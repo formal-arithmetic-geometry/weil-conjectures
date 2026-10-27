@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-group-scheme-characters",
+ "kind": "definition",
+ "title": "Characters of group schemes over arbitrary test schemes and their Laurent values",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a $k$-group scheme [def-sc-group-scheme], and let $T,S$ be $k$-schemes [def-pc-scheme]. Using fibre products [def-pc-fibre-product] and the multiplicative group $\\mathbf G_m$ [def-sc-gm-ga], put $G_T=G\\times_k T$ and $\\mathbf G_{m,T}=\\mathbf G_m\\times_k T$, with their pulled-back group structures. Define the character set $\\operatorname{Characters}(G,T)=\\operatorname{Hom}_{T\\text{-grp}}(G_T,\\mathbf G_{m,T})$. For $\\chi\\in\\operatorname{Characters}(G,T)$ and a $k$-morphism $z:S\\to G_T$, define its Laurent-coordinate value to be the global section $\\operatorname{value}(\\chi,z)=(\\operatorname{pr}_{\\mathbf G_m}\\circ\\chi\\circ z)^*(t)\\in\\Gamma(S,\\mathcal O_S)$, where $t$ is the Laurent coordinate on $\\mathbf G_m=\\operatorname{Spec}k[t,t^{-1}]$, with global sections identified by affine spectrum [def-weil-affine-spectrum]. These definitions impose no finiteness, commutativity, reducedness or affineness assumption on $G,T,S$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 11c, printed p.213, definition of Hom(G,G_m) immediately before Theorem 11.12, and printed p.214, Cartier pairing; scheme-valued version by the Zariski gluing in the parent node, steps 8--10."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "group scheme characters over a test scheme and Laurent coordinate evaluation",
+   "results": "{\"t\": \"2026-10-24T11:26:13Z\", \"tool\": \"leansearch\", \"query\": \"group scheme characters over a test scheme and Laurent coordinate evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.leval\", \"LaurentPolynomial.leval_apply\", \"LaurentPolynomial.eval₂\", \"LaurentPolynomial.smeval_add\", \"LaurentPolynomial.eval₂_C\", \"LaurentPolynomial.smeval\", \"LaurentPolynomial.smeval_congr\", \"LaurentPolynomial.eval₂_toLaurent\"], \"digest\": \"7090150f6007c62c\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Laurent evaluation and group-object APIs only; no specialized character hom-set and value interface in Mathlib. Existing PointedTorsor helpers are reused by definitional abbreviations, as requested by the maintainer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "group scheme homomorphisms into multiplicative group after base change",
+   "results": "{\"t\": \"2026-10-24T11:26:14Z\", \"tool\": \"leanfinder\", \"query\": \"group scheme homomorphisms into multiplicative group after base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"CategoryTheory.yonedaGrp_map_app\", \"CategoryTheory.Hom.group\", \"CategoryTheory.yonedaGrpObj_obj_coe\", \"CategoryTheory.yonedaGrpObj_map\", \"CategoryTheory.yonedaCommGrpGrpObj_obj_coe\", \"CategoryTheory.yonedaCommGrpGrp\", \"CategoryTheory.yonedaCommGrpGrpObj\"], \"digest\": \"845d906b2feb4b40\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Laurent evaluation and group-object APIs only; no specialized character hom-set and value interface in Mathlib. Existing PointedTorsor helpers are reused by definitional abbreviations, as requested by the maintainer."
+  },
+  {
+   "tool": "grep",
+   "query": "Characters|characterValue|CharacterValue",
+   "results": "{\"t\": \"2026-10-24T11:26:14Z\", \"tool\": \"grep\", \"query\": \"Characters|characterValue|CharacterValue\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Laurent evaluation and group-object APIs only; no specialized character hom-set and value interface in Mathlib. Existing PointedTorsor helpers are reused by definitional abbreviations, as requested by the maintainer."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"abbrev Characters|def value|GroupSchemeCharacters\" lean/Sheaf/AlgebraicGeometry/PointedTorsorLineCharacterDescent.lean lean/WeilConjectures/AlgebraicGeometry/GroupScheme; rg -l \"group-scheme-characters\" dag/nodes",
+   "results": "PointedTorsor.Characters at line 146 and PointedTorsor.value at line 153 are the exact constructions. No existing definition node owns them. No matching group-scheme character interface in WeilConjectures/AlgebraicGeometry/GroupScheme. Whole-blueprint search group characters found four unrelated nodes; ancestor is None.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing helpers with thin abbrev interface; new definition node requested by return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-commutative-cartier-representability",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree. Auxiliary below dual-isogeny-degree: The dual coordinate Hopf algebra represents finite-group characters. Character hom-set and Laurent-coordinate value in the representability statement and proof steps 6--10. Definition-only interface requested in the return of 59d1b694267f.",
+   "via": [
+    "lem-sfb-finite-commutative-cartier-representability",
+    "lem-sfb-dual-isogeny-degree",
+    "lem-sfb-abelian-poincare-biduality",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupSchemeCharacters",
+  "declaration": "AlgebraicGeometry.GroupSchemeCharacters.Characters",
+  "declarations": [
+   "AlgebraicGeometry.GroupSchemeCharacters.Characters",
+   "AlgebraicGeometry.GroupSchemeCharacters.value"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupSchemeCharacters.lean",
+  "statement": "abbrev Characters {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] (T : Over (Spec (.of k)))",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition-only interface requested by maintainer H2: the two abbrevs are exactly the existing PointedTorsor.Characters and PointedTorsor.value, so no notion or canonical map is constructed again. This node owns their consumer-facing interface, independent of the torsor classification theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-976018648",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-976018648",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 59d1 (H2): the theorem stmt_dep is replaced by new def node def-sfb-group-scheme-characters (kind definition, status split, Milne §11c p.213/214, searches recorded); its module GroupSchemeCharacters holds two abbrevs definitionally equal to PointedTorsor.Characters/value, whose live bodies (Hom_{T-grp}(G_T,G_{m,T}); (pr_Gm∘χ∘z)^*t) match the node statement exactly. Item module differs from 59d1 only by the import and the two renamed declarations; item node differs from live only in stmt_deps (6 defs + new def) and lean; lean.statement verbatim. Pointed-torsor proof_deps do not cite the item, so the import is acyclic; no competing owner; Q07 f504 retired, not landed. The 59d1 substance check stands: the six transposed formulas, finite commutative hopfSpec D, pointwise CommGroup with MulEquiv, naturality, dual-basis Laurent normalization, edge cases (empty T, char p infinitesimal, nonreduced T), universe u bound, real-data helper, docstrings present, only sorry. No file changed, no compile. Advisory only: the pointed-torsor record still lists the aliased defs."
+ }
+}

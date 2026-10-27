@@ -1,0 +1,225 @@
+{
+ "id": "lem-per-finite-algebra-normal-formal-fibres",
+ "kind": "statement",
+ "title": "Finite-algebra permanence of geometrically normal formal fibres",
+ "statement": "For any commutative Noetherian ring $D$ [def-weil-pbc-noetherian-ring], define $N(D)$ as follows: for every pair of prime ideals $\\mathfrak a\\subseteq\\mathfrak b$ of $D$, and every finite purely inseparable extension $E/\\kappa(\\mathfrak a)$ [def-weil-pbc-finite-purely-inseparable-extension], the ring $E\\otimes_D\\widehat{D_{\\mathfrak b}}$ is normal [def-weil-pbc-normal-ring]. Here $\\kappa(\\mathfrak a)=\\operatorname{Frac}(D/\\mathfrak a)$, $D_{\\mathfrak b}$ is localization at the prime [def-weil-pbc-localization-at-prime], $\\widehat{D_{\\mathfrak b}}=\\varprojlim_{n\\geq1}D_{\\mathfrak b}/(\\mathfrak bD_{\\mathfrak b})^n$ is its maximal-ideal-adic completion [def-weil-pbc-adic-completion], and $D\\to E$ factors through $D/\\mathfrak a$. Let $R$ be a commutative Noetherian ring satisfying $N(R)$, and let $S$ be a commutative $R$-algebra that is finitely generated as an $R$-module [def-weil-finitely-generated-module]. Then $S$ is Noetherian and satisfies $N(S)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BIV, proposition-finite-type-over-P-ring, specialized to finite algebras and the normal-fibre property of Tag 0BIX, lemma-formal-fibres-normal; Tag 037Z, algebra-lemma-geometrically-normal, finite purely inseparable test."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-noetherian], $S$ is Noetherian. Fix primes $\\mathfrak a\\subseteq\\mathfrak b$ of $S$ and a finite purely inseparable extension $E/\\kappa_S(\\mathfrak a)$. Let $\\mathfrak q,\\mathfrak p$ be their contractions to $R$; then $\\mathfrak q\\subseteq\\mathfrak p$. Put $C=\\widehat{R_{\\mathfrak p}}$ and $H=\\widehat{S_{\\mathfrak b}}$. The injection $R/\\mathfrak q\\hookrightarrow S/\\mathfrak a$ extends to an injection $k=\\kappa_R(\\mathfrak q)\\hookrightarrow\\kappa_S(\\mathfrak a)\\hookrightarrow E$: a fraction $r/t$ maps to the corresponding quotient, since $t\\notin\\mathfrak q$ has nonzero image. Thus $E$ is a field extension of $k$, without any assertion that $E/k$ is purely inseparable.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIT, label lemma-P-ring-goes-up-quasi-finite, proof specialized to finite algebras and geometric normality (Tag 0BIX); use Algebra Tags 07N9 and 037Z."
+   }
+  },
+  {
+   "text": "Put $F=k\\otimes_R C$. For every finite purely inseparable extension $L/k$, tensor associativity gives $L\\otimes_k F\\cong L\\otimes_R C$, explicitly $\\ell\\otimes(x\\otimes c)\\mapsto\\ell x\\otimes c$, with inverse $\\ell\\otimes c\\mapsto\\ell\\otimes(1\\otimes c)$. The latter ring is normal by $N(R)$ for $\\mathfrak q\\subseteq\\mathfrak p$. Apply [lem-per-geometric-normality-finite-inseparable-test] to the commutative $k$-algebra $F$. It gives normality of $E\\otimes_k F\\cong E\\otimes_R C$.",
+   "uses": [
+    "lem-per-geometric-normality-finite-inseparable-test",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIT, label lemma-P-ring-goes-up-quasi-finite, proof specialized to finite algebras and geometric normality (Tag 0BIX); use Algebra Tags 07N9 and 037Z."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completion-finite-extension] at $\\mathfrak p$. Because $S$ is module-finite, it gives a finite product decomposition $C\\otimes_R S\\cong H\\times B$ as $S$-algebras, by separating the factor indexed by $\\mathfrak b$ from the other primes over $\\mathfrak p$. The $S$-algebra compatibility is part of the cited statement. In particular tensoring over $S$ uses the same structural maps as the formal fibre in $N(S)$.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIT, label lemma-P-ring-goes-up-quasi-finite, proof specialized to finite algebras and geometric normality (Tag 0BIX); use Algebra Tags 07N9 and 037Z."
+   }
+  },
+  {
+   "text": "Tensor this decomposition with the $S$-algebra $E$. The canonical maps give $E\\otimes_R C\\cong E\\otimes_S(C\\otimes_R S)\\cong(E\\otimes_S H)\\times(E\\otimes_S B)$. The first isomorphism sends $e\\otimes(c\\otimes s)$ to $es\\otimes c$ and has inverse $e\\otimes c\\mapsto e\\otimes(c\\otimes1)$. For the second, send $e\\otimes(h,b)$ to $(e\\otimes h,e\\otimes b)$; its inverse adds the maps induced by $h\\mapsto(h,0)$ and $b\\mapsto(0,b)$. The orthogonal idempotents $(1,0)$ and $(0,1)$ show these maps preserve multiplication and are inverse. Thus $E\\otimes_S H$ is a direct factor of the normal ring from Step 2.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIT, label lemma-P-ring-goes-up-quasi-finite, proof specialized to finite algebras and geometric normality (Tag 0BIX); use Algebra Tags 07N9 and 037Z."
+   }
+  },
+  {
+   "text": "A direct factor $T$ of a normal ring $T\\times U$ is normal directly from [def-weil-pbc-normal-ring]: for any prime $\\mathfrak r$ of $T$, the prime $\\mathfrak r\\times U$ of $T\\times U$ has localization canonically isomorphic to $T_{\\mathfrak r}$, by projecting fractions to their first coordinate. Its inverse sends $t/s$ to $(t,0)/(s,1)$; the idempotent $(1,0)$ becomes $1$ in this localization. Hence $T_{\\mathfrak r}$ is an integrally closed domain. Apply this with $T=E\\otimes_S H$. As $\\mathfrak a,\\mathfrak b,E$ were arbitrary, this proves $N(S)$, together with Noetherianity from Step 1. If $S=0$, there are no primes and $N(S)$ is vacuous.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIT, label lemma-P-ring-goes-up-quasi-finite, proof specialized to finite algebras and geometric normality (Tag 0BIX); use Algebra Tags 07N9 and 037Z."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-per-geometric-normality-finite-inseparable-test",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-completion-finite-extension",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BIT, label lemma-P-ring-goes-up-quasi-finite, proof specialized to finite algebras and geometric normality (Tag 0BIX); use Algebra Tags 07N9 and 037Z."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometrically.?normal|formal.?fib|analytically.?normal",
+   "results": "{\"t\": \"2026-10-24T07:12:36Z\", \"tool\": \"grep\", \"query\": \"geometrically.?normal|formal.?fib|analytically.?normal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names concern completion constructions, localization, quasi-finiteness or integral-closure finiteness; none asserts geometrically normal formal-fibre permanence or analytic normality under the stated hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically normal formal fibres are preserved by finite ring extensions",
+   "results": "{\"t\": \"2026-10-24T07:12:37Z\", \"tool\": \"leansearch\", \"query\": \"Geometrically normal formal fibres are preserved by finite ring extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"RingHom.finiteType_localizationPreserves\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"RingHom.FormallyUnramified.ofLocalizationPrime\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"Normal.of_equiv_equiv\"], \"digest\": \"0442bce56511bcd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names concern completion constructions, localization, quasi-finiteness or integral-closure finiteness; none asserts geometrically normal formal-fibre permanence or analytic normality under the stated hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"AdicCompletion\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-24T07:12:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Finite\\\", \\\"AdicCompletion\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names concern completion constructions, localization, quasi-finiteness or integral-closure finiteness; none asserts geometrically normal formal-fibre permanence or analytic normality under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebras over Noetherian rings with geometrically normal formal fibres also have geometrically normal formal fibres",
+   "results": "{\"t\": \"2026-10-24T07:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"Finite algebras over Noetherian rings with geometrically normal formal fibres also have geometrically normal formal fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.quasiFinite_iff\", \"fg_of_fg_of_fg\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.QuasiFinite.finite_fiber\", \"finite_of_algHom_finiteType_of_isJacobsonRing\", \"IsIntegralClosure.isNoetherian\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"651425d2000e1659\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names concern completion constructions, localization, quasi-finiteness or integral-closure finiteness; none asserts geometrically normal formal-fibre permanence or analytic normality under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically normal formal fibres ascend from a Noetherian base ring to any module finite algebra",
+   "results": "{\"t\": \"2026-10-24T07:15:01Z\", \"tool\": \"leanfinder\", \"query\": \"Geometrically normal formal fibres ascend from a Noetherian base ring to any module finite algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.quasiFinite_iff\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"fg_of_fg_of_fg\", \"Algebra.QuasiFinite.finite_fiber\", \"IsIntegralClosure.finite\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.QuasiFiniteAt\", \"finite_of_algHom_finiteType_of_isJacobsonRing\"], \"digest\": \"743f9633165640e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned names concern completion constructions, localization, quasi-finiteness or integral-closure finiteness; none asserts geometrically normal formal-fibre permanence or analytic normality under the stated hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*formal.?fib|formal.?fib.*normal",
+   "results": "{\"t\": \"2026-10-24T07:44:37Z\", \"tool\": \"grep\", \"query\": \"normal.*formal.?fib|formal.?fib.*normal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extensions of Noetherian rings preserve geometrically normal formal fibres",
+   "results": "{\"t\": \"2026-10-24T07:44:37Z\", \"tool\": \"leansearch\", \"query\": \"Finite extensions of Noetherian rings preserve geometrically normal formal fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.finite_of_finite\", \"exists_finite_inj_algHom_of_fg\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"FractionalIdeal.isNoetherian_coeIdeal\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Ring.instIsIntegrallyClosedNormalClosure\"], \"digest\": \"6e810954a25a87f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-24T07:44:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically normal formal fibres of Noetherian rings are preserved by module finite algebras",
+   "results": "{\"t\": \"2026-10-24T07:44:45Z\", \"tool\": \"leanfinder\", \"query\": \"Geometrically normal formal fibres of Noetherian rings are preserved by module finite algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.quasiFinite_iff\", \"Algebra.EssFiniteType.isNoetherianRing\", \"fg_of_fg_of_fg\", \"IsNoetherianRing.of_finite\", \"IsIntegralClosure.finite\", \"Algebra.QuasiFinite.finite_fiber\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"b985ec1a04479b25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every local completion of a finite algebra over a ring with geometrically normal formal fibres has geometrically normal fibres",
+   "results": "{\"t\": \"2026-10-24T07:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Every local completion of a finite algebra over a ring with geometrically normal formal fibres has geometrically normal fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified.ofLocalizationPrime\", \"Algebra.QuasiFinite.finite_fiber\", \"Algebra.quasiFinite_iff\", \"Algebra.IsUnramifiedAt\", \"Algebra.IsSmoothAt\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.Etale\", \"Algebra.IsEtaleAt\"], \"digest\": \"44074c29a41701e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern geometrically reduced algebras, normal field extensions, quasi-finiteness or Noetherianity, not normality of all prime localizations after field base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-nagata-normal-formal-fibres-lifting",
+  "date": "2026-10-24",
+  "group": "Q160"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 completion subargument, Nishimura–Nishimura normal-formal-fibre lifting: permanence under quotient and finite normalization, before the generic-fibre test.",
+   "via": [
+    "lem-per-nagata-normal-formal-fibres-lifting",
+    "lem-per-adic-normal-completion-lifting",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-algebra-normal-formal-fibres",
+  "worker": "stage1",
+  "summary": "Proved finite-algebra permanence by the finite completion product decomposition, the finite purely inseparable test for geometric normality, explicit tensor cancellation and descent to a direct factor. Reused existing completion and Noetherianity nodes; added only the missing field-algebra test. Statement unchanged.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3 completion subargument along the existing normal-formal-fibre lifting branch; the item supplies permanence under finite normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic completion decomposition for finite algebras, exactly the finite case of the factor argument in Stacks 0BIT; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-finite-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-1cea2712d",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-1cea2712d (reviewer sub-agent of L); spot-checked: Read the item in full (5 steps), the new node lem-per-geometric-normality-finite-inseparable-test, and every cited statement. Sources: Stacks more-algebra 0BIT lemma-P-ring-goes-up-quasi-finite (l.12904), whose proof is the factor decomposition R_p^⊗R' = (R'_{p'})^×B; the delivery is its finite case. Also algebra 037Z lemma-geometrically-normal (l.46886), which holds for an arbitrary k-algebra (smooth ascent 'lemma-normal-goes-up' has no Noetherian hypothesis). The new node is 037Z (3)⇔(1). It is true, self-contained, statement-only and does not restate the item. Small cases: A=0; A=k; perfect k; and A=k(u), u^p∈k, over an imperfect k, which fails both conditions, consistent. Duplicate search: perfect-closure-criterion is (4)⇔(1) and would need a colimit argument; separable-field and tensor-normal nodes assume more; normalization nodes are scheme-level; no duplicate found. Steps: 1 uses finite-algebra-noetherian with exact hypotheses and an injection κ(q)→κ(a)→E with compatible structure maps. 2 applies N(R) at q⊆p, then the new node (1)⇒(2) with K=E. 3 uses lem-weil-pbc-completion-finite-extension (07N9) from its statement: an S-algebra isomorphism onto the product over primes over p. 4 and 5 are elementary tensor cancellation and direct-factor normality with explicit maps; edge cases S=0 and B=0 handled. Item statement unchanged; it matches the parent's N(-). Accepted tool_use: completion-finite-extension (sk-thm-p1, 07N9), already a common tool in this unit. No SGA citation, no cycle, no changes made."
+ }
+}

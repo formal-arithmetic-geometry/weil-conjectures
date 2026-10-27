@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-finite-type-completed-local-smoothness",
+ "kind": "statement",
+ "title": "Smoothness at a finite type point detected by completed local formal smoothness",
+ "statement": "Let $(R,\\mathfrak m_R)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], and let $B$ be a finite type commutative $R$-algebra, meaning generated as an $R$-algebra by finitely many elements. Let $\\mathfrak q\\subset B$ be a prime ideal with inverse image $\\mathfrak m_R$, and let $C=\\widehat{B_{\\mathfrak q}}=\\varprojlim_nB_{\\mathfrak q}/(\\mathfrak qB_{\\mathfrak q})^n$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion]. Then $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is smooth on an open neighbourhood of $\\mathfrak q$ [def-weil-affine-spectrum, def-sbc-smooth-morphisms] if and only if $R\\to C$ is formally smooth for the $\\mathfrak m_C$-adic topology [def-weil-pbc-formally-smooth-adic].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07VH, lemma-formally-smooth-finite-type, and Tag 07ED, lemma-formally-smooth-completion, equivalence (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=B_{\\mathfrak q}$ and $\\mathfrak n=\\mathfrak qT$. The localization definition gives that $T$ is local with maximal ideal $\\mathfrak n$. By [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-localization-noetherian], $B$ and $T$ are Noetherian. Thus $\\mathfrak n$ is finitely generated, by [def-weil-pbc-noetherian-ring]. Write $\\iota:T\\to C$ for completion. By [lem-weil-pbc-local-completion-local-ring], $C$ is local and $\\mathfrak m_C=\\mathfrak nC$. In particular the topology in the conclusion is exactly the extended-ideal topology used in the completion lemmas.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 05GI (lemma-radical-completion), and 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Assume the smooth-neighbourhood condition: there is an open subscheme $W\\subseteq\\operatorname{Spec}B$ with $\\mathfrak q\\in W$ and $\\pi|_W:W\\to\\operatorname{Spec}R$ smooth, where $\\pi=\\operatorname{Spec}(R\\to B)$. By [lem-weil-pbc-spec-localization-away-basic-open] (i) there is $g\\in B$ with $\\mathfrak q\\in D(g)\\subseteq W$, so $g\\notin\\mathfrak q$. By [lem-weil-pbc-smooth-restrict-open-subschemes] (a), applied to $\\pi|_W$, the open subscheme $D(g)$ of $W$ and the open $\\operatorname{Spec}R$ of the target, the restriction $p:D(g)\\to\\operatorname{Spec}R$ is smooth. By [lem-weil-pbc-principal-localization-open-immersion] the morphism $j:\\operatorname{Spec}B_g\\to\\operatorname{Spec}B$ induced by $B\\to B_g$ is an open immersion with image $D(g)$, so by [def-weil-open-immersion] $j$ is an isomorphism $\\sigma:\\operatorname{Spec}B_g\\xrightarrow{\\sim}D(g)$ followed by the inclusion of the open subscheme $D(g)$. Then $p\\circ\\sigma=\\pi\\circ j=\\operatorname{Spec}(R\\to B\\to B_g)$ by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum]. Clause (c) of [lem-weil-pbc-smooth-restrict-open-subschemes], with the isomorphism $\\sigma$ and the identity of $\\operatorname{Spec}R$, shows that $\\operatorname{Spec}(R\\to B_g)$ is smooth, and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] shows that $R\\to B_g$ is a smooth ring map.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6 (lemma-smooth-characterize) with Algebra Tag 00TB (definition-smooth-at-prime): the identification of a smooth open neighbourhood with smoothness of R -> B_g at q used in Tag 07VH (lemma-formally-smooth-finite-type), proof of (1) implies (2); comparison of the two smoothness notions by more-morphisms.tex Tag 02H6 (lemma-smooth-formally-smooth)."
+   }
+  },
+  {
+   "text": "Keep $g$ from step 2, so $R\\to B_g$ is a smooth ring map. We check adic lifting for $R\\to T$. Given an $R$-algebra $D$, a square-zero ideal $J$, and $u:T\\to D/J$, restrict $u$ to $B_g$. By [lem-weil-pbc-smooth-ring-map-square-zero-lifting] it lifts to $v:B_g\\to D$. The ring $T$ is a localization of $B_g$ at the images of $B\\setminus\\mathfrak q$: fractions in $B_g$ have denominators powers of $g$, already invertible in $T$, and subsequently inverting those images gives precisely the fractions defining $T$. Give $D$ its $B_g$-algebra structure through $v$ and use [lem-weil-pbc-localization-square-zero-lifting] to lift $u$ to $T\\to D$ over $B_g$, hence over $R$. This works for every $u$, in particular those killing a power of $\\mathfrak n$, and proves [def-weil-pbc-formally-smooth-adic] for $R\\to T$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+    "lem-weil-pbc-localization-square-zero-lifting",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VH (lemma-formally-smooth-finite-type), proof of (1) implies (2), with the localization lifting argument written out."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fs-adic-completion] to $R\\to T$ and its finitely generated ideal $\\mathfrak n$ from step 1. It gives adic formal smoothness of $R\\to C$ for $\\mathfrak nC=\\mathfrak m_C$. This proves the forward implication.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ED (lemma-formally-smooth-completion), (1) implies (2)."
+   }
+  },
+  {
+   "text": "Conversely assume $R\\to C$ is formally smooth for $\\mathfrak m_C$. Consider any small-extension test $a:B\\to A$, $\\rho:R\\to A'$, $e:A'\\twoheadrightarrow A$ in condition (2) of [lem-weil-pbc-smooth-at-prime-artinian-lifting]. Thus $A',A$ are Artinian local, $\\ker e$ has length one, $a^{-1}(\\mathfrak m_A)=\\mathfrak q$, and $a\\circ(R\\to B)=e\\rho$. For $s\\notin\\mathfrak q$, $a(s)\\notin\\mathfrak m_A$ is a unit, so fractions define $a_T:T\\to A$. Elements of $\\mathfrak n$ map into $\\mathfrak m_A$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent] choose $N\\geq1$ with $\\mathfrak m_A^N=0$. Thus $a_T$ factors through a map $\\bar a:T/\\mathfrak n^N\\to A$. By [lem-weil-pbc-adic-completion-mod-power], the coordinate projection $\\pi_N:C\\twoheadrightarrow T/\\mathfrak n^N$ has kernel $\\mathfrak n^NC=\\mathfrak m_C^N$ and satisfies $\\pi_N\\iota(t)=t\\bmod\\mathfrak n^N$. Hence $\\widetilde a=\\bar a\\pi_N:C\\to A$ is an $R$-algebra map killing $\\mathfrak m_C^N$, and $\\widetilde a\\iota=a_T$.",
+   "uses": [
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ED (lemma-formally-smooth-completion), proof via the finite quotients; Tag 07VH (lemma-formally-smooth-finite-type), (2) implies (1)."
+   }
+  },
+  {
+   "text": "Set $J=\\ker e$. It has square zero: a length-one ideal is a simple $A'$-module, so $\\mathfrak m_{A'}J=0$; also $J\\subset\\mathfrak m_{A'}$ since the nonzero quotient $A$ is local. Consequently $J^2=0$. Identify $A'/J$ with $A$ by the surjection $e$. Apply the assumed lifting property [def-weil-pbc-formally-smooth-adic] to $\\widetilde a:C\\to A'/J$ from step 5. It gives an $R$-algebra map $h:C\\to A'$ with $eh=\\widetilde a$. The composite $B\\to T\\xrightarrow{\\iota}C\\xrightarrow{h}A'$ is the required lift: its composite with $e$ is $a$, and its composite with $R\\to B$ is $\\rho$ because every map used is an $R$-algebra map. Every small-extension test therefore lifts. Condition (2) implies condition (1) of [lem-weil-pbc-smooth-at-prime-artinian-lifting], giving precisely the asserted smooth open neighbourhood of $\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HT (lemma-smooth-test-artinian), (3) implies (1); small extensions as in Tag 02HS (definition-small-extension)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+  "lem-weil-pbc-localization-square-zero-lifting",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-completion",
+  "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07VH (lemma-formally-smooth-finite-type) and 07ED (lemma-formally-smooth-completion); 07VH invokes Algebra Tag 02HT (lemma-smooth-test-artinian)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*[Aa]dic|[Aa]dic.*FormallySmooth|IsSmoothAt",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"33\", \"text\": \"- `Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial`:\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"387\", \"text\": \"theorem IsSmoothAt.exists_isStandardEtale_mvPolynomial\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"388\", \"text\": \"    {p : Ideal S} [p.IsPrime] [FinitePresentation R S] [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"392\", \"text\": \"  obtain ⟨f, hfp, H⟩ := IsSmoothAt.exists_notMem_isStandardSmooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"385\", \"text\": \"      Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial (R := R) (p := m.asIdeal)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"46\", \"text\": \"abbrev IsSmoothAt (p : Ideal A) [p.IsPrime] : Prop :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"51\", \"text\": \"def smoothLocus : Set (PrimeSpectrum A) := { p | IsSmoothAt R p.asIdeal }\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"151\", \"text\": \"    [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"194\", \"text\": \"lemma IsSmoothAt.of_formallySmooth_fiber\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"197\", \"text\": \"    Algebra.IsSmoothAt R q := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"28\", \"text\": \"- `IsSmoothAt.exists_notMem_isStandardSmooth`: If `S` is `R`-smooth at a prime `p`,\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"104\", \"text\": \"theorem IsSmoothAt.exists_notMem_isStandardSmooth [FinitePresentation R S] (p : Ideal S) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"105\", \"text\": \"    [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"109\", \"text\": \"  · obtain ⟨g, hg, hsm⟩ := IsSmoothAt.exists_notMem_smooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"157\", \"text\": \"  choose f hf₁ hf₂ using IsSmoothAt.exists_notMem_isStandardSmooth R (S := S)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*completion|completion.*formallySmooth|FormallySmoothAdic",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a prime detected by formal smoothness of completed local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"RingHom.IsStandardSmooth.smooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.IsStandardSmooth → f.Smooth\", \"doc\": \"Every standard smooth ring homomorphism between commutative rings is smooth, meaning that if $ f : R \\to S $ is a ring homomorphism such that $ S $ is isomorphic to a localized polynomial ring $ R[x_1,\"}\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of a ring homomorphism between commutative rings being smooth (i.e., flat with the module of differentials $\\\\Omega_{S/R}$ locally free of finite rank) is local, meaning it can be checked \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a Noetherian ring is smooth at a prime if and only if the completion of its local ring is adically formally smooth over the local base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebra over a Noetherian ring is smooth at a prime if and only if the completion of its local ring is adically formally smooth over the local base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.Smooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam →\\n    autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam → Algebra.Smooth R A\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is formally smooth over $ R $ and finitely presented over $ R $, then $ A $ is smooth over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Smooth R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the submonoid generated by all powers of an element $ r $, then $ A $ is a smooth $ R $-algebra.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"AdicCompletion\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {S : Type u_3} [CommRing S] [Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I) : ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"If `A` is formally smooth over `R`, any map `A →ₐ[R] S ⧸ I` lifts\\nto `A →ₐ[R] AdicCompletion I S`.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a prime detected by formal smoothness of completed local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"RingHom.IsStandardSmooth.smooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.IsStandardSmooth → f.Smooth\", \"doc\": \"Every standard smooth ring homomorphism between commutative rings is smooth, meaning that if $ f : R \\to S $ is a ring homomorphism such that $ S $ is isomorphic to a localized polynomial ring $ R[x_1,\"}\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of a ring homomorphism between commutative rings being smooth (i.e., flat with the module of differentials $\\\\Omega_{S/R}$ locally free of finite rank) is local, meaning it can be checked \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsSmoothAt and smooth-locus results concern discrete formal smoothness; the completion theorem lifts FROM a formally smooth algebra INTO a completion, and does not detect adic formal smoothness of the completed local ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebra over a Noetherian ring is smooth at a prime if and only if the completion of its local ring is adically formally smooth over the local base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.Smooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam →\\n    autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam → Algebra.Smooth R A\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is formally smooth over $ R $ and finitely presented over $ R $, then $ A $ is smooth over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Smooth R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the submonoid generated by all powers of an element $ r $, then $ A $ is a smooth $ R $-algebra.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsSmoothAt and smooth-locus results concern discrete formal smoothness; the completion theorem lifts FROM a formally smooth algebra INTO a completion, and does not detect adic formal smoothness of the completed local ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"AdicCompletion\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {S : Type u_3} [CommRing S] [Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I) : ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"If `A` is formally smooth over `R`, any map `A →ₐ[R] S ⧸ I` lifts\\nto `A →ₐ[R] AdicCompletion I S`.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsSmoothAt and smooth-locus results concern discrete formal smoothness; the completion theorem lifts FROM a formally smooth algebra INTO a completion, and does not detect adic formal smoothness of the completed local ring."
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*[Aa]dic|[Aa]dic.*FormallySmooth|IsSmoothAt",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"277\", \"text\": \"  have : Algebra.IsSmoothAt _ _ := (formallySmooth_stalkMap_iff U hU V hV hVU hxV).mp H\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"278\", \"text\": \"  obtain ⟨r, hrx, hr⟩ := Algebra.IsSmoothAt.exists_notMem_smooth Γ(Y, U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"302\", \"text\": \"    (inferInstanceAs (Algebra.IsSmoothAt _ _)), V.2, hxV⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"322\", \"text\": \"  exact inferInstanceAs (Algebra.IsSmoothAt _ _)\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"33\", \"text\": \"- `Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial`:\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"387\", \"text\": \"theorem IsSmoothAt.exists_isStandardEtale_mvPolynomial\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"388\", \"text\": \"    {p : Ideal S} [p.IsPrime] [FinitePresentation R S] [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"392\", \"text\": \"  obtain ⟨f, hfp, H⟩ := IsSmoothAt.exists_notMem_isStandardSmooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"385\", \"text\": \"      Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial (R := R) (p := m.asIdeal)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"28\", \"text\": \"- `IsSmoothAt.exists_notMem_isStandardSmooth`: If `S` is `R`-smooth at a prime `p`,\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"104\", \"text\": \"theorem IsSmoothAt.exists_notMem_isStandardSmooth [FinitePresentation R S] (p : Ideal S) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"105\", \"text\": \"    [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"109\", \"text\": \"  · obtain ⟨g, hg, hsm⟩ := IsSmoothAt.exists_notMem_smooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"157\", \"text\": \"  choose f hf₁ hf₂ using IsSmoothAt.exists_notMem_isStandardSmooth R (S := S)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"46\", \"text\": \"abbrev IsSmoothAt (p : Ideal A) [p.IsPrime] : Prop :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"51\", \"text\": \"def smoothLocus : Set (PrimeSpectrum A) := { p | IsSmoothAt R p.asIdeal }\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"151\", \"text\": \"    [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"194\", \"text\": \"lemma IsSmoothAt.of_formallySmooth_fiber\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"197\", \"text\": \"    Algebra.IsSmoothAt R q := by\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsSmoothAt and smooth-locus results concern discrete formal smoothness; the completion theorem lifts FROM a formally smooth algebra INTO a completion, and does not detect adic formal smoothness of the completed local ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adically formally smooth completed local ring of a finitely generated algebra gives a smooth neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"RingHom.Smooth.locally_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth → RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth) f\", \"doc\": \"If $ f : R \\\\to S $ is a smooth ring homomorphism, then there exists a covering of $ \\\\operatorname{Spec}(S) $ such that $ f $ is standard smooth on each open set of the covering. This means $ S $ is lo\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"RingHom.IsStandardSmooth.smooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.IsStandardSmooth → f.Smooth\", \"doc\": \"Every standard smooth ring homomorphism between commutative rings is smooth, meaning that if $ f : R \\to S $ is a ring homomorphism such that $ S $ is isomorphic to a localized polynomial ring $ R[x_1,\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsSmoothAt and smooth-locus results concern discrete formal smoothness; the completion theorem lifts FROM a formally smooth algebra INTO a completion, and does not detect adic formal smoothness of the completed local ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-artinian-smoothness-criterion",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Smoothness at a finite type point detected by completed local formal smoothness.",
+   "via": [
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-type-completed-local-smoothness",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited fields; expanded the local lifting and completion argument using existing DAG nodes only. The reverse implication constructs the continuous test map from a finite quotient and invokes the existing small-extension smoothness criterion. No new nodes. Reviewer FIX: the forward direction now derives the smooth ring map R -> B_g from the smooth neighbourhood through basic opens, open restriction and the affine comparison (new step 2). It no longer uses the parenthetical remark of lem-weil-pbc-smooth-at-prime-artinian-lifting, which that node's split does not prove.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/deformation route; latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) read. The local algebra subargument is the source-based input isolated by lem-sfb-stack-artinian-smoothness-criterion. The inherited blueprint.from.node is null because the creation chain ends at a Lean module rather than an imported node; its precise from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+    "why": "General affine finite-type small-extension test and its stated smooth-at-prime identification, needed in both directions; no node of this unit supplies that commutative algebra criterion."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-completion",
+    "why": "General forward preservation of adic lifting under completion; used as the completion input, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "General affine comparison (Stacks 01V6/02H6): Spec of a ring map is smooth iff the ring map is smooth; step 2 turns the smooth principal open D(g) into a smooth ring map R -> B_g. No node of this unit supplies it. Added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+  "lem-weil-pbc-fs-adic-completion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-fb80d0c43",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-fb80d0c43 (reviewer sub-agent of L); spot-checked: Read in full: the item (a split with no new nodes), every cited statement, Stacks 07VH (more-algebra line 9655) and 07ED (line 9224) with their proofs, and 00TB/01V6/02H6. The statement is byte-identical to the live base and still unsplit in live, so no supersession; no repair note; no SGA; no duplicate of the 07VH-plus-completion equivalence in the DAG; no cycle. Steps 1 and 3-5 are correct. Step 1: T=B_q is Noetherian local and m_C=nC (05GI/05GG node). Step 3: 07ED forward node with finitely generated n. Step 4: a_T factors through T/n^N because m_A is nilpotent, and pi_N has kernel n^N C=m_C^N. Step 5: a length-one kernel is simple, so m J=0 and J^2=0; adic lifting then the 02HT reverse direction; R-structures checked. One C3/C4 fault: step 2 took 'smooth open neighbourhood gives g notin q with R->B_g smooth' from the parenthetical remark of lem-weil-pbc-smooth-at-prime-artinian-lifting. That node's split (forward/reverse statements) does not carry this identification, although the remark itself says a split must. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-type-completed-local-smoothness.json: a new step 2 derives R->B_g smooth via lem-weil-pbc-spec-localization-away-basic-open (i), lem-weil-pbc-smooth-restrict-open-subschemes (a) and (c), lem-weil-pbc-principal-localization-open-immersion, def-weil-open-immersion, def-weil-affine-spectrum and lem-weil-pbc-smooth-ring-map-iff-smooth-affine. The old lifting step becomes step 3 without the faulty citation; steps renumbered and the 'from step 4' reference updated; proof_deps is the union of the step uses; tool_uses adds lem-weil-pbc-smooth-ring-map-iff-smooth-affine (generic 01V6/02H6 comparison). Accepted tool_uses: the 02HT Artinian criterion and the 07ED forward node, both used by statement only. Edge cases checked: identity, k[eps]/eps^2 (both sides fail), transcendental residue fields.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeCompletedLocalSmoothness",
+  "declaration": "AlgebraicGeometry.smooth_on_open_iff_formallySmoothAdic_completion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeCompletedLocalSmoothness.lean",
+  "statement": "theorem smooth_on_open_iff_formallySmoothAdic_completion {R B : Type u} [CommRing R] [CommRing B] [IsNoetherianRing R] [IsLocalRing R] [Algebra R B] [Algebra.FiniteType R B] (q : Ideal B) [q.IsPrime] (hq : Ideal.comap (algebraMap R B) q = IsLocalRing.maximalIdeal R) : (∃ W : (Spec (CommRingCat.of B)).Opens, (⟨q, inferInstance⟩ : PrimeSpectrum B) ∈ W ∧ Smooth (W.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R B)))) ↔ Algebra.FormallySmoothAdic R (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q)) ((IsLocalRing.maximalIdeal (Localization.AtPrime q)).map (algebraMap (Localization.AtPrime q) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q))))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cdcd339f",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Lean matches node/Stacks 07VH+07ED clause by clause: Noetherian local R, FiniteType B, prime q with comap=m_R, existential open W∋q with Smooth(W.ι≫Spec.map algebraMap) (same spelling as upstream smooth_on_open_iff_artinian_lifting), FormallySmoothAdic R (AdicCompletion m_T T) (m_T.map ι) = m_C by Mathlib maximalIdeal_eq_map (same spelling as FormallySmoothAdic.adicCompletion). No extra hypotheses; universe u forced by Scheme, test universe per recorded def. Edge cases B=R, k[ε]/ε², q=(0) checked. No duplicate found in side-live lean; no new defs; single sorry; docstrings with source+blueprint+6 steps; statement verbatim; only lean record changed; report has Worker report and Second reading by Q123. No fixes."
+ }
+}

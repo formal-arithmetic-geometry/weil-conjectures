@@ -235,16 +235,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-f571d7894 (reviewer sub-agent of L); spot-checked: Read the whole item, all six cited statements and the Stacks sources in derived.tex: 05RG (l.1909), 05RI (l.2066), 05RK (l.2121), lemma-kernel-localization (l.1549), 05QT lemma-split (l.700) and 0149 (l.386). The statement is the correct summand-closed case of 05RK and is unchanged; no new nodes. Steps 1-4 are correct. Step 1: the trW cone class has MS1-3 and MS5-6 without saturation. Step 2: lem-pur-localization-triangles-05r6 makes Q exact, hence additive. Step 3 is genuinely elementary: by TR1/TR2, 0->A lies in W, so id_{Q(A)}=0. Step 4: fraction equality with s1=s2=id, f1=id, f2=0 puts 0:R->A in W. Fault (C1/E5) in Step 5: clause (iii) gives h∘k=id, so R[1] is only a retract of C, and the step concluded R[1]∈S by 'retract closure'. The item's hypothesis is closure under direct summands, and retract => summand needs Stacks 05QT(2), which no step proved and no node states. FIX: Step 5 is rewritten using the already-cited lem-weil-pbc-hom-into-triangle-exact clauses (i)/(ii) and TR2. Set p=id-kh and take q with p=gq; this shows (g,k):A⊕R[1]->C is an isomorphism with inverse (q,h). So A is a direct summand of C∈S, and A∈S directly. The rewritten step is 1469 characters. Its source.place now names 05QT, and the split_report summary is updated. Edge cases S=0, S=D and S not summand-closed all behave as expected. Duplicate search over the DAG found no node for the kernel criterion or for 05QT(2). Batch-5 flag on lem-trf-triangulated-subcategory-cone-system: it is a Mathlib leaf (trW instances) with an empty closure and general Verdier-localization content (05RG), not part of the trace-formula or Poincaré-duality statements or proofs; no non-trf 05RG node exists. Accepted; the maintainer may relocate it. No SGA cited, no tool_uses.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/CategoryTheory/ThickVerdierQuotientKernel.lean",
   "module": "Sheaf.CategoryTheory.ThickVerdierQuotientKernel",
   "declaration": "CategoryTheory.thick_verdier_quotient_kernel",
-  "file": "lean/Sheaf/CategoryTheory/ThickVerdierQuotientKernel.lean",
-  "statement": "theorem thick_verdier_quotient_kernel {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] (S : ObjectProperty C) [S.IsTriangulated] [S.IsStableUnderRetracts] : S.trW.Q.IsTriangulated ∧ Functor.IsStrictLocalizationAt.{u, v, u, max u v, uE, vE} S.trW.Q S.trW ∧ ∀ A : C, IsZero (S.trW.Q.obj A) ↔ S A",
-  "branch": "newtargets-dag",
-  "by": "Q15",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.CategoryTheory.ThickVerdierQuotientKernel deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -254,5 +251,16 @@
   "result": "pass",
   "note": "Snapshot node differs from live only by the added lean record; statement verbatim in file. Hypotheses: Mathlib triangulated binders (def-weil-triangulated-category), S.IsTriangulated + S.IsStableUnderRetracts (retract = direct summand in pretriangulated, 05QT; implies repleteness). W = Mathlib S.trW, exactly first maps of distinguished triangles with third object in S; quotient = Mathlib canonical S.trW.Localization/S.trW.Q. Conjuncts: Q.IsTriangulated (exact), recorded dep Functor.IsStrictLocalizationAt.{u,v,u,max u v,uE,vE} (universes verified by #check probe), forall A, IsZero (Q.obj A) iff S A. Edge cases S=0, S=all, A zero, empty S excluded by ContainsZero; retract closure necessary, not stronger. Own Mathlib/side/live searches: only abelian Serre-class analogue, no existing theorem. Gates: proof sorry only, no definitions, source+blueprint docstrings, five proof steps in docstring, both stmt_deps used, no line >100, report has Worker report and Second reading by Q15. nt_compile --json side overlay: exit 0, clean, 1.1 s. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

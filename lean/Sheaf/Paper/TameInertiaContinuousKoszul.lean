@@ -18,6 +18,8 @@ public import Mathlib.NumberTheory.Padics.ProperSpace
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Analysis.Normed.Algebra.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Tame inertia with all-continuous norm-topological coefficients
 

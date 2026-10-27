@@ -1,0 +1,273 @@
+{
+ "id": "lem-pur-etale-graph-comparison-interchange",
+ "kind": "statement",
+ "title": "Product-graph comparisons intertwine proper/open interchange between presentations",
+ "statement": "Let $A$ be a finite commutative ring. Work on the ordinary unbounded small-etale categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories], with $R_v=Rv_*$ and $J_j=Dj_!$ [lem-weil-pbc-extension-by-zero-exact]. A presentation $(a,e,p)$ of a scheme map is a factorization as proper $a$, open $e$, proper $p$, with functor $F_{(a,e,p)}=R_pJ_eR_a$ [def-weil-proper-morphism, def-weil-open-immersion]. For presentations of a fixed map admitting an open-then-proper factorization, use exactly the product-graph comparisons $C_{t,s}:F_s\\xrightarrow{\\sim}F_t$ of [lem-pur-etale-graph-comparison-base-change]. Use the normalized proper/open interchange $\\Gamma$ of [lem-pur-etale-proper-open-exchange-cube].\n\nFirst, let $a:X\\to O$ and $a':X\\to W$ be proper, $u:W\\hookrightarrow O$ and $e:O\\hookrightarrow P$ open, and $p:P\\to Z$ proper, with $ua'=a$. Suppose $pea$ admits an open-then-proper factorization. Let $H=(a,e,p)$ and $S=(a',eu,p)$. For the commutative proper/open square $Q_u$ with top $1_X$, bottom $u$, left $a'$ and right $a$, one has\n$$C_{S,H}=R_pJ_e(\\Gamma_{Q_u}^{-1}):R_pJ_eR_a\\longrightarrow R_pJ_eJ_uR_{a'}\\cong F_S.$$\n\nSecond, let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be arbitrary scheme maps such that $f$ and $h=gf$ admit open-then-proper factorizations. For $\\nu=1,2$ supply schemes $W_\\nu,V_\\nu,P_\\nu,T_\\nu$ and maps\n$$a_\\nu:X\\to W_\\nu,\\quad e_\\nu:W_\\nu\\hookrightarrow V_\\nu,\\quad r_\\nu:V_\\nu\\to Y,$$\n$$k_\\nu:V_\\nu\\hookrightarrow P_\\nu,\\quad p_\\nu:P_\\nu\\to T_\\nu,\\quad i_\\nu:Y\\hookrightarrow T_\\nu,\\quad q_\\nu:T_\\nu\\to Z,$$\nwhere $a_\\nu,r_\\nu,p_\\nu,q_\\nu$ are proper, $e_\\nu,k_\\nu,i_\\nu$ open, and $r_\\nu e_\\nu a_\\nu=f$, $q_\\nu i_\\nu=g$, $p_\\nu k_\\nu=i_\\nu r_\\nu$. Let $Q_\\nu$ be the latter proper/open square. Put\n$$t_\\nu=(a_\\nu,e_\\nu,r_\\nu),\\quad d_\\nu=(1_Y,i_\\nu,q_\\nu),\\quad s_\\nu=(a_\\nu,k_\\nu e_\\nu,q_\\nu p_\\nu),$$\nso these present $f,g,h$, respectively. Define the specified interchange word\n$$I_\\nu=R_{q_\\nu}(\\Gamma_{Q_\\nu})J_{e_\\nu}R_{a_\\nu}:F_{d_\\nu}F_{t_\\nu}\\xrightarrow{\\sim}F_{s_\\nu}.$$\nThen, as natural transformations $F_{d_1}F_{t_1}\\to F_{s_2}$,\n$$C_{s_2,s_1}\\circ I_1=I_2\\circ(C_{d_2,d_1}F_{t_2})\\circ F_{d_1}(C_{t_2,t_1}).$$\nAll formulas insert the canonical proper direct-image and open-extension compositors [lem-weil-pbc-ringed-topoi-derived-pushforward-composition, lem-cbc-extension-zero-composition]. The $C$ are the specified graph maps, not merely isomorphisms with those endpoints. The two squares $Q_\\nu$ need not be Cartesian and no map between them is required. No quasi-compactness of the supplied opens or Noetherian, boundedness or constructibility hypothesis is imposed. No inverse-image exchange or tensor compatibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "lem-pur-etale-graph-comparison-base-change",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "The graph comparison from the auxiliary compactification is Side1 followed by Middle followed by Side2 inverse. The side-pasting and intersection-pasting equations imply B_S = B_H followed by the specified shrinking word, by cancellation of the neighborhood triangle and side factors. Cancel B_H inverse in C_HS to obtain the first assertion.",
+   "uses": [
+    "def-pur-etale-graph-neighborhood-words",
+    "lem-pur-etale-graph-shrink-side-pasting",
+    "lem-pur-etale-graph-shrink-middle-pasting",
+    "lem-pur-etale-graph-comparison-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the pairwise normalization to source, middle and composite presentations. Apply the selected-row equation for each index, with the same explicit productInterchange U. Cancel the second composite lambda on the right and substitute the two row equations. Naturality moves the second source lambda through the two middle lambdas. Their inverses cancel. This gives precisely the three pairwise comparison factors of the required second assertion.",
+   "uses": [
+    "lem-pur-etale-pairwise-product-graph-normalization",
+    "lem-pur-etale-graph-product-row-pasting",
+    "def-pur-etale-graph-product-interchange",
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-interchange-data",
+  "def-pur-etale-graph-neighborhood-words",
+  "lem-pur-etale-graph-shrink-side-pasting",
+  "lem-pur-etale-graph-shrink-middle-pasting",
+  "lem-pur-etale-graph-comparison-base-change",
+  "lem-pur-etale-pairwise-product-graph-normalization",
+  "lem-pur-etale-graph-product-row-pasting",
+  "def-pur-etale-graph-product-interchange",
+  "lem-amb-natural-transformation-whisker-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J product-graph extension. Explicit common products and two shrinking pasting identities; formal cancellation in Lean by V1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-graph-comparison-interchange: canonical product graph comparisons between proper open proper presentations intertwine proper open interchange under changes of all presentations",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux; AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme geometry, ordinary module pushforward compositors, and general mate pasting do not identify product-graph C with these proper/open interchange maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.comp_leftAdjointMate; CategoryTheory.comp_rightAdjointMate; CategoryTheory.comp_leftAdjointMate_assoc; CategoryTheory.comp_rightAdjointMate_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme geometry, ordinary module pushforward compositors, and general mate pasting do not identify product-graph C with these proper/open interchange maps"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*[Cc]omparison|[Cc]ompactification.*[Ii]nterchange|proper.*open.*[Pp]asting",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme geometry, ordinary module pushforward compositors, and general mate pasting do not identify product-graph C with these proper/open interchange maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical graph comparison of proper open proper presentations commutes with proper open interchange on unbounded etale derived categories",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instMorphismRestrict; Topology.IsOpenEmbedding.compatiblePreserving; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality; AlgebraicGeometry.IsProper.isStableUnderBaseChange; Opens.mayerVietorisSquare; AlgebraicGeometry.Scheme.restrictRestrictComm; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.opensDiagramι",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme geometry, ordinary module pushforward compositors, and general mate pasting do not identify product-graph C with these proper/open interchange maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-graph-comparison-interchange: naturality of proper pushforward open extension interchange under canonical changes of compact support presentations, with no base change or tensor",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pushforwardNatIso_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme geometry, ordinary module pushforward compositors, and general mate pasting do not identify product-graph C with these proper/open interchange maps"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|pushforwardComp",
+   "results": "5 hits at Mathlib/CategoryTheory/Adjunction/Mates.lean:170,209,251,252,355: mateEquiv_vcomp and mateEquiv_hcomp; read the two statements at 170 and 209",
+   "date": "2026-10-23",
+   "verdict": "no match: the general pasting laws require identification of the concrete graph C with the Gamma calculus, which is the missing content here"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*[Cc]omparison|proper.*open.*[Pp]asting|[Cc]ompactification.*[Ii]nterchange",
+   "results": "{\"t\": \"2026-10-23T18:52:57Z\", \"tool\": \"grep\", \"query\": \"graph.*[Cc]omparison|proper.*open.*[Pp]asting|[Cc]ompactification.*[Ii]nterchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification comparison of proper open direct images is compatible with composition",
+   "results": "{\"t\": \"2026-10-23T18:52:58Z\", \"tool\": \"leansearch\", \"query\": \"Canonical compactification comparison of proper open direct images is compatible with composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.CompactOpens.map_comp\", \"TopologicalSpace.PositiveCompacts.map_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Hom.comp_image\", \"AlgebraicGeometry.Scheme.Hom.opensRange_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"ContinuousOpenMap.comp\", \"CocompactMap.coe_comp\"], \"digest\": \"2df36fbb07d9f60a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "results": "{\"t\": \"2026-10-23T18:52:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"mate\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.comp_leftAdjointMate\", \"CategoryTheory.comp_rightAdjointMate\", \"CategoryTheory.comp_leftAdjointMate_assoc\", \"CategoryTheory.comp_rightAdjointMate_assoc\"], \"digest\": \"5148e2ae20d81527\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product graph comparisons for proper open proper factorizations commute with pasting proper direct image and extension by zero",
+   "results": "{\"t\": \"2026-10-23T18:52:59Z\", \"tool\": \"leanfinder\", \"query\": \"Product graph comparisons for proper open proper factorizations commute with pasting proper direct image and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.Products.evalFacProps\", \"Profinite.NobelingProof.GoodProducts.range_equiv_factorization\", \"Profinite.NobelingProof.Products.evalFacProp\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"Profinite.NobelingProof.factors_prod_eq_basis_of_eq\", \"Set.graphOn_prod_prodMap\", \"Set.graphOn_prod_graphOn\"], \"digest\": \"3121801dc03eac8b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*[Nn]ormali[sz]|[Cc]ompactification.*[Cc]omparison|proper.*open.*[Ee]xchange",
+   "results": "{\"t\": \"2026-10-23T18:57:15Z\", \"tool\": \"grep\", \"query\": \"graph.*[Nn]ormali[sz]|[Cc]ompactification.*[Cc]omparison|proper.*open.*[Ee]xchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between compactly supported derived pushforwards using product of two compactifications and intersection of open neighborhoods",
+   "results": "{\"t\": \"2026-10-23T18:57:16Z\", \"tool\": \"leansearch\", \"query\": \"Canonical comparison between compactly supported derived pushforwards using product of two compactifications and intersection of open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCompact.nhdsSetWithin_prod_eq\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.piInters\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"TopologicalSpace.Compacts.coe_prod\", \"IsCompact.nhdsSet_prod_eq\", \"TopologicalSpace.CompactOpens.coe_prod\", \"TopologicalSpace.CompactOpens.prod\", \"Filter.coprod_cocompact\"], \"digest\": \"d919ec85e8da162c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-pairwise-product-graph-normalization: comparisons of proper open proper presentations factor through the diagonal graph into the product of their open sources",
+   "results": "{\"t\": \"2026-10-23T18:57:17Z\", \"tool\": \"leanfinder\", \"query\": \"lem-pur-etale-pairwise-product-graph-normalization: comparisons of proper open proper presentations factor through the diagonal graph into the product of their open sources\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc\"], \"digest\": \"edf8d8b4b8a5e170\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proper\", \"comp\"",
+   "results": "{\"t\": \"2026-10-23T18:57:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"proper\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Lsp.CompletionItemKind.property\", \"CategoryTheory.ObjectProperty.liftCompιIso\", \"CategoryTheory.ObjectProperty.ιOfLECompιIso\", \"CategoryTheory.ObjectProperty.liftCompιOfLEIso\", \"CategoryTheory.ObjectProperty.FullSubcategory.comp_hom\", \"CategoryTheory.ObjectProperty.FullSubcategory.comp_hom_assoc\", \"CategoryTheory.MorphismProperty.instCompleteBooleanAlgebra\", \"CategoryTheory.MorphismProperty.RespectsLeft.precomp\"], \"digest\": \"8644ea12b9c5d4d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-pur-etale-pairwise-product-graph-normalization: total derived pushforward extension by zero comparison through two proper graph embeddings and their common open intersection",
+   "results": "{\"t\": \"2026-10-23T18:57:18Z\", \"tool\": \"leanfinder\", \"query\": \"lem-pur-etale-pairwise-product-graph-normalization: total derived pushforward extension by zero comparison through two proper graph embeddings and their common open intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc\"], \"digest\": \"7ae6576db4fe3560\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of extension by zero proper direct image interchange with changes of compactification graph presentations",
+   "results": "{\"t\": \"2026-10-23T18:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of extension by zero proper direct image interchange with changes of compactification graph presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.hom_naturality_apply\", \"LightCondSet.hom_naturality_apply\", \"Condensed.lanPresheafExt_hom\", \"LightCondensed.lanPresheafExt_hom\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccObjIso_hom_naturality_assoc\", \"AbstractCompletion.compare_comp_eq_compare\", \"OnePoint.map_comp\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccObjIso_hom_naturality\"], \"digest\": \"868a6a61a29cbbe5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T19:00:22Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"e59b1eb4bdd8a07b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|whiskerLeft_comp_whiskerRight",
+   "results": "{\"t\": \"2026-10-23T19:01:51Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv_vcomp|whiskerLeft_comp_whiskerRight\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Whiskering.lean\", \"Mathlib/CategoryTheory/Whiskering.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"accc4db55988551d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme normalization, ordinary topology, pushforward or categorical mate laws; no specified graph comparison of unbounded etale proper/open/proper presentations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-exists-right-derived-lower-shriek-comp-iso",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument.",
+   "via": [
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pur-etale-graph-comparison-interchange",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved the elementary open-presentation move directly from its graph neighborhoods, and reduced the two-presentation interchange equation to a specified product grid and cancellation. Isolated the universal pairwise graph normalization as one statement-only obligation. Retained the null blueprint ancestor returned by the required ancestor command, documenting the intended blueprint place; no Lean written or compilation run.",
+  "blueprint": "prop-asd-smooth-base-change.proof.md coherences (i),(iii), the composition comparisons used before transposition; sk-thm-sf-comp-composition.proof.md canonicity paragraph; sk-prop-sf-pf-coherence.proof.md refinement/counit coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-etale-locally-closed-graph-model",
+    "why": "Specified two-neighborhood graph map, needed to identify actual C; generic unbounded etale graph construction."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Only its normalization of composite and identity derived adjunctions is used to fix the proper compositors."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic unbounded normalized pushforward compositor, not a replacement for the compactification route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-etale-locally-closed-graph-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-736d2dfd9",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-736d2dfd9 (reviewer sub-agent of L); spot-checked: Item statement unchanged from base e4ce08d (unsplit there, no proof). No repair note, so the re-split rule does not apply; the item is still unsplit live, so no supersession. No SGA. Parent lem-route-exists-right-derived-lower-shriek-comp-iso uses the first clause in its step 2 and the second in its step 6; both match the item's notation. Read Stacks more-etale 0F7J (lemma-shriek-composition, squares A-E) and every cited statement: graph-model B=B_2^{-1}R(B_12)B_1, C_{t,s}=B_{t,c}B_{s,c}^{-1}, the cube's vertical law (R_{p2}Γ_{Q1})(Γ_{Q2}R_{r1}) and horizontal law (Γ_{Q2}J_k)(J_jΓ_{Q1}), the compositors, and the geometry leaves. Checked by hand: step 1 neighborhoods (T, O_1, B_1 common; ũ=u×1 with ũs_S=s_H). Step 3 typing of Γ_{Q_u}^{-1}:F_H→F_S. Step 4: δ is the pullback of Δ_{q_1} along i_1×i_1 (i_1 mono), so a closed immersion; B is Cartesian since W_0×_{V_0}V_c=W_c; a_c and a_0 are proper by IsProper.of_comp with a separated open-then-proper projection. Step 5: the three instantiations of the new node give targets G_0R_δ, F_c and H_0, and K is well typed. Steps 6-7 are a grid calculation in which every cell is a Γ or a compositor, with matching endpoints, at the level of 0F7J's A-E argument; accepted. Step 8 algebra and whisker exchange check out. New node lem-pur-etale-pairwise-product-graph-normalization is statement-only and self-contained; a is proper (U→U_1 separated), v_ν is open, z_ν is proper; it reduces to the graph-model B when t_1 is open-then-proper. Searches for product-graph, P_1×_YP_2 and C_{t,s} hit only the item, the base-change node and the parent, so it is not a duplicate. It concerns one map, so it does not restate a clause of the item. The three generic tool_uses are accepted. FIX: step 2 said to paste Q_u above D_H, which is impossible (u≠b_H and a≠pr_H). It is rewritten with the correct decomposition (Q_u = E over Cartesian D_u, D_S = D_u beside D_H, and the E' triangle cancelling in the intersections), and lem-amb-natural-transformation-whisker-exchange is added to its uses. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonInterchange",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphComparisonInterchange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphComparisonInterchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphComparisonInterchange.lean",
+  "statement": "theorem etaleGraphComparisonInterchange (A : Type (u + 1)) [CommRing A] [Finite A] : (∀ {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h) (H : EtaleGraphPresentation h) (a' : X ⟶ W) (v : W ⟶ H.U) [IsProper a'] [IsOpenImmersion v] (fac : a' ≫ v = H.a), (etaleGraphComparison A c H (H.shrink a' v fac)).hom = (etaleGraphShrinkInterchange A H a' v fac).hom) ∧ (∀ {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} (cf : Compactification f) (ch : Compactification (f ≫ g)) (d₁ d₂ : EtaleGraphInterchangeDiagram f g), (etaleGraphDiagramInterchange A d₁).hom ≫ (etaleGraphComparison A ch d₁.compositePresentation d₂.compositePresentation).hom = Functor.whiskerRight (etaleGraphComparison A cf d₁.sourcePresentation d₂.sourcePresentation).hom ((EtaleGraphPresentation.ofCompactification d₁.compactification).functor A) ≫ Functor.whiskerLeft (d₂.sourcePresentation.functor A) (etaleGraphComparison A d₁.compactification (EtaleGraphPresentation.ofCompactification d₁.compactification) (EtaleGraphPresentation.ofCompactification d₂.compactification)).hom ≫ (etaleGraphDiagramInterchange A d₂).hom)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The theorem signature is unchanged. Its explicit diagram definitions are re-exported from EtaleGraphInterchangeData. The proof uses the two strict shrinking substeps and the selected product row, followed by proved categorical cancellation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd6392e29",
+  "group": "NC",
+  "result": "pass",
+  "note": "Node statement, stmt_deps and proof unchanged (only the lean record is new); lean.statement verbatim in the file; one sorry. Clause 1: etaleGraphComparison A c H S is C_{S,H} (direction checked); the RHS uses the upstream Cartesian triangle iso, which equals the cube's Γ for the square (𝟙, a', a, v) by its Cartesian clause, with J_id removed by the cube's own unit iso and then the inverse open compositor, so it is R_pJ_e(Γ_{Q_u}^{-1}) followed by J_eJ_u≅J_{eu}. Clause 2: the diagram record gives the 4 proper and 3 open maps, facF, facG and a CommSq (never IsPullback); t, d, s match; I = R_qΓ_QJ_eR_a with explicit compositors; the equality is C_{s2,s1}I₁ = I₂(C_{d2,d1}F_{t2})F_{d1}(C_{t2,t1}) in diagrammatic order. Γ comes from the cube's existence statement, which pins it uniquely (support θ plus every K-injective representative), so it is not hollow. Edge cases covered (empty schemes, zero ring, identities, non-qc opens via Compactification, non-Cartesian squares); no extra hypotheses or universes; no duplicate definitions (grepped side-live). Docstrings with source and blueprint, proof steps 1-8, report sections present. Not recompiled (no FIX). Advisory: upstream compositors, Compactification and the triangle iso have no DAG owner, as already noted for the cube."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b198d",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261024T020820-L-2671853",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live (byte-identical); moved defs in EtaleGraphInterchangeData vs live item module (bodies verbatim); three new sorry statements (side/middle/row pasting) vs plan steps 2,6-7 and the explicit graph-model, pairwise-lambda and pinned exchange-cube Γ definitions; node lean records vs files"
+ }
+}

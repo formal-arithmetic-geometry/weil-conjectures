@@ -1,0 +1,251 @@
+{
+ "id": "lem-sf-oriented-double-hom-cancellation",
+ "kind": "statement",
+ "title": "Cancellation of a shifted Tate line in the canonical double-Hom map",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\ge1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, and a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Fix a six-functor datum [def-sf-datum], let $X$ be a finite-type $k$-scheme in its domain, and use the actual coefficient categories, tensor and internal Hom of [sk-def-sf-operations](i). Write $\\mathbf1=\\Lambda_X$, $H(P,M)=R\\mathcal Hom_X(P,M)$ and $P^\\vee=H(P,\\mathbf1)$. The integral unit and tensor are completed; the field categories are the specified rationalization and common finite-stage categories, respectively. All tensor constraints and symmetries below are those of these categories, including their cohomological signs.\n\nLet $m,r\\in\\mathbf Z$, put $L=\\Lambda_X(m)[2r]$ and $L^{-1}=\\Lambda_X(-m)[-2r]$ with their opposite-line evaluation identifications, and let $\\gamma:L\\xrightarrow{\\sim}W$ be any isomorphism. Write $D_WP=H(P,W)$. Let $P\\in\\Dctf(X,\\Lambda)$ be perfect and let $c_{P,L}:P^\\vee\\otimes L\\to H(P,L)$ be the transpose of coefficient evaluation tensored with $L$ (with symmetry moving $L$ past $P$). Assume this comparison is invertible, and set $\\theta_P=c_{P,L}^{-1}H(P,\\gamma^{-1})$.\n\nFor every object $U$, let\n$$q_U:H(U\\otimes L,L)\\xrightarrow{\\sim}H(U,\\mathbf1)$$\nbe the composite of $H(1_{U\\otimes L},\\lambda_L^{-1}):H(U\\otimes L,L)\\to H(U\\otimes L,\\mathbf1\\otimes L)$, where $\\lambda_L:\\mathbf1\\otimes L\\xrightarrow{\\sim}L$ is the left unitor, with the canonical cancellation isomorphism $c_{U,\\mathbf1,L}=s_{U,\\mathbf1,L}^{-1}:H(U\\otimes L,\\mathbf1\\otimes L)\\xrightarrow{\\sim}H(U,\\mathbf1)$ of [lem-sf-invertible-factor-hom-cancellation], applied in the closed symmetric monoidal structure of [sk-def-sf-operations](i) to the invertible factor $J=L$ with $I=L^{-1}$. Thus $q_U$ is natural in $U$, and $q_U^{-1}$ is the transpose of coefficient evaluation $H(U,\\mathbf1)\\otimes U\\to\\mathbf1$ tensored with $L$, followed by $\\lambda_L$. On morphisms out of every test object $V$, after the tensor--Hom adjunction, $q_U^{-1}$ is the bijection $\\operatorname{Hom}(V\\otimes U,\\mathbf1)\\xrightarrow{\\sim}\\operatorname{Hom}(V\\otimes U\\otimes L,L)$ sending $v$ to $v\\otimes1_L$ (with $\\lambda_L$).\n\nDefine $t_P=H(\\theta_P^{-1},\\gamma^{-1}):D_WD_WP\\xrightarrow{\\sim}H(P^\\vee\\otimes L,L)$. Let $\\delta^W_P:P\\to D_WD_WP$ and $j_P:P\\to P^{\\vee\\vee}$ be the transposes of the respective evaluations after interchanging their tensor factors by the symmetry. Then the equation of canonical maps is\n$$q_{P^\\vee}\\circ t_P\\circ\\delta^W_P=j_P.$$\nThe internal-Hom isomorphism and this equality use the signed derived symmetry; no unsigned identification on cohomology is substituted for them. No smooth morphism, absolute dualizing object, or general geometric biduality theorem is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "proof, sentence 4: applying theta twice and opposite-twist interchange identifies the canonical biduality; returned Step 5"
+ },
+ "stmt_deps": [
+  "sk-def-sf-operations",
+  "def-sf-datum",
+  "sk-def-perfect",
+  "def-coefficient-twists-detailed",
+  "lem-sf-invertible-factor-hom-cancellation",
+  "def-dl-a1-locally-constructible-adic-heart"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied right-tensor adjunction of the actual coefficient closed structure. Its counit and Hom equivalence give uncurry(g)=tensor(g,1) followed by evaluation. Adjunction naturality in the test object and target, together with evaluation_naturality in the source, gives uncurry(g followed by H(f,h))=tensor(1,f) followed by uncurry(g) followed by h. Apply these formulas to orientedHomCancellationInverse to obtain its explicit uncurry: inverse associator followed by tensor(uncurry(g),1_L) followed by the left unitor. Tensoring on the right by L is an equivalence by the existing source theorem tensorRightEquivalenceOfTensorIso(a,b); its fully faithful Hom map, the adjunction bijections and the invertible associator and unitor show that postcomposition with this exact cancellation inverse is bijective for every test object, using [lem-sf-quasi-inverse-hom-bijection]. Thus it is an isomorphism by isIso_of_yoneda_map_bijective. Set q to the inverse of its asIso. This works with arbitrary two-sided inverse identifications a and b; no triangle compatibility is assumed.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible) and 0GWJ (categories-remark-internal-hom-monoidal); explicit expansion of main-20261015 sk-thm-sf-dual-perfect proof sentence 4."
+   }
+  },
+  {
+   "text": "Uncurry the naturality square for the explicit cancellation inverse. Evaluation source naturality and associator middle naturality identify both sides. Multiply by the inverse isomorphisms to get the required naturality of q. The uncurry formula of step 1 proves the exact test-object transpose equation. The composite of transpose, postcomposition by q inverse, and inverse transpose is an equivalence of Hom sets, hence the displayed map on test-object Hom sets is bijective. All these are direct calculations in the supplied adjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible) and 0GWJ (categories-remark-internal-hom-monoidal); explicit expansion of main-20261015 sk-thm-sf-dual-perfect proof sentence 4."
+   }
+  },
+  {
+   "text": "Put A=H(P,1) and theta=orientedHomThetaInverse(P,L,W,gamma). The first evaluation law of [lem-sf-coefficient-evaluation-naturality] identifies the uncurry of the actual ringedSiteDualEvaluationLeft(P,L). Apply the uncurry map law to its composite with H(1,gamma.hom). Since theta.hom is precisely this composite, its evaluation is associator(A,L,P), then tensor(1_A,symmetry(L,P)), then inverse associator(A,P,L), then tensor(evaluation(P,1),1_L), then the left unitor and gamma.hom. This proves the needed conditional evaluation equation directly, retaining the explicit comparison-invertibility instance.",
+   "uses": [
+    "lem-sf-coefficient-evaluation-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible) and 0GWJ (categories-remark-internal-hom-monoidal); explicit expansion of main-20261015 sk-thm-sf-dual-perfect proof sentence 4."
+   }
+  },
+  {
+   "text": "Cancel q_A inverse on the right of the desired bidual equality. The remaining equation is delta_W followed by H(theta.hom,gamma.inv) equals j followed by the explicit cancellation inverse. Apply injectivity of inverse transpose. The uncurry map law and the definition of ringedSiteBidual rewrite the left side as tensor(1_P,theta.hom), then symmetry(P,H(P,W)), evaluation(P,W), and gamma.inv. Braiding naturality moves theta.hom before evaluation. Substitute the evaluation equation of step 3; gamma.hom followed by gamma.inv cancels.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible) and 0GWJ (categories-remark-internal-hom-monoidal); explicit expansion of main-20261015 sk-thm-sf-dual-perfect proof sentence 4."
+   }
+  },
+  {
+   "text": "Expand symmetry(P,A tensor L) with braiding_tensor_right_hom. Cancel inverse-associator/associator pairs and combine the whiskered crossings symmetry(P,L) and symmetry(L,P). SymmetricCategory.symmetry cancels these crossings. Associator coherence leaves inverse associator(P,A,L), then tensor(symmetry(P,A) followed by evaluation(P,1),1_L), then the left unitor. This is the uncurry of j followed by q inverse from step 1. Inverse transpose is injective, so the required equality follows. This uses the supplied signed symmetry throughout and does not require perfectness beyond the unchanged hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible) and 0GWJ (categories-remark-internal-hom-monoidal); explicit expansion of main-20261015 sk-thm-sf-dual-perfect proof sentence 4."
+   }
+  },
+  {
+   "text": "Obtain the finite, integral, rational and common-stage evaluation laws from [lem-sf-coefficient-evaluation-naturality], via sfCoefficientEvaluationNaturality. Apply steps 1-5 to each actual closed structure and its actual symmetric structure. The categorical argument works for every pair L,I with the supplied inverse isomorphisms, so the existing shifted-Tate object equalities need no transport and all four stated conclusions follow with their original hypotheses unchanged.",
+   "uses": [
+    "lem-sf-coefficient-evaluation-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFM (categories-lemma-invertible) and 0GWJ (categories-remark-internal-hom-monoidal); explicit expansion of main-20261015 sk-thm-sf-dual-perfect proof sentence 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-quasi-inverse-hom-bijection",
+  "lem-sf-coefficient-evaluation-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "W6 stage 3: direct right-tensor-adjunction implementation of Tags 0FFM and 0GWJ, following main-20261015 sk-thm-sf-dual-perfect proof sentence 4. Uses the existing tensor-right equivalence instead of transporting the Mathlib-ihom cancellation theorem to the supplied H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom into a shifted Tate line cancel opposite twists identifies canonical relative double dual evaluation with coefficient biduality and gives anti equivalence on perfect sheaf complexes",
+   "results": "{\"t\": \"2026-10-22T06:47:54Z\", \"tool\": \"leanfinder\", \"query\": \"Internal Hom into a shifted Tate line cancel opposite twists identifies canonical relative double dual evaluation with coefficient biduality and gives anti equivalence on perfect sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"CharacterModule.dual_rTensor_conj_homEquiv\", \"CategoryTheory.Abelian.Ext.homLinearEquiv_symm_apply\", \"CharacterModule.homEquiv\", \"LightCondensed.ihomPoints_symm_apply\", \"CharacterModule.homEquiv_symm_apply_apply_apply\", \"ModuleCat.ihom_coev_app\", \"CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv\"], \"digest\": \"68825986887a1f5c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom\\.ev|ev_naturality|uncurry_natural",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"grep\", \"query\": \"ihom\\\\.ev|ev_naturality|uncurry_natural\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"digest\": \"60ae99fb32fd853a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cancellation of invertible tensor factor inside internal Hom preserves the signed evaluation transpose biduality of perfect complexes",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"leansearch\", \"query\": \"Cancellation of invertible tensor factor inside internal Hom preserves the signed evaluation transpose biduality of perfect complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.rightCancelEquiv_comp_rTensor_comp_symm\", \"transpose_dualTensorHom\", \"Module.Invertible.rTensorInv\", \"LinearMap.IsPerfPair.dualEval\", \"CategoryTheory.tensorLeftHomEquiv\", \"Module.Invertible.leftCancelEquiv\", \"Module.Invertible.instTensorProduct_2\", \"Module.Invertible.rightCancelEquiv\"], \"digest\": \"ac04a453b1c1087a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.ihom",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.internalHom_obj\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"CategoryTheory.MonoidalClosed.internalHom_map\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\", \"CategoryTheory.ObjectProperty.prop_ihom\", \"CategoryTheory.ObjectProperty.IsMonoidalClosed.prop_ihom\", \"CategoryTheory.ObjectProperty.IsMonoidalClosed.mk\"], \"digest\": \"1bae8d5d0992486b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double dual map under duality twisted by an invertible line is coefficient biduality by cancellation on all test object Hom sets",
+   "results": "{\"t\": \"2026-10-22T06:48:42Z\", \"tool\": \"leanfinder\", \"query\": \"Double dual map under duality twisted by an invertible line is coefficient biduality by cancellation on all test object Hom sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CharacterModule.dual_rTensor_conj_homEquiv\", \"CharacterModule.congr\", \"CharacterModule.dual_comp\", \"LinearEquiv.trans_dualMap_symm_flip\", \"LinearEquiv.dualMap_apply\", \"LinearEquiv.flip\", \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"LinearMap.dualMap_eq_lcomp\"], \"digest\": \"226bbf2a37843b2f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical double dual evaluation for internal Hom into an invertible object agrees with unit coefficient biduality after cancelling the invertible tensor factor",
+   "results": "{\"t\": \"2026-10-22T07:55:37Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical double dual evaluation for internal Hom into an invertible object agrees with unit coefficient biduality after cancelling the invertible tensor factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.coev_ev\", \"CategoryTheory.ihom.ev_coev\", \"CategoryTheory.ihom.coev_ev_assoc\", \"CategoryTheory.exp.ev_coev\", \"CategoryTheory.Functor.ihom_coev_app\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.exp.coev_ev_assoc\"], \"digest\": \"659636358ac1fb53\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities or ordinary module duals do not state this cancellation-normalized equality in the specified coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "toIhomIhom|ihomTensorToIhom|ev_naturality",
+   "results": "{\"t\": \"2026-10-22T07:57:47Z\", \"tool\": \"grep\", \"query\": \"toIhomIhom|ihomTensorToIhom|ev_naturality\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"71c9244651b0e237\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities or ordinary module duals do not state this cancellation-normalized equality in the specified coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double duality map into an invertible object equals coefficient biduality under internal Hom tensor cancellation",
+   "results": "{\"t\": \"2026-10-22T07:57:48Z\", \"tool\": \"leansearch\", \"query\": \"Double duality map into an invertible object equals coefficient biduality under internal Hom tensor cancellation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.instDual\", \"LinearEquiv.dualMap\", \"Module.Invertible.linearEquivDual\", \"LinearEquiv.dualMap_symm\", \"TensorProduct.dualDistrib_dualDistribInvOfBasis_right_inverse\", \"AddChar.doubleDualEmb_doubleDualEquiv_symm_apply\", \"TensorProduct.dualDistrib_dualDistribInvOfBasis_left_inverse\", \"Lat.dualEquiv_inverse\"], \"digest\": \"76e9467d9d34f6c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities or ordinary module duals do not state this cancellation-normalized equality in the specified coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.toIhomIhom, CategoryTheory.ihom",
+   "results": "{\"t\": \"2026-10-22T07:57:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed.toIhomIhom, CategoryTheory.ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalClosed.toIhomIhom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unknown identifier in remote Loogle index"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal closed category the transpose of evaluation after swapping the factors is compatible with replacing the dualizing unit by an invertible line",
+   "results": "{\"t\": \"2026-10-22T07:58:25Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal closed category the transpose of evaluation after swapping the factors is compatible with replacing the dualizing unit by an invertible line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.MonoidalClosed.compTranspose_eq\", \"CategoryTheory.ihom.ev_coev_assoc\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.exp.ev_coev_assoc\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\"], \"digest\": \"eda7b50effc5e1ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities or ordinary module duals do not state this cancellation-normalized equality in the specified coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "compTranspose_eq|theorem ev_naturality|theorem coev_ev|theorem ev_coev",
+   "results": "{\"t\": \"2026-10-22T08:00:12Z\", \"tool\": \"grep\", \"query\": \"compTranspose_eq|theorem ev_naturality|theorem coev_ev|theorem ev_coev\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"1aa942921dff1e95\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities or ordinary module duals do not state this cancellation-normalized equality in the specified coefficient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-sf-dual-perfect",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-dual-perfect",
+   "place": "proof, sentence 4: applying theta twice and opposite-twist interchange identifies the canonical biduality; returned Step 5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-oriented-double-hom-cancellation",
+  "worker": "stage1",
+  "summary": "Expanded the canonical-map compatibility by uncurrying, using the existing evaluation formula and invertible-factor cancellation. The two crossings of P and L cancel by symmetry; no new nodes or changed statement. Checked all four coefficient stages and the exact map normalization.",
+  "blueprint": "sk-thm-sf-dual-perfect, proof sentence 4: the identification of canonical biduality after applying theta twice and cancelling the opposite twists. Steps 1–2 fix the evaluation normalization, steps 3–5 prove the equality.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-invertible-factor-hom-cancellation",
+    "why": "Steps 1 and 3 take the evaluation-normalized cancellation isomorphism s_{U,1,L}, its naturality and the closed-structure adjunction from its statement, a generic closed symmetric monoidal lemma of unit sk-prop-sf-biduality-general; no node of sk-thm-sf-dual-perfect or its cited units states the invertible-factor cancellation."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-658d09042",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-658d09042 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are unchanged, and the delivery adds no new nodes. I recomputed all five steps. Uncurrying gives uncurry(H(f,g)h)=g·uncurry(h)·(1⊗f). Moving theta past P uses naturality of the symmetry. The cited conditional evaluation formula of lem-sf-coefficient-evaluation-naturality, applied on the full subcategory {P}, cancels gamma. The hexagon σ_{P,A⊗L}=(1⊗σ_{P,L})(σ_{P,A}⊗1) and σ_{L,P}σ_{P,L}=1 leave λ_L((e∘σ_{P,A})⊗1_L). The s-uncurry equation of lem-sf-invertible-factor-hom-cancellation identifies this with uncurry(q_A^{-1} j_P), and composing with q_A proves q t δ=j. Variances, domains and associators check out. Edge cases checked: P=0; m=r=0 with W=1 and γ=1; negative m and r; signed symmetry for any shift parity. Sources checked: Stacks 0GWJ = categories-remark-internal-hom-monoidal and 0FFM = categories-lemma-invertible (categories.tex 9616 and 9268), and blueprint main-20261015 sk-thm-sf-dual-perfect proof sentence 4. No SGA source is cited. The duplicate search over dag/nodes for invertible-line biduality found nothing: lem-sf-etale-twisted-bidual-transport is a pullback statement, and the per-biduality nodes are geometric. Repair: lem-sf-invertible-factor-hom-cancellation is in unit sk-prop-sf-biduality-general, which is outside the route of sk-thm-sf-dual-perfect, and the node is split but not Lean-closed. I accepted it as a generic closed-monoidal tool and declared it in split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-sf-oriented-double-hom-cancellation.json; nothing else in the file changed. Advisory: the identifications L⊗L^{-1}≅1 are given data in the statement, and the parent supplies them through lem-sf-perfect-dual-pair-and-tate-stability.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedDoubleHomCancellation",
+  "declaration": "WeilConjectures.sixFunctor_orientedDoubleHomCancellation",
+  "declarations": [
+   "WeilConjectures.orientedHomTensorBoth",
+   "WeilConjectures.orientedHomCancellationInverse",
+   "WeilConjectures.orientedHomThetaInverse",
+   "WeilConjectures.orientedHomDoubleIso",
+   "WeilConjectures.OrientedDoubleHomCancellation",
+   "WeilConjectures.orientedFiniteTateObject",
+   "WeilConjectures.orientedIntegralTateObject",
+   "WeilConjectures.orientedRationalTateObject",
+   "WeilConjectures.orientedCommonTateObject",
+   "WeilConjectures.sixFunctor_orientedDoubleHomCancellation",
+   "WeilConjectures.sfOrientedCancellation_of_evaluationLaws"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedDoubleHomCancellation.lean",
+  "statement": "theorem sixFunctor_orientedDoubleHomCancellation (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (S : SixFunctorDatum D C E (n + 1) (Nat.succ_pos n)) (X : SixFunctorSpace D) : (∀ (m r : ℤ) (L I : (S.toSixFunctorOperationDatum.finiteTorDomain X).FullSubcategory), L.obj.obj = (orientedFiniteTateObject D C E X n m)⟦2 * r⟧ → I.obj.obj = (orientedFiniteTateObject D C E X n (-m))⟦-(2 * r)⟧ → OrientedDoubleHomCancellation (S.finiteClosed X).closed (S.finiteClosed X).symmetric L I) ∧ (∀ (m r : ℤ) (L I : (S.toSixFunctorOperationDatum.integralFiniteTorDomain X).FullSubcategory), L.obj.obj = (orientedIntegralTateObject D C E X m)⟦2 * r⟧ → I.obj.obj = (orientedIntegralTateObject D C E X (-m))⟦-(2 * r)⟧ → OrientedDoubleHomCancellation (S.integralClosed X).closed (S.integralClosed X).symmetric L I) ∧ (∀ (m r : ℤ) (L I : (⊤ : ObjectProperty (sfRationalConstructibleCategory C.l E X.obj.left)).FullSubcategory), L.obj = (orientedRationalTateObject D C E X m)⟦2 * r⟧ → I.obj = (orientedRationalTateObject D C E X (-m))⟦-(2 * r)⟧ → OrientedDoubleHomCancellation (S.rationalClosed X).closed (S.rationalClosed X).symmetric L I) ∧ (∀ (m r : ℤ) (L I : (⊤ : ObjectProperty (generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left)).FullSubcategory), L.obj = (orientedCommonTateObject D C X m)⟦2 * r⟧ → I.obj = (orientedCommonTateObject D C X (-m))⟦-(2 * r)⟧ → OrientedDoubleHomCancellation (S.commonClosed X).closed (S.commonClosed X).symmetric L I)",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four clauses use the recorded finite-Tor closed domains, tensors, partial-Hom restrictions and signed symmetries of SixFunctorDatum. The canonical arrows use its actual right-tensor adjunction; t is a constructed isomorphism, q is specified by its canonical inverse, naturality and all test-object transposes. The landed definition node def-dl-a1-locally-constructible-adic-heart supplies dlAdicGeometricResidueInvertible, transporting the coefficient-prime unit to geometric residue fields; no extra invertibility or separatedness assumption is introduced. Signed finite, integral, rational and common-stage Tate objects are the recorded twists with those inverses supplied. All helper declarations belong to this node; only the named main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65ce7e6d8",
+  "group": "O4",
+  "result": "pass",
+  "note": "Re-delivery of H2-returned 026813c1. The only change is the requested fix: lem-coef-completed-tensor-hom-transpose and the CompletedTensorHomTranspose import are replaced by the landed definition node def-dl-a1-locally-constructible-adic-heart and dlAdicGeometricResidueInvertible D C X.obj.left in the four Tate wrappers. That is a real construction (k0 unit through k->kappa(x)), adds no hypothesis, and Invertible is a subsingleton. The module diff touches only the import and letI lines; the node differs only in stmt_deps and lean; the dependency record matches side-live; lean.statement is verbatim. Independently rechecked: four closed stages; L/I twists with arbitrary m,r; free opposite-line isos; q fixed by its canonical inverse, with naturality, test-object and bijectivity clauses; c = ringedSiteDualEvaluationLeft equals the node's comparison (lambda/rho, hexagon, symmetry); theta^-1 = c>>H(P,gamma); t = H(theta^-1,gamma^-1); delta>>t>>q = j; IsDualizable; explicit IsIso c; edge cases; no hollow defs; docstrings. Advisories: an existing def node was added to stmt_deps as the return instructed; the ringed-site-duality-maps owner is not cited (inherited); second reading written by the same worker. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c85e",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123118-L-1833257",
+  "kind": "interface",
+  "note": "independent cc review: sfOrientedPerfectDuality proof + new sfOrientationPerfectLines + wrapper sfOrientedCancellation_of_evaluationLaws against SfOrientedPerfectDuality def, unit sk-thm-sf-dual-perfect realized steps, and clone diff; axioms checked in /tmp sandbox (sorryAx only from upstream evaluation/dual-pair holes)"
+ }
+}

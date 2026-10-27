@@ -1,0 +1,445 @@
+{
+ "id": "lem-pur-finite-tensor-presentation-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of the signed Tate twists, shifts and twist reassociation",
+ "statement": "Fix the finite-coefficient conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Let $1\\le m\\le n$, $A=\\mathcal O_E/\\varpi_E^n$, $B=\\mathcal O_E/\\varpi_E^m$. All schemes are separated finite-type $k$-schemes. On their small pro-etale sites use the ordinary bounded constructible finite-Tor categories $\\mathcal C_R(T)=D^b_{ctf}(T,R)$, $R=A,B$, and $Q_T=(-)\\otimes_A^LB$ with its target $B_T$-action. Reduction preserves finite Tor amplitude with the same interval [lem-sf-reduction-flat-model], so $Q_T:\\mathcal C_A(T)\\to\\mathcal C_B(T)$. Use the derived operations of [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor] and the actual coefficient comparisons of [def-pur-finite-reduction-comparisons] for pullback and tensor.\n\nUse the specified coefficient lines of [def-coefficient-twists-detailed], namely $A_T(1)=\\mathcal O_E(1)_T\\otimes_{\\mathcal O_E}A$ and similarly for $B$, with positive powers, degree-zero unit and negative dual powers. For every $L\\in\\mathcal C_A(T)$ and $r,s\\in\\mathbf Z$ there are canonical natural isomorphisms\n$$Q_T(L(r)[s])\\xrightarrow{\\sim}(Q_TL)(r)[s].$$\nThey identify tensor associativity, symmetry, twist addition, the shift comparisons and pullback composition with their $B$-coefficient versions. Their positive-power chart normalization is the one of [def-pur-finite-reduction-root-charts]. In particular, for smooth separated $f:X\\to Y$ of pure relative dimension $d\\ge0$, $K\\in\\mathcal C_A(Y)$, $M=Lf_A^*K$, and the canonical reassociation\n$$\\tau_{f,A,K}:M(d)[2d]\\longrightarrow M\\otimes_A^L(A_X(d)[2d]),$$\nreduction identifies $Q_X(\\tau_{f,A,K})$ with $\\tau_{f,B,Q_YK}$ through precisely these pullback, tensor, twist and shift comparisons. These assertions impose no flatness of $A\\to B$ and no ramification-index divisibility condition on either level.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2: compatibility with the invertible twist by associativity of derived tensor, all signed twists and shifts; returned proof Step 1 (twist part)"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "lem-sf-reduction-flat-model",
+  "def-pur-finite-reduction-comparisons",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-tensor-comparison-equations",
+  "def-pur-finite-signed-reduction-comparisons",
+  "def-pur-finite-signed-twist-products",
+  "def-pur-finite-root-tensor-presentation",
+  "def-sp-coefficient-scalar-representatives",
+  "def-sp-finite-scalar-realization-presentations",
+  "def-sf-orientation-finite-line-comparisons",
+  "lem-amb-finite-tate-site-descent",
+  "def-pur-supported-cup",
+  "def-pur-composition-comparisons",
+  "def-pur-proetale-constant-module-unit",
+  "def-pur-finite-first-root-chart",
+  "def-pur-finite-positive-root-charts",
+  "def-pur-finite-tensor-fixed-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Work first in the ambient ordinary derived categories. By [det-sp-scalar-extension-functor], clauses 1–2, scalar extension has its target B-action, is exact, and preserves constructibility and the Tor interval. Thus its restriction is the Q_T in the statement; [lem-sf-reduction-flat-model] also computes its unchanged Tor interval. Choose flat-term K-flat representatives by [lem-pc-kflat-resolution]. Change of rings carries them to flat-term K-flat representatives over B by [lem-pur-kflat-change-of-rings-independent]. The equivalence from their localization to the derived category in [lem-weil-pbc-site-derived-tensor-descent] permits the representative constructions and natural transformations below to descend. None of these assertions requires B to be flat over A.",
+   "uses": [
+    "det-sp-scalar-extension-functor",
+    "lem-sf-reduction-flat-model",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4: K-flat models for derived pullback and tensor"
+   }
+  },
+  {
+   "text": "For flat-term K-flat P,H use the scalar-first tensor comparison c: b tensor (x tensor y) maps to (b tensor x) tensor (1 tensor y); its inverse sends (b tensor x) tensor (b' tensor y) to bb' tensor (x tensor y). Apply [lem-pur-cochain-pullback-tensor-coherence] to the identity topos with ring map A_T to B_T. It gives natural isomorphisms of total complexes and their associator, unit, signed symmetry and composition equations. [lem-pur-cochain-comparison-monoidal-equations] gives the four explicit constraint squares. Descend these maps by [lem-weil-pbc-site-derived-tensor-descent]; the normalized K-flat tensor comparison is therefore Q_T(U tensor_A^L V) isomorphic to Q_TU tensor_B^L Q_TV, preserving those constraints. This specifies the tensor comparison by its actual formula, rather than selecting an isomorphism of its endpoints.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); Tag 0FPT (lemma-symmetric-monoidal-derived)"
+   }
+  },
+  {
+   "text": "Put I=O_E(1)_T. The actual line of [def-coefficient-twists-detailed] is A_T(1)=I tensor_{O_E} A_T; [lem-pur-twist-sheaf-locally-free], clauses 3–4, says it is finite locally constant and locally free of rank one in degree zero. Hence clause 3 of [det-sp-scalar-extension-functor] computes Q_T(A_T(1)) by ordinary tensor. The balanced isomorphism ((i tensor a) tensor b) maps to i tensor (bar(a)b), with inverse i tensor b maps to (i tensor 1) tensor b, identifies this with I tensor_{O_E} B_T=B_T(1). This is canonical in T and the ring quotient, since both formulas use only the given ring maps. It identifies the specified lines, with no choice of trivialization.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-twist-sheaf-locally-free",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2: coefficient twists are reduced coefficient twists; balanced sheaf tensor construction"
+   }
+  },
+  {
+   "text": "Define lambda_0:Q_T(A_T) to B_T by the unit comparison of Step 2. Starting from lambda_1 of Step 3 define lambda_{j+1} by the binary comparison of Step 2 followed by lambda_j tensor lambda_1, with the specified power bracketing. This induction constructs lambda_j:Q_T(A_T(j)) to B_T(j) for all j>=0. For j>0 use [lem-sp-scalar-extension-dual-local-iso] to identify the ordinary extension of Hom_A(A_T(j),A_T) with Hom_B(Q_T(A_T(j)),B_T), and then precompose functionals with lambda_j inverse. These are lambda_{-j}. Their evaluation formula is, by [lem-sp-scalar-extension-dual-evaluation], (b tensor phi)(b' tensor x)=bb' bar(phi(x)); all these modules are invertible, so ordinary and derived extension agree by [det-sp-scalar-extension-functor], clause 3. This handles every negative integer without asserting base change for arbitrary internal Hom.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-local-iso",
+    "lem-sp-scalar-extension-dual-evaluation",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 04TT (section-internal-hom), 03EM (lemma-internal-hom)"
+   }
+  },
+  {
+   "text": "The lambda_j preserve twist addition, including cancellation of opposite signs. Indeed trivialize the actual rank-one sheaf A_T(1) and write its basis e, with dual basis e^vee. Every power chart has basis e^j, with negative powers interpreted as dual powers. The maps of Steps 3–4 send these bases to their reduced bases, and evaluation sends e^vee tensor e to 1. Both routes in each twist-addition square therefore send (a e^r) tensor (a' e^t), after extension, to bar(a)bar(a') e_B^{r+t}. The zero-power cases are the action unitors. The dual formula in [lem-sp-scalar-extension-dual-evaluation] and the binary formula in [lem-sp-scalar-extension-binary-coherence] justify the displayed calculation on all local sections. These are equations of maps of degree-zero sheaves, so they glue as sheaf equations; tensoring them with an arbitrary derived L preserves them. This does not infer equality of arbitrary derived arrows from local equality.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 04TT and 03EM: balanced tensors, evaluation, and sheaf Hom"
+   }
+  },
+  {
+   "text": "Use the representative-normalized exact shift of scalar extension [lem-sbc-derived-scalar-extension-counit-shift]. Its integer iterates and inverses give Q_T(U[s]) isomorphic to (Q_TU)[s]. On cochains it is the identity in every degree. The canonical tensor-shift comparisons of [lem-weil-pbc-cochain-pullback-tensor-shift] commute with coefficient pullback: for the second-factor shift the summand of first degree p has sign (-1)^{sp}, and the first-factor shift is unsigned. Coefficient extension changes neither p nor s and sends -1 to -1. By [lem-weil-pbc-derived-tensor-shift-descent] these comparisons are exactly the published derived tensor shifts, including their zero, addition, and two-order sign laws. Composing the shift comparison, the binary comparison of Step 2, and 1 tensor lambda_r gives the required natural isomorphism Q_T(L(r)[s]) to (Q_TL)(r)[s]. Its associativity, symmetry and twist-addition squares are those already checked in Steps 2 and 5.",
+   "uses": [
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-weil-pbc-derived-tensor-shift-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; integer signs are Tag 0FNH (more-algebra.tex, item-shift-tensor)"
+   }
+  },
+  {
+   "text": "The fixed-scalar pullback assertions are the two independent diagrams in [lem-pur-finite-tensor-pullback-tensor-reduction] and [lem-pur-finite-tensor-pullback-composition-reduction]. The first is the tensor square for a single map f and every K,L; the second is the compositor square for f,g and every K. Each descends the cochain diagram and identifies it with the recorded adjunction mate in fixed coordinates. Apply these declarations and conjoin the resulting families to prove finiteTensorPullbackCoherence. No assertion about twists, shifts or the final purity reassociation is used in this assembly.",
+   "uses": [
+    "lem-pur-finite-tensor-pullback-tensor-reduction",
+    "lem-pur-finite-tensor-pullback-composition-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 and its preceding derived-composition lemma; normalized scalar-adjunction representatives"
+   }
+  },
+  {
+   "text": "Check the positive root-chart normalization of [def-pur-finite-reduction-root-charts]. Since ell^n annihilates A, a primitive ell^n root zeta_n gives the finite chart even when E is ramified. Lift zeta_n to a compatible sequence of primitive roots (successive ell-th roots exist in k); its m-th coordinate is zeta_m=zeta_n^{ell^{n-m}}. The reductions of this integral basis are the finite root bases, by [lem-pur-twist-sheaf-locally-free], clauses 2–3. The map of Step 3 sends its A-basis tensor 1 to its B-basis. Inductively Step 4 sends the ordered positive power basis to the corresponding B-basis, and Step 6 uses the same shift signs. Thus the recursive composites of [def-pur-finite-reduction-chart-calculus] are exactly these composites, including their unit stage. The result is independent of the lift: changing it while fixing zeta_n changes its n-th reduced basis by 1, and hence also its m-th reduced basis by 1. No condition that n or m be divisible by the ramification index was used.",
+   "uses": [
+    "def-pur-finite-reduction-root-charts",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-pur-finite-reduction-chart-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2: invertible twist and specified finite reduction charts"
+   }
+  },
+  {
+   "text": "Finally take M=Lf_A^*K. Under [def-coefficient-twists-detailed], tau_{f,A,K} is the inverse second-factor tensor-shift comparison (M tensor_A^L A_X(d))[2d] to M tensor_A^L(A_X(d)[2d]). Step 6 says reduction commutes with this precise tensor-shift comparison. Its line comparison is lambda_d[2d] from Steps 4 and 8, and its M comparison is the scalar-adjunction pullback comparison of Step 7. Naturality in both tensor variables therefore identifies the reduced tau with the same inverse tensor-shift comparison at Lf_B^*(Q_YK) and B_X(d)[2d], which is tau_{f,B,Q_YK}. For d=0 this is the unit comparison and shift zero. Only the line is flat; the quotient A to B was arbitrary throughout.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-weil-pbc-derived-tensor-shift-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2: compatibility with the invertible twist by derived tensor associativity"
+   }
+  },
+  {
+   "text": "Split the structural-coherence conjunction into the native symmetry square and the simultaneous integer-shift square. Apply [lem-pur-finite-tensor-symmetry-coherence] to the first conjunct and [lem-pur-finite-tensor-shift-coherence] to the second; combine by conjunction introduction. The positive root-chart assertion is reduced by the final step below; the other four assertions retain the existing plan.",
+   "uses": [
+    "lem-pur-finite-tensor-symmetry-coherence",
+    "lem-pur-finite-tensor-shift-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For finiteTensorPositiveReduction_chart, use [lem-pur-finite-tensor-line-chart-reduction] for the unshifted line comparison and its coefficient-unit map. Normalize both finiteTensorPositivePresentation isomorphisms by their primitive-root equations. In an arbitrary category with shifts, cancel the target presentation and use naturality of the scalar-shift natural isomorphism on the inverse source chart. The unshifted chart equation then gives the asserted shifted diagonal chart square. This is a genuine composition proof; only the unshifted chart compatibility is left as a separate statement.",
+   "uses": [
+    "lem-pur-finite-tensor-line-chart-reduction",
+    "def-pur-finite-root-tensor-presentation",
+    "def-pur-finite-signed-reduction-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-reduction-chart-calculus",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-root-tensor-presentation",
+  "def-pur-finite-signed-reduction-comparisons",
+  "det-sp-scalar-extension-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-finite-tensor-line-chart-reduction",
+  "lem-pur-finite-tensor-shift-coherence",
+  "lem-pur-finite-tensor-symmetry-coherence",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-sf-reduction-flat-model",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-finite-tensor-pullback-tensor-reduction",
+  "lem-pur-finite-tensor-pullback-composition-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2 and expanded node Step 7: isolate the independent fixed-scalar tensor and compositor diagrams, then assemble finiteTensorPullbackCoherence by conjunction. Existing structural-coherence and positive-chart proofs are preserved; the other three assertions retain their plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteReduction.*(Twist|Tensor)|Tate.*reduc|twist.*coefficient",
+   "results": "25 hits: Mathlib/Tactic/GCongr/Core.lean, Mathlib/Tactic/Find.lean, Mathlib/Tactic/Find.lean, Mathlib/Tactic/Find.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/Use.lean, Mathlib/Tactic/GRewrite/Core.lean, Mathlib/Tactic/Widget/LibraryRewrite.lean; incidental telescopeReducing and tactic text, no mathematical coefficient-reduction result; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient reduction preserves smooth dualizing tensor presentation and Tate twists",
+   "results": "8 hits: Algebra.Smooth.finitePresentation, Algebra.IsStandardSmooth.finitePresentation, instFinitePresentationTensorProduct, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Mathlib.Tactic.Module.reduceCoefficientwise, Algebra.Smooth.baseChange, Algebra.FormallySmooth.instTensorProduct, Algebra.Smooth.exists_finiteType; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"shift\"",
+   "results": "0 hits: ; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite quotient coefficients derived smooth exceptional tensor map Tate twist reassociation preserve finite Tor amplitude",
+   "results": "8 hits: Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor_obj, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|rightDerivedUpperShriek|smoothPurity|dualizingComplex",
+   "results": "0 hits: ; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp; generic mates correspondence read in Mathlib/CategoryTheory/Adjunction/Mates.lean:61-101, does not construct finite-Tor coefficient or Tate comparisons; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars commutes with shifts signed Tate line duals and counit projection formula tensor mate",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, ModuleCat.extendScalars_comp_id_assoc, CategoryTheory.tensorRightHomEquiv, CategoryTheory.Tor'_map_app, CategoryTheory.tensorLeftHomEquiv, ModuleCat.extendScalars_comp_id, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft; ordinary ModuleCat scalar extension and Ext composition, not the sheaf-derived six-operation comparison; no declaration states this node or specializes to it in one line",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|scalar.*[Tt]wist|[Tt]wist.*[Rr]eduction",
+   "results": "0 hits: ; read the returned results; these do not state the finite pro-etale signed Tate comparison with its specified normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension is symmetric monoidal and commutes with shifts and duals of invertible sheaves",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.MonoidalCategory.symmetricCategory, LightCondensed.instSymmetricCategoryLightCondMod, LinearEquiv.extendScalarsOfIsLocalizationEquiv, ModuleCat.extendRestrictScalarsAdj, AlgCat.instSymmetricCategory, ModuleCat.ExtendRestrictScalarsAdj.homEquiv; read the returned results; these do not state the finite pro-etale signed Tate comparison with its specified normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficients preserves signed Tate twists and tensor shift reassociation",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, Algebra.Generators.H1Cotangent.δ_eq, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.smul_comp, CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; read the returned results; these do not state the finite pro-etale signed Tate comparison with its specified normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\", \"tensor\"",
+   "results": "0 hits: ; read the returned results; these do not state the finite pro-etale signed Tate comparison with its specified normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of an invertible sheaf and its dual along a nonflat quotient ring in the derived category with monoidal coherence",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, KaehlerDifferential.cotangentComplexBaseChange, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, CommRing.Pic.mapAlgebra, CommRing.Pic.mapAlgebra_apply, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; read the returned results; these do not state the finite pro-etale signed Tate comparison with its specified normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*(Monoidal|monoidal|shift)|changeOfRings.*(Monoidal|monoidal|shift)",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; read the returned results; these do not state the finite pro-etale signed Tate comparison with its specified normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-finite-reduction-of-purity",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: compatibility with the invertible twist by associativity of derived tensor, all signed twists and shifts; returned proof Step 1 (twist part)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-tensor-presentation-reduction",
+  "worker": "stage1",
+  "summary": "Expanded signed line reduction, evaluation for negative powers, all integer shifts, normalized pullback mate and the actual twist reassociation. Reused existing generic comparison nodes; no new nodes or Lean changes.",
+  "blueprint": "thm-pur-finite-reduction-of-purity proof Step 2, and sk-thm-purity-transport Step 1, first constituent (canonical twist reassociation).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-reduction-flat-model",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings-independent",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-pur-cochain-comparison-monoidal-equations",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-sp-scalar-extension-dual-local-iso",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-sp-scalar-extension-dual-evaluation",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-sp-scalar-extension-binary-coherence",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-sbc-derived-scalar-extension-counit-shift",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ringed-site scalar-extension, tensor, shift, or line-evaluation tool; used with its stated hypotheses, without replacing the purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-reduction-flat-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-226464031",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-226464031 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and all 21 cited statements, and checked them against the blueprint source (main-20261015 thm-pur-finite-reduction-of-purity Step 2) and sk-thm-purity-transport Step 1. There are no new nodes, the statement is unchanged, proof_deps equals the union of the step uses, nothing cites SGA, there is no cycle and no repair note. The 4 off-route statements (the 3 sp-scalar-extension lemmas and the sbc counit-shift) are generic ringed-site tools, are declared in tool_uses, and I accept them. The math checks out. Step 2 applies the cochain coherence to the identity topos with A_T to B_T, so the hypotheses hold. Step 3 is the balanced map along O_E to A to B, inverse on generators. Step 4: negative twists use the dual local iso, which holds because the twists are invertible; no base change of a general internal Hom is assumed. Step 5 checks twist addition on local bases with evaluation e^v tensor e to 1, as equations of degree-0 sheaves. Step 6: the Koszul sign survives reduction (-1 maps to -1). In Step 7 the mate formula f^-1 x tensor b to b times f^-1(x tensor 1) agrees with the unit x to x tensor 1 of the coefficient adjunction. Step 8: the root relation zeta_m = zeta_n^(l^(n-m)) is the transition of Z_l(1), and it is valid when E is ramified because l^n kills O_E/varpi^n. Step 9: tau is the inverse t^2_(2d). Edge cases checked: T empty, m=n, r=0, d=0, nonflat Z/l^2 to Z/l, characteristic 2. Batch-5 finding (det-sp-scalar-extension-functor to lem-trf-site-functorial-flat-resolution): det-sp was already in the closure through the base stmt_dep def-pur-finite-reduction-root-charts, so the closure is unchanged. The reached node only gives functorial flat resolutions of module sheaves, which is generic and not part of the trace-formula or Poincare-duality assumptions, so I accept it. Duplicate search: the Q157 tate-source nodes only use this comparison, the diagonal-orientation sibling is about orientations, and det-sp clause 3 covers only line base change for the mu-based twist; none states the item. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTensorPresentationReduction",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finite_tensor_presentation_reduction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteTensorStructuralCoherence",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorTwistAdditionCoherence",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPullbackCoherence",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPositiveReduction_chart",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorTau",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorTau_reduction",
+   "WeilConjectures.PurityFiniteSetting.finite_tensor_presentation_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTensorPresentationReduction.lean",
+  "statement": "theorem finite_tensor_presentation_reduction (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] (d : ℕ) [SmoothOfRelativeDimension d f] (K : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((sfIntrinsicDerivedEquivalence Y P.Ring).functor.obj K)) : (P.finiteTensorReduction m hm hmn X).map (P.smoothPurityReassociation X d ((P.smoothPurityPullback f).obj K)).hom ≫ (P.finiteTensorPurityTargetComparison m hm hmn f d K).hom = (P.finiteTensorPuritySourceComparison m hm hmn f d K).hom ≫ ((P.finiteReductionSetting m hm).smoothPurityReassociation X d (((P.finiteReductionSetting m hm).smoothPurityPullback f).obj ((P.finiteTensorReduction m hm hmn Y).obj K))).hom",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery of aa2aa128e2c9 (RETURN H2). Lean byte-identical (9 modules); item statement/proof/lean record unchanged. stmt_deps repaired in item, def-pur-finite-tensor-fixed-comparisons, def-pur-finite-tensor-reduction-data: thm-pur-composition-coherence→def-pur-composition-comparisons (owns compositionFixedPullbackComp/PullbackTensorFixed/TwistShift/ShiftedPullback); lem-sp-supported-etale-tensor-origin→def-sp-coefficient-scalar-representatives + new existing:true def-sp-finite-scalar-realization-presentations on SupportedEtaleTensorOrigin (liftedHom/fixedScalar/fixedRestriction/restrictionPresentation/scalarPresentation; scalarPresentation = leftAdjointUniq conjugate of sectionwise-identity-pinned sfRealizationRestriction; statement verbatim; no competing owner). Mechanical finding lem-amb-finite-tate-site-descent: statement uses finite_tate_site_descent(...).choose (constructed comparison) → PASS on that point. No supersession on live. Advisories: non-stmt_dep owners of sfRealizationRestriction/sfIntrinsicDerivedEquivalence; Second reading is the author's own; degree-one HEq lemma advisory unchanged. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T065021-L-2672551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

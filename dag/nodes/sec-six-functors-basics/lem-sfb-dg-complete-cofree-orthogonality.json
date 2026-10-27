@@ -1,0 +1,408 @@
+{
+ "id": "lem-sfb-dg-complete-cofree-orthogonality",
+ "kind": "statement",
+ "title": "Complete dual-free filtrations are right orthogonal to acyclic DG modules",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A=\\bigoplus_{j\\in\\mathbf Z}A^j$ be an associative unital differential graded algebra over $\\mathbf Z$: $d_A$ has degree $1$, $d_A^2=0$, and $d_A(ab)=d_A(a)b+(-1)^j a\\,d_A(b)$ for $a\\in A^j$. A right DG $A$-module $M$ is a graded right module with a degree-$1$ differential satisfying $d_M^2=0$ and $d_M(ma)=d_M(m)a+(-1)^j m\\,d_A(a)$ for $m\\in M^j$. Use shifts $M[k]^n=M^{n+k}$ with differential $(-1)^k d_M$ and unchanged right action. Write $(A^\\vee)^n=\\operatorname{Hom}_{\\mathbf Z}(A^{-n},\\mathbf Q/\\mathbf Z)$, with $(d\\lambda)(a)=(-1)^{n+1}\\lambda(d_Aa)$ for $\\lambda\\in(A^\\vee)^n$, and right action $(\\lambda a)(b)=\\lambda(ab)$. Products of graded modules are taken degree by degree. Let $I=F_0I\\supset F_1I\\supset\\cdots$ be a decreasing filtration by DG submodules. Assume the canonical map $I\\to\\varprojlim_{p\\ge0}I/F_pI$ is an isomorphism, every quotient map $I/F_{p+1}I\\to I/F_pI$ has a degree-zero right $A$-linear section after forgetting the differentials, and every layer $F_pI/F_{p+1}I$ is isomorphic as a DG module to a product of shifts of $A^\\vee$. For every acyclic right DG $A$-module $C$, every degree-zero right $A$-linear chain map $g:C\\to I$ admits a degree-$-1$ right $A$-linear map $h:C\\to I$ with $g=d_Ih+hd_C$. Here acyclic means $\\ker(d_C:C^n\\to C^{n+1})=d_C(C^{n-1})$ for every integer $n$.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KS, lemma-property-I-K-injective, with property (I) defined immediately before Tag 09KR, lemma-property-I-sequence; the proof uses Tag 09K4, lemma-hom-into-shift-dual-free."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-complete-dual-free-filtration"
+ ],
+ "proof": [
+  {
+   "text": "The underlying character dual $C^\\vee$ is acyclic. Indeed $\\mathbf Q/\\mathbf Z$ is divisible: a root of $q+\\mathbf Z$ under multiplication by $m>0$ is $q/m+\\mathbf Z$. Fix $r\\in\\mathbf Z$ and a cocycle $\\lambda:C^{-r}\\to\\mathbf Q/\\mathbf Z$ of degree $r$. Its cocycle equation says $\\lambda d_C=0$. Since $C$ is acyclic, $\\ker(d_C:C^{-r}\\to C^{-r+1})=\\operatorname{im}d_C^{-{r}-1}$, so $\\beta(d_Cx)=(-1)^r\\lambda(x)$ is a well-defined homomorphism on $\\operatorname{im}d_C^{-r}$. Apply [lem-per-divisible-group-hom-extension] to its inclusion in $C^{-r+1}$ to extend $\\beta$ to $\\mu:C^{-r+1}\\to\\mathbf Q/\\mathbf Z$. As $\\mu$ has dual degree $r-1$, $d_{C^\\vee}\\mu=(-1)^r\\mu d_C=\\lambda$. This proves acyclicity in every degree.",
+   "uses": [
+    "lem-per-divisible-group-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KS, last sentence: exactness of character duality, expanded using the extension property for divisible abelian groups."
+   }
+  },
+  {
+   "text": "For every $k\\in\\mathbf Z$, [lem-sfb-dg-shifted-character-dual-hom] gives $\\operatorname{Hom}_{K(A)}(C,A^\\vee[k])\\cong H^k(C^\\vee)=0$ by Step 1. Its definition of the left side therefore supplies a degree-$-1$ right $A$-linear null-homotopy for every chain map $C\\to A^\\vee[k]$. This remains true with a product $\\prod_{t\\in T}A^\\vee[k_t]$ as target: compose a chain map with every projection, choose a null-homotopy $h_t$ for each component, and define $h(c)=(h_t(c))_{t\\in T}$. The differential and right action on the product are coordinatewise, so $dh+hd$ is the original map. The empty product is zero. Conjugating by each stipulated DG layer isomorphism, every chain map $C\\to L_p:=F_pI/F_{p+1}I$ has such a null-homotopy.",
+   "uses": [
+    "lem-sfb-dg-shifted-character-dual-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09K4 and 09KS: vanishing for shifted dual-free modules and their products."
+   }
+  },
+  {
+   "text": "Write $Q_p=I/F_pI$, $q_p:Q_{p+1}\\to Q_p$, $j_p:L_p\\hookrightarrow Q_{p+1}$ for the kernel inclusion, and $g_p:C\\to Q_p$ for the projection of $g$. We construct degree-$-1$ right $A$-linear maps $h_p:C\\to Q_p$ satisfying $d_{Q_p}h_p+h_pd_C=g_p$ and $q_ph_{p+1}=h_p$. The base is $Q_0=0$ and $h_0=0$. Given $h_p$, choose the assumed graded right $A$-linear section $s_p$ of $q_p$ and put $\\widetilde h=s_ph_p$. Set $e=g_{p+1}-d_{Q_{p+1}}\\widetilde h-\\widetilde h d_C$. Since $q_p$ is a chain map and $q_p\\widetilde h=h_p$, one has $q_pe=g_p-d_{Q_p}h_p-h_pd_C=0$. Also $d_{Q_{p+1}}e=g_{p+1}d_C-d_{Q_{p+1}}\\widetilde h d_C=e d_C$, using $d^2=0$. The DG Leibniz rule makes $d\\widetilde h+\\widetilde h d_C$ right $A$-linear (the two terms involving $d_A(a)$ cancel). Thus $e$ factors uniquely as $j_p\\epsilon_p$ for a right $A$-linear chain map $\\epsilon_p:C\\to L_p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KS, finite filtration argument, expanded into a graded-section homotopy-lifting induction."
+   }
+  },
+  {
+   "text": "By Step 2 choose $k_p:C\\to L_p$ of degree $-1$ with $d_{L_p}k_p+k_pd_C=\\epsilon_p$. Define $h_{p+1}=\\widetilde h+j_pk_p$. As $j_p$ commutes with differentials, $d_{Q_{p+1}}h_{p+1}+h_{p+1}d_C=(g_{p+1}-j_p\\epsilon_p)+j_p\\epsilon_p=g_{p+1}$. Moreover $q_ph_{p+1}=q_p\\widetilde h=h_p$. This completes the induction with the stated compatibility, rather than merely choosing unrelated null-homotopies on the quotients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KS, extension from a layer to the next quotient, explicit correction of the lifted homotopy."
+   }
+  },
+  {
+   "text": "For homogeneous $c\\in C^n$ the compatible tuple $(h_p(c))_{p\\ge0}$ is an element of $\\varprojlim_p Q_p^{n-1}$. Use the assumed canonical DG isomorphism $I\\xrightarrow{\\sim}\\varprojlim_p Q_p$ to define its unique preimage $h(c)\\in I^{n-1}$. Coordinatewise additivity and right $A$-linearity of the $h_p$ imply the same for $h$. The projection of $d_Ih+hd_C$ to $Q_p$ equals $d_{Q_p}h_p+h_pd_C=g_p$ for every $p$. Injectivity of the canonical limit map therefore gives $d_Ih+hd_C=g$. This is the required homotopy, with no boundedness or convergence of infinite sums needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KS, passage from the finite quotients to the complete filtration; explicit compatible-homotopy construction in place of the product triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-divisible-group-hom-extension",
+  "lem-sfb-dg-shifted-character-dual-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KS, lemma-property-I-K-injective: character-dual layer argument followed by an explicit compatible homotopy induction and inverse limit, expanding the finite-filtration and completeness portions without the triangulated-category argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "property.I|complete.*filtration|cofree",
+   "results": {
+    "t": "2026-10-24T01:24:49Z",
+    "tool": "grep",
+    "query": "property.I|complete.*filtration|cofree",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCofiber.lean",
+     "Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+     "Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+     "Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory.lean",
+     "Mathlib/Algebra/Homology/Functor.lean"
+    ],
+    "digest": "604075380bc72634"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomotopyCategory/KInjective.lean:40-86 assumes K-injectivity of an ordinary cochain complex; it does not prove it for a DG module with a complete dual-free filtration. The precise filtration grep has no hits; the broad property.I grep only found unrelated MorphismProperty instances."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete filtered differential graded module with cofree layers has no homotopy classes from acyclic modules",
+   "results": {
+    "t": "2026-10-24T01:24:50Z",
+    "tool": "leansearch",
+    "query": "Complete filtered differential graded module with cofree layers has no homotopy classes from acyclic modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.nonempty_homotopy_zero",
+     "CochainComplex.IsKInjective.homotopyZero_def",
+     "CochainComplex.IsKInjective.rightOrthogonal",
+     "CochainComplex.IsKProjective.nonempty_homotopy_zero",
+     "CochainComplex.IsKProjective.leftOrthogonal",
+     "HomologicalComplex.Acyclic",
+     "CochainComplex.IsKProjective.homotopyZero",
+     "CochainComplex.IsKProjective.mk"
+    ],
+    "digest": "8efec7950dbf2e1f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomotopyCategory/KInjective.lean:40-86 assumes K-injectivity of an ordinary cochain complex; it does not prove it for a DG module with a complete dual-free filtration. The precise filtration grep has no hits; the broad property.I grep only found unrelated MorphismProperty instances."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"filtration\"",
+   "results": {
+    "t": "2026-10-24T01:24:50Z",
+    "tool": "loogle",
+    "query": "\"IsKInjective\", \"filtration\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomotopyCategory/KInjective.lean:40-86 assumes K-injectivity of an ordinary cochain complex; it does not prove it for a DG module with a complete dual-free filtration. The precise filtration grep has no hits; the broad property.I grep only found unrelated MorphismProperty instances."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete decreasing graded split filtration of differential graded modules with character dual free successive quotients is right orthogonal to acyclic modules",
+   "results": {
+    "t": "2026-10-24T01:24:52Z",
+    "tool": "leanfinder",
+    "query": "A complete decreasing graded split filtration of differential graded modules with character dual free successive quotients is right orthogonal to acyclic modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.rightOrthogonal",
+     "CochainComplex.isKInjective_iff_rightOrthogonal",
+     "CochainComplex.IsKProjective.leftOrthogonal",
+     "CochainComplex.isKProjective_iff_leftOrthogonal",
+     "Profinite.NobelingProof.succ_exact",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "HomologicalComplex.acyclic_iff",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective"
+    ],
+    "digest": "22474e4003a66a32"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomotopyCategory/KInjective.lean:40-86 assumes K-injectivity of an ordinary cochain complex; it does not prove it for a DG module with a complete dual-free filtration. The precise filtration grep has no hits; the broad property.I grep only found unrelated MorphismProperty instances."
+  },
+  {
+   "tool": "grep",
+   "query": "complete.*filtration|filtration.*complete|dual.free|cofree",
+   "results": {
+    "t": "2026-10-24T01:26:21Z",
+    "tool": "grep",
+    "query": "complete.*filtration|filtration.*complete|dual.free|cofree",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomotopyCategory/KInjective.lean:40-86 assumes K-injectivity of an ordinary cochain complex; it does not prove it for a DG module with a complete dual-free filtration. The precise filtration grep has no hits; the broad property.I grep only found unrelated MorphismProperty instances."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Property I filtered differential graded module maps from acyclic complexes are null homotopic",
+   "results": {
+    "t": "2026-10-24T01:26:26Z",
+    "tool": "leanfinder",
+    "query": "Property I filtered differential graded module maps from acyclic complexes are null homotopic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.homotopyZero_def",
+     "CochainComplex.IsKInjective.homotopyZero",
+     "CochainComplex.IsKInjective.nonempty_homotopy_zero",
+     "CochainComplex.IsKProjective.homotopyZero_def",
+     "CochainComplex.IsKProjective.homotopyZero",
+     "CochainComplex.IsKProjective.nonempty_homotopy_zero",
+     "HomotopyCategory.subcategoryAcyclic",
+     "ComplexShape.QFactorsThroughHomotopy"
+    ],
+    "digest": "269b642500dcb31c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: HomotopyCategory/KInjective.lean:40-86 assumes K-injectivity of an ordinary cochain complex; it does not prove it for a DG module with a complete dual-free filtration. The precise filtration grep has no hits; the broad property.I grep only found unrelated MorphismProperty instances."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|cofree|dual.free",
+   "results": {
+    "t": "2026-10-24T01:56:44Z",
+    "tool": "grep",
+    "query": "DGModule|DGAlgebra|DifferentialGraded|cofree|dual.free",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsKInjective.nonempty_homotopy_zero and isKInjective_iff_rightOrthogonal in Algebra/Homology/HomotopyCategory/KInjective.lean:40-86 assume the K-injectivity to be established. isKInjective_of_injective requires a bounded-below ordinary complex of injective objects. None supplies the complete dual-free filtration criterion for unbounded DG modules over an arbitrary DG algebra; the DG-specific grep and Loogle filtration query return no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Property I complete filtered differential graded modules are homotopically injective",
+   "results": {
+    "t": "2026-10-24T01:56:45Z",
+    "tool": "leansearch",
+    "query": "Property I complete filtered differential graded modules are homotopically injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective",
+     "CochainComplex.isKInjective_iff_rightOrthogonal",
+     "CategoryTheory.injectiveResolutions",
+     "CochainComplex.isKInjective_of_injective",
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "CategoryTheory.HasInjectiveResolutions",
+     "CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective",
+     "CategoryTheory.InjectiveResolution.comp_descHomotopyZeroOne"
+    ],
+    "digest": "5fd7071e2e192428"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsKInjective.nonempty_homotopy_zero and isKInjective_iff_rightOrthogonal in Algebra/Homology/HomotopyCategory/KInjective.lean:40-86 assume the K-injectivity to be established. isKInjective_of_injective requires a bounded-below ordinary complex of injective objects. None supplies the complete dual-free filtration criterion for unbounded DG modules over an arbitrary DG algebra; the DG-specific grep and Loogle filtration query return no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"filtration\"",
+   "results": {
+    "t": "2026-10-24T01:56:45Z",
+    "tool": "loogle",
+    "query": "\"IsKInjective\", \"filtration\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsKInjective.nonempty_homotopy_zero and isKInjective_iff_rightOrthogonal in Algebra/Homology/HomotopyCategory/KInjective.lean:40-86 assume the K-injectivity to be established. isKInjective_of_injective requires a bounded-below ordinary complex of injective objects. None supplies the complete dual-free filtration criterion for unbounded DG modules over an arbitrary DG algebra; the DG-specific grep and Loogle filtration query return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete decreasing graded split filtration of differential graded modules by products of shifts of character dual modules is K injective",
+   "results": {
+    "t": "2026-10-24T01:56:47Z",
+    "tool": "leanfinder",
+    "query": "Complete decreasing graded split filtration of differential graded modules by products of shifts of character dual modules is K injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.instInjectiveXIntI",
+     "CochainComplex.isKInjective_of_injective",
+     "CochainComplex.cm5b.I_X",
+     "CochainComplex.IsKInjective",
+     "CochainComplex.isKInjective_of_injective_aux",
+     "CochainComplex.cm5b.instIsStrictlyGEI",
+     "CochainComplex.cm5b.instInjectiveXIntMappingConeIdI",
+     "CochainComplex.cm5b.I_d"
+    ],
+    "digest": "e69d58d1d4370791"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsKInjective.nonempty_homotopy_zero and isKInjective_iff_rightOrthogonal in Algebra/Homology/HomotopyCategory/KInjective.lean:40-86 assume the K-injectivity to be established. isKInjective_of_injective requires a bounded-below ordinary complex of injective objects. None supplies the complete dual-free filtration criterion for unbounded DG modules over an arbitrary DG algebra; the DG-specific grep and Loogle filtration query return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism from an acyclic dg module to a complete filtered module with dual free graded pieces is null homotopic",
+   "results": {
+    "t": "2026-10-24T01:57:59Z",
+    "tool": "leanfinder",
+    "query": "Every morphism from an acyclic dg module to a complete filtered module with dual free graded pieces is null homotopic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.homotopyZero",
+     "CochainComplex.IsKInjective.homotopyZero_def",
+     "CochainComplex.IsKInjective.nonempty_homotopy_zero",
+     "CochainComplex.IsKProjective.homotopyZero",
+     "CochainComplex.IsKProjective.homotopyZero_def",
+     "CochainComplex.IsKProjective.nonempty_homotopy_zero",
+     "instQFactorsThroughHomotopyIntUp",
+     "instQFactorsThroughHomotopyDown"
+    ],
+    "digest": "b36b2ca2fce2cfc0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsKInjective.nonempty_homotopy_zero and isKInjective_iff_rightOrthogonal in Algebra/Homology/HomotopyCategory/KInjective.lean:40-86 assume the K-injectivity to be established. isKInjective_of_injective requires a bounded-below ordinary complex of injective objects. None supplies the complete dual-free filtration criterion for unbounded DG modules over an arbitrary DG algebra; the DG-specific grep and Loogle filtration query return no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-injective-resolution-localization",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity. Supporting input: Tag 09KS, lemma-property-I-K-injective, with property (I) defined immediately before Tag 09KR, lemma-property-I-sequence; the proof uses Tag 09K4, lemma-hom-into-shift-dual-free.",
+   "via": [
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-complete-cofree-orthogonality",
+  "worker": "stage1",
+  "summary": "Read Stacks 09KS and its character-dual input 09K4. Preserve the full statement and hypotheses. Add one statement-only node for the natural shifted character-dual Hom computations; reuse the existing divisible-group extension Mathlib leaf. Prove character-dual acyclicity explicitly, pass coordinatewise to products, construct compatible quotient homotopies by graded splitting, and use completeness to obtain the actual null-homotopy. No Lean attachment was found.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity. Supporting input: Tag 09KS, lemma-property-I-K-injective, with property (I) defined immediately before Tag 09KR, lemma-property-I-sequence; the proof uses Tag 09K4, lemma-hom-into-shift-dual-free. The split supplies the Tag 09KS input on the inherited direct-image proof route; the newest blueprint direct-images proof paragraph (3) was read.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-ab5b3b5d8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ab5b3b5d8 (reviewer sub-agent of L); spot-checked: Read Stacks dga.tex in full at section-modules-noncommutative-graded, 09K4 lemma-hom-into-shift-dual-free, property (I), 09KR and 09KS lemma-property-I-K-injective. The item statement is unchanged and matches 09KS: F_0 = I, I ≅ lim I/F_p, graded-split quotient maps (admissible), layers DG-isomorphic to products of A^∨[k], and every chain map from an acyclic C is null-homotopic. I checked the Hom-complex sign, the right action on A^∨ and the Leibniz rule for A^∨ and for its shifts by hand. New node lem-sfb-dg-shifted-character-dual-hom (09K4) is statement-only and self-contained. I verified both isomorphisms by hand: evaluation f(m)(1) gives a cocycle, the inverse λ(ma) gives a chain map with matching signs, and a homotopy h corresponds to μ with dh+hd ↔ (−1)^k dμ. So Hom_K ≅ H^k(M^∨); the case A=Z, M a group, gives Hom(M,Q/Z). The node is not a duplicate (DAG grep for 09K4/09KS/character dual) and is strictly smaller than the item. Step 1: divisible-extension Mathlib leaf; β is well defined by acyclicity and dμ = λ is checked. Step 2: the new node plus coordinatewise products and the empty product. Steps 3–4: a correctly set-up induction; e is checked to be a right-linear chain map into L_p and the correction keeps q_p h_{p+1} = h_p. Step 5: limit isomorphism and injectivity. This is an explicit replacement of the omitted 09KR triangle argument, complete and on the same route. No re-split note applies (item created 2026-10-24 by Q21 with no proof). Blueprint from.node = null is inherited from the base chain, not this delivery's fault. coord/dag-sync.md is absent from the snapshot. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCompleteCofreeOrthogonality",
+  "declaration": "CategoryTheory.DgAlgebra.exists_rightLinearHomotopy_of_completeDualFreeFiltration",
+  "file": "lean/Sheaf/CategoryTheory/DgCompleteCofreeOrthogonality.lean",
+  "statement": "theorem exists_rightLinearHomotopy_of_completeDualFreeFiltration (A : Algebra.{u}) (I : RightModule A) (_F : CompleteDualFreeFiltration A I) (C : RightModule A) (hC : ((underlying A).obj C).Acyclic) (g : C ⟶ I) : ∃ h : Homotopy ((underlying A).map g) 0, ∀ (p q : ℤ) (c : ((underlying A).obj C).X p) (a : A.X.X q), HEq (h.hom (p + q) (p + q - 1) (act A C p q c a)) (act A I (p - 1) q (h.hom p (p - 1) c) a)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec337f484",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Statement exists_rightLinearHomotopy_of_completeDualFreeFiltration matches node and Stacks 09KS/property (I): new CompleteDualFreeFiltration encodes F_p=ker π_p (F_0=I via Subsingleton Q_0), completeness as unique compatible lifts per degree, graded right-A-linear sections not commuting with d (admissible epis), layers = ker q_p with ≃+ coordinates to full Type-u products of CharacterModule(A^{-(n+k)}); hand-checked differential sign (-1)^(n+1) and unsigned action (λa)(b)=λ(ab) against dga.tex section-hom-complexes; conclusion = Homotopy(g,0) plus unsigned right-linearity HEq, verbatim body of published homotopyRel (inlined since 0 in RightModule needs a Preadditive field only from HomotopyStructure; advisory). Edge cases (empty index, zero I, finite/infinite filtrations, all ℤ degrees) covered. Item node differs from live only in lean+stmt_deps; dep record unchanged; statements verbatim; no duplicate in side-live lean/dag; docstrings with source/blueprint and 5-step plan; sole sorry. Advisories: proof-only import Grp.Injective, redundant public import. No files changed, no compile."
+ }
+}

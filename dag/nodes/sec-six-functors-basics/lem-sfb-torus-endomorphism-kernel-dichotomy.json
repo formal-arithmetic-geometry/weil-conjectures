@@ -1,0 +1,446 @@
+{
+ "id": "lem-sfb-torus-endomorphism-kernel-dichotomy",
+ "kind": "statement",
+ "title": "A split torus endomorphism is onto or has a nontrivial torus in its kernel",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. A maximal torus is a torus subgroup maximal under inclusion. Let $T$ be a torus and let $f:T\\to T$ be a group-scheme homomorphism. Exactly one of the following holds: (i) $f$ is faithfully flat and finitely presented, meaning flat and surjective on spectra, locally of finite presentation, quasi-compact and quasi-separated [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-quasi-separated-morphism]; (ii) the scheme-theoretic kernel $\\ker f$, whose $A$-points are $\\{t:f_A(t)=1\\}$, contains a closed subtorus $S\\simeq\\mathbf G_m^s$ for some integer $s\\geq1$. Case (i) includes inseparable isogenies in positive characteristic and the unique endomorphism of the trivial torus.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(b), printed pp.233--234, and Remark 12.5, printed p.232 (character groups and kernels); this is the torus-kernel alternative used in the proof of Theorem 17.48, printed p.367."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose $T\\simeq\\mathbf G_m^r$. The torus-matrix correspondence and character anti-equivalence identify $T=D_F(L)$, $L=\\mathbf Z^r$, and $f=D_F(u)$ for $u=f^*:L\\to L$; its coordinate pullback sends $e_m$ to $e_{u(m)}$ in $F[L]$. Apply the Smith-basis theorem over $\\mathbf Z$ to $I=u(L)\\subseteq L$ (take $N=I$, $O=L$). Obtain a basis $b_1,\\ldots,b_r$ of $L$ and a basis $a_1b_1,\\ldots,a_nb_n$ of $I$, with $0\\le n\\le r$ and all $a_i\\ne0$ (a basis vector cannot be zero). Consequently the rational linear map $u_{\\mathbf Q}:\\mathbf Q^r\\to\\mathbf Q^r$ has image the span of $b_1,\\ldots,b_n$: the displayed generators of $I$ are integer images, and every rational vector is an integer vector divided by a positive integer.",
+   "uses": [
+    "lem-sfb-split-torus-hom-matrices",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-pid-submodule-smith-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), pp.233--234; the integer Smith-basis specialization is the cited Mathlib leaf, FreeModule/PID.lean:492."
+   }
+  },
+  {
+   "text": "If $n=r$, $u_{\\mathbf Q}$ is surjective, hence injective by the equal-finite-dimension linear-map theorem. Thus $u$ is injective, and $F[L]\\to F[L]$, $e_m\\mapsto e_{u(m)}$, is injective because distinct basis elements have distinct images. The structure morphism $T=\\operatorname{Spec}F[L]\\to\\operatorname{Spec}F$ has affine source, so it is separated by the affine-source separatedness lemma; thus $T$ is a separated group scheme of finite type over $F$. Apply the group homomorphism factorization to $f=j\\circ q$, with $q:T\\to J$ faithfully flat and finitely presented and $j:J\\hookrightarrow T$ closed. The scheme $J$ is affine by the affine description of a closed immersion. Its coordinate map $j^*:F[L]\\to F[J]$ is surjective, and is injective because its composite with $q^*$ is the injective map $f^*$. It is therefore a ring isomorphism, whose inverse induces an inverse scheme morphism by affine spectrum functoriality. Hence $j$ is an isomorphism and $f=j\\circ q$ has all the properties in (i).",
+   "uses": [
+    "lem-sfb-finite-linear-injective-surjective",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Proposition 5.43(c) implies (a), pp.108--109; Theorem 12.9(a), pp.233--234, for the preceding coordinate identification."
+   }
+  },
+  {
+   "text": "If $n<r$, put $s=r-n\\ge1$ and let $p:L\\twoheadrightarrow\\mathbf Z^s$ send $b_1,\\ldots,b_n$ to zero and the remaining basis vectors to the standard basis. Then $pu=0$ since $p$ annihilates the displayed generators of $I$. The character anti-equivalence turns the surjection $p$ into a closed immersion $D_F(p):D_F(\\mathbf Z^s)\\hookrightarrow D_F(L)=T$. Its source is $\\mathbf G_m^s$ by the diagonalizable-group decomposition. Contravariant functoriality gives $f\\circ D_F(p)=D_F(pu)$, the trivial homomorphism. This holds on every algebra's points, so the closed subtorus factors through the scheme-theoretic kernel, exactly (ii).",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-diagonalizable-group-geometric-criteria"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), pp.233--234; Remark 12.5, p.232, and the free-group case of the decomposition preceding it."
+   }
+  },
+  {
+   "text": "For exclusivity, suppose (i). By the affine flatness criterion its coordinate map is flat; its spectrum is surjective by (i). The flat-surjective-spectrum criterion makes this ring map faithfully flat. Universal injectivity, applied to the ring as a module over itself, makes $f^*:F[L]\\to F[L]$ injective. The basis formula forces $u$ injective. Clearing a common positive denominator of a rational kernel vector shows $u_{\\mathbf Q}$ injective, hence surjective by the equal-dimension theorem. If a closed subtorus $S\\simeq\\mathbf G_m^s$, $s\\ge1$, lay in $\\ker f$, restriction of characters would be a surjection $v:L\\twoheadrightarrow\\mathbf Z^s$ by character anti-equivalence, with $vu=0$. For each $x\\in L$, rational surjectivity gives $u(y)=d x$ for some $y\\in L$, integer $d>0$. Hence $d v(x)=v(u(y))=0$, so $v(x)=0$ in the torsion-free group $\\mathbf Z^s$, contradicting surjectivity. Thus (i) excludes (ii). When $r=0$ the first case applies with empty bases; in characteristic $p$, multiplication by $p$ has injective lattice map, so inseparable power maps are included without any smooth-kernel assertion.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-sfb-finite-linear-injective-surjective",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.43, pp.108--109, and Theorem 12.9(a), pp.233--234; Stacks morphisms.tex Tag 01U5 (lemma-flat-characterize), algebra.tex Tag 00HQ (lemma-ff-rings) and Tag 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-pid-submodule-smith-bases",
+  "lem-sfb-finite-linear-injective-surjective",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.48, p.367, torus alternative; details expanded using Theorem 12.9(a), pp.233--234, Proposition 5.43, p.109, and the cited Smith-basis and equal-dimension Mathlib leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of a split algebraic torus is either faithfully flat onto the whole torus or its scheme theoretic kernel contains a positive dimensional subtorus",
+   "results": "{\"t\": \"2026-10-23T20:18:58Z\", \"tool\": \"leanfinder\", \"query\": \"An endomorphism of a split algebraic torus is either faithfully flat onto the whole torus or its scheme theoretic kernel contains a positive dimensional subtorus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Algebra.FormallySmooth.iff_split_injection\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"PrimeSpectrum.specComap_surjective_of_faithfullyFlat\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\"], \"digest\": \"cc3a5b13e65a1531\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T20:20:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orus.*[Kk]ernel|[Kk]ernel.*[Tt]orus|[Tt]orus.*[Ss]urject",
+   "results": "{\"t\": \"2026-10-23T20:20:32Z\", \"tool\": \"grep\", \"query\": \"[Tt]orus.*[Kk]ernel|[Kk]ernel.*[Tt]orus|[Tt]orus.*[Ss]urject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Non surjective endomorphism of algebraic torus has positive dimensional torus in kernel",
+   "results": "{\"t\": \"2026-10-23T20:20:32Z\", \"tool\": \"leansearch\", \"query\": \"Non surjective endomorphism of algebraic torus has positive dimensional torus in kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_ker_pow_eq_ker_pow_succ\", \"Module.End.ker_pow_le_ker_pow_finrank\", \"LinearMap.injective_iff_surjective\", \"Module.End.eventually_disjoint_ker_pow_range_pow\", \"LinearMap.eventually_isCompl_ker_pow_range_pow\", \"Module.End.ker_pow_eq_ker_pow_finrank_of_le\", \"AlgHom.bijective\", \"IsTorsion.quotient_iff\"], \"digest\": \"cb37db61e7bc54c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomial self homomorphism of G_m power r either is surjective as a group scheme or has nontrivial connected torus kernel",
+   "results": "{\"t\": \"2026-10-23T20:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"A monomial self homomorphism of G_m power r either is surjective as a group scheme or has nontrivial connected torus kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"CategoryTheory.PreGaloisCategory.autMap_surjective_of_isGalois\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem_map_surjective\", \"AlgebraicGeometry.pointsPi_surjective\", \"CategoryTheory.PreGaloisCategory.evaluation_aut_surjective_of_isGalois\"], \"digest\": \"90dff8be13a0469d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orus.*[Kk]ernel|[Kk]ernel.*[Tt]orus|[Tt]orus.*[Ff]lat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:07:51Z",
+    "tool": "grep",
+    "query": "[Tt]orus.*[Kk]ernel|[Kk]ernel.*[Tt]orus|[Tt]orus.*[Ff]lat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every endomorphism of a split algebraic torus is surjective or has a nontrivial torus in its kernel",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:07:52Z",
+    "tool": "leansearch",
+    "query": "Every endomorphism of a split algebraic torus is surjective or has a nontrivial torus in its kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgHom.bijective",
+     "Module.Finite.toModuleEnd_moduleEnd_surjective",
+     "IsNoetherian.injective_of_surjective_endomorphism",
+     "Module.End.mulSemiringActionToAlgEquiv_conjAct_surjective",
+     "Module.End.surjective_of_iterate_surjective",
+     "Algebra.IsAlgebraic.algEquivEquivAlgHom",
+     "Matrix.isRepresentation.toEnd_surjective",
+     "LinearEquiv.conjAlgEquiv_surjective"
+    ],
+    "digest": "658a2deabb6fa0e9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"ker\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:07:52Z",
+    "tool": "loogle",
+    "query": "\"torus\", \"ker\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split algebraic torus endomorphism is faithfully flat or its scheme theoretic kernel contains a positive dimensional subtorus",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:07:59Z",
+    "tool": "leanfinder",
+    "query": "A split algebraic torus endomorphism is faithfully flat or its scheme theoretic kernel contains a positive dimensional subtorus",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "AlgebraicGeometry.flat_and_surjective_SpecMap_iff",
+     "RingHom.FaithfullyFlat",
+     "Algebra.FormallySmooth.iff_split_injection",
+     "Module.FaithfullyFlat.of_specComap_surjective",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+     "RingHom.FaithfullyFlat.of_bijective"
+    ],
+    "digest": "c8751e8c8423b6d8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integer exponent matrix map on a product of multiplicative group schemes has full rank or a nonzero subtorus in its kernel",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:08:00Z",
+    "tool": "leanfinder",
+    "query": "Integer exponent matrix map on a product of multiplicative group schemes has full rank or a nonzero subtorus in its kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsDedekindDomain.selmerGroup.fromUnit_ker",
+     "NumberField.Units.isMaxRank_fundSystem",
+     "NumberField.Units.IsMaxRank",
+     "NumberField.Units.dirichletUnitTheorem.logEmbedding_ker",
+     "Int.subgroup_index_ne_zero_iff",
+     "NumberField.Units.dirichletUnitTheorem.logEmbedding_eq_zero_iff",
+     "NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion",
+     "Subgroup.strictPeriods_SL2Z"
+    ],
+    "digest": "b5fe062c186153ce"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]iagonali[sz]able|[Dd]iagonali[sz]able.*[Ee]xact|[Cc]haracter.*[Aa]nti",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T22:14:07Z",
+    "tool": "grep",
+    "query": "[Dd]iagonali[sz]able|[Dd]iagonali[sz]able.*[Ee]xact|[Cc]haracter.*[Aa]nti",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonalizable group scheme functor from abelian groups is contravariant exact and sends injections to faithfully flat morphisms",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:14:07Z",
+    "tool": "leansearch",
+    "query": "The diagonalizable group scheme functor from abelian groups is contravariant exact and sends injections to faithfully flat morphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineScheme.Spec_faithful",
+     "AlgebraicGeometry.Spec.faithful",
+     "AlgebraicGeometry.Spec.fullyFaithful",
+     "GrpCat.abelianizeAdj",
+     "CategoryTheory.Functor.mapGrpFunctor",
+     "AlgebraicGeometry.AffineScheme.Spec_full",
+     "CategoryTheory.Functor.Faithful.mapCommGrp",
+     "GrpCat.abelianize"
+    ],
+    "digest": "28ec87a99be8c203"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonalizable\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:14:07Z",
+    "tool": "loogle",
+    "query": "\"diagonalizable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of finitely generated abelian groups induces an exact sequence of diagonalizable group schemes with faithfully flat finitely presented quotient map",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:14:08Z",
+    "tool": "leanfinder",
+    "query": "A short exact sequence of finitely generated abelian groups induces an exact sequence of diagonalizable group schemes with faithfully flat finitely presented quotient map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.Exact.ab_finite",
+     "Profinite.NobelingProof.succ_exact",
+     "CategoryTheory.ShortComplex.ShortExact.ab_finite_iff",
+     "SnakeLemma.exact_δ'_right",
+     "SnakeLemma.exact_δ'_left",
+     "SnakeLemma.exact_δ_left",
+     "SnakeLemma.exact_δ_right",
+     "Algebra.Generators.H1Cotangent.exact_map_δ"
+    ],
+    "digest": "95a2ee67977bb131"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inclusion of finitely generated character groups induces a faithfully flat map of spectra of group algebras whose kernel is the diagonalizable group of the quotient",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:14:10Z",
+    "tool": "leanfinder",
+    "query": "An inclusion of finitely generated character groups induces a faithfully flat map of spectra of group algebras whose kernel is the diagonalizable group of the quotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.iff_characterModule_injective",
+     "Module.FaithfullyFlat.of_specComap_surjective",
+     "PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+     "PrimeSpectrum.specComap_surjective_of_faithfullyFlat",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "Module.Flat.iff_characterModule_baer",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "AlgebraicGeometry.flat_and_surjective_SpecMap_iff"
+    ],
+    "digest": "5fded738d2e3edd5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations states the split algebraic-torus dichotomy. Flatness, abstract character modules and abelian-category exactness do not identify torus homomorphisms or produce their subtori."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-scheme-normalizer",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Theorem 12.9(b), printed pp.233--234, and Remark 12.5, printed p.232 (character groups and kernels); this is the torus-kernel alternative used in the proof of Theorem 17.48, printed p.367.",
+   "via": [
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-endomorphism-kernel-dichotomy",
+  "worker": "stage1",
+  "summary": "Q13: proved the torus alternative by the existing character and Smith-basis nodes, homomorphism image factorization and affine faithful-flatness criteria. Checked all citations and trivial, deficient-rank and inseparable cases. No new nodes, no statement change, no Lean writes or builds.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite chain, through Milne Theorem 17.48, p.367: the alternatives for the commutator endomorphism of a maximal torus. The latest blueprint has no separate torus statement. All four steps expand this auxiliary below-unit argument. The inherited from.node=null is retained, as returned by blueprint_refs.py ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-d2ea95370",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-d2ea95370 (reviewer sub-agent of L); spot-checked: Read in full the item, its 4 steps and every cited statement; there are no new nodes, and the item statement is unchanged (Milne iAG Thm 17.48, p.367, torus alternative; Thm 12.9(a) checked in the pdf). The math is correct. Step 1: monomial matrix gives coordinate map e_m->e_{u(m)}; Smith basis over Z for u(L) in L with a_i nonzero; the image of u_Q is the span of b_1..b_n. Step 2: n=r, so u_Q is bijective, f^* is injective, and the factorization f=j∘q has j^* both surjective and injective, so j is an iso. Step 3: p kills b_1..b_n, pu=0, D(p) is a closed immersion with source G_m^s inside the scheme-theoretic kernel. Step 4: flat plus surjective on spectra gives faithfully flat, so f^* is injective and u_Q bijective; a subtorus with v∘u=0 forces v=0 by torsion-freeness, contradicting surjectivity onto Z^s. Edge cases tested: r=0, u=0, u=±1, u=p in char p (μ_p kernel, case i), diag(2,0), and the rank-one non-diagonal matrix (1 1;1 1). One fault (C1/C4): step 2 proved T separated with the converse of def-weil-closed-immersion, which that node does not state, plus an uncited Spec B×Spec B=Spec(B⊗B). FIX: cite the Mathlib leaf lem-weil-pbc-affine-source-morphism-separated, added to step-2 uses and proof_deps. Batch-5: (1) via antiduality → lem-trf-projective-exterior-scalar-comparisons, which is generic scalar extension of exterior powers, duals and determinants of finite projectives, not a step of the trace formula or Poincaré duality, so accepted; (2) via the factorization node → lem-trf-fppf-covering-base-change, a generic fppf-cover base-change Mathlib leaf, accepted. Not duplicates of the item: torus-homomorphism-image, diagonalizable-quotient-character-kernel, largest-subtorus. Live item is still unsplit, so no supersession. No tool_uses, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusEndomorphismKernelDichotomy",
+  "declaration": "AlgebraicGeometry.torusEndomorphism_kernel_dichotomy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusEndomorphismKernelDichotomy.lean",
+  "statement": "theorem torusEndomorphism_kernel_dichotomy {F : Type u} [Field F] [IsAlgClosed F] (T : Grp (Over (Spec (.of F)))) (hT : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (f : T ⟶ T) : Xor (Flat f.hom.hom.left ∧ Surjective f.hom.hom.left ∧ LocallyOfFinitePresentation f.hom.hom.left ∧ QuasiCompact f.hom.hom.left ∧ QuasiSeparated f.hom.hom.left) (∃ (s : ℕ) (i : (MultiplicativeType.splitTorus F s).X ⟶ GrpObj.ker f.hom.hom), 1 ≤ s ∧ IsClosedSubgroupScheme i)",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed splitTorus of def-sfb-tori-multiplicative-type, added to stmt_deps. Xor expresses exactly one alternative; the second is an actual closed subgroup of GrpObj.ker f.hom.hom, with rank at least one. No new definitions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7290187e6",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Read the node, the delivered module, the report and the declarations it uses (splitTorus, GrpObj.ker, IsClosedSubgroupScheme). F is an algebraically closed field in a free universe. T is a group scheme with a split presentation T ≅ splitTorus F r, an isomorphism in Grp, r ≥ 0. f : T ⟶ T is arbitrary. Xor gives exactly one alternative. (i) is Flat, Surjective, LocallyOfFinitePresentation, QuasiCompact and QuasiSeparated of the underlying map, which is the node's definition. (ii) is a closed subgroup of the actual pullback kernel GrpObj.ker from a split torus of rank s ≥ 1; this is equivalent to a closed subtorus of T inside ker f because the kernel inclusion is closed. Checked r=0, the trivial map, [p] in characteristic p, and rank-deficient non-diagonal u; the statement is true in each. The added stmt_dep def-sfb-tori-multiplicative-type is landed on the base and owns splitTorus. lean.statement is verbatim. No new definitions, no proof beyond sorry, no competing split-torus predicate. Docstrings have the source place, blueprint id and proof plan; the report has both sections (the second reading is a self-check). No findings; not recompiled since no file changed."
+ }
+}

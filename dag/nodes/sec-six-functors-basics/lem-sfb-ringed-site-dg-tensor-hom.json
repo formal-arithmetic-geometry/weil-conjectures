@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-ringed-site-dg-tensor-hom",
+ "kind": "statement",
+ "title": "Ringed-site dg endomorphism tensor-Hom adjunction",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(\\mathcal C,J)$ be a small site and $\\mathcal O$ a sheaf of commutative rings; use module sheaves [def-weil-sheaf-of-modules-category], their cochain complexes and unbounded derived category [def-weil-abstract-derived-category]. For complexes $K,I$ put $\\operatorname{Hom}^n(K,I)=\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_{\\mathcal O}(K^p,I^{p+n})$, with differential $d(f)=d_I f-(-1)^n f d_K$. For any complex $K$ set $A=\\operatorname{Hom}^{\\bullet}(K,K)$ with composition multiplication. A differential graded $\\mathbf Z$-algebra is an associative unital graded ring with a degree-one additive differential $d$, $d^2=0$ and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$ for homogeneous $a,b$. A right dg module has $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$ and $d^2=0$. Its derived category $D(A,d)$ is the homotopy category of right dg modules localized at cohomology isomorphisms, with the mapping-cone triangles and integer shifts. This formula makes $(A,d)$ a dg algebra, acting on $K$ on the left by evaluation. The sheafification of $U\\mapsto M\\otimes_A K(U)$ has a total left derived functor $T_K=-\\otimes_A^{\\mathbf L}K:D(A,d)\\to D(\\mathcal O)$, defined for every right dg module. There is an exact adjunction $T_K\\dashv R_K$ with $R_K=R\\operatorname{Hom}_{\\mathcal O}(K,-):D(\\mathcal O)\\to D(A,d)$. Exact has the triangulated meaning of [def-weil-triangulated-category], with shift-compatible adjunction. The functor $T_K$ preserves all small coproducts and has a specified isomorphism $T_K(A)\\simeq K$. On a K-injective representative $I$ of $L$, $R_K(L)$ is represented by $\\operatorname{Hom}^{\\bullet}(K,I)$ with right action $f\\cdot a=f\\circ a$; K-injective means that $\\operatorname{Hom}^{\\bullet}(B,I)$ is acyclic for every acyclic complex $B$. There are natural isomorphisms $H^i(R_K(L))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,L[i])$ for all integers $i$. If $K$ is K-injective, the unit $\\eta_A:A\\to R_KT_K(A)$, after $T_K(A)\\simeq K$, is represented by the identity of $\\operatorname{Hom}^{\\bullet}(K,K)$ and is an isomorphism in $D(A,d)$.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09L9 (example-category-complexes), 09LK (lemma-existence-of-derived), 09LU (section-variant-base-change), 09LX (lemma-tensor-with-complex-derived), and 09LY (lemma-tensor-with-complex-hom-adjoint); unit computation at the regular module and the K-injective computation used in spaces-perfect.tex Tag 09MD (equation-E-is-OK)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal B=\\operatorname{Mod}(\\mathcal O)$ and $H(X)=\\operatorname{Hom}^{\\bullet}(K,X)$. For homogeneous composable $f,g$, expansion gives $d(gf)=d(g)f+(-1)^{|g|}g\\,d(f)$; the two middle terms cancel. Expanding once more gives $d^2(f)=d_X^2f-fd_K^2=0$. Composition is associative, its identity is closed, and evaluation satisfies $d_K(ak)=d(a)k+(-1)^{|a|}a\\,d_K(k)$. Thus $A=H(K)$ is a unital dg algebra acting on $K$. The same composition formula gives $d(fa)=d(f)a+(-1)^{|f|}f\\,d(a)$, so $H(X)$ is a right dg $A$-module. These calculations use products of global module-sheaf maps; no internal sheaf Hom or direct-sum replacement of those products is being asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09L9, example-category-complexes, differential and composition formulas."
+   }
+  },
+  {
+   "text": "For a right dg $A$-module $M$, form on each $U$ the graded balanced tensor $M\\otimes_A K(U)$, with degree-$n$ term the quotient of $\\bigoplus_{p+q=n}M^p\\otimes_{\\mathbf Z}K^q(U)$ by $(ma)\\otimes k=m\\otimes ak$. Put $d(m\\otimes k)=dm\\otimes k+(-1)^{|m|}m\\otimes dk$. The two Leibniz identities make the balancing relations stable under $d$; the mixed terms of $d^2$ cancel. Restrictions commute with this formula. Apply module-presheaf sheafification degreewise, using its universal property to extend the differential, and call the result $T(M)$. For a homogeneous right-module map $u$, set $T(u)(m\\otimes k)=u(m)\\otimes k$; its Hom differential is $T(du)$ by the same formula. Thus $T$ is a dg functor. Multiplication $a\\otimes k\\mapsto ak$ and $k\\mapsto1\\otimes k$ give inverse chain maps $T(A)\\cong K$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LV, lemma-tensor-with-complex; explicit balanced tensor and differential."
+   }
+  },
+  {
+   "text": "For a homogeneous sheaf map $u:T(M)\\to I$ of degree $r$, define $\\widehat u(m)(k)=u(m\\otimes k)$, and conversely $\\widetilde v(m\\otimes k)=v(m)(k)$. The first formula defines a global module-sheaf map in $k$; the second extends uniquely to the sheafification. The equality $v(ma)(k)=v(m)(ak)$ is exactly the balancing condition. These formulas are inverse, additive, and natural in both arguments, including all restrictions. For $m$ of degree $p$, both Hom differentials evaluate to\n$$d_Iu(m\\otimes k)-(-1)^r u(dm\\otimes k)-(-1)^{r+p}u(m\\otimes dk).$$\nHence they give an isomorphism of complexes $\\operatorname{Hom}^{\\bullet}_{\\mathcal O}(T(M),I)\\cong\\operatorname{Hom}^{\\bullet}_A(M,H(I))$. Taking degree-zero cocycles modulo boundaries gives the adjunction on homotopy categories; boundaries are precisely chain homotopies.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LY, lemma-tensor-with-complex-hom-adjoint: the omitted evaluation comparison is written explicitly, in every degree."
+   }
+  },
+  {
+   "text": "Both dg functors preserve homotopies. For $T$ this follows by applying $T$ to $f-g=dh+hd$; for $H$ it is postcomposition by that equation. Their shift comparisons $T(M[n])\\cong T(M)[n]$ and $H(I[n])\\cong H(I)[n]$ send each homogeneous tensor or component map to itself. Indeed $d_{M[n]}=(-1)^nd_M$ and the tensor sign changes by $(-1)^n$; the Hom differential obeys the identical rule. For $C(f)^j=Y^j\\oplus X^{j+1}$, with differential $(y,x)\\mapsto(dy+fx,-dx)$, the tensor and Hom formulas give $T(C(f))\\cong C(Tf)$ and $H(C(f))\\cong C(Hf)$ with these same matrices. Products in $H$ distribute over the two summands. Therefore the functors on homotopy categories preserve cone triangles, with their signed final projections, and are exact; the ordinary dg homotopy category is triangulated by the cited dg theorem. The sheaf-complex localization $Q_{\\mathcal O}$ is exact by the homotopy-category theorem, and the dg-module localization $Q_A$ is exact by the dg derived-triangle theorem. In particular every cone triangle of arbitrary dg modules has distinguished image in $D(A,d)$.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "lem-sfb-dg-homotopy-acyclic-localization",
+    "lem-sfb-dg-derived-admissible-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LW, lemma-tensor-with-complex-homotopy, and 09LK, lemma-existence-of-derived, cone calculation; derived.tex homotopy-category triangulation. Ordinary dg homotopy and derived cone triangles: Tags 09KJ, 09KW and 09KX."
+   }
+  },
+  {
+   "text": "Let $\\mathcal P$ be the full subcategory of $K(A,d)$ on homotopically projective modules, using the acyclic Hom test. For every $M$, the property-(P) resolution theorem gives $q_M:P_M\\to M$ in the specified module universe, with no countability restriction. The property-(P) projectivity theorem puts $P_M$ in $\\mathcal P$. The ordinary dg derived-Hom theorem says that $\\operatorname{Hom}_{K(A,d)}(P,N)\\to\\operatorname{Hom}_{D(A,d)}(Q_AP,Q_AN)$ is bijective for every $P\\in\\mathcal P$ and every $N$. Hence $e=Q_A|_{\\mathcal P}$ is fully faithful, and the isomorphisms $Q_A(q_M)$ make it essentially surjective: it is an equivalence with the ordinary $D(A,d)$. A quasi-isomorphism $s:P\\to P'$ in $\\mathcal P$ is invertible already in $K(A,d)$: lift $(Q_As)^{-1}$ by this bijection and use injectivity to check both inverse equations. Thus $T$ sends it to a homotopy equivalence.",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-dg-property-p-homotopically-projective",
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KP (lemma-resolve), 09KM (lemma-property-P-K-projective), 09KY (lemma-hom-derived), part (1); the ordinary projective-model equivalence is deduced from their statements."
+   }
+  },
+  {
+   "text": "Let $i:\\mathcal P\\to K(A,d)$ be the inclusion and localize $\\mathcal P$ by its identity functor, since its quasi-isomorphisms are already isomorphisms by step 5. Verify the definition of a left derivability structure. Condition (a) is $q_M$. For (b), the functor $(i\\downarrow M)\\to(e\\downarrow Q_AM)$ is an isomorphism of categories: for each $P$, the ordinary derived-Hom bijection of step 5 identifies all arrows $P\\to M$, and its injectivity identifies the commuting triangles defining morphisms. In particular it is final: the comma category from any target object has the corresponding object with its identity arrow as an initial object. Apply the unary left-derived calculus to $F=Q_{\\mathcal O}T$; step 5 verifies that $Fi$ inverts the required arrows. It supplies the total left derived functor $T_K$, with comparison invertible on every $P\\in\\mathcal P$. Consequently $T_K(M)\\cong Q_{\\mathcal O}T(P_M)$, naturally through $Q_A(q_M)$.",
+   "uses": [
+    "def-sfb-left-derivability-structure",
+    "lem-sfb-unary-left-derived-calculus",
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LX, lemma-tensor-with-complex-derived; its adapted-model argument with the universal property of a derived functor."
+   }
+  },
+  {
+   "text": "The homotopically projective modules are closed under zero, shifts and cones. Shifts reindex the acyclic Hom test. For $f:P\\to P'$, degree-$r$ maps $C(f)\\to N$ are pairs $(g,h)$ of degrees $r,r-1$ from $P',P$, with differential $(\\delta g,\\delta h-(-1)^rgf)$. A closed pair has $g=\\delta a$; subtracting $\\delta(a,0)$ leaves $(0,h-(-1)^raf)$, whose second component is a cycle and hence a boundary. Thus $C(f)\\in\\mathcal P$. To check exactness on an arbitrary distinguished triangle $\\Delta$ in $D(A,d)$, choose projective models for its first two vertices. By the ordinary Hom bijection, its first arrow is represented by $f:P\\to P'$ in $K(A,d)$. The cone triangle of $f$ is distinguished there, and its image is distinguished because $Q_A$ is exact, as stated by the cited ordinary localization results. The two model isomorphisms extend by the triangulated triangle-morphism axiom to a morphism of this triangle to $\\Delta$. Its third component is an isomorphism by the cited two-out-of-three theorem for morphisms of distinguished triangles. Therefore $\\Delta$ is isomorphic to this image of a cone triangle on three objects of $\\mathcal P$. On that triangle the natural comparison from step 6 identifies $T_KQ_A$ with $Q_{\\mathcal O}T$; the latter preserves the cone and its signed final projection by step 4. The shift comparison is the same identity comparison on these models. Hence $T_K$ is exact for the specified triangulation, including triangles of arbitrary modules.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization",
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KJ, 09KW, 09KX (ordinary cone triangulation and exact localization); Tags 09LW, 09LX; derived.tex Tag 014A, lemma-third-isomorphism-triangle."
+   }
+  },
+  {
+   "text": "The site is small, so the ringed-site resolution theorem supplies a K-injective resolution $L\\to I$ for every unbounded complex. Its acyclic Hom definition agrees with vanishing of homotopy maps from acyclic complexes: degree-$r$ cohomology is degree-zero homotopy maps into $I[r]$, and acyclic complexes are closed under shifts. The K-injective replacement theorem gives a triangulated equivalence $j:K_{\\mathrm{inj}}(\\mathcal B)\\simeq D(\\mathcal O)$. Define $R_K=Q_A H\\iota j^{-1}$. It is exact by step 4, exactness of $Q_A$, and this triangulated equivalence. It is also the total right derived functor of $Q_AH$. Indeed the canonical bijections from the K-injective Hom theorem identify $(L\\downarrow\\iota)$ with $(QL\\downarrow j)$, just as in step 6 with arrows reversed. Thus the inclusion is a right derivability structure: apply the definition and unary left-derived theorem to opposite categories. Its output is computed by $H(I)$, so it is the displayed $R_K$, with the right $A$-action from step 1. No claim that $H(I)$ is K-injective as an $A$-module is needed.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-kinjective-replacement-triangulated",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "def-sfb-left-derivability-structure",
+    "lem-sfb-unary-left-derived-calculus",
+    "lem-sfb-dg-derived-admissible-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LK, lemma-existence-of-derived; sites-cohomology.tex Section 07A5 and injectives.tex Tag 079P; derived.tex Tag 070I (lemma-K-injective)."
+   }
+  },
+  {
+   "text": "Choose $P\\to M$ homotopically projective and $L\\to I$ K-injective. The cited ordinary dg derived-Hom bijection and K-injective localization bijection, together with step 3, give\n$$\\operatorname{Hom}_{D(\\mathcal O)}(T_KM,L)\\cong\\operatorname{Hom}_{K(\\mathcal B)}(T(P),I)\\cong\\operatorname{Hom}_{K(A)}(P,H(I))\\cong\\operatorname{Hom}_{D(A,d)}(M,R_KL).$$\nEvery comparison is natural: localization maps and the currying formulas are natural, and maps between resolutions are uniquely determined in the relevant homotopy category by the same bijections. Thus the result is independent of choices and gives $T_K\\dashv R_K$. Its unit and counit on these models are $m\\mapsto(k\\mapsto m\\otimes k)$ and $f\\otimes k\\mapsto f(k)$. Applying the identity shift comparisons of step 4 to these formulas leaves them unchanged; hence both adjunction maps commute with every integer shift. This proves the asserted exact, shift-compatible adjunction.",
+   "uses": [
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LY, lemma-tensor-with-complex-hom-adjoint; the two resolved Hom computations and their evaluation maps."
+   }
+  },
+  {
+   "text": "For completeness, the source has all small coproducts. Choose projective replacements $P_a\\to M_a$. Their dg direct sum $P=\\bigoplus_aP_a$ is homotopically projective: $\\operatorname{Hom}^{\\bullet}_A(P,N)=\\prod_a\\operatorname{Hom}^{\\bullet}_A(P_a,N)$, and a cocycle in this product has a primitive by choosing a primitive in each acyclic factor. Taking degree-zero cohomology commutes with this product, since cycles and boundaries are coordinatewise and primitives can be chosen coordinatewise. Thus the ordinary dg derived-Hom bijection gives\n$$\\operatorname{Hom}_{D(A,d)}(P,N)=\\prod_a\\operatorname{Hom}_{D(A,d)}(M_a,N),$$\nwith the canonical injections. This is precisely the coproduct universal property, including the empty family. Apply the left-adjoint-colimit theorem to step 9 and every small discrete index category: $T_K$ sends this coproduct cocone to a coproduct cocone in $D(\\mathcal O)$. Therefore it preserves all small coproducts.",
+   "uses": [
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "dga.tex Tag 09QI, lemma-derived-products, direct-sum argument; categories.tex Tag 0038, left adjoints preserve colimits."
+   }
+  },
+  {
+   "text": "The regular right module $A$ is homotopically projective: evaluation at $1$ identifies $\\operatorname{Hom}^{\\bullet}_A(A,N)$ with $N$, so it is acyclic for acyclic $N$. Consequently the left-derived comparison of step 6 is invertible at $A$. Composing it with the explicit multiplication isomorphism $T(A)\\cong K$ of step 2 specifies $T_K(A)\\simeq K$. If $K$ is K-injective, choose $I=K$ and its identity as the resolution when computing $R_K(K)$. Under these identifications the unit at $A$ is $a\\mapsto(k\\mapsto ak)$, by step 9. Since $A$ was defined to be $\\operatorname{Hom}^{\\bullet}(K,K)$, this is literally its identity chain map, including its right composition action. It is therefore an isomorphism in $D(A,d)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LV, lemma-tensor-with-complex, regular module; spaces-perfect.tex Tag 09MD, equation-E-is-OK, with the explicitly computed adjunction unit."
+   }
+  },
+  {
+   "text": "A degree-$i$ cocycle $f$ of $H(I)$ satisfies $d_If=(-1)^ifd_K$, exactly the chain-map equation $K\\to I[i]$, because $d_{I[i]}=(-1)^id_I$. A boundary $\\delta h=d_Ih-(-1)^{i-1}hd_K$ is null-homotopic as such a map: take the homotopy $(-1)^ih$. Conversely every null homotopy gives a boundary by the same formula. Thus $H^i(H(I))\\cong\\operatorname{Hom}_{K(\\mathcal B)}(K,I[i])$. The shift $I[i]$ is K-injective by the replacement theorem (or its shifted acyclic Hom test), and the K-injective localization bijection identifies this group with $\\operatorname{Hom}_{D(\\mathcal O)}(K,L[i])$. These identifications commute with postcomposition, and hence with the resolution comparison maps in step 8; they are natural in $L$ for every positive, zero, and negative $i$.",
+   "uses": [
+    "lem-sf-kinjective-replacement-triangulated",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09L9, example-category-complexes, cocycles and homotopies; derived.tex Tag 070I, lemma-K-injective; sites-cohomology.tex Tag 0A94, lemma-RHom-into-K-injective."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-sfb-dg-homotopy-acyclic-localization",
+  "lem-sfb-dg-derived-admissible-triangles",
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-property-p-homotopically-projective",
+  "lem-sfb-dg-homotopically-projective-hom-derived",
+  "def-sfb-left-derivability-structure",
+  "lem-sfb-unary-left-derived-calculus",
+  "lem-sf-triangle-morphism-iso",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-kinjective-replacement-triangulated",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09L9, 09LV, 09LW, 09LX, 09LK and 09LY; explicit currying fills the evaluation details omitted in 09LY; regular-module unit is spaces-perfect.tex Tag 09MD. Ordinary DG replacements use 09KP, 09KM, 09KY(1), 09KJ, 09KW and 09KX; no enhanced localization or triangulation transfer."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves on a ringed site defines an adjunction between derived tensor over its differential graded endomorphism algebra and derived Hom",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.PullbackConstruction.adjunction (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous); SheafOfModules.pushforwardPushforwardAdj (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous); SheafOfModules.instIsRightAdjointPushforward (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous); SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous); PresheafOfModules.sheafificationAdjunction (Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification); AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules (Mathlib/AlgebraicGeometry/Modules/Sheaf); PresheafOfModules.sheafificationAdjunction_homEquiv_apply (Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification); CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj (Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary tensor-Hom or site pullback adjunctions, K-injectivity, and conditional abstract derived adjunctions; none constructs this dg endomorphism action and unbounded tensor-Hom pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a complex to a K injective complex is a right differential graded module over the endomorphism dg algebra",
+   "results": "[leanfinder] OK 8 hit(s); CochainComplex.IsKInjective.rightOrthogonal (Mathlib/Algebra/Homology/HomotopyCategory/KInjective); CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective); DerivedCategory.instLinearCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Linear); CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex (Mathlib/CategoryTheory/Abelian/Injective/Ext); DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective (Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives); CochainComplex.cm5b.I (Mathlib/Algebra/Homology/Factorizations/CM5b); Ext (Mathlib/CategoryTheory/Abelian/Ext); DerivedCategory.instLinear (Mathlib/Algebra/Homology/DerivedCategory/Linear)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary tensor-Hom or site pullback adjunctions, K-injectivity, and conditional abstract derived adjunctions; none constructs this dg endomorphism action and unbounded tensor-Hom pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "[loogle] OK 12 hit(s); PresheafOfModules.freeAdjunctionUnit (Mathlib.Algebra.Category.ModuleCat.Presheaf.Free); PresheafOfModules.freeAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.Free); PresheafOfModules.freeAdjunctionUnit_app (Mathlib.Algebra.Category.ModuleCat.Presheaf.Free); PresheafOfModules.freeAdjunction_homEquiv (Mathlib.Algebra.Category.ModuleCat.Presheaf.Free); PresheafOfModules.freeAdjunction_unit_app (Mathlib.Algebra.Category.ModuleCat.Presheaf.Free); PresheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback); PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing); PresheafOfModules.colimitAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor); PresheafOfModules.colimitAdjunction_homEquiv (Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor); PresheafOfModules.colimitAdjunction_homEquiv_symm_apply (Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor); PresheafOfModules.sheafificationAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification); PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary tensor-Hom or site pullback adjunctions, K-injectivity, and conditional abstract derived adjunctions; none constructs this dg endomorphism action and unbounded tensor-Hom pair."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.*(tensor|endomorphism)|DifferentialGraded|DGModule|DgModule",
+   "results": "[grep] OK 7 hit(s); Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean:16: `Truncated.Edge.tensor : Edge x x' → Edge y y' → Edge (x, y) (x', y')`.; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean:48:     ∃ (e₁ : Edge x x') (e₂ : Edge y y'), e₁.tensor e₂ = e :=; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean:120:     homMk (ex.tensor (.id y₀)) ≫ homMk (Edge.tensor (.id x₁) ey) =; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean:121:       homMk (Edge.tensor (.id x₀) ey) ≫ homMk (ex.tensor (.id y₁)) := by; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean:122:   rw [homMk_comp_homMk ((Edge.CompStruct.idComp ex).tensor (Edge.CompStruct.compId ey)),; Mathlib/CategoryTheory/Monoidal/Grp.lean:67: attribute [simps neg] AddGrpObj.instTensorAddUnit; Mathlib/CategoryTheory/Monoidal/Grp.lean:367: attribute [simps neg] AddGrpObj.tensorObj.instTensorObj",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary tensor-Hom or site pullback adjunctions, K-injectivity, and conditional abstract derived adjunctions; none constructs this dg endomorphism action and unbounded tensor-Hom pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor Hom adjunction for a complex of module sheaves and its differential graded endomorphism algebra",
+   "results": "[leansearch] OK 8 hit(s); ModuleCat.monoidalClosedHomEquiv (Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed); CategoryTheory.ihom.adjunction (Mathlib.CategoryTheory.Monoidal.Closed.Basic); lTensorHomEquivHomLTensor (Mathlib.LinearAlgebra.Contraction); CategoryTheory.FunctorToTypes.adj (Mathlib.CategoryTheory.Monoidal.Closed.FunctorToTypes); CategoryTheory.Adjunction.derivedη (Mathlib.CategoryTheory.Functor.Derived.Adjunction); CategoryTheory.Adjunction.derived (Mathlib.CategoryTheory.Functor.Derived.Adjunction); CategoryTheory.Adjunction.derivedε (Mathlib.CategoryTheory.Functor.Derived.Adjunction); dualTensorHomEquiv (Mathlib.LinearAlgebra.Contraction)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary tensor-Hom or site pullback adjunctions, K-injectivity, and conditional abstract derived adjunctions; none constructs this dg endomorphism action and unbounded tensor-Hom pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor over the differential graded endomorphism algebra of an unbounded complex of module sheaves is left adjoint to derived Hom",
+   "results": "{\"t\": \"2026-10-24T00:12:06Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor over the differential graded endomorphism algebra of an unbounded complex of module sheaves is left adjoint to derived Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"CategoryTheory.Tor_obj\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"aa51474da130dcb3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary-complex Hom and K-projectivity, ordinary endomorphism tensor, and conditional abstract derived adjunctions do not construct the stated dg-algebra/sheaf tensor-Hom pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopically projective differential graded modules compute derived morphisms and tensor Hom adjunction",
+   "results": "{\"t\": \"2026-10-24T00:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopically projective differential graded modules compute derived morphisms and tensor Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyEquiv.isKProjective\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq\", \"CochainComplex.IsKProjective.homotopyZero\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality\"], \"digest\": \"83096bdd7045cf77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary-complex Hom and K-projectivity, ordinary endomorphism tensor, and conditional abstract derived adjunctions do not construct the stated dg-algebra/sheaf tensor-Hom pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"HomComplex\"",
+   "results": "{\"t\": \"2026-10-24T00:12:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"HomComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Triplet\", \"CochainComplex.HomComplex.Triplet.p\", \"CochainComplex.HomComplex.Triplet.q\", \"CochainComplex.HomComplex.Triplet.mk\", \"CochainComplex.HomComplex.Triplet.hpq\", \"CochainComplex.HomComplex.Cochain.diff\", \"CochainComplex.HomComplex.Cocycle.diff\", \"CochainComplex.HomComplex.Cochain\"], \"digest\": \"670eafd4b3f0f9c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary-complex Hom and K-projectivity, ordinary endomorphism tensor, and conditional abstract derived adjunctions do not construct the stated dg-algebra/sheaf tensor-Hom pair."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|DgModule|dg.*endomorphism",
+   "results": "{\"t\": \"2026-10-24T00:12:09Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|DGModule|DgModule|dg.*endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary-complex Hom and K-projectivity, ordinary endomorphism tensor, and conditional abstract derived adjunctions do not construct the stated dg-algebra/sheaf tensor-Hom pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor Hom adjunction for differential graded modules and complexes of sheaves",
+   "results": "{\"t\": \"2026-10-24T00:12:10Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor Hom adjunction for differential graded modules and complexes of sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.adjunction\", \"ModuleCat.monoidalClosedHomEquiv\", \"CategoryTheory.FunctorToTypes.adj\", \"lTensorHomEquivHomLTensor\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε\"], \"digest\": \"fb29c7edee33747d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary-complex Hom and K-projectivity, ordinary endomorphism tensor, and conditional abstract derived adjunctions do not construct the stated dg-algebra/sheaf tensor-Hom pair."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-dg-equivalence",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: construct the dg endomorphism algebra and the derived tensor/Hom adjunction, including equation-E-is-OK.",
+   "via": [
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-dg-tensor-hom",
+  "worker": "stage1",
+  "group": "Q124",
+  "summary": "Repaired the returned enhanced-localization misuse: reused the now-live unrestricted property-(P) resolution, ordinary dg derived-Hom and exact-localization nodes, created only the missing 09KM projectivity input, and rebuilt the ordinary model equivalence, derived functor, exactness on arbitrary distinguished triangles, adjunction and coproduct proof. Statement unchanged.",
+  "blueprint": "Supporting argument of latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), via the inherited algebraic-space coherent-family/effectivity chain and spaces-perfect.tex 09MC: the displayed dg tensor/Hom adjunction and equation-E-is-OK (09MD). All inherited blueprint metadata retained; blueprint search found no alternate statement.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-left-derivability-structure",
+    "why": "Definition of the resolving-comma condition used to verify the derived-functor criterion."
+   },
+   {
+    "node": "lem-sfb-unary-left-derived-calculus",
+    "why": "Generic localization/derived-functor existence criterion, also on opposite categories; no same-unit substitute."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small-ringed-site unbounded K-injective existence, with all hypotheses present."
+   },
+   {
+    "node": "lem-sf-kinjective-replacement-triangulated",
+    "why": "Generic triangulated equivalence between K-injective homotopy models and the derived category."
+   },
+   {
+    "node": "lem-sc-kinjective-quasi-iso-comparison",
+    "why": "Generic Hom localization bijection into K-injectives; used for currying and cohomology."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Generic homotopy cone triangulation and exactness of sheaf-complex localization."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic categorical left-adjoint colimit preservation, applied to the actual adjunction."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic two-out-of-three theorem for a morphism of distinguished triangles, used to compare an arbitrary derived triangle with a projective-model cone triangle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-left-derivability-structure",
+  "lem-sfb-unary-left-derived-calculus",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-kinjective-replacement-triangulated",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-b2b1ce466",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-b2b1ce466 (reviewer sub-agent of L); spot-checked: This repairs the RETURN of 90e27d6b0136. The proof no longer depends on the dropped node lem-coef-dg-module-projective-resolution. I computed the closure of the item's dependencies over the snapshot DAG (182 nodes); it contains no node from route-pivot-dropped.txt, including lines 402 and 412. The statement matches live exactly, the live item is still unsplit, and proof_deps equals the union of the step uses. There is no SGA citation. C4 is repaired: steps 5 and 6 build the model equivalence and the derived functor only from ordinary nodes. Those are 09KP (lem-sfb-dg-property-p-resolution), the new 09KM node and 09KY(1) (lem-sfb-dg-homotopically-projective-hom-derived). I checked that quasi-isomorphisms between models are invertible in K(A,d), and that the comma functor is an isomorphism of categories, so the derivability conditions hold. E5 is repaired: lem-sfb-dg-derived-admissible-triangles states that Q_A is exact. Step 7 compares an arbitrary distinguished triangle with the image of a projective cone triangle using TR3 and 014A. The new node lem-sfb-dg-property-p-homotopically-projective is Stacks dga.tex 09KM (l. 2240), stated as acyclicity of the Hom complex, which is equivalent through shifts of N. Its property (P) is the 09KK definition (l. 2181) reindexed so that F_0 = 0. I tested it on A = Z with P = Z[0], on P = 0 and on A[k]. It is not a clause of the parent. Its only generalization, lem-coef-dg-semi-free-homotopically-projective, is route-pivot dropped. The other dg, pc-filtered, devissage and bimodule nodes do not state 09KM. I re-derived the signs in steps 3, 4 and 12: the currying sign (-1)^{r+p}, the identity shift comparison and the homotopy (-1)^i h. The adjunction chain of step 9 matches the 09LY proof (l. 6060), with step 3 supplying the details 09LY omits. I checked edge cases K = 0, the point site with K = Z[n], and the empty coproduct. Batch 5: lem-trf-triangulated-subcategory-cone-system (05RG, reached via dg-derived-admissible-triangles) and lem-trf-localization-essentially-surjective (04VH/04VK, reached via kinjective-replacement-triangulated) are generic category facts. Neither assumption gives them and they are not steps of the trace formula or Poincare duality proofs, so both are acceptable. I accept all eight tool_uses. No changes."
+ }
+}

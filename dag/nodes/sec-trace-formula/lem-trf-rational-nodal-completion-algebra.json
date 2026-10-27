@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-rational-nodal-completion-algebra",
+ "kind": "statement",
+ "title": "Coefficient-compatible presentation of a rational split-node completion",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $S$ be a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], and let $\\mathfrak p\\subset S$ be a maximal ideal such that the structure map $k\\to S/\\mathfrak p$ is an isomorphism. Put $A=S_{\\mathfrak p}$ and $\\mathfrak m=\\mathfrak pA$ [def-weil-pbc-localization-at-prime], and give $\\widehat A=\\varprojlim_{r\\ge1}A/\\mathfrak m^r$ its induced $k$-algebra structure and maximal-ideal-adic topology [def-weil-pbc-adic-completion]. Suppose $\\widehat A$ is isomorphic as a ring to $k[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series], without assuming the given ring isomorphism is $k$-linear. Then there exists an isomorphism $\\widehat A\\cong k[[u,v]]/(uv)$ of complete local $k$-algebras, continuous in both directions for the powers of the respective maximal ideals. Equivalently, there is a continuous surjective $k$-algebra homomorphism $\\pi:k[[u,v]]\\twoheadrightarrow\\widehat A$ with kernel $(uv)$ [def-weil-pbc-algebra-hom-quotient], whose restriction to constants is the structure map $k\\to\\widehat A$. Here the topology on $k[[u,v]]$ has the powers of $(u,v)$ as neighbourhoods of zero. This imposes no dimension hypothesis on $S$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49, lemma-nodal-algebraic, intrinsic quadratic criterion and coefficient-compatible presentation; with varieties.tex Tag 0C52, lemma-complete-local-ring-structure-as-algebra. Extracted coefficient-field rectification and binary-quadratic splitting argument from old Step 3 of lem-trf-node-algebraically-closed-extension; full retained argument in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Identify $F=S/\\mathfrak p$ with $k$ through the given structure isomorphism. Apply [lem-trf-separable-closed-point-formal-presentation] (the identity extension $k/k$ is finite separable). It gives $n\\ge2$ and a presentation $\\widehat A\\cong R=k[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)$ over $k$, with each $f_j\\in(t_1,\\ldots,t_n)$. Its coefficient section is the given map: a $k$-algebra section $F\\to\\widehat A$ with $F=k$ must send each $c$ to its structural image. Thus this presentation uses exactly the coefficient structure in the item, not the constants transported by the abstract ring isomorphism.",
+   "uses": [
+    "lem-trf-separable-closed-point-formal-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C52, lemma-complete-local-ring-structure-as-algebra, separable-residue-field clause and last paragraph of proof."
+   }
+  },
+  {
+   "text": "Compose the underlying ring isomorphism $R\\cong\\widehat A$ with the assumed one to $k[[u,v]]/(uv)$. This verifies condition (c) of [lem-trf-formal-jacobian-quadratic-criterion] with $a=c=0$, $b=1$ and discriminant $1$. Its implication (c)$\\Rightarrow$(b) gives a complete local $k$-algebra isomorphism $\\widehat A\\cong k[[x,y]]/(Q)$ for $Q=ax^2+bxy+cy^2$ with $\\Delta=b^2-4ac\\ne0$. The criterion assumes only the finite formal presentation, not a global dimension condition.",
+   "uses": [
+    "lem-trf-formal-jacobian-quadratic-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49, lemma-nodal-algebraic, intrinsic quadratic relation and coefficient-compatible condition (3); Tag 0C4C, lemma-fitting-ideal."
+   }
+  },
+  {
+   "text": "Write $Q=L_1L_2$ with independent $k$-linear forms, explicitly as follows. If $a=0$, then $b\\ne0$; take $L_1=y$ and $L_2=bx+cy$, whose coefficient determinant is $-b$. If $a\\ne0$, choose a root $r$ of $aT^2+bT+c$ using [def-weil-algebraic-closure] and put $s=-b/a-r$. The root equation gives $rs=c/a$, so $Q=a(x-ry)(x-sy)$ and $\\Delta=a^2(r-s)^2$. Hence $r\\ne s$; take $L_1=a(x-ry)$, $L_2=x-sy$, whose determinant is $a(r-s)\\ne0$. These identities hold in characteristic $2$ as well.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49, lemma-nodal-algebraic, nondegenerate quadratic form; explicit algebraically closed binary factorization supplement."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-field-cohen-regular-complete], both two-variable series rings are complete for their variable ideals. Use [lem-weil-pbc-power-series-universal-property-complete] to define $\\beta:k[[U,V]]\\to k[[x,y]]$ by $U\\mapsto L_1$, $V\\mapsto L_2$, fixing constants; write $L_1=Ax+By$, $L_2=Cx+Dy$, $d=AD-BC\\ne0$, and define $\\gamma$ by $x\\mapsto(DU-BV)/d$, $y\\mapsto(-CU+AV)/d$. Its images also lie in the variable ideal, so the same universal property applies. The composites fix constants and variables, so uniqueness in that universal property makes them identities. The maps preserve the variable ideals and their powers, hence are continuous. Since $\\beta(UV)=Q$, they send the principal ideals $(UV)$ and $(Q)$ onto each other. The maps on cosets $[h]\\mapsto[\\beta(h)]$ and $[g]\\mapsto[\\gamma(g)]$ are well-defined inverse $k$-algebra maps. Combining this quotient isomorphism with Step 2 gives $e:k[[U,V]]/(UV)\\xrightarrow{\\sim}\\widehat A$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49, lemma-nodal-algebraic, split quadratic coordinates; power-series substitution as in algebra.tex Tag 032A, theorem-cohen-structure-theorem."
+   }
+  },
+  {
+   "text": "A ring isomorphism between local rings sends their unique maximal ideals onto each other, and hence also their powers. Thus $e$ and $e^{-1}$ are continuous for the stipulated maximal-ideal-adic topologies. By [def-weil-pbc-algebra-hom-quotient], the quotient map $q:k[[U,V]]\\to k[[U,V]]/(UV)$ is a surjective $k$-algebra map with kernel $(UV)$. Put $\\pi=e\\circ q$. Its kernel is $(UV)$ since $e$ is injective, it is surjective, and it fixes the structural constants since both factors are $k$-linear. The quotient map sends $(U,V)^r$ into the $r$th power of the quotient maximal ideal, so $\\pi$ is continuous. This proves both formulations.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49, lemma-nodal-algebraic, condition (3); elementary local-ring and quotient-map consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-trf-formal-jacobian-quadratic-criterion",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49, lemma-nodal-algebraic; coefficient presentation from varieties.tex Tag 0C52; assembly through existing formal criterion, with explicit binary factorization, inverse substitutions and adic continuity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a rational point of a finite type algebra over an algebraically closed field, an abstract ring isomorphism of its completion to k[[u,v]]/(uv) can be replaced by a continuous k-algebra isomorphism",
+   "results": "8 hits: PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, LaurentSeries.powerSeriesAlgEquiv, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, LaurentSeries.ratfuncAdicComplRingEquiv_apply, Polynomial.IsDistinguishedAt.algEquivQuotient, LaurentSeries.ratfuncAdicComplRingEquiv, WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv. None rectifies an abstract nodal ring isomorphism to a coefficient-preserving one. The power-series equivalences concern reindexing, polynomial completion or Weierstrass presentations, not arbitrary rational nodal completions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary double|MvPowerSeries.*AlgEquiv|AlgEquiv.*MvPowerSeries",
+   "results": "7 hits: Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/PowerSeries/Evaluation.lean, Mathlib/RingTheory/PowerSeries/Evaluation.lean, Mathlib/RingTheory/PowerSeries/Basic.lean, Mathlib/RingTheory/PowerSeries/Basic.lean, Mathlib/RingTheory/PowerSeries/Basic.lean. Search directory: Mathlib/RingTheory. None rectifies an abstract nodal ring isomorphism to a coefficient-preserving one. The power-series equivalences concern reindexing, polynomial completion or Weierstrass presentations, not arbitrary rational nodal completions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary double point completed local ring over an algebraically closed coefficient field has a coefficient preserving presentation by the equation u times v equals zero",
+   "results": "8 hits: Algebra.Presentation.localizationAway, Algebra.Presentation.ModelOfHasCoeffs, AlgebraicGeometry.Scheme.residueField, StandardEtalePresentation.toPresentation, StandardEtalePresentation.toPresentation_relation, WeierstrassCurve.Affine.CoordinateRing.instAlgebra, PowerSeries.IsWeierstrassDivisor, IsLocalRing.closedPoint. None rectifies an abstract nodal ring isomorphism to a coefficient-preserving one. The power-series equivalences concern reindexing, polynomial completion or Weierstrass presentations, not arbitrary rational nodal completions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AlgEquiv",
+   "results": "12 hits: MvPolynomial.toMvPowerSeries_pUnitAlgEquiv, MvPowerSeries.renameEquiv, MvPowerSeries.renameEquiv_refl, MvPowerSeries.renameEquiv_symm, MvPowerSeries.renameEquiv_trans, MvPowerSeries.renameEquiv_apply, MvPowerSeries.isEmptyEquiv, MvPowerSeries.optionEquivLeft. None rectifies an abstract nodal ring isomorphism to a coefficient-preserving one. The power-series equivalences concern reindexing, polynomial completion or Weierstrass presentations, not arbitrary rational nodal completions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local algebra over an algebraically closed field abstractly isomorphic to an ordinary double point admits coefficient preserving coordinates with relation x*y",
+   "results": "8 hits: PowerSeries.algEquivQuotientWeierstrassDistinguished, WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply, WeierstrassCurve.VariableChange, Polynomial.IsDistinguishedAt.algEquivQuotient_apply. None rectifies an abstract nodal ring isomorphism to a coefficient-preserving one. The power-series equivalences concern reindexing, polynomial completion or Weierstrass presentations, not arbitrary rational nodal completions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|nondegenerate.*quadratic|quadratic.*hypersurface",
+   "results": "{\"t\": \"2026-10-23T04:06:39Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|nondegenerate.*quadratic|quadratic.*hypersurface\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Weierstrass presentations, variable renamings or canonical completion equivalences, not rectification of an arbitrary split-node ring isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete local algebra abstractly isomorphic to k[[u,v]]/(uv) has a coefficient preserving split node presentation",
+   "results": "{\"t\": \"2026-10-23T04:06:40Z\", \"tool\": \"leansearch\", \"query\": \"A complete local algebra abstractly isomorphic to k[[u,v]]/(uv) has a coefficient preserving split node presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"Algebra.FormallySmooth.iff_split_surjection\", \"StandardEtalePresentation.toPresentation\", \"IsLocalization.Away.finitePresentation\", \"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"Algebra.Extension.formallySmooth_iff_split_injection\"], \"digest\": \"d1d822110ef9457c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Weierstrass presentations, variable renamings or canonical completion equivalences, not rectification of an arbitrary split-node ring isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AlgEquiv",
+   "results": "{\"t\": \"2026-10-23T04:06:40Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, AlgEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.toMvPowerSeries_pUnitAlgEquiv\", \"MvPowerSeries.renameEquiv\", \"MvPowerSeries.renameEquiv_refl\", \"MvPowerSeries.renameEquiv_symm\", \"MvPowerSeries.renameEquiv_trans\", \"MvPowerSeries.renameEquiv_apply\", \"MvPowerSeries.isEmptyEquiv\", \"MvPowerSeries.optionEquivLeft\"], \"digest\": \"64fd67940ce2cfb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Weierstrass presentations, variable renamings or canonical completion equivalences, not rectification of an arbitrary split-node ring isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abstract ring isomorphism from a rational completed local algebra to a split node can be replaced by a continuous coefficient preserving algebra isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:06:43Z\", \"tool\": \"leanfinder\", \"query\": \"An abstract ring isomorphism from a rational completed local algebra to a split node can be replaced by a continuous coefficient preserving algebra isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"AdicCompletion.ofAlgEquiv_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"LaurentSeries.ratfuncAdicComplRingEquiv\", \"AdicCompletion.ofAlgEquiv\"], \"digest\": \"aed02f8aaa78a17b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Weierstrass presentations, variable renamings or canonical completion equivalences, not rectification of an arbitrary split-node ring isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series quotient isomorphic as a ring to an ordinary double point admits coefficient preserving quadratic coordinates",
+   "results": "{\"t\": \"2026-10-23T04:07:09Z\", \"tool\": \"leanfinder\", \"query\": \"A formal power series quotient isomorphic as a ring to an ordinary double point admits coefficient preserving quadratic coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\"], \"digest\": \"25b98c5a1b5c5fc6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Weierstrass presentations, variable renamings or canonical completion equivalences, not rectification of an arbitrary split-node ring isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-node-algebraically-closed-extension",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Supplies the hypothesis transfer used by its Steps 4, 6 and 11: nodal geometric fibres over the chosen algebraic closure give nodal fibres over every algebraically closed field. Re-split of lem-trf-node-algebraically-closed-extension: old Step 3, coefficient-compatible split-node presentation before scalar extension.",
+   "via": [
+    "lem-trf-node-algebraically-closed-extension",
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-rational-nodal-completion-algebra",
+  "worker": "stage1",
+  "summary": "Reused existing coefficient presentation and formal Jacobian quadratic criterion rather than duplicating their ring-isomorphism invariance and Morse arguments. Wrote the algebraically closed binary factorization in both cases, the inverse formal substitutions, and the topology and kernel checks. No statement change, no new nodes. Repair of the 2026-10-23 landing return: reapplied the retained split onto the current live unsplit item through the delivery tool, re-read every cited current statement against the retained verbatim quotations, and made the inverse substitutions explicit. The statement and dependency interfaces are unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Supplies the hypothesis transfer used by its Steps 4, 6 and 11: nodal geometric fibres over the chosen algebraic closure give nodal fibres over every algebraically closed field. Re-split of lem-trf-node-algebraically-closed-extension: old Step 3, coefficient-compatible split-node presentation before scalar extension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Only the field case and adic completeness of the two-variable power-series rings are used to construct the linear substitutions; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Generic evaluation and uniqueness for complete power-series rings constructs the inverse linear coordinate substitutions; the nodal unit supplies no separate evaluation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-5b2ef6339",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-5b2ef6339 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the full statement of all six cited nodes. Re-delivery of 70bd4b816a88, which was refused at landing because of side-DAG completion, not for its mathematics. Diff vs that snapshot: only Step 4 changed, now giving an explicit inverse x↦(DU−BV)/d, y↦(−CU+AV)/d (I checked γβ=id and βγ=id by hand), plus one repair sentence in split_report. The six cited nodes are byte-identical to the prior snapshot. The statement and stmt_deps are unchanged and there are no new nodes. S1: separable-closed-point-formal-presentation applies with F=k; its k-section σ must be the structure map, so R≅Â is k-linear. S2: formal-jacobian criterion (c) allows a non-F-linear ring isomorphism; with a=c=0, b=1, Δ=1 (also in char 2), (c)⇒(b) gives a k-algebra quadratic model. S3: I checked both branches by hand (a=0: y(bx+cy), det −b; a≠0: rs=c/a, Δ=a²(r−s)², det a(r−s)); no division by 2; small cases uv, xy+y², x²+xy in char 2, and the degenerate (x−y)² and 0. S4: completeness from cohen-regular-complete(3), the universal property with uniqueness, and β(UV)=Q. S5: π=e∘q has kernel (UV), is bicontinuous via the local isomorphism, and fixes constants. Sources: curves 0C49 lemma-nodal-algebraic (line 3873), varieties 0C52 (line 4044), and 032A/032C/07NL, all confirmed in tags; no SGA. Duplicate search on (uv) found none: rational-node-quadratic-completion and sfb-separable-node need dimension 1, separable-splitting needs an F-algebra isomorphism, geometric-splitting needs a coefficient-compatible model, and the sibling nodal-completion-rational-point is different. The two generic pbc power-series tool_uses are accepted. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RationalNodalCompletionAlgebra",
+  "declaration": "Algebra.rational_nodal_completion_algebra",
+  "file": "lean/Sheaf/RingTheory/RationalNodalCompletionAlgebra.lean",
+  "statement": "theorem rational_nodal_completion_algebra {k : Type u} {S : Type v} [Field k] [IsAlgClosed k] [CommRing S] [Algebra k S] (hS : (algebraMap k S).FiniteType) (p : Ideal S) [p.IsMaximal] (hp : Function.Bijective (algebraMap k (S ⧸ p))) (hnode : Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) : (∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p) ≃ₐ[k] (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}), @Continuous _ _ ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))).adicTopology ((Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) k))).map (Ideal.Quotient.mk (Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))).adicTopology e ∧ @Continuous _ _ ((Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) k))).map (Ideal.Quotient.mk (Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))).adicTopology ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))).adicTopology e.symm) ∧ (∃ π : MvPowerSeries (Fin 2) k →ₐ[k] AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p), Function.Surjective π ∧ RingHom.ker π.toRingHom = Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1} ∧ @Continuous _ _ (Ideal.span (Set.range (MvPowerSeries.X : Fin 2 → MvPowerSeries (Fin 2) k))).adicTopology ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))).adicTopology π ∧ ∀ c : k, π (MvPowerSeries.C c) = algebraMap k (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) c)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1808b3c07",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean field added; lean.statement verbatim in file; single sorry, no defs; source/blueprint docstrings with all 5 proof steps. Clause check: IsAlgClosed k, (algebraMap k S).FiniteType per recorded RingHom.FiniteType, p maximal with bijective algebraMap k (S/p), Localization.AtPrime p, AdicCompletion m A with Mathlib k-algebra instance, hnode a plain Nonempty ≃+*. Conclusions: ∃ AlgEquiv[k] to k[[X0,X1]]/(X0X1), continuous both ways for (m·Â)-adic (= maximal ideal, A Noetherian, maximalIdeal_eq_map_of_fg) and image-of-(X0,X1)-adic topologies; ∃ π →ₐ[k] surjective, ker=(X0X1), continuous, constants clause. No dimension or characteristic hypothesis, independent universes u,v, explicit adic topologies, char 2 covered. Proof-dep imports exist on live. No duplicate: RationalNodeQuadraticCompletion needs dimension 1, nodal_coefficient_straightening and private scalar_nodal_completion differ. Note: the second reading was by the same worker; this review is the independent reading. No compile needed (no change)."
+ }
+}

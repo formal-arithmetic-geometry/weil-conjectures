@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-ring-complex-ordered-scalar-iso",
+ "kind": "statement",
+ "title": "Scalar extension of explicit ordered localization coordinates",
+ "statement": "For commutative rings A,B, a ring homomorphism φ:A→B, a finite list f:Fin r→A, and augmented cochain complexes (C,a) over A and (D,b) over B on the one-object bottom sites, assume C has the explicit ordered localization coordinates for f and D those for φ∘f. This means the displayed linear degree-zero identifications with the rings, positive-degree identifications with finite products of localizations at tuple products, vanishing negative terms, the localization first differential, alternating face differential, and degree-zero augmentation identities. Then Eφ(C) is isomorphic to D as an augmented cochain complex: there is β:Eφ(C)≅D with β.hom≫b equal to the canonical scalar augmentation of a. No ideal, model predicate, derived category, or K-flat replacement is involved. The ring-site complexes and augmentations are those of [def-weil-pbc-ring-complex-cech-data], and Eφ is [def-weil-pbc-ring-complex-semilinear-extension]. The canonical augmentation is [def-weil-pbc-ring-complex-scalar-augmentation].",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "lemma-torsion-change-rings, Tag 0ALZ, displayed cochain isomorphism; algebraization.tex, Tag 099D(c)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ring-complex-scalar-augmentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the inverse bottom-topology sheafification unit to identify each scalar-extension term with its tensor product. In degree zero apply B tensor_A A≅B. In positive degree distribute tensor over the finite product of localizations, then apply IsLocalization.algEquiv using the localization tensor instance at each coordinate. Compose with the given target coordinate inverses. Negative terms are zero. Keep the target localization at the product of the image generators unchanged; map_prod supplies the equality identifying that product with the image of the source product, and thereby the target IsLocalization instance. This avoids transporting the coordinate modules along equality casts.",
+   "uses": [
+    "def-weil-pbc-ring-complex-semilinear-extension",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero pure-tensor formula is φ applied to the source coordinate. For positive coordinates it is the localization ring map on each source coordinate. The first differential commutes because localization maps preserve the algebra map; face squares commute by uniqueness of ring maps out of localization. Additivity preserves alternating sums and integer signs. The term isomorphisms therefore form a cochain isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check its augmentation in degree zero using the source and target coordinate identities and the proved canonical scalar-augmentation normalization. In every other degree the target is zero. The same tensor and localization equivalences apply to empty lists and zero generators and zero rings.",
+   "uses": [
+    "def-weil-pbc-ring-complex-scalar-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-ring-complex-scalar-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0ALZ, explicit scalar-extension equality with coordinate and augmentation details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of a localization with a base change ring is the localization at the image element",
+   "results": "IsLocalization.tensor; IsLocalization.Away.tensorEquiv; IsLocalization.tensorRight",
+   "date": "2026-10-26",
+   "verdict": "Provides the termwise localization isomorphism, not the augmented cochain comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.tensorEquiv",
+   "results": "IsLocalization.Away.tensorEquiv : S tensor_R A is isomorphic to Localization.Away (algebraMap R S r)",
+   "date": "2026-10-26",
+   "verdict": "Use this equivalence for each increasing-tuple coordinate."
+  },
+  {
+   "tool": "grep",
+   "query": "RingComplexHasCechModel|augmented.*(KFlat|kFlat); tensor.*piRight",
+   "results": "Read RingComplexCechData, GlobalSectionScalarCechModel, GlobalSectionOrderedCechTensor, and Mathlib TensorProduct/Pi. Generic roof proof and finite-product tensor equivalence available, but no scalar cochain comparison for arbitrary ring maps.",
+   "date": "2026-10-26",
+   "verdict": "Re-use the roof argument and finite tensor-product equivalences; prove the ring-map specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexCechScalarModel",
+  "date": "2026-10-26",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 0ALZ explicit localization-complex base change; Tag 099D(c) augmentation",
+   "via": [
+    "lem-weil-pbc-ring-complex-cech-scalar-model",
+    "lem-weil-pbc-ring-complex-cech-base-change",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexOrderedScalarIso",
+  "file": "lean/Sheaf/Paper/RingComplexOrderedScalarIso.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_ordered_scalar_iso",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_ordered_scalar_iso"
+  ],
+  "statement": "theorem ringComplex_ordered_scalar_iso\n    (A B : CommRingCat.{u}) (φ : A →+* B) (r : ℕ) (f : Fin r → A)\n    (C : CochainComplex (RingSiteModules A) ℤ) (a : C ⟶ ringComplexSingle A)\n    (e₀ : (C.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] A)\n    (e : ∀ q : ℕ, (C.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n      ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, f (t i))))\n    (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n      Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]\n        Localization.Away (∏ i, f (t i)))\n    (hneg : ∀ n : ℤ, n < 0 → IsZero (C.X n))\n    (hd₀ : ∀ (x : (C.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r),\n      e 0 ((C.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n        algebraMap A (Localization.Away (∏ i, f (t i))) (e₀ x))\n    (hd : ∀ (q : ℕ) (x : (C.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n      (t : Fin (q + 2) ↪o Fin r),\n      e (q + 1) ((C.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app\n        (op ⟨PUnit.unit⟩) x) t =\n          ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n            l q t j (e q x ((Fin.succAboveOrderEmb j).trans t)))\n    (ha : ∀ x : (C.X 0).val.obj (op ⟨PUnit.unit⟩),\n      ringComplexAugmentationValue a x = e₀ x)\n    (D : CochainComplex (RingSiteModules B) ℤ) (b : D ⟶ ringComplexSingle B)\n    (e₀' : (D.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[B] B)\n    (e' : ∀ q : ℕ, (D.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[B]\n      ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, (φ ∘ f) (t i))))\n    (l' : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n      Localization.Away (∏ i, (φ ∘ f) (t (Fin.succAboveOrderEmb j i))) →ₐ[B]\n        Localization.Away (∏ i, (φ ∘ f) (t i)))\n    (hneg' : ∀ n : ℤ, n < 0 → IsZero (D.X n))\n    (hd₀' : ∀ (x : (D.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r),\n      e' 0 ((D.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n        algebraMap B (Localization.Away (∏ i, (φ ∘ f) (t i))) (e₀' x))\n    (hd' : ∀ (q : ℕ) (x : (D.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n      (t : Fin (q + 2) ↪o Fin r),\n      e' (q + 1) ((D.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app\n        (op ⟨PUnit.unit⟩) x) t =\n          ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n            l' q t j (e' q x ((Fin.succAboveOrderEmb j).trans t)))\n    (ha' : ∀ x : (D.X 0).val.obj (op ⟨PUnit.unit⟩),\n      ringComplexAugmentationValue b x = e₀' x)\n    : ∃ β : ringComplexExtensionComplex φ C ≅ D,\n      β.hom ≫ b = ringComplexScalarAugmentation φ a",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T092116-L-3401753",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T092116-L-3401753",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

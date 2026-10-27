@@ -1,0 +1,135 @@
+{
+ "id": "lem-a1-affine-groupoid-canonical-norm-charts",
+ "kind": "statement",
+ "title": "Canonical determinant norm equals affine chart norm",
+ "statement": "Let A and B be commutative rings and φ : A → B a unital map whose affine spectrum morphism [def-weil-affine-spectrum] is finite locally free of constant degree r [def-pc-finite-locally-free]. For b ∈ B, let Nφ(b) be the canonical determinant norm selected by the unique local determinant characterization in [lem-a1-finite-locally-free-norm-characteristic-polynomial]. Then every x ∈ Spec A has an affine open V containing x on which Γ(Spec B, φ⁻¹V) is finite free over Γ(Spec A,V), and the restriction of Nφ(b) equals the finite free algebra norm of the restriction of b. Equivalently this value is computed by the determinant of multiplication in any finite basis of that section algebra. Zero rings, rank zero, zero section rings and empty inverse images are allowed.",
+ "source": {
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/groupoids.tex",
+  "place": "Tags 02DU(1), 02DV(1),(3), and Tag 03BJ, second paragraph: local determinant norm and affine-open norm comparison."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "lem-a1-finite-locally-free-norm-characteristic-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "Apply the principal basis cover theorem [lem-a1-finite-locally-free-principal-basis-cover] to obtain a unit-ideal family and localized rank-r bases, plus quasi-coherence of the structure-sheaf pushforward. First identify the two scalar module structures on each localization: on fractions (a/s) and (b/t), both act by (ab)/(st), so Module.ext identifies them, including zero localizations. Transport each basis through the canonical localization-tensor equivalence. The multiplication matrices then agree definitionally. The uniqueness clause of the principal-free determinant norm theorem [lem-a1-principal-free-algebra-determinant-norm] identifies the canonical norm [lem-a1-finite-locally-free-norm-characteristic-polynomial] with principalFreeNorm. At each point use the finite-locally-free norm-chart theorem [lem-pd-finite-locally-free-norm-charts] to obtain a free affine chart, discarding its auxiliary norm section. Take an arbitrary finite basis (reindexed by Fin, without assuming the section ring is nonzero). Apply the affine-open clause of the principal-free norm theorem and Algebra.norm_eq_matrix_det; both are the determinant of multiplication by the restricted element. This gives the asserted formula. Empty spectra have no points to check; zero section algebras and rank-zero bases obey the same determinant formula.",
+   "uses": [
+    "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+    "lem-a1-finite-locally-free-principal-basis-cover",
+    "lem-a1-principal-free-algebra-determinant-norm",
+    "lem-pd-finite-locally-free-norm-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/groupoids.tex",
+    "place": "Tags 02DU(1), 02DV(1),(3), and Tag 03BJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+  "lem-a1-finite-locally-free-principal-basis-cover",
+  "lem-a1-principal-free-algebra-determinant-norm",
+  "lem-pd-finite-locally-free-norm-charts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/groupoids.tex",
+  "place": "Tags 02DU(1), 02DV(1),(3), and 03BJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The determinant norm of a finite locally free algebra is computed on affine local free charts using localization and Spec global sections",
+   "results": "8 hits: Algebra.norm_localization, Algebra.norm_eq_iff, LinearMap.detAux_def, Algebra.norm_eq_matrix_det, LinearMap.det, Algebra.intNorm_eq_norm, Algebra.norm_apply, Algebra.norm",
+   "date": "2026-10-26",
+   "verdict": "The norm matrix and free localization results support the comparison, but no theorem directly states the canonical locally free affine-open chart formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical finite locally free determinant norm equals affine open norm chart",
+   "results": "8 hits: NumberField.det_basisOfFractionalIdeal_eq_absNorm, NumberField.mixedEmbedding.det_basisOfFractionalIdeal_eq_norm, Ideal.natAbs_det_equiv, Ideal.natAbs_det_basis_change, Algebra.norm_eq_matrix_det, Algebra.norm_localization, Algebra.intNorm_eq_norm, Algebra.norm_eq_iff",
+   "date": "2026-10-26",
+   "verdict": "The norm matrix and free localization results support the comparison, but no theorem directly states the canonical locally free affine-open chart formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm_eq_matrix_det",
+   "results": "1 hits: Algebra.norm_eq_matrix_det",
+   "date": "2026-10-26",
+   "verdict": "The norm matrix and free localization results support the comparison, but no theorem directly states the canonical locally free affine-open chart formula."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLocallyFreeDeterminantNorm|principalFreeNorm|norm_eq_matrix_det",
+   "results": "14 hits: Mathlib/RingTheory/Complex.lean, Mathlib/RingTheory/FractionalIdeal/Norm.lean, Mathlib/RingTheory/Norm/Transitivity.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Defs.lean",
+   "date": "2026-10-26",
+   "verdict": "The norm matrix and free localization results support the comparison, but no theorem directly states the canonical locally free affine-open chart formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGroupoidConstantRankNormAnnihilator",
+  "date": "2026-10-26",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Supporting norm-chart comparison in the constant-rank polynomial argument of Stacks 03BJ, second paragraph, beneath the inherited affine groupoid invariants route.",
+   "via": [
+    "lem-a1-affine-groupoid-constant-rank-norm-annihilator",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidCanonicalNormCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidCanonicalNormCharts.lean",
+  "declaration": "AlgebraicGeometry.affineGroupoid_canonicalNorm_chart_formula",
+  "statement": "theorem affineGroupoid_canonicalNorm_chart_formula (A B : Type u) [CommRing A] [CommRing B] (φ : A →+* B) (r : ℕ) (h : (Spec.map (CommRingCat.ofHom φ)).IsFiniteLocallyFreeOfDegree r) (b : B) : ∀ x : Spec (CommRingCat.of A), ∃ V : (Spec (CommRingCat.of A)).Opens, x ∈ V ∧ IsAffineOpen V ∧ (letI := ((Spec.map (CommRingCat.ofHom φ)).app V).hom.toAlgebra Module.Free Γ(Spec (CommRingCat.of A), V) Γ(Spec (CommRingCat.of B), Spec.map (CommRingCat.ofHom φ) ⁻¹ᵁ V) ∧ Module.Finite Γ(Spec (CommRingCat.of A), V) Γ(Spec (CommRingCat.of B), Spec.map (CommRingCat.ofHom φ) ⁻¹ᵁ V) ∧ (Spec (CommRingCat.of A)).presheaf.map (homOfLE le_top).op ((Scheme.ΓSpecIso (CommRingCat.of A)).inv (Algebra.finiteLocallyFreeDeterminantNorm φ r h b)) = Algebra.norm Γ(Spec (CommRingCat.of A), V) ((Spec (CommRingCat.of B)).presheaf.map (homOfLE (le_top : Spec.map (CommRingCat.ofHom φ) ⁻¹ᵁ V ≤ ⊤)).op ((Scheme.ΓSpecIso (CommRingCat.of B)).inv b)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T080951-L-1738681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T080951-L-1738681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

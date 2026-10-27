@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-compact-support-ordinary-pullback-transition",
+ "kind": "statement",
+ "title": "Ordinary inverse image respects horizontal coefficient maps",
+ "statement": "Let l be prime, E/Q_l finite, and let f:X→Y be any scheme morphism. Use the native coefficient-sequence module categories and coefficient rings A_k=O_E/m_E^(k+1) [def-sp-varying-ring-operations, def-weil-compact-support-native-system-evaluation]. For n≤m, write τ_W:e_m^W→e_n^W⋙Res_W for the actual horizontal map [lem-weil-compact-support-coefficient-transition]. Let δ_k:G_f⋙e_k^X ≅ e_k^Y⋙G_{f,k} be the normalized native inverse-image evaluation comparison [def-sp-varying-ring-operations], and let g:Res_Y⋙G_{f,m}→G_{f,n}⋙Res_X be the inverse mate of the section-normalized direct-image scalar square, constructed in [lem-weil-compact-support-open-restriction-scalar]. Then for every ordinary coefficient system N on Y, τ_X,G_f(N) ≫ Res_X(δ_n,N) = δ_m,N ≫ G_{f,m}(τ_Y,N) ≫ g_(e_n^Y(N)). No cartesian or flatness assumption on N is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03D3, naturality under adjunction of module inverse and direct images; Tag 0941, sequence-site horizontal maps. The first transpose in the assigned ordinary-open transition argument."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-weil-compact-support-open-restriction-scalar"
+ ],
+ "proof": [
+  {
+   "text": "Apply compactSupportOrdinaryDirectImageTransition, which states the equality of the two direct-image horizontal composites by their section maps.",
+   "uses": [
+    "lem-weil-compact-support-ordinary-direct-image-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic horizontalLeftMate calculation to the system inverse-image/direct-image adjunction and the two single-level adjunctions. Its two evaluation-unit equations are the defining normalization of moduleEvalG. Its scalar unit equation is unit_mateEquiv_symm, since the scalar inverse-image comparison was defined as that inverse mate. Naturality of the horizontal transformation and injectivity of the adjunction Hom equivalence give the claimed square.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-weil-compact-support-open-restriction-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use compactSupportOrdinaryPullbackUnit for the two evaluated system units in precisely the ordinary coefficient-system presentation.",
+   "uses": [
+    "lem-weil-compact-support-ordinary-pullback-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-ordinary-direct-image-transition",
+  "def-sp-varying-ring-operations",
+  "lem-weil-compact-support-open-restriction-scalar",
+  "lem-weil-compact-support-ordinary-pullback-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA, 03D3 and 0941; sectionwise direct-image naturality followed by the first adjunction transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of module sheaves commutes with evaluation and coefficient restriction in a sequence site",
+   "results": "8 hits, including SheafOfModules.evaluation and SheafOfModules.over. None states horizontal compatibility of the sequence-site open extension.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero evaluation commutes with horizontal coefficient transitions",
+   "results": "8 hits on Profinite.Nobeling and HomologicalComplex.extend. No sequence-site module statement.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, its unit equations and composition lemmas. These give generic mate calculus, not the geometric coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "Generic infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalJ.*[Tt]ransition|moduleEvalG.*naturality|[Tt]ransition.*[Oo]pen",
+   "results": "3 Mathlib hits: Gluing.lean, FiberBundle/Basic.lean and OpenPartialHomeomorph/Constructions.lean. None concerns module-sheaf evaluation. Local project search finds the assigned derived statement and different-coordinate transition statements, but no ordinary native theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportOrdinaryOpenTransition",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-ordinary-open-transition",
+   "place": "Step 1: native inverse-image horizontal square, obtained from direct image.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportOrdinaryPullbackTransition",
+  "file": "lean/Sheaf/Paper/CompactSupportOrdinaryPullbackTransition.lean",
+  "declaration": "WeilConjectures.compactSupportOrdinaryPullbackTransition",
+  "declarations": [
+   "WeilConjectures.compactSupportOrdinaryPullbackTransition"
+  ],
+  "statement": "theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {m n : ℕ} (h : n ≤ m) (N : coefficientSequenceModules.{u, u} l E Y) :\n    (compactSupportOrdinaryCoefficientTransition l E X h).app\n        ((ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) f).obj N) ≫\n      (proEtaleCoefficientRestrictScalars X (compactSupportLevelQuotient l E m n h)).map\n        ((ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) f n).hom.app N) =\n    (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) f m).hom.app N ≫\n      (ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E m) f).map\n        ((compactSupportOrdinaryCoefficientTransition l E Y h).app N) ≫\n      (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h)).app\n        ((coefficientSequenceEvaluation l E Y n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T112419-L-1581712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T112419-L-1581712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-global-section-scalar-kflat-quasi-iso",
+ "kind": "statement",
+ "title": "Global-section scalar extension preserves K-flat quasi-isomorphisms",
+ "statement": "Let (C,J,O) be a small commutative ringed site and let A be its ring of global sections. Let T be the explicit global-section scalar extension [def-weil-pbc-global-section-scalar-extension]. If alpha:P to Q is a quasi-isomorphism between K-flat complexes of one-point A-module sheaves [def-pc-kflat-complex], then T(alpha) is a quasi-isomorphism. No Cech-model, augmentation or derived-category hypotheses are required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YT; the scalar extension step of algebraization.tex Tag 099E, final paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "For the constant commutative ring presheaf R with value A, construct the sectionwise tensor functor along the global evaluation R to O. The explicit extension/restriction adjunction identifies it naturally with the chosen presheaf pullback. The construction and adjunction are proved privately in the module, reusing the formulas already proved in GlobalSectionRingFamilyBaseChange without importing its unrelated Cech comparison.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each object X, compare evaluation of the tensor functor on the constant presheaf complex with evaluation of ringComplexExtension along A to O(X). The bottom-site sheafification unit ringComplexExtensionSections gives the degreewise isomorphisms. Their compatibility with differentials and with alpha follows on generating pure tensors from tensorFunctor_map_tmul and ringComplexExtension_map_one_tmul. The latter extension has exactly the changeOfRings objects and morphisms, so changeOfRings_kFlat_quasiIso applies directly to alpha and the two K-flat hypotheses. Exact evaluation from bottom-site sheaves preserves this quasi-isomorphism.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-weil-pbc-ring-complex-semilinear-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Presheaf quasi-isomorphisms are detected objectwise, via the exact faithful underlying abelian presheaf functor. Thus step 2 makes the tensor-presheaf image of alpha a quasi-isomorphism. Naturality of the adjunction uniqueness isomorphism transports this to the chosen pullback image. Exact module sheafification preserves that quasi-isomorphism. This final image is definitionally the given ringFamilyGlobalExtension map. All comparisons are proved in Lean, including the empty-site case where objectwise detection is vacuous.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-pc-kflat-complex",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V6",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/algebraization.tex",
+  "place": "Tags 06YS and 06YT; Tag 099E final paragraph. Use the existing K-flat change-of-rings theorem on the one-point site and explicitly compare the presheaf pullback with its sectionwise tensors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving quasi isomorphisms between K flat complexes transports augmentation compatible derived isomorphisms using common K flat roofs",
+   "results": "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-26",
+   "verdict": "No theorem for this explicit global-section extension and ordered coordinate interface; the listed generic tensor/derived lemmas do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, IsKFlatIndependentCoefficients",
+   "results": "loogle: unknown identifier 'IsKFlatIndependentCoefficients'",
+   "date": "2026-10-26",
+   "verdict": "No theorem for this explicit global-section extension and ordered coordinate interface; the listed generic tensor/derived lemmas do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*[Kk][Ff]lat|[Kk][Ff]lat.*quasiIso",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for this explicit global-section extension and ordered coordinate interface; the listed generic tensor/derived lemmas do not state this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves quasi-isomorphisms between K-flat complexes",
+   "results": "HomologicalComplex.quasiIso_map_of_preservesHomology; Algebra.FormallyUnramified.flat_of_restrictScalars; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; HomologicalComplex.quasiIsoAt_extendMap_iff; Module.Flat.rTensor_shortComplex_exact; CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-26",
+   "verdict": "Only generic exact-functor, tensor and localization results; no comparison for this explicit global-section functor or ordered localization complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalSectionScalarCechModel",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original item proof step 1: scalar extension to every O(V) preserves the two quasi-isomorphisms between K-flat endpoints. The current created.item chain stops at the module name Sheaf.Paper.FunctorialRingComplexCechComparison, so tools/blueprint_refs.py ancestor returns None. The inherited blueprint route serves def-weil-pbc-completed-pullback, detailed form: the global augmented Cech comparison.",
+   "via": [
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionScalarKFlatQuasiIso",
+  "file": "lean/Sheaf/Paper/GlobalSectionScalarKFlatQuasiIso.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_quasiIso_of_kflat",
+  "statement": "theorem ringFamilyGlobalExtension_quasiIso_of_kflat\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    {P Q : CochainComplex (RingSiteModules (ringFamilyGlobalRing O)) ℤ}\n    (α : P ⟶ Q) (hP : P.IsKFlatIndependentCoefficients)\n    (hQ : Q.IsKFlatIndependentCoefficients) (hα : QuasiIso α) :\n    QuasiIso (((ringFamilyGlobalExtension O).mapHomologicalComplex (.up ℤ)).map α)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022856-L-492967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T071406-L-3923563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

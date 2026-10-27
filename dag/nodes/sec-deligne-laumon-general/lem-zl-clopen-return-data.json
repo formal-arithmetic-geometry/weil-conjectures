@@ -1,0 +1,120 @@
+{
+ "id": "lem-zl-clopen-return-data",
+ "kind": "statement",
+ "title": "Explicit geometric map for return restriction",
+ "statement": "Let k₀ and k₁ be finite fields with an algebra k₀→k₁, and let X/k₀ and C/k₁ be schemes. Given c:C→X commuting with their structural maps and a natural number r with #k₁=(#k₀)^r, there is a map v:Cbar→Xbar of geometric fibers [def-pc-base-change]. Its projection to X is Cbar→C→X, and its projection to Spec k₀bar is Cbar→Spec k₁bar followed by Spec of the inverse of the fixed k₀-algebra equivalence k₁bar≃k₀bar. It satisfies Fr_C;v=v;Fr_X^r. Both projection equations determine v by the pullback universal property. No immersion or finite-type hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the pullback lift of the composite Cbar→C→X and the closure-spectrum map. The supplied structural square and scalar-tower identity verify the compatibility of the two maps.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Under the closure equivalence, geometric k₁-Frobenius is the r-th power of geometric k₀-Frobenius, by the finite-field cardinality hypothesis. Cancel the inverse spectrum isomorphism to obtain the square for the chosen direction. Check both projections of the desired equality and use pullback.hom_ext.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+  "note": "A8: fully proved geometric construction, by the existing closure/Frobenius API and pullback universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Frobenius-stable lisse subobject on one clopen geometric component extends by its cyclic Frobenius translates to a Weil subobject",
+   "results": "8 hits: finite field Frobenius and Witt-vector isocrystals; no Weil sheaf subobject lifting theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of geometric fibres intertwining Frobenius powers induces a Frobenius module equivalence on stalks",
+   "results": "8 hits: ring Frobenius equivalences, ModuleCat.Tilde.stalkIso_hom, and Witt-vector isocrystals; none for pro-etale Weil sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|frobeniusPowStr|globalSectionsTransport",
+   "results": "0 Mathlib matches through msearch.py. Native library search found poweredGeometricPullback, its iterate square, and proved stalk transport helpers in ConstantFieldRestrictionStalk. No native clopen-return subobject lifting declaration.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ClopenReturnRestriction",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-clopen-return-restriction",
+   "place": "Explicit geometric map for return restriction",
+   "via": [
+    "thm-zl-real-mixed-by-curves"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ClopenReturnData",
+  "file": "lean/Sheaf/DeligneLaumon/ClopenReturnData.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_clopen_return_geometric_map",
+  "statement": "theorem exists_clopen_return_geometric_map\n    {k₀ k₁ : Type u} [Field k₀] [Finite k₀] [Field k₁] [Finite k₁]\n    [Algebra k₀ k₁] [Algebra.IsAlgebraic k₀ k₁]\n    {X C : Scheme.{u}} [X.Over (Spec (.of k₀))] [C.Over (Spec (.of k₁))]\n    (c : C ⟶ X)\n    (hc : c ≫ (X ↘ Spec (.of k₀)) =\n      (C ↘ Spec (.of k₁)) ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁)))\n    (r : ℕ) (hr : Nat.card k₁ = Nat.card k₀ ^ r) :\n    ∃ v : (C ↘ Spec (.of k₁)).geometricFiber ⟶ (X ↘ Spec (.of k₀)).geometricFiber,\n      v ≫ (X ↘ Spec (.of k₀)).geometricFiberProj =\n        (C ↘ Spec (.of k₁)).geometricFiberProj ≫ c ∧\n      v ≫ (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure =\n        (C ↘ Spec (.of k₁)).geometricFiberToAlgebraicClosure ≫\n          Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₁).symm.toRingHom) ∧\n      (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom ≫ v =\n        v ≫ ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ r).hom",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T180551-L-3354355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T180551-L-3354355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

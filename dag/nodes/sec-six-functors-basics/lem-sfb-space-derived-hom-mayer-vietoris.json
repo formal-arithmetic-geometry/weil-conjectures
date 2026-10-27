@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-space-derived-hom-mayer-vietoris",
+ "kind": "statement",
+ "title": "Derived Hom Mayer–Vietoris for elementary distinguished squares of spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $W$ an algebraic space over $S$ with its small etale structure sheaf [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], and canonical derived tensor pullback $Lh^*$ from [def-trf-space-etale-module-functors], computed by K-flat resolutions. Let $(U\\subset W,p:V\\to W)$ be an elementary distinguished square: $U$ is an open subspace [def-a1-space-open-subspace], $p$ is representable etale, and $V\\times_W Z\\to Z$ is an isomorphism for the reduced closed subspace $Z$ with underlying set $|W|\\setminus|U|$ [lem-sfb-space-reduced-closed-support, def-a1-space-point-topology]. Put $T=U\\times_WV$. For $E,F\\in D(\\mathcal O_W)$, let $E_A,F_A$ denote their exact etale restrictions for $A=U,V,T$, and put $\\operatorname{Ext}_A^n(E_A,F_A)=\\operatorname{Hom}_{D(\\mathcal O_A)}(E_A,F_A[n])$ for every $n\\in\\mathbf Z$. There is a long exact sequence\n$$\\cdots\\to\\operatorname{Ext}_T^{n-1}(E_T,F_T)\\xrightarrow{\\partial}\\operatorname{Ext}_W^n(E,F)\\longrightarrow\\operatorname{Ext}_U^n(E_U,F_U)\\oplus\\operatorname{Ext}_V^n(E_V,F_V)\\longrightarrow\\operatorname{Ext}_T^n(E_T,F_T)\\xrightarrow{\\partial}\\operatorname{Ext}_W^{n+1}(E,F)\\to\\cdots.$$\nThe middle maps are restriction and difference of restrictions. The boundary is the one obtained by applying derived Hom into $F$ to the canonical extension-by-zero triangle associated to the exact sequence of [lem-sfb-space-elementary-shriek-exact]. The sequence is natural contravariantly in $E$ and covariantly in $F$. For every morphism $h:W'\\to W$, base change gives an elementary distinguished square on $W'$, and the canonical pullback maps on every displayed Ext group, using derived pullback composition and shift isomorphisms, form a morphism to the long exact sequence for $Lh^*E,Lh^*F$ on that square; in particular they commute with the specified boundaries. No boundedness, quasi-coherence, flatness or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08H9 (lemma-mayer-vietoris-hom), including its proof from lemma-exact-sequence-lower-shriek; base-change naturality uses the same canonical extension-by-zero sequence, whose base-changed form is recorded in lem-sfb-space-elementary-shriek-exact."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-etale-module-functors",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "def-a1-space-point-topology",
+  "lem-sfb-space-elementary-shriek-exact",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-base-change-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Write $J_A=j_{A!}j_A^*$ for $A=U,V,T$. The exact additive functors and signed natural maps of [lem-sfb-space-elementary-shriek-exact] give, on every complex $C$, a degreewise short exact sequence $0\\to J_TC\\xrightarrow d J_UC\\oplus J_VC\\xrightarrow e C\\to0$. Their termwise functors descend, with their shift maps, by [lem-weil-pbc-exact-functor-derived-factorization]. Apply [lem-weil-pbc-complex-ses-triangle] to obtain the distinguished triangle $J_TE\\xrightarrow d J_UE\\oplus J_VE\\xrightarrow e E\\xrightarrow{\\delta_E}J_TE[1]$. This is the canonical short-exact-sequence triangle, natural in $E$: naturality on complexes descends through localization, whose fully faithful precomposition property is [lem-weil-pbc-localization-universal-property].",
+   "uses": [
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GV (lemma-exact-sequence-lower-shriek)(2); derived.tex Tag 0152 (lemma-derived-canonical-delta-functor)"
+   }
+  },
+  {
+   "text": "For each $A$, the specified exact adjunction $j_{A!}\\dashv j_A^*$ is part of [lem-sfb-space-elementary-shriek-exact]. Apply [lem-weil-pbc-termwise-adjunction-homotopy] and then [lem-sfb-adjunction-localization], using the factorizations of [lem-weil-pbc-exact-functor-derived-factorization]. This gives $\\operatorname{Hom}(j_{A!}M,F[n])\\cong\\operatorname{Hom}(M,j_A^*F[n])$ for arbitrary derived $M,F$ and all integers $n$. The derived counit is the localized evaluation counit. These adjunction bijections respect shifts: the termwise unit and counit have degree zero, so shifting their components changes neither map, while additivity preserves the signed differential $(-1)^nd$. Thus no boundedness is needed for this adjunction.",
+   "uses": [
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-adjunction-localization",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FJ (lemma-adjoint-lower-shriek-restrict); derived.tex Tag 015F; normalized localization adjunction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-hom-out-of-triangle-exact] to the triangle of step 1 and its successive rotations with target $F[n]$. Rotation and integral shifts are those of [def-weil-triangulated-category]. The two exactness assertions, for all rotations, give exactness at every term of the resulting long sequence. Identify the three local terms by step 2, and identify $\\operatorname{Hom}(J_UE\\oplus J_VE,F[n])$ with the pair of Hom groups by its two components. Explicitly, if $a:J_TE\\to F[n]$ is the adjoint of an element of $\\operatorname{Ext}_T^n(E_T,F_T)$, its connecting image is $a[1]\\circ\\delta_E:E\\to F[n+1]$, using the standard shift identifications. This defines precisely the specified boundary and gives the displayed sequence in every integer degree.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H9 (lemma-mayer-vietoris-hom), proof; derived.tex Tag 0149 (lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "The map induced by $e$ sends $f:E\\to F[n]$ to its restrictions: its $A$ component is $f\\circ\\varepsilon_{A,E}$, whose adjoint is $j_A^*f$ by the adjunction triangle identity. For $T\\to A$, precomposing the adjoint $j_{A!}E_A\\to F[n]$ with the overlap counit gives the adjoint of its restriction to $T$: on the sum presheaf both composites evaluate each nested summand in $F$, then the equality localizes. The signs $(+,-)$ of $d$ therefore give restriction from $U$ minus restriction from $V$. This uses the counit description in [lem-sfb-space-elementary-shriek-exact] and the normalization of [lem-sfb-adjunction-localization]. For $x:E'\\to E$, naturality of step 1 says $J_Tx[1]\\delta_{E'}=\\delta_Ex$; hence $(aJ_Tx)[1]\\delta_{E'}=(a[1]\\delta_E)x$. For $y:F\\to F'$, $(y[n]a)[1]\\delta_E=y[n+1](a[1]\\delta_E)$. These equations prove naturality of the boundary, and the restriction maps are natural by composition.",
+   "uses": [
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H9, signed arrows from Tag 08GV; sites-modules.tex Tag 03DI evaluation on nested summands"
+   }
+  },
+  {
+   "text": "For an arbitrary $h:W'\\to W$, [lem-sfb-space-elementary-shriek-exact] supplies the base-changed exact functors and their same signed maps, with the reduced complement taken on $W'$. In particular this is the elementary square on $W'$ stipulated there. This does not presume that the old reduced complement stays reduced. More explicitly, [lem-sfb-space-reduced-closed-support] identifies the support of $Z\\times_WW'$ with the complement of $U'$; the reduced closed subspace $Z'$ of that support factors through $Z\\times_WW'$. On reduced etale scheme charts, every element of its defining ideal vanishes at all points and hence is nilpotent, therefore zero. Base changing $V\\times_WZ\\cong Z$ to $Z'$ gives $V'\\times_{W'}Z'\\cong Z'$. The restrictions in this comparison satisfy $j_A'^*Lh^*\\cong Lh_A^*j_A^*$, with canonical composition, by [lem-sfb-space-derived-etale-chart-calculus].",
+   "uses": [
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GN (lemma-make-more-elementary-distinguished-squares)(2); Tag 08GV; sites-cohomology.tex Tag 0D6D"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat complex $P$ representing $E$ by [lem-pc-kflat-resolution]. By [lem-sfb-space-etale-sum-pullback], all $J_AP$ are K-flat with flat terms. Put $A=J_TP$, $B=J_UP\\oplus J_VP$ and $C=P$. Their cone $D=C(d:A\\to B)$ and $B$ are K-flat by [lem-sfb-kflat-homotopy-triangulated]. Its hypotheses hold for module sheaves: [lem-pc-sheaf-modules-tensor-closed] supplies additive symmetric closed tensor, and [lem-weil-pbc-module-sheaves-colimits-forgetful] supplies small colimits; tensor preserves them because its adjunction carries the colimit universal property to the limit of the Hom sets. Symmetry identifies the two-sided K-flat condition with [def-pc-kflat-complex]. The cone terms are $B^r\\oplus A^{r+1}$ and are flat: tensoring with a finite direct sum is the sum of the two exact tensor functors. Consequently $A,B,C,D$ all compute their derived pullbacks by ordinary $h^*$, by [lem-weil-pbc-ringed-topoi-derived-pullback].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-space-etale-sum-pullback",
+    "lem-sfb-kflat-homotopy-triangulated",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 07A3 (lemma-K-flat-two-out-of-three), 06YY (lemma-derived-base-change); sites-modules.tex Tags 03EO and 03DB"
+   }
+  },
+  {
+   "text": "The comparisons of [lem-sfb-space-etale-sum-pullback], composed with the restriction comparisons of [lem-sfb-space-derived-etale-chart-calculus], identify $h^*J_AP$ with $J_A'(h^*P)$. They preserve the nested counits and finite sums, so they give an isomorphism of three-term sequences of complexes, including $d$ and $e$, from $h^*$ of the sequence $0\\to J_TP\\to J_UP\\oplus J_VP\\to P\\to0$ to the sequence of step 5 evaluated on $h^*P$. The latter is short exact by step 5, although $h^*$ need not be exact on arbitrary sequences. By step 6 all three terms of the sequence on $W$ are K-flat with flat terms, so [lem-sfb-ringed-kflat-pullback-ses-triangle] applies: the comparisons $\\epsilon$ of [lem-weil-pbc-ringed-topoi-derived-pullback] form an isomorphism of triangles from $Lh^*$ of the canonical triangle of step 1 (its last arrow followed by the shift comparison of $Lh^*$) to the canonical triangle of the termwise pulled-back sequence, including the boundary; explicitly, additivity of $h^*$ identifies $h^*\\operatorname{Cone}(d)$ with $\\operatorname{Cone}(h^*d)$ (terms $h^*B^r\\oplus h^*A^{r+1}$, differential entries $h^*d_B,h^*d,-h^*d_A$), carrying $h^*q,h^*p$ to the cone maps $q',p'$, and the boundaries are $-pq^{-1}$ and $-p'(q')^{-1}$. Naturality of canonical triangles [lem-weil-pbc-complex-ses-triangle] for the isomorphism of short exact sequences above then gives an isomorphism to the canonical triangle of step 1 on $W'$ for $h^*P$, which represents $Lh^*E$. Thus the three specified comparison isomorphisms form an isomorphism from $Lh^*$ of the triangle in step 1 to the canonical triangle for $Lh^*E$, including its last arrow.",
+   "uses": [
+    "lem-sfb-space-etale-sum-pullback",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-ringed-kflat-pullback-ses-triangle",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), formula and functorial cone computation; spaces-perfect.tex Tag 08GV"
+   }
+  },
+  {
+   "text": "Let $L=Lh^*$ and let $c_A:LJ_AE\\xrightarrow{\\sim}J_A'LE$ be step 7's comparisons. Pulling a morphism $f:E\\to F[n]$ through $L$, followed by the shift comparison, defines the global Ext pullback. On the local terms it is precisely $Lh_A^*$: the sum-extension comparison preserves evaluation counits [lem-sfb-space-etale-sum-pullback], and [lem-sfb-adjunction-localization] identifies adjoints using those counits. Thus taking the transpose before or after pullback gives the same morphism on the slice, with the pullback composition identifications from [lem-sfb-space-derived-etale-chart-calculus]. For $a:J_TE\\to F[n]$, write $a'$ for $L(a)c_T^{-1}$ with the shift comparison. Step 7 says $\\delta_{LE}=c_T[1]L(\\delta_E)$, where shifts are understood canonically. Hence\n$$a'[1]\\delta_{LE}=L(a)[1]c_T^{-1}[1]c_T[1]L(\\delta_E)=L(a[1]\\delta_E).$$\nThis is the required boundary square. The squares for the two middle arrows follow from the preserved signed counits. It proves compatibility of the specified Ext pullback maps with the full long exact sequences, without a flatness, quasi-compactness, or boundedness assumption.",
+   "uses": [
+    "lem-sfb-space-etale-sum-pullback",
+    "lem-sfb-adjunction-localization",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H9, proof via Tag 08GV and Tag 08FJ; arbitrary derived-pullback compatibility is the explicit normalized cone and adjunction computation above"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-triangulated-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-adjunction-localization",
+  "lem-sfb-kflat-homotopy-triangulated",
+  "lem-sfb-ringed-kflat-pullback-ses-triangle",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-elementary-shriek-exact",
+  "lem-sfb-space-etale-sum-pullback",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08H9 proof from 08GV and 08FJ, expanded using derived.tex Tags 0149 and 0152. Arbitrary nonflat derived-pullback compatibility is checked on the canonical cone using the existing etale-sum pullback node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mayer[Vv]ietoris|mayer_vietoris|MayerVietoris",
+   "results": "{\"t\": \"2026-10-23T18:39:05Z\", \"tool\": \"grep\", \"query\": \"mayer[Vv]ietoris|mayer_vietoris|MayerVietoris\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"39ce2b80005aef34\"} Read the returned signatures: Mathlib gives ordinary abelian-sheaf cohomology for a site MayerVietorisSquare and generic Ext exact sequences for heart objects. Neither states unbounded derived Hom between two structure-module complexes on an algebraic space or boundary compatibility with nonflat derived base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MayerVietoris\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T18:39:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"MayerVietoris\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk₀_f_comp_biprodAddEquiv_symm_biprodIsoProd_hom\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.biprodAddEquiv_symm_biprodIsoProd_hom_toBiprod_apply\"], \"digest\": \"9d50475d9485e599\"} Read the returned signatures: Mathlib gives ordinary abelian-sheaf cohomology for a site MayerVietorisSquare and generic Ext exact sequences for heart objects. Neither states unbounded derived Hom between two structure-module complexes on an algebraic space or boundary compatibility with nonflat derived base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris long exact sequence of derived Hom for elementary distinguished squares of algebraic spaces natural under derived pullback",
+   "results": "{\"t\": \"2026-10-23T18:39:06Z\", \"tool\": \"leanfinder\", \"query\": \"Mayer Vietoris long exact sequence of derived Hom for elementary distinguished squares of algebraic spaces natural under derived pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback_toSquare\"], \"digest\": \"a2723e37e7207499\"} Read the returned signatures: Mathlib gives ordinary abelian-sheaf cohomology for a site MayerVietorisSquare and generic Ext exact sequences for heart objects. Neither states unbounded derived Hom between two structure-module complexes on an algebraic space or boundary compatibility with nonflat derived base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris sequence of Ext between two unbounded complexes on an algebraic space elementary distinguished square",
+   "results": "{\"t\": \"2026-10-23T18:39:59Z\", \"tool\": \"leansearch\", \"query\": \"Mayer Vietoris sequence of Ext between two unbounded complexes on an algebraic space elementary distinguished square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"Opens.mayerVietorisSquare\", \"CategoryTheory.Abelian.Ext.covariantSequence\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\"], \"digest\": \"a116448be08d732d\"} Read the returned signatures: Mathlib gives ordinary abelian-sheaf cohomology for a site MayerVietorisSquare and generic Ext exact sequences for heart objects. Neither states unbounded derived Hom between two structure-module complexes on an algebraic space or boundary compatibility with nonflat derived base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Excision long exact Ext sequence in the unbounded derived category of structure modules on an etale elementary distinguished square",
+   "results": "{\"t\": \"2026-10-23T18:42:45Z\", \"tool\": \"leanfinder\", \"query\": \"Excision long exact Ext sequence in the unbounded derived category of structure modules on an etale elementary distinguished square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁'\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃'\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₁'\", \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₂'\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂'\"], \"digest\": \"755804684c420751\"} Read the returned signatures: Mathlib gives ordinary abelian-sheaf cohomology for a site MayerVietorisSquare and generic Ext exact sequences for heart objects. Neither states unbounded derived Hom between two structure-module complexes on an algebraic space or boundary compatibility with nonflat derived base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mayer[Vv]ietoris|mayer_vietoris|MayerVietoris",
+   "results": "{\"t\": \"2026-10-23T19:29:26Z\", \"tool\": \"grep\", \"query\": \"mayer[Vv]ietoris|mayer_vietoris|MayerVietoris\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"2b59f479c1f374ec\"} Hits read: MayerVietorisSquare uses abelian sheaves freely generated by representables; sheaf cohomology uses heart objects. Generic yoneda_exact lemmas are already cited through the existing Hom-out-of-triangle node. None provides all clauses of this algebraic-space statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Excision exact sequence Hom between unbounded complexes of structure modules on an algebraic space",
+   "results": "{\"t\": \"2026-10-23T19:29:27Z\", \"tool\": \"leansearch\", \"query\": \"Excision exact sequence Hom between unbounded complexes of structure modules on an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homologySequence_exact₃\", \"CategoryTheory.ShortComplex.ShortExact.exact\", \"HomologicalComplex.shortExact_of_degreewise_shortExact\", \"HomologicalComplex.opcycles_right_exact\", \"CategoryTheory.ShortComplex.exact_iff_isZero_homology\", \"CategoryTheory.ShortComplex.moduleCat_exact_iff_ker_sub_range\", \"CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact\", \"CategoryTheory.ShortComplex.Exact.hasHomology\"], \"digest\": \"e30637f00c9aa439\"} Hits read: MayerVietorisSquare uses abelian sheaves freely generated by representables; sheaf cohomology uses heart objects. Generic yoneda_exact lemmas are already cited through the existing Hom-out-of-triangle node. None provides all clauses of this algebraic-space statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MayerVietoris\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T19:29:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"MayerVietoris\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk₀_f_comp_biprodAddEquiv_symm_biprodIsoProd_hom\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.biprodAddEquiv_symm_biprodIsoProd_hom_toBiprod_apply\"], \"digest\": \"9d50475d9485e599\"} Hits read: MayerVietorisSquare uses abelian sheaves freely generated by representables; sheaf cohomology uses heart objects. Generic yoneda_exact lemmas are already cited through the existing Hom-out-of-triangle node. None provides all clauses of this algebraic-space statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris Ext long exact sequence unbounded derived category modules algebraic space etale distinguished square arbitrary derived pullback",
+   "results": "{\"t\": \"2026-10-23T19:29:28Z\", \"tool\": \"leanfinder\", \"query\": \"Mayer Vietoris Ext long exact sequence unbounded derived category modules algebraic space etale distinguished square arbitrary derived pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₂'\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\"], \"digest\": \"5509ae06ab9f8528\"} Hits read: MayerVietorisSquare uses abelian sheaves freely generated by representables; sheaf cohomology uses heart objects. Generic yoneda_exact lemmas are already cited through the existing Hom-out-of-triangle node. None provides all clauses of this algebraic-space statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Long exact sequence of morphisms from distinguished triangles contravariant representable functor in a triangulated category",
+   "results": "{\"t\": \"2026-10-23T19:29:56Z\", \"tool\": \"leanfinder\", \"query\": \"Long exact sequence of morphisms from distinguished triangles contravariant representable functor in a triangulated category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁\", \"CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃\", \"CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.map_distinguished_exact\"], \"digest\": \"36d94c8534fd7e0e\"} Hits read: MayerVietorisSquare uses abelian sheaves freely generated by representables; sheaf cohomology uses heart objects. Generic yoneda_exact lemmas are already cited through the existing Hom-out-of-triangle node. None provides all clauses of this algebraic-space statement.",
+   "date": "2026-10-24",
+   "verdict": "existing generic Hom exactness is already lem-weil-pbc-hom-out-of-triangle-exact; not a match for the algebraic-space item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Excision long exact sequence derived Hom for etale Nisnevich distinguished squares modules unbounded complexes",
+   "results": "{\"t\": \"2026-10-23T19:31:09Z\", \"tool\": \"leanfinder\", \"query\": \"Excision long exact sequence derived Hom for etale Nisnevich distinguished squares modules unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"DerivedCategory.HomologySequence.exact₁\", \"DerivedCategory.HomologySequence.exact₂\", \"DerivedCategory.HomologySequence.exact₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.Functor.homologySequence_exact₂\"], \"digest\": \"04be2211c3b21184\"} Hits read: MayerVietorisSquare uses abelian sheaves freely generated by representables; sheaf cohomology uses heart objects. Generic yoneda_exact lemmas are already cited through the existing Hom-out-of-triangle node. None provides all clauses of this algebraic-space statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-source-hom-continuity",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback). Supporting input: proof of Tag 09RJ, first paragraph, full faithfulness from Tag 09RI (1). Excision input to Tag 09RI, proof paragraph 1: Mayer–Vietoris for Hom and its canonical transition maps.",
+   "via": [
+    "lem-sfb-space-perfect-source-hom-continuity",
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-derived-hom-mayer-vietoris",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the 08H9 exact-sequence and derived-adjunction proof, including all integral degrees, signed restrictions, naturality in both arguments, and canonical boundary compatibility under arbitrary derived pullback. All inputs already exist; no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback). Supporting input: proof of Tag 09RJ, first paragraph, full faithfulness from Tag 09RI (1). Excision input to Tag 09RI, proof paragraph 1: Mayer–Vietoris for Hom and its canonical transition maps. The eight steps supply the 08H9 excision input to 09RI and check its canonical transition maps. The current latest blueprint direct-images proof (3) is retained; no unit or chapter changes.",
+  "tool_uses": [
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-adjunction-localization",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-kflat-homotopy-triangulated",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "General module-category, localization, K-flat, or triangulated-category tool used to expand Stacks 08H9 and its canonical pullback maps; no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-kflat-complex",
+  "def-weil-triangulated-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-adjunction-localization",
+  "lem-sfb-kflat-homotopy-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-543c7fa67",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-543c7fa67 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, and every cited statement. Sources: spaces-perfect 08H9, its proof and 08GV(1)(2); derived.tex 0152, 05SU and 05SC; sites-cohomology 06YV and 0G7E. The statement and stmt_deps are identical to the base, so nothing was weakened. Live is still unsplit, there is no re-split note and there are no new nodes from the worker. Steps 1-6 and 8 are correct. Step 4 is genuinely elementary. Step 5 correctly does not assume that the old reduced complement stays reduced (factor through Z×W' on reduced charts, then V'×Z' ≅ Z'). Step 6 checks the hypotheses of the cone-closure node explicitly. Fault (C1/C4, cf. E5) in step 7, which carries the base-change boundary clause. The step quotes 'Tag 0152: boundaries are -pq^{-1}' by tag; lem-weil-pbc-complex-ses-triangle states only an unspecified natural δ. It also assumes that ε of lem-weil-pbc-ringed-topoi-derived-pullback commutes with the shift comparison, which that node does not state. No existing node covers the left-derived case: the right-derived analogue lem-pur-derived-injective-cone-comparison and the proper-Noetherian sc-kflat-cone nodes don't apply. FIX: I added the unsplit statement-only node lem-sfb-ringed-kflat-pullback-ses-triangle. It says that for a morphism of ringed topoi, ε commutes with shifts, and that (ε_A, ε_B, ε_C) is an isomorphism from Lu^* of the canonical SES triangle of flat-term K-flat complexes to the canonical triangle of the termwise pullback, with δ = -Q(p)Q(q)^{-1}. It is true by 05SC/05SU and 0152 (the strict cone is preserved by K(u^*)). I tested it with A = 0, a split SES and u = id. Mathlib grep finds only map_triangleOfSESδ, for exact functors; it is recorded as mathlib_candidate, and LeanSearch is recorded as unavailable. Step 7 now cites the new node plus the naturality of canonical triangles; proof_deps equals the union of the step uses. Batch-5 check: chart-calculus and etale-sum-pullback reach sec-trace-formula only via the general definition def-trf-algebraic-space, which the item already has in stmt_deps; neither is a trace-formula or Poincaré-duality step, so they are accepted. The other-unit nodes are generic K-flat, localization and triangulated tools, already listed in split_report tool_uses. No SGA source is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedHomMayerVietoris",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_derived_hom_mayer_vietoris",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceSmallModuleComplex_additive",
+   "AlgebraicGeometry.AlgebraicSpace.spaceOriginalComplexQ",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleSumComplex",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleSumComplexCounit",
+   "AlgebraicGeometry.AlgebraicSpace.SpacePullbackShiftNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.spaceExtPullback",
+   "AlgebraicGeometry.AlgebraicSpace.spaceExtRestrictionOver",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHomPullbackSquare",
+   "AlgebraicGeometry.AlgebraicSpace.spaceExtSquarePullback",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleRestrictionComplex",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleShriekComplex",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleComplexAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceEtaleRestrictionComplexComparison",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHomChartEtaleHom",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceEtaleHomAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHomConnecting",
+   "AlgebraicGeometry.AlgebraicSpace.spaceElementaryMiddleComplex",
+   "AlgebraicGeometry.AlgebraicSpace.spaceElementaryFirstComplex",
+   "AlgebraicGeometry.AlgebraicSpace.spaceElementarySecondComplex",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHomDeltaNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHomLES",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHomMayerVietorisData",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHomMayerVietorisData.boundary",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHomBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.space_derived_hom_mayer_vietoris"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedHomMayerVietoris.lean",
+  "statement": "theorem space_derived_hom_mayer_vietoris {U V T : AlgebraicSpace S} (jU : U ⟶ X) (jV : V ⟶ X) (a : T ⟶ U) (b : T ⟶ V) (sq : IsPullback a b jU jV) (hOpen : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) jU.hom.hom) (hV : IsEtale jV.hom.hom) (C : ClosedSubspace X) (hC : IsReduced (C.val : AlgebraicSpace S)) (hSupport : pointImage C.val.arrow.hom.hom = (pointImage jU.hom.hom)ᶜ) (hIso : IsIso (Limits.pullback.snd jV.hom C.val.arrow.hom)) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} U.SmallModules] [HasDerivedCategory.{w} V.SmallModules] [HasDerivedCategory.{w} T.SmallModules] : ∃ M : SpaceHomMayerVietorisData jU jV a b sq hV, ∀ (X' U' V' T' : AlgebraicSpace S) (h : X' ⟶ X) (jU' : U' ⟶ X') (jV' : V' ⟶ X') (a' : T' ⟶ U') (b' : T' ⟶ V') (sq' : IsPullback a' b' jU' jV') (pU : U' ⟶ U) (pV : V' ⟶ V) (pT : T' ⟶ T) (sqU : IsPullback pU jU' jU h) (sqV : IsPullback pV jV' jV h) (sqT : IsPullback pT (a' ≫ jU') (a ≫ jU) h), pT ≫ a = a' ≫ pU → pT ≫ b = b' ≫ pV → ∀ [HasDerivedCategory.{w} X'.SmallModules] [HasDerivedCategory.{w} U'.SmallModules] [HasDerivedCategory.{w} V'.SmallModules] [HasDerivedCategory.{w} T'.SmallModules], IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) jU'.hom.hom ∧ ∃ (hV' : IsEtale jV'.hom.hom) (C' : ClosedSubspace X'), IsReduced (C'.val : AlgebraicSpace S) ∧ pointImage C'.val.arrow.hom.hom = (pointImage jU'.hom.hom)ᶜ ∧ IsIso (Limits.pullback.snd jV'.hom C'.val.arrow.hom) ∧ ∃ (M' : SpaceHomMayerVietorisData jU' jV' a' b' sq' hV') (sh : (spaceDerivedPullback h).CommShift ℤ) (spU : (spaceDerivedPullback pU).CommShift ℤ) (spV : (spaceDerivedPullback pV).CommShift ℤ) (spT : (spaceDerivedPullback pT).CommShift ℤ), SpacePullbackShiftNormalized h sh ∧ SpacePullbackShiftNormalized pU spU ∧ SpacePullbackShiftNormalized pV spV ∧ SpacePullbackShiftNormalized pT spT ∧ SpaceHomBaseChange h pU pV pT sqU.w sqV.w sqT.w M M' sh spU spV spT",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full integral-degree LES, canonical signed-SES/adjunction boundary, both variances, and arbitrary derived base change. Helpers use the recorded original-site module functors and equivalent small ringed models. The square comparison and chart morphism are documented local constructions from spaceDerivedPullbackComp and etaleMap; no theorem conclusion from the removed chart-calculus or pushforward-restriction statement dependencies is used. Extension comparisons are normalized on all chain Hom transposes and ordinary tensor sections; shift comparisons are normalized by the existing total-derived counit. The only postponed proof is this node’s theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87310a288",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery of c10fe RETURN (H2). Both theorem stmt_deps removed; three landed def nodes added (derived-module-calculus, derived-pullback, base-change-comparisons). Two local helpers: spaceHomPullbackSquare (spaceDerivedPullbackComp composite) and spaceHomChartEtaleHom (⟨q.hom⟩ via etaleMap). Lean diff vs c10fe is only these helpers and a local instance priority. Item differs from live only in lean/stmt_deps; lean.statement verbatim; 25 declarations match the file. Maths re-read vs 08H9/08GV: hypotheses as in landed elementary_etale_shriek_exact; boundary pinned via ∃-short-exact triangleOfSESδ normalization plus E-naturality; adjunction/comparison data pinned by transpose/factors_normalized/ordinarySections; shifts pinned by total-derived counit; LES at all positions for every n ∈ ℤ, both variances; arbitrary non-flat base change with new reduced C′ and four squares. ClosedSubspace/IsReduced reached through the cited reduced-closed-support theorem, same pattern as the landed dependency. Non-blocking notes: chart-calculus kept as a proof-dep public import; Localization.Adjunction imported twice. No compile run (no file changed); worker reports clean scompile in 45.3 s."
+ }
+}

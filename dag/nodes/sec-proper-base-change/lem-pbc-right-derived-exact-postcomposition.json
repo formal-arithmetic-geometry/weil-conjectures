@@ -1,0 +1,125 @@
+{
+ "id": "lem-pbc-right-derived-exact-postcomposition",
+ "kind": "statement",
+ "title": "Unbounded right derivation commutes with exact postcomposition",
+ "statement": "Let C, D, E be abelian categories with chosen unbounded derived categories [def-weil-abstract-derived-category]. Assume C admits K-injective resolutions in the monomorphic-resolution sense used by the source library. Let F:C→D and G:D→E be additive functors, and suppose G preserves finite limits and finite colimits. Write RF and R(F⋙G) for the unbounded right derived functors computed by K-injective resolutions [def-sfb-right-derived-functor], and D(G) for the functor induced by termwise exact application of G. There is a canonical natural isomorphism R(F⋙G) ≅ RF⋙D(G). No exactness or preservation of K-injectives is required of F, and no K-injective resolution hypothesis is imposed on D or E.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
+  "place": "Proved declaration CategoryTheory.Functor.rightDerivedFunctorCompMapDerivedCategoryIso, CompositionExactRight section; exact-functor descent is Stacks Tag 015F (literature/stacks-project/derived.tex, lemma-right-derived-exact-functor)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Since G is exact, termwise G preserves quasi-isomorphisms, so it induces D(G). Compose the unit of RF with D(G), using the termwise composition identification, to obtain the unit from the homotopy functor of F⋙G to RF⋙D(G). On a K-injective complex in C, the unit of RF is invertible, hence so is its image under D(G). The K-injective derivability structure therefore makes this composite a right derived functor. This is the existing proved isRightDerivedFunctor_rightDerivedFunctor_comp_mapDerivedCategory instance in the source module.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of right derived functors gives the canonical unit-compatible natural isomorphism from R(F⋙G) to RF⋙D(G). This is precisely the proved source definition rightDerivedFunctorCompMapDerivedCategoryIso; its body is rightDerivedUnique applied to the two units. This works for unbounded complexes, arbitrary additive F, and also zero categories or zero functors.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
+  "place": "CompositionExactRight section, proved source instance and definition; no new proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total right derived functor of a composite with an exact functor is the right derived functor followed by its exact derived functor",
+   "results": "8 hits: CategoryTheory.Functor.totalRightDerived, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.Functor.IsRightDerivedFunctor.recOn",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Hits concern generic universal right derived functors or natural transformations, not this unbounded exact-postcomposition comparison. The proved project source declaration supplies the result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded right derived functor of a composite with an exact functor is naturally isomorphic to the right derived functor followed by the exact derived functor",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.Functor.rightDerived_fac_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.Functor.rightDerived_fac_app_assoc",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Hits concern generic universal right derived functors or natural transformations, not this unbounded exact-postcomposition comparison. The proved project source declaration supplies the result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorCompMapDerivedCategoryIso\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Hits concern generic universal right derived functors or natural transformations, not this unbounded exact-postcomposition comparison. The proved project source declaration supplies the result."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompMapDerivedCategoryIso|rightDerivedFunctorNatIso",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Hits concern generic universal right derived functors or natural transformations, not this unbounded exact-postcomposition comparison. The proved project source declaration supplies the result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleHomSums",
+  "date": "2026-10-24",
+  "group": "H9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Historical proof, first sentence \"Choose an integral lattice for K\": cohomological coproduct comparison used to justify the Ext denominator step in Lemma 6.8.13. Exact scalar forgetting after global sections is used when passing the derived-Hom coproduct comparison to zeroth cohomology.",
+   "via": [
+    "lem-weil-pbc-integral-constructible-hom-sums",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorCompMapDerivedCategoryIso",
+  "statement": "noncomputable def rightDerivedFunctorCompMapDerivedCategoryIso :\n    (F ⋙ G).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ G.mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-24",
+  "note": "Existing proved source declaration, unchanged. Ambient hypotheses: arbitrary abelian C,D,E; independent HasDerivedCategory instances; HasKInjectiveResolutions C; additive F and G; G preserves finite limits and finite colimits. Whole-blueprint searches for right derived and exact functor and DAG attachment search found no node for this comparison. No new Lean declaration, module or sorry. Read candidate Mathlib sources CategoryTheory/Functor/Derived/RightDerived.lean:150-213 and CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:47-88: the former assumes existence and the latter gives a comparison, rather than the asserted exact-postcomposition isomorphism."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T022518-L-1709497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T022518-L-1709497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

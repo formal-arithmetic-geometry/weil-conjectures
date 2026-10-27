@@ -1,0 +1,250 @@
+{
+ "id": "lem-trf-finite-monoid-stalk-data-spreading",
+ "kind": "statement",
+ "title": "Finite monoid data and equations spread from an etale stalk",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $\\bar x$ be a geometric point [def-weil-geometric-point], and let $(U,\\bar u)\\to(X,\\bar x)$ be a pointed etale neighbourhood [def-weil-pbc-geometric-stalks, def-weil-etale-morphism]. Let $F$ be a sheaf of commutative monoids on $X_{\\mathrm{Et}}$: its underlying presheaf of sets is a sheaf [def-weil-pbc-etale-sheaf-of-sets], its section sets are commutative monoids and restrictions are monoid homomorphisms. Let $P$ be a finitely generated commutative monoid, meaning that a finite tuple generates it under multiplication, with the empty tuple allowed. Write $\\operatorname{Hom}_{\\mathrm{mon}}$ for identity-preserving monoid homomorphisms. Then the germ map\n$$\\varinjlim_{(V,\\bar v)\\to(U,\\bar u),\\ V\\ \\mathrm{affine}}\\operatorname{Hom}_{\\mathrm{mon}}(P,F(V))\\ \\longrightarrow\\ \\operatorname{Hom}_{\\mathrm{mon}}(P,F_{\\bar x})$$\nis a bijection. The colimit [def-weil-pbc-category-colimit] is over the opposite of the category of affine pointed etale refinements of $(U,\\bar u)$; this category admits a small cofiltered skeleton (its opposite is filtered as in [def-weil-pbc-category-colimit]). In particular a specified homomorphism $P\\to F_{\\bar x}$ lifts on such a refinement, and two homomorphisms $P\\to F(U)$ with the same germ agree on a common such refinement. No integrality, saturation or finite generation of $F(U)$ is assumed.\n\nMore generally, for finitely many sheaves of sets $G_1,\\ldots,G_r$ on $X_{\\mathrm{Et}}$, any finite collection of elements of their geometric stalks has section representatives on a common affine pointed refinement of $U$. If finitely many pairs of sections of these sheaves on a pointed neighbourhood have equal germs, all these equalities hold on one further affine pointed refinement. This applies simultaneously to representatives already chosen. Every such refinement is locally Noetherian. For each sheaf $G$ the restriction stalk $(G|_U)_{\\bar u}$ is canonically $G_{\\bar x}$, compatibly with all representative sections and all further pointed refinements.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PQ, lemma-cofinal-etale, and definition-stalk; finite-presentation enhancement extracted by the agent from the chart-extension argument of ILO VI 3.7(a). Finite equations use categories.tex, Tag 002W, lemma-directed-commutes; local Noetherianity uses morphisms.tex, Tag 01T6, lemma-finite-type-noetherian. Monoid presentation input is lem-trf-fg-commutative-monoid-finite-presentation."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal A_U$ be the category of affine pointed refinements over $(U,\\bar u)$. First work with all pointed neighbourhoods of $\\bar u$ on $U$. This category is cofiltered by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], applied to the scheme $U$. Every object, common refinement, and equalizing refinement can be made affine by [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink], applied with the whole source as its open subset. Thus $\\mathcal A_U$ is nonempty and cofiltered. By composition and cancellation in [lem-weil-pbc-etale-composition-cancellation], a pointed etale neighbourhood on $U$ is exactly a pointed etale neighbourhood on $X$ equipped with a pointed map to $U$. Use the site universe convention [def-weil-size-convention]: the site has a small skeleton, and the lifts of the fixed geometric point and the arrows to $U$ are sets. Its pointed slice, and the full affine subcategory, therefore admit small skeletons. Replacing by these skeletons preserves the displayed refinement and equalizing properties, so all the following colimits have small filtered opposite index.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PQ, lemma-cofinal-etale; Remark Tag 03PP; affine refinement as in Tag 04HX, lemma-describe-etale-local-ring; universe convention of def-weil-size-convention."
+   }
+  },
+  {
+   "text": "For any sheaf of sets $G$, consider the germ map $\\varinjlim_{\\mathcal A_U^{op}}G(V)\\to G_{\\bar x}$. The stalk is the colimit in [def-weil-pbc-geometric-stalks]. Every element has a section representative by clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise]. Give its neighbourhood a common pointed refinement with $U$ using [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], then shrink affinely using [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink]. This proves surjectivity. If two representatives over $U$ have the same germ, clause (2) of the elementwise lemma gives a common pointed neighbourhood $W$ over $X$ on which they agree. Its two composite maps to $U$ need not agree. They are parallel pointed arrows: equalize them by the cofiltered-neighbourhood lemma and then shrink affinely. Equality remains true, and now both maps are over $U$. Clause (2) for the small filtered index $\\mathcal A_U^{op}$ proves injectivity. The same construction with base $U$ computes $(G|_U)_{\\bar u}$; composition and cancellation identify its affine indexing category with $\\mathcal A_U$. Hence its canonical identification with $G_{\\bar x}$ sends the germ of each section to that same section's germ on $X$. Every further refinement acts by restriction, so these identifications commute with all refinements.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040R, definition-stalk and following elementwise description; Tag 03PQ, lemma-cofinal-etale; Tag 04HX, affine cofinal neighbourhoods; Categories Tag 04AX."
+   }
+  },
+  {
+   "text": "Apply step 2 separately to each element in the specified finite collection of stalks. Choose one representative for each. Repeatedly take a common refinement in $\\mathcal A_U$ and restrict the previously chosen sections; after the finite list, all sections are on a single affine pointed refinement. For an equality of germs between two sections on the same pointed neighbourhood, step 2 and clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise] give one restriction arrow on which the sections are equal (start with an affine shrink if necessary). Iterate this operation over the finite list of equalities. Restrictions preserve all earlier equalities, so the last affine refinement carries them simultaneously, as well as any already chosen representatives. A prescribed additional neighbourhood can be included in the common-refinement list. Empty lists require only one affine shrink of $U$, which exists by [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, section-directed-colimits, element representatives and eventual equality; Tag 03PQ and Tag 04HX for common affine pointed refinements."
+   }
+  },
+  {
+   "text": "For the monoid sheaf $F$, define the product of two germs by choosing a common section neighbourhood and taking the germ of the section product; define the identity as the germ of the identity section. Step 3 gives common representatives, and equalities between different representatives hold after a further common refinement. Since restrictions are homomorphisms, those choices give the same product germ. Associativity, commutativity and the identity law hold on a common neighbourhood of the finitely many sections concerned and hence on germs. Thus $F_{\\bar x}$ is a commutative monoid, every section-to-germ map is a homomorphism, and germ formation commutes with every finite product and nonnegative power. In particular restriction defines the diagram $\\operatorname{Hom}_{\\rm mon}(P,F(V))$ and its germ maps form a cocone, giving the canonical map in the statement by [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040R, definition-stalk; direct construction of the monoid operations using the finite representatives and equalities established in steps 2--3."
+   }
+  },
+  {
+   "text": "Choose generators $p_1,\\ldots,p_n$ of $P$. Apply [lem-trf-fg-commutative-monoid-finite-presentation], writing its additive notation multiplicatively: there are finitely many pairs $a_j,b_j\\in\\mathbf N^n$ such that a tuple $(t_i)$ in any commutative monoid extends uniquely to a homomorphism from $P$ exactly when $\\prod_i t_i^{(a_j)_i}=\\prod_i t_i^{(b_j)_i}$ for all $j$. Given $h:P\\to F_{\\bar x}$, step 3 represents all $h(p_i)$ by sections $s_i$ on one affine pointed refinement $V$ over $U$. The two section monomials in each defining equation have equal germs, because $h$ is a homomorphism and step 4 identifies germs of monomials with monomials of germs. Step 3 makes these finitely many equations true on one further affine refinement $W$. The universal-property clause of the finite-presentation node, applied to $F(W)$, supplies a homomorphism $\\widetilde h:P\\to F(W)$ with those generator values. Its germ is $h$, since homomorphisms agreeing on the generating tuple agree on every finite product of generators, including the empty product. This proves surjectivity of the stated map.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI, 3.7(a), final chart-extension sentence on p. 75; agent supplies the finite-presentation argument using lem-trf-fg-commutative-monoid-finite-presentation."
+   }
+  },
+  {
+   "text": "Suppose $f:P\\to F(V)$ and $g:P\\to F(V')$ have equal germ homomorphisms, where $V,V'$ are affine refinements over $U$. Take a common affine pointed refinement over $U$, as in step 1, and restrict both maps to it. Their values on the finitely many generators have equal germs. Step 3 gives one further affine pointed refinement on which these values agree simultaneously. On that refinement the homomorphisms agree: every element of $P$ is a finite product of the generators and each map preserves products and identity. Clause (2) of [lem-weil-pbc-filtered-colimit-sets-elementwise], now for the diagram of homomorphism sets on $\\mathcal A_U^{op}$, says that $f$ and $g$ represent the same colimit element. Clause (1) says every colimit element has such a representative. This proves injectivity. For maps initially on $U$, first restrict them to an affine refinement and use the same argument. If $n=0$, $P$ is the identity monoid and there is exactly one homomorphism to each section monoid, so the argument also covers that case.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX, section-directed-colimits, elementwise criterion applied to the homomorphism-set diagram; generator comparison is elementary."
+   }
+  },
+  {
+   "text": "Finally each refinement $V\\to X$ is etale, so it is locally of finite presentation by [def-weil-etale-morphism]. Its affine charts are finite-variable polynomial quotients by [def-sbc-locally-finite-presentation]; in particular the coordinate algebras are generated by the images of finitely many variables, so $V\\to X$ is locally of finite type. Since $X$ is locally Noetherian, [pqf-lem-locnoeth-lft] implies that $V$ is locally Noetherian. No property of the section monoids beyond commutativity was used; the only finiteness input was the finite presentation of $P$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Tag 01TP, definition-finite-presentation; Tag 02GI, definition-etale."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-size-convention",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PQ (lemma-cofinal-etale), 040R (definition-stalk), 04HX (affine neighbourhoods), and Categories Tag 04AX. Finite-presentation elaboration of ILO VI 3.7(a), p. 75, using the existing monoid presentation node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(MonoidHom|CommMonCat).*(stalk|[Ff]initely[Pp]resent|[Ff]iltered)|stalk.*MonoidHom",
+   "results": "[grep] OK 8 hit(s); returned: Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean; No theorem for finitely generated commutative monoids and etale sheaf stalks. Abstract categorical finite presentability requires the monoid presentation and stalk identifications; ring spreading assumes a different algebraic object and germ injectivity. CommMonCat filtered-colimit construction alone does not prove the finite-presentation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented commutative monoid has its hom functor commuting with filtered colimits, so a homomorphism to an etale stalk spreads to a pointed neighborhood.",
+   "results": "[leansearch] OK 8 hit(s); returned: CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits, CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, preservesFilteredColimits_coyoneda, preservesColimit_coyoneda_of_finitePresentation, isFinitelyPresentable, CommRingCat.preservesFilteredColimits_coyoneda, CategoryTheory.ObjectProperty.isFinitelyPresentable, CategoryTheory.MorphismProperty.isFinitelyPresentable; No theorem for finitely generated commutative monoids and etale sheaf stalks. Abstract categorical finite presentability requires the monoid presentation and stalk identifications; ring spreading assumes a different algebraic object and germ injectivity. CommMonCat filtered-colimit construction alone does not prove the finite-presentation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidHom, \"stalk\"",
+   "results": "[loogle] OK 0 hit(s); No theorem for finitely generated commutative monoids and etale sheaf stalks. Abstract categorical finite presentability requires the monoid presentation and stalk identifications; ring spreading assumes a different algebraic object and germ injectivity. CommMonCat filtered-colimit construction alone does not prove the finite-presentation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a finitely generated commutative monoid into a geometric stalk of an etale sheaf of commutative monoids are represented on affine pointed etale neighborhoods, and two representatives agree after refinement exactly when their germs agree.",
+   "results": "[leanfinder] OK 8 hit(s); returned: AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.spread_out_unique_of_isGermInjective, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.spread_out_unique_of_isGermInjective', AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.spread_out_of_isGermInjective'; No theorem for finitely generated commutative monoids and etale sheaf stalks. Abstract categorical finite presentability requires the monoid presentation and stalk identifications; ring spreading assumes a different algebraic object and germ injectivity. CommMonCat filtered-colimit construction alone does not prove the finite-presentation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitelyPresentable|FinitePresentation|Presentation",
+   "results": "[grep] OK 0 hit(s); No theorem for finitely generated commutative monoids and etale sheaf stalks. Abstract categorical finite presentability requires the monoid presentation and stalk identifications; ring spreading assumes a different algebraic object and germ injectivity. CommMonCat filtered-colimit construction alone does not prove the finite-presentation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidHom|CommMonCat).*(stalk|[Ff]initely[Pp]resent)|stalk.*MonoidHom",
+   "results": "0 hits: none; inspected candidates: abstract categorical presentability assumes presentability, ring results concern rings, and CommMonCat filtered-colimit construction alone does not give finite monoid presentations or affine etale stalk refinements.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented commutative monoid homomorphisms commute with filtered colimits of monoids.",
+   "results": "8 hits: CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, MonCat.FilteredColimits.coconeMorphism, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommMonCat.FilteredColimits.colimitCommMonoid, preservesFilteredColimits_coyoneda, AddCommMonCat.FilteredColimits.forget_preservesFilteredColimits, SemiRingCat.FilteredColimits.colimitCoconeIsColimit.descMonoidHom_quotMk, SemiRingCat.FilteredColimits.colimitCoconeIsColimit.descMonoidHom; inspected candidates: abstract categorical presentability assumes presentability, ring results concern rings, and CommMonCat filtered-colimit construction alone does not give finite monoid presentations or affine etale stalk refinements.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidHom, \"stalk\"",
+   "results": "0 hits: none; inspected candidates: abstract categorical presentability assumes presentability, ring results concern rings, and CommMonCat filtered-colimit construction alone does not give finite monoid presentations or affine etale stalk refinements.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a finitely generated commutative monoid to an etale sheaf stalk extend to affine pointed etale neighborhoods and equality holds after refinement.",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.spread_out_unique_of_isGermInjective', AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq_fromSpecStalk; inspected candidates: abstract categorical presentability assumes presentability, ring results concern rings, and CommMonCat filtered-colimit construction alone does not give finite monoid presentations or affine etale stalk refinements.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinitelyPresentable_iff_preservesFilteredColimits|CommMonCat|preservesFilteredColimits_coyoneda",
+   "results": "3 hits: Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean; inspected candidates: abstract categorical presentability assumes presentability, ring results concern rings, and CommMonCat filtered-colimit construction alone does not give finite monoid presentations or affine etale stalk refinements.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generators and finitely many defining relations imply that the covariant Hom functor of a commutative monoid preserves filtered colimits.",
+   "results": "8 hits: CommMonCat.FilteredColimits.forget_preservesFilteredColimits, preservesFilteredColimits_coyoneda, CommMonCat.FilteredColimits.forget₂Mon_preservesFilteredColimits, CommRingCat.preservesFilteredColimits_coyoneda, preservesColimit_coyoneda_of_finitePresentation, AddCommMonCat.FilteredColimits.forget_preservesFilteredColimits, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, MonCat.FilteredColimits.forget_preservesFilteredColimits; inspected candidates: abstract categorical presentability assumes presentability, ring results concern rings, and CommMonCat filtered-colimit construction alone does not give finite monoid presentations or affine etale stalk refinements.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-log-stalk-chart-spreading",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, monoidal-resolution ancestry via the sharp log chart; ILO VI 3.7(a), final sentence extending the stalk splitting to a chart: finite presentation, common representatives, equations and canonical stalks (old spreading steps 1, 2 and the finite equalities in 6).",
+   "via": [
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-monoid-stalk-data-spreading",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim and split the proof into affine filtered indexing, canonical stalk comparison with explicit equalization of the two maps to U, finite data and equations, monoid operations, finite-presentation lifting, generatorwise injectivity, and local Noetherianity. Reused all inputs; no new nodes. Corrected source precision by identifying definition-stalk as Tag 040R.",
+  "blueprint": "Current main-20261015 lem-trf-local-term-locality proof (1)--(2), specialization to the normal cone; the recorded alteration/log-chart ancestry reaches ILO VI 3.7(a), p. 75, whose chart-extension sentence is made precise by this finite stalk-data lemma. The parent fine-log chart node uses this item for its finite monoid data and equations. No change to the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-fb64562fa",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-fb64562fa (reviewer sub-agent of L); spot-checked: Read the whole item and every cited statement. Delivery is the item plus the report only: no new nodes, no repair note (ordinary split, not a 2026-10-21 re-split). Statement unchanged and correct: a finitely generated commutative monoid is finitely presented, so Hom(P,-) commutes with filtered colimits; affine pointed refinements of an etale (U,u) are cofinal. Tested P trivial, N^n, Z/m and the idempotent monoid {1,e}. Step 1: neighbourhoods over U are the same as neighbourhoods over X with a map to U (etale composition (2) and cancellation (3)); the category stays cofiltered after affine shrinking; small by the size convention. Step 2: the two composites W->U are equalized by the cofiltered-equalizer clause before clause (2) is applied, which handles the subtle point correctly; this gives the restriction-stalk identification. Step 3: finite representatives and equalities by iterated refinement and clause (3); empty lists handled. Step 4: monoid structure on the stalk, correctly marked elementary. Step 5: uses the universal-property clause of the finite-presentation node, not its proof. Step 6: generatorwise injectivity, including non-affine U and n=0. Step 7: etale => lfp => lft, then 01T6. Every off-unit citation is a Mathlib leaf or a definition, so no tool_uses are needed; proof_deps equals the union of uses; no SGA. Stacks tags checked against tags/tags: 03PQ, 040R, 04HX, 002W, 04AX, 01T6. ILO VI 3.7(a) chart sentence read; proof correctly marked agent-written. Duplicate search finds only module/Zariski/ringed-site analogues. Advisory only: G|_U has no definition node in stmt_deps, but step 2 spells it out. The parent lem-trf-fine-log-stalk-chart-spreading uses the lift, refinement and equality clauses, and the item states all three."
+ }
+}

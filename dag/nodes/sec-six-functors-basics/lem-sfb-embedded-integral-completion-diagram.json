@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-embedded-integral-completion-diagram",
+ "kind": "lemma",
+ "title": "Scalar-normalized embedded constant completion diagram",
+ "statement": "Fix the embedded coefficient data of [def-sfb-embedded-integral-model-coefficients]: prime ell, finite intermediate E, maximal-ideal generator pi and Noetherian X. On the coefficient-sized small pro-etale site put A = ULift O_E and I = (ULift pi). Let phi, q and qB be the actual embedded scalar, constant first residue and completed first residue maps. There are ring-sheaf isomorphisms a from the source of phi to the constant A sheaf, b from its target to the inverse limit of the constant A/I^(n+1) sheaves, c from the target of q to the constant A/I sheaf and d from the target of qB to that same sheaf. They satisfy phi;b = a;coefficientMap, q;c = a;quotient_0 and qB;d = b;projection_0. No kernel, surjectivity, ideal-generation or flatness assertion is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Integral-models proof paragraph (1): constant coefficients and the projection-normalized integral limit; Stacks Tag 093M."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical comparison between the abelian sheafification of a constant ring presheaf and the abelian sheaf underlying the constant commutative ring sheaf. Combine its inverse with constantSchemeIso and its point version. Transport monoid structures using the monoidality of constantSchemeIso. Reconstruct the commutative section ring by the identity on sections, and use the AsSmall continuous-pushforward/sheafification comparison to obtain the small-site constant ring. Naturality of these comparisons identifies every discrete ring map, in particular the first residue quotient.",
+   "uses": [
+    "def-sfb-embedded-integral-model-coefficients",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite discrete ring, compare the actual constant-to-continuous map with the sheafification of the locally bijective constant-function presheaf map after precomposing the sheafification unit; this proves that the actual map is invertible. Its naturality is the naturality of constant functions under continuous ring maps. The residue quotients are finite by completedCondensedIntegral and discrete because the maximal ideal powers are open in the compact integer ring; compactness is PadicAlgCl.compactSpace_integers from the adopted source library. Form the small-site commutative-ring cone whose legs are the prescribed reductions. Its underlying abelian-presheaf cone is the AsSmall restriction of the limiting cone from the projection-normalized completedCondensedIntegral. The underlying-abelian-presheaf functor preserves limits and reflects isomorphisms, hence reflects this limit. Compare each residue with the constant quotient using the explicit ULift quotient equivalence. These natural comparisons identify the towers. Uniqueness of the limit gives the completed comparison with all projection equations. Naturality of constant functions with the quotient maps and limit extensionality gives the scalar equation. The discrete quotient equation and the level-zero projection give the other two equations.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "def-sfb-embedded-integral-model-coefficients",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F9",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Integral-models proof paragraph (1): constant coefficients and the projection-normalized integral limit; Stacks Tag 093M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous ring coefficient sheaf is the inverse limit of its finite constant quotient rings, with compatible scalar and residue maps",
+   "results": "Profinite.asLimitCone, ring limits and sheaf module limits; no embedded coefficient map comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use completedCondensedIntegral; the remaining obligation is its scalar-compatible section-ring transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf quotient by a nonzero principal ideal has kernel generated by the global constant section",
+   "results": "Local generators, presentations and scheme ideal-sheaf kernels; no embedded map normalization.",
+   "date": "2026-10-25",
+   "verdict": "Generic kernel theory already exists in ConstantCompletionEquivalence, so do not duplicate it."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.mk_ker",
+   "results": "Unknown identifier; source search found Ideal.mk_ker and the existing generic completion formulas.",
+   "date": "2026-10-25",
+   "verdict": "Algebraic quotient kernels do not normalize inverse image and reconstruction."
+  },
+  {
+   "tool": "grep",
+   "query": "constantToContinuous|constantSection_principal_quotient|sectionRingSheaf",
+   "results": "Remote grep found no hits. Local rg searches and full-source reads found CompletedCondensedCoefficients, IntegralCoefficientExtComparison, ProEtaleIntegralCoefficientLimit, IntegralConstantCompletion, FiniteDiscreteSchemeRing, ContinuousCoefficientModuleEncoding and CompletedConstantAlgebraFlatQuotients. None states the actual embedded reconstructed scalar/residue squares. Blueprint searches for constant completion and 093M found zero hits; integral coefficients found 28 nodes, including the spectral constant specialization already read, and none duplicates the diagram.",
+   "date": "2026-10-25",
+   "verdict": "Separate the map comparison from the proved principal-kernel and surjectivity argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsEmbeddedResidueSections",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Proof paragraph (1), identifying constant coefficients and their completed positive quotient tower, with the actual scalar and residue maps.",
+   "via": [
+    "lem-sfb-embedded-integral-residue-sections",
+    "lem-sfb-embedded-integral-coefficient-kernels",
+    "lem-sfb-embedded-integral-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralModelsEmbeddedCompletionDiagram",
+  "file": "lean/Sheaf/Paper/IntegralModelsEmbeddedCompletionDiagram.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralModelsEmbeddedCompletionDiagram",
+  "statement": "theorem integralModelsEmbeddedCompletionDiagram\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (X : Scheme.{u}) [IsNoetherian X] :\n    let J := Scheme.coefficientProEtaleModelTopology.{u, u} X\n    let A := ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)\n    let I : Ideal A := Ideal.span {ULift.up π}\n    let φ := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.scalarMap ℓ E X)\n    let q := IntegralModelsStacks.smallMap X (IntegralModelsEmbedded.residueMap ℓ E π X)\n    let qB := IntegralModelsStacks.smallMap X\n      (completedCoefficientMap X (completedReduction ℓ E π 0)).hom\n    ∃ (a : (Arrow.mk φ).left ≅ ConstantCompletion.constant J A)\n      (b : (Arrow.mk φ).right ≅ ConstantCompletion.completed J A I)\n      (c : (Arrow.mk q).right ≅ ConstantCompletion.finite J A I 0)\n      (d : (Arrow.mk qB).right ≅ ConstantCompletion.finite J A I 0),\n      φ ≫ b.hom = a.hom ≫ ConstantCompletion.coefficientMap J A I ∧\n      q ≫ c.hom = a.hom ≫ ConstantCompletion.quotient J A I 0 ∧\n      qB ≫ d.hom = b.hom ≫ ConstantCompletion.projection J A I 0",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162248-L-390709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261026T001531-L-7441",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

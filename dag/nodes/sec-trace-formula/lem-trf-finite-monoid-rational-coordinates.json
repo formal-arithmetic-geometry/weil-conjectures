@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-finite-monoid-rational-coordinates",
+ "kind": "statement",
+ "title": "Finite monoid generators in rational tensor coordinates",
+ "statement": "Let $G$ be an abelian group with a finite integral basis $e_1,\\ldots,e_r$, meaning that every $g\\in G$ has unique coordinates $g=\\sum_k\\lambda_k(g)e_k$ with $\\lambda_k(g)\\in\\mathbf Z$. Let $p_1,\\ldots,p_m\\in G$ generate $G$ as a group, meaning that every element is an integer combination of the $p_j$, and put $P=\\{\\sum_j a_jp_j:a_j\\in\\mathbf N\\}$. Set $V=G\\otimes_{\\mathbf Z}\\mathbf Q$ [def-weil-pbc-module-tensor-product], with its rational vector-space structure from extension of scalars [def-weil-module-base-change], and $i(g)=g\\otimes1$. Let $C$ be the set of all finite sums $\\sum_\\ell q_\\ell i(u_\\ell)$ with $u_\\ell\\in P$ and $q_\\ell\\in\\mathbf Q_{\\ge0}$. For each $k$ there is a unique $\\mathbf Q$-linear map $L_k:V\\to\\mathbf Q$ with $L_k(g\\otimes q)=q\\lambda_k(g)$, and every $x\\in V$ has the unique expansion $x=\\sum_k L_k(x)i(e_k)$. Moreover $C=\\{\\sum_j q_ji(p_j):q_j\\in\\mathbf Q_{\\ge0}\\}$. For every integer matrix $(b_{kj})$ satisfying $e_k=\\sum_j b_{kj}p_j$, and every $x\\in V$, put $c_j=\\sum_k L_k(x)b_{kj}$. Then $$x=\\sum_j\\max(c_j,0)i(p_j)-\\sum_j\\max(-c_j,0)i(p_j).$$ Empty bases and empty generating families are allowed; when $m=0$, $G=V=0$ and the displayed sums are zero.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Parent steps 3--4: tensor coordinate extensions and finite generator substitution; ILO Expose VIII Remark 3.1.29, printed p. 103, combinatorial fan motivation, in the inherited locality proof (1)--(2) ancestry. Agent extraction of the parent argument; ILO supplies motivation, not a proof of this precise algebraic statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Regard $G$ as a $\\mathbf Z$-module by integer multiplication. Uniqueness of the given integral expansion implies $\\lambda_k(g+h)=\\lambda_k(g)+\\lambda_k(h)$ and $\\lambda_k(ng)=n\\lambda_k(g)$: adding the expansions, or multiplying one by $n\\in\\mathbf Z$, gives the corresponding expansion, so uniqueness identifies its coefficients. In particular $\\lambda_k(e_h)=\\delta_{kh}$. Thus $\\beta_k(g,q)=q\\lambda_k(g)$ is $\\mathbf Z$-bilinear. Apply the tensor universal property of [def-weil-pbc-module-tensor-product] to obtain the unique $\\mathbf Z$-linear map $L_k:V\\to\\mathbf Q$ with $L_k(g\\otimes q)=q\\lambda_k(g)$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+   }
+  },
+  {
+   "text": "This $L_k$ is $\\mathbf Q$-linear. For fixed $a\\in\\mathbf Q$, the two maps $x\\mapsto L_k(ax)$ and $x\\mapsto aL_k(x)$ are $\\mathbf Z$-linear. On $g\\otimes q$ they agree, because the action in [def-weil-module-base-change] gives $a(g\\otimes q)=g\\otimes aq$, and both values are $aq\\lambda_k(g)$. Pure tensors generate $V$ as a $\\mathbf Z$-module by [def-weil-pbc-module-tensor-product], so the maps agree everywhere. Uniqueness among $\\mathbf Q$-linear maps with the required pure-tensor values follows from the same generation assertion, since a $\\mathbf Q$-linear map is $\\mathbf Z$-linear.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+   }
+  },
+  {
+   "text": "Put $E(x)=\\sum_k L_k(x)i(e_k)$, a $\\mathbf Q$-linear endomorphism of $V$. Bilinearity in [def-weil-pbc-module-tensor-product] and the scalar action in [def-weil-module-base-change] give, for each pure tensor, $$g\\otimes q=\\sum_k e_k\\otimes(\\lambda_k(g)q)=\\sum_k q\\lambda_k(g)i(e_k)=E(g\\otimes q).$$ Pure-tensor generation now gives $E(x)=x$ for every $x$. If also $x=\\sum_k d_ki(e_k)$ with rational $d_k$, applying $L_h$ gives $L_h(x)=\\sum_k d_k\\lambda_h(e_k)=d_h$. Thus the expansion is unique.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+   }
+  },
+  {
+   "text": "For $x\\in C$ choose a defining finite expression $x=\\sum_\\ell q_\\ell i(u_\\ell)$, and write $u_\\ell=\\sum_j a_{\\ell j}p_j$ with $a_{\\ell j}\\in\\mathbf N$, as allowed by the definition of $P$. Bilinearity and extension of scalars give $$x=\\sum_\\ell\\sum_j q_\\ell a_{\\ell j}i(p_j)=\\sum_j\\left(\\sum_\\ell q_\\ell a_{\\ell j}\\right)i(p_j).$$ Each parenthesized coefficient is nonnegative rational, since every summand is. Conversely $p_j\\in P$ (its coefficient vector has a single $1$), so any $\\sum_j q_ji(p_j)$ with $q_j\\ge0$ is a defining expression for $C$. The zero expression is the empty sum. This proves the cone equality without a cone-hull theorem.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+   }
+  },
+  {
+   "text": "Fix any integer matrix in the statement. Applying the additive map $i$ to its row identities gives $i(e_k)=\\sum_j b_{kj}i(p_j)$. Substitute in the expansion already proved and reorder the finite sums: $$x=\\sum_k L_k(x)\\sum_j b_{kj}i(p_j)=\\sum_j\\left(\\sum_k L_k(x)b_{kj}\\right)i(p_j)=\\sum_j c_ji(p_j).$$ For each rational $c$, $c=\\max(c,0)-\\max(-c,0)$: if $c\\ge0$ the right side is $c-0$, and if $c\\le0$ it is $0-(-c)$. Substitute this identity for each $c_j$ and distribute the finite sum to obtain exactly the asserted difference. Its two sums have nonnegative rational coefficients. Existence of such a matrix, when needed, follows by applying the group-generation hypothesis separately to each $e_k$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+   }
+  },
+  {
+   "text": "No argument requires a nonempty index set. If $r=0$, the given integral expansion says every $g$ is the empty sum $0$; the expansion of Step 3 likewise says every $x\\in V$ is $0$. If $m=0$, the group-generation hypothesis says every $g$ is an empty integer combination, so $G=0$; hence every pure tensor is $0$, and pure-tensor generation in [def-weil-pbc-module-tensor-product] gives $V=0$. The only natural combination defining $P$ is $0$, so $C=\\{0\\}$; both sides of the cone equality and the signed formula are empty sums. If $r=0$ and $m>0$, all $p_j$ are zero and $c_j=0$, so the same conclusions hold.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00CX, lemma-tensor-product and its proof (universal property and pure-tensor generators); agent finite-coordinate and finite-sum calculations using Tag 00CV, section-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange_repr|baseChange_apply|mem_hull_iff|hull.*(sum|addSubmonoid)|span.*hull",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"grep\", \"query\": \"baseChange_repr|baseChange_apply|mem_hull_iff|hull.*(sum|addSubmonoid)|span.*hull\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/Haar/OfBasis.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/Analysis/Convex/Cone/TensorProduct.lean\", \"Mathlib/Analysis/Convex/Cone/TensorProduct.lean\", \"Mathlib/Analysis/Convex/Cone/TensorProduct.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/Analysis/Convex/Visible.lean\"], \"digest\": \"80b1c71cae19e9ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; none states the full node or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite basis of an abelian group extends to rational tensor coordinates, and finite monoid generators give a spanning rational cone",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"leansearch\", \"query\": \"A finite basis of an abelian group extends to rational tensor coordinates, and finite monoid generators give a spanning rational cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instFintypeElemExtendOfFiniteSubtypeMemSubmoduleSpan\", \"Module.Basis.extendOfIsLattice\", \"AddGroup.fg_iff_addMonoid_fg\", \"finsetBasisOfTopLeSpanOfCardEqFinrank\", \"basis_finite_of_finite_spans\", \"AddMonoid.FG.to_moduleFinite_int\", \"Module.basisOfFiniteTypeTorsionFree\", \"Module.Finite.of_basis\"], \"digest\": \"b716361377808af6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; none states the full node or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Basis",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Basis'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange_repr_tmul|baseChange_apply|map_repr",
+   "results": "{\"t\": \"2026-10-22T06:45:39Z\", \"tool\": \"grep\", \"query\": \"baseChange_repr_tmul|baseChange_apply|map_repr\", \"sub\": \"LinearAlgebra/TensorProduct/Basis.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"68\", \"73\"], \"digest\": \"2d5cc5baf120c625\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match: read Mathlib/LinearAlgebra/TensorProduct/Basis.lean:62-74; baseChange coordinates alone do not identify the finite cone on arbitrary group generators."
+  },
+  {
+   "tool": "grep",
+   "query": "hull.*(closure|span)|mem_hull|hull_eq|isGenerating",
+   "results": "{\"t\": \"2026-10-22T06:45:39Z\", \"tool\": \"grep\", \"query\": \"hull.*(closure|span)|mem_hull|hull_eq|isGenerating\", \"sub\": \"Geometry/Convex/Cone\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/TensorProduct.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\"], \"digest\": \"575428a23140fc28\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match: read PointedCone.hull and mem_hull_set, Pointed.lean:190-208. They describe finite conical sums but do not compare monoid generators with a tensor basis or produce the signed coefficient formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite integral basis of an abelian group and finite group generators of a submonoid, rationalization has coordinate functionals, and the nonnegative rational cone on the monoid is generated by those generators and spans by differences",
+   "results": "{\"t\": \"2026-10-22T06:45:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite integral basis of an abelian group and finite group generators of a submonoid, rationalization has coordinate functionals, and the nonnegative rational cone on the monoid is generated by those generators and spans by differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.mem_rat_span_latticeBasis\", \"NumberField.canonicalEmbedding.mem_rat_span_latticeBasis\", \"NumberField.mixedEmbedding.mem_span_fractionalIdealLatticeBasis\", \"NumberField.Units.dirichletUnitTheorem.unitLattice_span_eq_top\", \"NumberField.mixedEmbedding.mem_span_latticeBasis\", \"BoxIntegral.unitPartition.mem_smul_span_iff\", \"NumberField.Units.span_basisOfIsMaxRank\", \"NumberField.canonicalEmbedding.mem_span_latticeBasis\"], \"digest\": \"12698e0a44ed5d4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; none states the full node or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Module.Basis",
+   "results": "{\"t\": \"2026-10-22T06:45:41Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Basis.baseChange\", \"TensorProduct.equivFinsuppOfBasisLeft\", \"TensorProduct.equivFinsuppOfBasisRight\", \"TensorProduct.eq_repr_basis_left\", \"TensorProduct.eq_repr_basis_right\", \"Module.Basis.tensorProduct\", \"TensorProduct.sum_tmul_basis_left_eq_zero\", \"TensorProduct.sum_tmul_basis_right_eq_zero\"], \"digest\": \"d6faee65f704a50e\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match: Module.Basis.baseChange and TensorProduct.eq_repr_basis_left give tensor coordinates, but not the finite monoid-generator cone comparison or signed coefficient formula; the full node is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite Z basis e of an abelian group G and elements p generating G as a group, express every x in G tensor Q as a difference of nonnegative rational combinations of the p, with coefficients obtained from the basis coordinates",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"leanfinder\", \"query\": \"Given a finite Z basis e of an abelian group G and elements p generating G as a group, express every x in G tensor Q as a difference of nonnegative rational combinations of the p, with coefficients obtained from the basis coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.basisModTorsion\", \"NumberField.Units.fun_eq_repr\", \"NumberField.mixedEmbedding.mem_rat_span_latticeBasis\", \"NumberField.canonicalEmbedding.mem_rat_span_latticeBasis\", \"Module.Basis.addSubgroupOfClosure_repr_apply\", \"NumberField.Units.instFreeIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion\", \"NumberField.Units.fundSystem_mk\", \"ModN.basis\"], \"digest\": \"efa5285591c6ea87\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; none states the full node or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange_repr_tmul|baseChange_apply|equivFinsuppOfBasisLeft",
+   "results": "{\"t\": \"2026-10-23T04:15:50Z\", \"tool\": \"grep\", \"query\": \"baseChange_repr_tmul|baseChange_apply|equivFinsuppOfBasisLeft\", \"sub\": \"LinearAlgebra/TensorProduct/Basis.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"68\", \"73\", \"130\", \"134\", \"135\"], \"digest\": \"98c840861c2f777a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis and coordinate results cover only the tensor-coordinate clause, not the cone equality and explicit signed generator formula; read TensorProduct/Basis.lean:62-74,130-142."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational tensor basis coordinates and nonnegative rational combinations of generators of an additive monoid",
+   "results": "{\"t\": \"2026-10-23T04:15:51Z\", \"tool\": \"leansearch\", \"query\": \"Rational tensor basis coordinates and nonnegative rational combinations of generators of an additive monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.single\", \"StarAddMonoid.toStarModuleNNRat\", \"Module.Basis.tensorAlgebra\", \"PiTensorProduct.tprodCoeff\", \"TensorProduct.instRepr\", \"TensorProduct.addMonoid\", \"TensorProduct.tmul\", \"DivisibleHull.qsmul_of_nonneg\"], \"digest\": \"43ae234a3a4871d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern number-field lattices, tensor definitions, or tactics; none states the full item or is a one-line specialization to it."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Module.Basis",
+   "results": "{\"t\": \"2026-10-23T04:15:51Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Basis.baseChange\", \"TensorProduct.equivFinsuppOfBasisLeft\", \"TensorProduct.equivFinsuppOfBasisRight\", \"TensorProduct.eq_repr_basis_left\", \"TensorProduct.eq_repr_basis_right\", \"Module.Basis.tensorProduct\", \"TensorProduct.sum_tmul_basis_left_eq_zero\", \"TensorProduct.sum_tmul_basis_right_eq_zero\"], \"digest\": \"d6faee65f704a50e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis and coordinate results cover only the tensor-coordinate clause, not the cone equality and explicit signed generator formula; read TensorProduct/Basis.lean:62-74,130-142."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite integral basis of an abelian group gives rational linear coordinates on its tensor product with Q, whose positive cone on a finitely generated monoid is generated by the monoid generators",
+   "results": "{\"t\": \"2026-10-23T04:15:53Z\", \"tool\": \"leanfinder\", \"query\": \"A finite integral basis of an abelian group gives rational linear coordinates on its tensor product with Q, whose positive cone on a finitely generated monoid is generated by the monoid generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_eq\", \"NumberField.mixedEmbedding.fundamentalCone.integerSet\", \"NumberField.mixedEmbedding.fundamentalCone.exists_unitSMul_mem_integerSet\", \"NumberField.mixedEmbedding.mem_rat_span_latticeBasis\", \"NumberField.canonicalEmbedding.mem_rat_span_latticeBasis\", \"NumberField.Units.dirichletUnitTheorem.unitLattice_span_eq_top\", \"NumberField.Units.span_basisOfIsMaxRank\", \"NumberField.mixedEmbedding.fundamentalCone.completeBasis\"], \"digest\": \"29c10d43f202f7d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern number-field lattices, tensor definitions, or tactics; none states the full item or is a one-line specialization to it."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_hull|hull_eq|isGenerating",
+   "results": "{\"t\": \"2026-10-23T04:16:42Z\", \"tool\": \"grep\", \"query\": \"mem_hull|hull_eq|isGenerating\", \"sub\": \"Geometry/Convex/Cone\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\"], \"digest\": \"69dec5f9712c9e07\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PointedCone.mem_hull_set (Pointed.lean:201) describes conical sums but does not compare the monoid generators or give the signed coefficient formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Express a rational linear combination of finitely many group generators as a difference of two nonnegative rational linear combinations using max c 0 and max negative c 0",
+   "results": "{\"t\": \"2026-10-23T04:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"Express a rational linear combination of finitely many group generators as a difference of two nonnegative rational linear combinations using max c 0 and max negative c 0\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.LinearCombination'.tacticLinear_combination2____\", \"Mathlib.Tactic.LinearCombination'.linearCombination'\", \"Mathlib.Tactic.LinearCombination.linearCombination\", \"Mathlib.Tactic.LinearCombination'.expandLinearCombo\", \"Mathlib.Tactic.Linarith.SimplexAlgorithm.postprocess\", \"Mathlib.Tactic.LinearCombination.expandLinearCombo\", \"Mathlib.Tactic.LinearCombination'.Expanded\", \"RootPairing.Base.exists_root_eq_sum_int\"], \"digest\": \"fd5cbe793cdf75cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern number-field lattices, tensor definitions, or tactics; none states the full item or is a one-line specialization to it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-sharp-cone-lattice-intersection",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Parent steps 3--4: tensor coordinate extensions and finite generator substitution; ILO Expose VIII Remark 3.1.29, printed p. 103, combinatorial fan motivation, in the inherited locality proof (1)--(2) ancestry.",
+   "via": [
+    "lem-trf-sharp-cone-lattice-intersection",
+    "lem-trf-sharp-fs-orthant-embedding",
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-monoid-rational-coordinates",
+  "worker": "stage1",
+  "summary": "Q83: retained the statement and prior searches; gave the coordinate maps from the tensor universal property, checked rational linearity on pure tensors, proved reconstruction and uniqueness, expanded monoid sums and substituted the integer matrix with explicit positive/negative parts. All inputs are clauses of two existing Mathlib definition nodes; no new node is needed. Checked empty bases, empty generators and redundant zero generators.",
+  "blueprint": "Realizes the inherited locality proof (1)--(2) algebraic ancestry, specifically parent lem-trf-sharp-cone-lattice-intersection steps 3--4, tensor coordinate extension and finite-generator substitution. The locality blueprint itself contains no separate statement of this algebraic calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-e8e68bf8d",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-e8e68bf8d (reviewer sub-agent of L); spot-checked: Q83 e8e68bf8: one commit, item node plus report only, no new nodes. The statement is byte-identical to the Q62 version (checked against all four Q62 run snapshots) and the stmt_deps are unchanged. Every clause the parent lem-trf-sharp-cone-lattice-intersection uses in steps 3 and 5 is in the statement: L_k(g⊗1)=λ_k(g) for injectivity, the cone equality, the signed formula with b_{kj}, and the empty case. The six steps cite only def-weil-pbc-module-tensor-product (universal property and pure-tensor generation, both in its statement; Stacks algebra.tex lemma-tensor-product 00CX, l.1716ff, read) and def-weil-module-base-change (action a(m⊗b)=m⊗ab, the same G⊗Q order). Both are Mathlib-status nodes, so there is no route issue. Step checks: 1) λ_k is additive by uniqueness of the expansion, so the bilinear map gives L_k. 2) Q-linearity: both maps are Z-linear and agree on generators. 3) E=id on pure tensors; uniqueness via L_h(i(e_k))=δ. 4) i(u)=Σa_j i(p_j) and nonnegative coefficients; the converse holds since p_j∈P. 5) Row substitution, sum interchange and c=max(c,0)−max(−c,0) in both sign cases. 6) Cases m=0 (G=V=0), r=0, and r=0 with m>0. Small cases tested: G=Z with p=(−1) and with p=(2,3), b=(−1,1); redundant zero generators. The elementary marking is justified. Duplicates ruled out: lem-sc-tensor-product-free-basis (Q is not free over Z), rational-cone-simultaneous-lifts, gordan-rational-cone-finite. ILO VIII Rem. 3.1.29 p.103 was read in the live literature directory; it is motivation only, as the node says, and proof_origin is agent. Searches recorded: LeanSearch, LeanFinder, Loogle, grep. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.FiniteMonoidRationalCoordinates",
+  "declaration": "TensorProduct.finite_monoid_rational_coordinates",
+  "file": "lean/Sheaf/GroupTheory/FiniteMonoidRationalCoordinates.lean",
+  "statement": "theorem finite_monoid_rational_coordinates (G : Type u) [AddCommGroup G] (r m : ℕ) (e : Module.Basis (Fin r) ℤ G) (p : Fin m → G) (hp : ∀ g : G, ∃ a : Fin m → ℤ, g = ∑ j, a j • p j) (P : Set G) (hP : P = {g | ∃ a : Fin m → ℕ, g = ∑ j, a j • p j}) (C : Set (TensorProduct ℤ ℚ G)) (hC : C = {x | ∃ (n : ℕ) (v : Fin n → G) (q : Fin n → ℚ), (∀ l, v l ∈ P) ∧ (∀ l, 0 ≤ q l) ∧ x = ∑ l, q l ⊗ₜ[ℤ] v l}) : ∃ L : Fin r → (TensorProduct ℤ ℚ G →ₗ[ℚ] ℚ), (∀ (k : Fin r) (g : G) (q : ℚ), L k (q ⊗ₜ[ℤ] g) = q * (e.repr g k : ℚ)) ∧ (∀ (k : Fin r) (L' : TensorProduct ℤ ℚ G →ₗ[ℚ] ℚ), (∀ (g : G) (q : ℚ), L' (q ⊗ₜ[ℤ] g) = q * (e.repr g k : ℚ)) → L' = L k) ∧ (∀ x : TensorProduct ℤ ℚ G, x = ∑ k, L k x • ((1 : ℚ) ⊗ₜ[ℤ] e k)) ∧ (∀ (x : TensorProduct ℤ ℚ G) (d : Fin r → ℚ), x = ∑ k, d k • ((1 : ℚ) ⊗ₜ[ℤ] e k) → ∀ k, d k = L k x) ∧ C = {x | ∃ q : Fin m → ℚ, (∀ j, 0 ≤ q j) ∧ x = ∑ j, q j ⊗ₜ[ℤ] p j} ∧ (∀ b : Fin r → Fin m → ℤ, (∀ k, e k = ∑ j, b k j • p j) → ∀ x : TensorProduct ℤ ℚ G, x = (∑ j, max (∑ k, L k x * (b k j : ℚ)) 0 ⊗ₜ[ℤ] p j) - ∑ j, max (-(∑ k, L k x * (b k j : ℚ))) 0 ⊗ₜ[ℤ] p j) ∧ (m = 0 → (∀ g : G, g = 0) ∧ (∀ x : TensorProduct ℤ ℚ G, x = 0))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the dependency-recorded extension-of-scalars order ℚ ⊗[ℤ] G, canonically identified with G ⊗[ℤ] ℚ by TensorProduct.comm ℤ G ℚ; q ⊗ g renders g ⊗ q. No mathematical statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c52c2bd00",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: basis via Module.Basis (Fin r) ℤ G / e.repr; ℤ-generation hp; P (ℕ-combos) and C (finite nonneg rational sums, n=0 allowed) via defining equations; L : Fin r → V →ₗ[ℚ] ℚ with pure-tensor values + per-k uniqueness; reconstruction + coefficient uniqueness; cone equality; signed max-formula for every integer matrix b (parse checked); m=0 ⇒ G=V=0. ℚ⊗[ℤ]G order is the recorded def-weil-module-base-change convention and the landed parent SharpConeLatticeIntersection's. Edge cases r=0, m=0, r=0<m fine. lean.statement verbatim; only lean field differs from live; no module collision; sorry-only theorem, docstrings with source and blueprint, six proof steps; Mathlib-only imports; report has Worker report + Second reading by N9 (a self-reread, labelled as such). No findings; not recompiled (no change)."
+ }
+}

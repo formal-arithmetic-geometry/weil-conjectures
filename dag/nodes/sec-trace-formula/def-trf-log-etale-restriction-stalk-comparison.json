@@ -1,0 +1,113 @@
+{
+ "id": "def-trf-log-etale-restriction-stalk-comparison",
+ "kind": "definition",
+ "title": "Etale prelog restriction and canonical strict-local ring comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with its small etale site [def-weil-pbc-etale-site], and let $(M,\\alpha)$ be a prelog structure, namely a sheaf of commutative monoids with structural homomorphism to the multiplicative structure sheaf, as in [def-trf-fs-log-blowup]. For an etale object $e:U\\to X$, define $M|_U$ by the slice restriction [def-pur-localized-ringed-site], transported through the canonical equivalence $X_{\\mathrm{et}}/U\\simeq U_{\\mathrm{et}}$. On an etale test $V\\to U$, its monoid sections are $M(V\\to U\\to X)$, its restrictions are those of $M$, and its structural homomorphism is the original $\\alpha$ on the same scheme $V$.\n\nFor a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point], let $A_{\\bar x}$ be the structure-ring geometric stalk and let its germs be the canonical pointed-neighbourhood coprojections [def-trf-log-regular-pair] [def-weil-pbc-geometric-stalks]. Define $c_{X,\\bar x}:A_{\\bar x}\\xrightarrow{\\sim}A^{\\mathrm{sh}}_{X,\\bar x}$, where the target is the small affine pointed-neighbourhood ring colimit [def-weil-pbc-strict-henselization-limit], to be the canonical colimit comparison induced by the initial inclusion of affine pointed neighbourhoods and the small representative equivalence. Thus its inverse carries every affine representative's colimit coprojection to the same scheme's structure-ring germ. This is the canonical comparison, not an arbitrary isomorphism of the two rings.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-trf-fs-log-blowup",
+  "def-pur-localized-ringed-site",
+  "def-weil-geometric-point",
+  "def-trf-log-regular-pair",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1--1.2 and 1.6, printed pp.69--70; VIII 3.3.8, p.107; slice localization and geometric structure-ring stalk/affine strict-henselization comparison (Stacks Tags 00Y0, 03EH)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical restriction of an etale prelog sheaf to the slice site and affine-colimit comparison for its geometric structure ring stalk",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.LocallyRingedSpace) {f : U ⟶ X.toTopCat}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (X_1 : (TopologicalSpace.Opens ↑U)ᵒᵖ),\\n  (X.restrict h).presheaf.obj X_1 = X.presheaf.obj (Opposite.op (⋯.functor.obj (Opposite.unop X_1)))\", \"doc\": \"For a locally ringed space $X$, an open subset $U$ of $X$, and an open embedding $f: U \\to X$, the presheaf of the restricted locally ringed space over $U$ is obtained by restricting the original presh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \"(F : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat) (α : (AffineZariskiSite.toOpensFunctor X).op ⋙ X.presheaf ⟶ F)\\n  (H : PreservesLocalization F α) (U : X.AffineZariskiSite) :\\n  haveI := H.isLocallyDirected\\n  haveI := H.isOpenImmersion\\n  (colimit.desc (F.rightOp ⋙ Scheme.Spec)\\n        ⟨X, Functor.whiskerRigh\", \"doc\": \"For a scheme $X$, a functor $F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing}$ preserving localization with natural transformation $\\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F$, the preimage of an affine\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": IsIso ((X.ofRestrict h).stalkMap x)\", \"doc\": \"Let $X$ be a locally ringed space and $U$ an open subset of $X$. Let $X|_U$ be the restriction of $X$ to $U$. The canonical inclusion morphism $i: X|_U \\\\to X$ induces for each point $x \\\\in U$ a ring h\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrict\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{U : TopCat} (X : LocallyRingedSpace.{u}) {f : U ⟶ X.toTopCat} (h : IsOpenEmbedding f) : LocallyRingedSpace\", \"doc\": \"Given a locally ringed space $ X $, an open subset $ U $ of $ X $, and an open embedding $ f: U \\to X $, the restriction of $ X $ to $ U $ constructs a new locally ringed space over $ U $. This space h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"smoothSheafCommRing.forgetStalk\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"(x : TopCat.of M) : ((smoothSheafCommRing IM I M R).presheaf.stalk x).carrier ≅ (smoothSheaf IM I M R).presheaf.stalk x\", \"doc\": \"The forgetful functor from the category of smooth sheaves of commutative rings to the category of types induces an isomorphism between the carrier of the stalk (obtained by forgetting the ring structu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : U) : U.toScheme.presheaf.stalk x ≅ X.presheaf.stalk x.1\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching prelog restriction or strict-henselization comparison declaration in the returned types; the project's exact existing constructions are relocated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale prelog structure restriction by the slice equivalence and canonical strict henselization ring stalk comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching prelog restriction or strict-henselization comparison declaration in the returned types; the project's exact existing constructions are relocated."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePrelogStructure|strictLocalRingStrictHenselizationIso; exact declaration searches in WeilConjectures, Sheaf, and DAG definition ids",
+   "results": "[grep] OK 0 hit(s)\nlean/Sheaf/AlgebraicGeometry/LogConditionFineChartLocality.lean:43:noncomputable def EtalePrelogStructure.etaleRestrict {T : Scheme.{u}}\nlean/Sheaf/AlgebraicGeometry/LogRegularCompletedChart.lean:57:noncomputable def strictLocalRingStrictHenselizationIso\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match or definition node owner; the two exact helpers occur only in the theorem modules. Relocate them, preserving a single declaration of each."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-free-log-chart-ordinary-parameters",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Free-chart ordinary-parameter assertion: restrict the original prelog structure to the actual etale chart and transport its ring germs and nonunit ideal from the geometric stalk to the small affine strict-henselization colimit. Definitions extracted as required by H2 return of 260b15ceef6c.",
+   "via": [
+    "lem-trf-free-log-chart-ordinary-parameters",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogEtaleRestrictionStalkComparison",
+  "declaration": "AlgebraicGeometry.EtalePrelogStructure.etaleRestrict",
+  "declarations": [
+   "AlgebraicGeometry.strictLocalRingStrictHenselizationIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogEtaleRestrictionStalkComparison.lean",
+  "statement": "def EtalePrelogStructure.etaleRestrict {T : Scheme.{u}}\n    (M : EtalePrelogStructure T) (U : T.Etale) : EtalePrelogStructure U.left",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 relocation: the two existing definitions are removed from their theorem modules and moved here with identical names, signatures and bodies. Only their ownership docstring tags change. Both theorem modules publicly import this definition-owned module. This neither duplicates the notions nor uses the theorem conclusions."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "MAINT-Q27-ownership-extraction",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Mechanical extraction already accepted by independent H2 review at d88fff709c48: both definition blocks were checked byte-identical to the existing reviewed library except blueprint owner tags. All remaining consumer statements and proofs are unchanged. Separate per-file 60-second compilation and incremental DAG validation passed. This stamp records only the shared definition ownership extraction; it does not review the item theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "MAINT-Q27-ownership-extraction",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Mechanical extraction already accepted by independent H2 review at d88fff709c48: both definition blocks were checked byte-identical to the existing reviewed library except blueprint owner tags. All remaining consumer statements and proofs are unchanged. Separate per-file 60-second compilation and incremental DAG validation passed. This stamp records only the shared definition ownership extraction; it does not review the item theorem."
+ }
+}

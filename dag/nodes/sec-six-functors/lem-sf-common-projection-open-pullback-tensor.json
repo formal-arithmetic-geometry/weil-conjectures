@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-common-projection-open-pullback-tensor",
+ "kind": "statement",
+ "title": "Common-stage inclusion preserves the open pullback/tensor comparison",
+ "statement": "Fix finite-field data D and coefficient data C, a SixFunctorCommonStages datum H [def-sf-operation-stages], a finite coefficient field E and a compactified square Q. Write V_X,V_Z for inclusion of E into the common-stage categories, c for H.commonStageComparison E, and t for the canonical natural tensorator [def-sf-common-projection-tensor-comparison]. For any rational objects M,L on Q.Z at E, inclusion preserves the inverse open tensor/pullback comparison μ for Q.i: V_X(μ_E^{-1});c_{i,tensor(M,L)};i_common^*(t_Z(M,L)) equals t_X(i_E^*M,i_E^*L);tensor(c_{i,M},c_{i,L});μ_common^{-1}(V_Z M,V_Z L). The tensor/pullback comparisons are canonically normalized by [def-pur-completed-pullback-tensor-comparison]. This square contains only tensor and pullback maps, with no open adjunction, proper image, projection factor or support identification. The attached Lean statement gives the exact endpoints and arrow order. The generic predicate OpenPullbackTensorSquare is the displayed universally quantified equation, defined directly as a proposition; using that predicate prevents repeated unfolding of coefficient-category expressions in the public interface.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-common-projection-tensor-comparison",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Proof: supply invertibility of the coefficient prime on Q.X and Q.Z using the\nbase-field structure maps. Transport the rational and common tensor functors and\npullbacks by their normalization equalities. The open tensor/pullback comparisons\nare the canonical ones by rationalOpenTensorPullbackNormalization and\ncommonStageOpenTensorPullbackNormalization. Evaluate the representative equation\nof canonicalCommonStagePullbackTensor_existsUnique at the field E on the included\npair M,L. The tensor comparisons at this stage, followed by the reflexive scalar\nunit, are exactly commonInclusionTensorComparison; the pullback comparisons are\nthe prescribed model comparisons, whose components are identities by\ncommonStageModelNormalization. Substitute these descriptions in the representative\nformula. The source and target transition isomorphisms cancel with their inverses,\nleaving the forward tensor/pullback square. Conjugate that square by the two\ncanonical tensor/pullback isomorphisms to obtain the displayed inverse square.\nAll calculations take place at E, so no enlargement or arbitrary representative\nis selected. The same identity-unit and isomorphism cancellation argument applies\nto the empty scheme, zero inputs and identity pullbacks.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-common-projection-tensor-comparison",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-common-projection-tensor-comparison",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility, the pullback and tensor coefficient comparisons; expanded using the representative characterization of canonicalCommonStagePullbackTensor_existsUnique."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient stage inclusion commutes with the canonical derived pullback tensor comparison",
+   "results": "Eight hits, including Limits.pullbackComparison, tensor-product direct limits and finite-limit preservation. None is about the completed/rational/common-stage tensor and pullback maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "One hit, the generic Hom-equivalence naturality theorem. It is used in the adjunction calculations but does not identify the finite-stage tensor/pullback square.",
+   "date": "2026-10-27",
+   "verdict": "No coefficient-stage square."
+  },
+  {
+   "tool": "grep",
+   "query": "openProjection.*(comparison|preserv)|openFactor|sixFunctorFactoredSupportIdentification",
+   "results": "msearch grep found no Mathlib matches. Local repository search found the normalization and representative declarations, and the ring-sheaf scalar theorem ScalarPullTensorCoefficientCoherence, whose categories differ from the rational and common-stage categories here.",
+   "date": "2026-10-27",
+   "verdict": "Use existing representative formulas; no matching inclusion tensor/pullback theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionOpenFactor",
+  "date": "2026-10-27",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Compatibility paragraph of thm-sf-pf-field: the coefficient comparisons for pullback and tensor. blueprint_refs.py ancestor returned None for this item, whose created.item chain ends at module names.",
+   "via": [
+    "lem-sf-common-projection-open-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionOpenPullbackTensor",
+  "file": "lean/Sheaf/Paper/CommonProjectionOpenPullbackTensor.lean",
+  "declaration": "WeilConjectures.commonProjectionOpenPullbackTensor",
+  "declarations": [
+   "WeilConjectures.OpenPullbackTensorSquare",
+   "WeilConjectures.commonProjectionOpenPullbackTensor"
+  ],
+  "statement": "theorem commonProjectionOpenPullbackTensor\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (Q : SixFunctorCompactifiedSquare D) :\n    OpenPullbackTensorSquare (H.commonStageComparison E) (commonProjectionTensorComparison H E)\n      ((H.coefficientStages E).rationalExchange Q) (H.commonStageExchange Q)",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261027T012939-L-2350779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261027T012939-L-2350779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

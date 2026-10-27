@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-relative-flat-closed-kernel-base-change",
+ "kind": "statement",
+ "title": "Derived base change of a relatively flat closed kernel in a product",
+ "statement": "Let $S_0$ be a scheme, let $X_0,Y_0$ be $S_0$-schemes, and let $a:S\\to S_0$ be any scheme morphism [def-pc-scheme]. Put $T_0=X_0\\times_{S_0}Y_0$, $T=T_0\\times_{S_0}S$, and write $q:T\\to T_0$ for the projection [def-pc-fibre-product]. Let $i_0:W_0\\hookrightarrow T_0$ be a closed immersion [def-weil-closed-immersion]. Assume that $Y_0\\to S_0$ and the composite $W_0\\xrightarrow{i_0}T_0\\to X_0$ are flat [def-weil-flat-morphism]. Form $W=W_0\\times_{T_0}T$ with closed immersion $i:W\\hookrightarrow T$. Then there is a canonical isomorphism\n$$Lq^*((i_{0,*}\\mathcal O_{W_0})[0])\\simeq(i_*\\mathcal O_W)[0]\\quad\\text{in }D(\\mathcal O_T)$$\n[def-pc-derived-category, def-pc-derived-pullback, def-pc-module-pullback]. No flatness of $a$, of $X_0\\to S_0$, or of $i_0$, and no Noetherian or finiteness hypotheses are assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 0CTA, lemma-case-of-tor-independence; Tag 0E23, lemma-compare-base-change-closed-immersion, applied to the structure sheaf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-sfb-module-base-change-map",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=X_0\\times_{S_0}S$ and let $b:X\\to X_0$ be its projection. The fibre-product universal property identifies $T$ with $T_0\\times_{X_0}X$: giving either object means giving maps to $X_0,Y_0,S$ with their three maps to $S_0$ equal. Likewise $W\\simeq W_0\\times_{X_0}X$. The projection $p:T_0\\to X_0$ is the base change of $Y_0\\to S_0$, hence flat. The morphism $i:W\\to T$ is a closed immersion by closed-immersion base change.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/perfect.tex",
+    "place": "Tag 0CTA, lemma-case-of-tor-independence; Tag 0E23, lemma-compare-base-change-closed-immersion"
+   }
+  },
+  {
+   "text": "Apply the common-base flat-families Tor-independence lemma with base $X_0$, source $W_0$, target $T_0$, morphism $i_0$, and base extension $b:X\\to X_0$. Its two flatness hypotheses are precisely the given flatness of $W_0\\to X_0$ and the flatness of $p$ from step 1. The target base change is $T$, so it says exactly that $i_0$ and $q:T\\to T_0$ are stalkwise Tor independent. This is the application of Tag 0CTA; neither $b$ nor $i_0$ is assumed flat.",
+   "uses": [
+    "lem-sfb-flat-families-tor-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/perfect.tex",
+    "place": "Tag 0CTA, lemma-case-of-tor-independence; Tag 0E23, lemma-compare-base-change-closed-immersion"
+   }
+  },
+  {
+   "text": "Apply the Tor-independent closed-pushforward comparison to the cartesian square $(W,W_0,T,T_0)$ with $K=\\mathcal O_{W_0}[0]$. Step 2 supplies Tor independence and $i_0$ is closed by hypothesis. It gives the canonical isomorphism $Lq^*Ri_{0,*}(\\mathcal O_{W_0}[0])\\simeq Ri_*Lr^*(\\mathcal O_{W_0}[0])$, where $r:W\\to W_0$ is projection.",
+   "uses": [
+    "lem-sfb-tor-independent-closed-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/perfect.tex",
+    "place": "Tag 0CTA, lemma-case-of-tor-independence; Tag 0E23, lemma-compare-base-change-closed-immersion"
+   }
+  },
+  {
+   "text": "Derived pullback of the degree-zero structure sheaf is the degree-zero structure sheaf, so $Lr^*(\\mathcal O_{W_0}[0])\\simeq\\mathcal O_W[0]$. For each of the closed immersions $i_0,i$, module pushforward preserves homology. Thus it preserves acyclic complexes and its derived functor is its termwise functor; on a degree-zero complex it is the degree-zero ordinary pushforward. Substituting these identifications in step 3 gives the asserted isomorphism. It is canonical: use the base-change adjoint specified in that comparison and the tensor-unit pullback identification $1\\otimes s\\mapsto s$; exact pushforward uses the identity on representatives. Every identification works for arbitrary $a$.",
+   "uses": [
+    "lem-sc-derived-pullback-structure-sheaf-local",
+    "lem-pc-closed-module-pushforward-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/perfect.tex",
+    "place": "Tag 0CTA, lemma-case-of-tor-independence; Tag 0E23, lemma-compare-base-change-closed-immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-flat-families-tor-independent",
+  "lem-sfb-tor-independent-closed-pushforward-comparison",
+  "lem-sc-derived-pullback-structure-sheaf-local",
+  "lem-pc-closed-module-pushforward-homology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 0CTA, lemma-case-of-tor-independence; Tag 0E23, lemma-compare-base-change-closed-immersion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor.independen|derived.chow|PseudoCoherent",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Chow lemma separated finitely presented scheme pseudo coherent kernel supported on graph",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"baseChange\"",
+   "results": "12 hits: CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, Algebra.Extension.toBaseChange_toRingHom, Algebra.Generators.baseChange, Algebra.Generators.baseChange_val, Algebra.Generators.baseChangeFromBaseChange, Algebra.Generators.baseChangeToBaseChange, Algebra.Generators.baseChangeFromBaseChange_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a closed immersion structure sheaf under relative flat product base change is the structure sheaf of the inverse image without flatness of the base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independent closed immersion structure sheaf derived pullback base change",
+   "results": "8 hits: AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent closed immersion base change gives an isomorphism between derived inverse image of its pushforward structure sheaf and the pushforward of the pulled back structure sheaf",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finitely presented scheme over a ring has a projective graph modification locally isomorphic near a chosen point and a pseudo coherent complex on the product restricting to that graph",
+   "results": "8 hits: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Proj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a closed subscheme structure sheaf under base change in a product with both ambient scheme and closed subscheme flat over one factor",
+   "results": "{\"t\": \"2026-10-23T18:13:31Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pullback of a closed subscheme structure sheaf under base change in a product with both ambient scheme and closed subscheme flat over one factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\"], \"digest\": \"2156a9386af2db10\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"structureSheaf\"",
+   "results": "{\"t\": \"2026-10-23T18:13:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"structureSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor.independen|derivedPullback.*[Cc]losed|[Cc]losed.*derivedPullback",
+   "results": "{\"t\": \"2026-10-23T18:13:32Z\", \"tool\": \"grep\", \"query\": \"TorIndependent|tor.independen|derivedPullback.*[Cc]losed|[Cc]losed.*derivedPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/GaloisObjects.lean\"], \"digest\": \"7706e955c912bb9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change",
+   "results": "{\"t\": \"2026-10-23T18:14:41Z\", \"tool\": \"grep\", \"query\": \"baseChange|base_change\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independent closed immersion derived inverse image of pushforward structure sheaf",
+   "results": "{\"t\": \"2026-10-23T18:14:42Z\", \"tool\": \"leansearch\", \"query\": \"Tor independent closed immersion derived inverse image of pushforward structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"digest\": \"e9158ea0c582d253\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"derived\"",
+   "results": "{\"t\": \"2026-10-23T18:14:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"derived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LieAlgebra.derivedSeries_baseChange\", \"LieAlgebra.derivedSeriesOfIdeal_baseChange\"], \"digest\": \"1f7b7725fdf166f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent cartesian square with a closed immersion has derived base change isomorphism for every unbounded complex of modules",
+   "results": "{\"t\": \"2026-10-23T18:14:43Z\", \"tool\": \"leanfinder\", \"query\": \"Tor independent cartesian square with a closed immersion has derived base change isomorphism for every unbounded complex of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.Functor.isHomological_of_localization\"], \"digest\": \"5d180e002a64c11a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a Tor independent cartesian square of schemes with a closed immersion the canonical derived pullback pushforward comparison is an isomorphism for all unbounded complexes",
+   "results": "{\"t\": \"2026-10-23T18:17:29Z\", \"tool\": \"leansearch\", \"query\": \"In a Tor independent cartesian square of schemes with a closed immersion the canonical derived pullback pushforward comparison is an isomorphism for all unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\"], \"digest\": \"cbdc33729beae7b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change for sheaves of structure modules along a Tor independent closed embedding commutes with direct image and inverse image",
+   "results": "{\"t\": \"2026-10-23T18:17:30Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change for sheaves of structure modules along a Tor independent closed embedding commutes with direct image and inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"d73859639339cb19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullbacks, open-immersion restrictions, sheaf adjunctions, Lie derived series or abstract Tor; none gives the Tor-independent derived closed-immersion comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-chow-neighbourhood",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: Tag 0CSJ, lemma-derived-chow, clauses (1)--(6); 0CSJ proof, arbitrary-base descent: the Tor-independent closed-immersion comparison on X times V.",
+   "via": [
+    "lem-sfb-derived-chow-neighbourhood",
+    "lem-sfb-pseudocoherent-tensor-relative-criterion",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-flat-closed-kernel-base-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Rebased the product square over X_0, reused flat base change and the existing common-base flat-families Tor-independence criterion, isolated the general Tag 0E23 comparison for all complexes, and specialized using the existing structure-sheaf pullback and exact closed module pushforward statements. No Lean writing or compilation.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the inherited auxiliary chain and Tag 0CSJ arbitrary-base descent: the relative-flat closed-kernel comparison using 0CTA and 0E23. The ancestor command returns None; the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic algebraic-geometric tool: Base change of a flat morphism of schemes is flat. Used inside the inherited Stacks derived-Chow auxiliary, without replacing the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic algebraic-geometric tool: Base change of a closed immersion is a closed immersion. Used inside the inherited Stacks derived-Chow auxiliary, without replacing the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-derived-pullback-structure-sheaf-local",
+    "why": "Generic algebraic-geometric tool: Derived pullback of the structure sheaf with local derived categories. Used inside the inherited Stacks derived-Chow auxiliary, without replacing the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-closed-module-pushforward-homology",
+    "why": "Generic algebraic-geometric tool: Ordinary closed module pushforward preserves homology. Used inside the inherited Stacks derived-Chow auxiliary, without replacing the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sc-derived-pullback-structure-sheaf-local",
+  "lem-pc-closed-module-pushforward-homology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-5665c4851",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5665c4851 (reviewer sub-agent of L); spot-checked: Read the item, its four steps, the new node, every cited statement, and Stacks 0CTA (more-morphisms.tex l.20290) and 0E23 (perfect.tex l.5337). Item hypotheses match 0CTA exactly (S'=S_0, X'=X_0, Y'=Y_0, Z'=W_0); the statement is unchanged and parent derived-chow step 8 uses it as stated. Step 1: T=T_0 x_{X_0} X by fibre-product pasting; p is flat by the flat-base-change leaf; i is closed by the closed-immersion-base-change leaf. Step 2: lem-sfb-flat-families-tor-independent with base X_0, source W_0, target T_0, map i_0 and extension b. Its two flatness hypotheses are the given flatness of W_0/X_0 and the flatness of p from step 1. It yields exactly the stalkwise Tor independence of i_0 and q that the new node assumes. Step 3: the new node with Z=W_0, X=T_0, X'=T, f=q, K=O_{W_0}[0]. Step 4: Lr^*O=O by lem-sc-derived-pullback-structure-sheaf-local; i_* is exact by lem-pc-closed-module-pushforward-homology, so Ri_* is termwise (elementary deduction, written out). New node = 0E23 verbatim: closed immersion i, any f, stalkwise Tor independence as in 08IA, all unbounded K, correct mate direction; statement-only. Small cases: Z=X is trivial; Spec F_p in Spec Z with flat A^1 base change gives an isomorphism; the Spec F_p self-intersection has nonzero H^{-1}, so the hypothesis is needed. Duplicate search over the DAG for 0E23/08IB/Tor-independent: no node states 0E23. lem-pc-rf-base-change-single-complex-criterion (qcqs, D_QCoh, stalk condition) is a different statement, not a duplicate. The new node is not a restated clause of the item. Batch-5 flag: lem-trf-tor-localization-on-spec, reached through the existing same-unit lem-sfb-flat-families-tor-independent, is Lean-closed generic commutative algebra (Tor commutes with localization). Neither assumption leaf provides it, so the flag is not a reason to RETURN. Accepted tool_uses: the two Mathlib base-change leaves and the two Lean-closed picard tools. No SGA citation; blueprint fields are inherited correctly. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatClosedKernelBaseChange",
+  "declaration": "AlgebraicGeometry.relativeFlatClosedKernel_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.relativeClosedKernelPullbackComparison",
+   "AlgebraicGeometry.relativeClosedKernelBaseChangeMap",
+   "AlgebraicGeometry.relativeFlatClosedKernel_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatClosedKernelBaseChange.lean",
+  "statement": "theorem relativeFlatClosedKernel_baseChange {S0 S X0 Y0 T0 T W0 W : Scheme.{u}} (x0 : X0 ⟶ S0) (y0 : Y0 ⟶ S0) (a : S ⟶ S0) (pX : T0 ⟶ X0) (pY : T0 ⟶ Y0) (hT0 : IsPullback pX pY x0 y0) (q : T ⟶ T0) (b : T ⟶ S) (hT : IsPullback q b (pX ≫ x0) a) (i0 : W0 ⟶ T0) [IsClosedImmersion i0] [Flat y0] [Flat (i0 ≫ pX)] (r : W ⟶ W0) (i : W ⟶ T) (hW : IsPullback r i i0 q) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T0.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] : ∃ e : (derivedPullback q).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings T0.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i0).obj (SheafOfModules.unit W0.ringCatSheaf))) ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit W.ringCatSheaf)), e.hom = relativeClosedKernelBaseChangeMap i0 i q r hW.w",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical isomorphism is pinned by equality of its hom to the constructed derived-counit/ordinary-exchange/structure-multiplication composite. Only local derived-category instances for the two ambient schemes are required. Existing definition nodes for the ordinary exchange and structure map are added to stmt_deps; no statement or proof-plan correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b9633dd2",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsPullback squares hT0/hT/hW oriented correctly, Flat y0 and Flat (i0≫pX) only, IsClosedImmersion i0, arbitrary a, HasDerivedCategory.{w} only on T0,T; conclusion is a D(O_T) iso pinned by e.hom = relativeClosedKernelBaseChangeMap. Pin is canonical: moduleBaseChangeMap/tensorPullbackObjUnitToUnit use exists_tensorPullbackAdjunction, unique by existsUnique_tensorPullbackSectionAdjunction, so it is the same adjunction as the helper's leftAdjointUniq; maps Lq*(M[0])→N[0] are determined by H^0, so the pin is the 0E23 arrow. Helper relativeClosedKernelPullbackComparison is real data and avoids canonicalSinglePullbackMap's global derived-composition interface; no name collisions. Node diff vs live: only lean record + 2 landed def stmt_deps. Statement verbatim; docstrings with source/blueprint and proof steps; only theorem sorry; report sections present. No file changed, no compile."
+ }
+}

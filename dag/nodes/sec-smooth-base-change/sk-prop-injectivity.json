@@ -1,0 +1,101 @@
+{
+ "id": "sk-prop-injectivity",
+ "kind": "statement",
+ "title": "Injectivity in the lowest unknown degree",
+ "statement": "Let $g:Y'\\to Y$ be a morphism and $n$ an integer invertible on $Y$. Recall that\n$\\mathrm{BC}(g,n,r)$ means: for every scheme $T$ over $Y$, every qcqs morphism $Z\\to T$,\nevery sheaf of $\\mathbf Z/n$-modules $M$ on $Z_{\\mathrm{\\acute et}}$ and every\n$0\\leq i\\leq r$, the degree-$i$ exchange map ([sk-def-exchange]) for the square with base\nchange $Y'\\times_YT\\to T$ and direct image along $Z\\to T$ is an isomorphism.\n\nSuppose $q\\geq1$ and $\\mathrm{BC}(g,n,q-1)$ holds. For every square\nobtained by base change as in the definition of $\\mathrm{BC}$ and every\nsheaf of $\\mathbf Z/n$-modules $M$ on $Z_{\\mathrm{\\acute et}}$, the degree-$q$ exchange map\n$b_M^q\\colon g^{-1}R^qf_*M\\to R^qf'_*u^{-1}M$ is injective. An inclusion\n$M\\hookrightarrow N$ induces\n\n$$\n \\operatorname{coker}(b_M^q)\n   \\hookrightarrow\\operatorname{coker}(b_N^q).\n$$\n\nFor an embedding $M\\hookrightarrow I$ with $I$ injective in the\ncategory of étale sheaves of $\\mathbf Z/n$-modules, this cokernel\nembeds into $R^qf'_*u^{-1}I$.\n\n*Complement.* In the notation of [sk-def-bc] (smooth side $f$, qcqs side $g$), the same holds\nfor an arbitrary commutative ring $\\Lambda$ in place of $\\mathbf Z/n$:\n\nLet $\\Lambda$ be a commutative ring, let $q\\ge1$ and assume\n$\\mathrm{BC}(f,\\Lambda,q-1)$ of [sk-def-bc] holds. Then for every square\nas there (with $g$ quasi-compact and quasi-separated) and every sheaf\n$\\mathcal F$ of $\\Lambda$-modules on $T_{\\Et}$:\n\n1. the base-change map\n$f^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ is *injective*;\n1. if $\\mathcal F\\subseteq\\mathcal G$ with $\\mathcal G$ a sheaf of\n$\\Lambda$-modules, the cokernel for $\\mathcal F$ is contained in the cokernel for\n$\\mathcal G$;\n1. if moreover $\\mathcal G$ is an injective sheaf of\n$\\Lambda$-modules, that cokernel is contained in\n$R^qh_*e^{-1}\\mathcal G$.\n\nConsequently a failure of $\\mathrm{BC}(f,\\Lambda,q)$ is witnessed by a nonzero\nelement of the cokernel in the stalk at a geometric point of $X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-smooth-base-change/sk-prop-injectivity/_section.md",
+  "place": "node sk-prop-injectivity, order 1427",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F03"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-exchange",
+  "sk-def-bc"
+ ],
+ "proof": [
+  {
+   "text": "Choose $0\\to M\\to I\\to Q\\to0$ with $I$ as in the statement. The long\nexact sequences give exact rows in\n\n$$\n\\begin{array}{ccccccc}\ng^{-1}R^{q-1}f_*I&\\to&g^{-1}R^{q-1}f_*Q&\\to&g^{-1}R^qf_*M&\\to&0\\\\\n\\downarrow{\\scriptstyle\\sim}&&\\downarrow{\\scriptstyle\\sim}&&\\downarrow&&\\downarrow\\\\\nR^{q-1}f'_*u^{-1}I&\\to&R^{q-1}f'_*u^{-1}Q&\\to&R^qf'_*u^{-1}M&\\to&R^qf'_*u^{-1}I.\n\\end{array}\n$$\n\nThe first two vertical arrows are isomorphisms by\n$\\mathrm{BC}(g,n,q-1)$, so a diagram chase proves injectivity and the\nlast assertion. Choosing an injective containing $N$ and comparing the\ntwo diagrams gives the inclusion of cokernels. This is\n[Stacks, Tag 0F03](https://stacks.math.columbia.edu/tag/0F03).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Complement.* The same argument, written for sheaves of $\\Lambda$-modules in the notation\nof [sk-def-bc], runs as follows.",
+   "uses": [
+    "sk-def-bc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1 (embed in an injective).* Choose a short exact sequence\n$0\\to\\mathcal F\\to\\mathcal I\\to\\mathcal Q\\to0$ with $\\mathcal I$ an\ninjective sheaf of $\\Lambda$-modules on $T_{\\Et}$. An injective object\nis its own injective resolution, so $R^qg_*\\mathcal I=0$ for $q>0$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 2 (compare the two long exact sequences).* The functors\n$f^{-1}$ and $e^{-1}$ are exact, so applying $f^{-1}R^\\bullet g_*$ to\nthe sequence and $R^\\bullet h_*$ to its $e^{-1}$-image gives two exact\nrows, and the base-change maps of [sk-def-bc] are natural, hence give\nthe vertical arrows of\n\n$$\n\\begin{array}{ccccccc}\nf^{-1}R^{q-1}g_*\\mathcal I&\\to&f^{-1}R^{q-1}g_*\\mathcal Q&\\to&\nf^{-1}R^{q}g_*\\mathcal F&\\to&0\\\\\n\\downarrow&&\\downarrow&&\\downarrow&&\\\\\nR^{q-1}h_*e^{-1}\\mathcal I&\\to&R^{q-1}h_*e^{-1}\\mathcal Q&\\to&\nR^{q}h_*e^{-1}\\mathcal F&\\to&R^{q}h_*e^{-1}\\mathcal I .\n\\end{array}\n$$\n\nThe top right entry is $f^{-1}R^qg_*\\mathcal I=0$ by Step 1, so the top\nrow exhibits $f^{-1}R^qg_*\\mathcal F$ as the cokernel of its left map.\nThe two left-hand verticals are isomorphisms by\n$\\mathrm{BC}(f,\\Lambda,q-1)$, so that cokernel is identified with the cokernel\nof the bottom left map, which is the image of\n$R^{q-1}h_*e^{-1}\\mathcal Q\\to R^qh_*e^{-1}\\mathcal F$. The middle\nvertical is therefore the inclusion of that image: this is (1).",
+   "uses": [
+    "sk-def-bc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (the cokernel).* Exactness of the bottom row continues the\nidentification: the quotient of $R^qh_*e^{-1}\\mathcal F$ by that image\ninjects into $R^qh_*e^{-1}\\mathcal I$, which is (3). For (2), run the\nsame diagram for $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal G/\\mathcal F\\to0$\nwith $\\mathcal F\\subseteq\\mathcal G\\subseteq\\mathcal I$; the\ndegree-$(q-1)$ isomorphisms again give the inclusion of the cokernel for\n$\\mathcal F$ into the one for $\\mathcal G$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 4 (a failure is a cokernel element at a point).* By (1) the\nbase-change map is an isomorphism if and only if its cokernel vanishes,\nand a sheaf vanishes if and only if all its stalks do; so if\n$\\mathrm{BC}(f,\\Lambda,q)$ fails there is a geometric point $\\bar x$ of $X$\nand an element of $(R^qh_*e^{-1}\\mathcal F)_{\\bar x}$ outside the image.\n\nThis is Stacks, Étale Cohomology, Lemma 59.88.2\n([`0F03`](https://stacks.math.columbia.edu/tag/0F03)).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-def-bc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-smooth-base-change/sk-prop-injectivity/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1427,
+ "blueprint_uses": [
+  "sk-def-bc",
+  "sk-def-exchange"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.mono_baseChangeHomologyMap",
+  "AlgebraicGeometry.Etale.mono_cokernelMap",
+  "AlgebraicGeometry.Etale.mono_cokernelDesc"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.mono_baseChangeHomologyMap",
+  "AlgebraicGeometry.Etale.mono_cokernelMap",
+  "AlgebraicGeometry.Etale.mono_cokernelDesc"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-prop-injectivity",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-injectivity"
+}

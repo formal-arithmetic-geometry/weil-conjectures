@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+ "kind": "statement",
+ "title": "A quasi-affine flat monomorphism has a quasi-affine open neighbourhood",
+ "statement": "Let $f:X\\to T$ be a quasi-compact flat monomorphism of schemes [def-pc-scheme] [def-weil-flat-morphism] [def-weil-pbc-scheme-conventions]. Monomorphism means that postcomposition with $f$ is injective on $\\operatorname{Hom}(W,X)$ for every scheme $W$. Suppose that $X$ is quasi-affine, meaning isomorphic to a quasi-compact open subscheme of an affine scheme [def-weil-affine-spectrum] [def-weil-open-immersion], and that $T$ is quasi-separated, meaning that the intersection of any two affine opens of $T$ is quasi-compact. Then there exists a quasi-compact quasi-affine open subscheme $U\\subseteq T$ such that $f(|X|)\\subseteq|U|$. Neither local finite presentation of $f$ nor a Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "§3, Proposition 3.4 (heading OCR 3.5), printed pp.14–15, proved using the following two lemmas. Its quasi-affine convention is quasi-compact open in an affine scheme. Primary scan: https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf . Local archive WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=f(|X|)$. It is quasi-compact, since $X$ is quasi-compact and $f$ is continuous, and stable under generalization by [lem-sfb-proopen-global-section-extension]. Fix $y\\in E$ and $x\\in X$ with $f(x)=y$, and choose an affine open $A\\subseteq T$ containing $y$. Apply [lem-a1-quasi-affine-open-principal-comparison-cover] to the open immersion $f^{-1}(A)\\hookrightarrow X$. Its principal comparison cover supplies $a\\in\\Gamma(X,\\mathcal O_X)$ such that $x\\in X_a\\subseteq f^{-1}(A)$ (and $X_a$ is affine).",
+   "uses": [
+    "lem-sfb-proopen-global-section-extension",
+    "lem-a1-quasi-affine-open-principal-comparison-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§3 Proposition 3.4 (heading OCR 3.5), printed pp.14–15; primary scan read online, local archive WANTED.",
+    "url": "https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proopen-global-section-extension] to $f$ and $a$. Obtain a quasi-compact open $V\\subseteq T$ containing all of $E$ and $g\\in\\Gamma(V,\\mathcal O_V)$ with $f_V^*g=a$. Local homomorphisms of local rings reflect units, so $f^{-1}(V_g)=X_a$. Consequently $y\\in V_g$ and $E\\cap V_g\\subseteq A$.",
+   "uses": [
+    "lem-sfb-proopen-global-section-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§3 Proposition 3.4 (heading OCR 3.5), printed pp.14–15; primary scan read online, local archive WANTED.",
+    "url": "https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "Set $F=V_g\\setminus A$. Both $V_g$ and $V\\cap A$ are quasi-compact opens of the quasi-separated scheme $V$: cover $V$ by finitely many affines, on which $V_g$ is a principal affine open; use quasi-separatedness for their intersections with $A$. Quasi-compact opens in a quasi-separated scheme are retrocompact, by intersecting their finite affine covers. Thus $F$ is constructible by [def-weil-constructible-subset]. The qcqs scheme $V$ is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. If $e\\in E\\cap\\overline F$, [lem-weil-pbc-spectral-proconstructible-closure-specialization], applied to the one-member family $F$, gives $z\\in F$ with $e\\in\\overline{\\{z\\}}$. Generalization stability of $E$ then gives $z\\in E$, contrary to $F\\cap E=\\varnothing$. Therefore $N=V\\setminus\\overline F$ is an open containing $E$. Cover $E$ by finitely many affine opens contained in $N$ and let $W$ be their union. The open $W_{g|W}=W\\cap V_g$ is quasi-compact (on a finite affine cover of $W$, it is a principal affine open) and lies in $A$, since $W$ avoids $F$. It is therefore a quasi-compact open of the affine scheme $A$, hence quasi-affine by definition. It contains $y$, since $y\\in E\\cap V_g$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0903, lemma-constructible-stable-specialization-closed (1), giving Raynaud Proposition 3.4 final constructible shrinking on printed p.15. Spectrality: properties.tex Tag 094L, lemma-quasi-compact-quasi-separated-spectral."
+   }
+  },
+  {
+   "text": "For every $y\\in E$ the preceding construction gives a quasi-separated open $W\\subseteq T$ containing all of $E$ (quasi-separatedness is inherited by opens), and a global function $g|W$ whose quasi-affine basic open contains $y$. These are exactly condition (ii) of [lem-sfb-quasiaffine-principal-neighbourhood-criterion]. Its implication (ii) to (i) gives a quasi-compact quasi-affine open $U\\subseteq T$ containing $E$. If $X$ is empty, take $U=\\varnothing$; it is the spectrum of the zero ring. No finite-presentation or Noetherian hypothesis was used.",
+   "uses": [
+    "lem-sfb-quasiaffine-principal-neighbourhood-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§3 Proposition 3.4 (heading OCR 3.5), printed pp.14–15; primary scan read online, local archive WANTED.",
+    "url": "https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "lem-a1-quasi-affine-open-principal-comparison-cover",
+  "lem-sfb-proopen-global-section-extension",
+  "lem-sfb-quasiaffine-principal-neighbourhood-criterion",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Proof following the primary scan, Proposition 3.4, printed pp.14–15; local archive WANTED; its constructible shrinking is written out using Stacks Tags 0903 and 094L."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?affine.*(flat|mono|neigh)|(flat|mono|neigh).*quasi.?affine",
+   "results": "{\"t\": \"2026-10-24T13:38:07Z\", \"tool\": \"grep\", \"query\": \"quasi.?affine.*(flat|mono|neigh)|(flat|mono|neigh).*quasi.?affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-affine quasi-compact pro-open subscheme of a quasi-separated scheme extends to a quasi-affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T13:38:07Z\", \"tool\": \"leansearch\", \"query\": \"A quasi-affine quasi-compact pro-open subscheme of a quasi-separated scheme extends to a quasi-affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\"], \"digest\": \"2cbea05e46b4e737\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiAffine\", \"Mono\"",
+   "results": "{\"t\": \"2026-10-24T13:38:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiAffine\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact flat monomorphism from a quasi-affine scheme into a quasi-separated scheme has image contained in a quasi-affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T13:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-compact flat monomorphism from a quasi-affine scheme into a quasi-separated scheme has image contained in a quasi-affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"add1920d9db341eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an affine scheme under a quasi-compact flat monomorphism has a quasi-affine open neighbourhood in a quasi-separated scheme",
+   "results": "{\"t\": \"2026-10-24T13:38:11Z\", \"tool\": \"leanfinder\", \"query\": \"The image of an affine scheme under a quasi-compact flat monomorphism has a quasi-affine open neighbourhood in a quasi-separated scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"d60b1ee098728d77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "grep",
+   "query": "of_isImmersion|IsQuasiAffine|quasi.?affine",
+   "results": "{\"t\": \"2026-10-24T13:42:50Z\", \"tool\": \"grep\", \"query\": \"of_isImmersion|IsQuasiAffine|quasi.?affine\", \"sub\": \"AlgebraicGeometry/QuasiAffine.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"15\", \"16\", \"18\", \"19\"], \"digest\": \"5cdb025dedd1f183\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine.of_isImmersion\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-24T13:42:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine.of_isImmersion\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-compact flat monomorphism from an affine scheme into a quasi-separated scheme is contained in a quasi-affine open and finite subsets have affine neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T13:42:50Z\", \"tool\": \"leansearch\", \"query\": \"A quasi-compact flat monomorphism from an affine scheme into a quasi-separated scheme is contained in a quasi-affine open and finite subsets have affine neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\"], \"digest\": \"526ab80487cd6a3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-affine source quasi-compact flat monomorphism quasi-separated target quasi-affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T13:42:52Z\", \"tool\": \"leanfinder\", \"query\": \"quasi-affine source quasi-compact flat monomorphism quasi-separated target quasi-affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"5ca3b0fd9df9a07a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib inherits quasi-affineness under immersions, but none of the hits extends a quasi-compact flat monomorphism to an open neighbourhood"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact flat monomorphism with quasi-affine source into a quasi-separated scheme has a quasi-affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T14:35:20Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-compact flat monomorphism with quasi-affine source into a quasi-separated scheme has a quasi-affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\"], \"digest\": \"73163f1c7444eaf9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean supplies open immersions only with local finite presentation, and QuasiAffine.lean has no target-neighbourhood extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiAffine\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T14:35:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiAffine\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean supplies open immersions only with local finite presentation, and QuasiAffine.lean has no target-neighbourhood extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?affine.*(flat|mono|neigh)|(flat|mono|neigh).*quasi.?affine",
+   "results": "{\"t\": \"2026-10-24T14:35:19Z\", \"tool\": \"grep\", \"query\": \"quasi.?affine.*(flat|mono|neigh)|(flat|mono|neigh).*quasi.?affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean supplies open immersions only with local finite presentation, and QuasiAffine.lean has no target-neighbourhood extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi-affine quasi-compact flat monomorphism extends to a quasi-affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-24T14:35:19Z\", \"tool\": \"leansearch\", \"query\": \"Quasi-affine quasi-compact flat monomorphism extends to a quasi-affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\"], \"digest\": \"8007e3086c885a8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FlatMono.lean supplies open immersions only with local finite presentation, and QuasiAffine.lean has no target-neighbourhood extension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the Anantharaman 4.2.2 / 4.1.3 finite-set affine-neighbourhood branch; §3, Proposition 3.4 (heading OCR 3.5), printed pp.14–15, proved using the following two lemmas. Its quasi-affine convention is quasi-compact open in an affine scheme. Primary scan: https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf . Local archive WANTED. This split realizes the Raynaud function-extension and constructible-shrinking argument, followed by the principal-neighbourhood criterion. No imported blueprint ancestor exists; the current latest direct-image proof, clause (3), is the inherited motivating place.",
+   "via": [
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Read Raynaud pp.1–5 and 14–15 online; keep the statement and route. Split the actual function-extension, constructible shrinking and principal-neighbourhood assembly; reuse the existing arbitrary-open principal comparison cover. Two new statement-only prerequisites, searched with all four services and a second semantic phrasing. No Lean written or compiled.",
+  "blueprint": "Current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3); inherited strict-local descent branch recorded in blueprint.from.place. ancestor returns None. Steps 1–3 realize Raynaud Proposition 3.4 choosing and extending a function and removing F; step 4 invokes the preceding principal-neighbourhood criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-quasi-affine-open-principal-comparison-cover",
+    "why": "Generic basis lemma for an arbitrary open subscheme of a quasi-affine scheme: its stated cover chooses a global function whose basic open lies in f inverse A. No same-unit node states the arbitrary-open refinement; the same-unit affine-basic-open criterion only covers the whole scheme."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "Generic spectral-topology closure lemma, used with the singleton family F to show its closure avoids a generalization-stable E. No same-unit statement gives this closure description. It implements the source constructible shrinking instead of adding a duplicate elementary prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-quasi-affine-open-principal-comparison-cover",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-f6dbbed8b",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-f6dbbed8b (reviewer sub-agent of L); spot-checked: Read Raynaud's Séminaire Samuel exposé 5 (Numdam primary scan, not archived locally) at pp.5-01–5-05 and 5-14–5-15. The item's statement is unchanged and matches Prop 3.5 (OCR numbering; 3.4 internally) hypothesis by hypothesis. New node lem-sfb-proopen-global-section-extension: true, from 1.1 (generalization stability), 1.2(i) (Z is the induced ringed subspace on its image), 1.4 (the image is retrocompact) and 2.3(i) (sections are a colimit over qc neighbourhoods); its qc-morphism hypothesis is redundant but harmless; not a duplicate of per-flat-monomorphism-local-structure or a1-sections-intersection-structure-colimit. New node lem-sfb-quasiaffine-principal-neighbourhood-criterion: this is Lemma 3.7. I re-proved (ii)⇒(i): take a finite subcover, then a qc neighbourhood inside the intersection, then apply the qcqs basic-open criterion 3.6. Empty E is fine. It is not a restatement of the item, and the same-unit basic-open criterion is the fixed-scheme version. Step 1: the comparison cover gives x in X_a inside f^{-1}(A) (j_V injective). Step 2: local homomorphisms reflect units, so f^{-1}(V_g)=X_a. Step 3: F = V_g minus A is constructible in the qcqs spectral V; Stacks 0903(1) plus generalization stability give that closure(F) misses E; this replaces Raynaud's appeal to 2.2 correctly, and W∩V_g is a qc open of A. Step 4: exactly condition (ii) of the criterion. No Noetherian or finite-presentation shortcut; no cycle. Batch-5 flag: lem-trf-quasi-affine-canonical-affine-embedding only says that a quasi-affine X maps to Spec Γ(X) by an open immersion. That is a general scheme fact and no part of the trace-formula or Poincaré proofs, so accepted. Tool uses accepted: lem-a1-quasi-affine-open-principal-comparison-cover and lem-weil-pbc-spectral-proconstructible-closure-specialization (both generic). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatMonoQuasiAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.Scheme.exists_quasiAffine_open_neighbourhood_of_flat_mono",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatMonoQuasiAffineNeighbourhood.lean",
+  "statement": "theorem exists_quasiAffine_open_neighbourhood_of_flat_mono {X T : Scheme.{u}} (f : X ⟶ T) [QuasiCompact f] [Flat f] [Mono f] [X.IsQuasiAffine] [QuasiSeparatedSpace T] : ∃ U : T.Opens, IsCompact (U : Set T) ∧ U.toScheme.IsQuasiAffine ∧ Set.range f ⊆ (U : Set T)",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4690c69fb",
+  "group": "NA",
+  "result": "pass",
+  "note": "Lean signature matches node/Raynaud Prop 3.4 clause by clause: QuasiCompact/Flat/Mono f, X.IsQuasiAffine (≡ qc open in affine via toSpecΓ open immersion + of_isImmersion), QuasiSeparatedSpace T (≡ affine-intersection qc via quasiSeparatedSpace_iff_forall_affineOpens); conclusion ∃ U : T.Opens compact, quasi-affine, range f ⊆ U. No lfp/Noetherian/extra hypotheses; empty X/T, Spec Q→Spec Z, non-qc T covered. Node changes only lean; statement verbatim; public imports for stmt deps, plain imports for the two Lean-stated proof deps (modules exist live), unsplit deps only in docstring. Docstrings carry source place, blueprint id and 4 proof steps; no defs, sorry only, report has Worker report + Second reading by NA. Not recompiled (no change)."
+ }
+}

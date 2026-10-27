@@ -1,0 +1,144 @@
+{
+ "id": "def-wf-tensor-unit-square-data",
+ "kind": "definition",
+ "title": "The coefficient, tensor, and strict fiber interfaces for the Frobenius unit square",
+ "statement": "Retain the completed quotient-ring presentation, its conjugated coefficient isomorphism, the actual signed total tensor and its canonical pullback comparison alpha, normalized constant generators, positive-power Koszul tower, product, signed fiber, and actual unit (u,0). NormalizedFiber records the beta product projections and both mapping-fiber coordinates; DerivedSquare and StrictSquare are precisely the previously published predicates of lem-wf-tensor-pullback-completion-unit-square. These are definitions, with no chosen unproved data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique generator normalized inverse image of constant modules extended to a completed coefficient ring sheaf",
+   "results": "ModuleCat.Tilde.const; SheafOfModules.Presentation.map_generators_I; no completed constant-module comparison",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq; unit_leftAdjointUniq_hom_app; these supply categorical uniqueness, not the coefficient normalization or strict Koszul unit",
+   "date": "2026-10-26",
+   "verdict": "useful construction API, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*lift|tensorPullbackTotal",
+   "results": "Factorizations.CM5a mappingCocone.lift and lift_fst; no normalized augmented Koszul transport",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant module pullback tensor product natural isomorphism mapping cone unit",
+   "results": "8 hits, including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal and generic categorical pullback cones; no completed-constant normalization or augmented Koszul fiber unit transport.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic pullback unit API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WfTensorPullbackCompletionUnitSquare",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof, penultimate sentence: 'Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]'; coefficient-normalization and augmented-tower data for the strict Frobenius tensor/unit square.",
+   "via": [
+    "lem-wf-tensor-pullback-completion-unit-square",
+    "lem-wf-tensor-completion-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WfTensorUnitSquareData",
+  "file": "lean/Sheaf/Paper/WfTensorUnitSquareData.lean",
+  "declaration": "WeilConjectures.WfTensorUnitSquare.ring",
+  "declarations": [
+   "WeilConjectures.WfTensorUnitSquare.ring",
+   "WeilConjectures.WfTensorUnitSquare.coefficientIso",
+   "WeilConjectures.WfTensorUnitSquare.transport",
+   "WeilConjectures.WfTensorUnitSquare.complexes",
+   "WeilConjectures.WfTensorUnitSquare.tensor",
+   "WeilConjectures.WfTensorUnitSquare.alpha",
+   "WeilConjectures.WfTensorUnitSquare.constants",
+   "WeilConjectures.WfTensorUnitSquare.generator",
+   "WeilConjectures.WfTensorUnitSquare.NormalizedConstants",
+   "WeilConjectures.WfTensorUnitSquare.koszul",
+   "WeilConjectures.WfTensorUnitSquare.tower",
+   "WeilConjectures.WfTensorUnitSquare.product",
+   "WeilConjectures.WfTensorUnitSquare.differential",
+   "WeilConjectures.WfTensorUnitSquare.fiber",
+   "WeilConjectures.WfTensorUnitSquare.unit",
+   "WeilConjectures.WfTensorUnitSquare.beta",
+   "WeilConjectures.WfTensorUnitSquare.NormalizedFiber",
+   "WeilConjectures.WfTensorUnitSquare.ordinary",
+   "WeilConjectures.WfTensorUnitSquare.completed",
+   "WeilConjectures.WfTensorUnitSquare.DerivedSquare",
+   "WeilConjectures.WfTensorUnitSquare.StrictSquare"
+  ],
+  "statement": "abbrev ring",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-26",
+  "note": "Section 1(B): published tensor and beta fail because the imported integralOperationsSiteSmall instance introduces a universe metavariable under max. Select the standard EssentiallySmall.{u+1} witness explicitly via essentiallySmallSelf.{0,u,u+1} in their bodies. Remove the obsolete scoped instance-disabling directives and module-wide respectTransparency=false options. The small pro-etale object universe u+1 and Hom universe u are retained. Every mathematical definition and declaration signature is unchanged; no axiom or sorry is added."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2fc77",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T202826-L-2756421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T142202-L-289291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f8ce5d4a",
+  "group": "NF",
+  "result": "pass",
+  "note": "NF rebase of NH 933c (2× PASS, unlanded) onto side-live HEAD bda59d7. SmoothExchangeScalarCompatibility.lean byte-identical to 933c; TwistedPullbackSquareScalars/WfTensorUnitSquareData differ only by a trailing blank line (vs main: elaboration-only transparency/attribute changes and explicit EssentiallySmall.{u+1} letI, signatures and universes unchanged); AffineSpaceZeroSectionPurity correctly dropped (main split it), clearing 933c advisory. Own reading: gamma = published rationalIso at the canonical compactification; exchange = Lu*(γ_f⁻¹) ≫ canonical middle (pullback-tensor, shifted root-line pull, TwistedPullbackScalars.t) ≫ γ_f'; betaA = Lu*_L(b_f)∘p_u and betaB = G_f',L(p_v)∘b_f'; whiskerRight e_E T ≫ betaB = betaA ≫ whiskerLeft T e_L with e pinned at every K; unit/tower/shift clauses present; v arbitrary; f' properties concluded via ∃ Geometry (all Prop fields); E=L, d=0, empty, K=0 covered; lean.statement verbatim; sorry only. Geometry/finiteResidueInverse owned by def-pur-smooth-exchange-geometry existing:true (18 fields match); theorem node drops them and cites the owner; its statement record matches lines 257–258. Advisory: def-wf-tensor-unit-square-data cited only as repair record; rationalIso/compactification def owners uncited; stage 3 must identify middle with TwistedPullbackScalars.m. No compile (no file changed)."
+ }
+}

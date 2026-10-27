@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-finite-product-open-restriction-pasting",
+ "kind": "statement",
+ "title": "Binary open restriction pasting",
+ "statement": "Let A be a finite commutative ring, G a finite product geometry for f:X→B and g:Y→B, and u the product compactification open. Let M∈D(X), N∈D(Y), H∈D(G.cf.Z), J∈D(G.cg.Z), s:M→L(G.cf.i)^*H and t:N→L(G.cg.i)^*J. Suppose m:H→G.cf.i_!M and n:J→G.cg.i_!N satisfy s;L(G.cf.i)^*(m)=η_M and t;L(G.cg.i)^*(n)=η_N. Then restrictPair(G,M,N,H,J,s,t);Lu^*(externalMap(m,n);e_G)=η_(M external N), using exactly the pullback compositors and tensor comparison of [def-pur-finite-triple-product-coordinate-data] and the specified binary e of [def-pur-finite-product-compactification-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+ },
+ "stmt_deps": [
+  "def-pur-finite-triple-product-coordinate-data",
+  "def-pur-finite-product-compactification-data"
+ ],
+ "proof": [
+  {
+   "text": "expand the two-stage open comparison into open base change, inverse open\nprojection and the extension compositor. The unit-normalized base-change squares\nidentify its restriction with the tensor of the two open units. Naturality of\npullback composition and of its tensor comparison moves m and n past the supplied\nrestriction arrows s and t. Replace the resulting factor restrictions by hs and ht.\nThe two inverse pullback compositors cancel their forward compositors; the tensor\ncomparison cancels its inverse. The remaining composite is precisely the unit of\nthe product open adjunction. This is a binary calculation, on arbitrary unbounded\nobjects; it uses no proper-image product or compact-support comparison. Identity\nopens give tensor functoriality, and zero objects or an empty product give the same\nunit equation without any nonemptiness assumption.",
+   "uses": [
+    "lem-pur-finite-open-product-swap",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-cbc-extension-zero-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-open-product-swap",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-cbc-extension-zero-composition",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii), the compactification reduction; the binary pasting and naturality calculations in Steps 2--4 of lem-pur-finite-triple-product-normal-forms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Iterated external tensor products of compactly supported derived sheaves agree with proper product compactifications",
+   "results": "Eight hits on light condensed monoidal categories and sheaf tensor; none gives either the specified binary open-unit equation or the ordinary product word naturality.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The naturality of the ordinary derived sheaf product and the unit normalization of a binary extension by zero tensor comparison",
+   "results": "Eight hits: CartesianMonoidalCategory product comparisons, toSheafify naturality, mapDerivedCategorySingleFunctor and toRightDerivedZero; none states the specified binary equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteProductOrdinary.*natural|finiteProductOpenTensor|restrictionL",
+   "results": "Mathlib search finds only transfinite restriction names. Local source search finds the binary constructions in FiniteProductCompactification and the recursive restriction in FiniteTripleProductNormalForms, without either claimed compatibility theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTripleProductNormalForms",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, reduction of triple product through binary compactifications; lem-sf-kunneth-coherence (ii).",
+   "via": [
+    "lem-pur-finite-triple-product-normal-forms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProductOpenRestrictionPasting",
+  "file": "lean/Sheaf/Paper/FiniteProductOpenRestrictionPasting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteTripleProduct.restrictPair_pasting",
+  "statement": "theorem restrictPair_pasting (A : Type (u + 1)) [CommRing A] [Finite A]\n    {B X Y : Scheme.{u}} {f : X ⟶ B} {g : Y ⟶ B}\n    (G : FiniteProductGeometry f g) (M : D A X) (N : D A Y)\n    (H : D A G.cf.Z) (J : D A G.cg.Z)\n    (s : M ⟶ L(upperStar (ModuleCat.{u + 1} A) G.cf.i).obj H)\n    (t : N ⟶ L(upperStar (ModuleCat.{u + 1} A) G.cg.i).obj J)\n    (m : H ⟶ (extend A G.cf.i).obj M)\n    (n : J ⟶ (extend A G.cg.i).obj N)\n    (hs : s ≫ L(upperStar (ModuleCat.{u + 1} A) G.cf.i).map m =\n      (openAdj A G.cf.i).unit.app M)\n    (ht : t ≫ L(upperStar (ModuleCat.{u + 1} A) G.cg.i).map n =\n      (openAdj A G.cg.i).unit.app N) :\n    restrictPair A G M N H J s t ≫\n      L(upperStar (ModuleCat.{u + 1} A) (finiteProductCompactification G).i).map\n        (externalMap A G.r G.t m n ≫\n          finiteProductOpenTensor G (ModuleCat.{u + 1} A) M N) =\n      (openAdj A (finiteProductCompactification G).i).unit.app (external A G M N)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61a6d",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T205910-L-3396657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61a6d",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T205910-L-3396657",
+  "kind": "interface",
+  "note": "independent cc review: item finiteTripleProduct_normalForms statement byte-identical to published; moved FiniteTripleProduct.* defs diffed verbatim against the clone; restrictPair_pasting read against finiteProductOpenTensor's definition and lem-sf-open-tensor-normalization; nodes checked against Lean signatures; unit sk-prop-an realized empty and CompactificationCoherence still in the public closure"
+ }
+}

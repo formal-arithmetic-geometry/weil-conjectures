@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-fixed-scalar-small-coordinates",
+ "kind": "statement",
+ "title": "Fixed scalar restriction commutes with the normalized small site coordinates",
+ "statement": "Let X be a scheme and k a commutative ring in the coefficient universe. Let a be an isomorphism from the small-site pushforward of the constant commutative k-ring sheaf on X_proet to the constant k-ring sheaf on the small site. Suppose a sends every original constant section r on the corresponding site object to the small-site constant section r. Then the composite of sfbFixedScalarRestriction with fixedScalarProEtaleSheafEquivalence.functor is naturally isomorphic to proEtaleModuleToModel followed by commutative scalar restriction along a inverse. The literal fixed-scalar restriction and model functor are those of lem-sfb-adic-stratified-perfect and def-sfb-fixed-scalar-etale-model.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099L, section-derived-completion-noetherian: the completed constant algebra is flat and identifies quotients; Tag 099M, lemma-naive-completion; Cohomology on Sites Tag 06YY, lemma-derived-base-change. Integral-models proof (1)--(2), comparison of the first reductions."
+ },
+ "stmt_deps": [
+  "def-sfb-fixed-scalar-etale-model",
+  "lem-sfb-adic-stratified-perfect",
+  "def-sfb-constant-completion-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose with the fully faithful constant scalar restriction functor on the small site. Its counit cancels the inverse functor in the fixed scalar model. Normalization of a and its inverse identity show that the other composite has the same constant scalar action on every section. Identity functions give a natural module isomorphism, which lifts through full faithfulness. This works for zero rings and empty sites.",
+   "uses": [
+    "def-sfb-fixed-scalar-etale-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-fixed-scalar-etale-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Integral-models proof (1)--(2), ordinary scalar coordinates before deriving."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Precomposition of a module sheaf along an equivalence of sites commutes with restricting to constant scalar actions",
+   "date": "2026-10-26",
+   "results": "Eight hits, including PresheafOfModules.restrictScalarsObj, PresheafOfModules.pushforward, and SheafOfModules.restrictScalars.",
+   "verdict": "The constructions exist, but no exact comparison of the prescribed project functors is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant ring sheaf module restricted to fixed scalars commutes with precomposition along an equivalence of sites",
+   "date": "2026-10-26",
+   "results": "Eight hits including SheafOfModules.pushforwardCongr, restrictScalars and PresheafOfModules.restrictScalarsCompToPresheaf.",
+   "verdict": "These provide ordinary constructions, but no exact natural isomorphism between the two specified project functors."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|constantCommuteCompose|pushforwardContinuousSheafificationCompatibility",
+   "date": "2026-10-26",
+   "results": "Ten hits in ConstantSheaf and CoverLifting.",
+   "verdict": "Use the sheafification comparison and its unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralResidueModelComparison",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-models proof (1)--(2), normalized scalar coordinates for the first residue.",
+   "via": [
+    "lem-sfb-integral-residue-model-comparison",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixedScalarSmallCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedScalarSmallCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.fixed_scalar_small_coordinates",
+  "statement": "theorem fixed_scalar_small_coordinates (X : Scheme.{u})\n    (k : Type (u + 1)) [CommRing k]\n    (a : (sfbModelRings X).obj (adicLisseConstantRing X k) ≅\n      ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, u} X) k)\n    (ha : ∀ (U : coefficientProEtaleSiteModel.{u, u} X) (r : k),\n      a.hom.hom.app (op U)\n          ((toSheafify (ProEt.topology X)\n            ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of k))).app\n              (op (AsSmall.down.obj U)) r) =\n        (toSheafify (coefficientProEtaleModelTopology.{u, u} X)\n          ((Functor.const (coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ).obj\n            (CommRingCat.of k))).app (op U) r) :\n    Nonempty (sfbFixedScalarRestriction X k ⋙\n        (fixedScalarProEtaleSheafEquivalence X k).functor ≅\n      proEtaleModuleToModel ((adicLisseForget X).obj (adicLisseConstantRing X k)) ⋙\n        ConstantCompletion.res a.inv)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T024018-L-630468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T024018-L-630468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

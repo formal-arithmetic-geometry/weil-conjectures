@@ -1,0 +1,227 @@
+{
+ "id": "lem-a1-simultaneous-residue-bases",
+ "kind": "statement",
+ "title": "Simultaneous bases in finitely many residue-field targets",
+ "statement": "Let $(D,\\mathfrak m)$ be a nonzero commutative ring with unique maximal ideal $\\mathfrak m$, let $k=D/\\mathfrak m$ be infinite, and let $Q$ be a $D$-module. Let $I$ be a finite set, possibly empty, and let $r\\geq0$ be an integer. For each $i\\in I$, let $K_i$ be a field equipped with an embedding $k\\hookrightarrow K_i$, let $F_i$ be a $K_i$-vector space of dimension $r$ [def-weil-vector-space-dimension], and let $\\rho_i:Q\\to F_i$ be $D$-linear, where $D$ acts on $F_i$ through $D\\to k\\hookrightarrow K_i$. Suppose that the $K_i$-linear span of $\\rho_i(Q)$ equals $F_i$ for every $i$. Then there exist $y_1,\\ldots,y_r\\in Q$ such that $\\rho_i(y_1),\\ldots,\\rho_i(y_r)$ is a $K_i$-basis of $F_i$ for every $i\\in I$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof, infinite-field linear avoidance and induction, isolated for finitely many linear targets."
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "If $I=\\varnothing$, take every $y_j=0$; there are no basis conditions to check. Otherwise construct, for $0\\leq t\\leq r$, elements $y_1,\\ldots,y_t\\in Q$ whose images are linearly independent in every $F_i$. For $t=0$ the empty family is independent. Steps 2--4 give the induction step whenever $t<r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof: infinite-field linear avoidance and induction on the rank; explicit simultaneous-target adaptation."
+   }
+  },
+  {
+   "text": "Let $W_i=\\operatorname{span}_{K_i}\\{\\rho_i(y_1),\\ldots,\\rho_i(y_t)\\}$. If $W_i=F_i$, this independent family is a basis, so [def-weil-vector-space-dimension] gives $r=t$, a contradiction. Thus $W_i$ is proper. Since $\\rho_i(Q)$ spans $F_i$, some $q_i\\in Q$ has $\\rho_i(q_i)\\notin W_i$: otherwise its entire span would lie in $W_i$. Choose these witnesses for the finite set $I$.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof: infinite-field linear avoidance and induction on the rank; explicit simultaneous-target adaptation."
+   }
+  },
+  {
+   "text": "Write $\\iota_i:k\\hookrightarrow K_i$ for the given embedding. On $V=k^I$ define $T_i(c)=\\sum_{j\\in I}\\iota_i(c_j)\\rho_i(q_j)$ and $A_i=T_i^{-1}(W_i)$. Each $T_i$ is $k$-linear, viewing $F_i$ as a $k$-space via $\\iota_i$, and $W_i$ is closed under these scalars, so $A_i$ is a $k$-subspace. It is proper: the coordinate vector $e_i$ maps to $\\rho_i(q_i)\\notin W_i$. The coordinate vectors form a finite basis of $V$ (every $c=\\sum_jc_je_j$, with unique coefficients). Apply [lem-pc-finite-linear-avoidance] over the infinite field $k$ to obtain $c\\in V\\setminus\\bigcup_{i\\in I}A_i$.",
+   "uses": [
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof: infinite-field linear avoidance and induction on the rank; explicit simultaneous-target adaptation."
+   }
+  },
+  {
+   "text": "Lift each $c_j$ through the surjection $D\\to D/\\mathfrak m=k$ to $d_j\\in D$ and set $y_{t+1}=\\sum_{j\\in I}d_jq_j$. The specified scalar action and $D$-linearity give $\\rho_i(y_{t+1})=\\sum_j\\iota_i(c_j)\\rho_i(q_j)=T_i(c)\\notin W_i$. In a relation $a\\rho_i(y_{t+1})+\\sum_{b=1}^ta_b\\rho_i(y_b)=0$, a nonzero $a$ would put $\\rho_i(y_{t+1})$ in $W_i$ by division by $a$. Hence $a=0$, and the induction hypothesis forces all $a_b=0$. This proves the required independence at $t+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof: infinite-field linear avoidance and induction on the rank; explicit simultaneous-target adaptation."
+   }
+  },
+  {
+   "text": "At $t=r$, the images are independent in each $F_i$. If their span were proper, choose $v$ outside it. The relation argument of step 4 shows that adjoining $v$ gives $r+1$ independent vectors. Applying [lem-weil-independent-family-card-le-dimension] to the finite-dimensional $K_i$-space $F_i$ gives $r+1\\leq\\dim_{K_i}F_i=r$, impossible. Thus the images span and are bases, by [def-weil-vector-space-dimension]. This argument also covers $r=0$: a nonzero vector would give an independent family of size one in dimension zero.",
+   "uses": [
+    "lem-weil-independent-family-card-le-dimension",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof: infinite-field linear avoidance and induction on the rank; explicit simultaneous-target adaptation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-dimension",
+  "lem-pc-finite-linear-avoidance",
+  "lem-weil-independent-family-card-le-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), proof: infinite-field linear avoidance and induction on the rank; explicit simultaneous-target adaptation. The source treats a product of residue fields and a free module; this proof writes its coefficient-space avoidance explicitly for the stated maps, without putting a residue-field module structure on Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given finitely many field extensions of an infinite residue field of a local ring and linear maps from a module whose images span r dimensional vector spaces choose r module elements forming a basis in every space simultaneously",
+   "results": "{\"t\": \"2026-10-22T07:52:54Z\", \"tool\": \"leanfinder\", \"query\": \"Given finitely many field extensions of an infinite residue field of a local ring and linear maps from a module whose images span r dimensional vector spaces choose r module elements forming a basis in every space simultaneously\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.ofIsCoprimeDifferentIdeal\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Field.Emb.Cardinal.wellOrderedBasis\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"IsLocalRing.basisQuotient\", \"LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap\", \"IsLocalRing.span_eq_top_of_tmul_eq_basis\"], \"digest\": \"cad04825efbabeaa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-ring basis lifting theorems (LocalRing/Module.lean:167,223,238) do not select vectors simultaneously in finitely many different field targets. PerfectPairing/Restrict.lean:156 requires a perfect pairing with values in the base field; DedekindDomain/LinearDisjoint.lean:212 requires different ideals and linear disjointness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinite field allows simultaneous selection of bases in finitely many extension field vector spaces using linear combinations of a common generating family",
+   "results": "{\"t\": \"2026-10-22T07:52:47Z\", \"tool\": \"leansearch\", \"query\": \"An infinite field allows simultaneous selection of bases in finitely many extension field vector spaces using linear combinations of a common generating family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.instFintypeElemOfVectorSpaceIndex\", \"Module.instFintypeElemExtendOfFiniteSubtypeMemSubmoduleSpan\", \"FiniteDimensional.instFintypeElemOfVectorSpaceIndex.congr_simp\", \"Field.infinite_emb_of_transcendental\", \"Infinite.nonempty_field\", \"Module.Basis.ofVectorSpace\", \"IntermediateField.LinearDisjoint.basisOfBasisRight\", \"Field.Emb.Cardinal.wellOrderedBasis\"], \"digest\": \"eefd2780029cc5ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-ring basis lifting theorems (LocalRing/Module.lean:167,223,238) do not select vectors simultaneously in finitely many different field targets. PerfectPairing/Restrict.lean:156 requires a perfect pairing with values in the base field; DedekindDomain/LinearDisjoint.lean:212 requires different ideals and linear disjointness."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Infinite",
+   "results": "{\"t\": \"2026-10-22T07:52:48Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, Infinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"infinite_basis_le_maximal_linearIndependent\", \"infinite_basis_le_maximal_linearIndependent'\", \"Module.not_finite_of_infinite_basis\", \"linearIndependent_le_infinite_basis\", \"maximal_linearIndependent_eq_infinite_basis\", \"ClassGroup.finsetApprox\", \"ClassGroup.distinctElems\", \"ClassGroup.fintypeOfAdmissibleOfAlgebraic\"], \"digest\": \"55dfee0ebbacaad9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-ring basis lifting theorems (LocalRing/Module.lean:167,223,238) do not select vectors simultaneously in finitely many different field targets. PerfectPairing/Restrict.lean:156 requires a perfect pairing with values in the base field; DedekindDomain/LinearDisjoint.lean:212 requires different ideals and linear disjointness."
+  },
+  {
+   "tool": "grep",
+   "query": "simultaneous|basis.*submodule|exists.*basis.*(span|baseChange)|nonempty_basis_of_flat_of_finrank_eq",
+   "results": "{\"t\": \"2026-10-22T07:52:47Z\", \"tool\": \"grep\", \"query\": \"simultaneous|basis.*submodule|exists.*basis.*(span|baseChange)|nonempty_basis_of_flat_of_finrank_eq\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"f40757fe096849e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-ring basis lifting theorems (LocalRing/Module.lean:167,223,238) do not select vectors simultaneously in finitely many different field targets. PerfectPairing/Restrict.lean:156 requires a perfect pairing with values in the base field; DedekindDomain/LinearDisjoint.lean:212 requires different ideals and linear disjointness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let D be a local ring with infinite residue field k, Q any D module, and finitely many D linear maps Q to r dimensional vector spaces over extension fields of k whose images span. There are r elements of Q whose images form a basis in every target.",
+   "results": "{\"t\": \"2026-10-22T08:03:50Z\", \"tool\": \"leanfinder\", \"query\": \"Let D be a local ring with infinite residue field k, Q any D module, and finitely many D linear maps Q to r dimensional vector spaces over extension fields of k whose images span. There are r elements of Q whose images form a basis in every target.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_flat\", \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"IsLocalRing.basisQuotient\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap\", \"Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial\"], \"digest\": \"2cf91a37e3cc4fb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-ring basis lifting theorems (LocalRing/Module.lean:167,223,238) do not select vectors simultaneously in finitely many different field targets. PerfectPairing/Restrict.lean:156 requires a perfect pairing with values in the base field; DedekindDomain/LinearDisjoint.lean:212 requires different ideals and linear disjointness."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_basis_of_span_eq_top_of_mem_algebraMap|ofIsCoprimeDifferentIdeal|simultaneous.*basis",
+   "results": "{\"t\": \"2026-10-22T08:03:49Z\", \"tool\": \"grep\", \"query\": \"exists_basis_basis_of_span_eq_top_of_mem_algebraMap|ofIsCoprimeDifferentIdeal|simultaneous.*basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\"], \"digest\": \"cf580203230558a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the local-ring basis lifting theorems (LocalRing/Module.lean:167,223,238) do not select vectors simultaneously in finitely many different field targets. PerfectPairing/Restrict.lean:156 requires a perfect pairing with values in the base field; DedekindDomain/LinearDisjoint.lean:212 requires different ideals and linear disjointness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module with finitely many spanning linear maps to vector spaces over extensions of an infinite residue field has elements whose images are simultaneous bases",
+   "results": "{\"t\": \"2026-10-24T00:41:31Z\", \"tool\": \"leansearch\", \"query\": \"A module with finitely many spanning linear maps to vector spaces over extensions of an infinite residue field has elements whose images are simultaneous bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_span_of_flat\", \"Module.exists_basis_of_basis_baseChange\", \"basis_finite_of_finite_spans\", \"Module.instFintypeElemExtendOfFiniteSubtypeMemSubmoduleSpan\", \"Module.Finite.linearMap\", \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\"], \"digest\": \"d73ce4ab8b249c19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose elements of a module whose images form bases simultaneously in finitely many field extensions of an infinite residue field",
+   "results": "{\"t\": \"2026-10-24T00:41:32Z\", \"tool\": \"leanfinder\", \"query\": \"Choose elements of a module whose images form bases simultaneously in finitely many field extensions of an infinite residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.ofIsCoprimeDifferentIdeal\", \"Module.Basis.ofIsCoprimeDifferentIdeal_apply\", \"Field.Emb.Cardinal.wellOrderedBasis\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"ClassGroup.fintypeOfAdmissibleOfFinite\", \"Module.Basis.extendOfIsLattice\", \"FiniteDimensional.exists_is_basis_integral\"], \"digest\": \"ae506b8430ed38c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Infinite",
+   "results": "{\"t\": \"2026-10-24T00:41:33Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, Infinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"infinite_basis_le_maximal_linearIndependent\", \"infinite_basis_le_maximal_linearIndependent'\", \"Module.not_finite_of_infinite_basis\", \"linearIndependent_le_infinite_basis\", \"maximal_linearIndependent_eq_infinite_basis\", \"ClassGroup.finsetApprox\", \"ClassGroup.distinctElems\", \"ClassGroup.fintypeOfAdmissibleOfAlgebraic\"], \"digest\": \"55dfee0ebbacaad9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  },
+  {
+   "tool": "grep",
+   "query": "simultaneous.*bas|exists_basis_of_span|exists_basis_of_basis_baseChange",
+   "results": "{\"t\": \"2026-10-24T00:41:33Z\", \"tool\": \"grep\", \"query\": \"simultaneous.*bas|exists_basis_of_span|exists_basis_of_basis_baseChange\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"f40757fe096849e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An independent family of vectors of cardinality equal to the dimension is a basis",
+   "results": "{\"t\": \"2026-10-24T00:41:38Z\", \"tool\": \"leanfinder\", \"query\": \"An independent family of vectors of cardinality equal to the dimension is a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"setBasisOfLinearIndependentOfCardEqFinrank\", \"finsetBasisOfLinearIndependentOfCardEqFinrank\", \"basisOfLinearIndependentOfCardEqFinrank\", \"coe_basisOfLinearIndependentOfCardEqFinrank\", \"coe_finsetBasisOfLinearIndependentOfCardEqFinrank\", \"coe_setBasisOfLinearIndependentOfCardEqFinrank\", \"basisOfTopLeSpanOfCardEqFinrank\", \"LinearIndependent.span_eq_top_of_card_eq_finrank'\"], \"digest\": \"d07e678f0391e894\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an infinite field choose a tuple in a common generating submodule which is a basis after each of finitely many scalar extension maps",
+   "results": "{\"t\": \"2026-10-24T00:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"Over an infinite field choose a tuple in a common generating submodule which is a basis after each of finitely many scalar extension maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.extendOfIsLattice\", \"LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap\", \"Field.Emb.Cardinal.wellOrderedBasis\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.Basis.sumExtendIndex\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_flat\"], \"digest\": \"be225c3d091698a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_basis_of_span_eq_top_of_mem_algebraMap|simultaneous.*bas|ofIsCoprimeDifferentIdeal",
+   "results": "{\"t\": \"2026-10-24T00:43:00Z\", \"tool\": \"grep\", \"query\": \"exists_basis_basis_of_span_eq_top_of_mem_algebraMap|simultaneous.*bas|ofIsCoprimeDifferentIdeal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/HierarchyDesign.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\", \"Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean\"], \"digest\": \"18c5ed3016872d3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring lifting results require finite presentation and concern one residue base-change map; the semilocal free-basis theorem does not prescribe simultaneous images of Q; perfect-pairing and different-ideal results require extra pairing or field-disjointness hypotheses. Cardinality-equals-dimension basis lemmas only finish one space after independence is known, not simultaneous selection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-semilocal-submodule-basis",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tags 03C1 (algebra-lemma-semi-local-module-basis-in-submodule) and 02M9 (algebra-lemma-locally-free-semi-local-free). Supporting semilocal basis argument, original steps 1, 4–5: residue-field embeddings, finite common coefficient space and avoidance induction.",
+   "via": [
+    "lem-a1-semilocal-submodule-basis",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-simultaneous-residue-bases",
+  "worker": "stage1",
+  "summary": "Q45: preserve the statement and its dimension definition dependency. Give the full independence induction, use existing finite linear avoidance on a finite residue-field coefficient space, lift coefficients to D, and deduce spanning from the existing independent-family dimension bound. Handle the empty target set and rank zero explicitly. No new nodes, no Lean edits, and no attachment were needed. Read and append the actual logged searches; no candidate states simultaneous selection.",
+  "blueprint": "Inherited supporting Tag 03C1 argument under lem-a1-affine-hc0: the finite-flat affine-equivalence-relation quotient infrastructure, through lem-a1-semilocal-submodule-basis. Steps 2--4 expand the infinite-field avoidance sentence and the rank induction of 03C1. The latest blueprint ancestor now gives the direct compact-support proof, rather than its historical representability infrastructure; retain the existing ancestry and split the assigned supporting lemma without changing the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-879230bf9",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-879230bf9 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery is the item alone with no new nodes, and its statement and stmt_deps are identical to live, where the item is still unsplit and has no prior proof, so this is not a re-split. Source: Stacks Tag 03C1 (algebra.tex 19310-19355); its selection argument (infinite residue field, then a coefficient combination nonzero in every factor, then induction on the rank) is made explicit for the D-linear maps ρ_i into r-dimensional K_i-spaces. Step 2 uses the dimension definition to show W_i is proper and picks spanning witnesses q_i. Step 3 applies finite linear avoidance in k^I, a finite-dimensional space, to the proper subspaces A_i = T_i^{-1}(W_i); the Mathlib leaf Subspace.biUnion_ne_univ_of_top_notMem (CosetCover.lean:380) was checked. Step 4 lifts the coefficients through D→k and proves independence by an explicit relation argument. Step 5 gets spanning from LinearIndependent.fintype_card_le_finrank (Dimension/Finite.lean:161). The parent lem-a1-semilocal-submodule-basis step 3 supplies exactly these hypotheses (Q=N, ρ_i=π_i|_N). Tested cases: I empty, r=0, Q=0, repeated targets, infinite [K_i:k]; F_2 with three lines is a counterexample showing the infinite-field hypothesis is needed. No SGA source, no duplicate node found by rg, no cycle, and proof_deps equal the cited uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SimultaneousResidueBases",
+  "declaration": "IsLocalRing.exists_simultaneous_residue_bases",
+  "file": "lean/Sheaf/RingTheory/SimultaneousResidueBases.lean",
+  "statement": "theorem exists_simultaneous_residue_bases (D : Type u) [CommRing D] [IsLocalRing D] [Infinite (ResidueField D)] (Q : Type v) [AddCommGroup Q] [Module D Q] (I : Type w) [Finite I] (r : ℕ) (K : I → Type x) [∀ i, Field (K i)] (ι : ∀ i, ResidueField D →+* K i) (F : I → Type z) [∀ i, AddCommGroup (F i)] [∀ i, Module (K i) (F i)] [∀ i, Module.Finite (K i) (F i)] (hdim : ∀ i, Module.finrank (K i) (F i) = r) (ρ : ∀ i, Q →ₛₗ[(ι i).comp (residue D)] F i) (hspan : ∀ i, Submodule.span (K i) (Set.range (ρ i)) = ⊤) : ∃ y : Fin r → Q, ∀ i, ∃ b : Module.Basis (Fin r) (K i) (F i), ∀ j, b j = ρ i (y j)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f577768",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Only change vs live: added lean record + module SimultaneousResidueBases.lean (sorry). Every clause matches the node: IsLocalRing (nontrivial), Infinite ResidueField, arbitrary D-module Q, Finite I (may be empty), K_i fields with ι_i : k →+* K_i, Module.Finite + finrank = r (dep def-weil-vector-space-dimension = Module.finrank), ρ_i semilinear along ι_i∘residue = D-linearity through D→k→K_i, span hypothesis, conclusion ∃ y : Fin r → Q, ∀ i, a basis pinned to ρ_i(y_j). Source Stacks 03C1 (algebra.tex 19310-19347) checked. Edge cases I=∅, r=0, Q=0, repeated/infinite extensions OK; 5 independent universes; citer lem-a1-semilocal-submodule-basis step 2 applies as typed. No duplicate in Mathlib or project; docstrings with source place and blueprint tag; statement verbatim; report has Worker report and Second reading by Q77; proof_dep plain imports per convention. No recompile (nothing changed). No findings."
+ }
+}

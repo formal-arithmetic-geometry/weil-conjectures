@@ -195,7 +195,32 @@
   "result": "fix",
   "note": "Restated in the unbundled form of K1 668c08560: A=CommRing R, N, family C j over J, P = ⨁ C with ι_j = DirectSum.lof; short exact = Injective/Function.Exact/Surjective; equivalence = endpoint-fixed ≃ₗ (h∘u=u', v'∘h=v); E×_P C_j = ker(v∘fst - ι_j∘snd) ⊆ E×C_j with n↦(u n,0), snd; bijectivity of Φ_A = surjectivity clause ∧ injectivity clause; universes independent, assembled extension in max w x y; private ModuleExtension/ExtOne/pullbackExtension removed (H4/H12)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "LinearMap.extOne_directSum_bijective"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "LinearMap.extOne_directSum_bijective",
+     "module": "WeilConjectures.Algebra.ExtOneDirectSum",
+     "lines": [
+      319,
+      469
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
@@ -205,5 +230,52 @@
   "landing": "20261013T082416-L-1649222",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, let $N$ be an $A$-module, and let $(C_j)_{j\\in J}$ be a family of $A$-modules. Put $P=\\bigoplus_{j\\in J}C_j$, with canonical inclusions $\\iota_j:C_j\\to P$. For an $A$-module $Q$, define $\\operatorname{Ext}^{1,\\mathrm{ext}}_A(Q,N)$ to be the set of equivalence classes of short exact sequences $0\\to N\\xrightarrow{u}E\\xrightarrow{v}Q\\to0$, where two sequences are equivalent when there is an $A$-module isomorphism $h:E\\xrightarrow{\\sim}E'$ with $h\\circ u=u'$ and $v'\\circ h=v$. For each $j$, pullback along $\\iota_j$ sends the class of $(u,v)$ to the class of $0\\to N\\to E\\mathbin{\\times_P}C_j\\to C_j\\to0$, where $E\\mathbin{\\times_P}C_j=\\{(e,c)\\mid v(e)=\\iota_j(c)\\}$. The resulting map $\\Phi_A: \\operatorname{Ext}^{1,\\mathrm{ext}}_A(P,N)\\to\\prod_{j\\in J}\\operatorname{Ext}^{1,\\mathrm{ext}}_A(C_j,N)$, $[E]\\mapsto([E\\mathbin{\\times_P}C_j])_{j\\in J}$, is a bijection.",
+  "proof": [
+   {
+    "text": "For an extension $0\\to N\\xrightarrow{u}E\\xrightarrow{v}P\\to0$ and an inclusion $\\iota_j:C_j\\to P$, the pullback is $E\\times_P C_j=\\{(e,c)\\mid v(e)=\\iota_j(c)\\}$ with its evident maps from $N$ and to $C_j$. An equivalence of extensions induces an equivalence of these pullbacks, so $\\Phi_A$ is well-defined.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "To prove surjectivity, choose representatives $0\\to N\\xrightarrow{u_j}E_j\\xrightarrow{v_j}C_j\\to0$ of a tuple of classes. The direct-sum map $p:\\bigoplus_jE_j\\to P$ is surjective, and its kernel is exactly $\\bigoplus_j u_j(N)$: an element has finite support, and each component lies in $\\ker(v_j)=\\operatorname{im}(u_j)$ precisely when it lies in the kernel. Let $\\Sigma:\\bigoplus_jN\\to N$ be the finite-sum map.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Form $E=(N\\oplus\\bigoplus_jE_j)/R$, where $R$ is the image of $\\bigoplus_jN\\to N\\oplus\\bigoplus_jE_j$, $n\\mapsto(\\Sigma(n),-\\bigoplus_j u_j(n_j))$. The maps $N\\to E$, $a\\mapsto[(a,0)]$, and $E\\to P$, $[(a,e)]\\mapsto p(e)$ are well-defined. The first is injective, the second is surjective, and if $p(e)=0$ then $e=\\bigoplus_j u_j(n_j)$, so $[(0,e)]=[(\\Sigma(n),0)]$; hence their image and kernel agree. Thus $0\\to N\\to E\\to P\\to0$ is short exact.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For each $j$, the map $E_j\\to E\\times_P C_j$, $e\\mapsto([0,\\iota_j(e)],v_j(e))$, is an isomorphism: surjectivity follows by subtracting the finitely supported components away from $j$ and absorbing their kernel parts through the relation defining $R$, and injectivity follows from the same relation with only the $j$-component present. Under this map the copy of $N$ is fixed because $[(0,\\iota_j u_j(n))]=[(n,0)]$, and the map to $C_j$ is fixed. Therefore the constructed extension maps to the prescribed tuple, proving surjectivity of $\\Phi_A$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For injectivity, let $0\\to N\\xrightarrow{u}E\\xrightarrow{v}P\\to0$ and $0\\to N\\xrightarrow{u'}E'\\xrightarrow{v'}P\\to0$ have equivalent pullbacks, with fixed-end-term isomorphisms $h_j:E\\times_P C_j\\to E'\\times_P C_j$. Every $e\\in E$ is in $u(N)+\\sum_j\\operatorname{im}(E\\times_P C_j\\to E)$: write $v(e)$ as the finite sum $\\sum_j\\iota_j(c_j)$, lift each $c_j$ to a pair in the corresponding pullback, and the remaining difference lies in $u(N)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Define $q:N\\oplus\\bigoplus_j(E\\times_P C_j)\\to E$ by the endpoint inclusion on $N$ and the sum of the pullback inclusions, and define $q'$ analogously using $u'$ and the maps $h_j$. If an element is in $\\ker(q)$, applying $v$ shows that every $C_j$-component is zero because the direct sum has unique components; hence every pullback summand lies in the common copy of $N$, where each $h_j$ is the identity. The relation $q=0$ then gives $q'=0$, so $q'$ factors uniquely through a map $h:E\\to E'$. Applying the same construction to the inverses $h_j^{-1}$ gives an inverse map. Thus $h$ is an isomorphism, fixes $N$, and commutes with the maps to $P$, proving injectivity of $\\Phi_A$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "A well-defined map that is both surjective and injective is a bijection, so $\\Phi_A$ has the asserted bijectivity.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

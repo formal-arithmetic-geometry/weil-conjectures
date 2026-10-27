@@ -17,74 +17,32 @@
  ],
  "proof": [
   {
-   "text": "Apply lem-amb-tate-root-projection-reduction and lem-amb-finite-root-site-comparison with $m=\\ell^r$. They give $\\theta_{r,T}:A_T^{\\mathrm{pro}}(1)\\cong D_{r,T}$ and $\\sigma_{r,T}:\\nu_T^*A_T^{\\mathrm{et}}(1)\\cong D_{r,T}$ with their specified root-tensor formulas. Set $\\beta_{r,T}=\\theta_{r,T}^{-1}\\sigma_{r,T}$. This is the required root-normalized $A$-linear isomorphism.",
+   "text": "Obtain the family b of normalized comparisons in every nonnegative degree from lem-amb-finite-tate-normalized-comparisons. Apply lem-amb-finite-tate-normalized-coherence to get normalized scheme pullback squares and exponent transitions.",
    "uses": [
-    "lem-amb-tate-root-projection-reduction",
-    "lem-amb-finite-root-site-comparison"
+    "lem-amb-finite-tate-normalized-comparisons",
+    "lem-amb-finite-tate-normalized-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-    "place": "Short assembly of root reduction and finite-root site comparison; original steps 1-4"
-   }
+   "elementary": false
   },
   {
-   "text": "The two cited projection/power equations give $\\beta_{r,T}\\nu_T^*(P_{r',r}\\otimes1)=\\beta_{r',T}$. The etale transition is invertible by lem-asd-etale-finite-twist-pullback. Exponent multiplication gives its cocycle identity; a common larger annihilating exponent compares any two choices. For $v:T'\\to T$, substitute the equation for $\\theta_{r,T'}b_v$ into the scheme square for $\\sigma_{r,T}$; cancellation gives $b_vv^*\\beta_{r,T}=\\beta_{r,T'}\\nu_{T'}^*(e^v_r)\\kappa_v$. Thus $b_v$ is invertible. The cited identity/composition equations give those for this square.",
-   "uses": [
-    "lem-amb-tate-root-projection-reduction",
-    "lem-amb-finite-root-site-comparison",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-    "place": "Short assembly of root reduction and finite-root site comparison; original steps 5-6"
-   }
-  },
-  {
-   "text": "At $a=0$ use the constant-$A$ isomorphism of lem-sf-comparison-pullback-exact. Inductively define $\\beta_{r,a+1}$ by $\\beta_{r,a}\\otimes_A\\beta_{r,1}$ after the canonical tensor comparison of lem-weil-pbc-ringed-topoi-module-pullback-tensor. The tensor-power definitions identify its source and target with the stated twists. Tensor the equations of step 2 factor by factor; naturality of the tensor comparison gives the required squares for every $a$. The derived comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback and exactness of lem-sf-comparison-pullback-exact identify this construction with the stipulated derived tensor convention.",
-   "uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-    "place": "Short assembly of root reduction and finite-root site comparison; original steps 7"
-   }
-  },
-  {
-   "text": "The unit theorem lem-weil-pbc-comparison-grothendieck-unit applies to $\\operatorname{Mod}(A)$ by lem-weil-pbc-ring-modules-grothendieck-abelian; hence $\\nu_T^*$ is fully faithful. Given another descent $(G,\\alpha)$, lift $\\alpha^{-1}\\beta_{r,a}$ and its inverse uniquely. Faithfulness makes the lifts inverse, giving exactly one comparison-preserving isomorphism. This works for all $a\\geq0$. The empty scheme has only zero module sheaves. The reductions above use only $\\ell^rA=0$, so no ramification divisibility or flatness restriction was introduced.",
+   "text": "Comparison inverse image is fully faithful for ModuleCat(A). Its fully faithful isomorphism equivalence lifts b followed by alpha inverse to a unique isomorphism of etale descents. The same equivalence with alpha=b_r proves uniqueness of every exponent transition from its comparison square. The Lean proof performs both cancellations explicitly.",
    "uses": [
     "lem-weil-pbc-comparison-grothendieck-unit",
     "lem-weil-pbc-ring-modules-grothendieck-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-    "place": "Short assembly of root reduction and finite-root site comparison; original steps 8"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-amb-tate-root-projection-reduction",
-  "lem-amb-finite-root-site-comparison",
-  "lem-asd-etale-finite-twist-pullback",
-  "def-coefficient-twists-detailed",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-amb-finite-tate-normalized-comparisons",
+  "lem-amb-finite-tate-normalized-coherence",
   "lem-weil-pbc-comparison-grothendieck-unit",
   "lem-weil-pbc-ring-modules-grothendieck-abelian"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
-  "place": "Finite Tate coefficient identification required by the vector-bundle integration. Agent combination of the existing finite reduction, root comparison, monoidal pullback and comparison-unit statements; no source claims this whole combination."
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Existence and coherence are separated as the two named intermediate results. Both categorical uniqueness clauses are proved using Mathlib FullyFaithful.isoEquiv and existing comparison full faithfulness."
  },
  "mathlib_searches": [
   {
@@ -256,5 +214,26 @@
   "existing": true,
   "note": "The theorem and its supporting declarations are already published in Sheaf.Paper.FiniteTateSiteDescent; this delivery imports and reuses that module."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-96e60",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261025T003330-L-3230059",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (unchanged); 12 relocated defs vs clone FiniteTateSiteDescent (byte-identical bodies); 2 new sorry lemmas vs their nodes (true, not restatements); node proof fields vs Lean assembly; 23 direct importers compiled against the delivered modules"
+ }
 }

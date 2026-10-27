@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-open-chart-fibre-bound-synchronization",
+ "kind": "statement",
+ "title": "Local fibre bounds on open charts and synchronization along closed comparisons",
+ "statement": "Let $I$ be a small nonempty directed partially ordered set and $(f_i:X_i\\to S_i)_{i\\in I}$ an inverse system of scheme morphisms [def-pc-scheme]. Let $A$ be a finite set. For every $i\\in I$ and $a\\in A$, choose open subschemes $W_{i,a}\\subseteq X_i$ and $V_{i,a}\\subseteq S_i$ [def-weil-open-immersion], such that $(W_{i,a})_{a\\in A}$ covers $X_i$ and $f_i(W_{i,a})\\subseteq V_{i,a}$. Assume transitions $X_j\\to X_i$ and $S_j\\to S_i$ carry $W_{j,a}$ into $W_{i,a}$ and $V_{j,a}$ into $V_{i,a}$ whenever $i\\le j$. Write $g_{i,a}:W_{i,a}\\to V_{i,a}$ for the restricted morphism. Fix an integer $d\\ge0$. Fibres are scheme-theoretic [def-pc-scheme-fibre] and dimension is topological Krull dimension [def-kun-topological-krull-dimension], with dimension $-\\infty$ for the empty scheme.\n\n(1) For each $i$, all fibres of $f_i$ have dimension at most $d$ if and only if, for every $a\\in A$, all fibres of $g_{i,a}$ have dimension at most $d$.\n\n(2) Suppose additionally that every $g_{i,a}$ is locally of finite type [def-weil-finite-type-morphism] and that for $i\\le j$ the induced map $W_{j,a}\\to W_{i,a}\\times_{V_{i,a}}V_{j,a}$ [def-pc-fibre-product] is a closed immersion [def-weil-closed-immersion]. Then a bound on all fibres of $g_{i,a}$ persists to all fibres of $g_{j,a}$ for every $j\\ge i$. Consequently, if for each $a\\in A$ there is an $i_a\\in I$ such that all fibres of $g_{i_a,a}$ have dimension at most $d$, there exists $j\\in I$ such that for every $k\\ge j$ every fibre of $f_k$ has dimension at most $d$. Both assertions allow empty fibres, empty schemes, and $A=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FY, lemma-dimension-fibre-after-base-change (1), combined with topology.tex Tag 0B7I, lemma-dimension-supremum-local-dimensions: auxiliary finite-chart propagation and globalization lemma."
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i$ and $s\\in S_i$. For $s\\in V_{i,a}$, the fibre $(g_{i,a})_s$ has underlying space $W_{i,a}\\cap f_i^{-1}(s)$ with the subspace topology: the open-subscheme identification and the fibre-to-set-theoretic-fibre homeomorphism give this directly. The residue field at $s$ is unchanged on the open $V_{i,a}$ because its stalk is unchanged. For $s\\notin V_{i,a}$, $W_{i,a}\\cap f_i^{-1}(s)$ is empty by $f_i(W_{i,a})\\subseteq V_{i,a}$. Thus these intersections form an open cover of $X_{i,s}$, with the nonempty members precisely among the chart fibres. These identifications preserve dimension: a homeomorphism and its inverse carry strict chains of irreducible closed subsets to strict chains.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-scheme-fibre",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055, definition-Krull; open restrictions and scheme-theoretic fibres"
+   }
+  },
+  {
+   "text": "If $\\dim X_{i,s}\\le d$, the open-subspace monotonicity lemma bounds every member of Step 1 by $d$. Conversely suppose all chart fibres have dimension at most $d$. For each $s$, the members with $s\\notin V_{i,a}$ are empty and have dimension $-\\infty\\le d$; every other member has the chart bound. A scheme is sober by the generic-point lemma, hence quasi-sober and $T_0$, so the open-cover dimension lemma applies to $X_{i,s}$ and gives $\\dim X_{i,s}\\le d$. This proves (1), without any finite-type assumption.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions, open-cover chain argument"
+   }
+  },
+  {
+   "text": "Fix $a$ and $i\\le j$, and put $P=W_{i,a}\\times_{V_{i,a}}V_{j,a}$. Assume all fibres of $g_{i,a}$ have dimension at most $d$. For $t\\in V_{j,a}$ write $s$ for its image in $V_{i,a}$. For every $y\\in P_t$ with image $x\\in(W_{i,a})_s$, the fibre base-change lemma, applied to the locally finite type morphism $g_{i,a}$, gives $\\dim_y P_t=\\dim_x(W_{i,a})_s$. Taking the whole old fibre as an open neighbourhood bounds the right side by $d$, by the definition of local dimension. Taking the supremum over $y$ gives $\\dim P_t\\le d$ by the global/local dimension lemma. If $P_t$ is empty the supremum is $-\\infty$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY, lemma-dimension-fibre-after-base-change (1), and Topology Tag 0B7I"
+   }
+  },
+  {
+   "text": "Let $c:W_{j,a}\\hookrightarrow P$ be the assumed closed comparison, a morphism over $V_{j,a}$. Pull it back along $P_t\\to P$. The closed-immersion base-change lemma gives a closed immersion $W_{j,a}\\times_P P_t\\hookrightarrow P_t$. The universal property identifies its source with $W_{j,a}\\times_{V_{j,a}}\\operatorname{Spec}\\kappa(t)=(W_{j,a})_t$: in either iterated pullback, maps from a scheme $T$ are exactly a map $u:T\\to W_{j,a}$ and a map $v:T\\to\\operatorname{Spec}\\kappa(t)$ whose composites to $V_{j,a}$ agree; the map to $P$ is forced to be $cu$. The two universal maps are inverse because their projections agree.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QR, lemma-base-change-closed-immersion, applied to the closed comparison"
+   }
+  },
+  {
+   "text": "A closed immersion identifies its source homeomorphically with a closed subspace. A strict chain of nonempty irreducible closed subsets of that subspace is also such a chain in the ambient space: closedness is transitive through the closed image and irreducibility uses the same induced topology. Consequently its dimension is at most the ambient dimension, including when the source is empty. Apply this to Step 4 and then Step 3 to obtain $\\dim(W_{j,a})_t\\le\\dim P_t\\le d$ for every $t$. This proves the persistence assertion in (2).",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055, definition-Krull, closed-subspace chain inclusion"
+   }
+  },
+  {
+   "text": "Choose $i_a$ for each $a$ in the finite set $A$. A common upper bound $j$ exists by induction on $A$: for the empty set choose any element of the nonempty $I$; to add $a$, use directedness on the previously obtained bound and $i_a$. For $k\\ge j$, transitivity gives $k\\ge i_a$ for every $a$, so the persistence just proved bounds every chart fibre of $g_{k,a}$ by $d$. Part (1) then bounds every fibre of $f_k$. If $A$ is empty, the covering assumption forces every $X_k$ empty; all fibre bounds hold, and the same arbitrary $j$ works.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Elementary finite directed upper-bound induction, assembling Tags 02FY and 0B7I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Tag 02FY (1), Topology Tags 0055 and 0B7I, and Tag 01QR; explicit finite directed upper-bound induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a directed inverse system of schemes covered by finitely many compatible open charts, fibre dimension bounds attained at separate chart stages hold simultaneously at one later stage if each chart comparison is a closed immersion into base change",
+   "results": "8 hits; top=['AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index', 'AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f', 'AlgebraicGeometry.exists_map_eq_top', 'AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType', 'AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans', 'AlgebraicGeometry.exists_map_preimage_le_map_preimage', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed']; note=; digest=4d3d4032800d09ee. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Synchronize finitely many eventual dimension bounds on open source charts of an inverse system using closed immersion comparisons and invariance of fibre dimension under field extension",
+   "results": "8 hits; top=['AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono', 'TopologicalSpace.Opens.chartAt_inclusion_symm_eventuallyEq', 'AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange', 'AlgebraicGeometry.IsFinite.instOfIsClosedImmersion', 'InverseSystem.limit', 'TopologicalSpace.Opens.chartAt_subtype_val_symm_eventuallyEq', 'AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion', 'AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget']; note=; digest=09a90b150d3b28ae. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", \"IsOpenCover\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(dimension|Dimension|krullDim|KrullDim).*(cover|Cover|baseChange)|(cover|Cover|baseChange).*(dimension|Dimension|krullDim|KrullDim)",
+   "results": "5 hits; top=['Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean']; note=; digest=e12336b0002cd174. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite open cover of a family of scheme morphisms with closed comparison maps allows relative dimension bounds on different stages to be propagated to a common directed upper bound",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed', 'AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected.property_trans', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected.ofIsBasisOpensRange', 'AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀', 'AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover']; note=; digest=2594909d90a1a3d6. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all fibres of a locally finite type scheme morphism have dimension at most d then every closed subscheme of any base change has fibres of dimension at most d",
+   "results": "8 hits; top=['AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme', 'AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.instLocallyQuasiFiniteFstScheme', 'AlgebraicGeometry.IsFinite.instSndScheme']; note=; digest=db11592d69205e6f. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"topologicalKrullDim\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the hits: closed-immersion stability, smooth relative dimension, finite fibres and directed-cover equalities do not state the local dimension comparison, persistence or finite-stage synchronization. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(topologicalKrullDim|krullDim).*(fiber|baseChange|Cover)|(fiber|baseChange|Cover).*(topologicalKrullDim|krullDim)",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. No matching declaration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform upper bounds on dimensions of scheme fibres can be tested on open charts and are preserved by closed subschemes of base changes for locally finite type morphisms",
+   "results": "8 hits; top=['AlgebraicGeometry.IsLocalAtSource.resLE', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.LocallyOfFiniteType.recOn', 'AlgebraicGeometry.LocallyOfFiniteType.rec', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict', 'AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict', 'AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange']; note=; digest=86ae9bb283f1e463. Read the hits: restriction-local properties, finite-type, smooth relative-dimension, quasi-finite and closed-immersion base-change statements do not give the arbitrary dimension bound and finite directed synchronization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"fiber\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. No matching declaration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre dimension bounds are local on a finite open source cover and persist in a directed system under closed immersions into base changes",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover', 'AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed', 'AlgebraicGeometry.Scheme.Cover.locallyDirectedPullbackCover', 'AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V', 'AlgebraicGeometry.Scheme.IsLocallyDirected.V', 'AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀']; note=; digest=3f3810340f50b4bc. Read the hits: directed affine covers and their gluing, finite-type and quasi-finite stability, and proper integral maps to fields do not state this dimension bound or synchronization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bound on the topological Krull dimension of every fibre of a locally finite type morphism is preserved by arbitrary base change and closed immersion, and finitely many eventual bounds hold at a common directed index",
+   "results": "8 hits; top=['AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.LocallyOfFiniteType', 'AlgebraicGeometry.quasiCompact_isStableUnderBaseChange', 'AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.LocallyQuasiFinite']; note=; digest=e5cd5b1ac3a8cdd9. Read the hits: directed affine covers and their gluing, finite-type and quasi-finite stability, and proper integral maps to fields do not state this dimension bound or synchronization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-limit-fibre-dimension-bound",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Auxiliary finite-chart synchronization in the retained finite-stage relative-dimension descent branch below lem-trf-limit-fibre-dimension-bound, steps 4, 6--7; ancestor lem-trf-local-term-locality (1)--(2). The latest ancestor proof gives the contracting-correspondence/normal-cone argument, not this auxiliary dimension lemma.",
+   "via": [
+    "lem-trf-limit-fibre-dimension-bound",
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-trf-marked-curve-finite-type-model",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-open-chart-fibre-bound-synchronization",
+  "worker": "stage1",
+  "summary": "Statement retained. Six-step proof identifies restricted fibres as an open cover, proves both local/global implications, uses 02FY and 0B7I to bound base-changed fibres, restricts the closed comparison to a fibre, and writes out the closed-subspace chain and finite directed induction arguments. All substantive tools already have nodes; zero new nodes. Empty fibres, schemes, chart set and d=0 checked. No project declaration proves the whole item.",
+  "blueprint": "Retains the finite-stage relative-dimension auxiliary route below lem-trf-limit-fibre-dimension-bound. Read the latest sk-i-curve-zero section and lem-trf-local-term-locality proof; the latter now invokes contracting correspondences via normal-cone specialization and does not itself state this auxiliary finite-chart fact. No unit/chapter edit or route replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic Tag 02FY local fibre-dimension equality under arbitrary base change of a locally finite type morphism; already used by the same relative-dimension branch, and no same-unit node states this general equality."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic Topology 0B7I equality converts pointwise local dimension bounds to the global bound on each new fibre; no same-unit statement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-c791ea10b",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-c791ea10b (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, no new nodes, statement unchanged from the Q155 re-split of lem-trf-limit-fibre-dimension-bound. Parent steps 2 and 4 use exactly clauses (1) and (2). The item is still unsplit in live and side-live, has no repair note, and cites no SGA. Sources read: Stacks 02FY(1) at morphisms.tex l.5425, 0B7I at topology.tex l.1428, 01QR at morphisms.tex l.165 and 0055; tags checked in tags/tags. Step 1 (elementary): the chart fibre is homeomorphic to W∩f^{-1}(s), by the fibre homeomorphism of def-pc-scheme-fibre and the open-subscheme identification; it is empty when s∉V. Step 2: the forward direction is open-subspace monotonicity; the converse is lem-weil-pbc-dimension-bound-open-cover, whose quasi-sober and T0 hypotheses follow from the existence and uniqueness of generic points in lem-weil-pbc-scheme-sober; no finite type is needed. Step 3: lem-sc-fibre-dimension-after-base-change applies to g_{i,a} (locally of finite type, assumed) along V_{j,a}→V_{i,a}. Its def-kun-dimension is the same min/chain notion as def-kun-topological-dimension-at-point, so dim_x is at most the whole fibre's dimension, then 0B7I gives dim P_t≤d. Step 4: base change of the closed comparison along P_t→P, with (W_{j,a})_t ≅ W×_P P_t by pasting pullbacks; c is a map over V_{j,a}. Step 5 (closed subspace has smaller dimension) and step 6 (finite directed upper bound, including A=∅) are genuinely elementary. Edge cases checked: A=∅, empty fibres or schemes, d=0, singleton I, non-Noetherian fibres in (1), nonreduced closed subschemes. No duplicate found by rg -L over the snapshot dag/nodes. Accepted tool_uses: lem-sc-fibre-dimension-after-base-change (generic 02FY) and lem-weil-pbc-dimension-supremum-local-dimensions (generic 0B7I, Lean-closed). proof_deps equals the union of the step uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.OpenChartFibreBoundSynchronization",
+  "declaration": "AlgebraicGeometry.openChart_fibreBound_synchronization",
+  "file": "lean/Sheaf/TraceFormula/OpenChartFibreBoundSynchronization.lean",
+  "statement": "theorem openChart_fibreBound_synchronization {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (X S : Iᵒᵖ ⥤ Scheme.{u}) (f : X ⟶ S) {A : Type v} [Finite A] (W V : A → Iᵒᵖ ⥤ Scheme.{u}) (ιW : ∀ a : A, W a ⟶ X) (ιV : ∀ a : A, V a ⟶ S) (hW : ∀ (a : A) (i : I), IsOpenImmersion ((ιW a).app (op i))) (hV : ∀ (a : A) (i : I), IsOpenImmersion ((ιV a).app (op i))) (hcover : ∀ (i : I) (x : X.obj (op i)), ∃ a : A, x ∈ Set.range ((ιW a).app (op i))) (g : ∀ a : A, W a ⟶ V a) (hrestrict : ∀ a : A, g a ≫ ιV a = ιW a ≫ f) (d : ℕ) : (∀ i : I, (∀ s : S.obj (op i), topologicalKrullDim ((f.app (op i)).fiber s) ≤ (d : WithBot ℕ∞)) ↔ ∀ (a : A) (t : (V a).obj (op i)), topologicalKrullDim (((g a).app (op i)).fiber t) ≤ (d : WithBot ℕ∞)) ∧ ((∀ (a : A) (i : I), LocallyOfFiniteType ((g a).app (op i))) → (∀ (a : A) (i j : I) (h : i ≤ j), IsClosedImmersion (pullback.lift ((W a).map (homOfLE h).op) ((g a).app (op j)) ((g a).naturality (homOfLE h).op))) → (∀ (a : A) (i j : I), i ≤ j → (∀ t : (V a).obj (op i), topologicalKrullDim (((g a).app (op i)).fiber t) ≤ (d : WithBot ℕ∞)) → ∀ t : (V a).obj (op j), topologicalKrullDim (((g a).app (op j)).fiber t) ≤ (d : WithBot ℕ∞)) ∧ ((∀ a : A, ∃ i : I, ∀ t : (V a).obj (op i), topologicalKrullDim (((g a).app (op i)).fiber t) ≤ (d : WithBot ℕ∞)) → ∃ j : I, ∀ k : I, j ≤ k → ∀ s : S.obj (op k), topologicalKrullDim ((f.app (op k)).fiber s) ≤ (d : WithBot ℕ∞)))",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc193d286",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: (1) per-stage iff without finite type; (2) persistence for all i≤j and eventual bound for all k≥j, with LocallyOfFiniteType and the closed-immersion hypothesis only in (2). Comparison is the canonical pullback.lift via g-naturality into W_i ×_{V_i} V_j; open charts encoded as natural open immersions; hrestrict makes g the restriction of f. Edge cases fine: A empty, empty schemes/fibres (⊥), d=0, i=j. Universes: I and schemes share u (project convention), A in its own universe v. lean.statement is verbatim the file signature. The 7 dependency records and imports match; proof-only imports exist in side-live. No definitions, sorry only, no new nodes; docstrings carry source and blueprint; report has both sections. No findings."
+ }
+}

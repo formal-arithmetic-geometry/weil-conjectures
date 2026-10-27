@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-completed-quotient-reduction-presentation",
+ "kind": "statement",
+ "title": "The prescribed ordinary quotient model is a reduction presentation",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme Y and a flat-term K-flat complex P on its small pro-etale site [def-weil-l-adic-coefficient-extension, def-pc-scheme, def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Use the precise quotient complex and fixed coherent reduction and ordinary evaluation isomorphisms of [def-pur-completed-comparison-quotient-realization-data, def-pur-completed-pullback-tower-core]. These data satisfy CoefficientReductionPresentation [def-pur-coefficient-reduction-presentation]: at every natural-number level n (positive exponent n+1), the localization of the ordinary evaluation isomorphism composed with the evaluated coherent reduction comparison equals the finite K-flat reduction comparison composed with the calculus evaluation map; every actual quotient transition commutes with the prescribed ordinary evaluation isomorphisms. No replacement of P or its quotient system is allowed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral level and reduction compatibility; the single-input presentation step of lem-pur-completed-comparison-quotient-normalization. Stacks 0941 and 06YY; normalization equations of pullbackTensorReductionModel_existsUnique and pullbackTensorReductionEvaluation_existsUnique."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-completed-comparison-quotient-realization-data",
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-coefficient-reduction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the fixed coherent reduction model under its reduction/total-limit adjunction. By its defining equation the transpose is the localized ordinary quotient unit followed by the canonical total-limit unit. Project to each finite level. Under the finite scalar-extension/restriction adjunction this is the same unit that normalizes both the ordinary evaluation comparison and the finite K-flat reduction comparison. Injectivity of the adjunction Hom equivalence proves the presentation comparison equation.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each m >= n transpose the two ordinary quotient/evaluation composites. Naturality of the quotient unit makes both transposes the same unit followed by the actual quotient map. The Hom equivalence is injective, and mapHomologicalComplex preserves this equality, giving the transition equation. This includes m=n and the zero complex.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral level and reduction compatibility; the single-input presentation step of lem-pur-completed-comparison-quotient-normalization. Stacks 0941 and 06YY; normalization equations of pullbackTensorReductionModel_existsUnique and pullbackTensorReductionEvaluation_existsUnique."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of recursively defined tensor and pullback maps on normalized quotient complexes and invertibility of adjunction counit",
+   "results": "8 Dold-Kan normalization and comparison naturality hits. No result about the prescribed ordinary quotient reduction presentation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. The required normalization relates the project-specific ordinary quotient, derived reduction model and finite scalar-extension comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "Adjunction.unit_naturality and two LiftRightAdjoint unitEqualizes declarations.",
+   "date": "2026-10-27",
+   "verdict": "Unit naturality supplies the categorical calculation but does not supply the compatibility of the fixed ordinary/derived quotient presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModels.*naturality|ReductionPresentation",
+   "results": "msearch returned no Mathlib hits. Local rg found the CoefficientReductionPresentation definition and its existential reductionModel API, but no theorem for the specific pullbackTensorReductionModel and pullbackTensorReductionEvaluationComplex.",
+   "date": "2026-10-27",
+   "verdict": "No existing statement supplies these fixed presentation equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedComparisonQuotientNormalization",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-comparison-quotient-normalization",
+   "place": "The single-representative CoefficientReductionPresentation conjunct; quotient and evaluation normalization in proof step 1.",
+   "via": [
+    "lem-pur-completed-comparison-quotient-realization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedQuotientReductionPresentation",
+  "file": "lean/Sheaf/Paper/CompletedQuotientReductionPresentation.lean",
+  "declaration": "WeilConjectures.CompletedQuotient.completedQuotientReductionPresentation",
+  "statement": "theorem completedQuotientReductionPresentation\n    (Y : Scheme.{u})\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :\n    CoefficientReductionPresentation l E Y\n      (pullbackTensorCalculus l E Y).toCoefficientDerivedSystemReduction\n      P.obj P.property.1 (quotient l E P.obj)\n      ((pullbackTensorReductionModel l E Y).app P)\n      (fun n ↦ ((pullbackTensorReductionEvaluationComplex l E Y n).app P.obj).symm)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T131455-L-2940877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T131455-L-2940877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

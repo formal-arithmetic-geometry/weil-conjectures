@@ -5,7 +5,7 @@ Authors: SHEAF group N1
 -/
 module
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison
+public import Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import Mathlib.CategoryTheory.Adjunction.Unique
 @[expose] public noncomputable section

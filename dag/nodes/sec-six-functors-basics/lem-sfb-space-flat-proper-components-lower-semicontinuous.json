@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-space-flat-proper-components-lower-semicontinuous",
+ "kind": "statement",
+ "title": "Lower semicontinuity of geometric component counts for proper flat spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a proper flat morphism of finite presentation from an algebraic space [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Finite presentation means local finite presentation on etale scheme charts, quasi-compactness, and quasi-separatedness. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the atlas point topology [def-a1-space-point-topology]. For each $t\\in T$ choose an algebraic closure $\\overline{\\kappa(t)}$ of the residue field [def-weil-residue-field, def-weil-algebraic-closure], and let $n_f(t)$ be the number of maximal nonempty connected subsets of $X\\times_T\\operatorname{Spec}\\overline{\\kappa(t)}$. This number is finite. For every $t\\in T$ there is an open neighbourhood $V$ of $t$ such that $n_f(u)\\geq n_f(t)$ for every $u\\in V$. Empty fibres have count zero. No reducedness hypothesis on the geometric fibres or Noetherian hypothesis on $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, restricted to a scheme target; finiteness at the beginning of its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "For any $t\\in T$, properness survives base change to $\\operatorname{Spec}\\overline{\\kappa(t)}$. Apply the proper-space global-algebra theorem only in its unrestricted first clause: the component set is finite and its components are clopen. This does not require reducedness. It proves finiteness of $n_f(t)$, including zero for an empty fibre.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-proper-global-algebra-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  },
+  {
+   "text": "We will use invariance of the count under scheme base change. If $g:T'\\to T$ and $t'\\mapsto t$, choose algebraic closures $\\Omega$ of $\\kappa(t)$ and $\\Omega'$ of $\\kappa(t')$. Regard both as extensions of $\\kappa(t)$ and embed them in a common field, then in its algebraic closure $M$. Reassociation of fibre products identifies the two resulting fibres over $M$. The separably closed component theorem applied to each algebraically closed field $\\Omega,\\Omega'$ gives component bijections with this common fibre. Thus $n_{f_{T'}}(t')=n_f(t)$. The same argument works for an arbitrary algebraically closed extension of the residue field.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "def-weil-algebraic-closure",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-sepclosed-components-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1B, lemma-base-change-fibres-nr-geometrically-connected-components, proof; spaces-over-fields.tex Tag 0A12."
+   }
+  },
+  {
+   "text": "Fix $t$. Restrict to an affine open neighbourhood $T_0=\\operatorname{Spec}A$ of $t$, replacing $X$ by its pullback. Properness, flatness and finite presentation persist by the base-change locality theorem, and step 2 identifies the counts on $T_0$ with the original counts. Take the canonical factorization $X\\xrightarrow q Z=\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)\\xrightarrow\\pi T_0$. The space Stein theorem gives integral $\\pi$ and proper $q$ with nonempty geometrically connected fibres. The Stein-fibre theorem gives a finite set $\\pi^{-1}(t)$ with finite residue extensions. Therefore integral-fibre etale splitting applies to $\\pi$ at $t$: obtain an affine etale $g:U\\to T_0$, $u\\mapsto t$, and a finite clopen partition $Z_U=\\coprod_{i=1}^m V_i$, where each $V_i$ has exactly one point $v_i$ over $u$ and $\\kappa(v_i)/\\kappa(u)$ is purely inseparable. Do not identify $m$ with the number of points of $Z$ over $t$ before this etale extension.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-stein-factorization-affine",
+    "lem-sfb-space-stein-finite-fibres-residue-fields",
+    "lem-weil-pbc-integral-fibre-etale-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  },
+  {
+   "text": "Let $X_U=X\\times_{T_0}U$, and let $q_U:X_U\\to Z_U$ be the pullback of $q$. Put $X_i=q_U^{-1}(V_i)$ as an open subspace: on a scheme test it is the inverse image of the open subscheme $V_i$. The open-subspace definition makes this an algebraic space. Continuity and the open-subspace topology show that these are a finite disjoint clopen partition of $X_U$. They remain such a partition after every scheme base change, since inverse images preserve unions, intersections and complements on scheme tests.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-open-subspace",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  },
+  {
+   "text": "Set $k=\\kappa(u)$ and choose its algebraic closure $\\Omega$. The scheme $(V_i)_u$ has exactly one point and purely inseparable residue extension, hence is radicial. Universal injectivity gives at most one point in $(V_i)_\\Omega$. There is at least one: in characteristic $p>0$, embed $\\kappa(v_i)$ in $\\Omega$ by sending $a$, with $a^{p^r}=c\\in k$, to the unique root of $Z^{p^r}-c$. Increasing exponents proves independence, and a common exponent for two elements proves additivity and multiplicativity. In characteristic zero the extension is trivial. The resulting residue-field morphism supplies an $\\Omega$-point. Write $z_i$ for the unique point. The fibre of $q_U$ after extension to $\\Omega$ over $z_i$ is, by reassociating fibre products, a field-extension fibre of $q$. It is nonempty and connected by the Stein theorem. Apply the scheme-target fibre-topology theorem to identify it homeomorphically with the inverse image of $z_i$, which is all of $(X_i)_\\Omega$. Thus every $(X_i)_\\Omega$ is nonempty connected.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-radicial-morphism",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-algebraic-closure",
+    "lem-sfb-space-stein-factorization-affine",
+    "lem-sfb-space-scheme-fibre-topology",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  },
+  {
+   "text": "The geometric fibre over $u$ is partitioned by the $m$ nonempty connected clopen subsets $(X_i)_\\Omega$. A connected subset meeting a clopen piece lies in that piece, because otherwise that piece and its complement separate the subset. Hence these pieces are exactly the maximal nonempty connected subsets. Step 2 yields $n_f(t)=m$. If $m=0$, the fibre is empty and the desired inequality holds on all of $T$ since counts are nonnegative; henceforth assume $m>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  },
+  {
+   "text": "The map $X_U\\to U$ is flat and finitely presented by base-change locality. Each $X_i\\to U$ is flat and locally of finite presentation. To check the restriction, use a surjective etale scheme chart $H\\to X_U$ and its open inverse image $H_i$ of $X_i$. The chart test makes $H\\to U$ flat and locally of finite presentation. The same local-ring maps prove flatness on $H_i$. At a point of $H_i$, choose a finite-presentation affine witness $\\operatorname{Spec}C$ for $H\\to U$ and shrink to a principal open $D(h)$ lying in $H_i$. If $C=R[x_1,\\ldots,x_a]/(r_1,\\ldots,r_b)$ then $C_h=R[x_1,\\ldots,x_a,z]/(r_1,\\ldots,r_b,zh-1)$ is finitely presented over $R$. The chart test back on $H_i\\to X_i$ gives the claim. The universally-open theorem now says that $W_i=\\operatorname{im}(|X_i|\\to U)$ is open. It contains $u$ by step 5.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-trf-algebraic-space",
+    "def-a1-space-open-subspace",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  },
+  {
+   "text": "Put $W=\\bigcap_{i=1}^mW_i$, an open neighbourhood of $u$. For $w\\in W$, the point-image formula applied to $X_i\\to U$ and $\\operatorname{Spec}\\overline{\\kappa(w)}\\to U$ shows that $(X_i)_{\\bar w}$ is nonempty, since $w$ belongs to the image of $X_i$. Thus $(X_U)_{\\bar w}$ is partitioned into $m$ nonempty clopen pieces. Each component lies in one piece, and each nonempty piece contains a component (the component of any one of its points), so $n_{f_U}(w)\\ge m$. The scheme etale-open theorem makes $g$ open; therefore $V=g(W)$ is an open neighbourhood of $t$ in $T_0$, hence in $T$. For $v\\in V$, choose $w\\in W$ over $v$. Step 2 gives $n_f(v)=n_{f_U}(w)\\ge m=n_f(t)$, as required.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-proper-global-algebra-components",
+  "lem-weil-common-extension-fields",
+  "def-weil-algebraic-closure",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-sepclosed-components-base-change",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-stein-factorization-affine",
+  "lem-sfb-space-stein-finite-fibres-residue-fields",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-point-open-calculus",
+  "def-pc-scheme-fibre",
+  "def-weil-radicial-morphism",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-sfb-space-scheme-fibre-topology",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-weil-pbc-etale-morphism-open-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0E1D, lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof; Tag 0E1B for invariance; the fibre topology is made explicit by decent-spaces.tex Tag 0AC8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric connected component counts in a proper flat finitely presented family of algebraic spaces are lower semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, abstract finite algebras, spectra or topological functions; none states this algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerSemicontinuous\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, abstract finite algebras, spectra or topological functions; none states this algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "component.*lowerSemi|lowerSemi.*component|geometric.*connected.*component",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, abstract finite algebras, spectra or topological functions; none states this algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Disconnected geometric fibres of proper flat algebraic space families remain disconnected nearby",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] : GeneralizingMap f\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : DiscreteTopology (f.fiber y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, abstract finite algebras, spectra or topological functions; none states this algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a proper flat finitely presented family each of the finitely many geometric connected components persists over an open neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, abstract finite algebras, spectra or topological functions; none states this algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric connected component count of a proper flat finitely presented algebraic space over a scheme is lower semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerSemicontinuous\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "component.*lowerSemi|lowerSemi.*component|geometric.*connected.*component",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Disconnected geometric fibres in proper flat finitely presented families of algebraic spaces remain disconnected on a neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : DiscreteTopology (f.fiber y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Each of the finitely many geometric connected components of a proper flat algebraic space family persists over an open neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-flat-geometric-component-count",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Final shrinking after the proper open has been spread to an etale neighbourhood: Tag 0E1E keeps the number of geometric connected components equal to one. Supporting input: Tag 0E1E proof, first sentence invoking Tag 0E1D; persistence of components without reducedness. Current latest blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper direct-image input; retained historical alteration-chain provenance, with this split supplying the Tag 0E1D auxiliary component-persistence input only.",
+   "via": [
+    "lem-sfb-space-proper-flat-geometric-component-count",
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-proper-components-lower-semicontinuous",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0E1D with explicit geometric count invariance, affine Stein factorization, integral etale splitting, radicial geometric points, fibre topology, and open-image descent. Reused the general proper-space component finiteness theorem without reducedness. Created three statement-only prerequisites (0A1C, 0E1C, 0AC8); scheme-only analogues are not algebraic-space attachments. Checked every cited statement and all empty/inseparable/non-Noetherian cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Final shrinking after the proper open has been spread to an etale neighbourhood: Tag 0E1E keeps the number of geometric connected components equal to one. Supporting input: Tag 0E1E proof, first sentence invoking Tag 0E1D; persistence of components without reducedness. Current latest blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper direct-image input; retained historical alteration-chain provenance, with this split supplying the Tag 0E1D auxiliary component-persistence input only.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic amalgamation of two field extensions compares geometric fibres; the unit has no such field construction."
+   },
+   {
+    "node": "lem-weil-pbc-integral-fibre-etale-splitting",
+    "why": "Generic splitting of an integral affine scheme morphism, applied to the scheme Stein base; no node of this unit states it."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-image and open-subspace topology for spaces, used for clopen pieces, geometric nonemptiness and the open etale image; not a trace-formula argument."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and reassociation of sheaf fibre products; it supplies space foundations and does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-d0c585910",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-d0c585910 (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, the statements of all 22 cited nodes, and the Stacks sources: 0E1D (spaces-more-morphisms.tex 8350-8386), 0A1C with its proof, 0A19, 0E1C, and 0AC8 (decent-spaces.tex) with its proof. The item statement is the same as on base and live; it is 0E1D over a scheme target T. Steps 1-8 follow 0E1D. (1) Finiteness comes from proper base change and the unrestricted clause of global-algebra-components. (2) Count invariance uses common-extension-fields and sepclosed base change in both directions. (3) The Stein node and the 0E1C node supply the hypotheses of 0BSR: integral map of affine schemes, finite fibre, finite residue extensions. (4) Elementary clopen partition by open subspaces. (5) A radicial fibre has exactly one Ω-point (embedding via p^r-th roots written out); the Stein fibre is connected, and 0AC8 applied over the scheme target (Z_U)_Ω identifies it with (X_i)_Ω. (6) m = n_f(t), with m = 0 handled. (7) Chart test plus the C_h presentation, then flat+lfp universally open. (8) Point-image formula, étale-open leaf and step 2. proof_deps equals the union of uses. New nodes: the 0A1C affine Stein node, the 0E1C finite-fibre node and the 0AC8 scheme-target fibre-topology node are true specializations, statement-only, self-contained, correct created/blueprint.via, five searches each. They are strictly smaller than the item and are not duplicates: the DAG has only scheme analogues (03H2, 0E0M, def-pc-scheme-fibre); I searched by tags and read the sfb/trf Stein nodes. No new item split exists in the live or side-live clones, so no supersession. No repair note, so the re-split rule does not apply. Accepted tool_uses: common-extension-fields, 0BSR integral-fibre-etale-splitting, a1 point-open calculus, space fibre products, all generic. No SGA citation. Batch-5 flags: every flagged citation reaches sec-trace-formula only through def-trf-algebraic-space (definition) or lem-trf-space-fibre-products-etale-covers (space foundations). Neither is a step of the trace formula or Poincaré duality, so all are accepted. Edge cases checked: empty fibres, non-reduced fibres, separable vs purely inseparable splitting, non-Noetherian A."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatProperComponentsLowerSemicontinuous",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.geometricComponentCount_lowerSemicontinuous",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatProperComponentsLowerSemicontinuous.lean",
+  "statement": "theorem geometricComponentCount_lowerSemicontinuous {S : Scheme.{u}} (T : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (hf : MapIsProper f) (hflat : MapIsFlat f) (hlfp : MapIsLocallyOfFinitePresentation f) (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (Ω : T.left → Type u) [∀ t : T.left, Field (Ω t)] [∀ t : T.left, Algebra (T.left.residueField t) (Ω t)] [∀ t : T.left, IsAlgClosure (T.left.residueField t) (Ω t)] : ∃ n : T.left → ℕ, (∀ t : T.left, Finite (ConnectedComponents (Point (Limits.pullback f.hom ((Scheme.fppfTopology.over S).yoneda.map (Over.homMk (U := Over.mk ((Spec.map (CommRingCat.ofHom (algebraMap (T.left.residueField t) (Ω t))) ≫ T.left.fromSpecResidueField t) ≫ T.hom)) (V := T) (Spec.map (CommRingCat.ofHom (algebraMap (T.left.residueField t) (Ω t))) ≫ T.left.fromSpecResidueField t) rfl))).obj)) ∧ n t = Nat.card (ConnectedComponents (Point (Limits.pullback f.hom ((Scheme.fppfTopology.over S).yoneda.map (Over.homMk (U := Over.mk ((Spec.map (CommRingCat.ofHom (algebraMap (T.left.residueField t) (Ω t))) ≫ T.left.fromSpecResidueField t) ≫ T.hom)) (V := T) (Spec.map (CommRingCat.ofHom (algebraMap (T.left.residueField t) (Ω t))) ≫ T.left.fromSpecResidueField t) rfl))).obj))) ∧ (∀ t : T.left, IsEmpty (Point (Limits.pullback f.hom ((Scheme.fppfTopology.over S).yoneda.map (Over.homMk (U := Over.mk ((Spec.map (CommRingCat.ofHom (algebraMap (T.left.residueField t) (Ω t))) ≫ T.left.fromSpecResidueField t) ≫ T.hom)) (V := T) (Spec.map (CommRingCat.ofHom (algebraMap (T.left.residueField t) (Ω t))) ≫ T.left.fromSpecResidueField t) rfl))).obj) → n t = 0) ∧ ∀ t : T.left, ∃ V : T.left.Opens, t ∈ V ∧ ∀ v : T.left, v ∈ V → n t ≤ n v",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f12d69bf",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read item, all 9 stmt_deps (unchanged vs side-live), Stacks 0E1D, module and report. Statement renders 0E1D over a scheme target: MapIsProper/MapIsFlat/MapIsLocallyOfFinitePresentation plus MapIsQuasiCompact of f and of its diagonal (finite presentation = lfp+qc+qs, the same encoding as IsProperCurveFamily; qc is implied by proper, so nothing stronger). Holds for every choice of algebraic closure Ω of each residue field. The geometric fibre is the real fppf sheaf pullback with the recorded point topology; the count is ConnectedComponents, with a Finite clause, n = Nat.card, an empty-fibre clause n = 0, and the neighbourhood inequality n t ≤ n v in the correct direction. No reducedness, Noetherian or universe restriction. stmt_deps gains only the landed nodes def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-proper-curve-moduli (MapIsQuasiCompact), both used in the signature and allowed by the brief. No dependency node changed, no new nodes, no definitions, proof is sorry, docstrings carry the source place, blueprint id and the 8 proof steps. Searched the project Lean trees: only scheme-level component-count results, no algebraic-space duplicate. lean.statement matches the file signature and all imported modules exist. Edge cases checked: empty target, empty fibre, non-reduced fibres, char p inseparable extensions, non-Noetherian T. No compile run (no file changed)."
+ }
+}

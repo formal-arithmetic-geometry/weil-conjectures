@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-lisse-open-unit-test-descent",
+ "kind": "statement",
+ "title": "Scalar contractible tests detect the actual open unit for lisse internal modules",
+ "statement": "Let $X$ be an affine scheme [def-weil-affine-spectrum], let $f\\in\\Gamma(X,\\mathcal O_X)$ and put $W=X[1/f]$. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. On every small pro-etale site $Z_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], put $\\Lambda_Z=p_Z^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and use internal $\\Lambda_Z$-modules [sk-def-sfb-module-objects]. Use ordinary uncompleted unbounded derived categories, with direct image computed by K-injective total derived functors of the internal-module direct image and with its actual derived adjunction unit [sk-def-sfb-module-derived-pushpull]. Derived sections of underlying abelian sheaves are computed by K-injectives [def-pur-ringed-site-zeroth-hypercohomology].\n\nAssume that for every affine pro-etale $v:V\\to X$ which is weakly contractible as an object of $X_{\\mathrm{proet}}$ [sk-def-pe-weak-contractible], the actual scalar restriction\n$$R\\Gamma(V,\\Lambda_V[0])\\longrightarrow R\\Gamma(V\\times_XW,\\Lambda_{V\\times_XW}[0])$$\nis an isomorphism in $D(\\mathbf{Ab})$ [def-weil-abstract-derived-category]. Weak contractibility here means that evaluation on $V$ sends every epimorphism of sheaves of sets on the full site $X_{\\mathrm{proet}}$ to a surjection.\n\nThen for every affine pro-etale $a:X'\\to X$, every lisse $\\Lambda_{X'}$-module $N$ (locally a finite direct sum of copies of $\\Lambda_{X'}$ on a pro-etale covering, with ranks allowed to vary) [def-sfb-lisse-coefficient-module], and $j':W\\times_XX'\\hookrightarrow X'$, the actual derived adjunction unit\n$$N[0]\\longrightarrow Rj'_*j'^*N[0]$$\nis an isomorphism in $D(\\operatorname{Mod}_{\\Lambda_{X'}})$. The coefficient ring is arbitrary, and no global trivialization, finite coefficient field, connectedness, or Noetherian assumption is required. Rank zero, empty schemes and identity opens are included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof step 8: unit-compatible localization, locally finite free trivializations, and conservative exact contractible evaluations. Agent-formulated sublemma; the complete retained argument and its existing citations are in report.md, not a theorem attributed to the blueprint."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-weak-contractible",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the lisse trivialization to a pro-etale covering with a finite-free module on each member.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3). B3 decomposition into the regular-module calculation and open-unit cover descent, with finite-biproduct propagation proved in Lean."
+   }
+  },
+  {
+   "text": "For each chart compose its weakly etale covering map with a. Apply the rank-one scalar criterion to obtain invertibility of the actual open unit on the regular module on that chart. No affineness of the chart is required.",
+   "uses": [
+    "lem-sfb-scalar-tests-regular-open-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3). B3 decomposition into the regular-module calculation and open-unit cover descent, with finite-biproduct propagation proved in Lean."
+   }
+  },
+  {
+   "text": "Whisker the actual adjunction unit by the degree-zero single functor. Both endpoint functors are additive, hence preserve finite coproducts. Its component on a finite biproduct of the regular module is invertible by the colimit comparison lemma. Naturality transports this along the given finite-free trivialization, including the empty biproduct of rank zero.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3). B3 decomposition into the regular-module calculation and open-unit cover descent, with finite-biproduct propagation proved in Lean."
+   }
+  },
+  {
+   "text": "Apply the cover descent criterion to the chart units. It returns invertibility of the specified original unit at N[0], completing the result with the original signature.",
+   "uses": [
+    "lem-sfb-open-unit-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3). B3 decomposition into the regular-module calculation and open-unit cover descent, with finite-biproduct propagation proved in Lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-open-unit-cover-descent",
+  "lem-sfb-scalar-tests-regular-open-unit",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas restrict-K-injective-to-open (08FI), unbounded-cohomology-of-open (0D6F), modules-abelian-unbounded (0D6J); agent assembly of blueprint latest, six-functor stability direct-images paragraph (3). B3 decomposition into the regular-module calculation and open-unit cover descent, with finite-biproduct propagation proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived open adjunction unit is an isomorphism for locally finite free internal condensed modules if scalar restriction is a quasi isomorphism on all weakly contractible affine pro etale tests",
+   "results": "8 hits: LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, LightCondensed.freeForgetAdjunction, LightCondMod.LocallyConstant.adjunction, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, Condensed.freeForgetAdjunction; digest e6c846ecb6117ead",
+   "date": "2026-10-22",
+   "verdict": "no match: locally free sheaf definitions and underived adjunction/sheaf equivalences do not identify or detect the actual derived open unit from scalar contractible tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Detect an open derived unit isomorphism for lisse sheaves of modules by scalar cohomology on weakly contractible affine pro etale objects",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongrPreregular_unitIso_hom_app_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso, CategoryTheory.Equivalence.sheafCongr.unitIso_hom_app_val_app, CategoryTheory.Equivalence.sheafCongr_unitIso, CategoryTheory.Equivalence.sheafCongr.unitIso, CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_inv_app_val_app; digest ea368574b43f55e0",
+   "date": "2026-10-22",
+   "verdict": "no match: locally free sheaf definitions and underived adjunction/sheaf equivalences do not identify or detect the actual derived open unit from scalar contractible tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLocallyFree\"",
+   "results": "11 hits: SheafOfModules.IsLocallyFree, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData, SheafOfModules.LocalGeneratorsData.isLocallyFree, SheafOfModules.IsLocallyFree.exists_isLocallyFreeData, SheafOfModules.IsLocallyFree.mk, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData.shrink, SheafOfModules.instIsQuasicoherentOfIsLocallyFree, SheafOfModules.instIsLocallyFreeFree; digest 1284985c16141a6a",
+   "date": "2026-10-22",
+   "verdict": "no match: locally free sheaf definitions and underived adjunction/sheaf equivalences do not identify or detect the actual derived open unit from scalar contractible tests"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|locallyFree|weaklyContractible).*(unit|derived|quasiIso)|(unit|derived|quasiIso).*(lisse|locallyFree|weaklyContractible)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: locally free sheaf definitions and underived adjunction/sheaf equivalences do not identify or detect the actual derived open unit from scalar contractible tests"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|locallyFree|weaklyContractible).*(unit|derived|quasiIso)|(unit|derived|quasiIso).*(lisse|locallyFree|weaklyContractible)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunctions or Zariski structure-sheaf results do not give the scalar-to-lisse derived pro-etale criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally free sheaves restriction derived adjunction unit detected on weakly contractible affine objects",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, PresheafOfModules.freeAdjunctionUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, PresheafOfModules.freeAdjunctionUnit_app, PresheafOfModules.freeAdjunction_unit_app, CategoryTheory.Sheaf.ΓRes, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.unit; digest 2d577bb4eeb39bc5",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunctions or Zariski structure-sheaf results do not give the scalar-to-lisse derived pro-etale criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar cohomology restriction on weakly contractible pro etale affines implies the derived open unit is an isomorphism for locally finite free internal modules",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.formallyUnramified_iff; digest 22d86633febe52e8",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunctions or Zariski structure-sheaf results do not give the scalar-to-lisse derived pro-etale criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torsion-acyclic-norm-coefficient-test",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof step 8: unit-compatible localization, locally finite free trivializations, and conservative exact contractible evaluations.",
+   "via": [
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lisse-open-unit-test-descent",
+  "worker": "stage1",
+  "summary": "Expanded the scalar-to-lisse descent: fixed the actual unit representative, tested on the absolute contractible basis inside trivializing charts, and descended acyclicity by the sheaf axiom. Added the general Stacks 0D6J derived-sections comparison; retained the statement unchanged.",
+  "blueprint": "Paragraph (3), inherited torsion-acyclic norm-coefficient-test step 8: locally finite free trivializations and conservative exact contractible evaluations; expands its actual unit compatibility.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-sfb-kflat-derived-adjunction-transport-shifts",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   },
+   {
+    "node": "sk-thm-pe-weakly-contractible-basis",
+    "why": "Generic ringed-site/contractible-basis or module-transport infrastructure needed for the unit calculation, not a replacement for the coefficient-test route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wc-sections-exact",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-kflat-derived-adjunction-transport-shifts",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-thm-pe-weakly-contractible-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-c6a3780e9",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-c6a3780e9 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Statement: unchanged and true. Tests: f invertible gives the identity unit; f=0 forces Λ(V)=0 on every test, so N=0; rank 0, empty X' and varying ranks all hold. Steps 1-2 use the internal/sectionwise transport with unit and counit, the alpha iso, slice exactness and the K-flat/exact adjunction transport (η^P=G(c^{-1})η^A), so u=j'_*s∘η^ord represents the actual unit. Steps 3-4: absolute contractible-basis tests inside trivializing charts (T=V×_X W agrees with the hypothesis's T), and the sectionwise unit is restriction. Step 5: I checked myself that u(V) is the actual derived restriction: with a homotopy-unique I|_T→J'|_T over N, Γ(T,a)∘u(V) equals the abelian restriction. det-pe-wc-sections-exact applies on V_proet because w-contractibility is a property of the ring. Steps 6-8: finite sums, cone cohomology vanishing on the tests, separatedness. New node lem-sfb-ringed-sections-forget-abelian: matches Stacks 0D6J(2) (sites-cohomology.tex 4453-4482) with the Γ(U,I)→Γ(U,J) representative; statement-only, derived form, searched. It is not a duplicate of the per-degree single-module lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison or the D^+ constant-ring lem-pe-left-module-derived-evaluation-forget, which the report missed; maintainer note only. The nine generic tool_uses are accepted. No SGA, no repair note, no cycle seen."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseOpenUnitTestDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_lisse_open_unit_of_scalar_contractible_tests",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openUnitTest",
+   "AlgebraicGeometry.ProEtale.openUnitTestProjection",
+   "AlgebraicGeometry.ProEtale.scalarOpenUnitTestRestriction",
+   "AlgebraicGeometry.ProEtale.isIso_lisse_open_unit_of_scalar_contractible_tests"
+  ],
+  "file": "lean/Sheaf/Paper/LisseOpenUnitTestDescent.lean",
+  "statement": "theorem isIso_lisse_open_unit_of_scalar_contractible_tests (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsAffine X] (f : Γ(X, ⊤)) (hscalar : ∀ (V : X.ProEt), IsAffine V.left → (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} V → IsIso (scalarOpenUnitTestRestriction Λ (X.basicOpen f) V)) (X' : Scheme.{u}) [IsAffine X'] (a : X' ⟶ X) [WeaklyEtale a] (N : Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1}) (condensedRingObj Λ X')) (hN : IsLisseCoefficientModule Λ N) : IsIso ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ (pullback.snd (X.basicOpen f).ι a)).unit.app ((DerivedCategory.singleFunctor _ 0).obj N))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d614121f4",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Only the item's lean field and the new module LisseOpenUnitTestDescent change; the node is otherwise identical to side-live and lean.statement is verbatim. Every clause matches: affine X with basicOpen f; unbundled commutative condensed Λ; condensedRingObj/Mod coefficients; tests are affine IsWeaklyContractible.{u+1} V on the full X-site (same universe as weaklyContractible_basis); the scalar arrow is rightDerivedFunctorNatTrans of sheafSections.map along the actual pullback projection, applied to Λ_X[0], canonically equal to RΓ(V,Λ_V)→RΓ(V×_X W,Λ); the conclusion ranges over affine WeaklyEtale a and lisse N (Mod.IsFree allows rank 0 and varying ranks), j' = pullback.snd, and the unit is that of the recorded derivedUpperStarLowerStarAdjunction. Edge cases rank 0, empty scheme, identity open and f=0 are covered. Helpers are real with docstrings; proof is sorry; the docstring has all 8 steps; report sections present. Advisory H9: some public imports may be unused. No compile run since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T080958-L-1747205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

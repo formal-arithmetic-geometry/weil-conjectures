@@ -1,0 +1,221 @@
+{
+ "id": "lem-trf-curve-pullback-tensor-euler",
+ "kind": "statement",
+ "title": "Euler increment for the pullback of a tensor product to an integral proper curve",
+ "statement": "Let $k$ be a field [def-weil-field], let $C$ be an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension], let $X$ be a scheme [def-pc-scheme], and let $j:C\\to X$ be any scheme morphism. Let $\\mathcal L,\\mathcal M$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module]. Suppose $j^*\\mathcal M$ is coherent [pqf-def-coherent], where $j^*$ is module pullback [def-pc-module-pullback]. With sheaf tensor product [def-pur-sheaf-tensor-product], coherent Euler characteristic [def-pc-euler-characteristic] and degree [def-pc-degree-line-bundle], one has\n$$\\chi(C,j^*(\\mathcal L\\otimes_{\\mathcal O_X}\\mathcal M))=\\deg_k(j^*\\mathcal L)+\\chi(C,j^*\\mathcal M).$$\nNo flatness, immersion or dominance hypothesis on $j$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYX, lemma-degree-tensor-product, proper-curve case via Tag 0AYV, lemma-degree-on-proper-curve, with generic rank one. Restriction comparison: Modules Tag 01CD, lemma-tensor-product-pullback, and Tag 01CT, lemma-constructions-invertible."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=j^*\\mathcal L$ and $B=j^*\\mathcal M$. Applying clause (1) of [lem-weil-pbc-invertible-pullback-tensor] to $j$ and then with the two line bundles interchanged shows that $A$ and $B$ are invertible. In particular both are locally free of rank one [def-sc-invertible-module]. The hypothesis of the item supplies coherence of $B$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8L, lemma-pullback-invertible; Tag 01C8, lemma-pullback-locally-free."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-curve-euler-tensor-generic-rank] on the given integral proper one-dimensional $C$, with its invertible first factor equal to $A$ and its coherent second factor equal to $B$. The generic local ring is $\\kappa(\\xi)$ as stated there. A local rank-one trivialization of $B$ gives $B_\\xi\\cong\\mathcal O_{C,\\xi}=\\kappa(\\xi)$: take germs of the trivialization and its inverse [def-weil-pbc-module-stalk]. The image of $1$ is a singleton basis, so its dimension is one [def-weil-vector-space-dimension]. Thus the cited formula, after $1\\cdot\\deg_k A=\\deg_k A$, gives $\\chi(C,A\\otimes B)=\\deg_k A+\\chi(C,B)$.",
+   "uses": [
+    "lem-trf-curve-euler-tensor-generic-rank",
+    "def-weil-pbc-module-stalk",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, with n=r=1."
+   }
+  },
+  {
+   "text": "Clause (2) of [lem-weil-pbc-invertible-pullback-tensor] gives an $\\mathcal O_C$-linear isomorphism $e:j^*(\\mathcal L\\otimes\\mathcal M)\\cong A\\otimes B$ for this arbitrary $j$. Applying cohomology to $e$ and $e^{-1}$ gives inverse $k$-linear maps in every degree. Hence each cohomology dimension, and therefore the alternating sum defining $\\chi$ [def-pc-euler-characteristic], agrees on these two sheaves. Substitute this equality in Step 2 and expand $A,B$ to obtain precisely the asserted formula.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CD, lemma-tensor-product-pullback; Euler characteristic transported along this sheaf isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-sc-invertible-module",
+  "lem-trf-curve-euler-tensor-generic-rank",
+  "def-weil-pbc-module-stalk",
+  "def-weil-vector-space-dimension",
+  "def-pc-euler-characteristic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, n=r=1; pullback comparisons from Modules Tags 0B8L and 01CD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eulerChar.*tensor|tensor.*eulerChar|Euler.*pullback|pullback.*Euler",
+   "results": "0 hits; . Searched Mathlib/AlgebraicGeometry. Read returned signatures: Pullback carrier, Picard-group, incidence-algebra and representation-character results do not assert coherent Euler characteristics on a proper integral curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of the restriction of a tensor product of invertible sheaves to an integral proper curve",
+   "results": "8 hits; Module.Invertible.instTensorProduct_2, CommRing.Pic.mk_tensor, IncidenceAlgebra.eulerChar_prod, FDRep.char_tensor, CategoryTheory.Sheaf.tensorProd_isSheaf, Module.Invertible.instTensorProduct, IncidenceAlgebra.eulerChar, Module.Invertible.instTensorProduct_1. Read returned signatures: Pullback carrier, Picard-group, incidence-algebra and representation-character results do not assert coherent Euler characteristics on a proper integral curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"tensor\"",
+   "results": "0 hits; . Read returned signatures: Pullback carrier, Picard-group, incidence-algebra and representation-character results do not assert coherent Euler characteristics on a proper integral curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback tensor compatibility and generic rank one imply chi of a tensor of line bundles on a proper integral curve equals degree plus chi",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField. Read returned signatures: Pullback carrier, Picard-group, incidence-algebra and representation-character results do not assert coherent Euler characteristics on a proper integral curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map from an integral proper curve to a scheme the Euler characteristic of the pullback of two line bundles tensor equals the degree of the first pullback plus Euler characteristic of the second",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField. Read returned signatures: Pullback carrier, Picard-group, incidence-algebra and representation-character results do not assert coherent Euler characteristics on a proper integral curve.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar.*tensor|tensor.*eulerChar|degree.*eulerChar",
+   "results": "{\"t\": \"2026-10-23T04:07:50Z\", \"tool\": \"grep\", \"query\": \"eulerChar.*tensor|tensor.*eulerChar|degree.*eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned signatures: incidence-algebra Euler characteristics, scheme fibre products, elliptic coordinate changes, and Lie ranks do not state coherent Euler characteristics of invertible twists on integral proper curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T04:07:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"eulerChar\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read returned signatures: incidence-algebra Euler characteristics, scheme fibre products, elliptic coordinate changes, and Lie ranks do not state coherent Euler characteristics of invertible twists on integral proper curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic on a proper integral curve after twisting a coherent sheaf by an invertible sheaf",
+   "results": "{\"t\": \"2026-10-23T04:07:50Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic on a proper integral curve after twisting a coherent sheaf by an invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar\", \"WeierstrassCurve.instIsEllipticHSMulVariableChange\", \"WeierstrassCurve.coe_variableChange_Δ'\", \"WeierstrassCurve.variableChange_Δ'\", \"WeierstrassCurve.isIntegral_iff\", \"WeierstrassCurve.inv_variableChange_Δ'\", \"WeierstrassCurve.exists_variableChange_isCharNeTwoNF\", \"WeierstrassCurve.j\"], \"digest\": \"424d110aeaf8039b\"}. Read returned signatures: incidence-algebra Euler characteristics, scheme fibre products, elliptic coordinate changes, and Lie ranks do not state coherent Euler characteristics of invertible twists on integral proper curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic of a tensor product of line bundles pulled back to a proper integral curve equals degree of the first plus Euler characteristic of the second",
+   "results": "{\"t\": \"2026-10-23T04:07:57Z\", \"tool\": \"leanfinder\", \"query\": \"Euler characteristic of a tensor product of line bundles pulled back to a proper integral curve equals degree of the first plus Euler characteristic of the second\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\"], \"digest\": \"e2ec5d4c92583538\"}. Read returned signatures: incidence-algebra Euler characteristics, scheme fibre products, elliptic coordinate changes, and Lie ranks do not state coherent Euler characteristics of invertible twists on integral proper curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper integral curve the Euler characteristic of a coherent sheaf twisted by a line bundle is rank times degree plus Euler characteristic",
+   "results": "{\"t\": \"2026-10-23T04:09:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper integral curve the Euler characteristic of a coherent sheaf twisted by a line bundle is rank times degree plus Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar_prod\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"LieModule.rank_le_natTrailingDegree_charpoly_ad\", \"LieModule.rank_eq_natTrailingDegree\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"LieAlgebra.engel_isBot_of_isMin.lieCharpoly_coeff_natDegree\"], \"digest\": \"f06b8c5dfff6cdfb\"}. Read returned signatures: incidence-algebra Euler characteristics, scheme fibre products, elliptic coordinate changes, and Lie ranks do not state coherent Euler characteristics of invertible twists on integral proper curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-degree-tensor-additive",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Returned proof Step 3: rank-one generic stalk, application of the integral-curve Euler formula, and comparison of the restricted tensor with the tensor of pullbacks.",
+   "via": [
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-curve-pullback-tensor-euler",
+  "worker": "stage1",
+  "summary": "Reused the existing generic-rank Euler formula and invertible pullback/tensor theorem; computed rank one explicitly and transported Euler characteristic along the tensor comparison. No new nodes or statement changes.",
+  "blueprint": "Realizes the returned Step 3 named in blueprint.from.place: rank-one generic stalk, integral-curve Euler formula, and comparison of the restricted tensor with the tensor of pullbacks; this is the existing ampleness/degree support chain under lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic module-pullback invertibility and tensor comparison, used as a black box; the curve Euler formula does not provide pullback comparisons."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-bca37333c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-bca37333c (reviewer sub-agent of L); spot-checked: The delivery is item-only, with no new nodes and the statement and stmt_deps unchanged; no repair note applies. Step 1: clause (1) of lem-weil-pbc-invertible-pullback-tensor holds for an arbitrary morphism (Stacks 0B8L, modules.tex:4143), so j*L and j*M are invertible; coherence of j*M is the item's hypothesis. Step 2: lem-trf-curve-euler-tensor-generic-rank applies, since C is integral, proper over k and of dimension 1, A is invertible and B is coherent. A rank-one trivialization gives B_xi = O_{C,xi} = kappa(xi), so r = 1, which matches Stacks 0AYV (varieties.tex:9669) with n = r = 1. Step 3: clause (2) of the same node gives the pullback-of-tensor isomorphism for any f (Stacks 01CD, modules.tex:2393), and cohomology of an isomorphism preserves chi. proof_deps equals the union of step uses, and there is no cycle. Small cases check out: the identity map with trivial bundles, O(a) and O(b) on P1 including negative degrees, and a constant j. The citer lem-trf-curve-degree-tensor-additive step 3 uses the statement exactly. The duplicate search found only a more general node, which the delivery cites, and non-matching degree nodes. The off-unit tool use of lem-weil-pbc-invertible-pullback-tensor is declared in split_report.tool_uses and accepted: it is a generic pullback fact with a Lean attachment and is already recorded as a tool in other units. There are no SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurvePullbackTensorEuler",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.eulerChar_tensorPullback_tensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurvePullbackTensorEuler.lean",
+  "statement": "theorem eulerChar_tensorPullback_tensor (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = 1) (X : Scheme.{u}) (j : C ⟶ X) (L M : X.Modules) [L.IsInvertible] [M.IsInvertible] (hM : RingedSpace.IsCoherent C.toRingedSpace ((tensorPullback j).obj M)) : ((tensorPullback j).obj (L ⊗ M)).eulerChar k = ((tensorPullback j).obj L).degree k + ((tensorPullback j).obj M).eulerChar k",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2ed79c2b",
+  "group": "N6",
+  "result": "pass",
+  "note": "Item-only delivery; lean.statement verbatim in file. All node hypotheses rendered exactly, nothing stronger: Field k, IsIntegral C, IsProper (C ↘ Spec k), topologicalKrullDim C = 1, arbitrary j : C ⟶ X, L M invertible, RingedSpace.IsCoherent of (tensorPullback j).obj M (recorded decl of pqf-def-coherent). Conclusion eulerChar k of pullback of L ⊗ M (tensor on X) = degree k (j*L) + eulerChar k (j*M), in ℤ. Tensor is SheafOfModules.monoidalCategory X.sheaf, the same as in the sibling generic-rank theorem and invertible_pullback_tensor, so the proof steps apply. Universe u for k, C and X is forced by the eulerChar/tensorPullback API. Docstrings carry source places and blueprint id. Edge cases checked (empty C, identity j, O(a)/O(b) on P1, constant/non-flat j, singular curves, any characteristic). No duplicate found; no new nodes. Report has Worker report and Second reading by N6 (thin self-check). No compile needed."
+ }
+}

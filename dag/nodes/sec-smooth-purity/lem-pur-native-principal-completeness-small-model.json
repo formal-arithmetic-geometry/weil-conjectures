@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-native-principal-completeness-small-model",
+ "kind": "statement",
+ "title": "Native Principal Completeness Small Model",
+ "status": "split",
+ "statement": "Let C be a site of object size c and arrow size v and let R have coefficient size q=max(c,v,r). Equip AsSmall at size q with the induced topology and its canonical equivalence to C. Under the displayed global and slice sheafification and derived-category structures, an object N is principally locally complete for a if and only if its exact restriction is principally locally complete for the restricted section on AsSmall. Dependencies: [lem-pur-native-ringed-restriction-slices], [lem-pur-native-ringed-restriction-localization], [def-pur-ringed-principal-local-tests].",
+ "stmt_deps": [
+  "lem-pur-native-ringed-restriction-slices",
+  "lem-pur-native-ringed-restriction-localization",
+  "def-pur-ringed-principal-local-tests"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "Principal local completeness is preserved and reflected on the AsSmall model. Every compatible slice section is determined by its terminal value, hence is the restriction of a native slice section. Transfer its covering divisibility and localization test. In the reverse direction choose the AsSmall copy of each native object; the faithful derived slice equivalence reflects zero objects. No vanishing or invertibility hypothesis on the generator is used. Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-slices",
+    "lem-pur-native-ringed-restriction-localization",
+    "def-pur-ringed-principal-local-tests",
+    "lem-pur-native-ringed-restriction-local-test",
+    "lem-pur-native-ringed-restriction-divisibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-slices",
+  "lem-pur-native-ringed-restriction-localization",
+  "def-pur-ringed-principal-local-tests",
+  "lem-pur-native-ringed-restriction-local-test",
+  "lem-pur-native-ringed-restriction-divisibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Let C be a site of object size c and arrow size v and let R have coefficient size q=max(c,v,r). Equip AsSmall at size q with the induced topology and its canonical equivalence to C. Under the displayed global and slice sheafification and derived-category structures, an object N is principally locally complete for a if and only if its exact restriction is principally locally complete for the restricted section on AsSmall.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"{C : Type u₂} [Category.{v} C] [EssentiallySmall.{v} C] (J : GrothendieckTopology C) (A : Type u₁) [Category.{v} A]\\n  [Abelian A] [IsGrothendieckAbelian.{v} A] [HasSheafify ((equivSmallModel C).inverse.inducedTopology J) A] :\\n  IsGrothendieckAbelian.{v} (Sheaf J A)\", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n  {\"name\": \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"[EssentiallySmall C] (F : Cᵒᵖ ⥤ A) :\\n  IsSheaf (regularTopology C) F ↔ IsSheaf (regularTopology (SmallModel C)) ((equivSmallModel C).inverse.op ⋙ F)\", \"doc\": \"For an essentially small category $\\\\mathcal{C}$, a presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ satisfies the sheaf condition with respect to the regular Grothendieck topology on $\\\\mathcal{C\"}\n  {\"name\": \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": HasSheafify J A\", \"doc\": \"For any essentially small site $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, and for any category $\\\\mathcal{A}$, there exists a sheafification functor from the category of presheaves on $\\\\m\"}\n  {\"name\": \"CategoryTheory.hasLimitsEssentiallySmallSite\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"[HasLimits <| Sheaf ((equivSmallModel C).inverse.inducedTopology J) A] :\\n  HasLimitsOfSize.{max v₃ w, max v₃ w} <| Sheaf J A\", \"doc\": \"If $\\\\mathcal{C}$ is an essentially small category equipped with a Grothendieck topology $J$, and $\\\\mathcal{A}$ is a category, then the category of sheaves $\\\\mathrm{Sh}(\\\\mathcal{C}, J; \\\\mathcal{A})$ ha\"}\n  {\"name\": \"CategoryTheory.smallSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": (Cᵒᵖ ⥤ A) ⥤ Sheaf J A\", \"doc\": \"The functor that transports a presheaf on the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ with values in $\\\\mathcal{A}$ through the equivalence with the small model of $\\\\mathcal{C}$, applies sheafifica\"}\n  {\"name\": \"CategoryTheory.smallSheafificationAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": smallSheafify J A ⊣ sheafToPresheaf J A\", \"doc\": \"For an essentially small category $\\\\mathcal{C}$ with Grothendieck topology $J$ and a category $\\\\mathcal{A}$, this defines an adjunction $\\\\text{smallSheafify}_J^\\\\mathcal{A} \\\\dashv \\\\text{sheafToPresheaf\"}\n  {\"name\": \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (hE : IsColimit E) : IsColimit (sheafifyCocone E)\", \"doc\": \"Let $F : \\\\mathcal{K} \\\\to \\\\text{Sh}(J, \\\\mathcal{D})$ be a functor representing a diagram of sheaves on a site $(\\\\mathcal{C}, J)$ with values in a category $\\\\mathcal{D}$. Let $E$ be a cocone for the dia\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \": (presheafToSheaf J A).IsLocalization J.W\", \"doc\": \"The sheafification functor from presheaves to sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, with respect to a Grothendieck topology $J$, is a localization functor with respect to t\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AsSmall\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.AsSmall\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" (D : Type u) [CategoryTheory.Category.{v, u} D] : Type (max u w v)\", \"doc\": \"`AsSmall C` is a small category equivalent to `C`.\\nMore specifically, if `C : Type u` is endowed with `Category.{v} C`, then\\n`AsSmall.{w} C : Type (max w v u)` is endowed with an instance of a small c\"}\n  {\"name\": \"CategoryTheory.instSmallCategoryAsSmall\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.SmallCategory (CategoryTheory.AsSmall C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.instInhabitedAsSmall\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [Inhabited C] : Inhabited (CategoryTheory.AsSmall C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AsSmall.down\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.Functor (CategoryTheory.AsSmall C) C\", \"doc\": \"One half of the equivalence between `C` and `AsSmall C`.\"}\n  {\"name\": \"CategoryTheory.AsSmall.equiv\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : C ≌ CategoryTheory.AsSmall C\", \"doc\": \"The equivalence between `C` and `AsSmall C`.\"}\n  {\"name\": \"CategoryTheory.AsSmall.up\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.Functor C (CategoryTheory.AsSmall C)\", \"doc\": \"One half of the equivalence between `C` and `AsSmall C`.\"}\n  {\"name\": \"CategoryTheory.AsSmall.up_obj_down\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (X : C) : (CategoryTheory.AsSmall.up.obj X).down = X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AsSmall.down_obj\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (X : CategoryTheory.AsSmall C) : CategoryTheory.AsSmall.down.obj X = X.down\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AsSmall.equiv_functor\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.AsSmall.equiv.functor = CategoryTheory.AsSmall.up\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AsSmall.equiv_inverse\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.AsSmall.equiv.inverse = CategoryTheory.AsSmall.down\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AsSmall.up_map_down\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X✝ Y✝ : C} (f : X✝ ⟶ Y✝) : (CategoryTheory.AsSmall.up.map f).down = f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AsSmall.down_map\", \"module\": \"Mathlib.CategoryTheory.Category.ULift\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X✝ Y✝ : CategoryTheory.AsSmall C} (f : X✝ ⟶ Y✝) : CategoryTheory.AsSmall.down.map f = f.down\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (AsSmall|sheafCongr|reflectsIsomorphisms) Mathlib/ (local read-only Mathlib source)",
+   "results": "216 matching source lines. First matches:\nMathlib/AlgebraicGeometry/AffineTransitionLimit.lean:965:    ⟨fun _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms⟩\nMathlib/AlgebraicGeometry/Modules/Sheaf.lean:80:  reflectsIsomorphisms_comp _ (PresheafOfModules.toPresheaf _)\nMathlib/RepresentationTheory/Rep/Basic.lean:187:instance reflectsIsomorphisms_forget : (forget (Rep.{w} k G)).ReflectsIsomorphisms where\nMathlib/RepresentationTheory/Rep/Basic.lean:568:  Limits.reflectsLimits_of_reflectsIsomorphisms\nMathlib/RepresentationTheory/Rep/Basic.lean:571:  Limits.reflectsColimits_of_reflectsIsomorphisms\nMathlib/Order/Category/PartOrdEmb.lean:346:  reflectsColimitsOfShape_of_reflectsIsomorphisms\nMathlib/CategoryTheory/Adhesive/Basic.lean:484:    reflectsLimitsOfShape_of_reflectsIsomorphisms\nMathlib/CategoryTheory/Adhesive/Basic.lean:486:    reflectsColimitsOfShape_of_reflectsIsomorphisms\nMathlib/Algebra/Category/CommBialgCat.lean:176:instance reflectsIsomorphisms_forget : (forget (CommBialgCat.{u} R)).ReflectsIsomorphisms where\nMathlib/Algebra/Category/Grp/Limits.lean:89:    CategoryTheory.reflectsIsomorphisms_forget₂ _ _\nMathlib/Algebra/Category/Grp/Limits.lean:236:    reflectsIsomorphisms_forget₂ _ _\nMathlib/Algebra/Category/ModuleCat/Abelian.lean:90:  reflectsLimits_of_reflectsIsomorphisms",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativePrincipalCompletenessSmallModel",
+  "file": "lean/Sheaf/CategoryTheory/NativePrincipalCompletenessSmallModel.lean",
+  "declaration": "CategoryTheory.NativeRestriction.smallModelComplete",
+  "statement": "theorem smallModelComplete\n    (a : (R.obj ⋙ forget CommRingCat).sections)\n    (N : DerivedCategory (NativeModules.{max c v r, c, v} R)) :\n    letI := globalModulesEquivalence.{max c v r, c, max c v r, v, r}\n      (K := Jsmall) F R\n    principalLocallyComplete.{c, v, r, w} R a N ↔\n      principalLocallyComplete.{max c v r, max c v r, r, w} S\n        (restrictedSection.{max c v r, c, max c v r, v, r} (K := Jsmall) F R a)\n        ((restrictModules.{max c v r, c, max c v r, v, r} (K := Jsmall) F\n          R).mapDerivedCategory.obj N)",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.smallModelComplete"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

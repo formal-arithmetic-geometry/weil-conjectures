@@ -1,0 +1,230 @@
+{
+ "id": "lem-weil-frobenius-finite-exchange-inverse",
+ "kind": "statement",
+ "title": "Finite Frobenius exchanges and their chosen compact-support inverse",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between finite-type $k_0$-schemes [def-weil-scheme-morphism-properties]. Write $f:X\\to Y$ for its base change to $k$, and $g_X,g_Y$ for the geometric-Frobenius scheme automorphisms [def-weil-frobenius-detailed]. Work in the unbounded derived categories of $A_n$-module sheaves on the small pro-etale sites [def-weil-pbc-proetale-site, def-weil-abstract-derived-category], with $Lf^*$, $Rf_*$ and $j_!$ of [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image, def-weil-extension-by-zero].\n\nSupply a compactification $c_0=(j_0,p_0)$ of $f_0$ over $k_0$ [def-weil-compactifications-refinements], and write $c=(j,p)$ for its base change. Thus $j$ is open, $p$ is proper, $f=pj$, and $Rf_!^c=Rp_*j_!$ is the chosen ambient functor [def-compact-support-direct-image-detailed]. Let $\\operatorname{FrEx}_{f,*}$ be precisely the unit--pullback-compositor--counit mate of [def-weil-frobenius-square-exchange], item 1, and let $b: Lg_{\\overline X}^*j_!\\to j_!Lg_X^*$ be the canonical open-square exchange in its item 2. For every $K\\in D(X_{\\mathrm{proet}},A_n)$ the two specified arrows\n$$\\operatorname{FrEx}_{f,*}(K):Lg_Y^*Rf_*K\\longrightarrow Rf_*Lg_X^*K,$$\n$$\\operatorname{FrEx}_{f,!}^c(K)=Rp_*(b_K)\\circ\\operatorname{FrEx}_{p,*}(j_!K):Lg_Y^*Rf_!^cK\\longrightarrow Rf_!^cLg_X^*K$$\nare isomorphisms, natural in $K$, in $D(Y_{\\mathrm{proet}},A_n)$. In particular the inverse of the second is\n$$\\operatorname{FrEx}_{p,*}(j_!K)^{-1}\\circ Rp_*(b_K^{-1}).$$\nOn the witnessed etale-origin domain, meaning $K\\cong\\nu_X^*L$ for $L\\in D^+(X_{\\mathrm{et}},A_n)$ [def-weil-pbc-etale-origin-witness], let $d$ be another compactification of $f$ and let $C_{d,c}:Rf_!^d\\xrightarrow{\\sim}Rf_!^c$ be the specified comparison [prop-compactification-coherence-detailed]. The transported compact exchange\n$$C_{d,c}(Lg_X^*K)^{-1}\\circ\\operatorname{FrEx}_{f,!}^c(K)\\circ Lg_Y^*C_{d,c}(K)$$\nis invertible, with inverse $Lg_Y^*C_{d,c}(K)^{-1}\\circ\\operatorname{FrEx}_{f,!}^c(K)^{-1}\\circ C_{d,c}(Lg_X^*K)$. No independence of the exchange from $c$ is asserted. The horizontal Frobenii are used as scheme isomorphisms, without an assumption that they are $k$-linear. No properness of $f$ or separatedness of $X_0,Y_0$ over $k_0$ is required.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), (1.1.10)-(1.1.11), (1.1.14), printed pp. 150-153; explicit coefficient-category verification is agent work extracted from the returned proof of lem-weil-frobenius-cohomology-transport-iso; Direct/compact exchange factors of those two arrows; returned proof steps 5-6, for general f_0 before the structure-map specialization."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-etale-origin-witness",
+  "prop-compactification-coherence-detailed"
+ ],
+ "proof": [
+  {
+   "text": "The geometric Frobenius of each of X0, Y0 and the retained middle model is the scheme automorphism of def-weil-frobenius-detailed. In intrinsic finite-coefficient coordinates form H = pullback along the inverse scheme map. The composition and identity natural isomorphisms of lem-trf-open-square-exchange, together with the two scheme inverse equations, give F H isomorphic to the identity and H F isomorphic to the identity. Equivalence.mk gives that each intrinsic derived pullback is an equivalence. This works for arbitrary finite coefficients and requires neither a stalk-prime-unit argument nor k-linearity.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-weil-mate-iso-along-equivalences to the canonical intrinsic derived adjunctions and the composition/commutativity pullback isomorphism in the actual finiteExchange definition. The horizontal equivalences from step 1 give its hypotheses. The two coordinate changes openSquareDerivedPullbackModel are natural isomorphisms, so whiskering and composition give invertibility of finiteTensorExchange. Specialize to f0 and the retained proper part using the commutativity of lem-weil-frobenius-square-cartesian. These are precisely the specified direct finite Frobenius transformations of def-weil-frobenius-square-exchange; use asIso for their natural isomorphisms.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-weil-frobenius-square-cartesian",
+    "def-weil-frobenius-square-exchange",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical constantOpenSquareExchange b of lem-trf-open-square-exchange on the very Cartesian square supplied in frobeniusFiniteOpenExchange by lem-weil-frobenius-square-cartesian. Whisker the proper natural isomorphism on the left by the intrinsic open functor J, then compose with b whiskered on the right by the proper image P. Its hom is definitionally frobeniusCompactFinite. The inverse of this composite is definitionally P.map(b.inv at K) followed by the proper inverse at J K, proving the requested formula without choosing any new exchange.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "lem-weil-frobenius-square-cartesian",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing definitions retain the pulledCompactOrigin witness and the specified frobeniusFiniteComparison C. No new witness or comparison is chosen. In arbitrary categories the composite F.mapIso(a), b, c.symm has forward map F.map(a.hom) followed by b.hom and c.inv, and inverse c.hom followed by b.inv and F.map(a.inv); their products cancel. Evaluate C on O and its pulled witness, use b = compactIso.app O.K, and substitute the equality compactIso.hom = frobeniusCompactFinite in the cancellation laws. Give the transported isomorphism exactly the specified forward and reverse arrows as fields. This proves both formulas without any further origin or coherence theorem.",
+   "uses": [
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-square-exchange",
+  "lem-trf-open-square-exchange",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-mate-iso-along-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne Weil II (1.1.7), (1.1.10)-(1.1.11), (1.1.14), pp. 150-153; M9 Lean proof via the existing intrinsic composition/identity isomorphisms, canonical finite mate, open-square isomorphism, and explicit composition of retained comparison isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient geometric Frobenius direct image and chosen compact support exchange are isomorphisms for any separated finite type morphism",
+   "results": "AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec; AlgebraicGeometry.IsFinite.of_comp; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.IsFinite.instOfIsIsoScheme; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical unit square counit mate for geometric Frobenius is invertible on finite coefficient pro etale direct image and extension by zero",
+   "results": "CategoryTheory.Equivalence.counit_app_functor; CategoryTheory.PreGaloisCategory.FibreFunctor.end_isUnit; CategoryTheory.mateEquiv; CategoryTheory.unit_mateEquiv; CategoryTheory.Adjunction.inv_counit_map; CategoryTheory.ExponentiableMorphism.coev; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Adjunction.toEquivalence_inverse; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app; CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app; CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius.*[Ee]xchange|[Ee]xchange.*[Ff]robenius|compactSupport.*[Ii]so",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite constant coefficients the derived direct image base change mate is invertible in a commuting square whose horizontal scheme maps are isomorphisms",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme; RingHom.IsStableUnderBaseChange.pullback_fst_appTop; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic geometry or mate ingredients do not state the specified ambient finite-coefficient Frobenius exchange and chosen compact-support inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius.*[Ee]xchange|[Ee]xchange.*[Ff]robenius|isIso.*mateEquiv",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic geometry or mate ingredients do not state the specified ambient finite-coefficient Frobenius exchange and chosen compact-support inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for derived direct image along scheme isomorphisms on pro etale sheaves and its compact support exchange inverse",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; RingHom.Etale.respectsIso; AlgebraicGeometry.Scheme.iso_hom_base_inv_base; AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso; AlgebraicGeometry.Scheme.hom_base_inv_base; AlgebraicGeometry.Scheme.Modules.pushforwardCongr; AlgebraicGeometry.IsProper.instRespectsIsoScheme; AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic geometry or mate ingredients do not state the specified ambient finite-coefficient Frobenius exchange and chosen compact-support inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.IsIso",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic geometry or mate ingredients do not state the specified ambient finite-coefficient Frobenius exchange and chosen compact-support inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley right mate of an invertible pullback square is an isomorphism when both side functors are equivalences; extension by zero commutes with isomorphism pullback",
+   "results": "CategoryTheory.CatCommSq.vInv; CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso; CategoryTheory.CatCommSq.hInv; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_inv_app; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_hom_app; CategoryTheory.Limits.CategoricalPullback.functorEquiv_inverse_obj_obj_iso_hom; CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_hom_app; CategoryTheory.Limits.CategoricalPullback.functorEquiv_inverse_obj_obj_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic geometry or mate ingredients do not state the specified ambient finite-coefficient Frobenius exchange and chosen compact-support inverse"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-frobenius-cohomology-transport-iso",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Direct/compact exchange factors of those two arrows; returned proof steps 5-6, for general f_0 before the structure-map specialization.",
+   "via": [
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-frobenius-finite-exchange-inverse",
+  "worker": "stage1",
+  "summary": "Proved invertibility of the actual ambient mate using the existing derived pullback equivalence and mate lemma; assembled the chosen compact arrow and its inverse from the open-square isomorphism; checked the etale-origin witness before conjugating by compactification comparisons. No statement change and no new nodes.",
+  "blueprint": "Realizes the direct and compact cohomology transport first arrows of def-weil-global-geometric-frobenius, via lem-weil-frobenius-cohomology-transport-iso, at the general finite-coefficient f_0 level.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-frobenius-open-square",
+    "why": "Generic Cartesian open-square input for the supplied compactification; no replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "Generic open extension-by-zero exchange on ambient finite pro-etale categories."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison inverse-image square establishes the etale-origin witness needed by compactification coherence."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "The statement itself specifies this comparison on its etale-origin domain; used only to conjugate the fixed chosen exchange."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-open-square-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-9b801d11a",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-9b801d11a (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement, stmt_deps and blueprint are byte-identical to the Q78-created node, and the 4 inherited searches are kept with 5 added. No repair note applies. Step 1: lem-weil-frobenius-square-cartesian, applied to f0 and p0, gives the automorphisms g_X, g_Y and g_Xbar. With ell != p, lem-weil-isomorphism-derived-pullback-equivalence makes their pullbacks equivalences on unbounded D(-_proet,A_{E,n}). Step 2: I checked the typing of lem-weil-mate-iso-along-equivalences (L=L'=Lf^*, G=Lg_Y^*, G'=Lg_X^*). Its alpha is exactly the unit-theta-counit formula of def-weil-pbc-ambient-ringed-exchange used in item 1 of def-weil-frobenius-square-exchange, theta is an isomorphism by definition, and the argument is the same for p. Step 3: lem-trf-frobenius-open-square (m=1) gives the Cartesian open square, and lem-trf-open-square-exchange gives the natural isomorphism b. Item 2 of the definition is Rp_*(b) after FrEx_{p,*} on all of D(X_proet), since Rf_!^c is defined on the ambient category, so the inverse formula is correct. Step 4: the finite Lg^* is termwise inverse image, and lem-weil-pbc-comparison-pullback gives an etale-origin witness for Lg_X^*K in D^+. prop-compactification-coherence-detailed (f separated finite type between finite-type schemes, ell invertible) supplies C_{d,c} at K and at Lg_X^*K, and the conjugated inverse is correct. The step makes no claim that the construction is independent of c. Source: Deligne Weil II (1.1.7) and (1.1.10)-(1.1.14), pp. 150-153, read; it motivates the transport, and the proof is correctly marked agent-written. No SGA. Edge cases checked: K=0, empty X0, f=id, j=id, d=c, unbounded K, and non-separated X0/Y0. Duplicate search over the 73 FrEx/Frobenius-exchange nodes (coef-frobenius-exchange-equivalence, pod compact-support exchange, pbc exchange-restriction, trf compact-power-exchange, native adic mates, the system-exchange-inverse sibling) found none at the finite ambient level. The trf and comparison-pullback citations are already in the stmt closure of def-weil-frobenius-square-exchange, so they add nothing new to the closure. Tool uses accepted. prop-compactification-coherence is on route anyway (sk-def-sf-operations)."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FrobeniusFiniteExchangeInverse",
+  "declaration": "WeilConjectures.FrobeniusExchange.frobenius_finite_exchange_inverse",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.frobeniusFiniteOpenExchange",
+   "WeilConjectures.FrobeniusExchange.frobeniusFiniteComparison",
+   "WeilConjectures.FrobeniusExchange.frobenius_finite_exchange_inverse"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FrobeniusFiniteExchangeInverse.lean",
+  "statement": "theorem frobenius_finite_exchange_inverse (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) {X₀ Y₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (c₀ : Compactification f₀.left) : ∃ (directIso : _ ≅ _) (properIso : _ ≅ _) (compactIso : _ ≅ _), directIso.hom = frobeniusDirectFinite D l E n hn f₀ ∧ properIso.hom = frobeniusDirectFinite D l E n hn (zlCompactificationProper D f₀ c₀) ∧ compactIso.hom = frobeniusCompactFinite D f₀ c₀ l E n hn ∧ (∀ K : proEtaleDerivedCategory (D.geometricFiber X₀).left (Padic.coefficientExtensionRing l E n), compactIso.inv.app K = (proEtaleConstantDerivedDirectImage (fiberMap D (zlCompactificationProper D f₀ c₀)) (Padic.coefficientExtensionRing l E n)).map ((frobeniusFiniteOpenExchange D l E n hn f₀ c₀).inv.app K) ≫ properIso.inv.app ((@sfIntrinsicDerivedOpen.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ _ (fiberMap D (zlCompactificationOpen D f₀ c₀)) (geometricCompactification_properties D f₀ c₀).1).obj K)) ∧ (∀ (d : Compactification (fiberMap D f₀)) (O : @CompactOriginCategory.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) (D.geometricFiber X₀).left), ∃ transportedIso : _ ≅ _, transportedIso.hom = (proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) (galois D Y₀)).map ((frobeniusFiniteComparison D l hl E n hn f₀ d (geometricCompactification D f₀ c₀)).hom.app O) ≫ (frobeniusCompactFinite D f₀ c₀ l E n hn).app (@CompactOrigin.K.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ O) ≫ (frobeniusFiniteComparison D l hl E n hn f₀ d (geometricCompactification D f₀ c₀)).inv.app (@pulledCompactOrigin.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ (galois D X₀) O) ∧ transportedIso.inv = (frobeniusFiniteComparison D l hl E n hn f₀ d (geometricCompactification D f₀ c₀)).hom.app (@pulledCompactOrigin.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ (galois D X₀) O) ≫ compactIso.inv.app (@CompactOrigin.K.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ O) ≫ (proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) (galois D Y₀)).map ((frobeniusFiniteComparison D l hl E n hn f₀ d (geometricCompactification D f₀ c₀)).inv.app O))",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The natural isomorphisms have the specified existing forward transformations; the two inverse formulas use the canonical open-square exchange and the normalized compactification comparison. Two real-data wrappers only supply inherited proof instances. No change to the mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfbc47d36",
+  "group": "NN",
+  "result": "pass",
+  "note": "All clauses match the node. directIso/properIso/compactIso have hom = frobeniusDirectFinite (the item-1 mate, for f and p) and frobeniusCompactFinite (= finiteCompact: the proper mate at j_! followed by Rp_*(b)). The compact inverse is Rp_*.map(b.inv) ≫ properIso.inv at j_!K, with frobeniusFiniteOpenExchange the same constantOpenSquareExchange instance as inside finiteCompact. The transport over d uses intrinsicCompactificationComparison d c (the normalized comparison, as in the dependency's transportCompact) on retained CompactOrigin witnesses and their pulled witnesses; hom and inv formulas are correct. Statement field verbatim; only the lean field differs from the live node. Helpers are non-hollow canonical instantiations; proof is sorry only; docstrings carry source, blueprint and 4 proof steps; imports are the stmt_dep and proof_dep modules. No extra hypotheses or universe restriction; edge cases n=1, K=0, empty schemes, f=id, j=id, d=c and unbounded K are covered. No duplicate found. Advisory: decls owned by def-weil-operation-exchange-coefficient-descent (in the closure via def-weil-frobenius-square-exchange) are used without that node in stmt_deps. No compile run (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T213314-L-318686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

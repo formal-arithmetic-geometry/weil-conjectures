@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-locally-separated-group-space-scheme",
+ "kind": "statement",
+ "title": "A locally separated group algebraic space over a field is a scheme",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $G$ be a group algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space]: multiplication $G\\times_kG\\to G$, identity $\\operatorname{Spec}k\\to G$ and inversion $G\\to G$ are morphisms of algebraic spaces satisfying the group identities on every test scheme. Assume $G$ is locally of finite type over $k$ [def-weil-finite-type-morphism], tested on etale scheme charts, and locally separated, meaning its diagonal is representable by immersions. Then $G$ is represented by a separated $k$-scheme locally of finite type, and its group operations are morphisms of that scheme, making it a group scheme [def-sc-group-scheme].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 08BH (lemma-group-scheme-over-field-separated), with the preceding paragraph explaining that locally separated spaces are decent; Tag 0B8F (lemma-group-space-scheme-locally-finite-type-over-k)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The identity $e:\\operatorname{Spec}k\\to G$ is a rational section. Apply [lem-sfb-locally-separated-rational-point-closed-immersion] with $Z=G$ and the identity extension $K=k$. Its immersion-diagonal hypothesis is exactly local separatedness here. Thus $e$ is representable by closed immersions.",
+   "uses": [
+    "lem-sfb-locally-separated-rational-point-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+   }
+  },
+  {
+   "text": "Put $d:G\\times_kG\\to G$, $d(g,h)=g^{-1}h$. For every test scheme, $d(g,h)=e$ if and only if $h=g$, so the square with top arrow $\\Delta:G\\to G\\times_kG$, bottom arrow $e:\\operatorname{Spec}k\\to G$, and right arrow $d$ is cartesian. To check the diagonal is a closed immersion, take any scheme $T\\to G\\times_kG$. Its pullback is $T\\times_{G,d} \\operatorname{Spec}k$. This is a scheme and a closed immersion into $T$ by the conclusion about $e$ in step 1. Equivalently, any further scheme pullback is closed by [lem-weil-pbc-closed-immersion-base-change]. Thus $G/k$ is separated. This is the explicit cartesian-square argument of Tag 06P6, not an additional group-space representability theorem.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\overline{k}$ using [def-weil-algebraic-closure]. By [lem-sfb-separated-group-space-geometric-scheme], the separated group space $G$ has $G_{\\overline{k}}$ represented by a scheme $H$. By [lem-trf-space-fibre-products-etale-covers] the base change is an algebraic space, and its pulled-back etale charts cover it. Base-changing multiplication, inverse and identity gives group operations on this sheaf. Applying [lem-pc-yoneda] with target functor $h_H$ and domains $H\\times_{\\overline{k}}H$, $H$ and $\\operatorname{Spec}\\overline{k}$ gives unique scheme morphisms realizing them; injectivity of the same bijection gives their group identities. Choose a jointly surjective family of etale scheme charts $U_i\\to G$, each $U_i$ locally of finite type over $k$. By [lem-trf-space-fibre-products-etale-covers] the schemes $U_{i,\\overline{k}}=U_i\\times_G G_{\\overline{k}}=U_i\\times_k\\overline{k}$ form a jointly surjective etale family over $G_{\\overline{k}}\\cong H$, and [lem-weil-pbc-lft-base-change] makes each $U_{i,\\overline{k}}$ locally of finite type over $\\overline{k}$. Let $q:\\coprod_iU_{i,\\overline{k}}\\to H$ be the induced map from the disjoint union. Each component is etale over $H$, hence flat and locally of finite presentation by [def-weil-etale-morphism]; joint surjectivity on field-valued points gives surjectivity on points of $H$ (a point $x$ is the class of $\\operatorname{Spec}\\kappa(x)\\to H$). The composite to $\\operatorname{Spec}\\overline{k}$ is locally of finite type componentwise. Hence [lem-a1-lft-flat-lfp-source-descent] shows that $H\\to\\operatorname{Spec}\\overline{k}$ is locally of finite type.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-separated-group-space-geometric-scheme",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-a1-lft-flat-lfp-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-finite-points-affine] to the group scheme $H/\\overline{k}$ of step 3. It gives an affine open containing any prescribed finite list of $\\overline{k}$-points, including the empty list. The hypotheses are local finite type and algebraic closedness; no quasi-compactness, smoothness or reducedness of $H$ has been used.",
+   "uses": [
+    "lem-sfb-group-finite-points-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-geometric-affine-neighbourhood-scheme-descent] with $X=G$ and $Y=H$. The given local separatedness and local finite type give its hypotheses on $G$; step 3 gives its geometric representing scheme and step 4 gives its finite-point affine condition. Therefore $G$ is represented by a $k$-scheme $P$.",
+   "uses": [
+    "lem-sfb-geometric-affine-neighbourhood-scheme-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+   }
+  },
+  {
+   "text": "Use [lem-pc-yoneda] with domains $P\\times_kP$, $\\operatorname{Spec}k$ and $P$ to turn the original multiplication, identity and inverse natural transformations into scheme morphisms. Their identities hold because Yoneda is injective and the original identities hold on all test schemes. Hence $P$ is a group scheme in [def-sc-group-scheme]. Under the representing isomorphism its diagonal is the diagonal proved closed in step 2, so $P/k$ is separated. Its structure morphism is locally of finite type: pulling the charts $U_i\\to G$ of step 3 back along the representing isomorphism $P\\cong G$ gives a jointly surjective family of etale scheme maps $U_i\\to P$ with each $U_i$ locally of finite type over $k$, and the disjoint-union argument of step 3 with [def-weil-etale-morphism] and [lem-a1-lft-flat-lfp-source-descent] gives that $P\\to\\operatorname{Spec}k$ is locally of finite type. These are exactly the asserted properties.",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-sc-group-scheme",
+    "def-weil-etale-morphism",
+    "lem-a1-lft-flat-lfp-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-separated-rational-point-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-algebraic-closure",
+  "lem-sfb-separated-group-space-geometric-scheme",
+  "lem-pc-yoneda",
+  "lem-weil-pbc-lft-base-change",
+  "lem-sfb-group-finite-points-affine",
+  "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+  "def-sc-group-scheme",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-etale-morphism",
+  "lem-a1-lft-flat-lfp-source-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tags 08BH (lemma-group-scheme-over-field-separated) and 0B8F (lemma-group-space-scheme-locally-finite-type-over-k), proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group algebraic space over a field which is locally separated is a separated scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness lemmas presuppose a scheme and do not prove that a group algebraic space is a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated group algebraic spaces over a field are representable by schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness lemmas presuppose a scheme and do not prove that a group algebraic space is a scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally separated group algebraic space over a field is represented by a separated scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X) → X.IsSeparated\", \"doc\": \"If the unique morphism from a scheme $ X $ to the terminal scheme is separated, then $ X $ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": Scheme.IsSeparated (Proj 𝒜)\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness lemmas presuppose a scheme and do not prove that a group algebraic space is a scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness lemmas presuppose a scheme and do not prove that a group algebraic space is a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "groupSpace|GroupAlgebraicSpace|group.*space.*scheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness lemmas presuppose a scheme and do not prove that a group algebraic space is a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally separated group algebraic space over a field is a separated scheme",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.IsSeparated; AlgebraicGeometry.IsSeparated.hasAffineProperty; AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine; AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated; AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget; AlgebraicGeometry.Proj.instIsSeparated; AlgebraicGeometry.Proj.isSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits assume schemes or an open scheme cover, which is not supplied for the group space"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|groupSpace|GroupAlgebraicSpace",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits assume schemes or an open scheme cover, which is not supplied for the group space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally separated group algebraic space over a field is a scheme",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.mk.noConfusion; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated; AlgebraicGeometry.Scheme.IsSeparated.mk; AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated; AlgebraicGeometry.Scheme.IsSeparated; AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift; AlgebraicGeometry.IsSeparated.hasAffineProperty; AlgebraicGeometry.Scheme.isSeparated_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits assume schemes or an open scheme cover, which is not supplied for the group space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of locally finite type group algebraic spaces with immersion diagonal by separated group schemes",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.IsImmersion.instDiagonalScheme; AlgebraicGeometry.IsSeparated.hasAffineProperty; AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.isSeparated_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits assume schemes or an open scheme cover, which is not supplied for the group space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-picard-identity-representability",
+  "date": "2026-10-23",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme.",
+   "via": [
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-separated-group-space-scheme",
+  "worker": "stage1",
+  "summary": "Checked Stacks 08BH and 0B8F; reuse the existing rational-section lemma, write the diagonal-as-pullback argument, and expose the three independent inputs 0B8E, 0B7S and 0B88. No change to the statement. New nodes are statement-only, searched twice semantically and by Loogle, grep and LeanSearch.",
+  "blueprint": "The inherited from.place records the Picard representability input in the alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3). Steps 1–2 provide separatedness; steps 3–5 implement the 0B8F route; step 6 recovers the group scheme. The latest sketch sk-thm-sf-ctf-stability has no group-space statement. The inherited null from.node is retained as returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence of algebraic-space fibre products and base change of etale covers for scheme charts; a generic tool, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Descent of local finite type along a flat, locally finitely presented surjection of schemes (here an etale chart cover), used in steps 3 and 6 to pass from the etale charts to the representing schemes H and P; no node of sk-thm-sf-ctf-stability states this scheme-level fact. Added by the cc maintainer review."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-lft-flat-lfp-source-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-a735970f7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-a735970f7 (reviewer sub-agent of L); spot-checked: Read the item and the three new nodes in full against the Stacks sources: 08BH (with 06P6 and 088J) and 0B8F, which is 0B8E + 0B7S + 0B88. The item statement is unchanged and agrees with the source. The new nodes state 0B8E (separated group space ⇒ G_kbar is a scheme, no finite-type hypothesis), 0B7S (lft group over an algebraically closed field: finite sets of rational points lie in one affine open) and 0B88 specialised through 088J (locally separated replaces decent). Each is unsplit and statement-only, with all objects introduced. None restates a clause of the item, and no duplicate exists in the DAG (rg -L over tags, labels and key phrases). Tested on the trivial group, G_a, the constant group Z, mu_p, n=0, repeated points and the empty space. Step 1 uses the rational-section node with K=k. Step 2 is the elementary 06P6 cartesian-square check. Steps 4 and 5 check every hypothesis of the cited nodes. One repair, C1/E5: steps 3 and 6 went from 'lft on étale charts' to 'the representing scheme H (resp. P) is lft' without a node, and step 3's claim that every chart of G_kbar is a base change of a chart of G is false; only the base-changed atlas is. Rewrote both steps: the disjoint union of the base-changed charts maps étale surjectively onto the scheme, and def-weil-etale-morphism together with the existing lem-a1-lft-flat-lfp-source-descent then gives lft. Added both to proof_deps and recorded lem-a1-lft-flat-lfp-source-descent (another unit) in tool_uses. Its closure is free of trace-formula and Poincaré-duality nodes. Batch-5 flags: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are generic algebraic-space foundations (definition; 02X2/041F fibre products), not steps of the trace formula or Poincaré duality. The rational-point lemma reaches that chapter only through these two nodes. All accepted. No SGA source. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-locally-separated-group-space-scheme.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallySeparatedGroupSpaceScheme",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_groupScheme_of_locallySeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallySeparatedGroupSpaceScheme.lean",
+  "statement": "theorem exists_groupScheme_of_locallySeparated {k : Type u} [Field k] (G : AlgebraicSpace (Spec (.of k))) (F : (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u}) (e : F ⋙ forget GrpCat ≅ G.obj.obj) (hlft : ∀ (U : Over (Spec (.of k))) (a : yoneda.obj U ⟶ G.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) (hsep : IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (prod.lift (𝟙 G.obj.obj) (𝟙 G.obj.obj))) : ∃ P : Grp (Over (Spec (.of k))), IsSeparated P.X.hom ∧ LocallyOfFiniteType P.X.hom ∧ Nonempty (yonedaGrp.obj P ≅ F)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The given group operations are encoded as a group-valued functor F with an isomorphism of its underlying presheaf to G. The representing group scheme P is required to have yonedaGrp.obj P isomorphic to that same F, retaining all operations. Local finite type is tested on every representable étale scheme chart; local separatedness uses scheme-test representability of the diagonal by immersions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f65f62f2",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read node, Stacks 08BH/0B8F (spaces-more-groupoids l.686-697, 1079-1091), all 6 stmt_deps and their Lean (AlgebraicSpace.lean IsRepresentableWith/IsEtale/IsAlgebraicSpace; Mathlib yonedaGrp, Over pullback CartesianMonoidal instance Pullbacks.lean:712, IsImmersion). Group structure = GrpCat-valued lift F with e : F⋙forget ≅ G (Yoneda-equivalent, no extra condition); conclusion ∃ P : Grp (Over Spec k), IsSeparated, LocallyOfFiniteType, Nonempty (yonedaGrp.obj P ≅ F) keeps the given operations. hlft every-étale-chart ⇔ lft (étale-local on source); hsep relative diagonal ⇔ locally separated. No extra assumptions; universes match def-trf-algebraic-space; edge cases trivial/ℤ/μ_p/imperfect/empty ok. Only the lean record changed; statement verbatim; docstrings with source, blueprint id and 6 proof steps; sorry only; lines ≤100; name new; plain imports are proof_dep modules. Advisory: theorem stmt_dep lem-trf-space-fibre-products-etale-covers unused in signature; Mathlib IsImmersion not listed in def-weil-closed-immersion's record. No compile (no file changed)."
+ }
+}

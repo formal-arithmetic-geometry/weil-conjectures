@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-ringed-site-ordinary-hom-comparison",
+ "kind": "statement",
+ "title": "Fixed ordinary-to-derived Hom comparison on a ringed site",
+ "statement": "Let (C,J,R) be a small ringed site with independent universes and its unbounded derived category [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Fix the ordinary internal Hom complex [def-pur-hom-complex], the functorial K-injective resolution and its augmentation eta [prop-pur-kinjective-resolutions-exist], and the fixed derived-Hom representative comparison [def-coef-hom-representative-evaluation]. Define c(E,F): Q Hom(E,F) to RHom(QE,QF) by localizing Hom(id_E,eta_F) and composing with the inverse fixed representative comparison. If Hom(id_E,eta_F) is a quasi-isomorphism, c(E,F) is an isomorphism. This is the same augmentation, chain-map action, comparison morphism and comparison isomorphism used in the coefficient-duality normalization; no new choice is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 079P, 0A8X and 0A95: fixed K-injective augmentation, ordinary Hom bifunctor, and comparison with derived Hom."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "The fixed representative comparison is already an isomorphism. Localization inverts the assumed quasi-isomorphism Hom(id_E,eta_F). Hence the displayed composite of these two isomorphisms is an isomorphism. All definitions and the proof are moved verbatim from the coefficient-duality module; this separates the comparison from shift and restriction compatibility without changing any object or morphism. The argument applies to zero and unbounded complexes, arbitrary characteristics and all recorded universes.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95; factor the comparison as the localized augmentation followed by the inverse fixed representative comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The comparison from ordinary Hom complex to derived internal Hom is invertible if applying Hom to the K-injective augmentation is a quasi-isomorphism",
+   "results": "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso and Qh_inverts_quasiIso; no fixed ringed-site internal Hom comparison.",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing project declarations verbatim and the localization IsIso instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary Hom complex to derived internal Hom comparison from the K-injective augmentation",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective and HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, rather than the sheaf internal Hom comparison.",
+   "date": "2026-10-22",
+   "verdict": "The existing project comparison is the required one."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"IsIso\"",
+   "results": "ShortComplex.QuasiIso.isIso, quasiIso_of_isIso and homology-map IsIso instances.",
+   "date": "2026-10-22",
+   "verdict": "Generic instances supply the elementary proof; preserve the existing comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "resolution.*[Cc]omparison|[Hh]om.*[Aa]ugmentation; ringedSiteOrdinaryHomComparison",
+   "results": "No Mathlib sheaf-internal-Hom augmentation comparison. Project search finds these five existing declarations in RingedSiteDualityMaps. The composition model has related helpers, already noted by its review; no duplicate declaration is introduced. Blueprint search for ordinary Hom finds no matching blueprint node.",
+   "date": "2026-10-22",
+   "verdict": "Move the existing declarations; retain their names, types and bodies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "date": "2026-10-22",
+  "group": "U7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Canonical coefficient-duality maps: ordinary representative normalizations use the fixed K-injective augmentation comparison.",
+   "via": [
+    "lem-sfb-ringed-site-duality-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteOrdinaryHomComparison",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteOrdinaryHomComparison.lean",
+  "declaration": "CategoryTheory.ringedSiteOrdinaryHomComparison_isIso",
+  "declarations": [
+   "CategoryTheory.ringedSiteHomAugmentation",
+   "CategoryTheory.ringedSiteHomComplexMap",
+   "CategoryTheory.ringedSiteOrdinaryHomComparison",
+   "CategoryTheory.ringedSiteOrdinaryHomComparison_isIso",
+   "CategoryTheory.ringedSiteOrdinaryHomIso"
+  ],
+  "statement": "theorem ringedSiteOrdinaryHomComparison_isIso (E F : CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)\n    (h : QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)\n      ((ringedSiteHomAugmentation.{c, v, r} J R).app F))) :\n    IsIso (ringedSiteOrdinaryHomComparison.{c, v, r, w} J R E F)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, 5 adapted modules, 5 new modules, 7 node files and 2 change records matched against the base in clones/live (verbatim move, identical #check signatures, import-only adaptations of unclaimed modules, unchanged statements), #print axioms in a sandbox, and the reader gate: 57 of 63 direct importers compiled against the sandbox, 3 after recompiling a stale importer, 3 not compilable against the lagging published build either"
+ }
+}

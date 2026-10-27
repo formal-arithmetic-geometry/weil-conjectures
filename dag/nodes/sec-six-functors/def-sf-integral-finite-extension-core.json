@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-integral-finite-extension-core",
+ "kind": "definition",
+ "title": "Canonical integral finite-extension maps and their conclusion predicates",
+ "statement": "For a prime l, finite coefficient extensions E⊂L and a separated finite-type D.k-scheme X with l≠D.p, use the specified tensor, completion and finite dualizing models [def-sf-integral-finite-extension-models] and coherent dualizing data [def-sf-coherent-integral-dualizing-datum]. The unique map u is characterized by its finite counit reduction equations; beta is v followed by internal Hom into u. The identity unit and composition comp are the specified ordinary scalar unit/associator conjugated by completion. extendedEvaluation is scalar extension of evaluation with all completion comparisons. Conclusion, IdentityConclusion and CompositionConclusion are exactly the existing predicates of the integral finite-extension lemma. This relocates their existing signatures and bodies unchanged; u_reduction records the defining reduction equation as a proved theorem. No second construction or choice is introduced.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-7: specified u, v, beta, unit, associator and compatibility equations."
+ },
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-models",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof": [
+  {
+   "text": "Construct the compatible finite family by quotient.hom, extension of wE.reduction, finiteU and wL.reduction.inv. Apply integralConstructibleReductionHom to T omega_E and omega_L, using constructibility preservation and finiteDualizing_reduction_coherent. Cancel wL.reduction.hom to obtain existence and uniqueness. All code is relocated unchanged.",
+   "uses": [
+    "lem-sf-integral-constructible-reduction-hom",
+    "lem-sf-integral-finite-dualizing-coherence",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define u by this unique characterization. Keep beta, unit, comp, extendedEvaluation and the three conclusion predicates verbatim. Extract u_reduction from the chosen witness specification; no new hole is introduced.",
+   "uses": [
+    "def-sf-integral-finite-extension-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-models",
+  "lem-sf-integral-constructible-reduction-hom",
+  "lem-sf-integral-finite-dualizing-coherence",
+  "lem-weil-integral-scalar-extension-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-7: specified u, v, beta, unit, associator and compatibility equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of derived sheaves commutes with internal Hom, evaluation, identity and composition",
+   "results": "8 results: ModuleCat.extendScalarsComp, ordinary extension/restriction adjunction, free sheaves, pullback free generators. None states completed derived sheaf Hom, signed biduality or finite dualizing comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\", \"hom\"",
+   "results": "3 PresheafOfModulesOfCommRing tensorHom declarations; these give tensor on ordinary morphisms, not derived Hom scalar compatibility. LeanFinder additionally returned light condensed internal-Hom section formulas, not the completed coefficient theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|Verdier|dualizing",
+   "results": "msearch: generic triangulated/Verdier references only; no completed coefficient comparison. Project rg finds the existing Models, scalar Hom comparison, finite coefficient calculus and signedCalculus. They supply ingredients but not these three completed comparison conclusions. Blueprint search for finite extension internal Hom found no separate node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 3-7: specified u, v, beta, unit, associator and compatibility equations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionCore.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.u",
+  "statement": "def u : (integralScalarExtensionOfUniverses l E L ι X).obj wE.omega.obj ⟶ wL.omega.obj",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.u_existsUnique",
+   "WeilConjectures.IntegralFiniteExtension.u",
+   "WeilConjectures.IntegralFiniteExtension.beta",
+   "WeilConjectures.IntegralFiniteExtension.unit",
+   "WeilConjectures.IntegralFiniteExtension.comp",
+   "WeilConjectures.IntegralFiniteExtension.extendedEvaluation",
+   "WeilConjectures.IntegralFiniteExtension.Conclusion",
+   "WeilConjectures.IntegralFiniteExtension.IdentityConclusion",
+   "WeilConjectures.IntegralFiniteExtension.CompositionConclusion",
+   "WeilConjectures.IntegralFiniteExtension.u_reduction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-integral-finite-extension + 3 new sorried lemmas and Core relocation against clone (diffed verbatim), TensorPresentation/ReductionPresentation/SignedSymmetry fields and signedCalculus conjuncts"
+ }
+}

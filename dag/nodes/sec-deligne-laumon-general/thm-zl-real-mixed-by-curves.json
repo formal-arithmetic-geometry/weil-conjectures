@@ -19,92 +19,38 @@
  ],
  "proof": [
   {
-   "text": "For a real classical lisse $\\mathcal G$ on a nonempty smooth geometrically connected affine base of positive dimension, [lem-zl-geometric-constituents-any-base] gives a geometric-constituent filtration after a finite constant extension. Smoothness survives by [lem-pc-proper-base-change](2); affineness and geometric connectedness survive by the affine tensor presentation and the unchanged geometric fibre. [lem-zl-classical-weil-filtration-heart-transport] makes it an actual exact filtration in the constructible Weil heart. Reality survives by [lem-zl-constant-extension-mixed-descent]. By the current [def-wf-iota-real] definition, this is the statement that each local characteristic factor has real coefficients, equivalently that its Frobenius eigenvalue multiset is stable under complex conjugation; the cited extension lemma applies to this precise notion.",
-   "uses": [
-    "lem-zl-geometric-constituents-any-base",
-    "lem-pc-proper-base-change",
-    "lem-zl-classical-weil-filtration-heart-transport",
-    "lem-zl-constant-extension-mixed-descent",
-    "def-wf-iota-real"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 1"
-   }
+   "text": "Use the already proved source-library isMixed_of_forall_exists_isMixed_upperStar_opensι: Noetherian induction on reduced closed subschemes, with open-closed gluing and recovery from the reduction. It remains to exhibit a nonempty mixed open for a real sheaf G on a nonempty reduced scheme T. This realizes the lisse-stratum and closed-complement steps of the unit directly in the source category; no raw/common-stage comparison is silently identified with it.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "[lem-zl-two-point-curve-constituent-purity] makes every nonzero quotient pure with its fixed-anchor weight. The finite filtration is mixed by [def-weil-punctual-weights], with the maximum of its finitely many weights (bound $0$ if empty). Descend the extension by [lem-zl-constant-extension-mixed-descent]. This proves the positive-dimensional lisse case.",
-   "uses": [
-    "lem-zl-two-point-curve-constituent-purity",
-    "def-weil-punctual-weights",
-    "lem-zl-constant-extension-mixed-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 2-5"
-   }
+   "text": "The proved source-library exists_dense_isLisse_upperStar gives a dense lisse open L. Over the perfect finite field, the smooth locus of T is dense. Their intersection contains a point; choose an affine open W inside that intersection. The smooth-locus criterion shows that W is smooth. Compatibility of lissity with composition and congruence of pullback makes G restricted to W lisse, and reality is preserved by pullback.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "For the given $\\mathcal F$ on arbitrary $X_0$, restrict to the reduction; [lem-zl-immersion-weil-local-behavior](1) preserves constructibility and reality. [lem-zl-raw-heart-adic-lisse-stratification] supplies a finite adapted partition of its reduced geometric base. Apply [lem-zl-smooth-affine-frontier-stratification] to obtain over one $k_m$ a finite reduced closed chain with open differences finite disjoint unions of smooth geometrically connected affine pieces refining that partition.",
+   "text": "The proved IsLisse.exists_filtration_isIrreducibleLisse gives a finite actual Weil filtration of the restriction. Each term maps monomorphically into the last term and hence into G restricted to W by exists_mono_of_chain. Apply the single-constituent purity lemma to each successive quotient. Its pending proof contains the geometric-constituent, two-point curve, finite-extension and point cases of the unit, with the precise source-category comparison left explicit.",
    "uses": [
-    "lem-zl-immersion-weil-local-behavior",
-    "lem-zl-raw-heart-adic-lisse-stratification",
-    "lem-zl-smooth-affine-frontier-stratification"
+    "lem-zl-smooth-affine-constituent-purity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 6-7"
-   }
+   "elementary": false
   },
   {
-   "text": "Every piece has a classical lisse Weil restriction by [lem-zl-raw-heart-adic-lisse-stratification]: all inclusions are over the same $k_m$. It is real by [lem-zl-constant-extension-mixed-descent] and [lem-zl-immersion-weil-local-behavior](1). Positive-dimensional pieces are mixed by Steps 1-2. A zero-dimensional piece is $\\operatorname{Spec}k_m$ by [lem-zl-smooth-affine-frontier-stratification], and is mixed by [lem-zl-point-weil-heart-flag], including nonsemisimple Frobenius.",
+   "text": "Choose the finitely many pure weights w_i. The sum of |w_i| bounds every w_i, by le_abs_self and single_le_sum. The given finite chain is therefore a filtration mixed of weights at most that sum. Return W and this filtration to the Noetherian induction. For an empty filtration the sum is zero; empty schemes and nilpotents are handled by the proved outer induction.",
    "uses": [
-    "lem-zl-raw-heart-adic-lisse-stratification",
-    "lem-zl-constant-extension-mixed-descent",
-    "lem-zl-immersion-weil-local-behavior",
-    "lem-zl-smooth-affine-frontier-stratification",
-    "lem-zl-point-weil-heart-flag"
+    "def-weil-punctual-weights"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7"
-   }
-  },
-  {
-   "text": "Apply [lem-zl-reduced-frontier-mixed-gluing] to $X_0\\times_{k_0}k_m$ and the mixed component restrictions. It gives a finite mixed Weil filtration on that entire scheme, including recovery from its reduction. [lem-zl-constant-extension-mixed-descent] descends it to $\\mathcal F$ on $X_0$. The empty scheme and zero sheaf are included in these two lemmas.",
-   "uses": [
-    "lem-zl-reduced-frontier-mixed-gluing",
-    "lem-zl-constant-extension-mixed-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraphs 8-9"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-zl-geometric-constituents-any-base",
-  "lem-pc-proper-base-change",
-  "lem-zl-classical-weil-filtration-heart-transport",
-  "lem-zl-constant-extension-mixed-descent",
-  "def-wf-iota-real",
-  "lem-zl-two-point-curve-constituent-purity",
-  "def-weil-punctual-weights",
-  "lem-zl-immersion-weil-local-behavior",
-  "lem-zl-raw-heart-adic-lisse-stratification",
-  "lem-zl-smooth-affine-frontier-stratification",
-  "lem-zl-point-weil-heart-flag",
-  "lem-zl-reduced-frontier-mixed-gluing"
+  "lem-zl-smooth-affine-constituent-purity",
+  "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-  "place": "Paragraphs 1-9, assembled from six separate statement-only argument nodes; the returned argument and its allocation are retained verbatim in report.md."
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Source-category assembly: existing Noetherian induction and generic lissity, smooth affine restriction, finite Jordan--Hölder filtration, and the constituent purity lemma carrying paragraphs 1--5 and the point case. The source-category/model mismatch is documented in Q4 report."
  },
  "mathlib_searches": [
   {
@@ -172,7 +118,222 @@
   "AlgebraicGeometry.WeilSheaf.IsReal.isMixed"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.IsReal.isMixed"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsReal.isMixed",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+     "lines": [
+      290,
+      309
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsReal.isMixed_of_isLisse",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.RealCurve",
+     "lines": [
+      50,
+      67
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.isMixed_of_locallyQuasiFinite",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed",
+     "lines": [
+      141,
+      182
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-zl-real-mixed-by-curves`, the dimension-zero case: \"a Jordan"
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+     "lines": [
+      208,
+      288
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-zl-real-mixed-by-curves`, the reduction to a lisse stratum"
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsReal.isMixed"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.exists_commShift_isTriangulated_verdierDual",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      146,
+      151
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-verdier-dual-triangulated"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      202,
+      216
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-compact-image-localization-triangle"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq",
+     "module": "WeilConjectures.ZetaFunction.TraceFormula",
+     "lines": [
+      65,
+      80
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      76,
+      82
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "thm-sf-weil-compact-direct-image-right-adjoint"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      149,
+      161
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      193,
+      201
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pur-weil-smooth-dualizing-complex"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_tensorLisse_dual_iso_derivedHom",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      210,
+      217
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-lisse-internal-hom-tensor-dual"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_verdierDual_derivedLowerShriek_iso",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      176,
+      181
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-verdier-exchange"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      116,
+      123
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      227,
+      231
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-lisse-biduality"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "split_report": {
@@ -219,5 +380,86 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-95b51e41b (reviewer sub-agent of L); spot-checked: Human re-split (repair note 2026-10-21: at least 5 nodes, assembly of at most 3000 characters). The delivery adds 6 statement-only unsplit nodes, and the item proof is 5 assembly steps, 2549 characters. Item statement and stmt_deps are the same as live. The item is not superseded, and neither it nor any cited id is in the dropped list. All 14 live steps are verbatim in the report, and each argument is now stated in a new node: old 1/5/6 in constant-extension-mixed-descent (F_z~F_x^f with f=m/gcd(d,m); g_*g^* mixed; Tr∘η=m·id; then lem-a1-mixed-direct-summand(3)); old 2 in classical-weil-filtration-heart-transport; old 3-4 in two-point-curve-constituent-purity (anchor weight w_j=2log_{q_x*}|ια| and the e/f power calculation; checked against curve-testing-irreducibility d>=1 and thm-rp, which covers any constituent of a real lisse sheaf); old 7/12/13 in reduced-frontier-mixed-gluing; old 8-10 in raw-heart-adic-lisse-stratification; old 11 in point-weil-heart-flag; old 14 is item Step 5. Nothing was shortened, and no node restates the item. I read the main-20261015 proof paragraphs 1-9 and every cited statement, including the current def-wf-iota-real. All new statements are true; small cases tested: r=0, x=x*, dim 1, Jordan block, V=0, m=1, Spec k[ε]/ε², empty scheme or components, components with different weights. FIX (B3, one point): this head lost the earlier reviewer's FIX (head 0729f598, returned at landing for a stale def-wf-iota-real). I re-applied it: def-weil-derived-pullback-tensor-hom and def-weil-derived-direct-image are now cited for g^*, g_* and η in the descent node; the gluing node now cites those two plus def-weil-integral-rational-qbar-compact-support for j_!, i_*, r_* and r^*. I also cited lem-tw-lisse-rational-realization and lem-per-continuous-rational-derived-realization for the two realization functors in the raw-heart node. stmt_deps are updated; BFS finds no cycle. Batch-5: punctual-weights, iota-real, local-frobenius-trace and pod-lisse are general definitions, and the constant-extension equivalence is not a trace-formula or Poincaré-duality step. All were already in the base proof_deps, so the closure does not grow. Accepted. tool_uses lem-pc-proper-base-change(2) and immersion-weil-local-behavior accepted.; 3 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Every constructible $\\iota$-real $\\Qlb$-Weil sheaf (an object of\n$\\Cons(X,\\Qlb)$ [sk-lem-coefficient-heart] with a Weil structure) on a separated\nfinite-type scheme over a finite field is $\\iota$-mixed, with a\nfinite filtration in the sense of [def-weil-punctual-weights].",
+  "proof": [
+   {
+    "text": "First suppose $X_0$ is smooth geometrically connected affine of\npositive dimension and $\\mathcal G$ is lisse, i.e. a locally free $\\QbarX$-module of finite\nrank on $X_{\\mathrm{proét}}$ ([sk-lem-coefficient-heart]), and real in\n[def-wf-iota-real]. We construct the finite Weil filtration\nrequired by [def-weil-punctual-weights]. By\n[lem-zl-geometric-constituents-any-base], after one finite\nconstant extension its Weil filtration has geometrically irreducible\nquotients $\\mathcal S_1,\\ldots,\\mathcal S_r$.\nThe extension preserves reality: local Frobenius becomes a positive\nintegral power of the old one, and powering preserves conjugation-stable\nspectra. Work over this new finite field.",
+    "uses": [
+     "sk-lem-coefficient-heart",
+     "def-wf-iota-real",
+     "def-weil-punctual-weights",
+     "lem-zl-geometric-constituents-any-base"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Fix a closed point $x_*\\in X_0$. For any other closed point\n$x$, apply [lem-zl-curve-testing-irreducibility] through chosen\ngeometric points above $x_*$ and $x$. On the resulting smooth\ngeometrically connected affine curve, over a further finite field,\n$\\mathcal G$ is real and each $\\mathcal S_j$ remains geometrically,\nhence arithmetically, irreducible. Pullback is exact, so it is an\nirreducible constituent of the restricted real sheaf. The already\nproved curve theorem [thm-rp-real-lisse-purity-affine] makes it\npunctually pure there.",
+    "uses": [
+     "lem-zl-curve-testing-irreducibility",
+     "thm-rp-real-lisse-purity-affine"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The weight obtained on this curve is independent of the curve.\nIndeed, if its point over $x_*$ has residue degree $e$ over\n$\\kappa(x_*)$, its Frobenius eigenvalues are $\\alpha^e$, where\n$\\alpha$ runs through the eigenvalues of $\\mathcal S_j$ at\n$x_*$; its residue cardinality is $q_{x_*}^e$. Thus curve purity\nforces all those $\\alpha$ to have one common modulus and fixes the\nweight as\n\n$$\nw_j=2\\log_{q_{x_*}}|\\iota(\\alpha)|.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The same power calculation at $x$ proves that every eigenvalue\nthere has modulus $q_x^{w_j/2}$. As $x$ was arbitrary,\n$\\mathcal S_j$ is pure of weight $w_j$ on all of $X_0$.\nThe actual Weil filtration, rather than separately chosen stalk\nfiltrations, now proves that $\\mathcal G$ is mixed.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "To descend the initial constant extension $g:X'_0\\to X_0$, push\nthis filtration forward. Finite pushforward is exact and preserves\npure weights by [lem-zl-finite-pushforward] (the finite case of\n[lem-zl-quasi-finite]). The diagonal unit\n$\\eta:\\mathcal G\\to g_*g^*\\mathcal G$ is split as follows.\nWrite $d=\\deg(g)$. Etale-locally the finite etale map $g$ is a\ndisjoint union of $d$ copies of the base, so summation on the copies\ndefines a map $\\operatorname{Tr}:g_*g^*\\mathcal G\\to\\mathcal G$.\nSummation is unchanged by permuting the copies; hence these local maps\nglue and commute with Frobenius. They satisfy\n$\\operatorname{Tr}\\circ\\eta=d\\operatorname{id}$.\nSince $d$ is invertible in $\\Qlb$,\n$d^{-1}\\operatorname{Tr}$ is a Weil-equivariant retraction. Thus\n[lem-a1-mixed-direct-summand] (a Weil subobject of a mixed sheaf is\nmixed, as in [sk-r-real-linear]) descends mixedness.",
+    "uses": [
+     "lem-zl-finite-pushforward",
+     "lem-zl-quasi-finite",
+     "lem-a1-mixed-direct-summand"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a general constructible sheaf, pass by [i-topology] to the reduction of the\ngeometric scheme and form a finite chain of reduced closed subschemes\n\n$$\nX=Z_0\\supset Z_1\\supset\\cdots\\supset Z_t=\\varnothing\n$$\n\nsuch that $U_a=Z_a\\setminus Z_{a+1}$ is a disjoint union of smooth\nconnected affine pieces on which the sheaf is lisse; the lisse loci\nexist by the stratification of [sk-lem-coefficient-heart] (3). To construct a\nstep, take in each irreducible component of $Z_a$ a dense smooth\naffine open inside the lisse locus, avoiding all the other components.\nTheir disjoint union is open in $Z_a$; its closed complement has\nsmaller dimension. Constructibility and Noetherian induction give\nthe finite chain. This also arranges the frontier condition needed\nfor successive open–closed gluing.",
+    "uses": [
+     "i-topology",
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "All these finitely many subschemes, affine pieces, and inclusions are\nof finite presentation over $\\overline{\\mathbf F}_q$. Their\ndefining equations therefore descend to one finite constant-field\nextension. Choose that extension large enough to define each\ngeometric component individually. Its Frobenius is a power of the\noriginal Frobenius and preserves every piece, so restriction of the\noriginal Weil structure supplies the required Weil structures there.\nThe pieces are geometrically connected over this field. The preceding\nargument applies to those of positive dimension; in dimension zero a\nJordan filtration of each invertible Frobenius operator gives pure\nfactors of weights $2\\log_{q_x}|\\iota(\\alpha)|$. On a finite disjoint\nunion, extend the filtrations of its components by zero and concatenate\nthem; this gives a mixed filtration even if their weights differ.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Mixed filtrations glue across a closed complement: for an open\n$j:U_0\\hookrightarrow X_0$ and closed complement $i:Z_0\\hookrightarrow X_0$, use the exact sequence\nof [sk-prop-sf-open-closed-triangle]\n\n$$\n0\\longrightarrow j_!j^*\\mathcal G\\longrightarrow\\mathcal G\n\\longrightarrow i_*i^*\\mathcal G\\longrightarrow0.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Both $j_!$ and $i_*$ are exact and preserve purity of a sheaf\nalready pure on its support, since their other stalks are zero.\nSplice the resulting finite filtrations using inverse images under\nthe quotient map. Apply this to each pair\n$U_a\\subset Z_a$, with closed complement $Z_{a+1}$, starting\nat the last nonempty member of the chain. All inclusions are defined\nover the chosen finite field, so every extension and inverse image is\nWeil-equivariant. The finite induction gives a global finite Weil\nfiltration. Finally descend the common constant extension as above.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T123541-L-1878963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

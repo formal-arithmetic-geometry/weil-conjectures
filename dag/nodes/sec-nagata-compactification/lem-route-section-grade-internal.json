@@ -1,0 +1,134 @@
+{
+ "id": "lem-route-section-grade-internal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "via": [
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "place": "the provisional RelativeProj proof sentence: “every piece is a direct summand of the quasi-coherent underlying module, hence quasi-coherent. On an affine open the equivalence with modules preserves coproducts. Apply sections to decomposition; the resulting map from the direct sum is bijective. The inclusions are injective, so replacing each piece by its image gives this internal sum.”"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "On an affine open the homogeneous section subgroups are an internal direct sum.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $\\mathcal A$ be a quasi-coherent commutative $\\mathcal O_X$-algebra sheaf [def-weil-pbc-quasi-coherent-algebra] [def-weil-pbc-comm-algebra-sheaf]. Let $(B_n)_{n\\in\\mathbb N}$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] equipped with a commutative unital graded sheaf algebra structure [def-weil-pbc-graded-sheaf-structures], and let $d:\\bigoplus_{n\\ge0}B_n\\xrightarrow{\\sim}\\mathcal A$ be a specified isomorphism of $\\mathcal O_X$-modules from the coproduct of the $B_n$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-category-colimit] to the underlying module of $\\mathcal A$, respecting the multiplication and the unit. Write $i_n:B_n\\to\\mathcal A$ for the composite of the $n$th coproduct inclusion with $d$. For an affine open $V\\subseteq X$, put $C_V=\\Gamma(V,\\mathcal A)$ and let $C_{V,n}=\\operatorname{im}(i_n(V):\\Gamma(V,B_n)\\to C_V)$, an additive subgroup of $C_V$. Then $C_V$ is the internal direct sum of the $C_{V,n}$: the additive map from the group $\\bigoplus_{n\\ge0}C_{V,n}$ of finitely supported families $(c_n)_n$ with $c_n\\in C_{V,n}$ to $C_V$, $(c_n)_n\\mapsto\\sum_n c_n$, is bijective; equivalently every $c\\in C_V$ is uniquely a finite sum $\\sum_n c_n$ with $c_n\\in C_{V,n}$. These are the section ring and image subgroups denoted by $A.\\mathrm{sections}(V)$ and $A.\\mathrm{sectionGrade}(V,n)$ for the given relative Proj input algebra $A$, and the conclusion is $\\mathrm{DirectSum.IsInternal}(A.\\mathrm{sectionGrade}(V))$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "lem-nagata-proj-affine-restriction: the Lean of this node (its module Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction imports Sheaf.AlgebraicGeometry.RelativeProjData (1 step)) reaches AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_internal, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean, declaration AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_internal (module Sheaf.AlgebraicGeometry.RelativeProjData, lines 86-94, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Transport the coproduct projections through decomposition. Composing a homogeneous inclusion with its own projection and reinclusion is the inclusion; composing with a different projection is zero. Thus the homogeneous projections extract the coordinates of the additive recomposition homomorphism. By direct-sum induction, recomposition is injective.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For the coproduct of underlying abelian sheaves, the map from the presheaf coproduct to the total algebra sheaf factors through sheafification by an epimorphism: cancellation can be tested on all summand inclusions using the coproduct universal property. Sheaf epimorphisms and the sheafification unit are locally surjective. Evaluation of the presheaf coproduct is an abelian-group coproduct, whose elements are finite sums. Consequently every section is locally a finite sum of homogeneous inclusions.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a section over an affine open, select a finite subcover of these local presentations using compactness of the affine open. Let S be the finite union of their degree sets. On each selected open, orthogonality shows the sum over S of the homogeneous projections equals the original section. Sheaf separation makes that equality global. A finite sum of direct-sum generators therefore maps to the given section, proving surjectivity. These arguments also apply to the empty affine open.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "G6",
+  "date": "2026-10-27",
+  "kind": "agent-written",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section relative-proj-via-glueing (01LH), lemma-proj-inclusion (01NO); direct Lean proof using the coproduct universal property and compact affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal direct sum of homogeneous section subgroups on an affine open from a sheaf direct sum decomposition",
+   "results": "DirectSum.Decomposition.isInternal; HomogeneousSubmodule.is_homogeneous'; DirectSum.Decomposition.ofAddHom",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic direct-sum decomposition APIs, no RelativeProj-specific theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal direct sum of homogeneous section subgroups on an affine open from a sheaf direct sum decomposition",
+   "results": "DirectSum.IsInternal; DirectSum.Decomposition.isInternal; DirectSum.Decomposition.ofAddHom; no RelativeProj-specific theorem",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic direct-sum APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.IsInternal, DirectSum.Decomposition.isInternal",
+   "results": "DirectSum.Decomposition.isInternal",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic internal decomposition theorem only"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionGrade_internal|DirectSum.IsInternal",
+   "results": "no match in Mathlib/AlgebraicGeometry; source declaration is only lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean:92",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-nagata-proj-affine-restriction",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjData",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_internal",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_internal"
+  ],
+  "statement": "theorem sectionGrade_internal (V : X.affineOpens) :\n    DirectSum.IsInternal (A.sectionGrade V) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-section-grade-internal",
+  "worker": "stage1",
+  "summary": "Corrected the provisional prose to introduce the full RelativeProjAlgebra data and the actual range-defined sectionGrade subgroups. Added two statement-only lemmas: retracts of quasi-coherent module sheaves are quasi-coherent, and injective component maps with a bijective direct-sum map have internal range sum. The proof uses affine tilde/global-sections and coproduct preservation to obtain the section-level bijection, then applies the range lemma. No Lean source was edited.",
+  "blueprint": "Realizes the Relative Proj order-12 proof sentence about piecewise quasi-coherence, affine sections preserving coproducts, and replacing injective summands by their ranges."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-ND-6f235de4a",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-6f235de4a (reviewer sub-agent of L); spot-checked: Read in full: the Lean of RelativeProjData.lean:36-94 (sectionGrade = range of (Sigma.ι piece n ≫ decomposition.hom) on V), blueprint def-nagata-relative-proj and the relative-proj-exists proof, Stacks Constructions situation-relative-proj, and the sibling route nodes. The item is true, and both new nodes are true and are not duplicates. Repaired three faults in fixes/. (1) E1/C4: step 2 cited lem-weil-pbc-affine-tilde-gamma-adjunction and lem-weil-pbc-spec-module-tilde-sections, which hold only for X = Spec R, but V is an affine open of an arbitrary X. The restriction of the coproduct to V and the identification V ≅ Spec 𝒪(V) were not covered by any cited node. Step 2 is re-routed: F_N = ∐_{n≤N} B_n is quasi-coherent (lem-weil-pbc-quasi-coherent-module-coproduct-closure); ∐B is the directed colimit of the F_N; Γ(V,F_N) is a finite biproduct of the Γ(V,B_n); and lem-weil-pbc-quasi-coherent-module-colimit-affine-sections (general scheme, affine open; checked against its Lean at QuasiCoherentModuleColimitAffineSections.lean:42-53) gives the bijection. Both new citations are Lean-closed on slopmaster2, so no tool_uses are needed. (2) B2/B3/B4: the item statement was plain text with Lean names and no node citations. It is rewritten in TeX in the sibling form (lem-route-section-grade-one/-mul), with IsInternal stated as bijectivity of ⊕C_{V,n} → C_V; stmt_deps += def-weil-pbc-comm-algebra-sheaf; steps 1 and 3 are rewritten precisely (explicit p_n; injectivity as the restriction of Σ to a summand). (3) B3/B4: lem-route-range-internal-of-bijective-sum cited def-weil-additive-category for abelian groups and used Lean syntax. It is rewritten in TeX, and its stmt_deps are now [def-weil-pbc-category-colimit]. lem-route-qcoherent-direct-summand is unchanged: it is true via the kernel of id − ιπ, and the kernel node is not an exact duplicate. Small cases checked: B_n = 0 for n > 0, the empty scheme, 𝒪_X[T], and ℤ² with its coordinate inclusions.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T112350-L-1576056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

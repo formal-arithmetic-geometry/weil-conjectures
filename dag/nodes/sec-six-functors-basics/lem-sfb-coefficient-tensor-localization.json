@@ -1,0 +1,103 @@
+{
+ "id": "lem-sfb-coefficient-tensor-localization",
+ "kind": "lemma",
+ "title": "Localization tensor normalization on reconstructed complexes",
+ "statement": "For arbitrary coefficient ring and internal complexes P,Q, tensorComparison followed by the tensor of the two localization comparisons and qTensor equals the image of the internal localization tensorator followed by the localization comparison of P tensor Q and Q(totalComparison).",
+ "stmt_deps": [
+  "def-pd-section-derived-realization",
+  "def-pd-section-cochain-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4, localization comparison and tensor representative compatibility."
+ },
+ "proof": [
+  {
+   "text": "Use the defining conjugation formula qTensor_spec. Compose with tensorComparison and the tensor of the two localization comparisons; cancel the inverse pairs. The remaining localized total comparison is sectionLocalizationComparison followed by Q(sectionTotalComparison). Replace sectionTotalComparison by totalComparison using sectionTotalComparison_eq.",
+   "uses": [
+    "def-pd-section-derived-realization",
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-derived-realization",
+  "def-pd-section-cochain-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4, localization comparison and tensor representative compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized natural scalar extension comparison under an equivalence commutes with tensor products on pure tensors and hence on direct sum total cochain complexes",
+   "results": "Eight hits, including HomologicalComplex.ιTensorObj and elementary ModuleCat scalar extension formulas. No theorem for these internal-section comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "Use coproduct inclusions and the existing scalar normalization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapBifunctorComparison",
+   "results": "Zero hits; the identifier is in the adopted source extension rather than the Mathlib index.",
+   "date": "2026-10-27",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*tensor.*(ordinary|total)|mapBifunctorComparison_naturality",
+   "results": "Remote Mathlib search has zero hits. Local adopted source provides mapBifunctorComparison and summand formulas; geometric SectionOplaxTotalComparison supplies a model for the coproduct argument.",
+   "date": "2026-10-27",
+   "verdict": "The scalar ordinary and total squares need explicit proofs from the prescribed normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRepresentativeInternal",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-scalar-tensor-representative-internal",
+   "place": "the categorical localization and pasting part of the internal representative argument"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientTensorLocalization",
+  "file": "lean/Sheaf/Paper/CoefficientTensorLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientTensor_localization",
+  "statement": "theorem coefficientTensor_localization\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ X)]\n    (Z : Scheme.{u}) (P Q : CochainComplex (ModuleRingedComparison.internalModules Λ Z) ℤ) :\n    let ER := (ModuleRingedComparison.equivalence Λ Z).functor\n    let ED := (ModuleRingedComparison.derivedEquivalence Λ Z).functor\n    let ERc := ER.mapHomologicalComplex (.up ℤ)\n    let ℓ : DerivedCategory.Q ⋙ ED ≅ ERc ⋙ DerivedCategory.Q :=\n      ER.mapDerivedCategoryFactors\n    let μ : DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q ⟶\n        DerivedCategory.Q.obj (P ⊗ Q) :=\n      (ModuleRingedComparison.internalLocalizationTensorMap Λ Z).app (P, Q)\n    let q : (ModuleRingedComparison.tensor Λ Z).obj\n        (DerivedCategory.Q.obj (ERc.obj P), DerivedCategory.Q.obj (ERc.obj Q)) ⟶\n        DerivedCategory.Q.obj (ERc.obj P ⊗ ERc.obj Q) :=\n      (ModuleRingedComparison.qTensor Λ Z).app (ERc.obj P, ERc.obj Q)\n    let r : ERc.obj (P ⊗ Q) ≅ ERc.obj P ⊗ ERc.obj Q :=\n      ModuleRingedComparison.totalComparison Λ Z P Q\n    (ModuleRingedComparison.tensorComparison Λ Z).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n      (ModuleRingedComparison.tensor Λ Z).map (Prod.mkHom (ℓ.hom.app P) (ℓ.hom.app Q)) ≫ q =\n    ED.map μ ≫ ℓ.hom.app (P ⊗ Q) ≫ DerivedCategory.Q.map r.hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

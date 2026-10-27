@@ -1,0 +1,279 @@
+{
+ "id": "lem-trf-frobenius-compact-power-exchange",
+ "kind": "statement",
+ "title": "Open Frobenius power squares and assembly of compact exchange pasting",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], with $p$ prime, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and $k=\\overline{k_0}$. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$ and $n\\geq1$, and set $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, $\\gamma=(z\\mapsto z^q)^{-1}$ and $h=\\operatorname{Spec}(\\gamma)$ [def-trf-scheme-frobenius]. Use ordinary unbounded derived categories of constant-$A$ modules on the small pro-etale sites and their adjoint operations $Lf^*\\dashv Rf_*$ [def-weil-pbc-proetale-operations]. All composition comparisons below are the canonical ones of [lem-weil-pbc-proetale-derived-pullback-composition]; composition is written with the rightmost map first.\n\nLet $X_0$ be separated of finite type over $k_0$ [def-weil-scheme-morphism-properties] and fix one compactification $X_0\\xrightarrow{j_0}W_0\\xrightarrow{p_0}\\operatorname{Spec}k_0$, with $j_0$ open and $p_0$ proper [def-weil-compactifications-refinements]. Write $X\\xrightarrow jW\\xrightarrow ps$ for its base change to $k$. Put $g=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$, $b=\\operatorname{id}_{W_0}\\times\\operatorname{Spec}(\\gamma)$, $P_r=L(g^r)^*$, $B_r=L(b^r)^*$, $Q_r=L(h^r)^*$, $J=j_!$ [def-weil-extension-by-zero], $R=Rp_*$ and $F=RJ$. Let $c_m:P_1P_m\\xrightarrow{\\sim}P_{m+1}$, $d_m:B_1B_m\\xrightarrow{\\sim}B_{m+1}$, $t_m:Q_1Q_m\\xrightarrow{\\sim}Q_{m+1}$ be the inverse composition comparisons. Let $u_r:Q_rR\\to RB_r$ be the proper-square exchanges of [def-weil-frobenius-square-exchange] (1). Assume their pasting equation\n$$u_{m+1,K}\\circ t_{m,RK}=R(d_{m,K})\\circ u_{1,B_mK}\\circ Q_1(u_{m,K})$$\nfor every $K\\in D(W_{\\mathrm{proet}},A)$ and $m\\geq1$.\n\nFor each $r\\geq1$, $jg^r=b^rj$ and the square with vertical edges $j,j$ and horizontal edges $g^r,b^r$ is Cartesian [def-weil-pbc-cartesian-square] with lift $(g^r,j)$. Each $P_r$ preserves the bounded constructible category $D^b_c(X,A)$ [def-weil-finite-torsion-constructibility]. Let $v_r:B_rJ\\xrightarrow{\\sim}JP_r$ be the canonical open-square exchange of [lem-trf-open-square-exchange], normalized by the identity on the open, and let $e_r=(Rv_r)\\circ(u_rJ):Q_rF\\to FP_r$ be the chosen-compactification exchange of [def-weil-frobenius-square-exchange] (2), always using this same compactification. Then, naturally for $M\\in D^b_c(X,A)$ and $m\\geq1$,\n$$v_{m+1,M}\\circ d_{m,JM}=J(c_{m,M})\\circ v_{1,P_mM}\\circ B_1(v_{m,M}),$$\n$$e_{m+1,M}\\circ t_{m,FM}=F(c_{m,M})\\circ e_{1,P_mM}\\circ Q_1(e_{m,M}).$$\nThese are identities of the specified maps in the ambient pro-etale module derived categories, without any $k$-linearity assumption on the horizontal maps.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, lemma-shriek-base-change, for the underived open exchange; its pro-etale derived pasting is the existing lem-trf-open-square-exchange. Agent refinement: composition with the proper exchange for a fixed compactification, conditional on the displayed proper pasting identity."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-trf-scheme-frobenius",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-torsion-constructibility",
+  "lem-trf-open-square-exchange",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-frobenius-cohomology-transport"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-frobenius-open-square] to $j_0$ and $r\\geq1$: its Galois square is precisely the square with horizontal arrows $g^r,b^r$, so $jg^r=b^rj$ and it is Cartesian. The chosen lift is $(g^r,j)$: the two components are the horizontal and vertical arrows of that square. By [lem-weil-frobenius-square-cartesian], $g$ is an isomorphism with inverse $\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma^{-1})$. Its $r$-th power has inverse $(g^{-1})^r$. Thus all the horizontal maps used here are scheme maps; no assertion of $k$-linearity enters.",
+   "uses": [
+    "lem-trf-frobenius-open-square",
+    "lem-weil-frobenius-square-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.proof.md",
+    "place": "Galois-square paragraph; identification of the chosen lift from its two projections"
+   }
+  },
+  {
+   "text": "Because $\\ell\\ne p$, Bezout gives integers $u,v$ with $u\\ell+vp=1$; in every local ring of the characteristic-$p$ scheme $X$, $u$ is an inverse of $\\ell$. Apply the finite-coefficient case of [lem-weil-isomorphism-derived-pullback] to the isomorphism $g^r$ from Step 1, with coefficient ring $A=A_{E,n}$ and its constant-sheaf structure identification. Its conclusion puts $L(g^r)^*M$ in $D^b_c(X,A)$ whenever $M$ is in that category. In particular $P_mM$ is a permissible constructible input in the displayed equations.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Finite-coefficient isomorphism pullback, as made precise by lem-weil-isomorphism-derived-pullback; agent specialization"
+   }
+  },
+  {
+   "text": "Use the normalized canonical exchange of [lem-trf-open-square-exchange] on the squares of Step 1. Paste first the square with arrows $g^m,b^m$ and then the square with arrows $g,b$ on its pullback side. The horizontal composites are $g^m\\circ g=g^{m+1}$ and $b^m\\circ b=b^{m+1}$. Contravariant pullback therefore gives $P_1P_m$ and $B_1B_m$. The pasting clause of that lemma, using the inverse composition comparisons $c_m,d_m$ of [lem-weil-pbc-proetale-derived-pullback-composition], is exactly\n$$v_{m+1,M}\\circ d_{m,JM}=J(c_{m,M})\\circ v_{1,P_mM}\\circ B_1(v_{m,M}).$$\nThe lemma states both normalization on the open and pasting for these specified canonical maps on the pro-etale derived categories, so no replacement of $v_r$ by an arbitrarily chosen isomorphism occurs.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-open-square-exchange.proof.md",
+    "place": "Final paragraph: pasting of Cartesian squares; specialize its canonical composition identifications"
+   }
+  },
+  {
+   "text": "Expand the chosen-compactification recipe of [def-weil-frobenius-square-exchange] (2), namely $e_{r,M}=R(v_{r,M})\\circ u_{r,JM}$. Apply the proper-pasting equation assumed in the statement at $K=JM$, then Step 3 and functoriality of $R$:\n$$\\begin{aligned}\ne_{m+1,M}\\circ t_{m,FM}\n&=R(v_{m+1,M}\\circ d_{m,JM})\\circ u_{1,B_mJM}\\circ Q_1(u_{m,JM})\\\\\n&=F(c_{m,M})\\circ R(v_{1,P_mM})\\circ R(B_1(v_{m,M}))\\circ u_{1,B_mJM}\\circ Q_1(u_{m,JM}).\n\\end{aligned}$$\nNaturality of the specified transformation $u_1:Q_1R\\to RB_1$, applied to the morphism $v_{m,M}:B_mJM\\to JP_mM$ in the ambient category on $W$, says\n$$R(B_1(v_{m,M}))\\circ u_{1,B_mJM}=u_{1,JP_mM}\\circ Q_1(R(v_{m,M})).$$\nSubstitute this equality, group the adjacent factors $R(v_{1,P_mM})\\circ u_{1,JP_mM}=e_{1,P_mM}$, and use functoriality of $Q_1$ to group $Q_1(R(v_{m,M}))\\circ Q_1(u_{m,JM})=Q_1(e_{m,M})$. This yields the claimed compact equation. These are the components of natural transformations throughout, hence the equality is natural in $M$. All intermediate objects are allowed in the ambient unbounded module derived categories; only the input $P_mM$ needs Step 2.",
+   "uses": [
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compact-support transport along powers, expanded by an agent into the fixed-compactification exchange calculation conditional on proper pasting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-frobenius-open-square",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-square-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "m-th-iterate compact-support transport; open pasting supplied by lem-trf-open-square-exchange and remaining assembly by naturality, conditional on the proper-pasting hypothesis"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support exchange defined as proper pushforward exchange followed by extension by zero exchange satisfies composition for powers of a scheme automorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits:",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting Frobenius base change through a fixed compactification Rp pushforward j extension by zero yields the power exchange cocycle",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits:",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|compactSupport|compactlySupported",
+   "results": "0 hits:",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of natural square comparisons for two functors obeys the endofunctor iterate coherence using naturality of the first comparison",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, CategoryTheory.SmallObject.SuccStruct.Iteration.congr_map, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj, CategoryTheory.SmallObject.iterationFunctorMapSuccAppArrowIso_hom_right_right_comp, CategoryTheory.SmallObject.SuccStruct.iterationFunctor_map_succ_assoc, CategoryTheory.SmallObject.SuccStruct.arrowMk_iterationFunctor_map, CategoryTheory.SmallObject.iterationFunctorMapSuccAppArrowIso_hom_right_right_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|compactlySupported|compactSupport",
+   "results": "0 hits:",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|compactSupport|compactlySupported",
+   "results": "25 displayed hits concerning compact support of functions in analysis/topology; no sheaf compact-support exchange.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change exchange for iterates of a scheme automorphism is compatible with composing the open immersion exchange and the proper exchange",
+   "results": "8 hits: stability under base change for quasi-compact, open immersion, proper, closed immersion and universally closed morphisms; Scheme.Modules.restrictFunctorComp and its component formula. These are not the asserted derived compact exchange identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting compact support base change exchanges Rp pushforward and j extension by zero for powers of geometric Frobenius",
+   "results": "8 hits: SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, PresheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp. Module pushforward comparisons or scalar-extension base change; none states pro-etale compact Frobenius power pasting.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|compactSupport|compactlySupported",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural base change transformation pastes with extension by zero to give a composition law for iterated pullbacks",
+   "results": "8 hits: IsBaseChange.comp, IsBaseChange.comp_iff, IsBaseChange.of_comp, LinearMap.baseChange_comp, ModuleCat.extendScalarsComp, LinearMap.baseChange_baseChange, LinearEquiv.baseChange_trans, IsBaseChange.linearMapLeftRightHom_comp. Module pushforward comparisons or scalar-extension base change; none states pro-etale compact Frobenius power pasting.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-compact-frobenius-transport-composition",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "m-th-iterate compact-support base-change identification: open factor and combination with the proper factor; former item steps 1 (open square and constructibility) and 5",
+   "via": [
+    "lem-trf-compact-frobenius-transport-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-frobenius-compact-power-exchange",
+  "worker": "stage1",
+  "summary": "Reused the existing Galois-power open-square, isomorphism constructibility and normalized open-pasting statements. Wrote the compact exchange identity explicitly using the assumed proper-pasting equation and naturality at v_m. No new nodes and no statement change.",
+  "blueprint": "Realizes the ancestor proof compact-support base-change identification for g_gamma^m: geometric powers, constructible domain, normalized open pasting, and assembly with proper exchange using one compactification.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-frobenius-open-square",
+    "why": "Supplies the Galois-power Cartesian open square for the fixed compactification; this is a geometric tool, not a replacement of the Weil-iterate route."
+   },
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Supplies that the geometric Galois map is a scheme isomorphism, without k-linearity; used only for the constructible input domain."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Its finite-level conclusion preserves D^b_c under the scheme isomorphism g^r; the unit does not supply this generic domain theorem."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "Supplies normalized ambient pro-etale open exchange and its pasting law; the unit iterate route uses this geometric exchange as a tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Fixes the precise inverse pullback composition comparisons c_m,d_m already named in the statement."
+   },
+   {
+    "node": "def-weil-frobenius-square-exchange",
+    "why": "Supplies the already fixed compactification recipe and naturality of the ambient exchange maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-frobenius-open-square",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-square-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-dd7af9307",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-dd7af9307 (reviewer sub-agent of L); spot-checked: This is a first one-level split of a node N0 created and FIXed on 2026-10-22. Statement and stmt_deps are byte-identical to the N0 fix file, and live and side-live still have the node unsplit, so it is not superseded. The split adds no new nodes and has 4 steps. Step 1: lem-trf-frobenius-open-square (open immersion of k_0-schemes, Y_0=W_0, b=g_W) gives Cartesian g^r/b^r squares with lift (g^r,j), and lem-weil-frobenius-square-cartesian(1) gives the inverse of g. Step 2: lem-weil-isomorphism-derived-pullback applies, since g^r is an isomorphism and ell is invertible on an F_p-scheme; its Lg^* (def-weil-derived-pullback-tensor-hom) is the module pullback of def-weil-pbc-proetale-operations, and D^b_c is closed under isomorphism, so P_r preserves D^b_c. Step 3: I re-derived the pasting of the open-square exchange along b^m∘b=b^{m+1} with d_m inverse to c_{b,b^m}; the v-equation types and holds. Advisory only: that lemma's pasting clause does not name the compositor, but the canonical one is the one fixed in the statement. Step 4: I recomputed the e-equation from the assumed proper pasting at K=JM, Step 3, naturality of u_1 at v_m (stated in def-weil-frobenius-square-exchange) and functoriality, so marking it elementary is justified. Edge cases checked: m=1, empty X, M=0, j=id. There is no cycle (the closure excludes the item), no duplicate (checked strict-tower, etale and system-level neighbours) and no SGA. All six off-unit citations are generic tools declared in tool_uses, and I accept them. Mathlib searches cover all three kinds. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FrobeniusCompactPowerExchange",
+  "declaration": "WeilConjectures.FrobeniusCompactPower.frobenius_compact_power_exchange",
+  "declarations": [
+   "WeilConjectures.FrobeniusCompactPower.middle",
+   "WeilConjectures.FrobeniusCompactPower.model",
+   "WeilConjectures.FrobeniusCompactPower.sourcePower",
+   "WeilConjectures.FrobeniusCompactPower.middlePower",
+   "WeilConjectures.FrobeniusCompactPower.basePower",
+   "WeilConjectures.FrobeniusCompactPower.powerComposition",
+   "WeilConjectures.FrobeniusCompactPower.sourcePullback",
+   "WeilConjectures.FrobeniusCompactPower.middlePullback",
+   "WeilConjectures.FrobeniusCompactPower.basePullback",
+   "WeilConjectures.FrobeniusCompactPower.openExtension",
+   "WeilConjectures.FrobeniusCompactPower.properImage",
+   "WeilConjectures.FrobeniusCompactPower.compactImage",
+   "WeilConjectures.FrobeniusCompactPower.properExchange",
+   "WeilConjectures.FrobeniusCompactPower.openExchange",
+   "WeilConjectures.FrobeniusCompactPower.compactExchange",
+   "WeilConjectures.FrobeniusCompactPower.frobenius_compact_power_exchange"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FrobeniusCompactPowerExchange.lean",
+  "statement": "theorem frobenius_compact_power_exchange (_hl : l ≠ D.p) [IsSeparated X₀.hom] (proper_pasting : ∀ (m : ℕ), 1 ≤ m → ∀ K : proEtaleDerivedCategory (model D X₀ c₀).Z (Padic.coefficientExtensionRing l E n), (powerComposition (Padic.coefficientExtensionRing l E n) (basePower D 1) m).hom.app ((properImage D X₀ c₀ l E n).obj K) ≫ (properExchange D X₀ c₀ l E n hn (m + 1)).app K = (basePullback D l E n 1).map ((properExchange D X₀ c₀ l E n hn m).app K) ≫ (properExchange D X₀ c₀ l E n hn 1).app ((middlePullback D X₀ c₀ l E n m).obj K) ≫ (properImage D X₀ c₀ l E n).map ((powerComposition (Padic.coefficientExtensionRing l E n) (middlePower D X₀ c₀ 1) m).hom.app K)) : (∀ (r : ℕ), 1 ≤ r → sourcePower D X₀ r ≫ (model D X₀ c₀).i = (model D X₀ c₀).i ≫ middlePower D X₀ c₀ r ∧ IsPullback (sourcePower D X₀ r) (model D X₀ c₀).i (model D X₀ c₀).i (middlePower D X₀ c₀ r)) ∧ (∀ (r : ℕ), 1 ≤ r → ∀ M : proEtaleDerivedCategory (D.geometricFiber X₀).left (Padic.coefficientExtensionRing l E n), intrinsicFiniteTorsionConstructible l E n hn (D.geometricFiber X₀).left M → intrinsicFiniteTorsionConstructible l E n hn (D.geometricFiber X₀).left ((sourcePullback D X₀ l E n r).obj M)) ∧ ∀ (m : ℕ), 1 ≤ m → ∀ M : (intrinsicFiniteTorsionConstructible l E n hn (D.geometricFiber X₀).left).FullSubcategory, (powerComposition (Padic.coefficientExtensionRing l E n) (middlePower D X₀ c₀ 1) m).hom.app ((openExtension D X₀ c₀ l E n hn).obj M.obj) ≫ (openExchange D X₀ c₀ l E n hn (m + 1)).hom.app M.obj = (middlePullback D X₀ c₀ l E n 1).map ((openExchange D X₀ c₀ l E n hn m).hom.app M.obj) ≫ (openExchange D X₀ c₀ l E n hn 1).hom.app ((sourcePullback D X₀ l E n m).obj M.obj) ≫ (openExtension D X₀ c₀ l E n hn).map ((powerComposition (Padic.coefficientExtensionRing l E n) (sourcePower D X₀ 1) m).hom.app M.obj) ∧ (powerComposition (Padic.coefficientExtensionRing l E n) (basePower D 1) m).hom.app ((compactImage D X₀ c₀ l E n hn).obj M.obj) ≫ (compactExchange D X₀ c₀ l E n hn (m + 1)).app M.obj = (basePullback D l E n 1).map ((compactExchange D X₀ c₀ l E n hn m).app M.obj) ≫ (compactExchange D X₀ c₀ l E n hn 1).app ((sourcePullback D X₀ l E n m).obj M.obj) ≫ (compactImage D X₀ c₀ l E n hn).map ((powerComposition (Padic.coefficientExtensionRing l E n) (sourcePower D X₀ 1) m).hom.app M.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All helpers specialize published canonical constructions. The only theorem assumes exactly the stated proper-pasting equation and concludes the open geometry, preservation of bounded constructibility and the open and compact power equations. Added the landed cohomology-transport definition solely to reuse its geometric compactification with target Spec k, without defining it again."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6c7cc48c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read the item, all 13 stmt_dep records and the declarations used in side-live. Matches clause by clause: g,b = geometricGaloisFrobenius powers, h = Spec of geometricFrobeniusAlgEquivOfAlgebraic; P/B/Q = proEtaleConstantRingDerivedPullback; R = proEtaleConstantDerivedDirectImage; J = sfIntrinsicDerivedOpen. c/d/t = canonical proEtaleConstantRingPullbackComposition + pow_succ (inverse of the recorded integralFiniteCanonicalPullbackComposition). u_r = finiteTensorExchange on the r-th proper square. v_r = constantOpenSquareExchange on the frobenius_open_square IsPullback. e_r = the literal finiteCompact recipe. One retained compactification (frobeniusCohomologyCompactification, target Spec k). Proper-pasting hypothesis and both conclusions are in correct diagrammatic order for m>=1, ambient K, and M in D^b_c. Open-square geometry and P_r-preserves-D^b_c clauses are present. No extra hypotheses; l!=p, n>=1 and separatedness match the node. Dep nodes are identical to side-live. The added stmt_dep def-weil-frobenius-cohomology-transport is landed and creates no cycle. lean.statement is verbatim; docstrings/blueprint markers are present; the proof is sorry only; no hollow helpers. Compile not reproduced (worker: clean, dry-run OK). Advisory: the citer writes h^r as an Aut power at n+1, so stage 3 needs a map_pow bridge."
+ }
+}

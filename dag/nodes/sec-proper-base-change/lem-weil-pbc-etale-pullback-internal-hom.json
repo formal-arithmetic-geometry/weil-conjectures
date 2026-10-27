@@ -98,7 +98,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "Sheaf.ConstructibleSheaf.EtalePullbackInternalHom",
@@ -128,5 +139,31 @@
   "landing": "20261012T112842-L-768832",
   "kind": "interface",
   "note": "independent Codex review: Packet reviewed against delivered files and repository; module, axiom probe, and both required direct importers compiled successfully."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:Y\\to X$ be an étale morphism of schemes, $\\Lambda$ a commutative ring, and $F,G$ sheaves of $\\Lambda$-modules on $X_{\\Et}$. Then there is an isomorphism $f^{-1}\\mathcal{H}om(F,G)\\cong\\mathcal{H}om(f^{-1}F,f^{-1}G)$ of sheaves of $\\Lambda$-modules on $Y_{\\Et}$, where $\\mathcal{H}om$ is the internal Hom right adjoint to the tensor product (the sheafification of the objectwise tensor product). No finiteness hypothesis is imposed on $F$, $G$ or $\\Lambda$.",
+  "proof": [
+   {
+    "text": "Identify étale pullback with the localization restriction using Etale.upperStarIsoLocalizationRestriction. Compute the unit of the restriction/pushforward adjunction sectionwise and verify its tensor and unit identities; these prove that the identification is monoidal. This is the étale specialization of the pro-étale argument in WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Composition with an étale morphism induces equivalences on every slice, by CategoryTheory.MorphismProperty.Over.isEquivalence_post_map_op. Thus the presheaf restriction comparison is invertible by CategoryTheory.isIso_ihomComparison_whiskeringLeft. The sheaf inclusion comparison is invertible by CategoryTheory.Monoidal.Reflective.isIso_ihomComparison. Apply the composition formula for comparison transformations, and reflect isomorphisms through sheafToPresheaf to obtain the comparison for localization restriction.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Transport invertibility through the monoidal pullback/restriction identification, using isIso_ihomComparison_of_iso. Evaluate the comparison transformation at G and use asIso to construct the requested isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

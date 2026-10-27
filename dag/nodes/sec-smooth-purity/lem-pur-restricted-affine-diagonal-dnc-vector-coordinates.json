@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-restricted-affine-diagonal-dnc-vector-coordinates",
+ "kind": "statement",
+ "title": "Compatible vector presentations of the restricted diagonal DNC",
+ "statement": "Let P be a finite purity setting [def-pur-conventions], Y a Noetherian scheme, d a natural number and p the ordered affine projection [def-amb-affine-trace-tower], smooth of relative dimension d. Let aY:Y→Spec k be locally finite type and quasi-compact, V an affine open of Y and H the affine diagonal geometry [lem-pur-affine-target-diagonal-dnc]. Put B=p inverse V, h=p restricted to V, g=pr1 on B×_V B, s=diagonal h, q the actual normal-cone projection and z its zero section [lem-pur-dnc-section-geometry]. There exist a rank-d finite locally free module F on B [def-asd-vector-bundle-zero-section], an isomorphism n:E(F)≅N_s preserving projection and zero, and an isomorphism e:E(F)≅B×_V B preserving projection and carrying zero to s. Write cN:C(q,z)≅C(pi_F,0_F) and cS:C(g,s)≅C(pi_F,0_F) for the canonical section exchanges over identity, each precomposed by the inverse identity-pullback comparison. Let sc,nc be the actual site comparisons and nu-star the comparison functor. Then delta.hom followed by nc.hom and nu-star(cN.hom) equals sc.hom followed by nu-star(cS.hom), where delta is the unique normalized DNC comparison [thm-pur-dnc-invariance, def-pur-diagonal-orientation-refinement-data]. No trace or beta occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: standard-pair DNC identity and zero-section restriction of normalized vector integration"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-amb-affine-trace-tower",
+  "lem-pur-affine-target-diagonal-dnc",
+  "lem-pur-dnc-section-geometry",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-diagonal-orientation-refinement-data",
+  "def-pur-restricted-affine-diagonal-section-trace"
+ ],
+ "proof": [
+  {
+   "text": "Apply affineTowerSection_vectorCoordinates to the published restrictedAffineDiagonalCoordinates. This constructs the free-bundle frame and an initial presentation of the source diagonal pair.",
+   "uses": [
+    "def-pur-restricted-affine-diagonal-section-trace",
+    "lem-pur-restricted-affine-source-vector-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the actual geometric Rees model by transporting the published standard-pair isomorphism. Its two fibre pullbacks provide the final source and normal presentations. vectorSection_reesReadings constructs a single family trivialization and proves the two required readings. No DNC comparison equation is assumed.",
+   "uses": [
+    "lem-pur-vector-section-rees-coordinates",
+    "lem-pur-vector-section-rees-readings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the family target from the vector section invariant to the source invariant. Naturality of the endpoint counits gives normalization at one and the specified reading at zero. Apply delta_etale_reading and cancel inverse isomorphisms. Uniqueness of the normalized comparison identifies SectionRestriction.delta with OrientationRefinement.delta.",
+   "uses": [
+    "lem-pur-section-constant-trivialization",
+    "thm-pur-dnc-invariance",
+    "def-pur-diagonal-orientation-refinement-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-restricted-affine-diagonal-section-trace",
+  "lem-pur-restricted-affine-source-vector-coordinates",
+  "lem-pur-vector-section-rees-coordinates",
+  "lem-pur-vector-section-rees-readings",
+  "lem-pur-section-constant-trivialization",
+  "thm-pur-dnc-invariance",
+  "def-pur-diagonal-orientation-refinement-data"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: difference coordinates and the standard-pair DNC",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "section restriction of affine integration commutes with deformation to normal cone",
+   "results": "8 normalization and ideal-sheaf-gluing hits; none states an exceptional-adjoint or DNC integration identity.",
+   "date": "2026-10-27",
+   "verdict": "No match for either local geometric DNC coordinates or integration restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoIsPullback",
+   "results": "9 hits, including isoIsPullback and its projection equations. They construct coordinates but do not state the DNC equation or integration identity.",
+   "date": "2026-10-27",
+   "verdict": "Only categorical coordinate construction found."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundleIntegration|sectionBaseChange",
+   "results": "msearch returned OK 0 Mathlib hits. Project rg found RestrictedAffineDiagonalSectionTrace, VectorBundleIntegration, VectorZeroSectionIntegrationBaseChange and AffineDiagonalDncCoordinateIdentity. The last would close an import cycle and addresses the global affineDiagonalProjection rather than the restricted tower. No existing theorem states these local components. Blueprint searches DNC and integration found the cited general geometry, DNC, integration and purity nodes, but no duplicate of the restricted statements.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing maps; separate their local geometric and integration compatibilities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictedAffineDiagonalDncTrace",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: standard-pair DNC identity and zero-section restriction of normalized vector integration",
+   "via": [
+    "lem-pur-restricted-affine-diagonal-dnc-trace",
+    "lem-pur-diagonal-dnc-affine-model",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictedAffineDiagonalDncVectorCoordinates",
+  "file": "lean/Sheaf/Paper/RestrictedAffineDiagonalDncVectorCoordinates.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.restrictedAffineDiagonalDncVectorCoordinates",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.vectorModelSectionComparison",
+   "WeilConjectures.PurityFiniteSetting.restrictedAffineDiagonalDncVectorCoordinates"
+  ],
+  "statement": "theorem restrictedAffineDiagonalDncVectorCoordinates (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) [IsNoetherian Y] (d : ℕ)\n    [SmoothOfRelativeDimension d (affineTraceProjection Y d)]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens)\n    (H : P.AffineDiagonalGeometry (affineTraceProjection Y d) aY d V) :\n    letI := H.separated\n    letI := H.finiteType\n    letI := H.quasiCompact\n    letI := H.smoothDimension\n    letI := H.baseFiniteType\n    letI := H.baseQuasiCompact\n    letI := H.sourceSeparated\n    letI := H.sourceFiniteType\n    letI := H.sourceQuasiCompact\n    let h := affineTraceProjection Y d ∣_ V.1\n    let B := (affineTraceProjection Y d ⁻¹ᵁ V.1).toScheme\n    let aB := h ≫ V.1.ι ≫ aY\n    letI := P.noetherian aB\n    letI := SmoothOfRelativeDimension.smooth d h\n    let g := pullback.fst h h\n    let s := pullback.diagonal h\n    letI := Dnc.compactifiable P g aB\n    letI := Dnc.invertibleExponent P (g ≫ aB)\n    let q := Scheme.Hom.normalConeProj g s\n    letI := Dnc.normalCompactifiable P d g aB s (pullback.diagonal_fst h)\n    letI : SmoothOfRelativeDimension d q :=\n      (Scheme.Hom.normalConeData d (pullback.diagonal_fst h)).smoothOfRelativeDimension_proj\n    letI := Dnc.invertibleExponent P (q ≫ aB)\n    let ν := (ProEtale.comparisonUpperStar\n      (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory\n    ∃ (F : B.Modules) (hF : F.IsFiniteLocallyFreeOfRank d),\n      letI := hF\n      letI := (Etale.vectorIntegration_geometry B d F).1\n      letI := (Etale.vectorIntegration_geometry B d F).2.1\n      letI := Dnc.compactifiable P (VectorBundleZeroSection.π B d F) aB\n      ∃ (n : VectorBundleZeroSection.scheme B d F ≅ s.ker.normalCone)\n        (w : n.hom ≫ q = VectorBundleZeroSection.π B d F)\n        (hz : VectorBundleZeroSection.zero B d F ≫ n.hom = s.normalConeZeroSection)\n        (e : VectorBundleZeroSection.scheme B d F ≅ pullback h h)\n        (we : e.hom ≫ g = VectorBundleZeroSection.π B d F)\n        (ze : VectorBundleZeroSection.zero B d F ≫ e.hom = s),\n        (OrientationRefinement.delta P (affineTraceProjection Y d) aY d V H).hom ≫\n            (Dnc.normalComparison P d g aB s (pullback.diagonal_fst h)).hom ≫\n            ν.map (vectorModelSectionComparison P.Coefficient d q s.normalConeZeroSection\n              F n w hz).hom =\n          (Dnc.sourceComparison P d g aB s).hom ≫\n            ν.map (vectorModelSectionComparison P.Coefficient d g s F e we ze).hom",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T222630-L-675880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T021419-L-2771695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,391 @@
+{
+ "id": "lem-sfb-space-ideal-closed-subspace-correspondence",
+ "kind": "statement",
+ "title": "Closed subspaces of an algebraic space from quasi-coherent ideals",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use small etale module sheaves [def-weil-sheaf-of-modules-category], quasi-coherence [def-trf-space-quasi-coherent-module], and tensor pullback and direct image [def-trf-space-etale-module-functors]. A closed subspace is a subfunctor whose inclusion is representable by closed immersions of schemes [def-weil-closed-immersion]. There is an inclusion-reversing bijection between closed subspaces $i:Z\\hookrightarrow X$ and quasi-coherent sheaves of ideals $\\mathcal I\\subseteq\\mathcal O_X$, sending $Z$ to $\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$. Its inverse associates to $\\mathcal I$ the subfunctor $V(\\mathcal I)$ of maps $h:T\\to X$ for which $h^*\\mathcal I\\to\\mathcal O_T$ is zero, initially on scheme tests $T$; this criterion holds also for algebraic-space sources. For this closed subspace, $\\mathcal O_X\\to i_*\\mathcal O_Z$ is surjective with kernel $\\mathcal I$. Equivalently, $h$ factors through $V(\\mathcal I)$ if and only if $\\mathcal I\\to h_*\\mathcal O_T$ is zero. Under any algebraic-space base change $h:Y\\to X$, the ideal of $V(\\mathcal I)\\times_XY$ is $\\operatorname{im}(h^*\\mathcal I\\to\\mathcal O_Y)$. For an etale base change this ideal is the restriction of $\\mathcal I$. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MB (lemma-closed-immersion-ideals), including the final factorization criterion and the paragraph following definition-inverse-image-closed-subspace; the equivalent direct-image criterion is the tensor-pullback/direct-image adjunction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-space-quasi-coherent-ideal",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "First fix the scheme case of the vanishing test. For a quasi-coherent ideal $J$ on a scheme $U$, take the closed subscheme $W$ with ideal $J$ supplied by [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme]. For a scheme map $a:T\\to U$, the condition $a^*J\\to\\mathcal O_T=0$ for the Zariski module pullback is equivalent, by its adjunction $a^*\\dashv a_*$ [def-pc-module-pullback], to the vanishing of the composite $J\\hookrightarrow\\mathcal O_U\\xrightarrow{a^\\sharp}a_*\\mathcal O_T$. Thus the hypothesis of [lem-weil-pbc-closed-immersion-lift-ideal-kills-sections] holds on every affine open, and supplies a lift to $W$. Conversely a lift kills $J$: locally the structure homomorphism factors through $R/J(U_0)$ on each affine open $U_0=\\operatorname{Spec}R$ of $U$. The lift is unique, since its underlying map is forced by the closed embedding and its local ring homomorphisms are forced by the surjections defining $W$. These assertions also apply on the small etale sites: [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies the ideals and tensor pullbacks, and [def-trf-space-etale-module-functors] supplies the adjunction. No reduction or finiteness assumption on $T$ is used.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections",
+    "def-weil-closed-immersion",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-etale-module-functors",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), second paragraph, scheme input: schemes.tex Tag 01HP (lemma-characterize-closed-subspace)."
+   }
+  },
+  {
+   "text": "We will use the following elementary image calculation. For any module map $A\\to B$, write $A\\twoheadrightarrow J\\hookrightarrow B$ for its image factorization. Tensor pullback preserves the first epimorphism: an epimorphism in module sheaves is a cokernel, and a left adjoint preserves its defining colimit [lem-weil-pbc-left-adjoint-preserves-colimits, def-trf-space-etale-module-functors]. Hence after any pullback and any map from the pulled-back $B$, the composite from the pulled-back $J$ is zero if and only if the composite from the pulled-back $A$ is zero. Iterated tensor pullbacks have the canonical comparison and local formula $a\\otimes(b\\otimes m)\\mapsto ab\\otimes m$ of [lem-trf-space-chart-adjunction-tensor-realization]; consequently this calculation applies to composites of scheme or space maps. This argument preserves the image's epimorphic presentation, and does not assume that pullback preserves its monomorphism.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, second paragraph: replace the pulled-back ideal by its image; elementary tensor justification."
+   }
+  },
+  {
+   "text": "Define a presheaf $Z$ on scheme tests by $Z(T)=\\{h:T\\to X\\mid h^*\\mathcal I\\to\\mathcal O_T=0\\}$. The composition comparison in step 2 shows that restriction of a member is again a member, so $Z$ is a subpresheaf of $X$. Given any scheme map $u:U\\to X$, put $J_u=\\operatorname{im}(u^*\\mathcal I\\to\\mathcal O_U)$. Pullback preserves quasi-coherence by [lem-sfb-space-module-pullback-quasicoherent], and images of maps of quasi-coherent modules are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]; $\\mathcal O_U$ is quasi-coherent by its one-generator presentation [def-trf-space-quasi-coherent-module]. Use the scheme etale/Zariski equivalence to regard $J_u$ as a Zariski ideal, and let $W_u\\hookrightarrow U$ be its closed subscheme. For every scheme $a:T\\to U$, step 2 gives $(ua)^*\\mathcal I\\to\\mathcal O_T=0$ exactly when $a^*J_u\\to\\mathcal O_T=0$. Step 1 identifies the latter condition with a unique map $T\\to W_u$ over $U$. These identifications commute with precomposition by uniqueness. Thus the presheaf fibre product $Z\\times_XU$ is represented by the closed subscheme $W_u$, for every scheme test $U\\to X$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), second paragraph: scheme-test construction."
+   }
+  },
+  {
+   "text": "Each $W_u$ of step 3 is an algebraic space via its actual representable sheaf [def-trf-scheme-algebraic-space]. Apply [lem-sfb-presheaf-space-target-bootstrap] to the presheaf map $Z\\to X$: its hypothesis holds on every scheme test by step 3, without assuming a sheaf condition on $Z$. It follows that $Z$ is an algebraic space. Step 3 already proves that its inclusion is representable by closed immersions, so it is a closed subspace in exactly the sense of the item. Write this subspace as $V(\\mathcal I)$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-presheaf-space-target-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, end of second paragraph; bootstrap.tex Tag 02YS (lemma-representable-by-spaces-over-space)."
+   }
+  },
+  {
+   "text": "Now let $i:C\\hookrightarrow X$ be any closed subspace. For an etale scheme chart $u:U\\to X$, its base change is a closed immersion of schemes $i_U:C_U\\hookrightarrow U$. By [lem-trf-space-etale-module-pushforward-restriction], $(i_*\\mathcal O_C)|_U$ is $i_{U*}\\mathcal O_{C_U}$ and the structural map is the usual one on sections. The scheme map is surjective by [def-weil-closed-immersion], with quasi-coherent kernel $K_U$ by [def-sbc-closed-immersion-ideal-sheaf]. Its target is the quotient $\\mathcal O_U/K_U$. These assertions pass to small etale modules by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]: the direct-image comparison applies because $i_U$ is separated and affine by [lem-weil-pbc-closed-immersion-integral-separated-uc], and is quasi-compact since its inverse image over every affine open is a quotient spectrum. Quasi-coherent kernels and cokernels are computed in all modules on both sites, by [lem-sfb-space-qcoh-kernels-colimits], [lem-weil-pbc-quasi-coherent-module-kernel] and [lem-weil-pbc-quasi-coherent-module-cokernel-image], so the equivalence transports this quotient sequence. Restriction of sheaves to a chart computes kernels sectionwise and detects surjectivity locally. Hence globally $\\mathcal O_X\\to i_*\\mathcal O_C$ is surjective, and its kernel $K$ and its quotient are quasi-coherent: locally they are $K_U$ and $\\mathcal O_U/K_U$, so their local presentations satisfy [def-trf-space-quasi-coherent-module].",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), first paragraph, using spaces-properties.tex Tag 03LX, morphisms.tex Tag 01QO, and descent.tex Tag 03LC."
+   }
+  },
+  {
+   "text": "Apply step 5 to $V(\\mathcal I)$. On an etale scheme chart $u:U\\to X$, tensor pullback is restriction [lem-trf-space-etale-module-pushforward-restriction]. Therefore the ideal $J_u$ of step 3 is exactly $\\mathcal I|_U$, since restriction of its inclusion into $\\mathcal O_X$ is still an inclusion. The kernel computed in step 5 restricts to this same ideal on every chart, and is consequently $\\mathcal I$. This proves that the construction recovers its input ideal, including the asserted surjective quotient map.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, first and second paragraphs: recover the given ideal."
+   }
+  },
+  {
+   "text": "For any algebraic space $Y$ and map $h:Y\\to X$, the scheme-test formula for $V(\\mathcal I)$ extends as follows. Cover $Y$ by etale scheme charts $v_a:T_a\\to Y$ [def-trf-algebraic-space]. The restriction of $h^*\\mathcal I\\to\\mathcal O_Y$ to $T_a$ is $(hv_a)^*\\mathcal I\\to\\mathcal O_{T_a}$ by the tensor composition/restriction comparisons [lem-trf-space-chart-adjunction-tensor-realization, lem-trf-space-etale-module-pushforward-restriction]. If the former map is zero, every $hv_a$ has a unique lift to $V(\\mathcal I)$ by its scheme-test definition. These lifts agree on all overlaps, because the inclusion is a subfunctor on scheme tests; the overlaps are schemes by representability of the atlas [lem-trf-space-representable-etale-scheme-tests]. More explicitly, for any scheme $T\\to Y$, pull back this atlas, glue the resulting matching lifts in the fppf sheaf $V(\\mathcal I)$, and use uniqueness to make the glued lift natural in $T$. They define a morphism $Y\\to V(\\mathcal I)$ over $X$. Conversely a factorization gives zero on each of these charts by the scheme-test formula. A map of module sheaves which is zero on a covering is zero, since its section images agree with zero after a sheaf cover. Thus $h$ factors if and only if $h^*\\mathcal I\\to\\mathcal O_Y$ is zero, and the factorization is unique.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, final paragraph: explicit verification omitted in the source."
+   }
+  },
+  {
+   "text": "It remains to recover a closed subspace $C$ from its kernel $K$. On each etale chart $U\\to X$, step 5 gives the ideal $K|_U$ for $C_U$, and step 6 gives this same ideal for $V(K)_U$. By [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic] the two closed subschemes of $U$ are uniquely isomorphic over $U$. For a scheme $T\\to X$, the pulled-back atlas is a jointly surjective etale family [lem-trf-space-fibre-products-etale-covers]. A factorization of $T\\to X$ through one of these two subfunctors is therefore equivalent to a factorization through the other: use the local isomorphisms and glue the unique lifts in their fppf sheaves. This proves $C=V(K)$ as subfunctors, hence the two constructions are inverse. If $\\mathcal I\\subseteq\\mathcal J$, vanishing of the pullback of $\\mathcal J$ implies vanishing for $\\mathcal I$, so $V(\\mathcal J)\\subseteq V(\\mathcal I)$. Conversely an inclusion of closed subspaces reverses their kernel ideals on every etale chart by [lem-weil-pbc-closed-immersion-factor-ideal-inclusion]; sectionwise inclusion can be checked on a cover, so it reverses them globally. The bijection is therefore inclusion-reversing in both directions.",
+   "uses": [
+    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB: inverse bijections and order reversal."
+   }
+  },
+  {
+   "text": "Let $h:Y\\to X$ be arbitrary and put $J=\\operatorname{im}(h^*\\mathcal I\\to\\mathcal O_Y)$. This is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent] and [lem-sfb-space-qcoh-kernels-colimits]. For every scheme map $a:T\\to Y$, step 2 identifies $a^*J\\to\\mathcal O_T=0$ with $(ha)^*\\mathcal I\\to\\mathcal O_T=0$. By step 7 the latter is exactly the condition that $ha$ lift to $V(\\mathcal I)$, hence exactly the condition that $a$ lift to the sheaf fibre product $Y\\times_XV(\\mathcal I)$ [lem-trf-space-fibre-products-etale-covers]. Uniqueness makes this a natural equality of subfunctors with $V(J)$. Step 6 then identifies its ideal with $J$. If $h$ is etale, its pullback is restriction [lem-trf-space-etale-module-pushforward-restriction], so the pulled-back ideal inclusion is monic and $J=\\mathcal I|_Y$. This proves both base-change clauses without any flatness assumption in the arbitrary-base-change clause.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Paragraph following definition-inverse-image-closed-subspace, immediately after Tag 03MB."
+   }
+  },
+  {
+   "text": "Finally, under $h^*\\dashv h_*$ [def-trf-space-etale-module-functors], the adjoint of $h^*\\mathcal I\\to\\mathcal O_T$ is precisely the composite $\\mathcal I\\hookrightarrow\\mathcal O_X\\xrightarrow{h^\\sharp}h_*\\mathcal O_T$: on a local tensor the first map sends $b\\otimes s$ to $b\\,h^\\sharp(s)$. The adjunction sends zero to zero, and is a bijection on morphisms. Thus the vanishing condition of step 7 is equivalent to $\\mathcal I\\to h_*\\mathcal O_T=0$, as asserted.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, final factorization criterion, rewritten by the tensor-pullback/direct-image adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-lift-ideal-kills-sections",
+  "def-weil-closed-immersion",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-pc-module-pullback",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-presheaf-space-target-bootstrap",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MB (lemma-closed-immersion-ideals) and paragraph following definition-inverse-image-closed-subspace; the omitted algebraic-space-source verification is expanded in step 7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|closedSubspace|idealSheaf.*subspace",
+   "results": "{\"t\": \"2026-10-23T12:06:24Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|closedSubspace|idealSheaf.*subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subspaces of an algebraic space correspond to quasi coherent ideals",
+   "results": "{\"t\": \"2026-10-23T12:06:25Z\", \"tool\": \"leansearch\", \"query\": \"Closed subspaces of an algebraic space correspond to quasi coherent ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsEmptyCarrierCarrierCommRingCatSubschemeTop\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_antimono\"], \"digest\": \"c427cc1be0a2ae29\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "{\"t\": \"2026-10-23T12:06:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData\", \"AlgebraicGeometry.Scheme.nilradical\", \"AlgebraicGeometry.Scheme.IdealSheafData.instAdd\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring\", \"AlgebraicGeometry.Scheme.IdealSheafData.instMul\", \"AlgebraicGeometry.Scheme.IdealSheafData.instOne\"], \"digest\": \"57ba23b1e68f347d\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a closed subspace of an algebraic space from a quasi coherent ideal with quotient structure sheaf",
+   "results": "{\"t\": \"2026-10-23T12:06:27Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a closed subspace of an algebraic space from a quasi coherent ideal with quotient structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\"], \"digest\": \"9867e37b21726c2e\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent ideal sheaves on an algebraic space correspond to closed subspaces",
+   "results": "{\"t\": \"2026-10-23T12:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent ideal sheaves on an algebraic space correspond to closed subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"AlgebraicGeometry.Scheme.IdealSheafData\"], \"digest\": \"3e568bf7376ab3a3\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquivIdealSheafData|def subscheme|def image|instIsOpenImmersionToImageOfQuasiCompact",
+   "results": "{\"t\": \"2026-10-23T12:12:07Z\", \"tool\": \"grep\", \"query\": \"overEquivIdealSheafData|def subscheme|def image|instIsOpenImmersionToImageOfQuasiCompact\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"f9a9cf482813d321\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|closedSubspace|overEquivIdealSheafData",
+   "results": "{\"t\": \"2026-10-23T13:45:29Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|closedSubspace|overEquivIdealSheafData\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"bf8a06b72939e6f7\"}; Read ClosedImmersion.lean:180-218: all hits classify or lift closed immersions of schemes, not arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme special cases, not the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subspaces of arbitrary algebraic spaces are classified by quasi coherent ideal sheaves with zero pullback factorization criterion",
+   "results": "{\"t\": \"2026-10-23T13:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Closed subspaces of arbitrary algebraic spaces are classified by quasi coherent ideal sheaves with zero pullback factorization criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\"], \"digest\": \"b627565cc0587bc0\"}; Read ClosedImmersion.lean:180-218: all hits classify or lift closed immersions of schemes, not arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme special cases, not the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ideals and closed subspaces of an algebraic space with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T13:50:04Z\", \"tool\": \"leansearch\", \"query\": \"Ideals and closed subspaces of an algebraic space with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\"], \"digest\": \"1f0cee77e8b81d3d\"}; Read ClosedImmersion.lean:180-218: all hits classify or lift closed immersions of schemes, not arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme special cases, not the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "{\"t\": \"2026-10-23T13:50:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData\", \"AlgebraicGeometry.Scheme.nilradical\", \"AlgebraicGeometry.Scheme.IdealSheafData.instAdd\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring\", \"AlgebraicGeometry.Scheme.IdealSheafData.instMul\", \"AlgebraicGeometry.Scheme.IdealSheafData.instOne\"], \"digest\": \"57ba23b1e68f347d\"}; Read ClosedImmersion.lean:180-218: all hits classify or lift closed immersions of schemes, not arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme special cases, not the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|lift_fac|lift_uniq|comap_eq_bot|le_ker|ker_le",
+   "results": "{\"t\": \"2026-10-23T13:52:59Z\", \"tool\": \"grep\", \"query\": \"def lift|lift_fac|lift_uniq|comap_eq_bot|le_ker|ker_le\", \"sub\": \"AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"210\", \"215\", \"443\"], \"digest\": \"adb26fbf9acf8bb4\"}; Read ClosedImmersion.lean:180-218: all hits classify or lift closed immersions of schemes, not arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme special cases, not the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent ideal on an algebraic space defines a representable closed immersion by vanishing under tensor pullback",
+   "results": "{\"t\": \"2026-10-23T13:59:05Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi coherent ideal on an algebraic space defines a representable closed immersion by vanishing under tensor pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\"], \"digest\": \"bf986c8ac996c63a\"}; Read ClosedImmersion.lean:180-218: all hits classify or lift closed immersions of schemes, not arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme special cases, not the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qc-open-schematic-closure",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: replace both compactifications by the schematic closure of their quasi-compact open. Supporting input to the closure construction: Tag 03MB, the ideal/closed-subspace correspondence and the zero-pullback factorization criterion.",
+   "via": [
+    "lem-sfb-space-qc-open-schematic-closure",
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 03MB construction and omitted algebraic-space-source descent using existing DAG tools only. Proved inverse/order statements, quotient map, adjoint vanishing test, and arbitrary versus etale base change. No new nodes. Normalized doubled TeX escapes without changing mathematical content.",
+  "blueprint": "The inherited from.place records det-thm-sf-ctf-stability-direct-images proof (3), schematic-closure prerequisite through Tag 09YB and Tag 03MB. Steps 1-6 realize the closed-subspace construction; steps 7-10 give the factorization and base-change tests used in the schematic closure. ancestor prints None for the inherited imported ancestry; preserve that record. Current blueprint latest direct-images proof (3) uses compactification and its proper/open inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Scheme etale/Zariski conversion, including pullback and closed-immersion direct-image compatibility; generic coefficient-site comparison, not replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Canonical tensor composition and etale restriction for the specified module functors, used for the zero-image calculation and adjunction normalization."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Etale localization of structural direct images and pullbacks; the exact Tag 03LX tool used in the source proof."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Scheme representability of etale overlaps and atlas pullbacks in the omitted descent verification."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Zariski quasi-coherent kernels are computed in all module sheaves, used solely to transport the scheme quotient sequence to the etale site."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Zariski quasi-coherent cokernels are computed in all module sheaves, used solely to transport the scheme quotient sequence to the etale site."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Sheaf fibre products and stability of jointly surjective etale covers under arbitrary algebraic-space base change, needed for gluing the scheme-test lifts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-697557b9d",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-697557b9d (reviewer sub-agent of L); spot-checked: I read Stacks 03MB (proof and the following inverse-image paragraph) and 01HP. The statement is byte-identical to live, so nothing was weakened, and the item is still unsplit live. There are no new nodes and no cycle: lem-sfb-space-closed-ideal-correspondence and the -closed-immersion-quasi-coherent-modules node both depend on the item and are not cited. Steps checked: (1) the 01HP scheme lift; (2) left-adjoint preservation of the image epimorphism, with no mono claim; (3) Z×_X h_U ≅ h_{W_u} via 03GA/03M1 and steps 1-2; (4) the 02YS bootstrap without a sheaf assumption; (5) the 03LX chart restriction plus the qc-separated Zariski/étale direct-image clause, with the quotient sequence transported through QCoh kernels/cokernels; (6) étale pullback is restriction, giving K=I; (7) the omitted algebraic-space source case, done by gluing over the pulled-back étale cover; (8) C=V(K) and both directions of inclusion reversal; (9) the base-change ideal im(h^*I→O_Y), with no flatness, tested on k[t]→k with I=(t); (10) the adjoint criterion. Edge cases I=0, I=O_X and Spec k[ε]/ε² are correct. FIX (C1): step 1's 'equivalent by adjunction' uses the Zariski a^*⊣a_* with no node. Step 1 now cites def-pc-module-pullback (a definition node, exempt from the route check) and writes out J↪O_U→a_*O_T; proof_deps updated, no other field changed. Batch-5: the stmt+proof closures of all 8 flagged citations (zariski-etale qcoh equivalence, chart-adjunction tensor realization, module-pullback-quasicoherent, qcoh-kernels-colimits, def-trf-scheme-algebraic-space, presheaf-space-target-bootstrap, étale pushforward-restriction, representable-étale scheme tests) reach no Poincaré, nt-*, trace-transport or Lefschetz node. They are general algebraic-space and module foundations, not steps of the proof of the trace formula or Poincaré duality, so I accept them. The split_report tool_uses are generic helpers for the étale-local argument and I accept them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceIdealClosedSubspaceCorrespondence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.ideal_closedSubspace_correspondence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceIdealClosedSubspaceCorrespondence.lean",
+  "statement": "theorem ideal_closedSubspace_correspondence (S : Scheme.{u}) : ∃ corr : ∀ X : AlgebraicSpace S, ClosedSubspace X ≃ QuasiCoherentIdeal X, (∀ (X : AlgebraicSpace S) (C : ClosedSubspace X), (corr X C).val = kernelSubobject (moduleStructureMap C.val.arrow) ∧ Epi (moduleStructureMap C.val.arrow)) ∧ (∀ (X : AlgebraicSpace S) (C D : ClosedSubspace X), C ≤ D ↔ corr X D ≤ corr X C) ∧ (∀ (X : AlgebraicSpace S) (I : QuasiCoherentIdeal X) (Y : AlgebraicSpace S) (h : Y ⟶ X), ((∃ l : Y ⟶ ((corr X).symm I).val, l ≫ ((corr X).symm I).val.arrow = h) ↔ idealTensorMap h I = 0) ∧ (idealTensorMap h I = 0 ↔ I.val.arrow ≫ moduleStructureMap h = 0)) ∧ (∀ (X Y : AlgebraicSpace S) (I : QuasiCoherentIdeal X) (h : Y ⟶ X), ∃ (P : ClosedSubspace Y) (a : (P.val : AlgebraicSpace S) ⟶ (((corr X).symm I).val : AlgebraicSpace S)), IsPullback a P.val.arrow ((corr X).symm I).val.arrow h ∧ (∃ q : (moduleTensorPullback h).obj (I.val : X.Modules) ⟶ ((corr Y P).val : Y.Modules), Epi q ∧ q ≫ (corr Y P).val.arrow = idealTensorMap h I) ∧ ∀ hh : IsEtale h.hom.hom, ∃ r : ((corr Y P).val : Y.Modules) ≅ (pullback h hh).obj (I.val : X.Modules), ∀ (V : Y.EtaleSite) (m : ((corr Y P).val : Y.Modules).val.obj (op V)), (corr Y P).val.arrow.val.app (op V) m = I.val.arrow.val.app (op ((etaleMap h hh).obj V)) (r.hom.val.app (op V) m))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58dd544a7",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Statement verbatim in the file; the node differs from live only in lean and stmt_deps (adds the landed def-sfb-space-module-structure-map and two new def nodes). Every clause matches Stacks 03MB: the kernel equality pins corr; epi structure map for all closed subspaces; order reversal in both directions; factorization iff idealTensorMap=0 for every algebraic-space source (scheme tests included) iff I→h_*O_Y=0, with idealTensorMap the actual adjunct; arbitrary base change through IsPullback in the full subcategory (sheaf fibre product) and the image as an epi onto the ideal, with no flatness; étale base change ideal = restriction, stated sectionwise through etaleMap. New ClosedSubspace (Subobject plus IsRepresentableWith closed immersion) and QuasiCoherentIdeal (Subobject of unit plus IsQuasicoherent) are not hollow and not duplicates (grep of side-live). All used declarations are owned by stmt_deps. Single universe u. Edge cases I=0, I=O_X, empty, non-reduced, non-flat k[t]→k are fine. Docstrings and proof steps present. Advisory: the second reading was by the same worker. No compile; no file changed."
+ }
+}

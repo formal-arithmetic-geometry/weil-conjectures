@@ -40,165 +40,189 @@
  ],
  "proof": [
   {
-   "text": "Work over the affine chart V and put h=f|_U, W_h=U\\times_VU, with first projection p_h and diagonal Delta_h. The section invariant is C_h=LDelta_h^*omega_{p_h}. The Cartesian square for p_h over h and the base-change comparison for the exceptional inverse image give the canonical isomorphism alpha_h:C_h~>omega_h. This is exactly the diagonal base-change comparison, since p_h\\circ Delta_h=id_U.",
-   "uses": [
-    "def-pur-section-invariant",
-    "lem-pur-diagonal-base-change",
-    "def-weil-exceptional-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Diagonal-dualizing-object proof Step 1; chart proof Step 3, source-map comparison"
-   }
-  },
-  {
-   "text": "The diagonal Delta_h is a regular closed immersion of codimension d and its normal bundle is canonically N_h~=T_{U/V}. Applying the normalized deformation-to-the-normal-cone theorem to the smooth section (p_h,Delta_h) gives the unique delta_h:C_h~>C(pi_h,0_h) which is the identity on the standard pair in etale coordinates. The fiber and coordinate descriptions of the DNC identify the two endpoint section invariants, so this comparison is compatible with restriction and base change. Use the centred smooth-section coordinates to obtain the regular conormal model. Fix its relative-Spec isomorphism by the canonical symmetric comparison and the normalized Rees identification on homogeneous ideal classes; no zero-preserving bundle automorphism is left unspecified.",
-   "uses": [
-    "lem-pur-diagonal-regular-immersion",
-    "def-pur-normal-bundle",
-    "def-asd-vector-bundle-zero-section",
-    "thm-pur-dnc-invariance",
-    "lem-pur-dnc-section-geometry",
-    "def-pur-section-invariant",
-    "lem-trf-smooth-section-centred-coordinates",
-    "lem-pur-rees-cone-normalized-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Chart proof Steps 2–3, normal bundle and normalized DNC comparison"
-   }
-  },
-  {
-   "text": "Vector-bundle purity for pi_h, pulled back along the zero section, gives beta_h:C(pi_h,0_h)~>Lambda_U(d)[2d]. Its compatibility with base change and direct sums makes beta_h depend only on the actual normal bundle and its zero section, with the canonical Tate pullback. Therefore the three displayed arrows form the assembly beta_h circ delta_h circ alpha_h^{-1}.",
-   "uses": [
-    "cor-pur-vector-bundle-purity",
-    "def-coefficient-twists-detailed",
-    "def-asd-vector-bundle-zero-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Chart proof Step 4, vector-bundle arrow"
-   }
-  },
-  {
-   "text": "By the definition of the specified diagonal orientation in the diagonal-dualizing-object theorem, the orientation on h is precisely beta_h circ delta_h circ alpha_h^{-1}. The same construction for f restricts along the open immersion j:U->X: exceptional composition, section-invariant pullback, the normalized DNC comparison, and vector-bundle purity all commute with this restriction. Hence under the canonical open-restriction comparison Lj^*omega_f~=omega_h one has Lj^*vartheta_f=vartheta_h.",
+   "text": "Extract chartOrdinaryOrientation_spec from the unique-existence witness defining the ordinary orientation. At the identity chart, cancel source-etale locality and use faithfulness of identity pullback to obtain chartProjectionOrientation_inv. The coordinate formula and its inverse follow by cancelling the chosen orientation. The affine mate is therefore invertible. Its zero-section pullback gives chartStandardSection_formula. The counit comparison follows from the ordinary/pro-etale witness equation, chartGamma_eq_inverseOrientation, and induction identifying the two ordered affine towers. For chartGamma_eq_inverseOrientation, apply the proved coefficient-unit projection normalization. The defining HEq witnesses identify the chosen tensor-shift map and chartProjectionUnitSource with the actual reassociation, tensor-unit and left-unitor composite occurring there. Its pullback-unit map is the defining chartUnitPullback. Conjugating the proved presentation identity by these equal source coordinates yields the inverse diagonal orientation, including at rank zero.",
    "uses": [
     "thm-pur-diagonal-dualizing-object",
-    "lem-pur-diagonal-base-change",
-    "thm-pur-dnc-invariance",
-    "cor-pur-vector-bundle-purity",
-    "thm-pur-cohomological-smoothness",
-    "def-weil-exceptional-inverse-image"
+    "lem-pur-projection-unit-presentation-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Diagonal-dualizing-object proof Steps 1–2 and chart proof final restriction paragraph"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–4: affine-chart geometry and canonical coordinate normalizations"
    }
   },
   {
-   "text": "Assume now that u:U->A^d_V is etale. The product map on the two factors is etale by stability under base change. Near Delta_h, the coordinate differences of the two pullbacks of the standard coordinates cut out the diagonal; the resulting map W_h->A^d_U is etale and carries Delta_h to the zero section. Its differential identifies N_h with the trivial rank-d bundle O_U^d. The coordinate and DNC descriptions in the section-geometry lemma, together with the uniqueness clause of the DNC theorem, therefore identify delta_h with the identity comparison for the standard zero-section pair. This also covers d=0, when the pair is already the identity pair. On the centred neighbourhood O, define c_src by restricting C(p_h,Delta_h) to O and then inverting etale restriction from the standard zero pair; the Cartesian zero square fixes the section. Define c_N from the canonical conormal model and differential frame by the same normalized exceptional-adjunction restriction. The resulting equality is c_N delta_h c_src^{-1}=id on D_d, also for d=0.",
+   "text": "Apply the proved centred etale coordinate-difference neighbourhood theorem, extracted without changing its definition or theorem signature. It factors the base-changed coordinate morphism through the translation shear, then proves the Cartesian zero square by its cone equations. The geometry is independent of all cohomological compatibility theorems.",
    "uses": [
-    "def-weil-etale-morphism",
-    "def-sbc-affine-space",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-pur-diagonal-regular-immersion",
-    "lem-pur-dnc-section-geometry",
-    "thm-pur-dnc-invariance",
+    "lem-pur-chart-coordinate-difference-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–4: affine-chart geometry and canonical coordinate normalizations"
+   }
+  },
+  {
+   "text": "The existing centred-coordinate theorem for a smooth section gives conormal rank d and invertibility of the canonical symmetric comparison. The relative differential module is finite locally free of rank d, and the proved diagonal difference identification transports this property to the conormal piece. Form the canonical symmetric-algebra relative Spec isomorphism and compose with the homogeneous-normalized Rees comparison. Its projection and zero equations follow from degree zero and augmentation. The equality with this fixed construction proves uniqueness of the model.",
+   "uses": [
+    "lem-pur-chart-normal-differential",
+    "lem-pur-rees-cone-normalized-existence",
+    "lem-pur-conormal-graded-algebra",
+    "def-pur-normal-bundle",
     "lem-trf-smooth-section-centred-coordinates"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Chart proof Steps 1–3 and the standard-pair normalization"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–4: affine-chart geometry and canonical coordinate normalizations"
    }
   },
   {
-   "text": "Under the same coordinate identification, beta_h is the pullback to the zero section of the rank-d vector-bundle comparison for O_U^d. Base-change compatibility of vector-bundle purity and the canonical pullback of Tate twists show that no frame-dependent scalar or sign is introduced. Thus the local assembly is the normalized standard zero-section orientation in the chosen coordinates.",
+   "text": "Etale composition with affine-space projection is smooth of relative dimension d. Apply the proved coordinate_differential_frame theorem, which provides the ordered generator formula directly. Any other normalized frame agrees on every free generator, hence agrees as a sheaf map. For a framed finite locally free module, identify its symmetric algebra with the polynomial algebra on the ordered basis. The resulting relative Spec map agrees with the explicit homOfVector on the base and all coordinates. Augmentation kills those coordinates, proving its zero equation. Apply this to chartConormalFrame and compose with the normalized cone model to prove chartNormalCoordinateMap_spec.",
    "uses": [
-    "cor-pur-vector-bundle-purity",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "lem-pur-vector-integration-site-comparison"
+    "lem-pur-etale-coordinate-differential-basis",
+    "lem-pur-chart-normal-differential",
+    "lem-pur-conormal-graded-algebra",
+    "def-pur-normal-bundle",
+    "lem-pur-rees-cone-normalized-existence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Chart proof Step 4, vector-bundle integration and frame independence"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–4: affine-chart geometry and canonical coordinate normalizations"
    }
   },
   {
-   "text": "The ordered affine comparison Gamma_{P_d,Lambda} is extended to every n>=1 by projection-purity-agreement. In the current constructible composition definition take f=u, g=P_d, and L=Lambda_V in D^b_c(V,A). Both maps are separated finite type between affine finite-type k-schemes. The defining comparison c_{P_d,u,Lambda_V} is the conjugate of the compact-support composition isomorphism; def-weil-pbc-adjunction-conjugate makes it invertible. Its evaluation is legitimate: K=R(P_du)^!Lambda_V is bounded constructible and has the etale-origin witness specified in pur9-def-upper-shriek-composition; compact support preserves the bounded-below etale-origin class. Compose c with the canonical etale identification Ru^!=Lu^* to obtain epsilon_u. Steps 2, 5 and 6 identify the diagonal, normalized DNC and zero-section arrows with the pullbacks of the corresponding arrows for P_d. Their composite is therefore Lu^*(vartheta_{P_d}) circ epsilon_u. Projection-purity-agreement at K=Lambda_V identifies vartheta_{P_d}=Gamma_{P_d,Lambda}^{-1}, giving the required formula for vartheta_h. For P_r over affine B, the same model agreement identifies its dualizing orientation with Gamma_{P_r,Lambda}^{-1}; pulling back along z_r gives b_r=Lz_r^*(Gamma_{P_r,Lambda}^{-1}) with canonical twist restriction.",
+   "text": "The coefficient unit has Tor amplitude [0,0] by the derived finite-unit theorem, and is constructible because the constant coefficient sheaf is constructible. The generic projection-unit source isomorphism is fixed by the displayed canonical tensor, shift and unit maps; use that actual composite and its defining equality to establish unique existence. Smoothness of the ordered affine trace projection follows inductively from smoothness of affine-line projection and composition.",
    "uses": [
-    "lem-pur-projection-purity-agreement",
-    "def-pur-affine-space-comparison",
-    "pur9-def-upper-shriek-composition",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-etale-morphism",
-    "thm-pur-diagonal-dualizing-object",
-    "def-weil-pbc-adjunction-conjugate",
-    "thm-sf-comp-composition"
+    "sbc-lem-affine-space-smooth"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Chart proof Step 4 and projection-purity-agreement normalization"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–4: affine-chart geometry and canonical coordinate normalizations"
    }
   },
   {
-   "text": "Further open restrictions and etale changes of chart pull back the same diagonal, normal-bundle and vector-bundle arrows (Steps 2, 5 and 6), so uniqueness of the normalized DNC comparison identifies the pulled-back DNC arrow with the new one. For the exceptional comparisons, thm-sf-comp-composition gives identity and associativity of alpha on bounded-below etale-origin inputs. Conjugation and mate pasting carry these equations to the comparisons c defined by pur9-def-upper-shriek-composition; all inputs here are the bounded constructible objects of Step 7. Thus the coordinate-adjunction expression is compatible with the same restrictions and chart changes. For d=0, the standard section pair is the identity pair, the normalized DNC map is the identity, and projection-purity-agreement gives Gamma_{P_0,Lambda}=1. The rank-zero zero-section pullback is also the identity. Hence every displayed formula has the claimed unit value.",
+   "text": "At rank zero cancel the coefficient descent against identity-unit pullback and use the literal identity counit. The proved compact_comparison_zero identifies the compact-support comparison. Apply the proved identityAdjunct theorem to identify its ordinary adjunct with the canonical exceptional-identity comparison, obtaining chartAffineGamma_zero. The helper exports the actual finite coefficient ring, after identifying its ordered integration presentation inside its proof. The argument includes the empty scheme. Substituting into chartStandardSection_zero gives its recorded unit formula.",
    "uses": [
+    "lem-pur-vector-integration-identity-unit",
+    "lem-pur-vector-integration-rank-zero-local",
+    "lem-pur-vector-integration-identity-adjunct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–4: affine-chart geometry and canonical coordinate normalizations"
+   }
+  },
+  {
+   "text": "Remaining normalization argument: The specified orientation $\\vartheta_f$ of [thm-pur-diagonal-dualizing-object] is glued from the local maps $\\theta_V=\\beta_V\\delta_V\\alpha_V^{-1}\\rho_V$ of [lem-pur-diagonal-orientation-refinement]. For our affine $V$, that node gives $\\theta_{V_i}=\\theta_{V'}=\\theta_V$ on affine $V'\\subseteq V\\cap V_i$; the equality test of [lem-pur-degree-zero-derived-map-gluing] after the shift $[-2d]$ gives $Lj_V^*\\vartheta_f=\\theta_V$. Restrict to $U$: dualizing mate locality identifies $\\alpha_V|_U=\\alpha_h$ and the source comparisons; base change of $\\delta_V$ along $U\\hookrightarrow X_V$ [thm-pur-dnc-invariance], then section restriction to the open $U\\times_VU$ of $X_V\\times_VU$, identifies $\\delta_V|_U=\\delta_h$; bundle base change identifies $\\beta_V|_U=\\beta_h$. Thus $Lj^*\\vartheta_f=\\beta_h\\delta_h\\alpha_h^{-1}$, with successive restriction compatibility.",
+   "uses": [
+    "lem-pur-diagonal-orientation-refinement",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-pur-section-etale-restriction-coherence",
     "thm-pur-dnc-invariance",
-    "def-pur-affine-space-comparison",
-    "lem-pur-projection-purity-agreement",
-    "pur9-def-upper-shriek-composition",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-mate-pasting",
-    "thm-sf-comp-composition"
+    "cor-pur-vector-bundle-purity",
+    "thm-pur-diagonal-dualizing-object"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-    "place": "Chart proof final compatibility paragraph and rank-zero normalization"
+    "place": "Chart proof Steps 1–4; repaired assembly Step 1"
+   }
+  },
+  {
+   "text": "Remaining normalization argument: The difference/Rees lemma gives the centred $O$, Cartesian zero square, actual conormal frame and $\\phi_N$. Let $i:O\\hookrightarrow W_h$; with the direction $R_a:C(g',s')\\to C(g,s)$ of the section restriction lemma, $c_{\\rm src}=R_eR_i^{-1}$ and $c_N=R_{\\phi_N}$. Its endpoint equation gives $R_{n_i}\\delta_O=\\delta_hR_i$ and $R_{n_e}\\delta_O=\\delta_{\\rm std}R_e=R_e$, the standard DNC map being $1$ [thm-pur-dnc-invariance]. The Rees lemma gives $n_e=\\phi_Nn_i$, so $R_{n_e}=R_{\\phi_N}R_{n_i}$ by composition. Hence $c_N\\delta_h=R_{\\phi_N}R_{n_i}\\delta_OR_i^{-1}=R_eR_i^{-1}=c_{\\rm src}$, i.e. the claimed conjugation is $1$.",
+   "uses": [
+    "lem-pur-diagonal-difference-rees-frame",
+    "lem-pur-section-etale-restriction-coherence",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Chart proof Steps 1–4; repaired assembly Step 2"
+   }
+  },
+  {
+   "text": "The normal-cone integration equation is assembled in Lean. Apply chartOrientation_etale_restriction to the scheme isomorphism from a vector-bundle presentation to the actual normal cone. Cancel the pulled-back forward orientation to obtain its inverse-arrow form. Transport the composite projection along the presentation equation; chartOrdinaryOrientation_inv_congr proves that this transports the chosen orientation, without changing it. Apply the normalized bundle model lemma to chartOrdinaryOrientation_spec, and substitute its integration-adjunct formula. The ordered-Gamma identification is now assembled from the coefficient-unit calculation and existing projection-coordinate equation described in the first step; the independent integration route remains unchanged.",
+   "uses": [
+    "lem-pur-vector-bundle-integration-orientation",
+    "thm-pur-diagonal-dualizing-object",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-affine-ordered-integration-transposes",
+    "lem-pur-vector-integration-chart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Chart proof Steps 1–4; repaired assembly Step 3"
+   }
+  },
+  {
+   "text": "Remaining normalization argument: The chart-mate lemma gives the domain-valid invertible $\\epsilon_u$ and $u^*\\alpha_Pq_u=\\epsilon_u\\alpha_h$, $r_u\\delta_h=u^*\\delta_Pq_u$, $u^*\\beta_Pr_u=\\beta_h$. Substitute into Step 1: $\\vartheta_h=u^*(\\beta_P\\delta_P\\alpha_P^{-1})\\epsilon_u$. Projection agreement at $A$ identifies the parenthesis with $\\Gamma_{P,A}^{-1}$.",
+   "uses": [
+    "lem-pur-chart-exceptional-mate-coherence",
+    "lem-pur-projection-purity-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Chart proof Steps 1–4; repaired assembly Step 4"
+   }
+  },
+  {
+   "text": "Remaining normalization argument: Frame/Rees restriction, the section endpoint/composition equations, bundle base change and the chart-mate identity/associativity equations make these the same formulas after further restriction and etale chart change. At $d=0$ the centred pair and empty frame are identity data, the DNC comparison is $1$, and ordered integration gives $\\Gamma_{P_0,A}=1$; its zero pullback gives $b_0=1$.",
+   "uses": [
+    "lem-pur-diagonal-difference-rees-frame",
+    "lem-pur-section-etale-restriction-coherence",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-chart-exceptional-mate-coherence",
+    "lem-pur-affine-ordered-integration-transposes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Chart proof Steps 1–4; repaired assembly Step 5"
    }
   }
  ],
  "proof_deps": [
-  "cor-pur-vector-bundle-purity",
-  "def-asd-vector-bundle-zero-section",
-  "def-coefficient-twists-detailed",
-  "def-pur-affine-space-comparison",
-  "def-pur-normal-bundle",
-  "def-pur-section-invariant",
-  "def-sbc-affine-space",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-etale-morphism",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-pbc-adjunction-conjugate",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "lem-pur-diagonal-base-change",
-  "lem-pur-diagonal-regular-immersion",
-  "lem-pur-dnc-section-geometry",
-  "lem-pur-projection-purity-agreement",
-  "lem-pur-rees-cone-normalized-existence",
-  "lem-pur-vector-integration-site-comparison",
-  "lem-trf-smooth-section-centred-coordinates",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-mate-pasting",
-  "pur9-def-upper-shriek-composition",
-  "thm-pur-cohomological-smoothness",
   "thm-pur-diagonal-dualizing-object",
+  "lem-pur-projection-unit-presentation-normalization",
+  "lem-pur-chart-coordinate-difference-neighbourhood",
+  "lem-pur-chart-normal-differential",
+  "lem-pur-rees-cone-normalized-existence",
+  "lem-pur-conormal-graded-algebra",
+  "def-pur-normal-bundle",
+  "lem-trf-smooth-section-centred-coordinates",
+  "lem-pur-etale-coordinate-differential-basis",
+  "sbc-lem-affine-space-smooth",
+  "lem-pur-vector-integration-identity-unit",
+  "lem-pur-vector-integration-rank-zero-local",
+  "lem-pur-vector-integration-identity-adjunct",
+  "lem-pur-diagonal-orientation-refinement",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "lem-pur-dualizing-sigma-cocycle-locality",
+  "lem-pur-section-etale-restriction-coherence",
   "thm-pur-dnc-invariance",
-  "thm-sf-comp-composition"
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-diagonal-difference-rees-frame",
+  "lem-pur-vector-bundle-integration-orientation",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-vector-integration-chart-comparison",
+  "lem-pur-chart-exceptional-mate-coherence",
+  "lem-pur-projection-purity-agreement"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
-  "place": "Steps 1–4, generalized from the Q_l chart statement to A_{E,n}"
+  "group": "K2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, projection agreement at the coefficient unit. Partial decomposition of chartGamma_eq_inverseOrientation through the proved projection/unit normalization module and the separate generic tensor-mate unit identity. The item proves the equality of its chosen chart source and the actual composite. The five other original holes and all earlier proved bodies remain unchanged; the unit route is preserved."
  },
  "mathlib_searches": [
   {
@@ -294,30 +318,35 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-diagonal-dnc-chart-normalization",
   "worker": "stage1",
-  "summary": "Split the local diagonal/DNC orientation statement into the section-invariant base-change assembly, normalized DNC comparison, vector-bundle restriction, open-restriction compatibility, etale coordinate normal form, affine comparison normalization, and rank-zero/functoriality checks. The proof follows the main-20261015 chart proof and uses the existing finite-coefficient purity and projection-agreement nodes; it retains arbitrary finite E/Q_l and all n>=1. Repair of the returned delivery: revalidated the current constructible definition pur9-def-upper-shriek-composition at L=Lambda_V, supplied conjugation for invertibility and compact-support associativity with mate pasting for coherence, and refreshed every citation excerpt against the current DAG. The item statement and arbitrary E,n domain are unchanged.",
-  "blueprint": "Realizes the composition-coherence proof's local orientation assembly and normalized DNC chart argument, using sk-prop-sp-orientation/sk-prop-sp-orientation-charts Steps 1–4 and the projection-purity-agreement normalization. The existing det-sp-orientation-charts is only the Q_l special case and is recorded as same_as.",
-  "tool_uses": [
-   {
-    "node": "thm-sf-comp-composition",
-    "why": "Generic compact-support composition, identity and associativity on bounded-below etale-origin inputs; used only to justify the constructible exceptional comparison in steps 7–8, as required by the revised pur9 definition. The purity unit does not prove compact-support composition."
-   }
-  ]
+  "summary": "RETURN repair: replace the two clause-sized nodes by a geometric difference/Rees frame lemma and a general counit-normalized section/family restriction lemma; retain accepted chart-mate coherence. Use Q82 refinement and existing ordered-integration-transpose equality for the actual Gamma bridge. Item statement and route unchanged.",
+  "blueprint": "Composition-coherence Step 1 and orientation chart Steps 1–4: geometric difference/Rees coordinates, adjunction locality of section/deformation invariants, integration transpose, chart-mate substitution, restriction and rank-zero units."
  },
  "tool_uses": [
   "thm-sf-comp-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NE-951c2252c",
-  "group": "NE",
+  "reviewer": "NT-cc-Q94-4d7d7d770",
+  "group": "Q94",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-951c2252c (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight proof steps, every cited DAG statement, unit/chapter route, and current blueprint sources. Verified finite-coefficient typing for arbitrary E and n, diagonal/base-change and normalized DNC maps, vector-bundle purity, affine comparison, exceptional composition, chart compatibility, and d=0/empty/identity/ramified edge cases. No new nodes or repair faults; review.md records detailed checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-4d7d7d770 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every statement the five steps cite, the 4-step proof of thm-pur-diagonal-dualizing-object and the main-20261015 chart proof (Steps 1–4). The item statement and its stmt_deps are unchanged. All three points of the earlier RETURN (1b3996bb) are repaired. (1) D1: the two clause nodes are gone. Clause 1 is built on the Q82 node lem-pur-diagonal-orientation-refinement. Clause 2 is now proved in Step 2 from two smaller lemmas: diagonal-difference-rees-frame (pure geometry) and section-etale-restriction-coherence (R_a: C(g',s')→C(g,s), the family map, R_nδ'=δR_a). Neither lemma restates an item clause. chart-exceptional-mate-coherence is byte-identical to the version accepted last time. (2) The Γ bridge is now carried by lem-pur-vector-integration-chart-comparison, which states c_π|=Γ_{p_d} at every n; its zero pullback gives b_r. lem-pur-affine-ordered-integration-transposes gives the same from the transpose side. (3) The old 8 steps map onto the new nodes and cited nodes with nothing dropped. The proof is 5 steps of about 2.6k characters. Checks: the difference map is (1×u) followed by a translation, so it is étale. Its zero locus is U×_{A^d}U, where Δ is open and closed; removing the other sheets gives the Cartesian square. I tested two disjoint sheets, d=0 (O≅U) and empty U. The sign [p_2^*a−p_1^*a]↦da matches Stacks 08S2. The Rees map is a flat pullback and its endpoints are e and φ_N. In Step 4 the three equations cancel to Lu^*(β_Pδ_Pα_P^{-1})ε_u, and projection agreement turns this into Γ^{-1}. There is no cycle and no SGA. I checked the duplicate candidates (lem-sc-smooth-section-affine-coordinates, lem-pur-difference-coordinate-section-identifications, lem-pur-affine-diagonal-integration-orientation, sigma-cocycle locality); none duplicates a new node. Batch-5: (a) the chart-mate and section-restriction citations of thm-pur-dnc-invariance and lem-pur-dnc-section-geometry reach only lem-trf-regular-perfect-field-smooth (regular ⇒ smooth over a perfect field, general algebra), and thm-pur-dnc-invariance was already a stmt_dep on base; (b) lem-pur-finite-etale-dualizing-normalization reaches only lem-pod-etale-stalk-tensor-scalar (stalks commute with tensor products, a general sheaf fact), and the proof already reached it through sigma-cocycle locality. Neither is a step of the trace formula or of Poincaré duality, so both are accepted. FIX (whole item file under fixes/dag/nodes/sec-smooth-purity/): (1) C3: Step 1 said only that ϑ_f is 'assembled' from the θ_V. It now derives Lj_V^*ϑ_f=θ_V for any affine V from the refinement's overlap agreement and the equality test of lem-pur-degree-zero-derived-map-gluing (added to proof_deps). It also cites thm-pur-dnc-invariance for the base change of δ_V along U→X_V. (2) E4 typing: Step 2 wrote c_src=R_e^{-1}R_i^{-1} and c_N=R_{φ_N}^{-1}, which are ill-typed under the node's direction. They are corrected to c_src=R_eR_i^{-1} and c_N=R_{φ_N}, and the step now writes out the derivation from the two endpoint equations, n_e=φ_N n_i and the composition rule.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.DiagonalDncChartNormalization",
   "declaration": "WeilConjectures.PurityFiniteSetting.diagonal_dnc_chart_normalization",
@@ -334,8 +363,6 @@
    "WeilConjectures.PurityFiniteSetting.chartOrientation_etale_restriction",
    "WeilConjectures.PurityFiniteSetting.chartOrdinaryBaseChange",
    "WeilConjectures.PurityFiniteSetting.chartOrientation_open_baseChange",
-   "WeilConjectures.PurityFiniteSetting.chartCoordinateDifferences",
-   "WeilConjectures.PurityFiniteSetting.chartCoordinateDifferences_neighbourhood",
    "WeilConjectures.PurityFiniteSetting.chartDiagonalNormalBundle",
    "WeilConjectures.PurityFiniteSetting.chartCoefficientUnit_finiteTor",
    "WeilConjectures.PurityFiniteSetting.chartUnitPullback",
@@ -590,5 +617,15 @@
    "thm-pur-dnc-invariance",
    "thm-sf-comp-composition"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T021337-L-2759031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

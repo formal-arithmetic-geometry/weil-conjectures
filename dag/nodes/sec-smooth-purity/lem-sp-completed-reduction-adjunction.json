@@ -1,0 +1,158 @@
+{
+ "id": "lem-sp-completed-reduction-adjunction",
+ "kind": "statement",
+ "title": "Canonical ell-power reduction adjunction and reconstruction maps",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $T$ on which $\\ell$ is invertible. Use the completed coefficient ring $A$, normalized coefficient-tower abelian interface $D$, and the actual reduction construction $R$ of [det-sp-reduction-tower-normalized]. Let $r$ be its reduction transported along the coefficient-ring isomorphism to $D(A)$, and let $L$ be exact completed scalar forgetting followed by total right-derived inverse limit [lem-sp-completed-tower-roos]. There exists an adjunction $r\\dashv L$ whose unit is invertible at every derived-complete object [def-weil-derived-complete] and whose counit is invertible at every normalized tower [sk-def-sp-normalized-towers]. No boundedness, constructibility or Tor bound is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction, Unit, Counit and Restriction paragraphs; Bhatt--Scholze Lemma 3.5.7"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-tower-normalized",
+  "sk-def-sp-normalized-towers",
+  "lem-sp-completed-tower-roos",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Write ell as a unit times a positive power pi^e. Identify the ell-power strict system with the arithmetic subsequence of the uniformizer system, with its quotient maps and completed projections.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the exact floor-index right-extension Hom bijection with the uniformizer reduction/limit adjunction. Projection-preserving arithmetic cofinality identifies its right adjoint with L. The left-derived universal property and the local tensor-generator formula of R identify its left adjoint with r.",
+   "uses": [
+    "lem-sp-arithmetic-system-right-adjoint",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "det-sp-reduction-tower-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ceiling-index arithmetic interpolation of a normalized tower gives an effective uniformizer tower; the selected projection adjuncts are its actual counit components. Jointly conservative derived evaluations make the counit invertible.",
+   "uses": [
+    "lem-sp-normalized-arithmetic-interpolation",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual uniformizer unit is invertible on complete objects. The cofinality comparison respects quotient cone units, so the transported ell-power adjunction has invertible unit on the same complete objects.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "sk-def-sp-coefficient-towers",
+  "lem-sp-arithmetic-system-right-adjoint",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "det-sp-reduction-tower-normalized",
+  "lem-sp-normalized-arithmetic-interpolation",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Normalization: Adjunction, Unit and Counit paragraphs, excluding constructible restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor between full subcategories is an equivalence when an adjunction has invertible unit and counit",
+   "results": "Adjunction.toEquivalence and its functor/inverse equations; abstract restriction assembly only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of strict sheaf module towers has distinguished Roos triangle with canonical projections",
+   "results": "Eight hits: derived-category fractions and triangleOfSES; no completed coefficient tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence",
+   "results": "Adjunction.toEquivalence and component formulas; abstract equivalence only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*[Cc]omplet|[Nn]ormalized.*[Tt]ower",
+   "results": "Three normalized field trace hits; none concerns derived module-sheaf towers.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityNormalizedEquivalence",
+  "date": "2026-10-25",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization: Adjunction, Unit and Counit paragraphs, excluding constructible restriction",
+   "via": [
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCompletedReductionAdjunction",
+  "file": "lean/Sheaf/Paper/SmoothPurityCompletedReductionAdjunction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spCompletedReduction_limitAdjunction",
+  "statement": "theorem spCompletedReduction_limitAdjunction [∀ x : T, Invertible (l : T.residueField x)] (D : SpCoefficientTowersAbelian l E T) (R : SpReductionTower l E T D) : ∃ adj : spCompletedReduction l E T D R ⊣ spCompletedTotalLimit l E T D, (∀ M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T), WeilConjectures.IntegralOnSlice.IsComplete l E T none M → IsIso (adj.unit.app M)) ∧ (∀ C : spDerivedCoefficientTowers l E T D, IsSpNormalizedTower l E T D C → IsIso (adj.counit.app C))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "independent cc review: moved defs byte-identical to clone; item sig/structure unchanged; 3 sorry lemmas vs item fields (all implied by item statement; Roos w/o Invertible true via coefficientConstantTower_roos); 5 direct importers compiled against delivered interface OK; #print axioms clean"
+ }
+}

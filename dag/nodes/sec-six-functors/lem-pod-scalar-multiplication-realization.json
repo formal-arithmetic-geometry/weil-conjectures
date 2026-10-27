@@ -1,0 +1,128 @@
+{
+ "id": "lem-pod-scalar-multiplication-realization",
+ "kind": "statement",
+ "title": "Multiplication normalizes the principal quotient scalar completion",
+ "statement": "Let $\\ell$ be prime, $E,L$ finite extensions of $\\mathbf Q_\\ell$, $\\iota:E\\to L$ an embedding over $\\mathbf Q_\\ell$, and $W$ any scheme. Let $R,S$ be the actual completed integral coefficient sheaves [def-weil-completed-integral-coefficients], with their canonical residue-compatible map [lem-weil-finite-free-completed-scalar-comparison]. Let $F$ be any cochain derived change-of-rings model [lem-pur-derived-change-of-rings] whose ordinary functor equals the specified completed ordinary extension, and let $\\sigma:F.T\\simeq T$ preserve the specified cochain counits. Let $C_S$ be any normalized principal quotient completion model for the actual target uniformizer [def-pur-principal-quotient-completion-model]. There is a natural isomorphism $c:F.T\\,C_S\\simeq\\widehat T$ to the specified completed integral scalar extension [lem-weil-integral-scalar-extension-well-defined]. On each flat-term K-flat $P$, it is realized by a strict tower isomorphism $\\mu$ and a Roos isomorphism $m$: the composite of the target quotient map with $\\mu_n$ sends $a\\otimes x$ to $\\overline a\\otimes x$ through the actual completed residue projection; both coordinates of $m$ are the product map induced by $\\mu$. The equality $C_S(F.\\epsilon_P)\\,C_S.\\mathrm{counit}_{F.E(P)}\\,Q(m)=c_{QP}\\,\\mathrm{comparison}_{\\widehat T,P}$ holds. Finally the already specified comparison $\\chi:T\\to\\widehat T$ is exactly $\\sigma^{-1}_K\\,C_S.\\mathrm{unit}_{F.TK}\\,c_K$ on every derived object $K$. This asserts the multiplication and counit normalization, without claiming completion-exchange or the final inverse-unit identity. The normalization predicates are those of [def-pod-completion-scalar-formulas].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Opening sentence, normalized coefficient calculation; parent lem-pod-completion-unit-scalar-intertwining steps [3]. Bhatt--Scholze Definitions 3.5.2--3.5.3 and Lemma 6.8.2(1); agent-formulated refinement."
+ },
+ "stmt_deps": [
+  "def-weil-finite-coefficient-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "def-weil-derived-complete",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-finite-free-completion-exchange",
+  "def-pc-kflat-complex",
+  "lem-weil-strict-roos-comparison",
+  "def-pur-principal-quotient-completion-model",
+  "def-pod-completion-scalar-formulas"
+ ],
+ "proof": [
+  {
+   "text": "identify the target quotient tensor at level n with the specified scalar\nquotient tensor by multiplication (p tensor a) tensor b mapped to p tensor ab.\nIts inverse sends p tensor b to (p tensor 1) tensor b. Balancing, the completed\nprojection equations, and the quotient universal property prove these are inverse\nsheaf maps and commute with every differential and quotient transition. Apply the\nsame product maps to both signed Roos coordinates to get m. Change of rings\npreserves K-flatness and flat terms, so both sides compute their derived functors\non these representatives. Descend the comparison to c, with the displayed counit\nequation. The strict comparison from ordinary scalar extension to the specified\nscalar tower has unshifted coordinates p tensor residue(a) and zero shifted\ncoordinate. Multiplication identifies it with CS.unit. Uniqueness in the resolving\nlocalization then gives the displayed equality for completedScalarComparison.\nAll constructions are natural; finite quotients of exponent one and zero complexes\nuse the same multiplication and unit formulas.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-completed-integral-quotient-model-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Opening sentence, normalized coefficient calculation; parent lem-pod-completion-unit-scalar-intertwining steps [3]. Bhatt--Scholze Definitions 3.5.2--3.5.3 and Lemma 6.8.2(1); agent-formulated refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-completed-integral-quotient-model-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Opening sentence, normalized coefficient calculation; parent lem-pod-completion-unit-scalar-intertwining steps [3]. Bhatt--Scholze Definitions 3.5.2--3.5.3 and Lemma 6.8.2(1); agent-formulated refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "multiplication identifies tensor quotient tower with completed scalar extension Roos cone",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_tmul, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop, AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule, AdicCompletion.instSMul.congr_simp, Algebra.TensorProduct.instMul.congr_simp, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, PiTensorProduct.instMul.congr_simp, instAlgebra",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product extension of scalars associativity quotient sheaf module",
+   "results": "8 hits: TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop, QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(comp|tensor)|tensor.*quotient",
+   "results": "25 hits: Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Finiteness/NilpotentKer.lean",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "V9",
+  "item": "Sheaf.Paper.PodCompletionUnitScalarIntertwining",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Opening sentence, normalized coefficient calculation; parent lem-pod-completion-unit-scalar-intertwining steps [3]. Bhatt--Scholze Definitions 3.5.2--3.5.3 and Lemma 6.8.2(1); agent-formulated refinement.",
+   "via": [
+    "lem-pod-completion-unit-scalar-intertwining",
+    "lem-pod-identity-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodScalarMultiplicationRealization",
+  "file": "lean/Sheaf/Paper/PodScalarMultiplicationRealization.lean",
+  "declaration": "WeilConjectures.PodCompletionScalar.scalarMultiplicationRealization",
+  "statement": "theorem scalarMultiplicationRealization\n    (F : @SheafOfModules.DerivedChangeOfRingsCochainModel.{t + 1, t, max u (t + 1),\n    max u (t + 1) + 1, max u (t + 1) + 1}\n    W.ProEt inferInstance (essentiallySmallSelf.{u} _)\n    (Scheme.ProEt.topology W) inferInstance\n    (integralCoefficientAbLocallyBijective.{t, u} W)\n    (integralCoefficientAbSheafify.{t, u} W)\n    (completedIntegralCommRingSheafUnrestricted l E W)\n    (completedIntegralCommRingSheafUnrestricted l L W)\n    (completedCoefficientMap l E L ι W)\n    (integralTowerHasDerivedCategory l E W)\n    (integralTowerHasDerivedCategory l L W))\n    (hE : F.E = completedOrdinaryScalarExtension l E L ι W)\n    (σ : F.T ≅ completedDerivedScalarExtension l E L ι W)\n    (hσ : ∀ P : CochainComplex (integralTowerModules l E W) ℤ,\n      σ.hom.app (DerivedCategory.Q.obj P) ≫ completedScalarCounit l E L ι W P =\n        F.ε.app P ≫ DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex (eqToIso hE) (.up ℤ)).hom.app P))\n    (CS : @Model.{t + 1, t, max u (t + 1), max u (t + 1) + 1}\n    W.ProEt inferInstance (essentiallySmallSelf.{u} _)\n    (Scheme.ProEt.topology W) inferInstance\n    (integralCoefficientAbSheafify.{t, u} W)\n    (integralCoefficientAbLocallyBijective.{t, u} W)\n    (completedIntegralCommRingSheafUnrestricted l L W)\n    (integralTowerHasDerivedCategory l L W)\n    (PrincipalKoszulStrictReplacement.uniformizer l L W)) :\n    ∃ c : F.T ⋙ CS.completion ≅ integralScalarExtensionOfUniverses l E L ι W,\n      (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,\n        ModelData.MultiplicationFormula l E L ι W F hE CS c P) ∧\n      ∀ K : DerivedCategory (integralTowerModules l E W),\n        (completedScalarComparison l E L ι W).app K =\n          σ.inv.app K ≫ CS.unit.app (F.T.obj K) ≫ c.hom.app K",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T205945-L-3425099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T205945-L-3425099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

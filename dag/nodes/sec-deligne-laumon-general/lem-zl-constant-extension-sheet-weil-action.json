@@ -1,0 +1,229 @@
+{
+ "id": "lem-zl-constant-extension-sheet-weil-action",
+ "kind": "statement",
+ "title": "Component formula for the Weil action on a constant-extension image",
+ "statement": "Fix $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, and $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme, $X=X_0\\times_{k_0}k$, $m\\ge1$, $k_m=\\mathbf F_{q^m}\\subset k$, and $g:X_{0,m}=X_0\\times_{k_0}k_m\\to X_0$. Let $\\mathcal F=(M,\\theta)$ be a constructible $\\Qlb$-Weil sheaf [def-weil-weil-sheaf-complex], with $\\theta:G_X^*M\\xrightarrow{\\sim}M$ for geometric $q$-Frobenius. Form $P=g_*g^*\\mathcal F$ using [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image] and the canonical induced Weil structures of [lem-fix-weil-operations].\nIndex the clopen sheets of $Y=X_{0,m}\\times_{k_0}k$ by $I=\\operatorname{Hom}_{k_0}(k_m,k)$, using the projection identifications with $X$ (on affine coordinates $a\\otimes b\\mapsto a\\sigma(b)$). Let $G_Y$ be geometric $q$-Frobenius on $Y$ [def-weil-frobenius-detailed]; since $g$ is a $k_0$-morphism, the projection $h:Y\\to X$ satisfies $hG_Y=G_Xh$, so $G_Y$ maps each sheet $Y_\\sigma$ into a sheet $Y_{\\pi(\\sigma)}$, and in the sheet identifications $G_Y|_{Y_\\sigma}$ is $G_X$. This defines the permutation $\\pi:I\\to I$. Under the natural underlying-heart identification $P\\simeq\\bigoplus_{\\sigma\\in I}M$ of [lem-zl-split-sheet-adjunction], its induced Weil map is the componentwise map $\\theta$ followed by this permutation:\n$$\\theta_P((v_\\sigma)_\\sigma)=(\\theta(v_{\\pi(\\sigma)}))_\\sigma,$$\nwhere $v_\\sigma$ lies in the $\\sigma$-component $G_X^*M$ of $G_X^*P$; the Frobenius exchange $G_X^*h_*\\simeq h_*G_Y^*$ places the $\\pi(\\sigma)$-component of $G_X^*P$ on the sheet $Y_\\sigma$.\nThis formula denotes equality of morphisms in the clopen product category, with source components $G_X^*M$, and not merely equality on stalks. It is compatible with finite coefficient extension and with the canonical Frobenius exchange for the actual derived operations. The adjunction unit corresponds to the equivariant diagonal $M\\to\\bigoplus_\\sigma M$. No lissity, connectedness or semisimplicity hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 5: “Summation is unchanged by permuting the copies; hence these local maps glue and commute with Frobenius”; old mixed-descent Step 5, the semilinear naturality comparison before the summation calculation."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-fix-weil-operations",
+  "lem-zl-split-sheet-adjunction",
+  "def-weil-frobenius-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Write $P_X=LG_X^*$ and $P_Y=LG_Y^*$. The geometric decomposition in clause (b) of [lem-zl-constant-extension-weil-heart-equivalence] supplies the finite clopen sheets. Fix their projection sections $s_\\sigma:X\\to Y$ as in the statement. Put $\\gamma=\\varphi_q^{-1}$, as in [def-weil-frobenius-detailed]. In an affine chart write\n$$r_\\sigma:A_0\\otimes_{k_0}k_m\\otimes_{k_0}k\\to A_0\\otimes_{k_0}k,\\quad a\\otimes b\\otimes c\\mapsto a\\otimes\\sigma(b)c.$$\nThe definition of $G_Y$ gives\n$$r_\\sigma G_Y^\\#=G_X^\\#r_{\\varphi_q\\sigma},$$\nbecause $\\gamma(\\varphi_q\\sigma(b))=\\sigma(b)$. Hence $G_Ys_\\sigma=s_{\\pi(\\sigma)}G_X$ with $\\pi(\\sigma)=\\varphi_q\\circ\\sigma$. This is a permutation, with inverse $\\gamma\\circ\\sigma$. The formula uses the labelled field embeddings and therefore specifies $\\pi$ also when $X$ is empty. The equations agree on overlaps, since each $s_\\sigma$ is the prescribed global projection section.",
+   "uses": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: the permutation of the copies, with its direction checked in the projection coordinates"
+   }
+  },
+  {
+   "text": "By [lem-zl-split-sheet-adjunction], in the clopen coordinates $H_\\sigma=s_\\sigma^*H$ the actual functors are\n$$Lh^*K=(K)_\\sigma,\\qquad Rh_*H=\\prod_\\sigma H_\\sigma,$$\nwith diagonal unit and counit $\\varepsilon_{H,\\sigma}=\\operatorname{pr}_\\sigma$. In particular $Rh_*Lh^*M=\\bigoplus_\\sigma M$ in the heart. The exact Frobenius equivalences of [lem-pod-semilinear-field-operation-lifts] preserve finite products: apply their inverse to a product cone and its universal property. Thus the source coordinates of $P_XRh_*H$ are $P_XH_\\tau$. Step 1 gives $(P_YH)_\\sigma=P_XH_{\\pi(\\sigma)}$: the identification is $s_\\sigma^*G_Y^*\\simeq(G_Ys_\\sigma)^*=(s_{\\pi(\\sigma)}G_X)^*\\simeq G_X^*s_{\\pi(\\sigma)}^*$, built from the integral composition isomorphisms $c_{h,k}$ of [lem-pod-integral-pullback-composition] at the finite stage $E$ over which $M$ is represented, rationalized as in the definition of the field-coefficient pullbacks.",
+   "uses": [
+    "lem-zl-split-sheet-adjunction",
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: the actual direct-image and adjunction coordinates before the Frobenius comparison"
+   }
+  },
+  {
+   "text": "Compute the prescribed exchange $e_H:P_XRh_*H\\to Rh_*P_YH$ as a mate, not as a chosen isomorphism between products. The commuting Frobenius square is Cartesian, since its horizontal arrows are automorphisms. For the $k$-scheme convention of [fix-lem-exchanges], give its source corners structural maps $a_XG_X$ and $a_YG_Y$; they remain finite-type $k$-schemes and $h$ remains a $k$-morphism. Use the unit--square--counit formula of [def-exchange-projection], which [fix-lem-exchanges] identifies with the actual coefficient-stage exchanges. Its transpose is\n$$Lh^*P_XRh_*H\\xrightarrow{c}P_YLh^*Rh_*H\\xrightarrow{P_Y\\varepsilon_H}P_YH.$$\nOn sheet $\\sigma$, the square comparison $c$ is the identity after the projection identifications: both composites are pullback along $G_X$, by $hG_Ys_\\sigma=G_X=G_Xhs_\\sigma$, and every map involved, namely $c$, the sheet identifications $s_\\sigma^*Lh^*\\simeq\\operatorname{id}$ of [lem-zl-split-sheet-adjunction] and those of Step 2, is a composite of the composition isomorphisms $c_{-,-}$. The associativity identity of [lem-pod-integral-pullback-composition] for the triples $(s_\\sigma,h,G_X)$ and $(s_\\sigma,G_Y,h)$ identifies both resulting maps $s_\\sigma^*Lh^*P_X\\to P_X$ with the composition isomorphism for $G_X=G_Xhs_\\sigma=hG_Ys_\\sigma$; it passes to the rational and common stage because those maps are rationalizations of the integral ones at one finite stage. The second arrow on this sheet is $P_X(\\operatorname{pr}_{\\pi(\\sigma)})$. The Hom bijection of [lem-zl-split-sheet-adjunction] therefore gives the exact component equation\n$$\\operatorname{pr}_\\sigma e_H=P_X(\\operatorname{pr}_{\\pi(\\sigma)}).$$\nThese projections determine a unique morphism into the product. Replacing $\\pi$ by $\\pi^{-1}$ gives its inverse. This proves the claimed normalization for the actual exchange as a morphism in the derived category.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "lem-zl-split-sheet-adjunction",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: expand “commute with Frobenius” by the canonical adjunction-mate exchange"
+   }
+  },
+  {
+   "text": "Apply the operation-lift formula of [lem-pod-semilinear-field-operation-lifts] to $Lh^*$ and $Rh_*$. The pullback Weil map on $Lh^*M$ has component $\\theta:P_XM\\to M$ on every sheet: its square comparison is the pullback-composition identity computed in Step 3. The direct-image Weil map is\n$$\\theta_P=Rh_*(\\theta_{Lh^*M})\\,e_{Lh^*M}.$$\nUsing the natural product description of [lem-zl-split-sheet-adjunction] and Step 3, its $\\sigma$-component is exactly $\\theta\\,P_X(\\operatorname{pr}_{\\pi(\\sigma)})$. This is the formula $\\theta_P((v_\\tau)_\\tau)=(\\theta(v_{\\pi(\\sigma)}))_\\sigma$. The equalities are component equations of derived morphisms, hence also of heart morphisms; no stalk-detection assertion is being substituted for them.",
+   "uses": [
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-zl-split-sheet-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: combine the componentwise Weil map with the permutation exchange"
+   }
+  },
+  {
+   "text": "All these identifications respect finite extension of the coefficient field. Indeed [lem-zl-split-sheet-adjunction] identifies the actual adjunction and its component maps compatibly with coefficient extension; [lem-pur-finite-clopen-derived-decomposition] supplies the coefficient-compatible derived clopen equivalence. By clause (1) of [fix-lem-exchanges], the exchange respects coefficient comparisons on their stated domains. Here those domains consist only of finite clopen products, identity transports and scheme-automorphism pullbacks, so bounded constructibility and the heart are preserved in the displayed coordinates. The pullback-composition isomorphisms used for the sheet identifications in Steps 2 and 3 commute with the integral scalar-extension comparisons by clause 1 of [lem-pod-pullback-identities-scalar-extension], so these identifications are the same after passing to a larger finite coefficient field. Applying a coefficient-extension functor to $\\operatorname{pr}_\\sigma e_H=P_X(\\operatorname{pr}_{\\pi(\\sigma)})$ gives the same equation with the new coefficients. The uniqueness from the product property identifies it with the new exchange. Rationalization and common-stage passage are already part of these cited identifications; no Frobenius-stable integral lattice is assumed and no rational object is reduced modulo a uniformizer.",
+   "uses": [
+    "lem-zl-split-sheet-adjunction",
+    "lem-pur-finite-clopen-derived-decomposition",
+    "fix-lem-exchanges",
+    "lem-pod-pullback-identities-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: coefficient-compatible derived, rather than only stalkwise, Frobenius comparison"
+   }
+  },
+  {
+   "text": "The unit is the diagonal $\\Delta:M\\to\\bigoplus_\\sigma M$ by [lem-zl-split-sheet-adjunction]. Its Weil equation is immediate componentwise:\n$$\\operatorname{pr}_\\sigma\\theta_P P_X\\Delta=\\theta=\\operatorname{pr}_\\sigma\\Delta\\theta.$$\nThus it is equivariant by the morphism equation of [def-weil-weil-sheaf-complex]. For $m=1$ the permutation is the identity and the formula is $\\theta$; for $M=0$ or $X=\\varnothing$ all maps are the unique zero maps. The argument uses only finite clopen coordinates and the given Weil isomorphism, so needs no lissity, connectedness or semisimplicity.",
+   "uses": [
+    "lem-zl-split-sheet-adjunction",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: equivariant diagonal, including the degenerate cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-constant-extension-weil-heart-equivalence",
+  "def-weil-frobenius-detailed",
+  "lem-zl-split-sheet-adjunction",
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-pod-integral-pullback-composition",
+  "fix-lem-exchanges",
+  "def-exchange-projection",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pod-pullback-identities-scalar-extension",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 5: explicit projection-coordinate and adjunction-mate expansion of Frobenius equivariance"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|WeilComplex|frobenius.*sheet|sheet.*frobenius",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: Witt-vector isocrystals and finite-field Frobenius are different categories; module semilinearity hits do not compare constructible Weil direct-image exchange with clopen reindexing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semilinear naturality of finite direct image gives componentwise Weil action followed by permutation on a split constant field cover",
+   "results": "Actual search: 8 hits; SemilinearMapClass.toMulActionSemiHomClass, SemilinearMapClass.mk, isSemilinearSet_image_iff, DirectSum.lmap_apply, SemilinearMapClass.distribMulActionSemiHomClass, SemilinearMapClass, LinearMap.semilinearMapClass, IsSemilinearSet.image",
+   "date": "2026-10-22",
+   "verdict": "no match: Witt-vector isocrystals and finite-field Frobenius are different categories; module semilinearity hits do not compare constructible Weil direct-image exchange with clopen reindexing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weil\"",
+   "results": "Actual search: 11 hits; AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor, AlgebraicGeometry.AlgebraicCycle.weilDivisors, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_zero, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_single, AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.neg, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_neg, AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_iff, AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.coheight_eq_one",
+   "date": "2026-10-22",
+   "verdict": "no match: Witt-vector isocrystals and finite-field Frobenius are different categories; module semilinearity hits do not compare constructible Weil direct-image exchange with clopen reindexing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius action on direct image of pullback of a Weil sheaf along constant field extension permutes the geometric sheets and applies the same Weil isomorphism",
+   "results": "Actual search: 8 hits; WittVector.IsocrystalEquiv.frob_equivariant, WittVector.IsocrystalHom.frob_equivariant, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, WittVector.instIsocrystalStandardOneDimIsocrystal, FiniteField.frobeniusAlgEquiv_symm_apply, MonoidHom.map_frobeniusEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: Witt-vector isocrystals and finite-field Frobenius are different categories; module semilinearity hits do not compare constructible Weil direct-image exchange with clopen reindexing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Frobenius exchange isomorphism for pushforward along a finite constant field extension reindexes components",
+   "results": "Actual search: 8 hits; FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.frobeniusAlgEquiv_apply, FiniteField.frobeniusAlgEquiv, FiniteField.frobeniusAlgEquiv_symm_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, WittVector.IsocrystalEquiv.frob_equivariant, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate",
+   "date": "2026-10-22",
+   "verdict": "no match: Witt-vector isocrystals and finite-field Frobenius are different categories; module semilinearity hits do not compare constructible Weil direct-image exchange with clopen reindexing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change exchange on a finite disjoint union reindexes product components of direct image under an automorphism",
+   "results": "Actual search: 8 hits; IsBaseChange.pi, CategoryTheory.Limits.Sigma.reindex, DirectSum.lequivCongrLeft_apply, CategoryTheory.Limits.Pi.reindex, IsBaseChange.finitePow, Module.Basis.coe_reindex, IsBaseChange.prodMap, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: product-reindexing and monoidal mate results do not identify the actual constructible Weil-sheaf exchange on constant-extension sheets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius action on the direct image of a pulled back constructible Weil sheaf along a constant finite field extension permutes sheets and applies its Weil isomorphism",
+   "results": "Actual search: 8 hits; WittVector.IsocrystalEquiv.frob_equivariant, WittVector.IsocrystalHom.frob_equivariant, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgEquiv_apply, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map",
+   "date": "2026-10-22",
+   "verdict": "no match: product-reindexing and monoidal mate results do not identify the actual constructible Weil-sheaf exchange on constant-extension sheets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate for a diagonal functor and a finite product functor under permutation of factors is the product reindexing isomorphism",
+   "results": "Actual search: 8 hits; CategoryTheory.frobeniusMorphism_mate, CategoryTheory.prodComparison_iso, CategoryTheory.monoidalOfHasFiniteProducts.δ_eq, CategoryTheory.Limits.piConstAdj, CategoryTheory.monoidalOfHasFiniteProducts.instIsIsoδ, CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_iso_of_preserves_binary_products, CategoryTheory.expComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: product-reindexing and monoidal mate results do not identify the actual constructible Weil-sheaf exchange on constant-extension sheets"
+  },
+  {
+   "tool": "grep",
+   "query": "def reindex|reindex_hom|piConstAdj|frobeniusMorphism_mate",
+   "results": "Actual search: 14 hits; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean, Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean, Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Limits/Presentation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: product-reindexing and monoidal mate results do not identify the actual constructible Weil-sheaf exchange on constant-extension sheets"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-mixed-descent",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 5: “Summation is unchanged by permuting the copies; hence these local maps glue and commute with Frobenius”; old mixed-descent Step 5, the semilinear naturality comparison before the summation calculation.",
+   "via": [
+    "lem-zl-constant-extension-mixed-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-constant-extension-sheet-weil-action",
+  "worker": "Q146 stage1",
+  "summary": "Preserved the statement. Computed the sheet permutation in ring coordinates, evaluated the actual exchange by its unit-square-counit mate, and assembled the componentwise Weil action and equivariant diagonal. Reused all auxiliary statements; no new nodes. Checked coefficient extension and the empty, zero and one-sheet cases.",
+  "blueprint": "thm-zl-real-mixed-by-curves, paragraph 5: “Summation is unchanged by permuting the copies; hence these local maps glue and commute with Frobenius”. Steps 1–4 identify that permutation and the actual derived Frobenius action; Steps 5–6 give coefficient compatibility and the equivariant diagonal.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-semilinear-field-operation-lifts",
+    "why": "Its statement gives exact Frobenius transport and the explicit F(theta) a formula for both pullback and direct image. This is the generic six-functor lift used by the item’s prescribed induced structures; the unit does not replace this operation calculus."
+   },
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Its statement gives the actual coefficient-compatible derived clopen equivalence. It is a generic finite-clopen tool underlying the same-unit split-sheet adjunction, rather than an alternate mixedness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-pur-finite-clopen-derived-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-3cdbe6828",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-3cdbe6828 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and the main-20261015 thm-zl-real-mixed-by-curves source paragraph ('Summation is unchanged by permuting the copies; hence these local maps glue and commute with Frobenius'; paragraph [6] in the file's blank-line split). The delivery has 0 new nodes, leaves the statement unchanged and is not a re-split. No duplicate found (lem-zl-weil-constant-extension-frobenius and heart-equivalence (b) state other things). Checks per step: Step 1: in ring coordinates r_σG_Y^#=G_X^#r_{φσ}, because Spec is contravariant this gives G_Ys_σ=s_{φσ}G_X, so π=φ_q∘σ; I checked m=1, X empty and a 3-cycle. Steps 2–4: the hypotheses of split-sheet adjunction hold (I nonempty, hs_σ=id, X separated finite type). Twisting the structure maps by a_XG_X and a_YG_Y makes the Frobenius square a Cartesian square of finite-type k-schemes, as fix-lem-exchanges requires. I recomputed the transpose of Ex_*: on sheet σ it is P_X(pr_{πσ}), so pr_σθ_P=θ∘P_X(pr_{πσ}), which is the statement's formula as derived morphisms. Step 6 (equivariance of the unit) is elementary. One repairable fault, C1: the identification (P_YH)_σ≅P_XH_{πσ} and the claim that the square comparison c is the identity on each sheet rest on pullback-composition coherence, and no step cited a node for it. FIX: Steps 2 and 3 now cite lem-pod-integral-pullback-composition (associativity, rationalized at the finite stage of M), and Step 5 now cites lem-pod-pullback-identities-scalar-extension clause 1. proof_deps is updated; nothing else in the item changes. Batch-5 flags, all accepted as generic and outside both assumptions: heart-equivalence reaches pod only through the definition def-weil-local-frobenius-trace; lem-pod-semilinear-field-operation-lifts is the generic F(θ)a Weil lift of the operations, the explicit form of the item's stmt_dep lem-fix-weil-operations, and is the only node the item adds to the stopped b5 closure (no nt-target, nt-assume or trace-transport node is reached); lem-pur-finite-clopen-derived-decomposition reaches trf only through the lemma 'fully faithful and essentially surjective implies equivalence'. Both nodes the FIX adds are already in the item's closure. The declared tool_uses are on the unit route anyway (sk-lem-finite and sk-def-purity-conv are reachable from sk-i-dl-general-real); accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

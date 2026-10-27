@@ -175,7 +175,30 @@
   "def-weil-pbc-symmetric-product-morphism"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveSpace",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction",
+     "lines": [
+      70,
+      86
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -210,5 +233,29 @@
   "reviewer": "R-rps",
   "group": "K1",
   "result": "pass"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring which is torsion as an abelian group, and use\ntorsion base change over $\\Lambda$ as in [lemma-weil-pbc-cancellation]. Assume that\nfor every scheme $S$ the projection $\\mathbf P^1_S\\to S$ has torsion base change\nover $\\Lambda$. Then for every scheme $T$ and every $n\\geq0$ the projection\n$\\mathbf P^n_T\\to T$ has torsion base change over $\\Lambda$.",
+  "proof": [
+   {
+    "text": "The projection $(\\mathbf P^1_T)^n\\to T$ is a composite of $n$ projective-line\nprojections over the successive bases $(\\mathbf P^1_T)^k$, so it has torsion base\nchange over $\\Lambda$ by the hypothesis and\n[prop-weil-pbc-composition-stability] (1) applied stepwise. The symmetric-product\nmorphism $\\sigma_n$ of [def-weil-pbc-symmetric-product-morphism] is finite by\n[lem-weil-pbc-symmetric-product-finite], hence has torsion base change by\n[prop-weil-pbc-finite-morphism], and is surjective by\n[lem-weil-pbc-symmetric-product-surjective]. Since\n$(\\mathbf P^1_T)^n\\xrightarrow{\\sigma_n}\\mathbf P^n_T\\to T$ composes to the product\nprojection, [lemma-weil-pbc-cancellation] (2) gives torsion base change for\n$\\mathbf P^n_T\\to T$. The case $n=0$ is the identity.",
+    "uses": [
+     "prop-weil-pbc-composition-stability",
+     "def-weil-pbc-symmetric-product-morphism",
+     "lem-weil-pbc-symmetric-product-finite",
+     "prop-weil-pbc-finite-morphism",
+     "lem-weil-pbc-symmetric-product-surjective",
+     "lemma-weil-pbc-cancellation"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

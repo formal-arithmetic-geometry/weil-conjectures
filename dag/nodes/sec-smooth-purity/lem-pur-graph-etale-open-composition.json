@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-graph-etale-open-composition",
+ "kind": "statement",
+ "title": "Graph composition with an etale first leg and open second leg",
+ "statement": "For finite commutative A, noetherian schemes U, X, Z, a separated quasi-compact etale v : U → X, a quasi-compact open immersion j : X → Z, and a compactification e of v followed by j, the chosen graph comparison for v, the chosen open comparison for j, and the inverse conjugate of inverse-image composition equal compact-support composition followed by the inverse chosen compactification comparison for e and its graph comparison. All three maps have the compactifiability assumptions displayed in the Lean statement.",
+ "stmt_deps": [
+  "def-pur-graph-chosen-etale-comparison",
+  "def-pur-graph-chosen-open-comparison",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-amb-etale-adjoint-locality"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J; etale-cohomology.tex Tag 0F4L, graph comparison with open second leg."
+ },
+ "proof": [
+  {
+   "text": "Normalize the graph comparison of an open immersion using graph refinement with the identity refinement of its identity-proper compactification. Cancellation of the invertible derived graph map and the direct-image identity/composition law remove the identity proper image.",
+   "uses": [
+    "lem-asd-compact-support-graph-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify localization of the exact etale adjunction with the derived open adjunction by their counits on complexes. The sum-composition counit theorem then identifies the inverse conjugate of inverse-image composition with the derived sum compositor.",
+   "uses": [
+    "lem-pur-etale-sum-composition-counit",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing support/sum compositor equation. Precompose with the two chosen compactification comparisons, use their naturality, and cancel them to obtain the asserted etale/open composition equation.",
+   "uses": [
+    "lem-pur-etale-support-sum-compositor",
+    "def-pur-graph-chosen-etale-comparison",
+    "def-pur-graph-chosen-open-comparison",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-support-graph-coherence",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-etale-sum-composition-counit",
+  "lem-amb-etale-adjoint-locality",
+  "lem-pur-etale-support-sum-compositor",
+  "def-pur-graph-chosen-etale-comparison",
+  "def-pur-graph-chosen-open-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J specialized to an open second leg, using support/sum composition and identity refinement.",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "canonicalEtaleCompactSupportComparison|graphChosenOpenComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Abstract mates and composition tools only; no existing Mathlib graph normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-27",
+   "verdict": "Abstract mates and composition tools only; no existing Mathlib graph normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale compact support comparison is compatible with composition with an open immersion and proper postcomposition",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme, AlgebraicGeometry.HasRingHomProperty.comp_of_isOpenImmersion, AlgebraicGeometry.isOpenImmersion_isStableUnderComposition, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsOpenImmersion.comp_lift_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_fac_assoc, AlgebraicGeometry.IsOpenImmersion.lift_fac_assoc, AlgebraicGeometry.Scheme.Hom.opensRange_comp",
+   "date": "2026-10-27",
+   "verdict": "Abstract mates and composition tools only; no existing Mathlib graph normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphOpenTowerFactor",
+  "date": "2026-10-27",
+  "group": "A4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-graph-open-tower-factor",
+   "place": "Etale-first/open-second composition, before proper postcomposition.",
+   "via": [
+    "lem-pur-graph-etale-open-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphEtaleOpenComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphEtaleOpenComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.graph_etale_open_composition",
+  "statement": "theorem graph_etale_open_composition\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U X Z : Scheme.{u}}\n    [IsNoetherian U] [IsNoetherian X] [IsNoetherian Z]\n    (v : U ⟶ X) [Etale v] [IsSeparated v] [QuasiCompact v]\n    (j : X ⟶ Z) [IsOpenImmersion j] [QuasiCompact j]\n    [HasCompactification v] [HasCompactification j] [HasCompactification (v ≫ j)]\n    (e : Compactification (v ≫ j)) :\n    let s := (conjugateIsoEquiv\n      (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (v ≫ j) inferInstance)\n      ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance).comp\n        (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j))).symm\n      (Functor.mapDerivedCategoryNatIso\n        (upperStarComp (ModuleCat.{u + 1} A) v j (v ≫ j) rfl) ≪≫\n        Functor.mapDerivedCategoryCompIso _ _)\n    Functor.isoWhiskerRight (graphChosenEtaleComparison A v)\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) j) ≪≫\n      Functor.isoWhiskerLeft\n        (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory\n        (graphChosenOpenComparison A j) ≪≫ s =\n      unboundedEtaleLowerShriekCompIso A v j ≪≫\n        (rightDerivedLowerShriekIso A e).symm ≪≫\n        canonicalEtaleCompactSupportComparison A (v ≫ j) e",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T065843-L-2480058",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T065843-L-2480058",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

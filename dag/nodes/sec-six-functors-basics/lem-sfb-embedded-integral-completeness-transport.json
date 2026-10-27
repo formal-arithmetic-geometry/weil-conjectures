@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-embedded-integral-completeness-transport",
+ "kind": "lemma",
+ "title": "Embedded integral completeness transport",
+ "statement": "Let ell be prime, E a finite intermediate field in PadicAlgCl ell with the transported finite-dimensional structure on ULift E, pi a generator of the maximal ideal of its embedded integers, X a Noetherian scheme in universe u, and e any isomorphism from the condensed commutative ring object of continuous embedded integers to the spectral integer ring object on ULift E. For every complex K of continuous embedded integral modules, restriction along the inverse image of e inverse transports local derived completeness of the constant scalar restriction to local derived completeness of the spectral constant scalar restriction. No boundedness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-integral-models-stacks-data",
+  "lem-integral-coefficient-ext-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the underived constant scalar isomorphism a, its commuting square, and its extended kernel equality. Restriction composition gives the ordinary scalar functor square, which descends via mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. The proved section-module and small-site scalar comparison identifies this with ConstantCompletion.res on the small site. Apply siteDerivedRestrictScalars_locallyDerivedComplete_iff to the spectral kernel, then rewrite by the extended-kernel equality. The exact derived functor comparison with the chosen smallDerivedObject representatives and isomorphism invariance of local internal-Hom vanishing give the asserted iff for arbitrary complexes.",
+   "uses": [
+    "lem-sfb-embedded-integral-scalar-kernel-square",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "def-sfb-integral-models-stacks-data",
+    "def-sfb-embedded-integral-model-coefficients",
+    "def-sfb-quotient-kernel-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+    "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-embedded-integral-scalar-kernel-square",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-quotient-kernel-completeness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J7",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring isomorphism preserves local derived completeness of sheaves and constructible residue complexes of finite Tor amplitude",
+   "results": "isLocalHom_of_iso, isLocalHom_of_isIso, RingHom.Flat.respectsIso; no derived sheaf transport criterion.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the local-ring isomorphism facts support the algebraic first-quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport integral constructible derived complexes across a coefficient ring isomorphism and universe lift",
+   "results": "HomologicalComplex.isSupported_of_iso and extend/restriction comparison isomorphisms, no coefficient transport result.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyDerivedRingedIdealComplete|stacksConstructible|residueCondition|mapDerivedCategoryHomologyFunctorIso|bounded_of_bounded_mapDerivedCategory_obj in Mathlib/Algebra/Homology/DerivedCategory and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "No matches. Project searches found IntegralModelsStacksData, IntegralCoefficientExtComparison and IntegralConstantModelHeartClosure; none states either transport iff.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; reuse the existing data and constant-model scalar-transport helpers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsEmbeddedStacksCriterion",
+  "date": "2026-10-25",
+  "group": "Q9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "First step, comparison with the Stacks category: completeness transport along coefficient isomorphisms.",
+   "via": [
+    "lem-sfb-embedded-integral-stacks-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedIntegralCompletenessTransport",
+  "file": "lean/Sheaf/Paper/EmbeddedIntegralCompletenessTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.embeddedIntegralCompletenessTransport",
+  "statement": "theorem embeddedIntegralCompletenessTransport\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)]\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (e : Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ E.val) ≅\n      sfbCondensedIntegers ℓ (ULift.{u} E.val))\n    (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (integralCoefficientObject X ℓ E))) :\n    IntegralModelsEmbedded.constantComplete ℓ E π X\n      ((IntegralModelsEmbedded.restriction ℓ E X).obj K) ↔\n    ConstantCompletion.IsComplete\n      (IntegralModelsStacks.smallMap X\n        (IntegralModelsStacks.residueMap ℓ (ULift.{u} E.val) X))\n      (IntegralModelsStacks.smallDerivedObject X _\n        ((IntegralModelsStacks.restriction ℓ (ULift.{u} E.val) X).obj\n          ((Mod.comap ((upperStarFromPoint X).map\n            e.inv.hom)).mapDerivedCategory.obj\n          K)))",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261025T095749-L-3478983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T123149-L-1839094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

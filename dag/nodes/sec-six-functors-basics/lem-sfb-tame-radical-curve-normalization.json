@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-tame-radical-curve-normalization",
+ "kind": "statement",
+ "title": "Smooth normalization of a tame radical cover of a marked curve",
+ "statement": "Let $K$ be a field and $C$ a smooth projective geometrically integral $K$-curve, with $F=K(C)$. Let $n>0$ be invertible in $K$ and assume $K$ contains all $n$th roots of unity. Let $a_1,\\ldots,a_r\\in F^\\times$ be finitely many nonzero rational functions. Suppose each $a_j$ and its inverse are regular on $C\\setminus D$, where $D\\subset C$ is a reduced finite etale closed subscheme. Let $M\\subset C$ be another reduced finite etale closed subscheme disjoint from $D$. In an algebraic closure of $F$, set $L=F(\\alpha_1,\\ldots,\\alpha_r)$ with $\\alpha_j^n=a_j$. Let $\\widetilde C$ be the normalization of $C$ in $L$ and let $E=\\{z\\in L:z\\text{ is algebraic over }K\\}$. Then $L/F$ is finite Galois, $E/K$ is finite separable, and $\\widetilde C\\to C$ is finite surjective and etale above $C\\setminus D$. The curve $\\widetilde C$ is smooth over $K$, and its structural morphism factors canonically through $\\operatorname{Spec}E$; over $E$ it is smooth projective and geometrically integral, with function field $L$. The reduced inverse image of $M$ is finite etale over $E$. Also $K$ is algebraically closed in $F$, and hence $E\\cap F=K$ inside $L$. Empty $D,M$ and an empty list of functions are allowed.\n\nThe notions used are [def-weil-field], [def-pc-smooth-projective-curve], [def-pc-geometrically-irreducible], [def-sc-function-field], [def-pc-field-extension], [def-fin-normalization-extension], [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-sbc-smooth-morphisms], [def-pc-genus], [def-weil-algebraic-closure]. Normal means that every local ring is an integrally closed domain. A finite separable extension is a finite-dimensional field extension whose elements have separable minimal polynomials. Group actions on schemes and fields may be nonfaithful and semilinear on the ground field.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-genus",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-multiradical-galois-degree] with base field $F=K(C)$. The roots of unity already lie in $K\\subset F$, and $n$ remains invertible. It gives that $L/F$ is finite Galois and $d=[L:F]$ divides $n^r$. Thus, in positive characteristic $p$, $p\\nmid d$. This includes $r=0$, when $L=F$ and $d=1$.",
+   "uses": [
+    "lem-sfb-multiradical-galois-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I6, section-Kummer, opening paragraph; product-character version in the cited node."
+   }
+  },
+  {
+   "text": "Put $U=C\\setminus D$. Apply [lem-sfb-radical-normalization-projective-etale] with this $U$, the given $a_j,\\alpha_j,n$, and the finite extension from step 1. Its unit hypothesis is exactly the regularity of $a_j$ and $a_j^{-1}$ off $D$. Thus $Y=\\widetilde C$ is a normal integral projective $K$-curve, $\\nu:Y\\to C$ is finite surjective and etale over $U$, and its specified generic morphism identifies $K(Y)=L$.",
+   "uses": [
+    "lem-sfb-radical-normalization-projective-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence, unit-root algebra in the proof; pione.tex Tag 0BQL, lemma-finite-etale-covering-normal-unramified; morphisms.tex Tags 035B, lemma-ubiquity-nagata, and 0AVK, lemma-nagata-normalization-finite-general. Returned item proof steps 2--4: affine normalization, finite-over-projective embedding, and unit-root generic component."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-tame-galois-curve-normalization-smooth] to $\\nu:Y\\to C$ and $D$. Step 2 supplies its finite normal integral curve and etale-open hypotheses. Step 1 gives the Galois degree $d\\mid n^r$. Write $de=n^r$ with $e\\in\\mathbf N$; in $K$, $(d\\cdot1)(e\\cdot1)=(n\\cdot1)^r\\ne0$, so $d\\cdot1\\ne0$ and is invertible. The given $D/K$ is reduced finite etale. The lemma proves that $Y/K$ is smooth, including at every point over $D$.",
+   "uses": [
+    "lem-sfb-tame-galois-curve-normalization-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EB, lemma-galois-conclusion; varieties.tex Tag 0B8Y, lemma-regular-point-on-curve. Returned item proof steps 5--6: prime-to-characteristic residue degree, separability, and smoothness on and off the branch subscheme."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-cover-constant-field-marking] to the original geometrically integral $C$, the smooth projective integral $Y$ from steps 2--3, and their finite surjective $K$-morphism $\\nu$. Use $U=C\\setminus D$ and the given $M$, which lies in $U$ by disjointness. Under the specified identification $K(Y)=L$, its constant subfield is exactly the stated $E$. The lemma gives finite separability of $E/K$, the canonical structural and generic factorizations, smooth projectivity and geometric integrality over $E$, the reduced finite etale inverse marking, and $K$ algebraically closed in $F$ with $E\\cap F=K$. These are all remaining conclusions. Empty markings and the empty radical list satisfy the cited hypotheses.",
+   "uses": [
+    "lem-sfb-smooth-cover-constant-field-marking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0, theorem-stein-factorization-Noetherian; varieties.tex Tag 0BUG, lemma-proper-geometrically-reduced-global-sections; more-morphisms.tex Tag 0G80, lemma-smooth-etale-permanence; morphisms.tex Tag 0C4Q, lemma-projective-permanence. Returned item proof steps 7--10: canonical algebraic constants, geometric integrality, etale marking, and constants intersection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiradical-galois-degree",
+  "lem-sfb-radical-normalization-projective-etale",
+  "lem-sfb-tame-galois-curve-normalization-smooth",
+  "lem-sfb-smooth-cover-constant-field-marking"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Expansion of de Jong §3.5, p.607 (publisher PDF read; local PDF WANTED), using the cited Stacks unit-root, Galois degree and Stein-factor statements. The prime-to-characteristic residue-degree argument is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a smooth projective curve in a prime to characteristic radical field extension branched only at separable closed points is smooth and etale away from the branch points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "tame.*normalization|normalization.*tame|radical.*curve|curve.*radical",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame Kummer covers of smooth curves have smooth normalization and finite separable field of constants over which the curve is geometrically integral",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S} {I : Ideal R}\\n  [inst_3 : IsDomain R] [inst_4 : IsIntegrallyClosed R] [inst_5 : IsDedekindDomain S]\\n  [inst_6 : Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥)\\n  (hx : Ideal.comap (alg\", \"doc\": \"For a maximal ideal $ I $ in an integrally closed domain $ R $, an integral element $ x $ in a Dedekind domain $ S $, and under conditions that the conductor ideal of $ x $ combined with $ I $ generat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : IsIntegralHom (f.normalizationDesc f₁ f₂ H)\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": QuasiCompact f.toNormalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the hits; none states this geometric assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalization of a smooth projective curve in a Kummer extension with separable branch points is smooth with finite separable constants",
+   "results": "8 hits; WeierstrassCurve.exists_isMinimal, WeierstrassCurve.minimal, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.exists_isIntegral, WeierstrassCurve.IsMinimal, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.Affine.Point.map_some",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions, elliptic minimal models and smooth base-change comparison do not state this tame curve theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsSmooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions, elliptic minimal models and smooth base-change comparison do not state this tame curve theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tame.*normalization|normalization.*smooth|radical.*curve",
+   "results": "3 hits; Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions, elliptic minimal models and smooth base-change comparison do not state this tame curve theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer cover smooth projective curve normalization separable branch locus",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, Algebra.unramifiedLocus, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization constructions, elliptic minimal models and smooth base-change comparison do not state this tame curve theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-equivariant-cover",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read.",
+   "via": [
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "worker": "stage1",
+  "summary": "NN repairs the 8265-character proof-work return without changing the statement. Three independently assignable statement-only nodes carry all arguments of returned steps 2--4 (2906 characters), 5--6 (1971 characters), and 7--10 (3085 characters). The parent retains the multiradical degree argument and assembles the three results. report.md preserves each original argument verbatim with its step dependencies and sources; all new nodes remain unsplit and carry six executed Mathlib searches. No Lean files or compilers touched. Landing-refusal repair: retain the split and 18 logged searches; refresh against the current live ten-step item, re-read current dependency statements, and correct the first auxiliary source to the Nagata finite-type normalization theorem (035B and 0AVK). Continuation after provider interruption: initial server rebase dry run passed at 1924ae15a71; current live item equals retained returned-item.json, all 28 original citation statements were re-read and recorded, and the four assembly citations were revalidated. The original substantive three-node re-split is retained for live promotion. Continuation of the promotion-return repair, 2026-10-23: compared the retained returned snapshot with the current read-clone item (identical), and all 28 audited dependency files by SHA-256 (unchanged). Retained the three statement-only work items and all nine delegated arguments. Made the invertible-degree hypothesis in assembly step 3 explicit directly from de=n^r; all four citation excerpts remain verbatim. Server dry run rebuilds the delivery on the current live DAG.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images (3) alteration prerequisite, through de Jong §3.5, p.607, tame normalization and algebraic constant extraction. No unit route is replaced. The ancestor command returns null because the inherited created-item chain has no imported blueprint ancestor; the existing from.node and via are retained.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-fin-normalization-extension-finite",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "lem-weil-pbc-finite-separable-base-refinement",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-finite-radicial-basechange",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-pc-h0-proper-variety"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-62528d4d4",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-62528d4d4 (reviewer sub-agent of L); spot-checked: Fourth delivery of the human re-split. The earlier heads 573ddfca, 6a08b0fd and 085064e8 each got PASS and were then refused at landing with 'not in the live DAG'. The live item still has the old 10-step, 8265-character proof, so the delivery is legitimate. Delta against 085064e8, by parsed JSON: the three new nodes are byte-identical. The item differs only in assembly step 3, which now writes de=n^r, so (d·1)(e·1)=(n·1)^r≠0 and d is a unit. That is correct. It also differs in split_report. I re-read everything myself.\n\nRe-split: old step 1 stays in the parent, citing lem-sfb-multiradical-galois-degree (X^n−1 splits, n invertible, so [L:F] | n^r). Old steps 2–4 (2906 characters) become node A, radical-normalization-projective-etale. Old steps 5–6 (1971) become node B, tame-galois-curve-normalization-smooth. Old steps 7–10 (3085) become node C, smooth-cover-constant-field-marking. The three nodes are comparable in size, statement-only and unsplit, each with weaker hypotheses than the item. The old step texts are kept verbatim in the report. The parent is a 4-step assembly of about 1.9k characters and covers every item conclusion: M⊂C∖D by disjointness, d is invertible, and E is taken via K(Y)=L.\n\nNode A: ν is finite by Nagata (035B, and 0AVK at morphisms.tex:14221). It is surjective because finite and dominant. Y is projective because it is finite over a projective scheme over Spec K. ν is étale over U by the unit-binomial tower and the generic-components identification. Edge cases r=0, n=1, U=∅ and real P^1 with sqrt(−1) all hold.\n\nNode B: 09EB (more-algebra.tex:33192) gives f | d, and p ∤ d, so the residue extension is separable. 0B8Y(6) (varieties.tex:9356) then gives smoothness at the points over D; off D, Y is étale over a smooth curve. Holds for imperfect K, D=∅ and d=1.\n\nNode C: Γ(Y,O)=E by normality. E/K is separable by 0BUG. Y is smooth and projective over E by 0G80 and 0C4Q, and geometrically integral because it is geometrically connected and smooth. P=Y×_C M is finite étale over E by cancellation. Γ(C,O)=K gives E∩F=K. The case Y=C_E is allowed.\n\nDuplicate search with rg -L over 27662 snapshot nodes found no duplicate. lem-sfb-finite-normal-cover-normalization, the sbc DVR residue-separable nodes and lem-trf-stein-smooth-generic-curve overlap only as tools. No SGA citation: the case-insensitive grep hits are inside IsGalois* Mathlib names.\n\nAdvisory: the item's tool_uses still lists the old 10-step dependencies. Maintainer note: this is a promotion loop; promote or land this head."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.TameRadicalNormalization",
+  "declaration": "AlgebraicGeometry.tame_radical_curve_normalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/TameRadicalNormalization.lean",
+  "statement": "theorem tame_radical_curve_normalization (K : Type u) [Field K] (C : Scheme.{u}) (q : C ⟶ Spec (CommRingCat.of K)) [IsSmoothProjectiveCurve q] [GeometricallyIntegral q] [Algebra K C.functionField] (hK : algebraMap K C.functionField = (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp (q.appTop.hom.comp (Scheme.ΓSpecIso (CommRingCat.of K)).inv.hom)) (n : ℕ) (hn : 0 < n) (hnK : IsUnit (n : K)) (hroots : ∃ ζ : K, IsPrimitiveRoot ζ n) (r : ℕ) (a : Fin r → C.functionFieldˣ) (D M : Scheme.{u}) (iD : D ⟶ C) (iM : M ⟶ C) [IsClosedImmersion iD] [IsClosedImmersion iM] [IsReduced D] [IsReduced M] [IsFinite (iD ≫ q)] [Etale (iD ≫ q)] [IsFinite (iM ≫ q)] [Etale (iM ≫ q)] (hdisj : Disjoint (Set.range iD) (Set.range iM)) (U : C.Opens) (hU : (U : Set C) = (Set.range iD)ᶜ) (hreg : ∀ (j : Fin r) (x : C), x ∈ U → (a j : C.functionField) ∈ Set.range (algebraMap (C.presheaf.stalk x) C.functionField) ∧ (a j : C.functionField)⁻¹ ∈ Set.range (algebraMap (C.presheaf.stalk x) C.functionField)) (Ω : Type u) [Field Ω] [Algebra C.functionField Ω] [IsAlgClosure C.functionField Ω] [Algebra K Ω] [IsScalarTower K C.functionField Ω] (α : Fin r → Ω) (hα : ∀ j : Fin r, α j ^ n = algebraMap C.functionField Ω (a j)) (L : IntermediateField C.functionField Ω) (hL : L = IntermediateField.adjoin C.functionField (Set.range α)) : FiniteDimensional C.functionField L ∧ IsGalois C.functionField L ∧ FiniteDimensional K (algebraicClosure K L) ∧ Algebra.IsSeparable K (algebraicClosure K L) ∧ IsFinite (C.fromNormalizationIn L) ∧ Surjective (C.fromNormalizationIn L) ∧ Etale (C.fromNormalizationIn L ∣_ U) ∧ Smooth (C.fromNormalizationIn L ≫ q) ∧ algebraicClosure K C.functionField = ⊥ ∧ (∀ z : C.functionField, algebraMap C.functionField L z ∈ algebraicClosure K L ↔ z ∈ Set.range (algebraMap K C.functionField)) ∧ (∃ e : Spec (CommRingCat.of L) ≅ Spec (C.normalizationIn L).functionField, e.hom ≫ (C.normalizationIn L).fromSpecFunctionField = (C.fromSpecOfAlgebraFunctionField L).toNormalization) ∧ ∃ qE : C.normalizationIn L ⟶ Spec (CommRingCat.of (algebraicClosure K L)), qE ≫ Spec.map (CommRingCat.ofHom (algebraMap K (algebraicClosure K L))) = C.fromNormalizationIn L ≫ q ∧ (C.fromSpecOfAlgebraFunctionField L).toNormalization ≫ qE = Spec.map (CommRingCat.ofHom (algebraMap (algebraicClosure K L) L)) ∧ IsSmoothProjectiveCurve qE ∧ GeometricallyIntegral qE ∧ IsReduced (pullback (C.fromNormalizationIn L) iM) ∧ IsFinite (pullback.fst (C.fromNormalizationIn L) iM ≫ qE) ∧ Etale (pullback.fst (C.fromNormalizationIn L) iM ≫ qE)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af02a30f4",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only the lean field differs from side-live, and lean.statement matches the file signature verbatim. Hypotheses match the node with nothing stronger: smooth projective, geometrically integral C; hK pins K→F to the structure map; IsUnit n plus a primitive nth root; stalkwise regularity of a_j and a_j^-1 on U = complement of range iD; D and M are reduced closed immersions, finite étale over K and disjoint; L = adjoin F (range α) in Ω with IsAlgClosure. Every conclusion is present: L/F finite Galois; E = algebraicClosure K L finite separable over K; ν finite, surjective and étale on U; C̃ smooth over K; K algebraically closed in F; E∩F = K as a biconditional; function field L via the existing exists_iso_toNormalization_normalizationIn interface; qE pinned by the generic equation; qE smooth projective and geometrically integral; P finite étale over E. Advisory: IsReduced(pullback ν iM) is stronger than 'reduced inverse image' but true and proved by node step 9. Edge cases r=0, n=1, empty D and M, imperfect K and a single universe u are fine. No hollow definitions, docstrings carry source, blueprint tag and the 10 steps, all imports exist, no duplicate declaration found. Not recompiled since no file was changed."
+ }
+}

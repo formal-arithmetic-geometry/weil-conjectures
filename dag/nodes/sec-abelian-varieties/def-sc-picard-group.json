@@ -54,13 +54,60 @@
   "def-sc-curves",
   "def-sc-invertible-module"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Pic"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Pic",
+     "module": "WeilConjectures.AlgebraicGeometry.PicardFunctor",
+     "lines": [
+      159,
+      169
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Pic.instCommGroup",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Group",
+     "lines": [
+      131,
+      153
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-def-av-pic",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $C$ be a curve. The\n*Picard group* $\\operatorname{Pic}(C)$ is the set of\nisomorphism classes of\ninvertible $\\mathcal O_C$-modules, with the group law induced by tensor product: the\nunit is $\\mathcal O_C$ and the inverse of an invertible module\n$\\mathcal L$ is its dual $\\mathcal L^{\\vee}$.\n\nThe tensor product of two invertible modules and the dual\n$\\mathcal L^{\\vee}$ of an invertible module are again invertible, and\nthis law satisfies the group axioms.",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $C$ be a scheme, for instance a curve. The\n*Picard group* $\\operatorname{Pic}(C)$ is the set of\nisomorphism classes of\ninvertible $\\mathcal O_C$-modules, with the group law induced by tensor product: the\nunit is $\\mathcal O_C$ and the inverse of an invertible module\n$\\mathcal L$ is its dual $\\mathcal L^{\\vee}$.\n\nThe tensor product of two invertible modules and the dual\n$\\mathcal L^{\\vee}$ of an invertible module are again invertible, and\nthis law satisfies the group axioms.",
+  "proof": [
+   {
+    "text": "By [lem-pc-tensor-dual-invertible], tensor products and duals of\ninvertible modules are invertible, so the law is well defined on\nisomorphism classes. Associativity, commutativity and the unit property\nof $\\otimes$ are the standard properties of the tensor product of\nquasi-coherent modules. By [lem-pc-tensor-dual-invertible] the evaluation\n$\\mathcal L\\otimes\\mathcal L^{\\vee}\\to\\mathcal O_C$ is an isomorphism, so\n$\\mathcal L^{\\vee}$ is an inverse of $\\mathcal L$.",
+    "uses": [
+     "lem-pc-tensor-dual-invertible"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

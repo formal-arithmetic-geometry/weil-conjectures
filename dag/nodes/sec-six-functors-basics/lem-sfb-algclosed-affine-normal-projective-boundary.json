@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-algclosed-affine-normal-projective-boundary",
+ "kind": "statement",
+ "title": "Normal projective compactification with constant geometric boundary primes",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $X$ be a smooth geometrically integral affine finite-type $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible, def-weil-affine-spectrum, def-weil-finite-type-morphism]. There exist a finite-type $k$-scheme $C$, a closed immersion $C\\hookrightarrow\\mathbf P^n_k$ for some finite $n$ [def-kun-projective], and a dense open immersion $j:X\\hookrightarrow C$ [def-weil-open-immersion] such that $C$ is geometrically integral and geometrically normal. Geometrically normal means that for every field extension $F/k$ [def-pc-field-extension] all local rings of $C_F=C\\times_k\\operatorname{Spec}F$ are integrally closed domains. In particular every $C_F$ is integral, normal, Noetherian (covered by finitely many spectra of Noetherian rings) and proper over $F$ [def-pc-integral-scheme, def-weil-proper-morphism]. Write $B_1,\\ldots,B_r$ for the reduced irreducible components of $C\\setminus j(X)$ of codimension one; $r$ is finite and may be zero. Here codimension one means that the local ring at the generic point has Krull dimension one. Each $B_i$ is geometrically integral. For every extension $F/k$, the reduced subschemes $(B_i)_F$ are precisely, without repetition, the codimension-one irreducible components of $C_F\\setminus j_F(X_F)$. The fibre products use [def-pc-fibre-product], and geometric integrality has its every-field-extension meaning [def-pc-geometrically-irreducible].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent-assembled geometric compactification interface: normalization of projective closure, Tag 0GK4 (lemma-normalize-projective); Tag 038N (lemma-geometrically-normal-at-point); Tags 020I (lemma-perfect-reduced), 020J (lemma-separably-closed-irreducible). The projective closure is morphisms.tex Tag 01WA (lemma-H-quasi-projective-open-H-projective); preservation of boundary dimensions uses algebra.tex Tag 00P3 (lemma-dimension-preserved-field-extension)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-kun-compactification-affine] to obtain a dense open immersion $X\\hookrightarrow P$ with $P$ projective. Replace $P$ by its reduction $P_0$, using [def-weil-pbc-scheme-reduction]. This is a closed subscheme with the same underlying space. Its restriction to the open $X$ is $X$ itself, because $X$ is integral and therefore reduced: on an affine chart the nilradical restricts to zero on this open. Thus $X\\hookrightarrow P_0$ is still a dense open immersion. The space $P_0$ is irreducible, since it contains the dense irreducible subspace $X$; being reduced and nonempty it is integral. Composing its closed immersion into $P$ with $P\\hookrightarrow\\mathbf P^n_k$ is a closed immersion (on local rings, compose the quotient maps), so $P_0$ is projective by [def-kun-projective]. The space $\\mathbf P^n_k$ is covered by its $n+1$ standard affine charts, so it is quasi-compact, and its closed subset $P_0$ is quasi-compact; hence $P_0\\to\\operatorname{Spec}k$ is also projective in the quasi-compact convention of [def-pc-projective-morphism]. By [lem-pc-projective-proper] it is proper, hence finite type by [def-weil-proper-morphism].",
+   "uses": [
+    "lem-kun-compactification-affine",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-integral-scheme",
+    "def-kun-projective",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK4 (lemma-normalize-projective), with morphisms.tex Tag 01WA (lemma-H-quasi-projective-open-H-projective); reduction of the dense projective closure."
+   }
+  },
+  {
+   "text": "Let $\\nu:C=P_0^\\nu\\to P_0$ be normalization in its own function field [def-sc-normalization]. The projective-normalization theorem [lem-weil-pbc-normalization-projective-components] gives a normal integral projective proper $C$: here $P_0$ has exactly one reduced irreducible component, so the componentwise normalization in that theorem has one summand and is exactly $P_0^\\nu$. In particular $C$ is finite type. The base $\\operatorname{Spec}k$ is normal, since its only local ring is the field $k$, an integrally closed domain. Applying [lem-sfb-smooth-normal-ascent] to $X\\to\\operatorname{Spec}k$ shows that $X$ is normal. Consequently [lem-sc-normalization-over-normal-locus] identifies $\\nu^{-1}(X)\\to X$ with an isomorphism. Its inverse followed by the open inclusion defines $j:X\\hookrightarrow C$. It has nonempty image, and this image is dense because $C$ is integral. Projectivity supplies the required finite projective-space embedding.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-weil-pbc-normalization-projective-components",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-sc-normalization-over-normal-locus",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK4 (lemma-normalize-projective); morphisms.tex Tags 035K (lemma-normalization-localization), 0H7D (lemma-normalization-trivial); descent.tex Tag 034F (lemma-normal-local-smooth)."
+   }
+  },
+  {
+   "text": "The field $k$ is perfect: in positive characteristic $p$, a root in $k$ of $T^p-a$ is a $p$th root of each $a\\in k$; characteristic zero already satisfies the definition of perfect. It is also separably closed, since every nonconstant polynomial has a root, so every irreducible polynomial has degree one. In [lem-weil-pbc-normality-perfect-closure-test] take $K=k$; the power condition holds with exponent index zero. Normality of $C$ therefore implies normality of every $C_F$, for arbitrary $F/k$. Taking $\\Omega=k$ and $A=|C|$ in [lem-sbc-subset-geometric-irreducibility] proves that every $C_F$ is nonempty and irreducible. A scheme with domain local rings is reduced, so these schemes are integral. This proves geometric normality and geometric integrality with precisely the every-field-extension meanings in the statement.",
+   "uses": [
+    "lem-weil-pbc-normality-perfect-closure-test",
+    "lem-sbc-subset-geometric-irreducibility",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 038O (lemma-geometrically-normal) and 020J (lemma-separably-closed-irreducible), specializing the perfect-closure test to the perfect field itself."
+   }
+  },
+  {
+   "text": "By step 2, $C$ is proper, hence of finite type and in particular quasi-compact over $k$ [def-weil-proper-morphism]; with its closed immersion into $\\mathbf P^n_k$, $C\\to\\operatorname{Spec}k$ is projective in the convention of [def-pc-projective-morphism]. For every $F/k$, projectivity of $C_F\\to\\operatorname{Spec}F$ in that convention follows from [lem-pc-projective-base-change]. Thus [lem-pc-projective-proper] and [def-weil-proper-morphism] make $C_F$ proper and finite type. A field is Noetherian (its only ideals are zero and the whole field), so [lem-weil-pbc-finite-type-over-noetherian] shows that $C_F$ is Noetherian, including the finite affine-cover assertion in the statement. This also applies to $F=k$. By [lem-weil-pbc-open-immersion-base-change], $j_F$ is an open immersion. Write $Z=|C|\\setminus j(X)$ and let $p:C_F\\to C$ be projection. The complement of $j_F(X_F)$ is $p^{-1}Z$: the pullback of an open subscheme is its inverse-image open, as is seen directly by restricting the fibre-product universal property.",
+   "uses": [
+    "lem-pc-projective-base-change",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0GK4 (lemma-normalize-projective), projective permanence; morphisms.tex Tag 01T6 (lemma-finite-type-noetherian); base change of the open complement."
+   }
+  },
+  {
+   "text": "By [lem-sc-noetherian-closed-subset-finite-components], the closed subset $Z$ has finitely many distinct irreducible components $T_1,\\ldots,T_s$; when $Z$ is empty use $s=0$. Give $T_a$ its reduced induced closed subscheme structure $D_a\\hookrightarrow C$ by [lem-weil-pbc-reduced-induced-closed-subscheme]. Each $D_a$ is reduced, nonempty and irreducible, hence integral. It is finite type over $k$: on each affine chart of the finite-type scheme $C$ its ring is a quotient of the chart ring, still a finitely generated $k$-algebra, and a finite affine cover of $C$ restricts to a finite affine cover of $D_a$. This verifies the finite-type hypothesis required for each use of geometric reducedness and dimension below.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components); schemes.tex reduced induced closed subscheme construction; preparation for Tags 020I and 020J."
+   }
+  },
+  {
+   "text": "Fix any $F/k$. Apply [lem-sbc-subset-geometric-irreducibility] with $\\Omega=k$, $X=D_a$, and its whole underlying set to show that $(D_a)_F$ is nonempty and irreducible. Since $k$ is perfect and $D_a$ is reduced of finite type, [lem-kun-geometric-reduced-perfect] says $(D_a)_F$ is reduced. Thus every $D_a$ is geometrically integral. By [lem-weil-pbc-closed-immersion-base-change], $(D_a)_F\\hookrightarrow C_F$ is a closed immersion; its image is $p^{-1}T_a$. Indeed, locally it is $\\operatorname{Spec}((R/I)\\otimes_kF)\\to\\operatorname{Spec}(R\\otimes_kF)$, whose image is the zero set of the extended ideal $I$. The projection $(D_a)_F\\to D_a$ is surjective by [lem-weil-pbc-surjective-base-change], applied to the surjective map $\\operatorname{Spec}F\\to\\operatorname{Spec}k$. Finite type of $(D_a)_F$ follows from [lem-sfb-finite-type-composition-base-change].",
+   "uses": [
+    "lem-sbc-subset-geometric-irreducibility",
+    "lem-kun-geometric-reduced-perfect",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 020I (lemma-perfect-reduced) and 020J (lemma-separably-closed-irreducible); affine quotient description of base change of closed immersions."
+   }
+  },
+  {
+   "text": "The subsets $p^{-1}T_a$ cover $p^{-1}Z$, and are irreducible closed by step 6. They have no containment relations: a containment $p^{-1}T_a\\subseteq p^{-1}T_b$ would imply $T_a\\subseteq T_b$ by surjectivity of $(D_a)_F\\to D_a$, hence $a=b$. An irreducible subset of a finite union of closed subsets lies in one of them (otherwise its intersections with these closed subsets give a finite proper closed covering, contradicting irreducibility). Therefore the $p^{-1}T_a$ are exactly, without repetitions, all irreducible components of $p^{-1}Z$. Their reduced induced structures are $(D_a)_F$, by uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme], since these are already reduced closed subschemes with those supports.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 020I and 020J followed by the finite-union irreducibility argument; uniqueness of the reduced induced closed subscheme."
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-sober], let $\\eta_a$ be the unique generic point of $D_a$, viewed also as a point of $C$. Its local ring on $D_a$ is its function field [def-sc-function-field], so has dimension zero. The formula [lem-kun-dimension-formula] for $D_a$ and [lem-sc-dimension-locally-algebraic] give $\\dim D_a=\\operatorname{trdeg}_k\\kappa(\\eta_a)$. By [lem-weil-pbc-closed-immersion-residue-field-iso] this residue field is the same on $C$. Apply the same dimension formula and local constancy of dimension to the integral scheme $C$ to obtain\n$\\dim C=\\dim\\mathcal O_{C,\\eta_a}+\\dim D_a$.\nThe same argument over $F$ gives\n$\\dim C_F=\\dim\\mathcal O_{C_F,\\eta_{a,F}}+\\dim(D_a)_F$.\nBy [lem-kun-dimension-extension], $\\dim C_F=\\dim C$ and $\\dim(D_a)_F=\\dim D_a$. All these dimensions are finite for the present nonempty finite-type schemes, by [lem-kun-dimension-finite-type], so cancellation proves equality of the two displayed local-ring dimensions. In particular a component has codimension one exactly when its base-changed component does. Enumerate those $D_a$ with codimension one as $B_1,\\ldots,B_r$. Steps 6--7 give geometric integrality and the asserted precise boundary list over every $F/k$. If none has codimension one, $r=0$ and the same argument gives the empty list after extension.",
+   "uses": [
+    "lem-kun-dimension-formula",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "lem-kun-dimension-extension",
+    "lem-kun-dimension-finite-type",
+    "def-sc-function-field",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), clauses (3), (6), (10); algebra.tex Tag 00P3 (lemma-dimension-preserved-field-extension)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-compactification-affine",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "def-sc-normalization",
+  "lem-weil-pbc-normalization-projective-components",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-weil-pbc-normality-perfect-closure-test",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-pc-projective-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-finite-type-morphism",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-dimension-formula",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-kun-dimension-extension",
+  "lem-kun-dimension-finite-type",
+  "def-sc-function-field",
+  "lem-sc-scheme-sober",
+  "def-pc-projective-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly of normalization (0GK4), perfect-field geometric normality (038O), geometric reducedness/irreducibility (020I/020J), and dimension (0A21/00P3), reusing existing DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine integral variety over an algebraically closed field admits a geometrically normal projective compactification with geometrically integral boundary prime divisors",
+   "results": "{\"t\": \"2026-10-24T07:18:21Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine integral variety over an algebraically closed field admits a geometrically normal projective compactification with geometrically integral boundary prime divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"34c22480e4aabe47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal projective compactification of a smooth affine variety over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-24T07:19:40Z\", \"tool\": \"leansearch\", \"query\": \"Normal projective compactification of a smooth affine variety over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.compactSpace_iff_exists\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\"], \"digest\": \"a3ee34c1cedb63ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T07:23:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"1aef5678d2c366c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|normalize.*projective|projective.*normal",
+   "results": "{\"t\": \"2026-10-24T07:19:39Z\", \"tool\": \"grep\", \"query\": \"compactification|normalize.*projective|projective.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every normal variety over a perfect field is geometrically normal and has a projective compactification if affine",
+   "results": "{\"t\": \"2026-10-24T07:19:42Z\", \"tool\": \"leanfinder\", \"query\": \"Every normal variety over a perfect field is geometrically normal and has a projective compactification if affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"571ff8b358ea3ff6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine variety over an algebraically closed field has a normal projective compactification with geometrically integral boundary components",
+   "results": "{\"t\": \"2026-10-24T08:10:17Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine variety over an algebraically closed field has a normal projective compactification with geometrically integral boundary components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"1dc36815f6723150\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; relative normalization instances and projective-spectrum constructions do not give the compactification and all its geometric boundary clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T08:14:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"1aef5678d2c366c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; relative normalization instances and projective-spectrum constructions do not give the compactification and all its geometric boundary clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|normalize.*projective|projective.*normal",
+   "results": "{\"t\": \"2026-10-24T08:14:55Z\", \"tool\": \"grep\", \"query\": \"compactification|normalize.*projective|projective.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; relative normalization instances and projective-spectrum constructions do not give the compactification and all its geometric boundary clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal projective completion of an affine smooth variety with prime divisors preserved by arbitrary extension of algebraically closed base field",
+   "results": "{\"t\": \"2026-10-24T08:16:12Z\", \"tool\": \"leansearch\", \"query\": \"Normal projective completion of an affine smooth variety with prime divisors preserved by arbitrary extension of algebraically closed base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"f20e6495683b502c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; relative normalization instances and projective-spectrum constructions do not give the compactification and all its geometric boundary clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of projective closure of an affine smooth integral scheme is a geometrically normal projective scheme over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-24T08:16:19Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of projective closure of an affine smooth integral scheme is a geometrically normal projective scheme over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"1ee5ffc9c6cb1ebb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; relative normalization instances and projective-spectrum constructions do not give the compactification and all its geometric boundary clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-variety-picard-detection",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard prerequisite beneath det-thm-sf-ctf-stability-direct-images, proof (3), extracted in lem-sfb-birigidified-affine-triviality-locus: detection of geometric triviality by normal projective compactification. The latest blueprint proof (3) assembles open and proper direct image and no longer spells out this historical prerequisite. Supporting input: Normal projective compactification with constant geometric boundary primes.",
+   "via": [
+    "lem-sfb-constant-variety-picard-detection",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algclosed-affine-normal-projective-boundary",
+  "worker": "stage1",
+  "summary": "Reused existing projective-closure, normalization, smooth-normality, perfect-closure, geometric irreducibility/reducedness and dimension nodes. Eight proof steps construct the compactification, track every boundary component, and preserve its codimension by an explicit dimension calculation. No new nodes and no statement change.",
+  "blueprint": "Historical Picard prerequisite on the added-input branch recorded in blueprint.from.place; latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) assembles proper and open image and has no compactification-normalization lemma of this statement. Steps 1--2 realize projective closure/normalization; 3--6 establish geometric properties; 7--8 establish constant codimension-one boundary primes. Whole-blueprint searches found no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-compactification-affine",
+    "why": "Generic geometric input used in this item: the affine projective closure in step 1. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic geometric input used in this item: projective properness in steps 1 and 4. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-projective-components",
+    "why": "Generic geometric input used in this item: finite projective normalization in step 2. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-sc-normalization-over-normal-locus",
+    "why": "Generic geometric input used in this item: preservation of the entire smooth open in step 2. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-normality-perfect-closure-test",
+    "why": "Generic geometric input used in this item: perfect-field geometric normality in step 3. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "Generic geometric input used in this item: irreducibility after arbitrary field extensions in steps 3 and 6. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Generic geometric input used in this item: projectivity after field extension in step 4. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic geometric input used in this item: the reduced boundary structures in steps 5 and 7. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic geometric input used in this item: reducedness of every scalar-extended boundary component in step 6. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic geometric input used in this item: the local-ring dimension calculation in step 8. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic geometric input used in this item: constant dimension on the integral schemes in step 8. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic geometric input used in this item: the residue-field identification in step 8. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Generic geometric input used in this item: the dimension equalities under arbitrary scalar extension in step 8. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic geometric input used in this item: finiteness needed for dimension cancellation in step 8. No node of the current unit states this generic fact; this preserves the normalization/projective-closure route, without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-compactification-affine",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-normalization-projective-components",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-weil-pbc-normality-perfect-closure-test",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-pc-projective-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-kun-dimension-formula",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-kun-dimension-extension",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-198e6c637",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-198e6c637 (reviewer sub-agent of L); spot-checked: I read the 8-step split in full, along with every cited node's statement and Stacks 0GK4 (varieties.tex l.4950). The delivery has no new nodes and leaves the statement and stmt_deps unchanged. This item was created by NL and had no proof before, so it is not a 2026-10-21 re-split. I tested the statement on Spec k (empty boundary, r=s=0), A^n⊂P^n (one hyperplane) and G_m⊂P^1 (two points that stay two points over every extension). Each step uses its cited node within that node's hypotheses. Step 1: the reduction P_0 is integral because it contains the dense integral X. Step 2: P_0 has exactly one reduced component, so normalization-projective-components has one summand. Smooth-normal-ascent applies over Spec k, and normalization-over-normal-locus applies to the whole normal open X. Step 3: the perfect-closure test works with K=k and exponent 0, and subset-geometric-irreducibility works with Ω=k separably closed. Step 6: the image of the base-changed boundary is p^{-1}T_a, checked by contracting primes of R⊗F. Step 7: the step marked elementary really is a few lines: irreducible components, no repetition, and the uniqueness clause of the reduced induced structure. Step 8: dimension formula 02FX plus dimension-locally-algebraic plus residue-field iso plus dimension-extension, with finiteness making the cancellation valid. Duplicate check: lem-per-normal-projective-compactification is over a mixed-characteristic trait, and the two geonormal-divisorial nodes assume such a Y is already given, so none duplicates this item. The generic off-unit tool_uses are accepted. One fault, fixed: def-kun-projective means H-projective only, but lem-pc-projective-proper and lem-pc-projective-base-change need def-pc-projective-morphism (H-projective and quasi-compact). The fix adds the quasi-compactness argument to steps 1 and 4 (P^n_k is quasi-compact, and C is proper) and adds def-pc-projective-morphism to those steps' uses and to proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-algclosed-affine-normal-projective-boundary.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgClosedAffineNormalProjectiveBoundary",
+  "declaration": "AlgebraicGeometry.exists_algClosed_affine_normal_projective_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgClosedAffineNormalProjectiveBoundary.lean",
+  "statement": "theorem exists_algClosed_affine_normal_projective_boundary (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsAffine X] [Smooth f] [GeometricallyIntegral f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ (C : Scheme.{u}) (p : C ⟶ Spec (.of k)) (j : X ⟶ C), LocallyOfFiniteType p ∧ QuasiCompact p ∧ IsHProjective p ∧ j ≫ p = f ∧ IsOpenImmersion j ∧ DenseRange j ∧ GeometricallyIntegral p ∧ (∀ (F : Type u) [Field F] [Algebra k F], IsIntegral (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F)))) ∧ (∀ x : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}), IsDomain ((pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F)))).presheaf.stalk x) ∧ IsIntegrallyClosed ((pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F)))).presheaf.stalk x)) ∧ IsNoetherian (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F)))) ∧ IsProper (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap k F))))) ∧ ∃ (r : ℕ) (B : Fin r → C.IdealSheafData), (∀ i : Fin r, IsReduced (B i).subscheme ∧ GeometricallyIntegral ((B i).subschemeι ≫ p)) ∧ Function.Injective (fun i : Fin r ↦ ((B i).support : Set C)) ∧ Set.range (fun i : Fin r ↦ ((B i).support : Set C)) = {T : Set C | (∃ Z : Set {x : C // x ∉ Set.range j}, Z ∈ irreducibleComponents {x : C // x ∉ Set.range j} ∧ Subtype.val '' Z = T) ∧ ∃ η : C, IsGenericPoint η T ∧ ringKrullDim (C.presheaf.stalk η) = 1} ∧ ∀ (F : Type u) [Field F] [Algebra k F], (∀ i : Fin r, IsReduced ((B i).comap (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k F))))).subscheme) ∧ Function.Injective (fun i : Fin r ↦ (((B i).comap (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k F))))).support : Set (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}))) ∧ Set.range (fun i : Fin r ↦ (((B i).comap (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k F))))).support : Set (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}))) = {T : Set (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}) | (∃ Z : Set {x : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}) // (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k F)))) x ∉ Set.range j}, Z ∈ irreducibleComponents {x : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}) // (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k F)))) x ∉ Set.range j} ∧ Subtype.val '' Z = T) ∧ ∃ η : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F))) : Scheme.{u}), IsGenericPoint η T ∧ ringKrullDim ((pullback p (Spec.map (CommRingCat.ofHom (algebraMap k F)))).presheaf.stalk η) = 1}",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab5f782b4",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node. IsHProjective = finite-coordinate closed immersion into P(n;k); C finite type = LOFT+QC; j over k, open, dense; GeometricallyIntegral p; for all F : Type u, C_F integral, stalks integrally closed domains, Noetherian, proper. Boundary: r : ℕ (0 allowed), B : Fin r → IdealSheafData, reduced and geometrically integral, injective supports, range = codim-1 (stalk ringKrullDim at generic point = 1) irreducible components of C∖range j; base change via IdealSheafData.comap (kernel of pullback.fst, scheme-theoretic preimage), reduced, injective, range = codim-1 components of p^{-1}(C∖jX) = C_F∖j_F(X_F). Redundant LOFT/QC hypotheses on f are not stronger. Universe of F is the same as Mathlib geometrically. lean.statement verbatim; only the lean field changed against live; live has no lean record; imports exist; docstrings carry source, blueprint and all 8 steps; sorry only; no defs or new nodes. Parallel NK 801e delivery of the same item exists (not read)."
+ }
+}

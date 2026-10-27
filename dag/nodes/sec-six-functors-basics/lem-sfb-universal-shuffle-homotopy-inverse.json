@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-universal-shuffle-homotopy-inverse",
+ "kind": "statement",
+ "title": "Universal signed shuffle and its natural homotopy inverse",
+ "statement": "Let $I=\\Delta\\times\\Delta$, where $\\Delta$ is the category of nonempty finite ordinals and monotone maps, and let $\\mathcal E=\\operatorname{Fun}(I,\\mathrm{Ab})$. For $i\\in I$ set $R_i(j)=\\mathbf Z[\\operatorname{Hom}_I(i,j)]$, with postcomposition maps. Let $P_n=R_{(n,n)}$ and $Q_n=\\bigoplus_{a+b=n}R_{(a,b)}$, with diagonal and separately signed alternating-deletion boundaries and vertex-sum augmentations $\\epsilon_P,\\epsilon_Q$ to $\\underline{\\mathbf Z}$, as in [lem-sfb-free-bisimplex-projective-resolutions].\n\nFor $a+b=n$ and a partition $\\mu\\sqcup\\nu=\\{0,\\ldots,n-1\\}$ with $|\\mu|=a$, $|\\nu|=b$, let $\\alpha_\\mu:[n]\\to[a]$ send $k$ to $\\#\\{j\\in\\mu:j<k\\}$, and define $\\alpha_\\nu$ likewise. Let $\\epsilon(\\mu,\\nu)$ be the sign of the permutation listing $\\mu$ then $\\nu$, each increasingly. Define $\\sigma_n:Q_n\\to P_n$ on the distinguished generator of its $R_{(a,b)}$ summand, at $(a,b)$, by\n$$[1_{(a,b)}]\\longmapsto\\sum_{\\mu,\\nu}\\epsilon(\\mu,\\nu)[(\\alpha_\\mu,\\alpha_\\nu)]\\in R_{(n,n)}(a,b),$$\nand extend by postcomposition and integral linearity at every object of $I$. Then $\\sigma$ is a natural chain map and $\\epsilon_P\\sigma_0=\\epsilon_Q$. There exist a natural chain map $\\tau:P\\to Q$ with $\\epsilon_Q\\tau_0=\\epsilon_P$ and natural degree-raising maps $h_P:P_n\\to P_{n+1}$, $h_Q:Q_n\\to Q_{n+1}$ such that\n$$\\sigma\\tau-1_P=\\partial_Ph_P+h_P\\partial_P,\\qquad \\tau\\sigma-1_Q=\\partial_Qh_Q+h_Q\\partial_Q.$$\nThus this prescribed $\\sigma$, not merely a chosen comparison map, is a chain homotopy equivalence, and its class is an isomorphism $Q\\xrightarrow{\\sim}P$ in $D(\\mathcal E)$ [def-weil-abstract-derived-category], placing the chain degree $n$ in cochain degree $-n$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0649 (lemma-morphisms-lift-projective) and 064A (lemma-morphisms-equal-up-to-homotopy-projective), with the prescribed combinatorial shuffle of lem-sfb-simplex-lattice-shuffle-boundary. Agent-formulated specialization; returned proof steps 4–5."
+ },
+ "stmt_deps": [
+  "lem-sfb-free-bisimplex-projective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sfb-simplex-lattice-path-sign"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-free-bisimplex-projective-resolutions], $\\mathcal E$ is abelian and $P,Q$ are projective resolutions of $\\underline{\\mathbf Z}$. Its generator bijection extends each specified finite sum uniquely to a morphism $R_{(a,b)}\\to P_n$. For $t:(p,q)\\to(p',q')$, postcomposition takes each basis arrow $s$ to $ts$, so both orders of applying $t$ and this extension give the same shuffle sum. Thus each $\\sigma_n$ is a morphism of diagrams.",
+   "uses": [
+    "lem-sfb-free-bisimplex-projective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0649 (lemma-morphisms-lift-projective) and 064A (lemma-morphisms-equal-up-to-homotopy-projective), with the prescribed combinatorial shuffle of lem-sfb-simplex-lattice-shuffle-boundary. Agent-formulated specialization; returned proof steps 4–5."
+   }
+  },
+  {
+   "text": "Evaluate at $(p,q)$. The identifications $P(p,q)=V(p,q)$ and $Q(p,q)=\\operatorname{Tot}(U(p)\\otimes U(q))$ of [lem-sfb-free-bisimplex-projective-resolutions] send a basis arrow $(u,v):(a,b)\\to(p,q)$ to its two strings. Its image under the prescribed map has $k$th vertex $(u_{\\alpha_\\mu(k)},v_{\\alpha_\\nu(k)})$. This is exactly the sum in [lem-sfb-simplex-lattice-shuffle-boundary], with the same partition sign. Its boundary and augmentation identities therefore give $\\partial_P\\sigma=\\sigma\\partial_Q$ and $\\epsilon_P\\sigma_0=\\epsilon_Q$ at every object, hence in $\\mathcal E$. This includes $a=0$, $b=0$, and repeated entries.",
+   "uses": [
+    "lem-sfb-free-bisimplex-projective-resolutions",
+    "lem-sfb-simplex-lattice-shuffle-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0649 (lemma-morphisms-lift-projective) and 064A (lemma-morphisms-equal-up-to-homotopy-projective), with the prescribed combinatorial shuffle of lem-sfb-simplex-lattice-shuffle-boundary. Agent-formulated specialization; returned proof steps 4–5."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-projective-resolution-lift] in $\\mathcal E$ to $f=1_{\\underline{\\mathbf Z}}$ and the ordered pair $(P,Q)$. These are precisely the projective resolutions supplied by [lem-sfb-free-bisimplex-projective-resolutions]. It gives a chain map $\\tau:P\\to Q$ with $\\epsilon_Q\\tau_0=\\epsilon_P$. Since this lifting takes place in the functor category, all its components are natural in $(p,q)$.",
+   "uses": [
+    "lem-sfb-abelian-projective-resolution-lift",
+    "lem-sfb-free-bisimplex-projective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0649 (lemma-morphisms-lift-projective) and 064A (lemma-morphisms-equal-up-to-homotopy-projective), with the prescribed combinatorial shuffle of lem-sfb-simplex-lattice-shuffle-boundary. Agent-formulated specialization; returned proof steps 4–5."
+   }
+  },
+  {
+   "text": "The equalities $\\epsilon_P\\sigma_0\\tau_0=\\epsilon_Q\\tau_0=\\epsilon_P$ and $\\epsilon_Q\\tau_0\\sigma_0=\\epsilon_P\\sigma_0=\\epsilon_Q$ show that $\\sigma\\tau$ and $1_P$, respectively $\\tau\\sigma$ and $1_Q$, have equal augmented composites. Apply [new-t4-augmented-resolution-lift-homotopy] first with source and target $P$, then with source and target $Q$. Their augmented exactness and projectivity were supplied in step 1. The resulting homotopies in $\\mathcal E$ are natural degree-raising maps and give exactly the two displayed equations (the component in degree $-1$ is zero).",
+   "uses": [
+    "new-t4-augmented-resolution-lift-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0649 (lemma-morphisms-lift-projective) and 064A (lemma-morphisms-equal-up-to-homotopy-projective), with the prescribed combinatorial shuffle of lem-sfb-simplex-lattice-shuffle-boundary. Agent-formulated specialization; returned proof steps 4–5."
+   }
+  },
+  {
+   "text": "Put chain degree $n$ in cochain degree $-n$ and extend by zero in positive degrees. The two equations make the classes of $\\sigma$ and $\\tau$ inverse in the homotopy category. The localization from this category defining $D(\\mathcal E)$ in [def-weil-abstract-derived-category] preserves their two identity composites. Hence the class of this prescribed $\\sigma$ is the asserted derived isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0649 (lemma-morphisms-lift-projective) and 064A (lemma-morphisms-equal-up-to-homotopy-projective), with the prescribed combinatorial shuffle of lem-sfb-simplex-lattice-shuffle-boundary. Agent-formulated specialization; returned proof steps 4–5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-free-bisimplex-projective-resolutions",
+  "lem-sfb-simplex-lattice-shuffle-boundary",
+  "lem-sfb-abelian-projective-resolution-lift",
+  "new-t4-augmented-resolution-lift-homotopy",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0649 and 064A, labels lemma-morphisms-lift-projective and lemma-morphisms-equal-up-to-homotopy-projective, specialized in the diagram category; the signed-shuffle calculation is supplied by the existing lattice-shuffle node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The signed lattice shuffle on free simplex representable projective resolutions has an augmentation preserving chain homotopy inverse natural in both simplex variables",
+   "results": "{\"t\": \"2026-10-22T06:00:55Z\", \"tool\": \"leanfinder\", \"query\": \"The signed lattice shuffle on free simplex representable projective resolutions has an augmentation preserving chain homotopy inverse natural in both simplex variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\"], \"digest\": \"5c3045199df0e555\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ProjectiveResolution.homotopyEquiv uses the chosen lift, not the specified signed shuffle. Establishing the shuffle chain-map equation and replacing the chosen lift by that map uses additional arguments. ExtraDegeneracy and DoldKan compare different complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented chain map between diagonal and tensor free bisimplex resolutions of the constant integer diagram is a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-22T06:01:07Z\", \"tool\": \"leanfinder\", \"query\": \"An augmented chain map between diagonal and tensor free bisimplex resolutions of the constant integer diagram is a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\"], \"digest\": \"fd1652e130160d75\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ProjectiveResolution.homotopyEquiv uses the chosen lift, not the specified signed shuffle. Establishing the shuffle chain-map equation and replacing the chosen lift by that map uses additional arguments. ExtraDegeneracy and DoldKan compare different complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal Eilenberg Zilber signed shuffle between free bisimplicial representable resolutions is a chain homotopy equivalence",
+   "results": "{\"t\": \"2026-10-22T06:01:08Z\", \"tool\": \"leansearch\", \"query\": \"Universal Eilenberg Zilber signed shuffle between free bisimplicial representable resolutions is a chain homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.homotopyEquiv\", \"HomotopyEquiv\", \"HomotopyEquiv.quasiIso_hom\", \"CategoryTheory.InjectiveResolution.homotopyEquiv\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"HomotopyEquiv.quasiIsoAt_hom\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"CategoryTheory.ShortComplex.HomotopyEquiv\"], \"digest\": \"106903337a254c2c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ProjectiveResolution.homotopyEquiv uses the chosen lift, not the specified signed shuffle. Establishing the shuffle chain-map equation and replacing the chosen lift by that map uses additional arguments. ExtraDegeneracy and DoldKan compare different complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyEquiv\", \"ProjectiveResolution\"",
+   "results": "{\"t\": \"2026-10-22T06:01:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyEquiv\\\", \\\"ProjectiveResolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.homotopyEquiv\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv_hom_π\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv_hom_π_assoc\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π_assoc\"], \"digest\": \"23541a168b169aa3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ProjectiveResolution.homotopyEquiv uses the chosen lift, not the specified signed shuffle. Establishing the shuffle chain-map equation and replacing the chosen lift by that map uses additional arguments. ExtraDegeneracy and DoldKan compare different complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|Eilenberg.Zilber|Alexander.Whitney|bisimplicial",
+   "results": "{\"t\": \"2026-10-22T06:01:08Z\", \"tool\": \"grep\", \"query\": \"shuffle|Eilenberg.Zilber|Alexander.Whitney|bisimplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ProjectiveResolution.homotopyEquiv uses the chosen lift, not the specified signed shuffle. Establishing the shuffle chain-map equation and replacing the chosen lift by that map uses additional arguments. ExtraDegeneracy and DoldKan compare different complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquiv|homotopy",
+   "results": "{\"t\": \"2026-10-22T06:01:08Z\", \"tool\": \"grep\", \"query\": \"homotopyEquiv|homotopy\", \"sub\": \"CategoryTheory/Preadditive/Projective/Resolution\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ProjectiveResolution.homotopyEquiv uses the chosen lift, not the specified signed shuffle. Establishing the shuffle chain-map equation and replacing the chosen lift by that map uses additional arguments. ExtraDegeneracy and DoldKan compare different complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "def homotopyEquiv|def liftHomotopy|def lift ",
+   "results": "{\"t\": \"2026-10-22T06:06:53Z\", \"tool\": \"grep\", \"query\": \"def homotopyEquiv|def liftHomotopy|def lift \", \"sub\": \"CategoryTheory/Abelian/Projective\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean\"], \"digest\": \"4ec60785773503fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations compare chosen lifts; the new statement additionally constructs and verifies the prescribed signed shuffle and its augmentation, and identifies that particular chain map as a homotopy equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prescribed signed shuffle from the total free bisimplex chain resolution to its diagonal is an augmentation preserving chain homotopy equivalence",
+   "results": "{\"t\": \"2026-10-23T04:12:59Z\", \"tool\": \"leanfinder\", \"query\": \"The prescribed signed shuffle from the total free bisimplex chain resolution to its diagonal is an augmentation preserving chain homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"AlgebraicTopology.DoldKan.hσ'\"], \"digest\": \"57f85a4d4bc62526\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits compare an augmented object with its augmentation, or normalized versus alternating chains of one simplicial object; none supplies the prescribed universal bisimplex shuffle. General comparison requires verifying its chain-map identity first."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shuffle\", \"ChainComplex\"",
+   "results": "{\"t\": \"2026-10-23T04:12:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"shuffle\\\", \\\"ChainComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits compare an augmented object with its augmentation, or normalized versus alternating chains of one simplicial object; none supplies the prescribed universal bisimplex shuffle. General comparison requires verifying its chain-map identity first."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|Eilenberg.Zilber|Alexander.Whitney|bisimplicial",
+   "results": "{\"t\": \"2026-10-23T04:12:59Z\", \"tool\": \"grep\", \"query\": \"shuffle|Eilenberg.Zilber|Alexander.Whitney|bisimplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits compare an augmented object with its augmentation, or normalized versus alternating chains of one simplicial object; none supplies the prescribed universal bisimplex shuffle. General comparison requires verifying its chain-map identity first."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bicosimplicial-shuffle-totalization",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: compare the diagonal product-group nerve with its two successive augmentations; the general bicosimplicial shuffle, before any group or coefficient choices. Inherited ancestor command returns None. Re-split of the universal proof: Universal signed shuffle and its natural homotopy inverse.",
+   "via": [
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-universal-shuffle-homotopy-inverse",
+  "worker": "stage1",
+  "group": "Q28",
+  "summary": "Verified the prescribed shuffle on basis arrows against the existing unnormalized lattice boundary theorem. Used the existing free-bisimplex resolutions in their abelian functor category, a new Mathlib lifting leaf, and the existing more general categorical augmented-lift homotopy theorem. Both homotopies are diagram morphisms, not the nonnatural pointwise contractions. Statement and statement dependencies unchanged.",
+  "blueprint": "Inherited null ancestor (confirmed by blueprint_refs.py ancestor); this assembly realizes the universal chain comparison used below paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "new-t4-augmented-resolution-lift-homotopy",
+    "why": "Generic uniqueness up to homotopy of augmented lifts from a projective resolution into an exact chain complex in any abelian category; this is a categorical tool, and the unit’s module-only comparison lemma does not cover the functor category or a prescribed map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-t4-augmented-resolution-lift-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-ca7736f3b",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-ca7736f3b (reviewer sub-agent of L); spot-checked: I read the whole item, the new leaf and every cited statement; no faults, no fixes. Statement, stmt_deps, source and blueprint are unchanged from the Q23 creation; only the proof was added. Step 1: free-bisimplex gives an abelian E, the Yoneda bijection and projective resolutions, so σ is natural by Yoneda. Step 2: by naturality, σ sends the basis arrow (u,v) to Σε[(u∘α_μ, v∘α_ν)]. This is exactly the σ of lattice-shuffle-boundary (k-th vertex (u_{A_k},v_{B_k}), μ listed before ν, sign (−1)^a matching Q's boundary), so ∂_Pσ=σ∂_Q and ε_Pσ_0=ε_Q hold, including a=0, b=0 and repeated vertices. Small cases: n=0 gives σ_0=id; (1,1) gives the two paths with signs ±1. Step 3: the new leaf with A=E, f=1 and source P gives a natural τ with ε_Qτ_0=ε_P. Step 4: new-t4's hypotheses hold, applied once with K=P and once with K=Q; the augmentation identities are computed in the step and the homotopies live in E. Step 5: def-weil-abstract-derived-category gives D(A) as a localization of K(A), so this is elementary and yields a derived-form isomorphism. New node lem-sfb-abelian-projective-resolution-lift: a sound Mathlib leaf. ProjectiveResolution.lift is at Resolution.lean:92 and lift_commutes_zero at :106, needing only [Abelian C]. Its source Stacks 0649(2) (derived.tex:6777) applies because the augmentation is surjective in every degree. The node passes B1–B9. It is not a duplicate: the existing lift nodes cover modules only, new-t4 gives uniqueness only, and lem-weil-pbc-injective-resolution-lift-exists is the dual statement. Accepted tool use: new-t4-augmented-resolution-lift-homotopy (sk-thm-picard-duality), a generic abelian-category uniqueness up to homotopy. No SGA source occurs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.UniversalShuffleHomotopyInverse",
+  "declaration": "AlgebraicTopology.FreeBisimplex.universal_shuffle_homotopy_inverse",
+  "declarations": [
+   "AlgebraicTopology.FreeBisimplex.shufflePathArrow",
+   "AlgebraicTopology.FreeBisimplex.shuffleGenerator",
+   "AlgebraicTopology.FreeBisimplex.universal_shuffle_homotopy_inverse"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/UniversalShuffleHomotopyInverse.lean",
+  "statement": "theorem universal_shuffle_homotopy_inverse [HasDerivedCategory.{w} (SimplexCategory × SimplexCategory ⥤ AddCommGrpCat.{u})] (P Q : ChainComplex (SimplexCategory × SimplexCategory ⥤ AddCommGrpCat.{u}) ℕ) (p : ∀ n : ℕ, P.X n ≅ representable.{u} (⦋n⦌, ⦋n⦌)) (q : ∀ n : ℕ, Q.X n ≅ totalTerm.{u} n) (εP : P.X 0 ⟶ (Functor.const _).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (εQ : Q.X 0 ⟶ (Functor.const _).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (hP : ∀ (n : ℕ) (j : SimplexCategory × SimplexCategory) (α : (⦋n + 1⦌, ⦋n + 1⦌) ⟶ j), (p n).hom.app j ((P.d (n + 1) n).app j ((p (n + 1)).inv.app j (generator α))) = ∑ k : Fin (n + 2), (-1 : ℤ) ^ k.val • generator ((SimplexCategory.δ k, SimplexCategory.δ k) ≫ α)) (hQ : ∀ (a b : ℕ) (j : SimplexCategory × SimplexCategory) (α : (⦋a⦌, ⦋b⦌) ⟶ j), (q (a + b - 1)).hom.app j ((Q.d (a + b) (a + b - 1)).app j ((q (a + b)).inv.app j (totalGenerator a b (a + b) rfl j α))) = totalBoundary a b j α) (hε : ∀ (j : SimplexCategory × SimplexCategory) (α : (⦋0⦌, ⦋0⦌) ⟶ j), εP.app j ((p 0).inv.app j (generator α)) = ULift.up (1 : ℤ) ∧ εQ.app j ((q 0).inv.app j (totalGenerator 0 0 0 rfl j α)) = ULift.up (1 : ℤ)) : ∃ (e : HomotopyEquiv Q P) (eD : DerivedCategory.Q.obj (Q.extend ComplexShape.embeddingDownNat) ≅ DerivedCategory.Q.obj (P.extend ComplexShape.embeddingDownNat)), (∀ (a b : ℕ) (j : SimplexCategory × SimplexCategory) (α : (⦋a⦌, ⦋b⦌) ⟶ j), (p (a + b)).hom.app j ((e.hom.f (a + b)).app j ((q (a + b)).inv.app j (totalGenerator a b (a + b) rfl j α))) = shuffleGenerator a b j α) ∧ e.hom.f 0 ≫ εP = εQ ∧ e.inv.f 0 ≫ εQ = εP ∧ eD.hom = DerivedCategory.Q.map (HomologicalComplex.extendMap e.hom ComplexShape.embeddingDownNat)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The degreewise identifications and generator boundary and augmentation equations specify exactly the free bisimplex complexes. The forward chain map is characterized on every summand basis arrow by the prescribed signed lattice-path sum. HomotopyEquiv includes the natural reverse map and both natural homotopies; both augmentation equations and the derived isomorphism with the same forward map are stated. Helpers define only the counting arrows and signed sums already introduced in this node. H2 repair of returned head 1c07e4c420fb: LatticePath and pathSign are owned by the new existing-declaration definition node def-sfb-simplex-lattice-path-sign; the lattice-boundary theorem remains only in proof_deps. No Lean declaration or signature is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0e6e749f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 1c07e4c420fb: the Lean module is byte-identical; the item changes only stmt_deps (theorem lem-sfb-simplex-lattice-shuffle-boundary replaced by the new existing:true def-sfb-simplex-lattice-path-sign) and lean.note; statement, proof and proof_deps equal live. New def node checked: it owns the live plain defs LatticePath/pathSign (SimplexLatticeShuffleBoundary.lean:45-57), the statement matches (vertical-before-horizontal inversions = sign of listing mu then nu), record fields match the def-sfb-shuffle-word-combinatorics precedent, no id clash and no other owner. Item mathematics re-read: P/Q fixed on generators by p/q/hP/hQ/hε; shuffleGenerator = prescribed signed sum extended by postcomposition, with alpha_mu/alpha_nu as path coordinates; (1,1) chain-map signs checked by hand; HomotopyEquiv in the functor category with both augmentation equations; derived iso via extend embeddingDownNat with eD.hom = Q.map(extendMap e.hom); edge cases n=0, a=0/b=0, repeated vertices and universes covered. Gates: no hollow defs, sorry only, docstrings with source and blueprint, report sections present. No compile (no file changed). Advisories: proof-only imports justified; a Fintype instance on LatticePath would be cleaner."
+ }
+}

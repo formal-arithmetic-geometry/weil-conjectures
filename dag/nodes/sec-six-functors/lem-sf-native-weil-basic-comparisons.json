@@ -1,0 +1,360 @@
+{
+ "id": "lem-sf-native-weil-basic-comparisons",
+ "kind": "statement",
+ "title": "Direct-image and open-extension comparisons in the native Weil realization",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For each $k_0$-scheme $S$ locally of finite type, use the abelian category $\\mathcal W_S$ of pro-etale Weil sheaves and its ordinary derived category $D(\\mathcal W_S)$, with the actual equivariant operations of [def-sf-native-weil-derived-framework]. All maps below are over $k_0$; absolute separatedness over $k_0$ is not imposed.\n\n(a) For composable maps $u:S\\to T$ and $v:T\\to H$ between these schemes, there are natural isomorphisms\n$$R(vu)_*\\cong Rv_*Ru_*,\\qquad R(\\operatorname{id}_S)_*\\cong\\operatorname{id}_{D(\\mathcal W_S)}.$$\nThese are isomorphisms in the native equivariant derived categories, for total right derivation in $\\mathcal W$, without any constructibility or boundedness assumption on the input.\n\n(b) If $j:U\\to S$ is a quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism], its equivariant sheaf extension by zero $j_!:\\mathcal W_U\\to\\mathcal W_S$ is exact. Its termwise descent $J_j:D(\\mathcal W_U)\\to D(\\mathcal W_S)$ carries bounded constructible cohomology to bounded constructible cohomology. For composable quasi-compact open immersions $j:U\\to S$ and $i:S\\to T$ there are natural equivariant isomorphisms\n$$J_iJ_j\\cong J_{ij},\\qquad J_{\\operatorname{id}_S}\\cong\\operatorname{id}_{D(\\mathcal W_S)}.$$\nConstructibility here is exactly the locally finite stratified $B_S$-module condition in [def-sf-native-weil-derived-framework], not a convention identifying this category with fixed pairs in another derived category.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/FiniteLeray.lean",
+  "place": "preservesKInjectiveComplexes_lowerStar and rightDerivedLowerStarCompIso, lines 160-176; LowerStarComp.lean lines 43-61; OpenImmersion.lean lines 43-55, 92-105, 138-150 for exactness and constructibility; the identity and successive-open comparisons are the adjunction/extension-by-zero comparisons for these same operations, formulated here by Q18."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing native ProEtaleWeilSheaf.rightDerivedLowerStarCompIso in WeilSheaf/FiniteLeray.lean (lines 171-177) for arbitrary composable maps. It already derives lowerStarCompIso using the exact pullback adjunction and preservation of K-injectives. No boundedness, constructibility or absolute separatedness is required. This supplies the first conjunct directly.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "Existing native APIs and the precise source declarations named in this step; Lean proof in Sheaf/WeilSheaf/NativeBasicComparisons.lean."
+   }
+  },
+  {
+   "text": "Apply Functor.rightDerivedFunctorNatIso to ProEtaleWeilSheaf.lowerStarIdIso. The right derived functor of the exact identity is its mapDerivedCategory by rightDerivedFunctorIsoMapDerivedCategory, and mapDerivedCategoryIdIso identifies that functor with the derived identity. Compose these three natural isomorphisms for the second conjunct.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "Existing native APIs and the precise source declarations named in this step; Lean proof in Sheaf/WeilSheaf/NativeBasicComparisons.lean."
+   }
+  },
+  {
+   "text": "Use the existing exactness instances for ProEtaleWeilSheaf.extensionByZero in WeilSheaf/OpenImmersion.lean lines 141-150. The exact functor preserves the bounded cohomological interval by bounded_mapDerivedCategory_obj. In each degree, mapDerivedCategoryHomologyFunctorIso identifies the extended cohomology with extension of the original cohomology. Apply the already proved WeilSheaf.isAdicConstructibleSheaf_extensionByZero (OpenImmersion.lean lines 99-105), and transport the object property across this isomorphism. This proves exactly WeilComplex.objectProperty, including its boundedness conjunct.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "Existing native APIs and the precise source declarations named in this step; Lean proof in Sheaf/WeilSheaf/NativeBasicComparisons.lean."
+   }
+  },
+  {
+   "text": "Construct the private nativeOpenAdjunction j by the existing IsoAlgebra.mapOfNatIsoLeftAdjunction. Its adjoint triple is the adic open extension, adic pullback and adic direct image on the geometric fibres. Its right-hand mate is mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv. Compatibility of the extension-to-direct-image map with Frobenius is adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso. Its transpose is the inverse counit by adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar. These existing proved source lemmas satisfy every hypothesis of the lifting construction, giving the actual native extensionByZero left adjoint to the actual upperStar.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "Existing native APIs and the precise source declarations named in this step; Lean proof in Sheaf/WeilSheaf/NativeBasicComparisons.lean."
+   }
+  },
+  {
+   "text": "Compose the native open adjunctions for j and i. Transport the adjunction for j followed by i along the existing ProEtaleWeilSheaf.upperStarCompIso. Both extensions are now left adjoint to upperStar i followed by upperStar j, so Mathlib Adjunction.leftAdjointUniq gives their native sheaf isomorphism. Descend that isomorphism by Functor.mapDerivedCategoryNatIso and precompose with the inverse of Functor.mapDerivedCategoryCompIso. This gives the fourth conjunct on all native derived objects.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sfb-exact-derived-composition",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "Existing native APIs and the precise source declarations named in this step; Lean proof in Sheaf/WeilSheaf/NativeBasicComparisons.lean."
+   }
+  },
+  {
+   "text": "For the identity open, transport nativeOpenAdjunction along ProEtaleWeilSheaf.upperStarIdIso and compare it with Adjunction.id by Adjunction.leftAdjointUniq. Descend the resulting sheaf isomorphism with Functor.mapDerivedCategoryNatIso and finish with Functor.mapDerivedCategoryIdIso. Assemble the five conjuncts. All constructions have the exact original universes and impose no additional geometric hypotheses.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sfb-exact-derived-natural-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "Existing native APIs and the precise source declarations named in this step; Lean proof in Sheaf/WeilSheaf/NativeBasicComparisons.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/WeilSheaf/NativeBasicComparisons.lean",
+  "place": "Q3, 2026-10-22: compiled proof from existing source-library direct-image comparisons, exact open-extension and constructibility APIs; actual native open adjunction lifted using IsoAlgebraLeftAdjunction, followed by uniqueness of left adjoints and exact-functor derived descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarCompIso|ProEtaleWeilSheaf|rightDerivedFunctorCompIso",
+   "results": "{\"t\": \"2026-10-22T04:24:34Z\", \"tool\": \"grep\", \"query\": \"rightDerivedLowerStarCompIso|ProEtaleWeilSheaf|rightDerivedFunctorCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorCompIso\"",
+   "results": "{\"t\": \"2026-10-22T04:24:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorCompIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition isomorphism for total right derived functors of direct images of sheaves with Frobenius action",
+   "results": "{\"t\": \"2026-10-22T04:24:35Z\", \"tool\": \"leansearch\", \"query\": \"Composition isomorphism for total right derived functors of direct images of sheaves with Frobenius action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves\", \"CategoryTheory.Functor.pointwiseRightKanExtensionCompIsoOfPreserves\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app\"], \"digest\": \"42f50759321b898a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero of equivariant sheaves is left adjoint to open restriction and commutes with successive open immersions",
+   "results": "{\"t\": \"2026-10-22T04:24:36Z\", \"tool\": \"leanfinder\", \"query\": \"Exact extension by zero of equivariant sheaves is left adjoint to open restriction and commutes with successive open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"digest\": \"79b3f2365f303c08\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image of pro etale Weil sheaves composes, and exact extension by zero along two open immersions composes and preserves constructible cohomology",
+   "results": "{\"t\": \"2026-10-22T04:24:37Z\", \"tool\": \"leanfinder\", \"query\": \"The derived direct image of pro etale Weil sheaves composes, and exact extension by zero along two open immersions composes and preserves constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\"], \"digest\": \"c1689de50f099b9d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image of pro etale Weil sheaves composes and exact extension by zero preserves constructible cohomology",
+   "results": "{\"t\": \"2026-10-22T04:55:23Z\", \"tool\": \"leanfinder\", \"query\": \"The derived direct image of pro etale Weil sheaves composes and exact extension by zero preserves constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Condensed.lanSheafProfinite\", \"LightCondensed.lanLightCondSet\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"Condensed.isSheafProfinite\"], \"digest\": \"789c618d721b1542\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtaleWeilSheaf\"",
+   "results": "{\"t\": \"2026-10-22T04:55:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProEtaleWeilSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|rightDerivedLowerStarCompIso|extensionByZero",
+   "results": "{\"t\": \"2026-10-22T04:55:23Z\", \"tool\": \"grep\", \"query\": \"ProEtaleWeilSheaf|rightDerivedLowerStarCompIso|extensionByZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of unbounded derived direct images and successive exact open extensions of Frobenius equivariant sheaves",
+   "results": "{\"t\": \"2026-10-22T04:55:24Z\", \"tool\": \"leansearch\", \"query\": \"Composition of unbounded derived direct images and successive exact open extensions of Frobenius equivariant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"bb3352890ab732d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along any scheme morphism of the pro etale sheaf of locally finite continuous Q ell bar valued functions is the same coefficient sheaf on the source",
+   "results": "{\"t\": \"2026-10-22T04:55:49Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image along any scheme morphism of the pro etale sheaf of locally finite continuous Q ell bar valued functions is the same coefficient sheaf on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.map_appLE'\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app\", \"AlgebraicGeometry.Scheme.Hom.app_eq_appLE\", \"AlgebraicGeometry.Scheme.Hom.appLE_map'\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.Scheme.inv_app\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"2af098511095ac22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adicConstantSheaf\"",
+   "results": "{\"t\": \"2026-10-22T04:55:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"adicConstantSheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarAdicConstantSheafIso|adicConstantSheaf|locallyFiniteFunctions",
+   "results": "{\"t\": \"2026-10-22T04:55:49Z\", \"tool\": \"grep\", \"query\": \"upperStarAdicConstantSheafIso|adicConstantSheaf|locallyFiniteFunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of the continuous l adic constant coefficient sheaf on a pro etale site along an arbitrary morphism of schemes",
+   "results": "{\"t\": \"2026-10-22T04:55:50Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of the continuous l adic constant coefficient sheaf on a pro etale site along an arbitrary morphism of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullback\", \"TopCat.Presheaf.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"SheafOfModules.instIsLeftAdjointPullback\"], \"digest\": \"b8e9e74d765f7498\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of continuous functions with values in an algebraic closure of Q p and locally finite dimensional image commutes with inverse image of schemes",
+   "results": "{\"t\": \"2026-10-22T04:55:51Z\", \"tool\": \"leanfinder\", \"query\": \"The sheaf of continuous functions with values in an algebraic closure of Q p and locally finite dimensional image commutes with inverse image of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"AlgebraicGeometry.Spec.map_appLE\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Hom.app_eq_appLE\"], \"digest\": \"1b9fb8b9f2316d28\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived pushforward on an unbounded derived category of sheaves with Frobenius action preserves composition and extension by zero along successive open immersions composes",
+   "results": "{\"t\": \"2026-10-22T04:57:11Z\", \"tool\": \"leanfinder\", \"query\": \"Right derived pushforward on an unbounded derived category of sheaves with Frobenius action preserves composition and extension by zero along successive open immersions composes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforward_assoc\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\"], \"digest\": \"3d17481427304e82\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general sheaf functors or scheme identities, not the native Frobenius-equivariant unbounded derived composition together with the specified locally finite continuous-coefficient constructibility condition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-shriek-composition",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause (3), compact-support composition; the compactification/direct-image/open-extension argument of Stacks lemma-shriek-composition, realized in the native category named by LowerShriekFunctoriality.lean lines 187-200. The seeded ancestor chain ends at created.item=null, so blueprint_refs.py ancestor prints None; retain that provenance explicitly.",
+   "via": [
+    "lem-sf-native-weil-shriek-composition",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-basic-comparisons",
+  "worker": "stage1",
+  "summary": "Split all clauses into eleven arguments in the actual native equivariant abelian and derived categories. Reused the small twisted action site, finite-coefficient continuous pullback, exact module adjunction, K-injective and ringed localization nodes. Wrote the coefficient-colimit argument, Frobenius mate checks, K-injective composition computation, adjunction-derived successive-open comparisons. No new nodes, no change of statement or coefficient category, and no Lean writing or compilation. Whole-item attachment is unavailable because the successive-open and identity-open derived comparisons are not covered by the found declarations. Review FIX (cc reader, 2026-10-22): the constructibility of open extension by zero is the existing node lem-sf-native-weil-open-exact-constructible (same unit), now cited in step 9 instead of being re-proved; step 7 identifies native j^* with slice restriction.",
+  "blueprint": "The item realizes the direct-image/open-extension part of the recorded parent native compact-support composition: prop-functor-package clause (3), compact-support composition, and the open/direct-image comparisons used by the Stacks compactification proof. The seeded created.item chain ends at null (blueprint_refs.py ancestor reports None), retained in blueprint.from.node; this is not the key node of sk-thm-sf-package. Whole-blueprint searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-twisted-action-ringed-site",
+    "why": "Generic Small ringed action site for a site automorphism and its exact orbit induction used as a tool for the native sheaf and derived calculation; it does not replace a geometric step of the unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Applies the generic small-ringed-site K-injective existence theorem to the twisted action site; it imposes no constructibility or boundedness."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Uses exactness of forgetting module structure and sheafified module colimits for the locally finite coefficient ring."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
+    "why": "Uses arbitrary-scheme pullback of each finite extension E coefficient sheaf before taking their locally finite union; it is not an adic category comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Supplies only the generic tensor-formula module adjunction and finite-free pullback calculation."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Supplies exactness of underlying abelian sheaf inverse image; step 2 separately checks the structural coefficient map is invertible."
+   },
+   {
+    "node": "lem-sf-fixed-pair-adjunction-lift",
+    "why": "Generic An adjunction lifts to fixed pairs when the right exchange is its invertible mate used as a tool for the native sheaf and derived calculation; it does not replace a geometric step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Applies the generic exact-left-adjoint criterion inside the native abelian categories after step 3 verifies that adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Computes total unbounded right derivation on native K-injective representatives."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Represents native derived morphisms by homotopy classes into K-injective representatives to establish naturality."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies an open pro-etale site with the slice so that general ringed localization tools apply to the actual j_!."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Uses the exact module extension left adjoint and successive slice restriction formula for the same coefficient ring."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Descends the proved exact native sheaf extension termwise to the ordinary derived category."
+   },
+   {
+    "node": "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+    "why": "Turns the explicit natural native adjunction Hom bijections into the underived successive-open and identity isomorphisms."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Combines the termwise descents of exact native sheaf extensions."
+   },
+   {
+    "node": "lem-sfb-exact-derived-natural-iso",
+    "why": "Descends the native sheaf comparison isomorphisms to the ordinary unbounded derived categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-9e8e73681",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-9e8e73681 (reviewer sub-agent of L); spot-checked: Same verdict as before. The background shell-loop search for duplicate composition nodes was stopped at its time limit. That search had already been rerun as a single Python pass, which completed. It found only generic ringed-topos or adic composition nodes, such as lem-weil-pbc-ringed-topoi-derived-pushforward-composition. None covers fixed pairs, so steps 5-6 are not duplicates. I read the item's 12 steps in full and every cited statement. There are 0 new nodes and the statement is unchanged. Steps 1-8 and 11-12 are correct: the twisted action site gives a small ringed site with K-injectives; B is the colimit over finite E of E_Y; the 03D7 adjunction lifts with the mate check; 08BJ, 070K/070Y and 070I give the composition and identity; 04J4 and Coyoneda 001P give the successive opens; and the 04VG exact-derived nodes handle descent. Repaired (C5/D): steps 9-10 re-proved the constructibility of open extension by zero. That is the statement of the existing same-unit node lem-sf-native-weil-open-exact-constructible (Q19, unsplit, present at base), whose hypotheses match clause (b). I replaced steps 9-10 with one step citing that node and applying step 8 to each H^a, renumbered the later steps, recomputed proof_deps and dropped three tool_uses. Repaired (E5): step 7 did not say that native j^* is the slice restriction. I added that both are left adjoints of the same direct image and that step 2 matches the coefficients, citing def-weil-proetale-inverse-image. The corrected file is fixes/dag/nodes/sec-six-functors/lem-sf-native-weil-basic-comparisons.json, and the step-by-step checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeBasicComparisons",
+  "declaration": "AlgebraicGeometry.nativeWeilBasicComparisons",
+  "file": "lean/Sheaf/WeilSheaf/NativeBasicComparisons.lean",
+  "statement": "theorem nativeWeilBasicComparisons (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] : (∀ (S T H : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))] [T.Over (Spec (CommRingCat.of k₀))] [H.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (H ↘ Spec (CommRingCat.of k₀))] (f : S ⟶ T) (g : T ⟶ H) [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))], Nonempty ((ProEtaleWeilSheaf.lowerStar k₀ l (f ≫ g)).rightDerivedFunctor ≅ (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor)) ∧ (∀ (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))], Nonempty ((ProEtaleWeilSheaf.lowerStar k₀ l (𝟙 S)).rightDerivedFunctor ≅ 𝟭 (_root_.DerivedCategory (ProEtaleWeilSheaf k₀ l S)))) ∧ (∀ (U S : Scheme.{u}) [U.Over (Spec (CommRingCat.of k₀))] [S.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ S) [j.IsOver (Spec (CommRingCat.of k₀))] [IsOpenImmersion j] [QuasiCompact j], PreservesFiniteLimits (ProEtaleWeilSheaf.extensionByZero k₀ l j) ∧ PreservesFiniteColimits (ProEtaleWeilSheaf.extensionByZero k₀ l j) ∧ ∀ (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l U)), WeilComplex.objectProperty k₀ l U K → WeilComplex.objectProperty k₀ l S ((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory.obj K)) ∧ (∀ (U S T : Scheme.{u}) [U.Over (Spec (CommRingCat.of k₀))] [S.Over (Spec (CommRingCat.of k₀))] [T.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ S) (i : S ⟶ T) [j.IsOver (Spec (CommRingCat.of k₀))] [i.IsOver (Spec (CommRingCat.of k₀))] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion i] [QuasiCompact i], Nonempty ((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory ≅ (ProEtaleWeilSheaf.extensionByZero k₀ l (j ≫ i)).mapDerivedCategory)) ∧ (∀ (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))], Nonempty ((ProEtaleWeilSheaf.extensionByZero k₀ l (𝟙 S)).mapDerivedCategory ≅ 𝟭 (_root_.DerivedCategory (ProEtaleWeilSheaf k₀ l S))))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1686df2cd",
+  "group": "NH",
+  "result": "pass",
+  "note": "Five conjuncts match node (a) R(f≫g)_*≅Rf_*⋙Rg_*, R(𝟙)_*≅𝟭 on unbounded DerivedCategory(ProEtaleWeilSheaf); (b) extensionByZero exact (PreservesFiniteLimits/Colimits), mapDerivedCategory preserves WeilComplex.objectProperty (= bounded ⊓ adicConstructible homology, the framework's locally finite stratified condition), J_j⋙J_i≅J_(j≫i), J_𝟙≅𝟭; declarations checked in side-live Category/LowerStar/OpenImmersion/FiniteLeray. Nonempty matches the node's existence claim (no canonical map named; citers use only existence). Hypotheses: LFT schemes over k₀, IsOver maps, qc open immersions, no separatedness, uniform universe u. Edge cases ok (empty, zero, unbounded, identity, non-qc S, nonseparated). Node differs from side-live only in lean; statement verbatim; docstrings carry source place, blueprint id and the 11 proof steps; all imports resolve; no existing successive/identity extension-by-zero comparison. Advisory: unused private imports (H9), no worker second reading (H11, policy). No fixes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261022T144102-L-1497242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

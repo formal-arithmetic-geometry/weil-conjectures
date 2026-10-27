@@ -1,0 +1,149 @@
+{
+ "id": "lem-pbc-scalar-constructible-operation-restriction",
+ "kind": "statement",
+ "title": "Constructible restriction and rationalization of scalar comparisons",
+ "statement": "Let l be prime. Coefficient fields are finite extensions of Q_l with specified Q_l-algebra embeddings. Use the actual completed coefficient sheaves and raw rationalizations of [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-rational-category]. Schemes supporting a constructible rational category are assumed noetherian, finite-dimensional, with l invertible; ambient operation comparisons are for arbitrary scheme morphisms g : X → Y in the actual ambient derived categories. A linear additive functor between the ambient complete derived categories restricts to the constructible full subcategories whenever it preserves the defining predicate, and raw rationalization gives its rational functor. The actual derived direct-image and completed-pullback operations are linear and additive. Under the explicit constructibility-preservation hypotheses, the ambient scalar comparison isomorphisms restrict and rationalize to the specified rational direct-image and completed-pullback comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Order 1307; existing scalar-extension component, relocated without changing signatures or proofs."
+ },
+ "stmt_deps": [
+  "lem-pbc-scalar-tensor-construction",
+  "lem-pbc-scalar-rational-exactness",
+  "lem-pbc-scalar-ambient-operation-comparisons",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof": [
+  {
+   "text": "A functor preserving the defining predicate restricts by the full-subcategory lift. The faithful inclusion proves linearity of the restriction. Raw tensor-Hom localization then gives the rational functor.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite coefficient projections show that direct image preserves constant sections, hence the underived direct image is linear. Derived localization detects the scalar equation on homotopy-category objects. Adjunction transfers linearity and additivity to pullback and the complete reflection, hence to completed pullback.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the stated constructibility-preservation assumptions, restrict the ambient scalar comparison components to the full constructible subcategories, then apply raw rationalization. On pure tensors naturality is the ambient comparison square and the specified coefficient scalar formula. Tensor induction extends it to every rational morphism.",
+   "uses": [
+    "lem-pbc-scalar-tensor-construction",
+    "lem-pbc-scalar-rational-exactness",
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "lem-pbc-scalar-tensor-construction",
+  "lem-pbc-scalar-rational-exactness",
+  "lem-pbc-scalar-ambient-operation-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Compilation partition of the already stated and partially proved scalar-extension package; unchanged mathematical argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|ChangeOfRings",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension for constructible adic sheaves and coherent base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcScalarExtension",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Existing companion declarations; compilation partition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcScalarRestriction",
+  "file": "lean/Sheaf/Paper/PbcScalarRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_rational",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_linear",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_additive",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_linearInstance",
+   "AlgebraicGeometry.Scheme.pbcConditionalRational",
+   "AlgebraicGeometry.Scheme.pbcActualOperations_linear",
+   "AlgebraicGeometry.Scheme.pbcActualPush_additive",
+   "AlgebraicGeometry.Scheme.pbcActualPush_linear",
+   "AlgebraicGeometry.Scheme.pbcActualCompletedPull_additive",
+   "AlgebraicGeometry.Scheme.pbcActualCompletedPull_linear",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_rational",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_rational"
+  ],
+  "statement": "theorem pbcScalarCompletedPull_rational (hE : ∀ K : PbcIntegralCategory l E Y dY hY, PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((pbcActualCompletedPull g (pbcIntegralDatum l E)).obj K.obj)) (hF : ∀ K : PbcIntegralCategory l F Y dY hY, PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l F) ((pbcActualCompletedPull g (pbcIntegralDatum l F)).obj K.obj)) : ∃! e : pbcRationalScalarExtension l E F i Y dY hY ⋙ pbcConditionalRational (pbcIntegralDatum l F) (pbcActualCompletedPull g (pbcIntegralDatum l F)) hF (pbcUniformizer l F) ≅ pbcConditionalRational (pbcIntegralDatum l E) (pbcActualCompletedPull g (pbcIntegralDatum l E)) hE (pbcUniformizer l E) ⋙ pbcRationalScalarExtension l E F i X dX hX, ∀ K : PbcRationalDerivedCategory l E Y dY hY, HEq (e.hom.app K) ((pbcRationalization X (pbcIntegralDatum l F) (pbcUniformizer l F)).map (ObjectProperty.homMk (X := (pbcConditionalIntegral (pbcIntegralDatum l F) (pbcActualCompletedPull g (pbcIntegralDatum l F)) hF).obj ((pbcEmbeddingIntegralTensor l E F i Y dY hY).obj K.obj)) (Y := (pbcEmbeddingIntegralTensor l E F i X dX hX).obj ((pbcConditionalIntegral (pbcIntegralDatum l E) (pbcActualCompletedPull g (pbcIntegralDatum l E)) hE).obj K.obj)) ((pbcScalarCompletedPullIso l E F i g).hom.app K.obj.obj)))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Existing declarations moved verbatim from PbcScalarExtension, with local reducibility scope and import changes only. No new mathematical statement or proof hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "independent cc review: The 152 declarations of the clone's original PbcScalarExtension (2c77716690b) against the 12 delivered modules: identical text, and identical public types, hints and def values in the compiled environment (only generated proof-lemma names differ); all 60 direct importers compiled against the delivered modules (57 OK; 2 slow but just as slow against the published version)"
+ }
+}

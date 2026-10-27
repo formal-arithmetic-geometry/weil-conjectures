@@ -1,0 +1,441 @@
+{
+ "id": "lem-trf-affinoid-supremum-seminorm-calculus",
+ "kind": "statement",
+ "title": "Supremum seminorm estimates on affinoid algebras",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value. A nonzero affinoid $K$-algebra here means a commutative unital $K$-algebra admitting a surjection from $K\\langle T_1,\\ldots,T_r\\rangle$, the ring of series with coefficients tending to zero [def-trf-restricted-series-presentation]. For every such algebra $A$ and maximal ideal $\\mathfrak m$, the field $A/\\mathfrak m$ is finite over $K$ and has a unique absolute value extending that of $K$. Put $\\rho_A(a)=\\sup_{\\mathfrak m\\in\\operatorname{Max}A}|a\\bmod\\mathfrak m|$. This is a finite nonnegative real number, and $\\rho_A(a^n)=\\rho_A(a)^n$ for every integer $n\\ge1$. For any surjective $K$-algebra map $q:K\\langle T_1,\\ldots,T_r\\rangle\\to A$, one has $\\rho_A(a)\\le\\inf_{q(f)=a}\\|f\\|_G$, where $\\|\\cdot\\|_G$ is the Gauss norm. For every $K$-algebra homomorphism $\\psi:B\\to A$ between nonzero affinoid $K$-algebras, $\\rho_A(\\psi(b))\\le\\rho_B(b)$ for all $b\\in B$. On a Tate algebra $K\\langle U_1,\\ldots,U_d\\rangle$ the function $\\rho$ equals the Gauss norm. Reducedness is not assumed; $\\rho$ may vanish on nonzero nilpotents.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.2, Corollary 11, printed p.14; Appendix Corollary 2 and Theorem 3 on unique extensions of absolute values; Section 1.4, definition before Proposition 5 and Propositions 5-8, printed pp.23-24. Primary PDF read online 2026-10-24; archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective presentation $q:T_r\\to A$. For a maximal ideal $\\mathfrak m$ of $A$, its inverse image $\\mathfrak n$ is maximal because $T_r/\\mathfrak n\\cong A/\\mathfrak m$. Apply [lem-per-tate-maximal-residue-evaluation] to $\\mathfrak n$: this quotient is finite over $K$, complete, and has a unique extending nonarchimedean absolute value. Transport that value through the displayed $K$-isomorphism. Thus every residue value in the statement is defined, independently of the presentation. Since $A\\ne0$, [lem-weil-pbc-proper-ideal-contained-in-maximal] also gives a maximal ideal of $A$.",
+   "uses": [
+    "lem-per-tate-maximal-residue-evaluation",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2 Corollary 11; Section 1.4 definition before Proposition 5; Appendix Corollary 2 and Theorem 3"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak m$ and the corresponding $\\mathfrak n\\subset T_r$. By [lem-per-tate-maximal-residue-evaluation] its coordinate residues $x_i$ in $L=T_r/\\mathfrak n$ satisfy $|x_i|\\le1$, and the quotient map is evaluation by a convergent series. Apply [lem-per-tate-banach-substitution] with $B=L$ and this tuple. Its hypotheses hold because $L$ is a complete nonarchimedean valued field. It gives $|q(f)\\bmod\\mathfrak m|\\le\\|f\\|_G$ for every $f$. For a fixed lift $f$ of $a$ this bounds all its residue values by the finite real $\\|f\\|_G$. They are nonnegative and form a nonempty set by step 1, so their supremum $\\rho_A(a)$ exists in $\\mathbf R_{\\ge0}$.",
+   "uses": [
+    "lem-per-tate-maximal-residue-evaluation",
+    "lem-per-tate-banach-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Proposition 8; evaluation estimate of Section 1.2 Proposition 5"
+   }
+  },
+  {
+   "text": "The estimate of step 2 holds for every lift, hence $\\rho_A(a)\\le\\inf_{q(f)=a}\\|f\\|_G$; the set of lifts is nonempty by surjectivity and its norms are bounded below by zero. Pointwise field identities also give $\\rho_A(0)=0$, $\\rho_A(1)=1$, $\\rho_A(ca)=|c|\\rho_A(a)$, $\\rho_A(a+a_1)\\le\\max(\\rho_A(a),\\rho_A(a_1))$, and $\\rho_A(aa_1)\\le\\rho_A(a)\\rho_A(a_1)$: each right side bounds the corresponding residue values, and taking suprema gives these inequalities. These verifications explain the word seminorm without assuming reducedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 definition before Proposition 5 and Proposition 8"
+   }
+  },
+  {
+   "text": "For $n\\ge1$, multiplicativity in each residue field gives $|a^n\\bmod\\mathfrak m|=|a\\bmod\\mathfrak m|^n$. Put $s=\\rho_A(a)$ and $t=\\rho_A(a^n)$. Thus $t\\le s^n$. Conversely, if $t<s^n$, then $s>0$ and continuity of $x\\mapsto x^n$ permits $0\\le u<s$ with $t<u^n$. Since $u$ is not an upper bound of the residue values of $a$, some such value is greater than $u$, and its $n$-th power is greater than $t$, a contradiction. Hence $t=s^n$. A nilpotent $a$ has zero image in every field quotient, so $\\rho_A(a)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Proposition 5 and the seminorm qualification before it"
+   }
+  },
+  {
+   "text": "Let $\\psi:B\\to A$ be any unital $K$-algebra homomorphism and $\\mathfrak m\\subset A$ maximal. Set $\\mathfrak n=\\psi^{-1}\\mathfrak m$. Then $B/\\mathfrak n$ injects into the finite-dimensional $K$-field $L=A/\\mathfrak m$. It is a finite-dimensional domain over $K$, so it is a field: multiplication by any nonzero element is injective on this finite-dimensional vector space, hence surjective, giving an inverse. Therefore $\\mathfrak n$ is maximal. The absolute value of $L$ restricted to this field is its unique extending absolute value from step 1 (applied to $B$). Thus $|\\psi(b)\\bmod\\mathfrak m|=|b\\bmod\\mathfrak n|\\le\\rho_B(b)$. Taking the supremum over $\\mathfrak m$ proves contractivity. No continuity of $\\psi$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Proposition 6 and its proof"
+   }
+  },
+  {
+   "text": "Now let $f\\in T_d$. The identity presentation and step 2 give $\\rho_{T_d}(f)\\le\\|f\\|_G$. If $f\\ne0$, its coefficients tending to zero imply that some coefficient $c\\ne0$ has $|c|=\\|f\\|_G$: only finitely many coefficients have absolute value at least half any chosen positive coefficient value, and the largest of these dominates all the rest. Set $g=c^{-1}f$, so $\\|g\\|_G=1$. In $T_{d+1}=K\\langle X_1,\\ldots,X_d,Y\\rangle$ put $h=1-Yg$. Its constant coefficient is $1$ and $\\|h-1\\|_G=1$. Hence [lem-trf-tate-unit-coefficient-criterion] says $h$ is not a unit. The principal ideal $(h)$ is proper, so [lem-weil-pbc-proper-ideal-contained-in-maximal] supplies a maximal ideal $\\mathfrak M$ containing it.",
+   "uses": [
+    "lem-trf-tate-unit-coefficient-criterion",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Proposition 7; auxiliary hypersurface argument using Section 1.2 Corollary 4"
+   }
+  },
+  {
+   "text": "Apply [lem-per-tate-maximal-residue-evaluation] to $T_{d+1}/\\mathfrak M=L$. In this complete finite extension the coordinate residues $(x_1,\\ldots,x_d,y)$ all have absolute value at most $1$. The equation $h=0$ gives $y\\,g(x)=1$. The first $d$ coordinates define $e:T_d\\to L$ by [lem-per-tate-banach-substitution], and $|e(g)|\\le1$. Compatibility with evaluation of $h$ follows term by term from the convergent sum formula: $e(g)$ is the residue of the series $g$ viewed in $T_{d+1}$. Consequently $1=|y||e(g)|$ forces $|e(g)|=1$. The image of $e$ is a finite-dimensional domain over $K$, hence a field by the multiplication argument of step 5. Thus $\\ker e$ is maximal and its quotient absolute value agrees with that induced from $L$ by uniqueness. It follows that $\\rho_{T_d}(f)\\ge|e(f)|=|c|=\\|f\\|_G$. Together with the upper bound this proves equality. If $f=0$, both sides are zero; the construction also applies for $d=0$.",
+   "uses": [
+    "lem-per-tate-maximal-residue-evaluation",
+    "lem-per-tate-banach-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Proposition 7; Section 1.2 Corollary 12 and the evaluation argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-tate-maximal-residue-evaluation",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-per-tate-banach-substitution",
+  "lem-trf-tate-unit-coefficient-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4 Propositions 5-8 reconstructed after reading the primary PDF online; the archival document is absent. The Gauss lower bound uses the auxiliary hypersurface 1-Yg rather than algebraic-closure residue lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affinoid|supremum.*[Tt]ate|[Tt]ate.*supremum|residue.*norm",
+   "results": {
+    "t": "2026-10-24T08:04:09Z",
+    "tool": "grep",
+    "query": "affinoid|supremum.*[Tt]ate|[Tt]ate.*supremum|residue.*norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/LSeries/PrimesInAP.lean",
+     "Mathlib/Order/Hom/BoundedLattice.lean"
+    ],
+    "digest": "21b979c363935cc2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and its power rules concern algebraic field extensions; the generic contraction lemmas require boundedness and do not identify maximal-ideal supremum with a Tate Gauss norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"pow\"",
+   "results": {
+    "t": "2026-10-24T08:04:10Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"pow\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "isPowMul_spectralNorm",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots"
+    ],
+    "digest": "add53642984c5882"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and its power rules concern algebraic field extensions; the generic contraction lemmas require boundedness and do not identify maximal-ideal supremum with a Tate Gauss norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affinoid algebra supremum norm is power multiplicative and contractive under algebra homomorphisms",
+   "results": {
+    "t": "2026-10-24T08:04:10Z",
+    "tool": "leansearch",
+    "query": "Affinoid algebra supremum norm is power multiplicative and contractive under algebra homomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "contraction_of_isPowMul_of_boundedWrt",
+     "contraction_of_isPowMul",
+     "MulAlgebraNormClass",
+     "AlgHom.norm_apply_le_self",
+     "MulAlgebraNorm",
+     "BoundedContinuousFunction.instNormedAlgebra",
+     "MulAlgebraNorm.ctorIdx",
+     "AlgHom.norm_apply_le_self_mul_norm_one"
+    ],
+    "digest": "76ce671b8ff9166c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and its power rules concern algebraic field extensions; the generic contraction lemmas require boundedness and do not identify maximal-ideal supremum with a Tate Gauss norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supremum seminorm on an affinoid algebra over a complete valued field equals the maximum residue-field absolute value and is functorially contractive",
+   "results": {
+    "t": "2026-10-24T08:04:14Z",
+    "tool": "leanfinder",
+    "query": "Supremum seminorm on an affinoid algebra over a complete valued field equals the maximum residue-field absolute value and is functorially contractive",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralMulAlgNorm",
+     "spectralNorm.seminormedAddCommGroup",
+     "isNonarchimedean_spectralNorm",
+     "spectralAlgNorm",
+     "spectralNorm.normedField",
+     "spectralMulAlgNorm_def",
+     "spectralNorm.metricSpace",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "b9911b20c2cc05d7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and its power rules concern algebraic field extensions; the generic contraction lemmas require boundedness and do not identify maximal-ideal supremum with a Tate Gauss norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The supremum of absolute values at maximal ideals of an affinoid algebra is a power multiplicative seminorm dominated by every quotient norm and equals the Gauss norm on a Tate algebra",
+   "results": {
+    "t": "2026-10-24T08:04:15Z",
+    "tool": "leanfinder",
+    "query": "The supremum of absolute values at maximal ideals of an affinoid algebra is a power multiplicative seminorm dominated by every quotient norm and equals the Gauss norm on a Tate algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm_unique",
+     "spectralAlgNorm",
+     "norm_le_spectralNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralMulAlgNorm",
+     "spectralMulAlgNorm_def",
+     "spectralAlgNorm_def"
+    ],
+    "digest": "63ba1514a09558f9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm and its power rules concern algebraic field extensions; the generic contraction lemmas require boundedness and do not identify maximal-ideal supremum with a Tate Gauss norm."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|supremum.*seminorm|gaussNorm",
+   "results": {
+    "t": "2026-10-24T08:38:44Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|supremum.*seminorm|gaussNorm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/Polynomial/GaussNorm.lean",
+     "Mathlib/RingTheory/Polynomial/GaussNorm.lean",
+     "Mathlib/RingTheory/Polynomial/GaussNorm.lean"
+    ],
+    "digest": "92f1836532ae35ea"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm is for algebraic field extensions, not arbitrary affinoid quotients. The generic contraction lemmas assume boundedness; the residue-value maximum and Tate comparison are absent. Read SpectralNorm.lean:628-641 and IsPowMulFaithful.lean:37-66."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supremum seminorm of maximal ideal residue values on an affinoid algebra is dominated by quotient Gauss norms and contractive under algebra homomorphisms",
+   "results": {
+    "t": "2026-10-24T08:38:44Z",
+    "tool": "leansearch",
+    "query": "Supremum seminorm of maximal ideal residue values on an affinoid algebra is dominated by quotient Gauss norms and contractive under algebra homomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "contraction_of_isPowMul_of_boundedWrt",
+     "AlgHom.norm_apply_le_self",
+     "Seminorm.instSupSet",
+     "contraction_of_isPowMul",
+     "AlgHom.norm_apply_le_self_mul_norm_one",
+     "Seminorm.sup_apply",
+     "Seminorm.coe_sup",
+     "Ideal.Quotient.norm_mk_le"
+    ],
+    "digest": "1393d562945877e2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm is for algebraic field extensions, not arbitrary affinoid quotients. The generic contraction lemmas assume boundedness; the residue-value maximum and Tate comparison are absent. Read SpectralNorm.lean:628-641 and IsPowMulFaithful.lean:37-66."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"pow\"",
+   "results": {
+    "t": "2026-10-24T08:38:45Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"pow\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "isPowMul_spectralNorm",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots"
+    ],
+    "digest": "add53642984c5882"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm is for algebraic field extensions, not arbitrary affinoid quotients. The generic contraction lemmas assume boundedness; the residue-value maximum and Tate comparison are absent. Read SpectralNorm.lean:628-641 and IsPowMulFaithful.lean:37-66."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supremum of residue field absolute values on an affinoid algebra is finite power multiplicative and contractive and equals the Gauss norm on Tate algebras",
+   "results": {
+    "t": "2026-10-24T08:38:46Z",
+    "tool": "leanfinder",
+    "query": "Supremum of residue field absolute values on an affinoid algebra is finite power multiplicative and contractive and equals the Gauss norm on Tate algebras",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "spectralAlgNorm",
+     "spectralMulAlgNorm",
+     "spectralNorm_unique",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm_def",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional"
+    ],
+    "digest": "9b82953dbd2b5c55"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm is for algebraic field extensions, not arbitrary affinoid quotients. The generic contraction lemmas assume boundedness; the residue-value maximum and Tate comparison are absent. Read SpectralNorm.lean:628-641 and IsPowMulFaithful.lean:37-66."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximum modulus principle on a Tate algebra and functoriality of the affinoid spectral seminorm defined by maximal ideals",
+   "results": {
+    "t": "2026-10-24T08:39:34Z",
+    "tool": "leanfinder",
+    "query": "The maximum modulus principle on a Tate algebra and functoriality of the affinoid spectral seminorm defined by maximal ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm",
+     "spectralMulAlgNorm",
+     "spectralAlgNorm",
+     "spectralAlgNorm_def",
+     "norm_le_spectralNorm",
+     "spectralMulAlgNorm_def",
+     "spectralNorm_unique",
+     "algNormFromConst_def"
+    ],
+    "digest": "da293199da56b245"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm is for algebraic field extensions, not arbitrary affinoid quotients. The generic contraction lemmas assume boundedness; the residue-value maximum and Tate comparison are absent. Read SpectralNorm.lean:628-641 and IsPowMulFaithful.lean:37-66."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-powerbounded-integral",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Supremum seminorm estimates on affinoid algebras.",
+   "via": [
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-supremum-seminorm-calculus",
+  "worker": "stage1",
+  "group": "NC",
+  "summary": "Statement unchanged. Reused Tate maximal-residue evaluation and Banach substitution, added one statement-only Tate unit criterion, and proved quotient domination, power multiplicativity, functorial contraction and the Gauss comparison. The latter is derived by a maximal ideal containing 1-Yg; it is not delegated as a new clause node. No project Lean attachment.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Supremum seminorm estimates on affinoid algebras. Steps 1-7 expand this historical analytic ingredient below node level; the current curve unit and contracting-correspondence route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-per-tate-maximal-residue-evaluation",
+    "why": "Generic Tate residue-field/evaluation theorem with exactly the same complete nontrivially valued field hypotheses; this historical analytic branch has no separate residue-evaluation node."
+   },
+   {
+    "node": "lem-per-tate-banach-substitution",
+    "why": "Generic contractive substitution in a complete nonarchimedean algebra, applied only to finite residue fields; no step of the current unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-tate-maximal-residue-evaluation",
+  "lem-per-tate-banach-substitution"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NC-a4b1908c8",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-a4b1908c8 (reviewer sub-agent of L); spot-checked: I read Bosch, Lectures on Formal and Rigid Geometry, online and checked it with pdftotext: 1.2 Cor.4/5/11/12 and 1.4 Def.1, the sup-norm definition and Props.5-8 (pp.23-24). The item's clauses match the source: Prop.8 gives the bound by the residue norm and finiteness, Prop.5 power multiplicativity, Prop.6 contraction, Prop.7 sup = Gauss on T_n. The statement is unchanged. The item had no proof on the base, so the re-split comparison does not apply. Steps 1-7 are correct against the cited statements. The residue node gives finiteness, a unique extending value and evaluation by convergent sums. Banach substitution with B=L applies because its absolute value extends |.|_K. Steps 3-5 are genuinely elementary; step 5 is Bosch's own proof of Prop.6. Steps 6-7 replace Bosch's maximum principle over the algebraic closure with this argument: g=c^{-1}f, h=1-Yg has constant 1 and tail norm 1, so it is a nonunit; a maximal ideal M contains it, y*e(g)=1 forces |e(g)|=1, and ker e is maximal because its image is a finite domain. This is valid, and the d=0 and f=0 cases hold. The new node lem-trf-tate-unit-coefficient-criterion is exactly Bosch 1.2 Cor.4, second sentence. It is self-contained and statement-only. I tested it on r=0, 1+pX, 1-X, X and p+X over Q_p. It is not a clause of the item. I read all 22 DAG nodes that mention the Gauss norm and found no duplicate. Its blueprint ancestry and created.item are correct. I accept the tool_uses of lem-per-tate-maximal-residue-evaluation and lem-per-tate-banach-substitution: they are generic Tate facts used under the same hypotheses. The worker wrote those entries themselves, against C8, but the content is right. No SGA source is cited, and I found no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidSupremumSeminormCalculus",
+  "declaration": "RestrictedSeries.affinoid_supremum_seminorm_calculus",
+  "declarations": [
+   "RestrictedSeries.affinoidResidueValues",
+   "RestrictedSeries.affinoidSupremum",
+   "RestrictedSeries.affinoid_supremum_seminorm_calculus"
+  ],
+  "file": "lean/Sheaf/RingTheory/AffinoidSupremumSeminormCalculus.lean",
+  "statement": "theorem affinoid_supremum_seminorm_calculus (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (A : Type v) [CommRing A] [Nontrivial A] [Algebra K A] (hA : ∃ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* A), Function.Surjective q ∧ q.comp (constants K r) = algebraMap K A) : (∀ (m : Ideal A), m.IsMaximal → Module.Finite K (A ⧸ m) ∧ ∃! v : AbsoluteValue (A ⧸ m) ℝ, ∀ c : K, v (Ideal.Quotient.mk m (algebraMap K A c)) = ‖c‖) ∧ (∀ a : A, IsLUB (affinoidResidueValues K A (algebraMap K A) a) (affinoidSupremum K A (algebraMap K A) a) ∧ 0 ≤ affinoidSupremum K A (algebraMap K A) a ∧ ∀ n : ℕ, 1 ≤ n → affinoidSupremum K A (algebraMap K A) (a ^ n) = affinoidSupremum K A (algebraMap K A) a ^ n) ∧ (∀ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* A), Function.Surjective q → q.comp (constants K r) = algebraMap K A → ∀ a : A, affinoidSupremum K A (algebraMap K A) a ≤ sInf {t : ℝ | ∃ f, q f = a ∧ t = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) f.val}) ∧ (∀ (B : Type w) [CommRing B] [Nontrivial B] [Algebra K B], (∃ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* B), Function.Surjective q ∧ q.comp (constants K r) = algebraMap K B) → ∀ (ψ : B →ₐ[K] A) (b : B), affinoidSupremum K A (algebraMap K A) (ψ b) ≤ affinoidSupremum K B (algebraMap K B) b) ∧ (∀ (d : ℕ) (f : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))), affinoidSupremum K _ (constants K d) f = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin d ↦ 1) f.val) ∧ (∀ a : A, IsNilpotent a → affinoidSupremum K A (algebraMap K A) a = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7a960476",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item node unchanged except lean (diffed against side-live); lean.statement verbatim in the file. Hypotheses match the node: K is NontriviallyNormedField + IsUltrametricDist + CompleteSpace; A is CommRing + Nontrivial + Algebra K with an existential surjective presentation from the dependency's exact IsRestricted.subring (radius 1) and constants, scalar-compatible; no norm, completeness or reducedness added (IsAffinoidQuotient correctly not used). All conclusion clauses present: Module.Finite K (A/m) and a unique extending AbsoluteValue; IsLUB and nonnegativity of the real supremum; power rule for n>=1; bound by sInf of Gauss norms of lifts for every presentation; contractivity for every K-algebra map from another presented B in universe w; equality with the Gauss norm on every Tate algebra including d=0; zero on nilpotents. Both helpers are real definitions; uniqueness of the extension makes the residue set choice-free. No duplicate in lean/Sheaf, WeilConjectures or Mathlib (spectralNorm is a different notion). Docstrings carry the source place and blueprint; proof docstring follows the node's steps (6-7 merged); proof is only sorry; report has both required sections (the second reading is the author's own pass). Not recompiled because no file changed."
+ }
+}

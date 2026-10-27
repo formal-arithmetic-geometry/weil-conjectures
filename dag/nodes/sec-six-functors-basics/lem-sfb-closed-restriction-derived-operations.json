@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-closed-restriction-derived-operations",
+ "kind": "statement",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1) supplies bounded-below filtered continuity; agent-formulated simultaneous compatibility of actual closed restriction with triangles and products, using the usual K-injective construction. The complete combined statement is not asserted to be quoted verbatim from HRS."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-triangulated-category",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Transfer exact products from sectionwise pro-etale module sheaves through the internal-module equivalence. The existing module-object category is Grothendieck abelian. Apply immersion limit preservation to the closed immersion t on underlying abelian sheaves; lift preservation to module objects through the conservative forgetful functor. Extension along the canonical coefficient isomorphism is naturally isomorphic to inverse scalar restriction, hence preserves products. The existing pullback adjunction gives preservation of colimits. Sections preserve products by their definition as forgetful functor, sheaf inclusion and evaluation.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-pe-products-exact",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-condensed-module-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA (lemma-closed-immersion), clause (1); module version through the cited equivalence and module adjunction. K-injectives: injectives.tex, Tag 079P (theorem-K-injective-embedding-grothendieck). Product sections: universal property of module products."
+   }
+  },
+  {
+   "text": "Use the existing source theorem Functor.rightDerivedPullback_app_Q_obj for E=t^*, F=Gamma(T,-), G=Gamma(T0,-), and actual underived section restriction beta. Naturality of rho along Q(s), together with naturality of E.mapDerivedCategoryFactors, transports its K-injective formula to every specified first quasi-isomorphism s. Thus both resolution choices are arbitrary. The existing right-derived and exact-functor triangulated structures give additivity and triangulatedness. The proved source-library helper unit_commShift_all gives compatibility of the right-derived units with signed shifts. The auxiliary defining rightDerivedPullback therefore commutes with shifts, and the unit equation descends this compatibility through Qh. Ordinary naturality gives the first two triangle squares. Naturality at the connecting arrow followed by the shift equation gives the third square.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05SE, 070Y and 015F. Existing source-library ShortExactPullback two-resolution formula and derived-unit shift helper in DerivedDirectImageKInjectiveShiftComparisonAux; no arbitrary derived-pair transfer is needed."
+   }
+  },
+  {
+   "text": "The existing source-library theorems CochainComplex.isKInjective_of_isLimitFan and DerivedCategory.isLimitFanMkQObjOfIsKInjective construct products from K-injective representatives. Exact products in Ab make Q preserve the corresponding termwise product cone. For an additive product-preserving F, map this cone by F and compare its localization with RF using the right-derived unit, which is invertible on K-injective complexes. Naturality of the unit identifies all projection maps. Transport through the representative isomorphisms proves that RF preserves products of any fixed indexing set, including the empty set.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6 (lemma-product-K-injective), applied to Ab; the coordinatewise kernel/image calculation is elementary."
+   }
+  },
+  {
+   "text": "Apply step 3 to module sections on T and T0. Exact products of their module-object categories were established in step 1. The proved source-library theorem Functor.preservesLimitsOfShape_discrete_mapDerivedCategory applies to exact, product-preserving t^*, since products are exact in both module categories. Therefore its derived functor preserves products. Composing with derived sections on T0 gives preservation by Psi. The K-injective representative construction also supplies existence of every required source product. These arguments preserve the original projection cones and never assume that t^* preserves K-injectives.",
+   "uses": [
+    "det-pe-products-exact",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-sfb-condensed-module-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6; existing source-library Products and ProductsMapDerivedCategory theorems, and det-pe-products-exact. The generic proved exact-functor product theorem replaces det-pe-products-derived."
+   }
+  },
+  {
+   "text": "Let p_i:prod K_i->K_i. Naturality of rho gives Psi(p_i) rho_(prod K_i)=rho_(K_i) Phi(p_i). After the projection-induced comparisons of step 4, this is exactly equality of the i-th projections of rho_(prod K_i) and prod rho_(K_i). The product universal property proves their equality (also for the empty family).",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent assembly: naturality from step 2 and the product universal property."
+   }
+  },
+  {
+   "text": "For the given strict filtered diagram C_i with common termwise bound a, step 1 identifies t^*(colim C_i) with colim t^*C_i by the original cocone. Both diagrams retain that termwise bound: an additive functor sends zero terms to zero. Apply the global-sections clause of lem-weil-pbc-condensed-qcqs-pushforward-continuity first on T and then on T_0 to the diagram t^*C_i. Both schemes are qcqs by hypothesis; the coefficient is the same arbitrary commutative condensed ring, and both diagrams and sites are small. Its common cohomological-bound hypothesis follows from the common termwise bound; the good truncation at a is canonically the original complex since the term in degree a-1 is zero. The cited theorem gives the two cocone-induced comparisons as quasi-isomorphisms of functorial bounded-below section representatives, independent of quasi-isomorphic replacements. Their Q-images are the two required isomorphisms in D(Ab).",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), and the first paragraph of its proof (global sections), through the existing normalized module-continuity theorem."
+   }
+  },
+  {
+   "text": "The existing functorial degreewise-injective K-injective replacement on a Grothendieck abelian category supplies a functorial monic injective embedding M -> I(M[0])^0: evaluate its monomorphic augmentation at degree zero. Apply the existing functorial bounded injective-resolution theorem on the source and target module categories. These replacements preserve every common termwise lower bound; their complexes are K-injective by Mathlib CochainComplex.isKInjective_of_injective. Taking sections of the first replacement defines P. Pull back that replacement, apply the target replacement, then take sections to define R. Underived section restriction followed by the second augmentation gives a natural chain transformation P -> R. The two-resolution formula of step 2 normalizes this transformation with the actual rho. The colimit complex has the same strict lower bound, since evaluation preserves colimits and a colimit of zero objects is zero. Evaluate the two functors and their chain transformation at this colimit and at its original cocone legs. Naturality gives the two normalized cocone equations and the commuting chain square. Step 6 gives the comparison isomorphisms for every normalized representative choice.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-functorial-bounded-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141 (lemma-functorial-injective-resolutions); lemma-bounded-below-injectives-K-injective; HRS Lemma 5.3(1), via the cited continuity theorem. Agent cocone-map assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-module-sections",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-products-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "K3 stage-3 proof, 2026-10-24: HRS Lemma 5.3(1) via normalized module continuity; Stacks 09AA, 0BK6, 015F and functorial bounded injective resolutions. Existing source-library derived-pullback formula, signed-unit compatibility and generic product theorems replace the extra statement-only transformation/product dependencies. Private proved glue keeps all projection and cocone normalizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(restriction|pullback).*(product|filteredColimit)|(product|filteredColimit).*restriction",
+   "results": "{\"t\": \"2026-10-23T22:26:20Z\", \"tool\": \"grep\", \"query\": \"(restriction|pullback).*(product|filteredColimit)|(product|filteredColimit).*restriction\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"5f184b2ab69d5eb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived global sections or structural sheaf limits, not the normalized module-derived restriction and all the asserted compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections restriction is a natural exact transformation commuting with products and bounded below filtered colimits on qcqs pro etale module sites",
+   "results": "{\"t\": \"2026-10-23T22:26:20Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections restriction is a natural exact transformation commuting with products and bounded below filtered colimits on qcqs pro etale module sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes\", \"CategoryTheory.Sheaf.natTransΓRes\", \"CategoryTheory.Sheaf.ΓRes_naturality\", \"CategoryTheory.Sheaf.natTransΓRes_app\", \"CategoryTheory.Sheaf.ΓRes_map\", \"PresheafOfModules.restriction_app\", \"SheafOfModules.sectionsFunctor\", \"CategoryTheory.Sheaf.ΓObjEquivSections_naturality\"], \"digest\": \"44e8244cf58884c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived global sections or structural sheaf limits, not the normalized module-derived restriction and all the asserted compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"prod\"",
+   "results": "{\"t\": \"2026-10-23T22:26:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived global sections or structural sheaf limits, not the normalized module-derived restriction and all the asserted compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The actual module derived restriction along a closed immersion of qcqs schemes is compatible with distinguished triangles countable products and uniformly bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-23T22:26:21Z\", \"tool\": \"leanfinder\", \"query\": \"The actual module derived restriction along a closed immersion of qcqs schemes is compatible with distinguished triangles countable products and uniformly bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\"], \"digest\": \"8562fdbdf1f2a925\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give underived global sections or structural sheaf limits, not the normalized module-derived restriction and all the asserted compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(NatTrans|commShift)|NatTrans.*rightDerived",
+   "results": "{\"t\": \"2026-10-23T22:56:10Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*(NatTrans|commShift)|NatTrans.*rightDerived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"fe981bef255be5ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits give a derived descent or a localization comparison, ordinary objectwise derived functors, or separate shift infrastructure; none states the two-resolution formula and its shift compatibility for arbitrary exact E without preservation of K-injectives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of right derived functors along an exact functor is compatible with shifts and distinguished triangles",
+   "results": "{\"t\": \"2026-10-23T22:56:10Z\", \"tool\": \"leansearch\", \"query\": \"Canonical comparison of right derived functors along an exact functor is compatible with shifts and distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.IsRightDerivedFunctor.recOn\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.Functor.IsRightDerivedFunctor\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\"], \"digest\": \"45c0c42dd66e0566\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits give a derived descent or a localization comparison, ordinary objectwise derived functors, or separate shift infrastructure; none states the two-resolution formula and its shift compatibility for arbitrary exact E without preservation of K-injectives"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"NatTrans\"",
+   "results": "{\"t\": \"2026-10-23T22:56:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctor\\\", \\\"NatTrans\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRightDerivedFunctor.postcomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.instCompShiftFunctorPostcomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.precomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.instCompShiftFunctorPrecomposeShiftNatTrans\", \"CategoryTheory.Functor.IsRightDerivedFunctor.natTrans_commShift\", \"CategoryTheory.Functor.IsRightDerivedFunctor.postcomposeShiftNatTrans_app\", \"CategoryTheory.Functor.IsRightDerivedFunctor.precomposeShiftNatTrans_app\", \"CategoryTheory.NatTrans.CommShift.of_isRightDerivedFunctor\"], \"digest\": \"9d479d53ff09a249\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits give a derived descent or a localization comparison, ordinary objectwise derived functors, or separate shift infrastructure; none states the two-resolution formula and its shift compatibility for arbitrary exact E without preservation of K-injectives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Actual closed inverse image of pro etale module sheaves and derived global sections commute with arbitrary products distinguished triangles and uniformly bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-23T22:56:11Z\", \"tool\": \"leanfinder\", \"query\": \"Actual closed inverse image of pro etale module sheaves and derived global sections commute with arbitrary products distinguished triangles and uniformly bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafProfinite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondAb.ofSheafLightProfinite\", \"SheafOfModules.Presentation.map_π_eq\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.IsSolid.isIso_solidification_map\"], \"digest\": \"70b3b9beeb6f18b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the inspected hits give a derived descent or a localization comparison, ordinary objectwise derived functors, or separate shift infrastructure; none states the two-resolution formula and its shift compatibility for arbitrary exact E without preservation of K-injectives"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-image-rigidity-from-model-comparisons",
+  "date": "2026-10-24",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "title": "Actual closed restriction and derived products, triangles and bounded filtered colimits",
+ "statement": "Let $\\Lambda$ be any commutative condensed ring, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, and use the ordinary uncompleted derived categories and abelian-group-valued module-derived sections [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Sites and every indexing category are small in the fixed universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $t:T_0\\hookrightarrow T$ be a closed immersion of quasi-compact quasi-separated schemes, with no quasi-compactness condition on its complementary open [def-pc-scheme, def-weil-closed-immersion, def-weil-pbc-scheme-conventions]. Identify $t^*\\Lambda_T$ with $\\Lambda_{T_0}$ by the canonical coefficient isomorphism. Define\n$$\\Phi(K)=R\\Gamma(T,K),\\qquad \\Psi(K)=R\\Gamma(T_0,t^*K),\\qquad \\rho_K:\\Phi(K)\\longrightarrow\\Psi(K).$$\nHere $t^*$ is the exact module inverse image, and $\\rho$ is the actual derived restriction: on a complex resolve $K\\to I$ by a K-injective complex on $T$, resolve $t^*I\\to H$ by a K-injective complex on $T_0$, and use $\\Gamma(T,I)\\to\\Gamma(T_0,t^*I)\\to\\Gamma(T_0,H)$, where the first arrow is section restriction from the pullback adjunction unit. These arrows specify the canonical derived transformation independently of the resolution choices.\n\nThe functors $\\Phi,\\Psi$ are additive and triangulated and $\\rho$ commutes with their shift comparisons and is a morphism between their images of every distinguished triangle, including the connecting arrow [def-weil-triangulated-category]. For every small family $(K_i)$ the projection-induced comparisons\n$$\\Phi(\\prod_iK_i)\\xrightarrow{\\sim}\\prod_i\\Phi(K_i),\\qquad\\Psi(\\prod_iK_i)\\xrightarrow{\\sim}\\prod_i\\Psi(K_i)$$\nare isomorphisms, and under these specified comparisons $\\rho_{\\prod_iK_i}=\\prod_i\\rho_{K_i}$ [def-weil-category-product]. For every strict small filtered diagram $(C_i^\\bullet)$ of $\\Lambda_T$-module complexes with one common termwise lower bound, put $C^\\bullet=\\varinjlim_iC_i^\\bullet$. Then the cocone-induced comparisons\n$$\\varinjlim_i\\Phi(QC_i^\\bullet)\\xrightarrow{\\sim}\\Phi(QC^\\bullet),\\qquad\\varinjlim_i\\Psi(QC_i^\\bullet)\\xrightarrow{\\sim}\\Psi(QC^\\bullet)$$\nare isomorphisms and identify $\\varinjlim_i\\rho_{QC_i^\\bullet}$ with $\\rho_{QC^\\bullet}$ [def-weil-pbc-category-colimit, def-weil-abstract-derived-category]. The colimits here mean termwise filtered colimits of functorial bounded-below section-complex representatives; their value is independent of quasi-isomorphic replacements. No preservation of K-injectives by $t^*$ is assumed. No model, constructibility, rigidity, or coefficient-finiteness hypothesis is imposed.",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Image rigidity after all supported finite-model comparisons have been supplied. Generic compatibility input for actual closed restriction. Agent formulation from Hemo–Richarz–Scholbach Lemma 5.3(1), Stacks Tag 09AA (lemma-closed-immersion) and Tag 015F (lemma-right-derived-exact-functor); the product/triangle normalization is not quoted as a theorem of HRS.",
+   "via": [
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-restriction-derived-operations",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-condensed-ring statement unchanged. Reused the existing exact immersion limit theorem, K-injective product theorem and normalized qcqs module continuity. Added one generic exact-input derived-transformation lemma, with an explicit two-resolution and signed-shift statement. Wrote projection and cocone arguments for the actual rho. All indexing and lower-bound hypotheses and empty cases were checked.",
+  "blueprint": "Latest det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement.proof.md (2), closed-complement test. This generic auxiliary supports the given closed-fibre image-rigidity route; no compactification route or coefficient hypothesis is changed.",
+  "tool_uses": [
+   {
+    "node": "det-pe-products-derived",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic module/derived-category tool used with its stated hypotheses in this auxiliary; the compactification-coherence unit does not itself supply this general infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "why": "Generic functorial bounded-below resolution infrastructure is used to represent the actual restriction as a natural chain map; the unit does not supply this infrastructure."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic functorial bounded-below resolution infrastructure is used to represent the actual restriction as a natural chain map; the unit does not supply this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-functorial-bounded-injective-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-bc89f4d5b",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-bc89f4d5b (reviewer sub-agent of L); spot-checked: I read the whole split: the item (statement unchanged, 7 steps), the new statement-only node lem-sfb-exact-input-derived-transformation and the report, against HRS Lemma 5.3(1) and its proof, Stacks 09AA, and the full statement of every cited node. Step 1: lem-weil-pbc-proetale-immersion-limit-preservation applies with c=α_t, so t^* is exact and preserves products, and the sk-def adjunction makes it a left adjoint. Steps 3-4: products of abelian-group complexes are coordinatewise, lem-pc-ringed-space-product-kinjective gives the product of K-injectives, and det-pe-products-derived applies on T and T_0. Together these show RΓ and D(t^*) preserve derived products without assuming t^* preserves K-injectives. Step 5 is naturality plus the product universal property. Step 6: a common termwise bound gives τ_{≥a}C_i=C_i because coker(0→C^a)=C^a, and the continuity node applies on both qcqs schemes, on T_0 to the diagram t^*C_i with colim t^*C_i=t^*C. Step 7: J(M)=I(M[0])^0 is a monic functorial injective embedding, because M→Z^0→H^0 is an isomorphism. With the functorial bounded injective resolution it gives a natural chain representative of ρ, and t^*C→I_0(t^*I(C)) is an admissible representative, so the colimit square commutes. New node: true. τ exists and is unique by the universal property in def-sfb-right-derived-functor, the two-resolution formula follows from naturality of η^G at j, and the shift equation from uniqueness. It is not a duplicate: lem-sfb-exact-square-right-derived-unit needs an invertible c, while β here is a non-invertible restriction; the other comparison nodes need an iso or K-injective preservation. The pinned Mathlib has no derived CommShift, so it is not a Mathlib leaf. It is generic and strictly smaller than the item. No cycle (closure walk of 814 nodes), proof_deps equals the union of the step uses, no SGA source. The nine declared tool_uses are generic infrastructure and are accepted. Advisory: the new node has no lean_audit key, as many new nodes on this base do."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedRestrictionDerivedOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closed_restriction_derived_operations",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionPhi",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionPsi",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedRestrictionRho",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ClosedRestrictionProducts",
+   "AlgebraicGeometry.ProEtale.CondensedRing.HasClosedRestrictionFilteredModel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ClosedRestrictionFilteredRepresentatives",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closed_restriction_derived_operations"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedRestrictionDerivedOperations.lean",
+  "statement": "theorem closed_restriction_derived_operations [IsClosedImmersion t] [CompactSpace T] [QuasiSeparatedSpace T] [CompactSpace T₀] [QuasiSeparatedSpace T₀] : (closedRestrictionPhi Λ T).Additive ∧ (closedRestrictionPsi Λ t).Additive ∧ (closedRestrictionPhi Λ T).IsTriangulated ∧ (closedRestrictionPsi Λ t).IsTriangulated ∧ NatTrans.CommShift (closedRestrictionRho Λ t) ℤ ∧ (∀ (K I : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ) [I.IsKInjective] (s : K ⟶ I) [QuasiIso s] (H : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T₀) Ab.{u + 1}) (condensedRingObj Λ T₀)) ℤ) [H.IsKInjective] (j : ((upperStar Λ t).mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ H) [QuasiIso j], (closedRestrictionRho Λ t).app (DerivedCategory.Q.obj K) ≫ (closedRestrictionPhi Λ T₀).map ((upperStar Λ t).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map (((upperStar Λ t).mapHomologicalComplex (ComplexShape.up ℤ)).map s ≫ j)) ≫ ((condensedModuleSections Λ T₀).rightDerivedFunctorObjQIso H).hom = (closedRestrictionPhi Λ T).map (DerivedCategory.Q.map s) ≫ ((condensedModuleSections Λ T).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (closedRestrictionSections Λ t) (ComplexShape.up ℤ)).app I ≫ ((condensedModuleSections Λ T₀).mapHomologicalComplex (ComplexShape.up ℤ)).map j)) ∧ (∀ Δ : Triangle (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))), Δ ∈ distTriang _ → ∃ r : (closedRestrictionPhi Λ T).mapTriangle.obj Δ ⟶ (closedRestrictionPsi Λ t).mapTriangle.obj Δ, r.hom₁ = (closedRestrictionRho Λ t).app Δ.obj₁ ∧ r.hom₂ = (closedRestrictionRho Λ t).app Δ.obj₂ ∧ r.hom₃ = (closedRestrictionRho Λ t).app Δ.obj₃) ∧ ClosedRestrictionProducts Λ t ∧ ClosedRestrictionFilteredRepresentatives Λ t",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "States the reviewed node without changing its accepted split. Phi and Psi transparently use existing ordinary module-derived sections and exact upperStar. Rho is the existing universal rightDerivedPullback applied to the actual adjunction-unit section restriction. Product clauses use limiting cones with their original projections. Filtered clauses assert existence of a simultaneous bounded chain model whose termwise colimit square for the chain representative of rho commutes, and invertibility of both cocone-induced comparisons for all normalized representative choices (reviewer FIX: the restriction square is not asserted for arbitrary chain lifts of rho, which is false because of phantom maps out of filtered colimits), using termwise complex colimits rather than arbitrary categorical colimits of derived diagrams.",
+  "fixed_by": "NT-stage2-cc-6aad07857"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6aad07857",
+  "group": "NW",
+  "result": "fix",
+  "note": "H3: the universal half of ClosedRestrictionFilteredRepresentatives asserted Q(colimMap η)≫Q(desc γ)=Q(desc α)≫Q(m) from derived-level normalizations of η,m alone. This is false because of phantom maps (T=T0=Spec k̄, t=𝟙, Λ=ℤ, ℕ-diagram ℤ⊕ℤ[1] with transitions p,id; perturbing η by null-homotopic δ_i(x)=φ(p^-i x) with φ:ℤ[1/p]→ℚ/ℤ not lifting to ℚ breaks the square), so the theorem was unprovable. FIX: removed η,m, their two hypotheses and the square from the universal clause and kept both IsIso conclusions (true via exact filtered colimits in Ab and HRS 5.3(1)). The ρ-identification remains in the existence clause, on the bounded-below model with a commuting chain square; docstrings updated. The theorem statement field is unchanged (verbatim in the lean-record fix, note updated). Fixed module compiled once via nt_compile --json: 15.0 s, exit 0, clean. Checked otherwise: Λ is an arbitrary commutative condensed ring; Φ, Ψ and upperStar are correct; ρ = rightDerivedPullback of the adjunction-unit section restriction (same map as the landed supported_rational_model_rigidity_transfer, no named duplicate); the two-resolution formula over all s,j matches the node; triangle morphism includes the connecting square; product clause covers the empty family; universes follow the size convention; stmt_dep records correct; no hollow defs, only sorry, docstrings with source and blueprint; report has both sections."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261024T190219-L-3990682",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

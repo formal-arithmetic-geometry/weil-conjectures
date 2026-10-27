@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-levelwise-quasicoherent-brown",
+ "kind": "statement",
+ "title": "Ordinary Brown representability for levelwise quasi-coherent module systems",
+ "statement": "Fix universes containing all sites, diagram indices, Hom sets and coproduct indices below [def-weil-size-convention]. For any scheme $T$ [def-pc-scheme], let $\\mathcal C_T=D_{\\mathrm{QCoh}}(\\mathcal O_T)$ denote the full subcategory of the ordinary unbounded derived category of structure-module sheaves with quasi-coherent cohomology [def-pc-derived-category, pqf-def-coherent]. Also allow the following second kind of category. Let $T_\\bullet$ be a small semisimplicial diagram of schemes whose transition module pullbacks are exact. Use their small Zariski ringed sites and the ringed total module category $\\mathscr M$ and exact evaluations $e_n$ of [lem-sfb-semisimplicial-ringed-total-category]. Let $\\mathscr A\\subset\\mathscr M$ be the full category of systems whose components are quasi-coherent modules; no invertibility of their transitions is required. Write $\\mathcal C_{T_\\bullet}=D_{\\mathscr A}(\\mathscr M)$ for the full subcategory of $D(\\mathscr M)$ consisting of objects $E$ for which every $H^q(e_nE)$ is quasi-coherent. The categories $\\mathscr M$ and $\\mathscr A$ are Grothendieck abelian [def-sp-grothendieck-abelian], $\\mathscr A$ is closed under coproducts, and kernels, cokernels and extensions of its objects computed in $\\mathscr M$ remain in $\\mathscr A$. The ordinary derived categories $\\mathcal C_T$ and $\\mathcal C_{T_\\bullet}$ have set-indexed coproducts computed by termwise sheaf coproducts. For either choice $\\mathcal C$, every exact functor $F:\\mathcal C\\to\\mathcal D$ to a locally small triangulated category with set-indexed coproducts [def-weil-triangulated-category] that preserves those coproducts has an ordinary right adjoint. No quasi-compactness or quasi-separatedness of the schemes, and no boundedness of the complexes, is required.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 077P, proposition-coherator, part (1), for Grothendieck abelianness of QCoh on arbitrary schemes. Hall--Neeman--Rydh, One positive and two negative results for derived categories of algebraic stacks, arXiv:1405.1888v2, Appendix A Theorem A.3 and Appendix B Theorem B.1, read at https://arxiv.org/html/1405.1888 (archive WANTED); Brown for well-generated categories as in Hall--Rydh, Perfect complexes on algebraic stacks, Theorem 4.14(1), proof citing Neeman Proposition 1.20. For the total-system specialization, use exact free evaluation adjoints of spaces-simplicial.tex Tag 0D72: their values on sets of QCoh generators generate the levelwise category. This is an ordinary weak-Serre Brown theorem, not a theorem about cartesian sections or gluing adjoints."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-sp-grothendieck-abelian",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme $X$, use the Grothendieck categories $\\operatorname{Mod}(\\mathcal O_X)$ and $\\operatorname{QCoh}(X)$ and a generator of each. The latter inclusion creates small colimits. It contains zero since $0=\\widetilde 0$ on every affine open. The kernel, cokernel, extension and arbitrary-coproduct results cited here show that this is a weak-Serre subcategory closed under coproducts. This verifies all underived hypotheses for the single-scheme case without a finiteness assumption on $X$.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasi-coherent-extension",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "077P, proposition-coherator (1); schemes.tex Section 01LA"
+   }
+  },
+  {
+   "text": "For the semisimplicial diagram, pullback preserves quasi-coherence and is left adjoint to module pushforward. It therefore preserves small colimits: maps from the pulled-back colimit correspond, by adjunction, to compatible families of maps from the pulled-back diagram. The same holds on the quasi-coherent full subcategories because their colimits are created in module sheaves. By hypothesis these pullbacks are exact. Apply the existing free-evaluation adjunction $\\ell_p\\dashv e_p$, whose component formula is $e_m\\ell_pG=\\bigoplus_{\\alpha:[p]\\hookrightarrow[m]}f_\\alpha^*G$. It restricts to the levelwise quasi-coherent systems by the pullback and coproduct closure just cited. Thus these systems are ordinary lax systems, with the same adjunction formula; no transition is inverted.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0D72, lemma-restriction-module-to-components-site, formula and adjunction"
+   }
+  },
+  {
+   "text": "In both system categories, form kernels, cokernels and colimits componentwise. Exactness of transition pullbacks induces the kernel transitions, and preservation of colimits induces the cokernel and colimit transitions; the universal properties hold componentwise. In particular both categories are abelian, and evaluation detects exactness. The componentwise kernels and cokernels remain quasi-coherent by the cited closure results. For a filtered diagram of short exact sequences, evaluating its colimit gives the colimit short exact sequence in the corresponding Grothendieck component category. Hence filtered colimits in both system categories are exact. If $G_p$ is a generator of the $p$th component category, then $G=\\bigoplus_{p\\geq0}\\ell_pG_p$ is a generator: a nonzero system morphism $h:E\\to E'$ has a nonzero component $h_p$, so faithfulness of $\\operatorname{Hom}(G_p,-)$ gives $u:G_p\\to E_p$ with $h_pu\\ne0$. Its adjunct $\\ell_pG_p\\to E$, extended by zero on the other summands, detects $h$. The sum is small by the size convention. Apply this argument once with all modules and once with quasi-coherent modules. This proves that $\\mathscr M$ and $\\mathscr A$ are Grothendieck abelian.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0D72 free-evaluation formula; properties.tex 077P component generators; agent-supplied AB5 and generator argument"
+   }
+  },
+  {
+   "text": "Evaluation is exact. Therefore a kernel or cokernel of a map between objects of $\\mathscr A$ lies in $\\mathscr A$ by the corresponding component result; an extension of two objects of $\\mathscr A$ lies there by the component extension result. Coproducts lie there by component coproduct closure. Thus $\\mathscr A$ is a full replete weak-Serre subcategory of $\\mathscr M$ closed under small coproducts. Apply the abstract representability result to $(\\mathcal B,\\mathcal A)=(\\operatorname{Mod}(\\mathcal O_T),\\operatorname{QCoh}(T))$ and to $(\\mathscr M,\\mathscr A)$. Exact evaluation gives $e_nH^q(E)=H^q(e_nE)$, so its second derived subcategory is exactly the one in the statement. In both cases it supplies the ordinary triangulated category, its ambient termwise coproducts, and cohomological representability.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasi-coherent-extension",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-sfb-grothendieck-weak-serre-derived-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A Theorem A.3 and the localizing-subcategory observation following it"
+   }
+  },
+  {
+   "text": "Fix $d\\in\\mathcal D$. The functor $H_d(c)=\\operatorname{Hom}_{\\mathcal D}(Fc,d)$ takes values in abelian groups in the fixed Hom universe. Exactness of $F$ and the triangulated Hom exactness axiom make $H_d$ cohomological; preservation of coproducts by $F$ and their universal property give $H_d(\\bigoplus c_i)=\\prod H_d(c_i)$. Representability gives an object $Rd$ and natural bijections $\\operatorname{Hom}_{\\mathcal C}(c,Rd)\\cong\\operatorname{Hom}_{\\mathcal D}(Fc,d)$. For $a:d\\to d'$, postcomposition induces a transformation $H_d\\to H_{d'}$. Under these bijections it corresponds to a unique map $Ra:Rd\\to Rd'$: evaluate the transformation at $Rd$ on its identity, then use naturality to check every component is postcomposition by that map. Uniqueness proves preservation of identity and composition. The same construction makes the bijections natural in $d$, giving $F\\dashv R$. This is an ordinary right adjoint for unbounded complexes.",
+   "uses": [
+    "lem-sfb-grothendieck-weak-serre-derived-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1887",
+    "place": "Theorem 4.14(1), proof: Brown right-adjoint argument; ordinary Yoneda assembly written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-sfb-qcoh-grothendieck-generators",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-sp-grothendieck-abelian",
+  "lem-sfb-grothendieck-weak-serre-derived-representability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "077P and spaces-simplicial.tex 0D72; HNR arXiv:1405.1888v2 Appendix A Theorem A.3 read online (archive WANTED); Hall--Rydh arXiv:1405.1887v3 Theorem 4.14(1), Brown application. System Grothendieck and adjoint assembly supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a small diagram of schemes with open immersion transitions, the derived category of sheaf module systems with levelwise quasi coherent cohomology is well generated and every exact coproduct preserving functor out of it has a right adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Grothendieck weak Serre subcategory closed under coproducts has well generated derived category and Brown representability",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.casesOn\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {motive : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C → Sort u_1} →\\n        (t : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C) →\\n          ((locallySmall : CategoryTheory.LocallySmal\", \"doc\": \"Given a category $ C $ equipped with an abelian structure, this function allows defining functions over the Grothendieck abelian category predicate by decomposing it into its components: local smallne\"}\n  {\"name\": \"CategoryTheory.hasExt_of_enoughProjectives\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives\", \"type\": \"[LocallySmall.{w} C] [EnoughProjectives C] : HasExt.{w} C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small and has enough projective objects, then the derived category of $\\\\mathcal{C}$ has well-defined hom-sets between single-term cochain complexes concentrated \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.ab4OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": AB4OfSize.{w} C\", \"doc\": \"Every Grothendieck abelian category satisfies the AB4 axiom, which requires that the category has all coproducts and that coproducts preserve exact sequences (i.e., coproducts are exact functors).\"}\n  {\"name\": \"CategoryTheory.Noetherian\", \"module\": \"Mathlib.CategoryTheory.Noetherian\", \"type\": \"(C : Type u_1) → [CategoryTheory.Category.{v_1, u_1} C] → Prop\", \"doc\": \"The category $\\\\mathcal{C}$ is Noetherian\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasLimits\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": HasLimitsOfSize.{w, w} C\", \"doc\": \"Every Grothendieck abelian category has all small limits, meaning that for any small diagram indexed by a small category, the limit of the diagram exists within the category.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.ab5OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C}\\n  [self : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.AB5OfSize.{w, w, v, u} C\", \"doc\": \"A Grothendieck abelian category $\\\\mathcal{C}$ satisfies the AB5 axiom of size $w$, meaning that filtered colimits of size $w$ are exact in $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \": (⊤ : ObjectProperty C).IsSerreClass\", \"doc\": \"The class of all objects in an abelian category is a Serre class. This means that it is closed under subobjects, quotients, extensions, and finite direct sums.\"}\n  {\"name\": \"CategoryTheory.instAB4OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic\", \"type\": \"[HasCoproducts.{w} C] [AB4OfSize.{w} C] :\\n  haveI : HasCoproducts.{0} C := hasCoproducts_shrink\\n  AB4OfSize.{0} C\", \"doc\": \"If a category satisfies the AB4 axiom (having all coproducts and exact coproducts) at some universe level $ w $, then it also satisfies the AB4 axiom at universe level 0 by inheriting coproducts throu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"rightAdjoint\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"TopologicalSpace.Opens.instIsRightAdjointSheafSubtypeCarrierMemGrothendieckTopologySheafRestrictOfOverOverOverPullback\", \"module\": \"Mathlib.Topology.Sheaves.Over\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] {X : TopCat} (U : TopologicalSpace.Opens ↑X) [((Opens.grothendieckTopology ↑X).overPullback A U).IsRightAdjoint] : U.sheafRestrict.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsRightAdjointSheafSkyscraperSheafFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Skyscraper\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.Limits.HasProducts A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] : Φ.skyscraperSheafFunctor.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C} : (CategoryTheory.preadditiveCoyonedaObj G).IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.IsLocalSite.instIsRightAdjointSheafCoconstantSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.LocalSite\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.LocallySmall.{w, v, u} C] [J.IsLocalSite] (A : Type u') [CategoryTheory.Category.{v', u'} A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.Limits.HasProducts A] [\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "weakSerre|wellGenerated|well_generated|quasicoherent.*[Gg]rothendieck",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability for quasi coherent cohomology subcategories of unbounded derived categories of ringed diagram module sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CochainComplex.IsKProjective.Qh_map_bijective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (L : HomotopyCategory C (ComplexShape.up ℤ))\\n  [K.IsKProjective], Function.Bijective DerivedCategory.Qh.map\", \"doc\": \"For any K-projective cochain complex $K$ in an abelian category $\\\\mathcal{C}$ and any object $L$ in the homotopy category of integer-indexed complexes, the induced map $\\\\text{Qh.map}$ from homotopy cl\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; underived sheaf or module constructions, AB4/AB5 instances and general category definitions do not state this derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any diagram of schemes with exact transition pullbacks the derived category of noncartesian levelwise quasi coherent module systems satisfies Brown representability",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"Condensed.instAB4CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4 (CondensedMod R)\", \"doc\": \"The category of condensed modules over any ring $ R $ satisfies the AB4 axiom, meaning it has all coproducts and coproducts preserve exact sequences (are exact functors).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"The property that the pullback functor between presheaves of modules has a left adjoint, characterized by the corepresentability condition: for each object $X$ in the category, the composition of the \"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary right adjoints to exact coproduct preserving functors from unbounded derived category with quasi coherent cohomology on arbitrary schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint.mk\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {right : CategoryTheory.Functor D C}, (∃ left, Nonempty (left ⊣ right)) → right.IsRightAdjoint\", \"doc\": \"Given categories $ C $ and $ D $, and a functor $ G : D \\to C $, if there exists a functor $ F : C \\to D $ such that $ F $ is left adjoint to $ G $, then $ G $ is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(right : C ⥤ D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"Given a right adjoint functor $ G : D \\to C $, this constructs an adjunction between its left adjoint functor $ F : C \\to D $ and $ G $, asserting that $ F $ is left adjoint to $ G $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"CategoryTheory.Functor.rightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"(L : C ⥤ D) [IsLeftAdjoint L] : D ⥤ C\", \"doc\": \"Given categories $ C $ and $ D $, and a functor $ L : C ⥤ D $ that is a left adjoint, this definition constructs the corresponding right adjoint functor $ G : D ⥤ C $ such that $ L $ is left adjoint t\"}\n  {\"name\": \"CategoryTheory.Adjunction.right_adjoint_additive\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Additive\", \"type\": \"[F.Additive] : G.Additive\", \"doc\": \"Given an adjunction between functors $ F : C \\to D $ and $ G : D \\to C $, if $ F $ is an additive functor (preserving addition of morphisms), then the right adjoint $ G $ is also an additive functor.\"}\n  {\"name\": \"CategoryTheory.Functor.isRightAdjoint_iff_leftAdjointObjIsDefined_eq_top\", \"module\": \"Mathlib.CategoryTheory.Adjunction.PartialAdjoint\", \"type\": \": F.IsRightAdjoint ↔ F.leftAdjointObjIsDefined = ⊤\", \"doc\": \"A functor $ F $ is a right adjoint if and only if for every object $ X $ in the category $ \\\\mathcal{C} $, the composition of $ F $ with the hom-functor $ \\\\text{Hom}(X, -) $ is corepresentable, meaning\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.EpiMono\", \"type\": \"(F : C ⥤ D) [IsRightAdjoint F] : PreservesMonomorphisms F\", \"doc\": \"Every right adjoint functor $ F : C \\to D $ preserves monomorphisms, meaning that if $ f $ is a monomorphism in $ C $, then $ F(f) $ is a monomorphism in $ D $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsLeftAdjoint\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {D : Type u₂} [CategoryTheory.Catego\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "grep",
+   "query": "levelwise.*quasicoherent|quasicoherent.*[Bb]rown|wellGenerated|well_generated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Well generated derived category of quasi coherent cohomology for non quasi compact non quasi separated schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary Brown input for arbitrary schemes and noncartesian levelwise quasi-coherent total systems; independent of properness and adjoint locality.",
+   "via": [
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-levelwise-quasicoherent-brown",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused the exact semisimplicial free-evaluation adjoints and all existing quasi-coherent closure and pullback lemmas. Added only arbitrary-scheme QCoh Grothendieck generators and abstract Grothendieck weak-Serre derived cohomological representability. Proved the noncartesian levelwise categories Grothendieck via componentwise AB5 and the explicit sum of free generators, then verified weak-Serre closure and assembled the ordinary right adjoint. No boundedness or qcqs assumptions added.",
+  "blueprint": "Prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction and its stable-curve coherent-duality input, following the inherited ancestry. This is the ordinary Brown input of the parent locality lemma; it neither changes the chapter/unit route nor asserts cartesian descent. The existing created.item ancestry has no blueprint ancestor (ancestor command returns None), so the null from.node and inherited via chain are retained. Latest blueprint proof read at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-modules-grothendieck-abelian",
+    "why": "Generic underived scheme/sheaf input used to verify the hypotheses of the ordinary Brown theorem; no node of this unit states this component fact. It does not replace an alteration or six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic underived scheme/sheaf input used to verify the hypotheses of the ordinary Brown theorem; no node of this unit states this component fact. It does not replace an alteration or six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic underived scheme/sheaf input used to verify the hypotheses of the ordinary Brown theorem; no node of this unit states this component fact. It does not replace an alteration or six-functor unit step."
+   },
+   {
+    "node": "lem-pc-quasi-coherent-extension",
+    "why": "Generic underived scheme/sheaf input used to verify the hypotheses of the ordinary Brown theorem; no node of this unit states this component fact. It does not replace an alteration or six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic underived scheme/sheaf input used to verify the hypotheses of the ordinary Brown theorem; no node of this unit states this component fact. It does not replace an alteration or six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic underived scheme/sheaf input used to verify the hypotheses of the ordinary Brown theorem; no node of this unit states this component fact. It does not replace an alteration or six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-619eb3dd9",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-619eb3dd9 (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the item's statement and all five proof steps, both new nodes, every cited node's statement, and Stacks 077P and 0D72 at the cited places. HNR App. A Thm A.3 is not available locally (the report lists it as WANTED), so for that theorem I relied on my own knowledge of the literature, not a reading. The statement is unchanged from the base (the base had no proof). Step 1: Mod(O_X) is Grothendieck (lem-pc-scheme-modules-grothendieck-abelian), the new QCoh node gives 077P(1), and the kernel, cokernel, extension and arbitrary-coproduct nodes give weak-Serre closure for any scheme. Step 2: module pullback is a left adjoint, pullback preserves quasi-coherence for any morphism, and the existing free-adjoint node l_p -| e_p restricts to the levelwise quasi-coherent systems; no transition is inverted. Step 3: kernels, cokernels and colimits are formed componentwise, filtered colimits are exact (AB5) componentwise, and the generator sum over p of l_p G_p detects a nonzero h through the adjunct of a map u with h_p u nonzero; the argument is correct. Step 4: exact evaluation gives H^q(e_n E) = e_n H^q(E), and the abstract node is applied to (Mod, QCoh) and (M, A) with all of its hypotheses checked. Step 5 is the standard Brown-representability-to-adjoint argument via Yoneda. For duplicates I searched rg -L for weak Serre, well generated, Brown, 077P, coherator and QCoh with Grothendieck. The existing D(A) Brown, compact-generation Brown, solution-set, 06UQ, D_QCoh direct-sum and coherator nodes are all weaker or different, so neither new node is a duplicate and neither restates a clause of the item. I tested the QCoh node on the empty scheme, a non-Noetherian affine scheme and a non-quasi-compact disjoint union, and the abstract node with A=0, A=B and a product of module categories; all are consistent. Batch-5: the flagged closure node lem-trf-slice-site-total-pseudofunctor is the general construction of a Grothendieck total site (Stacks 09WC). It is neither the trace formula nor Poincare duality, nor a step proving either, and the item already depended on it on the base through lem-sfb-semisimplicial-ringed-total-category. No SGA is cited. I accept the six generic scheme-module tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.LevelwiseQuasicoherentBrown",
+  "declaration": "CategoryTheory.levelwise_quasicoherent_brown",
+  "declarations": [
+   "CategoryTheory.schemeZariskiRingedSite",
+   "CategoryTheory.OrdinaryQuasiCoherentBrown",
+   "CategoryTheory.SemisimplicialRingedTotal.SchemePresentation",
+   "CategoryTheory.SemisimplicialRingedTotal.exists_schemePresentation",
+   "CategoryTheory.SemisimplicialRingedTotal.levelwiseQuasiCoherentProperty",
+   "CategoryTheory.SemisimplicialRingedTotal.levelwiseDerivedQuasiCoherentProperty",
+   "CategoryTheory.scheme_quasicoherent_brown",
+   "CategoryTheory.levelwise_quasicoherent_brown"
+  ],
+  "file": "lean/Sheaf/SixFunctors/LevelwiseQuasicoherentBrown.lean",
+  "statement": "theorem levelwise_quasicoherent_brown {F : LocallyDiscrete (SemiSimplexCategoryᵒᵖ)ᵒᵖ ⥤ᵖ Cat.{u, u}} {S : CoherentSitePseudofunctor SemiSimplexCategoryᵒᵖ F} {R : SemisimplicialRingedTotal.RingDiagram S} {h : Presheaf.IsSheaf S.totalTopology R.presheaf} (P : SemisimplicialRingedTotal.Presentation R h) (T : SemiSimplexCategoryᵒᵖ ⥤ Scheme.{u}) (Z : SemisimplicialRingedTotal.SchemePresentation P T) (exact : ∀ {i j : SemiSimplexCategoryᵒᵖ} (f : i ⟶ j), PreservesFiniteLimits (P.pullback f).ordinary ∧ PreservesFiniteColimits (P.pullback f).ordinary) (D : Type d) [Category.{v} D] [LocallySmall.{u} D] [Preadditive D] [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [IsTriangulated D] [HasCoproducts.{u} D] : IsGrothendieckAbelian.{u} (R.total h).modules ∧ (∃ hAb : Abelian (SemisimplicialRingedTotal.levelwiseQuasiCoherentProperty P Z).FullSubcategory, @IsGrothendieckAbelian.{u} _ _ hAb) ∧ (SemisimplicialRingedTotal.levelwiseQuasiCoherentProperty P Z).IsClosedUnderKernels ∧ (SemisimplicialRingedTotal.levelwiseQuasiCoherentProperty P Z).IsClosedUnderCokernels ∧ (SemisimplicialRingedTotal.levelwiseQuasiCoherentProperty P Z).IsClosedUnderExtensions ∧ (∀ I : Type u, ObjectProperty.IsClosedUnderColimitsOfShape (SemisimplicialRingedTotal.levelwiseQuasiCoherentProperty P Z) (Discrete I)) ∧ OrdinaryQuasiCoherentBrown (R.total h).modules (SemisimplicialRingedTotal.levelwiseDerivedQuasiCoherentProperty P Z) D",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The node has two statement components: scheme_quasicoherent_brown is independent of all diagram data; levelwise_quasicoherent_brown states the total-system case and its underived Grothendieck and closure clauses. OrdinaryQuasiCoherentBrown collects the full-subcategory, ambient termwise coproduct, and ordinary right-adjoint conclusions. The site and scheme presentation helpers only make the node’s specified small Zariski sites explicit; their data is not postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2056b26",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read item node, 5 proof steps, module, report (Worker report + Second reading by Q01 present), stmt_dep decls (schemeDerivedQCohProperty, SemisimplicialRingedTotal Site/RingDiagram/Presentation/Evaluation, IsQuasicoherent, Mathlib IsGrothendieckAbelian/IsClosedUnderKernels/Cokernels/Extensions/ObjectProperty.IsTriangulated). Every clause matched: scheme case via recorded D_QCoh property, no qcqs/boundedness; system case with exact face pullbacks, levelwise QCoh A without invertibility, derived property over all i,q, Grothendieck M and A, weak-Serre and size-u coproduct closure, triangulated full subcategory with termwise coproduct cocone, right adjoint for CommShift+IsTriangulated coproduct-preserving G into LocallySmall.{u} triangulated D. SchemePresentation is satisfiable ((schemeZariskiRingedSite X).modules is defeq X.Modules; HEq-pinned transport); the face-pullback iso is hypothesis-only data. exists_schemePresentation is an extra sorried realization theorem preventing vacuity, accepted. lean.statement verbatim; only lean field changed; docstrings/blueprint tags/line widths ok; no hollow defs; all proofs sorry. Notes: Lean slightly generalizes the total diagram (canonical case covered); A's Abelian structure is existential (equivalent)."
+ }
+}

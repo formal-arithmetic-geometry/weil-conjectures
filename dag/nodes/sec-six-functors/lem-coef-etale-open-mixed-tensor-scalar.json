@@ -1,0 +1,133 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Extension by zero commutes with coefficient tensor; comparisons are fixed by the same evaluations and adjunction counits, with successive coefficient changes."
+ },
+ "id": "lem-coef-etale-open-mixed-tensor-scalar",
+ "kind": "statement",
+ "title": "Scalar extension intertwines the exact open projection map and the scalar tensor maps.",
+ "statement": "For arbitrary commutative rings A and B, a ring homomorphism φ:A→B and an open immersion j:U→X, use the canonical comparisons of [lem-coef-etale-open-comparison-data] and [lem-coef-etale-hom-thick-locus]. For every P in D(U_et,A) and T in D(X_et,A), γ_B(F_U P,F_X T);(q_P^(-1) tensor id);t_X(j_! P,T) = j_!((id tensor r_T^(-1));t_U(P,j^* T));q_(P tensor j^* T)^(-1);F_X(γ_A(P,T)). No boundedness, constructibility, flat coefficient-map or quasi-compact-open hypotheses are imposed.",
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-hom-thick-locus"
+ ],
+ "proof": [
+  {
+   "text": "Regard the normalized scalar tensor isomorphisms t as natural isomorphisms of curried bifunctors, using their two naturality laws. Form the natural exact restriction tensor isomorphism by precomposing the existing mixed exact/left-derived tensor isomorphism with the inverse exact/left-derived comparison in its second argument.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data",
+    "lem-coef-etale-hom-thick-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse q of the chosen open/scalar left-adjoint comparison is the iterated inverse mate of the sectionwise restriction-of-scalars square. Apply iterated_mateEquiv_conjugateEquiv_symm and unit_mateEquiv_symm. This proves the unit hypothesis for q inverse and r hom in the projection-map mate theorem. A generic naturality calculation identifies canonicalGammaExact with the projectionMap for the exact restriction tensorator; no monoidal transport or K-flat assertion for extension by zero is used.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the scalar/restriction tensor square of lem-coef-etale-open-scalar-restriction-tensor as the tensor hypothesis of projectionMap_mate, with both right functors equal to exact restriction, the coefficient functors equal to scalar extension, and tensor maps t inverse. The conclusion is q inverse followed by F_X(gamma_A) and t_X inverse equals j_!(t_U inverse), j_!(id tensor r), gamma_B and q inverse tensor id.",
+   "uses": [
+    "lem-coef-etale-open-scalar-restriction-tensor",
+    "lem-asd-adjunction-projection-map-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose this identity with j_!((id tensor r inverse);t_U) and postcompose with t_X. Functoriality and the inverse identities for r and t cancel the auxiliary factors. Reverse the resulting equality to obtain precisely the stated mixed projection square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-hom-thick-locus",
+  "lem-coef-etale-open-scalar-restriction-tensor",
+  "lem-asd-adjunction-projection-map-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Scalar extension and extension by zero tensor compatibility; formal adjunction-mate calculation after the restriction tensor square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes and commutes with derived scalar extension with tensor coherence",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; CategoryTheory.lan_flat_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*(KFlat|Scalar)|scalar.*(normaliz|coher)",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean; Mathlib/Tactic/Module.lean; Mathlib/Tactic/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with extension by zero along an open immersion, normalized on K-flat complexes",
+   "results": "Eight hits including ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.baseChange and RingHom.Flat; no exact derived open normalization or mixed tensor theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenScalarCoherence",
+  "date": "2026-10-25",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-open-scalar-coherence",
+   "place": "Proof step 3",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenMixedTensorScalar",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenMixedTensorScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenMixedTensorScalar",
+  "statement": "theorem etaleOpenMixedTensorScalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    ∀ (P : DerivedCategoryModule A U) (T : DerivedCategoryModule A X),\n    canonicalGammaExact (ModuleCat.{u + 1} B) j\n        ((scalarExtension φ U).obj P) ((scalarExtension φ X).obj T) ≫\n        ((derivedTensor (ModuleCat.{u + 1} B) X).map\n          ((openScalarExtension φ j).inv.app P)).app ((scalarExtension φ X).obj T) ≫\n        (etaleHomTensorComparison X φ ((derivedExtension (A := A) j).obj P) T).hom =\n      (derivedExtension (A := B) j).map\n          (((derivedTensor (ModuleCat.{u + 1} B) U).obj ((scalarExtension φ U).obj P)).map\n              ((openScalarRestriction φ j).inv.app T) ≫\n            (etaleHomTensorComparison U φ P ((derivedRestriction j).obj T)).hom) ≫\n        (openScalarExtension φ j).inv.app\n          (((derivedTensor (ModuleCat.{u + 1} A) U).obj P).obj ((derivedRestriction j).obj T)) ≫\n        (scalarExtension φ X).map (canonicalGammaExact (ModuleCat.{u + 1} A) j P T)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T164420-L-1010894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T094332-L-215299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

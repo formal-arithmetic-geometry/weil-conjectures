@@ -1,0 +1,232 @@
+{
+ "id": "lem-pur-exact-adjoint-classical-counit-comparison",
+ "kind": "statement",
+ "title": "Lower bounds and classical counit comparison for exact derived adjoints",
+ "statement": "Let $\\mathcal A_Z,\\mathcal A_X,\\mathcal B_Z,\\mathcal B_X$ be abelian categories [def-sp-abelian], with ordinary unbounded derived categories [def-weil-abstract-derived-category] and their standard t-structures [def-sbc-standard-tstructure-derived-category]. Write $D^+$ for cohomology bounded below. Let $F:D(\\mathcal A_Z)\\to D(\\mathcal A_X)$ preserve $D^{\\le m}$ and $D^{\\ge m}$ for every integer $m$. Fix adjunctions $F\\dashv G$ and $F\\dashv J$, with counits $\\epsilon^G$ and $\\epsilon^J$, and let $\\gamma:G\\xrightarrow{\\sim}J$ be their counit-normalized isomorphism [det-sp-unique-right-adjoint], so $\\epsilon^J_N\\circ F(\\gamma_N)=\\epsilon^G_N$.\n\nLet $S_T:D(\\mathcal A_T)\\to D(\\mathcal B_T)$, for $T=X,Z$, be functors preserving cohomological lower bounds. Suppose $S_X$ has a right adjoint $U_X$, with unit $\\eta$ and counit $e$, and $\\eta_N:N\\to U_XS_XN$ is invertible for all $N\\in D^+(\\mathcal A_X)$. Let $P:D(\\mathcal B_Z)\\to D(\\mathcal B_X)$ be a functor and fix a natural isomorphism\n$$\\lambda_H:S_XFH\\xrightarrow{\\sim}PS_ZH\\qquad(H\\in D^+(\\mathcal A_Z)).$$\nHere the displayed adjunctions include their unit and counit triangle identities; all naturality assertions refer to the given functors and adjunctions.\n\nFor every integer $a$ and $N\\in D^{\\ge a}(\\mathcal A_X)$, both $JN$ and $GN$ lie in $D^{\\ge a}(\\mathcal A_Z)$. For $N\\in D^+(\\mathcal A_X)$ put\n$$K_N=S_XN,\\qquad D_N=JN,\\qquad E_N=GU_XS_XN,\\qquad r_N=\\eta_N^{-1}.$$\nThen $D_N,E_N$ are bounded below, and the natural maps\n$$\\beta_N=\\gamma_N\\circ G(r_N):E_N\\xrightarrow{\\sim}D_N,\\qquad\\alpha_N=S_Z(\\beta_N):S_ZE_N\\xrightarrow{\\sim}S_ZD_N$$\nare isomorphisms. Define the morphism\n$$t_N=e_{K_N}\\circ S_X(\\epsilon^G_{U_XK_N})\\circ\\lambda_{E_N}^{-1}:PS_ZE_N\\longrightarrow K_N.$$\nIt satisfies the counit comparison equation\n$$t_N=S_X(\\epsilon^J_N)\\circ\\lambda_{D_N}^{-1}\\circ P(\\alpha_N).$$\nAll these isomorphisms and equations are natural in $N\\in D^+(\\mathcal A_X)$. No assertion that $P$ has an ambient right adjoint is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "First localization triangle: categorical lower-bound and classical-unit/counit calculation extracted from returned item Steps 3, 4 and 6; standard truncation source and full argument preserved in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a$ and $N\\in D^{\\ge a}(\\mathcal A_X)$. For every $A\\in D^{\\le a-1}(\\mathcal A_Z)$, the hypothesis on $F$ gives $FA\\in D^{\\le a-1}(\\mathcal A_X)$. By [lem-pc-derived-tstructure-orthogonality], $\\operatorname{Hom}(FA,N)$ has only its zero morphism. The given adjunction bijections identify this singleton with each of $\\operatorname{Hom}(A,GN)$ and $\\operatorname{Hom}(A,JN)$. Each latter set therefore also consists only of its zero morphism. Apply [lem-pur-tstructure-lower-bound-hom-test] in the standard t-structure to obtain $GN,JN\\in D^{\\ge a}$. This singleton argument needs no unstated additivity assumption on $F$.",
+   "uses": [
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-pur-tstructure-lower-bound-hom-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.4, p. 30, right orthogonal characterization; agent application to the supplied adjunctions"
+   }
+  },
+  {
+   "text": "For $N\\in D^+$ choose $a$ with $N\\in D^{\\ge a}$. Step 1 gives $D_N=JN\\in D^{\\ge a}$. The supplied isomorphism $\\eta_N:N\\xrightarrow{\\sim}U_XS_XN$ puts $U_XS_XN$ in the same strictly full subcategory $D^{\\ge a}$ [def-sbc-standard-tstructure-derived-category], so Step 1 gives $E_N=GU_XS_XN\\in D^{\\ge a}$. Thus both inputs of $\\lambda$ used below belong to its prescribed domain. Since $r_N$ and $\\gamma_N$ are isomorphisms, functors preserve their inverses and hence $\\beta_N=\\gamma_N\\circ G(r_N)$ and $\\alpha_N=S_Z(\\beta_N)$ are isomorphisms.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following unit/counit formulas; elementary calculation for the supplied adjunctions"
+   }
+  },
+  {
+   "text": "The triangle identity for $S_X\\dashv U_X$ at $N$ is $e_{S_XN}\\circ S_X(\\eta_N)=1_{S_XN}$. Since $\\eta_N$ is invertible, compose on the right with $S_X(r_N)$ to obtain $e_{K_N}=S_X(r_N)$. This uses the actual given unit, not an arbitrary isomorphism $N\\cong U_XS_XN$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following unit/counit formulas; elementary calculation for the supplied adjunctions"
+   }
+  },
+  {
+   "text": "Counit naturality for $F\\dashv G$ at $r_N:U_XK_N\\to N$ gives $r_N\\circ\\epsilon^G_{U_XK_N}=\\epsilon^G_N\\circ F(G(r_N))$. The normalization from [det-sp-unique-right-adjoint] gives $\\epsilon^G_N=\\epsilon^J_N\\circ F(\\gamma_N)$. Substitute Step 3 and these identities in the definition of $t_N$ and use functoriality to get $$t_N=S_X(\\epsilon^J_N)\\circ S_XF(\\beta_N)\\circ\\lambda_{E_N}^{-1}.$$",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following unit/counit formulas; elementary calculation for the supplied adjunctions"
+   }
+  },
+  {
+   "text": "Naturality of the given $\\lambda$ at $\\beta_N:E_N\\to D_N$ gives $P S_Z(\\beta_N)\\circ\\lambda_{E_N}=\\lambda_{D_N}\\circ S_XF(\\beta_N)$. Composing with both inverses yields $S_XF(\\beta_N)\\circ\\lambda_{E_N}^{-1}=\\lambda_{D_N}^{-1}\\circ P(\\alpha_N)$. Substitute into Step 4 to obtain the required equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following unit/counit formulas; elementary calculation for the supplied adjunctions"
+   }
+  },
+  {
+   "text": "For a morphism $h:N\\to N'$ in $D^+$, naturality of $\\eta$ gives $r_{N'}\\circ U_XS_X(h)=h\\circ r_N$ by multiplication with its inverse components. Naturality of the given $\\gamma$ then gives $J(h)\\circ\\beta_N=\\beta_{N'}\\circ GU_XS_X(h)$. Applying $S_Z$ proves naturality of $\\alpha$. The definition of $t$ is a composite of natural transformations: the restrictions of $e$, $S_X\\epsilon^G$, and $\\lambda^{-1}$ along the indicated functors. These restrictions are defined because Step 2 puts $E_N$ in $D^+$ for every $N$ in the domain. Thus $t$ is natural. The right side of Step 5 is likewise a composite of $S_X\\epsilon^J$, $\\lambda^{-1}$ and $P\\alpha$, proving all the asserted naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following unit/counit formulas; elementary calculation for the supplied adjunctions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-pur-tstructure-lower-bound-hom-test",
+  "def-sbc-standard-tstructure-derived-category",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "First localization triangle: categorical expansion using BBD 1.3.4 and Stacks Tag 0037; no geometric purity or trace input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRightTExact|IsLeftTExact|rightAdjoint.*[Tt][Ee]xact|[Tt][Ee]xact.*rightAdjoint",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction construction, generic adjunction fields and limit preservation do not assert the standard-t-structure lower bound together with this specified classical comparison-counit equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of a t exact functor preserves lower bounds and counit compatibility under a comparison unit isomorphism",
+   "results": "8 hits: CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison; CategoryTheory.Adjunction.rightAdjoint_preservesLimits; CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso; CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint; CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful; CategoryTheory.Functor.totalRightDerivedUnit; CategoryTheory.Adjunction.Triple.rightToLeft_app_adj₂_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction construction, generic adjunction fields and limit preservation do not assert the standard-t-structure lower bound together with this specified classical comparison-counit equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsRightTExact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction construction, generic adjunction fields and limit preservation do not assert the standard-t-structure lower bound together with this specified classical comparison-counit equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor of abelian categories has a right adjoint on unbounded derived categories which preserves cohomological lower bounds; fully faithful comparison unit identifies the transported right adjoint on classical objects and its counit",
+   "results": "8 hits: CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction construction, generic adjunction fields and limit preservation do not assert the standard-t-structure lower bound together with this specified classical comparison-counit equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two right adjoints of the same exact derived functor the counit normalized isomorphism combined with inverse comparison unit yields a natural isomorphism on bounded below objects respecting the composite transported counit",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction construction, generic adjunction fields and limit preservation do not assert the standard-t-structure lower bound together with this specified classical comparison-counit equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint of a functor preserving cohomological upper bounds preserves cohomological lower bounds for t structures and comparison counits are compatible with an invertible unit",
+   "results": "8 hits: CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: hits supply generic adjunction, triangulatedness, or inverse-unit identities, not this lower-bound and specified comparison equation together"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*[Tt]Exact|[Tt]Exact.*rightAdjoint|isGE_of_orthogonal",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: hits supply generic adjunction, triangulatedness, or inverse-unit identities, not this lower-bound and specified comparison equation together",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.CoreUnitCounit, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit, CategoryTheory.Adjunction.CoreUnitCounit.counit",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: hits supply generic adjunction, triangulatedness, or inverse-unit identities, not this lower-bound and specified comparison equation together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint preserves lower bounds of a t structure when the left adjoint preserves upper bounds; natural counit comparison with inverse unit",
+   "results": "8 hits: CategoryTheory.Adjunction.inv_map_unit, CategoryTheory.Adjunction.inv_counit_map, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.comonadicAdjunction, CategoryTheory.Adjunction.ofIsRightAdjoint, CategoryTheory.Adjunction.mkOfUnitCounit_counit, CategoryTheory.Adjunction.rightOp_unit",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: hits supply generic adjunction, triangulatedness, or inverse-unit identities, not this lower-bound and specified comparison equation together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit naturality and the triangle identity identify the counit at a fully faithful left adjoint image with the image of the inverse adjunction unit",
+   "results": "8 hits: CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful, CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful, CategoryTheory.Adjunction.instIsIsoAppCounitObjOfFaithfulOfFull, CategoryTheory.Adjunction.instIsIsoMapAppCounitOfFaithfulOfFull, CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit, CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: hits supply generic adjunction, triangulatedness, or inverse-unit identities, not this lower-bound and specified comparison equation together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-closed-finite-adjoint-counit-transport",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3, realizing sk-prop-a1 first localization triangle: lower bound for the closed support adjoint and the final classical counit calculation (returned item Steps 3,4,6).",
+   "via": [
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-exact-adjoint-classical-counit-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved lower bounds using adjunction bijections, existing one-way orthogonality and one new Mathlib leaf for the converse Hom test. Wrote out the actual-unit triangle identity, counit naturality, counit normalization and lambda naturality. No additivity, exact-triangle preservation or ambient right adjoint for P is assumed.",
+  "blueprint": "Nearest ancestor prop-pur-affine-line-orientation-uniqueness via the two existing created nodes; realizes the first localization triangle of sk-prop-a1 by its closed-adjoint lower bound and classical counit calculation. Whole-blueprint searches for orthogonal, t-structure, orthogonality criterion, right adjoint, counit comparison and lower bound found no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-69817d775",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-69817d775 (reviewer sub-agent of L); spot-checked: Statement and stmt_deps are byte-identical to the base copy (Q130 snapshot), so the target is not weakened. There is no re-split note and nothing cites SGA. Step 1: FA lies in D^{<=a-1}, so Hom(FA,N)=0 by lem-pc-derived-tstructure-orthogonality (n=a-1<a). The Stacks 0037 adjunction bijections make Hom(A,GN) and Hom(A,JN) singletons, hence zero, with no additivity of F needed. The new leaf then gives GN and JN in D^{>=a}; BBD 1.3.4 (p. 30, right orthogonal) checked in the PDF. Step 2: U_XS_XN is in D^{>=a} because eta_N is invertible and the subcategory is strictly full, so E_N and D_N are in D^+. Step 3: the triangle identity gives e_{K_N}=S_X(eta_N^{-1}). Step 4: counit naturality at r_N plus the normalization of det-sp-unique-right-adjoint gives t_N=S_X(eps^J_N)∘S_XF(beta_N)∘lambda_E^{-1}. Step 5: lambda-naturality at beta_N gives the stated equation; I checked every source and target. Step 6: naturality is correct. New node lem-pur-tstructure-lower-bound-hom-test matches Mathlib TStructure.isGE_iff_orthogonal (TruncLTGE.lean:617-621, read) with n0=a-1, n1=a, as a one-line specialization. It is self-contained, statement-only and tested on small cases. The DAG search (isGE_iff_orthogonal, orthogonal, right-adjoint lower bound) found no duplicate: the étale amplitude upper-shriek nodes and lem-sf-localizing-hom-test say other things, and lem-pc orthogonality is the converse direction only. It does not restate the item. The item fits exactly the uses in Steps 2-3 of the parent lem-pur-closed-finite-adjoint-counit-transport, and there is no cycle. All cited nodes are Mathlib leaves or definitions, so no tool_uses are needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactAdjointClassicalCounitComparison",
+  "declaration": "DerivedCategory.exactAdjoint_classicalCounitComparison",
+  "file": "lean/Sheaf/CategoryTheory/ExactAdjointClassicalCounitComparison.lean",
+  "statement": "theorem exactAdjoint_classicalCounitComparison {AZ : Type uAZ} [Category.{vAZ} AZ] [Abelian AZ] [HasDerivedCategory.{wAZ} AZ] {AX : Type uAX} [Category.{vAX} AX] [Abelian AX] [HasDerivedCategory.{wAX} AX] {BZ : Type uBZ} [Category.{vBZ} BZ] [Abelian BZ] [HasDerivedCategory.{wBZ} BZ] {BX : Type uBX} [Category.{vBX} BX] [Abelian BX] [HasDerivedCategory.{wBX} BX] (F : DerivedCategory AZ ⥤ DerivedCategory AX) (G J : DerivedCategory AX ⥤ DerivedCategory AZ) (adjG : F ⊣ G) (adjJ : F ⊣ J) (hFle : ∀ (m : ℤ) (H : DerivedCategory AZ), H.IsLE m → (F.obj H).IsLE m) (hFge : ∀ (m : ℤ) (H : DerivedCategory AZ), H.IsGE m → (F.obj H).IsGE m) (SZ : DerivedCategory AZ ⥤ DerivedCategory BZ) (SX : DerivedCategory AX ⥤ DerivedCategory BX) (hSZ : ∀ (a : ℤ) (H : DerivedCategory AZ), H.IsGE a → (SZ.obj H).IsGE a) (hSX : ∀ (a : ℤ) (N : DerivedCategory AX), N.IsGE a → (SX.obj N).IsGE a) (UX : DerivedCategory BX ⥤ DerivedCategory AX) (adjS : SX ⊣ UX) (hη : ∀ N : Plus AX, IsIso (adjS.unit.app N.obj)) (P : DerivedCategory BZ ⥤ DerivedCategory BX) (comparison : Plus.ι (C := AZ) ⋙ F ⋙ SX ≅ Plus.ι (C := AZ) ⋙ SZ ⋙ P) : (∀ (a : ℤ) (N : DerivedCategory AX), N.IsGE a → (J.obj N).IsGE a ∧ (G.obj N).IsGE a) ∧ ∃ (hD : ∀ N : Plus AX, TStructure.t.plus (J.obj N.obj)) (hE : ∀ N : Plus AX, TStructure.t.plus (G.obj (UX.obj (SX.obj N.obj)))) (r : Plus.ι (C := AX) ⋙ SX ⋙ UX ≅ Plus.ι (C := AX)) (beta : Plus.ι (C := AX) ⋙ SX ⋙ UX ⋙ G ≅ Plus.ι (C := AX) ⋙ J) (alpha : Plus.ι (C := AX) ⋙ SX ⋙ UX ⋙ G ⋙ SZ ≅ Plus.ι (C := AX) ⋙ J ⋙ SZ) (t : Plus.ι (C := AX) ⋙ SX ⋙ UX ⋙ G ⋙ SZ ⋙ P ⟶ Plus.ι (C := AX) ⋙ SX), (∀ N : Plus AX, r.inv.app N = adjS.unit.app N.obj) ∧ (∀ N : Plus AX, beta.hom.app N = G.map (r.hom.app N) ≫ (adjG.rightAdjointUniq adjJ).hom.app N.obj) ∧ (∀ N : Plus AX, alpha.hom.app N = SZ.map (beta.hom.app N)) ∧ (∀ N : Plus AX, t.app N = comparison.inv.app ⟨G.obj (UX.obj (SX.obj N.obj)), hE N⟩ ≫ SX.map (adjG.counit.app (UX.obj (SX.obj N.obj))) ≫ adjS.counit.app (SX.obj N.obj)) ∧ (∀ N : Plus AX, t.app N = P.map (alpha.hom.app N) ≫ comparison.inv.app ⟨J.obj N.obj, hD N⟩ ≫ SX.map (adjJ.counit.app N.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95d92ae4d",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read node, 4 stmt_dep records, report, module, and the Mathlib declarations (DerivedCategory.IsLE/IsGE/Plus/Plus.ι, TStructure.plus, Adjunction.rightAdjointUniq and rightAdjointUniq_hom_app_counit). All hypotheses match with no extras and 12 independent universes. gamma is the canonical rightAdjointUniq. r is pinned by r.inv = unit; beta = G(r)≫γ; alpha = SZ(beta); both t formulas checked against the node with every source/target verified; naturality via NatIso/NatTrans on Plus AX; no hollow existentials. lean.statement is byte-identical to the file signature; node differs from live only in lean; one sorry; docstrings carry source, blueprint tag and all six steps; report sections present. No findings, no fixes, not recompiled (worker scompile and deliver2 dry run OK)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261023T124207-L-1344235",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "DerivedCategory.exactAdjoint_classicalCounitComparison"
+  ],
+  "sorry_after": []
+ }
+}

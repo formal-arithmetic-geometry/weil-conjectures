@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-completion-reflects-flat-liftability",
+ "kind": "statement",
+ "title": "Completion detects existence of a flat lift of an affine deformation",
+ "statement": "Let $k$ be a field [def-weil-field], let $P$ be a finite-type commutative $k$-algebra, and let $J\\subseteq P$ be an ideal such that $\\operatorname{Spec}P$ is smooth over $k$ outside $V(J)$ [def-weil-affine-spectrum, def-sbc-smooth-morphisms]. Let $A'\\twoheadrightarrow A$ be a surjective local homomorphism of Artinian local commutative $k$-algebras with specified residue field $k$, respecting these identifications; Artinian means descending chains of ideals stabilize. Let $Q$ be a flat finite-type $A$-algebra [def-weil-pbc-flat-ring-map] with a specified isomorphism $Q/\\mathfrak m_AQ\\cong P$. Let $J_Q$ be the inverse image of $J$, and let $\\widehat Q=\\varprojlim_n Q/J_Q^n$ [def-weil-pbc-adic-completion]. There exists a flat $A'$-algebra $Q'$ with a specified $A$-algebra isomorphism $Q'\\otimes_{A'}A\\cong Q$ if and only if there exists a flat $A'$-algebra $D$ with an $A$-algebra isomorphism $D\\otimes_{A'}A\\cong\\widehat Q$; tensor products are as in [def-weil-pbc-module-tensor-product]. This asserts existence of some lift on each side and does not assert that a chosen $D$ is the completion of a chosen $Q'$.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZ3 (lemma-lift-equivalence), applied to the inverse-image ideal in a flat finite-type deformation with smooth special fibre off V(J); algebra.tex lemma-flat-fibre-smooth verifies the smooth, hence syntomic, complement. Artinian coefficient rings are Noetherian with nilpotent maximal ideal."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\ker(A'\\to A)$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], $A',A$ are Noetherian and their maximal ideals are nilpotent. Since $I\\subseteq\\mathfrak m_{A'}$, $I$ is nilpotent. A field is Noetherian (its only ideals are $0,k$); [lem-weil-pbc-finite-type-algebra-noetherian] makes $P,Q$ and all finite-variable polynomial rings over $k,A,A'$ Noetherian. Take a surjection $S=A[x_1,\\ldots,x_d]\\twoheadrightarrow Q$ and put $S'=A'[x_1,\\ldots,x_d]$. These polynomial algebras are flat over their coefficient rings: tensoring an injection with their monomial basis gives a direct sum of copies of that injection. Let $K\\subset S$ be the inverse image of $J_Q$, and $K'\\subset S'$ its inverse image. Let $K_0$ be their common image in $k[x_1,\\ldots,x_d]$. Thus $K,K'$ are exactly the inverse images of $K_0$ under reduction to $k$. First prove reverse liftability under the additional assumption $I^2=0$ (steps 4–8); step 3 proves forward liftability without that assumption. Steps 9–10 then treat arbitrary kernels.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, first paragraph: polynomial presentations and inverse-image ideals."
+   }
+  },
+  {
+   "text": "Write $C=\\widehat Q$, $T=\\widehat S_K$, $T'=\\widehat {S'}_{K'}$. Apply [lem-sfb-adic-completion-flat-deformation-functor] first to $P,J,Q$, and then to the marked polynomial deformations of $k[x_1,\\ldots,x_d]$ along $K_0$. It gives Noetherianity and coefficient-flatness of $C,T,T'$, the marked special fibre $C\\otimes_Ak\\cong\\widehat P_J$, and the canonical reduction $T'\\otimes_{A'}A\\cong T$. Also $S'\\to T'$ is flat by [lem-weil-pbc-noetherian-completion-flat]. Since $S'$ is Noetherian, $K'$ is finitely generated; [lem-weil-pbc-adic-completion-mod-ideal] gives $S'/K'\\cong T'/K'T'$. The finite $S$-module $Q$ is cyclic; [lem-weil-pbc-completion-finite-module-tensor] identifies $Q\\otimes_ST\\cong C$. On pure tensors this map is $q\\otimes t\\mapsto q t$ in the completion, so it respects products and units. In particular $T\\to C$ is surjective, as extension of the surjection $S\\to Q$ (equivalently, every tensor reduces to $1\\otimes t$ after lifting $q$ to $S$).",
+   "uses": [
+    "lem-sfb-adic-completion-flat-deformation-functor",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, polynomial completions; Tags 0DYV, 00MA, 00MB and 05GG."
+   }
+  },
+  {
+   "text": "The forward implication already follows by completing a given flat lift $Q'/A'$. Its special fibre is $P$, so [lem-sfb-adic-completion-flat-deformation-functor], applied to $P,J$, supplies a flat completion $D$ and the canonical marked reduction $D\\otimes_{A'}A\\cong C$. This uses an arbitrary flat lift; no finite-type condition on the given $Q'$ is needed for that cited statement.",
+   "uses": [
+    "lem-sfb-adic-completion-flat-deformation-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV (lemma-completion); forward implication of Tag 0DZ3."
+   }
+  },
+  {
+   "text": "For each $g\\in K'$, let $h$ be its image in $Q$, and $\\bar h\\in J\\subset P$ its special-fibre image. Set $Q_g=Q[1/h]$. It is $A$-flat by [lem-pc-affine-flat-module-localization-preserves-flatness]. It is finite type over $A$: adjoin one generator $z$ and the relation $hz=1$ to a finite presentation by generators. Thus [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes it finitely presented. Its only fibre over $\\operatorname{Spec}A$ is $P[1/\\bar h]$, since every prime of $A$ contains its nilpotent maximal ideal. This fibre is smooth: its spectrum is $D(\\bar h)\\subseteq\\operatorname{Spec}P\\setminus V(J)$, and smoothness restricts to opens by the affine-local characterization in [def-sbc-smooth-morphisms]. The same characterization, with [lem-weil-pbc-smooth-ring-map-local-on-cover], identifies its ring map as smooth; an affine cover by principal opens has a finite subcover because their elements generate the unit ideal. Hence [lem-weil-pbc-smooth-over-field-local-complete-intersection] makes this fibre a local complete intersection. These are exactly flatness, finite presentation and fibrewise complete-intersection hypotheses in [lem-sfb-syntomic-algebra-surjection-lift]. Applied to $A'\\twoheadrightarrow A$, it gives an $A'$-flat algebra $E_g$ with $E_g/IE_g\\cong Q_g$.",
+   "uses": [
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-local-on-cover",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "lem-sfb-syntomic-algebra-surjection-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, last paragraph; Tag 07M8 (smoothing.tex, proposition-lift-smooth (1)); the syntomic condition is checked directly on the single Artinian fibre."
+   }
+  },
+  {
+   "text": "Lift the images of $x_1,\\ldots,x_d$ under $S\\to Q_g$ to arbitrary elements of $E_g$. Evaluation gives an $A'$-algebra map $S'\\to E_g$. The image of $g$ reduces to a unit. It is therefore a unit: lift its inverse modulo $IE_g$; their product is $1+u$ with $u$ nilpotent, inverted by $1-u+\\cdots+(-u)^{N-1}$. Evaluation consequently extends to $S'_g\\to E_g$. Its reduction is the prescribed map $S_g\\to Q_g$, so $E_g$ as an $S'_g$-module is an $A'$-flat lift of the localized $S$-module $Q_g$. This verifies every local-lift hypothesis needed below, including $g$ with nilpotent image, when $Q_g=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, last sentence: giving the lifted algebra its localized polynomial-module structure."
+   }
+  },
+  {
+   "text": "For the reverse implication, take the given flat $A'$-algebra $D$ with its specified reduction $D/ID\\cong C$. The special fibre is $\\widehat P_J$. By [lem-sfb-adic-completion-flat-deformation-functor], $\\widehat P_J$ is Noetherian and complete along $J\\widehat P_J$; its automatic-completeness assertion, now applied to this complete special-fibre algebra, makes $D$ Noetherian and complete along the inverse image $L\\subset D$ of $J\\widehat P_J$. Lift the variable images of $S\\to Q\\to C$ to $D$, obtaining $f:S'\\to D$. The ideal $K'$ maps into $L$, so $f$ extends to $\\widehat f:T'\\to D$: at level $n$ use $S'/K'^n\\to D/L^n$, then take compatible sequences and the completeness identification $D\\cong\\varprojlim D/L^n$. Reduction of this map agrees with $T\\to C$ because both maps are the continuous extension of $S\\to C$; agreement follows at each quotient and hence in the separated complete ring $C$. Thus $D$, regarded as a $T'$-module, is an $A'$-flat lift of $Q\\otimes_ST=C$.",
+   "uses": [
+    "lem-sfb-adic-completion-flat-deformation-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, third paragraph (completed algebra lift gives a completed polynomial-module lift); Tag 0DYC is packaged in the cited automatic-completeness assertion."
+   }
+  },
+  {
+   "text": "Under the temporary assumption $I^2=0$, apply [lem-sfb-flat-module-lift-formal-neighbourhood] to $A'\\to S'\\to T'$, $K'$, and $M=Q$. Step 1 gives Noetherian polynomial rings, coefficient-flatness and square-zero $I$; step 2 gives Noetherian $T'$, flat $S'\\to T'$, its canonical scalar reduction, and the required quotient isomorphism modulo $K'$. The module $Q$ is finite over $S$ because it is a quotient, and is $A$-flat by hypothesis. Steps 4–5 give every localized lift. The $T'$-module lift from step 6 therefore yields an $A'$-flat $S'$-module $M'$ and a specified $S$-linear isomorphism $M'/IM'\\cong Q$.",
+   "uses": [
+    "lem-sfb-flat-module-lift-formal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, final paragraph, applying only the valid square-zero part of Tag 0DZ2 (lemma-lift-equivalence-module); no nilpotent induction is used here."
+   }
+  },
+  {
+   "text": "Choose $e\\in M'$ mapping to $1\\in Q$. The $S'$-linear map $S'\\to M'$, $s\\mapsto se$, is surjective modulo $I$, since $S\\to Q$ is surjective. By [lem-weil-pbc-nakayama-nilpotent] it is surjective. Its kernel $H$ is an ideal, since $S'$ is a commutative ring and this is a map out of its rank-one free module. Hence $S'/H\\cong M'$ as $S'$-modules. Give $Q'=S'/H$ its quotient algebra structure. It is $A'$-flat because $M'$ is. The specified reduction identifies $Q'/IQ'$ with $Q$: the composite $S\\to Q'/IQ'\\to Q$ sends $s$ to its original image in $Q$, since $e$ maps to $1$. Consequently that bijective module map is an algebra isomorphism, proving the reverse implication for square-zero kernels with the required marking. If $J=P$, the completions are zero and the same argument uses local lifts on the whole smooth spectrum; if $J=0$, $J_Q$ is nilpotent and $C=Q$. If $P=0$, nilpotence forces $Q=0$, and the zero lift works. No step identifies the originally chosen $D$ with the completion of the constructed $Q'$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ3, second paragraph (cyclic module to algebra); edge cases of the same argument."
+   }
+  },
+  {
+   "text": "Consider the completion functor $F:\\mathrm{Def}_P\\to\\mathrm{Def}_{\\widehat P_J}$ of [lem-sfb-adic-completion-flat-deformation-functor]; $P$ is Noetherian by step 1, so that node applies and supplies its compatibility with every Artinian base change. By [lem-sfb-ring-deformation-smoothness-test], the source and target tangent spaces identify with $\\operatorname{Exal}_k(P,P)$ and $\\operatorname{Exal}_k(\\widehat P_J,\\widehat P_J)$. Under these identifications the tangent map is completion: both send the middle algebra of a marked dual-number extension to its completion, and its kernel map $p\\mapsto\\epsilon\\widetilde p$ is preserved by this operation. Apply [lem-sfb-exal-completion-smooth-complement] with $B=P$ and $N=P$, finite as a module over itself. Its hypotheses are exactly finite type of $P$ and smoothness off $V(J)$. Since $\\widehat N=\\widehat P_J$, it says precisely that this tangent map is an isomorphism, in particular surjective.",
+   "uses": [
+    "lem-sfb-adic-completion-flat-deformation-functor",
+    "lem-sfb-ring-deformation-smoothness-test",
+    "lem-sfb-exal-completion-smooth-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZ4 (lemma-first-order-completion), N=P; Tag 0DZ5 (lemma-smooth-completion), tangent comparison; Tag 0DY3 (lemma-rings-TI)."
+   }
+  },
+  {
+   "text": "We now discharge the temporary square-zero restriction. For every object $B\\in\\mathrm{Def}_P(R)$, the maximal ideal of $R$ is nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent], and [lem-weil-pbc-finite-type-lift-nilpotent] applied to $B/\\mathfrak m_RB=P$ makes $B$ finite type over $R$. Consequently steps 1–8 apply to every such object and every small extension $R'\\twoheadrightarrow R$: its kernel, being annihilated by $\\mathfrak m_{R'}$ and contained in that ideal, is square zero. They give exactly condition (ii) of [lem-sfb-ring-deformation-smoothness-test], existence of a source lift whenever the completed object lifts. Step 9 gives condition (i). The cited criterion therefore gives compatible marked lifts over arbitrary Artinian surjections. Apply it to the original $A'\\twoheadrightarrow A$, $Q$ and supplied $D$: the output includes a flat algebra $Q'$ with $Q'\\otimes_{A'}A\\cong Q$, as required. The criterion preserves the target marking at each small-extension step; no arbitrary intermediate lift is assumed to retain formal liftability. This proves the reverse implication for the original unchanged statement; combine with step 3.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-finite-type-lift-nilpotent",
+    "lem-sfb-ring-deformation-smoothness-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DYP (lemma-easy-check-smooth), with Tags 06JI/06JJ and 06GE (lemma-factor-small-extension), lemma-smoothness-small-extensions; examples-defos.tex Tag 0DZ5, using 0DZ3 only for small extensions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-adic-completion-flat-deformation-functor",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+  "lem-sfb-syntomic-algebra-surjection-lift",
+  "lem-sfb-flat-module-lift-formal-neighbourhood",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-sfb-ring-deformation-smoothness-test",
+  "lem-sfb-exal-completion-smooth-complement",
+  "lem-weil-pbc-finite-type-lift-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Repair of Tags 0DZ2/0DZ3: square-zero polynomial-module argument in steps 1–8; the existing 0DZ4 tangent comparison and 0DYP marked smoothness criterion in steps 9–10 supply the compatible induction that the false nilpotent module statement does not supply."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type flat algebra over an Artinian local base has a flat lift across a nilpotent extension if and only if its completion along the nonsmooth locus has a flat lift",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {Rₘ : Type u_6} [inst : CommRing R] [inst_1 : CommRing Rₘ] (M : Submonoid R) [inst_2 : Algebra R Rₘ]\\n  [IsLocalization M Rₘ], Algebra.FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary formally smooth homomorphism lifts and H1Cotangent.exact_liftBaseChange_map_of_flat do not assert existence of flat lifts of a deformed algebra; read JacobiZariski.lean:493-514."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"lift\"",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"Module.Flat.of_ulift\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Flat R (ULift.{v', v} M)] : Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.ulift\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Flat R M] : Module.Flat R (ULift.{v', v} M)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.ulift_left_iff\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \" {R : Type u} {M : Type w} [CommSemiring R] [AddCommMonoid M] [Module R M] : Module.Flat (ULift.{t, u} R) M ↔ Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.ulift_right_iff\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \" {R : Type u} {M : Type w} [CommSemiring R] [AddCommMonoid M] [Module R M] : Module.Flat R (ULift.{t, w} M) ↔ Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"RingHom.Flat.ulift_iff\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] {f : R →+* S} : (RingHom.ulift.{u₁, u₂, u_1, u_2} f).Flat ↔ f.Flat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PreservesFiniteLimitsOfFlat.lift\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type v₁} [CategoryTheory.SmallCategory J] [CategoryTheory.FinCategory J] {K : CategoryTheory.Functor J C} (F : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat F] {c : CategoryThe\", \"doc\": \"(Implementation).\\nGiven a limit cone `c : cone K` and a cone `s : cone (K ⋙ F)` with `F` representably flat,\\n`s` can factor through `F.mapCone c`.\"}\n  {\"name\": \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"module\": \"Mathlib.RingTheory.Flat.Tensor\", \"type\": \" {R : Type u} {M : Type v} [CommRing R] [AddCommGroup M] [Module R M] : Module.Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective ⇑(TensorProduct.lift (LinearMap.lsmul R M ∘ₗ Submodule.subtype I))\", \"doc\": \"An `R`-module `M` is flat if for all finitely generated ideals `I` of `R`,\\nthe canonical map `I ⊗ M →ₗ M` is injective.\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" (R : Type u₁) (S : Type u₂) [CommRing R] [CommRing S] [Algebra R S] (T : Type u₃) [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Module.Flat S T] : Function.Exact ⇑(LinearMap.liftBaseChange T (Algebra.H1Cotangent.map R R S T)) ⇑(Algebra.H1Cotangent.map R S T T)\", \"doc\": \"Given algebras $R \\\\to S \\\\to T$ and $T$ flat over $S$, the sequence\\n$T \\\\otimes_S H_1(L_{S/R}) \\\\to H_1(L_{T/R}) \\\\to H_1(L_{T/S})$\\nis exact.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat'\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) (W : Algebra.Generators R T τ) [Module.Flat S T] (\", \"doc\": \"A variant of `exact_liftBaseChange_map_of_flat` that takes in\\narbitrary maps between generators.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat\", \"module\": \"Mathlib.RingTheory.Kaehler.JacobiZariski\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] [Algebra R S] {T : Type u₃} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] {ι : Type w₁} {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ) [Module.Flat S T] : Function.Exact ⇑(LinearMap.liftBaseChange T \", \"doc\": \"When $T$ is flat over $S$, the left bottom part of the snake lemma diagram used in\\nthe construction of the connecting homomorphism `Algebra.Generators.H1Cotangent.δ`\\nnaturally extends via a base chang\"}\n  {\"name\": \"Stream'.WSeq.liftRel_flatten\", \"module\": \"Mathlib.Data.WSeq.Relation\", \"type\": \" {α : Type u} {β : Type v} {R : α → β → Prop} {c1 : Computation (Stream'.WSeq α)} {c2 : Computation (Stream'.WSeq β)} (h : Computation.LiftRel (Stream'.WSeq.LiftRel R) c1 c2) : Stream'.WSeq.LiftRel R (Stream'.WSeq.flatten c1) (Stream'.WSeq.flatten c2)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary formally smooth homomorphism lifts and H1Cotangent.exact_liftBaseChange_map_of_flat do not assert existence of flat lifts of a deformed algebra; read JacobiZariski.lean:493-514."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*flat|flat.*lift|liftability|syntomic",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Util/PrintSorries.lean\", \"line\": \"139\", \"text\": \"    let mut names ← liftCoreM <| idents.flatMapM fun id =>\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"48\", \"text\": \"  rw [weaklyEtale_iff, weaklyEtale_iff, Module.Flat.ulift_left_iff, Module.Flat.ulift_right_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"50\", \"text\": \"  conv_rhs => rw [← RingHom.Flat.ulift_iff.{u₁, u₂}]\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"92\", \"text\": \"    · exact (flat_lmul' (ULift R) (ULift S)).mapOfCompatibleSMul\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"94\", \"text\": \"    · exact WeaklyEtale.flat_lmul' (ULift S) (ULift T)\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"190\", \"text\": \"lemma ulift_iff {f : R →+* S} : (ulift.{u₁, u₂} f).Flat ↔ f.Flat := by\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"38\", \"text\": \"`Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat`. Globally, this extends\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"43\", \"text\": \"The exactness lemma is `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`.\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"47\", \"text\": \"The flatness assumption in `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"497\", \"text\": \"theorem exact_liftBaseChange_map_of_flat [Module.Flat S T] :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"517\", \"text\": \"/-- A variant of `exact_liftBaseChange_map_of_flat` that takes in\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"line\": \"131\", \"text\": \"/-- If `B` is a faithfully-flat `A`-algebra, the lifting an ideal in `A` to `B` is injective. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"189\", \"text\": \"instance ulift [Flat R M] : Flat R (ULift.{v'} M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"193\", \"text\": \"lemma of_ulift [Flat R (ULift.{v'} M)] : Flat R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Tensor.lean\", \"line\": \"95\", \"text\": \"lemma iff_lift_lsmul_comp_subtype_injective : Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG →\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"73\", \"text\": \"lemma ulift_left_iff : Flat (ULift.{t} R) M ↔ Flat R M := by\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"75\", \"text\": \"  have : Module.Flat (ULift.{t} R) R := .of_ulift\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"81\", \"text\": \"lemma ulift_right_iff : Flat R (ULift.{t} M) ↔ Flat R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Stability.lean\", \"line\": \"82\", \"text\": \"  Flat.equiv_iff ULift.moduleEquiv\"}\n  {\"file\": \"Mathlib/Computability/TuringMachine/Tape.lean\", \"line\": \"379\", \"text\": \"  apply l.liftOn (fun l ↦ ListBlank.mk (l.flatMap f))\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"268\", \"text\": \"theorem liftRel_flatten {R : α → β → Prop} {c1 : Computation (WSeq α)} {c2 : Computation (WSeq β)}\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"269\", \"text\": \"    (h : c1.LiftRel (LiftRel R) c2) : LiftRel R (flatten c1) (flatten c2) :=\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"270\", \"text\": \"  let S s t := ∃ c1 c2, s = flatten c1 ∧ t = flatten c2 ∧ Computation.LiftRel (LiftRel R) c1 c2\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"274\", \"text\": \"      simp only [destruct_flatten]; apply liftRel_bind _ _ h\"}\n  {\"file\": \"Mathlib/Data/WSeq/Relation.lean\", \"line\": \"280\", \"text\": \"    Computation.LiftRel Equiv c1 c2 → flatten c1 ~ʷ flatten c2 :=\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary formally smooth homomorphism lifts and H1Cotangent.exact_liftBaseChange_map_of_flat do not assert existence of flat lifts of a deformed algebra; read JacobiZariski.lean:493-514."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of flat algebra deformations can be detected after completion along the singular locus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary formally smooth homomorphism lifts and H1Cotangent.exact_liftBaseChange_map_of_flat do not assert existence of flat lifts of a deformed algebra; read JacobiZariski.lean:493-514."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Obstructions to flat deformation of a finite type algebra are unchanged by completing along an ideal containing the nonsyntomic locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext_of_iInf\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  ⨅ i, I ^ i = ⊥ →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quo\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ I $ is an ideal in $ B $ such that the intersection of all powers $ I^n $ is trivial (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n = 0 $), then any two $ R $-\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary formally smooth homomorphism lifts and H1Cotangent.exact_liftBaseChange_map_of_flat do not assert existence of flat lifts of a deformed algebra; read JacobiZariski.lean:493-514."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"lift\"",
+   "results": "Actual search hits: Module.Flat.of_ulift, Module.Flat.ulift, Module.Flat.ulift_left_iff, Module.Flat.ulift_right_iff, RingHom.Flat.ulift_iff, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern flatness of an existing module or lifting algebra homomorphisms; none asserts existence of flat module deformations or its formal-neighbourhood comparison. Read Mathlib/RingTheory/Kaehler/JacobiZariski.lean:493-514 and Smooth/AdicCompletion.lean:82-108."
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*flat|flat.*lift|liftability",
+   "results": "Actual search hits: Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern flatness of an existing module or lifting algebra homomorphisms; none asserts existence of flat module deformations or its formal-neighbourhood comparison. Read Mathlib/RingTheory/Kaehler/JacobiZariski.lean:493-514 and Smooth/AdicCompletion.lean:82-108."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a flat deformation of an algebra is equivalent to existence of a flat deformation of its completion away from the smooth locus",
+   "results": "Actual search hits: Algebra.Smooth.flat, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.smoothLocus_eq_univ_iff, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.formallySmooth, Algebra.Smooth, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.smooth_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern flatness of an existing module or lifting algebra homomorphisms; none asserts existence of flat module deformations or its formal-neighbourhood comparison. Read Mathlib/RingTheory/Kaehler/JacobiZariski.lean:493-514 and Smooth/AdicCompletion.lean:82-108."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a flat lift of an algebra over an Artinian ring is equivalent to existence of a flat lift of its completion along the nonsmooth locus",
+   "results": "Actual search hits: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift, Algebra.smoothLocus, Algebra.FormallySmooth.lift, AdicCompletion.liftAlgHom, IsAdicComplete.liftAlgHom, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_kerProj_comp_eq_id",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern flatness of an existing module or lifting algebra homomorphisms; none asserts existence of flat module deformations or its formal-neighbourhood comparison. Read Mathlib/RingTheory/Kaehler/JacobiZariski.lean:493-514 and Smooth/AdicCompletion.lean:82-108."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-affine-completion-deformation",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Existence-only comparison before the tangent action adjusts the chosen completed lift.",
+   "via": [
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-completion-reflects-flat-liftability",
+  "worker": "stage1",
+  "summary": "Repaired the returned E2/E7/D5 error without changing the item statement: the sole new module lemma now assumes I²=0. Retained the polynomial-module construction for that case. Reused the existing 0DZ4 Exal completion theorem and reviewed ring-deformation smoothness criterion to obtain compatible small-extension lifts and then arbitrary Artinian lifts. Reported the false nilpotent 0DZ2 statement with the supplied counterexample under Source error.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration/local curve-deformation chain recorded in blueprint.from.place; this item supplies the existence-only completion comparison needed before tangent adjustment. The ancestor command reports from.node=None for this created chain; its inherited null is retained. The repair uses the valid small-extension case of the polynomial-module comparison, followed by the tangent-adjustment route of 0DZ4/0DZ5 and the existing generic 0DYP node; this does not change the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic commutative-algebra input to the Stacks 0DZ3 polynomial-module argument; the unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic commutative-algebra input to the Stacks 0DZ3 polynomial-module argument; the unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "why": "Generic commutative-algebra input to the Stacks 0DZ3 polynomial-module argument; the unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-nilpotent",
+    "why": "Generic commutative-algebra input to the Stacks 0DZ3 polynomial-module argument; the unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-lift-nilpotent",
+    "why": "Generic algebra/deformation criterion supporting the source completion route; the unit supplies no substitute for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-weil-pbc-finite-type-lift-nilpotent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-c40024c0f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-c40024c0f (reviewer sub-agent of L); spot-checked: I read the whole item (unchanged statement, 10 steps), the new node, all 17 cited statements and the Stacks sources: examples-defos.tex 1996-2134 (0DZ2 and 0DZ3 with proofs), 0DZ4 at 2166 and 0DZ5 at 2275-2302. Steps 1-8 are Stacks' 0DZ3 polynomial-module argument restricted to I²=0: the inverse-image ideals K and K' are right; the completion functor gives T, T', C=Q⊗_S T and S'/K'≅T'/K'T'; the localizations Q_g are syntomic (single lci fibre P[1/h̄]) and lift by 07M8; D becomes a T'-module lift by automatic completeness; the new node gives an S'-module lift; nilpotent Nakayama turns the cyclic module into an algebra with the A-marking. Steps 9-10 follow the 0DZ5 route: the 0DZ4 node with B=N=P makes the tangent map an isomorphism. Every Def_P object is of finite type (finite-type-lift-nilpotent) and small extensions are square-zero, so condition (ii) of the smoothness test holds, and its marked conclusion gives Q' for any Artinian surjection. The statement is not weakened and no dependency closure reaches the item or its parent. The new node is the valid square-zero 0DZ2 argument: the class ω(M) in Ext² is finite and K-power torsion by the local lifts, and E→E⊗T is bijective on that torsion. Finiteness of M, used by the source proof, is now explicit. Small cases K'=S', K'=0 and M=0 are trivial. It has no duplicate (rg -L for 0DZ2/0DZ3/0DZ4/0DZ5 and lift-equivalence) and is not a clause of the item. Batch-5 flag: every sec-trace-formula node in the closure of the 0DZ4 node (lem-trf-cotangent-resolution-coherence etc.) is generic cotangent-complex, simplicial or site homological algebra (Stacks 08PM/08QL), not a step of the trace formula or Poincaré duality proof; the parent already cites the 0DZ4 node, so the citation is accepted. The generic commutative-algebra tool_uses are accepted. No SGA is cited. The base item was unsplit with an empty proof, so this is not a re-split case."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionReflectsFlatLiftability",
+  "declaration": "Algebra.completion_reflects_flat_liftability",
+  "file": "lean/Sheaf/RingTheory/CompletionReflectsFlatLiftability.lean",
+  "statement": "theorem completion_reflects_flat_liftability (k P : Type u) [Field k] [CommRing P] [Algebra k P] [FiniteType k P] (J : Ideal P) (hsmooth : ∀ p : Spec (CommRingCat.of P), p ∉ PrimeSpectrum.zeroLocus (J : Set P) → ∃ U : (Spec (CommRingCat.of P)).Opens, p ∈ U ∧ AlgebraicGeometry.Smooth (U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k P)))) (A' A : Type u) [CommRing A'] [CommRing A] [IsLocalRing A'] [IsLocalRing A] [IsArtinianRing A'] [IsArtinianRing A] [Algebra k A'] [Algebra k A] [Algebra A' A] [IsScalarTower k A' A] [IsLocalHom (algebraMap A' A)] (hsurj : Function.Surjective (algebraMap A' A)) (eA' : IsLocalRing.ResidueField A' ≃ₐ[k] k) (eA : IsLocalRing.ResidueField A ≃ₐ[k] k) (hres : ∀ a' : A', eA (IsLocalRing.residue A (algebraMap A' A a')) = eA' (IsLocalRing.residue A' a')) (Q : Type u) [CommRing Q] [Algebra A Q] [Algebra k Q] [IsScalarTower k A Q] [Module.Flat A Q] [FiniteType A Q] (eP : (Q ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A Q)) ≃ₐ[k] P) : (∃ (Q' : Type u) (_ : CommRing Q') (_ : Algebra A' Q'), Module.Flat A' Q' ∧ Nonempty ((A ⊗[A'] Q') ≃ₐ[A] Q)) ↔ (∃ (D : Type u) (_ : CommRing D) (_ : Algebra A' D), Module.Flat A' D ∧ Nonempty ((A ⊗[A'] D) ≃ₐ[A] AdicCompletion (J.comap (eP.toRingHom.comp (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A).map (algebraMap A Q))))) Q))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d1343ffe",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node (unchanged except the added lean record; the live node has no Lean record), Stacks 0DZ3 statement and proof, all 6 stmt_dep records, the module and report.md (real Worker report and Second reading by Q22). Clause check: hsmooth = smoothness on the open complement of V(J) via AlgebraicGeometry.Smooth of U.ι ≫ Spec.map(algebraMap k P). A', A local Artinian (DCC) k-algebras with a surjective algebraMap; IsLocalHom and hres are automatic, so nothing stronger is assumed. Q flat and finite type with the induced k-structure; eP : Q/m_A Q ≃ₐ[k] P. J_Q = J.comap(eP∘mk); Q̂ = AdicCompletion J_Q Q with the canonical A-algebra structure (Mathlib Algebra.lean:103). The iff has independent existentials: flat Q' with A⊗[A']Q' ≃ₐ[A] Q, and flat D with A⊗[A']D ≃ₐ[A] Q̂. Edge cases J=0, J=⊤, zero rings, A'=A and any characteristic are covered. Statement field is verbatim in the file (scripted check); proof is sorry; no new definitions; source and blueprint docstrings and all 10 proof steps present; proof-only WeilConjectures imports exist and are the proof_deps' recorded modules; no duplicate found. Advisory only: all types share one universe u (disclosed in the report; lifts are essentially small). No compile, since no file was changed."
+ }
+}

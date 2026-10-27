@@ -1,0 +1,229 @@
+{
+ "id": "lem-pur-system-block-repetition",
+ "kind": "statement",
+ "title": "Exact block repetition and unbounded derived direct image",
+ "statement": "Let $u:\\mathcal X\\to\\mathcal Y$ be a geometric morphism of topoi presented by small sites, so $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits. Let $B_1\\leftarrow B_2\\leftarrow\\cdots$ be sheaves of commutative rings on $\\mathcal Y$, and put $B_i^X=u^{-1}B_i$. For a ring sequence $A$, let $\\mathscr S(A)$ denote strict semilinear systems of module sheaves: objects have $A_{i+1}$-linear maps $M_{i+1}\\to\\operatorname{Res}_{A_{i+1}\\to A_i}M_i$, and morphisms are compatible componentwise maps. Use the ordinary unbounded derived categories, exact component evaluations, levelwise inverse image and its total derived direct image $Ru_{*,A}$ of [lem-coef-semilinear-derived-sections].\nLet $t:\\mathbf Z_{\\ge1}\\to\\mathbf Z_{\\ge1}$ be nondecreasing and surjective, with each fiber a finite nonempty interval. Put $a_i=\\min t^{-1}(i)$ and $D_m=B_{t(m)}$, with identity ring maps inside each block and the specified $B$-transition between blocks; likewise $D_m^X=B_{t(m)}^X$. Define the repetition functor $R_t^W:\\mathscr S(B^W)\\to\\mathscr S(D^W)$ by $(R_t^WM)_m=M_{t(m)}$, with identity transitions inside each block. Define $E_t^W:\\mathscr S(D^W)\\to\\mathscr S(B^W)$ by $(E_t^WP)_i=P_{a_i}$, using the composite transition from $a_{i+1}$ to $a_i$ and the identification $D_{a_i}=B_i$.\nThen $E_t^W\\dashv R_t^W$, and both functors are additive and exact. The component at $m\\in t^{-1}(i)$ of the adjunct of $f:E_t^WP\\to M$ is $P_m\\to P_{a_i}\\xrightarrow{f_i}M_i$. In particular $R_t^W$ preserves K-injective complexes (a complex $I$ is K-injective when every map from an acyclic complex to $I$ is chain homotopic to zero).\nThere is a canonical natural isomorphism on ordinary unbounded derived systems\n$$\\kappa_t:Ru_{*,D}R_t^X\\xrightarrow{\\sim}R_t^YRu_{*,B}.$$\nOn any K-injective $B^X$-system representative $I$, it is the identity comparison of the two identical complexes $(u_*I_{t(m)})_m$, under the canonical derived-functor identifications. These normalization equations determine $\\kappa_t$ independently of resolutions, including its map action and transitions. Together with the strict inverse-image identity $u_D^{-1}R_t^Y=R_t^Xu_B^{-1}$, this comparison intertwines the units and counits of the derived geometric adjunctions. The comparison is natural in the coefficients: let $b:B\\to B'$ be a compatible map of ring sequences on $\\mathcal Y$, with $b^X=u^{-1}b$, repeated sequence $D'_m=B'_{t(m)}$, repeated maps $d_m=b_{t(m)}:D_m\\to D'_m$, $d^X_m=b^X_{t(m)}$, and exact restrictions of scalars $U_b,U_d$, so that $R_t^WU_{b}^W=U_{d}^WR_t^W$ strictly. Let $\\beta_b:U_b^YRu_{*,B'}\\to Ru_{*,B}U_b^X$ and $\\beta_d:U_d^YRu_{*,D'}\\to Ru_{*,D}U_d^X$ be the comparisons of total right derived functors induced by the strict identities $U\\,u_*=u_*U$ through the universal property of the right derived functors. Then $$\\kappa_t^{B}U_b^X\\circ\\beta_dR_t^X=R_t^Y\\beta_b\\circ U_d^Y\\kappa_t^{B'}$$ as maps $U_d^YRu_{*,D'}R_t^X\\to R_t^YRu_{*,B}U_b^X$. For two block maps, the comparison for their composite equals the composite of their comparisons under strict reindexing identifications; the identity block map gives identity. If $u$ is an open localization, exact extension by zero also commutes with repetition, by the strict identity $j_{!,D}R_t^X=R_t^Yj_{!,B}$, and this identity is compatible with the same reindexings.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, and the levelwise geometric morphism and base-change argument preceding Lemma 4.10, printed p. 23; agent generalization to finite nonempty blocks."
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-block-constructions",
+  "lem-pur-system-block-derived-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual finite-block constructions and coefficient identifications of [lem-pur-system-block-constructions]. Use the actual ringed sequence-site definitions of [lem-coef-semilinear-derived-sections]. First endpoints a and the block map t form an adjunction a ⊣ t on the sequence site: the unit has index i ≤ t(a(i)) = i, and the counit has index a(t(m)) ≤ m. Both have identity vertical components. The triangle identities hold by thinness of the index category and the identity vertical maps. Apply Mathlib SheafOfModules.pushforwardPushforwardAdj to the endpoint and repetition ring identifications. For its counit ring equation, cancel the invertible repetition identification and use its naturality; after applying t the counit is an equality transport because t(a(t(m))) = t(m). The unit ring equation is also a composition of equality transports. The resulting module-sheaf unit at (m,U) is precisely the transition P_m(U) → P_(a(t(m)))(U), so Adjunction.homEquiv_unit gives the asserted adjunct formula. Composition of continuous pushforwards and equality of their coefficient maps gives the component evaluation isomorphism, identity on section carriers. Endpoint module objects are the original modules after transport along the endpoint ring equality. Reindexing is additive; it preserves finite limits after the forgetful functor to abelian presheaves and finite colimits after the conservative exact functor to abelian sheaves, since the sequence-site reindexing is cocontinuous. This proves every field of SystemBlockRepetition except K-injective preservation.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-block-constructions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p.21; agent finite-block endpoint generalization, including the displayed boundary equation."
+   }
+  },
+  {
+   "text": "Apply the proved source-library lemma CategoryTheory.Adjunction.preservesKInjectiveComplexes to the exact additive endpoint adjunction constructed in step 1. Explicitly, an acyclic repeated-system complex H remains acyclic under endpoint evaluation E. A map H → R(I) transposes to E(H) → I; K-injectivity of I makes it null-homotopic, and the additive degreewise adjunction transports this homotopy back. Thus repetition preserves K-injectives without any assertion that individual evaluations preserve them. Exact termwise descent is the existing construction of [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives, proof; Tag 015F, lemma-right-derived-exact-functor. The Hom argument here is written out, not used as an uncited theorem."
+   }
+  },
+  {
+   "text": "Use [lem-pur-block-geometric-core] for the repeated ordinary inverse-image system P, direct core K, and normalized squares. Use [lem-pur-block-geometric-adjunction-assembly], proved by applying the already proved [lem-coef-ordinary-direct-system-hom-data] to the local transition-mate core K: this assembles the global Hom equivalence from the component adjunctions. Prove left and right naturality of that equivalence by ordinary evaluation and the naturality of P.component and K.component, and use Adjunction.mkOfHomEquiv to construct the repeated ordinary adjunction. The two normalized evaluation-square equations imply that its Hom equivalence intertwines repetition with the original ordinary Hom equivalence. Apply this identity to an identity map to obtain unit compatibility, and to the original counit, using injectivity of the new Hom equivalence, to obtain counit compatibility. Additivity follows from preservation of binary products for P and from the right-adjoint criterion for K. Apply [prop-pur-kinjective-resolutions-exist] to the repeated ringed sequence site for Grothendieck abelianness; [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions of this actual repeated system category. Finally [lem-pur-system-block-derived-comparisons] gives canonical normalized derived comparison, uniqueness, derived adjunction compatibility, coefficient naturality and composition/identity coherence.",
+   "uses": [
+    "lem-pur-block-geometric-core",
+    "lem-coef-ordinary-direct-system-hom-data",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-pur-system-block-derived-comparisons",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-block-geometric-adjunction-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y (K-injective representatives and right-derived normalization), Tag 09T5 (derived adjunctions); existing generic comparison proofs extracted from Sheaf.Paper.SystemBlockRepetition."
+   }
+  },
+  {
+   "text": "Construct the open-slice repetition evaluation equality by continuous module pushforward composition and its coefficient-map equation; its restriction maps are the original reindexed restrictions. Apply the proved assembly and normalization theorem [lem-pur-block-open-extension-assembly] to these data. That theorem constructs normalized OpenSystems data, assembles the explicit component isomorphisms after checking the horizontal-compatibility obligation, and proves naturality, the full heterogeneous normalization equation, and uniqueness. Exact termwise descent is the existing mapDerivedCategorySquareIso construction. The generic assembly proof is in a support module so both files stay within the compilation limit.",
+   "uses": [
+    "lem-pur-block-open-extension-assembly",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, ordinary levelwise operations; agent open-localization and block-reindexing consequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-block-constructions",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-block-geometric-core",
+  "lem-coef-ordinary-direct-system-hom-data",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pur-system-block-derived-comparisons",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-block-geometric-adjunction-assembly",
+  "lem-pur-block-open-extension-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21, and geometric morphism paragraph before Lemma 4.10, printed p.23; explicit agent generalization to finite blocks, derived normalization and coefficient compatibility, with Stacks Tags 079P, 070I, 070Y, 08BJ, 09T5. V2 proves the endpoint adjunction via Mathlib module-sheaf pushforwards of adjoint site functors, and K-injective preservation via the existing exact-left-adjoint criterion. The proved generic derived-comparison portion is extracted unchanged into lem-pur-system-block-derived-comparisons after proof-local coefficient abstraction; the item publicly reexports it. The existing ordinary constructions and coherence are extracted into lem-pur-system-block-constructions, with public re-export, after generic coefficient-transport abstraction still left the item at the time limit. E4 reduces the remaining open extension comparison to a horizontal component compatibility theorem, proving normalized open-data construction, component assembly, naturality, normalization, and uniqueness in Lean. D3 assembles the global ordinary adjunction from the repeated local direct core using the existing component Hom-equivalence theorem, proves its naturality and both adjunction equations, and isolates only the local reindexing construction as lem-pur-block-geometric-core. The proved global assembly and its private categorical helpers are extracted into lem-pur-block-geometric-adjunction-assembly after a final compile exceeded the single-file limit; the local construction remains the only new hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Repeating finite blocks of an inverse sequence of module sheaves has an exact left adjoint given by evaluation at first block endpoints, preserves K injectives, and commutes with unbounded derived direct image",
+   "results": "Recorded returned hits: localCohomology.diagram, Ext, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskeringLeft",
+   "results": "Recorded returned hits: CategoryTheory.Functor.whiskeringLeft, CategoryTheory.Functor.whiskeringLeft_obj_id, CategoryTheory.Functor.whiskeringLeft_obj_obj, CategoryTheory.Functor.whiskeringLeftObjIdIso, CategoryTheory.Functor.whiskeringLeft_obj_map, CategoryTheory.Functor.whiskeringLeft_obj_comp, CategoryTheory.Functor.whiskeringLeftObjCompIso, CategoryTheory.Functor.whiskeringLeft_map_app_app. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blockRepetition|block.repetition|semilinear.*[Ss]ystem",
+   "results": "Recorded returned hits: Mathlib/Algebra/Ring/CompTypeclasses.lean. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a surjective nondecreasing map of natural numbers with finite fibers commutes with right derived direct images of sheaf systems",
+   "results": "Recorded returned hits: CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.Sheaf.ΓRes_map, CategoryTheory.Sheaf.ΓRes, CategoryTheory.Functor.rightDerivedNatTrans, ModuleCat.Tilde.toOpen_res, TopCat.Presheaf.SheafConditionEqualizerProducts.w, Finset.restrict₂_comp_restrict. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition of sheaf module inverse systems by a monotone surjection has a first endpoint evaluation left adjoint; natural derived pushforward comparison commutes with coefficient restriction",
+   "results": "Recorded returned hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-system-cofinal-mate",
+  "date": "2026-10-22",
+  "group": "Q29"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: form compatible finite-level functors before inverse limits; the cofinal-indexing argument needs exact repetition of selected coefficient levels before coefficient extension.",
+   "via": [
+    "lem-pur-etale-system-cofinal-mate",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-system-block-repetition",
+  "worker": "stage1",
+  "summary": "Explicit first-endpoint Hom adjunction, exactness and K-injective argument; canonical system-level derived comparison and coefficient square by derived-unit cancellation. All non-elementary general inputs reuse existing DAG nodes; no new nodes. Statement unchanged.",
+  "blueprint": "def-weil-exceptional-inverse-image, adic-stage paragraph: compatible finite-level functors before inverse limits. The cofinal-indexing proof needs repetition of coefficient levels. Steps 1-3 construct repetition and its derived comparison; steps 4-7 fix its maps, adjunction and coefficient/composition coherence; step 8 treats open extension.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Ordinary semilinear system categories, componentwise exactness and geometric adjunctions provide the ambient categories already required by the statement."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic natural-Hom-bijection construction turns the explicit endpoint bijection into an adjunction; no geometric route is replaced."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic Grothendieck-category K-injective existence applies to the system hearts; no alternative geometric route."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Universal total right-derived units specify the coefficient comparisons and their normalization; a categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-square-derived-counit",
+    "why": "Generic exact-square derived-adjunction comparison applies after the repetition comparison has been explicitly constructed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N9-c4f5f4bc7",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-c4f5f4bc7 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, all eight steps and the seven cited statements in full. Shape: one commit, the item and the report only, no new nodes. The statement and stmt_deps match the landed base (the Q29 FIX version) byte for byte. There is no repair note and no SGA citation. No cycle: the item is not among the 638 nodes its citations reach. proof_deps equals the union of the step uses. Source: Zheng arXiv:1006.3810 Construction 4.1 (p.21) only sets up projective systems and levelwise adjunctions, so the proof is correctly marked agent-written. Index checks: the first-endpoint adjunct is forced because transitions run from larger to smaller indices. The boundary equation M_{i+1,i}g_{a_{i+1}}=g_{a_i}p_{a_{i+1},a_i} is exactly the system equation for f. Tested t=id, singleton blocks, (1,1,2,2,…) with a nonidentity transition, zero rings, and composites with R_sR_t=R_{t∘s}. Steps: step 2 is the 08BJ Hom argument written out. In step 3, κ is natural on derived maps because the unique homotopy class of R_X h is R_X g. I recomputed the step-4 cancellation and the step-6 coefficient square (both sides reduce to R_Y(γ^B_{U_bI}), using step 4 at the non-K-injective U_bI) and the step-7 composite formula. Step 5 meets every hypothesis of the exact-square node with β=κ^{-1}, and unit compatibility follows from counit compatibility, which I checked. Advisory: step 6 attributes β_b's normalization to def-sfb-right-derived-functor somewhat loosely, but the normalization on K-injectives determines β_b uniquely, so this is not a fault. tool_uses accepted: generic categorical nodes plus the ambient semilinear framework, which is already a stmt_dep; none replaces a unit step. No duplicate found by a DAG-wide search; the only citer, cofinal-mate, uses exactly the clauses proved here."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemBlockRepetition",
+  "declaration": "WeilConjectures.SemilinearSections.systemBlockRepetition",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.systemBlockRepetition",
+   "WeilConjectures.SemilinearSections.SystemBlockGeometry",
+   "WeilConjectures.SemilinearSections.systemBlockGeometry",
+   "WeilConjectures.SemilinearSections.SystemBlockGeometry.comparison",
+   "WeilConjectures.SemilinearSections.blockOpenRepeatRing",
+   "WeilConjectures.SemilinearSections.blockOpenRepeat",
+   "WeilConjectures.SemilinearSections.blockOpenRepeat_exact",
+   "WeilConjectures.SemilinearSections.blockOpenRepeatAdditive",
+   "WeilConjectures.SemilinearSections.blockOpenRepeatLimits",
+   "WeilConjectures.SemilinearSections.blockOpenRepeatColimits",
+   "WeilConjectures.SemilinearSections.blockRepeat_extensionByZero",
+   "WeilConjectures.SemilinearSections.blockRepeatDerivedExtensionByZero"
+  ],
+  "file": "lean/Sheaf/Paper/SystemBlockRepetition.lean",
+  "statement": "theorem systemBlockRepetition : Nonempty (SystemBlockRepetition J B τ t)",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The declarations give the proof of the endpoint/repetition package (systemBlockRepetition), the actual repeated geometric square and its comparison, and the uniquely normalized open-extension comparison with its termwise derived descent. The finite-block constructions and ordinary coherence are owned by lem-pur-system-block-constructions (Sheaf.Paper.SystemBlockConstructions) and the generic normalized derived comparisons by lem-pur-system-block-derived-comparisons (Sheaf.Paper.SystemBlockDerivedComparison); both are publicly re-exported by this module. Indices start at zero (n represents the paper index n+1)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2aed3ba8e",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Read the item, its single stmt_dep lem-coef-semilinear-derived-sections (Systems, coefficientMap, systemMap, res, evaluation, GeometryBase, OpenSystems), the 828-line module, report (Worker report + Second reading by Q22) and the cofinal-mate citer. The node differs from live only in lean. Clauses: SystemBlockMap (zero-based, Nat.find first endpoint, monotone surjection with finite fibres); blockRepeat/blockEndpoint as actual pushforwards along the reindexed site (orientation checked: (RM)(m,U)=M(t m,U), (EP)(i,U)=P(a_i,U)); endpoint ⊣ repetition with sectionwise adjunct formula, exactness, unbounded K-injective preservation; κ from upstream universal isos with normalization for every complex and uniqueness from K-injectives; derived unit/counit; β = rightDerivedFunctorCompMapDerivedCategoryIso.inv ≫ rightDerivedPullback (universal, no K-inj or invertibility assumption) and the coefficient cube equation; composite/identity laws all OK. F1 FIXED: section variable [EssentiallySmall.{r} C] auto-included (verified by #check probe) in systemBlockGeometry, SystemBlockGeometry.comparison and all open-localization declarations alongside .{max c v r}, a strictly stronger smallness hypothesis (Data.{c,v,r} fixes r); fix adds omit [EssentiallySmall.{r} C] to both sections. F2 FIXED: blockRepeat_extensionByZero's ∃ O OD left the OpenSystems level identifications twistable, so ξ was not canonical; added identity-on-sections conjuncts for O/OD.restrictionEvaluation (Q73 precedent). Fix file fixes/SystemBlockRepetition.lean compiled once via nt_compile --json: rc 0, 14.7 s, no errors or warnings. lean.statement and declarations unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T021307-L-2753614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

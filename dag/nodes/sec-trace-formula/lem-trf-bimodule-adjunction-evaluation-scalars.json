@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-bimodule-adjunction-evaluation-scalars",
+ "kind": "statement",
+ "title": "Fixed-bimodule derived adjunction normalized by evaluation and scalar restriction",
+ "statement": "Let $S\\to B$ be a homomorphism of commutative rings and let $U:D(B)\\to D(S)$ be restriction of scalars in the ordinary unbounded derived categories [def-weil-abstract-derived-category]. Fix a K-flat $B$-complex $Q$ [def-pc-module-kflat-complex]. For $Y\\in D(S)$ with K-injective representative $I$ [def-pur-kinjective-complex], let $J_Q(Y)$ be represented by $\\operatorname{Hom}_S^\\bullet(UQ,I)$ with action $(bh)(e)=h(be)$; use the canonical resolved-model comparisons of [lem-trf-bimodule-resolved-hom-tensor-models]. Let $F_Q([C])=[U\\operatorname{Tot}(C\\otimes_B Q)]$ for a $B$-complex $C$ [def-pc-tensor-complex-sheaves]. For the chain isomorphism $\\theta$ of [lem-trf-bimodule-chain-currying-descent], taking $H^0$ and the localization maps into K-injectives gives a natural bijection\n$$\\operatorname{Hom}_{D(B)}([C],J_Q([I]))\\xrightarrow{\\sim}\\operatorname{Hom}_{D(S)}(F_Q([C]),[I]),\\qquad [f]\\longmapsto[\\,c\\otimes e\\mapsto f(c)(e)\\,].$$\nHere $f:C\\to\\operatorname{Hom}_S^\\bullet(UQ,I)$ is a chain representative, and the inverse on a chain map $g:U\\operatorname{Tot}(C\\otimes_B Q)\\to I$ is $c\\mapsto(e\\mapsto g(c\\otimes e))$. These are the maps induced by $H^0(\\theta)$ under the canonical Hom-complex identifications [def-sc-module-total-hom-complex], not just an unspecified adjunction. They make $F_Q$ left adjoint to $J_Q$. Its counit is represented by the chain evaluation $U\\operatorname{Tot}(\\operatorname{Hom}_S^\\bullet(UQ,I)\\otimes_B Q)\\to I$, $h\\otimes e\\mapsto h(e)$. If $r:U\\operatorname{Tot}(C\\otimes_B Q)\\to N$ is a K-injective resolution over $S$, its unit at $[C]$ is represented by $c\\mapsto(e\\mapsto r(c\\otimes e))$. The two triangle identities hold for these specified maps. For every homomorphism of commutative rings $K\\to S$, restriction of every $S$-complex and $S$-map in $\\theta$, the Hom-class comparison, unit, and evaluation preserves their quasi-isomorphism comparisons and commutative squares. More explicitly $\\theta(sf)(c\\otimes e)=s\\theta(f)(c\\otimes e)$, restriction retains the balancing and differential formulas, and the localized unit/counit identities retain these same representatives in $D(K)$. This means restriction of the $S$-linear Hom complexes and identities; it does not replace them by $K$-linear Hom complexes, or claim that the restricted Hom-set map is a bijection onto all $K$-linear derived morphisms. No flatness of $B/S$, perfectness of $Q$, or boundedness of $I$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LT (lemma-tensor-hom-adjoint), specializing the differential graded algebras to commutative rings in degree zero and fixing a K-flat bimodule model; evaluation normalization from lemma-tensor-hom-adjunction."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-kflat-complex",
+  "def-pur-kinjective-complex",
+  "lem-trf-bimodule-resolved-hom-tensor-models",
+  "lem-trf-bimodule-chain-currying-descent"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=\\operatorname{Hom}_S^\\bullet(UQ,I)$. Apply [lem-trf-bimodule-resolved-hom-tensor-models] with $T=Q$ and resolution $q=1_Q$: $J$ is K-injective over $B$, its $B$-action is the stated one, and $[\\operatorname{Tot}(C\\otimes_B Q)]$ is the canonical derived tensor model for every $C$. The same node supplies the comparison maps and the functor $J_Q$ on $D(S)$. By [def-pc-module-kflat-complex], tensoring a quasi-isomorphism in $C$ with $Q$ is a quasi-isomorphism. Forgetting to $S$ preserves it because the kernels and images have the same underlying abelian groups. Thus this tensor construction descends to $F_Q$ and uses precisely the resolved-model comparisons in the statement.",
+   "uses": [
+    "lem-trf-bimodule-resolved-hom-tensor-models",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective), ordinary mixed-ring specialization supplied by the cited model node; tensor comparison as in dga.tex Tag 09LT"
+   }
+  },
+  {
+   "text": "For any complexes $V,W$ over a commutative ring $R$, the total Hom differential of [def-sc-module-total-hom-complex] gives $Z^0\\operatorname{Hom}_R^\\bullet(V,W)=\\{f:d_Wf=fd_V\\}$. Its degree-zero boundaries are exactly $d_Wh+hd_V$ for degree-minus-one families $h$. Hence $H^0\\operatorname{Hom}_R^\\bullet(V,W)=\\operatorname{Hom}_{K(R)}(V,W)$, sending a cocycle to its chain-homotopy class. Precomposition and postcomposition give the same operations on both sides, so these identifications are natural.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section 0A8H (section-hom-complexes), differential and degree-zero cocycles/boundaries"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] over $B$ to target $J$ (K-injective by step 1) and over $S$ to target $I$ (K-injective by hypothesis). Combining those two localization bijections with step 2 identifies the two derived Hom sets in the statement with the two zeroth cohomology groups of $\\theta$ in [lem-trf-bimodule-chain-currying-descent]. Its $H^0$ is a bijection: the isomorphism and its inverse preserve cycles and boundaries. The formulas in that node send $[f]$ to $[c\\otimes e\\mapsto f(c)(e)]$ and $[g]$ to $[c\\mapsto(e\\mapsto g(c\\otimes e))]$. In particular they are the specified Hom-complex comparison, including on homotopy classes. The cited chain-currying node explicitly gives naturality under localized morphisms and canonical resolved-representative changes. Together with step 1 this proves naturality in both derived variables, not merely for chain maps.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-trf-bimodule-chain-currying-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LN (lemma-tensor-hom-adjunction) and 09LT (lemma-tensor-hom-adjoint), with derived.tex Tag 070I (lemma-K-injective)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] to the inverse of the bijection of step 3. It yields $F_Q\\dashv J_Q$, with unit the transpose of $1_{F_Q([C])}$ and counit the inverse transpose of $1_{J_Q([I])}$. The latter identity is represented by $1_J$; its image by the displayed formula is exactly $h\\otimes e\\mapsto h(e)$. For a chosen K-injective resolution $r:U\\operatorname{Tot}(C\\otimes_B Q)\\to N$, the identity of $F_Q([C])$, after its canonical comparison to $[N]$, is represented by $r$. Its transpose is therefore $c\\mapsto(e\\mapsto r(c\\otimes e))$. These are precisely the counit and unit, and the cited adjunction node gives both triangle identities for these same maps.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction-map paragraph following the definition"
+   }
+  },
+  {
+   "text": "Let $K\\to S$ be any ring homomorphism. Restriction keeps the abelian groups and all differential maps unchanged, so it keeps kernels, images, cohomology groups, chain homotopies and quasi-isomorphisms unchanged. It therefore induces a functor $D(S)\\to D(K)$ by the localization of [def-weil-abstract-derived-category]. The whole-complex map $\\theta$ is $S$-linear by [lem-trf-bimodule-chain-currying-descent]; explicitly $\\theta(sf)(c\\otimes e)=(sf(c))(e)=s f(c)(e)=s\\theta(f)(c\\otimes e)$. Restrict each already formed $S$-complex and each $S$-linear arrow, including the comparison arrows. Their balancing and differential equations remain equalities of the same maps. Thus their commutative squares and the $H^0$/localization comparisons still commute after restriction. Evaluation remains $h\\otimes e\\mapsto h(e)$ and the unit remains $c\\mapsto(e\\mapsto r(c\\otimes e))$; the localization functor preserves their identities and composites, so both triangle equalities remain true. This argument retains the $S$-linear Hom complexes: neither $I$ nor a restricted resolution is required to be K-injective over $K$, and no assertion about all $K$-linear derived morphisms is used.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-trf-bimodule-chain-currying-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN (lemma-tensor-hom-adjunction), isomorphism of complexes over the base ring; explicit scalar-restriction check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-bimodule-resolved-hom-tensor-models",
+  "def-pc-module-kflat-complex",
+  "def-sc-module-total-hom-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-trf-bimodule-chain-currying-descent",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09LT and 09LN: fixed-K-flat-model proof via the cited resolved models, with explicit H0, unit/counit and scalar-restriction normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom adjunction for unbounded bimodule complexes induces bijections on derived morphisms with evaluation counit and restriction of scalars",
+   "results": "{\"t\": \"2026-10-22T06:45:15Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor Hom adjunction for unbounded bimodule complexes induces bijections on derived morphisms with evaluation counit and restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.monoidalClosedHomEquiv\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.instMonoidalClosed\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\"], \"digest\": \"35b6efe79d4d0055\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.restrictCoextendScalarsAdj (ChangeOfRings.lean:659) is an ordinary-module adjunction with the regular bimodule only. Adjunction.derivedε and derived_counit are abstract derived-adjunction maps under derived-functor hypotheses; neither supplies the concrete mixed-ring Hom model, H0 normalization, or arbitrary scalar restriction. Bimod unitors are underived categorical bimodule maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For fixed homotopically flat bimodule Q derive tensor Q left adjoint to Hom Q; unit x maps to e maps to x tensor e and counit h tensor e maps to h e",
+   "results": "{\"t\": \"2026-10-22T06:46:11Z\", \"tool\": \"leanfinder\", \"query\": \"For fixed homotopically flat bimodule Q derive tensor Q left adjoint to Hom Q; unit x maps to e maps to x tensor e and counit h tensor e maps to h e\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.LeftUnitorBimod.hom\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"Bimod.LeftUnitorBimod.inv\", \"Bimod.leftUnitorBimod\", \"CategoryTheory.tensorLeftAdjunction\", \"Bimod.tensorBimod\", \"Bimod.RightUnitorBimod.hom\", \"Bimod.RightUnitorBimod.inv\"], \"digest\": \"077b76ddbd597fa4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.restrictCoextendScalarsAdj (ChangeOfRings.lean:659) is an ordinary-module adjunction with the regular bimodule only. Adjunction.derivedε and derived_counit are abstract derived-adjunction maps under derived-functor hypotheses; neither supplies the concrete mixed-ring Hom model, H0 normalization, or arbitrary scalar restriction. Bimod unitors are underived categorical bimodule maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation unit counit derived tensor Hom adjunction compatible with scalar restriction",
+   "results": "{\"t\": \"2026-10-22T06:45:03Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation unit counit derived tensor Hom adjunction compatible with scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.exp.ev\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.ihom.ev\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\"], \"digest\": \"589fbc467aa1a921\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.restrictCoextendScalarsAdj (ChangeOfRings.lean:659) is an ordinary-module adjunction with the regular bimodule only. Adjunction.derivedε and derived_counit are abstract derived-adjunction maps under derived-functor hypotheses; neither supplies the concrete mixed-ring Hom model, H0 normalization, or arbitrary scalar restriction. Bimod unitors are underived categorical bimodule maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "results": "{\"t\": \"2026-10-22T06:45:02Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"4b167a90eb1d92c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.restrictCoextendScalarsAdj (ChangeOfRings.lean:659) is an ordinary-module adjunction with the regular bimodule only. Adjunction.derivedε and derived_counit are abstract derived-adjunction maps under derived-functor hypotheses; neither supplies the concrete mixed-ring Hom model, H0 normalization, or arbitrary scalar restriction. Bimod unitors are underived categorical bimodule maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε",
+   "results": "{\"t\": \"2026-10-22T06:46:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.derivedε\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\"], \"digest\": \"8880dd733f7f31c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.restrictCoextendScalarsAdj (ChangeOfRings.lean:659) is an ordinary-module adjunction with the regular bimodule only. Adjunction.derivedε and derived_counit are abstract derived-adjunction maps under derived-functor hypotheses; neither supplies the concrete mixed-ring Hom model, H0 normalization, or arbitrary scalar restriction. Bimod unitors are underived categorical bimodule maps."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictCoextendScalarsAdj|monoidalClosedHomEquiv",
+   "results": "{\"t\": \"2026-10-22T06:45:02Z\", \"tool\": \"grep\", \"query\": \"restrictCoextendScalarsAdj|monoidalClosedHomEquiv\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"fe71d8897bbaffec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat.restrictCoextendScalarsAdj (ChangeOfRings.lean:659) is an ordinary-module adjunction with the regular bimodule only. Adjunction.derivedε and derived_counit are abstract derived-adjunction maps under derived-functor hypotheses; neither supplies the concrete mixed-ring Hom model, H0 normalization, or arbitrary scalar restriction. Bimod unitors are underived categorical bimodule maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfHomEquiv",
+   "results": "{\"t\": \"2026-10-23T09:46:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_unit_app\", \"CategoryTheory.Adjunction.mkOfHomEquiv_counit_app\"], \"digest\": \"b72d4ac66c763122\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictCoextendScalarsAdj|derived_counit|mkOfHomEquiv",
+   "results": "{\"t\": \"2026-10-23T09:46:15Z\", \"tool\": \"grep\", \"query\": \"restrictCoextendScalarsAdj|derived_counit|mkOfHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\"], \"digest\": \"a81bdc43c834ac58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor Hom adjunction with fixed K-flat bimodule and evaluation counit compatible with restriction of scalars",
+   "results": "{\"t\": \"2026-10-23T09:46:15Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor Hom adjunction with fixed K-flat bimodule and evaluation counit compatible with restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"ModuleCat.monoidalClosedHomEquiv\", \"CategoryTheory.FunctorToTypes.adj\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"27da319f03d53e4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom adjunction on unbounded derived categories of modules over two rings computed by K-flat and K-injective complexes with evaluation counit",
+   "results": "{\"t\": \"2026-10-23T09:46:21Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor Hom adjunction on unbounded derived categories of modules over two rings computed by K-flat and K-injective complexes with evaluation counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Tor'_obj_obj\", \"ModuleCat.ihom_coev_app\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"ModuleCat.instMonoidalClosed\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"ModuleCat.monoidalClosedHomEquiv\", \"CategoryTheory.Tor'_map_app\"], \"digest\": \"56d97e76cd1b81d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation normalized adjunction for derived tensor with a bimodule and derived Hom over a different ring; morphisms computed modulo homotopy into K-injectives",
+   "results": "{\"t\": \"2026-10-23T09:47:05Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation normalized adjunction for derived tensor with a bimodule and derived Hom over a different ring; morphisms computed modulo homotopy into K-injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived\", \"Ext\", \"CategoryTheory.Tor'_map_app\"], \"digest\": \"29cb121aba986d82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictCoextendScalarsAdj|monoidalClosedHomEquiv",
+   "results": "{\"t\": \"2026-10-23T09:47:19Z\", \"tool\": \"grep\", \"query\": \"restrictCoextendScalarsAdj|monoidalClosedHomEquiv\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\"], \"digest\": \"dba510ee8f48da15\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  },
+  {
+   "tool": "grep",
+   "query": "def derivedε|lemma derived_counit",
+   "results": "{\"t\": \"2026-10-23T09:47:19Z\", \"tool\": \"grep\", \"query\": \"def derivedε|lemma derived_counit\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"cec5754df6f22f06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: mkOfHomEquiv supplies the abstract adjunction assembly only (existing leaf lem-weil-pbc-adjunction-of-natural-bijection); ModuleCat.monoidalClosedHomEquiv is underived and one-ring; restrictCoextendScalarsAdj is underived with regular bimodule; Adjunction.derived and derivedε require abstract derived-functor data and do not give the mixed-ring total-Hom model or the stated representatives. Sources read: ModuleCat/Monoidal/Closed.lean:29; ModuleCat/ChangeOfRings.lean:659; Functor/Derived/Adjunction.lean:118,144; Adjunction/Basic.lean:436."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-bimodule-tensor-hom",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Mixed-ring tensor-Hom adjunction used to move the diagonal module past the perfect polynomial dual. Re-split component: old proof steps 6 and 7: H0 comparison, specified unit/evaluation counit, triangle identities and exact scalar restriction.",
+   "via": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-bimodule-adjunction-evaluation-scalars",
+  "worker": "stage1",
+  "summary": "Q130 checked the unbounded mixed-ring hypotheses and supplied a five-step proof using existing resolved-model and chain-currying nodes and two existing Mathlib leaves. No new nodes and no statement change. Evaluation, the resolution representative of the unit, and exact scalar restriction are explicit.",
+  "blueprint": "Realizes the inherited local-term-locality auxiliary relative-duality branch, specifically the derived-bimodule-tensor-hom old steps 6 and 7 named in blueprint.from.place: H0 comparison, unit/evaluation counit, triangle identities, scalar restriction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-43ba1a36a",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-43ba1a36a (reviewer sub-agent of L); spot-checked: Ordinary 5-step split of a re-split child; no new nodes. Statement and stmt_deps are byte-identical to Q63's created item (checked in all 4 Q63 snapshots). proof_deps = union of uses (7). No SGA; no off-route statements (siblings are in the same unit, the lem-weil-pbc nodes are Mathlib leaves, the rest are definitions). Read dga.tex 09LT (l.5416) and 09LN (l.4954): the item is the commutative-ring specialization with a fixed K-flat Q and a K-injective I. Old parent steps 6-7 (Q44 snapshot) are all kept: H0 bijection, evaluation counit, resolved unit, triangle identities, scalar restriction. They are now more explicit. Step 1: resolved-models with T=Q, q=1_Q gives K-injectivity of J over B, the action and the bifunctor on D(S); the def-pc-module-kflat qis-preservation clause gives descent of F_Q. Step 2: d(z)=d_M z-(-1)^n z d_L, so Z^0 = chain maps and B^0 = d h + h d, hence H^0 = Hom_K. Step 3: Qh_map_bijective over B and S, plus chain-currying theta (signs match the definition) and its derived naturality. Step 4: mkOfHomEquiv applied to Psi = inverse; counit = theta(1_J) = evaluation, unit = transpose of r; orientation checked. Step 5: restriction is exact, so it descends by localization; theta(sf) = s theta(f); no K-linear bijection is claimed. Small cases checked: Q=0; S=B=Q; Q=B (restriction left adjoint to coinduction, unit c->(b->r(cb))); non-flat Z->Z/2. Minor note: the existence of K-injective resolutions over S, needed for J_Q on all of D(S) and for r, is carried by the bifunctor clause of the resolved-models statement. The parent cites prop-pur-kinjective-resolutions-exist for it; this is not a gap."
+ }
+}

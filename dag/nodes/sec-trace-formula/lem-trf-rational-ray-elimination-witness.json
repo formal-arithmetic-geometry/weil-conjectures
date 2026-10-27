@@ -1,0 +1,216 @@
+{
+ "id": "lem-trf-rational-ray-elimination-witness",
+ "kind": "statement",
+ "title": "Explicit rational witness for one-variable signed inequalities",
+ "statement": "Let $I$ be a finite set and let $a_i,b_i\\in\\mathbf Q$ for every $i\\in I$ [def-weil-field]. Put $I_0=\\{i:a_i=0\\}$, $I_+=\\{i:a_i>0\\}$ and $I_-=\\{i:a_i<0\\}$. Suppose that $b_h\\ge0$ for $h\\in I_0$, $b_i\\ge0$ for $i\\in I_+$, and $a_i b_j-a_j b_i\\ge0$ for every $(i,j)\\in I_+\\times I_-$. Then\n$$B=\\{0\\}\\cup\\{b_j/a_j:j\\in I_-\\}\\subseteq\\mathbf Q$$\nis finite and nonempty, and has a largest member $T\\in\\mathbf Q$. This member satisfies\n$$T\\ge0,\\qquad T\\ge b_j/a_j\\ (j\\in I_-),\\qquad T\\le b_i/a_i\\ (i\\in I_+),\\qquad b_i-Ta_i\\ge0\\ (i\\in I).$$\nNo nonemptiness of $I$, $I_+$ or $I_-$ is assumed; if $I_-=\\varnothing$ then $T=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-written auxiliary assertion extracted from lem-trf-rational-cone-dual-finite, old proof step 5 and step 6 empty-sign-class discussion. Expose VIII Remark 3.1.29, printed p. 103, supplies toric context only, not this assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Since $I$ is finite, list its negative-sign indices as $j_1,\\ldots,j_r$, allowing $r=0$. Their coefficients are nonzero, so put $c_k=b_{j_k}/a_{j_k}\\in\\mathbf Q$. Then $B=\\{0,c_1,\\ldots,c_r\\}$ is finite and contains $0$. Define $t_0=0$ and $t_k=\\max(t_{k-1},c_k)$, choosing the larger of the two rationals. By induction, $t_k\\in\\{0,c_1,\\ldots,c_k\\}$ and every member of that set is at most $t_k$: this holds at $k=0$, and replacing the previous largest value by the larger of it and $c_k$ preserves both assertions. Thus $T=t_r\\in B$ is its largest member; in particular $T\\ge0$ and $T\\ge b_j/a_j$ for each $j\\in I_-$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written elementary proof of the extracted one-variable witness; ILO VIII Remark 3.1.29, printed p. 103, is contextual only."
+   }
+  },
+  {
+   "text": "Fix $i\\in I_+$ and $j\\in I_-$. Here $a_i(-a_j)>0$, and direct subtraction gives $$\\frac{b_i}{a_i}-\\frac{b_j}{a_j}=\\frac{a_i b_j-a_j b_i}{a_i(-a_j)}\\ge0.$$ The numerator is nonnegative by the pairwise hypothesis and the denominator is positive. Consequently $b_j/a_j\\le b_i/a_i$ for every such pair. Also $0\\le b_i/a_i$, since $b_i\\ge0$ and $a_i>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written elementary proof of the extracted one-variable witness; ILO VIII Remark 3.1.29, printed p. 103, is contextual only."
+   }
+  },
+  {
+   "text": "For any fixed $i\\in I_+$, Step 2 shows that every member of $B$ is at most $b_i/a_i$: its members are $0$ or one of the negative-sign ratios. Because $T\\in B$ by Step 1, it follows that $T\\le b_i/a_i$. If $I_+$ is empty this assertion is vacuous; no positive-sign index was chosen globally.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written elementary proof of the extracted one-variable witness; ILO VIII Remark 3.1.29, printed p. 103, is contextual only."
+   }
+  },
+  {
+   "text": "For $i\\in I_+$, the upper bound and $a_i>0$ give $Ta_i\\le b_i$, hence $b_i-Ta_i\\ge0$. For $j\\in I_-$, multiplying $T\\ge b_j/a_j$ by the negative number $a_j$ reverses the inequality and gives $Ta_j\\le b_j$, hence $b_j-Ta_j\\ge0$. For $h\\in I_0$, $b_h-Ta_h=b_h\\ge0$ by hypothesis. These three cases exhaust $I$. If $I_-=\\varnothing$, the list in Step 1 is empty, $B=\\{0\\}$ and $T=t_0=0$. This includes $I=\\varnothing$; all indexed inequalities are then vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written elementary proof of the extracted one-variable witness; ILO VIII Remark 3.1.29, printed p. 103, is contextual only."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-written elementary proof of the extracted one-variable witness; ILO VIII Remark 3.1.29, printed p. 103, is contextual only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational feasible solution to one variable linear inequalities is the maximum of zero and the finitely many lower bounds; the pairwise inequalities ensure every upper bound",
+   "results": "Linarith tactic functions and SimplexAlgorithm.findPositiveVector; no mathematical theorem asserting this maximum witness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite rational a_i and b_i, assume b_i >= 0 for a_i >= 0 and a_i*b_j-a_j*b_i >= 0 for a_i positive and a_j negative. The maximum of 0 and b_j/a_j for a_j negative satisfies all b_i-T*a_i >= 0",
+   "results": "num_smul_one_lt_den_smul_add, Rat.den_le_and_le_num_le_of_sub_lt_one_div_den_sq, continued fractions and tactic functions; none gives this compatibility-to-feasibility assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Motzkin converse: choose the largest rational lower bound including zero to solve finitely many inequalities with upper bounds",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; LeanSearch rate-limited; no absence claim from this call.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite nonempty set of rational lower bounds has a maximum satisfying all compatible rational upper bounds",
+   "results": "Finset.le_max', Finset.max'_le, Finset.isLUB_iff_isGreatest and Set.Nonempty.csSup_mem give the maximum API only; the signed rational division and feasibility argument are additional.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.max'",
+   "results": "Finset.max', max'_mem, le_max', isGreatest_max' and related API, Mathlib/Data/Finset/Max.lean. Source read at 188--228: no signed-system feasibility theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*(max\\x27|le_max\\x27|max\\x27_le)|lemma.*(max\\x27|le_max\\x27|max\\x27_le)",
+   "results": "In Data/Finset, Max.lean:211,214,217,220,224 (max'_mem, le_max', max'_le, isGreatest_max', max'_le_iff); source read; maximum bounds alone do not assert the signed compatibility step.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "elimVar|pelimVar|elimAllVarsM",
+   "results": "In Tactic/Linarith, the displayed hits are documentation/PComp.add at FourierMotzkin.lean:161--185. Reading 180--232 confirms tactic definitions, not this mathematical assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Fourier.Motzkin|rational.*inequal|exists.*forall.*sub.*mul",
+   "results": "Displayed Fourier-Motzkin hits are tactic documentation and implementations, primarily Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean; source read at 180--232 (elimVar and pelimVar are metaprogram definitions). No theorem stating the item in these hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Motzkin elimination of one rational variable: the maximum of zero and all lower bounds satisfies every compatible upper bound",
+   "results": "Mathlib.Tactic.Linarith.elimVar, Mathlib.Tactic.Linarith.elimVarM, Mathlib.Tactic.Linarith.pelimVar, Mathlib.Tactic.Linarith.elimWithSet, Mathlib.Tactic.Linarith.LinarithData.casesOn, Mathlib.Tactic.Linarith.LinarithData, Mathlib.Tactic.Linarith.CertificateOracle.fourierMotzkin, Mathlib.Tactic.Linarith.CompSource.casesOn. Read the returned types; no mathematical theorem states the whole signed rational witness assertion. Tactic implementations do not supply this theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.max'",
+   "results": "Finset.max', max'_mem, isGreatest_max', le_max' and related finite-maximum API; source read Mathlib/Data/Finset/Max.lean:180--230. Covers only the maximum clause, not the signed feasibility argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite rational a_i and b_i with b_i nonnegative when a_i is nonnegative and a_i*b_j-a_j*b_i nonnegative for a_i positive and a_j negative, the maximum of zero and b_j/a_j for negative a_j satisfies every b_i-T*a_i nonnegative",
+   "results": "num_smul_one_lt_den_smul_add, Rat.den_le_and_le_num_le_of_sub_lt_one_div_den_sq, Mathlib.Meta.Positivity.nonneg_of_isRat, Archimedean.mkRat_mem_ratLt, Rat.toNNRat_add_le, Rat.mkRat_nonpos, Rat.mkRat_nonneg_iff, GenContFract.zero_le_of_contsAux_b. Read the returned types; no mathematical theorem states the whole signed rational witness assertion. Tactic implementations do not supply this theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "max'_mem|isGreatest_max'|max'_le_iff",
+   "results": "Mathlib/Data/Finset/Max.lean:211 max'_mem, :220 isGreatest_max', :224 max'_le_iff; source read at 180--230. These give the finite maximum API, not the signed compatibility-to-feasibility assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite system of lower and upper bounds in a linearly ordered field has a nonnegative solution whenever zero and every lower bound are below every upper bound; choose the largest lower bound including zero",
+   "results": "Mathlib.Tactic.Bound.boundLinarith, Mathlib.Tactic.Linarith.CertificateOracle.fourierMotzkin, Mathlib.Tactic.Linarith.CertificateOracle.simplexAlgorithmSparse, Mathlib.Tactic.nlinarith, Mathlib.Tactic.Linarith.mkLTZeroProof, mul_le_of_forall_lt_of_nonneg, Mathlib.Tactic.Linarith.SimplexAlgorithm.findPositiveVector, Mathlib.Tactic.linarith. Read the returned types; no mathematical theorem states the whole signed rational witness assertion. Tactic implementations do not supply this theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-rational-cone-dual-finite",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestry only: lem-trf-local-term-locality proof clauses (1)--(2) contain no cone argument. This auxiliary assertion serves lem-trf-rational-cone-dual-finite, old proof step 5 and empty-sign cases in step 6, on the existing descendant route through lem-trf-rational-cone-dual-integral-forms proof step 1.",
+   "via": [
+    "lem-trf-rational-cone-dual-finite",
+    "lem-trf-rational-cone-dual-integral-forms",
+    "lem-trf-sharp-fs-orthant-embedding",
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-rational-ray-elimination-witness",
+  "worker": "stage1",
+  "summary": "Gave the full elementary four-step proof: explicit finite-list maximum construction with induction invariant, signed pairwise comparison with a positive denominator, upper bounds using membership of the maximum, and the three residual sign cases including all empty cases. No new nodes: these are elementary steps, not separate work items. Retained the statement and historical source and blueprint ancestry, and recorded fresh required Mathlib searches and candidate-source reads.",
+  "blueprint": "Historical ancestry only: lem-trf-local-term-locality clauses (1)--(2) do not contain rational cones in the current blueprint. The steps supply the extracted reverse-witness argument used by lem-trf-rational-cone-dual-finite proof step 4 (old steps 5--6), on the existing descendant route through rational-cone-dual-integral-forms. No claim to change the chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-848b3fb91",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-848b3fb91 (reviewer sub-agent of L); spot-checked: I read the delivered split in full and found no faults. The commit changes only the item (unsplit to split with 4 elementary steps, proof_deps empty) and its report, with no new nodes. Against clones/live, the statement, stmt_deps (def-weil-field), source and blueprint fields are byte-identical, so the target is not weakened. Live and side-live still have the item unsplit, and there is no repair note, so neither supersession nor the re-split rule applies. Step 1 builds the maximum T of B={0}∪{b_j/a_j : j in I_-} by a recursive max with a stated induction invariant (r=0 allowed). Step 2 rewrites b_i/a_i−b_j/a_j as (a_i b_j−a_j b_i)/(a_i(−a_j)); the algebra is correct and the denominator is positive. Step 3 gets T ≤ b_i/a_i from T being a member of B, not from an arbitrary upper bound. Step 4 checks the three sign cases (multiplying by a_j<0 reverses the inequality; on I_0 the residual is b_h) and the empty cases. Each step is a few lines from definitions and needs no citation. My exact-Fraction check found the statement true on 41,150 admissible systems of size 0-3. The hypotheses match what the parent lem-trf-rational-cone-dual-finite step 4 supplies (a_i=f_i(v), b_i=f_i(x)), and its step 5 uses the empty-sign remarks. I re-checked the Finset.max' API lines in Mathlib/Data/Finset/Max.lean (211-224) against the recorded searches; they are correct. ILO VIII Rem. 3.1.29 (printed p.103) is about fan and toric desingularization and is contextual only, as the node says; proof_origin by agent is accurate. A DAG search found no duplicate besides the existing companion lem-trf-rational-ray-elimination-forward. No SGA source is used, tool_uses is empty, and no fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.RationalRayEliminationWitness",
+  "declaration": "Weil.rationalRayEliminationWitness",
+  "file": "lean/Sheaf/TraceFormula/RationalRayEliminationWitness.lean",
+  "statement": "theorem rationalRayEliminationWitness {I : Type u} [Finite I] (a b : I → ℚ) (hzero : ∀ h : I, a h = 0 → 0 ≤ b h) (hpos : ∀ i : I, 0 < a i → 0 ≤ b i) (hmixed : ∀ i j : I, 0 < a i → a j < 0 → 0 ≤ a i * b j - a j * b i) : (insert 0 ((fun j : I ↦ b j / a j) '' {j : I | a j < 0})).Finite ∧ (insert 0 ((fun j : I ↦ b j / a j) '' {j : I | a j < 0})).Nonempty ∧ ∃ T : ℚ, IsGreatest (insert 0 ((fun j : I ↦ b j / a j) '' {j : I | a j < 0})) T ∧ 0 ≤ T ∧ (∀ j : I, a j < 0 → b j / a j ≤ T) ∧ (∀ i : I, 0 < a i → T ≤ b i / a i) ∧ (∀ i : I, 0 ≤ b i - T * a i) ∧ ({j : I | a j < 0} = ∅ → T = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7aa04989b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Node changes only lean (null→record) vs side-live; lean.statement verbatim in file. [Finite I] with universe u, no Nonempty/DecidableEq; hzero/hpos/hmixed exactly the node hypotheses (positive index first); B = insert 0 (b/a '' {a<0}); conclusions Finite, Nonempty, IsGreatest (membership), T≥0, lower/upper bounds, all residuals, I_-=∅→T=0 all present and correctly oriented; statement true (T=max(0, ratios)). Empty I/I+/I- and zero slopes covered. No defs, sorry only, docstrings with source place, blueprint tag and 4 proof steps; Mathlib-only imports; report has Worker report + Second reading by Q27 (same worker, disclosed). No recompile (no file changed); worker reports clean scompile. No findings."
+ }
+}

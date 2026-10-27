@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-projective-exponent-square",
+ "kind": "statement",
+ "title": "Root transitions preserve the forward unit--Chern projective square",
+ "statement": "Let l be prime, E a finite extension of Q_l, n a natural number, and A the finite coefficient quotient at level n+1. Let S be Noetherian with l invertible. For r≤s with both l^(r+1) and l^(s+1) killing A, use the fixed root-power transition e on the shifted lines of [def-pur-finite-site-coordinates]. For the actual ordinary projective decompositions b_r,b_s, one has b_s.hom followed by Rq_*(e) = (e on S ⊕ identity) followed by b_r.hom. There also exist pro-etale decomposition isomorphisms whose homs are exactly the prescribed supported projectiveB arrows at r and s, satisfying the identical forward square after comparison. This asserts only the forward decomposition squares in the coordinates of [def-pur-integration-exponent-transport-data]; no inverse-trace or affine-tower equation is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 6--7: the root-power Kummer boundary and adjunction-unit squares, combined by the projective biproduct decomposition. Stacks etale-cohomology.tex Tag 03PK, section-kummer; blueprint final sentence concerning the projective-line diagonal and ordinary adjunctions."
+ },
+ "stmt_deps": [
+  "def-pur-integration-exponent-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "The root-power Kummer sequence square preserves the supported infinity class; apply finite Tate descent to identify its coefficient with the prescribed transition. Naturality of the adjunction unit gives the other component square. The biproduct universal property proves the pro-etale forward square.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-amb-finite-tate-site-descent",
+    "def-pur-supported-projective-site-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use projectiveB_isIso for the actual pro-etale decompositions. The fixed proper mate and p1KummerTraceSiteTransport carry each ordinary component to the preceding pro-etale component. Naturality of the mate and full faithfulness on bounded shifted lines reflect the ordinary forward square.",
+   "uses": [
+    "lem-pur-p1-kummer-trace-site-transport",
+    "thm-weil-pbc-site-comparison",
+    "def-pur-supported-projective-site-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-supported-projective-site-arrows",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-p1-kummer-trace-site-transport",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 6--7: the root-power Kummer boundary and adjunction-unit squares, combined by the projective biproduct decomposition. Stacks etale-cohomology.tex Tag 03PK, section-kummer; blueprint final sentence concerning the projective-line diagonal and ordinary adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integration under a morphism of finite Tate lines, inverse projection formula, and adjunction transpose",
+   "results": "8 hits, including TopCat.Presheaf.pushforwardToOfIso, ContinuousLinearMap.integral_id_map, Module.Dual.transpose and transpose_dualTensorHom. None states finite-site coefficient integration transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv, homEquiv_unit, homEquiv_counit. These supply generic Hom calculus but not the geometric root-transition equations or their coefficient integration data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*[Ee]xponent|[Ee]xponent.*[Cc]ounit|[Tt]ensor.*[Ii]ntegrat",
+   "results": "0 hits in Mathlib. Local Sheaf search finds vectorTensorComparison and vectorExponentIndependence in VectorIntegrationSiteComparison; they are reused through separate acyclic statement records.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationExponentTransposeTransport",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Proof, inverse diagonal identification: root-normalized vector-bundle integration at the normal-bundle endpoint; Root transitions preserve the forward unit--Chern projective square",
+   "via": [
+    "lem-pur-integration-exponent-transpose-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegrationProjectiveExponentSquare",
+  "file": "lean/Sheaf/Paper/IntegrationProjectiveExponentSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationProjectiveExponentSquare",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "statement": "theorem integrationProjectiveExponentSquare (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (l : Γ(S, ⊤))) (r s : ℕ) (hrs : r ≤ s)\n    (hr : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (hs : ((l ^ (s + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0) :\n  IntegrationDecompositionSquare\n    (integrationLineTransition l E n S hS r s hrs hr hs).hom\n    ((Etale.ordinaryFinitePushforward _ (ProjectiveLine S ↘ S)).map\n      (integrationLineTransition l E n (ProjectiveLine S)\n        (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom) r s hrs hr hs).hom)\n    (kummerTraceOrdinaryDatum l E n S hS r hr).decomposition\n    (kummerTraceOrdinaryDatum l E n S hS s hs).decomposition ∧\n  ∃ (br : (line l E n r hr S ⊞ unit (Scheme.finiteTateCoefficient l E n) S) ≅\n      (lowerStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n))\n        (ProjectiveLine S ↘ S)).rightDerivedFunctor.obj (line l E n r hr (ProjectiveLine S)))\n    (bs : (line l E n s hs S ⊞ unit (Scheme.finiteTateCoefficient l E n) S) ≅\n      (lowerStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n))\n        (ProjectiveLine S ↘ S)).rightDerivedFunctor.obj (line l E n s hs (ProjectiveLine S))),\n    br.hom = projectiveB l E n S hS (infinityCartier S) r hr ∧\n    bs.hom = projectiveB l E n S hS (infinityCartier S) s hs ∧\n    IntegrationDecompositionSquare\n      ((comparison (Scheme.finiteTateCoefficient l E n) S).map\n        (integrationLineTransition l E n S hS r s hrs hr hs).hom)\n      ((lowerStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n))\n        (ProjectiveLine S ↘ S)).rightDerivedFunctor.map\n          ((comparison (Scheme.finiteTateCoefficient l E n) (ProjectiveLine S)).map\n            (integrationLineTransition l E n (ProjectiveLine S)\n              (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom)\n              r s hrs hr hs).hom)) br bs"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new-module Lean and node JSONs (incl. head-commit nodes missing from snapshot) vs clone sheaf-dag item, VectorIntegrationSiteComparison and the owner nodes of the declarations used"
+ }
+}

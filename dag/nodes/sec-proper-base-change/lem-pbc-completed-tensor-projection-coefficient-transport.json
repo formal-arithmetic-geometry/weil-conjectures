@@ -1,0 +1,136 @@
+{
+ "id": "lem-pbc-completed-tensor-projection-coefficient-transport",
+ "kind": "statement",
+ "title": "Transport tensor projection through the completed coefficient isomorphism",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism and $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Write $R_T^0$ for the completed constant-system ring and $c:f^{-1}R_Y^0\\cong R_X^0$ for its canonical coefficient identification [lemma-weil-pbc-perfect-projection-formula]. Use the ordinary unbounded derived categories and geometric adjunctions [def-weil-pbc-proetale-operations]. Fix tensor models $a_Y$ over $R_Y^0$ and $z$ over the literal inverse-image ring $f^{-1}R_Y^0$, presenting signed total tensor on flat K-flat representatives [def-sfb-proetale-tensor-model]. Given $K\\in D(R_X^0)$, $Q,P\\in D(R_Y^0)$ and $r:Q\\cong P$, set $K^i=\\operatorname{Res}_c K$. Let $H,L$ denote geometric direct image and pullback for literal inverse-image coefficients, and $H^0,L^0$ the functors using $c$ [lem-sfb-derived-scalar-mate-thick-locus]. There are a tensor model $a_X$ over $R_X^0$ and isomorphisms $s:a_Y(HK^i,Q)\\cong a_Y(H^0K,P)$ and $t:H(z(K^i,LQ))\\cong H^0(a_X(K,L^0P))$ such that $\\pi_{literal}(K^i,Q);t=s;\\pi_c(K,P)$, for the specified tensor-comparison/counit projection arrows [def-weil-pbc-projection-formula-map]. This asserts coefficient-isomorphism and coefficient-object transport only; it makes no hypothesis about scalar extension, finiteness, perfectness, or invertibility of a projection.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-sfb-derived-scalar-mate-thick-locus",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "equation-projection-formula-map (Tag 0B56), transported through the coefficient-change adjunction of Tag 07A6; blueprint perfect-projection-formula coefficient identification."
+ },
+ "proof": [
+  {
+   "text": "Construct an ordinary tensor model over the completed ring from the native derived monoidal tensor and its flat K-flat representative isomorphism. Apply the restriction/tensor comparison to this model and the given literal-coefficient model z, obtaining rho and its canonical pullback-tensor equation.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pbc-coefficient-restriction-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize identity scalar restriction on the base using the exact-derived identity isomorphism. Compose it with the existing restriction/pullback and restriction/direct-image comparisons. Naturality of Hom transposition transports the existing coefficient-change adjunction equation to these normalized comparisons b and q.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized adjunction equation to the completed counit. Transposition and the triangle identity identify its restriction with the literal counit preceded by the direct-image comparison. Naturality of the literal tensor comparison, the tensor equation for rho, and naturality of rho identify the two adjuncts of the claimed projection square. Injectivity of the Hom equivalence proves the square for coefficient Q. Its source isomorphism is tensor of q inverse and identity; its target isomorphism is direct image of the pullback/tensor identifications followed by q inverse.",
+   "uses": [
+    "def-weil-pbc-projection-formula-map",
+    "lem-pbc-coefficient-restriction-tensor-comparison",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the target isomorphism with tensor of identity and completed pullback of r, then direct image. Postcompose the source isomorphism with tensor of identity and r. Naturality of the right-adjoint projection map in its coefficient variable gives the asserted equation for Q isomorphic to P.",
+   "uses": [
+    "def-weil-pbc-projection-formula-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-map",
+  "lem-pbc-coefficient-restriction-tensor-comparison",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, projection as the adjunct of tensor comparison followed by counit, and Tag 07A6, compatibility of adjunctions. F7 supplies the complete categorical transposition proof; only the tensor restriction/pullback comparison remains split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport of the adjunction mate of scalar extension and derived direct image through isomorphisms of coefficient ring sheaves",
+   "results": "Eight hits: ordinary sheaf pullback adjunction, ordinary module change-of-scalars adjunctions and CategoryTheory.mateEquiv. No unbounded ring-sheaf transport normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphism is natural under an isomorphism of the coefficient ring sheaf",
+   "results": "Eight hits concerning ordinary free-module pullback, presheaf isomorphism components and section Hom naturality; none states the derived coefficient transport.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|restrict)|(scalar|restrict).*projection",
+   "results": "Nine unrelated Mathlib linear/geometric projection results. Local source search finds DerivedScalarMateThickLocus for the arbitrary ring-sheaf normalization in literal inverse-image coefficients; it does not transport the completed presentations.",
+   "date": "2026-10-27",
+   "verdict": "reuse the existing normalization; transport still needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedScalarProjectionTensorComparison",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Finite-level scalar projection comparison in the landed direct-image formalization: Transport tensor projection through the completed coefficient isomorphism.",
+   "via": [
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedTensorProjectionCoefficientTransport",
+  "file": "lean/Sheaf/Paper/CompletedTensorProjectionCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedTensorProjectionCoefficientTransport",
+  "statement": "theorem completedTensorProjectionCoefficientTransport\n    {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A)\n    (aY : ProEtaleTensorModel Y (PerfectProjection.ring d Y))\n    (z : ProEtaleTensorModel X\n      (DerivedScalarMate.inverseRing f (PerfectProjection.ring d Y)))\n    (K : PerfectProjection.derived d X)\n    (Q P : PerfectProjection.derived d Y) (r : Q ≅ P) :\n    ∃ (aX : ProEtaleTensorModel X (PerfectProjection.ring d X))\n      (s : aY.tensor.obj\n          ((DerivedScalarMate.push f (PerfectProjection.ring d Y)).obj\n            ((pbcDerivedRestrict (PerfectProjection.coefficients d f).hom).obj K), Q) ≅\n        aY.tensor.obj ((PerfectProjection.directImage d f).obj K, P))\n      (t : (DerivedScalarMate.push f (PerfectProjection.ring d Y)).obj\n          (z.tensor.obj ((pbcDerivedRestrict (PerfectProjection.coefficients d f).hom).obj K,\n            (DerivedScalarMate.pull f (PerfectProjection.ring d Y)).obj Q)) ≅\n        (PerfectProjection.directImage d f).obj\n          (aX.tensor.obj (K, (PerfectProjection.pullback d f).obj P))),\n      proEtaleProjectionFormulaMate f (PerfectProjection.ring d Y)\n          (DerivedScalarMate.inverseRing f (PerfectProjection.ring d Y))\n          (Iso.refl _) aY z\n          ((pbcDerivedRestrict (PerfectProjection.coefficients d f).hom).obj K) Q ≫ t.hom =\n        s.hom ≫ PerfectProjection.projection d f aY aX K P",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T012934-L-2350014",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T034640-L-3670088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

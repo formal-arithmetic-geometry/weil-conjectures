@@ -1,0 +1,317 @@
+{
+ "id": "lem-per-topological-ring-sheaf-open-descent",
+ "kind": "statement",
+ "title": "Open-cover descent of sheaves of topological commutative rings",
+ "statement": "Let $X$ be a topological space, $A$ a set and $X=\\bigcup_{a\\in A}U_a$ an open cover. A sheaf of topological commutative rings means a presheaf of commutative topological rings and continuous unital ring homomorphisms for which, for every open covering $W=\\bigcup_bW_b$, the map from sections on $W$ to compatible tuples in $\\prod_b\\mathcal F(W_b)$ is an isomorphism of topological rings, using the subspace topology [def-kun-subspace-topology] from the product. A morphism of such sheaves is a natural transformation whose components are continuous unital ring homomorphisms. Suppose $\\mathcal F_a$ is such a sheaf on $U_a$, with isomorphisms $\\theta_{ab}:\\mathcal F_a|_{U_a\\cap U_b}\\to\\mathcal F_b|_{U_a\\cap U_b}$ satisfying $\\theta_{aa}=1$ and $\\theta_{bc}\\theta_{ab}=\\theta_{ac}$ on every triple overlap. There exists a sheaf $\\mathcal F$ on $X$ with isomorphisms $e_a:\\mathcal F|_{U_a}\\to\\mathcal F_a$ satisfying $\\theta_{ab}e_a=e_b$ on overlaps. It can be chosen so that for every open $W$, $\\mathcal F(W)$ is exactly the ring of compatible tuples $(s_a)\\in\\prod_a\\mathcal F_a(W\\cap U_a)$ with its subspace topology and componentwise restrictions. For any two sheaves of topological commutative rings $\\mathcal H,\\mathcal G$ on $X$, compatible morphisms $\\mathcal H|_{U_a}\\to\\mathcal G|_{U_a}$ extend to a unique morphism $\\mathcal H\\to\\mathcal G$. Consequently the descended object with the specified $e_a$ is unique up to unique isomorphism. The empty space and empty cover are allowed.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+  "place": "Tag 0AHY, section-formal-schemes-EGA, initial discussion of the equalizer topology on sheaves of topological rings and continuous maps; Tag 00AL, lemma-glue-sheaves, first proof; Tag 00AM, lemma-glue-sheaves-structures; Tag 00AN, lemma-mapping-property-glue. The topological version uses the subspace-of-product topology of 0AHY, rather than applying the algebraic-structures claim to topological rings."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "We use the following immediate continuity test for the specified subspace topology [def-kun-subspace-topology]. If $S\\subseteq\\prod_iT_i$ and $f:Z\\to S$, then $f$ is continuous exactly when each coordinate $f_i:Z\\to T_i$ is continuous: a subbasic open of $S$ is $S\\cap\\operatorname{pr}_i^{-1}(V)$ for $V\\subseteq T_i$ open, whose inverse image is $f_i^{-1}(V)$. Finite intersections and arbitrary unions give all opens. In particular, coordinate projections and maps obtained by composing continuous coordinate maps are continuous. This test includes empty products.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA: subspace of the product topology; elementary subbasis argument"
+   }
+  },
+  {
+   "text": "For each open $W\\subseteq X$, let $P(W)=\\prod_a\\mathcal F_a(W\\cap U_a)$, and define $\\mathcal F(W)$ to consist of those $s\\in P(W)$ for which $\\theta_{ab}(s_a|_{W\\cap U_a\\cap U_b})=s_b|_{W\\cap U_a\\cap U_b}$ for every $a,b$. Each condition is an equality of two unital ring homomorphisms, so $0,1$ satisfy it and it is preserved by addition, negation and multiplication. Thus this is a commutative subring, with exactly the claimed set of sections. Give it the subspace topology [def-kun-subspace-topology]. Addition, negation and multiplication are continuous by step 1: their $a$-coordinates are respectively addition, negation and multiplication in $\\mathcal F_a(W\\cap U_a)$ after the continuous coordinate projections. Hence it is a topological commutative ring. This is the equalizer construction of the source, with the topology imposed explicitly.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AL and 00AM, lemma-glue-sheaves first proof and lemma-glue-sheaves-structures; Tag 0AHY equalizer topology"
+   }
+  },
+  {
+   "text": "For $W'\\subseteq W$, restrict every coordinate from $W\\cap U_a$ to $W'\\cap U_a$. Naturality of $\\theta_{ab}$ preserves each defining compatibility equation, so these are unital ring homomorphisms $\\mathcal F(W)\\to\\mathcal F(W')$. Their coordinates are the continuous local restrictions composed with projections, so step 1 proves continuity. Restriction identities and composition hold in each coordinate and hence for tuples. This defines the required presheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AL, lemma-glue-sheaves, first proof: restriction maps"
+   }
+  },
+  {
+   "text": "Let $W=\\bigcup_bW_b$ and let $t^b\\in\\mathcal F(W_b)$ be compatible on all $W_b\\cap W_c$. For each fixed $a$, the coordinates $t^b_a$ are a compatible family for the cover $W\\cap U_a=\\bigcup_b(W_b\\cap U_a)$. The assumed sheaf axiom of $\\mathcal F_a$ supplies a unique $s_a\\in\\mathcal F_a(W\\cap U_a)$ restricting to them. On $W\\cap U_a\\cap U_c$, the sections $\\theta_{ac}(s_a|)$ and $s_c|$ have equal restrictions to every $W_b\\cap U_a\\cap U_c$, since $t^b$ is a compatible tuple. Injectivity in the sheaf axiom of $\\mathcal F_c$ for that cover makes these sections equal. Thus $(s_a)_a\\in\\mathcal F(W)$ glues the $t^b$, uniquely since each coordinate is uniquely determined. Restriction preserves all ring operations, so the resulting bijection from $\\mathcal F(W)$ to compatible families is a unital ring isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AL, lemma-glue-sheaves, first proof: the sheaf condition written out"
+   }
+  },
+  {
+   "text": "Give the compatible families $E\\subseteq\\prod_b\\mathcal F(W_b)$ their subspace topology [def-kun-subspace-topology]. The restriction map $\\rho:\\mathcal F(W)\\to E$ is continuous by step 1 and step 3. For its inverse from step 4, fix $a$. The map $E\\to\\prod_b\\mathcal F_a(W_b\\cap U_a)$ taking $(t^b)_b$ to $(t^b_a)_b$ is continuous by the subbasis test, as each coordinate is a composite of two projections. Its image lies in the compatible-family subspace $E_a$ for the cover of $W\\cap U_a$; the same subbasis test makes the map to $E_a$ continuous. The assumed topological sheaf axiom of $\\mathcal F_a$ gives a continuous inverse $E_a\\to\\mathcal F_a(W\\cap U_a)$, so the $a$-coordinate of $\\rho^{-1}$ is continuous. Step 1 now gives continuity into $\\mathcal F(W)$. This verifies the full topological sheaf condition, not merely its underlying set version.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA: sheaf equalizer in topological rings; Tag 00AL construction"
+   }
+  },
+  {
+   "text": "For $W\\subseteq U_a$, define $e_{a,W}(s)=s_a$. Its inverse sends $r\\in\\mathcal F_a(W)$ to the tuple with $b$-coordinate $\\theta_{ab}(r|_{W\\cap U_b})$. The cocycle identity $\\theta_{bc}\\theta_{ab}=\\theta_{ac}$, after restriction to $W\\cap U_b\\cap U_c$, makes this tuple compatible; $\\theta_{aa}=1$ makes its $a$-coordinate $r$. Conversely, compatibility of any tuple with index $a$ forces every $b$-coordinate to have exactly this formula. Both maps are unital ring homomorphisms, and both are continuous: projection is continuous and all coordinates of the inverse are continuous restrictions followed by continuous transition maps (step 1). Naturality follows from that of the restrictions and transitions. Thus these are isomorphisms of sheaves of topological rings. The defining tuple equation gives $\\theta_{ab}e_a=e_b$ on overlaps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AL, lemma-glue-sheaves, first proof, last paragraph; Tag 0AHY topology"
+   }
+  },
+  {
+   "text": "Let $\\alpha_a:\\mathcal H|_{U_a}\\to\\mathcal G|_{U_a}$ be compatible local morphisms as in the statement. For $h\\in\\mathcal H(W)$ the sections $\\alpha_a(h|_{W\\cap U_a})$ agree on $W\\cap U_a\\cap U_b$: use naturality of $\\alpha_a,\\alpha_b$ and their assumed equality on that overlap. The sheaf axiom of $\\mathcal G$ therefore gives a unique $\\alpha_W(h)\\in\\mathcal G(W)$ with these restrictions. Applying this equality to $h+h'$, $hh'$, $-h$, $0$, and $1$ shows that $\\alpha_W$ preserves the ring operations, by uniqueness of gluing. Restricting from $W$ to $W'$ gives the same restrictions as $\\alpha_{W'}(h|_{W'})$, proving naturality by the same uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AN, lemma-mapping-property-glue, full faithfulness; explicit gluing of maps"
+   }
+  },
+  {
+   "text": "For the cover $W=\\bigcup_a(W\\cap U_a)$, write $E_{\\mathcal G}$ for the compatible-family subspace of $\\prod_a\\mathcal G(W\\cap U_a)$. The map $\\mathcal H(W)\\to E_{\\mathcal G}$ used in step 7 is continuous: its $a$-coordinate is the continuous restriction of $\\mathcal H$ followed by the continuous component of $\\alpha_a$, so step 1 applies. The topological sheaf axiom of $\\mathcal G$ identifies $E_{\\mathcal G}$ homeomorphically with $\\mathcal G(W)$, proving continuity of $\\alpha_W$. Any extension must give exactly these local restrictions on every section, so separatedness of $\\mathcal G$ proves uniqueness. This proves morphism descent including continuity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AN, lemma-mapping-property-glue, together with Tag 0AHY topological equalizer condition"
+   }
+  },
+  {
+   "text": "If $(\\mathcal F',e'_a)$ is another descended sheaf with the specified transition identifications, the local maps $(e'_a)^{-1}e_a$ agree on overlaps, since $e_b=\\theta_{ab}e_a$ and $e'_b=\\theta_{ab}e'_a$. Steps 7--8 glue them and their inverses; the composites restrict to identities, hence are identities by uniqueness in those steps. This proves the asserted unique isomorphism. Finally, the empty-cover sheaf axiom forces every local sheaf's section ring on $\\varnothing$ to be the one-element ring, homeomorphic to the empty product. If $A=\\varnothing$ the cover condition forces $X=\\varnothing$ and our tuple construction is that same one-element ring. If $X=\\varnothing$ with nonempty $A$, every factor is a one-element ring, so the construction and every argument above still apply. Empty members, infinite covers, and repeated cover members require no extra hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AN and 00AL; empty covering in the sheaf condition of Tag 0AHY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/formal-spaces.tex",
+  "place": "Tags 00AL, 00AM, 00AN and 0AHY; explicit topological refinement of the first gluing construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"TopCat\"",
+   "results": "{\"t\": \"2026-10-24T07:03:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"TopCat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TopCat.Presheaf.attrSheaf_restrict\", \"TopCat.Presheaf.restrict_tac\", \"TopCat.Presheaf.restrict_tac?\", \"TopCat.Presheaf\", \"TopCat.instCategoryPresheaf\", \"TopCat.Presheaf.presheafEquivOfIso\", \"TopCat.Presheaf.pushforward\", \"TopCat.Presheaf.pullback\"], \"digest\": \"0b7002882679a62d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent for sheaves of topological commutative rings along an open covering of a topological space with continuous morphisms",
+   "results": "{\"t\": \"2026-10-24T07:03:28Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent for sheaves of topological commutative rings along an open covering of a topological space with continuous morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.objSupIsoProdEqLocus\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsGluing\", \"TopCat.Presheaf.IsSheafUniqueGluing\", \"TopCat.Presheaf.IsSheaf.isSheafOpensLeCover\", \"TopCat.Sheaf.isLimitPullbackCone\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\"], \"digest\": \"0b1a0026f780e9bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves valued in topological rings satisfy descent for open covers including gluing continuous sheaf morphisms",
+   "results": "{\"t\": \"2026-10-24T07:03:30Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves valued in topological rings satisfy descent for open covers including gluing continuous sheaf morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\", \"TopCat.Presheaf.IsSheaf.isSheafOpensLeCover\", \"TopCat.Presheaf.IsSheafUniqueGluing\"], \"digest\": \"79d942b580fc7cb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafedSpace.GlueData\"",
+   "results": "{\"t\": \"2026-10-24T07:05:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafedSpace.GlueData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.GlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData.toTopGlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData.toPresheafedSpaceGlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData.toGlueData\", \"AlgebraicGeometry.SheafedSpace.GlueData.toGlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData.mk\", \"AlgebraicGeometry.SheafedSpace.GlueData.mk\"], \"digest\": \"6e974446937e78e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "grep",
+   "query": "TopCommRingCat.*[Ll]imit|[Ll]imit.*TopCommRingCat|namespace TopCommRingCat",
+   "results": "{\"t\": \"2026-10-24T07:08:43Z\", \"tool\": \"grep\", \"query\": \"TopCommRingCat.*[Ll]imit|[Ll]imit.*TopCommRingCat|namespace TopCommRingCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/TopCommRingCat.lean\"], \"digest\": \"b77a104d28b96801\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "grep",
+   "query": "TopCommRingCat|topological ring|existsUnique_gluing",
+   "results": "{\"t\": \"2026-10-24T07:14:18Z\", \"tool\": \"grep\", \"query\": \"TopCommRingCat|topological ring|existsUnique_gluing\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Flasque.lean\", \"Mathlib/Topology/Sheaves/Flasque.lean\", \"Mathlib/Topology/Sheaves/LocalPredicate.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\"], \"digest\": \"7d6c13d25d1eebe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible sheaves of topological commutative rings glue uniquely over an open cover",
+   "results": "{\"t\": \"2026-10-24T07:14:18Z\", \"tool\": \"leansearch\", \"query\": \"Compatible sheaves of topological commutative rings glue uniquely over an open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\", \"TopCat.Presheaf.IsSheafUniqueGluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types\", \"TopCat.Presheaf.IsGluing\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\"], \"digest\": \"b60588c71efd4b9b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCommRingCat, Sheaf",
+   "results": "{\"t\": \"2026-10-24T07:14:18Z\", \"tool\": \"loogle\", \"query\": \"TopCommRingCat, Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: loogle: unknown identifier 'Sheaf'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent and gluing of sheaves valued in topological commutative rings along an open covering",
+   "results": "{\"t\": \"2026-10-24T07:14:20Z\", \"tool\": \"leanfinder\", \"query\": \"Descent and gluing of sheaves valued in topological commutative rings along an open covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Sheaf.objSupIsoProdEqLocus\", \"TopCat.Sheaf.existsUnique_gluing'\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"TopCat.Presheaf.IsGluing\"], \"digest\": \"c06c8cdc139ba7e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: section gluing of an already given sheaf is not descent of sheaf objects; generic SheafedSpace.GlueData requires limits in its value category. TopCommRingCat.lean supplies the category but no HasLimits instance, and the source search finds none elsewhere. Ordinary CommRingCat equalizers do not supply the section topologies or their continuous descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent for sheaves of topological commutative rings along an open covering",
+   "results": "{\"t\": \"2026-10-24T07:39:42Z\", \"tool\": \"leanfinder\", \"query\": \"Descent for sheaves of topological commutative rings along an open covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.objSupIsoProdEqLocus\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"TopCat.Presheaf.IsSheaf.isSheafOpensLeCover\", \"TopCat.Presheaf.IsGluing\"], \"digest\": \"149042a77942786c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TopCommRingCat\"",
+   "results": "{\"t\": \"2026-10-24T07:39:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"TopCommRingCat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TopCommRingCat\", \"TopCommRingCat.delabOf\", \"TopCommRingCat.instCategory\", \"TopCommRingCat.instInhabited\", \"TopCommRingCat.α\", \"TopCommRingCat.instCoeSortType\", \"TopCommRingCat.isCommRing\", \"TopCommRingCat.isTopologicalSpace\"], \"digest\": \"a093268319904d3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "grep",
+   "query": "TopCommRingCat|GlueData",
+   "results": "{\"t\": \"2026-10-24T07:39:42Z\", \"tool\": \"grep\", \"query\": \"TopCommRingCat|GlueData\", \"sub\": \"Topology/Category\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/TopCommRingCat.lean\", \"Mathlib/Topology/Category/TopCommRingCat.lean\", \"Mathlib/Topology/Category/TopCommRingCat.lean\", \"Mathlib/Topology/Category/TopCommRingCat.lean\", \"Mathlib/Topology/Category/TopCommRingCat.lean\"], \"digest\": \"ee099d2abb3c6fdc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing sheaf objects valued in a category with limits along open immersions",
+   "results": "{\"t\": \"2026-10-24T07:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing sheaf objects valued in a category with limits along open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Sheaf.existsUnique_gluing'\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ιInvApp\", \"AlgebraicGeometry.SheafedSpace.GlueData\", \"AlgebraicGeometry.PresheafedSpace.GlueData.diagramOverOpenπ\", \"AlgebraicGeometry.PresheafedSpace.GlueData.diagramOverOpen\"], \"digest\": \"d1b332e13a38bc01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent for sheaves of topological commutative rings for an open cover",
+   "results": "{\"t\": \"2026-10-24T07:44:21Z\", \"tool\": \"leansearch\", \"query\": \"Effective descent for sheaves of topological commutative rings for an open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf\", \"TopCat.Presheaf.IsSheafOpensLeCover\", \"AlgebraicGeometry.commRingStructureSheafInTypeObj\", \"SheafOfModules.QuasicoherentData.mk\", \"TopCat.Presheaf.IsSheaf.isSheafOpensLeCover\", \"TopCat.Presheaf.IsSheaf\", \"TopCat.Presheaf.isSheafOpensLeCover_iff_isSheafPairwiseIntersections\", \"SheafOfModules.QuasicoherentData.coversTop\"], \"digest\": \"f65f3db950a4516a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "grep",
+   "query": "TopCommRingCat.*[Ll]imit|[Ll]imit.*TopCommRingCat|SheafedSpace.GlueData",
+   "results": "{\"t\": \"2026-10-24T07:44:21Z\", \"tool\": \"grep\", \"query\": \"TopCommRingCat.*[Ll]imit|[Ll]imit.*TopCommRingCat|SheafedSpace.GlueData\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\"], \"digest\": \"03b963b25c312fd7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subring of a product of topological rings is a topological ring with the induced topology and maps into it are continuous if and only if every coordinate is continuous",
+   "results": "{\"t\": \"2026-10-24T07:44:22Z\", \"tool\": \"leanfinder\", \"query\": \"A subring of a product of topological rings is a topological ring with the induced topology and maps into it are continuous if and only if every coordinate is continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Pi.instIsTopologicalRing\", \"RestrictedProduct.continuous_rng_of_principal_iff_forall\", \"RestrictedProduct.continuous_rng_of_top\", \"instIsTopologicalRingProd\", \"RestrictedProduct.continuous_rng_of_bot\", \"RestrictedProduct.isTopologicalRing\", \"RestrictedProduct.instIsTopologicalRingCoePrincipal\", \"RestrictedProduct.continuous_rng_of_principal\"], \"digest\": \"ffa15035ab00ec26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuous_pi_iff\"",
+   "results": "{\"t\": \"2026-10-24T07:44:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"continuous_pi_iff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"continuous_pi_iff\"], \"digest\": \"f89ac6f9d62d9a62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalRing|continuous_pi_iff|continuous_induced_rng",
+   "results": "{\"t\": \"2026-10-24T07:44:23Z\", \"tool\": \"grep\", \"query\": \"topologicalRing|continuous_pi_iff|continuous_induced_rng\", \"sub\": \"Topology/Algebra/Ring\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Ring/Ideal.lean\", \"Mathlib/Topology/Algebra/Ring/Ideal.lean\", \"Mathlib/Topology/Algebra/Ring/Ideal.lean\", \"Mathlib/Topology/Algebra/Ring/Ideal.lean\", \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"Mathlib/Topology/Algebra/Ring/Basic.lean\", \"Mathlib/Topology/Algebra/Ring/Basic.lean\", \"Mathlib/Topology/Algebra/Ring/Basic.lean\"], \"digest\": \"e4b39cd993c30f8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: section gluing of a given sheaf is not object descent; the general sheafed-space construction requires HasLimits in the value category, not supplied for TopCommRingCat. Basic coordinate-continuity and product-ring hits support elementary steps only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-formal-open-gluing",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 3 (cosupport by Verdier duality), through the regular-local-model/purity and formal-resolution descendants: gluing the topological structure sheaves of the formal charts used by lem-per-formal-open-blowup-base-change. Fixed-space sheaf descent is the sheaf-theoretic part of that construction.",
+   "via": [
+    "lem-per-adic-formal-open-gluing",
+    "lem-per-formal-open-blowup-base-change",
+    "lem-per-rig-formal-resolution-gluing",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-topological-ring-sheaf-open-descent",
+  "worker": "stage1",
+  "summary": "Checked Stacks first compatible-tuple construction against the explicit equalizer topology. Gave coordinatewise ring, sheaf, local inverse, continuity, morphism descent and uniqueness proofs, including empty covers. No external theorem is used: each step is an elementary expansion of the hypotheses and subspace/product topology. No new nodes; statement and seeded searches retained.",
+  "blueprint": "Realizes the fixed-space topological structure-sheaf descent needed by lem-per-adic-formal-open-gluing, along the recorded descendants of Step 3 of lem-per-artin-gabber-affine-curve; latest blueprint ancestor proof and unit read. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-b6a82cb23",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-b6a82cb23 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes. I checked it against Stacks 00AL (lemma-glue-sheaves, first proof: tuple formula and the identification over W⊆U_i; its φ_j=φ_ij∘φ_i convention matches θ_ab e_a=e_b), 00AM, 00AN (full faithfulness) and 0AHY (formal-spaces.tex lines 49-105: equalizer in topological rings, subspace of the product topology). The statement agrees with these sources clause by clause and with the parent lem-per-adic-formal-open-gluing steps 2 and 4, which use existence and the section formula. Step checks: 1, the subbasis continuity test via def-kun-subspace-topology, a Mathlib leaf; 2, the equalizer of two ring homomorphisms is a subring and its operations are continuous coordinatewise; 3, restrictions preserve compatibility by naturality of θ; 4, the per-a gluing is correct, and overlap compatibility is tested on W_b∩U_a∩U_c using separatedness of F_c; 5, the inverse is proved continuous through the assumed homeomorphism F_a(W∩U_a)≅E_a, not assumed from bijectivity; 6, the inverse of e_a uses the cocycle on W∩U_b∩U_c⊆U_a∩U_b∩U_c and θ_aa=1; 7-8, morphism gluing by the sheaf axiom of G, with continuity through the homeomorphism E_G≅G(W) and uniqueness by separatedness; 9, (e'_a)^{-1}e_a agree on overlaps, and uniqueness follows from step 8. Edge cases checked: A=∅ forces X=∅ and the zero ring; X=∅ with A nonempty; one-member, repeated or infinite covers; no Hausdorffness used. All steps are genuinely elementary expansions of the hypotheses, and proof_deps equals the union of the uses. No duplicate: lem-pe-set-sheaf-cover-descent and lem-pe-site-sheaf-gluing are about sheaves of sets on sites, and the trf/sc gluing nodes are about schemes and line bundles. The Mathlib searches cover all three kinds. Route: the only dependency is a Mathlib leaf, so there are no tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.TopologicalRingSheafOpenDescent",
+  "declaration": "TopCat.TopologicalRingDescent.openCover_descent",
+  "declarations": [
+   "TopCat.TopologicalRingDescent.sectionsOn",
+   "TopCat.TopologicalRingDescent.restrictOn",
+   "TopCat.TopologicalRingDescent.Transitions",
+   "TopCat.TopologicalRingDescent.tupleRing",
+   "TopCat.TopologicalRingDescent.Identifications",
+   "TopCat.TopologicalRingDescent.morphismOn",
+   "TopCat.TopologicalRingDescent.openCover_descent"
+  ],
+  "file": "lean/Sheaf/Topology/TopologicalRingSheafOpenDescent.lean",
+  "statement": "theorem openCover_descent (X : TopCat.{u}) (A : Type v) (U : A → Opens X) (hcover : iSup U = ⊤) (F : ∀ a, (TopCat.of (U a)).Sheaf TopCommRingCat.{max v w}) (t : Transitions U F) : (∃ (G : X.Sheaf TopCommRingCat.{max v w}) (e : Identifications U F t G), ∃ model : ∀ W : Opens X, G.obj.obj (op W) = TopCommRingCat.of (tupleRing U F t W), (∀ (V W : Opens X) (h : V ≤ W) (s : G.obj.obj (op W)) (a : A), ((eqToHom (model V)) (G.obj.map (homOfLE h).op s)).val a = restrictOn (U a) (F a) h (((eqToHom (model W)) s).val a)) ∧ (∀ (a : A) (V : Opens X) (ha : V ≤ U a) (s : G.obj.obj (op V)), (e.iso a V ha).hom s = ((eqToHom (model V)) s).val a)) ∧ (∀ (H G : X.Sheaf TopCommRingCat.{max v w}) (alpha : ∀ a, (U a).sheafRestrict.obj H ⟶ (U a).sheafRestrict.obj G), (∀ (a b : A) (V : Opens X) (ha : V ≤ U a) (hb : V ≤ U b), morphismOn (U a) H G (alpha a) V ha = morphismOn (U b) H G (alpha b) V hb) → ∃! f : H ⟶ G, ∀ a, (U a).sheafRestrict.map f = alpha a) ∧ (∀ (G H : X.Sheaf TopCommRingCat.{max v w}) (e : Identifications U F t G) (d : Identifications U F t H), ∃! f : G ⟶ H, IsIso f ∧ ∀ (a : A) (V : Opens X) (ha : V ≤ U a), f.hom.app (op V) ≫ (d.iso a V ha).hom = (e.iso a V ha).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d5997960",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Node diff vs side-live is only the new lean field; lean.statement is a verbatim substring of the module; all 7 decls listed. Clause check against node and Stacks 0AHY/00AL/00AM/00AN: TopCat.Sheaf TopCommRingCat matches the 0AHY subspace-of-product sheaf condition (tuple ring is a limit cone; representable test gives a continuous inverse even across universes); Transitions = sectionwise θ_ab on all opens of U_a∩U_b with naturality, θ_aa=1, cocycle; Identifications with e_a≫θ_ab=e_b; model is a bundled equality with tupleRing (⨅ eqLocus of θ_ab∘res∘ev_a and res∘ev_b) with subtype-of-Pi topology (def-kun-subspace-topology = instTopologicalSpaceSubtype), componentwise restriction and e_a = projection; ∃! morphism extension for all H,G via sheafRestrict with morphismOn transport checked against functor_map_eq_inf (V⊓U); ∃! IsIso f with f≫d_a=e_a. Edge cases: A=∅ ⇒ X=∅ and one-element ring; X=∅, repeated or infinite covers need no extra hypotheses; coefficients in max v w are forced by the A-indexed product, not a restriction. H4: no Mathlib or project descent of TopCommRingCat sheaves (SheafedSpace.GlueData needs HasLimits; Pseudofunctor.DescentData/IsStack lack the sheaf pseudofunctor and the tuple model); helpers are real, docstringed and listed. Gates: sorry-only proof, 9 proof steps in docstring, source/blueprint docstrings, report has Worker report and Second reading by Q87. No compile run (no file changed); worker compile evidence stands."
+ }
+}

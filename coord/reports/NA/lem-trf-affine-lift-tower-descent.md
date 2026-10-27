@@ -1,0 +1,50 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-affine-lift-tower-descent.json`: statement, now split into ten steps; no Mathlib match.
+- `citations.json`: one verbatim statement excerpt for each of the 20 step/node citations.
+- `searches.jsonl`: actual search-command log; the item preserves its imported searches and adds this run's five searches.
+- `report.md`: this report.
+
+No new nodes, no Mathlib leaves, no Lean written or compiled. The sandbox initially contained only dispatcher brief markers. There was no previous split or report to recover. The item was copied from the live read-only repository and its statement and imported provenance fields are retained.
+
+Attachments: none. A search in `lean/WeilConjectures/` for the exact blueprint id and for `Monoscheme`, `KatoFan`, `monoscheme`, and sharpening of fans returned no declaration for this result. Unrelated affine-lift and adic tower declarations do not concern monoidal spaces and cannot attach any of this item's clauses.
+
+WANTED: none for this item. The ILO source is present and was read. There is no applicable Stacks tag for monoidal fan resolution; scheme blowup/gluing tags would give results about the wrong objects.
+
+The imported statement was not changed. Its proof was empty. The proof now exposes the domain checks, minimal neighborhoods, explicit common lifts, preservation of all original indices, canonical overlap comparisons, the formula for the glued center, fraction-chart gluing, induction on the stage, final smoothness, global contraction and the empty case. Five existing lemma nodes and the two existing definitions supply the inputs. No dependency was replaced by a newly named clause of the item. In particular, the item does not cite its parent sharpening/functorial-resolution theorem or its downstream refinement lemma, which would create a cycle.
+
+The two definition nodes remain the statement dependencies. Proof dependencies are exactly the union of the step uses. No previous proof dependencies needed removal. No unfinished new lemma is introduced. Existing cited unsplit nodes remain work for their own assigned workers.
+
+The chapter and unit records were read but not edited: this is not a unit's key statement. The current blueprint proof of `lem-trf-local-term-locality` uses contracting correspondences, while this item's recorded ancestry is explicitly the historical monoidal-resolution branch. This delivery completes that already assigned supporting item without changing the current unit route or claiming to realize the unit's main statement. `blueprint.from.place` already names the historical branch and the precise ILO local construction; it is preserved. Searches of all blueprint nodes for monoscheme, saturated blowup, sharpening and affine lift found no equivalent statement (the sole sharpening hit concerns Fourier coefficients).
+
+## Not duplicates
+
+No new nodes. The existing nodes for prime-complement minimal neighborhoods, sharpened affine sections, fine-monoid unit splitting, saturated sharpening-chart comparison and tower synchronization are cited directly. Scheme gluing nodes do not state monoidal-space gluing. General sheaf gluing is carried out explicitly through membership and tuples of agreeing sections in the definition of fan blowup, so no separate elementary gluing node is created.
+
+## Review by NA
+
+I read ILO, Expose VIII, printed pp.98--102 (PDF pp.104--108), in full for 3.1.1--3.1.27, and Remark 2.3.5 on printed p.92 (PDF p.98). Remark 3.1.4 describes smallest neighborhoods and their trivial affine covers; 3.1.11 warns that a fan has no global monoscheme lift in general; 3.1.19 and 3.1.21 give the fraction charts and their saturation; 3.1.22 defines recursive tower pullback; 3.1.25 transfers ideals and towers through sharpening; 3.1.26--3.1.27 explain descent and its finite-disjoint-union synchronization. Remark 2.3.5(ii)--(iii) explains why separately contracted local resolutions are inadequate and why two smooth maps give identical uncontracted pullbacks. The source sketches some details, so this proof is honestly marked `proof_origin.by = agent`: the explicit common lift, membership formula and stage induction are supplied here, not attributed verbatim to ILO.
+
+I opened the statement of every cited node. For step 1, the two definition nodes supply local stalk models, coherent centers and tower restriction, and `lem-trf-sharpening-blowup-chart-comparison` states the ideal bijection and all-index tower comparison. The group of a chart monoid is torsion free because the sharp chart's closed-point stalk is that monoid; its ordinary localizations have the same group completion, and its sharp localizations are stalks of the given fan. This checks both separate conditions defining C, rather than assuming that ordinary torsion freeness implies sharp torsion freeness.
+
+Step 2 uses precisely the displayed minimal-open and localization equalities in `lem-trf-monoid-prime-minimal-neighborhood`, and the sections/stalk equalities in `lem-trf-affine-fan-localization-sections`. I verified that the latter names the localization-induced restriction maps. Thus the common B really is the fan stalk, and no intersection of arbitrary affine opens is assumed affine. The intrinsic smallest opens cover an overlap even if that overlap is not affine.
+
+Step 3 uses `lem-trf-fine-monoid-unit-splitting`, whose statement requires both ordinary and sharp torsion-free group completions; those hypotheses were checked for A_i before applying it. The rest is explicit: prime ideals ignore a group factor, inverse images give the maps on spectra, and stalk maps append a free group. The definitions give smoothness, and the same product description checks both group conditions for V_x. This is an argument for the common lift, not an invocation of an unrecorded descent theorem.
+
+Step 4 cites the final paragraph of `lem-trf-smooth-tower-index-synchronization`. It states equality of full uncontracted pullbacks for two arbitrary smooth maps, not only for surjections. I checked the smooth stalk forms of both composites into L. Its disjoint-union trick is exactly what preserves original indices, so the proof never identifies two towers merely because their contractions are equal.
+
+Step 5 uses `lem-trf-sharpening-blowup-chart-comparison`: its statement says recursive smooth pullback commutes with sharpening, charts are independent of splittings and generator representatives, and transitions are localized fraction identities with the triple-overlap cocycle. The proof writes why different local comparisons agree: the initial sharp sheaf is fixed and each later chart map sends p and b-a to themselves. This also removes dependence on a choice of splitting. No functorial comparison of unrelated final objects is being assumed.
+
+Step 6 uses only the coherent-ideal and sheaf definitions in `def-trf-fine-fan-blowup` after the overlap equalities are known. The membership formula is verified to be an ideal subsheaf, to restrict to each local center, and to have the same finite nonempty generators locally. This is marked elementary because it is a direct sheaf check. It applies only when a first center exists (n>0).
+
+Step 7 uses the actual saturated fraction-chart prescription in `def-trf-fine-fan-blowup` and its compatibility assertion in `lem-trf-sharpening-blowup-chart-comparison`. I checked that the local ideal is the identified J_i, so the same differences and localization maps are used. Step 8 uses these same statements in an induction with its claim, base and inductive step stated explicitly. Each center is glued on the already identified kth-level opens; the next fraction charts give the next-level identification. This proves existence and uniqueness with prescribed local identifications. The word unique is interpreted in the usual geometric sense of the unique comparison fixed by these identifications, not literal equality between differently encoded spaces.
+
+Step 9 uses the first and final paragraphs of `lem-trf-smooth-tower-index-synchronization`, respectively for equivalence of smoothness with sharpening and contractedness of R(L). The definition of smooth fan is stalkwise. To reflect contraction globally I checked both conditions, whole ideal and isomorphism arrow, on every component; an identity stage on only one chart is deliberately retained. In particular a whole-ideal nonidentity saturation is never deleted. Step 10 uses contractedness from that same statement and the tower definition: every possible stage on the empty space is a whole-ideal isomorphism and is therefore absent. This covers the empty cover as well as nonempty families of empty opens. No assumption that R returns the empty tower merely because a space is smooth is used.
+
+I checked the B--E return categories against the node files and source: no new statement-only-node schema arises; no tag is used instead of a node; no node is cited for a theorem its statement lacks; no hidden use of the proof of another node occurs; and no dependency cycle is introduced through the parent or through the refinement node. Each step is shorter than 2000 characters. The sheaf membership verification stays in the item as elementary rather than becoming a spurious lemma. The common lift, chart comparison and synchronization remain separate genuine arguments supported by existing inputs.
+
+Small cases checked: the zero monoid and a one-point fan (all unit ranks can be zero), a generic-point overlap (B=0 with free unit groups), the empty tuple of generators (a=0 and D(0) the whole spectrum), identical chart indices, a single chart, a length-zero resolution, duplicated chart opens, a removable stage on just one component, and an initial whole-ideal stage that is a nontrivial saturation. All retain the claimed hypotheses and the required indexing convention. No statement dispute was found and nothing remains unfinished in this split.
+
+Validation: the server `review_split` check passed before the report was written. The required delivery dry run and push follow this review.

@@ -183,7 +183,65 @@
   "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "_private.WeilConjectures.Algebra.CharpolyLocallyFree.0.Algebra.charpoly_standardCover_overlap",
+    "_private.WeilConjectures.Algebra.CharpolyLocallyFree.0.Algebra.charpoly_standardCover_glue",
+    "_private.WeilConjectures.Algebra.CharpolyLocallyFree.0.Algebra.charpoly_standardCover_comparison",
+    "Algebra.charpoly_locallyFree_exists_unique"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "_private.WeilConjectures.Algebra.CharpolyLocallyFree.0.Algebra.charpoly_standardCover_overlap",
+     "module": "WeilConjectures.Algebra.CharpolyLocallyFree",
+     "lines": [
+      48,
+      101
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "_private.WeilConjectures.Algebra.CharpolyLocallyFree.0.Algebra.charpoly_standardCover_glue",
+     "module": "WeilConjectures.Algebra.CharpolyLocallyFree",
+     "lines": [
+      103,
+      159
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "_private.WeilConjectures.Algebra.CharpolyLocallyFree.0.Algebra.charpoly_standardCover_comparison",
+     "module": "WeilConjectures.Algebra.CharpolyLocallyFree",
+     "lines": [
+      161,
+      252
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Algebra.charpoly_locallyFree_exists_unique",
+     "module": "WeilConjectures.Algebra.CharpolyLocallyFree",
+     "lines": [
+      256,
+      332
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -225,5 +283,51 @@
   "landing": "20261012T053936-L-2637232",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $n\\ge0$ an integer, $M$ an $A$-module and $\\varphi:M\\to M$ an $A$-linear map. Assume there are $f_1,\\dots,f_r\\in A$ generating the unit ideal such that for each $i$ the $A_{f_i}$-module $M_{f_i}$ is free of rank $n$. Then there is exactly one polynomial $\\chi\\in A[T]$ with the following property: for every ring map $A\\to A'$ such that $M\\otimes_AA'$ is a free $A'$-module of rank $n$, the image of $\\chi$ in $A'[T]$ is the characteristic polynomial $\\det(T\\cdot1-\\varphi_{A'})$ of $\\varphi_{A'}=\\varphi\\otimes1$ on $M\\otimes_AA'$ (computed in any basis). Moreover $\\chi=T^n+c_{n-1}T^{n-1}+\\dots+c_0$ with $c_k\\in A$ (in particular $\\chi$ is monic). In particular, if $M$ itself is free of rank $n$, then $\\chi$ is the usual characteristic polynomial of $\\varphi$.",
+  "proof": [
+   {
+    "text": "*Local polynomials.* For each $i$, $M_{f_i}\\cong M\\otimes_AA_{f_i}$, so the given basis of $M_{f_i}$ is a basis of the scalar extension; let $\\chi_i\\in A_{f_i}[T]$ be the characteristic polynomial of $\\varphi\\otimes1$ in it. It does not depend on the basis (conjugate matrices have the same characteristic polynomial), and it is monic of degree $n$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Towers.* For ring maps $A\\to S\\to T$ such that $M\\otimes_AS$ and $M\\otimes_AT$ are free of rank $n$, the characteristic polynomial of $\\varphi_T$ is the image of that of $\\varphi_S$: a basis of $M\\otimes_AS$ extends to a basis of $(M\\otimes_AS)\\otimes_ST\\cong M\\otimes_AT$, in which $\\varphi_T$ has the image matrix.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Agreement on overlaps.* Applying the tower statement to $A_{f_i}\\to A_{f_if_j}$ and $A_{f_j}\\to A_{f_if_j}$, the images of $\\chi_i$ and $\\chi_j$ in $A_{f_if_j}[T]$ are both the characteristic polynomial of $\\varphi$ over $A_{f_if_j}$, hence equal.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Gluing.* Since $f_1,\\dots,f_r$ generate the unit ideal, an element of $A$ is determined by its images in all $A_{f_i}$, and a family of elements $a_i\\in A_{f_i}$ whose images agree in all $A_{f_if_j}$ comes from a unique $a\\in A$. Applying this to each coefficient of $T^k$, $0\\le k<n$, gives $c_k\\in A$, and $\\chi=T^n+\\sum_{k<n}c_kT^k$ maps to $\\chi_i$ for every $i$ (if some $A_{f_i}$ is the zero ring the condition there is empty).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The base-change property.* Let $\\rho:A\\to A'$ be such that $M\\otimes_AA'$ is free of rank $n$. The images $\\rho(f_i)$ generate the unit ideal of $A'$. Over $T_i=A'_{\\rho(f_i)}$, which is an $A_{f_i}$-algebra, the tower statement applied to $A\\to A_{f_i}\\to T_i$ and to $A\\to A'\\to T_i$ shows that the images of $\\chi$ and of the characteristic polynomial of $\\varphi_{A'}$ in $T_i[T]$ coincide. By injectivity of $A'\\to\\prod_iT_i$ (applied coefficientwise) they are equal.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Uniqueness.* If $\\chi'$ also has the base-change property, applying it to $A\\to A_{f_i}$ shows that $\\chi'$ maps to $\\chi_i$ for every $i$, so $\\chi'=\\chi$ by injectivity of $A\\to\\prod_iA_{f_i}$ coefficientwise.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The free case.* If $M$ is free of rank $n$, apply the base-change property to the identity of $A$: $M\\otimes_AA\\cong M$, and the matrix of $\\varphi\\otimes1$ in the transported basis is that of $\\varphi$, so $\\chi$ is the usual characteristic polynomial.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

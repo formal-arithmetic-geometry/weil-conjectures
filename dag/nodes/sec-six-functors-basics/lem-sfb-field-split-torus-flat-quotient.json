@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-field-split-torus-flat-quotient",
+ "kind": "statement",
+ "title": "Faithfully flat quotients of split tori over any field",
+ "statement": "Let $k$ be any field [def-weil-field]. Write $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. A split torus is a $k$-group scheme [def-sc-group-scheme] isomorphic over $k$ to $\\mathbf G_{m,k}^r$ for an integer $r\\geq0$. Let $T$ be a split torus, let $Q$ be an affine $k$-group scheme of finite type [def-weil-finite-type-morphism], and let $q:T\\to Q$ be a homomorphism such that $k[T]$ is a faithfully flat $k[Q]$-module through $q^*:k[Q]\\to k[T]$ [def-weil-pbc-faithfully-flat-ring-map]. Here $k[X]=\\Gamma(X,\\mathcal O_X)$ for an affine $k$-scheme $X$. Then $Q$ is a split torus over $k$: there is an integer $t\\geq0$ and an isomorphism $Q\\simeq\\mathbf G_{m,k}^t$ of $k$-group schemes. No perfectness or infinitude assumption is made on $k$, and no smoothness, reducedness or finiteness assumption is imposed on the scheme-theoretic kernel of $q$. Rank zero is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(b),(c), printed pp.233--234; Definition 12.14 and its following paragraph, printed p.236: a quotient of a split torus is again a split torus. Quotient maps are the faithfully flat homomorphisms (Theorem 3.34, printed p.75; Theorem 5.39 and Remark 5.42, printed p.108)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose a splitting of $T$ of rank $r$ and put $A=k[Q]$, $H=k[\\mathbf Z^r]$, with basis $e_m$, product $e_me_n=e_{m+n}$, coproduct $\\Delta_H(e_m)=e_m\\otimes e_m$, counit $\\epsilon_H(e_m)=1$ and antipode $S_H(e_m)=e_{-m}$. The split case of [lem-sfb-diagonalizable-group-geometric-criteria] identifies this coordinate group with $T$. The coordinate Hopf structure on $A$ is supplied by [lem-sfb-affine-group-coordinate-hopf]. The map $i=q^*:A\\to H$ is injective: apply [lem-weil-pbc-faithfully-flat-universally-injective] to the given faithfully flat map and $N=A$, and identify $A\\otimes_AH$ with $H$ by $a\\otimes h\\mapsto i(a)h$. Moreover, pulling back the multiplication compatibility diagram of the group homomorphism $q$ gives $\\Delta_H i=(i\\otimes i)\\Delta_A$. On functors of points $q$ is a homomorphism of groups [def-sc-group-scheme], so it also sends the identity to the identity and inverses to inverses: $q\\circ e_T=e_Q$ and $q\\circ\\iota_T=\\iota_Q\\circ q$. Pulling back these two diagrams gives $\\epsilon_H i=\\epsilon_A$ and $S_H i=iS_A$. Let $B=i(A)\\subseteq H$. It is a unital $k$-subalgebra stable under $S_H$, and for every $b\\in B$ the displayed coproduct identity writes $\\Delta_H(b)$ as a finite sum $\\sum_j b_j\\otimes b'_j$ with $b_j,b'_j\\in B$.",
+   "uses": [
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9 and Definition 12.14, pp.233--236; the injective-coordinate viewpoint is Proposition 5.43(c), p.109. Faithful-flat injectivity: Stacks Tag 05CK, algebra-lemma-faithfully-flat-universally-injective."
+   }
+  },
+  {
+   "text": "For $n\\in\\mathbf Z^r$, define the $k$-linear coefficient functional $p_n:H\\to k$ by $p_n(\\sum_m c_me_m)=c_n$. The tensor universal property [def-weil-pbc-module-tensor-product] gives the linear map $1\\otimes p_n:H\\otimes_kH\\to H$, $h\\otimes h'\\mapsto h\\,p_n(h')$. If $b=\\sum_m c_me_m\\in B$, apply this map to the two expressions for $\\Delta_H(b)$ in step 1. It yields $c_ne_n=\\sum_j b_jp_n(b'_j)\\in B$. When $c_n\\ne0$, division by the nonzero scalar $c_n\\in k$ gives $e_n\\in B$. Consequently every element of $B$ is a finite linear combination of the individual monomials that belong to $B$. This is a coefficient calculation on finite sums and does not evaluate on $k$-rational points.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Coefficient-projection argument as in the proof of Theorem 12.12(a) => (b), p.235, applied to the coproduct of the coordinate subalgebra; agent adaptation."
+   }
+  },
+  {
+   "text": "Put $L=\\{m\\in\\mathbf Z^r:e_m\\in B\\}$. Since $1=e_0\\in B$, $e_{m+n}=e_me_n$ and $e_{-m}=S_H(e_m)$, this is an additive subgroup of $\\mathbf Z^r$. Step 2 says that $B$ is exactly the $k$-linear span of $\\{e_m:m\\in L\\}$; these vectors are linearly independent since they are part of the defining basis of $H$. Apply [lem-weil-subgroup-finite-free-abelian-group-free] with $J=\\{1,\\ldots,r\\}$ to choose a finite basis $\\lambda_1,\\ldots,\\lambda_t$ of $L$, for some $t\\geq0$. The bijection $\\mathbf Z^t\\to L$, $(a_j)\\mapsto\\sum_j a_j\\lambda_j$, induces the $k$-linear isomorphism $\\theta:k[\\mathbf Z^t]\\to B$ sending $e_a$ to $e_{\\sum_j a_j\\lambda_j}$. Its inverse sends each basis vector $e_m$ to the vector indexed by the unique basis coordinates of $m$. Addition of coordinates shows $\\theta(e_ae_b)=\\theta(e_a)\\theta(e_b)$ and $\\theta(e_0)=1$, so it is an algebra isomorphism.",
+   "uses": [
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.14, p.236: split tori correspond to free finite-rank character groups; the subgroup argument underlying Theorem 12.9(b),(c), pp.233--234, is made explicit on the coordinate algebra."
+   }
+  },
+  {
+   "text": "Compose $\\theta$ with the inverse of $i:A\\to B$ to obtain an algebra isomorphism $k[\\mathbf Z^t]\\simeq A$. Let $\\phi=i^{-1}\\theta:k[\\mathbf Z^t]\\to A$ and $m=\\sum_ja_j\\lambda_j$. By step 1, $(i\\otimes i)\\Delta_A(\\phi(e_a))=\\Delta_H(e_m)=e_m\\otimes e_m=(i\\otimes i)(\\phi(e_a)\\otimes\\phi(e_a))$, $\\epsilon_A(\\phi(e_a))=\\epsilon_H(e_m)=1$ and $i(S_A(\\phi(e_a)))=S_H(e_m)=e_{-m}=i(\\phi(e_{-a}))$. The map $i\\otimes i:A\\otimes_kA\\to H\\otimes_kH$ is injective: by step 3, $B$ is the span of the basis vectors $e_m$, $m\\in L$, so the coefficient projection $\\pi:H\\to B$, $\\sum_mc_me_m\\mapsto\\sum_{m\\in L}c_me_m$, satisfies $\\pi|_B=1_B$; hence, with the tensor products of linear maps of [def-weil-pbc-module-tensor-product], $(i^{-1}\\pi\\otimes i^{-1}\\pi)(i\\otimes i)=1_{A\\otimes A}$. Since $i$ is injective as well, $\\Delta_A(\\phi(e_a))=\\phi(e_a)\\otimes\\phi(e_a)$ and $S_A(\\phi(e_a))=\\phi(e_{-a})$; that is, $\\phi$ sends coproduct, counit and antipode of $k[\\mathbf Z^t]$ on each basis element to those of $A$, and linearity extends these equalities to all elements. Thus the isomorphism and its inverse preserve all coordinate group operations. By the contravariant affine-spectrum correspondence [def-weil-affine-spectrum], they give inverse isomorphisms of $k$-schemes respecting multiplication, unit and inverse, hence an isomorphism of $k$-group schemes $Q\\simeq D_k(\\mathbf Z^t)$. The split case of [lem-sfb-diagonalizable-group-geometric-criteria] identifies the latter with $\\mathbf G_{m,k}^t$. For $r=0$ one has $H=k$, $B=k$ and $L=0$, so $t=0$; the same argument applies. Neither a field extension nor any property of the kernel has been used.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-diagonalizable-group-geometric-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a)--(c), pp.233--234; Proposition 12.3, pp.231--232, and Definition 12.14, p.236."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(b),(c), pp.233--234, and Definition 12.14, p.236; direct coordinate-subalgebra proof using the coefficient projection from the proof of Theorem 12.12, p.235, instead of quotient uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(torus|tori|diagonalizable).*(quotient|faithfullyFlat)|(quotient|faithfullyFlat).*(torus|tori|diagonalizable)",
+   "results": "{\"t\": \"2026-10-24T04:15:19Z\", \"tool\": \"grep\", \"query\": \"(torus|tori|diagonalizable).*(quotient|faithfullyFlat)|(quotient|faithfullyFlat).*(torus|tori|diagonalizable)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/Data/QPF/Multivariate/Constructions/Quot.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/Topology/Maps/Strict/Basic.lean\", \"Mathlib/Topology/Maps/Strict/Basic.lean\", \"Mathlib/Topology/Maps/Strict/Basic.lean\", \"Mathlib/Topology/Maps/Strict/Basic.lean\"], \"digest\": \"2ef2b2080d12f63f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract QuotientGroup instances, formal-smoothness splitting criteria and affine flatness equivalences do not classify quotients of split algebraic tori; the precise AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient group scheme of a split torus is split over the base field",
+   "results": "{\"t\": \"2026-10-24T04:15:20Z\", \"tool\": \"leansearch\", \"query\": \"A quotient group scheme of a split torus is split over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.Quotient.group\", \"QuotientGroup.instHasQuotientSubgroup\", \"QuotientGroup.quotientBot\", \"QuotientGroup.Quotient.group.congr_simp\", \"QuotientGroup.map_normal\", \"Subgroup.IsComplement.leftQuotientEquiv\", \"QuotientAddGroup.quotientBot\", \"QuotientGroup.measurableSpace\"], \"digest\": \"25843c9fbee79dd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract QuotientGroup instances, formal-smoothness splitting criteria and affine flatness equivalences do not classify quotients of split algebraic tori; the precise AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T04:15:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract QuotientGroup instances, formal-smoothness splitting criteria and affine flatness equivalences do not classify quotients of split algebraic tori; the precise AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary field a faithfully flat quotient of a split algebraic torus is a split torus, even for a nonreduced kernel",
+   "results": "{\"t\": \"2026-10-24T04:15:22Z\", \"tool\": \"leanfinder\", \"query\": \"Over an arbitrary field a faithfully flat quotient of a split algebraic torus is a split torus, even for a nonreduced kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_split\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.FormallySmooth.iff_split_surjection\", \"retractionKerToTensorEquivSection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"Algebra.Smooth.flat\"], \"digest\": \"db2c0090e3bf311a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract QuotientGroup instances, formal-smoothness splitting criteria and affine flatness equivalences do not classify quotients of split algebraic tori; the precise AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(torus|tori|diagonalizable|Diagonalizable)\\b.*(quotient|faithfully)|(quotient|faithfully).*\\b(torus|tori|diagonalizable|Diagonalizable)\\b",
+   "results": "{\"t\": \"2026-10-24T04:15:55Z\", \"tool\": \"grep\", \"query\": \"\\\\b(torus|tori|diagonalizable|Diagonalizable)\\\\b.*(quotient|faithfully)|(quotient|faithfully).*\\\\b(torus|tori|diagonalizable|Diagonalizable)\\\\b\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract QuotientGroup instances, formal-smoothness splitting criteria and affine flatness equivalences do not classify quotients of split algebraic tori; the precise AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a split torus maps faithfully flat onto an affine finite type group scheme over k then that group scheme is isomorphic to a product of multiplicative groups over k",
+   "results": "{\"t\": \"2026-10-24T04:15:56Z\", \"tool\": \"leanfinder\", \"query\": \"If a split torus maps faithfully flat onto an affine finite type group scheme over k then that group scheme is isomorphic to a product of multiplicative groups over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"d037b982106c5760\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract QuotientGroup instances, formal-smoothness splitting criteria and affine flatness equivalences do not classify quotients of split algebraic tori; the precise AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat quotient of a split torus over any field is a split torus",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T04:39:54Z",
+    "tool": "leanfinder",
+    "query": "A faithfully flat quotient of a split torus over any field is a split torus",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat.codescendsAlong_surjective",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "RingHom.FaithfullyFlat.codescendsAlong_bijective",
+     "Algebra.Extension.formallySmooth_iff_split_injection",
+     "Algebra.FormallySmooth.iff_split_injection",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+     "Module.Flat.of_retract",
+     "RingHom.FaithfullyFlat"
+    ],
+    "digest": "b94a53725a07f150"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern faithful flatness, Hopf structures on group algebras, or formal smoothness; none classifies a quotient of a split algebraic torus. Read HopfAlgebra/MonoidAlgebra.lean and the exact group-algebra structure candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "(torus|Torus|diagonalizable|Diagonalizable).*(quotient|Quotient)|(quotient|Quotient).*(torus|Torus|diagonalizable|Diagonalizable)",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-24T04:41:18Z",
+    "tool": "grep",
+    "query": "(torus|Torus|diagonalizable|Diagonalizable).*(quotient|Quotient)|(quotient|Quotient).*(torus|Torus|diagonalizable|Diagonalizable)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern faithful flatness, Hopf structures on group algebras, or formal smoothness; none classifies a quotient of a split algebraic torus. Read HopfAlgebra/MonoidAlgebra.lean and the exact group-algebra structure candidates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat quotient homomorphism from a split algebraic torus has split torus target over the original field",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T04:41:19Z",
+    "tool": "leansearch",
+    "query": "A faithfully flat quotient homomorphism from a split algebraic torus has split torus target over the original field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat",
+     "Module.FaithfullyFlat.instTensorProduct",
+     "Module.FaithfullyFlat.surjective_of_tensorProduct",
+     "Module.FaithfullyFlat.bijective_of_tensorProduct",
+     "PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+     "RingHom.Flat",
+     "RingHom.FaithfullyFlat.isStableUnderBaseChange",
+     "Ideal.comap_surjective_of_faithfullyFlat"
+    ],
+    "digest": "811a06ba22cf81b8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern faithful flatness, Hopf structures on group algebras, or formal smoothness; none classifies a quotient of a split algebraic torus. Read HopfAlgebra/MonoidAlgebra.lean and the exact group-algebra structure candidates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"MonoidAlgebra\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T04:41:19Z",
+    "tool": "loogle",
+    "query": "\"HopfAlgebra\", \"MonoidAlgebra\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "AddMonoidAlgebra.instHopfAlgebra",
+     "AddMonoidAlgebra.instHopfAlgebraStruct",
+     "MonoidAlgebra.instHopfAlgebra",
+     "MonoidAlgebra.instHopfAlgebraStruct"
+    ],
+    "digest": "43192b9b16cc05bd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern faithful flatness, Hopf structures on group algebras, or formal smoothness; none classifies a quotient of a split algebraic torus. Read HopfAlgebra/MonoidAlgebra.lean and the exact group-algebra structure candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hopf subalgebra of a Laurent polynomial algebra over a field is the group algebra of a subgroup of the integer exponent lattice",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T04:41:19Z",
+    "tool": "leanfinder",
+    "query": "A Hopf subalgebra of a Laurent polynomial algebra over a field is the group algebra of a subgroup of the integer exponent lattice",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentPolynomial.instHopfAlgebra",
+     "LaurentPolynomial.antipode_C_mul_T",
+     "LaurentPolynomial.instBialgebra",
+     "LaurentPolynomial.antipode_T",
+     "LaurentPolynomial.antipode_C",
+     "AddMonoidAlgebra.instHopfAlgebra",
+     "LaurentPolynomial.instIsCocomm",
+     "AddMonoidAlgebra.instHopfAlgebraStruct"
+    ],
+    "digest": "07d30a629ffd7851"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern faithful flatness, Hopf structures on group algebras, or formal smoothness; none classifies a quotient of a split algebraic torus. Read HopfAlgebra/MonoidAlgebra.lean and the exact group-algebra structure candidates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-split-torus-rational-containment",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, image step: Milne 12.14, quotient of a split torus remains split over the original field.",
+   "via": [
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-split-torus-flat-quotient",
+  "worker": "stage1",
+  "group": "Q141",
+  "summary": "Kept the arbitrary-field statement and gave a coordinate-subalgebra proof: faithful-flat injectivity, explicit monomial coefficient extraction, finite-free exponent subgroup, and coordinate reconstruction. Reused all prerequisites; no new nodes. Checked nonreduced kernels, finite/imperfect fields, and rank zero.",
+  "blueprint": "Realizes the inherited supporting field-quotient step serving det-thm-sf-ctf-stability-direct-images proof (3), through rational containment of split tori. The current latest blueprint retains this direct-image step. The ancestry command returns None; the inherited null ancestor, precise place and full via list are retained. No unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-5d55ddbd1",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-5d55ddbd1 (reviewer sub-agent of L); spot-checked: Read in full: the item (4 steps, no new nodes), every cited statement, and Milne Algebraic Groups Thm 12.9(c) p.233, Def 12.14 p.236 ('a quotient of a split torus is again a split torus') and the 12.12 coefficient extraction p.235. The statement is kept verbatim (live is still unsplit with the same statement and stmt_deps). It matches the source over any field, with ring-level faithful flatness as in the citer's flat-image factorization. There is no duplicate over an arbitrary field (the existing quotient and subgroup nodes assume an algebraically closed base) and no cycle (126-node closure). Off-unit citations are only Mathlib leaves and definitions, so there are no tool_uses. The proof is correct: injectivity via tensorProduct_mk_injective, Hopf compatibility, coefficient projection 1⊗p_n gives c_n e_n∈B, the exponent subgroup L is free via basisOfPid, and the group algebra is reconstructed through Spec. Edge cases checked: r=0, Frobenius with kernel μ_p (L=pZ), projections, finite and imperfect fields. FIX, proof text of the item only: step 1 now derives the identity and antipode compatibility from q being a homomorphism on functors of points (def-sc-group-scheme cited), which is needed for −L⊆L; step 4 now proves i⊗i injective with the coefficient projection H→B, which the deduction of Δ_A(φe_a)=φe_a⊗φe_a and of the antipode on A needs. def-weil-pbc-module-tensor-product is added to step 4's uses, and proof_deps is still the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FieldSplitTorusFlatQuotient",
+  "declaration": "AlgebraicGeometry.exists_iso_splitTorus_of_faithfullyFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FieldSplitTorusFlatQuotient.lean",
+  "statement": "theorem exists_iso_splitTorus_of_faithfullyFlat {k : Type u} [Field k] (T Q : Grp (Over (Spec (.of k)))) (hT : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) [IsAffine Q.X.left] [LocallyOfFiniteType Q.X.hom] [QuasiCompact Q.X.hom] (q : T ⟶ Q) (hq : q.hom.hom.left.appTop.hom.FaithfullyFlat) : ∃ t : ℕ, Nonempty (Q ≅ MultiplicativeType.splitTorus k t)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dafcd3efa",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read item, 5 stmt_deps (Field; GrpObj/Grp over Spec k; LocallyOfFiniteType+QuasiCompact; RingHom.FaithfullyFlat; MultiplicativeType.splitTorus from landed def-sfb-tori-multiplicative-type) and Milne 12.9/12.14. Every clause matches: arbitrary field, hT split iso in Grp(Over Spec k) with r≥0, Q affine + finite type on structure map, q Grp morphism, hq = appTop (k[Q]→k[T]) FaithfullyFlat in the correct direction, conclusion ∃ t, Q ≅ splitTorus k t; no kernel/char/perfectness hypotheses. Edge cases r=t=0, μ_p kernel, finite/imperfect k covered; single universe. Only lean + added landed stmt_dep changed vs live (allowed); lean.statement verbatim; docstrings with source/blueprint/4 proof steps; sorry only; no duplicate in Sheaf/WeilConjectures/Mathlib. No compile (no change); worker compile and dry run OK."
+ }
+}

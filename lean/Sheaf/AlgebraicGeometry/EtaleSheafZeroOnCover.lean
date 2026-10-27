@@ -11,9 +11,6 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Over
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Vanishing of an étale module sheaf on a covering family
@@ -61,6 +58,33 @@ theorem etaleSheaf_isZero_of_isZero_over_cover (X : Scheme.{u})
     (hcover : ∀ x : X, ∃ (i : I) (y : V i), φ i y = x)
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hzero : ∀ i : I, IsZero (F.over (Scheme.Etale.mk (φ i)))) : IsZero F := by
-  sorry
+  -- The covering family generates a covering sieve on the identity object.
+  let T : X.Etale := Scheme.Etale.mk (𝟙 X)
+  let f (i : I) : Scheme.Etale.mk (φ i) ⟶ T :=
+    MorphismProperty.Over.homMk (φ i) (Category.comp_id _)
+  let R := Sieve.ofArrows (fun i ↦ Scheme.Etale.mk (φ i)) f
+  have hR : R ∈ X.smallEtaleTopology T := by
+    apply (Scheme.ofArrows_mem_smallEtaleTopology_iff f).2
+    ext x
+    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+    exact hcover x
+  apply (IsZero.iff_id_eq_zero F).2
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  change 𝟙 (F.obj.obj U) = 0
+  -- Separatedness detects the identity map on the pulled-back covering sieve.
+  let a : U.unop ⟶ T := MorphismProperty.Over.homMk U.unop.hom (Category.comp_id _)
+  apply F.property.hom_ext ⟨R.pullback a, X.smallEtaleTopology.pullback_stable a hR⟩
+  intro W
+  obtain ⟨_, b, _, ⟨i⟩, _⟩ := W.hf
+  -- A factoring arrow supplies an object of the slice over the covering member.
+  have hz := congrArg
+    (fun e : F.over (Scheme.Etale.mk (φ i)) ⟶ F.over (Scheme.Etale.mk (φ i)) ↦
+      e.hom.app (Opposite.op (Over.mk b)))
+    ((IsZero.iff_id_eq_zero _).1 (hzero i))
+  change 𝟙 (F.obj.obj (Opposite.op W.Y)) = 0 at hz
+  have hobj := (IsZero.iff_id_eq_zero _).2 hz
+  exact hobj.eq_of_tgt _ _
 
 end AlgebraicGeometry.Scheme

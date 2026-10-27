@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-pinned-split-root-classification",
+ "kind": "statement",
+ "title": "Existence and isomorphism theorem for pinned split realizations",
+ "statement": "Let $A$ be a nonzero commutative ring. Use finite reduced based root data and pinned split realizations over $A$ as defined in [def-sfb-pinned-split-root-realization]. Every finite reduced based root datum $\\mathcal R$ has a pinned split realization over $A$. If $P$ and $P'$ are pinned split realizations over $A$ of based data $\\mathcal R$ and $\\mathcal R'$, respectively, then each specified based-datum isomorphism $u:\\mathcal R\\simeq\\mathcal R'$ is induced by a unique pinning-compatible $A$-group-scheme isomorphism $P\\simeq P'$. This isomorphism induces the specified constant lattice map on the tori, even when $\\operatorname{Spec}A$ is disconnected. There is no Noetherian, field, semisimplicity or positive-rank hypothesis.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186 Read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization"
+ ],
+ "proof": [
+  {
+   "text": "Forget the base of $\\mathcal R$ and realize its underlying reduced datum over $\\mathbf Q$ by [lem-sfb-rational-split-root-realization]. Apply [lem-sfb-rational-split-integral-prolongation] to this particular split rational group and its specified torus to obtain a split realization $(\\mathcal G,\\mathcal T=D_{\\mathbf Z}(M))$ over $\\mathbf Z$ of the same datum. This input explicitly includes the full tangent decomposition and free rank-one integral root modules. Keep the original base $\\Delta$ and choose a generator of each of its finitely many free root modules. This gives a pinning over $\\mathbf Z$ by [def-sfb-pinned-split-root-realization], with no choice needed when $\\Delta$ is empty. Now apply [lem-sfb-pinned-split-root-base-change] along $\\mathbf Z\\to A$ to obtain the desired pinned realization over $A$. No relation between $A$ and $\\mathbf Q$ is required: only the integral model is pulled back.",
+   "uses": [
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-rational-split-integral-prolongation",
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-pinned-split-root-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, pp.211--212; Section 6.3, pp.212--229; Theorem 6.1.17, p.197; Definition 6.1.1, p.186"
+   }
+  },
+  {
+   "text": "For given $P,P'$ and $u$, write $h:M'\\to M$ for the pullback on character lattices corresponding to $u$, and $b:\\Phi\\to\\Phi'$ for the associated root bijection, so $h(b(\\alpha))=\\alpha$. The dual equality is exactly preservation of coroots. Apply [lem-sfb-split-central-isogeny-lifting] to the underlying split realizations. Since $h$ is an isomorphism, it gives an isomorphism $f:G\\to G'$ with torus restriction exactly $D_A(h)$. For each simple root $\\alpha$, its tangent map is an isomorphism between free rank-one root modules; hence there is a unique unit $a_{b(\\alpha)}\\in A^\\times$ with $df(X_\\alpha)=a_{b(\\alpha)}X'_{b(\\alpha)}$. Indeed, in the specified generators the map and its inverse are scalar multiplication by mutually inverse elements of $A$.",
+   "uses": [
+    "lem-sfb-split-central-isogeny-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.1.16(1), p.196; Lemma 6.1.4; Example 6.1.9, p.191"
+   }
+  },
+  {
+   "text": "Put $Q'=\\mathbf Z\\Phi'$. The base axioms imply $Q'=\\bigoplus_{\\beta\\in\\Delta'}\\mathbf Z\\beta$: spanning follows from the integer simple-root expressions, and independence follows from their rational independence. Define $t:Q'\\to A^\\times$ by $t(\\sum n_\\beta\\beta)=\\prod a_\\beta^{-n_\\beta}$. By [lem-sfb-adjoint-torus-root-coordinates], this is an $A$-point of $T'/Z(G')$ acting by an automorphism $c_t$ which fixes $T'$ pointwise and scales its $\\beta$-root line by $a_\\beta^{-1}$. Therefore $F=c_t\\circ f$ satisfies $dF(X_\\alpha)=a_{b(\\alpha)}^{-1}a_{b(\\alpha)}X'_{b(\\alpha)}=X'_{b(\\alpha)}$. Its torus map is still exactly $D_A(h)$, so it induces the specified based isomorphism and respects the pinning.",
+   "uses": [
+    "lem-sfb-adjoint-torus-root-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proof of Corollary 6.1.15, p.196 (simple-root coordinates); deduction of Theorem 6.1.17, p.197"
+   }
+  },
+  {
+   "text": "If $F_1,F_2$ are two pinning-compatible isomorphisms inducing $u$, their torus restrictions are both $D_A(h)$ by definition. By [lem-sfb-split-central-isogeny-lifting], $F_2=c_t\\circ F_1$ for a unique $t\\in(T'/Z(G'))(A)$. By [lem-sfb-adjoint-torus-root-coordinates] and the equality of the pinned generators, $t(\\beta)X'_\\beta=X'_\\beta$ for every $\\beta\\in\\Delta'$, so $t(\\beta)=1$. The basis description in step 3 forces $t=1$, whence $F_1=F_2$. This uses units of the full ring $A$ and the specified constant lattice map, without decomposing its spectrum into connected components. With empty roots $Q'=0$, the same argument has an empty product and a trivial adjoint torus.",
+   "uses": [
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-adjoint-torus-root-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 6.1.15, pp.195--196; Theorem 6.1.17, p.197"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-split-root-realization",
+  "lem-sfb-rational-split-integral-prolongation",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-pinned-split-root-base-change",
+  "lem-sfb-split-central-isogeny-lifting",
+  "lem-sfb-adjoint-torus-root-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly following the deduction of Theorem 6.1.17, pp.196--197: existence via Proposition 6.2.12 and Section 6.3, pp.211--229; morphisms via central-isogeny lifting and the root-lattice calculation in Corollary 6.1.15. Source read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of pinned split reductive group schemes and based root data over any nonempty scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Equiv\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"An equivalence between two root pairings, consisting of a bijection between their index sets and module isomorphisms between their underlying modules, preserving the pairing structure.\"}\n  {\"name\": \"RootPairing.Equiv.weightEquiv\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given an equivalence $ e $ between root pairings $ P $ and $ Q $ over a commutative ring $ R $, this constructs the $ R $-linear equivalence between the underlying modules $ M $ and $ M_2 $ induced by\"}\n  {\"name\": \"RootPairing.Hom.indexEquiv\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given root pairings $P$ and $Q$ over a commutative ring $R$, a homomorphism $f : P \\to Q$ induces a bijection (equivalence) between their index types $\\\\iota$ and $\\\\iota_2$. This equivalence arises natu\"}\n  {\"name\": \"RootPairing.Equiv.mk.inj\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  {inst_5 : AddCommGroup M₂} {inst_6 : Module R M₂} {inst_7 : AddCommGro\", \"doc\": \"If two root pairing equivalences have the same underlying homomorphism with bijective weight and coweight maps, then the equivalences are equal as root pairing equivalences.\"}\n  {\"name\": \"RootPairingCat.mk.inj\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {weight : Type v} {weightIsAddCommGroup : AddCommGroup weight}\\n  {weightIsModule : Module R weight} {coweight : Type v} {coweightIsAddCommGroup : AddCommGroup coweight}\\n  {coweightIsModule : Module R coweight} {index : Type v} {pairing : RootPairing index R weight \", \"doc\": \"The constructor for the category of root pairings over a commutative ring is injective: if two instances constructed via `RootPairingCat.mk` are equal, then their weight modules, coweight modules, ind\"}\n  {\"name\": \"RootPairing.Equiv.ext_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  {inst_5 : AddCommGroup M₂} {inst_6 : Module R M₂} {inst_7 : AddCommGro\", \"doc\": \"Two equivalences between root pairings over a commutative ring are equal if and only if their weight maps, coweight maps, and index set equivalences are equal as linear maps and bijections, respective\"}\n  {\"name\": \"RootPairing.Equiv.ext\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  {inst_5 : AddCommGroup M₂} {inst_6 : Module R M₂} {inst_7 : AddCommGro\", \"doc\": \"Given two equivalences between root pairings $ P $ and $ Q $, if their weight maps, coweight maps, and index equivalences are equal, then the equivalences themselves are equal. Specifically, for any $\"}\n  {\"name\": \"RootPairing.mk.hcongr_17\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ (ι ι' : Type u_1),\\n  ι = ι' →\\n    ∀ (R R' : Type u_2),\\n      R = R' →\\n        ∀ (M M' : Type u_3),\\n          M = M' →\\n            ∀ (N N' : Type u_4),\\n              N = N' →\\n                ∀ (inst : CommRing R) (inst' : CommRing R'),\\n                  inst ≍ inst' →\\n                    ∀ (inst_1 \", \"doc\": \"Given commutative rings $ R $ and $ R' $, additive commutative groups $ M, N $ and $ M', N' $ with compatible module structures, and congruent linear maps, roots, coroots, and reflection permutations \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence and uniqueness of Chevalley group schemes with a prescribed root datum over Z",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairingCat.mk.inj\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {weight : Type v} {weightIsAddCommGroup : AddCommGroup weight}\\n  {weightIsModule : Module R weight} {coweight : Type v} {coweightIsAddCommGroup : AddCommGroup coweight}\\n  {coweightIsModule : Module R coweight} {index : Type v} {pairing : RootPairing index R weight \", \"doc\": \"The constructor for the category of root pairings over a commutative ring is injective: if two instances constructed via `RootPairingCat.mk` are equal, then their weight modules, coweight modules, ind\"}\n  {\"name\": \"RootSystem.ext\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Finite ι] [CharZero R] [IsDomain R]\\n  [Module.IsTorsionFree R M] {P₁ P₂ : RootPairing ι R M N} [P₁.IsRootSystem] [P₂.Is\", \"doc\": \"Let $ R $ be a commutative ring with characteristic zero and a domain, and let $ M $, $ N $ be torsion-free $ R $-modules. For any two root systems $ P_1 $, $ P_2 $ over a finite index set $ \\\\iota $, \"}\n  {\"name\": \"RootPairing.IsRootSystem.ext\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Finite ι] [CharZero R] [IsDomain R]\\n  [Module.IsTorsionFree R M] {P₁ P₂ : RootPairing ι R M N} [P₁.IsRootSystem] [P₂.Is\", \"doc\": \"Given a commutative ring $ R $ with characteristic zero and no zero divisors, and a torsion-free $ R $-module $ M $, if two root systems $ P_1 $ and $ P_2 $ between $ R $-modules $ M $ and $ N $ have \"}\n  {\"name\": \"RootPairing.ext\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Finite ι] [CharZero R] [IsDomain R]\\n  [Module.IsTorsionFree R M] {P₁ P₂ : RootPairing ι R M N},\\n  P₁.toLinearMap = P₂.t\", \"doc\": \"Under the assumptions that $R$ is a commutative ring of characteristic zero with no zero divisors and $M$ is a torsion-free $R$-module, two root pairings $P_1$ and $P_2$ are equal if their associated \"}\n  {\"name\": \"CartanMatrix.Generators.E.inj\", \"module\": \"Mathlib/Algebra/Lie/SerreConstruction\", \"type\": \"∀ {B : Type v} {a a_1 : B}, CartanMatrix.Generators.E a = CartanMatrix.Generators.E a_1 → a = a_1\", \"doc\": \"The constructor $ E $, which maps each element $ b $ of type $ B $ to a simple root generator in the inductive structure associated with a Cartan matrix, is injective. Specifically, if $ E(a) = E(a_1)\"}\n  {\"name\": \"CartanMatrix.Generators.F.inj\", \"module\": \"Mathlib/Algebra/Lie/SerreConstruction\", \"type\": \"∀ {B : Type v} {a a_1 : B}, CartanMatrix.Generators.F a = CartanMatrix.Generators.F a_1 → a = a_1\", \"doc\": \"The constructor mapping elements of type $ B $ to simple root generators in the Cartan matrix's generator structure is injective. Specifically, for any $ a, a_1 : B $, if $ F(a) = F(a_1) $, then $ a =\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.ext\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {x y : WeierstrassCurve.VariableChange R},\\n  x.u = y.u → x.r = y.r → x.s = y.s → x.t = y.t → x = y\", \"doc\": \"Two Weierstrass curve variable changes over a commutative ring $ R $ are equal if and only if their corresponding parameters $ u $ (a unit in $ R $), $ r $, $ s $, and $ t $ (elements of $ R $) are eq\"}\n  {\"name\": \"RootPairing.ext_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Finite ι] [CharZero R] [IsDomain R]\\n  [Module.IsTorsionFree R M] {P₁ P₂ : RootPairing ι R M N},\\n  P₁ = P₂ ↔ P₁.toLinear\", \"doc\": \"For root pairings $ P_1 $ and $ P_2 $ over a commutative ring $ R $ with characteristic zero and a domain, between torsion-free $ R $-modules $ M $ and $ N $, and a finite index type $ \\\\iota $, the eq\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*datum|Chevalley.*group|pinned.*group",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"25\", \"text\": \"* `RootDatum`: A root datum is a root pairing for which the roots and coroots take values in\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"31\", \"text\": \"A root datum is sometimes defined as two subsets: roots and coroots, together with a bijection\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"33\", \"text\": \"so the question arises of whether this bijection should be part of the data of a root datum or\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"102\", \"text\": \"/-- A root datum is a root pairing with coefficients in the integers and for which the root and\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"line\": \"109\", \"text\": \"abbrev RootDatum (X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂] := RootPairing ι ℤ X₁ X₂\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Extension.lean\", \"line\": \"39\", \"text\": \"* [Chevalley, Eilenberg, *Cohomology Theory of Lie Groups and Lie\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism theorem pinned split reductive group schemes root data",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).coroot i = P.coroot i\", \"doc\": \"For each index $ i $, the coroot embedding of the root pairing after restricting scalars from $ L $ to $ K $ at $ i $ is equal to the original coroot embedding at $ i $. This equality demonstrates tha\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).root i = P.root i\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootPairing.isIrreducible_iff_invtRootSubmodule\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"{K : Type*} [Field K] [Module K M] [Module K N] [Nontrivial M] (P : RootPairing ι K M N) :\\n  P.IsIrreducible ↔ IsSimpleOrder P.invtRootSubmodule\", \"doc\": \"A root pairing $ P $ over a field $ K $ is irreducible if and only if the lattice of submodules invariant under all root reflections in $ P $ forms a simple order, meaning every such invariant submodu\"}\n  {\"name\": \"RootPairing.rootSpan_eq_top_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \": P.rootSpan R = ⊤ ↔ P.corootSpan R = ⊤\", \"doc\": \"For a root pairing $ P $ between $ R $-modules $ M $ and $ N $, the submodule of $ M $ generated by the roots is equal to the entire module $ M $ if and only if the submodule of $ N $ generated by the\"}\n  {\"name\": \"RootPairing.corootSpan_mem_invtSubmodule_coreflection\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.IsValuedIn\", \"type\": \"(i : ι) : P.corootSpan R ∈ Module.End.invtSubmodule (P.coreflection i)\", \"doc\": \"The submodule of $ N $ generated by coroots associated with the root pairing is invariant under the coreflection determined by the coroot $ \\\\alpha_i^\\\\vee $ and the root pairing condition $ \\\\langle \\\\al\"}\n  {\"name\": \"RootPairing.Equiv.toEndUnit\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Hom\", \"type\": \"(P : RootPairing ι R M N) : Aut P ≃* (End P)ˣ\", \"doc\": \"The function establishes a group isomorphism between the automorphism group $\\\\text{Aut}(P)$ of a root pairing $P$ and the group of units $(\\\\text{End}(P))^\\times$ in the endomorphism monoid of $P$. This\"}\n  {\"name\": \"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[NeZero (2 : R)] [IsDomain R] [Module.IsTorsionFree R M] (q : Submodule R M)\\n  (hq : ∀ i, q ∈ invtSubmodule (P.reflection i)) :\\n  ∃ Φ : Set ι, (∀ i ∈ Φ, ¬Disjoint q (R ∙ P.root i)) ∧ (∀ i ∉ Φ, q ≤ ker (P.coroot' i))\", \"doc\": \"Let $R$ be an integral domain in which $2 \\\\neq 0$, and let $M$ be a torsion-free $R$-module. Let $P$ be a root pairing with index set $\\\\iota$, roots $\\\\alpha_i \\\\in M$ for $i \\\\in \\\\iota$, and correspondi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-integral-models",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186",
+   "via": [
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pinned-split-root-classification",
+  "worker": "stage1",
+  "summary": "Retain the arbitrary-ring statement. Realize the datum over Q, prolong the given group over Z, choose pinning generators and pull back. Lift morphisms by the central-isogeny theorem, then explicitly correct root-line scalars by the adjoint torus and prove uniqueness. Add four statement-only inputs after logged searches. The dry-run cycle through the concurrently split integral-root-datum-isogenies node was repaired by removing that citation and its zero-weight auxiliary.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186 Current latest direct-image proof (3), through the inherited alteration and invariant-theory support chain; existence and pinning adjustment realize the Conrad classification prerequisite. blueprint_refs.py ancestor returns None for the inherited chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-b235ee4eb",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-b235ee4eb (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, the cited definition, diagonalizable-group and base-change nodes, and the duplicate candidates (integral-root-datum-isogenies with its full proof, root-datum-realization, root-datum-isogeny-realization, isogeny-simple-root-rigidity, relative-reductive-centre-weight-kernel, chevalley-integral-root-model, relative-central-multiplicative-quotient, among others). Conrad is not in literature/, so I fetched the public PDF and read it with pdftotext: Def 6.1.1, Cor 6.1.15 and its proof (pp.195-196), Thm 6.1.16(1),(2) (p.196), Thm 6.1.17 with its deduction 'from 6.1.16 and the Z-basis Δ of X(T/Z_G) in the proof of 6.1.15' (p.197), Prop 6.2.12 (pp.211-212), Lemma 6.3.1 and the end of §6.3, Cor 3.3.6(1) and Ex 5.1.7. The split follows this route exactly. Step 1: realization over Q, then the integral prolongation of that same Q-group, then a choice of pinning over Z, then base change along Z→A (the base-change node allows any ring map). Step 2: I checked directions with h=u^{-1}, b=u: h(bα)=α and h^∨(α^∨)=(uα)^∨, so the isogeny node gives an isomorphism with torus map D_A(u^{-1}), and its root-line maps are units. Step 3: Δ' is a Z-basis of ZΦ', t(β)=a_β^{-1} lies in D_A(Q')=T'/Z, and c_t fixes T' while correcting the root-line scalars. Step 4: t(β)=1 on Δ', so t=1; this is a ring identity, valid on disconnected and nonreduced spectra. All new nodes are true. I tested the isogeny node on SL2→PGL2 (kernel μ_2, not smooth over F_2). Its clause on every homomorphism with the given torus restriction holds, because the rank-one relation forces c_α c_{-α}=1. No node duplicates an existing one: the existing nodes work over algebraically closed fields, need a Noetherian base, or would make a cycle. The isogeny half of integral-root-datum-isogenies is now a specialisation of the new isogeny node; this is a note for the maintainer, not a fault. No single new node states either clause of the item. Warning for later splits: the proofs of the rational-realization and prolongation nodes need the isomorphism theorem over a field and must cite the isogeny and adjoint-torus nodes, not the item, to avoid a cycle. Batch 5: every flagged path runs through the general definition def-sfb-pinned-split-root-realization, which was already a statement dependency of the item, to the Mathlib leaf lem-trf-smooth-fpqc-base-descent. That leaf is generic fpqc descent of smoothness, not the trace formula or Poincaré duality. Every node is in unit sk-thm-sf-ctf-stability, so there are no tool_uses. No changes."
+ }
+}

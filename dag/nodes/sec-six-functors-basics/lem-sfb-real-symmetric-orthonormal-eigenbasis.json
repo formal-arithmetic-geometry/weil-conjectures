@@ -1,0 +1,92 @@
+{
+ "id": "lem-sfb-real-symmetric-orthonormal-eigenbasis",
+ "kind": "statement",
+ "title": "Orthonormal real eigenbasis for a symmetric linear operator",
+ "statement": "Let $V$ be a finite-dimensional real inner product space [def-weil-finite-dimensional-subspace]: a real vector space with a symmetric bilinear form $\\langle-,-\\rangle$ such that $\\langle v,v\\rangle>0$ for $v\\ne0$, equipped with its induced norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Let $n=\\dim_{\\mathbf R}V$, and let $T:V\\to V$ be a real linear map satisfying $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in V$. Then there are real numbers $a_1,\\ldots,a_n$ and an orthonormal basis $e_1,\\ldots,e_n$ of $V$ such that $Te_i=a_i e_i$ for every $i$. Orthonormal means $\\langle e_i,e_j\\rangle=1$ if $i=j$ and $0$ otherwise; the zero-dimensional space and empty basis are included.",
+ "source": {
+  "document": "Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+  "place": "LinearMap.IsSymmetric.eigenvalues, lines 279–281; eigenvectorBasis, lines 300–304; apply_eigenvectorBasis, lines 325–327, in the pinned Mathlib source."
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric linear operator on a finite dimensional real inner product space has an orthonormal basis of eigenvectors with real eigenvalues",
+   "results": "8 hits: LinearMap.IsSymmetric.eigenvectorBasis, LinearMap.IsSymmetric.eigenvectorBasis_def, LinearMap.IsSymmetric.hasEigenvector_eigenvectorBasis, LinearMap.IsSymmetric.apply_eigenvectorBasis, LinearMap.IsSymmetric.eigenvectorBasis_apply_self_apply, LinearMap.IsSymmetric.eigenvalues, LinearMap.IsSymmetric.hasEigenvalue_eigenvalues, LinearMap.IsSymmetric.diagonalization",
+   "date": "2026-10-24",
+   "verdict": "match: the real specialization of eigenvectorBasis and apply_eigenvectorBasis states every clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.IsSymmetric, OrthonormalBasis",
+   "results": "6 hits: LinearMap.IsSymmetric.eigenvectorBasis, LinearMap.IsSymmetric.hasEigenvector_eigenvectorBasis, LinearMap.IsSymmetric.eigenvectorBasis_def, LinearMap.IsSymmetric.apply_eigenvectorBasis, Matrix.isSymmetric_toLin_iff, LinearMap.isHermitian_toMatrix_iff",
+   "date": "2026-10-24",
+   "verdict": "match: the real specialization of eigenvectorBasis and apply_eigenvectorBasis states every clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every self adjoint endomorphism of a finite dimensional real inner product space admits an orthonormal eigenbasis",
+   "results": "8 hits: LinearMap.IsSymmetric.eigenvectorBasis_def, LinearMap.IsSymmetric.eigenvectorBasis.congr_simp, LinearMap.IsSymmetric.eigenvectorBasis, LinearMap.IsSymmetric.hasEigenvector_eigenvectorBasis, Matrix.IsHermitian.eigenvectorBasis, Matrix.IsHermitian.eigenvectorBasis.congr_simp, Matrix.IsHermitian.spectral_theorem, OrthonormalBasis",
+   "date": "2026-10-24",
+   "verdict": "match: the real specialization of eigenvectorBasis and apply_eigenvectorBasis states every clause"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible_def eigenvectorBasis|theorem apply_eigenvectorBasis|irreducible_def eigenvalues",
+   "results": "3 hits: Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+   "date": "2026-10-24",
+   "verdict": "match: the real specialization of eigenvectorBasis and apply_eigenvectorBasis states every clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.IsSymmetric.eigenvectorBasis",
+  "file": "Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+  "line": 300,
+  "how": "specializes in one line: take 𝕜=ℝ and hn=rfl in LinearMap.IsSymmetric.eigenvectorBasis (lines 300–304), with real eigenvalues from LinearMap.IsSymmetric.eigenvalues (279–281); LinearMap.IsSymmetric.apply_eigenvectorBasis (325–327) supplies T e_i = a_i • e_i. Relabel Fin n by 1,…,n. No positivity assumption on T. Finite-dimensionality and symmetry are precisely the hypotheses in the statement."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-polarization-positive-spectrum",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Agent auxiliary for the abelian endomorphism-span input: consequence of I Proposition 14.2 and Theorem 14.3, pp.61–62, Theorem 11.1, p.54, and Proposition 10.20 / Corollary 10.24, pp.50–53. The positive-spectrum deduction, including arbitrary-field descent, is written in the report; this is not a separately numbered theorem in Milne. Supporting Orthonormal real eigenbasis for a symmetric linear operator.",
+   "via": [
+    "lem-sfb-ample-polarization-positive-spectrum",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-qs-space-rational-point-topology",
+ "kind": "statement",
+ "title": "Topology of rational points of quasi-separated algebraic spaces",
+ "statement": "Let $K$ be a field [def-weil-field] and $Z$ an algebraic space over $K$ [def-trf-algebraic-space] whose diagonal $Z\\to Z\\times_K Z$ is quasi-compact. This means that after every scheme test the inverse image of each quasi-compact open subset is quasi-compact. Use the atlas topology and field-valued point convention of [lem-sfb-smooth-presentation-closed-subsets], applied to algebraic spaces as stacks with trivial automorphisms. Then the map $Z(K)\\to|Z|$ sending a $K$-morphism $\\operatorname{Spec}K\\to Z$ to its underlying point is injective, and the image of each such morphism is a closed singleton. No finite-type, reducedness or separatedness hypothesis is imposed on $Z$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JX (lemma-bounded-fibres), quasi-separated implies decent; Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point) with S=Spec K and k=K; Tag 0H1T (lemma-factor-through-residual-space-decent) and Tag 0H1R (lemma-residual-space-monomorphism) for the field-valued representative and its uniqueness over K."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "lem-sfb-smooth-presentation-closed-subsets"
+ ],
+ "proof": [
+  {
+   "text": "Fix a $K$-point $a:\\operatorname{Spec}K\\to Z$ and let $x$ be its point class. Apply [lem-sfb-qs-space-field-monomorphism] over $S=\\operatorname{Spec}K$: the assumed relative diagonal is quasi-compact, so choose a quasi-compact monomorphism $j:\\operatorname{Spec}F\\to Z$ representing $x$. Give $\\operatorname{Spec}F$ the induced map to $\\operatorname{Spec}K$. By [def-weil-affine-spectrum] this is a field homomorphism $i:K\\to F$. The point classes of [lem-sfb-smooth-presentation-closed-subsets] and of [def-a1-space-point-topology] are the same: field-valued maps identified after restriction to a common extension field. So $x\\in|Z|$ in the sense of the cited lemma.",
+   "uses": [
+    "lem-sfb-qs-space-field-monomorphism",
+    "def-weil-affine-spectrum",
+    "def-a1-space-point-topology",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 03JX (lemma-bounded-fibres), (eta) implies (gamma), and 03JV (lemma-UR-finite-above-x), condition (4)."
+   }
+  },
+  {
+   "text": "The field spectrum $\\operatorname{Spec}K$ is reduced, since a field has no nonzero nilpotents. Apply [lem-sfb-reduced-singleton-field-factorization] to $a$ and $j$ to obtain $g:\\operatorname{Spec}K\\to\\operatorname{Spec}F$ over $K$ with $j\\circ g=a$. By [def-weil-affine-spectrum], $g$ corresponds to a field homomorphism $h:F\\to K$ satisfying $h\\circ i=\\mathrm{id}_K$. If $b$ is a second $K$-point with the same point class $x$, the same lemma factors it through this same $j$, giving $h':F\\to K$ with $h'\\circ i=\\mathrm{id}_K$.",
+   "uses": [
+    "lem-sfb-reduced-singleton-field-factorization",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 0H1T (lemma-factor-through-residual-space-decent) and 0H1R (lemma-residual-space-monomorphism); uniqueness follows from the monomorphism hypothesis."
+   }
+  },
+  {
+   "text": "A unital homomorphism from a field has zero kernel: a nonzero kernel element would have an inverse and force $1=0$. Thus $h$ is injective. For $u\\in F$, $h(i(h(u)))=h(u)$, so injectivity gives $i(h(u))=u$. Therefore $i$ is surjective and $h$ is its inverse. For every $u=i(v)$ we also have $h'(u)=v=h(u)$, so $h'=h$. The uniqueness of the ring map corresponding to an affine-scheme morphism in [def-weil-affine-spectrum] gives equality of the two factorizations and hence $b=a$. This proves injectivity of $Z(K)\\to|Z|$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Elementary field retraction argument after the factorization of Tag 0H1T."
+   }
+  },
+  {
+   "text": "By [lem-sfb-qs-space-field-monomorphism], every point of $Z$ has a quasi-compact field monomorphism representative, which is precisely the hypothesis on $X$ in [lem-sfb-decent-algebraic-field-image-closed]. Apply that lemma with $S=\\operatorname{Spec}K$, $X=Z$, $L=K$, and the given $a$. By [def-weil-affine-spectrum] the base has one point with residue field $K$; its singleton is the whole space and is closed. The induced field extension is the identity $K\\to K$, algebraic because $u\\in K$ satisfies $T-u$. The lemma therefore makes the image of $a$ a closed singleton for the topology of [def-a1-space-point-topology], which for the algebraic space $Z$ is its usual atlas topology, the quotient topology from a surjective etale scheme atlas $U\\to Z$. An etale morphism is smooth (of relative dimension zero) by [def-sbc-smooth-morphisms], so $U\\to Z$ is a smooth surjective scheme atlas, and [lem-sfb-smooth-presentation-closed-subsets] makes the quotient topology independent of the smooth atlas. Hence the image of $a$ is a closed singleton also in the topology fixed in the statement. The case $Z(K)=\\varnothing$ is vacuous. No property of $Z$ beyond its stated diagonal hypothesis was used.",
+   "uses": [
+    "lem-sfb-qs-space-field-monomorphism",
+    "lem-sfb-decent-algebraic-field-image-closed",
+    "def-weil-affine-spectrum",
+    "def-a1-space-point-topology",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point); the hypothesis on field monomorphisms is decency by Tag 03JV (lemma-UR-finite-above-x), condition (4), and Definition 03I8 (definition-very-reasonable)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qs-space-field-monomorphism",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-reduced-singleton-field-factorization",
+  "lem-sfb-decent-algebraic-field-image-closed",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Assembly of Tags 03JX, 03JV, 0H1T, 0H1R and 07U5, with the elementary field retraction argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rational points of a quasi separated algebraic space over a field are closed and determined by their underlying point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), T0Space ↥X\", \"doc\": \"For any scheme, its underlying topological space satisfies the T₀ separation axiom, meaning that for any two distinct points, there exists an open set containing one but not the other.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated X.toSpecΓ\", \"doc\": \"If the underlying topological space of a scheme $X$ is quasi-separated, then the canonical morphism from $X$ to the affine scheme associated with its ring of global sections $\\\\operatorname{Spec}(\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_injective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [QuasiSeparatedSpace ↥X],\\n  Function.Injective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $ X $ is a quasi-separated scheme, then the decomposition map associating to each morphism $ \\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X $ the corresponding family of morphisms $ \\\\{\\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated], QuasiSeparatedSpace ↥X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi separated algebraic space over an algebraically closed field rational points are closed without finite type assumptions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace X] : QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X : Scheme.{u}} [JacobsonSpace X] {x : X} : IsClosed { x } ↔ LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, QuasiSeparatedSpace ↥X ↔ ∀ (U V : ↑X.affineOpens), IsCompact (↑↑U ∩ ↑↑V)\", \"doc\": \"A scheme $X$ has a quasi-separated underlying topological space if and only if the intersection of any two affine open subsets $U$ and $V$ of $X$ is a compact set.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rational\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Type u\", \"doc\": \"A rational map from `X` to `Y` (`X ⤏ Y`) is an equivalence class of partial maps,\\nwhere two partial maps are equivalent if they are equal on a dense open subscheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.id\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.RationalMap X\", \"doc\": \"The identity rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.Opens\", \"doc\": \"The domain of definition of a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) : X.RationalMap Y\", \"doc\": \"A scheme morphism as a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : X.RationalMap Y\", \"doc\": \"A partial map as a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.PartialMap Y\", \"doc\": \"An arbitrarily chosen partial map representing `f`. Use `RationalMap.toPartialMap` instead\\nif `X` is reduced and `Y` is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} : Function.Surjective AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : (↑f.domain).OpenCover\", \"doc\": \"The open cover of the domain of `f : X ⤏ Y`,\\nconsisting of all the domains of the partial maps in the equivalence class.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] [Y.IsSeparated] (f : X.RationalMap Y) : X.PartialMap Y\", \"doc\": \"If `f : X ⤏ Y` is a rational map from a reduced scheme to a separated scheme,\\nthen `f` can be represented as a partial map on its domain of definition.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [X.Over S] [Y.Over S] (f : X.RationalMap Y) : Prop\", \"doc\": \"A rational map is an `S`-map if some partial map in the equivalence class is an `S`-map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.representative_toRationalMap_equiv\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : f.toRationalMap.representative.equiv f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toRationalMap_representative\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : f.representative.toRationalMap = f\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|isClosed.*[Rr]ational",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section from the base field to a decent algebraic space has closed image and rational points inject into the point space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (X.fromSpecResidueField x).base) = {x}\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the image of the canonical morphism $ \\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X $ from the spectrum of the residue field $ \\\\kappa(x) $ at $ x $ is the singleton \"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_injective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [QuasiSeparatedSpace ↥X],\\n  Function.Injective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $ X $ is a quasi-separated scheme, then the decomposition map associating to each morphism $ \\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X $ the corresponding family of morphisms $ \\\\{\\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Injective\\n    ⇑(CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.specTargetImageFactorization f)))\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsDominant f\", \"doc\": \"Let $X$ be a compact space. If the induced map on global sections is injective, then the morphism $f$ is dominant, i.e., the image of $f$ is dense in its codomain.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|rational.*[Cc]losed|[Cc]losed.*rational|points.*injective",
+   "results": "Search directory Mathlib/AlgebraicGeometry; 1 hits: Mathlib/AlgebraicGeometry/PointsPi.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map from K rational points to the underlying point set of a quasi separated algebraic space is injective and its image consists of closed points",
+   "results": "8 hits: AlgebraicGeometry.pointsPi_injective, WeierstrassCurve.Affine.Point.map_injective, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.isSeparated_of_injective, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsSeparated.instQuasiSeparated, preimage_closedPoints_subset",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pointEquiv\"",
+   "results": "3 hits: AlgebraicGeometry.pointEquivClosedPoint, AlgebraicGeometry.pointEquivClosedPoint_symm_apply_coe, AlgebraicGeometry.pointEquivClosedPoint_apply_coe",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational points of a quasi separated algebraic space over any field are closed and uniquely determined by their underlying topological point without finite type assumptions",
+   "results": "8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.pointsPi_injective, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections over a field of a quasi separated algebraic space are determined by their image point which is closed",
+   "results": "8 hits: AlgebraicGeometry.pointsPi_injective, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_over_affine_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-geometric-fibres-submersion",
+  "date": "2026-10-23",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces.",
+   "via": [
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qs-space-rational-point-topology",
+  "worker": "stage1",
+  "summary": "Q46 checked the general-field, non-finite-type assertion against Stacks. Three general statement-only inputs supply quasi-compact field representatives, reduced-source factorization and algebraic field-image closedness. Injectivity is assembled using an explicit field retraction calculation. No statement change or attachment.",
+  "blueprint": "Retains the inherited supporting route to det-thm-sf-ctf-stability-direct-images (3) through adequate-geometric-fibres-submersion. The current latest sk-thm-sf-ctf-stability-direct-images proof (3) is the corresponding direct-image place; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "The existing spectrum interface supplies affine morphism/ring-map correspondence and the single point with residue field K; no unit-specific construction replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-affine-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-8866cbdf2",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-8866cbdf2 (reviewer sub-agent of L); spot-checked: Read the whole item, the three new statement-only nodes, every cited node and the Stacks decent-spaces.tex source at 03JV(4), 03I8, 03JX, 03M5, 0ABY, 0H1R, 0H1T (with 0BBN and example 0H2Y), 07U5 and 08AL. The item statement is unchanged and true: over Spec K a quasi-compact diagonal is the same as absolute quasi-separatedness. Step 1 uses lem-sfb-qs-space-field-monomorphism (03JV(4)) to get a quasi-compact monomorphism j: Spec F -> Z and i: K -> F. Step 2 uses lem-sfb-reduced-singleton-field-factorization, which matches 0H1T exactly (it needs only a qc monomorphism, not decency), to get h with h∘i = id_K. Step 3 is an elementary retraction argument: i is bijective, h' = h, so b = a. Step 4 uses lem-sfb-decent-algebraic-field-image-closed, which is exactly 07U5. Small cases checked: reducedness excludes dual numbers, the qc hypothesis excludes the 0H2Y example, the generic point of A^1 is excluded because K(t)/K is not algebraic. No duplicates found: decent-space-finite-field-map (08AL) gives finiteness only for finite extensions; the locally-separated nodes assume an immersion diagonal; etale-specializations states lifting only. No new node restates an item clause, and there is no cycle. Batch-5: def-trf-algebraic-space and def-a1-space-point-topology are general definitions, not trace-formula or Poincare-duality statements or proof steps, so accepted. Tool use def-weil-affine-spectrum (a generic definition) accepted. FIX: (1) step 4 concluded closedness in the def-a1 etale-final topology while the item asserts the smooth-atlas topology of lem-sfb-smooth-presentation-closed-subsets; added the bridge (def-a1 = usual atlas topology; etale is smooth by def-sbc-smooth-morphisms; the quotient topology does not depend on the smooth atlas) and the point-class identification in step 1, with uses and proof_deps updated. (2) lem-sfb-qs-space-field-monomorphism is stated over an arbitrary base S, but its source cited only 03JX(eta), which is about absolute quasi-separatedness; added 03M5, 03JX(theta=>gamma) and 0ABY to source.place. Statements unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QsSpaceRationalPointTopology",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qsSpace_rationalPoint_topology",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.rationalPointClass",
+   "AlgebraicGeometry.AlgebraicSpace.qsSpace_rationalPoint_topology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QsSpaceRationalPointTopology.lean",
+  "statement": "theorem qsSpace_rationalPoint_topology (K : Type u) [Field K] (Z : AlgebraicSpace (Spec (.of K))) (hdiag : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 Z.obj.obj) (𝟙 Z.obj.obj))) : Function.Injective (rationalPointClass K Z) ∧ ∀ a : yoneda.obj (Over.mk (𝟙 (Spec (.of K)))) ⟶ Z.obj.obj, @IsClosed _ (moduliSmoothPointTopology (discreteModuli Z.obj.obj)) {rationalPointClass K Z a}",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses ModuliPoints and moduliSmoothPointTopology on the existing discreteModuli of the algebraic space, as required by the recorded smooth-presentation dependency. rationalPointClass is the concrete class of the specified natural transformation from Spec K; no auxiliary point quotient or topology is introduced. The diagonal hypothesis uses IsRepresentableWith QuasiCompact on the relative product diagonal."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-889759a21",
+  "group": "O4",
+  "result": "pass",
+  "note": "Node unchanged except new lean record; lean.statement verbatim in file. K arbitrary Field; Z : AlgebraicSpace (Spec K) (def-trf record); hdiag = IsRepresentableWith (QuasiCompact p.left) on the diagonal of presheaves over Spec K, i.e. the relative qc diagonal over all scheme tests. Z(K) = yoneda(Over.mk 𝟙) ⟶ Z.obj.obj; rationalPointClass = class of a itself in the landed ModuliPoints (discreteModuli Z) quotient with the refl field witness (no choice, not hollow). Conclusions: Injective ∧ ∀ a, IsClosed {class a} in moduliSmoothPointTopology, the convention prescribed by the node via lem-sfb-smooth-presentation-closed-subsets (the discrete stack of an algebraic space has smooth atlases, so the topology is not degenerate). No extra hypotheses or universe restriction; empty Z(K) vacuous. H4: no existing Z(K)→ModuliPoints map (moduliSchemePoint is residue-field based; def-a1 Point is the other convention); helper name unique. ModuliPoints/discreteModuli enter through the cited dependency's framework and are def-node-owned. Docstrings, source places, step-by-step proof in the docstring and sorry-only proof all present; report has both sections. No compile needed (no file changed)."
+ }
+}

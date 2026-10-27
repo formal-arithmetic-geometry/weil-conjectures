@@ -1,0 +1,260 @@
+{
+ "id": "lem-cbc-normalized-pull-family-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16.",
+   "via": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of the normalized completed-pullback coefficient family",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and noetherian finite-dimensional schemes $X,Y$ with $\\ell$ invertible in every stalk. Let $g:Y\\to X$ be any morphism. On the raw rational finite coefficient stages [def-weil-pbc-rational-category, prop-weil-pbc-scalar-extension], there exists a normalized completed-pullback coefficient family [def-cbc-normalized-coefficient-families]. Its exact coherent functors are the localizations of the actual strict completed pullback [def-weil-pbc-completed-pullback] on the integral constructible complete categories. Its ambient scalar comparison is compatible with ordinary balancing and the specified completion units. The inverse beta is its localized comparison conjugated by the prescribed integral-scalar comparisons, and repeated-field beta is the identity. No compactification or exchange is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16."
+ },
+ "stmt_deps": [
+  "def-cbc-normalized-coefficient-families",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Record carefully how scalar extension interacts with completion units. Let $\\Lambda_R,\\Lambda_{S,t},\\Lambda_{S,v}$ denote the Koszul completion reflectors. The DVR description in [lem-weil-l-adic-extension-integers-dvr] gives $t=u v^e$ in $\\mathcal O_L$, with $u$ a unit and $e\\geq1$ (the restricted absolute value gives $0<|t|_L<1$). The local completeness conditions for $(t)$ and $(v)$ in $S_W$ agree: an element of $(t)$ lies in $(v)$, and for any local $a\\in(v)$ one has $a^e\\in(t)$ and $S_W[1/a]=S_W[1/a^e]$. Hence the Hom-bijection in [lem-weil-pbc-ringed-koszul-completion-reflector] gives a unique unit-preserving natural isomorphism $\\Lambda_{S,t}\\cong\\Lambda_{S,v}$. Tensor with the finite free $S_W$ commutes with the strict Koszul-tower limit: after the basis check in step 1, the comparison with products is the finite-biproduct rearrangement $\\bigoplus_{i=1}^d\\prod_n^D X_n\\cong\\prod_n^D\\bigoplus_{i=1}^d X_n$; it commutes with $1-s$ and hence with the natural Roos limit triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. At index $n$, tensor sends $[R_W\\xrightarrow{t^n}R_W]$ to $[S_W\\xrightarrow{t^n}S_W]$ and sends the transition $(t,1)$ to $(t,1)$. It therefore gives a unit-preserving isomorphism $C_W\\Lambda_R\\cong\\Lambda_{S,t}C_W\\cong\\Lambda_{S,v}C_W$. By [prop-weil-pbc-koszul-reconstruction] the quotient-tower units are these same units. In particular these are comparisons for the actual completed functors, including the specified $\\chi$ in step 1, not arbitrary identifications of complete endpoints.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-weil-pbc-koszul-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16."
+   }
+  },
+  {
+   "text": "Let $u:T'\\to T$ be $g$ or $g'$ and $M\\in\\mathcal C_E^{\\mathrm{int}}(T)$. By [lem-weil-pbc-integral-stratified-perfect-characterization] (iii), $M$ is bounded, say in cohomological degrees $[a,b]$. The augmented two-term resolution $[\\mathcal O_E\\xrightarrow{t^n}\\mathcal O_E]$ of $\\mathcal O_E/t^n$ is [lem-weil-pbc-standard-quotients-perfect]. The flat constant-to-completed coefficient comparison of [lem-weil-pbc-constant-completion-equivalence] tensors this to the corresponding resolution over $R_T$. Hence $M_n$ is represented by $M\\otimes^L[R_T\\xrightarrow{t^n}R_T]$. The cone triangle $M\\xrightarrow{t^n}M\\to M_n\\to M[1]$ gives $\\mathcal H^i(M_n)=0$ outside $[a-1,b]$ by its cohomology exact sequence, independently of $n$. This is the common reduction bound required in the next step.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16."
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-preservation-constructible] to the cartesian square with vertical maps $\\mathrm{id}_T,\\mathrm{id}_{T'}$ and both horizontal maps $u$. The four schemes are noetherian and finite-dimensional, the identities are proper with fibres of dimension at most $0$, and $N=\\ell$ annihilates $\\mathcal O_E/t$ and is invertible on $T,T'$. The preceding step supplies its common reduction bound. Its stated third conclusion gives $P_uM\\in\\mathcal C_E^{\\mathrm{int}}(T')$, with the uniform constructibility and compatible etale-origin witnesses required by [def-weil-pbc-bounded-constructible-complete]. The square and its pullback comparison are [def-weil-pbc-cartesian-square]. Thus this is preservation in the precise completed PBC category, without identifying a different coefficient category with it.",
+   "uses": [
+    "prop-weil-pbc-preservation-constructible",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16."
+   }
+  },
+  {
+   "text": "On the inherited triangulations of [lem-weil-pbc-uniform-complete-triangulated], these restricted $P_u$ are exact: [def-weil-pbc-completed-pullback] writes them as derived reduction tower, derived tower pullback, and total derived limit, and [lem-weil-pbc-ringed-strict-tower-homotopy-limit] makes the last functor exact. They are $\\mathcal O_E$-linear by [lem-sbc-completed-operations-linear-natural-exchange], whose domain is the full derived-complete category, so its linearity restricts to this full subcategory. This supplies exactly the hypotheses on $P$ needed for rational transport in the final step. For $f'$ the separated-finite-type hypotheses follow from [lem-pod-separated-finite-type-base-change]; [def-cbc-compact-support-square] provides the pulled-back compactification. The opens are quasi-compact by [def-cbc-completed-exchange-map].",
+   "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-pod-separated-finite-type-base-change",
+    "def-cbc-compact-support-square",
+    "def-cbc-completed-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16."
+   }
+  },
+  {
+   "text": "Finally localize the integral functors and comparisons. By [def-weil-pbc-rational-category] there are no new objects: a rational arrow is a finite sum of $u\\otimes a$, with integral $u$ and $a\\in E$. By [prop-weil-pbc-rational-transport], the exact $\\mathcal O_E$-linear $H,P$ and all their integral natural transformations extend, with component $\\eta_K\\otimes1$. For the scalar functor the extension on such an arrow is $C(u)\\otimes\\iota_{L/E}(a)$; this is well defined by balancing, since $C(ru)=\\iota(r)C(u)$ and every nonzero $r\\in\\mathcal O_E$ becomes invertible in $L$. Thus an integral naturality square multiplied by $\\iota(a)$ is the required rational naturality square for $u\\otimes a$, and additivity handles a general arrow. Apply localization to the equations of steps 3, 4, 14 and 15: it preserves compositions, identities, inverses and shifts. The scalar associators and shifts are those of [prop-weil-pbc-scalar-extension], whose integral comparisons were used above. Consequently the rational $b^h$ have the displayed unit, shift and successive-extension laws, their composite comparisons are the stated $b^U,b^V$, and step 15 becomes $\\eta_{L,TK}b^U=b^V T(\\eta_{E,K})$ for the rationalization of precisely the specified strict-normalized exchange. All hypotheses used were the stated integral-operation domains, finite coefficient extensions and the compactification geometry; no base-field or smoothness assumption was introduced.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-rational-transport",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-compact-support-square",
+  "def-cbc-completed-exchange-map",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-rational-category",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "prop-weil-pbc-koszul-reconstruction",
+  "prop-weil-pbc-preservation-constructible",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons preserve units and counits; original coefficient-coherence proof steps 5, 11--13, 16. Precise normalization and localization argument supplied by P5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact compact support and completed pullback form normalized coherent coefficient families; scalar extension intertwines their completed base change exchange",
+   "results": "TestFunction.coe_mk and ordinary PresheafOfModules.pullback; none states normalized completed coefficient families or exchange compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized exact coefficient families for compact support and completed pullback and the compatibility square of localized exchange transformations",
+   "results": "Profinite.NobelingProof.succ_exact, IsLocalizedModule.map_exact, Scheme.Hom.preservesLocalization_normalizationDiagramMap; none has the required categories or specified transformations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*scalar|scalar.*compact.?support|completedPull|coefficientFamily in Mathlib/CategoryTheory; normalized coefficient families in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py searches for coefficient compact support and completed pullback family",
+   "results": "No Mathlib theorem matches. Existing PbcPullbackCoherentFamily supplies a reflector pullback family but not the strict datum completionUnit/localization/shift interface. Existing finiteExtension_compactSupportBaseChange uses the unlifted coefficient datum, not the normalized small-stage families. Generic localization and natural-transformation tools are used in the single-stage proof. No duplicate of these four precise parts was found.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalCompactSupportCoefficientCoherence",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CbcCompletedPullCoefficientFamilyExistence",
+  "file": "lean/Sheaf/Paper/CbcCompletedPullCoefficientFamilyExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcCompletedPullCoefficientFamily_exists",
+  "statement": "theorem cbcCompletedPullCoefficientFamily_exists (g : Y ⟶ X) :\n    Nonempty (CbcCompletedPullCoefficientFamily l Ω g)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-cbc-normalized-pull-family-existence",
+  "worker": "P5",
+  "summary": "One strict part of the original coefficient-coherence argument. Its source and full proof are also in the theorem docstring.",
+  "blueprint": "Preserves the original open/proper mate and strict completion normalization route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic Ringed koszul reflector is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic Strict tower homotopy limit is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic Koszul and quotient reconstruction is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic Separated finite-type morphisms are stable under base change is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic Functorial transport to a finite field is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "prop-weil-pbc-preservation-constructible",
+    "why": "Generic preservation of the integral PBC category by completed pullback (identity-vertical square), used only to type the completed pullbacks P_g, P_g' on the stated categories as the statement presupposes; the compact-support unit has no node for it and thm-cbc-finite-extension uses the same tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic boundedness of objects of the integral PBC category, needed for the uniform reduction interval in the completed-pullback restriction."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Generic two-term resolution of O_E/t^n, used to bound the reduction amplitudes."
+   },
+   {
+    "node": "lem-weil-pbc-uniform-complete-triangulated",
+    "why": "Generic inherited triangulation of the integral PBC category, used for exactness of the restricted completed pullback."
+   },
+   {
+    "node": "lem-sbc-completed-operations-linear-natural-exchange",
+    "why": "Generic linearity of completed pullback on the full derived-complete category; its restriction is linear on the full uniform constructible subcategory."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b299e",
+  "group": "P5",
+  "result": "fix",
+  "landing": "20261025T164027-L-938248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b299e",
+  "group": "P5",
+  "result": "fix",
+  "landing": "20261025T164027-L-938248",
+  "kind": "interface",
+  "note": "independent cc review: item rationalCompactSupportCoefficientCoherence (statement byte-identical) and its 4 new split statements against def-cbc-normalized-coefficient-families (β/functors pinned), the parent 16-step plan and the unit sk-thm-sf-compatibility (realized empty); axioms of the stage theorem and of localization_full in scratch compiles"
+ }
+}

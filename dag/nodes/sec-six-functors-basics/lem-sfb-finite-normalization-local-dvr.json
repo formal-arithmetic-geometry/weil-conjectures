@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-finite-normalization-local-dvr",
+ "kind": "statement",
+ "title": "DVR localizations of normalization in a finite field extension",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] which is a nonzero local integral domain of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring], with unique maximal ideal $\\mathfrak m_D\\ne0$. Let $K\\subseteq L$ be fields [def-weil-field], with $D\\subseteq K=\\operatorname{Frac}(D)$ (each element of $K$ is a ratio of elements of $D$ with nonzero denominator), and suppose $[L:K]<\\infty$. Let $C\\subseteq L$ be the integral closure of $D$ in $L$ [def-weil-pbc-integral-closure]. Then $C$ is a Noetherian normal domain [def-weil-pbc-normal-ring] of Krull dimension $1$, and its given inclusion in $L$ makes $L$ its fraction field. There exists a prime ideal $\\mathfrak q\\subset C$ with $\\mathfrak q\\cap D=\\mathfrak m_D$. Every such prime $\\mathfrak q$ is nonzero and maximal. For every such $\\mathfrak q$, the localization $A=C_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] embeds into $L$ by $c/s\\mapsto c/s$, and its image is the subring $\\{c/s\\in L:c,s\\in C,\\ s\\notin\\mathfrak q\\}$. This subring is a discrete valuation ring [def-sc-discrete-valuation-ring] containing $D$, with fraction field $L$, and its maximal ideal satisfies $\\mathfrak m_A=\\mathfrak qA$, $\\mathfrak m_A\\cap C=\\mathfrak q$ and $\\mathfrak m_A\\cap D=\\mathfrak m_D$. No separability assumption is imposed on $L/K$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PH, algebra-lemma-exists-dvr, final proof paragraph: integral closure, lying over and localization; Tag 09IG, algebra-lemma-integral-closure-Dedekind. Expanded construction in the parent's former steps 5--8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-field",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-integral-closure-dedekind-surjective-fibres] to $D$, $K$, $L$: $D$ is Noetherian of dimension $1$ and $L/K$ is finite, so $C$ is a Noetherian normal domain of dimension $1$. Apply [lem-weil-pbc-integral-closure-finite-extension-normal] to the same inclusions to obtain that the given $C\\subseteq L$ makes $L$ its fraction field. These results impose neither normality on $D$ nor separability on $L/K$.",
+   "uses": [
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 09IG (algebra-lemma-integral-closure-Dedekind), 034L (algebra-lemma-integral-closure-in-normal); Tag 00PH, final paragraph"
+   }
+  },
+  {
+   "text": "The inclusion $D\\hookrightarrow C$ is integral by the definition of integral closure. Lying over [pqf-lem-lying-over] supplies a prime $\\mathfrak q$ with $\\mathfrak q\\cap D=\\mathfrak m_D$. For any such prime, choose $0\\ne d\\in\\mathfrak m_D$; its image is nonzero in $C$ and belongs to $\\mathfrak q$, so $\\mathfrak q\\ne0$. It is maximal: otherwise a maximal ideal strictly containing it would give the prime chain $(0)\\subsetneq\\mathfrak q\\subsetneq\\mathfrak n$, contradicting $\\dim C=1$.",
+   "uses": [
+    "pqf-lem-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GQ (algebra-lemma-integral-overring-surjective), 00PH (algebra-lemma-exists-dvr), final paragraph"
+   }
+  },
+  {
+   "text": "Fix any such $\\mathfrak q$. Since $C$ is Noetherian, normal and one-dimensional and $\\mathfrak q$ is maximal, [lem-sc-dedekind-localization-dvr] makes $A=C_{\\mathfrak q}$ a DVR. Apply [lem-weil-pbc-localization-normal-domain] with $S=C\\setminus\\mathfrak q$ and fraction field $L$: it gives the injective map $A\\to L$, $c/s\\mapsto c/s$, and fraction field $L$. Its image is exactly the displayed set of fractions, since every element of $A$ is represented by such a pair and every such pair defines an element of $A$. The image contains $D$ by $d\\mapsto d/1$.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 034X (algebra-lemma-characterize-Dedekind), 00GY (algebra-lemma-localize-normal-domain), and 00PH final paragraph"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-localization-at-prime], $A$ is local with maximal ideal $\\mathfrak qA$. Its contraction to $C$ is $\\mathfrak q$ by [lem-trf-localization-maximal-contraction]. Contraction through the composite $D\\hookrightarrow C\\hookrightarrow A$ is therefore $\\mathfrak q\\cap D=\\mathfrak m_D$. These equalities also hold for the embedded image in $L$, since the embedding is injective.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-trf-localization-maximal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 07BH, paragraph after Definition 07BI; Tag 00E3 (algebra-lemma-spec-localization); Tag 00PH final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "pqf-lem-lying-over",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-localization-maximal-contraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00PH (algebra-lemma-exists-dvr), final proof paragraph, and 09IG (algebra-lemma-integral-closure-Dedekind)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralClosure|isDiscreteValuationRing|IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:13:40Z\", \"tool\": \"grep\", \"query\": \"integralClosure|isDiscreteValuationRing|IsFractionRing\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\"], \"digest\": \"a05c5ac4075f1ae2\"}; Read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:45-87,147-174,190-240 and RingTheory/DedekindDomain/Dvr.lean:127-137. The Dedekind normalization results assume an integrally closed base and separability, neither assumed here. The prime-localization theorem starts with an already Dedekind ring. The fraction-field result covers only that clause. No exact match or one-line specialization for the full normalization/localization construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing the normalization of a one dimensional Noetherian local domain in a finite field extension at a prime over the maximal ideal gives a discrete valuation ring with prescribed fraction field",
+   "results": "{\"t\": \"2026-10-22T06:13:41Z\", \"tool\": \"leansearch\", \"query\": \"Localizing the normalization of a one dimensional Noetherian local domain in a finite field extension at a prime over the maximal ideal gives a discrete valuation ring with prescribed fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"instIsFractionRingAtPrimeFractionRing\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"IsDedekindDomainDvr.mk\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDedekindDomain.isDedekindDomainDvr\"], \"digest\": \"de58c5da4ff3b4e6\"}; Read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:45-87,147-174,190-240 and RingTheory/DedekindDomain/Dvr.lean:127-137. The Dedekind normalization results assume an integrally closed base and separability, neither assumed here. The prime-localization theorem starts with an already Dedekind ring. The fraction-field result covers only that clause. No exact match or one-line specialization for the full normalization/localization construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T06:13:41Z\", \"tool\": \"loogle\", \"query\": \"integralClosure, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:45-87,147-174,190-240 and RingTheory/DedekindDomain/Dvr.lean:127-137. The Dedekind normalization results assume an integrally closed base and separability, neither assumed here. The prime-localization theorem starts with an already Dedekind ring. The fraction-field result covers only that clause. No exact match or one-line specialization for the full normalization/localization construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure C of a one dimensional Noetherian local domain D in a finite extension L of its fraction field has a nonzero maximal ideal q over the maximal ideal of D; C localized at every such q is a discrete valuation ring in L dominating D with fraction field L",
+   "results": "{\"t\": \"2026-10-22T06:13:55Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure C of a one dimensional Noetherian local domain D in a finite extension L of its fraction field has a nonzero maximal ideal q over the maximal ideal of D; C localized at every such q is a discrete valuation ring in L dominating D with fraction field L\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsDedekindDomainDvr\", \"IsLocalization.AtPrime.isDedekindDomain\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"d0912d8230882824\"}; Read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:45-87,147-174,190-240 and RingTheory/DedekindDomain/Dvr.lean:127-137. The Dedekind normalization results assume an integrally closed base and separability, neither assumed here. The prime-localization theorem starts with an already Dedekind ring. The fraction-field result covers only that clause. No exact match or one-line specialization for the full normalization/localization construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isDedekindDomain|IsNoetherianRing|FiniteDimensional|IsSeparable",
+   "results": "{\"t\": \"2026-10-22T06:14:14Z\", \"tool\": \"grep\", \"query\": \"isDedekindDomain|IsNoetherianRing|FiniteDimensional|IsSeparable\", \"sub\": \"RingTheory/DedekindDomain/IntegralClosure.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"83\", \"87\", \"90\", \"102\", \"125\"], \"digest\": \"e895b91b93f51e3c\"}; Read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:45-87,147-174,190-240 and RingTheory/DedekindDomain/Dvr.lean:127-137. The Dedekind normalization results assume an integrally closed base and separability, neither assumed here. The prime-localization theorem starts with an already Dedekind ring. The fraction-field result covers only that clause. No exact match or one-line specialization for the full normalization/localization construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull Akizuki normalization of a one dimensional Noetherian local domain in an arbitrary finite field extension is Dedekind, with fraction field the extension and DVR localizations lying over the closed point",
+   "results": "{\"t\": \"2026-10-22T06:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"Krull Akizuki normalization of a one dimensional Noetherian local domain in an arbitrary finite field extension is Dedekind, with fraction field the extension and DVR localizations lying over the closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDedekindDomain.isDedekindDomainDvr\", \"isDedekindDomain_iff\", \"IsDedekindDomainDvr.isDedekindDomain\", \"isDedekindRing_iff\", \"IsLocalization.AtPrime.isDedekindDomain\", \"IsDedekindDomainDvr\", \"Localization.AtPrime.isDedekindDomain\"], \"digest\": \"e63bd15551217978\"}; Read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:45-87,147-174,190-240 and RingTheory/DedekindDomain/Dvr.lean:127-137. The Dedekind normalization results assume an integrally closed base and separability, neither assumed here. The prime-localization theorem starts with an already Dedekind ring. The fraction-field result covers only that clause. No exact match or one-line specialization for the full normalization/localization construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*isDiscreteValuationRing_of_dedekind_domain|theorem.*isDedekindDomain|variable.*IsSeparable",
+   "results": "{\"t\": \"2026-10-22T06:18:08Z\", \"tool\": \"grep\", \"query\": \"theorem.*isDiscreteValuationRing_of_dedekind_domain|theorem.*isDedekindDomain|variable.*IsSeparable\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\"], \"digest\": \"1b4ba46fa1d7a607\"}; Read Dvr.lean:127-137: assumes an already Dedekind ring and nonzero prime. Read IntegralClosure.lean:147-174,220-237: the normalization theorem requires separability and a Dedekind base. These do not give the construction from a possibly nonnormal Noetherian dimension-one domain in an arbitrary finite extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isDiscreteValuationRing_of_dedekind_domain|isFractionRing_of_finite_extension|isDedekindDomain",
+   "results": "{\"t\": \"2026-10-23T09:32:03Z\", \"tool\": \"grep\", \"query\": \"isDiscreteValuationRing_of_dedekind_domain|isFractionRing_of_finite_extension|isDedekindDomain\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\"], \"digest\": \"806232028865edcd\"}; Read Mathlib/RingTheory/DedekindDomain/Dvr.lean:127-137 and IntegralClosure.lean:147-174,220-237. DVR localization assumes an already Dedekind ring; normalization Noetherianity assumes normal base and separable extension. Neither supplies the whole item from its hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of a one dimensional Noetherian domain in a finite extension localized at a nonzero prime is a DVR",
+   "results": "{\"t\": \"2026-10-23T09:32:03Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of a one dimensional Noetherian domain in a finite extension localized at a nonzero prime is a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDedekindDomainDvr.mk\", \"IsDedekindDomainDvr.casesOn\", \"Ring.instIsIntegrallyClosedNormalClosure\", \"IsDedekindDomainDvr.ring_dimensionLEOne\"], \"digest\": \"1a8e881e31a2ea15\"}; Read Mathlib/RingTheory/DedekindDomain/Dvr.lean:127-137 and IntegralClosure.lean:147-174,220-237. DVR localization assumes an already Dedekind ring; normalization Noetherianity assumes normal base and separable extension. Neither supplies the whole item from its hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-23T09:32:03Z\", \"tool\": \"loogle\", \"query\": \"integralClosure, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/DedekindDomain/Dvr.lean:127-137 and IntegralClosure.lean:147-174,220-237. DVR localization assumes an already Dedekind ring; normalization Noetherianity assumes normal base and separable extension. Neither supplies the whole item from its hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a one dimensional Noetherian local domain in a finite field extension has DVR localizations over the maximal ideal and the extension as fraction field",
+   "results": "{\"t\": \"2026-10-23T09:32:10Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a one dimensional Noetherian local domain in a finite field extension has DVR localizations over the maximal ideal and the extension as fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDiscreteValuationRing.TFAE\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"isDedekindDomain_iff\", \"IsDedekindDomainDvr.ring_dimensionLEOne\"], \"digest\": \"563ebdd880f82479\"}; Read Mathlib/RingTheory/DedekindDomain/Dvr.lean:127-137 and IntegralClosure.lean:147-174,220-237. DVR localization assumes an already Dedekind ring; normalization Noetherianity assumes normal base and separable extension. Neither supplies the whole item from its hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull Akizuki arbitrary finite inseparable extension integral closure of dimension one Noetherian domain is Dedekind without normal base assumption",
+   "results": "{\"t\": \"2026-10-23T09:33:30Z\", \"tool\": \"leanfinder\", \"query\": \"Krull Akizuki arbitrary finite inseparable extension integral closure of dimension one Noetherian domain is Dedekind without normal base assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain_fractionRing\", \"Ring.DimensionLEOne.integralClosure\", \"Ring.DimensionLEOne.isIntegralClosure\", \"Ring.instIsDedekindDomainNormalClosure\", \"isDedekindDomain_iff\", \"isDedekindRing_iff\"], \"digest\": \"bca464d2aa478931\"}; Read Mathlib/RingTheory/DedekindDomain/Dvr.lean:127-137 and IntegralClosure.lean:147-174,220-237. DVR localization assumes an already Dedekind ring; normalization Noetherianity assumes normal base and separable extension. Neither supplies the whole item from its hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-domain-fg-field-dvr",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points). Algebraic input in the proof of Tag 0CM2: Tag 00PH with the finitely generated field extension equal to the residue field of a source point.; last paragraph of Tag 00PH: normalization in a finite field extension and closed-point localization (former steps 5--8)",
+   "via": [
+    "lem-sfb-local-domain-fg-field-dvr",
+    "lem-sfb-noetherian-image-boundary-dvr",
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-normalization-local-dvr",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported metadata. Reused the existing general finite-extension normalization theorem, fraction-field normality leaf, lying-over leaf, Dedekind localization leaf, normal-localization leaf and prime-localization contraction leaf. Wrote the nonzero/maximal argument and the image and contraction checks explicitly. No new nodes.",
+  "blueprint": "Realizes the inherited from.place: the final paragraph of Tag 00PH in the DVR boundary-point prerequisite of the direct-image alteration route; normalization, lying over and localization. Whole-blueprint searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic commutative-algebra normalization theorem (Stacks 09IG), used for Noetherian normal dimension-one integral closure in the finite-extension step of 00PH; the unit has no such algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-closure-dedekind-surjective-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-e53f4b09f",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-e53f4b09f (reviewer sub-agent of L); spot-checked: I read the item and all 7 cited nodes in full; there are no new nodes. The proof is the 4-step route of the last paragraph of Stacks 00PH (algebra.tex l.29330-29337), and I read 09IG at l.29754-29766. Step 1: 09IG (lem-sc-integral-closure-dedekind-surjective-fibres) needs only a Noetherian 1-dimensional domain and a finite L/K, and the Mathlib-leaf fraction-field node gives Frac C = L, so no normality of D or separability of L/K is used. Step 2: lying over applies to D→C, which is injective and integral. Every q over m_D is nonzero because it contains a nonzero d in m_D. It is maximal because (0)⊊q⊊n would contradict dim C = 1. Step 3: the Dedekind-localization leaf at a maximal q gives a DVR, and the normal-localization leaf with S = C∖q gives the injective map into L and Frac = L. Step 4: the localization def gives m_A = qA, the localization contraction leaf gives m_A∩C = q, and composing gives m_A∩D = m_D. proof_deps equal the union of uses. Edge cases checked: ramified Z_(2)⊂Z[i], non-normal k[t^2,t^3] with L = K, purely inseparable F_p[t]_(t)⊂K(t^{1/p}), and several primes over m_D. The statement matches what the parent lem-sfb-local-domain-fg-field-dvr step 3 uses. Duplicate search (integral closure / DVR / Krull-Akizuki) found no restatement. There is no repair note, so the re-split rule does not apply. Batch-5: lem-trf-localization-maximal-contraction is a general commutative-algebra Mathlib-exact leaf (Localization.AtPrime.under_maximalIdeal) with no deps. It is not part of the trace formula or Poincaré duality or their proofs, so it is accepted. The tool_use for the 09IG node, filed in another unit, is accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteNormalizationLocalDvr",
+  "declaration": "integralClosure.finite_normalization_local_dvr",
+  "file": "lean/Sheaf/RingTheory/FiniteNormalizationLocalDvr.lean",
+  "statement": "theorem finite_normalization_local_dvr (D : Type u) (K : Type v) (L : Type w) [CommRing D] [IsDomain D] [IsLocalRing D] [IsNoetherianRing D] [Field K] [Field L] [Algebra D K] [IsFractionRing D K] [Algebra K L] [Algebra D L] [IsScalarTower D K L] [FiniteDimensional K L] (hdim : ringKrullDim D = 1) (hm : IsLocalRing.maximalIdeal D ≠ ⊥) (C : Subalgebra D L) (hC : C = integralClosure D L) : IsNoetherianRing C ∧ IsDomain C ∧ IsIntegrallyClosed C ∧ ringKrullDim C = 1 ∧ IsFractionRing C L ∧ (∃ q : PrimeSpectrum C, q.asIdeal.comap (algebraMap D C) = IsLocalRing.maximalIdeal D) ∧ ∀ q : PrimeSpectrum C, q.asIdeal.comap (algebraMap D C) = IsLocalRing.maximalIdeal D → q.asIdeal ≠ ⊥ ∧ q.asIdeal.IsMaximal ∧ ∃ e : Localization.AtPrime q.asIdeal →ₐ[C] L, Function.Injective e ∧ (∀ (c : C) (s : q.asIdeal.primeCompl), e (IsLocalization.mk' (Localization.AtPrime q.asIdeal) c s) = (c : L) / ((s : C) : L)) ∧ (∀ x : L, x ∈ e.range ↔ ∃ c s : C, s ∉ q.asIdeal ∧ x = (c : L) / (s : L)) ∧ (∀ d : D, algebraMap D L d ∈ e.range) ∧ IsDiscreteValuationRing (Localization.AtPrime q.asIdeal) ∧ @IsFractionRing (Localization.AtPrime q.asIdeal) _ L _ e.toRingHom.toAlgebra ∧ IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) = q.asIdeal.map (algebraMap C (Localization.AtPrime q.asIdeal)) ∧ (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)).comap (algebraMap C (Localization.AtPrime q.asIdeal)) = q.asIdeal ∧ (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)).comap ((algebraMap C (Localization.AtPrime q.asIdeal)).comp (algebraMap D C)) = IsLocalRing.maximalIdeal D ∧ ∃ h : IsDiscreteValuationRing e.range, IsFractionRing e.range L ∧ @IsLocalRing.maximalIdeal e.range _ h.toIsLocalRing = q.asIdeal.map (algebraMap C e.range) ∧ (@IsLocalRing.maximalIdeal e.range _ h.toIsLocalRing).comap (algebraMap C e.range) = q.asIdeal ∧ (@IsLocalRing.maximalIdeal e.range _ h.toIsLocalRing).comap ((algebraMap C e.range).comp (algebraMap D C)) = IsLocalRing.maximalIdeal D",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d08edd4ba",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_dep records, the module, the report and Stacks 00PH/09IG. Each hypothesis matches the node: Noetherian local domain, ringKrullDim = 1, m_D ≠ ⊥, IsFractionRing D K, scalar tower D-K-L, FiniteDimensional K L, C = integralClosure D L as a Subalgebra; no separability or normal-base assumption; universes u,v,w independent. Each conclusion clause is present: Noetherian/IsDomain/IsIntegrallyClosed/dim 1, IsFractionRing C L, a lying-over prime exists, every such prime is nonzero and maximal, the canonical injective AlgHom pinned on every mk', the exact range set, D inside the range, DVR, fraction field L via e, and m_A = qA, m_A ∩ C = q, m_A ∩ D = m_D on both the localization and e.range. No duplicate: Mathlib has no Krull-Akizuki and nothing in the project matches. No definitions, proof only sorry, docstrings carry source/blueprint/steps, lean.statement verbatim, only the node's lean record changed. Edge cases checked: L = K with a non-normal base, purely inseparable, ramified, several primes over m_D. No compile run because nothing was changed. No findings."
+ }
+}

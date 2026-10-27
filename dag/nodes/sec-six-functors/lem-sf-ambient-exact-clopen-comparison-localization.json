@@ -1,0 +1,275 @@
+{
+ "id": "lem-sf-ambient-exact-clopen-comparison-localization",
+ "kind": "statement",
+ "title": "Exact localization identifies the intrinsic clopen comparison and its mate",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps are not required to be separated [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site]. For each $T$, choose either $\\mathscr M_T=\\operatorname{Mod}((A_n)_T)$ at one fixed $n$, or the category $\\mathscr M_T$ of module sheaves $M_n$ over $(A_n)_T$ with semilinear maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars, lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived category $D(\\mathscr M_T)$ [def-weil-abstract-derived-category]. For a scheme map $f$ write $f^*$ for exact constant-coefficient module inverse image and $P_f=D(f^*)$; for an open immersion $j$ write $j_!$ for exact extension by zero and $J_j=D(j_!)$. Use the specified adjunctions $P_f\\dashv S_f=Rf_*$ and $J_j\\dashv P_j$ [def-weil-pbc-proetale-operations, lem-pur-site-restriction-module-adjunction-exact]. System operations are constructed simultaneously on the ringed diagram site, before finite evaluation, scalar restriction or total limit [lem-coef-semilinear-derived-sections].\n\nLet $k_1:U\\hookrightarrow V$ and $i:W\\hookrightarrow Z$ be quasi-compact open immersions, let $r:U\\to W$ and $p:V\\to Z$ be proper, and assume $pk_1=ir$. Put $V_W=V\\times_ZW$, with projections $b:V_W\\to V$, $q:V_W\\to W$, and induced map $s=(k_1,r):U\\to V_W$ [def-pc-fibre-product]. No Cartesian hypothesis is imposed on this square.\n\nUse the decomposition $V_W=s(U)\\amalg C$ and projector $\\pi_s:F\\to s_!s^*F$ given by identity on $s(U)$ and zero on $C$. With $\\widetilde\\beta:p^*i_!\\cong b_!q^*$ the underived open-unit-normalized base-change comparison, define\n$$\\widetilde a_Q:p^*i_!\\xrightarrow{\\widetilde\\beta}b_!q^*\\xrightarrow{b_!\\pi_sq^*}b_!s_!s^*q^*\\cong(k_1)_!r^*.$$\nHere the last comparison is the adjunction-normalized open and inverse-image compositor [def-weil-pbc-composite-adjunction, lem-sf-open-tensor-normalization]. This is a natural transformation between exact functors in either abelian coefficient category. Its restriction to $U$, after the canonical open units and pullback compositors, is $1_{r^*M}$ for every $M\\in\\mathscr M_W$; it is the unique sheaf or system transformation with that restriction.\n\nTermwise application to arbitrary unbounded cochain complexes and exact localization gives precisely the intrinsic derived composite\n$$a_Q:P_pJ_i\\xrightarrow{\\beta}J_bP_q\\xrightarrow{J_b\\pi_sP_q}J_bJ_sP_sP_q\\cong J_{k_1}P_r.$$\nIn particular the localized $\\widetilde\\beta$ is the specified open-unit-normalized $\\beta$, and the localized open adjunction has the localized ordinary unit and counit. This equality holds on the simultaneous derived system category before evaluation. Under the mate bijection [def-weil-pbc-adjunction-mate], the proper-adjunction mate is exactly\n$$\\Gamma_Q=S_p(J_{k_1}\\varepsilon_r)\\circ S_p(a_QS_r)\\circ\\eta_pJ_iS_r:J_iS_r\\to S_pJ_{k_1}.$$\nThe $a_Q,\\Gamma_Q$ in this formula are the specified clopen $\\alpha,\\gamma$ normalization in [lem-sf-proper-open-projection-mate], in both coefficient settings; this assertion concerns their normalization, not invertibility or the projection-formula identity.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), map normalization; sites-cohomology.tex Tag 07A7 (remark-base-change), adjunction transpose. Agent exact-localization comparison for the stated ambient categories; returned proof Step 6."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-fibre-product",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-proper-open-projection-mate",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-open-tensor-normalization",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-finite-field-fiber",
+  "def-weil-exact-derived-adjunction",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-coef-semilinear-proper-open-mate",
+  "def-sf-integral-system-operations",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-sf-integral-system-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Prove the ordinary alpha restriction equation from the open beta-unit equation, the clopen projector restriction and the unit-normalized open compositor. Cancel the open source unit and use injectivity of restriction into an open extension to prove uniqueness. For systems, use moduleAlpha_restriction and module_clopen_factor_hom_ext on the whole module category. The factorized unit equation follows directly by naturality of the pullback compositor and the open unit; no étale normalization theorem is used.",
+   "uses": [
+    "def-sf-ambient-underived-clopen-comparison",
+    "lem-sf-semilinear-alpha-restriction",
+    "lem-sf-semilinear-alpha-pullback",
+    "lem-cbc-proetale-extension-zero-local-vanishing",
+    "def-cbc-clopen-mate-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), map normalization; sites-cohomology.tex Tag 07A7 (remark-base-change), adjunction transpose. Agent exact-localization comparison for the stated ambient categories; returned proof Step 6."
+   }
+  },
+  {
+   "text": "Localize the specified ordinary open adjunction termwise. Adjunction.localization_unit_app and localization_counit_app give the two equations on all QK, using the standard exact factorization isomorphisms. The ordinary total-derived open adjunction equals this exact localization; the two system presentations agree by equality of their underlying pushforwards and chosen adjunctions.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), map normalization; sites-cohomology.tex Tag 07A7 (remark-base-change), adjunction transpose. Agent exact-localization comparison for the stated ambient categories; returned proof Step 6."
+   }
+  },
+  {
+   "text": "Use the separate ordinary and simultaneous system localization identifications for alpha and beta. The ordinary beta equation is definitional from properOpenBeta and the standard exact square localization.",
+   "uses": [
+    "lem-sf-ambient-ordinary-clopen-localization",
+    "lem-sf-ambient-system-clopen-localization",
+    "lem-sf-ambient-system-beta-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), map normalization; sites-cohomology.tex Tag 07A7 (remark-base-change), adjunction transpose. Agent exact-localization comparison for the stated ambient categories; returned proof Step 6."
+   }
+  },
+  {
+   "text": "Expand mateEquiv to obtain the unit-alpha-counit formulas. Equality of the proper adjunctions and alpha transports system gamma between the two presentations. Naturality of the mate bijection under the four canonical bridge isomorphisms, followed by cancellation of their components, gives the realization formula. Retain the resulting unit--comparison--counit equation as the public properMateFormula predicate of [def-sf-ambient-exact-clopen-data]; its body is exactly the same component equation and keeps the native category dictionaries shared.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-realization-data",
+    "def-sf-ambient-exact-clopen-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), map normalization; sites-cohomology.tex Tag 07A7 (remark-base-change), adjunction transpose. Agent exact-localization comparison for the stated ambient categories; returned proof Step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-ambient-underived-clopen-comparison",
+  "lem-sf-semilinear-alpha-restriction",
+  "lem-sf-semilinear-alpha-pullback",
+  "lem-cbc-proetale-extension-zero-local-vanishing",
+  "def-cbc-clopen-mate-composite",
+  "def-weil-exact-derived-adjunction",
+  "lem-sf-ambient-ordinary-clopen-localization",
+  "lem-sf-ambient-system-clopen-localization",
+  "lem-sf-ambient-system-beta-localization",
+  "def-weil-pbc-adjunction-mate",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-realization-data",
+  "def-sf-ambient-exact-clopen-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "R4: explicit restriction normalization, termwise adjunction localization, separate geometric localization comparisons and naturality of mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extension.*zero|lowerShriek|LowerShriek|clopen",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization preserves adjunctions, but does not construct or identify this intrinsic geometric clopen arrow in both coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Localization",
+   "results": "0 hits; . loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization preserves adjunctions, but does not construct or identify this intrinsic geometric clopen arrow in both coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of extension by zero base change preserves adjunction unit and clopen projection normalization for module systems",
+   "results": "8 hits; CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.localization, isLocalizedModule_iff_isBaseChange, CategoryTheory.Adjunction.Localization.η, instIsLocalizedModuleFinsuppLinearMap, IsLocalizedModule.isBaseChange, Algebra.Extension.localization, IsLocalizedModule.recOn",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization preserves adjunctions, but does not construct or identify this intrinsic geometric clopen arrow in both coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact proper open clopen projection comparison localizes to the canonical open base change map in unbounded derived proetale system categories",
+   "results": "8 hits; LightProfinite.proj_comp_transitionMapLE, LightProfinite.proj_comp_transitionMap, LightProfinite.proj_comp_transitionMapLE', LightProfinite.proj_comp_transitionMap', Condensed.isColimitLocallyConstantPresheaf_desc_apply, Profinite.NobelingProof.CC_exact, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization preserves adjunctions, but does not construct or identify this intrinsic geometric clopen arrow in both coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "3 hits; CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization preserves adjunctions, but does not construct or identify this intrinsic geometric clopen arrow in both coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|def localization|def comp|theorem mateEquiv_vcomp",
+   "results": "25 hits; Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Square.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization preserves adjunctions, but does not construct or identify this intrinsic geometric clopen arrow in both coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of an extension by zero base change transformation preserves its open adjunction unit and clopen projector normalization",
+   "results": "8 hits; CompHausLike.LocallyConstant.adjunction_unit, Profinite.NobelingProof.succ_exact, exact_of_isLocalized_span, CompHausLike.LocallyConstant.adjunction_left_triangle, LocalizedModule.map_exact, IsLocalizedModule.map_exact, exact_of_isLocalized_maximal, ModuleCat.localizedModule_functor_map_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction localization and transformation descent are existing DAG tools; no hit states the geometric clopen comparison with both coefficient settings"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|localization_counit_app|liftNatTrans",
+   "results": "25 hits; Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction localization and transformation descent are existing DAG tools; no hit states the geometric clopen comparison with both coefficient settings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero proper open comparison is localization of the clopen identity zero projection on coefficient systems",
+   "results": "8 hits; FractionalIdeal.extended_zero, LocallyConstant.ofIsClopen, DerivedCategory.instHasZeroObject, AlgebraicGeometry.LocallyRingedSpace.basicOpen_zero, CategoryTheory.Localization.instHasZeroObjectLocalization, AlgebraicGeometry.Γ_restrict_isLocalization, LocallyConstant.coe_zero, LocallyConstant.charFn_eq_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction localization and transformation descent are existing DAG tools; no hit states the geometric clopen comparison with both coefficient settings"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "3 hits; CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction localization and transformation descent are existing DAG tools; no hit states the geometric clopen comparison with both coefficient settings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ambient-proper-open-pasting",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": intrinsic clopen comparison agrees with exact localization and its specified mate (returned Step 6).",
+   "via": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ambient-exact-clopen-comparison-localization",
+  "worker": "stage1",
+  "summary": "Proved the underived restriction normalization with the existing clopen Hom-bijection, localized the actual inverse-open-adjunct word, projector and normalized compositor, and substituted the proper mate formula. Existing nodes suffice; no new nodes and no change to statement or statement dependencies.",
+  "blueprint": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": intrinsic clopen comparison agrees with exact localization and its specified mate (returned Step 6).",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies simultaneous exact system operations before localization, a generic system-category construction absent from the assembly unit."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Supplies exact ordinary open module adjunctions on localized ringed sites; this is generic sheaf calculus."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Supplies the standard exact-functor composition identification on all unbounded complexes, a generic localization tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Its explicit inverse-open-adjunct formula fixes beta, including ringed diagram systems; no local assembly-unit node replaces this normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-exact-derived-composition",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-ff13d3502",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-ff13d3502 (reviewer sub-agent of L); spot-checked: I read the item and all 11 cited statements in full. The delivery is one commit with the item and the report and no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the unsplit node created by Q144's re-split; the old search records are kept. proof_deps equals the union of the step uses, and there is no cycle: none of the deps, including lem-sf-proper-open-projection-mate, reaches the item. Old Step 6 of the parent's proof (from the Q144 packet) is carried in full by Steps 1-5, more explicitly, with lem-sfb-adjunction-localization replaced by def-weil-exact-derived-adjunction. Step 1: the clopen-restriction node gives the bijection Hom(b_!F,k1_!G)=Hom(s^*F,G), which I checked by hand (b open, then the (F_U,F_C)/(G,0) split); applied to F=q^*M, G=r^*M it gives existence and uniqueness of ã_Q. Step 2: the exact-functor factorization and the localization universal property (clauses 2-3), μ from exact-derived-composition, and localized units/counits with no bound. Step 3: the β^{-1} adjunct word ε_b∘b_!θ^{-1}i_!∘b_!q^*u_i type-checks and is exactly the open-tensor-normalization inverse-β formula (j=i, g=p, j'=b, g_U=q); that node also covers ringed diagram systems. Step 4: the composite-adjunction words localize, and the localized (1,0) projector restricts to 1 on s(U) and 0 on C. Step 5: the mate substitution (P_r,S_r,P_p,S_p,J_i,J_k1) gives exactly the displayed Γ_Q. In the system case, projection-mate's γ=Γ_Q clause is a proved assertion (its Step 3, via lem-sf-semilinear-proper-open-mate-pasting), so citing it is legitimate. Sources: Stacks 0F7B (more-etale l.2460, motivation only, so the agent origin is correct), 07A7 (l.4033) and 015F (l.5884); no SGA. Edge cases checked: U empty, W empty, a Cartesian square (s=id), identity maps, and a nonempty complement C killed by π_s without any claim of invertibility. No duplicate found: the nearest nodes (semilinear mate-pasting, def-sf-semilinear-proper-open-comparisons, cbc clopen projector, varying-ring arrows, pur clopen derived localization) are at the derived level only or in other settings. Accepted tool uses: semilinear-derived-sections, site-restriction-adjunction, exact-derived-composition, open-tensor-normalization; all are generic, and unit sk-rem-sf-pf-done has no steps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AmbientExactClopenComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientClopen.ambientExactClopenComparisonLocalizes",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientClopen.ambientExactClopenComparisonLocalizes"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AmbientExactClopenComparison.lean",
+  "statement": "theorem ambientExactClopenComparisonLocalizes (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {U V W Z : Scheme.{u}} [U.Over (Spec (.of F.k))] [V.Over (Spec (.of F.k))] [W.Over (Spec (.of F.k))] [Z.Over (Spec (.of F.k))] [LocallyOfFiniteType (U ↘ Spec (.of F.k))] [QuasiCompact (U ↘ Spec (.of F.k))] [LocallyOfFiniteType (V ↘ Spec (.of F.k))] [QuasiCompact (V ↘ Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] [LocallyOfFiniteType (Z ↘ Spec (.of F.k))] [QuasiCompact (Z ↘ Spec (.of F.k))] (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [k.IsOver (Spec (.of F.k))] [r.IsOver (Spec (.of F.k))] [p.IsOver (Spec (.of F.k))] [i.IsOver (Spec (.of F.k))] [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) : (∀ n : ℕ, OrdinaryAssertion (scalarRings l E n) k r p i h) ∧ Systems.Assertion (scalarRings l E) (scalarTransitions l E) k r p i h ∧ (∀ (o : Operations l E) (z : Realizations l E F o) (M : System l E U), properMateFormula (o.direct r).adj (o.direct p).adj (realizationAlpha l E o z.canonicalBridge k r p i h) (z.properOpen.gamma k r p i h) M)",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The complete proof uses the same geometric clauses. Its realization clause is expressed by properMateFormula, a public definition whose body is the original unit--comparison--counit equality; this keeps the native coefficient-category dictionaries shared during kernel checking. All binders and all Challenge targets are unchanged. See coord/changes/R4-ambient-realization-formula-normal-form.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f0568f5f",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 5a786a7c4a78. Item Lean byte-identical (sha bc7a28e1); record differs only in stmt_deps and lean.note; statement verbatim, the only sorry is the main theorem. H2 repaired: theorem stmt_dep lem-sf-semilinear-proper-open-mate-pasting replaced by landed def-sf-semilinear-proper-open-comparisons and def-coef-semilinear-proper-open-mate; added def-sf-integral-system-operations and def-cbc-strict-tower-proper-open-arrows (ownership verified live); new existing:true def-sf-integral-system-realization-data owns all 17 non-theorem declarations of the unchanged IntegralCompactificationSystemRealization; statement equals the tool-extracted signature; branch accepted; id new; no cycle; TeX citations are all in stmt_deps; ProperOpenCoherence.canonical pins gamma. Math re-checked: Normalized types, uniqueness over all transformations, unbounded localization, open-adjunction unit/counit, mate direction, HEq between equal presentations, edge cases U/W empty, Cartesian square, killed complement. No compile (no file changed). Advisories: ringedProperProjection/ringedCompactificationProjection also listed by NH def-pur-integral-ringed-projection-maps; PurCompactSupport openExtension/reduction owners not in the new node's closure (inherited from the theorem node); base-era finite pro-etale helper owners outside stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4c627",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T070810-L-3659151",
+  "kind": "interface",
+  "note": "independent cc review: 4c62 Lean/node files vs b5a4 reviewer fixes and delivery (byte-identical); records/report diffs are wording only; reader gate: 5 delivered modules + current-clone SystemClopenMateIdentification and AmbientUnderivedClopenPasting compiled together, exit 0"
+ }
+}

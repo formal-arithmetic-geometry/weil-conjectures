@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-adic-finite-completion-tower",
+ "kind": "statement",
+ "title": "The normalized finite-reduction tower computes quotient completion",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ a commutative ring, $J\\subset A$ an ideal, and $N\\in D(X_{\\mathrm{pro\\acute et}},\\underline A)$, using constant ring sheaves [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category], the derived category [def-weil-abstract-derived-category], and the pro-etale site [def-weil-pbc-proetale-site]. Use the coefficient-sized site model and normalized reductions and transitions of [lem-sfb-adic-finite-reduction-data]. Put $U_n=\\operatorname{Res}_A^{A/J^{n+1}}(N\\otimes_A^{\\mathbf L}A/J^{n+1})$ and let $t_n:U_{n+1}\\to U_n$ be those normalized quotient transitions. Let $\\widehat N$ be the quotient-tower completion functor applied to $N$, with precisely the construction of [lem-weil-pbc-constant-completion-equivalence]. Then $\\prod_n U_n$ exists in the derived category, and $\\widehat N$ is a derived limit of $(U_n,t_n)$ [def-weil-derived-limit]. No completeness or Tor-amplitude assumption on $N$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, quotient-tower model comparison; sites-cohomology.tex, Tag 0940, section-derived-limits, and Tag 0947, proposition-enough-weakly-contractibles (4)-(5)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a preimage of N under Q and a flat-term K-flat resolution P of that complex. Localization of its quasi-isomorphism gives e:Q(P)≅N. The quotient presentation comparison is invertible on P, hence identifies its derived strict tower at N with TQ of the strict ordinary reduction tower on P.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each positive quotient construct the level isomorphism explicitly from derivedExtension.computation on P, exact restriction via resFactors, and the identity identification between evaluating the strict reduction complex and applying ordinary change and restriction termwise. The successor square is the finite calculation in [lem-sfb-adic-finite-strict-reduction-successor]. NatTrans.ofOpSequence assembles these maps, and their levelwise inverses give a natural isomorphism with the normalized adicFiniteTransition tower.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-adic-finite-strict-reduction-successor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing total-derived strict-limit theorem to the small coefficient site. It gives derived countable products, a compatible evaluation functor, and a Roos triangle for the derived strict quotient tower. Uniqueness of right derived functors identifies its limit functor with the rlim selected in completion. Transport the evaluation across the quotient-presentation comparison and the tower isomorphism of the preceding step. The product isomorphism has components the levelwise isomorphisms. Naturality of towerTransitionEndomorphism makes the middle square commute; use Triangle.isoMk and isomorphic_distinguished to transport the full triangle, including its boundary. The first vertex is definitionally completion(N).",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-sfb-adic-finite-strict-reduction-successor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, quotient-tower construction; sites-cohomology.tex, section-derived-limits (0940). Explicit use of the already proved strict-tower Roos theorem, universal uniqueness, and normalized scalar computations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit of quotient reductions of a complex is its ideal-adic completion",
+   "results": "Eight hits, all ordinary AdicCompletion algebra/module constructions and evaluation maps; no derived sheaf completion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total derived inverse limit of the quotient reductions of a sheaf complex is its ideal adic completion",
+   "results": "Eight hits: ordinary AdicCompletion and localCohomology constructions; none identifies the normalized derived quotient tower.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*tower|tower.*completion|strict.*Roos",
+   "results": "Eighteen hits, concerning IsScalarTower on ordinary completions and number-field completions; no strict Roos comparison in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicFiniteCompletionBounds",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof sentence: completeness is a property of the underlying complex of sheaves of O_E-modules, the limit of its reductions; normalized quotient-tower computation used by the Stacks 09C2 boundedness argument.",
+   "via": [
+    "lem-sfb-adic-finite-completion-bounds",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteCompletionTower",
+  "file": "lean/Sheaf/Paper/AdicFiniteCompletionTower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteCompletion_tower",
+  "statement": "theorem adicFiniteCompletion_tower\n    (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A) :\n    ∃ hp : HasProduct (adicFiniteUnderlying.{u, v} X J N),\n      @IsDerivedLimit _ _ _ _ _ _ _ _ hp (adicFiniteTransition.{u, v} X J N)\n        ((completion (coefficientProEtaleModelTopology.{u, v} X) A J false).obj N)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T111805-L-1732639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T130458-L-3466124",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

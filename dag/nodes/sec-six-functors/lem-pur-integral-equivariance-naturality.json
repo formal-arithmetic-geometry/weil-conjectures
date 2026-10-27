@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-integral-equivariance-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Steps 1--3 (three squares) and Step 5 (coefficient transports); normalized integral adjunction Purity clause",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Steps 1--3 (three squares) and Step 5 (coefficient transports); normalized integral adjunction Purity clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completed integral smooth purity is natural in the input and geometric Frobenius exchange is the counit mate",
+   "results": "AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv; Scheme.ΓSpecIso_naturality_assoc; ΓSpec.right_triangle; ΓSpec.left_triangle; ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; Spec_Γ_naturality_assoc; Scheme.toSpecΓ_naturality_assoc; Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-27",
+   "verdict": "no match: scheme spectrum adjunction identities do not identify completed purity or its canonical geometric comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 Lean.Compiler.LCNF purity declarations, including Purity, tacticPurity_tac, Purity.impure and Purity.pure",
+   "date": "2026-10-27",
+   "verdict": "no match: compiler purity is unrelated to smooth geometric purity"
+  },
+  {
+   "tool": "grep",
+   "query": "integralGamma|integralPurity.*naturality|integral.*[Pp]urity.*[Mm]ate",
+   "results": "No hits",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral smooth purity is natural and its geometric Frobenius exchange is the counit mate",
+   "results": "CategoryTheory.Adjunction.counit_naturality; Adjunction.counit_naturality_assoc; Comonad.counit_naturality; Equivalence.counit_naturality_assoc; Adjunction.CoreUnitCounit.counit; Equivalence.counit_naturality; Adjunction.CoreHomEquivUnitCounit.counit; frobeniusMorphism",
+   "date": "2026-10-27",
+   "verdict": "general categorical counit naturality is used in the assembly; no result identifies completed geometric purity and its independent source comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilEquivarianceOfPurityAndTrace",
+  "date": "2026-10-27",
+  "group": "E7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "title": "Naturality of completed purity and support comparison",
+ "statement": "Let $k_0$ be a finite field of characteristic $p$, let $k$ be its fixed algebraic closure, and fix a prime $\\ell\\ne p$ and a finite coefficient extension $E/\\mathbf Q_\\ell$, with ring of integers $\\mathcal O_E$, as in [def-pur-conventions]. Let $X_0,Y_0$ be separated finite-type $k_0$-schemes, $f_0:X_0\\to Y_0$ a separated finite-type morphism, and $X,Y,f$ their geometric base changes. Suppose $f$ is smooth of pure relative dimension $d\\ge0$. Fix a compactification $c_0$ of $f_0$ and the specified exceptional coefficient system $S$, with the actual comparisons of [def-pur-weil-equivariance-data]. Let $\\mathcal C_T=D^b_{ctf}(T,\\mathcal O_E)$ be the derived-complete finite-Tor category, $P=Lg_Y^*$, $Q=Lg_X^*$, $H=Lf^*(-)(d)[2d]$, and $F\\dashv G$ the specified constructible adjunction. Let $\\Gamma_K:HK\\simeq GK$ be integralGamma, the fixed canonical trace-transpose integral purity, and $B_M:PFM\\simeq FQM$ be integralBeta, the specified completed proper/open exchange in those coordinates. For every integral arrow $a:K\\to L$ one has $\\Gamma_K\\,G(a)=H(a)\\,\\Gamma_L$. For every integral arrow $v:M\\to N$ on $X$ one has $P(F(v))\\,B_N=B_M\\,F(Q(v))$. These equations are in the actual completed full subcategories; no strict Weil datum is assumed.",
+ "stmt_deps": [
+  "def-pur-weil-equivariance-data",
+  "def-pur-canonical-rational-purity-realization",
+  "def-pur-field-geometric-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use [det-sp-normalized-equivalence] to reduce every integral morphism to a morphism of its entire normalized tower. Naturality in [det-sp-tower-gamma] is an equality of whole-tower morphisms. Apply total derived inverse limit and the pullback, tensor and source comparisons of [lem-pur-integral-geometric-comparison-realization]. The counit-preserving right-adjoint comparison and [lem-pur-tower-trace-purity-comparison] identify the realized components with the specified trace-transpose integralGamma. Naturality of the reconstruction units cancels the comparison factors. This gives the first equation for arbitrary a, rather than only an isomorphism or a single evaluation.",
+   "uses": [
+    "det-sp-normalized-equivalence",
+    "det-sp-tower-gamma",
+    "lem-pur-integral-geometric-comparison-realization",
+    "lem-pur-tower-trace-purity-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Steps 1--3 (three squares) and Step 5 (coefficient transports); normalized integral adjunction Purity clause"
+   }
+  },
+  {
+   "text": "The completed-to-ordinary pullback, support realization, and canonical proper/open Frobenius maps of [def-pur-field-geometric-comparison-data] are natural transformations. Their composite integralExchange is natural. Conjugate this naturality square by the specified integralLeft natural isomorphism of the coefficient system and lift through the faithful finite-Tor inclusion in [def-pur-weil-equivariance-data]. This is exactly naturality of integralBeta.",
+   "uses": [
+    "def-pur-field-geometric-comparison-data",
+    "def-pur-weil-equivariance-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Steps 1--3 (three squares) and Step 5 (coefficient transports); normalized integral adjunction Purity clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-normalized-equivalence",
+  "det-sp-tower-gamma",
+  "lem-pur-integral-geometric-comparison-realization",
+  "lem-pur-tower-trace-purity-comparison",
+  "def-pur-field-geometric-comparison-data",
+  "def-pur-weil-equivariance-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Steps 1--3 (three squares) and Step 5 (coefficient transports); normalized integral adjunction Purity clause"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralEquivarianceNaturality",
+  "file": "lean/Sheaf/Paper/IntegralEquivarianceNaturality.lean",
+  "declaration": "WeilConjectures.PurityWeil.integralEquivariance_naturality",
+  "declarations": [
+   "WeilConjectures.PurityWeil.integralEquivariance_naturality"
+  ],
+  "statement": "theorem integralEquivariance_naturality :\n    (∀ {K L : finiteTorConstructibleIntegralCategory P.coefficients.l P.extension\n        (P.frobeniusFiber Y₀).left} (a : K ⟶ L),\n      (integralGamma P X₀ Y₀ f₀ d c₀ S K).hom ≫\n          (S.ring.operation (zlGeometricCompactification P.field f₀ c₀)\n            (.integral (AdicSmoothDualizing.fieldStage P))).G.map a =\n        (integralH P (P.frobeniusMap f₀) d).map a ≫\n          (integralGamma P X₀ Y₀ f₀ d c₀ S L).hom) ∧\n    (∀ {M N : finiteTorConstructibleIntegralCategory P.coefficients.l P.extension\n        (P.frobeniusFiber X₀).left} (a : M ⟶ N),\n      (integralP P Y₀).map\n          ((S.ring.operation (zlGeometricCompactification P.field f₀ c₀)\n            (.integral (AdicSmoothDualizing.fieldStage P))).F.map a) ≫\n        (integralBeta P X₀ Y₀ f₀ c₀ S N).hom =\n      (integralBeta P X₀ Y₀ f₀ c₀ S M).hom ≫\n        (S.ring.operation (zlGeometricCompactification P.field f₀ c₀)\n          (.integral (AdicSmoothDualizing.fieldStage P))).F.map ((integralP P X₀).map a))",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-367c8",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T235856-L-1464333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-367c8",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T235856-L-1464333",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); 13 moved definitions in WeilPurityEquivarianceData vs the clone's item module (byte-identical apart from imports and blueprint tags); 2 new sorry lemmas vs the integral case of PurityNaturalityMate and their nodes; item node proof_deps vs the Lean proof"
+ }
+}

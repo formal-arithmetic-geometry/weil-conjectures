@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-invertible-stalk-neighbourhood-section",
+ "kind": "statement",
+ "title": "A stalk isomorphism spreads to a neighbourhood section",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $f:Y\\to X$ be a locally finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and let $y\\in Y$ with $x=f(y)$. Suppose the induced local homomorphism $f^\\sharp_y:\\mathcal O_{X,x}\\to\\mathcal O_{Y,y}$ is an isomorphism [def-weil-locally-ringed-space-morphism]. Then there are an open neighbourhood $W\\subseteq X$ of $x$ and a morphism $s:W\\to Y$ with $f\\circ s$ the inclusion of $W$, $s(x)=y$, and $s^\\sharp_x=(f^\\sharp_y)^{-1}$ under the canonical identification $\\mathcal O_{W,x}=\\mathcal O_{X,x}$. Equivalently $s$ factors as a section $W\\to f^{-1}(W)$ of the restricted morphism.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), construction and spreading of the inverse local map; Morphisms Tag 0BX6 (lemma-morphism-defined-local-ring), case (2)(c)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_{X,x}$, $B=\\mathcal O_{Y,y}$, $\\alpha=f^\\sharp_y$ and $\\beta=\\alpha^{-1}:B\\to R$. The inverse is local: a ring isomorphism preserves units, hence the nonunits, which are the maximal ideal of a local ring. By the point-and-local-map bijection, $(y,\\beta)$ determines $\\varphi:\\operatorname{Spec}R\\to Y$ sending the closed point $z$ to $y$. Let $c_x:\\operatorname{Spec}R\\to X$ be the canonical morphism, corresponding to $(x,\\mathrm{id}_R)$. The composite $f\\circ\\varphi$ sends $z$ to $x$; its normalized stalk map is $\\beta\\circ\\alpha=\\mathrm{id}_R$, by composition of stalk maps. Thus the injectivity of the same bijection gives $f\\circ\\varphi=c_x$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-scheme-stalk-map-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6, lemma-morphism-from-spec-local-ring; Equation 02NA, equation-canonical-morphism; stalk composition: sheaves.tex Tag 008M, lemma-compose-f-maps-stalks."
+   }
+  },
+  {
+   "text": "Apply the spreading lemma with $S=T=X$, $a=\\mathrm{id}_X$, $Z=Y$, $g=f$, $t=x$, and the morphism $\\varphi$ just constructed. Its hypotheses are exactly that $X$ is locally Noetherian, that $f$ is locally of finite type, and $f\\circ\\varphi=\\mathrm{id}_X\\circ c_x$. It yields an open neighbourhood $W$ of $x$ and $s:W\\to Y$ satisfying $f\\circ s=\\iota_W$ and $s\\circ c_{x,W}=\\varphi$.",
+   "uses": [
+    "lem-sfb-local-ring-map-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX6, lemma-morphism-defined-local-ring, (2)(c), applied as in varieties.tex Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4)."
+   }
+  },
+  {
+   "text": "The canonical map $c_{x,W}$ sends the closed point to $x$, so evaluation of $s\\circ c_{x,W}=\\varphi$ there gives $s(x)=y$. Its normalized stalk map at that closed point is the identity under $\\mathcal O_{W,x}=R$. Taking normalized stalk maps in the same equality therefore gives $s^\\sharp_x=\\beta$, using the composition formula. Finally $f\\circ s=\\iota_W$ says that the pair $(s,\\mathrm{id}_W)$ gives a morphism to $Y\\times_X W$, which is the open subscheme $f^{-1}(W)$ with its inclusion into $Y$ and the restriction of $f$ as projections [lem-weil-pbc-open-preimage-fibre-product], whose projection to $W$ is the identity. Conversely composing such a section with $f^{-1}(W)\\to Y$ gives $s$ with the same identity. This proves the equivalent formulation.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX6, lemma-morphism-defined-local-ring, (2)(c), applied as in varieties.tex Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "lem-sfb-local-ring-map-spread",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BX6, lemma-morphism-defined-local-ring, (2)(c), applied as in varieties.tex Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism on stalks for a locally finite type scheme morphism over a locally Noetherian base extends to a section near the point",
+   "results": "{\"t\": \"2026-10-22T07:39:26Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism on stalks for a locally finite type scheme morphism over a locally Noetherian base extends to a section near the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\"], \"digest\": \"b768ee26c91f83cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: spread_out_of_isGermInjective' requires an already constructed morphism Spec R to Y over X; the point-and-local-map bijection and verification that it lies over X remain separate arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-22T07:39:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme.Hom.stalkMap\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: spread_out_of_isGermInjective' requires an already constructed morphism Spec R to Y over X; the point-and-local-map bijection and verification that it lies over X remain separate arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "spread|exists.*[Ss]ection|stalkMap.*[Ii]so",
+   "results": "{\"t\": \"2026-10-22T07:39:26Z\", \"tool\": \"grep\", \"query\": \"spread|exists.*[Ss]ection|stalkMap.*[Ii]so\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\"], \"digest\": \"6383cb34de923645\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: spread_out_of_isGermInjective' requires an already constructed morphism Spec R to Y over X; the point-and-local-map bijection and verification that it lies over X remain separate arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism on stalks for a locally finite type scheme morphism over a locally Noetherian base extends to a section near the point",
+   "results": "{\"t\": \"2026-10-22T07:39:27Z\", \"tool\": \"leansearch\", \"query\": \"An isomorphism on stalks for a locally finite type scheme morphism over a locally Noetherian base extends to a section near the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso\", \"AlgebraicGeometry.Scheme.Hom.stalkMap_inv_hom_apply\", \"AlgebraicGeometry.PresheafedSpace.restrictStalkIso\"], \"digest\": \"7faab91dabbed9ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: spread_out_of_isGermInjective' requires an already constructed morphism Spec R to Y over X; the point-and-local-map bijection and verification that it lies over X remain separate arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible local homomorphism of scheme stalks gives a local inverse section by spreading out Spec of the local ring",
+   "results": "{\"t\": \"2026-10-22T07:42:17Z\", \"tool\": \"leanfinder\", \"query\": \"Invertible local homomorphism of scheme stalks gives a local inverse section by spreading out Spec of the local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\"], \"digest\": \"9074cac319303cce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: spread_out_of_isGermInjective' requires an already constructed morphism Spec R to Y over X; the point-and-local-map bijection and verification that it lies over X remain separate arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "spread_out_of_isGermInjective|SpecToEquivOfLocalRing",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"grep\", \"query\": \"spread_out_of_isGermInjective|SpecToEquivOfLocalRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\"], \"digest\": \"73c62b119ab633ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: spread_out_of_isGermInjective and its primed form supply the spreading step, already lem-sfb-local-ring-map-spread; the inverse-map construction and extraction of the specified stalk remain separate steps. Other hits are definitions or partial stalk facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type scheme morphism with invertible local ring map has a section on an open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T09:30:47Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type scheme morphism with invertible local ring map has a section on an open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\"], \"digest\": \"bc1e2ce9c28427ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: spread_out_of_isGermInjective and its primed form supply the spreading step, already lem-sfb-local-ring-map-spread; the inverse-map construction and extraction of the specified stalk remain separate steps. Other hits are definitions or partial stalk facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-23T09:30:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme.Hom.stalkMap\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: spread_out_of_isGermInjective and its primed form supply the spreading step, already lem-sfb-local-ring-map-spread; the inverse-map construction and extraction of the specified stalk remain separate steps. Other hits are definitions or partial stalk facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local inverse section near a point of a locally Noetherian scheme constructed from an inverse stalk map",
+   "results": "{\"t\": \"2026-10-23T09:30:54Z\", \"tool\": \"leanfinder\", \"query\": \"Local inverse section near a point of a locally Noetherian scheme constructed from an inverse stalk map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply\"], \"digest\": \"726b1118628fce2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: spread_out_of_isGermInjective and its primed form supply the spreading step, already lem-sfb-local-ring-map-spread; the inverse-map construction and extraction of the specified stalk remain separate steps. Other hits are definitions or partial stalk facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism on stalks for a locally finite type scheme morphism over a locally Noetherian base extends to a section near the point",
+   "results": "{\"t\": \"2026-10-23T09:30:55Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism on stalks for a locally finite type scheme morphism over a locally Noetherian base extends to a section near the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\"], \"digest\": \"b768ee26c91f83cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: spread_out_of_isGermInjective and its primed form supply the spreading step, already lem-sfb-local-ring-map-spread; the inverse-map construction and extraction of the specified stalk remain separate steps. Other hits are definitions or partial stalk facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Old step 5: construct Spec R to Y from the inverse local map, check the composite by the (x,id_R) bijection, and spread over X.",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invertible-stalk-neighbourhood-section",
+  "worker": "stage1",
+  "summary": "Constructed the inverse local map as a morphism from Spec of the stalk using 01J6; verified it lies over X using the normalized stalk composition and bijection; applied the existing 0BX6 Mathlib leaf and recovered the point and stalk identities. No new nodes or statement changes. Searched the project Lean and current blueprint.",
+  "blueprint": "Realizes the inherited from.place: old step 5 of lem-sfb-normal-modification-codimension-one, the inverse-local-map construction and spreading used in Stacks 0BFP(4), under the direct-image alteration route. The current latest direct-image proof (3) is read; the inherited blueprint.from.node is null and blueprint_refs ancestor returns None, so no ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic canonical Spec-stalk morphism and identity at its closed point, needed to translate the inverse local map into the input and output of the unit-local spreading lemma; no construction in this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-0cf97b52b",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-0cf97b52b (reviewer sub-agent of L); spot-checked: I read all of the item. The statement is true and matches Stacks 0BFP proof (4) and 0BX6 (2)(c), checked at morphisms.tex 10339ff and varieties.tex 3345-3376: X locally Noetherian, f locally of finite type, no separatedness or reducedness needed. Edge cases checked: f=id; Y = X⊔X (section through the chosen copy only); nonreduced X; non-closed x; s^♯_x has the right variance. Step 1: the 01J6 bijection (SpecToEquivOfLocalRing) gives φ from (y,β). Stalk composition gives normalized stalk β∘α=id, and injectivity gives f∘φ=c_x. Step 2: lem-sfb-local-ring-map-spread with S=T=X, a=id, g=f; its hypotheses match exactly. Step 3: s(x)=y and s^♯_x=β follow from s∘c_{x,W}=φ, canonical-morphism (2) and the composition formula; it is elementary. One fault, C1: step 3 identifies Y×_X W with f^{-1}(W) citing only def-pc-fibre-product, which does not state that. Fixed by citing the existing Mathlib leaf lem-weil-pbc-open-preimage-fibre-product (isPullback_morphismRestrict, Restrict.lean:586) in step 3's text, its uses and proof_deps. The declared tool use of lem-weil-pbc-spec-local-ring-canonical-morphism (sk-thm-p1, the generic canonical Spec O_{X,x}→X morphism, also in the spreading lemma's statement) is accepted. There are no new nodes and no duplicate of the item: the lem-per twin proof does the step inline. No SGA source. Searches were recorded with four tools and real results.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleStalkNeighbourhoodSection",
+  "declaration": "AlgebraicGeometry.Scheme.exists_neighbourhood_section_of_isIso_stalkMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleStalkNeighbourhoodSection.lean",
+  "statement": "theorem exists_neighbourhood_section_of_isIso_stalkMap {X Y : Scheme.{u}} [IsLocallyNoetherian X] (f : Y ⟶ X) [LocallyOfFiniteType f] (y : Y) [IsIso (f.stalkMap y)] : ∃ (W : X.Opens) (hx : f y ∈ W) (s : W.toScheme ⟶ Y) (hy : s ⟨f y, hx⟩ = y), s ≫ f = W.ι ∧ (Y.presheaf.stalkCongr (Inseparable.of_eq hy)).inv ≫ s.stalkMap ⟨f y, hx⟩ ≫ (W.stalkIso ⟨f y, hx⟩).hom = inv (f.stalkMap y) ∧ ∃ t : W.toScheme ⟶ (f ⁻¹ᵁ W).toScheme, t ≫ (f ⁻¹ᵁ W).ι = s ∧ t ≫ (f ∣_ W) = 𝟙 W.toScheme",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0bb369d5",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Every node clause is rendered: [IsLocallyNoetherian X], [LocallyOfFiniteType f], [IsIso (f.stalkMap y)] with the correct direction; ∃ W ∋ f y and s with s ⟨f y,hx⟩ = y and s ≫ f = W.ι; stalk clause (stalkCongr (of_eq hy)).inv ≫ s.stalkMap ≫ (W.stalkIso _).hom = inv (f.stalkMap y) type-checked by hand against Mathlib Restrict.lean:150 and Stalks.lean:408, canonical maps only; section t into f⁻¹ᵁ W tied to the same s with t ≫ (f ∣_ W) = 𝟙. No extra assumptions, single universe u, lean.statement verbatim, live vs snapshot node differ only in lean, no new definitions, no name collision, Mathlib spreading lemma is only proof step 2. Edge cases empty Y, f=id, disjoint copies, non-closed x all fine. Docstrings carry source, blueprint id and three proof steps; proof is sorry. Report has Worker report and Second reading by Q61 sections. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-completed-projection-exchange-paths",
+ "kind": "lemma",
+ "title": "Canonical generator witnesses for each completed diamond path",
+ "statement": "Fix D, l, E, operations o, canonical realization data rho, a compactified Cartesian square Q, and integral inputs K,L [def-sf-completed-projection-exchange-data]. Suppose all four word expressions are geometric and have their actual input domains. For any endpoint geometric and domain proofs, there exist integral arrows r1,r2 from integralSource to integralTarget such that CanonicalPair relates diamondLeft to r1 and diamondRight to r2. This does not assert either equality of the system paths or their integral realizations, and does not assert any input domain closure.",
+ "stmt_deps": [
+  "def-sf-completed-projection-exchange-data",
+  "def-sf-integral-system-realization-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48."
+ },
+ "proof": [
+  {
+   "text": "Expand the actual diamond paths into compactProjection, compactExchange, tensorPull, and the two pullComp square identifications. The square is the specified composite of pullComp and equality transport. Instantiate the corresponding BasicPair and CanonicalIsoPair generators on their expression subtrees.",
+   "uses": [
+    "def-sf-integral-system-realization-data",
+    "def-sf-completed-projection-exchange-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each basic generator use completionIso on its supplied subexpression domain to form CanonicalPair.basic. Use the pull, tensor, compactSupport and composition constructors in the ordered paths. All middle word domains are supplied; the hidden open bounds are components of their recursive domains. This constructs the two integral composites r1,r2 and their CanonicalPair witnesses; no equality argument is used.",
+   "uses": [
+    "def-sf-integral-system-realization-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-completed-projection-exchange-data",
+  "def-sf-integral-system-realization-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived inverse systems uniform constructible Tor bounds compact support finite expressions",
+   "results": "8 hits: InverseSystem.limit, InverseSystem.mk, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.invLimEquiv.congr_simp, DerivedCategory.TStructure.t, Condensed.instAB4StarCondensedMod, InverseSystem.globalEquiv",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical integral realization of generator paths projection exchange diamond",
+   "results": "8 hits: GenLoop.toLoop_apply, GenLoop.fromLoop_apply, SSet.Path.interval, GenLoop.toLoop, GenLoop.transAt, SSet.Path.arrow_interval, CategoryTheory.SimplicialThickening.Path.I, SSet.Truncated.Path.interval",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "CanonicalPair|IsNormalizedCoefficientSequence|compactificationProjection",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedProjectionExchangeRealization",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48.",
+   "via": [
+    "lem-sf-completed-projection-exchange-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompletedProjectionExchangePaths",
+  "file": "lean/Sheaf/SixFunctors/CompletedProjectionExchangePaths.lean",
+  "declaration": "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangePaths",
+  "statement": "theorem completedProjectionExchangePaths\n    (K : Integral l E Q.X.obj.left) (L : Integral l E Q.Y.obj.left)\n    (g₀ : (word Q 0).geometric) (g₃ : (word Q 3).geometric)\n    (h₀ : (word Q 0).domain l E o (inputs l E Q K L))\n    (h₃ : (word Q 3).domain l E o (inputs l E Q K L))\n    (_hwords : ∀ i : Fin 4, (word Q i).geometric ∧\n      (word Q i).domain l E o (inputs l E Q K L)) :\n    ∃ r₁ r₂ : integralSource l E Q K L ⟶ integralTarget l E Q K L,\n      CanonicalPair l E o ρ.compositors ρ.openComparisons ρ.canonicalBridge ρ.properOpen\n        ρ.ringedModels ρ.ringedOpenComparisons ρ.ringedProperOpen\n        ((inputReduction l E (spaces Q)).obj (inputs l E Q K L))\n        (inputs l E Q K L) (word Q 0) (word Q 3)\n        (diamondLeft l E o ρ Q ((calculus l E Q.X.obj.left).reduction.obj K)\n          ((calculus l E Q.Y.obj.left).reduction.obj L)) r₁ ∧\n      CanonicalPair l E o ρ.compositors ρ.openComparisons ρ.canonicalBridge ρ.properOpen\n        ρ.ringedModels ρ.ringedOpenComparisons ρ.ringedProperOpen\n        ((inputReduction l E (spaces Q)).obj (inputs l E Q K L))\n        (inputs l E Q K L) (word Q 0) (word Q 3)\n        (diamondRight l E o ρ Q ((calculus l E Q.X.obj.left).reduction.obj K)\n          ((calculus l E Q.Y.obj.left).reduction.obj L)) r₂",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed byte-identical with the clone's original; item proof checked against ρ.coherence and the Realizations/OpenComparisons/Compositors fields; Domains/System/Paths statements read against Statement's conjuncts, the CanonicalPair/BasicPair constructors and Expression.domain/admissible; node lean records checked against signatures"
+ }
+}

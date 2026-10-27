@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-scalar-p-isogeny-relative-frobenius",
+ "kind": "statement",
+ "title": "Scalar-p torus isogenies are relative Frobenius up to isomorphism",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] of characteristic $p>0$. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme]: smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Here unipotent means that all geometric points act by unipotent matrices in a faithful linear representation. Fix a split maximal torus $T\\subseteq G$: a subgroup isomorphic to $\\mathbf G_m^r$ and maximal among tori, where $\\mathbf G_m(R)=R^\\times$. Write $X^*(T)=\\operatorname{Hom}_{F\\text{-groups}}(T,\\mathbf G_m)$. Let $f:G\\to G$ be a surjective $F$-group-scheme homomorphism with finite scheme-theoretic kernel, where finite means finite-dimensional coordinate algebra. Assume $f(T)\\subseteq T$ as a factorization of scheme morphisms, and\n$$\\chi\\circ f|_T=p\\chi\\qquad(\\chi\\in X^*(T)).$$\nPut $C=F[G]$ and define the Frobenius twist $G^{(p)}=\\operatorname{Spec}(C\\otimes_{F,a\\mapsto a^p}F)$ with its base-changed group law [def-weil-affine-spectrum]. Define the relative Frobenius $F_{G/F}:G\\to G^{(p)}$ by the coordinate-algebra homomorphism $b\\otimes c\\mapsto c b^p$. Then there exists an isomorphism of $F$-group schemes $h:G^{(p)}\\xrightarrow{\\sim}G$ such that $f=h\\circ F_{G/F}$. No choice of a model over a finite field, compatibility with a chosen Borel, or prime-to-$p$ condition on the kernel is assumed. The cases of a torus and the trivial group are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-reductive-frobenius-twist] to $(G,T)$. It supplies the split reductive pair $(G^{(p)},T^{(p)})$, the full root-datum identification $\\iota:X^*(T)\\xrightarrow{\\sim}X^*(T^{(p)})$, and the Frobenius isogeny $F_{G/F}$ with $(F_{G/F}|_T)^*\\iota=p\\,\\mathrm{id}$. This is exactly the coordinate morphism specified in the statement, not a chosen finite-field model.",
+   "uses": [
+    "lem-sfb-reductive-frobenius-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.25--2.29, pp.47--49; proof of 23.27, p.493."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-root-datum-isogeny-realization] with $(G_1,S_1)=(G^{(p)},T^{(p)})$, $(G_0,S_0)=(G,T)$ and $u=\\iota$. The cokernel is zero. For each source root $\\alpha^{(p)}$ choose $b(\\alpha^{(p)})=\\alpha$ and $q_{\\alpha^{(p)}}=1$. The root equation is $\\iota(\\alpha)=\\alpha^{(p)}$; the coroot equation is $\\iota^\\vee((\\alpha^\\vee)^{(p)})=\\alpha^\\vee$, supplied by step 1's full root-datum identification. Thus the cited existence theorem gives $g:G^{(p)}\\to G$ inducing $\\iota$ on characters, and its isomorphism criterion makes $g$ an isomorphism. No kernel separability hypothesis is required.",
+   "uses": [
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-reductive-frobenius-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.9, p.487; 23.25--23.26, pp.492--493; Proposition 23.5 isomorphism criterion."
+   }
+  },
+  {
+   "text": "Set $a=g\\circ F_{G/F}$ and $b=f$. The former is an isogeny because composition with an isomorphism preserves surjectivity and the kernel; the latter is one by hypothesis. Both map $T$ into $T$. For every character $\\chi$, $\\chi\\circ a|_T=(\\iota\\chi)\\circ F_{G/F}|_T=p\\chi=\\chi\\circ f|_T$. Apply [lem-sfb-isogeny-torus-conjugacy] to these two maps with $G_1=G_0=G$ and $T_1=T_0=T$. It gives $t\\in T(F)$ with $f=\\operatorname{Int}(t)\\circ g\\circ F_{G/F}$.",
+   "uses": [
+    "lem-sfb-reductive-frobenius-twist",
+    "lem-sfb-isogeny-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, p.486; full isogeny theorem 23.25, pp.492--493."
+   }
+  },
+  {
+   "text": "Define $h=\\operatorname{Int}(t)\\circ g$. Conjugation by $t^{-1}$ is inverse to conjugation by $t$, so $h$ is an isomorphism with inverse $g^{-1}\\circ\\operatorname{Int}(t^{-1})$. Step 3 gives $f=h\\circ F_{G/F}$. When the roots are empty the same argument uses empty root bijections; for the trivial group both lattices are zero. Thus no rank, Borel compatibility or kernel reducedness assumption has been introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.25--23.26, p.493; elementary composition of the obtained isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-frobenius-twist",
+  "lem-sfb-root-datum-isogeny-realization",
+  "lem-sfb-isogeny-torus-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.25--2.29 and 23.25--23.26: root-datum isomorphism comparison with relative Frobenius, followed by Proposition 23.7 uniqueness and absorption of inner conjugation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of a split reductive algebraic group acting as multiplication by p on the character lattice factors as relative Frobenius followed by an isomorphism",
+   "results": "8 hits: coe_frobenius_comp_coe_frobeniusEquiv_symm, coe_frobeniusEquiv_symm_comp_coe_frobenius, frobeniusEquiv_symm_comp_frobenius, frobenius_comp_frobeniusEquiv_symm, frobenius_apply_frobeniusEquiv_symm, frobeniusEquiv_symm_apply_frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgEquiv_symm_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Frobenius on perfect rings or finite fields and Witt vectors, not the factorization of a reductive group isogeny by relative Frobenius. The scheme searches found no relative Frobenius isogeny comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isogeny inducing p on torus characters is relative Frobenius composed with an isomorphism of reductive groups",
+   "results": "8 hits: LinearMap.frobenius, FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic, frobenius, frobenius_apply_frobeniusEquiv_symm, coe_frobenius_comp_coe_frobeniusEquiv_symm, frobeniusEquiv_apply, coe_frobeniusEquiv_symm_comp_coe_frobenius",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Frobenius on perfect rings or finite fields and Witt vectors, not the factorization of a reductive group isogeny by relative Frobenius. The scheme searches found no relative Frobenius isogeny comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeFrobenius\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Frobenius on perfect rings or finite fields and Witt vectors, not the factorization of a reductive group isogeny by relative Frobenius. The scheme searches found no relative Frobenius isogeny comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|frobenius.*[Ii]sIso|Frobenius.*isogen",
+   "results": "0 hits: . Search directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Frobenius on perfect rings or finite fields and Witt vectors, not the factorization of a reductive group isogeny by relative Frobenius. The scheme searches found no relative Frobenius isogeny comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A p power torus isogeny between reductive group schemes is a Frobenius isogeny with first Frobenius kernel",
+   "results": "8 hits: coe_frobeniusEquiv, frobeniusEquiv_apply, frobeniusEquiv_def, frobeniusEquiv, frobeniusEquiv_symm_apply_frobenius, WittVector.frobeniusEquiv_apply, iterateFrobeniusEquiv, FiniteField.frobeniusAlgEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Frobenius on perfect rings or finite fields and Witt vectors, not the factorization of a reductive group isogeny by relative Frobenius. The scheme searches found no relative Frobenius isogeny comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Frobenius on perfect rings or finite fields and Witt vectors, not the factorization of a reductive group isogeny by relative Frobenius. The scheme searches found no relative Frobenius isogeny comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of a reductive group acting by p on torus characters is relative Frobenius followed by an isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:47:23Z\", \"tool\": \"leanfinder\", \"query\": \"An isogeny of a reductive group acting by p on torus characters is relative Frobenius followed by an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_frobenius_comp_coe_frobeniusEquiv_symm\", \"frobenius_comp_frobeniusEquiv_symm\", \"WittVector.IsocrystalEquiv.frob_equivariant\", \"FiniteField.frobeniusAlgEquiv_symm_apply\", \"MonoidHom.map_frobeniusEquiv_symm\", \"FiniteField.frobeniusAlgEquiv\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.frobeniusAlgEquiv_apply\"], \"digest\": \"10fb6c07426a0bd1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned maps concern perfect rings, finite fields and isocrystals. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118 and FieldTheory/Perfect.lean:119-122; these give semilinear ring Frobenius and a perfect-ring equivalence, not a reductive group scheme factorization. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeFrobenius\"",
+   "results": "{\"t\": \"2026-10-23T21:47:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeFrobenius\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned maps concern perfect rings, finite fields and isocrystals. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118 and FieldTheory/Perfect.lean:119-122; these give semilinear ring Frobenius and a perfect-ring equivalence, not a reductive group scheme factorization. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|frobenius.*isogen|isogen.*frobenius",
+   "results": "{\"t\": \"2026-10-23T21:47:22Z\", \"tool\": \"grep\", \"query\": \"relativeFrobenius|frobenius.*isogen|isogen.*frobenius\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned maps concern perfect rings, finite fields and isocrystals. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118 and FieldTheory/Perfect.lean:119-122; these give semilinear ring Frobenius and a perfect-ring equivalence, not a reductive group scheme factorization. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive group isogeny scalar p on character lattices factors through relative Frobenius by an isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:47:22Z\", \"tool\": \"leansearch\", \"query\": \"A reductive group isogeny scalar p on character lattices factors through relative Frobenius by an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.frobenius\", \"FiniteField.Extension.frob\", \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"frobeniusEquiv\", \"WittVector.IsocrystalEquiv.frob_equivariant\", \"frobenius_inj\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\"], \"digest\": \"25e4a5ceace64370\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned maps concern perfect rings, finite fields and isocrystals. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118 and FieldTheory/Perfect.lean:119-122; these give semilinear ring Frobenius and a perfect-ring equivalence, not a reductive group scheme factorization. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar multiplication by the characteristic on a maximal torus determines a Frobenius isogeny of a reductive algebraic group",
+   "results": "{\"t\": \"2026-10-23T21:48:23Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar multiplication by the characteristic on a maximal torus determines a Frobenius isogeny of a reductive algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_frobeniusEquiv\", \"frobeniusEquiv_apply\", \"LinearMap.frobenius\", \"FiniteField.frobeniusAlgHom\", \"FiniteField.coe_frobeniusAlgHom\", \"FiniteField.frobeniusAlgEquiv_apply\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\"], \"digest\": \"6487f44bca7032c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned maps concern perfect rings, finite fields and isocrystals. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118 and FieldTheory/Perfect.lean:119-122; these give semilinear ring Frobenius and a perfect-ring equivalence, not a reductive group scheme factorization. AlgebraicGeometry grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-frobenius-tensor-simplicity",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h.",
+   "via": [
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scalar-p-isogeny-relative-frobenius",
+  "worker": "stage1",
+  "summary": "Construct the comparison isomorphism using the existing root-datum isogeny realization theorem, compute the two character maps, and absorb the torus-conjugacy ambiguity. Two supporting statement-only nodes: Frobenius twist/root datum and uniqueness of isogenies. No mathematical statement change; normalize doubled TeX escapes.",
+  "blueprint": "Nearest ancestor is null (blueprint_refs.py ancestor); retained the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/representation-theory via chain. This realizes the scalar-p comparison input in restricted-frobenius-tensor-simplicity. Read the latest 20261024 ctf-stability unit and direct-images proof; global blueprint searches for isogeny, Frobenius twist and root datum found no matching theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-4b9447349",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-4b9447349 (reviewer sub-agent of L); spot-checked: Shape: the delivery is one commit containing the item, two new statement-only nodes (created.item is the item) and a report with a Review section. The item is still unsplit in clones/live and side-live with the same statement, so it is not superseded and its statement is unchanged. Sources read in Milne iAG2017: 2.27-2.29 (Prop 2.29: F_G is an isogeny of degree p^dim and faithfully flat), Prop 23.7 (p.486), Thm 23.25, Rem 23.26 and Cor 23.27 (pp.492-493). Step 1: the twist node's statement gives everything the step uses (G^(p) reductive, T^(p) split maximal, iota preserving roots/coroots/pairing, F_{G/F} an isogeny with T->T^(p), chi^(p)∘F|_T = p chi). Step 2: in lem-sfb-root-datum-isogeny-realization, u=iota is injective with zero cokernel; with b(alpha^(p))=alpha and q=1 the root equation iota(alpha)=alpha^(p) holds, and the coroot equation (alpha^vee)^(p)∘iota = alpha^vee holds because the pairing is preserved. Its existence clause gives g, and its isomorphism criterion (all q=1, u bijective) makes g an isomorphism. Step 3: a=g∘F has kernel ker F and is surjective; chi∘g∘F|_T = (iota chi)∘F|_T = p chi = chi∘f|_T, so the conjugacy node applies with G_1=G_0=G and gives f=Int(t)∘a. Step 4 is elementary. Twist node: true by 2.29 plus 23.27 base change along the automorphism sigma of the perfect field F; naturality gives the character formula, and the coordinate map is well defined. Torus-conjugacy node: Milne 23.7 over an algebraically closed F. The hypotheses force a(T_1)=T_0 and the same root-data isogeny. t exists in T_0(F) because the simple roots are independent and F^x is divisible. The order inn(t)∘phi_1 is the correct one; Milne's printed last line reverses it. Small cases checked: tori (a=b), trivial group, SL_2 in char 2 with non-reduced kernel, char 0. A DAG scan for Frobenius twist, G^{(p)}, Int/inner with isogeny, and Milne 2.25-2.29/23.7/23.25 sources found no duplicate; the realization node has no uniqueness clause, and affine-group-frobenius-smooth-image is about smooth images. Batch-5 flags: lem-trf-fppf-covering-base-change and lem-trf-smooth-composition are generic scheme facts reached through existing structure-theory nodes, not steps of the trace formula or Poincare duality, so all three listed citations are accepted. No SGA cited, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ScalarPIsogenyRelativeFrobenius",
+  "declaration": "AlgebraicGeometry.scalarPIsogeny_relativeFrobenius",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarPIsogenyRelativeFrobenius.lean",
+  "statement": "theorem scalarPIsogeny_relativeFrobenius {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [Fact p.Prime] [CharP F p] (G T : Grp (Over (Spec (.of F)))) (i : T ⟶ G) (hG : ReductiveTorusCentralizer.IsReductive G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (f : G ⟶ G) [Surjective f.hom.hom.left] [IsFinite (GrpObj.ker f.hom.hom).hom] (fT : T ⟶ T) (hfT : fT ≫ i = i ≫ f) (hscalar : ∀ χ : T.X ⟶ StandardGroupSchemes.multiplicative F, IsMonHom χ → fT.hom.hom ≫ χ = χ ^ p) : ∃ h : ((Over.pullback (Spec.map (CommRingCat.ofHom (frobenius F p)))).mapGrp.obj G) ≅ G, ((f ≫ h.inv).hom.hom.left ≫ pullback.fst G.X.hom (Spec.map (CommRingCat.ofHom (frobenius F p)))).IsFrobenius p",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The twist is (Over.pullback (Spec.map (frobenius F p))).mapGrp.obj G with its actual base-changed group law. The factorization is expressed equivalently by requiring f followed by h inverse and the projection to G to be absolute Frobenius. Both f and h lie over F, so the other projection is the structure map, and the pullback universal property gives exactly the relative Frobenius with coordinate map b tensor c ↦ c*b^p. IsFrobenius is nonvacuous here: the affine F-scheme G is of characteristic p."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59f820ac8",
+  "group": "N7",
+  "result": "pass",
+  "note": "Node diff vs side-live: lean plus 3 added stmt_deps; the added nodes (reductive-torus-centralizer-terminology, tori-multiplicative-type, sc-gm-ga) are landed and used. lean.statement is verbatim in the file. IsReductive and IsMaximalTorus match the node over an algebraically closed F; hsplit allows rank 0. Surjectivity is on the underlying scheme; IsFinite applies to the scheme-theoretic GrpObj.ker, so non-reduced kernels are allowed. fT/hfT is the factorization of f through T. hscalar covers every IsMonHom character, and chi^p is Mathlib's pointwise Hom.monoid, i.e. p*chi. The twist is Over.pullback(Spec Frob).mapGrp, giving the base-changed group law. The conclusion IsFrobenius(fst after h.inv after f) is equivalent to f = h after F_{G/F}: IsFrobenius pins down the absolute Frobenius uniquely on char-p F-schemes, and the second projection is the structure map because the maps are over F. The existing relativeFrobenius needs absolute Frobenius as data, which the library cannot construct, so this is not a duplicate notion. Edge cases checked: trivial group, torus, mu_p kernel, p=2; single universe. Docstrings carry the source, blueprint id and 4-step proof plan; proof is sorry only. Report has Worker report and Second reading sections. Not compiled because nothing was changed."
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "lem-zl-constant-extension-sheet-coefficient-equivalences",
+ "kind": "lemma",
+ "title": "Finite, integral and rational cyclic sheet equivalences",
+ "statement": "Fix the finite-field datum D, m$\\ge$1, separated finite-type X_0, a coefficient prime l$\\ne$p, and G : ZlSheetGeometry D m hm X_0 as in [def-zl-constant-extension-sheet-heart-data]. The actual canonical sheet maps satisfy ZlSheetCoefficientClauses D m hm X_0 l hl: finite, integral and rational product equivalences detecting both standard halves with exact full-heart restrictions; cohomology, coefficient reductions and quotient comparisons; and normalized integral and rational scalar-extension comparisons for all finite coefficient fields. No common-stage or Weil-coordinate conclusion is asserted.",
+ "stmt_deps": [
+  "def-zl-constant-extension-sheet-heart-data"
+ ],
+ "proof": [
+  {
+   "text": "For each coordinate isomorphism $r_i:X\\xrightarrow{\\sim}Y_i$ and for $g_X$, use [lem-weil-proetale-isomorphism-inverse-image]: reindexing on the pro-etale sites gives exact inverse equivalences on constant-coefficient module sheaves. By [lem-weil-isomorphism-derived-pullback] the actual finite and integral pullbacks are the termwise inverse-image functors with the specified coefficient action. The finite constructible categories are preserved by that lemma, for both the isomorphism and its inverse. At integral, rational and common-field stages [lem-pod-isomorphism-field-transport] supplies the actual inverse equivalences and their scalar-compatible inverse identities. Termwise exact inverse image commutes with kernels and images, hence with cohomology. It preserves both integral standard halves; the rational and common-field halves are isomorphism closures of the preceding halves by [def-weil-constructible-standard-tstructure], so both inverse functors preserve those halves too. They therefore restrict to equivalences of standard hearts; these are exact since kernels and cokernels are preserved by an additive equivalence of abelian categories.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-pod-isomorphism-field-transport",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Functoriality of the pro-etale site; isomorphism reindexing, followed by the prescribed integral and field coefficient constructions"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-finite-clopen-derived-decomposition] to $Y=\\coprod_iY_i$ and compose its restriction equivalence with the coordinate equivalences of Step 3. Since $h_i=j_i\\circ r_i$, the composition isomorphism $L(j_ir_i)^*\\xrightarrow{\\sim}Lr_i^*Lj_i^*$ of [lem-weil-pbc-proetale-derived-pullback-composition] at finite level and of [lem-pod-integral-pullback-composition] at integral level, rationalized and passed to common stages by the morphism rules of [def-weil-derived-pullback-tensor-hom], identifies this composite naturally with $R:N\\mapsto(h_i^*N)_i$; a functor naturally isomorphic to an equivalence is an equivalence. A quasi-inverse first transports $A_i$ to $Y_i$ by the inverse of $r_i^*$, then glues by the finite clopen quasi-inverse. Componentwise cohomology in the cited lemma and Step 3 show that $R$ and its inverse preserve the standard halves and restrict to exact heart equivalences. The same lemma gives compatibility with reduction and scalar extension for clopen restriction, and Step 3 gives it for each coordinate isomorphism. Their composites give that compatibility for $R$ and its inverse. Thus every coefficient stage in the statement is covered. An individual $h_i^*$ is an exact projection after this equivalence; its coordinate factor $r_i^*$, rather than this projection from all of $Y$, is the equivalence.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS, lemma-mapping-property-glue; disjoint-cover specialization and its coefficient-stage extension"
+   }
+  },
+  {
+   "text": "The compositors used above are the specified ones, not arbitrary choices: [lem-pod-integral-pullback-composition] prescribes all finite reductions and the associativity identity, so the repeated comparison $(g_X^m)^*\\simeq P^m$ is coherent. Part 1 of [lem-pod-pullback-identities-scalar-extension] says that extending a compositor and then applying the two scalar comparisons equals applying the scalar comparison for the composite and then the new compositor. Thus every $\\tau_i$, including the iterated return, commutes with finite coefficient extension. Rationalization sends the same integral comparisons to rational arrows; in the actual common-stage category of [def-weil-derived-pullback-tensor-hom], arrows are their classes over a common finite field. The preceding equality makes the two induced common-stage arrows equal after any further extension. Hence the coordinate constructions and equations retain exactly the integral normalization required by [def-zl-weil-ind-sheaf-category].",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "lem-pod-pullback-identities-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; integral and common-stage comparisons as specified by the cited nodes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pod-isomorphism-field-transport",
+  "def-weil-constructible-standard-tstructure",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-pullback-identities-scalar-extension",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), (1.1.10) and following paragraph, pp.150–152; explicit semilinear sheet calculation and coefficient-stage assembly from cited DAG statements"
+ },
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7) and paragraph after (1.1.10), pp.150–152; geometric splitting, coefficient enhancement and transition-arrow coordinates (returned steps 1–2 and coordinate part of step 3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullbacks to the components of a finite clopen partition give a product equivalence preserving constructibility cohomology and scalar extension",
+   "results": "Eight unrelated Profinite.NobelingProof and locally-constant decomposition results; no derived coefficient equivalence.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, CategoryTheory.Functor.pi'",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*equivalence|clopen.*cohomology",
+   "results": "One unrelated measure-theoretic clopenability equivalence. Project search found finiteClopen_constructible_equivalences and isomorphismFieldTransport; the factorization/comparison and standard-heart assembly remains to be done.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite clopen partition equivalence of derived categories of module sheaves",
+   "results": "Clopen topological partitions, HasDerivedCategory.standard, and sheaf-module finite limits; no derived coefficient-stage product theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionSheetHeartCoordinates",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Stage-3 proof part 2; original steps 3–4 and 7",
+   "via": [
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "lem-zl-constant-extension-sheet-heart-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantExtensionSheetCoefficientEquivalences",
+  "file": "lean/Sheaf/Paper/ConstantExtensionSheetCoefficientEquivalences.lean",
+  "declaration": "WeilConjectures.constantExtensionSheetCoefficientEquivalences",
+  "statement": "theorem constantExtensionSheetCoefficientEquivalences (G : ZlSheetGeometry D m hm X₀) : ZlSheetCoefficientClauses D m hm X₀ l hl",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ff04",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122459-L-1775850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ff04",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122459-L-1775850",
+  "kind": "interface",
+  "note": "independent cc review: HeartData.lean vs clone item module (verbatim 20 interfaces, only blueprint ids differ); item proof vs 3 new sorry statements + proved fixedPairTransport/sheetWeilCoordinates; sandbox --all compile + #print axioms (propext/choice/Quot.sound/sorryAx)"
+ }
+}

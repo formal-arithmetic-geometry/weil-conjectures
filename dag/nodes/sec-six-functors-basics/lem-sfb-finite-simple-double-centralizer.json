@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-finite-simple-double-centralizer",
+ "kind": "statement",
+ "title": "Finite double-centralizer theorem for a faithful simple module",
+ "statement": "Let $A$ be a unital associative ring, not necessarily commutative, and let $M$ be a nonzero unital left $A$-module (an abelian group with an additive, distributive action satisfying $(ab)m=a(bm)$ and $1m=m$). Assume that $M$ is faithful, meaning that $am=0$ for every $m\\in M$ implies $a=0$, and simple, meaning that the only additive subgroups of $M$ stable under all $a\\in A$ are $0$ and $M$. Let $C=\\operatorname{End}_A(M)$ be the ring of additive maps $c:M\\to M$ satisfying $c(am)=ac(m)$, with pointwise addition and multiplication given by composition. Give $M$ its left $C$-action $c\\cdot m=c(m)$. Suppose $M$ is finitely generated for this action [def-weil-finitely-generated-module]: there are $m_1,\\ldots,m_r\\in M$ such that every $m\\in M$ has the form $\\sum_{i=1}^r c_i(m_i)$ for $c_i\\in C$. Then the canonical homomorphism $A\\to\\operatorname{End}_C(M)$ is surjective. Explicitly, for every additive $f:M\\to M$ satisfying $f(c(m))=c(f(m))$ for all $c\\in C,m\\in M$, there is $a\\in A$ such that $f(m)=am$ for every $m\\in M$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.1, printed p.279, displayed double-centralizer theorem (attributed there to Lang 2002, XVII, 3.5); stated as surjectivity of the canonical action map, with the faithful hypothesis retained."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a simple left module finite over its endomorphism ring the canonical map from the original ring to its double endomorphism ring is surjective",
+   "results": "8 hits: Module.Finite.toModuleEnd_moduleEnd_surjective, Module.End.ringHomEndFinsupp_surjective, IsSimpleModule.toSpanSingleton_surjective, IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, Module.End.mulSemiringActionToAlgEquiv_conjAct_surjective, jacobson_density, Module.End.instDivisionRing, Module.End.injective_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "match: Module.Finite.toModuleEnd_moduleEnd_surjective; source and hypotheses read at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobson density theorem for a simple module finitely generated over its endomorphism ring gives surjectivity onto the double centralizer",
+   "results": "8 hits: Module.Finite.toModuleEnd_moduleEnd_surjective, jacobson_density, DoubleCentralizer.mk.inj, IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, IsSemisimpleModule.jacobson_le_ker, IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end, IsSemisimpleModule.exists_end_ringEquiv, IsSimpleModule.jacobson_eq_bot",
+   "date": "2026-10-23",
+   "verdict": "match: Module.Finite.toModuleEnd_moduleEnd_surjective; source and hypotheses read at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.toModuleEnd_moduleEnd_surjective",
+   "results": "1 hits: Module.Finite.toModuleEnd_moduleEnd_surjective",
+   "date": "2026-10-23",
+   "verdict": "match: Module.Finite.toModuleEnd_moduleEnd_surjective; source and hypotheses read at the lines in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "toModuleEnd_moduleEnd_surjective|IsSimpleModule.toIsSemisimpleModule",
+   "results": "1 hits: Mathlib/RingTheory/SimpleModule/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "match: Module.Finite.toModuleEnd_moduleEnd_surjective; source and hypotheses read at the lines in mathlib_match.how"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite.toModuleEnd_moduleEnd_surjective",
+  "file": "Mathlib/RingTheory/SimpleModule/Basic.lean",
+  "line": 581,
+  "how": "specializes in one line: Module.Finite.toModuleEnd_moduleEnd_surjective (R := A) (M := M). Declaration and proof read at lines 581–592, section variables at lines 559–564. Its IsSemisimpleModule A M instance is inferred from IsSimpleModule A M by the instance at lines 68–69 of the same file. Module.Finite (Module.End A M) M is exactly the displayed finite-generation hypothesis. The faithful hypothesis is allowed but not needed for this surjectivity conclusion."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-matrix-group-fixed-vector",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Linear-algebra prerequisite for the fixed-vector input: Milne Proposition 14.1, applied after showing all matrices in the image of the requested representation are unipotent. Supporting input: Proposition 14.1, printed p.279, displayed double-centralizer theorem (attributed there to Lang 2002, XVII, 3.5); stated as surjectivity of the canonical action map, with the faithful hypothesis retained.",
+   "via": [
+    "lem-sfb-unipotent-matrix-group-fixed-vector",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

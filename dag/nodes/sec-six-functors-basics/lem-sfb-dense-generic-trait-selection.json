@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-dense-generic-trait-selection",
+ "kind": "statement",
+ "title": "Trait selection meeting a prescribed generic open with finite fraction field",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$, generic point $\\eta$ and closed point $s$ of $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $Y$ be an integral scheme [def-pc-integral-scheme] of finite type over $S$ [def-weil-finite-type-morphism], whose structural map is dominant, meaning that its image is dense in $S$. Suppose that the fibre $Y_s$ [def-pc-scheme-fibre] is nonempty. For every nonempty open subscheme $U\\subseteq Y_\\eta$ [def-weil-open-immersion] there exist a discrete valuation ring $R_0$, a local injective homomorphism $R\\to R_0$, a finite extension $K_0/K$ of fraction fields [def-pc-field-extension] (finite-dimensional as a $K$-vector space), and an $S$-morphism $c:\\operatorname{Spec}R_0\\to Y$ whose generic restriction factors through $U$ and whose closed point maps into $Y_s$. Neither excellence nor completeness of $R$ is assumed; $R_0$ is not required to be finite as an $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU, more-morphisms-lemma-quasi-finite-quasi-section-meeting-nearby-open-X, applied at a closed point of the special fibre, followed by Tag 00PH, algebra-lemma-exists-dvr, applied to the local integral curve selected there. The latter is in literature/stacks-project/algebra.tex."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-open-immersion",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $t$ of $R$. By [def-sc-discrete-valuation-ring], every ideal of $R$ is principal, hence finitely generated, so $R$ is Noetherian and $S$ is locally Noetherian. Every nonzero prime $\\mathfrak p=(a)$, with $a\\ne0$, equals $(t)$: write $a=tb$ since $\\mathfrak p\\subseteq\\mathfrak m_R$; primality gives $t\\in\\mathfrak p$ or $b\\in\\mathfrak p$, and the latter gives $b=ac=tbc$, hence $1=tc$, impossible. Thus $D(t)=\\{(0)\\}$. The domain $R[1/t]$ is a field, since a nonzero nonunit would lie in a nonzero maximal ideal by [lem-weil-pbc-proper-ideal-contained-in-maximal], whose contraction would be a nonzero prime of $R$ avoiding $t$: a nonzero fraction in that maximal ideal has nonzero numerator in its contraction. Consequently $R[1/t]=K$ and $\\eta=D(t)$ as open subschemes. Thus the given $U$ is open in $Y$. Choose an affine open $X=\\operatorname{Spec}B\\subseteq Y$ meeting $Y_s$. By [lem-weil-pbc-lft-affine-pairs], $B$ is a finite type $R$-algebra. The ideal $tB$ is proper because $X_s$ is nonempty. Choose a maximal ideal $\\mathfrak m\\supseteq tB$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. Its point $x$ is closed in $X_s=\\operatorname{Spec}(B/tB)$, by the affine spectrum description [def-weil-affine-spectrum, def-pc-scheme-fibre].",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, hypotheses; choice of a closed point after restriction to an affine open meeting the special fibre. Algebra Tag 00E0, algebra-lemma-Zariski-topology, maximal ideal existence."
+   }
+  },
+  {
+   "text": "The integral scheme $Y$ is irreducible [def-pc-integral-scheme], and has a generic point $\\xi$ by [lem-sc-scheme-sober]. The defining equality $\\overline{\\{\\xi\\}}=Y$ means that $\\xi$ belongs to every nonempty open, hence to $U$ and $X$, and specializes to $x$. Since $U\\subseteq Y_\\eta$, its image is $\\eta\\ne s$. Apply [lem-sfb-quasi-section-nearby-open] to $X\\to S$, the point $x$, and the open $U\\cap X$. It gives an integral closed subscheme $Z\\subseteq X$ with generic point $z\\in U\\cap X$, containing $x$, and quasi-finite over $S$ at $x$. All hypotheses are now verified: the morphism is locally of finite type, $S$ is locally Noetherian, $x$ is closed in its fibre, and $\\xi$ is the required nearby point.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "lem-sfb-quasi-section-nearby-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, more-morphisms-lemma-quasi-finite-quasi-section-meeting-nearby-open-X, application and the reduced-closure construction in its proof."
+   }
+  },
+  {
+   "text": "By the affine description of a closed immersion [def-weil-closed-immersion], $Z=\\operatorname{Spec}C$ for a quotient $C$ of $B$. Images of the finite $R$-algebra generators of $B$ generate $C$, so $Z\\to S$ is of finite type. Hence $Z$ is locally Noetherian by [pqf-lem-locnoeth-lft]. By [lem-sc-quasi-finite-points-open], the quasi-finite locus $Q\\subseteq Z$ is open, contains $x$, and is locally quasi-finite over $S$. Choose an affine open neighbourhood $W=\\operatorname{Spec}E$ of $x$ inside $Q$. The open $W$ contains $z$: otherwise the closed complement $Z\\setminus W$ would contain $z$, hence its closure $Z$, contradicting $x\\in W$. The integral affine $W$ is quasi-compact, and $W\\to S$ is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens] applied to $Q\\to S$, the open $W\\subseteq Q$ and $V=S$. Therefore [lem-weil-pbc-lqf-qc-source-bounded-fibres] gives that $W_\\eta$ is the spectrum of a finite-dimensional $K$-algebra $D$. By [lem-sbc-affine-fibre-sections-tensor] applied to $W\\to\\operatorname{Spec}R$, the affine open $W$ itself and the prime $(0)$, $D=\\Gamma(W_\\eta,\\mathcal O)\\cong E\\otimes_R\\kappa(\\eta)=E\\otimes_R K$, compatibly with $E\\to D$; since $K=R[1/t]$ by step 1, $D=E[1/t]$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-quasi-finite-points-open",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-sbc-affine-fibre-sections-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01TI (lemma-quasi-finite-points-open), 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded). Tag 01TH (4) for restriction to the open W; affine fibre ring as a tensor product."
+   }
+  },
+  {
+   "text": "Put $L=\\kappa(z)=\\mathcal O_{Z,z}$. By [lem-sc-integral-function-field-affine-fraction] applied to $Z$ and $W$, $E$ is an integral domain and $L$ is its fraction field. The point $z$ lies over $\\eta$, giving the inclusion $K\\hookrightarrow L$; consequently the structural map $R\\to E\\hookrightarrow L$ is injective. In particular $t$ remains nonzero. The map $E[1/t]\\to L$ sends $e/t^n$ to its fraction in $L$; it is injective because $E\\hookrightarrow L$ is injective and $t\\ne0$. It extends the structural inclusion $K=R[1/t]\\hookrightarrow L$, so it identifies the generic-fibre algebra $D$ with a $K$-subalgebra of $L$. Thus $D$ is a nonzero domain with fraction field $L$. Since $D$ is finite-dimensional over $K$, [lem-weil-pbc-finite-dimensional-domain-is-field] makes it a field. It equals $L$: every element of $L$ is $a/b$ for $a,b\\in E$, $b\\ne0$, and $b$ already has an inverse in the field $D$. Hence $L/K$ is finite. Set $K_0=L$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; Tag 03JA, finite generic fibre; elementary fraction-field identification of a localization that is a field."
+   }
+  },
+  {
+   "text": "The points $x,z\\in Z$ are distinct, since their images in $S$ are $s$ and $\\eta$. Apply [lem-sfb-nongeneric-point-same-field-dvr] to the integral locally Noetherian $Z$, its generic point $z$, and its nongeneric point $x$. We obtain a discrete valuation subring $R_0\\subseteq L$ with fraction field exactly $L$ and a morphism $a:\\operatorname{Spec}R_0\\to Z$ whose closed point maps to $x$ and whose generic restriction is the canonical $\\operatorname{Spec}L\\to Z$. Composing with $Z\\hookrightarrow X\\hookrightarrow Y$ gives $c$. Its generic point maps to $z\\in U$; the canonical generic-point morphism therefore factors through the open $U$. Its closed point maps to $x\\in Y_s$.",
+   "uses": [
+    "lem-sfb-nongeneric-point-same-field-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F, properties-lemma-locally-Noetherian-specialization-dvr, same-field case; algebraic input Tag 00PH, algebra-lemma-exists-dvr."
+   }
+  },
+  {
+   "text": "Equip $\\operatorname{Spec}R_0$ with the $S$-structure given by the composite $c$ followed by $Y\\to S$; then $c$ is an $S$-morphism by construction. Let $R\\to R_0$ be its affine ring map. Its composite into $K_0=L$ is $R\\hookrightarrow K\\hookrightarrow L$, since the generic restriction is the canonical generic-point morphism. It is therefore injective and induces the finite extension $K_0/K$ from step 4. On affine spectra [def-weil-affine-spectrum], the image of the prime $\\mathfrak m_{R_0}$ is its inverse image in $R$. Since that image is the closed point $s$, the inverse image is $\\mathfrak m_R$. Hence the ring map is local; injectivity lets us write this as $\\mathfrak m_{R_0}\\cap R=\\mathfrak m_R$. These are all the requested conclusions. The construction never asserted that $R_0$ is module-finite over $R$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, domination conclusion; affine spectrum functor applied to the constructed composite."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "lem-sfb-quasi-section-nearby-open",
+  "def-weil-closed-immersion",
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-sfb-nongeneric-point-same-field-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU, followed by Tags 01TI, 03JA, 01RV in morphisms.tex and Tag 054F in properties.tex (same-field Tag 00PH). Assembly written by Q69."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?section|nearby.?open|quasiFinite.*closed|closed.*quasiFinite",
+   "results": "{\"t\": \"2026-10-22T05:42:53Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|nearby.?open|quasiFinite.*closed|closed.*quasiFinite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"6b1683d13ff48b88\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite quasi section through closed point meeting prescribed open subscheme",
+   "results": "{\"t\": \"2026-10-22T05:42:53Z\", \"tool\": \"leansearch\", \"query\": \"Quasi finite quasi section through closed point meeting prescribed open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\"], \"digest\": \"409aba63363a7c69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.QuasiFinite\"",
+   "results": "{\"t\": \"2026-10-22T05:42:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.QuasiFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism to a locally noetherian scheme has a quasi finite closed subscheme through a closed fibre point meeting a prescribed open generalization",
+   "results": "{\"t\": \"2026-10-22T05:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism to a locally noetherian scheme has a quasi finite closed subscheme through a closed fibre point meeting a prescribed open generalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"947b7136eb307a72\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite quasi section meeting nearby open subscheme through closed point of fibre",
+   "results": "{\"t\": \"2026-10-22T05:43:04Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi finite quasi section meeting nearby open subscheme through closed point of fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.instLocallyQuasiFiniteResLE\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\"], \"digest\": \"9390b3df72e5af57\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Select a trait through the special fibre with finite generic field extension meeting a dense generic open of a finite type integral scheme over a DVR",
+   "results": "{\"t\": \"2026-10-22T05:44:33Z\", \"tool\": \"leansearch\", \"query\": \"Select a trait through the special fibre with finite generic field extension meeting a dense generic open of a finite type integral scheme over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\"], \"digest\": \"6e9aebbcceea82be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral finite type scheme over a discrete valuation ring with nonempty special fibre admits a DVR point with finite fraction field extension and generic point in any prescribed nonempty generic open",
+   "results": "{\"t\": \"2026-10-22T05:44:40Z\", \"tool\": \"leanfinder\", \"query\": \"An integral finite type scheme over a discrete valuation ring with nonempty special fibre admits a DVR point with finite fraction field extension and generic point in any prescribed nonempty generic open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.Scheme.functionField\"], \"digest\": \"96e219cd8ed1982d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "grep",
+   "query": "DVR.*(dense|open)|trait.*(dense|open)|quasi.?section|finite.*extension.*valuation",
+   "results": "{\"t\": \"2026-10-22T05:44:52Z\", \"tool\": \"grep\", \"query\": \"DVR.*(dense|open)|trait.*(dense|open)|quasi.?section|finite.*extension.*valuation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-finiteness definitions and valuative properness do not select a finite-extension trait through an arbitrary finite-type integral scheme meeting a prescribed generic open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Curve selection over a discrete valuation ring with finite fraction field extension and prescribed generic open",
+   "results": "{\"t\": \"2026-10-22T07:08:16Z\", \"tool\": \"leansearch\", \"query\": \"Curve selection over a discrete valuation ring with finite fraction field extension and prescribed generic open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_isDiscreteValuationRing\", \"WeierstrassCurve.IsIntegral.mk\", \"WeierstrassCurve.integralModel\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"WeierstrassCurve.exists_isMinimal\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"WeierstrassCurve.IsIntegral.integral\", \"WeierstrassCurve.exists_isIntegral\"], \"digest\": \"538ab22e9565c808\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral finite type scheme over a DVR with nonempty special fibre admits a discrete valuation ring point whose fraction field is finite over the base fraction field and whose generic image is in any nonempty generic open",
+   "results": "{\"t\": \"2026-10-22T07:08:26Z\", \"tool\": \"leanfinder\", \"query\": \"An integral finite type scheme over a DVR with nonempty special fibre admits a discrete valuation ring point whose fraction field is finite over the base fraction field and whose generic image is in any nonempty generic open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.functionField\"], \"digest\": \"7ce333cd1c49beea\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trait|quasi.?section|nearby.?open|finite.*fraction.*field",
+   "results": "{\"t\": \"2026-10-22T07:13:11Z\", \"tool\": \"grep\", \"query\": \"trait|quasi.?section|nearby.?open|finite.*fraction.*field\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T07:13:12Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.exists_units_eq_smul_zpow_of_irreducible\", \"IsDiscreteValuationRing.isRankOneDiscrete\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsDiscreteValuationRing.associated_of_valuation_eq\", \"IsDiscreteValuationRing.equivValuationSubring\", \"IsDiscreteValuationRing.mker_valuation_eq_isUnitSubmonoid\", \"WeierstrassCurve.HasAdditiveReduction\"], \"digest\": \"6a3d29d92e3d8f56\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-git-semistable-replacement",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Trait selection meeting a prescribed generic open with finite fraction field.",
+   "via": [
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dense-generic-trait-selection",
+  "worker": "stage1",
+  "summary": "Verified the full statement without excellence or completeness. Selected a closed point in an affine special fibre, applied the general integral quasi-section theorem (one new statement-only node, Tag 05GU), used existing quasi-finite-locus and finite-fibre tools to prove finiteness of the selected function field, and reused the existing same-field DVR selection node. Corrected serialization-level doubled TeX escapes, with no mathematical statement change. Repair of the unpromoted side completion: compared the retained split with the current unsplit DAG item, reread every cited statement, and checked all 16 verbatim citation entries. The statement and inherited metadata agree with current DAG; clarified the nonzero-prime localization argument and the inverse-image calculation establishing locality. Delivery is rebuilt on the current server base for independent promotion by L. On renewed current-base review, made the localization embedding explicit as a K-algebra map, so the finite-dimensional generic-fibre conclusion gives the requested finite extension with its actual structural K-action. Revalidated on 2026-10-23 against the current unsplit item and all current cited statements; expanded the specialization/open-neighbourhood calculation in step 3. The first dry run of this retry passed at 0b3845a3364; the final repaired delivery is rebuilt against the current server DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Trait selection meeting a prescribed generic open with finite fraction field. The six steps supply the trait-selection prerequisite of the existing semistable-replacement route; no unit or chapter route changes. Ancestor lookup returns None, retained as in the live item.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "Generic openness theorem Tag 01TI used to pass from quasi-finiteness at the closed point to a locally quasi-finite affine neighbourhood; no node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "why": "Generic quasi-finite fibre theorem Tag 03JA makes the selected generic fibre a finite algebra; no node of this unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic Tag 01TH (4) locality: restricts the locally quasi-finite Q -> S of the 01TI node to the affine open W before applying 03JA; no node of this unit states it."
+   },
+   {
+    "node": "lem-sbc-affine-fibre-sections-tensor",
+    "why": "Generic affine fibre-ring identification Gamma(W_eta) = E tensor_R K used to read the 03JA finite generic fibre as E[1/t]; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-sbc-affine-fibre-sections-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-8cdb8486f",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8cdb8486f (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the new node lem-sfb-quasi-section-nearby-open in full. I also read every cited statement, and in Stacks: 05GU (more-morphisms-lemma-quasi-finite-quasi-section-meeting-nearby-open-X, statement, proof and the local lemma before it), 01TH and 01TI (morphisms.tex), with 03JA, 054F and 00PH read through their nodes; all labels confirmed in tags/tags. clones/live and side-live both still have the item unsplit and neither has the new node. There is no repair note, so this is not a re-split. The statement and stmt_deps are byte-identical to live, so nothing is weakened. Against d42f, only step 3's z∈W argument changed (the complement Z∖W would contain the closure of z, which is Z); it is correct. Steps: (1) the DVR prime calculation gives D(t)={(0)} and R[1/t]=K, and a maximal m⊇tB gives a point x closed in X_s. (2) The generic point ξ of Y lies in U∩X and f(ξ)≠s, so every hypothesis of the new node holds and it returns an integral Z with generic point z∈U∩X over η. (3) Z is locally Noetherian, the 01TI locus Q contains x, and 03JA applied to an affine W gives a finite K-algebra D. (4) E⊆L=Frac E and R→L is injective, so D=E[1/t] is a K-subdomain of L; it is a field, hence D=L and L/K is finite. (5) The same-field DVR node applies to (Z,z,x) because x≠z, and the generic morphism factors through the open U. (6) Elementary: the ring map is injective and local. Fault C1 in step 3, which the e50f and b6c8 FIXes repaired and which is again missing here: two facts are used without a node although nodes state them. First, W→S locally quasi-finite needs Tag 01TH(4) (lem-weil-pbc-lqf-restriction-to-opens), which is not elementary. Second, D=E⊗_R K needs lem-sbc-affine-fibre-sections-tensor. The FIX cites both in step 3 (text, uses, source), adds them to proof_deps and to split_report.tool_uses; neither reaches the item, so there is no cycle. New node: faithful to the 05GU proof (z is the image of q in the inverse image of U, Z is its reduced closure, so Z is integral with generic point z, f(z)≠s and Z is quasi-finite at x). It is statement-only, self-contained and searched, and is not a clause of the item. rg -L for 05GU, quasi-section and nearby open finds no duplicate, and the trait/DVR nodes state neither node. Small cases checked: the identity trait, non-excellent R, inseparable L/K, residue extension at x, smaller U. I accept the tool uses 01TI, 03JA and the two added nodes as generic tools. No SGA is cited. Maintainer note: blueprint.from.node is null, inherited; this C1 FIX has now been lost twice, so it should be carried at landing.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DenseGenericTraitSelection",
+  "declaration": "AlgebraicGeometry.exists_dense_generic_trait",
+  "file": "lean/Sheaf/AlgebraicGeometry/DenseGenericTraitSelection.lean",
+  "statement": "theorem exists_dense_generic_trait (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (Y : Scheme.{u}) [IsIntegral Y] (f : Y ⟶ Spec (CommRingCat.of R)) [LocallyOfFiniteType f] [QuasiCompact f] (hf : DenseRange f) (hYs : Nonempty (f.fiber (IsLocalRing.closedPoint R))) (U : (f.fiber (genericPoint (Spec (CommRingCat.of R)))).Opens) (hU : (U : Set (f.fiber (genericPoint (Spec (CommRingCat.of R))))).Nonempty) : ∃ (R₀ : Type u) (_ : CommRing R₀) (_ : IsDomain R₀) (_ : IsDiscreteValuationRing R₀) (_ : Algebra R R₀) (_ : Algebra K (FractionRing R₀)), Function.Injective (algebraMap R R₀) ∧ IsLocalHom (algebraMap R R₀) ∧ FiniteDimensional K (FractionRing R₀) ∧ (algebraMap K (FractionRing R₀)).comp (algebraMap R K) = (algebraMap R₀ (FractionRing R₀)).comp (algebraMap R R₀) ∧ ∃ c : Spec (CommRingCat.of R₀) ⟶ Y, c ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R R₀)) ∧ f (c (IsLocalRing.closedPoint R₀)) = IsLocalRing.closedPoint R ∧ ∃ cη : Spec (CommRingCat.of (FractionRing R₀)) ⟶ U.toScheme, cη ≫ U.ι ≫ f.fiberι (genericPoint (Spec (CommRingCat.of R))) = Spec.map (CommRingCat.ofHom (algebraMap R₀ (FractionRing R₀))) ≫ c",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-280cfb759",
+  "group": "NX",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the new lean record (existing:false); statement, stmt_deps and proof byte-identical; all 7 stmt_dep records identical to live; lean.statement verbatim in the file. Clause check: DVR R and IsFractionRing K, IsIntegral Y, LocallyOfFiniteType+QuasiCompact (the finite-type record), DenseRange f, nonempty special fibre, nonempty U : (f.fiber η).Opens. Conclusion: R₀ DVR with injective local algebraMap; FractionRing R₀ finite over K with compatibility pinning the canonical extension; c ≫ f = Spec.map; closed point to closedPoint R (redundant, harmless); canonical generic inclusion factors through U.ι ≫ fiberι. No extra assumptions; edge cases (empty Y, empty fibre, empty U, Y inside the special fibre) match the node; universe u loses nothing since Frac R lives in u. No duplicate found (exists_trait_of_strict_specializes is 054F without the finite field or the open). Docstrings carry source 05GU/00PH, the blueprint id and the 6 proof steps; sorry only; imports exist in side-live; report sections present. No file changed, no compile run."
+ }
+}

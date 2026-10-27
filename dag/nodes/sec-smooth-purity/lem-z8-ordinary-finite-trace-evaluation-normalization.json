@@ -1,0 +1,110 @@
+{
+ "id": "lem-z8-ordinary-finite-trace-evaluation-normalization",
+ "kind": "statement",
+ "title": "The prescribed trace counit is the coordinate evaluation",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteTraceCounit_coordinate_evaluation\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    (L : DerivedCategoryModule A Y)\n    (τ : (ordinaryFinitePushforward A f).obj ((ordinaryFinitePullback A f).obj L) ⟶\n      ordinaryFiniteUnit A Y) (K : DerivedCategoryModule A Y) :\n    (ordinaryFiniteTraceCounit A f ((ordinaryFinitePullback A f).obj L) τ).app K =\n      CoordinateTrace.evaluation A f L (τ ≫ (ordinaryFiniteSingleUnitIso A Y).hom) K",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-z8-ordinary-finite-single-unit-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Precompose with the invertible ordered projection. Its defining counit equation identifies the left side with tensor of the scalar trace followed by the single-object unit comparison and right unitor. The inverse ordered projection in coordinate evaluation cancels. Identify the cached unit comparison by its defining equation and apply tensor functoriality and category associativity.",
+   "uses": [
+    "def-asd-ordinary-finite-trace-counit",
+    "def-sfb-etale-coordinate-trace-data",
+    "lem-z8-ordinary-finite-single-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-z8-ordinary-finite-single-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteTraceEvaluationNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteTraceEvaluationNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteTraceCounit_coordinate_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteTraceCounit_coordinate_evaluation"
+  ],
+  "statement": "theorem ordinaryFiniteTraceCounit_coordinate_evaluation\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    (L : DerivedCategoryModule A Y)\n    (τ : (ordinaryFinitePushforward A f).obj ((ordinaryFinitePullback A f).obj L) ⟶\n      ordinaryFiniteUnit A Y) (K : DerivedCategoryModule A Y) :\n    (ordinaryFiniteTraceCounit A f ((ordinaryFinitePullback A f).obj L) τ).app K =\n      CoordinateTrace.evaluation A f L (τ ≫ (ordinaryFiniteSingleUnitIso A Y).hom) K",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

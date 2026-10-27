@@ -1,0 +1,172 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorTransport",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-coefficient-restriction-tensor-comparison",
+   "place": "Strictly smaller tensor-coherence component of the coefficient restriction comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pbc-coefficient-pullback-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 07A4, 07A6 and 03EL; the coefficient-isomorphism tensor subargument of Tag 0B56."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of sheaves of rings commutes with derived tensor product and canonical tensor pullback comparison",
+   "results": "Eight hits on ordinary presheaf/sheaf scalar restriction and ModuleCat scalar restriction functoriality. No derived tensor/pullback coherence statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphism transported along an equivalence of coefficient rings and a natural tensor comparison",
+   "results": "Eight unrelated polynomial law, algebra presentation and adic completion tensor hits. No sheaf-derived coefficient tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Id|id|[Ee]quiv)|mapDerivedCategory.*[Ii]d",
+   "results": "25 returned Mathlib hits on ordinary scalar restriction and unrelated algebra. Direct source searches find canonical geometric tensor pullback and adjunction normalization, but no restriction/tensor coherence for the arbitrary original-site coefficient models. blueprint_refs.py search coefficient tensor restriction finds zero blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; retain existing normalized pullback and restriction definitions"
+  }
+ ],
+ "id": "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+ "title": "Compatibility of coefficient restriction with tensor pullback",
+ "statement": "For the same schemes, coefficient sheaves, coefficient isomorphism and three signed-total tensor models as [lem-pbc-coefficient-restriction-tensor-chain-square] and [def-sfb-proetale-tensor-model], there exists a restriction tensor isomorphism rho compatible with the canonical geometric tensor comparisons and the canonical restriction/pullback comparison b. Explicitly, for all derived F,G, b at aY(F,G) followed by alpha_i(F,G) equals U(alpha_c(F,G)) followed by rho inverse at (L_c F,L_c G) and z(b_F,b_G). Unlike the old signature, rho is constructed with its chain normalization and b is fixed to the canonical comparison. The canonical b and its termwise normalization are defined in [lem-pbc-coefficient-pullback-factorization].",
+ "proof": [
+  {
+   "text": "Apply ringIso_tensor_transport to c. Its flat_iff and kflat_iff clauses preserve flat-term K-flat representatives. Its totalIso and total_naturality fields supply the normalized chain tensor isomorphism. The chain-square lemma compares this map with the two ordinary geometric tensor pullbacks.",
+   "uses": [
+    "lem-pbc-coefficient-restriction-tensor-chain-square",
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorComparisonDescent to exact restriction, sigma and the two target tensor-model representatives. Fully faithful restriction to flat K-flat representatives supplies the descent hypothesis. Obtain gamma, and take rho=gamma inverse.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved representative_square to the descended gamma and its normalization. This computes the canonical geometric square on every flat K-flat pair. Reflect equality of the resulting natural transformations through fully faithful restriction to those resolving representatives.",
+   "uses": [
+    "lem-pbc-coefficient-restriction-tensor-representative-square",
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-coefficient-restriction-tensor-chain-square",
+  "lem-pbc-coefficient-restriction-tensor-representative-square",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback and its bilinear-map proof; Tag 07A4, lemma-pullback-tensor-product and its signed-total construction. Actual Lean descent proof and exact-derived factorization normalization."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientTensorCompatibility",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientTensorCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorTransport.tensorComparison_compatibility",
+  "statement": "theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (aY : ProEtaleTensorModel Y R)\n    (z : ProEtaleTensorModel X\n      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))\n    (aX : ProEtaleTensorModel X S) :\n    ∃ rho : ((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)) ⋙ z.tensor ≅\n        aX.tensor ⋙ pbcDerivedRestrict c.hom,\n      ∀ F G : DerivedCategory (proEtaleRingModules Y R),\n        (pullback f R S c).hom.app (aY.tensor.obj (F, G)) ≫\n            (proEtaleCanonicalTensorComparison f R\n              ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n              (Iso.refl _) aY z).hom.app (F, G) =\n          (pbcDerivedRestrict c.hom).map\n              ((proEtaleCanonicalTensorComparison f R S c aY aX).hom.app (F, G)) ≫\n            rho.inv.app ((proEtaleRingDerivedPullback f R S c).obj F,\n              (proEtaleRingDerivedPullback f R S c).obj G) ≫\n            z.tensor.map (Prod.mkHom\n              ((pullback f R S c).hom.app F)\n              ((pullback f R S c).hom.app G))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T050629-L-247015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dade8",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T072146-L-2804008",
+  "kind": "interface",
+  "note": "independent cc review: item tensorComparison_compatibility (old ∀rho,b false → ∃rho with canonical pullback) against parent tensorComparison (unchanged) and change record; moved identityRestriction/pullback diffed verbatim vs clone a9fbd52; chain-square hole read against RingIsoTensorTransport pure_hom/total_summand and unique proEtaleOrdinaryTensorPullback; stmt_deps against DAG owners; 3b importer OK"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "J1 stage 3",
+  "old_statement": "Given the normalized restriction tensor isomorphism and the canonical coefficient pullback comparison, the two induced maps on every pair of derived objects are equal.",
+  "what": "The old Lean signature universally quantified unnormalized rho and b. Negating rho alone negates just the right-hand side; on integer tensor units this contradicts invertibility. The corrected source statement constructs a normalized rho and fixes the canonical b. The original parent goal is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 03EL, lemma-tensor-product-pullback and its bilinear-map proof; Tag 07A4, lemma-pullback-tensor-product and its signed-total construction."
+  },
+  "citers": [
+   {
+    "id": "lem-pbc-coefficient-restriction-tensor-comparison",
+    "holds": false,
+    "note": "The old application to an arbitrary existence witness is invalid. Adapted in this packet to use the constructed normalized rho, preserving the parent theorem statement."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-proetale-operations",
+   "def-sfb-proetale-tensor-model",
+   "lem-weil-pbc-ring-sheaf-change-adjunction",
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  ],
+  "old_proof": [
+   {
+    "text": "Evaluate both composites on flat K-flat representatives. The canonical geometric tensor comparisons and restriction/pullback map pure tensors to the same inverse-image section with its scalar action transported by the coefficient isomorphism.",
+    "uses": [
+     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+     "lem-weil-pbc-ring-sheaf-change-adjunction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The equality survives sheafification, signed totalization, localization and descent in both variables, so it holds for arbitrary derived objects.",
+    "uses": [
+     "lem-weil-pbc-site-derived-tensor-descent"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "lem-weil-pbc-ring-sheaf-change-adjunction",
+   "lem-weil-pbc-site-derived-tensor-descent"
+  ]
+ }
+}

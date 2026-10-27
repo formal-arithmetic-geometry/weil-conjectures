@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-affine-homogeneous-quotient-projective-immersion",
+ "kind": "statement",
+ "title": "Projective-space immersion of an affine homogeneous quotient",
+ "statement": "Let $k$ be a field [def-weil-field]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], finite type as in [def-weil-finite-type-morphism], and smoothness and connectedness as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth and affine of finite type over $k$, let $H\\hookrightarrow G$ be any closed subgroup, and suppose $q:G\\to Y$ is a quotient with $Y$ a separated finite-type $k$-scheme [def-pc-scheme, def-weil-proper-morphism]. By a quotient here we mean that $q$ is faithfully flat and of finite presentation, is invariant under right multiplication by $H$, and that $(g,h)\\mapsto(g,gh)$ is an isomorphism $G\\times_kH\\simeq G\\times_YG$; faithfully flat means flat [def-weil-flat-morphism] and surjective, and finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-quasi-separated-morphism]. Products are fibre products [def-pc-fibre-product]. Then there exist $N\\geq0$ and a $k$-immersion $j:Y\\hookrightarrow\\mathbf P^N_k$, where immersion means a closed immersion into an open subscheme [def-weil-closed-immersion, def-weil-open-immersion], and $\\mathbf P^N_k$ is projective space [def-nagata-projective-space-base-change]. No normality or smoothness of $H$, connectedness or reductivity of $G$, or perfection of $k$ is assumed. The case $H=G$, including $G=1$, is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 7.18 and its proof, printed p.143, using Theorem 4.27, printed pp.94--95, and Proposition 7.17, printed p.143. Also Theorem 8.43, printed p.161. Only quasi-projectivity is asserted, not properness."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-chevalley-scheme-line-stabilizer] to the affine finite-type $k$-group $G$ and its closed subgroup $H$. Obtain a nonzero representation $E$, a line $D\\subseteq E$, and equality $H(A)=\\{g:\\rho_A(g)D_A=D_A\\}$ for every commutative $k$-algebra $A$. Choose a basis of $E$ and put $N=\\dim_k(E)-1\\geq0$. The equality is scheme-theoretic, so it retains infinitesimal stabilizers.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.18, first sentence; Theorem 4.27 and Remark 4.30, pp.94--96,143."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-projective-space-functor-of-points] and base change to $k$ (a $k$-morphism $T\\to\\mathbf P^N_k=\\operatorname{Spec}k\\times_{\\mathbf Z}\\mathbf P^N_{\\mathbf Z}$ is a morphism $T\\to\\mathbf P^N_{\\mathbf Z}$ by [def-pc-fibre-product]) to interpret $\\mathbf P^N_k(T)$ as locally direct-summand line subbundles $L\\subseteq E\\otimes_k\\mathcal O_T$: send $L$ to the invertible quotient $E^*\\otimes\\mathcal O_T\\twoheadrightarrow L^*$ with the sections from the dual basis, and recover $L$ by dualizing that quotient. These operations are inverse on a local basis and commute with pullback. Thus $g\\cdot L=\\rho_T(g)L$ is a natural transformation on test schemes. Yoneda [lem-pc-yoneda] makes it a morphism $G\\times_k\\mathbf P^N_k\\to\\mathbf P^N_k$; its unit and multiplication identities follow on test schemes from those for $\\rho$. The constant line $D$ defines $x\\in\\mathbf P^N_k(k)$, and the stabilizer of $x$ on every $A$ is precisely $H(A)$ by step 1. This extends to every $k$-scheme $T$: whether $g\\in G(T)$ factors through the closed subscheme $H$, and whether $\\rho_T(g)$ fixes $D\\otimes\\mathcal O_T$, are both checked on an affine open cover of $T$. In particular the orbit map $b(g)=gD$ satisfies $b(gh)=b(g)$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "lem-pc-yoneda",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.18, projective-space functor and induced action, p.143; Stacks Tag 01NE (lemma-projective-space)."
+   }
+  },
+  {
+   "text": "Projective space is proper over $k$ by [lemma-nagata-projective-space-base-change-proper], hence separated and finite type by [def-weil-proper-morphism]. Apply [lem-sfb-smooth-rational-orbit-arbitrary-field] to this action at $x$: it gives an immersion $i:O\\hookrightarrow\\mathbf P^N_k$ and $b=i\\circ\\beta$ with $\\beta:G\\to O$ flat, surjective and locally of finite presentation. Its hypotheses use the smoothness of $G$ and impose no smoothness on $H$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-smooth-rational-orbit-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.18, last sentence, using Proposition 7.17 and Proposition 7.4(b), pp.139--140,143."
+   }
+  },
+  {
+   "text": "The two kernel pairs are the same right-$H$ relation. For $\\beta$ the inverse to $(g,h)\\mapsto(g,gh)$ is $(g,g')\\mapsto(g,g^{-1}g')$: equality $\\beta(g)=\\beta(g')$ is equivalent to $gD=g'D$, since $i$ is an immersion and thus injective on test-scheme morphisms. It is equivalent to $g^{-1}g'$ stabilizing $D$, namely belonging to $H$, by steps 1--2. The formulas are natural on test schemes, and the group identities show they are inverse. Hence the fibre-product universal property [def-pc-fibre-product] and Yoneda [lem-pc-yoneda] give $G\\times_O G\\simeq G\\times_kH$ with projections $(g,h)\\mapsto g,gh$. Here test-scheme injectivity of $i$ follows directly from its open/closed factorization: both inclusions are monomorphisms (locally, the closed inclusion is a quotient of rings). The given quotient hypothesis already supplies the identical description of $G\\times_YG$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-yoneda",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.11 and proof, pp.141--142; Theorem 7.18, stabilizer identification, p.143."
+   }
+  },
+  {
+   "text": "Both $q$ and $\\beta$ are singleton fppf coverings by [def-pc-fppf-site]: they are flat, surjective and locally of finite presentation. They are fpqc coverings by [lem-trf-fppf-covering-is-fpqc]. Since $\\beta(gh)=\\beta(g)$, [lem-weil-pbc-fpqc-representable-descent] descends $\\beta$ along $q$ to $u:Y\\to O$ with $u q=\\beta$. The equality of the kernel pairs in step 4 and $q(gh)=q(g)$ descend $q$ along $\\beta$ to $v:O\\to Y$ with $v\\beta=q$. Now $(vu)q=q$ and $(uv)\\beta=\\beta$; uniqueness in the same descent statement gives $vu=\\mathrm{id}_Y$ and $uv=\\mathrm{id}_O$. The descended maps are over $k$, since their composites to $\\operatorname{Spec}k$ agree after their fpqc covers, where that uniqueness applies again. Thus $u$ is a $k$-isomorphism.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.11--7.12, pp.141--142, quotient identification; explicit uniqueness via Stacks Tag 023Q (lemma-fpqc-universal-effective-epimorphisms) and Tag 022C."
+   }
+  },
+  {
+   "text": "Set $j=i\\circ u$. Write the immersion $i$ as $O\\hookrightarrow U\\hookrightarrow\\mathbf P^N_k$ with the first arrow closed and the second open. Precomposing the first arrow with the isomorphism $u$ preserves its closed image and the surjective map of structure sheaves, so [def-weil-closed-immersion] makes $Y\\to U$ a closed immersion. Therefore $j$ is the required $k$-immersion. When $H=G$, Chevalley's line is $G$-stable and its orbit is the rational point $x$; the same descent gives $Y\\simeq\\operatorname{Spec}k$, so this case (including $G=1$) is included.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.18 and Example 7.19, p.143; definition of immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-pc-yoneda",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-smooth-rational-orbit-arbitrary-field",
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Theorem 7.18, p.143, via Theorem 4.27 and Proposition 7.17; the identification with the supplied quotient is expanded using Stacks 023Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of an affine algebraic group by a closed subgroup admits an immersion into projective space",
+   "results": "{\"t\": \"2026-10-24T04:20:07Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of an affine algebraic group by a closed subgroup admits an immersion into projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"c4eb154a676c34ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj, quasi-affine schemes, closed immersions and topological or abstract group quotients do not give a projective-space immersion of an algebraic homogeneous quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiProjective\"",
+   "results": "{\"t\": \"2026-10-24T04:20:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj, quasi-affine schemes, closed immersions and topological or abstract group quotients do not give a projective-space immersion of an algebraic homogeneous quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*quasi.?projective|quotient.*quasi.?projective|quasi.?projective.*quotient",
+   "results": "{\"t\": \"2026-10-24T04:20:04Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*quasi.?projective|quotient.*quasi.?projective|quasi.?projective.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj, quasi-affine schemes, closed immersions and topological or abstract group quotients do not give a projective-space immersion of an algebraic homogeneous quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf quotient G H of an affine finite type group scheme by a closed subgroup is quasi projective over a field",
+   "results": "{\"t\": \"2026-10-24T04:20:05Z\", \"tool\": \"leansearch\", \"query\": \"The fppf quotient G H of an affine finite type group scheme by a closed subgroup is quasi projective over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.instT2Space\", \"QuotientGroup.mk'_apply\", \"AddSubgroup.fintypeQuotientOfFiniteIndex\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AddSubgroup.finite_quotient_of_finiteIndex\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"QuotientGroup.mk'\", \"QuotientAddGroup.fintype\"], \"digest\": \"164372f5455babca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj, quasi-affine schemes, closed immersions and topological or abstract group quotients do not give a projective-space immersion of an algebraic homogeneous quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous spaces for linear algebraic groups over any field are quasi projective schemes",
+   "results": "{\"t\": \"2026-10-24T04:20:52Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous spaces for linear algebraic groups over any field are quasi projective schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\"], \"digest\": \"41aa65125ef9b2dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj, quasi-affine schemes, closed immersions and topological or abstract group quotients do not give a projective-space immersion of an algebraic homogeneous quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic group quotient by a closed subgroup embeds into projective space over its field",
+   "results": "{\"t\": \"2026-10-24T04:55:16Z\", \"tool\": \"leanfinder\", \"query\": \"An affine algebraic group quotient by a closed subgroup embeds into projective space over its field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"WeierstrassCurve.Affine.Point.toProjective\", \"Projectivization.finite_of_finite\", \"AlgebraicGeometry.Proj\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.Projective.Point.fromAffine\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"6f491f2f90aa22b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic homogeneous quotient embedding theorem among these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*quasi.?projective|quotient.*quasi.?projective|quasi.?projective.*quotient",
+   "results": "{\"t\": \"2026-10-24T04:56:14Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*quasi.?projective|quotient.*quasi.?projective|quasi.?projective.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic homogeneous quotient embedding theorem among these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quotient of a smooth affine algebraic group by a closed subgroup has a locally closed embedding in projective space",
+   "results": "{\"t\": \"2026-10-24T04:56:14Z\", \"tool\": \"leansearch\", \"query\": \"Every quotient of a smooth affine algebraic group by a closed subgroup has a locally closed embedding in projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.instT2Space\", \"QuotientGroup.borelSpace\", \"Subgroup.quotientSubgroupOfEmbeddingOfLE_apply_mk\", \"QuotientAddGroup.isClosedMap_coe\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"QuotientGroup.isClosedMap_coe\", \"Subgroup.coe_div\", \"QuotientAddGroup.instLocallyCompactSpace\"], \"digest\": \"12a35cd7873a1626\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic homogeneous quotient embedding theorem among these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiProjective\"",
+   "results": "{\"t\": \"2026-10-24T04:56:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic homogeneous quotient embedding theorem among these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous spaces of smooth linear algebraic groups are quasi projective schemes",
+   "results": "{\"t\": \"2026-10-24T04:58:10Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous spaces of smooth linear algebraic groups are quasi projective schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\"], \"digest\": \"ea1d42854e5b10b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic homogeneous quotient embedding theorem among these hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Theorem 7.18 and its proof, printed p.143, using Theorem 4.27, printed pp.94--95, and Proposition 7.17, printed p.143. Also Theorem 8.43, printed p.161. Only quasi-projectivity is asserted, not properness.",
+   "via": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-homogeneous-quotient-projective-immersion",
+  "worker": "stage1",
+  "summary": "Reused the existing scheme-theoretic Chevalley theorem; added only an arbitrary-field smooth-orbit input, since existing orbit nodes require algebraic closure and connectedness. Constructed the projective action from the existing line-quotient functor, wrote the two kernel-pair inverse formulas, and identified the given quotient with the orbit using fpqc morphism descent. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Theorem 7.18 and its proof, printed p.143, using Theorem 4.27, printed pp.94--95, and Proposition 7.17, printed p.143. Also Theorem 8.43, printed p.161. Only quasi-projectivity is asserted, not properness. The ancestor tool reports None; retain that inherited null root and via chain. The split realizes the final Milne Theorem 7.18 supporting input by the Chevalley representation, projective action, orbit, and quotient identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic projective-space representability supplies the projective action; no node in the unit supplies this interface."
+   },
+   {
+    "node": "lem-pc-yoneda",
+    "why": "Generic Yoneda bijection turns the natural test-scheme formulas into morphisms and verifies equality; no unit-route replacement."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic property of the ambient projective space supplies the separated finite-type hypotheses of the orbit theorem."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic covering comparison permits fpqc descent for the two fppf quotient presentations."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic descent of morphisms identifies two presentations of the same right-H relation; no unit node states this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-pc-yoneda",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-69bf2189e",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-69bf2189e (reviewer sub-agent of L); spot-checked: I read the whole split: the item, which is a first split with six steps, and the new node lem-sfb-smooth-rational-orbit-arbitrary-field. I checked them against Milne (2017) p.27 (1.65(b),(c)), pp.139-140 (orbit paragraph, Prop 7.4(b) and its proof), pp.141-142 (7.9-7.12) and p.143 (7.17, 7.18, 7.19). The item statement is unchanged and holds in the tested cases: H=G (including G=1), H=mu_p inside G_m with q=Frobenius over an imperfect field, and disconnected G. Step 1, Chevalley, holds on all k-algebras with E nonzero. Step 3: P^N_k is proper, hence separated and of finite type. Step 4: i is a monomorphism and the inverse formulas for the kernel pair are correct. Step 5: both maps are fppf, hence fpqc, coverings, and descent with uniqueness (i=j) gives u, v, uv=1, vu=1 and the k-structure. Step 6: a closed immersion precomposed with an isomorphism is a closed immersion. Fix 1, item step 2: added def-pc-fibre-product for the base change Spec k x P^N_Z. Added one sentence extending the stabilizer = H(A) identification from k-algebras to arbitrary test schemes by checking on an affine cover; step 4 uses it on test schemes. Fix 2, new node, B3: it cited def-pc-reduced-scheme, which only defines reduced, for 'reduced induced subscheme'. O_x is now the reduced induced closed subscheme of the open U = X minus (closure minus image), citing lem-weil-pbc-reduced-induced-closed-subscheme, added to stmt_deps with no cycle. The new node is true over any field: it is Milne 7.4(b), and over imperfect k the image is geometrically reduced because scheme-theoretic image commutes with flat base change. It is not a duplicate: the existing orbit nodes assume an algebraically closed field and connected G. I accept the tool uses (P^n functor of points, Nagata P proper, Yoneda, fppf to fpqc, fpqc descent) as generic. Batch-5 flags: the Chevalley closure reaches only lem-trf-vector-subspace-complement, a Mathlib linear-algebra leaf, and lem-trf-fppf-covering-is-fpqc is a generic Mathlib leaf whose closure has no trace-formula or Poincaré node. Neither is part of either assumed statement or its proof, so both are accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineHomogeneousQuotientProjectiveImmersion",
+  "declaration": "AlgebraicGeometry.exists_projectiveSpace_immersion_of_affine_homogeneous_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineHomogeneousQuotientProjectiveImmersion.lean",
+  "statement": "theorem exists_projectiveSpace_immersion_of_affine_homogeneous_quotient {k : Type u} [Field k] (G H : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] (i : H ⟶ G) [IsClosedSubgroupScheme i] (Y : Over (Spec (.of k))) [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (q : G ⟶ Y) [Flat q.left] [Surjective q.left] [LocallyOfFinitePresentation q.left] [QuasiCompact q.left] [QuasiSeparated q.left] (hq : IsPullback (fst G H) (fst G H * (snd G H ≫ i)) q q) : ∃ (N : ℕ) (j : Y.left ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of k))), IsImmersion j ∧ j ≫ (ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of k)) ↘ Spec (.of k)) = Y.hom",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7f569b5b",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read the node, all 15 stmt_dep records, the upstream IsClosedSubgroupScheme (Defs.lean:100) and ProjectiveSpace (ProjectiveSpace.lean:121, first-projection structure map, Fin (N+1) homogeneous coordinates), the module and the report (Worker report and Second reading by Q10 both present). Clause-by-clause match: Field k; GrpObj G,H over Spec k; IsAffine, LOFT+QC and Smooth on G; IsClosedSubgroupScheme i; Y separated LOFT+QC; q Flat, Surjective, LOFP, QC, QS; hq IsPullback (fst) (fst * (snd ≫ i)) q q gives right-H invariance plus the canonical kernel pair (same idiom as landed BorelCharacteristicPicardSequence); conclusion ∃ N, immersion j into ProjectiveSpace (ULift.{u} (Fin (N+1))) (Spec k) over k. No extra hypotheses (no IsAlgClosed, connectedness, or smoothness/reducedness of H). Edge cases H=G, G=1 (N=0), mu_p/Frobenius over imperfect k, disconnected G and universes are covered. No duplicate: the existing orbit-quotient theorems need IsAlgClosed and ConnectedSpace. lean.statement is verbatim in the file, the proof is sorry only, docstrings carry source, blueprint and the six steps. No files changed, so no compile."
+ }
+}

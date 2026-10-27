@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-central-extension-of-tori",
+ "kind": "statement",
+ "title": "A central extension of tori is a torus",
+ "statement": "Let $k$ be an arbitrary field [def-weil-field]. All groups below are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group scheme whose extension to an algebraic closure $\\bar k$ [def-weil-algebraic-closure] is isomorphic to $\\mathbf G_m^r$ for some integer $r\\geq0$ [def-sfb-tori-multiplicative-type, def-sc-gm-ga]. Let $E$ be smooth and connected, let $T\\hookrightarrow E$ be a central torus subgroup, and let $q:E\\to S$ be a faithfully flat finitely presented homomorphism to a torus $S$ with scheme-theoretic kernel exactly $T$. Here central means that $t e=e t$ in $E(A)$ for every commutative $k$-algebra $A$, $t\\in T(A)$ and $e\\in E(A)$; the kernel is the fibre of $q$ over the identity [def-pc-fibre-product]. Faithfully flat means flat and surjective [def-weil-flat-morphism], and finitely presented means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Then $E$ is a torus over $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.43, printed p.340, with ambient connected group G=E, H=E, H-prime=T; multiplicative-type conclusion together with smooth connectedness and Theorem 12.23, printed p.240, gives a torus. This is the inverse-image argument used in Theorem 17.82, printed p.379."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Fix an algebraic closure $F=\\bar k$. The identity $e:\\operatorname{Spec}k\\to E$ is a section of the structure morphism of the connected scheme $E$, so [lem-sbc-connected-rational-point-geometrically-connected] shows that $E\\times_kK$ is connected for every field extension $K/k$. In particular $E_F$ is connected, and it is geometrically connected over $F$: an extension $L/F$ is also an extension of $k$, and $(E_F)_L\\cong E_L$ by iterated base change [def-pc-fibre-product]. By clause (2) of [lem-pc-proper-base-change], it is smooth. All scalar-extended groups are affine of finite type: [lem-weil-pbc-fibre-product-affine-spectra] identifies their rings with $F\\otimes_k k[G]$, which are generated over $F$ by the images of any finite set of $k$-algebra generators of $k[G]$. Base change of the group-law diagrams gives their group structures [def-sc-group-scheme].",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340, via Corollaries 12.41 (with Chapter 12 erratum) and 12.22, pp.244,239; diagonalizable classification, pp.231--234,240."
+   }
+  },
+  {
+   "text": "The map $q^*:k[S]\\to k[E]$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine], and faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat], since $q$ is surjective. Its scalar extension $q_F^*:F[S_F]\\to F[E_F]$ is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change], using the tensor-ring identification of [lem-weil-pbc-fibre-product-affine-spectra]. In this identification it is base change along $k[S]\\to F\\otimes_k k[S]$. The kernel is $T_F$: both this kernel and the base change of $T=E\\times_{S,e}\\operatorname{Spec}k$ represent the pairs consisting of an $E_F$-point with image the identity, by the fibre-product universal property [def-pc-fibre-product]. Centrality persists, since an $F$-algebra is also a $k$-algebra and $T_F(A)=T(A)$, $E_F(A)=E(A)$.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340, via Corollaries 12.41 (with Chapter 12 erratum) and 12.22, pp.244,239; diagonalizable classification, pp.231--234,240."
+   }
+  },
+  {
+   "text": "By the torus hypothesis [def-sfb-tori-multiplicative-type], $T_F$ and $S_F$ are split tori. The formula $D_F(\\mathbf Z^r)\\simeq\\mathbf G_m^r$ in [lem-sfb-diagonalizable-group-geometric-criteria] makes them groups of multiplicative type in the sense required by [lem-sfb-multiplicative-extension-action-rigidity]. Apply that lemma to $G=E_F$, $N=T_F$, $Q=S_F$ and the conjugation action of $E_F$ on itself. The action preserves $T_F$ because it is central, and consists of automorphisms by the group identities. Step 1 gives smoothness and connectedness of the acting group; step 2 supplies the faithfully flat quotient with precisely the indicated central kernel. The lemma gives $ghg^{-1}=h$ on every algebra of points. Multiplying by $g$ on the right gives $gh=hg$, hence $E_F$ is commutative [def-sc-group-scheme].",
+   "uses": [
+    "def-sfb-tori-multiplicative-type",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-multiplicative-extension-action-rigidity",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340, via Corollaries 12.41 (with Chapter 12 erratum) and 12.22, pp.244,239; diagonalizable classification, pp.231--234,240."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-commutative-multiplicative-type-extension] to $q_F:E_F\\to S_F$. Step 2 supplies its faithfully flat coordinate map and kernel $T_F$; step 3 supplies commutativity and the multiplicative-type hypotheses on kernel and quotient. There is therefore a finitely generated abelian group $M$ and a group-scheme isomorphism $E_F\\simeq D_F(M)$.",
+   "uses": [
+    "lem-sfb-commutative-multiplicative-type-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340, via Corollaries 12.41 (with Chapter 12 erratum) and 12.22, pp.244,239; diagonalizable classification, pp.231--234,240."
+   }
+  },
+  {
+   "text": "The group $D_F(M)$ is smooth and geometrically connected by step 1. Apply [lem-sfb-diagonalizable-group-geometric-criteria]. In characteristic zero its connectedness criterion says $M$ is torsion-free. In characteristic $p>0$, geometric connectedness says every torsion element is killed by a power of $p$, while smoothness says there is no nonzero element killed by such a power; together these again say $M$ is torsion-free. The structure theorem [lem-sbc-finitely-generated-abelian-group-structure] now gives $M\\simeq\\mathbf Z^r$ for some $r\\geq0$: every finite cyclic direct summand must be zero, since all of its elements are torsion. The product formula in [lem-sfb-diagonalizable-group-geometric-criteria] yields $E_F\\simeq D_F(\\mathbf Z^r)\\simeq\\mathbf G_m^r$. This is exactly the definition that $E$ is a $k$-torus [def-sfb-tori-multiplicative-type], including the rank-zero case.",
+   "uses": [
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "def-sfb-tori-multiplicative-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340, via Corollaries 12.41 (with Chapter 12 erratum) and 12.22, pp.244,239; diagonalizable classification, pp.231--234,240."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "def-pc-fibre-product",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-multiplicative-extension-action-rigidity",
+  "lem-sfb-commutative-multiplicative-type-extension",
+  "lem-sbc-finitely-generated-abelian-group-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.43, p.340, via Corollaries 12.41 (with Chapter 12 erratum) and 12.22, pp.244,239; diagonalizable classification, pp.231--234,240."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An extension of an algebraic torus by a central algebraic torus is again an algebraic torus over an arbitrary field",
+   "results": "{\"t\": \"2026-10-24T04:18:38Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of an algebraic torus by a central algebraic torus is again an algebraic torus over an arbitrary field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTorsion.extension_closed\", \"TrivSqZeroExt.isCentralScalar\", \"LieAlgebra.IsExtension.extension_instLieAlgebra\", \"LieAlgebra.Extension.instIsLieAbelianSubtypeLMemLieSubmoduleKerProj\", \"TrivSqZeroExt.addGroupWithOne\", \"LieAlgebra.IsExtension.extension_L\", \"LieAlgebra.Extension.ofAlg\", \"SemidirectProduct.toGroupExtension\"], \"digest\": \"97109148840c1ca1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact sequence of affine algebraic groups with torus kernel contained in the centre and torus quotient, the middle group is a torus",
+   "results": "{\"t\": \"2026-10-24T04:21:39Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact sequence of affine algebraic groups with torus kernel contained in the centre and torus quotient, the middle group is a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTorsion.extension_closed\", \"AddIsTorsion.extension_closed\", \"GroupExtension\", \"GroupExtension.range_inl_eq_ker_rightHom\", \"LieAlgebra.IsExtension.kerEquivRange\", \"addCommGroupOfAddCyclicCenterQuotient\", \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"AddGroupExtension.range_inl_eq_ker_rightHom\"], \"digest\": \"6657128f2997929f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat homomorphism of smooth connected affine algebraic groups with central torus kernel and torus quotient has torus source",
+   "results": "{\"t\": \"2026-10-24T04:18:33Z\", \"tool\": \"leansearch\", \"query\": \"A faithfully flat homomorphism of smooth connected affine algebraic groups with central torus kernel and torus quotient has torus source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"RingHom.Smooth\", \"RingHom.FaithfullyFlat.injective\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.FaithfullyFlat.toFlat\", \"Algebra.Smooth.flat\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_faithful\", \"RingHom.FaithfullyFlat.flat\"], \"digest\": \"09d07e017b07d514\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCentral\", \"torus\"",
+   "results": "{\"t\": \"2026-10-24T04:18:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCentral\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|multiplicative.type|central.extension",
+   "results": "{\"t\": \"2026-10-24T04:18:33Z\", \"tool\": \"grep\", \"query\": \"torus|multiplicative.type|central.extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract torsion groups, Lie-algebra Cartan subalgebras, ring-theoretic flatness and analytic tori do not state this theorem about affine algebraic group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central extension of algebraic tori by a smooth connected affine group scheme is a torus",
+   "results": "{\"t\": \"2026-10-24T04:55:34Z\", \"tool\": \"leanfinder\", \"query\": \"A central extension of algebraic tori by a smooth connected affine group scheme is a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension\", \"addCommGroupOfAddCyclicCenterQuotient\", \"LieAlgebra.IsExtension.extension_L\", \"LieAlgebra.Extension.instIsLieAbelianSubtypeLMemLieSubmoduleKerProj\", \"LieAlgebra.IsExtension.kerEquivRange\", \"IsTorsion.extension_closed\", \"commGroupOfCyclicCenterQuotient\", \"AddIsTorsion.extension_closed\"], \"digest\": \"7b4bdaf0debc0ba4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group extensions and torsion groups, Lie algebra extensions, and central algebras do not state this theorem for affine algebraic group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|multiplicative.type|central.extension",
+   "results": "{\"t\": \"2026-10-24T04:56:28Z\", \"tool\": \"grep\", \"query\": \"torus|multiplicative.type|central.extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group extensions and torsion groups, Lie algebra extensions, and central algebras do not state this theorem for affine algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central extension of algebraic tori is an algebraic torus over a field",
+   "results": "{\"t\": \"2026-10-24T04:56:29Z\", \"tool\": \"leansearch\", \"query\": \"A central extension of algebraic tori is an algebraic torus over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsCentral.right_of_tensor_of_field\", \"Algebra.Extension.ctorIdx\", \"Algebra.IsCentral\", \"CSA\", \"LieAlgebra.Extension\", \"Algebra.IsCentral.left_of_tensor_of_field\", \"Algebra.Extension.noConfusionType\", \"Algebra.IsCentral.of_algEquiv\"], \"digest\": \"59e8f9a2b0aacdfa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group extensions and torsion groups, Lie algebra extensions, and central algebras do not state this theorem for affine algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"extension\"",
+   "results": "{\"t\": \"2026-10-24T04:56:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"extension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group extensions and torsion groups, Lie algebra extensions, and central algebras do not state this theorem for affine algebraic group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence of affine algebraic groups with torus kernel in the center and torus quotient has torus middle group",
+   "results": "{\"t\": \"2026-10-24T04:56:30Z\", \"tool\": \"leanfinder\", \"query\": \"An exact sequence of affine algebraic groups with torus kernel in the center and torus quotient has torus middle group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension\", \"IsTorsion.extension_closed\", \"MonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"GroupExtension.range_inl_eq_ker_rightHom\", \"MonoidHom.bijective_of_bijective_of_injective_of_left_exact\", \"AddIsTorsion.extension_closed\", \"MonoidHom.bijective_of_surjective_of_bijective_of_right_exact\", \"AddGroupExtension\"], \"digest\": \"bbd683efa31e41b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group extensions and torsion groups, Lie algebra extensions, and central algebras do not state this theorem for affine algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-maximal-torus-field-extension",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Lemma 16.43, printed p.340, with ambient connected group G=E, H=E, H-prime=T; multiplicative-type conclusion together with smooth connectedness and Theorem 12.23, printed p.240, gives a torus. This is the inverse-image argument used in Theorem 17.82, printed p.379.",
+   "via": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-central-extension-of-tori",
+  "worker": "stage1",
+  "summary": "Checked Milne Lemma 16.43 through its corrected action-rigidity and commutative-extension inputs; assembled five steps entirely from existing DAG statements, with faithful-flat scalar extension and geometric connectedness explicit. Statement unchanged; no new nodes and no Mathlib match.",
+  "blueprint": "Realizes the inverse-image-of-a-torus prerequisite of Milne Theorem 17.82 in the existing ancestry leading to det-thm-sf-ctf-stability-direct-images (3); read the current latest blueprint direct-images proof. The item is a supporting node, not the unit key theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), stability of scheme smoothness under scalar extension; generic geometry tool for the algebraic-group argument."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Stacks 04KV, Lean-closed (GeometricallyConnected.of_connectedSpace_of_section): a connected k-scheme with a k-point stays connected after every field extension; replaces the sec-trace-formula criterion 056R (reviewer FIX, batch-5 closure)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-6a9a7c87f",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-6a9a7c87f (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct; I replaced one citation, the one that drew the batch-5 flag. Route checked against Milne iAG2017: Lemma 16.43 (p.340), Cor 12.41 with the Chapter 12 erratum (N must be central, and the item assumes it), Cor 12.42, Cor 12.22 and Thm 17.82. The route matches the 12.42/16.43 argument with G=H=E and H'=T. Statement is unchanged and true. No new nodes, and the base proof was empty, so this is a first split, not a re-split. Steps: (1) E_F is connected, geometrically connected and smooth (clause 2 of lem-pc-proper-base-change, no properness needed), affine of finite type via F⊗_k k[G]. (2) q* is flat, then faithfully flat because q is surjective; base change is along k[S]→F⊗_k k[S], so the base ring is correct. The kernel is T_F by the universal property, and centrality holds on F-algebras. (3) Rigidity applied to conjugation of E_F on itself: every hypothesis holds (F algebraically closed, faithfully flat q_F, central N=T_F, G=E_F smooth and connected), so E_F is commutative, with no circularity. (4) The commutative-extension lemma gives E_F≅D_F(M). (5) In characteristic p, smooth plus geometrically connected makes M torsion-free (characteristic 0 is direct); the Mathlib structure leaf then gives M≅Z^r, and the product formula gives E_F≅G_m^r. Edge cases tested: r=0, split products, nonsplit k-tori, mu_p (excluded by smoothness) and mu_n with p∤n (excluded by connectedness). DAG search for 12.42/16.43/17.82, central+torus and 056R/04KV found no duplicate, and the item is not in its own closure (no cycle). Batch-5 flag: lem-trf-geometrically-connected-image-criterion (056R) is a generic lemma, but it is a node of the trace-formula chapter, so I replaced it in step 1, proof_deps and tool_uses with lem-sbc-connected-rational-point-geometrically-connected. That node (Stacks 04KV) is outside sec-trace-formula, Lean-closed (GeometricallyConnected.of_connectedSpace_of_section) and has empty proof_deps. Step 1 now also says explicitly that E_F is geometrically connected over F by iterated base change, which step 5 uses. The item now cites no sec-trace-formula node. The one remaining pod node in the closure (lem-pod-separated-finite-type-base-change) is reached only through the pre-existing lem-pc-proper-base-change and is a generic base-change lemma. Accepted tool_uses: lem-pc-proper-base-change clause (2), and the 04KV node. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-central-extension-of-tori.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CentralExtensionOfTori",
+  "declaration": "AlgebraicGeometry.isTorus_of_central_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CentralExtensionOfTori.lean",
+  "statement": "theorem isTorus_of_central_extension {k : Type u} [Field k] (E T S : Over (Spec (.of k))) [GrpObj E] [GrpObj T] [GrpObj S] [IsAffine E.left] [IsAffine T.left] [IsAffine S.left] [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [Smooth E.hom] [ConnectedSpace E.left] (i : T ⟶ E) [IsClosedSubgroupScheme i] (q : E ⟶ S) [IsMonHom q] [Flat q.left] [Surjective q.left] [LocallyOfFinitePresentation q.left] [QuasiCompact q.left] [QuasiSeparated q.left] (hT : MultiplicativeType.IsTorus (Grp.mk T)) (hS : MultiplicativeType.IsTorus (Grp.mk S)) (hcentral : ∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T) (e : StandardGroupSchemes.affine k A ⟶ E), (t ≫ i) * e = e * (t ≫ i)) (hker : ∃ f : Grp.mk T ≅ Grp.mk (GrpObj.ker q), f.hom.hom.hom ≫ GrpObj.kerι q = i) : MultiplicativeType.IsTorus (Grp.mk E)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5977f2a7d",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Read item node, 13 stmt_dep records, module, report and live decls (IsTorus/baseChange/splitTorus, StandardGroupSchemes.affine, IsClosedSubgroupScheme, GrpObj.ker/kerι). All hypotheses render the node exactly: affine finite-type E,T,S; E smooth+connected; closed subgroup i; q IsMonHom, flat+surjective, lfp+qc+qs; T,S tori; centrality on all A:Type u comm k-algebra points; hker is a Grp iso T≅ker q compatible with i; conclusion IsTorus E. No extra assumptions; r=0, char p, imperfect k, nonreduced A covered. Snapshot node differs from live only in lean; statement verbatim; one sorry theorem, no defs; docstrings with Milne places, blueprint id and 5 steps; report has Worker report + Second reading by Q90. H4 grep found no duplicate. No compile run (no file changed)."
+ }
+}

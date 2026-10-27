@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-etale-line-flat-braiding",
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle, final paragraph: all shifts rearranged in the tensor self symmetry are even."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleEvenLineSelfSymmetry",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-even-line-self-symmetry",
+   "place": "Strict subargument of the even-line self-symmetry computation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "title": "Flatness and ordinary identity self braiding of an etale line",
+ "statement": "Let A be a commutative ring and J an etale sheaf of A-modules on Y which is etale locally isomorphic to the tensor unit. Then J is flat and its ordinary self braiding is the identity. This is a subargument of [def-sfb-etale-coordinate-trace-data].",
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "The etale trivializing cover supplies isomorphisms to the tensor unit. The existing tensorInverseOfUpperStarIso constructs the internal-dual tensor inverse, so flat_of_tensorIso gives flatness.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Second triangle, final paragraph: all shifts rearranged in the tensor self symmetry are even."
+   }
+  },
+  {
+   "text": "Upper-star functors of this cover preserve equalizers and jointly reflect isomorphisms, hence are jointly faithful on ordinary sheaf morphisms. Transport braiding through the monoidal adjunction, and use braiding naturality along the local unit isomorphisms. The self braiding of the unit is identity by unitor coherence. Cancel the invertible tensor comparisons and apply joint faithfulness.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Second triangle, final paragraph: all shifts rearranged in the tensor self symmetry are even."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle, final paragraph: all shifts rearranged in the tensor self symmetry are even."
+ },
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLineFlatBraiding",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLineFlatBraiding.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.etaleLineFlatAndBraiding",
+  "statement": "theorem etaleLineFlatAndBraiding {Y : Scheme.{u}}\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hJ : Scheme.IsLisseRankOneSheaf J) :\n    ObjectProperty.flat J ∧ (β_ J J).hom = 𝟙 _",
+  "by": "P3",
+  "date": "2026-10-27",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(self|even|rank.one).*(braiding|symmetry)",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "No ready-made self-braiding computation with the required even-shift and canonical-derived hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "braiding, shiftFunctor",
+   "results": "loogle: unknown identifier 'braiding'",
+   "date": "2026-10-27",
+   "verdict": "No ready-made self-braiding computation with the required even-shift and canonical-derived hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The self braiding of a rank one sheaf shifted by an even integer is the identity",
+   "results": "CategoryTheory.CommShift₂Setup.hε, CategoryTheory.CommShift₂Setup.ε, CategoryTheory.TwistShiftData.z, CategoryTheory.CommShift₂Setup.int_ε, CategoryTheory.CommShift₂Setup.z_zero₂, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.CommShift₂Setup.z_zero₁, CategoryTheory.TwistShiftData.z_zero_right",
+   "date": "2026-10-27",
+   "verdict": "No ready-made self-braiding computation with the required even-shift and canonical-derived hypotheses."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T034719-L-3678351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T034719-L-3678351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

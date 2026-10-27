@@ -1,0 +1,118 @@
+{
+ "id": "def-pur-inverse-scalar-coherence",
+ "kind": "definition",
+ "title": "Inverse scalar-comparison coherence predicate",
+ "status": "split",
+ "statement": "Let $I$ be a preorder and let $S$ and $P$ be stage systems of categories indexed by $I$, in the stage-system language of [def-weil-pbc-finite-stage-pair-category] used also for the framework system [def-weil-algebraically-closed-coefficients]. Write $S_h:C_E\\to C_L$ and $P_h:D_E\\to D_L$ for their transitions when $h:E\\le L$, and $a^S_{h,k}:S_kS_h\\xrightarrow{\\sim}S_{hk}$ and $a^P_{h,k}:P_kP_h\\xrightarrow{\\sim}P_{hk}$ for their associators. Let $F:S\\to P$ be a morphism of stage systems: functors $\\Phi_E:C_E\\to D_E$ and coherent natural isomorphisms $\\beta_h:P_h\\Phi_E\\xrightarrow{\\sim}\\Phi_LS_h$. Put $j_h=\\beta_h^{-1}$; $hk$ denotes the transitive composite of inequalities. Define $\\operatorname{FdInverseScalarCoherence}(F)$ to be the conjunction of the following equations, at every object $K\\in C_E$, without assuming that $I$ is directed or nonempty. For $h:E\\le L$, $k:L\\le M$,\n$$a^P_{h,k,\\Phi_EK}\\circ P_k(j_{h,K})\\circ j_{k,S_hK}=j_{hk,K}\\circ\\Phi_M(a^S_{h,k,K}).$$\nFor $h:E\\le L$, $k:L\\le M$, $m:M\\le N$, define\n$$B_K=P_m(P_k(j_{h,K}))\\circ P_m(j_{k,S_hK})\\circ j_{m,S_kS_hK}.$$\nRequire both four-field contractions\n$$a^P_{hk,m,\\Phi_EK}\\circ P_m(a^P_{h,k,\\Phi_EK})\\circ B_K=j_{(hk)m,K}\\circ\\Phi_N(a^S_{hk,m,K}\\circ S_m(a^S_{h,k,K})),$$\n$$a^P_{h,km,\\Phi_EK}\\circ a^P_{k,m,P_h\\Phi_EK}\\circ B_K=j_{(hk)m,K}\\circ\\Phi_N(a^S_{hk,m,K}\\circ S_m(a^S_{h,k,K})).$$\nAll equalities use the specified associators, including repeated indices. This is a predicate on the given data; it chooses no comparison.",
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2 and 4, coefficient comparison interface; the existing predicate FdInverseScalarCoherence in Sheaf.Paper.FdCompletionInverseScalarCoherence records the corresponding inverse-scalar/common-stage comparison conclusion."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse scalar comparison cocycle and four field contractions for a coherent morphism of coefficient stage systems",
+   "results": "{\"t\": \"2026-10-24T03:49:11Z\", \"tool\": \"leansearch\", \"query\": \"Inverse scalar comparison cocycle and four field contractions for a coherent morphism of coefficient stage systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocycles₁_map_inv\", \"LieAlgebra.of_symm_smul\", \"groupCohomology.cocyclesMap_comp_isoCocycles₁_hom\", \"groupCohomology.cocyclesMk₂_eq\", \"FourierInvSMul.mk\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles_assoc\", \"AlgEquiv.coe_restrictScalars_symm'\", \"CategoryTheory.PresheafOfGroups.OneCochain.instInv\"], \"digest\": \"a596e469e469f627\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match: generic cocycle and linear Hom APIs do not define these coefficient-system predicates. Reuse the exact existing project predicates instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom linear equivalence between two coefficient pair categories induced by coherent finite stage equivalences",
+   "results": "{\"t\": \"2026-10-24T03:49:15Z\", \"tool\": \"leanfinder\", \"query\": \"Hom linear equivalence between two coefficient pair categories induced by coherent finite stage equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InducedCategory.homLinearEquiv\", \"CategoryTheory.InducedCategory.homLinearEquiv_apply\", \"LinearEquiv.toFGModuleCatIso_hom\", \"CategoryTheory.Linear.homCongr\", \"LinearEquiv.toFGModuleCatIso\", \"fromModuleCatToModuleCatLinearEquivtoModuleCatObj\", \"CategoryTheory.Linear.homCongr_apply\", \"fromModuleCatToModuleCatLinearEquiv\"], \"digest\": \"aa5c21c57293196f\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match: generic cocycle and linear Hom APIs do not define these coefficient-system predicates. Reuse the exact existing project predicates instead."
+  },
+  {
+   "tool": "grep",
+   "query": "FdInverseScalarCoherence|FdHomLinearEquivalence|StageSystem",
+   "results": "{\"t\": \"2026-10-24T03:49:15Z\", \"tool\": \"grep\", \"query\": \"FdInverseScalarCoherence|FdHomLinearEquivalence|StageSystem\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match: generic cocycle and linear Hom APIs do not define these coefficient-system predicates. Reuse the exact existing project predicates instead."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FdInverseScalarCoherence|FdHomLinearEquivalence lean/WeilConjectures lean/Sheaf; rg -l FdInverseScalarCoherence|FdHomLinearEquivalence dag/nodes; blueprint_refs.py search inverse scalar; blueprint_refs.py search Hom linear",
+   "results": "No WeilConjectures hits. Sheaf/Paper/FdCompletionInverseScalarCoherence.lean:48 defines FdInverseScalarCoherence; Sheaf/Paper/FdHomLinearEquivalence.lean:64 defines FdHomLinearEquivalence. Only the two theorem-node records mention these names; no live definition node owns either. Blueprint searches: inverse scalar has one unrelated d-curve-pieces hit; Hom linear has zero hits. Exact-name scan of definition-node lean records confirms no owner.",
+   "date": "2026-10-24",
+   "verdict": "Existing declarations reused without source changes; new DAG definition nodes supply the missing notion ownership."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-framework-pbc-coefficient-category-comparison",
+  "date": "2026-10-24",
+  "group": "Q75"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Step 2 coefficient-category comparison before transporting finite-stage purity: named predicate used by lem-pur-framework-pbc-coefficient-category-comparison",
+   "via": [
+    "lem-pur-framework-pbc-coefficient-category-comparison",
+    "lem-pur-common-stage-smooth-operation-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FdCompletionInverseScalarCoherence",
+  "declaration": "WeilConjectures.FdInverseScalarCoherence",
+  "statement": "def FdInverseScalarCoherence\n    {I : Type w} [Preorder I]\n    {C : I → Type u} [∀ i, Category.{v} (C i)]\n    {D : I → Type u'} [∀ i, Category.{v'} (D i)]\n    {S : StageSystem C} {P : StageSystem D} (F : S.Morphism P) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Repair requested by L for returned head 56794a1fe72f: records the existing plain Prop definition in its unchanged published module. No declaration is moved or redeclared. Its explicit parameters are verbatim in lean.statement."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eedbeeebe",
+  "group": "Q75",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eedbeeebe",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Re-delivery after return 5679 (H2). Item Lean byte-identical (sha a54a…). stmt_deps now cite new def nodes def-pur-inverse-scalar-coherence and def-pur-hom-linear-equivalence (existing:true on unchanged FdCompletionInverseScalarCoherence.lean:48 and FdHomLinearEquivalence.lean:64; both statements verbatim). Theorem nodes stay in proof_deps. Both predicate bodies checked clause by clause against the node statements (three-field cocycle, both four-field contractions; mapAt/preimage formulas, transport, Ω-linear Hom maps, essential surjectivity, equivalence and counit for every choice of preimages, inclusions). No other owner in live. Source file exists. Item re-read: hypotheses not stronger, j=Q(χ⁻¹) pinned via datum, unitor HEq, triangle iff, counit-normalized inclusions, no Karoubi, single sorry, docstrings and report sections present. No compile needed (no change). Advisory: base-era decls from nodes outside stmt_deps (pbcScalarSystem, pbcRationalCoefficientEquiv, purCoefficientIso); predicate docstrings keep lem-fd blueprint tags; item restates lem-fd-rational-coefficient-category-comparison at T=W."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202130-L-2677643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.fdCompletionInverseScalarCoherence"
+  ],
+  "sorry_after": []
+ }
+}

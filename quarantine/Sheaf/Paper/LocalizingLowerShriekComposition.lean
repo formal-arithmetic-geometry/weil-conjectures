@@ -184,7 +184,7 @@ theorem exists_localizingLowerShriekComposition
   have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ := by
     rcases _hΛ with h | h
     · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩)))
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h)))))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
   have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace (Z ↘ Spec (.of k))
   have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
@@ -192,10 +192,10 @@ theorem exists_localizingLowerShriekComposition
   have hf := fun c ↦ (compactification_localizing Λ ℓ k f c hΛ).1
   have hg := fun c ↦ (compactification_localizing Λ ℓ k g c hΛ).1
   have hgf := fun c ↦ (compactification_localizing Λ ℓ k (f ≫ g) c hΛ).1
-  obtain ⟨φf, hρf, hnf, _, hcf⟩ := compactification_coherence_cocycle Λ ℓ hΛ f
-  obtain ⟨φg, hρg, hng, _, hcg⟩ := compactification_coherence_cocycle Λ ℓ hΛ g
+  obtain ⟨φf, hρf, hnf, _, hcf⟩ := compactification_coherence_cocycle Λ ℓ hΛ k f
+  obtain ⟨φg, hρg, hng, _, hcg⟩ := compactification_coherence_cocycle Λ ℓ hΛ k g
   obtain ⟨φgf, hρgf, hngf, _, hcgf⟩ :=
-    compactification_coherence_cocycle Λ ℓ hΛ (f ≫ g)
+    compactification_coherence_cocycle Λ ℓ hΛ k (f ≫ g)
   let F := fun (c : Compactification.BoundaryCompactification f) ↦
     localizingLowerShriek Λ c.obj.obj (hf c)
   let G := fun (c : Compactification.BoundaryCompactification g) ↦

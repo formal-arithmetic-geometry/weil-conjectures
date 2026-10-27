@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-two-root-normal-model-function-field",
+ "kind": "statement",
+ "title": "Function field and normalization of a normal two-root chart model",
+ "statement": "Let $k_0$ be a field, let $U$ be an integral scheme of finite type over $k_0$, and put $K=k(U)$ [def-weil-field, def-pc-integral-scheme, def-weil-finite-type-morphism, def-sc-function-field]. Let $n\\geq1$, let $Y$ be an integral scheme whose local rings are integrally closed domains, and let $q:Y\\to P=\\mathbf P^1_U$ be a finite surjective $U$-morphism [def-weil-finite-integral-morphism, def-nagata-projective-space-base-change]. Suppose that for every affine open $V=\\operatorname{Spec}R\\subset U$, the inverse images of the standard $x$- and $y$-charts of $P_V$ are affine, with identifications over those charts\n$$S_C=R[x,a,b]/(a^n-x,b^n-(x-1)),\\qquad S_A=R[y,u,v]/(v^n-y,u^n-(1-y)).$$\nAssume that these presentations commute with restriction to base opens and that on their overlap $y=x^{-1}$, $v=a^{-1}$, $u=b/a$. Then $P$ is integral and $k(P)=K(x)$ with the embedding of $K$ induced by $P\\to U$. Under the inclusion $k(P)\\hookrightarrow k(Y)$ induced by $q$, there are generators $a,b$ represented by the indicated chart coordinates such that\n$$k(Y)=K(x)(a,b),\\qquad a^n=x,\\qquad b^n=x-1,$$\nand this is a finite field extension [def-pc-field-extension]. For every nonempty affine open $V=\\operatorname{Spec}R\\subset U$, on each displayed target affine chart of $P_V$ the corresponding $S_C$ or $S_A$ is an integrally closed domain with fraction field $k(Y)$ and is exactly the integral closure of its target ring $R[x]$ or $R[y]$ in that field [def-weil-pbc-integral-closure]. These identifications agree on overlaps and identify $q$ over $P$ with the normalization of $P$ in $k(Y)$ [def-fin-normalization-extension]. No smoothness, primality of $n$, primitive root of unity or normality hypothesis on $U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0358, lemma-normal-integral-sections; literature/stacks-project/morphisms.tex Tag 01RV, lemma-integral-scheme-rational-functions. Explicit two-root fraction-field and integral-closure argument of returned proof steps 8--9, with normality of the model supplied as a hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-nagata-projective-space-base-change",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-fin-normalization-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use the two standard charts over each nonempty affine $V=\\operatorname{Spec}R\\subset U$. Their rings are $R[x]$ and $R[y]$, by the standard-chart statement (a),(c). The ring $R$ is a domain, and the polynomial-domain lemma makes both chart rings domains. These charts are reduced and irreducible. Any two nonempty base affines meet, since $U$ is irreducible; their intersection contains a nonempty affine open $W$. Above $W$, the intersection of either pair of chosen charts contains either $\\operatorname{Spec}\\mathcal O_U(W)[x]$ or its nonempty principal open where $x$ is invertible. Thus any two covering charts meet. Explicitly, take nonempty opens $O_1,O_2\\subset P$ meeting covering charts $C_1,C_2$. Each $C_i$ is irreducible and $C_1\\cap C_2$ is a nonempty open in each. Thus $O_1\\cap C_1\\cap C_2$ and $O_2\\cap C_1\\cap C_2$ are nonempty opens of the irreducible space $C_1\\cap C_2$, so they meet. Also $P$ is nonempty since it contains a domain chart. This proves irreducibility. Every stalk lies on a domain chart and is a localization of a domain, hence reduced; the reduced-and-irreducible criterion gives integrality.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG, lemma-standard-covering-projective-space; Properties Tag 01ON, lemma-characterize-integral; explicit overlap argument"
+   }
+  },
+  {
+   "text": "Fix one nonempty affine $V=\\operatorname{Spec}R\\subset U$. The affine-fraction-field lemma applied to $U$ and $P$ identifies $K=\\operatorname{Frac}R$ and $k(P)=\\operatorname{Frac}R[x]$ by germs. Inside the latter field, $K$ and $x$ generate it as a field: a fraction of polynomials over $R$ belongs to $K(x)$, and conversely any polynomial over $K$ can have its finitely many coefficient denominators multiplied to give a polynomial over $R$ divided by a nonzero element of $R$. The variable $x$ is transcendental over $K$, since multiplying those denominators in a putative polynomial relation would give a relation in $R[x]$. This gives $k(P)=K(x)$. The constants are the structural pullbacks from $U$, because the chart isomorphisms are $R$-algebra isomorphisms. Surjectivity of $q$ implies dominance. Its generic stalk map gives the specified inclusion $k(P)\\hookrightarrow L=k(Y)$, as in the dominant-function-field definition.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sfb-dominant-function-field-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01RV, lemma-integral-scheme-rational-functions, and 01RW, definition-function-field; explicit fraction calculation"
+   }
+  },
+  {
+   "text": "The inverse image of the $x$-chart is a nonempty affine open of $Y$ by surjectivity, so the affine-fraction-field lemma gives $L=\\operatorname{Frac}S_C$ through the germ embedding. Let $a,b\\in L$ be the germs of its displayed coordinates. Their equations are $a^n=x$ and $b^n=x-1$. Every element of $S_C$ is a polynomial in $x,a,b$ over $R$, hence belongs to $K(x)(a,b)$, and therefore so does every quotient of two such elements with nonzero denominator. Conversely $L$ contains $K(x),a,b$. Thus $L=K(x)(a,b)$. The germs agree for different base affines: on a nonempty affine refinement of their intersection the coordinates agree by the assumed restriction compatibility, so they give the same elements of the generic stalk. This also keeps the specified embedding, rather than choosing an abstract field isomorphism.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; explicit two-root fraction-field calculation"
+   }
+  },
+  {
+   "text": "Put $F=K(x)$ and consider the subalgebra $B=F[a,b]\\subset L$. Replacing each factor $a^n$ by $x$ and $b^n$ by $x-1$ reduces every monomial to an $F$-multiple of $a^ib^j$, $0\\leq i,j<n$. These $n^2$ elements span $B$. Since $B$ is a subring of a field it is a domain, and the finite-dimensional-domain lemma makes $B$ a field. It contains $F,a,b$, so it equals $F(a,b)=L$ by the preceding step. Consequently $[L:F]\\leq n^2$, in particular the required extension is finite. This uses only $n\\geq1$ and does not assert that these monomials are linearly independent.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Finite algebraic generators: explicit monomial reduction and finite-dimensional-domain argument; Mathlib LinearAlgebra/FiniteDimensional/Basic.lean, FiniteDimensional.exists_mul_eq_one, line 496"
+   }
+  },
+  {
+   "text": "The one-point scheme $\\operatorname{Spec}k_0$ is locally Noetherian: its ring is a field, whose only ideals are $(0)$ and $(1)$. Apply the locally-finite-type Noetherian lemma to $U\\to\\operatorname{Spec}k_0$. The presentations in the hypotheses exhibit an affine cover of the inverse image of every base affine by finitely generated $R$-algebras $S_C,S_A$; hence $Y\\to U$ is locally of finite type by its definition. Apply the same Noetherian lemma to obtain that $Y$ is locally Noetherian. For either displayed nonempty source chart $T=\\operatorname{Spec}S$, apply the normal-sections finite-product lemma to the quasi-compact open $T\\subset Y$. It gives $S\\cong\\prod_{i<r} B_i$ with each $B_i$ an integrally closed domain. Also $S$ is a domain with fraction field $L$ by the affine-fraction-field lemma. Thus $r\\ne0$ (the empty product is the zero ring), and $r$ cannot exceed one: two nonzero factors give nonzero complementary idempotents with product zero. Therefore $r=1$ and $S$ is integrally closed in $L$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "def-weil-finite-type-morphism",
+    "lem-sbc-normal-sections-finite-product",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358, lemma-normal-integral-sections; morphisms.tex Tag 01T6, lemma-finite-type-noetherian; elementary domain-versus-product argument"
+   }
+  },
+  {
+   "text": "Apply the finite-normal-cover normalization lemma with $X=P$, $Z=Y$, $f=q$, $F=k(P)=K(x)$, and $L=k(Y)$. Integrality of $P$, finiteness of $L/F$, and local Noetherianity of $Y$ were established above; normality, integrality of $Y$, and finite surjectivity are hypotheses. Its affine conclusion applies to both target charts above every nonempty base affine: their inverse-image rings are precisely the supplied $S_C,S_A$. It identifies each with the integral closure of its target ring in $L$ and gives the compatibility on overlaps and the resulting $P$-isomorphism with the normalization. On the overlap the assumed formulas $y=x^{-1}$, $v=a^{-1}$ and $u=b/a$ are equalities in the same field $L$ (here $a^n=x\\ne0$); hence the chart identifications use exactly the displayed coordinates. No extra assumption on $U$, on roots of unity, or on the characteristic has entered the proof.",
+   "uses": [
+    "lem-sfb-finite-normal-cover-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I, lemma-characterize-normalization; properties.tex Tag 0358, lemma-normal-integral-sections; specialization to the supplied charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sfb-dominant-function-field-map",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-finite-type-morphism",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sfb-finite-normal-cover-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Explicit two-root assembly using Tags 01RV and 035I, properties.tex 0358, and the existing DAG statements; coordinate and overlap arguments written by Q99."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective normal integral scheme over P1 with affine ring R[x,a,b]/(a^n-x,b^n-(x-1)) has function field K(x)(a,b) and is the normalization of P1 in this field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"FunctionField\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"(Fq : Type u_1) → (F : Type u_2) → [inst : Field Fq] → [inst_1 : Field F] → [Algebra (RatFunc Fq) F] → Prop\", \"doc\": \"Given a field $ F_q $, the proposition that a field $ F $ is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $. This asserts that $ F $ is a finite extension of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(R : CommRingCat) → [inst : IsDomain ↑R] → Algebra ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic normalization and fraction-field declarations do not identify this two-root model, its specified field embedding and both chart integral closures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite normal model of a two-root Kummer algebra is the integral closure of the polynomial ring in its fraction field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.instIsGaloisFractionRingNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S] [PerfectField (FractionRing R)],\\n  IsGalois (FractionRing R) (FractionRing (Ring.NormalClosure R S))\", \"doc\": \"The fraction field of the integral closure of a commutative ring $ S $ in a field $ E $ forms a Galois extension over $ K $.\"}\n  {\"name\": \"adjoinRootXPowSubCEquiv\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {n : ℕ} →\\n      {a : K} →\\n        {L : Type u_1} →\\n          [inst_1 : Field L] →\\n            [inst_2 : Algebra K L] →\\n              [Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] →\\n                {α : L} →\\n                  (primitiveR\", \"doc\": \"Given a field $K$ containing primitive $n$-th roots of unity, an irreducible polynomial $X^n - a$ over $K$, and a splitting field $L$ of $X^n - a$ containing an element $\\\\alpha$ with $\\\\alpha^n = a$, t\"}\n  {\"name\": \"AdjoinRootXPowSubCEquivToRootsOfUnity\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {n : ℕ} →\\n      (primitiveRoots n K).Nonempty →\\n        {a : K} →\\n          Irreducible (Polynomial.X ^ n - Polynomial.C a) →\\n            [NeZero n] →\\n              (AdjoinRoot (Polynomial.X ^ n - Polynomial.C a) ≃ₐ[K] AdjoinRoot (Polynomial.X ^ n - Polynomial\", \"doc\": \"Given a field $ K $ and an irreducible polynomial $ f(X) = X^n - a $ over $ K $, for any algebra automorphism $ \\\\sigma $ of the field extension $ K(\\\\alpha) $ (where $ \\\\alpha $ is a root of $ f $), the\"}\n  {\"name\": \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S],\\n  IsIntegralClosure (Ring.NormalClosure R S) S\\n    ↥(IntermediateField.normalClosure (FractionRing R) (FractionRing S) (\", \"doc\": \"The proposition that T is the integral closure of S in E, asserting that T is an S-algebra where every element of T is integral over S and S is integrally closed in T.\"}\n  {\"name\": \"instIsGaloisGroupRingOfIntegersOfNumberField\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (K : Type u_6) (L : Type u_7) [inst : Field K] [inst_1 : Field L] [NumberField K] [NumberField L]\\n  [inst_4 : Algebra K L] (G : Type u_8) [inst_5 : Group G] [inst_6 : MulSemiringAction G L] [IsGaloisGroup G K L],\\n  IsGaloisGroup G (NumberField.RingOfIntegers K) (NumberField.RingOfIntegers L)\", \"doc\": \"If $ G $ is the Galois group of a number field extension $ L/K $, then $ G $ is also the Galois group of the induced extension of their rings of integers $ \\\\mathcal{O}_L/\\\\mathcal{O}_K $, given the can\"}\n  {\"name\": \"IntermediateField.AdjoinDouble.normal_algebraicClosure\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] {x y : L},\\n  IsIntegral K x → IsIntegral K y → Normal K (AlgebraicClosure ↥K⟮x, y⟯)\", \"doc\": \"For any elements $x$ and $y$ in a field $L$ that are integral over a field $K$, the algebraic closure of the field extension $K(x, y)$ is a normal extension of $K$.\"}\n  {\"name\": \"instIsGaloisGroupIntRingOfIntegersOfRat\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (L : Type u_6) [inst : Field L] [inst_1 : NumberField L] (G : Type u_7) [inst_2 : Group G]\\n  [inst_3 : MulSemiringAction G L] [IsGaloisGroup G ℚ L], IsGaloisGroup G ℤ (NumberField.RingOfIntegers L)\", \"doc\": \"If $ G $ is the Galois group of a number field $ L $ over $ \\\\mathbb{Q} $, then $ G $ is also the Galois group of the ring of integers $ \\\\mathcal{O}_L $ of $ L $ over $ \\\\mathbb{Z} $. This means that th\"}\n  {\"name\": \"autAdjoinRootXPowSubCEquiv\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {n : ℕ} →\\n      (primitiveRoots n K).Nonempty →\\n        {a : K} →\\n          Irreducible (Polynomial.X ^ n - Polynomial.C a) →\\n            [NeZero n] →\\n              ↥(rootsOfUnity n K) ≃*\\n                AdjoinRoot (Polynomial.X ^ n - Polynomial.C a) ≃ₐ[K] Adj\", \"doc\": \"The group isomorphism mapping each n-th root of unity $\\\\eta \\\\in K$ to the K-algebra automorphism of the field extension $K(\\\\sqrt[n]{a})$ that sends the adjoined root $\\\\alpha$ (satisfying $\\\\alpha^n = a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic normalization and fraction-field declarations do not identify this two-root model, its specified field embedding and both chart integral closures."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.normalizationIn",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Scheme.normalizationIn'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic normalization and fraction-field declarations do not identify this two-root model, its specified field embedding and both chart integral closures."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationIn|integralClosure|functionField",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"17\", \"text\": \"* `AlgebraicGeometry.Scheme.functionField`: The function field of an integral scheme.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"18\", \"text\": \"* `AlgebraicGeometry.Scheme.germToFunctionField`: The canonical map from a component into the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"37\", \"text\": \"noncomputable abbrev Scheme.functionField [IrreducibleSpace X] : CommRingCat :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"41\", \"text\": \"noncomputable abbrev Scheme.germToFunctionField [IrreducibleSpace X] (U : X.Opens)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"42\", \"text\": \"    [h : Nonempty U] : Γ(X, U) ⟶ X.functionField :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"95\", \"text\": \"abbrev FunctionField : Type r :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"381\", \"text\": \"    (FractionalIdeal W.CoordinateRing⁰ W.FunctionField)ˣ :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"383\", \"text\": \"      (XIdeal W x : FractionalIdeal W.CoordinateRing⁰ W.FunctionField)⁻¹) <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"385\", \"text\": \"      FractionalIdeal.coe_ideal_span_singleton_mul_inv W.FunctionField <| XClass_ne_zero x]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"388\", \"text\": \"    (XYIdeal' h : FractionalIdeal W.CoordinateRing⁰ W.FunctionField) = XYIdeal W x (C y) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.FunctionField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"35\", \"text\": \"def ordHom (z : X) (hz : coheight z = 1) : X.functionField →*₀ ℤᵐ⁰ :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"41\", \"text\": \"    ordHom x hx (X.germToFunctionField U f) = 1 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"43\", \"text\": \"  rw [← algebraMap_germ_eq_germToFunctionField _ hx']\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"52\", \"text\": \"def ord (f : X.functionField) (z : X) : ℤ :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Smooth.IntegralClosure\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"49\", \"text\": \"    .of (integralClosure Γ(Y, U.unop) Γ(X, f ⁻¹ᵁ U.unop))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"73\", \"text\": \"    CommRingCat.ofHom (algebraMap Γ(Y, U.unop) (integralClosure Γ(Y, U.unop) Γ(X, f ⁻¹ᵁ U.unop)))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"85\", \"text\": \"  let : Algebra (integralClosure Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"86\", \"text\": \"      (integralClosure Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r)) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.FunctionField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"23\", \"text\": \"* `AlgebraicGeometry.Scheme.RationalMap.equivFunctionFieldOver`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"181\", \"text\": \"abbrev fromFunctionField [IrreducibleSpace X] (f : X.PartialMap Y) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"182\", \"text\": \"    Spec X.functionField ⟶ Y :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"204\", \"text\": \"lemma fromFunctionField_restrict (f : X.PartialMap Y) [IrreducibleSpace X]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic normalization and fraction-field declarations do not identify this two-root model, its specified field embedding and both chart integral closures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Function field and normalization of a finite normal cover of the projective line from two monic root coordinate rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \": IsFractionRing (ringOfIntegers Fq F) F\", \"doc\": \"For any function field $ F $ over a field $ F_q $, $ F $ is the fraction field of its ring of integers, which is the integral closure of the polynomial ring $ F_q[X] $ in $ F $.\"}\n  {\"name\": \"FunctionField.ringOfIntegers\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"[Algebra Fq[X] F]\", \"doc\": \"The integral closure of the polynomial ring $ \\\\mathbb{F}_q[X] $ in the function field $ F $, consisting of all elements of $ F $ that are integral over $ \\\\mathbb{F}_q[X] $.\"}\n  {\"name\": \"functionField_iff\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"(Fqt : Type*) [Field Fqt] [Algebra Fq[X] Fqt] [IsFractionRing Fq[X] Fqt] [Algebra (RatFunc Fq) F] [Algebra Fqt F]\\n  [Algebra Fq[X] F] [IsScalarTower Fq[X] Fqt F] [IsScalarTower Fq[X] (RatFunc Fq) F] :\\n  FunctionField Fq F ↔ FiniteDimensional Fqt F\", \"doc\": \"A field $ F $ is a function field over $ F_q $ if and only if it is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $.\"}\n  {\"name\": \"FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \": IsIntegralClosure (ringOfIntegers Fq F) Fq[X] F\", \"doc\": \"The ring of integers of a function field $F$ over $\\\\mathbb{F}_q$ is the integral closure of the polynomial ring $\\\\mathbb{F}_q[X]$ in $F$. This means every element of the ring of integers is integral o\"}\n  {\"name\": \"Polynomial.normalize_eq_self_iff_monic\", \"module\": \"Mathlib.Algebra.Polynomial.FieldDivision\", \"type\": \"[DecidableEq R] {p : Polynomial R} (hp : p ≠ 0) : normalize p = p ↔ p.Monic\", \"doc\": \"For a non-zero polynomial $ p $ over a commutative ring $ R $, the normalization of $ p $ equals $ p $ itself if and only if $ p $ is monic, i.e., $\\\\text{normalize}(p) = p \\\\leftrightarrow p \\\\text{ is \"}\n  {\"name\": \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \": IsIntegrallyClosed (ringOfIntegers Fq F)\", \"doc\": \"The integral closure of the polynomial ring $\\\\mathbb{F}_q[X]$ in the function field $F$ is integrally closed in its fraction field. This means every element of the fraction field that is integral over\"}\n  {\"name\": \"FunctionField\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"[Algebra (RatFunc Fq) F] : Prop\", \"doc\": \"Given a field $ F_q $, the proposition that a field $ F $ is a finite-dimensional algebra over the rational function field $ \\\\text{RatFunc}(F_q) $. This asserts that $ F $ is a finite extension of the\"}\n  {\"name\": \"AlgebraicClosure.finEquivRoots.congr_simp\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"∀ {k : Type u} [inst : Field k] {K : Type u_1} [inst_1 : Field K] [inst_2 : DecidableEq K] {i : k →+* K}\\n  {f : AlgebraicClosure.Monics k} (hf : (Polynomial.map i ↑f).Splits),\\n  AlgebraicClosure.finEquivRoots hf = AlgebraicClosure.finEquivRoots hf\", \"doc\": \"For any field $k$ and its extension field $K$, if a monic polynomial $f$ over $k$ splits into linear factors in $K$, then the explicit bijection between the finite set $\\\\mathrm{Fin}(\\\\deg(f))$ and the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic normalization and fraction-field declarations do not identify this two-root model, its specified field embedding and both chart integral closures."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegralClosure, IsIntegrallyClosed",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsIntegrallyClosed.instIsIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] {K : Type u_3} [CommRing K] [Algebra R K] [ifr : IsFractionRing R K] [iic : IsIntegrallyClosed R] : IsIntegralClosure R R K\", \"doc\": \"Note that this is not a duplicate instance, since `IsIntegrallyClosed R` is instead defined\\nas `IsIntegrallyClosed R R (FractionRing R)`.\"}\n  {\"name\": \"isIntegrallyClosed_iff_isIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] (K : Type u_4) [CommRing K] [Algebra R K] [IsFractionRing R K] : IsIntegrallyClosed R ↔ IsIntegralClosure R R K\", \"doc\": \"`R` is integrally closed iff it is the integral closure of itself in its field of fractions.\"}\n  {\"name\": \"IsIntegralClosure.of_isIntegrallyClosed\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) (S : Type u_2) [CommRing R] [CommRing S] (K : Type u_3) [CommRing K] [Algebra R K] [ifr : IsFractionRing R K] [IsIntegrallyClosed R] [Algebra S R] [Algebra S K] [IsScalarTower S R K] [Algebra.IsIntegral S R] : IsIntegralClosure R S K\", \"doc\": \"\"}\n  {\"name\": \"IsIntegralClosure.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \" (A : Type u_1) (K : Type u_2) [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u_3) [Field L] (C : Type u_4) [CommRing C] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [FiniteDimensional K L] [IsDomai\", \"doc\": \"If `L` is a finite separable extension of `K = Frac(A)`, where `A` is\\nintegrally closed and Noetherian, the integral closure `C` of `A` in `L` is\\nNoetherian.\"}\n  {\"name\": \"IsIntegralClosure.finite\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \" (A : Type u_1) (K : Type u_2) [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u_3) [Field L] (C : Type u_4) [CommRing C] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [FiniteDimensional K L] [IsDomai\", \"doc\": \"If `L` is a finite separable extension of `K = Frac(A)`, where `A` is\\nintegrally closed and Noetherian, the integral closure `C` of `A` in `L` is\\nfinite over `A`.\"}\n  {\"name\": \"IsIntegralClosure.isNoetherian\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \" (A : Type u_1) (K : Type u_2) [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u_3) [Field L] (C : Type u_4) [CommRing C] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [FiniteDimensional K L] [IsDomai\", \"doc\": \"If `L` is a finite separable extension of `K = Frac(A)`, where `A` is\\nintegrally closed and Noetherian, the integral closure `C` of `A` in `L` is\\nNoetherian over `A`.\"}\n  {\"name\": \"IsIntegralClosure.range_le_span_dualBasis\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \" {A : Type u_1} {K : Type u_2} [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] {L : Type u_3} [Field L] (C : Type u_4) [CommRing C] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [FiniteDimensional K L] [Algebra\", \"doc\": \"\"}\n  {\"name\": \"Algebra.intNormAux\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_6) [CommRing A] [CommRing B] [Algebra A B] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsIntegralClosure B A L] [IsIntegrallyClosed A] : B →* A\", \"doc\": \"The restriction of the norm on `L/K` restricted onto `B/A` in an AKLB setup.\\nSee `Algebra.intNorm` instead.\"}\n  {\"name\": \"Algebra.intTraceAux\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_6) [CommRing A] [CommRing B] [Algebra A B] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsIntegralClosure B A L] [FiniteDimensional K L] [IsInteg\", \"doc\": \"The restriction of the trace on `L/K` restricted onto `B/A` in an AKLB setup.\\nSee `Algebra.intTrace` instead.\"}\n  {\"name\": \"Algebra.map_intNormAux\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \" {A : Type u_1} {K : Type u_2} {L : Type u_3} {B : Type u_6} [CommRing A] [CommRing B] [Algebra A B] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsIntegralClosure B A L] [IsIntegrallyClosed A] (x : B) :\", \"doc\": \"\"}\n  {\"name\": \"Algebra.algebraMap_intNorm\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \" {A : Type u_1} {K : Type u_2} {L : Type u_3} {B : Type u_6} [CommRing A] [CommRing B] [Algebra A B] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsIntegralClosure B A L] [FiniteDimensional K L] [IsInteg\", \"doc\": \"\"}\n  {\"name\": \"Algebra.map_intTraceAux\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \" {A : Type u_1} {K : Type u_2} {L : Type u_3} {B : Type u_6} [CommRing A] [CommRing B] [Algebra A B] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsIntegralClosure B A L] [FiniteDimensional K L] [IsInteg\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsIntegralClosure.of_isIntegrallyClosed (IntegrallyClosed.lean:272) supplies only the final ring integral-closure fact; chart domains, specified function field and scheme identification remain separate work."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem of_isIntegrallyClosed|lemma of_isIntegrallyClosed|of_isIntegrallyClosed",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"line\": \"223\", \"text\": \"lemma _root_.IsIntegralClosure.of_isIntegrallyClosedIn\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"line\": \"272\", \"text\": \"instance _root_.IsIntegralClosure.of_isIntegrallyClosed [IsIntegrallyClosed R]\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"line\": \"275\", \"text\": \"  IsIntegralClosure.of_isIntegrallyClosedIn\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"line\": \"277\", \"text\": \"lemma of_isIntegrallyClosedIn\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"line\": \"288\", \"text\": \"lemma _root_.IsIntegralClosure.of_isIntegralClosure_of_isIntegrallyClosedIn\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"line\": \"223\", \"text\": \"    IsIntegralClosure.of_isIntegrallyClosed _ _ _\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"line\": \"265\", \"text\": \"    IsIntegralClosure.of_isIntegrallyClosed _ _ _\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"line\": \"279\", \"text\": \"    IsIntegralClosure.of_isIntegrallyClosed _ _ _\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"line\": \"299\", \"text\": \"    IsIntegralClosure.of_isIntegrallyClosed _ _ _\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"line\": \"313\", \"text\": \"    IsIntegralClosure.of_isIntegrallyClosed _ _ _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsIntegralClosure.of_isIntegrallyClosed (IntegrallyClosed.lean:272) supplies only the final ring integral-closure fact; chart domains, specified function field and scheme identification remain separate work."
+  },
+  {
+   "tool": "grep",
+   "query": "two.root|normalizationIn|functionField_isFractionRing",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give generic affine fractions or normalization constructions, not the two-root equations, the prescribed field embedding and both integral-closure charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Function field of an integral normal finite two-root cover of projective space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.functionField, FunctionField, FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial, AlgebraicGeometry.instFieldCarrierFunctionField, functionField_iff, FunctionField.ringOfIntegers, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give generic affine fractions or normalization constructions, not the two-root equations, the prescribed field embedding and both integral-closure charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen",
+   "results": "1 hits: AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give generic affine fractions or normalization constructions, not the two-root equations, the prescribed field embedding and both integral-closure charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Function field and normalization of a finite normal cover of the projective line with coordinate equations a^n=x and b^n=x-1",
+   "results": "8 hits: WeierstrassCurve.Affine.FunctionField, FunctionField, functionField_iff, AlgebraicGeometry.Scheme.Hom.toNormalization, FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial, WeierstrassCurve.Affine.CoordinateRing.mk_φ, AlgebraicGeometry.Scheme.Hom.normalizationDesc, WeierstrassCurve.Affine.CoordinateRing.XClass; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give generic affine fractions or normalization constructions, not the two-root equations, the prescribed field embedding and both integral-closure charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of a two-generator integral algebra over R[x] is K(x)(a,b) and its normal affine charts are integral closures",
+   "results": "8 hits: FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial, FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial, Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, AlgebraicGeometry.functionField_isFractionRing_of_affine, FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial, IsIntegralClosure.isFractionRing_of_finite_extension, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, integralClosure.isFractionRing_of_finite_extension; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give generic affine fractions or normalization constructions, not the two-root equations, the prescribed field embedding and both integral-closure charts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fermat-kummer-relative-curve",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof steps 8--9: localization to K, two field generators, target integrality, Noetherian normal affine sections, equality with the integral closure and overlap gluing.",
+   "via": [
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-two-root-normal-model-function-field",
+  "worker": "stage1",
+  "summary": "No new nodes. Proved the target integrality and the actual function-field embedding, computed the two-generator field and finite spanning algebra, verified local Noetherianity and normal affine sections, then applied the existing general finite-normal-cover normalization lemma. No change to the statement. Repair after the 2026-10-23 return at a08b2be64af: rebased the retained split onto the current live unsplit item, re-read all current cited statements and verified every saved full-statement quote is unchanged. Expanded the chart-intersection and reducedness checks in step 1; retained the accepted field and normalization arguments.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof steps 8--9: localization to K, two field generators, target integrality, Noetherian normal affine sections, equality with the integral closure and overlap gluing. Steps 1--4 realize target integrality and field generators; steps 5--6 realize normal chart sections, integral closures and gluing.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic projective-space chart cover and affine polynomial chart interface, needed for the given P1 model; no same-unit chart statement supplies it."
+   },
+   {
+    "node": "lem-sbc-normal-sections-finite-product",
+    "why": "Generic normal-sections tool applied to the displayed affine opens; domain forces exactly one factor. It supplies affine normality without assuming the base normal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-sbc-normal-sections-finite-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-fb9d0d6bc",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-fb9d0d6bc (reviewer sub-agent of L); spot-checked: Re-delivery after the landing return at a08b2be64af, with no new nodes. Compared with the a08b snapshot, only step 1 is reworded (the irreducibility argument through the irreducible C1∩C2 is spelled out, and P is shown nonempty) and one sentence is added to split_report.summary. The statement, deps, source and steps 2-6 are identical. I read all six steps in full. Step 1: integral P via standard-charts (a),(c) and polynomial domains, with charts over different base affines meeting in D(x) over a common affine W. Step 2: k(P)=K(x) by clearing denominators in the affine-fraction germs, with the structural embedding of K and a dominant q. Step 3: L=Frac S_C=K(x)(a,b). Step 4: F[a,b] is spanned by n^2 monomials, so it is a field by finite-dim-domain-is-field, and [L:F]<=n^2. Step 5: U is locally Noetherian by 01T6, Y->U is locally of finite type from the chart presentations, so Y is locally Noetherian, and normal-sections-finite-product plus the domain property give r=1. Step 6: every hypothesis of lem-sfb-finite-normal-cover-normalization is met (both schemes integral, Y locally Noetherian and normal, q finite surjective, L/F finite), and its conclusions give the integral-closure, overlap and normalization clauses. The overlap relations check out (v^n=y, u^n=1-y). Edge cases: n=1 is trivial; char p dividing n makes the hypotheses unsatisfiable, so the statement holds vacuously. No duplicate: fermat-finite-chart-cover only computes the charts. No SGA cited. Both tool_uses (projective charts, normal sections) are generic and accepted. Stacks 0358 read at properties.tex:1006."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TwoRootNormalModelFunctionField",
+  "declaration": "AlgebraicGeometry.TwoRootNormalModel.functionField_and_normalization",
+  "declarations": [
+   "AlgebraicGeometry.TwoRootNormalModel.standard",
+   "AlgebraicGeometry.TwoRootNormalModel.targetChart",
+   "AlgebraicGeometry.TwoRootNormalModel.sourceChart",
+   "AlgebraicGeometry.TwoRootNormalModel.rootOn",
+   "AlgebraicGeometry.TwoRootNormalModel.relations",
+   "AlgebraicGeometry.TwoRootNormalModel.presentation",
+   "AlgebraicGeometry.TwoRootNormalModel.onOverlapC",
+   "AlgebraicGeometry.TwoRootNormalModel.onOverlapA",
+   "AlgebraicGeometry.TwoRootNormalModel.functionField_and_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoRootNormalModelFunctionField.lean",
+  "statement": "theorem functionField_and_normalization (k₀ : Type u) [Field k₀] (U Y : Scheme.{u}) [IsIntegral U] [IsIntegral Y] (p : U ⟶ Spec (.of k₀)) [LocallyOfFiniteType p] [QuasiCompact p] (n : ℕ) (hn : 1 ≤ n) (q : Y ⟶ ProjectiveSpace (ULift.{u} Bool) U) [IsFinite q] [Surjective q] (hnormal : ∀ z : Y, IsDomain (Y.presheaf.stalk z) ∧ IsIntegrallyClosed (Y.presheaf.stalk z)) (r s : ∀ i : Bool, Γ(Y, q ⁻¹ᵁ standard U i)) (hcharts : ∀ (V : U.affineOpens) (i : Bool), IsAffineOpen (sourceChart q V.1 i) ∧ Function.Surjective (presentation q V.1 i r s) ∧ RingHom.ker (presentation q V.1 i r s) = relations Γ(U, V.1) n i) (hv : onOverlapA q (r true) * onOverlapC q (r false) = 1) (hu : onOverlapA q (s true) * onOverlapC q (r false) = onOverlapC q (s false)) : ∃ (_ : IsIntegral (ProjectiveSpace (ULift.{u} Bool) U)) (_ : Nonempty (standard U false)) (_ : Nonempty (q ⁻¹ᵁ standard U false)) (e : RatFunc U.functionField ≃+* (ProjectiveSpace (ULift.{u} Bool) U).functionField) (_ : Algebra (ProjectiveSpace (ULift.{u} Bool) U).functionField Y.functionField), e RatFunc.X = (ProjectiveSpace (ULift.{u} Bool) U).germToFunctionField _ (ProjectiveSpace.coordRatio (ULift.{u} Bool) U ⟨false⟩ ⟨true⟩) ∧ Spec.map (CommRingCat.ofHom e.symm.toRingHom) ≫ (ProjectiveSpace (ULift.{u} Bool) U).fromSpecFunctionField ≫ ProjectiveSpace (ULift.{u} Bool) U ↘ U = Spec.map (CommRingCat.ofHom (algebraMap U.functionField (RatFunc U.functionField))) ≫ U.fromSpecFunctionField ∧ Spec.map (CommRingCat.ofHom (algebraMap (ProjectiveSpace (ULift.{u} Bool) U).functionField Y.functionField)) ≫ (ProjectiveSpace (ULift.{u} Bool) U).fromSpecFunctionField = Y.fromSpecFunctionField ≫ q ∧ FiniteDimensional (ProjectiveSpace (ULift.{u} Bool) U).functionField Y.functionField ∧ (∃ a b : Y.functionField, a = Y.germToFunctionField _ (r false) ∧ b = Y.germToFunctionField _ (s false) ∧ a ^ n = algebraMap _ _ (e RatFunc.X) ∧ b ^ n = algebraMap _ _ (e RatFunc.X - 1) ∧ IntermediateField.adjoin (ProjectiveSpace (ULift.{u} Bool) U).functionField {a, b} = ⊤) ∧ (∀ (V : U.affineOpens) (_ : Nonempty V.1) (i : Bool), ∃ (_ : Nonempty (sourceChart q V.1 i)) (_ : Algebra Γ(ProjectiveSpace (ULift.{u} Bool) U, targetChart U V.1 i) Y.functionField), (∀ t : Γ(ProjectiveSpace (ULift.{u} Bool) U, targetChart U V.1 i), algebraMap _ _ t = Y.germToFunctionField (sourceChart q V.1 i) (q.app (targetChart U V.1 i) t)) ∧ IsDomain Γ(Y, sourceChart q V.1 i) ∧ IsIntegrallyClosed Γ(Y, sourceChart q V.1 i) ∧ IsFractionRing Γ(Y, sourceChart q V.1 i) Y.functionField ∧ (integralClosure Γ(ProjectiveSpace (ULift.{u} Bool) U, targetChart U V.1 i) Y.functionField : Set Y.functionField) = Set.range (Y.germToFunctionField (sourceChart q V.1 i))) ∧ ∃ E : Y ≅ (ProjectiveSpace (ULift.{u} Bool) U).normalizationIn Y.functionField, E.hom ≫ (ProjectiveSpace (ULift.{u} Bool) U).fromNormalizationIn Y.functionField = q ∧ Y.fromSpecFunctionField ≫ E.hom = ((ProjectiveSpace (ULift.{u} Bool) U).fromSpecOfAlgebraFunctionField Y.functionField).toNormalization",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The concrete chart helpers belong to this two-root statement. Compatible coordinate families are represented by their uniquely glued sections; surjectivity and the exact kernel encode each specified quotient presentation. Chart integral closures and normalization are identified through the canonical germs, not arbitrary abstract field embeddings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ed64143f",
+  "group": "Q144",
+  "result": "fix",
+  "note": "Lean exact against the node. P1_U is ProjectiveSpace(ULift Bool) with coordRatio charts (x=T_true/T_false, y=x^-1 built in). Chart presentations are surjective evaluation with kernel = relations, as R[x]/R[y]-algebras. r,s on full standard preimages are equivalent to compatible families. Overlaps v*a=1, u*a=b. e:RatFunc K≃k(P) pinned on X and on K via the P→U triangle; Algebra k(P) k(Y) pinned by the generic-point triangle with q; a,b are germs with a^n=x, b^n=x-1 and adjoin=⊤; FiniteDimensional stated; per nonempty affine chart: domain, integrally closed, IsFractionRing, integralClosure = germ range with the algebra pinned to germ∘q.app; E: Y≅normalizationIn over P, generic-compatible. Empty V trivial; char p | n vacuous; no extra hypotheses; universes bound; proof-dep imports non-public (rule 7). Only fault: H11, the Second reading was the worker's self-check ('not a claim of an independent reading'). FIX: fixes/lem-sfb-two-root-normal-model-function-field.report.md = worker report verbatim + independent clause-by-clause second reading. Advisory: existential algebra vs dominantFunctionFieldAlgebra (proof_dep only); hnormal domain part redundant. No Lean changed, no compile."
+ }
+}

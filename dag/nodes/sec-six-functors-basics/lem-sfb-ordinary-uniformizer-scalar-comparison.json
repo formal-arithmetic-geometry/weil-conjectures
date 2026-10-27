@@ -1,0 +1,161 @@
+{
+ "id": "lem-sfb-ordinary-uniformizer-scalar-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: identify the chosen uniformizer scalar after transport from continuous internal coefficients to ordinary constant-coefficient module sheaves; only the ordinary single-scalar step.",
+   "via": [
+    "lem-sfb-internal-uniformizer-scalar-realization",
+    "lem-sfb-internal-uniformizer-koszul-scalar-square",
+    "lem-sfb-internal-koszul-cone-coordinates",
+    "lem-sfb-internal-koszul-finite-acyclicity",
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The ordinary single-uniformizer scalar comparison",
+ "statement": "Let l be prime, E a finite extension of Q_l and X any scheme. Let O and q be the small-site discrete integer ring and first residue map of [def-sfb-internal-completion-section-transport], F the prescribed ordinary module transport of [def-sfb-internal-quotient-tower-model], and A and A_1 the lifted constant integer ring sheaf and its first quotient of [det-prop-integral-criterion-constant-coefficients]. There exist ring isomorphisms e:A≅O and f:A_1≅O_1 commuting with the quotient maps. Put t=e(η(varpi)), where varpi is the chosen coefficient uniformizer and η its constant sheaf section. For every endomorphism d of the point regular integer module whose continuous section action is multiplication by varpi, and every ordinary internal module M, F(scalarOnModules(d)_M) followed by the inverse right unitor equals that inverse right unitor followed by F(M) tensor ringedKoszulScalar(O,t). The scalarOnModules expression is that of [det-pe-derived-nakayama-resolution] and the rank-one section endomorphism is [def-weil-pbc-ringed-koszul-system]. This is a statement about one scalar on ordinary modules, without ideal, regularity, power, cochain-complex or totalization assertions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), constant coefficient comparison; literature/stacks-project/algebraization.tex, Lemma derived-completion-koszul (0A0E), the rank-one multiplication map."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-completion-section-transport",
+  "def-sfb-internal-quotient-tower-model",
+  "det-prop-integral-criterion-constant-coefficients",
+  "det-pe-derived-nakayama-resolution",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Retain the canonical smallIso for the discrete integer coefficients. Use its naturality for the first quotient, with the ULift quotient equivalence and the equality of the mapped uniformizer ideal with IntegralConstantCompletion.ideal, to construct f and prove the quotient square. Normalize smallIso on constant sections: the adjunction uniqueness unit identity normalizes smallConstantIso at the terminal object, naturality gives the formula on every object, and constantRingMap_normalization supplies the reconstructed ring formula.",
+   "uses": [
+    "lem-sfb-internal-discrete-quotient-comparison",
+    "lem-sfb-admissible-scalar-realization-exact",
+    "def-sfb-internal-completion-section-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the profinite point, apply unit_hom_ext and the sheafification adjunction to the constant-function map. Additive maps from the tensor unit ULift Z agree when they agree on 1. Evaluate this generator on each point of the profinite set: the hypothesis on d sends the constant function 1 to the constant uniformizer. The existing scalarPointMap_absolute identifies the pointComparison transport with this constant-function coefficient map. Monoidality and naturality of constantSchemeIso carry the equality to X.",
+   "uses": [
+    "lem-sfb-integral-models-flat-residue",
+    "lem-sfb-internal-first-residue-ring-iso",
+    "def-sfb-integral-constant-model-realization",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express the inverse left unitor of an internal module using the relative tensor projection and the unit. Its naturality shows that scalarOnModules has underlying map equal to the action of the pulled-back constant uniformizer. Restriction of scalars composes this action with the two coefficient maps. Lax unitality of sheafToPresheaf identifies the result on sections with the reconstructed section-module action; the small-site pushforward keeps this formula. The proved pure-tensor right-unitor formula gives its inverse on m as m tensor 1. Tensor naturality and unitHomEquiv identify tensoring ringedKoszulScalar with the same sectionwise scalar multiplication. Apply this characterization to modules.map scalarOnModules. The proof works for the empty scheme and zero modules and uses no boundedness, regularity or flatness hypothesis.",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-pur-module-tensor-generator-calculus",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), constant coefficient comparison, with the ordinary scalar and unit normalization made explicit.",
+  "group": "T4",
+  "date": "2026-10-27",
+  "note": "Direct proof from the existing constant-function, monoidal coefficient, internal action and pure-tensor APIs; no split-off statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monoidal coefficient comparison carries the scalar action of a constant element on an internal module to multiplication by the same section on the ordinary module sheaf",
+   "results": "8 infrastructure hits, including ModObj.smul, ModObj.mul_smul, ModObj.mul_smul', IsMod_Hom.smul_hom, Mod_.scalarRestriction_smul and sheafification scalar identities. No statement for the prescribed coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; the coefficient and section-normalization step is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular constant section generates the kernel of a quotient map of sheaves of rings, and scalar endomorphisms act by that section under the module equivalence",
+   "results": "8 infrastructure hits, including SheafOfModules.Presentation.map_generators_I and QuasicoherentData.localGeneratorsData_generators. No scalar comparison for this transport.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing project ordinary tensor and quotient comparisons supply the underlying constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.rightUnitor",
+   "results": "0 hits; unknown identifier.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*scalar|scalar.*map",
+   "results": "25 generic source hits from msearch, including function-field and generic algebraic scalar-map results; no coefficient-comparison theorem. Local rg on the scalar, constant-section and unitHomEquiv APIs also found no normalized single-uniformizer comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Blueprint searches for uniformizer scalar and constant scalar found no duplicate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalUniformizerScalarRealization",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.OrdinaryUniformizerScalarComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/OrdinaryUniformizerScalarComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.ordinary_uniformizer_scalar_comparison",
+  "statement": "theorem ordinary_uniformizer_scalar_comparison :\n    ∃ e : IntegralConstantCompletion.constantRing l E X ≅ ring l E X,\n    ∃ f : IntegralConstantCompletion.finiteRing l E X 0 ≅\n        smallRing X (condensedRingObj\n          (discreteObj (Padic.coefficientExtensionRing l E 1)) X),\n      (IntegralConstantCompletion.quotientMap l E X false 0 ≫ f.hom =\n        e.hom ≫ residue l E X) ∧\n      ∀ (d : End (Mod.regular (DerivedNakayama.integerRing l E))),\n        (∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)\n          (s : S.unop), ((d.hom.hom.app S) b).down s =\n            Padic.coefficientExtensionUniformizer l E * b.down s) →\n        ∀ M : AdicCompletion.Modules l E X,\n          (modules l E X).map ((DerivedNakayama.scalarOnModules l E X d).app M) ≫\n              (ρ_ ((modules l E X).obj M)).inv =\n            (ρ_ ((modules l E X).obj M)).inv ≫ (modules l E X).obj M ◁\n              ringedKoszulScalar (ring l E X) (ConstantCompletion.algebraSection e.hom\n                (ULift.up (Padic.coefficientExtensionUniformizer l E)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "lem-sfb-internal-discrete-quotient-comparison",
+  "lem-sfb-admissible-scalar-realization-exact",
+  "def-sfb-internal-completion-section-transport",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-sfb-internal-first-residue-ring-iso",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "det-pe-derived-nakayama-resolution",
+  "def-sfb-internal-quotient-tower-model",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-pur-module-tensor-generator-calculus",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T130315-L-3448248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T201957-L-3427040",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

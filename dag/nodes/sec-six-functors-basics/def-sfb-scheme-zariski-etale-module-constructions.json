@@ -1,0 +1,151 @@
+{
+ "id": "def-sfb-scheme-zariski-etale-module-constructions",
+ "kind": "definition",
+ "title": "Canonical small etale module category and Zariski extension and restriction",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with its small etale site [def-weil-pbc-etale-site] and Zariski site [def-sc-zariski-site]. Define the ring presheaf $\\mathcal O_{X,\\mathrm{et}}$ by $(v:V\\to X)\\mapsto\\Gamma(V,\\mathcal O_V)$, with restriction by pullback of regular functions, and let $\\mathcal O_{X,\\mathrm{et}}$ also denote its sheaf of rings. Write $\\operatorname{Mod}(X_{\\mathrm{et}},\\mathcal O_{X,\\mathrm{et}})$ for its category of module sheaves [def-weil-sheaf-of-modules-category]. Let $j:X_{\\mathrm{Zar}}\\to X_{\\mathrm{et}}$ send an open to its open subscheme. For a proof that $j$ is continuous, the canonical ring map $\\mathcal O_{X,\\mathrm{Zar}}\\to j_*\\mathcal O_{X,\\mathrm{et}}$ identifies regular functions on an open with those on its open subscheme. Define $\\epsilon_*$ to be restriction along $j$ with restriction of scalars through this map. Given also a proof that $\\epsilon_*$ is a right adjoint, define $\\epsilon^*$ as the canonical ringed-site tensor pullback $\\mathcal O_{X,\\mathrm{et}}\\otimes_{\\epsilon^{-1}\\mathcal O_{X,\\mathrm{Zar}}}\\epsilon^{-1}(-)$. A Zariski-etale module context consists only of these two proof fields, continuity of $j$ and the right-adjoint property of $\\epsilon_*$; its restriction and extension functors are the constructions just specified, with no additional chosen functor or map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-sc-zariski-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03DU (definition-structure-sheaf), 03FH (remark-change-topologies-ringed-sites), and 0GN7 (lemma-fully-faithful-associated, restriction description in its proof)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zariskiEtaleModule|SmallEtaleModules|smallEtaleModuleRing",
+   "results": "{\"t\": \"2026-10-23T12:53:00Z\", \"tool\": \"grep\", \"query\": \"zariskiEtaleModule|SmallEtaleModules|smallEtaleModuleRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "Exact scheme-specific constructions already exist in Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence; generic Mathlib APIs do not independently give this specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical extension and restriction of modules between the Zariski and small etale sites of a scheme",
+   "results": "{\"t\": \"2026-10-23T12:53:00Z\", \"tool\": \"leansearch\", \"query\": \"Canonical extension and restriction of modules between the Zariski and small etale sites of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\"], \"digest\": \"984ae7eee570cf88\"}",
+   "date": "2026-10-23",
+   "verdict": "Exact scheme-specific constructions already exist in Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence; generic Mathlib APIs do not independently give this specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "{\"t\": \"2026-10-23T12:53:01Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, SheafOfModules.pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.pullback_assoc\"], \"digest\": \"de3cefe46418329c\"}",
+   "date": "2026-10-23",
+   "verdict": "Exact scheme-specific constructions already exist in Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence; generic Mathlib APIs do not independently give this specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ZariskiEtaleModuleContext|zariskiEtaleModuleExtension|smallEtaleModuleRing|SmallEtaleModules lean/WeilConjectures lean/Sheaf; rg -l SmallEtaleModules|ZariskiEtaleModuleContext|zariskiEtaleOpenRingMap|smallEtaleModuleRing|SchemeZariskiEtaleQuasiCoherentEquivalence dag/nodes; tools/blueprint_refs.py search Zariski.*etale.*module",
+   "results": "No upstream WeilConjectures matches. Sheaf/AlgebraicGeometry/SchemeZariskiEtaleQuasiCoherentEquivalence.lean defines the constructions; consumers occur in ZariskiEtaleTensorSections and SmallEtaleQuasiCoherentKernel. Only three theorem nodes mention these names: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, lem-trf-zariski-etale-tensor-sections, lem-trf-scheme-etale-quasi-coherent-kernel. None is a definition node owning them. Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "existing declarations, no definition node; record without copying or moving Lean"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-etale-derived-module-realization",
+  "date": "2026-10-23",
+  "group": "Q128"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0S supplies coherence and lower boundedness of the internal Hom. Affine chart reduction: Tag 071Q (lemma-derived-quasi-coherent-small-etale-site), composed with perfect.tex lemma-affine-compare-bounded (affine module equivalence); exactness from lemma-epsilon-flat and the affine associated-module functor. Definition of the canonical scheme small-etale module category and the Zariski extension/restriction used to define a_A.",
+   "via": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-coherent-derived-internal-hom",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleRing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleRing",
+   "AlgebraicGeometry.Scheme.Modules.SmallEtaleModules",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleOpenRingMap",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleModuleRestriction",
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtaleModuleExtension",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext.extension",
+   "AlgebraicGeometry.Scheme.Modules.ZariskiEtaleModuleContext.restriction"
+  ],
+  "statement": "def smallEtaleModuleRing (X : Scheme.{u}) : Sheaf X.smallEtaleTopology RingCat.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing definitions in the landed module are recorded in place, without moving or copying them. smallEtaleModulePresheaf and smallEtaleModuleRing give regular functions; SmallEtaleModules is the actual SheafOfModules category. The ring map, restriction and tensor extension are canonical. ZariskiEtaleModuleContext has only continuity and right-adjoint proof fields; its extension and restriction use those proofs. This definition node does not assert the comparison theorem or choose its existential witness."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3bb379d73",
+  "group": "Q128",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3bb379d73",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of eca1a946. Item Lean byte-identical (sha256 938ed7fe…), so the prior full maths check holds: canonical a_A = tilde ⋙ canonical extension, exact and faithful, e pinned termwise, D_QCoh with IsQuasicoherent cohomology in all degrees, RΓ by its universal property plus K-injective computation, e.inverse ≅ ι ⋙ RG, natural H^i, a ⋙ Γ ≅ 𝟭, A=0 allowed, wA/wE independent. stmt_deps: theorem lem-trf-scheme-zariski-etale-quasi-coherent-equivalence replaced by new existing:true def-sfb-scheme-zariski-etale-module-constructions; theorem kept in proof_deps and step 1. The new node's statement matches the landed decls (regular-function ring presheaf/sheaf, SheafOfModules category, gabberOpenEtale ring map, pushforward restriction, SheafOfModules.pullback extension, two-Prop-field context) and Stacks 03DU/03FH/0GN7; stmt_deps exist; no concurrent owner in side-live. statement_change is citation-only; 6-citer audit complete (a 7th node mentioning the item cites it in neither stmt_deps nor proof_deps). Advisory: the node omits isSheaf/adjunction decls, which the item does not use and the trf theorem node still owns. No fixes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T081356-L-1941788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.scheme_zariski_etale_quasiCoherent_equivalence",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverHasWeakSheafify",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverWEqualsLocallyBijective",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf_isSheaf"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.Modules.scheme_zariski_etale_quasiCoherent_equivalence"
+  ]
+ }
+}

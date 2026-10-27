@@ -208,18 +208,36 @@
   "file": "lean/Sheaf/RingTheory/TraceOneInvariantFiniteness.lean",
   "statement": "theorem isNoetherianRing_and_finite_of_trace_one (R : Type u) [CommRing R] [IsNoetherianRing R] (G : Type v) [Group G] [Fintype G] [MulSemiringAction G R] (htrace : ∃ a : R, ∑ g : G, g • a = 1) : IsNoetherianRing (FixedPoints.subring R G) ∧ Module.Finite (FixedPoints.subring R G) R",
   "branch": "newtargets-dag",
-  "by": "Q85",
-  "date": "2026-10-19",
+  "by": "Q07",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.TraceOneInvariantFiniteness deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restores the previously reviewed statement module deleted on 2026-10-20; the mathematical statement and dependency interfaces are unchanged."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f714d7b04",
-  "group": "Q85",
+  "reviewer": "NT-stage2-cc-bf124005e",
+  "group": "Q07",
   "result": "pass",
-  "note": "Item lean record + new module only; dep records identical to side. Every clause matches the node: CommRing+IsNoetherianRing R; Group+Fintype G (needed for the sum, not stronger than the citer's Finite); MulSemiringAction G R (ring automorphisms, no faithfulness); A = Mathlib FixedPoints.subring R G; trace-one hypothesis as a sum over all of G; conclusion IsNoetherianRing A ∧ Module.Finite A R. No |G| invertibility or finite-type assumption. Edge cases R=0, trivial G, non-faithful actions, |G|=0 (F2xF2 swap) and independent universes u v all covered. No duplicate in Mathlib or the project; no definitions; proof is sorry only; docstrings give source place, blueprint tag and all six steps; lean.statement matches the file verbatim. nt_compile --json clean in 4.5 s. Advisory only: two plain imports unused until the stage-3 proof."
+  "note": "Change to the Lean record only: it restores the deleted module Sheaf.RingTheory.TraceOneInvariantFiniteness. The dep records are byte-identical to side-live and there are no new nodes. Clause check: CommRing+IsNoetherianRing R; Group+Fintype G; MulSemiringAction (no faithfulness); A=Mathlib FixedPoints.subring; htrace is the group-sum trace one; conclusion IsNoetherianRing A ∧ Module.Finite A R; no |G|^-1 or finite-type hypothesis; independent universes u v. lean.statement is verbatim; docstrings carry source+blueprint+6 steps; proof is sorry only. Edge cases R=0, trivial G, non-faithful ℤ[1/2], F2xF2 swap and trivial F2 all hold. Advisories: H11 no-second-reading under the dispatcher policy; H9 two proof-only imports; reachability of the item is the dispatcher's concern."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/TraceOneInvariantFiniteness.lean",
+  "module": "Sheaf.RingTheory.TraceOneInvariantFiniteness",
+  "declaration": "FixedPoints.isNoetherianRing_and_finite_of_trace_one",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

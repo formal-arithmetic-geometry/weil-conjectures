@@ -118,6 +118,36 @@ theorem Adjunction.boundedBelowDerivedMateModel
           ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app P) ≫
         R'.rightDerivedFunctorPlusUnit.app (H.mapHomotopyCategoryPlus.obj P) ≫
         R'.rightDerivedFunctorPlus.map (H.mapDerivedCategoryPlusFactorsh.inv.app P) := by
-  sorry
+  refine adj.derivedPlus_mateEquiv_app_fac adj' σ (boundedBelowDerivedSquare σ) ?_ P
+  intro N
+  have h := NatTrans.congr_app
+    ((Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Plus.Qh
+      (HomotopyCategory.Plus.quasiIso B) (DerivedCategory.Plus A')).map_preimage
+      ((Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight G.mapDerivedCategoryPlusFactorsh.hom L'.mapDerivedCategoryPlus ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft G.mapHomotopyCategoryPlus L'.mapDerivedCategoryPlusFactorsh.hom ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight
+          ((Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (G ⋙ L'))).hom ≫
+            NatTrans.mapHomotopyCategoryPlus σ.natTrans ≫
+            (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (L ⋙ H))).inv)
+          DerivedCategory.Plus.Qh ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft L.mapHomotopyCategoryPlus H.mapDerivedCategoryPlusFactorsh.inv ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight L.mapDerivedCategoryPlusFactorsh.inv H.mapDerivedCategoryPlus ≫
+        (Functor.associator _ _ _).hom)) N
+  simp only [NatTrans.comp_app, Functor.associator_inv_app,
+    Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Category.id_comp, Category.comp_id,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app] at h
+  dsimp only [Functor.whiskeringLeft_obj_map, Functor.whiskerLeft_app] at h
+  dsimp only [boundedBelowDerivedSquare, TwoSquare.mk, TwoSquare.natTrans]
+  rw [h]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    Functor.map_id]
+  erw [Category.id_comp, Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
 
 end CategoryTheory

@@ -1,0 +1,293 @@
+{
+ "id": "lem-dl-a1-separable-normalization-local-embeddings",
+ "kind": "statement",
+ "title": "Compatible local embeddings of the two henselizations into a separable normalization",
+ "statement": "Let $(A,\\mathfrak m,\\kappa)$ be a normal local domain [def-weil-pbc-normal-ring], $K=\\operatorname{Frac}(A)$, and $\\Omega/K$ a separable closure [def-pd-separable-closure]. Let $B\\subset\\Omega$ consist of the elements integral over $A$ (roots of monic polynomials over $A$), choose a maximal ideal $\\mathfrak q$ of $B$ with $\\mathfrak q\\cap A=\\mathfrak m$, and put $T=B_{\\mathfrak q}$ and $E=T/\\mathfrak m_T=B/\\mathfrak q$. Let $H=A^{\\mathrm h}$ be a henselization [def-weil-pbc-henselization-at-prime], with residue field $\\kappa$, and $R=A^{\\mathrm{sh}}$ the compatible strict henselization [def-weil-pbc-strict-henselization-limit] at a chosen separable closure $\\kappa_s/\\kappa$ [def-pd-separable-closure]. Then $B,T,H,R$ are normal domains, $\\operatorname{Frac}(B)=\\operatorname{Frac}(T)=\\Omega$, $T$ is strictly henselian [def-weil-pbc-henselian-terminology], and $E/\\kappa$ is algebraic. The structural maps $A\\to H\\to R$ are injective local ind-etale maps [def-weil-pbc-ind-etale-algebra], and $R/\\mathfrak m_R=\\kappa_s$. There exists a $\\kappa$-embedding $j:\\kappa_s\\hookrightarrow E$. There is a unique local $A$-map $h:H\\to T$; for every such $j$ there is a unique local $H$-map $i_j:R\\to T$ inducing $j$. Both maps are injective. Thus each residue choice gives compatible embeddings $A\\subseteq H\\subseteq R\\subseteq T\\subseteq\\Omega$; every compatible local embedding of $R$ into $T$ with that residue map equals $i_j$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSD, section-ramification, setup and displayed henselization diagram; Tag 0BSQ, lemma-normal-local-domain-separablly-closed-fraction-field; algebra.tex Tag 08HR, lemma-map-into-henselian-colimit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-pd-separable-closure",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-closure-algebraic-extension-normal] to the algebraic extension $\\Omega/K$. It makes $B$ a normal domain with fraction field $\\Omega$. Since $\\mathfrak q$ is maximal, hence prime, its complement contains no zero. Apply [lem-weil-pbc-localization-normal-domain] to obtain the normal local domain $T=B_{\\mathfrak q}\\subset\\Omega$ with fraction field $\\Omega$. The residue identification $T/\\mathfrak qT=B/\\mathfrak q$ sends $(b/s)\\bmod\\mathfrak qT$ to $\\bar b/\\bar s$: every $s\\notin\\mathfrak q$ is already invertible in the field $B/\\mathfrak q$. This also identifies the structural residue inclusion of $\\kappa=A/\\mathfrak m$ with that induced by $A\\subset B$ because $\\mathfrak q\\cap A=\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSD, section-ramification, normalization and localization setup; algebra.tex Tags 0308 and 00GY."
+   }
+  },
+  {
+   "text": "Every $e\\in E=B/\\mathfrak q$ has a representative $b\\in B$ satisfying a monic equation over $A$. Reducing that equation modulo $\\mathfrak q$ gives a monic (therefore nonzero) polynomial over $\\kappa$ vanishing at $e$. Thus $E/\\kappa$ is algebraic. For strict henselianity apply [lem-weil-pbc-gabber-quotient-localizations] with its normal domain equal to $B$, its ideal equal to $(0)$, and its prime equal to the image of $\\mathfrak q$ in $B/(0)$. The fraction field is the separably closed field $\\Omega$. The canonical identification $(B/(0))_{\\mathfrak q/(0)}\\simeq B_{\\mathfrak q}=T$ transfers strict henselianity to $T$. In particular $T$ is henselian and $E$ is separably closed. This specialization supplies exactly the normal-local assertion of Tag 0BSQ without requiring the stronger assertion that $E$ is algebraically closed.",
+   "uses": [
+    "lem-weil-pbc-gabber-quotient-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSQ, lemma-normal-local-domain-separablly-closed-fraction-field; etale-cohomology.tex Tag 09ZC, quotient-localization specialization with zero ideal."
+   }
+  },
+  {
+   "text": "To justify the ind-etale structure for the specified ordinary henselization $H$, use [lem-trf-prime-pair-colimit-ind-etale-model] with prime $\\mathfrak m$ of $A$. Since $A$ is local, $A_{\\mathfrak m}\\simeq A$ by $a/s\\mapsto a s^{-1}$. This gives a henselian local ind-etale $A$-algebra $C$ with unchanged residue field. Apply [lem-trf-initial-henselian-colimit-comparison] to this $C$ and to the universal local henselian extension $H$ of [def-weil-pbc-henselization-at-prime]. It gives an $A$-isomorphism $C\\simeq H$ and transports the filtered etale presentation to the actual structural map $A\\to H$. Consequently this map is local and ind-etale. The normal domain $A$ is a normal ring: each $A_{\\mathfrak p}$ is a normal domain by [lem-weil-pbc-localization-normal-domain] (with $S=A\\setminus\\mathfrak p$, $0\\notin S$). Apply [lem-weil-pbc-etale-colimit-normal-local-domain] to $A$ and the local colimit $H$: $H$ is a normal domain and $A\\to H$ is injective.",
+   "uses": [
+    "lem-trf-prime-pair-colimit-ind-etale-model",
+    "lem-trf-initial-henselian-colimit-comparison",
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A02 and 0A03, lemma-henselization and lemma-henselization-local-ring; Tag 06DI, lemma-henselization-normal."
+   }
+  },
+  {
+   "text": "Use [lem-wf-strict-henselization-finite-lifts] for $A$, its henselization $H$, and the chosen separable closure $\\kappa_s/\\kappa$. Its identification respects the $A$-structure and the canonical $H$-structure, so the given compatible strict henselization $R$ is the filtered colimit of the finite local etale $H$-algebras $B_e$ indexed by finite separable subextensions $e\\subset\\kappa_s$. Thus $H\\to R$ is local and ind-etale, and $R$ is local with the specified residue field $\\kappa_s$. By [lem-wf-finite-local-lift-colimit-structure], applied to this diagram (each $B_e/\\mathfrak m_HB_e\\simeq e$ is a field and $B_e$ is local, so $\\mathfrak m_HB_e$ is its maximal ideal and the structure and transition maps are local), the colimit is strictly henselian; hence so is $R$. Therefore the induced local $A$-map $H\\to R$ is the canonical one, the unique local $A$-map given by the universal property of $H$. Composition in [lem-weil-pbc-ind-etale-stability] also gives that $A\\to R$ is ind-etale. The normal domain $H$ is a normal ring by [lem-weil-pbc-localization-normal-domain] as in Step 3. Applying [lem-weil-pbc-etale-colimit-normal-local-domain] to $H$ and this local ind-etale $H$-algebra $R$ proves that $R$ is a normal domain and $H\\to R$ is injective.",
+   "uses": [
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-wf-finite-local-lift-colimit-structure",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL, remark-construct-sh-from-h; more-algebra.tex Tag 06DI, lemma-henselization-normal."
+   }
+  },
+  {
+   "text": "By Step 2, $E$ is separably closed. Since $\\kappa_s/\\kappa$ is separable algebraic, [lem-weil-pbc-separable-extension-embeds-separably-closed] gives a $\\kappa$-algebra map $j:\\kappa_s\\to E$. A unital field map is injective. This works also when $A$ is a field: then $B=T=\\Omega$ and $E=\\Omega$ need only be separably closed.",
+   "uses": [
+    "lem-weil-pbc-separable-extension-embeds-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSD, section-ramification, choice of residue embedding; the field case is separated in Tag 0BSQ."
+   }
+  },
+  {
+   "text": "The inclusion $A\\to T$ is local because $\\mathfrak q\\cap A=\\mathfrak m$. Since $T$ is henselian, [def-weil-pbc-henselization-at-prime] gives the unique local $A$-map $h:H\\to T$. Its residue map is the structural $\\kappa\\hookrightarrow E$, since the structural residue map $A\\to H/\\mathfrak m_H=\\kappa$ is onto. Fix any $\\kappa$-embedding $j:\\kappa_s\\hookrightarrow E$. Apply [lem-weil-pbc-map-into-henselian-colimit] with base ring $H$, target $T$ endowed with $h$, ind-etale algebra $R$, prime $\\mathfrak m_R$, and residue map $j$. The contracted prime in $H$ is $\\mathfrak m_H$ for both $T$ and $R$, by locality, and the residue compatibility is exactly that $j$ is a $\\kappa$-map. The conclusion gives a unique local $H$-map $i_j:R\\to T$ inducing $j$. Any compatible local $A$-map $R\\to T$ restricts on $H$ to $h$ by its uniqueness, hence is an $H$-map and equals $i_j$ if it induces $j$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GQ and 08HR, lemma-map-into-henselian-colimit; pione.tex Tag 0BSD, extension of the chosen residue embedding."
+   }
+  },
+  {
+   "text": "Apply the final clause of [lem-dl-a1-ind-etale-domain-generic-field] first to the injective ind-etale domain map $A\\to H$ and the unital map $H\\xrightarrow{h}T\\hookrightarrow\\Omega$, and then to $A\\to R$ and $R\\xrightarrow{i_j}T\\hookrightarrow\\Omega$. The maps $A\\to H$ and $A\\to R$ are injective by Steps 3 and 4, and both composites restrict to the inclusion $A\\hookrightarrow\\Omega$. Thus both composites into the field $\\Omega$ are injective, whence $h$ and $i_j$ are injective. As $i_j$ is an $H$-map, its restriction to $H$ is $h$. These maps therefore realize $A\\subseteq H\\subseteq R\\subseteq T\\subseteq\\Omega$, with the uniqueness for the chosen residue map already established in Step 6.",
+   "uses": [
+    "lem-dl-a1-ind-etale-domain-generic-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSD, section-ramification, the embeddings in the displayed henselization/fraction-field diagram; generic-fibre calculation isolated in the existing cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-gabber-quotient-localizations",
+  "lem-trf-prime-pair-colimit-ind-etale-model",
+  "lem-trf-initial-henselian-colimit-comparison",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-wf-finite-local-lift-colimit-structure",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-dl-a1-ind-etale-domain-generic-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSD, section-ramification, normal-local henselization diagram; Tag 0BSQ; its cited algebra.tex Tags 04GQ, 04GU, 08HR and more-algebra.tex Tag 06DI, with the finite-residue-extension presentation of algebra.tex Tag 0BSL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localization of the integral closure in a separable closure is strictly henselian and receives unique compatible local embeddings of the henselization and strict henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A], IsField A\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring that is formally unramified as a $ K $-algebra, then $ A $ is a field.\"}\n  {\"name\": \"IsIntegralClosure.isLocalization_of_isSeparable\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is a domain and $ K $ is a separable algebra over $ L $, then $ L $ is the fraction field of $ A $, i.e., the localization of $ A $ at its non-zero divisors.\"}\n  {\"name\": \"galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ with $K$ as the fraction field of $A$, and $L$, $L_2$ as algebraic extensions of $K$, if $B$ and $B_2$ are the integral closures\"}\n  {\"name\": \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A],\\n  Function.Bijective ⇑(algebraMap K A)\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring, then the canonical algebra homomorphism from $ K $ to $ A $ is bijective.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" (R : Type u_1) [CommRing R] : Prop\", \"doc\": \"A local ring `R` is *Henselian* if the following condition holds:\\nfor every polynomial `f` over `R`, with a *simple* root `a₀` over the residue field,\\nthere exists a lift `a : R` of `a₀` that is a roo\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" (K : Type u_1) [Field K] : HenselianLocalRing K\", \"doc\": \"\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" {R : Type u_1} {inst✝ : CommRing R} [self : HenselianLocalRing R] : IsLocalRing R\", \"doc\": \"\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" (R : Type u_1) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" {R : Type u_1} {inst✝ : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R) : f.Monic → ∀ (a₀ : R), Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R → IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"\"}\n  {\"name\": \"HenselianLocalRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" {R : Type u_1} [CommRing R] [toIsLocalRing : IsLocalRing R] (is_henselian : ∀ (f : Polynomial R), f.Monic → ∀ (a₀ : R), Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R → IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R) : HenselianLocal\", \"doc\": \"\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \" (R : Type u) [CommRing R] [IsLocalRing R] : [HenselianLocalRing R, ∀ (f : Polynomial R), f.Monic → ∀ (a₀ : IsLocalRing.ResidueField R), (Polynomial.aeval a₀) f = 0 → (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRoot a ∧ (IsLocalRing.residue R) a = a₀, ∀ {K : Type u} [inst : Field \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*(integralClosure|[Ee]mbed)|[Ss]trict.*[Hh]enseli",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a chosen embedding of a separable residue closure uniquely to a local map from the strict henselization into the normalization localized at a prime",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"galLift_id\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \": galLift K L L (.id A B) = .id K L\", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ where $K$ is the fraction field of $A$, and $L$, $L_2$ are algebraic extensions of $K$, if $B$ and $B_2$ are the integral closur\"}\n  {\"name\": \"separableClosure.map_le_of_algHom\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(i : E →ₐ[F] K) : (separableClosure F E).map i ≤ separableClosure F K\", \"doc\": \"For any algebra homomorphism $ i : E \\\\to K $ over $ F $, the image of the separable closure of $ F $ in $ E $ under $ i $ is contained in the separable closure of $ F $ in $ K $. In symbols, $ i(separ\"}\n  {\"name\": \"map_mem_separableClosure_iff\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(i : E →ₐ[F] K) {x : E} : i x ∈ separableClosure F K ↔ x ∈ separableClosure F E\", \"doc\": \"For any algebra homomorphism $ i : E \\\\to K $ over $ F $ and any element $ x \\\\in E $, the image $ i(x) $ lies in the separable closure of $ F $ in $ K $ if and only if $ x $ lies in the separable closu\"}\n  {\"name\": \"galLift\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \"(σ : B →ₐ[A] B₂) : L →ₐ[K] L₂\", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ with $K$ as the fraction field of $A$, and $L$, $L_2$ as algebraic extensions of $K$, if $B$ and $B_2$ are the integral closures\"}\n  {\"name\": \"IsSepClosed.lift\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      [inst : Field K] →\\n        [inst_1 : Field L] →\\n          [inst_2 : Algebra K L] →\\n            [inst_3 : Field M] → [inst_4 : Algebra K M] → [IsSepClosed M] → [Algebra.IsSeparable K L] → L →ₐ[K] M\", \"doc\": \"Given a separably closed field $ M $ and a finite separable field extension $ L/K $, this function constructs a $ K $-algebra homomorphism from $ L $ to $ M $. This exists because $ M $ being separabl\"}\n  {\"name\": \"Ideal.ResidueField.liftₐ\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(I : Ideal A) [I.IsPrime] (f : A →ₐ[R] B) (hf₁ : I ≤ RingHom.ker f)\\n  (hf₂ : I.primeCompl ≤ (IsUnit.submonoid B).comap f) : I.ResidueField →ₐ[R] B\", \"doc\": \"Given a prime ideal $ I $ in a commutative ring $ A $, an $ R $-algebra homomorphism $ f : A →ₐ[R] B $, and conditions that $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"IsLocalization.Away.integralClosure\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"(f : R) [IsLocalization.Away f Rf] [IsLocalization.Away (algebraMap R S f) Sf]\\n  [Algebra (integralClosure R S) (integralClosure Rf Sf)]\\n  [IsScalarTower (integralClosure R S) (integralClosure Rf Sf) Sf]\\n  [IsScalarTower R (integralClosure R S) (integralClosure Rf Sf)] :\\n  IsLocalization.Away (algeb\", \"doc\": \"If $ R_f $ and $ S_f $ are localizations of $ R $ and $ S $ at $ f $ and $ \\\\text{algebraMap}(R,S)(f) $ respectively, then the integral closure of $ R_f $ in $ S_f $ is the localization of the integral\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local embeddings of a henselization and a strict henselization into the localization of the integral closure in a separable closure",
+   "results": "[leanfinder] OK 8 hit(s); IsIntegralClosure.isLocalization_of_isSeparable, galLift, galLiftEquiv_apply, galRestrict'_galLift, Field.henselian, galLift_algebraMap_apply, galLiftEquiv_algebraMap_apply, AlgHom.IsArithFrobAt.localize",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned integral-closure localization and HenselianLocalRing declarations do not construct the two henselizations or the residue-prescribed local embeddings"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*(integralClosure|[Ee]mbed)|[Ss]trict.*[Hh]enseli",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned integral-closure localization and HenselianLocalRing declarations do not construct the two henselizations or the residue-prescribed local embeddings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A henselization and strict henselization have unique compatible local embeddings into a normal local ring with separably closed fraction field",
+   "results": "[leansearch] OK 8 hit(s); HenselianLocalRing.TFAE, HenselianLocalRing.is_henselian, HenselianLocalRing.casesOn, HenselianLocalRing.toIsLocalRing, HenselianLocalRing.rec, HenselianLocalRing.recOn, HenselianLocalRing.mk, HenselianLocalRing",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned integral-closure localization and HenselianLocalRing declarations do not construct the two henselizations or the residue-prescribed local embeddings"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing",
+   "results": "[loogle] OK 7 hit(s); HenselianLocalRing, Field.henselian, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing.is_henselian, HenselianLocalRing.mk, HenselianLocalRing.TFAE",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned integral-closure localization and HenselianLocalRing declarations do not construct the two henselizations or the residue-prescribed local embeddings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The henselization and strict henselization of a normal local domain embed in the localization of its separable normalization",
+   "results": "[leanfinder] OK 8 hit(s); IsIntegralClosure.isLocalization_of_isSeparable, Algebra.intNorm_eq_of_isLocalization, Field.henselian, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing.TFAE, IsLocalization.Away.integralClosure, IsIntegralClosure.isLocalization",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned integral-closure localization and HenselianLocalRing declarations do not construct the two henselizations or the residue-prescribed local embeddings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-henselian-global-inertia-comparison",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph, equivalence of extension across infinity with trivial inertia: normal-local comparison used through lem-dl-a1-weil-kernel-inertia; returned comparison proof steps 1, 2, 4, 5 and injectivity portion of 6.",
+   "via": [
+    "lem-dl-a1-henselian-global-inertia-comparison",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-separable-normalization-local-embeddings",
+  "worker": "stage1",
+  "summary": "Seven steps establish every original clause using existing DAG statements only. Checked the source normal-local diagram, the field edge case, colimit recognition for the specified ordinary henselization, strict-henselization residue compatibility, and injectivity via the existing generic-field lemma. No new nodes and no statement change. Fresh Mathlib searches did not give an exact match.",
+  "blueprint": "Current latest blueprint rem-dl-a1-conventions, final paragraph: extension across infinity iff trivial inertia. This split supplies the normal-local embedding comparison used by lem-dl-a1-weil-kernel-inertia through lem-dl-a1-henselian-global-inertia-comparison; source diagram setup rather than a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-gabber-quotient-localizations",
+    "why": "Its zero-ideal specialization makes the already constructed normalization localization strictly henselian; no node in this unit provides that generic normal-domain tool."
+   },
+   {
+    "node": "lem-trf-prime-pair-colimit-ind-etale-model",
+    "why": "Provides the ordinary henselization ind-etale model with local structure and unchanged residue field, for an arbitrary local ring."
+   },
+   {
+    "node": "lem-trf-initial-henselian-colimit-comparison",
+    "why": "Transports that model to the specified universal henselization, so the proof does not assume a colimit presentation absent from its definition."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic permanence of normality and injectivity for local ind-etale algebras, applied to H and R."
+   },
+   {
+    "node": "lem-wf-strict-henselization-finite-lifts",
+    "why": "Generic construction of the compatible strict henselization from finite separable residue extensions of H; supplies H-ind-etaleness and the specified residue field."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Only composition of ind-etale maps is used, to obtain A to R from A to H to R."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic unique residue-prescribed local lifting into a henselian ring, applied over H to R and T."
+   },
+   {
+    "node": "lem-wf-finite-local-lift-colimit-structure",
+    "why": "Strict henselianity of the colimit of the finite local etale lifts B_e over H, transported to R, so that H to R is the canonical local A-map; no node in this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-gabber-quotient-localizations",
+  "lem-trf-prime-pair-colimit-ind-etale-model",
+  "lem-trf-initial-henselian-colimit-comparison",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-wf-finite-local-lift-colimit-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-0c9b922b2",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-0c9b922b2 (reviewer sub-agent of L); spot-checked: Read the whole delivery (0 new nodes, statement unchanged against side-live, no repair note) against Stacks pione 0BSD and 0BSQ, and checked every step against the cited statements. Steps 1–3 and 5–7 are correct. B is a normal domain with Frac Omega; T is strictly henselian through gabber-quotient-localizations with I=0; H is ind-étale through the prime-pair model and the initial-henselian comparison (which needs only the universal property of H). j comes from the separable-embedding leaf, h and i_j from the universal property of H and from map-into-henselian-colimit (the residue structures are compatible), and injectivity from the final clause of the generic-field lemma. Edge cases checked: A a field, A strictly henselian, non-Noetherian A. There is no cycle and no duplicate (rg -L for 0BSD/0BSQ/0BSL). Fixes, both C1/C4 citation gaps, in fixes/dag/nodes/sec-deligne-laumon-a1/: (1) In Steps 3 and 4, lem-weil-pbc-etale-colimit-normal-local-domain needs its base to be a normal ring, but A and H are only normal domains. Added a citation of lem-weil-pbc-localization-normal-domain. (2) Step 4 used, without a citation, that R is henselian, which makes H to R the canonical local A-map. Added a citation of lem-wf-finite-local-lift-colimit-structure (the colimit of the B_e is strictly henselian; its hypotheses hold elementarily) and declared it in tool_uses. proof_deps is resynced. Batch-5 flags: lem-trf-prime-pair-colimit-ind-etale-model (closure of 111 nodes) and lem-trf-initial-henselian-colimit-comparison (closure of 70 nodes) are generic henselization algebra; their closures contain no trace-formula or Poincaré node. lem-wf-strict-henselization-finite-lifts reaches the trace-formula chapter only through def-weil-pbc-henselization-at-prime, a plain definition. All three accepted as outside both assumptions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SeparableNormalizationLocalEmbeddings",
+  "declaration": "Algebra.separableNormalization_local_embeddings",
+  "file": "lean/Sheaf/RingTheory/SeparableNormalizationLocalEmbeddings.lean",
+  "statement": "theorem separableNormalization_local_embeddings (A K Ω H ks R : Type u) [CommRing A] [IsLocalRing A] [IsDomain A] [IsIntegrallyClosed A] [Field K] [Algebra A K] [IsFractionRing A K] [Field Ω] [Algebra K Ω] [IsSepClosure K Ω] [Algebra A Ω] [IsScalarTower A K Ω] (q : Ideal (integralClosure A Ω)) [q.IsMaximal] (hq : q.comap (algebraMap A (integralClosure A Ω)) = IsLocalRing.maximalIdeal A) [CommRing H] [HenselianLocalRing H] [Algebra A H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] [IsScalarTower A (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] (hH : IsHenselizationAtPrime' A (IsLocalRing.maximalIdeal A) H) [Field ks] [Algebra (IsLocalRing.ResidueField A) ks] [IsSepClosure (IsLocalRing.ResidueField A) ks] [Algebra A ks] [IsScalarTower A (IsLocalRing.ResidueField A) ks] [CommRing R] [Algebra A R] (P : StrictHenselizationPresentationIn.{u, u} A ks R) : IsDomain (integralClosure A Ω) ∧ IsIntegrallyClosed (integralClosure A Ω) ∧ IsFractionRing (integralClosure A Ω) Ω ∧ IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q) ∧ (∃ (_ : Algebra (Localization.AtPrime q) Ω), IsScalarTower (integralClosure A Ω) (Localization.AtPrime q) Ω ∧ IsFractionRing (Localization.AtPrime q) Ω) ∧ IsStrictlyHenselianLocalRing (Localization.AtPrime q) ∧ IsLocalHom (algebraMap A (Localization.AtPrime q)) ∧ (∃ e : (integralClosure A Ω ⧸ q) ≃+* IsLocalRing.ResidueField (Localization.AtPrime q), e.toRingHom.comp (Ideal.Quotient.mk q) = (IsLocalRing.residue (Localization.AtPrime q)).comp (algebraMap (integralClosure A Ω) (Localization.AtPrime q))) ∧ IsDomain H ∧ IsIntegrallyClosed H ∧ IsLocalHom (algebraMap A H) ∧ Function.Injective (algebraMap A H) ∧ RingHom.IndEtaleAcrossUniverses (algebraMap A H) ∧ (∃ eH : IsLocalRing.ResidueField H ≃+* IsLocalRing.ResidueField A, eH.toRingHom.comp ((IsLocalRing.residue H).comp (algebraMap A H)) = IsLocalRing.residue A) ∧ ∃ (_ : IsLocalRing R) (_ : Algebra H R), IsScalarTower A H R ∧ IsDomain R ∧ IsIntegrallyClosed R ∧ IsLocalHom (algebraMap H R) ∧ Function.Injective (algebraMap H R) ∧ RingHom.IndEtaleAcrossUniverses (algebraMap H R) ∧ (∃ eR : IsLocalRing.ResidueField R ≃+* ks, eR.toRingHom.comp (IsLocalRing.residue R) = P.residueMap) ∧ ∃ (_ : Algebra (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField (Localization.AtPrime q))), IsScalarTower A (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField (Localization.AtPrime q)) ∧ Algebra.IsAlgebraic (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField (Localization.AtPrime q)) ∧ Nonempty (ks →ₐ[IsLocalRing.ResidueField A] IsLocalRing.ResidueField (Localization.AtPrime q)) ∧ ∃ h : H →ₐ[A] Localization.AtPrime q, IsLocalHom h.toRingHom ∧ Function.Injective h ∧ (∀ h' : H →ₐ[A] Localization.AtPrime q, IsLocalHom h'.toRingHom → h' = h) ∧ ∀ j : ks →ₐ[IsLocalRing.ResidueField A] IsLocalRing.ResidueField (Localization.AtPrime q), ∃ i : R →ₐ[A] Localization.AtPrime q, IsLocalHom i.toRingHom ∧ Function.Injective i ∧ i.toRingHom.comp (algebraMap H R) = h.toRingHom ∧ (IsLocalRing.residue (Localization.AtPrime q)).comp i.toRingHom = j.toRingHom.comp P.residueMap ∧ ∀ i' : R →ₐ[A] Localization.AtPrime q, IsLocalHom i'.toRingHom → (IsLocalRing.residue (Localization.AtPrime q)).comp i'.toRingHom = j.toRingHom.comp P.residueMap → i' = i",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded normal-domain, separable-closure, generalized ordinary-henselization and ind-etale notions. The existing landed def-sc-ring-strict-henselization is added as a statement dependency to express the local-ring specialization with its specified residue map through StrictHenselizationPresentationIn. No new notion, no statement correction, and no change to the accepted stage-1 split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eaf72ab68",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read item node, 7 stmt_deps records and decls (IsHenselizationAtPrime', StrictHenselizationPresentationIn/.residueMap, IsStrictlyHenselianLocalRing, IndEtaleAcrossUniverses, IsSepClosure, normal-domain inline form), module, report. Node differs from live only in lean and an added landed stmt_dep def-sc-ring-strict-henselization (permitted); dep records unchanged; statement verbatim; sole sorry. Every clause matches: B=integralClosure, T=AtPrime q, normal domains, Frac via towers, T strictly henselian, E≅B/q, A→H→R local/injective/ind-etale, residue identifications, E/κ algebraic with tower-pinned κ-structure, j exists, unique local h injective, ∀ j unique local i compatible with h and j (uniqueness over all local A-maps). Existentials pinned by towers. Edge cases: field A, strictly henselian A, non-Noetherian A. Common universe u matches the ring definition and the citer. Docstrings carry Stacks 0BSD/0BSQ/08HR, blueprint id and 7 steps; plain imports = 7 proof_dep modules. Advisory: scheme definition stays in stmt_deps while R is rendered through the ring 04GW presentation, a sound specialization. No compile (no file changed)."
+ }
+}

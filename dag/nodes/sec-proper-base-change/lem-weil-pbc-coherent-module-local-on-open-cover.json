@@ -132,7 +132,32 @@
   "item": "lem-weil-pbc-pushforward-coherent-on-open",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.coherent_module_local_on_open_cover"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.coherent_module_local_on_open_cover",
+     "module": "WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover",
+     "lines": [
+      30,
+      72
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -176,5 +201,53 @@
   "landing": "20261012T223423-L-1643086",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal F$ an $\\mathcal O_X$-module and $X=\\bigcup_{i\\in I}U_i$ a covering by open subschemes; for an open $W\\subseteq X$ write $\\mathcal F|_W$ for the restriction of $\\mathcal F$ to the open subscheme $W$ ($(\\mathcal F|_W)(V)=\\mathcal F(V)$ for $V\\subseteq W$ open). (1) If $\\mathcal F$ is coherent [pqf-def-coherent], then $\\mathcal F|_W$ is a coherent $\\mathcal O_W$-module for every open $W\\subseteq X$. (2) If $\\mathcal F|_{U_i}$ is a coherent $\\mathcal O_{U_i}$-module for every $i\\in I$, then $\\mathcal F$ is a coherent $\\mathcal O_X$-module. (Both conditions of [pqf-def-coherent] are local: being of finite type is a condition on neighbourhoods of points, and for the kernel condition over an open $W$ one restricts to the $W\\cap U_i$, kernels of $\\mathcal O_X$-modules being computed sectionwise.)",
+  "proof": [
+   {
+    "text": "*Step 1 (restriction to opens).* Throughout, a surjection of $\\mathcal O_W$-modules means an epimorphism of the abelian category $\\Mod(\\mathcal O_W)$, and \"of finite type\" and \"coherent\" are as in [pqf-def-coherent]. For opens $V\\subseteq W\\subseteq X$ of the scheme $X$ [def-pc-scheme]: (a) $\\mathcal O_X|_W=\\mathcal O_W$ and $(\\mathcal G|_W)|_V=\\mathcal G|_V$ for every $\\mathcal O_X$-module $\\mathcal G$, with $(\\alpha|_W)|_V=\\alpha|_V$ for morphisms: by the formula for restriction to an open subscheme (for inclusions of open subschemes $f(U)=U$ and $f^\\sharp$ is the identity), both sides have sections $\\mathcal G(V')$ over $V'\\subseteq V$ open, the same restriction maps and the same $\\mathcal O_X(V')$-action. (b) Restriction $\\mathcal G\\mapsto\\mathcal G|_V$, $\\Mod(\\mathcal O_W)\\to\\Mod(\\mathcal O_V)$, is a left adjoint, so it preserves coproducts, whence $(\\mathcal O_W^{\\oplus n})|_V\\cong\\mathcal O_V^{\\oplus n}$ by (a); and it preserves epimorphisms: if $e$ is an epimorphism and $g\\circ e|_V=h\\circ e|_V$, the adjoint transposes satisfy $g^\\flat\\circ e=h^\\flat\\circ e$, so $g^\\flat=h^\\flat$ and $g=h$. (c) For a morphism $\\varphi:\\mathcal G\\to\\mathcal H$ of $\\mathcal O_W$-modules, $\\Ker(\\varphi)|_V=\\Ker(\\varphi|_V)$: kernels in $\\Mod(\\mathcal O_W)$ and $\\Mod(\\mathcal O_V)$ are computed sectionwise, so both have sections $\\ker(\\varphi_{V'}:\\mathcal G(V')\\to\\mathcal H(V'))$ over $V'\\subseteq V$, with the same restriction maps and module structures. (d) Being of finite type is invariant under isomorphism (compose the surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ with the restricted isomorphism).",
+    "uses": [
+     "pqf-def-coherent",
+     "def-pc-scheme"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2 (finite type restricts).* Let $\\mathcal G$ be an $\\mathcal O_X$-module of finite type and $W\\subseteq X$ open. For $x\\in W$ choose by [pqf-def-coherent] an open $U\\ni x$ of $X$ and a surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$. Restricting it to the open $U\\cap W$ gives by Step 1(a),(b) a surjection $\\mathcal O_{U\\cap W}^{\\oplus n}\\cong(\\mathcal O_U^{\\oplus n})|_{U\\cap W}\\to\\mathcal G|_{U\\cap W}=(\\mathcal G|_W)|_{U\\cap W}$, and $U\\cap W$ is an open neighbourhood of $x$ in $W$. Hence $\\mathcal G|_W$ is of finite type.",
+    "uses": [
+     "pqf-def-coherent"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3 (part (1)).* Let $\\mathcal F$ be coherent and $W\\subseteq X$ open. $\\mathcal F|_W$ is of finite type by Step 2. Let $W'\\subseteq W$ be open and $\\varphi:\\mathcal O_{W'}^{\\oplus n}\\to(\\mathcal F|_W)|_{W'}$ a morphism. By Step 1(a) $(\\mathcal F|_W)|_{W'}=\\mathcal F|_{W'}$, and $W'$ is open in $X$, so the kernel of $\\varphi$ is of finite type by the kernel condition of [pqf-def-coherent] for $\\mathcal F$. Hence $\\mathcal F|_W$ is a coherent $\\mathcal O_W$-module.",
+    "uses": [
+     "pqf-def-coherent"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4 (finite type is local).* Let $W\\subseteq X$ be open, $W=\\bigcup_iW_i$ an open covering and $\\mathcal G$ an $\\mathcal O_W$-module with $\\mathcal G|_{W_i}$ of finite type for every $i$. For $x\\in W$ pick $i$ with $x\\in W_i$; by [pqf-def-coherent] for $\\mathcal G|_{W_i}$ there are an open $V\\ni x$ of $W_i$ and a surjection $\\mathcal O_V^{\\oplus n}\\to(\\mathcal G|_{W_i})|_V=\\mathcal G|_V$ (Step 1(a)). $V$ is open in $W$, so $\\mathcal G$ is of finite type.",
+    "uses": [
+     "pqf-def-coherent"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5 (part (2)).* Let $\\mathcal F|_{U_i}$ be coherent for all $i$. $\\mathcal F$ is of finite type by Step 4 (with $W=X$, $W_i=U_i$). Let $W\\subseteq X$ be open and $\\varphi:\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$ a morphism with kernel $\\mathcal K$. Put $W_i=W\\cap U_i$, an open of $U_i$; these cover $W$. By Step 1, $\\mathcal K|_{W_i}=\\Ker(\\varphi|_{W_i})$ and $\\varphi|_{W_i}$ is, up to the isomorphism $\\mathcal O_{W_i}^{\\oplus n}\\cong(\\mathcal O_W^{\\oplus n})|_{W_i}$, a morphism $\\mathcal O_{W_i}^{\\oplus n}\\to\\mathcal F|_{W_i}=(\\mathcal F|_{U_i})|_{W_i}$; composing with an isomorphism of the source replaces the kernel by an isomorphic one. By the kernel condition of [pqf-def-coherent] for the coherent $\\mathcal O_{U_i}$-module $\\mathcal F|_{U_i}$ and its open $W_i$, this kernel is of finite type, hence so is $\\mathcal K|_{W_i}$ (Step 1(d)). By Step 4, $\\mathcal K$ is of finite type. So $\\mathcal F$ satisfies both conditions of [pqf-def-coherent] and is coherent.",
+    "uses": [
+     "pqf-def-coherent"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

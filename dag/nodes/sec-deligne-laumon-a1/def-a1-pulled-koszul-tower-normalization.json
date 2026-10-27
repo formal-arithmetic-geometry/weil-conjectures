@@ -1,0 +1,119 @@
+{
+ "id": "def-a1-pulled-koszul-tower-normalization",
+ "kind": "definition",
+ "title": "Canonical generators and normalization of pulled principal Koszul towers",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with independent scheme and coefficient universes. For a scheme morphism $g:X\\to Y$ use the completed module categories $\\mathcal M_W$, the ordinary module pullback $G_g$ with its specified adjunction unit $\\eta$, and the actual small pro-etale base-change functor $g_{\\mathrm{Proet}}$ of [def-a1-integral-completed-tower-pullback-universes]. Define $G$ on unbounded cochain complexes by applying $G_g$ to every term and differential; define $\\operatorname{diagramPull}$ on strict towers by postcomposition with $G$. For $M\\in\\mathcal M_Y$, $V\\in Y_{\\mathrm{Proet}}$, and $x\\in M(V)$, define $\\operatorname{generator}_g(x)=\\eta_M(V)(x)\\in(G_gM)(g_{\\mathrm{Proet}}V)$. Use the actual sheafified total-tensor summand generator $\\tau_{p,q}$ of [def-coef-ringed-tensor-hom-model]. For the principal mapping-cone Koszul complexes $Q_{W,n}=[R_W\\xrightarrow{t^{n+1}}R_W]$ of [def-a1-principal-completed-koszul-towers], define $e_{W,n,0}:R_W\\to Q_{W,n}^0$ by the target cone inclusion and $e_{W,n,-1}:R_W\\to Q_{W,n}^{-1}$ by the shifted source cone inclusion, both preceded by the inverse of the standard degree-zero single-complex identification. Index these bases by $\\mathrm{negative}\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with degrees $d(\\mathrm{false})=0$ and $d(\\mathrm{true})=-1$. Put $H_W(P)_n=P\\otimes Q_{W,n}$, with the specified strict transitions, by the existing source tower of [def-a1-principal-completed-koszul-towers]. For an isomorphism of strict towers $e:\\operatorname{diagramPull}(H_Y(P))\\cong H_X(GP)$ define $\\operatorname{KoszulNormalization}(P,e)$ to mean that for every $n\\in\\mathbf N$, either basis degree $i\\in\\{-1,0\\}$, $p,k\\in\\mathbf Z$ with $p+i=k$, $V\\in Y_{\\mathrm{Proet}}$, $x\\in P^p(V)$ and $b\\in R_X(g_{\\mathrm{Proet}}V)$, one has\n$$e_{n}^{k}\\bigl(b\\,\\operatorname{generator}_g(\\tau_{p,i}(x,e_{Y,n,i}(1)))\\bigr)=\\tau_{p,i}\\bigl(b\\,\\operatorname{generator}_g(x),e_{X,n,i}(1)\\bigr).$$\nNo goodness, boundedness, coefficient-map flatness or invertibility-of-$\\ell$ hypothesis is imposed.",
+ "stmt_deps": [
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-coef-ringed-tensor-hom-model",
+  "def-a1-principal-completed-koszul-towers"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary total-complex comparison; sites-modules.tex, Tags 03D2, 03EK and 03EL, pullback unit and sheafified tensor; the two cone bases of the principal Koszul construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pulled Koszul tower tensor generator basis normalization ordinary pullback cochain complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DoldKan.termN[_]\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Notations\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $ N[A] $ for the normalized chain complex of a simplicial object $ A $.\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.cochainComplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \": CochainComplex C ℤ\", \"doc\": \"Given a projective resolution $R$ of an object $Z$ in a category $\\\\mathcal{C}$ with zero objects and morphisms, this constructs a cochain complex in $\\\\mathcal{C}$ by extending the chain complex $R.com\"}\n  {\"name\": \"Algebra.Presentation.differentials.comm₁₂_single\", \"module\": \"Mathlib.Algebra.Module.Presentation.Differentials\", \"type\": \"(r : σ) :\\n  pres.toExtension.cotangentComplex (hom₁ pres (Finsupp.single r 1)) =\\n    pres.cotangentSpaceBasis.repr.symm ((differentialsRelations pres).relation r)\", \"doc\": \"For a presentation $\\\\text{pres}$ of an algebra over a commutative ring $R$ with generators $\\\\sigma$, applying the cotangent complex map to the image of the single-generator relation $\\\\text{Finsupp.sin\"}\n  {\"name\": \"VectorBundle.pullback\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"[∀ x, TopologicalSpace (E x)] [FiberBundle F E] [VectorBundle 𝕜 F E] (f : K) : VectorBundle 𝕜 F ((f : B' → B) *ᵖ E)\", \"doc\": \"Given a continuous map $ f : B' \\to B $ and a vector bundle $ E $ over $ B $ with fiber $ F $ modeled on a normed vector space over a nontrivially normed field, the pullback bundle $ f^*E $ over $ B' $\"}\n  {\"name\": \"Algebra.Generators.cotangentSpaceBasis_apply\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(i) : P.cotangentSpaceBasis i = ((1 : S) ⊗ₜ[P.Ring] D R P.Ring (.X i) :)\", \"doc\": \"For a commutative ring $ R $ and a set of generators $ \\\\iota $, the basis element $ dX_i $ of the cotangent space of the algebra extension $ R[\\\\iota] $ is given by the tensor product $ 1 \\\\otimes dX_i \"}\n  {\"name\": \"CochainComplex.ConnectData.restrictionLEIso\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Connect\", \"type\": \": h.cochainComplex.restriction (ComplexShape.embeddingUpIntLE (-1)) ≅ K\", \"doc\": \"For a connected cochain complex constructed from a chain complex $K$ and cochain complex $L$ in category $\\\\mathcal{C}$, the restriction of this cochain complex via the embedding $\\\\mathbb{N} \\\\to \\\\mathb\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"{P A : Type*} [CommRing P] [CommRing A] [Algebra P S] [Algebra P A] [Algebra R P] [Algebra S A] [IsScalarTower P S A]\\n  (a b) :\\n  cotangentComplexBaseChange R S P A (a ⊗ₜ b) =\\n    a • kerToTensor R P A ⟨b.1, by rw [IsScalarTower.algebraMap_eq P S A]; aesop⟩\", \"doc\": \"Given commutative rings $P, S, A$ with compatible algebra structures and a scalar tower condition $P \\\\to S \\\\to A$, the cotangent complex base change of the tensor product $a \\\\otimes b$ equals the scal\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.instCoeCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": Coe (Cocycle F G n) (Cochain F G n)\", \"doc\": \"There is a canonical coercion from the cocycles in degree $n$ of the homomorphism complex $\\\\text{Hom}(F,G)$ to the cochains in the same degree, defined by mapping each cocycle to its underlying cochai\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib normalization; general cochain and tensor constructions are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pulled Koszul tower tensor generator basis normalization ordinary pullback cochain complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (P : Type u_2) →\\n          (A : Type u_3) →\\n            [inst_2 : CommRing P] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : Algebra P S] →\\n                  [inst_5 : Algebra P A] →\\n  \", \"doc\": \"Let $R, P, S, A$ be commutative rings forming a tower of algebras $R \\\\to P \\\\to S \\\\to A$. This defines an $A$-linear map from $A \\\\otimes_P \\\\ker(P \\\\to S)$ to $A \\\\otimes_P \\\\Omega_{P/R}$, where $\\\\ker(P \\\\t\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R \\\\to S$ and $R \\\\to A$ be homomorphisms of commutative rings. If $B$ is the pushout of these maps (i.e., $B$ is isomorphic to the tensor product algebra $S \\\\otimes_R A$), then there is a natural \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {P : Type u_2} {A : Type u_3}\\n  [inst_2 : CommRing P] [inst_3 : CommRing A] [inst_4 : Algebra P S] [inst_5 : Algebra P A] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra S A] [inst_8 : IsScalarTower P S A] (a : A) (b : ↥(RingHom.ker (a\", \"doc\": \"Given commutative rings $P, S, A$ with compatible algebra structures and a scalar tower condition $P \\\\to S \\\\to A$, the cotangent complex base change of the tensor product $a \\\\otimes b$ equals the scal\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.compEquiv_symm_zero\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Applying the inverse of the composition equivalence between cotangent spaces to the pair $(0, x)$ yields the image of $x$ under the linear map induced by the algebra extension homomorphism composed wi\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"KaehlerDifferential.moduleBaseChange'\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} is equipped with a B-module structure. This construction utilizes th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib normalization; general cochain and tensor constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "KoszulNormalization|koszulBasis|diagramPull",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Plus.lean\", \"line\": \"54\", \"text\": \"def diagramPullback {X Y : C} (f : X ⟶ Y) : J.diagram P Y ⟶ (J.pullback f).op ⋙ J.diagram P X where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Plus.lean\", \"line\": \"112\", \"text\": \"  map f := colimMap (J.diagramPullback P f.unop) ≫ colimit.pre _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Plus.lean\", \"line\": \"117\", \"text\": \"    simp only [diagramPullback_app, colimit.ι_pre, ι_colimMap_assoc, Category.comp_id]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Plus.lean\", \"line\": \"133\", \"text\": \"    simp only [diagramPullback_app, colimit.ι_pre_assoc, colimit.ι_pre, ι_colimMap_assoc,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Plus.lean\", \"line\": \"156\", \"text\": \"    simp only [diagramPullback_app, ι_colimMap, colimit.ι_pre_assoc, colimit.ι_pre,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CompatiblePlus.lean\", \"line\": \"100\", \"text\": \"      simp only [HasColimit.isoOfNatIso_ι_hom_assoc, GrothendieckTopology.diagramPullback_app,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib normalization; general cochain and tensor constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l KoszulNormalization|pulled-koszul.*(model|normalization)|koszulBasis dag/nodes lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search pulled Koszul tower",
+   "results": "lean/Sheaf/Paper/FinitePullbackStrictTowerComparison.lean\ndag/nodes/sec-deligne-laumon-a1/lem-a1-finite-pullback-strict-tower-comparison.json\ndag/nodes/sec-deligne-laumon-a1/lem-a1-balanced-finite-tower-generator-comparison.json\n0 blueprint nodes match 'pulled Koszul tower'\n",
+   "date": "2026-10-22",
+   "verdict": "The only definitions are theorem-owned helpers in FinitePullbackStrictTowerComparison. The returned review expressly requires this independent definition owner to remove their dependency cycle; other DAG matches are theorem consumers, not definition owners."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-pulled-koszul-tower-chain-comparison",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Ordinary pulled principal Koszul tower comparison: canonical cochain pullback, both cone basis vectors and generator normalization in steps 2-4.",
+   "via": [
+    "lem-a1-pulled-koszul-tower-chain-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.Paper.PulledKoszulTowerNormalization",
+  "declaration": "WeilConjectures.PulledKoszulTowerModel.KoszulNormalization",
+  "declarations": [
+   "WeilConjectures.PulledKoszulTowerModel.tensorGenerator",
+   "WeilConjectures.PulledKoszulTowerModel.koszulZero",
+   "WeilConjectures.PulledKoszulTowerModel.koszulMinusOne",
+   "WeilConjectures.PulledKoszulTowerModel.koszulDegree",
+   "WeilConjectures.PulledKoszulTowerModel.koszulBasis",
+   "WeilConjectures.PulledKoszulTowerModel.G",
+   "WeilConjectures.PulledKoszulTowerModel.generator",
+   "WeilConjectures.PulledKoszulTowerModel.H",
+   "WeilConjectures.PulledKoszulTowerModel.diagramPull",
+   "WeilConjectures.PulledKoszulTowerModel.KoszulNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/PulledKoszulTowerNormalization.lean",
+  "statement": "def KoszulNormalization (P : CochainComplex (Modules l E Y) ℤ) (e : (diagramPull l E g).obj (H l E Y P) ≅ H l E X ((G l E g).obj P)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed4a9020e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed4a9020e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 6250f131 (F1 helpers owned by a theorem module with an import cycle; F2 missing stmt_dep). New def node def-a1-pulled-koszul-tower-normalization (own module PulledKoszulTowerNormalization, stmt_deps integral-completed-tower-pullback-universes / coef-ringed-tensor-hom-model / principal-completed-koszul-towers) owns the 10 helpers; bodies compared mechanically with the parent FinitePullbackStrictTowerComparison copies: identical. The item no longer imports the parent (cycle gone) and changes only lean plus +1 stmt_dep. Both statements match their files verbatim; all §5 new-node fields present; real data, no sorry in the def module; generator-pinned normalization covers both Koszul degrees; item clauses, edge cases (n=0 = exponent 1, P=0, unbounded P, g=id, empty schemes, independent t/u) unchanged and correct. Advisory: parent should re-point its duplicate helpers (maintainer note in report); proEtaleBaseChange owner not a stmt_dep, but intrinsic to the pull interface. No compile (no change); worker dry run OK 9b5a0e5ade8."
+ }
+}

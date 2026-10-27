@@ -1,0 +1,406 @@
+{
+ "id": "lem-trf-fppf-affine-refinement-pullback-model",
+ "kind": "statement",
+ "title": "Finite affine refinement and Cartesian local model of a family descent datum",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering [def-pc-fppf-site], and fix a family descent datum $(V_i\\to T_i,\\phi_{ij})$ [def-trf-scheme-cover-descent-datum]. Put $A=\\coprod_iT_i$, $Z=\\coprod_iV_i$ and let $D$ be a singleton descent datum on $Z\\to A$ relative to $A\\to T$ [def-pd-descent-datum] whose transport restricts to $\\phi_{ij}$ on each component. Coproducts are those of [lem-weil-pbc-scheme-coproduct-family], and all objects lie in the fixed universes of [def-weil-size-convention]. For every affine open subscheme $U\\subset T$ [def-weil-open-immersion], set $A_U=A\\times_TU$ and $Z_U=Z\\times_AA_U$ [def-pc-fibre-product]. There is a descent datum $D_U$ on $Z_U\\to A_U$ relative to $A_U\\to U$ such that projection $Z_U\\to Z$ intertwines its transport with that of $D$ along $A_U\\to A$ over $U\\to T$. There exist $m\\ge0$, indices $i(j)\\in I$, and affine open subschemes $W_j\\subset T_{i(j)}\\times_TU$ whose images cover $U$, each flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation] over $U$, with these additional properties. The coproduct $C=\\coprod_{j=1}^m W_j$ is affine. Its induced morphism $p:C\\to U$ is flat, surjective [def-weil-surjective-morphism], locally of finite presentation, quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], hence of finite presentation; $\\{p\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering]. The refinement induces $h:C\\to A_U$ over $U$. The scheme $Z_U\\times_{A_U}C$ admits a descent datum $E$ relative to $p$, whose projection to $Z_U$ is Cartesian over $h$ and intertwines the transports of $E$ and $D_U$. There is an isomorphism over $C$\n$$Z_U\\times_{A_U}C\\cong\\coprod_{j=1}^m Q_j,\\qquad Q_j=V_{i(j)}\\times_{T_{i(j)}}W_j,$$\nwhere $W_j\\to T_{i(j)}$ is the projection through $T_{i(j)}\\times_TU$. This includes $U=\\varnothing$ and $m=0$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, preliminary pullback observation and affine-base paragraph; Tag 023Y, lemma-pullback; Topologies Tags 021P, lemma-fppf-affine, and 021Q, definition-standard-fppf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-trf-scheme-cover-descent-datum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "def-weil-size-convention",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Construct the transport on the specified pullback Z_U directly. Project a point x over r to Z, apply D.transport along r b and s b, and pair the transported point with s by the IsPullback universal property. The equality over T follows by postcomposing r a_U = s a_U with U to T and the Cartesian-square equation. The first projection gives the requested transport equation. The two projections reduce naturality, identity, and cocycle to the corresponding laws of D, giving the descent datum over U [def-pd-descent-datum], with the chosen fibre product [def-pc-fibre-product]. This direct construction works for arbitrary specified Cartesian squares, without a change-of-base assertion from the fixed-base pullback theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Y, lemma-pullback (1), construction along the square with bases U and T"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fppf-covering-base-change] to $U\\to T$, giving the fppf family $B_i=T_i\\times_TU\\to U$ (interchanging the fibre-product projections if necessary). Apply [lem-pc-fppf-affine-refinement] with the affine base $U$. It supplies finitely many indices $i(j)$ and affine opens $W_j\\subset B_{i(j)}$, whose composites to $U$ are flat and locally of finite presentation and whose images cover $U$. This application uses the joint surjectivity clause of the fppf covering, not only the properties of its individual arrows.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021O, lemma-fppf (3), and 021P, lemma-fppf-affine"
+   }
+  },
+  {
+   "text": "Form $C=\\coprod_jW_j$ and $p:C\\to U$ using [lem-weil-pbc-scheme-coproduct-family]. By clause (4) of [lem-weil-pbc-affine-morphism-permanence], $C$ is affine. A point of $C$ belongs to one open component $W_j$, on which its local ring and the induced map from the local ring of $U$ are those for $W_j\\to U$. Thus $p$ is flat by [def-weil-flat-morphism]. The affine neighbourhoods witnessing local finite presentation on $W_j$ are also affine open neighbourhoods in $C$, so [def-sbc-locally-finite-presentation] gives local finite presentation of $p$. The images of the components cover $U$, so $p$ is surjective. Since $C,U$ are affine, [lem-weil-pbc-morphism-affine-schemes-affine] makes $p$ affine; clause (3) of the permanence lemma makes it quasi-compact and quasi-separated. The finite-presentation assertion is now precisely the convention in [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I5, lemma-disjoint-union-affines; morphisms.tex Tags 01SH, lemma-morphism-affines-affine, and 01S7, lemma-affine-separated; Tag 01TP, definition-finite-presentation"
+   }
+  },
+  {
+   "text": "For every affine open $V\\subset U$, affineness of $p$ means that $p^{-1}(V)$ is an affine open of $C$ by [pqf-def-affine-morphism]. Its image is exactly $V$, since $p$ is surjective. The singleton choice of this affine open, together with flatness already proved, meets [def-weil-pbc-fpqc-covering]. Thus $\\{p\\}$ is an fpqc covering; here we do not identify fpqc with a mere flat surjective family.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B, definition-fpqc-covering"
+   }
+  },
+  {
+   "text": "For each $j$, the map $W_j\\to T_{i(j)}$ followed by the coprojection to $A$, together with $W_j\\to U$, gives a unique $U$-map $h_j:W_j\\to A_U$ by [def-pc-fibre-product]. The coproduct universal property in [lem-weil-pbc-scheme-coproduct-family] assembles these maps into $h:C\\to A_U$ with $a_Uh=p$. Apply [lem-galois-fpqc-canonical-pullback-datum] to $a_U:A_U\\to U$, $p:C\\to U$, $h$, and $D_U$. Its conclusion gives $E$ on the chosen $Z_U\\times_{A_U}C$ with the required transport equation. Its underlying projection square is Cartesian by the very definition of this fibre product.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-galois-fpqc-canonical-pullback-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Y, lemma-pullback (1), applied with fixed base U"
+   }
+  },
+  {
+   "text": "Install the supplied colimit cofans as coproduct-existence instances and compare them with the chosen coproducts by their canonical colimit isomorphisms. The component equations hq identify q with the componentwise coproduct map. The component Cartesian-square clause of [lem-trf-fppf-family-coproduct-descent-encoding] therefore gives IsPullback (inZ i) (V_i to T_i) q (inA i). Paste this square with each chosen pullback Q_j = V_i times_{T_i} W_j, then cancel the specified square Z_U to Z over A_U to A. The resulting squares exhibit Q_j as the pullback of Z_U along h_j. Finite coproducts of schemes are universal by [lem-sc-etale-fibre-product-base-change-coproduct] (Mathlib FinitaryPreExtensive.isUniversal_finiteCoproducts), so their coproduct is a pullback of Z_U along h. Comparison with the chosen pullback v h gives the isomorphism. The second projection equation of the pullback comparison is exactly the displayed equation over C. This uses only the component-square conclusion of the existing encoding theorem, not its construction or any assertion about the chosen singleton datum.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-fppf-family-coproduct-descent-encoding",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023X, lemma-family-is-one, component decompositions; Tag 023Y, lemma-pullback (1)"
+   }
+  },
+  {
+   "text": "All constructions and Mathlib instances above permit Fin 0. Neither the finite affine refinement theorem nor universality of finite coproducts requires a nonempty base or index type. Transport and comparison maps are defined by universal properties, so they require no point and no nonempty index type. Thus the same Lean proof handles the empty-base case, empty summands, and repeated selected indices without separate choices.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021P, lemma-fppf-affine, and 021Q, definition-standard-fppf, empty-base case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-canonical-pullback-datum",
+  "lem-trf-fppf-family-coproduct-descent-encoding",
+  "lem-sc-etale-fibre-product-base-change-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 02W3, lemma-descending-types-morphisms; 023Y, lemma-pullback (1); 023X, lemma-family-is-one, using the existing family-encoding component squares and universality of finite scheme coproducts; topologies.tex Tag 021P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an fppf scheme cover and a descent datum, over each affine open of the base there exists a finite affine flat surjective finitely presented refinement whose pulled back scheme is the coproduct of the local base changes",
+   "results": "{\"t\": \"2026-10-22T06:06:24Z\", \"tool\": \"leanfinder\", \"query\": \"For an fppf scheme cover and a descent datum, over each affine open of the base there exists a finite affine flat surjective finitely presented refinement whose pulled back scheme is the coproduct of the local base changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\"], \"digest\": \"49a4003032ca17d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern affine refinements of open covers, cofiltered affine-transition limits, or definitions of fppf coverings. None supplies the finite fppf refinement together with the specified Cartesian scheme-datum pullback and its component identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\"",
+   "results": "{\"t\": \"2026-10-22T06:06:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"AlgebraicGeometry.Scheme.fppfTopology\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology\", \"AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\"], \"digest\": \"419fa6232936f8a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern affine refinements of open covers, cofiltered affine-transition limits, or definitions of fppf coverings. None supplies the finite fppf refinement together with the specified Cartesian scheme-datum pullback and its component identification."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*refin|refin.*affine|DescentDatum|isEffective",
+   "results": "{\"t\": \"2026-10-22T06:06:10Z\", \"tool\": \"grep\", \"query\": \"affine.*refin|refin.*affine|DescentDatum|isEffective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\"], \"digest\": \"366d7eb5c0bb1002\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern affine refinements of open covers, cofiltered affine-transition limits, or definitions of fppf coverings. None supplies the finite fppf refinement together with the specified Cartesian scheme-datum pullback and its component identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine refinement of an fppf cover gives a flat surjective finite presentation affine coproduct and the pullback of descent data is the coproduct of local pullbacks",
+   "results": "{\"t\": \"2026-10-22T06:06:11Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine refinement of an fppf cover gives a flat surjective finite presentation affine coproduct and the pullback of descent data is the coproduct of local pullbacks\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Standard fppf cover of an affine scheme obtained from finitely many affine opens of a covering family, with cartesian transport-compatible pullback of a scheme descent datum",
+   "results": "{\"t\": \"2026-10-22T06:07:11Z\", \"tool\": \"leanfinder\", \"query\": \"Standard fppf cover of an affine scheme obtained from finitely many affine opens of a covering family, with cartesian transport-compatible pullback of a scheme descent datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.AffineCover.cover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.AffineCover.J\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\"], \"digest\": \"e598672fb404094d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern affine refinements of open covers, cofiltered affine-transition limits, or definitions of fppf coverings. None supplies the finite fppf refinement together with the specified Cartesian scheme-datum pullback and its component identification."
+  },
+  {
+   "tool": "grep",
+   "query": "affineRefinement|exists.*[Ff]inite|finite.*[Aa]ffine",
+   "results": "{\"t\": \"2026-10-22T06:06:59Z\", \"tool\": \"grep\", \"query\": \"affineRefinement|exists.*[Ff]inite|finite.*[Aa]ffine\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"f8cebc49d35845a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern affine refinements of open covers, cofiltered affine-transition limits, or definitions of fppf coverings. None supplies the finite fppf refinement together with the specified Cartesian scheme-datum pullback and its component identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine refinement of an fppf covering and Cartesian pullback of a scheme descent datum with its componentwise coproduct model",
+   "results": {
+    "t": "2026-10-22T07:30:14Z",
+    "tool": "leanfinder",
+    "query": "Finite affine refinement of an fppf covering and Cartesian pullback of a scheme descent datum with its componentwise coproduct model",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+     "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc"
+    ],
+    "digest": "108a03eadec1a7d4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give open-cover affine refinements or general morphism and site properties, not this combined scheme descent-datum construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\"",
+   "results": {
+    "t": "2026-10-22T07:30:14Z",
+    "tool": "loogle",
+    "query": "\"fppf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.fppfPrecoverage",
+     "AlgebraicGeometry.Scheme.fppfTopology",
+     "AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage",
+     "AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage",
+     "AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology",
+     "AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology",
+     "AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf",
+     "AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage"
+    ],
+    "digest": "419fa6232936f8a4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give open-cover affine refinements or general morphism and site properties, not this combined scheme descent-datum construction."
+  },
+  {
+   "tool": "grep",
+   "query": "affineRefinement|DescentDatum|isAffine.*[Cc]oprod",
+   "results": {
+    "t": "2026-10-22T07:30:14Z",
+    "tool": "grep",
+    "query": "affineRefinement|DescentDatum|isAffine.*[Cc]oprod",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Noetherian.lean",
+     "Mathlib/AlgebraicGeometry/Cover/Open.lean",
+     "Mathlib/AlgebraicGeometry/Cover/Open.lean",
+     "Mathlib/AlgebraicGeometry/Cover/Open.lean",
+     "Mathlib/AlgebraicGeometry/Cover/Open.lean",
+     "Mathlib/AlgebraicGeometry/Cover/Open.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean"
+    ],
+    "digest": "ad068842df4736a0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give open-cover affine refinements or general morphism and site properties, not this combined scheme descent-datum construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf covering of an affine scheme admits a finite affine refinement and transport compatible pullback of scheme descent data",
+   "results": {
+    "t": "2026-10-22T07:30:15Z",
+    "tool": "leansearch",
+    "query": "An fppf covering of an affine scheme admits a finite affine refinement and transport compatible pullback of scheme descent data",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.HasAffineProperty.of_openCover",
+     "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map",
+     "AlgebraicGeometry.Scheme.OpenCover.affineRefinement",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+     "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D"
+    ],
+    "digest": "5b1251ab1c51bdf8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give open-cover affine refinements or general morphism and site properties, not this combined scheme descent-datum construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme descent data can be pulled back along any commutative square and a finite flat locally finitely presented affine covering has an affine coproduct",
+   "results": {
+    "t": "2026-10-22T07:31:38Z",
+    "tool": "leanfinder",
+    "query": "Scheme descent data can be pulled back along any commutative square and a finite flat locally finitely presented affine covering has an affine coproduct",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback",
+     "AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+     "AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'"
+    ],
+    "digest": "2345b76c8d6403e7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give open-cover affine refinements or general morphism and site properties, not this combined scheme descent-datum construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-family-affine-effectivity-reduction",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric quotient-presentation support via 0265 and 02W8: Tag 02W3, lemma-descending-types-morphisms, preliminary pullback observation and affine-base paragraph; Tag 023Y, lemma-pullback; Topologies Tags 021P, lemma-fppf-affine, and 021Q, definition-standard-fppf.",
+   "via": [
+    "lem-trf-fppf-family-affine-effectivity-reduction",
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fppf-affine-refinement-pullback-model",
+  "worker": "stage1",
+  "summary": "Split by explicit base restriction, finite affine fppf refinement, affine coproduct geometry, fpqc verification, fixed-base datum pullback, and componentwise Cartesian identification. Existing nodes supply all non-elementary inputs; no new node and no statement change. Checked the empty base and distinguished the fixed-base pullback statement from the change of base.",
+  "blueprint": "Geometric quotient-presentation support of lem-trf-local-term-locality via Tags 0265 and 02W8: realizes the local refinement and Cartesian pullback portion of the Tag 02W3 reduction, at the precise place already recorded in blueprint.from.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic Tag 021P finite affine refinement on an affine base; no change to the unit route."
+   },
+   {
+    "node": "lem-galois-fpqc-canonical-pullback-datum",
+    "why": "Generic fixed-base construction of the pulled-back scheme transport; base restriction is written separately, so no stronger conclusion is presumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-galois-fpqc-canonical-pullback-datum"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-e1293d6ba",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-e1293d6ba (reviewer sub-agent of L); spot-checked: Read the item's 7 steps against every cited statement and against Stacks 02W3 (descent.tex l.9028), 023Y(1) (l.8279) and 021P (topologies.tex l.1970). The delivery adds no new nodes and leaves the statement unchanged. No SGA. Step 1 builds D_U correctly: the fixed-base canonical-pullback lemma is applied along b:A_U→A over T, then restricted along A_U×_U A_U→A_U×_T A_U. This works for any U→T, and the change of base is not taken from the fixed-base lemma (C4 avoided). Steps 2-4: base change of the fppf covering, then the 021P refinement on the affine U. C=∐W_j is affine by clause (4) of the permanence lemma. Flatness and lfp hold componentwise via open-component local rings and affine witnesses. p is affine because it is a map of affines, hence qc+qs, hence of finite presentation by the conventions node. fpqc is verified against the actual definition: for each affine V, the affine open p^{-1}(V) maps onto V. Step 5: h_j comes from the fibre-product property, a_U h=p by coproduct uniqueness, and the lemma is reapplied with base U. Step 6: P_j ≅ Z_U×_{A_U}W_j ≅ Z×_A W_j ≅ V_{i(j)}×_{T_{i(j)}}W_j because Z→A is componentwise, then glued over C. Edge cases checked: U=∅/m=0, I=∅, repeated i(j), non-separated U→T, non-qc A. Duplicates: lem-galois-fpqc-singleton-affine-refinement (starts from a singleton fpqc cover) and lem-trf-fppf-sheaf-representability-descent-data are different statements. The parent step does its own (i)-(iii) work, so the item does not restate a parent clause. Accepted tool_uses: lem-pc-fppf-affine-refinement (generic 021P; the unit has no own node) and lem-galois-fpqc-canonical-pullback-datum (generic 023Y fixed base). Neither replaces the unit route. The worker wrote these tool_uses themselves, which C8 leaves to the maintainer; I accept them as accurate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfAffineRefinementPullbackModel",
+  "declaration": "AlgebraicGeometry.exists_fppf_affine_refinement_pullback_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfAffineRefinementPullbackModel.lean",
+  "statement": "theorem exists_fppf_affine_refinement_pullback_model {I : Type (u + 1)} {T : Scheme.{u}} {Ti : I → Scheme.{u}} (f : ∀ i, Ti i ⟶ T) (hcov : Presieve.ofArrows Ti f ∈ Scheme.fppfPrecoverage T) (F : SchemeCoverDescentDatum f) {A Z : Scheme.{u}} (inA : ∀ i, Ti i ⟶ A) (inZ : ∀ i, (F.localScheme i).left ⟶ Z) (hA : IsColimit (Cofan.mk A inA)) (hZ : IsColimit (Cofan.mk Z inZ)) (a : A ⟶ T) (q : Z ⟶ A) (ha : ∀ i, inA i ≫ a = f i) (hq : ∀ i, inZ i ≫ q = (F.localScheme i).hom ≫ inA i) (D : Over.DescentDatum a (Over.mk q)) (hD : ∀ (H : Scheme.{u}) (pH : H ⟶ T) (i k : I) (r : H ⟶ Ti i) (s : H ⟶ Ti k) (hr : r ≫ f i = pH) (hs : s ≫ f k = pH) (x : (F.data.obj i).obj.obj (op ((Over.map r).obj (Over.mk (𝟙 H))))) (y : Over.mk (r ≫ inA i) ⟶ Over.mk q) (ht : (r ≫ inA i) ≫ a = (s ≫ inA k) ≫ a), y.left = ((F.representation i).homEquiv.symm x).left ≫ inZ i → (D.transport (r ≫ inA i) (s ≫ inA k) ht y).left = ((F.representation k).homEquiv.symm ((F.data.hom pH r s hr hs).hom.app (op (Over.mk (𝟙 H))) x)).left ≫ inZ k) (U : T.Opens) (hU : IsAffineOpen U) {AU ZU : Scheme.{u}} (b : AU ⟶ A) (aU : AU ⟶ U.toScheme) (hAU : IsPullback b aU a U.ι) (z : ZU ⟶ Z) (v : ZU ⟶ AU) (hZU : IsPullback z v q b) : ∃ DU : Over.DescentDatum aU (Over.mk v), (∀ (H : Scheme.{u}) (r s : H ⟶ AU) (hrs : r ≫ aU = s ≫ aU) (x : Over.mk r ⟶ Over.mk v) (y : Over.mk (r ≫ b) ⟶ Over.mk q) (ht : (r ≫ b) ≫ a = (s ≫ b) ≫ a), y.left = x.left ≫ z → (DU.transport r s hrs x).left ≫ z = (D.transport (r ≫ b) (s ≫ b) ht y).left) ∧ ∃ (m : ℕ) (i : Fin m → I) (W : ∀ j, (pullback (f (i j)) U.ι).Opens), (∀ j, IsAffineOpen (W j)) ∧ (∀ j, Flat ((W j).ι ≫ pullback.snd (f (i j)) U.ι) ∧ LocallyOfFinitePresentation ((W j).ι ≫ pullback.snd (f (i j)) U.ι)) ∧ (∀ x : U.toScheme, ∃ j, x ∈ Set.range ((W j).ι ≫ pullback.snd (f (i j)) U.ι)) ∧ ∃ (p : (∐ fun j ↦ (W j).toScheme) ⟶ U.toScheme), p = Sigma.desc (fun j ↦ (W j).ι ≫ pullback.snd (f (i j)) U.ι) ∧ IsAffine (∐ fun j ↦ (W j).toScheme) ∧ Flat p ∧ Surjective p ∧ LocallyOfFinitePresentation p ∧ QuasiCompact p ∧ QuasiSeparated p ∧ Presieve.singleton p ∈ Scheme.fpqcPrecoverage U.toScheme ∧ ∃ (h : (∐ fun j ↦ (W j).toScheme) ⟶ AU) (hh : h ≫ aU = p), (∀ j, Sigma.ι (fun j ↦ (W j).toScheme) j ≫ h ≫ b = (W j).ι ≫ pullback.fst (f (i j)) U.ι ≫ inA (i j)) ∧ ∃ E : Over.DescentDatum p (Over.mk (pullback.snd v h)), Over.DescentDatum.IsBaseChange hh (pullback.condition (f := v) (g := h)) DU E ∧ ∃ e : pullback v h ≅ ∐ (fun j ↦ pullback (F.localScheme (i j)).hom ((W j).ι ≫ pullback.fst (f (i j)) U.ι)), e.hom ≫ Sigma.desc (fun j ↦ pullback.snd (F.localScheme (i j)).hom ((W j).ι ≫ pullback.fst (f (i j)) U.ι) ≫ Sigma.ι (fun j ↦ (W j).toScheme) j) = pullback.snd v h",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e2a09df5",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Node and Lean match clause by clause. The node changed only in lean; the statement is verbatim in the file; the item is not Lean-closed live. Hypotheses: coproducts A, Z by IsColimit cofans with the structure maps fixed by ha/hq; hD has satisfiable premises (y from hq, ht from ha/hr/hs) and uses the recorded SchemeCoverDescentDatum/IsEffective form; A_U, Z_U by IsPullback. Conclusion: D_U is stated over the base U and its transport equation fixes it uniquely; W_j are affine opens of T_i x_T U, flat and lfp over U, covering U; C is the actual coproduct with p = Sigma.desc; affine, flat, surjective, lfp, qc, qs and the fpqcPrecoverage singleton are all stated; h is pinned by hh and its component equations; E is stated by IsBaseChange on pullback v h, the exact shape of exists_canonical_pullback_descent_datum; the isomorphism to the coproduct of Q_j = V_i x_{T_i} W_j carries the over-C equation. Edge cases: U empty with m = 0, I empty, repeated indices, no extra assumptions. Universes match the SchemeCoverDescentDatum interface. No definitions; the only proof is sorry; docstrings carry the sources, blueprint and all 7 proof steps; report has both required sections. Not recompiled per instruction; worker reports a clean compile and a passed dry run (c2fa360094e). Advisory: the node's 'affine' has no DAG citation (stage-1 matter)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261023T132024-L-2184442",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

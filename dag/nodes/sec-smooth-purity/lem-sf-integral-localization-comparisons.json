@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-integral-localization-comparisons",
+ "kind": "statement",
+ "title": "Qualitative integral localization from ordinary recollement and finite records",
+ "statement": "Fix a field k, a prime l invertible in k, a finite extension E/Q_l, a separated finite-type k-scheme X with structure morphism t, and complementary closed/open immersions i:Z→X and j:U→X. Given a family F n : SfFiniteLocalization l E n k i j [def-sf-localization-stage-data] and ordinary recollement O : SfIntegralOrdinaryRecollement l E i j [lem-sf-integral-ordinary-recollement-realization], the qualitative comparison record SfIntegralLocalizationComparisonData l E k hl t i j F [def-sf-integral-localization-comparison-data] is nonempty. This conclusion contains no finite-stage existence assertion no integral image limit existence, and no integral quantitative Tor field; all five integral reduction comparisons include the same prescribed adjunction equations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage: actual completed images, supported triangle, normalized exceptional and open reduction comparisons."
+ },
+ "stmt_deps": [
+  "def-sf-localization-stage-data",
+  "def-sf-integral-localization-comparison-data",
+  "lem-sf-integral-ordinary-recollement-realization"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied O: restrict the actual ambient kernel right adjoint and use its restricted exceptional adjunction, ordinary closed/open adjunctions, and completed image and pullback comparisons. Transport the ordinary supported triangle through the invertible ordinary-to-completed pullback comparison. The normalized adjunction equations identify its maps with the restricted counit and open unit. Shifted Hom orthogonality makes the boundary unique and natural. Full faithfulness of closed image gives the exceptional unit; its Hom adjunction and orthogonality give exceptional-open vanishing. Fullness identifies the restricted pullbacks with constructibleIntegralPullback.",
+   "uses": [
+    "lem-sf-integral-ordinary-recollement-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "O gives actual direct-image reduction. Its pull_reduction, computed on a K-flat representative, and the normalized completed pullback reduction of [lemma-weil-pbc-completed-pullback-reduction] give both pullback reductions. Lift these natural isomorphisms along the full intrinsic constructible inclusions. Each finite record in F has its image and pullbacks compared to these same ambient operations; conjugate the reduction isomorphisms by those comparisons.",
+   "uses": [
+    "lem-sf-integral-ordinary-recollement-realization",
+    "lemma-weil-pbc-completed-pullback-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build the ordinary/finite kernel presentation from O and the finite adjunctions and triangles. Restrict the canonical counit transpose alphaOf to constructible inputs. [lem-sf-exceptional-reduction-transition-comparison] makes it invertible and proves its exceptional-counit and open-unit equations. The unique adjoint isomorphism preserving the counit compares the finite kernel presentation with the exceptional adjunction of F n. Conjugate the equations with this same comparison and the ordinary-operation comparisons to obtain exactly the two recorded equations. Assemble the qualitative comparison data; no finite cohomological dimension or Tor assumption is used.",
+   "uses": [
+    "lem-sf-exceptional-reduction-transition-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-recollement-realization",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-sf-exceptional-reduction-transition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage: actual completed images, supported triangle, normalized exceptional and open reduction comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct a supported localization triangle from adjunctions closed open recollement and prove uniqueness of the boundary",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Adjunction.isTriangulated_leftAdjoint; CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "SfFiniteLocalization|SfIntegralLocalization|HasProEtaleTorAmplitude.*iso",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude is invariant under isomorphism and uniform bounds on all derived reductions imply integral finite Tor amplitude",
+   "results": "RingHom.Flat.respectsIso; CategoryTheory.hasProjectiveDimensionLT_of_iso; CategoryTheory.Triangulated.TStructure.isLE_of_iso; RingHom.finite_respectsIso; RingHom.isIntegral_respectsIso; CategoryTheory.hasInjectiveDimensionLT_of_iso; RingHom.finitePresentation_respectsIso; RingHom.finiteType_respectsIso",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Y2",
+  "item": "Sheaf.Paper.SfIntegralLocalizationConstruction",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral stage: actual completed images, supported triangle, normalized exceptional and open reduction comparisons.",
+   "via": [
+    "lem-sf-integral-localization-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralLocalizationComparisons",
+  "file": "lean/Sheaf/Paper/SfIntegralLocalizationComparisons.lean",
+  "declaration": "WeilConjectures.sfIntegralLocalizationComparisons",
+  "declarations": [
+   "WeilConjectures.sfIntegralLocalizationComparisons"
+  ],
+  "statement": "theorem sfIntegralLocalizationComparisons (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j = (Set.range i)ᶜ) (F : ∀ n : ℕ, SfFiniteLocalization l E n k i j) (O : SfIntegralOrdinaryRecollement l E i j) : Nonempty (SfIntegralLocalizationComparisonData l E k hl t i j F)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T164813-L-1086400",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T164813-L-1086400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

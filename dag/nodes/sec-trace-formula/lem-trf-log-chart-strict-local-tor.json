@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-log-chart-strict-local-tor",
+ "kind": "statement",
+ "title": "Monomial quotient Tor vanishing for an arbitrary chart at a geometric point",
+ "statement": "Let $X=\\operatorname{Spec}A$ be a locally Noetherian log regular fs log scheme [def-trf-fs-log-blowup, pqf-def-locnoeth], where $A$ is a commutative ring. Let $P$ be a fine saturated commutative monoid written additively and let $\\alpha:P\\to(A,\\cdot)$ be the structural map of a chart of this log structure; the chart need not identify $P$ with a characteristic monoid. Let $\\bar x$ be any geometric point of $X$ [def-weil-geometric-point], put $B_{\\bar x}=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ [def-weil-pbc-strict-henselization-limit], and give $B_{\\bar x}$ its $R=\\mathbf Z[P]$-algebra structure by the composite $z^p\\mapsto\\alpha(p)\\mapsto B_{\\bar x}$. Here $\\mathbf Z[P]=\\bigoplus_{p\\in P}\\mathbf Zz^p$ with $z^pz^q=z^{p+q}$. For every monoid ideal $H\\subset P$, meaning $H+P\\subset H$ and allowing $H=\\varnothing$, put $I=\\mathbf Z[H]=\\bigoplus_{h\\in H}\\mathbf Zz^h\\subset R$. Then, with Tor as in [def-weil-pbc-tor-modules],\n$$\\operatorname{Tor}^{R}_1(R/I,B_{\\bar x})=0.$$",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, proof of Lemma 3.4.3, printed p. 110 (Kato 1994, 6.1(ii)); arbitrary-chart reduction through Exposé VI, 1.6 and 3.7(a), printed pp. 70 and 75. Re-split of the original first proof step."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-tor-modules",
+  "def-trf-chart-strict-henselization-map",
+  "def-trf-monomial-quotient-tor"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=B_{\\bar x}$ and $L=M_{\\bar x}$. By [def-weil-pbc-geometric-stalks], the etale structure-sheaf stalk is the colimit of rings of sections on pointed etale neighbourhoods. Restricting to affine neighbourhoods is cofinal by [lemma-weil-pbc-affine-neighbourhood-cofinal], so this is precisely the ring $B$ defined in [def-weil-pbc-strict-henselization-limit], compatibly with the chart map. By [lem-weil-pbc-strict-henselization-local-structure], $B$ is strictly henselian local. The chart condition of [def-trf-fs-log-blowup] gives $L\\cong P\\oplus_F B^\\times$, where $F=\\{p:\\alpha(p)\\in B^\\times\\}$ and $\\alpha$ now denotes the composite to $B$. Thus the chart germ over $B$ is the original log stalk.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring; ILO Expose VI 1.1--1.2, printed p. 69 (log chart stalks)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-chart-face-localization-logification] to the given chart at $\\bar x$. It says that $F$ is a face and identifies $Q=P_F/F^{\\rm gp}$ with $\\overline M_{\\bar x}$, where $P_F=\\{p-f:p\\in P,f\\in F\\}$. By [lem-trf-fs-face-sharpening], $P_F$ is integral fs, its units are $G=F^{\\rm gp}$, and $Q$ is sharp fs with finite free group completion.",
+   "uses": [
+    "lem-trf-chart-face-localization-logification",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.1--3.1.5, printed pp. 98--99; Expose VI 1.6, printed p. 70."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-integral-monoid-free-sharpening-splitting] with its integral monoid $R=P_F$, unit group $U=G$ and sharp quotient $B=Q$ (its letter $B$ here denotes a monoid, not our local ring). The hypotheses hold by Step 2. Obtain a monoid section $s:Q\\to P_F$ and $P_F\\cong Q\\oplus G$. This construction permits torsion in $G$; only $Q^{\\rm gp}$ is required to be free.",
+   "uses": [
+    "lem-trf-integral-monoid-free-sharpening-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.7(a), printed p. 75, splitting the group sequence and restricting to the sharp monoid."
+   }
+  },
+  {
+   "text": "By [lem-trf-log-regular-sharp-chart], applied to the original log regular $X$ and $\\bar x$, choose a chart modeled on $\\overline M_{\\bar x}$ on an affine pointed etale neighbourhood. Use the identification $Q\\cong\\overline M_{\\bar x}$ of Step 2 to write its germ as $b_M:Q\\to L$ with structural map $b:Q\\to B$. It induces exactly the characteristic identification specified by the original chart.",
+   "uses": [
+    "lem-trf-log-regular-sharp-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6, printed p. 70, existence of a chart modeled on the characteristic monoid."
+   }
+  },
+  {
+   "text": "Let $H_x$ be the image of $H$ in $Q$. The map $P\\to Q$ is surjective: a class represented by $p-f\\in P_F$ equals the class of $p$. Therefore $H_x+Q\\subset H_x$, since the sum of images of $h\\in H$ and $p\\in P$ is the image of $h+p\\in H$. The comparison [lem-trf-log-chart-face-tor-comparison] applies to the two chart germs over the strictly henselian local ring $B$, with the section $s$ of Step 3 and the sharp chart $b_M$ of Step 4. It gives\n$$\\operatorname{Tor}^{\\mathbf Z[P]}_1(\\mathbf Z[P]/\\mathbf Z[H],B)\\cong\\operatorname{Tor}^{\\mathbf Z[Q]}_1(\\mathbf Z[Q]/\\mathbf Z[H_x],B),$$\nwhere the right coefficient action is $z^q\\mapsto b(q)$. This comparison includes the unit-character twist between the original and chosen sharp charts; their structural maps need not be equal.",
+   "uses": [
+    "lem-trf-log-chart-face-tor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.7(a), printed p. 75 (unit comparison), and Expose VIII proof of 3.4.3, printed p. 110 (monomial Tor)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-kato-tor-independence-chart] to the original $X$, $\\bar x$, the sharp characteristic chart on the neighbourhood chosen in Step 4, and the ideal $H_x\\subset Q$ from Step 5. It gives vanishing of the right-hand Tor group of Step 5. Its monomial ideal $H_x\\mathbf Z[Q]$ equals $\\mathbf Z[H_x]$: multiplying a basis element indexed by $H_x$ by one indexed by $Q$ keeps its exponent in $H_x$. Hence the displayed comparison proves the required vanishing for the original chart. Empty and total ideals are included by both cited statements, so no properness or nonemptiness restriction on $H$ was introduced.",
+   "uses": [
+    "lem-trf-kato-tor-independence-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII proof of Lemma 3.4.3, printed p. 110, citing Kato 1994 6.1(ii)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-trf-chart-face-localization-logification",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-integral-monoid-free-sharpening-splitting",
+  "lem-trf-kato-tor-independence-chart",
+  "lem-trf-log-chart-face-tor-comparison",
+  "lem-trf-log-regular-sharp-chart",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1--1.2, 1.6 and 3.7(a), printed pp. 69--70, 75; Expose VIII proof of 3.4.3, printed p. 110. Assembly of existing chart, face and Tor statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "logRegular|log_regular|[Mm]onomial.*[Tt]or|[Tt]or.*[Mm]onomial",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/Tactic/Ring/Common.lean\", \"line\": \"168\", \"text\": \"/-- `ExProdNat e` stores the structure of a normalized monomial expression `e : Q(ℕ)`.\"}\n  {\"file\": \"Mathlib/Tactic/Ring/Common.lean\", \"line\": \"228\", \"text\": \"/-- `ExProd BaseType sα e` stores the structure of a normalized monomial expression `e`.\"}\n  {\"file\": \"Mathlib/Tactic/Ring/Common.lean\", \"line\": \"491\", \"text\": \"Two monomials are said to \\\"overlap\\\" if they differ by a constant factor, in which case the\"}\n  {\"file\": \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Monomial/Basic.lean\", \"line\": \"411\", \"text\": \"/-- Scales a monomial by a real factor `c`. -/\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"line\": \"312\", \"text\": \"    ∏ y ∈ t, (X y : MvPolynomial σ R) ^ x y = monomial (indicator t (fun i _ ↦ x i)) (1 : R) := by\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"line\": \"313\", \"text\": \"  rw [monomial_eq, C_1, one_mul, Finsupp.prod, Finset.prod_subset (support_indicator_subset _ _)]\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Derivation.lean\", \"line\": \"15\", \"text\": \"monomials `MvPolynomial.X i`. We also provide a constructor `MvPolynomial.mkDerivation` that\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Division.lean\", \"line\": \"24\", \"text\": \"  `divMonomial` and `modMonomial` are well-behaved as quotient and remainder operators.\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"133\", \"text\": \"/-- The linear span of the monomials `mFourier n` is dense in `C(UnitAddTorus d, ℂ)`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"line\": \"270\", \"text\": \"monomials `mFourier n` on `UnitAddTorus d` considered as elements of `L²`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"line\": \"38\", \"text\": \"the generators. Note that `si ≤ xi` is analogous to saying that the monomial corresponding to `si`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean\", \"line\": \"20\", \"text\": \"* `FirstOrder.Ring.genericPolyMap` is a function that given a finite set of monomials\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Basic.lean\", \"line\": \"32\", \"text\": \"* `basisMonomials`: shows that the monomials form a basis of the vector space of multivariate\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/FundamentalTheorem.lean\", \"line\": \"181\", \"text\": \"  · rwa [← esymm_eq_sum_monomial, ← Finsupp.indicator_eq_sum_single, ← single_eq_monomial,\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Generators.lean\", \"line\": \"447\", \"text\": \"lemma Hom.toAlgHom_monomial (f : Generators.Hom P P') (v r) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Generators.lean\", \"line\": \"538\", \"text\": \"lemma ofComp_toAlgHom_monomial_sumElim (Q : Generators S T ι') (P : Generators R S ι) (v₁ v₂ a) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Generators.lean\", \"line\": \"548\", \"text\": \"lemma toComp_toAlgHom_monomial (Q : Generators S T ι') (P : Generators R S ι) (j a) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Generators.lean\", \"line\": \"683\", \"text\": \"    convert_to monomial (e.symm (i, 0)) 1 * (Q.toComp P).toAlgHom.toRingHom\"}\n  {\"file\": \"Mathlib/RingTheory/PolynomialAlgebra.lean\", \"line\": \"134\", \"text\": \"    simp_rw [eval₂_monomial, AlgHom.coe_toRingHom, Algebra.TensorProduct.tmul_pow, one_pow,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log regular monoid charts are Tor independent from quotients by monoid ideals after strict henselization.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submonoid.LocalizationMap.map_isRegular\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"(f : LocalizationMap S N) {m : M} (hm : IsRegular m) : IsRegular (f m)\", \"doc\": \"If $ m $ is a regular element in the commutative monoid $ M $, then its image $ f(m) $ under the localization map $ f : M \\to N $ is a regular element in the commutative monoid $ N $.\"}\n  {\"name\": \"IsLocalization.injective_iff_isRegular\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \": Injective (algebraMap R S) ↔ ∀ c : M, IsRegular (c : R)\", \"doc\": \"The canonical algebra homomorphism from $ R $ to $ S $ is injective if and only if every element of the monoid $ M $ is a regular element in $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R S] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"Submonoid.LocalizationMap.injective_iff\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"(f : LocalizationMap S N) : Injective f ↔ ∀ ⦃x⦄, x ∈ S → IsRegular x\", \"doc\": \"A localization map $ f : M \\\\to N $ from a commutative monoid $ M $ to another commutative monoid $ N $ with respect to a submonoid $ S \\\\subseteq M $ is injective if and only if every element $ x \\\\in S\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"Algebra.FormallyUnramified.localization_map\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R S] : FormallyUnramified Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally unramified $ R_M $-algebra, where $ R_M $ denotes the localization of $ R $ at $ M $.\"}\n  {\"name\": \"Localization.toLocalizationMap_eq_monoidOf\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \": toLocalizationMap M (Localization M) = monoidOf M\", \"doc\": \"The canonical localization map from a commutative monoid $ M $ to its Ore localization $ M[S^{-1}] $ coincides with the monoid homomorphism $ \\\\text{monoidOf}(M) $, which sends each element $ x \\\\in M $\"}\n  {\"name\": \"IsLocalizedModule.isTorsionFree_of_forall_isRegular\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.Basic\", \"type\": \"(S : Submonoid R) (hS : ∀ s ∈ S, s ≠ 0 → IsRegular s) [IsTorsionFree R M] [IsLocalization S A]\\n  [IsLocalizedModule S f] : IsTorsionFree A N\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ an $ R $-module, and $ S $ a submonoid of $ R $. If $ M $ is torsion-free, every nonzero element of $ S $ is a regular element of $ R $, and $ N $ is the loc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Tor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddMonoidAlgebra.toRingHom_mapDomainRingEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.MapDomain\", \"type\": \" {R : Type u_3} {M : Type u_6} {N : Type u_7} [Semiring R] [AddMonoid M] [AddMonoid N] (e : M ≃+ N) : (AddMonoidAlgebra.mapDomainRingEquiv R e).toRingHom = AddMonoidAlgebra.mapDomainRingHom R ↑e\", \"doc\": \"\"}\n  {\"name\": \"MonoidAlgebra.toRingHom_mapDomainRingEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.MapDomain\", \"type\": \" {R : Type u_3} {M : Type u_6} {N : Type u_7} [Semiring R] [Monoid M] [Monoid N] (e : M ≃* N) : (MonoidAlgebra.mapDomainRingEquiv R e).toRingHom = MonoidAlgebra.mapDomainRingHom R ↑e\", \"doc\": \"\"}\n  {\"name\": \"AddMonoidAlgebra.toRingHom_mapRingEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.MapDomain\", \"type\": \" {R : Type u_3} {S : Type u_4} {M : Type u_6} [Semiring R] [Semiring S] [AddMonoid M] (e : R ≃+* S) : (AddMonoidAlgebra.mapRingEquiv M e).toRingHom = AddMonoidAlgebra.mapRingHom M ↑e\", \"doc\": \"\"}\n  {\"name\": \"MonoidAlgebra.toRingHom_mapRingEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.MapDomain\", \"type\": \" {R : Type u_3} {S : Type u_4} {M : Type u_6} [Semiring R] [Semiring S] [Monoid M] (e : R ≃+* S) : (MonoidAlgebra.mapRingEquiv M e).toRingHom = MonoidAlgebra.mapRingHom M ↑e\", \"doc\": \"\"}\n  {\"name\": \"AddMonoidAlgebra.instIsTorsionFree\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Module\", \"type\": \" {R : Type u_1} {S : Type u_2} {M : Type u_3} [Semiring R] [Semiring S] [Module R S] [Module.IsTorsionFree R S] : Module.IsTorsionFree R (AddMonoidAlgebra S M)\", \"doc\": \"\"}\n  {\"name\": \"MonoidAlgebra.instIsTorsionFree\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Module\", \"type\": \" {R : Type u_1} {S : Type u_2} {M : Type u_3} [Semiring R] [Semiring S] [Module R S] [Module.IsTorsionFree R S] : Module.IsTorsionFree R (MonoidAlgebra S M)\", \"doc\": \"\"}\n  {\"name\": \"AddMonoidAlgebra.toRingEquiv_uniqueAlgEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \" (R : Type u_1) {A : Type u_4} (M : Type u_7) [CommSemiring R] [Semiring A] [Algebra R A] [AddMonoid M] [Unique M] : ↑(AddMonoidAlgebra.uniqueAlgEquiv R M) = AddMonoidAlgebra.uniqueRingEquiv M\", \"doc\": \"\"}\n  {\"name\": \"MonoidAlgebra.toRingEquiv_uniqueAlgEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \" (R : Type u_1) {A : Type u_4} (M : Type u_7) [CommSemiring R] [Semiring A] [Algebra R A] [Monoid M] [Unique M] : ↑(MonoidAlgebra.uniqueAlgEquiv R M) = MonoidAlgebra.uniqueRingEquiv M\", \"doc\": \"\"}\n  {\"name\": \"AddMonoidAlgebra.toRingHom_mapAlgHom\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \" {R : Type u_1} {A : Type u_4} {B : Type u_5} (M : Type u_7) [CommSemiring R] [Semiring A] [Semiring B] [Algebra R A] [Algebra R B] [AddMonoid M] (f : A →ₐ[R] B) : ↑(AddMonoidAlgebra.mapAlgHom M f) = AddMonoidAlgebra.mapRingHom M f.toRingHom\", \"doc\": \"\"}\n  {\"name\": \"MonoidAlgebra.toRingHom_mapAlgHom\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \" {R : Type u_1} {A : Type u_4} {B : Type u_5} (M : Type u_7) [CommSemiring R] [Semiring A] [Semiring B] [Algebra R A] [Algebra R B] [Monoid M] (f : A →ₐ[R] B) : ↑(MonoidAlgebra.mapAlgHom M f) = MonoidAlgebra.mapRingHom M f.toRingHom\", \"doc\": \"\"}\n  {\"name\": \"MonoidAlgebra.toRingHom_mapRangeAlgHom\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \" {R : Type u_1} {A : Type u_4} {B : Type u_5} (M : Type u_7) [CommSemiring R] [Semiring A] [Semiring B] [Algebra R A] [Algebra R B] [Monoid M] (f : A →ₐ[R] B) : ↑(MonoidAlgebra.mapAlgHom M f) = MonoidAlgebra.mapRingHom M f.toRingHom\", \"doc\": \"**Alias** of `MonoidAlgebra.toRingHom_mapAlgHom`.\"}\n  {\"name\": \"AddMonoidAlgebra.toRingEquiv_symm_uniqueAlgEquiv\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Basic\", \"type\": \" (R : Type u_1) {A : Type u_4} (M : Type u_7) [CommSemiring R] [Semiring A] [Algebra R A] [AddMonoid M] [Unique M] : ↑(AddMonoidAlgebra.uniqueAlgEquiv R M).symm = (AddMonoidAlgebra.uniqueRingEquiv M).symm\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a geometric point of a log regular fs scheme, Tor one of a monomial quotient of an arbitrary chart monoid ring with the strict henselian local ring vanishes.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kato monomial quotient Tor vanishing for nonsharp fine saturated log regular charts after localizing the face of units.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\blogRegular\\b|\\blog_regular\\b|monomial.{0,50}\\bTor\\b|\\bTor\\b.{0,50}monomial",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a log regular fine saturated log scheme, a monomial quotient of any chart monoid ring has zero Tor one with the strict local ring at a geometric point.",
+   "results": "OK 8 hits: Algebra.IsSmoothAt, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.smoothLocus_eq_compl_support_inter, Algebra.smoothLocus, Algebra.FormallyEtale.of_isLocalization, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Tor\"",
+   "results": "OK 12 hits: AddMonoidAlgebra.toRingHom_mapDomainRingEquiv, MonoidAlgebra.toRingHom_mapDomainRingEquiv, AddMonoidAlgebra.toRingHom_mapRingEquiv, MonoidAlgebra.toRingHom_mapRingEquiv, AddMonoidAlgebra.instIsTorsionFree, MonoidAlgebra.instIsTorsionFree, AddMonoidAlgebra.toRingEquiv_uniqueAlgEquiv, MonoidAlgebra.toRingEquiv_uniqueAlgEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logRegular|log_regular|[Mm]onomial.*[Tt]or|[Tt]or.*[Mm]onomial",
+   "results": "OK 19 hits: Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean, Mathlib/RingTheory/MvPolynomial/Symmetric/FundamentalTheorem.lean, Mathlib/RingTheory/MvPolynomial/Ideal.lean, Mathlib/RingTheory/MvPolynomial/Basic.lean, Mathlib/RingTheory/PolynomialAlgebra.lean, Mathlib/RingTheory/Extension/Generators.lean, Mathlib/RingTheory/Extension/Generators.lean, Mathlib/RingTheory/Extension/Generators.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log regular monoid chart monomial ideal quotient Tor vanishing at a geometric strict local ring.",
+   "results": "OK 8 hits: IsRegular.monomial, IsLocalizedModule.isTorsionFree_of_forall_isRegular, AlgebraicGeometry.StructureSheaf.localRingLocalizations, HomogeneousLocalization, HomogeneousLocalization.isLocalRing, AlgebraicGeometry.StructureSheaf.Localizations, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsLocalization.isRegular_mk'",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kato monomial Tor independence extends from a sharp characteristic monoid chart to an arbitrary fine saturated chart by localizing its unit face.",
+   "results": "OK 8 hits: LinearIndependent.localization_localization, LinearIndependent.of_isLocalized_maximal, IsLocalizedModule.linearIndependent_lift, LinearIndependent.localization, LinearIndependent.of_isLocalizedModule, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, LinearIndependent.of_isLocalizedModule_of_isRegular, Module.IsLocalRing.linearIndependent_of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\\\blogRegular\\\\b|\\\\blog_regular\\\\b|monomial.{0,50}\\\\bTor\\\\b|\\\\bTor\\\\b.{0,50}monomial",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-monomial-tor",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VIII, 3.4.1--3.4.6(i), printed pp. 110--111 (monoidal ideals and normalized-blowup comparison); 3.3.8--3.3.11, printed pp. 107--108, and Expose VI, 1.8, printed p. 70 (log regularity preserved). The triviality-locus assertion is the universal property over U and the local homomorphism on local rings outside U. Input: Expose VIII, proof of Lemma 3.4.3, printed p. 110, using Kato 1994, 6.1(ii); 3.5, printed p. 115, explicitly states the monomial Tor-independence theorem. Re-split of lem-trf-log-regular-monomial-tor: old step 1, face localization, sharp chart, unit twist, change of rings and Kato vanishing.",
+   "via": [
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-chart-strict-local-tor",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary fs chart statement unchanged. Reused existing face localization, free sharpening splitting, sharp chart, Tor comparison and Kato vanishing nodes; added no nodes. Checked strict local ring and stalk identification, monoid ideal image, chart coefficient actions, torsion units and empty/total ideals. All non-elementary inputs have statement citations.",
+  "blueprint": "Realizes the retained nearby-duality/log-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2), via lem-trf-log-regular-monomial-tor: arbitrary-chart strict-local Tor reduces to the characteristic-chart Kato theorem. Read latest blueprint 7284bb09daf97437d544c51882b325f9c52cd345; this node supplies the log-resolution branch below its contracting-correspondence theorem.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Generic cofinality of affine pointed etale neighbourhoods identifies the two defined stalk colimits; the trace unit has no statement of this site tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic strict-henselian local-ring structure of the coordinate-ring colimit, required by chart Tor comparison; it replaces no trace-unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-strict-henselization-local-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-7ab52959f",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-7ab52959f (reviewer sub-agent of L); spot-checked: PASS, no fixes: the six-step assembly from existing nodes is sound. Shape: one commit on 4f78060 with the item and the report only, no new nodes. Live and side-live still have the item unsplit, so it is not superseded. It is an ordinary split, not a re-split, because the re-split note belongs to the parent lem-trf-log-regular-monomial-tor. Statement and stmt_deps are unchanged; proof_deps equals the union of the step uses (11 ids); no SGA. No cycle: a DFS over the 695-node closure contains neither the item nor its parent. Sources read: ILO VIII Lemma 3.4.3 proof, p.110 (Tor_1(Z[P]/IZ[P],O_X)=0 for an arbitrary chart, by Kato 6.1(ii)); ILO VI 1.1-1.4, pp.69-70; ILO VI 3.7(a), p.75 (splitting of M^gp to free M̄^gp). Steps: (1) the geometric-stalks definition, affine cofinality and the strict-henselization-limit definition identify B with the étale stalk; the local-structure lemma makes B strictly henselian; the fs chart clause gives L≅P⊕_F B^×. (2) chart-face-localization-logification gives that F is a face and ι: P_F/F^gp ≅ M̄; fs-face-sharpening gives P_F fs, units F^gp, Q sharp fs with free Q^gp. (3) The free-sharpening splitting applies to integral P_F, allows torsion units, and gives the section and P_F≅Q⊕G. (4) The sharp chart on the original log regular X, precomposed with ι, induces the identification the comparison node requires. (5) H_x is an ideal because P→Q is surjective. The face-Tor comparison is applied with B, s and b as in its statement; the Kato node's step 4 already uses it the same way on O^sh with X's log stalk. (6) The Kato chart node allows any ideal including ∅; H_xZ[Q]=Z[H_x]. Edge cases: H=∅; H meeting F (H_x=Q); P a group; N-chart on k[t]; torsion F^gp. Accepted tool uses, both generic: lemma-weil-pbc-affine-neighbourhood-cofinal (sk-prop-h2) and lem-weil-pbc-strict-henselization-local-structure (sk-thm-p1). Not duplicates: kato-tor-independence-chart and per-log-regular-chart-monomial-tor need a characteristic chart, and the face-Tor comparison gives only an isomorphism. Advisory only: the report and split_report.blueprint name blueprint 'latest 7284bb' instead of main-20261015, and the report mentions a citations.json that is not in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LogChartStrictLocalTor",
+  "declaration": "AlgebraicGeometry.logChart_strictLocal_torOne_isZero",
+  "file": "lean/Sheaf/TraceFormula/LogChartStrictLocalTor.lean",
+  "statement": "theorem logChart_strictLocal_torOne_isZero (X : FineSaturatedLogScheme.{u}) (A : Type u) [CommRing A] (eA : X.scheme ≅ Spec (.of A)) (hlog : X.IsLogRegular) (P : Type u) [AddCommMonoid P] (hP : IsFineSaturatedMonoid (Multiplicative P)) (α : Multiplicative P →* A) (c : Multiplicative P →* X.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 X.scheme)))) (hc : X.logStructure.IsChart (Scheme.Etale.mk (𝟙 X.scheme)) c) (hα : ∀ p : P, X.logStructure.alpha.app (op (Scheme.Etale.mk (𝟙 X.scheme))) (c (Multiplicative.ofAdd p)) = eA.hom.appTop ((Scheme.ΓSpecIso (CommRingCat.of A)).inv (α (Multiplicative.ofAdd p)))) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (H : Set P) (hH : ∀ h ∈ H, ∀ p : P, h + p ∈ H) : IsZero (LogChartFaceTor.tor (X.logStructure.chartStrictHenselizationMap t (Scheme.Etale.mk (𝟙 X.scheme)) (Over.homMk t (Category.comp_id t)) c) (Multiplicative.ofAdd '' H))",
+  "branch": "sheaf-dag",
+  "by": "Q85",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c8b52d3f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of f11078752052 (H2). The item Lean file is byte-identical (sha256 d7fa72d4) and the signature equals lean.statement verbatim. The item node differs from live only in stmt_deps, where the two theorem ids are replaced by the new definition nodes def-trf-chart-strict-henselization-map (existing:true on LogRegularMonoidalIdealContraction: chartStrictHenselizationMap + strictLocalRingIsoStrictHenselization) and def-trf-monomial-quotient-tor (existing:true on LogChartFaceTorComparison: ideal/coefficients/tor). Both recorded statements equal the side-live source verbatim from def on. Both TeX statements match the bodies; the canonical final-colimit iso is used, not an arbitrary map. H12 fields complete (source place, 3 search kinds, created, blueprint.from, chapter/unit, import_flags). No competing definition owner; landed theorem records untouched. Clause-by-clause check and edge cases (empty/total/unit-meeting H, torsion group P, empty scheme, single universe u) all OK. Proof is sorry only; docstrings carry source and blueprint id; report has Worker report and Second reading by Q85. No file changed, so nothing compiled. Not superseded on side-live."
+ }
+}

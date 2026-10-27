@@ -51,6 +51,16 @@ theorem isIso_of_isProper_birational_normal_curve
       C.presheaf.stalk (p (genericPoint E)) ⟶ E.functionField))
     (hnormal : ∀ x : C, IsDomain (C.presheaf.stalk x) ∧
       IsIntegrallyClosed (C.presheaf.stalk x)) : IsIso p := by
-  sorry
+  have : IsFinite p := isFinite_of_isProper_birational_curve (k := k)
+    (IsIntegralCurve.topologicalKrullDim_eq_one (f := C ↘ Spec (.of k)))
+    (IsIntegralCurve.topologicalKrullDim_eq_one (f := E ↘ Spec (.of k))) p hbirational
+  have hgeneric : p (genericPoint E) = genericPoint C := by
+    refine ((genericPoint_spec C).eq ?_).symm
+    have hi := (genericPoint_spec E).image p.continuous
+    rw [Set.image_univ, p.denseRange.closure_range] at hi
+    exact hi
+  apply isIso_of_finite_birational_normal p hgeneric _ hnormal
+  exact hbirational.comp (ConcreteCategory.bijective_of_isIso
+    (C.presheaf.stalkCongr (Inseparable.of_eq hgeneric)).inv)
 
 end AlgebraicGeometry

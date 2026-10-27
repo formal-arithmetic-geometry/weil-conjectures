@@ -45,7 +45,8 @@
     "lemma-constructible-pullback-constant",
     "def-weil-pbc-finite-open-comparison",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lemma-weil-pbc-finite-pushforward-extension-zero"
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "lemma-weil-pbc-finite-open-comparison-inverse"
    ],
    "elementary": false,
    "source": {
@@ -141,7 +142,8 @@
   "lemma-weil-pbc-finite-stalk-formula",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-geometric-stalks-exact",
-  "sbc-prop-extension-by-zero-and-arbitrary-base-change"
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lemma-weil-pbc-finite-open-comparison-inverse"
  ],
  "proof_origin": {
   "by": "agent",
@@ -218,7 +220,30 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      674,
+      740
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -298,5 +323,34 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-e11d28fa2 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Step 2 had malformed TeX (`R_U\\\\tov_*v^{-1}R_U`); corrected whole DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lemma-weil-pbc-normalization-exact-sequence.json. Also clarified existing quotient and tensor-product TeX. No statements or dependencies changed.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be an algebraically closed field, $X$ a reduced curve over $k$, and\n$\\nu:X^\\nu\\to X$ a finite surjective morphism which is an isomorphism over a\ndense open $V\\subseteq X$ (for instance the normalization of $X$). Let\n$j:U\\hookrightarrow X$ be an open immersion and $j^\\nu:U^\\nu\\hookrightarrow\nX^\\nu$ its pullback along $\\nu$. Let $\\Lambda$ be a commutative ring and\n$\\ell$ a prime with $\\Lambda/\\ell\\Lambda$ finite, and write\n$\\underline{\\Lambda/\\ell}$ for the constant sheaf of $\\Lambda$-modules. Then\nthere is a monomorphism\n\n$$\n\\alpha:j_!\\underline{\\Lambda/\\ell}\\longrightarrow\n\\nu_*j^\\nu_!\\underline{\\Lambda/\\ell}\n$$\n\nwhose cokernel $Q$ is constructible and restricts to zero on $V$. Thus\n\n$$\n0\\longrightarrow j_!\\underline{\\Lambda/\\ell}\n\\xrightarrow{\\alpha}\\nu_*j^\\nu_!\\underline{\\Lambda/\\ell}\n\\longrightarrow Q\\longrightarrow0\n$$\n\nis exact, with $Q$ supported on the finite set $X\\setminus V$.",
+  "proof": [
+   {
+    "text": "Let $v:U^\\nu\\to U$ be the base change of $\\nu$; it is surjective because\n$\\nu$ is. Define $\\alpha$ as the composite\n\n$$\nj_!\\underline{\\Lambda/\\ell}\n\\xrightarrow{j_!\\eta}\nj_!v_*v^{-1}\\underline{\\Lambda/\\ell}\\cong j_!v_*\\underline{\\Lambda/\\ell}\n\\xrightarrow{\\beta_{\\nu,j}}\n\\nu_*j^\\nu_!\\underline{\\Lambda/\\ell},\n$$\n\nwhere $\\eta$ is the unit of $v^{-1}\\dashv v_*$, the middle isomorphism is the\nidentification of the pullback of a constant sheaf with the constant sheaf,\nand $\\beta_{\\nu,j}$ is the finite-open comparison map of\n[def-weil-pbc-finite-open-comparison]. Since $v$ is surjective, $v^{-1}$ is\nfaithful and $\\eta$ is a monomorphism. Extension by zero $j_!$ is exact, so\n$j_!\\eta$ is a monomorphism, and $\\beta_{\\nu,j}$ is an isomorphism by\n[lemma-weil-pbc-finite-pushforward-extension-zero]. Hence $\\alpha$ is a\nmonomorphism.",
+    "uses": [
+     "def-weil-pbc-finite-open-comparison",
+     "lemma-weil-pbc-finite-pushforward-extension-zero"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The source $j_!\\underline{\\Lambda/\\ell}$ is constructible (constant with\nfinite stalks on $U$ and zero outside), and so is the target by\n[lem-weil-pbc-finite-pushforward-open-quotient-constant]; therefore the\ncokernel $Q$ of $\\alpha$ is constructible. Over $V$ the restrictions of the\nsource and the target are isomorphic\n([lem-weil-pbc-normalization-comparison-on-iso-locus]), so at every geometric\npoint of $V$ the stalk of $\\alpha$ is an injective map between finite sets of\nthe same cardinality, hence bijective. By conservativity of geometric stalks\n([lemma-weil-pbc-geometric-stalk-conservative]) the restriction of $\\alpha$\nto $V$ is an isomorphism, and $Q$ restricts to zero on $V$. Finally,\n$X\\setminus V$ is a closed subset containing no generic point of $X$ (as $V$\nis dense), so in the curve $X$ it is a finite set of closed points.",
+    "uses": [
+     "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+     "lem-weil-pbc-normalization-comparison-on-iso-locus",
+     "lemma-weil-pbc-geometric-stalk-conservative"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

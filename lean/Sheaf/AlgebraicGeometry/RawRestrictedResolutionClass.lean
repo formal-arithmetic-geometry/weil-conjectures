@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedClassNormalizationData
+import Sheaf.AlgebraicGeometry.ResolutionCocycleAdjunctionClass
 
 /-! # The cocycle class of raw resolution evaluation
 
@@ -17,8 +18,13 @@ namespace AlgebraicGeometry.Etale
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
+attribute [local instance] normalizationShiftedResolution_restriction_isKInjective
+attribute [local irreducible] normalizationResolutionClass normalizationRestrictedIso
+  RawRestrictedComparison.shiftIso normalizationResolutionCocycleIso
+  RawRestrictedComparison.resolutionSectionsIso abelianHigherDirectImageClass
 
 /-- The prescribed resolution evaluation represents the canonical derived-adjunction class.
 Source: Stacks Project, Tags 072W, 0DVC and 09T5, termwise adjunction on an
@@ -69,6 +75,80 @@ theorem rawRestrictedResolution_class {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale) :
     rawRestrictedCohomologyComparison f q F V ≫ normalizationIota f q F V =
       (normalizationKappa f q F).app (op V) := by
-  sorry
+  ext z
+  let I := injectiveResolution F
+  let J := normalizationShiftedResolution F I q
+  let a := normalizationShiftedAugmentation F I q
+  have : J.obj.IsKInjective := by
+    change (I.cochainComplex⟦(q : ℤ)⟧).IsKInjective
+    infer_instance
+  let A := (CochainComplex.singleFunctor _ 0).obj
+    ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V))
+  obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj A) J.obj).surjective
+      (DerivedCategory.Plus.ι.map (z ≫ a.hom))
+  obtain ⟨c, rfl⟩ := (HomotopyCategory.quotient _ (.up ℤ)).map_surjective g
+  let qc : (DerivedCategory.Plus.singleFunctor _ 0).obj
+      ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V)) ⟶
+        DerivedCategory.Plus.Q.obj J := DerivedCategory.Plus.ι.preimage
+          (X := (DerivedCategory.Plus.singleFunctor _ 0).obj
+            ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V)))
+          (Y := DerivedCategory.Plus.Q.obj J) (DerivedCategory.Q.map c)
+  have hc : qc = z ≫ a.hom := by
+    apply DerivedCategory.Plus.ι.map_injective
+    dsimp only [qc]
+    rw [Functor.map_preimage]
+    exact hg
+  have hz : qc ≫ a.inv = z := by
+    rw [hc]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  change (normalizationResolutionClass f q F I).app (op V)
+    ((normalizationRestrictedIso f q F I V).hom
+      (rawRestrictedCohomologyComparison f q F V z)) =
+        abelianHigherDirectImageClass f q F V z
+  rw [← hz]
+  let W := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V
+  let T := RawRestrictedComparison.sectionsFunctor W ⋙
+    DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0
+  let x := (RawRestrictedComparison.zeroIso W
+    ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V))).inv
+      (RawRestrictedComparison.generator f V)
+  let zc := qc ≫ a.inv
+  have ha : T.map a.hom (T.map zc x) =
+      T.map (qc) x := by
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+    simp only [zc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rfl
+  have hs := ConcreteCategory.congr_hom
+    (rawRestricted_resolution_shift_square f q F I V) (T.map zc x)
+  simp only [ConcreteCategory.comp_apply] at hs
+  change (normalizationRestrictedIso f q F I V).hom
+      ((RawRestrictedComparison.shiftIso f q F V).hom (T.map zc x)) =
+    (normalizationResolutionCocycleIso f q F I V).hom
+      ((RawRestrictedComparison.resolutionSectionsIso W J).hom
+        (T.map a.hom (T.map zc x))) at hs
+  have he := RawRestrictedComparison.rawRestricted_resolution_evaluation f V J c
+  change (RawRestrictedComparison.resolutionSectionsIso W J).hom (T.map qc x) =
+    RawRestrictedComparison.chainEvaluation f V J.obj c at he
+  have hv : (normalizationRestrictedIso f q F I V).hom
+      (rawRestrictedCohomologyComparison f q F V zc) =
+        (normalizationResolutionCocycleIso f q F I V).hom
+          (RawRestrictedComparison.chainEvaluation f V J.obj c) := by
+    change (normalizationRestrictedIso f q F I V).hom
+      ((RawRestrictedComparison.shiftIso f q F V).hom (T.map zc x)) = _
+    rw [hs, ha, he]
+  change (normalizationResolutionClass f q F I).app (op V)
+      ((normalizationRestrictedIso f q F I V).hom
+        (rawRestrictedCohomologyComparison f q F V zc)) =
+    abelianHigherDirectImageClass f q F V zc
+  have hclass := resolutionCocycle_adjunction_class f q F I V c
+  change (normalizationResolutionClass f q F I).app (op V)
+      ((normalizationResolutionCocycleIso f q F I V).hom
+        (RawRestrictedComparison.chainEvaluation f V J.obj c)) =
+    abelianHigherDirectImageClass f q F V zc at hclass
+  have hmap := congrArg
+    (fun y : ((normalizationPresheafComplex f F I).homology (q : ℤ)).obj (op V) =>
+      (normalizationResolutionClass f q F I).app (op V) y) hv
+  exact Eq.trans hmap hclass
 
 end AlgebraicGeometry.Etale

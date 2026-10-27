@@ -94,7 +94,24 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_upperStar",
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_upperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_upperStar",
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_upperStar"
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
@@ -137,5 +154,37 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9670b6030 (reviewer sub-agent of L); spot-checked: I read the item, its new node, every cited statement, the main-20261015 blueprint proof, Stacks morphisms.tex at lemma-smoothness-dimension (tag 0AFF) and stacks-geometry.tex at line 1005 (tag 0DRI). The item statement is verbatim and unchanged. Its k is the global F̄_q (D_X comes from def-trf), which matches the base of cor-sf-duality-pullback and prop-functor-package. Three faults, all repaired in fixes/: (1) B5: the new node lem-per-smooth-pullback-support-dimension cites tag 0DRI, which is the algebraic-spaces lemma in stacks-geometry, while the cited morphisms label is tag 0AFF; corrected. The node is true (Supp f^*F = f^{-1}Supp F, and 0AFF on the smooth base change to the support) and is not a duplicate. (2) E1: Step 3 used lem-per-lisse-tensor-permanence, which assumes X smooth of pure dimension; the item assumes no such thing. I replaced it with a new statement-only node, lem-per-tate-twist-support-condition (a Tate twist leaves the supports of cohomology sheaves unchanged; created.item = the item; blueprint.from = the item at 'The twist (d) is lisse of rank one'; searched by rg and a Mathlib grep, with LeanSearch recorded as unavailable). (3) E1/C3/E5: Step 2 cited cor-pur-adic-and-rational-smooth-dualizing-complexes, which needs a_X smooth, and fix-cor-verdier-exchange, whose D_Y Rf_! formula is not what the step needs; the composite was also never written. It now reads D_X f^*K ≅ f^! D_Y K (cor-sf-duality-pullback), then f^! ≅ f^*(d)[2d] (prop-functor-package clause 6), then D_X(M[d]) = D_X(M)[-d], giving f^*(D_Y K)(d)[d]. Steps 1 and 3 now also state that f^*K[d] and D_Y K are constructible. I checked the index arithmetic and tested f: A^1 → pt, d = 0 and empty supports. Accepted tool_uses: cor-sf-duality-pullback and prop-functor-package; the other two declarations are removed. Not a fault of this split: the slopmaster2 Lean states the lemma for finite Λ on the étale site, not Q̄_ℓ, which matters for stage 2; and def-per-support-condition uses the finite-coefficient D_X of def-trf on Q̄_ℓ objects. No SGA source is used.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ be a smooth\nmorphism of constant relative dimension $d$ between separated schemes\nof finite type over a field $k$. On the bounded constructible categories\n$\\Dbc(-,\\Qlb)$ of [det-def-sfb-bounded-constructible], the functor $Lf^*[d]$ is exact for\nthe candidate subcategories of [def-per-perverse-subcategories]:\n\n$$\nLf^*[d]\\bigl({}^pD^{\\le0}(Y)\\bigr)\\subset{}^pD^{\\le0}(X),\\qquad\nLf^*[d]\\bigl({}^pD^{\\ge0}(Y)\\bigr)\\subset{}^pD^{\\ge0}(X).\n$$",
+  "proof": [
+   {
+    "text": "For the $\\le$-direction: $Lf^*$ is exact (the cohomology sheaves\nof $Lf^*K$ are the pullbacks of those of $K$) and the geometric\nfibers of $f$ have dimension $d$, so the support of\n$\\mathcal H^{-i}(Lf^*K[d])$ has dimension at most the dimension of\nthe support of $\\mathcal H^{-i+d}(K)$ plus $d$ (the pullback of a\nconstructible sheaf has support the preimage, of dimension raised by\nthe fibre dimension $d$, and the shift of the cohomology index is\n$H^n(C[d])=H^{n+d}(C)$); hence\n\n$$\n\\dim\\operatorname{Supp}\\mathcal H^{-i}\\bigl(Lf^*K[d]\\bigr)\n\\le\\dim\\operatorname{Supp}\\mathcal H^{-i+d}(K)+d,\n$$\n\nand the support inequality for $K$ (applied to the index\n$i-d$) gives\n$\\dim\\operatorname{Supp}\\mathcal H^{-i+d}(K)\\le i-d$, so the\nright-hand side is $\\le i$, which is the support inequality\nfor $Lf^*K[d]$: $\\operatorname{SuppCon}(Lf^*K[d])$.\nFor the $\\ge$-direction: the cosupport condition of $K$, namely\n$\\operatorname{SuppCon}(D_YK)$, is transported along the smooth\nmorphism as follows. First, $D_XLf^*M\\cong Rf^!D_YM$ for every $M$,\nwithout any biduality: for a test complex $N$ on $X$, the adjunction\n$Rf_!\\dashv Rf^!$ of [fix-prop-adjunctions], the tensor–internal-Hom\nadjunction of [def-weil-derived-pullback-tensor-hom] and the projection\nformula of [fix-prop-projection-formula] give\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(N,Rf^!D_YM)\n&\\cong\\operatorname{Hom}_Y(Rf_!N\\otimes^LM,\\omega_Y)\n\\cong\\operatorname{Hom}_Y\\bigl(Rf_!(N\\otimes^LLf^*M),\\omega_Y\\bigr)\\\\\n&\\cong\\operatorname{Hom}_X(N\\otimes^LLf^*M,Rf^!\\omega_Y),\n\\end{aligned}\n$$\n\nnaturally in $N$, so $Rf^!R\\mathcal Hom_Y(M,\\omega_Y)\\cong\nR\\mathcal Hom_X(Lf^*M,Rf^!\\omega_Y)$, and $Rf^!\\omega_Y\\cong\\omega_X$ is the\nmate of the composition isomorphism $R(a_Y f)_!\\cong Ra_{Y!}Rf_!$ of\n[thm-sf-comp-composition]. Combining this with the smooth\nidentity $Rf^!M\\cong Lf^*M(d)[2d]$ (the smooth-purity form of the\ndualizing complexes of the smooth morphism,\n[cor-pur-adic-and-rational-smooth-dualizing-complexes] and [prop-functor-package]),\n\n$$\nD_X\\bigl(Lf^*[d]K\\bigr)\n\\cong Lf^*\\bigl(D_YK\\bigr)(d)[d].\n$$",
+    "uses": [
+     "fix-prop-adjunctions",
+     "def-weil-derived-pullback-tensor-hom",
+     "fix-prop-projection-formula",
+     "thm-sf-comp-composition",
+     "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+     "prop-functor-package"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The twist $(d)$ is lisse of rank one, hence support-preserving\n([lem-per-lisse-tensor-permanence]); the shift by $[d]$ moves\nthe cohomology index by $d$, i.e. $H^{-i}(Lf^*(D_YK)(d)[d])=H^{-i+d}(Lf^*(D_YK)(d))$, with the same\ndimension bookkeeping as in the $\\le$-direction; the support\ninequality for $D_YK$ therefore implies the one for\n$Lf^*D_YK(d)[d]$, i.e. $\\operatorname{SuppCon}\\bigl(D_X(Lf^*[d]K)\\bigr)$, and the\n$\\ge$-inclusion follows from [def-per-support-condition].",
+    "uses": [
+     "lem-per-lisse-tensor-permanence",
+     "def-per-support-condition"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

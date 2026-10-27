@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-tower-normalization-preservation",
+ "kind": "statement",
+ "title": "Normalization of the two actual tower adjoints",
+ "statement": "Fix a finite field datum $D$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, and Noetherian separated finite-type schemes $X,Y$ over the fixed algebraic closure. Let $f:X\\to Y$ be smooth of relative dimension $d\\ge0$, with a factorization $X\\xrightarrow{j}Z\\xrightarrow{p}Y$ in which $j$ is an open immersion and $p$ is proper. Use the strict coefficient towers, their uniform constructible finite-Tor categories, and fixed adjunction/evaluation presentations [det-sp-tower-gluing, sk-def-sp-normalized-towers]. With normalized root, coefficient, tensor and geometric presentations [def-sp-tower-gamma-data], compact support and its given exceptional right adjoint both preserve normalized objects of the uniform constructible finite-Tor category. No orientation or purity map of whole towers is asserted.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sp-tower-gamma-data",
+  "det-sp-tower-gluing",
+  "sk-def-sp-normalized-towers"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), compact-support factorization and exceptional reduction conjugacy"
+ },
+ "proof": [
+  {
+   "text": "CompactSupportTowerReduction identifies each actual compact-support reduction,\nup to the specified evaluation isomorphisms, with the direct-image coefficient\ncomparison followed by compact support of the input reduction. ReductionDirectImage\nmakes the former invertible on the finite constructible finite-Tor input; the latter\nis invertible on a normalized input because a functor preserves inverses. Cancel the\nevaluation comparisons. ScalarCoordinates identifies this reduction with the original\nabelian-tower reduction through an isomorphism, proving support normalization.\nFor exceptional output use PurityConjugatesTowerReduction at each pair m <= n.\nIts pullback reduction square is scalar/pullback balancing, input reduction and\npositive Tate-line reduction, with the even shift. The Tate reduction is invertible\nwithout flatness of the quotient because the line is locally free. Thus this source\nreduction is invertible on normalized input. The displayed exceptional conjugacy\nexpresses the output reduction as this source reduction conjugated by the finite\npurity isomorphisms. All three factors are invertible. Cancel the scalar-coordinate\nisomorphism to obtain the original reduction. Equal indices use the scalar unitor,\nand d=0 uses the coefficient unit, so these edge cases are included. Membership in\nthe uniform category is supplied by hF and by the codomain of G.",
+   "uses": [
+    "lem-sp-compact-support-tower-reduction",
+    "det-sp-reduction-direct-image",
+    "lem-sp-purity-conjugates-tower-reduction",
+    "det-sp-scalar-extension-functor",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-compact-support-tower-reduction",
+  "det-sp-reduction-direct-image",
+  "lem-sp-purity-conjugates-tower-reduction",
+  "det-sp-scalar-extension-functor",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), compact-support factorization and exceptional reduction conjugacy"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth purity orientation and natural exceptional pullback isomorphism on coefficient towers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"KaehlerDifferential.isBaseChange\"], \"digest\": \"84c8f386dd078adf\"}",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower smooth-purity theorem; generic category theory only."
+  },
+  {
+   "tool": "grep",
+   "query": "tower_gamma|strict_line_heart_assembly",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower smooth-purity theorem; generic category theory only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso.of_isIso_comp_left\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.IsIso.of_isIso_comp_left\"], \"digest\": \"8a797b31dbc49af9\"}",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower smooth-purity theorem; generic category theory only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatible finite diagonal orientations assemble to an orientation of strict coefficient towers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Orientation.someBasis\", \"Orientation\", \"Orientation.someBasis_orientation\", \"Module.Basis.orientation\", \"Module.Oriented\", \"Module.Oriented.positiveOrientation\", \"Complex.orientation\", \"Orientation.finOrthonormalBasis_orientation\"], \"digest\": \"e7fb334ad4db9426\"}",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower smooth-purity theorem; generic category theory only."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*purity|normalized.*tower",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\"], \"digest\": \"f02a2c970e81d667\"}",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower smooth-purity theorem; generic category theory only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsIso\", \"CategoryTheory.IsIso.id\", \"CategoryTheory.Iso.isIso_hom\", \"CategoryTheory.Iso.isIso_inv\", \"CategoryTheory.IsIso.epi_of_iso\", \"CategoryTheory.IsIso.mono_of_iso\", \"CategoryTheory.IsIso.inv_isIso\", \"CategoryTheory.IsIso.inv_id\"], \"digest\": \"37a8b857a28e6cef\"}",
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower smooth-purity theorem; generic category theory only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerGamma",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Tower-geometric gamma proof (3), compact-support factorization and exceptional reduction conjugacy",
+   "via": [
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerNormalizationPreservation",
+  "file": "lean/Sheaf/Paper/TowerNormalizationPreservation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerGamma.tower_normalization_preservation",
+  "statement": "theorem tower_normalization_preservation (D : FiniteFieldDatum.{u}) [CharP D.k D.p] (hne : l ≠ D.p) {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p] [(j ≫ p).IsOver (Spec (.of D.k))] [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)] (d : ℕ) [SmoothOfRelativeDimension d (j ≫ p)] (w : SpChartAdmissibility.Twists l E X) (hF : ∀ M : SpTowerCalculus.C l E b q X, spConstructibleTorTowers l E Y (q.abelian Y) ((SpTowerCalculus.F l E b o q (factorization j p)).obj M.obj)) (G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X) (adj : SpTowerGluing.support l E b o q (factorization j p) hF ⊣ G) (lv : SpTowerGluing.Levels l E b o q (factorization j p) hF G adj) (roots : SpCoordinateAdjunction.RootLines l E X) (unitsX : ∀ n : ℕ, IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))) (cc : ∀ n : ℕ, letI : Finite (SpTowerShriek.R l E n) := b.finite n SpTowerP1.CoefficientCoordinates l E n X (unitsX n)) (tc : ∀ n : ℕ, letI : Finite (SpTowerShriek.R l E n) := b.finite n SpTowerP1.TensorCoordinates l E n b X) (gc : ∀ n : ℕ, letI : Finite (SpTowerShriek.R l E n) := b.finite n SpTowerP1.GeometricCoordinates l E n (j ≫ p)) : (∀ M : SpTowerCalculus.C l E b q X, IsSpNormalizedTower l E X (q.abelian X) M.obj → IsSpNormalizedTower l E Y (q.abelian Y) ((SpTowerGluing.support l E b o q (factorization j p) hF).obj M).obj) ∧ (∀ K : SpTowerCalculus.C l E b q Y, IsSpNormalizedTower l E Y (q.abelian Y) K.obj → IsSpNormalizedTower l E X (q.abelian X) (G.obj K).obj)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-27694",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T202818-L-2755214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-27694",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T202818-L-2755214",
+  "kind": "interface",
+  "note": "independent cc review: published SmoothPurityTowerGamma vs delivered Data module (verbatim apart from removed imports/theorem and one docstring addition) and item (tower_gamma statement byte-identical); 2 sorry nodes vs Purity/FiniteLevels clauses; 35-module sandbox incl. all item and adapted-module importers rc 0"
+ }
+}

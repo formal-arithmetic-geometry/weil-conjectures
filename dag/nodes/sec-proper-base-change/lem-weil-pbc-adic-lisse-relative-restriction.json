@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-adic-lisse-relative-restriction",
+ "kind": "statement",
+ "title": "Adic-lisse restriction to inverse-image coefficients",
+ "statement": "Let h:Y→X be a scheme morphism, A a commutative Noetherian ring, I an ideal, and H_Z the limit of constant quotient ring sheaves A/I^(n+1) on Z [def-weil-pbc-adic-lisse-module]. Let β:h⁻¹H_X→H_Y satisfy β followed by the nth projection equals inverse image of the nth projection followed by the canonical constant ring inverse-image map. If F is an adic-lisse H_Y-module, then its scalar restriction along β is relatively adic lisse over h⁻¹H_X, in the precise relative sense of that definition. No finite-set assumption on the quotient rings, invertibility of β, or scalar-extension functor is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BT, definition-adic clause (3); sites.tex, Tag 00YV, proposition-functoriality-algebraic-structures-topoi parts (2), (5), (6)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved concrete relativeEncoding, scalarRestriction equivalence and constantCoefficients comparison from the finite-pullback module (their generic helpers require neither finite coefficients nor Noetherian schemes). Prove naturality of the constantComparisonHom from module sheafification by precomposing with its unit. Combine this natural constant encoding with relativeEncoding and the constantSheaf/global-sections adjunction comparison. Cancel the fully faithful scalar encoding and transport back through the coefficient equivalence. This constructs a natural isomorphism from the concrete inverse image of every constant A-module on X to its constant module on Y restricted along the canonical coefficient map. Apply NatTrans.ofOpSequence to the quotient modules of N; its successor naturality is exactly naturality for Submodule.factorPowSucc.",
+   "uses": [
+    "lem-weil-pbc-finite-pullback-constructibility",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adic-lisse-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The forgetful functor from module sheaves to abelian sheaves preserves countable limits: compose with the fully faithful sheaf inclusion and use the sectionwise module-presheaf limit instances. Apply preservesLimitIso on both sides of the diagram isomorphism and HasLimit.isoOfNatIso between them. This gives a comparison of the underlying abelian completed models, with the projection equation obtained by the three standard limit-comparison projection identities. Restrict the inverse comparison to the slice and compose with each original local trivialization. No inverse image is applied to an infinite-limit comparison.",
+   "uses": [
+    "def-weil-pbc-adic-lisse-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove a general local-model transport lemma for a commutative square of base rings, completed rings and quotient rings, together with an isomorphism of module diagrams to a scalar-restricted diagram. Map the given residue equality through the quotient-ring comparison; the two squares give equality of the absolute residues. Apply each component of the module-diagram isomorphism to the desired scalar identity; it is injective on sections. Its linearity, the limit projection equation, and the original local-model scalar identity prove the result. For the present rings the base-ring square is naturality of proEtaleConstantInverseImageMap, and the completed-ring square is hβ. Retain exactly the original covering sieve, complete A-module N and finite N/IN.",
+   "uses": [
+    "def-weil-pbc-adic-lisse-module",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-finite-pullback-constructibility",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BT(3), with sites.tex Tag 00YV(2),(5),(6). Concrete fixed-module encoding replaces the abstract chosen geometric lift; the remaining limit and scalar transport is proved directly in Lean by Q3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adic lisse module relative coefficients scalar restriction inverse image constant modules",
+   "results": "Eight hits, including ModuleCat.restrictScalarsComp and AdicCompletion tensor comparisons; no relative adic-lisse transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"restrictScalars\"",
+   "results": "Six hits: scalar restriction, additivity, object/map equations and locally-surjective full/faithful restrictions; no adic local-model statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsRelativelyAdicLisseModule lean/Sheaf lean/WeilConjectures",
+   "results": "Only the definition, the assigned theorem and its tower consumers; no transport lemma. Also inspected adic-lisse definitions and the constant-module inverse-image declarations.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeCompletedModuleRealizationExact",
+  "date": "2026-10-27",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-relative-completed-module-realization-exact",
+   "place": "step 3: transport the absolute completed-module local model to inverse-image coefficients",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicLisseRelativeRestriction",
+  "file": "lean/Sheaf/Paper/AdicLisseRelativeRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicLisse_relative_restrict",
+  "statement": "theorem adicLisse_relative_restrict {X Y : Scheme.{u}} (h : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (β : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj\n      (adicLisseCompletedRing X I) ⟶ adicLisseCompletedRing Y I)\n    (hβ : ∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem Y I) (op n) =\n      (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map\n        (limit.π (adicLisseRingSystem X I) (op n)) ≫\n          proEtaleConstantInverseImageMap h CommRingCat.{u + 1}\n            (CommRingCat.of (A ⧸ I ^ (n + 1))))\n    (F : ringedSiteModules.{u + 1}\n      ((adicLisseForget Y).obj (adicLisseCompletedRing Y I)))\n    (hF : IsAdicLisseModule Y I F) :\n    IsRelativelyAdicLisseModule h I\n      ((SheafOfModules.restrictScalars ((adicLisseForget Y).map β)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T235834-L-1459822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T021349-L-2762198",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

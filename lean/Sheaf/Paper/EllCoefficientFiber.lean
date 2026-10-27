@@ -10,10 +10,9 @@ public import Sheaf.Algebra.Homology.PrincipalKoszulQuotientTowers
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
-import Sheaf.Paper.CompletedIntegralScalarRegular
-import Sheaf.Paper.CompletedIntegralProjectionDivisibility
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
-import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
 
 /-! # Regular completed coefficients and quotient Koszul fibers
 
@@ -184,6 +183,46 @@ def spCompletedQuotientTensor (n m : ℕ) :=
       (spCompletedScalar l E T l) m)).obj
         ((CochainComplex.singleFunctor _ 0).obj (spCompletedEllModule l E T n))
 
+private lemma completedEllMultiplication :
+    globalSectionMultiplication (completedIntegralCommRingSheafUnrestricted l E T)
+      (spCompletedScalar l E T l) =
+        l • 𝟙 (SheafOfModules.unit ((sheafCompose (Scheme.ProEt.topology T)
+          (forget₂ CommRingCat RingCat)).obj
+            (completedIntegralCommRingSheafUnrestricted l E T))) := by
+  apply (SheafOfModules.unitHomEquiv _).injective
+  rw [globalSectionMultiplication, Equiv.apply_symm_apply]
+  ext U
+  change (integralConstantToCompletionOfUniverses l E T).hom.app U
+    ((toSheafify (Scheme.ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj
+        (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U
+          (ULift.up (l : Padic.coefficientExtensionIntegers l E))) = _
+  simp only [show ULift.up (l : Padic.coefficientExtensionIntegers l E) =
+    (l : ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)) from rfl,
+    map_natCast]
+  rw [SheafOfModules.unitHomEquiv_apply_coe]
+  let R := (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat RingCat)).obj
+    (completedIntegralCommRingSheafUnrestricted l E T)
+  let F := SheafOfModules.forget.{max u (t + 1)} R ⋙
+    PresheafOfModules.evaluation R.obj U
+  have h : F.map (l • 𝟙 (SheafOfModules.unit R)) =
+      l • 𝟙 (F.obj (SheafOfModules.unit R)) := by
+    rw [F.map_nsmul, F.map_id]
+  have hh := congrArg (fun f ↦ f.hom (1 : R.obj.obj U)) h
+  simp only [ModuleCat.hom_nsmul, ModuleCat.hom_id] at hh
+  rw [LinearMap.smul_apply, LinearMap.id_apply] at hh
+  change (F.map (l • 𝟙 (SheafOfModules.unit R))).hom
+      (1 : R.obj.obj U) = l • (1 : R.obj.obj U) at hh
+  change (l : R.obj.obj U) =
+    (F.map (l • 𝟙 (SheafOfModules.unit R))).hom (1 : R.obj.obj U)
+  exact (nsmul_one l).symm.trans hh.symm
+
+private lemma endoPow_nsmul_id {A : Type*} [Category A] [Preadditive A]
+    (X : A) (a k : ℕ) : endoPow (a • 𝟙 X) k = a ^ k • 𝟙 X := by
+  induction k with
+  | zero => simp [endoPow]
+  | succ k ih => simp [endoPow, ih, smul_smul, Nat.pow_succ, Nat.mul_comm]
+
 /-- The explicit two-term model really computes the total tensor used in the node.
 Source: sk-lem-sp-tower, proof paragraph 1, displayed coefficient tensor product
 (blueprint: lem-sp-ell-coefficient-fiber).
@@ -199,7 +238,36 @@ theorem sp_ell_coefficient_tensor (n m : ℕ) (_hm : m ≤ n) :
     Nonempty (spCompletedQuotientTensor l E T n m ≅
       CochainComplex.mappingCone ((CochainComplex.singleFunctor _ 0).map
         (l ^ (m + 1) • 𝟙 (spCompletedEllModule l E T n)))) := by
-  sorry
+  let R := completedIntegralCommRingSheafUnrestricted l E T
+  let A := SheafOfModules.{max u (t + 1)}
+    ((sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat RingCat)).obj R)
+  let X := (CochainComplex.singleFunctor A 0).obj (spCompletedEllModule l E T n)
+  let := SheafOfModules.cochainModulesMonoidal R
+  let := SheafOfModules.cochainModulesPreadditive R
+  let f := (CochainComplex.singleFunctor A 0).map
+    (endoPow (globalSectionMultiplication R (spCompletedScalar l E T l)) (m + 1))
+  have hf : f = l ^ (m + 1) • 𝟙 (HomologicalComplex.tensorUnit A (.up ℤ)) := by
+    dsimp only [f, R]
+    rw [completedEllMultiplication, endoPow_nsmul_id, Functor.map_nsmul]
+    change l ^ (m + 1) • (CochainComplex.singleFunctor A 0).map (𝟙 _) =
+      l ^ (m + 1) • 𝟙 ((CochainComplex.singleFunctor A 0).obj _)
+    rw [CategoryTheory.Functor.map_id]
+  let e := HomologicalComplex.rightUnitor X
+  refine ⟨CochainComplex.mapBifunctorMappingCone₂Iso X f
+    (MonoidalCategory.curriedTensor A) ≪≫ ?_⟩
+  apply HomologicalComplex.homotopyCofiber.mapArrowIso _ _
+    (fun j ↦ ⟨j - 1, by change j - 1 + 1 = j; omega⟩)
+  refine Arrow.isoMk e e ?_
+  symm
+  rw [hf]
+  change ((MonoidalCategory.curriedTensor A).map₂CochainComplex.obj X).map
+    (l ^ (m + 1) • 𝟙 _) ≫ e.hom =
+    e.hom ≫ (CochainComplex.singleFunctor A 0).map
+      (l ^ (m + 1) • 𝟙 (spCompletedEllModule l E T n))
+  simp only [Functor.map_nsmul, CategoryTheory.Functor.map_id, Preadditive.nsmul_comp,
+    Preadditive.comp_nsmul, Category.id_comp]
+  change l ^ (m + 1) • e.hom = l ^ (m + 1) • e.hom ≫ 𝟙 X
+  rw [CategoryTheory.Category.comp_id]
 
 /-- Any quotient reduction between positive coefficient levels. Source: sk-lem-sp-tower,
 coefficient tensor calculation (blueprint: lem-sp-ell-coefficient-fiber). -/

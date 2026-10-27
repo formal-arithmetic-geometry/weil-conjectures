@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-integral-ordinary-augmentation-milnor",
+ "kind": "statement",
+ "title": "Unreduced normalized Milnor presentation of a regular ordinary quotient augmentation",
+ "statement": "Let ell be prime, W a scheme, O an ordinary simultaneous ell^(n+1)-cokernel presentation [def-sfb-diagonal-system-interface], RZ a total right-derived inverse limit with comparison etaZ, e an additive equivalence from integral abelian sheaves to module sheaves over the lifted integers, and P an unbounded complex with all positive ell-power multiplications monic degreewise. Put K=e(QP), Y=e(RZ(Q(O(P)))), and let u:K->Y be the specified ordinary augmentation [lem-sfb-integral-strict-augmentation]. Let G be the principal derived quotient tower n |-> K tensor^L Z/ell^n, with its canonical cone a:const K->G (the initial quotient is zero). There exist limiting product fans PK of const K and PG of G, and arrows deltaK:PK->K[1], cY:Y->PG, deltaY:PG->Y[1], such that the Milnor triangles K->PK--(1-shift)-->PK->K[1] and Y->PG--(1-shift)-->PG->Y[1] are distinguished, the first arrow of the constant triangle is the diagonal lift of the identity family, and that arrow followed by the product map induced by a equals u followed by cY, while deltaK followed by u[1] equals that product map followed by deltaY. This is an unreduced triangle presentation, with no reduced invertibility assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; sites-cohomology.tex, Tags 0940 and 0941; normalized strict augmentation"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-integral-strict-augmentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply integral_regular_quotient_tower to identify the ordinary localized quotient tower and its augmentation with the positive tail of the principal derived quotient tower.",
+   "uses": [
+    "lem-sfb-integral-regular-quotient-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalizedStrictLimitCone to the supplied RZ and etaZ and this tail identification. The ordinary constant/limit adjunction unit followed by the tower augmentation has nth projection exactly O.pi_n. Hence the resulting cone with point Y satisfies u followed by its positive legs = the canonical completion legs. Cone naturality at 1 to 0 proves the zeroth equation as well.",
+   "uses": [
+    "lem-sfb-normalized-strict-limit-cone",
+    "lem-sfb-integral-strict-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity cone of the constant tower is a homotopy limit. Choose its Milnor triangle and the Milnor triangle of the cone on G. Product extensionality applied to the leg equations gives the required first square. The constant triangle first arrow is exactly the diagonal lift of the identity family.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The diagonal first arrow has retraction the zeroth product projection. The last/first zero-composite identity of the constant distinguished triangle, followed by the shifted retraction, forces deltaK=0. Triangle.epi2 makes its difference map epic. The product map from the canonical completion cone commutes with the two difference maps. Precompose its composite with deltaY by the epic constant difference map, use the zero middle/last composite of the second triangle, and cancel the epic map. Both sides of the requested boundary square therefore vanish. This argument retains the specified u and needs no arbitrary lift of a triangle morphism.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M; sites-cohomology.tex Tags 0940 and 0941. Normalized K-injective strict-limit cone plus the split constant-tower argument for the boundary square; exactness of products and the explicit signed strict-Roos comparison are unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ordinary quotient augmentation of a torsion free complex is a morphism of Milnor triangles from its constant tower to its principal derived quotient tower",
+   "results": "Eight hits, including ChainComplex.augment and CochainComplex.mappingCone.triangle; none identifies this augmented derived quotient limit.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing strict Roos comparison and principal quotient triangles; no direct theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary quotient augmentation of a torsion free complex is a morphism of Milnor triangles from its constant tower to its principal derived quotient tower",
+   "results": "Eight hits, including DerivedCategory.triangleOfSESδ and triangleOfSES_mor₁; no normalized Milnor presentation of the ordinary quotient augmentation.",
+   "date": "2026-10-27",
+   "verdict": "Generic short-exact triangle tools are available; the normalized tower identification remains separate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Fan.IsLimit.lift",
+   "results": "Eight hits including Fan.IsLimit.lift, fac and fac_assoc.",
+   "date": "2026-10-27",
+   "verdict": "Use limiting product fans for the two Milnor triangles."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*augmentation.*milnor|Milnor.*quotient",
+   "results": "No search-service matches. Local rg finds strictRoosComparison, strictDerivedLimit_milnor, and the source tensorQuotPowTriangle, but no theorem identifying this ordinary augmentation with the principal tower Milnor map.",
+   "date": "2026-10-27",
+   "verdict": "This is the remaining unreduced normalization step, rather than a duplicate invertibility assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrdinaryAugmentationReduction",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof step 2, functorial derived completion: ordinary regular quotient tower and its normalized derived-limit augmentation",
+   "via": [
+    "lem-sfb-integral-ordinary-augmentation-reduction",
+    "lem-sfb-integral-strict-limit-augmentation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryAugmentationMilnor",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryAugmentationMilnor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_ordinary_augmentation_milnor",
+  "statement": "theorem integral_ordinary_augmentation_milnor (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]\n    (O : DiagonalReductionPresentation ℓ (𝟭 (DiagonalAb W)))\n    (RZ : DerivedCategory (ℕᵒᵖ ⥤ DiagonalAb W) ⥤ DerivedCategory (DiagonalAb W))\n    (ηZ : (lim : (ℕᵒᵖ ⥤ DiagonalAb W) ⥤ DiagonalAb W).mapHomologicalComplex (.up ℤ) ⋙\n      DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RZ)\n    (hRZ : RZ.IsRightDerivedFunctor ηZ\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ DiagonalAb W) (.up ℤ)))\n    (e : DiagonalAb W ≌\n      Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))\n    [e.functor.Additive] [e.inverse.Additive]\n    (P : CochainComplex (DiagonalAb W) ℤ)\n    (hP : ∀ (n : ℕ) (i : ℤ), Mono (ℓ ^ (n + 1) • 𝟙 (P.X i))) :\n    let K := e.mapDerivedCategory.functor.obj (DerivedCategory.Q.obj P)\n    let Y := e.mapDerivedCategory.functor.obj\n      (RZ.obj (DerivedCategory.Q.obj ((O.E.mapHomologicalComplex (.up ℤ)).obj P)))\n    let u := e.mapDerivedCategory.functor.map\n      (integralStrictOrdinaryAugmentation ℓ RZ ηZ O P)\n    let G := DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology W)\n      (Ideal.span {(ℓ : ULift.{u + 1} ℤ)}) K\n    ∃ (PK : Fan fun _ : ℕ ↦ K) (hPK : IsLimit PK)\n      (PG : Fan fun n : ℕ ↦ G.obj (op n)) (hPG : IsLimit PG)\n      (δK : PK.pt ⟶ K⟦(1 : ℤ)⟧) (cY : Y ⟶ PG.pt) (δY : PG.pt ⟶ Y⟦(1 : ℤ)⟧),\n      Triangle.mk (Fan.IsLimit.lift hPK (fun _ ↦ 𝟙 K))\n        (𝟙 PK.pt - towerShift (F := (Functor.const ℕᵒᵖ).obj K) hPK) δK ∈ distTriang (DerivedCategory\n          (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) ∧\n      Triangle.mk cY (𝟙 PG.pt - towerShift (F := G) hPG) δY ∈ distTriang (DerivedCategory\n          (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) ∧\n      Fan.IsLimit.lift hPK (fun _ ↦ 𝟙 K) ≫ productTowerMap (PF := PK) hPG\n        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology W)\n          (Ideal.span {(ℓ : ULift.{u + 1} ℤ)}) K).π = u ≫ cY ∧\n      δK ≫ u⟦(1 : ℤ)⟧' = productTowerMap (PF := PK) hPG\n        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology W)\n          (Ideal.span {(ℓ : ULift.{u + 1} ℤ)}) K).π ≫ δY",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
+  "lem-sfb-integral-regular-quotient-tower",
+  "lem-sfb-integral-strict-augmentation",
+  "lem-sfb-normalized-strict-limit-cone"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T235945-L-1473581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T050618-L-244651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

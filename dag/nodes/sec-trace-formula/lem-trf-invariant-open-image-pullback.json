@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-invariant-open-image-pullback",
+ "kind": "statement",
+ "title": "Invariant open image and its cartesian descended model",
+ "statement": "Let $q:W\\to W'$ be a flat, quasi-compact, surjective morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-finite-type-morphism, def-weil-surjective-morphism]. Let $j:V\\hookrightarrow W$ be an open immersion [def-weil-open-immersion], put $O=j(|V|)\\subseteq |W|$, and let $r_0,r_1:W\\times_{W'}W\\to W$ be the projections [def-pc-fibre-product]. Suppose $r_0^{-1}(O)=r_1^{-1}(O)$. Then, for any $x,y\\in |W|$ with $q(x)=q(y)$, one has $x\\in O\\iff y\\in O$. The subset $U=q(O)$ is open in $W'$, satisfies $q^{-1}(U)=O$, and is the unique subset of $|W'|$ with that inverse image. Giving $U$ its open-subscheme structure and writing $i:U\\hookrightarrow W'$, there is a unique morphism $h:V\\to U$ with $i\\circ h=q\\circ j$, and the square with sides $j,h,q,i$ is cartesian; equivalently, the canonical morphism $V\\to W\\times_{W'}U$ is an isomorphism compatible with $j$ and $h$.\n\nMoreover, let $A\\to B$ and $W'\\to B$ be morphisms of schemes and let $\\theta:W\\simeq W'\\times_B A$ identify $q$ with the projection to $W'$. Give $V$ the induced map to $A$. If $\\phi$ is a descent datum on $V$ over $A/B$ [def-pd-descent-datum] and the open immersion $\\theta\\circ j$ intertwines $\\phi$ with the canonical datum on $W'\\times_B A$, then $h$ and $V\\to A$ induce an isomorphism $V\\simeq U\\times_B A$ whose induced descent datum is exactly $\\phi$. No quasi-affineness, quasi-compactness of $V$, or local finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0247, lemma-quasi-affine, proof, final paragraph: stable open is the inverse image of a subset, fpqc quotient topology, and the resulting open-subscheme model; returned proof steps 8, 9 and 10 (open-model part)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-base-change-image] to the kernel-pair square and the subset $O$: $r_1(r_0^{-1}(O))=q^{-1}(q(O))$. By the assumed equality of inverse images, its left side equals $r_1(r_1^{-1}(O))$, which is contained in $O$. Conversely $O\\subseteq q^{-1}(q(O))$ for every function. Thus $q^{-1}(q(O))=O$. If $q(x)=q(y)$ and $x\\in O$, then $q(y)\\in q(O)$, hence $y\\in O$; interchanging $x,y$ proves the equivalence. This uses the scheme fibre-product image formula, without identifying scheme points with pairs of points.",
+   "uses": [
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1, lemma-base-change-surjective, proof (subset image formula), applied to the kernel pair; Tag 0247 final paragraph in descent.tex"
+   }
+  },
+  {
+   "text": "Put $U=q(O)$. The open-immersion definition [def-weil-open-immersion] makes $O$ open. Apply [lem-weil-pbc-flat-qc-surjective-quotient-map] to $q$, which is flat, quasi-compact and surjective by hypothesis: since $q^{-1}(U)=O$ is open, $U$ is open. If $T\\subseteq |W^{\\prime}|$ also has inverse image $O$, surjectivity gives $T=q(q^{-1}(T))=q(O)=U$. This proves uniqueness even among arbitrary subsets.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-flat-qc-surjective-quotient-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JY, lemma-fpqc-quotient-topology; used in Tag 0247 final paragraph of descent.tex"
+   }
+  },
+  {
+   "text": "Equip $U$ with its open-subscheme structure. The image of $q\\circ j$ is $q(O)=U$, so [lem-weil-pbc-morphism-factors-through-open-subscheme] supplies the unique $h:V\\to U$ satisfying $i\\circ h=q\\circ j$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HI, lemma-restrict-map-to-opens; the open model in Tag 0247 final paragraph of descent.tex"
+   }
+  },
+  {
+   "text": "To verify the cartesian assertion directly, let $a:T\\to W$ and $b:T\\to U$ satisfy $q\\circ a=i\\circ b$. Every point of $a(T)$ belongs to $q^{-1}(U)=O$. By [def-weil-open-immersion], $j$ identifies $V$ with the open subscheme on $O$, so [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $c:T\\to V$ with $j\\circ c=a$. Now $i\\circ h\\circ c=q\\circ a=i\\circ b$, and [lem-weil-pbc-open-immersion-monomorphism] cancels $i$ to give $h\\circ c=b$. Uniqueness already follows from the unique factorization through $j$. This is precisely the universal property in [def-pc-fibre-product]; its uniqueness clause makes the canonical map $V\\to W\\times_{W^{\\prime}}U$ an isomorphism with the required projections.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, lemma-quasi-affine, proof, final paragraph: stable open is the inverse image of a subset, fpqc quotient topology, and the resulting open-subscheme model; returned proof steps 8, 9 and 10 (open-model part)"
+   }
+  },
+  {
+   "text": "For the additional base-change presentation, put $f:V\\to A$ for the second projection of $\\theta\\circ j$. Since $\\theta$ identifies $q$ with the first projection, the maps $h,f$ agree over $B$, giving $e=(h,f):V\\to U\\times_B A$ by [def-pc-fibre-product]. Conversely let $P=U\\times_B A$ with projections $u,a$. The pair $(i\\circ u,a)$ gives $P\\to W^{\\prime}\\times_B A$, hence $w:P\\to W$ using $\\theta^{-1}$, and $q\\circ w=i\\circ u$. Step 4 gives $c:P\\to V$ with $j\\circ c=w$ and $h\\circ c=u$. The $A$-projection of $\\theta\\circ j\\circ c$ is $a$, so $f\\circ c=a$. The two product projections give $e\\circ c=1_P$; the $W$-projection gives $j\\circ c\\circ e=j$, so [lem-weil-pbc-open-immersion-monomorphism] gives $c\\circ e=1_V$. Thus $e$ is the asserted isomorphism over both $U$ and $A$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, lemma-quasi-affine, proof, final paragraph: stable open is the inverse image of a subset, fpqc quotient topology, and the resulting open-subscheme model; returned proof steps 8, 9 and 10 (open-model part)"
+   }
+  },
+  {
+   "text": "Finally put $A_2=A\\times_B A$. Pulling the presentation of Step 5 back by either projection $A_2\\to A$ identifies each pullback of $V$ with $U\\times_B A_2$: a morphism into either object is exactly a pair of maps into $U,A_2$ agreeing over $B$, by [def-pc-fibre-product]. Under these identifications the canonical datum is the identity on $U\\times_B A_2$, as in [def-pd-descent-datum]. Write $k:U\\times_B A_2\\to W^{\\prime}\\times_B A_2$ for the map induced by $i$. This map is monic: equality after $k$ gives equality of the $A_2$-components and, by [lem-weil-pbc-open-immersion-monomorphism] for $i$, equality of the $U$-components, hence equality by the product universal property. The hypothesis that $\\theta\\circ j$ intertwines the given datum with the ambient canonical datum says exactly that the transported $\\phi$ satisfies $k\\circ\\phi=k$. Cancel $k$ to get $\\phi=1$. Consequently $e$ identifies the actual given datum, not merely its underlying scheme, with the canonical datum of $U\\times_B A$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247, lemma-quasi-affine, proof, final paragraph: stable open is the inverse image of a subset, fpqc quotient topology, and the resulting open-subscheme model; returned proof steps 8, 9 and 10 (open-model part)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-base-change-image",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-flat-qc-surjective-quotient-map",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0247, lemma-quasi-affine, final paragraph; saturation expanded by the subset image formula in Tag 01S1, openness by Tag 02JY, and open-model and datum compatibility by the universal property of open subschemes and fibre products."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An invariant open in a scheme pulled back along a faithfully flat quasi-compact morphism is the inverse image of an open of the original scheme",
+   "results": "{\"t\": \"2026-10-22T05:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"An invariant open in a scheme pulled back along a faithfully flat quasi-compact morphism is the inverse image of an open of the original scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\"], \"digest\": \"0477b4a3d4a1b1db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat quasi-compact surjective scheme morphism q and an open O with equal inverse images on the kernel pair the image q(O) is open and its open subscheme pulls back to O",
+   "results": "{\"t\": \"2026-10-22T06:00:11Z\", \"tool\": \"leansearch\", \"query\": \"For a flat quasi-compact surjective scheme morphism q and an open O with equal inverse images on the kernel pair the image q(O) is open and its open subscheme pulls back to O\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuotientMap\", \"isOpen\"",
+   "results": "{\"t\": \"2026-10-22T05:59:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuotientMap\\\", \\\"isOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"IsOpenMap.isQuotientMap\", \"IsOpenQuotientMap.isQuotientMap\", \"IsOpenQuotientMap.of_isOpenMap_isQuotientMap\", \"IsOpenQuotientMap.iff_isOpenMap_isQuotientMap\", \"isQuotientMap_of_isOpenQuotientMap_of_isInducing\", \"Topology.IsQuotientMap.restrictPreimage_isOpen\", \"Topology.IsQuotientMap.continuousOn_isOpen_iff\", \"AddMonoidHom.isOpenQuotientMap_of_isQuotientMap\"], \"digest\": \"c9eef673d8e54592\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isEffective_restrict|isOpen_preimage|exists_preimage_pullback|isQuotientMap_of_surjective",
+   "results": "{\"t\": \"2026-10-22T05:59:31Z\", \"tool\": \"grep\", \"query\": \"isEffective_restrict|isOpen_preimage|exists_preimage_pullback|isQuotientMap_of_surjective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"3623e62d4a836fae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open subschemes invariant under canonical fpqc descent descend to the open image under the projection",
+   "results": "{\"t\": \"2026-10-22T05:59:43Z\", \"tool\": \"leanfinder\", \"query\": \"Open subschemes invariant under canonical fpqc descent descend to the open image under the projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V_self\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open\", \"AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.tAux\"], \"digest\": \"4edab13841771704\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, \"isQuotientMap\"",
+   "results": "{\"t\": \"2026-10-22T07:05:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, \\\"isQuotientMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\"], \"digest\": \"7a14ac27a1038cc4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; quotient-map and open-lifting components are existing DAG Mathlib leaves; morphism-property descent assumes an already existing downstairs morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of invariant open subschemes along faithfully flat quasi compact maps",
+   "results": "{\"t\": \"2026-10-22T07:05:53Z\", \"tool\": \"leansearch\", \"query\": \"Descent of invariant open subschemes along faithfully flat quasi compact maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"339a8a032f14fc86\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; quotient-map and open-lifting components are existing DAG Mathlib leaves; morphism-property descent assumes an already existing downstairs morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "isQuotientMap_of_surjective|exists_preimage_pullback|lemma isPullback|def lift",
+   "results": "{\"t\": \"2026-10-22T07:05:53Z\", \"tool\": \"grep\", \"query\": \"isQuotientMap_of_surjective|exists_preimage_pullback|lemma isPullback|def lift\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"e256d7ff658232a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; quotient-map and open-lifting components are existing DAG Mathlib leaves; morphism-property descent assumes an already existing downstairs morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme invariant under the kernel pair of a faithfully flat quasi compact morphism descends uniquely and preserves its descent datum",
+   "results": "{\"t\": \"2026-10-22T07:06:01Z\", \"tool\": \"leanfinder\", \"query\": \"An open subscheme invariant under the kernel pair of a faithfully flat quasi compact morphism descends uniquely and preserves its descent datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\"], \"digest\": \"79cd585571e76f61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; quotient-map and open-lifting components are existing DAG Mathlib leaves; morphism-property descent assumes an already existing downstairs morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A saturated open subset of a scheme for a surjective flat quasi compact morphism is the inverse image of a unique open subset of the target",
+   "results": "{\"t\": \"2026-10-22T07:06:47Z\", \"tool\": \"leanfinder\", \"query\": \"A saturated open subset of a scheme for a surjective flat quasi compact morphism is the inverse image of a unique open subset of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"AlgebraicGeometry.range_eq_range_of_surjective\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"AlgebraicGeometry.range_eq_univ\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"1b538764b8dce64c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item; quotient-map and open-lifting components are existing DAG Mathlib leaves; morphism-property descent assumes an already existing downstairs morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quasi-affine-fpqc-effective-descent",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric quotient-presentation support in lem-trf-local-term-locality, through Tag 0265 and Tag 02W8, via the item (Tag 0247, proof, final paragraph): the open V of X x_S U' stable under the descent datum is the inverse image of a subset U of U', open by the fpqc quotient topology, giving the descended open model.",
+   "via": [
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-invariant-open-image-pullback",
+  "worker": "stage1",
+  "summary": "Expanded invariant-open descent into saturation via the existing fibre-product subset image formula, quotient-map openness, unique open factorization, the pullback universal property, explicit inverse of the base-change presentation, and cancellation proving equality of the given descent datum. Reused all supporting nodes; no new nodes and no statement change.",
+  "blueprint": "Geometric quotient-presentation support in lem-trf-local-term-locality, through Tag 0265 and Tag 02W8, via the item (Tag 0247, proof, final paragraph): the open V of X x_S U' stable under the descent datum is the inverse image of a subset U of U', open by the fpqc quotient topology, giving the descended open model.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-4245d4354",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-4245d4354 (reviewer sub-agent of L); spot-checked: Ordinary split of a statement-only item. The statement is unchanged, there are no new nodes and no tool_uses. The item is not on the route-pivot drop list, nor is any link of its blueprint via chain (all split live). The live item is still unsplit and has no repair note of its own. Source: Stacks Tag 0247 final paragraph (descent.tex ~9233ff) plus 02JY; there is no SGA reference. Step 1: lem-weil-pbc-base-change-image with f=g=q and C=O gives r1(r0^-1 O)=q^-1 q(O), which is contained in O by invariance, so O is saturated. Step 2: O is open, U is open by the flat-qc-surjective quotient-map node, and U is unique by surjectivity. Step 3: unique h from open-subscheme factorization, since im(qj)=U. Step 4: universal property; a(T) lies in O, so a factors through j, and h c=b after cancelling the monic i. Step 5: e=(h,f) with an explicit inverse c from Step 4; I checked w e=j, so c e=1 by monicity of j. Step 6: pr_i^*V is U x_B A2, the canonical datum is the identity there, k=i x 1 is monic, and intertwining gives k phi'=k, so phi'=1. Edge cases checked (V empty, O=W, q an iso, empty overlap). No duplicate among descent-saturation-invariant-open, a1-flat-relation-invariant-open-complement, etale-relation-finding-opens or a1-ind-quasi-affine descent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantOpenImagePullback",
+  "declaration": "AlgebraicGeometry.invariant_open_image_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantOpenImagePullback.lean",
+  "statement": "theorem invariant_open_image_pullback {W W' V : Scheme.{u}} (q : W ⟶ W') [Flat q] [QuasiCompact q] [Surjective q] (j : V ⟶ W) [IsOpenImmersion j] (hinv : (pullback.fst q q) ⁻¹' Set.range j = (pullback.snd q q) ⁻¹' Set.range j) : (∀ (x y : W), q x = q y → (x ∈ Set.range j ↔ y ∈ Set.range j)) ∧ ∃ U : W'.Opens, (U : Set W') = q '' Set.range j ∧ q ⁻¹' (U : Set W') = Set.range j ∧ (∀ S : Set W', q ⁻¹' S = Set.range j → S = (U : Set W')) ∧ ∃ h : V ⟶ U.toScheme, h ≫ U.ι = j ≫ q ∧ (∀ k : V ⟶ U.toScheme, k ≫ U.ι = j ≫ q → k = h) ∧ IsPullback j h q U.ι ∧ ∀ {A B : Scheme.{u}} (a : A ⟶ B) (b : W' ⟶ B) (theta : W ≅ pullback b a) (_htheta : theta.hom ≫ pullback.fst b a = q) (f : V ⟶ A) (_hf : f = j ≫ theta.hom ≫ pullback.snd b a) (D : Over.DescentDatum a (Over.mk f)) (_hcompat : ∀ {T : Scheme.{u}} (f₀ f₁ : T ⟶ A) (hf₀₁ : f₀ ≫ a = f₁ ≫ a) (v : Over.mk f₀ ⟶ Over.mk f), (D.transport f₀ f₁ hf₀₁ v).left ≫ j ≫ theta.hom ≫ pullback.fst b a = v.left ≫ j ≫ theta.hom ≫ pullback.fst b a), (∃ e : V ≅ pullback (U.ι ≫ b) a, e.hom ≫ pullback.fst (U.ι ≫ b) a = h ∧ e.hom ≫ pullback.snd (U.ι ≫ b) a = f) ∧ ∀ {T : Scheme.{u}} (f₀ f₁ : T ⟶ A) (hf₀₁ : f₀ ≫ a = f₁ ≫ a) (v : Over.mk f₀ ⟶ Over.mk f), (D.transport f₀ f₁ hf₀₁ v).left ≫ h = v.left ≫ h",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12ef162b5",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the Lean matches the node: flat, quasi-compact, surjective q; open immersion j; equal inverse images under the kernel-pair projections; points with the same image agree on membership; U = q(O) open with inverse image O and unique among all subsets; unique h with IsPullback j h q U.ι in the right orientation; e : V ≅ pullback (U.ι ≫ b) a with projections h and f. The compatibility hypothesis (transport keeps the W'-coordinate of θ∘j) is exactly agreement with the canonical datum, and the final clause (transport keeps h fixed) is exactly 'the induced datum is φ', as in DescentDatum.IsEffective. No extra hypotheses; one universe u. Edge cases V empty, O = W, W' empty and q an isomorphism are covered. No duplicate in Mathlib or the project; isEffective_of_effective_open_cover is a different statement. lean.statement is verbatim; only the lean field changed; docstrings have the source place, the blueprint id and the six proof steps; imports follow the rules (plain import of PullbackCarrier for a proof dependency). Not compiled because no file was changed; the worker reports a clean compile. Advisory only: _hcompat could use q in place of theta.hom ≫ pullback.fst b a."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261023T132323-L-2253739",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.invariant_open_image_pullback"
+  ],
+  "sorry_after": []
+ }
+}

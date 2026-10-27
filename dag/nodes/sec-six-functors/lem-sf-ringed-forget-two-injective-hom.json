@@ -1,0 +1,289 @@
+{
+ "id": "lem-sf-ringed-forget-two-injective-hom",
+ "kind": "statement",
+ "title": "Two-injective internal Hom models under ringed forgetting",
+ "statement": "Let $(C,R)$ and $(C',R')$ be small ringed sites in compatible universes [def-weil-size-convention], with commutative coefficient sheaves. Write $\\mathcal B=\\operatorname{Mod}(R)$ and $\\mathcal A=\\operatorname{Mod}(R')$ [def-weil-sheaf-of-modules-category], with unbounded derived categories [def-weil-abstract-derived-category]. Let $U:\\mathcal B\\to\\mathcal A$ be an exact additive functor which preserves all small products and has specified natural sheaf-Hom isomorphisms $U\\mathcal Hom_R(B,C)\\simeq\\mathcal Hom_{R'}(UB,UC)$ [def-pur-sheaf-hom]. Assume $U$ preserves K-injective complexes [def-pur-kinjective-complex]. Give both derived categories the total K-flat tensor and signed symmetric structure of [lem-sf-ringed-derived-closed-symmetric-monoidal], with the particular tensor-Hom adjunction fixed by [lem-sf-ringed-derived-tensor-hom-adjunction, def-coef-ringed-tensor-hom-model]. Denote their internal Homs by $H_{\\mathcal B},H_{\\mathcal A}$ [def-pur-derived-internal-hom].\n\nFor all $K,L\\in D(\\mathcal B)$ and K-injective representatives $J,I$ of $K,L$, the product-total complex $\\mathcal Hom_R^\\bullet(J,I)$ represents $H_{\\mathcal B}(K,L)$. For a complex representative $K^\\bullet$ and a resolution $t:K^\\bullet\\to J$, precomposition induces a canonical isomorphism $Q\\mathcal Hom_R^\\bullet(J,I)\\xrightarrow{\\sim}Q\\mathcal Hom_R^\\bullet(K^\\bullet,I)$ in $D(\\mathcal B)$, where $Q$ denotes localization. These identifications are independent of resolutions and natural in both derived variables. They use internal sheaf Hom, not global Hom.\n\nThere is a natural isomorphism of derived objects $\\chi_{K,L}:D(U)H_{\\mathcal B}(K,L)\\xrightarrow{\\sim}H_{\\mathcal A}(D(U)K,D(U)L)$. Its representative is the chain isomorphism $U\\mathcal Hom_R^\\bullet(J,I)\\simeq\\mathcal Hom_{R'}^\\bullet(UJ,UI)$ induced on every product projection by the specified sheaf-Hom comparison. In degree $n$ the Hom complexes are $\\prod_{p\\in\\mathbf Z}\\mathcal Hom(J^p,I^{p+n})$, with differential $d(f)=d_I f-(-1)^n f d_J$ [def-pur-hom-complex]. This isomorphism is compatible with precomposition by source resolutions, target replacement, and inversion of quasi-isomorphisms. For the twisted action-site realization of Frobenius module sheaves, with sheaf-Hom action $f\\mapsto\\theta_I g_T^*(f)\\theta_J^{-1}$, this two-K-injective model with its termwise contragredient structure is canonically chain-isomorphic to the native model `AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`. More precisely, the native product-total differential is $(d_{\\mathrm{nat}}f)^p=(-1)^p(d_I f^p-f^{p+1}d_J)$; the chain isomorphism from the native complex to the standard Hom complex above multiplies its degree-$n$, source-index-$p$ component by $(-1)^{np}$. It is natural in both complex variables and preserves the contragredient action. The native sheaf category and coefficient interpretation are those of [def-sf-native-weil-derived-framework]. In this last specialization, fix a finite field $k_0$, its algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, a separated finite-type $k_0$-scheme $T_0$, $T=T_0\\times_{k_0}k$, and $g_T=1\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-finite-field-fiber, def-weil-frobenius-detailed]. Take $R_T$ to be the continuous finite-subextension coefficient sheaf [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x], $\\mathcal B$ its Frobenius-fixed module pairs [def-weil-endofunctor-fixed-pair-category] realized as modules on the twisted action site [lem-sf-twisted-action-ringed-site], and $U$ their underlying-module functor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation/transposition paragraph; agent native ringed-site refinement, argument allocated from returned item steps 4 and 6; supporting Stacks labels and original arguments in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "def-pur-kinjective-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sf-twisted-action-ringed-site",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved ringedRepresentatives on both ringed sites. Their normalized isomorphisms identify the derived internal Hom with the localized actual Hom complex whenever the target is K-injective. Their naturality and quasi-isomorphism invariance are proved by the augmentation to the functorial K-injective target resolution, using [lem-pur-rhom-well-defined-universes]. Thus all the representative data needed for the comparison is available without new choices.",
+   "uses": [
+    "def-sf-ringed-two-injective-models",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined; Tag 08J7, section-internal-hom. Agent assembly and componentwise forgetting calculation."
+   }
+  },
+  {
+   "text": "The source module category is Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], hence has K-injective resolutions. Its category of K-injective complexes localizes to the derived category. This supplies the source localization used by the descent step, replacing the explicit homotopy comparison calculation in the original plan.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined; Tag 08J7, section-internal-hom. Agent assembly and componentwise forgetting calculation."
+   }
+  },
+  {
+   "text": "Exactness of $U$ gives the termwise derived functor $D(U)$ by [lem-sf-exact-functor-derived-triangulated]. It sends a representative $E$ to $UE$ and a localized chain map to its termwise image. The assumed preservation of K-injectives makes $UJ,UI$ K-injective, and exactness makes them representatives of $D(U)K,D(U)L$. Thus step 1, now on $(C',R')$, identifies the desired right-hand object with $Q\\mathcal Hom_{R'}^\\bullet(UJ,UI)$, while the left-hand object is represented by $U\\mathcal Hom_R^\\bullet(J,I)$. It remains to compare these two actual complexes.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined; Tag 08J7, section-internal-hom. Agent assembly and componentwise forgetting calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-ringed-sheaf-hom-complex-comparison] to U and the specified internal sheaf-Hom comparison h. It specializes the abstract product-total comparison to the actual sheaf-Hom complexes, and gives exactly the chain natural isomorphism and projection formula required by Comparison.",
+   "uses": [
+    "lem-sf-ringed-sheaf-hom-complex-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved ringedRepresentatives on both sites. Apply [lem-sf-ringed-sheaf-hom-comparison-descent] to their representative isomorphisms and naturality squares, together with the chain isomorphism from the preceding step. Source module sheaves have K-injective resolutions because they are Grothendieck abelian. The descended isomorphism has exactly Comparison.representative, including both mapDerivedCategoryFactors legs. Assemble source, target, chain, projection, derived and representative into Comparison. The representative normalization and the two comparison equations determine all chosen data. This proves ringed_forget_two_injective_hom. The remaining steps still specify the unfinished native specialization.",
+   "uses": [
+    "lem-sf-ringed-sheaf-hom-comparison-descent",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicit standardHomModel construction on the actual native ihomBifunctor and on underlyingHomBifunctor [def-sf-standard-bifunctor-hom-model]. Their underlying complex functors are the native row-sign functors; their projections are rescaled by (-1)^(np). Consequently the identity chain isomorphism has exactly the required signed components and is natural in both variables.",
+   "uses": [
+    "def-sf-standard-bifunctor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient interpretations agree pointwise locally: choose finitely many generators of the finite-dimensional span of the values on a neighbourhood, and adjoin them to Q_l. Algebraicity makes the generated intermediate field finite. Conversely the span of values in any finite intermediate field is a subspace of its finite-dimensional underlying space. This proves the exact coefficients field, without compactness assumptions on the test space.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the source H and its representatives and native slice isomorphisms with their exact normalization from [lem-sf-native-standard-hom-representatives], and obtain the target H and representatives from [lem-sf-underlying-standard-hom-representatives]. These universal extensions are determined up to the unique isomorphisms preserving their representative maps, rather than arbitrary choices of data.",
+   "uses": [
+    "lem-sf-native-standard-hom-representatives",
+    "lem-sf-underlying-standard-hom-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the actual IsoAlgebra.forget functor use the existing forgetKInjective proof in [def-sf-ringed-two-injective-models]. Its internal-Hom comparison is the identity on the underlying modules, as in ihomFunctorCompForgetIso. Apply [lem-sf-ringed-hom-complex-comparison] to the two StandardModels and this natural sheaf-Hom comparison, using their product, differential and map equations. This supplies the chain comparison with precisely the required projections. Apply [lem-sf-kinjective-hom-comparison-descent] to the two representative systems and that chain comparison. Its equation is exactly derived_representative, including both localization factors. Assemble all these fields into TwoInjectiveHomModel; the native normalization follows because the sign chain map is the identity.",
+   "uses": [
+    "def-sf-ringed-two-injective-models",
+    "lem-sf-ringed-hom-complex-comparison",
+    "lem-sf-kinjective-hom-comparison-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-ringed-two-injective-models",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined-universes",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-ringed-sheaf-hom-complex-comparison",
+  "lem-sf-ringed-sheaf-hom-comparison-descent",
+  "def-sf-standard-bifunctor-hom-model",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-standard-hom-representatives",
+  "lem-sf-underlying-standard-hom-representatives",
+  "lem-sf-ringed-hom-complex-comparison",
+  "lem-sf-kinjective-hom-comparison-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "The already proved general comparison is unchanged. B4 reduces the native specialization to separate native and ordinary representative extensions; the explicit signed standard model, coefficient comparison, chain comparison and derived forgetting descent are proved. Supporting Stacks section-hom-complexes and Tags 0A95 and 08J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For modules on a twisted action ringed site forgetting preserves K flat and K injective resolutions and derived internal Hom",
+   "results": "8 hits: SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, SheafOfModules.forgetToSheafModuleCat, PresheafOfModules.sheafification, CategoryTheory.Sheaf.cohomologyPresheafFunctor, instAbelianLightCondMod, PresheafOfModules.HasDifferentials. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of equivariant sheaves computed by two K injective resolutions agrees after forgetting with ordinary derived sheaf Hom",
+   "results": "8 hits: CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.sheafHom, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.homotopyEquiv, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bifunctorRHom\"",
+   "results": "0 hits: . Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorRHom|mapDerivedCategory|preserves.*[Kk][Ii]njective",
+   "results": "10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean. Read relevant declarations; none gives this ringed-action/derived representative comparison in one specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorRHom|sheafHom.*[Kk][Ii]njective|[Kk][Ii]njective.*sheafHom",
+   "results": "0 hits: . Read the relevant sheaf-Hom and exact-derived-functor sources; none states the two-K-injective internal-sheaf-Hom comparison or the native equivariant signed identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of sheaves of modules computed by K injective resolutions and natural under exact forgetting functors",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.rightDerived_app_eq. Read the relevant sheaf-Hom and exact-derived-functor sources; none states the two-K-injective internal-sheaf-Hom comparison or the native equivariant signed identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, HomologicalComplex",
+   "results": "0 hits: . Read the relevant sheaf-Hom and exact-derived-functor sources; none states the two-K-injective internal-sheaf-Hom comparison or the native equivariant signed identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal sheaf Hom computed using K injective representatives in both variables commutes with exact functor preserving products and sheaf Hom",
+   "results": "8 hits: CategoryTheory.Functor.IsCoverDense.sheafHom, CategoryTheory.Sheaf.H, PresheafOfModules.sheafifyHomEquiv, CategoryTheory.sheafHom', CategoryTheory.sheafHom, CategoryTheory.Sheaf.cohomologyPresheafFunctor, PresheafOfModules.sheafificationHomEquiv, CategoryTheory.Functor.IsCoverDense.sheafHom_eq. Read the relevant sheaf-Hom and exact-derived-functor sources; none states the two-K-injective internal-sheaf-Hom comparison or the native equivariant signed identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHom|internalHom|mapDerivedCategory",
+   "results": "10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean. Read the relevant sheaf-Hom and exact-derived-functor sources; none states the two-K-injective internal-sheaf-Hom comparison or the native equivariant signed identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving products and internal hom carries the unbounded derived internal hom to the derived internal hom when it preserves K injectives",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory. Read the relevant sheaf-Hom and exact-derived-functor sources; none states the two-K-injective internal-sheaf-Hom comparison or the native equivariant signed identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-closed-forgetful",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native refinement of cor-coef-verdier-weil-equivariance, internal-Hom comparison, evaluation and transposition paragraph; returned item steps 4 and 6. The maintainer-created ancestry has no blueprint id (ancestor command prints None).",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ringed-forget-two-injective-hom",
+  "worker": "stage1",
+  "summary": "Reused existing two-variable RHom quasi-isomorphism invariance and K-injective comparison nodes; checked every product projection, differential and derived naturality square, and the action-site adjoint hypotheses. Corrected the native-model clause by its canonical (-1)^(np) sign conjugation. No new nodes.",
+  "blueprint": "Native refinement of cor-coef-verdier-weil-equivariance, internal-Hom/evaluation/transposition paragraph, allocated from parent steps 4 and 6. The inherited ancestor command returns None; the concrete blueprint file and place are retained. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "General ringed-site quasi-isomorphism invariance supplies exactly the source-resolution and K-injective-target-replacement maps."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "General exact-left-adjoint criterion verifies the specialization hypothesis using the action site exact orbit induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-5ffe5b004",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-5ffe5b004 (reviewer sub-agent of L); spot-checked: The S1 split of lem-sf-ringed-forget-two-injective-hom is correct. It has 8 steps and no new nodes; I made no fixes. I read the statement and proof, checked them against the base text (sha 34c3c75a in earlier snapshots) and confirmed no dependency cycle. Statement change: the base said the two-K-injective model is 'exactly' the native ProEtaleWeilSheaf.derivedHom. That is false. The live BifunctorHom.d / d_π (BifunctorHomComplex.lean:54-70) gives (d_nat f)^p=(-1)^p(d_I f^p - f^{p+1}d_J), while def-pur-hom-complex gives d_I f^p-(-1)^n f^{p+1}d_J. In the report's small case (J=Q[-1], I=Q->Q in degrees 1-2, n=0, f^1=id) these are +id and -id. The fix, the explicit chain isomorphism (S^n f)^p=(-1)^{np}f^p, is correct: both sides come to (-1)^{np}(d_I f^p - f^{p+1}d_J), S^2=1, and it holds in characteristic 2 and for negative indices. It is the precise true form, not a weakening, and is named in the report. Both citers are fine: the native-closed-forgetful parent only needs a canonical isomorphism, and the tensor-transposition node only uses chi. The added stmt_dep def-sf-native-weil-derived-framework is forced by the corrected clause and is not circular. I unfolded the Lean derivedHom = bifunctorRHom = bifunctorHomObj on two K-injectives. Steps: (1) def-pur-derived-internal-hom and Stacks 0A95 (sites-cohomology.tex:8754) with s=1, t a resolution; (2) both homotopy formulas recomputed ((-1)^n f h for the source, h f for the target); (3) termwise D(U) for an exact U; (4)-(5) the product projections, the differential and naturality are checked; (6) the action-site node gives an exact left adjoint Ind, and right-adjoint-preserves-kinjective applies with u=U, v=Ind; (7) the coefficient sheaves agree by the finite-span/compositum argument; (8) the sign computation. No SGA is used. The source is main-20261015 cor-coef-verdier-weil-equivariance.proof (internal-Hom paragraph). I accept the two generic tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveHom",
+  "declaration": "CategoryTheory.RingedForgetTwoInjective.ringed_forget_two_injective_hom",
+  "declarations": [
+   "CategoryTheory.RingedForgetTwoInjective.ringed_forget_two_injective_hom",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.native_two_injective_hom_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTwoInjectiveHom.lean",
+  "statement": "theorem ringed_forget_two_injective_hom (SB : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, wb} J R)) (TB : CoefficientTensorModels.{r, c, v, wb} J R SB) (βB : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R)) _ SB.monoidal) (_coherenceB : RingedDerivedTensorCoherence.{c, v, r, wb} J R SB TB βB) (SA : CoefficientClosedStructure (derivedInternalHomOfUniverses.{d, vd, s, wa} J' R')) (TA : CoefficientTensorModels.{s, d, vd, wa} J' R' SA) (βA : @SymmetricCategory (DerivedCategory (RingedTensorModules.{d, vd, s} J' R')) _ SA.monoidal) (_coherenceA : RingedDerivedTensorCoherence.{d, vd, s, wa} J' R' SA TA βA) : Nonempty (Comparison.{wb, wa, c, v, r, d, vd, s} J R J' R' U h)",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem signatures are unchanged. The definitions and the already proved ringedRepresentatives construction are re-exported from RingedForgetTwoInjectiveModels, retaining all original names, signatures and bodies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5cad9cef1",
+  "group": "Q36",
+  "result": "pass",
+  "note": "First S2 delivery; only the item lean field changed (17 stmt_dep records identical to live, no new nodes). Every hypothesis matches the node and none is stronger: exact additive U, small-product preservation only, internal sheaf-Hom NatIso h, K-injective preservation; independent site and derived universes. RingedRepresentatives iso pinned by normalization to coefficientHomResolutionIso through the actual augmentation (a quasi-iso between K-injectives). Comparison.chain pinned on homComplexπ projections to U(π_p)≫h; χ tied to it on every two-K-injective pair with both mapDerivedCategoryFactors legs. Native: live d_nat=(-1)^p(d_I f^p - f^{p+1}d_J) checked; sign (n*p).negOnePow recomputed (both composites (-1)^{np}(d_I f^p - f^{p+1}d_J)); StandardModel determined by product, standard differential and map_projection; native_normalization goes through the actual kInjectiveRep/bifunctorRHomOfComplexObjIso; coefficients iff true; forgetKInjective applies the existing IsoAlgebra criterion. No hollow data, 3 sorry theorems only, docstrings with source and blueprint, statement verbatim, 12 declarations = file, report sections present. Not compiled (no change). Advisories: uncited owners of homComplexπ/coefficientHomResolution*/ihomBifunctor/derivedHom; some stmt_dep decls cited for interpretation only; second reading by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T235832-L-1459339",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

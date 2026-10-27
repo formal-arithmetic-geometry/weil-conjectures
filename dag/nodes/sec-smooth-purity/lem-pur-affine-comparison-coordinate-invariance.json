@@ -1,0 +1,159 @@
+{
+ "id": "lem-pur-affine-comparison-coordinate-invariance",
+ "kind": "statement",
+ "title": "Coordinate invariance of the actual ordered affine comparison",
+ "statement": "Fix the finite purity data [def-pur-conventions], coefficient ring $A$, a separated finite-type $k$-scheme $Y$, and a bounded-below complex $K$ equipped with a bounded constructible finite-Tor ordinary etale antecedent $K_e$ and an isomorphism $\\nu^*K_e\\cong K$. For $n\\geq1$ and every permutation $\\sigma$ of $\\{0,\\dots,n-1\\}$, let $s_\\sigma:X_n\\cong X_n$ be the actual polynomial coordinate permutation over $Y$. The ordered affine comparison $\\Gamma_{n,K}$ [def-pur-affine-space-comparison] is fixed by transport through $s_\\sigma$ using precisely the canonical source and exceptional transports of [def-pur-affine-comparison-coordinate-maps]. This is equality of the morphisms themselves, not merely isomorphy of their endpoints; it asserts no consecutive-block composition equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 3--4: even signed permutation invariance, via the expanded integration and exceptional-transpose argument"
+ },
+ "stmt_deps": [
+  "def-pur-affine-comparison-coordinate-maps",
+  "def-pur-affine-space-comparison",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient line is shifted flat rank one. The ordinary one-line top trace and site comparison give V_1 isomorphic to the coefficient unit and base-change compatibility of the actual line integration. Apply affine_space_product_domain to get finite-Tor constructibility of V_m and invertibility of the canonical binary products. Identify the relative external powers and their products with the tate and forward constructions of the even-line product maps by canonical pullback/tensor comparisons.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-affine-space-product-domain",
+    "def-pur-even-line-product-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use orderedAffineTranspose_projection to express the transpose at K as the coefficient-first inverse projection followed by 1_K tensor I_m and the right unitor, and to identify its one-line normalization. Apply affineSpaceTraceFactorization using the just established finite-Tor domains and canonical binary products. This supplies the I_m recursion in precisely the coordinates needed by evenLineProductIntegrationSymmetry.",
+   "uses": [
+    "lem-pur-ordered-affine-transpose-projection",
+    "lem-pur-affine-space-trace-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply evenLineProductIntegrationSymmetry to these actual I_m and binary products. Its coefficient-first clause fixes the transpose for every permutation. The signed Tate interchange equals the canonical source transport because every degree is even and the unshifted rank-one Tate multiplication is symmetric. Both geometric permutations have the same coordinate pullbacks, hence are equal.",
+   "uses": [
+    "lem-pur-even-line-product-integration-symmetry",
+    "def-pur-even-line-product-maps",
+    "def-pur-affine-comparison-coordinate-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the concrete coordinateSourceIso, isoExceptional and compositionInverse composite using their defining adjunctions and the pasted counit. Via the canonical sourceIso it is the preceding coefficientAction followed by the coefficient trace. Equality of these transposes and injectivity of the bounded-origin exceptional Hom bijection give equality of the transported comparisons. One coordinate has only the identity permutation; empty bases and arbitrary positive ramified coefficient levels require no exception.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-pur-ordered-affine-transpose-projection",
+    "lem-pur-vector-integration-site-comparison",
+    "def-pur-affine-comparison-coordinate-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-twist-preserves",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-affine-space-product-domain",
+  "def-pur-even-line-product-maps",
+  "lem-pur-ordered-affine-transpose-projection",
+  "lem-pur-affine-space-trace-factorization",
+  "lem-pur-even-line-product-integration-symmetry",
+  "def-pur-affine-comparison-coordinate-maps",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 3--4: even signed permutation invariance, via the expanded integration and exceptional-transpose argument",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine space purity comparison is compatible with ordered block composition and invariant under permutation of coordinates",
+   "results": "Eight hits on affine independence, affine equivalences and AffineSpace.map_comp. No derived compact-support purity comparison, ordered block equation or coordinate-invariance statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A recursively composed natural transformation between twisted pullbacks and exceptional inverse images respects consecutive blocks and coordinate permutations",
+   "results": "Eight hits on GlueData, pullback-shift natural isomorphisms, categorical pullbacks and simplicial splitting. No match for the specified exceptional-purity comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Twelve conjugation and unitor lemmas in Adjunction.Mates; these supply generic mate operations, not the actual scheme-coordinate comparison equations.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(composition|regroup)|ordered.*regroup",
+   "results": "Five Mathlib hits: a Euclidean-volume decomposition and affine morphism composition instances. None is a purity comparison or its coordinate transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpacePurityComposition",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4: even signed permutation invariance, via the expanded integration and exceptional-transpose argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpacePurityCoordinateInvariance",
+  "file": "lean/Sheaf/Paper/AffineSpacePurityCoordinateInvariance.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpacePurity.affineSpacePurity_coordinateEquation",
+  "statement": "theorem affineSpacePurity_coordinateEquation (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y) (hKe : etaleFiniteTor (Ring P) Y Ke) (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) (r : ℕ) (σ : Equiv.Perm (Fin (r + 1))) : HEq (transportedComparison P Y aY K Ke hKe eK r (coordinateIso Y (r + 1) σ) (iteratedAffineLineProj Y (r + 1)) (hg' := purityProjectionCompactification Y (r + 1)) (coordinateProjection Y (r + 1) σ)) (positiveComparison P Y aY K Ke hKe eK r)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6dc2c",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T211934-L-4162362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6dc2c",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T211934-L-4162362",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (identical); moved Maps defs vs old item bodies (verbatim); two sorry lemmas vs item conjuncts 1 and 3 and their nodes; item node vs Lean (statement uses decls owned by def-pur-affine-comparison-coordinate-maps)"
+ }
+}

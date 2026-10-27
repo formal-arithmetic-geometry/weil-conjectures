@@ -15,23 +15,54 @@
  ],
  "proof": [
   {
-   "text": "Apply the explicit adjunction transpose formula to the graph construction and simplify its graph and complement restrictions.",
+   "text": "Express the graph comparison as the transpose of the graph projection through the etale shriek base change isomorphism. The unit law for leftAdjointUniq and the adjunction conjugate identify this transpose with the direct-image exchange followed by the graph transfer.",
    "uses": [
+    "def-f7-etale-compactification-graph-map",
     "def-weil-pbc-adjunction-conjugate",
-    "def-f7-etale-compactification-graph-map"
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the transfer with direct image on the clopen graph section. The inverse-image composition and identity unit equations show that restriction along the test-object graph is the identity. The localization restriction base change isomorphism transports the formula to the original test object.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-underived-exchange-restriction",
+    "lem-cbc-clopen-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the graph complement to the graph section. The pullback equations force every point into the graph, contradicting membership in its complement, so this pullback is empty. Extension by zero therefore has zero sections there, and the transfer restricts to zero on the complement.",
+   "uses": [
+    "lem-cbc-clopen-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use graph_hom_ext to identify the two section maps from their graph and complement restrictions. The section formula defining lowerStarUnit is exactly this graph extension by zero.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-to-star-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-f7-etale-compactification-graph-map",
   "def-weil-pbc-adjunction-conjugate",
-  "def-f7-etale-compactification-graph-map"
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-cbc-clopen-extension-zero-comparison",
+  "def-weil-pbc-etale-shriek-to-star-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
-  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+  "place": "Tags 03S6 and 0F4L; SGA 4 XVII 6.2.11",
+  "note": "G5: explicit adjunction and pullback calculation, followed by the graph/complement sheaf extension characterization. Existing public statements and unit route are unchanged. Repair of return 322e42761b2: use Mathlib pullback projection equations directly, and calculate the transfer from the Mathlib left-adjoint-uniqueness unit law inside its consuming proof, without duplicate helper declarations."
  },
  "mathlib_searches": [
   {
@@ -94,7 +125,18 @@
   "by": "F4",
   "date": "2026-10-20"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-19",
   "by": "L",
@@ -106,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "G5",
   "result": "pass",
-  "landing": "20261019T192721-L-1859010",
-  "kind": "proof",
+  "landing": "20261024T014842-L-2286031",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

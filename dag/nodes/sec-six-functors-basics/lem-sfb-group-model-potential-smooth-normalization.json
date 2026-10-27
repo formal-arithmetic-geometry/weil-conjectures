@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-group-model-potential-smooth-normalization",
+ "kind": "statement",
+ "title": "Potentially smooth finite normalization of an affine group model",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $K$, residue field $k$ and a fixed algebraic closure $\\bar k$ [def-weil-algebraic-closure]. Let $\\mathcal G=\\operatorname{Spec}B$ be an affine group scheme of finite type over $A$, where $B$ is a finitely generated flat $A$-algebra [def-weil-affine-spectrum, def-weil-pbc-flat-ring-map]. Group schemes over a ring have multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme], with that ring as base. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Suppose $\\mathcal G_K$ is smooth and geometrically connected. There is an injective local map $A\\to R$ to a henselian discrete valuation ring [def-weil-pbc-henselian-terminology], whose residue field is identified with $\\bar k$ compatibly with $k\\to\\bar k$. Put $L=\\operatorname{Frac}R$ and $B_R=B\\otimes_A R$. Let $C$ be the integral closure of $B_R$ in $B_R\\otimes_R L$, namely the subring of elements satisfying a monic polynomial with coefficients in $B_R$. Then $C$ is a finite $B_R$-module, and $\\mathcal N=\\operatorname{Spec}C$ has a smooth affine finite-type $R$-group-scheme structure such that $\\nu:\\mathcal N\\to\\mathcal G_R$ is a group homomorphism and $\\nu_L$ is an isomorphism. The special fibre $\\mathcal N_{\\bar k}$ is a smooth affine group scheme of finite type over $\\bar k$. Both $\\nu$ and its special-fibre map $\\nu_{\\bar k}:\\mathcal N_{\\bar k}\\to\\mathcal G_{\\bar k}$ are finite and surjective on underlying spaces; finite means that the source coordinate ring is a finite module over the target coordinate ring. No excellence assumption on $A$ is imposed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://arxiv.org/pdf/math/0405381: Section 3.3, Proposition 3.4 and Corollary A.4, with Theorem A.6; local-extension reductions at the beginning of Section 5 and following Lemma A.9, printed pp.5-6,9,27-30"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ of $A$. Apply [lem-weil-pbc-flat-local-extension-given-residue-field] to $A$ and the specified extension $\\bar k/k$, obtaining a flat local algebra $S$ with maximal ideal $\\pi S$ and residue field the specified $\\bar k$. Multiplication by $\\pi$ on $S$ is injective: tensor the injection $A\\xrightarrow{\\pi}A$ with the flat module $S$. Apply [lem-sfb-principal-regular-local-completion-dvr] to obtain the complete DVR $D=\\varprojlim S/\\pi^nS$, with uniformizer the image of $\\pi$ and residue field $\\bar k$. The composite $A\\to D$ is injective and local. Indeed a nonzero $a\\in A$ is $u\\pi^n$ with $u$ a unit, whose image is nonzero in the domain $D$; units remain units, and $\\pi$ lies in the maximal ideal. The residue identification is compatible with the original $k\\to\\bar k$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "lem-sfb-principal-regular-local-completion-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03C3, lemma-flat-local-given-residue-field; Tag 0328, completion step with a general uniformizer"
+   }
+  },
+  {
+   "text": "Put $F=\\operatorname{Frac}D$ and $E=B\\otimes_A D$. It is finitely generated over $D$ by the images of generators of $B$ and is flat: for a $D$-module $M$, $M\\otimes_D E=M\\otimes_A B$, so injections are preserved. Its generic fibre is $\\mathcal G_K\\times_K F$, hence smooth. For clarity, smooth base extension and products here follow directly from the lifting definition of [def-sbc-smooth-morphisms]: a map out of a tensor product is a pair of maps with the specified common scalar map, and their lifts give its lift; presentations base change by the same generators and relations. Apply [lem-trf-smooth-geometrically-normal] to this smooth generic fibre and then [lem-sfb-raynaud-faltings-normalized-reduction] to $E/D$. Obtain its finite extension $L/F$ and the stated integral-closure algebra $C$ over $R$, the integral closure of $D$ in $L$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-raynaud-faltings-normalized-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix Theorem A.2, geometrically normal generic fibre case; Corollary A.4, proof before constructing the group law"
+   }
+  },
+  {
+   "text": "The DVR $D$ is Noetherian, and by Step 1 it is complete for its maximal ideal $\\mathfrak m_D$. By [lem-weil-pbc-complete-local-nagata] it is a Nagata ring; for the prime $(0)$ this says that the domain $D$ itself is N-2, so the integral closure $R$ of $D$ in the finite extension $L/F$ is a finite $D$-module. As a subring of $L$, $R$ is a domain, so by [lem-weil-pbc-finite-over-complete-local-product] it is a Noetherian local ring, complete for its maximal ideal $\\mathfrak m_R$, and $\\mathfrak m_R$ is the only prime of $R$ contracting to $\\mathfrak m_D$. By [lem-sfb-finite-normalization-local-dvr], which imposes no separability on $L/F$, $L$ is the fraction field of $R$ and there is a prime $\\mathfrak q$ of $R$ over $\\mathfrak m_D$ such that $R_{\\mathfrak q}$ is a DVR whose maximal ideal contracts to $\\mathfrak m_D$. Uniqueness gives $\\mathfrak q=\\mathfrak m_R$; as $R$ is local, its elements outside $\\mathfrak m_R$ are units, so $R=R_{\\mathfrak m_R}$ is a complete DVR with fraction field $L$, finite over $D$, and $D\\to R$ is local. Its residue field is a finite extension of the specified $\\bar k$: reduce a finite set of $D$-module generators modulo the maximal ideal of $R$. Since $\\bar k$ is algebraically closed, the induced embedding of $\\bar k$ onto that residue field is an isomorphism. This fixes the required identification. By [lem-weil-pbc-complete-pair-henselian], $R$ is henselian. The composite $A\\to R$ is the required injective local map. Since $B_R=E\\otimes_D R$, the algebra $C$ of Step 2 is exactly the integral closure prescribed by the item, and Step 2 supplies its finiteness, flatness, normality and generic isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-sfb-finite-normalization-local-dvr",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032W (lemma-Noetherian-complete-local-Nagata), Tag 0325 (lemma-quotient-complete-local) and Tag 00PD (lemma-characterize-dvr): the integral closure of a complete DVR in a finite extension is a finite complete DVR; completion and prescribed algebraically closed residue field as in Prasad--Yu Appendix Remark A.1 and Corollary A.4"
+   }
+  },
+  {
+   "text": "Write $P=C\\otimes_R C$. This is flat over $R$, since tensoring an injection first with one flat factor and then with the other remains injective. Its generic fibre is the coordinate algebra of $\\mathcal G_L\\times_L\\mathcal G_L$, which is smooth by the tensor lifting argument in Step 2 and normal by [lem-trf-smooth-geometrically-normal]. Its special fibre is reduced: apply [lem-sfb-flat-geometrically-reduced-pullback] over $\\bar k$ with both factors $\\operatorname{Spec}(C/\\mathfrak m_RC)$, which are geometrically reduced by Step 2 and locally Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], since they are finite type over a field; flatness over the field holds for every vector space. Thus [lem-sfb-dvr-normal-generic-reduced-special] applies both to $P$ and to $C$. In each case every element of its generic algebra integral over the original algebra lies in that original algebra.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-dvr-normal-generic-reduced-special"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Corollary A.4, proof: normality of the product of the normalization with itself, using Remark A.3"
+   }
+  },
+  {
+   "text": "Let $\\Delta_L$, $\\iota_L$ and $\\epsilon_L$ be multiplication, inverse and identity on the generic coordinate algebra $C_L=B_R\\otimes_R L$. For $c\\in C$, choose a monic relation $c^n+b_{n-1}c^{n-1}+\\cdots+b_0=0$ with $b_i\\in B_R$. Applying $\\Delta_L$ shows $\\Delta_L(c)$ integral over $P$: its coefficients are the images of $\\Delta_{B_R}(b_i)$ in $P$. Step 4 puts it in $P$. Applying $\\iota_L$ similarly gives an element integral over $C$, hence in $C$. Applying $\\epsilon_L$ gives an element of $L$ integral over $R$, since $\\epsilon_{B_R}(b_i)\\in R$; it lies in $R$ because a DVR is a PID and [lem-weil-pbc-pid-noetherian-normal] says a PID is integrally closed. Restriction therefore defines $R$-algebra maps $\\Delta:C\\to C\\otimes_R C$, $\\iota:C\\to C$ and $\\epsilon:C\\to R$. Each extends the given map on $B_R$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Corollary A.4, proof: extending the group law by normalization; the affine monic-polynomial calculation is written out here"
+   }
+  },
+  {
+   "text": "The two maps in each group diagram agree after inverting a uniformizer of $R$, because there they are the group diagrams of $\\mathcal G_L$. They already agree over $R$: the targets $R$, $C$, $C\\otimes_R C$, and $C\\otimes_R C\\otimes_R C$ are flat over $R$ and thus embed in their localizations (multiplication by every power of the uniformizer is injective). Equality after localization is consequently equality on every element. These maps give $\\mathcal N=\\operatorname{Spec}C$ a group structure, and compatibility on $B_R$ says precisely that $\\nu$ is a homomorphism. Its generic fibre is the isomorphism in Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Corollary A.4, proof: compatibility with the generic group law; verification of all group diagrams by flatness"
+   }
+  },
+  {
+   "text": "The special fibre is a finite-type geometrically reduced group over $\\bar k$, so [lem-sfb-geometrically-reduced-group-smooth] makes it smooth. The generic fibre is smooth as well. Since $C$ is a flat finite-type algebra over the Noetherian ring $R$, it has a finite presentation by [lem-weil-pbc-finite-type-noetherian-finite-presentation]. By [sbc-lem-smooth-criterion], these two smooth fibres make $\\mathcal N\\to\\operatorname{Spec}R$ smooth. It is affine and finite type by construction. This proves every asserted property of the special-fibre group.",
+   "uses": [
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Corollary A.4, proof: geometrically reduced group fibres imply smoothness"
+   }
+  },
+  {
+   "text": "The inclusion $B_R\\subset C$ is injective and integral by its definition, so [lem-weil-pbc-integral-injective-lying-over] proves that $\\nu$ is surjective on underlying spaces. For a prime $\\mathfrak p$ of $B_R/\\mathfrak m_RB_R$, lift it to a prime of $B_R$ containing $\\mathfrak m_RB_R$. Lying-over gives a prime of $C$ contracting to that prime; it contains $\\mathfrak m_RC$, so it gives a point above $\\mathfrak p$ in the special fibre. This proves special-fibre surjectivity without assuming injectivity on the quotient rings. The finite set of $B_R$-module generators of $C$ maps to generators of $C/\\mathfrak m_RC$ over $B_R/\\mathfrak m_RB_R$, proving finiteness of the special-fibre map. Finiteness of $\\nu$ was Step 2. No hypothesis on excellence of the original $A$ was used: the auxiliary complete $D$ was constructed in Step 1.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Section 3.3 (going-up); Corollary A.4; finiteness and surjectivity after reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-sfb-principal-regular-local-completion-dvr",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sfb-raynaud-faltings-normalized-reduction",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sfb-finite-normalization-local-dvr",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-dvr-normal-generic-reduced-special",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-integral-injective-lying-over"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Appendix A.2--A.4, Section 3.3 and Proposition 3.4, read online; local copy WANTED. Prescribed residue extension via Stacks 03C3 and completion, and affine Hopf algebra extension and diagram calculations written by Q20."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "After extending a discrete valuation ring an affine flat group scheme with smooth connected generic fibre has finite smooth normalization",
+   "results": "{\"t\": \"2026-10-24T02:00:17Z\", \"tool\": \"leanfinder\", \"query\": \"After extending a discrete valuation ring an affine flat group scheme with smooth connected generic fibre has finite smooth normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"c813f9500031e8fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization and smooth-chart/descent lemmas do not produce a DVR extension with finite smooth group normalization; no Raynaud potential-smoothness theorem was found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud potential smoothness of normalization of a group scheme over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T02:00:17Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud potential smoothness of normalization of a group scheme over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"beb6d0f029efabf4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization and smooth-chart/descent lemmas do not produce a DVR extension with finite smooth group normalization; no Raynaud potential-smoothness theorem was found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T02:00:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization and smooth-chart/descent lemmas do not produce a DVR extension with finite smooth group normalization; no Raynaud potential-smoothness theorem was found"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothen|Prasad|Raynaud|normalization",
+   "results": "{\"t\": \"2026-10-24T02:00:18Z\", \"tool\": \"grep\", \"query\": \"smoothen|Prasad|Raynaud|normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"eaf1feaf40fd07c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization and smooth-chart/descent lemmas do not produce a DVR extension with finite smooth group normalization; no Raynaud potential-smoothness theorem was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite smooth group model covering a flat affine model after a local extension of discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T02:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"Finite smooth group model covering a flat affine model after a local extension of discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"RingHom.Smooth.propertyIsLocal\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"47e9f1f3d0e19452\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization and smooth-chart/descent lemmas do not produce a DVR extension with finite smooth group normalization; no Raynaud potential-smoothness theorem was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine flat group scheme over any DVR with smooth geometrically connected generic fibre admits a henselian DVR extension with algebraically closed residue field and finite smooth normalization",
+   "results": "{\"t\": \"2026-10-24T03:02:04Z\", \"tool\": \"leanfinder\", \"query\": \"An affine flat group scheme over any DVR with smooth geometrically connected generic fibre admits a henselian DVR extension with algebraically closed residue field and finite smooth normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"8d94246a60e30887\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization supplies integral morphisms; smoothness results give flatness or local smooth charts, not finite smooth normalization of a group model after extension of a DVR."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T02:53:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization supplies integral morphisms; smoothness results give flatness or local smooth charts, not finite smooth normalization of a group model after extension of a DVR."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothen|Raynaud|normalization",
+   "results": "{\"t\": \"2026-10-24T03:02:00Z\", \"tool\": \"grep\", \"query\": \"smoothen|Raynaud|normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"d3a37eb2d6b30722\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization supplies integral morphisms; smoothness results give flatness or local smooth charts, not finite smooth normalization of a group model after extension of a DVR."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Potentially smooth finite normalization of an affine flat group model over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T03:02:01Z\", \"tool\": \"leansearch\", \"query\": \"Potentially smooth finite normalization of an affine flat group model over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"10df578cc511778f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization supplies integral morphisms; smoothness results give flatness or local smooth charts, not finite smooth normalization of a group model after extension of a DVR."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After local extension of a discrete valuation ring a smooth generic algebraic group model has a finite smooth group normalization",
+   "results": "{\"t\": \"2026-10-24T03:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"After local extension of a discrete valuation ring a smooth generic algebraic group model has a finite smooth group normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.Smooth.locally_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"cfa1495dc94a7f8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization supplies integral morphisms; smoothness results give flatness or local smooth charts, not finite smooth normalization of a group model after extension of a DVR."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasi-reductive-special-connectedness",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Section 3.3, Proposition 3.4 and Corollary A.4, with Theorem A.6; local-extension reductions at the beginning of Section 5 and following Lemma A.9, printed pp.5-6,9,27-30",
+   "via": [
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-model-potential-smooth-normalization",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Split the complete-residue-field construction, Raynaud--Faltings reduced-fibre input and DVR normality criterion. Wrote the affine extension of the three Hopf maps and every group diagram, fibrewise smoothness, and special-fibre lying-over argument. Three statement-only nodes; no Lean or compilation.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli/Chevalley chain, through the parent quasi-reductive special connectedness split. Current latest blueprint and all DAG nodes searched; no equivalent imported node. blueprint_refs.py ancestor prints None, inherited from the already reviewed parent; retained the null ancestor and exact inherited place, and prepended this item to every new via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "why": "Generic local-algebra residue-extension construction; realizes the specified residue field before the normalization theorem."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic smooth-scheme normality theorem, used for the generic fibre and its product; does not replace a unit-route step."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic commutative algebra: a complete Noetherian local ring is Nagata, so the integral closure of the complete DVR D in a finite, possibly inseparable, extension is finite (reviewer FIX, replaces a route-pivot-dropped citation)."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic commutative algebra: a domain finite over a complete Noetherian local ring is local and complete (reviewer FIX, replaces a route-pivot-dropped citation)."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic completeness-to-henselianity theorem for the constructed DVR."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic fibrewise criterion for smoothness, applied after extending the group law."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-complete-pair-henselian",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-acec14ff5",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-acec14ff5 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the 3 new nodes in full, plus every cited statement. The item statement is unchanged and not weakened. This is a first split of a proofless import, not a re-split.\n\nNew nodes, all true and not duplicates:\n(1) principal-regular-local-completion-dvr: proved directly. t is regular in the completion, ker = t^nD, the residue ring is a field, so every nonzero x is t^n times a unit and D is a DVR. Generalizes the completion step of Stacks 0328.\n(2) raynaud-faltings-normalized-reduction: Prasad-Yu A.2 is WANTED locally. Checked instead against local Stacks 09IL (more-morphisms l.19281), with Nagata from 032W. S2 normality plus generic smoothness of the fibres gives a geometrically reduced special fibre, and normality of E_F⊗L gives C⊗L ≅ E_F⊗L.\n(3) dvr-normal-generic-reduced-special: Serre R1+S2 (031S). Checked on xy=π, R[1/π] and 0.\n\nSteps: 1 (03C3 plus completion: A→D injective and local), 2 (flatness of E, 056T, then node 2), 4 (flat reduced pullback hypotheses: reduced, locally Noetherian, flat over k̄), 5 (monic transport for Δ, ι, ε; PID normal), 6 (flat targets embed in their localizations), 7 (047N, 00FP, smooth criterion) and 8 (lying-over, lifting the special-fibre primes, finiteness) are all correct.\n\nFIX: step 3 cited lem-per-complete-dvr-finite-normalization, which is on route-pivot-dropped.txt (line 1453); this delivery is the only thing that would make it reachable again. Repointed to lem-weil-pbc-complete-local-nagata (032W: R finite over D), lem-weil-pbc-finite-over-complete-local-product (0325: R local and complete) and lem-sfb-finite-normalization-local-dvr (R_q a DVR with q = m_R). All three are reachable at base and their closures contain no dropped ids. proof_deps, tool_uses and the step source (Stacks 032W/0325/00PD) are updated in the corrected item JSON.\n\nBatch-5 flag: lem-trf-smooth-geometrically-normal is generic Stacks 056T, neither the trace formula nor Poincaré duality nor a step of their proofs. Its closure has no trf/pod proof node except a generic pod base-change lemma, and it was reachable at base. Accepted.\n\nArtin-Gabber route: no Qbar/adic, Gabber or de Jong input is used, and the dropped cite is repointed. No SGA anywhere.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PotentialSmoothNormalization",
+  "declaration": "AlgebraicGeometry.PotentialSmoothNormalization.exists_potential_smooth_normalization",
+  "declarations": [
+   "AlgebraicGeometry.PotentialSmoothNormalization.affineOver",
+   "AlgebraicGeometry.PotentialSmoothNormalization.scalarArrow",
+   "AlgebraicGeometry.PotentialSmoothNormalization.coordinateBase",
+   "AlgebraicGeometry.PotentialSmoothNormalization.coordinateGeneric",
+   "AlgebraicGeometry.PotentialSmoothNormalization.coordinateClosure",
+   "AlgebraicGeometry.PotentialSmoothNormalization.normalizedModel",
+   "AlgebraicGeometry.PotentialSmoothNormalization.normalizationArrow",
+   "AlgebraicGeometry.PotentialSmoothNormalization.exists_potential_smooth_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PotentialSmoothNormalization.lean",
+  "statement": "theorem exists_potential_smooth_normalization (A B : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] [Module.Flat A B] [GrpObj (affineOver A B)] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (Ω : Type u) [Field Ω] [Algebra (IsLocalRing.ResidueField A) Ω] [IsAlgClosure (IsLocalRing.ResidueField A) Ω] (hsm : Smooth ((Over.pullback (scalarArrow A K)).obj (affineOver A B)).hom) (hconn : GeometricallyConnected ((Over.pullback (scalarArrow A K)).obj (affineOver A B)).hom) : ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : IsDiscreteValuationRing R) (_ : HenselianLocalRing R) (_ : Algebra A R) (_ : IsLocalHom (algebraMap A R)), Function.Injective (algebraMap A R) ∧ ∃ e : IsLocalRing.ResidueField R ≃+* Ω, e.toRingHom.comp (IsLocalRing.ResidueField.map (algebraMap A R)) = algebraMap (IsLocalRing.ResidueField A) Ω ∧ Module.Finite (coordinateBase A B R) (coordinateClosure A B R) ∧ ∃ (_ : GrpObj (normalizedModel A B R)), IsMonHom (normalizationArrow A B R) ∧ Smooth (normalizedModel A B R).hom ∧ IsAffine (normalizedModel A B R).left ∧ LocallyOfFiniteType (normalizedModel A B R).hom ∧ QuasiCompact (normalizedModel A B R).hom ∧ IsIso ((Over.pullback (scalarArrow R (FractionRing R))).map (normalizationArrow A B R)) ∧ IsFinite (normalizationArrow A B R).left ∧ Surjective (normalizationArrow A B R).left ∧ Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (e.toRingHom.comp (IsLocalRing.residue R))))).obj (normalizedModel A B R)).hom ∧ IsAffine ((Over.pullback (Spec.map (CommRingCat.ofHom (e.toRingHom.comp (IsLocalRing.residue R))))).obj (normalizedModel A B R)).left ∧ LocallyOfFiniteType ((Over.pullback (Spec.map (CommRingCat.ofHom (e.toRingHom.comp (IsLocalRing.residue R))))).obj (normalizedModel A B R)).hom ∧ QuasiCompact ((Over.pullback (Spec.map (CommRingCat.ofHom (e.toRingHom.comp (IsLocalRing.residue R))))).obj (normalizedModel A B R)).hom ∧ IsFinite ((Over.pullback (Spec.map (CommRingCat.ofHom (e.toRingHom.comp (IsLocalRing.residue R))))).map (normalizationArrow A B R)).left ∧ Surjective ((Over.pullback (Spec.map (CommRingCat.ofHom (e.toRingHom.comp (IsLocalRing.residue R))))).map (normalizationArrow A B R)).left",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the actual integral closure in the actual generic tensor algebra. The normalization arrow is constructed canonically into the pullback of the original model; generic and special maps are its pullbacks. The special-fibre group law is inherited canonically by the monoidal pullback functor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce66310a4",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Every node clause matches the Lean theorem: DVR A with arbitrary K and IsAlgClosure Ω, GrpObj (affineOver A B) with FiniteType and Flat, smooth and geometrically connected generic fibre; existential henselian DVR R with local injective A→R and compatible e : ResidueField R ≃+* Ω; C = integralClosure (R⊗[A]B) ((R⊗[A]B)⊗[R] FractionRing R) is a finite B_R-module; ∃ GrpObj on Spec C with IsMonHom of the canonical pullback.lift arrow ν, smooth/affine/finite type, ν_L IsIso, special fibre over Ω smooth/affine/finite type, ν and ν_Ω IsFinite and Surjective. The group laws on G_R and on the special fibre are the canonical ones under the monoidal Over.pullback. The lean.statement is verbatim and the theorem is sorry. No extra assumptions; the single universe u loses no generality. The 8 stmt_dep records are consistent. No duplicate or name clash in side-live Lean or Mathlib. The helpers are real data, docstrings carry the source place and blueprint, and all imports exist. The report has a Worker report and a Second reading section. Not compiled, as instructed."
+ }
+}

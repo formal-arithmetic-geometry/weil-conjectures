@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-normalized-integral-scalar-tensor-descent",
+ "kind": "statement",
+ "title": "Descent of the normalized integral scalar tensor comparison",
+ "statement": "For prime ell, finite E,L over Q_ell, an embedding iota:E→L and a scheme W, ordinary derived scalar extension commutes with the recorded completed tensor by exactly one natural isomorphism whose component on each good pair P,Q is the localization of scalarTensorChain, conjugated by integralCompletedTensorComparison and the exact scalar mapDerivedCategoryFactors. This is the literal good-pair normalization of scalarTensorOrdinary_existsUnique, extracted as a proved helper solely to separate compilation of its descent proof from the preceding pullback and Hom proofs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; categories.tex, Tag 04VK (fully faithful localization descent)."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the completely proved integralScalarTensorRepresentativeDescent to the explicit integralScalarTensorGoodIso construction. Its proved hom-component formula rewrites the representative square into the desired scalarTensorChain normalization verbatim. The existing theorem then applies this fully proved helper. The explicit construction avoids unpacking an unnecessary existential package.",
+   "uses": [
+    "def-pur-integral-scalar-tensor-good-iso",
+    "lem-pur-integral-scalar-tensor-representative-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0941; categories.tex, Tag 04VK (fully faithful localization descent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-scalar-tensor-good-iso",
+  "lem-pur-integral-scalar-tensor-representative-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; categories.tex, Tag 04VK (fully faithful localization descent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar extension commutes with completed tensor product via the normalized Roos comparison",
+   "results": "Algebraic adic completion/tensor results only; no specified sheaf Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing generic functor-square descent and the project strict models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsLocalization\"",
+   "results": "Ring localization/tensor base-change results; no such representative-normalized natural isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorChain|scalarOperationsOrdinary_tower",
+   "results": "No Mathlib hits from msearch. Local source has the existing scalarTensorOrdinary_existsUnique hole and its normalization, not a completed proof. The helper extracts its actual descent proof, as previous normalized-comparison helpers do.",
+   "date": "2026-10-27",
+   "verdict": "Compile-time extraction of a proved argument, with no new hole."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with derived completed tensor through a normalized Roos quasi-isomorphism",
+   "results": "Eight results: ModuleCat.ExtendScalars.obj′, algebraic adic-completion tensor/scalar lemmas, ring-localization scalar extension; none concerns the specified sheaf Roos maps or normalized representative descent.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement. Retain the stated strict-model comparison and generic functor-square localization descent."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-27",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final coefficient compatibility paragraph; normalized scalar/tensor comparison, good-representative descent.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralScalarTensorComparison",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralScalarTensorComparison.lean",
+  "declaration": "WeilConjectures.normalizedIntegralScalarTensorComparison",
+  "statement": "theorem normalizedIntegralScalarTensorComparison :\n    ∃! α : integralCompletedTensor l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅\n      (integralOrdinaryDerivedScalar l E L ι W).prod\n        (integralOrdinaryDerivedScalar l E L ι W) ⋙ integralCompletedTensor l L W,\n      ∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory,\n        (integralOrdinaryDerivedScalar l E L ι W).map\n            ((integralCompletedTensorComparison l E W).hom.app (P, Q)) ≫\n          (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app\n            ((integralOperationsTensorComplexFunctor l E W).obj (P.obj, Q.obj)) ≫\n          DerivedCategory.Q.map (scalarTensorChain l E L ι W P.obj Q.obj) =\n        α.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n          (integralCompletedTensor l L W).map\n            (CategoryTheory.Prod.mkHom\n              ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj)\n              ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app Q.obj)) ≫\n          (integralCompletedTensorComparison l L W).hom.app\n            (⟨_, scalarGood l E L ι W P⟩, ⟨_, scalarGood l E L ι W Q⟩)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T112413-L-1580371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T112413-L-1580371",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

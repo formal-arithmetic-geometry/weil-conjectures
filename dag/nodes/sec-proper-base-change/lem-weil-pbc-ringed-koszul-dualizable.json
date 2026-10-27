@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-dualizable",
+ "kind": "statement",
+ "title": "Dualizability of the actual finite positive Koszul stages",
+ "statement": "For every small ringed site (C,J,O), natural r, family b of r global sections, and natural m, the actual complex (ringedKoszulDiagram O r b).obj m of [def-weil-pbc-ringed-koszul-system] is dualizable in the ordinary symmetric monoidal category of cochain complexes of O-module sheaves. No regularity or invertibility hypothesis on b is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex, example-dual immediately before lemma-left-dual-complex and Tag 08JJ (lemma-dual-perfect-complex); the bounded-complex dual construction is also proved in WeilConjectures.Algebra.Homology.Monoidal.Dual."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "A single Koszul factor is a double complex with the unit in degrees zero and one and zero elsewhere. Its terms are dualizable, and it is strictly bounded between zero and one. Apply the proved CochainComplex.isDualizable_of_isStrictlyGE_of_isStrictlyLE theorem.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on r using the actual recursive definition of ringedKoszulDiagram. The empty product is the tensor unit, which is dualizable; each successor is a tensor product of the first dualizable factor and the induction hypothesis. Apply IsDualizable.tensorObj.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex, example-dual immediately before lemma-left-dual-complex and Tag 08JJ (lemma-dual-perfect-complex); the bounded-complex dual construction is also proved in WeilConjectures.Algebra.Homology.Monoidal.Dual.",
+  "note": "Specialization of proved project monoidal closed and bounded-complex duality APIs; signs and unit conventions are checked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For bounded finite free cochain complexes, tensor with the dual is naturally isomorphic to the internal Hom complex",
+   "results": "Tensor-Hom equivalences for finite free modules and closedOfHasLeftDual; no signed ringed-site Hom comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing closed-category evaluation and the project bounded-complex duality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLeftDual\"",
+   "results": "Duals of the tensor unit and tensor products, closedOfHasLeftDual, and the braided conversion from right to left duals.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients only; no actual Koszul-stage comparison or normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite free modules is dualizable, and tensoring with its dual computes the internal Hom.",
+   "results": "dualTensorHomEquiv, dualTensorHomEquivOfBasis and module dual finiteness results; no theorem for actual ringed-site complexes.",
+   "date": "2026-10-26",
+   "verdict": "Module-level ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|isDualizable_of_isStrictlyGE_of_isStrictlyLE|homComplexFunctorObjIsoInternalHom",
+   "results": "Mathlib grep service: zero hits. Local project-source search finds proved canonical dual-pair evaluation, bounded-complex dualizability, and signed ordinary-Hom/internalHom comparison. No existing declaration supplies the specialization and coherence statements here. Blueprint searches tensor evaluation and dualizable complex found no duplicate node.",
+   "date": "2026-10-26",
+   "verdict": "Reuse all three existing proved results; add only their specialization and coherence proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulFiniteEvaluation",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Supporting finite Koszul evaluation and completion-unit identification below the inherited ancestor def-weil-pbc-completed-pullback. In the current latest blueprint, the corresponding place is lemma-weil-pbc-completed-pullback-reduction: the displayed identification of completed inverse image with R inverse limit of reductions, together with the completion map in clause (2).",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-finite-evaluation",
+    "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulDualizable",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulDualizable.lean",
+  "declaration": "CategoryTheory.ringedKoszulStage_dualizable",
+  "statement": "theorem ringedKoszulStage_dualizable (r : ℕ)\n    (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :\n    IsDualizable ((ringedKoszulDiagram O r b).obj m)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T001241-L-4178767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T001241-L-4178767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

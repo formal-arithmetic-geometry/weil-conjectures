@@ -1,0 +1,146 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Step (4), associativity and unit; Stacks Project sites-modules.tex, Section 03EK; homology localization and constructibility transport."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "description": "Explicit substep of the existing finite-filtration argument, retaining the actual coefficient maps and tensor constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat complex over a discrete valuation ring has constructible cohomology bounded in the same interval modulo every power of a uniformizer if its residue reduction does",
+   "results": "No exact sheaf theorem. Returned BDeRham, PreTilt, Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField, Module.IsLocalRing.linearCombination_bijective_of_flat and AdicCompletion.flat_of_isNoetherian.",
+   "date": "2026-10-25",
+   "verdict": "generic infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.Quotient\", \"IsDiscreteValuationRing\"",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]calar|[Ss]calar.*constructible|uniformizer.*filtration",
+   "results": "No Mathlib hits for this pattern. Separate project rg searches found finite-field scalar extension and filtered tensor bounds.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctorFactors\"",
+   "results": "DerivedCategory.homologyFunctorFactors and the homotopy-category variants; used for localization homology comparison.",
+   "date": "2026-10-25",
+   "verdict": "generic infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant regular module sheaf is the tensor unit; tensoring a complex of sheaves of modules with the regular coefficient module gives the same complex",
+   "results": "SheafOfModules.unit and unitHomEquiv, FGModuleCat.tensorUnit_obj, presheaf tensor and condensed monoidal instances. Project rg then found the proved regularIso helper.",
+   "date": "2026-10-25",
+   "verdict": "generic infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarFiniteLevelBounds",
+  "date": "2026-10-26",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "place": "Final paragraph of def-weil-rationalization-karoubi: finite target levels of integral scalar extension; parent finite-level-bounds proof steps 1--3.",
+   "via": [
+    "lem-sf-integral-scalar-finite-level-bounds",
+    "lem-weil-integral-scalar-extension-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "id": "lem-sf-integral-scalar-regular-tensor-comparison",
+ "title": "Regular coefficient tensor and the finite scalar complex",
+ "statement": "For every complex P of completed O_E module sheaves, without a good-complex or boundedness hypothesis, and every n>=0, let B=ULift(O_L/pi_L^(n+1)). The regular-coefficient complex filteredCoefficientTensorComplex Y B R rho P B of [lem-sf-filtered-coefficient-tensor-bounds] is isomorphic as a cochain complex of B_Y-modules to integralScalarFiniteComplex(P) of [def-weil-integral-scalar-extension]. Consequently, for every i, their homology sheaves agree on vanishing, and finite-model constructibility of the first is equivalent to intrinsic geometric-stalk constructibility of the localized second [def-weil-proetale-constructible-sheaf].",
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The sheafification of the constant regular B-module is the tensor unit B_Y. Apply the tensor-right presentation comparison, the isomorphism of this regular module with the unit, and the right unitor. The resulting natural isomorphism identifies the objectwise coefficient tensors. Naturality makes it commute with every differential. The equality to integralScalarReductionConcrete gives the actual specified finite scalar complex.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply homology to the complex isomorphism and compose with DerivedCategory.homologyFunctorFactors. Zero objects are preserved and reflected by this isomorphism. The two constructibility predicates are identified by their existing equivalences with fixed-module constructibility, and intrinsic constructibility is transported across the isomorphism. No support interval or residue hypothesis is involved.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-sf-filtered-coefficient-tensor-bounds",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarRegularTensorComparison",
+  "file": "lean/Sheaf/Paper/IntegralScalarRegularTensorComparison.lean",
+  "declaration": "WeilConjectures.integralScalarRegularTensorIso",
+  "declarations": [
+   "WeilConjectures.integralScalarRegularTensorIso",
+   "WeilConjectures.integralScalarRegularTensorComparison"
+  ],
+  "statement": "theorem integralScalarRegularTensorIso\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :\n    let B := ULift.{u + 1} (Padic.coefficientExtensionRing l L (n + 1))\n    Nonempty (filteredCoefficientTensorComplex Y B\n      (completedIntegralCommRingSheafUnrestricted l E Y)\n      (integralScalarRho l E L ι Y n) P (ModuleCat.of B B) ≅\n        (integralScalarFiniteComplex l E L ι Y n).obj P)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T213321-L-320271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T213321-L-320271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,181 @@
+{
+ "id": "def-pd-section-representative-tensor-arrow",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "definition",
+ "title": "Canonical component interfaces for the fixed representative tensor comparisons",
+ "statement": "Using the fixed localization and normalized tensors of [def-pd-section-derived-tensor-data], their representative transformation of [def-pd-section-derived-realization], and the canonical cochain types of [def-pd-section-cochain-tensor-comparison], for the fixed exact internal/section module equivalence E_T, its derived equivalence G_T and the prescribed section tensor, define cochainLocalizationIso_T(A) to be the existing localization comparison κ_A, now with target q(E_T A) expressed using cochainSectionEquivalence. Define derivedSectionTensorIso_T(M,N) to be the component θ_(M,N) of the existing tensorComparison, with canonical internal derived tensor source. Define qTensorArrow_T(P,Q) to be precisely qTensor_T.app(P,Q), with codomain q(P ⊗ Q) expressed using the canonical signed cochain tensor. These are the same specified maps and isomorphisms, for all complexes and all derived objects. Their API records naturality of all three components and the defining representative square G_T(μ) ≫ κ_(A⊗B) ≫ q(t_(A,B)) = θ_(qA,qB) ≫ tensor(κ_A,κ_B) ≫ qTensorArrow(E_T A,E_T B). No resolving, flatness or boundedness assumption is added. The internalQTensorArrow component is the existing lax monoidal localization map μ : q(A) ⊗ q(B) → q(A ⊗ B), with its canonical all-complex naturality square. Retain the existing internal chosen localization, its category structure, and its derived monoidal structure data as compact named instance aliases. These aliases return the original instances definitionally; they choose no new model or monoidal structure. The internal and section cochain unit objects are the existing canonical tensor units. cochainUnitComparison, internalPullUnitArrow and sectionPullUnitArrow retain the existing total unit comparison and pullback unit maps with these fixed endpoints. Their ordinary compatibility square follows by cancelling the inverse comparison factors in the specified oplax unit clause. Also retain the full original internal derived MonoidalCategory and typed aliases for the internal localization Q, derived section functor G, and internal derived pullback L. The latter returns the raw leftDerivedFunctor read by comparisonSource. derivedPullSquare is the original derivedPullComparison with these same source and target functors.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05RU, 06YU and 07A4. Component interfaces for the already specified localization and tensor comparisons; agent refinement of the canonical representative-square calculation."
+ },
+ "stmt_deps": [
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-cochain-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pd-section-total-oplax-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Return the existing sectionLocalizationComparison, tensorComparison.app and qTensor.app directly, with their component source and target types written using canonical cochain and derived tensors. They introduce no choice or different map. The object equation totalTensor_obj_tensor identifies the signed-total object with the canonical cochain tensor. Also return the fixed internal localization lax tensor map μ directly with canonical tensor component types.",
+   "uses": [
+    "def-pd-section-derived-realization",
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of mapDerivedCategoryFactors.hom, tensorComparison.hom and qTensor respectively to the given map or pair of maps. Unfold the fixed cochain and derived equivalence interfaces, use the uncurried tensor map formula and totalTensor_map, and retain the displayed canonical component types. The internal localization component obeys the existing LaxMonoidal.μ_natural axiom.",
+   "uses": [
+    "def-pd-section-derived-realization",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the first, all-complex clause of TensorRepresentativeCondition for the uniquely normalized qTensor. Multiply its equation by the forward tensor comparison and by the tensor of the forward localization factors. Functoriality combines each pair of maps, and both inverse laws cancel the prescribed inverse factors. The remaining localized total comparison is exactly κ_(A⊗B) followed by localization of cochainTensorComparison. This gives the stated representative square with the fixed components. For the current component API, apply internalLocalizationTensorMap_app and sectionTotalComparison_eq to identify the named transformations with their original components.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists-unique",
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expose the unchanged totalTensor object as the canonical cochain tensor in the interface’s fixed structure arguments. Its map on a pair is tensorHom by the defining right-whisker then left-whisker formula. No definition in the existing data module changes.",
+   "uses": [
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Name the existing internal HasDerivedCategory instance, its Category instance, its full MonoidalCategory and the latter’s structure-data projection. Each returns the existing instance; no new localization, tensor or coherence map is chosen. The typed internalLocalizationFunctor and derivedSectionFunctor return the original Q and G. internalDerivedPullFunctor returns the raw leftDerivedFunctor, exactly the source returned by comparisonSource in internalDerivedPullback. derivedPullSquare returns the existing comparison. These aliases occur after the original tensor-data and realization modules, retaining their existing generated declarations and instance environment.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Name the two existing cochain units, their fixed unit comparison, and the actual internal and section pullback unit maps. Apply the unit clause of section_oplax_total_comparison, then compose by the forward termwise pull comparison and pullback of the forward unit comparison. The inverse laws cancel the two inverse factors. This gives cochainPullUnitCompatibility before localization and constructs no new unit data.",
+   "uses": [
+    "def-pd-section-total-oplax-comparison-data",
+    "lem-pd-section-oplax-total-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-cochain-tensor-comparison",
+  "lem-pd-section-tensor-representatives-exists-unique",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pd-section-total-oplax-comparison-data",
+  "lem-pd-section-oplax-total-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05RU, 06YU and 07A4; existing component maps with their canonical defining equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "qTensorArrow|cochainTensorNaturalIso",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "Use the existing qTensor, tensorComparison and localization factor directly. The new interface only fixes their component types and exposes their existing naturality and representative normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'NatIso.ofComponents'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "Use the existing qTensor, tensorComparison and localization factor directly. The new interface only fixes their component types and exposes their existing naturality and representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and normalization of a fixed derived tensor representative map on cochain complexes",
+   "results": "{\"n_hits\": 8, \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.tensorHom\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\"], \"note\": \"\", \"digest\": \"733f9796647a2ea0\"}",
+   "date": "2026-10-26",
+   "verdict": "Use the existing qTensor, tensorComparison and localization factor directly. The new interface only fixes their component types and exposes their existing naturality and representative normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolutionConjugationIdentities",
+  "date": "2026-10-26",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-pd-section-resolution-conjugation-identities",
+   "place": "Canonical component types and representative square of the specified comparisons.",
+   "via": [
+    "def-pd-section-derived-realization",
+    "def-pd-section-derived-tensor-data"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionRepresentativeTensorArrow",
+  "file": "lean/Sheaf/Paper/SectionRepresentativeTensorArrow.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.qTensorArrow",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.compactInternalHasDerivedCategory",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.compactInternalDerivedCategory",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.compactInternalDerivedMonoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.compactInternalDerivedMonoidalStruct",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalLocalizationFunctor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedSectionFunctor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalDerivedPullFunctor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedPullSquare",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainUnitComparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalPullUnitArrow",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionPullUnitArrow",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainPullUnitCompatibility",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalTensor_obj_tensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalTensor_map",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalQTensorArrow",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalQTensorArrow_naturality",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainLocalizationIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.cochainLocalizationIso_naturality",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedSectionTensorIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedSectionTensorIso_naturality",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.qTensorArrow",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.qTensorArrow_naturality",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.qTensorArrow_normalization"
+  ],
+  "statement": "def qTensorArrow (T : Scheme.{u})\n    (P Q : CochainComplex (modules Λ T) ℤ) :\n    (tensor Λ T).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⟶\n      DerivedCategory.Q.obj (P ⊗ Q)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f206",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T182250-L-3543761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f206",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T182250-L-3543761",
+  "kind": "interface",
+  "note": "independent cc review: delivered SectionResolutionConjugationIdentities + 2 new modules + 4 adapted modules vs clone dce325f: old item predicates re-elaborated in scratch equal the new ones by with_unfolding_all rfl; #print axioms clean (no sorryAx); totalTensor/internalTotalTensor binders identical to published; sandbox chain plus 15 further users compiled OK; PESMF SLOW pre-existing (published 96 s concurrently)"
+ }
+}

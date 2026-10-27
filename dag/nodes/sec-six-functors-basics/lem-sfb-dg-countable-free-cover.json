@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-dg-countable-free-cover",
+ "kind": "statement",
+ "title": "Countable two-layer DG free cover surjective on cocycles",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(A,d_A)$ be an associative unital $\\mathbf Z$-graded ring with $d_A:A^i\\to A^{i+1}$, $d_A^2=0$, and $d_A(ab)=d_A(a)b+(-1)^ia\\,d_A(b)$ for $a\\in A^i$. A right differential graded $A$-module means a graded right $A$-module $M$ with $d_M:M^j\\to M^{j+1}$, $d_M^2=0$, and $d_M(ma)=d_M(m)a+(-1)^jm\\,d_A(a)$ for $m\\in M^j$. Cohomology is $H^i(M)=\\ker(d_M:M^i\\to M^{i+1})/\\operatorname{im}(d_M:M^{i-1}\\to M^i)$; a quasi-isomorphism is a DG module map inducing isomorphisms on all these groups. Countable means countable in the sense of [def-sfb-countable-set]. Assume the set $\\coprod_i A^i$ is countable. Let $M$ be a right differential graded $A$-module such that $\\coprod_i M^i$ is countable. There exist a DG module map $\\pi:Q\\to M$, disjoint countable sets $U,V$, integers $t_w$ for $w\\in U\\amalg V$, and a homogeneous graded right $A$-basis $(e_w)_{w\\in U\\amalg V}$ of $Q$, with $|e_w|=t_w$, such that $\\pi:Q^k\\to M^k$ and $\\ker(d_Q:Q^k\\to Q^{k+1})\\to\\ker(d_M:M^k\\to M^{k+1})$ are surjective for every $k$. For $u\\in U$ one has $d_Q(e_u)=0$, and for $v\\in V$ one has $d_Q(e_v)\\in\\bigoplus_{u\\in U}e_uA$. In particular $\\coprod_i Q^i$ is countable, $Q_U=\\bigoplus_{u\\in U}e_uA$ is a DG submodule, and the inclusion $Q_U\\hookrightarrow Q$ splits as a graded module map; $Q_U$ and $Q/Q_U$ are direct sums of shifts of $A$ as DG modules.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KN, lemma-good-quotient, statement and proof, with the countability refinement invoked in Tag 0CRM, lemma-countable, proof (2) to (1)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-countable-set"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=\\coprod_{k\\in\\mathbf Z}M^k$ and $Z=\\{(k,z)\\in E:d_Mz=0\\}$. For each $(k,m)\\in E$ take distinct symbols $x_{k,m},y_{k,m}$ in degrees $k,k+1$, and for each $(k,z)\\in Z$ take a symbol $s_{k,z}$ of degree $k$. Let $V$ be the set of $x$ symbols and $U$ the set of $y$ and $s$ symbols, with their displayed degrees $t_w$. These are disjoint countable sets: restrict the given injection $E\\to\\mathbf N$ to $Z$, and encode the three symbol types by $3c,3c+1,3c+2$. Define $Q^n=\\bigoplus_{w\\in U\\amalg V}A^{n-t_w}$, explicitly the finite-support families of coefficients in the indicated additive groups. Addition is coordinatewise; the right action is $(e_wa)b=e_w(ab)$, extended additively. Associativity and the unit law follow on each coordinate from those of $A$. Thus the formal $e_w$ form a homogeneous graded right $A$-basis.",
+   "uses": [
+    "def-sfb-countable-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "Define an additive degree-one map $D$ on finite sums by\n$$D(e_wa)=\\delta_wa+(-1)^{t_w}e_wd_Aa,\\qquad \\delta_{x_{k,m}}=e_{y_{k,m}},\\quad\\delta_y=\\delta_s=0.$$\nThe formula is well-defined because coefficients have unique coordinates, $d_A$ is additive, and finite sums remain finite; its terms have degree $t_w+|a|+1$. The Leibniz identity on a coordinate follows by expanding $d_A(ab)$:\n$$D(e_wab)=\\delta_wab+(-1)^{t_w}e_wd_A(a)b+(-1)^{t_w+|a|}e_wa\\,d_A(b)=D(e_wa)b+(-1)^{t_w+|a|}e_wa\\,d_A(b).$$\nIt extends to homogeneous finite sums by additivity. Also $d_A(1)=0$, since applying the Leibniz identity to $1\\cdot1$ gives $d_A(1)=d_A(1)+d_A(1)$. Hence $D(e_w)=\\delta_w$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "For a $y$ or $s$ symbol, $D^2(e_wa)=e_wd_A^2(a)=0$. For $w=x_{k,m}$, expand twice to get\n$$D^2(e_wa)=(-1)^{k+1}e_{y_{k,m}}d_Aa+(-1)^ke_{y_{k,m}}d_Aa+e_wd_A^2a=0.$$\nHere $D(e_y)=0$ and $|y|=k+1$ are used. Additivity gives $D^2=0$ on every $Q^n$. Therefore $d_Q=D$ makes the constructed graded module a DG module, and $d_Q(e_u)=0$, $d_Q(e_v)\\in\\bigoplus_{u\\in U}e_uA$ hold exactly as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "Define $p_x=m$, $p_y=d_Mm$ for the symbols indexed by $(k,m)$, and $p_s=z$ for the symbol indexed by $(k,z)$. Set $\\pi(\\sum_we_wa_w)=\\sum_wp_wa_w$. This is an additive degree-zero right $A$-module map by the associativity and distributivity axioms. The three assignments satisfy $d_Mp_w=\\pi(\\delta_w)$: for $x$ this is the definition of $p_y$, for $y$ it is $d_M^2m=0$, and for $s$ it is the defining equation of $Z$. The module Leibniz identity then gives\n$$d_M(p_wa)=\\pi(\\delta_w)a+(-1)^{t_w}p_wd_Aa=\\pi D(e_wa).$$\nSumming proves that $\\pi$ is a DG module map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "For every $m\\in M^k$, the element $e_{x_{k,m}}\\in Q^k$ maps to $m$, proving degreewise surjectivity. For every $z\\in\\ker(d_M:M^k\\to M^{k+1})$, the element $e_{s_{k,z}}$ has degree $k$, differential zero, and image $z$. Hence the restriction of $\\pi$ to cocycles is surjective in every degree. This uses actual cocycles, not merely representatives of cohomology classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "Here is the countability check for the entire homogeneous disjoint union. Fix injections of $U\\amalg V$ and $\\coprod_i A^i$ into $\\mathbf N$. For $r\\in\\mathbf N$ let $T_r\\subseteq\\coprod_nQ^n$ consist of elements with at most $r$ nonzero coordinates. A member is determined by its degree $n$ and its list of nonzero coordinate/coefficient pairs sorted by the injective coordinate labels. For each fixed list length at most $r$, these are finitely many natural-number labels; encode them by iterating the injective pairing $(a,b)\\mapsto 2^a(2b+1)-1$, also recording the length and the degree (encode $n\\geq0$ by $2n$ and $n<0$ by $-2n-1$). This gives an injection $T_r\\to\\mathbf N$; injectivity of the pairing follows by removing the unique power of $2$ from its value plus $1$. The cited countable-union statement now applies to $\\bigcup_{r\\in\\mathbf N}T_r=\\coprod_nQ^n$. Thus $Q$ is countable. Only finite lists occur, not an infinite product.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "The coordinate submodule $Q_U=\\bigoplus_{u\\in U}e_uA$ is stable under $D$, since $D(e_ua)=(-1)^{t_u}e_ud_Aa$. The coordinate projection that kills all $x$ symbols and fixes $y,s$ is a graded right $A$-linear retraction of $Q_U\\hookrightarrow Q$. The quotient has basis the classes $\\bar e_v$, $v\\in V$, and its differential is $D(\\bar e_va)=(-1)^{t_v}\\bar e_vd_Aa$, because $\\delta_v$ lies in $Q_U$. A generator in degree $t$ with this differential is a copy of $A[-t]$: explicitly $A[-t]^n=A^{n-t}$, $d_{A[-t]}=(-1)^td_A$, with unchanged right action. The maps $a\\mapsto e_ua$ and $a\\mapsto\\bar e_va$ therefore identify $Q_U$ and $Q/Q_U$, respectively, with the indicated direct sums of shifts, including their differentials. No DG splitting of $Q$ is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1). Shift convention: definition-shift in the same document."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-countable-set",
+  "lem-trf-countable-unions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KN, lemma-good-quotient, proof; countable refinement in Tag 0CRM, lemma-countable, proof (2) to (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "good.quotient|surject.*cocycl|surject.*cycles|two.step.*free",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Differentials.lean, Mathlib/Algebra/Homology/ShortComplex/Ab.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: maps from single-degree complexes and ordinary projective module covers do not supply this DG cover with its two layers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"surjective\", \"cycles\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: maps from single-degree complexes and ordinary projective module covers do not supply this DG cover with its two layers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A differential graded module has a free cover surjective on elements and cycles with two step free graded filtration",
+   "results": "8 hits: ModuleCat.projectiveResolution, IsModuleFiltration.toIsFiltration, IsModuleFiltration, IsModuleFiltration.toGradedSMul, groupHomology.instEpiModuleCatH2π, ModuleCat.FilteredColimits.M.mk_surjective, IsModuleFiltration.mk_int, Module.Relations.surjective_toQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: maps from single-degree complexes and ordinary projective module covers do not supply this DG cover with its two layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded module disk generators x y with dx equals y cover arbitrary cochains and extra sphere generators cover all cycles",
+   "results": "8 hits: CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective, CochainComplex.HomComplex.Cocycle.toSingleMk_surjective, CochainComplex.HomComplex.Cochain.fromSingleMk_surjective, CochainComplex.HomComplex.Cochain.toSingleMk_surjective, CochainComplex.ConnectData.X, CochainComplex.ConnectData, CochainComplex.ConnectData.cochainComplex, CochainComplex.cm5b.I_d",
+   "date": "2026-10-24",
+   "verdict": "no match: maps from single-degree complexes and ordinary projective module covers do not supply this DG cover with its two layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every countable differential graded module over a countable dg algebra admits a degreewise and cocycle surjection from a countable two step extension of direct sums of shifts of the algebra",
+   "results": "8 hits: CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective, CochainComplex.HomComplex.Cocycle.toSingleMk_surjective, CategoryTheory.ProjectiveResolution.extMk_surjective, CochainComplex.HomComplex.Cochain.fromSingleMk_surjective, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b, CochainComplex.HomComplex.Cochain.toSingleMk_surjective, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-24",
+   "verdict": "no match: maps from single-degree complexes and ordinary projective module covers do not supply this DG cover with its two layers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded module admits a two layer graded free cover surjective on all cochains and all cocycles",
+   "results": "{\"t\": \"2026-10-24T00:35:01Z\", \"tool\": \"leanfinder\", \"query\": \"A differential graded module admits a two layer graded free cover surjective on all cochains and all cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective\", \"CochainComplex.IsKProjective\", \"CochainComplex.HomComplex.Cochain.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\"], \"digest\": \"bb09af456fb7c217\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HomComplex single-source cocycle parametrizations, short-complex exactness, and Kaehler differentials do not construct a free cover of modules over a DG algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Differential\", \"Module\"",
+   "results": "{\"t\": \"2026-10-24T00:35:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Differential\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"instModuleKaehlerDifferentialOfSMulCommClass\", \"instModuleTensorProductKaehlerDifferential\", \"KaehlerDifferential.submodule_span_range_eq_ideal\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal'\", \"PresheafOfModulesOfCommRing.HasDifferentials\"], \"digest\": \"671638ef589f368f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HomComplex single-source cocycle parametrizations, short-complex exactness, and Kaehler differentials do not construct a free cover of modules over a DG algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "good.quotient|surject.*cocycl|two.step.*free",
+   "results": "{\"t\": \"2026-10-24T00:35:02Z\", \"tool\": \"grep\", \"query\": \"good.quotient|surject.*cocycl|two.step.*free\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean\"], \"digest\": \"8e45c37d6224d2d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HomComplex single-source cocycle parametrizations, short-complex exactness, and Kaehler differentials do not construct a free cover of modules over a DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable two stage free differential graded module surjecting onto a module and its cycles",
+   "results": "{\"t\": \"2026-10-24T00:38:09Z\", \"tool\": \"leansearch\", \"query\": \"Countable two stage free differential graded module surjecting onto a module and its cycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.exact_iff_surjective_moduleCatToCycles\", \"Module.finitePresentation_of_free_of_surjective\", \"CategoryTheory.ShortComplex.ShortExact.surjective_g\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"CategoryTheory.ShortComplex.exact_iff_surjective_abToCycles\", \"CategoryTheory.ShortComplex.cyclesIsKernel\", \"CategoryTheory.ShortComplex.cycles\", \"Module.Finite.kerRepr\"], \"digest\": \"f8506fadbcc5891b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HomComplex single-source cocycle parametrizations, short-complex exactness, and Kaehler differentials do not construct a free cover of modules over a DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free differential graded module on disks and spheres admits a surjection to any differential graded module inducing surjections on cocycles",
+   "results": "{\"t\": \"2026-10-24T00:38:17Z\", \"tool\": \"leanfinder\", \"query\": \"A free differential graded module on disks and spheres admits a surjection to any differential graded module inducing surjections on cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\", \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"CochainComplex.HomComplex.Cochain.toSingleMk_surjective\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"CochainComplex.IsKProjective\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\"], \"digest\": \"45b9a9df26574f6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HomComplex single-source cocycle parametrizations, short-complex exactness, and Kaehler differentials do not construct a free cover of modules over a DG algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-semi-free-resolution",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRM, lemma-countable, proof (2) to (1), countable module representative and countable property-(P) resolution paragraphs; Tags 09KN, lemma-good-quotient, and 09KP, lemma-resolve. The homogeneous basis and height are the graded splittings in property (P). Supporting subargument: Tag 09KN, lemma-good-quotient, statement and proof, with the countability refinement invoked in Tag 0CRM, lemma-countable, proof (2) to (1).",
+   "via": [
+    "lem-sfb-dg-countable-semi-free-resolution",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-countable-free-cover",
+  "worker": "stage1",
+  "summary": "Expanded the disk-and-cocycle construction of 09KN with all graded signs and explicit finite-support coordinates. Proved both surjections and both DG shift identifications; made the countability refinement of 0CRM explicit using the existing countable-union Mathlib leaf. Statement unchanged and no new nodes.",
+  "blueprint": "Realizes the inherited supporting subargument for proof (3) of det-thm-sf-ctf-stability-direct-images in the latest blueprint: 0CRM countable property-(P) resolution via 09KN. Steps 1-5 construct the cover, step 6 proves countability, step 7 supplies the two-layer DG filtration. The inherited ancestor is null (blueprint_refs.py ancestor); no new blueprint identity is invented.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-68a637f2e",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-68a637f2e (reviewer sub-agent of L); spot-checked: I read the item and its 7 steps in full against Stacks dga.tex 09KN lemma-good-quotient (l.2272-2302), definition-shift (l.250-290) and 0CRM lemma-countable (l.7071-7150). The statement is unchanged and keeps the right-module Leibniz convention of the source. The countability hypothesis on A matches 0CRM, and no other hypothesis is added. Step-by-step checks: the D formula has the right degree and satisfies Leibniz; d_A(1)=0 is proved explicitly; in D^2 on x the terms (-1)^{k+1} and (-1)^k cancel; pi commutes with d because d_M p_w=pi(delta_w) for x, y and s; the s generators give cocycle lifts; the finite-support encoding into N is injective and the union over T_r is all of the disjoint union of the Q^n, as the sequence clause of lem-trf-countable-unions needs; Q_U is D-stable, has a graded (not DG) retraction, and Q_U and Q/Q_U are DG-isomorphic to sums of A[-t] with differential (-1)^t d_A. Edge cases M=0, A=0, negative degrees and nonzero d_A all hold. On duplicates, the lem-pc free-complex-cover nodes are the special case of ordinary complexes over a ring and lem-sfb-dg-property-p-resolution has no cocycle surjection or countability, so neither duplicates the item. There are no new nodes. Batch-5 flag: lem-trf-countable-unions is a status-mathlib set-theoretic leaf (countable unions) with no proof closure. Neither assumption gives it and it is not a step of the trace-formula or Poincare-duality proofs, so it is accepted. There is no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCountableFreeCover",
+  "declaration": "CategoryTheory.DgAlgebra.exists_countableTwoLayerFreeCover",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.CountableTwoLayerFreeCover",
+   "CategoryTheory.DgAlgebra.exists_countableTwoLayerFreeCover"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgCountableFreeCover.lean",
+  "statement": "theorem exists_countableTwoLayerFreeCover (A : Algebra.{u}) (hA : Countable (Σ n : ℤ, (A.X.X n : Type u))) (M : RightModule A) (hM : Countable (Σ n : ℤ, (((underlying A).obj M).X n : Type u))) : Nonempty (CountableTwoLayerFreeCover A M)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d428905b",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read node, 09KN/definition-shift/0CRM source, delivered module and the landed DgAlgebraDerivedCategory framework. Every clause matches: whole-union countability hA/hM; DG map with degreewise and actual-cocycle surjectivity; disjoint countable U,V via U ⊕ V; Q ≅ L × R graded A-linearly (split_action), L,R coordinatised as ⊕ A^{n-t} with regular action and differential t.negOnePow•d_A = A[-t] per definition-shift; d e_u = 0 and d e_v ∈ span U follow from differentialU/V, split_inclusion, split_quotient; R is the actual quotient; graded-only splitting; countableQ. Bundle is equivalent to the node (Leibniz consistency checked). Edge cases M=0, A=0, empty U/V, unbounded degrees, noncommutative A admitted. Only the item's lean changed; statement verbatim; no hollow defs; sorry only; docstrings with source, blueprint and 7 steps; no duplicate found. Notes: framework node not in stmt_deps (inline notions; H2 forbids adding it); private proof-dep import Set.Countable; second reading by the author group but specific."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-per-local-rhom-section-equivalence",
+ "kind": "lemma",
+ "title": "Concrete additive local sections of the resolved presheaf",
+ "statement": "Let C,R and both derived universes satisfy [def-per-local-rhom-normalization-interface]. For a complex L, a derived object K and isomorphism k:QL to K, the explicit resolved presheaf P_L^n of [lem-per-local-rhom-presheaf-model] has an additive equivalence at every M,U with morphisms res_U K to res_U(M[n]). It is obtained by the fixed localization factorization, exact evaluation of module presheaves, the additive local comparison into a K-injective resolution, and transport by the localization and representative isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8Y, 0A94, 0A95; sites-modules.tex Tag 03EI; derived.tex Tags 0147 and 0149"
+ },
+ "stmt_deps": [
+  "def-per-local-rhom-normalization-interface",
+  "lem-per-local-rhom-presheaf-model",
+  "lem-per-local-rhom-additive-cocycle-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the presheaf localization factorization on QX, evaluate at U, and use exact evaluation of module presheaves to identify its cohomology with the homology of the section complex. Apply the additive canonical derived comparison into the fixed K-injective resolution of X. Transport along resQ for L and the target restriction-shift isomorphism, followed by the inverse of the localized augmentation X to I(X). For arbitrary M, take the specified Q.objPreimage M and transport along Q.objObjPreimageIso M. Transport the source by k using additive homCongr. Naturality on complex representatives combines the evaluation homology naturality, the component-characterized local comparison naturality, and the augmentation square. All component formulas use the fixed localization factorizations.",
+   "uses": [
+    "lem-per-local-rhom-canonical-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8Y (equation-cohomology-hom-complex), 0A94 (lemma-RHom-into-K-injective), 0A95 (lemma-RHom-well-defined); module sheafification sites-modules.tex Tag 03EI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-local-rhom-canonical-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P5",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The local Hom comparison and its normalizations, Tags 0A8Y, 0A94 and 0A95"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of sheaf internal Hom on sections is natural for derived maps, local scalars, restrictions and target shifts, and its sheafification comparison preserves cycle classes",
+   "results": "CategoryTheory.Sheaf.ΓObjEquivHom_naturality; CategoryTheory.sheafHom; PresheafOfModules.sheafifyMap_val; PresheafOfModules.sheafifyMap; PresheafOfModules.sheafifyHomEquiv'; SheafOfModules.unitHomEquiv_symm_comp; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-23",
+   "verdict": "General infrastructure; no exact ringed-site normalized comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "CategoryTheory.ShortComplex.mapHomologyIso; CategoryTheory.ShortComplex.mapHomologyIso'; CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso; CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq; CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq; CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality; CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-23",
+   "verdict": "General infrastructure; no exact ringed-site normalized comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|shiftMap|mapCyclesIso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "date": "2026-10-23",
+   "verdict": "General infrastructure; no exact ringed-site normalized comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalRHomCohomologicalBound",
+  "date": "2026-10-23",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof, Step 1, relative Verdier duality and its coefficient comparison chain: the degreewise truncation passage implicit in ILO XVII 10.1.1 p. 325 from Ext continuity to representable direct sums. Re-split of lem-per-bounded-above-rhom-hyperext: old proof Steps 1–3 (local comparison, orthogonality and natural long exact sequences). Concrete local RHom comparison: Concrete additive local sections of the resolved presheaf",
+   "via": [
+    "lem-per-rhom-local-cohomological-bound",
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-per-constructible-rhom-coproduct-continuity",
+    "lem-per-ctf-hom-universal-coefficients",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalRHomSectionEquiv",
+  "file": "lean/Sheaf/Algebra/Homology/LocalRHomSectionEquiv.lean",
+  "declaration": "CategoryTheory.LocalRHom.Sections.sectionEquiv",
+  "declarations": [
+   "CategoryTheory.LocalRHom.Sections.homAddEquiv",
+   "CategoryTheory.LocalRHom.Sections.shiftedRestrictionIso",
+   "CategoryTheory.LocalRHom.Sections.resQ_naturality",
+   "CategoryTheory.LocalRHom.Sections.shiftedRestrictionIso_naturality",
+   "CategoryTheory.LocalRHom.Sections.presheafSectionsEquiv",
+   "CategoryTheory.LocalRHom.Sections.presheafSectionsEquiv_naturality",
+   "CategoryTheory.LocalRHom.Sections.sectionEquivOnQ",
+   "CategoryTheory.LocalRHom.Sections.sectionEquivOnQ_naturality",
+   "CategoryTheory.LocalRHom.Sections.sectionEquiv"
+  ],
+  "statement": "def sectionEquiv (K : D.{uC, vC, u, w} J R) (L : CochainComplex (Mod.{uC, vC, u} J R) ℤ) (k : DerivedCategory.Q.obj L ≅ K) (n : ℤ) (M : D.{uC, vC, u, w} J R) (U : C) : ((Model.presheaf.{uC, vC, u, w} J R L n).obj M).obj (op U) ≃+ ((res.{uC, vC, u, w, wSlice} J R U).obj K ⟶ (res.{uC, vC, u, w, wSlice} J R U).obj (M⟦n⟧))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-8872d",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261024T190546-L-4111539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-8872d",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261024T190546-L-4111539",
+  "kind": "interface",
+  "note": "independent cc review: 8872ddfd vs PASSed 40fc7aa56 delivery (diff -r: only canonical-naturality import/helper removal, private→public lemma in unclaimed HomComplexSectionsHomotopyNaturalityOfUniverses vs live, node proof_deps, change record, report); importer HomComplexSectionsDerivedNaturalityOfUniverses compiled against delivered module"
+ }
+}

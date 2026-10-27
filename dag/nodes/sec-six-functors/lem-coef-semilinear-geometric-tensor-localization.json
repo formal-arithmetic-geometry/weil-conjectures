@@ -1,0 +1,152 @@
+{
+ "id": "lem-coef-semilinear-geometric-tensor-localization",
+ "kind": "statement",
+ "title": "Normalized tensor localization for fixed ordinary geometric operations",
+ "statement": "Let the sites, coefficient tower, set-sheaf geometric adjunction and, when specified, source/target derived calculi have the following parameters. The exact fields defining the conclusion are displayed, so all ordinary carrier and transition normalizations and all representative equations are part of the statement.\n\nvariable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n\nvariable (A : Data.{c, v, r} J B τ)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n  (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)\n\nstructure GeometryTensor where\n  /-- The canonical tensor comparison for inverse image of systems. -/\n  tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅\n    (O.pull.mapDerivedCategory.prod O.pull.mapDerivedCategory) ⋙ target.closed.tensor\n  /-- Tensor/inverse-image comparison at each actual coefficient level. -/\n  levelTensorPullback : ∀ n : ℕ,\n    (A.levelClosed n).tensor ⋙\n        derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules ≅\n      ((derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).prod\n        (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules)) ⋙ (target.levelClosed n).tensor\n  /-- The tensor comparison evaluates to the specified level comparison. -/\n  tensorPullback_evaluation : ∀ (n : ℕ) (M P : DS.{c, v, max c v r} J B τ),\n    (e.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n        (tensorPullback.hom.app (M, P)) ≫\n        (target.tensorEvaluation n).hom.app\n          (O.pull.mapDerivedCategory.obj M, O.pull.mapDerivedCategory.obj P) ≫\n        (target.levelClosed n).tensor.map\n          (Prod.mkHom (((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app M)\n            (((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app P)) =\n      ((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app (A.closed.tensor.obj (M, P))\n        ≫\n        (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).map\n            ((A.tensorEvaluation n).hom.app (M, P)) ≫\n        (levelTensorPullback n).hom.app\n          ((e.{c, v, max c v r} J B τ n).obj M, (e.{c, v, max c v r} J B τ n).obj P)\n  /-- Level tensor pullback is fixed on the signed total K-flat representatives. -/\n  levelTensorModel : ∀ n : ℕ,\n    TensorComparisonModel.{c, v, r} J J' (B n) (O.coefficients n) (O.inverseImage n).modules\n      (A.levelClosed n) (target.levelClosed n) (A.levelTensorModels n)\n        (target.levelTensorModels n) (levelTensorPullback n)\n  /-- Its ordinary maps are the inverse images of pure tensors. -/\n  levelTensor_pure : ∀ n : ℕ,\n    InverseTensorPure.{c, v, r} J J' uInv (B n) (O.coefficients n) (O.inverseImage n)\n      (levelTensorModel n).ordinary\n  /-- The system comparison is localized on the system category itself. -/\n  tensorModel : TensorComparisonModel.{c, v, r} (coefficientSequenceTopology J)\n    (coefficientSequenceTopology J') (systemRing.{c, v, max c v r} J B τ)\n      (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition) O.pull A.closed\n        target.closed\n        A.tensorModels target.tensorModels tensorPullback\n  /-- The ordinary system tensor map is fixed by ordinary, faithful evaluations. -/\n  tensor_ordinary_evaluation : ∀ (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ),\n    (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n      (tensorModel.ordinary M N).hom ≫\n      (ordinaryEvaluationTensor.{c, v, r} J' O.coefficients O.coefficientTransition n (O.pull.obj M)\n        (O.pull.obj N)).hom ≫\n      ordinaryTensorHom.{c, v, r} J' (O.coefficients n)\n        ((O.ordinaryPullEvaluation n).hom.app M) ((O.ordinaryPullEvaluation n).hom.app N) =\n      (O.ordinaryPullEvaluation n).hom.app\n        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J\n          B τ) M N) ≫\n      (O.inverseImage n).modules.map (ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom ≫\n      ((levelTensorModel n).ordinary ((evaluation.{c, v, max c v r} J B τ n).obj M)\n        ((evaluation.{c, v, max c v r} J B τ n).obj N)).hom\n\ntheorem semilinearGeometryTensor [PreservesFiniteLimits uInv] :\n    Nonempty (GeometryTensor.{c, v, r} J B τ J' uInv uPush adjSet A O target)",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, including the signed total comparison; Tag 06YY, lemma-derived-base-change, for descent from flat-term K-flat representatives. Apply to the level and strict-system ringed topoi of Zheng Construction 4.1."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, including the signed total comparison; Tag 06YY, lemma-derived-base-change, for descent from flat-term K-flat representatives. Apply to the level and strict-system ringed topoi of Zheng Construction 4.1."
+ },
+ "proof": [
+  {
+   "text": "Obtain ordinary level and system tensor comparisons, simultaneous naturality, the pure-tensor normalization and preservation of flat-term K-flat complexes from geometricOrdinaryTensor_exists. Its ordinary evaluation equation is retained.",
+   "uses": [
+    "lem-coef-semilinear-geometric-ordinary-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, its bilinear-adjunction proof; sites-cohomology.tex Tag 0G7E, lemma-pullback-K-flat. Strict-system realization as in Zheng Construction 4.1 and the fixed GeometryOrdinary horizontal normalization."
+   }
+  },
+  {
+   "text": "Use the proved private geometryModelOfOrdinary construction in this module. Totalize the inverse ordinary comparisons with tensorPullbackTotal; its isomorphism and naturality equations give the signed cochain tensor isomorphism. Cochain tensor rigidity supplies fully faithful restriction to pairs of flat-term K-flat representatives. Apply tensorComparisonDescent to the fixed source and target model comparisons, and cancel its invertible factors to verify TensorComparisonModel. Apply this construction to O.pull and its ordinary adjunction, and separately at every coefficient level to O.inverseImage and the level adjunction. The constructed ordinary parts are definitionally the supplied comparisons, so their equalities transfer the pure-tensor property and ordinary evaluation equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, including the signed total comparison; Tag 06YY, lemma-derived-base-change, for descent from flat-term K-flat representatives. Apply to the level and strict-system ringed topoi of Zheng Construction 4.1."
+   }
+  },
+  {
+   "text": "Apply geometricTensorEvaluation to these models and the transported ordinary evaluation equation, obtaining the derived evaluation square. Assemble the system and level comparisons, both models, the pure normalization, and the two evaluation equations into GeometryTensor.",
+   "uses": [
+    "lem-coef-semilinear-geometric-tensor-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-geometric-ordinary-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-coef-semilinear-geometric-tensor-evaluation"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOperationsBaseExistence",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations.",
+   "via": [
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of unbounded derived tensor product normalized on K-flat total complexes and pure tensors, compatible with evaluation",
+   "results": "{\"t\": \"2026-10-26T02:51:38Z\", \"tool\": \"leanfinder\", \"query\": \"inverse image of unbounded derived tensor product normalized on K-flat total complexes and pure tensors, compatible with evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"TensorProduct.directLimitLeft_symm_of_tmul\", \"HomologicalComplex.HasGoodTensor₂₃\", \"TensorProduct.directLimitRight_symm_of_tmul\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\"], \"digest\": \"ddabdd1482d1f36c\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|prodComparison|pullbackPushforwardAdjunction",
+   "results": "{\"t\": \"2026-10-26T02:56:00Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryNatIso|prodComparison|pullbackPushforwardAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\"], \"digest\": \"03cf201ccb2bbcac\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "{\"t\": \"2026-10-26T02:56:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugateIsoEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\", \"CategoryTheory.Bicategory.conjugateIsoEquiv\", \"CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv\"], \"digest\": \"98a2463c6f1dc6d0\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric inverse image preserves derived tensor product with a comparison represented by ordinary pure tensor maps on flat complexes",
+   "results": "{\"t\": \"2026-10-26T02:56:31Z\", \"tool\": \"leansearch\", \"query\": \"geometric inverse image preserves derived tensor product with a comparison represented by ordinary pure tensor maps on flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"TensorProduct.directLimitLeft_symm_of_tmul\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.instTensorProduct\", \"TensorProduct.map_injective_of_flat_flat'\", \"TensorProduct.map_injective_of_flat_flat\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\"], \"digest\": \"626a6c6df98d3521\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricTensorLocalization",
+  "file": "lean/Sheaf/Paper/GeometricTensorLocalization.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearGeometryTensor",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.GeometryTensor",
+   "WeilConjectures.SemilinearSections.semilinearGeometryTensor"
+  ],
+  "statement": "theorem semilinearGeometryTensor [PreservesFiniteLimits uInv] :\n    Nonempty (GeometryTensor.{c, v, r} J B τ J' uInv uPush adjSet A O target)",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T070639-L-3636090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091103-L-3304892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,259 @@
+{
+ "id": "lem-a1-separated-lqf-affine-relation-cover",
+ "kind": "statement",
+ "title": "Closed affine relation presentations on open pieces of a separated locally quasi-finite space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $T$ an $S$-scheme, $E$ an algebraic space over $S$ [def-trf-algebraic-space], and $f:E\\to T$ a morphism. Assume that for every representable etale scheme chart $h_V\\to E$, the composite $V\\to T$ is locally quasi-finite [pqf-def-quasifinite], and that $\\Delta_{E/T}:E\\to E\\times_TE$ is a closed immersion on all scheme tests [def-pc-fibre-product, def-weil-closed-immersion]. There is a set-indexed covering of $E$ by open subspaces $X_i$ [def-a1-space-open-subspace], affine opens $T_i\\subseteq T$, and affine schemes $U_i,R_i$ over $T_i$, with the following properties. The map $X_i\\to T$ factors through $T_i$; every representable etale scheme chart of $X_i$ is locally quasi-finite over $T_i$, and $\\Delta_{X_i/T_i}$ is a closed immersion on all scheme tests. There is a representable surjective etale atlas $h_{U_i}\\to X_i$ [def-weil-etale-morphism], $U_i\\to T_i$ is locally quasi-finite, and $R_i=U_i\\times_{X_i}U_i$ has surjective etale projections $s_i,t_i:R_i\\to U_i$. The map $(s_i,t_i):R_i\\to U_i\\times_{T_i}U_i$ is a closed immersion and identifies $R_i(H)$ with an equivalence relation on $U_i(H)$ for every $T_i$-scheme $H$. The fppf sheaf quotient $U_i/R_i$ is canonically isomorphic to $X_i$, compatibly with its atlas and structure morphism; here the quotient is the sheafification [def-weil-pbc-sheafification] on the big fppf site [def-pc-fppf-site] of $H\\mapsto U_i(H)/R_i(H)$. For every $T_i$-scheme $B$, the atlas $U_i\\times_{T_i}B\\to X_i\\times_{T_i}B$ has kernel pair $R_i\\times_{T_i}B$ and its fppf sheaf quotient is canonically $X_i\\times_{T_i}B$. Covering means that for every $S$-scheme $H$ and section $h_H\\to E$, the open subschemes representing $h_H\\times_EX_i$ cover $H$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), first three proof paragraphs: affine-base reduction, affine atlas and closed affine kernel pair; quotient identification after scheme base change."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "def-a1-space-open-subspace",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Cover T by all affine opens [lem-weil-pbc-affine-opens-basis]. For each W form the sheaf pullback of E to W. Apply [lem-a1-space-separated-lqf-permanence], whose first conclusion supplies its algebraic-space structure. Apply [lem-a1-space-affine-atlas-open-cover] to this space. Paste the representing open squares to get open inclusions into E. An open inclusion is monic: test against a section and use monicity of the representing scheme open immersion. Identify each inclusion with its range subfunctor, giving the displayed OpenSubspace and isomorphism. The open-restriction clause of permanence gives exactly the relative chartwise quasi-finiteness and closed diagonal. Yoneda constructs uT from p followed by q.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-space-affine-atlas-open-cover",
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), first three proof paragraphs: affine-base reduction, affine atlas and closed affine kernel pair; quotient identification after scheme base change."
+   }
+  },
+  {
+   "text": "The composite family is jointly surjective on field-valued representatives. A field-valued representative maps into an affine neighbourhood of its unique scheme point in T; lift it to the sheaf pullback, then use the point-covering clause of the affine-atlas cover. For an arbitrary H and a section, represent each inverse image by an open immersion and identify it with its open range. A residue-field representative at any point lifts to a covering member after field extension. The cartesian square then factors that extended residue-field map through the inverse-image open. Its image in H is the original point, so that point belongs to the open. Thus the supremum of the opens is top, also for empty H.",
+   "uses": [
+    "lem-a1-space-affine-atlas-open-cover",
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), first three proof paragraphs: affine-base reduction, affine atlas and closed affine kernel pair; quotient identification after scheme base change."
+   }
+  },
+  {
+   "text": "Test the representable etale atlas p against itself to construct R, s and t. Uniqueness of representing pullback squares transfers the etale and surjective properties of the test projections to both projections. On every scheme test, the pullback universal property gives unique relation witnesses precisely for pairs with equal p-image; equality supplies the equivalence relation. The atlas is fppf locally surjective, since its representing etale surjective scheme test is a singleton fppf covering. Factor p through its presheaf range. That epimorphism has the supplied relation as kernel pair, so Mathlib IsKernelPair.toCoequalizer gives the range coequalizer. Local surjectivity says the subsheaf closure of the range is the whole target. The subsheaf closure universal property therefore extends every equalizing map uniquely to the target. Descending p along the presheaf coequalizer gives eta and precisely the required hom-set bijections. This uses no global small-valued sheafification instance.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), first three proof paragraphs: affine-base reduction, affine atlas and closed affine kernel pair; quotient identification after scheme base change."
+   }
+  },
+  {
+   "text": "Test the relative closed diagonal against h_(U times_Ti U), with the two maps induced by p. The resulting closed scheme R-prime is a second representative of the kernel pair: on sections its diagonal square describes exactly equal p-images, and pairs with equal p-image have equal Ti-image. Uniqueness gives R isomorphic to R-prime and identifies its map to the scheme product with the tested closed immersion. Transfer closedness along this isomorphism. The scheme product is affine [lem-weil-pbc-fibre-product-affine-spectra], and a closed immersion has affine source over an affine target [def-weil-closed-immersion].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), first three proof paragraphs: affine-base reduction, affine atlas and closed affine kernel pair; quotient identification after scheme base change."
+   }
+  },
+  {
+   "text": "For arbitrary B over Ti, form UB=U times_Ti B and RB=R times_Ti B in Over S. Representable scheme sheaves are algebraic spaces: their diagonals are represented by equalizers and their identity maps are etale surjective atlases. Thus [lem-trf-space-fibre-products-etale-covers] supplies XB=X times_Ti B. The two scheme pullback projections induce pB by the XB universal property. Pullback cancellation identifies pB as the base change of p, so its representable etaleness and surjectivity follow directly by pasting their scheme tests. Define sB,tB by their specified projections. The universal properties identify RB with the kernel pair of pB: a compatible pair gives an R-coordinate by the original kernel-pair property and a common B-coordinate. Uniqueness follows by the RB and UB pullback properties. Apply the range-and-subsheaf-closure quotient argument of step 3 to pB and its kernel pair. All witnesses and projection equations are retained.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), first three proof paragraphs: affine-base reduction, affine atlas and closed affine kernel pair; quotient identification after scheme base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-a1-space-separated-lqf-permanence",
+  "lem-a1-space-affine-atlas-open-cover",
+  "def-a1-space-open-subspace",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XX, first three proof paragraphs; Spaces Tag 0262 and its direct fppf descent proof; base change by the fibre-product universal property. Implemented by T2 using fully proved private helpers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally quasi-finite algebraic space has an open cover over affine base opens by quotients of affine schemes by closed affine etale equivalence relations",
+   "results": "{\"t\": \"2026-10-22T07:55:40Z\", \"tool\": \"leanfinder\", \"query\": \"A separated locally quasi-finite algebraic space has an open cover over affine base opens by quotients of affine schemes by closed affine etale equivalence relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\"], \"digest\": \"a22609e1a8348042\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme covers, scheme morphism properties and ring etale quotients do not state this algebraic-space presentation or schematic-neighbourhood assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "{\"t\": \"2026-10-22T07:55:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsSeparated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme covers, scheme morphism properties and ring etale quotients do not state this algebraic-space presentation or schematic-neighbourhood assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space.*(presentation|quotient)",
+   "results": "{\"t\": \"2026-10-22T07:55:37Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic.space.*(presentation|quotient)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme covers, scheme morphism properties and ring etale quotients do not state this algebraic-space presentation or schematic-neighbourhood assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine atlas kernel relation presentation of a separated locally quasi finite algebraic space",
+   "results": "{\"t\": \"2026-10-22T07:55:38Z\", \"tool\": \"leansearch\", \"query\": \"Affine atlas kernel relation presentation of a separated locally quasi finite algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\"], \"digest\": \"fafbe4f605af6bee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme covers, scheme morphism properties and ring etale quotients do not state this algebraic-space presentation or schematic-neighbourhood assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski localization of separated locally quasi finite spaces with affine etale atlases and affine kernel pairs",
+   "results": "{\"t\": \"2026-10-22T07:55:44Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski localization of separated locally quasi finite spaces with affine etale atlases and affine kernel pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"bd9ffa90350d5017\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme covers, scheme morphism properties and ring etale quotients do not state this algebraic-space presentation or schematic-neighbourhood assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space.*(presentation|quotient)",
+   "results": "{\"t\": \"2026-10-22T11:59:18Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic.space.*(presentation|quotient)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern scheme affine covers, scheme etale maps or ring etale presentations, not algebraic spaces with these relative kernel-pair and quotient clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine etale atlas presentation of an algebraic space as the fppf quotient by its kernel pair",
+   "results": "{\"t\": \"2026-10-22T11:59:18Z\", \"tool\": \"leansearch\", \"query\": \"Affine etale atlas presentation of an algebraic space as the fppf quotient by its kernel pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"Algebra.Etale.finitePresentation\", \"StandardEtalePresentation.mk\", \"RingHom.Etale\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"StandardEtalePresentation.toSubmersivePresentation\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"1c5219d085567cee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern scheme affine covers, scheme etale maps or ring etale presentations, not algebraic spaces with these relative kernel-pair and quotient clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "{\"t\": \"2026-10-22T11:59:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsSeparated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern scheme affine covers, scheme etale maps or ring etale presentations, not algebraic spaces with these relative kernel-pair and quotient clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally quasi finite algebraic space has an open cover with affine etale atlases and closed affine kernel equivalence relations",
+   "results": "{\"t\": \"2026-10-22T11:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"A separated locally quasi finite algebraic space has an open cover with affine etale atlases and closed affine kernel equivalence relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.affineOpenCover\"], \"digest\": \"ae2568b19cdbbfa7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern scheme affine covers, scheme etale maps or ring etale presentations, not algebraic spaces with these relative kernel-pair and quotient clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski localization of a separated locally quasi finite algebraic space with affine etale charts and base change compatible sheaf quotient",
+   "results": "{\"t\": \"2026-10-22T12:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski localization of a separated locally quasi finite algebraic space with affine etale charts and base change compatible sheaf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion.of_isLocalization\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\"], \"digest\": \"fdbbfefa2bca2973\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern scheme affine covers, scheme etale maps or ring etale presentations, not algebraic spaces with these relative kernel-pair and quotient clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-separated-locally-qf-space-representable",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Representability input to lem-a1-separated-etale-space-scheme in the support argument for lem-a1-affine-hc0: Tag 03XX first three proof paragraphs (old item steps 1-4).",
+   "via": [
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-separated-lqf-affine-relation-cover",
+  "worker": "stage1",
+  "summary": "Assembled the affine-base and affine-atlas reductions, closed affine kernel pair, and quotient presentation from existing nodes only. Wrote the scheme-test covering verification and the arbitrary-base-change kernel-pair calculation explicitly. No statement change, no new node, no Lean attachment.",
+  "blueprint": "The support/representability input to lem-a1-affine-hc0 via lem-a1-separated-etale-space-scheme and lem-a1-separated-locally-qf-space-representable: Tag 03XX first three proof paragraphs. Steps 1-2 realize its two localizations, steps 3-4 its closed affine relation, and step 5 its base-change-compatible presentation.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and etale-cover base change for algebraic spaces, needed for the affine base localization and arbitrary B; no lemma of this unit replaces this generic fibre-product tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-be8da8989",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-be8da8989 (reviewer sub-agent of L); spot-checked: I read all 5 steps and every cited node's statement in full. There are no new nodes and no changes. The statement is unchanged: Q124 created it on 2026-10-22 from lem-a1-separated-locally-qf-space-representable. There is no re-split note for this item. The proof matches Stacks spaces-morphisms 03XX, proof paragraphs 1-3, which I checked in the source: affine-base reduction, 03FY affine-atlas Zariski cover, U->T lqf, X=U/R (0262), and R->UxU a closed immersion (03KN), so R is affine. Step 1: E_j=Ex_TT_j is open by the open-preimage leaf. The affine-atlas open cover is applied to E_j. Permanence with B=T_j and O=X_{j,a} gives chartwise lqf and a closed diagonal over T_i, so U_i->T_i is lqf. The relative-base remark is correct because Xx_{T_i}X->Xx_SX is a monomorphism. Step 2: the cover is checked on every test via residue-field points; the empty case is fine. Step 3: the atlas-presentation node gives every presentation clause. Step 4: the square is cartesian with the relative diagonal; the closed immersion into Spec(B(x)_AB) gives an affine R_i. Step 5: fibre-products/etale-covers gives the base-changed atlas, the kernel pair is R_i x_{T_i} B by the universal property, and the presentation is reapplied over an arbitrary B. Edge cases tested: empty E/T/H/B, points over a field, nilpotents. There is no duplicate among the trf etale-quotient, presentation and affine-relation nodes, and no cycle. No SGA is cited. Batch-5 flags: the closures of lem-trf-space-fibre-products-etale-covers, the affine-atlas-open-cover, permanence, etale-open-image and atlas-presentation nodes reach only def-trf-algebraic-space and generic trf fibre-product, descent and quotient foundations. None reaches an nt-assume leaf, sk-thm-trace or Poincare-duality node, so all flags and the declared tool_use are accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedLqfAffineRelationCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_separated_lqf_affine_relation_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedLqfAffineRelationCover.lean",
+  "statement": "theorem exists_separated_lqf_affine_relation_cover {S : Scheme.{u}} (T : Over S) (E : AlgebraicSpace S) (f : E.obj.obj ⟶ yoneda.obj T) (hqf : ∀ (V : Over S) (a : yoneda.obj V ⟶ E.obj.obj), IsEtale a → Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (a ≫ f)).left) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal f)) : ∃ (I : Type u) (A : I → OpenSubspace E) (X : I → AlgebraicSpace S) (e : ∀ i : I, (X i).obj.obj ≅ (A i).val.toFunctor) (W : I → T.left.Opens), (∀ (H : Over S) (a : yoneda.obj H ⟶ E.obj.obj), ∃ (V : I → H.left.Opens) (k : ∀ i : I, yoneda.obj (Over.mk ((V i).ι ≫ H.hom)) ⟶ (X i).obj.obj), (⨆ i : I, V i) = ⊤ ∧ ∀ i : I, IsPullback (k i) (yoneda.map (Over.homMk (V i).ι)) ((e i).hom ≫ (A i).val.ι) a) ∧ ∀ i : I, IsAffine (W i).toScheme ∧ ∃ (q : (X i).obj.obj ⟶ yoneda.obj (Over.mk ((W i).ι ≫ T.hom))) (U R : Over S) (uT : U ⟶ Over.mk ((W i).ι ≫ T.hom)) (s t : R ⟶ U) (p : yoneda.obj U ⟶ (X i).obj.obj), q ≫ yoneda.map (Over.homMk (W i).ι) = (e i).hom ≫ (A i).val.ι ≫ f ∧ (∀ (V : Over S) (a : yoneda.obj V ⟶ (X i).obj.obj), IsEtale a → Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (a ≫ q)).left) ∧ IsRepresentableWith (fun _ _ v ↦ IsClosedImmersion v.left) (pullback.diagonal q) ∧ IsAffine U.left ∧ IsAffine R.left ∧ IsEtale p ∧ IsSurjective p ∧ p ≫ q = yoneda.map uT ∧ Scheme.Hom.IsLocallyQuasiFinite uT.left ∧ IsPullback (yoneda.map s) (yoneda.map t) p p ∧ Etale s.left ∧ Surjective s.left ∧ Etale t.left ∧ Surjective t.left ∧ (∃ hst : s.left ≫ uT.left = t.left ≫ uT.left, IsClosedImmersion (pullback.lift s.left t.left hst)) ∧ (∀ H : Over S, Function.Injective (fun r : H ⟶ R ↦ (r ≫ s, r ≫ t)) ∧ Equivalence (fun a b : H ⟶ U ↦ ∃ r : H ⟶ R, r ≫ s = a ∧ r ≫ t = b) ∧ ∀ a b : H ⟶ U, (∃ r : H ⟶ R, r ≫ s = a ∧ r ≫ t = b) ↔ p.app (op H) a = p.app (op H) b) ∧ (∃ η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ (X i).obj.obj, coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η = p ∧ ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun a : (X i).obj.obj ⟶ G.obj ↦ η ≫ a)) ∧ ∀ (B : Over S) (b : B ⟶ Over.mk ((W i).ι ≫ T.hom)), ∃ (UB RB : Over S) (v : UB ⟶ U) (uB : UB ⟶ B) (w : RB ⟶ R) (rB : RB ⟶ B) (sB tB : RB ⟶ UB) (XB : AlgebraicSpace S) (g : XB.obj.obj ⟶ (X i).obj.obj) (d : XB.obj.obj ⟶ yoneda.obj B) (pB : yoneda.obj UB ⟶ XB.obj.obj), IsPullback v uB uT b ∧ IsPullback w rB (s ≫ uT) b ∧ IsPullback g d q (yoneda.map b) ∧ pB ≫ g = yoneda.map v ≫ p ∧ pB ≫ d = yoneda.map uB ∧ sB ≫ v = w ≫ s ∧ tB ≫ v = w ≫ t ∧ sB ≫ uB = rB ∧ tB ≫ uB = rB ∧ IsEtale pB ∧ IsSurjective pB ∧ IsPullback (yoneda.map sB) (yoneda.map tB) pB pB ∧ ∃ ηB : coequalizer (yoneda.map sB) (yoneda.map tB) ⟶ XB.obj.obj, coequalizer.π (yoneda.map sB) (yoneda.map tB) ≫ ηB = pB ∧ ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun a : XB.obj.obj ⟶ G.obj ↦ ηB ≫ a)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The quotient is stated by its sheafification universal property, with unit induced by the specified atlas. Relative sheaves on Ti (and B) are represented as sheaves over h_Ti (and h_B) on the big fppf site of S; all structure maps are retained. The open cover is tested on every S-scheme, and the arbitrary-base-change clause includes the representing pullback squares and projection compatibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3397af1bf",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records (AlgebraicSpace IsRepresentableWith/IsEtale/IsSurjective, OpenSubspace, IsLocallyQuasiFinite, Etale, fppfTopology.over, pullback, IsClosedImmersion, sheafification), the EtaleAtlasPresentation/AffineAtlasOpenCover/SeparatedLqfPermanence interfaces, and Stacks 03XX/0262. Every clause is matched: hqf/hsep encodings, OpenSubspace pieces indexed by Type u with iso e, affine W i with factorization q, chartwise lqf and closed diagonal over W i, affine U/R with kernel-pair IsPullback, etale surjective s,t, closed (s,t) into U x_Wi U, equivalence relation on all S-tests (equivalent to Ti-tests since s.uT=t.uT), quotient via eta/bijectivity as in lem-a1-etale-atlas-presentation, base change along arbitrary B with pinned squares and kernel pair, covering on every H with checked IsPullback orientation. Edge cases (empty E/H/B, missed pieces, non-affine B, universes) are fine. Node unchanged except lean; statement verbatim; no new nodes or defs; single sorry; source and blueprint docstrings and 5-step proof present; no existing duplicate. Advisories: Surjective/IsAffine/coequalizer have no stmt_dep node (same as the recorded dependency), SubcanonicalOver public import possibly unused, the Second reading section is an author self-check. No compile run (no fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261023T152012-L-430795",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

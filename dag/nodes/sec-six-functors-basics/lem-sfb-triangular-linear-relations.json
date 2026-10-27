@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-triangular-linear-relations",
+ "kind": "statement",
+ "title": "Basis criterion for well-founded triangular linear relations",
+ "statement": "Let $k$ be a field [def-weil-field], let $W$ be a set with a well-founded strict partial order $\\prec$ (every nonempty subset has a $\\prec$-minimal element), and let $F=k^{(W)}$ be the vector space of finitely supported functions $W\\to k$, with coordinate basis $(e_w)_{w\\in W}$. Let $S$ be a set of rules, with a leading index $\\ell(s)\\in W$ and $f_s\\in F$ for each $s\\in S$. Assume $\\operatorname{supp}(f_s)\\subseteq\\{v:v\\prec\\ell(s)\\}$. Define the vector subspaces\n$$R=\\operatorname{span}_k\\{e_{\\ell(s)}-f_s:s\\in S\\},\\qquad R_{\\prec w}=\\operatorname{span}_k\\{e_{\\ell(s)}-f_s:s\\in S,\\ \\ell(s)\\prec w\\}.$$\nAssume that for every $w\\in W$ and every $s,t\\in S$ with $\\ell(s)=\\ell(t)=w$, one has $f_s-f_t\\in R_{\\prec w}$. Put $N=W\\setminus\\ell(S)$. Then the classes $(e_n+R)_{n\\in N}$ form a $k$-basis of the quotient vector space $F/R$. Empty sets of rules or indices are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting linear normal-form criterion extracted by Q12 from the intended reduction argument of Theorem 10.36, printed pp.201--204, especially Steps 4--8. This abstract statement is agent-written, not asserted to be a theorem stated in Milne. WANTED: G. M. Bergman, The Diamond Lemma for Ring Theory (1978), Theorem 1.2, for a standard reference for linear reduction modulo smaller relations."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $V=k^{(N)}$, with coordinate vectors $u_n$, and let $i:V\\to F$ extend a function by zero off $N$. Choose a rule $s_w$ with $\\ell(s_w)=w$ for each $w\\notin N$. Apply [lem-sfb-well-founded-relation-recursion] to $r(v,w)\\iff v\\prec w$, $B=N$, and the rule $g(w)=u_w$ for $w\\in N$, while for $w\\notin N$ set $g(w)=\\sum_{v\\in\\operatorname{supp}(f_{s_w})}f_{s_w}(v)g(v)$. The support hypothesis makes every recursive argument a predecessor. Each sum is finite and belongs to $V$, without any bound on the ranks of $W$.",
+   "uses": [
+    "lem-sfb-well-founded-relation-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.201-204, especially the intended normal-form conclusion in Steps 7-8; the following abstract well-founded argument is agent-written, not a quotation of Milne."
+   }
+  },
+  {
+   "text": "Define $P:F\\to V$ by $P(a)=\\sum_{w\\in\\operatorname{supp}(a)}a(w)g(w)$. This is linear: to check addition, sum over the union of the two finite supports and allow zero coefficients; scalar multiplication distributes through the same finite sum. Thus $P(e_w)=g(w)$. In particular $Pi=\\mathrm{id}_V$, since $g(n)=u_n$ for $n\\in N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.201-204, especially the intended normal-form conclusion in Steps 7-8; the following abstract well-founded argument is agent-written, not a quotation of Milne."
+   }
+  },
+  {
+   "text": "Use induction on $w$ from [lem-sfb-well-founded-relation-recursion] to prove $g(w)=P(f_s)$ for every rule with $\\ell(s)=w$. Assume this for all predecessors of $w$; it says that $P(e_{\\ell(t)}-f_t)=0$ whenever $\\ell(t)\\prec w$. Hence $P$ kills $R_{\\prec w}$, since it kills each spanning vector and is linear. If a rule $s$ leads at $w$, the chosen $s_w$ exists. Compatibility gives $f_s-f_{s_w}\\in R_{\\prec w}$, so $P(f_s)=P(f_{s_w})=g(w)$, the last equality being step 1. If no rule leads at $w$, the induction claim is vacuous. Consequently $P$ kills every generator of $R$, and $P(R)=0$.",
+   "uses": [
+    "lem-sfb-well-founded-relation-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.201-204, especially the intended normal-form conclusion in Steps 7-8; the following abstract well-founded argument is agent-written, not a quotation of Milne."
+   }
+  },
+  {
+   "text": "Again use [lem-sfb-well-founded-relation-recursion], now to prove $e_w-i(g(w))\\in R$. For $w\\in N$ this difference is zero. Otherwise its explicit expression is $(e_w-f_{s_w})+\\sum_{v\\in\\operatorname{supp}(f_{s_w})}f_{s_w}(v)(e_v-i(g(v)))$. The first summand is a defining generator of $R$, and each term of the finite sum lies in $R$ by induction because $v\\prec w$. This includes minimal $w$, where every right-hand side has empty support. By summing with the coefficients of $a\\in F$, obtain $a-iP(a)\\in R$.",
+   "uses": [
+    "lem-sfb-well-founded-relation-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.201-204, especially the intended normal-form conclusion in Steps 7-8; the following abstract well-founded argument is agent-written, not a quotation of Milne."
+   }
+  },
+  {
+   "text": "For any $a\\in F$, step 4 gives $a+R=iP(a)+R$, a finite linear combination of the classes $e_n+R$. They span. If a finite sum $i(b)=\\sum_n b(n)e_n$ lies in $R$, step 3 and $Pi=\\mathrm{id}_V$ give $b=P(i(b))=0$, so each coefficient vanishes. Thus the classes are linearly independent and form the asserted basis. For $W=\\varnothing$ both spaces are zero; for $S=\\varnothing$, $N=W$ and $P$ is the identity; if $N=\\varnothing$, step 4 says $F=R$ and the empty family is a basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.201-204, especially the intended normal-form conclusion in Steps 7-8; the following abstract well-founded argument is agent-written, not a quotation of Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-well-founded-relation-recursion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.36, printed pp.201-204, especially the intended normal-form conclusion in Steps 7-8; the following abstract well-founded argument is agent-written, not a quotation of Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bergman linear diamond lemma monic word rewriting reductions resolvable overlap ambiguities irreducible words basis quotient free associative algebra",
+   "results": "{\"t\": \"2026-10-23T23:28:31Z\", \"tool\": \"leanfinder\", \"query\": \"Bergman linear diamond lemma monic word rewriting reductions resolvable overlap ambiguities irreducible words basis quotient free associative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAlgebra.basisFreeMonoid\", \"FreeAlgebra.Rel\", \"FreeAlgebra\", \"FreeAlgebra.Pre\", \"FreeAlgebra.Pre.hasMul\", \"FreeAlgebra.instMul\", \"FreeAlgebra.Rel.mul_assoc\", \"FreeAlgebra.Rel.mul_compat_left\"], \"digest\": \"c96fe90295209052\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A terminating confluent linear rewriting system gives a basis of a quotient of a free associative algebra by its irreducible monomials",
+   "results": "{\"t\": \"2026-10-23T23:29:01Z\", \"tool\": \"leansearch\", \"query\": \"A terminating confluent linear rewriting system gives a basis of a quotient of a free associative algebra by its irreducible monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAlgebra.quot_mk_eq_ι\", \"FreeAlgebra.Pre.brecOn.go\", \"FreeAlgebra.basisFreeMonoid\", \"FreeAlgebra\", \"FreeAlgebra.Pre.recOn\", \"Polynomial.basisMonomials\", \"FreeAlgebra.Pre.rec\", \"FreeAlgebra.instMonoidWithZero\"], \"digest\": \"30db806b342fad07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Diamond\"",
+   "results": "{\"t\": \"2026-10-23T23:29:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Diamond\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"FreeAddGroup.Red.Step.diamond\", \"FreeGroup.Red.Step.diamond\", \"FreeAddGroup.Red.Step.diamond_aux\", \"FreeGroup.Red.Step.diamond_aux\"], \"digest\": \"24fee0a4c6912c19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergman|diamond.lemma|linear.*rewrit|monic.*rewrit|Groebner|Gröbner",
+   "results": "{\"t\": \"2026-10-23T23:30:04Z\", \"tool\": \"grep\", \"query\": \"Bergman|diamond.lemma|linear.*rewrit|monic.*rewrit|Groebner|Gröbner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Refinements.lean\", \"Mathlib/CategoryTheory/Abelian/Refinements.lean\", \"Mathlib/CategoryTheory/Abelian/Refinements.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/Data/Finsupp/MonomialOrder.lean\"], \"digest\": \"f888b53ad6171732\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChurchRosser\"",
+   "results": "{\"t\": \"2026-10-23T23:30:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"ChurchRosser\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"FreeAddGroup.reduce.churchRosser\", \"FreeGroup.reduce.churchRosser\"], \"digest\": \"0263d96875a4be81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noncommutative Groebner basis critical pairs monic relations irreducible words form a basis by the linear diamond lemma",
+   "results": "{\"t\": \"2026-10-23T23:30:05Z\", \"tool\": \"leanfinder\", \"query\": \"Noncommutative Groebner basis critical pairs monic relations irreducible words form a basis by the linear diamond lemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.basis\", \"Algebra.SubmersivePresentation.basisDeriv\", \"FreeAlgebra.basisFreeMonoid\", \"FreeGroupBasis.ofFreeGroup\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Polynomial.Sequence.basis\", \"IsFreeGroup.basis\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\"], \"digest\": \"15c8b7f1d3913917\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*(quotient|relation|basis)|normal.form.*basis|basis.*normal.form|linear.*diamond",
+   "results": "{\"t\": \"2026-10-23T23:30:54Z\", \"tool\": \"grep\", \"query\": \"triangular.*(quotient|relation|basis)|normal.form.*basis|basis.*normal.form|linear.*diamond\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Basis.lean\", \"Mathlib/LinearAlgebra/Dual/Basis.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\"], \"digest\": \"25ae0c8d9f01be75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Well founded triangular linear relations normal form basis quotient vector space diamond lemma",
+   "results": "{\"t\": \"2026-10-23T23:30:55Z\", \"tool\": \"leansearch\", \"query\": \"Well founded triangular linear relations normal form basis quotient vector space diamond lemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SetRel.IsWellFounded.of_finiteDimensional\", \"SetRel.IsWellFounded\", \"WellFounded.of_quotient_lift₂\", \"Finsupp.DegLex.wellFounded\", \"NONote.lt_wf\", \"Mathlib.Tactic.Module.qNF.toNF\", \"NONote.instWellFoundedLT\", \"Polynomial.trailingDegree_lt_wf\"], \"digest\": \"5426a7ab49abab0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.Quotient, Module.Basis",
+   "results": "{\"t\": \"2026-10-23T23:30:55Z\", \"tool\": \"loogle\", \"query\": \"Submodule.Quotient, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Submodule.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a free vector space by triangular monic relations has basis the unreduced indices when differences between rules with the same leading index are combinations of smaller relations",
+   "results": "{\"t\": \"2026-10-23T23:30:58Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a free vector space by triangular monic relations has basis the unreduced indices when differences between rules with the same leading index are combinations of smaller relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.basis\", \"Algebra.SubmersivePresentation.basisDeriv\", \"Polynomial.Sequence.basis\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.SubmersivePresentation.basisCotangent_apply\", \"RootPairing.Base.toWeightBasis\", \"IsAdjoinRootMonic.basis\", \"Module.presentationFinsupp_G\"], \"digest\": \"091ce6491514daf5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", \"basis\"",
+   "results": "{\"t\": \"2026-10-23T23:32:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"quotient\\\", \\\"basis\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsOpenQuotientMap.isTopologicalBasis\", \"TopologicalSpace.IsTopologicalBasis.isQuotientMap\", \"TopologicalSpace.IsTopologicalBasis.quotient\", \"PowerBasis.quotientEquivQuotientMinpolyMap\", \"PowerBasis.quotientEquivQuotientMinpolyMap_apply_mk\", \"PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply_mk\", \"PowerBasis.quotientEquivQuotientMinpolyMap_apply\", \"PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply\"], \"digest\": \"955a21e9a8f49b2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free-algebra bases do not give a quotient basis from overlapping triangular linear rules. The Church--Rosser/diamond hits concern cancellation of inverse letters in free groups. Polynomial sequences, monic one-variable quotients, Smith normal form and geometric presentations have different hypotheses and do not specialize in one line. The unknown-identifier Loogle query gives no evidence of absence; other phrasings and source grep were used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vector space quotient by well founded triangular linear relations has a basis of irreducible indices if equal leading terms give differences of smaller relations",
+   "results": "{\"t\": \"2026-10-23T23:57:49Z\", \"tool\": \"leanfinder\", \"query\": \"A vector space quotient by well founded triangular linear relations has a basis of irreducible indices if equal leading terms give differences of smaller relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.Basis\", \"Module.Basis.SmithNormalForm\", \"Profinite.NobelingProof.GoodProducts.linearIndependent\", \"Module.Basis.SmithNormalForm.bM\", \"Module.Basis.SmithNormalForm.bN\", \"Module.Basis.SmithNormalForm.f\", \"Submodule.smithNormalFormBotBasis_def\", \"Submodule.smithNormalForm\"], \"digest\": \"2d13d6bd8c27618c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results give topological bases, Smith normal form, special polynomial or residue-field bases, a basis of a support subspace, or the definitions of generators and relations. None states the well-founded triangular compatibility criterion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*(quotient|relation|basis)|normal.form.*basis|basis.*normal.form|linear.*diamond",
+   "results": "{\"t\": \"2026-10-23T23:58:43Z\", \"tool\": \"grep\", \"query\": \"triangular.*(quotient|relation|basis)|normal.form.*basis|basis.*normal.form|linear.*diamond\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Basis.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/Matrix/Basis.lean\"], \"digest\": \"bbade69e9b4c2d9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results give topological bases, Smith normal form, special polynomial or residue-field bases, a basis of a support subspace, or the definitions of generators and relations. None states the well-founded triangular compatibility criterion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Triangular linear rewriting rules with well founded support and compatible leading terms give a basis of the quotient vector space",
+   "results": "{\"t\": \"2026-10-23T23:58:43Z\", \"tool\": \"leansearch\", \"query\": \"Triangular linear rewriting rules with well founded support and compatible leading terms give a basis of the quotient vector space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.basisRestrictSupport\", \"LieModule.IsTriangularizable\", \"Mathlib.Tactic.LibraryRewrite.Rewrite\", \"Mathlib.Tactic.LibraryRewrite.Rewrite.replacement\", \"Module.Basis.ofVectorSpace\", \"IsLocalRing.basisQuotient\", \"Module.Basis.ofVectorSpaceIndex\", \"Module.Basis.mk.congr_simp\"], \"digest\": \"c41a2a59e2692b2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results give topological bases, Smith normal form, special polynomial or residue-field bases, a basis of a support subspace, or the definitions of generators and relations. None states the well-founded triangular compatibility criterion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"basis\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T23:58:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"basis\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsOpenQuotientMap.isTopologicalBasis\", \"TopologicalSpace.IsTopologicalBasis.isQuotientMap\", \"TopologicalSpace.IsTopologicalBasis.quotient\", \"PowerBasis.quotientEquivQuotientMinpolyMap\", \"PowerBasis.quotientEquivQuotientMinpolyMap_apply_mk\", \"PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply_mk\", \"PowerBasis.quotientEquivQuotientMinpolyMap_apply\", \"PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply\"], \"digest\": \"955a21e9a8f49b2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results give topological bases, Smith normal form, special polynomial or residue-field bases, a basis of a support subspace, or the definitions of generators and relations. None states the well-founded triangular compatibility criterion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear reduction on a free vector space: differences of two right hand sides with the same leading basis vector lie in the span of smaller relations, hence unreduced vectors form a quotient basis",
+   "results": "{\"t\": \"2026-10-23T23:59:28Z\", \"tool\": \"leanfinder\", \"query\": \"Linear reduction on a free vector space: differences of two right hand sides with the same leading basis vector lie in the span of smaller relations, hence unreduced vectors form a quotient basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.Solution.ofQuotient_var\", \"Module.Relations.Solution.π_single\", \"Module.Presentation.finsupp_G\", \"Module.Relations.relation\", \"Module.Presentation.finsupp_var\", \"Module.presentationFinsupp_G\", \"Module.Relations.Solution.ofπ_var\", \"Module.presentationFinsupp_var\"], \"digest\": \"4a4ea965687c62e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results give topological bases, Smith normal form, special polynomial or residue-field bases, a basis of a support subspace, or the definitions of generators and relations. None states the well-founded triangular compatibility criterion or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-pbw",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Section 23h, pp.509--510, enveloping-algebra prerequisite to the admissible-lattice construction. Full proof source WANTED: a characteristic-zero PBW theorem for an ordered vector-space basis (e.g. Bourbaki, Lie Groups and Lie Algebras, Chapters 1--3, Chapter I, universal enveloping algebras). Supporting rational-PBW argument: Supporting linear normal-form criterion extracted by Q12 from the intended reduction argument of Theorem 10.36, printed pp.201--204, especially Steps 4--8. This abstract statement is agent-written, not asserted to be a theorem stated in Milne. WANTED: G. M. Bergman, The Diamond Lemma for Ring Theory (1978), Theorem 1.2, for a standard reference for linear reduction modulo smaller relations.",
+   "via": [
+    "lem-sfb-rational-pbw",
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-triangular-linear-relations",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the selected-rule normal-form map by arbitrary well-founded recursion, proved it kills all rules by induction using the given smaller-relations compatibility, proved the defect lies in R, and obtained spanning and independence by explicit finite-sum calculations. One new Mathlib recursion/induction leaf; no new unsplit nodes.",
+  "blueprint": "Inherited ancestor is null (blueprint_refs.py ancestor confirms this); preserve the existing via chain and place. This supports rational PBW below the alteration prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3). Current latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) was read. Item steps 1-5 realize the linear reduction and quotient-basis argument of Milne Theorem 10.36, intended Steps 7-8, at the existing node-level route; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-fd2baeb9e",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-fd2baeb9e (reviewer sub-agent of L); spot-checked: Read the item and the new leaf in full. The item statement is unchanged against live and side-live, where it is still unsplit with no repair note. Source checked: Milne iAG2017 Thm 10.36 at PDF pp.212-216; the abstract criterion is agent-written and labelled as such. Step 1: recursion via IsWellFounded.fix with H_w = Σ f_{s_w}(v) g(v); the support hypothesis puts every argument among the predecessors. Step 2: P is linear with P∘i = id. Step 3: induction on 'g(w) = P(f_s) for every rule at w'; the hypothesis gives P(R_{≺w}) = 0, and compatibility then gives P(f_s) = P(f_{s_w}) = g(w). Step 4: I recomputed the defect identity e_w − i g(w) = (e_w − f_{s_w}) + Σ f(v)(e_v − i g(v)), so a − iP(a) ∈ R. Step 5: spanning and independence follow. Tested on 0<1<2 with three rules, which is compatible and gives dim 1. Without the smaller rule, compatibility fails, which shows the hypothesis is needed. Antichain and empty cases also checked. Leaf: IsWellFounded.induction, fix and fix_eq at RelClasses.lean 211-228, verified. Advisory only: the minimal-element wording relies on WellFounded.wellFounded_iff_has_min (WellFounded.lean:148), which `how` does not name. No duplicate in the DAG: lem-weil-pbc-transfinite-recursion needs a total well-order, and rewrite-common-reduct and buchberger are different statements. No SGA, no tool_uses, proof_deps = union of uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.TriangularLinearRelations",
+  "declaration": "Module.Basis.exists_basis_quotient_of_wellFounded_triangular_relations",
+  "file": "lean/Sheaf/LinearAlgebra/TriangularLinearRelations.lean",
+  "statement": "theorem exists_basis_quotient_of_wellFounded_triangular_relations {k : Type u} [Field k] {W : Type v} {S : Type w} (r : W → W → Prop) [IsStrictOrder W r] (hwf : WellFounded r) (leading : S → W) (f : S → W →₀ k) (hsupport : ∀ s : S, ↑(f s).support ⊆ {v : W | r v (leading s)}) (hcompat : ∀ (w : W) (s t : S), leading s = w → leading t = w → f s - f t ∈ Submodule.span k {a : W →₀ k | ∃ q : S, r (leading q) w ∧ a = Finsupp.single (leading q) 1 - f q}) : ∃ b : Module.Basis {n : W // n ∉ Set.range leading} k ((W →₀ k) ⧸ Submodule.span k (Set.range (fun s : S => Finsupp.single (leading s) 1 - f s))), ∀ n : {n : W // n ∉ Set.range leading}, b n = Submodule.Quotient.mk (Finsupp.single n.val 1)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc8225abf",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: Field k (def-weil-field); W and S in independent universes with no Nonempty/Finite/totality; IsStrictOrder + WellFounded; exact support inclusion; R and R_{≺w} spanned by generators (r (leading q) w, correct direction); compatibility keeps both leading equalities; the conclusion fixes b n = mk (single n 1) over the subtype N = W \\ range leading. Five-step proof checked; S, W, N empty, minimal and duplicate leading indices covered. Node unchanged against side-live except the lean record; lean.statement verbatim equals the file signature; no H4 duplicate in lean/Sheaf or Mathlib. One sorried theorem, no defs; docstrings give the source and blueprint and carry the proof steps; report has the Worker report and Second reading by Q36 sections. No file changed, so no compile. No findings."
+ }
+}

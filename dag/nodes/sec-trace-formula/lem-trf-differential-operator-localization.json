@@ -1,0 +1,230 @@
+{
+ "id": "lem-trf-differential-operator-localization",
+ "kind": "statement",
+ "title": "Finite-order differential operators extend to prime localizations",
+ "statement": "Let $R\\to B$ be a homomorphism of commutative rings, let $\\mathfrak p\\subset B$ be a prime ideal, and write $j:B\\to B_{\\mathfrak p}$ for the ordinary localization map [def-weil-pbc-localization-at-prime]. For any commutative $R$-algebra $C$, an $R$-linear map $D:C\\to C$ has differential order at most $0$ if it is $C$-linear; recursively, it has differential order at most $r>0$ if, for every $c\\in C$, the $R$-linear map $[D,c]:x\\mapsto D(cx)-cD(x)$ has differential order at most $r-1$. Let $r\\ge0$ and let $D:B\\to B$ be $R$-linear of differential order at most $r$. There exists a unique $R$-linear map $\\widetilde D:B_{\\mathfrak p}\\to B_{\\mathfrak p}$ of differential order at most $r$ such that $\\widetilde D(j(b))=j(D(b))$ for every $b\\in B$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0G36, lemma-invert-system-differential-operators, specialized to M=N=B and the multiplicative set B minus p; differential order is Definition 09CI, definition-differential-operators."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-differential-order"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=B\\setminus\\mathfrak p$ and $A=B_{\\mathfrak p}$. By [def-weil-pbc-localization-at-prime], elements of $A$ are fractions $b/s$, and $b/s=c/t$ means $u(tb-sc)=0$ for some $u\\in S$. Write $\\mu_a$ for multiplication by $a$ on whichever ring is under consideration. Induct on the bound $r$, proving existence and uniqueness together for every operator on $B$. For $r=0$, $D(b)=bD(1)$, so multiplication by $j(D(1))$ is the required extension; every $A$-linear endomorphism of $A$ is determined by its value at $1$, proving uniqueness.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36, lemma-invert-system-differential-operators"
+   }
+  },
+  {
+   "text": "The zero map, sums and differences of operators of order at most $n$ again have order at most $n$: induct on $n$, using linearity at $n=0$ and $[T+U,c]=[T,c]+[U,c]$, $[-T,c]=-[T,c]$ for the induction step. Multiplication maps have order $0$. Thus [lem-trf-differential-operator-composition-order], with one bound equal to $0$, shows that precomposing or postcomposing an order-at-most-$n$ operator with multiplication by any element preserves its bound. These assertions apply both over $B/R$ and over $A/R$.",
+   "uses": [
+    "lem-trf-differential-operator-composition-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 09CI and 09CJ, closure under sums and composition with order-zero maps"
+   }
+  },
+  {
+   "text": "Assume $r>0$ and the assertion for bound $r-1$. For $b\\in B$, put $L_b=[D,b]$, and let $E_b:A\\to A$ be its unique extension of order at most $r-1$ given by induction. Expansion on an element of $B$ gives $L_{bc}=L_b\\mu_c+\\mu_bL_c$ and $[L_b,c]=[L_c,b]$. Every corresponding sum or commutator of the $E_b$ has order at most $r-1$ by Step 2 and [lem-trf-differential-operator-composition-order]. Uniqueness in the induction hypothesis therefore gives\n$$E_{bc}=E_b\\mu_{j(c)}+\\mu_{j(b)}E_c,\\qquad [E_b,j(c)]=[E_c,j(b)].$$\nBoth sides restrict along $j$ to the same displayed operator on $B$. In particular $E_1=0$, since $L_1=0$.",
+   "uses": [
+    "lem-trf-differential-operator-composition-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36, lemma-invert-system-differential-operators"
+   }
+  },
+  {
+   "text": "Define a proposed value on a fraction $z=b/s$ by\n$$E(z)=j(s)^{-1}\\bigl(j(D(b))-E_s(z)\\bigr).$$\nFor $t\\in S$, the refined representative $tb/(ts)$ gives the same value: Step 3 yields $E_{ts}(z)=E_t(j(b))+j(t)E_s(z)=j(L_t(b))+j(t)E_s(z)$, whereas $j(D(tb))=j(t)j(D(b))+j(L_t(b))$. Subtraction and division by $j(ts)$ give exactly the original value. If $b/s=c/t$, choose $u\\in S$ with $u(tb-sc)=0$ using [def-weil-pbc-localization-at-prime]. Refining the first representative by $ut$ and the second by $us$ gives equal numerators $utb=usc$ and equal denominators $uts=ust$. Refinement invariance therefore proves well-definedness even when $j$ has a kernel.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36, lemma-invert-system-differential-operators"
+   }
+  },
+  {
+   "text": "For fractions with a fixed denominator $s$, the formula in Step 4 is additive in the numerator and commutes with multiplication by an element of $R$, since $D$ and $E_s$ are $R$-linear. Any two fractions have a common denominator $st$, so refinement invariance proves additivity on all of $A$; the same formula proves $R$-linearity. For $s=1$, $E_1=0$, so $E(j(b))=j(D(b))$ for every $b\\in B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36, lemma-invert-system-differential-operators"
+   }
+  },
+  {
+   "text": "For $b,c\\in B$, $s\\in S$, and $z=c/s$, the defining formula gives\n$$j(s)\\bigl(E(j(b)z)-j(b)E(z)\\bigr)=j(L_b(c))-[E_s,j(b)](z).$$\nThe second identity of Step 3 replaces the last commutator by $[E_b,j(s)]$. Since $E_b(j(c))=j(L_b(c))$ and $j(s)z=j(c)$, the right side is $j(s)E_b(z)$. Multiplication by the unit $j(s)$ is injective, hence $[E,j(b)]=E_b$. In the endomorphism ring of the $R$-module $A$, multiplying out also gives\n$$[E,j(s)^{-1}]=-\\mu_{j(s)^{-1}}[E,j(s)]\\mu_{j(s)^{-1}}=-\\mu_{j(s)^{-1}}E_s\\mu_{j(s)^{-1}}.$$\nBy [lem-trf-differential-operator-composition-order] and Step 2, all these commutators have order at most $r-1$.",
+   "uses": [
+    "lem-trf-differential-operator-composition-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36, lemma-invert-system-differential-operators"
+   }
+  },
+  {
+   "text": "Here is the algebra-generator test used in Tag 0G35, written out in this instance. Let $H$ be the set of $a\\in A$ for which $[E,a]$ has order at most $r-1$. It contains the image of $R$, since $E$ is $R$-linear and its commutator with such a scalar is zero. It is closed under addition and negation by Step 2 and $[E,a+a']=[E,a]+[E,a']$. It is closed under products because\n$$[E,aa']=[E,a]\\mu_{a'}+\\mu_a[E,a'],$$\nand composing with the order-zero multiplication maps preserves order by [lem-trf-differential-operator-composition-order]. Thus $H$ is an $R$-subalgebra. Step 6 puts every $j(b)$ and $j(s)^{-1}$ in $H$. Every fraction is $j(b)j(s)^{-1}$, so $H=A$. By the recursive definition, $E$ has order at most $r$.",
+   "uses": [
+    "lem-trf-differential-operator-composition-order"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G35, lemma-check-differential-operators, its subalgebra proof; Tag 09CJ, lemma-composition-differential-operators"
+   }
+  },
+  {
+   "text": "Finally let $F:A\\to A$ be any extension of $D$ of order at most $r$. For each $s\\in S$, the commutator $[F,j(s)]$ has order at most $r-1$ and restricts along $j$ to $L_s$. The uniqueness part of the induction hypothesis gives $[F,j(s)]=E_s$. Evaluating at $z=b/s$ yields\n$$j(D(b))=F(j(s)z)=j(s)F(z)+E_s(z),$$\nso $F(z)=j(s)^{-1}(j(D(b))-E_s(z))=E(z)$. All fractions occur in this way; hence $F=E$. This completes the induction and proves the stated existence, bound, and uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G36, lemma-invert-system-differential-operators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-differential-operator-composition-order"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0G36, lemma-invert-system-differential-operators, specialized to M=N=B; Tag 0G35 generator test expanded and omitted uniqueness supplied in Step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-differential-operator-localization: every finite order differential operator between modules extends uniquely to a localization of the ring",
+   "results": "{\"t\": \"2026-10-22T06:49:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-differential-operator-localization: every finite order differential operator between modules extends uniquely to a localization of the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isLocalizedModule_map\", \"KaehlerDifferential.isLocalizedModule_of_isLocalizedModule\", \"KaehlerDifferential.isLocalizedModule\", \"KaehlerDifferential.span_range_map_derivation_of_isLocalization\", \"Derivation.liftKaehlerDifferential_unique\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"Derivation.liftKaehlerDifferential_unique_iff\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\"], \"digest\": \"59fe40a029c108a3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "DifferentialOperator",
+   "results": "{\"t\": \"2026-10-22T06:49:45Z\", \"tool\": \"loogle\", \"query\": \"DifferentialOperator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DifferentialOperator'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: name-pattern search returned no declaration; loogle: unknown identifier 'DifferentialOperator'"
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialOperator|differential operator",
+   "results": "{\"t\": \"2026-10-22T06:49:45Z\", \"tool\": \"grep\", \"query\": \"DifferentialOperator|differential operator\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite order differential operators extend uniquely to the localization at a prime ideal",
+   "results": "{\"t\": \"2026-10-22T06:50:50Z\", \"tool\": \"leansearch\", \"query\": \"Finite order differential operators extend uniquely to the localization at a prime ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.primesOverEquivPrimesOver_apply\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"Differential.uniqueDifferentialAlgebraFiniteDimensional\", \"IsDedekindDomain.primesOverEquivPrimesOver\", \"LocalizedModule.AtPrime\", \"Localization.AtPrime.isLocalRing\", \"LocalSubring.ofPrime\", \"LocalSubring.instAtPrimeSubtypeMemSubringToSubringOfPrime\"], \"digest\": \"30e9673e44b0d43a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-differential-operator-localization: localizing a higher order differential operator on a commutative algebra preserves its order and uniquely extends the operator",
+   "results": "{\"t\": \"2026-10-22T06:51:00Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-differential-operator-localization: localizing a higher order differential operator on a commutative algebra preserves its order and uniquely extends the operator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isLocalizedModule_map\", \"KaehlerDifferential.isLocalizedModule\", \"KaehlerDifferential.isLocalizedModule_of_isLocalizedModule\", \"Differential\", \"KaehlerDifferential.span_range_map_derivation_of_isLocalization\", \"Derivation.apply_aeval_eq'\", \"CommRingCat.KaehlerDifferential.D\", \"DifferentialAlgebra\"], \"digest\": \"c38dea3445497a6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialOperator|differential operator|differentialOperator",
+   "results": "{\"t\": \"2026-10-22T06:51:00Z\", \"tool\": \"grep\", \"query\": \"DifferentialOperator|differential operator|differentialOperator\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern first-order derivations, Kaehler differentials, localizations, homogeneous components or Weierstrass division, not localization of arbitrary finite-order differential operators or additive generation of this order algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-differential-operator-localization: finite order algebraic differential operators extend uniquely to a prime localization preserving their order",
+   "results": "{\"t\": \"2026-10-23T14:40:33Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-differential-operator-localization: finite order algebraic differential operators extend uniquely to a prime localization preserving their order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isLocalizedModule_map\", \"KaehlerDifferential.isLocalizedModule\", \"KaehlerDifferential.isLocalizedModule_of_isLocalizedModule\", \"KaehlerDifferential.span_range_map_derivation_of_isLocalization\", \"Algebra.IsSmoothAt\", \"Algebra.Generators.cMulXSubOneCotangent\", \"algebraMap.coe_deriv\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\"], \"digest\": \"06eb38d45859bc06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kaehler differential localization and derivations do not state extension of arbitrary finite-order operators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-order-algebra-additive-generators",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Algebraic subgroup input: homogeneous forms of maximal local order are generated by additive polynomials. Refinement in Q114: finite-order differential operators extend to ordinary prime localizations, used to show Hasse derivatives preserve the maximal-order spaces; Stacks 0G36.",
+   "via": [
+    "lem-trf-projective-order-algebra-additive-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-differential-operator-localization",
+  "worker": "stage1",
+  "summary": "Followed the order induction in Stacks 0G36, made fraction refinement and noninjective localization descent explicit, expanded the 0G35 generator test using the new general 09CJ composition bound, and supplied the omitted uniqueness proof. No statement or hypothesis changes.",
+  "blueprint": "Historical supporting algebra branch recorded by blueprint.from: extension of Hasse differential operators in lem-trf-projective-order-algebra-additive-generators. Latest lem-trf-local-term-locality now uses contracting correspondences; this split only supplies the already assigned lower algebra item and changes no unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-73bbc3286",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-73bbc3286 (reviewer sub-agent of L); spot-checked: Read the item, its 8 steps and the new node lem-trf-differential-operator-composition-order in full. Checked against Stacks algebra.tex: 09CI (l.34658), 09CJ (l.34684), 0G35 (l.34999) and 0G36 (l.35026), with every tag matched to its label in tags/tags. The item statement is identical to live/base: 0G36 with M=N=B and S=B minus p. Live has no repair note, so this is not a re-split, and the new id exists nowhere else. I recomputed every step. Step 1: the r=0 case is D(b)=bD(1), and an A-linear map is fixed by its value at 1. Step 3: L_{bc}=L_b mu_c+mu_b L_c and [L_b,c]=[L_c,b] check out; the order <=r-1 bounds come from the composition node, not from monotonicity, and uniqueness at r-1 gives the E-identities. Step 4: refining to tb/ts cancels the j(L_t(b)) terms; for any representatives, refining by ut and us gives the same pair in B, so this holds even when j is not injective (tested on Z/6 at (2)). Steps 5-7: [E,j(b)]=E_b, [E,1/s]=-mu E_s mu, and the 0G35 subalgebra closure goes through via 09CJ. Step 8 supplies the uniqueness that Stacks omits, without circularity. The new node is a self-contained 09CJ statement over arbitrary C-modules, unsplit with no proof. Small cases: both orders 0, either order 0, zero maps. It has five recorded searches (LeanSearch, Loogle, 2x LeanFinder, grep) with no match. No duplicate turned up in the DAG, blueprint_refs or live/side-live. It is not a clause of the item. Its blueprint from/via is the item's ancestor with the item prepended. The route stays in unit sk-i-curve-zero with mathlib definitions only, so no tool_uses; there is no SGA and no cycle. There is no target node, so the base-change/coefficient-category check does not apply. Minor and not a fault: the inherited item statement says 'R-algebra' without a stmt_dep on the algebra definition. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DifferentialOperatorLocalization",
+  "declaration": "LinearMap.existsUnique_differentialOperator_atPrime",
+  "file": "lean/Sheaf/RingTheory/DifferentialOperatorLocalization.lean",
+  "statement": "theorem existsUnique_differentialOperator_atPrime (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B] (p : Ideal B) [p.IsPrime] (r : ℕ) (D : B →ₗ[R] B) (hD : HasDifferentialOrderLE R B r D) : ∃! E : Localization.AtPrime p →ₗ[R] Localization.AtPrime p, HasDifferentialOrderLE R (Localization.AtPrime p) r E ∧ ∀ b : B, E (algebraMap B (Localization.AtPrime p) b) = algebraMap B (Localization.AtPrime p) (D b)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f70d1a1c",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Item Lean ∃! E : Bₚ →ₗ[R] Bₚ, HasDifferentialOrderLE R Bₚ r E ∧ ∀ b, E (j b) = j (D b) matches the node and Stacks 0G36 (S=B∖p, M=N=B) clause by clause; no extra hypotheses; universes u,v independent; both lean.statement fields verbatim. Item diff vs side-live: only stmt_deps += new (A) node def-trf-differential-order and the lean record. The new node's HasDifferentialOrderLE is a real recursive Prop: 0 ↦ C-linear, n+1 ↦ ∀ c the commutator D∘lsmul c − lsmul c∘D (Mathlib Algebra.lsmul, x ↦ D(cx)−cD(x)) has order ≤ n, = Stacks 09CI; §5 fields complete, 7 searches; no duplicate in side-live dag/lean/blueprint-index or svc.log. Edge cases r=0, zero operator, noninjective j, zero ring, any characteristic all fine. Docstrings carry source place, blueprint id and the full proof; only sorry; report has both sections. No compile run since nothing was changed. Minor: proof dep composition-order has no Lean record (proof-only, cited in docstring)."
+ }
+}

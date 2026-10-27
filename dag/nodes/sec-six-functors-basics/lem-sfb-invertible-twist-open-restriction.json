@@ -1,0 +1,416 @@
+{
+ "id": "lem-sfb-invertible-twist-open-restriction",
+ "kind": "statement",
+ "title": "Invertibility and open restriction of a pullback tensor-power twist",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], and let $L$ and $M$ be invertible modules on $X$ and $Y$, respectively [def-sc-invertible-module]. For $a\\geq0$ put $N_a=L\\otimes_{\\mathcal O_X}f^*(M^{\\otimes a})$, using module pullback [def-pc-module-pullback] and the sheaf tensor product [def-pur-sheaf-tensor-product], with $M^{\\otimes0}=\\mathcal O_Y$. Then $M^{\\otimes a}$, $f^*(M^{\\otimes a})$ and $N_a$ are invertible. For every open $U\\subseteq Y$, let $k:U\\hookrightarrow Y$, $j:f^{-1}(U)\\hookrightarrow X$ and $f_U:f^{-1}(U)\\to U$ be the inclusions and restricted morphism, so $f\\circ j=k\\circ f_U$. There is an isomorphism of invertible $\\mathcal O_{f^{-1}(U)}$-modules\n$$N_a|_{f^{-1}(U)}\\cong (L|_{f^{-1}(U)})\\otimes f_U^*((M|_U)^{\\otimes a}).$$\nHere restriction is pullback along the open inclusion. The isomorphism is the composite of the pullback tensor comparison, the comparison of successive pullbacks along $f\\circ j=k\\circ f_U$, and the tensor-power comparison. In exponent zero the latter uses $f_U^*\\mathcal O_U\\cong\\mathcal O_{f^{-1}(U)}$, whose tensor-formula map is $b\\otimes c\\mapsto b f_U^\\sharp(c)$ with inverse $b\\mapsto b\\otimes1$. For each $U$ and $a$, the two modules in the displayed isomorphism are ample simultaneously [def-weil-pbc-ample-invertible-module]. No quasi-compactness, affine, finite-type or ampleness hypothesis is imposed on $f$ or $U$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4K (lemma-ample-composition), identifying the restriction of the displayed global twist with the local twist. Module comparisons: Modules Tags 01CD (lemma-tensor-product-pullback), 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible); Sheaves Tag 0097 (lemma-push-pull-composition-modules)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved instances IsInvertible.tensorPow and IsInvertible.tensorObj in WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula. The former inducts from the structure module at exponent zero, with successor M tensor M.tensorPow a. Pullback preserves invertibility by the proved instance IsInvertible.pullback, and transport along the inverse of boundaryPullbackComparison identifies ordinary pullback with the explicit tensor pullback. Apply this to M.tensorPow a along f, then tensor with L, and pull the twist back along j. These give the first three assertions and the invertibility of the left restricted twist.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-tensor-pullback-power-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the degree-zero equation, expand only boundaryPullbackPowIso at zero. Its hom is the comparison from uniqueness of left adjoints followed by the ordinary pullback structure-module morphism. Apply the injective Hom equivalence of the normalized tensor-pullback adjunction. Naturality and homEquiv_leftAdjointUniq_hom_app turn the composite into the ordinary adjunction unit followed by the pushforward of its structure-module morphism. Mathlib's pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit identifies this with the structure-sheaf map. By definition tensorPullbackObjUnitToUnit is the inverse image of that same map under the tensor adjunction. Thus the two morphisms agree. The tensor description is multiplication b tensor c maps to b h-sharp(c), and its inverse inserts one, by the balancing relation.",
+   "uses": [
+    "def-sc-tensor-pullback-power-comparison",
+    "def-sfb-tensor-pullback-structure-sheaf-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the already constructed invertibleTwistOpenRestrictionIso: compose boundaryPullbackTensorIso along j, the inverse tensorPullbackSectionComp along j and f, the equality j followed by f equals f_U followed by k, tensorPullbackSectionComp along f_U and k, and the pullback of boundaryPullbackPowIso along k. The recursive power comparison includes exponent zero, whose normalization was proved in the preceding step. All these are actual constructed isomorphisms, without additional invertibility or finiteness hypotheses.",
+   "uses": [
+    "def-sc-tensor-pullback-power-comparison",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport invertibility from the left restricted twist across invertibleTwistOpenRestrictionIso using IsInvertible.of_iso. With those two invertibility proofs as instances, apply isAmple_iff_of_iso to the same specified isomorphism. Choose that isomorphism as the existential witness, with the required equality given by reflexivity. No hypothesis excludes exponent zero, empty opens, or empty schemes.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-tensor-pullback-structure-sheaf-map",
+  "def-pc-module-pullback",
+  "lem-sc-ample-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tags 0B8L, 01CT and 01CD, with sheaves.tex Tags 0096 and 0097 and properties.tex Tag 01PS. H8 formal proof uses the existing invertibility instances and canonical comparisons directly, and Mathlib adjunction naturality for the degree-zero normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a line bundle tensor a pullback tensor power to an inverse image open is the corresponding restricted twist and preserves ampleness",
+   "results": {
+    "t": "2026-10-22T07:34:46Z",
+    "tool": "leanfinder",
+    "query": "Restriction of a line bundle tensor a pullback tensor power to an inverse image open is the corresponding restricted twist and preserves ampleness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.morphismRestrict",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc",
+     "AlgebraicGeometry.isPullback_morphismRestrict"
+    ],
+    "digest": "af3f7aa3f4cfd30d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern restrictions or scheme fibre-product rings, not invertibility and the tensor-power twist comparison with ampleness transport"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback|pullbackTensor|pullback.*[Tt]ensor|[Tt]ensor.*pullback",
+   "results": {
+    "t": "2026-10-22T07:36:22Z",
+    "tool": "grep",
+    "query": "tensorPullback|pullbackTensor|pullback.*[Tt]ensor|[Tt]ensor.*pullback",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean"
+    ],
+    "digest": "184e31f6cb560edd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern restrictions or scheme fibre-product rings, not invertibility and the tensor-power twist comparison with ampleness transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf tensor the pullback of a tensor power restricts to the same twist on the inverse image of an open subscheme",
+   "results": {
+    "t": "2026-10-22T07:36:22Z",
+    "tool": "leansearch",
+    "query": "An invertible sheaf tensor the pullback of a tensor power restricts to the same twist on the inverse image of an open subscheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict",
+     "AlgebraicGeometry.Scheme.Modules.restrict_obj",
+     "TopCat.Presheaf.pullbackObjObjOfImageOpen",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "AlgebraicGeometry.Scheme.inv_app",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv",
+     "AlgebraicGeometry.Scheme.Hom.appLE"
+    ],
+    "digest": "0586ec9f877946fc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern restrictions or scheme fibre-product rings, not invertibility and the tensor-power twist comparison with ampleness transport"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\", \"tensor\"",
+   "results": {
+    "t": "2026-10-22T07:36:22Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"pullback\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern restrictions or scheme fibre-product rings, not invertibility and the tensor-power twist comparison with ampleness transport"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|[Ii]nvertible.*restrict|restrict.*[Ii]nvertible",
+   "results": {
+    "t": "2026-10-22T07:36:57Z",
+    "tool": "grep",
+    "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|[Ii]nvertible.*restrict|restrict.*[Ii]nvertible",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern restrictions or scheme fibre-product rings, not invertibility and the tensor-power twist comparison with ampleness transport"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a commutative square of open inclusions commutes with tensor products and tensor powers of invertible modules including the zeroth power",
+   "results": {
+    "t": "2026-10-22T07:36:58Z",
+    "tool": "leanfinder",
+    "query": "Pullback along a commutative square of open inclusions commutes with tensor products and tensor powers of invertible modules including the zeroth power",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+     "AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+     "AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom"
+    ],
+    "digest": "e675b79036f09585"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern restrictions or scheme fibre-product rings, not invertibility and the tensor-power twist comparison with ampleness transport"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|[Ii]nvertible.*restrict|restrict.*[Ii]nvertible",
+   "results": {
+    "t": "2026-10-23T04:16:52Z",
+    "tool": "grep",
+    "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|[Ii]nvertible.*restrict|restrict.*[Ii]nvertible",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+     "Mathlib/AlgebraicGeometry/PullbackCarrier.lean"
+    ],
+    "digest": "184e31f6cb560edd"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern scheme fibre products, restriction functors, or Proj sections; none states the full invertible-module twist restriction comparison together with its invertibility and ampleness clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf tensor the pullback of a tensor power restricts to the same twist on the inverse image of an open subscheme",
+   "results": {
+    "t": "2026-10-23T04:16:52Z",
+    "tool": "leansearch",
+    "query": "An invertible sheaf tensor the pullback of a tensor power restricts to the same twist on the inverse image of an open subscheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict",
+     "AlgebraicGeometry.Scheme.Modules.restrict_obj",
+     "TopCat.Presheaf.pullbackObjObjOfImageOpen",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "AlgebraicGeometry.Scheme.inv_app",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv",
+     "AlgebraicGeometry.Scheme.Hom.appLE"
+    ],
+    "digest": "0586ec9f877946fc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern scheme fibre products, restriction functors, or Proj sections; none states the full invertible-module twist restriction comparison together with its invertibility and ampleness clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\", \"tensor\"",
+   "results": {
+    "t": "2026-10-23T04:16:53Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"pullback\", \"tensor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern scheme fibre products, restriction functors, or Proj sections; none states the full invertible-module twist restriction comparison together with its invertibility and ampleness clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a line bundle tensor a pullback tensor power to an inverse image open is the corresponding restricted twist and preserves ampleness",
+   "results": {
+    "t": "2026-10-23T04:17:02Z",
+    "tool": "leanfinder",
+    "query": "Restriction of a line bundle tensor a pullback tensor power to an inverse image open is the corresponding restricted twist and preserves ampleness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.morphismRestrict",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc",
+     "AlgebraicGeometry.isPullback_morphismRestrict"
+    ],
+    "digest": "af3f7aa3f4cfd30d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern scheme fibre products, restriction functors, or Proj sections; none states the full invertible-module twist restriction comparison together with its invertibility and ampleness clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a commutative square of open inclusions commutes with tensor products and tensor powers of invertible modules including the zeroth power",
+   "results": {
+    "t": "2026-10-23T04:18:15Z",
+    "tool": "leanfinder",
+    "query": "Pullback along a commutative square of open inclusions commutes with tensor products and tensor powers of invertible modules including the zeroth power",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+     "AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+     "AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom"
+    ],
+    "digest": "e675b79036f09585"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern scheme fibre products, restriction functors, or Proj sections; none states the full invertible-module twist restriction comparison together with its invertibility and ampleness clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiprojective-qc-composition",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, second sentence: quasi-projectivity of the composite, by 0C4M; supplies a relatively ample module on the composite modification tower.; Tag 0C4K (lemma-ample-composition), identifying the restriction of the displayed global twist with the local twist. Module comparisons: Modules Tags 01CD (lemma-tensor-product-pullback), 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible); Sheaves Tag 0097 (lemma-push-pull-composition-modules).",
+   "via": [
+    "lem-sfb-quasiprojective-qc-composition",
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invertible-twist-open-restriction",
+  "worker": "stage1",
+  "summary": "Q30 gives explicit tensor-power and invertibility inductions, the multiplication/insertion-of-one structure-module comparison in degree zero, the ordered open-restriction composite, and ampleness transport. The statement is unchanged. Existing DAG nodes supply all non-elementary inputs; no new nodes. Project Lean was searched and has no declaration giving the whole item.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration-route provenance: the 0C4K local/global twist identification used in the 0C4M/0C4P composition argument. Steps 1-4 realize its module restriction identification, and step 5 transports ampleness. Whole-blueprint searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic Zariski invertible-module pullback, tensor, and canonical composition comparisons needed for the 0C4K restriction calculation; the current unit has no replacement for these module tools."
+   },
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Generic invariance of ampleness under an isomorphism on one scheme, used only after constructing the required restriction isomorphism; not a replacement of the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-ample-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-10c1e6044",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-10c1e6044 (reviewer sub-agent of L); spot-checked: Stage-1 delivery with no new nodes; the statement is unchanged and the base item had no proof. Item, cited nodes and Stacks 0C4K checked. Cited nodes: lem-weil-pbc-invertible-pullback-tensor clauses (1) and (2), lem-weil-pbc-module-pullback-structure-sheaf, def-pc-module-pullback, lem-sc-ample-iso. Stacks 0C4K (morphisms.tex l.8888) reduces to ampleness of the twist on (g∘f)^{-1}(V_i), which is the identification the item proves. Tags 01CD, 0B8L, 01CT and 0097 resolve correctly. Step 2: the degree-zero map ε_h is b⊗c↦b·h^♯(c) with inverse b↦b⊗1, which is correct. Step 4: the composite is pullback tensor comparison, then successive pullbacks along f∘j=k∘f_U, then 1⊗f_U^*(p_a), in the order the statement gives, and it is correct. Step 5: ampleness transports along an isomorphism on one scheme, which is correct. Edge cases a=0, a=1, U=∅ and U=Y were checked. lem-sc-pullback-tensor-power-iso gives no specified map, so it is not a duplicate. Both tool_uses are accepted as generic. Fault repaired: steps 1 and 3 built powers as M⊗M^{⊗a} with no a=1 base. The statement takes powers from def-pur-sheaf-tensor-product, where F^{⊗1}=F and F^{⊗(m+1)}=F^{⊗m}⊗F, so the claimed target equality k^*M⊗(k^*M)^{⊗a}=(k^*M)^{⊗(a+1)} was false without the symmetry isomorphism. The FIX rewrites step 1 and step 3. In step 3, p_0=ε_k, p_1=id, and for a≥1 p_{a+1}=(p_a⊗1)∘comparison(M^{⊗a}⊗M). def-pur-sheaf-tensor-product is added to the uses of steps 1 and 3 and to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleTwistOpenRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invertible_twist_open_restriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.invertibleTwistOpenRestrictionIso",
+   "AlgebraicGeometry.Scheme.Modules.invertibleTwistOpenRestriction_power_zero",
+   "AlgebraicGeometry.Scheme.Modules.invertible_twist_open_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleTwistOpenRestriction.lean",
+  "statement": "theorem invertible_twist_open_restriction {X Y : Scheme.{u}} (f : X ⟶ Y) (L : X.Modules) (M : Y.Modules) [L.IsInvertible] [M.IsInvertible] (a : ℕ) : (M.tensorPow a).IsInvertible ∧ ((tensorPullback f).obj (M.tensorPow a)).IsInvertible ∧ (L ⊗ (tensorPullback f).obj (M.tensorPow a)).IsInvertible ∧ ∀ U : Y.Opens, ∃ hleft : ((tensorPullback (f ⁻¹ᵁ U).ι).obj (L ⊗ (tensorPullback f).obj (M.tensorPow a))).IsInvertible, ∃ hright : ((tensorPullback (f ⁻¹ᵁ U).ι).obj L ⊗ (tensorPullback (f ∣_ U)).obj (((tensorPullback U.ι).obj M).tensorPow a)).IsInvertible, ∃ e : (tensorPullback (f ⁻¹ᵁ U).ι).obj (L ⊗ (tensorPullback f).obj (M.tensorPow a)) ≅ (tensorPullback (f ⁻¹ᵁ U).ι).obj L ⊗ (tensorPullback (f ∣_ U)).obj (((tensorPullback U.ι).obj M).tensorPow a), e = invertibleTwistOpenRestrictionIso f L M a U ∧ (@IsAmple (f ⁻¹ᵁ U).toScheme ((tensorPullback (f ⁻¹ᵁ U).ι).obj (L ⊗ (tensorPullback f).obj (M.tensorPow a))) hleft ↔ @IsAmple (f ⁻¹ᵁ U).toScheme ((tensorPullback (f ⁻¹ᵁ U).ι).obj L ⊗ (tensorPullback (f ∣_ U)).obj (((tensorPullback U.ι).obj M).tensorPow a)) hright)",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2503855c1",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Re-delivery of 745a6dd6de3b (returned for H2). Snapshot diff: the Lean module is byte-identical; the item JSON differs only in the two requested stmt_deps swaps, lem-sc-square-zero-ideal-tensor-unit to def-sc-tensor-pullback-power-comparison (boundaryPullbackTensorIso/PowIso, existing:true, 2026-10-22) and lem-weil-pbc-module-pullback-structure-sheaf to def-sfb-tensor-pullback-structure-sheaf-map (tensorPullbackObjUnitToUnit, existing:true, 2026-10-23). proof_deps unchanged. All other names are owned by cited nodes (tensorPullbackSectionComp by def-pc-module-pullback, tensorPow/IsInvertible by def-sc-invertible-module, IsAmple by def-weil-pbc-ample-invertible-module) or are Mathlib (morphismRestrict_ι). Clauses, composite order, degree-zero comparison, ampleness iff, edge cases (a=0, U=⊥, empty schemes) and absence of extra hypotheses re-confirmed. Report has Worker report and Second reading sections. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T082207-L-2147647",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

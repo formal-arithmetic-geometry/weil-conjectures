@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-strict-mixed-scalar-square",
+ "kind": "statement",
+ "title": "Scalar-linear reconstruction mate square",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, $\\Omega$ an algebraic closure of $\\mathbf Q_\\ell$, and $f:X\\to Y$ proper between separated finite-type $k$-schemes. Let $D$ be prescribed strict integral direct-image comparison data satisfying HasIntegralLaws [lem-sf-strict-direct-image-scalar-comparison], and $E\\subset L$ finite coefficient subextensions. Choose normalized reduction calculi, scalar systems, coefficient reduction data, limit comparisons and restriction comparison $C$ [def-weil-strict-mixed-unit-data]. Write $s_W$ for the coefficient reduction isomorphism $R_L T_W\\cong S_W R_E$, $r_E,r_L$ for the reconstruction reduction mates, $b$ for the inverse integral comparison, and $q_N$ for the scalar-adjunction transpose of $G_E(\\zeta^X_N)$ followed by $C^{-1}_{S_XN}$. For every integral constructible $K$ over $E$ on $X$, the following equality holds on entire derived quotient systems: $s_{Y,I_EK}^{-1};R_L(b_K);r_{L,T_XK};G_L(s_{X,K})=S_Y(r_{E,K});q_{R_EK}$. Semicolon denotes composition in displayed order. This is an equality of scalar-linear maps before applying restriction or precomposing with the scalar unit.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map (counit-transpose construction); agent-extracted coherent mixed-quotient normalization of the reconstruction-transported comparison in lem-sf-strict-direct-image-scalar-comparison, using the specified system units and counits."
+ },
+ "stmt_deps": [
+  "def-weil-strict-mixed-unit-data",
+  "lem-sf-strict-direct-image-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Let $q_N:S_YG_EN\\to G_LS_XN$ be the coefficient-adjunction mate of $d$, so\n$$U_Y(q_N)\\zeta^Y_{G_EN}=d_{S_XN}G_E(\\zeta^X_N).$$\nIt is also the geometric counit/tensor mate: applying [lem-trf-iterated-square-mates] to the pullback/scalar-association square identifies its twice-transposed comparison with the restriction/direct-image comparison $d$; this applies because $d$ is the conjugate of that square by Step 1 [lem-sfb-ringed-comparison-tensor-adjunction], and injectivity of the mate bijections gives this identification. Likewise, by Step 2 and [lem-trf-iterated-square-mates], $\\alpha_H$ is the geometric mate of the pullback/reduction square. Let $c:C_YF_E\\to F_LC_X$ be the ambient counit/tensor mate used to define $b_*$. Paste the coefficient/reduction squares in the two orders. On the left-adjoint side, one order uses $\\widehat R_E\\to\\widehat R_L\\to B_\\bullet$, the other $\\widehat R_E\\to A_\\bullet\\to B_\\bullet$. They are the same ring map. Their pullback/tensor identifications agree: on a representative they send $((x\\otimes s)\\otimes b)$ to $x\\otimes\\bar s b$, and further association multiplies the same scalars in the same order. Naturality in the ring maps in [lem-sfb-successive-derived-quotient-normalization] proves this on the sequence sites with their transitions. Taking geometric mates, the horizontal and vertical pasting identities of [lem-weil-pbc-mate-pasting] now give\n$$G_L(e_X)\\,\\alpha_{L,C_XK}\\,\\mathcal R_L^Y(c_K)\n=q_{\\mathcal R_E^XK}\\,S_Y(\\alpha_{E,K})\\,e_{Y,F_EK}.$$\nThis is an equality of system maps. The argument is a mate of the specified equality of left-adjoint comparisons, so does not infer it from componentwise equality.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-iterated-square-mates",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sfb-ringed-comparison-tensor-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map) for the counit transpose; Tags 0E46 and 0E47 (remark-compose-base-change and remark-compose-base-change-horizontal) for the two pastings. The precise pasting and iterated-transpose identities are cited as nodes."
+   }
+  },
+  {
+   "text": "By [lem-sf-strict-direct-image-scalar-comparison], the prescribed $b_*$ is $c$ transported through $\\psi_E,\\psi_L,\\chi_X,\\chi_Y$. Substitute $r_H\\mathcal R_H\\psi_H=\\alpha_H$ and $s_W\\mathcal R_L\\chi_W=e_W$ from Steps 2–3 into the equation of Step 4. Naturality cancels the reconstruction and completion isomorphisms, giving, with $N=\\mathcal R_E^XK$,\n$$G_L(s_{X,K})\\,r_{L,T_XK}\\,\\mathcal R_L^Y(b_{*,K})\n=q_N\\,S_Y(r_{E,K})\\,s_{Y,I_EK}. \\tag{*}$$\nFor clarity, apply $U_Y$ to (*) and precompose with $\\eta_{Y,I_EK}$. Its right side becomes\n$$U_Y(q_N)\\,U_YS_Y(r_{E,K})\\,\\zeta^Y_{\\mathcal R_E^YI_EK}\n=U_Y(q_N)\\,\\zeta^Y_{G_EN}\\,r_{E,K}\n=d_{S_XN}\\,G_E(\\zeta^X_N)\\,r_{E,K}.$$\nThe first equality is unit naturality and the second is the defining equation for $q$. Replace $\\zeta^X_N$ by $U_X(s_{X,K})\\eta_{X,K}$ and use naturality of $d$. This last expression is\n$$U_YG_L(s_{X,K})\\,d_{\\mathcal R_L^XT_XK}\\,G_E(\\eta_{X,K})\\,r_{E,K}.$$\nCancel the isomorphism $U_YG_L(s_{X,K})$ from the two sides. We obtain the requested equation on entire $A_{E,\\bullet}$-systems.",
+   "uses": [
+    "lem-sf-strict-direct-image-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map); algebraic assembly of the specified comparisons and unit equations in Steps 1–4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-iterated-square-mates",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-sf-strict-direct-image-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of Steps 1--6 of lem-weil-strict-direct-image-mixed-unit, using the cited Stacks adjunction and projection-formula constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension pushforward counit mate with derived tensor adjunction units",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, ModuleCat.extendScalars_comp_id_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_unit. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|homEquiv.*naturality",
+   "results": "25 hits: Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Category/UniformSpace.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension adjunction mixed tensor unit and direct image comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, CategoryTheory.Adjunction.derivedη.congr_simp, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.derivedη. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "First paragraph: identification of the strict-tower direct image with ordinary direct image, including the coefficient-descent normalization hidden in this identification. Scalar-linear reconstruction mate square",
+   "via": [
+    "lem-weil-proper-coefficient-descent",
+    "lem-weil-strict-direct-image-mixed-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictMixedScalarSquare",
+  "file": "lean/Sheaf/Paper/StrictMixedScalarSquare.lean",
+  "declaration": "WeilConjectures.StrictDirectImageMixedUnit.strictMixedScalarSquare",
+  "statement": "theorem strictMixedScalarSquare\n    (k : Type u) [Field k] (hl : IsUnit (l : k))\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f]\n    (D : IntegralComparisons l Ω f) (hD : HasIntegralLaws l Ω f D)\n    (e j : AlgebraicallyClosedCoefficients.Index l Ω) (h : e ≤ j)\n    (EX : CoefficientDerivedSystemCalculus l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      X)\n    (EY : CoefficientDerivedSystemCalculus l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      Y)\n    (LX : CoefficientDerivedSystemCalculus l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      X)\n    (LY : CoefficientDerivedSystemCalculus l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      Y)\n    (AX : CoefficientExtensionSystems l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) X)\n    (AY : CoefficientExtensionSystems l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) Y)\n    (dX : CoefficientExtensionReductionData l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω\n      e) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) X EX LX AX)\n    (dY : CoefficientExtensionReductionData l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω\n      e) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) Y EY LY AY)\n    (CE : LimitComparison l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e) f) (CL :\n      LimitComparison l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) f)\n    (C : RestrictionComparison l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) f)\n    (K : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      X) :\n    (coefficientExtensionReductionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) Y EY LY AY dY).inv.app\n        ((D.integral e).image.obj K).obj ≫\n      LY.reduction.map (((D.integralComparison e j h).inv.app K).hom) ≫\n      reductionMap l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) f LX LY CL (D.integral\n      j)\n        ((sfConstructibleIntegralScalarExtension 0 l\n          (Nat.Prime.ne_zero (Fact.out : l.Prime)) (AlgebraicallyClosedCoefficients.Coefficient.{u}\n      l Ω e) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) X).obj K) ≫\n      (FrobeniusExchange.systemDirect l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      f).map\n        ((coefficientExtensionReductionIso l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)\n      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) X EX LX AX dX).hom.app K.obj)\n      =\n    AY.scalar.T.map (reductionMap l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e) f EX EY\n      CE (D.integral e) K) ≫\n      (AY.scalar.adjunction.homEquiv _ _).symm\n        ((FrobeniusExchange.systemDirect l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e)\n      f).map\n            (AX.scalar.adjunction.unit.app (EX.reduction.obj K.obj)) ≫\n          C.derived.inv.app (AX.scalar.T.obj (EX.reduction.obj K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "worker": "H4",
+  "summary": "Formal proof-step obligation from the existing six-step strict mixed-unit calculation.",
+  "blueprint": "The original coefficient-descent subargument below prop-weil-proper-compact-coincidence; no chapter or unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Simultaneous unbounded operations and transposes on varying-ring sequence sites, without flatness or equality detection by evaluations. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Actual derived extension/restriction Hom bijection, units and their representative normalization for arbitrary ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal horizontal and vertical pasting of square mates, also for sequence sites. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Derived tensor association and unit normalization natural in arbitrary composable ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-trf-iterated-square-mates",
+    "why": "Identifies coefficient and geometric transpositions of the same square, before evaluation. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sf-strict-direct-image-scalar-comparison",
+    "why": "Specifies the strict-tower comparison as transport of the ambient comparison through psi and chi. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "States that the direct-image comparison of two factorizations of one ringed-topos map, built from the K-injective composition isomorphisms, is the conjugate of the derived pullback comparison; used to identify d and the tower comparison with conjugates before taking iterated mates (reviewer FIX). Generic ringed-topos tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "independent cc review: old StrictDirectImageMixedUnit defs vs StrictDirectImageMixedUnitData (verbatim); item theorem signature vs base; three split statements vs their nodes and the old CoherentLaws/FiniteLaws; item node proof/proof_deps vs Lean assembly"
+ }
+}

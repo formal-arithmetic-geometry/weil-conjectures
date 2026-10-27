@@ -14,31 +14,13 @@ public import Sheaf.Paper.DerivedCompleteOnSlices
 public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 public import Sheaf.Paper.CompletedPullbackTriangles
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.Paper.SfImmersionCompletedPullbackComparison
 public import Sheaf.Paper.CompletedPullbackReduction
 public import Sheaf.Paper.IntegralPullbackShiftCoordinates
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Sheaf.Paper.IntegralPullbackCompletedComparisonData
+import Sheaf.Paper.IntegralCoefficientCompletenessTransport
+import Sheaf.Paper.IntegralPullbackSignedShift
+import Sheaf.Paper.CompletedIntegralFiniteTowerTransport
 
 /-! # Integral and strict-tower completed pullback
 
@@ -56,206 +38,111 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [local irreducible] HasDerivedCategory.standard CategoryTheory.constantSheaf
+attribute [local instance 5000] WeilConjectures.integralTowerHasDerivedCategory
+attribute [-instance] WeilConjectures.IntegralOnSlice.abLocallyBijective
+  WeilConjectures.integralOperationsAbLocallyBijective
+  WeilConjectures.integralOperationsCommHasDerivedCategory
+  WeilConjectures.IntegralOnSlice.hasDerived
+attribute [-instance] WeilConjectures.integralOperationsAbSheafify
+  WeilConjectures.integralOperationsSiteSmall
+  WeilConjectures.PrincipalKoszulStrictReplacement.abSheafify
+  WeilConjectures.PrincipalKoszulStrictReplacement.abLocallyBijective
+  WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 open WeilConjectures
+
+private instance (priority := 3000) fixedAbSheafify (W : Scheme.{u}) :
+    HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=
+  integralCoefficientAbSheafify.{u, u} W
+
+private instance (priority := 3000) fixedAbBijective (W : Scheme.{u}) :
+    (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+  integralCoefficientAbLocallyBijective.{u, u} W
 
 namespace WeilConjectures.IntegralCompletedComparison
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The existing completed-ring transport, on modules before localization.
-Source: Stacks 099N, coefficient identification
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-abbrev modules (T : Scheme.{u}) :=
-  pbcRestrict (ImmersionCompletedPullback.completedRingIso l E T).inv
-
-/-- The same transport on complexes.
-Source: Stacks 099N (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-abbrev complexes (T : Scheme.{u}) := (modules l E T).mapHomologicalComplex (.up ℤ)
-
-/-- The existing exact transport on derived categories.
-Source: Stacks 099N (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-abbrev derived (T : Scheme.{u}) := ImmersionCompletedPullback.transport l E T
-
-/-- Exact coefficient restriction inherits the standard termwise derived shift.
-Source: Stacks 014E (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-instance derived_commShift (T : Scheme.{u}) : (derived l E T).CommShift ℤ :=
-  inferInstanceAs ((modules l E T).mapDerivedCategory.CommShift ℤ)
-
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-/-- Finite pullback followed by restriction, in the integral presentation.
-Source: Stacks 099N(5) (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def finiteIntegral (n : ℕ) :=
-  modules l E Y ⋙ unrestrictedIntegralReductionFunctor.{u, u} l E Y n ⋙
-    integralOperationsLevelPullback.{u, u} l E g n ⋙
-      SheafOfModules.restrictScalars.{u + 1}
-        ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-          (completedIntegralCommRingProjectionUnrestricted.{u, u} l E X n))
 
-/-- Additivity of the composite finite pullback and exact coefficient restriction.
-Source: Stacks 03D2 (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-instance finiteIntegral_additive (n : ℕ) : (finiteIntegral l E g n).Additive := by
-  have := unrestrictedIntegralReductionFunctor_additive.{u, u} l E Y n
-  have := integralOperationsLevelPullback_additive.{u, u} l E g n
-  unfold finiteIntegral
-  infer_instance
+attribute [local irreducible] pbcIntegralDatum
 
-/-- The same finite pullback in the adic presentation, transported to the same ring.
-Source: Stacks 099N(5) (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def finiteCompleted (n : ℕ) :=
-  reductionChange Y (completedReductionProjection Y (pbcIntegralDatum l E) n) ⋙
-    completedReductionFiniteModules g (pbcIntegralDatum l E) n ⋙
-      pbcRestrict (completedReductionProjection X (pbcIntegralDatum l E) n) ⋙ modules l E X
+private theorem quotientEquiv_eq (n : ℕ) :
+    ImmersionCompletedPullback.quotientEquiv l E n = integralCoefficientULift l E n := by
+  exact (ImmersionCompletedPullback.quotientEquiv_exists l E n).unique
+    (ImmersionCompletedPullback.quotientEquiv_exists l E n).exists.choose_spec
+    (integralCoefficientULift_exists l E n).exists.choose_spec
 
-/-- Additivity of the finite target and its coefficient transports.
-Source: Stacks 03D2 (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-instance finiteCompleted_additive (n : ℕ) : (finiteCompleted l E g n).Additive := by
-  unfold finiteCompleted
-  infer_instance
+private theorem coefficientIso_eq (T : Scheme.{u}) :
+    (adicLisseForget T).mapIso (ImmersionCompletedPullback.completedRingIso l E T) =
+      integralDetailedCoefficientComparison T l E := by
+  apply (integralDetailedCoefficientComparison_exists T l E).unique
+    ?_ (integralDetailedCoefficientComparison_exists T l E).exists.choose_spec
+  intro n
+  have h := congrArg (fun f ↦ (adicLisseForget T).map f)
+    ((ImmersionCompletedPullback.completedRingIso_exists l E T).exists.choose_spec n)
+  have hp : (adicLisseForget T).map
+      (completedIntegralCommRingProjectionUnrestricted l E T n) =
+      limit.π (integralCoefficientSheafSystem l E T) (op n) := by
+    rfl
+  simpa only [Functor.map_comp, Functor.mapIso_hom, hp,
+    ImmersionCompletedPullback.completedRingIso,
+    ImmersionCompletedPullback.finiteRingIso, integralDetailedLevelComparison,
+    Iso.trans_hom, Functor.mapIso_trans, quotientEquiv_eq] using h
 
-/-- Apply the actual finite natural comparison to complexes, with inherited zero preservation.
-Source: Stacks 099N(5) (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def finiteComplexComparison (n : ℕ)
-    (e : finiteIntegral l E g n ≅ finiteCompleted l E g n) :=
-  letI := finiteIntegral_additive l E g n
-  letI := finiteCompleted_additive l E g n
-  NatTrans.mapHomologicalComplex e.hom (.up ℤ)
+private theorem intrinsic_of_complete
+    (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) (hK : Complete l E K) :
+    PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) K := by
+  have hc : ImmersionCompletedPullback.completedRingIso l E Y = purCoefficientIso l E Y :=
+    (purCoefficientIso_existsUnique l E Y).unique (coefficientIso_eq l E Y)
+      (purCoefficientIso_existsUnique l E Y).exists.choose_spec
+  apply (purCoefficientModel_predicates l E Y K).1.mpr
+  simpa only [Complete, derived, ImmersionCompletedPullback.transport, hc,
+    purCoefficientModel, Equivalence.changeFunctor] using hK
 
-/-- The finite comparison sends each pulled-back tensor-unit generator to itself.
-This fixes the comparison on the actual finite quotient modules, rather than allowing
-an arbitrary automorphism of a derived tower evaluation.
-Source: Stacks 099N(5), tensor balancing
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def FiniteNormalization (n : ℕ)
-    (e : finiteIntegral l E g n ≅ finiteCompleted l E g n) : Prop :=
-  ∀ (M : pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E)))
-    (V : Y.ProEt) (x : M.val.obj (op V)),
-    ((e.hom.app M).val.app (op ((proEtaleBaseChange g).obj V)))
-      (integralOperationsPullbackGenerator.{u, u} l E g n
-        ((unrestrictedIntegralReductionFunctor.{u, u} l E Y n).obj ((modules l E Y).obj M)) V
-        (unrestrictedIntegralTensorSection.{u, u} l E Y n ((modules l E Y).obj M) (op V) 1 x)) =
-      completedReductionFiniteGenerator g (pbcIntegralDatum l E) n M V
-        ((proEtaleBaseChange g).obj V) (𝟙 _) 1 1 x
+private theorem completedToFiniteTower_naturality
+    (C : FinitePullbackStrictTower.Comparison.{u, u} l E g)
+    (b : transportedStrict l E g ≅ finiteTowerLimit l E g C)
+    (K L : PbcCompletedDerived Y (pbcIntegralDatum l E))
+    (hK : PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) K)
+    (hL : PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) L) (f : K ⟶ L) :
+    (completed l E g).map f ≫ (completedToFiniteTower l E g C b L hL).hom =
+      (completedToFiniteTower l E g C b K hK).hom ≫
+        (finiteTowerLimit l E g C).map f := by
+  change (derived l E X).map ((pbcActualCompletedPull g (pbcIntegralDatum l E)).map f) ≫
+      ((derived l E X).map ((towerIso l E g).inv.app ⟨L, hL⟩) ≫ b.hom.app L) =
+    ((derived l E X).map ((towerIso l E g).inv.app ⟨K, hK⟩) ≫ b.hom.app K) ≫ _
+  rw [← Functor.map_comp_assoc]
+  have h := (towerIso l E g).inv.naturality
+    (ObjectProperty.homMk f :
+      (⟨K, hK⟩ : ObjectProperty.FullSubcategory
+        (PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E))) ⟶
+        ⟨L, hL⟩)
+  change (pbcActualCompletedPull g (pbcIntegralDatum l E)).map f ≫ _ =
+    _ ≫ (pbcActualStrictCompletedPull (pbcIntegralDatum l E) g).map f at h
+  rw [h, Functor.map_comp, Category.assoc]
+  simpa only [transportedStrict, Functor.comp_map, Category.assoc] using congrArg
+    ((derived l E X).map ((towerIso l E g).inv.app ⟨K, hK⟩) ≫ ·)
+    (b.hom.naturality f)
 
-/-- The representative computation map of the specified integral pullback.
-Source: Stacks 099N(5), resolving-class descent
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def integralComputation
-    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E))) ℤ)
-    (hP : integralOperationsGoodComplex.{u, u} l E Y ((complexes l E Y).obj P)) :=
-  (integralDerivedPullback.{u, u} l E g).map ((modules l E Y).mapDerivedCategoryFactors.hom.app P) ≫
-    (integralDerivedPullbackComparison.{u, u} l E g).hom.app ⟨(complexes l E Y).obj P, hP⟩
-
-/-- The actual integral projection is the first mapping-cocone map and the nth product leg.
-Source: Stacks 0941 and 099N(5)
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def integralProjection
-    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E))) ℤ)
-    (hP : integralOperationsGoodComplex.{u, u} l E Y ((complexes l E Y).obj P)) (n : ℕ) :=
-  integralComputation l E g P hP ≫ DerivedCategory.Q.map
-    (CochainComplex.mappingCocone.fst
-      (towerTransitionEndomorphism
-        (K := fun k : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj
-          ((complexes l E Y).obj P)).obj (op k))
-        (integralOperationsTowerStep ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj
-          ((complexes l E Y).obj P)))) ≫
-      Pi.π (fun k : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj
-        ((complexes l E Y).obj P)).obj (op k)) n)
-
-/-- The existing unique unit-compatible strict-tower/reflector comparison.
-Source: Stacks 099N(2),(5)
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def towerIso := (pbcActualCompletedPullback_tower (pbcIntegralDatum l E) g).exists.choose
-
-/-- The defining strict derived-limit projection, followed by its normalized finite evaluation.
-Source: Stacks 0941 and 099N(5)
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def completedProjection (K : PbcCompletedDerived Y (pbcIntegralDatum l E))
-    (hK : PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) K) (n : ℕ) :=
-  (derived l E X).map
-    ((towerIso l E g).inv.app ⟨K, hK⟩ ≫
-      (completedReductionLimitProjection (pbcIntegralDatum l E) (X := X) n).app
-        ((completedTowerPullback g (pbcIntegralDatum l E)).obj
-          ((completedReductionTower Y (pbcIntegralDatum l E)).obj K)) ≫
-      (completedReductionFiniteEvaluation g (pbcIntegralDatum l E) n).hom.app K)
-
-/-- The canonical finite computation map, retaining both exact restriction comparisons.
-Source: Stacks 099N(5), universal derived counits
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-def finiteComputation
-    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E))) ℤ)
-    (n : ℕ) :=
-  (derived l E X).map
-    ((pbcDerivedRestrict (completedReductionProjection X (pbcIntegralDatum l E) n)).map
-      (completedReductionFiniteModelMap g (pbcIntegralDatum l E) n P) ≫
-      (completedReductionRestrictionFactors X
-        (completedReductionProjection X (pbcIntegralDatum l E) n)).hom.app
-        (((completedReductionFiniteModules g (pbcIntegralDatum l E) n).mapHomologicalComplex
-          (.up ℤ)).obj
-          (((reductionChange Y (completedReductionProjection Y
-            (pbcIntegralDatum l E) n)).mapHomologicalComplex (.up ℤ)).obj P))) ≫
-    (modules l E X).mapDerivedCategoryFactors.hom.app
-      (((pbcRestrict (completedReductionProjection X
-        (pbcIntegralDatum l E) n)).mapHomologicalComplex (.up ℤ)).obj
-          (((completedReductionFiniteModules g (pbcIntegralDatum l E) n).mapHomologicalComplex
-            (.up ℤ)).obj
-              (((reductionChange Y (completedReductionProjection Y
-                (pbcIntegralDatum l E) n)).mapHomologicalComplex (.up ℤ)).obj P)))
-
-/-- The integral pullback after the existing coefficient identification.
-Source: Stacks 099N(5) (blueprint: lem-a1-integral-pullback-completed-comparison). -/
-abbrev integral := derived l E Y ⋙ integralDerivedPullback.{u, u} l E g
-
-/-- The completed pullback after the same coefficient identification.
-The shift is the normalized shift of completedPullback-preserves-triangles.
-Source: Stacks 099N(2),(5)
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-abbrev completed := pbcActualCompletedPull g (pbcIntegralDatum l E) ⋙ derived l E X
-
-/-- Derived completeness is the recorded Roos predicate after canonical coefficient transport.
-Source: Bhatt--Scholze 3.5.2
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-abbrev Complete (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) : Prop :=
-  IntegralOnSlice.IsComplete l E Y none ((derived l E Y).obj K)
-
-/-- The clauses of the comparison, with all projections and shifts specified.
-The finite isomorphisms identify the two exact finite module pullbacks on their
-canonical generators. Every gamma is a morphism over the completed coefficient ring.
-Source: Stacks 099N(5), 0941
-(blueprint: lem-a1-integral-pullback-completed-comparison). -/
-structure Comparison where
-  intrinsic : ∀ (K : PbcCompletedDerived Y (pbcIntegralDatum l E)), Complete l E K →
-    PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) K
-  finite : ∀ n : ℕ, finiteIntegral l E g n ≅ finiteCompleted l E g n
-  finite_normalization : ∀ n : ℕ, FiniteNormalization l E g n (finite n)
-  chainShift : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ
-  chainShift_coordinates : ShiftCoordinates l E g chainShift
-  derivedShift : (integralDerivedPullback.{u, u} l E g).CommShift ℤ
-  derivedShift_descent : ShiftDescent l E g chainShift derivedShift
-  gamma : ∀ (K : PbcCompletedDerived Y (pbcIntegralDatum l E)), Complete l E K →
-    ((integral l E g).obj K ≅ (completed l E g).obj K)
-  naturality : ∀ (K L : PbcCompletedDerived Y (pbcIntegralDatum l E))
-    (hK : Complete l E K) (hL : Complete l E L) (a : K ⟶ L),
-    (integral l E g).map a ≫ (gamma L hL).hom =
-      (gamma K hK).hom ≫ (completed l E g).map a
-  projections : ∀
-    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l E))) ℤ)
-    (hP : integralOperationsGoodComplex.{u, u} l E Y ((complexes l E Y).obj P))
-    (hK : Complete l E (DerivedCategory.Q.obj P)) (n : ℕ),
-    (gamma (DerivedCategory.Q.obj P) hK).inv ≫ integralProjection l E g P hP n ≫
-        DerivedCategory.Q.map
-          ((finiteComplexComparison l E g n (finite n)).app P) =
-      completedProjection l E g (DerivedCategory.Q.obj P)
-          (intrinsic (DerivedCategory.Q.obj P) hK) n ≫ finiteComputation l E g P n
-  shifts : (fun [_d : (integralDerivedPullback.{u, u} l E g).CommShift ℤ] ↦
-    ∀ (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) (hK : Complete l E K) (r : ℤ),
-      ∃ hKr : Complete l E (K⟦r⟧),
-        (gamma (K⟦r⟧) hKr).hom ≫ ((completed l E g).commShiftIso r).hom.app K =
-          ((integral l E g).commShiftIso r).hom.app K ≫ ((gamma K hK).hom)⟦r⟧')
-    (_d := derivedShift)
+private theorem conjugate_shift_square
+    {A : Type*} [Category A] [HasShift A ℤ]
+    {I J H Ir Jr Hr : A} (a : I ≅ H) (ar : Ir ≅ Hr)
+    (b : J ≅ H) (br : Jr ≅ Hr) (r : ℤ)
+    (i : Ir ⟶ I⟦r⟧) (j : Jr ⟶ J⟦r⟧) (h : Hr ⟶ H⟦r⟧)
+    (ha : ar.hom ≫ h = i ≫ a.hom⟦r⟧')
+    (hb : br.hom ≫ h = j ≫ b.hom⟦r⟧') :
+    (ar ≪≫ br.symm).hom ≫ j = i ≫ (a ≪≫ b.symm).hom⟦r⟧' := by
+  apply (cancel_mono (b.hom⟦r⟧')).mp
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.map_comp, Category.assoc]
+  rw [← hb]
+  simp only [← Category.assoc]
+  simpa only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id,
+    Functor.map_id, Category.comp_id] using ha
 
 /-- Integral derived pullback agrees naturally with strict-tower completed pullback,
 including the intrinsic domain, all finite derived-limit projections and every shift.
@@ -265,52 +152,87 @@ Source: Stacks Project, proetale.tex, Tag 099N(5), and sites-cohomology.tex, Tag
 (blueprint: lem-a1-integral-pullback-completed-comparison).
 
 Proof:
-1. The coefficient integer ring is a Noetherian DVR, with nonzero uniformizer and
-finite residue field. Positive quotients are finite, additive torsion and perfect:
-[A --t^n--> A] is their two-term free resolution. This gives the stated adic datum.
-2. Exact constant-sheafification and flat constant-to-completed scalar extension
-make [R --t^n--> R] a resolution of the finite constant quotient on each site.
-The transitions are (t,1) and commute strictly with their quotient augmentations.
-3. Apply finite-free-completed-scalar-comparison at L=E to the imported Roos
-completeness predicate. It makes the actual zero-second-coordinate quotient unit
-invertible. Exact countable products and normalized strict-Roos comparison carry
-it to the canonical strict derived-limit unit, which is therefore invertible.
-4. Koszul-reconstruction intertwines this unit with the Koszul unit. The signed
-coordinate identification (x,y) mapped to (-y,x) sends the explicit intrinsic
-fiber unit (u,0) to the cone unit (0,u). Thus K is intrinsically complete.
-5. On one flat-term K-flat representative P, tensor the strict two-term Koszul
-resolutions with P. K-flatness makes the resulting map to the quotient tower a
-levelwise quasi-isomorphism. The Koszul tensor levels are K-flat with flat terms:
-tensor with an acyclic complex gives a cone on an acyclic tensor complex.
-6. Ringed-topos K-flat pullback preserves these properties. It identifies this
-strict replacement after pullback with the corresponding target Koszul tower.
-Its augmentation to the target finite reduction tower is a quasi-isomorphism.
-No invertibility of the completed coefficient structure map is assumed.
-7. Tensor reassociation identifies the target finite reductions with Res g_n*P_n.
-The balancing map sends (x tensor b) tensor a to x tensor bar(b)a, with inverse
-inserting 1. It preserves every transition and the tensor-unit generators used
-in finite_normalization. Finite constant-coefficient pullback is exact.
-8. The integral construction is the Roos cone C(B); the completed construction is
-Rlim(VK_bullet). The strict comparison b:VK_bullet ≅ B and normalized Roos map
-rho give gamma = rho followed by inverse Rlim(b). These are coefficient-linear.
-9. All comparisons are natural on good representatives and descend through the
-resolving-class localization by integral-operations-well-defined. This gives
-naturality on every derived arrow and independence of the chosen resolution.
-10. The normalized Roos map and functorial limit projections give
-p_comp gamma = p_int, equivalently gamma inverse followed by p_int = p_comp.
-The displayed representative projection equation is this equality after the
-canonical finite computation maps; all such representatives are quantified.
-11. On cone coordinates the shift map is (y,x) mapped to ((-1)^r y,x).
-It commutes with the differential and has the zero and addition shift laws.
-Use P[r] and a shifted K-injective tower resolution. Koszul augmentation,
-balancing, zero-coordinate limit inclusion and rho commute with that signed
-shift. The completed shift is the composite reduction/pullback/limit shift of
-completed-pullback-triangles, so gamma has exactly the asserted shift square.
+1. Projection-normalized uniqueness identifies the completed coefficient-ring
+   comparison with the coefficient model used by integral completeness. The
+   coefficient-completeness transport therefore gives intrinsic completeness.
+2. Use the finite-pullback strict-tower comparison C. Its termwise normalized
+   shifts give the signed Roos shift, which descends along good complexes.
+3. Realize integral Roos pullback as H, the total derived limit of C.B. Independently,
+   transport the published strict completed tower to H by the coefficient-ring
+   isomorphisms, retaining its finite quotient-unit normalizations.
+4. On a complete K, compose the integral-to-H comparison with the inverse of the
+   actual-completed-to-H comparison. Naturality follows from the naturality of
+   both maps and cancellation. Compose their two representative projection
+   identities to obtain precisely the required projection formula.
+5. The two realization comparisons intertwine their specified shifts with H's
+   shift. Conjugating these two squares gives the required square for gamma.
+   Shift stability supplies the completeness proof for K[r].
 -/
 theorem integralPullback_completedComparison
     (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :
     Nonempty (Comparison l E g) := by
-  sorry
+  obtain ⟨C⟩ := FinitePullbackStrictTower.finite_pullback_strict_tower_comparison.{u, u}
+    l E g _hX _hY
+  obtain ⟨c, d, hc, hd⟩ := integralPullback_signedShift.{u} l E g C
+  obtain ⟨a, ha, hshift⟩ := integralPullback_roosFiniteTower.{u} l E g C c hc d hd
+  obtain ⟨e, b, he, hb, hbs⟩ :=
+    completedIntegral_finiteTowerTransport.{u} l E g _hX _hY C
+  let intrinsic : ∀ (K : PbcCompletedDerived Y (pbcIntegralDatum l E)),
+      Complete.{u} l E K → PbcIsIntrinsicallyComplete Y (pbcIntegralDatum l E) K :=
+    intrinsic_of_complete.{u} l E (Y := Y)
+  let beta (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) (hK : Complete.{u} l E K) :
+      (completed.{u} l E g).obj K ≅ (finiteTowerLimit.{u} l E g C).obj K :=
+    completedToFiniteTower.{u} l E g C b K (intrinsic K hK)
+  let gamma (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) (hK : Complete.{u} l E K) :
+      (integral.{u} l E g).obj K ≅ (completed.{u} l E g).obj K :=
+    a.app K ≪≫ (beta K hK).symm
+  refine ⟨(show Comparison.{u} l E g from {
+    intrinsic := intrinsic
+    finite := e
+    finite_normalization := he
+    chainShift := c
+    chainShift_coordinates := hc
+    derivedShift := d
+    derivedShift_descent := hd
+    gamma := gamma
+    naturality := ?_
+    projections := ?_
+    shifts := ?_ })⟩
+  · intro K L hK hL f
+    apply (cancel_mono (beta L hL).hom).mp
+    simp only [gamma, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+      Iso.inv_hom_id, Category.comp_id]
+    rw [completedToFiniteTower_naturality.{u} l E g C b K L
+      (intrinsic K hK) (intrinsic L hL) f]
+    change (integral l E g).map f ≫ a.hom.app L =
+      a.hom.app K ≫ (beta K hK).inv ≫ (beta K hK).hom ≫
+        (finiteTowerLimit l E g C).map f
+    simpa only [Iso.inv_hom_id_assoc] using a.hom.naturality f
+  · intro P hP hK n
+    have hp : a.hom.app (DerivedCategory.Q.{u + 2}.obj P) ≫
+        finiteTowerLimitProjection.{u} l E g C P n = integralProjection.{u} l E g P hP n :=
+      ha P hP n
+    have hpi : a.inv.app (DerivedCategory.Q.{u + 2}.obj P) ≫
+        integralProjection.{u} l E g P hP n = finiteTowerLimitProjection.{u} l E g C P n := by
+      rw [← hp]
+      simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+    change ((beta (DerivedCategory.Q.obj P) hK).hom ≫
+      a.inv.app (DerivedCategory.Q.{u + 2}.obj P)) ≫ _ ≫ _ = _
+    simp only [Category.assoc]
+    rw [← Category.assoc (a.inv.app (DerivedCategory.Q.{u + 2}.obj P)), hpi]
+    exact hb P hP (intrinsic _ hK) n
+  · let := d
+    let : NatTrans.CommShift a.hom ℤ := hshift
+    intro K hK r
+    obtain ⟨hKr, hbr⟩ := hbs K hK r
+    refine ⟨hKr, ?_⟩
+    exact conjugate_shift_square (a.app K) (a.app (K⟦r⟧))
+      (beta K hK) (beta (K⟦r⟧) hKr) r
+      (((integral l E g).commShiftIso r).hom.app K)
+      (((completed l E g).commShiftIso r).hom.app K)
+      (((finiteTowerLimit l E g C).commShiftIso r).hom.app K)
+      ((NatTrans.shift_app_comm a.hom r K).symm)
+      (hbr (intrinsic K hK) (intrinsic (K⟦r⟧) hKr))
 
 end WeilConjectures.IntegralCompletedComparison

@@ -1,0 +1,187 @@
+{
+ "id": "lem-route-coefficient-twist-line-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "via": [],
+   "place": "Proof (3), last paragraph of det-def-sp-tate-twist-locally-free: tensor powers and duals are invertible, opposite powers cancel by evaluation, and tensor by a line is exact."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor with an integer power or dual of a rank-one line is exact and additive.",
+ "statement": "Let $X$ be a scheme, let $X_{\\mathrm{proet}}$ be its small pro-etale site [def-weil-pbc-proetale-site], and let $R$ be any sheaf of commutative rings on this site. Work in the category $\\operatorname{Mod}(R)$ of sheaves of $R$-modules [def-weil-sheaf-of-modules-category], with universes as in the pro-etale site convention. Let $L$ be a locally free rank-one $R$-module sheaf, meaning that locally for this topology $L$ is isomorphic to $R$. Using the sheaf tensor product [def-pur-sheaf-tensor-product] and internal sheaf Hom [def-pur-sheaf-hom], define\n$$\n L^{(m)}=\\begin{cases}\n R,&m=0,\\\\\n L^{\\otimes_R m},&m>0,\\\\\n \\mathcal Hom_R(L^{\\otimes_R(-m)},R),&m<0.\n \\end{cases}\n$$\nFor every integer $m$, let $T_m:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R)$ be $M\\mapsto M\\otimes_R L^{(m)}$, acting on a morphism $f$ by $f\\otimes 1$. Then $T_m$ is additive, i.e. $T_m(f+g)=T_m(f)+T_m(g)$ for parallel morphisms, and it preserves finite limits and finite colimits [def-galois-finite-limits-colimits]. Thus this is the conjunction of additivity, preservation of finite limits, and preservation of finite colimits for the ordinary sheaf tensor functor, for every $m\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
+  "place": "det-def-sp-tate-twist-locally-free: the Lean of this node (its declaration uses) reaches WeilConjectures.coefficientTwistLine_exact, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/CoefficientTwistsDetailed.lean, declaration WeilConjectures.coefficientTwistLine_exact (module Sheaf.Paper.CoefficientTwistsDetailed, lines 78-96, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Apply isFiniteLocallyFreeOfRank_iff_exists_over_iso_free to L at rank one. Its free sheaf on ULift (Fin 1) is the unit by freeUniqueIso, yielding the covering charts required by the signed-line flatness theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply signed_line_power_flat [lem-pur-signed-line-power-flat] to those charts and the integer m. By integer cases, its signedLinePower is exactly coefficientTwistLine: both use scalarTensorPower at nonnegative degrees and its internal dual at negative degrees. Thus the tensor functor preserves finite limits and finite colimits.",
+   "uses": [
+    "lem-pur-signed-line-power-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Preservation of finite colimits implies additivity between these abelian categories by Mathlib CategoryTheory.rightExactFunctor_le_additiveFunctor. Combine this with the two finite preservation clauses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-line-power-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z6",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "The invertible-line clause and signed tensor/dual powers; reuse the general-site theorem lem-pur-signed-line-power-flat for exactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEquivalence|preservesLimitsOfEquivalence|preservesColimitsOfEquivalence",
+   "results": "Hits read: Mathlib/CategoryTheory/Limits/Cones.lean, Mathlib/CategoryTheory/Limits/Cones.lean, Mathlib/CategoryTheory/Limits/Cones.lean, Mathlib/CategoryTheory/Limits/VanKampen.lean, Mathlib/CategoryTheory/Limits/Final.lean, Mathlib/CategoryTheory/Limits/Final.lean, Mathlib/CategoryTheory/Limits/Final.lean, Mathlib/CategoryTheory/Limits/Final.lean. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a locally free rank one sheaf of modules is an exact additive functor",
+   "results": "Hits read: CategoryTheory.tensoringLeft_additive, rTensor_exact, CategoryTheory.tensorRight_additive, CategoryTheory.tensoringRight_additive, CategoryTheory.tensorLeft_additive, SheafOfModules.freeFunctor, SheafOfModules.freeFunctor_obj, CategoryTheory.AdditiveFunctor.ofExact. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "Hits read: CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring sheaves of modules with a locally free rank one module or its tensor powers and dual is additive and preserves finite limits and finite colimits",
+   "results": "Hits read: SheafOfModules.mapFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.Monoidal.tensorObj, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitsOfEquivalence|preservesColimitsOfEquivalence|isEquivalence_of_comp_iso|preservesFiniteLimits_of_preservesLimits",
+   "results": "No hits. ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "siteSheafTensorRight|coefficientTwistLine|[Ll]ocally[Ff]ree|[Ii]nvertible",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalences of categories preserve all limits and colimits and tensor right is additive in a monoidal preadditive category",
+   "results": "Hits read: CategoryTheory.Limits.hasLimit_equivalence_comp, CategoryTheory.Adjunction.isEquivalencePreservesLimits, CategoryTheory.tensoringRight_additive, CategoryTheory.tensorRight_additive, CategoryTheory.Limits.hasColimit_equivalence_comp, CategoryTheory.Adjunction.has_colimits_of_equivalence, CategoryTheory.Enriched.HasConicalLimit.of_equiv, CategoryTheory.Adjunction.isEquivalence_preservesColimits. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preserves\", \"equivalence\"",
+   "results": "Hits read: CategoryTheory.Adjunction.isEquivalencePreservesLimits, CategoryTheory.Adjunction.isEquivalence_preservesColimits, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify, CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence, CategoryTheory.Functor.preservesProjectiveObjects_of_isEquivalence, CategoryTheory.Functor.instPreservesEffectiveEpiFamiliesOfIsEquivalence, Action.functorCategoryEquivalence_preservesZeroMorphisms. General equivalence-preservation and tensor-additivity results are tools only; they do not turn a locally free ringed-site line into an equivalence. The latter is supplied by the existing signed-line node.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-def-sp-tate-twist-locally-free",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "file": "lean/Sheaf/Paper/CoefficientTwistsDetailed.lean",
+  "declaration": "WeilConjectures.coefficientTwistLine_exact",
+  "declarations": [
+   "WeilConjectures.coefficientTwistLine_exact"
+  ],
+  "statement": "theorem coefficientTwistLine_exact\n    {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}\n    (L : SheafOfModules.{u + 1}\n      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))\n    [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :\n    (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n      (coefficientTwistLine X L m)).Additive ∧\n    PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n      (coefficientTwistLine X L m)) ∧\n    PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (A := R)\n      (coefficientTwistLine X L m)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-coefficient-twist-line-exact",
+  "worker": "stage1",
+  "group": "NE",
+  "summary": "Replaced the truncated machine-made provisional statement by the full ordinary-sheaf functor conjunction from the recorded Lean signature. Reused the exact signed-line inverse-functor interface twice, ordinary tensor additivity, and the existing Mathlib equivalence-preservation leaf; no new nodes. Checked every cited statement and cycle reachability. Corrected the source support: 03RV concerns finite locally constant sheaves, not this arbitrary coefficient-ring exactness theorem.",
+  "blueprint": "Realizes proof (3), last paragraph of det-def-sp-tate-twist-locally-free, specifically the formal exactness of signed line twists after the inverse-pair statement; adds no purity argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-signed-line-tensor-equivalence",
+    "why": "Generic ordinary sheaf tensor inverse pair for an arbitrary rank-one pro-etale coefficient line; realizes the ancestor proof (3) without replacing any vector-bundle purity step."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic additivity of ordinary sheaf tensor on a ringed site, required for the additive-functor clause; no unit purity step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NE-054e28172",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-054e28172 (reviewer sub-agent of L); spot-checked: I read the item, its attached Lean (CoefficientTwistsDetailed.lean:58-96) and the definitions behind it (scalarTensorPower at InvertibleTensorScalarExtensionDefinitions.lean:48, IsFiniteLocallyFreeOfRank at LocallyFree.lean:135). The inline L^{(m)} (R; L^{⊗m}; Hom_R(L^{⊗(-m)},R)) matches coefficientTwistLine. The statement has the same three clauses as the Lean (Additive, PreservesFiniteLimits, PreservesFiniteColimits of M↦M⊗L^{(m)}), for any scheme, any commutative ring sheaf and every m. It is not weakened and adds no hypothesis. I checked it against the blueprint main-20261015 sk-def-sp-tate-twist-locally-free proof (3), last paragraph. Replacing the docstring's 03RV, which is about finite locally constant sheaves, with Stacks 03EK/0038 is correct; I checked both tags in tags/tags and lemma-adjoint-exact at categories.tex:3472. Step 1 applies lem-weil-signed-line-tensor-equivalence (exact Lean type) at m and at -m; after neg_neg this gives both T_{-m}T_m≅id and T_mT_{-m}≅id, and the hypotheses match. Step 2: lem-pc-sheaf-modules-tensor-closed states the sheaf tensor is additive in each variable, which gives additivity. Step 3: the Mathlib leaf lem-galois-equivalence-preserves-limits needs exactly the two isomorphisms and gives all limits and colimits, so the finite ones and the empty diagram are included. A reachability check over the snapshot DAG finds no cycle; the only node citing the item is det-def-sp-tate-twist-locally-free. Duplicate search found lem-pur-sheaf-line-evaluation-inverse-pair (m=±1 only), lem-pur-signed-line-power-flat (a different P^[d] construction) and lem-pur-line-unbounded-derived-tensor (derived). None states the item, and the delivery adds no new nodes. Small cases checked: m=0, ±1, -2, a line with no global generator, the zero ring and an empty X. The declared tool_uses (the signed-line node in unit sk-prop-sf-existence and tensor-closed in sk-thm-picard-semicon) are accepted; both units are reachable from sk-prop-an's unit uses, so neither leaves the route. No SGA source is used. No changes made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T065042-L-2679916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.coefficientTwistStageComparison_coherent",
+   "WeilConjectures.integralComplexTwist_constructible",
+   "WeilConjectures.rationalTwistScalarComparison_unit",
+   "WeilConjectures.twistLineScalarIso_existsUnique",
+   "WeilConjectures.twistScalarMaps_existsUnique",
+   "WeilConjectures.twistSheafScalarComparison_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.twistLineScalarIso_existsUnique",
+   "WeilConjectures.twistScalarMaps_existsUnique"
+  ]
+ }
+}

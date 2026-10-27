@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-finite-stage-normalized-coherence",
+ "kind": "statement",
+ "title": "Coherence of already normalized stage and arrow families",
+ "statement": "Given any family of AdjointDatum for each stage and compactification, and Change for every stage arrow and compactification, there exists a unique family of normalized RefinementDatum. The given projections and mates satisfy scalar composition and identity equations and the two refinement squares. This does not construct adjunctions or coefficient comparisons: they are input families [def-pur-finite-coefficient-adjoint-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Parent lem-pur-finite-coefficient-adjoint-comparisons, numbered proof steps; general separated finite-type extension via ordinary-etale closed support as recorded there."
+ },
+ "stmt_deps": [
+  "def-pur-finite-coefficient-adjoint-data"
+ ],
+ "proof": [
+  {
+   "text": "The projection cocycle, tensor associators and open balancing give identity, composite and mixed coefficient equalities for $q$; the refinement square is the cited site/coefficient square. Mate pasting gives those for $b$: both transposes are $T_{A,C}\\epsilon_A q_{A,C}^{-1}$. The counit equation defines $b$. The transpose of $G_B(q_K)b_{F_AK}T\\eta_{A,K}$ is $q_K(T\\epsilon_A)(TF_A\\eta_A)q_K^{-1}=1$ by naturality and the triangle identity, proving the unit equation. Step 1 gives the claimed cofinal subsystem.",
+   "uses": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "det-sp-scalar-extension-functor",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Agent-written ordinary-etale extraction of the locality/chart argument"
+   }
+  },
+  {
+   "text": "Projection normalization and the site/coefficient cocycle prove projection composition, identity and refinement. Construct refinement by the canonical lower compactification comparison and its adjoint conjugate. Transpose the two sides of each mate equation: counit normalization reduces them to the corresponding projection equation, so injectivity proves equality. Witness normalization uniquely fixes the lower refinement and the normalized counit fixes the upper refinement; function extensionality and proof irrelevance give uniqueness of the family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sp-scalar-extension-functor",
+  "lem-coef-etale-open-tensor",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Stage-3 extraction of the parent argument; normalization uniqueness is by extensionality and injectivity of adjunction transposes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction on constructible finite Tor derived sheaves transported from etale to proetale with coefficient change mates",
+   "results": "8 general sheaf pullback adjunction hits; none supplies the normalized exceptional coefficient system.",
+   "date": "2026-10-26",
+   "verdict": "Use geometric preservation, site transport, and mate arguments from the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient exceptional adjunction has a unique counit normalized coefficient change mate satisfying scalar composition and refinement coherence",
+   "results": "8 generic adjunction counit and rightAdjointUniq hits.",
+   "date": "2026-10-26",
+   "verdict": "These formal results do not establish the geometric preservation and normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*counit|mateEquiv.*vcomp",
+   "results": "25 generic counit and mate-composition hits via msearch; local source search found no existing assembly in these fixed coefficient categories.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical results are ingredients for the separate coherence step, not a replacement for the geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientAdjointComparisons",
+  "group": "F8",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+   "place": "Coherence of already normalized stage and arrow families",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStageNormalizedCoherence",
+  "file": "lean/Sheaf/Paper/FiniteStageNormalizedCoherence.lean",
+  "declaration": "AlgebraicGeometry.FiniteCoefficientAdjoints.finite_stage_normalized_coherence",
+  "statement": "theorem finite_stage_normalized_coherence (k : Type u) [Field k] (p l : ℕ) [CharP k p] (hp : 0 < p) [Fact l.Prime] (hlp : l ≠ p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] : letI := finiteTypeNoetherian k X letI := finiteTypeNoetherian k Y letI := (finiteTypeMorphismProperties k f).1 letI := (finiteTypeMorphismProperties k f).2.1 letI := (finiteTypeMorphismProperties k f).2.2 ∀ (datum : ∀ (s : Stage l E) (c : Compactification f), AdjointDatum s.ring c) (change : ∀ {s t : Stage l E} (a : Arrow s t) (c : Compactification f), Change a.ringMap c (datum s c) (datum t c)), ∃! refinement : ∀ (s : Stage l E) {c d : Compactification f} (r : c.Refinement d), RefinementDatum r (datum s c) (datum s d), (∀ {s t v : Stage l E} (a : Arrow s t) (b : Arrow t v) (ab : Arrow s v) (h : ab.embedding = b.embedding.comp a.embedding) (c : Compactification f) (K : (ctf s.ring X).FullSubcategory), (tensor b.ringMap Y).map ((change a c).projection.hom.app K) ≫ (change b c).projection.hom.app ⟨(tensor a.ringMap X).obj K.obj, (change a c).tensor_preserves_X K.obj K.property⟩ ≫ (lower v.ring c).map ((ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology X) a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app K.obj) = (ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology Y) a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app ((lower s.ring c).obj K.obj) ≫ (change ab c).projection.hom.app K) ∧ (∀ {s t v : Stage l E} (a : Arrow s t) (b : Arrow t v) (ab : Arrow s v) (h : ab.embedding = b.embedding.comp a.embedding) (c : Compactification f) (K : (ctf s.ring Y).FullSubcategory), (tensor b.ringMap X).map ((change a c).mate.hom.app K) ≫ (change b c).mate.hom.app ⟨(tensor a.ringMap Y).obj K.obj, (change a c).tensor_preserves_Y K.obj K.property⟩ ≫ (upper v.ring c).map ((ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology Y) a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app K.obj) = (ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology X) a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app ((upper s.ring c).obj K.obj) ≫ (change ab c).mate.hom.app K) ∧ (∀ (s : Stage l E) (a : Arrow s s) (h : a.embedding = AlgHom.id (Padic l) s.field) (c : Compactification f) (K : (ctf s.ring X).FullSubcategory), (change a c).projection.hom.app K ≫ (lower s.ring c).map ((ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X) a.ringMap (Arrow.ringMap_id a h)).hom.app K.obj) = (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y) a.ringMap (Arrow.ringMap_id a h)).hom.app ((lower s.ring c).obj K.obj)) ∧ (∀ (s : Stage l E) (a : Arrow s s) (h : a.embedding = AlgHom.id (Padic l) s.field) (c : Compactification f) (K : (ctf s.ring Y).FullSubcategory), (change a c).mate.hom.app K ≫ (upper s.ring c).map ((ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y) a.ringMap (Arrow.ringMap_id a h)).hom.app K.obj) = (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X) a.ringMap (Arrow.ringMap_id a h)).hom.app ((upper s.ring c).obj K.obj)) ∧ (∀ {s t : Stage l E} (a : Arrow s t) {c d : Compactification f} (r : c.Refinement d) (K : (ctf s.ring X).FullSubcategory), (tensor a.ringMap Y).map ((refinement s r).lowerIso.hom.app K) ≫ (change a d).projection.hom.app K = (change a c).projection.hom.app K ≫ (refinement t r).lowerIso.hom.app ⟨(tensor a.ringMap X).obj K.obj, (change a c).tensor_preserves_X K.obj K.property⟩) ∧ (∀ {s t : Stage l E} (a : Arrow s t) {c d : Compactification f} (r : c.Refinement d) (K : (ctf s.ring Y).FullSubcategory), (tensor a.ringMap X).map ((refinement s r).upperIso.hom.app K) ≫ (change a c).mate.hom.app K = (change a d).mate.hom.app K ≫ (refinement t r).upperIso.hom.app ⟨(tensor a.ringMap Y).obj K.obj, (change a c).tensor_preserves_Y K.obj K.property⟩)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-529dd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T202009-L-2662190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-529dd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T202009-L-2662190",
+  "kind": "interface",
+  "note": "independent cc review: 529d Data relocation (pp.all #print of 38 decls + item identical published vs sandbox) and 3 new ∃! sorry lemmas against the item's own clauses/normalizations; 11 direct importers compiled rc 0"
+ }
+}

@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-space-zeroth-hypercohomology-coproducts",
+ "kind": "statement",
+ "title": "Zeroth hypercohomology preserves quasi-coherent coproducts on a qcqs algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ with its small etale structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated: every open cover of $|X|$ admits a finite subcover, and its absolute diagonal is quasi-compact, i.e. the diagonal $X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ of $X$ regarded as an algebraic space over $\\operatorname{Spec}\\mathbf Z$ through $S\\to\\operatorname{Spec}\\mathbf Z$ [lem-sfb-space-change-base-to-integers]. Use module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Write $C_X$ for its full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. For every small family $(E_i)_{i\\in I}$ in $C_X$ and every coproduct cofan $\\iota_i:E_i\\to E$ in the ambient $D(\\mathcal O_X)$, the canonical homomorphism\n$$\\bigoplus_{i\\in I}H^0(X,E_i)\\longrightarrow H^0(X,E)$$\nis bijective. Here $H^0(X,-)=H^0R\\Gamma(X,-)$ is zeroth hypercohomology [def-pur-ringed-site-zeroth-hypercohomology], and the map restricts on summand $i$ to $H^0(X,\\iota_i)$. No common cohomological bound or Noetherian hypothesis is assumed; the empty family is included.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08FB, label lemma-quasi-coherence-pushforward-direct-sums; the global zeroth-hypercohomology consequence explicitly invoked in the first paragraph of proposition-compact-is-perfect."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-change-base-to-integers",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Set $F=\\Gamma(X,-):\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$. The small-site module category is Grothendieck abelian and admits K-injective resolutions. Abelian groups are $\\mathbf Z$-modules, so their category is also Grothendieck abelian. Ambient coproducts are termwise sums of representatives, and $H^r(E)=\\bigoplus_i H^r(E_i)$. Quasi-coherent modules are closed under sums, kernels and cokernels; thus $E$ and all good truncations in use have quasi-coherent cohomology. Exactness of sums also makes good truncations commute with sums: at the boundary degree compute the kernel or cokernel of the differential. These identifications preserve each coprojection, and apply to any specified coproduct cofan by its unique isomorphism with the termwise model. The formula $F(M)=\\operatorname{Hom}(\\mathcal O_X,M)$ makes $F$ additive, left exact and product preserving: a map into a product is precisely a family of maps.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "src-weil-derived-homology-preserves-coproducts",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums; Tag 08FB, truncations and sums"
+   }
+  },
+  {
+   "text": "Choose a uniform bound for $F$ as follows. Put $T=\\operatorname{Spec}\\mathbf Z$ and apply the change-of-base lemma with $S'=T$: $j_!X$ is an algebraic space over $T$ (part (1)), and by part (3) it has the same small etale site and structure sheaf as $X$, hence the same module sheaves, quasi-coherent modules, functor $F$ and derived functors $R^pF$. Its point space is $|X|$ (same atlases and field points, as in step 1 of the qcqs permanence lemma), so $j_!X$ is quasi-compact, and by the statement its diagonal over $T$ is quasi-compact. Work with $j_!X$, written $X$, over the base scheme $T$. The absolute diagonal of $T$ is the identity and $T$ is quasi-compact: a cover refines to basic opens $D(a)$, the covering elements generate the unit ideal, and an expression for $1$ uses finitely many of them. Thus $T$ is quasi-separated. The qcqs permanence lemma gives that $f:X\\to T$ is quasi-compact and quasi-separated. Apply the affine-chart uniform vanishing lemma to $Y=V=T$ and $\\operatorname{id}_T:V\\to Y$. Here $X\\times_TV=X$, and evaluation of the extension $\\widetilde M$ at $X$ is global sections of $M$: the enlarged-site equivalence identifies maps from the structure module with its sections at the terminal object $X$. Consequently that lemma gives one $N\\geq1$ with $R^pF(M)=0$ for every quasi-coherent $M$ and $p\\geq N$. Neither a dimension bound on $X$ nor a bound on the family has been introduced.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, choice of N; Tag 08FA, affine-target bound; spaces-cohomology.tex Tags 073G and 08EX; spaces.tex Tag 03I4 (lemma-change-base-scheme) and spaces-properties.tex Tag 03BS (definition-separated, absolute properties via Spec Z)"
+   }
+  },
+  {
+   "text": "For every $p\\geq0$, $R^pF$ preserves sums of module sheaves. To apply the abelian-sheaf colimit theorem, use the enlarged etale site, where $X$ is terminal. Its equivalence with the small site preserves global sections, colimits and injectives: an additive equivalence preserves kernels and cokernels, and its inverse transports the injective extension property. Hence it identifies the derived evaluations as well. Apply the module-to-abelian evaluation comparison at $X$ there. Together with preservation of colimits by forgetting modules, the filtered-colimit theorem for abelian sheaf cohomology now gives the corresponding assertion for $R^pF$ on modules. Write a sum as the filtered colimit of its finite subsums, indexed by finite subsets of $I$, including the empty subset. Additivity of derived functors identifies the higher cohomology of a finite subsum with the finite sum of higher cohomologies. The resulting isomorphism $\\bigoplus_iR^pF(M_i)\\cong R^pF(\\bigoplus_iM_i)$ has on each summand exactly the map induced by its coprojection.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, last sentence; spaces-cohomology.tex Tag 073E, lemma-colimits; sites-cohomology.tex Tag 03FD"
+   }
+  },
+  {
+   "text": "First consider objects $K_i$ with a common lower cohomological bound $a$, and their ambient sum $K$ with injections $u_i$. Step 1 gives the same bound for $K$ and $H^r(K)=\\bigoplus_iH^r(K_i)$. The natural single-object identification in the truncation spectral sequence is $H^p(RF(M[0]))\\cong R^pF(M)$ for $p\\geq0$. By step 3 every canonical comparison $\\bigoplus_i H^p(RF(H^r(K_i)[0]))\\to H^p(RF(H^r(K)[0]))$ is therefore an isomorphism. Apply the bounded-below coproduct filtration lemma with $\\mathcal A=\\operatorname{Mod}(\\mathcal O_X)$, $\\mathcal B=\\operatorname{Ab}$, $F=\\Gamma(X,-)$ and total degree $0$. Its finite filtrations and filtered comparison have underlying map $\\sum_i H^0(RF(u_i))$, with every graded map invertible. Finite-filtration induction proves this map bijective. The required Grothendieck and K-injective hypotheses were checked in step 1; the lemma includes empty families and degrees below the common lower bound.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-pc-bounded-below-coproduct-filtration",
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, bounded-below spectral-sequence reduction"
+   }
+  },
+  {
+   "text": "For any $K$ with quasi-coherent cohomology, put $A=\\tau_{\\leq -N-1}K$ and $K'=\\tau_{\\geq -N}K$. Step 1 checks the product-preserving hypothesis of the derived upper-bound lemma, and step 2 checks its uniform vanishing hypothesis. Apply it with $b=-N-1$ to $A$. It gives $H^m(RF(A))=0$ for $m\\geq-1$, in particular for $m=0,1$. Apply the triangulated functor $RF$ to $A\\to K\\to K'\\to A[1]$. In the long exact sequence, the terms adjacent to $H^0(RF(K))\\to H^0(RF(K'))$ vanish, so this map is an isomorphism. The truncation maps are natural, making these isomorphisms natural in $K$. This is the single cutoff needed for all $E_i$ and their sum.",
+   "uses": [
+    "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, lemma-application-nice-K-injective; Tag 08FB, removal of the negative tail"
+   }
+  },
+  {
+   "text": "Apply step 5 to each $E_i$ and to $E$. Taking the direct sum of the former isomorphisms gives the left vertical isomorphism in the square comparing the original canonical map with the canonical map for $(\\tau_{\\geq-N}E_i)_i$. The right vertical map is the isomorphism for $E$. Step 1 identifies $\\tau_{\\geq-N}E$ with the coproduct of this truncated family. Each truncated object has the common lower bound $-N$, so step 4 makes the bottom comparison bijective. The square commutes on every summand by naturality of $K\\to\\tau_{\\geq-N}K$; the coproduct universal property makes the whole square commute. Its top comparison is thus bijective. By definition it restricts to $H^0(X,\\iota_i)$ on summand $i$, so it is the requested map. If $I$ is empty, the ambient coproduct is zero and the additive functor $H^0RF$ sends it to zero, giving the same conclusion.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, final comparison; Tag 09M8, proposition-compact-is-perfect, first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-affine-spectrum",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-space-cohomology-filtered-colimit",
+  "lem-pc-right-derived-functor-triangulated",
+  "thm-sp-truncation-e2",
+  "lem-pc-bounded-below-coproduct-filtration",
+  "lem-sp-finite-filtration-induction",
+  "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08FB, lemma-quasi-coherence-pushforward-direct-sums, global H^0 consequence invoked in Tag 09M8; uniform cutoff from Tag 08F7 and the existing affine-chart bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercohomology.*coproduct|globalSections.*[Cc]oproduct|AlgebraicSpace.*[Cc]oproduct",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme ring sections, generic derived categories or sheaf cohomology definitions, not unbounded quasi-coherent hypercohomology coproduct preservation for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth derived global sections on a qcqs algebraic space preserves arbitrary sums of quasi coherent complexes",
+   "results": "Search returned 8 hits: AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, DerivedCategory.instHasZeroObject, HomologicalComplex.instPreservesZeroMorphismsOpcyclesFunctor, AlgebraicGeometry.RingedSpace.res_zero, HomologicalComplex.zero. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme ring sections, generic derived categories or sheaf cohomology definitions, not unbounded quasi-coherent hypercohomology coproduct preservation for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"PreservesCoproducts\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme ring sections, generic derived categories or sheaf cohomology definitions, not unbounded quasi-coherent hypercohomology coproduct preservation for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zeroth hypercohomology of unbounded quasi coherent complexes on a quasi compact quasi separated algebraic space commutes with arbitrary direct sums",
+   "results": "Search returned 8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CategoryTheory.Sheaf.instAddCommGroupH, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme ring sections, generic derived categories or sheaf cohomology definitions, not unbounded quasi-coherent hypercohomology coproduct preservation for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections preserves coproducts on D QCoh of an algebraic space",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, CategoryTheory.Sheaf.instHasFiniteCoproducts, AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteWalkingPairSpec, AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteSpecOfFinite. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme ring sections, generic derived categories or sheaf cohomology definitions, not unbounded quasi-coherent hypercohomology coproduct preservation for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zeroth hypercohomology on a quasi compact quasi separated algebraic space preserves direct sums of unbounded quasi coherent complexes",
+   "results": "Search returned 8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheaf, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Sheaf.cohomologyPresheafFunctor, DerivedCategory.isZero_of_isLE. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology.*coproduct|[Aa]lgebraic[Ss]pace|globalSections.*[Cc]oproduct",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on a qcqs algebraic space commutes with arbitrary direct sums on D QCoh",
+   "results": "Search returned 8 hits: CategoryTheory.Sheaf.Γ, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.Γ, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.PresheafedSpace.Γ, AlgebraicGeometry.AffineScheme.Γ. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"PreservesColimitsOfShape\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cohomological dimension of quasi coherent modules on a quasi compact quasi separated algebraic space",
+   "results": "Search returned 8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.exists_of_res_zero_of_qcqs, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological_dimension|[Aa]lgebraic[Ss]pace|quasi.?coherent.*vanish",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a uniform bound on higher cohomology of all quasi coherent sheaves on a qcqs algebraic space",
+   "results": "Search returned 8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "Search returned 7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space has one finite bound above which cohomology of every quasi coherent sheaf vanishes",
+   "results": "Search returned 8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.isNoetherian_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary sheaf cohomology definitions, general derived categories, or scheme sections/quasi-coherence; none gives this unbounded algebraic-space coproduct assertion or the uniform bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-objects-compact",
+  "date": "2026-10-23",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, first paragraph: reduction to perfect tests using the perfect generator, including the ambient-coproduct interpretation. Supporting input for this split: Tag 09M8, proposition-compact-is-perfect, perfect-to-compact direction; perfect objects lie in D_QCoh as in section-spell-out and the first paragraph of that proof. Supporting input: spaces-perfect.tex lemma-quasi-coherence-pushforward-direct-sums, global H^0 consequence used in the first paragraph of proposition-compact-is-perfect.",
+   "via": [
+    "lem-sfb-space-perfect-objects-compact",
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-zeroth-hypercohomology-coproducts",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave the uniform truncation and bounded-below coproduct-filtration argument. Reused all prerequisites, including the affine-chart cohomology bound specialized to the absolute structure morphism, so no new node is necessary. Checked the module/abelian cohomology comparison on the enlarged site with terminal object X, the natural canonical map, and empty families.",
+  "blueprint": "The inherited supporting-input place in det-thm-sf-ctf-stability-direct-images proof (3), through spaces-perfect.tex Tag 09M8 first paragraph, requires H^0 coproduct preservation. Steps 1-6 realize the cited Tag 08FB consequence without altering the unit route. The current latest blueprint relocates and rewrites the high-level direct-image paragraph; this split only supplies the inherited generic prerequisite.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "src-weil-derived-homology-preserves-coproducts",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "def-pur-ringed-site-zeroth-hypercohomology",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-pc-bounded-below-coproduct-filtration",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "Generic site, derived-category or spectral-sequence tool for the Tag 08FB argument; the unit does not replace this general prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-right-derived-functor-triangulated",
+  "thm-sp-truncation-e2",
+  "lem-pc-bounded-below-coproduct-filtration",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-0e3af7bb9",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-0e3af7bb9 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-perfect 08FB (proof), 08FA (proof), 09M8 first paragraph, and spaces-properties 03BS. Also read the item's six steps and the statements of all 20 cited nodes. There are no new nodes, and the item is not a re-split. The statement is correct against 09M8 and 08FB (unbounded, ambient sums, empty family). One fault, fixed (E1/C1). Step 2 applied qcqs-permanence and the affine-chart uniform-vanishing lemma to X -> Spec Z, but both lemmas concern morphisms of spaces over S, and Spec Z is not an S-space. Step 2 now cites lem-sfb-space-change-base-to-integers (same unit, reviewed pass): j_!X is an algebraic space over Spec Z, it has the same small etale site, O_X, QCoh, F and R^pF, and |j_!X| = |X|. Linked clarification: the statement's 'its diagonal is quasi-compact' now says the absolute diagonal X -> X x_{Spec Z} X, as in 03BS. Read with the diagonal over S, the statement fails for a non-quasi-separated S (X = S qc but not qs). That node was added to stmt_deps and proof_deps, and the step source was updated. Steps 1 and 3-6 check out. Step 3 goes through the enlarged site, where X is terminal, then the module/abelian comparison and the filtered-colimit lemma. Step 4 checks every hypothesis of the bounded-below coproduct filtration (via truncation-e2 part 2) and applies finite-filtration induction. Step 5 uses the upper bound with b = -N-1 and the long exact sequence. Step 6 is the naturality square, with I empty giving 0 -> 0. The 11 declared tool uses are generic and accepted. Batch 5: the flagged citations (qcoh-kernels-colimits, qcqs-permanence, cohomology-filtered-colimit, enlarged-site model, and the added change-base node) reach sec-trace-formula only through the definition of algebraic spaces and its foundations (fppf descent, fibre products, site models). That is no part of the trace formula or Poincare duality, so accepted. No SGA. Maintainer note: the parent lem-sfb-space-perfect-objects-compact uses the same 'diagonal' phrase and must be read in the same absolute sense.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceZerothHypercohomologyCoproducts",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.zerothHypercohomology_coproduct_bijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceZerothHypercohomologyCoproducts.lean",
+  "statement": "theorem zerothHypercohomology_coproduct_bijective {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (I : Type v) (E : I → X.DerivedModules) (hE : ∀ i : I, X.derivedQCohProperty (E i)) (c : Cofan E) (hc : IsColimit c) : Function.Bijective (DirectSum.toAddMonoid (fun i : I ↦ ((ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, w} X.smallEtaleModelTopology X.smallStructureSheaf).map (c.inj i)).hom))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed equivalent small affine ringed model, preserving the original module section universe. The family is unbounded, the cofan is an arbitrary specified ambient coproduct, and the homomorphism is DirectSum.toAddMonoid applied to the recorded H0 RΓ functor on each coprojection. Compactness is on the existing point topology; absolute quasi-separatedness is the existing affine-test predicate for the absolute diagonal. The four added statement dependencies are already landed nodes used verbatim; no statement correction or dependency interface change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf6df4e2b",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: qc as CompactSpace on the landed point topology; absolute qs via the landed IsAbsolutelyQuasiSeparated def node; D(O_X) on the landed small model; quasi-coherent cohomology via derivedQCohProperty with no bound; arbitrary Cofan+IsColimit in the ambient category; DirectSum.toAddMonoid of ringedSiteZerothHypercohomologyOfUniverses.map (c.inj i) is bijective. No extra hypotheses; empty family covered. Matches Stacks 08FB / 09M8 first paragraph. The 4 added stmt_deps are landed nodes used in the signature, which §5 allows; lean.statement is verbatim; item not yet landed in live. Docstrings carry the source place, blueprint id and the 6-step proof; proof is only sorry. Note: I : Type v is more general than 'small' but still true. No compile: no file changed; the worker reports clean scompile."
+ }
+}

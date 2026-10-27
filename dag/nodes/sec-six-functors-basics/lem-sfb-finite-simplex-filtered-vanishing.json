@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-finite-simplex-filtered-vanishing",
+ "kind": "statement",
+ "title": "Vanishing for a finite filtered augmented simplex first page",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], and use its ordinary derived category [def-weil-abstract-derived-category]. Let $I$ be a nonempty finite linearly ordered set of cardinality $m$. Let $D\\in D(\\mathcal A)$ have a finite decreasing filtration by distinguished triangles: objects $F^aD$, maps $F^{a+1}D\\to F^aD$, identifications $F^{-1}D=D$, $F^mD=0$, and distinguished triangles $F^{a+1}D\\to F^aD\\to G^a\\to F^{a+1}D[1]$ for $-1\\le a<m$. The first page of its cohomological exact-couple spectral sequence [def-sp-spectral-sequence] is $E_1^{a,b}=\\mathcal H^{a+b}(G^a)$ with differential of bidegree $(1,0)$. Suppose for every integer $b$ an object $M_b\\in\\mathcal A$ and isomorphisms identify this row, including its differential, with the augmented alternating subset complex\n$$M_b\\longrightarrow\\bigoplus_{|J|=1}M_b\\longrightarrow\\bigoplus_{|J|=2}M_b\\longrightarrow\\cdots\\longrightarrow\\bigoplus_{|J|=m}M_b,$$\nwhere $J$ ranges over subsets of $I$, the augmentation object has horizontal degree $-1$, its map is diagonal, and the component of the differential at $a_0<\\cdots<a_{n+1}$ is $\\sum_{j=0}^{n+1}(-1)^j c(a_0,\\ldots,\\widehat{a_j},\\ldots,a_{n+1})$. Terms outside $-1\\le a<m$ are zero.\nThen $D$ is a zero object of $D(\\mathcal A)$. No boundedness in the cohomology degree $b$ and no strict chain-level identification of the graded objects are required. In particular, if $D$ is a cone of a morphism $u$, then $u$ is an isomorphism. The assertion is invariant under maps of such filtered data. It concerns a finite filtration; it asserts no convergence for infinite filtrations or infinite totalizations.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W, lemma-biregular-ss-converges, finite-filtration convergence; agent extension to a finite derived triangle tower and augmented subset-row criterion, extracted from the inner-support proof step 5. The simplex contraction itself is agent-written."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-spectral-sequence",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "Fix $b$ and write $C^a$ for its displayed augmented subset row. Choose the least vertex $v\\in I$. Define $h^a:C^a\\to C^{a-1}$ by finite biproduct matrices: for $a\\geq0$, the component indexed by a subset $J$ of size $a$ is $c_{\\{v\\}\\cup J}$ if $v\\notin J$, and zero if $v\\in J$; $v$ is first in the ordered union. Thus $h^0$ is projection to the vertex $v$. Put $h^{-1}=0$ and extend the maps by zero beyond the row. The notation $c_J$ denotes a biproduct projection, so the formulas define morphisms in $\\mathcal A$, without assuming elements of its objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent-written least-vertex contraction of the augmented subset row; the item source explicitly distinguishes this calculation from Tag 012W."
+   }
+  },
+  {
+   "text": "Check $dh+hd=1$ componentwise. At a subset $J=\\{a_0<\\cdots<a_a\\}$ not containing $v$, the two components are $\\sum_j(-1)^j c_{\\{v\\}\\cup(J\\setminus\\{a_j\\})}$ and $c_J+\\sum_j(-1)^{j+1}c_{\\{v\\}\\cup(J\\setminus\\{a_j\\})}$, which add to $c_J$. If $v\\in J$, only the term deleting $v$ survives in $dh$, with coefficient $+1$, while $hd$ is zero. In augmentation degree $-1$, $h^0d^{-1}=1$ since the augmentation is diagonal. These identities include the top degree (a maximal subset contains $v$). Restricting $1=dh+hd$ to $\\ker d$ shows that its inclusion factors through $d$; hence $\\ker d=\\operatorname{im}d$. Every row is exact. The assumed differential-preserving identifications and the page-homology rule of [def-sp-spectral-sequence] give $E_2^{a,b}=0$; the same rule gives zero on every later page.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent-written component calculation; spectral-sequence page-homology rule (Stacks 011M)."
+   }
+  },
+  {
+   "text": "Extend the tower constantly by $D$ for $a\\leq-1$ and by zero for $a\\geq m$. Use its given cohomological exact couple in the convention of [def-sp-exact-couple]: $X.D^{P,Q}=H^{P+Q}(F^{-Q}D)$ and $X.E^{P,Q}=H^{P+Q}(G^{-Q})=E_1^{-Q,P+2Q}$. Filtration inclusion has bidegree $(-1,1)$, the triangle boundary has $(2,-1)$, and the quotient map has $(0,0)$, as required. Thus the initial differential of $X$ is exactly the displayed first-page differential $d_1$; the convention calls its initial page $E_2$, so its next page is zero by step 2. For each $n$, the diagonal alpha-colimit is $A_n=H^n(D)$: $X.D^{P,n-P}=H^n(F^{P-n}D)$, the maps are identities on $H^n(D)$ for $P\\leq n-1$, and the terms are zero for $P\\geq n+m$. A compatible cocone is uniquely determined by its map from any constant-tail term. Apply [lem-sp-finite-cocone-exact-couple] with bounds $a_n=n-1$, $b_n=n+m$. It supplies the limiting page and identifies it with the successive quotients of the image filtration $G^P A_n=\\operatorname{im}(H^n(F^{P-n}D)\\to H^n(D))$ of [def-sp-convergence].",
+   "uses": [
+    "def-sp-exact-couple",
+    "lem-sp-finite-cocone-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012W, lemma-biregular-ss-converges, finite-tail argument in the existing generic exact-couple node; explicit reindexing for a finite triangle tower."
+   }
+  },
+  {
+   "text": "The limiting page in step 3 is zero because its pages after the first are zero. Therefore all $G^P A_n/G^{P+1}A_n$ vanish. Here $G^{n+m}A_n=0$ and $G^{n-1}A_n=A_n$. Descending induction over the finite interval gives $G^P A_n=0$ throughout it: a zero quotient says $G^{P+1}A_n=G^P A_n$. In particular $H^n(D)=A_n=0$ for every integer $n$. To see that this makes $D$ zero, represent it by a complex $K$ as in [def-weil-abstract-derived-category]. The map $K\\to0$ induces isomorphisms on every cohomology object, so is a quasi-isomorphism by that definition and becomes invertible in the localization. Thus $D\\cong0$. Only finitely many filtration indices were used for each $n$; there is no cohomological boundedness assumption.",
+   "uses": [
+    "def-sp-convergence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012W, finite image-filtration argument; derived-category localization at quasi-isomorphisms (Stacks 05RU)."
+   }
+  },
+  {
+   "text": "If $D$ is a cone of $u$, its distinguished triangle and [lem-kun-distinguished-cone-zero] give that $u$ is invertible. The construction of $h$ is needed only to prove zero cohomology; no chosen contraction enters the conclusion. For a map of the filtered data, the source and target objects are zero by the argument above, so its underlying morphism is the unique map between zero objects and is invertible. Every induced square between the zero cohomology objects commutes. In the cone application, any commuting square of the maps $u,u'$ also commutes after inversion: from $t u=u's$ obtain $s u^{-1}=(u')^{-1}t$ by composition. This proves the stated invariance without a functorial choice of vertex. Nothing in the proof forms an infinite filtration or totalization.",
+   "uses": [
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Stacks derived.tex Tag 05QR, lemma-third-object-zero; elementary uniqueness of maps between zero objects and inversion of commuting squares."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-spectral-sequence",
+  "def-sp-exact-couple",
+  "lem-sp-finite-cocone-exact-couple",
+  "def-sp-convergence",
+  "def-weil-abstract-derived-category",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Explicit augmented-subset contraction followed by the existing Tag 012W exact-couple finite-tail theorem; no strict filtered-complex replacement is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely filtered derived object vanishes if its first page is the augmented alternating simplex complex on a nonempty finite ordered set",
+   "results": "8 hits: AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, AlgebraicTopology.DoldKan.HigherFacesVanish.of_P, AlgebraicTopology.DoldKan.HigherFacesVanish, HomologicalComplex.isZero_single_comp_eval, AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_eq_zero, AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contract augmented finite subset cochains by insertion of the least vertex and deduce vanishing from a finite filtration",
+   "results": "8 hits: AlgebraicTopology.DoldKan.HigherFacesVanish.of_succ, AlgebraicTopology.DoldKan.HigherFacesVanish.induction, AlgebraicTopology.DoldKan.HigherFacesVanish, AlgebraicTopology.DoldKan.HigherFacesVanish.of_P, AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id, AlgebraicTopology.DoldKan.HigherFacesVanish.comp_δ_eq_zero, CochainComplex.ConnectData.shape, AlgebraicTopology.DoldKan.hσ'_eq_zero; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Homotopy\"",
+   "results": "12 hits: Homotopy.dNext_cochainComplex, Homotopy.prevD_zero_cochainComplex, Homotopy.prevD_succ_cochainComplex, CochainComplex.HomComplex.Cochain.ofHomotopy, CochainComplex.HomComplex.Cochain.ofHomotopy_refl, CochainComplex.HomComplex.δ_ofHomotopy, CochainComplex.HomComplex.Cochain.equivHomotopy, CochainComplex.HomComplex.Cochain.ofHomotopy_ofEq; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "(simplex|Simplex).*(contract|homotop)|(contract|homotop).*(simplex|Simplex)",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtration spectral sequence acyclic augmented alternating constant simplex implies zero derived object",
+   "results": "8 hits: DerivedCategory.instHasZeroObject, HomologicalComplex.acyclic_of_isZero, HomologicalComplex.Acyclic, HomologicalComplex.alternatingConst, ChainComplex.alternatingConst, HomologicalComplex.acyclic_iff, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, ChainComplex.alternatingConstHomologyZero; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingConstHomologyZero|def alternatingConst|acyclic_of_isZero",
+   "results": "6 hits: Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tower of distinguished triangles in an unbounded derived category has a convergent cohomological spectral sequence with the image filtration on cohomology",
+   "results": "8 hits: DerivedCategory.HomologySequence.exact₁, DerivedCategory.HomologySequence.exact₃, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.triangleOfSESδ, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the finite derived triangle-tower augmented subset-row criterion; general spectral-object and alternating-constant-complex infrastructure does not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented alternating subset cochain complex of a nonempty finite ordered set with values in an abelian category is contractible",
+   "results": "8 hits: ChainComplex.alternatingConstHomotopyEquiv, ChainComplex.alternatingConst_obj, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, AlgebraicTopology.alternatingCofaceMapComplex, AlgebraicTopology.AlternatingCofaceMapComplex.obj, CochainComplex.exists_iso_single, CochainComplex.exactAt_succ_single_obj, AlgebraicTopology.alternatingCofaceMapComplex_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the finite derived triangle-tower augmented subset-row criterion; general spectral-object and alternating-constant-complex infrastructure does not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "simplex.*contract|augmented.*simplex|isIso.*isZero|isZero_of_forall_isZero_homology",
+   "results": "14 hits: Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean, Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the finite derived triangle-tower augmented subset-row criterion; general spectral-object and alternating-constant-complex infrastructure does not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pretriangulated\", \"isIso\", \"isZero\"",
+   "results": "6 hits: CategoryTheory.Pretriangulated.Triangle.isZero₁_of_isIso₂, CategoryTheory.Pretriangulated.Triangle.isZero₃_of_isIso₁, CategoryTheory.Pretriangulated.Triangle.isZero₁_iff_isIso₂, CategoryTheory.Pretriangulated.Triangle.isZero₃_iff_isIso₁, CategoryTheory.Pretriangulated.Triangle.isZero₂_of_isIso₃, CategoryTheory.Pretriangulated.Triangle.isZero₂_iff_isIso₃",
+   "date": "2026-10-23",
+   "verdict": "match for existing cone-criterion leaf, not for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite filtration with acyclic first page spectral sequence has zero abutment",
+   "results": "8 hits: HomologicalComplex.Acyclic, Ideal.Filtration.Stable, IsFiltration.casesOn, HomologicalComplex.acyclic_iff, IsFiltration.recOn, Ideal.Filtration.bot_N, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, Ideal.Filtration.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the finite derived triangle-tower augmented subset-row criterion; general spectral-object and alternating-constant-complex infrastructure does not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\"",
+   "results": "12 hits: ComplexShape.spectralSequenceNat, ComplexShape.spectralSequenceFin, ComplexShape.spectralSequenceNat_rel_iff, ComplexShape.spectralSequenceFin_rel_iff, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.deg, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.i₁, CategoryTheory.Abelian.SpectralObject.SpectralSequenceDataCore.i₂",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the finite derived triangle-tower augmented subset-row criterion; general spectral-object and alternating-constant-complex infrastructure does not specialize in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-inner-support",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent expansion of root-tower inner-support proof step 5: augmented subset contraction on cohomology rows and finite-filtration vanishing.",
+   "via": [
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-simplex-filtered-vanishing",
+  "worker": "stage1",
+  "summary": "Kept the statement intact, wrote the least-vertex biproduct contraction with its endpoint checks, and reused the existing generic finite-cocone exact-couple theorem with explicit grading conversion and finite-tail bounds. Wrote finite image-filtration induction, localization detection of zero, the cone criterion and invariance. No new nodes: the prospective convergence lemma duplicates existing machinery, and the contraction is an explicit component calculation. Added the definition of the exact-couple notion to statement dependencies.",
+  "blueprint": "Paragraph (3) of the current direct-images proof, agent expansion of root-tower inner-support former step 5: steps 1–2 implement the augmented-row contraction, steps 3–4 the finite-filtration argument, step 5 the actual cone and invariance consequences. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms; its exact from.place and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-finite-cocone-exact-couple",
+    "why": "Generic exact-couple finite-tail convergence for a finite derived triangle tower; the unit supplies no such homological-algebra theorem. Its input is the exact couple already specified in the item, not a replacement for the geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-finite-cocone-exact-couple"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-f19bf3202",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-f19bf3202 (reviewer sub-agent of L); spot-checked: Statement is word for word the same as live/side-live, where the item is still unsplit; there is no repair note and no new node. The one stmt_dep added (def-sp-exact-couple) is justified because the statement already names the exact-couple spectral sequence. proof_deps equals the union of step uses. No SGA. I read Tag 012W (homology.tex:6362) and agree it covers filtered complexes, so the delivery is right to go through lem-sp-finite-cocone-exact-couple instead. Step 1: least-vertex biproduct homotopy h. Step 2: I recomputed dh+hd=1 for v∉J (sums cancel), v∈J (only the deletion of a_0=v survives, sign +), and degree -1 (c_v∘diag=1); kernel equals image follows; checked small cases m=1 and m=2; nonempty I is needed. Step 3: I recomputed the conversion D^{P,Q}=H^{P+Q}(F^{-Q}D), E^{P,Q}=E_1^{-Q,P+2Q}: alpha has bidegree (-1,1), f (2,-1), g (0,0), and d moves (a,b) by (1,0). The exact couple is the presupposed long exact sequence data. The finite-tail bounds a_n=n-1, b_n=n+m match the cited lemma, which supplies only the equal-kernel epimorphisms. Step 4: Z_inf ⊆ Z_3=B_3 ⊆ B_inf gives E_inf=0, so gr=0; finite descending induction gives H^n(D)=0, and D≅0 follows from the localization definition. Step 5: the cone criterion lem-kun-distinguished-cone-zero gives the cone clause; invariance is trivial. Duplicate search over dag/nodes (augmented/Čech/least-vertex/filtration) found no restatement. The tool use of lem-sp-finite-cocone-exact-couple is accepted. Only a cosmetic letter reuse in step 2."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteSimplexFilteredVanishing",
+  "declaration": "DerivedCategory.finiteSimplex_filtered_vanishing",
+  "file": "lean/Sheaf/CategoryTheory/FiniteSimplexFilteredVanishing.lean",
+  "statement": "theorem finiteSimplex_filtered_vanishing {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{w} A] (I : Type t) [LinearOrder I] [Fintype I] [Nonempty I] (D : DerivedCategory A) (F G : ℕ → DerivedCategory A) (i : ∀ k : ℕ, F (k + 1) ⟶ F k) (q : ∀ k : ℕ, F k ⟶ G k) (δ : ∀ k : ℕ, G k ⟶ (F (k + 1))⟦(1 : ℤ)⟧) (hT : ∀ k : ℕ, k ≤ Fintype.card I → Triangle.mk (i k) (q k) (δ k) ∈ distTriang (DerivedCategory A)) (eD : F 0 ≅ D) (hF : IsZero (F (Fintype.card I + 1))) (M : ℤ → A) (e : ∀ (b : ℤ) (k : Fin (Fintype.card I + 1)), (homologyFunctor A ((k.val : ℤ) - 1 + b)).obj (G k.val) ≅ ∏ᶜ fun _ : Fin k.val ↪o I => M b) (he : ∀ (b : ℤ) (k : Fin (Fintype.card I)) (s : Fin (k.val + 1) ↪o I), (e b k.castSucc).inv ≫ HomologySequence.δ (Triangle.mk (i k.val) (q k.val) (δ k.val)) ((k.val : ℤ) - 1 + b) (((k.val : ℤ) - 1 + b) + 1) ≫ (homologyFunctor A (((k.val : ℤ) - 1 + b) + 1)).map (q (k.val + 1)) ≫ eqToHom (congrArg (fun n : ℤ => (homologyFunctor A n).obj (G (k.val + 1))) (by simp only [Fin.val_succ, Nat.cast_add, Nat.cast_one]; omega)) ≫ (e b k.succ).hom ≫ Pi.π (fun _ : Fin (k.val + 1) ↪o I => M b) s = ∑ j : Fin (k.val + 1), (-1 : ℤ) ^ j.val • Pi.π (fun _ : Fin k.val ↪o I => M b) ((Fin.succAboveOrderEmb j).trans s)) : IsZero D ∧ (∀ (T : Triangle (DerivedCategory A)), T ∈ distTriang (DerivedCategory A) → (T.obj₃ ≅ D) → IsIso T.mor₁) ∧ (∀ (D' : DerivedCategory A), IsZero D' → ∀ f : D ⟶ D', IsIso f)",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fed1d8b3",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Clause-by-clause match: k=a+1 reindexing; triangles for k≤m (−1≤a<m); F 0≅D, IsZero F(m+1); E_1 = H^{k-1+b}(G k) ≅ ∏ over Fin k ↪o I (size a+1 subsets, empty subset = augmentation); d_1 = HomologySequence.δ then H(q(k+1)), projections = Σ(−1)^j deletion via succAboveOrderEmb, diagonal at k=0; conclusions IsZero D, cone clause, invariance (maps to zero objects iso). A possible sign difference from the exact-couple convention does not affect row exactness. Universes u v w t free, IsGrothendieckAbelian.{v} matches record. Statement field verbatim; node differs from live only in lean; Tag 012W at homology.tex:6362; proof import FiniteCoconeExactCouple exists. No defs, sorry only, docstrings OK. No compile needed (no file changed). No findings."
+ }
+}

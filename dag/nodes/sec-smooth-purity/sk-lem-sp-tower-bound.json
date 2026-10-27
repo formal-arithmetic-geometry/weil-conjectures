@@ -31,11 +31,11 @@
  ],
  "proof": [
   {
-   "text": "By [sk-def-sp-normalized-towers], there are integers $a\\leq b$, independent of $n$, for which every $C_n$ is constructible of Tor amplitude $[a,b]$. Testing the definition [det-def-sfb-constructible-tor-amplitude] with the coefficient module itself gives $\\mathcal H^q(C_n)=0$ for $q\\notin[a,b]$. In the tower category [sk-def-sp-coefficient-towers], kernels and cokernels are formed componentwise: the component transition maps restrict to kernels and descend to quotients. Consequently cohomology is componentwise, and the zero components in degrees $q<a$ make the cohomology tower zero there. Thus $C_\\bullet$ belongs to the bounded-below domain of $Rf_{!,\\bullet}$.",
+   "text": "The section-normalized coordinates of lem-sp-tower-section-coordinates compare the sequence-site realization with ordinary finite-level evaluation. For any two recorded abelian presentations, their sections, restrictions and morphisms agree by the fields of sk-def-sp-coefficient-towers, so their ordinary evaluation functors are equal by extensionality. Derive this ordinary comparison using mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. Compose it with Fcomparison from det-sp-tower-shriek-levels and the derived equivalence counit to obtain the natural compact-support evaluation isomorphism, including its restriction to D+.",
    "uses": [
-    "sk-def-sp-normalized-towers",
-    "det-def-sfb-constructible-tor-amplitude",
-    "sk-def-sp-coefficient-towers"
+    "lem-sp-tower-section-coordinates",
+    "sk-def-sp-coefficient-towers",
+    "det-sp-tower-shriek-levels"
    ],
    "elementary": true,
    "source": {
@@ -44,33 +44,41 @@
    }
   },
   {
-   "text": "Write $D_\\bullet=Rf_{!,\\bullet}C_\\bullet$. Apply clause (1) of [det-sp-tower-shriek-levels] to the supplied compactification and the bounded-below tower from step 1. It gives, for every $n\\geq1$, $D_n\\simeq Rf_{!,A_n}C_n$, where $A_n=\\mathcal O_E/\\ell^n$. This is precisely the tower operation in the statement; no levelwise choices or alteration of transition maps are made.",
+   "text": "The exact realization and exact open extension preserve every lower cohomological bound. The proper direct image is a total right derived functor, which is left t-exact on bounded-below objects: compare its bounded-below derived functor and use vanishing below the bound (CategoryTheory.Functor.isGE_rightDerivedFunctor_obj). The inverse exact realization preserves that bound too. For a constructible finite-Tor tower, use its given common cohomological interval from sk-def-sp-normalized-towers. Exact evaluation commutes with homology; strict systems detect zero levelwise and the presentation equivalence reflects zero. Hence the input tower is bounded below. The generic derived-category left-exactness argument is a proved source-library tool, not the constructibility assertion of that module.",
    "uses": [
-    "det-sp-tower-shriek-levels"
+    "det-sp-tower-shriek-levels",
+    "sk-def-sp-normalized-towers",
+    "sk-def-sp-coefficient-towers",
+    "def-pur-system-level-left-extension-basic"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
     "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
    }
   },
   {
-   "text": "Apply the finite-ring assertion of [det-sp-tower-bound-uniform] to each $C_n$. Its standing geometric hypotheses are exactly those made explicit in the statement; the bound is on the geometric fibres of $f$, not those of its proper compactification. Its coefficient hypotheses hold: [def-weil-l-adic-coefficient-extension] gives a uniformizer $\\varpi_E$ and a unit-power decomposition $\\ell=u\\varpi_E^e$ with $e\\geq1$, since $|\\ell|_E<1$. Therefore $A_n=\\mathcal O_E/(\\varpi_E^{en})$ is one of its finite commutative coefficient rings, and is killed by $\\ell^n$. The cited finite-ring assertion gives $Rf_{!,A_n}C_n\\in\\Dctf(Y_{\\mathrm{proet}},A_n)$ with Tor interval $[a,b+2d]$. Step 2 identifies this object with $D_n$. Both $d$ and $[a,b]$ are independent of $n$, so this is a common output Tor interval, including all finite-level constructibility assertions.",
+   "text": "Apply det-sp-tower-bound-uniform with the common input Tor interval [v,w]. In the smooth case base change preserves the given relative dimension, and topologicalKrullDim_le_of_smoothOfRelativeDimension gives the geometric fibre bound. In the general case specialize the given bound to algebraic closures of residue fields. The actual coefficient ring R_n is killed by ell^(n+1), since ell^(n+1) belongs to the defining ideal (ell)^(n+1); it is finite by the supplied Base. Thus clause (1) of the uniform theorem proves finite-level constructibility for the actual finite compact-support image. Compare its open-extension left adjoint with the intrinsic one using the normalized pullback comparison def-trf-finite-pullback-coordinate-comparison and uniqueness of left adjoints; derive and compose with the fixed proper direct image. Transfer finite constructibility to the tower output using the level comparison. Constructibility is invariant under isomorphism via lem-weil-pbc-proetale-constant-module-constructibility.",
    "uses": [
     "det-sp-tower-bound-uniform",
-    "def-weil-l-adic-coefficient-extension"
+    "det-sp-tower-shriek-levels",
+    "def-sbc-smooth-morphisms",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
     "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
    }
   },
   {
-   "text": "For each $n$, test the Tor interval of $D_n$ with the degree-zero tensor unit $A_{n,Y}$ in [det-def-sfb-constructible-tor-amplitude]. Since $D_n\\otimes^L_{A_{n,Y}}A_{n,Y}\\simeq D_n$, its cohomology vanishes outside $[a,b+2d]$. The levels are constructible by step 3, have the common Tor interval from that step and now a common cohomological interval. These are exactly all conditions defining $\\Dctf(Y_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$ in [sk-def-sp-normalized-towers]. Thus $D_\\bullet$ belongs to the stated category. The normalization condition in that definition is separate and is never used.",
+   "text": "Clause (2) of det-sp-tower-bound-uniform already gives both the common output Tor interval [v,w+2d] and vanishing of cohomology outside it. Transfer the input hypotheses across the realization-level comparison, apply that clause to the realized input tower, and transfer the conclusion across the inverse realization counit and its level comparison. Tor amplitude is invariant under isomorphism directly from its definition, by composing the representative isomorphism. Combine these uniform bounds with finite-level constructibility from step 3 to construct exactly spConstructibleTorTowers on the output. No normalization hypothesis is used.",
    "uses": [
-    "det-def-sfb-constructible-tor-amplitude",
-    "sk-def-sp-normalized-towers"
+    "det-sp-tower-bound-uniform",
+    "det-sp-tower-shriek-levels",
+    "sk-def-sp-normalized-towers",
+    "det-def-sfb-constructible-tor-amplitude"
    ],
    "elementary": true,
    "source": {
@@ -80,17 +88,21 @@
   }
  ],
  "proof_deps": [
-  "sk-def-sp-normalized-towers",
-  "det-def-sfb-constructible-tor-amplitude",
+  "lem-sp-tower-section-coordinates",
   "sk-def-sp-coefficient-towers",
   "det-sp-tower-shriek-levels",
+  "sk-def-sp-normalized-towers",
+  "def-pur-system-level-left-extension-basic",
   "det-sp-tower-bound-uniform",
-  "def-weil-l-adic-coefficient-extension"
+  "def-sbc-smooth-morphisms",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "det-def-sfb-constructible-tor-amplitude"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
-  "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
+  "by": "N3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
+  "place": "The finite-level uniform-interval argument, realized using the existing section-coordinate comparison and both clauses of compactSupport_uniform_tor_bound."
  },
  "mathlib_searches": [
   {
@@ -203,7 +215,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-d1b34a20a (reviewer sub-agent of L); spot-checked: Read the item, all four steps, cited statements, blueprint sources and unit/chapter route. Verified finite coefficients, bounded-below evaluation, uniform [a,b+2d] bounds and edge cases. Confirmed the reported 0F10 misattribution; the proof uses the existing uniform-bound theorem instead. No new nodes, cycles returning to the item, unsupported category identifications or required repairs. Full review written to review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -227,5 +250,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The geometric operations are those of det-sp-tower-shriek-levels, transported by its section-normalized realization equivalence to the original coefficient towers. The level comparison is a natural isomorphism restricted to D+; the preservation clause uses exactly spConstructibleTorTowers, without normalization. The geometric hypothesis explicitly allows smooth pure relative dimension d or the general geometric fibre bound."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c853e",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T163934-L-906846",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityTowerBound.lean + sk-lem-sp-tower-bound.json against clone HEAD, unit sk-lem-sp-tower-bound (realized empty), cited nodes' declarations, and 5 direct importers compiled against the delivered module"
  }
 }

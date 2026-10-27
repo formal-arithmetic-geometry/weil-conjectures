@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-invariant-separating-parameters",
+ "kind": "statement",
+ "title": "Invariant separating parameters for a semilinear finite action",
+ "statement": "Let $k\\subseteq E$ be a finitely generated field extension, let $d=\\operatorname{trdeg}_kE$, and suppose that $E\\otimes_k K$ is an integral domain for every extension field $K/k$. Here the tensor product is the commutative tensor-product algebra, with $(a\\otimes b)(c\\otimes e)=ac\\otimes be$. Let a finite group $H$ act on $E$ and on $k$ by field automorphisms, with $h(a)$ computed in $E$ equal to the image of $h(a)$ computed in $k$ for $a\\in k$. No faithfulness is required. There are $t_1,\\ldots,t_d\\in E^H$, where $E^H=\\{a\\in E:h(a)=a\\ \\forall h\\in H\\}$, algebraically independent over $k$, such that $E/k(t_1,\\ldots,t_d)$ is finite separable. Algebraically independent means that no nonzero polynomial over $k$ in these $d$ elements vanishes; finite separable means finite-dimensional with separable minimal polynomials. The empty family is allowed when $d=0$. Fields, extensions and transcendence degree use [def-weil-field], [def-pc-field-extension] and [def-kun-transcendence-degree]; generated subfields and separating bases use [def-weil-pbc-transcendence-basis] and [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.2 proof, printed p.613, invariant separating parameters; agent formulation with a full basis and possibly nonfaithful action. Algebraic inputs: literature/stacks-project/fields.tex Tag 09I3 (lemma-galois-over-fixed-field), algebra.tex Tag 030W (lemma-characterize-separable-field-extensions). Local de Jong PDF WANTED; publisher PDF read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $k_0=k^H$ and $F=E^H$. The finite compatible actions and finite generation of $E/k$ satisfy [lem-sfb-semilinear-fixed-field-finite-generation]. Hence $k_0\\subseteq F$, $k/k_0$ and $E/F$ are finite separable, and $E/k_0$ and $F/k_0$ are finitely generated. This applies without faithfulness of either action.",
+   "uses": [
+    "lem-sfb-semilinear-fixed-field-finite-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent extraction of former steps 1-3 of lem-sfb-invariant-separating-parameters: apply Tag 09I3 (lemma-galois-over-fixed-field) to the two automorphism images, use its orbit polynomials and Tag 09GH (lemma-algebraic-finitely-generated) to obtain a finite coefficient field, then the finite-dimensional-subspace argument. Serves de Jong Lemma 5.2 proof, printed p.613, invariant parameter choice."
+   }
+  },
+  {
+   "text": "The assumed domains $E\\otimes_kK$ are reduced: a nilpotent $x$ has $x^n=0$, and absence of zero divisors gives $x=0$. Apply [lem-sfb-geometric-subfield-scalar-restriction] to the two towers $k_0\\subseteq k\\subseteq E$ and $k_0\\subseteq F\\subseteq E$. Step 1 gives its separable algebraicity and algebraicity hypotheses. It yields geometric reducedness of $F/k_0$ and $\\operatorname{trdeg}_{k_0}F=\\operatorname{trdeg}_kE=d$.",
+   "uses": [
+    "lem-sfb-geometric-subfield-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent extraction of former steps 4-6 of lem-sfb-invariant-separating-parameters: Tag 0C2Y (lemma-geometrically-reduced-over-separable-algebraic), followed by tensor injectivity for the subfield inclusion and two applications of fields.tex Tag 030H (lemma-transcendence-degree-tower). Serves de Jong Lemma 5.2 proof, printed p.613."
+   }
+  },
+  {
+   "text": "Steps 1 and 2 verify every hypothesis of [lem-sfb-separating-basis-algebraic-diamond]: both fields are finitely generated over $k_0$, $k/k_0$ is algebraic, $E/F$ is separable algebraic, and $F/k_0$ is geometrically reduced of transcendence degree $d$. It supplies $t_1,\\ldots,t_d\\in F$, algebraically independent over $k$, with $E/k(t_1,\\ldots,t_d)$ finite separable. Membership in $F=E^H$ means each parameter is fixed by every $h\\in H$. The lemma includes $d=0$, so this also gives the permitted empty family.",
+   "uses": [
+    "lem-sfb-separating-basis-algebraic-diamond"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent extraction of former steps 7-9 of lem-sfb-invariant-separating-parameters: Tag 030W (lemma-characterize-separable-field-extensions), Tag 030Z (lemma-perfect), fields.tex Tag 09HB (lemma-separable-permanence) and Tag 09GH (lemma-algebraic-finitely-generated), algebraic-base independence, and the explicit minimal-polynomial Bezout identity after enlarging the parameter base. Serves de Jong Lemma 5.2 proof, printed p.613."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semilinear-fixed-field-finite-generation",
+  "lem-sfb-geometric-subfield-scalar-restriction",
+  "lem-sfb-separating-basis-algebraic-diamond"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Short assembly of three independent extractions of the original nine-step fixed-field argument for de Jong Lemma 5.2, printed p.613. The full original argument is retained verbatim in report.md, grouped by the new nodes; no source route or statement changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixedField.*(Separ|[Tt]ranscend)|([Ss]epar|[Tt]ranscend).*fixedField",
+   "results": "{\"t\": \"2026-10-22T03:10:10Z\", \"tool\": \"grep\", \"query\": \"fixedField.*(Separ|[Tt]ranscend)|([Ss]epar|[Tt]ranscend).*fixedField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Galois/Basic.lean\"], \"digest\": \"d81fc35eff8bec54\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant separating transcendence basis under a finite group of field automorphisms",
+   "results": "{\"t\": \"2026-10-22T03:10:10Z\", \"tool\": \"leansearch\", \"query\": \"Invariant separating transcendence basis under a finite group of field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTranscendenceBasis.of_comp\", \"IsTranscendenceBasis.lift_cardinalMk_eq\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"AlgEquiv.isTranscendenceBasis_iff\", \"IsTranscendenceBasis\", \"AlgEquiv.isTranscendenceBasis\", \"Algebra.isInvariant_of_isGalois'\", \"IsTranscendenceBasis.to_subtype_range'\"], \"digest\": \"cf61fd1011928eba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTranscendenceBasis\", \"fixedField\"",
+   "results": "{\"t\": \"2026-10-22T03:10:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTranscendenceBasis\\\", \\\"fixedField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated geometrically integral field extension with a finite semilinear group action has a separating transcendence basis consisting of invariant elements",
+   "results": "{\"t\": \"2026-10-22T03:10:13Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated geometrically integral field extension with a finite semilinear group action has a separating transcendence basis consisting of invariant elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.isSeparable\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"mem_galBasis_iff\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"IsGaloisGroup.iff_isFractionRing\", \"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\"], \"digest\": \"cce9626e96bcfbae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparablyGenerated\", \"exists\"",
+   "results": "{\"t\": \"2026-10-22T03:10:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparablyGenerated\\\", \\\"exists\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "isSeparable_tower|isSeparable_of_tower|IsSeparable.tower|isTranscendenceBasis.*(tower|isAlgebraic)|fg.*(of_fg|of_finite)|fg_of_fg",
+   "results": "{\"t\": \"2026-10-22T03:26:16Z\", \"tool\": \"grep\", \"query\": \"isSeparable_tower|isSeparable_of_tower|IsSeparable.tower|isTranscendenceBasis.*(tower|isAlgebraic)|fg.*(of_fg|of_finite)|fg_of_fg\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SplittingField/IsSplittingField.lean\", \"Mathlib/FieldTheory/FinTrdeg.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean\"], \"digest\": \"6764ef677951f23e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary separating bases, intermediate-field finite-generation definitions, or separable-tower facts, but none supplies invariant parameters for a semilinear action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated geometrically reduced field extension with a finite semilinear automorphism group admits an invariant separating transcendence basis",
+   "results": "{\"t\": \"2026-10-22T03:26:18Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated geometrically reduced field extension with a finite semilinear automorphism group admits an invariant separating transcendence basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"mem_galBasis_iff\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\"], \"digest\": \"de5b4ed57a55ae3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary separating bases, intermediate-field finite-generation definitions, or separable-tower facts, but none supplies invariant parameters for a semilinear action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An intermediate field of a finitely generated field extension is finitely generated over the base field",
+   "results": "{\"t\": \"2026-10-22T03:26:25Z\", \"tool\": \"leansearch\", \"query\": \"An intermediate field of a finitely generated field extension is finitely generated over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fg_top\", \"IntermediateField.fg_def\", \"IntermediateField.fg_of_noetherian\", \"IntermediateField.FG\", \"IntermediateField.fg_of_fg_toSubalgebra\", \"IntermediateField.fg_adjoin_finset\", \"IntermediateField.essFiniteType_iff\", \"IntermediateField.fg_top_iff\"], \"digest\": \"f758b43420df237f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary separating bases, intermediate-field finite-generation definitions, or separable-tower facts, but none supplies invariant parameters for a semilinear action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTranscendenceBasis\", \"fixedField\"",
+   "results": "{\"t\": \"2026-10-22T03:27:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTranscendenceBasis\\\", \\\"fixedField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary separating bases, intermediate-field finite-generation definitions, or separable-tower facts, but none supplies invariant parameters for a semilinear action"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*(Separ|[Tt]ranscend)|([Ss]epar|[Tt]ranscend).*fixedField",
+   "results": "{\"t\": \"2026-10-22T03:27:28Z\", \"tool\": \"grep\", \"query\": \"fixedField.*(Separ|[Tt]ranscend)|([Ss]epar|[Tt]ranscend).*fixedField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Galois/Basic.lean\"], \"digest\": \"d81fc35eff8bec54\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary separating bases, intermediate-field finite-generation definitions, or separable-tower facts, but none supplies invariant parameters for a semilinear action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant separating transcendence basis under a finite group of field automorphisms",
+   "results": "{\"t\": \"2026-10-22T03:29:43Z\", \"tool\": \"leansearch\", \"query\": \"Invariant separating transcendence basis under a finite group of field automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTranscendenceBasis.of_comp\", \"IsTranscendenceBasis.lift_cardinalMk_eq\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"AlgEquiv.isTranscendenceBasis_iff\", \"IsTranscendenceBasis\", \"AlgEquiv.isTranscendenceBasis\", \"Algebra.isInvariant_of_isGalois'\", \"IsTranscendenceBasis.to_subtype_range'\"], \"digest\": \"cf61fd1011928eba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary separating bases, intermediate-field finite-generation definitions, or separable-tower facts, but none supplies invariant parameters for a semilinear action"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, invariant functions x_1,...,x_{d-1}; supplies the separating basis before taking its first d-1 entries",
+   "via": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-invariant-separating-parameters",
+  "worker": "stage1",
+  "summary": "Q132 repair of the 4998-character re-split return. Statement and Lean metadata unchanged. Three self-contained statement-only unsplit nodes now carry former steps 1-3, 4-6 and 7-9, respectively; their original proof text, source places and dependencies are retained verbatim in the report for future workers. The parent is a short assembly, with exact statement-quote citations and genuine logged Mathlib searches for every new node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, invariant functions x_1,...,x_{d-1}; supplies the separating basis before taking its first d-1 entries",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-trf-geometric-reducedness-separable-scalar-restriction",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-b28d1abac",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-b28d1abac (reviewer sub-agent of L); spot-checked: Released re-split note (human 2026-10-21, batch5; old proof 4998 chars, 9 steps). The delivery changes only proof/proof_deps/proof_origin/split_report against the live node (NK ee22ccc FIX + NI S2 binding); statement, stmt_deps, lean, reviewed and tool_uses are byte-identical. No SGA source (the regex hits are IsGaloisGroup and the NK note's 'no SGA source'). The nine old steps, checked verbatim against the NK base, are all carried by new statements. Node 1 lem-sfb-semilinear-fixed-field-finite-generation takes old steps 1-3: Artin 09I3 on the images of H, then orbit polynomials + 09GH + spanning, giving k/k0 and E/F finite separable and E/k0, F/k0 finitely generated. Node 2 lem-sfb-geometric-subfield-scalar-restriction takes old steps 4-6: 0C2Y (algebra.tex:10258, read), flat injectivity F⊗L→E⊗L and the 030H towers. Node 3 lem-sfb-separating-basis-algebraic-diamond takes old steps 7-9: 030W/030Z, 09HB+09GH, lem-zl-independence-algebraic-base and the Bezout identity 1=Q(UR+VR')+Q'VR, which I rechecked. The old steps they carry total 1654/1488/1856 chars, so the nodes are comparable, and none restates the item: node 1 has no geometric hypothesis, node 2 no group or finite generation, node 3 no group. The parent is 1245 chars in 3 steps, each a direct application. All three statements are true. I tested trivial H, an action with a kernel, Frobenius on F_{p^r} with u fixed, Artin-Schreier u↦u+1, d=0 and E=k. For node 2, F_p(u^p) ⊆ F_{p^r}(u) is inseparable but allowed, and k0(a^{1/p}) shows the separability hypothesis is needed. For node 3, an inseparable algebraic F is excluded by reducedness; its F/k0 finite-generation hypothesis is redundant but harmless. The Stacks tags and labels match tags/tags. A DAG regex search (fixed-field FG, intermediate-field FG, separating basis, geometrically reduced subfield) found no duplicate. The new nodes are unsplit with empty proofs, created.item is this item, from.node is null like the item's, via starts with the item, same_as is []. The searches are grep plus Loogle/LeanFinder; LeanSearch is recorded unavailable for nodes 2 and 3 (B7 OK). Maintainer note: the item's inherited tool_uses (trf 0C2Y node, pbc 030W node) are no longer cited by the item; the future splits of nodes 2 and 3 will cite them. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.InvariantSeparatingParameters",
+  "declaration": "Algebra.exists_invariant_separating_parameters",
+  "file": "lean/Sheaf/FieldTheory/InvariantSeparatingParameters.lean",
+  "statement": "theorem exists_invariant_separating_parameters (k : Type u) (E : Type v) [Field k] [Field E] [Algebra k E] (hfg : (⊤ : IntermediateField k E).FG) (d : ℕ) (hd : Algebra.trdeg k E = (d : Cardinal)) (hgeom : ∀ (K : Type (max u v z)) [Field K] [Algebra k K], IsDomain (E ⊗[k] K)) (H : Type w) [Group H] [Finite H] (ρk : H →* (k ≃+* k)) (ρE : H →* (E ≃+* E)) (hcompat : ∀ (h : H) (a : k), ρE h (algebraMap k E a) = algebraMap k E (ρk h a)) : ∃ t : Fin d → E, (∀ (h : H) (i : Fin d), ρE h (t i) = t i) ∧ AlgebraicIndependent k t ∧ FiniteDimensional (IntermediateField.adjoin k (Set.range t)) E ∧ Algebra.IsSeparable (IntermediateField.adjoin k (Set.range t)) E",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfcb07986",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clause-by-clause match: FG field extension, d=trdeg as ℕ, geometric domain test over K : Type (max u v z) (contains a copy of k̄, so it can always be met; same convention as GeometricReducednessSeparableScalarRestriction/GeometricallyReducedExtensionSeparable), finite H with non-injective ρk/ρE into ≃+*, semilinear hcompat; conclusion Fin d family fixed by H, AlgebraicIndependent k, FiniteDimensional and Algebra.IsSeparable over IntermediateField.adjoin k (range t). Statement verified true (separating basis of E^H/k^H). Edge cases d=0, E=k, nonfaithful/wild actions, char p fine. lean.statement verbatim; only the lean field changes vs live; 5 stmt_dep records are existing Mathlib declarations; docstrings give source place, blueprint tag and all 9 proof steps; no defs, sorry only; report has Worker report + Second reading sections. No findings; no file changed, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

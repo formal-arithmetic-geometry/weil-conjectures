@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-ringed-negative-koszul-factor-hom-tensor",
+ "kind": "statement",
+ "title": "Tensor-Hom comparison for a single two-term Koszul factor with arbitrary tail",
+ "statement": "Let $C$ be a small category, $J$ a Grothendieck topology, $O$ a commutative ring sheaf, $b$ a global section and $U=O[0]$. Write $P_m=[O\\xrightarrow{b^{m+1}}O]$ in degrees $0,1$ and $D_m=[O\\xrightarrow{b^{m+1}}O]$ in degrees $-1,0$, using [def-weil-pbc-ringed-koszul-system] and [def-cbc-signed-koszul-completion-model]. There are chain isomorphisms $a_{m,K}:D_m\\otimes\\mathcal Hom^\\bullet(K,U)\\xrightarrow{\\sim}\\mathcal Hom^\\bullet(P_m\\otimes K,U)$ for every $m\\in\\mathbb N$ and arbitrary integer cochain complex $K$ of $O$-modules. These are contravariantly natural in $K$. The transition $(b,1):D_{m+1}\\to D_m$ of [def-weil-pbc-ringed-negative-koszul-transitions] corresponds under these isomorphisms to precomposition by $(1,b)\\otimes\\mathrm{id}_K$ on $P_m\\otimes K$. For any chain map $p:K\\to U$, let $v_p:O\\to\\mathcal Hom^\\bullet(K,U)^0$ be inverse single-complex identification followed by inverse evaluation at one and precomposition by $p$. If $j_m:O\\to D_m^0$ is the canonical rank-one basis inclusion, then the map $O\\xrightarrow{\\lambda_O^{-1}}O\\otimes O\\xrightarrow{j_m\\otimes v_p}D_m^0\\otimes\\mathcal Hom^\\bullet(K,U)^0$ followed by the $(0,0)$ total-tensor inclusion and $a_{m,K}^0$ equals inverse single-complex identification followed by inverse evaluation at one and precomposition by $P_m\\otimes K\\xrightarrow{\\pi_m\\otimes p}U\\otimes U\\xrightarrow{\\lambda_U}U$, where $\\pi_m$ is the positive factor projection. There is no boundedness condition on $K$, no finite negative tensor of a list, and no derived-category or limit construction.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-negative-koszul-transitions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free dual identification; sites-cohomology.tex Tag 0A90, lemma-compose, for currying."
+ },
+ "proof": [
+  {
+   "text": "Project Hom(L,O[0]) in degree n to its unique potentially nonzero coordinate, with source degree p satisfying p+n=0. All other factors have zero target; the product universal property constructs an inverse to this projection. Transport the remaining target term to O. Standard evaluation at one identifies the rank-one internal Homs with O. Normalize these rank-one identifications by the automorphism comparing their value on O[0] with the prescribed Hom-unit evaluation isomorphism. Endomorphisms of the monoidal unit commute (the unitor naturality and interchange identities prove this), so the normalized rank-one identifications still intertwine every scalar map. The Hom differential from -1 to 0 is positive precomposition by the positive differential. The two normalized rank-one identifications therefore give a chain isomorphism q_m:D_m -> Hom(P_m,O[0]); outside degrees -1 and 0 both sides are zero.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-cbc-signed-koszul-completion-model",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare q_m with the explicit factor transitions after projecting and applying the normalized rank-one identifications in degrees -1 and 0. Componentwise Hom functoriality changes (1,b) to (b,1), exactly the negative transition. The normalization was chosen so that projection and rank-one evaluation on Hom(O[0],O[0]) coincide with the prescribed Hom-unit evaluation. Consequently the degree-zero basis inclusion j_m:O[0] -> D_m is sent to inverse Hom-unit evaluation followed by precomposition with the positive projection pi_m:P_m -> O[0]. These chain maps agree on the supported degrees; all other source terms are zero.",
+   "uses": [
+    "def-weil-pbc-ringed-negative-koszul-transitions",
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the ordinary closed structure on module-sheaf complexes, define the dual product [X,1] tensor [Y,1] -> [X tensor Y,1] by transposing the middle-four interchange followed by the two evaluations and the unit multiplication. Naturality follows by transposing and using evaluation naturality. This map factors as ihomUnitTensorToIhom X [Y,1], internal uncurrying, and precomposition with inverse braiding Y tensor X -> X tensor Y. The braided coherence and evaluation identities prove that factorization. The positive Koszul factor is dualizable by the existing bounded finite-Koszul theorem; hence all three maps are isomorphisms, for arbitrary Y=K. Transposing the two maps pi_m and p shows that the product of their transposes is the transpose of (pi_m tensor p) followed by unit multiplication.",
+   "uses": [
+    "lem-weil-pbc-ringed-complex-tensor-evaluation",
+    "lem-weil-pbc-ringed-koszul-dualizable",
+    "lem-weil-pbc-ringed-hom-tensor-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define e_m,K as q_m tensor identity followed by the dual product. Its naturality in K is the naturality of the dual product in its second source; compatibility with m uses the transition identity for q_m and naturality in its first source. For the normalized degree-zero equation, apply the dual-product transpose identity to pi_m and p, replace the transpose of pi_m by j_m followed by q_m, and use inverse Hom-unit evaluation for the transpose of p. Take degree zero and precompose with the inverse single-object identification. The component formula for the tensor left unitor and the tensor-inclusion naturality give precisely the displayed basis tensor. No invertibility of b, nonzero ring, boundedness of K, or nonempty site is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-complex-tensor-evaluation",
+    "lem-weil-pbc-ringed-hom-tensor-unit-normalization",
+    "def-weil-pbc-ringed-negative-koszul-transitions",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul: finite free dual identification. Z5 constructs the two supported degrees of the one-factor dual, normalizes rank-one evaluation by the prescribed Hom unit using commuting unit endomorphisms, and applies ordinary closed-category dualizability to obtain the tensor-Hom comparison, transitions, and degree-zero normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom from a two term Koszul complex is tensor with the negative Koszul factor, naturally in a remaining complex",
+   "results": "8 hits: HomologicalComplex.tensorObj, tensorHom, rightUnitor, HomComplex cochain shifts and homologyOpNatIso. No comparison for internal sheaf Hom of the specified two-term factors.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a tensor of two term Koszul complexes is the tensor of the negative two term complexes",
+   "results": "8 hits: generic tensor differentials, tensorObj, tensor inclusions and TensorProduct.Neg.aux. None gives the one-factor internal sheaf Hom comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"tensor\"",
+   "results": "12 hits: categorical rigid tensor duals and module dualDistrib and dualTensorHomEquiv. No comparison with the present Hom convention and normalized unit.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "double.*[Dd]ual|[Dd]ual.*double|[Dd]ual.*[Tt]ensor",
+   "results": "Mathlib returned generic module dual-tensor statements, no two-term complex comparison. Local source contains HomComplexToSingle and HomTensorTotal, but no dual identification of the actual negative factor. The latter supplies the currying step, the former treats only Hom into a single sheaf and cannot supply the arbitrary coefficient complex required here.",
+   "date": "2026-10-26",
+   "verdict": "Reuse existing currying; the rank-one signed comparison and its normalized unit are missing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedNegativeKoszulDuality",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite free dual identification in the negative Koszul model: one-factor tensor-Hom comparison, used recursively.",
+   "via": [
+    "lem-weil-pbc-ringed-negative-koszul-duality",
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport",
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulFactorHomTensor",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulFactorHomTensor.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulFactorHomTensor",
+  "statement": "theorem ringedNegativeKoszulFactorHomTensor\n    (b : (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ e : ∀ (m : ℕ) (K : ringedSiteComplex O),\n      ((ringedKoszulTensor O).obj (ringedNegativeKoszulFactor O b m)).obj\n          (homComplex (R := O) K (ringedSiteRingComplex O)) ≅\n        homComplex (R := O)\n          (((ringedKoszulTensor O).obj (ringedKoszulFactor O b m)).obj K)\n          (ringedSiteRingComplex O),\n      (∀ (m : ℕ) (K K' : ringedSiteComplex O) (f : K' ⟶ K),\n        ((ringedKoszulTensor O).obj (ringedNegativeKoszulFactor O b m)).map\n            (((homComplexFunctor (R := O)).map f.op).app _) ≫ (e m K').hom =\n          (e m K).hom ≫ ((homComplexFunctor (R := O)).map\n            (((ringedKoszulTensor O).obj (ringedKoszulFactor O b m)).map f).op).app _) ∧\n      (∀ (m : ℕ) (K : ringedSiteComplex O),\n        ((ringedKoszulTensor O).map\n            (ringedNegativeKoszulFactorTransition O b m)).app _ ≫ (e m K).hom =\n          (e (m + 1) K).hom ≫ ((homComplexFunctor (R := O)).map\n            (((ringedKoszulTensor O).map (ringedKoszulFactorStep O b m)).app K).op).app _) ∧\n      (∀ (m : ℕ) (K : ringedSiteComplex O) (p : K ⟶ ringedSiteRingComplex O),\n        (MonoidalCategory.leftUnitor\n            (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))).inv ≫\n          MonoidalCategory.tensorHom (ringedNegativeKoszulFactorBasis O b m 0)\n            ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫\n              (ringedHomUnitEvaluationIso O (ringedSiteRingComplex O)).inv.f 0 ≫\n              (((homComplexFunctor (R := O)).map p.op).app _).f 0) ≫\n          CochainComplex.ιMapBifunctor (ringedNegativeKoszulFactor O b m)\n            (homComplex (R := O) K (ringedSiteRingComplex O))\n            (MonoidalCategory.curriedTensor _) 0 0 0 (by omega) ≫ (e m K).hom.f 0 =\n        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫\n          (ringedHomUnitEvaluationIso O (ringedSiteRingComplex O)).inv.f 0 ≫\n          (((homComplexFunctor (R := O)).map\n            (((ringedKoszulTensor O).map (ringedKoszulFactorProjection O b m)).app K ≫\n              ((ringedKoszulTensor O).obj (ringedSiteRingComplex O)).map p ≫\n              (ringedKoszulUnitTensorIso O).hom).op).app _).f 0)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-cbc-signed-koszul-completion-model",
+  "lem-sc-hom-complex-projections",
+  "def-weil-pbc-ringed-negative-koszul-transitions",
+  "lem-weil-pbc-ringed-complex-tensor-evaluation",
+  "lem-weil-pbc-ringed-koszul-dualizable",
+  "lem-weil-pbc-ringed-hom-tensor-unit-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T022721-L-399390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261026T104501-L-837754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

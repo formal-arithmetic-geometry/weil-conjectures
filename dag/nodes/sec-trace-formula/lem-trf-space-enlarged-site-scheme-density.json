@@ -1,0 +1,313 @@
+{
+ "id": "lem-trf-space-enlarged-site-scheme-density",
+ "kind": "statement",
+ "title": "Scheme-density comparison for the enlarged etale site",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with every site small relative to its sheaves. Use chartwise etale morphisms as in [lem-trf-space-chartwise-etale-permanence]: every representable etale scheme chart remains representable etale after composition. For a space $A$, let $\\mathcal C_A$ have objects chartwise etale maps $T\\to A$ from algebraic spaces, arrows all maps over $A$, and coverings jointly surjective chartwise etale families [def-weil-pbc-sites-and-cohomology]. Write $i_A:A_{\\mathrm{et}}\\to\\mathcal C_A$ for the scheme-object inclusion, regarding schemes as their representable sheaves [def-trf-scheme-algebraic-space]. For every space $X$, these coverings satisfy the site axioms. The object $X/X$ is terminal and sheaf fibre products [lem-trf-space-fibre-products-etale-covers] give pullbacks in $\\mathcal C_X$; in particular $\\mathcal C_X$ has finite limits. Coverings between scheme objects are exactly the small etale coverings. The functor $i_X$ is fully faithful and continuous. Every covering $\\{T_j\\to i_X(U)\\}$ admits a refinement by a covering $\\{i_X(W_j)\\to i_X(U)\\}$ obtained from surjective representable etale scheme charts $W_j\\to T_j$. Every object of $\\mathcal C_X$ has a singleton covering by a scheme object. Thus $i_X$ satisfies all five conditions of a special cocontinuous functor [def-weil-pbc-special-cocontinuous-functor], including local fullness and local faithfulness. Restriction $i_X^*:\\operatorname{Sh}(\\mathcal C_X)\\to\\operatorname{Sh}(X_{\\mathrm{et}})$ is an equivalence of categories of sheaves of sets.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G0 (definition-spaces-etale-site), 03G1 (lemma-compare-etale-sites); finite limits in Tag 03G2 (lemma-functoriality-etale-site), proof; chartwise convention Tag 03FR (definition-etale)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use chartwise permanence to make every arrow over X chartwise etale by cancellation. Construct X/X and prove its terminal universal property. Bundle the actual sheaf pullback of two arrows as an enlarged object: its projection is chartwise etale by base change and its structure map by composition. Reflect its presheaf pullback square through the fully faithful forgetful functors. Singleton isomorphisms lift sections by their inverse; composition uses the presheaf field-extension family calculus. For base change, apply the evaluated sheaf pullback universal property to a restricted target section and the original lifted section. These prove the three site axioms, including empty covers. Terminal object and pullbacks give finite limits.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-presheaf-field-lift-family-calculus",
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G0 (definition-spaces-etale-site), 03G2 (lemma-functoriality-etale-site), proof; 03FV (lemma-etale-permanence)."
+   }
+  },
+  {
+   "text": "Compare pointwise scheme surjectivity and field-extension lifting for any indexed scheme family. In one direction test the residue-field map at a point and evaluate the lifted field-valued map at its unique point. Conversely choose a source point over the image of a given field-valued map. The compatible-point theorem gives a point of the scheme fibre product with Spec K. The residue field at that point and the map from its spectrum give a field extension K to L and the required lift, with its over-S equation. Comparison maps between scheme objects etale over X are etale by representable_etale_scheme_tests. Reindex an arbitrary presieve by its arrows to conclude exact covering agreement.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-scheme-pullback-compatible-point",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites); Tag 03BV (lemma-scheme-points), via schemes.tex Tag 01J9 (lemma-characterize-points)."
+   }
+  },
+  {
+   "text": "Construct the fully faithful structure on scheme inclusion explicitly. For an enlarged-site arrow between scheme objects take the Yoneda preimage of its underlying natural transformation. The equation over X transports unchanged. Yoneda map_preimage and preimage_map prove the two inverse identities.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites), assumptions (3),(4); categories.tex Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "Construct the scheme fibre product of two small-site arrows, whose second projection is etale by scheme base change. Its composite to X is representable etale, so it is a small-site object. Yoneda preserves the scheme pullback and the enlarged forgetful functor reflects it, proving that inclusion preserves this pullback. For a generating small covering pulled back along an arbitrary arrow, its included family covers by enlarged base change and hence covers in the small site by step 2. Apply the sheaf criterion for a generated precoverage and the equivalence of sheaf conditions under preservation of pairwise pullbacks. This proves continuity without any extra precoverage instances.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites), continuity; sites.tex Tag 00WV (definition-continuous)."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas of the source algebraic space of an enlarged object. The chartwise condition of its structure map makes the composite into X representable etale, giving the small-site object. For any field-valued section, the atlas scheme test is a surjective scheme over Spec K. Choose a point above the unique point of Spec K and take its residue-field map. Yoneda evaluation of the representing pullback equality proves the lift equation after that field extension. Thus the atlas is a singleton enlarged covering.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites), assumption (5); Tag 025Y (definition-algebraic-space)."
+   }
+  },
+  {
+   "text": "Choose the singleton atlases of step 5 for each member of an enlarged covering of a scheme object. Full faithfulness lifts their composites to small-site arrows. The presheaf family composition calculus makes the composite family field-point surjective, and step 2 makes it a small covering. This keeps the original index set, including the empty set. Show by induction on precoverage saturation that each covering sieve contains an actual covering presieve, using the three enlarged site axioms. Refine that presieve by the preceding atlases; its small covering lies in the functor pullback sieve. This is cocontinuity.",
+   "uses": [
+    "lem-trf-presheaf-field-lift-family-calculus",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-special-cocontinuous-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites), cocontinuity; sites.tex Tag 00XJ (definition-cocontinuous)."
+   }
+  },
+  {
+   "text": "Use the identity singleton small cover, which covers by step 2 and the enlarged isomorphism axiom. Faithfulness gives equality of parallel arrows with equal image; fullness lifts an arrow between image objects. These prove the two local conditions. Steps 2, 4, 5, and 6 give cover preservation, preservation of covering pullbacks, covering by image objects, and cocontinuity. Assemble exactly the special cocontinuous covering predicate.",
+   "uses": [
+    "def-weil-pbc-special-cocontinuous-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites), conditions (1)--(5); sites.tex Tag 03A0 (lemma-equivalence)."
+   }
+  },
+  {
+   "text": "The singleton atlases give Mathlib IsCoverDense. Fullness and faithfulness give local fullness and local faithfulness. Continuity makes inclusion preserve covering sieves. Conversely cocontinuity makes the pullback of an image covering sieve cover, and full faithfulness identifies that pullback with the original sieve. These are IsDenseSubsite. Apply the existing Mathlib dense-subsite restriction equivalence, with coefficient universe max (u+1) w so all required comma-category limits exist. The resulting sheafPushforwardContinuous is definitionally enlargedRestriction. This is the sieve formulation of the same Stacks 03A0 comparison and avoids the small-category-only signature of specialCocontinuous_sheafEquivalence.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G1 (lemma-compare-etale-sites); sites.tex Tag 03A0 (lemma-equivalence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-presheaf-field-lift-family-calculus",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-scheme-pullback-compatible-point",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-trf-scheme-algebraic-space",
+  "lem-galois-yoneda-fully-faithful",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-size-convention",
+  "lem-pc-fppf-dense-sheaf-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G0, 03G1, 03G2, with the scheme compatible-point theorem (Stacks 01JT, Mathlib PullbackCarrier) for field-extension lifts and Mathlib DenseSubsite/SheafEquiv for universe-polymorphic restriction equivalence. Fully implemented by C7, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space the site of etale algebraic spaces has finite limits and scheme objects form a special cocontinuous cover dense subsite",
+   "results": "{\"t\": \"2026-10-22T06:47:50Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space the site of etale algebraic spaces has finite limits and scheme objects form a special cocontinuous cover dense subsite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"7b80dfc0c6b5ed90\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the general dense-subsite theorems require the geometric density and topology conditions which this statement proves for algebraic spaces; scheme etale sites do not supply those conditions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of scheme charts into the enlarged etale site of an algebraic space induces an equivalence of sheaf categories",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leansearch\", \"query\": \"The inclusion of scheme charts into the enlarged etale site of an algebraic space induces an equivalence of sheaf categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.Equivalence.sheafCongr_functor\", \"CategoryTheory.Equivalence.sheafCongr\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Equivalence.sheafCongr.functor\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"CategoryTheory.Equivalence.sheafCongrPreregular_functor_obj_val_obj\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent\"], \"digest\": \"7af06ffbe502bfff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the general dense-subsite theorems require the geometric density and topology conditions which this statement proves for algebraic spaces; scheme etale sites do not supply those conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoverDense\", \"IsContinuous\"",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoverDense\\\", \\\"IsContinuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCoverDense.isContinuous\"], \"digest\": \"c7ba6fe6bc426c16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the general dense-subsite theorems require the geometric density and topology conditions which this statement proves for algebraic spaces; scheme etale sites do not supply those conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|spacesEtale|enlargedEtale",
+   "results": "{\"t\": \"2026-10-22T06:47:39Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|spacesEtale|enlargedEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the general dense-subsite theorems require the geometric density and topology conditions which this statement proves for algebraic spaces; scheme etale sites do not supply those conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafEquiv|def sheafInducedTopologyEquivOfIsCoverDense|theorem isContinuous",
+   "results": "{\"t\": \"2026-10-22T06:48:57Z\", \"tool\": \"grep\", \"query\": \"def sheafEquiv|def sheafInducedTopologyEquivOfIsCoverDense|theorem isContinuous\", \"sub\": \"CategoryTheory/Sites/DenseSubsite\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\"], \"digest\": \"81b2078518302415\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the general dense-subsite theorems require the geometric density and topology conditions which this statement proves for algebraic spaces; scheme etale sites do not supply those conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space the inclusion of scheme objects into its enlarged etale site is special cocontinuous and restriction is an equivalence of sheaf categories",
+   "results": "{\"t\": \"2026-10-23T09:34:54Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space the inclusion of scheme objects into its enlarged etale site is special cocontinuous and restriction is an equivalence of sheaf categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous\"], \"digest\": \"bf9e830cbeea0fc8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites and general dense-subsite comparisons do not establish the algebraic-space geometry, the site axioms or the atlas refinement proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|enlargedEtale|spacesEtale",
+   "results": "{\"t\": \"2026-10-23T09:35:45Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|enlargedEtale|spacesEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites and general dense-subsite comparisons do not establish the algebraic-space geometry, the site axioms or the atlas refinement proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme objects form a cover dense fully faithful subsite of the etale algebraic spaces over an algebraic space",
+   "results": "{\"t\": \"2026-10-23T09:35:45Z\", \"tool\": \"leansearch\", \"query\": \"Scheme objects form a cover dense fully faithful subsite of the etale algebraic spaces over an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.mk\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"CategoryTheory.Functor.instIsDenseSubsiteInducedTopologyOfIsCoverDense\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"3162f436c6424208\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites and general dense-subsite comparisons do not establish the algebraic-space geometry, the site axioms or the atlas refinement proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoverDense\", \"IsContinuous\"",
+   "results": "{\"t\": \"2026-10-23T09:35:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoverDense\\\", \\\"IsContinuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCoverDense.isContinuous\"], \"digest\": \"c7ba6fe6bc426c16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites and general dense-subsite comparisons do not establish the algebraic-space geometry, the site axioms or the atlas refinement proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafEquiv|sheafInducedTopologyEquivOfIsCoverDense|theorem isContinuous",
+   "results": "{\"t\": \"2026-10-23T09:37:09Z\", \"tool\": \"grep\", \"query\": \"def sheafEquiv|sheafInducedTopologyEquivOfIsCoverDense|theorem isContinuous\", \"sub\": \"CategoryTheory/Sites/DenseSubsite\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"4a150d63ae3c44a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites and general dense-subsite comparisons do not establish the algebraic-space geometry, the site axioms or the atlas refinement proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale algebraic spaces over a fixed space form a site with finite limits and every object is covered by a representable scheme chart",
+   "results": "{\"t\": \"2026-10-23T09:37:18Z\", \"tool\": \"leanfinder\", \"query\": \"Etale algebraic spaces over a fixed space form a site with finite limits and every object is covered by a representable scheme chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\"], \"digest\": \"e82ebab64514b96e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites and general dense-subsite comparisons do not establish the algebraic-space geometry, the site axioms or the atlas refinement proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-enlarged-etale-ringed-site-model",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Re-split of lem-trf-space-enlarged-etale-ringed-site-model, old proof steps 1–3: Scheme-density comparison for the enlarged etale site.",
+   "via": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-enlarged-site-scheme-density",
+  "worker": "stage1",
+  "summary": "Expanded the scheme-density comparison into eight steps, using existing geometric permanence, scheme tests, Yoneda and site-comparison nodes. No new nodes, no statement change. Checked field-valued point surjectivity, arbitrary over-X pullbacks, atlas refinement, all five comparison conditions and the precise restriction functor.",
+  "blueprint": "Retains blueprint.from.place and the historical via chain below lem-trf-local-term-locality. Realizes old steps 1–3 of lem-trf-space-enlarged-etale-ringed-site-model at that place; no chapter or unit route is changed. The latest blueprint locality proof is about contracting correspondences, so the section-algebra descent ancestry is historical, not an assertion that the latest proof mentions enlarged sites.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic field-amalgamation tool for matching a given field-valued scheme point to a covering source over its residue field; this unit has no such field theorem."
+   },
+   {
+    "node": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+    "why": "Generic small-site comparison lemma (Stacks 03A0), applied only after this item establishes every geometric hypothesis; this unit has no general comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-5df1ef5c5",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-5df1ef5c5 (reviewer sub-agent of L); spot-checked: Read in full: the 8-step proof, every cited statement, and Stacks 03G0, 03G1 and the 03G2 proof. Step 1: the site axioms and C_X pullbacks come from the clauses of chartwise-permanence (over-Z, base change, composition) and from the sheaf fibre product of fibre-products-etale-covers; X/X is terminal, so finite-limits clause (1) applies. Step 2: field-point-class covers equal scheme-point covers, by morphism-from-spec-field plus common extension over kappa(x); etaleness between scheme objects uses chartwise=representable etale and the h_r clause of scheme-tests. Step 3: full faithfulness via Yoneda on Sch/S. Step 4: continuity by representing the scheme fibre product. Step 5: the atlas is a singleton cover, with the field-point lift done explicitly. Step 6: cocontinuity by covering composition, empty J included. Step 7: conditions (c) and (d) via identity coverings. Step 8: the 03A0 node gives that precomposition is an equivalence. Statement unchanged and consistent with 03G1 for sheaves of sets. No new nodes; rg -L over dag/nodes found no duplicate. No cycle. Item is still unsplit live, and all cited nodes are live and unmerged. Accepted tool_uses: common-extension-fields and special-cocontinuous-sheaf-equivalence. Cosmetic only: step 5 cites 025Y (spaces.tex) under the spaces-properties.tex document. review_split's 'no such node' messages come from the tool not following symlinks; the nodes exist."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EnlargedSiteSchemeDensity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.enlargedSite_scheme_density",
+  "file": "lean/Sheaf/AlgebraicGeometry/EnlargedSiteSchemeDensity.lean",
+  "statement": "theorem enlargedSite_scheme_density {S : Scheme.{u}} (X : AlgebraicSpace S) : X.enlargedEtalePrecoverage.IsSiteForCoverings ∧ (∃ T : X.EnlargedEtaleSite, T.obj = Over.mk (𝟙 X) ∧ Nonempty (IsTerminal T)) ∧ (∀ (T U V : X.EnlargedEtaleSite) (f : T ⟶ V) (g : U ⟶ V), ∃ (P : X.EnlargedEtaleSite) (p : P ⟶ T) (q : P ⟶ U), IsPullback p q f g ∧ IsPullback p.hom.left.hom q.hom.left.hom f.hom.left.hom g.hom.left.hom) ∧ Nonempty (HasFiniteLimits X.EnlargedEtaleSite) ∧ (∀ (U : X.EtaleSite) (R : Presieve U), R ∈ X.etalePrecoverage U ↔ R.map (enlargedSchemeInclusion X) ∈ X.enlargedEtalePrecoverage ((enlargedSchemeInclusion X).obj U)) ∧ Nonempty (enlargedSchemeInclusion X).FullyFaithful ∧ (enlargedSchemeInclusion X).IsContinuous X.etaleTopology X.enlargedEtaleTopology ∧ (∀ (I : Type v) (U : X.EtaleSite) (T : I → X.EnlargedEtaleSite) (f : ∀ i : I, T i ⟶ (enlargedSchemeInclusion X).obj U), Presieve.ofArrows T f ∈ X.enlargedEtalePrecoverage ((enlargedSchemeInclusion X).obj U) → ∃ (W : I → X.EtaleSite) (a : ∀ i : I, (enlargedSchemeInclusion X).obj (W i) ⟶ T i) (b : ∀ i : I, W i ⟶ U), (∀ i : I, IsEtale (a i).hom.left.hom.hom ∧ IsSurjective (a i).hom.left.hom.hom) ∧ (∀ i : I, (enlargedSchemeInclusion X).map (b i) = a i ≫ f i) ∧ Presieve.ofArrows W b ∈ X.etalePrecoverage U) ∧ (∀ T : X.EnlargedEtaleSite, ∃ (W : X.EtaleSite) (a : (enlargedSchemeInclusion X).obj W ⟶ T), IsEtale a.hom.left.hom.hom ∧ IsSurjective a.hom.left.hom.hom ∧ Presieve.singleton a ∈ X.enlargedEtalePrecoverage T) ∧ (enlargedSchemeInclusion X).IsSpecialCocontinuousForCoverings X.etalePrecoverage X.enlargedEtalePrecoverage ∧ (enlargedRestriction X (Type (max (u + 1) w))).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc28d2840",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (69aecf85). Lean module byte-identical (diff of snapshots); item node vs side-live differs only by the lean record and the added stmt_dep def-sfb-space-chartwise-etale-morphism (existing:true IsChartwiseEtale, landed before base), which owns the predicate behind EnlargedEtaleSite/enlargedEtalePrecoverage. lean.statement verbatim. Re-read the side-live declarations (IsChartwiseEtale, EnlargedEtaleSite, enlargedEtalePrecoverage, enlargedSchemeInclusion, enlargedRestriction, IsSpecialCocontinuousForCoverings), all unchanged. Clauses match node/Stacks 03G0/03G1/03G2: site axioms, X/X terminal, pullbacks with sheaf square, finite limits, scheme-cover iff, fully faithful, continuous, same-index atlas refinement (free I : Type v, empty I ok), singleton scheme covers, special cocontinuity, literal restriction equivalence. No new defs; proof sorry only; docstrings OK; report sections present. Not recompiled (no file changed). Advisory: enlarged-site plain defs are owned only by the parent theorem record; maintainer should add an existing:true def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T081303-L-1909489",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,198 @@
+{
+ "id": "lem-route-bounded-constructible-tate-twist-derived-of-invertible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ],
+   "place": "thm-pur-rational-and-qbar-purity proof Step 2, transport to Qbar coefficients: bounded constructibility of the actual condensed Tate endpoint used by def-pur-condensed-smooth-purity-iso; local rank-one and signed-twist construction in sk-def-sp-tate-twist."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Every integer shift of the actual condensed Tate twist is bounded constructible when ell is invertible on the scheme.",
+ "statement": "Let $\\ell$ be a prime and $X$ an arbitrary scheme. Suppose that the image of $\\ell$ in the residue field $\\kappa(x)$ [def-weil-residue-field] is invertible for every $x\\in X$. Put $B_X=p_X^*\\underline\\Omega$, where $\\underline\\Omega=\\mathrm{Profinite.padicAlgClRingObj}(\\ell)$ is the finite-subextension-valued condensed algebraic closure of $\\mathbf Q_\\ell$, and let $B_X(d)$ and $\\mathrm{tateTwistDerived}(X,\\ell,d)=B_X(d)[0]$ be exactly the internal-module constructions of [def-pur-condensed-tate-twists]. For every $d,n\\in\\mathbf Z$, the object\n$$\\mathrm{tateTwistDerived}(X,\\ell,d)[n]\\in D(\\operatorname{Mod}_{B_X})$$\nis bounded constructible in the precise sense of [def-sfb-bounded-constructible-complexes]: its cohomology vanishes outside a finite interval and every cohomology module is constructible in the finite-stratification, locally-finitely-presented sense of [def-sfb-constructible-module]. No quasi-compactness, Noetherianity, finite-type or finite-field hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/upstream-master-20261016/WeilConjectures/SmoothPurity/Defs.lean",
+  "place": "def-pur-condensed-smooth-purity-iso: the Lean of this node (its module WeilConjectures.SmoothPurity.Defs uses) reaches AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived_of_invertible, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Targets/PoincareTateBoundedConstructible.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived_of_invertible (module Sheaf.Targets.PoincareTateBoundedConstructible, lines 47-102, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-pur-condensed-tate-twists",
+  "def-sfb-bounded-constructible-complexes",
+  "def-sfb-constructible-module"
+ ],
+ "proof": [
+  {
+   "text": "The residue-field invertibility assumption makes ell a unit in every stalk: use IsLocalRing.residue_ne_zero_iff_isUnit and the nonzero image of an invertible element in the residue field. The ringed-space stalk criterion then makes ell a unit in Gamma(X,O_X). Apply [lem-poincare-first-twist-pullback-local-line] to id_X to obtain a cover and a basis for the actual first twist after the two raw inverse images that occur in the constructibility predicate.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-poincare-first-twist-pullback-local-line"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the composite of the two monoidal mapMod functors, induction identifies the image of tateTwistNat(n) with the regular module: at zero use the inverse unit comparison; at the successor use the inverse tensor comparison, the inductive basis and first-twist basis, followed by the left unitor. This is powers_image_regular in the delivered Lean file and uses exactly the recursive definition in [def-pur-condensed-tate-twists].",
+   "uses": [
+    "def-pur-condensed-tate-twists",
+    "def-sfb-finite-upper-star-monoidal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a weakly etale inverse image, the ambient sheaf internal-Hom comparison is an isomorphism, and inverse image preserves the equalizer imposing R-linearity. The concrete module internal Hom Mod.ihom' is the right adjoint of relative tensor, hence agrees with the categorical ihom by uniqueness of right adjoints. Apply Mod.isIso_mapIhom'Hom with identity scalar change and remove that identity change using Mod.comapId. This is nonempty_pullback_ihom. Apply it to id_X and each cover morphism, then use the positive-power basis, the unit comparison and MonoidalClosed.unitIsoSelf. The negative signed twist is therefore regular on the same cover.",
+   "uses": [
+    "def-pur-condensed-tate-twists",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the single stratum X with identity immersion. Its image is constructible and locally closed. Each local image of the signed twist is regular by the preceding two steps. A regular module is the cokernel of the zero map from the free module of rank zero to the free module of rank one, using biproductUniqueIso and cokernelZeroIsoTarget. These are finite presentations for precisely the raw double pullbacks of [def-sfb-constructible-module], so the signed twist is constructible without any quasi-compactness or Noetherian assumption.",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-poincare-constructible-shift-single] to this constructible signed twist and arbitrary n. By [def-pur-condensed-tate-twists], its degree-zero single is exactly tateTwistDerived. This proves the stated boundedConstructible predicate, including d=0, positive and negative d, every n and the empty scheme.",
+   "uses": [
+    "lem-poincare-constructible-shift-single",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "lem-poincare-first-twist-pullback-local-line",
+  "def-pur-condensed-tate-twists",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-upper-star",
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented",
+  "def-sfb-finitely-presented-module",
+  "lem-poincare-constructible-shift-single"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "The local rank-one assertion, positive tensor powers, negative dual powers and degree-zero realization; instantiated using the existing proved first-twist local basis and shifted-single declarations. Written as Lean by Y2 on 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'boundedConstructible_tateTwistDerived_of_invertible' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every integer shift of a condensed Tate twist on a scheme where ell is invertible is bounded constructible",
+   "results": "{\"t\": \"2026-10-25T06:37:07Z\", \"tool\": \"leanfinder\", \"query\": \"Every integer shift of a condensed Tate twist on a scheme where ell is invertible is bounded constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.IsSolid\", \"DerivedCategory.IsGE\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"DerivedCategory.IsLE\", \"instAbelianLightCondMod\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"CondensedMod.ofSheafCompHaus\"], \"digest\": \"1343171b023cff01\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic condensed categories, derived shifts or constructible subsets, not the condensed Tate construction and constructibility predicate of the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, CategoryTheory.shiftFunctor",
+   "results": "{\"t\": \"2026-10-25T06:37:07Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.singleFunctor, CategoryTheory.shiftFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.hasExt_iff\", \"CategoryTheory.Abelian.Ext.zero_hom\", \"CategoryTheory.Abelian.Ext.homAddEquiv\", \"CategoryTheory.Abelian.Ext.neg_hom\", \"CategoryTheory.Abelian.Ext.add_hom\", \"CategoryTheory.Abelian.Ext.homAddEquiv_apply\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₃\"], \"digest\": \"796f5e99277b3150\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic condensed categories, derived shifts or constructible subsets, not the condensed Tate construction and constructibility predicate of the item."
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*tateTwist|tateTwistDerived|TateTwist",
+   "results": "{\"t\": \"2026-10-25T06:37:07Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible.*tateTwist|tateTwistDerived|TateTwist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic condensed categories, derived shifts or constructible subsets, not the condensed Tate construction and constructibility predicate of the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shifted Tate twists are bounded constructible complexes over condensed l-adic coefficient sheaves",
+   "results": "{\"t\": \"2026-10-25T06:37:08Z\", \"tool\": \"leansearch\", \"query\": \"Shifted Tate twists are bounded constructible complexes over condensed l-adic coefficient sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed\", \"CategoryTheory.Triangulated.TStructure.le_shift\", \"CategoryTheory.Triangulated.TStructure.isLE_of_shift\", \"instCategoryCondensed\", \"CategoryTheory.Triangulated.TStructure.isLE_shift\", \"LightCondensed\", \"CochainComplex.isStrictlyGE_shift\", \"CategoryTheory.Triangulated.TStructure.ge_shift\"], \"digest\": \"bd37bf66a5b46276\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic condensed categories, derived shifts or constructible subsets, not the condensed Tate construction and constructibility predicate of the item."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Tate.twist|tate.twist",
+   "results": "{\"t\": \"2026-10-25T06:40:04Z\", \"tool\": \"grep\", \"query\": \"constructible|Tate.twist|tate.twist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"c360eb7f048e36ff\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic condensed categories, derived shifts or constructible subsets, not the condensed Tate construction and constructibility predicate of the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free rank one l-adic Tate sheaf placed in degree zero has bounded constructible cohomology after any integer shift",
+   "results": "{\"t\": \"2026-10-25T06:40:04Z\", \"tool\": \"leanfinder\", \"query\": \"A locally free rank one l-adic Tate sheaf placed in degree zero has bounded constructible cohomology after any integer shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.ofSheafCompHaus\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondAb.ofSheafLightProfinite\", \"CondensedMod.IsSolid\"], \"digest\": \"b508820bad53cb45\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern generic condensed categories, derived shifts or constructible subsets, not the condensed Tate construction and constructibility predicate of the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-pur-condensed-smooth-purity-iso",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Targets.PoincareTateBoundedConstructible",
+  "file": "lean/Sheaf/Targets/PoincareTateBoundedConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived_of_invertible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived_of_invertible"
+  ],
+  "statement": "theorem boundedConstructible_tateTwistDerived_of_invertible\n    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})\n    [∀ x : X, Invertible (ℓ : X.residueField x)] (d n : ℤ) :\n    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)\n      ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d)) :=\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-bounded-constructible-tate-twist-derived-of-invertible",
+  "worker": "stage1",
+  "summary": "Replaced the provisional signature/docstring dump by the exact mathematical statement. Found that nt-target-poincare-tate-bc already states the conclusion for arbitrary ell-invertible schemes. Proved the elementary residue-field-to-global-unit translation and reused that existing node; created no duplicates and no new nodes. Read the actual condensed coefficient and signed-twist construction, the exact bounded-constructibility definitions and all cited statements; no Lean written or compiled.",
+  "blueprint": "The ancestor purity proof Step 2 needs a bounded constructible condensed Tate endpoint. This split discharges that obligation by the existing Tate-twist route of sk-def-sp-tate-twist; no smooth-purity argument or finite-coefficient route is replaced.",
+  "tool_uses": [
+   {
+    "node": "nt-target-poincare-tate-bc",
+    "why": "Existing exact theorem on shifted actual condensed Tate twists, used after the elementary translation of invertibility. The purity transport unit does not prove general Tate bounded constructibility; its statement, coefficient category and all integer twists already coincide with this node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "nt-target-poincare-tate-bc"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NC-549250034",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-549250034 (reviewer sub-agent of L); spot-checked: The item statement now gives the exact content of the Sheaf Lean declaration boundedConstructible_tateTwistDerived_of_invertible (PoincareTateBoundedConstructible.lean:97-102, still sorry): ell prime, any scheme X, ell invertible in every residue field, every d,n in Z. The coefficient category is D(Mod_{B_X}) with B_X = condensedRingObj(padicAlgClRingObj ell) X, which def-pur-condensed-tate-twists names explicitly, and constructibility is def-sfb-bounded-constructible-complexes with def-sfb-constructible-module. Nothing is weakened and there is no base-change morphism. Step 1 is elementary and correct: by def-weil-residue-field a unit in kappa(x) means ell is outside m_x, so it is a unit in the local ring; the local inverses are unique and glue to a global inverse, also on the empty scheme. This is the IsUnit hypothesis of the cited node. Step 2 applies nt-target-poincare-tate-bc (split; mathematics reviewed Q95, Lean statement reviewed Q08, proof landed 2026-10-24). Its statement matches clause by clause, and its proof does not depend on the item, so there is no cycle. There are no new nodes, so no restated or duplicate split; treating the item as a corollary with an equivalent hypothesis is correct. The tool use of nt-target-poincare-tate-bc (another unit, sk-def-sp-tate-twist) is accepted. I checked blueprint.from (thm-pur-rational-and-qbar-purity is in the DAG), same_as=[], and the opening sentence of sk-def-sp-tate-twist cited in the step sources. Minor: the report mentions a citations.json that is not in the commit; no rule requires it. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f037c",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T101933-L-3756085",
+  "kind": "interface",
+  "note": "independent cc review: theorem signature vs node lean.statement (identical); node diff (proof fields only) vs Lean proof; removed CompletedCondensedCoefficients nodes (unit sk-prop-sfb-qlbar-colimit-x) vs item unit sk-thm-purity-transport realized (not included); axioms clean; importer SmoothPurity.Defs compiled with the fixed item"
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-ring-complex-godement-affine-sections",
+ "kind": "statement",
+ "title": "Godement augmentation computes sections on principal affine intersections",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal and $f:\\operatorname{Fin}(r)\\to A$ satisfy $\\operatorname{span}(f)=I$. On $U=\\operatorname{Spec}A\\setminus V(I)$ take the specified Godement augmentation $e:\\mathcal O_U[0]\\to G_U$ of [def-weil-pbc-ring-complex-godement-construction]. For every $p\\geq0$ and increasing tuple $t:\\operatorname{Fin}(p+1)\\hookrightarrow\\operatorname{Fin}(r)$, evaluation of $e$ on $V_t=\\bigcap_j(U\\cap D(f_{t(j)}))$, with the family of [def-weil-pbc-ring-complex-ordered-cech-construction], is a quasi-isomorphism of complexes of $\\mathcal O_U(V_t)$-modules. This asserts a property of the specified augmentation, not the existence of some resolution.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "def-weil-pbc-ring-complex-godement-construction"
+ ],
+ "proof": [
+  {
+   "text": "In principalIntersection_affine, take W to be the finite nonempty intersection of the ambient basic opens D(f(t j)). Mathlib IsAffineOpen.Spec_basicOpen and IsAffineOpen.iInf show W is affine. Since f(t 0) belongs to span(range f)=I, W lies in the ideal complement. IsAffineOpen.preimage_of_isOpenImmersion then proves its inverse image under the open inclusion is affine; extensionality identifies this inverse image with the specified alternatingCechIntersection. This includes empty intersections and zero rings; an empty generating list has no increasing tuples.",
+   "uses": [
+    "def-weil-pbc-ring-complex-ordered-cech-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any affine open V of any scheme X, use the abelian-group-valued RingedSpace.openModuleSections X V. The structure module is quasi-coherent by SheafOfModules.isQuasicoherent_unit, so affine vanishing makes it right-acyclic. Its single complex has right-acyclic terms by transport along singleObjXSelf in degree zero and by the zero-object property in other degrees.",
+   "uses": [
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The choose_spec of the existing specified Godement construction supplies ModuleCupGodementModel for exactly ringComplexGodementUnit. Hence moduleCup_godement_model_quasiIso makes that augmentation a quasi-isomorphism. The same model identifies its natural-degree terms with godementObject applied to the preceding iterate, so they are flasque. For open sections, Scheme.Modules.rightAcyclic_of_isFlasque applies the source dimension-shifting criterion: injectives are flasque, the flasque quotient and section-surjectivity facts give its hypotheses. This proves right-acyclicity on V directly, without restriction of sheaves. HomologicalComplex.prop_extend_X supplies the zero negative terms.",
+   "uses": [
+    "lem-sc-module-cup-godement-model-quasi-iso",
+    "lem-sc-module-cup-godement-object-flasque",
+    "lem-sc-zariski-flasque-quotient-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Enough injectives is supplied by moduleSheaves_abelian_enoughInjectives. Both complexes vanish below zero. Apply Functor.quasiIso_map_of_rightAcyclic to the actual augmentation with bound zero and the two termwise right-acyclicity proofs. Its conclusion is the desired quasi-isomorphism after forgetting O_X(V)-module structure. The exact faithful forgetful functor ModuleCat O_X(V) to AddCommGrpCat reflects quasi-isomorphisms by HomologicalComplex.quasiIso_map_iff_of_preservesHomology; the iterated evaluation agrees definitionally with openModuleSections. Apply this affine-open result to principalIntersection_affine.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-module-cup-godement-model-quasi-iso",
+  "lem-sc-module-cup-godement-object-flasque",
+  "lem-sc-zariski-flasque-quotient-sections",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/coherent.tex",
+  "place": "lemma-godement-resolution (0FKS), lemma-flasque-acyclic (09SY); lemma-quasi-coherent-affine-cohomology-zero (01XB). Lean proof H9, 2026-10-25, using the source Leray comparison directly on open sections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement resolution section augmentation on affine open intersection is quasi-isomorphism",
+   "results": "Affine-open spectrum isomorphisms and injective-resolution augmentation instances; no Godement section comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Cech complex mapping fibre coordinates ring localization alternating restriction differential",
+   "results": "AlternatingCofaceMapComplex.map, representation standard complex and Dold-Kan constructions; no localization fibre coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|mappingCone|Localization.Away",
+   "results": "Restrict.lean principal-open localization isomorphisms, StructureSheaf and Tilde localization APIs. Local rg found the existing ordered Cech construction and finite flasque comparison, but no coordinate calculation or affine Godement evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "use existing Cech definitions and comparison; isolate the missing specializations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexGodementCech",
+  "date": "2026-10-25",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(d): principal-open ordered Cech computation of the augmented ring complex",
+   "via": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexGodementAffineSections",
+  "file": "lean/Sheaf/Paper/RingComplexGodementAffineSections.lean",
+  "declaration": "AlgebraicGeometry.ringComplexGodement_affineSections",
+  "statement": "theorem ringComplexGodement_affineSections (A : CommRingCat.{u}) (I : Ideal A)\n    (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) :\n    ∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r),\n      QuasiIso (((SheafOfModules.forget.{u}\n        (moduleRings (ringComplexOpen A I).toScheme.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u}\n          (moduleRings (ringComplexOpen A I).toScheme.toRingedSpace).obj\n          (op (alternatingCechIntersection\n            (ringComplexPrincipalCover A I f) t))).mapHomologicalComplex (.up ℤ)).map\n              (ringComplexGodementUnit (ringComplexOpen A I).toScheme))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T144342-L-1231608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T163705-L-778038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -71,13 +71,24 @@
   "def-wf-lie-algebra"
  ],
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring",
-  "declaration": "AlgebraicGeometry.tangentGroup",
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "declaration": "AlgebraicGeometry.GrpObj.lieEquivTangent",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.Lie",
+   "AlgebraicGeometry.GrpObj.instAddCommGroupLie",
+   "AlgebraicGeometry.GrpObj.instModuleLie",
+   "AlgebraicGeometry.GrpObj.lieEquivTangent",
+   "AlgebraicGeometry.GrpObj.instBracketLie",
+   "AlgebraicGeometry.GrpObj.instLieRingLie",
+   "AlgebraicGeometry.GrpObj.instLieAlgebraLie",
+   "AlgebraicGeometry.tangentGroup"
+  ],
+  "statement": "def lieEquivTangent : Lie G ≃ pointsKer G (aug₁ (k := k))",
   "branch": "slopmaster2",
-  "line": 148,
-  "sorry_free": true,
-  "body_lines": 1,
-  "note": "Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.GroupScheme.Lie:492"
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The old lean record named only tangentGroup, so did not expose the Lie module, canonical bracket or Lie-to-tangent map required by this consumer. This lean-only repair records the existing upstream Lie construction already assigned to this node in lean_audit.slopmaster2 and dag/lean_names_upstream.json. The primary declaration lieEquivTangent is defined in the recorded Lie.Bracket module, which also defines the commutator Bracket/LieRing/LieAlgebra instances and publicly imports GrpObj.Lie and its additive/global-scalar instances from Lie.Basic and the base-ring module instance from Lie.Ring through its dependencies. Lie is Hom(e*Omega,O), lieEquivTangent is the canonical dual-number point, and the bracket is the mixed commutator term, exactly the current blueprint definition. tangentGroup remains recorded. No construction is duplicated; no theorem of lem-ag-lie-identity-tangent-equiv is used. The other existing matrix-action realizations remain listed in this node’s unchanged lean_audit.slopmaster2 record."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.tangentGroup",
@@ -90,7 +101,90 @@
   "Matrix.GeneralLinearGroup.RationalHom",
   "Matrix.GeneralLinearGroup.RationalHom.differential"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.tangentGroup",
+    "Matrix.GeneralLinearGroup.lieAlgebra",
+    "Matrix.GeneralLinearGroup.RationalHom",
+    "Matrix.GeneralLinearGroup.RationalHom.differential"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.tangentGroup",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring",
+     "lines": [
+      59,
+      64
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GrpObj.Lie",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic",
+     "lines": [
+      64,
+      69
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.lieAlgebraEquivMatrix",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie",
+     "lines": [
+      300,
+      304
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.RationalHom",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie",
+     "lines": [
+      333,
+      337
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.RationalHom.differential",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie",
+     "lines": [
+      419,
+      424
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.lieSubalgebra",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      245,
+      263
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "superseded": [
+    "Matrix.GeneralLinearGroup.lieAlgebra",
+    "Matrix.GeneralLinearGroup.RationalHom",
+    "Matrix.GeneralLinearGroup.RationalHom.differential"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-d-tangent",
  "split_report": {
@@ -145,5 +239,13 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb6dd4cbe",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-delivery after the 449c H2 RETURN makes both prescribed repairs. (a) New definition node def-sfb-affine-coordinate-hopf-algebra, existing:true on the landed Sheaf.AlgebraicGeometry.HopfCoactionLinearization (affineCoordinateHopfAlgebra = Mathlib inferInstance, coordinateHopfAlgebra its unbundled-field specialisation; verbatim statement; nothing moved or copied). (b) §1(B) lean-only superset repair of def-wf-lie-algebra-derivation: primary GrpObj.lieEquivTangent (side-live Bracket.lean:788, verbatim), plus Lie, AddCommGroup, Module R (Ring.lean:39), Bracket/LieRing/LieAlgebra instances and the old tangentGroup, all in the closure of Lie.Bracket (Bracket→LocalPoints→Ring→…→Basic); the rest of the record equals live. Item node equals live apart from lean and stmt_deps; added stmt_deps are all definition nodes; lean.statement verbatim; the only Lean change vs 449c is dropping the unused LieIdentityTangentEquiv import plus a docstring line. No cycle (BFS); item still unsplit for stage 2 on side-live. Mathematics re-checked: hypotheses match the node, δ pinned to the actual tangent point with range exactly the counit derivations, D=(1⊗δ)Δ left-invariant with bracket sign XY−YX, dr formulas, dual-number clause, both iff clauses (R : Type (max u r)); edge cases M=0, N=0, trivial and non-commutative G. One sorry, no definitions, source and blueprint docstrings present, both report sections present. No compile because no file was changed. Advisory only: step-1 docstring still mentions lieIdentityTangentEquiv; SchemeTangentSpace public import unused; Q86 wrappers keep their lem-sfb-hopf-coaction-linearization blueprint tag; sibling statement node lem-sfb-affine-group-coordinate-hopf is a different kind, not a duplicate."
  }
 }

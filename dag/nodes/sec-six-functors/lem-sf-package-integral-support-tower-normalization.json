@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-package-integral-support-tower-normalization",
+ "kind": "statement",
+ "title": "Projection-normalized support comparison with the designated strict tower",
+ "statement": "For the operation datum [def-fix-six-functor-datum], a separated finite-type morphism f:X→Y of separated finite-type geometric-field schemes, an invertible coefficient prime, and a fixed compactification c, there is a CompactSupportReductionTowerConstruction with tower exactly the designated choice in [lem-weil-compact-support-reduction-tower-functor]. Its tower and total-limit functors have triangulated shift structures. The actual integral support functor, followed by the full constructible inclusion, is naturally isomorphic to the source inclusion followed by this tower and its total limit. This isomorphism preserves every chosen Roos projection to the compact-support finite term. No recollement boundary, image triangle, or rational/common-stage assertion is included.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3): the recollement-image argument, source triangle and exact compact-support realization"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-compact-support-reduction-tower-datum"
+ ],
+ "proof": [
+  {
+   "text": "Take exactly the tower, evaluation isomorphisms, normalized scalar structures and triangulated shift supplied by lem-weil-compact-support-reduction-tower-functor. Use the canonical coefficientConstantTowerLimit and its complex-level derived unit for the limit fields. Descend each ordinary inverse-limit projection through the right-derived universal property. Its K-injective normalization identifies it with coefficientConstantTowerProjection; the factorization equation then proves the required unit-projection equation on all complexes. The standard right-derived inverse-limit functor has its triangulated shift structure.",
+   "uses": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "def-coef-ringed-sequence-site",
+    "lem-weil-compact-support-representative-independence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constructibleIntegralSupport_eq from def-sf-constructible-exceptional-compositor-data to identify the supplied support functor with the published normalized integral functor. Apply lem-pod-compact-support-normalized-tower-limit to the designated tower and its unchanged evaluations. Rewrite the support equality to obtain the required natural isomorphism and every chosen Roos projection equation. Assemble these fields with the two triangulated shift structures. This uses the whole-tower normalized comparison, not reconstruction of derived tower maps from evaluations.",
+   "uses": [
+    "def-sf-constructible-exceptional-compositor-data",
+    "lem-pod-compact-support-normalized-tower-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-compact-support-representative-independence",
+  "def-sf-constructible-exceptional-compositor-data",
+  "lem-pod-compact-support-normalized-tower-limit"
+ ],
+ "proof_origin": {
+  "by": "K3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3): the recollement-image argument, source triangle and exact compact-support realization",
+  "note": "Reuse the existing equality with the published integral action and its whole-tower projection-normalized comparison; construct the designated datum with the canonical total derived limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral compact support functor as normalized total derived inverse limit of coefficient reduction towers",
+   "results": "8 hits, including Profinite.lim', profiniteToCondensed and localCohomology.ofDiagram; none gives the normalized integral support comparison or supplied-adjunction recollement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor transports natural open closed recollement boundary and distinguished triangle to localization",
+   "results": "8 hits; generic map_distinguished and triangulated localization. Existing sfPackageLocalizationImage implements this transport; no match for the two normalization inputs.",
+   "date": "2026-10-26",
+   "verdict": "generic exact transport used in the assembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "12 hits including Functor.map_distinguished and Functor.map_distinguished_iff; no supplied-adjunction or strict-tower normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no specialized match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfPackageIntegralRecollementSource|sfPackageIntegralSupportTowerNormalization",
+   "results": "msearch returned zero hits; rg of Sheaf and WeilConjectures found source recollement for normalized presentations, the supplied supportConstruction interface, and total-limit exactness, but no theorem giving these two input comparisons.",
+   "date": "2026-10-26",
+   "verdict": "new glue statements needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfPackageLocalizationProjectionRealization",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (3): the recollement-image argument, source triangle and exact compact-support realization",
+   "via": [
+    "lem-sf-package-localization-projection-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfPackageIntegralSupportTowerNormalization",
+  "file": "lean/Sheaf/Paper/SfPackageIntegralSupportTowerNormalization.lean",
+  "declaration": "WeilConjectures.sfPackageIntegralSupportTowerNormalization",
+  "statement": "theorem sfPackageIntegralSupportTowerNormalization\n    {X Y : SixFunctorSpace D}\n    [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom]\n    (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (hl : IsUnit (C.l : D.k)) (c : Compactification f.hom.left) :\n    (fun [_products : HasCountableProducts\n        (DerivedCategory (scalarReductionSource C.l E Y.obj.left))] ↦\n      ∃ T : CompactSupportReductionTowerConstruction C.l E f.hom.left c,\n      T.tower = Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (exists_compactSupportReductionTower C.l E D.k X.obj.left Y.obj.left\n          f.hom.left hl c))).2.2 ∧\n      ∃ (sT : T.tower.CommShift ℤ) (sL : T.limit.CommShift ℤ),\n      (fun [_shiftT : T.tower.CommShift ℤ] ↦ T.tower.IsTriangulated) (_shiftT := sT) ∧\n      (fun [_shiftL : T.limit.CommShift ℤ] ↦ T.limit.IsTriangulated) (_shiftL := sL) ∧\n      ∃ e : S.higher.integral.support f c ⋙\n          (sfIntegralConstructible C.l E Y.obj.left).ι ≅\n          (sfIntegralConstructible C.l E X.obj.left).ι ⋙ (T.tower ⋙ T.limit),\n        ∀ (K : sfIntegralConstructibleCategory C.l E X.obj.left) (m : ℕ),\n          HEq (e.hom.app K ≫ (T.projections m).app (T.tower.obj K.obj) ≫\n              (T.evaluations m).hom.app K.obj)\n            (Classical.choose (Classical.choose_spec (exists_isDerivedLimit_and_iso\n              (sfCompactSupportTerm C.l E c K.obj)\n              (sfCompactSupportTransition C.l E c K.obj)).1) ≫\n                Pi.π (sfCompactSupportTerm C.l E c K.obj) m))\n      (_products := integralOperationsDerivedCountableProducts C.l E Y.obj.left)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T023114-L-521184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T070151-L-3429906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -72,7 +72,18 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-weil-sheaf-complex"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-ordinary-compact-cohomology",
@@ -111,5 +122,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Section 1(B): the previous Frobenius-retaining specialization accepts the older AlgebraicGeometry.WeilSheaf and PadicAlgCl, while the current punctual-weight dependency accepts sfCommonStageWeilSheaf over an arbitrary specified coefficient closure. The previous common-stage coefficient output forgets Frobenius. This module retains the canonical compact-support higher image as a Weil sheaf on Spec(k₀), using zlWeilHigherShriek and its comparison with sfQbarCompactSupportValue. Its geometric coefficient fibre is the original H_c^n with the induced action. No operator or category equivalence is postulated or chosen. Public imports retain the entire previous ordinary/compact interface, all four coefficient cases, constants, twists and Weil-complex specializations. The new specialization is for sheaves and n≥0; it does not restrict the retained integer-degree interfaces. NU repair under §1(B): NX's recorded interface covers compact support only, over a compactification of X₀ over k₀, as a Weil sheaf; it supplies neither ordinary H⁰ nor a coefficient-module value with Ω in Type (u+1). The appended adicOrdinaryCohomology and adicCompactCohomology compute the actual finite-stage rational ordinary/compact cohomology after forgetting Weil structure and canonically extend scalars to Ω in independent universe v. NX's module, primary declaration, signature, file and three owned declarations are preserved; the original OrdinaryCompactWeilCohomology module is unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, where\n$q=p^a$, and a prime $\\ell\\neq p$. Write $\\Ql=\\mathbf Q_\\ell$, choose an\nalgebraic closure $\\Qlb$ of $\\Ql$, and choose a finite extension $E/\\Ql$\ncontained in $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer\n$\\pi_E$, and $n\\geq1$. Put $A_{E,n}=\\mathcal O_E/\\pi_E^n$ and\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, each regarded as a condensed\nring, and let $D^b_c(-,\\Lambda)$ be the condensed bounded constructible\ncategory ([det-def-sfb-bounded-constructible]). Let $Y$ be a separated\nfinite-type [def-weil-scheme-morphism-properties] $k$-scheme and $a_Y:Y\\to\ns=\\Spec k$ its structure morphism. Use the finite coefficient categories\n[def-weil-finite-coefficient-point], Weil complexes\n[def-weil-weil-sheaf-complex], derived direct image\n[def-weil-derived-direct-image], compact-support direct image\n[def-compact-support-direct-image-detailed], and Tate twists\n[def-coefficient-twists-detailed]. Evaluation at the geometric point of $s$\ngives equivalences\n\n$$\n\\begin{aligned}\n \\operatorname{Fib}_s:D^b_c(s,A_{E,n})&\\xrightarrow{\\sim}\n D^b_{\\mathrm{fin}}(A_{E,n}),\\\\\n \\operatorname{Fib}_s:D^b_c(s,\\mathcal O_E)&\\xrightarrow{\\sim}\n D^b_{\\mathrm{fg}}(\\mathcal O_E),\\\\\n \\operatorname{Fib}_s:D^b_c(s,E)&\\xrightarrow{\\sim}D^b_{\\mathrm{fd}}(E),\\\\\n \\operatorname{Fib}_s:D^b_c(s,\\Qlb)&\\xrightarrow{\\sim}D^b_{\\mathrm{fd}}(\\Qlb)\n\\end{aligned}\n$$\n\nof [def-weil-finite-coefficient-point]. For $K\\in D^b_c(Y,\\Lambda)$, define the\ncoefficient complexes\n\n$$\n \\RGamma(Y,K)=\\operatorname{Fib}_s(Ra_{Y*}K),\n \\qquad\n \\RGammac(Y,K)=\\operatorname{Fib}_s(Ra_{Y!}K),\n$$\n\nand\n\n$$\nH^i(Y,K)=\\mathrm H^i\\bigl(\\RGamma(Y,K)\\bigr),\n\\qquad\nH_c^i(Y,K)=\\mathrm H^i\\bigl(\\RGammac(Y,K)\\bigr).\n$$\n\nFor a coefficient ring $\\Lambda$ in the displayed list, let\n$\\Lambda_Y=p_Y^*\\Lambda$ be its coefficient sheaf on the small pro-étale site\n[def-weil-pbc-proetale-site] ([det-def-sfb-pulled-back-coefficients]); for\n$\\Lambda=A_{E,n}$ this is the constant sheaf $(A_{E,n})_Y$. When\n$\\Lambda\\in\\{E,\\Qlb\\}$ and $Y=Y_0\\times_{k_0}k$, $\\Lambda_Y$ is a Weil sheaf with the canonical Weil\nstructure $g_Y^*\\Lambda_Y\\cong\\Lambda_Y$ of [def-weil-weil-sheaf-complex]. Abbreviate\n\n$$\n H^i(Y,\\Lambda)=H^i(Y,\\Lambda_Y),\\qquad\n H_c^i(Y,\\Lambda)=H_c^i(Y,\\Lambda_Y).\n$$\n\nFor every integer $m$, the notation with a Tate twist means\n\n$$\n H^i(Y,\\Lambda(m))=H^i\\bigl(Y,\\Lambda_Y(m)\\bigr),\\qquad\n H_c^i(Y,\\Lambda(m))=H_c^i\\bigl(Y,\\Lambda_Y(m)\\bigr),\n$$\n\nwhere $\\Lambda_Y(m)=\\Lambda_Y\\otimes^L_\\Lambda\\Lambda(m)_Y$ uses the\ncoefficient-twist construction [def-coefficient-twists-detailed]. In\nparticular, $(\\Ql)_Y(m)$ denotes the twisted constant coefficient object and\n$\\Ql(m)$ is its coefficient-space notation in these abbreviations. If $K$ is\na Weil complex [def-weil-weil-sheaf-complex], each of these four symbols is\nobtained by applying the displayed construction to $\\operatorname{For}(K)$.\nWhenever one of these coefficient spaces is finite-dimensional over its\nfield, its dimension, trace, and determinant have their ordinary\nlinear-algebraic meanings.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

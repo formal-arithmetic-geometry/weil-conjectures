@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-smooth-pair-closed-fibre-local-preparation",
+ "kind": "statement",
+ "title": "Closed-fibre specialization and local algebra preparation for a smooth pair",
+ "statement": "Let $A_0$ be a Noetherian integrally closed domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], $T=\\operatorname{Spec}A_0$, and $g:V=\\operatorname{Spec}B_0\\to T$ smooth of finite presentation [def-weil-affine-spectrum, def-sbc-smooth-morphisms]. Let $Z\\subseteq V$ be closed. Its inverse image in each fibre contains no irreducible component [def-pc-fibre-product, def-weil-residue-field, def-weil-irreducible-components], and every point of $Z_\\eta$ has local ring of dimension at least two in $V_\\eta$, where $\\eta$ is the generic point of $T$ [def-sc-generic-point, def-weil-pbc-krull-dimension-ring]. For every $z\\in Z$ there is a point $y\\in Z_{g(z)}$ closed in the fibre $V_{g(z)}$ [def-weil-closed-points] to which the fibre point $z$ specializes (meaning $y$ lies in its closure). Write $s=g(z)=g(y)$, $A=\\mathcal O_{T,s}$, $B=\\mathcal O_{V,y}$ and $\\mathfrak m_A$ for the maximal ideal of $A$. Then $A$ and $B$ are Noetherian local rings, the actual stalk map $A\\to B$ is local and formally smooth for the maximal-ideal adic topology on $B$ [def-weil-pbc-formally-smooth-adic], $\\kappa(y)/\\kappa(s)$ is finite, and $\\dim B>\\dim A$. The ideal $\\mathfrak p=\\mathfrak m_AB$ is prime. The point $z$ defines a prime $\\mathfrak q_z\\subset B$ with $\\mathfrak p\\subsetneq\\mathfrak q_z$, and there is a canonical isomorphism $B_{\\mathfrak q_z}\\cong\\mathcal O_{V,z}$ of local rings [def-weil-pbc-localization-at-prime]. Moreover $\\dim B_{\\mathfrak q_z}\\ge2$.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 Proposition 21.14.3(ii), final proof paragraph: closed specialization y in the fibre, formal smoothness 17.5.3, dimension 17.5.8, residue extension I 6.4.2, and the prime corresponding to z. Dimension >=2 also uses generic-fibre codimension and flat local dimension. Read in the online English EGA translation; local EGA IV4 WANTED.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-closed-points",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\sigma\\subset A_0$ for $s=g(z)$ and $Q_z\\subset B_0$ for $z$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $A_0\\to B_0$ is a smooth ring map, hence has a finite polynomial presentation by [def-weil-pbc-smooth-ring-map]. Therefore $B_0$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. By [lem-weil-pbc-fibre-product-affine-spectra], $V_s=\\operatorname{Spec}C$, where $C=B_0\\otimes_{A_0}\\kappa(s)$. By [lem-weil-pbc-smooth-fibre-regular-local], $C$ is smooth over $\\kappa(s)$ and its prime localizations are regular local rings. In particular $C$ is finite type over that field. The fibre projection identifies its underlying space with $g^{-1}(s)$ by [def-pc-scheme-fibre].",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00T2 (definition-smooth), 00FN (lemma-Noetherian-permanence), 00T4 (lemma-base-change-smooth), 00TT (lemma-characterize-smooth-over-field); schemes.tex Tags 01I4, 01K1."
+   }
+  },
+  {
+   "text": "The closure $H=\\overline{\\{z\\}}$ in $\\operatorname{Spec}C$ is nonempty and lies in the closed inverse image $Z_s$. The closed points of $\\operatorname{Spec}C$ lying in $H$ are dense in $H$ by [lem-sc-lft-over-field-jacobson-space], so at least one exists; choose it as $y$. Thus $y\\in Z_s$ is closed in the whole fibre and is a specialization of $z$. Let $M\\subset C$ be its maximal ideal. Its residue field is $C/M$, a finitely generated $\\kappa(s)$-algebra because it is a quotient of $C$. Apply [lem-weil-pbc-zariski-lemma] to conclude $[\\kappa(y):\\kappa(s)]<\\infty$. Here $\\kappa(y)$ as a fibre point and as a point of $V$ agree: the stalk quotient of [lem-sbc-scheme-fibre-stalk-quotient] has kernel in the maximal ideal, so taking its residue field gives the same quotient by the maximal ideal.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson); algebra.tex Tag 00FV (theorem-nullstellensatz); schemes.tex Tag 0HA1 (lemma-local-ring-fibre)."
+   }
+  },
+  {
+   "text": "Let $Q_y\\subset B_0$ be the prime for $y$. By [lem-weil-pbc-affine-open-stalk-localization], $A=\\mathcal O_{T,s}\\cong(A_0)_\\sigma$ and $B=\\mathcal O_{V,y}\\cong(B_0)_{Q_y}$ through their actual germ maps. These are local rings by [def-weil-pbc-localization-at-prime], and are Noetherian by [lem-weil-pbc-localization-noetherian] and step 1. The actual stalk map is local, as stated in [def-weil-flat-morphism]. By [lem-sfb-smooth-stalk-formally-smooth] it has the square-zero lifting property for every $A$-algebra map $B\\to D/J$, without a continuity condition. Applying that property to the maps which kill a power of the maximal ideal gives exactly [def-weil-pbc-formally-smooth-adic]. Thus the stalk map is formally smooth for the required maximal-ideal adic topology.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-flat-morphism",
+    "lem-sfb-smooth-stalk-formally-smooth",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); smooth-stalk lifting via Tags 04EG, 031H and more-morphisms.tex 02H6; adic definition more-algebra.tex 07NI."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak p=\\mathfrak m_AB$. By [lem-sbc-scheme-fibre-stalk-quotient], $B/\\mathfrak p\\cong\\mathcal O_{V_s,y}$, and $\\mathcal O_{V_s,y}\\cong C_M$ by [lem-weil-pbc-affine-open-stalk-localization] applied to $V_s=\\operatorname{Spec}C$ (step 1); likewise $\\mathcal O_{V_s,w}\\cong C_{P_w}$ for every $w\\in V_s$ with prime $P_w\\subset C$. The ring $C_M$ is regular local by step 1 and is a nonzero integral domain by [lem-sc-regular-local-domain]. Consequently $\\mathfrak p$ is prime: a product in its kernel maps to zero in a domain, and one factor maps to zero. We will use this same fibre-stalk identification at other points of $V_s$.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre), and algebra.tex Tags 00TT (lemma-characterize-smooth-over-field), 00NP (lemma-regular-domain)."
+   }
+  },
+  {
+   "text": "For each $w\\in Z_s$, let $P_w\\subset C$ be its prime. It is not a minimal prime of $C$: otherwise [lem-weil-pbc-spec-irreducible-components-minimal-primes] makes $V(P_w)$ a fibre component, while $Z_s$, being closed and containing $w$, contains $\\overline{\\{w\\}}=V(P_w)$, contrary to the hypothesis. By [lem-weil-pbc-prime-contains-minimal-prime], there is a minimal prime $N_w\\subsetneq P_w$. The prime-localization correspondence in [lem-weil-pbc-localization-prime-residue-field-iso] preserves this strict inclusion in $C_{P_w}$: their contractions are the distinct original primes. Hence $\\dim C_{P_w}\\ge1$ directly from [def-weil-pbc-krull-dimension-ring]. This applies both to $w=y$ and to $w=z$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00ES (lemma-irreducible), 00E0 (lemma-Zariski-topology), 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "The ring map $A_0\\to B_0$ is flat by [lem-weil-pbc-smooth-ring-map-flat]. Apply [lem-weil-pbc-flat-height-formula] at $Q_y$ and $Q_z$; both contract to $\\sigma$. With the stalk identifications of steps 3 and 4 ([lem-weil-pbc-affine-open-stalk-localization] for $\\mathcal O_{V,z}\\cong(B_0)_{Q_z}$ and $\\mathcal O_{V_s,z}\\cong C_{P_z}$), it gives\n$$\\dim\\mathcal O_{V,w}=\\dim A+\\dim\\mathcal O_{V_s,w}\\qquad(w=y,z).$$\nThe base local dimension is finite by [lem-weil-pbc-noetherian-local-finite-krull-dimension]. Step 5 now gives $\\dim B\\ge\\dim A+1>\\dim A$. This uses the dimension of the fibre local ring, not the topological local dimension of the fibre at a nonclosed point.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00TA (lemma-smooth-syntomic), 00SL (definition-lci), 00ON (lemma-dimension-base-fibre-equals-total), 00KQ (proposition-dimension)."
+   }
+  },
+  {
+   "text": "Since $y$ specializes from $z$ in $V_s$, it also does so in $V$, and $Q_z\\subseteq Q_y$. Explicitly $\\overline{\\{Q_z\\}}=V(Q_z)$: a closed $V(I)$ contains $Q_z$ precisely when $I\\subseteq Q_z$, and their intersection is $V(Q_z)$. Define $\\mathfrak q_z=Q_zB$. The localization correspondence in [lem-weil-pbc-localization-prime-residue-field-iso] shows this is prime, with contraction $Q_z$. Since $\\sigma B_0\\subseteq Q_z$, we have $\\mathfrak p\\subseteq\\mathfrak q_z$. Equality is impossible: modulo $\\mathfrak p$, the prime $\\mathfrak q_z/\\mathfrak p$ is the localization of $P_z$ in $C_M$, and the strict chain $N_z\\subsetneq P_z$ from step 5 survives in $C_M$ (both primes lie under $M$). It cannot end in the zero prime, which has no strictly smaller ideal. Therefore $\\mathfrak p\\subsetneq\\mathfrak q_z$. By [lem-weil-pbc-localize-localization-at-prime](1),\n$$B_{\\mathfrak q_z}\\cong(B_0)_{Q_z}\\cong\\mathcal O_{V,z},$$\nthe last isomorphism being [lem-weil-pbc-affine-open-stalk-localization]. The maps send each fraction to the same fraction, so this is the canonical local-ring isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localize-localization-at-prime",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization); schemes.tex Tag 01HV (lemma-spec-sheaves); the comparison is the iterated localization at the prime of z."
+   }
+  },
+  {
+   "text": "It remains to show $\\dim\\mathcal O_{V,z}\\ge2$. If $s\\ne\\eta$, the prime $\\sigma$ is nonzero since $A_0$ is a domain. The strict chain $(0)\\subsetneq\\sigma$ survives in $(A_0)_\\sigma$ by [lem-weil-pbc-localization-prime-residue-field-iso], so $\\dim A\\ge1$. Combine step 6 at $z$ with step 5 to get $\\dim\\mathcal O_{V,z}\\ge1+1=2$. If $s=\\eta$, then $\\sigma=(0)$ and $A=(A_0)_{(0)}=\\operatorname{Frac}(A_0)=\\kappa(\\eta)$ is a field. The fibre stalk quotient [lem-sbc-scheme-fibre-stalk-quotient] therefore identifies $\\mathcal O_{V,z}$ with $\\mathcal O_{V_\\eta,z}$. Its dimension is at least two by the generic-fibre hypothesis of the item. Finally use step 7 to obtain $\\dim B_{\\mathfrak q_z}\\ge2$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total); schemes.tex Tag 0HA1 (lemma-local-ring-fibre). EGA IV4 21.14.3(ii), final paragraph, with the generic/nongeneric case distinction written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "def-pc-scheme-fibre",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-flat-morphism",
+  "lem-sfb-smooth-stalk-formally-smooth",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-localize-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent assembly of the final local preparation in EGA IV4 Proposition 21.14.3(ii), read in its English translation, using the cited Stacks results and existing DAG tool lemmas; local EGA IV4 PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Specialize a point in a closed subset of a smooth fibre to a closed point and compare stalk primes with the generic point of the closed fibre",
+   "results": "Hits: AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes, AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply, AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply, AlgebraicGeometry.Scheme.stalkClosedPointTo Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed specialization in a smooth fibre yields a formally smooth local homomorphism with finite residue field extension and prime fibre ideal",
+   "results": "Hits: Algebra.IsSmoothAt, Algebra.smoothLocus, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.Smooth, Algebra.IsEtaleAt, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.instFiniteResidueFieldOfFormallyUnramified Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed point specialization in an affine smooth fibre has finite residue field extension and a regular local fibre ring",
+   "results": "Hits: Algebra.instFiniteResidueFieldOfQuasiFiniteAt, IsLocalRing.specializes_closedPoint, Algebra.QuasiFinite.instFiniteResidueField, IsLocalRing.closedPoint, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.Scheme.residueField, Algebra.instFiniteResidueFieldOfFormallyUnramified Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"PrimeSpectrum\"",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|punctured|fibre.*component|fiber.*component",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Ff]iber.*[Dd]im|[Ff]iber.*[Ii]deal.*[Pp]rime|formallySmooth.*stalk",
+   "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean. Read the returned statements: smooth charts, smooth loci, residue-field finiteness or stalk formal smoothness alone do not state the closed-pair specialization, fibre prime, and dimension conclusions together.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth local rings closed fibre dimension formula and finite residue field at a closed point",
+   "results": "Hits: IsLocalRing.finite_residueField_of_compactSpace, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.FormallySmooth.iff_injective_lTensor_residueField, RingHom.IsStandardSmoothOfRelativeDimension, smoothSheafCommRing.instLocalRing_stalk, IsLocalRing.PrimeSpectrum.comap_residue, Algebra.smoothLocus, Algebra.IsStandardSmooth.relativeDimension. Read the returned statements: smooth charts, smooth loci, residue-field finiteness or stalk formal smoothness alone do not state the closed-pair specialization, fibre prime, and dimension conclusions together.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"AtPrime\"",
+   "results": "Hits: . Read the returned statements: smooth charts, smooth loci, residue-field finiteness or stalk formal smoothness alone do not state the closed-pair specialization, fibre prime, and dimension conclusions together.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism over a Noetherian normal domain closed specialization in a fibre formally smooth stalk dimension prime closed fibre ideal",
+   "results": "Hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsSmoothAt, Algebra.smoothLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. Read the returned statements: smooth charts, smooth loci, residue-field finiteness or stalk formal smoothness alone do not state the closed-pair specialization, fibre prime, and dimension conclusions together.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth_stalkMap|isRegularLocalRing.*[Ff]iber|height.*[Ff]iber|finrank.*[Rr]esidueField",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean. Read the returned statements: smooth charts, smooth loci, residue-field finiteness or stalk formal smoothness alone do not state the closed-pair specialization, fibre prime, and dimension conclusions together.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme over a normal noetherian base choose a closed specialization in the same fibre and use flat local dimension additivity to get codimension two",
+   "results": "Hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.IsSmooth. Read the returned statements: smooth charts, smooth loci, residue-field finiteness or stalk formal smoothness alone do not state the closed-pair specialization, fibre prime, and dimension conclusions together.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Proposition 21.14.3(ii), final proof paragraph: closed specialization y in the fibre, formal smoothness 17.5.3, dimension 17.5.8, residue extension I 6.4.2, and the prime corresponding to z. Dimension >=2 also uses generic-fibre codimension and flat local dimension. Split realizes that final paragraph by Jacobson closed specialization, actual smooth stalk lifting, fibre regularity, flat local dimension, and iterated localization; the generic-base case uses the prescribed generic codimension.",
+   "via": [
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-pair-closed-fibre-local-preparation",
+  "worker": "stage1",
+  "summary": "NB: eight proof steps using existing DAG nodes only; no statement change. Closed specialization and finite residue extension, smooth actual stalk map, prime fibre ideal, strict containment for z, canonical iterated localization, and the two dimension bounds are proved separately. Mathlib searches found ingredients but no whole-item match.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability direct-image/compactification branch, inherited affine-boundary and Ramanujam–Samuel route: EGA IV4 21.14.3(ii), final paragraph. The imported created-item ancestry has null from.node; preserved rather than inventing an ancestor. Whole-blueprint searches for smooth local, closed fibre, dimension formula and regular local found no item-equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Convert the specified affine scheme smoothness to its actual smooth coordinate-ring map. No statement in this unit gives this general scheme/ring comparison."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-fibre-regular-local",
+    "why": "Regularity of all local rings of an arbitrary smooth affine fibre. No statement in this unit gives this general scheme/ring comparison."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Identify the actual fibre stalk with the quotient of the actual total stalk. No statement in this unit gives this general scheme/ring comparison."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Prime extension/contraction for arbitrary localizations, used to preserve strict prime chains and identify the prime of z. This general commutative-algebra comparison is absent from the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NB-0230edf57",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-0230edf57 (reviewer sub-agent of L); spot-checked: Read the item, all 24 proof deps and 12 stmt deps in full. Stacks sources checked: 0HA1 at schemes.tex l.3545 and 0478(2) at varieties.tex l.2670. EGA IV4 21.14.3(ii) is not in literature/, so it is flagged WANTED and proof_origin is agent. Statement and stmt_deps are unchanged from base, there are no new nodes, and there is no re-split note. The statement is true; checked on k[t]⊂k[t,u] with Z=V(t,u), on k⊂k[u,v], and on the vacuous case k⊂k[u] with Z=V(u). The eight steps are correct. Step 2 takes a closed y in the closure of z in the fibre by Jacobson density, then gets a finite residue extension by Zariski's lemma. Step 3 restricts the lifting of lem-sfb-smooth-stalk-formally-smooth to maps killing m^k, which is the adic definition. Step 4 gets B/m_A B regular local, hence a domain, so p is prime. Step 5 uses the no-component hypothesis to show the fibre prime is not minimal, so the fibre local dimension is at least 1. Step 6 applies the flat height formula 00ON. Step 7 proves p strictly inside q_z through the surviving chain N_z⊊P_z and gets B_{q_z}≅O_{V,z} by iterated localization. Step 8 splits s≠η (dim A≥1) from s=η (the generic codimension-2 hypothesis). These conclusions match what the parent feeds into lem-sfb-formally-smooth-ramanujam-samuel-localization. No duplicate found (rg -L for 21.14.3 and for the no-component phrase). The only off-route citation is lem-sbc-scheme-fibre-stalk-quotient (sk-thm-vanishing), declared and accepted as a generic tool use; the p1, picard and reduction citations are in the unit's transitive route. No SGA. FIX (C1): steps 4 and 6 used O_{V_s,y}≅C_M and O_{V,z}≅(B_0)_{Q_z} without a citation; lem-weil-pbc-affine-open-stalk-localization is added to both steps. proof_deps is unchanged. Corrected item is at fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPairClosedFibreLocalPreparation",
+  "declaration": "AlgebraicGeometry.smooth_pair_closed_fibre_local_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPairClosedFibreLocalPreparation.lean",
+  "statement": "theorem smooth_pair_closed_fibre_local_preparation (A₀ B₀ : Type u) [CommRing A₀] [CommRing B₀] [IsNoetherianRing A₀] [IsDomain A₀] [IsIntegrallyClosed A₀] (g : Spec (CommRingCat.of B₀) ⟶ Spec (CommRingCat.of A₀)) [Smooth g] (Z : Set (Spec (CommRingCat.of B₀))) (hZ : IsClosed Z) (hcomponents : ∀ s : Spec (CommRingCat.of A₀), ∀ C ∈ irreducibleComponents (g.fiber s), ¬ C ⊆ (g.fiberι s) ⁻¹' Z) (η : Spec (CommRingCat.of A₀)) (hη : IsGenericPoint η Set.univ) (hgeneric : ∀ w : g.fiber η, g.fiberι η w ∈ Z → 2 ≤ ringKrullDim ((g.fiber η).presheaf.stalk w)) (z : Spec (CommRingCat.of B₀)) (hz : z ∈ Z) : ∃ y ∈ Z, ∃ hy : g y = g z, ∃ hzy : z ⤳ y, (g.fiberHomeo (g z)).symm ⟨y, hy⟩ ∈ closedPoints (g.fiber (g z)) ∧ IsNoetherianRing ((Spec (CommRingCat.of A₀)).presheaf.stalk (g y)) ∧ IsLocalRing ((Spec (CommRingCat.of A₀)).presheaf.stalk (g y)) ∧ IsNoetherianRing ((Spec (CommRingCat.of B₀)).presheaf.stalk y) ∧ IsLocalRing ((Spec (CommRingCat.of B₀)).presheaf.stalk y) ∧ IsLocalHom (g.stalkMap y).hom ∧ @Algebra.FormallySmoothAdic _ _ _ _ (g.stalkMap y).hom.toAlgebra (IsLocalRing.maximalIdeal ((Spec (CommRingCat.of B₀)).presheaf.stalk y)) ∧ (g.residueFieldMap y).hom.Finite ∧ ringKrullDim ((Spec (CommRingCat.of A₀)).presheaf.stalk (g y)) < ringKrullDim ((Spec (CommRingCat.of B₀)).presheaf.stalk y) ∧ ((IsLocalRing.maximalIdeal ((Spec (CommRingCat.of A₀)).presheaf.stalk (g y))).map (g.stalkMap y).hom).IsPrime ∧ ∃ q : PrimeSpectrum ((Spec (CommRingCat.of B₀)).presheaf.stalk y), q.asIdeal = (IsLocalRing.maximalIdeal ((Spec (CommRingCat.of B₀)).presheaf.stalk z)).comap ((Spec (CommRingCat.of B₀)).presheaf.stalkSpecializes hzy).hom ∧ (IsLocalRing.maximalIdeal ((Spec (CommRingCat.of A₀)).presheaf.stalk (g y))).map (g.stalkMap y).hom < q.asIdeal ∧ ∃ e : Localization.AtPrime q.asIdeal ≃+* (Spec (CommRingCat.of B₀)).presheaf.stalk z, (∀ b : (Spec (CommRingCat.of B₀)).presheaf.stalk y, e (algebraMap _ (Localization.AtPrime q.asIdeal) b) = ((Spec (CommRingCat.of B₀)).presheaf.stalkSpecializes hzy).hom b) ∧ 2 ≤ ringKrullDim (Localization.AtPrime q.asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47da1f116",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Read item, 12 stmt_dep records (identical to side-live; item changes only lean), module, report, FormallySmoothAdic def, Mathlib Fiber/stalkSpecializes. All hypotheses match without strengthening (Smooth between affines gives finite presentation; η binder harmless since A₀ is a domain). All conclusions present: closed y in the fibre specialized from z, Noetherian local stalks, local + adic-formally-smooth actual stalk map, finite residue-field map, strict dim inequality, m_A·B prime, q pinned as comap along stalkSpecializes, strict containment, iso e fixed by e∘algebraMap = stalkSpecializes, dim B_q ≥ 2. Edge cases fine. Statement verbatim, imports exist, name new, sorry only, docstrings and report sections present. No findings; no compile needed."
+ }
+}

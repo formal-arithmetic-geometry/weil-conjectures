@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-groupoid-strict-local-reduced-orbit",
+ "kind": "statement",
+ "title": "Reduced closed orbits for a stabilizer-preserving etale groupoid map",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $F:(U\\prime,R\\prime,s\\prime,t\\prime,e\\prime,i\\prime,c\\prime)\\to(U,R,s,t,e,i,c)$ be a morphism of groupoid schemes over $S$ [def-a1-scheme-groupoid-laws], with object and arrow maps $a,b$. Suppose $U=\\operatorname{Spec}A$, $R=\\operatorname{Spec}B$, $U\\prime=\\operatorname{Spec}A\\prime$, $R\\prime=\\operatorname{Spec}B\\prime$ are affine [def-weil-affine-spectrum], all four source and target maps are finite locally free [def-pc-finite-locally-free], and $a$ is etale [def-weil-etale-morphism]. Write $G=R\\times_{(s,t),U\\times_SU,\\Delta_U}U$ and $G\\prime=R\\prime\\times_{(s\\prime,t\\prime),U\\prime\\times_SU\\prime,\\Delta_{U\\prime}}U\\prime$ [def-pc-fibre-product]. Assume the source square, target square, and stabilizer square $(G\\prime\\to G,U\\prime\\to U)$ are cartesian. Put $C=\\{x\\in A:s^*x=t^*x\\}$ and $C\\prime=\\{x\\in A\\prime:(s\\prime)^*x=(t\\prime)^*x\\}$. Assume $C$ is a strictly henselian local ring [def-weil-pbc-henselian-terminology], with maximal ideal $\\mathfrak m$, and let $p\\prime\\in\\operatorname{Spec}C\\prime$ lie above $\\mathfrak m$. Let $Z\\subset U$ and $Z\\prime\\subset U\\prime$ be the sets of points over $\\mathfrak m$ and $p\\prime$, respectively. Then $Z,Z\\prime$ are nonempty finite sets of closed points, $a:Z\\prime\\to Z$ is a bijection, and $\\kappa(a(u\\prime))\\to\\kappa(u\\prime)$ is an isomorphism for every $u\\prime\\in Z\\prime$. Here residue fields use [def-weil-residue-field]. If $J=\\sqrt{\\mathfrak m A}$ and $J\\prime=\\bigcap_{u\\prime\\in Z\\prime}u\\prime\\subset A\\prime$ (points being regarded as prime ideals), the induced homomorphism $A/J\\to A\\prime/J\\prime$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT9 (lemma-etale), proof of the claim, first part: from \"Observe that U_p and U\\prime_{p\\prime} have finitely many points\" through the definition of J\\prime; reduced coordinate rings by finite Chinese remainder. Uses the orbit description Tag 03BL (lemma-points) and integrality Tag 03BJ (lemma-integral-over-invariants)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The morphism of groupoids carries invariant functions to invariant functions: for $c\\in C$, $(s\\prime)^*a^*c=b^*s^*c=b^*t^*c=(t\\prime)^*a^*c$. Thus $C\\to C\\prime$ and the maps of invariant spectra commute. Apply [lem-a1-affine-groupoid-integral-invariants] to both affine groupoids: $C\\subset A$ and $C\\prime\\subset A\\prime$ are integral. Apply [lem-a1-affine-groupoid-orbit-fibres] to both: $Z,Z\\prime$ are nonempty single ordinary-point orbits, and $a(Z\\prime)\\subset Z$. For any point $w$ of either orbit, that orbit equals the target image of the source fibre over $w$. These source fibres have finitely many points by [lem-weil-pbc-finite-closed-map-finite-fibres], since finite locally free maps are finite by [def-pc-finite-locally-free]. Consequently both $Z$ and $Z\\prime$ are finite.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (groupoids-lemma-etale), first part of the strictly henselian claim"
+   }
+  },
+  {
+   "text": "Put $k=C/\\mathfrak m=\\kappa(\\mathfrak m)$. It is separably closed by [def-weil-pbc-henselian-terminology]. For each $u\\in Z$, [lem-a1-integral-residue-extension-algebraic] applied to $C\\subset A$ makes $\\kappa(u)/k$ algebraic. By [lem-sfb-algebraic-sepclosed-purely-insep], $\\kappa(u)$ is separably closed and $\\kappa(u)/k$ is purely inseparable. For $u\\prime\\in Z\\prime$ above $u$, apply [lem-exc-etale-lift-sepclosed-base] to $a$, $L=\\kappa(u)$, $\\Omega=\\kappa(u\\prime)$, the residue embedding $\\beta:L\\to\\Omega$, and the canonical residue points $\\tau:\\operatorname{Spec}L\\to U$, $g:\\operatorname{Spec}\\Omega\\to U\\prime$. It gives $g\\prime:\\operatorname{Spec}L\\to U\\prime$ with $g\\prime\\operatorname{Spec}\\beta=g$ and $ag\\prime=\\tau$. Its image is $u\\prime$. Taking the residue maps gives $\\lambda:\\kappa(u\\prime)\\to L$ with $\\lambda\\beta=1_L$ and $\\beta\\lambda=1_\\Omega$. Hence the original residue map $\\beta$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-a1-integral-residue-extension-algebraic",
+    "lem-sfb-algebraic-sepclosed-purely-insep",
+    "lem-exc-etale-lift-sepclosed-base",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (groupoids-lemma-etale), first part of the strictly henselian claim"
+   }
+  },
+  {
+   "text": "Choose $u\\prime\\in Z\\prime$ and put $u=a(u\\prime)$. The cartesian source square gives $R\\prime\\times_{U\\prime}\\operatorname{Spec}\\kappa(u\\prime)\\cong R\\times_U\\operatorname{Spec}\\kappa(u\\prime)$. By step 2 this is the original source fibre $R\\times_U\\operatorname{Spec}\\kappa(u)$. Given $v\\in Z$, [lem-a1-affine-groupoid-orbit-fibres] supplies a point $r\\in R$ with $s(r)=u,t(r)=v$. Use the canonical $\\kappa(r)$-point of $R$ and the $\\kappa(r)$-point of $U\\prime$ obtained from $\\kappa(u\\prime)\\cong\\kappa(u)\\to\\kappa(r)$ to lift to a $\\kappa(r)$-point of $R\\prime$. Its source is $u\\prime$; its target $v\\prime$ lies above $v$. Source and target agree on every invariant in $C\\prime$, so $v\\prime$ has the same image $p\\prime$ as $u\\prime$ in $\\operatorname{Spec}C\\prime$. Thus $v\\prime\\in Z\\prime$ and $a:Z\\prime\\to Z$ is surjective.",
+   "uses": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (groupoids-lemma-etale), first part of the strictly henselian claim"
+   }
+  },
+  {
+   "text": "Let $u\\prime_1,u\\prime_2\\in Z\\prime$ have the same image $u$. By [lem-a1-affine-groupoid-orbit-fibres], choose $r\\prime\\in R\\prime$ with endpoints $u\\prime_1,u\\prime_2$. Set $H=\\kappa(r\\prime)$. The two endpoint maps $\\kappa(u)\\to H$ agree on $k$, because the invariant functions $C\\to C\\prime\\to B\\prime$ agree through source and target. They coincide: in characteristic $p>0$, each $x\\in\\kappa(u)$ has $x^{p^n}\\in k$ by step 2, so their images have the same $p^n$-th power and hence are equal in the field $H$; in characteristic zero $\\kappa(u)=k$. Therefore the canonical $H$-point of $R\\prime$ has image in $R$ whose source and target are the same $H$-point of $U$, not merely the same underlying point. The definition of $G$ as the diagonal fibre product gives an $H$-point of $G$. Pair it with the source $H$-point in $U\\prime$. The cartesian stabilizer square gives an $H$-point of $G\\prime$. Its image in $R\\prime$ equals the original $H$-point: both have the same image in $R$ and the same source in $U\\prime$, and the source square is cartesian. In $G\\prime$ the two endpoints coincide, so $u\\prime_1=u\\prime_2$. This proves injectivity.",
+   "uses": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (groupoids-lemma-etale), first part of the strictly henselian claim"
+   }
+  },
+  {
+   "text": "Every point $q$ of $Z$ is closed in $\\operatorname{Spec}A$, and every point $q\\prime$ of $Z\\prime$ is closed in $\\operatorname{Spec}A\\prime$, by the following elementary argument (the proof of Stacks Tag 00GA, algebra-lemma-finite-residue-extension-closed). Both $A/q$ and $A\\prime/q\\prime$ contain $k=C/\\mathfrak m$, because these primes contract to $\\mathfrak m$ in $C$. They embed into their residue fields, which are algebraic over $k$ by step 2. If $0\\ne x$ lies in either domain, an algebraic equation $c_0+c_1x+\\cdots+c_nx^n=0$ can be chosen with $c_0\\ne0$ by cancelling powers of $x$. It gives $x^{-1}=-c_0^{-1}(c_1+\\cdots+c_nx^{n-1})$ in that domain. Thus both quotients are fields and the primes are maximal. The finite sets $Z,Z\\prime$ are consequently closed subsets of their ambient affine schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GA (algebra-lemma-finite-residue-extension-closed), proof, with the inverse polynomial written out"
+   }
+  },
+  {
+   "text": "The prime ideals containing $\\mathfrak mA$ are exactly $Z$, since their contractions contain the maximal ideal $\\mathfrak m$ and are proper. Thus [lem-weil-pbc-zero-locus-eq-iff-radical-eq] gives $J=\\bigcap_{q\\in Z}q$. Distinct maximal ideals are coprime: if $q+q_1$ were proper, maximality of $q$ would give $q_1\\subset q$ and then $q=q_1$. Apply [lem-pc-crt-ideal-quotient-product] to the finite sets of maximal ideals $Z$ and $Z\\prime$. Since $A/q=\\kappa(q)$ and $A\\prime/q\\prime=\\kappa(q\\prime)$ for maximal ideals, it gives $A/J\\cong\\prod_{q\\in Z}\\kappa(q)$ and $A\\prime/J\\prime\\cong\\prod_{q\\prime\\in Z\\prime}\\kappa(q\\prime)$. The map $a^*$ sends $J$ into $J\\prime$: each $q\\prime$ pulls back to its image $q\\in Z$. On these products its $q\\prime$-coordinate is precisely $\\kappa(a(q\\prime))\\to\\kappa(q\\prime)$, since reducing $a^*f$ at $q\\prime$ is the residue of $f$ at $a(q\\prime)$ followed by the residue map. Steps 2-4 make this a product of isomorphisms indexed by a bijection. Its inverse takes each coordinate back through the inverse residue map and the inverse index bijection. This proves that the induced $A/J\\to A\\prime/J\\prime$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-pc-crt-ideal-quotient-product",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 0DT9, transition to the second part of the claim; Tags 00E0 (lemma-Zariski-topology (7)) and 00DT (lemma-chinese-remainder)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-henselian-terminology",
+  "lem-a1-integral-residue-extension-algebraic",
+  "lem-sfb-algebraic-sepclosed-purely-insep",
+  "lem-exc-etale-lift-sepclosed-base",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-pc-crt-ideal-quotient-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT9 (groupoids-lemma-etale), first part of the strictly henselian claim; final reduced-ring identification expanded by finite Chinese remainder, Algebra Tag 00DT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian stabilizer preserving etale morphism of finite flat affine groupoids induces an isomorphism on reduced orbit fibres over a strictly henselian invariant ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"RingHom.Etale.respectsIso\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism and $ e : S \\\\cong T $ is a ring isomorphism, then the composition $ e \\\\circ f : R \\\\to T $ is also étale. Similarly, if $ g : S \\\\to T $ is étale and $ e\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(stabili|orbit)|stabili.*groupoid",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"23\", \"text\": \"* the notion of normality of subgroupoids and its stability under intersection and preimage;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"303\", \"text\": \"/-- A subgroupoid is normal if it is wide and satisfies the expected stability under conjugacy. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced closed orbit fibres for etale equivariant maps of affine groupoids preserving stabilizers over a strictly henselian local quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DomMulAct.comp_stabilizerEquiv_invFun\", \"module\": \"Mathlib.GroupTheory.Perm.DomMulAct\", \"type\": \"(g : ∀ i, Perm { a // f a = i }) (a : α) : f (stabilizerEquiv_invFun g a) = f a\", \"doc\": \"For any permutation $ g $ acting on the fibers of a function $ f : \\\\alpha \\\\to \\\\beta $ and any element $ a \\\\in \\\\alpha $, applying the inverse of the stabilizer equivalence to $ g $ and $ a $ produces a\"}\n  {\"name\": \"AddAction.selfEquivOrbitsQuotientProd'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} →\\n  {β : Type v} →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] →\\n        {φ : Quotient (AddAction.orbitRel α β) → β} →\\n          Function.LeftInverse Quotient.mk'' φ →\\n            (∀ (b : β), AddAction.stabilizer α b = ⊥) → β ≃ Quotient (AddAction.orbitRel α β) × α\", \"doc\": \"If an additive group $G$ acts freely on a type $\\\\beta$ (i.e., all stabilizers are trivial), then $\\\\beta$ is in bijection with the product of the orbit space $\\\\beta/\\\\sim$ (quotient by the orbit equival\"}\n  {\"name\": \"Topology.IsQuotientMap.isCoveringMapOn_of_vadd_disjoint\", \"module\": \"Mathlib.Topology.Covering.Quotient\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {f : E → X} {G : Type u_3}\\n  [inst_2 : AddGroup G] [inst_3 : AddAction G E],\\n  Topology.IsQuotientMap f →\\n    ∀ [ContinuousConstVAdd G E],\\n      (∀ {e₁ e₂ : E}, f e₁ = f e₂ ↔ e₁ ∈ AddAction.orbit G e₂) →\\n      \", \"doc\": \"Let $G$ be an additive group acting continuously on a topological space $E$, and let $f: E \\\\to X$ be the quotient map to the orbit space. Suppose that for every point $e \\\\in E$, there exists a neighbo\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"(Q : Ideal B) {N N' : OpenNormalSubgroup G} (e : N ≤ N') (x : G ⧸ N.1.1)\\n  (hx : x ∈ MulAction.stabilizer (G ⧸ N.1.1) (Q.under (FixedPoints.subalgebra A B N.1.1))) :\\n  QuotientGroup.map _ _ (.id _) e x ∈ MulAction.stabilizer (G ⧸ N'.1.1) (Q.under (FixedPoints.subalgebra A B N'.1.1))\", \"doc\": \"If an element $ x $ in the quotient group $ G/N $ stabilizes the ideal $ Q $ under the action of $ G/N $ on the fixed points subalgebra $ B^N $, then its image under the quotient map to $ G/N' $ stabi\"}\n  {\"name\": \"MulAction.orbitProdStabilizerEquivGroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(b : β) : orbit α b × stabilizer α b ≃ α\", \"doc\": \"For a group $G$ acting on a set $\\\\beta$ and an element $b \\\\in \\\\beta$, there is a canonical bijection between the Cartesian product of the orbit of $b$ and the stabilizer subgroup of $b$, and the group\"}\n  {\"name\": \"MulAction.selfEquivOrbitsQuotientProd'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{φ : Quotient (MulAction.orbitRel α β) → β} (hφ : Function.LeftInverse Quotient.mk'' φ)\\n  (h : ∀ b : β, MulAction.stabilizer α b = ⊥) : β ≃ Quotient (MulAction.orbitRel α β) × α\", \"doc\": \"Given a group $\\\\alpha$ acting on a set $\\\\beta$ with all stabilizers trivial (i.e., the action is free), and a section $\\\\phi$ of the quotient map $\\\\beta \\\\to \\\\beta/\\\\sim$ (where $\\\\sim$ is the orbit equiv\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib.CategoryTheory.Galois.EssSurj\", \"type\": \"(X : C) [IsConnected X] (x : F.obj X) : (functorToAction F).obj X ≅ Aut F ⧸ₐ MulAction.stabilizer (Aut F) x\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale cartesian map of affine finite locally free scheme groupoids preserving inertia is bijective on the points of a closed quotient fibre with identical residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Ideal.fiberIsoOfBijectiveResidueField\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"{R : Type u_1} →\\n  {R' : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing R'] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R R'] →\\n              [inst_4 : Algebra R S] →\\n                {p : Ideal R} →\\n                  {q : Ideal R'} →\\n   \", \"doc\": \"Given a bijective algebra homomorphism between the residue fields of prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{q} \\\\subseteq R'$, this constructs an order isomorphism between the sets of p\"}\n  {\"name\": \"Algebra.FormallyEtale.comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally étale algebra $ A $ over a commutative semiring $ R $, and an ideal $ I $ of a ring $ B $ with $ I^2 = 0 $, the function obtained by composing the canonical quotient homomorphism $ B \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(stabili|orbit)|stabili.*groupoid",
+   "results": "Search returned 2 hits: Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern residue-field definitions, ordinary etale algebras or categorical groupoids, not the finite-flat affine scheme groupoid assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed orbit points and residue fields under cartesian stabilizer preserving etale morphisms of finite flat affine groupoids",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.LocallyRingedSpace.residueField, AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.LocallyRingedSpace.residueFieldMap, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.LocallyRingedSpace.Γevaluation, AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr, AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern residue-field definitions, ordinary etale algebras or categorical groupoids, not the finite-flat affine scheme groupoid assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsEtale\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern residue-field definitions, ordinary etale algebras or categorical groupoids, not the finite-flat affine scheme groupoid assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale cartesian stabilizer preserving morphism of finite locally free affine scheme groupoids induces an isomorphism of reduced closed orbit fibres over strictly henselian invariants",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Scheme.Etale, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, StandardEtalePair.homEquiv_symm_apply, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale, StandardEtalePresentation.lift_bijective, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, StandardEtalePair.homEquiv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern residue-field definitions, ordinary etale algebras or categorical groupoids, not the finite-flat affine scheme groupoid assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-groupoid-etale-invariant-comparison",
+  "date": "2026-10-23",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Invariant-ring quotient of a stack with a finite flat affine cover. Supporting input: Etale invariant spectra for cartesian stabilizer-preserving affine groupoids. Supporting input in Tag 0DT9: Tag 0DT9 (lemma-etale), proof of the claim, first part: from \"Observe that U_p and U\\prime_{p\\prime} have finitely many points\" through the definition of J\\prime; reduced coordinate rings by finite Chinese remainder. Uses the orbit description Tag 03BL (lemma-points) and integrality Tag 03BJ (lemma-integral-over-invariants).",
+   "via": [
+    "lem-sfb-affine-groupoid-etale-invariant-comparison",
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-strict-local-reduced-orbit",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0DT9, 03BJ, 03BL and 00GA. Reused orbit, integrality, residue-extension, finite-fibre, radical and CRT nodes. Exposed the two field maps into the arrow residue field before using the stabilizer square; closedness is proved without any finite-type assumption. One new general algebraic-extension Mathlib leaf; statement unchanged.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images, clause (3); retained the inherited alteration/coarse-moduli supporting route recorded in blueprint.from.place, and realized the 0DT9 first-claim argument in that route. blueprint_refs.py ancestor returns None for this created-node chain.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-affine-groupoid-integral-invariants",
+    "why": "Generic affine finite locally free groupoid integrality, used for both invariant inclusions; no statement in this unit replaces Tag 03BJ."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-orbit-fibres",
+    "why": "Generic affine groupoid quotient orbit description, used to produce source-fibre images and joining arrows; no statement in this unit replaces Tag 03BL."
+   },
+   {
+    "node": "lem-exc-etale-lift-sepclosed-base",
+    "why": "Generic etale descent of a field-valued lift over a separably closed field, used solely to identify residue maps; no statement in this unit provides this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-exc-etale-lift-sepclosed-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-b159814d7",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b159814d7 (reviewer sub-agent of L); spot-checked: I read Stacks 0DT9 (groupoids-lemma-etale), from 'Proof of the claim' to the definition of J', and 00GA in full. The item statement is identical to the live unsplit node, its hypotheses match 0DT9 (1)-(4), and there is no repair note or supersession. Step 1: integral-invariants (03BJ) and orbit-fibres (03BL) give nonempty orbits t(s^{-1}(w)); these are finite because finite locally free implies finite and finite morphisms have finite fibres; a(Z') lies in Z. Step 2: the residue extension is algebraic over the integral C⊂A, so κ(u) is separably closed and purely inseparable over k by the new leaf. The étale-lift tool yields g'; both residue identities hold (λβ=1, βλ=1), so β is an isomorphism. Step 3: the cartesian source square lifts a κ(r)-point; s'^*=t'^* on C' puts v' in Z'. Step 4: the two maps κ(u)→κ(r') agree on k and therefore on all of κ(u) by pure inseparability, which gives an H-point of G; the stabilizer square then gives one of G'; the source square identifies its image with r̃', so u'_1=u'_2. Step 5: the 00GA inverse polynomial applies because both quotients contain k=C/m and are algebraic over it; marking it elementary is acceptable. Step 6: V(mA)=Z, CRT on pairwise coprime maximal ideals, and the coordinates are the residue maps, so the map is the induced A/J→A'/J'. New leaf lem-sfb-algebraic-sepclosed-purely-insep: verified against Mathlib PurelyInseparable/Basic.lean lines 148-153 and 567-572, which need algebraicity only. It strictly generalizes the finite-extension nodes lem-kun-sep-closed-finite-extension-* and lem-weil-pbc-sepclosed-finite-extension-unique-embedding; this matters because κ(u)/k can be infinite. It is not a duplicate. I accept the tool_uses lem-a1-affine-groupoid-integral-invariants, lem-a1-affine-groupoid-orbit-fibres and lem-exc-etale-lift-sepclosed-base as generic. No SGA; proof_deps equals the union of uses; every cited node exists. review_split.py's 'no such node' output is caused by the symlinked chapter directories, not by the delivery. Small cases: trivial groupoids over k×k, a pair groupoid (excluded by the source square), an infinite purely inseparable residue field, and the empty case (excluded)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidStrictLocalReducedOrbit",
+  "declaration": "AlgebraicGeometry.groupoid_strictLocal_reducedOrbit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidStrictLocalReducedOrbit.lean",
+  "statement": "theorem groupoid_strictLocal_reducedOrbit (S : Scheme.{u}) (A B A' B' : CommRingCat.{u}) (π : Spec A ⟶ S) (π' : Spec A' ⟶ S) (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (s' t' : Spec B' ⟶ Spec A') (e' : Spec A' ⟶ Spec B') (i' : Spec B' ⟶ Spec B') (c' : pullback s' t' ⟶ Spec B') (_hG : Scheme.IsGroupoid s t e i c) (_hG' : Scheme.IsGroupoid s' t' e' i' c') (_hS : s ≫ π = t ≫ π) (_hS' : s' ≫ π' = t' ≫ π') (a : Spec A' ⟶ Spec A) (b : Spec B' ⟶ Spec B) (_ha : a ≫ π = π') (_he : e' ≫ b = a ≫ e) (_hi : i' ≫ b = b ≫ i) (_hc : ∀ (H : Scheme.{u}) (p' : H ⟶ pullback s' t') (p : H ⟶ pullback s t), p' ≫ pullback.fst s' t' ≫ b = p ≫ pullback.fst s t → p' ≫ pullback.snd s' t' ≫ b = p ≫ pullback.snd s t → p' ≫ c' ≫ b = p ≫ c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] [s'.IsFiniteLocallyFree] [t'.IsFiniteLocallyFree] [Etale a] (_hs : IsPullback b s' s a) (_ht : IsPullback b t' t a) (_hstab : ∀ (H : Scheme.{u}) (x : H ⟶ Spec A') (r : H ⟶ Spec B), r ≫ s = x ≫ a → r ≫ t = x ≫ a → ∃! r' : H ⟶ Spec B', r' ≫ b = r ∧ r' ≫ s' = x ∧ r' ≫ t' = x) (C : Subring A) (C' : Subring A') (_hC : C = (Spec.preimage s).hom.eqLocus (Spec.preimage t).hom) (_hC' : C' = (Spec.preimage s').hom.eqLocus (Spec.preimage t').hom) (φ : C →+* C') (_hφ : C'.subtype.comp φ = (Spec.preimage a).hom.comp C.subtype) [IsStrictlyHenselianLocalRing C] (p' : PrimeSpectrum C') (_hp' : PrimeSpectrum.comap φ p' = IsLocalRing.closedPoint C) (Z : Set (PrimeSpectrum A)) (Z' : Set (PrimeSpectrum A')) (_hZ : Z = {x | PrimeSpectrum.comap C.subtype x = IsLocalRing.closedPoint C}) (_hZ' : Z' = {x | PrimeSpectrum.comap C'.subtype x = p'}) : Z.Nonempty ∧ Z.Finite ∧ (∀ x ∈ Z, IsClosed ({x} : Set (PrimeSpectrum A))) ∧ Z'.Nonempty ∧ Z'.Finite ∧ (∀ x ∈ Z', IsClosed ({x} : Set (PrimeSpectrum A'))) ∧ Set.BijOn a Z' Z ∧ (∀ x ∈ Z', IsIso (a.residueFieldMap x)) ∧ ∃ ψ : (A ⧸ (Ideal.map C.subtype (IsLocalRing.maximalIdeal C)).radical) ≃+* (A' ⧸ ⨅ x : Z', x.val.asIdeal), ψ.toRingHom.comp (Ideal.Quotient.mk (Ideal.map C.subtype (IsLocalRing.maximalIdeal C)).radical) = (Ideal.Quotient.mk (⨅ x : Z', x.val.asIdeal)).comp (Spec.preimage a).hom",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abe7a71f1",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the item node, Stacks 0DT9 hypotheses (1)-(4) and the proof of the claim, every stmt_dep record (Scheme.IsGroupoid laws, IsFiniteLocallyFree, Etale, pullback, IsStrictlyHenselianLocalRing, residueField, Spec/Spec.preimage) and the delivered module. Only the item's lean record changed; the statement is verbatim; first delivery. Clause match: groupoids over S via pi with s≫pi=t≫pi; morphism (a,b) with _ha/_he/_hi/_hc (Yoneda form of composition); source/target IsPullback orientation correct; _hstab = Yoneda bijectivity of G'(H)→(G×_U U')(H), scheme-theoretic, identical to the parent affineGroupoid_etale_invariant_comparison interface; C,C' = eqLocus of s*,t*; phi pinned by inclusion and exists, so canonical; p' over closedPoint; Z,Z' comap fibres; conclusion nonempty/finite/closed points, Set.BijOn a Z' Z, IsIso residueFieldMap, and a ring iso A/rad(mA) ≅ A'/⨅Z' commuting with the quotient maps and a* = Spec.preimage a. No extra assumptions, single universe u, char 0/p and infinite purely inseparable residue extensions covered, no hollow defs, sorry-only proof, docstrings with source place, blueprint tag and six proof steps, no pro-etale material. No fix, so no compile; the worker reports clean compiles and an OK dry run. Findings: none."
+ }
+}

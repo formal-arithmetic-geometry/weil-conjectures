@@ -48,7 +48,11 @@ theorem smallModelComparisonInclusion_isContinuous (X : Scheme.{u}) :
     (smallModelComparisonInclusion.{u, v} X).IsContinuous
       (smallModelComparisonEtaleTopology.{u, v} X)
       (coefficientProEtaleModelTopology.{u, v} X) := by
-  sorry
+  have := Functor.isContinuous_comp (toProEt X) AsSmall.up
+    X.smallEtaleTopology (ProEt.topology X) (coefficientProEtaleModelTopology.{u, v} X)
+  exact Functor.isContinuous_comp AsSmall.down (toProEt X ⋙ AsSmall.up)
+    (smallModelComparisonEtaleTopology.{u, v} X) X.smallEtaleTopology
+    (coefficientProEtaleModelTopology.{u, v} X)
 
 /-- The comparison inverse image on the existing small models.
 Source: Stacks Tag 099R (blueprint: def-weil-pbc-site-comparison-morphism). -/
@@ -82,6 +86,16 @@ equivalences. The transported inclusion retains all etale and pro-etale objects.
 @[instance]
 theorem smallModelComparisonPullback_preservesFiniteLimits (X : Scheme.{u}) :
     PreservesFiniteLimits (smallModelComparisonPullback.{u, v} X) := by
-  sorry
+  have : (AsSmall.down : smallModelComparisonEtaleSite.{u, v} X ⥤ X.Etale).IsRightAdjoint :=
+    (AsSmall.equiv.{u, u + 1, max v (u + 1)} (C := X.Etale)).isRightAdjoint_inverse
+  have : (AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{u, v} X).IsRightAdjoint :=
+    (AsSmall.equiv.{u, u + 1, max v (u + 1)} (C := X.ProEt)).symm.isRightAdjoint_inverse
+  have : RepresentablyFlat (smallModelComparisonInclusion.{u, v} X) :=
+    inferInstanceAs (RepresentablyFlat
+      ((AsSmall.down : smallModelComparisonEtaleSite.{u, v} X ⥤ X.Etale) ⋙
+        toProEt X ⋙ AsSmall.up))
+  exact Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
+    (smallModelComparisonInclusion.{u, v} X) (Type (max v (u + 1)))
+    (smallModelComparisonEtaleTopology.{u, v} X) (coefficientProEtaleModelTopology.{u, v} X)
 
 end AlgebraicGeometry.Scheme

@@ -6,6 +6,8 @@ Authors: SHEAF group Q19
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-!
 # The selected canonical composition comparison
@@ -17,8 +19,52 @@ Source: Stacks Project, Tag 0D6D
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] proEtaleRingModulePullback
+  proEtaleRingModuleUnitSection proEtaleRingDerivedPullbackFactors
+  CochainComplex.IsAcyclicTensorKFlat SheafOfModules.IsFlatOnSite
+
+private theorem normalizedAdjunction_ext
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (a b : proEtaleRingModulePullback f R S c ⊣ proEtaleRingModuleDirectImage f R S c)
+    (ha : proEtaleRingModuleAdjunctionNormalized f R S c a)
+    (hb : proEtaleRingModuleAdjunctionNormalized f R S c b) : a = b := by
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext m
+  exact (ha M U.unop m).trans (hb M U.unop m).symm
+
+private theorem derivedTransformation_ext
+    {V : Scheme.{u}} (R : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
+    {E : Type*} [Category E] {F G : DerivedCategory (proEtaleRingModules V R) ⥤ E}
+    (α β : F ⟶ G)
+    (h : ∀ (P : CochainComplex (proEtaleRingModules V R) ℤ),
+      CochainComplex.IsAcyclicTensorKFlat P →
+      (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology V) (R := R) (P.X n)) →
+      α.app (DerivedCategory.Q.obj P) = β.app (DerivedCategory.Q.obj P)) : α = β := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso (proEtaleRingModules V R) (.up ℤ))
+  intro K
+  obtain ⟨P, p, hP, hflat, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) K
+  have := hp
+  have h' := h P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mp hP)
+    (fun n ↦ by
+      unfold SheafOfModules.IsFlatOnSite
+      exact (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso R (P.X n)).symm (hflat n))
+  apply (cancel_epi (F.map (DerivedCategory.Q.map p))).1
+  rw [α.naturality, β.naturality, h']
 
 set_option maxHeartbeats 800000 in
 -- The original-site coefficient transports require the same budget as the source theorem.
@@ -93,7 +139,49 @@ theorem proEtaleCanonicalPullbackComposition_existsUnique
                     (proEtaleRingDerivedPullbackFactors h R_W R_Z c_h).hom.app
                       (((proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex
                         (ComplexShape.up ℤ)).obj K) := by
-  sorry
+  classical
+  obtain ⟨adjk, adjh, adjhk, nk, nh, nhk, d, hd, a, ha, b, hb, c, hc⟩ :=
+    proEtaleRingDerivedPullbackComposition h k R_V R_W R_Z c_k c_h c_hk hc_hk
+  refine ⟨c, ⟨adjk, adjh, adjhk, nk, nh, nhk, d, hd, a, ha, b, hb, hc⟩, ?_⟩
+  intro c' hc'
+  obtain ⟨adjk', adjh', adjhk', nk', nh', nhk', d', hd', a', ha', b', hb', hc'⟩ := hc'
+  have ek := normalizedAdjunction_ext k R_V R_W c_k adjk' adjk nk' nk
+  have eh := normalizedAdjunction_ext h R_W R_Z c_h adjh' adjh nh' nh
+  have ehk := normalizedAdjunction_ext (h ≫ k) R_V R_Z c_hk adjhk' adjhk nhk' nhk
+  subst adjk'
+  subst adjh'
+  subst adjhk'
+  have ed : d' = d := by
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext m
+    exact (hd' N U.unop m).trans (hd N U.unop m).symm
+  have ea : a' = a := (conjugateIsoEquiv (adjk.comp adjh) adjhk).injective
+    (ha'.trans (ed.trans ha.symm))
+  have eb : b'.hom = b.hom := by
+    apply NatTrans.ext
+    funext K
+    apply HomologicalComplex.Hom.ext
+    funext n
+    exact (hb' K n).trans ((congrArg (fun e ↦ e.hom.app (K.X n)) ea).trans
+      (hb K n).symm)
+  apply Iso.ext
+  apply derivedTransformation_ext R_V
+  intro K hK hflat
+  have e' := (hc' K hK hflat).2.2
+  rw [eb] at e'
+  have e := e'.symm.trans ((hc K hK hflat).2.2)
+  apply (cancel_mono
+    ((proEtaleRingDerivedPullback h R_W R_Z c_h).map
+        ((proEtaleRingDerivedPullbackFactors k R_V R_W c_k).hom.app K) ≫
+      (proEtaleRingDerivedPullbackFactors h R_W R_Z c_h).hom.app
+        (((proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj K))).1
+  simpa only [Category.assoc] using e
 
 /-- Select the comparison characterized by the normalized ordinary adjunctions,
 fibre-product pasting, and the termwise K-flat comparison. Each witness in the existing

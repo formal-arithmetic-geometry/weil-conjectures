@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-condensed-ambient-exchange-triangulated",
+ "kind": "statement",
+ "title": "Triangulated isomorphism locus of the condensed ambient exchange",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, with the unbounded derived categories of internal $\\Lambda$-module objects and their derived pullback/pushforward adjunctions [sk-def-sfb-module-derived-pushpull]. Let $\\square$ be a chosen Cartesian square of schemes and let $\\beta$ be its specified ambient exchange [def-weil-pbc-ambient-ringed-exchange]. Then the object property $P(K):=\\text{``}\\beta_K\\text{ is an isomorphism}$ on the source derived category is triangulated: it contains zero, is stable under every integer shift, and satisfies the two-out-of-three condition on distinguished triangles. No properness, constructibility or finiteness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "Clause (2): triangulated isomorphism locus of exchange in the localizing extension."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "For coefficients pulled back from the same condensed point, the coefficient comparison in each module pullback is an isomorphism. Thus the pullback is exact: inverse image of abelian sheaves is exact, and extension along this coefficient isomorphism is an exact equivalence. Its total left derived functor is identified with the exact termwise functor on complexes. Give it the coherent shifts transported by leftDerivedUpperStarIsoMapDerivedCategory. The derived compositor is the composite of these exact-functor normalizations and the localized termwise compositor. Each component on a shifted complex is its component in the shifted degree, and additivity respects the signed differential, so it commutes with shifts. Compatibility is stable under compositions and whiskering. The equality transport around the square commutes with shifts by equality induction. Consequently the specified ambient pullback comparison commutes with shifts, and every pullback is triangulated.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the two recorded derived adjunctions, use the unique right-adjoint shifts compatible with the left-adjoint shifts. The triangulated adjunction theorem makes both right adjoints triangulated; the compatible units and counits commute with shifts. The ambient exchange is the specified mate. Expand its unit/comparison/counit formula: every whiskered factor and the associators and unitors commute with shifts, hence so does the exchange. Its source and target are composites of triangulated functors.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-triangulated-functor-composite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the isomorphism-locus argument to this shift-compatible transformation. The component at zero is invertible because both functors send zero to zero. Shift compatibility conjugates a shifted component by shift isomorphisms, so invertibility is stable under shifts. Naturality together with the connecting square gives a morphism of distinguished image triangles. If two components are invertible, the triangulated two-out-of-three theorem makes the third invertible. These are precisely the axioms of a triangulated object property. In Lean these three closure assertions are packaged by NatTrans.instIsTriangulatedIsoLocus.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "Clause (2): triangulated isomorphism locus of exchange in the localizing extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between triangulated functors that commutes with integer shifts has a triangulated isomorphism locus",
+   "results": "8 hits, including Functor.isTriangulated_iff_of_iso, Functor.mapTriangleIso and Functor.isTriangulated_of_iso.",
+   "date": "2026-10-27",
+   "verdict": "Generic triangulated tools apply after proving shift compatibility for the specified condensed mate; none states that coefficient-specific result."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift, NatTrans.isoLocus",
+   "results": "0 hits: unknown identifier 'NatTrans.CommShift'.",
+   "date": "2026-10-27",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLocus.*IsTriangulated|CommShift.*mateEquiv",
+   "results": "0 hits from the authorized Mathlib search. Repository inspection found NatTrans.instIsTriangulatedIsoLocus and NatTrans.CommShift.mateEquiv in the adopted source library; both are applied in the proof.",
+   "date": "2026-10-27",
+   "verdict": "No existing public coefficient-specific theorem. The private helper in UnboundedBaseChangeExtension cannot be imported here because that would create an import cycle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperLocalizing",
+  "date": "2026-10-27",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-proper-localizing",
+   "place": "Clause (2), shift-compatible exchange in the localizing extension.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedAmbientExchangeTriangulated",
+  "file": "lean/Sheaf/Paper/CondensedAmbientExchangeTriangulated.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedAmbientExchange_isoLocus_triangulated",
+  "statement": "theorem condensedAmbientExchange_isoLocus_triangulated\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X' X Y' Y : Scheme.{u}}\n    {g' : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}\n    (sq : ChosenCartesianSquare g' p' p g) :\n    (condensedAmbientExchange Λ sq).isoLocus.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T222731-L-687688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T222731-L-687688",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

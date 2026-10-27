@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-integral-codimension-one-affine-neighbourhood",
+ "kind": "statement",
+ "title": "Finite codimension-at-most-one points on an integral separated scheme have a common affine neighbourhood",
+ "statement": "Let $X$ be an integral separated scheme [def-pc-scheme, def-pc-integral-scheme, def-weil-proper-morphism]. Let $T\\subseteq X$ be a finite set of points, possibly empty. Suppose that for every $x\\in T$ the local ring $\\mathcal O_{X,x}$ [def-weil-pbc-module-stalk] is Noetherian [def-weil-pbc-noetherian-ring] and has Krull dimension at most one [def-weil-pbc-krull-dimension-ring]. Then there exists an affine open subscheme $V\\subseteq X$ containing $T$ [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NJ (lemma-finite-set-codim-1-points-in-affine), statement; used in Tag 09NN (proposition-finite-set-of-points-of-codim-1-in-affine), proof, last sentence: the integral case."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta$ for the generic point and $K=\\mathcal O_{X,\\eta}$. By [lem-sc-integral-scheme-stalks-in-function-field], every $A_x=\\mathcal O_{X,x}$ embeds in $K$ with fraction field $K$. By [lem-weil-pbc-spec-local-ring-canonical-morphism], the image of $\\operatorname{Spec}(A_x)\\to X$ contains every generalization of $x$, including $\\eta$. If $\\dim A_x=0$, the domain $A_x$ has only its zero prime: any other prime would give a strict prime chain of length one. Since its maximal ideal is a prime, it is zero, so $A_x$ is a field and its spectrum is a singleton. Its image contains both $x$ and $\\eta$, hence $x=\\eta$. Remove $\\eta$ from the finite set and enumerate the remaining distinct points $x_1,\\ldots,x_r$. Their local rings have dimension exactly one. If $r=0$, choose any point of the nonempty integral scheme $X$ and an affine neighbourhood using [lem-weil-pbc-affine-opens-basis]; it contains $\\eta$ because every nonempty open does. This proves the assertion for $T=\\varnothing$ and $T\\subseteq\\{\\eta\\}$. Henceforth $r\\geq1$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NJ, opening sentence, with explicit reduction of the dimension-zero and empty cases."
+   }
+  },
+  {
+   "text": "Put $A_i=\\mathcal O_{X,x_i}\\subset K$. There is no discrete valuation subring $\\mathcal O\\subset K$ containing both $A_i$ and $A_j$ for $i\\ne j$. Indeed, the contraction to $A_i$ of the maximal ideal of $\\mathcal O$ is either zero or the maximal ideal of $A_i$, since $A_i$ is a one-dimensional local domain. In the zero case every nonzero element of $A_i$ is a unit of $\\mathcal O$, so $K=\\operatorname{Frac}(A_i)\\subseteq\\mathcal O$, contrary to a discrete valuation ring being a nonfield. Thus the inclusion $A_i\\to\\mathcal O$ is local, and likewise for $A_j$. Compose the two spectrum maps with the canonical morphisms of [lem-weil-pbc-spec-local-ring-canonical-morphism]. The resulting maps $\\operatorname{Spec}(\\mathcal O)\\to X$ agree on $\\operatorname{Spec}(K)$, where both are the canonical generic-point map, by the stalk embeddings in Step 1. Uniqueness for the separated structure morphism, [lemma-nagata-separated-valuation-lift-unique], makes them equal. The closed point then maps both to $x_i$ and to $x_j$, contradicting their distinctness.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lemma-nagata-separated-valuation-lift-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NJ, proof, first paragraph and displayed valuative diagram; Schemes Tag 01KZ (schemes-lemma-separated-implies-valuative)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-one-dimensional-subrings-common-dvr-criterion] to $A_i,A_j\\subset K$. Its Noetherian and dimension-one hypotheses hold by the original assumptions and Step 1. Step 2 excludes its common-DVR alternative, so $A_i\\otimes_{\\mathbb Z}A_j\\to K$ is surjective for every $i\\ne j$.",
+   "uses": [
+    "lem-trf-one-dimensional-subrings-common-dvr-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NJ, proof, invocation of Tag 09N0."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-semilocal-subring-affine-gluing] to the nonempty finite family $A_1,\\ldots,A_r$. Every $A_i$ is local, hence semilocal; the other hypotheses are Step 1 and Step 3. Obtain a domain $A\\subset K$ with fraction field $K$, an open covering of $S=\\operatorname{Spec}(A)$ by $S_i=\\operatorname{Spec}(A_i)$, and distinct closed points $m_i$ with $A_{m_i}=A_i$. For $i\\ne j$ the overlaps are $\\operatorname{Spec}(K)$ with the maps prescribed by the inclusions in $K$.",
+   "uses": [
+    "lem-trf-semilocal-subring-affine-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NJ, proof, application of Tag 09N4 and displayed open covering."
+   }
+  },
+  {
+   "text": "Let $c_i:S_i\\to X$ be the canonical local-ring morphisms of [lem-weil-pbc-spec-local-ring-canonical-morphism]. On every overlap $S_i\\cap S_j=\\operatorname{Spec}(K)$ their restrictions are the canonical map at $\\eta$: in an affine neighbourhood of $x_i$ the map is induced by taking germs, and localizing further to the zero prime gives the germ at $\\eta$. Thus [lem-weil-pbc-scheme-morphism-gluing] gives $f:S\\to X$ restricting to $c_i$. The closed point $m_i$ maps to $x_i$. The induced map on local rings at $m_i$ is an isomorphism, since restricting to the open chart $S_i$ identifies it with the closed-point stalk map of $c_i$, which is the identity of $A_i$. Also $S$ has the single generic point $(0)$, whose image is $\\eta$, since this holds on each chart. Hence the map between the generic-point sets is a bijection of singletons.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NJ, proof, gluing the canonical morphisms and matching local rings."
+   }
+  },
+  {
+   "text": "By [lem-pc-separated-quasi-separated], $X$ is quasi-separated. It has exactly one irreducible component, since it is integral. Apply [lem-trf-affine-source-stalk-isomorphism-neighbourhood] to $f:S\\to X$ and $m_1,\\ldots,m_r$. Its affine-source hypothesis holds because $S=\\operatorname{Spec}(A)$; its finite and injective generic-point hypotheses and its stalk-isomorphism hypotheses were checked in Step 5. Obtain an affine open $V$ containing all $x_i$. It is nonempty, so it also contains $\\eta$. This restores any removed generic point and gives $T\\subseteq V$.",
+   "uses": [
+    "lem-pc-separated-quasi-separated",
+    "lem-trf-affine-source-stalk-isomorphism-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NJ, proof, final sentence applying Tag 09NI."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-discrete-valuation-ring",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lem-trf-one-dimensional-subrings-common-dvr-criterion",
+  "lem-trf-semilocal-subring-affine-gluing",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-pc-separated-quasi-separated",
+  "lem-trf-affine-source-stalk-isomorphism-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NJ (varieties-lemma-finite-set-codim-1-points-in-affine), full proof; empty/generic-point cases and the local nature of inclusions in a common DVR expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"grep\", \"query\": \"finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"8284f0fed80bd1dc\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite points with Noetherian local rings of Krull dimension at most one in a separated integral scheme have a common affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:44:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite points with Noetherian local rings of Krull dimension at most one in a separated integral scheme have a common affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\"], \"digest\": \"f21999332b4ccb03\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(component|[Cc]odim|ringKrullDim).*(affine|Affine)|(affine|Affine).*(component|[Cc]odim|ringKrullDim)",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"grep\", \"query\": \"(component|[Cc]odim|ringKrullDim).*(affine|Affine)|(affine|Affine).*(component|[Cc]odim|ringKrullDim)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"5ee91cec53cb490c\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an integral separated scheme any finite collection of codimension one points with Noetherian local rings is contained in one affine open",
+   "results": "{\"t\": \"2026-10-22T06:44:29Z\", \"tool\": \"leansearch\", \"query\": \"In an integral separated scheme any finite collection of codimension one points with Noetherian local rings is contained in one affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\"], \"digest\": \"2ce9a53161a3fa09\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsAffineOpen",
+   "results": "{\"t\": \"2026-10-22T06:44:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsAffineOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\"], \"digest\": \"3ddab4b5a89c8260\"}; Read the returned hits. No common-affine-neighbourhood theorem: finite affine covers need not be affine, affine bases treat one point, disjoint affine unions require disjointness, and Noetherian coordinate rings or fraction fields give no common neighbourhood.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of points with Noetherian local rings of dimension at most one on an integral separated scheme has a common affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T09:49:31Z\", \"tool\": \"leanfinder\", \"query\": \"A finite set of points with Noetherian local rings of dimension at most one on an integral separated scheme has a common affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"ac064c19b6bd21e7\"}; No match: the affine basis treats one point; none of the returned declarations produces a common affine neighbourhood of this finite set.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(codim.*affine|finite.*points.*affine|affine.*finite.*points)",
+   "results": "{\"t\": \"2026-10-23T09:52:17Z\", \"tool\": \"grep\", \"query\": \"(codim.*affine|finite.*points.*affine|affine.*finite.*points)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: the affine basis treats one point; none of the returned declarations produces a common affine neighbourhood of this finite set.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsAffineOpen",
+   "results": "{\"t\": \"2026-10-23T09:52:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsAffineOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\"], \"digest\": \"3ddab4b5a89c8260\"}; No match: the affine basis treats one point; none of the returned declarations produces a common affine neighbourhood of this finite set.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite codimension one points of an integral separated scheme are contained in an affine open",
+   "results": "{\"t\": \"2026-10-23T09:53:29Z\", \"tool\": \"leansearch\", \"query\": \"Finite codimension one points of an integral separated scheme are contained in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.affineBasicOpen\"], \"digest\": \"c807cd8cebe70c49\"}; No match: the affine basis treats one point; none of the returned declarations produces a common affine neighbourhood of this finite set.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any finitely many codimension at most one points with Noetherian stalks of a separated irreducible reduced scheme lie in a single affine open",
+   "results": "{\"t\": \"2026-10-23T09:54:21Z\", \"tool\": \"leanfinder\", \"query\": \"Any finitely many codimension at most one points with Noetherian stalks of a separated irreducible reduced scheme lie in a single affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.exists_basicOpen_le_affine_inter\"], \"digest\": \"bd61efeff4fa8787\"}; No match: the affine basis treats one point; none of the returned declarations produces a common affine neighbourhood of this finite set.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(codim|local.ring|generic).*(affine.*(neighbour|neighbor)|common.affine)",
+   "results": "{\"t\": \"2026-10-23T09:56:30Z\", \"tool\": \"grep\", \"query\": \"(codim|local.ring|generic).*(affine.*(neighbour|neighbor)|common.affine)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: the affine basis treats one point; none of the returned declarations produces a common affine neighbourhood of this finite set.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-codimension-one-points-affine-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 09NN proof, last sentence: the integral case; this is the componentwise reduction supporting the finite-pinching affine-neighbourhood hypothesis in the ancestor contraction paragraph.",
+   "via": [
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-integral-codimension-one-affine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Expanded Tag 09NJ into the dimension-zero reduction, valuation uniqueness, pairwise tensor surjectivity, semilocal affine gluing, gluing of canonical morphisms, and the affine-source criterion. Added three statement-only source lemmas; reused existing stalk, valuative uniqueness, affine basis, scheme gluing and quasi-separatedness nodes. Statement unchanged.",
+  "blueprint": "The inherited ancestor is lem-trf-local-term-locality; this auxiliary realizes the integral case (Tag 09NJ) of Tag 09NN in the finite-set affine-neighbourhood requirement of the nodal pinching/contraction chain. The current latest ancestor proof was read; none of its trace statements is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Canonical morphisms from spectra of local rings and their normalized stalk maps are generic scheme tools not supplied by the trace unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-e2db7682d",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-e2db7682d (reviewer sub-agent of L); spot-checked: I read the full Stacks varieties source: 09MY, 09N0, the 09N2/09N3 lemmas, 09N4, 09NI and 09NJ, with their proofs; the tags are checked against tags/tags and no SGA source is used. The item statement is unchanged from live and is exactly 09NJ, with T empty allowed. The live item is still unsplit and there is no repair note. Step 1 correctly shows that a point with dimension-zero local ring is the generic point eta (the local ring is a field and the canonical image contains eta), and it handles r=0 through the affine basis. Step 2 gives the containment-to-local-inclusion argument the source omits: the contraction is 0 or the maximal ideal, and 0 would force K inside the DVR. Valuative uniqueness then applies to any valuation ring and the separated morphism to Spec Z. Steps 3, 4 and 6 apply the three new nodes with every hypothesis checked. Step 5 glues the canonical local morphisms over the overlaps Spec K, with identity closed stalks and the generic point going to eta. The new nodes match their sources. 09N0 (common DVR iff the tensor map is not onto) was tested on Z_(p), Z_(q) and on A=B. In 09N4 I checked the added local clauses myself: m_i distinct, A_{m_i}=A_i, overlaps Spec K. 09NI keeps hypotheses (1)-(5) verbatim. None of the new nodes restates the item, and searches over the tags and concepts found no duplicates. The worker wrote the split_report.tool_uses entry for lem-weil-pbc-spec-local-ring-canonical-morphism itself; I accept that tool use, and the content is correct. The valuation node is Lean-closed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralCodimensionOneAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_superset_of_isIntegral_of_stalk_dimension_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralCodimensionOneAffineNeighbourhood.lean",
+  "statement": "theorem exists_isAffineOpen_superset_of_isIntegral_of_stalk_dimension_le_one (X : Scheme.{u}) [IsIntegral X] [X.IsSeparated] (T : Set X) (hT : T.Finite) (hnoetherian : ∀ x ∈ T, IsNoetherianRing (X.presheaf.stalk x)) (hdimension : ∀ x ∈ T, ringKrullDim (X.presheaf.stalk x) ≤ 1) : ∃ V : X.Opens, IsAffineOpen V ∧ T ⊆ (V : Set X)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6d5e6087",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Matches Stacks 09NJ and the node clause by clause: integral, separated X : Scheme.{u}; finite T, empty allowed; Noetherian stalks with ringKrullDim ≤ 1 for x ∈ T; conclusion ∃ V : X.Opens, IsAffineOpen V ∧ T ⊆ V. No extra assumptions. Edge cases T=∅, generic point and universe are covered. lean.statement is verbatim and the node differs from live only in lean. The seven stmt_dep records are usable and all imported proof-dep modules exist in live. No duplicate found, sorry-only, docstrings carry the source place and blueprint, and both report sections are present. No compile needed (no change)."
+ }
+}

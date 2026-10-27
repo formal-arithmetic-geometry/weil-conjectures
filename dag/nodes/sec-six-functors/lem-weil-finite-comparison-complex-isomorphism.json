@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-finite-comparison-complex-isomorphism",
+ "kind": "statement",
+ "title": "The specified finite comparison is an isomorphism of complexes",
+ "statement": "Let $\\ell$ be a prime and $E/\\mathbf Q_\\ell$ a finite extension [def-weil-l-adic-coefficient-extension], let $g:X\\to Y$ be an isomorphism of schemes, and let $n\\geq0$ index the positive exponent $n+1$. For every unbounded cochain complex $K$ of sheaves of modules over the finite constant coefficient ring $(\\mathcal O_E/\\varpi^{n+1})_Y$, the specified tensor-unit chain map $\\kappa_K:GK\\to g^*K$ of [def-weil-inverse-image-pullback-comparison] is an isomorphism of complexes. Here $G$ is the sectionwise inverse image with action transported through the inverse of the canonical coefficient-ring comparison, as in [lem-weil-proetale-isomorphism-inverse-image]. The site universe and coefficient universe are independent. No boundedness, constructibility, flatness or completeness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "Step 3 of lem-weil-point-automorphism-derived-transport-inverse: the finite scalar-extension isomorphism and identification of its inverse with the specified comparison. Stacks 03D2, 03D6 and 00WX."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Let F be postcomposition by g and G the pro-etale base-change functor, with their map/pullback adjunction. For the finite constant ring, write psi for the canonical direct ring map and c for inverseImageFiniteCoefficientMap. The adjunct F*(psi) followed by the sheaf adjunction counit agrees with c: after precomposing with constant presheaf sections this is the defining sheafification hom-equivalence equation and naturality of toSheafify along proEtaleIsoCommaArrow. Uniqueness of isoSectionwiseConstantMap gives the equality. Hence psi is the adjoint of c.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "Step 3 of lem-weil-point-automorphism-derived-transport-inverse: the finite scalar-extension isomorphism and identification of its inverse with the specified comparison. Stacks 03D2, 03D6 and 00WX."
+   }
+  },
+  {
+   "text": "Transport actions through the inverse of c. The two coefficient compatibility equations for SheafOfModules.pushforwardPushforwardAdj follow from the preceding adjunct equation, inverse identities for c, and the sheaf adjunction triangle identity. That Mathlib construction supplies an adjunction from inverseImageFiniteModules to coefficientProEtaleModuleDirectImage. Its counit on sections is restriction along the site adjunction unit, namely proEtaleIsoCommaArrow.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "Step 3 of lem-weil-point-automorphism-derived-transport-inverse: the finite scalar-extension isomorphism and identification of its inverse with the specified comparison. Stacks 03D2, 03D6 and 00WX."
+   }
+  },
+  {
+   "text": "The recorded finite pullback is another left adjoint of exactly that module direct image. Apply Adjunction.leftAdjointUniq to get a natural isomorphism from sectionwise inverse image to pullback. Its component is the image of the pullback adjunction unit followed by the sectionwise adjunction counit, by homEquiv_leftAdjointUniq_hom_app. On sections this is the pullback generator restricted along proEtaleIsoCommaArrow, exactly the normalization in inverseImageFiniteComparison_existsUnique. Uniqueness identifies the recorded chain map with this natural isomorphism mapped to complexes, which is invertible.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "Step 3 of lem-weil-point-automorphism-derived-transport-inverse: the finite scalar-extension isomorphism and identification of its inverse with the specified comparison. Stacks 03D2, 03D6 and 00WX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3 and 03D6, together with Sites Tag 00WX; uniqueness of the normalized left adjoint replaces an explicit scalar-extension calculation.",
+  "note": "A9: use Mathlib SheafOfModules.pushforwardPushforwardAdj and Adjunction.leftAdjointUniq, with the coefficient adjunct equation proved from the public constant-section normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor unit map from inverse image to pullback of sheaves of modules along a scheme isomorphism is an isomorphism",
+   "results": "Scheme.Modules.pullbackCongr; Scheme.Hom.instIsIsoCommRingCatApp; SheafOfModules.pullback_id_comp; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; TopCat.Presheaf.pullbackInvIsoPushforwardHom.",
+   "date": "2026-10-25",
+   "verdict": "No match: none identifies the specified finite pro-etale comparison, with independent coefficient universe."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "Localization.liftNatIso and its hom/inv formulas in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-25",
+   "verdict": "Useful for the parent descent only; it requires an already constructed chain-level isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*[Cc]omparison|[Cc]omparison.*[Ii]so in Mathlib/Algebra/Category/ModuleCat/Sheaf; inverseImageFiniteComparisonComplex in lean/Sheaf and lean/WeilConjectures; blueprint_refs search finite comparison",
+   "results": "No matching Mathlib comparison. Library has the comparison characterization and its naturality but no invertibility declaration; blueprint search has no duplicate.",
+   "date": "2026-10-25",
+   "verdict": "No match. ScalarExtensionRingIso supplies multiplication, while the adjunction/comma identification still needs a proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor unit comparison from sectionwise inverse image to finite constant coefficient module pullback along an isomorphism is an isomorphism of cochain complexes",
+   "results": "HomologicalComplex.tensorUnitIso, leftUnitor, rightUnitor; groupCohomology.inhomogeneousCochainsIso; CochainComplex.ConnectData.restrictionLEIso; Rep.standardComplex.quasiIso_forget₂_εToSingle₀.",
+   "date": "2026-10-25",
+   "verdict": "No match: tensor unit objects of a monoidal category are unrelated to the specified pullback-unit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointAutomorphismDerivedTransportInverse",
+  "date": "2026-10-25",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Finite-coefficient point-transport factor in the first cohomology arrow; step 3 of the inverse-transport node.",
+   "via": [
+    "lem-weil-point-automorphism-derived-transport-inverse",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.FiniteComparisonIsomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/FiniteComparisonIsomorphism.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.inverseImageFiniteComparisonComplex_isIso",
+  "statement": "theorem inverseImageFiniteComparisonComplex_isIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) [IsIso g] (n : ℕ)\n    (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :\n    IsIso (inverseImageFiniteComparisonComplex l E g n K)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T144207-L-1205858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T091119-L-3306906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

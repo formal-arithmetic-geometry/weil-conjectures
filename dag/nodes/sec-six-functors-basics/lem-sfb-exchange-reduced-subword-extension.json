@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-exchange-reduced-subword-extension",
+ "kind": "statement",
+ "title": "One-letter extension of a reduced subword under strong exchange",
+ "statement": "Let $V$ be a finite-dimensional real vector space [def-weil-vector-space-dimension], let $G\\subseteq\\operatorname{GL}_{\\mathbf R}(V)$ be a subgroup of the group of invertible real linear maps, and let $S\\subseteq G\\setminus\\{1\\}$ be a set such that $s^2=1$ for every $s\\in S$ and every element of $G$ is a finite product of elements of $S$. Let $\\ell(g)$ be the least number of letters in such a product, and call a word reduced when its number of letters equals the length of its product. Put $T=\\{h^{-1}sh:h\\in G,\\ s\\in S\\}$. Assume the following right strong exchange property, including possibly nonreduced words: for every $n\\geq0$, $a_1,\\ldots,a_n\\in S$ and $t\\in T$, if $g=a_1\\cdots a_n$ and $\\ell(gt)\\leq\\ell(g)$, then $n\\geq1$ and there is $j\\in\\{1,\\ldots,n\\}$ with\n$$gt=a_1\\cdots a_{j-1}a_{j+1}\\cdots a_n.$$\nFor $q\\geq0$ let $b_1,\\ldots,b_q\\in S$ and let $b_1\\cdots b_q$ be a reduced word with product $v$. Suppose $u\\in G$, $u\\ne v$, and some subsequence of this word, in its original order, is a reduced word with product $u$. Then there exist a subset $I\\subseteq\\{1,\\ldots,q\\}$ and an index $r\\in\\{1,\\ldots,q\\}\\setminus I$ such that the word formed by the letters at the positions in $I$, in increasing order, is reduced with product $u$, and the word formed by the positions in $I\\cup\\{r\\}$, in increasing order, is also reduced. In particular their lengths are $\\ell(u)$ and $\\ell(u)+1$, respectively. Empty words are allowed; when $S=\\varnothing$ or $q=0$ the hypotheses $u\\ne v$ and reduced-subword containment cannot hold simultaneously.",
+ "source": {
+  "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+  "place": "Lemma 2.2.1 and its proof, printed pp.33--34 (PDF pp.41--42, zero-based). This statement extracts the one-position insertion conclusion of that proof and replaces the Coxeter-system hypothesis by the explicit right strong exchange property it uses. Local PDF WANTED; university-hosted text read online. The delivered formulation is for a real linear subgroup, exactly the kind of group used by the parent item; no property beyond its displayed group and exchange assumptions is needed.",
+  "url": "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $m=\\ell(u)$ and $[q]=\\{1,\\ldots,q\\}$. The family $\\mathcal F$ of subsets $J\\subseteq[q]$ whose selected word is reduced with product $u$ is finite and nonempty by hypothesis. Every $J\\in\\mathcal F$ has $|J|=m$. No such $J$ is $[q]$, since the full product is $v\\ne u$; hence $m<q$. Choose $I\\in\\mathcal F$ for which $r=\\max([q]\\setminus I)$ is as small as possible. This uses a minimum of a nonempty finite set of integers only.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+    "place": "Lemma 2.2.1, printed p.33 (PDF page 41, zero-based), first sentence of the proof: minimizing the last omitted position."
+   }
+  },
+  {
+   "text": "All positions strictly greater than $r$ belong to $I$. Let $A$ be the product of the selected letters before $r$, let $B=b_{r+1}\\cdots b_q$, and let $P=b_1\\cdots b_{r-1}$, with empty products equal to $1$. Then $u=AB$ and $v=P b_rB$. Set $t=B^{-1}b_rB\\in T$ and $z=A b_rB=ut$. The word at $I\\cup\\{r\\}$ represents $z$ and has $m+1$ letters, so $\\ell(z)\\le m+1$. These identities follow by cancellation; also $t^2=1$ because $b_r^2=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+    "place": "Lemma 2.2.1, printed p.33, definition of the conjugate reflection and the inserted expression; group identities written explicitly."
+   }
+  },
+  {
+   "text": "Suppose this inserted word is not reduced. Its $m+1$ letters then give $\\ell(z)<m+1$, hence $\\ell(ut)\\le m=\\ell(u)$. Apply the assumed right strong exchange property to the selected word at $I$, of length $m$, and to $t$. It gives $m\\ge1$ and deletion of one selected position $p\\in I$ yielding $z$. Thus $p\\ne r$ and either $p>r$ or $p<r$. If $m=0$, the asserted $m\\ge1$ is already a contradiction, so that case needs no deletion index.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+    "place": "Lemma 2.2.1, printed p.33, strong-exchange application. Here the displayed non-strict exchange hypothesis applies directly; no Coxeter length-parity theorem is used."
+   }
+  },
+  {
+   "text": "If $p>r$, write $B=C b_pD$, where $C=b_{r+1}\\cdots b_{p-1}$ and $D=b_{p+1}\\cdots b_q$. The deletion equality is $A b_rB=A C D$. Left cancellation gives $b_rB=CD$, so $v=P b_rB=P C D$. The displayed word $P C D$ is the original full word with precisely positions $r$ and $p$ removed, and has $q-2$ letters. Hence $\\ell(v)\\le q-2<q$, contradicting the assumed reducedness of $b_1\\cdots b_q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+    "place": "Lemma 2.2.1, printed pp.33--34, equation (2.8) and its contradiction: deletion in the final full suffix."
+   }
+  },
+  {
+   "text": "If $p<r$, let $A_p$ be the product of the selected letters before $r$ except the letter at $p$. The deletion equality is $A b_rB=A_pB$. Right cancellation and $b_r^2=1$ give $A b_r=A_p$ and $A=A_p b_r$, hence $u=A_p b_rB$. Thus $I'=(I\\setminus\\{p\\})\\cup\\{r\\}$ selects another word for $u$ with exactly $m$ letters; it is reduced since $m=\\ell(u)$. Its omitted set is $([q]\\setminus(I\\cup\\{r\\}))\\cup\\{p\\}$. This is nonempty (it contains $p$), and each of its positions is less than $r$. Therefore $\\max([q]\\setminus I')<r$, contradicting the choice of $I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+    "place": "Lemma 2.2.1, printed p.34, equation (2.9) and the minimality contradiction; includes deletions before the first originally omitted position, as in the source remark."
+   }
+  },
+  {
+   "text": "Both possible deletions are impossible, so the inserted word is reduced. The original selected word at $I$ is reduced with product $u$ by its choice in $\\mathcal F$, $r\\notin I$, and $|I\\cup\\{r\\}|=|I|+1=m+1$. These are all the asserted conclusions. If $q=0$, the only subword is the full empty word, giving $u=v=1$ and contradicting the hypotheses. If $S=\\varnothing$, generation forces $G=\\{1\\}$ and the only possible word has $q=0$. Empty selected words with $q>0$ were covered by the $m=0$ contradiction in step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+    "place": "Lemma 2.2.1, printed pp.33--34, conclusion; empty-word and empty-generator cases checked explicitly."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bjorner-brenti-combinatorics-coxeter-groups.pdf",
+  "place": "Agent-written explicit-assumption version of the minimal-last-omission proof of Bjorner--Brenti Lemma 2.2.1, printed pp.33--34 (PDF pages 41--42, zero-based), read at the university-hosted URL in source.url. Local PDF WANTED. Each step uses finite selection, the stated strong-exchange hypothesis, or group cancellation; no theorem about Coxeter systems is imported."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subword|Subword|exchange|deletion|IsReduced",
+   "results": "{\"t\": \"2026-10-24T01:25:00Z\", \"tool\": \"grep\", \"query\": \"subword|Subword|exchange|deletion|IsReduced\", \"sub\": \"GroupTheory/Coxeter\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\"], \"digest\": \"0b6c95f3b8d465da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231, 235) preserve prefixes or suffixes; they do not insert an omitted position into an arbitrary reduced subword. IsReduced itself (line 81) only defines minimality. The second phrasing returned FreeGroup reductions (Basic.lean:301,436), which concern freely reduced words and do not imply this exchange-based insertion assertion. The targeted Coxeter grep found no subword/exchange/deletion declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a Coxeter group a reduced subword of a reduced expression can be extended by one letter to another reduced subword",
+   "results": "{\"t\": \"2026-10-24T01:25:01Z\", \"tool\": \"leansearch\", \"query\": \"In a Coxeter group a reduced subword of a reduced expression can be extended by one letter to another reduced subword\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.IsReduced.drop\", \"CoxeterSystem.IsReduced.take\", \"CoxeterSystem.IsReduced\", \"CoxeterSystem.length\", \"CoxeterSystem.wordProd_concat\", \"CoxeterSystem.IsRightDescent\", \"CoxeterSystem.exists_leftDescent_of_ne_one\", \"CoxeterSystem.IsLeftDescent\"], \"digest\": \"987e81ac75390c14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231, 235) preserve prefixes or suffixes; they do not insert an omitted position into an arbitrary reduced subword. IsReduced itself (line 81) only defines minimality. The second phrasing returned FreeGroup reductions (Basic.lean:301,436), which concern freely reduced words and do not imply this exchange-based insertion assertion. The targeted Coxeter grep found no subword/exchange/deletion declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CoxeterSystem.IsReduced",
+   "results": "{\"t\": \"2026-10-24T01:25:01Z\", \"tool\": \"loogle\", \"query\": \"CoxeterSystem.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CoxeterSystem.IsReduced\", \"CoxeterSystem.IsReduced.reverse\", \"CoxeterSystem.isReduced_reverse_iff\", \"CoxeterSystem.IsReduced.drop\", \"CoxeterSystem.IsReduced.take\", \"CoxeterSystem.exists_isReduced\", \"CoxeterSystem.IsReduced.eq\", \"CoxeterSystem.not_isReduced_alternatingWord\"], \"digest\": \"e17967659d26ce43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231, 235) preserve prefixes or suffixes; they do not insert an omitted position into an arbitrary reduced subword. IsReduced itself (line 81) only defines minimality. The second phrasing returned FreeGroup reductions (Basic.lean:301,436), which concern freely reduced words and do not imply this exchange-based insertion assertion. The targeted Coxeter grep found no subword/exchange/deletion declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper reduced subword of a fixed reduced word in a Coxeter group can be enlarged by inserting one letter so that the resulting subword is still reduced",
+   "results": "{\"t\": \"2026-10-24T01:25:01Z\", \"tool\": \"leanfinder\", \"query\": \"A proper reduced subword of a fixed reduced word in a Coxeter group can be enlarged by inserting one letter so that the resulting subword is still reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.IsReduced.take\", \"CoxeterSystem.IsReduced.drop\", \"CoxeterSystem.exists_reduced_word\", \"CoxeterSystem.IsReduced\", \"CoxeterSystem.exists_reduced_word'\", \"CoxeterSystem.IsRightDescent\", \"CoxeterSystem.not_isReduced_alternatingWord\", \"CoxeterSystem.length_mul_simple_ne\"], \"digest\": \"fa11b86dbd4eafd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231, 235) preserve prefixes or suffixes; they do not insert an omitted position into an arbitrary reduced subword. IsReduced itself (line 81) only defines minimality. The second phrasing returned FreeGroup reductions (Basic.lean:301,436), which concern freely reduced words and do not imply this exchange-based insertion assertion. The targeted Coxeter grep found no subword/exchange/deletion declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "subword|Subword|Sublist|sublist|exchange|deletion",
+   "results": "{\"t\": \"2026-10-24T01:25:55Z\", \"tool\": \"grep\", \"query\": \"subword|Subword|Sublist|sublist|exchange|deletion\", \"sub\": \"GroupTheory/Coxeter\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231, 235) preserve prefixes or suffixes; they do not insert an omitted position into an arbitrary reduced subword. IsReduced itself (line 81) only defines minimality. The second phrasing returned FreeGroup reductions (Basic.lean:301,436), which concern freely reduced words and do not imply this exchange-based insertion assertion. The targeted Coxeter grep found no subword/exchange/deletion declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong exchange implies that a proper reduced subsequence of a reduced word has a reduced extension by one inserted generator",
+   "results": "{\"t\": \"2026-10-24T01:25:56Z\", \"tool\": \"leanfinder\", \"query\": \"Strong exchange implies that a proper reduced subsequence of a reduced word has a reduced extension by one inserted generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.inv_of_red_of_ne\", \"FreeGroup.IsReduced.infix\", \"FreeGroup.Red.Step.cons\", \"FreeGroup.Red.cons_cons\", \"FreeGroup.Red.Step.cons_left_iff\", \"FreeAddGroup.IsReduced.infix\", \"FreeGroup.IsReduced.append_overlap\", \"FreeGroup.Red.cons_nil_iff_singleton\"], \"digest\": \"925bd7354e0cc07b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231, 235) preserve prefixes or suffixes; they do not insert an omitted position into an arbitrary reduced subword. IsReduced itself (line 81) only defines minimality. The second phrasing returned FreeGroup reductions (Basic.lean:301,436), which concern freely reduced words and do not imply this exchange-based insertion assertion. The targeted Coxeter grep found no subword/exchange/deletion declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem IsReduced\\.(take|drop|infix)|theorem inv_of_red_of_ne",
+   "results": "{\"t\": \"2026-10-24T01:29:56Z\", \"tool\": \"grep\", \"query\": \"theorem IsReduced\\\\.(take|drop|infix)|theorem inv_of_red_of_ne\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\"], \"digest\": \"b91168bb2e8891e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source locations confirmed for the prefix/suffix lemmas (Length.lean:231,235) and the free-group hits (Basic.lean:301,436); none is a one-letter extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a real linear group generated by involutions with the strong exchange property, a proper reduced subword of a fixed reduced word can be extended by inserting one letter",
+   "results": "{\"t\": \"2026-10-24T01:35:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a real linear group generated by involutions with the strong exchange property, a proper reduced subword of a fixed reduced word can be extended by inserting one letter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.wordProd_concat\", \"CoxeterSystem.leftInvSeq_concat\", \"FreeGroup.startsWith_mk_mul\", \"CoxeterSystem.wordProd_mul_getD_rightInvSeq\", \"CoxeterSystem.wordProd_cons\", \"CoxeterSystem.alternatingWord_succ\", \"CoxeterSystem.IsReduced.drop\", \"CoxeterSystem.getD_rightInvSeq\"], \"digest\": \"12bf8df7223c4d0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the final real-linear subgroup phrasing returns word-product identities, inversion-sequence formulas and IsReduced.drop; none guarantees an omitted position giving a reduced one-letter extension. wordProd_mul_getD_rightInvSeq is the deletion identity already read at Inversion.lean:349."
+  },
+  {
+   "tool": "grep",
+   "query": "subword|Subword|exchange|deletion|IsReduced",
+   "results": "{\"t\": \"2026-10-24T01:58:30Z\", \"tool\": \"grep\", \"query\": \"subword|Subword|exchange|deletion|IsReduced\", \"sub\": \"GroupTheory/Coxeter\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\"], \"digest\": \"0b6c95f3b8d465da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231,235) retain prefixes or suffixes, and exists_isReduced (line 85) supplies an arbitrary reduced word. FreeGroup.IsReduced.infix (Mathlib/GroupTheory/FreeGroup/Basic.lean:436) concerns freely reduced words; FreeGroup.Red.inv_of_red_of_ne (line 301) concerns free-group reductions. CoxeterSystem.wordProd_mul_getD_rightInvSeq (Mathlib/GroupTheory/Coxeter/Inversion.lean:349) is a deletion identity, not existence of a reduced insertion. None states this extension assertion or specializes to it in one line. The targeted subword/exchange/deletion grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CoxeterSystem.IsReduced",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"loogle\", \"query\": \"CoxeterSystem.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CoxeterSystem.IsReduced\", \"CoxeterSystem.IsReduced.reverse\", \"CoxeterSystem.isReduced_reverse_iff\", \"CoxeterSystem.IsReduced.drop\", \"CoxeterSystem.IsReduced.take\", \"CoxeterSystem.exists_isReduced\", \"CoxeterSystem.IsReduced.eq\", \"CoxeterSystem.not_isReduced_alternatingWord\"], \"digest\": \"e17967659d26ce43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231,235) retain prefixes or suffixes, and exists_isReduced (line 85) supplies an arbitrary reduced word. FreeGroup.IsReduced.infix (Mathlib/GroupTheory/FreeGroup/Basic.lean:436) concerns freely reduced words; FreeGroup.Red.inv_of_red_of_ne (line 301) concerns free-group reductions. CoxeterSystem.wordProd_mul_getD_rightInvSeq (Mathlib/GroupTheory/Coxeter/Inversion.lean:349) is a deletion identity, not existence of a reduced insertion. None states this extension assertion or specializes to it in one line. The targeted subword/exchange/deletion grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced subword of a reduced Coxeter word admits a reduced extension by one additional position",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"leansearch\", \"query\": \"A reduced subword of a reduced Coxeter word admits a reduced extension by one additional position\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAddGroup.IsReduced.infix\", \"CoxeterSystem.IsReduced.take\", \"CoxeterSystem.IsReduced.drop\", \"FreeGroup.IsReduced.infix\", \"CoxeterSystem.wordProd_concat\", \"CoxeterSystem.exists_reduced_word\", \"FreeGroup.IsReduced.of_forall_not_step\", \"CoxeterSystem.IsReduced.reverse\"], \"digest\": \"531880b26b50fd1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231,235) retain prefixes or suffixes, and exists_isReduced (line 85) supplies an arbitrary reduced word. FreeGroup.IsReduced.infix (Mathlib/GroupTheory/FreeGroup/Basic.lean:436) concerns freely reduced words; FreeGroup.Red.inv_of_red_of_ne (line 301) concerns free-group reductions. CoxeterSystem.wordProd_mul_getD_rightInvSeq (Mathlib/GroupTheory/Coxeter/Inversion.lean:349) is a deletion identity, not existence of a reduced insertion. None states this extension assertion or specializes to it in one line. The targeted subword/exchange/deletion grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a group generated by involutions satisfying strong exchange, a proper reduced subword of a reduced word can be enlarged by one inserted letter",
+   "results": "{\"t\": \"2026-10-24T01:58:35Z\", \"tool\": \"leanfinder\", \"query\": \"In a group generated by involutions satisfying strong exchange, a proper reduced subword of a reduced word can be enlarged by one inserted letter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.inv_of_red_of_ne\", \"FreeGroup.IsReduced.infix\", \"CoxeterSystem.IsReduced.take\", \"CoxeterSystem.IsReduced.drop\", \"FreeGroup.startsWith_mk_mul\", \"CoxeterSystem.not_isReduced_alternatingWord\", \"CoxeterSystem.exists_reduced_word\", \"CoxeterSystem.wordProd_concat\"], \"digest\": \"44bc7602a2bd8358\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231,235) retain prefixes or suffixes, and exists_isReduced (line 85) supplies an arbitrary reduced word. FreeGroup.IsReduced.infix (Mathlib/GroupTheory/FreeGroup/Basic.lean:436) concerns freely reduced words; FreeGroup.Red.inv_of_red_of_ne (line 301) concerns free-group reductions. CoxeterSystem.wordProd_mul_getD_rightInvSeq (Mathlib/GroupTheory/Coxeter/Inversion.lean:349) is a deletion identity, not existence of a reduced insertion. None states this extension assertion or specializes to it in one line. The targeted subword/exchange/deletion grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "subword|Subword|Sublist|sublist|exchange|deletion",
+   "results": "{\"t\": \"2026-10-24T01:59:21Z\", \"tool\": \"grep\", \"query\": \"subword|Subword|Sublist|sublist|exchange|deletion\", \"sub\": \"GroupTheory/Coxeter\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231,235) retain prefixes or suffixes, and exists_isReduced (line 85) supplies an arbitrary reduced word. FreeGroup.IsReduced.infix (Mathlib/GroupTheory/FreeGroup/Basic.lean:436) concerns freely reduced words; FreeGroup.Red.inv_of_red_of_ne (line 301) concerns free-group reductions. CoxeterSystem.wordProd_mul_getD_rightInvSeq (Mathlib/GroupTheory/Coxeter/Inversion.lean:349) is a deletion identity, not existence of a reduced insertion. None states this extension assertion or specializes to it in one line. The targeted subword/exchange/deletion grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong exchange for involutive generators: choose a reduced subword minimizing its largest omitted position; inserting that position preserves minimal word length",
+   "results": "{\"t\": \"2026-10-24T01:59:24Z\", \"tool\": \"leanfinder\", \"query\": \"Strong exchange for involutive generators: choose a reduced subword minimizing its largest omitted position; inserting that position preserves minimal word length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.exists_reduced_word\", \"CoxeterSystem.length_simple_mul\", \"CoxeterSystem.length_mul_simple\", \"CoxeterSystem.wordProd_mul_getD_rightInvSeq\", \"CoxeterSystem.IsReduced\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.not_isReduced_alternatingWord\", \"CoxeterSystem.IsLeftInversion\"], \"digest\": \"11197bdaa3be38a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CoxeterSystem.IsReduced.take and .drop (Mathlib/GroupTheory/Coxeter/Length.lean:231,235) retain prefixes or suffixes, and exists_isReduced (line 85) supplies an arbitrary reduced word. FreeGroup.IsReduced.infix (Mathlib/GroupTheory/FreeGroup/Basic.lean:436) concerns freely reduced words; FreeGroup.Red.inv_of_red_of_ne (line 301) concerns free-group reductions. CoxeterSystem.wordProd_mul_getD_rightInvSeq (Mathlib/GroupTheory/Coxeter/Inversion.lean:349) is a deletion identity, not existence of a reduced insertion. None states this extension assertion or specializes to it in one line. The targeted subword/exchange/deletion grep returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-subword-reflection-chains",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Geometry used before both characteristic cases: projectivity/smoothness and ampleness of M_(lambda+rho) and M_(lambda+2rho). Fundamental-weight divisor calculation used to construct affine nonvanishing opens. Supporting input: Opposite Schubert divisors form the degree-dual Picard basis. Supporting Bruhat closure order and complementary tangent spaces of the ordinary and opposite cells, before the Picard argument. Supporting finite-root-system opposition of subword containment, used to translate ordinary closures to opposite closures. Combinatorial prerequisite for opposition: replace reduced-subword containment by a finite increasing chain of right root reflections; this is used before reversing the chain. Local combinatorial input: the maximal-omitted-position insertion argument of Bjorner--Brenti Lemma 2.2.1, used to increase a proper reduced subword by exactly one letter.",
+   "via": [
+    "lem-sfb-root-subword-reflection-chains",
+    "lem-sfb-longest-subword-order-duality",
+    "lem-sfb-schubert-closure-cell-geometry",
+    "lem-sfb-opposite-schubert-picard-basis",
+    "lem-sfb-fundamental-flag-boundary-sections",
+    "lem-sfb-strict-dominant-flag-line-ample",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-exchange-reduced-subword-extension",
+  "worker": "stage1",
+  "summary": "Q08 preserved the statement and its sole statement dependency. Read the online source proof and wrote the minimum-last-omission argument with both deletion cases and all empty cases explicit. Every step is elementary relative to the displayed strong-exchange hypothesis; no new nodes or proof dependencies are needed. Checked the project Lean for an attachment, searched the whole blueprint and DAG, read the Mathlib candidates, and recorded six fresh searches. Finite permutation models check every minimizing choice in S1--S4 and I2(4), I2(5), I2(6).",
+  "blueprint": "Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md, especially (3). Retains the inherited alteration/moduli/flag-geometry prerequisite chain at the exchange insertion argument used by lem-sfb-root-subword-reflection-chains step 7. blueprint_refs.py ancestor reports null; the inherited non-unspecified from.place and via are retained. Whole-blueprint searches for subword, strong exchange and reduced word find no equivalent imported node. This is not a unit key node; no realized fields change."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-e8a78de53",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e8a78de53 (reviewer sub-agent of L); spot-checked: I read the whole delivery and it holds; no fixes written. Shape: one commit touching only the item and its report; statement and stmt_deps byte-identical to live; live and side-live still show the item unsplit, so no parallel group superseded it. Hypotheses: the item's abstract right strong-exchange setting (≤ form, any word, G a subgroup of GL_R(V) generated by involutions S, T = conjugates of S) is exactly what lem-sfb-root-subword-reflection-chains steps 1/3/4 supply, so it is satisfiable and not weakened. Proof: six elementary steps with no citations. Step 1 picks the reduced subword I with the smallest last omitted position r. Step 2: t = B^{-1} b_r B is in T and ut = A b_r B. Step 3 applies exchange to the selected word and gets a deleted position p ≠ r; m = 0 is excluded by the n ≥ 1 clause. Step 4, p > r: cancelling gives v = PCD with q−2 letters, contradicting reducedness. Step 5, p < r: I' = (I∖{p})∪{r} represents u and every omitted position of I' is below r, contradicting minimality. Step 6 handles the edge cases q = 0 and S empty. Small cases I worked myself: S3 with v = s1s2s1, u = s1 (the minimal choice I = {3}, r = 2 gives the reduced word s2s1, while I = {1}, r = 3 shows why minimality is needed), and u = 1, v = s1s2. Source: Björner–Brenti Lemma 2.2.1 pp.33–34 is not in literature/ (worker WANTED, proof_origin by: agent). I did not see the source text; the proof was checked on its own. No SGA cited. Duplicate search over the DAG with rg -L (sibling nodes root-sign-word-deletion, longest-subword-order-duality, root-length-inversion-count, schubert-closure-cell-geometry, bott-samelson-gallery-geometry) and a grep of the project lean/ tree found no node or declaration stating this insertion; citing the parent would be circular. Blueprint from.node is null, as the ancestor lookup returns, with the inherited place and via. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.StrongExchangeSubwordExtension",
+  "declaration": "Subgroup.exists_reduced_subword_extension_of_strong_exchange",
+  "file": "lean/Sheaf/GroupTheory/StrongExchangeSubwordExtension.lean",
+  "statement": "theorem exists_reduced_subword_extension_of_strong_exchange (V : Type u) [AddCommGroup V] [Module ℝ V] [FiniteDimensional ℝ V] (G : Subgroup (LinearMap.GeneralLinearGroup ℝ V)) (S : Set G) (hS : ∀ s ∈ S, s ≠ 1 ∧ s ^ 2 = 1) (ℓ : G → ℕ) (hlength : ∀ g : G, IsLeast {n : ℕ | ∃ a : List S, (a.map Subtype.val).prod = g ∧ a.length = n} (ℓ g)) (hexchange : ∀ (a : List S) (t : G), (∃ (h : G) (s : S), t = h⁻¹ * s.val * h) → ℓ ((a.map Subtype.val).prod * t) ≤ ℓ (a.map Subtype.val).prod → 1 ≤ a.length ∧ ∃ j : Fin a.length, (a.map Subtype.val).prod * t = ((a.eraseIdx j.val).map Subtype.val).prod) (b : List S) (u v : G) (hv : (b.map Subtype.val).prod = v) (hb : ℓ v = b.length) (huv : u ≠ v) (hsub : ∃ a : List S, a.Sublist b ∧ (a.map Subtype.val).prod = u ∧ a.length = ℓ u) : ∃ (I : Finset (Fin b.length)) (r : Fin b.length), r ∉ I ∧ ((I.sort (· ≤ ·)).map (fun i ↦ (b.get i).val)).prod = u ∧ I.card = ℓ u ∧ ℓ ((((insert r I).sort (· ≤ ·)).map (fun i ↦ (b.get i).val)).prod) = (insert r I).card ∧ (insert r I).card = ℓ u + 1",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-582955ca2",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Shape: only the item node's lean field, the module and the report changed; statement, stmt_deps and proof are byte-identical to side-live, which has no binding (no supersession). lean.statement is verbatim in the file, the proof is sorry only, no defs or axioms, autoImplicit off, universe u explicit, source and blueprint docstrings present, report has both sections. Clause check: V finite-dimensional real space with no Nontrivial; G is a Subgroup of LinearMap.GeneralLinearGroup ℝ V; hS gives s≠1 and s^2=1; hlength via IsLeast encodes generation and least length, so ℓ is uniquely specified, not arbitrary; T is ∃ h s, t = h⁻¹ s h; hexchange covers all lists with non-strict ≤, gives 1 ≤ length and an eraseIdx deletion over Fin; hb gives reducedness of b; hsub gives a Sublist with product u and length ℓ u; the conclusion gives I : Finset (Fin b.length), r ∉ I, I.sort (≤) product u, card = ℓ u, insert r I reduced, card = ℓ u + 1. Math: minimal-last-omission proof checked in the p>r and p<r cases; hypotheses satisfiable for reflection groups; edge cases (b=[], S=∅, empty selection) vacuous or fine; S3 example checked. Advisories: the last conjunct is redundant; the stmt_dep is the dimension node while the Lean uses only FiniteDimensional (stage-1 choice). No compile run (no FIX)."
+ }
+}

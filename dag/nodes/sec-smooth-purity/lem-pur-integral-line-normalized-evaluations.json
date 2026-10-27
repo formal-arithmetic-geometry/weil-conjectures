@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-integral-line-normalized-evaluations",
+ "kind": "statement",
+ "title": "Normalized ordinary derived evaluations for opposite signed integral lines",
+ "statement": "Let $\\ell$ be prime, let $E$ be a finite-dimensional field extension of $\\mathbb Q_\\ell$, and let $X$ be a scheme. Write $R$ for the completed integral coefficient sheaf on the small pro-etale site of $X$, and let $L$ be an $R$-module sheaf locally free of rank one. Use the signed powers, ordinary tensor functors $T_m$, sheaf evaluations and representative formula of [def-pur-integral-line-reduction-data]. Suppose a family $e$ of opposite-line evaluation isomorphisms satisfies EvaluationFormula: multiplication at exponent zero and functional evaluation for positive and negative exponents. For every integer $m$, there exist natural isomorphisms $v:T_m\\mathbin{\\cdot}T_{-m}\\cong1$ and $w:T_{-m}\\mathbin{\\cdot}T_m\\cong1$ on the entire unbounded derived category of $R$-modules, where functors are composed in their displayed order. They satisfy DerivedEvaluationFormula for $e(m)$ and reverseEvaluation$(e,m)$ respectively: on every admissible K-flat flat-term representative, their components are the localized chain cancellations $((x\\otimes y)\\otimes z)\\mapsto e(y,z)x$ through the recorded representative comparisons. For every unbounded derived object $K$, $T_m(v_K^{-1})\\,;\\,w_{T_m(K)}=1_{T_m(K)}$. There are no completeness, constructibility, residue-characteristic or finite-reduction hypotheses or conclusions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final two sentences: flat invertible line tensor and opposite-twist cancellation",
+  "also": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU: derived tensor product on ringed sites"
+   },
+   {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F: exact functors on unbounded derived categories"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-integral-line-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the chain cancellation theorem to the given normalized sheaf evaluations. It gives natural isomorphisms a and b between the two composite total-tensor functors on all complexes and the identity, their generator formulas and the first chain triangle identity. No localization or choice of a derived tensor model occurs in this step.",
+   "uses": [
+    "lem-pur-integral-line-chain-evaluations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Signed powers are locally free of rank one. The line-unbounded theorem supplies K-flatness of their degree-zero complexes. Apply ringedTensorComparison_extension to the recorded closed tensor structure and its CoefficientTensorModels. Specializing the right factor to each degree-zero line gives natural isomorphisms c: Q followed by ordinary(m) ≅ chainTensor(m) followed by Q on every complex. The both-K-flat normalization and the definition of integralLineRepresentativeIso identify c on each good representative with the inverse of that recorded representative comparison.",
+   "uses": [
+    "lem-weil-signed-line-tensor-equivalence",
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-sfb-ringed-tensor-comparison-extension",
+    "def-pur-integral-line-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend a and b through Q with c and d by the existing localizedCancellation construction in LineUnboundedDerivedTensor. Its component formula is G(c) followed by d followed by Q(a). The comparison for an iterated representative is d inverse followed by G(c inverse), directly from the definition of integralLineRepresentativeIso and functoriality of the recorded tensor. Cancelling these isomorphisms gives the representative equation Q(a), respectively Q(b); their chain generator formulas prove the two DerivedEvaluationFormula clauses. The existing localizedCancellation_triangles lemma descends the first chain triangle by localization faithfulness, yielding the required equation on every derived object.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-pur-integral-line-reduction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-line-chain-evaluations",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "def-pur-integral-line-reduction-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final two sentences. S9: explicit recorded-model comparison and localization of the chain cancellation, retaining the chain-only step as a separate obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The evaluation between opposite tensor powers of a locally free rank one sheaf induces inverse equivalences on the unbounded derived category, with the same evaluation on K-flat representatives",
+   "results": "CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedInverse; HomologicalComplex.opEquivalence_inverse; CategoryTheory.MonoidalOpposite.tensorRightUnmopIso. None includes the recorded sheaf tensor model or representative equation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use existing line tensor and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso",
+   "results": "Remote Loogle reports unknown identifier. Local Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean contains the exact-functor localization API; the project supplies normalized tensor comparisons.",
+   "date": "2026-10-26",
+   "verdict": "Generic exact-functor natural isomorphisms do not state the required representative formula."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedEvaluationFormula|integral_line_normalized_evaluations in Mathlib, Sheaf and WeilConjectures; blueprint_refs.py search line evaluation",
+   "results": "Only IntegralLineReductionDefinitions defines DerivedEvaluationFormula and uses it in Restrictions. No Mathlib or adopted-source declaration. No blueprint node matches line evaluation; LineUnboundedDerivedTensor states the generic dual-line result in another tensor presentation. The sheaf-level LineEvaluationInversePair has proved normalized cancellations, but no derived representative normalization; it is a substep already encapsulated by LineUnboundedDerivedTensor.",
+   "date": "2026-10-26",
+   "verdict": "The model-specific descent is a strict intermediate step, not a duplicate completeness/restriction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineRestrictions",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final derived-tensor sentence: opposite signed-line cancellations, before restriction and completion",
+   "via": [
+    "lem-pur-integral-line-restrictions",
+    "lem-pur-integral-line-reduction-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineNormalizedEvaluations",
+  "file": "lean/Sheaf/Paper/IntegralLineNormalizedEvaluations.lean",
+  "declaration": "WeilConjectures.IntegralLineReduction.integral_line_normalized_evaluations",
+  "statement": "theorem integral_line_normalized_evaluations\n    (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]\n    (e : Evaluations l E X L) (he : EvaluationFormula l E X L e) (m : ℤ) :\n    ∃ (v : ordinary l E X L m ⋙ ordinary l E X L (-m) ≅ 𝟭 (D.{u, u} l E X none))\n      (w : ordinary l E X L (-m) ⋙ ordinary l E X L m ≅ 𝟭 (D.{u, u} l E X none)),\n      DerivedEvaluationFormula l E X L m (-m) (e m) v ∧\n      DerivedEvaluationFormula l E X L (-m) m (reverseEvaluation l E X L e m) w ∧\n      ∀ K : D.{u, u} l E X none,\n        (ordinary l E X L m).map (v.inv.app K) ≫\n          w.hom.app ((ordinary l E X L m).obj K) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T204604-L-2979143",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261026T002712-L-109472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,286 @@
+{
+ "id": "lem-pur-constant-purity-frobenius-square",
+ "kind": "statement",
+ "title": "Canonical constant Tate structure and the rational purity Frobenius square",
+ "statement": "Let $k_0$ be a finite field, $k$ an algebraic closure, $\\ell\\ne\\operatorname{char}(k_0)$ a prime and $\\Lambda=\\overline{\\mathbf Q}_\\ell$. Use the rational common-stage bounded constructible coefficient categories and operations of [def-pur-conventions], and the Weil fixed-pair categories of [def-weil-weil-sheaf-complex]. Let $X_0$ be separated and of finite type over $k_0$, with structure morphism $a_0:X_0\\to\\operatorname{Spec}k_0$ smooth of relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Put $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$ and $a:X\\to s$. Let $g_X,g_s$ be geometric Frobenius, $Q=Lg_X^*$, $P=Lg_s^*$, $F=Ra_!$, $G=Ra^!$, and $H(K)=La^*K(d)[2d]$. Let $\\beta:PF\\xrightarrow{\\sim}FQ$ be canonical compact-support exchange and $e:QG\\xrightarrow{\\sim}GP$ its inverse's right adjunction mate [def-weil-pbc-adjunction-mate]. Let $\\gamma_K:H(K)\\xrightarrow{\\sim}G(K)$ be the canonical rational purity map of [thm-pur-rational-and-qbar-purity]. Let $b_K:QH(K)\\xrightarrow{\\sim}H(PK)$ be pullback composition for $ag_X=g_sa$, followed by the canonical tensor, Tate-line and shift comparisons, using [def-weil-frobenius-coefficient-twists]. Write $(\\Lambda_s,\\theta_0)$ and $(\\Lambda_X,\\theta_X)$ for the canonical constant pairs of [def-weil-constant-weil-structure], and write $\\theta_{H,\\mathrm{can}}$ for the structure on $\\Lambda_X(d)[2d]$ obtained by the canonical Tate twist and the pullback-shift comparison. Then the usual identification $La^*\\Lambda_s\\cong\\Lambda_X$ carries the pullback of $\\theta_0$ to $\\theta_X$, and under its twisted and shifted identification $H(\\Lambda_s)\\cong\\Lambda_X(d)[2d]$ one has\n$$\\theta_{H,\\mathrm{can}}=H(\\theta_0)\\circ b_{\\Lambda_s},$$\n$$G(\\theta_0)\\circ e_{\\Lambda_s}\\circ Q(\\gamma_{\\Lambda_s})=\\gamma_{\\Lambda_s}\\circ\\theta_{H,\\mathrm{can}}.$$\nThese are identities in the common-stage category and use the rational Frobenius isomorphism, without requiring a Frobenius-stable integral lattice. The purity isomorphism here is exactly the inverse of the geometric dualizing identification of [cor-pur-adic-and-rational-smooth-dualizing-complexes].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "The smooth dualizing formula used by lem-a1-local-boundary-duality: geometric purity at the constant object and identification of its canonical constant, Tate and shifted Frobenius data (parent old step 1 and the constant-comparison/naturality portions of old step 3); expanded categorical/Weil argument of the parent split, old steps 1-3; prop-weil-operations.proof.md, sentences 1 and 3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-weil-sheaf-complex",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adjunction-mate",
+  "thm-pur-rational-and-qbar-purity",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-constant-weil-structure",
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-operation-exchange-coefficient-descent",
+  "lem-pur-common-constant-unit-frobenius"
+ ],
+ "proof": [
+  {
+   "text": "Auxiliary exchange construction: the two rationalExchange_endpoints equalities follow by explicitly unfolding the retained rational source/target definitions, then by the compact branch of modelRationalFunctor, the prescribed rationalLeft endpoints and geometric Frobenius pullback. Give rationalBeta and betaAtStage their explicit functor-object endpoint types and elaborate the five conjugation factors separately. Project the same coefficient system with explicit geometric instances. Before common-stage inclusion, transport the rational arrow along the definitional equality of the two inherited rational-stage category structures, proved by unfolding their definitions. This preserves the original conjugation factors and their normalization while limiting unfolding of constructed pullbacks and coefficient structures. For exceptionalMate_isIso, [lem-pod-semilinear-field-operation-lifts] supplies the source and target common-stage Frobenius equivalences. Apply [lem-weil-mate-iso-along-equivalences] to the inverse of the recorded beta and the prescribed exceptional adjunction twice. Its resulting morphism is definitionally exceptionalMate.",
+   "uses": [
+    "lem-pod-semilinear-field-operation-lifts",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify each rationalBeta with RationalWeilPurity.betaComponent using the rational compactification-exchange normalization. The generic transport_hom_of_heq lemma cancels its two functor endpoint transports. At every finite stage this identifies betaAtStage with the already constructed CommonWeilPurity.beta component. Use that natural isomorphism as witness for beta_existsUnique. For uniqueness, every common-stage object is literally the inclusion of its own stage object; Iso.ext and NatTrans.ext reduce the claim to the two component normalization equations.",
+   "uses": [
+    "lem-pur-frobenius-compact-rational-normalization",
+    "lem-pur-rational-weil-naturality-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized unit constructors are reexported unchanged from CommonConstantUnitFrobenius. Apply commonUnit_frobenius at pointMap to obtain the first identity; all geometric instances are inherited exactly as in Square.",
+   "uses": [
+    "lem-pur-common-constant-unit-frobenius",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the common-stage natural tensor comparison of derivedPullbackTensorIso. Its naturality at the normalized unit identification, followed by bifunctoriality of tensor and the first identity, proves that canonicalSourceTheta equals sourceSquare followed by H(theta₀). The fixed shifted Tate-line map is retained in both composites.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-weil-frobenius-coefficient-twists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the common-stage clause of rational_weil_purity_naturality_mate. commonFrobeniusSquare_eq identifies its b component with sourceSquare, and beta_existsUnique plus component extensionality identifies the chosen beta with CommonWeilPurity.beta. The canonical purity maps are definitionally the same commonIso.",
+   "uses": [
+    "lem-pur-rational-weil-naturality-mate",
+    "lem-pur-common-frobenius-square-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The two counit equations identify the purity Frobenius conjugate with mateEquiv of beta.inv by injectivity of the inverse adjunction hom-equivalence and Mathlib mateEquiv_counit. Purity naturality at theta₀ and cancellation of Q(gamma) with its inverse give Q(gamma) followed by e followed by G(theta₀) equals b followed by H(theta₀) followed by gamma. Substitute the second identity.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-rational-weil-naturality-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-semilinear-field-operation-lifts",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-pur-frobenius-compact-rational-normalization",
+  "lem-pur-rational-weil-naturality-mate",
+  "lem-pur-common-constant-unit-frobenius",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-pur-common-frobenius-square-normalization",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Steps 1-2 for the constant pair; normalized unit coherence, tensor naturality and the common-stage purity counit equation identify the specified adjunction mate.",
+  "auxiliary_repair": {
+   "by": "J1",
+   "date": "2026-10-26",
+   "note": "Restored the quarantined module and proved four auxiliary holes using existing declarations. The six-step proof plan for the remaining main theorem is retained; beta_existsUnique is also still open."
+  },
+  "exchange_reduction": {
+   "by": "B3",
+   "date": "2026-10-27",
+   "note": "Reduce beta_existsUnique to the rational proper/open normalization, with complete endpoint-transport and common-stage extensionality glue. The main purity-square proof remains open."
+  },
+  "constant_square_reduction": {
+   "by": "C4",
+   "date": "2026-10-27",
+   "note": "Complete tensor and adjunction-mate glue from generalized rational purity naturality; isolate constant-unit and compositor normalization."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth scheme over a finite field geometric purity identifies the constant Tate twist with exceptional pullback and intertwines their Frobenius structures via the adjunction mate",
+   "results": "Returned: CategoryTheory.frobeniusMorphism_mate, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, CategoryTheory.frobeniusMorphism, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Spec.faithful, AlgebraicGeometry.Spec.full, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. Read the returned signatures: generic adjoint uniqueness/lifting and ordinary scheme-module adjunctions (or Witt-vector isocrystals), not the stated fixed-pair comparison or geometric purity square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical shifted Tate twisted constant sheaf on a smooth finite field scheme has the same Frobenius structure as geometric purity transported by the exceptional adjunction mate",
+   "results": "Returned: AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Read the returned signatures: generic adjoint uniqueness/lifting and ordinary scheme-module adjunctions (or Witt-vector isocrystals), not the stated fixed-pair comparison or geometric purity square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateTwist\"",
+   "results": "Returned: no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|upperShriek|TateTwist|tateTwist",
+   "results": "Returned: no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|upperShriek|TateTwist|tateTwist",
+   "results": "Returned . Generic sheaf-module pullback and adjunction results do not state rational Tate purity or its canonical Frobenius square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of the constant Tate sheaf on a smooth scheme preserves its canonical Frobenius structure under purity",
+   "results": "Returned TopCat.Sheaf.pullback, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.instIsLeftAdjointPullback. Generic sheaf-module pullback and adjunction results do not state rational Tate purity or its canonical Frobenius square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateTwist\"",
+   "results": "Returned . Generic sheaf-module pullback and adjunction results do not state rational Tate purity or its canonical Frobenius square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical constant Tate sheaf smooth purity isomorphism commutes with geometric Frobenius and exceptional adjunction mate",
+   "results": "Returned SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv. Generic sheaf-module pullback and adjunction results do not state rational Tate purity or its canonical Frobenius square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit|pullbackObjFreeIso_hom_naturality|conjugateEquiv_pullbackComp_inv",
+   "results": "Returned Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean. Generic sheaf-module pullback and adjunction results do not state rational Tate purity or its canonical Frobenius square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-smooth-dualizing-complex",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The smooth dualizing formula used by lem-a1-local-boundary-duality: geometric purity at the constant object and identification of its canonical constant, Tate and shifted Frobenius data (parent old step 1 and the constant-comparison/naturality portions of old step 3)",
+   "via": [
+    "lem-pur-weil-smooth-dualizing-complex"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-constant-purity-frobenius-square",
+  "worker": "stage1",
+  "summary": "No new nodes: proved the canonical constant and Tate comparisons from coherent unit pullbacks, then used the existing strict-data purity/counit equivariance theorem and explicitly cancelled the constant Frobenius to identify its purity-defined exceptional exchange with the adjunction mate. Checked the completed unit supplies the strict input; no arbitrary rational Weil lattice is assumed.",
+  "blueprint": "The source dualizing-corollary proof first sentence (purity at the coefficient unit), together with prop-weil-operations.proof.md sentences 1 and 3; the inherited parent proof constant-comparison and Frobenius-naturality clauses are expanded as Steps 1-6.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic permanence under the geometric field extension; it checks the purity domain."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic smooth base change with unchanged dimension."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Canonical constant-section maps compose for underlying scheme morphisms."
+   },
+   {
+    "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+    "why": "Uses the existing purity and exceptional-counit equivariance statements as generic tools at the canonical constant input; no proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pur-proetale-constant-ring-composition",
+  "thm-pur-weil-equivariance-of-purity-and-trace"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-851d84f1f",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-851d84f1f (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, plus every cited statement and the main-20261015 sources (thm-pur-weil-equivariance-of-purity-and-trace proof Steps 1-2; the dualizing corollary's proof). The item statement is unchanged from the Q80 snapshot, and its base proof was empty, so no re-split note applies. There are no new nodes. Step 1: (Λ_s,θ_0) is a strict datum, because def-weil-constant-weil-structure builds it from the compatible c_n and lem-pur-completed-unit-pullback-tower gives ctf, Tor [0,0] and the unit system map. So the lattice hypothesis of the purity-equivariance theorem holds for this canonical input, and no arbitrary rational pair is used. Step 2: two applications of lem-pur-proetale-constant-ring-composition, then the completed level via tower-substitution, then the rational and common-stage images; correct. Step 3: naturality and unit compatibility of μ turn H(θ_0)b into (θ_X⊗τ_d)μ shifted by 2d, the twist formula, with no scalar. Step 4: the theorem's statement gives E_K=γ b(Qγ)^{-1}, the purity square, and the counit clause through compact-support transport Ex_!, which is the item's β; the theorem's field-stage γ is the one of thm-pur-rational-and-qbar-purity, the same as the item's. Step 5: I checked the mate setup (α=β^{-1}, transpose P(ε)β^{-1}), the naturality of ε at θ_0 and the cancellation; this proves E_K=e_K. Step 6: the corollary inverts the same transported purity map. Edge cases d=0, X_0 empty and X_0=Spec k_0 hold. Batch 5: I recomputed the closure from both targets, without expanding the trf/pod chapters, sk-thm-trace-transport or nt-assume; the item's proof adds 0 nodes. The flagged lem-pod-derived-exact-square-composition (abstract derived pasting) and lem-trf-site-functorial-flat-resolution (existence of flat resolutions) are generic and already in the base closure. The 4 declared tool uses are generic and accepted; no SGA. Duplicate search: lem-pur-rational-weil-naturality-mate covers Steps 4-5 for general u but not the constant/Tate comparison; the strict-theorem route is valid here, so this is not a fault. Maintainer advisory: the purity-equivariance theorem's statement identifies the tower γ family and the thm-pur-rational γ family implicitly; the explicit comparison is lem-pur-tower-trace-purity-comparison."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantPurityFrobeniusSquare",
+  "declaration": "WeilConjectures.ConstantPurityFrobenius.constant_purity_frobenius_square",
+  "declarations": [
+   "WeilConjectures.ConstantPurityFrobenius.sourceFrobenius",
+   "WeilConjectures.ConstantPurityFrobenius.targetFrobenius",
+   "WeilConjectures.ConstantPurityFrobenius.operation",
+   "WeilConjectures.ConstantPurityFrobenius.rationalExchange_endpoints",
+   "WeilConjectures.ConstantPurityFrobenius.rationalBeta",
+   "WeilConjectures.ConstantPurityFrobenius.betaAtStage",
+   "WeilConjectures.ConstantPurityFrobenius.beta_existsUnique",
+   "WeilConjectures.ConstantPurityFrobenius.beta",
+   "WeilConjectures.ConstantPurityFrobenius.exceptionalMate",
+   "WeilConjectures.ConstantPurityFrobenius.exceptionalMate_isIso",
+   "WeilConjectures.ConstantPurityFrobenius.exceptionalIso",
+   "WeilConjectures.ConstantPurityFrobenius.shiftedLine",
+   "WeilConjectures.ConstantPurityFrobenius.shiftedLineTheta",
+   "WeilConjectures.ConstantPurityFrobenius.source",
+   "WeilConjectures.ConstantPurityFrobenius.sourceSquare",
+   "WeilConjectures.ConstantPurityFrobenius.sourceUnit",
+   "WeilConjectures.ConstantPurityFrobenius.canonicalSourceTheta",
+   "WeilConjectures.ConstantPurityFrobenius.point",
+   "WeilConjectures.ConstantPurityFrobenius.pointMap",
+   "WeilConjectures.ConstantPurityFrobenius.pointIso",
+   "WeilConjectures.ConstantPurityFrobenius.systems",
+   "WeilConjectures.ConstantPurityFrobenius.Square",
+   "WeilConjectures.ConstantPurityFrobenius.constant_purity_frobenius_square"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantPurityFrobeniusSquare.lean",
+  "statement": "theorem constant_purity_frobenius_square (d : ℕ) [SmoothOfRelativeDimension d X₀.hom] : Square P X₀ c₀ S d",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Square expands the three map identities using the recorded constant pairs and canonical commonIso. beta is uniquely specified by every rational proper/open exchange component; exceptionalIso has the actual inverse-exchange right adjunction mate as its hom. The canonical pullback presentation of Spec k is exhibited by pointIso. All geometric hypotheses inside systems and Square are inherited from the arithmetic source, not additional assumptions. B3 makes the geometric proof arguments of systems explicit; proof irrelevance preserves its type and all target semantics."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1378d7479",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery after b155 H2 RETURN: every PodFrobeniusExchange.fiberMap replaced by FrobeniusExchange.fiberMap D f₀ (= zlFiberMap, owned by landed def-weil-operation-exchange-coefficient-descent, which is now in stmt_deps); FrobeniusCompactSupportExchange import and theorem stmt_dep dropped. The rest is mechanical: respectTransparency false as in the owning modules, and explicit Prop instance arguments to System and commonIso (same γ). Node differs from live only in lean and stmt_deps (two landed def nodes added); statement verbatim; lines ≤96; all 6 sorrys are theorem proofs. Re-checked: hypotheses LFT/QC/separated/SmoothOfRelativeDimension d; β ∃!-pinned per stage to frobeniusRational; e = mateEquiv of β.inv (QG→GP); γ = RationalSmoothPurityCanonical.commonIso; θ₀/θ_X = constantWeil .str; the three conjuncts match the node in order; edge cases d=0, empty X₀, Spec k₀, disconnected X₀ covered. Advisory: podCommonSquarePullbackComponent (theorem lem-pod-semilinear-field-operation-lifts) and the FieldWeilShriekShiftData CommShift instances (def-zl-field-weil-shriek-shift-data) are used but not in stmt_deps; already so at b155, advisory per practice. No compile (no fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ac54",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034621-L-3666357",
+  "kind": "interface",
+  "note": "independent cc review: delivered CommonConstantUnitFrobenius/CommonFrobeniusSquareNormalization/item vs clone item (verbatim Unit…CommonUnit move, diff empty); zlPullComp vs pullbackTensorCommonComposition definitions (same integralPullbackComposition.choose); node stmt_deps vs owners of declarations in the Lean statements"
+ }
+}

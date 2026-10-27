@@ -1,0 +1,430 @@
+{
+ "id": "lem-sfb-absolute-dedekind-normalization-reduced-fibres",
+ "kind": "statement",
+ "title": "Raynaud normalization over the absolute integral closure of a Dedekind domain",
+ "statement": "Let $R$ be a Noetherian integrally closed domain of Krull dimension one [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], let $K=\\operatorname{Frac}R$, choose an algebraic closure $\\Omega/K$ [def-weil-algebraic-closure], and let $B\\subseteq\\Omega$ be the integral closure of $R$ [def-weil-pbc-integral-closure]. Let $A$ be a commutative finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra] that is flat as an $R$-module [def-weil-pbc-flat-ring-map]. Suppose $A_K=A\\otimes_RK$ is geometrically normal: for every field extension $E/K$, every prime localization of $A_K\\otimes_KE$ is an integrally closed domain. Set $A_B=A\\otimes_RB$ and $D=A_K\\otimes_K\\Omega$, with the usual tensor-product ring structures [def-weil-pbc-module-tensor-product]. The natural map $A_B\\to D$ is injective. Let $C\\subseteq D$ be the integral closure of $A_B$ in $D$. Then $C$ is a finite $A_B$-module [def-weil-finitely-generated-module], a flat finitely presented $B$-algebra, and a normal ring. The canonical map $C\\otimes_B\\Omega\\to D$ is an isomorphism. For every homomorphism $B\\to E$ to a field $E$ and every field extension $E\\subseteq E^{\\prime}$, the ring $C\\otimes_BE^{\\prime}$ is reduced, meaning it has no nonzero nilpotent elements. The zero algebra is allowed. Neither Noetherianity of $B$, semilocality or excellence of $R$, nor module-finiteness of $B/R$ is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Appendix II, Theorem 1, printed p.73 (PDF page 69, zero-based), affine form; separable means geometrically reduced fibres. C is the normalization because the generic fibre is geometrically normal. Primary scan read online https://www.numdam.org/article/MSMF_1973__33__5_0.pdf; local archive WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-integral-closure-algebraic-extension-normal], $B$ is a normal domain with fraction field $\\Omega$. Flatness of $A$ tensors the injection $B\\hookrightarrow\\Omega$ over $R$ to an injection $A_B\\hookrightarrow A\\otimes_R\\Omega=D$. Tensor associativity identifies these maps and identifies $(A_B)\\otimes_B\\Omega$ with $D$. Base-changing a finite polynomial presentation of $A$ gives one of $A_B$ over $B$. Flatness also base-changes directly: for an injection of $B$-modules, tensoring with $A_B$ is the same as tensoring the underlying $R$-modules with $A$. Thus $A_B$ is flat finitely presented over $B$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Integral closure in algebraic extensions; explicit tensor and presentation calculations"
+   }
+  },
+  {
+   "text": "For each finite intermediate field $F/K$ in $\\Omega$, let $R_F$ be the integral closure of $R$ in $F$. Every element of $B$ belongs to such a field by [lem-weil-pbc-algebraic-generators-finite-extension]; its monic equation is unchanged there. Hence $B=\\bigcup_FR_F$. By [lem-sc-integral-closure-dedekind-surjective-fibres], each $R_F$ is a Dedekind domain. Fix a prime $\\mathfrak p$ of $B$, and put $\\mathfrak p_F=\\mathfrak p\\cap R_F$. Inside $\\Omega$ we have $B_{\\mathfrak p}=\\bigcup_F(R_F)_{\\mathfrak p_F}$: each fraction has its numerator and denominator in a common finite field. Every ring in this union is a field if $\\mathfrak p_F=0$, and otherwise a DVR by [lem-sc-dedekind-localization-dvr], thus a valuation ring by [def-sc-discrete-valuation-ring]. For $0\\ne x\\in\\Omega$, choose $F$ containing $x$; either $x$ or $x^{-1}$ is in $(R_F)_{\\mathfrak p_F}$. This proves that $V=B_{\\mathfrak p}$ is a valuation ring with fraction field $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-sc-dedekind-localization-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 09GH, 09IG (lemma-integral-closure-Dedekind), 034X (lemma-characterize-Dedekind), 00PD; directed-union valuation argument"
+   }
+  },
+  {
+   "text": "The hypothesis makes $D$ normal and makes $D\\otimes_\\Omega L$ normal for every field extension $L/\\Omega$. A nilpotent in any of these rings is zero: its germ in each prime localization is zero because that localization is a domain; if the element were nonzero its annihilator would be a proper ideal, contained in a maximal ideal where the germ is nonzero. Thus $D$ is geometrically reduced. By [lem-weil-pbc-integral-closure-commutes-localization], $C\\otimes_B V$ is precisely the integral closure of $A_B\\otimes_B V$ in $D$. Apply [lem-trf-valuation-reduced-fibre-normalization] over $V$ with fraction field $\\Omega$, which is algebraically and hence separably closed. Its input algebra is flat finitely presented by the same tensor argument as Step 1. It gives $C_{\\mathfrak p}$ finite over $(A_B)_{\\mathfrak p}$, flat finitely presented over $V$, with generic fibre $D$ and reduced fibres over all algebraically closed fields. Here subscripts $\\mathfrak p$ mean localization in the base $B$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-trf-valuation-reduced-fibre-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Appendix II, Theorem 1 to Theorem 1′, printed pp.73–74; valuation input implemented by Temkin Theorem 3.5.5, Steps 3–5"
+   }
+  },
+  {
+   "text": "Keep $\\mathfrak p$ fixed. The small nonempty system $B_f$, indexed by $f\\in B\\setminus\\mathfrak p$ and enlargement of the finite set of inverted elements, has colimit $V$: fractions and their equalities give its universal property. Products combine finitely many denominators. Apply [lem-kun-fp-algebra-descent] to $C_{\\mathfrak p}$ to obtain a finitely presented $B_f$-algebra $H$ with $H\\otimes_{B_f}V\\cong C_{\\mathfrak p}$. The algebra $(A_B)_f$ is finitely presented by Step 1. By [lem-weil-pbc-colimit-category-fp-algebras], after enlarging the denominators the map $(A_B)_{\\mathfrak p}\\to C_{\\mathfrak p}$ descends to $(A_B)_f\\to H$, with exactly that base change. Every later occurrence of $H$ means this fixed model after base change.",
+   "uses": [
+    "lem-kun-fp-algebra-descent",
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00QO (finite-presentation algebra descent) and 05N9 (lemma-colimit-category-fp-algebras), applied to principal localizations"
+   }
+  },
+  {
+   "text": "Enlarge $f\\notin\\mathfrak p$ so $(A_B)_f\\to H$ is finite by [lem-weil-pbc-colimit-finite-ring-map]: $H$ is finite type over $B_f$, hence over $(A_B)_f$, and its limit map is finite by Step 3. Enlarge again so $H$ is flat over $B_f$ by [lem-weil-pbc-colimit-flat-ring-map], whose finite-presentation hypothesis is the chosen presentation of $H$. The inverse system $\\operatorname{Spec}B_g$ has limit $\\operatorname{Spec}V$ by [lem-weil-pbc-limit-affine-transition]. It consists of affine qcqs schemes with affine transitions. The affine map $\\operatorname{Spec}H\\to\\operatorname{Spec}B_f$ is of finite presentation, by its finite algebra presentation and the affine comparisons [lem-trf-affine-geometric-fibre-reduced-comparison]. Its limit has reduced geometric fibres by Step 3. Thus [lem-trf-geometrically-reduced-fibres-limit-descent] allows a further enlargement making every geometric fibre reduced. Finiteness persists by tensoring a finite spanning list, and flatness and finite presentation persist by the injection and presentation arguments of Step 1.",
+   "uses": [
+    "lem-weil-pbc-colimit-finite-ring-map",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-trf-affine-geometric-fibre-reduced-comparison",
+    "lem-trf-geometrically-reduced-fibres-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-morphisms.tex; literature/stacks-project/limits.tex",
+    "place": "Tags 07RG, 02JO(3), 01YW, 0579, 0576, 05F4; spreading on principal neighbourhoods"
+   }
+  },
+  {
+   "text": "The chosen comparison $H\\otimes_{B_f}V\\cong C_{\\mathfrak p}$ gives, after tensoring with $\\Omega$, a canonical identification $H\\otimes_{B_f}\\Omega\\cong D$ under $(A_B)_f$. Flatness of $H$ over the domain $B_f$ makes $H\\to H\\otimes_{B_f}\\Omega$ injective, by tensoring $B_f\\hookrightarrow\\Omega$. Hence view $H$ as a subring of $D$ containing $(A_B)_f$. Its finiteness over $(A_B)_f$ makes every element integral by [lem-weil-pbc-finite-algebra-is-integral], and localization of integral closure [lem-weil-pbc-integral-closure-commutes-localization] therefore gives $H\\subseteq C_f$. The normality of $B$ in Step 1 implies that $\\operatorname{Spec}B_f$ is normal: its local rings are the corresponding local rings of $B$. This base is integral and affine qcqs. Step 5 and [lem-weil-pbc-flat-ring-map-iff-flat-affine] verify every hypothesis of [lem-trf-geometrically-reduced-eta-normal] for $\\operatorname{Spec}H\\to\\operatorname{Spec}B_f$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-trf-geometrically-reduced-eta-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2, printed pp.20–21, and Theorem 3.5.5, limit argument; verification of the finite model hypotheses"
+   }
+  },
+  {
+   "text": "For $c\\in C_f$, the equality $H\\otimes_{B_f}\\Omega=D$ writes $c=h/s$ with $h\\in H$ and $0\\ne s\\in B_f$. The element $c$ satisfies a monic equation over $(A_B)_f\\subseteq H$, so $H[c]$ is finite over $H$: powers below the monic degree span. The map $\\operatorname{Spec}H[c]\\to\\operatorname{Spec}H$ is finite [def-weil-finite-integral-morphism], hence proper by [lem-weil-pbc-finite-proper]. It is an isomorphism on the generic fibre and on the open $D(s)$ since $c=h/s$. On both schemes that open is schematically dense: multiplication by $s$ is injective on the rings and all their localizations, as they are subrings of the $\\Omega$-algebra $D$ and $s$ is a unit there. This is a finite $\\eta$-modification. The conclusion of [lem-trf-geometrically-reduced-eta-normal], whose hypotheses were verified in Step 6, makes it an isomorphism. Therefore $c\\in H$. This proves $C_f=H$ on an actual principal neighbourhood of $\\mathfrak p$, not merely after localization at $\\mathfrak p$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-proper",
+    "lem-trf-geometrically-reduced-eta-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2; apply eta-normality separately to each integral element of the fixed relative normalization"
+   }
+  },
+  {
+   "text": "As $\\mathfrak p$ varies, Steps 4–7 give principal opens $D(f)$ covering $\\operatorname{Spec}B$, on which $C_f$ is finite over $(A_B)_f$, flat finitely presented over $B_f$. A finite subcover exists since an affine spectrum is quasi-compact, as recorded in [lem-trf-affine-geometric-fibre-reduced-comparison]; equivalently these finitely many $f$ generate the unit ideal. The corresponding opens in $\\operatorname{Spec}A_B$ form an fpqc covering, by [def-weil-pbc-fpqc-covering] and localization flatness [lem-weil-pbc-localization-flat]. Thus [lem-weil-pbc-fpqc-descend-finite] makes $C$ finite over $A_B$. The flat-localization criterion [lem-sc-affine-standard-cover-flat-localization-span] makes $C$ flat over $B$. For finite presentation, [lem-sfb-separated-lfp-target-open-locality] applied over the opens $D(f)$ makes $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ locally of finite presentation. Finally [lem-weil-pbc-lfp-affine-opens-finite-presentation] gives the required finite polynomial presentation of the global $B$-algebra $C$.",
+   "uses": [
+    "lem-trf-affine-geometric-fibre-reduced-comparison",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-sc-affine-standard-cover-flat-localization-span",
+    "lem-sfb-separated-lfp-target-open-locality",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/descent.tex",
+    "place": "Zariski locality of finite, flat and locally finitely presented morphisms; Tag 01TQ, lemma-locally-finite-presentation-characterize"
+   }
+  },
+  {
+   "text": "To verify normality of the prescribed ring $C$, apply [lem-wf-affine-noetherian-components] to the finite-type $\\Omega$-algebra $D$. Hence $\\operatorname{Spec}D$ is locally Noetherian; it is normal by hypothesis. The section-ring theorem [lem-sbc-normal-sections-finite-product] applied to the whole affine open writes $D$ as a finite product of integrally closed domains. Now [lem-sbc-integral-closure-finite-normal-product], with $A=A_B$ and ambient ring $D$, says precisely that each prime localization of its integral closure $C$ is an integrally closed domain. Thus $C$ is normal; the empty product covers $D=0$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-sbc-normal-sections-finite-product",
+    "lem-sbc-integral-closure-finite-normal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035L (lemma-normal-normalization), affine finite-product argument"
+   }
+  },
+  {
+   "text": "Since $A_B\\subseteq C\\subseteq D$ and $D=(B\\setminus\\{0\\})^{-1}A_B$, localization gives $D\\subseteq C\\otimes_B\\Omega\\subseteq D$. The second inclusion is injective because $C$ is a subring of $D$: a fraction mapping to zero has zero numerator. Thus the specified canonical map $C\\otimes_B\\Omega\\to D$ is an isomorphism. By Steps 5–8 every geometric fibre of $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is reduced, since it lies over a principal neighbourhood where $C_f=H$. For any $B\\to E$, put $\\mathfrak p=\\ker(B\\to E)$; the induced embedding $\\kappa(\\mathfrak p)\\hookrightarrow E$ identifies $C\\otimes_BE'$ with $(C\\otimes_B\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}E'$ for every extension $E'/E$. By [lem-trf-affine-geometric-fibre-reduced-comparison], the residue-field algebra is geometrically reduced, so this ring is reduced. All arguments allow zero algebras and empty fibres; none assumes $B$ Noetherian or $B/R$ finite.",
+   "uses": [
+    "lem-trf-affine-geometric-fibre-reduced-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Appendix II, Theorem 1, printed p.73; generic localization and geometric-fibre clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-module-tensor-product",
+  "lem-kun-fp-algebra-descent",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sc-affine-standard-cover-flat-localization-span",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-trf-affine-geometric-fibre-reduced-comparison",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-geometrically-reduced-fibres-limit-descent",
+  "lem-trf-valuation-reduced-fibre-normalization",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-localization-flat",
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Appendix II Theorem 1, printed p.73: expand its localization and limit reduction using the existing valuation-ring theorem (Temkin 3.5.5) and eta-normality (Temkin 3.5.2). Primary scans read online; archival copies WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finite type scheme with geometrically normal generic fibre over a Dedekind scheme has finite flat finitely presented normalization with geometrically reduced fibres after base change to the integral closure in an algebraic closure",
+   "results": "{\"t\": \"2026-10-24T14:41:37Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finite type scheme with geometrically normal generic fibre over a Dedekind scheme has finite flat finitely presented normalization with geometrically reduced fibres after base change to the integral closure in an algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"a07d96e0cd2ca638\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization constructions, integrality and reducedness instances, and Dedekind integral-closure results do not assert finite flat normalization with geometrically reduced fibres over the absolute integral closure. Read Mathlib/AlgebraicGeometry/Normalization.lean:15-24, 349-356; this is relative integral closure, not the Raynaud theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over the integral closure of a Dedekind domain in an algebraic closure of its fraction field, normalization of a flat finitely presented algebra with geometrically normal generic fibre is finite flat finitely presented with reduced geometric fibres",
+   "results": "{\"t\": \"2026-10-24T14:52:18Z\", \"tool\": \"leansearch\", \"query\": \"Over the integral closure of a Dedekind domain in an algebraic closure of its fraction field, normalization of a flat finitely presented algebra with geometrically normal generic fibre is finite flat finitely presented with reduced geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"IsIntegralClosure.isDedekindDomain\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"IsDedekindRing.toIsIntegralClosure\", \"Ring.instFiniteNormalClosure_1\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"7e22cb487183b0bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization constructions, integrality and reducedness instances, and Dedekind integral-closure results do not assert finite flat normalization with geometrically reduced fibres over the absolute integral closure. Read Mathlib/AlgebraicGeometry/Normalization.lean:15-24, 349-356; this is relative integral closure, not the Raynaud theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T14:52:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization constructions, integrality and reducedness instances, and Dedekind integral-closure results do not assert finite flat normalization with geometrically reduced fibres over the absolute integral closure. Read Mathlib/AlgebraicGeometry/Normalization.lean:15-24, 349-356; this is relative integral closure, not the Raynaud theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud normalization theorem over an algebraically closed fraction field valuation ring yields a finite flat finitely presented algebra with reduced geometric fibres",
+   "results": "{\"t\": \"2026-10-24T14:53:43Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud normalization theorem over an algebraically closed fraction field valuation ring yields a finite flat finitely presented algebra with reduced geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"73599ced6d157f88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization constructions, integrality and reducedness instances, and Dedekind integral-closure results do not assert finite flat normalization with geometrically reduced fibres over the absolute integral closure. Read Mathlib/AlgebraicGeometry/Normalization.lean:15-24, 349-356; this is relative integral closure, not the Raynaud theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*Flat|Flat.*normalization|GeometricallyReduced.*normalization|normalization.*GeometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T14:59:39Z\", \"tool\": \"grep\", \"query\": \"normalization.*Flat|Flat.*normalization|GeometricallyReduced.*normalization|normalization.*GeometricallyReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization constructions, integrality and reducedness instances, and Dedekind integral-closure results do not assert finite flat normalization with geometrically reduced fibres over the absolute integral closure. Read Mathlib/AlgebraicGeometry/Normalization.lean:15-24, 349-356; this is relative integral closure, not the Raynaud theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a flat finitely presented algebra over the absolute integral closure of a Dedekind domain is finite flat with geometrically reduced fibres",
+   "results": "{\"t\": \"2026-10-24T15:35:50Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a flat finitely presented algebra over the absolute integral closure of a Dedekind domain is finite flat with geometrically reduced fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instFiniteNormalClosure\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instIsDedekindDomainNormalClosure\", \"Algebra.ZariskisMainProperty\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"IsIntegralClosure.isDedekindDomain\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"8a25970d83f03877\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected relative normalization constructions (Mathlib/AlgebraicGeometry/Normalization.lean:15–28,349–356), geometric-reducedness predicates (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:44–79), and finite-extension Dedekind closure results. None supplies Raynaud finiteness over the infinite integral closure."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*Flat|Flat.*normalization|GeometricallyReduced.*normalization|normalization.*GeometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T15:36:32Z\", \"tool\": \"grep\", \"query\": \"normalization.*Flat|Flat.*normalization|GeometricallyReduced.*normalization|normalization.*GeometricallyReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected relative normalization constructions (Mathlib/AlgebraicGeometry/Normalization.lean:15–28,349–356), geometric-reducedness predicates (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:44–79), and finite-extension Dedekind closure results. None supplies Raynaud finiteness over the infinite integral closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud normalization of flat finitely presented algebras over integral closures of Dedekind domains has geometrically reduced fibres",
+   "results": "{\"t\": \"2026-10-24T15:36:32Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud normalization of flat finitely presented algebras over integral closures of Dedekind domains has geometrically reduced fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isGeometricallyReduced_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"8a3dae44ab31bdbd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected relative normalization constructions (Mathlib/AlgebraicGeometry/Normalization.lean:15–28,349–356), geometric-reducedness predicates (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:44–79), and finite-extension Dedekind closure results. None supplies Raynaud finiteness over the infinite integral closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T15:36:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected relative normalization constructions (Mathlib/AlgebraicGeometry/Normalization.lean:15–28,349–356), geometric-reducedness predicates (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:44–79), and finite-extension Dedekind closure results. None supplies Raynaud finiteness over the infinite integral closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure in a geometrically normal generic fibre is finite and flat over the integral closure of a Dedekind ring in an algebraic closure of its fraction field",
+   "results": "{\"t\": \"2026-10-24T15:36:33Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure in a geometrically normal generic fibre is finite and flat over the integral closure of a Dedekind ring in an algebraic closure of its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instFiniteNormalClosure\", \"Ring.instFiniteNormalClosure_1\", \"IsIntegralClosure.finite\", \"Ring.instIsDedekindDomainNormalClosure\", \"IsIntegralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain_fractionRing\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\"], \"digest\": \"bed84201d7b01a22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected relative normalization constructions (Mathlib/AlgebraicGeometry/Normalization.lean:15–28,349–356), geometric-reducedness predicates (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:44–79), and finite-extension Dedekind closure results. None supplies Raynaud finiteness over the infinite integral closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semitrait-potential-reduced-normalization",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images proof (3), through the inherited strict-local trait descent chain: Anantharaman Appendix II Theorem 1, the normalization over the algebraic closure before the finite-stage descent of Corollary 2. The current latest proof (3) contains only the direct-image assembly and does not state this auxiliary algebra theorem.",
+   "via": [
+    "lem-sfb-semitrait-potential-reduced-normalization",
+    "lem-sfb-almost-homogeneous-potential-smooth-cover",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-absolute-dedekind-normalization-reduced-fibres",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the localization/limit reduction of Anantharaman Appendix II Theorem 1 using the existing valuation normalization theorem, descent on principal neighbourhoods and eta-normality to recognize the fixed integral closure. All supporting statements already exist; no new nodes. Verified hypotheses, empty cases, and the difference between stalkwise finiteness and finite neighbourhood models.",
+  "blueprint": "The current latest det-thm-sf-ctf-stability-direct-images proof (3) contains only direct-image assembly; this is the inherited auxiliary algebra input. blueprint_refs.py ancestor returns None, as already recorded. No chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-fp-algebra-descent",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-sbc-normal-sections-finite-product",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-trf-affine-geometric-fibre-reduced-comparison",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-trf-geometrically-reduced-eta-normal",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-trf-geometrically-reduced-fibres-limit-descent",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-trf-valuation-reduced-fibre-normalization",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-finite-ring-map",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-flat-ring-map",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic commutative algebra or affine-scheme tool for the local normalization, principal-neighbourhood descent, or normalization recognition. It supplies the cited statement, not an alternative six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-fp-algebra-descent",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-trf-affine-geometric-fibre-reduced-comparison",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-geometrically-reduced-fibres-limit-descent",
+  "lem-trf-valuation-reduced-fibre-normalization",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-ca55a450e",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-ca55a450e (reviewer sub-agent of L); spot-checked: PASS, no files changed: all 10 steps were checked against the full statements of the 31 cited nodes. The delivery has no new nodes and keeps the statement and stmt_deps; proof_deps equals the union of the uses, there is no cycle, nothing is merged and the 10 Mathlib searches are recorded. Anantharaman App. II Thm 1 and Temkin are not in the local literature (the report lists them as WANTED), so the mathematics was checked directly. The steps: B_p is a valuation ring with fraction field Omega (union of DVR localizations of Krull-Akizuki stages). C_p comes from the valuation normalization (Temkin 3.5.5 node; all hypotheses hold). It is descended to a principal open B_f (colimit lemmas 00QO/05N9/07RG and flatness). Reduced geometric fibres are spread out with the limit-descent node. The eta-normal hypotheses are verified, and each c=h/s in C_f gives a finite eta-modification Spec H[c]->Spec H, dense over D(s) and an isomorphism on the generic fibre, so C_f=H. Finite, flat and finite presentation are globalized by fpqc descent, the span criterion and 01TQ. Normality uses Noetherian D = product of normal domains plus the integral-closure product node. The generic fibre and reduced fibres follow from the affine fibre comparison. Edge cases A=0, D=0 and empty fibres were checked. No duplicate: Anantharaman and absolute-integral-closure searches found only the semitrait corollary (the citer) and the DVR/semi-trait local-section or fpqc-model nodes, which state different things. Batch-5 flags: none of the four cited trf nodes (affine-geometric-fibre-reduced-comparison, geometrically-reduced-fibres-limit-descent, geometrically-reduced-eta-normal, valuation-reduced-fibre-normalization) is a step of the trace formula or Poincare duality. Their closures reach no trace, local-term, nt-* or pod-duality node, only generic algebra, module foundations and definitions (oriented nearby cycles through the multipointed-curve definition). Accepted as generic tools, as are the 13 declared tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AbsoluteDedekindNormalizationReducedFibres",
+  "declaration": "absolute_dedekind_normalization_reduced_fibres",
+  "declarations": [
+   "AbsoluteDedekindNormalization.Generic",
+   "AbsoluteDedekindNormalization.baseMap",
+   "AbsoluteDedekindNormalization.ambientAlgebra",
+   "AbsoluteDedekindNormalization.ambientTower",
+   "AbsoluteDedekindNormalization.closure",
+   "AbsoluteDedekindNormalization.genericMap",
+   "absolute_dedekind_normalization_reduced_fibres"
+  ],
+  "file": "lean/Sheaf/RingTheory/AbsoluteDedekindNormalizationReducedFibres.lean",
+  "statement": "theorem absolute_dedekind_normalization_reduced_fibres (R : Type u) (K : Type v) (Ω : Type w) (A : Type x) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] [Field K] [Algebra R K] [IsFractionRing R K] [Field Ω] [Algebra K Ω] [IsAlgClosure K Ω] [Algebra R Ω] [IsScalarTower R K Ω] [CommRing A] [Algebra R A] [Algebra.FinitePresentation R A] [Module.Flat R A] (hdim : ringKrullDim R = 1) (hgeom : ∀ (E : Type (max u v w x y)) [Field E] [Algebra K E] (p : Ideal (E ⊗[K] (K ⊗[R] A))) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : Function.Injective (baseMap R K Ω A) ∧ Module.Finite ((integralClosure R Ω) ⊗[R] A) (closure R K Ω A) ∧ Module.Flat (integralClosure R Ω) (closure R K Ω A) ∧ Algebra.FinitePresentation (integralClosure R Ω) (closure R K Ω A) ∧ (∀ (p : Ideal (closure R K Ω A)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧ Function.Bijective (genericMap R K Ω A) ∧ (∀ (E : Type (max u v w x y)) [Field E] [Algebra (integralClosure R Ω) E] (E' : Type (max u v w x y z)) [Field E'] [Algebra E E'] [Algebra (integralClosure R Ω) E'] [IsScalarTower (integralClosure R Ω) E E'], IsReduced ((closure R K Ω A) ⊗[integralClosure R Ω] E'))",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2a8795e8",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node: R Noetherian integrally closed domain of dimension 1, IsFractionRing, IsAlgClosure, B = integralClosure R Ω, A flat finitely presented, geometric normality hgeom over fields in a large universe; all match. Injectivity of baseMap (b⊗a ↦ b⊗(1⊗a)) is concluded, not assumed. C = integralClosure (B⊗A) D with algebra induced by baseMap; finite over A_B, flat and finitely presented over B, normal in the recorded inline form; genericMap (c⊗ω ↦ ω·c) bijective; reduced-fibre clause over B→E⊆E' uses max-universe binders. Edge cases A=0, D=0 and empty fibres covered; no extra assumptions. Supporting definitions are concrete, proof is sorry only, docstrings carry source, blueprint tag and the 10 steps, lean.statement matches the file verbatim, no duplicate found. Advisory: the report's second reading is a self-check by the worker. No files changed, so nothing compiled."
+ }
+}

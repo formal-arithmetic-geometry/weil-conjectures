@@ -1,0 +1,369 @@
+{
+ "id": "lem-sfb-pd-generator-criterion",
+ "kind": "statement",
+ "title": "Checking divided-power multiplication and iteration on ideal generators",
+ "statement": "Let $C$ be a commutative ring, $J\\subseteq C$ an ideal, and $S\\subseteq J$ a set generating $J$ as an ideal. Let $\\delta_n:J\\to J$ for $n\\geq1$, and put $\\delta_0(z)=1\\in C$. Assume for all $z,w\\in J$, $c\\in C$, and $n\\geq1$ that $\\delta_1(z)=z$, $\\delta_n(cz)=c^n\\delta_n(z)$ and $\\delta_n(z+w)=\\sum_{i=0}^n\\delta_i(z)\\delta_{n-i}(w)$. Assume for every $s\\in S$ and positive integers $n,m$ that\n$$\\delta_n(s)\\delta_m(s)=\\binom{n+m}{n}\\delta_{n+m}(s),\\qquad\\delta_n(\\delta_m(s))=\\frac{(nm)!}{n!(m!)^n}\\delta_{nm}(s).$$\nThen these last two identities hold for every $z\\in J$, and $\\delta$ is an ordinary divided-power structure on $J$ [def-sfb-ordinary-divided-power-structure]. The factorial quotient is an integer coefficient. The generating set need not be finite and may be empty when $J=0$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07GP (lemma-check-on-generators), conditions (a),(b) and conclusion."
+ },
+ "stmt_deps": [
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-pd-check-generators] with its ring $A=C$, ideal $I=J$, generating set the given $S$, and maps $g_n=\\delta_n$. Its three globally assumed identities are exactly the identity, scalar homogeneity and addition hypotheses here, including $g_0=\\delta_0=1$. Its two generator identities have the same positive indices and the same integer coefficients as ours. Thus the given maps $\\delta_n$ form an ordinary divided-power structure on $J$. This application imposes neither finiteness nor nonemptiness on $S$, and does not invert any integer.",
+   "uses": [
+    "lem-sfb-pd-check-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GP (lemma-check-on-generators), statement; reuse of the existing DAG statement."
+   }
+  },
+  {
+   "text": "Unpack [def-sfb-ordinary-divided-power-structure] for the structure on the same maps obtained in step 1: its fourth and fifth displayed axioms give $\\delta_n(z)\\delta_m(z)=\\binom{n+m}{n}\\delta_{n+m}(z)$ and $\\delta_n(\\delta_m(z))=((nm)!/(n!(m!)^n))\\delta_{nm}(z)$ for every $z\\in J$ and positive $n,m$. These are precisely the two requested identities. If $S$ is empty then $J=0$ because $S$ generates $J$; scalar homogeneity with $c=0$ gives $\\delta_n(0)=0$ for $n>0$, so the same conclusion includes the zero ideal.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07GL (definition-divided-powers), axioms (2),(5); Tag 07GP conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pd-check-generators",
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07GP (lemma-check-on-generators), via existing identical node lem-sfb-pd-check-generators; Tag 07GL to unpack its conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generat|from_gens|mk",
+   "results": {
+    "t": "2026-10-24T01:08:40Z",
+    "tool": "grep",
+    "query": "generat|from_gens|mk",
+    "sub": "RingTheory/DividedPowers/Basic.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "156",
+     "177",
+     "182",
+     "187",
+     "188"
+    ],
+    "digest": "7be2adc5b26c250b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk at Basic.lean:78-92 requires all axioms everywhere. DPMorphism.fromGens and dpow_eq_from_gens at DPMorphism.lean:164,245 assume two already complete divided-power structures; they neither construct one nor prove missing product/iteration axioms from a generating set."
+  },
+  {
+   "tool": "loogle",
+   "query": "DividedPowers.mk",
+   "results": {
+    "t": "2026-10-24T01:08:41Z",
+    "tool": "loogle",
+    "query": "DividedPowers.mk",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DividedPowers.mk"
+    ],
+    "digest": "d806436675323e30"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk at Basic.lean:78-92 requires all axioms everywhere. DPMorphism.fromGens and dpow_eq_from_gens at DPMorphism.lean:164,245 assume two already complete divided-power structures; they neither construct one nor prove missing product/iteration axioms from a generating set."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct divided powers by checking product and composition identities only on a generating set of the ideal",
+   "results": {
+    "t": "2026-10-24T01:08:41Z",
+    "tool": "leansearch",
+    "query": "Construct divided powers by checking product and composition identities only on a generating set of the ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.mk",
+     "DividedPowers",
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers.casesOn",
+     "DividedPowers.mk.injEq",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.rec"
+    ],
+    "digest": "1dbc059930a80090"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk at Basic.lean:78-92 requires all axioms everywhere. DPMorphism.fromGens and dpow_eq_from_gens at DPMorphism.lean:164,245 assume two already complete divided-power structures; they neither construct one nor prove missing product/iteration axioms from a generating set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps on an ideal satisfying addition and scalar divided power axioms satisfy all divided power axioms if multiplication and iteration hold on ideal generators",
+   "results": {
+    "t": "2026-10-24T01:08:43Z",
+    "tool": "leanfinder",
+    "query": "Maps on an ideal satisfying addition and scalar divided power axioms satisfy all divided power axioms if multiplication and iteration hold on ideal generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.DPMorphism.fromGens",
+     "DividedPowers.IsDPMorphism.on_span",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.IsSubDPIdeal",
+     "DividedPowers.dpow_comp_from_gens",
+     "DividedPowers",
+     "DividedPowers.dpow_eq_from_gens"
+    ],
+    "digest": "a1633612a8ee8362"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk at Basic.lean:78-92 requires all axioms everywhere. DPMorphism.fromGens and dpow_eq_from_gens at DPMorphism.lean:164,245 assume two already complete divided-power structures; they neither construct one nor prove missing product/iteration axioms from a generating set."
+  },
+  {
+   "tool": "grep",
+   "query": "check.*generat|from_gens|dpow_linearCombination|flat",
+   "results": {
+    "t": "2026-10-24T01:10:15Z",
+    "tool": "grep",
+    "query": "check.*generat|from_gens|dpow_linearCombination|flat",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean"
+    ],
+    "digest": "29102140dd9e2c14"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.mk at Basic.lean:78-92 requires all axioms everywhere. DPMorphism.fromGens and dpow_eq_from_gens at DPMorphism.lean:164,245 assume two already complete divided-power structures; they neither construct one nor prove missing product/iteration axioms from a generating set."
+  },
+  {
+   "tool": "grep",
+   "query": "fromGens|dpow_eq_from_gens|dpow_comp_from_gens|^structure DividedPowers",
+   "results": {
+    "t": "2026-10-24T01:33:07Z",
+    "tool": "grep",
+    "query": "fromGens|dpow_eq_from_gens|dpow_comp_from_gens|^structure DividedPowers",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean"
+    ],
+    "digest": "15f3d64e6ac8123a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all divided-power axioms globally. DPMorphism.lean:164-166,237-250 assumes existing full structures; fromGens and dpow_eq_from_gens establish compatibility or equality, not a structure from partial axioms. Read all hits; rational constructions add a Q-algebra hypothesis absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct divided powers from operations satisfying the additive and homogeneous axioms by checking remaining axioms on an ideal generating set",
+   "results": {
+    "t": "2026-10-24T01:33:08Z",
+    "tool": "leansearch",
+    "query": "Construct divided powers from operations satisfying the additive and homogeneous axioms by checking remaining axioms on an ideal generating set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.mk",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers",
+     "DividedPowers.casesOn",
+     "DividedPowers.IsSubDPIdeal.mk",
+     "DividedPowers.rec",
+     "DividedPowers.mk.injEq",
+     "DividedPowers.SubDPIdeal.mk"
+    ],
+    "digest": "8cf8598e5bd14036"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all divided-power axioms globally. DPMorphism.lean:164-166,237-250 assumes existing full structures; fromGens and dpow_eq_from_gens establish compatibility or equality, not a structure from partial axioms. Read all hits; rational constructions add a Q-algebra hypothesis absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "DividedPowers, \"gens\"",
+   "results": {
+    "t": "2026-10-24T01:33:08Z",
+    "tool": "loogle",
+    "query": "DividedPowers, \"gens\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers.DPMorphism.fromGens",
+     "DividedPowers.DPMorphism.fromGens_coe",
+     "DividedPowers.dpow_comp_from_gens"
+    ],
+    "digest": "5458203a0986eed7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all divided-power axioms globally. DPMorphism.lean:164-166,237-250 assumes existing full structures; fromGens and dpow_eq_from_gens establish compatibility or equality, not a structure from partial axioms. Read all hits; rational constructions add a Q-algebra hypothesis absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Check multiplication and iteration divided power identities only on ideal generators, assuming addition and scalar homogeneity globally",
+   "results": {
+    "t": "2026-10-24T01:33:10Z",
+    "tool": "leanfinder",
+    "query": "Check multiplication and iteration divided power identities only on ideal generators, assuming addition and scalar homogeneity globally",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.mul_dpow",
+     "DividedPowers",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.dpow_mul",
+     "DividedPowers.dpow",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.OfInvertibleFactorial.dpow_mul"
+    ],
+    "digest": "78e453d127679549"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all divided-power axioms globally. DPMorphism.lean:164-166,237-250 assumes existing full structures; fromGens and dpow_eq_from_gens establish compatibility or equality, not a structure from partial axioms. Read all hits; rational constructions add a Q-algebra hypothesis absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of homogeneous divided power operations on an ideal satisfying addition extends to a divided power structure if multiplication and composition hold on a spanning set",
+   "results": {
+    "t": "2026-10-24T01:33:46Z",
+    "tool": "leanfinder",
+    "query": "A family of homogeneous divided power operations on an ideal satisfying addition extends to a divided power structure if multiplication and composition hold on a spanning set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers.IsSubDPIdeal",
+     "DividedPowers.SubDPIdeal.span",
+     "DividedPowers.dpow",
+     "DividedPowers.IsDPMorphism.on_span"
+    ],
+    "digest": "b2817f059b2b67fd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:78-92 requires all divided-power axioms globally. DPMorphism.lean:164-166,237-250 assumes existing full structures; fromGens and dpow_eq_from_gens establish compatibility or equality, not a structure from partial axioms. Read all hits; rational constructions add a Q-algebra hypothesis absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pd-flat-extension",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: the adjunctions of exterior and divided-power variables of Stacks 09PH/09PI and 0F4I that define the polynomial graded divided-power algebras of the item; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3). Supporting argument: Tag 07H5 (lemma-divided-power-polynomial-algebra), existence, uniqueness and universal property; the algebra and augmentation ideal are the explicit construction in section-divided-power-polynomial-ring. Supporting input to Tag 07H5: Tag 07H1 (lemma-gamma-extends), uniqueness and existence under condition (3), flatness. Immediate supporting input: Tag 07GP (lemma-check-on-generators), conditions (a),(b) and conclusion.",
+   "via": [
+    "lem-sfb-pd-flat-extension",
+    "lem-sfb-ordinary-pd-polynomial-extension",
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pd-generator-criterion",
+  "worker": "stage1",
+  "summary": "Found and reused the pre-existing exact duplicate lem-sfb-pd-check-generators (Q12, Tag 07GP), rather than creating a duplicate or splitting the same theorem twice. Matched every hypothesis and unpacked the ordinary divided-power definition for both explicitly requested identities. No new nodes; statement unchanged. Maintainer may merge these two identical nodes. Mathlib constructors and generator morphism results do not prove this criterion from partial axioms.",
+  "blueprint": "The existing provenance has from.node=null and a complete via chain. This supporting Tag 07GP criterion belongs to the Tag 07H1 flat-extension input below the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images, as recorded in from.place. Whole-blueprint searches for 07GP, divided power, divided-power and generator found no blueprint node stating this algebraic criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-ae0abdb19",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-ae0abdb19 (reviewer sub-agent of L); spot-checked: The item is a same-day duplicate of the existing unsplit node lem-sfb-pd-check-generators (Q12). Both state Stacks 07GP: I read dpa.tex lemma-check-on-generators, its statement and full proof, and tags line 9524 maps 07GP to it. The delivery creates no new node and makes one non-elementary step that cites the duplicate, with A=C, I=J, the same S and g=δ. Every hypothesis matches one-to-one: g_0=1, the three global axioms (07GP(a): (1), (3), (4)) and the generator axioms (07GP(b): (2), (5)) with integer coefficients. The duplicate's conclusion is a DP structure on the given maps. Step 2 is an elementary unpacking of def-sfb-ordinary-divided-power-structure (status mathlib); its 4th and 5th axioms give the product and iteration identities on all of J. Edge cases checked: S empty forces J=0 and δ_n(0)=0; n=1 or m=1; characteristic p (no division used); infinite S. Statement, stmt_deps, source and blueprint are unchanged from live, and all 5 earlier searches are kept. There is no cycle: the duplicate has no proof_deps, both nodes are unsplit on live and side-live, and no run under runs/ splits lem-sfb-pd-check-generators. Same chapter and unit, so no route issue and no tool_uses. The only citer, lem-sfb-pd-flat-extension, needs only the conclusion. Maintainer: merge lem-sfb-pd-generator-criterion (later by search timestamps, Q10) into lem-sfb-pd-check-generators (Q12) and repoint the citer. Whoever splits the Q12 node must follow 07GP and must not cite this item (that would make a 2-cycle). Minor: citations.json and searches.jsonl named in the report are not in the commit; this is not a DAG fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DividedPowersGeneratorCriterion",
+  "declaration": "DividedPowers.generator_criterion",
+  "file": "lean/Sheaf/RingTheory/DividedPowersGeneratorCriterion.lean",
+  "statement": "theorem generator_criterion {C : Type u} [CommRing C] (J : Ideal C) (S : Set J) (hS : Ideal.span (Subtype.val '' S) = J) (δ : ℕ → J → C) (hzero : ∀ z : J, δ 0 z = 1) (hmem : ∀ (n : ℕ), 0 < n → ∀ z : J, δ n z ∈ J) (hone : ∀ z : J, δ 1 z = (z : C)) (hscalar : ∀ (n : ℕ), 0 < n → ∀ (c : C) (z : J), δ n (c • z) = c ^ n * δ n z) (hadd : ∀ (n : ℕ), 0 < n → ∀ z w : J, δ n (z + w) = ∑ i ∈ Finset.range (n + 1), δ i z * δ (n - i) w) (hmul : ∀ s ∈ S, ∀ (n m : ℕ), 0 < n → 0 < m → δ n s * δ m s = (Nat.choose (n + m) n : C) * δ (n + m) s) (hcomp : ∀ s ∈ S, ∀ (n m : ℕ), 0 < n → ∀ hm : 0 < m, δ n ⟨δ m s, hmem m hm s⟩ = (((n * m).factorial / (n.factorial * m.factorial ^ n) : ℕ) : C) * δ (n * m) s) : (∀ (z : J) (n m : ℕ), 0 < n → 0 < m → δ n z * δ m z = (Nat.choose (n + m) n : C) * δ (n + m) z) ∧ (∀ (z : J) (n m : ℕ), 0 < n → ∀ hm : 0 < m, δ n ⟨δ m z, hmem m hm z⟩ = (((n * m).factorial / (n.factorial * m.factorial ^ n) : ℕ) : C) * δ (n * m) z) ∧ ∃ γ : DividedPowers J, ∀ (n : ℕ) (z : J), γ.dpow n z = δ n z",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a2841d01",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Lean DividedPowers.generator_criterion matches node and Stacks 07GP clause by clause: ideal span of S : Set J, δ : ℕ → J → C with hmem/hzero/hone/hscalar/hadd for n>0, generator hmul/hcomp for positive n,m with ℕ-cast coefficients ((n*m)!/(n!(m!)^n) = uniformBell n m, Mathlib dpow_comp order). Conclusion: both identities for all z, and ∃ γ : DividedPowers J with γ.dpow n z = δ n z (γ pinned to δ). Edge cases checked: empty S (J=0), infinite S, zero ring, n or m = 1, any characteristic, single universe u. Only the lean field differs from live; statement verbatim; stmt_dep def-sfb-ordinary-divided-power-structure (Mathlib DividedPowers) imported; docstrings give source and blueprint; proof is sorry only; report sections present; no compile (no change). Maintainer note: same theorem as node lem-sfb-pd-check-generators (Q41 delivery DividedPowers.exists_of_axioms_on_generators, PASS, not yet live, different names, no clash); merge the nodes and repoint the citer lem-sfb-pd-flat-extension; avoid a 2-cycle."
+ }
+}

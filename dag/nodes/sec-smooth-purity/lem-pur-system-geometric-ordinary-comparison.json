@@ -1,0 +1,170 @@
+{
+ "id": "lem-pur-system-geometric-ordinary-comparison",
+ "kind": "statement",
+ "title": "Ordinary singleton extension commutes with geometric inverse image",
+ "statement": "For sites small relative to the module universe, coefficient-ring towers with pulled-back transitions, and specified algebraic inverse images, construct exact termwise inverse image of strict semilinear systems. Ordinary singleton extension commutes with this functor. The level comparison is the scalar extension comparison, normalized on all generalized tensor generators; above the selected index the comparison is zero; at the selected index it is normalized by multiplication. The full precise statement is the attached Lean declaration.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; derived singleton base-change isomorphism immediately before Lemma 4.10, printed p. 23.",
+  "note": "Agent extraction includes the representative and lower-singleton-map normalizations; the derived isomorphism is stated by Zheng."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-pur-system-evaluation-topos"
+ ],
+ "proof": [
+  {
+   "text": "Construct each pulled-back semilinear transition by conjugating its underlying set-sheaf map with the recorded inverse-image comparisons. The operation diagrams for addition and scalar action make it linear; the coefficient graph equation supplies the scalar compatibility. Conjugation proves identities, composition and naturality. The exactness theorem applies at every coefficient level, and the componentwise universal properties of strict limits and colimits prove exactness of the termwise system functor.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pur-system-level-left-extension-basic",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21; Stacks 03D2 for inverse image of module operations."
+   }
+  },
+  {
+   "text": "Apply the normalized balanced coefficient-square construction with identity structural maps on X. Strip the two identity scalar extensions using their normalized tensor units. Conjugate by the scalar models’ recorded object-equality isomorphisms. The inverse generator formula gives the ordinary coefficient-change comparison and its unit equation. Transporting scalar multiplication extends that equation to every generalized tensor generator.",
+   "uses": [
+    "lem-pur-coefficient-comparisons-balanced-construction",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EL: normalized scalar extension and inverse-image coefficient comparison."
+   }
+  },
+  {
+   "text": "Take the mate of the strict evaluation square under the two ordinary singleton adjunctions. Below the selected level, transpose its evaluated component and use the coefficient comparison’s unit equation to identify it with the inverse tensor comparison and the two below-level isomorphisms. Above that level both objects are zero. Thus the mate is invertible; its inverse is the specified ordinary singleton comparison. Its unit equation gives multiplication normalization.",
+   "uses": [
+    "lem-pur-system-ordinary-single-extension",
+    "lem-pur-system-single-derived-evaluation",
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, singleton adjunction and tensor-or-zero level values; Stacks 0FND for mates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-system-level-left-extension-basic",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-pur-coefficient-comparisons-balanced-construction",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-ordinary-single-extension",
+  "lem-pur-system-single-derived-evaluation",
+  "lem-pur-adjunction-mate-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Extracted from the ordinary and derived portions of the parent proof, Zheng Construction 4.1 and the base-change sentence before Lemma 4.10, printed pp. 21 and 23; the docstring records the full proposed argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact termwise geometric inverse image of strict semilinear module systems commutes with ordinary singleton extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"IsLocalizedModule.map_exact\", \"module\": \"Mathlib/Algebra/Module/LocalizedModule/Exact\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) {M₀ : Type u_2} {M₀' : Type u_5} [inst_1 : AddCommMonoid M₀]\\n  [inst_2 : AddCommMonoid M₀'] [inst_3 : Module R M₀] [inst_4 : Module R M₀'] (f₀ : M₀ →ₗ[R] M₀')\\n  [inst_5 : IsLocalizedModule S f₀] {M₁ : Type u_3} {M₁' : Type u_6} [inst_6 : Add\", \"doc\": \"Given a commutative semiring $ R $, a submonoid $ S $ of $ R $, and $ R $-modules $ M_0 $, $ M_1 $, $ M_2 $, if the sequence of $ R $-linear maps $ g: M_0 \\\\to M_1 $ and $ h: M_1 \\\\to M_2 $ is exact (i.\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est\"}\n  {\"name\": \"Function.Exact.iff_of_ladder_linearEquiv\", \"module\": \"Mathlib/Algebra/Exact\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {M' : Type u_3} {N : Type u_4} {N' : Type u_5} {P : Type u_6} {P' : Type u_7}\\n  [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : AddCommMonoid M'] [inst_3 : AddCommMonoid N]\\n  [inst_4 : AddCommMonoid N'] [inst_5 : AddCommMonoid P] [inst_6 : AddCommMonoid P'] [\", \"doc\": \"Given linear equivalences $ e_1, e_2, e_3 $ and commuting diagrams involving linear maps $ g_{12}, g_{23} $ and $ f_{12}, f_{23} $, the exactness of the sequence $ (g_{12}, g_{23}) $ is equivalent to \"}\n  {\"name\": \"IsAdicComplete.StrictMono.extend_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For each natural number $n$, the extension of the function $f$ evaluated at the sequence term $a_n$ is equal to $f(n)$, i.e., $\\\\text{extend}_{ha}(f)(a_n) = f(n)$.\"}\n  {\"name\": \"Function.Exact.of_ladder_linearEquiv_of_exact\", \"module\": \"Mathlib/Algebra/Exact\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {M' : Type u_3} {N : Type u_4} {N' : Type u_5} {P : Type u_6} {P' : Type u_7}\\n  [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : AddCommMonoid M'] [inst_3 : AddCommMonoid N]\\n  [inst_4 : AddCommMonoid N'] [inst_5 : AddCommMonoid P] [inst_6 : AddCommMonoid P'] [\", \"doc\": \"Given linear maps $ f_{12}: M_1 \\\\to M_2 $, $ f_{23}: M_2 \\\\to M_3 $ forming an exact sequence (i.e., $ \\\\mathrm{im}\\\\,f_{12} = \\\\ker f_{23} $), and bijective linear equivalences $ e_1: M_1 \\\\simeq M_1' $, \"}\n  {\"name\": \"exact_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {L : Type u_4} [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : Module R M] [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : AddCommMonoid L]\\n  [inst_6 : Module R L] (s : Set R),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₚ : ↑s → Type u_5) [i\", \"doc\": \"If for every element $ r $ in a submonoid $ S $ of a commutative semiring $ R $, the localized sequence of modules at the submonoid generated by the powers of $ r $ is exact, then the original sequenc\"}\n  {\"name\": \"Function.Exact.exact_mapQ_iff\", \"module\": \"Mathlib/Algebra/Exact\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_4} {P : Type u_6} [inst : Ring R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P},\\n  Function.Exact ⇑f ⇑g →\\n    ∀ {p : Submo\", \"doc\": \"Given exact functions $ f: M \\\\to N $ and $ g: N \\\\to P $, and submodules $ p \\\\subseteq M $, $ q \\\\subseteq N $, $ r \\\\subseteq P $ such that $ p $ is contained in the preimage of $ q $ under $ f $ and $ \"}\n",
+   "date": "2026-10-25",
+   "verdict": "No direct match. General adjunction and scalar-extension lemmas supply ingredients, but do not state the normalized geometric singleton comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D C) : Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"`F ⊣ G` represents the data of an adjunction between two functors\\n`F : C ⥤ D` and `G : D ⥤ C`. `F` is the left adjoint and `G` is the right adjoint.\\n\\nWe use the unit-counit definition of an adjunction\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : F.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) : F.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mk'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction from the data of a `CoreHomEquivUnitCounit`, i.e. a hom set\\nequivalence, unit and counit natural transformations together with proofs of the equalities\\n`homEquiv_unit` and `hom\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquiv F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between `F` and `G` out of a natural bijection between each\\n`F.obj X ⟶ Y` and `X ⟶ G.obj Y`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between functors `F` and `G` given a unit and counit for the adjunction\\nsatisfying the triangle identities.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (left : CategoryTheory.Functor C D) [left.IsLeftAdjoint] : left ⊣ left.rightAdjoint\", \"doc\": \"The adjunction associated to a functor known to be a left adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor C D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"The adjunction associated to a functor known to be a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (E : CategoryTheory.Functor C D) [E.IsEquivalence] : E ⊣ E.inv\", \"doc\": \"An equivalence `E` is left adjoint to its inverse.\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {left : CategoryTheory.Functor C D} [self : left.IsLeftAdjoint] : ∃ right, Nonempty (left ⊣ right)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftAdjoint.mk\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {left : CategoryTheory.Functor C D} (exists_rightAdjoint : ∃ right, Nonempty (left ⊣ right)) : left.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {right : CategoryTheory.Functor D C} [self : right.IsRightAdjoint] : ∃ left, Nonempty (left ⊣ right)\", \"doc\": \"\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No direct match. General adjunction and scalar-extension lemmas supply ingredients, but do not state the normalized geometric singleton comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*geometric|geometric.*singleton",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/Probability/Distributions/Geometric.lean\", \"line\": \"71\", \"text\": \"lemma geometricMeasure_singleton (hp : p ≠ 0) n :\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Geometric.lean\", \"line\": \"73\", \"text\": \"  rw [geometricMeasure_eq hp, Measure.sum_smul_dirac_singleton]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Geometric.lean\", \"line\": \"75\", \"text\": \"lemma geometricMeasure_real_singleton (hp : p ≠ 0) n :\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Geometric.lean\", \"line\": \"77\", \"text\": \"  rw [measureReal_def, geometricMeasure_singleton hp,\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Geometric.lean\", \"line\": \"80\", \"text\": \"lemma geometricMeasure_real_singleton_pos (h1 : p ≠ 0) (h2 : p ≠ 1) n :\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/Separation.lean\", \"line\": \"38\", \"text\": \"* `geometric_hahn_banach_point_point`: Both sets are singletons. Strict separation.\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/Separation.lean\", \"line\": \"128\", \"text\": \"    geometric_hahn_banach_open hs₁ hs₂ (convex_singleton x) (disjoint_singleton_right.2 disj)\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/Separation.lean\", \"line\": \"190\", \"text\": \"    geometric_hahn_banach_of_nonempty_interior hA (convex_singleton x)\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/Separation.lean\", \"line\": \"227\", \"text\": \"    geometric_hahn_banach_compact_closed (convex_singleton x) isCompact_singleton ht₁ ht₂\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/Separation.lean\", \"line\": \"234\", \"text\": \"    geometric_hahn_banach_closed_compact hs₁ hs₂ (convex_singleton x) isCompact_singleton\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"25\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"99\", \"text\": \"lemma GeometricallyIntegral.isIntegral_of_subsingleton\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"100\", \"text\": \"    [GeometricallyIntegral f] [Subsingleton S] [IsIntegral S] : IsIntegral X := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"102\", \"text\": \"  refine ⟨GeometricallyIrreducible.irreducibleSpace_of_subsingleton f,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"101\", \"text\": \"lemma GeometricallyIrreducible.irreducibleSpace_of_subsingleton\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"102\", \"text\": \"    [GeometricallyIrreducible f] [Subsingleton S] [Nonempty S] : IrreducibleSpace X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"52\", \"text\": \"    geometrically P = .universally fun X Y _ ↦ IsIntegral Y → Subsingleton Y → P X := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"122\", \"text\": \"lemma self_of_isIntegral_of_geometrically [IsIntegral Y] [Subsingleton Y] (hf : geometrically P f) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"72\", \"text\": \"lemma Scheme.Hom.isConnected_preimage_singleton [GeometricallyConnected f] (x : S) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"98\", \"text\": \"lemma GeometricallyConnected.connectedSpace_of_subsingleton\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"99\", \"text\": \"    [GeometricallyConnected f] [Subsingleton S] [Nonempty S] : ConnectedSpace X :=\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No direct match. General adjunction and scalar-extension lemmas supply ingredients, but do not state the normalized geometric singleton comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemSingletonGeometricPullback",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-system-singleton-geometric-pullback",
+   "place": "Ordinary construction and normalized derived lift in the six-step proof of the parent.",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemGeometricOrdinaryComparison",
+  "file": "lean/Sheaf/CategoryTheory/SystemGeometricOrdinaryComparison.lean",
+  "declaration": "SheafOfModules.geometricSystemOrdinaryComparison",
+  "statement": "theorem geometricSystemOrdinaryComparison\n    (BY : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (BX : ℕᵒᵖ ⥤ Sheaf K CommRingCat.{w})\n    (u : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))\n    (I : ∀ n : ℕ, AlgebraicInverseImage u.inverse (BY.obj (op n)) (BX.obj (op n)))\n    (htransition : ∀ {m n : ℕ} (h : m ≤ n),\n      u.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map\n          (BY.map (homOfLE h).op)) ≫ (I m).ringUnderlying.hom =\n        (I n).ringUnderlying.hom ≫\n          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map\n            (BX.map (homOfLE h).op))\n    (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)\n    (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX) :\n    ∃ F : GeometricSystemOrdinaryData BY BX u I,\n  ∃ (ordinary : ∀ n : ℕ,\n      systemSingleFunctor SY TY BY n ⋙ F.functor ≅\n        F.levelInverseImage n ⋙ systemSingleFunctor SX TX BX n)\n    (tensor : ∀ {j n : ℕ} (h : j ≤ n),\n      systemTensor SY BY h ⋙ F.levelInverseImage j ≅\n        F.levelInverseImage n ⋙ systemTensor SX BX h),\n    (∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n),\n    (F.evaluation j).hom.app ((systemSingleFunctor SY TY BY n).obj P) ≫\n        (F.levelInverseImage j).map ((systemSingleBelow SY TY BY n h).hom.app P) ≫\n        (tensor h).hom.app P =\n      ((ordinary n).hom.app P).app j ≫\n        (systemSingleBelow SX TX BX n h).hom.app ((F.levelInverseImage n).obj P)) ∧\n    (∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n)\n    (Z : Sheaf J (Type w))\n    (b : Z ⟶ (sheafCompose J (CategoryTheory.forget CommRingCat.{w})).obj (BY.obj (op j)))\n    (x : Z ⟶ (geometricSystemUnderlying BY n).obj P)\n    (z : Z ⟶ (geometricSystemUnderlying BY j).obj ((systemTensor SY BY h).obj P)),\n    (∀ U t, z.hom.app U t =\n      systemModelTmul (SY (BY.map (homOfLE h).op)).model P U\n        (b.hom.app U t) (x.hom.app U t)) →\n    ∀ (W : Dᵒᵖ) (t : (u.inverse.obj Z).obj.obj W),\n      ((tensor h).hom.app P).val.app W\n          (((u.inverse.map z) ≫\n            (I j).moduleUnderlying.inv.app ((systemTensor SY BY h).obj P)).hom.app W t) =\n        systemModelTmul (SX (BX.map (homOfLE h).op)).model\n          ((F.levelInverseImage n).obj P) W\n          (((u.inverse.map b) ≫ (I j).ringUnderlying.hom).hom.app W t)\n          (((u.inverse.map x) ≫ (I n).moduleUnderlying.inv.app P).hom.app W t)) ∧\n    (∀ (n j : ℕ) (h : n < j) (P : systemLevel BY n),\n    ((ordinary n).hom.app P).app j = 0) ∧\n    (∀ (n : ℕ) (P : systemLevel BY n),\n    ((ordinary n).hom.app P).app n ≫\n        ((systemSingleBelow SX TX BX n (Nat.le_refl n) ≪≫ TX.ordinaryUnit BX n)).hom.app\n          ((F.levelInverseImage n).obj P) =\n      (F.evaluation n).hom.app ((systemSingleFunctor SY TY BY n).obj P) ≫\n        (F.levelInverseImage n).map\n          ((systemSingleBelow SY TY BY n (Nat.le_refl n) ≪≫\n            TY.ordinaryUnit BY n).hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25",
+  "declarations": [
+   "SheafOfModules.geometricSystemUnderlying",
+   "SheafOfModules.GeometricSystemOrdinaryData",
+   "SheafOfModules.GeometricSystemOrdinaryData.levelInverseImage",
+   "SheafOfModules.GeometricSystemOrdinaryData.levelInverseImageAdditive",
+   "SheafOfModules.GeometricSystemOrdinaryData.levelInverseImageLimits",
+   "SheafOfModules.GeometricSystemOrdinaryData.levelInverseImageColimits",
+   "SheafOfModules.GeometricSystemOrdinaryData.derivedEvaluation",
+   "SheafOfModules.geometricSystemOrdinaryComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T122924-L-1818889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T122924-L-1818889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

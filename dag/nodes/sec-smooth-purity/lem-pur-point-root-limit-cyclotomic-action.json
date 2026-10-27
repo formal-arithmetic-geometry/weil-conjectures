@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-point-root-limit-cyclotomic-action",
+ "kind": "statement",
+ "title": "Geometric cyclotomic action on the completed root sheaf",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and $s=\\operatorname{Spec}k$. Let $g=\\operatorname{Spec}((z\\mapsto z^q)^{-1})$ and use the root comparison and restriction/coprojection formula [def-weil-frobenius-point-transport, def-pur-roots-of-unity-inverse-image, def-weil-frobenius-coefficient-twists]. On every section $e$ of $\\mathbf Z_\\ell(1)_s=\\varprojlim_r\\mu_{\\ell^{r+1},s}$ at the final object, their composite is multiplication by $q^{-1}\\in\\mathbf Z_\\ell$, acting through the constant-section map and its recorded map into completed coefficients. No primitivity of $e$ is required. The explicit section formulas are [def-pur-point-cyclotomic-section-data].",
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281 (root action, tensor powers, duals); geometric convention in Deligne Weil II (1.1.7), pp. 150-151; returned item steps 5-7"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-point-transport",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-point-cyclotomic-section-data"
+ ],
+ "proof": [
+  {
+   "text": "Let U be the final site object of s=Spec k. For every r, compose the rootLimitAction with the projection to mu_(l^(r+1)). Naturality of this projection moves restriction past it. The equations limit.post_pi and limMap_pi reduce the canonical rootLineMap to its r-th root comparison. Naturality of the inverse-image unit moves the projection through the unit. Thus the r-th coordinate is exactly the finite root action defined by the same restriction/comparison composite.",
+   "uses": [
+    "def-weil-frobenius-coefficient-twists",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For that finite root action, the adjunct identity identifies the inverse-image unit followed by the comparison with the direct-image map. Its defining formula pulls units back along the fibre-product first projection. Composing with the specified sectionArrow yields the scheme geometric Frobenius, by the unit projection identity of the map/pullback adjunction. Naturality of GammaSpecIso identifies the resulting section value with inverse arithmetic field Frobenius. Root comparison transition compatibility makes these coordinates compatible.",
+   "uses": [
+    "def-pur-roots-of-unity-inverse-image",
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "def-pur-roots-of-unity-sheaf",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Frobenius roots-of-unity power theorem identifies inverse arithmetic Frobenius on compatible root systems with inverse(q) scalar multiplication on the ordinary cyclotomic Tate module. Identify the sheaf-limit section with that compatible system by its root-section equivalences and GammaSpecIso, with the extra order-one coordinate equal to 1. The completed sheaf coefficient action is coordinatewise finite Z/l^(r+1) multiplication, and the constant-to-completed coefficient map is determined by the p-adic residue maps. Consequently every projection of the claimed right-hand side agrees with the coordinate calculated above. Evaluation preserves limits and their projections are jointly injective, proving the identity. No primitive generator is used.",
+   "uses": [
+    "lem-pur-frobenius-roots-of-unity-power",
+    "def-pur-twist-sheaves",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-coefficient-twists",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-inverse-image",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "def-pur-roots-of-unity-sheaf",
+  "def-weil-frobenius-point-transport",
+  "lem-pur-frobenius-roots-of-unity-power",
+  "def-pur-twist-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281 (root action, tensor powers, duals); geometric convention in Deligne Weil II (1.1.7), pp. 150-151; returned item steps 5-7; explicit section calculation and subargument of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit of root of unity sheaves on algebraic closure geometric Frobenius acts by inverse q",
+   "results": "8 hits including cyclotomicCharacter.spec, cyclotomicCharacter.toFun_spec, FiniteField.frobeniusAlgEquivOfAlgebraic and cyclotomicCharacter.toZModPow. These describe ordinary field roots and characters, not the specified sheaf inverse-image composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inverse_unit\"",
+   "results": "3 hits: Ring.inverse_unit and two Equivalence.changeInverse_unitIso lemmas. Ring.inverse_unit is used for unit arithmetic, but does not describe either sheaf action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "signed_section_scalar|root_limit_cyclotomic_action|rootLineMap",
+   "results": "0 hits in Mathlib search. Local library inspection finds rootLineMap and the positive/signed normalization declarations in FrobeniusCoefficientTwistsCanonical.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric Frobenius acts by inverse q on the inverse limit of root of unity sheaves and on signed tensor powers and duals",
+   "results": "8 hits, chiefly iterateFrobeniusEquiv_symm and frobeniusEquiv inverse identities; also WittVector.StandardOneDimIsocrystal.frobenius_apply. None identifies the sheaf operators.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSignedCyclotomicAction",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "geometric Frobenius acts on E(1) by q inverse, on E(m) by q to minus m, and actions commute with finite reduction; root inverse-limit part",
+   "via": [
+    "lem-pur-point-signed-cyclotomic-action",
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointRootLimitCyclotomicAction",
+  "file": "lean/Sheaf/Paper/PointRootLimitCyclotomicAction.lean",
+  "declaration": "WeilConjectures.PointSignedCyclotomicAction.root_limit_cyclotomic_action",
+  "statement": "theorem root_limit_cyclotomic_action (hl : l ≠ D.p)\n    (e : (purTwistZlOne (point D) l).obj.obj (op (finalObject D))) :\n    rootLimitAction D l e =\n      @SMul.smul _ _ (purTwistZlAction (point D) l (op (finalObject D))).toSMul\n        ((purTwistZlCompletionMap (point D) l).hom.app (op (finalObject D))\n          (((toSheafify (ProEt.topology (point D))\n            ((Functor.const (point D).ProEtᵒᵖ).obj\n              (CommRingCat.of (ULift.{u + 1} (PadicInt l))))).app (op (finalObject D)))\n                (ULift.up (Ring.inverse (D.q : ℤ_[l])))))\n        e",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-54049",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T163532-L-691593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-54049",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T163532-L-691593",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to clone; 16 data defs verbatim vs clone; root_limit = item conjunct (he dropped, true via unique coordinatewise purTwistZlAction); signed_section_scalar = item scalar conjunct at b=1; combined scratch compile + #print axioms (sorryAx from the 2 sublemmas only); 0 importers"
+ }
+}

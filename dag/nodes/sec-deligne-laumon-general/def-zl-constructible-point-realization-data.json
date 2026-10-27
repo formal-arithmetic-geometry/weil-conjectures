@@ -1,0 +1,140 @@
+{
+ "id": "def-zl-constructible-point-realization-data",
+ "kind": "definition",
+ "title": "Finite and common-stage point realization composites and scalar component",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and its finite coefficient stages and inclusions [def-weil-algebraically-closed-coefficients]. Use the actual finite and common-stage point fibre functors [def-weil-finite-coefficient-point]. Define the finite point realization to be $\\operatorname{pointRationalFibre}\\mathbin{\\ggg}\\iota$, where $\\iota$ is the full inclusion of bounded finite-dimensional complexes into $D(E)$ [def-weil-point-fd-complexes]. Define the common-stage point realization to be $\\operatorname{pointQbarFibre}\\mathbin{\\ggg}\\operatorname{pointFdQbarRealization}$ [def-weil-point-fd-qlbar-category]. For a finite stage $E$, define its coefficient-model map by the canonical Shrink algebra equivalence to the actual subfield of $\\Omega$. Define the common-stage object isomorphism using the specified object formula of $\\operatorname{pointQbarFibre}$ on the actual stage inclusion: its realization is the successive derived scalar extension from the coefficient model to $E$ and then to $\\Omega$. Define the canonical finite-to-common scalar component as the inverse of the normalized derived tensor-tower component [lem-weil-derived-field-scalar-extension-tower], followed by the inverse of this common-stage object isomorphism. Its source is direct derived scalar extension of the finite point realization to $\\Omega$ and its target is the actual common-stage point realization of that same included object. These constructions introduce no arbitrary comparison isomorphism and assert no t-exactness theorem.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-complexes",
+  "def-weil-point-fd-qlbar-category",
+  "lem-weil-derived-field-scalar-extension-tower"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Propositions 6.8.4(1),(4) and 6.8.14(2), Remark 6.8.15; blueprint real-mixed-by-curves proof paragraph 1. Definition ownership repair requested in return L for lem-zl-classical-normalized-two-fibre-comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived realization of finite and algebraic closure geometric point fibres with canonical finite-to-common scalar component",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : DiscreteTopology (f.fiber y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"algebraicClosure.le_restrictScalars\", \"module\": \"Mathlib.FieldTheory.AlgebraicClosure\", \"type\": \"[Algebra E K] [IsScalarTower F E K] : algebraicClosure F K ≤ (algebraicClosure E K).restrictScalars F\", \"doc\": \"Given a tower of field extensions $ F \\\\to E \\\\to K $ satisfying the scalar tower condition, the algebraic closure of $ F $ in $ K $ is contained within the scalar restriction to $ F $ of the algebraic \"}\n  {\"name\": \"minpoly.instIsScalarTowerSubtypeMemSubringSubalgebraIntegralClosure\", \"module\": \"Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed\", \"type\": \": IsScalarTower A ((integralClosure A L)) L\", \"doc\": \"The integral closure of $ A $ in $ L $ is equipped with a canonical $ A $-algebra structure, where scalar multiplication is inherited from the algebra structure on $ L $.\"}\n  {\"name\": \"Ring.instFiniteNormalClosure_1\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": Module.Finite R T\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $, consisting of all elements of $ E $ integral over $ S $, is equipped with a canonical $ S $-algebra structure. This means the subalge\"}\n  {\"name\": \"AlgebraicClosure.instIsScalarTower\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"{R S : Type*} [CommSemiring R] [CommSemiring S] [Algebra R S] [Algebra S k] [Algebra R k] [IsScalarTower R S k] :\\n  IsScalarTower R S (AlgebraicClosure k)\", \"doc\": \"Given commutative semirings $R$ and $S$ with compatible algebra structures on a field $k$ forming a scalar tower $R \\\\to S \\\\to k$, the algebraic closure $\\\\overline{k}$ of $k$ inherits this scalar tower\"}\n  {\"name\": \"AlgebraicClosure.isAlgClosed\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \": IsAlgClosed (AlgebraicClosure k)\", \"doc\": \"The algebraic closure of any field is a field.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations, without a private copy; assign their plain definitions a definition-node owner."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructiblePointRationalRealization constructiblePointCommonStageRealization constructiblePointCommonStageScalarComponent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.g\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → (self : PrimeSpectrum.BasicConstructibleSetData R) → Fin self.n → R\", \"doc\": \"A function assigning to each basic constructible set data in the prime spectrum of a ring a finite list of ring elements, indexed by the natural number $n$ associated with that data. For a given data \"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.f\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → PrimeSpectrum.BasicConstructibleSetData R → R\", \"doc\": \"The function that maps a basic constructible set data structure for the prime spectrum of a ring $ R $ to its corresponding element in $ R $, which encodes the defining ideal or relation for the const\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The type representing finite sets of basic constructible subsets of the prime spectrum of a ring, generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.n\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → PrimeSpectrum.BasicConstructibleSetData R → ℕ\", \"doc\": \"A function that assigns a natural number to each basic constructible set data in the prime spectrum of a ring.\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"An inductive type defining the data structure for basic constructible subsets of the prime spectrum of a ring, typically generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"ChevalleyThm.chevalley_mvPolynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {n : ℕ} {M : Submodule ℤ R},\\n  1 ∈ M →\\n    ∀ (k : ℕ) (d : Multiset (Fin n)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin n) R)),\\n      (∀ C ∈ S, C.n ≤ k) →\\n        (∀ C ∈ S,\\n            ∀ (j : Fin C.n),\\n              C.g j ∈\\n                MvPolyno\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, $ k $ a natural number, $ d $ a multiset of indices $\\\\{1, ..., n\\\\}$, and $ S $ a constructible set in the mul\"}\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → [inst : CommSemiring R] → PrimeSpectrum.ConstructibleSetData (Polynomial R) → ℕ\", \"doc\": \"For a constructible set data $ S $, the function $ \\\\text{degBound} $ computes the supremum over all basic constructible set data $ C $ in $ S $ of the sum over indices $ i $ of the degree of the polyn\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations, without a private copy; assign their plain definitions a definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "constructiblePointRationalRealization|constructiblePointCommonStageRealization|constructiblePointCommonStageScalarComponent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations, without a private copy; assign their plain definitions a definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg on lean/WeilConjectures, lean/Sheaf and dag/nodes for constructiblePointRationalRealization, constructiblePointCommonStageRealization, constructiblePointCoefficientMap, constructiblePointCommonStageObjectIso, constructiblePointCommonStageScalarComponent",
+   "results": "lean/Sheaf/Paper/ConstructiblePullbackTExact.lean:467:abbrev constructiblePointRationalRealization\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:474:abbrev constructiblePointCommonStageRealization\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:497:      (constructiblePointRationalRealization D l hl E)),\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:500:          rationalDerivedPullback l E x ⋙ constructiblePointRationalRealization D l hl E ≅\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:501:        rationalDerivedPullback l E x ⋙ constructiblePointRationalRealization D l hl E ⋙\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:505:        γ.app K = (constructiblePointRationalRealization D l hl E).mapIso\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:510:        ((constructiblePointRationalRealization D l hl E).obj\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:530:      (constructiblePointCommonStageRealization D l hl Ω)),\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:533:          commonStageDerivedPullback l Ω x ⋙ constructiblePointCommonStageRealization D l hl Ω ≅\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:534:        commonStageDerivedPullback l Ω x ⋙ constructiblePointCommonStageRealization D l hl Ω ⋙\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:538:        γ.app K = (constructiblePointCommonStageRealization D l hl Ω).mapIso\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:543:        ((constructiblePointCommonStageRealization D l hl Ω).obj\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:556:    (constructiblePointRationalRealization D l hl E)\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:568:    (constructiblePointCommonStageRealization D l hl Ω)\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:588:    constructiblePointRationalRealization D l hl (Coefficient.{u} l Ω E) ⋙\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:592:        constructiblePointRationalRealization D l hl (Coefficient.{u} l Ω L) :=\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:619:def constructiblePointCoefficientMap\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:627:def constructiblePointCommonStageObjectIso\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:630:    (constructiblePointCommonStageRealization D l hl Ω).obj\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:634:          (constructiblePointCoefficientMap l Ω E)).obj\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:644:def constructiblePointCommonStageScalarComponent\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:648:        (E.val.subtype.comp (constructiblePointCoefficientMap l Ω E))).obj\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:649:          ((constructiblePointRationalRealization D l hl (Coefficient.{u} l Ω E)).obj K) ≅\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:650:      (constructiblePointCommonStageRealization D l hl Ω).obj\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:653:    (M := Ω) (constructiblePointCoefficientMap l Ω E) E.val.subtype).symm.app\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:655:    (constructiblePointCommonStageObjectIso D l hl Ω E K).symm\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:688:          (E.val.subtype.comp (constructiblePointCoefficientMap l Ω E)))\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:689:        (β : constructiblePointRationalRealization D l hl (Coefficient.{u} l Ω E) ⋙\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:691:              (E.val.subtype.comp (constructiblePointCoefficientMap l Ω E)) ≅\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:693:            constructiblePointCommonStageRealization D l hl Ω),\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:696:            (E.val.subtype.comp (constructiblePointCoefficientMap l Ω E))).CommShift ℤ) ∧\nlean/Sheaf/Paper/ConstructiblePullbackTExact.lean:698:          β.app K = constructiblePointCommonStageScalarComponent D l hl Ω E K) ∧\ndag/nodes/sec-deligne-laumon-a1/lem-a1-constructible-pullback-t-exact.json\n",
+   "date": "2026-10-24",
+   "verdict": "The definitions exist only in Sheaf.Paper.ConstructiblePullbackTExact. Existing theorem nodes mention them but no definition node owns them; reuse these exact declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search 'point realization'",
+   "results": "0 blueprint nodes match 'point realization'",
+   "date": "2026-10-24",
+   "verdict": "No duplicate blueprint definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-classical-normalized-two-fibre-comparison",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1: the normalized two-fibre comparison, its finite scalar square and scalar extension to the algebraic closure",
+   "via": [
+    "lem-zl-classical-normalized-two-fibre-comparison",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.ConstructiblePullbackTExact",
+  "declaration": "WeilConjectures.constructiblePointCommonStageScalarComponent",
+  "declarations": [
+   "WeilConjectures.constructiblePointRationalRealization",
+   "WeilConjectures.constructiblePointCommonStageRealization",
+   "WeilConjectures.constructiblePointCoefficientMap",
+   "WeilConjectures.constructiblePointCommonStageObjectIso",
+   "WeilConjectures.constructiblePointCommonStageScalarComponent"
+  ],
+  "statement": "def constructiblePointCommonStageScalarComponent\n    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (E : Index l Ω) (K : Stage l Ω (Spec (.of D.k)) E) :\n    (DerivedCategory.fieldDerivedScalarExtension\n        (E.val.subtype.comp (constructiblePointCoefficientMap l Ω E))).obj\n          ((constructiblePointRationalRealization D l hl (Coefficient.{u} l Ω E)).obj K) ≅\n      (constructiblePointCommonStageRealization D l hl Ω).obj\n        ((inclusion (l := l) (Ω := Ω) (Y := Spec (.of D.k)) E).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: owns the existing plain definitions in this module by exact re-export, as authorized by return L. No file or duplicate declaration is introduced; the theorem formerly cited for these definitions constructs no object used here."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d0371483",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d0371483",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of return L (5a28, H2 only). Lean is byte-identical to 5a28 (all 4 modules diffed); only records changed. Item, two-fibre-data and common-data now cite new existing:true owners: def-zl-normalized-adic-fibre-limit-data (PerAdicNormalizedFibreComparisons: modelH0/IsPulledLattice/LocalLimits etc., 13 decls exist, LocalLimits signature matches l.400) and def-zl-constructible-point-realization-data (ConstructiblePullbackTExact constructiblePoint*, 5 decls exist; its lemma stmt_dep supplies fieldScalarTower = .choose of an ∃!). Item statement and proof_deps unchanged. Mechanical theorem-stmt_dep finding: fieldDerivedHomologyIso is .choose of existsUnique_fieldDerivedHomologyIso, an object the theorem constructs, and finiteFieldDatumPrimeUnit is a real theorem (IsUnit l) used for an instance; both genuine, PASS on that point. Every non-existing lean.statement is verbatim in its file. The _he/_hc non-vacuity lemmas exist. Edge cases: empty Y, rank 0/varying, b=0, E≤E, arbitrary x. Advisory: Stage.realization pinned only up to E^× (node says 'isomorphic'). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-25bc0",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261025T033830-L-104915",
+  "kind": "interface",
+  "note": "independent cc review: constructiblePullbackResidueUnits abbrev→def via proved char-p lemma constructiblePullbackResidue_isUnit against def-a1-constructible-pullback-residue-units (statement_change + change record) and new node lem-a4-constructible-residue-prime-unit; axioms clean; all 14 direct importers + SfCommonStageDirectImage/WeilCohomology compile",
+  "sorry_before": [
+   "WeilConjectures.constructible_point_scalar_compatibility",
+   "WeilConjectures.constructible_pullback_scalar_compatibility"
+  ],
+  "sorry_after": [
+   "WeilConjectures.constructible_point_scalar_compatibility",
+   "WeilConjectures.constructible_pullback_scalar_compatibility"
+  ]
+ }
+}

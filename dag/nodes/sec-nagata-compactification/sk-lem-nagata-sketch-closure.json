@@ -208,7 +208,77 @@
   "date": "2026-10-16",
   "existing": false
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Compactification.denseRefinement",
+     "module": "WeilConjectures.Compactification.BoundaryPreparation",
+     "lines": [
+      60,
+      89
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.image",
+    "AlgebraicGeometry.Compactification.ofIsImmersion",
+    "AlgebraicGeometry.Compactification.baseChange"
+   ],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Compactification.ofIsImmersion",
+     "module": "WeilConjectures.Compactification.Constructions",
+     "lines": [
+      64,
+      73
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.denseRefinement",
+     "module": "WeilConjectures.Compactification.BoundaryPreparation",
+     "lines": [
+      60,
+      77
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.baseChange",
+     "module": "WeilConjectures.Compactification.BaseChange",
+     "lines": [
+      167,
+      174
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.image",
+     "module": "Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "def",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
@@ -222,5 +292,27 @@
    "AlgebraicGeometry.nagata_sketch_closure"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $i:U\\to T$ be a quasi-compact immersion. Its\nscheme-theoretic image $\\overline U\\subseteq T$ is a closed subscheme,\n$U\\to\\overline U$ is an open immersion, and $U$ is scheme-theoretically\ndense in $\\overline U$.\n\nIf $U\\subseteq T$ is a scheme-theoretically dense open and $Y\\to S$ is\nseparated, two $S$-maps $T\\to Y$ agreeing on $U$ agree on $T$.",
+  "proof": [
+   {
+    "text": "The ideal of the image is $\\ker(\\mathcal O_T\\to i_*\\mathcal O_U)$, which is\nquasi-coherent because $i$ is quasi-compact and, being an immersion,\nseparated. On an open\nof $T$ where the immersion is closed, the image restricts to $U$ itself.\nHence $U$ is open in its image. By construction a section of\n$\\mathcal O_{\\overline U}$ vanishing on $U$ is zero; this is schematic\ndensity. These statements are the image and closure lemmas (Stacks 01R8 and\n01RG).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For uniqueness, the equalizer of the two maps is a closed subscheme of $T$,\nsince it is the inverse image of the diagonal of $Y/S$. Its ideal vanishes on\n$U$ and thus vanishes on $T$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

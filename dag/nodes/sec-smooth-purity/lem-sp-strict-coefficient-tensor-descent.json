@@ -1,0 +1,279 @@
+{
+ "id": "lem-sp-strict-coefficient-tensor-descent",
+ "kind": "statement",
+ "title": "Strict coefficient tensor complexes descend through K-flat localization",
+ "statement": "Let $\\mathcal C$ be a site small relative to the universe of module sheaves [def-weil-pbc-sites-and-cohomology], $R$ a sheaf of commutative rings, and $(S_n,q_n)_{n\\geq1}$ an inverse sequence of commutative $R$-algebra sheaves, with $q_n:S_{n+1}\\to S_n$ an $R$-algebra map. Let $\\mathscr S(S)$ be the category of systems of $S_n$-module sheaves $L_n$ with $S_{n+1}$-linear maps $L_{n+1}\\to\\operatorname{Res}_{q_n}L_n$, and compatible componentwise morphisms; restriction of scalars is [def-pc-sheaf-restrict-scalars]. Its kernels and cokernels are componentwise. Use sheaves of modules and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], sheafified tensor products [def-pur-sheaf-tensor-product], and derived scalar extension computed by K-flat complexes [lem-pur-derived-change-of-rings].\n\nFor a cochain complex $P$ of $R$-modules [def-pc-cochain-complex-modules], define $F(P)^i_n=P^i\\otimes_RS_n$, with differential $d_P\\otimes1$ and transition $1\\otimes q_n$. This is a complex of strict systems. The assignment on chain maps and chain homotopies is componentwise tensor with $1$. On the full homotopy subcategory $\\mathcal P_R$ of K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], $F$ sends quasi-isomorphisms to quasi-isomorphisms of strict-system complexes. There is an exact functor\n$$\\mathcal F:D(R)\\longrightarrow D(\\mathscr S(S))$$\nwith a natural comparison $\\mathcal F(Q_RP)\\simeq Q_{\\mathscr S}F(P)$ for every $P\\in\\mathcal P_R$, unique up to the unique comparison compatible with this normalization. These comparisons are independent of the K-flat representative and natural for derived morphisms represented by roofs in $\\mathcal P_R$.\n\nFor every $n$, exact evaluation identifies $e_n\\mathcal F(M)$ naturally with $M\\otimes_R^LS_n$. Under this identification, the underlying transition is the quotient/coefficient-induced map: on $P$ it is $x\\otimes c\\mapsto x\\otimes q_n(c)$. The maps for composite indices are the actual composites of these strict transitions. This asserts existence and descent of a functor into the ordinary derived category of strict systems, not merely a system of objects in the separate derived categories. No coefficient map is required to be flat or surjective, and no boundedness or geometric hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7D (lemma-factor-through-K-flat), with Tag 06YS (lemma-K-flat-resolution) and Tag 06YY (lemma-derived-base-change); strict-system construction and resolving-class descent of the blueprint reduction paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural algebra sequence from the adjacent compatibility ha by NatTrans.ofOpSequence. Use the concrete additive extension functor of [lem-coef-sequence-projection-derived-adjunction], followed by the ringed sequence equivalence of [lem-pur-system-ringed-sequence-site]. Its level comparison is the identity on sections after restriction along the identity coefficient identification. For a vertical arrow its naturality is exactly the identity-transition law of the strict system.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section formula characterizing transition in [def-coef-semilinear-system-models] identifies it with horizontal restriction. Apply the existing extension transition_tmul formula: horizontal restriction followed by the identity vertical restriction sends s tensor x to q(s) tensor x, for every composite index, including the identity index. Additivity and functoriality hold before passing to complexes.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-coef-sequence-projection-derived-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing extension_preserves proof of [lem-coef-sequence-projection-derived-adjunction] gives quasi-isomorphism invariance on K-flat complexes. The exact ringed sequence equivalence preserves homology, so the ordinary functor into sequence-site module sheaves also preserves these quasi-isomorphisms. In particular it preserves them on the resolving class with flat terms.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-evaluation-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pc-kflat-resolution] to resolve every complex. Transfer termwise tensor exactness to IsFlatOnSite by the existing siteSheafTensorRightIso. On the homotopy category, lift quasi-isomorphisms and use the invariance just proved; apply [lem-pur-left-derived-from-kflat-class] to obtain the pointwise universal derived pair, triangulated and computing on resolving complexes. Transfer its pointwise right Kan extension along the full essentially surjective homotopy quotient and the quotientCompQhIso to obtain precisely the cochain counit.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pur-homotopy-category-triangulated",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each exact evaluation compose the cochain counit with its canonical exact-derived comparison and the termwise ordinary level isomorphism. This natural transformation is invertible on every resolving complex. Compare it with the scalar model counit from [lem-pur-derived-change-of-rings], also invertible there. The generic comparison_from_resolutions proof of [lem-cbc-derived-constant-tower-normalization] extends their quotient uniquely to a natural isomorphism. Its normalization is exactly the displayed evaluation_normalized equation.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-cbc-derived-constant-tower-normalization",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same generic comparison_from_resolutions lemma to the actual counit and any competing counit invertible on the resolving class. It gives the unique normalized natural isomorphism required by Descent.unique, without assuming the competing pair universal. The lemma uses the right calculus on the homotopy category and [lem-sc-nattrans-from-resolving-class]; cancellation on a resolution proves uniqueness on all derived objects. Assemble all fields of Descent.",
+   "uses": [
+    "lem-cbc-derived-constant-tower-normalization",
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pc-flat-sheaf-modules",
+  "lem-cbc-derived-constant-tower-normalization",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.proof.md",
+  "place": "Construction paragraph, realized by the existing concrete sequence projection extension and generic resolving-class/cochain comparison arguments; Stacks sites-cohomology.tex Tags 06YS, 06YT, 06YY and derived.tex Tag 06XN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strict.*tower|semilinear.*sequence|KFlat",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; scalar module flatness and Tor declarations do not construct derived strict semilinear systems from nonflat coefficient maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension into strict inverse systems of sheaf modules is computed by one K-flat resolution",
+   "results": "8 hits: Module.Flat.of_flat_tensorProduct, RingHom.Flat, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.of_projective, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, Module.Flat.isBaseChange, comonadicExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; scalar module flatness and Tor declarations do not construct derived strict semilinear systems from nonflat coefficient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; scalar module flatness and Tor declarations do not construct derived strict semilinear systems from nonflat coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site, K-flat termwise tensor with an inverse sequence of ring sheaves descends to a functor from the derived category to the derived category of strict semilinear module sequences",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; scalar module flatness and Tor declarations do not construct derived strict semilinear systems from nonflat coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat resolving complexes localize to the unbounded derived category and a coefficientwise tensor construction gives strict semilinear tower objects, independent of resolution and natural for roofs",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, HasDerivedCategory.standard",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; scalar module flatness and Tor declarations do not construct derived strict semilinear systems from nonflat coefficient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*tower|semilinear.*sequence|[Kk].?[Ff]lat",
+   "results": "0 hits in Mathlib/CategoryTheory: ",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; scalar module flatness and Tor declarations do not construct derived strict semilinear systems from nonflat coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat coefficient tensor functor descends from sheaf complexes to the ordinary derived category of strict semilinear inverse systems",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor', CategoryTheory.Tor, localCohomology.diagram, CategoryTheory.Tor_obj, Ext",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; Tor uses projective resolutions and computes homology bifunctors, not this unbounded derived strict-system construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; Tor uses projective resolutions and computes homology bifunctors, not this unbounded derived strict-system construction."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*coefficient|semilinear.*tower|[Kk].?[Ff]lat",
+   "results": "0 hits: ; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; Tor uses projective resolutions and computes homology bifunctors, not this unbounded derived strict-system construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with varying coefficient rings defines a functor into the derived category of strict module systems",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CommRingCat.tensorProd, PresheafOfModules.pushforward₀, PresheafOfModules.Monoidal.tensorObj, ModuleCat.coextendScalars, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearShiftFunctorInt",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; Tor uses projective resolutions and computes homology bifunctors, not this unbounded derived strict-system construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of flat term K-flat resolutions defines unbounded derived extension of scalars with values in varying ring module towers, unique with prescribed evaluation comparisons",
+   "results": "8 hits: Ext, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor', Module.flat_of_isLocalized_span, CategoryTheory.Tor, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Tor_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor derived maps require exact underived functors; Tor uses projective resolutions and computes homology bifunctors, not this unbounded derived strict-system construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-tower-normalized",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Construction paragraph: strict coefficient complex and localization descent (former proof steps 1--2)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-strict-coefficient-tensor-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies unchanged. Expanded strict-system abelian/cohomology detection, tensor chain/homotopy/cone formulas, K-flat invariance, exact derived descent, normalization uniqueness through the dense right-fraction subcategory, evaluations and strict composite transitions. Every non-elementary input reuses an existing node; no new nodes or Mathlib leaves. Searched the current project for an exact attachment and Mathlib with logged commands.",
+  "blueprint": "det-sp-reduction-tower-normalized Construction paragraph: the strict complexes and transitions are steps 1--3, quasi-isomorphism invariance step 4, functorial derived descent steps 5--6, evaluation and transition identifications steps 7--8.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat replacement on an arbitrary ringed site, required for the unbounded resolving class; the normalized-tower unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic arbitrary-coefficient K-flat quasi-isomorphism preservation and canonical single-level derived computation; strict-system assembly remains in this proof."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic exact left-derived-functor criterion applied to the explicitly constructed strict-system tensor functor."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Generic right-fraction calculus for quasi-isomorphisms in a homotopy category, used to justify normalization uniqueness and roofs."
+   },
+   {
+    "node": "lem-trf-right-fraction-dense-subcategory",
+    "why": "Generic localization equivalence for a full subcategory with enough denominators, used with flat-term K-flat complexes."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic termwise derived functor of an exact functor, applied to the explicitly verified exact evaluations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-e9011dba8",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-e9011dba8 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with nothing changed. There are no new nodes, the statement and stmt_deps are unchanged, the proof_deps equal the union of the step uses (11 nodes), and there is no cycle. Step 1: the system category is abelian (kernels, cokernels and coimage-to-image isomorphisms are levelwise, and restriction of scalars keeps the underlying sheaf), and a map is a quasi-isomorphism exactly when every level is. Steps 2-3: strict tensor complexes are compatible with chain maps, homotopies and cones (cone block matrix and sign match def-weil-abstract-derived-category), and G=Q∘F is exact by lem-pur-homotopy-category-triangulated. Step 4: clause (1) of lem-pur-derived-change-of-rings is applied to each map R→S_n with exactly its hypotheses (K-flat complexes, arbitrary ring map); no flatness is needed. Step 5: lem-pc-kflat-resolution (06YS, unbounded) and step 4 are the two hypotheses of lem-pur-left-derived-from-kflat-class, which gives an exact LG and an ε that is invertible on 𝒫_R. Step 6: the right-fraction axioms of lem-trf-right-fraction-dense-subcategory follow from the second halves of MS2 and MS3 and from MS1, and 𝒫_R is full with a denominator into every complex, so 𝒫_R[W⁻¹]≃D(R); the universal property (1)-(3) then gives the normalized uniqueness and the roof formula without functorial resolutions. Step 7: the exact evaluation derived by lem-sf-exact-functor-derived-triangulated is matched with clause (2) of derived-change-of-rings and extended from 𝒫_R. Step 8: termwise transitions descend, and composites are strict. I checked Stacks derived 0GSL (line 1497), sites-cohomology 0G7D (line 3418) and the blueprint main-20261015 Construction paragraph. Edge cases: identity q_n, nonflat ℤ→ℤ/2 (only K-flat quasi-isomorphisms are inverted), unbounded complexes. I searched for duplicates among the strict/varying-ring nodes (coef-sequential-varying-ring-realization, coef-semilinear-derived-calculus, sp-constant-reduction-models, cbc-ringed-open-strict-reduction); all are different or narrower. Batch 5: lem-trf-right-fraction-dense-subcategory is a pure category-theory localization lemma (categorical form of 0GSL), and its 14-node closure contains only definitions and localization lemmas, nothing from the trace formula or Poincaré duality, so it is accepted as outside the assumptions. The 6 generic tool_uses are accepted. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StrictCoefficientTensorDescent",
+  "declaration": "WeilConjectures.SemilinearSections.StrictCoefficientTensor.strictCoefficientTensorDescent",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.StrictCoefficientTensor.Resolving",
+   "WeilConjectures.SemilinearSections.StrictCoefficientTensor.Scalar",
+   "WeilConjectures.SemilinearSections.StrictCoefficientTensor.pure",
+   "WeilConjectures.SemilinearSections.StrictCoefficientTensor.Descent",
+   "WeilConjectures.SemilinearSections.StrictCoefficientTensor.strictCoefficientTensorDescent"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/StrictCoefficientTensorDescent.lean",
+  "statement": "theorem strictCoefficientTensorDescent (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) : Nonempty (Descent J R S q a)",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed generic semilinear-system model node for the ordinary category of strict systems and its ordinary unbounded derived category. The sole theorem supplies the normalized strict tensor descent, its universal cochain comparison, uniqueness relative to the resolving-class normalization, and the compatible levelwise derived scalar-extension comparisons. Independent site object, morphism and coefficient universes are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d8f740b3",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading present; self-reread advisory), module and dependency Lean: DerivedChangeOfRingsCochainModel, SemilinearSystemModels (Systems/DS/evaluation/e/transition/derivedTransition/coefficientMap/extensionUnit), IsKFlatIndependentCoefficients, IsFlatOnSite.{c,v,r,r}. Node diff: only lean + stmt_dep of landed def-coef-semilinear-system-models (allowed). Clauses: site EssentiallySmall.{r} with independent universes; ha = R-algebra compatibility only, no flatness or surjectivity. ordinary/level pin levels to changeOfRings; transition_pure fixes all n<=m transitions on pure sections with actual composites. preserves, T into DS, triangulated, ε iso on K-flat flat-term complexes, pointwise/universal, unique (true via 0GSL density). evaluation to scalar extension pinned by evaluation_normalized. Edge cases (zero, identity q, non-flat q, unbounded) OK. No duplicate found (scalarExtensionSection is at a different universe; PurSequenceKFlatComparisonShifts only cites the item). No hollow definitions, docstrings and proof steps present, only sorry. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261025T180719-L-4023353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

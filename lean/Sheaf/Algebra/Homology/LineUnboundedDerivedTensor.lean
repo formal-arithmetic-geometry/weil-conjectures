@@ -14,6 +14,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.LineEvaluationInversePair
+import Sheaf.Algebra.Homology.FlatSingleDerivedNormalization
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
+import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
@@ -97,6 +101,172 @@ def comparisonData {A : Type u} [Category.{v} A] [Abelian A]
           DerivedCategory.homologyFunctor A i ⋙ T)) ∧
         T.Linear B ∧ S.Linear B ∧ F.Linear B ∧ G.Linear B) (_instP := sP) (_instD := sD)
 
+section Localization
+
+variable {C D : Type*} [Category C] [Category D]
+  (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]
+  (T S : C ⥤ C) (F G : D ⥤ D)
+  (cF : Q ⋙ F ≅ T ⋙ Q) (cG : Q ⋙ G ≅ S ⋙ Q)
+
+private def cancellationComparison (e : T ⋙ S ≅ 𝟭 C) : Q ⋙ (F ⋙ G) ≅ Q :=
+  (Functor.associator Q F G).symm ≪≫ Functor.isoWhiskerRight cF G ≪≫
+    Functor.associator T Q G ≪≫ Functor.isoWhiskerLeft T cG ≪≫
+    (Functor.associator T S Q).symm ≪≫ Functor.isoWhiskerRight e Q ≪≫
+    Functor.leftUnitor Q
+
+private def localizedCancellation (e : T ⋙ S ≅ 𝟭 C) : F ⋙ G ≅ 𝟭 D :=
+  Localization.liftNatIso Q W _ _ _ _
+    (cancellationComparison Q T S F G cF cG e ≪≫ (Functor.rightUnitor Q).symm)
+
+private theorem localizedCancellation_app (e : T ⋙ S ≅ 𝟭 C) (K : C) :
+    (localizedCancellation Q W T S F G cF cG e).hom.app (Q.obj K) =
+      G.map (cF.hom.app K) ≫ cG.hom.app (T.obj K) ≫ Q.map (e.hom.app K) := by
+  simp [localizedCancellation, cancellationComparison, Localization.liftNatTrans_app,
+    Localization.Lifting.iso]
+
+private theorem localizedCancellation_inv_app (e : T ⋙ S ≅ 𝟭 C) (K : C) :
+    (localizedCancellation Q W T S F G cF cG e).inv.app (Q.obj K) =
+      Q.map (e.inv.app K) ≫ cG.inv.app (T.obj K) ≫ G.map (cF.inv.app K) := by
+  simp [localizedCancellation, cancellationComparison, Localization.liftNatTrans_app,
+    Localization.Lifting.iso]
+
+private theorem localizedCancellation_triangles
+    (a : T ⋙ S ≅ 𝟭 C) (b : S ⋙ T ≅ 𝟭 C)
+    (ht : ∀ K : C, T.map (a.inv.app K) ≫ b.hom.app (T.obj K) = 𝟙 _) :
+    (∀ K : D,
+      F.map ((localizedCancellation Q W T S F G cF cG a).inv.app K) ≫
+        (localizedCancellation Q W S T G F cG cF b).hom.app (F.obj K) = 𝟙 _) ∧
+    (∀ K : D,
+      (localizedCancellation Q W T S F G cF cG a).inv.app (G.obj K) ≫
+        G.map ((localizedCancellation Q W S T G F cG cF b).hom.app K) = 𝟙 _) := by
+  let alpha := localizedCancellation Q W T S F G cF cG a
+  let beta := localizedCancellation Q W S T G F cG cF b
+  have htri : Functor.whiskerRight alpha.inv F ≫ Functor.whiskerLeft F beta.hom =
+      𝟙 F := by
+    apply Localization.natTrans_ext Q W
+    intro K
+    change F.map (alpha.inv.app (Q.obj K)) ≫ beta.hom.app (F.obj (Q.obj K)) = 𝟙 _
+    apply (cancel_mono (cF.hom.app K)).mp
+    simp only [Category.assoc, Category.id_comp]
+    have hn := beta.hom.naturality (cF.hom.app K)
+    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_map] at hn
+    rw [← hn]
+    rw [← F.map_comp_assoc]
+    dsimp only [alpha]
+    rw [localizedCancellation_inv_app]
+    simp only [Category.assoc, ← G.map_comp, Iso.inv_hom_id_app]
+    erw [G.map_id, Category.comp_id]
+    dsimp only [beta]
+    rw [localizedCancellation_app]
+    rw [F.map_comp (Q.map (a.inv.app K)) (cG.inv.app (T.obj K))]
+    simp only [Category.assoc]
+    erw [← F.map_comp_assoc (cG.inv.app (T.obj K)) (cG.hom.app (T.obj K)),
+      Iso.inv_hom_id_app, F.map_id, Category.id_comp]
+    have hnF := cF.hom.naturality (a.inv.app K)
+    dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map, Functor.id_obj] at hnF
+    rw [← Category.assoc, hnF]
+    rw [Category.assoc, ← Q.map_comp, ht]
+    erw [Q.map_id, Category.comp_id]
+  have htF (K : D) : F.map (alpha.inv.app K) ≫ beta.hom.app (F.obj K) = 𝟙 _ :=
+    congrArg (fun n : F ⟶ F ↦ n.app K) htri
+  let E : D ≌ D := ⟨F, G, alpha.symm, beta, htF⟩
+  exact ⟨htF, E.unit_inverse_comp⟩
+
+private theorem localizedCancellation_commShift [HasShift C ℤ] [HasShift D ℤ]
+    [Q.CommShift ℤ] [T.CommShift ℤ] [S.CommShift ℤ]
+    [F.CommShift ℤ] [G.CommShift ℤ]
+    [NatTrans.CommShift cF.hom ℤ] [NatTrans.CommShift cG.hom ℤ]
+    (e : T ⋙ S ≅ 𝟭 C) [NatTrans.CommShift e.hom ℤ] :
+    NatTrans.CommShift (localizedCancellation Q W T S F G cF cG e).hom ℤ := by
+  let a := localizedCancellation Q W T S F G cF cG e
+  have he : Functor.whiskerLeft Q a.hom =
+      (cancellationComparison Q T S F G cF cG e ≪≫ (Functor.rightUnitor Q).symm).hom := by
+    ext K
+    simp [a, localizedCancellation, Localization.liftNatTrans_app, Localization.Lifting.iso]
+  have : NatTrans.CommShift (Functor.whiskerLeft Q a.hom) ℤ := by
+    rw [he]
+    dsimp [cancellationComparison]
+    infer_instance
+  have : Q.EssSurj := Localization.essSurj Q W
+  exact NatTrans.CommShift.of_whiskerLeft a.hom Q (fun X ↦
+    ⟨Q.objPreimage X, (Q.objObjPreimageIso X).inv, inferInstance⟩)
+
+end Localization
+
+private theorem whiskered_normalization
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {F G : C ⥤ D} (Q : D ⥤ E) (H : C ⥤ E)
+    (chi : H ≅ F ⋙ Q) (e : F ≅ G) (K : C)
+    {r : H.obj K ≅ Q.obj (F.obj K)} (hr : chi.app K = r) :
+    (chi ≪≫ Functor.isoWhiskerRight e Q).app K = r ≪≫ Q.mapIso (e.app K) := by
+  rw [NatIso.trans_app, hr]
+  apply Iso.ext
+  rfl
+
+private theorem comparison_of_localized_pair
+    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    (B : Type b) [CommRing B] [Linear B A]
+    (T S : A ⥤ A) [T.Additive] [S.Additive]
+    (evP : T ⋙ S ≅ 𝟭 A) (evD : S ⋙ T ≅ 𝟭 A)
+    (F G : DerivedCategory A ⥤ DerivedCategory A)
+    (nP : ∀ K : CochainComplex A ℤ,
+      (F.obj (DerivedCategory.Q.obj K) ≅
+        DerivedCategory.Q.obj ((T.mapHomologicalComplex (.up ℤ)).obj K)) → Prop)
+    (nD : ∀ K : CochainComplex A ℤ,
+      (G.obj (DerivedCategory.Q.obj K) ≅
+        DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj K)) → Prop)
+    [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated]
+    (cP : DerivedCategory.Q ⋙ F ≅ T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (cD : DerivedCategory.Q ⋙ G ≅ S.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    [NatTrans.CommShift cP.hom ℤ] [NatTrans.CommShift cD.hom ℤ]
+    (hnP : ∀ K, nP K (cP.app K)) (hnD : ∀ K, nD K (cD.app K))
+    (aP : T ⋙ S ≅ 𝟭 A) (aD : S ⋙ T ≅ 𝟭 A)
+    (haP : aP = evP) (haD : aD = evD)
+    (ht : ∀ M, T.map (aP.inv.app M) ≫ aD.hom.app (T.obj M) = 𝟙 _)
+    (hcoh : ∀ i : ℤ, Nonempty (F ⋙ DerivedCategory.homologyFunctor A i ≅
+      DerivedCategory.homologyFunctor A i ⋙ T))
+    [T.Linear B] [S.Linear B] [F.Linear B] [G.Linear B] :
+    comparisonData B T S evP evD F G nP nD := by
+  subst aP
+  subst aD
+  let a := Functor.mapHomologicalComplexCompIso evP (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso A (.up ℤ)
+  let b := Functor.mapHomologicalComplexCompIso evD (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso A (.up ℤ)
+  have hId : NatTrans.CommShift (Functor.mapHomologicalComplexIdIso A (.up ℤ)).hom ℤ := by
+    constructor
+    intro n
+    ext K i
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f',
+      Functor.mapHomologicalComplexIdIso_hom_app_f,
+      Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
+      Functor.commShiftIso_id_hom_app]
+    erw [Category.id_comp]
+  have haS : NatTrans.CommShift a.hom ℤ := by
+    dsimp only [a, Iso.trans_hom]
+    infer_instance
+  have hbS : NatTrans.CommShift b.hom ℤ := by
+    dsimp only [b, Iso.trans_hom]
+    infer_instance
+  let W := HomologicalComplex.quasiIso A (.up ℤ)
+  let alpha := localizedCancellation DerivedCategory.Q W _ _ _ _ cP cD a
+  let beta := localizedCancellation DerivedCategory.Q W _ _ _ _ cD cP b
+  have htC (K : CochainComplex A ℤ) :
+      (T.mapHomologicalComplex (.up ℤ)).map (a.inv.app K) ≫
+        b.hom.app ((T.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := by
+    ext i
+    simpa [a, b, Functor.mapHomologicalComplex] using ht (K.X i)
+  obtain ⟨ht1, ht2⟩ := localizedCancellation_triangles DerivedCategory.Q W
+    _ _ _ _ cP cD a b htC
+  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance,
+    cP, cD, inferInstance, inferInstance, hnP, hnD, alpha, beta,
+    localizedCancellation_commShift DerivedCategory.Q W _ _ _ _ cP cD a,
+    localizedCancellation_commShift DerivedCategory.Q W _ _ _ _ cD cP b,
+    localizedCancellation_app DerivedCategory.Q W _ _ _ _ cP cD a,
+    localizedCancellation_app DerivedCategory.Q W _ _ _ _ cD cP b,
+    ht1, ht2, hcoh, inferInstance, inferInstance, inferInstance, inferInstance⟩
+
 variable (X : Scheme.{t})
   [EssentiallySmall.{max a (t + 1)} X.ProEt]
   (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
@@ -154,6 +324,10 @@ def cancellation (P Q : Modules.{t, a} X R) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, 
   (tensorRightTensor P Q).symm ≪≫ (tensoringRight (Modules.{t, a} X R)).mapIso e ≪≫
     rightUnitorNatIso (Modules.{t, a} X R)
 
+private theorem cancellation_eq (P Q : Modules.{t, a} X R)
+    (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X R)) :
+    cancellation X R P Q e = LineEvaluation.cancellation R P Q e := rfl
+
 /-- Collapse the total tensor with a degree-zero right factor to termwise tensor.
 Source: Stacks, 06YU (blueprint: lem-pur-line-unbounded-derived-tensor). -/
 def collapse (P : Modules.{t, a} X R) :
@@ -161,6 +335,9 @@ def collapse (P : Modules.{t, a} X R) :
       (tensor.{t, a} X R P).mapHomologicalComplex (.up ℤ) :=
   CochainComplex.map₂HomologicalComplexFlipObjSingleIso
     (KFlatFixedTensor.ordinaryTensor.{t + 1, t, max a (t + 1)} R) P
+
+private theorem collapse_eq (P : Modules.{t, a} X R) :
+    collapse X R P = FlatSingleDerivedNormalization.collapse R P := rfl
 
 variable [HasDerivedCategory.{w} (Modules.{t, a} X R)]
 
@@ -192,6 +369,10 @@ def normalization (P : Modules.{t, a} X R)
         (single.{t, a} X R P) hK hP hKf hPf).symm ≪≫
           DerivedCategory.Q.mapIso ((collapse.{t, a} X R P).app K)
 
+
+
+set_option maxHeartbeats 300000 in
+-- The concrete sheaf instance conversions in this assembly exceed the default budget.
 /-- Tensoring an arbitrary unbounded complex with a locally free line is termwise,
 with its inverse given by the internal dual and the specified evaluation. Global-section
 linearity is equivalent to the universal B-linearity clause: every sheaf B-algebra
@@ -263,6 +444,86 @@ theorem line_unbounded_derived_tensor (P : Modules.{t, a} X R)
           ((β_ (dual.{t, a} X R P) P) ≪≫ e)) F G
         (normalization.{t, a} X R P hP hPf F hF)
         (normalization.{t, a} X R (dual.{t, a} X R P) hD hDf G hG) := by
-  sorry
+  classical
+  let Rm := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat RingCat)).obj R
+  have hcover : ∀ U : X.ProEt, ∃ s : Sieve U, s ∈ Scheme.ProEt.topology X U ∧
+      ∀ (V : X.ProEt) (f : V ⟶ U), s f →
+        Nonempty (P.over V ≅ unit (Rm.over V)) := by
+    obtain ⟨I, V, hV, h⟩ :=
+      (isFiniteLocallyFreeOfRank_iff_exists_over_iso_free (M := P) (r := 1)).mp
+        inferInstance
+    intro U
+    refine ⟨Sieve.ofObjects V U, hV U, ?_⟩
+    rintro Z f ⟨i, ⟨g⟩⟩
+    let e : P.over (V i) ≅ unit (Rm.over (V i)) :=
+      (h i).some ≪≫ freeUniqueIso (ULift (Fin 1))
+    exact ⟨((overFunctorMap Rm g).app P).symm ≪≫
+      (overMap Rm g).mapIso e ≪≫ overMapUnitIso (R := Rm) g⟩
+  obtain ⟨_, _, _, hPl, hPc, hDl, hDc, hP, hD, hPT, hDT,
+    e, he, hei, a, b, ha, hb, ht, _, _⟩ :=
+    LineEvaluation.evaluation_inverse_pair.{t + 1, t, max a (t + 1)} R P hcover
+  obtain ⟨hK, hKf, _, _, hcollapseP, _, _, _, sP, htriP, chiP, hchiP, hnP,
+    etaP, hetaP, heP, hcohP⟩ :=
+    FlatSingleDerivedNormalization.flat_single_derived_normalization.{t + 1, t,
+      max a (t + 1), w} R P hP
+  obtain ⟨hKD, hKDf, _, _, hcollapseD, _, _, _, sD, htriD, chiD, hchiD, hnD,
+    etaD, hetaD, heD, _⟩ :=
+    FlatSingleDerivedNormalization.flat_single_derived_normalization.{t + 1, t,
+      max a (t + 1), w} R (dual X R P) hD
+  have hcomp : comparisonData (scalars X R)
+      (tensor X R P) (tensor X R (dual X R P))
+      (cancellation X R P (dual X R P) e)
+      (cancellation X R (dual X R P) P ((β_ (dual X R P) P) ≪≫ e))
+      (derived X R P) (derived X R (dual X R P))
+      (normalization X R P hK hKf (derived X R P) rfl)
+      (normalization X R (dual X R P) hKD hKDf (derived X R (dual X R P)) rfl) := by
+    let := sP
+    let := sD
+    have := hPl
+    have := hPc
+    have := hDl
+    have := hDc
+    have := hPT
+    have := hDT
+    have := hchiP
+    have := hchiD
+    have := hcollapseP
+    have := hcollapseD
+    let cP := chiP ≪≫ Functor.isoWhiskerRight
+      (FlatSingleDerivedNormalization.collapse R P) DerivedCategory.Q
+    let cD := chiD ≪≫ Functor.isoWhiskerRight
+      (FlatSingleDerivedNormalization.collapse R (dual X R P)) DerivedCategory.Q
+    have hcP : NatTrans.CommShift cP.hom ℤ := by
+      change NatTrans.CommShift (chiP.hom ≫
+        Functor.whiskerRight (FlatSingleDerivedNormalization.collapse R P).hom
+          DerivedCategory.Q) ℤ
+      infer_instance
+    have hcD : NatTrans.CommShift cD.hom ℤ := by
+      change NatTrans.CommShift (chiD.hom ≫
+        Functor.whiskerRight (FlatSingleDerivedNormalization.collapse R (dual X R P)).hom
+          DerivedCategory.Q) ℤ
+      infer_instance
+    have hLP := Functor.linear_of_iso (scalars X R) etaP.symm
+    have hLD := Functor.linear_of_iso (scalars X R) etaD.symm
+    have := htriP
+    have := htriD
+    apply comparison_of_localized_pair (scalars X R) _ _ _ _ _ _ _ _ cP cD
+      (aP := a) (aD := b) (haP := ha.trans (cancellation_eq X R _ _ e).symm)
+      (haD := hb.trans (cancellation_eq X R _ _ ((β_ (dual X R P) P) ≪≫ e)).symm)
+    · intro K hK' hKf'
+      dsimp only [normalization, cP, NatIso.trans_app]
+      simp only [eqToIso_refl, Iso.refl_trans]
+      exact whiskered_normalization _ _ _ _ _ (hnP K hK' hKf')
+    · intro K hK' hKf'
+      dsimp only [normalization, cD, NatIso.trans_app]
+      simp only [eqToIso_refl, Iso.refl_trans]
+      exact whiskered_normalization _ _ _ _ _ (hnD K hK' hKf')
+    · exact ht
+    · intro i
+      exact ⟨(hcohP i).choose⟩
+  exact ⟨hP, hD, hK, hKD, hKf, hKDf, hPl, hPc, hDl, hDc, e, he,
+    (fun U p phi h ↦ (hei U p phi h).2.1), derived X R P,
+    derived X R (dual X R P), rfl, rfl, hcomp⟩
 
 end SheafOfModules.LineUnbounded

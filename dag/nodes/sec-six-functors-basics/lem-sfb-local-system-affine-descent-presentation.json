@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-local-system-affine-descent-presentation",
+ "kind": "statement",
+ "title": "Finite affine coproduct descent presentation of a locally constant pro-etale sheaf",
+ "statement": "Let $X$ be a qcqs scheme [def-weil-pbc-scheme-conventions], let $S$ be a set in the universes of [def-weil-size-convention], and let $F$ be a sheaf of sets [def-weil-pbc-sites-and-cohomology] on $X_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site]. Suppose a pro-étale covering $\\{U_i\\to X\\}$ is supplied with isomorphisms $F|_{U_i}\\simeq\\underline S_{U_i}$, where $\\underline S$ is the sheafification of the constant presheaf with value $S$ [def-weil-pbc-constant-sheaf].\n\nThere exist finitely many affine pro-étale objects $V_j\\to X$, each mapping over $X$ to one of the $U_i$, such that $V=\\coprod_jV_j$ is affine and $p:V\\to X$ is weakly étale, flat, surjective and quasi-compact, and $\\{p\\}$ is both an fpqc and a pro-étale covering [def-weil-pbc-fpqc-covering]. There is a trivialization $\\psi:F|_V\\simeq\\underline S_V$. Let $T=\\coprod_{s\\in S}V$, the scheme coproduct [lem-weil-pbc-scheme-coproduct-family]. For every weakly étale $W\\to V$ there are natural bijections $F(W)\\simeq\\underline S_V(W)\\simeq\\operatorname{Hom}_V(W,T)$, taking a constant label to its component section. The latter functor is a sheaf and its sections are precisely the $S$-indexed clopen decompositions of $W$ (pairwise disjoint open subschemes whose union is $W$).\n\nPut $R=V\\times_XV$ and let $p_1,p_2:R\\to V$ be its projections [def-pc-fibre-product]. The transition between the two pullbacks of $\\psi$ is induced by a unique $R$-isomorphism $\\delta:p_1^*T\\xrightarrow{\\sim}p_2^*T$. For each fixed source label $s$, its target labels give a clopen decomposition of $R$, and on its piece labelled $t$ the map is the identity of that open subscheme from component $s$ to component $t$. These component maps assemble to $\\delta$, its inverse realizes the inverse transition, and $\\delta_{13}=\\delta_{23}\\circ\\delta_{12}$ on $V\\times_XV\\times_XV$. Thus it is a scheme descent datum [def-pd-descent-datum] realizing the restrictions of $F$. Empty $X$ and empty $S$ are allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(2), finite affine trivializing pro-étale charts and the clopen transition descent datum; old proof steps 3–5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-sfb-clopen-decomposition",
+  "def-a1-proetale-set-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For nonempty X use finite_affine_proetale_refinement, retaining its affine opens and maps to the supplied charts. For empty X use Fin 0 and the empty covering. Form the actual finite scheme coproduct. IsZariskiLocalAtSource.sigmaDesc proves its codiagonal weakly etale; the finite affine coproduct instance makes its source affine. The refinement cover proves joint surjectivity. Compactness of the source and quasi-separatedness of X imply quasi-compactness, and Hom.singleton_mem_propQCPrecoverage supplies the singleton pro-etale cover and hence the fpqc cover. The explicit universes keep the schemes, label set, and their coproducts in Type u, with sheaf values lifted to Type (u + 1).",
+   "uses": [
+    "lem-sfb-finite-affine-cover-refinement-general",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "Restriction along a weakly etale map is precomposition. Its pushforwardContinuousSheafificationCompatibility identifies the restriction of a constant sheaf with the constant sheaf and gives the restriction of each supplied trivialization to its affine chart. Pulling back the disjoint summand inclusions gives a disjoint open cover of every test object. Sheaf amalgamation identifies sections with the product of the sections on these pieces: distinct pieces have empty common test source, where sheaf sections are terminal. Conjugating the product of the restricted trivializations gives the trivialization on the coproduct. This argument includes an empty family.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "The relative representable localSystemCopiesHom is a sheaf by subcanonicity of the big pro-etale topology over the base and continuity of ProEt.forget; lifting its values by ULift preserves the sheaf condition. Subcanonicity follows from fpqc descent of scheme morphisms.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "Map the constant presheaf to this representable by component sections. The coproduct clopen-description theorem shows local surjectivity on the component preimages. Equality of two distinct labels forces the test scheme empty, where the empty covering proves local injectivity. Lift the map by sheafifyLift and use the local-bijection composition criteria and Sheaf.isLocallyBijective_iff_isIso. The factorization through toSheafify proves the required label equation. The same coproduct theorem supplies the clopen decomposition and unique Over morphism for every test object.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "The codiagonal from the coproduct of copies is weakly etale by source locality, so it is a pro-etale site object Q. The slice equivalence and the trivialization and constant-model comparison identify F.over V with sliceTo.op composed with uliftYoneda Q. Construct the comparison at Q times_X V: its universal Q-point gives a section of F via the first lift and a Q-point via the second. An arbitrary point and second lift map to this universal test scheme, defining transport without choosing a witness. Pullback functoriality proves naturality, and naturality of the representing isomorphism proves compatibility with F sections.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "Test transport_self on Q itself and transport_transport on Q times_X V times_X V; these are weakly etale objects over X. Compatibility identifies all transports with the same section of F, proving both identities there. Every arbitrary point and collection of lifts factors through these universal objects; naturality pulls back the identities. Package these maps and laws into the existing Over.DescentDatum. Applying the inverse representing isomorphism gives the stated HEq compatibility, with identity maps of the underlying scheme identifying equal composites to X.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "For any pair r1,r2 with equal composite to X, transport the universal point of pullback r1 T and apply Over.mapPullbackAdj r2 to obtain a morphism to pullback r2 T. Transport naturality gives its realization identity on every scheme point. The reverse transport and the cocycle and identity laws give its two inverse equations. Testing any other realizing isomorphism on the universal source point, and using pullback extensionality, proves uniqueness. This directly implements the mapping-property step without a separate Yoneda full-faithfulness application.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  },
+  {
+   "text": "Evaluate transport on each source-label section and apply coproductCopiesMorphismsClopen to its underlying morphism over the overlap. This supplies both displayed clopen transition conditions. Combine the finite-cover witnesses, trivialization, constant-model comparison, clopen mapping property, compatible datum, and unique transition isomorphism. Empty labels and empty schemes were retained throughout.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), finite affine trivializing charts and clopen transition descent datum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-weakly-etale-morphism",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-sfb-finite-affine-cover-refinement-general",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(2), implemented in Lean by C2. Private disjoint-cover helpers adapt the proved EtaleDisjointCover and EtaleCoproductRepresentation arguments; private arbitrary-point transport helpers adapt FiniteLocalModelsDescentDatumCompatibilityDatum, TransportDiagonal and TransportCocycle to weakly etale objects. The transition isomorphism uses the map-pullback adjunction directly. No new public result or unproved intermediate theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf of sets on a quasi compact quasi separated pro etale site admits a finite affine fpqc trivializing cover and a coproduct scheme descent datum",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, Condensed.lanSheafProfinite, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone. The hits concern affine inverse-limit charts, constant-sheaf recognition, and definitions of the pro-etale site; none constructs this finite affine trivialization and realizes its arbitrary-label sheaf transitions as scheme descent data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "0 hits: . The hits concern affine inverse-limit charts, constant-sheaf recognition, and definitions of the pro-etale site; none constructs this finite affine trivialization and realizes its arbitrary-label sheaf transitions as scheme descent data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|ProEt.*[Cc]over|fpqc.*[Tt]rivial|[Cc]onstantSheaf.*[Cc]oproduct",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. The hits concern affine inverse-limit charts, constant-sheaf recognition, and definitions of the pro-etale site; none constructs this finite affine trivialization and realizes its arbitrary-label sheaf transitions as scheme descent data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally constant pro etale sheaf has a finite affine faithfully flat trivializing cover",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondensed.IsDiscrete, CompHausLike.LocallyConstant.functor_map_val, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.IsConstant.mk, CompHausLike.LocallyConstant.counit_app_val, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CategoryTheory.Sheaf.IsConstant.rec. The hits concern affine inverse-limit charts, constant-sheaf recognition, and definitions of the pro-etale site; none constructs this finite affine trivialization and realizes its arbitrary-label sheaf transitions as scheme descent data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|ProEt.*[Cc]over|[Cc]onstantSheaf.*[Cc]oproduct|fpqc.*[Tt]rivial",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean.  Read the pro-etale topology, constant continuous-map sheaf and finite spectrum-coproduct sources: these are ingredients only, not the item with its arbitrary-label descent presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent a constant sheaf of arbitrary sets on the pro etale site by the disjoint union of copies of the base scheme",
+   "results": "8 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_of_forget.  Read the pro-etale topology, constant continuous-map sheaf and finite spectrum-coproduct sources: these are ingredients only, not the item with its arbitrary-label descent presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"ProEt\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology.  Read the pro-etale topology, constant continuous-map sheaf and finite spectrum-coproduct sources: these are ingredients only, not the item with its arbitrary-label descent presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf on the pro etale site of a qcqs scheme admits a finite affine trivializing fpqc cover and a scheme descent datum on a coproduct of copies",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine.  Read the pro-etale topology, constant continuous-map sheaf and finite spectrum-coproduct sources: these are ingredients only, not the item with its arbitrary-label descent presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant sheaf of sets is represented by the disjoint union of copies of a scheme and natural transformations glue clopen permutations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Presheaf.toType_isSheaf, Condensed.discrete_obj, TopCat.Presheaf.isSheaf_unit, LightCondensed.discrete_obj, TopCat.toSheafCompHausLike_val_obj, CompHausLike.LocallyConstant.functor_obj_val, CompHausLike.LocallyConstant.functor.  Read the pro-etale topology, constant continuous-map sheaf and finite spectrum-coproduct sources: these are ingredients only, not the item with its arbitrary-label descent presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|IsLocallyConstant|sigmaSpec|instSubcanonical",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean.  Searched Mathlib/AlgebraicGeometry. Read the pro-etale topology, constant continuous-map sheaf and finite spectrum-coproduct sources: these are ingredients only, not the item with its arbitrary-label descent presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-stratified-lattice-scheme",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "(2), finite affine trivializing pro-étale charts and the clopen transition descent datum; old proof steps 3–5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-local-system-affine-descent-presentation",
+  "worker": "stage1",
+  "summary": "Proved the finite affine singleton cover, constant model and clopen transitions using existing DAG tools only. Expanded the arbitrary-set sheafification comparison and its compatibility with weakly etale restriction, then assembled the supplied trivializations and checked inverse and cocycle by Yoneda. Checked nonempty hypotheses, universes, infinite labels and both empty cases. No statement changes or new nodes. Repair of the returned head cfa5ed3300f: re-read all 20 proof dependencies against the current DAG and revalidated all 31 citation quotations. Made the bounded-object hypothesis of the localization theorem explicit and deferred restriction of the original trivializations until that comparison is proved. Rebased delivery is built on the current origin/sheaf-dag by deliver.py.",
+  "blueprint": "Realizes ancestor det-lem-stratified-lattice-scheme proof (2), from the choice of finitely many affine trivializing charts through its clopen transition maps and cocycle; does not invoke the subsequent effectivity or lattice-representability conclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-affine-cover-refinement-general",
+    "why": "General finite affine refinement of the supplied pro-etale cover; the unit needs this covering tool but states no such general refinement lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Identifies the chosen finite disjoint union with an affine spectrum, not an alternative route for lattices."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-source-locality",
+    "why": "Checks that the codiagonal of the chosen charts and arbitrary constant models are weakly etale; generic locality tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Checks quasi-compactness of the affine chart over the quasi-separated base; generic morphism permanence tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Checks the affine-open covering condition for the singleton chart using quasi-compact inverse images; generic affine-cover tool."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Gives the functor of points of an arbitrary-label scheme coproduct and the forced component maps; independent of the unit lattice theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Gives sheaf gluing for maps into a scheme, used for constant models on the pro-etale site; no lattice-specific effectivity theorem is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Shows clopen inclusions are site arrows; generic open-immersion tool."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Its first clause shows these open-immersion etale arrows are weakly etale; generic morphism-property implication."
+   },
+   {
+    "node": "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "why": "Identifies the constant sheaf by the explicitly verified local bijection, with no etale/pro-etale identification assumed."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Only clause (1) identifies the slice site with the intrinsic pro-etale site; generic localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Ensures constant sheaf morphisms preserving labels are unique, since every section is locally a label; generic sheafification tool."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Checks that overlap projections admit the same restriction constructions; generic stability tool."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Turns the transition of representable sheaves into a unique scheme isomorphism and tests its cocycle; generic categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-affine-cover-refinement-general",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-bca61ef54",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-bca61ef54 (reviewer sub-agent of L); spot-checked: Read in full: the item (10 steps, statement unchanged, no new nodes), all 20 cited statements in the current snapshot plus def-weil-size-convention, blueprint main-20261015 sk-lem-stratified-lattice-scheme proof (2), and the parent det-lem-stratified-lattice-scheme steps 2 and 5, which this item feeds. This re-delivery follows the refused promotion landing of cfa5ed3300f0. That head's review was a FIX (step 3 used Yoneda without citing it), and the fix was lost: the new head comes from the unfixed copy. Delta against cfa5: step 1 now restricts the trivializations only in step 7, after the step-6 comparison (harmless). Step 6 now requires B' to be a bounded site object, which the localization node (1) needs. Step 3 now opens with a universe sentence but still identifies B'x_B T_B with T_{B'} from equal functors of points, which is Yoneda, without citation (C1). Hypothesis checks: the refinement lemma's nonempty and n>0 hypotheses are avoided for X empty. V is affine via Spec of the product, which is 0 for no summands. p is quasi-compact by permanence (1). The affine-open covering condition holds by surjectivity. Clopen node (a)(b)(c) handles arbitrary S, with E empty included. Local bijection: local surjectivity holds because open immersions are etale, hence weakly etale; local injectivity holds by disjointness of components, and empty W is covered by the empty sieve. The comparison is canonical by 00WK sections-local. The Yoneda delta and its inverse come from tau^-1. Cocycle orientation is pr02 = pr12 o pr01 as in def-pd-descent-datum. Edge cases: X empty, S empty, singleton or infinite (T not quasi-compact, never claimed affine), R not affine, W not quasi-compact. No duplicate: the galois constant-sheaf node is etale-only, the pbc finite-constant node needs finite E, the a1 representability node needs Noetherian X. tool_uses accepted, no SGA cited. FIX: step 3 now cites [def-weil-size-convention] for S, B and T_B in U and [lem-galois-yoneda-fully-faithful] for the base-change identification. Step 3 uses are extended accordingly, and proof_deps is recomputed as the union of step uses (adds def-weil-size-convention). File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-local-system-affine-descent-presentation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalSystemAffineDescentPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.localSystem_affine_descent_presentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.localSystemCopies",
+   "AlgebraicGeometry.Scheme.ProEt.localSystemCopiesHom",
+   "AlgebraicGeometry.Scheme.ProEt.localSystemLabel",
+   "AlgebraicGeometry.Scheme.ProEt.localSystemPullbackPoint",
+   "AlgebraicGeometry.Scheme.ProEt.LocalSystemTransitionRealizes",
+   "AlgebraicGeometry.Scheme.ProEt.LocalSystemTransitionClopen",
+   "AlgebraicGeometry.Scheme.ProEt.localSystem_affine_descent_presentation"
+  ],
+  "file": "lean/Sheaf/Paper/LocalSystemAffineDescentPresentation.lean",
+  "statement": "theorem localSystem_affine_descent_presentation (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (S : Type u) (F : Sheaf (topology X) (Type (u + 1))) (I : Type i) (U : I → X.ProEt) (hcover : Presieve.ofArrows (fun k ↦ (U k).left) (fun k ↦ (U k).hom) ∈ proetalePrecoverage X) (trivializations : ∀ k : I, (Scheme.proEtaleSetRestriction X (U k)).obj F ≅ (constantSheaf (topology (U k).left) (Type (u + 1))).obj (ULift.{u + 1} S)) : ∃ (n : ℕ) (A : Fin n → X.ProEt) (α : Fin n → I) (_refinement : ∀ j, A j ⟶ U (α j)) (V : X.ProEt) (ι : ∀ j, (A j).left ⟶ V.left), (∀ j, IsAffine (A j).left) ∧ (∀ j, ι j ≫ V.hom = (A j).hom) ∧ Nonempty (IsColimit (Cofan.mk V.left ι)) ∧ IsAffine V.left ∧ Flat V.hom ∧ Surjective V.hom ∧ QuasiCompact V.hom ∧ Presieve.singleton V.hom ∈ fpqcPrecoverage X ∧ Presieve.singleton V.hom ∈ proetalePrecoverage X ∧ ∃ (ψ : (Scheme.proEtaleSetRestriction X V).obj F ≅ (constantSheaf (topology V.left) (Type (u + 1))).obj (ULift.{u + 1} S)) (e : ((constantSheaf (topology V.left) (Type (u + 1))).obj (ULift.{u + 1} S)).obj ≅ localSystemCopiesHom V.left S), Presheaf.IsSheaf (topology V.left) (localSystemCopiesHom V.left S) ∧ (∀ (W : V.left.ProEt) (s : S), e.hom.app (op W) ((toSheafify (topology V.left) ((Functor.const V.left.ProEtᵒᵖ).obj (ULift.{u + 1} S))).app (op W) (ULift.up s)) = ULift.up (localSystemLabel S W.hom s)) ∧ (∀ W : V.left.ProEt, (∀ a : Over.mk W.hom ⟶ localSystemCopies V.left S, IsClopenDecomposition W.left S (fun s ↦ a.left ⁻¹ᵁ (Sigma.ι (fun _ : S ↦ V.left) s).opensRange) ∧ ∀ s : S, (a.left ⁻¹ᵁ (Sigma.ι (fun _ : S ↦ V.left) s).opensRange).ι ≫ a.left = ((a.left ⁻¹ᵁ (Sigma.ι (fun _ : S ↦ V.left) s).opensRange).ι ≫ W.hom) ≫ Sigma.ι (fun _ : S ↦ V.left) s) ∧ (∀ P : S → W.left.Opens, IsClopenDecomposition W.left S P → ∃! a : Over.mk W.hom ⟶ localSystemCopies V.left S, ∀ s, a.left ⁻¹ᵁ (Sigma.ι (fun _ : S ↦ V.left) s).opensRange = P s)) ∧ ∃ D : Over.DescentDatum V.hom (localSystemCopies V.left S), (∀ (W : Scheme.{u}) (f₁ f₂ : W ⟶ V.left) [WeaklyEtale f₁] [WeaklyEtale f₂] (h : f₁ ≫ V.hom = f₂ ≫ V.hom) (a : Over.mk f₁ ⟶ localSystemCopies V.left S), HEq (ψ.inv.hom.app (op (ProEt.mk f₂)) (e.inv.app (op (ProEt.mk f₂)) (ULift.up (D.transport f₁ f₂ h a)))) (ψ.inv.hom.app (op (ProEt.mk f₁)) (e.inv.app (op (ProEt.mk f₁)) (ULift.up a)))) ∧ ∃! δ : (Over.pullback (pullback.fst V.hom V.hom)).obj (localSystemCopies V.left S) ≅ (Over.pullback (pullback.snd V.hom V.hom)).obj (localSystemCopies V.left S), LocalSystemTransitionRealizes D (pullback.fst V.hom V.hom) (pullback.snd V.hom V.hom) pullback.condition δ ∧ LocalSystemTransitionRealizes D (pullback.snd V.hom V.hom) (pullback.fst V.hom V.hom) pullback.condition.symm δ.symm ∧ LocalSystemTransitionClopen S D (pullback.fst V.hom V.hom) (pullback.snd V.hom V.hom) pullback.condition ∧ LocalSystemTransitionClopen S D (pullback.snd V.hom V.hom) (pullback.fst V.hom V.hom) pullback.condition.symm",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the canonical Scheme.proEtaleSetRestriction for supplied trivializations and ψ. The clopen notion is cited through def-sfb-clopen-decomposition, reusing AlgebraicGeometry.IsClopenDecomposition; the coproduct-clopen theorem remains only a proof dependency. The cocycle is the transport_transport field of the recorded Over.DescentDatum. S : Type u with ULift into Type (u+1) implements the fixed size convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-085d1214b",
+  "group": "O4",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 52c0 fixes both findings and changes nothing else; only lean and stmt_deps differ from the returned head and side-live. Finding 1: lem-galois-coproduct-copies-morphisms-clopen removed from stmt_deps (kept in proof_deps); new def node def-sfb-clopen-decomposition binds AlgebraicGeometry.IsClopenDecomposition (existing:true, statement verbatim at CoproductCopiesMorphismsClopen.lean:31, node text = disjoint opens with union W, source path exists, no other owner in side-live). Finding 2: localSystemRestriction deleted; trivializations and psi use (Scheme.proEtaleSetRestriction X _).obj F, whose underlying presheaf is definitionally the deleted helper; landed def-a1-proetale-set-restriction added to stmt_deps (tool allows landed nodes); HEq now evaluates psi.inv.hom.app after e.inv.app, same meaning. Statement verbatim; every clause, universe and empty case re-checked; docstrings, sorry-only proof and gates OK; no file changed, nothing compiled (worker scompile clean 2.1/2.2 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261023T131357-L-2095046",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

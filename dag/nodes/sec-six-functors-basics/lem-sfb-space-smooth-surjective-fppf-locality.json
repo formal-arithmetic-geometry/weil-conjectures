@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-space-smooth-surjective-fppf-locality",
+ "kind": "statement",
+ "title": "Base change and fppf target locality for smooth and surjective space maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Smoothness is tested on etale scheme charts using [def-sbc-smooth-morphisms]. Surjectivity means surjectivity on the field-valued point classes of [lem-trf-space-fibre-products-etale-covers]. Both smoothness and surjectivity, separately, are stable under arbitrary algebraic-space base change. Let $Y$ be a scheme and $\\{Y_i\\to Y\\}_{i\\in I}$ an fppf covering [def-pc-fppf-site]. Then $f$ is smooth if and only if every $X\\times_YY_i\\to Y_i$ is smooth, and $f$ is surjective if and only if every $X\\times_YY_i\\to Y_i$ is surjective. All fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. No quasi-compactness, finite type, or separation assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 0429 (lemma-descending-property-smooth) and 041Q (lemma-descending-property-surjective), fppf specialization of fpqc locality; spaces-morphisms.tex Tags 03ZE (lemma-base-change-smooth) and 03MH (lemma-base-change-surjective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fppf-site",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $f$ is smooth and let $g:Y'\\to Y$ be arbitrary. Choose a surjective etale scheme atlas $V\\to Y$ and a surjective etale scheme atlas $U\\to E=X\\times_YV$. The fibre-product and representable-etale calculus show that $U\\to X$ is surjective etale. Thus $h:U\\to V$ is smooth by the presentation criterion, whose scheme-property hypothesis is supplied by the scheme etale-locality lemma. Choose a surjective etale scheme atlas $V'\\to Y'\\times_YV$ and put $U'=U\\times_VV'$. These are scheme fibre products, and $U'\\to V'$ is smooth by scheme smooth base change. Indeed $U'\\cong (U\\times_YY')\\times_{V\\times_YY'}V'$: on a test scheme both sides consist of compatible triples $(u,y',v')$ with $v'$ mapping to $(h(u),y')$. Consequently $U'\\to U\\times_YY'$ and $U\\times_YY'\\to X\\times_YY'$ are surjective etale by base change; their composite is a surjective etale scheme chart. Also $V'\\to Y'$ is surjective etale. Apply the presentation criterion to the smooth scheme map $U'\\to V'$ to conclude that $X\\times_YY'\\to Y'$ is smooth.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZE (lemma-base-change-smooth); remark-base-change-P and Tag 03MJ (lemma-local-source-target), expanded on scheme charts"
+   }
+  },
+  {
+   "text": "Suppose $f$ is surjective. For any field-valued representative $y':\\operatorname{Spec}K\\to Y'$, surjectivity in the extension-lifting formulation gives a field extension $K\\hookrightarrow L$ and $x:\\operatorname{Spec}L\\to X$ with $f(x)=g(y')|_L$. The pair $(x,y'|_L)$ is a section of the sheaf fibre product $X\\times_YY'$ over $L$ and maps to $y'|_L$. This proves surjectivity of the base change. Notice that an extension of $K$ is allowed; a lift over $K$ itself is not asserted.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MH (lemma-base-change-surjective), using the common-field-extension proof of spaces-properties.tex Tag 03H4 (lemma-points-cartesian)"
+   }
+  },
+  {
+   "text": "We will apply the scheme fpqc-family descent theorem with $P=$ smooth. Its base-change hypothesis is clause (2) of the scheme base-change lemma, and its descent hypothesis for one flat quasi-compact surjection is the scheme smooth fpqc-descent lemma. For its Zariski target-locality hypothesis, let $q:A\\to B$ be a scheme morphism and let $(W_a)$ cover $B$ by opens and suppose $A\\times_BW_a\\to W_a$ is smooth for every $a$. For each $x\\in A$ choose $a$ with $q(x)\\in W_a$; the open inclusions $A\\times_BW_a\\to A$ and $W_a\\to B$ are etale, so the pointwise condition (iii) of scheme etale source-and-target locality gives smoothness of $A\\to B$. Conversely restrictions are smooth by base change. Hence all three hypotheses of the existing fpqc-family theorem hold, and smoothness of a scheme map descends from its pullbacks along any fpqc covering family. No quasi-compactness of that scheme map or of individual arrows of the family is required.",
+   "uses": [
+    "lem-galois-fpqc-family-descent-of-local-property",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0429 (lemma-descending-property-smooth), reduction to scheme descent in descent.tex Tag 02VL (lemma-descending-property-smooth); the family assembly is the existing fpqc-family descent theorem"
+   }
+  },
+  {
+   "text": "Now assume $Y$ is a scheme, $(Y_i\\to Y)$ is an fppf covering, and every $X_i=X\\times_YY_i\\to Y_i$ is smooth. Choose a surjective etale scheme atlas $a:U\\to X$. Each $U_i=U\\times_YY_i$ is a scheme, and $U_i\\to X_i$ is surjective etale by the representable-etale calculus. With target chart $Y_i\\to Y_i$ the presentation criterion therefore gives smoothness of the scheme map $U_i\\to Y_i$. The given fppf family is an fpqc family by the fppf-to-fpqc covering lemma. Step 3 applied to $U\\to Y$ proves it smooth; the presentation diagram $U\\to Y$, $U\\to X$, $Y\\to Y$ then proves $f$ smooth. The converse is step 1.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0429 (lemma-descending-property-smooth), choose a scheme atlas and descend its composite to the scheme target; topologies.tex Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)"
+   }
+  },
+  {
+   "text": "Assume instead that every $X_i\\to Y_i$ is surjective. Given $y:\\operatorname{Spec}K\\to Y$, pull the fppf covering back to $\\operatorname{Spec}K$. The covering-base-change lemma makes $(Y_i\\times_Y\\operatorname{Spec}K)$ jointly surjective on scheme points. Choose an index $i$ and a point $t$ above the unique point of $\\operatorname{Spec}K$. Its residue-field representative gives a morphism $\\operatorname{Spec}L\\to Y_i\\times_Y\\operatorname{Spec}K$, with $L=\\kappa(t)$ a field extension of $K$. Surjectivity of $X_i\\to Y_i$ then gives, after a further extension $L\\hookrightarrow M$, a lift to $X_i$. Projecting this lift to $X$ gives $x$ with $f(x)=y|_M$, proving surjectivity of $f$. Conversely use step 2. If the index set is empty, the covering condition forces $Y$ empty, so there are no $y$ to test; smoothness in step 4 is likewise vacuous by the pointwise scheme criterion and the empty source atlas. Empty members of a nonempty covering cause no change.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fppf-site",
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-residue-field",
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041Q (lemma-descending-property-surjective), omitted point argument written out using spaces-properties.tex Tags 03BU (definition-points), 03H4 (lemma-points-cartesian) and topologies.tex Tag 021O (lemma-fppf)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-residue-field",
+  "lem-galois-fpqc-family-descent-of-local-property",
+  "lem-pc-proper-base-change",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 0429 and 041Q, with spaces-morphisms.tex Tags 03ZE and 03MH. Scheme-atlas reduction follows 0429; its affine fpqc assembly is replaced by the already proved general scheme fpqc-family descent theorem, with every hypothesis verified in step 3. The omitted surjectivity argument is expanded by field-extension lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness and surjectivity of morphisms of algebraic spaces are preserved by base change and descend along fppf covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology\", \"type\": \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage.IsStableUnderBaseChange\", \"doc\": \"The jointly surjective precoverage on the category of schemes is stable under base change. Specifically, if a family of morphisms of schemes has images that jointly cover the target scheme, then the p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is smooth if its pullbacks to an fppf covering of the target are smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-23",
+   "verdict": "no match: Loogle does not recognize AlgebraicGeometry.IsSmooth; the two semantic searches and local grep were also read"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isSmooth.*[Ff]ppf|[Ss]mooth.*[Dd]escent|[Ss]urjective.*[Dd]escent",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"40\", \"text\": \"/-- Surjective satisfies fpqc descent. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.NoetherianDescent\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth and surjective morphisms of algebraic spaces satisfy fppf descent on the target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Surjective",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or rings, not arbitrary algebraic-space morphisms; Loogle does not recognize the identifier when its note says so"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isSmooth.*[Ff]ppf|[Ss]mooth.*[Dd]escent|[Ss]urjective.*[Dd]escent",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"f9ade9c0df48e4f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or rings, not arbitrary algebraic-space morphisms; Loogle does not recognize the identifier when its note says so"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces is smooth if its pullbacks to an fppf covering of its target are smooth",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"4b8a91fc6ea1dcbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or rings, not arbitrary algebraic-space morphisms; Loogle does not recognize the identifier when its note says so"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness and surjectivity of algebraic space morphisms are stable under arbitrary base change and local on the target for fppf coverings",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.JointlySurjective\"], \"digest\": \"76d051bfaa021af0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or rings, not arbitrary algebraic-space morphisms; Loogle does not recognize the identifier when its note says so"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphisms descend from faithfully flat covers of the target and are stable under pullback for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or rings, not arbitrary algebraic-space morphisms; Loogle does not recognize the identifier when its note says so"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-groupoid-fppf-quotient",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: The fppf quotient of a smooth algebraic-space groupoid. Supporting input in algebraic.tex Tag 04X0: properties of the algebraic-space projection F to T are fppf local on T; the local projection is a base change of s.",
+   "via": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-smooth-surjective-fppf-locality",
+  "worker": "stage1",
+  "summary": "Five steps, no new nodes. Proved arbitrary algebraic-space base change for smoothness on compatible scheme atlases, and for surjectivity by common field extensions. Verified the hypotheses of existing scheme fpqc-family descent from scheme etale-locality, scheme base change and single-morphism descent, then applied it to a source atlas. Expanded fppf surjectivity descent over residue fields, including empty covers. Read the current blueprint and Stacks sources; no exact project attachment or Mathlib algebraic-space match. Statement and statement dependencies retained.",
+  "blueprint": "Supporting input for det-thm-sf-ctf-stability-direct-images proof (3), through the recorded created.item chain to the smooth-groupoid quotient: smoothness and surjectivity of F -> T are fppf local on T, and local projections are base changes of the source map. Realizes exactly that supporting input; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic chart calculus: representability of scheme maps to spaces and composition/base change of etale atlases. This unit has no separate scheme-test chart-calculus statement."
+   },
+   {
+    "node": "def-a1-algebraic-space-point-classes",
+    "why": "Generic definition of field-valued point classes and residue-field representatives; used only to express the explicit point-lifting argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-09a1993b4",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-09a1993b4 (reviewer sub-agent of L); spot-checked: Five-step split, no new nodes, statement and stmt_deps unchanged. The live node is still unsplit and no repair note exists. I read Stacks 0429, 041Q, 03ZE and 03MH (tag/label pairs checked in tags/tags). Step 1: the chart U'=U×_VV' is identified with (U×_YY')×_{V×_YY'}V' (checked on points); the presentation criterion runs on scheme étale-locality, with clause (2) of lem-pc-proper-base-change for smooth base change. Step 2: extension-lifting surjectivity. Step 3: the three hypotheses of the closed lem-galois fpqc-family theorem are verified: base change from pc-proper-base-change (2), single-map descent from lem-trf-smooth-fpqc-base-descent, and Zariski target-locality from condition (iii) with open immersions étale. Step 4: the atlas U→Y descends via the same family being fpqc (lem-trf-fppf-covering-is-fpqc), then clause (2) gives f smooth. Step 5: surjectivity via covering base change, residue-field representatives and two successive lifts. Edge cases checked: empty I (forces Y empty), empty members, field extensions without rational points. No duplicate: lem-sfb-space-lft-smooth-fpqc-locality, four-property, flat-proper-fp and fibred-groupoid nodes cover other properties or notions. Batch-5: every listed citation is a generic definition or Mathlib-leaf foundation (point classes, jointly surjective families, fppf base change and fppf⇒fpqc, smooth fpqc descent, étale chart tests); none is given by the trace-formula or Poincaré-duality assumptions or is part of their proofs. Tool uses accepted: lem-trf-space-representable-etale-scheme-tests and def-a1-algebraic-space-point-classes (declared), and lem-trf-space-fibre-products-etale-covers (an existing stmt_dep, generic). No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSmoothSurjectiveFppfLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smooth_surjective_fppf_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSmoothSurjectiveFppfLocality.lean",
+  "statement": "theorem smooth_surjective_fppf_locality {S : Scheme.{u}} : (∀ {X Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y), MapIsLocally (@Smooth) f → MapIsLocally (@Smooth) (enlargedFibreProductFst g f)) ∧ (∀ {X Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y), IsJointlySurjective (fun _ : Unit ↦ f.hom.hom) → IsJointlySurjective (fun _ : Unit ↦ (enlargedFibreProductFst g f).hom.hom)) ∧ (∀ {I : Type w} (T : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T), Presieve.ofArrows (fun i : I ↦ (Tᵢ i).left) (fun i : I ↦ (g i).left) ∈ Scheme.fppfPrecoverage T.left → (MapIsLocally (@Smooth) f ↔ ∀ i : I, MapIsLocally (@Smooth) (enlargedFibreProductFst (ObjectProperty.homMk ⟨yoneda.map (g i)⟩ : schemeSpace (Tᵢ i) ⟶ schemeSpace T) f))) ∧ (∀ {I : Type w} (T : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T), Presieve.ofArrows (fun i : I ↦ (Tᵢ i).left) (fun i : I ↦ (g i).left) ∈ Scheme.fppfPrecoverage T.left → (IsJointlySurjective (fun _ : Unit ↦ f.hom.hom) ↔ ∀ i : I, IsJointlySurjective (fun _ : Unit ↦ (enlargedFibreProductFst (ObjectProperty.homMk ⟨yoneda.map (g i)⟩ : schemeSpace (Tᵢ i) ⟶ schemeSpace T) f).hom.hom)))",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four conjuncts state independent smooth and point-surjective base-change stability and independent fppf target-locality equivalences. Smoothness is the existing MapIsLocally applied to Smooth. Point-surjectivity is the existing IsJointlySurjective on a singleton family, allowing field extensions and imposing no representability. Added only existing definition-node statement dependencies for these predicates and the actual scheme and sheaf fibre-product constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d921cf793",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Four conjuncts match the node and Stacks 0429/041Q/03ZE/03MH: separate smooth and point-surjective base change along arbitrary g with enlargedFibreProductFst g f, and separate fppf iff-locality over T : Over S with Presieve.ofArrows in Scheme.fppfPrecoverage (no qc), I : Type w. Read the declarations: MapIsLocally (@Smooth) is the all-charts étale test, an existing idiom; singleton IsJointlySurjective allows field extensions with no representability (owner is a stmt_dep); enlargedFibreProductFst is the actual sheaf pullback.fst; schemeSpace is the actual Yoneda sheaf. The 4 added stmt_deps are existing landed def nodes on the base and own the declarations used; node otherwise unchanged against live. Edge cases: empty I forces T empty and both sides hold; empty members; identity base change. Gates: lean.statement verbatim, only sorry is the whole proof, docstrings carry source place, blueprint id and the 5 steps, report has both sections, imports exist in live, no duplicate declaration. Nothing changed, so no compile."
+ }
+}

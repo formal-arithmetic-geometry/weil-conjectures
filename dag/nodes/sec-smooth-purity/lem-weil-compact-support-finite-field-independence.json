@@ -21,69 +21,64 @@
  ],
  "proof": [
   {
-   "text": "For $Z=X,Y$, write $T^Z_{B/A}$ for the rational scalar extension of [def-weil-rationalization-karoubi], and write $F_A=Rf_{!,A}$ for the rational compact-support operation of [def-weil-integral-rational-qbar-compact-support]. Use the coefficient comparisons of [lem-fix-operation-reduction], on the stated bounded constructible domains, to obtain natural isomorphisms\n$$\\beta_{B/A}:T^Y_{B/A}F_A\\xrightarrow{\\sim}F_BT^X_{B/A}.$$\nHere only finite extensions of coefficient fields are used; the notation $-\\otimes_A\\Qlb$ will subsequently mean a pair in the common-stage category. Let $a^Z_{N,M,A}:T^Z_{N/M}T^Z_{M/A}\\xrightarrow{\\sim}T^Z_{N/A}$ be the scalar-extension associator of [lem-weil-scalar-extension-composition]. The compatibility with tensor associativity asserted in [lem-fix-operation-reduction] gives the equation\n$$\\beta_{N/A,K}=F_N(a^X_{N,M,A,K})\\circ\\beta_{N/M,T^X_{M/A}K}\\circ T^Y_{N/M}(\\beta_{M/A,K})\\circ(a^Y_{N,M,A,F_AK})^{-1}.$$\nThe identity-extension comparison is the corresponding unit map. These are comparisons for the actual completed-integral scalar extensions followed by raw Hom scalar localization, rather than for the ambient derived category of discrete $\\Qlb$-module sheaves.",
+   "text": "For every inclusion E ≤ L choose the integral comparison b and rational comparison β of [lem-weil-compact-support-normalized-scalar-isomorphisms], retaining its finite tensor-unit mate specification, whole-system normalization and rational component equality. Apply [lem-weil-compact-support-normalized-scalar-descent] to this entire family to obtain its tower equation. Choices are of the prescribed normalized maps, not arbitrary compact-support values.",
    "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-fix-operation-reduction",
-    "lem-weil-scalar-extension-composition"
+    "lem-weil-compact-support-normalized-scalar-isomorphisms",
+    "lem-weil-compact-support-normalized-scalar-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
-    "place": "Imported ## Proof: finite-stage scalar-extension compatibility, with its associator equation made explicit"
+    "place": "Finite scalar compatibility, descent of functors, and comparison paragraphs; concrete StageSystem assembly"
    }
   },
   {
-   "text": "In the common-stage category of [def-weil-algebraically-closed-coefficients], let $\\gamma=\\alpha_L^{-1}\\alpha_E:(E,K_E)\\xrightarrow{\\sim}(L,K_L)$. Represent $\\gamma$ and $\\gamma^{-1}$ over common finite coefficient fields, then enlarge to a finite $M\\supset L$ on which both compositions are identities. This is possible because equality of two morphism representatives means equality after a further finite extension, and a compositum dominates the finitely many fields needed for the two equalities. With the associators of [lem-weil-scalar-extension-composition] inserted in the transport maps, we therefore have inverse maps\n$$u:T^X_{M/E}K_E\\xrightarrow{\\sim}T^X_{M/L}K_L,\\qquad v=u^{-1}$$\nat this single stage. No isomorphism $T^X_{L/E}K_E\\cong K_L$ at $L$ is assumed: the supplied common-stage identification may require enlarging $L$.",
+   "text": "Present the stage systems of [def-weil-algebraically-closed-coefficients] by their specified transition functors and associators; stageSystem_existsUnique identifies these presentations with the recorded systems. The finite functors and β form a StageSystem.Morphism: its coherence field is precisely the reversed tower equation of step 1. The concrete quotient functor already built into [def-weil-compact-support-coefficient-action] sends a representative to β at the source followed by the finite functor map followed by inverse β at the target. Thus no normalization to strict identity transitions and no additional abstract descent theorem is required for this existing quotient.",
    "uses": [
     "def-weil-algebraically-closed-coefficients",
-    "lem-weil-scalar-extension-composition"
+    "def-weil-compact-support-coefficient-action"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
-    "place": "Imported ## Proof: common-stage representation, with the inverse represented at a common larger field"
+    "place": "Finite scalar compatibility, descent of functors, and comparison paragraphs; concrete StageSystem assembly"
    }
   },
   {
-   "text": "Define at stage $M$\n$$w_M=\\beta_{M/L,K_L}^{-1}\\circ F_M(u)\\circ\\beta_{M/E,K_E}:\nT^Y_{M/E}F_EK_E\\longrightarrow T^Y_{M/L}F_LK_L.$$\nDefine $z_M=\\beta_{M/E,K_E}^{-1}\\circ F_M(v)\\circ\\beta_{M/L,K_L}$. Then $z_Mw_M=\\beta_{M/E,K_E}^{-1}F_M(vu)\\beta_{M/E,K_E}=1$, and $w_Mz_M=\\beta_{M/L,K_L}^{-1}F_M(uv)\\beta_{M/L,K_L}=1$. Passing to morphism classes in [def-weil-algebraically-closed-coefficients] preserves these equations, since its composition is represented at one common stage. Thus $[M,w_M]$ is an isomorphism from $(E,F_EK_E)$ to $(L,F_LK_L)$. By [def-weil-integral-rational-qbar-compact-support], these are precisely the two objects displayed in the statement. This uses the finite-stage functors and the coefficient comparisons of [lem-fix-operation-reduction], without identifying the coefficient categories with a different ambient sheaf category.",
+   "text": "The object equality of [def-weil-compact-support-finite-action] identifies each finite integral functor value with the specified integral compact-support value. Raw localization and pairing at the same field identify the descended value with [def-weil-integral-rational-qbar-compact-support]. Package the StageSystem.Morphism, these finite/value equalities, b, its mate specification and its rational component equality into SfCompactSupportCoefficientAction.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients",
+    "def-weil-compact-support-finite-action",
     "def-weil-integral-rational-qbar-compact-support",
-    "lem-fix-operation-reduction"
+    "def-weil-compact-support-coefficient-action"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
-    "place": "Imported ## Proof: the descended value on the two representatives, via an explicit map and inverse"
+    "place": "Finite scalar compatibility, descent of functors, and comparison paragraphs; concrete StageSystem assembly"
    }
   },
   {
-   "text": "It remains to verify that the isomorphism is canonical relative to $\\alpha_E,\\alpha_L$. If $M\\subset N$, the common-stage transport of $u$ is\n$$u_N=a^X_{N,M,L,K_L}\\circ T^X_{N/M}(u)\\circ(a^X_{N,M,E,K_E})^{-1}$$\nby [def-weil-algebraically-closed-coefficients] and [lem-weil-scalar-extension-composition]. For $A=E,L$, abbreviate $x_A=a^X_{N,M,A,K_A}$, $y_A=a^Y_{N,M,A,F_AK_A}$, $b_A=\\beta_{M/A,K_A}$ and $c_A=\\beta_{N/M,T^X_{M/A}K_A}$, and put $S=T^Y_{N/M}$. Step 1 says $\\beta_{N/A,K_A}=F_N(x_A)c_AS(b_A)y_A^{-1}$. Hence substitution of $u_N=x_LT^X_{N/M}(u)x_E^{-1}$ gives\n$$w_N=y_LS(b_L)^{-1}c_L^{-1}F_N(T^X_{N/M}u)c_ES(b_E)y_E^{-1}.$$\nNaturality of $\\beta_{N/M}$ at the map $u:T^X_{M/E}K_E\\to T^X_{M/L}K_L$ is precisely\n$$F_N(T^X_{N/M}u)c_E=c_LS(F_Mu).$$\nSubstituting this equality cancels $c_L^{-1}c_L$ and gives\n$$w_N=y_LS(b_L^{-1}F_M(u)b_E)y_E^{-1}=a^Y_{N,M,L,F_LK_L}\\circ T^Y_{N/M}(w_M)\\circ(a^Y_{N,M,E,F_EK_E})^{-1}.$$\nConsequently $w_N$ represents the same morphism as $w_M$. For two representatives of the fixed morphism $\\gamma$, choose a further stage where their transports agree, as in the equality clause of [def-weil-algebraically-closed-coefficients]; the displayed formula makes their output representatives equal there. This proves independence of every auxiliary stage and representative. Identity input comparisons give identity output comparisons, and composable comparisons give composable outputs, because in the product $\\beta^{-1}F(v)\\beta\\,\\beta^{-1}F(u)\\beta$ the middle factors cancel and $F(v)F(u)=F(vu)$. This is the descent argument in the imported proof, written within the present pair categories.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "lem-weil-scalar-extension-composition",
-    "lem-fix-operation-reduction"
-   ],
+   "text": "Unfold representative: it is the image of the represented input arrow under the concrete quotient functor, conjugated by value_eq. Equal represented arrows therefore give equal output representatives by congruence. Unfold comparison: its hom is the same conjugated functor image of α_E.hom followed by α_L.inv. The representative formula follows by substitution. Identity and composition follow from map_id and map_comp, cancellation of the representing isomorphisms, and cancellation of the value_eq transports.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
-    "place": "Imported ## Proof: descent-of-functors argument, written as invariance under common-stage transport and representative change"
+    "place": "Finite scalar compatibility, descent of functors, and comparison paragraphs; concrete StageSystem assembly"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-rationalization-karoubi",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-fix-operation-reduction",
-  "lem-weil-scalar-extension-composition",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-weil-compact-support-normalized-scalar-isomorphisms",
+  "lem-weil-compact-support-normalized-scalar-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-compact-support-finite-action",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-finite-field-independence.md",
-  "place": "Imported proof paragraph in the DAG; explicit common-stage comparison and inverse, since the referenced markdown is absent locally and the literal PBC finite-stage categories have additional witness requirements."
+  "place": "W3 stage-3 Lean assembly from normalized comparisons, their tower equation, and the existing concrete StageSystem.Morphism.functor"
  },
  "mathlib_searches": [
   {
@@ -199,32 +194,41 @@
   "prop-weil-pbc-descent-functors"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "lem-weil-compact-support-finite-field-independence",
   "worker": "stage1",
-  "summary": "Made the representing isomorphisms explicit to repair the canonicity ambiguity. The four steps supply coherent finite-stage coefficient comparisons using the existing operation-reduction statement, represent the chosen input isomorphism and its inverse at one finite stage, form inverse output maps, and prove invariance under enlarging that stage or changing the representative. No new nodes. The PBC descent formula is written out directly, so no identification between its witness-enhanced coefficient categories and the present categories is needed.",
-  "blueprint": "Realizes the imported proof paragraph: scalar-extension compatibility in step 1, common-stage input in step 2, descended output in step 3, and the independence asserted by functor descent in step 4. The PBC descent proposition is not invoked on differently defined coefficient categories.",
+  "summary": "Repair of every returned point: retain normalized existence (A), restrict scalar-descent to unit/tower equations only (B), and explicitly invoke generic pair-functor descent. Reviewer FIX (Q112 maintainer reader): the generic inverse-representative node was dropped as unneeded, since the descended functor carries isomorphisms to isomorphisms; step 3 now uses functoriality. No new node states independence or the parent conclusion. Statement and Lean metadata are unchanged.",
+  "blueprint": "First sentence: existence and coherence nodes; descent-of-functors sentence: generic coherent pair-functor tool; computation at stage E or L: functoriality of the descended functor applied to the representing isomorphisms.",
   "tool_uses": [
    {
-    "node": "lem-fix-operation-reduction",
-    "why": "Its statement gives the compact-support coefficient comparisons and compatibility with rationalization, common-stage scalar extension, and tensor associativity. No statement in the present unit supplies that coefficient-transport theorem."
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic additive pair-category descent is the categorical core of the blueprint prop-weil-pbc-descent-functors, with the representative formula and independence. Its statement allows arbitrary additive coefficient diagrams, so it applies to these literal framework stages without identifying them with the distinct PBC coefficient categories."
    }
   ]
  },
- "tool_uses": [
-  "lem-fix-operation-reduction"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NI-dbb05f32e",
-  "group": "NI",
+  "reviewer": "NT-cc-Q112-fb5084d41",
+  "group": "Q112",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-dbb05f32e (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, master sources, report, and unit/chapter route. All four steps, associator directions, inverse calculations, edge cases, and dependency checks pass. Accepted lem-fix-operation-reduction as the declared comparison tool. No new nodes or repairs. Condensed-category and exchange-map comparisons remain separate target obligations; review.md records the checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-fb5084d41 (reviewer sub-agent of L); spot-checked: I read the whole item and all three new nodes, every cited statement, the master and main-20261015 proof paragraph (finite scalar compatibility, then descent of functors; no SGA), the 2026-10-21 re-split note (4531 chars, at least 2 new nodes of comparable size) and the previous RETURN of d08ab84a. A (normalized-scalar-isomorphisms) states existence of b_{B/A} with the normalization of def-weil-compact-support-coefficient-action. Its types check. I tested the ramified case Q_p(√p) at n=1: S_1 is not perfect over Z/p^2, so the comparison needs the projection formula, and A asserts no flatness. A also holds for A=B and for zero or empty inputs. A is not a duplicate of lem-pur-compact-support-integral-coefficient-comparison (finite-field datum, finite-Tor only), of lem-fix-operation-reduction (no normalized b) or of the live normalized-scalar nodes (pullback/tensor, not compact support). B (normalized-scalar-descent) states only the unit and tower equations. They type-check and are exactly the hypotheses of lem-sbc-coherent-pair-functor-descent once T_{A/A} is normalized to 1. A and B are of comparable size and neither restates the item. Step 2's tool use of lem-sbc-coherent-pair-functor-descent (unit sk-rem-rest) is accepted: it is the generic core of prop-weil-pbc-descent-functors and is already accepted as a tool by that proposition and eight other nodes. FIX: I dropped C (lem-weil-common-stage-inverse-representatives). It is true but unneeded: the descended Φ is a functor, so Φ(α_L^{-1}α_E) is an isomorphism with inverse Φ(γ^{-1}). The old inverse-representative argument is carried by the existing theorem's composition clause. I rewrote step 3 to use functoriality and added def-weil-algebraically-closed-coefficients to its uses; proof_deps is now the union of the step uses. The assembly is 2310 chars. Advisories: the not-duplicates section misses prop-weil-pbc-common-stage-calculus, and the new nodes have no lean_audit key.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -243,5 +247,15 @@
   "by": "Q103",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101751-L-3734562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

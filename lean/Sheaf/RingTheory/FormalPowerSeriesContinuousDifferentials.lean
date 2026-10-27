@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Derivative
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Sheaf.SixFunctors.TraceFormula.FormalPowerSeriesContinuousFree
 import Sheaf.TraceFormula.FormalPowerSeriesContinuousConormal
 
@@ -26,6 +27,61 @@ Source: Stacks Project, Curves, Tags 0C4B and 0C4D, and Algebra, Tags 00RU,
 set_option autoImplicit false
 
 universe u
+
+/-- Restore exponent zero using its specified transition; the inverse drops that component. -/
+private noncomputable def positiveAdicEquiv (F A : Type u) [CommRing F] [CommRing A]
+    [Algebra F A] (J : Ideal A) :
+    KaehlerDifferential.Continuous F A J ≃ₗ[A]
+      KaehlerDifferential.adicContinuousDifferentials F A J where
+  toFun z := ⟨fun r ↦ match r with
+    | 0 => KaehlerDifferential.adicZerothTransition F A J (z.val 0)
+    | k + 1 => z.val k, by
+      rw [KaehlerDifferential.adicContinuousDifferentials, Submodule.mem_iInf]
+      intro r
+      rw [LinearMap.mem_ker]
+      simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.proj_apply,
+        sub_eq_zero]
+      cases r with
+      | zero => rfl
+      | succ k => exact z.property k⟩
+  invFun z := ⟨fun k ↦ z.val (k + 1), by
+    intro k
+    have hz := ((Submodule.mem_iInf _).mp z.property) (k + 1)
+    simpa only [LinearMap.mem_ker, LinearMap.sub_apply, LinearMap.comp_apply,
+      LinearMap.proj_apply, sub_eq_zero, KaehlerDifferential.adicTransitionZero] using hz⟩
+  left_inv z := by rfl
+  right_inv z := by
+    apply Subtype.ext
+    funext r
+    cases r with
+    | zero =>
+      have hz := ((Submodule.mem_iInf _).mp z.property) 0
+      simp only [LinearMap.mem_ker, LinearMap.sub_apply, LinearMap.comp_apply,
+        LinearMap.proj_apply, sub_eq_zero] at hz
+      exact hz
+    | succ k => rfl
+  map_add' z w := by
+    apply Subtype.ext
+    funext r
+    cases r <;> simp
+  map_smul' a z := by
+    apply Subtype.ext
+    funext r
+    cases r <;> simp
+
+/-- The indexing comparison preserves the canonical differential in every truncation. -/
+private theorem positiveAdicEquiv_continuousD (F A : Type u) [CommRing F] [CommRing A]
+    [Algebra F A] (J : Ideal A) (x : A) (r : ℕ) :
+    (positiveAdicEquiv F A J (KaehlerDifferential.continuousD F A J x)).val r =
+      KaehlerDifferential.D F _ (Ideal.Quotient.mk (J ^ r) x) := by
+  cases r with
+  | zero =>
+    change KaehlerDifferential.adicZerothTransition F A J
+      (KaehlerDifferential.D F (A ⧸ J ^ 1) (Ideal.Quotient.mk _ x)) = _
+    simp only [KaehlerDifferential.adicZerothTransition, LinearMap.restrictScalars_apply,
+      KaehlerDifferential.map_D]
+    rfl
+  | succ k => rfl
 
 namespace MvPowerSeries
 
@@ -56,6 +112,8 @@ noncomputable def quotientJacobian (F : Type u) [Field F] {n s : ℕ}
     ∑ i : Fin n, Finsupp.single i
       (Ideal.Quotient.mk (relationIdeal F f) (MvPowerSeries.pderiv F i (f j)))
 
+set_option maxHeartbeats 600000 in
+-- Tensor-product bases and the two quotient presentations require extra instance comparisons.
 /-- Continuous differentials of a formal power-series quotient are the Jacobian cokernel,
 with the specified canonical derivation and map on coordinate vectors. The derivation is
 characterized on every element by its value in every truncation. Thus neither the derivation
@@ -93,6 +151,84 @@ theorem exists_quotientJacobian_equiv_adicContinuousDifferentials
             ((coordinateIdeal F n).map (Ideal.Quotient.mk (relationIdeal F f))),
         ∀ i : Fin n, e (Submodule.Quotient.mk (Finsupp.single i 1)) =
           d (Ideal.Quotient.mk (relationIdeal F f) (MvPowerSeries.X i)) := by
-  sorry
+  classical
+  let D := MvPowerSeries (Fin n) F
+  let I := relationIdeal F f
+  let J := coordinateIdeal F n
+  let R := D ⧸ I
+  have hIJ : I ≤ J := Ideal.span_le.mpr (by rintro _ ⟨j, rfl⟩; exact hf j)
+  obtain ⟨basis, hbasis, hder⟩ :=
+    RingTheory.formalPowerSeriesContinuousDifferentials_free F n
+  obtain ⟨a, b, ha, hb, hex, hsurj⟩ :=
+    formal_power_series_continuous_conormal F n s J I rfl f rfl hIJ
+  change Module.Basis (Fin n) D (KaehlerDifferential.Continuous F D J) at basis
+  change (∀ i, basis i = KaehlerDifferential.continuousD F D J (X i)) at hbasis
+  change (∀ h, KaehlerDifferential.continuousD F D J h =
+    ∑ i, pderiv F i h • basis i) at hder
+  let E : TensorProduct D R (KaehlerDifferential.Continuous F D J) ≃ₗ[R] (Fin n →₀ R) :=
+    (basis.baseChange R).repr
+  let p := Finsupp.linearEquivFunOnFinite R R (Fin s)
+  -- In the base-changed coordinate basis, the relation arrow is the Jacobian.
+  have hmatrix : E.toLinearMap.comp (a.comp p.toLinearMap) = quotientJacobian F f := by
+    apply Finsupp.lhom_ext'
+    intro j
+    apply LinearMap.ext_ring
+    change E (a (p (Finsupp.single j 1))) = _
+    simp only [p, Finsupp.linearEquivFunOnFinite_single]
+    rw [ha j, hder (f j)]
+    change E (TensorProduct.tmul D (1 : R) (∑ i, pderiv F i (f j) • basis i)) =
+      (Finsupp.linearCombination R (fun j ↦ ∑ i,
+        Finsupp.single i (Ideal.Quotient.mk I (pderiv F i (f j)))))
+        (Finsupp.single j 1)
+    rw [Finsupp.linearCombination_single, one_smul, TensorProduct.tmul_sum, map_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [TensorProduct.tmul_smul]
+    rw [← IsScalarTower.algebraMap_smul R (pderiv F i (f j))
+      (TensorProduct.tmul D (1 : R) (basis i)), ← Module.Basis.baseChange_apply]
+    change (basis.baseChange R).repr
+      (algebraMap D R (pderiv F i (f j)) • (basis.baseChange R) i) = _
+    rw [map_smul, Module.Basis.repr_self, Finsupp.smul_single]
+    simp only [smul_eq_mul, mul_one]
+    rfl
+  let q : (Fin n →₀ R) →ₗ[R]
+      KaehlerDifferential.Continuous F R (J.map (Ideal.Quotient.mk I)) :=
+    b.comp E.symm.toLinearMap
+  have hqsurj : Function.Surjective q := hsurj.comp E.symm.surjective
+  -- Transport conormal exactness to the free coordinate module.
+  have hker : LinearMap.range (quotientJacobian F f) = LinearMap.ker q := by
+    apply Submodule.ext
+    intro x
+    change (∃ y, quotientJacobian F f y = x) ↔ b (E.symm x) = 0
+    constructor
+    · rintro ⟨y, rfl⟩
+      rw [← hmatrix]
+      change b (E.symm (E (a (p y)))) = 0
+      rw [E.symm_apply_apply]
+      exact hex.apply_apply_eq_zero (p y)
+    · intro hx
+      obtain ⟨y, hy⟩ := (hex (E.symm x)).mp hx
+      refine ⟨p.symm y, ?_⟩
+      rw [← hmatrix]
+      change E (a (p (p.symm y))) = x
+      rw [p.apply_symm_apply, hy, E.apply_symm_apply]
+  -- Restore exponent zero and transport both the derivation and the cokernel map.
+  let z := positiveAdicEquiv F R (J.map (Ideal.Quotient.mk I))
+  refine ⟨z.toLinearMap.compDer
+    (KaehlerDifferential.continuousD F R (J.map (Ideal.Quotient.mk I))), ?_, ?_⟩
+  · intro x r
+    exact positiveAdicEquiv_continuousD F R _ x r
+  · let c : ((Fin n →₀ R) ⧸ LinearMap.range (quotientJacobian F f)) ≃ₗ[R]
+        KaehlerDifferential.Continuous F R (J.map (Ideal.Quotient.mk I)) :=
+      (Submodule.quotEquivOfEq _ _ hker).trans (q.quotKerEquivOfSurjective hqsurj)
+    refine ⟨c.trans z, ?_⟩
+    intro i
+    change z (q (Finsupp.single i 1)) =
+      z (KaehlerDifferential.continuousD F R (J.map (Ideal.Quotient.mk I))
+        (Ideal.Quotient.mk I (X i)))
+    apply congrArg z
+    change b ((basis.baseChange R).repr.symm (Finsupp.single i 1)) = _
+    rw [Module.Basis.repr_symm_single_one, Module.Basis.baseChange_apply,
+      hbasis i, hb (X i) 1, one_smul]
 
 end MvPowerSeries

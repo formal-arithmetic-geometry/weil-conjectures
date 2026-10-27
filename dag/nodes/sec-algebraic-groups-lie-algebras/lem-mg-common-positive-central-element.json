@@ -162,7 +162,30 @@
   "p-central"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_pos_mem_center_mem_degreeComponent",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+     "lines": [
+      1053,
+      1093
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-p-central",
  "split_report": {
@@ -179,5 +202,36 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b89df6d02 (reviewer sub-agent of L); spot-checked: I read in full the item (no new nodes) against the main-20261015/master proof (two paragraphs, identical in both snapshots) and against the exact statements of p-central (blueprint_update: algebraically closed char-0 k, which Q̄_ℓ satisfies), d-central (blueprint_update), d-monodromy (blueprint_update), def-wf-arithmetic-monodromy-extension, degree-components, monodromy-data, fundamental-representation, semisimple-module, normal-restriction-semisimple and degree-component-functoriality. Step 1: a direct sum of simples is semisimple, and a basis choice gives the represented datum with F in G_Zar and H in G_Zar. Step 2: an exact application of p-central, then choosing h with z_mat=hF^N and setting z=(h,N) in G^[N]. Step 3: I checked by hand with (h,m)(h',n)=(h α^m(h'),m+n). Centrality gives hF=Fh and hF^N x F^{-N}=xh, so z(x,n)=(xh,N+n)=(x,n)z for every (x,n). This keeps the integer coordinate, so it is valid when F has finite order or F=1. It replaces the blueprint's injectivity/generation shorthand with a complete check, which is why lem-wf-degree-component-image is correctly no longer cited. Step 4: the in-particular clause of normal-restriction, and functoriality applied to a subquotient of the summand V_i of V; z is chosen before Q, so it works for every Q at once. Edge case: an empty family or V=0 is fine. The statement is verbatim, and the added stmt_deps are the notions it names. No duplicate turned up in an rg -L search; the item is not on route-pivot-dropped.txt; live and side-live still have it imported, with no re-split note; no SGA source; no tool_uses needed. Batch-5 finding: def-wf-fundamental-representation and def-wf-monodromy-data reach only def-pod-lisse-l-adic-sheaves, a general definition of lisse ℓ-adic sheaves and not a step of the Poincaré-duality or trace-formula proofs, so I accept both. No changes made."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\rho_1,\\ldots,\\rho_a$ be semisimple Weil representations\n([def-wf-semisimple-module]) of one and the same degree datum\n([d-monodromy]) over an algebraically closed field $k$ of characteristic\nzero (such representations are geometrically semisimple by\n[lem-mg-normal-restriction-semisimple]), and let\n$\\rho=\\bigoplus_i\\rho_i$, a semisimple represented degree datum. There\nare an integer $m>0$ and\n\n$$\nz\\in Z\\bigl(G_{\\mathrm{arith}}(\\rho)\\bigr)\\cap G^{[m]}\n$$\n\nwhose matrix under $(h,n)\\mapsto hF^n$ lies in the centre $Z(G)(k)$.\nThus all $W$-stable subquotients of all the $\\rho_i$ may be measured\nusing images of one and the same degree-$m$ element, via the\nfunctoriality of [lem-mg-degree-component-functoriality].",
+  "proof": [
+   {
+    "text": "The direct sum $\\rho$ of semisimple Weil representations is a\nsemisimple Weil representation, so it is a semisimple represented degree\ndatum in the sense of [d-monodromy], with geometric monodromy group $H$,\narithmetic monodromy group $G$ and $F=\\rho(s)$ for the chosen degree-one\n$s$. By [p-central] there is a positive central pair ([d-central]), i.e.\n$N>0$ and\n\n$$\nz_{\\mathrm{mat}}=hF^N\\in Z(G),\\qquad h\\in H.\n$$",
+    "uses": [
+     "d-monodromy",
+     "p-central",
+     "d-central"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Put $m=N$ and $z=(h,m)\\in G^{[m]}$ in the notation of\n[def-wf-degree-components]. The matrix map\n$(h',n)\\mapsto h'F^n$ of\n[def-wf-arithmetic-monodromy-extension] is a group homomorphism with\nvalues in $G$ ([lem-wf-degree-component-image]), and it\nsends $z$ to $z_{\\mathrm{mat}}$. For $x\\in H$, the\ncommutator of $z$ with $(x,0)$ has degree $0$ and matrix\n$z_{\\mathrm{mat}}xz_{\\mathrm{mat}}^{-1}x^{-1}=1$; the commutator of $z$\nwith $(1,1)$ has degree $0$ and matrix\n$z_{\\mathrm{mat}}Fz_{\\mathrm{mat}}^{-1}F^{-1}=1$. On the degree-zero\ncomponent the matrix map $(h',0)\\mapsto h'$ is injective, so both\ncommutators are trivial. Since $G_{\\mathrm{arith}}(\\rho)$ is generated\nby $H\\times\\{0\\}$ and $(1,1)$, the element $z$ is central.\nIts image on every subquotient has the same\ndegree and remains central by the functoriality of\n[lem-mg-degree-component-functoriality].",
+    "uses": [
+     "def-wf-degree-components",
+     "def-wf-arithmetic-monodromy-extension",
+     "lem-wf-degree-component-image",
+     "lem-mg-degree-component-functoriality"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

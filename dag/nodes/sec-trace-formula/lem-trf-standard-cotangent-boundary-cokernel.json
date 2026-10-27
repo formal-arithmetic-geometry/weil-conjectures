@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-standard-cotangent-boundary-cokernel",
+ "kind": "statement",
+ "title": "The degree-minus-one standard cotangent boundary cokernel",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings. Form $R=A[B]$, $Q_1=A[R]$ and $Q_2=A[Q_1]$ [def-weil-pbc-mv-polynomial-ring], with variables $X_b,Y_p,Z_f$ respectively. Let $\\epsilon:R\\twoheadrightarrow B$ be evaluation and $I=\\ker\\epsilon$. Define $d_0,d_1:Q_1\\to R$ by $Y_p\\mapsto p,X_{\\epsilon(p)}$, respectively, and augment $Q_1$ to $B$ by their common composite with $\\epsilon$. Put $M_1=\\Omega^1_{Q_1/A}\\otimes_{Q_1}B$, $M_2=\\Omega^1_{Q_2/A}\\otimes_{Q_2}B$, using the augmentation $Z_f\\mapsto\\epsilon(d_0f)$ on $Q_2$ [def-weil-pbc-kahler-differentials]. Define the $B$-linear map $\\partial_2:M_2\\to M_1$ on polynomial differential generators by $\\partial_2(\\mathrm dZ_f\\otimes1)=\\mathrm df\\otimes1-\\mathrm dY_{d_0f}\\otimes1+\\mathrm dY_{d_1f}\\otimes1$. Suppose the rule $\\rho(\\mathrm df\\otimes b)=b[d_0f-d_1f]$ defines a $B$-linear map $M_1\\to I/I^2$ with $\\rho\\partial_2=0$. Let $E=M_1/\\operatorname{im}\\partial_2$ and denote by $t_p$ the class of $\\mathrm dY_p\\otimes1$. Then the induced map $\\overline\\rho:E\\to I/I^2$ is a $B$-linear isomorphism, with inverse $[h]\\mapsto t_h-t_0$ for $h\\in I$. In particular that inverse rule is additive, is linear for the $R$-action through $\\epsilon$, and annihilates $I^2$. No finiteness or regularity assumption on $A\\to B$ is required.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08UP (remark-explicit-comparison-map) and 08RB (lemma-relation-with-naive-cotangent-complex): explicit cokernel calculation completing the omitted low-degree comparison verification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:M_1\\to E$ for the quotient and $D(f)=q(\\mathrm df\\otimes1)$. The defining formula for $\\partial_2$ gives, for every $f\\in Q_1$, the relation $D(f)=t_{d_0f}-t_{d_1f}$ in $E$. From the derivation definition [def-weil-pbc-kahler-differentials], $D$ is additive, vanishes on $A$, and satisfies $D(fg)=\\epsilon(d_0f)D(g)+\\epsilon(d_0g)D(f)$. Also $D(Y_p)=t_p$. These $t_p$ generate $E$ over $B$: the defining presentation of differentials gives generation by all $\\mathrm df$; write $f$ as a finite sum of monomials [def-weil-pbc-mv-polynomial-ring] and repeatedly apply additivity and the product rule to express each $\\mathrm df$ in the $\\mathrm dY_p$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+   }
+  },
+  {
+   "text": "For $f=Y_p$ the relation of step 1 reads $t_p=t_p-t_{X_{\\epsilon(p)}}$, hence $t_{X_b}=0$ for every $b\\in B$, since $\\epsilon(X_b)=b$. Fix $p\\in R$, put $b=\\epsilon(p)$ and $h=p-X_b\\in I$. Apply that relation to $f=Y_p-Y_{X_b}$. Its derivative class is $t_p-t_{X_b}=t_p$, and its two faces are $h$ and $X_b-X_b=0$. Thus $t_p=t_h-t_0$. This will verify one composite of the proposed inverse on every generator.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+   }
+  },
+  {
+   "text": "Define the set map $s:I\\to E$ by $s(h)=t_h-t_0$. It has $s(0)=0$. For $h,k\\in I$, applying step 1 to $Y_h+Y_k$ gives $t_h+t_k=t_{h+k}-t_{2X_0}$. Applying it to $Y_0+Y_0$ gives $2t_0=t_0-t_{2X_0}$, so $t_{2X_0}=-t_0$. Substitution gives $s(h+k)=s(h)+s(k)$. In particular $s(-h)=-s(h)$. Here $0$ as an index means the zero polynomial of $R$, whereas $X_0$ is the variable indexed by zero in $B$; these have not been identified.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+   }
+  },
+  {
+   "text": "For $r\\in R$ and $h\\in I$, use step 1 with $Y_rY_h$. Since $\\epsilon(h)=0$, the result is $\\epsilon(r)t_h=t_{rh}-t_{X_{\\epsilon(r)}X_0}$. The same relation for $Y_rY_0$ is $\\epsilon(r)t_0=t_0-t_{X_{\\epsilon(r)}X_0}$. Subtracting the two equalities gives $s(rh)=\\epsilon(r)s(h)$. Together with step 3, this says that $s$ is $R$-linear when $E$ has its $R$-action through $\\epsilon$. No choice of a polynomial lift has entered this formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+   }
+  },
+  {
+   "text": "For $h,k\\in I$, step 4 gives $s(hk)=\\epsilon(h)s(k)=0$. Every element of $I^2$ is a finite sum of products $h_jk_j$ with $h_j,k_j\\in I$: coefficients in $R$ can be absorbed into one factor because $I$ is an ideal. Additivity therefore makes $s$ vanish on $I^2$. Define $\\sigma:I/I^2\\to E$ by $\\sigma([h])=s(h)$. If $h-h'\\in I^2$, then $s(h)-s(h')=s(h-h')=0$, proving independence of representatives. For $b\\in B$, lift it to $r=X_b\\in R$; the $B$-action on $I/I^2$ is $b[h]=[rh]$, independent of the lift since another lift differs by an element of $I$. Step 4 gives $\\sigma(b[h])=b\\sigma([h])$, so $\\sigma$ is $B$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+   }
+  },
+  {
+   "text": "By the assumed identity $\\rho\\partial_2=0$, the map $\\rho$ descends to $\\overline\\rho:E\\to I/I^2$. For every $h\\in I$ its composite with $\\sigma$ is $\\overline\\rho(t_h-t_0)=[h-X_0]-[0-X_0]=[h]$; both displayed representatives lie in $I$. Conversely, for every generator $t_p$, with $b=\\epsilon(p)$, one has $\\sigma\\overline\\rho(t_p)=\\sigma([p-X_b])=t_{p-X_b}-t_0=t_p$ by step 2. Generation from step 1 and $B$-linearity give $\\sigma\\overline\\rho=1_E$. Thus $\\overline\\rho$ and $\\sigma$ are mutually inverse $B$-linear maps, with the inverse rule and its additivity, scalar linearity and vanishing on $I^2$ proved in steps 3--5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08UP (remark-explicit-comparison-map), explicit alternating face boundary, and 08RB (lemma-relation-with-naive-cotangent-complex); agent-written verification of the boundary cokernel."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cokernel of second differential of standard free simplicial algebra differentials is augmentation ideal modulo square",
+   "results": "8 hits; top=['classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'AlgebraicTopology.NormalizedMooreComplex.obj_d', 'AlgebraicTopology.NormalizedMooreComplex.objD', 'AlgebraicTopology.normalizedMooreComplex_objD', 'Module.Presentation.cokernel_R', 'AlgebraicTopology.NormalizedMooreComplex.obj', 'AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty', 'AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ']; note=; digest=f754363470b8b438. Full results retained in lem-trf-standard-cotangent-boundary-cokernel.search-0.txt. No match: Ideal.Cotangent and presentation-of-differentials hits define the target quotient or a different presentation, not this specific boundary cokernel; read Ideal/Cotangent.lean and Extension/Cotangent/Basic.lean:339-344.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relations on symbols indexed by polynomials identify quotient differential module with conormal module I mod I squared",
+   "results": "8 hits; top=['Algebra.Presentation.differentials', 'KaehlerDifferential.derivationQuotKerTotal_apply', 'Algebra.Presentation.differentialsSolution', 'KaehlerDifferential.quotKerTotalEquiv_apply', 'KaehlerDifferential.derivationQuotKerTotal', 'Algebra.Presentation.differentials.hom₁', 'KaehlerDifferential.quotKerTotalEquiv', 'Algebra.Presentation.differentials.hom₁_single']; note=; digest=cbe7d314a4a7b254. Full results retained in lem-trf-standard-cotangent-boundary-cokernel.search-1.txt. No match: Ideal.Cotangent and presentation-of-differentials hits define the target quotient or a different presentation, not this specific boundary cokernel; read Ideal/Cotangent.lean and Extension/Cotangent/Basic.lean:339-344.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "standard cotangent resolution cokernel degree two boundary is conormal module",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. Full results retained in lem-trf-standard-cotangent-boundary-cokernel.search-2.txt. No match: Ideal.Cotangent and presentation-of-differentials hits define the target quotient or a different presentation, not this specific boundary cokernel; read Ideal/Cotangent.lean and Extension/Cotangent/Basic.lean:339-344.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Cotangent",
+   "results": "12 hits; top=['Ideal.Cotangent', 'Ideal.instAddCommGroupCotangent', 'Ideal.instInhabitedCotangent', 'Ideal.instSMulCotangentOfAlgebra', 'Ideal.instModuleCotangentOfAlgebra', 'Ideal.instModuleQuotientCotangent', 'Ideal.cotangent_subsingleton_iff', 'Ideal.isTorsionBySet_cotangent']; note=; digest=5e1b7e95f71de8e9. Full results retained in lem-trf-standard-cotangent-boundary-cokernel.search-3.txt. No match: Ideal.Cotangent and presentation-of-differentials hits define the target quotient or a different presentation, not this specific boundary cokernel; read Ideal/Cotangent.lean and Extension/Cotangent/Basic.lean:339-344.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel|cotangentEquiv|H1Cotangent [sub=RingTheory/Extension]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/Basic.lean', 'Mathlib/RingTheory/Extension/Basic.lean', 'Mathlib/RingTheory/Extension/Basic.lean']; note=; digest=5d0e7792d5b979e0. Full results retained in lem-trf-standard-cotangent-boundary-cokernel.search-4.txt. No match: Ideal.Cotangent and presentation-of-differentials hits define the target quotient or a different presentation, not this specific boundary cokernel; read Ideal/Cotangent.lean and Extension/Cotangent/Basic.lean:339-344.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel|cotangentEquiv|H1Cotangent",
+   "results": "25 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/Basic.lean', 'Mathlib/RingTheory/Extension/Basic.lean', 'Mathlib/RingTheory/Extension/Basic.lean']; note=; digest=c142a121dfb23e81. Read returned types and Mathlib/RingTheory/Ideal/Cotangent.lean:43-80, RingTheory/Extension/Cotangent/Basic.lean:339-344, Algebra/Module/Presentation/Differentials.lean:51-86,140-178 and RingTheory/Extension/Presentation/Basic.lean:520-522. These give conormal modules, naive H1, and presentations of differentials, not the specific standard simplicial second-boundary cokernel or its inverse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "standard cotangent resolution boundary cokernel conormal ideal squared",
+   "results": "8 hits; top=['Ideal.cotangentIdeal_square', 'Algebra.Extension.Cotangent.ker_mk', 'Ideal.mem_toCotangent_ker', 'Ideal.map_toCotangent_ker', 'CategoryTheory.ProjectiveResolution.cokernelCofork', 'instR', 'Algebra.Extension.Cotangent.mk_eq_zero_iff', 'Ideal.cotangentIdeal']; note=; digest=39595b906927598d. Read returned types and Mathlib/RingTheory/Ideal/Cotangent.lean:43-80, RingTheory/Extension/Cotangent/Basic.lean:339-344, Algebra/Module/Presentation/Differentials.lean:51-86,140-178 and RingTheory/Extension/Presentation/Basic.lean:520-522. These give conormal modules, naive H1, and presentations of differentials, not the specific standard simplicial second-boundary cokernel or its inverse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Cotangent",
+   "results": "12 hits; top=['Ideal.Cotangent', 'Ideal.instAddCommGroupCotangent', 'Ideal.instInhabitedCotangent', 'Ideal.instSMulCotangentOfAlgebra', 'Ideal.instModuleCotangentOfAlgebra', 'Ideal.instModuleQuotientCotangent', 'Ideal.cotangent_subsingleton_iff', 'Ideal.isTorsionBySet_cotangent']; note=; digest=5e1b7e95f71de8e9. Read returned types and Mathlib/RingTheory/Ideal/Cotangent.lean:43-80, RingTheory/Extension/Cotangent/Basic.lean:339-344, Algebra/Module/Presentation/Differentials.lean:51-86,140-178 and RingTheory/Extension/Presentation/Basic.lean:520-522. These give conormal modules, naive H1, and presentations of differentials, not the specific standard simplicial second-boundary cokernel or its inverse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cokernel of standard simplicial polynomial algebra differential boundary is conormal module ideal modulo square",
+   "results": "8 hits; top=['Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Generators.H1Cotangent.δAux', 'Algebra.Presentation.differentials.hom₁', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Extension.H1Cotangent', 'Algebra.Presentation.differentials.hom₁_single', 'AlgebraicTopology.NormalizedMooreComplex.objX', 'Algebra.Presentation.differentialsSolution']; note=; digest=9c823e96916d1fc0. Read returned types and Mathlib/RingTheory/Ideal/Cotangent.lean:43-80, RingTheory/Extension/Cotangent/Basic.lean:339-344, Algebra/Module/Presentation/Differentials.lean:51-86,140-178 and RingTheory/Extension/Presentation/Basic.lean:520-522. These give conormal modules, naive H1, and presentations of differentials, not the specific standard simplicial second-boundary cokernel or its inverse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relations on polynomial indexed symbols give augmentation ideal modulo its square via an explicit inverse",
+   "results": "8 hits; top=['Algebra.Presentation.naive_relation_apply', 'Algebra.Presentation.naive_relation', 'Algebra.Presentation.differentialsRelations_R', 'Algebra.Generators.exists_presentation_of_free_cotangent', 'Algebra.Presentation.differentialsRelations_G', 'Algebra.Presentation.differentials.hom₁_single', 'Algebra.Presentation.differentialsSolution_isPresentation', \"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\"]; note=; digest=86558dbee24ea31a. Read returned types and Mathlib/RingTheory/Ideal/Cotangent.lean:43-80, RingTheory/Extension/Cotangent/Basic.lean:339-344, Algebra/Module/Presentation/Differentials.lean:51-86,140-178 and RingTheory/Extension/Presentation/Basic.lean:520-522. These give conormal modules, naive H1, and presentations of differentials, not the specific standard simplicial second-boundary cokernel or its inverse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lci-naive-cotangent-model",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Natural projection to the two-term naive cotangent truncation. Repair extraction: old proof steps 3-5: explicit inverse for the degree-minus-one boundary cokernel.",
+   "via": [
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-standard-cotangent-boundary-cokernel",
+  "worker": "stage1",
+  "summary": "Q134: completed the explicit boundary-cokernel computation using six short elementary steps. Constructed the inverse by subtracting boundary relations for sums and products, proved descent through I squared, and checked both composites on generators. No statement change and no new nodes. Searched project Lean, the whole DAG and blueprint, and Mathlib with two semantic phrasings, Loogle, LeanSearch and source grep.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality: supporting lci cotangent comparison in the semistable-alteration branch, as specified in blueprint.from.place; realizes the extracted explicit inverse for the degree-minus-one boundary cokernel. This is below the unit route and does not replace its geometric argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-7df5fa7a5",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-7df5fa7a5 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full and redid each calculation by hand; the delivery has no new nodes. Step 1: D(f)=t_{d0f}-t_{d1f} in E, the Leibniz rule holds through ε∘d0, and the t_p generate E. Step 2: from f=Y_p and f=Y_p-Y_{X_b}, t_{X_b}=0 and t_p=t_h-t_0. Step 3: additivity comes from Y_h+Y_k against Y_0+Y_0, giving t_{2X_0}=-t_0, and 0 is kept distinct from X_0. Step 4: comparing Y_rY_h with Y_rY_0 gives s(rh)=ε(r)s(h) for all r in R. Step 5: s vanishes on I^2 and σ is B-linear. Step 6: both composites are the identity on generators. The faces, the ∂_2 signs and the augmentation match Stacks 08UP remark-explicit-comparison-map (cotangent.tex ~1978-2014). The cokernel claim is the verification that 08RB lemma-relation-with-naive-cotangent-complex and 08UP omit. The cited def-weil-pbc-kahler-differentials and def-weil-pbc-mv-polynomial-ring state what the steps take from them. ρ∂_2=0 is a hypothesis, supplied in the parent by lem-trf-standard-cotangent-chain-projection; the parent lci-naive-cotangent-model step 1 uses exactly this conclusion. Edge cases checked: B=0, h=0, k=-h, r in I, characteristic 2, and the identity map A→A. No duplicate in the DAG (searched 08UP/08RB and standard-resolution nodes), no Lean declaration for the id in slopmaster2, no Mathlib match, no SGA citation, no tool_uses, blueprint fields present. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StandardCotangentBoundaryCokernel",
+  "declaration": "Algebra.StandardCotangentBoundary.boundary_cokernel_equiv",
+  "declarations": [
+   "Algebra.StandardCotangentBoundary.epsilon",
+   "Algebra.StandardCotangentBoundary.faceZero",
+   "Algebra.StandardCotangentBoundary.faceOne",
+   "Algebra.StandardCotangentBoundary.augmentationOne_section",
+   "Algebra.StandardCotangentBoundary.generatorsOne",
+   "Algebra.StandardCotangentBoundary.augmentationTwo_section",
+   "Algebra.StandardCotangentBoundary.generatorsTwo",
+   "Algebra.StandardCotangentBoundary.ModuleOne",
+   "Algebra.StandardCotangentBoundary.ModuleTwo",
+   "Algebra.StandardCotangentBoundary.differentialTensor",
+   "Algebra.StandardCotangentBoundary.boundary",
+   "Algebra.StandardCotangentBoundary.Cokernel",
+   "Algebra.StandardCotangentBoundary.symbol",
+   "Algebra.StandardCotangentBoundary.augmentationIdeal",
+   "Algebra.StandardCotangentBoundary.faceDifference_mem",
+   "Algebra.StandardCotangentBoundary.differenceClass",
+   "Algebra.StandardCotangentBoundary.inverseRule",
+   "Algebra.StandardCotangentBoundary.boundary_cokernel_equiv"
+  ],
+  "file": "lean/Sheaf/RingTheory/StandardCotangentBoundaryCokernel.lean",
+  "statement": "theorem boundary_cokernel_equiv (rho : ModuleOne A B →ₗ[B] (Generators.self A B).toExtension.Cotangent) (rho_formula : ∀ (f : MvPolynomial (MvPolynomial B A) A) (b : B), rho (differentialTensor A B b f) = b • differenceClass A B f) (rho_boundary : rho.comp (boundary A B) = 0) : (∃ e : Cokernel A B ≃ₗ[B] (Generators.self A B).toExtension.Cotangent, e.toLinearMap.comp (LinearMap.range (boundary A B)).mkQ = rho ∧ ∀ h : augmentationIdeal A B, e.symm (Extension.Cotangent.mk h) = inverseRule A B h) ∧ (∀ h k : augmentationIdeal A B, inverseRule A B (h + k) = inverseRule A B h + inverseRule A B k) ∧ (∀ (r : MvPolynomial B A) (h : augmentationIdeal A B), inverseRule A B (r • h) = epsilon A B r • inverseRule A B h) ∧ (∀ h : augmentationIdeal A B, h.val ∈ augmentationIdeal A B ^ 2 → inverseRule A B h = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Explicit polynomial augmentations, genuine base-changed Kähler differential modules, basis-defined second boundary and actual quotient. The equivalence is pinned as the induced rho and by its inverse on every conormal class; all three inverse-rule clauses are explicit. The auxiliary section and membership theorems are proof obligations of the constructions in this same node, with real polynomial data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3bda292bf",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: MvPolynomial towers R/Q1/Q2, epsilon=aeval id, I=(Generators.self).ker, faces d0/d1 exact, Q1 aug Y_p↦ε(p), Q2 aug Z_f↦ε(d0 f) with explicit sections (named sorried theorems), M_i=CotangentSpace (B⊗Ω), ∂2 via cotangentSpaceBasis.constr with signs +df−dY_{d0f}+dY_{d1f}, rho hypotheses = node (B-linear, b⊗df↦b[d0f−d1f], ρ∂2=0); conclusion pins e∘mkQ=rho and e.symm[h]=t_h−t_0, plus additivity, ε-linearity, I² vanishing. Proof rechecked on generators (t_{X_b}=0, both composites). Edge cases B=0, id A→A, h=0, k=−h, char 2, r∈I, u≠v. Only lean field changed, deps unchanged, statement verbatim; no H4 duplicate in project/Mathlib; H5/H6/H8/H9 ok; report sections present. No findings."
+ }
+}

@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-cartesian-module-fppf-realization",
+ "kind": "statement",
+ "title": "Compatible scheme modules give a quasi-coherent sheaf on a fibred fppf site",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $p:\\mathcal C\\to\\mathit{Sch}/S$ be a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids]. Give its big fppf site the structure sheaf $\\mathcal O_{\\mathcal C}(x)=\\Gamma(T,\\mathcal O_T)$ for $x\\in\\mathcal C(T)$, with the site and module quasi-coherence conventions of [def-sfb-stack-quasi-coherent-algebra]. For each such $x$ suppose given a quasi-coherent $\\mathcal O_T$-module $M_x$ [pqf-def-coherent]. For every arrow $\\alpha:y\\to x$ over $u:T'\\to T$, suppose given an isomorphism $\\theta_\\alpha:u^*M_x\\xrightarrow{\\sim}M_y$, where $u^*$ is tensor pullback [def-pc-module-pullback]. Assume $\\theta_{\\mathrm{id}_x}=\\mathrm{id}_{M_x}$ and, for composable $\\beta:z\\to y$ over $v:T''\\to T'$, $\\theta_{\\alpha\\circ\\beta}=\\theta_\\beta\\circ v^*\\theta_\\alpha$ under $(u\\circ v)^*\\simeq v^*u^*$. Then the presheaf $F(x)=\\Gamma(T,M_x)$, whose restriction along $\\alpha$ pulls a section to $u^*M_x$ and applies $\\theta_\\alpha$, is a sheaf of $\\mathcal O_{\\mathcal C}$-modules for the fppf topology and is quasi-coherent in the local-presentation sense. No algebraicity, finiteness or representability assumption on $\\mathcal C$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WK (lemma-quasi-coherent), cartesian criterion and its proof, with Tag 06WI (lemma-characterize-quasi-coherent). The statement writes the associated section presheaf explicitly, using the scheme associated-module construction invoked in that proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\rho_\\alpha(s)=\\Gamma(T',\\theta_\\alpha)(u^*s)$. In the tensor definition [def-pc-module-pullback], section pullback sends the germ of $s$ to $1\\otimes s$; hence it is additive, semilinear for pullback of functions, and natural in module maps. Two successive pullbacks give $1\\otimes(1\\otimes s)$, identified with $1\\otimes s$ for the composite. The assumed identity and cocycle equations for $\\theta$ therefore give $\\rho_{\\mathrm{id}}=\\mathrm{id}$ and $\\rho_{\\alpha\\beta}=\\rho_\\beta\\rho_\\alpha$. With the pointwise $\\Gamma(T,\\mathcal O_T)$-actions this is exactly an $\\mathcal O_{\\mathcal C}$-module presheaf [def-sfb-stack-quasi-coherent-algebra].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), converse proof; Tag 06WI (lemma-characterize-quasi-coherent), sufficiency; section-restriction, lemma-localizing."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\mathcal C(T)$. The functor $p_x:\\mathcal C/x\\to\\mathit{Sch}/T$ sends $(\\alpha:y\\to x)$ to $u=p(\\alpha)$. It is essentially surjective because every base arrow to $T$ has a lift to $x$. For two such lifts, every base triangle has a unique arrow above it by the defining factorization property of a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids]. Thus $p_x$ is fully faithful and essentially surjective. Covers on both sides are precisely the families whose base maps are fppf covers [def-sfb-stack-quasi-coherent-algebra], and the structure rings are the same $\\Gamma(T',\\mathcal O_{T'})$. We can therefore describe the ringed slice using $(\\mathit{Sch}/T)_{fppf}$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), converse proof; Tag 06WI (lemma-characterize-quasi-coherent), sufficiency; section-restriction, lemma-localizing."
+   }
+  },
+  {
+   "text": "By [lem-sfb-scheme-big-fppf-quasicoherent-equivalence], $A_T(M_x)(u:T'\\to T)=\\Gamma(T',u^*M_x)$ with section-pullback restrictions (through $v^*u^*M_x\\simeq(uv)^*M_x$) is a quasi-coherent module sheaf on the big fppf site of $T$. On the slice its comparison with $F$ is explicitly $\\lambda_\\alpha=\\Gamma(T',\\theta_\\alpha):A_T(M_x)(p_x\\alpha)=\\Gamma(T',u^*M_x)\\xrightarrow{\\sim}\\Gamma(T',M_y)=F(y)$ for $\\alpha:y\\to x$ over $u$; $\\lambda_{\\mathrm{id}_x}=\\mathrm{id}$ since $\\theta_{\\mathrm{id}_x}=\\mathrm{id}$. For a slice arrow $\\beta:z\\to y$ over $v:T''\\to T'$ (so $z$ lies over $x$ via $\\alpha\\beta$ over $uv$) and an arbitrary section $t\\in\\Gamma(T',u^*M_x)$, not only one of the form $u^*s$, the two composites are $\\rho_\\beta(\\lambda_\\alpha(t))=\\Gamma(T'',\\theta_\\beta)\\big(v^*\\Gamma(T',\\theta_\\alpha)(t)\\big)$ and $\\lambda_{\\alpha\\beta}(v^*t)=\\Gamma(T'',\\theta_{\\alpha\\beta})(v^*t)$, with $v^*t$ read in $(uv)^*M_x$. Naturality of section pullback in module maps (step 1) gives $v^*\\Gamma(T',\\theta_\\alpha)(t)=\\Gamma(T'',v^*\\theta_\\alpha)(v^*t)$, and the assumed cocycle equation $\\theta_{\\alpha\\beta}=\\theta_\\beta\\circ v^*\\theta_\\alpha$ identifies the two. Module operations are respected because each $\\Gamma(\\theta_\\alpha)$ is $\\Gamma(T',\\mathcal O_{T'})$-linear. Thus $\\lambda$ is an isomorphism of module presheaves on $\\mathcal C/x\\simeq(\\mathit{Sch}/T)_{fppf}$, including the specified restrictions, not merely an objectwise bijection.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), converse proof; Tag 06WI (lemma-characterize-quasi-coherent), sufficiency; section-restriction, lemma-localizing."
+   }
+  },
+  {
+   "text": "For an fppf covering $\\{y_i\\to x\\}$, a matching family for $F$ is the same matching family for $F|_{\\mathcal C/x}$: its compatibility is tested on arrows into the $y_i$ over $x$. Step 3 identifies this restricted presheaf with a sheaf, so the family has a unique amalgamation in $F(x)$. As $x$ and its cover were arbitrary, $F$ is a sheaf. The module operations already commute with restrictions by step 1; hence this is a sheaf of $\\mathcal O_{\\mathcal C}$-modules with the original values.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), converse proof; Tag 06WI (lemma-characterize-quasi-coherent), sufficiency; section-restriction, lemma-localizing."
+   }
+  },
+  {
+   "text": "On each ringed slice, step 3 identifies $F$ with the quasi-coherent sheaf $A_T(M_x)$, where site quasi-coherence means local presentations by arbitrary small free modules. By the explicit definition [def-trf-space-quasi-coherent-module], choose such a covering of the terminal object $\\mathrm{id}_T$ and its free presentations. Under step 2 these are covers $y_i\\to x$ and the same presentations on $\\mathcal C/y_i$, with ring sheaf $\\mathcal O_{\\mathcal C}|_{\\mathcal C/y_i}$. This supplies exactly the required local presentations at each $x$. No property of $\\mathcal C$ beyond the lift and unique-factorization axioms was used.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), converse proof; Tag 06WI (lemma-characterize-quasi-coherent), sufficiency; section-restriction, lemma-localizing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "def-trf-space-quasi-coherent-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WK converse and Tag 06WI sufficiency, with the explicit compatible-module slice comparison; descent.tex Tag 03DX(1) supplies the scheme-associated sheaf via the existing DAG node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent|QuasiCoherent",
+   "results": "{\"t\": \"2026-10-23T11:34:43Z\", \"tool\": \"grep\", \"query\": \"quasi.?coherent|QuasiCoherent\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\"], \"digest\": \"e6bc37b479811f13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of modules on a category fibred in groupoids is quasi coherent on the big fppf site if its restrictions to schemes are quasi coherent and its pullback comparison maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T11:34:51Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf of modules on a category fibred in groupoids is quasi coherent on the big fppf site if its restrictions to schemes are quasi coherent and its pullback comparison maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"36c7e4af2d3a6ae3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|fibred|fibered|fppf",
+   "results": "{\"t\": \"2026-10-23T11:39:10Z\", \"tool\": \"grep\", \"query\": \"cartesian|fibred|fibered|fppf\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible quasi coherent modules on a category fibred in groupoids define a quasi coherent sheaf on the fppf site by sections",
+   "results": "{\"t\": \"2026-10-23T11:39:11Z\", \"tool\": \"leansearch\", \"query\": \"Compatible quasi coherent modules on a category fibred in groupoids define a quasi coherent sheaf on the fppf site by sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.sections\", \"SheafOfModules.Presentation\"], \"digest\": \"4f37b228b08fd7e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Quasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T11:39:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Quasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\"], \"digest\": \"84dd5f6ef412bd8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible quasi coherent modules on all scheme objects of a category fibred in groupoids give a quasi coherent sheaf on its big fppf site by taking sections",
+   "results": "{\"t\": \"2026-10-23T11:39:14Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible quasi coherent modules on all scheme objects of a category fibred in groupoids give a quasi coherent sheaf on its big fppf site by taking sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"6794a4d6a40a1691\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasicoherentData|IsQuasicoherent",
+   "results": "{\"t\": \"2026-10-23T11:48:36Z\", \"tool\": \"grep\", \"query\": \"QuasicoherentData|IsQuasicoherent\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"202\", \"211\", \"213\", \"215\", \"216\"], \"digest\": \"edb03199bf523cac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic site quasi-coherence definitions and presentation data do not construct a big-fppf sheaf from compatible scheme modules; the inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 202-209 only define presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|fibred|fibered|fppf",
+   "results": "{\"t\": \"2026-10-23T13:27:38Z\", \"tool\": \"grep\", \"query\": \"cartesian|fibred|fibered|fppf\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasicoherentData in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, lines 200-209; the hits give general site presentation definitions, not realization of compatible scheme modules on fibred fppf sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cartesian system of quasi coherent modules on schemes gives a sheaf of modules on a fibred fppf site",
+   "results": "{\"t\": \"2026-10-23T13:27:39Z\", \"tool\": \"leansearch\", \"query\": \"A cartesian system of quasi coherent modules on schemes gives a sheaf of modules on a fibred fppf site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.mk\", \"SheafOfModules.QuasicoherentData.presentation\"], \"digest\": \"d1f2cb2f05ce87d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasicoherentData in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, lines 200-209; the hits give general site presentation definitions, not realization of compatible scheme modules on fibred fppf sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Quasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T13:27:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Quasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\"], \"digest\": \"84dd5f6ef412bd8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasicoherentData in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, lines 200-209; the hits give general site presentation definitions, not realization of compatible scheme modules on fibred fppf sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible quasi coherent scheme modules on a category fibred in groupoids define a quasi coherent sheaf on the big fppf site by sections",
+   "results": "{\"t\": \"2026-10-23T13:27:39Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible quasi coherent scheme modules on a category fibred in groupoids define a quasi coherent sheaf on the big fppf site by sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"c49fccd5616b2234\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasicoherentData in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, lines 200-209; the hits give general site presentation definitions, not realization of compatible scheme modules on fibred fppf sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherence of a module presheaf can be checked on scheme slices using tensor pullback section sheaves",
+   "results": "{\"t\": \"2026-10-23T13:27:41Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherence of a module presheaf can be checked on scheme slices using tensor pullback section sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"54e19425cbb11df1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasicoherentData in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, lines 200-209; the hits give general site presentation definitions, not realization of compatible scheme modules on fibred fppf sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Adequate quotient surjectivity, closed images and intersection of images used for the affine invariant quotient. Supporting input: the disjoint closed-substack quotient algebra to which adequate power lifting is applied. Scheme-object cartesian-module criterion used to identify the explicit section presheaves with quasi-coherent modules. This split realizes that supporting input by the explicit slice comparison with the scheme-associated big-fppf sheaf; current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, (3), direct-image preservation.",
+   "via": [
+    "lem-sfb-disjoint-closed-substacks-algebra-quotient",
+    "lem-sfb-adequate-moduli-topological-images",
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cartesian-module-fppf-realization",
+  "worker": "stage1",
+  "summary": "Verified the Stacks cartesian realization for arbitrary fibred groupoids. Wrote section-pullback functoriality, the ringed slice equivalence, and the cocycle-compatible comparison explicitly; reused the existing general scheme big-fppf quasi-coherent equivalence, then checked sheaf matching and local free presentations. No new nodes and no change to the statement.",
+  "blueprint": "Supporting cartesian-module realization in the alteration/coarse-moduli prerequisite chain for det-thm-sf-ctf-stability-direct-images (current sketch file sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3)); steps 1-3 implement the compatible scheme-module comparison and steps 4-5 its sheaf and local-presentation consequences. Whole-blueprint searches for quasi-coherent, cartesian, fibred in groupoids, 06WI and 06WK found no imported node stating this realization."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-e5888f1b7",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-e5888f1b7 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement and stmt_deps are unchanged and the base proof was empty; on live and side-live the item is still unsplit, so nothing supersedes this delivery. Source check: stacks-sheaves.tex lemma-localizing (l.977), Tag 06WI (l.1581) and Tag 06WK converse proof (l.1693) give the same route as steps 1-5: slice equivalence, then the scheme-associated sheaf via Descent 03DX through the existing node lem-sfb-scheme-big-fppf-quasicoherent-equivalence, then the sheaf property and quasi-coherence on each slice. Every hypothesis matches the Stacks hypotheses (arbitrary category fibred in groupoids, quasi-coherent M_x, cocycle in the right direction). Edge cases checked: empty C, empty T, non-flat u, non-affine T, nontrivial fibre automorphisms, infinite index sets. Step 2 is exactly the lift and unique-factorisation axioms of def-sfb-stable-pointed-moduli-groupoids. Steps 4 and 5 are correct direct uses of the definitions. No duplicate: scheme-restriction is the forward direction only, qcoh-presentation-tensor-equivalence is for DM stacks with an atlas, and the space chart-family and groupoid nodes are for algebraic spaces. No cycle in the 9732-node closure; the only non-elementary citation is in the same unit, so no tool_uses; no SGA. Batch-5 finding: def-trf-space-quasi-coherent-module is a general definition (local presentations on a ringed site, status mathlib). It is already a stmt_dep of def-sfb-stack-quasi-coherent-algebra, which the item cited before, and it is not part of the trace-formula or Poincaré-duality proofs, so the finding is accepted. FIX: step 3's naturality formula applied v^* twice and checked naturality only on sections u^*s with s global on T, which do not exhaust Γ(T',u^*M_x). I rewrote the step for an arbitrary t: ρ_β(λ_α t)=Γ(θ_β)Γ(v^*θ_α)(v^*t)=Γ(θ_{αβ})(v^*t)=λ_{αβ}(v^*t), using naturality of section pullback and the cocycle, and added λ_id=id and linearity. Only proof[2].text changed, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-cartesian-module-fppf-realization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartesianModuleFppfRealization",
+  "declaration": "CategoryTheory.cartesian_module_fppf_realization",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianModuleFppfRealization.lean",
+  "statement": "theorem cartesian_module_fppf_realization {S : Scheme.{u}} (C : BasedCategory.{v, w} (Over S)) (hC : IsFibredInGroupoids C) (M : ∀ x : C.obj, ((moduliSchemeForget C).obj x).Modules) (hM : ∀ x : C.obj, SheafOfModules.IsQuasicoherent (M x)) (theta : ∀ {y x : C.obj} (a : y ⟶ x), (Scheme.Modules.tensorPullback ((moduliSchemeForget C).map a)).obj (M x) ≅ M y) (theta_id : ∀ x : C.obj, (theta (𝟙 x)).hom = eqToHom (congrArg (fun f ↦ (Scheme.Modules.tensorPullback f).obj (M x)) ((moduliSchemeForget C).map_id x)) ≫ (Scheme.Modules.tensorPullbackSectionId ((moduliSchemeForget C).obj x)).hom.app (M x)) (theta_comp : ∀ {z y x : C.obj} (b : z ⟶ y) (a : y ⟶ x), (theta (b ≫ a)).hom = eqToHom (congrArg (fun f ↦ (Scheme.Modules.tensorPullback f).obj (M x)) ((moduliSchemeForget C).map_comp b a)) ≫ (Scheme.Modules.tensorPullbackSectionComp ((moduliSchemeForget C).map b) ((moduliSchemeForget C).map a)).hom.app (M x) ≫ (Scheme.Modules.tensorPullback ((moduliSchemeForget C).map b)).map (theta a).hom ≫ (theta b).hom) : ∃ G : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC), ∃ e : ∀ x : C.obj, G.val.obj (op x) ≃+ Γ(M x, ⊤), SheafOfModules.IsQuasicoherent G ∧ (∀ (x : C.obj) (r : (moduliModuleRings C hC).obj.obj (op x)) (s : G.val.obj (op x)), e x (r • s) = (eqToHom (Scheme.Γ_obj_op ((moduliSchemeForget C).obj x)) r.down) • e x s) ∧ (∀ {y x : C.obj} (a : y ⟶ x) (s : G.val.obj (op x)), e y (G.val.map a.op s) = (theta a).hom.app ⊤ (((Scheme.Modules.tensorPullback ((moduliSchemeForget C).map a)).obj (M x)).presheaf.map (homOfLE ((moduliSchemeForget C).map a).preimage_top.ge).op (((Scheme.Modules.tensorPullbackSectionAdjunction ((moduliSchemeForget C).map a)).unit.app (M x)).app ⊤ (e x s))))",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The realized module sheaf is specified by additive section equivalences, structural scalar compatibility through the canonical ULift/ring identification, and the exact tensor-unit section restriction formula. This is the prescribed section presheaf up to its fully specified module-presheaf identification; no arbitrary maps, finiteness hypotheses or algebraicity assumptions are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e18deb0a6",
+  "group": "NU",
+  "result": "pass",
+  "note": "Fresh statement; only change is the new lean record. Hypotheses match the node through the dependency declarations: IsFibredInGroupoids, moduliModuleRings (ULift of Γ), SheafOfModules.IsQuasicoherent, tensorPullback θ. theta_id uses tensorPullbackSectionId after map_id; theta_comp uses tensorPullbackSectionComp v u then v^*θ_a then θ_b, the node's direction. Conclusion: a module sheaf G with additive equivalences to Γ(M x,⊤), scalar compatibility via r.down/Γ_obj_op, restriction = θ_a ∘ restriction ∘ normalized unit (section pullback 1⊗s, same as sfbSectionPullback in the proof dependency), and IsQuasicoherent G; G is pinned to the prescribed sheaf, not hollow. Universes independent, no extra assumptions. Statement verbatim, one sorry, no line over 100 characters, source/blueprint docstrings and five proof steps present, public/plain imports per §3, report sections present, no duplicate found. Not recompiled per instructions; no findings."
+ }
+}

@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-space-generic-freeness",
+ "kind": "statement",
+ "title": "Generic freeness of a full-support coherent module on a reduced irreducible algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is Noetherian: locally Noetherian on etale scheme charts [pqf-def-locnoeth], quasi-compact, and quasi-separated (its diagonal is quasi-compact on scheme tests). Modules are sheaves on the small etale ringed site; quasi-coherence is [def-trf-space-quasi-coherent-module], and coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. The support $\\operatorname{Supp}(F)$ is the set of points with nonzero geometric stalk, in the atlas topology [def-a1-space-point-topology]. Assume $X$ is reduced (all its etale scheme charts have local rings without nonzero nilpotents), $|X|$ is nonempty and irreducible, and $F$ is coherent with $\\operatorname{Supp}(F)=|X|$. There exist a nonempty open subspace $U\\subseteq X$, an integer $r\\geq1$, and an isomorphism $F|_U\\cong\\mathcal O_U^{\\oplus r}$. Here an open subspace is representable by open immersions after scheme base change, and the superscript denotes a finite direct sum.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UQ, lemma-prepare-filter-irreducible, proof, second paragraph: dense open schematic locus and shrinking until F is free; the positive-rank conclusion follows from full support."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-coherent",
+  "def-a1-space-point-topology",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-module-support"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-quasiseparated-space-dense-scheme-open] to the quasi-separated space $X$, obtaining a dense open scheme $W$. It is nonempty since $X$ is nonempty. The hypothesis on etale scheme charts makes $W$ locally Noetherian and reduced. Choose a nonempty affine member $V$ of a Noetherian affine cover of $W$ [pqf-def-locnoeth]; then $V$ is Noetherian and reduced. Every nonempty open subset of an irreducible space is irreducible: two nonempty relative opens are nonempty opens of $X$, hence intersect. Thus $V$ is integral by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "pqf-def-locnoeth",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UQ, lemma-prepare-filter-irreducible, second proof paragraph; dense schematic open from Tag 06NH, spaces-properties-proposition-locally-quasi-separated-open-dense-scheme."
+   }
+  },
+  {
+   "text": "Under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $F|_V$ corresponds to the Zariski quasi-coherent module $G$ obtained by restriction to open subschemes. The hypothesis that $F$ has coherent pullbacks on etale scheme charts applies to the chart $V\\to X$, so this $G$ is coherent. The same equivalence identifies restriction to any open $U\\subseteq V$ with the associated etale module of $G|_U$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, part (2); Tag 03LC, proposition-equivalence-quasi-coherent-functorial, part (1)."
+   }
+  },
+  {
+   "text": "Write $\\eta$ for the generic point of $V$. By [lem-sc-integral-function-field-affine-fraction], $\\mathcal O_{V,\\eta}$ is a field. Its maximal ideal is therefore zero, and annihilates $G_\\eta$. Apply [lem-pc-c3-coherent-generic-local-free-model] with ambient scheme $V$, integral closed subscheme $V$, identity closed immersion, and coherent module $G$. All its hypotheses hold; identity pushforward is the identity. It gives $r\\geq0$ and an open $U\\subseteq V$ containing $\\eta$, with $G|_U\\cong\\mathcal O_U^{\\oplus r}$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-pc-c3-coherent-generic-local-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YE, lemma-prepare-filter-irreducible, integral case, through the local free model; Tag 01RV, morphisms-lemma-integral-scheme-rational-functions, for the generic stalk field."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] on $U$ to this isomorphism. Its tensor-pullback description sends each copy of $\\mathcal O_U$ to the etale structure module and the finite direct sum to the corresponding finite direct sum, giving $F|_U\\cong\\mathcal O_U^{\\oplus r}$. Here $U$ is a nonempty open subspace of $X$, since it contains $\\eta$ and is open in the open scheme $V$. If $r=0$, then $F|_U=0$; at any geometric point above $\\eta\\in U$ its stalk is zero. This contradicts $\\operatorname{Supp}(F)=|X|$, so $r\\geq1$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UQ, lemma-prepare-filter-irreducible, second proof paragraph, together with Tag 03DX and the definition of full support."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-pc-c3-coherent-generic-local-free-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UQ, lemma-prepare-filter-irreducible, second proof paragraph, with the local free model from Tag 01YE and the small-etale/Zariski equivalence Tag 03DX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"IsLocallyFree\"",
+   "results": "{\"t\": \"2026-10-23T12:03:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoherent\\\", \\\"IsLocallyFree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring localization generic freeness and scheme integrality do not provide a dense schematic open or trivialization for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|genericallyFree|generic.*free|free.*generic",
+   "results": "{\"t\": \"2026-10-23T12:03:15Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|genericallyFree|generic.*free|free.*generic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/AxGrothendieck.lean\", \"Mathlib/FieldTheory/AxGrothendieck.lean\", \"Mathlib/FieldTheory/AxGrothendieck.lean\", \"Mathlib/FieldTheory/AxGrothendieck.lean\", \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean\", \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean\", \"Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean\", \"Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean\"], \"digest\": \"4f02aed95b15b397\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring localization generic freeness and scheme integrality do not provide a dense schematic open or trivialization for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent module with full support on a reduced irreducible Noetherian algebraic space is finite free of positive rank on some nonempty open",
+   "results": "{\"t\": \"2026-10-23T12:03:15Z\", \"tool\": \"leansearch\", \"query\": \"A coherent module with full support on a reduced irreducible Noetherian algebraic space is finite free of positive rank on some nonempty open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.freeLocus\", \"Module.isOpen_freeLocus\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.rankAtStalk_eq_zero_iff_notMem_support\", \"Module.rank_lt_aleph0_iff\", \"Module.rankAtStalk_pos_iff_mem_support\", \"Module.finrank_pos_iff_of_free\", \"Module.FinitePresentation.exists_free_localizedModule_powers\"], \"digest\": \"4fd87b47cb1de520\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring localization generic freeness and scheme integrality do not provide a dense schematic open or trivialization for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module with full support on a reduced irreducible Noetherian algebraic space is finite free of positive rank on some nonempty open",
+   "results": "{\"t\": \"2026-10-23T12:03:23Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent module with full support on a reduced irreducible Noetherian algebraic space is finite free of positive rank on some nonempty open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\"], \"digest\": \"5969e5c6ca6de7c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring localization generic freeness and scheme integrality do not provide a dense schematic open or trivialization for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic trivialization of a coherent sheaf over an integral algebraic space on a dense open",
+   "results": "{\"t\": \"2026-10-23T12:03:24Z\", \"tool\": \"leanfinder\", \"query\": \"Generic trivialization of a coherent sheaf over an integral algebraic space on a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"SheafOfModules.LocalGeneratorsData.coversTop\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\"], \"digest\": \"34daaf441cb92a20\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring localization generic freeness and scheme integrality do not provide a dense schematic open or trivialization for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|generic.*free|free.*generic",
+   "results": "{\"t\": \"2026-10-23T13:48:31Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|generic.*free|free.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are module free-locus results or scheme facts; none states generic freeness for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf on a reduced irreducible Noetherian algebraic space is finite free on a nonempty open",
+   "results": "{\"t\": \"2026-10-23T13:48:32Z\", \"tool\": \"leansearch\", \"query\": \"A coherent sheaf on a reduced irreducible Noetherian algebraic space is finite free on a nonempty open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.freeLocus\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"Module.isOpen_freeLocus\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\"], \"digest\": \"1b6ebffe7e3c8200\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are module free-locus results or scheme facts; none states generic freeness for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"IsLocallyFree\"",
+   "results": "{\"t\": \"2026-10-23T13:48:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoherent\\\", \\\"IsLocallyFree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are module free-locus results or scheme facts; none states generic freeness for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module on an irreducible reduced Noetherian algebraic space is free on a nonempty open subspace",
+   "results": "{\"t\": \"2026-10-23T13:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent module on an irreducible reduced Noetherian algebraic space is free on a nonempty open subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isOpen_freeLocus\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"Module.freeLocus\", \"ModuleCat.Tilde.exists_const\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.mem_freeLocus\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\"], \"digest\": \"78ec6087d8085e76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are module free-locus results or scheme facts; none states generic freeness for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic trivialization of a coherent sheaf over an integral algebraic space on a dense open",
+   "results": "{\"t\": \"2026-10-23T13:51:19Z\", \"tool\": \"leanfinder\", \"query\": \"Generic trivialization of a coherent sheaf over an integral algebraic space on a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.StructureSheaf.exists_const\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"SheafOfModules.LocalGeneratorsData.X\", \"SheafOfModules.LocalGeneratorsData.I\", \"AlgebraicGeometry.germ_injective_of_isIntegral\"], \"digest\": \"c769f40aa60a102a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are module free-locus results or scheme facts; none states generic freeness for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generic-multiple-embedding",
+  "date": "2026-10-23",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, final proof paragraph: generic ranks, extension from an open, and removal of the supported kernel by Artin-Rees; before the property assumption is used. Supporting input: Tag 07UQ, lemma-prepare-filter-irreducible, proof, second paragraph: dense open schematic locus and shrinking until F is free; the positive-rank conclusion follows from full support.",
+   "via": [
+    "lem-sfb-space-generic-multiple-embedding",
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-generic-freeness",
+  "worker": "stage1",
+  "summary": "Followed Tag 07UQ through a dense open scheme, an integral Noetherian affine chart, the existing scheme local free model, and the Zariski/etale equivalence. Full support excludes rank zero. Reused all supporting nodes; created none. Normalized doubled TeX escapes without changing hypotheses or conclusion.",
+  "blueprint": "Inherited ancestry of det-thm-sf-ctf-stability-direct-images, proof (3), via the coherent-devissage prerequisite: realizes exactly the Tag 07UQ second-paragraph generic-free shrinking recorded in blueprint.from.place. Read the current latest unit and direct-images proof. The ancestor tool returns None for this existing chain; retained that inherited value.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic change-of-site equivalence needed to apply the scheme coherent-module input to an etale module; no node of this unit states this equivalence."
+   },
+   {
+    "node": "lem-pc-c3-coherent-generic-local-free-model",
+    "why": "Generic coherent local free model used with the identity closed immersion in the exact Tag 01YE shrinking cited by Tag 07UQ; no node of this unit gives that scheme result."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic stalk of an integral scheme is a field, used to verify the maximal-ideal annihilation hypothesis of the local free model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-c3-coherent-generic-local-free-model",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-cb6045c36",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-cb6045c36 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Statement is identical to the live/side-live text; the live item is still unsplit; no re-split note; no new nodes; no cycle; no SGA. Source: Stacks 07UQ lemma-prepare-filter-irreducible, second proof paragraph (dense open scheme from 06NH, Noetherian integral, then shrink until free via 01YE); r>0 comes from full support. Step 1: the dense-scheme-open node needs only the qc diagonal. W is étale over X, so it is locally Noetherian and reduced. Choosing a nonempty Noetherian affine V via pqf-def-locnoeth, irreducibility of an open of an irreducible space, and def-pc-integral-scheme give V integral. Step 2: Zariski/étale equivalence with restriction as inverse; G is coherent by the item's chart hypothesis; open restriction comes from the stated pullback comparison. Step 3: O_{V,η} is a field (sc affine-fraction), so its maximal ideal kills G_η; lem-pc-c3 local free model with Z=V and i=id, every hypothesis checked, gives U∋η with G|_U≅O^r. Step 4 is elementary: tensor pullback preserves finite sums and O; U is an open subspace; r=0 would make the geometric stalk over η zero, contradicting full support. Small cases checked: Spec k, torsion sheaf on a curve, O_X. Duplicate search (07UQ, generic-free) found only citers and scheme or ideal variants. tool_uses accepted: trf 03DX equivalence, pc-c3 01YE model, sc affine-fraction. Batch-5: both flagged cites (dense-scheme-open via def-trf-algebraic-space; trf Zariski-étale qc equivalence) have closures made only of algebraic-space and étale-module foundations, with no trace-formula or Poincaré-duality statement or proof node, so both are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGenericFreeness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_generic_free_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGenericFreeness.lean",
+  "statement": "theorem exists_generic_free_open {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (hred : ∀ T : X.EtaleSite, IsReduced (X.etaleForget.obj T)) (hirr : IrreducibleSpace (Point X.obj.obj)) (F : X.Modules) [F.IsQuasicoherent] (hF : ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) (hsupp : moduleSupport F = Set.univ) : ∃ (U : AlgebraicSpace S) (j : U ⟶ X) (hj : IsEtale j.hom.hom), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom ∧ Nonempty (Point U.obj.obj) ∧ ∃ r : ℕ, 1 ≤ r ∧ Nonempty ((pullback j hj).obj F ≅ (∏ᶜ fun _ : Fin r ↦ SheafOfModules.unit U.structureSheaf))",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1b1294",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_generic_free_open with the node and Stacks 07UQ (second proof paragraph). Hypotheses: locally Noetherian and IsReduced on every etale chart; CompactSpace on Point; quasi-compact diagonal via IsRepresentableWith QuasiCompact (prod.lift 𝟙 𝟙), the same form as the landed dense-scheme-open lemma; IrreducibleSpace including nonemptiness; [F.IsQuasicoherent]; RingedSpace.IsCoherent (finite type + finite-type kernels, 01BV) on every chart via schemeRestriction; moduleSupport F = univ. Conclusion: an open-immersion representable j : U ⟶ X with nonempty Point U, r ≥ 1, and Nonempty (pullback j hj F ≅ ∏ Fin r unit); the extra IsEtale witness is implied and needed for the landed pullback functor. lean.statement matches the file verbatim. The node diff against live adds only lean and two landed definition stmt_deps (scheme-restriction, module-support), with no cycle. No duplicate declaration found; no new definitions; the proof is only sorry; docstrings give the source, blueprint tag and 4 proof steps; universe u only; no pro-etale use; the report has Worker report and Second reading sections. Edge cases checked: empty X, r = 0, zero module, arbitrary S. Not recompiled because no file changed."
+ }
+}

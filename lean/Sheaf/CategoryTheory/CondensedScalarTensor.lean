@@ -6,6 +6,7 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.CategoryTheory.CondensedDerivedCup
+import all Sheaf.CategoryTheory.ModuleObjects.ScalarExtensionMonoidal
 
 /-! # Balanced derived scalar tensor and regular coefficient arrow
 
@@ -27,7 +28,7 @@ exact reference wanted
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-universe u
+universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open CategoryTheory.CondensedBar
 namespace CategoryTheory.CondensedDerivedRestriction
@@ -58,7 +59,30 @@ tensors from the corresponding equations over R'. Pure tensors generate locally,
 these equations also prove uniqueness, including the coherence proof fields. -/
 theorem scalarTensorExist (a : A ⟶ A') :
     ∃! m : (scalarModules a).LaxMonoidal, ScalarTensorModel a m := by
-  sorry
+  let m := Mod.restrictionLaxMonoidal a.hom.hom
+  have hm : ScalarTensorModel a m := by
+    refine ⟨rfl, ?_⟩
+    intro M N S x y
+    have h := Mod.restrictionTensor_π a.hom.hom M N
+    exact congrArg (fun f ↦ f.hom.app (op S)
+      ((Functor.LaxMonoidal.μ
+        (sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
+          M.X N.X).app (op S) (TensorProduct.tmul ℤ x y))) h
+  refine ⟨m, hm, ?_⟩
+  intro m' hm'
+  apply Functor.LaxMonoidal.ext
+  · apply Mod.hom_ext
+    exact hm'.1
+  · funext M N
+    apply Mod.hom_ext
+    apply (cancel_epi (Mod.tensorObjπ ((scalarModules a).obj M)
+      ((scalarModules a).obj N))).mp
+    apply Sheaf.tensor_hom_ext
+    ext S z
+    induction z using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | add x y hx hy => simp only [map_add, hx, hy]
+    | tmul x y => exact (hm'.2 M N S.unop x y).trans (hm.2 M N S.unop x y).symm
 
 /-- The normalized balanced scalar tensor structure, with no flatness hypothesis.
 Source: paragraph (3) (blueprint: def-sfb-condensed-scalar-tensor). -/
@@ -71,7 +95,61 @@ Proof: the scalar action descends uniquely to every sheafified colimit; its univ
 property is exactly the same internal-module colimit universal property. -/
 @[instance] theorem scalarSmallColimits (a : A ⟶ A') :
     PreservesColimitsOfSize.{0, 0} (scalarModules a) := by
-  sorry
+  exact preservesSmallestColimits_of_preservesColimits (scalarModules a)
+
+private theorem laxComplexTensor_exists
+    {C D : Type*} [Category.{v} C] [Category.{w} D] [Abelian C] [Abelian D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    [MonoidalPreadditive C] [MonoidalPreadditive D]
+    [MonoidalClosed C] [MonoidalClosed D] [BraidedCategory C] [BraidedCategory D]
+    [HasColimitsOfSize.{0, 0} C] [HasColimitsOfSize.{0, 0} D]
+    (F : C ⥤ D) [F.Additive] [F.LaxMonoidal] (P Q : CochainComplex C ℤ) :
+    ∃! m : (F.mapHomologicalComplex (.up ℤ)).obj P ⊗
+        (F.mapHomologicalComplex (.up ℤ)).obj Q ⟶
+      (F.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q),
+      ∀ (p q n : ℤ) (h : p + q = n),
+        HomologicalComplex.ιTensorObj
+          ((F.mapHomologicalComplex (.up ℤ)).obj P)
+          ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h ≫ m.f n =
+        Functor.LaxMonoidal.μ F (P.X p) (Q.X q) ≫
+          F.map (HomologicalComplex.ιTensorObj P Q p q n h) := by
+  let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
+  let FQ := (F.mapHomologicalComplex (.up ℤ)).obj Q
+  let f (n : ℤ) : (FP ⊗ FQ).X n ⟶ F.obj ((P ⊗ Q).X n) :=
+    HomologicalComplex.mapBifunctorDesc (fun p q h ↦
+      Functor.LaxMonoidal.μ F (P.X p) (Q.X q) ≫
+        F.map (HomologicalComplex.ιTensorObj P Q p q n h))
+  have hf (p q n : ℤ) (h : p + q = n) :
+      HomologicalComplex.ιTensorObj FP FQ p q n h ≫ f n =
+        Functor.LaxMonoidal.μ F (P.X p) (Q.X q) ≫
+          F.map (HomologicalComplex.ιTensorObj P Q p q n h) :=
+    HomologicalComplex.ι_mapBifunctorDesc _ p q h
+  let m : FP ⊗ FQ ⟶ (F.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) :=
+    { f := f
+      comm' := by
+        intro i j hij
+        change i + 1 = j at hij
+        apply HomologicalComplex.mapBifunctor.hom_ext
+        intro p q h
+        change HomologicalComplex.ιTensorObj FP FQ p q i h ≫
+            (f i ≫ F.map ((P ⊗ Q).d i j)) =
+          HomologicalComplex.ιTensorObj FP FQ p q i h ≫ ((FP ⊗ FQ).d i j ≫ f j)
+        rw [← Category.assoc, hf, Category.assoc, ← F.map_comp,
+          CochainComplex.ιTensorObj_d P Q p q i j h hij,
+          Functor.map_add, Units.smul_def, Functor.map_zsmul, Functor.map_comp,
+          Functor.map_comp, Preadditive.comp_add, Preadditive.comp_zsmul]
+        erw [CochainComplex.ιTensorObj_d_assoc FP FQ p q i j h hij]
+        simp only [Preadditive.add_comp, Units.smul_def, Preadditive.zsmul_comp,
+          Category.assoc, hf]
+        erw [← Functor.LaxMonoidal.μ_natural_left_assoc,
+          ← Functor.LaxMonoidal.μ_natural_right_assoc]
+        rfl }
+  refine ⟨m, hf, ?_⟩
+  intro g hg
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  exact (hg p q n h).trans (hf p q n h).symm
 
 /-- The scalar comparison for total tensor is fixed on each degree summand.
 Source: paragraph (3) (blueprint: def-sfb-condensed-scalar-tensor).
@@ -88,7 +166,7 @@ theorem scalarComplexTensorExist (a : A ⟶ A') (P Q : CochainComplex (Modules A
           (((scalarModules a).mapHomologicalComplex (.up ℤ)).obj Q) p q n h ≫ m.f n =
         Functor.LaxMonoidal.μ (scalarModules a) (P.X p) (Q.X q) ≫
           (scalarModules a).map (HomologicalComplex.ιTensorObj P Q p q n h) := by
-  sorry
+  exact laxComplexTensor_exists (scalarModules a) P Q
 
 /-- The unique summand-normalized scalar tensor map of complexes.
 Source: paragraph (3) (blueprint: def-sfb-condensed-scalar-tensor). -/
@@ -148,7 +226,13 @@ restriction. Equality of internal-module morphisms is equality of their underlyi
 theorem regularScalarExist (a : A ⟶ A') :
     ∃! f : Mod.regular A.X ⟶ (scalarModules a).obj (Mod.regular A'.X),
       f.hom = a.hom.hom := by
-  sorry
+  let f : Mod.regular A.X ⟶ (scalarModules a).obj (Mod.regular A'.X) :=
+    Mod.Hom.mk' a.hom.hom (by
+      change MonObj.mul ≫ a.hom.hom =
+        A.X ◁ a.hom.hom ≫ a.hom.hom ▷ A'.X ≫ MonObj.mul
+      rw [IsMonHom.mul_hom, tensorHom_def', Category.assoc]
+      rfl)
+  exact ⟨f, rfl, fun g hg ↦ Mod.hom_ext _ _ hg⟩
 
 /-- The scalar unit on the actual regular modules.
 Source: paragraph (3) (blueprint: def-sfb-condensed-scalar-tensor). -/
@@ -176,7 +260,13 @@ theorem regularScalarEquivariant (a : A ⟶ A') :
     Profinite.CondensedAction.Equivariant (regularTrivial A G)
       ((scalarAction (G := G) a).functor.obj (regularTrivial A' G))
       (regularScalar a ≫ (scalarAction a).underlying.inv.app (regularTrivial A' G)) := by
-  sorry
+  intro S g x
+  let N := regularTrivial A' G
+  let e := (scalarAction (G := G) a).underlying.app N
+  have he : Function.Injective (e.hom.hom.hom.app (op S)) :=
+    (ConcreteCategory.bijective_of_isIso (e.hom.hom.hom.app (op S))).injective
+  apply he
+  exact ((scalarAction a).action N S g _).symm
 
 /-- The ring map regarded as an equivariant map between the trivial coefficients.
 Source: paragraph (3) (blueprint: def-sfb-condensed-scalar-tensor). -/

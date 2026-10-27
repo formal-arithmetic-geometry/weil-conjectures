@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-separable-field-square-zero-lifting",
+ "kind": "statement",
+ "title": "Arbitrary separable field extensions lift across square-zero ideals",
+ "statement": "Let $k\\subseteq L$ be an extension of fields which is separable [def-weil-pbc-separable-field-extension], meaning that every intermediate field finitely generated as a field over $k$ is separably generated over $k$. For every commutative $k$-algebra $D$, every ideal $J\\subseteq D$ with $J^2=0$, and every $k$-algebra homomorphism $g:L\\to D/J$, there exists a $k$-algebra homomorphism $f:L\\to D$ with $q\\circ f=g$, where $q:D\\to D/J$ is the quotient map [def-weil-pbc-algebra-hom-quotient]. No algebraicity, finite generation, or characteristic hypothesis is imposed on $L/k$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0322, proposition-characterize-separable-field-extensions, characteristic-zero clause (3) and positive-characteristic implication (1) implies (6); formal smoothness is Definition 00TI, definition-formally-smooth."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Let $E$ be any intermediate field of $L/k$ finitely generated as a field over $k$. By the definition of separability [def-weil-pbc-separable-field-extension], $E/k$ is separably generated: choose its separating transcendence basis. Apply [lem-sfb-separably-generated-field-h1-zero] to this extension to obtain $H_1(L_{E/k})=0$. This applies to every such $E$, including $E=k$.",
+   "uses": [
+    "def-weil-pbc-separable-field-extension",
+    "lem-sfb-separably-generated-field-h1-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0320, proof of (3), finitely generated intermediate extensions and their separating transcendence bases."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-h1-cotangent-finite-subfields] to $k\\subseteq L$ and the vanishing just obtained for every finitely generated intermediate field. Its conclusion is $H_1(L_{L/k})=0$. This is the passage through cotangent homology in the source; it does not require choosing compatible lifts on the subfields.",
+   "uses": [
+    "lem-weil-pbc-h1-cotangent-finite-subfields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0320, proof (3), application of Tag 07BQ, lemma-colimits-NL, to the union of finitely generated intermediate fields."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-kahler-differentials], $\\Omega_{L/k}$ is an $L$-module. Since $L$ is a field, [lem-weil-pbc-vector-space-projective], with $V=\\Omega_{L/k}$, shows that this module is projective. No finite-dimensionality of the differential module is needed.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-vector-space-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031Z, lemma-characterize-formally-smooth-field-extension, proof: vector spaces are free, hence projective; used at the end of Tag 0320 (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-ring-map-square-zero-lifting] with $A=k$, $B=L$, $N=J$, and the given $D$ and $g$. Its two hypotheses are exactly the homology vanishing of step 2 and the projectivity of step 3. By [def-weil-pbc-algebra-hom-quotient], the structure map $k\\to D$ gives the required algebra structures and its quotient map is the stated $q:D\\to D/J$. The cited lifting theorem therefore produces a $k$-algebra map $f:L\\to D$ with $q\\circ f=g$, as required.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031J, proposition-characterize-formally-smooth, (6) implies (1); the field application is Tag 031Z and the final sentence of Tag 0320 (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-field-extension",
+  "lem-sfb-separably-generated-field-h1-zero",
+  "lem-weil-pbc-h1-cotangent-finite-subfields",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-vector-space-projective",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0320, proof of (3), as used in Tag 0322; Tag 031Z and Tag 031J supply the field lifting criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "separable|formallySmooth",
+   "results": "Hits read: 25, 27, 28, 30, 36. Search directory: Mathlib/RingTheory/Smooth/Field.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: local Mathlib/RingTheory/Smooth/Field.lean:44-51 proves the separably generated case, not general separability defined by all finitely generated subextensions; Etale/Field.lean (of_isSeparable) uses separable algebraic extensions. No general IsSeparableExtension lifting result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary separable field extension is formally smooth for square zero lifting problems",
+   "results": "Hits read: Algebra.FormallySmooth.of_perfectField, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.of_split, Algebra.FormallySmooth.adjoin_of_algebraicIndependent, Algebra.FormallySmooth.iff_split_surjection",
+   "date": "2026-10-23",
+   "verdict": "no match: local Mathlib/RingTheory/Smooth/Field.lean:44-51 proves the separably generated case, not general separability defined by all finitely generated subextensions; Etale/Field.lean (of_isSeparable) uses separable algebraic extensions. No general IsSeparableExtension lifting result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsSeparable\"",
+   "results": "Hits read: Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable",
+   "date": "2026-10-23",
+   "verdict": "no match: local Mathlib/RingTheory/Smooth/Field.lean:44-51 proves the separably generated case, not general separability defined by all finitely generated subextensions; Etale/Field.lean (of_isSeparable) uses separable algebraic extensions. No general IsSeparableExtension lifting result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every separable field extension, not necessarily algebraic or finitely generated, is formally smooth and lifts maps across square zero ideals",
+   "results": "Hits read: Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, IsSepClosed.lift_def, Algebra.FormallySmooth.of_algebraicIndependent, IsSepClosed.lift, Algebra.FormallyEtale.iff_isSeparable",
+   "date": "2026-10-23",
+   "verdict": "no match: local Mathlib/RingTheory/Smooth/Field.lean:44-51 proves the separably generated case, not general separability defined by all finitely generated subextensions; Etale/Field.lean (of_isSeparable) uses separable algebraic extensions. No general IsSeparableExtension lifting result."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparableExtension|separable.*formally|formally.*separable",
+   "results": "Hits read: Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Unramified/Field.lean, Mathlib/RingTheory/Unramified/Field.lean, Mathlib/RingTheory/Unramified/Field.lean, Mathlib/RingTheory/Unramified/LocalRing.lean, Mathlib/RingTheory/Unramified/LocalRing.lean, Mathlib/RingTheory/DedekindDomain/Different.lean. Search directory: Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: local Mathlib/RingTheory/Smooth/Field.lean:44-51 proves the separably generated case, not general separability defined by all finitely generated subextensions; Etale/Field.lean (of_isSeparable) uses separable algebraic extensions. No general IsSeparableExtension lifting result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension for which every finitely generated intermediate extension is separably generated has the infinitesimal lifting property",
+   "results": "Hits read: Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyUnramified.of_isSeparable, Algebra.FormallySmooth.of_algebraicIndependent, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+   "date": "2026-10-23",
+   "verdict": "no match: local Mathlib/RingTheory/Smooth/Field.lean:44-51 proves the separably generated case, not general separability defined by all finitely generated subextensions; Etale/Field.lean (of_isSeparable) uses separable algebraic extensions. No general IsSeparableExtension lifting result."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparableExtension|of_algebraicIndependent_of_isSeparable",
+   "results": "Actual msearch record: {\"t\": \"2026-10-23T19:23:39Z\", \"tool\": \"grep\", \"query\": \"IsSeparableExtension|of_algebraicIndependent_of_isSeparable\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\"], \"digest\": \"62702b279f7c72c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for arbitrary separability: Field.lean:44 requires one separating transcendence basis for the entire extension. IsSeparable in Etale/Field.lean is separable algebraic. Neither supplies the general IsSeparableExtension hypothesis of this item. The second natural-language phrasing also returned only algebraic, separably generated, or generic lifting results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary separable field extension lifts algebra maps through square zero quotient ideals",
+   "results": "Actual msearch record: {\"t\": \"2026-10-23T19:23:39Z\", \"tool\": \"leansearch\", \"query\": \"An arbitrary separable field extension lifts algebra maps through square zero quotient ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.kerSquareLift\", \"IsSepClosed.lift_def\", \"Algebra.FormallyEtale.of_isSeparable\", \"liftOfDerivationToSquareZero\", \"Algebra.FormallySmooth.lift\", \"derivationToSquareZeroEquivLift\", \"Ideal.ResidueField.liftₐ\", \"derivationToSquareZeroOfLift_apply\"], \"digest\": \"843618d2a2521427\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for arbitrary separability: Field.lean:44 requires one separating transcendence basis for the entire extension. IsSeparable in Etale/Field.lean is separable algebraic. Neither supplies the general IsSeparableExtension hypothesis of this item. The second natural-language phrasing also returned only algebraic, separably generated, or generic lifting results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsSeparableExtension\"",
+   "results": "Actual msearch record: {\"t\": \"2026-10-23T19:23:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\", \\\"IsSeparableExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for arbitrary separability: Field.lean:44 requires one separating transcendence basis for the entire extension. IsSeparable in Etale/Field.lean is separable algebraic. Neither supplies the general IsSeparableExtension hypothesis of this item. The second natural-language phrasing also returned only algebraic, separably generated, or generic lifting results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every separable field extension in the sense of all finitely generated subextensions being separably generated is formally smooth",
+   "results": "Actual msearch record: {\"t\": \"2026-10-23T19:23:43Z\", \"tool\": \"leanfinder\", \"query\": \"Every separable field extension in the sense of all finitely generated subextensions being separably generated is formally smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyUnramified.of_isSeparable\", \"Algebra.FormallySmooth.of_algebraicIndependent\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.FormallySmooth.adjoin_of_algebraicIndependent\"], \"digest\": \"575c77383f77d4ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for arbitrary separability: Field.lean:44 requires one separating transcendence basis for the entire extension. IsSeparable in Etale/Field.lean is separable algebraic. Neither supplies the general IsSeparableExtension hypothesis of this item. The second natural-language phrasing also returned only algebraic, separably generated, or generic lifting results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-local-separable-residue-adic-smooth",
+  "date": "2026-10-23",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Adic formal smoothness ascends and descends through a smooth complete local map. Descent after completion: the geometrically regular closed fibre is adically formally smooth (the reverse field implication of Stacks 07EL). Supporting input: Tag 07EL uses Tag 07EJ to lift over the base field in characteristic zero and over the prime field in positive characteristic. In the proof of Tag 07EJ: the sentence \"K is formally smooth over k\", also used to choose a k-linear residue section in Tag 0C34.",
+   "via": [
+    "lem-sfb-regular-local-separable-residue-adic-smooth",
+    "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "lem-sfb-adic-formal-smoothness-descent",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separable-field-square-zero-lifting",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-separable-extension statement. Followed Stacks 0320 (3): finitely generated subextensions have zero first cotangent homology by one new composed Mathlib leaf; reused the existing finite-subfield reduction, vector-space projectivity and square-zero lifting criterion. Read the statements of every cited node, checked the local Mathlib signatures and edge cases, and recorded verbatim citations. No Lean written or compiled.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/deformation chain specified in blueprint.from.place, specifically the use of arbitrary separable residue-field lifting in Tag 07EJ and Tag 0C34. The current ancestor command returns None because the created.item chain stops at Sheaf.SixFunctors.CtfStabilityDirectImages; preserved this mechanically computed null reference and the inherited descriptive provenance. No unit or chapter route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-h1-cotangent-finite-subfields",
+    "why": "Generic canonical-presentation finite-support vanishing criterion used verbatim at step 2 of Stacks 0320 (3); no node in this unit states it. This preserves the field-theory subargument of the inherited unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-h1-cotangent-finite-subfields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-9ad6ebff0",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-9ad6ebff0 (reviewer sub-agent of L); spot-checked: Read Stacks algebra.tex 031Z, 0320 (full proof of (3)) and 0322, with tags checked against tags/tags. The item keeps arbitrary separability as defined by def-weil-pbc-separable-field-extension (2), with no added finite-generation or characteristic hypothesis, so the target is not weakened. Its four steps follow 0320 (3) in order. Step 1: clause (2) of the definition makes each finitely generated intermediate field E separably generated, and the new leaf then gives H_1(L_{E/k})=0. Step 2: lem-weil-pbc-h1-cotangent-finite-subfields takes exactly that hypothesis; its Lean (H1CotangentFiniteSubfields.lean) has 0 sorry. The declared tool_use for it is accepted: it is a generic, Lean-closed 07BQ criterion and replaces no unit route. Step 3: Omega_{L/k} is projective by lem-weil-pbc-vector-space-projective, which holds in any dimension. Step 4: lem-weil-pbc-smooth-ring-map-square-zero-lifting needs only H_1=0 and Omega projective, with no finite presentation; with A=k, B=L, N=J it gives the k-algebra lift q∘f=g. New leaf lem-sfb-separably-generated-field-h1-zero: Mathlib Smooth/Field.lean:44-51 (of_algebraicIndependent_of_isSeparable) has no EssFiniteType hypothesis, and with Basic.lean:72 (subsingleton_h1Cotangent) it gives the leaf in one line. It is strictly smaller than the item, since it needs a separating basis of the whole extension. Tested E=k, purely transcendental with an infinite basis, separable algebraic, and the excluded F_p(s)(s^{1/p}). A whole-DAG and project-Lean duplicate search found no copy of the leaf or the item; the nearest are the char-0, F_p-only, algebraic-only and colimit nodes, and a private EssFiniteType-only Lean lemma. blueprint from.node=null is what the ancestor tool prints, and it is also null on the parent. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableFieldSquareZeroLifting",
+  "declaration": "Algebra.exists_lift_of_isSeparableExtension",
+  "file": "lean/Sheaf/FieldTheory/SeparableFieldSquareZeroLifting.lean",
+  "statement": "theorem exists_lift_of_isSeparableExtension (k : Type u) (L : Type v) [Field k] [Field L] [Algebra k L] (hsep : IsSeparableExtension k L) (D : Type w) [CommRing D] [Algebra k D] (J : Ideal D) (hJ : J ^ 2 = ⊥) (g : L →ₐ[k] D ⧸ J) : ∃ f : L →ₐ[k] D, (Ideal.Quotient.mkₐ k J).comp f = g",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d76a2ee30",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Signature matches node clause by clause: IsSeparableExtension (live def: every FG intermediate field separably generated, Stacks 030O(2)); D CommRing+Algebra k in independent universe w; J^2=⊥; g : L →ₐ[k] D⧸J; ∃ f with (Ideal.Quotient.mkₐ k J).comp f = g (canonical q, existence only). No algebraicity, finite-generation, characteristic or universe restriction. lean.statement verbatim. Only the theorem, proof sorry; source and blueprint docstrings with the 4 proof steps. Node record differs from live only in lean; no new nodes. H4: Mathlib Smooth/Field has only the whole-extension separating-basis and perfect-field cases, Etale/Field only algebraic; project IsSeparableExtension uses are hypotheses or the SeparableSmoothColimit presentation; no duplicate. Edge cases L=k, J=0, D=0, infinite transcendence degree, inseparable excluded: OK. No files changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261026T092059-L-3399462",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Algebra.exists_lift_of_isSeparableExtension"
+  ],
+  "sorry_after": []
+ }
+}

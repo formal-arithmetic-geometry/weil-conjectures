@@ -1,0 +1,166 @@
+{
+ "id": "def-sf-etale-constant-module-realization",
+ "kind": "definition",
+ "title": "Canonical constant-module realization on the small etale site",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] with its small etale site [def-weil-pbc-etale-site], and let $A$ be a commutative ring in the coefficient universe. Let $A_T$ be the constant commutative ring sheaf [def-weil-pbc-constant-sheaf] and $U(A_T)$ its underlying ring sheaf. Define the functor $R_{T,A}$ from ordinary $A$-module-valued sheaves to sheaves of $U(A_T)$-modules [def-weil-sheaf-of-modules-category] by composing the canonical constant-scalar realization [def-pur-etale-constant-scalar-realization] with restriction of scalars along the inverse of the canonical comparison from the constant ring sheaf to $U(A_T)$ [def-sfb-constant-module-coefficient-transport]. On objects and maps this retains the underlying abelian sheaf and changes only its scalar coordinates by that canonical ring isomorphism. Define $R^\\bullet_{T,A}$ on integer-indexed cochain complexes [def-pc-cochain-complex-modules] by applying $R_{T,A}$ in each degree and to each differential and chain-map component. No flatness, K-flatness, boundedness, finiteness or nonempty-scheme hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-etale-constant-scalar-realization",
+  "def-sfb-constant-module-coefficient-transport",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093I and 03CV (constant-scalar module realization); canonical ring-sheaf comparison of Tags 03CY and 093T; degreewise extension used by the small-etale clause of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-flat-model.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Realize sheaves of modules over a constant commutative ring as sheaves of modules on a site and extend the functor to cochain complexes",
+   "results": {
+    "t": "2026-10-23T06:21:57Z",
+    "tool": "leansearch",
+    "query": "Realize sheaves of modules over a constant commutative ring as sheaves of modules on a site and extend the functor to cochain complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.constantSheaf",
+     "SheafOfModules.mk",
+     "SheafOfModules.noConfusionType",
+     "SheafOfModules",
+     "AlgebraicGeometry.Scheme.Modules",
+     "CompHausLike.LocallyConstantModule.functor",
+     "SheafOfModules.forgetToSheafModuleCat",
+     "SheafOfModules.instCategory"
+    ],
+    "digest": "6d111a292459147a"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib specialization: reuse the already landed etaleSumFlatModuleRealization and etaleSumFlatComplexRealization; attach definition ownership rather than duplicate them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical constant coefficient module realization on the small etale site and its degreewise cochain complex realization",
+   "results": {
+    "t": "2026-10-23T06:21:58Z",
+    "tool": "leanfinder",
+    "query": "The canonical constant coefficient module realization on the small etale site and its degreewise cochain complex realization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.I",
+     "LightCondMod.LocallyConstant.functor",
+     "CochainComplex.cm5b.I_X",
+     "localCohomology.diagram",
+     "CategoryTheory.Sheaf.H",
+     "PresheafOfModules.DifferentialsConstruction.instHasDifferentials",
+     "LightCondensed.free",
+     "CategoryTheory.Sheaf.cohomologyPresheaf"
+    ],
+    "digest": "25b28ccde34d4087"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib specialization: reuse the already landed etaleSumFlatModuleRealization and etaleSumFlatComplexRealization; attach definition ownership rather than duplicate them."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*Module|constant.*module|mapHomologicalComplex",
+   "results": {
+    "t": "2026-10-23T06:21:56Z",
+    "tool": "grep",
+    "query": "constant.*Module|constant.*module|mapHomologicalComplex",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib specialization: reuse the already landed etaleSumFlatModuleRealization and etaleSumFlatComplexRealization; attach definition ownership rather than duplicate them."
+  },
+  {
+   "tool": "rg",
+   "query": "etaleSumFlatModuleRealization|etaleSumFlatComplexRealization in lean/WeilConjectures, lean/Sheaf, dag/nodes; blueprint_refs.py search constant module realization",
+   "results": {
+    "WeilConjectures": "No matching declarations; upstream etaleConstantModuleFunctor is the RingCat precursor.",
+    "Sheaf": "The two definitions are in Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat:46,58; EtaleOpenTensorDefs uses them to define etaleFlat and etaleKFlat.",
+    "dag": "The theorem node lem-pur-etale-sum-flat-kflat carries the helper declarations; def-sp-etale-kflat-realization owns only the K-flat predicate, not either functor. No definition node owns the two functors. def-pur-etale-constant-scalar-realization owns the precursor and def-sfb-constant-module-coefficient-transport the ring comparison.",
+    "blueprint": "12 broad text matches, none defines these two canonical functors."
+   },
+   "date": "2026-10-23",
+   "verdict": "Existing declarations, missing definition-node owner; add an existing:true attachment as required by the independent return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-tor-flat-pullback-model",
+  "date": "2026-10-23",
+  "group": "Q90"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Restriction of the evaluation tensor to Z: express flatness and K-flatness of ordinary constant-coefficient etale models in ringed-site module coordinates.",
+   "via": [
+    "lem-sf-etale-tor-flat-pullback-model",
+    "lem-sf-boundary-bounded-tensor-comparison",
+    "lem-weil-boundary-proetale-projection-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat",
+  "declaration": "AlgebraicGeometry.Scheme.etaleSumFlatModuleRealization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleSumFlatModuleRealization",
+   "AlgebraicGeometry.Scheme.etaleSumFlatComplexRealization"
+  ],
+  "statement": "def etaleSumFlatModuleRealization (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :\n    Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤\n      SheafOfModules.{u + 1} ((sheafCompose T.smallEtaleTopology\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership only, requested by return L at immutable head 1d2c37bb9c06. Reuse the two canonical functor definitions at lines 46 and 58; their data uses the existing scalar realization, canonical ring comparison, and mapHomologicalComplex. No conclusion of etaleSum_preserves_flat_kflat or other sum-extension theorem is used."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03e31b174",
+  "group": "Q90",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03e31b174",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Re-delivery of the 1d2c37bb9c06 RETURN (R1: theorem node lem-pur-etale-sum-flat-kflat in stmt_deps for plain defs). Lean module byte-identical (sha256 597d09a0). The item's stmt_deps now cite the new definition node def-sf-etale-constant-module-realization: existing:true on Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat, declarations etaleSumFlatModuleRealization and etaleSumFlatComplexRealization, lean.statement verbatim. Its data is the constant-scalar realization followed by restriction of scalars along constantModuleHomRingIso.inv (direction checked), applied degreewise, with no theorem or choice. Its 7 stmt_deps are all definition nodes owning the used decls; no prior owner; no SGA citation. Item statement re-checked clause by clause against the node; edge cases M=0, u=v, empty schemes, n=1 and non-flat f are covered; one sorry; docstrings OK. Live item has no lean and no competing landing. Advisories: bare Nonempty final clause (the specified iso is the real def etaleTorFlatPullbackModelIso), beta-redex statement form, upperStar/hasTorAmplitudeIn owners not in stmt_deps (base-era pattern). No file changed, nothing compiled."
+ }
+}

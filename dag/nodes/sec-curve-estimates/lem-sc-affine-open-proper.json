@@ -110,7 +110,32 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Compactification",
+     "lines": [
+      359,
+      443
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "split_report": {
@@ -209,5 +234,29 @@
    "AlgebraicGeometry.IsCurve.isQuasiProjective"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $k$ be algebraically closed, let $\\overline C$ be a\nproper smooth connected curve over $k$, and let\n$j:U\\hookrightarrow\\overline C$ be an open immersion with\n$\\overline C\\setminus U\\neq\\emptyset$. Then $U$ is affine.",
+  "proof": [
+   {
+    "text": "The complement $S:=\\overline C\\setminus U$ is a nonempty closed\nsubset of dimension at most zero, hence a finite nonempty set of\nclosed points ([lem-sc-dim0-finite]), and\n$U=\\overline C\\setminus S$. By [lem-sc-point-cartier] each\n$P\\in S$ is an effective Cartier divisor, so\n$D:=\\sum_{P\\in S}[P]$ is an effective Cartier divisor with support\n$S$ ([def-nagata-invertible-ideal]); its degree is\n$\\deg D=|S|\\geq1$ ([def-sc-divisor]), and\n$\\deg\\mathcal O(D)=\\deg D>0$ by the well-definedness of the degree\non $\\operatorname{Pic}$ ([lem-sc-deg-principal-zero]), so\n$\\mathcal O(D)$ is ample by [lem-sc-positive-degree-ample].\nBy [lem-sc-ample-complement-affine],\n$U=\\overline C\\setminus D$ is affine.",
+    "uses": [
+     "lem-sc-dim0-finite",
+     "lem-sc-point-cartier",
+     "def-nagata-invertible-ideal",
+     "def-sc-divisor",
+     "lem-sc-deg-principal-zero",
+     "lem-sc-positive-degree-ample",
+     "lem-sc-ample-complement-affine"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,586 @@
+{
+ "id": "lem-sfb-reduced-curve-torsionfree-biduality",
+ "kind": "statement",
+ "title": "Canonical biduality for coherent modules without punctual torsion on a reduced curve",
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be a nonempty proper reduced $k$-scheme of pure dimension one [def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pure-dimension]. Choose its dualizing module $\\omega_C$ with the natural representing isomorphisms of [lem-sfb-reduced-curve-dualizing-module]. Let $F$ be a coherent $\\mathcal O_C$-module [pqf-def-coherent]. Assume that for every open subset $U\\subseteq C$, a section of $F(U)$ whose germ is zero at every irreducible-component generic point lying in $U$ is zero [def-weil-irreducible-components, def-weil-pbc-module-stalk]. Define $F^\\dagger=\\mathcal Hom_{\\mathcal O_C}(F,\\omega_C)$ [def-pur-sheaf-hom]. Then $F^\\dagger$ is coherent and has the same property of detection of local sections at component generic points. The canonical evaluation morphism\n$$\\delta_F:F\\longrightarrow\\mathcal Hom_{\\mathcal O_C}(F^\\dagger,\\omega_C),\\qquad \\delta_F(f)(\\varphi)=\\varphi(f)$$\nis an isomorphism of $\\mathcal O_C$-modules. The formula is on every open subset and determines the morphism uniquely. No local freeness, constant generic rank, connectedness, nodal or Gorenstein hypothesis is imposed on $F$ or $C$; the zero module is allowed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0B5A (lemma-local-CM), final assertion and proof: canonical duality on finite Cohen–Macaulay modules. Sheaf form on a reduced pure-dimensional-one curve, whose dualizing module is supplied by lem-sfb-reduced-curve-dualizing-module; the generic-section condition spells out absence of dimension-zero torsion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "pqf-def-coherent",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-module-stalk",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Properness includes finite type, so [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. Every local ring $A$ has dimension at most one: by [lem-weil-pbc-primes-of-localization], chains of its primes give chains in an affine open of $C$. Reducedness and [lem-weil-pbc-serre-criterion-reduced] give $\\operatorname{depth}A\\geq\\min(1,\\dim A)=\\dim A$; [lem-weil-pbc-depth-le-support-dimension], applied to $A$ as its own module, gives equality. At a closed point $x$ the local dimension is one: dimension zero would make $x$ a component-generic point, whose being closed would give a zero-dimensional component, contrary to pure dimension one. Conversely every nongeneric point is closed, since a further strict specialization would give a chain of length two after adjoining a component-generic point. By [pqf-lem-coherent-ft-locnoeth], every coherent module used below is quasi-coherent of finite type on this locally Noetherian scheme.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2 (lemma-duality-dim-1), 0BS3 (lemma-duality-dim-1-CM); reduced dimension-one verification as in Tag 0E33."
+   }
+  },
+  {
+   "text": "Write $f:C\\to\\operatorname{Spec}k$. It is flat by [lem-pc-flat-field]. On affine charts its finite-type algebras are finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]; properness supplies quasi-compactness and separatedness. Thus [lem-sfb-proper-flat-dualizing-polynomial-model] supplies the right adjoint $f^!$ of $Rf_*$ on quasi-coherent derived categories. Put $K=f^!k[0]$. By [lem-sfb-proper-field-algebraic-dualizing], $K$ has bounded coherent cohomology and each stalk is an algebraic dualizing complex. At each closed point $x$, [lem-sfb-proper-dualizing-closed-stalk-normalized] gives the residue-field normalization of $K_x$.",
+   "uses": [
+    "lem-pc-flat-field",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-proper-field-algebraic-dualizing",
+    "lem-sfb-proper-dualizing-closed-stalk-normalized"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2 (lemma-duality-dim-1), construction and normalization in its proof."
+   }
+  },
+  {
+   "text": "At a closed point $x$, Step 1 gives a Cohen--Macaulay local ring of dimension one. Apply [lem-sfb-normalized-cm-local-dualizing-concentration] to the normalized $K_x$: it is $H^{-1}(K_x)[1]$, and $H^{-1}(K_x)$ has depth one. Exactness of stalks [lem-weil-pbc-module-stalk-exact] commutes with kernels and cokernels of the differentials, so $H^j(K)_x=0$ for $j\\ne-1$. Each coherent $H^j(K)$ has closed support by [lem-weil-pbc-finite-type-module-support-closed]. Schemes are Kolmogorov by [lem-sc-scheme-sober]: points with the same closure would be two generic points of that irreducible closed subset. Since $C$ is quasi-compact, [lem-sc-quasi-compact-kolmogorov-closed-point] would put a closed point in any nonempty support. Hence $H^j(K)=0$ for $j\\ne-1$. Set $W=H^{-1}(K)$; [lem-sf-derived-concentrated-single] gives $K\\cong W[1]$. In particular $W_x$ has depth one at every closed point.",
+   "uses": [
+    "lem-sfb-normalized-cm-local-dualizing-concentration",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS3 (lemma-duality-dim-1-CM), concentration; dualizing.tex Tag 0AWS (lemma-apply-CM)."
+   }
+  },
+  {
+   "text": "For every coherent $G$, the degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful], the adjunction of Step 2, and [lem-trf-field-complex-cohomology-splitting] give natural $k$-linear bijections\n$$\\operatorname{Hom}(G,W)=\\operatorname{Hom}_{D(C)}(G[1],K)=\\operatorname{Hom}_{D(k)}(R\\Gamma(C,G)[1],k[0])=\\operatorname{Hom}_k(H^1(C,G),k).$$\nThe last map takes the degree-zero cohomology map; $H^0(R\\Gamma(G)[1])=H^1(C,G)$. Thus $W$ with these bijections is a representing pair of [lem-sfb-reduced-curve-dualizing-module]. Its uniqueness assertion identifies it with the chosen $\\omega_C$, respecting the representing bijections. Consequently $K\\cong\\omega_C[1]$, and at each closed $x$, $K_x\\cong(\\omega_C)_x[1]$ is normalized and $(\\omega_C)_x$ has depth one. This obtains the local dualizing properties from statements of cited nodes, rather than assuming that the representing property alone states those properties.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-trf-field-complex-cohomology-splitting",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2(5) and 0BS3(3), with the representing-pair uniqueness in 0BS2."
+   }
+  },
+  {
+   "text": "The sheaf $F^\\dagger=\\mathcal Hom(F,\\omega_C)$ is coherent by [lem-weil-pbc-coherent-sheaf-hom-coherent]; applying it again makes $F^{\\dagger\\dagger}$ coherent. By [lem-weil-pbc-coherent-local-finite-presentation], both $F$ and $F^\\dagger$ are locally finitely presented, so [lem-weil-pbc-stalk-internal-hom-finite-presentation] gives their Hom stalks as ordinary Hom modules. The comparison sends the germ of a local morphism to its stalk map, a normalization used below. For coherent $G$, [lem-weil-pbc-coherent-affine-sections-finite] gives finite affine section modules, and [lem-weil-pbc-finite-type-module-support-closed] identifies $G_x$ with the localization of those modules.",
+   "uses": [
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01BW (lemma-coherent-finite-presentation), 01CQ (lemma-internal-hom-locally-kernel-direct-sum), 01CP (lemma-stalk-internal-hom)."
+   }
+  },
+  {
+   "text": "Take an affine open $V=\\operatorname{Spec}R\\subseteq C$ and $M=F(V)$. The hypothesis and the stalk/localization dictionary of [lem-weil-pbc-finite-type-module-support-closed] say that $M\\to\\prod_{\\mathfrak q\\in\\operatorname{Min}R}M_{\\mathfrak q}$ is injective. If $\\mathfrak p=\\operatorname{Ann}_R(z)$ is an associated prime of $M$ which is not minimal, then for each minimal $\\mathfrak q$ choose $a\\in\\mathfrak p\\setminus\\mathfrak q$ (otherwise $\\mathfrak p\\subseteq\\mathfrak q$ would force equality by minimality). Since $az=0$, $z/1=0$ in $M_{\\mathfrak q}$. Injectivity forces $z=0$, contradicting that its annihilator is a proper prime. Thus every associated prime of $M$ is minimal.",
+   "uses": [
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0311 (lemma-zero-at-ass-zero), associated-prime criterion; forward implication written out on annihilators."
+   }
+  },
+  {
+   "text": "Fix a closed point $x\\in V$ with $F_x\\ne0$, corresponding to $\\mathfrak p\\subset R$. This prime is not minimal by Step 1 and is finitely generated since $R$ is Noetherian. If the maximal ideal of $R_{\\mathfrak p}$ were the annihilator of an element of $M_{\\mathfrak p}$, [lem-sc-associated-localization-fg] would make $\\mathfrak p$ associated to $M$, contradicting Step 6. Apply [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] to obtain an injective multiplication $t:F_x\\to F_x$ with $t\\in\\mathfrak m_x$. By [lem-weil-pbc-nakayama-jacobson], $F_x/tF_x\\ne0$, since $F_x$ is finite and nonzero and $(t)\\subseteq\\mathfrak m_x=\\operatorname{Jac}(R_{\\mathfrak p})$. Thus $t$ is a regular sequence of length one, so depth is at least one by [def-weil-pbc-depth]. By [lem-weil-pbc-depth-le-support-dimension], depth is at most the support dimension, which is at most $\\dim R_{\\mathfrak p}=1$. Therefore $\\operatorname{depth}F_x=1$. No depth assertion for a nonzero module was applied to a zero stalk.",
+   "uses": [
+    "lem-sc-associated-localization-fg",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0B5A (lemma-local-CM), dimension-one Cohen--Macaulay hypothesis; algebra.tex Tags 058A, 00LL and 00LK."
+   }
+  },
+  {
+   "text": "The sheaf $\\omega_C$ detects sections at component-generic points even on arbitrary opens. Indeed, on an affine $V=\\operatorname{Spec}R$, put $P=\\omega_C(V)$. If $\\operatorname{Ann}_R(z)=\\mathfrak p$ is nonminimal and prime, then $z/1\\ne0$ in $P_{\\mathfrak p}$: an element outside $\\mathfrak p$ cannot kill $z$. Its annihilator there is the maximal ideal. By Step 1 this is a closed point of $C$, so Step 4 gives depth one; a length-one regular element of its maximal ideal cannot kill a nonzero element annihilated by that ideal. This contradiction shows $\\operatorname{Ass}(P)\\subseteq\\operatorname{Min}R$. Now [lem-weil-pbc-module-injects-localizations-associated-primes] makes any element vanishing at all minimal primes zero. The affine-section and stalk identifications are [lem-weil-pbc-coherent-affine-sections-finite, lem-weil-pbc-finite-type-module-support-closed]. Applying this on affine subopens of any open $U$ proves the asserted detection there by the sheaf separation axiom.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0311 (lemma-zero-at-ass-zero), with the depth-one exclusion of nongeneric associated primes."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq C$ and $\\varphi\\in F^\\dagger(U)$ have zero component-generic germs. By [def-pur-sheaf-hom], this is a morphism $F|_U\\to\\omega_C|_U$. On each open $T\\subseteq U$ and $s\\in F(T)$, its value $\\varphi_T(s)\\in\\omega_C(T)$ has zero component-generic germs: by the Hom stalk normalization of [lem-weil-pbc-stalk-internal-hom-finite-presentation], the germ is $\\varphi_\\eta(s_\\eta)=0$. Step 8 gives $\\varphi_T(s)=0$. This holds for every $T,s$, so $\\varphi=0$. Thus $F^\\dagger$ has precisely the detection property required in the statement.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Internal sheaf Hom on opens; algebra.tex Tag 0311 applied in Step 8."
+   }
+  },
+  {
+   "text": "For every open $U$ and $s\\in F(U)$ define a morphism $F^\\dagger|_U\\to\\omega_C|_U$ by sending $\\varphi\\in F^\\dagger(T)$ to $\\varphi_T(s|_T)$ on every $T\\subseteq U$. It is linear in $\\varphi$ and $s$ and respects restrictions, since local module morphisms do. By [def-pur-sheaf-hom] these maps define $\\delta_F:F\\to F^{\\dagger\\dagger}$. Equality of all such section values forces equality of the morphisms, proving uniqueness. Applying [lem-weil-pbc-stalk-internal-hom-finite-presentation] twice shows that at every $x$ its map is exactly\n$$M\\longrightarrow\\operatorname{Hom}_A(\\operatorname{Hom}_A(M,W),W),\\qquad m\\longmapsto(\\phi\\longmapsto\\phi(m)),$$\nwhere $A=\\mathcal O_{C,x}$, $M=F_x$, and $W=(\\omega_C)_x$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0B5A (lemma-local-CM), canonical evaluation morphism, expressed via local sheaf Hom."
+   }
+  },
+  {
+   "text": "Let $x$ be closed, with $A,M,W$ as in Step 10. By Step 4, $K_x\\cong W[1]$ is a normalized algebraic dualizing complex over the Noetherian local ring $A$. If $M=0$, both ordinary Hom duals vanish and $\\delta_{F,x}$ is already an isomorphism. Suppose $M\\ne0$. Its depth is one by Step 7, and its support dimension $d_M$ is at most one. Apply [lem-sfb-normalized-dualizing-depth-detection] to $M,K_x$. Clause (1) kills $E^j=H^j(R\\operatorname{Hom}_A(M[0],K_x))$ for $j<-1$ and $j>0$, and clause (2), using depth one, kills $E^0$. Consequently this derived Hom is concentrated in degree $-1$.",
+   "uses": [
+    "lem-sfb-normalized-dualizing-depth-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0B5A (lemma-local-CM), (1) implies (3), via Tag 0A7U (lemma-sitting-in-degrees)."
+   }
+  },
+  {
+   "text": "Put $N=\\operatorname{Hom}_A(M,W)$. By [lem-pur-derived-internal-hom-shift-comparison] and [lem-sc-rhom-cohomology-ext-ring] at $n=0$, followed by [lem-weil-pbc-derived-single-fully-faithful],\n$$E^{-1}=H^0(R\\operatorname{Hom}_A(M[0],W[0]))=\\operatorname{Hom}_A(M,W)=N.$$\nTogether with Step 11 and [lem-sf-derived-concentrated-single] this identifies $R\\operatorname{Hom}_A(M[0],K_x)$ with $N[1]$ in $D(A)$. This is concentration of the whole derived object, not an assertion of degreewise isomorphisms alone. Choose this isomorphism to induce the displayed identification on degree-minus-one cohomology, adjusting by an automorphism of N if necessary.",
+   "uses": [
+    "lem-pur-derived-internal-hom-shift-comparison",
+    "lem-sc-rhom-cohomology-ext-ring",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0B5A (lemma-local-CM), proof, the object $N[\\delta]$ with $\\delta=1$."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-module-canonical-biduality] to the finite $A$-module $M$ and $L=K_x$; both bounded-injective representability and the scalar-action isomorphism hold by Step 4. It gives the canonical isomorphism\n$$M[0]\\longrightarrow R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(M[0],K_x),K_x)\\cong R\\operatorname{Hom}_A(N[1],W[1])\\cong R\\operatorname{Hom}_A(N[0],W[0]).$$\nThe last comparison is [lem-pur-derived-internal-hom-shift-comparison] with $m=n=1$. Its degree-zero cohomology is $\\operatorname{Hom}_A(N,W)$ by [lem-sc-rhom-cohomology-ext-ring] and [lem-weil-pbc-derived-single-fully-faithful]. The canonical-biduality statement specifies evaluation on Hom representatives. Thus the induced map is evaluation $m\\mapsto(\\phi\\mapsto\\phi(m))$: in the two shifted degree-$-1$ slots it evaluates $\\phi$ on the degree-zero $m$, so the graded interchange contributes $(-1)^{0\\cdot(-1)}=1$. The Hom differential and shift comparisons are those of [def-pur-derived-internal-hom]. Hence the very map $\\delta_{F,x}$ of Step 10 is an isomorphism, not just a module map between abstractly isomorphic objects.",
+   "uses": [
+    "lem-trf-finite-module-canonical-biduality",
+    "lem-pur-derived-internal-hom-shift-comparison",
+    "lem-sc-rhom-cohomology-ext-ring",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0B5A (lemma-local-CM), biduality in its proof; Tag 0A7C (lemma-dualizing), canonical evaluation comparison."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], the kernel and cokernel of $\\delta_F$ are coherent. By [lem-weil-pbc-module-stalk-exact], their closed-point stalks vanish, using Steps 11--13. By [lem-weil-pbc-finite-type-module-support-closed] their supports are closed; the same quasi-compact Kolmogorov argument of Step 3, using [lem-sc-scheme-sober, lem-sc-quasi-compact-kolmogorov-closed-point], makes both supports empty. Their sections therefore vanish, since a section with every germ zero is locally zero and the sheaf axiom glues those zeros. Thus kernel and cokernel are zero and $\\delta_F$ is an isomorphism. Coherence and detection of $F^\\dagger$ were proved in Steps 5 and 9. This also covers $F=0$, components where its generic rank is zero, and disconnected curves.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Sheaf form of dualizing.tex Tag 0B5A, with closed-support detection on the proper curve."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-flat-field",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-sfb-proper-field-algebraic-dualizing",
+  "lem-sfb-proper-dualizing-closed-stalk-normalized",
+  "lem-sfb-normalized-cm-local-dualizing-concentration",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-scheme-sober",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-sc-associated-localization-fg",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "def-pur-sheaf-hom",
+  "lem-sfb-normalized-dualizing-depth-detection",
+  "lem-pur-derived-internal-hom-shift-comparison",
+  "lem-sc-rhom-cohomology-ext-ring",
+  "lem-trf-finite-module-canonical-biduality",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0B5A (lemma-local-CM), proof, using existing 0A7U depth bounds and 0A7C canonical biduality; curves.tex Tags 0BS2/0BS3 for the dualizing sheaf realization. Associated-prime arguments are written out from algebra.tex Tags 058A, 00LL and 0311."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|IsReflexive|bidual",
+   "results": "{\"t\": \"2026-10-23T18:46:03Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|IsReflexive|bidual\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite maximal Cohen Macaulay module over a one dimensional Gorenstein local ring is canonically isomorphic to its double dual",
+   "results": "{\"t\": \"2026-10-23T18:46:03Z\", \"tool\": \"leansearch\", \"query\": \"A finite maximal Cohen Macaulay module over a one dimensional Gorenstein local ring is canonically isomorphic to its double dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.evalEquiv\", \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.bijective_dual_eval\", \"Module.evalEquiv_toLinearMap\", \"Module.Dual.instIsReflecive\", \"LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive\", \"Module.IsReflexive\"], \"digest\": \"f674c8818037916e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\", \"Module\"",
+   "results": "{\"t\": \"2026-10-23T18:46:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReflexive\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"MulOpposite.instModuleIsReflexive\", \"Module.IsReflexive.of_split\", \"Module.instIsReflexiveDual\", \"Module.IsReflexive.bijective_dual_eval'\", \"Module.IsReflexive.mk\", \"Module.instIsReflexiveOfFiniteOfProjective\"], \"digest\": \"bc3b265b4d509c7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent torsion free sheaves on a nodal curve are canonically isomorphic to their double dual with respect to the dualizing line bundle",
+   "results": "{\"t\": \"2026-10-23T18:46:04Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent torsion free sheaves on a nodal curve are canonically isomorphic to their double dual with respect to the dualizing line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isIso_to_global\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"CommRing.Pic.mk_dual\", \"CommRing.Pic.inv_eq_dual\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"FGModuleCat.exactPairing\", \"Module.Invertible.linearEquiv\"], \"digest\": \"b2e7ac055fb26dc9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Gorenstein|CohenMacaulay|IsReflexive",
+   "results": "{\"t\": \"2026-10-23T18:46:34Z\", \"tool\": \"grep\", \"query\": \"Gorenstein|CohenMacaulay|IsReflexive\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\"], \"digest\": \"a5e966db671b9b0e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Gorenstein local ring of dimension one every finite torsion free module is reflexive and its dual is torsion free",
+   "results": "{\"t\": \"2026-10-23T18:46:35Z\", \"tool\": \"leanfinder\", \"query\": \"Over a Gorenstein local ring of dimension one every finite torsion free module is reflexive and its dual is torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.to_isTorsionFree\", \"Module.IsReflexive.of_finite_of_free\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive\", \"Module.free_iff_isTorsionFree\", \"Module.Dual.instIsReflecive\", \"Module.dual_finite\", \"Module.instFiniteDimensionalOfIsReflexive\"], \"digest\": \"c4395558afb3f8ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical biduality for coherent sheaves with no zero dimensional torsion on a proper reduced curve using its dualizing module",
+   "results": "{\"t\": \"2026-10-23T18:48:06Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical biduality for coherent sheaves with no zero dimensional torsion on a proper reduced curve using its dualizing module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.exactPairing\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"FGModuleCat.rightRigidCategory\", \"FGModuleCat.FGModuleCatDual\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"FGModuleCat.FGModuleCatDual_obj\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"FGModuleCat.FGModuleCatDual_coe\"], \"digest\": \"1a59b9bf9f0cdea1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are structure-sheaf comparisons, finite-dimensional vector spaces, invertible/projective modules, PID freeness, or the definition of reflexivity. Source inspection of Mathlib/LinearAlgebra/Dual/Defs.lean:216-230 and Dual/Lemmas.lean:259-262 shows that reflexivity or finite freeness is an input, not a consequence for non-locally-free coherent modules. Neither AlgebraicGeometry nor RingTheory grep supplies the curve duality theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical biduality for finite maximal Cohen Macaulay modules with respect to a canonical module over a Cohen Macaulay local ring",
+   "results": "{\"t\": \"2026-10-23T19:18:07Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical biduality for finite maximal Cohen Macaulay modules with respect to a canonical module over a Cohen Macaulay local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.dual_finite\", \"Module.IsReflexive\", \"Module.IsReflexive.of_finite_of_free\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.Dual.instIsReflecive\", \"Module.dual_projective\", \"Module.dual_free\", \"Module.finite_dual_iff\"], \"digest\": \"589bdd4c255c14a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, Module.Dual",
+   "results": "{\"t\": \"2026-10-23T19:20:36Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, Module.Dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.instIsReflexiveDual\", \"Module.Dual.instIsReflecive\", \"Module.evalEquiv\", \"Module.evalEquiv_toLinearMap\", \"Module.bijective_dual_eval\", \"Module.IsReflexive.bijective_dual_eval'\", \"Module.IsReflexive.mk\", \"Module.dualMap_dualMap_eq_iff\"], \"digest\": \"d31f59f13e64cf5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|dualizing|canonicalModule|bidual",
+   "results": "{\"t\": \"2026-10-23T19:20:36Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|dualizing|canonicalModule|bidual\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules without punctual torsion on a reduced algebraic curve are canonically isomorphic to their dualizing sheaf double dual",
+   "results": "{\"t\": \"2026-10-23T19:21:09Z\", \"tool\": \"leansearch\", \"query\": \"Coherent modules without punctual torsion on a reduced algebraic curve are canonically isomorphic to their dualizing sheaf double dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.evalEquiv\", \"Module.Dual.eval_comp_comp_evalEquiv_eq\", \"Module.Dual.instIsReflecive\", \"Module.IsReflexive.of_finite_of_free\", \"LinearMap.IsPerfPair.dualEval\", \"Module.IsReflexive\", \"CommRing.Pic.mk_dual\", \"Module.symm_dualMap_evalEquiv\"], \"digest\": \"9ab7191e9594c5c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double dual evaluation of a torsion free coherent sheaf with respect to a dualizing module on a singular reduced curve",
+   "results": "{\"t\": \"2026-10-23T19:21:10Z\", \"tool\": \"leanfinder\", \"query\": \"Double dual evaluation of a torsion free coherent sheaf with respect to a dualizing module on a singular reduced curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tilde\", \"AlgebraicGeometry.Scheme.Γevaluation\", \"WeierstrassCurve.Affine.FunctionField\", \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"FGModuleCat.FGModuleCatEvaluation_apply\", \"FGModuleCat.FGModuleCatEvaluation\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\", \"ModuleCat.tildeInModuleCat\"], \"digest\": \"f2b428bb5b2c155e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*support|support.*depth|generic.*injective|injective.*generic",
+   "results": "{\"t\": \"2026-10-23T19:23:01Z\", \"tool\": \"grep\", \"query\": \"depth.*support|support.*depth|generic.*injective|injective.*generic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf has no embedded associated points on a one dimensional Noetherian scheme precisely when all nongeneric stalks have positive depth",
+   "results": "{\"t\": \"2026-10-23T19:23:02Z\", \"tool\": \"leansearch\", \"query\": \"A coherent sheaf has no embedded associated points on a one dimensional Noetherian scheme precisely when all nongeneric stalks have positive depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\", \"smoothSheafCommRing.isUnit_stalk_iff\", \"AlgebraicGeometry.Scheme.fromSpecStalk\"], \"digest\": \"ed9841011a841403\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.depth, Module.support",
+   "results": "{\"t\": \"2026-10-23T19:23:02Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing.depth, Module.support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a coherent module on a Noetherian scheme of dimension at most one, sections are detected at irreducible component generic points if and only if every nongeneric nonzero stalk has positive depth",
+   "results": "{\"t\": \"2026-10-23T19:23:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a coherent module on a Noetherian scheme of dimension at most one, sections are detected at irreducible component generic points if and only if every nongeneric nonzero stalk has positive depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"ModuleCat.Tilde.smul_stalk_no_nonzero_divisor\", \"Module.rankAtStalk_pos_iff_mem_support\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\"], \"digest\": \"bacc125c32959654\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring of dimension one a finite module embeds into the product of its localizations at minimal primes exactly when it has depth at least one at each nonminimal prime",
+   "results": "{\"t\": \"2026-10-23T19:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"Over a Noetherian ring of dimension one a finite module embeds into the product of its localizations at minimal primes exactly when it has depth at least one at each nonminimal prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_isLocalized_maximal\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"Submodule.fg_of_isLocalized_maximal\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson\", \"Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes\", \"Module.Finite.of_localized_maximal\", \"LocalizedModule.exists_subsingleton_away\", \"IsLocalizedModule.exists_subsingleton_away\"], \"digest\": \"0102ff473352c583\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern reflexive/projective modules or affine stalk/support infrastructure, not canonical-module biduality or the generic-point/depth criterion; IsReflexive is an assumption, not a theorem establishing it here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subcanonical-residual-duality",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length; Definition 2.10, Remarks 2.13 and 2.18, pp.231--234, with the length/section formulas from Serre duality and the canonical ideal sequence; reduced nodal specialization. Supporting input for Definition 2.10: canonical biduality on coherent modules without punctual torsion, before identifying the twice-evaluated image.",
+   "via": [
+    "lem-sfb-subcanonical-residual-duality",
+    "lem-sfb-subcanonical-splitting-clifford-bound",
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reduced-curve-torsionfree-biduality",
+  "worker": "stage1",
+  "summary": "Proved the sheaf assertion by the existing normalized local depth bounds and canonical finite-module derived biduality. Explicitly reconstructed the proper adjoint dualizing complex and identified its degree-minus-one sheaf with the chosen representing module; supplied both directions of the needed generic-point/associated-prime arguments in steps. No statement change, new nodes, Lean edits or compiles. Zero stalks are handled before depth detection.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration prerequisite chain: residual subcanonical duality needs canonical biduality on torsion-free coherent modules. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3): the current text uses compactification assembly and no longer expands the historic alteration prerequisites. The existing supporting statement is proved without changing chapter/unit routes. blueprint_refs ancestor returns None because the inherited created.item chain ends outside a blueprint node; preserve that null ancestor and its non-unspecified place. Whole-blueprint searches for bidual, dualizing, Cohen, Cohen-Macaulay, depth, generic detection and torsionfree found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-primes-of-localization",
+    "why": "Generic primes of prime and principal localizations used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-serre-criterion-reduced",
+    "why": "Generic serre's criterion for reducedness: reduced iff (r_0) and (s_1) used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic the depth of a nonzero finite module over a noetherian local ring is at most the dimension of its support used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence on locally noetherian schemes used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-pc-flat-field",
+    "why": "Generic every morphism to a field is flat used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic finite type over a noetherian ring is finite presentation used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic stalks of o_x-modules commute with kernels, images and cokernels (stacks 01ag) used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic the support of a finite type quasi-coherent module is closed, locally the zero locus of the annihilator used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic schemes are sober used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic closed points in closed subsets of quasi-compact kolmogorov spaces used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Generic a complex with cohomology in a single degree is that cohomology object shifted used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic the single-complex embedding of an abelian category is fully faithful used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Only the natural degreewise Hom bijection over a field is used to identify the proper adjoint representing functor; no trace theorem is imported."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "why": "Generic the sheaf hom between coherent modules is coherent used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-local-finite-presentation",
+    "why": "Generic a coherent module has a local finite free cokernel presentation used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "why": "Generic stalk of internal hom for a finitely presented module used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-affine-sections-finite",
+    "why": "Generic finite affine sections of a coherent module used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-sc-associated-localization-fg",
+    "why": "The ordinary module associated-prime localization implication is used at a finite-generated prime; it does not change the curve duality route."
+   },
+   {
+    "node": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "why": "Generic if the maximal ideal is not an associated prime of a finite module, it contains a nonzerodivisor on it used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "Generic nakayama's lemma for an ideal in the jacobson radical used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic a module over a noetherian ring embeds in the product of its localizations at its associated primes used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-comparison",
+    "why": "Generic derived Hom shift isomorphism on a small ringed site, specialized to a ring, with no smooth-purity theorem."
+   },
+   {
+    "node": "lem-sc-rhom-cohomology-ext-ring",
+    "why": "Only degree-zero cohomology of algebraic RHom and Ext is used on the one-object ringed site."
+   },
+   {
+    "node": "lem-trf-finite-module-canonical-biduality",
+    "why": "Canonical algebraic biduality over a Noetherian ring with bounded-injective target; this is generic local algebra, not a trace or Poincare duality theorem."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic coherent modules on a locally noetherian scheme: kernels, cokernels, sums, quasi-coherent sub- and quotient modules used as a black-box tool for the explicit local algebra or coherent-sheaf argument; it supplies no replacement for a unit-level six-functor step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-flat-field",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-scheme-sober",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-sc-associated-localization-fg",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-pur-derived-internal-hom-shift-comparison",
+  "lem-sc-rhom-cohomology-ext-ring",
+  "lem-trf-finite-module-canonical-biduality",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-fe9b7d117",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-fe9b7d117 (reviewer sub-agent of L); spot-checked: I read the delivery in full; there are no new nodes and no fixes. Shape: the statement, stmt_deps, source, blueprint and created are unchanged from live, the item is still unsplit on live (no supersession), and proof_deps equals the union of the step uses. Source: Stacks 0B5A (dualizing.tex lemma-local-CM, l.3090) proves the result via 0A7U + 0A7C + 00LK. Steps 11-13 follow that route at closed stalks; the sheaf realization omega = H^{-1}(f^!k) follows curves 0BS2/0BS3. Step checks: S1 (dim <= 1, CM local rings via 031R/00LK; nongeneric points are closed). S2: the polynomial-model hypotheses hold (proper+flat+finite presentation). S3: the concentration node applies (depth = dim = 1); closed support + quasi-compact Kolmogorov (01IS, 005E) give K = W[1]. S4: the chain Hom(G,W) = Hom(G[1],K) = Hom(RGamma(G)[1],k) = Hom(H^1,k) uses only i=0 of the field splitting; the uniqueness clause of the dualizing-module node gives W = omega_C. S6: annihilator argument, correct. S7: 058A direction checked, then 00LL + Nakayama, so depth F_x = 1. S8: Ann(z/1) = pR_p, with a regular-element contradiction, then 0311. S9/S10: elementary. S11: the depth-detection hypotheses hold (M nonzero, d_M <= 1, depth 1). S12: shift e(M,W,0,1) and Ext^0. S13: the 0A7C node applies, and H^0 of the canonical iso is evaluation up to isos, so delta_{F,x} is an iso. S14: coherent kernel/cokernel are zero by the closed-point argument. Edge cases: F=0, rank 0 on a branch, a non-Gorenstein singularity, a skyscraper (violates the hypothesis). Duplicates: rg -L for 0B5A/biduality found no sheaf-level duplicate. Batch-5: all 7 flagged nodes are already in the closure of the item's unchanged base stmt_dep lem-sfb-reduced-curve-dualizing-module; the new citations add only lem-sc-associated-localization-fg, and the target closure is 25747 nodes before and after. Each flagged node is generic coherent duality or commutative algebra (0E2X, 0AA3, 0AWL, 0AWS, 0A7U, 0A7C, vector-space splitting), not a step of the trace formula or Poincare duality, so all are accepted. The generic tool_uses are accepted. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedCurveTorsionfreeBiduality",
+  "declaration": "AlgebraicGeometry.reducedCurve_torsionfree_biduality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedCurveTorsionfreeBiduality.lean",
+  "statement": "theorem reducedCurve_torsionfree_biduality (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsProper (C ↘ Spec (.of k))] [IsReduced C] [Nonempty C] (hPure : C.IsPureDimension 1) (D : ReducedCurveDualizingPair k C) (F : C.Modules) (hF : RingedSpace.IsCoherent C.toRingedSpace F) (hDetect : ∀ (U : C.Opens) (s : F.val.obj (op U)), (∀ (Z : Set C), Z ∈ irreducibleComponents C → ∀ η : C, IsGenericPoint η Z → ∀ hη : η ∈ U, TopCat.Presheaf.germ F.val.presheaf U η hη s = 0) → s = 0) : RingedSpace.IsCoherent C.toRingedSpace (SheafOfModules.homObj (R := C.sheaf) F D.omega) ∧ (∀ (U : C.Opens) (s : (SheafOfModules.homObj (R := C.sheaf) F D.omega).val.obj (op U)), (∀ (Z : Set C), Z ∈ irreducibleComponents C → ∀ η : C, IsGenericPoint η Z → ∀ hη : η ∈ U, TopCat.Presheaf.germ (SheafOfModules.homObj (R := C.sheaf) F D.omega).val.presheaf U η hη s = 0) → s = 0) ∧ ∃ δ : F ⟶ SheafOfModules.homObj (R := C.sheaf) (SheafOfModules.homObj (R := C.sheaf) F D.omega) D.omega, (∀ (U : C.Opens) (s : F.val.obj (op U)) (V : C.Opens) (i : V ⟶ U) (φ : (SheafOfModules.homObj (R := C.sheaf) F D.omega).val.obj (op V)), (((δ.val.app (op U)) s).app (op (Over.mk i))) φ = (φ.app (op (Over.mk (𝟙 V)))) (F.val.map i.op s)) ∧ IsIso δ ∧ ∀ δ' : F ⟶ SheafOfModules.homObj (R := C.sheaf) (SheafOfModules.homObj (R := C.sheaf) F D.omega) D.omega, (∀ (U : C.Opens) (s : F.val.obj (op U)) (V : C.Opens) (i : V ⟶ U) (φ : (SheafOfModules.homObj (R := C.sheaf) F D.omega).val.obj (op V)), (((δ'.val.app (op U)) s).app (op (Over.mk i))) φ = (φ.app (op (Over.mk (𝟙 V)))) (F.val.map i.op s)) → δ' = δ",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a9df57a3",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node record differs from live only by the added lean field; lean.statement matches the file verbatim. Hypotheses match the node: k field, C : Scheme.{u} over Spec k, IsProper, IsReduced, Nonempty, IsPureDimension 1, D an arbitrary ReducedCurveDualizingPair (unique by the landed dep theorem), RingedSpace.IsCoherent (Stacks 01BV, listed in the pqf-def-coherent record), generic-germ detection on all opens with the Ab-stalk germ (the carrier of moduleStalkFunctor). Conclusions match: homObj F ω coherent and detecting; δ given by δ(s)(φ)=φ(s|_V) on every V ⊆ U, IsIso, unique among all module maps with that formula. Edge cases covered: F=0, empty open, skyscraper excluded, non-Gorenstein or disconnected curves; universe u as in the dependency. No duplicate: only private ringedSiteSheafBidual/flipEval exist. All imports exist; docstrings cite 0B5A/0BS2/0BS3 and the blueprint and follow all 14 proof steps; no definitions, no proof beyond sorry. Not recompiled; relied on the worker's clean compile."
+ }
+}

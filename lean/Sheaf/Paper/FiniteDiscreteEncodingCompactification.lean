@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.FiniteDiscreteOrdinaryEncoding
+import all Sheaf.Paper.FiniteDiscreteEncodingPullbackFixed
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 
 /-! # Finite discrete coefficient comparison -/
 
@@ -21,6 +23,84 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+
+private def encodingPullbackIso {T U : Scheme.{u}} (f : U ⟶ T)
+    (eT : Encoding A T) (eU : Encoding A U) :
+    CondensedRing.upperStar (coefficient A) f ⋙ (eU.ordinary.trans eU.fixed).functor ≅
+      (eT.ordinary.trans eT.fixed).functor ⋙
+        upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f := by
+  let ET := eT.ordinary.trans eT.fixed
+  let EU := eU.ordinary.trans eU.fixed
+  let R := lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f
+  let i : CondensedRing.lowerStar (coefficient A) f ⋙ ET.functor ≅ EU.functor ⋙ R :=
+    encodingPushforwardNatIso A T U f eT eU
+  let k := Iso.isoCompInverse (H := ET) i ≪≫ Functor.associator _ _ _
+  let kr := Iso.inverseCompIso (G := EU) k
+  let a := ET.toAdjunction.comp
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} A)) f)
+  let b := (CondensedRing.upperStarLowerStarAdjunction (coefficient A) f).comp
+    EU.toAdjunction
+  exact (a.leftAdjointUniq (b.ofNatIsoRight kr)).symm
+
+private def encodingOpenShriekIso {T U : Scheme.{u}} (j : U ⟶ T)
+    [IsOpenImmersion j] (eT : Encoding A T) (eU : Encoding A U) :
+    CondensedRing.openImmersionLowerShriek (coefficient A) j ⋙
+        (eT.ordinary.trans eT.fixed).functor ≅
+      (eU.ordinary.trans eU.fixed).functor ⋙
+        openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} A)) j := by
+  let ET := eT.ordinary.trans eT.fixed
+  let EU := eU.ordinary.trans eU.fixed
+  let i := encodingPullbackIso A j eT eU
+  let k := Iso.isoCompInverse (H := EU) i ≪≫ Functor.associator _ _ _
+  let kr := Iso.inverseCompIso (G := ET) k
+  let a := (CondensedRing.openImmersionLowerShriekUpperStarAdjunction
+    (coefficient A) j).comp ET.toAdjunction
+  let b := EU.toAdjunction.comp
+    (openImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) j)
+  exact a.leftAdjointUniq (b.ofNatIsoRight kr.symm)
+
+private def encodingDerivedPushforwardIso {T U : Scheme.{u}} (f : U ⟶ T)
+    (eT : Encoding A T) (eU : Encoding A U) :
+    (CondensedRing.lowerStar (coefficient A) f).rightDerivedFunctor ⋙
+        eT.fixedDerived.functor ≅
+      eU.fixedDerived.functor ⋙
+        (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).rightDerivedFunctor := by
+  let ET := eT.ordinary.trans eT.fixed
+  let EU := eU.ordinary.trans eU.fixed
+  let F := CondensedRing.lowerStar (coefficient A) f
+  let G := lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f
+  letI : ET.functor.Additive := inferInstanceAs
+    (eT.ordinary.functor ⋙ eT.fixed.functor).Additive
+  letI : EU.functor.Additive := inferInstanceAs
+    (eU.ordinary.functor ⋙ eU.fixed.functor).Additive
+  change F.rightDerivedFunctor ⋙ ET.functor.mapDerivedCategory ≅
+    EU.functor.mapDerivedCategory ⋙ G.rightDerivedFunctor
+  exact (Functor.rightDerivedFunctorCompMapDerivedCategoryIso
+      F ET.functor).symm ≪≫
+    Functor.rightDerivedFunctorNatIso (encodingPushforwardNatIso A T U f eT eU) ≪≫
+    Functor.mapDerivedCategoryCompRightDerivedFunctorIso EU.functor G
+
+private def encodingDerivedOpenShriekIso {T U : Scheme.{u}} (j : U ⟶ T)
+    [IsOpenImmersion j] (eT : Encoding A T) (eU : Encoding A U) :
+    (CondensedRing.openImmersionLowerShriek (coefficient A) j).mapDerivedCategory ⋙
+        eT.fixedDerived.functor ≅
+      eU.fixedDerived.functor ⋙
+        (openImmersionLowerShriek
+          (ModuleCat.{u + 1} (ULift.{u + 1} A)) j).mapDerivedCategory := by
+  let ET := eT.ordinary.trans eT.fixed
+  let EU := eU.ordinary.trans eU.fixed
+  let F := CondensedRing.openImmersionLowerShriek (coefficient A) j
+  let G := openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} A)) j
+  letI : ET.functor.Additive := inferInstanceAs
+    (eT.ordinary.functor ⋙ eT.fixed.functor).Additive
+  letI : EU.functor.Additive := inferInstanceAs
+    (eU.ordinary.functor ⋙ eU.fixed.functor).Additive
+  change F.mapDerivedCategory ⋙ ET.functor.mapDerivedCategory ≅
+    EU.functor.mapDerivedCategory ⋙ G.mapDerivedCategory
+  exact (Functor.mapDerivedCategoryCompIso F ET.functor).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (encodingOpenShriekIso A j eT eU) ≪≫
+    Functor.mapDerivedCategoryCompIso EU.functor G
 
 /-- The two compactification composites agree under normalized coefficient encoding.
 Source: blueprint coefficient-identification proof, steps 11--12; Stacks Tags 015F and 03EK.
@@ -45,6 +125,11 @@ theorem encoding_compactification [Finite A] [DiscreteTopology A]
         (E Y).fixedDerived.functor ≅
       (E X).fixedDerived.functor ⋙
         rightDerivedLowerShriekOfCompactification
-          (ModuleCat.{u + 1} (ULift.{u + 1} A)) c) := by sorry
+          (ModuleCat.{u + 1} (ULift.{u + 1} A)) c) := by
+  exact ⟨Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (encodingDerivedPushforwardIso A c.g (E Y) (E c.Z)) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (encodingDerivedOpenShriekIso A c.i (E c.Z) (E X)) _ ≪≫
+    Functor.associator _ _ _⟩
 
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary

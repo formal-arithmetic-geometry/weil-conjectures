@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-constructible-external-composition",
+ "kind": "statement",
+ "title": "Composition on an external constructible torsion object",
+ "statement": "Let $A$ be a concrete Grothendieck abelian category [def-sp-grothendieck-abelian] with a closed symmetric monoidal, additive tensor structure and functorial flat resolutions. Here an object is finitely generated when a finite set of its underlying elements is contained in no proper subobject: every monomorphism into it whose underlying range contains that set is an isomorphism. Assume small-site sheafification for $A$. For a scheme $T$ [def-pc-scheme], write $D(T,A)=D(\\operatorname{Sh}(T_{\\mathrm{et}},A))$ for its ordinary unbounded derived category [def-weil-abstract-derived-category]. The tensor $\\otimes^L$ is the K-flat derived tensor [def-kun-derived-tensor], with $A$ as its coefficient category. Say that $C\\in D(T,A)$ is constructible finite-Tor if it has only finitely many nonzero cohomology sheaves, each is locally constant with finitely generated geometric stalks on a finite locally closed constructible partition, and $C\\otimes^L F[0]$ has cohomology in one fixed finite interval for every $A$-valued sheaf $F$. Say its cohomology stalks are torsion if, for each integer $i$ and geometric point $t$, there is an integer $r>0$ with $r\\operatorname{id}_{H^i(C)_t}=0$. For a compactifiable morphism $h$, choose a factorization $h=pj$ with $j$ open and $p$ proper, and set $Rh_!=Rp_*j_!$ using that chosen factorization [def-weil-compactifications-refinements]. Let $f:X\\to B$ and $g:Y\\to B$ be quasi-compact compactifiable morphisms, let $P=X\\times_B Y$ with projections $p,q$ and $h=gq=fp$, and assume $h$ compactifiable. For constructible finite-Tor $K\\in D(X,A)$ and $M\\in D(Y,A)$ whose cohomology stalks are torsion, put $K\\boxtimes M=Lp^*K\\otimes^L Lq^*M$. Then there exists an isomorphism $Rh_!(K\\boxtimes M)\\cong Rg_!Rq_!(K\\boxtimes M)$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "proof step (1), composition before either projection formula; general-coefficient specialization needed by the adopted source declaration"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Compute the two sides on compatible open/proper compactifications. Extension by zero composes exactly, and right-derived proper direct images compose because inverse image is exact and its right adjoint preserves injectives. The only exchange needed is extension by zero across a proper map.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-scheme",
+    "def-weil-abstract-derived-category",
+    "def-kun-derived-tensor",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For that exchange, restrict to the open and its closed complement. On the open it is the identity via open base change and the fully faithful extension. On the complement it is zero by proper base change applied to the torsion homology of the extended object. The explicit annihilators are preserved by additive inverse images and tensor in either variable. Use bounded flat representatives for the finite-Tor inputs, so that each degree of the relevant tensor calculation has only finitely many contributions.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-scheme",
+    "def-weil-abstract-derived-category",
+    "def-kun-derived-tensor",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare each compatible compactification with its chosen one through a common proper refinement. The same open/complement argument makes its unit comparison invertible on this torsion domain. Compose the proper direct-image, open-extension and refinement isomorphisms and evaluate at the external product.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-scheme",
+    "def-weil-abstract-derived-category",
+    "def-kun-derived-tensor",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII 5.1.6--5.1.8 and 5.2.6--5.2.9; additive coefficient extension is the remaining formalization, not a claimed direct use of the ring-only theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change torsion Grothendieck abelian coefficient category",
+   "results": "8 hits: abelian epimorphism stability, Grothendieck AB4, Guitart exact Kan base change and geometric properness stability; none is derived etale base change.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of derived compactly supported direct images of etale sheaves",
+   "results": "8 hits about underived continuous sheaf/module pushforward composition; none constructs the compact-support derived comparison.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula derived tensor compact support direct image constructible finite Tor",
+   "results": "8 hits about algebraic Tor and tensor direct sums; none is the etale projection formula.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|LowerShriek|Kunneth",
+   "results": "25 hits on compact support of topological functions; none is a sheaf-theoretic compact-support functor.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative",
+  "date": "2026-10-24",
+  "group": "R5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-kunneth-relative",
+   "place": "proof step (1), composition before either projection formula",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ConstructibleExternalComposition",
+  "file": "lean/Sheaf/SixFunctors/ConstructibleExternalComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_constructible_external_composition",
+  "statement": "theorem nonempty_iso_constructible_external_composition {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)] {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hK : DerivedCategory.constructibleFiniteTor A X K) (hM : DerivedCategory.constructibleFiniteTor A Y M) (hTK : ∀ (n : ℤ) (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X), ∃ N : ℕ, 0 < N ∧ N • (𝟙 ((Scheme.pointSmallEtale s).sheafFiber.obj ((_root_.DerivedCategory.homologyFunctor _ n).obj K))) = 0) (hTM : ∀ (n : ℤ) (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y), ∃ N : ℕ, 0 < N ∧ N • (𝟙 ((Scheme.pointSmallEtale s).sheafFiber.obj ((_root_.DerivedCategory.homologyFunctor _ n).obj M))) = 0) : Nonempty ((R(pullback.toBase f g)_![A]).obj (externalProduct A f g K M) ≅ (R(g)_![A]).obj ((R(pullback.snd f g)_![A]).obj (externalProduct A f g K M)))",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261024T015947-L-2486729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261024T015947-L-2486729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

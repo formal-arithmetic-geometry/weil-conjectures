@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Finite realization steps of lemma-naive-completion (099M)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Identify the quotient of ULift A by the lifted generator ideal power with ULift of A/I^(n+1), using Ideal.quotientEquiv and ha. Compare its constant ring sheaf with the finite-functions ring sheaf using finiteRingComparison and the proved constantComparison_isIso helper from completed constant sheaf reduction. Naturality on constant sections identifies all transition maps, giving quotientSystemIso. The argument also applies to zero rings and to the zero or unit ideal.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The forgetful functor from commutative ring sheaves to ring sheaves preserves the inverse limit. Transport quotientSystemIso through the preserved-limit comparison and lift along the fully faithful forgetful functor to obtain completionRingIso. Projection identities and equality on locally constant sections identify the actual completed scalar map with the constant-completion coefficient map.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the normalized scalar-extension morphism from the constant quotient module to its restricted regular ring sheaf. Define the map from the constant module by the constant ring unit, then apply constant-module sheafification and the scalar-tensor adjunction. It sends s tensor the constant class x to p(s) times the constant class x. Apply completed_constant_algebra_flat_quotients over ULift A to show it is invertible. Transport through quotientRingIso to the actual finite module. The normalized regular-unit isomorphism and tensor naturality show that its composite with the quotient map is reconstructionQuotientUnit.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-completed-koszul-regular-unit-normalization",
+    "def-weil-pbc-koszul-reconstruction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both extended single complexes are concentrated in degree zero. Assemble the degree-zero quotient-module isomorphism and the unique isomorphisms between zero objects in other degrees into a complex isomorphism. Choose c using the degree-zero unit-complex isomorphism followed by the normalized regular-unit isomorphism. Compute the degree-zero component, cancel the extension and single-complex isomorphisms, and use right-unitor naturality and the defining ordinary-unit projection formula to obtain the required normalized equality.",
+   "uses": [
+    "def-weil-pbc-koszul-reconstruction-models",
+    "lem-weil-pbc-completed-koszul-regular-unit-normalization",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-completed-koszul-regular-unit-normalization",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Finite realization in lemma-naive-completion (099M), using sites-modules.tex lemma-completion-flat (093M); E2 constructs the ring-system comparison, normalized quotient module map and degree-zero complex comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedAdic scalar extension finite quotient comparison",
+   "results": "No direct Mathlib theorem; uses project declarations.",
+   "verdict": "No direct match.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulFiniteQuotientRealization",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-koszul-finite-quotient-realization",
+   "place": "Finite realization steps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "new-s3-completed-koszul-finite-quotient-comparison",
+ "title": "Finite quotient comparison for completed Koszul coefficients",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulFiniteQuotientComparison",
+  "file": "lean/Sheaf/Paper/CompletedKoszulFiniteQuotientComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulFiniteQuotientComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulFiniteQuotientComparison"
+  ],
+  "statement": "theorem completedKoszulFiniteQuotientComparison (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) : let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d let U := 𝟙_ (CochainComplex (CompletedAdicModules T d) ℤ) ∃ (c : U.X 0 ≅ E.obj (ModuleCat.of (ULift.{t + 1} A) (ULift.{t + 1} A))) (eQ : ∀ n : ℕ, (E.mapHomologicalComplex (.up ℤ)).obj (((ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj (ModuleCat.of (ULift.{t + 1} A) ((ULift.{t + 1} A) ⧸ (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)))).extend ComplexShape.embeddingDownNat) ≅ (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj U).asFunctor.obj (op n)), ∀ n : ℕ, c.hom ≫ E.map (ModuleCat.ofHom ((Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)).mkQ) ≫ E.map ((((ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj (ModuleCat.of (ULift.{t + 1} A) ((ULift.{t + 1} A) ⧸ (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)))).extendXIso ComplexShape.embeddingDownNat (i := 0) rfl).inv) ≫ (eQ n).hom.f 0 = (completedQuotientTensorUnit T d U n).f 0",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "statement": "theorem completedKoszulFiniteQuotientComparison (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) : let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d let U := 𝟙_ (CochainComplex (CompletedAdicModules T d) ℤ) ∃ (c : U.X 0 ≅ E.obj (ModuleCat.of (ULift.{t + 1} A) (ULift.{t + 1} A))) (eQ : ∀ n : ℕ, (E.mapHomologicalComplex (.up ℤ)).obj (((ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj (ModuleCat.of (ULift.{t + 1} A) ((ULift.{t + 1} A) ⧸ (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)))).extend ComplexShape.embeddingDownNat) ≅ (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj U).asFunctor.obj (op n)), ∀ n : ℕ, c.hom ≫ E.map (ModuleCat.ofHom ((Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)).mkQ) ≫ E.map ((((ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj (ModuleCat.of (ULift.{t + 1} A) ((ULift.{t + 1} A) ⧸ (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)))).extendXIso ComplexShape.embeddingDownNat (i := 0) rfl).inv) ≫ (eQ n).hom.f 0 = (completedQuotientTensorUnit T d U n).f 0",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T050643-L-249600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T064443-L-2179931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

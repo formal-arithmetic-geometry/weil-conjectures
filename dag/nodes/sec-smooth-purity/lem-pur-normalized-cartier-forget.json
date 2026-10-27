@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-normalized-cartier-forget",
+ "kind": "statement",
+ "title": "Ordinary Chern class after forgetting a normalized Cartier support",
+ "statement": "Fix P, A and m=ell^n in [def-pur-conventions]. For a closed Cartier immersion i:D->T [def-pc-divisor-line-bundle] and a structure map a:T->Spec(k), let kappa be an Ext representative satisfying SupportedKummerBoundary [def-asd-ordinary-supported-kummer-boundary]. Let alpha be its supported Hom representative with HEq kappa.hom alpha [lem-pur-supported-cup-functoriality]. There is an ordinary module Ext representative c1 whose Hom equals functorialCupForget false i alpha, and whose ordinaryFiniteClass is the supportedKummerChern of the dual Cartier ideal with its canonical complementary section. The same ordinary representative is compatible with forgetting the pro-etale comparison class, by the supportedCupFunctoriality forget-support law. No family, local-equation calculation, sum formula or Cartier geometry is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Final ordinary-Chern paragraph, for the relative class c_D"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-divisor-line-bundle",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "The restriction closedConstantSectionMap is the adjunct of the canonical pullback isomorphism on constants, hence supportedConstantUnit. This follows from the lax-monoidal unit/composition formulas. Form c1 by Yoneda precomposition with Ext.mk0 of that unit. The single-functor Ext realization formula identifies its Hom with functorialCupForget of alpha.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exact derived single-unit comparison identifies this same ordinary Hom with supportedDerivedUnit followed by supportedExactDerivedMap of kappa. Apply the proved ordinary_supported_kummer_chern to hKappa. The result is global and also covers the empty divisor. Apply the forget_support law of supportedCupFunctoriality to the ordinary etale Hom representative; this is precisely the last site-comparison equality.",
+   "uses": [
+    "lem-asd-derived-single-unit-exact",
+    "lem-asd-ordinary-supported-chern-normalization",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-supported-cup-functoriality",
+  "lem-asd-derived-single-unit-exact",
+  "lem-asd-ordinary-supported-chern-normalization"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Final ordinary-Chern paragraph, for the relative class c_D",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer class of an effective Cartier divisor is additive and equals minus localization boundary on a principal chart",
+   "results": "{\"t\": \"2026-10-25T10:21:56Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer class of an effective Cartier divisor is additive and equals minus localization boundary on a principal chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.toClass\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"AlgebraicGeometry.StructureSheaf.const_add\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\"], \"digest\": \"73a5517718333c87\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedKummerBoundary|divisor_class|cartierPairTensor",
+   "results": "{\"t\": \"2026-10-25T10:22:48Z\", \"tool\": \"grep\", \"query\": \"SupportedKummerBoundary|divisor_class|cartierPairTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"Kummer\"",
+   "results": "{\"t\": \"2026-10-25T10:22:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer class of a Cartier divisor is additive in the product of two Cartier ideals and has the negative local localization boundary",
+   "results": "{\"t\": \"2026-10-25T10:39:11Z\", \"tool\": \"leansearch\", \"query\": \"Kummer class of a Cartier divisor is additive in the product of two Cartier ideals and has the negative local localization boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.count_prod\", \"FractionalIdeal.count_mul'\", \"MeromorphicOn.divisor_fun_smul\", \"FractionalIdeal.count_mul\", \"MeromorphicOn.divisor_mul\", \"MeromorphicOn.divisor_fun_mul\", \"ArchimedeanClass.mk_mul\", \"AddLocalization\"], \"digest\": \"dd6cd8e90a2ba230\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityDivisorClass",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "Final ordinary-Chern paragraph, for the relative class c_D"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCartierForget",
+  "file": "lean/Sheaf/Paper/NormalizedCartierForget.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.normalizedCartier_forget",
+  "statement": "theorem normalizedCartier_forget (P : PurityFiniteSetting.{u})\n    {D T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k))\n    (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (κ : Abelian.Ext\n      ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constantEtale D))\n      (P.frameTwistEtale T 1) 2)\n    (α : P.FunctorialCupH false i 2 1) (hα : HEq κ.hom α)\n    (hκ : Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates i hI (P.diagonalExponent_isUnit a) κ) :\n    divisorChernSpecification\n      (P.divisorOrdinaryHom T)\n      (P.divisorOrdinaryRealization T)\n      (Etale.supportedKummerChern P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates i hI (P.diagonalExponent_isUnit a))\n      (P.functorialCupForget true i 2 1 (P.functorialCupCompare i 2 1 α))\n      (P.functorialCupOrdinaryCompare T 2 1)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.divisorChernSpecification",
+   "WeilConjectures.PurityFiniteSetting.divisorOrdinaryHom",
+   "WeilConjectures.PurityFiniteSetting.divisorOrdinaryRealization",
+   "WeilConjectures.PurityFiniteSetting.normalizedCartier_forget"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T180532-L-4000619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T180532-L-4000619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

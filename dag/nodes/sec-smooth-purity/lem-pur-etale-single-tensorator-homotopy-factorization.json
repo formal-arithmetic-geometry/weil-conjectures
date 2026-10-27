@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-etale-single-tensorator-homotopy-factorization",
+ "kind": "statement",
+ "title": "Flat single tensorator through homotopy single complexes",
+ "statement": "Let B be a symmetric closed monoidal Grothendieck abelian coefficient category with additive tensor and functorial flat resolutions, X a scheme, and L,M B-valued etale sheaves on X with L flat. Write s for degree-zero cochain inclusion, q for the homotopy quotient, e(A)=singleFunctorObjIsoQh(A), and t(L,M)=singleCochainTensorIso(L,M). Then singleFunctorObjTensorIso(L,M).hom = (e(L).hom tensor e(M).hom);μQh(q(sL),q(sM));Qh(q(t(L,M).hom));e(L tensor M).inv. The notions are [def-kun-derived-tensor], [def-pc-flat-sheaf-modules], and [lem-pur-etale-single-cochain-monoidal].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ and 06YU; explicit expansion of the composite-functor tensorator in lem-pur-etale-single-tensorator-factorization."
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-etale-single-cochain-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Apply singleFunctorObjTensorIso_factorization. Expand the lax tensorator of the composite q followed by Qh. The tensorator of q is an identity, so Qh maps it to an identity; cancel it. The two remaining maps are exactly the Qh tensorator and Qh of q of the cochain tensorator. Keep the initial tensor of the prescribed e maps and its final inverse unchanged.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-etale-single-cochain-monoidal",
+    "lem-pur-etale-single-tensorator-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-etale-single-cochain-monoidal",
+  "lem-pur-etale-single-tensorator-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ and 06YU; explicit expansion of the composite-functor tensorator in lem-pur-etale-single-tensorator-factorization. Written explicitly in Lean by N1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The single functor comparison for an exact monoidal functor commutes with derived tensor products",
+   "results": "Eight hits including Tor_map and localization monoidal structure constructors; none gives this specified component identity. Existing source comparisons are used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleMapHomologicalComplex\"",
+   "results": "Eleven hits including singleMapHomologicalComplex and its degree-zero component equations, which the proof uses; none gives this homotopy/derived tensor comparison identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Tt]ensor.*[Pp]ullback",
+   "results": "No search-service hit. Local source search found the existing counit tensor square, explicit flat single factorization, and exact-functor single comparisons; these are used rather than reproved.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSingleTensoratorPullback",
+  "date": "2026-10-27",
+  "group": "N1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Unit multiples, permutations and elementary shears: canonical derived tensor coherence needed for the degree-zero supported pairing and its pullback; Tensor equation for the canonical single/pullback comparison. Support identity: Flat single tensorator through homotopy single complexes; proved support lemma for the assigned two-step comparison argument.",
+   "via": [
+    "lem-pur-etale-single-tensorator-pullback",
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingleTensoratorHomotopyFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingleTensoratorHomotopyFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.singleFunctorObjTensorIso_homotopy_factorization",
+  "statement": "theorem singleFunctorObjTensorIso_homotopy_factorization\n    (L M : Sheaf X.smallEtaleTopology B) (hL : ObjectProperty.flat L) :\n    let q := HomotopyCategory.quotient (Sheaf X.smallEtaleTopology B) (.up ℤ)\n    let s := HomologicalComplex.single (Sheaf X.smallEtaleTopology B) (.up ℤ) 0\n    (singleFunctorObjTensorIso L M hL).hom =\n      ((singleFunctorObjIsoQh L).hom ⊗ₘ (singleFunctorObjIsoQh M).hom) ≫\n        Functor.LaxMonoidal.μ DerivedCategory.Qh (q.obj (s.obj L)) (q.obj (s.obj M)) ≫\n        DerivedCategory.Qh.map (q.map (singleCochainTensorIso L M).hom) ≫\n        (singleFunctorObjIsoQh (L ⊗ M)).inv ",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T235923-L-1469189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T235923-L-1469189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

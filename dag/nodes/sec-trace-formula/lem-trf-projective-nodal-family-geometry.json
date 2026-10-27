@@ -23,57 +23,42 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-nodal-family-fitting-singular] to f. Flatness and local finite presentation are hypotheses, and every geometric fibre is a nonempty equidimensional one-dimensional fibre with at-worst-nodal singularities by the completed-local-ring assumption. The node gives the open relative smooth locus U, identifies its complement with the support of the first-Fitting singular subscheme, and proves that this singular subscheme is unramified over Y. Define S_f to be that canonical singular subscheme using [def-trf-first-fitting-singular-subscheme].",
+   "text": "For each geometric fibre, projectivity gives compactness and local finite type over a field gives local Noetherianity. A connected Noetherian space C of dimension one is pure of dimension one: each component has dimension at most one; if its dimension is less than one it is at most zero, so its irreducible T0 underlying space is a singleton. Noetherianity gives a nonempty open subset of that component, so the singleton component is clopen. Connectedness makes it all of C, contradicting dimension one. This is proved by the private helper pure_dimension_one_of_connected. Apply [lem-trf-nodal-family-fitting-singular] using this purity and the given ordinary-double-point completion condition; take the canonical subscheme of [def-trf-first-fitting-singular-subscheme].",
    "uses": [
+    "def-kun-projective",
     "lem-trf-nodal-family-fitting-singular",
     "def-trf-first-fitting-singular-subscheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tags 0C59 and 0C5A; Divisors Tag 0C3K"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a point $y\\in Y$ and let $Z=S_f\\times_Y\\operatorname{Spec}\\kappa(y)$ be the scheme-theoretic fibre of $S_f\\to Y$; by [def-pc-scheme-fibre] its underlying space is homeomorphic to the underlying fibre of $S_f$ over $y$, so it suffices to show $Z$ has finitely many points. By step 1, $S_f\\to Y$ is unramified, so $Z\\to\\operatorname{Spec}\\kappa(y)$ is unramified by clause (1) of [lem-weil-pbc-unramified-base-change-open]. Since $Z=S_f\\times_X X_y$ (associativity of fibre products) and $S_f\\to X$ is a closed immersion, $Z\\to X_y$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. The fibre $X_y\\to\\operatorname{Spec}\\kappa(y)$ is projective by [lem-pc-projective-base-change], i.e. a closed subscheme of $\\mathbf P^N_{\\kappa(y)}$ [def-kun-projective], hence of finite type over $\\kappa(y)$ ($\\mathbf P^N_{\\kappa(y)}$ is covered by $N+1$ affine charts that are polynomial rings in $N$ variables, and a closed immersion is of finite type). By [lem-weil-pbc-unramified-over-field-discrete] the underlying space of $Z$ is discrete, so of dimension at most zero, and [lem-pc-zero-dimensional-closed-subscheme-finite] shows $Z$ is affine, finite over $\\kappa(y)$. An affine scheme is quasi-compact, and a discrete quasi-compact space is finite. Hence every underlying fibre of $S_f\\to Y$ is finite.",
+   "text": "The closed singular inclusion composed with the projective morphism is quasi-compact. Its scheme-theoretic fibre at y, as defined in [def-pc-scheme-fibre], is therefore compact. Base-change unramifiedness by [lem-weil-pbc-unramified-base-change-open], then apply [lem-weil-pbc-unramified-over-field-discrete] to the fibre projection to obtain a discrete topology. Mathlib finite_of_compact_of_discrete gives finiteness. Transport it along Scheme.Hom.fiberHomeo to obtain Set.Finite of the underlying fibre. No zero-dimensional finiteness theorem or projectivity of the fibre is required.",
    "uses": [
-    "lem-weil-pbc-unramified-base-change-open",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-pc-projective-base-change",
     "def-kun-projective",
-    "lem-weil-pbc-unramified-over-field-discrete",
-    "lem-pc-zero-dimensional-closed-subscheme-finite",
-    "def-pc-scheme-fibre"
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-unramified-over-field-discrete"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02G7 (lemma-unramified-over-field); Tag 02GA (base change unramified); Tag 01JY (closed immersion base change)"
-   }
+   "elementary": false
   },
   {
-   "text": "For an arbitrary morphism Y_1\\to Y with Y_1 Noetherian, form f_1:X\\times_Y Y_1\\to Y_1. Projectivity is preserved by [lem-pc-projective-base-change], flatness by [lem-weil-pbc-flat-morphism-base-change], and local finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. For a geometric point of Y_1, associativity of the fibre products identifies the geometric fibre of f_1 with the geometric fibre of f over its image. Thus nonemptiness, connectedness, pure dimension one, and the completed nodal local-ring condition are inherited directly from the hypotheses on f.",
+   "text": "Apply [lem-pc-projective-base-change], [lem-weil-pbc-flat-morphism-base-change], and the local-finite-presentation clause of [lem-weil-pbc-qcqs-morphism-permanence]. The geometric fibre of the base change is identified with the original geometric fibre by pullbackLeftPullbackSndIso. Transport connectedness and dimension through its homeomorphism. Preimage of the smooth locus under this isomorphism is the smooth locus of the composite. Its stalk map is a ring isomorphism identifying maximal ideals, so [lem-weil-pbc-adic-completion-ring-equiv] transports the ordinary-double-point completion condition. These transports are the proved private helpers nodal_point_of_iso and nodal_geometric_fibres_base_change.",
    "uses": [
     "lem-pc-projective-base-change",
     "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-adic-completion-ring-equiv"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01WF, 01U9 and 01TS; curves Tag 0C5B"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-nodal-family-fitting-singular] to f_1. Its formation clause gives the scheme-theoretic equality Sing(f_1)=S_f\\times_Y Y_1, while its support clause identifies the support with the nonsmooth locus of f_1. Therefore the smooth locus is U\\times_Y Y_1, and S_f\\times_Y Y_1 is closed and unramified over Y_1. This uses the Fitting-subsheme base-change equality itself and makes no claim about commuting reduced closed subschemes.",
+   "text": "Use the Over-isomorphism in [lem-trf-nodal-family-fitting-singular] to write nodalSingularBaseChangeMap as an isomorphism followed by the new first-Fitting singular inclusion. Composition gives a closed immersion and surjectivity of the isomorphism identifies its range with the new nonsmooth locus. Mathlib Scheme.Pullback.range_map identifies that same range with the preimage of the old singular range, since the two other comparison maps are identities. Taking complements gives equality of the smooth open loci. Apply [lem-weil-pbc-unramified-base-change-open] to the singular projection for its unramifiedness after base change.",
    "uses": [
-    "lem-trf-nodal-family-fitting-singular"
+    "lem-trf-nodal-family-fitting-singular",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-weil-pbc-unramified-base-change-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tags 0C59 and 0C5B; Divisors Tag 0C3I and 0C3K"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -81,18 +66,19 @@
   "def-pc-scheme-fibre",
   "def-trf-first-fitting-singular-subscheme",
   "lem-pc-projective-base-change",
-  "lem-pc-zero-dimensional-closed-subscheme-finite",
   "lem-trf-nodal-family-fitting-singular",
-  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-adic-completion-ring-equiv",
   "lem-weil-pbc-flat-morphism-base-change",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-unramified-base-change-open",
   "lem-weil-pbc-unramified-over-field-discrete"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "A5",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tags 0C59 and 0C5B, with Divisors Tags 0C3I--0C3K for Fitting formation and the smooth-locus identification"
+  "place": "Tags 0C59 and 0C5B; compact discrete fibres shorten the previous zero-dimensional finiteness argument, and private proved helpers supply purity and isomorphism transport."
  },
  "mathlib_searches": [
   {
@@ -213,5 +199,26 @@
    "AlgebraicGeometry.projective_nodal_family_geometry"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261023T120522-L-624333",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

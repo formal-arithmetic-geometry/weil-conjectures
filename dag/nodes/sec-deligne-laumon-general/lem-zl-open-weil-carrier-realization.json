@@ -1,0 +1,124 @@
+{
+ "id": "lem-zl-open-weil-carrier-realization",
+ "kind": "statement",
+ "title": "Carrier realization of the adjoint open Weil extension",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, an algebraic closure Qbar of Q_l in an independent universe, and an open immersion j0:U0 -> X0 of separated finite-type schemes. For every functor J left adjoint to the canonical Weil restriction along j0, every integral finite-stage presentation of an input carrier identifies the output carrier with its specified Qbar compact-support value.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-open-weil-coefficient-fibres",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-complete-integral-detailed",
+  "def-zl-weil-compact-support-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "for the compactification (j,id), identify completed integral compact support\nwith ordinary extension by zero using the normalized Roos comparison. Exactness\nand constructibility make it preserve both standard classes. Rationalize and\napply the scalar-compatible common-stage descent of openExtension_tExact. Lift\nthe resulting heart functor through its invertible Frobenius exchange, whose mate\nis fixed by openWeilUnitAndEmptyFibre. Its restriction is exactly zlWeilPull by\nthe normalized Frobenius square. Uniqueness of left adjoints identifies it with J.\nThe integral/rational comparison and the coefficient-action object formula give\nthe displayed iso on the included localization of K. Apply the functor to the\nspecified carrier presentation of F and compose with that comparison. The\ncomparison depends only on the carrier; no Weil structure on K is required.\nFor the empty open every value is zero; for the identity open the comparisons\nare the identity normalizations. No stable integral Weil lattice is assumed.",
+   "uses": [
+    "lem-zl-open-extension-texact-coefficient-stages",
+    "lem-zl-open-weil-unit-and-empty-fibre",
+    "def-weil-compact-support-coefficient-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-open-extension-texact-coefficient-stages",
+  "lem-zl-open-weil-unit-and-empty-fibre",
+  "def-weil-compact-support-coefficient-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient inclusion of constructible Weil sheaves and natural Frobenius square",
+   "results": "8 hits: CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, SheafOfModules.IsFiniteType.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.Presentation.IsFinite, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra.mapOfNatIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*extension|extension.*Weil|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint of open restriction has carrier equal to compact support integral rationalization",
+   "results": "8 hits: CondensedSet.compactlyGeneratedAdjunction, TopologicalSpace.Opens.adjunction_counit_map_functor, IsOpenMap.adjunction, CondensedSet.LocallyConstant.adjunction, LightCondSet.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction, CondensedSet.topCatAdjunctionCounit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem for the recorded constructible Weil coefficient categories; hits are generic topology, scalar algebra or unrelated Frobenius constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtensionByZeroPunctual",
+  "date": "2026-10-25",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-quasi-finite",
+   "place": "proof (1) and (2), open extension by zero",
+   "via": [
+    "lem-zl-extension-by-zero-punctual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenWeilCarrierRealization",
+  "file": "lean/Sheaf/Paper/OpenWeilCarrierRealization.lean",
+  "declaration": "WeilConjectures.openWeilCarrierRealization",
+  "statement": "theorem openWeilCarrierRealization : (∀ (F : sfCommonStageWeilSheaf D l hl U₀ Qbar) (L : Padic.FiniteCoefficientFields l Qbar) (K : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) (D.geometricFiber U₀).left), Nonempty (F.obj.carrier ≅ (GeneralAlgebraicallyClosedCoefficients.inclusion L).obj ((sfRationalConstructibleLocalization l _ (D.geometricFiber U₀).left).obj K)) → Nonempty ((J.obj F).obj.carrier ≅ sfQbarCompactSupportValue l (X := (D.geometricFiber U₀).left) (Y := (D.geometricFiber X₀).left) (f := zlFiberMap D j₀) D.k (zlClosurePrimeUnit D l hl) Qbar (Compactification.ofIsOpenImmersion (zlFiberMap D j₀)) L K))",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "independent cc review: item extensionByZero_punctual and its 4 new sorried lemmas against the base item conjuncts, SfPunctualEigenvalue and the owning nodes of the declarations used; moved declarations diffed against the clone; importer ReducedFrontierMixedGluing compiled with the 6 delivered modules"
+ }
+}

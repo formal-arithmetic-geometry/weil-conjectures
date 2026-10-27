@@ -1,0 +1,274 @@
+{
+ "id": "lem-sf-native-weil-immersion-heart-localization",
+ "kind": "statement",
+ "title": "Exact open-closed sequence and constructibility in the native Weil sheaf heart",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $X$ be a quasi-compact quasi-separated $k_0$-scheme locally of finite type [def-weil-quasi-separated-morphism, def-weil-finite-type-morphism]. Let $j:U\\to X$ be a quasi-compact open immersion [def-weil-open-immersion] and $i:Z\\to X$ a closed immersion [def-weil-closed-immersion], over $k_0$, with complementary images. Write $\\bar W=W\\times_{k_0}k$ and use exactly the coefficient sheaves $B_W$, module categories $\\mathcal A_W$, fixed-pair categories $\\mathcal W_W$, Frobenius actions and constructibility condition of [def-sf-native-weil-derived-framework], for $W=X,U,Z$.\n\nThe canonical coefficient maps $\\bar j^{-1}B_X\\to B_U$ and $\\bar i^{-1}B_X\\to B_Z$ are isomorphisms of ring sheaves compatible with the geometric Frobenius comparisons. The categories $\\mathcal W_W$ are abelian, and their forgetful functors to $\\mathcal A_W$ are exact and reflect exact sequences. On these native sheaf categories let $P=j^*$ and $Q=i^*$ be the actual inverse images, $J=j_!$ the actual open extension by zero, and $I=i_*$ the ordinary direct image, with the Frobenius structures specified in [def-sf-native-weil-derived-framework]. All four functors are additive and preserve finite limits and finite colimits. They preserve the property that the underlying $B_W$-module is constructible. There are adjunctions $J\\dashv P$ and $Q\\dashv I$ whose units and counits have the usual sheaf-adjunction maps as their carriers. For every $M\\in\\mathcal W_X$, those actual counit and unit maps give a natural short exact sequence in $\\mathcal W_X$,\n$$0\\longrightarrow JP(M)\\xrightarrow{\\varepsilon_M}M\\xrightarrow{\\eta_M}IQ(M)\\longrightarrow0.$$\nThe assertions include empty $U$ or $Z$ and nonreduced closed complements.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, and Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact, adapted to native ring modules and Frobenius fixed pairs. Native coefficient comparison: lean/WeilConjectures/SixFunctors/ProEtale/Adic/UpperStar.lean, upperStarAdicConstantSheafIso; immersion exactness: Adic/ClosedImmersion.lean, preservesFiniteColimits_adicLowerStar_of_isCompl; Weil lift: WeilSheaf/Category.lean and WeilSheaf/OpenImmersion.lean. This native comparison and constructibility assertion is agent-extracted, not claimed to be stated verbatim by Stacks."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The canonical coefficient morphisms are isomorphisms and monoid morphisms by the existing native pullback API. For any square a b = c d, cancel the composition isomorphism for a,b, use upperStarAdicConstantSheafHom_comp on both sides and transport the canonical map along the equality of composites. Specialize first to two explicit structure morphisms over the finite field in the private proved helper coefficient_frobenius_square, then apply it to j and i. Keep the geometric-fiber and Frobenius constructors locally irreducible while checking this specialization, to avoid unfolding the base-change construction. This is the private proved helper coefficient_square; no immersion or finiteness assumption is required for this calculation. Proof-only imports expose alternate ring and Grothendieck-abelian instances; their priorities are locally lowered so this helper and the unchanged public statement use identical coefficient instances, avoiding expensive definitional conversions.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the native abelian structures and the finite-limit and finite-colimit preservation of IsoAlgebra.forget at X,U,Z. Mathlib ShortComplex.exact_map_iff_of_faithful and ShortExact.shortExact_map_iff identify exactness and short exactness with their carrier versions, giving all three reflection assertions.",
+   "uses": [
+    "lem-sf-native-weil-constructible-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The native upperStar and extensionByZero functors already have additive and finite-limit/colimit instances. For the closed lowerStar, use the native specialization ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl of ringed localization, with Scheme.Hom.isCompl_range_geometricFiberMap transporting the complement; finite limits and additivity are already instances. Constructibility of the pullbacks is IsAdicConstructibleSheaf.upperStar, that of open extension is WeilSheaf.isAdicConstructibleSheaf_extensionByZero, and that of closed direct image is IsAdicConstructibleSheaf.adicLowerStar_of_isClosedImmersion in Adic.ClosedLowerStar. Its locally Noetherian geometric target is the existing isLocallyNoetherian_geometricFiber instance. Local finite type of U and Z follows by composing each immersion with the structure morphism. Thus the exactness and constructibility assertion is assembled without a new stratification theorem.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-weil-constructible-abelian",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-sf-native-weil-open-exact-constructible",
+    "lem-sf-native-adic-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the closed adjunction use the existing ProEtaleWeilSheaf.upperStarLowerStarAdjunction. Construct the open adjunction with IsoAlgebra.mapOfNatIsoLeftAdjunction: its hypotheses are the existing mate equality for upperStar/lowerStar, compatibility of adicOpenImmersionLowerShriekToLowerStar with Frobenius, and its transpose formula. This is the same concrete lifting construction used by the proved nativeBasicComparisons module, not an application of its theorem. All four carrier formulas are definitional equalities. In particular no normalization of a new Frobenius comparison is needed.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write P=j*, Q=i*, J=j!, I=i_*. The native specialization of localization gives P I=0, Q J=0, the invertible open unit and closed counit, and joint detection of zero by P,Q. The first and last are ProEtaleWeilSheaf.isZero_upperStar_obj_lowerStar_obj and isZero_of_isZero_upperStar_of_isCompl; Q J=0 is obtained by faithful forgetting from isZero_adicUpperStar_adicOpenImmersionLowerShriek on the geometric fibers. Invertibility of the open unit is reflected by IsoAlgebra.forget. The composite of the actual counit epsilon and unit eta is zero by naturality of the open counit: P(eta_M) has zero target P I Q M, so J P(eta_M)=0, and the naturality square identifies epsilon_M followed by eta_M with zero.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-sf-native-weil-constructible-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private proved categorical helper shortExact_of_localization carries out this argument. For S=(J P M -> M -> I Q M), apply Q: its first term is zero and its second arrow is invertible by the closed counit and the triangle identity. Apply P: its first arrow is invertible by the open unit and the triangle identity and its last term is zero. Both image complexes are short exact by Mathlib ShortComplex.exact_iff_mono and exact_iff_epi. The private proved helper shortExact_of_jointly_detected now detects short exactness: exact P,Q preserve the kernel of S.f, cokernel of S.g and homology of S; these are zero after either functor and hence zero by joint detection. This proves monicity, epicity and exactness of S. The maps are natural because they are actual adjunction maps. All arguments allow empty pieces and nonreduced closed immersions.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-weil-constructible-abelian",
+    "det-sf-open-closed-sequence-ring-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-weil-constructible-abelian",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-sf-native-weil-open-exact-constructible",
+  "lem-sf-native-adic-constructible-pullback",
+  "lem-sf-fixed-pair-adjunction-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/WeilSheaf/NativeImmersionHeartLocalization.lean",
+  "place": "G3 complete Lean proof: coefficient cocycle, existing native exact constructible operations, concrete IsoAlgebra left-adjunction lift, and exact joint open/closed detection. Follows the native sheaf-heart route of the original node and the open-closed input to sk-thm-sf-package."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "short exact open closed sequence of pro-etale Frobenius equivariant adic module sheaves with constructible cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module adjunctions, general exactness, or topological support; none supplies the native locally-finite continuous coefficient identifications and Frobenius-equivariant immersion theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "recollement exact functors on modules over a sheaf of rings commuting with a scheme automorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module adjunctions, general exactness, or topological support; none supplies the native locally-finite continuous coefficient identifications and Frobenius-equivariant immersion theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|ProEtaleWeilSheaf|adicOpenImmersionLowerShriek",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Basic.lean\", \"line\": \"243\", \"text\": \"def algEquivIsoAlgebraIso {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module adjunctions, general exactness, or topological support; none supplies the native locally-finite continuous coefficient identifications and Frobenius-equivariant immersion theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"algEquivIsoAlgebraIso\", \"module\": \"Mathlib.Algebra.Category.AlgCat.Basic\", \"type\": \" {R : Type u} [CommRing R] {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] : (X ≃ₐ[R] Y) ≅ ↧X ≅ ↧Y\", \"doc\": \"Algebra equivalences between `Algebra`s are the same as (isomorphic to) isomorphisms in\\n`AlgCat`.\"}\n  {\"name\": \"algEquivIsoAlgebraIso_hom\", \"module\": \"Mathlib.Algebra.Category.AlgCat.Basic\", \"type\": \" {R : Type u} [CommRing R] {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] : algEquivIsoAlgebraIso.hom = TypeCat.ofHom fun e => e.toAlgebraIso\", \"doc\": \"\"}\n  {\"name\": \"algEquivIsoAlgebraIso_inv\", \"module\": \"Mathlib.Algebra.Category.AlgCat.Basic\", \"type\": \" {R : Type u} [CommRing R] {X Y : Type v} [Ring X] [Ring Y] [Algebra R X] [Algebra R Y] : algEquivIsoAlgebraIso.inv = TypeCat.ofHom fun i => i.toAlgEquiv\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module adjunctions, general exactness, or topological support; none supplies the native locally-finite continuous coefficient identifications and Frobenius-equivariant immersion theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "abelian category of equivariant sheaves open extension by zero closed direct image exact sequence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.sheafIsAbelian\", \"module\": \"Mathlib.CategoryTheory.Sites.Abelian\", \"type\": \": Abelian (Sheaf J D)\", \"doc\": \"For any category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and an abelian category $\\\\mathcal{D}$, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ inherits an abelia\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Extensions\", \"type\": \"[P.IsClosedUnderExtensions] (F : D ⥤ C) [HasZeroMorphisms D] [F.PreservesZeroMorphisms] [PreservesFiniteLimits F]\\n  [PreservesFiniteColimits F] : (P.inverseImage F).IsClosedUnderExtensions\", \"doc\": \"If a property $ P $ on objects of a category $ \\\\mathcal{D} $ is closed under extensions, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves zero morphisms, finite limits, and finite colimits,\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences\", \"type\": \": (contravariantSequence hS Y n₀ n₁ h).Exact\", \"doc\": \"Given a short exact sequence in an abelian category, the contravariant sequence of additive homomorphisms between Ext groups constructed via precomposition with the sequence's differential maps forms \"}\n  {\"name\": \"CategoryTheory.Abelian.tfae_epi\", \"module\": \"Mathlib.CategoryTheory.Abelian.Exact\", \"type\": \"{X Y : C} (f : X ⟶ Y) (Z : C) : TFAE [Epi f, cokernel.π f = 0, (ShortComplex.mk f (0 : Y ⟶ Z) comp_zero).Exact]\", \"doc\": \"For a morphism $f: X \\to Y$ in an abelian category $\\\\mathcal{C}$ and any object $Z$, the following are equivalent: (1) $f$ is an epimorphism; (2) the canonical projection morphism $\\\\pi: Y \\to \\\\text{Coke\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.covariantSequence_exact\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences\", \"type\": \": (covariantSequence X hS n₀ n₁ h).Exact\", \"doc\": \"The covariant long exact sequence in Ext groups, constructed from postcompositions with extension classes and zero morphisms in the derived category of an abelian category, satisfies the exactness con\"}\n  {\"name\": \"CategoryTheory.abelianOfEquivalence\", \"module\": \"Mathlib.CategoryTheory.Abelian.Transfer\", \"type\": \"{C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasFiniteProducts C] {D : Type u₂} [Category.{v₂} D] [Abelian D]\\n  (F : C ⥤ D) [F.IsEquivalence] : Abelian C\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$ with finite products and an abelian category $\\\\mathcal{D}$, if there exists an equivalence $F : \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, then $\\\\mathcal{C}$ inherits \"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.exact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {S : CategoryTheory.ShortComplex C}, S.ShortExact → S.Exact\", \"doc\": \"In a category with zero morphisms, every short exact sequence is an exact complex, meaning the image of each differential equals the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsIsZero\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Extensions\", \"type\": \": IsClosedUnderExtensions (IsZero (C := C))\", \"doc\": \"In a category equipped with zero morphisms, the property of being a zero object is closed under extensions. That is, if an object property is closed under extensions and includes zero objects, then an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary module adjunctions, general exactness, or topological support; none supplies the native locally-finite continuous coefficient identifications and Frobenius-equivariant immersion theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact localization sequence for Frobenius equivariant locally finite continuous Qlbar module sheaves on the pro etale site",
+   "results": "Hits: Profinite.NobelingProof.succ_exact, IsLocalizedModule.map_exact, LocalizedModule.map_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, exact_of_isLocalized_span, exact_of_isLocalized_maximal, exact_of_localized_span, exact_of_localized_maximal",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness, ordinary scheme modules or ordinary algebra isomorphisms do not state the native pro-etale locally finite continuous coefficient and fixed-pair theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|adicConstantSheaf|IsoAlgebra",
+   "results": "Hits: Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness, ordinary scheme modules or ordinary algebra isomorphisms do not state the native pro-etale locally finite continuous coefficient and fixed-pair theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed short exact sequence for sheaves of modules with invertible Frobenius action",
+   "results": "Hits: CategoryTheory.ShortComplex.ShortExact.mk', CategoryTheory.ShortComplex.ShortExact, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ShortComplex.moduleCat_exact_iff_ker_sub_range, IsSMulRegular.smulShortComplex_shortExact, CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact, CategoryTheory.ShortComplex.moduleCat_exact_iff, CategoryTheory.ShortComplex.ShortExact.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness, ordinary scheme modules or ordinary algebra isomorphisms do not state the native pro-etale locally finite continuous coefficient and fixed-pair theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtaleWeilSheaf\"",
+   "results": "Hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness, ordinary scheme modules or ordinary algebra isomorphisms do not state the native pro-etale locally finite continuous coefficient and fixed-pair theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "recollement on an abelian category of equivariant sheaves of modules extension by zero closed immersion",
+   "results": "Hits: instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, instAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness, ordinary scheme modules or ordinary algebra isomorphisms do not state the native pro-etale locally finite continuous coefficient and fixed-pair theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-open-closed-triangle",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-zl-morphism-open-closed-reduction, open-closed reduction; prop-functor-package clause 3, applying compact support to localization. The seeded item's created.item is null, so blueprint_refs.py ancestor reports None; this node serves that item's proof through its recorded blueprint.from breadcrumb. exists_distTriang_openClosed, lines 165-184 (proof sorry); the native derived realization of the open-closed input to prop-functor-package clause 3. The heart-level exact sequence underlying the open-closed input, including native coefficient and Frobenius compatibility, before passage to complexes.",
+   "via": [
+    "lem-sf-native-weil-open-closed-triangle",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-native-weil-immersion-heart-localization",
+  "worker": "stage1",
+  "summary": "Split into ten steps using existing nodes only. Verified the actual locally finite continuous coefficients, arbitrary-ideal closed complement, exact native fixed-pair forgetting, ordinary ring-module localization, reindexing-normalized adjunction lift and native constructibility. No separatedness of the schemes or finite/discrete coefficient identification is introduced. No whole-item closed Lean declaration was found.",
+  "blueprint": "Latest prop-functor-package.proof.md clause (3) and lem-zl-morphism-open-closed-reduction.proof.md Part 1: heart input to native open-closed recollement before applying compact support. Original breadcrumb and null nearest ancestor retained (blueprint_refs.py ancestor reports None). No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Generic ordinary ring-sheaf localization, instantiated at B_X using proved coefficient identifications."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "why": "Generic adjunction transport through actual Frobenius reindexing equivalences; keeps the specified carrier unit and counit."
+   },
+   {
+    "node": "lem-sf-fixed-pair-adjunction-lift",
+    "why": "Generic geometric or sheaf/category tool with the hypotheses checked in the numbered proof step; the unit gives no native replacement for this input."
+   },
+   {
+    "node": "lem-sf-closed-partition-module-test",
+    "why": "Only its first geometric paragraph extends a finite stratification across a closed immersion; no finite-ring module assertion is applied."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-sf-fixed-pair-adjunction-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-316cc764c",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-316cc764c (reviewer sub-agent of L); spot-checked: Read the full item: 10 steps, no new nodes, statement and stmt_deps unchanged from base; live and side-live are still unsplit; no cycle. Also read every cited statement, Stacks 09AH/09BM and blueprint main-20261015 prop-functor-package clause (3). Two text repairs, both in the item and with no new citations: (a) Step 4 now writes out the coefficient identification i^{-1}M ≅ B_Z⊗i^{-1}M along the isomorphism c. This shows the tensor-pullback adjunction has the same unit as the module-object adjunction of det-sf-open-closed-sequence-ring-sheaf (3). (b) Step 5's open case only pointed to the Lean definition (conjugateIsoEquiv), which is a C3/E6 problem. It now argues mathematically: reindexing restricts over Ū because F_X j̄ = j̄ F_U, carries the extension-by-zero presheaf to itself, commutes with sheafification and with the J_0⊣P_0 Hom bijections, so uniqueness in lem-sfb-equivalence-square-inverse-mate-coherence(1) gives the mate hypothesis of lem-sf-fixed-pair-adjunction-lift. I checked the e/b directions against both lemmas. Edge cases checked: U, Z or X empty, nonreduced Z, rank-zero strata; no separatedness is used. Not a duplicate of lem-sf-weil-open-closed-triangle-exists (derived triangle) or of native clopen-sheaf-comparison. Batch-5: the flags on pullback-exact-lisse, weil-constructible-abelian and adic-qcqs-stratification all reach lem-trf-geometric-inverse-image-exact, which is generic exactness of geometric-morphism inverse image. It is not the trace formula, Poincaré duality or a step of their proofs, so I accepted them. The declared tool_uses are generic and I accept them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeImmersionHeartLocalization",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeImmersionHeartLocalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeImmersion_coefficientComparisons",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeImmersion_exact_constructible",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeImmersionHeartLocalization"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/NativeImmersionHeartLocalization.lean",
+  "statement": "theorem ProEtaleWeilSheaf.nativeImmersionHeartLocalization (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X U Z : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] [U.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range i.base) (Set.range j.base)) : ∃ (aj : ProEtaleWeilSheaf.extensionByZero k₀ l j ⊣ ProEtaleWeilSheaf.upperStar k₀ l j) (ai : ProEtaleWeilSheaf.upperStar k₀ l i ⊣ ProEtaleWeilSheaf.lowerStar k₀ l i), (∀ N : ProEtaleWeilSheaf k₀ l U, (aj.unit.app N).hom.f = (adicOpenImmersionLowerShriekAdjunction l (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))).unit.app N.carrier) ∧ (∀ M : ProEtaleWeilSheaf k₀ l X, (aj.counit.app M).hom.f = (adicOpenImmersionLowerShriekAdjunction l (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))).counit.app M.carrier) ∧ (∀ M : ProEtaleWeilSheaf k₀ l X, (ai.unit.app M).hom.f = (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀))))).unit.app M.carrier) ∧ (∀ N : ProEtaleWeilSheaf k₀ l Z, (ai.counit.app N).hom.f = (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀))))).counit.app N.carrier) ∧ ∀ M : ProEtaleWeilSheaf k₀ l X, ∃ h : aj.counit.app M ≫ ai.unit.app M = 0, (ShortComplex.mk (aj.counit.app M) (ai.unit.app M) h).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three declarations state, respectively, the canonical ring coefficient isomorphisms and their Frobenius compatibility; abelianity, preservation/reflection of exactness by forgetting, and additive exact constructible operations; and adjunctions with all four unit/counit carrier formulas and the natural short exact sequence. All functors are the native framework declarations, with no extra constructibility hypothesis on the localization sequence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ade6b2ee8",
+  "group": "Q51",
+  "result": "pass",
+  "note": "All node hypotheses are rendered exactly (X qcqs and locally of finite type over k0, j quasi-compact open immersion, i closed immersion, IsCompl images) with no extra assumptions (no separatedness, reducedness, nonemptiness, or constructibility of M). Clauses checked: IsIso and IsMonHom of upperStarAdicConstantSheafHom for both immersions plus the Frobenius coefficient squares via upperStarCompIso; Abelian and exact forgetting with Exact and ShortExact reflection for X, U, Z; Additive, finite limits/colimits and objectProperty preservation for upperStar j, upperStar i, extensionByZero j, lowerStar i; adjunctions aj, ai with all four unit/counit carriers fixed to adicOpenImmersionLowerShriekAdjunction and adicUpperStarLowerStarAdjunction (unique because forgetting is faithful); ShortExact sequence for every M using the same aj, ai. lean.statement matches the file exactly; only the lean field differs from live; no definitions added; no whole-node declaration exists (parts in Localization.lean, UpperStarLowerStarAdjunction.lean, NativeBasicComparisons.lean); docstrings carry source, blueprint tag and all 10 steps; all imports exist. No recompile since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T033858-L-144899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

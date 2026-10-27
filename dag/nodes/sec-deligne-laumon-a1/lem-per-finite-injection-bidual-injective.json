@@ -1,0 +1,229 @@
+{
+ "id": "lem-per-finite-injection-bidual-injective",
+ "kind": "statement",
+ "title": "Double dualization preserves finite-module injections over a Noetherian domain",
+ "statement": "Let $R$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], let $U,V$ be finitely generated $R$-modules [def-weil-finitely-generated-module], and let $f:U\\to V$ be an injective $R$-linear map. For an $R$-module $W$, write $W^*=\\operatorname{Hom}_R(W,R)$. Define $f^*:V^*\\to U^*$ by $f^*(\\varphi)=\\varphi\\circ f$, and define $f^{**}:U^{**}\\to V^{**}$ by $f^{**}(x)(\\varphi)=x(\\varphi\\circ f)$. Then $f^{**}$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the claim that j is injective, more-algebra.tex:5286-5305. This claim uses only the injectivity of M into M′ and finiteness over the Noetherian domain, not reflexivity of M′ or torsion freeness of M″."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R\\setminus\\{0\\}$ and $K=S^{-1}R$, the fraction field. Write $P_K=S^{-1}P$ for module localization, with fractions and equality as in [lem-weil-pbc-localization-module-exact]. Localizing the exact pair $0\\to U\\xrightarrow{f}V$ gives an injective $K$-linear map $f_K:U_K\\to V_K$, $u/s\\mapsto f(u)/s$, by [lem-weil-pbc-localization-module-exact]. The ring map $R\\to K$ is flat by [lem-weil-pbc-localization-flat].",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the injectivity claim; algebra.tex, Tags 0583, 00CS, 00HT(1), 00DL for the localization inputs."
+   }
+  },
+  {
+   "text": "Apply the localization-tensor statement [lem-weil-pbc-localization-tensor-product] with $A=K$, $(M,M',\\ell_M)=(K,K,\\mathrm{id}_K)$ (the identity of $K$ is a localization at $S$, since every $s\\in S$ acts bijectively on $K$) and $(N,N',\\ell_N)=(P,P_K,p\\mapsto p/1)$: the map $\\ell:K\\otimes_RP\\to K\\otimes_KP_K$ is a localization at $S$. Every $s\\in S$ already acts bijectively on the $K$-module $K\\otimes_RP$, so conditions (b) and (c) make $\\ell$ bijective; composing with the unit $K\\otimes_KP_K\\cong P_K$ identifies $K\\otimes_R P$ with $P_K$, for every $R$-module $P$ (we use $P=U,V,U^*,V^*$ and $K\\otimes_RR=K$). The resulting maps are $(a/s)\\otimes p\\mapsto ap/s$ and $p/s\\mapsto (1/s)\\otimes p$. The tensor unit maps are $r\\otimes p\\mapsto rp$ and $a\\otimes z\\mapsto az$. Apply [lem-weil-pbc-flat-base-change-hom-finitely-presented], including its Noetherian finite-module clause, to $(M,N)=(U,R)$ and $(V,R)$. It gives bijections $\\theta_P:S^{-1}P^*\\to\\operatorname{Hom}_K(P_K,K)$ for $P=U,V$, with $\\theta_P(\\varphi/s)(p/t)=\\varphi(p)/(st)$. No finite presentation of the dual modules is needed. On $u/t$, both $\\theta_U((\\psi\\circ f)/s)$ and $\\theta_V(\\psi/s)\\circ f_K$ equal $\\psi(f(u))/(st)$; thus these bijections intertwine restriction along $f$ and $f_K$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the injectivity claim; algebra.tex, Tags 0583, 00CS, 00HT(1), 00DL for the localization inputs."
+   }
+  },
+  {
+   "text": "By [lem-trf-vector-subspace-complement], choose $V_K=f_K(U_K)\\oplus C$. For any $\\alpha:U_K\\to K$, define $\\beta:V_K\\to K$ by $\\beta(f_K(u)+c)=\\alpha(u)$ for $u\\in U_K$, $c\\in C$. Unique decomposition and injectivity of $f_K$ make this well-defined. Addition and scalar multiplication of decompositions show it is $K$-linear, and $\\beta f_K=\\alpha$. Consequently restriction $\\operatorname{Hom}_K(V_K,K)\\to\\operatorname{Hom}_K(U_K,K)$ is surjective.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the injectivity claim; algebra.tex, Tags 0583, 00CS, 00HT(1), 00DL for the localization inputs."
+   }
+  },
+  {
+   "text": "Fix $\\varphi\\in U^*$. Extend $\\theta_U(\\varphi/1)$ by Step 3 and write its inverse under $\\theta_V$ as $\\psi/s$ with $\\psi\\in V^*$, $s\\ne0$. Step 2 and injectivity of $\\theta_U$ give $(\\psi\\circ f)/s=\\varphi/1$ in $S^{-1}U^*$. By the fraction equality specified in [lem-weil-pbc-localization-module-exact], there is $t\\ne0$ with $t(\\psi\\circ f-s\\varphi)=0$. Hence $(t\\psi)\\circ f=(ts)\\varphi$, with $ts\\ne0$. This explicitly says that each class of $U^*/f^*(V^*)$ is killed by a nonzero element, which is the torsion-cokernel claim in Tag 0EB8.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the injectivity claim; algebra.tex, Tags 0583, 00CS, 00HT(1), 00DL for the localization inputs."
+   }
+  },
+  {
+   "text": "Let $x\\in U^{**}$ satisfy $f^{**}(x)=0$. For $\\varphi\\in U^*$ choose $s,t,\\psi$ as in Step 4. By $R$-linearity and the defining formula for $f^{**}$, $ts\\,x(\\varphi)=x(ts\\varphi)=x((t\\psi)\\circ f)=f^{**}(x)(t\\psi)=0$. Since $ts\\ne0$ in the integral domain $R$, $x(\\varphi)=0$. This holds for every $\\varphi$, so $x=0$. Finally, if $f^{**}(x)=f^{**}(y)$, linearity gives $f^{**}(x-y)=0$, whence $x=y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the injectivity claim; algebra.tex, Tags 0583, 00CS, 00HT(1), 00DL for the localization inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-vector-subspace-complement",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the injectivity claim, expanded with the cited Algebra localization results and the vector-space complement theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective map of finite modules over a Noetherian domain induces an injective map on double duals",
+   "results": "{\"t\": \"2026-10-24T02:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"An injective map of finite modules over a Noetherian domain induces an injective map on double duals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrzechProperty.injective_of_surjective_of_injective\", \"Module.dualMap_dualMap_eq_iff_of_injective\", \"IsNoetherian.injective_of_surjective_of_injective\", \"Module.map_eval_injective\", \"LinearMap.BilinForm.dualSubmoduleToDual_injective\", \"LinearMap.dualMap_injective_of_surjective\", \"OrzechProperty.injective_of_surjective_of_submodule'\", \"CharacterModule.dual_injective_of_surjective\"], \"digest\": \"69faaf8efe2b7cfe\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:138-153 and 250-265 and Dual/Lemmas.lean:309-346, 808-815 and 930-936. dualMap_injective_of_surjective needs a surjection before a single dual; dualMap_surjective_of_injective and dualMap_injective_iff assume a field. dualMap_dualMap_eq_iff_of_injective assumes reflexivity and compares two maps, rather than proving injectivity of the double dual. CharacterModule is duality into Q/Z, a different object. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double dualization preserves monomorphisms between finitely generated modules over a Noetherian integral domain",
+   "results": "{\"t\": \"2026-10-24T02:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"Double dualization preserves monomorphisms between finitely generated modules over a Noetherian integral domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.FGModuleCatDual\", \"FGModuleCat.exactPairing\", \"FGModuleCat.rightDual\", \"FGModuleCat.rightRigidCategory\", \"FGModuleCat.FGModuleCatDual_obj\", \"FGModuleCat.FGModuleCatDual_coe\", \"Module.dual_finite\", \"Module.dualMap_dualMap_eq_iff_of_injective\"], \"digest\": \"a30fb418b0eef0e0\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:138-153 and 250-265 and Dual/Lemmas.lean:309-346, 808-815 and 930-936. dualMap_injective_of_surjective needs a surjection before a single dual; dualMap_surjective_of_injective and dualMap_injective_iff assume a field. dualMap_dualMap_eq_iff_of_injective assumes reflexivity and compares two maps, rather than proving injectivity of the double dual. CharacterModule is duality into Q/Z, a different object. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.dualMap, Function.Injective",
+   "results": "{\"t\": \"2026-10-24T02:26:06Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.dualMap, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"LinearMap.dualMap_injective_of_surjective\", \"Module.dualMap_dualMap_eq_iff_of_injective\", \"LinearMap.dualMap_surjective_of_injective\", \"LinearMap.dualMap_injective_iff\", \"LinearMap.dualMap_surjective_iff\", \"SeparatingDual.dualMap_surjective_iff\"], \"digest\": \"3ce18ebbdfd0ef6b\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:138-153 and 250-265 and Dual/Lemmas.lean:309-346, 808-815 and 930-936. dualMap_injective_of_surjective needs a surjection before a single dual; dualMap_surjective_of_injective and dualMap_injective_iff assume a field. dualMap_dualMap_eq_iff_of_injective assumes reflexivity and compares two maps, rather than proving injectivity of the double dual. CharacterModule is duality into Q/Z, a different object. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualMap.*injective|injective.*dualMap|dualMap.*dualMap",
+   "results": "{\"t\": \"2026-10-24T02:26:05Z\", \"tool\": \"grep\", \"query\": \"dualMap.*injective|injective.*dualMap|dualMap.*dualMap\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"70da33c6c892eca8\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:138-153 and 250-265 and Dual/Lemmas.lean:309-346, 808-815 and 930-936. dualMap_injective_of_surjective needs a surjection before a single dual; dualMap_surjective_of_injective and dualMap_injective_iff assume a field. dualMap_dualMap_eq_iff_of_injective assumes reflexivity and compares two maps, rather than proving injectivity of the double dual. CharacterModule is duality into Q/Z, a different object. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injection of finitely generated modules over a Noetherian domain remains injective after taking the double dual",
+   "results": "{\"t\": \"2026-10-24T02:26:37Z\", \"tool\": \"leansearch\", \"query\": \"An injection of finitely generated modules over a Noetherian domain remains injective after taking the double dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"LinearMap.dualMap_injective_of_surjective\", \"FractionalIdeal.dual_injective\", \"LinearMap.dualMap_injective_iff\", \"SeparatingDual.dualMap_surjective_iff\", \"CharacterModule.dual_injective_iff_surjective\", \"Module.eval_apply_injective\", \"Module.Dual.instIsReflecive\"], \"digest\": \"c611e9351a3fbdfa\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:138-153 and 250-265 and Dual/Lemmas.lean:309-346, 808-815 and 930-936. dualMap_injective_of_surjective needs a surjection before a single dual; dualMap_surjective_of_injective and dualMap_injective_iff assume a field. dualMap_dualMap_eq_iff_of_injective assumes reflexivity and compares two maps, rather than proving injectivity of the double dual. CharacterModule is duality into Q/Z, a different object. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualMap.*injective|injective.*dualMap|dualMap.*dualMap",
+   "results": "{\"t\": \"2026-10-24T02:58:55Z\", \"tool\": \"grep\", \"query\": \"dualMap.*injective|injective.*dualMap|dualMap.*dualMap\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"70da33c6c892eca8\"}; Read Dual/Defs.lean:138-148, 245-264 and Dual/Lemmas.lean:160-175, 807-815. The single-dual injection theorem requires a surjection; surjectivity of the dual of an injection is over a field; bidual faithfulness assumes reflexivity; FGModuleCat duality is over a field. None states the item over a Noetherian domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injection of finitely generated modules over a Noetherian domain remains injective after taking the double dual",
+   "results": "{\"t\": \"2026-10-24T02:58:56Z\", \"tool\": \"leansearch\", \"query\": \"An injection of finitely generated modules over a Noetherian domain remains injective after taking the double dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"LinearMap.dualMap_injective_of_surjective\", \"FractionalIdeal.dual_injective\", \"LinearMap.dualMap_injective_iff\", \"SeparatingDual.dualMap_surjective_iff\", \"CharacterModule.dual_injective_iff_surjective\", \"Module.eval_apply_injective\", \"Module.Dual.instIsReflecive\"], \"digest\": \"c611e9351a3fbdfa\"}; Read Dual/Defs.lean:138-148, 245-264 and Dual/Lemmas.lean:160-175, 807-815. The single-dual injection theorem requires a surjection; surjectivity of the dual of an injection is over a field; bidual faithfulness assumes reflexivity; FGModuleCat duality is over a field. None states the item over a Noetherian domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.dualMap, Function.Injective",
+   "results": "{\"t\": \"2026-10-24T02:58:56Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.dualMap, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"LinearMap.dualMap_injective_of_surjective\", \"Module.dualMap_dualMap_eq_iff_of_injective\", \"LinearMap.dualMap_surjective_of_injective\", \"LinearMap.dualMap_injective_iff\", \"LinearMap.dualMap_surjective_iff\", \"SeparatingDual.dualMap_surjective_iff\"], \"digest\": \"3ce18ebbdfd0ef6b\"}; Read Dual/Defs.lean:138-148, 245-264 and Dual/Lemmas.lean:160-175, 807-815. The single-dual injection theorem requires a surjection; surjectivity of the dual of an injection is over a field; bidual faithfulness assumes reflexivity; FGModuleCat duality is over a field. None states the item over a Noetherian domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective map of finite modules over a Noetherian domain induces an injective map on double duals",
+   "results": "{\"t\": \"2026-10-24T02:58:58Z\", \"tool\": \"leanfinder\", \"query\": \"An injective map of finite modules over a Noetherian domain induces an injective map on double duals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrzechProperty.injective_of_surjective_of_injective\", \"Module.dualMap_dualMap_eq_iff_of_injective\", \"IsNoetherian.injective_of_surjective_of_injective\", \"Module.map_eval_injective\", \"LinearMap.BilinForm.dualSubmoduleToDual_injective\", \"LinearMap.dualMap_injective_of_surjective\", \"OrzechProperty.injective_of_surjective_of_submodule'\", \"CharacterModule.dual_injective_of_surjective\"], \"digest\": \"69faaf8efe2b7cfe\"}; Read Dual/Defs.lean:138-148, 245-264 and Dual/Lemmas.lean:160-175, 807-815. The single-dual injection theorem requires a surjection; surjectivity of the dual of an injection is over a field; bidual faithfulness assumes reflexivity; FGModuleCat duality is over a field. None states the item over a Noetherian domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem LinearMap.dualMap_injective_of_surjective|theorem dualMap_surjective_of_injective|lemma dualMap_surjective_of_injective|dualMap_dualMap_eq_iff_of_injective|theorem dualMap_injective_iff",
+   "results": "{\"t\": \"2026-10-24T03:00:09Z\", \"tool\": \"grep\", \"query\": \"theorem LinearMap.dualMap_injective_of_surjective|theorem dualMap_surjective_of_injective|lemma dualMap_surjective_of_injective|dualMap_dualMap_eq_iff_of_injective|theorem dualMap_injective_iff\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"acb47a5fdd1e430f\"}; Read Dual/Defs.lean:138-148, 245-264 and Dual/Lemmas.lean:160-175, 807-815. The single-dual injection theorem requires a surjection; surjectivity of the dual of an injection is over a field; bidual faithfulness assumes reflexivity; FGModuleCat duality is over a field. None states the item over a Noetherian domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double dualization preserves monomorphisms between finitely generated modules over a Noetherian integral domain",
+   "results": "{\"t\": \"2026-10-24T03:00:10Z\", \"tool\": \"leanfinder\", \"query\": \"Double dualization preserves monomorphisms between finitely generated modules over a Noetherian integral domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.FGModuleCatDual\", \"FGModuleCat.exactPairing\", \"FGModuleCat.rightDual\", \"FGModuleCat.rightRigidCategory\", \"FGModuleCat.FGModuleCatDual_obj\", \"FGModuleCat.FGModuleCatDual_coe\", \"Module.dual_finite\", \"Module.dualMap_dualMap_eq_iff_of_injective\"], \"digest\": \"a30fb418b0eef0e0\"}; Read Dual/Defs.lean:138-148, 245-264 and Dual/Lemmas.lean:160-175, 807-815. The single-dual injection theorem requires a surjection; surjectivity of the dual of an injection is over a field; bidual faithfulness assumes reflexivity; FGModuleCat duality is over a field. None states the item over a Noetherian domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-reflexive-saturated-free-embedding",
+  "date": "2026-10-24",
+  "group": "Q43"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The finite-free embedding criterion used before and after base change in Tag 0EB9. Immediate refinement of lem-per-reflexive-saturated-free-embedding: Tag 0EB8 (more-algebra-lemma-sequence-reflexive), proof of the claim that j is injective, more-algebra.tex:5284-5305. This claim uses only the injectivity of M into M′ and finiteness over the Noetherian domain, not reflexivity of M′ or torsion freeness of M″.",
+   "via": [
+    "lem-per-reflexive-saturated-free-embedding",
+    "lem-per-flat-base-change-reflexive-modules",
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-injection-bidual-injective",
+  "worker": "stage1",
+  "summary": "Read the Tag 0EB8 injectivity claim and its localization inputs. Reused five existing Mathlib-leaf nodes, wrote the naturality and denominator calculation, and proved kernel vanishing by domain cancellation. No new nodes or attachment; statement unchanged.",
+  "blueprint": "Historical regular-pair refinement of the ancestor lem-per-artin-gabber-affine-curve, latest proof Step 3 duality symmetry, through the existing via chain. This item realizes the finite-injection bidual claim used by lem-per-reflexive-saturated-free-embedding in its Tag 0EB8/0EB9 construction; it does not replace a unit-level step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-611db3884",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-611db3884 (reviewer sub-agent of L); spot-checked: S1 split with no new nodes; the statement is unchanged. The statement is true; I checked Z/n, Z→(×n)Z and the field case, and parent lem-per-reflexive-saturated-free-embedding Step 5 uses exactly this statement. The steps follow Stacks Tag 0EB8, proof of the claim that j is injective (more-algebra.tex:5284-5305): localize to K (00CS, 00HT), base change of Hom (087R Noetherian clause), complement in V_K, then clear denominators to get (tψ)∘f=(ts)φ and cancel in the domain. Every hypothesis is used. Fault fixed: Step 2 applied lem-weil-pbc-localization-tensor-product to the instance R⊗_R P→K⊗_K P_K. That instance only gives the tautology P_K≅K⊗_K P_K, not the K⊗_R P≅P_K that the step uses. The corrected file uses the instance (M,M',ℓ_M)=(K,K,id_K), (N,N')=(P,P_K) and checks bijectivity because S already acts invertibly. Nothing else changed. Batch-5 check: lem-trf-vector-subspace-complement is a Mathlib leaf (Submodule.exists_isCompl) depending only on def-weil-field. It is general linear algebra, not part of either assumed statement, and citing it imports no trace-formula or Poincaré-duality proof, so I accept it; I found no non-trf complement node. No SGA. Live still shows the item unsplit, so it has not been superseded.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteInjectionBidualInjective",
+  "declaration": "LinearMap.dualMap_dualMap_injective_of_injective_of_finite",
+  "file": "lean/Sheaf/RingTheory/FiniteInjectionBidualInjective.lean",
+  "statement": "theorem dualMap_dualMap_injective_of_injective_of_finite {R : Type u} [CommRing R] [IsDomain R] [IsNoetherianRing R] {U : Type v} [AddCommGroup U] [Module R U] [Module.Finite R U] {V : Type w} [AddCommGroup V] [Module R V] [Module.Finite R V] (f : U →ₗ[R] V) (hf : Function.Injective f) : Function.Injective f.dualMap.dualMap",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-afa6da60f",
+  "group": "Q97",
+  "result": "pass",
+  "note": "The Lean theorem LinearMap.dualMap_dualMap_injective_of_injective_of_finite matches the node clause by clause: CommRing+IsDomain+IsNoetherianRing, Module.Finite U,V, injective f, Function.Injective f.dualMap.dualMap (f.dualMap φ = φ.comp f, so f** x φ = x(φ∘f)). Universes u v w independent; no extra hypotheses; lean.statement verbatim. Item JSON identical to live except the lean field; not superseded (live lean=None, no module). Stacks 0EB8 more-algebra.tex:5262-5306 read. No Mathlib or project duplicate (dualMap results need a surjection, a field or reflexivity). Docstrings give the source place, blueprint id and 5 proof steps; proof is sorry only; plain imports are the proof_dep modules. No recompile per instructions; worker reports a clean compile. No findings."
+ }
+}

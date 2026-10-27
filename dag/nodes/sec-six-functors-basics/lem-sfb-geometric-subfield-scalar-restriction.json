@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-geometric-subfield-scalar-restriction",
+ "kind": "statement",
+ "title": "Geometric reducedness and transcendence degree in an algebraic field diamond",
+ "statement": "Let $k_0\\subseteq k\\subseteq E$ and $k_0\\subseteq F\\subseteq E$ be inclusions of fields [def-weil-field, def-pc-field-extension]; $k$ and $F$ need not contain one another. Assume that $k/k_0$ is separable algebraic [def-weil-pbc-separable-algebraic-extension], that $E/F$ is algebraic (every element satisfies a nonzero polynomial over $F$), and that for every extension field $K/k$ the ring $E\\otimes_k K$ is reduced. Then for every extension field $L/k_0$ both $E\\otimes_{k_0}L$ and $F\\otimes_{k_0}L$ are reduced, and\n$$\\operatorname{trdeg}_{k_0}F=\\operatorname{trdeg}_{k_0}E=\\operatorname{trdeg}_kE.$$\nTranscendence degrees use [def-kun-transcendence-degree], with cardinal lifts if needed. All tensor products are commutative algebra tensor products with multiplication $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$. Reduced means having no nonzero nilpotent element. No finite generation, finite degree, group action, or geometric integrality hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent extraction of former steps 4-6 of lem-sfb-invariant-separating-parameters: Tag 0C2Y (lemma-geometrically-reduced-over-separable-algebraic), followed by tensor injectivity for the subfield inclusion and two applications of fields.tex Tag 030H (lemma-transcendence-degree-tower). Serves de Jong Lemma 5.2 proof, printed p.613."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-geometric-reducedness-separable-scalar-restriction] with its smaller field $k=k_0$, larger field $k_1=k$, and algebra $A=E$. Its separable algebraic hypothesis is exactly the assumption on $k/k_0$, and its condition (2) is the assumed reducedness of $E\\otimes_kK$ for every $K/k$. Condition (1) therefore gives reducedness of $E\\otimes_{k_0}L$ for every $L/k_0$. The inclusions $k_0\\subseteq k\\subseteq E$ make $E$ a commutative $k$-algebra and its restricted $k_0$-structure is the given inclusion; the cited node requires no finiteness assumption.",
+   "uses": [
+    "lem-trf-geometric-reducedness-separable-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, forward paragraph of proof (restriction from k-prime to k)"
+   }
+  },
+  {
+   "text": "Fix any extension field $L/k_0$. By [lem-weil-pbc-module-over-field-flat], the $k_0$-vector space $L$ is flat. Apply [lem-trf-flat-tensor-preserves-injection] with $R=k_0$, $M=L$, $N=F$, $P=E$, and the $k_0$-linear inclusion $i:F\\hookrightarrow E$. This makes $1\\otimes i:L\\otimes_{k_0}F\\to L\\otimes_{k_0}E$ injective. The swap $a\\otimes b\\mapsto b\\otimes a$ is well defined by bilinearity and tensor balancing; swapping twice is the identity on pure tensors, hence on their sums. Compose the swap on $F\\otimes_{k_0}L$, the injective map $1\\otimes i$, and the swap on $L\\otimes_{k_0}E$. This gives an injective ring map $j:F\\otimes_{k_0}L\\to E\\otimes_{k_0}L$, $a\\otimes b\\mapsto i(a)\\otimes b$: preservation of products follows on pure tensors from $i(aa')=i(a)i(a')$ and then by bilinearity. If $z^n=0$ with $n>0$, then $j(z)^n=0$; step 1 gives $j(z)=0$, and injectivity gives $z=0$. Thus $F\\otimes_{k_0}L$ is reduced. This uses only $k_0\\subseteq F\\subseteq E$, without assuming $k\\subseteq F$. The inclusion $F\\hookrightarrow E$ is $k_0$-linear because both scalar actions are the specified inclusions of $k_0$ into these subfields of $E$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "lemma-subalgebra-separable, clause (1), and the tensor-injectivity observation immediately after lemma-geometrically-reduced-permanence; flat tensor injection supplied by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Use [lem-kun-transcendence-degree-tower] first for $k_0\\subseteq F\\subseteq E$. Since $E/F$ is algebraic, its zero-degree clause and tower formula give $\\operatorname{trdeg}_{k_0}E=\\operatorname{trdeg}_{k_0}F+0=\\operatorname{trdeg}_{k_0}F$. Use the same node for $k_0\\subseteq k\\subseteq E$. The extension $k/k_0$ is algebraic, so the formula gives $\\operatorname{trdeg}_{k_0}E=0+\\operatorname{trdeg}_kE=\\operatorname{trdeg}_kE$. Combine the equalities. These are cardinal equalities, with lifts to a common universe when required; neither cancellation of an infinite cardinal nor finite generation is used. Both tower hypotheses hold because their structure homomorphisms are inclusions into the same field $E$; separability is used only in step 1, while this step uses the stated algebraicity assumptions.",
+   "uses": [
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030H, lemma-transcendence-degree-tower, specialized to the two indicated towers; algebraic iff zero transcendence degree supplied by the cited leaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-reducedness-separable-scalar-restriction",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-kun-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic; lemma-subalgebra-separable (1), with explicit flat tensor injection; fields.tex Tag 030H for the two tower comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Gg]eometrically[Rr]educed|geometrically_reduced|trdeg.*[Ii]sAlgebraic|trdeg_eq_of_isAlgebraic",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"grep\", \"query\": \"[Gg]eometrically[Rr]educed|geometrically_reduced|trdeg.*[Ii]sAlgebraic|trdeg_eq_of_isAlgebraic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\"], \"digest\": \"e6b26cafa5667d45\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply geometric-reducedness definitions or same-base injective descent, or the transcendence-degree tower formula; none supplies separable scalar restriction together with subfield descent and the field-diamond comparison in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyReduced\", \"IsAlgebraic\"",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyReduced\\\", \\\"IsAlgebraic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"bf3c911dc9285713\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply geometric-reducedness definitions or same-base injective descent, or the transcendence-degree tower formula; none supplies separable scalar restriction together with subfield descent and the field-diamond comparison in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subfield of a geometrically reduced extension is geometrically reduced after restricting scalars along a separable algebraic field extension",
+   "results": "{\"t\": \"2026-10-22T06:11:57Z\", \"tool\": \"leansearch\", \"query\": \"A subfield of a geometrically reduced extension is geometrically reduced after restricting scalars along a separable algebraic field extension\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If k is separable algebraic over k0 and E is geometrically reduced over k, every subfield F of E containing k0 is geometrically reduced over k0 and if E is algebraic over F then trdeg k0 F equals trdeg k E",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"If k is separable algebraic over k0 and E is geometrically reduced over k, every subfield F of E containing k0 is geometrically reduced over k0 and if E is algebraic over F then trdeg k0 F equals trdeg k E\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lift_trdeg_add_eq\", \"trdeg_add_eq\", \"lift_trdeg_add_le\", \"Field.insepDegree_eq_of_isSeparable\", \"Field.lift_insepDegree_mul_lift_insepDegree_of_isAlgebraic\", \"trdeg_add_le\", \"Field.insepDegree_top_le_insepDegree_of_isScalarTower\", \"Field.insepDegree_mul_insepDegree_of_isAlgebraic\"], \"digest\": \"21adaee3f2cc3b3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply geometric-reducedness definitions or same-base injective descent, or the transcendence-degree tower formula; none supplies separable scalar restriction together with subfield descent and the field-diamond comparison in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness descends to a subfield over a smaller separable algebraic base field; transcendence degrees agree in an algebraic field diamond",
+   "results": "{\"t\": \"2026-10-22T06:12:25Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric reducedness descends to a subfield over a smaller separable algebraic base field; transcendence degrees agree in an algebraic field diamond\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Field.lift_insepDegree_mul_lift_insepDegree_of_isAlgebraic\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Field.finInsepDegree_top_le_finInsepDegree_of_isScalarTower\", \"Field.finInsepDegree_mul_finInsepDegree_of_isAlgebraic\", \"Field.insepDegree_mul_insepDegree_of_isAlgebraic\", \"Field.insepDegree_top_le_insepDegree_of_isScalarTower\"], \"digest\": \"d5b00f1d3cf89898\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply geometric-reducedness definitions or same-base injective descent, or the transcendence-degree tower formula; none supplies separable scalar restriction together with subfield descent and the field-diamond comparison in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem|lemma|instance",
+   "results": "{\"t\": \"2026-10-22T06:12:47Z\", \"tool\": \"grep\", \"query\": \"theorem|lemma|instance\", \"sub\": \"RingTheory/Nilpotent/GeometricallyReduced.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"58\", \"62\", \"71\", \"78\", \"85\"], \"digest\": \"3998914f7c82344c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply geometric-reducedness definitions or same-base injective descent, or the transcendence-degree tower formula; none supplies separable scalar restriction together with subfield descent and the field-diamond comparison in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "isGeometricallyReduced|trdeg_add_eq|trdeg_eq_zero_iff",
+   "results": "{\"t\": \"2026-10-22T11:05:56Z\", \"tool\": \"grep\", \"query\": \"isGeometricallyReduced|trdeg_add_eq|trdeg_eq_zero_iff\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\"], \"digest\": \"7b63477cb27a15af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the hits cover same-base injective descent, algebraic-only scalar tensor products, definitions, or the transcendence-degree tower; no separable-algebraic restriction-of-scalars theorem in the checked source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically reduced field extension restriction of scalars along separable algebraic extension and descent to subfields",
+   "results": "{\"t\": \"2026-10-22T11:05:56Z\", \"tool\": \"leansearch\", \"query\": \"Geometrically reduced field extension restriction of scalars along separable algebraic extension and descent to subfields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.recOn\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.IsGeometricallyReduced.rec\", \"IsSepClosed.surjective_restrictDomain_of_isSeparable\", \"Subalgebra.ofRestrictScalars\", \"IntermediateField.restrictScalars\"], \"digest\": \"968bf168c2c2b7e0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the hits cover same-base injective descent, algebraic-only scalar tensor products, definitions, or the transcendence-degree tower; no separable-algebraic restriction-of-scalars theorem in the checked source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyReduced\", \"IsAlgebraic\"",
+   "results": "{\"t\": \"2026-10-22T11:05:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyReduced\\\", \\\"IsAlgebraic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"bf3c911dc9285713\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the hits cover same-base injective descent, algebraic-only scalar tensor products, definitions, or the transcendence-degree tower; no separable-algebraic restriction-of-scalars theorem in the checked source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness descends along a separable algebraic base extension and to a subfield; transcendence degrees agree in an algebraic field diamond",
+   "results": "{\"t\": \"2026-10-22T11:06:06Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric reducedness descends along a separable algebraic base extension and to a subfield; transcendence degrees agree in an algebraic field diamond\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Field.lift_insepDegree_mul_lift_insepDegree_of_isAlgebraic\", \"lift_trdeg_add_eq\"], \"digest\": \"4ceb2febb4020292\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the hits cover same-base injective descent, algebraic-only scalar tensor products, definitions, or the transcendence-degree tower; no separable-algebraic restriction-of-scalars theorem in the checked source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically reduced algebra over a separable algebraic extension remains geometrically reduced over the smaller field",
+   "results": "{\"t\": \"2026-10-22T11:06:27Z\", \"tool\": \"leanfinder\", \"query\": \"A geometrically reduced algebra over a separable algebraic extension remains geometrically reduced over the smaller field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"7b742276dc541761\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the hits cover same-base injective descent, algebraic-only scalar tensor products, definitions, or the transcendence-degree tower; no separable-algebraic restriction-of-scalars theorem in the checked source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-separating-parameters",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, invariant functions x_1,...,x_{d-1}; supplies the separating basis before taking its first d-1 entries; Agent extraction of former steps 4-6 of lem-sfb-invariant-separating-parameters: Tag 0C2Y (lemma-geometrically-reduced-over-separable-algebraic), followed by tensor injectivity for the subfield inclusion and two applications of fields.tex Tag 030H (lemma-transcendence-degree-tower). Serves de Jong Lemma 5.2 proof, printed p.613.",
+   "via": [
+    "lem-sfb-invariant-separating-parameters",
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometric-subfield-scalar-restriction",
+  "worker": "stage1",
+  "summary": "Reused the existing separable-algebraic scalar-restriction theorem, flat-module and tensor-injection Mathlib leaves, and the transcendence-degree tower leaf with its zero-degree clause. Wrote the nilpotent descent explicitly; preserved all hypotheses and the complete statement. No new nodes, no Lean changes. Repair after the side-completion landing refusal: rebased against current live DAG, reread all dependency statements and made scalar structures, linearity, and tower hypotheses explicit. Retained the approved argument and historical searches. Retry against live read-clone head b327bbfb142b38769e47983a7b7ea17a4d0450c9: reread all eight dependency statements, revalidated all five literal citation excerpts, and made the inverse tensor swaps and their composition explicit in step 2.",
+  "blueprint": "The inherited ancestry has from.node=null. This split realizes the recorded det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction via the de Jong Lemma 5.2 invariant separating parameters: former steps 4-6 of lem-sfb-invariant-separating-parameters, restricting scalars, descending reducedness to the fixed subfield, and comparing transcendence degrees. Whole-blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "why": "Generic field-algebra scalar restriction along a separable algebraic extension, applied to E; it preserves the inherited invariant-parameters route, and no same-unit node states this generic equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-reducedness-separable-scalar-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-d19d482c8",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-d19d482c8 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is identical to the base. The only difference from the prior head 559be1fc is extra explanatory sentences in steps 1-3: the double tensor swap is written out, and the scalar structures and tower hypotheses are made explicit. There are no new nodes and no repair note applies. Step 1 applies lem-trf-geometric-reducedness-separable-scalar-restriction with (k,k1,A)=(k0,k,E); its direction (2)⇒(1) gives reducedness of E⊗_{k0}L. I checked this against Stacks 0C2Y (algebra.tex l.10258). Step 2: L is flat over k0 (Mathlib leaf), so L⊗F→L⊗E is injective by lTensor_preserves_injective_linearMap. After the swaps this is an injective ring map, and nilpotent descent follows. This writes out the omitted proof of 030T(1) (l.10063) and never assumes k⊆F. Step 3 applies the trdeg tower leaf twice with zero-degree clauses. Only x+0=x is used, so no infinite cardinal is cancelled. Checked against fields.tex l.3482 (030H). Test cases: the incomparable fields k0=Q, k=Qbar, F=Q(t), E=Qbar(t) behave as stated. The example k0=F_p(s), E=F_p(s^{1/p}) shows the separability hypothesis is needed, and step 1 uses it. Batch-5 flags: I recomputed the closure of the scalar-restriction node. Its 37 nodes are all Mathlib definitions or pure commutative algebra, with no trace-formula, Poincaré, batch-4 or sk-thm-trace-transport node. flat-tensor-preserves-injection is a Mathlib leaf with no dependencies. Neither is given by, or part of the proof of, the assumed statements, so I accept both. I accept the tool_use of the generic sk-i-curve-zero lemma. No SGA source is cited, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GeometricSubfieldScalarRestriction",
+  "declaration": "Algebra.geometric_subfield_scalar_restriction",
+  "file": "lean/Sheaf/FieldTheory/GeometricSubfieldScalarRestriction.lean",
+  "statement": "theorem geometric_subfield_scalar_restriction (k₀ : Type u) (k : Type v) (E : Type w) (F : Type x) [Field k₀] [Field k] [Field E] [Field F] [Algebra k₀ k] [Algebra k E] [Algebra k₀ E] [Algebra k₀ F] [Algebra F E] [IsScalarTower k₀ k E] [IsScalarTower k₀ F E] [Algebra.IsSeparable k₀ k] [Algebra.IsAlgebraic F E] (hgeom : ∀ (K : Type (max u v w x t)) [Field K] [Algebra k K], IsReduced (E ⊗[k] K)) : (∀ (L : Type (max u v w x t)) [Field L] [Algebra k₀ L], IsReduced (E ⊗[k₀] L) ∧ IsReduced (F ⊗[k₀] L)) ∧ Cardinal.lift.{w} (Algebra.trdeg k₀ F) = Cardinal.lift.{x} (Algebra.trdeg k₀ E) ∧ Algebra.trdeg k₀ E = Algebra.trdeg k E",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ec3c0fd8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Only the lean record changed vs live; lean.statement verbatim. Statement matches node clause by clause: two field towers sharing one k0->E structure, no k/F relation, IsSeparable k0 k, IsAlgebraic F E, reducedness hypothesis over k, reducedness of E⊗L and F⊗L for all L/k0, lifted trdeg_{k0}F = trdeg_{k0}E and trdeg_{k0}E = trdeg_k E. Test-field universe max u v w x t matches the cited forall_isReduced_tensorProduct_iff_of_isSeparable instantiation, so the statement is provable and not vacuous. Mathematics checked against Stacks 0C2Y and 030H, using only x+0 (no infinite-cardinal cancellation). Edge cases (identity, infinite, char p, incomparable middle fields) covered. No duplicate in Mathlib/project, name free. Single sorry theorem, source/blueprint docstrings, proof steps in docstring, private proof imports, report sections present. No compile run since no file changed."
+ }
+}

@@ -115,5 +115,55 @@
   "kind": "proof",
   "note": "independent Codex review: Unchanged theorem signature and node statement matched the explicit proof, dependencies, unit route, and report; delivery and sole direct importer compiled cleanly; all proved declarations use only permitted axioms."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.etale_limit_canonical_cohomology_diagram"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.etale_limit_canonical_cohomology_diagram",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram",
+     "lines": [
+      66,
+      181
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $I$ be a nonempty directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an arbitrary inverse system of schemes [def-pc-scheme], with transition morphisms $D_{ji}:D_j\\to D_i$ for $i\\le j$, and $(S,(f_i:S\\to D_i)_{i\\in I})$ any cone over $D$. Let $F_i$ be abelian sheaves on $(D_i)_{\\Et}$ and $\\varphi_{ij}:D_{ji}^{-1}F_i\\to F_j$ ($i\\le j$) morphisms such that $\\varphi_{ii}$ is the canonical identification $\\mathrm{id}^{-1}F_i\\cong F_i$ and $\\varphi_{ik}=\\varphi_{jk}\\circ D_{kj}^{-1}(\\varphi_{ij})\\circ c$ for $i\\le j\\le k$, where $c:D_{ki}^{-1}F_i\\cong D_{kj}^{-1}D_{ji}^{-1}F_i$ is the composition isomorphism of inverse images [def-weil-pbc-inverse-image]. Let $G:I\\to\\mathrm{Ab}(S_{\\Et})$ be a functor with isomorphisms $e_i:G_i\\cong f_i^{-1}F_i$ such that, under $e_i$ and $e_j$, the transition map $G_i\\to G_j$ is the composition isomorphism $f_i^{-1}F_i\\cong f_j^{-1}D_{ji}^{-1}F_i$ followed by $f_j^{-1}(\\varphi_{ij})$. Let $(L,(\\lambda_i:G_i\\to L)_{i\\in I})$ be any cocone over $G$, not necessarily a colimit. Then for each $n\\ge0$ there are\n- a functor $H:I\\to\\mathrm{Ab}$ with isomorphisms $\\epsilon_i:H_i\\cong H^n(D_i,F_i)$ [def-weil-pbc-etale-cohomology] under which the transition map $H_i\\to H_j$ is $H^n(\\varphi_{ij})\\circ D_{ji}^*$, with $D_{ji}^*$ the cohomological pullback [def-weil-pbc-cohomology-pullback];\n- a cocone $(B,(\\beta_i)_{i\\in I})$ over $H$ and an isomorphism $\\epsilon:B\\cong H^n(S,L)$ such that $\\epsilon\\circ\\beta_i=H^n(\\lambda_i\\circ e_i^{-1})\\circ f_i^*\\circ\\epsilon_i$ for every $i$.\n\nNo limit property of $S$, no qcqs condition, no affineness of transition maps, and no exactness or connecting morphism is assumed or asserted.",
+  "proof": [
+   {
+    "text": "Define H_i as the degree-n cohomology of F_i and each transition as cohomology pullback followed by H.map(phi_f). The identity transition of F and the identity pullback clause give H.map_id. For composition, rewrite phi_(f≫g), use naturality of pullback in coefficients to interchange the map of phi_f and pullback along g, then apply the composition clause of cohomologyPullbackFunctorial. This gives H.map_comp. ([lem-weil-pbc-cohomology-pullback-functorial]).",
+    "uses": [
+     "lem-weil-pbc-cohomology-pullback-functorial"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Take B.pt=H^n(L.pt) and its ith leg to be cohomology pullback along f_i followed by H.map((eG_i).inv≫L_i). For naturality along f:i->j, interchange phi_f with pullback along f_j; the cone equation identifies f_j composed with D(f^op) with f_i. The cohomology pullback composition clause introduces exactly the upperStarComp in hG. Rewrite G.map f by hG in the cocone equation L.w f and cancel the inverse-image object isomorphisms. Applying H.map to the resulting coefficient equality proves naturality of the legs. Take all eH and eB to be identity isomorphisms. ([lem-weil-pbc-cohomology-pullback-functorial]).",
+    "uses": [
+     "lem-weil-pbc-cohomology-pullback-functorial"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

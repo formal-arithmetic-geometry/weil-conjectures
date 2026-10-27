@@ -1,0 +1,165 @@
+{
+ "id": "def-sfb-projective-diagonal-composition",
+ "kind": "definition",
+ "title": "Canonical derived composition for the projective diagonal",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] with its actual pulled-back coefficients [sk-def-sfb-pulled-back-coefficients], ordinary unbounded internal-module derived functors [sk-def-sfb-module-derived-pushpull], tensor and coefficient unit [sk-def-sfb-derived-tensor-hom]. For a scheme $Y$ put $P=\\mathbf P^1_Y$ [def-nagata-projective-space-base-change], $W=P\\times_Y P$, second projection $p_2:W\\to P$ and diagonal $\\Delta:P\\to W$, with degree-zero supported coefficient source $S_\\Lambda=\\Delta_*\\Lambda_P$ [def-sfb-diagonal-coefficient-category]. Define the canonical isomorphism $\\operatorname{Id}_{D(P)}\\simeq Rp_{2*}R\\Delta_*$ as the right-adjoint conjugate of the canonical pullback section isomorphism $\\Delta^*p_2^*\\simeq\\operatorname{Id}$ of [def-sfb-projective-diagonal-pullback]. Define the identification $R\\Delta_*\\Lambda_P\\simeq S_\\Lambda[0]$ using the canonical single-degree right-derived comparison of the exact closed direct-image functor. The left-factor projection of [def-sfb-proetale-projection-exchange-maps] is retained through its unique realization heterogeneously equal to the published map.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-nagata-projective-space-base-change",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-proetale-projection-exchange-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.md",
+  "place": "clause 2, its initial identification, and proof steps 6 and 8"
+ },
+ "proof": [
+  {
+   "text": "Construct pushSectionIso by taking the right-adjoint conjugate of pullSectionIso for the second projection. The section equation is pullback.diagonal_snd, so no additional choice of a comparison is made.",
+   "uses": [
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The projective-line structural map is separated by properness, and smooth of relative dimension one by the existing standard-chart theorem lem-sc-projective-line-smooth-relative-dimension-one. Smoothness gives local finite presentation. Its diagonal is therefore a closed immersion and locally of finite presentation by lemma-nagata-diagonal-finite-presentation; a closed immersion is finite. Apply the existing finite-pushforward exactness theorem of lem-fd-proetale-finite-pushforward-exact to modules over the universe-lifted integer ring.",
+   "uses": [
+    "lem-sc-projective-line-smooth-relative-dimension-one",
+    "lemma-nagata-diagonal-finite-presentation",
+    "lem-fd-proetale-finite-pushforward-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcomposition by the equivalence from abelian groups to modules over the universe-lifted integers induces an equivalence on sheaves: full faithfulness is inherited and the inverse coefficient equivalence supplies essential surjectivity through its counit. This postcomposition commutes definitionally with direct image. Transfer preservation of finite colimits across these sheaf equivalences. Unfold internal-module lowerStar as mapMod of abelian direct image followed by restriction of scalars, as in def-sfb-module-lower-star. The existing proved mapMod and comap finite-colimit instances compute and reflect finite colimits through the underlying-module forgetful functors, using the cokernel construction of lem-sfb-modobj-cokernels and finite biproducts. Their composition proves diagonalPush_preservesFiniteColimits. The existing canonical single-degree right-derived comparison then defines supportedUnitIso.",
+   "uses": [
+    "def-sfb-module-lower-star",
+    "lem-sfb-modobj-cokernels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold ProjectionFamily, ProjectionNormalized and the fixed native tensor bundle. The published traceProjection family supplies a normalized witness by reflexivity. Any normalized family is pointwise equal to it by eq_of_heq; dependent function extensionality gives equality of families. This proves projection_existsUnique and determines projectionMap.",
+   "uses": [
+    "def-sfb-proetale-projection-exchange-maps",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-diagonal-pullback",
+  "lem-sc-projective-line-smooth-relative-dimension-one",
+  "lemma-nagata-diagonal-finite-presentation",
+  "lem-fd-proetale-finite-pushforward-exact",
+  "def-sfb-module-lower-star",
+  "lem-sfb-modobj-cokernels",
+  "def-sfb-proetale-projection-exchange-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/lem-fd-proetale-finite-pushforward-exact.md",
+  "place": "Proof (2), applied to the projective diagonal; unit/counit clause 2 and fixed-map normalization clause 1; Lean implementation by X6, 2026-10-24"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For the closed diagonal of a projective line and its second projection, the canonical composite derived direct image is the identity and the derived image of the coefficient unit is its exact degree-zero supported module.",
+   "results": "8 hits including pullback.diagonal_fst and pullback.diagonal_snd; these are used for the ordinary section equation, but none gives the normalized derived internal-module composition or supported-unit comparison.",
+   "date": "2026-10-22",
+   "verdict": "Construct the derived comparisons from the existing generic derived-functor and mate interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor, AlgebraicGeometry.IsClosedImmersion",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Functor.rightDerivedFunctor' in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Dd]erived|[Dd]erived.*diagonal|singleFunctorCompRightDerivedFunctorIso",
+   "results": "msearch.py Mathlib grep: 0 hits. Source rg: unrelated private supportedUnitIso in ProEtaleRingedClosedKernelAdjoint, for a different kernel adjoint. Blueprint search diagonal derived composition: 12 broad unrelated or finite-coefficient hits; DAG search finds the coefficient diagrams and later P1 triangle statements, not this canonical derived functor isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "No existing specialization; use the published generic comparison rather than defining a new derived direct image."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-unit-counit",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "clause 2, its initial identification, and proof steps 6 and 8",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.ProjectiveDiagonalComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.pushSectionIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.pushSectionIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.diagonalPush_preservesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.RationalP1.diagonalPush_colimits",
+   "AlgebraicGeometry.ProEtale.RationalP1.supportedUnitIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectionFamily",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectionNormalized",
+   "AlgebraicGeometry.ProEtale.RationalP1.projection_existsUnique",
+   "AlgebraicGeometry.ProEtale.RationalP1.projectionMap"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectiveDiagonalComposition.lean",
+  "statement": "def pushSectionIso (Y : Scheme.{u}) : 𝟭 (DerivedCategory (Modules Λ (ProjectiveLine Y))) ≅ CondensedRing.moduleObjectDerivedPushforward Λ (diagonalImmersion Y) ⋙ CondensedRing.moduleObjectDerivedPushforward Λ (secondProjection Y)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Section 1(B): retained DAG binding points to a withdrawn source module; the live source reader reports Module source unavailable. Restore the canonical construction described by this unchanged node, with fixed-map normalization and real definition data."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e328197e9",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of the 69f9 H2 RETURN. Lean signature and body are byte-identical; only imports changed (5 definition modules made public imports, DiagonalTowerCoefficients made a plain proof import). stmt_deps drop det-prop-diagonal-tower-coefficients and -trace (both kept in proof_deps) and cite def-sfb-diagonal-coefficient-reference, -trace-limit-characterization, -trace-models plus three new existing:true ownership nodes (system-interface, completed-endpoints, normalized-source). check_existing is clean on all three; statements are verbatim with live; the prose matches the live declarations and the source places exist. No cycle, no theorem stmt_dep, no Lean moved. Seven dependency modules and records are unchanged from 69f9. H3 substance accepted at 69f9 still holds. Advisories: diagonalSurface in the signature is owned only by det-prop-diagonal-tower-system but is reached through the closure; second readings are self-readings; inherited ∃ CommShift in unitCounit_exact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261024T191725-L-475549",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

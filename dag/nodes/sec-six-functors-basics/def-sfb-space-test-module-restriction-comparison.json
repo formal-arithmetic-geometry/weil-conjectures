@@ -1,0 +1,160 @@
+{
+ "id": "def-sfb-space-test-module-restriction-comparison",
+ "kind": "definition",
+ "title": "Small-etale restriction and canonical tensor comparison on algebraic-space tests",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $p:\\mathcal C\\to\\mathit{Sch}/S$ a category fibred in groupoids, with its big fppf structure ringed site [def-sfb-stack-quasi-coherent-algebra, def-pc-fppf-site]. Let $K$ be a sheaf of $\\mathcal O_{\\mathcal C}$-modules [def-weil-sheaf-of-modules-category]. For an algebraic space $V/S$ [def-trf-algebraic-space], let $\\mathcal S_V$ denote its discrete fibred category: objects over $T$ are maps $v:T\\to V$, and an arrow from $v':T'\\to V$ to $v:T\\to V$ is a scheme map $h:T'\\to T$ satisfying $vh=v'$. A based test is a functor $z:\\mathcal S_V\\to\\mathcal C$ over $\\mathit{Sch}/S$. Restrict $z$ to the small-etale scheme charts of $V$. Define the module sheaf $K_z$ on $V_{\\mathrm{et}}$ by $K_z(T,v)=K(z(v))$, with restriction along $h$ equal to $K(z(h))$. Its action is the original action after identifying $\\mathcal O_V(T,v)=\\Gamma(T,\\mathcal O_T)=\\mathcal O_{\\mathcal C}(z(v))$ by the common base scheme. On a module morphism $\\lambda:K\\to L$ define $(\\lambda_z)_{(T,v)}=\\lambda_{z(v)}$. Use module sheaves in the ambient universe, without imposing quasi-coherence.\n\nLet $a:V\\to W$ be a morphism of algebraic spaces, let $w:\\mathcal S_W\\to\\mathcal C$ be a based test, and let $\\theta:z\\Rightarrow w\\circ\\mathcal S_a$ be a natural isomorphism over $\\mathit{Sch}/S$, where $\\mathcal S_a(T,v)=(T,av)$. Use the chart-limit direct image $a_*$, tensor pullback $a^*$, specified adjunction unit and local tensor sections of [def-trf-space-etale-module-functors], with composition normalization [def-sfb-space-module-tensor-composition]. Define $d_{a,\\theta}^K:K_w\\to a_*K_z$ by its chart projections: for an etale chart $(E,e)$ over $W$, a chart $(T,v)$ over $V$, a map $r:T\\to E$ with $er=av$, and $m\\in K_w(E,e)$, put\n$$\\pi_{T,r}\\bigl(d_{a,\\theta}^K(E,e)(m)\\bigr)=K\\bigl(w(r)\\circ\\theta_{(T,v)}\\bigr)(m).$$\nHere $\\theta_{(T,v)}:z(v)\\to w(av)$ lies over $\\mathrm{id}_T$, so the composite arrow has source $z(v)$ and target $w(e)$. The displayed compatible family defines $d$ by the limit universal property. Define the canonical comparison $c_{a,\\theta}^K:a^*K_w\\to K_z$ to be the adjoint of $d_{a,\\theta}^K$. Equivalently its value on the local tensor associated with this chart is\n$$b\\otimes m\\longmapsto b\\,K\\bigl(w(r)\\circ\\theta_{(T,v)}\\bigr)(m),\\qquad b\\in\\Gamma(T,\\mathcal O_T).$$\nRetain this chart arrow and the identity natural isomorphism $\\mathrm{id}_z$ as part of the based-test notation. This defines the comparison without imposing its later naturality, composition or invertibility properties. No quasi-coherence, stack, algebraicity of $\\mathcal C$, flatness or finiteness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-pc-fppf-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-tensor-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 075D and 076R: small-etale restriction, equation-comparison-modules, the adjoint construction preceding equation-comparison-algebraic-spaces-modules, and that equation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comparison|pushforward",
+   "results": "{\"t\": \"2026-10-24T12:06:24Z\", \"tool\": \"grep\", \"query\": \"comparison|pushforward\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"078591426b63068b\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: PushforwardContinuous.lean:44 defines general ringed-site pushforward and PullbackContinuous.lean defines its tensor adjoint; neither supplies algebraic-space test chart transport or its pinned comparison. These general constructions are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical small etale restriction and tensor pullback comparison for module sheaves on a category fibred in groupoids",
+   "results": "{\"t\": \"2026-10-24T12:06:24Z\", \"tool\": \"leansearch\", \"query\": \"Canonical small etale restriction and tensor pullback comparison for module sheaves on a category fibred in groupoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.pushforward\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"a09b9b46b922216a\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: PushforwardContinuous.lean:44 defines general ringed-site pushforward and PullbackContinuous.lean defines its tensor adjoint; neither supplies algebraic-space test chart transport or its pinned comparison. These general constructions are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of module sheaves from a fibred fppf site to algebraic space tests and its canonical tensor pullback comparison",
+   "results": "{\"t\": \"2026-10-24T12:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of module sheaves from a fibred fppf site to algebraic space tests and its canonical tensor pullback comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"5451dd62b8cf6f2a\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: PushforwardContinuous.lean:44 defines general ringed-site pushforward and PullbackContinuous.lean defines its tensor adjoint; neither supplies algebraic-space test chart transport or its pinned comparison. These general constructions are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "spaceTestModuleRestriction|spaceTestModuleComparison|spaceTestIdentityTwoIso; DAG small-etale restriction comparison; blueprint_refs.py search space test module restriction comparison",
+   "results": "No matching declarations in lean/WeilConjectures or lean/Sheaf. DAG concept search found lem-sfb-fibred-fppf-space-module-comparisons, which bundles these constructions with properties, and downstream theorem users, but no definition node owning the constructions. blueprint_refs.py returned 0 blueprint nodes. Existing sandbox definitions are moved intact, not duplicated.",
+   "date": "2026-10-24",
+   "verdict": "No separate existing definition node; this split is required by the H2 independent review of 610be222011a."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|pullback|pushforward",
+   "results": "{\"t\": \"2026-10-24T14:33:03Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|pullback|pushforward\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"983885b9bf2afac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic ringed-site pullback, restriction of scalars and open-immersion restrictions do not specify fibred fppf algebraic-space tests, their chart functor and their pinned comparison; read PushforwardContinuous.lean:44-49, PullbackContinuous.lean:56-64 and ChangeOfRings.lean:36-41."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module sheaf restriction along a functor preserving covers and canonical comparison from tensor pullback",
+   "results": "{\"t\": \"2026-10-24T14:33:03Z\", \"tool\": \"leansearch\", \"query\": \"Module sheaf restriction along a functor preserving covers and canonical comparison from tensor pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"TopCat.Sheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback\", \"PresheafOfModules.pushforward\"], \"digest\": \"1a88a0272c7daf9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic ringed-site pullback, restriction of scalars and open-immersion restrictions do not specify fibred fppf algebraic-space tests, their chart functor and their pinned comparison; read PushforwardContinuous.lean:44-49, PullbackContinuous.lean:56-64 and ChangeOfRings.lean:36-41."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "{\"t\": \"2026-10-24T14:33:04Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, SheafOfModules.pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.pullback_assoc\"], \"digest\": \"de3cefe46418329c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic ringed-site pullback, restriction of scalars and open-immersion restrictions do not specify fibred fppf algebraic-space tests, their chart functor and their pinned comparison; read PushforwardContinuous.lean:44-49, PullbackContinuous.lean:56-64 and ChangeOfRings.lean:36-41."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a module sheaf on a fibred fppf site to the small etale site of an algebraic space and construct its canonical tensor pullback comparison",
+   "results": "{\"t\": \"2026-10-24T14:33:04Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a module sheaf on a fibred fppf site to the small etale site of an algebraic space and construct its canonical tensor pullback comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.restrictScalars\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"0efbf1be017d98ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic ringed-site pullback, restriction of scalars and open-immersion restrictions do not specify fibred fppf algebraic-space tests, their chart functor and their pinned comparison; read PushforwardContinuous.lean:44-49, PullbackContinuous.lean:56-64 and ChangeOfRings.lean:36-41."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation from restriction along two isomorphic based algebraic space tests gives an adjoint morphism of sheaves of modules",
+   "results": "{\"t\": \"2026-10-24T14:33:49Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformation from restriction along two isomorphic based algebraic space tests gives an adjoint morphism of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.restriction_app\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_inv_app_app\"], \"digest\": \"c5790b1be1ac8774\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic ringed-site pullback, restriction of scalars and open-immersion restrictions do not specify fibred fppf algebraic-space tests, their chart functor and their pinned comparison; read PushforwardContinuous.lean:44-49, PullbackContinuous.lean:56-64 and ChangeOfRings.lean:36-41."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|fibred|fppf",
+   "results": "{\"t\": \"2026-10-24T14:33:49Z\", \"tool\": \"grep\", \"query\": \"algebraic space|fibred|fppf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"], \"digest\": \"a81cbb543b7d7ba8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic ringed-site pullback, restriction of scalars and open-immersion restrictions do not specify fibred fppf algebraic-space tests, their chart functor and their pinned comparison; read PushforwardContinuous.lean:44-49, PullbackContinuous.lean:56-64 and ChangeOfRings.lean:36-41."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-groupoid-module-descent",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: module right adjoint before adding multiplication; Q53 split: the quasi-coherator on locally quasi-coherent flat-compatible modules, used after ordinary direct image and before composing the Hom bijections. Q22 split: Tag 0778 proof, equivalence q_1 from quasi-coherent modules on the presentation. Restriction and tensor-comparison constructions used by Tag 06WT, split from their property theorem under the H2 return.",
+   "via": [
+    "lem-sfb-space-groupoid-module-descent",
+    "lem-sfb-stack-lqc-coherator",
+    "lem-sfb-stack-qcqs-module-adjunction",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-space-test-module-restriction-comparison",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Tags 075K, 06WC and 076R. Made the discrete fibred category, restriction on module morphisms, chart-limit mate and typed two-isomorphism explicit. Removed unused quasi-coherence and Zariski-pullback dependencies. Existing chart-limit and tensor-adjunction definitions suffice; no new nodes or theorem proof steps are required.",
+  "blueprint": "Retains the inherited provenance chain serving det-thm-sf-ctf-stability-direct-images, proof (3), via the restriction and comparison construction in the Tag 06WT groupoid-module-descent input. The latest blueprint proof (3) is the direct-image preservation clause. blueprint_refs.py ancestor returns None for this inherited record; its existing from.node and via are retained. Exact construction source: Stacks 075K and 076R. Whole-blueprint searches found no equivalent definition."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-3a3b69228",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-3a3b69228 (reviewer sub-agent of L); spot-checked: Read the delivered definition in full and compared it with the base text in clones/live. The rewrite makes the same construction explicit: S_V is the discrete fibred category; z and w are based tests; theta: z => w∘S_a has components over id_T; d: K_w -> a_*K_z has chart projections pi_{T,r}(d(m)) = K(w(r)∘theta_T)(m); and c is the adjoint of d. The old 'theta_T;w(r)' is the same arrow written in composition order. Nothing is weakened. The only citer, lem-sfb-fibred-fppf-space-module-comparisons, stays consistent. The construction agrees with stacks-sheaves.tex lines 1465-1510: c_varphi is the adjoint of the unit restricted to the space, with the 2-cell identification, and the module version is Tag 076R. Direction a^*K_w -> K_z and O_{V_et}-modules match the source. Checked against the cited statements: def-trf-space-etale-module-functors (chart category A(a,E), limit projections, adjoint unit, local tensor b⊗m), def-trf-algebraic-space (O_V(T) = Gamma(T,O_T)) and def-sfb-stack-quasi-coherent-algebra (fppf site on any fibred category, discrete fibred category of a space). Dropping def-trf-space-quasi-coherent-module and def-pc-module-pullback is justified. Checked by hand that the definition is well defined: K_z is a sheaf (étale chart covers lie over fppf covers, and fibre products are preserved because C is fibred in groupoids; this is the existing lemma lem-sfb-fibred-fppf-ringed-inverse-image, so there is no cycle); the family is compatible by naturality of theta; it is linear over r^#; it is natural in E; and the b⊗m formula follows from the unit and determines c. Edge cases: K=0; identity test with theta=id (gives ordinary restriction); V empty; a nontrivial vertical theta; non-étale a, where c is not claimed invertible. Grepped the DAG for 076R: only lemmas mention it, and no definition node duplicates this one. Mathlib verdict null is correct. No SGA source used. FIX (B5): source.place still read 'Tags 075D and 076R', although the report says it was changed. Tag 075D is the property lemma lemma-comparison, not the construction. Corrected the place to Tag 075K (equation-restrict), Tag 06WC (equation-comparison-modules) and Tag 076R with the adjoint construction just before it. No other field changed.; 1 file(s) fixed by the reviewer"
+ }
+}

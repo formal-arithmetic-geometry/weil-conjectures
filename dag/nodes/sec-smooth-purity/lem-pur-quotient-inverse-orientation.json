@@ -1,0 +1,105 @@
+{
+ "id": "lem-pur-quotient-inverse-orientation",
+ "kind": "statement",
+ "title": "Quotient compatibility of inverse normalized orientation",
+ "statement": "Let ell be prime, X,Y Noetherian schemes, f:X->Y smooth of relative dimension d, separated, quasi-compact, locally of finite type and compactifiable. Suppose ell is invertible at every stalk of Y and r>=m>=1. Let a,b be normalized finite smooth levels at r,m [def-pur-finite-smooth-adjunction-data], and e a generator-normalized CoefficientLineComparison for the quotient [def-pur-finite-smooth-coefficient-arrows]. Ordinary scalar extension of a.alpha.inv followed by the actual dualizingScalarMap equals e.tensorPower(d).hom followed by b.alpha.inv. Only this coefficient-unit orientation equation is asserted, with no general-complex or pro-etale conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Quotient compatibility of inverse normalized orientation; the two-level argument."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Primality gives positivity of ell^r and ell^m; m<=r gives divisibility. Germwise invertibility of ell gives global invertibility on Y and hence of ell^r. The two levels supply invertibility of their exponents on X. Their Geometry witnesses are propositions and hence proof irrelevant. Apply normalizedOrientation_scalar to the quotient, the two actual normalized orientations, and the supplied generator-normalized line comparison. This gives exactly the displayed equation, including equal levels and relative dimension zero.",
+   "uses": [
+    "lem-sp-finite-normalized-orientation-scalar"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-normalized-orientation-scalar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "K2: specialize the already proved normalizedOrientation_scalar theorem; Geometry witnesses are proof irrelevant."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth etale purity normalized orientation change finite coefficients",
+   "results": "Eight Mathlib hits; no normalized etale/pro-etale purity coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the project APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction transposition and naturality lemmas; used in the assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing categorical API."
+  },
+  {
+   "tool": "grep",
+   "query": "OrientationNormalized|reductionOrientation|diagonalOrientationCompatibility",
+   "results": "Mathlib grep: zero hits. Local rg: The ordinary tensor calculation already exists in ReductionCompatibilities. reductionOrientation assumes a finite-field base and a common exponent, whereas the present levels have arbitrary Noetherian bases and different exponents. The diagonal specialization theorem has the source normalization, but requires transport of its single-lift presentation and the geometric pasting. A targeted project search found FiniteNormalizedOrientationScalar.normalizedOrientation_scalar, which accepts divisible exponents and arbitrary Noetherian bases and closes this step.",
+   "date": "2026-10-27",
+   "verdict": "Use existing declarations for formal steps; isolate only the stated step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothTwoLevelReduction",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 1: finite reductions; Quotient compatibility of inverse normalized orientation",
+   "via": [
+    "lem-pur-finite-smooth-two-level-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientInverseOrientation",
+  "file": "lean/Sheaf/Paper/QuotientInverseOrientation.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.quotientInverseOrientation",
+  "statement": "theorem quotientInverseOrientation\n    (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType f] (d : ℕ) [SmoothOfRelativeDimension d f]\n    (hY : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y))\n    (r m : ℕ) (_hm : 1 ≤ m) (hmr : m ≤ r)\n    (a : Level ell r f d) (b : Level ell m f d)\n    (e : CoefficientLineComparison (FiniteReduction.quotient ell hmr)\n      (ell ^ r) (ell ^ m) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) X) :\n    (ordinaryScalar (FiniteReduction.quotient ell hmr) X).map a.alpha.inv ≫\n        ExceptionalCoefficients.dualizingScalarMap (FiniteReduction.quotient ell hmr) f =\n      (e.tensorPower d).hom ≫ b.alpha.inv",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T094432-L-225776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T094432-L-225776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,359 @@
+{
+ "id": "lem-trf-curve-integral-filtration-multiplicity-profile",
+ "kind": "statement",
+ "title": "Integral-ideal filtrations on proper curves and their generic multiplicity profile",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ a scheme proper over $k$ [def-weil-proper-morphism] with topological Krull dimension at most one [def-kun-topological-krull-dimension]. Then $X$ is Noetherian (locally Noetherian [pqf-def-locnoeth] and quasi-compact, meaning every open cover has a finite subcover), and $\\mathcal O_X$ is coherent [pqf-def-coherent]. There are finitely many dimension-one irreducible components [def-weil-irreducible-components]. Write them without repetitions as $C_1,\\ldots,C_t$, each with its reduced induced closed subscheme structure [def-pc-reduced-scheme], and write $j_i:C_i\\hookrightarrow X$ for its closed immersion [def-weil-closed-immersion]. Each $C_i$ is integral [def-pc-integral-scheme], proper over $k$ and of dimension one, and has a unique generic point $\\xi_i$ (viewed in $X$) with $\\overline{\\{\\xi_i\\}}=j_i(C_i)$. On any affine open $\\operatorname{Spec}R\\subseteq X$ [def-weil-affine-spectrum] meeting $C_i$, the reduced closed subscheme $C_i$ is cut out by the prime ideal of its underlying irreducible closed subset.\n\nFor every coherent $\\mathcal O_X$-module $\\mathcal F$ there is an integer $s\\geq0$ and a filtration $0=\\mathcal F_0\\subseteq\\cdots\\subseteq\\mathcal F_s=\\mathcal F$ by coherent submodules [def-weil-sheaf-of-modules-category] whose quotients $\\mathcal Q_a=\\mathcal F_a/\\mathcal F_{a-1}$ are isomorphic to $(h_a)_*\\mathcal I_a$, for closed immersions $h_a:Z_a\\hookrightarrow X$ with $Z_a$ integral and $\\mathcal I_a\\subseteq\\mathcal O_{Z_a}$ a nonzero coherent ideal. Here the quotient is the cokernel of the inclusion and pushforward is pushforward of modules [def-pc-module-pullback]. Every $Z_a$ is proper over $k$ and Noetherian. For every filtration of this form, each $Z_a$ either has dimension zero and consists of a single closed point, or has dimension one and is equal, as a reduced closed subscheme of $X$, to exactly one $C_i$.\n\nPut $R_i=\\mathcal O_{X,\\xi_i}$ and let $\\kappa(\\xi_i)$ be its residue field [def-weil-residue-field]. For every such filtration, as $R_i$-modules the quotient stalk $(\\mathcal Q_a)_{\\xi_i}$ [def-weil-pbc-module-stalk] is zero unless $h_a(Z_a)=j_i(C_i)$, and is $\\kappa(\\xi_i)$ when these supports agree; in the latter case $R_i\\twoheadrightarrow\\mathcal O_{C_i,\\xi_i}=\\kappa(\\xi_i)$ is surjective and the quotient stalk has length one [def-weil-pbc-module-length]. Consequently\n$$\\operatorname{length}_{R_i}(\\mathcal F_{\\xi_i})=\\#\\{a\\in\\{1,\\ldots,s\\}:h_a(Z_a)=j_i(C_i)\\}<\\infty.$$\nIn particular, when $\\mathcal F=\\mathcal O_X$, each $m_i=\\operatorname{length}_{R_i}R_i$ is a positive integer and equals this count. For $\\mathcal F=0$ the length-zero filtration is allowed; if $X$ is empty then $\\mathcal O_X=0$, the component list is empty and this filtration applies.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YF (lemma-coherent-filter); generic-stalk length argument using algebra.tex Tag 00IV (lemma-length-additive); geometry and multiplicity paragraph preceding varieties.tex Tag 0AYW (lemma-degree-in-terms-of-components). Agent-written filtration refinement of these inputs."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-coherent-integral-filtration",
+  "def-pc-module-stalk-functor",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-scheme-reduction",
+  "def-sbc-ideal-sheaf-powers",
+  "def-trf-vanishing-ideal-reduced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "The structure module $\\mathcal O_Y$ of any scheme $Y$ is invertible: it is the rank-one free module, with its identity local trivializations. In particular take $\\mathcal N=\\mathcal O_X$ in [lem-trf-proper-field-invertible-coherent]. Its hypotheses are exactly that $k$ is a field and $X$ is proper over $k$; it gives Noetherianity of $X$ and coherence of $\\mathcal O_X$. We will use the same application for any proper closed subscheme of $X$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-trf-proper-field-invertible-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian), final sentence; morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-components], select without repetitions the finite sublist of one-dimensional components. Give each its reduced induced structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. Each resulting $C_i$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme], and has the same dimension as its underlying component. By [lem-weil-pbc-scheme-sober] it has a unique generic point $\\xi_i$, whose closure in $X$ is its component. A nonempty open subset of an irreducible space is dense: two nonempty opens intersect, since otherwise their closed complements cover it. Thus on any affine open $U$ meeting this component, its intersection with $U$ is nonempty irreducible and closed in $U$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes] it is $V(\\mathfrak p)$ for a unique prime $\\mathfrak p$. The radical-ideal description of the reduced induced structure identifies its defining ideal on $U$ with $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IS (lemma-scheme-sober), 01J3 (lemma-reduced-closed-subscheme); properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components); algebra.tex Tag 00ES (lemma-irreducible)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coherent-filtration-integral-subschemes] to the Noetherian scheme $X$ of Step 1 and the given coherent module $\\mathcal F$. It gives exactly the finite chain of coherent submodules, quotient cokernels, integral closed immersions $h_a$ and nonzero coherent ideals $\\mathcal I_a$ asserted here. No dimension or reducedness hypothesis on $X$ is needed for this application. Fix any filtration with these properties for the remaining assertions, rather than just the one supplied by the existence theorem.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YF (lemma-coherent-filter), statement"
+   }
+  },
+  {
+   "text": "For every $h:Z\\hookrightarrow X$ occurring in the filtration, and for every $j_i$, [lem-weil-pbc-closed-immersion-proper] gives properness of the composite to $\\operatorname{Spec}k$. Step 1 applied to each such proper scheme gives its Noetherianity. Write $T=h(Z)$, a nonempty irreducible closed subset of $X$. Chains of irreducible closed subsets of $T$ are chains in $X$, so $0\\leq\\dim T\\leq1$ by [def-kun-topological-krull-dimension]. If $\\dim T=0$, the closure of every $x\\in T$ equals $T$: a proper closure would give a chain of length one in $T$. Uniqueness of the generic point in [lem-weil-pbc-scheme-sober] then says all its points coincide. It is a singleton closed in $X$. If $\\dim T=1$, choose a nonempty irreducible closed $A\\subsetneq T$ from a length-one chain. A strictly larger irreducible closed $W$ in $X$ would give $A\\subsetneq T\\subsetneq W$, contrary to $\\dim X\\leq1$. Thus $T$ is a component and equals exactly one listed component. Since $Z$ is integral, it is reduced, so uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies $h$ with that $j_i$ as a reduced closed subscheme. This also proves the claimed properness of each $C_i$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Paragraph preceding Tag 0AYW (lemma-degree-in-terms-of-components); proper closed subschemes by morphisms.tex Tags 01W5 and 01W3; chain argument from topology.tex Tag 0055"
+   }
+  },
+  {
+   "text": "Fix $i$ and a factor indexed by $a$, and set $T_a=h_a(Z_a)$. If $\\xi_i\\in T_a$, closedness gives $j_i(C_i)=\\overline{\\{\\xi_i\\}}\\subseteq T_a$. Since $T_a$ is irreducible and $j_i(C_i)$ is a maximal irreducible subset, equality follows by [def-weil-irreducible-components]. Consequently $T_a\\neq j_i(C_i)$ implies $\\xi_i\\notin T_a$, and clause (1) of [lem-weil-pbc-closed-pushforward-stalks] gives $(\\mathcal Q_a)_{\\xi_i}=0$. If the supports agree, Step 4 identifies $Z_a$ with $C_i$ over $X$, and the point above $\\xi_i$ is its generic point. We use this identification in the next step.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AE (lemma-stalks-closed-pushforward), vanishing off the closed image; component maximality by topology.tex Tag 004V"
+   }
+  },
+  {
+   "text": "Suppose $T_a=j_i(C_i)$. The scheme $Z_a$ is Noetherian by Step 4, so [pqf-lem-coherent-ft-locnoeth] makes its coherent ideal $\\mathcal I_a$ quasi-coherent. Apply [lem-weil-pbc-integral-scheme-ideal-generic-stalk]: nonzeroness gives $(\\mathcal I_a)_{\\xi_i}=\\mathcal O_{C_i,\\xi_i}$ and this local ring is a field. Clause (2) of [lem-weil-pbc-closed-pushforward-stalks] identifies $(\\mathcal Q_a)_{\\xi_i}$ with this field as an $R_i$-module, with action through the immersion's stalk map. By [def-weil-closed-immersion], the structure-sheaf map onto $(j_i)_*\\mathcal O_{C_i}$ is surjective; [lem-weil-pbc-module-stalk-exact] and the same pushforward-stalk comparison therefore give a surjective local map $R_i\\twoheadrightarrow\\mathcal O_{C_i,\\xi_i}$. Since the target is a field, the inverse image of its zero maximal ideal is the maximal ideal of $R_i$. Thus its kernel is that maximal ideal, so it identifies the target with $R_i/\\mathfrak m_i=\\kappa(\\xi_i)$ by [def-weil-residue-field].",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 08KS (lemma-i-star-equivalence), generic stalk quotient-ring calculation, and 01AG (lemma-abelian); coherent.tex Tag 01XZ and generic ideal argument in Tag 01YL"
+   }
+  },
+  {
+   "text": "Through the surjection $R_i\\twoheadrightarrow\\kappa(\\xi_i)$, every $R_i$-submodule of the residue field is stable under multiplication by every field element. A submodule containing $v\\neq0$ contains $v^{-1}v=1$ and hence the whole field. Its only submodules are therefore $0$ and itself, and its length is one. The zero module has length zero, directly from [def-weil-pbc-module-length]. These conclusions are invariant under module isomorphism since an isomorphism and its inverse carry submodule chains to chains with the same strict inclusions. Steps 5 and 6 thus give quotient length $1$ precisely for the factors on $C_i$, and $0$ for all others.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02LY (definition-length); elementary submodule calculation for the residue-field module"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-stalk-exact] to each inclusion and its quotient cokernel. At $\\xi_i$ this yields $0\\to(\\mathcal F_{a-1})_{\\xi_i}\\to(\\mathcal F_a)_{\\xi_i}\\to(\\mathcal Q_a)_{\\xi_i}\\to0$ over the same ring $R_i$. By [lem-weil-pbc-length-additive-short-exact], the length of the middle term is the sum of the other two. Starting from $(\\mathcal F_0)_{\\xi_i}=0$, induction on $a=0,\\ldots,s$ gives length equal to the number of indices $b\\leq a$ whose support is $C_i$: the base is zero and the successor adds exactly the indicator computed in Step 7. At $a=s$ this proves the asserted equality and finiteness for every filtration of the stated form.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV (lemma-length-additive); modules.tex Tag 01AG (lemma-abelian); generic multiplicity calculation preceding and in proof of varieties.tex Tag 0AYW"
+   }
+  },
+  {
+   "text": "For $\\mathcal F=\\mathcal O_X$, Step 1 supplies coherence and Step 8 supplies finite length and its equality with the count. The local ring $R_i$ is nonzero: it surjects onto the nonzero residue field. Hence $0\\subsetneq R_i$ is a submodule chain of length one, so its finite length is positive by [def-weil-pbc-module-length]. For $\\mathcal F=0$ choose $s=0$ and the chain with sole term $0$; there are no quotients to specify and every count and stalk length is zero. If $X$ is empty its structure sheaf is zero, the component list is empty, and this same chain applies.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Multiplicity paragraph preceding Tag 0AYW (lemma-degree-in-terms-of-components); zero and empty cases from the filtration and length definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Assembly of Tag 01YF with schemes.tex Tags 01IS and 01J3, sheaves.tex Tag 00AE, modules.tex Tags 01AG and 08KS, algebra.tex Tag 00IV, and the multiplicity paragraph before varieties.tex Tag 0AYW. The filtration-independent counting refinement and dimension-chain arguments are written by Q149."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on a proper scheme of dimension at most one admits a finite filtration by integral closed subscheme ideals and the number of factors on a component is its generic stalk length",
+   "results": "8 hits;  Returned names/files: ringKrullDim_le_ringKrullDim_add_card, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_add_length_eq_supportDim_of_isRegular, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular. Read the returned statements. Ideal.Filtration is an adic module filtration; regular-sequence dimension formulas, local Artinian criteria, and Module.length_compositionSeries do not construct coherent integral-ideal filtrations on a scheme or identify their generic quotient supports. None states this profile or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coherent integral ideal filtration on a proper curve counts generic local ring lengths and classifies supports as components or closed points",
+   "results": "8 hits;  Returned names/files: Ideal.Filtration, Ideal.Filtration.casesOn, Ideal.Filtration.rec, Ideal.Filtration.recOn, Ideal.Filtration.Stable, Ideal.Filtration.submodule_fg_iff_stable, Ideal.Filtration.ctorIdx, Ideal.Filtration.mk.sizeOf_spec. Read the returned statements. Ideal.Filtration is an adic module filtration; regular-sequence dimension formulas, local Artinian criteria, and Module.length_compositionSeries do not construct coherent integral-ideal filtrations on a scheme or identify their generic quotient supports. None states this profile or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"filtration\"",
+   "results": "0 hits;  Returned names/files: . Read the returned statements. Ideal.Filtration is an adic module filtration; regular-sequence dimension formulas, local Artinian criteria, and Module.length_compositionSeries do not construct coherent integral-ideal filtrations on a scheme or identify their generic quotient supports. None states this profile or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.{0,60}filtrat|filtrat.{0,60}coherent|generic.{0,50}length|length.{0,50}generic",
+   "results": "0 hits;  Returned names/files: . Read the returned statements. Ideal.Filtration is an adic module filtration; regular-sequence dimension formulas, local Artinian criteria, and Module.length_compositionSeries do not construct coherent integral-ideal filtrations on a scheme or identify their generic quotient supports. None states this profile or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic length of a coherent sheaf equals the count of nonzero integral ideal factors in a coherent filtration at a minimal point of a noetherian curve",
+   "results": "8 hits;  Returned names/files: isFiniteLength_quotient_span_singleton, Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_le_ringKrullDim_add_spanFinrank, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim. Read the returned statements. Ideal.Filtration is an adic module filtration; regular-sequence dimension formulas, local Artinian criteria, and Module.length_compositionSeries do not construct coherent integral-ideal filtrations on a scheme or identify their generic quotient supports. None states this profile or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(filtrat|composition)|filtrat.*length|eulerChar.*(add|tensor)|Euler.*coherent",
+   "results": "25 hits;  Returned names/files: Mathlib/Computability/TuringMachine/Config.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/Analysis/Analytic/Inverse.lean, Mathlib/Analysis/Analytic/Inverse.lean, Mathlib/Analysis/Analytic/Inverse.lean, Mathlib/Analysis/Analytic/Inverse.lean, Mathlib/Analysis/Analytic/Inverse.lean. Read the returned statements. Ideal.Filtration is an adic module filtration; regular-sequence dimension formulas, local Artinian criteria, and Module.length_compositionSeries do not construct coherent integral-ideal filtrations on a scheme or identify their generic quotient supports. None states this profile or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaf filtration by integral ideals on a noetherian curve and generic component multiplicities",
+   "results": "8 hits. Read returned statements: Ideal.Filtration, Ideal.stableFiltration_stable, Ideal.Filtration.rec, Ideal.Filtration.recOn, Ideal.stableFiltration, Ideal.Filtration.noConfusionType, Ideal.Filtration.noConfusion, Ideal.Filtration.casesOn. Ideal.Filtration concerns adic decreasing module filtrations; module length/composition-series and local-Artinian/dimension results do not construct coherent integral-ideal filtrations or identify generic component supports. Existing DAG nodes supply those ingredients separately. No declaration states this complete item or specializes to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module on a proper scheme of dimension at most one has a finite filtration by nonzero ideals on integral closed subschemes whose component counts equal generic stalk lengths",
+   "results": "8 hits. Read returned statements: AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, IsFiniteLength, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, isFiniteLength_quotient_span_singleton, Module.length_ne_top, Module.supportDim_add_length_eq_supportDim_of_isRegular. Ideal.Filtration concerns adic decreasing module filtrations; module length/composition-series and local-Artinian/dimension results do not construct coherent integral-ideal filtrations or identify generic component supports. Existing DAG nodes supply those ingredients separately. No declaration states this complete item or specializes to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(filtrat|composition)|filtrat.*length",
+   "results": "14 hits. Read returned statements: Mathlib/RingTheory/FiniteLength.lean, Mathlib/RingTheory/FiniteLength.lean, Mathlib/RingTheory/FiniteLength.lean, Mathlib/RingTheory/FiniteLength.lean, Mathlib/RingTheory/FiniteLength.lean, Mathlib/RingTheory/LocalRing/Length.lean, Mathlib/RingTheory/LocalRing/Length.lean, Mathlib/RingTheory/LocalRing/Length.lean. Subdirectory: RingTheory. Ideal.Filtration concerns adic decreasing module filtrations; module length/composition-series and local-Artinian/dimension results do not construct coherent integral-ideal filtrations or identify generic component supports. Existing DAG nodes supply those ingredients separately. No declaration states this complete item or specializes to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The length of a coherent sheaf at each generic point of a one dimensional noetherian scheme is the number of factors supported on that irreducible component in an integral ideal filtration",
+   "results": "8 hits. Read returned statements: Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_le_supportDim_quotSMulTop_succ, ringKrullDim_le_ringKrullDim_add_card, Module.supportDim_quotient_eq_ringKrullDim, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, ringKrullDim_le_ringKrullDim_quotSMulTop_succ. Ideal.Filtration concerns adic decreasing module filtrations; module length/composition-series and local-Artinian/dimension results do not construct coherent integral-ideal filtrations or identify generic component supports. Existing DAG nodes supply those ingredients separately. No declaration states this complete item or specializes to it in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-degree-weighted-irreducible-components",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the multiplicity-weighted reduction to reduced integral components in the proof of Stacks 0AYX (via 0AYW). Extraction: Original item proof steps 1 (Noetherianity and structure-module coherence), 2, 3, 4 and 5: coherent filtration, support geometry and generic length counts.",
+   "via": [
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-curve-integral-filtration-multiplicity-profile",
+  "worker": "stage1",
+  "summary": "Reused the existing Noetherian coherent filtration and generic-stalk inputs; supplied support classification, the local residue-field identification and length-one argument, and induction proving the multiplicity count for every such filtration. No new nodes and no statement change. All proof citations were read and copied in citations.json.",
+  "blueprint": "Serves the recorded descendant route from lem-trf-local-term-locality: fibrewise ampleness-to-projectivity, proper integral curve degree criterion, and the multiplicity-weighted degree reduction. This item realizes the extracted filtration, support geometry and generic length-count portions (original parent Steps 1--5), using Stacks 01YF and the multiplicity calculation adjacent to 0AYW; it makes no change to the contracting-correspondence theorem or its unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Reduced induced structure and its uniqueness on a specified closed support; generic scheme-theoretic tool used without replacing the unit route. No statement in sk-i-curve-zero supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "why": "The general Noetherian coherent integral-ideal filtration theorem (01YF), the specified algebraic input of this item. No statement in sk-i-curve-zero supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-pushforward-stalks",
+    "why": "Ordinary Zariski module stalks of a closed pushforward, including its scalar action, are a generic sheaf-theoretic tool. No statement in sk-i-curve-zero supplies this general input."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherent ideals on the Noetherian supports are quasi-coherent, needed for the generic-ideal theorem. No statement in sk-i-curve-zero supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "why": "A nonzero quasi-coherent ideal on an integral scheme has the full field at its generic point; generic commutative-algebra tool. No statement in sk-i-curve-zero supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exact ordinary module stalks and quotient comparison; generic sheaf-theoretic tool for the length computation. No statement in sk-i-curve-zero supplies this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-0148d8c9b",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-0148d8c9b (reviewer sub-agent of L); spot-checked: First split, not a re-split: base item unsplit with no proof, statement byte-identical, zero new nodes, one commit. Sources read: Stacks 01YF lemma-coherent-filter (coherent.tex l.3050ff) and the multiplicity paragraph and proof of 0AYW (varieties.tex l.9694ff); item objects C_i, xi_i, m_i match. All 19 proof_deps statements read; each step uses only what the statement says. Step 1: proper-field-invertible-coherent with N=O_X. Step 2: noetherian-finitely-many-components, reduced-induced (1)-(2), integral equivalence, sober, Spec prime classification; the radical ideal I_T(U) equals the prime. Step 4: dimension chain argument correct (dim 0 gives a single point via generic-point uniqueness; dim 1 gives a component); uniqueness clause (3) identifies Z_a with C_i; properness via 01W3/01W5 leaf (c). Step 5: maximality plus closed-pushforward clause (1). Step 6: 01XZ quasi-coherence, generic-stalk (d), pushforward clause (2), surjective stalk map, kernel = m_i, so the stalk is kappa(xi_i); R_i need not be reduced. Steps 7-9: length 1, stalk-exact (1)+(3), length additivity, explicit induction, m_i >= 1. Small cases checked: empty X, Spec k, integral curve, curve plus point, two crossing lines, P^1 with epsilon^2 (m=2), skyscraper. No cycle (791-node closure). No duplicates (parent degree-weighted, curve-euler-defect-additivity, hilbert-samuel nodes are different statements). The 6 declared other-unit generic tool_uses are accepted. No SGA; not a target node, so the base-change/coefficient check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveIntegralFiltrationMultiplicityProfile",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_components",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_components",
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_component_geometry",
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_exists",
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_factor_geometry",
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_stalk_count",
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_multiplicity",
+   "AlgebraicGeometry.Scheme.Modules.curve_integral_filtration_zero_cases"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveIntegralFiltrationMultiplicityProfile.lean",
+  "statement": "theorem curve_integral_filtration_components {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [IsProper f] (hdim : topologicalKrullDim X ≤ 1) : IsNoetherian X ∧ RingedSpace.IsCoherent X.toRingedSpace (SheafOfModules.unit X.ringCatSheaf) ∧ ∃ (t : ℕ) (T : Fin t → Closeds X), Function.Injective T ∧ Set.range (fun i ↦ (T i : Set X)) = {S : Set X | S ∈ irreducibleComponents X ∧ topologicalKrullDim S = 1}",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Seven theorem declarations render the clauses of this node, with all signatures unchanged from the independently checked returned head d1708de228f8. H2 repair: the reduced-induced-closed-subscheme theorem remains only a proof dependency and plain import. Statement dependencies instead cite the existing scheme-reduction and ideal-sheaf definitions and the new existing:true node def-trf-vanishing-ideal-reduced-closed-subscheme for Mathlib vanishingIdeal. No statement correction or new Lean construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb15367ed",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of d1708de2. Diff against the d170 snapshot: the Lean change is imports only (the ReducedInducedClosedSubscheme public import becomes a plain proof import; public imports of Mathlib IdealSheaf.Basic and IdealSheaf.Subscheme added). The 7 signatures, already judged mathematically correct, are byte-identical. Item node vs live: only lean and stmt_deps differ; statement, proof and proof_deps are byte-identical. stmt_deps drop lem-weil-pbc-reduced-induced-closed-subscheme (kept in proof_deps) and add def-weil-pbc-scheme-reduction, def-sbc-ideal-sheaf-powers and the new def-trf-vanishing-ideal-reduced-closed-subscheme. The new node matches Stacks 01J3/01J4 and is bound existing:true to Mathlib IdealSheafData.vanishingIdeal (Basic.lean:565, verbatim; affine intersection of primes checked). Its deps all exist live; no cycle; no duplicate def node (the 3 vanishingIdeal hits in live dag are theorem/lemma nodes). lean.statement is verbatim. Report sections are present. No compile, since no file was changed; the worker's scompile and deliver2 --no-push were OK."
+ }
+}

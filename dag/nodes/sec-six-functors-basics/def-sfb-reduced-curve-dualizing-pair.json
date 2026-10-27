@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-reduced-curve-dualizing-pair",
+ "kind": "definition",
+ "title": "Representing pair in coherent curve duality",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be a $k$-scheme [def-pc-scheme] with its specified structure morphism $f:C\\to\\operatorname{Spec}k$. For $p\\geq 0$ define $H^p_k(C,-)$ to be the module cohomology functor of [def-sc-ringed-space-module-cohomology], with scalars restricted from $\\Gamma(C,\\mathcal O_C)$ to $k$ along the ring map induced by $f$. A representing dualizing pair on $C$ consists of a sheaf of $\\mathcal O_C$-modules $\\omega$ [def-weil-sheaf-of-modules-category], a proof that $\\omega$ is coherent [pqf-def-coherent], and for every coherent sheaf of $\\mathcal O_C$-modules $F$ a $k$-linear isomorphism $e_F:\\operatorname{Hom}_{\\mathcal O_C}(F,\\omega)\\simeq\\operatorname{Hom}_k(H^1_k(C,F),k)$. These isomorphisms are required to be natural contravariantly in coherent $F$: for every morphism $a:F\\to G$ of coherent modules and $b:G\\to\\omega$, $e_F(b\\circ a)=e_G(b)\\circ H^1_k(C,a)$. This defines the data of a representing pair; it asserts no existence on an arbitrary $k$-scheme and imposes no connectedness condition.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BS2, lemma-duality-dim-1, (5): coherent restriction of the functorial representing isomorphisms; representing-pair uniqueness by Yoneda as in the footnote to (4)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent dualizing module with natural linear isomorphisms Hom into it and the dual of first sheaf cohomology",
+   "results": "[leansearch] OK 8 hit(s)\nModule.Invertible.linearEquivDual\ndualTensorHomEquiv\nModule.Dual.instIsReflecive\ndualTensorHomEquivOfBasis\nModule.evalEquiv\nModule.Dual\nModule.dualProdDualEquivDual_apply\nLinearMap.IsPerfPair.dualEval",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib representing-pair definition; hits are ordinary linear duals, categorical adjoints or unrelated representability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The representing pair of coherent Serre duality for a scheme over a field, with cohomology restricted to scalars in the field",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\nFGModuleCat.exactPairing\nAlgebraicGeometry.Scheme.LocalRepresentability.representableBy\nAlgebraicGeometry.AffineSpace.homOverEquiv\nAlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\nAlgebraicGeometry.Scheme.Modules.instAbelian\nAlgebraicGeometry.AffineSpace\nAlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib representing-pair definition; hits are ordinary linear duals, categorical adjoints or unrelated representability."
+  },
+  {
+   "tool": "grep",
+   "query": "DualizingPair|moduleCohomologyOverField|duality.*coherent",
+   "results": "[grep] OK 0 hit(s)\n\nMathlib AlgebraicGeometry: no hits. Local rg over lean/WeilConjectures and lean/Sheaf: ReducedCurveDualizingModule.lean:71 defines Scheme.Modules.moduleCohomologyOverField; :80 defines ReducedCurveDualizingPair; ClosedSubcurveDualizingAdjunction.lean uses it. No definition in WeilConjectures. grep of dag/nodes finds the declarations only owned by lem-sfb-reduced-curve-dualizing-module (a theorem node), with downstream uses in lem-sfb-closed-subcurve-dualizing-adjunction. blueprint_refs.py search dualizing pair: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing project declarations found; register them with existing:true, without a second construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-subcurve-dualizing-annihilator",
+  "date": "2026-10-24",
+  "group": "Q86"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED. Auxiliary: Dualizing module of a nodal subcurve as an annihilator. Definition of the coherent representing pair and its scalar-restricted module cohomology used by the annihilator statement.",
+   "via": [
+    "lem-sfb-nodal-subcurve-dualizing-annihilator",
+    "lem-sfb-nodal-special-clifford-subcurve",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedCurveDualizingModule",
+  "declaration": "AlgebraicGeometry.ReducedCurveDualizingPair",
+  "declarations": [
+   "AlgebraicGeometry.ReducedCurveDualizingPair",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyOverField"
+  ],
+  "statement": "structure ReducedCurveDualizingPair (k : Type u) [Field k]\n    (C : Scheme.{u}) [C.Over (Spec (.of k))]",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing structure and scalar-cohomology abbreviation, read at ReducedCurveDualizingModule.lean:71-90. This node records their representing-pair data, not the theorem asserting existence for proper reduced pure curves. Coherence is RingedSpace.IsCoherent, exactly clause 3 of pqf-def-coherent, now explicitly exposed by that node. No Lean declaration is copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60410f785",
+  "group": "Q86",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60410f785",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery of returned head bc130 (RETURN H2, missing owner of ReducedCurveDualizingPair). Lean module byte-identical to bc130; my clause-by-clause re-read against the node and Stacks 0E33(2)/0E38 agrees it is correct. Item JSON differs from side-live only in lean and stmt_deps: added def-sfb-reduced-curve-dualizing-pair (new, existing:true) plus the advised landed def-pc-module-stalk-functor and def-sc-generic-point; proof_deps and statement unchanged. New node: lean.statement matches ReducedCurveDualizingModule.lean:79-80 exactly; TeX matches omega, coherence (RingedSpace.IsCoherent, owned by pqf-def-coherent), k-linear duality and naturality, and moduleCohomologyOverField; source 0BS2(5); no extra assumptions; all stmt_deps resolve; not in live or side-live, so no parallel-delivery clash. One sorry; helper nodalSubcurveHomMap is real; docstrings and both report sections present. No compile (no file changed). Notes only: e fixed up to automorphism, as in the landed adjunction; legacy 0C4D source place."
+ }
+}

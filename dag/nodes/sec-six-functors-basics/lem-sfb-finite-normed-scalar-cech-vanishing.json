@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-finite-normed-scalar-cech-vanishing",
+ "kind": "statement",
+ "title": "Finite-family Cech vanishing for continuous normed p-adic scalar coefficients",
+ "statement": "Fix a prime ell, a normed finite-dimensional algebra E over Q_ell, and the continuous-function abelian sheaf A on Profinite [def-sfb-continuous-map-condensed-ring]. For every nonempty finite index type T (in any universe), every family W_t -> V of profinite sets jointly surjective on points, every chosen alternating complex S [def-weil-pbc-site-cech-complex], and every q>0, the q-th cohomology of S with coefficients in A is zero. The base V may be empty; the empty index type is handled directly in the parent proof. The statement concerns actual continuous functions with the extending norm topology.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2)–(4), through the existing lem-sfb-normed-scalar-profinite-cech-exact; elementary disjoint-union identification of the finite-family complex."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the finite family by a finite ordinal to keep the disjoint union of its sources u-small even if the original indices live in a larger universe. This disjoint union T is profinite and its induced map q to V is a continuous surjection. For each degree, equal-image tuples in T form the finite disjoint union of the fibre products indexed by tuples of summands. Each piece is clopen, and its universal property identifies it with the chosen object S.W. Restriction to the pieces and gluing continuous functions are inverse additive maps between the scalar tuple cochains and the finite-family cochains. Both maps commute with deleting any coordinate, hence with the alternating differential. The given norm on E agrees with the spectral norm by uniqueness of the extending norm on a finite extension of Q_ell. For any positive-degree family cocycle, glue to a continuous tuple cocycle, apply lem-sfb-normed-scalar-profinite-cech-exact to obtain a primitive, and restrict it to the pieces. Its boundary is the original cocycle. Thus image equals kernel and positive homology is zero. Empty V gives empty sources and zero continuous-function groups, and is included. The empty index type is proved separately in the parent.",
+   "uses": [
+    "lem-sfb-normed-scalar-profinite-cech-exact",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-scalar-profinite-cech-exact",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2)–(4), through the existing lem-sfb-normed-scalar-profinite-cech-exact; elementary disjoint-union identification of the finite-family complex.",
+  "by": "agent",
+  "group": "C7",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite Cech cohomology of continuous p-adic functions on profinite spaces vanishes in positive degrees",
+   "results": "Profinite.lim, Condensed.lanSheafProfinite, Profinite.asLimitConeIso, mahler, Condensed.isSheafProfinite, Profinite.hasColimits, Profinite.exists_locallyConstant_fin_two, profiniteToCondensed. None states the required finite-family vanishing or module-resolution comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct result; use the existing project primitive and categorical criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an injective sheaf of modules resolution after evaluation is the right derived sections of its underlying abelian sheaf",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H, CochainComplex.cm5b.I_X, Functor.isZero_rightDerived_obj_injective_succ, Sheaf.cohomologyPresheafFunctor, CochainComplex.cm5b.I, InjectiveResolution.ofCocomplex, InjectiveResolution.instIsKInjectiveCochainComplex. These give formal ingredients, not the required comparison after forgetting module structure.",
+   "date": "2026-10-26",
+   "verdict": "No direct result. Existing project ModuleAbelianEvaluationComparison is the mathematical input, with a site-universe transport still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"Exact\"",
+   "results": "InjectiveResolution.cocomplex_exactAt_succ, exact_succ, ofCocomplex_exactAt_succ and exact₀. These assert exactness before evaluation; evaluation is only left exact, so they do not imply positive evaluated exactness.",
+   "date": "2026-10-26",
+   "verdict": "Use the kernel universal property for the augmentation; positive exactness needs the derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*Cech|Cech.*vanishing|injective.*module.*acyclic",
+   "results": "Mathlib/AlgebraicTopology/CechNerve.lean only in msearch. Local project searches found NormedScalarProfiniteCechExact, CategoricalFiniteCechCriterion, SiteCechMathlibComparison, InternalAbelianSheafModuleEquivalence, ModuleAbelianEvaluationComparison. The last two general-site comparison interfaces have more restrictive universe binders than this profinite application.",
+   "date": "2026-10-26",
+   "verdict": "Reuse project declarations; prove the categorical finite criterion application with a private universe-generalized product comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FiniteNormedScalarSectionAcyclicity",
+  "date": "2026-10-26",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, finite E scalar input; Finite-family Cech vanishing for continuous normed p-adic scalar coefficients.",
+   "via": [
+    "lem-sfb-finite-normed-scalar-section-acyclicity",
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.FiniteNormedScalarCechVanishing",
+  "file": "lean/Sheaf/Topology/FiniteNormedScalarCechVanishing.lean",
+  "declaration": "Profinite.finiteNormedScalar_cech_vanishing",
+  "statement": "theorem finiteNormedScalar_cech_vanishing (l : ℕ) [Fact l.Prime]\n    (E : Type u) [NormedField E] [NormedAlgebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (V : Profinite.{u}) (T : Type v) [Finite T] [Nonempty T] (W : T → Profinite.{u})\n    (f : ∀ t, W t ⟶ V) (hf : ∀ v : V, ∃ t, ∃ w : W t, f t w = v)\n    (S : SiteCechComplex W f) (q : ℕ) (hq : 0 < q) :\n    IsZero ((S.cohomologyFunctor q).obj (continuousMapRingObjOfUniverse E).obj)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T081310-L-1913135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T081310-L-1913135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -272,7 +272,98 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+    "CategoryTheory.Functor.ProjectionFormula.smul",
+    "CategoryTheory.Functor.ProjectionFormula.modObj",
+    "CategoryTheory.Functor.ProjectionFormula.mapModLeft_obj_X",
+    "CategoryTheory.Functor.ProjectionFormula.mapModLeft_map_hom",
+    "CategoryTheory.Functor.ProjectionFormula.mapModLeft_obj_smul",
+    "CategoryTheory.Functor.ProjectionFormula.mapModLeft_comp_forget"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      259,
+      271
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.smul",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      217,
+      220
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.modObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      227,
+      255
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModLeft_obj_X",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      273,
+      273
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModLeft_map_hom",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      275,
+      276
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModLeft_obj_smul",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      278,
+      279
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.ProjectionFormula.mapModLeft_comp_forget",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+     "lines": [
+      281,
+      282
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
   "declaration": "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
@@ -299,5 +390,38 @@
   "group": "Q147",
   "result": "pass",
   "note": "existing:true record of upstream CategoryTheory.Functor.ProjectionFormula.mapModLeft (side-live ProjectionFormula.lean 215–282); only the item's lean field changes, and the 4 dependency nodes are identical to live. Every clause matches: smul = (pf.iso B M).inv ≫ P.map γ, modObj gives the module laws, Mod.Hom.mk' gives B-linearity, mapModLeft is the functor, mapModLeft_comp_forget is a functor equality by rfl. The monoid on SB comes from Mathlib monObjObj (ε ≫ S.map η, μ ≫ S.map μ), checked by rfl. No extra assumptions (no adjunction, braiding, additivity or exactness; B noncommutative allowed; independent universes); the record correctly takes the general version, not Adjunction.mapModLeft. No duplicate record in the DAG. The two monoid dependencies are status mathlib with matching mathlib_match. nt_compile --json probe (#check of the 7 declarations and rfl checks of the action and monoid formulas) compiled clean, 5.1 s, exit 0."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\pi$ be a projection formula for $P\\colon\\mathcal C\\to\\mathcal D$ relative to a strong\nmonoidal $S\\colon\\mathcal D\\to\\mathcal C$ ([def-sfb-projection-formula]). Let\n$\\mathcal B$ be a monoid object of $\\mathcal D$, so $S\\mathcal B$ is a monoid object of\n$\\mathcal C$. For an $S\\mathcal B$-module object $M$ ([det-def-sfb-module-objects-definition]), the\nmorphism\n$$\n\\mathcal B\\otimes PM\\xrightarrow{\\pi^{-1}_{\\mathcal B,M}}P(S\\mathcal B\\otimes M)\n\\xrightarrow{P\\gamma_M}PM\n$$\nmakes $PM$ a $\\mathcal B$-module object, and $Pf$ is $\\mathcal B$-linear for every\n$S\\mathcal B$-linear $f$. This defines the *linearization*\n$$\nP_{\\mathcal B}\\colon\\Mod_{S\\mathcal B}(\\mathcal C)\\to\\Mod_{\\mathcal B}(\\mathcal D),\n$$\nwhich commutes with the forgetful functors.",
+  "proof": [
+   {
+    "text": "We use the notation of [def-sfb-projection-formula]. The monoid $S\\mathcal B$ has unit\n$S(\\eta_{\\mathcal B})\\epsilon^{-1}$ and multiplication\n$S(\\mu_{\\mathcal B})\\delta_{\\mathcal B,\\mathcal B}^{-1}$.",
+    "uses": [
+     "def-sfb-projection-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Unit law. By naturality of $\\pi$ in $L$,\n$$\nP(\\gamma_M)\\pi^{-1}_{\\mathcal B,M}(\\eta_{\\mathcal B}\\otimes PM)\n=P\\bigl(\\gamma_M(S\\eta_{\\mathcal B}\\otimes M)\\bigr)\\pi^{-1}_{\\mathbf 1,M}.\n$$\nThe unit law of $M$ gives $\\gamma_M(S\\eta_{\\mathcal B}\\otimes M)=\\lambda_M(\\epsilon\\otimes M)$.\nBy the unit compatibility of $\\pi$, the right side is therefore $\\lambda_{PM}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Associativity. Naturality of $\\pi$ in $L$, applied to $\\mu_{\\mathcal B}$, reduces the\nassociativity of the action to the associativity of $\\gamma_M$ for the multiplication of\n$S\\mathcal B$. This multiplication involves $\\delta_{\\mathcal B,\\mathcal B}$. The\nassociativity compatibility of $\\pi$, together with naturality of $\\pi$ in $M$ applied to\n$\\gamma_M$, identifies the two sides.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Linearity of $Pf$ is naturality of $\\pi$ in $M$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

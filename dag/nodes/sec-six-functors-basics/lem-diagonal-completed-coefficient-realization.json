@@ -1,0 +1,128 @@
+{
+ "id": "lem-diagonal-completed-coefficient-realization",
+ "kind": "statement",
+ "title": "A completed-to-condensed coefficient realization at one scheme",
+ "statement": "Let l be prime and X a Noetherian scheme on which l is a unit in global sections. There exists a CompletedRealization l X as defined in [def-sfb-diagonal-coefficient-reference]: an additive exact equivalence from completed coefficient modules to modules over the pulled-back condensed Z_l ring, with its underlying abelian-sheaf comparison and the prescribed regular-module finite-projection and integral-root-line normalizations. This assertion concerns one scheme and no direct-image functor.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1); initial coefficient and supported-source identification, expanded in lem-diagonal-completed-frame proof"
+ },
+ "proof": [
+  {
+   "text": "Obtain the coefficient-ring isomorphism fixed by every finite reduction and the already constructed integral root map. Obtain the linear root-line isomorphism for this coefficient identification.",
+   "uses": [
+    "lem-diagonal-completed-coefficient-ring-comparison",
+    "lem-diagonal-completed-coefficient-root-line-comparison",
+    "lem-diagonal-integral-root-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose scalar restriction along the ring isomorphism with the inverse internal/sectionwise module equivalence. Construct the inverse scalar restriction explicitly, with identity round trips on sections. Additivity follows on sections for reconstruction, hence for its inverse and the composite. As an equivalence the composite preserves finite limits and colimits. Its underlying-sheaf natural isomorphism is the reconstruction counit.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse ring map gives an explicit sectionwise regular-module isomorphism. Lift its composite with the reconstruction counit through the fully faithful reconstruction functor; similarly lift the sectionwise root-line isomorphism. For either lift, applying reconstruction gives exactly the counit followed by its sectionwise comparison. Composing with the inverse underlying counit cancels the counit. Thus the unit normalization is the ring projection equation and the line normalization is the prescribed root map. Assemble these data into CompletedRealization.",
+   "uses": [
+    "lem-diagonal-completed-coefficient-ring-comparison",
+    "lem-diagonal-completed-coefficient-root-line-comparison",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-diagonal-completed-coefficient-ring-comparison",
+  "lem-diagonal-completed-coefficient-root-line-comparison",
+  "lem-diagonal-integral-root-map"
+ ],
+ "proof_origin": {
+  "by": "V2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), explicit scalar restriction/reconstruction and counit cancellation; coefficient-ring and root-line comparisons isolated as strictly smaller steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between modules over isomorphic ring sheaves preserves direct images and the canonical derived unit on acyclic objects",
+   "results": "Eight hits, including ModuleCat.restrictScalarsEquivalenceOfRingEquiv and SheafOfModules.pushforwardSections_unitHomEquiv; no complete normalized sheaf comparison.",
+   "date": "2026-10-26",
+   "verdict": "Existing scalar and module APIs are tools; the normalized coefficient statements are absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence commuting with ordinary direct image transports its normalized acyclic degree zero supported source through the derived functor universal unit",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactors, mapDerivedCategorySingleFunctor and Abelian.Ext.mapExactFunctor_hom. No supported-source or completed-coefficient existence theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing exact-derived and single-object comparison APIs for the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "CompletedRealization|CompletedOrdinarySquare|NormalizedSource|restrictScalarsEquivalence",
+   "results": "Local rg of both library roots found the definitions and the original frame hole, but no realization or ordinary-square existence theorem. Mathlib supplies general scalar restriction and exact-derived APIs. DAG search found no duplicate normalized comparison statement.",
+   "date": "2026-10-26",
+   "verdict": "These separate construction steps are not already declared."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCompletedFrame",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial coefficient and supported-source identification",
+   "via": [
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientRealization",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficientRealization_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficientRealization_exists"
+  ],
+  "statement": "theorem completedCoefficientRealization_exists (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (l : Γ(X, ⊤))) :\n    Nonempty (CompletedRealization l X)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T183249-L-3697987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T202608-L-3472059",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

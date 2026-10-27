@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-generating-tuple-chain",
+ "blueprint": {
+  "is": null,
+  "from": "lem-pur-frame-independence",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Elementary chains in a common span",
+ "statement": "Let R be a commutative local ring, M an R-module and f,g length-c tuples with the same span. A finite chain of unit scalings, transpositions and shears connects f to g. Work in the common finite span and apply [lem-pur-local-generating-tuples].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Local-ring reduction and spreading paragraph"
+ },
+ "stmt_deps": [
+  "lem-pur-local-generating-tuples"
+ ],
+ "proof": [
+  {
+   "text": "Lift both tuples into their common span, a finite module because a finite tuple generates it. Both lifted tuples generate the entire submodule.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pur-local-generating-tuples], discard the matrix witnesses and map each operation through the submodule inclusion. Induct through the finite sequence.",
+   "uses": [
+    "lem-pur-local-generating-tuples"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-local-generating-tuples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Local-ring and spreading paragraph, realized explicitly in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite generating tuples over a local ring joined by elementary operations and spread to scheme neighbourhoods",
+   "results": "No direct statement; use the project local generator theorem and Mathlib stalk APIs.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, Submodule.span, Relation.ReflTransGen",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_le_germ_eq|isUnit_res_of_isUnit_germ|exists_elementary_generating_tuple_change",
+   "results": "Mathlib.Topology.Sheaves.Stalks.exists_le_germ_eq and RingedSpace.isUnit_res_of_isUnit_germ supply the local lifting steps; no assembled chain theorem.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFrameIndependence",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.GeneratingTupleChain",
+  "file": "lean/Sheaf/RingTheory/GeneratingTupleChain.lean",
+  "declaration": "Module.generatingTupleChain",
+  "declarations": [
+   "Module.GeneratingTupleStep",
+   "Module.generatingTupleChain"
+  ],
+  "statement": "theorem generatingTupleChain {R : Type u} [CommRing R] [IsLocalRing R]\n    {M : Type v} [AddCommGroup M] [Module R M] (c : ℕ) (f g : Fin c → M)\n    (hfg : Submodule.span R (Set.range f) = Submodule.span R (Set.range g)) :\n    Relation.ReflTransGen (GeneratingTupleStep (R := R)) f g",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T041157-L-1052777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T041157-L-1052777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

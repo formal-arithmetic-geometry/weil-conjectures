@@ -1,0 +1,283 @@
+{
+ "id": "lem-per-g-ring-finite-domain-generic-test",
+ "kind": "statement",
+ "title": "G-rings tested by finite domain generic formal fibres",
+ "statement": "Let $R$ be a commutative Noetherian semilocal ring [def-weil-pbc-noetherian-ring], where semilocal means having finitely many maximal ideals. Then $R$ is a G-ring [def-weil-pbc-g-ring] if and only if the following condition holds. For every commutative $R$-algebra $B$ that is a nonzero integral domain and finite as an $R$-module [def-weil-finitely-generated-module] (such a $B$ is Noetherian semilocal), let $\\mathfrak r_B$ be the intersection of its maximal ideals and let $C=\\varprojlim_n B/\\mathfrak r_B^n$ [def-weil-pbc-adic-completion]. For every prime $\\mathfrak P\\subset C$ whose inverse image in $B$ is $(0)$, the local ring $C_{\\mathfrak P}$ [def-weil-pbc-localization-at-prime] is regular [def-weil-regular-scheme]. The finite algebra map $R\\to B$ need not be injective. No characteristic or universal catenarity hypothesis is imposed.",
+ "source": {
+  "document": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/85AECB0C45C611A35984C299BC5F5EC1/S0027763000018560a.pdf/komplettierung-semilokaler-quasiausgezeichneter-ringe.pdf",
+  "place": "Rotthaus, Komplettierung semilokaler quasiausgezeichneter Ringe, Nagoya Math. J. 76 (1979), Lemma 1(a)–(b), p.174 (Matsumura 33.E); her terminology quasiausgezeichnet means geometrically regular formal fibres, as explicitly defined on p.173. Related Stacks Tag 07PQ, more-algebra-lemma-check-G-ring, is the finite-free regular-formal-fibre test, not this finite-domain generic-fibre formulation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First check the parenthetical assertion about a finite $R$-algebra $B$. It is Noetherian by [lem-weil-pbc-finite-algebra-noetherian]. It is integral over $R$ by [lem-weil-pbc-finite-algebra-is-integral], so every maximal ideal of $B$ contracts to a maximal ideal of $R$ by [lem-weil-pbc-integral-extension-dimension]. Over each such ideal there are finitely many primes by the finiteness assertion in [lem-weil-pbc-completion-finite-extension]. There are finitely many maximal ideals of $R$, hence finitely many maximal ideals of $B$. This reasoning does not assume that $R\\to B$ is injective. If $R$ is the zero ring there is no unital map to a nonzero domain; its G-ring condition is vacuous as well, by [def-weil-pbc-g-ring]. Henceforth take $R\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-extension-dimension",
+    "lem-weil-pbc-completion-finite-extension",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PQ, algebraic finiteness preliminaries; algebra.tex Tags 00FN, 00OJ and 07N9."
+   }
+  },
+  {
+   "text": "For the forward direction assume $R$ is a G-ring. Module generators of $B$ also generate it as an $R$-algebra, so [lem-weil-pbc-finite-type-over-g-ring] makes $B$ a G-ring. By [lem-weil-pbc-g-ring-completion-regular], $B\\to C$ is regular for its Jacobson-radical completion. Put $K=\\operatorname{Frac}(B)$. Its fibre $F=C\\otimes_BK$ over $(0)$ is Noetherian and geometrically regular. Taking the trivial field extension in [def-weil-pbc-g-ring] makes $F$ regular. By [lem-weil-pbc-localization-base-change], $F=(B\\setminus\\{0\\})^{-1}C$. A prime $\\mathfrak P$ of $C$ contracting to zero is disjoint from this denominator set, and $F_{\\mathfrak P F}\\cong C_{\\mathfrak P}$: the isomorphism sends $(c/s)/(d/u)$ to $cu/(sd)$ and has inverse $c/d\\mapsto(c/1)/(d/1)$. The definition [def-weil-regular-scheme] therefore gives the required regular local ring.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07PQ (forward implication), 07PV and 0AH2; algebra.tex, geometric regularity Definition 0382."
+   }
+  },
+  {
+   "text": "Assume now the stated test on finite domain algebras. Fix a maximal ideal $\\mathfrak m$ of $R$, a prime $\\mathfrak q\\subseteq\\mathfrak m$, and a finite purely inseparable extension $L/K$, where $A=R/\\mathfrak q$ and $K=\\operatorname{Frac}(A)=\\kappa(\\mathfrak q)$. Construct a finite domain $R$-algebra $B\\subset L$ with fraction field $L$ as follows. In characteristic zero take $B=A$, since $L=K$ by [def-weil-pbc-finite-purely-inseparable-extension]. In characteristic $p>0$, choose a finite $K$-basis $u_1,\\ldots,u_s$ of $L$. For each $j$ choose $e_j\\geq0$ and $a_j,b_j\\in A$, $b_j\\ne0$, with $u_j^{p^{e_j}}=a_j/b_j$. For $d=\\prod_jb_j$ and $v_j=du_j$, one has $v_j^{p^{e_j}}=d^{p^{e_j}}a_j/b_j\\in A$. Thus $v_j$ satisfies a monic polynomial over $A$. Set $B=A[v_1,\\ldots,v_s]\\subset L$. By [lem-weil-pbc-finite-of-integral-generators] it is finite over $A$. Since $A$ is cyclic over $R$, [lem-weil-pbc-finite-module-over-finite-algebra] makes it finite over $R$. It is a nonzero domain. Moreover $K\\subseteq\\operatorname{Frac}(B)\\subseteq L$ and $u_j=v_j/d$ lies in $\\operatorname{Frac}(B)$; the basis then gives equality. Step 1 applies to $B$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PQ, construction of a finite model for a prescribed purely inseparable residue-field extension; denominator-clearing variant of its finite-free model. The monic calculation is written out here."
+   }
+  },
+  {
+   "text": "Let $C_B$ be the Jacobson-radical completion of this $B$. It is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. Put $S=B\\setminus\\{0\\}$. By [lem-weil-pbc-localization-base-change], $G=C_B\\otimes_BL=S^{-1}C_B$, because $L=\\operatorname{Frac}(B)$. This is Noetherian by [lem-weil-pbc-localization-noetherian]. Its prime ideals correspond to primes $\\mathfrak P\\subset C_B$ disjoint from $S$, equivalently contracting to zero in $B$. As in Step 2 its local ring is $(C_B)_{\\mathfrak P}$, regular by the assumed test. Hence $G$ is regular by [def-weil-regular-scheme]. Apply [lem-per-semilocal-jacobson-completion-product] to $B$ and invert $S$. This gives $G\\cong\\prod_{\\mathfrak n\\in\\operatorname{Max}B}(\\widehat{B_{\\mathfrak n}}\\otimes_BL)$. Localization commutes with this finite product: on each component it sends $(c_{\\mathfrak n})/s$ to $(c_{\\mathfrak n}/s)$, and component fractions have a common denominator obtained by multiplying their finitely many denominators. Thus each factor is regular. Indeed primes in a finite product select exactly one of its orthogonal coordinate idempotents, so the corresponding local ring equals a local ring of that factor; each factor is also a quotient of the Noetherian product.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-regular-scheme",
+    "lem-per-semilocal-jacobson-completion-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PQ, regular generic fibres of the finite models; algebra.tex Tag 07N9 proof, via the separately stated semilocal completion comparison."
+   }
+  },
+  {
+   "text": "Write $H=\\widehat{R_{\\mathfrak m}}$. By [lem-weil-pbc-completion-finite-extension], $H\\otimes_RB\\cong\\prod_{\\mathfrak n\\cap R=\\mathfrak m}\\widehat{B_{\\mathfrak n}}$ as $B$-algebras. All these $\\mathfrak n$ are maximal: their quotients are domains integral over $R/\\mathfrak m$, a field, and a nonzero element integral over a field has its inverse expressed by its monic equation with nonzero constant coefficient. Hence they occur among the factors of Step 4. Tensor with $L$ over $B$ and use [lem-weil-pbc-tensor-cancel-base-change] (and the interchange of tensor factors). Since $L$ is the localization of $B$ at $S$, the common-denominator calculation of Step 4 identifies the result with the finite product of $\\widehat{B_{\\mathfrak n}}\\otimes_BL$. Consequently $H\\otimes_RL$ is regular: at every prime its local ring is that of one regular factor, and this finite product is Noetherian, since an ideal is the product of its finitely many coordinate ideals, whose finite generators can be put in their respective coordinates. The empty product is the zero ring, also regular.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PQ, displayed completion/base-change product in the converse; algebra.tex Tag 07N9 (algebra-lemma-completion-finite-extension)."
+   }
+  },
+  {
+   "text": "For fixed $\\mathfrak m,\\mathfrak q$, put $F=H\\otimes_R\\kappa(\\mathfrak q)$. The completion $H$ is Noetherian by [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-adic-completion-noetherian], and $F$ is Noetherian by [lem-weil-pbc-fibre-ring-noetherian]. For every finite purely inseparable $L/\\kappa(\\mathfrak q)$, Step 5 gives regularity of $F\\otimes_{\\kappa(\\mathfrak q)}L\\cong H\\otimes_RL$, the cancellation isomorphism sending $(h\\otimes a)\\otimes l$ to $h\\otimes al$. Thus $F$ is geometrically regular by [def-weil-pbc-g-ring]. The primes of $R_{\\mathfrak m}$ are precisely $\\mathfrak qR_{\\mathfrak m}$ for $\\mathfrak q\\subseteq\\mathfrak m$, with residue field $\\kappa(\\mathfrak q)$; contraction sends a prime $Q$ to $\\mathfrak q$, while membership $a/s\\in Q$ is equivalent to $a/1\\in Q$ since $s/1$ is a unit; conversely extension of a prime disjoint from the denominators is prime. Residue fields are identified by $a/s\\mapsto\\bar a/\\bar s$. With the conventions of [def-weil-pbc-localization-at-prime], the fibre of $R_{\\mathfrak m}\\to H$ is exactly $F$, since every element outside $\\mathfrak m$ is already a unit in both tensor factors. This completion map is flat by [lem-weil-pbc-noetherian-completion-flat]. Its fibres are therefore Noetherian and geometrically regular, so it is regular. This holds for every maximal $\\mathfrak m$, and [lem-weil-pbc-g-ring-maximal-ideal-criterion] concludes that $R$ is a G-ring.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07PQ and 07PT (more-algebra-lemma-check-G-ring-maximal-ideals); geometric-regularity definition in Tag 07GH/07BZ and algebra.tex Tag 0382."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "lem-per-semilocal-jacobson-completion-product",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PQ, proof of lemma-check-G-ring, adapted to finite domain models and semilocal Jacobson completions; Tag 07PT for passage from maximal local completion maps to G-rings. Rotthaus (1979), Lemma 1, p.174 states the exact criterion but refers to Matsumura 33.E rather than giving its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-g-ring-finite-domain-generic-test: A Noetherian semilocal ring is a G-ring if and only if every finite domain algebra has regular generic formal fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"instFiniteMaximalSpectrumOfIsFractionRing\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] [IsNoetherianRing A] [IsFractionRing A A], Finite (MaximalSpectrum A)\", \"doc\": \"The maximal spectrum of a field is finite.\"}\n  {\"name\": \"Algebra.QuasiFinite\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) → (S : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $, which is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition (typically meaning $ S $ is f\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.EssFiniteType.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Localization/Submodule\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] [IsNoetherianRing R], IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-g-ring-finite-domain-generic-test: G-ring criterion by regular localizations of completions of finite domain algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \"[IsDomain R] (h : ∀ p : Ideal R, p ≠ ⊥ → [p.IsMaximal] → IsIntegrallyClosed (Localization.AtPrime p)) :\\n  IsIntegrallyClosed R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ is integrally closed in\"}\n  {\"name\": \"Submodule.fg_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"(N : Submodule R M) (H : ∀ (P : Ideal R) [P.IsMaximal], (Submodule.localized' (Rₚ P) P.primeCompl (f P) N).FG) : N.FG\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ an $ R $-module, and $ N $ a submodule of $ M $. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the localization of $ N $ at the complement of $ \\\\math\"}\n  {\"name\": \"RingHom.locally_iff_finite\", \"module\": \"Mathlib.RingTheory.RingHom.Locally\", \"type\": \"(f : R →+* S) :\\n  Locally P f ↔\\n    ∃ (s : Finset S) (_ : Ideal.span (s : Set S) = ⊤), ∀ t ∈ s, P ((algebraMap S (Localization.Away t)).comp f)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is locally $ P $ if and only if there exists a finite set $ s \\\\subset S $ such that the ideal generated by $ s $ is the entire ring $ S $, and for each $ t \\\\in s $,\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \": IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"OfLocalizationMaximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Basic\", \"type\": \": Prop\", \"doc\": \"For any commutative ring $ R $, if a property $ P $ holds for the localization of $ R $ at every maximal ideal $ J $, then $ P $ also holds for $ R $ itself. This expresses that properties can be veri\"}\n  {\"name\": \"Algebra.FiniteType.of_span_eq_top_source\", \"module\": \"Mathlib.RingTheory.RingHom.FiniteType\", \"type\": \"(s : Set R) (hs : Ideal.span (s : Set R) = ⊤)\\n  (h : ∀ i ∈ s, Algebra.FiniteType (Localization.Away i) (Localization.Away i ⊗[R] S)) : Algebra.FiniteType R S\", \"doc\": \"Let $R$ be a commutative ring and let $S$ be an $R$-algebra. Let $s \\\\subseteq R$ be a set of elements such that the ideal they generate is the whole ring, i.e., $\\\\langle s \\\\rangle = R$. If for every $\"}\n  {\"name\": \"RingHom.OfLocalizationFiniteSpan\", \"module\": \"Mathlib.RingTheory.LocalProperties.Basic\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) → Prop\", \"doc\": \"A property $ P $ of ring homomorphisms $ f : R → S $ between commutative rings holds for $ f $ if there exists a finite set $ s ⊆ R $ generating the unit ideal (i.e., $ \\\\langle s \\\\rangle = R $) such t\"}\n  {\"name\": \"isIntegrallyClosed_ofLocalizationMaximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \": OfLocalizationMaximal fun R _ => ([IsDomain R] → IsIntegrallyClosed R)\", \"doc\": \"Let $ R $ be a commutative ring. If the localization of $ R $ at every maximal ideal is integrally closed in its fraction field whenever it is a domain, then $ R $ itself is integrally closed in its f\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGRing|formal[Ff]ib|geometricallyRegular",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; completion maps, regular sequences, localizations and primary decompositions do not state this formal-fibre/compatible-ideal theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian semilocal ring is a G-ring if every finite domain algebra has regular generic formal fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}\n  {\"name\": \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R], FiniteRingKrullDim R\", \"doc\": \"Every Noetherian local ring has finite Krull dimension. This instance asserts that if a commutative ring is both Noetherian (every ideal is finitely generated) and local (possessing a unique maximal i\"}\n  {\"name\": \"instFiniteMaximalSpectrumOfIsFractionRing\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] [IsNoetherianRing A] [IsFractionRing A A], Finite (MaximalSpectrum A)\", \"doc\": \"The maximal spectrum of a field is finite.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"Algebra.EssFiniteType.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Localization/Submodule\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] [IsNoetherianRing R], IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian local properties, smoothness or quasi-finite fibres; none states the finite-domain generic-formal-fibre G-ring criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically regular formal fibres characterized by regular completions of finite integral domain algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[QuasiFinite R S] (P : Ideal R) [P.IsPrime] : IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian local properties, smoothness or quasi-finite fibres; none states the finite-domain generic-formal-fibre G-ring criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian local properties, smoothness or quasi-finite fibres; none states the finite-domain generic-formal-fibre G-ring criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGRing|formal.fib|geometrically.regular",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian local properties, smoothness or quasi-finite fibres; none states the finite-domain generic-formal-fibre G-ring criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-g-ring-adic-lifting",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the existing small-singular-locus / ideal-adic quasi-excellence chain: the local G-ring lifting input to Kurano–Shimomoto Theorem 5.1 Step 2 equation (5.1). Refined using Rotthaus (1979), Theorem 3, pp.176–179. Rotthaus, Komplettierung semilokaler quasiausgezeichneter Ringe, Nagoya Math. J. 76 (1979), Lemma 1(a)–(b), p.174 (Matsumura 33.E); her terminology quasiausgezeichnet means geometrically regular formal fibres, as explicitly defined on p.173. Related Stacks Tag 07PQ, more-algebra-lemma-check-G-ring, is the finite-free regular-formal-fibre test, not this finite-domain generic-fibre formulation.",
+   "via": [
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-g-ring-finite-domain-generic-test",
+  "worker": "stage1",
+  "summary": "Verified Rotthaus Lemma 1 and her p.173 terminology against the unchanged statement. Six-step proof uses the existing finite-type G-ring ascent and regular completion theorem forward. Conversely explicit integral multiples realize every finite purely inseparable residue-field extension inside a finite domain algebra; its regular generic completed fibre supplies regular local-completion factors, and finite-extension completion plus the maximal-ideal G-ring criterion concludes. One new statement-only node supplies the semilocal completion product; no new lemma restates either implication.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, through the recorded local G-ring adic lifting dependency chain in blueprint.from: Rotthaus Lemma 1 supplies the finite-domain testing tool used in the local lifting proof. No change to the Fourier/perverse unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra fact used exactly as stated; no Fourier/perverse unit result supplies this algebra input. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Finite primes over a maximal ideal and the compatible completed-local-factor decomposition are the generic finite-extension algebra tools. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-noetherian",
+    "why": "Noetherianity of fibres of a map with Noetherian target supplies the definition-level side condition. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic finite-type ascent of the G-ring property supplies the forward implication for a finite algebra. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Regularity of an arbitrary ideal-adic completion map of a G-ring supplies the generic formal fibre. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "why": "The general maximal-local-completion criterion finishes the converse after the fibres have been checked. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Only its maximal-ideal contraction clause is used to prove finite algebras semilocal. This is a tool below the existing adic-lifting branch, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+  "lem-weil-pbc-integral-extension-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-a4c275eb4",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-a4c275eb4 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; first split, not a re-split), the new node lem-per-semilocal-jacobson-completion-product, and the statements of all 22 cited nodes. Checked against the sources: Stacks 07PQ (more-algebra l.12263-12303) and 07N9 with its proof (algebra l.23135-23174). Rotthaus is not in the local literature directory. Because the delivered proof establishes the unchanged statement directly, its truth does not rest on her p.174. Step 1: B is semilocal through the finite-primes clause of 07N9 and the maximal-contraction clause of 00OJ; this needs no injectivity, and R=0 is vacuous on both sides. Step 2: forward direction by 07PV and 0AH2 (any ideal, here r_B); the trivial extension k'=k gives regularity; F=S^-1 C via 00DK, with the explicit fraction isomorphism to C_P. Step 3: v_j=d u_j has v_j^{p^e} = (d^{p^e}/b_j) a_j in A, so B=A[v] is finite over A, then over R; Frac B = L; no Nagata assumption. Step 4: G = S^-1 C_B is Noetherian, and its primes are exactly those of C_B contracting to 0, so it is regular by the test. The new node is then applied to B (semilocal by step 1), and the factors are regular via finite-product localization. Step 5: 07N9 at m, primes over m are maximal, tensor-cancel gives H⊗_R L as a finite regular product (empty product handled). Step 6: F is Noetherian, F⊗L ≅ H⊗_R L is regular for every finite purely inseparable L, so F is geometrically regular. The fibre of R_m -> H at qR_m is F, the map is flat by 00MB, and 07PT concludes. New node: statement-only and self-contained. It is true by the CRT inverse-limit argument (J^n = ∩ m_i^n). Tested on a field, a product of two fields, Z localized away from (2)∪(3), k[ε]/ε², and t=0. It is strictly smaller than the item and creates no cycle. Duplicate search: rg -L over dag/nodes for semilocal/Jacobson/completion-product/07N9/07PQ/Rotthaus, reading lem-weil-pbc-completion-finite-extension, lem-trf-finite-dvr-branch-completion, lem-sfb-finite-maximal-support-localization and lem-per-g-quotient-completed-local-comparison. blueprint_refs search found 0 hits. A grep of Mathlib AdicCompletion found no match, and the six recorded searches cover three kinds. The seven sk-thm-p1 statements in split_report.tool_uses are exactly the off-unit split statements used, all generic algebra tools; accepted. No SGA cited. No faults found, no fixes written."
+ }
+}

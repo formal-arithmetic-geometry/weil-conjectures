@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-over-sheaf-map-gluing",
+ "kind": "statement",
+ "title": "Componentwise gluing of set-sheaf maps in a containing universe",
+ "statement": "Let C be a category with pullbacks, J a Grothendieck topology, and {f_a : X_a → U} a family generating a J-covering sieve [def-weil-pbc-sites-and-cohomology]. All indexing types and section sets lie in a universe containing both site universes [def-weil-size-convention]. Let F and G be sheaves of sets on C/U. For each a let s_a : F|_{X_a} → G|_{X_a} be a natural transformation, where restriction is sectionwise composition along Over.map [def-pur-localized-ringed-site]. On X_a ×_U X_b identify the two composites to U by the canonical natural isomorphism with identity underlying arrow. Suppose G transports s_b(x) to s_a applied to the transported x for every overlap object and section, including a=b. Then there exists a unique natural transformation t : F → G whose component on every object over X_a is the specified component of s_a.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps, proof at lines 5660–5707; gluing operations and the structural map on covering slice sites."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "For V→U pull back the covering family to V_a=V×_U X_a→V. Covering stability and the slice topology make this a cover in C/U. For x∈F(V), restrict x to V_a and apply s_a. On V_a×_V V_b the two results agree: naturality restricts each s_a to the corresponding object of C/(X_a×_U X_b), and the assumed overlap equation identifies the results, including the identity-arrow comparison of composites to U.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf axiom for G gives a unique amalgamation t_V(x). For W→V the restrictions of G(W→V)(t_V(x)) and t_W(F(W→V)(x)) agree after the pullback cover of W by naturality of every s_a, hence agree by separatedness. This proves naturality of t.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If V→U factors through X_a, its graph into V×_U X_a is a section of the covering projection. Restrict the amalgamation equation for index a along this graph and apply naturality of s_a. The two composite arrows are identities, so t_V equals s_a on that object. Finally any two natural maps with these local formulas agree on all V_a; separatedness of G makes them equal on every V. This also proves the empty-cover case, when all G(V) are singletons.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps, proof at lines 5660–5707; gluing operations and the structural map on covering slice sites."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets with compatible local commutative monoid operations on a cover has unique global commutative monoid operations",
+   "results": {
+    "t": "2026-10-26T08:16:26Z",
+    "tool": "leanfinder",
+    "query": "A sheaf of sets with compatible local commutative monoid operations on a cover has unique global commutative monoid operations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types",
+     "TopCat.Sheaf.existsUnique_gluing'",
+     "TopCat.Sheaf.existsUnique_gluing",
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing",
+     "TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types",
+     "TopCat.Presheaf.isSheaf_of_isSheafUniqueGluing_types",
+     "TopCat.Presheaf.IsSheaf.section_ext",
+     "CategoryTheory.Sheaf.tensorUnit_isSheaf"
+    ],
+    "digest": "c6f0bf57af7d461a"
+   },
+   "date": "2026-10-26",
+   "verdict": "No one-line match: presheafHom_isSheafFor and Presheaf.IsSheaf.hom supply abstract Hom sheaf gluing, but translating the nested slices and proving the displayed component equations remains. SetSheafCoverDescent has coefficient universe max u v, whereas this component form retains the independent containing universe w. TopCat gluing has a different site. This is a source-backed concrete interface, not a new algebraic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "presheafHom_isSheafFor|existsUnique_amalgamation_ofArrows",
+   "results": {
+    "t": "2026-10-26T08:28:16Z",
+    "tool": "grep",
+    "query": "presheafHom_isSheafFor|existsUnique_amalgamation_ofArrows",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+     "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+     "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean"
+    ],
+    "digest": "237149f12d360045"
+   },
+   "date": "2026-10-26",
+   "verdict": "No one-line match: presheafHom_isSheafFor and Presheaf.IsSheaf.hom supply abstract Hom sheaf gluing, but translating the nested slices and proving the displayed component equations remains. SetSheafCoverDescent has coefficient universe max u v, whereas this component form retains the independent containing universe w. TopCat gluing has a different site. This is a source-backed concrete interface, not a new algebraic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural multiplication and identity operations on a sheaf of sets glue from compatible operations on covering slice sites",
+   "results": {
+    "t": "2026-10-26T08:28:17Z",
+    "tool": "leansearch",
+    "query": "Natural multiplication and identity operations on a sheaf of sets glue from compatible operations on covering slice sites",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.instCategorySheaf",
+     "CategoryTheory.Sheaf.instInhabitedHom",
+     "CategoryTheory.Sheaf.monoidalCategory",
+     "CategoryTheory.typesGlue",
+     "TopCat.Presheaf.IsSheafUniqueGluing",
+     "CategoryTheory.Sheaf.cartesianMonoidalCategory",
+     "TopCat.Sheaf.forget",
+     "CategoryTheory.Sheaf.instHasFiniteProducts"
+    ],
+    "digest": "06be6bbb3e7cccde"
+   },
+   "date": "2026-10-26",
+   "verdict": "No one-line match: presheafHom_isSheafFor and Presheaf.IsSheaf.hom supply abstract Hom sheaf gluing, but translating the nested slices and proving the displayed component equations remains. SetSheafCoverDescent has coefficient universe max u v, whereas this component form retains the independent containing universe w. TopCat gluing has a different site. This is a source-backed concrete interface, not a new algebraic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"presheafHom\", \"IsSheaf\"",
+   "results": {
+    "t": "2026-10-26T08:28:17Z",
+    "tool": "loogle",
+    "query": "\"presheafHom\", \"IsSheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "CategoryTheory.presheafHom_isSheafFor",
+     "CategoryTheory.PresheafHom.IsSheafFor.app",
+     "CategoryTheory.PresheafHom.IsSheafFor.app_cond",
+     "CategoryTheory.PresheafHom.IsSheafFor.exists_app"
+    ],
+    "digest": "b5325ea936690d09"
+   },
+   "date": "2026-10-26",
+   "verdict": "No one-line match: presheafHom_isSheafFor and Presheaf.IsSheaf.hom supply abstract Hom sheaf gluing, but translating the nested slices and proving the displayed component equations remains. SetSheafCoverDescent has coefficient universe max u v, whereas this component form retains the independent containing universe w. TopCat gluing has a different site. This is a source-backed concrete interface, not a new algebraic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps between sheaves on a slice site glue uniquely from compatible natural transformations on covering slices in any containing universe",
+   "results": {
+    "t": "2026-10-26T08:28:19Z",
+    "tool": "leanfinder",
+    "query": "Maps between sheaves on a slice site glue uniquely from compatible natural transformations on covering slices in any containing universe",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Sheaf.existsUnique_gluing'",
+     "TopCat.Sheaf.existsUnique_gluing",
+     "CategoryTheory.GrothendieckTopology.plus_hom_ext",
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing",
+     "CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext",
+     "CategoryTheory.GrothendieckTopology.plusLift_unique",
+     "CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows",
+     "CategoryTheory.Presheaf.IsSheaf.hom_ext"
+    ],
+    "digest": "53283ca90f69de98"
+   },
+   "date": "2026-10-26",
+   "verdict": "No one-line match: presheafHom_isSheafFor and Presheaf.IsSheaf.hom supply abstract Hom sheaf gluing, but translating the nested slices and proving the displayed component equations remains. SetSheafCoverDescent has coefficient universe max u v, whereas this component form retains the independent containing universe w. TopCat gluing has a different site. This is a source-backed concrete interface, not a new algebraic assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.MonoidSheafStructureGluing",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose VIII 3.3.8 final sentence: fine logarithmic structures and morphisms descend from strict etale charts as sheaves of monoids. Old proof step 3: reconstruct monoid operations and the structural map after set-sheaf descent. Auxiliary componentwise gluing of set-sheaf maps in a containing universe.",
+   "via": [
+    "lem-trf-monoid-sheaf-structure-gluing",
+    "lem-trf-fine-log-structure-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.OverSheafMapGluing",
+  "file": "lean/Sheaf/CategoryTheory/OverSheafMapGluing.lean",
+  "declaration": "CategoryTheory.overSheafMapGluing",
+  "statement": "theorem overSheafMapGluing\n    {C : Type u} [Category.{v} C] [HasPullbacks C]\n    (J : GrothendieckTopology C) {I : Type (max u v w)}\n    (U : C) (X : I → C) (f : ∀ a, X a ⟶ U)\n    (hcov : Sieve.ofArrows X f ∈ J U)\n    (F G : Sheaf (J.over U) (Type (max u v w)))\n    (s : ∀ a, (Over.map (f a)).op ⋙ F.obj ⟶ (Over.map (f a)).op ⋙ G.obj)\n    (hs : ∀ (a b : I) (V : Over (pullback (f a) (f b)))\n      (x : F.obj.obj (op ((Over.map (pullback.snd (f a) (f b)) ⋙\n        Over.map (f b)).obj V))),\n      G.obj.map\n        (((Over.mapComp _ _).symm ≪≫\n          Over.mapCongr _ _ (pullback.condition (f := f a) (g := f b)) ≪≫\n          Over.mapComp _ _).hom.app V).op ((s b).app _ x) =\n        (s a).app _ (F.obj.map\n          (((Over.mapComp _ _).symm ≪≫\n            Over.mapCongr _ _ (pullback.condition (f := f a) (g := f b)) ≪≫\n            Over.mapComp _ _).hom.app V).op x)) :\n    ∃! t : F.obj ⟶ G.obj,\n      ∀ (a : I) (V : (Over (X a))ᵒᵖ)\n        (x : F.obj.obj ((Over.map (f a)).op.obj V)),\n        t.app _ x = (s a).app V x",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T091723-L-3368614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T091723-L-3368614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

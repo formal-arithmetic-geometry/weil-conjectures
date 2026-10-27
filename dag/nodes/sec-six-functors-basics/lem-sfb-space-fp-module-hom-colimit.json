@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-space-fp-module-hom-colimit",
+ "kind": "statement",
+ "title": "Hom from a finitely presented module on a qcqs space commutes with directed colimits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaves of $\\mathcal O_X$-modules on the small etale site and quasi-coherence of [def-trf-space-quasi-coherent-module]. Assume $|X|$ is quasi-compact (every open cover has a finite subcover, with topology [def-a1-space-point-topology]) and that its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on affine scheme tests. A module is of finite presentation if etale locally it is the cokernel of a map $\\mathcal O^{m}\\to\\mathcal O^{n}$ with $m,n$ finite. Let $I$ be a small nonempty directed preorder, let $(\\mathcal M_i)$ be a diagram of module sheaves, and let $(\\mathcal M,(c_i))$ be its colimit in module sheaves [def-weil-pbc-category-colimit]. For a module $\\mathcal G$ of finite presentation, the canonical map $\\varinjlim_i\\operatorname{Hom}(\\mathcal G,\\mathcal M_i)\\to\\operatorname{Hom}(\\mathcal G,\\mathcal M)$ is bijective. Explicitly every map $\\mathcal G\\to\\mathcal M$ factors as $c_i g$ at some stage, and if $c_i g=c_j h$, there is $k\\ge i,j$ with the two induced maps to $\\mathcal M_k$ equal. The modules $\\mathcal M_i$ need not be quasi-coherent.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07U7 (lemma-finite-presentation-quasi-compact-colimit)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=X_{\\mathrm{et}}$ and $\\mathcal H_i=\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal M_i)$, with transitions given by postcomposition. These are module sheaves, and their global sections are $\\operatorname{Hom}(\\mathcal G,\\mathcal M_i)$ by the sheaf-Hom definition. Check the technical site hypotheses of the internal-Hom continuity theorem as follows. The universe convention makes $\\mathcal C$ and each iterated slice small in the module universe. Apply sieve-module sheafification with $\\Lambda=\\mathbf Z$ on each such site: abelian presheaves are exactly $\\mathbf Z$-module presheaves by the unique repeated-addition action, so its reflector gives abelian sheafification. The locally-bijective characterization of abelian sheafification applies to every such site. Finally, forgetting commutativity of a ring sheaf preserves the sheaf condition: the underlying sections, restrictions and unique gluings are identical. Thus all the sheafification, local-bijection and ring-forgetting hypotheses in the cited continuity theorem hold; no finiteness property of $\\mathcal M_i$ is involved.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-size-convention",
+    "lem-cbc-sieve-module-sheafification",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMZ (lemma-hom-finite-presentation-colimit), setup; internal Hom: Tag 03EM (lemma-internal-hom). General-site sheafification hypotheses are supplied by the cited existing nodes."
+   }
+  },
+  {
+   "text": "The given finite-presentation hypothesis says precisely that $\\mathcal G$ locally admits a finite presentation on $\\mathcal C$. Apply the site finite-presentation internal-Hom continuity theorem to $\\mathcal G$ and the small filtered diagram $i\\mapsto\\mathcal M_i$. A nonempty directed preorder is filtered: finitely many objects have a common upper bound by induction, and parallel arrows are equal. The resulting isomorphism is the canonical map $$a:\\varinjlim_i\\mathcal H_i\\xrightarrow{\\sim}\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal M),$$ whose composite with the $i$th coprojection sends a local map $g$ to $c_i\\circ g$.",
+   "uses": [
+    "lem-weil-pbc-site-finite-presentation-internal-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMZ (lemma-hom-finite-presentation-colimit), conclusion; Tag 0GN0 (lemma-finite-presentation-quasi-compact-colimit), proof, H = colim H_lambda."
+   }
+  },
+  {
+   "text": "Write $L=\\varinjlim_i\\mathcal H_i$ in module sheaves. The module forgetful theorem identifies its underlying abelian sheaf with the colimit of the underlying abelian sheaves of $\\mathcal H_i$, with the same coprojections. Apply algebraic-space cohomology continuity in degree $q=0$ to this abelian diagram. Its hypotheses are exactly the quasi-compactness and absolute quasi-separatedness assumed for $X$. Consequently $$\\varinjlim_i\\Gamma(X,\\mathcal H_i)\\xrightarrow{\\sim}\\Gamma(X,L).$$ Here $H^0=\\Gamma$ canonically: global sections are additive and left exact (a compatible family of sections in a kernel is exactly a compatible family mapping to zero); the cited degree-zero injective-resolution theorem therefore identifies their zeroth derived functor with global sections. This does not require $X$ to be a scheme or a final object of its scheme etale site.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073E (lemma-colimits), q=0; sites-cohomology.tex, section-cohomology-sheaves, equation-cohomology; sites-modules.tex Tag 03DB (lemma-limits-colimits)."
+   }
+  },
+  {
+   "text": "Compose the isomorphism of step 3 with $\\Gamma(a)$ from step 2 and use the global-section formula for sheaf Hom. This gives $$\\varinjlim_i\\operatorname{Hom}(\\mathcal G,\\mathcal M_i)\\xrightarrow{\\sim}\\operatorname{Hom}(\\mathcal G,\\mathcal M).$$ On the $i$th coprojection it sends $g$ to $c_i\\circ g$, so it is the canonical map in the statement, not an unspecified bijection. Forgetting abelian groups preserves filtered colimits, and the elementwise set-colimit theorem says every element has a stage representative and equality is witnessed at a common later stage. Applying it to this map proves both explicit assertions, with $k\\ge i,j$ since the arrows of $I$ are its order relations.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GN0 (lemma-finite-presentation-quasi-compact-colimit), proof, global-section identifications; categories.tex Tag 04AX (section-directed-colimits), elementwise description."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-size-convention",
+  "lem-cbc-sieve-module-sheafification",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-site-finite-presentation-internal-hom-colimit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-space-cohomology-filtered-colimit",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GN0 (lemma-finite-presentation-quasi-compact-colimit), proof via Tag 0GMZ; global sections supplied by spaces-cohomology.tex Tag 073E, q=0. This uses the existing algebraic-space cohomology theorem instead of repeating the finite-affine-cover verification in Tag 07U7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Pp]resentation.*[Cc]olimit|[Cc]olimit.*[Ff]inite[Pp]resentation",
+   "results": "{\"t\": \"2026-10-23T12:00:07Z\", \"tool\": \"grep\", \"query\": \"[Ff]inite[Pp]resentation.*[Cc]olimit|[Cc]olimit.*[Ff]inite[Pp]resentation\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom of a finitely presented module on a quasi compact quasi separated algebraic space preserves filtered colimits",
+   "results": "{\"t\": \"2026-10-23T12:00:07Z\", \"tool\": \"leansearch\", \"query\": \"Hom of a finitely presented module on a quasi compact quasi separated algebraic space preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\", \"preservesFilteredColimits_coyoneda\", \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"preservesColimit_coyoneda_of_finitePresentation\", \"CategoryTheory.IsFinitelyPresentable\", \"ModuleCat.FilteredColimits.M\"], \"digest\": \"5cceb1fc5d2d241e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"PreservesFilteredColimits\"",
+   "results": "{\"t\": \"2026-10-23T12:00:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"PreservesFilteredColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On qcqs algebraic spaces Hom from a finitely presented sheaf of modules commutes with filtered colimits",
+   "results": "{\"t\": \"2026-10-23T12:00:17Z\", \"tool\": \"leanfinder\", \"query\": \"On qcqs algebraic spaces Hom from a finitely presented sheaf of modules commutes with filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"CommRingCat.preservesFilteredColimits_coyoneda\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"preservesFilteredColimits_coyoneda\", \"PresheafOfModules.colimitPresheafOfModules_map\"], \"digest\": \"ecf20f903d4a71fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented module sheaf on a coherent etale site is a finitely presentable object",
+   "results": "{\"t\": \"2026-10-23T12:00:49Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented module sheaf on a coherent etale site is a finitely presentable object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\"], \"digest\": \"628bf7974cad1493\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ring, scheme, category-theoretic and sheaf-presentation declarations do not state this algebraic-space theorem or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFilteredColimits_coyoneda_of_finitePresentation|isFinitelyPresentable_iff_preservesFilteredColimits|isFinite_presentation|instIsQuasicoherentOfIsFinitePresentation|exists_quasicoherentData|preservesColimit_Γ",
+   "results": "{\"t\": \"2026-10-23T12:27:32Z\", \"tool\": \"grep\", \"query\": \"preservesFilteredColimits_coyoneda_of_finitePresentation|isFinitelyPresentable_iff_preservesFilteredColimits|isFinite_presentation|instIsQuasicoherentOfIsFinitePresentation|exists_quasicoherentData|preservesColimit_Γ\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"036db84f9fe5cf82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Quasicoherent.lean lines 233-285 and Presentable/Finite.lean lines 49-79; the hits define local finite presentation or characterize categorical finite presentability, not approximation or global Hom continuity on qcqs algebraic spaces, nor affine-etale algebra evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinitelyPresentable_iff_preservesFilteredColimits",
+   "results": "{\"t\": \"2026-10-23T12:28:35Z\", \"tool\": \"grep\", \"query\": \"isFinitelyPresentable_iff_preservesFilteredColimits\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"Mathlib/CategoryTheory/Presentable/Finite.lean\"], \"digest\": \"32dcfd23b9d7648c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Quasicoherent.lean lines 233-285 and Presentable/Finite.lean lines 49-79; the hits define local finite presentation or characterize categorical finite presentability, not approximation or global Hom continuity on qcqs algebraic spaces, nor affine-etale algebra evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|isFinitelyPresentable|preservesFilteredColimits|preservesColimit",
+   "results": "{\"t\": \"2026-10-23T13:53:43Z\", \"tool\": \"grep\", \"query\": \"finitePresentation|isFinitelyPresentable|preservesFilteredColimits|preservesColimit\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"93e1596ad73bb74c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from a finitely presented module sheaf commutes with filtered colimits on a coherent ringed site",
+   "results": "{\"t\": \"2026-10-23T13:53:43Z\", \"tool\": \"leansearch\", \"query\": \"Hom from a finitely presented module sheaf commutes with filtered colimits on a coherent ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Hom\", \"SheafOfModules.isFinitePresentation\", \"preservesColimit_coyoneda_of_finitePresentation\", \"preservesFilteredColimits_coyoneda\", \"SheafOfModules.Hom.mk\", \"SheafOfModules.Presentation.isColimit\", \"ModuleCat.FilteredColimits.M\", \"PresheafOfModules.hasColimit\"], \"digest\": \"4c0abbd3c0b7136e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"PreservesFilteredColimits\"",
+   "results": "{\"t\": \"2026-10-23T13:53:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"PreservesFilteredColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site with a finite covering basis and quasi compact pairwise overlaps Hom from a locally finitely presented module preserves filtered colimits",
+   "results": "{\"t\": \"2026-10-23T13:53:44Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site with a finite covering basis and quasi compact pairwise overlaps Hom from a locally finitely presented module preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\"], \"digest\": \"98a6e3cde4447f30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Ff]iltered|[Ff]iltered.*[Cc]olimit|[Cc]olimit.*[Ff]iltered",
+   "results": "{\"t\": \"2026-10-23T14:14:16Z\", \"tool\": \"grep\", \"query\": \"preserves.*[Ff]iltered|[Ff]iltered.*[Cc]olimit|[Cc]olimit.*[Ff]iltered\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean\", \"Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean\", \"Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean\"], \"digest\": \"fa3f95c91b2d6012\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections preserves filtered colimits for a quasi compact quasi separated coherent site with finite coverings",
+   "results": "{\"t\": \"2026-10-23T14:14:17Z\", \"tool\": \"leansearch\", \"query\": \"Global sections preserves filtered colimits for a quasi compact quasi separated coherent site with finite coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasGlobalSectionsFunctor\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape\", \"AlgebraicGeometry.preservesColimit_Γ\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.Limits.PreservesFilteredColimits\"], \"digest\": \"f31913e176c4ad03\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"PreservesFilteredColimits\"",
+   "results": "{\"t\": \"2026-10-23T14:14:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"PreservesFilteredColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of sheaves commute with filtered colimits on a site having a finite cover by basis objects whose covers and pairwise products admit finite basis refinements",
+   "results": "{\"t\": \"2026-10-23T14:14:18Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of sheaves commute with filtered colimits on a site having a finite cover by basis objects whose covers and pairwise products admit finite basis refinements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"CategoryTheory.isSheaf_pointwiseColimit\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.Sheaf.instHasFiniteColimits\", \"LightProfinite.hasSheafify\", \"CategoryTheory.Sheaf.instHasColimitsOfShape\"], \"digest\": \"1be1341e76200aed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent|filtered|PreservesColimit",
+   "results": "{\"t\": \"2026-10-23T14:15:47Z\", \"tool\": \"grep\", \"query\": \"coherent|filtered|PreservesColimit\", \"sub\": \"CategoryTheory/Sites/GlobalSections.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections from the terminal sheaf preserve filtered colimits when there is a finite basis cover of the terminal sheaf and each pairwise basis product is quasi compact",
+   "results": "{\"t\": \"2026-10-23T14:15:51Z\", \"tool\": \"leanfinder\", \"query\": \"Sections from the terminal sheaf preserve filtered colimits when there is a finite basis cover of the terminal sheaf and each pairwise basis product is quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isSheaf_pointwiseColimit\", \"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim\", \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal\", \"Condensed.instPreservesFiniteProductsOppositeProfiniteVal\"], \"digest\": \"500f4e6b943340f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinite_presentation|exists_quasicoherentData|instIsQuasicoherentOfIsFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T14:34:15Z\", \"tool\": \"grep\", \"query\": \"isFinite_presentation|exists_quasicoherentData|instIsQuasicoherentOfIsFinitePresentation\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"036db84f9fe5cf82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local finite-presentation definitions and general categorical presentability do not prove global Hom continuity on a qcqs algebraic space; existing DAG tools are reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-integral-algebra-fp-colimit",
+  "date": "2026-10-23",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YA (lemma-integral-limit-finite-and-finite-presentation), including its relative-Spec construction; affine transitions and qcqs stages are the properties of that construction. Supporting input to the relative-Spec proof of Tag 09YA: Integral quasi-coherent algebras on qcqs spaces admit finite finitely presented directed approximations. Supporting input: Tag 07U7 (lemma-finite-presentation-quasi-compact-colimit).",
+   "via": [
+    "lem-sfb-space-integral-algebra-fp-colimit",
+    "lem-sfb-integral-space-finite-presentation-limit",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fp-module-hom-colimit",
+  "worker": "stage1",
+  "summary": "Read Stacks 07U7, 0GN0, 0GMZ and 073E. Preserved every hypothesis and the arbitrary (not necessarily quasi-coherent) target modules. Reused the existing general-site internal-Hom continuity theorem and degree-zero algebraic-space cohomology continuity, with module/abelian colimit and underlying-set bridges. Checked the technical sheafification hypotheses on all slices and tracked the coprojections to obtain the stated canonical map and eventual equality. No new nodes, no Lean attachment, no statement change.",
+  "blueprint": "Realizes the inherited supporting-input place of det-thm-sf-ctf-stability-direct-images, proof (3): the Tag 07U7 prerequisite of finite-presentation approximations of integral algebras (Tag 09YA). Read the latest blueprint direct-image unit route. This is a supporting general sheaf argument below that route; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-finite-presentation-internal-hom-colimit",
+    "why": "Generic ringed-site or abelian-category tool used with exactly its stated hypotheses; the unit supplies no replacement for this foundational comparison."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site or abelian-category tool used with exactly its stated hypotheses; the unit supplies no replacement for this foundational comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-finite-presentation-internal-hom-colimit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-5e695111d",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-5e695111d (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement and stmt_deps are byte-identical to the base and match Stacks 07U7 (spaces-cohomology l.518): X is qcqs with absolute quasi-separatedness, I is nonempty directed, the target modules are arbitrary, G has finite presentation, and the explicit factorisation and eventual-equality form is spelled out. Live and side-live both show the item unsplit with no repair note, so it is not superseded and not a re-split. The proof follows Stacks 0GN0 (sites-modules l.4194) exactly. Step 1 checks the site hypotheses: sieve sheafification with Λ=ℤ on X_et and its slices, the locally-bijective W, and that forgetting ring commutativity keeps sheaves. Step 2 gives SheafHom(G,-) continuity from the site internal-Hom node (0GMZ); the item's étale-local cokernel presentation is that node's local finite presentation, and directed implies filtered. Step 3 gets global-section continuity from 03DB's forgetful clause (3) and from lem-sfb-space-cohomology-filtered-colimit at q=0 (073E), which is the same unit and reviewed; R^0Γ=Γ comes from the degree-zero node, and 073E's quasi-separatedness hypothesis is the item's absolute diagonal hypothesis. Step 4 tracks g ↦ c_i∘g and uses Ab→Set preservation of filtered colimits plus the elementwise set-colimit clauses (1) and (2); it is genuinely elementary. proof_deps equals the union of uses. There is no cycle and no SGA. Edge cases X=∅, G=0, G=O^n, a singleton index and non-quasi-coherent M_i all hold. The DAG search for 07U7/0GN0/0GMZ found only the scheme version (01BS), the pro-étale-scheme version and the global-presentation site node, so the item is not a duplicate. I accept the tool_uses for the generic 0GMZ and 03DB nodes. Batch-5 check: the closure of lem-sfb-space-cohomology-filtered-colimit reaches only general algebraic-space and descent infrastructure (def-trf-algebraic-space, fppf descent, étale quotients, chart permanence). None of it is the trace formula, Poincaré duality, or a step of their proofs, and the base statement already cites def-trf-algebraic-space, so I accept it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpModuleHomColimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finitePresentation_hom_directed_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFpModuleHomColimit.lean",
+  "statement": "theorem finitePresentation_hom_directed_colimit {S : Scheme.{u}} (X : AlgebraicSpace S) [CompactSpace (Point X.obj.obj)] (hqs : IsAbsolutelyQuasiSeparated X) (I : Type (u + 1)) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : I ⥤ X.Modules) (c : Cocone D) (hc : IsColimit c) (G : X.Modules) [G.IsFinitePresentation] : Function.Bijective (colimit.desc (D ⋙ coyoneda.obj (op G)) ((coyoneda.obj (op G)).mapCocone c)) ∧ (∀ f : G ⟶ c.pt, ∃ (i : I) (g : G ⟶ D.obj i), g ≫ c.ι.app i = f) ∧ (∀ (i j : I) (g : G ⟶ D.obj i) (h : G ⟶ D.obj j), g ≫ c.ι.app i = h ≫ c.ι.app j → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), g ≫ D.map (homOfLE hik) = h ≫ D.map (homOfLE hjk))",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22a470969",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps and their Lean sources (AlgebraicSpace.Modules, Point/pointTopologicalSpace, IsAbsolutelyQuasiSeparated, the QCoh slice instances), Stacks 07U7 and the module. Clause-by-clause match: CompactSpace(Point) = |X| quasi-compact; IsAbsolutelyQuasiSeparated = the absolute affine-test diagonal; nonempty directed preorder I : Type (u+1), the Hom universe of X.Modules; arbitrary D : I ⥤ X.Modules (no quasi-coherence); any IsColimit cocone; Mathlib IsFinitePresentation; Bijective colimit.desc of the coyoneda-mapped cocone (canonical legs), plus the stagewise factorisation and the common-upper-bound equality with i≤k and j≤k. Edge cases (X empty, G=0, G free incl. rank 0, singleton I, non-antisymmetric preorder) hold; empty I is excluded as in the node. Node unchanged except lean and the added landed owner stmt_dep def-sfb-space-absolute-quasi-separated (record identical to live). lean.statement is verbatim, one sorry, no new defs, docstrings carry source and blueprint, the Worker report and Second reading sections are present. Only other 07U7/0GN0 hit is the pro-étale scheme version, so no duplicate. No compile (no file changed). No findings."
+ }
+}

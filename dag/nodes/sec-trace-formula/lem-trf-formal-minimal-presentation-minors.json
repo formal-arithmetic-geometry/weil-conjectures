@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-formal-minimal-presentation-minors",
+ "kind": "statement",
+ "title": "Minimal formal coordinates and residual Jacobian minors",
+ "statement": "Let $F$ be a field, $n\\ge2$, $T=F[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series], $\\mathfrak n=(x_1,\\ldots,x_n)$, and $I=(f_1,\\ldots,f_s)\\subseteq\\mathfrak n$. Put $R=T/I$, $\\mathfrak m=\\mathfrak n/I$, $t=\\dim_F((I+\\mathfrak n^2)/\\mathfrak n^2)$ and $e=n-t$. Let $J$ be the ideal of $(n-1)$-minors of $(\\partial f_j/\\partial x_i)$ over $R$ [def-weil-matrix, def-weil-pbc-matrix-determinant], with derivatives as in [def-trf-formal-power-series-partial-derivative]. There exist $g_1,\\ldots,g_t\\in I$ and $z_1,\\ldots,z_e\\in\\mathfrak n$ whose linear terms form a basis of $\\mathfrak n/\\mathfrak n^2$, such that substitution gives an $F$-algebra coordinate isomorphism $F[[G_1,\\ldots,G_t,Z_1,\\ldots,Z_e]]\\cong T$, sending the variables to $g_i,z_i$. In these coordinates put $h_j=f_j(0,\\ldots,0,Z_1,\\ldots,Z_e)$, $S=F[[Z_1,\\ldots,Z_e]]$, $\\mathfrak p=(Z_1,\\ldots,Z_e)$ and $H=(h_1,\\ldots,h_s)$. Then $I=(g_1,\\ldots,g_t,h_1,\\ldots,h_s)$, $H\\subseteq\\mathfrak p^2$, and the induced complete local $F$-algebra isomorphism $R\\cong S/H$ identifies the classes of $Z_i$ with an $F$-basis of $\\mathfrak m/\\mathfrak m^2$. Under this isomorphism $J$ is the ideal $D$ defined as follows: $D=R$ if $e\\le1$; if $e\\ge2$, $D$ is the ideal of $(e-1)$-minors of $(\\partial h_j/\\partial Z_i)$ over $S/H$, and $D\\subseteq\\mathfrak m^{e-1}$. Minors of a size exceeding the number of rows or columns generate the zero ideal.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4C (lemma-fitting-ideal), proof: unit-derivative elimination and the displayed identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined), invariance under generators and coordinates. Simultaneous elimination uses a basis of linear terms."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient identification gives $\\mathfrak n/\\mathfrak n^2\\cong F^n$. Choose a basis of the subspace $(I+\\mathfrak n^2)/\\mathfrak n^2$ and lift its $t$ members to $g_1,\\ldots,g_t\\in I$. Extend this basis to one of $\\mathfrak n/\\mathfrak n^2$ and lift the remaining $e=n-t$ members to $z_1,\\ldots,z_e\\in\\mathfrak n$. Thus their combined list has length $n$ and the required linear terms. Basis selection and extension are finite-dimensional linear algebra.",
+   "uses": [
+    "lem-trf-formal-hom-cotangent-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  },
+  {
+   "text": "The power-series regularity theorem makes $T$ Noetherian local of dimension $n$, with maximal ideal $\\mathfrak n=(x_1,\\ldots,x_n)$ and residue field $F$. Apply local Nakayama to the finite $T$-module $\\mathfrak n$: the chosen classes span $\\mathfrak n/\\mathfrak n\\mathfrak n$, so $(g_1,\\ldots,g_t,z_1,\\ldots,z_e)=\\mathfrak n$. The list is therefore a regular system of parameters by its definition. The full-coordinate theorem gives the $F$-algebra isomorphism $\\phi:F[[G,Z]]\\xrightarrow{\\sim}T$. It and its inverse preserve the respective maximal ideals and hence every power, so they are continuous for the maximal-ideal topologies.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-weil-pbc-power-series-full-coordinates-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  },
+  {
+   "text": "Write $\\widetilde f_j=\\phi^{-1}(f_j)$ and $h_j=\\widetilde f_j(0,Z)$. Assign each monomial containing a $G$ to its first such variable and divide by that variable; the resulting coefficient families give $\\widetilde f_j-h_j=\\sum_{a=1}^tG_aq_{aj}$ with $q_{aj}\\in F[[G,Z]]$. Since every $G_a$ maps into $I$, this proves both inclusions in $\\phi^{-1}(I)=(G_1,\\ldots,G_t,h_1,\\ldots,h_s)$. Moreover, the linear term of every $f_j$ lies in the span of the linear terms of the $g_a$. Thus the linear term of $\\widetilde f_j$ is a combination only of the $G_a$, and setting $G=0$ leaves neither constant nor linear terms. Grouping each monomial of degree at least two by its first two variable factors shows $h_j\\in\\mathfrak p^2$; hence $H\\subseteq\\mathfrak p^2$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  },
+  {
+   "text": "Evaluation at $G=0$ has kernel $(G)$ by the same monomial grouping, and inclusion of $F[[Z]]$ is its section. Consequently the quotient maps induce mutually inverse $F$-algebra maps $T/I\\cong S/H$. Both are local and preserve all maximal-ideal powers. The power-series theorem and the complete-local-quotient theorem apply to $T,I$ and $S,H$: both ideals are proper because they lie in the respective variable ideals. Hence this is an isomorphism of complete local $F$-algebras. Since $H\\subseteq\\mathfrak p^2$, the quotient of $\\mathfrak p/H$ by its square is exactly $\\mathfrak p/\\mathfrak p^2$; the coefficient identification gives its $F$-basis $[Z_1],\\ldots,[Z_e]$. This is the required basis of $\\mathfrak m/\\mathfrak m^2$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-trf-formal-hom-cotangent-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  },
+  {
+   "text": "Use fixed-size Jacobian-minor invariance, first for the parameter system $(g,z)$ of Step 2, then for the finite generating list $(G_1,\\ldots,G_t,h_1,\\ldots,h_s)$ of Step 3. It follows that $J$ is the ideal of $(n-1)$-minors of $B=\\operatorname{diag}(I_t,A)$ over $S/H$, with $A=(\\partial h_j/\\partial Z_i)_{j,i}$. Indeed the derivative definition gives the identity matrix for the $G$ rows, zero $Z$ derivatives there, and zero $G$ derivatives for the $h$ rows, since these series involve only $Z$.",
+   "uses": [
+    "lem-trf-formal-jacobian-minor-invariance",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  },
+  {
+   "text": "If $e\\le1$, then $t\\ge n-1$, so choosing $n-1$ matching rows and columns in $I_t$ gives determinant $1$ and $J=R$. Suppose $e\\ge2$. Adjoin all $t$ identity rows and columns to any $(e-1)$-minor of $A$; the block determinant formula gives that same determinant as an $(n-1)$-minor of $B$, so $D\\subseteq J$. Conversely choose an $(n-1)$-minor of $B$. If its selected identity-row indices and identity-column indices differ, a selected row or column is zero. Otherwise these index sets agree, of size $a\\le t$, and its matrix is $\\operatorname{diag}(I_a,A')$, with $A'$ a $q$-minor of $A$ and $q=n-1-a\\ge e-1$. The block formula identifies its determinant with $\\det A'$. Repeated application of $J_{r+1}(A)\\subseteq J_r(A)$ puts this determinant in $J_{e-1}(A)=D$. Thus $J=D$. If the residual matrix has too few rows for an $(e-1)$-minor, the same argument makes all the original minors zero.",
+   "uses": [
+    "lem-weil-pbc-block-triangular-determinant",
+    "lem-trf-fitting-ideal-minor-inclusions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  },
+  {
+   "text": "For $e\\ge2$, each $h_j$ has no monomials of degree zero or one. The coefficient formula for its partial derivatives therefore gives $\\partial h_j/\\partial Z_i\\in\\mathfrak p$. Every summand in the determinant of an $(e-1)$-submatrix is a signed product of $e-1$ entries, hence belongs to $\\mathfrak p^{e-1}$ and has image in $\\mathfrak m^{e-1}$. Their sums and the ideal they generate have the same containment, proving $D\\subseteq\\mathfrak m^{e-1}$. Empty generating families give the zero ideal as stipulated.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4C (lemma-fitting-ideal), proof: elimination of linear equations and identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-hom-cotangent-linearization",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-weil-pbc-power-series-full-coordinates-field",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-trf-formal-jacobian-minor-invariance",
+  "def-trf-formal-power-series-partial-derivative",
+  "lem-weil-pbc-block-triangular-determinant",
+  "lem-trf-fitting-ideal-minor-inclusions",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4C and 0C4B; simultaneous basis selection and the exact residual minor ideal are written out rather than the source's successive elimination sketch."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a formal power series ring over a field admits minimal power series coordinates eliminating the linear relations; its Jacobian minor ideal is the residual minors ideal",
+   "results": "{\"t\": \"2026-10-22T05:58:30Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a formal power series ring over a field admits minimal power series coordinates eliminating the linear relations; its Jacobian minor ideal is the residual minors ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"PowerSeries.weierstrassMod\"], \"digest\": \"8d22d1e0a2b6673a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern polynomial submersive presentations or univariate Weierstrass division, not simultaneous minimal formal coordinates with residual fixed-size minors."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-22T05:58:30Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: this query was rejected for an unknown identifier; a corrected Loogle search is also recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*presentation|jacobian.*minor|Jacobian.*minor",
+   "results": "{\"t\": \"2026-10-22T05:58:31Z\", \"tool\": \"grep\", \"query\": \"minimal.*presentation|jacobian.*minor|Jacobian.*minor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern polynomial submersive presentations or univariate Weierstrass division, not simultaneous minimal formal coordinates with residual fixed-size minors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eliminating linear equations in a formal power series quotient preserves the residual Jacobian Fitting ideal",
+   "results": "{\"t\": \"2026-10-22T05:58:31Z\", \"tool\": \"leansearch\", \"query\": \"Eliminating linear equations in a formal power series quotient preserves the residual Jacobian Fitting ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.weierstrassDiv.congr_simp\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\", \"PowerSeries.IsWeierstrassDivisorAt\"], \"digest\": \"4508b179a0565df5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern polynomial submersive presentations or univariate Weierstrass division, not simultaneous minimal formal coordinates with residual fixed-size minors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eliminating linear equations in a formal power series quotient preserves the residual Jacobian Fitting ideal",
+   "results": "{\"t\": \"2026-10-22T05:58:44Z\", \"tool\": \"leanfinder\", \"query\": \"Eliminating linear equations in a formal power series quotient preserves the residual Jacobian Fitting ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\"], \"digest\": \"5579b6a8aac77bb3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern polynomial submersive presentations or univariate Weierstrass division, not simultaneous minimal formal coordinates with residual fixed-size minors."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv",
+   "results": "{\"t\": \"2026-10-22T05:59:04Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.pderiv\", \"MvPowerSeries.pderiv_X_self\", \"MvPowerSeries.pderiv_X_of_ne\", \"MvPowerSeries.pderiv_one\", \"MvPowerSeries.pderiv_X\", \"MvPowerSeries.pderiv_C\", \"MvPowerSeries.pderiv_coe\", \"MvPowerSeries.pderiv_pow\"], \"digest\": \"ed4b904cf5ed1d93\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern polynomial submersive presentations or univariate Weierstrass division, not simultaneous minimal formal coordinates with residual fixed-size minors."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*presentation|jacobian.*minor|Jacobian.*minor",
+   "results": "{\"t\": \"2026-10-23T09:34:00Z\", \"tool\": \"grep\", \"query\": \"minimal.*presentation|jacobian.*minor|Jacobian.*minor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no matches for the Jacobian-minor/minimal-presentation pattern."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal presentation of a formal power series quotient and residual Jacobian minors",
+   "results": "{\"t\": \"2026-10-23T09:34:00Z\", \"tool\": \"leansearch\", \"query\": \"Minimal presentation of a formal power series quotient and residual Jacobian minors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDiv.congr_simp\", \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivision.isUnit_of_map_ne_zero\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivision.elim\"], \"digest\": \"9038085b4e7e3529\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial submersive-presentation or univariate Weierstrass results do not state this simultaneous formal-coordinate and fixed-size minor calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv",
+   "results": "{\"t\": \"2026-10-23T09:34:00Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.pderiv\", \"MvPowerSeries.pderiv_X_self\", \"MvPowerSeries.pderiv_X_of_ne\", \"MvPowerSeries.pderiv_one\", \"MvPowerSeries.pderiv_X\", \"MvPowerSeries.pderiv_C\", \"MvPowerSeries.pderiv_coe\", \"MvPowerSeries.pderiv_pow\"], \"digest\": \"ed4b904cf5ed1d93\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only termwise partial derivatives and their elementary laws; no minimal-coordinate or residual-minor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a formal power series ring admits minimal coordinates by eliminating linear equations and its Jacobian minor ideal equals the residual Jacobian minors",
+   "results": "{\"t\": \"2026-10-23T09:34:10Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a formal power series ring admits minimal coordinates by eliminating linear equations and its Jacobian minor ideal equals the residual Jacobian minors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.ofHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.aeval_jacobianOfHasCoeffs\"], \"digest\": \"a3fb1998eed057c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial submersive-presentation or univariate Weierstrass results do not state this simultaneous formal-coordinate and fixed-size minor calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eliminating independent linear relations from a complete local power series presentation preserves the first Fitting ideal of continuous differentials",
+   "results": "{\"t\": \"2026-10-23T09:39:34Z\", \"tool\": \"leanfinder\", \"query\": \"Eliminating independent linear relations from a complete local power series presentation preserves the first Fitting ideal of continuous differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.HasSubst.ideal\", \"MvPowerSeries.hasSubstIdeal\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"MvPowerSeries.LinearTopology.basis\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisionAt\"], \"digest\": \"2219af47641dddad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass division, admissible substitution ideals and linear topology do not give simultaneous linear-relation elimination or the residual first-Fitting minor identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-jacobian-quadratic-criterion",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0C4C (lemma-fitting-ideal), proof: unit-derivative elimination and the displayed identity/residual Jacobian block; Tag 0C4B (lemma-fitting-ideal-well-defined), invariance under generators and coordinates. Simultaneous elimination uses a basis of linear terms. This is the minimal formal coordinates and residual jacobian minors argument within the pointwise nodal ingredient below the imported locality route.",
+   "via": [
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-minimal-presentation-minors",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps construct minimal formal coordinates by a basis and Nakayama, identify the quotient explicitly, and compute the exact residual fixed-size Jacobian minor ideal, including e=0 and e=1. All prerequisites already exist; no new nodes.",
+  "blueprint": "Realizes the simultaneous parameter elimination and residual Jacobian calculation in Curves 0C4C below the pointwise nodal ingredient. The nearest imported ancestor is lem-trf-local-term-locality, through the recorded nodal-family geometry chain; its current blueprint proof has no separate formal-algebra sentence. This is the existing algebra subroute, not a replacement of the unit's trace argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic commutative-algebra tool for the formal-coordinate/minor argument; sk-i-curve-zero has no statement of this algebra fact. No trace, specialization, or contracting-correspondence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Generic commutative-algebra tool for the formal-coordinate/minor argument; sk-i-curve-zero has no statement of this algebra fact. No trace, specialization, or contracting-correspondence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-full-coordinates-field",
+    "why": "Generic commutative-algebra tool for the formal-coordinate/minor argument; sk-i-curve-zero has no statement of this algebra fact. No trace, specialization, or contracting-correspondence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic commutative-algebra tool for the formal-coordinate/minor argument; sk-i-curve-zero has no statement of this algebra fact. No trace, specialization, or contracting-correspondence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-block-triangular-determinant",
+    "why": "Generic commutative-algebra tool for the formal-coordinate/minor argument; sk-i-curve-zero has no statement of this algebra fact. No trace, specialization, or contracting-correspondence step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-power-series-full-coordinates-field",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-block-triangular-determinant"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-9189878c4",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-9189878c4 (reviewer sub-agent of L); spot-checked: Statement unchanged and identical to live and side-live (both still unsplit, so no supersession). No new nodes, no repair note, no SGA citation, no cycle. Source read: curves.tex 0C4B (lemma-fitting-ideal-well-defined) and 0C4C (lemma-fitting-ideal) proof block; the item faithfully refines the source's elimination with a simultaneous basis and an exact residual ideal. Step 1: cotangent coefficient isomorphism plus basis lift from I. Step 2: power-series theorem (Noetherian, local, dim n), Nakayama on the finite module n, the definition of regular system of parameters, then the 07NM F-algebra coordinate isomorphism. Step 3 (elementary): (G)-division gives phi^-1(I)=(G,h); linear terms lie in G since f-sum c g lies in n^2=phi((G,Z)^2); h in p^2. Step 4: evaluation kernel (G) with section; quotient ideals proper (also e=0); p/(p^2+H)=p/p^2. Step 5: 0C4B invariance node used for coordinates and then for generators on F[[G,Z]] (generator count may change); derivative coefficients give the identity and zero blocks. Step 6: zero row or column when the selected identity index sets differ, otherwise diag(I_a,A'), block determinant, q in {e-1,e}, J_{r+1} in J_r; e<=1 identity minor 1; too-few-rows case handled. Step 7: Leibniz gives p^{e-1}. Small cases checked: (x1x2), (x1+x2^2), I=n, s<e-1, char p. Nearest DAG relatives (binary-hypersurface, hilbert-stratum-minors) are not duplicates. The five split_report tool_uses (sk-thm-p1 generic algebra) are accepted."
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-proper-algcl-comparison-domains",
+ "kind": "statement",
+ "title": "Constructible domains for the two-stage algebraic-closure proper comparison",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended $\\ell$-adic norm topology. Schemes are separated and finite type over $k$ and morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. For a profinite set $S$ put\n$$C(S)=\\{a\\in C(S,\\Omega):a(S)\\subset F\\text{ for some finite intermediate field }\\mathbf Q_\\ell\\subset F\\subset\\Omega\\},\\qquad B(S)=C(S,\\Omega).$$\nHere $C$ is the finite-subextension-valued condensed ring [sk-def-sfb-qlbar-condensed], $B$ uses ALL norm-continuous maps [def-sfb-continuous-map-condensed-ring], and $c:C\\to B$ is inclusion. Put $R_W=p_W^*R$ for every coefficient ring $R$ [sk-def-sfb-pulled-back-coefficients]. Use ordinary unbounded derived categories of internal module objects and their derived geometric adjunctions [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull]. Let $D^b_c(W,R)$ be the full subcategory of complexes with bounded constructible cohomology, where constructible means finite constant local models on finite constructible locally closed stratifications [sk-def-sfb-constructible], and finite Tor amplitude is the vanishing of $H^q(K\\otimes^{\\mathbf L}_{R_W}N)$ outside a bounded interval for all $R_W$-modules $N$ [det-def-sfb-constructible-tor-amplitude]. Write $J_W=B_W\\otimes^L_{C_W}-$ for the actual K-flat derived extension [sk-def-sfb-derived-extension-of-scalars].\n\nFix a finite intermediate field $E\\subset\\Omega$ with the restricted norm topology, put $A_E(S)=C(S,E)$, and let $a:A_E\\to C$ be inclusion of functions. Write $S_W=C_W\\otimes^L_{A_{E,W}}-$. For a proper morphism $f:Z\\to T$ [def-weil-proper-morphism] and $K\\in D^b_c(Z,A_E)$ put\n$$L=S_ZK,\\qquad P=Rf_{*,C}L,\\qquad Q=Rf_{*,B}J_ZL.$$\nLet $\\chi_{a,K}:S_TRf_{*,A_E}K\\to P$ be the canonical counit mate: its adjunct under $f_C^*\\dashv Rf_{*,C}$ is the canonical pullback/tensor comparison $f_C^*S_TRf_{*,A_E}K\\cong S_Zf_{A_E}^*Rf_{*,A_E}K$ followed by $S_Z\\varepsilon_{A_E,K}$, with the K-flat balanced-tensor normalization [lem-pur-ringed-coefficient-projection-cocycle]. Then $L\\in D^b_c(Z,C)$, $P\\in D^b_c(T,C)$, and $\\chi_{a,K}$ is an isomorphism. Moreover $J_ZL\\in D^b_c(Z,B)$ has finite Tor amplitude, and both $J_TP$ and $Q$ belong to $D^b_c(T,B)$. These are assertions in the ordinary ambient derived categories; no flatness of either coefficient inclusion is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proper coefficient-change input: returned proof steps 2 and 3, intermediate comparison and constructibility of its topology-change endpoints Agent-extracted obligation from the returned six-step proof; no independent reference claimed."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-weil-proper-morphism",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "def-sfb-algcl-topology-scalar-extension",
+  "def-sfb-algcl-topology-inclusion",
+  "def-sfb-derived-extend-to-qlbar",
+  "def-sfb-derived-push-hom",
+  "def-sfb-subfield-coefficient-ring",
+  "def-sfb-qlbar-subextension-to-qlbar"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: an ideal containing a nonzero element contains $1$, so its only ideals are $0$ and $k$. Thus $\\operatorname{Spec}k$ is locally Noetherian by [pqf-def-locnoeth], and it is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-weil-pbc-finite-type-over-noetherian] to the finite-type structure maps of $Z,T$: both schemes are Noetherian. Also [pqf-lem-proper-basic] makes the given proper $f$ quasi-compact and quasi-separated.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): geometric hypotheses for proper finiteness and bounded-below coefficient comparison; agent assembly from the cited DAG statements"
+   }
+  },
+  {
+   "text": "The rational-category identification in [sk-thm-sfb-qlbar-two-colimit] (4) identifies the finite-constant-model $D^b_c$ and $D^b_{ctf}$ categories for $A_E,C$ with the ordinary bounded constructible categories used in the finite-subextension results. The coefficient $C$ here is precisely that theorem's finite-subextension-valued algebraic closure, not $B$. By [def-sfb-derived-extend-to-qlbar], its functor $T_{E,\\overline{\\mathbf Q}_\\ell}$ is exactly $S_Z$. Apply [lem-sfb-extend-to-qlbar-constructible] to $K$ to obtain $L=S_ZK\\in D^b_c(Z,C)$.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "def-sfb-derived-extend-to-qlbar",
+    "lem-sfb-extend-to-qlbar-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): finite-subextension scalar extension of the input; agent assembly from the cited DAG statements"
+   }
+  },
+  {
+   "text": "Apply [det-thm-sfb-proper-base-change-rational] (2) with $\\Lambda=C$ and the proper morphism $f$. It gives $P=Rf_{*,C}L$ bounded constructible. The identification of its constructibility convention with finite constant local models is [sk-thm-sfb-qlbar-two-colimit] (4), now on $T$.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational",
+    "sk-thm-sfb-qlbar-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): intermediate proper-image finiteness; agent assembly from the cited DAG statements"
+   }
+  },
+  {
+   "text": "Since $K$ is bounded, it is bounded below. The qcqs comparison [lem-sfb-qlbar-direct-image-comparison], with the given $E\\subset\\Omega$, therefore gives an isomorphism $S_TRf_{*,A_E}K\\to Rf_{*,C}S_ZK=P$. This is the required $\\chi_{a,K}$: the cited statement specifies the adjunct of scalar extension of the $A_E$-counit under the canonical pullback/tensor identification. That is exactly the defining adjunct in the item, so uniqueness of adjuncts identifies the maps. No ambient unbounded coproduct-continuity hypothesis is invoked, and the coefficient on this step is $C$.",
+   "uses": [
+    "lem-sfb-qlbar-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): intermediate coefficient comparison, with the counit mate fixed; agent assembly from the cited DAG statements"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-constructible-algcl-topology-comparison] on $Z$ to $L$ and on $T$ to $P$. Its actual K-flat functors are the $J_Z,J_T$ of the item, so $J_ZL\\in D^b_c(Z,B)$ and $J_TP\\in D^b_c(T,B)$. Because $Z$ is Noetherian by step 1, [det-sf-comp-continuous-algcl-constructible-tor] applied to $J_ZL$ gives finite Tor amplitude. This uses the ring of ALL continuous norm-valued maps, with no claim that $C=B$ or that $c$ is flat.",
+   "uses": [
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "det-sf-comp-continuous-algcl-constructible-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): domains of the topology-change functor and finite Tor amplitude; agent assembly from the cited DAG statements"
+   }
+  },
+  {
+   "text": "The input $J_ZL$ is bounded constant-model constructible with finite Tor amplitude by step 5. Apply the preservation clause of [det-sf-comp-proper-continuous-algcl] to the proper $k$-morphism $f$ and the all-continuous ring $B$. It gives $Q=Rf_{*,B}J_ZL\\in D^b_c(T,B)$ (indeed with finite Tor amplitude). Together with steps 2--5 this proves every stated conclusion in the ordinary ambient derived categories.",
+   "uses": [
+    "det-sf-comp-proper-continuous-algcl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3): final proper-image endpoint, independently of the scalar mate; agent assembly from the cited DAG statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-proper-basic",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "def-sfb-derived-extend-to-qlbar",
+  "lem-sfb-extend-to-qlbar-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-sfb-qlbar-direct-image-comparison",
+  "lem-sfb-constructible-algcl-topology-comparison",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "det-sf-comp-proper-continuous-algcl"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proper coefficient-change input; six-step assembly of existing statements, keeping the two condensed algebraic-closure rings distinct"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(constructible|finiteTor).*(PadicAlgCl|continuousMapRing)|(PadicAlgCl|continuousMapRing).*(constructible|finiteTor)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern proper scheme geometry, scalar fields, or constructible subsets, not constructibility and finite Tor of these derived coefficient-change endpoints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper l adic pushforward and finite subextension scalar extension preserve bounded constructible complexes for all continuous algebraic closure coefficients",
+   "results": "8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange, PadicComplex.instIsScalarTowerPadicPadicAlgCl, IntermediateField.extendScalars, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, PresheafOfModules.pullbackPushforwardAdjunction, Bornology.IsVonNBounded.extend_scalars, Padic.adicCompletionEquiv, PadicComplex",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern proper scheme geometry, scalar fields, or constructible subsets, not constructibility and finite Tor of these derived coefficient-change endpoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern proper scheme geometry, scalar fields, or constructible subsets, not constructibility and finite Tor of these derived coefficient-change endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of finite type schemes in positive characteristic, factor scalar extension from a finite l adic field through finite subextension valued algebraic closure coefficients to all norm continuous coefficients; the intermediate pushforward and both final comparison endpoints are bounded constructible",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.IsFinite.comp_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern proper scheme geometry, scalar fields, or constructible subsets, not constructibility and finite Tor of these derived coefficient-change endpoints"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|PadicAlgCl).*(constructible|proper)|(constructible|proper).*(Condensed|PadicAlgCl)",
+   "results": "4 hits: Mathlib/Condensed/Solid.lean, Mathlib/Condensed/Solid.lean, Mathlib/Topology/Category/CompHausLike/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern proper scheme geometry, scalar fields, or constructible subsets, not constructibility and finite Tor of these derived coefficient-change endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes under scalar extension E to the finite-subextension-valued algebraic closure and then to all continuous norm topology algebraic closure coefficients; proper pushforward constructibility and finite Tor amplitude",
+   "results": "8 hits: chevalley_mvPolynomial_mvPolynomial, ChevalleyThm.chevalley_mvPolynomialC, ChevalleyThm.chevalley_polynomialC, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_C, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern proper scheme geometry, scalar fields, or constructible subsets, not constructibility and finite Tor of these derived coefficient-change endpoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of bounded constructible complexes with condensed l adic coefficient scalar extension and finite Tor amplitude",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.IsSolid, Condensed.profiniteFree, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits supply condensed categorical infrastructure, ordinary module adjunctions, or p-adic scalar fields, not the stated constructible proper-image and two-stage coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of proper derived direct image and scalar extension of l adic sheaves in ordinary derived categories",
+   "results": "8 hits: PresheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.pullback, SheafOfModules.restrictScalars, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.sheafIsAbelian, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits supply condensed categorical infrastructure, ordinary module adjunctions, or p-adic scalar fields, not the stated constructible proper-image and two-stage coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension from a finite p adic field through finite subextension valued algebraic closure to all norm continuous coefficients preserves constructible complexes and commutes with proper pushforward",
+   "results": "8 hits: PadicComplex.instIsScalarTowerPadicPadicAlgCl, PadicComplex.norm_extends, PadicComplex.instAlgebraPadic, PadicAlgCl, PadicComplex, PadicAlgCl.norm_extends, PadicComplex.coe_eq, PadicAlgCl.normedField",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits supply condensed categorical infrastructure, ordinary module adjunctions, or p-adic scalar fields, not the stated constructible proper-image and two-stage coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-proper-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), proper direct image and the two-stage coefficient-change input: constructibility of L, P, J_Z L, J_T P and Q, and normalization of the intermediate counit mate",
+   "via": [
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-algcl-comparison-domains",
+  "worker": "stage1",
+  "summary": "Retained the statement and all statement dependencies. Split into six steps using only existing nodes. Distinguished finite constant models from general stratified finite presentation using the recorded rational-category identification. Used the bounded-below qcqs coefficient comparison rather than the repaired unbounded theorem requiring ambient coproduct continuity. Obtained the B-endpoint finiteness from the independent proper all-continuous coefficient theorem, not from the comparison being proved. No new nodes.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sf-ctf-stability-direct-images: steps 1--4 the finite-subextension proper input, steps 5--6 the all-continuous constructible finite-Tor endpoints. The imported created.item ancestry ends before a blueprint node (blueprint_refs.py ancestor returns None); retained that null ancestry and gave the precise current blueprint source place.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Affine-cover definition used to check the Noetherian hypothesis; no proper coefficient step supplies this definition."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affineness implies quasi-compactness for Spec k."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence supplies the source scheme hypothesis for the all-continuous Tor theorem."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic proper-morphism permanence supplies the qcqs hypotheses of the bounded-below comparison."
+   },
+   {
+    "node": "sk-thm-sfb-qlbar-two-colimit",
+    "why": "Its rational-category identification (4) reconciles finite constant models with the older ordinary bounded-constructible interface; no coefficient topology is changed."
+   },
+   {
+    "node": "def-sfb-derived-extend-to-qlbar",
+    "why": "Identifies the existing coefficient-extension functor with the actual K-flat S of the item."
+   },
+   {
+    "node": "lem-sfb-extend-to-qlbar-constructible",
+    "why": "Finite-subextension scalar preservation is an independent coefficient tool, retaining the proper-image route."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "The proper rational finiteness input is explicitly the route invoked by paragraph (3)."
+   },
+   {
+    "node": "lem-sfb-qlbar-direct-image-comparison",
+    "why": "Bounded-below qcqs coefficient comparison supplies the precise intermediate mate, without the extra unbounded continuity hypothesis."
+   },
+   {
+    "node": "det-sf-comp-continuous-algcl-constructible-tor",
+    "why": "Independent finite Tor theorem for ALL continuous algebraic-closure coefficients, required by the endpoint domain."
+   },
+   {
+    "node": "det-sf-comp-proper-continuous-algcl",
+    "why": "Independent proper direct-image preservation for ALL continuous coefficients supplies Q; does not assume the scalar comparison of the parent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-proper-basic",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "def-sfb-derived-extend-to-qlbar",
+  "lem-sfb-extend-to-qlbar-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-sfb-qlbar-direct-image-comparison",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "det-sf-comp-proper-continuous-algcl"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-e17594180",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-e17594180 (reviewer sub-agent of L); spot-checked: Shape: 0 new nodes; the item statement is byte-identical to live and its stmt_deps are kept; the item is still unsplit in live and side-live; no repair note; no cycles. Route: blueprint main-20261015 direct-images proof paragraph (3) cites sk-thm-sfb-proper-base-change and sk-prop-open-coefficients. The split realizes it through det-thm-sfb-proper-base-change-rational (2) and lem-sfb-qlbar-direct-image-comparison; the off-unit nodes are recorded in tool_uses, which I accept. Steps: step 1 (Noetherian/qcqs) follows from pqf-def-locnoeth, the affine qcqs lemma, finite type over Noetherian, and proper-basic. Step 2: T_{E,Qlb} equals S_Z because C is exactly sk-def-sfb-qlbar-condensed and A_E is the condensed ring of E; the finite-constant-model convention is bridged to the D_cons convention of lem-sfb-extend-to-qlbar-constructible by the stated clause (4) of sk-thm-sfb-qlbar-two-colimit. Step 3: det-thm (2) with Lambda=Qlb. Step 4: the qcqs, bounded-below comparison has the same adjunct-of-counit map as the item's chi, which I checked against the chi_a definition in lem-pur-ringed-coefficient-projection-cocycle; no unbounded hypothesis is used. Step 5: the topology-comparison equivalence gives J_Z L and J_T P bounded constructible, and the all-continuous Tor node, applied on Noetherian Z, gives finite Tor amplitude. Step 6: the preservation clause of det-sf-comp-proper-continuous-algcl gives Q in Dctf(T,B). Edge cases (empty schemes, K=0, E=Q_l, f=id) hold. Batch-5: the five flagged closures reach only generic lemmas: the fully-faithful plus essentially-surjective equivalence criterion, the identification of module objects with ringed-topos modules and its derived pushpull normalization, and the components of a normal scheme with Noetherian underlying space. None is a step of the trace formula or of Poincare duality, so all are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperAlgClComparisonDomains",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.properAlgClComparisonDomains",
+  "file": "lean/Sheaf/Paper/ProperAlgClComparisonDomains.lean",
+  "statement": "theorem properAlgClComparisonDomains (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ) (E : PadicAlgCl.FiniteIntermediateField ℓ) {Z T : Scheme.{u}} [Z.Over (Spec (.of k))] [T.Over (Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] (f : Z ⟶ T) [f.IsOver (Spec (.of k))] [IsProper f] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (padicSubfieldRingObj.{u} Z ℓ E))) (_hK : constantModelBoundedConstructible.{u} (Profinite.continuousMapRingObj.{u} E) Z K) : constantModelBoundedConstructible.{u} (Profinite.padicAlgClRingObj.{u} ℓ) Z ((derivedExtendScalarsToPadicAlgCl.{u} Z ℓ E).obj K) ∧ constantModelBoundedConstructible.{u} (Profinite.padicAlgClRingObj.{u} ℓ) T ((moduleObjectDerivedPushforward.{u} (Profinite.padicAlgClRingObj.{u} ℓ) f).obj ((derivedExtendScalarsToPadicAlgCl.{u} Z ℓ E).obj K)) ∧ IsIso ((derivedPushHom.{u} (Profinite.padicSubfieldRingObjToPadicAlgCl.{u} ℓ E) f).app K) ∧ constantModelBoundedConstructible.{u} (Profinite.continuousMapRingObj.{u} (PadicAlgCl ℓ)) Z ((algClTopologyScalarExtension.{u} ℓ Z).obj ((derivedExtendScalarsToPadicAlgCl.{u} Z ℓ E).obj K)) ∧ DerivedCategory.finiteTorAmplitude _ ((algClTopologyScalarExtension.{u} ℓ Z).obj ((derivedExtendScalarsToPadicAlgCl.{u} Z ℓ E).obj K)) ∧ constantModelBoundedConstructible.{u} (Profinite.continuousMapRingObj.{u} (PadicAlgCl ℓ)) T ((algClTopologyScalarExtension.{u} ℓ T).obj ((moduleObjectDerivedPushforward.{u} (Profinite.padicAlgClRingObj.{u} ℓ) f).obj ((derivedExtendScalarsToPadicAlgCl.{u} Z ℓ E).obj K))) ∧ constantModelBoundedConstructible.{u} (Profinite.continuousMapRingObj.{u} (PadicAlgCl ℓ)) T ((moduleObjectDerivedPushforward (Profinite.continuousMapRingObj.{u} (PadicAlgCl ℓ)) f).obj ((algClTopologyScalarExtension.{u} ℓ Z).obj ((derivedExtendScalarsToPadicAlgCl.{u} Z ℓ E).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All seven conclusions are stated in the ordinary ambient derived categories. S is the recorded derivedExtendScalarsToPadicAlgCl, J is the existing actual K-flat algClTopologyScalarExtension, and chi is the existing canonical derivedPushHom for the finite-subfield inclusion. The latter map internally uses proved finite-subfield flatness instances; the theorem adds no flatness assumption and makes no claim that the finite-subextension-valued coefficient equals the all-continuous coefficient. PadicAlgCl is the chosen normed algebraic-closure model, as in the recorded dependency interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-365a6c3aa",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Re-delivery of returned head 53991d78 (H2). The Lean module is byte-identical to 53991d78, whose mathematics was fully checked (7 conjuncts, χ = derivedPushHom(padicSubfieldRingObjToPadicAlgCl).app K, C≠B, no flatness assumed, edge cases, universes). A JSON diff of the item node shows only six added stmt_deps: def-sfb-algcl-topology-scalar-extension, def-sfb-algcl-topology-inclusion, def-sfb-derived-extend-to-qlbar, def-sfb-derived-push-hom, def-sfb-subfield-coefficient-ring, def-sfb-qlbar-subextension-to-qlbar. All six are on the delivery base with existing:true records naming the declarations the signature uses. No cycle. The report has the worker report and repair sections. No compile run, since no file was changed."
+ }
+}

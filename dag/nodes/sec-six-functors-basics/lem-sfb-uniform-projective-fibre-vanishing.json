@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-uniform-projective-fibre-vanishing",
+ "kind": "statement",
+ "title": "Uniform projective field-fibre regularity and vanishing",
+ "statement": "Fix $n\\geq0$ and a numerical polynomial $P\\in\\mathbf Q[t]$ (integer-valued at all sufficiently large integers). There exists an integer $m\\geq1$, depending only on $n,P$, such that for every algebraically closed field $k$ [def-weil-field, def-weil-algebraic-closure] and every closed subscheme $i:Z\\hookrightarrow\\mathbf P^n_k$ [def-pc-scheme, def-weil-closed-immersion, def-nagata-projective-space-base-change] whose coordinate Hilbert polynomial is $P$ [def-sfb-projective-coordinate-hilbert-polynomial], the ideal $\\mathcal J=\\ker(\\mathcal O_{\\mathbf P^n_k}\\to i_*\\mathcal O_Z)$ is coherent [pqf-def-coherent] and $m$-regular, meaning $H^j(\\mathbf P^n_k,\\mathcal J(m-j))=0$ for $1\\leq j\\leq n$. Here twists are as in [def-pc-projective-space-twist], $\\mathcal O_Z(d)=i^*\\mathcal O(d)$ [def-pc-module-pullback], and $H^j$ is module sheaf cohomology [pqf-def-cohomology]. For every integer $d\\geq m$ and every $j>0$,\n$$H^j(\\mathbf P^n_k,\\mathcal J(d))=H^j(Z,\\mathcal O_Z(d))=0,$$\nand the canonical restriction map fits into an exact sequence of finite-dimensional $k$-vector spaces\n$$0\\longrightarrow H^0(\\mathbf P^n_k,\\mathcal J(d))\\longrightarrow k[x_0,\\ldots,x_n]_d\\longrightarrow H^0(Z,\\mathcal O_Z(d))\\longrightarrow0,$$\nwith $\\dim_kH^0(Z,\\mathcal O_Z(d))=P(d)$. This includes $n=0$ and $Z=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+  "place": "Tags 08AG (lemma-bound-quotients-free), 08A6 (lemma-m-regular-up), 08AE (lemma-hilbert-polynomial-H0), and 01XT (lemma-cohomology-projective-space-over-ring); uniform field consequence with the twisted ideal long exact sequence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The item's $\\mathbf P^n_k$ is $\\mathbf P(\\{0,\\ldots,n\\};\\operatorname{Spec}k)=\\operatorname{Spec}k\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}(\\mathbf Z[T_0,\\ldots,T_n])$, while the cited lemmas are stated for $\\operatorname{Proj}(S)$, $S=k[x_0,\\ldots,x_n]$. Apply the Proj scalar-extension lemma with $R=\\mathbf Z$, $S=k$, $A=\\mathbf Z[T_0,\\ldots,T_n]$ and the graded $k$-algebra isomorphism $\\beta:k\\otimes_{\\mathbf Z}A\\to S$, $c\\otimes T_a\\mapsto cx_a$, of the polynomial scalar-extension lemma (it sends monomials to monomials of the same degree). Its cartesian square identifies $\\operatorname{Proj}(S)$ over $\\operatorname{Spec}k$ with $\\mathbf P(\\{0,\\ldots,n\\};\\operatorname{Spec}k)$; the preimage of $D_+(T_a)$ is $D_+(x_a)$ and on that chart the identification is $F/T_a^d\\mapsto\\beta(1\\otimes F)/x_a^d$. Hence the standard charts, their dehomogenizations used in the coordinate-polynomial definition, and the twists $\\mathcal O(d)$ glued from these charts agree on the two models; we transport $i$ along this isomorphism and work on $\\operatorname{Proj}(S)$ from now on. Put $X=\\mathbf P^n_k$ and $\\mathcal F=i_*\\mathcal O_Z$. The field coordinate--Euler lemma makes $Z$ and $X$ (apply it also to the identity of $X$) proper Noetherian schemes with coherent structure sheaves. The chartwise homogeneous-ideal lemma identifies $Z$ with $\\operatorname{Proj}(S/I)$ for the actual ideal $I=\\bigoplus I_d(i)$ in the coordinate-polynomial definition: its chartwise kernels are already linear subspaces, so taking their linear spans changes nothing. Thus the coordinate--Euler lemma and the hypothesis give $P=Q_Z$ by uniqueness, and $\\chi(Z,\\mathcal O_Z(t))=P(t)$ for every integer $t$. The closed-immersion lemma gives coherence of $\\mathcal F$, and the coherent-kernel lemma gives coherence of $\\mathcal J$. The closed-immersion definition gives the surjection in $0\\to\\mathcal J\\to\\mathcal O_X\\to\\mathcal F\\to0$.",
+   "uses": [
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "def-sfb-projective-coordinate-hilbert-polynomial",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "def-weil-closed-immersion",
+    "lem-nagata-affine-proj-scalar-extension",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tag 03GL (constructions.tex, lemma-closed-in-projective-space); Tags 0BEM (lemma-numerical-polynomial-from-euler), 08AE (lemma-hilbert-polynomial-H0), 01Y6 (lemma-finite-pushforward-coherent), 089W (lemma-relative-affine-cohomology); modules.tex Tag 01BY (lemma-coherent-abelian)"
+   }
+  },
+  {
+   "text": "Apply the closed-immersion projection and cohomology isomorphisms to obtain $H^q(X,\\mathcal F(t))\\cong H^q(Z,\\mathcal O_Z(t))$ for all $q,t$. Hence the exact coherent quotient of step 1 has $\\chi(X,\\mathcal F(t))=P(t)$ for every integer $t$. The free-quotient kernel bound with $r=1$ supplies an integer $a$ depending only on $n,P$, for which $\\mathcal J$ is $a$-regular. Set $m=\\max(1,a)$. The upward-regularity clause makes $\\mathcal J$ $m$-regular. This single $m$ works over every field, and therefore over every algebraically closed field in the item.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-m-regular-coherent-sheaf-consequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tag 08AG (lemma-bound-quotients-free), with Tag 08A6 (lemma-m-regular-up); Tag 089W (lemma-relative-affine-cohomology); invertible projection formula by local trivialization"
+   }
+  },
+  {
+   "text": "For any integer $d$, tensor the sequence of step 1 by $\\mathcal O_X(d)$. On each standard chart the twist is free with its specified basis, so this is the original exact sequence in that basis; exactness is local and is therefore preserved. The closed-immersion projection isomorphism identifies its last term with $i_*\\mathcal O_Z(d)$. We have the specified short exact sequence $0\\to\\mathcal J(d)\\to\\mathcal O_X(d)\\to i_*\\mathcal O_Z(d)\\to0$, whose last arrow is restriction: on a trivializing chart it is the quotient of functions defining the closed immersion.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y6 (lemma-finite-pushforward-coherent); projection formula for an invertible twist, locally the identity; constructions.tex Tag 03GL (lemma-closed-in-projective-space)"
+   }
+  },
+  {
+   "text": "Fix $d\\geq m$. The regularity-consequences lemma gives $H^q(X,\\mathcal J(d))=0$ for every $q>0$. Since $d\\geq1$, the projective-space computation gives $H^q(X,\\mathcal O_X(d))=0$ for $q>0$ and a $k$-linear isomorphism $H^0(X,\\mathcal O_X(d))\\cong k[x_0,\\ldots,x_n]_d$. That statement does not specify the map, so we check that the canonical map is one. Let $\\sigma_d:S_d\\to H^0(X,\\mathcal O_X(d))$ send $F$ to the section equal to $(F/x_a^d)e_a^{(d)}$ on $U_a$; these agree on overlaps by the transition rule $e_a^{(d)}=(x_a/x_b)^de_b^{(d)}$ of the twist definition. It is injective: on $U_0=\\operatorname{Spec}k[x_1/x_0,\\ldots,x_n/x_0]$ the dehomogenization $F\\mapsto F(1,x_1/x_0,\\ldots,x_n/x_0)$ is injective on homogeneous polynomials of degree $d$, since distinct monomials of degree $d$ go to distinct monomials. Both sides have the same finite dimension by the projective-space computation, so $\\sigma_d$ is an isomorphism; this is the monomial identification used below. Apply the closed-cokernel cohomology sequence to step 3. For $j>0$ its segment $H^j(X,\\mathcal O_X(d))\\to H^j(Z,\\mathcal O_Z(d))\\to H^{j+1}(X,\\mathcal J(d))$ has zero outside terms, giving the required vanishing on $Z$. Its initial segment ends with $H^1(X,\\mathcal J(d))=0$, giving exactly the asserted short exact restriction sequence. Under the monomial identification the middle arrow sends a homogeneous polynomial to its restricted section, because step 3 is the quotient map on every standard chart.",
+   "uses": [
+    "lem-sfb-m-regular-coherent-sheaf-consequences",
+    "sk-thm-picard-pn",
+    "lem-sfb-closed-immersion-cokernel-cohomology",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tags 08A6 (lemma-m-regular-up), 01XT (lemma-cohomology-projective-space-over-ring); curves.tex Tag 0BYD (lemma-genus-plane-curve), the same twisted-ideal long exact sequence"
+   }
+  },
+  {
+   "text": "The middle space of this exact sequence has its finite monomial basis, so its subspace $H^0(X,\\mathcal J(d))$ and quotient $H^0(Z,\\mathcal O_Z(d))$ are finite-dimensional. By the Euler-characteristic definition and the positive-degree vanishing just proved, $\\dim_k H^0(Z,\\mathcal O_Z(d))=\\chi(Z,\\mathcal O_Z(d))=Q_Z(d)=P(d)$. No bound depending on $Z$ was introduced. For $n=0$, regularity has no conditions and the projective-space computation explicitly gives no positive cohomology. For $Z=\\varnothing$, $\\mathcal F=0$, $\\mathcal J=\\mathcal O_X$, and $Q_Z=P=0$; the sequence reduces to the monomial identification. If no fibre realizes $P$, the universal assertion is vacuous and the bound still exists by the free-quotient lemma.",
+   "uses": [
+    "def-pc-euler-characteristic",
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "sk-thm-picard-pn"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "Tags 0BEM (lemma-numerical-polynomial-from-euler), 08AE (lemma-hilbert-polynomial-H0), 01XT (lemma-cohomology-projective-space-over-ring); elementary dimension and zero-sheaf calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-field-coordinate-euler-polynomial",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "def-weil-closed-immersion",
+  "lem-sfb-free-quotient-kernel-regularity-bound",
+  "lem-sfb-m-regular-coherent-sheaf-consequences",
+  "def-pc-projective-space-twist",
+  "sk-thm-picard-pn",
+  "lem-sfb-closed-immersion-cokernel-cohomology",
+  "def-pc-euler-characteristic",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+  "place": "Assembly of Tags 08AG, 08A6, 08AE, 0BEM, 01XT, 089W, 01Y6, with constructions.tex Tag 03GL and modules.tex Tag 01BY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|hilbertPolynomial|HilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T07:21:35Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|hilbertPolynomial|HilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define Proj, homogeneous vanishing ideals, regular topologies, or a formal generating-function polynomial; none states uniform coherent ideal regularity and field-cohomology bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For fixed Hilbert polynomial projective subscheme ideals have bounded regularity and vanishing cohomology",
+   "results": "{\"t\": \"2026-10-22T07:21:35Z\", \"tool\": \"leansearch\", \"query\": \"For fixed Hilbert polynomial projective subscheme ideals have bounded regularity and vanishing cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"ProjectiveSpectrum.vanishingIdeal\", \"Polynomial.hilbertPoly_eq_zero_of_le_rootMultiplicity_one\", \"ProjectiveSpectrum.ideal_le_vanishingIdeal_zeroLocus\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"ProjectiveSpectrum.gc_homogeneousIdeal\", \"ProjectiveSpectrum.homogeneousIdeal_le_vanishingIdeal_zeroLocus\", \"ProjectiveSpectrum.subset_zeroLocus_vanishingIdeal\"], \"digest\": \"77da99779bae7259\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define Proj, homogeneous vanishing ideals, regular topologies, or a formal generating-function polynomial; none states uniform coherent ideal regularity and field-cohomology bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T07:21:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.regularTopology.isSheaf_of_projective\", \"CategoryTheory.regularTopology.isSheaf_yoneda_obj\", \"CategoryTheory.regularTopology.equalizerCondition_iff_isSheaf\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff\", \"CategoryTheory.Equivalence.sheafCongrPreregular\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\"], \"digest\": \"de6d9148d2fa601f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define Proj, homogeneous vanishing ideals, regular topologies, or a formal generating-function polynomial; none states uniform coherent ideal regularity and field-cohomology bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Castelnuovo Mumford regularity and higher cohomology vanishing for ideal sheaves of projective closed subschemes with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T07:21:46Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform Castelnuovo Mumford regularity and higher cohomology vanishing for ideal sheaves of projective closed subschemes with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"ProjectiveSpectrum.not_irrelevant_le\", \"ProjectiveSpectrum.vanishingIdeal\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"ProjectiveSpectrum.ext\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"ProjectiveSpectrum.ext_iff\"], \"digest\": \"3722ac2ec265a42a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define Proj, homogeneous vanishing ideals, regular topologies, or a formal generating-function polynomial; none states uniform coherent ideal regularity and field-cohomology bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded regularity kernels of coherent quotients of the structure sheaf on projective space",
+   "results": "{\"t\": \"2026-10-22T07:21:47Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded regularity kernels of coherent quotients of the structure sheaf on projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem'\", \"AlgebraicGeometry.Proj.ext_iff\"], \"digest\": \"434445848d10a522\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define Proj, homogeneous vanishing ideals, regular topologies, or a formal generating-function polynomial; none states uniform coherent ideal regularity and field-cohomology bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|hilbertPolynomial|HilbertPolynomial",
+   "results": "{\"t\": \"2026-10-23T10:00:17Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|hilbertPolynomial|HilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular topologies, Proj constructions, free-sheaf presentations, cotangent finiteness and the formal generating-function Polynomial.hilbertPoly do not state a bound on coherent ideal regularity or the field-fibre conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded regularity and cohomology of ideals of projective subschemes with fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-23T10:00:17Z\", \"tool\": \"leansearch\", \"query\": \"Bounded regularity and cohomology of ideals of projective subschemes with fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"ProjectiveSpectrum.gc_homogeneousIdeal\", \"ProjectiveSpectrum.ideal_le_vanishingIdeal_zeroLocus\", \"ProjectiveSpectrum.vanishingIdeal\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"ProjectiveSpectrum.subset_vanishingIdeal_zeroLocus\"], \"digest\": \"50bb1d462b4ffcfd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular topologies, Proj constructions, free-sheaf presentations, cotangent finiteness and the formal generating-function Polynomial.hilbertPoly do not state a bound on coherent ideal regularity or the field-fibre conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-23T10:00:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.isSheafFor_regular_of_projective\", \"CategoryTheory.regularTopology.isSheaf_of_projective\", \"CategoryTheory.regularTopology.isSheaf_yoneda_obj\", \"CategoryTheory.regularTopology.equalizerCondition_iff_isSheaf\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff\", \"CategoryTheory.Equivalence.sheafCongrPreregular\", \"CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall\"], \"digest\": \"de6d9148d2fa601f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular topologies, Proj constructions, free-sheaf presentations, cotangent finiteness and the formal generating-function Polynomial.hilbertPoly do not state a bound on coherent ideal regularity or the field-fibre conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels of coherent quotients of a finite free sheaf on projective space have uniformly bounded regularity for fixed Euler polynomial",
+   "results": "{\"t\": \"2026-10-23T10:00:26Z\", \"tool\": \"leanfinder\", \"query\": \"Kernels of coherent quotients of a finite free sheaf on projective space have uniformly bounded regularity for fixed Euler polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"AlgebraicGeometry.Proj.sub_apply\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"9e6dc10a1c3d416b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular topologies, Proj constructions, free-sheaf presentations, cotangent finiteness and the formal generating-function Polynomial.hilbertPoly do not state a bound on coherent ideal regularity or the field-fibre conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Castelnuovo Mumford regularity bound and higher cohomology vanishing for projective closed subschemes with a fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-23T10:00:28Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform Castelnuovo Mumford regularity bound and higher cohomology vanishing for projective closed subschemes with a fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"ProjectiveSpectrum.vanishingIdeal\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.affineOpenCover\"], \"digest\": \"ff7c1828e48d4f06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: regular topologies, Proj constructions, free-sheaf presentations, cotangent finiteness and the formal generating-function Polynomial.hilbertPoly do not state a bound on coherent ideal regularity or the field-fibre conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; returned uniform-section-bound proof steps 2, 3",
+   "via": [
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-uniform-projective-fibre-vanishing",
+  "worker": "stage1",
+  "summary": "Complete five-step assembly using existing DAG lemmas only. Identified the actual chartwise coordinate ideal before using the coordinate/Euler comparison, verified the all-integer Euler hypothesis for rank-one free-quotient regularity, chose max(1,a), and wrote the twisted ideal sequence and its long-exact-sequence arguments. Preserved the statement, statement dependencies and inherited blueprint ancestry. Checked n=0, empty and full projective subschemes, unrealizable P, and all positive cohomological degrees. No new nodes.",
+  "blueprint": "Inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor returns None). The existing from.place identifies det-thm-sf-ctf-stability-direct-images proof (3), the Hilbert-scheme prerequisite to the de Jong alteration step. These steps realize the field bound extracted in lem-sfb-hilbert-uniform-section-bound, former proof steps 2--3. The latest sk-thm-sf-ctf-stability-direct-images.proof.md was read; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Generic closure of coherent modules under kernels, used only to establish coherence of the ideal in the rank-one quotient; no same-unit node replaces this closure result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-8b7b98685",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-8b7b98685 (reviewer sub-agent of L); spot-checked: This is a first split of an item that was unsplit on base: statement and stmt_deps are unchanged and there are no new nodes. I read every cited statement in full and checked the sources: Stacks 08AG lemma-bound-quotients-free (varieties.tex l.6856), 08A6 and 08AE. The item is true, follows from 08AG with r=1 plus 08A6, and keeps m independent of k. Steps 2, 3 and 5 are correct. Step 1 correctly gets P=Q_Z through uniqueness in the Euler lemma, with I_d(i) equal to the homogeneous-ideal lemma's I_d. m=max(1,a) handles a≤0. Edge cases checked: n=0, Z empty, Z all of P^n, non-reduced Z, unrealisable P. I fixed two gaps. (1) C1/E4, step 1: the item's P^n_k is the base-change model of def-nagata-projective-space-base-change, which has no charts, while every cited lemma is stated on Proj(k[x]). The step switched models without a citation, so I added the bridge through lem-nagata-affine-proj-scalar-extension and lem-weil-pbc-polynomial-scalar-extension, as the sibling Euler lemma does in its step 1. (2) C4, step 4: sk-thm-picard-pn only gives an abstract isomorphism H^0(O(d)) ≅ S_d, but the item claims the canonical restriction map is surjective. I added that the canonical map is injective by dehomogenisation on U_0 and is an isomorphism because both sides have the same dimension. The accepted tool_use is lem-weil-pbc-coherent-modules-kernel-cokernel-sum (generic, Lean-closed). Every other cited unit lies in the unit's route. Batch 5: lem-trf-standard-graded-hilbert-function is Stacks 00K1, generic graded Hilbert polynomial algebra, and def-sc-tensor-pullback-power-comparison is a general tensor pullback definition. Neither is part of the trace formula or Poincaré duality proofs, so both are accepted. No cycle. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniformProjectiveFibreVanishing",
+  "declaration": "AlgebraicGeometry.UniformProjectiveFibreVanishing.exists_uniform_projective_fibre_vanishing",
+  "declarations": [
+   "AlgebraicGeometry.UniformProjectiveFibreVanishing.cohomology",
+   "AlgebraicGeometry.UniformProjectiveFibreVanishing.zeroSections",
+   "AlgebraicGeometry.UniformProjectiveFibreVanishing.exists_uniform_projective_fibre_vanishing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UniformProjectiveFibreVanishing.lean",
+  "statement": "theorem exists_uniform_projective_fibre_vanishing (n : ℕ) (P : Polynomial ℚ) (hP : ∃ N : ℕ, ∀ d : ℕ, N ≤ d → ∃ z : ℤ, P.eval (d : ℚ) = (z : ℚ)) : ∃ m : ℤ, 1 ≤ m ∧ ∀ (k : Type u) [Field k] [IsAlgClosed k] (Z : Scheme.{u}) (i : Z ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))), IsClosedImmersion i → ProjectiveHilbertPolynomial.IsCoordinatePolynomial k n i P → RingedSpace.IsCoherent ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)).toRingedSpace i.ker.toModules ∧ (∀ j : ℕ, 1 ≤ j → j ≤ n → Subsingleton ((RingedSpace.moduleCohomology ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)).toRingedSpace j).obj (i.ker.toModules ⊗ₘ ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (m - (j : ℤ))))) ∧ ∀ d : ℤ, m ≤ d → (∀ j : ℕ, 0 < j → Subsingleton ((RingedSpace.moduleCohomology ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)).toRingedSpace j).obj (i.ker.toModules ⊗ₘ ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) ∧ Subsingleton ((RingedSpace.moduleCohomology Z.toRingedSpace j).obj ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)))) ∧ Module.Finite k (cohomology k (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k)) (i.ker.toModules ⊗ₘ ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) 0) ∧ Module.Finite k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k d.toNat) ∧ Module.Finite k (cohomology k (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) 0) ∧ (Module.finrank k (cohomology k (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) 0) : ℚ) = P.eval (d : ℚ) ∧ ∃ σ : ModuleCat.of k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k d.toNat) ≅ cohomology k (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k)) (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) 0, (∀ F : MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k d.toNat, ∀ a : ULift.{u} (Fin (n + 1)), (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d).presheaf.map (homOfLE le_top).op ((zeroSections (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)).hom (σ.hom F)) = ProjectiveSpace.chartRingEquiv _ k a (MvPolynomial.dehomogenizeX k a F.val) • ProjectiveSpace.twistGenerator _ (Spec (.of k)) d a) ∧ ∃ β : ModuleCat.of k (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k d.toNat) ⟶ cohomology k (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) 0, (∀ F : MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k d.toNat, ∀ a : ULift.{u} (Fin (n + 1)), ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)).presheaf.map (homOfLE le_top).op ((zeroSections ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d))).hom (β F)) = Scheme.Modules.tensorPullbackSection i (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) (ProjectiveSpace.standardOpen _ (Spec (.of k)) a) (ProjectiveSpace.chartRingEquiv _ k a (MvPolynomial.dehomogenizeX k a F.val) • ProjectiveSpace.twistGenerator _ (Spec (.of k)) d a)) ∧ Function.Injective (((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k)).appTop).hom).map ((RingedSpace.moduleCohomology ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)).toRingedSpace 0).map (i.ker.toModulesι ▷ ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d ≫ (λ_ (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)).hom))) ≫ σ.inv) ∧ Function.Exact (((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k)).appTop).hom).map ((RingedSpace.moduleCohomology ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)).toRingedSpace 0).map (i.ker.toModulesι ▷ ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d ≫ (λ_ (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)).hom))) ≫ σ.inv) β ∧ Function.Surjective β",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The cohomology helper is exactly pqf-def-cohomology followed by scalar restriction along the given structural map. zeroSections is Mathlib rightDerivedZeroIsoSelf for evaluation. The existential monomial isomorphism and restriction map are fixed by their values on every standard chart. Their characterizations state the canonical sequence; neither map is arbitrary. No statement correction. H13 repair of returned head 6bd4901c1991: pqf-def-coherent retains Q25's landed Sheaf.AlgebraicGeometry.CoherentFiniteType / AlgebraicGeometry.Scheme.Modules.IsQuasiCoherentFiniteType record and module ownership unchanged. The item directly imports WeilConjectures.AlgebraicGeometry.Coherent and uses AlgebraicGeometry.RingedSpace.IsCoherent, the existing faithful Stacks 01BV predicate (finite type and finite-type kernels of maps from finite free modules on every open). This does not redefine coherence or rebind its dependency node. The item Lean file is byte-identical to the returned packet; the dependency JSON is omitted from this repaired delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a8385423",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery after the H13 return of 6bd4901c1991. pqf-def-coherent.json is identical to live and side-live (Q25 CoherentFiniteType/IsQuasiCoherentFiniteType record kept). The item Lean is byte-identical (sha256 9b68…ffaa1). The item node differs from live only in lean, and within lean only in note, which explains the direct use of the upstream RingedSpace.IsCoherent. IsCoherent is exactly clause 3 of pqf-def-coherent (01BV). Clause-by-clause check: uniform m ≥ 1 before k and Z; IsCoordinatePolynomial matches the def node; regularity for 1 ≤ j ≤ n; vanishing for all j > 0 on P^n and on Z via tensorPullback; finite dimensions; finrank = P(d); σ and β pinned on every chart (canonical monomial map and tensorPullbackSection restriction); Injective/Exact/Surjective. Helpers real; proof sorry only; docstrings present. All 17 imports resolve; no live collision. Edge cases n=0, Z empty, Z = P^n, non-reduced Z, unrealizable P covered. No file changed, so no compile."
+ }
+}

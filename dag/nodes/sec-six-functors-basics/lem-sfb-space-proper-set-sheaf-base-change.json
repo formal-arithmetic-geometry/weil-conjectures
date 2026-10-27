@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-space-proper-set-sheaf-base-change",
+ "kind": "statement",
+ "title": "Proper base change for arbitrary etale sheaves of sets on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Use sheaves of sets on small etale sites [def-weil-pbc-sites-and-cohomology] and the canonical inverse-image/direct-image adjunctions and composition comparisons of [lem-trf-space-enlarged-etale-ringed-site-model, lem-trf-space-enlarged-chart-ringed-morphism]. Let $f:Y\\to Z$ be proper [def-sfb-space-morphism-properties], let $g:Z'\\to Z$ be any morphism of algebraic spaces, and put $Y'=Y\\times_Z Z'$ with projections $f':Y'\\to Z'$ and $g':Y'\\to Y$ [lem-trf-space-fibre-products-etale-covers]. For every sheaf of sets $F$ on $Y_{\\mathrm{et}}$, the canonical base-change map\n$$g^{-1}f_*F\\longrightarrow f'_*g'^{-1}F$$\nis an isomorphism. Here the map is the adjoint under $f'^{-1}\\dashv f'_*$ of\n$$f'^{-1}g^{-1}f_*F\\simeq g'^{-1}f^{-1}f_*F\\xrightarrow{g'^{-1}\\epsilon_f}g'^{-1}F,$$\nwhere $\\epsilon_f$ is the adjunction counit. The isomorphism is natural in $F$. No surjectivity, finite-presentation, Noetherianity, representability, group structure, or torsion hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-cohomology.tex",
+  "place": "Tag 0DG0 (lemma-proper-base-change-f-star), full statement and proof. Canonical mate normalization is the base-change map used there; compare etale-cohomology.tex Tag 0A3U (lemma-proper-base-change-f-star)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Work on the enlarged sites of [lem-trf-space-enlarged-etale-ringed-site-model]. Along an etale map inverse image is restriction to the localized site; direct image evaluates on fibre products by [lem-trf-space-enlarged-chart-ringed-morphism]. Thus etale restriction of either side of the asserted map is the corresponding side for the restricted square; its adjoint is still the restricted counit. Choose a surjective etale scheme chart $V\\to Z$ and then a surjective etale scheme chart $V_1\\to V\\times_ZZ'$, using [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. It suffices to prove the result for the pulled-back square with base map $V_1\\to V$. Indeed, on every test object its inverse image along these covers is a bijection; local inverse sections agree on overlaps by injectivity and glue uniquely by the sheaf axiom. Refine $V$ by affine opens, then refine their inverse images in $V_1$ by affine opens. This reduces to $Z$ and $Z'$ affine, without assuming $g$ etale. The restricted vertical morphisms remain proper by [lem-sfb-space-proper-base-change].",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof, first paragraph, etale and Zariski localization"
+   }
+  },
+  {
+   "text": "Now $Z$ is affine and $f:Y\\to Z$ is separated of finite type. Regard these spaces over $\\operatorname{Spec}\\mathbf Z$ by [lem-sfb-space-change-base-to-integers], which preserves fibre products, small etale sites and maps to $S$, so that a scheme over $\\operatorname{Spec}\\mathbf Z$ with a map to $Y$ is again a scheme over $S$, and apply [lem-sfb-space-weak-chow] to obtain a universally surjective proper map $h_1:Y_1\\to Y$ from a scheme. Put $Y_2=Y_1\\times_YY_1$, with projections $r_1,r_2$, and $h_2=h_1r_1=h_1r_2$. This is a scheme: it is the pullback of the representable diagonal of $Y$ along the scheme $Y_1\\times_SY_1$, by [def-trf-algebraic-space]. Each $r_i$ is proper by [lem-sfb-space-proper-base-change], so $h_2$ and $k_i=fh_i:Y_i\\to Z$ are proper by [lem-sfb-space-proper-composition]. These applications require only separated finite type and properness, with no finite-presentation hypothesis.",
+   "uses": [
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-change-base-to-integers",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof, second paragraph, weak Chow cover and its double overlap"
+   }
+  },
+  {
+   "text": "Write $Y_i'=Y_i\\times_ZZ'$, $v_i:Y_i'\\to Y_i$, $h_i':Y_i'\\to Y'$, and $k_i'=f' h_i'$. The schemes $Y_i'$ are also $Y_i\\times_YY'$, and $Y_2'=Y_1'\\times_{Y'}Y_1'$, by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. The map $h_1'$ is proper by [lem-sfb-space-proper-base-change] and surjective by the universal surjectivity in [lem-sfb-space-weak-chow]. Put $F_i=h_i^{-1}F$ and $F'=g'^{-1}F$. Apply [lem-sfb-space-proper-surjection-set-sheaf-equalizer] to $h_1,F$ and $h_1',F'$. It gives $F=\\operatorname{Eq}(h_{1,*}F_1\\rightrightarrows h_{2,*}F_2)$ and $F'=\\operatorname{Eq}(h_{1,*}' v_1^{-1}F_1\\rightrightarrows h_{2,*}' v_2^{-1}F_2)$, with the specified projection-unit arrows.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-proper-surjection-set-sheaf-equalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof, equalizer diagrams before and after base change"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] these equalizers are sectionwise. The direct-image formula of [lem-trf-space-enlarged-chart-ringed-morphism] therefore shows that $f_*$ and $f'_*$ preserve them; that node also says that $g^{-1}$ is left exact. Consequently the source and target of the asserted map are respectively the equalizers of\n$$g^{-1}k_{1,*}F_1\\rightrightarrows g^{-1}k_{2,*}F_2,\\qquad k_{1,*}' v_1^{-1}F_1\\rightrightarrows k_{2,*}' v_2^{-1}F_2.$$\nFor $i=1,2$ apply [lem-sfb-scheme-proper-set-sheaf-base-change] to the proper scheme morphism $k_i$, arbitrary scheme map $g$, and set sheaf $F_i$. It gives isomorphisms $b_i:g^{-1}k_{i,*}F_i\\simeq k_{i,*}' v_i^{-1}F_i$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-sfb-scheme-proper-set-sheaf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof, scheme base change on the two terms, and preservation of equalizers"
+   }
+  },
+  {
+   "text": "Check the arrows using the adjunctions and composition comparisons of [lem-trf-space-enlarged-etale-ringed-site-model, lem-trf-space-enlarged-chart-ringed-morphism]. For a projection $r:Y_2\\to Y_1$, its arrow is $k_{1,*}\\eta_r$ followed by $r^{-1}F_1=F_2$. A base-change mate is obtained by applying the horizontal pullback to the vertical counit. Expand the composite units and counits as $\\eta_{ab}=\\eta_a;a_*\\eta_b a^{-1}$ and $\\epsilon_{ab}=b^{-1}\\epsilon_a b_*;\\epsilon_b$ for composable maps $b$ then $a$. Naturality of $\\eta_r$ moves it past the counit, and $r_*\\epsilon_r\\circ\\eta_r r_*=1$ cancels the adjacent pair. This proves $b_2\\circ g^{-1}(k_{1,*}\\eta_r)=(k_{1,*}'\\eta_{r'})\\circ b_1$, for both projections. The same expansion with $h_i$ shows that the mate $\\beta:g^{-1}f_*F\\to f'_*g'^{-1}F$ commutes with the equalizer inclusions: the composite counit for $fh_i$ is $h_i^{-1}\\epsilon_f h_{i,*};\\epsilon_{h_i}$. Thus the induced map of equalizers is exactly the counit mate in the statement.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-enlarged-chart-ringed-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof, details omitted: compatibility of projection units and canonical counit mates"
+   }
+  },
+  {
+   "text": "An isomorphism between the two parallel-arrow diagrams induces a bijection between their equalizers: send a matching section by $b_1$; the commutative squares show that it matches, and $b_1^{-1}$ gives the inverse since $b_2$ is invertible. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], $\\beta$ is an isomorphism of sheaves. The counit and all composition comparisons are natural in $F$ by [lem-trf-space-enlarged-etale-ringed-site-model], so the isomorphism is natural. If $Y$ or $Z'$ is empty, the same equalizer and restriction argument applies to the unique sheaf on the empty site. No point, group operation, or torsion restriction was used.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof, conclusion and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-scheme-proper-set-sheaf-base-change",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-space-proper-surjection-set-sheaf-equalizer",
+  "lem-sfb-space-weak-chow",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-cohomology.tex",
+  "place": "Tag 0DG0 (lemma-proper-base-change-f-star), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper",
+   "results": "{\"t\": \"2026-10-23T22:05:07Z\", \"tool\": \"grep\", \"query\": \"proper.*base.?change|base.?change.*proper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\"], \"digest\": \"c56104ce7dbc1193\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned proper instances concern preservation of scheme morphism properties; the sheaf hits are adjunction/composition formulas, not proper base change for arbitrary set sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper map of algebraic spaces and a sheaf of sets the underived etale base change mate is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T22:05:07Z\", \"tool\": \"leansearch\", \"query\": \"For a proper map of algebraic spaces and a sheaf of sets the underived etale base change mate is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"3fc3a5921c9e09d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned proper instances concern preservation of scheme morphism properties; the sheaf hits are adjunction/composition formulas, not proper base change for arbitrary set sheaves on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-23T22:05:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"], \"digest\": \"b16df769ac229669\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned proper instances concern preservation of scheme morphism properties; the sheaf hits are adjunction/composition formulas, not proper base change for arbitrary set sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaves of sets and proper pushforward commute with arbitrary pullback in degree zero without torsion assumptions",
+   "results": "{\"t\": \"2026-10-23T22:05:08Z\", \"tool\": \"leanfinder\", \"query\": \"Etale sheaves of sets and proper pushforward commute with arbitrary pullback in degree zero without torsion assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"167adf3012b94914\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned proper instances concern preservation of scheme morphism properties; the sheaf hits are adjunction/composition formulas, not proper base change for arbitrary set sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for arbitrary sheaves of sets on the small etale sites of algebraic spaces: inverse image commutes with proper direct image",
+   "results": "{\"t\": \"2026-10-23T22:05:09Z\", \"tool\": \"leanfinder\", \"query\": \"Proper base change for arbitrary sheaves of sets on the small etale sites of algebraic spaces: inverse image commutes with proper direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.pullbackComp\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\"], \"digest\": \"66e933dd8656526e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned proper instances concern preservation of scheme morphism properties; the sheaf hits are adjunction/composition formulas, not proper base change for arbitrary set sheaves on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "proper|baseChange|base_change",
+   "results": "{\"t\": \"2026-10-23T22:06:59Z\", \"tool\": \"grep\", \"query\": \"proper|baseChange|base_change\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\"], \"digest\": \"a332db0e8804df0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned proper instances concern preservation of scheme morphism properties; the sheaf hits are adjunction/composition formulas, not proper base change for arbitrary set sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of an arbitrary sheaf of sets on an algebraic space commutes with inverse image under any base change",
+   "results": "{\"t\": \"2026-10-23T22:41:50Z\", \"tool\": \"leanfinder\", \"query\": \"Proper direct image of an arbitrary sheaf of sets on an algebraic space commutes with inverse image under any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pullbackComp\"], \"digest\": \"ddb29be85aae3e18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-23T22:41:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper",
+   "results": "{\"t\": \"2026-10-23T22:41:46Z\", \"tool\": \"grep\", \"query\": \"proper.*base.?change|base.?change.*proper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Sites/Small.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\"], \"digest\": \"19ef90917988463d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for sheaves of sets on algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T22:41:46Z\", \"tool\": \"leansearch\", \"query\": \"Proper base change for sheaves of sets on algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.SheafedSpace.comp_base\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_base\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.SheafedSpace.comp_hom_base\"], \"digest\": \"e89094850f31406d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underived etale pushforward of set valued sheaves satisfies proper base change",
+   "results": "{\"t\": \"2026-10-23T22:41:49Z\", \"tool\": \"leanfinder\", \"query\": \"Underived etale pushforward of set valued sheaves satisfies proper base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\"], \"digest\": \"a765c25005113689\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-surjection-etale-space-effectivity",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10); proper-surjection input, equalizer descent construction: proper base change for sheaves of sets (Stacks 0DG0).",
+   "via": [
+    "lem-sfb-proper-surjection-etale-space-effectivity",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-set-sheaf-base-change",
+  "worker": "stage1",
+  "summary": "Retained the full set-sheaf statement and canonical counit mate. Expanded Stacks 0DG0 through etale localization, the existing weak Chow cover, the proper-surjection equalizer, scheme set-sheaf base change, and explicit mate compatibility. Two new statement-only inputs, 0A3U and 0DFX, with five logged searches each; no torsion/module substitution.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10); proper-surjection input, equalizer descent construction: proper base change for sheaves of sets (Stacks 0DG0). Current latest unit and direct-image proof read. The inherited ancestry has null blueprint anchor; retained it and its via chain, as in the reviewed parent. No unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic localization and composition of small etale sheaf adjunctions; no unit theorem supplies this foundation."
+   },
+   {
+    "node": "lem-trf-space-enlarged-chart-ringed-morphism",
+    "why": "Generic left exact inverse image and sectionwise direct image; used only for sheaf equalizers."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product and covering calculus for algebraic spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-47c36fbee",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-47c36fbee (reviewer sub-agent of L); spot-checked: FIX for one missing citation; otherwise the delivery is sound. I read the item and both new nodes in full, and checked them against Stacks spaces-more-cohomology 0DG0 and 0DFX and etale-cohomology 0A3U. The item's statement and stmt_deps are byte-identical to live. The map is the counit mate, which is the same as the 0A3U adjoint construction; coefficients are arbitrary set sheaves; no SGA citation. Fault (C1): step 2 says 'regard these spaces over Spec Z' so that weak Chow 089J (stated over Spec Z) can be applied, but cites nothing for that change of base scheme. The fix cites the existing split node lem-sfb-space-change-base-to-integers (same unit, 03I4/04SG; no cycle) in step 2's text, its uses and proof_deps. Steps checked: (1) etale localization uses the trf localization/composition, direct-image and cover clauses, and proper base change keeps the vertical maps proper; (2) Y_2 is a scheme as the pullback of the representable diagonal along Y_1 x_S Y_1, and k_i is proper by base change and composition; (3) h_1' is proper, and surjective by weak Chow's universal surjectivity, so the 0DFX hypotheses hold upstairs and downstairs; (4) equalizers are sectionwise (00W2 leaf), f_* preserves them and g^{-1} is left exact, so the scheme node gives b_i; (5)-(6) the omitted details of 0DG0 are written out as a mate-pasting check and are elementary. New nodes are statement-only and self-contained, with five searches each and no Mathlib match. Tested on small cases: empty spaces, closed immersion, h = identity, two points over one; properness and surjectivity are each needed. Not duplicates: only torsion/module versions of 0A3U exist (lemma-weil-pbc-proper-underived-exchange, lem-weil-pbc-proper-geometric-point-exchange), and the existing trf equalizer covers only global sections of abelian sheaves on schemes. Neither new node restates the item. Batch-5: the cited trf nodes (def-trf-algebraic-space and the enlarged-etale-site, chart-morphism and fibre-product nodes) are generic algebraic-space and etale-site foundations, not the trace formula, Poincare duality or steps of their proofs; the sfb nodes reach that chapter only through the definition. Accepted. The three declared trf tool_uses are accepted as black boxes. The report's source-typo note on 0DFX (the proof should assume X affine, not Y) is correct.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperSetSheafBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_proper_set_sheaf_base_change",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.properSetDirectImageComp",
+   "AlgebraicGeometry.AlgebraicSpace.properSetInverseImageSquare",
+   "AlgebraicGeometry.AlgebraicSpace.properSetBaseChangeTransformation",
+   "AlgebraicGeometry.AlgebraicSpace.space_proper_set_sheaf_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperSetSheafBaseChange.lean",
+  "statement": "theorem space_proper_set_sheaf_base_change {Y Z Y' Z' : AlgebraicSpace S} (f : Y ⟶ Z) (g : Z' ⟶ Z) (f' : Y' ⟶ Z') (g' : Y' ⟶ Y) (sq : IsPullback g' f' f g) (hf : MapIsProper f) (F : Sheaf Y.etaleTopology (Type (max (u + 1) w))) : IsIso ((properSetBaseChangeTransformation f g f' g' sq.w).app F)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2 at returned head 56d162de7044: uses (enlargedSmallDirectImage_geometric f).choose directly from the already-cited enlarged-site dependency for every inverse image, direct image, and adjunction; no geometric-points theorem dependency/import and no duplicate smallEtaleMorphism definition. The exchange is the real natural transformation obtained by mateEquiv from projection-normalized direct-image composition, with exactly the node's counit-mate normalization. The theorem covers every cartesian square."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11b505cd9",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after the 56d1 H2 RETURN. Diff vs 56d1 snapshot: the SpaceGeometricPointsConservative import is removed and each smallEtaleMorphism.{u,w} x is replaced by its definitional body (enlargedSmallDirectImage_geometric.{u,w} x).choose; nothing else changed. Item node differs from live only in lean (live lean null); stmt_deps back to the base 8. enlargedSmallDirectImage_geometric is in the lean.declarations of the cited stmt_dep lem-trf-space-enlarged-etale-ringed-site-model, and the node text names that node's adjunctions. Mate direction (mateEquiv f.adj f'.adj of the conjugate of the projection-normalized direct-image iso) equals the node's counit mate. MapIsProper f, g arbitrary, IsPullback square, arbitrary Type (max (u+1) w) set sheaves, no extra hypotheses; IsIso of a NatTrans component. Edge cases (empty spaces, identities, closed immersion, non-representable proper f) covered. lean.statement verbatim; helpers carry real data; only the theorem is sorry; docstrings OK; report sections present. No compile (no change). Advisory: proof-only imports SpaceChangeBase and Sites.Limits."
+ }
+}

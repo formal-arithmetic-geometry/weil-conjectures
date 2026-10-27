@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-faithful-stack-map-representable",
+ "kind": "statement",
+ "title": "Faithful morphisms of algebraic stacks are representable by algebraic spaces",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic spaces mean [def-trf-algebraic-space], algebraic stacks mean [def-sfb-algebraic-moduli-stack], and stacks in groupoids, their morphisms and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids]. Let $F:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$. Then $F$ is representable by algebraic spaces if and only if, for every $S$-scheme $T$ and every two objects $x,x'\\in\\mathcal X(T)$, the map $\\operatorname{Isom}_{\\mathcal X(T)}(x,x')\\to\\operatorname{Isom}_{\\mathcal Y(T)}(F(x),F(x'))$ is injective. Representable by algebraic spaces means that every $2$-base change by an $S$-scheme mapping to $\\mathcal Y$ is equivalent over that scheme to an algebraic space regarded as a discrete fibred groupoid.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence (1) and (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $F$ is representable by algebraic spaces. Fix $T$, $x,x'\\in\\mathcal X(T)$ and arrows $a,b:x\\to x'$ with $F(a)=F(b)=\\alpha$. In $\\mathcal W=h_T\\times_{\\mathcal Y}\\mathcal X$, formed using the object $F(x)$ of $\\mathcal Y(T)$, both $a,b$ define arrows $(\\mathrm{id}_T,x,\\mathrm{id}_{F(x)})\\to(\\mathrm{id}_T,x',\\alpha)$: the compatibility equation is $F(a)\\mathrm{id}=\\alpha=F(b)\\mathrm{id}$. By representability $\\mathcal W$ is equivalent to a discrete algebraic-space groupoid, so each of its hom sets has at most one element. Thus these arrows agree and $a=b$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "Conversely assume the stated injectivity for every $S$-scheme. Fix an arbitrary $S$-scheme $T$ and object $y\\in\\mathcal Y(T)$. Regard $h_T$ as a discrete fibred groupoid. It is an algebraic stack: its representing fppf sheaf has effective etale descent (compatible local maps glue uniquely), its diagonal is represented by scheme fibre products, and its identity is a representable surjective etale scheme atlas. The representable smooth calculus makes this atlas smooth, so the definition of algebraic stack applies.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "Apply the algebraic-stack fibre-product theorem to $h_T\\xrightarrow{y}\\mathcal Y\\xleftarrow{F}\\mathcal X$. All three stacks are algebraic over the same $S$, with no representability assumption on $F$ needed. It follows that $\\mathcal W=h_T\\times_{\\mathcal Y}\\mathcal X$ is an algebraic stack over $S$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "For any $S$-scheme $V$, an object of $\\mathcal W(V)$ is $(t:V\\to T,x,\\alpha:y|_t\\xrightarrow{\\sim}F(x))$. An arrow to $(t',x',\\alpha')$ can exist only if $t=t'$, since $h_T(V)$ is discrete, and is then an arrow $a:x\\to x'$ satisfying $F(a)\\alpha=\\alpha'$. If $a,b$ are two such arrows, cancel the isomorphism $\\alpha$ to get $F(a)=F(b)$ and use the assumed injectivity at $V$ to get $a=b$. In particular every automorphism in every fibre of $\\mathcal W$ is the identity.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "The algebraic-setoid theorem now gives an algebraic space $R/S$ and an equivalence $h_R\\simeq\\mathcal W$ over $S$. Compose this equivalence with $\\mathcal W\\to h_T$: since both $h_R$ and $h_T$ are discrete, it is a natural transformation of their sheaves, hence a morphism $R\\to T$ by the definition of algebraic-space maps. Equip $R$ with this morphism. The same equivalence is then over $T$; an inverse is over $T$ because its unit and counit become equalities after mapping to the discrete $h_T$. Thus the chosen scheme $2$-base change is an algebraic space over $T$. Since $T,y$ were arbitrary, $F$ is representable by algebraic spaces.",
+   "uses": [
+    "lem-sfb-algebraic-setoid-space",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence of (1) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-algebraic-setoid-space",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), equivalence of (1) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Faithful morphisms between algebraic stacks are representable by algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Spec.faithful, AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace_faithful, AlgebraicGeometry.Scheme.instFaithfulLocallyRingedSpaceForgetToLocallyRingedSpace, AlgebraicGeometry.AffineScheme.forgetToScheme_faithful, AlgebraicGeometry.instFaithfulOppositeCommRingCatLocallyRingedSpaceToLocallyRingedSpace, AlgebraicGeometry.AffineScheme.Spec_faithful, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward. The displayed signatures concern ordinary scheme forgetful/Spec functors, not algebraic-stack representability.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary faithful scheme functors do not state the algebraic-stack criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is representable by algebraic spaces if its functors on all fibre groupoids are faithful",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.relative.rep\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Representable\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {X Y : D} {P : CategoryTheory.MorphismProperty C} {f : X ⟶ Y},\\n  CategoryTheory.MorphismProperty.relative F P f → F.relativelyRepresentable f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ in category $ \\\\mathcal{D} $ satisfies the relative morphism property with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, then $ f $ is relatively representable\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Representable\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] → CategoryTheory.Functor C D → CategoryTheory.MorphismProperty D\", \"doc\": \"A morphism $ f : X \\to Y $ in category $ \\\\mathcal{D} $ is relatively representable with respect to a functor $ F : \\\\mathcal{C} \\to \\\\mathcal{D} $ if for every object $ a $ in $ \\\\mathcal{C} $ and every mo\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.hom_ext_iff\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Representable\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {X Y : D} {f : X ⟶ Y} {hf : F.relativelyRepresentable f} {a : C} {g : F.obj a ⟶ Y}\\n  [F.Faithful] {c : C} {a_1 b : c ⟶ hf.pullback g},\\n  a_1 = b \", \"doc\": \"Given a faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and a relatively representable morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $, for any object $ a \\\\in \\\\mathcal{C} $ and morphism $ g : F(a) \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful ordinary functors and relative representability in ordinary categories do not characterize representability of algebraic-stack maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithful functors on fibres characterize representable morphisms of algebraic stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.CoGrothendieck.instFaithfulαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Grothendieck\", \"type\": \": (Fiber.inducedFunctor (comp_const F S)).Faithful\", \"doc\": \"The induced functor from the fiber category over an object $ S $ to the Grothendieck category, constructed via the composition of the inclusion functor and the forgetful functor, is faithful. This mea\"}\n  {\"name\": \"CategoryTheory.Grothendieck.faithful_ι\", \"module\": \"Mathlib.CategoryTheory.Grothendieck\", \"type\": \"(c : C) : (ι F c).Faithful\", \"doc\": \"For any category $\\\\mathcal{C}$ and functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, the inclusion functor $\\\\iota_c : F(c) \\\\to \\\\text{Grothendieck}(F)$ is faithful for each object $c \\\\in \\\\mathcal{C}$. This m\"}\n  {\"name\": \"HasFibers.instFaithfulFibι\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \": Functor.Faithful (ι (p := p) S)\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, the canonical inclusion functor $ \\\\iota_S : \\\\text{Fib}_p(S) \\\\to \\\\mathcal{X} $ from the fiber category over $ S $ to the total category $ \\\\mat\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \": F.Faithful\", \"doc\": \"The fiber functor $ F $ from a pre-Galois category $ \\\\mathcal{C} $ to the category of finite types is faithful, meaning the induced maps on hom-sets $ \\\\mathrm{Hom}_{\\\\mathcal{C}}(X,Y) \\\\to \\\\mathrm{Hom}_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"CategoryTheory.Functor.Faithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} → [inst_1 : CategoryTheory.Category.{v₂, u₂} D] → CategoryTheory.Functor C D → Prop\", \"doc\": \"A functor $ F : C \\\\to D $ is faithful if, for every pair of objects $ X, Y $ in $ C $, the induced map $ \\\\text{Hom}_C(X, Y) \\\\to \\\\text{Hom}_D(FX, FY) $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": Spec.Faithful\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to the category of affine schemes is faithful, meaning that for any commutative rings $R$ and $S$, the induced map from r\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": MorphismProperty D\", \"doc\": \"A morphism $ f : X \\to Y $ in category $ \\\\mathcal{D} $ is relatively representable with respect to a functor $ F : \\\\mathcal{C} \\to \\\\mathcal{D} $ if for every object $ a $ in $ \\\\mathcal{C} $ and every mo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful ordinary functors and relative representability in ordinary categories do not characterize representability of algebraic-stack maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Faithful\", \"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful ordinary functors and relative representability in ordinary categories do not characterize representability of algebraic-stack maps"
+  },
+  {
+   "tool": "grep",
+   "query": "representable.*faithful|faithful.*representable|algebraic.stack",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"64\", \"text\": \"  representable morphisms, formulated internally to `C`. We assume that `F` is fully faithful here.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"305\", \"text\": \"  dsimp [associator, Coyoneda.fullyFaithful, corepresentableBy₂,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"330\", \"text\": \"  dsimp [associator, Coyoneda.fullyFaithful, corepresentableBy₂,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"592\", \"text\": \"  dsimp [leftUnitor, Coyoneda.fullyFaithful, corepresentableByLeft,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"607\", \"text\": \"  dsimp [leftUnitor, Coyoneda.fullyFaithful, corepresentableByLeft,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"644\", \"text\": \"  dsimp [rightUnitor, Coyoneda.fullyFaithful, corepresentableByRight,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"line\": \"19\", \"text\": \"showing that it is fully faithful and its (essential) image is the representable functors.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp.lean\", \"line\": \"17\", \"text\": \"showing that it is fully faithful and its (essential) image is the representable functors.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful ordinary functors and relative representability in ordinary categories do not characterize representability of algebraic-stack maps"
+  },
+  {
+   "tool": "grep",
+   "query": "representable.*faithful|faithful.*representable|algebraic.stack",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary faithful functors, scheme representability or scheme base-change properties, not the algebraic-stack criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithful functors on fibres characterize representable morphisms of algebraic stacks",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.instFaithfulαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.Grothendieck.faithful_ι\", \"HasFibers.instFaithfulFibι\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.Functor.Faithful\", \"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"CategoryTheory.Functor.relativelyRepresentable\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary faithful functors, scheme representability or scheme base-change properties, not the algebraic-stack criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Faithful\", \"AlgebraicSpace\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary faithful functors, scheme representability or scheme base-change properties, not the algebraic-stack criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is representable by algebraic spaces if and only if it is faithful on all fibre groupoids",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace_faithful\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"HasFibers.instFaithfulFibι\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.Functor.relativelyRepresentable.hom_ext_iff\", \"CategoryTheory.Functor.relativelyRepresentable.hom_ext\", \"CategoryTheory.Functor.Fiber.instFaithfulFiberInclusion\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary faithful functors, scheme representability or scheme base-change properties, not the algebraic-stack criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack base change with trivial automorphism groups is represented by an algebraic space",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary faithful functors, scheme representability or scheme base-change properties, not the algebraic-stack criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-open-subgroupoid-etale-quotient",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0DU2 (lemma-quasi-splitting-etale), first paragraph: faithful on fibre categories implies representable by algebraic spaces; supporting the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain.",
+   "via": [
+    "lem-sfb-open-subgroupoid-etale-quotient",
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-faithful-stack-map-representable",
+  "worker": "stage1",
+  "summary": "Q153 checked both directions against Stacks 04Y5. Reused existing algebraic-stack fibre products and the algebraic-setoid theorem; wrote the arrow equations and the over-test-scheme structure explicitly. No new nodes, no statement change, no Lean attachment or Mathlib match.",
+  "blueprint": "Retains the inherited from.place and via chain: the faithful-map input to Stacks 0DU2 in the open-subgroupoid etale quotient supporting det-thm-sf-ctf-stability-direct-images proof (3). Read the latest unit and direct-images proof. No duplicate blueprint statement found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-cfe9c0476",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-cfe9c0476 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item in full; the delivery has no new nodes. The item is unsplit on both live and side-live with no repair note, so nothing supersedes it. Statement, stmt_deps and blueprint are byte-identical to side-live; only status, proof, proof_deps, proof_origin, split_report and searches changed. Source: Stacks algebraic.tex Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), statement and proof read. The item is its equivalence (1)<=>(3) with no hypothesis changed. Step 1 replaces the source's criterion lemma with a direct 2-fibre-product calculation: base change at y=F(x), both a and b give arrows (id,x,id)->(id,x',F(a)), and a discrete equivalence is faithful, so a=b; correct. Step 2 shows h_T is an algebraic stack, mirroring Stacks 03YS(3), from def-trf-scheme-algebraic-space and the smooth-calculus clause 'representable etale implies smooth'; elementary, and no DAG node states it. Step 3 applies lem-sfb-algebraic-stack-fibre-products with A=h_T, B=X, C=Y and matching orientation. Step 4 shows the fibres of W are setoids at every V, nonreduced V included. Step 5 applies lem-sfb-algebraic-setoid-space, then gets R->T as a natural transformation h_R->h_T; the equivalence and its inverse lie over h_T because 2-isomorphisms into a discrete groupoid are identities. proof_deps equals the union of uses. All cited statements are in unit sk-thm-sf-ctf-stability or are definitions; no tool_uses; no SGA. No duplicate: grepped 04Y5, 04SZ, the criterion lemma and faithful plus representable; universal-injectivity, dm-geometric-inertia and self-relation-quotient-embedding are different statements. Batch 5: def-trf-scheme-algebraic-space is a general definition, and the other three cited nodes reach sec-trace-formula only through the definition def-trf-algebraic-space; none is part of the trace formula or Poincare duality, so all are accepted. Edge cases: identity of BG is faithful and representable; BG->S is neither; empty T is vacuous."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FaithfulStackMapRepresentable",
+  "declaration": "CategoryTheory.isRepresentableByAlgebraicSpaces_iff_injective_mapIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/FaithfulStackMapRepresentable.lean",
+  "statement": "theorem isRepresentableByAlgebraicSpaces_iff_injective_mapIso {S : Scheme.{u}} (X : BasedCategory.{v₁, w₁} (Over S)) (Y : BasedCategory.{v₂, w₂} (Over S)) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (F : BasedFunctor X Y) : IsRepresentableByAlgebraicSpaces F ↔ ∀ (T : Over S) (x x' : Functor.Fiber X.p T), Function.Injective (fun α : x ≅ x' ↦ (moduliFiberMap F T).mapIso α)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cadefbfb5",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Only the item lean field changed, and the statement field is verbatim in the file. Q32's theorem isRepresentableByAlgebraicSpaces_iff_injective_mapIso matches Stacks 04Y5 (1)<=>(3) clause by clause: IsAlgebraicModuliStack on X and Y; BasedFunctor F; IsRepresentableByAlgebraicSpaces, whose HasSpaceBaseChange gives an equivalence plus a 2-iso to the specified map to h_T (equivalent over T); for all T : Over S and x x' : Fiber X.p T, Injective of mapIso along the actual moduliFiberMap. No extra hypotheses; universes v1 w1 v2 w2 independent. Both directions hold under the recorded definitions; the setoid theorem's universes are free. Edge cases checked: empty T or fibres, x = x' automorphisms. No duplicate or name clash in live, side-live or Mathlib. No definitions, sorry only, docstrings with source, blueprint and 5 proof steps, imports exist, both report sections present. Not recompiled because no file was changed."
+ }
+}

@@ -1,0 +1,386 @@
+{
+ "id": "lem-per-generically-reduced-strict-transform-geometry",
+ "kind": "statement",
+ "title": "Generic reducedness through strict transform and smooth comparison",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] which is generically reduced: $\\mathcal O_{X,\\eta}$ is reduced for every generic point $\\eta$ of every irreducible component [def-pc-reduced-scheme, def-sc-generic-point, def-weil-irreducible-components]. Then these local rings are fields, hence regular [def-weil-regular-scheme]. If $J\\subseteq\\mathcal O_X$ is a quasi-coherent ideal of finite type with nowhere dense zero set (containing no nonempty open subset), its ordinary blowup $b:X^+=\\operatorname{Bl}_J(X)\\to X$ is locally Noetherian and generically reduced [pqf-def-coherent, def-nagata-global-blowup]. The open $b^{-1}(X\\setminus V(J))$ is dense in every irreducible component of $X^+$; the component generic points correspond bijectively to those of $X$, with identical local rings. For any closed immersion $X\\hookrightarrow P$ and a finite-type quasi-coherent ambient center whose extended ideal is $J$, the scheme-theoretic strict transform of $X$ is canonically this same $X^+$ [def-weil-closed-immersion, def-nagata-strict-transform]. No reducedness away from the generic points and no regularity of the center or ambient scheme are required.\n\nIf $v:Y\\to X$ is any smooth morphism [def-sbc-smooth-morphisms], then $Y$ is locally Noetherian and generically reduced, and generic points upstairs map to generic points downstairs. Smooth pullback of a finite ambient blowup/strict-transform diagram agrees with the diagram constructed from the extended ideals, including all scheme structures and all earlier ideal centers; an empty pulled-back center gives the identity stage. The comparisons are the canonical flat-base-change comparisons, commute with further pullback, and retain the earlier ideals even when the intrinsic blowup is an identity. Empty schemes and unit center ideals are allowed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 036C, lemma-Rk-local-smooth, k=0; strict transforms: divisors.tex Tag 080E, lemma-strict-transform, and its explicit power-torsion chart formula. Generic-point preservation is the schematic-closure/chart argument recorded in the worker report, not a quoted stronger form of 080E."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-reduced-scheme",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-nagata-extended-ideal",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-pc-fibre-product",
+  "def-per-finite-embedded-blowup-diagram"
+ ],
+ "proof": [
+  {
+   "text": "At a component generic point $\\eta$, choose an affine neighbourhood $\\operatorname{Spec}A$ and let $\\mathfrak p$ be its minimal prime. The affine identification of stalks gives $\\mathcal O_{X,\\eta}=A_{\\mathfrak p}$. Every element of its maximal ideal is nilpotent by the minimal-prime localization lemma, whose first assertion does not require $A$ reduced. Our hypothesis says this local ring itself is reduced, so its maximal ideal is zero. A nonzero local ring with zero maximal ideal is a field: every nonzero element is outside the maximal ideal and hence a unit. The field-regularity lemma now gives regularity. This argument never assumes that $A$ or $X$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-field-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EU, lemma-minimal-prime-reduced-ring, first assertion; Tag 00ES, lemma-irreducible (3)"
+   }
+  },
+  {
+   "text": "Put $U=X\\setminus V(J)$. On a Noetherian affine chart $\\operatorname{Spec}A$, there are finitely many minimal primes. If $V(J)$ contained the component $V(\\mathfrak p)$, choose for each other minimal prime $\\mathfrak q$ an element $s_{\\mathfrak q}\\in\\mathfrak q\\setminus\\mathfrak p$. Their product $s$ (the empty product is $1$) satisfies $\\varnothing\\ne D(s)\\subseteq V(\\mathfrak p)\\subseteq V(J)$, contradicting the empty interior. Thus $U$ contains all component generic points. Blowup properness applies to the given finite-type quasi-coherent ideal; proper means in particular finite type. Consequently the locally-Noetherian ascent lemma shows that $X^+$ is locally Noetherian. No quasi-compactness of $X$ is used.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS, lemma-blowing-up-projective; morphisms.tex Tag 01T6, lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Use the affine local models in the global blowup construction and the finite chart cover for $I=(f_0,\\ldots,f_r)$. On $\\operatorname{Spec}C$, $C=A[I/a]$, the extended ideal is $(a)$ and multiplication by $a$ is injective. The minimal-prime avoidance lemma therefore puts every minimal prime of $C$ in $D(a)$. This open is exactly the inverse image of $U$ on the chart, since $IC=(a)$. Hence every component generic point of $X^+$ belongs to $b^{-1}U$: being a generic point can be checked in an open neighbourhood, since all generalizations of a point of an open remain in that open. In particular $b^{-1}U$ meets every component in an open containing its generic point, so it is dense in that component.",
+   "uses": [
+    "def-nagata-global-blowup",
+    "prop-nagata-affine-blowup-chart-cover",
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lemma-nagata-chart-generator-regular",
+    "lem-pc-minimal-prime-avoids-nonzerodivisor",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-sc-generic-point",
+    "def-nagata-global-blowup-glue-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BFM, lemma-blow-up-and-irreducible-components, proof; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "The complement theorem identifies $b^{-1}U$ with $U$ as schemes. An open neighbourhood contains every generalization of each of its points; therefore a point in an open subscheme is a component generic point exactly when it is one in the whole scheme. Applying this on both sides, and using Steps 2 and 3, gives a bijection of all component generic points of $X^+$ and $X$. Under the same isomorphism their stalks are identical, since restricting a sheaf to an open neighbourhood does not change its stalk. Step 1 makes these stalks fields. Thus $X^+$ is generically reduced. Finally the ambient closed-immersion strict-transform theorem identifies the scheme-theoretic strict transform with $\\operatorname{Bl}_JX$, for the extended ideal $J$ specified in the statement. This identifies the actual schemes, including nilpotents away from the generic points.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "def-weil-open-immersion",
+    "def-sc-generic-point",
+    "lemma-nagata-strict-transform-ambient-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BFM, lemma-blow-up-and-irreducible-components; Tag 080E, lemma-strict-transform (1)"
+   }
+  },
+  {
+   "text": "Let $v:Y\\to X$ be smooth. It is flat and locally of finite presentation. A finite presentation $A[t_1,\\ldots,t_n]/(g_1,\\ldots,g_m)$ is generated as an $A$-algebra by the images of the $t_i$, so $v$ is locally of finite type and $Y$ is locally Noetherian by ascent. Choose affine neighbourhoods $\\operatorname{Spec}B\\subset Y$ and $\\operatorname{Spec}A\\subset X$ around a generic point $\\xi$ and its image. The affine flatness criterion makes $A\\to B$ flat. If the contraction $\\mathfrak p$ of the minimal prime $\\mathfrak q$ of $B$ had a strictly smaller prime $\\mathfrak p_0$, going down would give $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $\\mathfrak p_0$. Minimality forces $\\mathfrak q_0=\\mathfrak q$, a contradiction. Thus $v(\\xi)$ is a component generic point of $X$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS, lemma-flat-going-down; descent.tex Tag 036C, lemma-Rk-local-smooth, k=0"
+   }
+  },
+  {
+   "text": "For $\\xi$ as in Step 5, put $\\eta=v(\\xi)$. Step 1 says $\\mathcal O_{X,\\eta}$ is a field and its maximal ideal is zero. Smoothness gives a geometrically reduced fibre $Y_\\eta$, hence a reduced local ring $\\mathcal O_{Y_\\eta,\\xi}$. The fibre-stalk quotient isomorphism identifies this ring with $\\mathcal O_{Y,\\xi}/\\mathfrak m_\\eta\\mathcal O_{Y,\\xi}=\\mathcal O_{Y,\\xi}$. This proves generic reducedness of $Y$. Also $v^{-1}U$ contains every component generic point of $Y$, since its image is a component generic point in $U$. Thus extended nowhere dense centres remain nowhere dense. This uses neither surjectivity nor reducedness of $X$ away from its generic points.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1, lemma-local-ring-fibre; varieties.tex Tag 056T, lemma-smooth-geometrically-normal; descent.tex Tag 036C, lemma-Rk-local-smooth"
+   }
+  },
+  {
+   "text": "For an ambient diagram $X\\hookrightarrow P$ and a smooth cartesian pullback $P_1\\to P$, the induced map $Y=X\\times_PP_1\\to X$ is smooth. Indeed relative dimension is locally constant for a smooth map, so around any point one restricts to relative dimension $n$ and applies the relative-dimension permanence lemma; smoothness is local by its definition. Use smooth-flatness, the flat blowup comparison, and the scheme strict-transform flat-base-change theorem. Its extra generic-point hypothesis on $Y\\to X$ is exactly Step 5. It identifies the pulled-back closed strict transform, with its scheme structure and its map into the ambient blowup, with the strict transform of $Y$ for the extended ambient ideal. For intrinsic blowups, the flat blowup comparison applies directly to any smooth $Y\\to X$. On affine charts these are the specified maps $B\\otimes_A A[I/a]\\xrightarrow{\\sim}B[IB/\\varphi(a)]$, $b\\otimes(c/a)\\mapsto b\\varphi(c)/\\varphi(a)$, including the structural maps and the centre ideals. The cited chart-restriction theorem also identifies the overlap localizations. Thus these are precisely the canonical flat-base-change comparisons.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-trf-strict-transform-flat-etale-base-change",
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; morphisms.tex Tag 081I, lemma-flat-base-change-scheme-theoretic-image; Tag 01VB, lemma-base-change-smooth"
+   }
+  },
+  {
+   "text": "For a further pullback with coefficient maps $A\\xrightarrow{\\varphi}B\\xrightarrow{\\psi}C$, both chart comparisons send $d\\otimes(b\\otimes(c/a))$ to $d\\psi(b)\\psi\\varphi(c)/\\psi\\varphi(a)$. They therefore agree: these tensors and fractions generate the chart algebras, and the overlap maps are the corresponding localizations. For any earlier ideal $K=(k_\\lambda)$ its successive extensions have generators $\\psi\\varphi(k_\\lambda)$, exactly the generators of its extension along the composite. This also describes the scheme-theoretic inverse-image centre by the ideal-image formula. Starting with the identity comparison at stage zero, apply Step 7 at each next blowup and strict transform; the comparison at that stage preserves all earlier extended ideals by this generator calculation. The new vertical maps are base changes of the original smooth map, hence smooth by the same local constant-relative-dimension argument as in Step 7. This induction proves the assertion for every finite diagram, and the displayed equality proves compatibility with further pullback.",
+   "uses": [
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up, coefficientwise comparison; schemes.tex Tag 01JU, lemma-fibre-product-immersion (1)"
+   }
+  },
+  {
+   "text": "If a pulled-back centre is empty, its ideal is the unit ideal. The complement is then the whole scheme and the complement isomorphism gives the identity blowup stage. Any earlier ideal is still extended along this isomorphism: it is not replaced by the unit ideal merely because the current blowup is an identity. The same bookkeeping applies when a non-unit centre happens to have identity blowup. Unit ideals thus cause no exception in the induction; on the empty scheme all generic-point assertions are vacuous and all comparisons are the unique corresponding maps. None of Steps 1--8 requires a regular centre or regular ambient scheme.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor (1); empty-centre case in its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-field-regular-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-nagata-global-blowup",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-chart-generator-regular",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "def-sc-generic-point",
+  "def-nagata-global-blowup-glue-data",
+  "thm-nagata-global-blowup-complement",
+  "def-weil-open-immersion",
+  "lemma-nagata-strict-transform-ambient-closed",
+  "lem-pc-smooth-flat",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sc-flat-going-down",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-trf-strict-transform-flat-etale-base-change",
+  "lem-sfb-flat-pullback-blowup-chart-restrictions",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "def-nagata-extended-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02OS, 0BFM, 080E, 0805, with algebra.tex 00EU/00HS and schemes.tex 0HA1; assembly and finite-diagram compatibility written by Q95"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic strict transform of a generically reduced scheme along a nowhere dense blowup remains generically reduced and commutes with smooth base change",
+   "results": "; 8 hits: AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk, AlgebraicGeometry.Scheme.RationalMap.toPartialMap",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms preserve generic reducedness and strict transforms retain generic reduced local rings",
+   "results": "; 8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"generically\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]enerically[Rr]educed|generically.reduced|strict[Tt]ransform|strict.transform",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a closed ideal missing minimal primes preserves Serre R0 for finite type schemes with embedded nilpotents",
+   "results": "; 8 hits: AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.IsGermInjective.Spec, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "generically.reduced|strict.?transform|blowup.*generic",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, function-field and stalk declarations do not supply the blowup generic-point assertion or the complete scheme-theoretic strict-transform comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms preserve generic reducedness and blowups identify generic points outside the center",
+   "results": "; 8 hits: AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, function-field and stalk declarations do not supply the blowup generic-point assertion or the complete scheme-theoretic strict-transform comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"generically\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, function-field and stalk declarations do not supply the blowup generic-point assertion or the complete scheme-theoretic strict-transform comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a generically reduced locally Noetherian scheme outside a nowhere dense closed center preserves its generic local rings and commutes with smooth pullback",
+   "results": "; 8 hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, function-field and stalk declarations do not supply the blowup generic-point assertion or the complete scheme-theoretic strict-transform comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic points of a blowup are precisely the minimal primes not containing the center ideal, with unchanged stalks",
+   "results": "; 8 hits: AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, PrimeSpectrum.stableUnderGeneralization_singleton, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, function-field and stalk declarations do not supply the blowup generic-point assertion or the complete scheme-theoretic strict-transform comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-generically-reduced-rational-invariant-calculus",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (duality), regular-resolution branch: Generic reducedness needed for scheme-theoretic strict transforms, not reduction before resolution.",
+   "via": [
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-generically-reduced-strict-transform-geometry",
+  "worker": "stage1",
+  "summary": "No new nodes. Assemble generic-field regularity, the blowup chart denominator argument and the complement isomorphism; prove smooth generic-point preservation by going down and generic reducedness via the fibre-stalk quotient. Reuse existing strict-transform and flat-chart comparisons. Write the coefficientwise composition equation and an induction retaining all earlier ideals, including identity stages. Statement unchanged; all cited statements read and verbatim quotes supplied.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, latest proof Step 3 (duality), regular-resolution branch specified by the inherited via chain. The present lemma supplies generic reducedness through that branch without replacing schemes by their reductions. No unit/chapter route or realization fields change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Provides the actual affine stalk/prime-localization identification, including for a nonreduced ambient scheme. This is a tool input below the regular-resolution branch of the duality step; the perverse/Fourier unit supplies no such algebraic geometry lemma."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Computes the fibre stalk as the original stalk modulo the image of the base maximal ideal. This is a tool input below the regular-resolution branch of the duality step; the perverse/Fourier unit supplies no such algebraic geometry lemma."
+   },
+   {
+    "node": "lem-trf-strict-transform-flat-etale-base-change",
+    "why": "Provides equality of closed strict transforms under the ambient flat comparison, after checking its generic-point hypothesis. This is a tool input below the regular-resolution branch of the duality step; the perverse/Fourier unit supplies no such algebraic geometry lemma."
+   },
+   {
+    "node": "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "why": "Gives the specified coefficientwise chart comparison, overlap maps, structural maps and centre-ideal compatibility. This is a tool input below the regular-resolution branch of the duality step; the perverse/Fourier unit supplies no such algebraic geometry lemma."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Provides smooth base-change stability locally after restricting to the locally constant relative dimension. This is a tool input below the regular-resolution branch of the duality step; the perverse/Fourier unit supplies no such algebraic geometry lemma."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Identifies inverse-image closed centres by their extended ideals, including earlier centres. This is a tool input below the regular-resolution branch of the duality step; the perverse/Fourier unit supplies no such algebraic geometry lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-trf-strict-transform-flat-etale-base-change",
+  "lem-sfb-flat-pullback-blowup-chart-restrictions",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-closed-subscheme-base-change-ideal-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-076f334c7",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-076f334c7 (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps and every cited statement (34 ids). Read Stacks 0BFM (divisors l.8541), 02OS, 080E(1), 0805, algebra 00EU (first assertion) and 00HS, schemes 0HA1, descent 036C. Statement unchanged; there are no new nodes and no cycle. Step 1: O_{X,eta}=A_p (spec-local-ring node); the maximal ideal is nil by 00EU without assuming A reduced, and zero by the item's hypothesis, so A_p is a field and hence regular. Step 2: the product s of elements s_q in q minus p gives nonempty D(s) inside V(p), contradicting the empty interior of V(J); proper implies finite type, so X+ is locally Noetherian by 01T6. Step 3: chart IC=(a), a a nonzerodivisor, minimal primes avoid a; this is exactly the 0BFM proof. Step 4: complement iso, generic points maximal in an open iff in the space; ambient strict transform by the 080E(1) node, which has no extra hypothesis. Step 5: correct going-down argument, no surjectivity needed. Step 6: 0HA1 with m_eta=0 and reduced smooth fibre. Steps 7-8: chart composites recomputed (d psi(b) psi phi(c)/psi phi(a)); ideal generators psi phi(k); the trf strict-transform hypothesis is Step 5. Step 9 is genuinely elementary. Small cases: k[x,e]/(e^2,xe) with J=(x) keeps the generic field k(x); J=0 is excluded; empty X and unit ideal; varying relative dimension. Duplicates: trf reduced-blowup and smooth-reduced-dense-pullback need reduced S, so they do not apply. lem-per-flat-maximal-dominance-base-change states Step 5's generic-point clause, which the step re-derives correctly: a note only, not a fault. Batch-5 flag on lem-trf-strict-transform-flat-etale-base-change: pure scheme theory (080E/0805 strict transform under flat base change), given by neither assumption and not a cohomological step of their proofs. Its 669-node closure contains only 3 trace-formula-chapter nodes (itself, the blowup base-change open-diagram lemma and the finite-centre closure-kernel lemma) and 2 zeta definitions; no trace-formula, Poincare, nt-assume or batch-4 node. Flag accepted as generic. The six declared tool_uses (spec-local-ring, fibre-stalk-quotient, trf strict-transform, sfb chart restrictions, smooth relative-dimension permanence, closed-subscheme ideal image) are accepted as black-box algebraic-geometry tools outside the Fourier/perverse route."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericallyReducedStrictTransformGeometry",
+  "declaration": "AlgebraicGeometry.genericallyReduced_blowup_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericallyReducedStrictTransformGeometry.lean",
+  "statement": "theorem genericallyReduced_blowup_geometry (X : Scheme.{u}) [IsLocallyNoetherian X] (hX : ∀ C ∈ irreducibleComponents X, ∀ η : X, IsGenericPoint η C → _root_.IsReduced (X.presheaf.stalk η)) : (∀ C ∈ irreducibleComponents X, ∀ η : X, IsGenericPoint η C → IsField (X.presheaf.stalk η) ∧ IsRegularLocalRing (X.presheaf.stalk η)) ∧ (∀ (J : X.IdealSheafData), J.ofFiniteType → interior (J.support : Set X) = ∅ → IsLocallyNoetherian J.blowup ∧ (∀ C ∈ irreducibleComponents J.blowup, ∀ ξ : J.blowup, IsGenericPoint ξ C → _root_.IsReduced (J.blowup.presheaf.stalk ξ)) ∧ (∀ C ∈ irreducibleComponents J.blowup, Dense ((Subtype.val : C → J.blowup) ⁻¹' (J.blowupMap ⁻¹' (J.support.compl : Set X)))) ∧ (∀ C ∈ irreducibleComponents J.blowup, ∀ ξ : J.blowup, IsGenericPoint ξ C → J.blowupMap ξ ∈ J.support.compl ∧ (∃ D ∈ irreducibleComponents X, IsGenericPoint (J.blowupMap ξ) D) ∧ IsIso (J.blowupMap.stalkMap ξ)) ∧ (∀ D ∈ irreducibleComponents X, ∀ η : X, IsGenericPoint η D → ∃! ξ : J.blowup, J.blowupMap ξ = η ∧ ∃ C ∈ irreducibleComponents J.blowup, IsGenericPoint ξ C) ∧ (∀ (P : Scheme.{u}) (i : X ⟶ P) [IsClosedImmersion i] (I : P.IdealSheafData), I.ofFiniteType → I.comap i = J → ∃ e : J.blowup ≅ I.strictTransform i, e.hom ≫ strictTransformToSource i I.blowupMap I.support.compl = J.blowupMap ∧ (e.hom ≫ strictTransformMap i I.blowupMap I.support.compl) ≫ I.blowupMap = J.blowupMap ≫ i))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.genericallyReduced_blowup_geometry",
+   "AlgebraicGeometry.genericallyReduced_smooth_geometry",
+   "AlgebraicGeometry.genericallyReduced_strictTransform_smooth_diagrams"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c660dcf0e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Read the item, all 14 stmt_dep records, both modules and the new node def-per-finite-embedded-blowup-diagram, plus upstream blowupFlatBaseChange (FlatBaseChange l.144, real construction with IsIso instance), strictTransform (scheme-theoretic image) and IdealSheafData.ofFiniteType. Clause check: generic stalks IsField and IsRegularLocalRing; J finite type with interior(support)=∅; blowup locally Noetherian and generically reduced; density in each component subtype; generic-point bijection (forward map plus ∃!) with IsIso stalkMap; strict-transform iso for any closed immersion and finite-type I with comap i = J, unique given the ToSource equation by the blowup universal property (the second equation follows from the first). Smooth v: locally Noetherian, generically reduced, generic points map to generic points. Diagram theorem: existence with cartesian squares, center_eq and canonical flat comparison; earlier ideals retained; empty center gives IsIso; uniqueness, identity and composite comparisons all true. No extra hypotheses, one universe u, empty and unit and n=0 cases fine. Statements verbatim. DAG diff: only the item lean record, one added stmt_dep (the new A node) and the new node, whose §5 fields are correct. Its structures are real data with no sorry. H4: OrdinaryBlowupTower, MarkedIdeal.History and EmbeddedResolutionHistory are more restricted; Q02 GenericallyReducedResolution.History (unlanded) is a rational-Pair-anchored narrower notion, noted only. Docstrings give source, blueprint and proof steps; only sorry; report has Worker report and Second reading by Q123 (worker self-reread). No compile, no file changed."
+ }
+}

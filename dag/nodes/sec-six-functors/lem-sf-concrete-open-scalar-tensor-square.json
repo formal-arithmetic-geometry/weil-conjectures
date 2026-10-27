@@ -1,0 +1,105 @@
+{
+ "id": "lem-sf-concrete-open-scalar-tensor-square",
+ "kind": "statement",
+ "title": "Open scalar and tensor square with geometric compositor",
+ "statement": "For normalized scalar/tensor models and choices [def-sp-open-scalar-tensor-data], finite commutative rings A,B and map φ:A→B, any compactification X→Z→Y of f:X→Y and arbitrary unbounded inputs K,L, let openFactor and openScalar be the specified open factor maps [def-sf-concrete-projection-factors], and inputComparison the scalar tensor/pullback comparison [def-sf-concrete-projection-reduction-data]. Scalar(openFactor_A), followed by openScalar on K tensor Lf*L and open_B(inputComparison_f), equals inputComparison_g followed by tensor(openScalar K, identity) and openFactor_B at the scalar inputs. Both factors include the canonical geometric pullback compositor for the compactification. No separatedness of the schemes structure morphisms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0E48; more-etale.tex Tags 0GL1 and 0GL6. Concrete proper/open argument of fix-prop-projection-formula, proof sentence 2."
+ },
+ "stmt_deps": [
+  "def-sf-concrete-projection-factors"
+ ],
+ "proof": [
+  {
+   "text": "The open scalar map is determined by the open-adjunction unit equation. Apply the normalized open tensor square, then scalar/pullback geometric composition for the compactification. This includes exactly the compositor in openFactor and the tensor/pullback comparison in inputComparison.",
+   "uses": [
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete finite coefficient-reduction square, proof sentence 2; the component argument recorded above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and extension of scalar coefficients commute with tensor product and adjunction counit projection formula",
+   "results": "Ordinary ModuleCat unit/counit and Presheaf.pullbackComp hits; no normalized unbounded constant-ring proper/open square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "Eleven generic adjunction APIs; use Hom-equivalence naturality and mate equations.",
+   "verdict": "Useful generic glue, no exact scalar comparison.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|coefficient)|(scalar|coefficient).*projection",
+   "results": "One unrelated CStarProjection hit. Local rg located normalized scalar tensor, proper/open and compact-support comparisons used here.",
+   "verdict": "Use the stated library comparisons.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConcreteProjectionReductionSquare",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-concrete-projection-reduction-square",
+   "place": "Normalized concrete proper/open coefficient square, its components and coefficient cocycles."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConcreteOpenScalarTensorSquare",
+  "file": "lean/Sheaf/Paper/ConcreteOpenScalarTensorSquare.lean",
+  "declaration": "WeilConjectures.ConcreteProjectionReduction.open_scalar_tensor_square",
+  "declarations": [
+   "WeilConjectures.ConcreteProjectionReduction.open_scalar_tensor_square"
+  ],
+  "statement": "theorem open_scalar_tensor_square\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f) (K : proEtaleDerivedCategory X A)\n    (L : proEtaleDerivedCategory Y A) :\n    (scalar m φ c.Z).map (openFactor m A c K L).hom ≫\n      (openScalar m φ c.i).app (input m A f K L) ≫\n      (openImage B c.i).map (inputComparison m choices φ f K L).hom =\n    (inputComparison m choices φ c.g ((openImage A c.i).obj K) L).hom ≫\n      (tensor m B c.Z).map (Prod.mkHom ((openScalar m φ c.i).app K) (𝟙 _)) ≫\n      (openFactor m B c ((scalar m φ X).obj K) ((scalar m φ Y).obj L)).hom",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-concrete-projection-reduction-square + 6 new/2 changed nodes vs delivered Lean (compiled set + 8 copied OpenScalarTensorData importers in sandbox, axioms printed); change records vs Lean diffs; claims lock of IntegralCompactSupportCoefficientComparison (F8)"
+ }
+}

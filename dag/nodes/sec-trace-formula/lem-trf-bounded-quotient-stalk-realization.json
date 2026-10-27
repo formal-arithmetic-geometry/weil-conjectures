@@ -1,0 +1,297 @@
+{
+ "id": "lem-trf-bounded-quotient-stalk-realization",
+ "kind": "statement",
+ "title": "Uniform bounded quotient towers and completed geometric stalk realization",
+ "statement": "Fix the finite-field coefficient datum [def-trf-coefficient-conventions]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$. All schemes below have $\\ell$ invertible and use compatible small pro-etale sites [def-weil-pbc-proetale-site]. Put $\\widehat R_T=\\lim_n(A_n)_T$. Use $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], completed pullback of [def-pur-integral-derived-operations], and point sections $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point]. For a geometric point $v:s\\to T$ and $M\\in D^b_c(T,R)$ put $J_v(M)=\\operatorname{Fib}_s(Lv^*M)$. Stalks and their representatives $[U,u,a]$ mean [def-weil-proetale-geometric-stalk]. For a strict tower $T_\\bullet$ of complexes with transitions $t_n$, write $H(T_\\bullet)=\\operatorname{Cone}(1-s_T:\\prod_nT_n\\to\\prod_nT_n)[-1]$, $s_T((x_n))=(t_nx_{n+1})$, with degree-$i$ coordinates $(b,a)\\in\\prod_nT_n^{i-1}\\oplus\\prod_nT_n^i$ and differential $d(b,a)=(-db-(1-s_T)a,da)$.\n\nLet $T$ be such a scheme, $M\\in D^b_c(T,R)$, $P\\to M$ any flat-term K-flat representative [lem-pc-kflat-resolution], and $P_n=P\\otimes_{\\widehat R_T}(A_n)_T$ with actual quotient transitions. Choose $a\\le b$ containing all reduction cohomology degrees. Good truncations [def-kun-truncations] give a strict-tower zigzag\n$$P_\\bullet\\longleftarrow\\tau_{\\le b}P_\\bullet\\longrightarrow B_\\bullet=\\tau_{\\ge a}\\tau_{\\le b}P_\\bullet$$\nof levelwise quasi-isomorphisms, with $B_n$ supported in $[a,b]$. This zigzag is functorial in tower maps and preserved by every finite-coefficient scheme pullback. Here the upper boundary is $\\ker d^b$, the lower boundary is quotient by $\\operatorname{im}d^{a-1}$, and for $a=b$ the retained term is $H^a(P_n)$.\n\nFor every $v:s\\to T$, there is a specified isomorphism in the derived category of $R$-modules\n$$e_{v,P}:J_v(M)\\xrightarrow{\\sim}H(((P_n)_v)_n).$$\nIts finite-level coordinates are $e_{v,n}:\\Gamma(s,v^*P_n)\\xrightarrow{\\sim}(P_n)_v$: identify $H_{\\mathrm{id}_s}$ with $\\Gamma(s,H)$ by $[U,u,x]\\mapsto u^*x$ with inverse $x\\mapsto[s,\\mathrm{id},x]$, then use the finite germ comparison [lem-trf-proetale-pullback-stalk-coherence]. The $e_{v,n}$ commute with all quotient transitions. On whole cone complexes, $e_{v,P}$ uses the sectionwise product identifications on both $b$ and $a$, with no off-diagonal component. It is natural for chain maps and agrees under the displayed bounded-tower zigzag and under the canonical changes of K-flat representatives. No boundedness of the terms of $P$, and no finite Tor-amplitude of its reductions, is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0993 (lemma-classical-point): sections over the strictly henselian point compute the geometric stalk, so at s=Spec k the identity stalk is Gamma(s,-); with sites.tex Tag 05V1 (lemma-point-morphism-sites) for the pulled-back stalks. Agent extraction (uniform good truncations, sectionwise Roos cones) of the original completed-stalk proof Steps 1--2; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-coefficient-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-geometric-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-pc-kflat-resolution",
+  "def-kun-truncations",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-trf-quotient-germ-tower to obtain the natural finite section/stalk comparisons gamma and delta and the strict tower isomorphism e, with precisely the three required generator equations. This step uses no constructibility or boundedness.",
+   "uses": [
+    "lem-trf-quotient-germ-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual finite inverse-image functor preserves finite limits and colimits. Apply lem-trf-exact-functor-good-truncations to obtain both natural truncation comparisons and their upper and lower boundary-arrow equations.",
+   "uses": [
+    "lem-trf-exact-functor-good-truncations",
+    "lem-pur-coefficient-pullback-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For M constructible and Q(P)≅M, lem-trf-integral-quotient-cohomological-bounds gives the uniform interval. For any interval satisfying the stated bound, the upper inclusion is a quasi-isomorphism by quasiIso_ιTruncLE_iff. Transport IsGE across it using isSupported_iff_of_quasiIso; then quasiIso_πTruncGE_iff proves the lower projection is a quasi-isomorphism. Good truncations have zero terms outside the interval. If p=r, truncGEXIsoOpcycles identifies the retained term with the opcycles of the upper truncation; its outgoing differential is zero, so isoHomologyι and isoOfQuasiIsoAt identify it with H^p of the original complex.",
+   "uses": [
+    "lem-trf-integral-quotient-cohomological-bounds",
+    "def-kun-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved stalk_exact_products helper of lem-t5-integral-stalk-roos-control makes the integral stalk exact. It therefore preserves the preceding levelwise quasi-isomorphisms. Apply the proved roosMap_quasiIso helper of lem-pur-integral-operations-well-defined: module countable products are exact, and the cone map of the product quasi-isomorphisms is a quasi-isomorphism. This gives the two required stalk-side Roos clauses.",
+   "uses": [
+    "lem-t5-integral-stalk-roos-control",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved natural sectionwise roosComparison of lem-trf-point-quotient-augmentation-diagram. Its two projection equations satisfy the characterization of scalarRoosMap; uniqueness identifies its hom with that prescribed map. Thus scalarRoosMap is an isomorphism. Every factor of the prescribed trfQuotientStalkRealizationArrow is now invertible: the image of q inverse and the defining completed-pullback comparison, the exact-sections localization factor, the sectionwise Roos comparison, and the image of e. Compose these component isomorphisms, taking asIso only for the scalar Roos factor. The resulting isomorphism has hom definitionally the required arrow, so no triangle filler or independent comparison choice occurs.",
+   "uses": [
+    "lem-trf-point-quotient-augmentation-diagram",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-pur-integral-derived-operations",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker and compose the four natural comparison factors on the category of flat-term K-flat complexes to obtain eta. The prescribed arrow for q is F(q inverse) followed by eta_P, by functoriality, associativity, and the scalarRoosMap identification. The relation Q(w) followed by q prime equals q followed by h implies h followed by q prime inverse equals q inverse followed by Q(w). Apply F and the naturality square of eta to obtain the final displayed representative equation. This calculation applies to arbitrary derived h satisfying the given representative equation.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quotient-germ-tower",
+  "lem-trf-exact-functor-good-truncations",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-trf-integral-quotient-cohomological-bounds",
+  "def-kun-truncations",
+  "lem-t5-integral-stalk-roos-control",
+  "lem-pur-integral-operations-well-defined",
+  "lem-trf-point-quotient-augmentation-diagram",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Local powers (b); constructive natural-comparison proof with Stacks 0118, 0993, 05V1 and 0941, retaining three strictly smaller obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed geometric stalk of an integral constructible proetale complex is the homotopy inverse limit of its strict quotient stalk tower, with simultaneous bounded truncations",
+   "results": "8 hits: AlgebraicGeometry.Proj.stalkIso'_germ, AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued, AlgebraicGeometry.ProjectiveSpectrum.Proj.stalkMap_toSpec, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, smoothSheafCommRing.ι_forgetStalk_inv, StalkSkyscraperPresheafAdjunctionAuxs.germ_fromStalk, smoothSheafCommRing.ι_forgetStalk_inv_apply, AlgebraicGeometry.PresheafedSpace.restrictStalkIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale|geometricStalk|mappingCocone",
+   "results": "24 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sites.Point",
+   "results": "loogle: unknown identifier 'CategoryTheory.Sites.Point'; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Sites.Point'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniformly cohomologically bounded reduction towers admit functorial good truncations compatible with exact geometric pullback and sectionwise Roos cones",
+   "results": "8 hits: CochainComplex.truncate, CategoryTheory.CosimplicialObject.truncation, CategoryTheory.SimplicialObject.Truncated.trunc, CategoryTheory.CosimplicialObject.Truncated.trunc, ComplexShape.Embedding.truncGEFunctor, ComplexShape.Embedding.truncLEFunctor, ComplexShape.Embedding.truncGE'Functor, SSet.Truncated.trunc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\"",
+   "results": "12 hits: RingHom.SurjectiveOnStalks, RingHom.surjectiveOnStalks_of_isLocalization, RingEquiv.surjectiveOnStalks, RingHom.surjectiveOnStalks_of_surjective, RingHom.SurjectiveOnStalks.of_comp, RingHom.SurjectiveOnStalks.comp, RingHom.surjectiveOnStalks_iff_of_isLocalHom, RingHom.surjectiveOnStalks_of_exists_div",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniformly cohomologically bounded reduction towers admit functorial good truncations compatible with exact geometric pullback and sectionwise Roos cones",
+   "results": "8 hits: CochainComplex.shortComplexTruncLE_shortExact, CochainComplex.shortComplexTruncLE, CochainComplex.shortComplexTruncLEX₃ToTruncGE, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, CochainComplex.πTruncGE, CochainComplex.truncGE",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale|stalkPullbackIso|sheafFiberComapIso",
+   "results": "12 hits; top results: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the relevant site-fibre, topological-stalk, ell-adic sheaf and good-truncation hits; they supply constituent tools, not the specified completed quotient-stalk cone comparison and bounded-tower compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform good truncations of finite quotient towers commute with exact geometric inverse image and identify completed stalks with Roos cones",
+   "results": "8 hits; top results: ComplexShape.Embedding.πTruncGENatTrans, UniformSpace.Completion.comap_coe_eq_uniformity, smoothSheafCommRing.forgetStalk, Profinite.asLimitCone, Profinite.lim, Profinite.asLimit, CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE, smoothSheafCommRing.ι_forgetStalk_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the relevant site-fibre, topological-stalk, ell-adic sheaf and good-truncation hits; they supply constituent tools, not the specified completed quotient-stalk cone comparison and bounded-tower compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPullbackIso\"",
+   "results": "1 hits; top results: TopCat.Presheaf.stalkPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the relevant site-fibre, topological-stalk, ell-adic sheaf and good-truncation hits; they supply constituent tools, not the specified completed quotient-stalk cone comparison and bounded-tower compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed geometric fiber of an adic constructible proetale complex is the homotopy inverse limit of its finite quotient stalks",
+   "results": "8 hits; top results: BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AdicCompletion.evalₐ, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AlgebraicGeometry.Scheme.Etale.forget, IsAdicComplete.henselianRing",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the relevant site-fibre, topological-stalk, ell-adic sheaf and good-truncation hits; they supply constituent tools, not the specified completed quotient-stalk cone comparison and bounded-tower compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*[Qq]uasi|[Qq]uasi.*truncLE|πTruncGE|ιTruncLE",
+   "results": "25 hits; top results: Mathlib/Algebra/Homology/Embedding/Basic.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/TruncGE.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the relevant site-fibre, topological-stalk, ell-adic sheaf and good-truncation hits; they supply constituent tools, not the specified completed quotient-stalk cone comparison and bounded-tower compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact point sections identify a homotopy inverse limit of sheaf complexes with the Roos cone of their geometric fibers naturally under bounded truncation",
+   "results": "8 hits; top results: TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIsoApp, CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_π_app, CategoryTheory.Sheaf.multiforkEvaluationCone, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_inverse, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the relevant site-fibre, topological-stalk, ell-adic sheaf and good-truncation hits; they supply constituent tools, not the specified completed quotient-stalk cone comparison and bounded-tower compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-stalk-reparametrization-coherence",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers, input (b): canonical integral stalk and fixed-point identifications; extracted original completed-stalk proof Steps 1,2",
+   "via": [
+    "lem-trf-completed-stalk-reparametrization-coherence",
+    "lem-trf-rational-local-frobenius-powers"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-bounded-quotient-stalk-realization",
+  "worker": "stage1",
+  "summary": "Seven explicit steps prove the unchanged item: simultaneous good truncations, exact pullback compatibility, identity-stalk/germ comparisons term by term, quotient-transition equations, the normalized whole-cone realization, bounded-zigzag compatibility, and canonical representative independence. Reuse the existing general point-pullback representative diagram and normalized strict Roos comparison. No new nodes, no Lean writing or compilation.",
+  "blueprint": "thm-trf-l-function-euler-product, Step 1, Local powers, input (b): the specified integral completed stalk identifications used by the rational comparison; exactly original Steps 1--2 archived in Q127 report.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exact finite-coefficient inverse image preserves the upper kernels, lower cokernels and quasi-isomorphisms; generic site-theoretic input."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Clause (1) puts Lv*M in the domain of the integral point fibre; a generic preservation theorem, not an alternative trace route."
+   },
+   {
+    "node": "lem-trf-point-pullback-representative-diagram",
+    "why": "The general arbitrary-input point-pullback representative theorem supplies the normalized section cone and its resolution naturality; this item then identifies its tower with geometric stalks and bounded truncations."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exactness of sections over the algebraically closed point preserves tower quasi-isomorphisms."
+   },
+   {
+    "node": "lem-cbc-proetale-classical-stalk",
+    "why": "Exactness of each classical geometric stalk preserves the bounded tower zigzag; no conservativity of these points is assumed."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The general normalized strict-cone functor descends levelwise tower quasi-isomorphisms, so the bounded replacements give the same realization."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Checks the exact-countable-product hypothesis of the strict Roos theorem for completed coefficient sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-proetale-sections-exact",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-1ae2d7a57",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-1ae2d7a57 (reviewer sub-agent of L); spot-checked: PASS. I read the item, all seven steps and every cited statement. The statement is unchanged against the Q127 snapshot: only proof, proof_deps, split_report, appended searches, status and source changed. There are no new nodes. No repair note exists for this item, which Q127 created as a statement-only extraction of original Steps 1-2; every argument of those archived steps is present in Steps 1-6, and Step 7 adds representative independence. Step 1: def-kun-truncations gives ker d^b and coker d^{a-1} with their retained cohomology, and the uniform interval is part of def-weil-derived-complete-integral-detailed; for a=b the term is H^a. Step 2: prop-weil-pbc-proetale-constant-exact preserves kernels and cokernels, and its underlying inverse image L does not depend on the ring, so transitions between different A_n are respected. Step 3: (s,id) is initial among pointed neighbourhoods, so Gamma(s,-) is the identity stalk. The coherence node c_{t,u,M} is applied with t=v, u=id_s, A=A_n, termwise in degree 0; its naturality makes this a chain map even for unbounded P, and its identity clause gives c_id=id. Step 4: by the explicit germ rule, reduction before or after gives [V,w,a-bar], so the tower is strict. Step 5: preserve-constructible (1) holds because ell is invertible on s and T. lem-trf-point-pullback-representative-diagram applies with arbitrary Y, f=v, K=M and the given P, and its comparison is the identity on both coordinates. I checked that the diagonal map (prod e, prod e) commutes with d(b,a)=(-db-(1-s)a,da). Step 6: Gamma and stalks are exact, and the strict-Roos functor descends levelwise quasi-isomorphisms of towers; its exact-product hypothesis holds by the proetale products node and, for R-modules on a one-point site, elementarily. Step 7: naturality and roof clauses of the representative-diagram node, plus inverting a commuting square with isomorphism sides. Edge cases checked: M=0, v=id, n=1, a=b, T=s with P=R-hat (gives R), d^2=0. Sources: Stacks 0993, 05V1, 0118 and 0941 confirmed in tags/tags and their .tex labels; blueprint euler-product proof Local powers (b), lines 56-62; no SGA. No cycle (closure of 12521 nodes) and no duplicate found. I accept the seven generic off-unit tools listed in split_report.tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceBoundedQuotientStalkRealization",
+  "declaration": "WeilConjectures.trfBoundedQuotientStalkRealization",
+  "declarations": [
+   "WeilConjectures.trfUpperTower",
+   "WeilConjectures.trfBoundedTower",
+   "WeilConjectures.trfUpperArrow",
+   "WeilConjectures.trfLowerArrow",
+   "WeilConjectures.TrfBoundedZigzag",
+   "WeilConjectures.TrfTruncationCompatible",
+   "WeilConjectures.trfQuotientTower",
+   "WeilConjectures.trfQuotientStalkTower",
+   "WeilConjectures.trfQuotientSectionTower",
+   "WeilConjectures.trfCompletedPointFibre",
+   "WeilConjectures.trfIntegralModuleQ",
+   "WeilConjectures.trfIntegralSectionsFactors",
+   "WeilConjectures.trfQuotientStalkRealizationArrow",
+   "WeilConjectures.TrfQuotientGermNormalized",
+   "WeilConjectures.TrfBoundedQuotientStalkRealized",
+   "WeilConjectures.trfBoundedQuotientStalkRealization"
+  ],
+  "file": "lean/Sheaf/Paper/TraceBoundedQuotientStalkRealization.lean",
+  "statement": "theorem trfBoundedQuotientStalkRealization (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueField x)] (v : Spec (.of D.k) ⟶ T) : TrfBoundedQuotientStalkRealized l E D v",
+  "branch": "sheaf-dag",
+  "by": "Q64",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The auxiliary wrappers use published quotient, stalk, truncation and Roos constructions. The normalization fixes finite germ maps and both cone coordinates. The added landed statement dependency supplies scalarRoosMap, already uniquely characterized on the two coordinates; it is not redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7c6323aa",
+  "group": "Q64",
+  "result": "pass",
+  "note": "All node clauses match the Lean with no added hypotheses. e_{v,P} is a pinned composite (defining pullback comparison, sections factor, scalarRoosMap, diagonal Roos map of e); γ, δ and e are fully pinned by their germ rules. Mechanical finding: the item uses only scalarRoosMap, the .choose of the proved scalarRoosMap_existsUnique listed in that node's declarations, i.e. an object the theorem constructs, so PASS on that point (maintainer note: this generic Roos comparison could get its own def node later). Item changed only in lean and by adding a landed stmt_dep; no new nodes. Advisories: H^p clause is only a Nonempty iso; zigzag agreement rendered as stalk-side Roos quasi-iso clauses; base theorem dep pullback-stalk-coherence supplies a plain def. Docstrings and lean.statement verbatim OK. No files changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T071346-L-3919417",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

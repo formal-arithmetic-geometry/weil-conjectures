@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-regular-point-blowup-functions",
+ "kind": "statement",
+ "title": "Regular functions under a regular point blowup",
+ "statement": "Let $T$ be a Noetherian regular scheme of dimension at most two [pqf-def-locnoeth, def-weil-regular-scheme, def-kun-topological-krull-dimension], where Noetherian means locally Noetherian and quasi-compact. Let $x\\in T$ be a reduced closed point and let $b:W=\\operatorname{Bl}_xT\\to T$ be its blowup [def-nagata-global-blowup]. Assume that the fibre $b^{-1}(x)$ is nonempty. The canonical morphism of sheaves of rings $\\beta:\\mathcal O_T\\to b_*\\mathcal O_W$ is an isomorphism. Explicitly, for every open $U\\subseteq T$, the pullback $\\beta_U:\\mathcal O_T(U)\\to\\mathcal O_W(b^{-1}U)$ is an isomorphism, compatibly with restriction [def-weil-locally-ringed-space-morphism].",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AGS (lemma-cohomology-of-blowup), clause (4) at n=0: for a regular local ring A of dimension 2, the blowup X of A in its maximal ideal has H^0(X,O_X)=A. The stalk of b_*O_W at x is identified with these global sections by flat base change along Spec O_{T,x} -> T (coherent.tex Tag 02KH, lemma-flat-base-change-cohomology); when O_{T,x} has dimension 1 it is a discrete valuation ring (algebra.tex Tag 00PD, lemma-characterize-dvr), the centre is invertible near x and b is an isomorphism; dimension 0 gives an empty fibre and is excluded by hypothesis. Away from x, b is an isomorphism."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-global-blowup",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local chart package to $T,x,b$. It supplies $V=\\operatorname{Spec}R$, the proper morphism $f:b^{-1}V\\to V$, and the regular local domain $A=\\mathcal O_{T,x}$ with $d\\in\\{0,1,2\\}$. Proper means separated and finite type, so $f$ is quasi-compact and, by separatedness, quasi-separated. The localized scheme $Z$ is the maximal-ideal affine blowup over $A$, with the same coefficient maps and closed fibre.",
+   "uses": [
+    "lem-sfb-point-blowup-local-chart-package",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0804 (lemma-blowing-up-affine) and 0805 (lemma-flat-base-change-blowing-up); algebra.tex Tags 00NP and 00NQ; resolve.tex Tag 0AGS, first proof paragraph (two-chart cover)"
+   }
+  },
+  {
+   "text": "For every $y\\in V$, the neighbourhoods contained in $V$ are cofinal among all neighbourhoods of $y$, and inverse images of these opens under $f$ and $b$ coincide. Thus the stalk map for the restricted morphism $f$ identifies with $\\beta_y$. Apply the qcqs functions local comparison to $f$ at $x$: it identifies $\\beta_x:A\\to(b_*\\mathcal O_W)_x$ with the coefficient map $A\\to\\Gamma(Z,\\mathcal O_Z)$ as a ring homomorphism.",
+   "uses": [
+    "lem-sfb-qcqs-functions-local-comparison",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, i=0; localization and elementary fraction/germ comparison, followed by the germ-and-gluing argument for sheaf invertibility"
+   }
+  },
+  {
+   "text": "If $d=0$, the local chart package makes $Z$ empty, so its closed fibre is empty, contradicting the nonempty-fibre assumption. If $d=1$, the package says that the structural map $q:Z\\to\\operatorname{Spec}A$ itself is an isomorphism. Pullback by its inverse gives an inverse to $q^\\sharp:A=\\Gamma(\\operatorname{Spec}A,\\mathcal O)\\to\\Gamma(Z,\\mathcal O_Z)$, by functoriality. This is precisely the coefficient map identified in step 2. If $d=2$, its two charts embed as $A$-subalgebras of $A_s,A_t$, for a nonzero regular sequence $s,t$, and equal restrictions have equal images in $A_{st}$. The regular-sequence two-chart functions theorem therefore makes $A\\to\\Gamma(Z,\\mathcal O_Z)$ an isomorphism. Thus $\\beta_x$ is an isomorphism in all permitted cases.",
+   "uses": [
+    "lem-sfb-point-blowup-local-chart-package",
+    "lem-sfb-regular-sequence-two-chart-functions",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DV (lemma-regular-sequence-powers); two-chart divisibility and sheaf gluing argument for resolve.tex Tag 0AGS(4), n=0, generalized to an arbitrary two-chart A-scheme"
+   }
+  },
+  {
+   "text": "Put $E=T\\setminus\\{x\\}$. The blowup-complement theorem makes $b$ an isomorphism over $E$, so $\\beta_y$ is invertible for $y\\ne x$. For $f:b^{-1}V\\to V$, the qcqs comparison identifies every local coefficient map with $\\beta_y$ by step 2; these are invertible at $x$ by step 3 and elsewhere by the complement. Its criterion therefore makes $\\beta|_V$ invertible, while $\\beta|_E$ is invertible by the blowup isomorphism. For an arbitrary open $U$ and $w\\in\\mathcal O_W(b^{-1}U)$, invert the restrictions of $w$ on $U\\cap V$ and $U\\cap E$. The resulting sections agree on $U\\cap V\\cap E$: their images there both equal the restriction of $w$, and $\\beta$ is injective there. Glue them to $a\\in\\mathcal O_T(U)$. Its image is $w$ by sheaf uniqueness on the inverse-image cover. The same two-open cover proves injectivity of $\\beta_U$. Thus every $\\beta_U$ is a ring isomorphism; cancellation in its naturality squares makes the inverses compatible with restriction.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-sfb-qcqs-functions-local-comparison",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "divisors.tex Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), clause (1); coherent.tex Tag 02KH (lemma-flat-base-change-cohomology), i=0, followed by the local-coefficient criterion and elementary sheaf gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-proper-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-point-blowup-local-chart-package",
+  "lem-sfb-qcqs-functions-local-comparison",
+  "lem-sfb-regular-sequence-two-chart-functions",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AGS (lemma-cohomology-of-blowup), clause (4), n=0; explicit alternative proof by the two affine charts using algebra.tex Tags 00NP, 00NQ, 07DV; globalization through coherent.tex Tag 02KH and divisors.tex Tag 0805"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blow.?up|blowing",
+   "results": "{\"t\": \"2026-10-22T04:46:49Z\", \"tool\": \"grep\", \"query\": \"blow.?up|blowing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup at a regular closed point preserves the sheaf of regular functions",
+   "results": "{\"t\": \"2026-10-22T04:46:50Z\", \"tool\": \"leansearch\", \"query\": \"Blowup at a regular closed point preserves the sheaf of regular functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.stalkClosedPointIso_inv\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.stalkClosedPointIso\", \"AlgebraicGeometry.StructureSheaf.toOpen_germ\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"AlgebraicGeometry.StructureSheaf.toStalk\"], \"digest\": \"6e88ea34ab7c029a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blow\", \"push\"",
+   "results": "{\"t\": \"2026-10-22T04:46:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blow\\\", \\\"push\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical structure sheaf map to the pushforward along a blowup of a regular closed point is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T04:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical structure sheaf map to the pushforward along a blowup of a regular closed point is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"AlgebraicGeometry.Spec_stalkClosedPointIso\", \"AlgebraicGeometry.stalkClosedPointIso_inv\", \"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.Spec_map_localization_isIso\"], \"digest\": \"034e4b46e33bb865\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|blowing",
+   "results": "{\"t\": \"2026-10-22T05:06:02Z\", \"tool\": \"grep\", \"query\": \"blow.?up|blowing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern localizations, stalks, basic opens or birational definitions, not preservation of the structure sheaf by this blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup of a regular surface at a reduced closed point has the same regular functions",
+   "results": "{\"t\": \"2026-10-22T05:06:02Z\", \"tool\": \"leansearch\", \"query\": \"Blowup of a regular surface at a reduced closed point has the same regular functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecFun\", \"AlgebraicGeometry.stalkClosedPointIso_inv\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.StructureSheaf.instIsLocalHomCarrierOfAtPrimeAsIdealStalkCommRingCatPresheafStructureSheafRingHomHomLocalizationToStalk\"], \"digest\": \"d925459067276dd9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern localizations, stalks, basic opens or birational definitions, not preservation of the structure sheaf by this blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T05:06:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern localizations, stalks, basic opens or birational definitions, not preservation of the structure sheaf by this blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf map to the direct image of the structure sheaf along the blowup at a regular closed point is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T05:06:03Z\", \"tool\": \"leanfinder\", \"query\": \"The structure sheaf map to the direct image of the structure sheaf along the blowup at a regular closed point is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.isIso_to_global\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"AlgebraicGeometry.stalkClosedPointIso_inv\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.Spec_stalkClosedPointIso\"], \"digest\": \"06693e16315ab050\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern localizations, stalks, basic opens or birational definitions, not preservation of the structure sheaf by this blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|normal.*pushforward|pushforward.*normal",
+   "results": "{\"t\": \"2026-10-22T05:06:17Z\", \"tool\": \"grep\", \"query\": \"birational|normal.*pushforward|pushforward.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\"], \"digest\": \"c7cdbcb217626ff2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern localizations, stalks, basic opens or birational definitions, not preservation of the structure sheaf by this blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global regular functions on the blowup of the spectrum of a two dimensional regular local ring at its maximal ideal equal the ring",
+   "results": "{\"t\": \"2026-10-22T05:06:18Z\", \"tool\": \"leanfinder\", \"query\": \"Global regular functions on the blowup of the spectrum of a two dimensional regular local ring at its maximal ideal equal the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isUnit_toStalk\", \"AlgebraicGeometry.StructureSheaf.const_self\", \"AlgebraicGeometry.StructureSheaf.const\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations\", \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\"], \"digest\": \"5d9e61e7791ebb25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern localizations, stalks, basic opens or birational definitions, not preservation of the structure sheaf by this blowup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-blowdown-factorization",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.",
+   "via": [
+    "lem-sfb-point-blowdown-factorization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-point-blowup-functions",
+  "worker": "stage1",
+  "summary": "Rebased the retained three-obligation finer split onto the current server DAG after the landing synchronization refusal. Reopened every current assembly and original proof dependency, checked all twelve verbatim citation quotes, and retained all eleven original arguments in the report. The final assembly now writes the inverse on an arbitrary open explicitly: invert the section on its intersections with the affine neighbourhood and the complement, prove overlap equality by injectivity, and glue; verify both inverse identities on that two-open cover. The statement, statement dependencies, three new obligations and logged Mathlib searches are unchanged. The assembly remains below 3000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof. This split realizes only the regular-functions prerequisite: the coefficient isomorphism used in the first paragraph of the point-blowdown factorization proof. The higher unit and chapter routes are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "The generic separated-implies-quasi-separated theorem checks the hypothesis of the qcqs local comparison; no alteration-route argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-sequence-powers",
+  "prop-nagata-global-blowup-cover-independent",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-514f561cd",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-514f561cd (reviewer sub-agent of L); spot-checked: This is the fifth delivery of the re-split the human ordered on 2026-10-21. Readers FIXed heads 2723e734, 82de6003, c1be3f13 and 4fbd85db, and L returned each one because the side completion had not been promoted to the live DAG. That is the promotion loop, not a fault in the mathematics. The repair note still requires the split, and no source cites SGA. Diff against 4fbd85db: the three new nodes are byte-identical, so the B3 citation fix was lost a fourth time. In the item only step 4 and the summary changed; the statement, stmt_deps, proof_deps and source are unchanged. New step 4: with E=T minus x, the blowup-complement theorem inverts beta over E and the qcqs criterion inverts beta over V. For a section w over U, the preimages on U∩V and U∩E agree on the overlap because beta is injective there. Since x is in V, V∪E=T, so they glue, and the image is w by uniqueness on the cover of b^-1 U. Injectivity uses the same cover. This is correct and needs no global qcqs property of b. I re-read all four item steps and the three nodes in full. Two-chart node (old steps 9-10): t^n a=s^r b, then Stacks 07DV (valid for any ring) gives a=s^r e and b=t^n e, and the sheaf axiom gives v=q^#(e); k[s,t] satisfies it, and s=t=z in k[z] shows the regular-pair hypothesis is needed. qcqs node (old steps 2, 3, 11): degree-0 flat base change 02KH gives S^-1 M, the D(h) germs give M_p, and stalkwise isomorphisms give the sheaf isomorphism. Chart package (old steps 1, 4-8): 0804/0805 and 00NP/00NQ; d=0 gives an empty blowup, d=1 gives A[m/t]=A, and for d=2 the chart overlaps map into A_st. Source 0AGS(4) at n=0 (resolve.tex 569) checked. New candidates, not duplicates: lem-sfb-point-blowdown-factorization and lem-a1-affinization-localization-stalk-criterion. FIX (B3), re-applied by copying the 4fbd85db fixes; each fixed file differs from this head only in statement and stmt_deps. lem-sfb-point-blowup-local-chart-package now cites def-weil-pbc-module-stalk for O_{T,x}, and lem-sfb-qcqs-functions-local-comparison now cites def-weil-pbc-module-localization for S^-1 R and S^-1 M. Maintainer: please promote with fixes/ applied, because each re-delivery drops these citations again.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPointBlowupFunctions",
+  "declaration": "AlgebraicGeometry.isIso_structureSheafMap_point_blowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPointBlowupFunctions.lean",
+  "statement": "theorem isIso_structureSheafMap_point_blowup (T : Scheme.{u}) [CompactSpace T] (hregular : IsRegularScheme T) (hdim : topologicalKrullDim T ≤ 2) (x : T) (hx : IsClosed ({x} : Set T)) (hfibre : Set.Nonempty ((Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowupMap ⁻¹' {x})) : IsIso (Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowupMap.toLRSHom.toHom.c",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cb97503f",
+  "group": "NS",
+  "result": "pass",
+  "note": "Lean isIso_structureSheafMap_point_blowup matches the node clause by clause: CompactSpace + IsRegularScheme (IsLocallyNoetherian ∧ IsRegular) = Noetherian regular; topologicalKrullDim ≤ 2 keeps d=0,1; vanishingIdeal ⟨{x},hx⟩ = reduced point centre; recorded Gluing blowup/blowupMap need no instances; hfibre = nonempty b⁻¹(x); IsIso of PresheafedSpace.Hom.c = sheaf iso O_T → b_*O_W with every β_U iso and naturality. No extra hypotheses; edge cases fine (empty T vacuous, d=0 excluded by hfibre, d=1 Cartier, d=2 Stacks 0AGS(4)); single universe u. Same centre and binders as the landed consumer existsUnique_factor_through_point_blowup. No duplicate or name clash; statement field verbatim; only the lean field differs from side-live; docstrings carry source, blueprint tag and 11 proof steps; proof is sorry. No compile run since no file changed (worker report: scompile clean, dry run OK). Advisory H11: Second reading section is the dispatcher placeholder."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

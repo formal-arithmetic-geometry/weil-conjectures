@@ -1,0 +1,271 @@
+{
+ "id": "lem-fd-pullback-weil-return-square",
+ "kind": "statement",
+ "title": "Pullback comparison for same-length rational Weil return operators",
+ "statement": "Fix $k_0=\\mathbf F_q$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$, an algebraic closure $\\Qlb/\\mathbf Q_\\ell$, and a finite coefficient field $E\\subset\\Qlb$. Let $f_0:X_0\\to Y_0$ be a morphism of separated finite-type $k_0$-schemes and $f:X\\to Y$ its base change to $k$. Put $s=\\operatorname{Spec}k$, and let $g_X,g_Y,g_s$ be geometric Frobenius [def-weil-frobenius-detailed]. Work in the framework rationalized constructible categories, with pullbacks [def-weil-derived-pullback-tensor-hom], point fibres [def-weil-finite-coefficient-point], and the specified rationalized comparison families [lem-trf-integral-pullback-comparison-realization]. Choose $\\bar z:s\\to X$ and $\\bar x=f\\bar z:s\\to Y$, and $n\\geq1$ such that $g_X^n\\bar z=\\bar z g_s^n$ and $g_Y^n\\bar x=\\bar x g_s^n$. Put $G_X=Lg_X^*$, $G_Y=Lg_Y^*$, $J_z=\\operatorname{Fib}_{s,E}L\\bar z^*$ and $J_x=\\operatorname{Fib}_{s,E}L\\bar x^*$. Let $c_M:J_zLf^*M\\xrightarrow{\\sim}J_xM$ be $\\operatorname{Fib}_{s,E}$ of the inverse pullback compositor for $f\\bar z$, and let $\\beta_r:G_X^rLf^*\\xrightarrow{\\sim}Lf^*G_Y^r$ be the comparison for $fg_X^r=g_Y^rf$, using the associative identifications of functor powers. Write $t^X_{n,N}:J_zN\\to J_zG_X^nN$ and $t^Y_{n,M}:J_xM\\to J_xG_Y^nM$ for the normalized successive point transports [lem-trf-local-frobenius-transport-normalization].\n\nFor every $M\\in D^b_c(Y,E)$ one has\n$$c_{G_Y^nM}\\,J_z(\\beta_{n,M})\\,t^X_{n,Lf^*M}=t^Y_{n,M}\\,c_M.$$\nFor every $E$-Weil complex $(M,\\theta_Y)$ [def-weil-weil-sheaf-complex], give $Lf^*M$ the structure $\\theta_X=Lf^*(\\theta_Y)\\beta_{1,M}$. Its iterates [def-weil-local-frobenius-trace] satisfy, for every $r\\geq1$,\n$$\\theta_X^{[r]}=Lf^*(\\theta_Y^{[r]})\\beta_{r,M}.$$\nWith $R^X_n=J_z(\\theta_X^{[n]})t^X_{n,Lf^*M}$ and $R^Y_n=J_x(\\theta_Y^{[n]})t^Y_{n,M}$, the resulting equality in $D^b_{\\mathrm{fd}}(E)$ is\n$$c_MR^X_n=R^Y_nc_M.$$\nNo finite Tor-amplitude condition on reductions or integral Weil-stable lattice is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, sentence on pullback and the residue-degree Frobenius power; extracted rational argument from lem-fd-weil-pullback-local-frobenius, returned proof steps 4-5 and scalar-factor part of 7. Compare Deligne Weil II (1.1.7)-(1.1.10), pp. 150-151; construction is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-frobenius-detailed",
+  "lem-trf-local-frobenius-transport-normalization",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "def-fd-specified-weil-iterate",
+  "lem-weil-frobenius-square-cartesian"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=Lf^*$, $P_z=L\\bar z^*$, $P_x=L\\bar x^*$, $U=Lg_s^*$ and $B=\\operatorname{Fib}_{s,E}$. Compose right to left. Let $C:P_zF\\xrightarrow{\\sim}P_x$ be the inverse compositor, so $c=BC$. The affine formula [def-weil-frobenius-detailed] gives $fg_X=g_Yf$: both ring maps send $a\\otimes b$ to $f_0^\\#(a)\\otimes\\gamma(b)$. Iteration gives $fg_X^r=g_Y^rf$. For $v_X:U^nP_z\\to P_zG_X^n$ and $v_Y:U^nP_x\\to P_xG_Y^n$ from the assumed returns, associativity of the specified comparisons [lem-trf-integral-pullback-comparison-realization] gives\n$$C_{G_Y^nM}P_z(\\beta_{n,M})v_{X,FM}=v_{Y,M}U^n(C_M).$$\nTo see the pasting explicitly, expand $v_X,v_Y$ as the inverse compositor for $\\bar z g_s^n$, respectively $\\bar x g_s^n$, followed by the compositor for $g_X^n\\bar z$, respectively $g_Y^n\\bar x$; expand $\\beta_n$ as the inverse compositor for $fg_X^n$ followed by that for $g_Y^nf$. Both sides are the reassociation along $f g_X^n\\bar z=g_Y^nf\\bar z=f\\bar z g_s^n$. The cited coherence includes equality of scheme maps and finite iterations, also after rationalization. Here $B$ is the functor of [def-weil-finite-coefficient-point].",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback raises local Frobenius to the residue-degree power; explicit same-length comparison calculus by NJ. Underlying composition: Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+   }
+  },
+  {
+   "text": "Put $I_N^{(0)}=1$ and $I_N^{(j+1)}=\\iota_{U^jN}I_N^{(j)}$. Naturality of $\\iota$ [lem-weil-frobenius-point-transport-natural] implies naturality of $I^{(j)}$ by induction: the base is the identity; for a point-category map $a:N\\to N'$, the successor equality is\n$$BU^{j+1}(a)\\iota_{U^jN}I_N^{(j)}=\\iota_{U^jN'}BU^j(a)I_N^{(j)}=\\iota_{U^jN'}I_{N'}^{(j)}B(a).$$\nApply this with $j=n$ and $a=C_M:P_zFM\\to P_xM$. With the normalized successive transport construction specified in the statement [lem-trf-local-frobenius-transport-normalization], $t^X_{n,FM}=B(v_{X,FM})I_{P_zFM}^{(n)}$ and $t^Y_{n,M}=B(v_{Y,M})I_{P_xM}^{(n)}$. Apply $B$ to Step 1 and compose with $I_{P_zFM}^{(n)}$; substituting the naturality equation gives $c_{G_Y^nM}J_z(\\beta_{n,M})t^X_{n,FM}=t^Y_{n,M}c_M$. Only the defining construction of normalized transport is used; no extra choice of a rational-point representative is needed.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-trf-local-frobenius-transport-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback raises local Frobenius to the residue-degree power; explicit same-length comparison calculus by NJ. Underlying composition: Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+   }
+  },
+  {
+   "text": "Associativity of [lem-trf-integral-pullback-comparison-realization] gives\n$$\\beta_{r+1,M}=\\beta_{r,G_YM}G_X^r(\\beta_{1,M})\\quad(r\\geq1).$$\nIndeed, factor the commuting square through $fg_X^rg_X=g_Y^rfg_X=g_Y^rg_Yf$; its two successive comparison factors are exactly those displayed. Naturality of the same specified comparison gives, for $u:G_YM\\to M$,\n$$\\beta_{r,M}G_X^r(Fu)=F(G_Y^ru)\\beta_{r,G_YM}.$$\nThese equations are in the rationalized categories, using the associative identifications of functor powers.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback raises local Frobenius to the residue-degree power; explicit same-length comparison calculus by NJ. Underlying composition: Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+   }
+  },
+  {
+   "text": "The isomorphism $\\theta_X=F(\\theta_Y)\\beta_1$ is a Weil structure [def-weil-weil-sheaf-complex]. Induct on $r\\geq1$ to prove $\\theta_X^{[r]}=F(\\theta_Y^{[r]})\\beta_{r,M}$. The base is its definition. For the successor, the recursion [def-weil-local-frobenius-trace], the induction hypothesis, and Step 3 with $u=\\theta_Y$ give\n$$\\begin{aligned}\n\\theta_X^{[r+1]}&=F(\\theta_Y^{[r]})\\beta_{r,M}G_X^r(F\\theta_Y)G_X^r(\\beta_{1,M})\\\\\n&=F(\\theta_Y^{[r]})F(G_Y^r\\theta_Y)\\beta_{r,G_YM}G_X^r(\\beta_{1,M})\\\\\n&=F(\\theta_Y^{[r+1]})\\beta_{r+1,M}.\n\\end{aligned}$$\nThus every positive iterate has the claimed form.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback raises local Frobenius to the residue-degree power; explicit same-length comparison calculus by NJ. Underlying composition: Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+   }
+  },
+  {
+   "text": "Naturality of the inverse compositor from [lem-trf-integral-pullback-comparison-realization], followed by $B$, says $c_MJ_z(Fu)=J_x(u)c_{G_Y^nM}$ for $u:G_Y^nM\\to M$. Take $u=\\theta_Y^{[n]}$. Step 4, this equation, and Step 2 give\n$$\\begin{aligned}\nc_MR^X_n\n&=c_MJ_z(F\\theta_Y^{[n]})J_z(\\beta_{n,M})t^X_{n,FM}\\\\\n&=J_x(\\theta_Y^{[n]})c_{G_Y^nM}J_z(\\beta_{n,M})t^X_{n,FM}\\\\\n&=J_x(\\theta_Y^{[n]})t^Y_{n,M}c_M=R^Y_nc_M.\n\\end{aligned}$$\nThe values lie in $D^b_{\\mathrm{fd}}(E)$ by [def-weil-finite-coefficient-point]. Every operation on the Weil map occurs in the rational category; neither an integral lift of that map nor finite Tor-amplitude of a reduction was used.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback raises local Frobenius to the residue-degree power; explicit same-length comparison calculus by NJ. Underlying composition: Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-trf-local-frobenius-transport-normalization",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, pullback raises local Frobenius to the residue-degree power; explicit same-length comparison calculus by NJ. Underlying composition: Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a morphism over a finite field commutes with point return transport and iterated Weil structure at a finite rational coefficient stage",
+   "results": "WeierstrassCurve.Affine.Point.map_map; WeierstrassCurve.Affine.Point.map_baseChange; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; WeierstrassCurve.Affine.Point.map_some; WeierstrassCurve.Affine.Point.baseChange; AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint; WeierstrassCurve.Affine.Point.map; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme point/residue maps and regular-category Frobenius reciprocity do not state the rational Weil return-transport square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme point/residue maps and regular-category Frobenius reciprocity do not state the rational Weil return-transport square."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*(stalk|pullback)|((stalk|pullback).*frobenius)",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme point/residue maps and regular-category Frobenius reciprocity do not state the rational Weil return-transport square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback stalk comparison intertwines same length Frobenius return operators for rational Weil complexes",
+   "results": "TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackIso; TopCat.Presheaf.germ_stalkPullbackHom; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; TopCat.Presheaf.germToPullbackStalk; TopCat.Presheaf.germ_stalkPullbackInv; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme point/residue maps and regular-category Frobenius reciprocity do not state the rational Weil return-transport square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The commutative Frobenius square for a scheme morphism induces compatible iterated Weil maps and geometric point transport naturality",
+   "results": "AlgebraicGeometry.AffineSpace.map_over; AlgebraicGeometry.AffineSpace.comp_homOfVector; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.AffineSpace.homOfVector_over_assoc; AlgebraicGeometry.Scheme.Hom.naturality; AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme point/residue maps and regular-category Frobenius reciprocity do not state the rational Weil return-transport square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme-module pseudofunctors, abstract pullHom composition, regular-category Frobenius reciprocity and ring Frobenius do not supply the specified rational constructible return maps and Weil iterates."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*(stalk|pullback|return)|((stalk|pullback|return).*frobenius)",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme-module pseudofunctors, abstract pullHom composition, regular-category Frobenius reciprocity and ring Frobenius do not supply the specified rational constructible return maps and Weil iterates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback composition coherence intertwines geometric point Frobenius return maps and iterated Weil structures in rational constructible derived categories",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme-module pseudofunctors, abstract pullHom composition, regular-category Frobenius reciprocity and ring Frobenius do not supply the specified rational constructible return maps and Weil iterates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback comparison at a geometric point conjugates iterated Weil Frobenius return operators",
+   "results": "CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.instIsIsoPullbackComparison; LinearMap.iterateFrobenius; IsPurelyInseparable.iterateFrobenius; iterateFrobenius.congr_simp; WittVector.verschiebung_frobenius_comm; iterateFrobenius_eq_pow; iterateFrobeniusEquiv_eq_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme-module pseudofunctors, abstract pullHom composition, regular-category Frobenius reciprocity and ring Frobenius do not supply the specified rational constructible return maps and Weil iterates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudofunctor pullback natural transformation for a commuting square respects iterated endomorphism equivariant objects",
+   "results": "CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom; CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom_pullHom; CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom; CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom; CategoryTheory.Pseudofunctor.DescentData.pullFunctor_map_hom; CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso_hom_app_hom; CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq; CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme-module pseudofunctors, abstract pullHom composition, regular-category Frobenius reciprocity and ring Frobenius do not supply the specified rational constructible return maps and Weil iterates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-weil-pullback-local-frobenius",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-some-weight",
+ "blueprint": {
+  "from": {
+   "node": "lem-fd-realified-kernel-real",
+   "place": "Proof Step 2, sentence pullback along p_1 raises the local Frobenius to the e-th power: compare the same-length point returns under a morphism",
+   "via": [
+    "lem-fd-weil-pullback-local-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-fd-pullback-weil-return-square",
+  "worker": "stage1",
+  "summary": "NJ writes the return-square pasting equation, applies naturality to the inverse point compositor, derives the comparison recurrence and proves the Weil iterate formula by induction, then composes with the Weil map. Reuses existing coherence and point-transport nodes; no new nodes or hypothesis changes.",
+  "blueprint": "Latest blueprint lem-fd-realified-kernel-real.proof.md, Step 2: same-length pullback comparison underlying the residue-degree Frobenius power.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specified rational compositor naturality and associativity; the affine-line unit does not construct these comparison families."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of the single point transport for every point-category morphism; its successive form is proved here by induction."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Identifies the specified normalized return with successive point transport followed by the return compositor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-97ac069e6",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-97ac069e6 (reviewer sub-agent of L); spot-checked: I read all of it. Live still has the item unsplit, no other group has split it, and there is no repair note. Statement, stmt_deps, source and blueprint fields are byte-identical to live, so no target is weakened. The delivery has 0 new nodes, and proof_deps is exactly the union of the step uses. I checked each step against the statement it cites. Step 1 is compositor pasting along f g_X^n z̄ = g_Y^n x̄ = f z̄ g_s^n, using the coherence (associative, unital, respects equal maps) that lem-trf-integral-pullback-comparison-realization states. Step 2 sets up the induction for successive transports properly, using rational naturality of ι from lem-weil-frobenius-point-transport-natural clause 2 applied to C_M in D^b_c(s,E), and t is taken from the definition in lem-trf-local-frobenius-transport-normalization; I rebuilt the final chain myself. Step 3: the recurrence β_{r+1}=β_{r,G_YM}∘G_X^r(β_1) and the naturality square are correctly typed. Step 4: I redid the successor calculation of θ_X^{[r]} and it is correct. Step 5: naturality of C, then Fib, gives c R^X_n = R^Y_n c in D^b_fd(E). Edge cases checked: n=1, r=1 and r=2, f=id, X=Spec k, zero complex. No Tor-amplitude condition or integral lattice is used. I found no duplicate: lem-zl-residue-compatible-pullback-frobenius is a special case (residue isomorphism, n=r) in a downstream chapter, which I note as advisory only. There is no cycle and no SGA citation. I accept all three tool_uses as generic coherence or naturality. Batch-5 flag on lem-weil-frobenius-point-transport-natural, which reaches lem-weil-isomorphism-derived-pullback-comparison-normalization: accepted. Citing it adds 0 nodes to the closure the item already had through its unchanged stmt_deps, and the flagged node already sits there. That node is whole-cone completed-pullback normalization for a scheme isomorphism, not a step of the trace-formula or Poincaré-duality proofs, and the proof_deps closure contains no theorem-level trace or Poincaré node."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdPullbackWeilReturnSquare",
+  "declaration": "WeilConjectures.fdPullbackWeilReturnSquare",
+  "declarations": [
+   "WeilConjectures.FdPullbackWeilReturn.map",
+   "WeilConjectures.FdPullbackWeilReturn.power_comm",
+   "WeilConjectures.FdPullbackWeilReturn.pullback",
+   "WeilConjectures.FdPullbackWeilReturn.beta",
+   "WeilConjectures.FdPullbackWeilReturn.pointComparison",
+   "WeilConjectures.FdPullbackWeilReturn.weilPullback",
+   "WeilConjectures.FdPullbackWeilReturn.operator",
+   "WeilConjectures.FdPullbackWeilReturn.Properties",
+   "WeilConjectures.fdPullbackWeilReturnSquare"
+  ],
+  "file": "lean/Sheaf/Paper/FdPullbackWeilReturnSquare.lean",
+  "statement": "theorem fdPullbackWeilReturnSquare (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (X₀ Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (C : IntegralComparisonSystem.{u} c.l) (f₀ : X₀ ⟶ Y₀) (z : Spec (.of D.k) ⟶ (D.geometricFiber X₀).left) (n : ℕ) (hz : localPositivePower (frobeniusPointIso D).hom n ≫ z = z ≫ localPositivePower (D.geometricFrobenius X₀).hom n) (hx : localPositivePower (frobeniusPointIso D).hom n ≫ (z ≫ FdPullbackWeilReturn.map D f₀) = (z ≫ FdPullbackWeilReturn.map D f₀) ≫ localPositivePower (D.geometricFrobenius Y₀).hom n) : FdPullbackWeilReturn.Properties D c.l c.different E.val C f₀ z n hz hx",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned b6baafacf01f, H2: the positive-power pullback and specified-C Weil iteration are now owned by the new definition node def-fd-specified-weil-iterate, bound existing:true to LocalFrobeniusCoefficient.pullback/iterate; the theorem lem-fd-local-frobenius-coefficient-extension is no longer a statement dependency. Retain lem-weil-frobenius-square-cartesian: its actual one-step scheme-map equality, iterated by power_comm, is required data in beta_r, so this is a genuine statement dependency, as the independent reviewer confirmed. Positive n,r encode exponents n+1,r+1. All three equations, arbitrary geometric return points, categories, comparison constructions and hypotheses are unchanged; no Tor-amplitude or lattice assumption is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02f880fc2",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Repair of b6baafacf01f (H2): Lean module byte-identical to the fully reviewed b6ba; the item JSON changes only by swapping stmt_dep lem-fd-local-frobenius-coefficient-extension for new def node def-fd-specified-weil-iterate, plus lean.note. New node is existing:true on LocalFrobeniusCoefficient.pullback/iterate (live LocalFrobeniusCoefficientExtension.lean:45-110): P_r = L(g^{r+1})^*, W_0=θ, W_{r+1}=W_r∘P_r(θ)∘rationalComposition C (g^{r+1}) g; matches the node's recursion and directions; hypotheses finite-type/E finite/ℓ≠p with no extra binders; lean.statement verbatim; distinct from localWeilIterate (uses choose compositor); id absent from live; citations equal its 7 stmt_deps. Mechanical finding: lem-weil-frobenius-square-cartesian clause 2 (f∘g_X=g_Y∘f, iterated as power_comm) is needed to type beta via eqToIso, so the statement genuinely depends on the theorem's conclusion → PASS on that point. Gates: no hollow defs, sorry only in power_comm and the main theorem, docstrings present, report sections present. Advisory: item statement text (unchanged from live) does not bracket-cite the two added deps. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123113-L-1832898",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.FdPullbackWeilReturn.power_comm",
+   "WeilConjectures.fdPullbackWeilReturnSquare"
+  ],
+  "sorry_after": [
+   "WeilConjectures.fdPullbackWeilReturnSquare"
+  ]
+ }
+}

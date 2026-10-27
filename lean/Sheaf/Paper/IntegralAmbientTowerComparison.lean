@@ -16,17 +16,14 @@ public import Sheaf.CategoryTheory.ConstantScalarRestrictionTensor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import Sheaf.AlgebraicGeometry.UnboundedDirectImageComparisonMap
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-import Sheaf.Paper.CoefficientSystemDerivedComparison
-import Sheaf.Paper.CompletedCoefficientPushforwardComparison
-import Sheaf.CategoryTheory.DiagramRingRestrictionPushforward
-import Sheaf.NumberTheory.Padics.IntegersProfiniteTower
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.AugmentedDiagramProjectionMate
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.Paper.ReductionPullbackDerivedTower
 import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.IntegralCoefficientModelRealization
+import Sheaf.Paper.CompletedConstantPresentationTransport
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 public import Sheaf.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
 
 /-! # Ordinary integral direct image and its finite reduction tower
@@ -44,11 +41,10 @@ set_option autoImplicit false
 
 set_option genSizeOf false
 set_option genInjectivity false
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.hasDerived
 universe u
 open scoped CategoryTheory.Obj
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -79,7 +75,84 @@ theorem finiteResolution (π : PadicAlgCl.integers l E.1)
         (resolution.{u} l E π n).IsStrictlyGE (-1) ∧
         (resolution.{u} l E π n).IsStrictlyLE 0 ∧
         HasFiniteFreeTerms (resolution.{u} l E π n) := by
-  sorry
+  let R := integers.{u} l E
+  let M := ModuleCat.of R R
+  let a : R := ULift.up π ^ (n + 1)
+  let I : Ideal R := (Ideal.span {ULift.up π}) ^ (n + 1)
+  have hI : I = Ideal.span {a} := Ideal.span_singleton_pow _ _
+  let e : R ≃+* PadicAlgCl.integers l E.1 := ULift.ringEquiv
+  have : IsDomain R := e.toMulEquiv.isDomain _
+  have hπ0 : π ≠ 0 := by
+    intro h
+    apply PadicAlgCl.maximalIdeal_integers_ne_bot l E.1
+    rw [← hπ, h, Ideal.span_singleton_eq_bot.mpr rfl]
+  have ha : a ≠ 0 := pow_ne_zero _ (fun h ↦ hπ0 (congrArg ULift.down h))
+  let m : M ⟶ M := ModuleCat.ofHom ((LinearMap.lsmul R R) a)
+  let q : M ⟶ ModuleCat.of R (R ⧸ I) := ModuleCat.ofHom I.mkQ
+  have hmq : m ≫ q = 0 := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change Ideal.Quotient.mk I (a * x) = 0
+    apply Ideal.Quotient.eq_zero_iff_mem.mpr
+    rw [hI, Ideal.mem_span_singleton]
+    exact dvd_mul_right a x
+  let S := ShortComplex.mk m q hmq
+  have hS : S.ShortExact := by
+    refine ShortComplex.ShortExact.mk' ?_ ?_ ?_
+    · rw [ShortComplex.moduleCat_exact_iff]
+      intro x hx
+      have hx' : x ∈ I := Ideal.Quotient.eq_zero_iff_mem.mp hx
+      rw [hI, Ideal.mem_span_singleton] at hx'
+      obtain ⟨y, hy⟩ := hx'
+      exact ⟨y, hy.symm⟩
+    · change Mono m
+      rw [ModuleCat.mono_iff_injective]
+      intro x y h
+      exact mul_left_cancel₀ ha h
+    · change Epi q
+      rw [ModuleCat.epi_iff_surjective]
+      exact I.mkQ_surjective
+  let F := CochainComplex.singleFunctor (ModuleCat.{u + 1} R) 0
+  have : PreservesFiniteLimits F := by
+    change PreservesFiniteLimits (HomologicalComplex.single (ModuleCat.{u + 1} R) (.up ℤ) 0)
+    infer_instance
+  have : PreservesFiniteColimits F := by
+    change PreservesFiniteColimits (HomologicalComplex.single (ModuleCat.{u + 1} R) (.up ℤ) 0)
+    infer_instance
+  have hs := hS.map_of_exact F
+  refine ⟨(integral_coefficient_model_realization l E π hπ).2.2.2.2.2.1 n,
+    CochainComplex.mappingCone.descShortComplex (S.map F),
+    CochainComplex.mappingCone.quasiIso_descShortComplex hs, ?_, ?_, ?_⟩
+  · rw [CochainComplex.isStrictlyGE_iff]
+    intro i hi
+    rw [resolution, CochainComplex.mappingCone.isZero_X_iff]
+    exact ⟨HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega),
+      HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega)⟩
+  · rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    rw [resolution, CochainComplex.mappingCone.isZero_X_iff]
+    exact ⟨HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega),
+      HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega)⟩
+  · have hterm (i : ℤ) : Module.Free R ((F.obj M).X i) ∧
+        Module.Finite R ((F.obj M).X i) := by
+      by_cases hi : i = 0
+      · subst i
+        change Module.Free R R ∧ Module.Finite R R
+        exact ⟨Module.Free.self R, Module.Finite.self R⟩
+      · have hz : IsZero ((F.obj M).X i) :=
+          HomologicalComplex.isZero_single_obj_X _ _ _ _ hi
+        have := ModuleCat.subsingleton_of_isZero hz
+        exact ⟨inferInstance, inferInstance⟩
+    intro i
+    have := (hterm (i + 1)).1
+    have := (hterm (i + 1)).2
+    have := (hterm i).1
+    have := (hterm i).2
+    let t := HomologicalComplex.homotopyCofiber.XIsoBiprod (multiplication l E π n)
+      i (i + 1) rfl ≪≫ ModuleCat.biprodIsoProd _ _
+    exact ⟨Module.Free.of_equiv t.symm.toLinearEquiv,
+      Module.Finite.equiv t.symm.toLinearEquiv⟩
 
 /-- The canonical coefficient models exist, without hypotheses on the scheme.
 Source: Bhatt--Scholze, Section 6.5; Stacks 09BT
@@ -94,7 +167,7 @@ from constant sections, and then from the jointly monic limit projections. -/
 theorem coefficientModel_exists (π : PadicAlgCl.integers l E.1)
     (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E.1))
     (T : Scheme.{u}) : Nonempty (CoefficientModel l E π hπ T) := by
-  sorry
+  exact ((integral_coefficient_model_realization l E π hπ).2.2.2.2.2.2.1 T).1
 
 /-- The canonical encodings exist for every morphism and every positive finite level.
 Source: Bhatt--Scholze, Section 6.5; Stacks 0D6E
@@ -113,7 +186,86 @@ theorem encodings (π : PadicAlgCl.integers l E.1)
     (CX : CoefficientModel l E π hπ X) (CY : CoefficientModel l E π hπ Y) :
     Nonempty (AmbientEncoding l E f CX CY) ∧
       ∀ n : ℕ, Nonempty (FinitePushEncoding l E (π := π) (hπ := hπ) f n) := by
-  sorry
+  have h := (integral_coefficient_model_realization l E π hπ).2.2.2.2.2.2.2 f CX CY
+  exact h.2.2
+
+private theorem roos_object_iso
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {B : ℕ → C} [HasProduct B] (f : ∀ n, B (n + 1) ⟶ B n)
+    {K L : C} {p : K ⟶ ∏ᶜ B} {q : L ⟶ ∏ᶜ B}
+    {δ : ∏ᶜ B ⟶ K⟦(1 : ℤ)⟧} {ε : ∏ᶜ B ⟶ L⟦(1 : ℤ)⟧}
+    (hK : IsDerivedLimitTriangle f K p δ) (hL : IsDerivedLimitTriangle f L q ε) :
+    Nonempty (K ≅ L) := by
+  let tK := Pretriangulated.Triangle.mk p (towerTransitionEndomorphism f) δ
+  let tL := Pretriangulated.Triangle.mk q (towerTransitionEndomorphism f) ε
+  let e := Pretriangulated.isoTriangleOfIso₁₂ tK.rotate tL.rotate
+    (Pretriangulated.rot_of_distTriang _ hK) (Pretriangulated.rot_of_distTriang _ hL)
+    (Iso.refl _) (Iso.refl _) (by
+      change towerTransitionEndomorphism f ≫ 𝟙 _ = 𝟙 _ ≫ towerTransitionEndomorphism f
+      simp only [Category.comp_id, Category.id_comp])
+  exact ⟨(shiftFunctor C (1 : ℤ)).preimageIso
+    (Pretriangulated.Triangle.π₃.mapIso e)⟩
+
+private theorem quotient_products (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    HasCountableProducts (d.derived T) := by
+  let R := d.completedRing T
+  let B := reductionModules T R
+  have : HasFiniteBiproducts B := CategoryTheory.Abelian.hasFiniteBiproducts
+  have : CountableAB4Star B := by
+    have : (lim (J := Discrete ℕ) (C := B)).PreservesEpimorphisms :=
+      { preserves := by
+          intro F G f hf
+          have h := (ProEt.countableProducts_exact.{u, u, 0} T R).2.2
+            ℕ (fun n ↦ F.obj ⟨n⟩) (fun n ↦ G.obj ⟨n⟩)
+            (fun n ↦ f.app ⟨n⟩) (fun n ↦ inferInstance)
+          have he : lim.map f = (Pi.isoLimit _).inv ≫
+              Limits.Pi.map (fun n ↦ f.app ⟨n⟩) ≫ (Pi.isoLimit _).hom := by
+            apply limit.hom_ext
+            intro ⟨n⟩
+            simp
+          rw [he]
+          infer_instance }
+    have := hasExactLimitsOfShape_of_preservesEpi B (Discrete ℕ)
+    exact CountableAB4Star.of_hasExactLimitsOfShape_nat B
+  exact (derivedCategory_countableProducts_core.{0} B).choose
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem unit_of_iso_completion (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : d.derived T)
+    (e : K ≅ (completedRlim T (d.completedRing T)).obj
+      ((completedReductionTower T d).obj K)) : d.TowerComplete T K := by
+  obtain ⟨D⟩ := completed_constant_presentation_transport T d
+  let F := D.equivalence.functor
+  let J := completedCechTopology T
+  let G := ConstantCompletion.completion J A d.ideal true
+  let η := ConstantCompletion.completionUnit J A d.ideal true
+  have : IsNoetherianRing A := d.noetherian
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+  obtain ⟨_, _, hc, _, hi⟩ :=
+    ConstantCompletion.koszul_quotient_reflector J A d.ideal true r a ha
+  obtain ⟨q, hq⟩ := D.quotient K
+  let e' : F.obj K ≅ G.obj (F.obj K) := F.mapIso e ≪≫ q
+  have : IsIso (η.app (G.obj (F.obj K))) := (hi _).mpr (hc _)
+  have hn := η.naturality e'.hom
+  dsimp only [Functor.id_map] at hn
+  have : IsIso (η.app (F.obj K) ≫ G.map e'.hom) := by
+    rw [← hn]
+    infer_instance
+  have : IsIso (η.app (F.obj K)) := IsIso.of_isIso_comp_right _ (G.map e'.hom)
+  have : IsIso (F.map ((completedQuotientCompletionUnit T d).app K) ≫ q.hom) := by
+    rw [hq]
+    exact ‹IsIso (η.app (F.obj K))›
+  have : IsIso (F.map ((completedQuotientCompletionUnit T d).app K)) :=
+    IsIso.of_isIso_comp_right _ q.hom
+  have h := isIso_of_reflects_iso ((completedQuotientCompletionUnit T d).app K) F
+  unfold AdicCoefficientDatum.TowerComplete AdicCoefficientDatum.completionUnit
+  simpa only [completedQuotientCompletionUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, AdicCoefficientDatum.constantRlimAdjunction,
+    completedReductionAugmentation] using h
 
 /-- Roos completeness and invertibility of the specified strict quotient completion
 unit coincide; the actual quotient-unit legs are retained throughout.
@@ -131,7 +283,29 @@ theorem complete_iff (π : PadicAlgCl.integers l E.1)
     (T : Scheme.{u}) (K : (datum.{u} l E π hπ).derived T) :
     (datum.{u} l E π hπ).quotientRoosComplete T K ↔
       (datum.{u} l E π hπ).TowerComplete T K := by
-  sorry
+  let d := datum.{u} l E π hπ
+  constructor
+  · rintro ⟨hp, δ, hδ⟩
+    let := hp
+    obtain ⟨ε, hε⟩ := completedRlim_roos T d ((completedReductionTower T d).obj K)
+    obtain ⟨e⟩ := roos_object_iso _ hδ hε
+    exact unit_of_iso_completion T d K e
+  · intro hK
+    have : IsIso (d.completionUnit T K) := hK
+    have := quotient_products T d
+    obtain ⟨δ, hδ⟩ := completedRlim_roos T d ((completedReductionTower T d).obj K)
+    let e := asIso (d.completionUnit T K)
+    refine ⟨inferInstance, δ ≫ (shiftFunctor _ (1 : ℤ)).map e.inv, ?_⟩
+    apply Pretriangulated.isomorphic_distinguished _ hδ _
+    exact Pretriangulated.Triangle.isoMk _ _ e (Iso.refl _) (Iso.refl _)
+      (by change (_ ≫ _) ≫ 𝟙 _ = e.hom ≫ _; simp [e, d])
+      (by change _ ≫ 𝟙 _ = 𝟙 _ ≫ _
+          simp only [Category.comp_id, Category.id_comp]
+          rfl)
+      (by change (δ ≫ _) ≫ _ = 𝟙 _ ≫ δ
+          simp only [Category.assoc, ← Functor.map_comp, e.inv_hom_id, Category.id_comp]
+          change δ ≫ (shiftFunctor (d.derived T) (1 : ℤ)).map (𝟙 _) = δ
+          simp only [CategoryTheory.Functor.map_id, Category.comp_id])
 
 /-- The ordinary direct image preserves completeness and compares to one strict
 finite reduction tower, with its coefficient-linear evaluations and augmentation.
@@ -182,7 +356,14 @@ theorem comparison (π : PadicAlgCl.integers l E.1)
         ((datum.{u} l E π hπ).push f).map ((datum.{u} l E π hπ).completionUnit X K) ≫
           ((datum.{u} l E π hπ).directImageRlimIso f).hom.app
             ((completedReductionTower X (datum.{u} l E π hπ)).obj K) := by
-  sorry
+  let d := datum.{u} l E π hπ
+  have h := d.push_complete f K ((complete_iff l E π hπ X K).mp hK)
+  have : IsIso (d.completionUnit Y ((d.push f).obj K)) := h
+  refine ⟨(complete_iff l E π hπ Y _).mpr h, ?_, inferInstance,
+    (d.towerProjection_properties f K).1, inferInstance,
+    (d.towerProjection_properties f K).2.2⟩
+  intro n
+  infer_instance
 
 
 
@@ -275,6 +456,13 @@ theorem etaleOriginComparison (π : PadicAlgCl.integers l E.1)
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (K : (datum.{u} l E π hπ).derived X) :
     FiniteEtaleOriginComparison (datum.{u} l E π hπ) f K := by
-  sorry
+  intro n H L b hb θ
+  let A := integers.{u} l E ⧸ (datum.{u} l E π hπ).ideal ^ (n + 1)
+  have : Finite A := (datum.{u} l E π hπ).quotientFinite n
+  have hm : IsIso (unboundedDirectImageComparisonMap A f L.obj) :=
+    unboundedDirectImageComparison_boundedBelow A f L.obj b
+  have hθ : IsIso ((proEtalePush A f).map θ.hom) := by infer_instance
+  dsimp only [etaleComparisonInverse]
+  exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' hθ inferInstance)
 
 end AlgebraicGeometry.Scheme.IntegralAmbientTower

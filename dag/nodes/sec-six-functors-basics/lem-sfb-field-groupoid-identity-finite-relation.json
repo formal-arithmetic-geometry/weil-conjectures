@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-field-groupoid-identity-finite-relation",
+ "kind": "statement",
+ "title": "Identity component of an unramified field groupoid",
+ "statement": "Let $S$ be a scheme and $(U,R,s,t,e,i,c)$ a groupoid in algebraic spaces over $S$, with $U=\\operatorname{Spec}K$ for a field $K$ [def-weil-field]. Assume $s,t:R\\to U$ are locally of finite type [def-weil-finite-type-morphism] and $j=(s,t):R\\to U\\times_SU$ is unramified [def-weil-unramified-morphism]. Then $R$ is a separated scheme, a disjoint union of spectra of local Artinian rings finite-dimensional over $K$ via either projection. The map $j$ is separated and locally quasi-finite. Here separated means its diagonal is a closed immersion [def-weil-closed-immersion], and locally quasi-finite means locally of finite type with discrete finite-type field fibres. The open and closed component $P=\\operatorname{Spec}B$ containing the point $e(U)$ has $B$ local Artinian, with residue field identified with $K$ by both projections. The groupoid operations restrict to $P$, the maps $s|_P,t|_P:P\\to U$ are finite locally free [def-pc-finite-locally-free], and $j|_P:P\\to U\\times_SU$ is a monomorphism. Thus on every test scheme $P$ defines an equivalence relation on $U$. Artinian means descending chains of ideals stabilize, local means one maximal ideal, and monomorphism means injectivity on every test-scheme Hom set. A groupoid in algebraic spaces means objects $U$ and arrows $R$ with source $s$, target $t$, unit $e$, inverse and composition giving groupoids on all test-scheme points, naturally under pullback; for schemes these are [def-a1-groupoid-scheme]. Algebraic spaces and fibre products use [def-trf-algebraic-space], [def-pc-fibre-product]; space morphism properties are tested on etale scheme charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N0 (lemma-DM-residual-gerbe), first paragraph, groupoid calculation only. Inputs: spaces-more-groupoids.tex Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer); spaces-over-fields.tex Tag 06LZ (lemma-locally-finite-type-dim-zero); varieties.tex Tag 06LH (lemma-algebraic-scheme-dim-0). Relative stabilizer and relation map over S."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-finite-locally-free",
+  "def-sfb-algebraic-space-groupoid"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=U\\times_SU$ and $G=U\\times_{\\Delta_{U/S},Y,j}R$. This is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Its map to $U$ is a base change of $j$, hence unramified by [lem-sfb-space-unramified-permanence]. Choose an etale surjective scheme chart $V\\to G$ using [def-trf-algebraic-space]. The chart is unramified and its composite $V\\to G\\to U$ is unramified, again by the etale and composition clauses of [lem-sfb-space-unramified-permanence]. Thus [lem-trf-unramified-field-fibre-decomposition] makes $V$ a disjoint union of spectra of finite separable extensions of $K$. Every such chart has dimension zero. The chartwise dimension convention in [lem-sfb-field-groupoid-stabilizer-dimension] gives $\\dim G=0$ (the unit gives a point of $G$), and its dimension equality gives $\\dim R=0$. Both locally finite type projections required by that equality are hypotheses of this item.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-unramified-permanence",
+    "def-trf-algebraic-space",
+    "lem-trf-unramified-field-fibre-decomposition",
+    "lem-sfb-field-groupoid-stabilizer-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), first paragraph through dim(R)=0; Tag 06FF, with the field-unramified input Tag 02G7."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-zero-dimensional-field-space-components] to $(R,s)$ and to $(R,t)$. Thus $R$ is a separated scheme with one-point open and closed components, each the spectrum of a local Artinian algebra finite-dimensional over $K$ for either structure. These are the same components for both applications because they are the individual underlying points of $R$. Let $P=\\operatorname{Spec}B$ be the component containing $e(U)$ and write $\\epsilon=e^\\sharp:B\\to K$. This is defined because the unit factors through that open component. The equations $se=te=1$ give $\\epsilon s^\\sharp=\\epsilon t^\\sharp=1_K$. Therefore $\\epsilon$ is surjective, its kernel is the unique maximal ideal $\\mathfrak m$ of $B$, and $B/\\mathfrak m\\simeq K$ via $\\epsilon$, with both structural field maps inducing the identity of $K$.",
+   "uses": [
+    "lem-sfb-zero-dimensional-field-space-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), Artinian decomposition and the identity component; Tags 06LZ and 06LH."
+   }
+  },
+  {
+   "text": "For each of the two $K$-structures on $B$, choose a finite vector-space basis beginning with $1$. It exhibits $B$ as a finite free $K$-module; tensoring a module with $B$ is a finite direct sum, so preserves injections and exact sequences. It also gives an explicit finite algebra presentation: introduce a variable for each basis vector other than $1$, and impose the finitely many multiplication-table relations $x_i x_j=\\sum_k c_{ijk}x_k$, writing $x_1=1$. Every polynomial reduces to a linear combination of the basis vectors, and their linear independence proves that the resulting presentation maps isomorphically onto $B$. Thus both maps $P\\to U$ are finite, flat and of finite presentation, hence finite locally free by [def-pc-finite-locally-free].",
+   "uses": [
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), finite flat maps from the identity component; explicit finite-basis argument for finite local freeness."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-artinian-local-noetherian-nilpotent] choose $N\\ge1$ with $\\mathfrak m^N=0$. For any choices of the two structural $K$-maps on the two factors of $B\\otimes_KB$, the ideal $I=\\mathfrak m\\otimes_K B+B\\otimes_K\\mathfrak m$ satisfies $I^{2N}=0$, and the quotient is $K\\otimes_KK=K$, because both residue structural maps are the identity. Consequently every prime contains $I$ and the tensor spectrum has exactly one point, with residue field $K$. In particular the space of composable arrows $P\\times_{s,U,t}P$ has one point, represented by the pair of units. Composition sends this point to $e(U)$ by the unit axiom, and hence factors through the open $P\\subset R$. Inversion also preserves that point, so factors through $P$. The unit already factors through $P$. Their identities hold after restriction because equality of maps into an open subscheme is tested after its inclusion. Thus all groupoid operations restrict to $P$, using the axioms of [def-a1-groupoid-scheme].",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), the assertion that P defines a subgroupoid, with its omitted tensor and restriction argument written out; nilpotence input Tag 00J8."
+   }
+  },
+  {
+   "text": "Choose an affine open $W=\\operatorname{Spec}A\\subset Y$ containing the point $j(P)$. The map $P\\to Y$ factors through $W$, since $P$ has one point. The projection $Y\\to U$ makes $A$ a $K$-algebra and $A\\to B$ compatible with the source $K$-structure. Therefore $D=P\\times_Y P=P\\times_W P=\\operatorname{Spec}(B\\otimes_A B)$ is a closed subscheme of $\\operatorname{Spec}(B\\otimes_{K,s,s}B)$: the tensor map is surjective, since every pure tensor is in its image. By the preceding nilpotent-ideal calculation this latter spectrum has one point; $D$ is nonempty because it has the diagonal $P\\to D$. Hence $D$ has exactly one point. Restricting the now scheme morphism $j$ to $P\\to W$ is unramified by [lem-weil-pbc-unramified-base-change-open]. Its diagonal $P\\to D$ is an open immersion by [def-weil-unramified-morphism]. It is surjective on the one-point space, so is an isomorphism by [def-weil-open-immersion]. This proves monicity directly: two test-scheme maps $a,b:T\\to P$ with $ja=jb$ form a map $T\\to D$; its factorization through the isomorphic diagonal forces $a=b$.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), monicity of P to U times U; equivalent diagonal proof expanding the Tag 05VH argument; scheme restriction Tag 02G6."
+   }
+  },
+  {
+   "text": "The morphism $j$ is locally quasi-finite by [lem-weil-pbc-unramified-quasi-finite-at-points], since both $R$ and $Y$ are now schemes and $j$ is unramified by hypothesis. Its diagonal is the pullback of the absolute diagonal $R\\to R\\times_{\\operatorname{Spec}\\mathbf Z}R$ along the forgetful map $R\\times_YR\\to R\\times_{\\operatorname{Spec}\\mathbf Z}R$: on every test scheme both pullbacks say that the two arrows to $R$ are equal. The absolute diagonal is closed because $R$ is separated by [lem-sfb-zero-dimensional-field-space-components]. Its pullback is closed directly from the affine quotient characterization in [def-weil-closed-immersion]: base change replaces $A/J$ by $A^\\prime/JA^\\prime$. Thus $j$ is separated. Finally on every $S$-scheme $T$, the restricted unit gives reflexivity, inversion gives symmetry, and restricted composition gives transitivity of the image of $P(T)$ in $U(T)\\times U(T)$; the monicity just proved identifies $P(T)$ with that relation.",
+   "uses": [
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-sfb-zero-dimensional-field-space-components",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N0 (lemma-DM-residual-gerbe), finite flat equivalence relation and separated locally quasi-finite j (parenthetical verification in the next paragraph); locally quasi-finite input Tag 02V5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-unramified-permanence",
+  "def-trf-algebraic-space",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-sfb-field-groupoid-stabilizer-dimension",
+  "lem-sfb-zero-dimensional-field-space-components",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-unramified-base-change-open",
+  "def-weil-unramified-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N0 (lemma-DM-residual-gerbe), first paragraph and the parenthetical verification of separated locally quasi-finite j; subgroupoid and monicity details expanded using the open diagonal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a groupoid in algebraic spaces on the spectrum of a field with unramified relation map and locally finite type projections, the identity component is a finite locally free equivalence relation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"For any scheme $X$, the identity morphism $\\\\text{id}_X : X \\\\to X$ is a finite morphism. This instance asserts that the class of finite morphisms between schemes satisfies the property of containing id\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero dimensional field groupoid has Artinian components and its identity component is a finite flat monomorphic subgroupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Subgroupoid.IsTotallyDisconnected\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → CategoryTheory.Subgroupoid C → Prop\", \"doc\": \"A subgroupoid $\\\\mathcal{S}$ is totally disconnected if for any two objects $c, d$ in $\\\\mathcal{S}.\\\\text{objs}$, the existence of a morphism $c \\\\to d$ implies $c = d$. In other words, the only morphism\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"CategoryTheory.Groupoid.IsTotallyDisconnected\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Basic\", \"type\": \"(C : Type u_1) → [CategoryTheory.Groupoid C] → Prop\", \"doc\": \"A groupoid is totally disconnected if for any two objects $ c $ and $ d $, the existence of a morphism $ c \\to d $ implies $ c = d $. In other words, the only morphisms in such a groupoid are identity \"}\n  {\"name\": \"CategoryTheory.Subgroupoid.disconnect_isTotallyDisconnected\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (S : CategoryTheory.Subgroupoid C), S.disconnect.IsTotallyDisconnected\", \"doc\": \"The subgroupoid $\\\\mathcal{S}.\\\\text{disconnect}$, consisting of identity morphisms in $\\\\mathcal{S}$, is totally disconnected. This means that for any two objects $c, d$ in $\\\\mathcal{S}.\\\\text{disconnect\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.isTotallyDisconnected_iff\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (S : CategoryTheory.Subgroupoid C),\\n  S.IsTotallyDisconnected ↔ ∀ (c d : C), (S.arrows c d).Nonempty → c = d\", \"doc\": \"A subgroupoid $\\\\mathcal{S}$ is totally disconnected if and only if for any two objects $c, d$ in $\\\\mathcal{S}$, the existence of a morphism $c \\\\to d$ implies $c = d$. Equivalently, the only morphisms \"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.finite\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], Finite ↥X\", \"doc\": \"Every Artinian scheme is a finite scheme.\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.discrete\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → CategoryTheory.Subgroupoid C\", \"doc\": \"The discrete subgroupoid of a groupoid $\\\\mathcal{C}$ is the subgroupoid consisting of all objects of $\\\\mathcal{C}$ and only the identity morphisms on each object. It is closed under composition and in\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.discrete_isNormal\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C], CategoryTheory.Subgroupoid.discrete.IsNormal\", \"doc\": \"The discrete subgroupoid of a groupoid is normal, meaning that for every identity morphism $f$ in the discrete subgroupoid and every morphism $g$ in the groupoid with $\\\\mathrm{src}(g) = \\\\mathrm{tgt}(f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional field groupoid has Artinian components and its identity component is a finite flat monomorphic subgroupoid",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.isArtinianObject_of_isZero\", \"module\": \"Mathlib.CategoryTheory.Subobject.ArtinianObject\", \"type\": \"(hX : IsZero X) : IsArtinianObject X\", \"doc\": \"In any category, a zero object is an Artinian object. This follows because the partial order of its subobjects is trivially well-founded, containing only the object itself, thus preventing any infinit\"}\n  {\"name\": \"CategoryTheory.instContainsZeroIsArtinianObjectOfHasZeroObject\", \"module\": \"Mathlib.CategoryTheory.Subobject.ArtinianObject\", \"type\": \"[HasZeroObject C] : (isArtinianObject (C := C)).ContainsZero\", \"doc\": \"In a category equipped with a zero object, the zero object itself is an Artinian object. This means that the partial order of its subobjects is trivially well-founded, as there are no infinite descend\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.discrete\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \": Subgroupoid C\", \"doc\": \"The discrete subgroupoid of a groupoid $\\\\mathcal{C}$ is the subgroupoid consisting of all objects of $\\\\mathcal{C}$ and only the identity morphisms on each object. It is closed under composition and in\"}\n  {\"name\": \"AddSubgroup.fintypeBot\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Finite\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → Fintype ↥⊥\", \"doc\": \"For any additive group $G$, the trivial additive subgroup $\\\\{0\\\\}$ is equipped with a finite type structure, asserting that it contains finitely many elements (specifically, only the zero element).\"}\n  {\"name\": \"AddSubgroup.connectedComponentOfZero\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"(G : Type u_1) → [inst : TopologicalSpace G] → [inst_1 : AddGroup G] → [IsTopologicalAddGroup G] → AddSubgroup G\", \"doc\": \"The additive subgroup of a topological additive group $G$ consisting of all elements in the connected component of the zero element. This subgroup is formed as the union of all preconnected subsets co\"}\n  {\"name\": \"IsArtinianRing.isUnitSubmonoid_eq_of_mulOpposite\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"[IsArtinianRing Rᵐᵒᵖ] : IsUnit.submonoid R = R⁰\", \"doc\": \"In an Artinian ring $ R $, the submonoid of units is equal to the submonoid of non-zero divisors.\"}\n  {\"name\": \"SetLike.GradeZero.subring\", \"module\": \"Mathlib.Algebra.DirectSum.Internal\", \"type\": \": Subring R\", \"doc\": \"The subring of a graded ring $ R $ consisting of elements in the zero-graded component $ A(0) $, which is closed under addition, multiplication, contains the additive identity $ 0 $, the multiplicativ\"}\n  {\"name\": \"GrpCat.instHasZeroObject\", \"module\": \"Mathlib.Algebra.Category.Grp.Zero\", \"type\": \": HasZeroObject GrpCat\", \"doc\": \"The category of groups has a zero object, which is an object that is both initial and terminal in the category.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|groupoid.*stabilizer|groupoid.*Artinian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid.",
+   "via": [
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-groupoid-identity-finite-relation",
+  "worker": "stage1",
+  "summary": "Checked the relative-S form of Stacks 06N0. Isolated the general field-groupoid dimension equality and zero-dimensional algebraic-space structure inputs. Wrote the residue identifications, finite-free presentations, tensor localness, subgroupoid restrictions, diagonal monicity and separatedness arguments explicitly. Reused the existing unramified, field decomposition, nilpotence and local quasi-finiteness nodes; item statement unchanged.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability section and det-thm-sf-ctf-stability-direct-images proof (3). This is the field-groupoid calculation in the inherited moduli/alteration prerequisite chain, not a change of the unit route. blueprint_refs.py ancestor reports null; inherited place and via retained. Whole-blueprint tag and concept searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-unramified-field-fibre-decomposition",
+    "why": "Generic scheme unramified-over-field decomposition, applied to etale charts of the stabilizer; not a trace-formula argument."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "why": "Generic Artinian local-ring nilpotence needed for the two tensor-product calculations."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Generic restriction of a scheme unramified map to source and target opens, applied only after representability."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic unramified implies locally quasi-finite fact, used on the scheme relation map."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products, needed to form the relative stabilizer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-cd291de02",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-cd291de02 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all cited statements in full. The item follows Stacks 06N0 (stacks-morphisms l.4193-4260), with the same chain of steps. Its monicity proof differs from the source but is valid: it uses the open diagonal of j|_P on the one-point space B⊗_A B, where B⊗_A B is a quotient of B⊗_{K,s,s}B and that ring has one point by I^{2N}=0. New node lem-sfb-field-groupoid-stabilizer-dimension is Stacks 06FF (spaces-more-groupoids l.962) with B=S. Writing G with (s,t) instead of t×s gives the same stabilizer because Δ is symmetric. It uses the chart dimension convention of spaces-properties. New node lem-sfb-zero-dimensional-field-space-components is 06LZ case (2) plus 06LH, the locally algebraic case. I checked every step. Step 1: G is unramified by base change, a chart V is a disjoint union of finite separable extensions by 02G7, and 06FF gives dim R=0. Step 2: the component decomposition is intrinsic and ε=e^♯ gives the residue field identifications. Step 3: B is finite free with a multiplication-table presentation. Step 4: I^{2N}=0, so P×_{s,U,t}P has one point and c and i restrict to P. Step 5: monicity as above. Step 6: separatedness of j as a pullback of the absolute diagonal, local quasi-finiteness from unramified, and the equivalence relation. Small cases checked: the trivial groupoid, a constant étale group, a purely inseparable pair groupoid with S=Spec k (R=P non-reduced, j=id), and a Galois pair groupoid (mono only on P). rg over the DAG found no duplicate of 06FF or 06LZ/06LH for algebraic spaces; the 06LH-type nodes are about finite-type schemes. Batch-5 flags: lem-trf-space-fibre-products-etale-covers, def-trf-algebraic-space, lem-sfb-space-unramified-permanence (closure reaches only that definition) and lem-trf-unramified-field-fibre-decomposition (02G7) are general algebraic-space and scheme foundations, not steps of the trace formula or Poincaré duality, so all are accepted. Advisory, not a fault: the item glosses locally quasi-finite as 'discrete field fibres', while the cited node gives quasi-finite at every point; the two are equivalent here. No SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidIdentityFiniteRelation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fieldGroupoid_identity_finite_relation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidIdentityFiniteRelation.lean",
+  "statement": "theorem fieldGroupoid_identity_finite_relation {S : Scheme.{u}} (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ S) (R : AlgebraicSpace S) (s t : R.obj.obj ⟶ yoneda.obj (Over.mk b)) (e : yoneda.obj (Over.mk b) ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s t ⟶ R.obj.obj) (_hgroupoid : IsPresheafGroupoid s t e i c) (_hs : ∀ (V : Over S) (a : yoneda.obj V ⟶ R.obj.obj), IsEtale a → LocallyOfFiniteType (yoneda.preimage (a ≫ s)).left) (_ht : ∀ (V : Over S) (a : yoneda.obj V ⟶ R.obj.obj), IsEtale a → LocallyOfFiniteType (yoneda.preimage (a ≫ t)).left) (_hj : ∀ (V W : Over S) (a : yoneda.obj V ⟶ R.obj.obj) (d : yoneda.obj W ⟶ yoneda.obj (Over.mk b) ⨯ yoneda.obj (Over.mk b)) (f : V ⟶ W), IsEtale a → IsEtale d → a ≫ prod.lift s t = yoneda.map f ≫ d → IsUnramified f.left) : (IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.diagonal (prod.lift s t))) ∧ (∀ (V W : Over S) (a : yoneda.obj V ⟶ R.obj.obj) (d : yoneda.obj W ⟶ yoneda.obj (Over.mk b) ⨯ yoneda.obj (Over.mk b)) (f : V ⟶ W), IsEtale a → IsEtale d → a ≫ prod.lift s t = yoneda.map f ≫ d → LocallyOfFiniteType f.left ∧ LocallyQuasiFinite f.left) ∧ ∃ (Z : Over S) (E : yoneda.obj Z ≅ R.obj.obj) (sz tz : Z ⟶ Over.mk b), Z.left.IsSeparated ∧ E.hom ≫ s = yoneda.map sz ∧ E.hom ≫ t = yoneda.map tz ∧ (∀ z : Z.left, ∃ (V : Z.left.Opens) (A : CommRingCat.{u}) (a : V.toScheme ≅ Spec A), (V : Set Z.left) = {z} ∧ IsClosed (V : Set Z.left) ∧ IsLocalRing A ∧ IsArtinianRing A ∧ (Spec.homEquiv (a.inv ≫ V.ι ≫ sz.left)).hom.Finite ∧ (Spec.homEquiv (a.inv ≫ V.ι ≫ tz.left)).hom.Finite) ∧ ∃ (P : Over S) (p : P ⟶ Z) (sp tp : P ⟶ Over.mk b) (ep : Over.mk b ⟶ P) (ip : P ⟶ P) (cp : Limits.pullback (yoneda.map sp) (yoneda.map tp) ⟶ yoneda.obj P) (B : CommRingCat.{u}) (a : P.left ≅ Spec B) (sigma tau : K →+* B) (epsilon : B →+* K), IsOpenImmersion p.left ∧ IsClosed (Set.range p.left) ∧ Subsingleton P.left ∧ IsLocalRing B ∧ IsArtinianRing B ∧ sigma.Finite ∧ tau.Finite ∧ a.inv ≫ sp.left = Spec.map (CommRingCat.ofHom sigma) ∧ a.inv ≫ tp.left = Spec.map (CommRingCat.ofHom tau) ∧ ep.left ≫ a.hom = Spec.map (CommRingCat.ofHom epsilon) ∧ Function.Surjective epsilon ∧ (∀ x : B, epsilon x = 0 ↔ ¬ IsUnit x) ∧ epsilon.comp sigma = RingHom.id K ∧ epsilon.comp tau = RingHom.id K ∧ sp.left.IsFiniteLocallyFree ∧ tp.left.IsFiniteLocallyFree ∧ IsPresheafGroupoid (yoneda.map sp) (yoneda.map tp) (yoneda.map ep) (yoneda.map ip) cp ∧ yoneda.map p ≫ E.hom ≫ s = yoneda.map sp ∧ yoneda.map p ≫ E.hom ≫ t = yoneda.map tp ∧ yoneda.map ep ≫ yoneda.map p ≫ E.hom = e ∧ yoneda.map ip ≫ yoneda.map p ≫ E.hom = yoneda.map p ≫ E.hom ≫ i ∧ (∀ (H : Over S) (v : yoneda.obj H ⟶ Limits.pullback (yoneda.map sp) (yoneda.map tp)) (w : yoneda.obj H ⟶ Limits.pullback s t), v ≫ Limits.pullback.fst (yoneda.map sp) (yoneda.map tp) ≫ yoneda.map p ≫ E.hom = w ≫ Limits.pullback.fst s t → v ≫ Limits.pullback.snd (yoneda.map sp) (yoneda.map tp) ≫ yoneda.map p ≫ E.hom = w ≫ Limits.pullback.snd s t → v ≫ cp ≫ yoneda.map p ≫ E.hom = w ≫ c) ∧ (∀ (H : Over S) (v w : H ⟶ P), v ≫ sp = w ≫ sp → v ≫ tp = w ≫ tp → v = w) ∧ (∀ H : Over S, Equivalence (fun v w : H ⟶ Over.mk b ↦ ∃ r : H ⟶ P, r ≫ sp = v ∧ r ≫ tp = w))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The separated scheme representation, singleton clopen Artinian components for both field structures, and restricted finite locally free monomorphic identity-component groupoid are recorded together. The two residue-field identifications are encoded by the unit augmentation, its exact nonunit kernel, and its splitting of both field maps. The existing algebraic-space groupoid definition is reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e06041920",
+  "group": "Q13",
+  "result": "pass",
+  "note": "I read the item, all 9 statement dependencies' declarations (AlgebraicSpace/IsRepresentableWith/IsEtale, IsPresheafGroupoid, IsUnramified=LFT∧open diagonal, IsFiniteLocallyFree, Mathlib LocallyQuasiFinite/IsClosedImmersion/pullback) and Stacks 06N0 l.4193. Every hypothesis (LFT s,t and unramified j tested on étale charts, equivalent to the Stacks definitions) and every conclusion clause matches the node: separated diagonal; chartwise LFT∧LQF; R represented by a separated scheme with singleton clopen local Artinian components finite over K both ways; one-point component P containing e, local Artinian B, ε surjective with kernel = non-units and ε∘σ=ε∘τ=id; sp,tp finite locally free; restricted IsPresheafGroupoid with s,t,e,i,c compatibility; monicity on test S-schemes; Equivalence on U(H). The lean.statement matches the file verbatim, the only sorry is the target theorem, docstrings give the source places, blueprint id and 6 proof steps, and all imports exist in side-live. The only node change is the added stmt_dep def-sfb-algebraic-space-groupoid (landed, used in the Lean). Edge cases checked: trivial, constant étale, inseparable pair, Galois pair groupoids. Note only: def-a1-groupoid-scheme stays in stmt_deps; the Lean states the restricted groupoid via IsPresheafGroupoid on Yoneda images, which is equivalent. Not compiled (no changes made)."
+ }
+}

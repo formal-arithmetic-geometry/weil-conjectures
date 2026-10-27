@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-space-derived-pushforward-coproducts",
+ "kind": "statement",
+ "title": "Quasi-coherent derived pushforward and its coproduct comparison",
+ "statement": "Work in the fixed universes [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. For an algebraic space $Z$ over $S$ [def-trf-algebraic-space], use its small etale structure sheaf $\\mathcal O_Z$, module sheaves [def-weil-sheaf-of-modules-category], and their unbounded derived category $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory of objects whose cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module]. Let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of algebraic spaces over $S$. Here quasi-compactness is tested after pullback to every affine scheme over $Y$, and quasi-separatedness means the relative diagonal is quasi-compact. Use the canonical module direct image [def-trf-space-etale-module-functors], and let $Rf_*$ be its unbounded right derived functor computed on K-injective resolutions. Then $Rf_*$ sends $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ into $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. For every small family $(E_i)$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, the map $\\bigoplus_i Rf_*E_i\\to Rf_*(\\bigoplus_iE_i)$ induced by the coproduct injections is an isomorphism in $D(\\mathcal O_Y)$. The coproducts are the ambient derived coproducts (computed by termwise direct sums of representatives). No quasi-compactness or quasi-separatedness of the individual spaces is required unless explicitly stated.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08FA, lemma-quasi-coherence-direct-image, part (1); Tag 08FB, lemma-quasi-coherence-pushforward-direct-sums; ambient sums: Tag 08F3, lemma-quasi-coherence-direct-sums."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-size-convention",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Use the small site skeletons fixed by the size convention. The module categories on the small etale sites are Grothendieck abelian. Their ambient derived coproducts are represented by termwise sums. Exactness of sums implies $H^q(\\bigoplus_iE_i)=\\bigoplus_iH^q(E_i)$ and that good truncations commute with these sums: compute their kernels and cokernels termwise. Quasi-coherent modules are closed under sums, kernels and cokernels. Consequently the ambient sum of the $E_i$ has quasi-coherent cohomology, as do their good truncations.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "src-weil-derived-homology-preserves-coproducts",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums, proof"
+   }
+  },
+  {
+   "text": "Restrict to affine etale scheme charts $a:V\\to Y$, putting $X_V=X\\times_YV$ and $g:X_V\\to V$. The chart calculus identifies $a^*Rf_*K$ with $Rg_*(K|_{X_V})$, and quasi-coherent cohomology is detected on these charts. Restriction to a slice commutes with sums: the sheafified termwise sum restricts to the sheafified sum on that slice, since its coverings are exactly the coverings over the slice object. It is exact, so it also commutes with good truncations and cohomology. These identifications take each coprojection to its restricted coprojection, hence identify the restricted canonical comparison with the comparison for $g$. The hypotheses on $g$ follow directly from the scheme-test definitions: every affine test over $V$ is one over $Y$, and the diagonal is a base change of the diagonal of $f$. We may thus prove both claims with $Y$ affine. Isomorphisms of sheaves are detected on a covering by the sheaf gluing axiom.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FA, proof: first localization on Y; Tag 08FB, local interpretation of the choice of N"
+   }
+  },
+  {
+   "text": "The canonical module direct image is left exact: its adjunction identifies maps into the image of a kernel with maps into that kernel, so it preserves kernels and the zero object; it is additive by its module-valued limit formula. For bounded below $K$ with quasi-coherent cohomology, apply the truncation spectral sequence $E_2^{p,q}=R^pf_*H^q(K)\\Rightarrow H^{p+q}(Rf_*K)$. Its $E_2$ terms are quasi-coherent by the higher-image theorem. Every next page is a kernel modulo an image of maps between such modules, so remains quasi-coherent. In each fixed total degree, the spectral sequence stabilizes and the abutment has a finite filtration. Each graded piece is therefore quasi-coherent; induction through that finite filtration, starting at zero and using extension closure, proves that every $H^r(Rf_*K)$ is quasi-coherent.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-qcoh-extension-closed",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FA, lemma-quasi-coherence-direct-image, bounded below paragraph"
+   }
+  },
+  {
+   "text": "On this affine target choose one $N\\geq1$ from the uniform upper-bound lemma. Fix $r\\in\\mathbf Z$ and put $l=r-N$. For $A=\\tau_{\\leq l-1}K$ the bound gives $H^m(Rf_*A)=0$ for $m\\geq l-1+N=r-1$, in particular for $m=r,r+1$. Apply $Rf_*$ to the truncation triangle $A\\to K\\to\\tau_{\\geq l}K\\to A[1]$. Its long exact cohomology sequence gives the natural isomorphism $H^r(Rf_*K)\\cong H^r(Rf_*\\tau_{\\geq l}K)$. The right side is quasi-coherent by the bounded below case. This proves preservation for arbitrary $K$; the chart reduction then proves it on the original target.",
+   "uses": [
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FA, last paragraph, truncation triangle"
+   }
+  },
+  {
+   "text": "For every $p\\geq0$, $R^pf_*$ preserves arbitrary sums of module sheaves. Indeed, the sum is the filtered colimit of its finite subsums, indexed by finite subsets of the indexing set (including the empty subset). The filtered-colimit lemma identifies its higher image with the colimit of the higher images of those finite subsums. Additivity of $R^pf_*$ identifies the latter with the finite subsums of $\\bigoplus_iR^pf_*M_i$: applying the additive derived functor and then cohomology preserves finite biproducts. All identifications agree with the injections, so the resulting isomorphism is the canonical comparison.",
+   "uses": [
+    "lem-sfb-space-higher-module-image-filtered-colimits",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, final sentence, using Tag 07U6"
+   }
+  },
+  {
+   "text": "For a family $K_i$ of objects with quasi-coherent cohomology and a common lower cohomological bound $a$, put $K=\\bigoplus_iK_i$ with its coprojections $u_i:K_i\\to K$; by step 1, $H^q(K)=0$ for $q<a$. The module categories are Grothendieck abelian and $f_*$ is left exact and additive (step 3). By part 2 of the truncation spectral-sequence theorem applied to $M[0]$, $H^p(Rf_*(M[0]))\\cong R^pf_*M$ naturally in the module $M$. Fix $p\\geq0$ and $r\\in\\mathbf Z$. Under these identifications the canonical map $\\bigoplus_iH^p(Rf_*(H^r(K_i)[0]))\\to H^p(Rf_*(H^r(K)[0]))$ induced by the $H^r(u_i)$ is the composite of $\\bigoplus_iR^pf_*H^r(K_i)\\to R^pf_*(\\bigoplus_iH^r(K_i))$, an isomorphism by step 5, with $R^pf_*$ of the canonical map $\\bigoplus_iH^r(K_i)\\to H^r(K)$, an isomorphism because $H^r$ preserves coproducts. So every hypothesis of the bounded-below coproduct filtration lemma holds for $F=f_*$, the maps $u_i$ and the bound $a$. For each degree $q$ it gives finite filtrations of $\\bigoplus_iH^q(Rf_*K_i)$ and $H^q(Rf_*K)$ and a filtered morphism between them whose underlying map is the canonical comparison $\\sum_iH^q(Rf_*u_i)$, with every graded map an isomorphism. The finite-filtration induction lemma shows that this comparison is an isomorphism, in every degree $q$, including $q<a$ and the empty family.",
+   "uses": [
+    "lem-pc-bounded-below-coproduct-filtration",
+    "lem-sp-finite-filtration-induction",
+    "thm-sp-truncation-e2",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "src-weil-derived-homology-preserves-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, spectral-sequence reduction to a direct sum of quasi-coherent sheaves; natural comparison through the existing bounded-below coproduct filtration"
+   }
+  },
+  {
+   "text": "For the original unbounded family and a fixed degree $r$, take the single cutoff $l=r-N$ from step 4, with $N$ independent of the family. That step gives natural degree-$r$ isomorphisms for every $E_i$ and for $E=\\bigoplus_iE_i$. Since $\\tau_{\\geq l}E=\\bigoplus_i\\tau_{\\geq l}E_i$, step 6 gives the degree-$r$ comparison for the truncated family. Naturality with respect to each injection makes the square of truncated and untruncated degree-$r$ comparisons commute. Its two vertical arrows and bottom arrow are isomorphisms; hence so is its top arrow. By cohomology of ambient sums this top arrow is $H^r$ of the requested comparison. This holds for every $r$. A derived morphism inducing isomorphisms in all degrees is invertible: represent it by a roof with left arrow a quasi-isomorphism; the right arrow is then a quasi-isomorphism too, and both arrows are inverted by localization. This also covers the empty family. Finally restrict to the affine charts of step 2 to conclude globally.",
+   "uses": [
+    "src-weil-derived-homology-preserves-coproducts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08FB, lemma-quasi-coherence-pushforward-direct-sums, unbounded reduction and shifts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-size-convention",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-trf-space-etale-module-functors",
+  "thm-sp-truncation-e2",
+  "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "lem-sfb-space-qcoh-extension-closed",
+  "lem-sfb-space-derived-pushforward-upper-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-space-higher-module-image-filtered-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-bounded-below-coproduct-filtration",
+  "lem-sp-finite-filtration-induction",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08F3, 08FA and 08FB; explicit localization and natural spectral-sequence comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct image for quasi compact quasi separated morphisms of algebraic spaces preserves quasi coherent cohomology and arbitrary coproducts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)]\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [∀ (i : I), QuasiSeparatedSpace ↥(D.obj i)],\\n  \", \"doc\": \"For any diagram of schemes where all morphisms are affine and each scheme is compact and quasi-separated, the right opposite of the global sections functor (mapping schemes to their global sections in\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this functor maps a sheaf $\\\\mathcal{F}$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the composition of the sheaf pushforward functor $ G_\\\\ast $ with the inclusion of sheaves into presheaves is naturally isomorphic to the\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this constructs a morphism between the localizers of quasi-isomorphi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quasi coherent pushforward commutes with direct sums for qcqs maps between algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).inv.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      (((AlgebraicGeometry.Scheme.Modules.pushforward (Ca\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the inverse of the natural isomorphism between the pushforward functor along $g \\\\circ f$ and the composition of pushforward functors a\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"PreservesColimitsOfShape\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coher.*direct.sum|derived.*pushforward|pushforward.*coproduct",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward of quasi coherent complexes on algebraic spaces commutes with arbitrary direct sums",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.pushforward₀_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"(R : Dᵒᵖ ⥤ RingCat.{u}) (M : PresheafOfModules R) : PresheafOfModules (F.op ⋙ R)\", \"doc\": \"Given a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the pushforward presheaf $ F_*M $ is defined as follo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) (R : CategoryTheory.Functor Dᵒᵖ RingCat) (M : PresheafOfModules R) (X : Cᵒᵖ),\\n  ((PresheafOfModules.pushforward₀_obj F R M).obj X).isModule = (M.\", \"doc\": \"Given a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the pushforward presheaf $ F_*M $ assigns to each obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ pushforward g ≅ pushforward (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  (pushforward ψ').isoWhiskerLeft (pushforwardComp φ ψ) ≪≫\\n      pushforwardComp (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ) ψ' =\\n    ((pushforward ψ').associator (pushforward ψ) (pushforward φ)).symm ≪≫\\n      isoWhiskerRight (pushforwardComp ψ ψ') (pushforward φ) ≪≫\\n  \", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"PresheafOfModules.pushforward₀_obj_obj_isAddCommGroup\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) (R : CategoryTheory.Functor Dᵒᵖ RingCat) (M : PresheafOfModules R) (X : Cᵒᵖ),\\n  ((PresheafOfModules.pushforward₀_obj F R M).obj X).isAddCommGroup\", \"doc\": \"For any categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a presheaf of rings $R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring}$, a presheaf of modules $M$ over $R$\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct image along a qcqs morphism of algebraic spaces preserves quasi coherent cohomology and all coproducts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)]\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [∀ (i : I), QuasiSeparatedSpace ↥(D.obj i)],\\n  \", \"doc\": \"For any diagram of schemes where all morphisms are affine and each scheme is compact and quasi-separated, the right opposite of the global sections functor (mapping schemes to their global sections in\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this functor maps a sheaf $\\\\mathcal{F}$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (F : CategoryTheory.Functor X.AffineZariskiSiteᵒᵖ CommRingCat)\\n  (α : (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op.comp X.presheaf ⟶ F),\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization F α →\\n    ((F.rightOp.comp AlgebraicGeometr\", \"doc\": \"Given a scheme $X$, a functor $F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing}$ equipped with a natural transformation $\\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F$ that preserves localization, the comp\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of complexes of modules with quasi coherent cohomology commutes with infinite direct sums",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pushforward_map_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\phi : S \\\\to F_*R$ between \"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"PreservesColimitsOfShape\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coher.*direct.sum|derived.*pushforward|pushforward.*coproduct",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward for quasi compact quasi separated algebraic spaces preserves arbitrary direct sums",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ pushforward g ≅ pushforward (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ : M ⟶ N) (U : Y.Opens) : ((pushforward f).map φ).app U = φ.app (f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(U) : ((pushforwardComp f g).hom.app M).app U = 𝟙 _\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"PresheafOfModules.pushforward₀_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"(R : Dᵒᵖ ⥤ RingCat.{u}) (M : PresheafOfModules R) : PresheafOfModules (F.op ⋙ R)\", \"doc\": \"Given a presheaf of modules $ M $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, and a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the pushforward presheaf $ F_*M $ is defined as follo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": PreservesColimitsOfShape (Discrete.{v} ι) forgetToSheafedSpace.{u}\", \"doc\": \"The forgetful functor from the category of locally ringed spaces to the category of sheafed spaces over commutative rings preserves colimits of discrete diagrams, i.e., coproducts. This means that the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "date": "2026-10-23",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB.",
+   "via": [
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-derived-pushforward-coproducts",
+  "worker": "stage1",
+  "summary": "Q70 follows 08FA/08FB with explicit affine etale localization, a uniform truncation bound, the bounded below quasi-coherence spectral sequence, and the natural coproduct spectral-sequence comparison. Two auxiliary statements are left unsplit, with recorded searches. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "src-weil-derived-homology-preserves-coproducts",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "lem-pc-bounded-below-coproduct-filtration",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "Generic module or derived-category machinery used as a black box in the Stacks 08FA/08FB route; the unit supplies no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "thm-sp-truncation-e2",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-bounded-below-coproduct-filtration",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-3b82fbad3",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-3b82fbad3 (reviewer sub-agent of L); spot-checked: Read spaces-perfect 08F3/08F7/08FA/08FB, spaces-cohomology 07U6/073E/073G, sites-cohomology 03FD. Item statement unchanged and matches 08FA(1)+08FB (f qcqs only; ambient coproducts; injection-induced comparison). Steps 1-5 and 7 are correct: termwise sums and exact truncations; affine étale chart localisation via lem-sfb-space-derived-etale-chart-calculus, with N chosen after localising; bounded-below E2 = R^pf_*H^q argument with finite filtration and extension closure; unbounded case via cutoff l=r-N and the upper bound (indices checked, m>=r-1); R^pf_* preserves sums as a filtered colimit of finite subsums plus additivity; single family-independent cutoff and the roof argument. Fault C3/C4/C5 in step 6: it applied thm-sp-truncation-e2's filtration and abutment identifications to the abstract couples of lem-pc-coproduct-truncation-couple, whose statement does not say they are truncation couples. It also redid the work of the existing node lem-pc-bounded-below-coproduct-filtration. FIX: step 6 now checks that node's E2 hypothesis (step 5, H^r preserves coproducts, thm-sp-truncation-e2 part 2) and cites it together with lem-sp-finite-filtration-induction. proof_deps and tool_uses updated; the unused coproduct-couple, short-five-lemma and couple-functoriality citations are removed. The new closures contain no trace-formula or Poincaré-duality nodes. New nodes accepted: upper-bound (08FA(2) shifted, N>=1, Y quasi-compact, unbounded below allowed; tested on X empty, f=id, affine f) and higher-module-image-filtered-colimits (07U6 plus 03FD, all module sheaves, small filtered J). Both are self-contained, statement-only and smaller than the item. They are not duplicates: the scheme pc-* nodes are Zariski, and lem-sfb-space-cohomology-filtered-colimit is the absolute 073E case. Batch-5 flags: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions; the three qcoh/chart lemmas reach sec-trace-formula only through def-trf-algebraic-space. None of these is part of either assumption, so all are accepted. No SGA citations. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-derived-pushforward-coproducts.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedDirectImageCoproducts",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derivedDirectImage_quasiCoherent_coproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedDirectImageCoproducts.lean",
+  "statement": "theorem derivedDirectImage_quasiCoherent_coproducts {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hqs : IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] : (∀ K : X.DerivedModules, X.derivedQCohProperty K → Y.derivedQCohProperty ((derivedDirectImage f).obj K)) ∧ (∀ (I : Type u) (E : I → X.DerivedQCoh), IsIso (sigmaComparison (derivedDirectImage f) (fun i ↦ (E i).obj)))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed canonical small-ringed-model derived calculus. The second conjunct states invertibility of the canonical sigmaComparison in the ambient derived category, with no extra coproduct-existence hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb585bec0",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Re-delivery of 645cce5d RETURN(H2). Lean module byte-identical to the returned version (maths accepted there clause by clause). The only node change is the requested stmt_dep swap lem-trf-space-qc-separated-etale-local -> def-sfb-space-quasi-compact-presheaf-map + def-sfb-presheaf-map-separated-diagonal (both existing:true owners of IsQuasiCompactPresheafMap/diagonalPresheafMap, present in base). The rest of the node equals side-live (no hidden statement change; item not yet landed). Definitions re-read: affine-test qc of the pullback, diagonal = pullback.lift id id. lean.statement verbatim; derived-category IsIso of sigmaComparison for I : Type u, ambient coproducts with no extra hypothesis; edge cases (empty or unbounded families, empty spaces, f=id) covered; no defs, sorry only, docstrings with source and blueprint, report sections present; no compile (no file changed)."
+ }
+}

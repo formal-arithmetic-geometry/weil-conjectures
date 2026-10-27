@@ -1,0 +1,250 @@
+{
+ "id": "lem-zl-constant-extension-sheet-heart-coordinates",
+ "kind": "statement",
+ "title": "Cyclic geometric sheet coordinates for constructible coefficient hearts",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$ and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme, $X=X_0\\times_{k_0}k$, $m\\ge1$, $k_m=\\mathbf F_{q^m}\\subset k$, $X_{0,m}=X_0\\times_{k_0}k_m$, and $Y=X_{0,m}\\times_{k_0}k$. Use the actual common-stage coefficient categories, constructible hearts and Weil sheaves of [def-weil-algebraically-closed-coefficients], [def-weil-constructible-heart] and [def-weil-weil-sheaf-complex], and the integral-normalized pullback comparisons of [def-zl-weil-ind-sheaf-category]. Write $g_X$ for geometric $q$-Frobenius on $X$, $H$ for geometric $q$-Frobenius on $Y$, and $P=Lg_X^*$ on the constructible heart [def-weil-frobenius-detailed].\n\nThere is a decomposition $k_m\\otimes_{k_0}k\\simeq\\prod_{\\sigma:k_m\\hookrightarrow k}k$ and a corresponding covering of $Y$ by $m$ pairwise disjoint open-and-closed sheets. For the inclusion $j_0:X\\to Y$ belonging to $k_m\\subset k$, put $h_i=H^i\\circ j_0$ for $0\\le i<m$. Each $h_i$ is an isomorphism onto one sheet, all sheets occur, and $H^m j_0=j_0g_X^m$; $g_X^m$ is geometric Frobenius for the $k_m$-model. No $k$-linearity is asserted for $h_i$.\n\nThe functor $N\\mapsto(h_i^*N)_{i=0}^{m-1}$ is an equivalence $D^b_c(Y,\\Lambda)\\simeq\\prod_{i=0}^{m-1}D^b_c(X,\\Lambda)$, with cohomology computed componentwise, for finite coefficients $A_{E,n}$, integral coefficients $\\mathcal O_E$, rational coefficients $E$ and common-stage coefficients $\\Qlb$ as in [def-weil-derived-pullback-tensor-hom]. It respects coefficient reduction and scalar extension and restricts to an exact equivalence of the standard hearts. The functor $P$ on the heart of $X$ is an exact equivalence. Writing $Y_i$ for the sheet containing the image of $h_i$ and $r_i:X\\xrightarrow{\\sim}Y_i$ for its factorization, each $r_i^*$ is an exact equivalence of hearts, even for these semilinear coordinates; $h_i^*=r_i^*\\circ j_i^*$, where $j_i:Y_i\\hookrightarrow Y$, is exact component restriction.\n\nThrough the specified pullback-composition comparisons, a constructible $k_0$-Weil sheaf $(N,\\eta)$ on $X_{0,m}$ corresponds exactly to objects $A_i=h_i^*N$ and isomorphisms $a_i:A_{i+1}\\xrightarrow{\\sim}A_i$ for $i<m-1$ and $a_{m-1}:P^mA_0\\xrightarrow{\\sim}A_{m-1}$. Morphisms correspond exactly to tuples $u_i$ with $u_i a_i=a_i'u_{i+1}$ and $u_{m-1}a_{m-1}=a_{m-1}'P^m(u_0)$. These identifications are natural and retain the integral-normalized compositors after rationalization and passage to a common coefficient stage.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7) and paragraph after (1.1.10), pp.150–152; geometric splitting, coefficient enhancement and transition-arrow coordinates (returned steps 1–2 and coordinate part of step 3)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-cyclic-sheet",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the geometric clopen sheet package from [lem-zl-constant-extension-sheet-geometry]. Apply [lem-zl-constant-extension-sheet-coefficient-equivalences] to those same sheets, then [lem-zl-constant-extension-sheet-common-stage-equivalences] to pass these coefficient equivalences and their normalizations to the actual common-stage category.",
+   "uses": [
+    "lem-zl-constant-extension-sheet-geometry",
+    "lem-zl-constant-extension-sheet-coefficient-equivalences",
+    "lem-zl-constant-extension-sheet-common-stage-equivalences"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the successor and return comparisons already defined in [def-zl-constant-extension-sheet-heart-data] componentwise into a natural isomorphism R ⋙ cycle ≅ H* ⋙ R. The component is exactly the prescribed successor or return comparison, so both HEq normalization clauses follow by selecting the appropriate branch. Naturality is the component comparison naturality.",
+   "uses": [
+    "def-zl-constant-extension-sheet-heart-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The common-stage package makes R an equivalence. Transport invertible endofunctor algebras along the preceding comparison. This transport is fully faithful: lift a carrier map by R.preimage and cancel the comparison isomorphism to check its algebra square. For essential surjectivity choose a carrier preimage X of a given algebra A with b:R(X)≅A. Lift the isomorphism e_X^(-1) followed by cycle(b), str_A, and b^(-1) through the fully faithful R. Its transport is isomorphic to A via b. This is the explicit proof fixedPairTransportEquivalence, with no new postponed assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The product.standard clauses identify the source heart-carrier condition with the componentwise target condition: apply true,0 and false,0 separately and combine pointwise. The target condition is invariant under isomorphism because each standard class is represented by an isomorphism at a finite field stage. Restrict the fixed-pair equivalence to these full subcategories using Equivalence.congrFullSubcategory. The resulting functor is definitionally the displayed IsoAlgebra.mapOfNatIso followed by the full inclusion, so identification is reflexive. Its finite-limit and finite-colimit preservation follows because it is an equivalence. Combine this constructed Weil-coordinate package with the preceding three parts to prove the original existential unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-constant-extension-sheet-geometry",
+  "lem-zl-constant-extension-sheet-coefficient-equivalences",
+  "lem-zl-constant-extension-sheet-common-stage-equivalences",
+  "def-zl-constant-extension-sheet-heart-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "A7 stage-3 reduction of geometric/coefficient/common-stage steps; complete explicit fixed-pair transport and full-heart restriction of Deligne Weil II (1.1.10)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant field base change decomposes into cyclic Frobenius sheets; pullback gives an exact product equivalence of constructible sheaf hearts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop)\\n  {L₁ L₂ : FiniteGaloisIntermediateField k K} (h : L₁ ⟶ L₂),\\n  (CategoryTheory.ConcreteCategory.hom ((finGaloi\", \"doc\": \"For any element $g$ in the inverse limit profinite Galois group of a Galois extension $K/k$, and for any morphism $h:L_1 \\\\to L_2$ between finite Galois intermediate fields, applying the Galois group f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [inst_1 : CategoryTheory.PreGaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          {X A B : C} →\\n            (f : A ⟶ X) →\\n              (g : B ⟶ X\", \"doc\": \"For a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $ over a pre-Galois category $ \\\\mathcal{C} $, and morphisms $ f : A \\\\to X $, $ g : B \\\\to X $, this establishes a bijection between $ F $ app\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite field extension the geometric scheme is a disjoint union of conjugate components and Frobenius cyclically permutes the componentwise sheaf categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"FiniteField.Extension.frob_apply\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"{x : Extension k p n} : frob k p n x = x ^ Nat.card k\", \"doc\": \"For any element $x$ in the finite field extension $L$ of $k$, the Frobenius automorphism $\\\\text{Frob}$ satisfies $\\\\text{Frob}(x) = x^{|k|}$, where $|k|$ denotes the cardinality of the base field $k$.\"}\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[CharP k p] : Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"FiniteField.instIsCyclicAlgEquivOfFinite\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"(K L) [Finite L] [Field K] [Field L] [Algebra K L] : IsCyclic Gal(L/K)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ of any finite field extension $L/K$ is a cyclic group. This means that when $L$ is a finite field and $K$ is a subfield of $L$, the group of field automorphisms of $\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L] (a : L), (FiniteField.frobeniusAlgEquivOfAlgebraic K L) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ and an algebraic field extension $ L/K $, the Frobenius automorphism in the Galois group $ \\\\mathrm{Gal}(L/K) $ is defined by raising elements of $ L $ to the power of the card\"}\n  {\"name\": \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"[Algebra.IsAlgebraic K L] : ⇑(frobeniusAlgEquivOfAlgebraic K L) = (· ^ q)\", \"doc\": \"The Frobenius automorphism of the algebraic field extension $ L/K $, viewed as an element of the Galois group $ \\\\mathrm{Gal}(L/K) $, coincides with the field automorphism that raises each element of $\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\", \"module\": \"Mathlib.FieldTheory.Finite.Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L],\\n  FiniteField.frobeniusAlgEquivOfAlgebraic K L = FiniteField.frobeniusAlgEquivOfAlgebraic K L\", \"doc\": \"For any finite field $ K $ and algebraic field extension $ L/K $, the Frobenius automorphism defined by raising elements to the power of the cardinality of $ K $ is an algebraic equivalence, and this \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct, FiniteField.frobeniusAlgEquiv",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclic.*sheet|Frobenius.*(clopen|component)|constructible.*product",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/WittVector/Frobenius.lean\", \"line\": \"210\", \"text\": \"    ghostComponent n (frobeniusFun x) = ghostComponent (n + 1) x := by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Frobenius.lean\", \"line\": \"244\", \"text\": \"    ghostComponent n (frobenius x) = ghostComponent (n + 1) x :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, FiniteField.frobeniusAlgEquiv",
+   "results": "0 hits; no cyclic sheet or twisted-return equivalence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquiv|isCyclic.*AlgEquiv|IsGalois.*Finite",
+   "results": "13 hits: Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Trace.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of a finite field: embeddings into an algebraic closure are precisely the distinct powers of Frobenius, indexed by the extension degree",
+   "results": "8 hits: FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.Extension.exists_frob_pow_eq, FiniteField.nonempty_algHom_extension, FiniteField.Extension.frob, FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclic.*sheet|sheet.*equivalence|constructible.*clopen",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of constructible adic sheaves along semilinear isomorphisms gives an exact equivalence, compatible with cyclic Frobenius coordinates of a finite constant extension",
+   "results": "8 hits: SheafOfModules.pullback, TopCat.Sheaf.pullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback_comp_id, SheafOfModules.pullbackObjFreeIso.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Equivalence",
+   "results": "12 hits: CategoryTheory.sheafBotEquivalence, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-weil-heart-equivalence",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: (1.1.7) and paragraph after (1.1.10), pp.150–152; geometric splitting, coefficient enhancement and transition-arrow coordinates (returned steps 1–2 and coordinate part of step 3).",
+   "via": [
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-constant-extension-sheet-heart-coordinates",
+  "worker": "stage1",
+  "summary": "Q57 supplies a seven-step proof using existing finite-field, clopen, isomorphism-transport and normalized-composition statements; creates no duplicate or clause nodes. Corrects the false claim that one-sheet restriction from all of Y is an equivalence: only the sheet coordinate is an equivalence, while restriction is an exact projection.",
+  "blueprint": "thm-zl-real-mixed-by-curves, proof paragraphs 1 and 5: finite constant extension, geometric components and Weil-compatible constant-field descent; the same constant-field operation in unit sk-i-dl-general-real Steps 1 and 4.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-galois-algebra-tensor-decomposition",
+    "why": "Generic Affine fibre-product consequence of a finite Galois tensor decomposition: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Generic The spectrum of a finite product of fields is a finite discrete scheme whose points are the spectra of the factors: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic Derived pullback along an isomorphism of schemes is the termwise inverse image: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-pod-isomorphism-field-transport",
+    "why": "Generic Exact isomorphism transport through integral and field coefficient stages: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Generic Finite clopen decomposition of pro-etale derived coefficient categories: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic Composition isomorphism for integral derived pullbacks: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-pod-pullback-identities-scalar-extension",
+    "why": "Generic Pullback composition and inverse identities commute with integral scalar extension: used only for its stated algebraic or coefficient-transport interface in this constant-field computation; the current unit has no replacement statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pod-isomorphism-field-transport",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-pullback-identities-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-3c62de95b",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-3c62de95b (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item's 7 steps, every cited node's statement, the unit sk-i-dl-general-real (steps 1 and 4), the only citer (the parent lem-zl-constant-extension-weil-heart-equivalence), and Deligne, Weil II, p.152, the paragraph after (1.1.10), which gives X_0⊗_{F_p}F as the disjoint union over σ of X_0⊗_{F_q,σ}F. There are no new nodes and no repair note, and no SGA source is used. STATEMENT CORRECTION accepted: the base text 'P and h_i^* on hearts are exact equivalences' is false for m≥2 with X nonempty, since h_i^* kills sheaves supported on the other sheets (test: X_0=Spec k_0, m=2). The new text keeps the product equivalence, P, the sheet coordinates r_i^* as exact equivalences, and h_i^*=r_i^*j_i^* as component restriction. It is reported under '## Statement corrected', and the parent's step 1 only uses the parts that still hold. CHECKS: Step 1: k_m⊗k≅∏k via t⊗b↦(σ(t)b), every embedding lands in k_m, and Y is a disjoint union of m clopen sheets. Step 2: Hj_σ=j_{γ^{-1}σ}g_X, checked on ring maps; h_i=j_{φ^i}g_X^i; H^m j_0=j_0g_X^m; g_X^m is the geometric Frobenius of the k_m-model. Step 3: termwise transport preserves the integral halves of the t-structure, and the field halves as isomorphism closures. Step 5: τ_i is the inverse of the compositor; a_{m-1}:P^mA_0→A_{m-1} is correctly oriented; the converse uses full faithfulness. Step 6 is elementary. Step 7 uses the associativity of lem-pod-integral-pullback-composition and Part 1 of the scalar-extension node. Edge cases m=1, m=2 and X empty pass. Not a duplicate of sheet-weil-action or split-sheet-adjunction, which concern g_*g^* and the adjunction. FIX: Step 4 said 'this is precisely R', but h_i^*=L(j_i r_i)^* is identified with Lr_i^*Lj_i^* only through the specified compositor. I added lem-weil-pbc-proetale-derived-pullback-composition, lem-pod-integral-pullback-composition and def-weil-derived-pullback-tensor-hom to its uses, with one sentence; proof_deps is unchanged. BATCH-5: lem-pod-isomorphism-field-transport (exact transport along a scheme isomorphism through the coefficient stages) and lem-pod-pullback-identities-scalar-extension (compositors commute with scalar extension) are generic coefficient infrastructure from prop-weil-operations. Neither the trace formula nor Poincaré duality states them, and they are not steps of either proof. lem-pur-finite-clopen-derived-decomposition reaches sec-trace-formula only through the Mathlib leaf lem-trf-fully-faithful-ess-surj-equivalence (fully faithful and essentially surjective implies equivalence), plus generic coherence nodes. I accept all three. The 9 declared tool_uses are generic black boxes and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionSheetHeartCoordinates",
+  "declaration": "WeilConjectures.constantExtensionSheetHeartCoordinates",
+  "declarations": [
+   "WeilConjectures.constantExtensionSheetHeartCoordinates"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantExtensionSheetHeartCoordinates.lean",
+  "statement": "theorem constantExtensionSheetHeartCoordinates : ∃ G : ZlSheetGeometry D m hm X₀, ZlSheetCoefficientClauses D m hm X₀ l hl ∧ Nonempty (ZlSheetCommonClauses D m hm X₀ l hl Ω G) ∧ Nonempty (ZlSheetWeilCoordinates D m hm X₀ l hl Ω G)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual intrinsic coefficient categories and canonical constant-extension sheet maps. Clause packages have actual data; the only postponed theorem is the item. Definition ownership: def-dl-a1-constant-extension-data for the datum/models/fibre iso/distinguished sheet, def-zl-constant-extension-cyclic-sheet for the cyclic maps, and def-weil-local-frobenius-trace for localPositivePower. Return L/H2 repaired without changing the mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37b78a944",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after L/H2 return of 1ba84047: Lean module byte-identical (mathematics previously and again checked clause-by-clause: splitting, clopen sheets, successor/return identities, Functor.pi' equivalences at finite/integral/rational/common stages with standard halves, cohomology, reduction and scalar squares, exact heart equivalences, P exact equivalence, r_i equivalence and h_i=j_i r_i, IsoAlgebra Weil coordinates pinned by HEq to zlPullComp comparisons; edge cases m=1, empty X0, n=0). Repair: new existing:true def node def-zl-constant-extension-cyclic-sheet whose lean.statement is verbatim the side-live signature (ConstantExtensionWeilHeartEquivalence:367); its statement h_i=H^i∘j∘e^{-1} matches the Lean composite; stmt_deps def-dl-a1-constant-extension-data/frobenius-detailed/finite-field-fiber own all of its data; H12 fields present. Item stmt_deps add it and def-weil-local-frobenius-trace (owns localPositivePower). Closure script: no cycle, parent theorem not cited, no same-id node on side-live. One sorry; docstrings OK; report sections present. Advisory: integralDerivedPullback unrecorded upstream helper. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ff04",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122459-L-1775850",
+  "kind": "interface",
+  "note": "independent cc review: HeartData.lean vs clone item module (verbatim 20 interfaces, only blueprint ids differ); item proof vs 3 new sorry statements + proved fixedPairTransport/sheetWeilCoordinates; sandbox --all compile + #print axioms (propext/choice/Quot.sound/sorryAx)"
+ }
+}

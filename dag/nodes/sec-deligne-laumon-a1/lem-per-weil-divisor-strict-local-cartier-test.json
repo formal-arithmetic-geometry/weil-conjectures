@@ -1,0 +1,302 @@
+{
+ "id": "lem-per-weil-divisor-strict-local-cartier-test",
+ "kind": "statement",
+ "title": "Cartierness of a fixed Weil divisor is tested on strict local rings",
+ "statement": "Let $Y$ be a Noetherian normal scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-normal-ring]: it has a finite affine cover by Noetherian rings, and each local ring is a domain integrally closed in its fraction field. A Weil divisor is a finite sum $E=\\sum_j m_j[Z_j]$, where $m_j\\in\\mathbf Z$ and the $Z_j$ are distinct integral closed subschemes of codimension one. At the generic point of $Z_j$ its coefficient is measured by the normalized discrete valuation of the corresponding one-dimensional normal local ring. A Cartier divisor is a family of local nonzero rational functions whose ratios on overlaps are regular units; it is effective if its equations belong to the local rings. For a geometric point $\\bar y$ put $R=\\mathcal O_{Y,\\bar y}$, the strict henselization of $\\mathcal O_{Y,y}$ [def-sc-ring-strict-henselization]. Then $R$ is a Noetherian normal local domain. The pullback $E_R$ has coefficient $m_j$ at each height-one prime over the germ of $Z_j$ containing $y$, and coefficient zero elsewhere; this defines the usual pullback of Weil divisors under strict localization. The analogous rule defines pullback to etale neighborhoods, and is compatible with further strict localization.\n\nFix an integer $a>0$. The Weil divisor $aE$ is Cartier if and only if for every geometric point $\\bar y$ there exists $c_{\\bar y}\\in\\operatorname{Frac}(R)^\\times$ with $\\operatorname{div}_R(c_{\\bar y})=aE_R$. Here $\\operatorname{div}_R(c)$ is the sum of its normalized height-one valuations. If $E$ is effective, the generators can be taken in $R\\setminus\\{0\\}$; the resulting global Cartier divisor is effective and has support $\\bigcup_{m_j\\ne0}|Z_j|$. In that case, near every geometric point there is a pointed etale neighborhood on which this effective Cartier divisor has a single non-zero-divisor equation.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent-formulated strict-local consequence of Tags 0EBM (lemma-normal-class-group, rank-one reflexive modules and Weil classes), 0AY6 (lemma-reflexive-over-normal), and 0BE8 (lemma-normal-c1-injective, proof identifying zero valuations with units); faithful-flat local freeness descent: algebra.tex Tag 00O1 (lemma-finite-projective-descends); normality under etale maps: etale.tex Tag 025P (proposition-etale-normal). This is the precise local test used in ILO VIII 5.3.8, p.125, not a verbatim Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sc-ring-strict-henselization",
+  "def-per-cartier-fraction-cover"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=aE$. Apply the clopen-component result with the identity etale map of $Y$. Normality means all local rings are reduced domains, so each open irreducible component is integral. Thus we may cover $Y$ by integral affine opens $U=\\operatorname{Spec}A$ with $A$ Noetherian normal. On each $U$ form the concrete module $I_A(D|_U)$ of the divisorial-lattice lemma. Its localization rule makes the associated sheaves agree as fractional submodules on overlaps, so they glue to a coherent sheaf $\\mathcal I(D)$ of finite presentation. Its stalk at $y$ is $I_{A_y}(D_y)$ for $A_y=\\mathcal O_{Y,y}$, a finite rank-one reflexive fractional module. The empty scheme needs no equations and satisfies the conclusion.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-a1-normal-etale-components-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, construction of the reflexive module attached to a divisor, applied componentwise."
+   }
+  },
+  {
+   "text": "For a geometric point over $y$, the strict-henselization triples theorem identifies $R$ with a local filtered colimit of etale $A_y$-algebras, with local structural map. The existing Noetherianity theorem and normal-domain colimit theorem show that $R$ is a Noetherian normal domain. The existing faithful-flatness theorem makes $A_y\\to R$ faithfully flat. Consequently the ind-etale valuation comparison applies to this map.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-per-ind-etale-height-one-valuation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LJ (lemma-henselization-noetherian), 06DI (lemma-henselization-normal), 07QM (lemma-dumb-properties-henselization), and 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres)."
+   }
+  },
+  {
+   "text": "For an ind-etale map $A\\to B$ between the Noetherian normal domains in question, each height-one prime $\\mathfrak q$ contracts to a height-one prime $\\mathfrak p$, with unchanged normalized valuation. Define the coefficient at $\\mathfrak q$ to be $d_{\\mathfrak p}$. Only finitely many coefficients are nonzero: $D$ has finite support and the existing finite-separable-fibres lemma gives only finitely many primes of $B$ above each supported prime. This defines $D_B$, and the same argument defines $E_B$. For a tower, contraction of primes is transitive, so the coefficient obtained by two pullbacks equals the coefficient obtained directly; valuations are compatible by composing their equalities. Apply this on the integral affine components of etale neighbourhoods (normality is preserved by etale maps, and their rings are locally Noetherian by the finite-type-algebra Noetherianity lemma, since the etale definition supplies local finite presentation), and to the strict-local map from Step 2. The pulled-back coefficients are exactly the rule in the statement; $D_R=aE_R$.",
+   "uses": [
+    "lem-per-ind-etale-height-one-valuation",
+    "lem-weil-pbc-henselization-finite-separable-fibres",
+    "lem-a1-normal-etale-components-clopen",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AH1; coefficient calculation using unchanged normalized valuations. Etale definition and Tag 00FN (algebra-lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Let $A=A_y$ and $M=\\mathcal I(D)_y=I_A(D_y)$. Flatness identifies $M\\otimes_A R$ with its image in $\\operatorname{Frac}(R)$ (tensor the inclusion $M\\subset\\operatorname{Frac}(A)$ and then localize). The flat-reflexivity lemma makes this image finite reflexive. At a height-one prime $\\mathfrak q\\subset R$ over $\\mathfrak p$, its localization is $\\pi_{\\mathfrak p}^{d_{\\mathfrak p}}R_{\\mathfrak q}$ by the lattice formula and tensor localization. The valuation comparison makes $\\pi_{\\mathfrak p}$ a uniformizer there. Thus this lattice equals $I_R(D_R)_{\\mathfrak q}$. Both fractional modules equal the intersection of their height-one lattices, so\n$$\\mathcal I(D)_y\\otimes_{A_y}R=I_R(D_R).$$\nAlso, for any normal Noetherian domain $T$ and $c\\in\\operatorname{Frac}(T)^\\times$ with $\\operatorname{div}_T(c)=F$, the same lattice formula gives $I_T(F)_{\\mathfrak q}=cT_{\\mathfrak q}$; taking intersections gives $I_T(F)=cT$. These are direct comparisons of the cited height-one formulas, with no freeness assertion added.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-per-ind-etale-height-one-valuation",
+    "lem-per-flat-base-change-reflexive-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0EB9 and 0AVB; compare localized fractional modules, then intersect."
+   }
+  },
+  {
+   "text": "If $D$ is Cartier, take its nonzero rational equation $f$ near $y$. The valuation comparison shows that its image $c_{\\bar y}$ in $\\operatorname{Frac}(R)$ has divisor $D_R$. Conversely, suppose all the required $c_{\\bar y}$ exist. Choose a geometric point over each $y$. Step 4 gives $\\mathcal I(D)_y\\otimes R=c_{\\bar y}R$, a free rank-one module. Apply finite-projective descent along the flat local map $A_y\\to R$: $\\mathcal I(D)_y$ is finite free. Its rank is one because its fraction-field extension has dimension one. The prescribed-stalk-basis spreading lemma gives an open neighbourhood of $y$ with a single basis section $f_y$ of $\\mathcal I(D)$. On every height-one stalk there, equality $\\mathcal I(D)=f_y\\mathcal O$ and the lattice formula force $v(f_y)$ to equal the coefficient of $D$. On overlaps, $f_y\\mathcal O=f_z\\mathcal O$, so $f_y/f_z$ and its inverse are regular, hence their ratio is a unit. The equations $f_y$ therefore define a Cartier divisor with Weil divisor exactly $D$, proving the equivalence for this fixed $a$.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-per-ind-etale-height-one-valuation",
+    "lem-weil-pbc-finite-projective-descends-flat-local",
+    "lem-trf-finite-presentation-stalk-basis-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM and Algebra Tag 00O1 (lemma-finite-projective-descends); Modules Tag 0B8J (lemma-finite-presentation-stalk-free)."
+   }
+  },
+  {
+   "text": "Under these equivalent conditions, suppose $E$ is effective. The coefficients of $D=aE$ and $D_R$ are nonnegative, so the effective-ideal clause gives $I_R(D_R)\\subset R$. Step 4 implies $c_{\\bar y}\\in R\\setminus\\{0\\}$, even for the generators originally supplied. Likewise $\\mathcal I(D)\\subset\\mathcal O_Y$, so the local basis sections $f_y$ are regular and nonzero on their integral components; they are non-zero-divisors. Thus the glued Cartier divisor is effective. On an affine chart its ideal has radical $\\bigcap_{am_j>0}\\mathfrak p_j$, so its support is the union of those $|Z_j|$. Since $a>0$ this is precisely $\\bigcup_{m_j\\ne0}|Z_j|$. Each open chart carrying $f_y$ is already an etale neighbourhood of $y$; lift the given geometric point through this open immersion. It has the asserted single non-zero-divisor equation. For $E=0$ the ideal is the whole structure sheaf and one may use the equation $1$, with empty support.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, effective fractional ideals; final equations and support from the lattice formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-a1-normal-etale-components-clopen",
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-per-flat-base-change-reflexive-modules",
+  "lem-per-ind-etale-height-one-valuation",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-finite-presentation-stalk-basis-spread",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-finite-projective-descends-flat-local",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/more-algebra.tex; literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent assembly of Tags 0EBM, 0AVB, 0EB9, 0AH1, 00O1 and 0B8J, for the etale-local check in ILO VIII 5.3.8, printed p.125."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|Weil.*[Cc]artier|[Cc]artier.*[Hh]ensel",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"grep\", \"query\": \"WeilDivisor|Weil.*[Cc]artier|[Cc]artier.*[Hh]ensel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. The Weil-divisor cycle predicates do not supply Cartierness or strict-local testing.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartierness of a fixed effective Weil divisor can be checked on strict local rings by a principal equation with prescribed orders",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"leansearch\", \"query\": \"Cartierness of a fixed effective Weil divisor can be checked on strict local rings by a principal equation with prescribed orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt\", \"PowerSeries.weierstrassDiv\"], \"digest\": \"374e8306800479ed\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDivisor\"",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilDivisor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor\", \"AlgebraicGeometry.AlgebraicCycle.weilDivisors\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_zero\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_single\", \"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.neg\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_neg\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_iff\", \"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.coheight_eq_one\"], \"digest\": \"0fabed86f69e230a\"}; Read the returned hits. The Weil-divisor cycle predicates do not supply Cartierness or strict-local testing.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil divisor on a normal Noetherian scheme is Cartier if and only if its pullback to each strict henselian local ring is principal",
+   "results": "{\"t\": \"2026-10-24T00:30:49Z\", \"tool\": \"leanfinder\", \"query\": \"A Weil divisor on a normal Noetherian scheme is Cartier if and only if its pullback to each strict henselian local ring is principal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"IsDedekindDomain.isPrincipalIdealRing_localization_over_prime\"], \"digest\": \"9cb4599ee8adfa95\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil divisor on a normal Noetherian scheme is Cartier if and only if it is principal on all strict henselizations",
+   "results": "{\"t\": \"2026-10-24T01:30:00Z\", \"tool\": \"leanfinder\", \"query\": \"A Weil divisor on a normal Noetherian scheme is Cartier if and only if it is principal on all strict henselizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"IsDedekindDomain.isPrincipalIdealRing_localization_over_prime\", \"IsDedekindDomainDvr\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\"], \"digest\": \"1d5af552a2e8458e\"}; Weil cycle predicates, Dedekind-domain principal-ideal facts and Weierstrass division do not state the strict-local Cartier test for arbitrary Noetherian normal schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDivisor\"",
+   "results": "{\"t\": \"2026-10-24T01:29:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilDivisor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor\", \"AlgebraicGeometry.AlgebraicCycle.weilDivisors\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_zero\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_single\", \"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.neg\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_neg\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_iff\", \"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.coheight_eq_one\"], \"digest\": \"0fabed86f69e230a\"}; Weil cycle predicates, Dedekind-domain principal-ideal facts and Weierstrass division do not state the strict-local Cartier test for arbitrary Noetherian normal schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|Cartier.*hensel|hensel.*Cartier",
+   "results": "{\"t\": \"2026-10-24T01:29:57Z\", \"tool\": \"grep\", \"query\": \"WeilDivisor|Cartier.*hensel|hensel.*Cartier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Weil cycle predicates, Dedekind-domain principal-ideal facts and Weierstrass division do not state the strict-local Cartier test for arbitrary Noetherian normal schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil divisors Cartier divisors strict henselization local principal",
+   "results": "{\"t\": \"2026-10-24T01:29:57Z\", \"tool\": \"leansearch\", \"query\": \"Weil divisors Cartier divisors strict henselization local principal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.toIsLocalRing\", \"IsDedekindDomain.isPrincipalIdealRing\", \"instHenselianRingMaximalIdeal\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.IsWeierstrassDivisorAt.div_add\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisor\", \"AlgebraicGeometry.StructureSheaf.isFractionPrelocal\"], \"digest\": \"f1a89fad5fed5933\"}; Weil cycle predicates, Dedekind-domain principal-ideal facts and Weierstrass division do not state the strict-local Cartier test for arbitrary Noetherian normal schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-very-tame-boundary-quotient-cartier",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, the regular-pair modification input: ILO VIII 5.3.8, printed p.125, sentence beginning “it suffices to check this étale-locally at a point”; strict-local test for a fixed multiple, rather than only its support.",
+   "via": [
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-weil-divisor-strict-local-cartier-test",
+  "worker": "stage1",
+  "summary": "Construct divisorial fractional modules and compare their height-one lattices after strict localization. Descend finite projectivity to ordinary local rings, spread rank-one bases, and glue rational equations by equality of their fractional ideals. Three new statement-only general algebra lemmas; existing strict-local and descent inputs reused. Effectivity, fixed multiplicity, supports, etale equations and empty cases checked.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3 regular-pair modification input, as refined through the existing ancestor chain; the fixed-multiple etale-local assertion of ILO VIII 5.3.8, printed p.125. Latest blueprint searched for Cartier, Weil divisor, divisorial, reflexive, height-one and source tags; no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-normal-etale-components-clopen",
+    "why": "Generic tool: Clopen irreducible components of an etale scheme over a normal base. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic tool: Strict henselization is faithfully flat. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic tool: Strict henselization preserves Noetherianity of local rings. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-trf-finite-presentation-stalk-basis-spread",
+    "why": "Generic tool: A prescribed finite stalk basis spreads to a free neighbourhood. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic tool: A local filtered colimit of etale algebras over a normal domain is a normal domain. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic tool: An etale algebra over a normal ring is a normal ring. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-descends-flat-local",
+    "why": "Generic tool: Finite projective modules descend along flat local homomorphisms. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic tool: Finitely generated algebras over Noetherian rings are Noetherian. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-finite-separable-fibres",
+    "why": "Generic tool: A Noetherian filtered colimit of etale algebras has finite separable fibres. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic tool: The colimit over etale algebras with a point and a residue embedding is strictly henselian. The divisorial-module proof uses precisely this statement; this unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-normal-etale-components-clopen",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-finite-presentation-stalk-basis-spread",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-finite-projective-descends-flat-local",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-964f0698d",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-964f0698d (reviewer sub-agent of L); spot-checked: I read the item and its three new nodes in full. I read the statement of every cited node and the Stacks sources: 0EB9 statement and proof, 0AVB(3), 0AH1, 0EBM, 0B8J. The item statement is unchanged; on the A_1 cone, the fixed multiple a=2 holds and a=1 fails, as the statement predicts. Step 1: clopen components give integral Noetherian normal charts; the localization rule of the lattice lemma glues a finitely presented subsheaf of K. Step 2: triples, Noetherian, normal-domain colimit and faithful flatness give a Noetherian normal domain R with A_y->R injective, local and flat; the pairs definition of the strict henselization is the triples category over m, which is elementary. Step 3: the new ind-etale node gives height and valuation comparison; the 0AH1 node gives finite support; etale charts are covered by etale-normal, the etale definition and 00FN; towers follow from transitivity of contraction. Step 4: flat embedding into Frac R, 0EB9 reflexivity, height-one lattices pi^d R_q, intersection of lattices; the principal case gives I(div c)=cT. Step 5: the flat local finite-projective descent leaf, rank 1, then the 0B8J spread; overlap ratios are units. Step 6: the effective-ideal and radical clauses give c in R, non-zero-divisor equations and support = union of Z_j; Zariski charts serve as etale neighbourhoods; E=0 gives equation 1. All three new nodes are true and statement-only, and none is a duplicate: the nearest nodes are lem-sc-etale-local-dimension, lem-sc-strict-henselization-dimension, lem-sfb-etale-stalk-invariants and lem-sc-divisor-module-local, which give only dimension or curve statements. All declared tool_uses are generic algebra and accepted. Batch 5: lem-trf-finite-presentation-stalk-basis-spread is Stacks 0B8J, a generic module-sheaf lemma; its closure is 13 generic nodes with no trace-formula or Poincare content and it is not part of either assumed proof, so it is allowed. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.WeilDivisorStrictLocalCartierTest",
+  "declaration": "AlgebraicGeometry.Scheme.isCartierWeilMultiple_iff_strictLocal",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.strictLocalWeil_normal_finite",
+   "AlgebraicGeometry.Scheme.exists_etaleWeilPullback_strictLocal_compatible",
+   "AlgebraicGeometry.Scheme.isCartierWeilMultiple_iff_strictLocal",
+   "AlgebraicGeometry.Scheme.effectiveWeilMultiple_strictLocal_equations"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/WeilDivisorStrictLocalCartierTest.lean",
+  "statement": "theorem isCartierWeilMultiple_iff_strictLocal (Y : Scheme.{u}) [IsNoetherian Y] (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) (E : AlgebraicCycle Y ℤ) (hE : ∀ z : Y, E z ≠ 0 → ringKrullDim (Y.presheaf.stalk z) = 1) (a : ℤ) (ha : 0 < a) : IsCartierWeilMultiple Y E a ↔ IsStrictLocallyPrincipalWeilMultiple.{u, v} Y E a",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e300cba5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Read item, new node def-per-cartier-fraction-cover, both modules, deps (IsNoetherian/IsLocallyNoetherian, inline normal form, StrictHenselizationPresentionIn with actual universal cocone, Ring.weilOrder/weilFractionOrder/WeilHeightOnePrime, Mathlib Ring.ord, AlgebraicCycle, fromSpecStalk). All clauses match: fixed a>0 iff, every y and separable closure K and presentation H in max u v, contracted coefficient rule, étale pullback + strict-local compatibility, Noetherian normal local domain plus finite support, effective cover with support ⋃ closures, r∈H nonzero, single non-zero-divisor equation on a pointed étale neighbourhood (determined by orders on normal V). Edge cases empty Y, E=0, disconnected Y, negative coefficients, field strict ring covered. No duplicate: existing Cartier nodes are effective ideal sheaves, integral-scheme or algebraic-space divisors; Mathlib Scheme.ord needs integral. Statement verbatim, docstrings/blueprint tags, sorry-only proofs, proof_dep imports exist, report sections present. Not recompiled (no fix). Advisory only: s is fixed by its orders rather than tied explicitly to C."
+ }
+}

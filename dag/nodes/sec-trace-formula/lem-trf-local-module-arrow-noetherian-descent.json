@@ -17,96 +17,53 @@
  ],
  "proof": [
   {
-   "text": "Apply the directed local tower theorem to R→S→S and M. Both targets are essentially of finite presentation over R by hypothesis, and the second map is the local identity. Write the resulting tower R_i→A_i→S_i. Its clauses (1), (3), (4), (5) supply ring colimits, finite cokernel presentations for M_i, and the two adjacent ring localization comparisons and module comparisons. By composition of essentially finite type maps, R_i→S_i is essentially of finite type. Finite-type Noetherianity and localization Noetherianity, starting with the Noetherian ring Z, make R_i, A_i and S_i Noetherian. A finite-type algebra over R_i is finitely presented by the cited Noetherian finite-presentation result, so the chosen finite-type algebra whose localization is S_i can be chosen finitely presented.",
+   "text": "Apply the local tower theorem to R→S→S and M, with the identity as the second map. Its hypotheses follow from the given localization presentation and finite presentation of M. Write the output R_i→B_i→S_i with module models T_i. Apply the supplied-tower collapse lemma to these exact diagrams: it gives Noetherianity, essential finite type of R_i→S_i, and the canonical transition and limit localizations. The tower statement supplies finite cokernel presentations for T_i and canonical identifications T_i⊗S≅M.",
    "uses": [
     "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-essentially-finite-type-composition",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+    "lem-trf-local-tower-collapse-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00R7 (lemma-criterion-flatness-fibre), approximation paragraphs; 07DS (lemma-composition-essentially-of-finite-type); 00FN and 00FP"
+    "place": "Tag 00R7, approximation paragraphs, applied to the identity upper local map; returned steps 1–2."
    }
   },
   {
-   "text": "For i≤j apply the composite tower localization lemma with (A,B,C)=(R_i,A_i,S_i) and (A′,B′,C′)=(R_j,A_j,S_j). The two hypotheses are precisely clause (4) of the tower theorem. Its conclusion is the required canonical localization S_i⊗_{R_i}R_j→S_j, with s⊗r sent to s_{ji}(s)r. Apply the same lemma with (A′,B′,C′)=(R,S,S) and the cocone maps, using clause (5), to obtain the required limit localization S_i⊗_{R_i}R→S. The identity between the two copies of S is allowed; no equality of A_i and S_i is asserted.",
+   "text": "Pass from the supplied directed preorder to its antisymmetrization. Choosing representatives gives a final functor back to the preorder, so the top ring cocone remains a colimit. Use the object clause of affine module descent to model both M and N at stages, after replacing each limit module by its finite-presentation small representative. Move the two models to a common upper stage by scalar extension, which preserves finite presentation. Conjugate u by their limit identifications and use the morphism clause to descend it to a further stage c. Transport the canonical-colimit result to the supplied cocone using its unique ring isomorphism and the extension-restriction equivalence. Thus P,Q over S_c and v:P→Q have fixed identifications S⊗P≅M and S⊗Q≅N carrying 1⊗v to u.",
    "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-tensor-localization-tower-transition"
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00R7, transition and limit localization comparisons, composed by the generic tensor-localization tower lemma"
+    "place": "Tag 05N7 (lemma-colimit-category-fp-modules), clauses (1),(2); Tag 00QX, tensoring the finite presentation."
    }
   },
   {
-   "text": "Apply algebraic finite-presentation module descent to the directed ring colimit S=colim S_i. Its object clause gives a finitely presented model Q at some stage with Q⊗S≅N. Choose a common later stage with a tower model for M and base-change both models there. Finite presentation is preserved here simply by tensoring their finite cokernel presentations. Conjugate u by their limit identifications and apply the morphism clause to descend this map at a further stage c. Put P=M_c and let Q denote the base-changed model for N at c; write v:P→Q for the descended map. Thus there are fixed identifications P⊗_{S_c}S≅M and Q⊗_{S_c}S≅N under which v⊗1 is u. All rings and modules are placed in one common sufficiently large universe, as permitted by the descent theorem.",
+   "text": "Restrict to j≥c and apply the fixed-arrow scalar-extension diagram theorem to (S_i), P,Q,v. Its specified formulas supply the module transitions, arrow squares, finite presentations, canonical transition/limit isomorphisms, and algebraic group colimits. Compose its limit cocones with the fixed identifications to M,N; these send v⊗1 to u, so they give exactly the displayed canonical maps and equations. The tail is final: an upper bound of any i and c lies in it. Final-tail colimit invariance retains both ring colimits. Their algebraic element criteria persist because any representing or equality stage can be advanced to an upper bound with c. Locality, Noetherianity and ring localization comparisons simply restrict. Thus every requested clause holds on this tail, in a common sufficiently large universe. To preserve the independent module universe, apply Mathlib Algebra.FiniteType.small to the finite type integer subalgebra of each essentially finite type stage ring. Its submonoid and their product are small; IsLocalization.mk'_surjective and small_of_surjective show that the localized stage ring is small in the requested universe. Finite stage modules are small by Module.Finite.small. Use Shrink with its transported module structure and linear equivalence, and conjugate every diagram map and comparison. Use Mathlib Types.FilteredColimit.isColimitOf with the transported representative and eventual equality criteria to construct the colimits of underlying types. A proved private lifting lemma for any filtered category upgrades a colimit of underlying types to an additive-group colimit: the universal descending function is additive because any two elements have representatives at a common stage; IsColimit.ofFaithful supplies factorization and uniqueness. The argument handles independent index and group universes and changes no statement.",
    "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-trf-fixed-arrow-scalar-extension-diagram",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05N7 (lemma-colimit-category-fp-modules), clauses (1),(2), the affine algebraic case of Limits Tag 01ZR"
-   }
-  },
-  {
-   "text": "Restrict the ring diagrams to j≥c. This is a nonempty directed tail: for an old index i, an upper bound of i,c belongs to it. Apply final-tail colimit invariance (equivalently its stated cofiltered opposite form) to retain the ring colimits. On this tail define M_j=P⊗_{S_c}S_j, N_j=Q⊗_{S_c}S_j and u_j=v⊗1. Set m_{kj}(x⊗a)=x⊗s_{kj}(a) and n_{kj}(y⊗a)=y⊗s_{kj}(a). Define μ_j(x⊗a)=a μ_c(x), using the old tower cocone on P, and ν_j(y⊗a)=a ν_c(y), using the fixed identification Q⊗S≅N. These formulas are balanced and additive; they give the required semilinearity, identities, compositions and cocone equations directly. On x⊗a the arrow square reads v(x)⊗s_{kj}(a) on both sides, and ν_j u_j=u μ_j follows from the descended limit identity.",
-   "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, simultaneous approximation paragraph; 00QX, clauses (5),(6); tensor universal property, Tag 00CX"
-   }
-  },
-  {
-   "text": "For either L=P or L=Q the transition comparison is (L⊗S_j)⊗_{S_j}S_k→L⊗S_k, (x⊗a)⊗b↦x⊗s_{kj}(a)b. Its inverse sends x⊗b to (x⊗1)⊗b; balancing verifies the two composites. The same formulas with S instead of S_k give the limit comparisons, followed by the fixed identifications with M,N. They are exactly the canonical maps displayed in the statement, and application to v(x) proves the asserted compatibility with u. Tensoring a finite presentation of L over S_c with S_j supplies a finite presentation of each stage module; this uses only that a tensor product of a cokernel is the cokernel of the tensored map, immediately from the tensor universal property.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00CX and 00QX, presentation construction and canonical tensor comparisons"
-   }
-  },
-  {
-   "text": "The underlying group colimit of L⊗_{S_c}S_j is L⊗_{S_c}S: for compatible additive maps to a group H, define the induced map on x⊗s by choosing a representative s in S_j and applying the j-th map to x⊗s_j. Equality of representatives at a later stage proves independence; a common stage proves additivity and balancing, hence existence and uniqueness by the tensor presentation. For completeness the algebraic element criterion for each directed ring or group colimit follows from its explicit construction: take stage elements modulo the relation that they agree at some common upper stage, and perform each finite ring or group operation at a common stage. This quotient has the colimit universal property; therefore it agrees with the colimits already obtained and gives exactly the representation and eventual-equality clauses in (2). Steps 1–5 now give all other clauses. Empty finite presentations and zero v include zero modules and the zero map.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, simultaneous approximation conclusion; Tag 00QX (1),(6); elementary directed-colimit construction"
+    "place": "Tag 046Y, first proof paragraph; Tag 00QX, clauses (1),(6), with final-tail restriction."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-module-tensor-product",
   "lem-pc-fp-module-map-descent-affine",
+  "lem-trf-fixed-arrow-scalar-extension-diagram",
+  "lem-trf-local-tower-collapse-noetherian",
   "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-essentially-finite-type-composition",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-tensor-localization-tower-transition"
+  "lem-weil-pbc-limit-tower-essentially-finite-presentation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 046Y (lemma-mod-injective-general), simultaneous finite-presentation approximation paragraph, expanded with Tags 00QX and Limits 01ZR for the module arrow"
+  "place": "Algebra, Tag 046Y (lemma-mod-injective-general), simultaneous finite-presentation approximation paragraph, expanded with Tags 00QX and Limits 01ZR for the module arrow; Lean assembly by F8, including antisymmetrization, Mathlib smallness and underlying-type colimit transport; duplicate-helper repair on 2026-10-24."
  },
  "mathlib_searches": [
   {
@@ -179,43 +136,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-local-module-arrow-noetherian-descent",
   "worker": "stage1",
-  "summary": "Reviewer repair: cite essential-finite-type composition and the composite tower localization comparison, and use the existing algebraic affine module/map descent theorem directly. Explicit scalar-extension formulas verify both transition/limit comparisons, module-arrow compatibility, finite presentations, and algebraic colimits. The statement is unchanged; no new nodes.",
-  "blueprint": "Realizes the first proof paragraph of the 046Y helper invoked by lem-trf-local-term-locality: common Noetherian approximation, finite module/map descent, and the common-tail localization comparisons.",
+  "summary": "Repair of the 4421-character returned proof: extract two independently usable, statement-only arguments, supplied-tower Noetherian collapse and fixed-arrow scalar-extension realization. Keep the statement unchanged. The parent is a three-step assembly using the existing local tower, affine module/map descent and final-tail theorem. Full old argument and its allocation are retained in report.md.",
+  "blueprint": "The 046Y simultaneous approximation helper below lem-trf-local-term-locality: tower collapse, descent to a common stage, and realization on a final tail, following the same Stacks route.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "why": "Generic simultaneous local Noetherian ring and one finite-module approximation from the algebraic Tag 00R7 route; this trace-formula unit has no algebraic replacement."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
-    "why": "Noetherianity of finite-type stage algebras used to turn the tower's essential finite-type stages into the stated Noetherian rings."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "why": "Finite type over a Noetherian stage is finite presentation, needed for the item's localization-of-finitely-presented-algebra wording."
-   },
-   {
-    "node": "lem-weil-pbc-localization-noetherian",
-    "why": "Noetherianity survives the localizations used in the stage rings."
-   },
-   {
-    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
-    "why": "Generic final-tail colimit transport when all data are restricted to one common directed tail."
+    "why": "Generic local ring and one-module approximation; the trace unit uses this algebraic helper on the existing route."
    },
    {
     "node": "lem-pc-fp-module-map-descent-affine",
-    "why": "Generic algebraic object and arrow descent for finitely presented modules over the directed ring colimit; no scheme-module comparison is needed."
+    "why": "Object and morphism descent for the supplied ring colimit, with no change of the geometric unit route."
    },
    {
-    "node": "lem-weil-pbc-essentially-finite-type-composition",
-    "why": "Generic composition of the two stage essential-finite-type ring maps."
-   },
-   {
-    "node": "lem-weil-pbc-tensor-localization-tower-transition",
-    "why": "Composes the adjacent tower localization comparisons to the canonical R_i-to-S_i transition and limit comparisons."
+    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
+    "why": "Generic final-tail colimit transport for the restricted ring diagrams."
    }
   ]
  },
@@ -230,12 +167,12 @@
   "lem-weil-pbc-tensor-localization-tower-transition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q113-8e911d4ee",
-  "group": "Q113",
+  "reviewer": "NT-cc-NW-b3078f0e3",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-8e911d4ee (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, unit/chapter route, and Stacks 046Y, 00QV, 00QX, 00R7, 01ZR and 05N7. Repaired three citation faults using existing composition, composite-localization and algebraic module-descent nodes. Statement unchanged; edge cases checked; corrected closure has no missing references or cycles. Wrote review.md and the whole corrected item JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b3078f0e3 (reviewer sub-agent of L); spot-checked: I read the whole re-split delivery against the released repair note of 2026-10-22 and the 6-step base proof on side-live, and the mathematics passes. The statement is unchanged. The new parent proof has 3 steps and 1900 characters; it assembles the tower theorem (00QX), the module descent node lem-pc-fp-module-map-descent-affine (05N7), the final-tail Mathlib leaf and two new statement-only nodes of comparable size (2256 and 1936 characters). Every old argument lands somewhere. Old steps 1-2 (essential finite type composition, Noetherian permanence, finite presentation of the presenting algebra, both composite localizations, ring element criterion) go into lem-trf-local-tower-collapse-noetherian. Old steps 4-6 (explicit tail transitions and cocones, arrow squares, tensor comparison isomorphisms, finite presentations, additive colimits with the element criterion) go into lem-trf-fixed-arrow-scalar-extension-diagram. Old step 3 stays as parent step 2, an assembly of the existing 05N7 node. Both new statements are true and neither restates the item, since both start from diagrams that are already supplied. Collapse: 00FN/07DS/00FP plus the composite-localization node (C_i⊗A_j = C_i⊗_{B_i}(B_i⊗A_j)); it correctly does not claim the limit rings are Noetherian. Fixed-arrow: right exactness and associativity of ⊗, the tail is final, ⊗ commutes with directed colimits. I tested singleton I, zero rings and modules, the zero map, non-injective and non-flat transitions. Duplicate check: noetherian-local-model-tower and its categorical-conversion node overlap only in part (they need module data and state the limit comparison as U^{-1}(R⊗S_i)≅S), and base-change-diagram-elementwise and the finite-presentation-*-diagram nodes do not match. Stacks 046Y/00QX/00QV/00R7/05N7 checked in algebra.tex. I accept the three declared tool uses as generic algebra. No SGA. FIX: both new nodes had a blueprint.from.via that listed the item twice and left out lem-trf-valuation-general-mod-injective. I replaced it with the chain computed by blueprint_refs and wrote whole corrected files under fixes/dag/nodes/sec-trace-formula/. Maintainer note: the base item's own via starts with itself, a pre-existing fault.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.LocalModuleArrowNoetherianDescent",
@@ -255,5 +192,26 @@
   "result": "pass",
   "note": "Reviewed packet, node, dependencies, source references, module, report, edge cases, route-pivot constraints, and compiler evidence. Per-file scompile completed successfully; no substantive or mechanical faults found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261023T231140-L-3552975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

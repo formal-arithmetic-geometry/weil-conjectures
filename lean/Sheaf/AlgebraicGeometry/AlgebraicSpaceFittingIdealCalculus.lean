@@ -1,0 +1,126 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q38
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentIdeal
+public import Sheaf.AlgebraicGeometry.AlgebraicSpaceCommAlgebraSheaf
+public import Sheaf.RingTheory.FittingIdealZero
+public import Mathlib.CategoryTheory.Subobject.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+
+import Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineChartCalculus
+import Sheaf.AlgebraicGeometry.SpaceChartTensorRealization
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineEtaleCover
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceModulePullbackQuasiCoherent
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import Mathlib.Algebra.Module.FinitePresentation
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+
+/-!
+# Zeroth Fitting ideals on algebraic spaces
+
+Source: Stacks Project, Divisors on Spaces, Tags 0CZ3, 0CZ4 and 0CZ5, at index zero
+(blueprint: lem-sfb-space-fitting-ideal-calculus).
+
+The affine characterization fixes an ideal as a subobject of the structure module.
+Arbitrary pullback uses the image of the canonical tensor map into the structure module.
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace AlgebraicGeometry.AlgebraicSpace
+
+/-- The affine-chart characterization of the zeroth Fitting ideal. On every affine etale
+chart the section module is finite and the inclusion has image its existing ring-theoretic
+zeroth Fitting ideal. The second equality explicitly retains the maximal kernel-row
+formula for every finite free generating surjection, including rank zero.
+Source: Stacks Project, Tag 0CZ3; More on Algebra, Tags 07Z8 and 07ZA
+(blueprint: lem-sfb-space-fitting-ideal-calculus). -/
+def IsZerothFittingIdeal {S : Scheme.{u}} {X : AlgebraicSpace S}
+    (M : X.Modules) (I : QuasiCoherentIdeal X) : Prop :=
+  ∀ (U : X.EtaleSite), IsAffine (X.etaleForget.obj U) →
+    ∃ h : Module.Finite (X.commStructureSheaf.obj.obj (op U)) (M.val.obj (op U)),
+      Set.range (I.val.arrow.val.app (op U)) =
+        (↑(@LinearMap.fittingIdealZero (X.commStructureSheaf.obj.obj (op U)) _
+          (M.val.obj (op U)) _ _ h) : Set (X.commStructureSheaf.obj.obj (op U))) ∧
+      ∀ (n : ℕ)
+        (π : (Fin n → X.commStructureSheaf.obj.obj (op U)) →ₗ[
+          X.commStructureSheaf.obj.obj (op U)] M.val.obj (op U)),
+        Function.Surjective π → Set.range (I.val.arrow.val.app (op U)) =
+          (↑(π.presentationFittingIdeal 0) : Set (X.commStructureSheaf.obj.obj (op U)))
+
+/-- A finitely presented quasi-coherent module has a unique zeroth Fitting ideal with the
+specified affine restrictions. This ideal is of finite type. Arbitrary tensor pullback
+preserves finite presentation and quasi-coherence, and its Fitting ideal is the image of
+the canonical map from the pulled-back ideal into the structure sheaf.
+Source: Stacks Project, Tags 0CZ3, 0CZ4 and 0CZ5, at index zero
+(blueprint: lem-sfb-space-fitting-ideal-calculus).
+
+Proof:
+1. Restrict M to each etale scheme chart using
+   lem-sfb-space-qcoh-cartesian-chart-family. Transfer to ordinary scheme modules using
+   lem-trf-scheme-zariski-etale-quasi-coherent-equivalence. The affine finiteness test in
+   lem-sfb-space-qcoh-affine-chart-calculus makes these modules finite type. Construct
+   their scheme Fitting ideals by lem-trf-fitting-ideal-sheaf-pullback. Its base-change
+   formula, and the etale restriction clause of
+   lem-trf-space-chart-adjunction-tensor-realization, identify the ideals as submodules
+   along every chart map.
+2. The transition identifications satisfy the cocycle because their inclusions into the
+   structure sheaf are monic. Glue the compatible ideals and inclusions by
+   lem-sfb-space-qcoh-cartesian-chart-family. The kernel is quasi-coherent by
+   lem-sfb-space-qcoh-kernels-colimits and zero on affine charts by the affine-chart
+   calculus, so the glued map is monic. Its affine sections are the zeroth Fitting ideal;
+   lem-trf-fitting-ideal-independence-base-change identifies these with every kernel-row
+   presentation ideal. A second ideal has the same chartwise inclusions; full faithfulness
+   of the chart-family equivalence identifies the subobjects uniquely.
+3. On an affine chart choose a finite presentation A^m to A^n to M to zero, using
+   def-sc-finitely-presented-module. Write its relation rows as r_1,...,r_m. Every
+   determinant of n kernel rows expands, by def-weil-pbc-matrix-determinant, as a finite
+   sum of products of coefficients times determinants of n-tuples of these relation
+   rows. Thus the ideal is generated by at most m^n determinants. For n=0 the empty
+   determinant is 1; for m=0<n all rows are zero. The finite-type chart test proves the
+   ideal is of finite type.
+4. For g:X' to X choose an affine etale cover of X by lem-a1-space-affine-etale-cover,
+   base change it by lem-trf-space-fibre-products-etale-covers, and refine the resulting
+   cover of X' by affine etale charts Spec B mapping to Spec A. Pullback is quasi-coherent
+   by lem-sfb-space-module-pullback-quasicoherent. The chart-tensor composition and etale
+   restriction formulas, followed by the Zariski-etale comparison and
+   lem-weil-pbc-module-pullback-affine-sections, identify the restricted pullback with
+   B tensor_A M(A). Naturality identifies the canonical ideal map with b tensor j mapped
+   to b times the image of j. All comparisons preserve the specified adjunction units.
+5. By lem-pc-fp-module-base-change this tensor module is finitely presented. The
+   affine-chart calculus gives local finite free presentations on the covering charts,
+   hence the required finite presentation on X'.
+6. The image of B tensor_A I(A) to B is the extended ideal I(A)B. The arbitrary ring-map
+   clause of lem-trf-fitting-ideal-independence-base-change identifies this with the
+   zeroth Fitting ideal of B tensor_A M(A). Images are quasi-coherent by
+   lem-sfb-space-qcoh-kernels-colimits and computed by the affine-chart calculus.
+   Consequently the two ideal subsheaves agree on the covering charts, and membership
+   of sections glues to give equality globally. Injectivity of the tensor map is never
+   asserted. -/
+theorem existsUnique_zerothFittingIdeal {S : Scheme.{u}} (X : AlgebraicSpace S)
+    (M : X.Modules) (hM : M.IsFinitePresentation) (hqc : M.IsQuasicoherent) :
+    ∃ I : QuasiCoherentIdeal X,
+      IsZerothFittingIdeal M I ∧
+      (∀ J : QuasiCoherentIdeal X, IsZerothFittingIdeal M J → J = I) ∧
+      (I.val : X.Modules).IsFiniteType ∧
+      ∀ (X' : AlgebraicSpace S) (g : X' ⟶ X),
+        ((moduleTensorPullback g).obj M).IsFinitePresentation ∧
+        ((moduleTensorPullback g).obj M).IsQuasicoherent ∧
+        ∃ I' : QuasiCoherentIdeal X',
+          IsZerothFittingIdeal ((moduleTensorPullback g).obj M) I' ∧
+          I'.val = Subobject.mk (image.ι (idealTensorMap g I)) := by
+  sorry
+
+end AlgebraicGeometry.AlgebraicSpace

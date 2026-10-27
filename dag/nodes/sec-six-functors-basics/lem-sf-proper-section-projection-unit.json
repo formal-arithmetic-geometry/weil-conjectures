@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-proper-section-projection-unit",
+ "kind": "statement",
+ "title": "Projection at the unit along a proper section",
+ "statement": "Let \\(A\\) be a finite commutative ring and let \\(s:X\\to W\\) and \\(p:W\\to X\\) be proper morphisms of schemes such that \\(s;p=\\mathrm{id}_X\\). Write \\(S=Rs_!\\), \\(P=Rp_!\\), and \\(U=S(\\mathbf1_X)\\). Let \\(\\alpha:\\mathrm{Id}\\simeq P\\circ S\\) denote properSectionPushIso, constructed from the canonical identity, equality and composition comparisons, and let \\(\\ell:s^*\\circ p^*\\simeq\\mathrm{Id}\\) denote leftDerivedUpperStarCompSectionIso (semicolons in the formula denote composition in application order). Let \\(\\kappa:S\\simeq U\\otimes p^*(-)\\) be properSectionTensorIso, the actual composite of the inverse pullback section comparison, its pushforward, and projectionUnitIso; its component is \\(\\kappa_M=S(\\ell_M^{-1});\\operatorname{projectionUnitIso}_s(p^*M)\\). Use the canonical tensor, symmetry, right unitor \\(\\rho\\), projectionUnitIso and outside-first orderedProjection \\(\\pi\\) of [def-sf-supported-diagonal-calculus]. For every \\(M\\in D_A(X)\\),\n\\[\n\\alpha_M;P\\bigl(\\kappa_M;\\operatorname{swap}_{U,p^*M}\\bigr)\n=\\rho_M^{-1};(\\mathrm{id}_M\\otimes\\alpha_{\\mathbf1_X});\\pi_{p,M,U}.\n\\]",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Projection naturality in both diagonal-coordinate triangle computations, specialized to the unit of an arbitrary proper section. Stacks Project: sites-cohomology.tex, Tag 0B56; categories.tex, Tag 0DV0."
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use canonical proper projection composition for s,p and the equal composite id. Naturality of its direct-image compositor moves the pullback section comparison inward. The pullback compositor followed by that section comparison equals the identity pullback comparison. Apply canonical identity projection normalization, obtaining the section projection square for every inside factor V.",
+   "uses": [
+    "lem-sf-proper-projection-composition",
+    "lem-sf-identity-projection-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize V to the tensor unit. The inverse of properSectionTensorIso is computed from its actual isomorphism factors, using a generic functor-category calculation. Postcompose the section square with the twice-pushed left unitor. Its naturality and naturality of properSectionPushIso give the unordered unit square; cancel the inverse section tensor isomorphism. Naturality of canonical tensor symmetry moves the unit component of the section push isomorphism past the swap. The canonical equality rho_M.inv followed by beta_(M,1) equals lambda_M.inv yields exactly orderedProjection.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-projection-composition",
+  "lem-sf-identity-projection-normalization",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Q2: complete section/unit cancellation from canonical proper projection composition and canonical identity projection normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula naturality diagonal section insertion derived tensor",
+   "results": "Eight hits, including LinearMap.proj_comp_single and CategoryTheory.CartesianMonoidalCategory.tensorHom_fst. None states the derived section/projection normalization or the direct-image compositor identity.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; existing abstract projection coherence needs specialization to the concrete compact-support comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*section|section.*projection",
+   "results": "24 hits in Mathlib, mostly topology, module complements, and simplicial projections; no derived projection section identity. Also searched project for rightDerivedLowerShriekCompIso, diagonalIso, idIsoDiagonalSnd, and diagonalFirst.",
+   "date": "2026-10-27",
+   "verdict": "The library has the concrete canonical maps and abstract ringed projection section coherence, but no theorem identifying these concrete composites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfDiagonalInsertionProjection",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; Projection naturality in both diagonal-coordinate triangle computations, specialized to the unit of an arbitrary proper section.",
+   "via": [
+    "lem-sf-diagonal-insertion-projection",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfProperSectionProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfProperSectionProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.properSectionProjectionUnit",
+  "statement": "theorem properSectionProjectionUnit {X W : Scheme.{u}} (s : X ⟶ W) (p : W ⟶ X)\n    [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X) (M : DerivedCategoryModule A X) :\n    (properSectionPushIso A s p h).hom.app M ≫\n        (push A p).map\n          ((properSectionTensorIso A s p h).hom.app M ≫\n            (CoordinateTrace.swap A W\n              ((push A s).obj (derivedTensorUnit (ModuleCat.{u + 1} A) X))\n              ((CoordinateTrace.pull A p).obj M)).hom) =\n      (unitRightUnitor (ModuleCat.{u + 1} A) X M).inv ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n          ((properSectionPushIso A s p h).hom.app\n            (derivedTensorUnit (ModuleCat.{u + 1} A) X)) ≫\n        (orderedProjection A p M\n          ((push A s).obj (derivedTensorUnit (ModuleCat.{u + 1} A) X))).hom",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SupportedTrace.properSectionPushIso",
+   "AlgebraicGeometry.Etale.SupportedTrace.properSectionTensorIso",
+   "AlgebraicGeometry.Etale.SupportedTrace.properSectionProjectionUnit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T012902-L-2344025",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T064502-L-2187715",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

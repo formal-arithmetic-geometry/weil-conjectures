@@ -30,58 +30,34 @@
  ],
  "proof": [
   {
-   "text": "Put $M=Lf^*K$ and $T=\\Lambda_X(d)$. By [def-coefficient-twists-detailed],\n$M(d)[2d]=(M\\otimes^L T)[2d]$. Compute the tensor using a K-flat\nrepresentative $P\\to M$ as in [def-weil-derived-tensor]. The degree-$r$\nterms of both $(P\\otimes T)[2d]$ and $P\\otimes T[2d]$ are\n$P^{r+2d}\\otimes T$; their differential is $d_P\\otimes1$ on both sides,\nsince $T$ is in degree zero and $(-1)^{2d}=1$. These are the total-tensor\nand shift conventions of [def-pc-tensor-complex-sheaves] and\n[def-weil-abstract-derived-category]. The identity on these terms thus\ngives the canonical reassociation\n$a_M:M(d)[2d]\\xrightarrow{\\sim}M\\otimes^L T[2d]$.\nThe calculation is functorial in $P$ and $T$, so is the displayed\nidentification on derived objects, with no extra scalar or sign.",
+   "text": "Put $M=Lf^*K$ and $T=A_X(d)$ [def-coefficient-twists-detailed]. The full-domain theorem [thm-pur-diagonal-dualizing-object] supplies the specified $\\Pi_f:\\omega_f\\xrightarrow{\\sim}T[2d]$, without absolute separatedness of $X,Y$. The canonical tensor map $\\theta_{f,K}:M\\otimes_A^L\\omega_f\\xrightarrow{\\sim}Rf^!K$ is invertible by [thm-pur-cohomological-smoothness]. Apply [lem-pur-oriented-derived-tensor-transport] with parameter $K\\in D^b_{ctf}(Y,A)$, $P(K)=Lf^*K$ and $H(K)=Rf^!K$. Its sign-free reassociation $a_M$, inverse orientation and tensor map give\n$$\\gamma_{f,K}=\\theta_{f,K}\\circ(1_M\\otimes\\Pi_f^{-1})\\circ a_M.$$\nThis is the specified arrow order of [def-pur-smooth-purity-map]; its inverse and naturality follow from the transport lemma. No new chart orientation is introduced.",
    "uses": [
     "def-coefficient-twists-detailed",
-    "def-weil-derived-tensor",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012Z, definition-associated-simple-complex (the two total-complex differential formulas); Stacks sites-cohomology.tex Tags 06YL and 06YM; the imported item Proof, twist reassociation"
-   }
-  },
-  {
-   "text": "Apply [thm-pur-diagonal-dualizing-object] to the given $f:X\\to Y$. Its statement assumes precisely finite-type $k$-schemes in the exceptional-image domain and a smooth separated morphism of pure relative dimension $d$; it does not assume that $X$ or $Y$ is separated over $k$. It supplies the canonical isomorphism\n$$\\Pi_f:\\omega_f=Rf^!\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_X(d)[2d].$$\nUse this specified map itself. In particular, no second orientation is constructed on source-affine charts and no equality between two chart constructions is required. The symbol $\\Pi_f$ here is exactly the diagonal-purity isomorphism named in [def-pur-smooth-purity-map].",
-   "uses": [
     "thm-pur-diagonal-dualizing-object",
-    "def-pur-smooth-purity-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
-    "place": "The inverse of the identification of thm-pur-diagonal-dualizing-object; original unit Step 1, realized by the existing diagonal theorem"
-   }
-  },
-  {
-   "text": "Put $M=Lf^*K$. By [thm-pur-cohomological-smoothness], the specified canonical tensor map\n$$\\phi_{f,K}:M\\otimes_A^L\\omega_f\\xrightarrow{\\sim}Rf^!K$$\nis an isomorphism for the given smooth separated $f$ and bounded constructible finite-Tor $K$. Define\n$$\\gamma_{f,K}=\\phi_{f,K}\\circ(1_M\\otimes\\Pi_f^{-1})\\circ a_M.$$\nThe arrow $a_M$ is Step 1; the middle arrow uses the inverse of the very map of Step 2. Tensoring the two inverse equations for $\\Pi_f$ gives inverse equations for this middle arrow. Thus all three arrows are invertible, and so is their composite. This is exactly the arrow order and the specified orientation in [def-pur-smooth-purity-map]. It is natural in $K$: reassociation is functorial by Step 1, $\\Pi_f$ is fixed independently of $K$, and the canonical tensor map is natural in $K$.",
-   "uses": [
     "thm-pur-cohomological-smoothness",
+    "lem-pur-oriented-derived-tensor-transport",
     "def-pur-smooth-purity-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
-    "place": "The three-arrow composite, with the diagonal theorem supplying its middle arrow"
+    "place": "Three-arrow composite: twist reassociation, inverse orientation and canonical tensor map; extraction of returned proof Steps 1 and 3."
    }
   },
   {
-   "text": "For normalization, use a statement about the specified smooth purity maps. On a separated finite-type base $S$, [lem-pur-projection-purity-agreement] states that for $p_d:\\mathbf A^d_S\\to S$ the map defined using the diagonal orientation equals $\\Gamma_{p_d,K}$. The latter is the ordered composite of adjoint transposes of the restricted projective-line Kummer traces, for every $A=A_{E,n}$; for $d=0$ it is $1_K$. Thus the model normalization belongs to the map $\\Pi$ used in Step 2, rather than to a separately constructed orientation. The lemma is used only on its stated separated-base model domain, not as a theorem about arbitrary nonseparated bases.\n\nThe actual finite-level site comparison [lem-pur-vector-integration-site-comparison] gives $t_q^ph_q^p=1$ for the prescribed Kummer class, identifies the restricted projective-line traces and their integration adjoint transposes on the two sites, and states independence of the annihilating exponent $r$. These statements apply to every $E,n$ and require no divisibility by the ramification index. The reassociation of Step 1 adds no sign, and Step 3 uses the fixed diagonal orientation and fixed tensor transformation, so introduces no new scalar choice. Finally [def-pur-smooth-trace] defines the trace of these very maps by\n$$\\operatorname{Tr}^{\\mathrm{sm}}_{f,K}=\\epsilon_{f,K}\\circ Rf_!(\\gamma_{f,K}).$$\nConsequently the twist $d$, shift $2d$, and trace are fixed with the stated Kummer normalization. This uses no property of a new source-affine construction. It also makes no specialization of a result restricted to $E=\\mathbf Q_\\ell$.",
+   "text": "On the separated-base affine models, [lem-pur-diagonal-affine-trace-site-comparison] identifies the trace of this diagonal-defined map with ordered restricted Kummer integration and identifies its adjoint transpose on the two sites. It includes $t_q^ph_q^p=1$, rank zero, all $E,n$, and independence of the annihilating exponent. It is used only on its separated model domain. For general $f$, [def-pur-smooth-trace] fixes the trace as $\\epsilon_{f,K}\\circ Rf_!(\\gamma_{f,K})$. The given $\\Pi_f$, tensor map and sign-free reassociation therefore fix twist $d$, shift $2d$ and trace with that normalization; no further scalar is chosen.",
    "uses": [
-    "lem-pur-projection-purity-agreement",
-    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-diagonal-affine-trace-site-comparison",
     "def-pur-smooth-trace"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
-    "place": "Normalization sentence of the corollary and the original unit model paragraph, using the stated all-level projection-agreement and site-comparison maps"
+    "place": "Three-arrow composite: twist reassociation, inverse orientation and canonical tensor map; extraction of returned proof Steps 1 and 3."
    }
   },
   {
-   "text": "For a Cartesian square with $f'$ the base change of $f$ and bottom\nmap $v:Y'\\to Y$, put $e=Lu^*\\gamma_{f,K}$,\n$e'=\\gamma_{f',Lv^*K}$, and let $b$ be the canonical pullback-and-twist\nidentification from the source of $e$ to the source of $e'$. By the\nexplicit statement of [def-pur-smooth-pullback-exchange],\n$\\operatorname{Ex}^{!,\\mathrm{sm}}=e'\\circ b\\circ e^{-1}$.\nConsequently\n$$\n\\operatorname{Ex}^{!,\\mathrm{sm}}\\circ Lu^*\\gamma_{f,K}\n=e'\\circ b\\circ e^{-1}\\circ e=e'\\circ b,\n$$\nwhich is precisely the square of [thm-pur-smooth-base-change-coherence].\nThe latter statement applies to arbitrary $v$ between the finite-type\nschemes here, with no flatness, smoothness or etaleness condition on\n$v$. This is compatibility for the chapter's defined smooth exchange;\nit makes no identification with a different right-adjoint mate.",
+   "text": "For a Cartesian square in the stated finite-type domain put $e=Lu^*\\gamma_{f,K}$ and $e'=\\gamma_{f',Lv^*K}$. If $b$ is the canonical pullback-and-twist source identification, [def-pur-smooth-pullback-exchange] gives $\\operatorname{Ex}^{!,\\mathrm{sm}}=e'\\circ b\\circ e^{-1}$. Cancelling $e^{-1}e$ gives $\\operatorname{Ex}^{!,\\mathrm{sm}}\\circ e=e'\\circ b$, precisely [thm-pur-smooth-base-change-coherence]. Its domain allows arbitrary $v$; no flatness, smoothness or etaleness of $v$ is required.",
    "uses": [
     "def-pur-smooth-pullback-exchange",
     "thm-pur-smooth-base-change-coherence"
@@ -93,7 +69,7 @@
    }
   },
   {
-   "text": "Let $g:Y\\to Z$ also be smooth separated of pure relative dimension\n$e$, with $Z$ in the same scheme domain, and let $K\\in D^b_{ctf}(Z,\\Lambda)$.\nThe maps constructed in Step 3 are the smooth purity maps to which\n[thm-pur-composition-coherence] applies. Its displayed identity is\n$$\n\\gamma_{gf,K}\n=c_{g,f}^{-1}\\circ\\gamma_{f,Rg^!K}\\circ\nLf^*(\\gamma_{g,K})(d)[2d],\n$$\nunder its canonical identification of the source with\n$L(gf)^*K(d+e)[2d+2e]$. This proves composition compatibility for the\nspecified maps, with the order of exceptional pullbacks fixed by\n$c_{g,f}:R(gf)^!\\cong Rf^!Rg^!$. In particular the twists add as $d+e$\nand the even shifts add as $2d+2e$; no inference from mere existence of\nisomorphisms, or from tensor invertibility alone, is used.",
+   "text": "For $g:Y\\to Z$ smooth separated of dimension $e$ and $K\\in D^b_{ctf}(Z,A)$, apply [thm-pur-composition-coherence] to the same specified maps:\n$$\\gamma_{gf,K}=c_{g,f}^{-1}\\circ\\gamma_{f,Rg^!K}\\circ Lf^*(\\gamma_{g,K})(d)[2d].$$\nIts source comparison is $L(gf)^*K(d+e)[2d+2e]$ and its exceptional compositor is $c_{g,f}:R(gf)^!\\cong Rf^!Rg^!$. Thus the twists and even shifts add in exactly the required order.",
    "uses": [
     "thm-pur-composition-coherence"
    ],
@@ -106,14 +82,11 @@
  ],
  "proof_deps": [
   "def-coefficient-twists-detailed",
-  "def-weil-derived-tensor",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
   "thm-pur-diagonal-dualizing-object",
-  "def-pur-smooth-purity-map",
   "thm-pur-cohomological-smoothness",
-  "lem-pur-projection-purity-agreement",
-  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-oriented-derived-tensor-transport",
+  "def-pur-smooth-purity-map",
+  "lem-pur-diagonal-affine-trace-site-comparison",
   "def-pur-smooth-trace",
   "def-pur-smooth-pullback-exchange",
   "thm-pur-smooth-base-change-coherence",
@@ -122,7 +95,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
-  "place": "The three-arrow proof verbatim in route: twist reassociation, existing canonical diagonal orientation, canonical tensor formula. Normalization expanded using the stated projection-agreement and finite-level integration comparisons; coherence uses the existing typed statements."
+  "place": "Current blueprint three-arrow assembly; mandatory 2026-10-21 re-split of the 5406-character returned argument. K-flat oriented tensor transport and affine-model trace/site identification are separate statement-only nodes; existing diagonal and coherence theorems are retained."
  },
  "mathlib_searches": [
   {
@@ -199,15 +172,26 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "cor-pur-dualizing-object-purity",
   "worker": "stage1",
-  "summary": "Repaired the maintainer return: replaced the duplicate diagonal/DNC localization and gluing by one application of the reviewed full-domain diagonal theorem; withdrew both unneeded new nodes. The middle arrow now uses its specified Pi_f directly, so no chart-comparison assertion remains. Rebased normalization on the all-E, all-n projection-purity-agreement and integration-site-comparison statements, rather than properties of a second construction. Preserved reassociation, tensor arrow order, defined smooth exchange and composition; recomputed proof dependencies and verbatim quotations. No new nodes, Lean or compiler.",
-  "blueprint": "Current main-20261015 corollary proof, its three-arrow composite: Steps 1-3. Original sk-thm-smooth-purity diagonal/DNC Steps 1-3 are delegated to their reviewed carrier thm-pur-diagonal-dualizing-object, as the current corollary explicitly prescribes. The original unit model paragraph is used through lem-pur-projection-purity-agreement in Step 4. Steps 5-6 realize the corollary compatibility sentence.",
+  "summary": "Q84 repair of the mandatory re-split: preserved the statement and all six returned arguments, extracting two independent statement-only tasks (oriented K-flat derived tensor transport, and diagonal affine trace/site comparison). The assembly retains the specified diagonal orientation, canonical tensor map, full scheme domain, all finite coefficient levels, trace definition, arbitrary smooth exchange and exceptional composition. Full old text and argument-to-task map retained in report.md.",
+  "blueprint": "Main-20261015 corollary three-arrow proof: assembly Step 1 and oriented tensor node. Kummer-normalization sentence and original unit model paragraph: assembly Step 2 and affine trace node. Base-change and composition sentence: assembly Steps 3-4. No unit route changes.",
   "tool_uses": []
  },
  "tool_uses": [
@@ -218,16 +202,20 @@
   "lem-pur-sheaf-hom-cover-gluing"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q20-d6020fc09",
-  "group": "Q20",
+  "reviewer": "NT-cc-Q84-21fcf4806",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d6020fc09 (reviewer sub-agent of L); spot-checked: I read the repaired item in full, every cited statement, the unit, the master and main-20261015 corollary sources, the full proof of the diagonal theorem, and the previous return. Against the base, only proof, proof_deps, proof_origin, status and split_report changed; the statement and stmt_deps are unchanged. There are no new nodes, and the two withdrawn nodes exist nowhere and are cited by nothing. All four requested repairs are done. Step 2 now cites thm-pur-diagonal-dualizing-object, whose hypotheses (finite-type X,Y in the exceptional-image domain, f smooth separated of pure dimension d, no absolute separatedness) are exactly the item's. def-pur-smooth-purity-map names Pi_f as that map, which removes the old E5/C3 chart-comparison fault. Step 1: the reassociation has no sign, since (-1)^{2d}=1 and T is in degree 0; this is the definition's tau. Step 3: the arrow order theta∘(1⊗Pi_f^{-1})∘tau matches def-pur-smooth-purity-map; the tensor formula is thm-pur-cohomological-smoothness (1). Step 4: lem-pur-projection-purity-agreement (separated model, all E and n, d=0 gives 1_K) and lem-pur-vector-integration-site-comparison (t^p h^p=1, the trace comparisons, independence of r, no e|n) are both in the item's own unit and are used by statement only. The lemma's orientation beta∘delta∘alpha^{-1} agrees with the diagonal theorem's local orientation theta_i. Step 5: Ex is the defined composite gamma'∘b∘(Lu^*gamma)^{-1}, not a right-adjoint mate; v is arbitrary, and cancelling gives the coherence square. Step 6: the composition identity is quoted verbatim. proof_deps equals the union of the steps' uses; there is no cycle (closure of 14,371 nodes); the route stays in the own unit plus sk-prop-cohsm; no SGA source and no off-route tool is used. The coefficients are D^b_ctf(A_{E,n}) on the pro-etale site and the target is not weakened. Edge cases checked: d=0, K=0, empty X, doubled-origin base, e not dividing n. Notes for the maintainer, not delivery faults: the node-level tool_uses still lists five tools the proof no longer uses and should be cleared at merge; def-pur-smooth-purity-map still says separated X,Y, which needs aligning with the full domain; the statement's '(constructed below …)' wording is slightly stale. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-21fcf4806 (reviewer sub-agent of L); spot-checked: Re-split note (released 2026-10-22: at least 2 nodes, assembly at most 3000 characters) is fulfilled. Against live, only proof, proof_deps, proof_origin and split_report changed. The statement, stmt_deps and Lean record are unchanged. The 6-step proof of 5406 characters became 4 assembly steps of 2329 characters. The old Steps 1 and 3 (K-flat even-shift reassociation with sign (-1)^{2d}=1, composite θ∘(1⊗Π^{-1})∘a, inverse, naturality) are now lem-pur-oriented-derived-tensor-transport. I checked by hand that both complexes have the term Q^{r+2d}⊗T with differential d_Q⊗1. Old Step 4 is now lem-pur-diagonal-affine-trace-site-comparison. It follows from projection-purity-agreement (γ=Γ), the composite-integration and transpose lemmas, and vector-integration-site-comparison (trivial bundle: η^p=C_V(η^e), t_q^p h_q^p=1, independent of r, no e|n). Both claims are true, and neither node duplicates an existing one: det-sp-trace-basic, trace-normalization-transitivity, dnc-chart-normalization, derived-tensor-shift-descent and total-tensor-signed-coherence are each narrower or different. Old Steps 2, 5 and 6 stay as single-citation assembly steps with the same inferences. Assembly Step 1 matches the arrow order and τ of def-pur-smooth-purity-map. θ is natural in K, and A_X(d) is a degree-zero sheaf. Step 3 cancels e^{-1}e for arbitrary v. Step 4 quotes composition coherence with the order of c_{g,f}. Mechanical checks: step citations equal their uses, statement citations are within stmt_deps, no cycle (closures checked), no dropped dependency is orphaned, three kinds of search on both nodes, no SGA, same unit. Maintainer notes: stale node-level tool_uses (5 entries); def-pur-smooth-purity-map still says 'separated X,Y'; the trace node uses D^b_ctf(S_et) without its own definition citation, which the cited lemma defines inline."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth separated of pure relative dimension $d$\nand let $K\\in D^b_{ctf}(Y,\\Lambda)$. Substituting the identification\nof [thm-pur-diagonal-dualizing-object] into the tensor formula of\n[thm-pur-cohomological-smoothness] gives the canonical\nisomorphism\n\n$$\nLf^*K(d)[2d]\\;\\xrightarrow{\\ \\sim\\ }\\;Rf^!K.\n$$\n\nEvery map involved was normalized by the Kummer generator, so the Tate\ntwist, shift, and trace normalization are fixed canonically; the\nidentification is compatible with arbitrary base change and\ncomposition.",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth separated of pure relative dimension $d$\nand let $K\\in D^b_{ctf}(Y,\\Lambda)$. Substituting the identification\nof [thm-pur-diagonal-dualizing-object] into the tensor formula of\n[thm-pur-cohomological-smoothness] gives the canonical\nisomorphism\n\n$$\nLf^*K(d)[2d]\\;\\xrightarrow{\\ \\sim\\ }\\;Rf^!K.\n$$\n\nEvery map involved was normalized by the projective-line trace (the\nKummer generator up to the sign $(-1)^d$), so the Tate\ntwist, shift, and trace normalization are fixed canonically; the\nidentification is compatible with arbitrary base change and\ncomposition.",
   "proof": [
    {
     "text": "The composite is the twist reassociation of\n[def-coefficient-twists-detailed], the inverse of the identification of\n[thm-pur-diagonal-dualizing-object], and the tensor formula of\n[thm-pur-cohomological-smoothness]; each is an isomorphism.",
@@ -239,7 +227,7 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  },
  "lean": {
   "module": "Sheaf.Paper.DualizingObjectPurity",

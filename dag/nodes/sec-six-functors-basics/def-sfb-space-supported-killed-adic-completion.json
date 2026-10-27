@@ -1,0 +1,143 @@
+{
+ "id": "def-sfb-space-supported-killed-adic-completion",
+ "kind": "definition",
+ "title": "Supported completion on modules killed by an ideal power",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let S be a scheme [def-pc-scheme], let X,Y be algebraic spaces over S [def-trf-algebraic-space], and let f:X→Y be a morphism. Modules and direct image are on their small etale ringed sites [def-trf-space-etale-module-functors]. Let J,K be quasi-coherent ideals [def-sfb-space-quasi-coherent-ideal], and q≥0. Use coherent modules, J-adic diagrams, the canonical completion functor C_J:H↦(H/J^nH)_{n≥1}, and annihilation by ideal powers as in [def-sfb-space-coherent-adic-system]; coherence means quasi-coherence and coherence on all etale scheme charts [pqf-def-coherent]. A module has proper support over Y if it is i_*Q for a representable closed immersion i:Z→X [def-weil-closed-immersion] with f i proper and Q finite type quasi-coherent, using the proper-carrier convention of [def-sfb-space-proper-quot-functor] and properness of [def-sfb-space-morphism-properties]. Let C be the full subcategory of coherent modules H with proper support over Y and K^qH=0. Let D be the full subcategory of Coh(X,J) with proper first-term support over Y and every term killed by K^q. SupportedKilledAdicCompletionEquivalence(f,J,K,q) means that C_J takes C into D, is bijective on every hom set between objects of C, and every object of D is isomorphic to C_J(H) for some H in C. Thus it is precisely the condition that the specified canonical completion restricts to an equivalence C→D, not the existence of an unrelated equivalence. For q≥1 these are the ambient full subcategories for the closed thickening cut out by K^q, as in Stacks 08BC.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-quasi-coherent-ideal",
+  "def-sfb-space-coherent-adic-system",
+  "pqf-def-coherent",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BC, lemma-existence-tricky, proof: first two displayed ambient full-subcategory identifications and the following completion-equivalence sentence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adic completion functor on coherent sheaves with proper support killed by a fixed ideal power is fully faithful and essentially surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.of_bijective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Bijective (of I M)\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is bijective.\"}\n  {\"name\": \"AdicCompletion.map_surjective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Exactness\", \"type\": \"(hf : Function.Surjective f) : Function.Surjective (map I f)\", \"doc\": \"If a linear map $ f : M \\\\to N $ between $ R $-modules is surjective, then the induced linear map between their $ I $-adic completions is also surjective.\"}\n  {\"name\": \"AdicCompletion.of_surjective_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Surjective (of I M) ↔ IsPrecomplete I M\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is surjective if and only if $ M $ is precomplete with respect to the ideal $ I $.\"}\n  {\"name\": \"AdicCompletion.of_surjective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"[IsPrecomplete I M] : Function.Surjective (of I M)\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is surjective if $ M $ is precomplete with respect to the ideal $ I $.\"}\n  {\"name\": \"AdicCompletion.of_injective_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Injective (of I M) ↔ IsHausdorff I M\", \"doc\": \"The canonical linear map from an $ R $-module $ M $ to its $ I $-adic completion is injective if and only if the Hausdorff condition holds for $ M $ with respect to the ideal $ I $, i.e., the intersec\"}\n  {\"name\": \"LightCondSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.{u}.FullyFaithful\", \"doc\": \"The functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces (totally disconnected and second-countable) is fully faithful. This follows from the adjunction between \"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Exactness\", \"type\": \": Function.Exact (map I f) (map I g)\", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space supported-subcategory completion interface. Loogle supplies the general equivalence criterion; the canonical completion and supported killed subcategories must still be specified."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic completion equivalence for coherent sheaves with proper support on a closed thickening, as fully faithful and essentially surjective on ambient modules killed by an ideal power",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.of_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (x : M) (n : ℕ), ↑((AdicCompletion.of I M) x) n = (I ^ n • ⊤).mkQ x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AdicCompletion.ofLinearEquiv\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → [IsAdicComplete I M] → M ≃ₗ[R] AdicCompletion I M\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and the condition that $ M $ is $ I $-adically complete, this constructs an $ R $-linea\"}\n  {\"name\": \"AdicCompletion.ofLinearEquiv_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsAdicComplete I M] (a : M), (AdicCompletion.ofLinearEquiv I M) a = (AdicCompletion.of I M) a\", \"doc\": \"For any element $ a $ in an $ I $-adically complete $ R $-module $ M $, applying the $ R $-linear equivalence between $ M $ and its $ I $-adic completion to $ a $ yields the same result as applying th\"}\n  {\"name\": \"AdicCompletion.congr\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, an $ R $-linear equivalence between $ M $ and $ N $ induces a linear equivalence between their $ I $-adic completions\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space supported-subcategory completion interface. Loogle supplies the general equivalence criterion; the canonical completion and supported killed subcategories must still be specified."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isEquivalence_refl\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : (CategoryTheory.Functor.id C).IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsEquivalence\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) : Prop\", \"doc\": \"A functor is an equivalence of categories if it is faithful, full and\\nessentially surjective.\"}\n  {\"name\": \"CategoryTheory.Equivalence.isEquivalence_functor\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : C ≌ D) : F.functor.IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isEquivalence_inverse\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : C ≌ D) : F.inverse.IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.asEquivalence\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.IsEquivalence] : C ≌ D\", \"doc\": \"Interpret a functor that is an equivalence as an equivalence.\"}\n  {\"name\": \"CategoryTheory.Functor.inv\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.IsEquivalence] : CategoryTheory.Functor D C\", \"doc\": \"A quasi-inverse `D ⥤ C` to a functor that `F : C ⥤ D` that is an equivalence,\\ni.e. faithful, full, and essentially surjective.\"}\n  {\"name\": \"CategoryTheory.Functor.IsEquivalence.essSurj\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {F : CategoryTheory.Functor C D} [self : F.IsEquivalence] : F.EssSurj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsEquivalence.faithful\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {F : CategoryTheory.Functor C D} [self : F.IsEquivalence] : F.Faithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsEquivalence.full\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {F : CategoryTheory.Functor C D} [self : F.IsEquivalence] : F.Full\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isEquivalence_inv\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.IsEquivalence] : F.inv.IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.asEquivalence_functor\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.IsEquivalence] : F.asEquivalence.functor = F\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isEquivalence_of_iso\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F G : CategoryTheory.Functor C D} (e : F ≅ G) [F.IsEquivalence] : G.IsEquivalence\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space supported-subcategory completion interface. Loogle supplies the general equivalence criterion; the canonical completion and supported killed subcategories must still be specified."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(proper|coherent)|proper.*completion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact algebraic-space supported-subcategory completion interface. Loogle supplies the general equivalence criterion; the canonical completion and supported killed subcategories must still be specified."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*completion|completion.*supported|killed.*completion in lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search supported adic completion; DAG definition nodes",
+   "results": "Blueprint search: 0 blueprint nodes match supported adic completion. Project search: SpaceCoherentAdicSystem supplies diagrams and a support predicate specialized to base Spec A. Scheme-only CoherentFormalModule completion and second-adic torsion results use scheme Zariski modules, not algebraic-space module sheaves. No definition node or declaration names this ambient supported K^q-killed completion restriction. The closed-adic-dictionary is a theorem, not a definition of this restriction.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition; new definition names the exact full-subcategory condition in Stacks 08BC."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-second-adic-torsion-transfer",
+  "date": "2026-10-24",
+  "group": "Q158"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Stacks 08BC completion equivalence on closed thickenings in the inherited compactification/direct-image prerequisite chain of latest sk-thm-sf-ctf-stability-direct-images.proof.md (3).",
+   "via": [
+    "lem-sfb-space-second-adic-torsion-transfer",
+    "lem-sfb-space-adic-torsion-devissage",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSupportedKilledAdicCompletion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SupportedKilledAdicCompletionEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.supportedCoherentKilled",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicKilled",
+   "AlgebraicGeometry.AlgebraicSpace.SupportedKilledAdicCompletionEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSupportedKilledAdicCompletion.lean",
+  "statement": "def SupportedKilledAdicCompletionEquivalence {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (J K : QuasiCoherentIdeal X) (q : ℕ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q158",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d85d21780",
+  "group": "Q158",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d85d21780",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Re-delivery fixes the H13/H2 return of 7fe1e024: SpaceCoherentAdicSystem.lean = live + appended CoherentAdicHasProperSupportOver only; def-sfb-space-coherent-adic-system record keeps module/file/declaration CoherentAdicSystem, 14 live names + the new one, statement verbatim. Item node vs live: only lean set + stmt_dep on new def node; statement/proof/proof_deps identical; lean.statement verbatim. Clauses checked vs node and Stacks 08BC/08BA: Noetherian X (hln/hqc/hqs), Noetherian A, b, f separated finite type; hcompletion for q>=1 via canonical completion restricted to K^q-killed proper-support subcategories (lands, hom-bijective, ess. surjective) = the 08BC ambient identification; M, N, H proper support; sigma natural double-diagram iso of the right direction; theta pinned by h-theta; hcompat = (a_n mod K^e) sigma = theta (d_e mod J^n); K^t for all n on ordinary kernels/cokernels; K^{4t} for all e. Edge cases (K=0, K=O_X, J=0, op 0 = level 1, t=1, empty X) fine; no universe restriction; sorry only; docstrings OK. New node def-sfb-space-supported-killed-adic-completion: real Prop defs over canonical completion. Note: Q72 8b747701f (PASS, not landed yet) appends the same-named, definitionally identical CoherentAdicHasProperSupportOver to the same file and record; the second lander is refused by merge_delivery (dep lean changed) and must rebase; H4 advisory: Q72 inlines the condition this new node defines. No files changed, nothing compiled.; reverted the delivery's change of existing node(s) def-sfb-space-coherent-adic-system (--revert-nodes; kept as on sheaf-dag)"
+ }
+}

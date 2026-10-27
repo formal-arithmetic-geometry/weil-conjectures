@@ -1,0 +1,220 @@
+{
+ "id": "lem-sf-native-weil-induction-summands",
+ "kind": "statement",
+ "title": "Native integer exchange and free induction summand comparison",
+ "statement": "Under the finite-type compactification hypotheses of the parent native comparison, the specified native exchange admits natural coherent integer iterates cN, normalized at zero and satisfying the successor recurrence. The actual transpose kappa of F eta followed by beta inverse satisfies the stated summand equation and is invertible on the constructible localizing hull. All functors, structure maps and comparisons are those of [def-sf-native-weil-induction-comparison-data]; the integer coproduct cocones are those of HeartProperties. No identification of the derived Weil category with fixed pairs in an ordinary derived category is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Parent comparison proof: Native integer exchange and free induction summand comparison. Final exceptional-adjunction sentence; extraction of parent proof steps 2-4: Grothendieck hearts, K-injective normalization, actual left-functor and free-induction comparison. Generic source: Stacks Tags 079P (theorem-K-injective-embedding-grothendieck), 08BJ (lemma-adjoint-preserve-K-injectives), 070Y (lemma-K-injective-defined). The native induction specialization is agent-formulated."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-induction-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct positive integer exchanges recursively by applying Q then the specified first exchange. Construct negative exchanges by full-faithful preimage under Q, using the successor identifications for both equivalences and the inverse first exchange. Cancellation proves the successor recurrence. Naturality at zero is the identity; at adjacent integers it is equivalent by the successor recurrence, naturality of the first exchange, and the naturality of the successor identifications. Integer induction gives naturality at every integer. All these calculations are proved by private helpers in the item module.",
+   "uses": [
+    "def-sf-native-weil-induction-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define a_A=F(eta_X,A) followed by beta_(IX A) inverse, and define kappa_A as its transpose under the specified free derived adjunction on Y. Naturality of the unit, beta, and the adjunction hom equivalence proves kappa is a natural transformation. The adjunction triangle identity says eta_Y,FA followed by UY(kappa_A) is a_A.",
+   "uses": [
+    "def-sf-native-weil-induction-comparison-data",
+    "lem-sf-free-derived-weil-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the compatibility equation of the specified beta to IX A. The family iota_Y,n followed by UY(kappa_A) and beta, and the family c_n,A followed by F(iota_X,n), have the same zeroth term by the adjunction identity. Both satisfy the same successor equation: use naturality of the localized structure on kappa and beta compatibility for the first, and first-exchange naturality, the exchange recurrence, and the inclusion recurrence for the second. Full faithfulness of Q and invertibility of the structure make equality at adjacent integers equivalent. Integer induction proves equality on all summands. This is the proved generic summand_formula helper.",
+   "uses": [
+    "lem-sf-native-weil-comparison-structure",
+    "def-sf-native-weil-induction-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse Frobenius also preserves the constructible localizing hull: use the native lower-star equivalence for inverse geometric Frobenius. Its inverse functor is naturally isomorphic to pullback along inverse Frobenius, which preserves bounded constructibles. The exact derived inverse preserves coproducts, so the inverse image of the hull is localizing. The derived counit identifies it with the chosen inverse of derived Frobenius. Induction puts every integer translate of A in the hull.",
+   "uses": [
+    "lem-sf-native-weil-heart-properties",
+    "def-sf-native-weil-derived-framework",
+    "lem-pur-exact-derived-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the given compactification to the algebraic closure: the three geometric-fibre maps are the actual functors used by ordinaryImage. The base-change property instances give an open immersion and proper projection, and separatedness, quasi-compactness and local finite type for the base-changed f and structure maps. Apply the native compact-support coproduct theorem. Lift the integer free cofan to the constructible localizing hull; its apex belongs to the hull by the free cofan colimit property. The restricted functor and the inclusion of the target hull preserve this colimit, so applying ordinaryImage to the free cofan is colimiting in the ambient derived category.",
+   "uses": [
+    "lem-sf-native-weil-heart-properties",
+    "lem-sf-locally-finite-adic-compact-support-sums",
+    "lem-weil-pbc-lft-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the mapped free cofan to define s by its leg c_n,A inverse followed by the Y coprojection. The summand equation gives t s=1 and s t=1, where t=UY(kappa_A) followed by beta_(IX A); check both equations on coprojections with the two colimit universal properties. Thus t is invertible. Cancel the invertible beta and reflect invertibility through derived forgetting, which is conservative by the heart-properties theorem.",
+   "uses": [
+    "lem-sf-native-weil-heart-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-induction-comparison-data",
+  "lem-sf-free-derived-weil-resolution",
+  "lem-sf-native-weil-comparison-structure",
+  "lem-sf-native-weil-heart-properties",
+  "def-sf-native-weil-derived-framework",
+  "lem-pur-exact-derived-coproducts",
+  "lem-sf-locally-finite-adic-compact-support-sums",
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Native induction summands: explicit integer exchanges, adjunction transpose and coproduct inverse; localized beta structure compatibility isolated as a strictly smaller theorem."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilDerivedInductionComparison",
+  "date": "2026-10-24",
+  "group": "S1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-derived-induction-comparison",
+   "place": "Proof component: Native integer exchange and free induction summand comparison",
+   "via": [
+    "lem-sf-native-weil-derived-induction-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilInductionSummands",
+  "file": "lean/Sheaf/Paper/NativeWeilInductionSummands.lean",
+  "declaration": "AlgebraicGeometry.NativeWeilInduction.nativeWeil_induction_summands",
+  "statement": "theorem nativeWeil_induction_summands\n    [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k₀))]\n    [QuasiCompact (Y ↘ Spec (.of k₀))] [QuasiSeparated (Y ↘ Spec (.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k₀))] [QuasiCompact (X ↘ Spec (.of k₀))] :\n    ∃ cN : ∀ (n : ℤ) (A : _root_.DerivedCategory\n        (ProEtale.AdicSheaf l (X ↘ Spec (.of k₀)).geometricFiber)),\n      IsoAlgebra.Free.obj (frobenius k₀ l Y) ((ordinaryImage k₀ l f c).obj A) n ≅\n        (ordinaryImage k₀ l f c).obj (IsoAlgebra.Free.obj (frobenius k₀ l X) A n),\n      (∀ (n : ℤ) (A B : _root_.DerivedCategory\n          (ProEtale.AdicSheaf l (X ↘ Spec (.of k₀)).geometricFiber)) (g : A ⟶ B),\n        IsoAlgebra.Free.objMap (frobenius k₀ l Y) ((ordinaryImage k₀ l f c).map g) n ≫\n          (cN n B).hom = (cN n A).hom ≫ (ordinaryImage k₀ l f c).map\n            (IsoAlgebra.Free.objMap (frobenius k₀ l X) g n)) ∧\n      (∀ A, (cN 0 A).hom = 𝟙 _) ∧\n      (∀ (n : ℤ) A,\n        (frobenius k₀ l Y).map (cN n A).hom ≫\n          (exchange k₀ l f c).hom.app (IsoAlgebra.Free.obj (frobenius k₀ l X) A n) ≫\n          (ordinaryImage k₀ l f c).map (IsoAlgebra.Free.objSucc\n            (frobenius k₀ l X) A n).hom =\n        (IsoAlgebra.Free.objSucc (frobenius k₀ l Y)\n          ((ordinaryImage k₀ l f c).obj A) n).hom ≫ (cN (n + 1) A).hom) ∧\n      ∃ κ : ordinaryImage k₀ l f c ⋙ induction k₀ l Y ⟶\n          induction k₀ l X ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c,\n        (∀ A, κ.app A = (induction k₀ l Y).map\n          ((ordinaryImage k₀ l f c).map\n              ((IsoAlgebra.freeWeilDerivedAdjunction\n                (WeilSheaf.frobeniusPullback k₀ l X)).unit.app A) ≫\n            (comparison k₀ l f c).inv.app ((induction k₀ l X).obj A)) ≫\n          (IsoAlgebra.freeWeilDerivedAdjunction\n            (WeilSheaf.frobeniusPullback k₀ l Y)).counit.app\n              ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c).obj\n                ((induction k₀ l X).obj A))) ∧\n        ∀ A, ProEtale.nativeAdicConstructibleLocalizingHull l\n            (X ↘ Spec (.of k₀)).geometricFiber A →\n          IsIso (κ.app A) ∧ ∀ n : ℤ,\n            inclusion k₀ l Y ((ordinaryImage k₀ l f c).obj A) n ≫\n              (forget k₀ l Y).map (κ.app A) ≫\n              (comparison k₀ l f c).hom.app ((induction k₀ l X).obj A) =\n            (cN n A).hom ≫ (ordinaryImage k₀ l f c).map (inclusion k₀ l X A n)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between categories with automorphisms commutes with free integer induction when it preserves coproducts",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ExactFunctor.of",
+     "CategoryTheory.Functor.exact_tfae",
+     "CategoryTheory.ExactFunctor",
+     "CategoryTheory.ExactFunctor.of_fst",
+     "CategoryTheory.PreGaloisCategory.instPreservesFiniteCoproductsActionFintypeCatAutFunctorFunctorToAction",
+     "CategoryTheory.exactFunctor_le_additiveFunctor",
+     "CategoryTheory.AdditiveFunctor.ofExact_obj_fst",
+     "AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux"
+    ],
+    "digest": "aefc0384226e1db4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the specified normalized native derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra.Free.obj",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra.Free.obj'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the specified normalized native derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "objSucc|freeWeilDerivedAdjunction|rightDerivedFunctorMapOfNatIsoCompForgetIso",
+   "results": {
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean",
+     "Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean",
+     "Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean",
+     "Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean"
+    ],
+    "digest": "4bb62de89dcea727"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the specified normalized native derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of an exact free adjunction preserves the integer coproduct cocone for an automorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.localization_unit_app",
+     "CategoryTheory.Adjunction.isLocalization_leftAdjoint",
+     "CategoryTheory.Adjunction.localization_counit_app",
+     "CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone"
+    ],
+    "digest": "e96b52d3734942d9"
+   },
+   "date": "2026-10-24",
+   "verdict": "general localization adjunction API; not the native integer induction summand comparison"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ff560",
+  "group": "S1",
+  "result": "fix",
+  "landing": "20261025T013237-L-3944560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T235955-L-1475623",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

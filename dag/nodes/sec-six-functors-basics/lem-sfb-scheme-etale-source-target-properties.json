@@ -1,0 +1,513 @@
+{
+ "id": "lem-sfb-scheme-etale-source-target-properties",
+ "kind": "statement",
+ "title": "Etale source-and-target locality for the five scheme properties",
+ "statement": "For schemes [def-pc-scheme], let $P$ be any one of smooth, etale, flat, locally of finite presentation, or locally of finite type, with the meanings of [def-sbc-smooth-morphisms, def-weil-etale-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. A property $P$ of scheme morphisms is etale local on source-and-target if (i) precomposing a map having $P$ with an etale map preserves $P$; (ii) etale base change preserves $P$; and (iii) a scheme map $f:X\\to Y$ has $P$ if and only if, for every $x\\in X$, there are schemes $U,V$, etale maps $a:U\\to X$, $b:V\\to Y$, a point $u\\in U$ with $a(u)=x$, and a map $h:U\\to V$ with $fa=bh$ and $P(h)$. Each of these five properties is etale local on source-and-target. In particular, in any commutative square $fa=bh$ of schemes with $a:U\\to X$ and $b:V\\to Y$ etale, $P(f)$ implies $P(h)$; if $a$ is surjective, $P(h)$ implies $P(f)$. For any jointly surjective set-indexed family of etale scheme maps $a_i:U_i\\to X$, one has $P(f)$ if and only if $P(fa_i)$ for every $i$. Jointly surjective means that every point of $X$ is in the image of some $a_i$. The empty family is allowed when $X$ is empty. No Noetherian, separation or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 04QZ (definition-local-source-target), 04R1 (lemma-local-source-target-characterize), especially (a),(c),(d),(f), and 04R3 (remark-list-local-source-target), entries flat, locally of finite presentation, locally finite type, smooth, etale"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-sfb-etale-local-source-target-property",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib supplies composition of smooth, etale, flat, locally finitely presented and locally finite type morphisms, and every etale morphism has each of these properties. Thus for the chosen P, infer IsStableUnderComposition P and etale ≤ P. Open immersions, including identity maps, are etale. These facts give precomposition and postcomposition by etale maps.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-smooth-morphisms",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-smooth-composition",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, 04R1 and 04R3; singleton source descent and open-image refinement"
+   }
+  },
+  {
+   "text": "Infer arbitrary base-change stability of P from the existing Mathlib instances for each of the five cases. In particular, P(f) gives P(pullback.snd f b) for any b, and etaleness of b gives etaleness of pullback.fst f b.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, 04R1 and 04R3; singleton source descent and open-image refinement"
+   }
+  },
+  {
+   "text": "Establish singleton source descent for any surjective etale a:U→X. For smoothness and local finite presentation, use the given family equivalences with the Unit-indexed family constantly equal to a. Use Etale.of_comp_of_surjective_etale for etaleness, the already proved source-library Flat.of_comp_of_flat_of_surjective for flatness, and locallyOfFiniteType_of_flat_lfp_source for local finite type. Etale a supplies the required flatness and local finite presentation. No quasi-compactness is needed.",
+   "uses": [
+    "lem-trf-etale-source-smoothness",
+    "lem-trf-etale-descent-through-source-cover",
+    "lem-trf-lfp-fppf-source-locality",
+    "lem-a1-lft-flat-lfp-source-descent",
+    "lem-pc-flat-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, 04R1 and 04R3; singleton source descent and open-image refinement"
+   }
+  },
+  {
+   "text": "For any jointly surjective etale family a_i:U_i→X, let W_i be its open image. Factor a_i as q_i followed by W_i→X, using IsOpenImmersion.lift. Etale cancellation makes q_i etale; injectivity of W_i→X and the definition of its image make q_i surjective. From P(a_i followed by f), singleton descent gives P(f restricted to W_i). The W_i cover X, so IsZariskiLocalAtSource.of_iSup_eq_top gives P(f); the converse is composition. The five source-local instances come from their affine-local ring-hom definitions. The index may lie in any universe: no coproduct is formed. An empty family gives an empty open covering and the same Zariski-local criterion.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, 04R1 and 04R3; singleton source descent and open-image refinement"
+   }
+  },
+  {
+   "text": "Cancel an etale target b:V→Y from h:U→V. Form B=U×_Y V for h followed by b and b, and the graph s=(id_U,h):U→B. The projection B→U is etale, and s followed by that projection is the identity, so etale cancellation makes s etale. The other projection has P by base change of h followed by b; composing with s gives P(h). This graph argument does not require separatedness.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, 04R1 and 04R3; singleton source descent and open-image refinement"
+   }
+  },
+  {
+   "text": "For a commutative square a followed by f = h followed by b, composition with a and target cancellation give P(f)→P(h). Conversely compose h with b and descend along the surjective etale a. For the pointwise criterion, use identity charts in the forward direction. Conversely choose one chart and lift above each x in X. These source charts are jointly surjective, and their composites with f have P by postcomposition with the etale target charts. Apply family descent. Combine with precomposition and base-change stability to obtain all clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, 04R1 and 04R3; singleton source descent and open-image refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-smooth-composition",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lft-base-change",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-pc-flat-source-descent",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 04QZ, 04R1 and 04R3. U3 formal proof: singleton source descent, open-image refinement, etale graph cancellation, and pointwise chart assembly. Flatness uses the existing proved source-library source-descent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth etale flat locally of finite presentation and locally of finite type scheme morphisms are etale local on source and target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski locality, ring localization, scheme permanence or implications, not the etale source-and-target chart criterion for all five properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square of schemes with etale vertical maps and surjective source chart, smoothness flatness and finite presentation hold for the top map if and only if the bottom map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski locality, ring localization, scheme permanence or implications, not the etale source-and-target chart criterion for all five properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalAtSource\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski locality, ring localization, scheme permanence or implications, not the etale source-and-target chart criterion for all five properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth etale flat locally of finite presentation and locally of finite type are etale local on source and target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.affineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property $ P $ holds locally on affine opens of both the source and target if, for every morphism $ f : X \\\\to Y $, every affine open subset $ U \\\\subseteq Y $, and every affine open subset $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski locality, ring localization, scheme permanence or implications, not the etale source-and-target chart criterion for all five properties"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalAtSource|IsLocalAtTarget|etale.*local.*source|local.*source.*target",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Logic/Equiv/PartialEquiv.lean\", \"line\": \"112\", \"text\": \"/-- Local equivalence between subsets `source` and `target` of `α` and `β` respectively. The\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.Geometry.Manifold.LocalSourceTargetProperty\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"144\", \"text\": \"lemma isLocalSourceTargetProperty_immersionAtProp :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"145\", \"text\": \"    IsLocalSourceTargetProperty (ImmersionAtProp F I J M N) where\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"215\", \"text\": \"  LiftSourceTargetPropertyAt.mk_of_continuousAt hf isLocalSourceTargetProperty_immersionAtProp\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"310\", \"text\": \"    isLocalSourceTargetProperty_immersionAtProp hf.property hfg\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Submersion.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Geometry.Manifold.LocalSourceTargetProperty\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Submersion.lean\", \"line\": \"129\", \"text\": \"lemma isLocalSourceTargetProperty_submmersionAtProp :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Submersion.lean\", \"line\": \"130\", \"text\": \"    IsLocalSourceTargetProperty (SubmersionAtProp F I J M N) where\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Submersion.lean\", \"line\": \"202\", \"text\": \"    isLocalSourceTargetProperty_submmersionAtProp\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Submersion.lean\", \"line\": \"285\", \"text\": \"    isLocalSourceTargetProperty_submmersionAtProp hf.property hfg\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\", \"line\": \"10\", \"text\": \"/-! # Local properties of smooth functions which depend on both the source and target\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\", \"line\": \"27\", \"text\": \"* `Manifold.LocalSourceTargetPropertyAt` captures a local property of the above form:\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\", \"line\": \"31\", \"text\": \"* `Manifold.LiftSourceTargetPropertyAt f x P`, where `P` is a `LocalSourceTargetPropertyAt`,\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\", \"line\": \"65\", \"text\": \"structure IsLocalSourceTargetProperty\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean\", \"line\": \"122\", \"text\": \"noncomputable def localPresentationAt (h : LiftSourceTargetPropertyAt I J n f x P) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"498\", \"text\": \"instance : (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"135\", \"text\": \"  have := HasRingHomProperty.of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"32\", \"text\": \"`affineLocally P` will be local on both the source and the target.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"402\", \"text\": \"lemma isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"434\", \"text\": \"lemma of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget [IsZariskiLocalAtTarget P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"438\", \"text\": \"    isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget P\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"442\", \"text\": \"      ⟨isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget P, rfl⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Local.lean\", \"line\": \"51\", \"text\": \"class IsLocalAtTarget (P : MorphismProperty C) (K : Precoverage C) extends RespectsIso P where\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Local.lean\", \"line\": \"63\", \"text\": \"namespace IsLocalAtTarget\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski locality, ring localization, scheme permanence or implications, not the etale source-and-target chart criterion for all five properties"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|IsStableUnderBaseChange|IsStableUnderComposition|HasOfPostcompProperty",
+   "results": "{\"t\": \"2026-10-23T09:51:29Z\", \"tool\": \"grep\", \"query\": \"of_comp|IsStableUnderBaseChange|IsStableUnderComposition|HasOfPostcompProperty\", \"sub\": \"AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properties of scheme morphisms descend under surjective flat locally finitely presented precomposition",
+   "results": "{\"t\": \"2026-10-23T09:51:29Z\", \"tool\": \"leansearch\", \"query\": \"Properties of scheme morphisms descend under surjective flat locally finitely presented precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Surjective.comp_iff\", \"CategoryTheory.MorphismProperty.instDescendsAlongOfIsStableUnderBaseChangeOfHasOfPrecompPropertyOfRespectsRight\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.instHasOfPrecompPropertySchemeSurjective\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\"], \"digest\": \"b2866b110914beef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-23T09:51:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_of_surjective\", \"Algebra.FormallySmooth.comp_surjective\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact\"], \"digest\": \"eafab11c1cf1ccdc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a scheme morphism composed with a surjective smooth morphism is smooth then it is smooth; flat and locally finite presentation descend on the source",
+   "results": "{\"t\": \"2026-10-23T09:51:36Z\", \"tool\": \"leanfinder\", \"query\": \"If a scheme morphism composed with a surjective smooth morphism is smooth then it is smooth; flat and locally finite presentation descend on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"faadaa502f2c98a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth etale flat locally of finite presentation and locally of finite type morphisms of schemes are stable under composition arbitrary base change and Zariski open covers on source",
+   "results": "{\"t\": \"2026-10-23T10:08:57Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth etale flat locally of finite presentation and locally of finite type morphisms of schemes are stable under composition arbitrary base change and Zariski open covers on source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"098a91e09b1fbb38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "HasRingHomProperty implies IsZariskiLocalAtSource and all etale morphisms are smooth flat locally finitely presented and locally of finite type",
+   "results": "{\"t\": \"2026-10-23T10:09:01Z\", \"tool\": \"leanfinder\", \"query\": \"HasRingHomProperty implies IsZariskiLocalAtSource and all etale morphisms are smooth flat locally finitely presented and locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.HasRingHomProperty.of_isLocalAtSource_of_isLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"fbd9b2d47f8880dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"locallyOfFinitePresentation_comp\"",
+   "results": "{\"t\": \"2026-10-23T10:09:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"locallyOfFinitePresentation_comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_comp\"], \"digest\": \"b6aac0be757f13ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme morphisms flat smooth etale finite presentation finite type stable composition base change Zariski local source",
+   "results": "{\"t\": \"2026-10-23T10:09:02Z\", \"tool\": \"leansearch\", \"query\": \"Scheme morphisms flat smooth etale finite presentation finite type stable composition base change Zariski local source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\"], \"digest\": \"6ff715c887364750\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth_comp|etale_comp|instance comp |locallyOfFinitePresentation_comp|locallyOfFiniteType_comp|isStableUnderBaseChange)",
+   "results": "{\"t\": \"2026-10-23T10:09:02Z\", \"tool\": \"grep\", \"query\": \"(smooth_comp|etale_comp|instance comp |locallyOfFinitePresentation_comp|locallyOfFiniteType_comp|isStableUnderBaseChange)\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"96f39d98423bbc92\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsZariskiLocalAtSource P|iff_of_iSup_eq_top|SmoothOfRelativeDimension.smooth|iff_smoothOfRelativeDimension_zero|iff_flat_and_formallyUnramified|LocallyOfFiniteType f :=|LocallyOfFinitePresentation f :=)",
+   "results": "{\"t\": \"2026-10-23T10:09:02Z\", \"tool\": \"grep\", \"query\": \"(IsZariskiLocalAtSource P|iff_of_iSup_eq_top|SmoothOfRelativeDimension.smooth|iff_smoothOfRelativeDimension_zero|iff_flat_and_formallyUnramified|LocallyOfFiniteType f :=|LocallyOfFinitePresentation f :=)\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\"], \"digest\": \"5e433a8816327c47\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_comp|smooth_isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"smooth_comp|smooth_isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"109\", \"117\", \"126\"], \"digest\": \"5fd8d725b075f861\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFinitePresentation_comp|locallyOfFinitePresentation_isStableUnderBaseChange|LocallyOfFiniteType f :=",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"locallyOfFinitePresentation_comp|locallyOfFinitePresentation_isStableUnderBaseChange|LocallyOfFiniteType f :=\", \"sub\": \"AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"80\", \"85\", \"109\"], \"digest\": \"f157ec3fe6f34c75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "instance comp|instance isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"instance comp|instance isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"70\", \"81\"], \"digest\": \"151974850d834742\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_comp|locallyOfFiniteType_isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"locallyOfFiniteType_comp|locallyOfFiniteType_isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms/FiniteType.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"68\", \"80\"], \"digest\": \"9e42716735f7b258\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "etale_comp|etale_isStableUnderBaseChange|iff_smoothOfRelativeDimension_zero|iff_flat_and_formallyUnramified",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"etale_comp|etale_isStableUnderBaseChange|iff_smoothOfRelativeDimension_zero|iff_flat_and_formallyUnramified\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"69\", \"74\", \"108\", \"112\"], \"digest\": \"15efd8e22955c007\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem iff_of_iSup_eq_top|lemma comp ",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"theorem iff_of_iSup_eq_top|lemma comp \", \"sub\": \"AlgebraicGeometry/Morphisms/Basic.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"156\", \"256\", \"272\", \"558\"], \"digest\": \"d596d0870027f817\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "instance : IsZariskiLocalAtSource P",
+   "results": "{\"t\": \"2026-10-23T10:14:07Z\", \"tool\": \"grep\", \"query\": \"instance : IsZariskiLocalAtSource P\", \"sub\": \"AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"382\"], \"digest\": \"0cba11bcc5e69347\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "instance : IsZariskiLocalAtSource P|theorem iff_of_iSup_eq_top",
+   "results": "{\"t\": \"2026-10-23T10:33:46Z\", \"tool\": \"grep\", \"query\": \"instance : IsZariskiLocalAtSource P|theorem iff_of_iSup_eq_top\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"6ff394f6a5886dfb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_isStableUnderBaseChange|instance smooth_comp",
+   "results": "{\"t\": \"2026-10-23T10:33:46Z\", \"tool\": \"grep\", \"query\": \"smooth_isStableUnderBaseChange|instance smooth_comp\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"c15cd36496bc110c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth scheme morphisms stable under arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T10:33:47Z\", \"tool\": \"leansearch\", \"query\": \"Smooth scheme morphisms stable under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\"], \"digest\": \"785fe23e27c8617b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsZariskiLocalAtSource iff_of_iSup_eq_top for a morphism property with HasRingHomProperty",
+   "results": "{\"t\": \"2026-10-23T10:33:47Z\", \"tool\": \"leansearch\", \"query\": \"IsZariskiLocalAtSource iff_of_iSup_eq_top for a morphism property with HasRingHomProperty\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.HasRingHomProperty.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtSource.mk'\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.topologically_isZariskiLocalAtSource'\", \"AlgebraicGeometry.IsLocalAtSource.mk'\", \"AlgebraicGeometry.topologically_isLocalAtSource'\"], \"digest\": \"bede60ff7e7a5689\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smooth_isStableUnderBaseChange\"",
+   "results": "{\"t\": \"2026-10-23T10:33:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"smooth_isStableUnderBaseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.smooth_isStableUnderBaseChange\"], \"digest\": \"b63116028062531b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZariskiLocalAtSource.iff_of_iSup_eq_top\"",
+   "results": "{\"t\": \"2026-10-23T10:33:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsZariskiLocalAtSource.iff_of_iSup_eq_top\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\"], \"digest\": \"2d7c7bca3e4a7ad5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of schemes remains smooth after any base change",
+   "results": "{\"t\": \"2026-10-23T10:33:47Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism of schemes remains smooth after any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"085e81c7e2373675\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat smooth etale locally finite type locally finite presentation scheme morphism holds if and only if its restrictions to an open cover of its source have the property",
+   "results": "{\"t\": \"2026-10-23T10:33:49Z\", \"tool\": \"leanfinder\", \"query\": \"Flat smooth etale locally finite type locally finite presentation scheme morphism holds if and only if its restrictions to an open cover of its source have the property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsLocalAtSource.of_openCover\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"a35ca080f6bfba7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-23T10:39:57Z\", \"tool\": \"grep\", \"query\": \"smooth_isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"92586c88ca201656\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "HasRingHomProperty|IsZariskiLocalAtSource|iff_of_iSup_eq_top",
+   "results": "{\"t\": \"2026-10-23T10:39:57Z\", \"tool\": \"grep\", \"query\": \"HasRingHomProperty|IsZariskiLocalAtSource|iff_of_iSup_eq_top\", \"sub\": \"AlgebraicGeometry/Morphisms/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"38\", \"43\", \"45\", \"52\"], \"digest\": \"a9de536c055c986b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_of_openCover|instance : IsZariskiLocalAtSource P",
+   "results": "{\"t\": \"2026-10-23T10:43:39Z\", \"tool\": \"grep\", \"query\": \"iff_of_openCover|instance : IsZariskiLocalAtSource P\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"49bc9357b462ec45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "LocallyOfFiniteType Zariski locality on the source open cover",
+   "results": "{\"t\": \"2026-10-23T10:43:40Z\", \"tool\": \"leansearch\", \"query\": \"LocallyOfFiniteType Zariski locality on the source open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.IsLocalAtSource.mk'\", \"AlgebraicGeometry.IsZariskiLocalAtSource\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\"], \"digest\": \"aadc870e8e0522ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZariskiLocalAtSource.iff_of_openCover\"",
+   "results": "{\"t\": \"2026-10-23T10:43:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsZariskiLocalAtSource.iff_of_openCover\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\"], \"digest\": \"8c6a7c6d9c5fe5f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is locally of finite type if and only if it is so after restricting to every member of an open cover of the source",
+   "results": "{\"t\": \"2026-10-23T10:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of schemes is locally of finite type if and only if it is so after restricting to every member of an open cover of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtSource.of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtSource.of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtTarget.iff_of_iSup_eq_top\"], \"digest\": \"c3885613b32eb153\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the returned declarations provide individual composition, base-change, implication or Zariski-locality facts, which are reused through existing DAG nodes; they do not state the five-property etale chart criterion and its source-descent assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Chartwise calculus for smooth and etale representable morphisms. Supporting input: scheme-locality prerequisite for the chartwise calculus in the unramified-diagonal atlas argument; Stacks 04R3 and 04R1.",
+   "via": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-etale-source-target-properties",
+  "worker": "stage1",
+  "summary": "Q121 supplies nine steps with complete composition, base-change, source-descent, coproduct and etale-graph arguments, reusing existing nodes only. The statement and statement dependencies are unchanged. All five properties, arbitrary source-cover families, nonseparated etale target charts and the empty-family case are checked. No new nodes and no Lean attachment.",
+  "blueprint": "The inherited from.place and via chain are preserved. The live nearest blueprint ancestor is null; latest blueprint main-20261023-1620 det-thm-sf-ctf-stability-direct-images proof (3) has changed route, while this node remains an existing prerequisite of chartwise scheme calculus. Whole-blueprint searches found no equivalent imported statement, so same_as is empty.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-morphism permanence or source-descent tool used only for its stated hypotheses and conclusion; no node of this unit replaces it, and this does not change the alteration route."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic scheme-morphism permanence or source-descent tool used only for its stated hypotheses and conclusion; no node of this unit replaces it, and this does not change the alteration route."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic scheme-morphism permanence or source-descent tool used only for its stated hypotheses and conclusion; no node of this unit replaces it, and this does not change the alteration route."
+   },
+   {
+    "node": "lem-trf-lfp-fppf-source-locality",
+    "why": "Generic scheme-morphism permanence or source-descent tool used only for its stated hypotheses and conclusion; no node of this unit replaces it, and this does not change the alteration route."
+   },
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Generic scheme-morphism permanence or source-descent tool used only for its stated hypotheses and conclusion; no node of this unit replaces it, and this does not change the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-permanence",
+    "why": "Generic scheme-morphism permanence or source-descent tool used only for its stated hypotheses and conclusion; no node of this unit replaces it, and this does not change the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic scheme fact (Stacks remark after 02GI, Lemma 02GK) that an etale morphism is smooth; added by the reviewer in step 1 because the smoothness definition only names smooth morphisms of relative dimension zero 'etale' and does not compare that with the etale definition the item uses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-a1-lft-flat-lfp-source-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-176af9a30",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-176af9a30 (reviewer sub-agent of L); spot-checked: Nine-step split with 0 new nodes and the statement unchanged; it matches Stacks descent 04QZ (l.7144), 04R1 (a),(c),(d),(f) (l.7252) and 04R3 (l.7493) entries flat, lfp, lft, smooth and etale, with no added hypotheses. Every step was checked against the full statements of the cited nodes. Step 2 (composition): clause (e) of proper-fp-permanence for lft, flat-ring composition for flatness. Step 3 (arbitrary base change): pc-proper-base-change (2), etale-base-change-finite-limits (1) (arbitrary u), flat base change, qcqs (3) for lfp, lft base change. Step 4 (source descent): 036U, 036W, 036N, 02KL. Step 5 (flat descent): etale-stalk faithful flatness plus flat permanence with R=A, S=B, M=C. Step 6: coproduct of a family, with stalk, affine and cover arguments and the empty family. Step 7: graph cancellation needing no separatedness of b. Steps 8-9 assemble. All correct. Fault C4/E6 in step 1: 'etale implies smooth' was taken from the final sentence of def-sbc-smooth-morphisms, which defines a second notion of etale (smooth of relative dimension 0) and does not compare it with def-weil-etale-morphism. FIX: step 1 now cites the existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres (Stacks 02GK and the remark after 02GI); proof_deps, source.place and tool_uses are updated, and no cycle results. Batch-5: lem-trf-smooth-composition (Mathlib smooth_comp, 01VA), lem-trf-etale-source-smoothness (036U), lem-trf-etale-descent-through-source-cover (036W) and lem-trf-lfp-fppf-source-locality (036N) are generic scheme permanence and source-locality facts. Their closures contain no trace-formula or Poincaré-duality theorem and no nt-assume leaf, so they are accepted. The generic tool_uses are accepted, no SGA source is cited, and no cycle was found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleSourceTargetProperties",
+  "declaration": "AlgebraicGeometry.scheme_etale_source_target_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleSourceTargetProperties.lean",
+  "statement": "theorem scheme_etale_source_target_properties (P : MorphismProperty Scheme.{u}) (hP : P = @Smooth ∨ P = @Etale ∨ P = @Flat ∨ P = @LocallyOfFinitePresentation ∨ P = @LocallyOfFiniteType) : IsEtaleLocalOnSourceAndTarget P ∧ (∀ (X Y U V : Scheme.{u}) (f : X ⟶ Y) (a : U ⟶ X) (b : V ⟶ Y) (h : U ⟶ V), Etale a → Etale b → a ≫ f = h ≫ b → (P f → P h) ∧ (Surjective a → P h → P f)) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (I : Type v) (U : I → Scheme.{u}) (a : ∀ i : I, U i ⟶ X), (∀ i : I, Etale (a i)) → (∀ x : X, ∃ (i : I) (u : U i), (a i).base u = x) → (P f ↔ ∀ i : I, P (a i ≫ f)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reuses the unchanged landed IsEtaleLocalOnSourceAndTarget declaration through its owning definition node def-sfb-etale-local-source-target-property. The conjunction also includes both square implications and arbitrary jointly surjective families. No change to the accepted mathematical split or Lean signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13acc801e",
+  "group": "N5",
+  "result": "pass",
+  "note": "Matched Stacks 04QZ and 04R1 (a),(c),(d),(f) clause by clause. The five properties are Mathlib Smooth/Etale/Flat/LocallyOfFinitePresentation/LocallyOfFiniteType (the recorded dep declarations; lft is the local alternative). IsEtaleLocalOnSourceAndTarget (live def, SpaceEtalePresentationPropertyCriterion.lean:37) is exactly 04QZ (1),(2),(3). Square clause uses a≫f=h≫b with surjectivity on a only. Family clause allows arbitrary I : Type v with no Nonempty/Small; empty family and empty X are correct. New def node owns the landed plain def via existing:true with matching signature and acyclic deps, repairing L's mandatory point; Q19 record untouched; def-weil-surjective-morphism cited. Item diff vs live: only stmt_deps and lean; statement verbatim. Docstrings carry source place, blueprint tag and all 9 proof steps; proof is sorry only; 7 plain proof-dep imports exist in side-live. No fix, so no compile; relied on the worker's clean scompile runs."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T092742-L-3462776",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

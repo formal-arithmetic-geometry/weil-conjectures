@@ -1,0 +1,270 @@
+{
+ "id": "lem-pod-completed-scalar-extension-texact",
+ "kind": "statement",
+ "title": "Completed integral scalar extension preserves standard cohomological bounds",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "Let $\\ell$ be a prime, $E\\subset L$ finite extensions of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and chosen uniformizers $t,v$ [def-weil-l-adic-coefficient-extension], and let $Y$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible. Here noetherian means a finite affine cover by noetherian rings, finite-dimensional means a finite bound on chains of irreducible closed subsets, and invertibility is in each local ring. On the small pro-etale site [def-weil-pbc-proetale-site], put $R=\\varprojlim_n(\\mathcal O_E/t^n)_Y$ and $S=\\varprojlim_n(\\mathcal O_L/v^n)_Y$ [def-weil-completed-integral-coefficients]. Use the full derived-complete constructible integral categories $\\mathcal C_E=D^b_c(Y,\\mathcal O_E)$ and $\\mathcal C_L=D^b_c(Y,\\mathcal O_L)$ [def-weil-derived-complete-integral-detailed], with their bounded standard t-structures [prop-weil-pbc-integral-tstructure].\n\nThe actual strict-tower scalar-extension functor $T_{L/E}$ [def-weil-integral-scalar-extension], whose value is\n$$R\\varprojlim_{m\\ge1}\\operatorname{Res}_m\\bigl(K\\otimes_R^L(\\mathcal O_L/v^m)_Y\\bigr),$$\nis naturally isomorphic in $D(S)$ to ordinary derived change of rings $K\\otimes_R^L S$, and is the restriction of the derived functor of the exact sheaf functor $M\\mapsto M\\otimes_R S$. It is an exact triangulated functor $\\mathcal C_E\\to\\mathcal C_L$ with the induced shift comparison. For all integers $a\\le b$ it sends $\\mathcal C_E^{\\le b}$ into $\\mathcal C_L^{\\le b}$ and $\\mathcal C_E^{\\ge a}$ into $\\mathcal C_L^{\\ge a}$. These assertions hold for arbitrary constructible $K$; no flatness of its cohomology is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+  "place": "Proof, sentence beginning \"Being characterized by the vanishing of cohomology sheaves\": the integral scalar-extension t-exactness argument (previous step 4); agent extraction of the existing corrected stage-1 argument, not a quoted theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "prop-weil-pbc-integral-tstructure",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use finiteFreeCompletedScalarComparison to identify the restricted completed coefficient algebra with a finite product of units. Convert this to the finite free module using the biproduct comparison and reindexing along ULift. The proved scalarFiniteExact helper of strict-tower transport applies to the canonical completedScalarCochainModel: restriction identifies ordinary extension with tensor by that finite free module, detects finite limits, and its ordinary adjunction gives finite colimits. This proves both named ordinary exactness instances.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-finite-free-strict-tower-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical completedScalarCochainModel supplies the existing ordinary derived extension and its universal counit on complexes. Exactness makes mapDerivedCategory, together with mapDerivedCategoryFactors, another left derived functor of the identical termwise extension. Apply Functor.leftDerivedUnique and leftDerivedNatTrans_app to obtain e from the published ordinary derived extension to mapDerivedCategory, with the required counit normalization on every complex. Reuse the proved scalar_exact_comparison helper of the point-derived-sections tensor-descent module; that helper itself is stated for an arbitrary scheme, with exactly these canonical functors and counits.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-point-derived-sections-tensor-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each intrinsic integral constructible K, its first defining clause is intrinsic derived completeness. Choose an auxiliary finite field of prime characteristic greater than l, and apply sfDerivedComplete_iff_legacy. This supplies exactly IsDerivedCompleteUnrestricted, with no condition on the characteristic of Y. finiteFreeCompletedScalarComparison now makes the published chi_K invertible. Its naturality supplies an isomorphism beta from restricted ordinary derived extension to the published constructible strict-tower extension followed by inclusion. Construct epsilon as the inverse of e inverse followed by beta, so its inverse has the specified formula definitionally.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The intrinsic integral constructible category inherits shifts and triangles from its triangulated object property. The source inclusion followed by mapDerivedCategory is triangulated. Apply Functor.CommShift.ofComp to epsilon and the fully faithful target inclusion to equip the actual restricted strict-tower functor with its induced shift comparison. Its compatibility theorem gives NatTrans.CommShift epsilon.hom. Then Functor.isTriangulated_iff_comp_right gives triangulatedness of that functor.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each K and each upper bound b, the exact ordinary functor satisfies isLE_mapDerivedCategory_obj. Transport this bound through epsilon_K inverse using the standard derived t-structure. Independently apply isGE_mapDerivedCategory_obj and the same isomorphism to the lower bound a. These are exactly the ambient bounds already written in the Lean statement; neither an induced integral t-structure nor a comparison with the other constructible presentation is needed. The argument applies to any scheme, so the stated geometric hypotheses need not be used.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-point-derived-sections-tensor-descent",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F and 014X; Bhatt--Scholze Lemma 6.8.2(1); Z5 Lean assembly from the published finite-free comparison, universal derived extension, intrinsic completeness comparison and triangulated full-subcategory interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral scalar extension of constructible pro-etale complexes along finite extensions of l-adic coefficient fields is exact and t-exact for the standard integral t-structures",
+   "results": "8 hits: HomologicalComplex.extend_exactAt_iff, HomologicalComplex.extend_exactAt, AdicCompletion.map_exact, Profinite.NobelingProof.succ_exact, HomologicalComplex.IsSupportedOutside.exactAt, BDeRhamPlus, HomologicalComplex.exactAt_of_isSupported, HomologicalComplex.isSupported_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: generic homology, adic completion, or truncation machinery does not identify completed constructible scalar extension with a t-exact functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure.truncGE, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGELT, CategoryTheory.Triangulated.TStructure.truncLTGE, CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Triangulated.TStructure.triangleLTLTGELT, CategoryTheory.Triangulated.TStructure.truncGEπ, CategoryTheory.Triangulated.TStructure.truncLTι",
+   "date": "2026-10-22",
+   "verdict": "no match: generic homology, adic completion, or truncation machinery does not identify completed constructible scalar extension with a t-exact functor"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*scalar.*(exact|trunc)|scalar.*extension.*t.exact|constructible.*trunc",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic homology, adic completion, or truncation machinery does not identify completed constructible scalar extension with a t-exact functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed tensor extension by a finite free completed coefficient sheaf is t-exact on derived complete integral constructible complexes",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free completed sheaf coefficient extension preserves both standard cohomological bounds of derived complete integral constructible complexes",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, localCohomology.diagram, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, CochainComplex.instIsStrictlyGEExtendNatIntEmbeddingUpNatOfNat, LightCondMod.ofSheafLightProfinite, CondensedMod.IsSolid, IsAdicComplete.StrictMono.extend_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: generic homology, adic completion, or truncation machinery does not identify completed constructible scalar extension with a t-exact functor"
+  },
+  {
+   "tool": "grep",
+   "query": "(t.exact|TExact|tExact).*scalar|scalar.*(t.exact|TExact|tExact)|derived.*complete.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic homology, adic completion, or truncation machinery does not identify completed constructible scalar extension with a t-exact functor"
+  },
+  {
+   "tool": "grep",
+   "query": "tExact|TExact|t.exact",
+   "results": "Hits: Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic exact-derived-functor machinery is reused via the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization; it does not state the strict completed coefficient comparison and constructible restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived functor of an exact functor between abelian categories commutes with cohomology and preserves cohomological bounds",
+   "results": "Hits: CategoryTheory.ExactFunctor.of, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExtAddHom_apply, CategoryTheory.exactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapExtAddHom.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic exact-derived-functor machinery is reused via the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization; it does not state the strict completed coefficient comparison and constructible restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "Hits: CategoryTheory.Functor.mapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplex_reflects_iso, CategoryTheory.instPreservesZeroMorphismsHomologicalComplexMapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplex_obj_X, CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex, CategoryTheory.Functor.mapHomologicalComplexIdIso, CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex, CategoryTheory.instFullHomologicalComplexMapHomologicalComplexOfFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic exact-derived-functor machinery is reused via the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization; it does not state the strict completed coefficient comparison and constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of completed coefficient sheaves gives a t-exact scalar extension on derived complete constructible complexes",
+   "results": "Hits: Condensed.profiniteSolidification, Condensed.profiniteSolid, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', CategoryTheory.Functor.mapExactFunctor_smul, CondensedMod.IsSolid, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic exact-derived-functor machinery is reused via the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization; it does not state the strict completed coefficient comparison and constructible restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|mapHomologicalComplex.*[Hh]omology",
+   "results": "Hits: Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic exact-derived-functor machinery is reused via the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization; it does not state the strict completed coefficient comparison and constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor induces a triangulated functor on derived categories that preserves both halves of the standard t-structure",
+   "results": "Hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.IsTriangulated.map_distinguished, CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic exact-derived-functor machinery is reused via the existing Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization; it does not state the strict completed coefficient comparison and constructible restriction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-constructible-truncations",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-constructible-truncations",
+   "place": "Proof, sentence beginning \"Being characterized by the vanishing of cohomology sheaves\": the integral scalar-extension t-exactness argument (previous step 4)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-completed-scalar-extension-texact",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved exactness by finite-free coordinates, used the existing normalized completed/ordinary comparison and constructibility theorem, and established both standard bounds on bounded representatives. Explicitly used the existing characterization to identify the two integral-category definitions before invoking the integral t-structure. No new nodes.",
+  "blueprint": "prop-constructible-truncations: integral t-structure paragraph and the sentence beginning \"Being characterized by the vanishing of cohomology sheaves\", for integral finite scalar extension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies precisely the detailed integral category with the proper-base-change integral category under the present scheme hypotheses, so its t-structure can be used; this unit has no alternative category-identification statement."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Supplies the bounded standard integral t-structure and its ambient bounds; it is the integral t-structure explicitly invoked by the ancestor blueprint."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Supplies finite freeness of the completed coefficient sheaf and the canonical comparison to the actual strict-tower scalar extension for complete inputs; no result in this unit constructs that coefficient comparison."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes ordinary derived coefficient extension on K-flat representatives on a ringed site, as used to identify the exact-functor derivation."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Supplies preservation of precisely the detailed integral constructible category; used as a coefficient tool, without changing the unit proof route."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Supplies the inherited triangulated structure of the two full detailed integral subcategories, so the ambient exact functor restricts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-integral-tstructure",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-29457293a",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-29457293a (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and report, 0 new nodes, statement unchanged. Every cited id exists and none is merged; there is no cycle (closure walk), proof_deps equals the union of the step uses, and the searches cover all three kinds. Step 1: the stratified-perfect-characterization's sentence 'also describe exactly the category of def-weil-derived-complete-integral-detailed … same completed ring sheaf' identifies C_E and C_L with the categories of prop-weil-pbc-integral-tstructure. Its hypotheses (noetherian, finite-dimensional, ℓ invertible) match the item's, and the Tor-conditioned clause is not used. Step 2: S is finite free of rank [L:E] (finite-free comparison lemma, first paragraph), so Res(M⊗S)≅M^d and the presheaf tensor is already a sheaf. Kernels and cokernels are taken on underlying sheaves, so F is exact; marking this step elementary is justified. Step 3: the Mathlib leaf mapDerivedCategory (termwise, triangulated, preserves quasi-isomorphisms) together with lem-pur-derived-change-of-rings(2) on K-flat P gives F_D≅Lφ*; Stacks 015F checked at derived.tex:5884. Step 4: χ_K is a natural isomorphism to the actual strict-tower T for derived t-complete K, and completeness is part of the detailed definition. Step 5: the constructibility lemma and the triangulated-subcategory lemma let F_D restrict; the shift comparison is written explicitly as χ[n]∘σ∘χ^{-1}. Step 6: the bounded-representative clause of def-sbc-standard-tstructure (Mathlib leaf) shows the termwise F preserves D^{≤b} and D^{≥a} separately, and the constructible halves are ambient by Step 1. Edge cases: L=E; ramified input O_E/t; K=0. Taken over all of D(R), the first clause would be false (E_Y is not complete, T(E_Y)=0 but E_Y⊗S=L_Y). The statement correctly restricts it to constructible K in C_E. Source read: main-20261015 prop-constructible-truncations proof, sentence 'Being characterized by the vanishing of cohomology sheaves'; proof_origin=agent is correct. No duplicate found: lem-weil-scalar-extension-exact-triangulated, prop-weil-pbc-scalar-extension and lem-sfb-extend-scalars-bounded-constructible state no integral t-exactness. All 6 declared tool uses are accepted as generic coefficient and t-structure tools; the parent already uses the t-structure and the characterization, and unit sk-lem-finite has no replacing step. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedScalarExtensionTExact",
+  "declaration": "WeilConjectures.podCompletedScalarExtension_tExact",
+  "declarations": [
+   "WeilConjectures.podCompletedOrdinaryScalarExtension_preservesFiniteLimits",
+   "WeilConjectures.podCompletedOrdinaryScalarExtension_preservesFiniteColimits",
+   "WeilConjectures.podCompletedScalarExtension_tExact"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedScalarExtensionTExact.lean",
+  "statement": "theorem podCompletedScalarExtension_tExact [AlgebraicGeometry.IsNoetherian Y] (_hdim : ∃ n : ℕ, topologicalKrullDim Y ≤ n) (_hinv : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ e : completedDerivedScalarExtension l E L ι Y ≅ (completedOrdinaryScalarExtension l E L ι Y).mapDerivedCategory, (∀ P : CochainComplex (integralTowerModules l E Y) ℤ, e.hom.app (DerivedCategory.Q.obj P) ≫ (completedOrdinaryScalarExtension l E L ι Y).mapDerivedCategoryFactors.hom.app P = completedScalarCounit l E L ι Y P) ∧ ∃ (_σ : (sfConstructibleIntegralScalarExtension (l + 1) l (Nat.ne_of_lt (Nat.lt_succ_self l)) E L ι Y).CommShift ℤ), (sfConstructibleIntegralScalarExtension (l + 1) l (Nat.ne_of_lt (Nat.lt_succ_self l)) E L ι Y).IsTriangulated ∧ ∃ ε : sfConstructibleIntegralScalarExtension (l + 1) l (Nat.ne_of_lt (Nat.lt_succ_self l)) E L ι Y ⋙ (sfIntegralConstructible l L Y).ι ≅ (sfIntegralConstructible l E Y).ι ⋙ (completedOrdinaryScalarExtension l E L ι Y).mapDerivedCategory, (∀ K : sfIntegralConstructibleCategory l E Y, ε.inv.app K = e.inv.app K.obj ≫ (completedScalarComparison l E L ι Y).app K.obj) ∧ NatTrans.CommShift ε.hom ℤ ∧ ∀ (a b : ℤ), a ≤ b → ∀ K : sfIntegralConstructibleCategory l E Y, (DerivedCategory.IsLE K.obj b → DerivedCategory.IsLE ((sfConstructibleIntegralScalarExtension (l + 1) l (Nat.ne_of_lt (Nat.lt_succ_self l)) E L ι Y).obj K).obj b) ∧ (DerivedCategory.IsGE K.obj a → DerivedCategory.IsGE ((sfConstructibleIntegralScalarExtension (l + 1) l (Nat.ne_of_lt (Nat.lt_succ_self l)) E L ι Y).obj K).obj a)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5cba56b94",
+  "group": "Q139",
+  "result": "pass",
+  "note": "First S2 delivery; only the item's lean field changed, no new nodes; lean.statement is verbatim; 3 sorry proofs; report sections present. H3: Noetherian, finite-dimensional and stalk-unit hypotheses exact; C_E/C_L = sfIntegralConstructibleCategory; T = sfConstructibleIntegralScalarExtension, whose dummy p=l+1 is used only in the lift proof field, so the functor is p-independent and nothing is added. e is fixed uniquely by the universal counit on every complex (true since F is exact); ε fixed by ε.inv = e.inv ≫ completedScalarComparison and restricted to C_E; σ determined by NatTrans.CommShift ε.hom; ambient IsLE/IsGE bounds are correct because pbcIntegralTStructure is the ambient restriction. Edge cases K=0, empty Y, L=E, torsion K, a=b checked. H8/H9 OK. Advisories: statement decls owned by non-stmt_dep theorem nodes (finite-free comparison, integral-scalar-extension-constructible); integralOrdinaryScalar vs completedOrdinaryScalarExtension are parallel pre-existing presentations, and restating exactness for the latter is justified by the counit/χ pins. Compile not reproduced per the 2026-10-21 rule; worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-172ec",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T005435-L-3488592",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompletedScalarExtensionTExact.lean vs published (only .{u,u} universe annotations and imports differ in statements); node lem-pod-completed-scalar-extension-texact proof/proof_deps/proof_origin vs the Lean proof; scratch #print axioms (propext, sorryAx transitive, Classical.choice, Quot.sound)"
+ }
+}

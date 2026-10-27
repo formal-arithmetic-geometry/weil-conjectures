@@ -1,0 +1,174 @@
+{
+ "id": "lem-coef-semilinear-scalar-tensor",
+ "kind": "statement",
+ "title": "Representative-normalized scalar extension tensor comparison",
+ "statement": "Let J be an essentially small site in universes c,v and R,S commutative ring sheaves in max(c,v,r). Let \\varphi:R\\to S and let scalar be any normalized ScalarData for \\varphi of [def-coef-semilinear-system-models]. For any chosen closed tensor structures and CoefficientTensorModels over R and S of [def-coef-semilinear-system-models], there is a natural isomorphism scalar(X tensor_R Y) \\cong  scalar(X) tensor_S scalar(Y) equipped with ScalarTensorComparisonModel for these precise models. In particular its ordinary pure-section formula, chain summand comparison, K-flat preservation and derived counit square are the ones recorded in that structure. No flatness of \\varphi, boundedness, inverse system, or Hom-evaluation theorem is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, applied to the identity topos with coefficient map; Tags 06YY and 07A6; ordinary sheaf tensor in sites-modules.tex, Tag 03EK. Representative and unit normalizations are made explicit here."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing binary scalar-extension tensor core and the proved ordinary comparison presentation helpers. Transport ordinary extension along scalar.model.obj_eq, and identify the monoidal sheaf tensors with their sheafifications. The normalized ordinary adjunction identifies its unit with scalarExtensionSection. This gives the ordinary comparison and its pure-section equation; the ordinary adjunction and pure-tensor extensionality prove bifunctor naturality.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, applied to the identity topos with coefficient map; Tags 06YY and 07A6; ordinary sheaf tensor in sites-modules.tex, Tag 03EK. Representative and unit normalizations are made explicit here."
+   }
+  },
+  {
+   "text": "Apply tensorPullbackTotal to the inverse ordinary comparisons in every bidegree. Its signed differential equation gives a chain map. The ordinary scalar adjunction makes scalar extension preserve the defining coproducts, so the chain map is invertible. The proved total-comparison naturality and tensor-map factorization helpers assemble it into a natural isomorphism. The coproduct descending-map equation is exactly the required summand normalization.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-scalar-tensor-comparison",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, applied to the identity topos with coefficient map; Tags 06YY and 07A6; ordinary sheaf tensor in sites-modules.tex, Tag 03EK. Representative and unit normalizations are made explicit here."
+   }
+  },
+  {
+   "text": "Ordinary scalar extension preserves every K-flat complex by the independent-coefficient tensor-cancellation theorem. Choose the property of all K-flat complexes as the representative class. K-flat resolutions and resolvingRepresentativesFullyFaithfulWhiskering give fully faithful restriction of bifunctors. Apply tensorComparisonDescent using the supplied source and target tensor-model comparisons, scalar.model.ε, its computes field, the chain comparison, and K-flatness of total tensors. It produces the desired derived isomorphism with its forward counit square.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-pur-derived-change-of-rings",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, applied to the identity topos with coefficient map; Tags 06YY and 07A6; ordinary sheaf tensor in sites-modules.tex, Tag 03EK. Representative and unit normalizations are made explicit here."
+   }
+  },
+  {
+   "text": "Reverse the forward counit square by cancellation of the six displayed isomorphisms; this is the derived field of ScalarTensorComparisonModel. Use the inverse total comparison as its chain field, the all-K-flat preservation theorem as its kflat field, and the ordinary comparison from the first step as its ordinary field. The ordinary unit-section equality converts the pure formula to ScalarTensorPure. Package these fields with the descended isomorphism.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, applied to the identity topos with coefficient map; Tags 06YY and 07A6; ordinary sheaf tensor in sites-modules.tex, Tag 03EK. Representative and unit normalizations are made explicit here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-scalar-tensor-comparison",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product: inverse ordinary comparison on total summands and K-flat descent. Scalar-specific all-K-flat cancellation and representative descent reuse the proved library interfaces. P5, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars along ring sheaf morphism is compatible with tensor product",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange and ModuleCat.ExtendScalars formulas; no sheaf derived comparison with the prescribed representative square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic components are used where indicated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensor product on K-flat complexes",
+   "results": "Module.Flat.rTensor_shortComplex_exact, lTensor_shortComplex_exact and CategoryTheory.Tor'; none is the unbounded sheaf scalar-tensor comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic components are used where indicated."
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange in Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "results": "distribBaseChange and its forward/inverse pure tensor equations found and read at lines 441,462,467; ordinary algebra only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic components are used where indicated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearSystemsExistence",
+  "date": "2026-10-26",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraphs 1 and 2: the actual normalized finite coefficient system and its enriched adjunction before inverse limits. Ordinary-derived system foundation, specifically Stacks 03EK, 06YY, 07A4 and 07A6; tensor rebracketing used in original existence proof steps 6 and 8.",
+   "via": [
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearScalarTensor",
+  "file": "lean/Sheaf/Paper/SemilinearScalarTensor.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearScalarTensor",
+  "statement": "theorem semilinearScalarTensor\n    (R S : Sheaf J CommRingCat.{max c v r}) (φ : R ⟶ S)\n    (scalar : ScalarData.{c, v, max c v r} φ)\n    (source : Closed.{c, v, r} J R) (target : Closed.{c, v, r} J S)\n    (sourceModels : Models.{c, v, r} J R source)\n    (targetModels : Models.{c, v, r} J S target) :\n    ∃ γ : source.tensor ⋙ scalar.T ≅ (scalar.T.prod scalar.T) ⋙ target.tensor,\n      Nonempty (ScalarTensorComparisonModel.{c, v, r} J R S φ scalar source target\n        sourceModels targetModels γ)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092231-L-3415503",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092231-L-3415503",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

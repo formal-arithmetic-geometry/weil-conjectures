@@ -1,0 +1,302 @@
+{
+ "id": "lem-sf-tensor-exchange-ctf-domains",
+ "kind": "statement",
+ "title": "Finite affine descent of internal-Hom bounds and uniform integral direct-image bounds",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$ for $n\\geq1$, with the scheme, coefficient-sheaf and operation conventions of [def-fix-six-functor-datum]. Let $W$ be any finite-type $k$-scheme, not necessarily separated over $k$, and let $d_W\\geq0$ satisfy $\\dim W\\leq d_W$ [def-kun-topological-krull-dimension]. On the small pro-etale site use the intrinsic finite-torsion constructibility and finite-Tor categories [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude], and ambient derived internal Hom $H_W$ [def-pur-derived-internal-hom].\n\nFor integers $a\\leq b$ and $c\\leq e$, and $P,Q\\in D^b_{ctf}(W,A_n)$ of Tor amplitude in $[a,b]$ and $[c,e]$, respectively, $H_W(P,Q)$ is bounded constructible and has Tor amplitude in $[c-b-2d_W,e-a+2d_W]$. The bound is valid on $W$ itself for a finite affine cover with this single dimension bound; it requires no separatedness of $W$ and no site-perfectness of either input.\n\nUse the actual completed coefficient sheaf $\\widehat R_W=\\varprojlim_n(A_n)_W$. For $P,Q\\in D^b_c(W,R)$ in the derived-complete integral sense [def-weil-derived-complete-integral-detailed], write $P_n,Q_n$ for their reductions [def-weil-integral-derived-reduction]. If every $P_n$ has Tor amplitude in $[a,b]$ and every $Q_n$ in $[c,e]$, then $H_W(P,Q)=R\\mathcal Hom_{\\widehat R_W}(P,Q)$ is derived complete and belongs to $D^b_c(W,R)=D^b_{ctf}(W,R)$. Its evaluation-defined comparison\n$$H_W(P,Q)\\otimes^L_{\\widehat R_W}(A_n)_W\\xrightarrow{\\sim}R\\mathcal Hom_{(A_n)_W}(P_n,Q_n)$$\nis an isomorphism in the derived category at every $n$, and all reductions have Tor amplitude in $[c-b-2d_W,e-a+2d_W]$.\n\nLet $f:X\\to Y$ be separated of finite type between finite-type $k$-schemes and let $d_X\\geq0$ bound $\\dim X$. If $K\\in D^b_c(X,R)$ and all $K_n$ have Tor interval $[u,v]$, then $Rf_*K$ is derived complete, belongs to $D^b_c(Y,R)=D^b_{ctf}(Y,R)$, and the canonical maps\n$$(Rf_*K)_n\\xrightarrow{\\sim}Rf_*(K_n)$$\nare isomorphisms in $D(Y_{\\mathrm{proet}},A_n)$ compatible with quotient transitions. Every reduction has Tor interval $[u,v+2d_X]$, hence also that common cohomological bound. All assertions include empty schemes, for which one may take dimension bound zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
+  "place": "Proof Step 2, detection: independent finite-Tor membership replacing the unsupported ambient detection; returned detailed steps 3–4, finite affine-cover descent and integral uniform bounds"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite level. By lem-weil-pbc-finite-ring-constructible-derived-origin choose bounded constructible etale origins $P',Q'$ for the intrinsic pro-etale objects $P,Q$. Clause (ii) of lem-sf-comparison-tor-amplitude gives precisely the intervals $[a,b]$ and $[c,e]$ for these origins. Apply thm-sf-hom-ctf to $W,P',Q'$ and the supplied $d_W$: it gives bounded constructibility and Tor interval $I=[c-b-2d_W,e-a+2d_W]$ for $H_{\\mathrm{et}}(P',Q')$. Its statement permits every finite-type scheme; separatedness and site-perfectness are absent from its general assertion. In particular the theorem already supplies the finite-affine-cover descent with a single dimension bound; applying it on $W$ does not require affine intersections or separatedness of $W$.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "thm-sf-hom-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
+    "place": "node thm-sf-hom-ctf, order 2199"
+   }
+  },
+  {
+   "text": "The first origin $P'$ is now in $D^b_{ctf}$ and the second is bounded constructible, so thm-sf-hom-comparison-constructible identifies $H_W(P,Q)$ with $\\nu_W^*H_{\\mathrm{et}}(P',Q')$ in the derived category. Clause (i) of lem-sf-comparison-tor-amplitude transfers bounded constructibility and the same interval $I$ to this object. This proves the entire finite-level assertion for arbitrary intrinsic inputs; the comparison theorem assumes no site-perfectness. The exact intrinsic coefficient realization identifies the fixed-scalar ambient Hom with the recorded Hom-complex localization by lem-sf-intrinsic-site-hom-transport. Compose this with the two input origin isomorphisms, and transport constructibility and the exact Tor interval by isomorphism invariance.",
+   "uses": [
+    "thm-sf-hom-comparison-constructible",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-intrinsic-site-hom-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
+    "place": "node thm-sf-hom-comparison-constructible, order 2198"
+   }
+  },
+  {
+   "text": "For integral $P,Q$, use lem-coef-integral-hom-reduction on the actual ring sheaf $B=\\widehat R_W$. Since $Q$ is complete, $H_B(P,Q)$ is complete, and its stated evaluation-transpose comparison $F_nH_B(P,Q)\\to H_{B_n}(P_n,Q_n)$ is an isomorphism for every $n$. Apply Steps 1–2 to each $P_n,Q_n$: the hypothesis supplies the same two Tor intervals for every $n$, hence their Homs are constructible with the same interval $I$. Taking the degree-zero coefficient ring sheaf as test module in the definition of Tor amplitude also bounds their cohomology by $I$. Completeness, constructibility of every reduction, and this uniform cohomological bound are exactly def-weil-derived-complete-integral-detailed. Thus the ambient Hom belongs to $D^b_c(W,R)$; its uniform Tor bound places it in $D^b_{ctf}(W,R)$ by def-weil-finite-tor-amplitude. The equality of the two integral categories is the scheme-general assertion of lem-coef-integral-residue-tor, so no separatedness is introduced here. The legacy completeness supplied by integralHomReduction is converted to IsSfDerivedComplete by lem-sf-derived-complete-legacy-comparison. Isomorphism invariance of intrinsic constructibility is supplied by lem-weil-proetale-dbc-triangulated. The tensor-unit support argument chooses a K-flat resolution, so it is valid for the unbounded ambient derived category.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude",
+    "lem-coef-integral-residue-tor",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.md",
+    "place": "node lem-coef-integral-hom-reduction, order 2134"
+   }
+  },
+  {
+   "text": "For $f$ and $K$ in the last paragraph, cor-sf-direct-image-ctf-proetale applied to each $K_n$ gives bounded constructibility and Tor interval $J=[u,v+2d_X]$ for $Rf_{*,n}K_n$. It requires separatedness of $f$, which is assumed, but not separatedness of either scheme over $k$. The same $d_X,u,v$ work at every level. By def-weil-derived-direct-image the integral $Rf_*K$ is the derived limit of these finite direct images with the prescribed quotient transitions. Lem-sf-complete-direct-image-reduction states that this object is complete and that the canonical scalar adjunct of each limit projection is an isomorphism. These are exactly the reduction maps asserted here.",
+   "uses": [
+    "cor-sf-direct-image-ctf-proetale",
+    "def-weil-derived-direct-image",
+    "lem-sf-complete-direct-image-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-pushforward-Noetherian-case (Tag 099N), parts (1),(3),(4), and lemma-naive-completion; with the perfect-coefficient projection formula of Tag 0944"
+   }
+  },
+  {
+   "text": "Apply lem-sf-direct-image-reduction-transitions to obtain the precise adjacent transition square for the prescribed projection adjuncts. The comparisons in Step 4 respect quotient transitions: writing $\\pi_n$ for the limit projections and $t_{m,n}$ for a tower transition ($m\\ge n$), their defining cone relation is $t_{m,n}\\pi_m=\\pi_n$. Taking the scalar-extension adjuncts, with the canonical successive-reduction identifications, gives exactly the transition square for the reduction comparisons; this uses their specified projection normalization, not a choice of isomorphisms. By Step 4 all reductions are constructible with Tor interval $J$; testing on the coefficient ring sheaf gives the same cohomological interval. Completeness and the defining uniform-bound criterion therefore put $Rf_*K$ in $D^b_c(Y,R)$, and the uniform Tor criterion puts it in $D^b_{ctf}(Y,R)$. The category equality is again lem-coef-integral-residue-tor. On an empty scheme the empty covering is a covering, so every sheaf is zero by the sheaf axiom; all the complexes above are zero and the bounds with dimension zero remain valid.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude",
+    "lem-coef-integral-residue-tor",
+    "lem-sf-direct-image-reduction-transitions",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+    "place": "node def-weil-derived-direct-image, order 1468"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-sf-direct-image-ctf-proetale",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-integral-residue-tor",
+  "lem-pc-kflat-resolution",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-direct-image-reduction-transitions",
+  "lem-sf-intrinsic-site-hom-transport",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-proetale-dbc-triangulated",
+  "thm-sf-hom-comparison-constructible",
+  "thm-sf-hom-ctf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 2; existing domain plan assembled in Lean, with separate intrinsic Hom transport and quotient-transition coherence lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On proetale finite type schemes not necessarily separated derived internal Hom and direct image preserve bounded constructible finite Tor complexes and uniform integral reduction bounds",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme finiteness and generic derived categories do not state intrinsic pro-etale internal-Hom constructibility, affine descent or the uniform integral bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open descent of constructibility and uniform Tor amplitude for derived internal Hom with integral derived complete coefficients",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme finiteness and generic derived categories do not state intrinsic pro-etale internal-Hom constructibility, affine descent or the uniform integral bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of constructible finite Tor complexes on a finite type scheme is constructible finite Tor and the integral direct image has uniform bounds",
+   "results": "8 hits: HomologicalComplex.locallySmall, DerivedCategory, HomologicalComplex.instHasLimit, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.Hom.mk, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, HomologicalComplex.instHasFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme finiteness and generic derived categories do not state intrinsic pro-etale internal-Hom constructibility, affine descent or the uniform integral bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, TorAmplitude",
+   "results": "0 hits: ; loogle: unknown identifier 'TorAmplitude'",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme finiteness and generic derived categories do not state intrinsic pro-etale internal-Hom constructibility, affine descent or the uniform integral bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(internalHom|internal.hom|TorAmplitude)|TorAmplitude.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme finiteness and generic derived categories do not state intrinsic pro-etale internal-Hom constructibility, affine descent or the uniform integral bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(internalHom|internal.hom|TorAmplitude)|TorAmplitude.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic derived truncations, underived sheaf morphisms, adic modules or constructible subsets, not the geometric finite-Tor internal-Hom and completed direct-image assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral sheaves internal Hom commutes with reduction and direct image preserves uniform finite Tor amplitude",
+   "results": "8 hits: SheafOfModules.Hom, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.sheafHom, SheafOfModules.forgetPreservesLimitsOfShape, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.Finite.forgetPreservesFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic derived truncations, underived sheaf morphisms, adic modules or constructible subsets, not the geometric finite-Tor internal-Hom and completed direct-image assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, internalHom",
+   "results": "0 hits: ; loogle: unknown identifier 'internalHom'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic derived truncations, underived sheaf morphisms, adic modules or constructible subsets, not the geometric finite-Tor internal-Hom and completed direct-image assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of constructible finite Tor complexes on a finite type scheme has uniform Tor amplitude bounds without separatedness",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic derived truncations, underived sheaf morphisms, adic modules or constructible subsets, not the geometric finite-Tor internal-Hom and completed direct-image assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complete|[Tt]or[Aa]mplitude|[Cc]onstructible",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic derived truncations, underived sheaf morphisms, adic modules or constructible subsets, not the geometric finite-Tor internal-Hom and completed direct-image assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves derived tensor Hom scalar reduction adic completion pushforward preserves Tor intervals",
+   "results": "8 hits: localCohomology.diagram, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.IsSolid, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AdicCompletion.ofTensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic derived truncations, underived sheaf morphisms, adic modules or constructible subsets, not the geometric finite-Tor internal-Hom and completed direct-image assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-lem-tensor-adjunction",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 2, detection: independent finite-Tor membership replacing the unsupported ambient detection; returned detailed steps 3–4, finite affine-cover descent and integral uniform bounds",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-tensor-exchange-ctf-domains",
+  "worker": "stage1",
+  "summary": "Proved the intrinsic finite-level Hom assertion through etale origins and the existing nonseparated Hom theorem; assembled the integral Hom and direct-image assertions from their normalized completed-coefficient comparisons and uniform finite-level bounds. No new nodes or statement changes.",
+  "blueprint": "fix-lem-tensor-adjunction, proof Step 2 (detection): supplies independently the finite-Tor membership and uniform bounds of both ambient exchange endpoints; the finite affine descent is already provided by thm-sf-hom-ctf.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic finite-ring etale-origin equivalence needed to apply the etale Hom theorem to intrinsic inputs; this unit does not replace site comparison."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic transfer of the exact Tor interval in both directions across site comparison."
+   },
+   {
+    "node": "thm-sf-hom-ctf",
+    "why": "Generic finite Hom bound including finite affine descent on nonseparated finite-type schemes; this unit uses the bound as a domain theorem."
+   },
+   {
+    "node": "thm-sf-hom-comparison-constructible",
+    "why": "Generic evaluation-defined site comparison for finite-Tor first input, without assuming site-perfectness."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Generic intrinsic finite direct-image constructibility and precise Tor interval, used levelwise."
+   },
+   {
+    "node": "lem-sf-complete-direct-image-reduction",
+    "why": "Generic completed direct-image completeness and normalized reduction isomorphisms."
+   },
+   {
+    "node": "def-weil-derived-direct-image",
+    "why": "Specifies the integral direct-image tower, its transitions, and the canonical projection-adjoint maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "thm-sf-hom-ctf",
+  "thm-sf-hom-comparison-constructible",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-sf-complete-direct-image-reduction",
+  "def-weil-derived-direct-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-caed00577",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-caed00577 (reviewer sub-agent of L); spot-checked: I read the item in full, all 11 cited statements, the relevant proofs of thm-sf-hom-ctf and cor-sf-direct-image-ctf-proetale, and the parent fix-lem-tensor-adjunction (blueprint Step 2 and split step 1). There are no new nodes, the statement is unchanged and nothing is weakened. Step 1 (origin lemma, then comparison-tor-amplitude (ii), then thm-sf-hom-ctf) is correct: thm-sf-hom-ctf is stated for any finite-type k-scheme and proved by a finite affine cover with one m, so it covers nonseparated W. Its interval [c-b-2m,d-a+2m] matches the item's. Step 2 (thm-sf-hom-comparison-constructible needs only ctf first and D^b_c second input; clause (i) transfers the interval I) is correct. Step 3: lem-coef-integral-hom-reduction works over the same B=lim (A_n)_X, and its c_n is the item's evaluation-transpose map. Completeness comes from Q being complete. Testing with N=B_n gives the uniform support required by def-weil-derived-complete-integral-detailed, and residue-tor gives D^b_c=D^b_ctf. Step 4: cor-sf-direct-image-ctf-proetale applies levelwise (f separated finite type, dim X<=d), and lem-sf-complete-direct-image-reduction gives completeness and the prescribed projection-adjoint isomorphisms. Step 5 (transition square by adjunction naturality) is genuinely elementary. Small cases checked: a point gives the sharp [c-b,e-a]; i_*A against A on a curve sits in degree 2, inside [-2,2], so the 2d enlargement is needed; A_1 over A_2 is not ctf; the empty scheme is fine. The route departures to sk-thm-sf-hom-ctf and sk-cor-sf-direct-image-ctf are accepted as generic tool uses declared in split_report. There is no cycle and no SGA. Batch-5 flag: lem-pod-derived-exact-square-composition, reached via lem-weil-pbc-integral-coefficient-presentation-comparison, is generic exact-functor derived-square coherence and not part of the trace formula or Poincare duality, so the flag is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorExchangeCtfDomains",
+  "declaration": "WeilConjectures.tensorExchange_finiteHom_domains",
+  "declarations": [
+   "WeilConjectures.tensorExchange_finiteHom_domains",
+   "WeilConjectures.tensorExchange_integralHom_domains",
+   "WeilConjectures.tensorExchange_integralDirectImage_domains"
+  ],
+  "file": "lean/Sheaf/Paper/TensorExchangeCtfDomains.lean",
+  "statement": "theorem tensorExchange_finiteHom_domains (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (W : Over (Spec (.of D.k))) [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] (d : ℕ) (_hd : topologicalKrullDim W.left ≤ (d : WithBot ℕ∞)) (a b c e : ℤ) (_hab : a ≤ b) (_hce : c ≤ e) (P Q : proEtaleDerivedCategory W.left (Padic.coefficientExtensionRing l E n)) (_hP : finiteTorConstructible l E n hn W.left P) (_hQ : finiteTorConstructible l E n hn W.left Q) (_hPt : HasProEtaleTorAmplitude W.left (Padic.coefficientExtensionRing l E n) P a b) (_hQt : HasProEtaleTorAmplitude W.left (Padic.coefficientExtensionRing l E n) Q c e) : intrinsicFiniteTorsionConstructible l E n hn W.left ((IntegralHom.hom.{u, u} W.left (proEtaleConstantRing W.left (Padic.coefficientExtensionRing l E n))).obj (op P, Q)) ∧ HasProEtaleTorAmplitude W.left (Padic.coefficientExtensionRing l E n) ((IntegralHom.hom.{u, u} W.left (proEtaleConstantRing W.left (Padic.coefficientExtensionRing l E n))).obj (op P, Q)) (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f40979080",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Item node changes only lean; statement verbatim; 3 theorems, all sorry, docstrings with source and blueprint tag. Finite clause: arbitrary finite-type W (LOFT+QC, no separatedness), dim bound d:ℕ, finiteTorConstructible + HasProEtaleTorAmplitude [a,b],[c,e] → intrinsic constructible + Tor [c-b-2d,e-a+2d] for IntegralHom.hom = recorded derivedInternalHomOfUniverses. Integral Hom: sfIntegralConstructible inputs + all-level intervals → complete, D^b_c, D^b_ctf, predicate equality, uniform reduction interval, IsIso of defined evaluation-transpose IntegralHom.comparison (∃ normalized presentation, same shape as landed integralHomReduction). Direct image: f separated+LOFT+QC only, any Roos SfIntegralDirectImage with HasProduct (as in landed sfCompleteDirectImage_reduction) → complete, both domains, equality, IsIso projection adjuncts, Tor/support [a,b+2d], adjacent transition square. Edge cases (empty, dim 0, n=0 index) covered. Advisory: def nodes def-sf-integral-hom-reduction-models, def-weil-derived-direct-image, def-weil-integral-reduction-tower used but not in stmt_deps (S2 cannot add); second reading by same worker. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163835-L-861613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

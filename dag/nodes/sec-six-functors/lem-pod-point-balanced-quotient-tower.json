@@ -1,0 +1,139 @@
+{
+ "id": "lem-pod-point-balanced-quotient-tower",
+ "kind": "statement",
+ "title": "Balanced quotient tower at the geometric point",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, and $s=\\operatorname{Spec}D.k$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $B$ be the completed integral coefficient sheaf on $s_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients]. On the small pro-etale site [def-weil-pbc-proetale-site], let $C,J$ be arbitrary cochain complexes of $B$-module sheaves, with sheaf tensor [def-pur-sheaf-tensor-product] and signed total [def-pc-tensor-complex-sheaves]. Then the tower of separately reduced total tensors [lem-pur-integral-operations-well-defined] is isomorphic to the identity scalar-extension quotient tower of their ordinary signed total tensor [lem-weil-integral-scalar-extension-well-defined]. The forward isomorphism sends $(a\\otimes x)\\otimes(b\\otimes y)$ in each bidegree and each quotient to $ab\\otimes(x\\otimes y)$, including after sheafification, for all local sections $a,b,x,y$. No flatness, constructibility or boundedness is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemmas 3.4.11--3.4.12; agent-written chain-coordinate argument in completion normalization steps 1--2"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing tensor reduction tower comparison. Multiplication identifies the identity scalar reduction with ordinary reduction. The inverse balancing rule multiplies the quotient scalars; its inverse inserts one in the first tensor factor. The balanced relations prove the two inverse equations. Sheafification gives the corresponding sheaf maps; the direct sum over bidegrees gives complex maps commuting with both signed differential summands. Multiplication commutes with every quotient transition, so the level maps assemble to the required strict tower isomorphism.",
+   "uses": [
+    "lem-pur-integral-tensor-reduction-tower-comparison",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemmas 3.4.11--3.4.12, strict local generator specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of completion unit tensor product of sheaf complexes and unique pairing through isomorphism",
+   "results": "8 hits, including SheafOfModules.unitHomEquiv_comp_apply and pullbackObjUnitToUnit; none give the strict integral quotient tower normalization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso.of_isIso_comp_left\"",
+   "results": "One hit: CategoryTheory.IsIso.of_isIso_comp_left, Mathlib.CategoryTheory.Iso. Used for the elementary invertibility assembly.",
+   "date": "2026-10-26",
+   "verdict": "No strict tower/sections normalization result."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|quotient.*tower|completion.*sheaf",
+   "results": "msearch grep returned 25 unrelated hits, including RamificationInertia/Inertia, FreeModule/Norm, and Ideal/Quotient/Basic. Direct rg in Mathlib/Algebra/Homology and Mathlib/CategoryTheory/Sites returned no hits. Separate project search found the unit and tower comparison; their public interfaces do not contain the two requested normalized chain-level compatibilities.",
+   "date": "2026-10-26",
+   "verdict": "Existing general ingredients used; missing compatibility isolated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of sheaves commutes with change of rings and completion unit is natural",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; TensorProduct.isBaseChange; SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.unit; SheafOfModules.unitToPushforwardObjUnit; IsLocalization.algebraTensorEquiv; AdicCompletion.ofTensorProduct_tmul.",
+   "date": "2026-10-26",
+   "verdict": "No matching strict quotient-tower/sections-completion compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor base change for sheaf complexes gives an isomorphism between the tensor of quotient complexes and the quotient of their total tensor, sending (a tensor x) tensor (b tensor y) to (a*b) tensor (x tensor y)",
+   "results": "8 hits: lTensor.inverse_apply, Ideal.pi_mkQ_rTensor, lTensor.inverse_comp_lTensor, rTensor.inverse_apply, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, rTensor.inverse_comp_rTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor. These are module-quotient identities, not the normalized sheaf-complex tower isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general ingredients do not state this compatibility."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointEvaluationCompletionNormalization",
+  "date": "2026-10-26",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Proof, third paragraph identifying the actual pairing map; strict integral completion normalization steps 1--2",
+   "via": [
+    "lem-pod-point-evaluation-completion-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointBalancedQuotientTower",
+  "file": "lean/Sheaf/Paper/PointBalancedQuotientTower.lean",
+  "declaration": "WeilConjectures.point_balanced_quotient_tower",
+  "statement": "theorem point_balanced_quotient_tower (C J : CochainComplex (integralTowerModules l E (Spec (.of\n      D.k))) ℤ) :\n    ∃ rho : (integralOperationsTensorTowerFunctor l E (Spec (.of D.k))).obj (C, J) ≅\n      (integralScalarTowerFunctor l E E (AlgHom.id ℚ_[l] E) (Spec (.of D.k))).obj\n      ((PointDerivedHom.total.{u, u} D.k (completedIntegralCommRingSheafUnrestricted l E (Spec (.of\n      D.k)))) C J), PointQuotientTowerBalanced D l E C J rho",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.PointQuotientTowerBalanced",
+   "WeilConjectures.point_balanced_quotient_tower"
+  ],
+  "note": "The named predicates have exactly the displayed generator and strict completion formulas as their real bodies, with no holes. The sections completion equation is also used by the parent normalization predicate, which is definitionally the same equation. No data definition is chosen from the existence theorem."
+ },
+ "lean_audit": {
+  "master": null,
+  "slopmaster2": null
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T022753-L-431069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T022753-L-431069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

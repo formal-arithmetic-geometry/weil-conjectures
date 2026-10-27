@@ -1,0 +1,110 @@
+{
+ "id": "sk-p-dl-general-relative-line",
+ "kind": "statement",
+ "title": "Pure lisse sheaves over relative affine curves",
+ "statement": "Let $h:U_0\\to Y_0$ be smooth separated of relative dimension one,\nwith affine geometric fibres, and let $F$ be lisse and pure of weight\n$w$. Then $R^ih_!F$ is mixed of weights at most $w+i$.\n\n*Complement.* In particular this applies to an open subscheme\n$U_0\\subset\\mathbf A^1_{Y_0}$ with its projection $h_0:U_0\\to Y_0$,\nfor $Y_0$ a separated $k_0$-scheme of finite type: for every $r\\ge0$,\n$R^rh_{0!}F_0$ is $\\iota$-mixed of weights at most $w+r$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/_section.md",
+  "place": "node sk-p-dl-general-relative-line, order 4060"
+ },
+ "stmt_deps": [
+  "sk-d-real-weights",
+  "sk-def-wrp-real-definition"
+ ],
+ "proof": [
+  {
+   "text": "The assertion is immediate if $F=0$. Suppose that $F\\ne0$, and fix a\nclosed point $y$ of $Y_0$. We first bound the stalks. Compact-support\nbase change ([sk-thm-sf-comp-composition], in the form\n[sk-prop-sf-cbc]) identifies\n\n$$\n (R^ih_!F)_{\\bar y}=H_c^i(U_{\\bar y},F)\n$$\n\ntogether with its local Frobenius operator. The restriction of $F$ to\nthe fibre is again pure of weight $w$, because a residue extension\nraises both an eigenvalue and the residue cardinality to the same\npower. After a finite extension of $\\kappa(y)$, the nonempty\ncomponents of the fibre are geometrically connected smooth affine\ncurves, and [sk-cor-wft-curve-upper] bounds the weights of the\ncohomology of each of them by $w+i$. Taking the direct sum and then\nroots of the powers of the eigenvalues, we get the same bound over\n$\\kappa(y)$. In particular, $R^ih_!F=0$ outside degrees $1,2$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Next we prove that $R^ih_!F$ is mixed, using the real envelope\n([sk-prop-wrp-real-envelope]). Choose $b$ with\n$|\\iota(b)|=q^{-w/2}$, by taking a root of a nonzero local eigenvalue\nas in that proposition, and let $B_b$ be the corresponding\ngeometrically constant twist. Put $F^0=F\\otimes B_b$ and\n$E=F^0\\oplus(F^0)^\\vee$; this is the real envelope of $F$, a lisse\nsheaf that is real and pure of weight zero. At a closed point $y$\nwrite\n\n$$\n P_{i,y}(T)=\\det(1-TF_y\\mid H_c^i(U_{\\bar y},E)).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "By [sk-l-dl-a1-endpoints], $P_{0,y}=1$ and every\nreciprocal root of $P_{2,y}$ has modulus $q_y$, and by the bound just\nproved every reciprocal root of $P_{1,y}$ has modulus at most\n$q_y^{1/2}$. For a disconnected fibre these statements follow by the\nsame constant-extension argument.",
+   "uses": [
+    "sk-l-dl-a1-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the Euler product and the determinant identity of\n[sk-thm-trace-transport], after applying $\\iota$ we have\n\n$$\n L_\\iota(U_y,E,T)=\\frac{\\iota P_{1,y}(T)}{\\iota P_{2,y}(T)}.\n$$",
+   "uses": [
+    "sk-thm-trace-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since the Euler factors are real, this rational function has real\nTaylor coefficients, and so it equals its complex conjugate as a\nrational function, both being regular at zero. The numerator and the\ndenominator are coprime, because a common root would give an\neigenvalue having both permitted moduli, whereas $q_y^{1/2}<q_y$.\nA reduced fraction whose numerator and denominator have constant\ncoefficient one is unique, and comparing it with its conjugate we\nfind $\\iota P_{1,y},\\iota P_{2,y}\\in\\mathbf R[T]$.\nTherefore the sheaves $R^ih_!E$, which are constructible by the\nfiniteness theorems ([sk-thm-sf-ctf-stability]), are real at every\nclosed point, and [sk-i-dl-general-real] gives a finite mixed\nfiltration of each of them.",
+   "uses": [
+    "sk-i-dl-general-real"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By additivity, $R^ih_!F^0$ is a direct summand of $R^ih_!E$, hence is\nmixed. The projection formula for the constant twist identifies it\nwith $R^ih_!F\\otimes B_b$, and untwisting shifts the weight of every\npure quotient by $w$ while preserving the finite Weil filtration.\nIt follows that $R^ih_!F$ is mixed. Finally, the bound on its stalks\nproved above and [sk-lem-wgen-punctual-cutoff] show that every\nnonzero quotient in this filtration has weight at most $w+i$.",
+   "uses": [
+    "sk-lem-wgen-punctual-cutoff"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-l-dl-a1-endpoints",
+  "sk-thm-trace-transport",
+  "sk-i-dl-general-real",
+  "sk-lem-wgen-punctual-cutoff"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 4060,
+ "blueprint_uses": [
+  "sk-d-real-weights",
+  "sk-def-wrp-real-definition",
+  "sk-thm-sf-comp-composition",
+  "sk-prop-sf-cbc",
+  "sk-cor-wft-curve-upper",
+  "sk-prop-wrp-real-envelope",
+  "sk-l-dl-a1-endpoints",
+  "sk-thm-trace-transport",
+  "sk-thm-sf-ctf-stability",
+  "sk-i-dl-general-real",
+  "sk-lem-wgen-punctual-cutoff"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-d-real-weights",
+  "sk-def-wrp-real-definition"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-p-dl-general-relative-line",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-p-dl-general-relative-line"
+}

@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-space-reduced-closed-support",
+ "kind": "statement",
+ "title": "Reduced closed subspaces and their supports after base change",
+ "statement": "Algebraic spaces use [def-trf-algebraic-space], schemes use [def-pc-scheme], and universes use [def-weil-size-convention]. Their point spaces have the atlas topology [def-a1-space-point-topology]; fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $X$ be an algebraic space over a scheme $S$, and let $T\\subseteq|X|$ be closed. There is a unique reduced closed subspace $i:Z\\hookrightarrow X$ with $|Z|=T$. Here a closed subspace is a subfunctor whose inclusion is representable and becomes a closed immersion on every scheme base change [def-weil-closed-immersion]; reduced means that its etale scheme charts are reduced, that is, their local rings have no nonzero nilpotents. For every morphism of algebraic spaces $q:W\\to X$, the projection $Z\\times_XW\\to W$ is a closed immersion and identifies its underlying point space homeomorphically with $|q|^{-1}(T)$. No reducedness is asserted for this base change.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03IQ (lemma-reduced-closed-subspace); support after base change: Tag 03H4 (lemma-points-cartesian), and spaces.tex Tag 02YW (lemma-base-change-immersions)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:U\\to X$. By [lem-a1-etale-atlas-presentation], $R=U\\times_XU$ is a scheme and its projections $s,t$ are surjective etale. By [lem-a1-space-point-open-calculus], $|p|$ is continuous and surjective, so $T_U=|p|^{-1}T$ is closed. Since $ps=pt$, the subsets $|s|^{-1}T_U$ and $|t|^{-1}T_U$ of $|R|$ coincide.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-etale-atlas-presentation",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ (lemma-reduced-closed-subspace), first three sentences; Tag 03BW (lemma-points-presentation)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-reduced-induced-closed-subscheme], let $D\\hookrightarrow U$ be the reduced induced closed subscheme on $T_U$. The scheme pullbacks $D_s=R\\times_{s,U}D$ and $D_t=R\\times_{t,U}D$ are closed in $R$ by [lem-weil-pbc-closed-immersion-base-change]. Their projections to $D$ are etale by [lem-trf-space-representable-etale-scheme-tests], so both schemes are reduced by [etale-proposition-etale-reduced]. Their point images in $R$ are $|s|^{-1}T_U$ and $|t|^{-1}T_U$ by [lem-a1-space-point-open-calculus]. Step 1 makes these equal. The uniqueness clause of the reduced induced closed-subscheme theorem therefore identifies $D_s=D_t$ as closed subschemes of $R$. This is scheme-theoretic invariance, not merely equality of supports.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "etale-proposition-etale-reduced",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ, middle of proof; reducedness without Noetherian hypotheses is justified by descent.tex Tag 034E (lemma-reduced-local-smooth)."
+   }
+  },
+  {
+   "text": "Regard $X$ as the discrete fibred groupoid of its sheaf of sets. It is an etale stack: compatible objects glue by the sheaf axiom, and all arrows are identities. Its diagonal is representable and $U\\to X$ is an atlas by [def-trf-algebraic-space]. Every scheme test of this atlas is surjective etale, hence smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]; thus it is an algebraic stack as defined in [def-sfb-algebraic-moduli-stack]. Apply [lem-sfb-invariant-closed-substack-descent] to the invariant $D\\subset U$. It gives a closed substack $\\mathcal Z\\subset X$ with $U\\times_X\\mathcal Z=D$. Since it is strictly full in the discrete $X$, $\\mathcal Z$ is exactly a set subfunctor $F\\subset X$; its etale-stack gluing is the etale sheaf axiom for $F$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-invariant-closed-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), closed case; Tag 04YN (lemma-immersion-presentation)."
+   }
+  },
+  {
+   "text": "For any scheme $V$ and section $a\\in F(V)$, the identity $D=U\\times_XF$ gives $V\\times_FD=V\\times_XU$. The latter is a scheme surjective etale over $V$, by the scheme-test definition of the atlas $U\\to X$. Consequently [lem-sfb-etale-sheaf-space-atlas-bootstrap], applied to the etale sheaf $F$ with scheme atlas $D$, makes $F$ an algebraic space $Z$. The closed-substack conclusion in step 3 says precisely that $Z\\to X$ is representable by closed immersions. The map $D\\to Z$ is surjective etale by the same scheme-test identity. A reduced scheme $D$ is reduced as an algebraic space because each of its etale scheme charts is reduced by [etale-proposition-etale-reduced]. The atlas $D\\to Z$ is smooth on scheme charts by [lem-trf-space-representable-etale-scheme-tests] and [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Now [lem-sfb-space-smooth-reduced-locality] implies that $Z$ is reduced. By [lem-a1-space-point-open-calculus], the image of $D\\to X$ equals that of $Z\\to X$; it is $|p|(T_U)=T$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+    "etale-proposition-etale-reduced",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4 (lemma-spaces-etale-locally-representable); spaces-descent.tex Tag 0GB3 (lemma-reduced-local-smooth); spaces-properties.tex Tag 03IQ, existence conclusion."
+   }
+  },
+  {
+   "text": "If $Z_1\\subset X$ is another reduced closed subspace with point image $T$, its pullback $D_1=U\\times_XZ_1$ is a closed subscheme of $U$. It is an etale scheme chart of $Z_1$ by [lem-trf-space-representable-etale-scheme-tests], and hence is reduced by the stated definition of reduced algebraic space. By [lem-a1-space-point-open-calculus] its image in $U$ is $T_U$. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] gives $D_1=D$. The injectivity of the bijection in [lem-sfb-invariant-closed-substack-descent] then gives $Z_1=Z$ as subfunctors of $X$. This supplies the uniqueness proof omitted in Tag 03IQ.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-invariant-closed-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ, last sentence (omitted uniqueness), filled using Tag 01J3 and stacks-properties.tex Tag 0507."
+   }
+  },
+  {
+   "text": "Put $P=Z\\times_XW$, an algebraic space by [lem-trf-space-fibre-products-etale-covers], and let $j:P\\to W$ be the projection. For any scheme $V\\to W$, associativity of compatible pairs identifies $P\\times_WV=Z\\times_XV$ over $V$. This is a scheme closed in $V$ because $Z\\to X$ is a representable closed immersion. These are exactly the scheme tests for $j$ to be a closed immersion. No reducedness of $P$ is used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02YW (lemma-base-change-immersions), closed case; formal scheme-test argument."
+   }
+  },
+  {
+   "text": "By [lem-a1-space-point-open-calculus], $\\operatorname{im}|j|=|q|^{-1}(\\operatorname{im}|i|)=|q|^{-1}(T)=:B$. Choose a scheme atlas $v:V\\to W$, and put $P_V=P\\times_WV$. Its map $j_V:P_V\\to V$ is a closed immersion of schemes. To check injectivity of $|j|$, let $a,b\\in|P|$ map to the same $w\\in|W|$, and choose $u\\in|V|$ above $w$. The point-surjectivity for fibre products in [lem-a1-space-point-open-calculus] gives lifts of $(a,u)$ and $(b,u)$ to $|P_V|$. Since $|j_V|$ is injective by [def-weil-closed-immersion], the lifts coincide, so $a=b$. Thus $|j|$ is a continuous bijection onto $B$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-trf-algebraic-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03H4 (lemma-points-cartesian) and 0ABJ (lemma-subspace-induced-topology), closed-immersion case."
+   }
+  },
+  {
+   "text": "Let $C\\subseteq|P|$ be closed. Its inverse image $C_V\\subseteq|P_V|$ is closed, since the projection is continuous by [lem-a1-space-point-open-calculus]. The scheme closed immersion $j_V$ sends $C_V$ to a closed subset of $V$ by [def-weil-closed-immersion]. Point-surjectivity for the same fibre square gives $|v|^{-1}(|j|(C))=|j_V|(C_V)$. The map $|v|$ is an open continuous surjection by [lem-a1-space-point-open-calculus]. If a subset $H$ of $|W|$ has closed inverse image under $|v|$, its complement is $|v|(|v|^{-1}(H^c))$ and is open; thus $H$ is closed. Apply this to $H=|j|(C)$. Hence $|j|$ is closed, and the continuous bijection of step 7 has continuous inverse. It identifies $|P|$ homeomorphically with the subspace $B=|q|^{-1}(T)$, as required.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0ABJ (lemma-subspace-induced-topology), proof via an etale atlas, with the quotient-topology argument written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-invariant-closed-substack-descent",
+  "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03IQ (lemma-reduced-closed-subspace), with its invariant descent implemented by existing Tag 0507 and Tag 0BH4 nodes; uniqueness filled explicitly; Tag 03H4 and Tag 0ABJ for the base-change topology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every closed subset of an algebraic space admits a unique reduced closed subspace whose base changes have the inverse image support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → TopologicalSpace.Closeds ↥X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (s : Set ↑(X.presheaf.obj (Opposite.op U))), IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.IsClosedImmersion I.subschemeι\", \"doc\": \"For any scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the canonical morphism from the closed subscheme defined by $\\\\mathcal{I}$ to $X$ is a closed immersion. This means the morphism induces a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) [AlgebraicGeometry.IsReduced X], AlgebraicGeometry.IsReduced ↑U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom I.subschemeι.base) = ↑I.support\", \"doc\": \"The image of the canonical morphism from the closed subscheme defined by an ideal sheaf $ I $ to the original scheme $ X $ coincides with the support of $ I $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced induced closed algebraic subspace associated to a closed subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_isClosed_isIrreducible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R],\\n  PrimeSpectrum.vanishingIdeal '' {s | IsClosed s ∧ IsIrreducible s} = {P | P.IsPrime}\", \"doc\": \"The vanishing ideal of a closed irreducible subset of the prime spectrum $\\\\operatorname{Spec}(R)$ under the Zariski topology is a prime ideal of the commutative semiring $R$. Conversely, every prime i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (s : Set ↑(X.presheaf.obj (Opposite.op U))), IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"PrimeSpectrum.isClosed_iff_zeroLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (Z : Set (PrimeSpectrum R)), IsClosed Z ↔ ∃ s, Z = PrimeSpectrum.zeroLocus s\", \"doc\": \"A subset $ Z $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is closed in the Zariski topology if and only if there exists a subset $ s \\\\subseteq R $ such that $ Z $\"}\n  {\"name\": \"PrimeSpectrum.isClosed_iff_zeroLocus_radical_ideal\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (Z : Set (PrimeSpectrum R)),\\n  IsClosed Z ↔ ∃ I, I.IsRadical ∧ Z = PrimeSpectrum.zeroLocus ↑I\", \"doc\": \"A subset $ Z $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ is closed in the Zariski topology if and only if there exists a radical ideal $ I $ of $ R $ such that $ Z $ coincides with the zero loc\"}\n  {\"name\": \"PrimeSpectrum.isClosed_iff_zeroLocus_ideal\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (Z : Set (PrimeSpectrum R)), IsClosed Z ↔ ∃ I, Z = PrimeSpectrum.zeroLocus ↑I\", \"doc\": \"A subset $ Z $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is closed in the Zariski topology if and only if there exists an ideal $ I $ of $ R $ such that $ Z $ is\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.RingedSpace) {U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace}\\n  (s : Set ↑(X.presheaf.obj (Opposite.op U))), IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $ U $ of a ringed space $ X $ and any set $ s $ of sections over $ U $, the zero locus of $ s $ (i.e., the set of points in $ U $ where all elements of $ s $ vanish) is a closed su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → TopologicalSpace.Closeds ↥X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsReduced, AlgebraicGeometry.IsClosedImmersion",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Scheme.IsReduced'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the query returned an identifier error; the corrected Loogle query is recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "reduced.*[Cc]losed|[Cc]losed.*[Rr]educ|algebraic.?space",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/KrullDimension.lean\", \"line\": \"18\", \"text\": \"collection of all its subsets that are closed and irreducible. Unfolding this definition, it is\"}\n  {\"file\": \"Mathlib/Topology/KrullDimension.lean\", \"line\": \"19\", \"text\": \"the length of longest series of closed irreducible subsets ordered by inclusion.\"}\n  {\"file\": \"Mathlib/Topology/KrullDimension.lean\", \"line\": \"37\", \"text\": \"closed irreducible sets.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"80\", \"text\": \"      rw [Z.property.1.closure_genericPoint (isClosed_of_mem_irreducibleComponents _ Z.property)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"97\", \"text\": \"        isClosed_irreducibleComponent).specializes mem_irreducibleComponent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"37\", \"text\": \"If `G` is a group scheme over an algebraically closed field `k` that is reduced and locally\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"40\", \"text\": \"private lemma smooth_of_grpObj_of_isAlgClosed [IsReduced G] [IsAlgClosed K] : Smooth f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"563\", \"text\": \"The reduced induced scheme structure on the closed set is the quotient of this ideal. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"16\", \"text\": \"irreducible component is not already reduced. Instead, we take the closed subscheme defined by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"46\", \"text\": \"      fun W hW ↦ isClosed_of_mem_irreducibleComponents W hW.1⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"74\", \"text\": \"instance : IsClosedImmersion (X.irreducibleComponentι Z hZ) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"75\", \"text\": \"  inferInstanceAs (IsClosedImmersion (X.irreducibleComponentIdeal Z hZ).subschemeι)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"62\", \"text\": \"instance : ObjectProperty.IsClosedUnderIsomorphisms (C := Scheme) (IrreducibleSpace ·) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"110\", \"text\": \"instance : ObjectProperty.IsClosedUnderIsomorphisms (C := Scheme) (IsReduced ·) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"415\", \"text\": \"/-- A surjective closed immersion is an isomorphism when the target is reduced. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"417\", \"text\": \"    [IsClosedImmersion f] [Surjective f] [IsReduced Y] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"385\", \"text\": \"        fun W hW ↦ isClosed_of_mem_irreducibleComponents W hW.1⟩\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"156\", \"text\": \"/-- In a Noetherian space, every closed set is a finite union of irreducible closed sets. -/\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"157\", \"text\": \"theorem NoetherianSpace.exists_finite_set_closeds_irreducible [NoetherianSpace α] (s : Closeds α) :\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"158\", \"text\": \"    ∃ S : Set (Closeds α), S.Finite ∧ (∀ t ∈ S, IsIrreducible (t : Set α)) ∧ s = sSup S := by\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"175\", \"text\": \"/-- In a Noetherian space, every closed set is a finite union of irreducible closed sets. -/\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"176\", \"text\": \"theorem NoetherianSpace.exists_finite_set_isClosed_irreducible [NoetherianSpace α]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"269\", \"text\": \"lemma vanishingIdeal_isClosed_isIrreducible :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"270\", \"text\": \"    vanishingIdeal (R := R) '' {s | IsClosed s ∧ IsIrreducible s} = {P | P.IsPrime} := by\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"968\", \"text\": \"Zero loci of prime ideals are closed irreducible sets in the Zariski topology and any closed\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subset of an algebraic space has a unique reduced induced closed subspace",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(U : X.Opens) [IsReduced X] : IsReduced U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.mk.inj\", \"module\": \"Mathlib.Topology.Sets.Closeds\", \"type\": \"∀ {α : Type u_4} {inst : TopologicalSpace α} {carrier : Set α} {isIrreducible' : IsIrreducible carrier}\\n  {isClosed' : IsClosed carrier} {carrier_1 : Set α} {isIrreducible'_1 : IsIrreducible carrier_1}\\n  {isClosed'_1 : IsClosed carrier_1},\\n  { carrier := carrier, isIrreducible' := isIrreducible', is\", \"doc\": \"If two irreducible closed subsets of a topological space $\\\\alpha$ are equal, then their underlying sets are equal.\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.mk.injEq\", \"module\": \"Mathlib.Topology.Sets.Closeds\", \"type\": \"∀ {α : Type u_4} [inst : TopologicalSpace α] (carrier : Set α) (isIrreducible' : IsIrreducible carrier)\\n  (isClosed' : IsClosed carrier) (carrier_1 : Set α) (isIrreducible'_1 : IsIrreducible carrier_1)\\n  (isClosed'_1 : IsClosed carrier_1),\\n  ({ carrier := carrier, isIrreducible' := isIrreducible', i\", \"doc\": \"Two irreducible closed subsets of a topological space are equal if and only if their underlying closed irreducible sets are equal as subsets of the space.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if every open subset $U \\\\subseteq X$ has a reduced ring of sections $\\\\mathcal{O}_X(U)$, then this recursor constructs a\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.component_reduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsReduced X] (U : X.Opens),\\n  IsReduced ↑(X.presheaf.obj (Opposite.op U))\", \"doc\": \"For any reduced scheme $X$, every open subset $U$ of $X$ has a reduced ring in the structure sheaf, i.e., the ring $\\\\mathcal{O}_X(U)$ is reduced.\"}\n  {\"name\": \"TopologicalSpace.IrreducibleCloseds.mk.congr_simp\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"∀ {α : Type u_4} [inst : TopologicalSpace α] (carrier carrier_1 : Set α) (e_carrier : carrier = carrier_1)\\n  (isIrreducible' : IsIrreducible carrier) (isClosed' : IsClosed carrier),\\n  { carrier := carrier, isIrreducible' := isIrreducible', isClosed' := isClosed' } =\\n    { carrier := carrier_1, isIrr\", \"doc\": \"If two irreducible closed subsets of a topological space $\\\\alpha$ have equal underlying sets $S = S'$ and both satisfy the irreducibility and closedness conditions, then their constructor-generated ir\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsClosedImmersion",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.IsReduced Y] : CategoryTheory.IsIso f\", \"doc\": \"A surjective closed immersion is an isomorphism when the target is reduced.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsClosed|vanishingIdeal|IsReduced.*subscheme",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"27\", \"text\": \"* `AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal`: The vanishing ideal of a set.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"32\", \"text\": \"  `support` and `vanishingIdeal` forms a Galois connection.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"506\", \"text\": \"section ofIsClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"565\", \"text\": \"noncomputable nonrec def vanishingIdeal (Z : Closeds X) : IdealSheafData X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"567\", \"text\": \"    (fun U ↦ vanishingIdeal (U.2.fromSpec ⁻¹' Z))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"168\", \"text\": \"lemma map_vanishingIdeal {X Y : Scheme} (f : X ⟶ Y) (Z : TopologicalSpace.Closeds X) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"169\", \"text\": \"    (vanishingIdeal Z).map f = vanishingIdeal (.closure (f '' Z)) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"171\", \"text\": \"  · rw [map, ← le_support_iff_le_vanishingIdeal, TopologicalSpace.Closeds.closure_le]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"174\", \"text\": \"      range_subschemeι, coe_support_vanishingIdeal]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"175\", \"text\": \"  · simp [le_map_iff_comap_le, ← le_support_iff_le_vanishingIdeal, ← Set.image_subset_iff,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every closed subset of an algebraic space has a unique reduced closed subspace and the support pulls back under every morphism",
+   "results": "8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.support_nilradical, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.RingedSpace.zeroLocus_isClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology, not reduced closed algebraic subspaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced induced closed algebraic subspace associated to a closed subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.RingedSpace.zeroLocus_isClosed, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal, TopologicalSpace.IrreducibleCloseds.coe_mk, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology, not reduced closed algebraic subspaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"ClosedImmersion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology, not reduced closed algebraic subspaces"
+  },
+  {
+   "tool": "grep",
+   "query": "reduced.*[Cc]losed|[Cc]losed.*[Rr]educ|AlgebraicSpace",
+   "results": "14 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology, not reduced closed algebraic subspaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subset of an algebraic space has a unique reduced induced closed subspace",
+   "results": "8 hits: AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsReduced.mk, TopologicalSpace.IrreducibleCloseds.mk.inj, TopologicalSpace.IrreducibleCloseds.mk.injEq, AlgebraicGeometry.IsReduced.casesOn, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsReduced.component_reduced, TopologicalSpace.IrreducibleCloseds.mk.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology, not reduced closed algebraic subspaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-closed-subset-finite-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space. Supporting input: Reduced closed subspaces and their supports after base change.",
+   "via": [
+    "lem-sfb-space-closed-subset-finite-fibre-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-reduced-closed-support",
+  "worker": "stage1",
+  "summary": "Follow the atlas proof of Stacks 03IQ, use existing scheme reduced-structure and etale-locality nodes, and reuse invariant closed-substack descent plus the existing etale-sheaf bootstrap instead of duplicating them with a new closed-subspace lemma. Fill the omitted uniqueness and prove arbitrary-base-change support and the homeomorphism by point lifting and closedness detected on an open surjective atlas. No statement change or new node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space. Supporting input: Reduced closed subspaces and their supports after base change. The eight proof steps realize this reduced-support prerequisite of the historical alteration chain. The ancestor command returns None, so the inherited null ancestor and via chain are retained. Current latest blueprint direct-image proof (3) remains the route; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Scheme kernel-pair presentation of an atlas, used only to descend the reduced closed structure."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point lifting, images, continuity and openness on algebraic spaces; the unit has no competing point-calculus result."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Existence and uniqueness of reduced closed scheme structures on the atlas and its relation."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Scheme tests and base changes of etale atlases, needed to check all chart hypotheses."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Reducedness of an etale scheme over a reduced scheme; no Noetherian hypothesis is used."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Etale scheme tests are smooth, allowing the existing smooth-stack and reduced-locality tools."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Closure under fibre products and pulled-back atlases for arbitrary base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-55f6024f6",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-55f6024f6 (reviewer sub-agent of L); spot-checked: I read the delivery in full: an eight-step proof of the item, no new nodes. Compared with clones/live, the statement, stmt_deps, source and blueprint fields are unchanged. The item is still unsplit with an empty proof in live and side-live, so it is not superseded, and no re-split note exists. No cycle: the closure of every dep does not contain the item. No SGA is cited. Steps 1-4 follow spaces-properties 03IQ (l.1467-1499) exactly. Step 1 takes R and s,t from 0262. In step 2, the pullbacks D_s and D_t are reduced by 03EC plus 025O, and 01J3(3) uniqueness gives D_s=D_t scheme-theoretically, which is exactly the invariance hypothesis of the 0507 descent node. Step 3 treats X as a discrete etale stack that meets def-sfb-algebraic-moduli-stack (its atlas tests are etale, hence smooth). Step 4 checks the 0BH4 bootstrap hypotheses via V x_F D = V x_X U; reducedness comes from 0GB3 using D reduced and D->Z smooth and surjective, and the image is T. Step 5 supplies the uniqueness that 03IQ omits: 01J3(3) gives D_1=D, and injectivity of the 0507 bijection gives Z_1=Z. This uses tacitly that a closed subfunctor is an etale subsheaf, which is standard and matches the descent node's convention, so it is noted only. Step 6 is the formal closed-immersion scheme test. Steps 7-8 prove the 0ABJ-style homeomorphism: injectivity by point lifting, and closedness through the open surjective atlas, with |v|^-1(|j|C)=|j_V|(C_V) verified. Edge cases: T empty; T=|X|; the uniqueness counterexample on Spec k[eps]; and q: x->t^2, T={0}, which gives the non-reduced base change Spec k[t]/(t^2), consistent with 'no reducedness asserted'. All step tags match tags/tags, including 034E and 0GB3 with no Noetherian hypothesis. No duplicate: lem-sfb-smooth-presentation-closed-subsets is over a field, concerns stacks, and cites this item. The 7 declared tool_uses are generic black boxes and accepted. Batch-5: the 5 flagged citations (a1 atlas presentation, a1 point calculus, trf representable-etale tests 03EC, sfb algebraic-stack definition, 0BH4 bootstrap) are generic algebraic-space foundations. Except the 03EC node, which is itself a generic trace-formula-chapter node, they reach sec-trace-formula only through def-trf-algebraic-space, which is already a stmt_dep. None is part of the trace formula or Poincare duality, so no assumption leaf is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedClosedSubspaceSupport",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_unique_reduced_closed_subspace",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedClosedSubspaceSupport.lean",
+  "statement": "theorem exists_unique_reduced_closed_subspace {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Set (Point X.obj.obj)) (hT : IsClosed T) : ∃ C : ClosedSubspace X, IsReduced (C.val : AlgebraicSpace S) ∧ pointImage C.val.arrow.hom.hom = T ∧ (∀ D : ClosedSubspace X, IsReduced (D.val : AlgebraicSpace S) → pointImage D.val.arrow.hom.hom = T → D = C) ∧ ∀ (W : AlgebraicSpace S) (q : W ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.snd C.val.arrow.hom q.hom).hom ∧ ∃ e : Point (Limits.pullback C.val.arrow.hom q.hom).obj ≃ₜ {w : Point W.obj.obj | mapPoint q.hom.hom w ∈ T}, ∀ z : Point (Limits.pullback C.val.arrow.hom q.hom).obj, (e z).val = mapPoint (Limits.pullback.snd C.val.arrow.hom q.hom).hom z",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-beb0663c5",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Clause-by-clause match: reduced closed subspace C exists with pointImage = T; uniqueness ranges over all reduced closed subspaces and gives subobject equality; for every q : W ⟶ X the sheaf-pullback projection is representable by closed immersions; the pullback's points are homeomorphic to {w | mapPoint q w ∈ T}, pinned to the projection's own mapPoint; no reducedness is asserted for the base change. The three added landed stmt_deps (closed subspace, reduced space, proper-curve-moduli as owner of mapPoint) create no cycle; mapPoint is the only map on points in the project's Lean trees. The 9 dep nodes are identical to side-live; the item changes only lean and stmt_deps and is not superseded. lean.statement matches the file verbatim; the proof is only sorry; docstrings carry Stacks 03IQ/03H4/0ABJ/02YW and all 8 steps; every proof-dep import exists. Edge cases checked: empty T, T=|X|, q=id, non-reduced base change via u^2. No fixes, no compile needed."
+ }
+}

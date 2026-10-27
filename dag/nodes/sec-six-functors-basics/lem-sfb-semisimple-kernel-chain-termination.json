@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-semisimple-kernel-chain-termination",
+ "kind": "statement",
+ "title": "No infinite bad tower of full semisimple-kernel quotients",
+ "statement": "Let $k$ be a field [def-weil-field], with an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All group schemes are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smooth and connected mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Tori and groups of multiplicative type have the meanings of [def-sfb-tori-multiplicative-type]. For a smooth group $J$, write $\\mathfrak j=T_{J/k,e}$ [def-sc-scheme-tangent-space], with bracket induced by commutators [def-wf-lie-algebra]; $\\operatorname{Ad}$ is the differential of conjugation. Fix a faithful closed linear representation of $J$ into $\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]. A tangent vector is semisimple if its matrix in this representation is diagonalizable over $\\bar k$, and is central if its bracket with every tangent vector is zero. Nilpotent for a group means that it has a finite descending central series of closed normal subgroup schemes with commutators lowering the series. In characteristic $p>0$, $X^{[p]}$ denotes the tangent vector whose left invariant derivation on $k[J]$ is the $p$-fold composite of the derivation of $X$. A restricted Lie subalgebra means a $k$-linear subspace closed under brackets and $X\\mapsto X^{[p]}$. A homomorphism is finite faithfully flat when its coordinate algebra is a finite faithfully flat module over the target coordinate algebra; a finite group scheme is infinitesimal if its coordinate algebra is local with nilpotent augmentation ideal. Radicial means universally injective on geometric points. Assume $\\operatorname{char}k=p>0$. There is no infinite sequence $(J_i,q_i)_{i\\geq0}$ with each $J_i$ smooth, connected and nonnilpotent, every semisimple element of $\\operatorname{Lie}((J_i)_{\\bar k})$ central, and each $q_i:J_i\\to J_{i+1}$ a finite faithfully flat radicial homomorphism whose kernel is central of multiplicative type and has height at most one. Require in addition that $\\ker(dq_i)$ is precisely the set of semisimple elements of $\\operatorname{Lie}(J_i)$ and that its scalar extension to $\\bar k$ is the full semisimple subspace of $\\operatorname{Lie}((J_i)_{\\bar k})$. Height at most one means that every element of the augmentation ideal of the kernel coordinate algebra has $p$th power zero.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80 proof, printed p.378, the sentence beginning \"Eventually\". This is the termination assertion, separated from construction and torus lifting; Milne refers for its details to Springer 1998, 13.3.5, which is not present locally."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Suppose such a tower exists and put $F=\\bar k$, $G_i=(J_i)_F$. Connectedness after this extension follows from the identity rational point by [lem-sbc-connected-rational-point-geometrically-connected], and smoothness from [lem-sfb-scheme-lfp-smooth-flat-base-change]. By [lem-sfb-nilpotence-field-extension], $G_0$ remains nonnilpotent. The coordinate-ring maps after extension are finite (tensor a finite generating set) and faithfully flat by [lem-weil-pbc-faithfully-flat-base-change]. Kernels are obtained by imposing the same identity-fibre equations after tensoring, so remain central and of multiplicative type. The hypothesis on the geometrically full semisimple kernel says exactly that $d(q_i)_F$ kills every semisimple tangent vector of $G_i$. We henceforth write $q_i$ for these maps over $F$.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-sfb-nilpotence-field-extension",
+    "lem-weil-pbc-faithfully-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80, p.378, geometric semisimple-kernel hypothesis; Section 6f and Section 2h for geometric nilpotence."
+   }
+  },
+  {
+   "text": "Choose a maximal torus $T_0\\subseteq G_0$, allowing $T_0=1$. Here existence requires no conjugacy theorem: take a torus of greatest rank. The ranks are bounded by the dimension $n$ of the given faithful representation: [lem-sfb-split-torus-representation-weight-decomposition] diagonalizes its restriction, and the resulting at most $n$ characters give a closed inclusion into $\\mathbf G_m^n$. By [lem-sfb-multiplicative-character-antiduality], their map $\\mathbf Z^n\\to X^*(T)$ is surjective, so $\\operatorname{rank}T\\leq n$. A strict inclusion of split tori increases rank: otherwise its surjective map between free character groups of equal rank is an isomorphism. Now define $T_{i+1}=q_i(T_i)$. By [lem-sfb-quotient-borel-torus-images] these are maximal tori and $f_i=q_i|_{T_i}:T_i\\to T_{i+1}$ is faithfully flat.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-quotient-borel-torus-images"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, pp.357–358; Theorems 12.9, 12.12 and 12.23, pp.233–240; maximal-rank choice is elementary."
+   }
+  },
+  {
+   "text": "Every vector in $\\operatorname{Lie}(T_i)$ is semisimple in $\\operatorname{Lie}(G_i)$: restrict the faithful representation and differentiate its diagonal character blocks, using [lem-sfb-split-torus-representation-weight-decomposition]. Thus $d(q_i)$ kills this tangent space. Choose split coordinates on $T_i$ and $T_{i+1}$. A character pulled back along $f_i$ is a monomial $z_1^{a_1}\\cdots z_d^{a_d}$ by [lem-sfb-multiplicative-character-antiduality]. Differentiating its composite with the faithful diagonal representation of $T_{i+1}$ shows its exponent is divisible by $p$: the weights of that representation generate $X^*(T_{i+1})$ by the closed-inclusion argument of step 2, and each pulled-back weight has differential $(a_1,\\ldots,a_d)=0$ in $F^d$. Consequently $f_i^*X^*(T_{i+1})\\subseteq pX^*(T_i)$. Composing gives $(f_{r-1}\\cdots f_0)^*X^*(T_r)\\subseteq p^r X^*(T_0)$. On the subgroup $T_0[p^r]$ defined by $z_j^{p^r}=1$, every such monomial is $1$, so the composite is the identity-valued homomorphism there.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, pp.234–235; character calculation in Theorem 12.9, pp.233–234; Proposition 17.80, p.378."
+   }
+  },
+  {
+   "text": "For $r\\geq1$ put $Q_r=q_{r-1}\\cdots q_0:G_0\\to G_r$. Inductively [lem-sfb-multiplicative-isogeny-composition] applies: each $q_i$ is a faithfully flat homomorphism between smooth connected affine groups with finite multiplicative-type kernel, and its conclusion supplies the same hypotheses for the next composition. Thus $\\ker Q_r$ is central in $G_0$. Step 3 gives $T_0[p^r]\\subseteq\\ker Q_r$, hence $T_0[p^r]$ commutes with $G_0$ on every algebra, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-multiplicative-isogeny-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2 and its proof, p.387, with centrality from Corollary 12.41."
+   }
+  },
+  {
+   "text": "The commutator morphism $T_0\\times_F G_0\\to G_0$ is therefore identity-valued. Indeed, write $T_0=\\mathbf G_m^d$, $A=F[G_0]$. For any regular function on the target, the difference of its pullbacks by the commutator and by the constant identity lies in $A[z_1^{\\pm1},\\ldots,z_d^{\\pm1}]$ and restricts to zero modulo $(z_1^{p^r}-1,\\ldots,z_d^{p^r}-1)$ for every $r$. Write this finite Laurent sum as $\\sum_m a_m z^m$. Choose $p^r$ larger than every absolute nonzero coordinate difference between exponents in its support. Those exponents are distinct in $(\\mathbf Z/p^r\\mathbf Z)^d$, whose monomials are an $A$-basis of the quotient. All $a_m$ are zero. If $d=0$ the same conclusion is immediate. This proves equality of morphisms, hence centrality on every test algebra, not merely on geometric points. Thus $T_0$ is a central maximal torus. Apply [lem-sfb-central-maximal-torus-nilpotent] to the smooth connected $F$-group $G_0$: it is nilpotent, contradicting step 1.",
+   "uses": [
+    "lem-sfb-central-maximal-torus-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.23, p.359; the p-power Laurent-basis density argument is supplied by ND for the termination sentence of Proposition 17.80, p.378."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-sfb-nilpotence-field-extension",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-multiplicative-isogeny-composition",
+  "lem-sfb-central-maximal-torus-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80, p.378, termination sentence. ND supplies the p-power-torsion density argument using 12.9, 12.12, 17.20, 17.23 and 18.2; Springer 1998, 13.3.5 is unavailable locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "There is no infinite sequence of nonnilpotent smooth connected algebraic groups with all semisimple tangent vectors central and finite infinitesimal quotient maps killing exactly the semisimple tangent subalgebras",
+   "results": "{\"t\": \"2026-10-24T07:03:55Z\", \"tool\": \"leanfinder\", \"query\": \"There is no infinite sequence of nonnilpotent smooth connected algebraic groups with all semisimple tangent vectors central and finite infinitesimal quotient maps killing exactly the semisimple tangent subalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.isEngelian_of_isNoetherian\", \"LieAlgebra.IsSolvable.solvable\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieAlgebra.IsSolvable\", \"LieAlgebra.IsSolvable.solvable_int\", \"LieAlgebra.IsSemisimple\"], \"digest\": \"196927f61b64ae42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel, lower-central-series stabilization and nilpotent abstract Lie quotients do not bound a tower of finite isogenies of nonnilpotent algebraic groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termination of the iteration of infinitesimal isogenies with kernel the semisimple restricted Lie subalgebra",
+   "results": "{\"t\": \"2026-10-24T07:03:59Z\", \"tool\": \"leanfinder\", \"query\": \"Termination of the iteration of infinitesimal isogenies with kernel the semisimple restricted Lie subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.derivedLength\", \"LieModule.posFittingCompOf\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"LieModule.eventually_iInf_lowerCentralSeries_eq\", \"LieModule.mem_posFittingCompOf\", \"LieAlgebra.mem_zeroRootSubalgebra\"], \"digest\": \"2431f3a519a9331f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel, lower-central-series stabilization and nilpotent abstract Lie quotients do not bound a tower of finite isogenies of nonnilpotent algebraic groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"LieAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:03:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"LieAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.isNilpotent_ad_of_isNilpotent\", \"LieAlgebra.ad_mem_adjoin_of_isNilpotent\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"Function.Injective.lieAlgebra_isNilpotent\", \"Function.Surjective.lieAlgebra_isNilpotent\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"LieAlgebra.LieIdeal.isNilpotent_iff_le_maxNilpotentIdeal\"], \"digest\": \"6b9bedee0d2dbe93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel, lower-central-series stabilization and nilpotent abstract Lie quotients do not bound a tower of finite isogenies of nonnilpotent algebraic groups."
+  },
+  {
+   "tool": "grep",
+   "query": "isogen.*nilpotent|nilpotent.*isogen|semisimple.*kernel",
+   "results": "{\"t\": \"2026-10-24T07:03:51Z\", \"tool\": \"grep\", \"query\": \"isogen.*nilpotent|nilpotent.*isogen|semisimple.*kernel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel, lower-central-series stabilization and nilpotent abstract Lie quotients do not bound a tower of finite isogenies of nonnilpotent algebraic groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinite chain of algebraic groups modulo height one semisimple kernels cannot remain nonnilpotent with central semisimple Lie elements",
+   "results": "{\"t\": \"2026-10-24T07:03:51Z\", \"tool\": \"leansearch\", \"query\": \"An infinite chain of algebraic groups modulo height one semisimple kernels cannot remain nonnilpotent with central semisimple Lie elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.nilpotent_of_nilpotent_quotient\", \"Group.IsNilpotent.rec\", \"Group.IsNilpotent\", \"LieModule.IsNilpotent.casesOn\", \"Group.IsNilpotent.nilpotent\", \"upperCentralSeries_nilpotencyClass\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieModule.nilpotencyLength\"], \"digest\": \"7de72ebfdcd22362\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Engel, lower-central-series stabilization and nilpotent abstract Lie quotients do not bound a tower of finite isogenies of nonnilpotent algebraic groups."
+  },
+  {
+   "tool": "grep",
+   "query": "isogen.*nilpotent|nilpotent.*isogen|semisimple.*kernel",
+   "results": "{\"t\": \"2026-10-24T07:45:46Z\", \"tool\": \"grep\", \"query\": \"isogen.*nilpotent|nilpotent.*isogen|semisimple.*kernel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie nilpotence and group nilpotence do not address this tower of algebraic-group isogenies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There is no infinite sequence of nonnilpotent algebraic groups modulo full semisimple Lie kernels",
+   "results": "{\"t\": \"2026-10-24T07:45:46Z\", \"tool\": \"leansearch\", \"query\": \"There is no infinite sequence of nonnilpotent algebraic groups modulo full semisimple Lie kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.isNilpotent\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent\", \"LieModule.IsNilpotent.casesOn\", \"Group.IsNilpotent.casesOn\", \"IsNilpotent.to_isSolvable\", \"LieAlgebra.IsEngelian\", \"Group.IsNilpotent.rec\"], \"digest\": \"96b2f6bf268a561f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie nilpotence and group nilpotence do not address this tower of algebraic-group isogenies."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"LieAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:45:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"LieAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.isNilpotent_ad_of_isNilpotent\", \"LieAlgebra.ad_mem_adjoin_of_isNilpotent\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"Function.Injective.lieAlgebra_isNilpotent\", \"Function.Surjective.lieAlgebra_isNilpotent\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"LieAlgebra.maxNilpotentIdeal_eq_top_of_isNilpotent\", \"LieAlgebra.LieIdeal.isNilpotent_iff_le_maxNilpotentIdeal\"], \"digest\": \"6b9bedee0d2dbe93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie nilpotence and group nilpotence do not address this tower of algebraic-group isogenies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termination of finite central infinitesimal isogeny towers killing all semisimple tangent elements in smooth connected algebraic groups",
+   "results": "{\"t\": \"2026-10-24T07:45:51Z\", \"tool\": \"leanfinder\", \"query\": \"Termination of finite central infinitesimal isogeny towers killing all semisimple tangent elements in smooth connected algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"Algebra.FormallySmooth.of_perfectField\"], \"digest\": \"be9f9a035fde4def\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie nilpotence and group nilpotence do not address this tower of algebraic-group isogenies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic torus characters divisible by arbitrarily large powers of the characteristic vanish, forcing nilpotence of a central isogeny tower",
+   "results": "{\"t\": \"2026-10-24T07:46:33Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic torus characters divisible by arbitrarily large powers of the characteristic vanish, forcing nilpotence of a central isogeny tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"JacobsonNoether.exist_pow_eq_zero_of_le\", \"RootPairing.GeckConstruction.isNilpotent_f\", \"RootPairing.GeckConstruction.isNilpotent_e\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable'\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable\", \"ExpChar.expChar_center_iff\", \"isNilpotent_of_ker_le_center\", \"instExpCharLinearMapSubtypeMemSubringCenterId\"], \"digest\": \"e19e4f707d5b6c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie nilpotence and group nilpotence do not address this tower of algebraic-group isogenies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinitesimal-isogeny-lie-reduction",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, the sentence beginning \"Eventually\". This is the termination assertion, separated from construction and torus lifting; Milne refers for its details to Springer 1998, 13.3.5, which is not present locally.",
+   "via": [
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-kernel-chain-termination",
+  "worker": "stage1",
+  "summary": "ND supplies termination by killing p-power torsion of a maximal torus and using centrality of composite multiplicative kernels. Existing character, weight, image and central-torus lemmas are reused. One new statement-only field-invariance lemma; no statement changes or Mathlib leaves.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3), finiteness of open direct image. Retain inherited alteration/moduli/group-theory support ancestry, whose blueprint ancestor is null in blueprint_refs.py; Milne 17.80 termination is the local supporting place. Current blueprint contains no equivalent torus-tower or nilpotence-field-invariance node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Connectedness of a connected group after field extension, using its identity section; generic geometric tool for the supporting group argument."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "Faithful flatness of affine coordinate-ring maps after the field extension; generic ring-base-change tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-faithfully-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-ND-f840556de",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f840556de (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and the new unsplit node lem-sfb-nilpotence-field-extension in full. Milne 17.80 (p.378) only says 'Eventually' and points to Springer 13.3.5, so the delivery supplies its own termination argument, and the argument is sound. Step 1 base-changes to k̄; the cited connectedness, lfp smooth flat base change and faithfully flat base change statements fit their hypotheses. Step 2 bounds torus rank by n using the weight decomposition and antiduality (closed immersion ⇔ surjection on characters), then uses quotient-borel-torus-images to get T_{i+1}=q_i(T_i) maximal with faithfully flat restriction. Step 3: Lie(T_i) is diagonal, hence semisimple and killed by dq_i. Every pulled-back character therefore lies in pX^*, the composite lies in p^r X^*(T_0), and the composite is trivial on T_0[p^r]. Step 4 applies multiplicative-isogeny-composition inductively, which makes ker Q_r central. Step 5: a Laurent-polynomial basis argument over A=F[G_0] shows T_0 is central, and central-maximal-torus-nilpotent then contradicts step 1. The new node is true by Milne 6.38 (pp.133–134) plus the fact that the descending central series commutes with scalar extension (6.19a/§2h). An rg -L search for duplicates found none, and the node is not a clause of the item. Batch 5: the four flagged closures reach generic trf nodes (smooth fibre criterion, exterior-power base change, the scheme-as-algebraic-space definition, the descent-datum definition), all in unit sk-i-curve-zero. None of them is part of the trace formula or Poincaré duality proofs, so I accept them. I accept the two declared tool_uses. No SGA source is cited, and I made no fixes."
+ }
+}

@@ -1,0 +1,455 @@
+{
+ "id": "lem-sfb-affine-groupoid-pointed-quasisplitting",
+ "kind": "statement",
+ "title": "Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme]. Assume $U$ is affine [def-weil-affine-spectrum] and $s,t:R\\to U$ are separated (their diagonals are closed immersions [def-weil-proper-morphism]), flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and locally quasi-finite [pqf-def-quasifinite]. For every point $u\\in U$ there exist an affine $S$-scheme $W$, an etale morphism $g:W\\to U$ [def-weil-etale-morphism], and $w\\in W$ with $g(w)=u$ and induced residue-field map $\\kappa(u)\\to\\kappa(w)$ an isomorphism [def-weil-residue-field]. Put $R_W=W\\times_{g,U,s}R\\times_{t,U,g}W$ [def-pc-fibre-product], with its restricted groupoid on $W$. Its projections $s_W,t_W:R_W\\to W$ are flat, locally of finite presentation and locally quasi-finite. There is an open subscheme $P\\subseteq R_W$ [def-weil-open-immersion] containing the entire unit section and closed under inverse and composition, such that $(W,P,s_W|_P,t_W|_P,e_W,i_W|_P,c_W|_{P\\times_WP})$ is a groupoid and both $P\\to W$ are finite locally free [def-pc-finite-locally-free]. All objects may be taken within the chosen site bound.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04S0 (lemma-quasi-splitting-affine-scheme), with Situation situation-quasi-splitting and Tag 04RK (definition-split-at-point), quasi-splitting clause (3). The restricted projections retain their properties by etale base change and composition; the finite projections of the open subgroupoid are flat and locally of finite presentation, hence finite locally free."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-pc-finite-locally-free",
+  "def-sfb-restricted-groupoid-relation"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u\\in U$. Apply [lem-sfb-section-marked-finite-parts-scheme] to $f=s:R\\to U$ and its section $e$. It gives a separated etale $g_0:M\\to U$, a point $m$ over $u$ with the prescribed residue-field isomorphism, and the universal finite clopen $Q\\subseteq R\\times_{s,U,g_0}M$. The point clause applies since $s$ is locally quasi-finite, in particular quasi-finite at $e(u)$. By [lem-weil-pbc-lqf-locally-finite-type], $s,t$ are locally of finite type, so [lem-sfb-universal-finite-parts-groupoid] gives the groupoid $(M,Q)$, its morphism to $(U,R)$, and finite projections $s_Q,t_Q$.",
+   "uses": [
+    "lem-sfb-section-marked-finite-parts-scheme",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lem-sfb-universal-finite-parts-groupoid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 04RI, 04RR, 04RU and 04RW: parameter scheme, chosen point and finite-part groupoid"
+   }
+  },
+  {
+   "text": "Put $E=R\\times_{s,U,g_0}M$ and $H=M\\times_{g_0,U,s}R\\times_{t,U,g_0}M$. The map $H\\to E$ forgetting the target lift is a base change of the separated etale map $g_0$, hence separated and etale [lem-weil-pbc-separated-lqf-base-change, lem-weil-pbc-etale-scheme-base-change]. The groupoid morphism of step 1 gives $j:Q\\to H$ over the inclusion $Q\\subseteq E$. Its graph $Q\\to H\\times_EQ$ is a section of a separated etale morphism, hence a clopen immersion [lem-weil-pbc-etale-section-clopen-immersion]. The projection $H\\times_EQ\\to H$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]. Composing these two open immersions identifies $Q$ with an open subscheme $P_0\\subseteq H$; composition is an open immersion because the maps identify source schemes with open subschemes with restricted structure sheaves [def-weil-open-immersion]. Since $j$ respects all operations, $P_0$ is a subgroupoid on all objects $M$, containing the entire unit section.",
+   "uses": [
+    "lem-sfb-universal-finite-parts-groupoid",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RW, first paragraph: open immersion of the finite-part groupoid into the restricted relation"
+   }
+  },
+  {
+   "text": "The map $H\\to R$ is a composite of two base changes of $g_0$, hence etale [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-composition-cancellation]. Apply [lem-sfb-scheme-etale-source-target-properties] to the squares over $s$ and $t$, with horizontal etale maps $H\\to R$ and $M\\to U$: both projections $H\\to M$ are flat and locally of finite presentation. They are also locally quasi-finite: each is the composite of a base change of $s$ or $t$ and a base change of $g_0$; etale maps are unramified [def-weil-etale-morphism], hence locally quasi-finite [lem-weil-pbc-unramified-quasi-finite-at-points], and use [lem-weil-pbc-separated-lqf-base-change, lem-a1-scheme-lqf-composition]. Precomposition with the open immersion $P_0\\to H$ preserves flatness and local finite presentation, by its etaleness and the same source-and-target lemma. Since $P_0\\simeq Q$ has finite projections by step 1, [def-pc-finite-locally-free] makes both projections finite locally free.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-a1-scheme-lqf-composition",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 04S0 and 04MP: restricted projection properties; finiteness applies to the open subgroupoid"
+   }
+  },
+  {
+   "text": "The orbit $O(m)=t_Q(s_Q^{-1}(\\{m\\}))$ is finite, because $s_Q$ is finite and [lem-weil-pbc-finite-closed-map-finite-fibres] gives finite fibres. The unit shows $m\\in O(m)$. The morphism $g_0$ is separated and etale, hence locally quasi-finite by [def-weil-etale-morphism, lem-weil-pbc-unramified-quasi-finite-at-points]. Its target $U$ is affine. Thus [lem-sfb-separated-lqf-affine-finite-set] supplies an affine open of $M$ containing $O(m)$. Applying [lem-sfb-locally-free-groupoid-invariant-affine] to the groupoid $(M,Q)$ yields an affine open $W\\subseteq M$ containing $O(m)$ such that $s_Q^{-1}(W)=t_Q^{-1}(W)$. In particular $m\\in W$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-sfb-separated-lqf-affine-finite-set",
+    "lem-sfb-locally-free-groupoid-invariant-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04S0 via lemma-strong-splitting-affine-scheme: finite orbit and invariant affine neighborhood; affine finite-set input also Tag 07S0"
+   }
+  },
+  {
+   "text": "Let $P=Q\\times_{s_Q,M}W$. Invariance makes this also $Q\\times_{t_Q,M}W$ and the two-sided restriction $W\\times_MQ\\times_MW$: an arrow with one endpoint in $W$ has both endpoints in $W$. By [lem-a1-groupoid-invariant-open-restriction-degree] the operations restrict to a groupoid $(W,P)$. Both $P\\to W$ are finite as base changes of $s_Q,t_Q$ [lem-weil-pbc-finite-morphism-permanence]. Flatness and local finite presentation follow from the source-and-target lemma applied to the open restriction squares [lem-sfb-scheme-etale-source-target-properties, lem-weil-pbc-etale-composition-cancellation], so they are finite locally free by [def-pc-finite-locally-free]. The map $P\\to R_W$ is the base change of $P_0\\to H$ along $R_W\\to H$, hence open [lem-weil-pbc-open-immersion-base-change]. Here the fibre-product identity follows by specifying the two endpoints in $W$ [def-pc-fibre-product]. Its units, inverses and composition are the restricted operations, giving precisely the required open subgroupoid.",
+   "uses": [
+    "lem-a1-groupoid-invariant-open-restriction-degree",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04S0 via lemma-strong-splitting-affine-scheme, final paragraph: invariant restriction preserves finite projections"
+   }
+  },
+  {
+   "text": "Take $g=g_0|_W$ and $w=m$ regarded as a point of $W$. This composite of an open immersion and an etale morphism is etale [lem-weil-pbc-etale-composition-cancellation]. An open immersion induces residue-field isomorphisms [lem-weil-pbc-residue-field-point-naturality], so $\\kappa(u)\\to\\kappa(w)$ is the isomorphism from step 1 followed by an isomorphism, and $g(w)=u$. For $R_W\\to W$ the argument of step 3 applies with the etale map $g$: $R_W\\to R$ is etale by base change and composition, the source-and-target lemma gives flatness and local finite presentation, and the factorization into a base change of $s$ or $t$ and a base change of $g$ gives local quasi-finiteness using the cited permanence lemmas. All parameter schemes in step 1 and all subsequent fibre products and open subschemes lie in the chosen universe; passing to its fixed site skeleton is allowed by [def-weil-size-convention].",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-a1-scheme-lqf-composition",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04S0: final pointed affine quasi-splitting and retained projection properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-section-marked-finite-parts-scheme",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-sfb-universal-finite-parts-groupoid",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-a1-scheme-lqf-composition",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sfb-separated-lqf-affine-finite-set",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-a1-groupoid-invariant-open-restriction-degree",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04S0, by the proof of lemma-strong-splitting-affine-scheme with quasi-splitting substituted as instructed; construction via Tags 04RI, 04RR, 04RU and 04RW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale local finite locally free open subgroupoids of affine scheme groupoids with separated flat locally quasi finite projections",
+   "results": {
+    "t": "2026-10-23T11:58:11Z",
+    "tool": "leanfinder",
+    "query": "Etale local finite locally free open subgroupoids of affine scheme groupoids with separated flat locally quasi finite projections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.IsEtale",
+     "Algebra.isOpen_etaleLocus"
+    ],
+    "digest": "a1d4bc942d127f09"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale neighborhoods, etale loci and individual morphism properties; none constructs a finite locally free open internal subgroupoid or a pointed quasi-splitting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T11:59:00Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale neighborhoods, etale loci and individual morphism properties; none constructs a finite locally free open internal subgroupoid or a pointed quasi-splitting"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.splitting|quasiSplitting|finite.*subgroupoid",
+   "results": {
+    "t": "2026-10-23T11:59:32Z",
+    "tool": "grep",
+    "query": "quasi.splitting|quasiSplitting|finite.*subgroupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale neighborhoods, etale loci and individual morphism properties; none constructs a finite locally free open internal subgroupoid or a pointed quasi-splitting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine flat locally quasi finite scheme equivalence relation has etale neighborhoods with finite locally free open equivalence subrelations",
+   "results": {
+    "t": "2026-10-23T11:59:33Z",
+    "tool": "leansearch",
+    "query": "An affine flat locally quasi finite scheme equivalence relation has etale neighborhoods with finite locally free open equivalence subrelations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.IsAffineOpen",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.affineOpensRestrict",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE"
+    ],
+    "digest": "9f05827e0d5df2b4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale neighborhoods, etale loci and individual morphism properties; none constructs a finite locally free open internal subgroupoid or a pointed quasi-splitting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a finite flat open subrelation after passing to an affine etale neighborhood of a point",
+   "results": {
+    "t": "2026-10-23T11:59:42Z",
+    "tool": "leanfinder",
+    "query": "Existence of a finite flat open subrelation after passing to an affine etale neighborhood of a point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "Algebra.exists_etale_of_isEtaleAt",
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "RingHom.Etale.propertyIsLocal",
+     "Algebra.etaleLocus"
+    ],
+    "digest": "88f9e072e9a80862"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale neighborhoods, etale loci and individual morphism properties; none constructs a finite locally free open internal subgroupoid or a pointed quasi-splitting"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.splitting|quasiSplitting|finite.*subgroupoid",
+   "results": {
+    "t": "2026-10-23T13:03:54Z",
+    "tool": "grep",
+    "query": "quasi.splitting|quasiSplitting|finite.*subgroupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale neighborhoods, etale loci, and type-level subgroups do not give pointed finite locally free open internal subgroupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local finite flat open subgroupoid of a flat quasi finite scheme groupoid",
+   "results": {
+    "t": "2026-10-23T13:03:54Z",
+    "tool": "leansearch",
+    "query": "Etale local finite flat open subgroupoid of a flat quasi finite scheme groupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Flat.mk",
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "OpenSubgroup"
+    ],
+    "digest": "371390ce832c72ea"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale neighborhoods, etale loci, and type-level subgroups do not give pointed finite locally free open internal subgroupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T13:03:54Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale neighborhoods, etale loci, and type-level subgroups do not give pointed finite locally free open internal subgroupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat locally quasi finite groupoid scheme admits an affine etale neighborhood of any point with the same residue field and an open finite locally free subgroupoid",
+   "results": {
+    "t": "2026-10-23T13:03:55Z",
+    "tool": "leanfinder",
+    "query": "A separated flat locally quasi finite groupoid scheme admits an affine etale neighborhood of any point with the same residue field and an open finite locally free subgroupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.Scheme.etaleTopology"
+    ],
+    "digest": "1c3f3b89642e779a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale neighborhoods, etale loci, and type-level subgroups do not give pointed finite locally free open internal subgroupoids"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-relation-etale-replacement",
+  "date": "2026-10-23",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid.",
+   "via": [
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-groupoid-pointed-quasisplitting",
+  "worker": "stage1",
+  "summary": "Q58 expands Tag 04S0 through the scheme of section-marked finite parts and its translation groupoid; proves the open subgroupoid embedding by a graph of an etale section; reuses existing finite-set affine and invariant-affine lemmas; checks all projection properties and the residue-field point. Two general statement-only inputs are created. No statement change; source finiteness typo corrected in the proof.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), supporting algebraic-space bootstrap in the inherited from.place: finite-part construction and invariant affine shrinking for the pointed quasi-splitting, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme-morphism implication needed to apply the finite-part groupoid construction."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic separatedness and local-quasi-finiteness permanence for the restriction diagram."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic implication showing the etale object map and its base changes are locally quasi-finite."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-composition",
+    "why": "Generic scheme-morphism permanence for each restricted source/target projection."
+   },
+   {
+    "node": "lem-a1-groupoid-invariant-open-restriction-degree",
+    "why": "Generic restriction of groupoid operations to an invariant open, after the finite part has been constructed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-a1-scheme-lqf-composition",
+  "lem-a1-groupoid-invariant-open-restriction-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-9206669c7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-9206669c7 (reviewer sub-agent of L); spot-checked: I read the Stacks sources in full: 04RI, 04RR, 04RC, lemma-finite-separated, section-finite-part-groupoid/04RU, 04RK, situation-quasi-splitting, 04RW, 04RY, the strong-splitting-affine proof and 04S0. The item matches 04S0 and is unchanged; finite locally free equals finite plus flat plus lfp, which is the source's own upgrade. New node section-marked-finite-parts-scheme is the scheme case of (X/Y,σ)_fin (04RI(1),(2) and 04RR(4)). I checked its point clause myself: σ(y) is rational and isolated in a locally-finite-type fibre, so it is a clopen finite component, and κ(y)→κ(m)→κ(y) is the identity. New node universal-finite-parts-groupoid gives the 04RU formulas verbatim. I checked every groupoid law, since Stacks omits that check: e(tz) lies in c(Z,iz) via c(z,iz); c(z1,z2) lies in Z2; i_Q is an involution; t_Q = s_Q∘i_Q is finite. Neither node restates a clause of the item, and there is no duplicate: the DAG grep for the tags and for quasi-split(ting) finds only the parent chain and 0DTE, which needs a finite stabilizer. Steps 1-6: the bases are right (H→E is the base change of g0 along t). The graph is a section of a separated étale map, so it is an open immersion. Flat and lfp come from the étale source-target squares, lqf from étale⇒unramified⇒lqf plus base change and composition. Affine and invariant shrinking cite nodes whose hypotheses are all established, P = P0×_H R_W is open, and the residue-field isomorphism composes through the open immersion. The report's source-error note (R' itself is not finite, only P) is correct. Batch-5 flag: scheme-etale-source-target-properties reaches lem-trf-smooth-composition, the generic fact that smooth composites are smooth. It is not part of the trace formula or Poincaré duality, so the citation is accepted. The generic tool_uses from sk-thm-p1 and sk-p-real-rankin are accepted. No SGA. No other group has split this item (live and side-live are unsplit). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidPointedQuasisplitting",
+  "declaration": "AlgebraicGeometry.affine_groupoid_pointed_quasisplitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidPointedQuasisplitting.lean",
+  "statement": "theorem affine_groupoid_pointed_quasisplitting {S : Scheme.{u}} {R U : Over S} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s.left t.left ⟶ R.left) (hG : IsGroupoidScheme s.left t.left e.left i.left c) [IsAffine U.left] [IsSeparated s.left] [IsSeparated t.left] [Flat s.left] [Flat t.left] [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] (hs : s.left.IsLocallyQuasiFinite) (ht : t.left.IsLocallyQuasiFinite) (u₀ : U.left) : ∃ (W : Over S) (g : W ⟶ U) (w : W.left), IsAffine W.left ∧ Etale g.left ∧ g.left w = u₀ ∧ IsIso (g.left.residueFieldMap w) ∧ Flat (restrictedEtaleRelationSource s t g).left ∧ Flat (restrictedEtaleRelationTarget s t g).left ∧ LocallyOfFinitePresentation (restrictedEtaleRelationSource s t g).left ∧ LocallyOfFinitePresentation (restrictedEtaleRelationTarget s t g).left ∧ (restrictedEtaleRelationSource s t g).left.IsLocallyQuasiFinite ∧ (restrictedEtaleRelationTarget s t g).left.IsLocallyQuasiFinite ∧ ∃ (eW : W.left ⟶ (restrictedEtaleRelation s t g).left) (iW : (restrictedEtaleRelation s t g).left ⟶ (restrictedEtaleRelation s t g).left) (cW : pullback (restrictedEtaleRelationSource s t g).left (restrictedEtaleRelationTarget s t g).left ⟶ (restrictedEtaleRelation s t g).left), IsGroupoidScheme (restrictedEtaleRelationSource s t g).left (restrictedEtaleRelationTarget s t g).left eW iW cW ∧ eW ≫ (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s).left = g.left ≫ e.left ∧ iW ≫ (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s).left = (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s).left ≫ i.left ∧ (∀ (H : Scheme.{u}) (p : H ⟶ pullback (restrictedEtaleRelationSource s t g).left (restrictedEtaleRelationTarget s t g).left) (q : H ⟶ pullback s.left t.left), p ≫ pullback.fst _ _ ≫ (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s).left = q ≫ pullback.fst s.left t.left → p ≫ pullback.snd _ _ ≫ (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s).left = q ≫ pullback.snd s.left t.left → p ≫ cW ≫ (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s).left = q ≫ c) ∧ ∃ (P : (restrictedEtaleRelation s t g).left.Opens) (eP : W.left ⟶ P.toScheme) (iP : P.toScheme ⟶ P.toScheme) (cP : pullback (P.ι ≫ (restrictedEtaleRelationSource s t g).left) (P.ι ≫ (restrictedEtaleRelationTarget s t g).left) ⟶ P.toScheme) (k : pullback (P.ι ≫ (restrictedEtaleRelationSource s t g).left) (P.ι ≫ (restrictedEtaleRelationTarget s t g).left) ⟶ pullback (restrictedEtaleRelationSource s t g).left (restrictedEtaleRelationTarget s t g).left), IsGroupoidScheme (P.ι ≫ (restrictedEtaleRelationSource s t g).left) (P.ι ≫ (restrictedEtaleRelationTarget s t g).left) eP iP cP ∧ eP ≫ P.ι = eW ∧ iP ≫ P.ι = P.ι ≫ iW ∧ k ≫ pullback.fst _ _ = pullback.fst _ _ ≫ P.ι ∧ k ≫ pullback.snd _ _ = pullback.snd _ _ ≫ P.ι ∧ cP ≫ P.ι = k ≫ cW ∧ (P.ι ≫ (restrictedEtaleRelationSource s t g).left).IsFiniteLocallyFree ∧ (P.ι ≫ (restrictedEtaleRelationTarget s t g).left).IsFiniteLocallyFree",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing arbitrary restricted-relation definition via the landed def-sfb-restricted-groupoid-relation. The groupoid operations are existentially specified by the original operations and pullback projections; no new construction or notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-efed921bb",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read node, Stacks 04RK(3)/situation-quasi-splitting/04RZ proof/04S0, every stmt_dep record and the Lean sources of IsGroupoidScheme, restrictedEtaleRelation{,Source,Target}, IsLocallyQuasiFinite and IsFiniteLocallyFree. H3: hypotheses match the node with nothing extra (Over-S groupoid with c on pullback s t, IsAffine U, IsSeparated/Flat/LocallyOfFinitePresentation/IsLocallyQuasiFinite on s,t; the node's global lqf is stronger than 04S0 but settled in stage 1). Conclusion: W affine, g étale, g w = u₀, IsIso residueFieldMap; six projection properties of R_W = pullback (snd g s ≫ t) g. Restricted eW/iW/cW pinned on the R coordinate by middle equations (q exists uniquely) and on the W coordinates by the groupoid laws, so canonical. P : Opens with eP≫ι=eW (whole unit section), inverse, and composition via k pinned by projections; both projections IsFiniteLocallyFree. Universe u throughout. Records: only lean plus one landed stmt_dep (def-sfb-restricted-groupoid-relation, landed 10-23 before base, unchanged); statement, proof and proof_deps unchanged; lean.statement verbatim; sorry only; docstrings with source and blueprint; plain imports are proof_dep modules; report sections present; no duplicate declaration. No file changed, so no compile. No findings."
+ }
+}

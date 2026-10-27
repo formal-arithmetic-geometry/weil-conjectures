@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-reduction-frobenius-sheaf-norm",
+ "kind": "statement",
+ "title": "A uniform Frobenius power gives a sheaf norm for the reduction immersion",
+ "statement": "Let $p$ be a prime and $X$ a Noetherian scheme [def-pc-scheme], meaning that it has a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Assume $p\\mathcal O_X=0$ (in every local ring). Write $i:X_{\\mathrm{red}}\\hookrightarrow X$ for the reduction immersion and $\\mathcal N_X$ for its nilradical [def-weil-pbc-scheme-reduction]. There exist an integer $e\\geq1$ and unital ring homomorphisms $$\\nu_V:\\Gamma(i^{-1}V,\\mathcal O_{X_{\\mathrm{red}}})\\longrightarrow\\Gamma(V,\\mathcal O_X)$$ for every open $V\\subseteq X$, compatible with restriction, such that $\\nu_V(i^\\sharp a)=a^{p^e}$ for every $a\\in\\Gamma(V,\\mathcal O_X)$. On each affine open $U=\\operatorname{Spec}A$, under $\\Gamma(i^{-1}U,\\mathcal O_{X_{\\mathrm{red}}})=A/\\sqrt{(0)}$, the map is $\\bar a\\mapsto a^{p^e}$. Moreover, for every open $V$, every $b\\in\\Gamma(i^{-1}V,\\mathcal O_{X_{\\mathrm{red}}})$ and every $y\\in i^{-1}V$, $$b(y)=0\\ \\Longrightarrow\\ \\nu_V(b)(i(y))=0,$$ where values are taken in residue fields [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction); norm conditions in Tag 0BCX (divisors-section-norms)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-scheme-reduction], $i$ is the identity on underlying spaces and $i_*\\mathcal O_{X_{\\mathrm{red}}}=\\mathcal O_X/\\mathcal N_X$ as sheaves of rings. Apply [lem-sc-reduction-nilradical-nilpotent] to the Noetherian scheme $X$ and choose $n\\geq1$ such that $\\mathcal N_X^n=0$. This is one exponent on all of $X$, not an exponent chosen separately for each open. Choose $e\\geq1$ with $q=p^e\\geq n$, possible because $p\\geq2$. Then $\\mathcal N_X^q=0$: a product of $q$ local sections of $\\mathcal N_X$ contains a product of $n$ such sections, which is zero.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-sc-reduction-nilradical-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction), proof; the local-lift gluing details omitted there."
+   }
+  },
+  {
+   "text": "For every open $W\\subseteq X$, the element $p\\cdot1\\in\\Gamma(W,\\mathcal O_X)$ is zero: its germ is zero at every point by hypothesis, hence it is zero by the sheaf separatedness axiom. By [def-weil-ring-frobenius], $P_W:a\\mapsto a^q$ is a unital ring endomorphism, and it commutes with restriction since restriction is a ring homomorphism and preserves powers. The zero section ring, in particular the ring on the empty open, is allowed: there the power map is the unique ring endomorphism.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC6 (varieties-section-frobenius), paragraph after Definition 03SM (varieties-definition-absolute-frobenius), iterated e times; applied in the construction of 0BDZ."
+   }
+  },
+  {
+   "text": "Fix an open $V$ and $b\\in\\Gamma(i^{-1}V,\\mathcal O_{X_{\\mathrm{red}}})$. The quotient-sheaf description in [def-weil-pbc-scheme-reduction] means that $b$ has lifts $a_j\\in\\Gamma(W_j,\\mathcal O_X)$ on an open cover $V=\\bigcup_jW_j$: a quotient germ has a representative, and equality of germs holds on a smaller neighbourhood. If $a$ and $a^\\prime$ are two lifts on an open $W$, then $a-a^\\prime\\in\\mathcal N_X(W)$. Its $q$-th power is zero by Step 1 (equivalently, its germ belongs to the $q$-th power of the nilradical at each point). By the ring-endomorphism assertion of [def-weil-ring-frobenius], $a^q-(a^\\prime)^q=(a-a^\\prime)^q=0$. Applying this to restricted lifts on each $W_j\\cap W_k$ shows that their $q$-th powers agree. No affineness of these intersections is used.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction), proof; the local-lift gluing details omitted there."
+   }
+  },
+  {
+   "text": "The sheaf axiom for the structure sheaf of the scheme [def-pc-scheme] now gives a unique section $\\nu_V(b)$ restricting to $a_j^q$ on each $W_j$. Step 3 applied to any two systems of lifts shows independence of both lifts and cover. For two sections $b,c$, pass to the intersections of their lifting covers. On such an open, if $a,d$ lift $b,c$, then $a+d$, $ad$, and $1$ lift $b+c$, $bc$, and $1$. By [def-weil-ring-frobenius], their $q$-th powers are $a^q+d^q$, $a^qd^q$, and $1$. Equality locally implies equality globally, so $\\nu_V$ is a unital ring homomorphism. If $V^\\prime\\subseteq V$, restrict the same lifts to $W_j\\cap V^\\prime$; restriction preserves powers, and uniqueness of gluing gives $\\nu_V(b)|_{V^\\prime}=\\nu_{V^\\prime}(b|_{i^{-1}V^\\prime})$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction), proof; the local-lift gluing details omitted there."
+   }
+  },
+  {
+   "text": "For $a\\in\\Gamma(V,\\mathcal O_X)$, the section $a$ itself is a lift of $i^\\sharp a$, so the construction gives $\\nu_V(i^\\sharp a)=a^q$. For any affine open $U=\\operatorname{Spec}A$, the affine description of the closed immersion [def-weil-closed-immersion] identifies $i^\\sharp$ with a surjection $A\\to A/J$. Its kernel is $\\mathcal N_X(U)=\\sqrt{(0)}$ by [def-weil-pbc-scheme-reduction]; hence $J=\\sqrt{(0)}$ and $\\Gamma(i^{-1}U,\\mathcal O_{X_{\\mathrm{red}}})=A/\\sqrt{(0)}$. Every class $\\bar a$ has the global lift $a$, so the displayed affine formula is exactly $\\bar a\\mapsto a^q$. This verifies the formula on every affine open, not just on a chosen cover.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction), proof; the local-lift gluing details omitted there."
+   }
+  },
+  {
+   "text": "Let $y\\in i^{-1}V$, put $x=i(y)$, and choose one local lift $a$ of $b$ near $x$. By the residue-field map of [def-weil-residue-field], the image of $a(x)\\in\\kappa(x)$ in $\\kappa(y)$ is $b(y)$. A unital homomorphism of fields is injective (if a nonzero element maps to zero, multiplying by its inverse would give $1=0$). Thus $b(y)=0$ implies $a(x)=0$. The constructed section equals $a^q$ near $x$, so $\\nu_V(b)(x)=a(x)^q=0$. If $V$ is empty the construction is the unique homomorphism between zero rings and this clause is vacuous.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction), proof; the local-lift gluing details omitted there."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "def-weil-ring-frobenius",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BDZ (divisors-lemma-Frobenius-gives-norm-for-reduction), proof; the local-lift gluing details omitted there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobenius",
+   "results": "OK 0 hits; read results: . Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, perfection, arithmetic Frobenius and normalization results do not provide a uniform reduction sheaf norm with the stated properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A power of Frobenius factors through the reduction of a Noetherian scheme and defines a sheaf norm for the reduction immersion",
+   "results": "OK 8 hits; read results: LinearMap.frobenius, iterateFrobenius, iterateFrobeniusEquiv_eq_pow, frobenius_def, frobenius, LinearMap.frobenius_def, iterate_frobenius, iterateFrobenius_def",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, perfection, arithmetic Frobenius and normalization results do not provide a uniform reduction sheaf norm with the stated properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"nilradical\"",
+   "results": "OK 1 hits; read results: pNilradical_eq_bot_of_frobenius_inj",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, perfection, arithmetic Frobenius and normalization results do not provide a uniform reduction sheaf norm with the stated properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduction closed immersion of a Noetherian scheme killed by a prime admits a multiplicative norm given by a uniform power of Frobenius",
+   "results": "OK 8 hits; read results: AlgHom.IsArithFrobAt.mk_apply, IsArithFrobAt.arithFrobAt, PerfectClosure.instReduced, PreTilt.untilt_iterate_frobeniusEquiv_symm_pow, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, spectralAlgNorm_isPowMul, Ideal.relNorm_eq_pow_of_isMaximal, IsArithFrobAt.exists_of_isInvariant",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, perfection, arithmetic Frobenius and normalization results do not provide a uniform reduction sheaf norm with the stated properties."
+  },
+  {
+   "tool": "grep",
+   "query": "nilradical.*[Ff]robenius|[Ff]robenius.*nilradical|iterateFrobenius",
+   "results": "OK 25 hits; read results: Mathlib/Algebra/Polynomial/Expand.lean, Mathlib/Algebra/Polynomial/Expand.lean, Mathlib/Algebra/Polynomial/Expand.lean, Mathlib/Algebra/Polynomial/Expand.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, perfection, arithmetic Frobenius and normalization results do not provide a uniform reduction sheaf norm with the stated properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniform p power lifts functions on the reduced subscheme to a Noetherian scheme of characteristic p compatibly with restriction",
+   "results": "OK 8 hits; read results: PerfectionMap.map, PreTilt.untiltFun, PerfectRing.liftAux, PerfectRing.lift, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.liftQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, perfection, arithmetic Frobenius and normalization results do not provide a uniform reduction sheaf norm with the stated properties."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|Frobenius",
+   "results": "OK 0 hits; ; read results: ; subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring Frobenius, perfect closures or reducedness; none gives the uniform reduction sheaf norm with all the stated clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduction of a Noetherian scheme of characteristic p admits a norm given by a uniform power of Frobenius",
+   "results": "OK 8 hits; ; read results: LinearMap.frobenius, PerfectClosure.instReduced, iterateFrobenius_mul_apply, AlgebraicGeometry.IsReduced.mk, frobenius_def, PerfectRing.ofFiniteOfIsReduced, iterateFrobeniusEquiv_eq_pow, frobenius",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring Frobenius, perfect closures or reducedness; none gives the uniform reduction sheaf norm with all the stated clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power of Frobenius gives a ring sheaf morphism from the reduction of a Noetherian scheme to its structure sheaf",
+   "results": "OK 8 hits; ; read results: coe_iterateFrobeniusEquiv, PerfectClosure.iterate_frobenius_mk, IsPurelyInseparable.iterateFrobeniusₛₗ, AlgHom.IsArithFrobAt.restrict_apply, AlgHom.IsArithFrobAt.mk_apply, iterateFrobeniusEquiv_one, iterateFrobeniusEquiv_def, iterateFrobeniusEquiv_eq_pow",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring Frobenius, perfect closures or reducedness; none gives the uniform reduction sheaf norm with all the stated clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functions on a reduced closed subscheme lift after taking a uniform p power because the nilradical is nilpotent",
+   "results": "OK 8 hits; ; read results: AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.nilradical_eq_bot, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.IsReduced.component_reduced, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, PerfectRing.lift_aux, AlgebraicGeometry.isReduced_stalk_of_isReduced, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring Frobenius, perfect closures or reducedness; none gives the uniform reduction sheaf norm with all the stated clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-existence-characteristic-p-reduction",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Positive-characteristic reduction in the second paragraph of the proof of Groupoids Tag 0BF7. Supporting Frobenius norm input: Stacks 0BDZ, used in 0BD4(3) before 0BD0; no ampleness assumption.",
+   "via": [
+    "lem-sfb-ample-existence-characteristic-p-reduction",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reduction-frobenius-sheaf-norm",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported fields. Expanded the omitted gluing in Stacks 0BDZ using the existing uniform nilradical-nilpotence node and ring-Frobenius leaf. Local lifts give well-defined compatible powers without affine intersections or global surjectivity on arbitrary opens; checked all homomorphism, affine-formula, and residue-field clauses. No new nodes.",
+  "blueprint": "Supports the existing created-item chain from det-thm-sf-ctf-stability-direct-images (3) through the characteristic-p ampleness reduction: this is precisely the 0BDZ Frobenius norm input recorded in blueprint.from.place. The latest blueprint has no node stating this item; retained the inherited null ancestor and full via list.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-reduction-nilradical-nilpotent",
+    "why": "Its statement gives uniform nilradical nilpotence for every Noetherian scheme, including the empty scheme; a generic tool required by Stacks 0BDZ, not a replacement for any step of the six-functors unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-reduction-nilradical-nilpotent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-187a0bb93",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-187a0bb93 (reviewer sub-agent of L); spot-checked: Read the item JSON in full, all 7 cited node statements, and Stacks divisors.tex 0BDZ (line 3870) and 0BCX (line 3587). The statement is unchanged against live, where the item is still unsplit with no reviewed field. It matches 0BDZ and both 0BCX norm conditions: ν(i^♯a)=a^{p^e}, and the residue clause in the same ⟹ direction. Unital ring homomorphisms are stronger than the multiplicative maps 0BCX asks for, and the affine construction gives them. Step 1: the uniform exponent comes from lem-sc-reduction-nilradical-nilpotent, renaming its n+1 as n and choosing p^e≥n. Step 2: def-weil-ring-frobenius states the Frobenius endomorphism for any ring with p·1=0, including the zero ring. Steps 3-4 write out the gluing 0BDZ omits: lifts of the quotient-sheaf section exist locally, two lifts differ by a section of N whose q-th power is 0, and the pieces glue by the sheaf axiom. These steps give the ring laws and compatibility with restriction, and assume no affine intersections. Step 5: on an affine open, def-weil-closed-immersion (01QO) gives the quotient A/J and the reduction node's kernel N(U)=√0 gives J=√0. Step 6: the residue-field map of def-weil-residue-field is injective, so b(y)=0 gives a(x)=0 and ν(b)(x)=a(x)^q=0. There are no new nodes and no cycle. A search for 0BDZ, the source label and 'norm of degree' over dag/nodes finds only the item and its citer, so there is no duplicate. No SGA is cited and proof_deps equals the union of the uses. I accept the declared tool use of lem-sc-reduction-nilradical-nilpotent (generic, from another unit). Small cases checked: X empty, X reduced, F_p[ε]/ε^r with r>p (e=1 fails, the uniform e works), and a non-separated X. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReductionFrobeniusSheafNorm",
+  "declaration": "AlgebraicGeometry.Scheme.reduction_frobenius_sheaf_norm",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReductionFrobeniusSheafNorm.lean",
+  "statement": "theorem reduction_frobenius_sheaf_norm (p : ℕ) (hp : p.Prime) (X : Scheme.{u}) [IsNoetherian X] (hchar : ∀ x : X, (p : X.presheaf.stalk x) = 0) : ∃ e : ℕ, 1 ≤ e ∧ ∃ ν : ∀ V : X.Opens, Γ(X.nilradical.subscheme, X.nilradical.subschemeι ⁻¹ᵁ V) →+* Γ(X, V), (∀ (V W : X.Opens) (hVW : V ≤ W) (b : Γ(X.nilradical.subscheme, X.nilradical.subschemeι ⁻¹ᵁ W)), X.presheaf.map (homOfLE hVW).op (ν W b) = ν V (X.nilradical.subscheme.presheaf.map (homOfLE (X.nilradical.subschemeι.preimage_mono hVW)).op b)) ∧ (∀ (V : X.Opens) (a : Γ(X, V)), ν V (X.nilradical.subschemeι.app V a) = a ^ (p ^ e)) ∧ (∀ (U : X.affineOpens) (a : Γ(X, U.1)), ν U.1 ((X.nilradical.subschemeObjIso U).inv (Ideal.Quotient.mk (X.nilradical.ideal U) a)) = a ^ (p ^ e)) ∧ (∀ (V : X.Opens) (b : Γ(X.nilradical.subscheme, X.nilradical.subschemeι ⁻¹ᵁ V)) (y : X.nilradical.subscheme) (hy : y ∈ X.nilradical.subschemeι ⁻¹ᵁ V), X.nilradical.subscheme.evaluation (X.nilradical.subschemeι ⁻¹ᵁ V) y hy b = 0 → X.evaluation V (X.nilradical.subschemeι y) hy (ν V b) = 0)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f555b494",
+  "group": "NS",
+  "result": "pass",
+  "note": "Checked node 0BDZ/0BCX clause-by-clause against the Lean statement: prime p; IsNoetherian matches the finite-cover definition; stalkwise p=0 as in the node; ∃ e≥1 before ∃ ν (one exponent for all opens); ν_V are →+* maps for every open; restriction compatibility in the right direction (V≤W); ν(i^♯a)=a^{p^e} via subschemeι.app; formula on every affine open via the canonical subschemeObjIso.inv ∘ Quotient.mk with nilradical.ideal U = √0; residue clause b(y)=0 ⇒ ν(b)(i y)=0 via Scheme.evaluation on both schemes. Edge cases: empty scheme/open, reduced X, p=2 and thickenings needing e>1 all covered, no extra assumptions, free universe u. Records: only the item lean field and one new module; lean.statement verbatim; stmt deps are existing Mathlib leaves; proof imports exist in side-live. No duplicate: AbsoluteFrobenius exists_nilradical_le_ker_iterateFrobenius is only a proof tool. Gates: no defs, single sorry, source/blueprint/proof docstrings, both report sections present (the second reading is an openly declared self-pass). Not recompiled; nothing changed."
+ }
+}

@@ -1,0 +1,324 @@
+{
+ "id": "lem-cbc-proper-open-clopen-projector",
+ "kind": "statement",
+ "title": "Clopen lift and adjunction-normalized component projection for a proper/open square",
+ "statement": "Let $B$ be a commutative ring. For every scheme $X$ use its small pro-etale site with the chosen small skeleton, its constant ring sheaf $\\underline B_X$, the abelian category of module sheaves, and $\\mathcal T_X=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline B_X))$ of strict inverse systems. Work in the ordinary unbounded derived categories $D(\\mathcal T_X)$. Use the termwise inverse image $G_u$, total derived termwise direct image $R_u$, and exact open extension $J_j$ with their specified adjunctions and compositors [def-cbc-strict-constant-tower-operations] [def-cbc-strict-tower-open-extension]. Let $Q$ be a commutative square of schemes with $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ quasi-compact open immersions, $r:V\\to S$ and $p:W\\to T$ proper, and $pk=ir$. Put $W_S=W\\times_T S$ with projections $b:W_S\\to W$, $q:W_S\\to S$, and $s=(k,r):V\\to W_S$. The map $s$ is an open and closed immersion, with $bs=k$, $qs=r$; no cartesian or identity-left hypothesis is required. Put $C=W_S\\setminus s(V)$ and let $c:C\\hookrightarrow W_S$ be the complementary open. For every module sheaf $F$, the section decomposition over a pro-etale test object $H$ is $F(H)\\cong F(H\\times_{W_S}s(V))\\times F(H\\times_{W_S}C)$. Its first-factor projection defines a unique natural map $\\pi_s:F\\to s_!s^{-1}F$, identity on $s(V)$ and zero on $C$. The canonical map $t_s:s_!\\to s_*$, the direct-image transpose of the inverse open unit, is an isomorphism, and $(t_s s^{-1})\\circ\\pi_s=\\eta_s$ for the direct-image unit. Thus this section projection is exactly the adjunction-defined projection of [def-cbc-strict-tower-proper-open-arrows]. The statements remain true termwise on towers and complexes and in $D(\\mathcal T_{W_S})$: under the open unit $G_s\\pi_s=1$, whereas $G_c\\pi_s=0$ with zero target. Define $\\alpha_Q=(J_b\\pi_sG_q)\\circ\\beta_{i,p}$, followed by $J_bJ_sG_sG_q\\cong J_kG_r$. In a cartesian square, identify $V$ with $W_S$ by its canonical pullback isomorphism; then $s=1$ and $\\alpha_Q=\\beta_{i,p}$; if $V=S$, $r=1$, it is projection to the clopen section $(k,1_S)$. These are assertions about actual transformations, independent of evaluation faithfulness.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; morphisms.tex Tag 01W6 (lemma-image-proper-scheme-closed), part (2); geometric lift and arbitrary-ring projector refinement, original parent proof steps 5-6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-weil-pbc-adjunction-mate",
+  "def-pur-clopen-test-piece-inclusion"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved squareLift_clopen in the proper/open-arrow module. Its proof factors the top open through the base-changed bottom open and applies proper-to-separated-target to the lift. The pullback universal property supplies both projection equations. The closed image has open complement; its open subscheme and inclusion give the stated complementary map, also for empty schemes.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; elementary factorization through the base-changed open"
+   }
+  },
+  {
+   "text": "Apply the proved clopenSections_bijective from the ringed-module gluing module to the two-element family consisting of s and c. The complement equation gives disjointness in both orders and coverage. The resulting restriction bijection is exactly the two stated clopenTestInclusion maps.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-pur-clopen-test-piece-inclusion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VM (definition-sheaf-sets), 00VR (definition-sheaf); disjoint-cover equalizer calculation"
+   }
+  },
+  {
+   "text": "Transport the fixed-coefficient sheaf open adjunction through the module equivalences fixedRestriction. Its unit is invertible on an open immersion. For a clopen immersion the proved moduleClopenIso identifies extension by zero with direct image. Full faithfulness of extension and uniqueness of the normalized transpose show that the specified clopenModuleToDirect is invertible.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero); proetale.tex Tag 09AE (definition-extension-zero); explicit clopen model and its adjunction"
+   }
+  },
+  {
+   "text": "Define the projector by the direct-image unit followed by the inverse normalized comparison, as already specified. A generic adjunction-triple calculation gives its open restriction: the comparison is counit followed by unit, and the open triangle identity cancels the counit. On the complement, disjoint open extension has zero restriction: apply the existing pro-etale isZero_upperStar_openImmersionLowerShriek theorem, transporting along fixedPull and fixedOpen, then reflect the zero object through the faithful constant-coefficient equivalence. Maps into extension are determined by open restriction, using the direct-image adjunction and its comparison isomorphism; hence uniqueness. On sections, compose evaluation of the extension/direct-image isomorphism with evaluation of the mate of fixedDirect. Its unit equation identifies the projector with ordinary restriction to the clopen test piece, giving the required additive equivalence and first-factor formula.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate",
+    "def-pur-clopen-test-piece-inclusion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), unit normalization; proetale.tex Tag 09AE (definition-extension-zero)"
+   }
+  },
+  {
+   "text": "Whisker the ordinary natural transformation to strict towers and then to cochain complexes. Naturality gives the transition and differential equations automatically. Equality of tower morphisms and complex morphisms is componentwise equality, and their zero targets follow from the componentwise zero identity. This is all before localization.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4); exact derived factorization and comparison with the right derived functor; homology.tex Tag 02MZ (lemma-inverse-systems-abelian)"
+   }
+  },
+  {
+   "text": "Use the exact tower pullback and open extension already constructed. Descend the termwise projector by Localization.liftNatTrans and transport its source and target through the exact-derived identity and composition comparisons. Their factorization equations give the required cochain representative equation. This construction uses ordinary unbounded localization and imposes no bound or finiteness assumption.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-exact-restriction-composition",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4); exact derived factorization and comparison with the right derived functor; homology.tex Tag 02MZ (lemma-inverse-systems-abelian)"
+   }
+  },
+  {
+   "text": "The exactAdj_unit equation from the proper/open arrows identifies the open unit on cochain representatives. Apply localization natural-transformation extensionality to descend the ordinary open-restriction equation. Independently, the adjunction-triple triangle calculation gives the same restriction equation for the intrinsic pi. Cancel the invertible open-to-direct comparison and transpose under G_s left adjoint to R_s to identify the descended map with pi on every derived object. For complementary vanishing first use the invertible ordinary open unit and the tower vanishing clause to show that the exact composite towerJ(s) followed by towerPullback(c) kills every tower. Exact derived functor homology compatibility then shows its derived composite kills every object, and the derived composition isomorphism gives the claimed zero target.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 0FND (lemma-pre-derived-adjoint-functors-general); localization of the explicitly computed units and transpose"
+   }
+  },
+  {
+   "text": "The alpha formula is its defining equation. The cartesian pullback lift is hsq.isoPullback.hom by the pullback projection equations, hence is invertible. Its inverse image is faithful: compose with inverse image of the inverse scheme map, and use gComp and gId to identify the composite with identity. Applying that faithful functor, the projector restriction equation and the open adjunction triangle show pi_s followed by the open counit equals identity. Apply betaInv_source_factorization to s and the canonical fibre-product projections. Cancel the inverse beta on the right of the asserted alpha=beta equation, use naturality of the open compositor, cancel its inverse and the inverse-image compositor, and use the projector-counit identity. The remaining beta and inverse beta cancel. Finally qs=identity is the pullback equation, and both section restriction equations are the already proved clopenDerived_section_projector clauses.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-constant-tower-operations",
+    "def-pc-fibre-product",
+    "lem-cbc-open-beta-source-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; intrinsic clopen construction and its cartesian/refinement specializations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-pc-fibre-product",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-pur-clopen-test-piece-inclusion",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-exact-restriction-composition",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-cbc-open-beta-source-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open source-factorization in the strict-tower refinement; E1 completes step 8 by the normalized inverse-comparison factorization and the projector-counit triangle. Earlier steps retain their existing localization and section proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative proper vertical and open horizontal square of schemes, the lift of the top-left scheme into the pullback of the bottom open is clopen; the identity-zero sheaf projector equals the adjunction-unit clopen projector on derived module towers.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap_fst, AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap_snd, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.Pullback.gluedLift_p1, AlgebraicGeometry.Scheme.Pullback.t_fst_snd, AlgebraicGeometry.Scheme.Pullback.gluedLift_p2, AlgebraicGeometry.Scheme.Pullback.pullbackFstιToV_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|Clopen).*(sheaf|Sheaf|module|Module)|IsProper.*IsOpenImmersion",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a commutative proper vertical and open horizontal square of schemes, the lift of the top-left scheme into the pullback of the bottom open is clopen; the identity-zero sheaf projector equals the adjunction-unit clopen projector on derived module towers.",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen subscheme decomposes sheaves of modules as a product and its summand projector is the direct image unit followed by extension-by-zero identification",
+   "results": "8 hits: TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, topological gluing or algebraic etaleness, not the full specified comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper open square of schemes the clopen component projection on pro-etale module sheaves is the adjunction unit under extension by zero equals direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected module adjunction hits are for the structure sheaf on the Zariski site, and product hits concern topological or structure-ring sheaves; none states the pro-etale normalized tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a clopen immersion on the proetale site the sheaf component projection equals the direct image adjunction unit and descends to unbounded derived inverse systems",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_hom_c, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_c, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected module adjunction hits are for the structure sheaf on the Zariski site, and product hits concern topological or structure-ring sheaves; none states the pro-etale normalized tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules on a disjoint union of two open and closed schemes split into a product and extension by zero is direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd_assoc, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd, TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected module adjunction hits are for the structure sheaf on the Zariski site, and product hits concern topological or structure-ring sheaves; none states the pro-etale normalized tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit_app_app|restrictAdjunction_counit_app_app|coprodPresheafObjIso|objSupIsoProdEqLocus",
+   "results": "15 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected module adjunction hits are for the structure sheaf on the Zariski site, and product hits concern topological or structure-ring sheaves; none states the pro-etale normalized tower assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 5,6: Clopen lift and adjunction-normalized component projection for a proper/open square",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-proper-open-clopen-projector",
+  "worker": "stage1",
+  "summary": "Restored properness of r, absent from the imported child statement but required by its parent and Stacks 0F7B; supplied the explicit counterexample in report.md. Proved the clopen lift, disjoint-cover section formula, the normalized adjunction projector, and its descent as actual unbounded derived tower transformations using existing generic nodes. No new nodes.",
+  "blueprint": "thm-cbc-complete-proetale proof final sentence on compatibility of comparisons with completed maps, via lem-cbc-strict-tower-proper-open-calculus original steps 5-6: clopen lift and adjunction-normalized projector.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used for the explicit clopen section/derived descent calculation; this unit has no more specific statement supplying this categorical or geometric tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site used for the explicit clopen section/derived descent calculation; this unit has no more specific statement supplying this categorical or geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor used for the explicit clopen section/derived descent calculation; this unit has no more specific statement supplying this categorical or geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-8c781563f",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-8c781563f (reviewer sub-agent of L); spot-checked: S1 split of a leaf from the Q65 re-split: 8 steps, 0 new nodes, item only, stmt_deps unchanged. Statement compared with the Q65 snapshot. 'r and p proper' only clarifies the base wording, and the parent already assumes p,r proper. The worker's counterexample with r non-proper is correct but rests on misreading the base as r arbitrary. The cartesian 's=1 after the canonical pullback iso' is a clarification. No weakening. Step checks: (1) open base change gives s=b^{-1}k open, bs=k, qs=r. (2) q proper so separated; lemma-nagata-proper-to-separated-target on V->W_S->S with qs=r proper gives s proper and closed image (Stacks 01W6(2), read); closed-immersion definition checked. (3) H_U,H_C clopen; affine pieces give a finite cover; F(empty)=0, empty overlap, so a product. (4) I(N)(H)=N(H_U) with gluing gives the s_!-adjunction, and conjugate-iso uniqueness gives the unit-preserving s_!~I, as def-cbc-strict-tower-open-extension allows. (5) s_*N(H)=N(H_U) from def-weil-pbc-proetale-operations: t_s=id, so it is invertible and (t_s s^-1)pi=eta matches the arrows definition. (6)-(7) Exact termwise descent; exact-functor-derived-functor identifies R_s; cochain-derived-adjunction plus the localization universal property hold as actual transformations. (8) alpha substitution; cartesian and refinement cases checked. 0F7B proof read: the lift is an agent refinement, correctly marked. Duplicate search: lem-sf-clopen-composite-counit-normalization is the finite-Lambda ordinary case only. No SGA citation. tool_uses accepted: weakly-etale localization, site restriction adjunction, exact-functor-derived-functor."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenClopenProjector",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.properOpen_clopen_projector",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpen_clopen_geometry",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopen_section_decomposition",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenModuleAdj",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenModule_openUnit_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenModuleToDirect",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenModuleToDirect_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenModulePi",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenModule_section_projector",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenTowerPi",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenTower_section_projector",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenTowerAbelian",
+   "AlgebraicGeometry.ProEtale.StrictTower.ClopenProjectorDescent",
+   "AlgebraicGeometry.ProEtale.StrictTower.clopenDerived_section_projector",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpen_clopen_projector"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenClopenProjector.lean",
+  "statement": "theorem properOpen_clopen_projector {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) : (alpha B k r p i h = (beta B (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm (IsPullback.of_hasPullback p i).flip).hom ≫ Functor.whiskerRight (Functor.whiskerLeft (G B (pullback.snd p i)) (pi B (squareLift k r p i h))) (J B (pullback.fst p i)) ≫ Functor.whiskerRight (Functor.associator (G B (pullback.snd p i)) (G B (squareLift k r p i h)) (J B (squareLift k r p i h))).inv (J B (pullback.fst p i)) ≫ (Functor.associator (G B (pullback.snd p i) ⋙ G B (squareLift k r p i h)) (J B (squareLift k r p i h)) (J B (pullback.fst p i))).hom ≫ Functor.whiskerLeft (G B (pullback.snd p i) ⋙ G B (squareLift k r p i h)) ((jComp B (squareLift k r p i h) (pullback.fst p i)).hom ≫ (jCongr B (pullback.lift_fst k r h)).hom) ≫ Functor.whiskerRight ((gComp B (squareLift k r p i h) (pullback.snd p i)).inv ≫ (eqToIso (congrArg (G B) (pullback.lift_snd k r h))).hom) (J B k)) ∧ (∀ hsq : IsPullback k r p i, IsIso (squareLift k r p i h) ∧ alpha B k r p i h = (beta B r k i p h.symm hsq.flip).hom) ∧ (∀ (k' : S ⟶ W) [IsOpenImmersion k'] [QuasiCompact k'] (h' : k' ≫ p = (𝟙 S) ≫ i), squareLift k' (𝟙 S) p i h' ≫ pullback.snd p i = 𝟙 S ∧ ∀ (C : Scheme.{u}) (c : C ⟶ pullback p i) [IsOpenImmersion c], Set.range c = (Set.range (squareLift k' (𝟙 S) p i h'))ᶜ → ∀ M : Derived B (pullback p i), (G B (squareLift k' (𝟙 S) p i h')).map ((pi B (squareLift k' (𝟙 S) p i h')).app M) = (jAdj B (squareLift k' (𝟙 S) p i h')).unit.app ((G B (squareLift k' (𝟙 S) p i h')).obj M) ∧ (G B c).map ((pi B (squareLift k' (𝟙 S) p i h')).app M) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The declarations jointly state the geometry, ordinary section decomposition and uniquely normalized projector, its tower/complex equations and localization to the existing pi, followed by alpha and its cartesian/section specializations. Helpers define only canonical transposes and termwise functorial images."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-806b73907",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 31d3d2752a31. Lean byte-identical to the returned head. The only item change is stmt_deps: lem-pur-clopen-ringed-module-gluing replaced by the new def-pur-clopen-test-piece-inclusion (existing:true on unchanged ProEtaleClopenRingedModuleGluing, declarations clopenTestPiece/clopenTestInclusion lines 62-74, verbatim signature, Stacks 04TR, stmt_deps scheme/proetale-site/fibre-product/open-immersion own the bodies). check_existing and check_new_node clean against side-live; branch sheaf-dag valid; live item has no lean record, no repair note, no competing owner. Full re-read of the module: square hypotheses with both r,p proper and k,i qc open immersions; clopen geometry; restriction-pair bijection; projector pinned by open-unit, zero-complement and uniqueness clauses; tower/complex/derived equations as transformation identities; cartesian alpha = beta B r k i p h.symm hsq.flip type-checked; V=S,r=1 specialization; edge cases and universes OK; real def bodies, sorry proofs, docstrings, both report sections present. Advisories: alpha/s≫q=1/t∘pi=eta conjuncts true by definition; proof dep lem-cbc-tower-open-beta-normalization unstated (stage 3); item TeX does not cite the new node (statement unchanged). No compile (no fix; Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T211310-L-3921569",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

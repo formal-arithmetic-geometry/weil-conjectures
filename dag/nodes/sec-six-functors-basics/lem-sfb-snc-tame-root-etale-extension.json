@@ -18,217 +18,73 @@
  ],
  "proof": [
   {
-   "text": "If $V$ is empty, take $n=1$ and $Z=\\varnothing$. If $r=0$, then $V^\\circ=V$, and $n=1$, $Z=P$ works without using the tower hypothesis. If $P=\\varnothing$, take $n=1$, $Z=\\varnothing$. In the remaining argument allow degree zero locally. For every positive $a$ prime to $p$ put $C_a=B[x_1,\\ldots,x_r]/(x_i^a-t_i)_i$ and $X_a=\\operatorname{Spec}C_a$. Iterating the monic-quotient basis gives the finite free $B$-basis $\\prod_i x_i^{e_i}$, $0\\le e_i<a$. The same presentation represents roots after any scalar extension: both directions fix coefficients and send each root to its named coordinate. For $a\\mid b$ the transition $X_b\\to X_a$ is defined by $x_{i,a}\\mapsto x_{i,b}^{b/a}$; the relations and composition law follow by exponent multiplication.",
+   "text": "If $V=\\varnothing$, $r=0$, or $P=\\varnothing$, take $n=1$ and respectively $Z=\\varnothing$, $P$, or $\\varnothing$. Otherwise write $P=\\operatorname{Spec}D$ over $B[1/f]$ and put $C_a=B[x_1,\\ldots,x_r]/(x_i^a-t_i)_i$, $X_a=\\operatorname{Spec}C_a$ for each positive $a$ prime to $p$. The labelled-root geometry lemma gives finite freeness over $B$, regularity and normality, injectivity of $f$, density of $X_a^\\circ$ in every component, and the compatible power transitions.",
    "uses": [
-    "lem-weil-pbc-monic-quotient-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 04GG, monic power bases; the simultaneous presentation in ILO IX Proposition 2.1, printed p.133."
-   }
-  },
-  {
-   "text": "We first check regularity of every $C_a$ despite the possibly disconnected labels. At a point $v\\in V$, the active $t_i$ are distinct regular parameters, so each is prime in $\\mathcal O_{V,v}$ by the regular-local UFD boundary lemma. At every point the same assertion shows that $V(t_i)$ is reduced and locally has at most one irreducible component through the point. There are finitely many boundary components. Delete the components not passing through $v$ and invert the inactive $t_i$; shrink to an affine neighbourhood $W$ of $v$. There each remaining $V(t_i)\\cap W$ is precisely one reduced integral boundary component, and these components are pairwise distinct. Indeed two components through $v$ cannot belong to one $(t_i)$, because its localized ideal is prime; two active labels cannot name the same component, because associated parameters would make a generator redundant in the full parameter list, contradicting the dimension bound for a generating set of the maximal ideal. The restricted SNC intersection conditions are unchanged. Apply the existing finite-root regularity theorem to these active labels on $W$. It gives a regular Noetherian algebra after adjoining their $a$th roots.",
-   "uses": [
-    "lem-trf-regular-local-ufd-boundary-factorization",
-    "lem-weil-pbc-noetherian-local-dimension-le-generators",
-    "def-trf-strict-normal-crossings-boundary",
-    "lem-weil-pbc-noetherian-finite-components",
-    "lem-sfb-snc-finite-root-regular-ring"
+    "lem-sfb-snc-labelled-root-algebra-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "IX Proposition 2.1 proof, printed p.133, local parameter-root algebra; Stacks 0AG0 (lemma-regular-local-UFD) and 0BIA (lemma-strict-normal-crossings)."
+    "place": "IX Proposition 2.1 proof, printed pp.133-134; finite-root normalization and etale-local descent, with the explicit finite-level assembly of the returned split."
    }
   },
   {
-   "text": "Adjoin the roots of the inactive labels successively to the algebra just obtained. If $u$ is a unit in a regular ring $D$, then in $D[T]/(T^a-u)$ the class of $T$ is a unit, with inverse $T^{a-1}/u$. The image of the derivative $aT^{a-1}$ is a unit, since $a$ is prime to $p$. The polynomial ring $D[T]$ is regular, so the hypersurface-derivation criterion makes its quotient regular. Induction over the inactive labels proves that $C_a$ is regular on the inverse image of $W$. These opens cover $X_a$, proving its regularity everywhere; $C_a$ is Noetherian also directly from its finite $B$-basis. Thus $C_a$ is normal. At each stalk of $B$, $f$ is a unit times a product of nonzero parameters in a domain, so multiplication by $f$ is injective on $B$. The monic basis then makes multiplication by $f$ injective on $C_a$ as well. Decompose $X_a$ into its finitely many clopen normal integral components. None is contained in $V(f)$: in that product decomposition injectivity excludes the zero component of $f$. Consequently $X_a^\\circ=D(f)$ contains every generic point and is dense in every component.",
+   "text": "Put $D_a=D\\otimes_{B[1/f]}C_a[1/f]$ and let $E_a$ be the integral closure of $C_a$ in $D_a$. Base change preserves etaleness; images of module generators preserve finiteness. Apply the normalization/spreading lemma with $(C,g,F)=(C_a,f,D_a)$. Thus $N_a=\\operatorname{Spec}E_a$ is finite and finitely presented over $X_a$, and its canonical restriction to $X_a^\\circ$ is exactly the prescribed pullback of $P$.",
    "uses": [
-    "lem-trf-polynomial-ring-regular-base",
-    "lem-weil-pbc-hypersurface-derivation-regular",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-regular-ring-normal",
-    "lem-trf-regular-local-ufd-boundary-factorization",
-    "lem-trf-normal-topologically-noetherian-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00FN, 00OD; more-algebra.tex Tag 07PF (lemma-quotient-regular); regularity and normal components of the parameter-root algebra."
-   }
-  },
-  {
-   "text": "Write $P=\\operatorname{Spec}D$ over $B[1/f]$, and $D_a=D\\otimes_{B[1/f]}C_a[1/f]$. Finiteness is preserved here by the elementary tensor argument: images of any finite module generating set generate the tensor product. Etaleness is preserved by the etale base-change theorem. Let $E_a$ be the integral closure of $C_a$ in $D_a$. On each normal integral component of $X_a$, apply finite-etale-open integral-closure finiteness to $D(f)$ and this finite etale cover. Its conclusion makes the integral closure a finite module on that component. The finite clopen component decomposition therefore makes $E_a$ a finite $C_a$-module. As $C_a$ is Noetherian, the resulting finite-type algebra $E_a$ is of finite presentation. Put $N_a=\\operatorname{Spec}E_a$ with its finite map to $X_a$. No Galois closure or degree bound has been introduced.",
-   "uses": [
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-sbc-finite-etale-open-integral-closure",
-    "lem-trf-normal-topologically-noetherian-components",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 032L (lemma-Noetherian-normal-domain-finite-separable-extension), applied componentwise as in the cited finiteness node; 00FP; morphisms.tex 02GO."
-   }
-  },
-  {
-   "text": "The open restriction of $N_a$ is the prescribed cover: apply integral-closure ind-etale base change to $C_a\\to C_a[1/f]$. This localization is ind-etale since it is an open immersion and is etale. It identifies $E_a[1/f]$ with the integral closure of $C_a[1/f]$ in $D_a$. Every element of the finite $C_a[1/f]$-algebra $D_a$ is integral, so this closure is all of $D_a$. Also the integral closure of $C_a$ in $C_a[1/f]$ is exactly $C_a$: an integral section on the dense open $D(f)$ extends by the normal dense-open integral-section theorem, and the injection $C_a\\hookrightarrow C_a[1/f]$ from Step 3 makes the extension unique. Both assertions use the actual structural maps, not merely abstract isomorphisms.",
-   "uses": [
-    "lem-sfb-integral-closure-ind-etale-base-change",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-sbc-normal-dense-open-integral-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0CBF (lemma-integral-closure-commutes-colim-smooth), with localization; normal integral-section extension, Tag 0AB1."
-   }
-  },
-  {
-   "text": "Fix a geometric point $\\bar v$ with image $v$ and put $A=\\mathcal O_{V,\\bar v}^{\\rm sh}$ and $I=\\{i:t_i(v)=0\\}$. The geometric strict-henselization presentation identifies $A$ with the algebraic strict henselization of $B_v$. It is Noetherian and is a filtered colimit of etale $B$-algebras. For $(m,p)=1$, put $T_m=A[z_i:i\\in I]/(z_i^m-t_i)_{i\\in I}$. The active puncture $T_m[1/\\prod_{i\\in I}t_i]$ equals $T_m[1/f]$, since all inactive $t_j$ are units in $A$. These affine punctures form a directed inverse system under divisibility with affine transitions. The limit is the tower in the hypothesis, by the affine-transition limit theorem. Each $T_m$ and $T_m[1/f]$ is Noetherian, by the monic finite basis and Noetherian finite-type permanence. The pullbacks of $P$ are etale and of finite presentation: etaleness is base change, and finite module generators give finite-type algebras over these Noetherian bases.",
-   "uses": [
-    "lem-sbc-geometric-strict-henselization-local-presentation",
-    "lem-sc-strict-henselization-noetherian",
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-etale-scheme-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01YW, affine inverse limits; more-algebra.tex 06LJ; algebra.tex 04GW; etale-cohomology.tex 04HX."
-   }
-  },
-  {
-   "text": "By the hypothesis, over that punctured limit there is an isomorphism from the pullback of $P$ to $d$ copies of the base for some finite $d\\ge0$. Apply the morphism and equality clauses of finite-data descent to this isomorphism and its inverse between the pullbacks of $P_A$ and the fixed trivial $d$-sheeted cover, both defined at $m=1$. Descend the two arrows and the two inverse identities, and enlarge to a common prime-to-$p$ index $m$. This gives an isomorphism over $T_m[1/f]$ between $P_A$ pulled back there and $\\coprod_d\\operatorname{Spec}T_m[1/f]$. All objects at the starting stage are etale of finite presentation, as checked in Step 6; the index is the directed set of positive prime-to-$p$ integers with divisibility. Thus the cited morphism and equality clauses apply to the specified objects, rather than descending an unrelated model of them.",
-   "uses": [
-    "lem-weil-pbc-etale-finite-data-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZM, morphisms and eventual equality, applied to an isomorphism and its inverse on the punctured finite-root system."
-   }
-  },
-  {
-   "text": "Let $S=A\\otimes_B C_m=A[x_1,\\ldots,x_r]/(x_i^m-t_i)_i$. There is a $T_m$-algebra structure on $S$ sending $z_i$ to $x_i$ for active $i$. Base change of the preceding splitting gives the actual $S[1/f]$-algebra isomorphism $D_m\\otimes_{C_m}S\\simeq S[1/f]^d$. The map $C_m\\to S$ is ind-etale: it is the base change of the filtered etale presentation $B\\to A$, by ind-etale stability. This argument merely adjoins the roots of the inactive units as additional coordinates; it neither chooses those roots in $A$ nor assumes any roots of unity in $B$.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 04GW for the strict-local presentation and base change of that presentation; the displayed full root algebra in ILO IX Proposition 2.1."
-   }
-  },
-  {
-   "text": "Apply integral-closure ind-etale base change twice along $C_m\\to S$. For the algebra $C_m[1/f]$, Step 5 says its integral closure is $C_m$, so the theorem identifies the integral closure of $S$ in $S[1/f]$ with $S$, via the structural inclusion. For the algebra $D_m$, it identifies $S\\otimes_{C_m}E_m$ with the integral closure of $S$ in $S[1/f]^d$, using Step 8. This last closure is $S^d$: projection shows that an integral tuple has every coordinate integral, hence in $S$ by the first application; conversely every tuple of elements of $S$ is integral over diagonal $S$, since for $s=(s_1,\\ldots,s_d)$ the monic polynomial $\\prod_{j=1}^d(T-s_j)$ vanishes coordinatewise. For $d=0$ the target ring is the zero ring and both closures are zero. Hence $N_m\\times_V\\operatorname{Spec}A$ is a disjoint union of $d$ copies of $X_m\\times_V\\operatorname{Spec}A$. It is therefore finite etale over that base.",
-   "uses": [
-    "lem-sfb-integral-closure-ind-etale-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0CBF; two explicit applications of integral-closure base change, followed by the coordinatewise monic-polynomial calculation."
-   }
-  },
-  {
-   "text": "The map $B_v\\to A$ is faithfully flat by strict-henselization faithful flatness; its spectrum is surjective by faithful-flat surjectivity and flat, hence is an fpqc cover (an affine surjective flat map meets the defining affine-cover condition). Fpqc base-change stability makes $\\operatorname{Spec}(A\\otimes_B C_m)\\to\\operatorname{Spec}(B_v\\otimes_B C_m)$ an fpqc cover. Etaleness thus descends by fpqc descent from Step 9: $N_m\\times_V\\operatorname{Spec}B_v\\to X_m\\times_V\\operatorname{Spec}B_v$ is etale. Now write $B_v$ as the directed colimit of $B[1/h]$ for $h\\notin v$ (the index can be finite subsets of $B\\setminus v$, inverting their product). Apply etale-property descent to the fixed finitely presented morphism $N_m\\to X_m$ over $V$. All schemes at the starting stage are affine, hence qcqs; the transitions are affine localizations. There is $h_v\\notin v$ such that $N_m\\to X_m$ is etale after base change from $V$ to $W_v=D(h_v)$. It is still finite there, because a finite module generating set remains generating after localization. Thus a finite root level $m_v=m$ works on an entire Zariski neighbourhood of $v$, including every point of $X_m$ above it.",
-   "uses": [
-    "lem-sc-strict-henselization-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "def-weil-pbc-fpqc-covering",
-    "lem-galois-fpqc-covering-base-change",
-    "lem-galois-fpqc-descend-etale",
-    "lem-weil-pbc-descend-etale"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 07RP (lemma-descend-etale) for the localization system; descent.tex 02VN; more-algebra.tex 07QM (lemma-dumb-properties-henselization)."
-   }
-  },
-  {
-   "text": "The opens $W_v$ cover the quasi-compact affine $V$. Choose a finite subcover $W_1,\\ldots,W_s$, with corresponding levels $m_1,\\ldots,m_s$. Set $n=\\prod_{j=1}^s m_j$, a positive integer prime to $p$. For every $j$ the power substitutions from Step 1 give $X_n\\to X_{m_j}$. Pull the finite etale cover $N_{m_j}|_{X_{m_j}\\times_VW_j}$ back along this map, obtaining $Z_j\\to X_n\\times_VW_j$. Etaleness is stable under base change, and tensoring module generators proves finiteness. Its restriction to $X_n^\\circ\\times_VW_j$ is identified with the pullback of $P$ by Step 5. These identifications use the same power substitution for every root and therefore give actual identifications with one fixed cover $P\\times_{V^\\circ}X_n^\\circ$.",
-   "uses": [
+    "lem-sfb-normalization-strict-local-etale-spreading",
     "lem-weil-pbc-etale-scheme-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "IX Proposition 2.1 proof, printed pp.133-134, locality on the base; explicit quasi-compact finite-level passage."
+    "place": "IX Proposition 2.1 proof, printed pp.133-134; finite-root normalization and etale-local descent, with the explicit finite-level assembly of the returned split."
    }
   },
   {
-   "text": "For completeness construct the overlap identifications rather than assuming normalization commutes with the ramified transition $X_n\\to X_{m_j}$. The base $X_n$ is normal Noetherian by Steps 2-3. On an overlap $H_{ij}=X_n\\times_V(W_i\\cap W_j)$, its clopen integral components are normal, and $H_{ij}\\cap X_n^\\circ$ is dense in each nonempty component, by Step 3 and restriction. The two covers $Z_i,Z_j$ have a specified isomorphism on that dense open through their identifications with the same pullback of $P$. On each integral component restrict this isomorphism to its generic point and apply generic-point full faithfulness for finite etale covers to extend that morphism and its inverse. Their composites are identities by uniqueness at the generic point. These extensions agree with the original isomorphism on the entire punctured overlap: apply uniqueness again on the integral dense open, which is normal. Combining the clopen components gives an isomorphism $\\alpha_{ij}:Z_i|_{H_{ij}}\\simeq Z_j|_{H_{ij}}$ extending exactly the specified puncture identification.",
+   "text": "At each geometric $\\bar v$ above $v$, let $A=\\mathcal O_{V,\\bar v}^{\\mathrm{sh}}$. Apply the active-root splitting lemma to the given tower trivialization. Its hypotheses hold because $B$ is Noetherian of characteristic $p$ and all $C_a$ are normal with $f$ injective by step 1. It supplies $m_v$ prime to $p$ such that $E_{m_v}\\otimes_B A\\simeq(A\\otimes_B C_{m_v})^d$, including $d=0$. This is a finite etale model after the actual strict-local base change, with no root-of-unity choices.",
    "uses": [
-    "lem-trf-normal-topologically-noetherian-components",
-    "lem-sbc-normal-integral-generic-hom-full"
+    "lem-sfb-active-root-tower-normalization-splitting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "IX Proposition 2.1 proof, printed pp.133-134, graph/full-faithfulness argument; algebraic generic-point extension supplied by the cited existing node."
+    "place": "IX Proposition 2.1 proof, printed pp.133-134; finite-root normalization and etale-local descent, with the explicit finite-level assembly of the returned split."
    }
   },
   {
-   "text": "On each integral component of a triple overlap, the two composites $\\alpha_{jk}\\alpha_{ij}$ and $\\alpha_{ik}$ agree at the generic point, since all puncture identifications factor through the single cover pulled back from $P$. Uniqueness in generic-point full faithfulness makes them equal everywhere. The same uniqueness gives the identity and inverse conditions. Hence $(Z_j,\\alpha_{ij})$ is a finite etale descent datum for the surjective etale morphism $\\coprod_j(X_n\\times_VW_j)\\to X_n$ (each summand is an open immersion). Effective finite-etale descent supplies a finite etale $Z\\to X_n$ and compatible identifications with the $Z_j$. Restricting to the puncture, their specified identifications with $P\\times_{V^\\circ}X_n^\\circ$ satisfy the same datum. Full faithfulness of the descent equivalence therefore gives the required isomorphism $Z\\times_{X_n}X_n^\\circ\\simeq P\\times_{V^\\circ}X_n^\\circ$. Since $X_n=V_n$ by its presentation, this is the assertion.",
+   "text": "For this $m_v$, the last clause of the normalization/spreading lemma applies to $N_{m_v}\\to X_{m_v}$ and yields $h_v\\notin v$ such that it is finite etale over $X_{m_v}\\times_VW_v$, $W_v=D(h_v)$. Its punctured identification is the canonical one of step 2. Choosing a geometric point above each $v$ therefore supplies the open neighbourhoods and local covers required for common-level gluing.",
    "uses": [
-    "lem-sbc-normal-integral-generic-hom-full",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-galois-descent"
+    "lem-sfb-normalization-strict-local-etale-spreading"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "IX Proposition 2.1 proof, printed pp.133-134: etale-local descent; explicit overlap cocycle and effective finite-etale descent as stated by lem-galois-descent."
+    "place": "IX Proposition 2.1 proof, printed pp.133-134; finite-root normalization and etale-local descent, with the explicit finite-level assembly of the returned split."
+   }
+  },
+  {
+   "text": "Apply common-level gluing to $V$, $U=V^\\circ$, and the system $X_a$ with the power transitions of step 1 and the local covers of step 4. The base $V$ is quasi-compact, and every $X_a$ is normal Noetherian with componentwise dense puncture by step 1. The lemma chooses a finite subcover and $n=\\prod_jm_j$, constructs unique overlap isomorphisms extending the specified puncture identifications, verifies their cocycle, and glues a finite etale $Z\\to X_n$ with the required punctured isomorphism. Since $X_n=V_n$ and $n$ is positive and prime to $p$, this is the assertion.",
+   "uses": [
+    "lem-sfb-normal-tower-common-level-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1 proof, printed pp.133-134; finite-root normalization and etale-local descent, with the explicit finite-level assembly of the returned split."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-trf-regular-local-ufd-boundary-factorization",
-  "lem-weil-pbc-noetherian-local-dimension-le-generators",
-  "def-trf-strict-normal-crossings-boundary",
-  "lem-weil-pbc-noetherian-finite-components",
-  "lem-sfb-snc-finite-root-regular-ring",
-  "lem-trf-polynomial-ring-regular-base",
-  "lem-weil-pbc-hypersurface-derivation-regular",
-  "lem-weil-pbc-finite-algebra-noetherian",
-  "lem-weil-pbc-regular-ring-normal",
-  "lem-trf-normal-topologically-noetherian-components",
+  "lem-sfb-snc-labelled-root-algebra-geometry",
+  "lem-sfb-normalization-strict-local-etale-spreading",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-sbc-finite-etale-open-integral-closure",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-sfb-integral-closure-ind-etale-base-change",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-sbc-normal-dense-open-integral-section",
-  "lem-sbc-geometric-strict-henselization-local-presentation",
-  "lem-sc-strict-henselization-noetherian",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-etale-finite-data-descent",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-sc-strict-henselization-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "def-weil-pbc-fpqc-covering",
-  "lem-galois-fpqc-covering-base-change",
-  "lem-galois-fpqc-descend-etale",
-  "lem-weil-pbc-descend-etale",
-  "lem-sbc-normal-integral-generic-hom-full",
-  "lem-galois-descent"
+  "lem-sfb-active-root-tower-normalization-splitting",
+  "lem-sfb-normal-tower-common-level-cover-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "IX Proposition 2.1 proof, printed pp.133-134, finite parameter-root normalization and local descent. The hypothesis already supplies tower splitting; the explicit finite-data/normalization proof uses Stacks 0CBF, 01ZM, 07RP and 02VN, without the source's separate fundamental-group computation."
+  "place": "IX Proposition 2.1 proof, printed pp.133-134; same finite-root normalization and locality route as the returned 13-step split, now assembled from four independent statement-only arguments."
  },
  "mathlib_searches": [
   {
@@ -368,77 +224,13 @@
   "date": "2026-10-22",
   "item": "lem-sfb-snc-tame-root-etale-extension",
   "worker": "stage1",
-  "group": "Q06",
-  "summary": "Statement unchanged. Descended each supplied strict-local tower splitting to a finite active-root level; used the concrete finite integral closure and ind-etale base change to obtain an etale strict-local model, then faithfully flat descent, localization descent and qc common-level gluing. One new general commutative-algebra input (0CBF); no Galois/order restriction, no SGA route, no Lean edits or compiles. Reducible boundary labels handled locally before invoking the existing regular-root theorem.",
-  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image through sk-prop-open-coefficients: finite-cover input below the inherited tame-root-tower-extension chain. The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor returns None); its place/via fields are retained.",
+  "group": "Q66",
+  "summary": "Repaired the 2026-10-22 batch5 re-split return: statement unchanged; all 13 old proof steps distributed among four comparable statement-only unsplit nodes (old 1-3, 4-5/10, 6-9, 11-13). Parent proof is a short assembly below 3000 characters. Full old arguments, sources and citations retained in report; no Lean edit, compiler, or SGA route.",
+  "blueprint": "Paragraph (3), open direct image: tame-boundary Kummer calculation, finite-cover input to the equivariant lisse extension. The finite tame normalization becomes etale after one simultaneous finite parameter-root base change. The new nodes realize root-chart geometry, finite normalization and neighbourhood spreading, finite strict-local splitting, and common-level gluing. The inherited nearest blueprint ancestor is null, as reported by blueprint_refs.py ancestor.",
   "tool_uses": [
    {
-    "node": "lem-trf-regular-local-ufd-boundary-factorization",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-hypersurface-derivation-regular",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-regular-ring-normal",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-trf-normal-topologically-noetherian-components",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-sbc-finite-etale-open-integral-closure",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-sbc-normal-dense-open-integral-section",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-sbc-geometric-strict-henselization-local-presentation",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-sc-strict-henselization-noetherian",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-strict-henselization-triples",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-limit-affine-transition",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-finite-data-descent",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-ind-etale-stability",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-sc-strict-henselization-faithfully-flat",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-galois-fpqc-descend-etale",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-weil-pbc-descend-etale",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-sbc-normal-integral-generic-hom-full",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
-   },
-   {
-    "node": "lem-galois-descent",
-    "why": "Generic commutative-algebra, affine-limit or finite-cover tool in the explicitly numbered proof steps; its statement supplies that general input, which no node of this unit supplies. It supports the unit's tame-boundary finite-cover calculation rather than replacing its direct-image route."
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic preservation of etaleness of the specified punctured cover under scalar extension; it supports the existing Kummer route."
    }
   ]
  },
@@ -459,15 +251,16 @@
   "lem-galois-fpqc-descend-etale",
   "lem-weil-pbc-descend-etale",
   "lem-sbc-normal-integral-generic-hom-full",
-  "lem-galois-descent"
+  "lem-galois-descent",
+  "lem-weil-pbc-etale-scheme-base-change"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q06-bd3acccd8",
-  "group": "Q06",
+  "reviewer": "NT-cc-Q66-0d7c06145",
+  "group": "Q66",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-bd3acccd8 (reviewer sub-agent of L); spot-checked: I read the item and its one new node in full. The ILO IX Prop 2.1 proof (printed pp.133-134) shows that the question is étale-local and that the cover is the normalization of A[x]/(x^n-t). The item replaces the source's Abhyankar step (SGA 1) with its own hypothesis that the strict-local tower splits, so neither file cites SGA. All 13 steps are correct against the statements they cite. Step 2: the active t_i are prime by the UFD node, and two labels with the same branch would force t_i=u t_j, so m would be generated by d-1 elements, which the dimension bound forbids; after shrinking to W the hypotheses of the finite-root regularity node hold. Step 3: the inactive roots are handled by the hypersurface criterion with aT^{a-1} a unit; f is a nonzerodivisor, so D(f) is dense in every component. Steps 4-5: E_a is finite on each component (open-integral-closure node), E_a[1/f]=D_a, and C_a is integrally closed in C_a[1/f] (dense-open section node). Step 7: the morphism and equality clauses of 01ZM descend the isomorphism and its inverse at m=1, where T_1=A. Steps 8-9: S=A⊗C_m is ind-étale over C_m; two applications of 0CBF give S⊗E_m≅S^d, with d=0 checked. Step 10: B_v→A is faithfully flat, hence an fpqc cover; fpqc descent of étaleness and then 07RP give a neighbourhood D(h_v). Steps 11-13: a common level n=∏m_j; overlap isomorphisms come from generic full faithfulness on the normal X_n; the cocycle holds by uniqueness; lem-galois-descent gives effective descent and the puncture isomorphism. Small cases checked: r=0, V or P empty, v off the boundary, and an Artin-Schreier cover (excluded by the hypothesis). The new node lem-sfb-integral-closure-ind-etale-base-change is true: it specializes Stacks 0CBF (algebra.tex lemma-integral-closure-commutes-colim-smooth), since finitely presented étale implies smooth. It is self-contained and statement-only, and it is no clause of the item. It duplicates no existing node: rg -L for 0CBF/03GE finds only an unrelated DVR chart node, and the weak-étale, localization and Noetherian-local normalization nodes are narrower. Batch-5 flags: lem-trf-regular-local-ufd-boundary-factorization (regular local rings are UFDs), lem-trf-polynomial-ring-regular-base (Mathlib leaf), lem-trf-normal-topologically-noetherian-components (generic topology), and lem-sfb-snc-finite-root-regular-ring, which reaches sec-trace-formula only through def-trf-strict-normal-crossings-boundary and the polynomial leaf. All four are generic; none of their closures contains a trace-formula theorem, a Poincaré-duality node, sk-thm-trace-transport or an nt-* node, so I accepted them. I accepted all 17 declared tool_uses as generic black boxes. proof_deps equals the union of the uses lists, and there is no cycle. I made no changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-0d7c06145 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement identical to Q06 bd3acccd; the stmt_dep def-sfb-strict-local-kummer-tame-module was already on the base, as the NP S2 snapshot shows), all four new nodes, and the report with the verbatim old steps 1-13. Re-split conformity: every old step is now a clause of exactly one self-contained new statement. labelled-root-algebra-geometry = old 1-3 (basis/transitions, local branch shrinking, inactive unit roots, normality, f injective, componentwise density). normalization-strict-local-etale-spreading = old 4,5,10 (032L componentwise finiteness and fp, E[1/g]=F, IntCl_C(C_g)=C, 02VN descent from O^sh to B_v, then 07RP spreading to D(h)). active-root-tower-normalization-splitting = old 6-9 (01ZM descent of theta_inf and its inverse to a finite m; 0CBF twice gives E_m(x)A = S_m^d). normal-tower-common-level-cover-gluing = old 11-13 (finite subcover, n = product of m_j, unique overlap isos by generic full faithfulness on clopen normal integral components, cocycle, Zariski descent). Node sizes are 1.8-2.4k characters, none restates the item, and the parent is a 2335-character, five-step assembly whose hypothesis checks all hold: affine V is qc; C_a is finite over Noetherian B, normal, with f injective; B is an F_p-algebra; Q_m = T_m[1/f] because the inactive t_j are units in A; the tower trivialization is Spec of D(x)Q_inf = Q_inf^d; the distinct-positions hypothesis follows from the RSoP reading and from reduced SNC. I checked each new statement mathematically, including the edge cases zero ring, r=0, a=1, d=0, empty V, and the disconnected label t(t-1); all four are true. Sources: ILO IX 2.1 on printed pp.133-134 matches (etale-local, normalization of A[x]/(x^n-t)); the item's hypothesis replaces the SGA 1 Abhyankar step, and nothing in the item or the new nodes cites SGA. The Stacks tags 07RP, 032L, 0CBF, 02VN, 01ZM, 0AG0, 0BIA, 07PF, 0BQM were verified in tags/tags, and the main-20261015 paragraph (3) route is inherited unchanged. Duplicate check: none duplicates snc-finite-root-regular-ring (needs irreducible branches), finite-etale-open-integral-closure, root-split-factor-finite-etale, finite-etale-descent-near-closed-point, strict-hensel-root-normalization-finite or finite-etale-two-open-gluing. Batch-5 flag: def-trf-strict-normal-crossings-boundary is a general definition that is already in the base item's stmt_deps and is not part of the trace formula or Poincare duality, so I accept it. Advisory: the item's tool_uses still lists the tools of the old 13-step proof; the maintainer owns that field. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SNCTameRootEtaleExtension",
@@ -497,5 +290,17 @@
   "group": "NP",
   "result": "pass",
   "note": "Clause-by-clause match: char-p field; finite type + qc + separated over k; IsRegularScheme; SNC boundary D = ofIdealTop(span ∏t_i), which includes reduced; the active-parameter Sublist of an RSoP is order-independent; finite étale π over B[1/f]; the split hypothesis over every prime, separable closure K and StrictHenselizationPresentationIn H uses tameRootAlgebra (compatible prime-to-p roots, the stated limit) punctured by the full f, where inactive t_i are units, with a coproduct iso over the tower; conclusion ∃ n>0 coprime p, finite étale ζ to B[x]/(x_i^n−t_i), iso over V_n° with projection equation. Edge cases r=0, d=0, empty V, off-boundary points, universes ok. The added stmt_dep def-sfb-strict-local-kummer-tame-module has landed (allowed, reuses tameRootAlgebra). Helpers are canonical maps, not hollow; docstrings carry source and blueprint tag; all 13 proof steps verbatim; statement field equals signature; sorry only; proof-dependency modules imported. No file changed, so no compile. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

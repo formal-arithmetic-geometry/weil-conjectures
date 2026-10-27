@@ -1,0 +1,310 @@
+{
+ "id": "lem-trf-valuation-integral-scheme-component-dimension",
+ "kind": "statement",
+ "title": "Component dimensions of an integral locally finite type scheme over a valuation domain",
+ "statement": "Let $A$ be a valuation domain, meaning an integral domain such that every nonzero element of $K=\\operatorname{Frac}(A)$ or its inverse belongs to $A$, with maximal ideal $\\mathfrak m_A$ and residue field $k=A/\\mathfrak m_A$. Let $h:Z\\to\\operatorname{Spec}A$ be a morphism locally of finite type [def-weil-finite-type-morphism; def-weil-affine-spectrum], where $Z$ is an integral scheme [def-pc-integral-scheme] with generic point $\\eta$ [def-sc-generic-point], and suppose $h(\\eta)$ is the generic point of $\\operatorname{Spec}A$. Let $Z_K=Z\\times_{\\operatorname{Spec}A}\\operatorname{Spec}K$ and $Z_k=Z\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k$ be its generic and closed fibres [def-pc-scheme-fibre]. Both fibres are locally Noetherian [pqf-def-locnoeth]. Then $Z_K$ is integral and its generic point maps to $\\eta$. For every irreducible component $E$ of $Z_k$ [def-weil-irreducible-components] with generic point $z$, one has $\\dim_z(Z_k)=\\dim E=\\dim Z_K$, where $\\dim$ is topological Krull dimension [def-kun-topological-krull-dimension] and $\\dim_z$ is local topological dimension [def-kun-topological-dimension-at-point]. Empty $Z_k$ is allowed, in which case the component assertion is vacuous. No Noetherianity or rank condition on $A$, quasi-compactness of $Z$, or flatness hypothesis on $h$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), first proof paragraph: apply Algebra Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres) to affine neighbourhoods in the integral Y′; scheme form including generic-fibre integrality and local dimension at a component generic point."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open cover of $Z$ by nonempty $U=\\operatorname{Spec}B$ for which $B$ is finite type over $A$, as permitted by local finite type. Integrality makes every such $B$ a domain. The generic point $\\eta$ belongs to every nonempty open: otherwise its closed complement would contain $\\overline{\\{\\eta\\}}=Z$. Its prime in $B$ is $(0)$, since $V((0))=\\operatorname{Spec}B$. The image of this prime in $\\operatorname{Spec}A$ is $(0)$ by hypothesis, so the inverse image of $(0)\\subset B$ is zero. Thus $A\\to B$ is injective, and $B$ contains $A$ as a subring.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "def-sc-generic-point",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), applied to the affine neighbourhoods in Tag 00QK; generic-point and injectivity reduction"
+   }
+  },
+  {
+   "text": "For $L=K$ and $L=k$, restriction of the fibre to $U$ is the open subscheme $U_L=\\operatorname{Spec}(B\\otimes_A L)$, by open fibre products and the affine tensor-product formula. These opens cover $Z_L$. If $b_1,\\ldots,b_r$ generate $B$ over $A$, the elements $b_i\\otimes1$ generate $B\\otimes_A L$ over $L$: expand a pure tensor $P(b_1,\\ldots,b_r)\\otimes\\lambda$ as the same polynomial in $b_i\\otimes1$ with coefficients in $L$, and then add pure tensors. Thus both fibre morphisms are locally of finite type. Every field is Noetherian, since its ideals are only zero and the unit ideal. The finite-type-algebra Noetherian theorem therefore makes every $B\\otimes_A L$ Noetherian, and the affine covers show that both fibres are locally Noetherian. Zero chart rings cause no problem.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes); Algebra Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "Set $S=A\\setminus\\{0\\}$. The localization base-change theorem gives $B\\otimes_A K\\cong S^{-1}B$. No element of $S$ vanishes in $B$, by step 1. In this localization $b/s=0$ forces $tb=0$ for some $t\\in S$, hence $b=0$; and a product of two nonzero fractions cannot vanish because $B$ is a domain. Thus $S^{-1}B$ is a nonzero domain, and its zero prime contracts to the zero prime of $B$. Its generic point consequently maps to $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization), 00ES (lemma-irreducible); the fraction calculation for the generic fibre"
+   }
+  },
+  {
+   "text": "Each $U_K$ is reduced by the affine reducedness criterion. Reducedness of $Z_K$ follows directly from the stalk definition: any point lies in such an open, where its local ring is reduced, and restriction to an open leaves that stalk unchanged. The fibre projection is a homeomorphism onto $h^{-1}((0))$, so the points above $\\eta$ in all these charts are one point $\\eta_K$. In each chart its closure is the whole chart, by step 3 and the formula $\\overline{\\{(0)\\}}=V((0))$. Hence its closure in $Z_K$ contains the covering charts and equals $Z_K$. A space with a dense point is irreducible: any closed covering has one member containing that point and hence its whole closure. Therefore $Z_K$ is nonempty, reduced and irreducible, and is integral. Its generic point $\\eta_K$ maps to $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "def-pc-reduced-scheme",
+    "def-pc-scheme-fibre",
+    "def-sc-generic-point",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J2 (lemma-affine-reduced), Tag 01K1 (lemma-fibre-topological); Properties Tag 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "Write $d=\\dim Z_K$. This is the dimension of an integral scheme locally of finite type over the field $K$, by steps 2 and 4. Every chart $U_K$ is nonempty by step 3. The nonempty-open dimension theorem therefore gives $\\dim U_K=d$ for every chosen $U$. Via the affine isomorphism of step 2, homeomorphism invariance and the spectrum/ring dimension equality give $\\dim(B\\otimes_A K)=d$.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3), for the generic fibre"
+   }
+  },
+  {
+   "text": "Whenever $U_k\\ne\\varnothing$, its ring $B\\otimes_A k$ is nonzero. Apply the valuation-domain fibre-dimension theorem to the domain inclusion $A\\subset B$ from step 1. All its hypotheses hold: $A$ is a valuation domain, $B$ is a finite type $A$-algebra and a domain, and the closed tensor fibre is nonzero. Its equidimensionality conclusion says that every irreducible component of $U_k$ has dimension $\\dim(B\\otimes_A K)=d$, using step 5 and the homeomorphism of step 2.",
+   "uses": [
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), including equidimensionality; More on Morphisms Tag 0GSI, first proof paragraph"
+   }
+  },
+  {
+   "text": "Let $E$ be an irreducible component of $Z_k$ with generic point $z$, and choose a chart $U$ containing its image in $Z$. Then $z\\in U_k$, and the open-component intersection theorem makes $E\\cap U_k$ an irreducible component of $U_k$, so step 6 gives $\\dim(E\\cap U_k)=d$. Give the closed subset $E$ its reduced induced closed subscheme structure $E_{\\mathrm{red}}$. The closed immersion identifies its topological space with $E$; it is nonempty, reduced and irreducible, hence integral. That immersion is locally of finite type, and composition with $Z_k\\to\\operatorname{Spec}k$ is locally of finite type. Apply the nonempty-open dimension theorem to the inverse image of $U_k$ in $E_{\\mathrm{red}}$. Homeomorphism invariance identifies the resulting equality with $\\dim E=\\dim(E\\cap U_k)=d$. This use of the field theorem does not require $E$ or $Z$ to be quasi-compact.",
+   "uses": [
+    "lem-sc-components-open-injection",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3), on the component; Schemes Tag 01J3 (lemma-reduced-closed-subscheme); Morphisms Tags 01T5 and 01T3"
+   }
+  },
+  {
+   "text": "For this $z\\in U_k=\\operatorname{Spec}(B\\otimes_A k)$, the affine dimension-at-a-point formula identifies $\\dim_z U_k$ with the maximum of the dimensions of its irreducible components through $z$. This formula applies because the chart ring is finite type over the field $k$ by step 2; its statement guarantees that the maximum is over a nonempty family. Every one of these component dimensions is $d$ by step 6, so $\\dim_z U_k=d$. Local topological dimension is unchanged on restricting to the open neighbourhood $U_k\\subset Z_k$, giving $\\dim_z Z_k=d=\\dim E=\\dim Z_K$. When $Z_k$ is empty there is no $E$ or $z$ to consider; the generic-fibre and local-Noetherian assertions already hold by steps 2--4.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field); Topology Tag 0055 (definition-Krull), local dimension on an open neighbourhood"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "def-pc-reduced-scheme",
+  "def-pc-scheme-fibre",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-trf-valuation-domain-fibre-dimensions",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), first paragraph, using Algebra Tag 00QK on affine charts; the globalization uses Varieties Tag 0A21 (3) and Algebra Tag 00OT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral locally finite type scheme dominating spectrum of a valuation ring has all nonempty closed fibre components of dimension equal to generic fibre dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [AlgebraicGeometry.IsIntegral X] → OrderTop ↥X\", \"doc\": \"For any integral scheme $X$, its underlying topological space is equipped with an order having a top element, which is the unique generic point of $X$. This means that every point in $X$ is a speciali\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.domain\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), IsDomain self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the associated ring $ R $ is an integral domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\nAssessment: The hits concern properness over a field, affine integrality, finite type charts and generic-point topology; none compares closed and generic fibre component dimensions over an arbitrary valuation domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, topologicalKrullDim",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: The hits concern properness over a field, affine integrality, finite type charts and generic-point topology; none compares closed and generic fibre component dimensions over an arbitrary valuation domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*dim|dim.*valuation|equidimensional",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"line\": \"65\", \"text\": \"equidimensionality hypotheses cannot be assumed.\"}\nAssessment: The hits concern properness over a field, affine integrality, finite type charts and generic-point topology; none compares closed and generic fibre component dimensions over an arbitrary valuation domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of irreducible components of closed fibre of dominant integral locally finite type scheme over valuation domain equals generic fibre dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IrreducibleSpace X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [LocallyOfFiniteType f] : JacobsonSpace (f.fiber y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"topologicalKrullDim\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"(T : Type*) [TopologicalSpace T] : WithBot ℕ∞\", \"doc\": \"The Krull dimension of a topological space $ T $ is defined as the Krull dimension of the preorder of irreducible closed subsets of $ T $. This is the supremum of the lengths of all strictly increasin\"}\n  {\"name\": \"genericPoints.component_ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : component (ofComponent x) = x\", \"doc\": \"In a quasi-sober topological space, for any irreducible component $C$, the irreducible component of the generic point associated to $C$ is equal to $C$ itself. Formally, if $x$ is the generic point of\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\nAssessment: The hits concern properness over a field, affine integrality, finite type charts and generic-point topology; none compares closed and generic fibre component dimensions over an arbitrary valuation domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend affine finite type valuation domain fibre dimension equality to an integral locally finite type scheme using nonempty affine opens",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [inst_1 : Nonempty ↥↑U], IsFractionRing ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an integral scheme $X$ and a non-empty affine open subset $U$ of $X$, the function field of $X$ is the fraction field of the ring of sections $\\\\Gamma(X, U)$. This follows from the fact that every \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type. For any affine open subset $U \\\\subseteq Y$ and affine open subset $V \\\\subseteq X$ contained in $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is locally of finite type, $ U $ is an affine open subset of $ Y $, and $ V $ is an affine open subset of $ X $ contained in the preimage of $ U $ under $ f $, \"}\nAssessment: The hits concern properness over a field, affine integrality, finite type charts and generic-point topology; none compares closed and generic fibre component dimensions over an arbitrary valuation domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*dim|dim.*valuation|equidimensional",
+   "results": "Search returned 1 hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean.  Assessment: no hit supplies the integral dominant valuation-base component-dimension comparison; properness and discrete-valuation hypotheses in some hits are unavailable here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "All irreducible components of the closed fibre of an integral scheme locally of finite type over a valuation ring have the dimension of the generic fibre",
+   "results": "Search returned 8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, genericPoints, genericPoints.ofComponent, isClosed_of_mem_irreducibleComponents, genericPoints.component_ofComponent, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType.  Assessment: no hit supplies the integral dominant valuation-base component-dimension comparison; properness and discrete-valuation hypotheses in some hits are unavailable here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, topologicalKrullDim",
+   "results": "Search returned 0 hits: .  Assessment: no hit supplies the integral dominant valuation-base component-dimension comparison; properness and discrete-valuation hypotheses in some hits are unavailable here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral scheme locally of finite type dominating a valuation domain has integral generic fibre and equidimensional closed fibre of the same dimension",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.ValuativeCommSq.domain, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.ValuativeCommSq.valuationRing, AlgebraicGeometry.ValuativeCommSq.isFractionRing, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization.  Assessment: no hit supplies the integral dominant valuation-base component-dimension comparison; properness and discrete-valuation hypotheses in some hits are unavailable here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type domain algebra over a valuation ring, the special fibre is equidimensional and has the same Krull dimension as the generic fibre",
+   "results": "Search returned 8 hits: IsLocalRing.finrank_CotangentSpace_eq_one, Ideal.inertiaDeg_le_finrank, IsLocalRing.finrank_quotient_map, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, Ideal.inertiaDeg_pos, ringKrullDim_le_ringKrullDim_add_spanFinrank.  Assessment: no hit supplies the integral dominant valuation-base component-dimension comparison; properness and discrete-valuation hypotheses in some hits are unavailable here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-relative-associated-specialization",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. Tag 0GSI (lemma-associated-point-specializes), first proof paragraph: apply Algebra Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres) to affine neighbourhoods in the integral Y′; scheme form including generic-fibre integrality and local dimension at a component generic point.",
+   "via": [
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-valuation-integral-scheme-component-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the affine-chart application of 00QK in 0GSI into eight steps. Proved generic-fibre integrality by localization and a common generic point, established locally Noetherian fibres on finite type field charts, compared each component globally via its reduced induced scheme and 0A21, and computed local dimension via 00OT. The statement is unchanged. Every proof input already has a DAG node; no new nodes.",
+  "blueprint": "lem-trf-local-term-locality, proof (1)--(2), semistable alteration / nearby-cycle dimension branch, via the existing ancestor chain: realizes the valuation-base component dimension input in 0GSI through the affine 00QK argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Nonempty opens of the generic fibre and of the reduced component have their whole-space dimension. This is precisely the field dimension input to globalizing 00QK, not an alternative route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Equips a component with its reduced closed scheme structure so that the field open-dimension theorem applies; the valuation unit has no replacement construction."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Computes local topological dimension of a finite type field chart from its components after 00QK has supplied their common dimension."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Transfers local topological dimension from the affine closed-fibre neighbourhood to the whole fibre."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-11af89670",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-11af89670 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It splits the item into 8 steps, keeps the statement unchanged and adds no new nodes. Sources: Stacks 00QK (algebra.tex:31380) states that Spec(S⊗k) is equidimensional of dimension dim(S⊗K) for a finite-type domain S containing a valuation ring R. Stacks 0GSI (more-morphisms.tex:5188) applies 00QK to the integral Y'. The item is the scheme-level form of that application and is true. Small cases checked: A a field (trivial), Z=Spec A[1/π] (empty closed fibre, clause vacuous), A[x,y]/(xy−π) (two lines of dimension 1). Step by step: (1) the cover of lft/integral charts and the zero prime via spec-irreducible-closed (2) give A⊂B. (2) Open fibre product and the affine tensor formula give the fibre charts; Hilbert basis and the cover definition give locally Noetherian fibres. (3) Localization base change with R=A, M=A∖0 gives S⁻¹B, a nonzero domain. (4) The stalk definition of reduced and the fibre homeomorphism give one dense point η_K, so Z_K is integral. (5) The 0A21(3) node gives dim(B⊗K)=d. (6) All hypotheses of lem-trf-valuation-domain-fibre-dimensions are checked, and its equidimensionality clause is used. (7) The component E: E∩U_k is a component of U_k by open-injection, E_red is integral via the reduced induced subscheme and the closed-immersion homeomorphism, it is lft via 01T5 and clause (e) of the permanence node, and the open-dimension theorem gives dim E=d without quasi-compactness. (8) The 00OT node gives the local dimension as a maximum over a nonempty family; the open-subspace node passes to Z_k. proof_deps equals the union of uses, and every cited statement says what the step takes from it. The DAG search for 00QK finds no duplicate: the affine node is cited, and the other hits are proof pieces or flat/finitely presented variants. I accept the 4 declared tool_uses (integral lft open dimension, reduced induced subscheme, dimension at a point by components, dimension at a point on an open subspace) as generic black boxes. There is no SGA citation and no repair note. The item has no lean_audit field; most nodes created on 2026-10-22 lack it too, so this is not a delivery fault. Details are in review.md."
+ }
+}

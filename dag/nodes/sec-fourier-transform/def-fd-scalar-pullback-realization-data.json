@@ -1,0 +1,130 @@
+{
+ "id": "def-fd-scalar-pullback-realization-data",
+ "kind": "definition",
+ "title": "Normalized scalar coefficient transports and canonical whole-tower comparison maps",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L/\\mathbf Q_\\ell$ in one universe, and a $\\mathbf Q_\\ell$-algebra embedding $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$ use the derived module categories [def-weil-abstract-derived-category] on its small pro-etale site [def-weil-pbc-proetale-site], the completed coefficient rings $R_{E,W},R_{L,W}$ [def-weil-completed-integral-coefficients], their quotient-normalized identity transports $I_E,I_L$ [def-fd-coefficient-comparison-datum], and ordinary scalar extension $C_W=-\\otimes_{R_{E,W}}R_{L,W}$ with its derived functor $C_W^D$ [def-weil-integral-scalar-extension]. Write $C_W^p$ for the ordinary PBC scalar extension, and use its derived ambient tensor functor and actual completed-pullback scalar comparison [prop-weil-pbc-scalar-extension].\nA normalized scalar coefficient transport is a tuple, asserting no existence, consisting of a module natural isomorphism $c_W^0:I_L C_W\\simeq C_W^p I_E$ whose value on every sheafified tensor generator $s\\otimes x$ is $r_L^{-1}(s)\\otimes x$, where $r_L$ is the fixed coefficient-ring identity; and a derived natural isomorphism $c_W:I_L^D C_W^D\\simeq (C_W^p)^D I_E^D$. For every cochain complex $P$, require that $c_W$ at $Q(P)$, followed by the PBC scalar image of the coefficient-transport localization comparison and then the actual PBC cochain counit, equals the image under $I_L^D$ of the ordinary-scalar localization comparison, followed by the coefficient-transport localization comparison at $C_W(P)$ and then $Q$ of the cochain map whose degree-$i$ component is $(c_W^0)_{P^i}$. Thus this is the specified universal cochain-counit normalization, not an arbitrary isomorphism of derived endpoints. The last cochain map is defined componentwise by $c_W^0$.\nUse the derived sequence category and total limit $R\\!\\lim$ [def-coef-ringed-sequence-site], and the constant-tower functor $\\Delta$ with its actual adjunction counit $\\epsilon:\\Delta R\\!\\lim\\to1$ [def-trf-integral-comparison-realization-models]. Define $\\widehat C_W$ to be the derived functor of termwise $C_W$ on whole strict towers. Define $\\sigma_W:\\widehat C_W\\Delta_E\\simeq\\Delta_L C_W^D$ by deriving the literal ordinary constant-tower/scalar square, with the two derived-composition comparisons inserted. Define the canonical scalar/limit map $\\lambda_Q:C_W^D(R\\!\\lim_E Q)\\to R\\!\\lim_L(\\widehat C_W Q)$ to be the adjunct of $\\widehat C_W(\\epsilon_{E,Q})\\circ\\sigma_{W,R\\!\\lim_E Q}^{-1}$. No basis or comparison is chosen.\nFor an isomorphism $h:U\\simeq T$, supplied normalized transports $c_U,c_T$, a common strict-tower datum $b_E$ [def-fd-common-strict-tower-models], and an integral constructible $K$, define the actual PBC comparison with coefficient identities inserted to be\n$$F^p_{h,L}(c_{T,K}^{-1})\\circ(\\delta^p_{I_EK})\\circ (C_U^p)^D(b_{E,K}^{\\rm amb})\\circ c_{U,G_{h,E}K}.$$\nHere $G_{h,E}$ is the ordinary framework derived pullback [def-weil-derived-pullback-tensor-hom], $F^p$ is the actual PBC completed pullback [def-weil-pbc-completed-pullback], and $\\delta^p$ is the inverse-direction hom of the fixed completed-pullback/scalar isomorphism [prop-weil-pbc-scalar-extension]. This defines a map from $I_L^D C_U^D G_{h,E}K$ to $F^p_{h,L}I_L^D C_T^D K$. No commutative scalar/pullback square, existence of the supplied data, or invertibility of this composite is asserted.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-integral-scalar-extension",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-realization-models",
+  "def-fd-common-strict-tower-models",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Opening bounded-constructible/pro-etale coefficient-category identification; normalized scalar presentation data extracted in lem-fd-scalar-pullback-realization-identification. Supporting Stacks 03EL and 0941 (lemma-derived-limit-is-ok); this definition owns the published constructions, not that theorem's existence or compatibility conclusions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized coefficient scalar transport on completed proetale modules and the whole tower derived inverse limit comparison",
+   "results": "8 hits: AdicCompletion.val_smul, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.instModuleOfIsScalarTower, AdicCompletion.instIsScalarTower, AdicCompletion.module, AdicCompletion.instModuleOfIsScalarTower.congr_simp, AdicCompletion.instSMul.congr_simp, AdicCompletion.instSMul",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the already landed project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension on strict towers with a normalized coefficient identity and canonical derived inverse limit constant tower counit comparison",
+   "results": "8 hits: AdicCompletion.instIsScalarTower, Condensed.profiniteSolidCounit, ModuleCat.extendScalars_assoc', ModuleCat.extendScalarsComp, AdicCompletion.instIsScalarTower_1, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the already landed project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "FdScalarCoefficientTransport|fdScalarActualPbc|fdScalarLimitComparison|fdScalarTower|fdScalarConstantSquare",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the already landed project declarations."
+  },
+  {
+   "tool": "rg",
+   "query": "FdScalarCoefficientTransport|fdScalarActualPbc|fdScalarLimitComparison|fdScalarTower|fdScalarConstantSquare in lean/WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json and dag/nodes",
+   "results": "No upstream hit. Existing definitions found in Sheaf.Paper.FdScalarPullbackRealizationIdentification at lines 84, 90, 105, 134, 236; helper fdScalarTransportComplex at line 118. DAG ownership only by theorem node lem-fd-scalar-pullback-realization-identification, no definition node.",
+   "date": "2026-10-24",
+   "verdict": "Existing project constructions, record existing:true; add their missing definition owner."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "scalar coefficient transport",
+   "results": "0 blueprint nodes match 'scalar coefficient transport'",
+   "date": "2026-10-24",
+   "verdict": "No separate blueprint definition; extracted coefficient-presentation data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-scalar-roos-comparison-intertwining",
+  "date": "2026-10-24",
+  "group": "Q106"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Coefficient-category identification: normalized scalar identity transports and the canonical whole-tower adjunct used to state the scalar/Roos intertwining square.",
+   "via": [
+    "lem-fd-scalar-roos-comparison-intertwining",
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.FdScalarPullbackRealizationIdentification",
+  "declaration": "WeilConjectures.FdScalarCoefficientTransport",
+  "declarations": [
+   "WeilConjectures.fdScalarTower",
+   "WeilConjectures.fdScalarConstantSquare",
+   "WeilConjectures.fdScalarLimitComparison",
+   "WeilConjectures.fdScalarTransportComplex",
+   "WeilConjectures.FdScalarCoefficientTransport",
+   "WeilConjectures.fdScalarActualPbc"
+  ],
+  "statement": "structure FdScalarCoefficientTransport (W : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested in the independent return at immutable head d38f223e1ec2. These six already landed definitions supply normalized coefficient transport, its degreewise cochain map, the actual whole-tower scalar functor and constant square, its canonical counit adjunct, and the actual PBC comparison composite. No existence theorem or scalar/Roos intertwining conclusion is included."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f77363a02",
+  "group": "Q106",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f77363a02",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Re-delivery after the d38f H2 RETURN. The Lean module is byte-identical (sha256 76a9f20d…) to the version whose mathematics was checked: 3 sorries, Roos transport, integral squares, rational square, dE/dL pinned to b. Item vs live: only stmt_deps (additions only) and lean change. The theorem stmt_deps lem-fd-pullback-common-strict-tower-models and lem-trf-integral-pullback-comparison-realization are replaced by their on-base def owners def-fd-common-strict-tower-models and def-sf-integral-comparison-system-data. New existing:true node def-fd-scalar-pullback-realization-data owns fdScalarTower, fdScalarConstantSquare, fdScalarLimitComparison, fdScalarTransportComplex, FdScalarCoefficientTransport and fdScalarActualPbc. All six are present in the live module and match the node statement (adjunct of Ĉ(ε)∘σ⁻¹; four-factor PBC composite). The statement field is verbatim, its stmt_deps are live, no SGA, no other owner node. report.md has the Worker report and Second reading sections. Advisory only: base-era uses of non-stmt_dep owner declarations (scalarPullbackOrdinary/scalarCompletionIso, coefficientConstantTowerLimit, integralComparisonConstantTower, sfIntegralConstructibleCategory). No file changed, no compile."
+ }
+}

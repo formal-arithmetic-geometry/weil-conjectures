@@ -1,0 +1,105 @@
+{
+ "id": "def-sp-field-scalar-strict-limit-data",
+ "kind": "definition",
+ "title": "Finite-free scalar arrows and normalized strict-limit comparison data",
+ "statement": "On a small ringed site, use ordinary scalar extension and its pure sections [def-weil-pbc-ringed-tensor-section-calculus, def-sfb-scalar-inverse-image-normalization]. A finite-free scalar arrow R to S is a ring-sheaf map whose restricted unit module is isomorphic to a finite product of copies of the R-unit module. For an exact additive functor F between abelian categories with countable products, tower limits and derived categories [def-weil-abstract-derived-category], ScalarStrictLimitComparison records a derived natural comparison iso, its ordinary-limit normalization, a projection-normalized product comparison intertwining one minus the transition shift, and the natural signed Roos cone iso with both coordinate formulas and its localization equation [def-weil-strict-roos-model, def-sbc-strict-projection-tower-data]. exactDerived, exactDerivedComp and exactDerivedUnit are the existing exact derived functor and its localized ordinary composition and identity isomorphisms. These definitions are extracted verbatim from the strict-limit theorem interface.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), finite-free tensor and the projection-normalized strict-limit interface"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-sfb-scalar-inverse-image-normalization",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "def-sbc-strict-projection-tower-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), finite-free tensor and the projection-normalized strict-limit interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a finite free sheaf of algebras is the finite power functor after restriction of scalars",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.freeFunctor, Algebra.TensorProduct.piScalarRight and presheaf change-of-rings constructions. No finite-basis sheaf tensor comparison with the displayed normalization.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; existing scalar and product APIs supply ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact countable products of sheaves of modules on a small site equivalent to a scheme pro etale site",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, Condensed.hasExactLimitsOfShape, and condensed module constructions. No arbitrary coefficient sheaf on a specified small pro-etale model.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the existing project pro-etale product theorem is the geometric ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "countableProducts_exact|tensorFunctor|scalarReassoc",
+   "results": "msearch Mathlib grep: 0 hits. Project rg finds scalarReassoc_normalized in ScalarInverseImageTowerDiagram and countableProducts_exact in ProEtaleCountableProductsExact.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the project tensor and geometric APIs; no Mathlib theorem states these interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldScalarStrictLimit",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(1), finite-free tensor and the projection-normalized strict-limit interface",
+   "via": [
+    "lem-sp-field-scalar-strict-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldScalarStrictLimitData",
+  "file": "lean/Sheaf/Paper/FieldScalarStrictLimitData.lean",
+  "declaration": "SheafOfModules.FiniteFreeScalarArrow",
+  "statement": "abbrev FiniteFreeScalarArrow (R S : Sheaf J CommRingCat.{u})",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25",
+  "declarations": [
+   "SheafOfModules.FiniteFreeScalarArrow",
+   "SheafOfModules.ScalarStrictLimitComparison",
+   "SheafOfModules.FieldScalarStrictLimit.exactDerived",
+   "SheafOfModules.FieldScalarStrictLimit.exactDerivedComp",
+   "SheafOfModules.FieldScalarStrictLimit.exactDerivedUnit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "independent cc review: delivered FieldScalarStrictLimit theorem statement vs clone (identical); FieldScalarStrictLimitData vs the clone's interface block (verbatim); the two sorry statements vs their nodes and the item's needs; node proof_deps vs Lean imports/uses; #print axioms on a scratch build"
+ }
+}

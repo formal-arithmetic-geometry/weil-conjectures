@@ -1,0 +1,247 @@
+{
+ "id": "lem-sp-orientation-scalar-tower-transport",
+ "kind": "statement",
+ "title": "Transport of an orientation square through finite scalars and sheaf towers",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. All schemes in this statement are separated and of finite type over $k$, and all morphisms are $k$-morphisms [def-weil-scheme-morphism-properties]. Use the ordinary uncompleted constant-coefficient pro-etale module derived categories and their bounded constructible finite-Tor subcategories [def-weil-pbc-proetale-modules, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Pullbacks and tensor products are the ordinary derived operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor].\n\nLet $f:X\\to Y$ be smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms], let $v:Y'\\to Y$ be arbitrary, and put $X'=X\\times_Y Y'$ with projections $u:X'\\to X$ and $f':X'\\to Y'$ [def-pc-base-change].\nFor a coefficient ring $D$ put $L_{f,D}=D_X(d)[2d]$ [def-coefficient-twists-detailed] and $\\omega_{f,D}=f_D^!D_Y$, and let $e_D:u_D^*\\omega_{f,D}\\xrightarrow{\\sim}\\omega_{f',D}$ be the transpose of inverse compact-support exchange followed by the pulled-back counit [def-pur-co-smoothness, def-weil-pbc-adjunction-mate].\n\n(1) Let $R=\\mathbf Z/\\ell^r$, $r\\ge1$, and let $A$ be any finite commutative ring with $\\ell^rA=0$. Write $(-)_A=-\\otimes_R^LA$. Use the scalar comparisons $c_f:(\\omega_{f,R})_A\\xrightarrow{\\sim}\\omega_{f,A}$ and $c_{f'}$, and orientations $\\Pi_{f,D}:\\omega_{f,D}\\xrightarrow{\\sim}L_{f,D}$, whose normalization is\n$$\\Pi_{f,A}c_f=(\\Pi_{f,R})_A,\\qquad\\Pi_{f',A}c_{f'}=(\\Pi_{f',R})_A$$\n[det-sp-finite-general-ring]. Assume the mixed comparison square\n$$e_Au_A^*c_f=c_{f'}(e_R)_A$$\nand the orientation equation $\\Pi_{f',R}e_R=u_R^*\\Pi_{f,R}$. Then\n$$\\Pi_{f',A}e_A=u_A^*\\Pi_{f,A},\\qquad e_Au_A^*(\\Pi_{f,A}^{-1})=\\Pi_{f',A}^{-1}.$$\nAll identifications are the canonical derived scalar/pullback and exponent-independent Tate comparisons; no flatness of $R\\to A$ is assumed.\n\n(2) Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and put $A_n=\\mathcal O_E/\\ell^n$. Work in the ordinary derived categories of varying-coefficient sheaf towers and their full uniformly bounded constructible finite-Tor subcategories [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian, sk-def-sp-normalized-towers]. Let $a_f:L_{f,\\bullet}=A_{\\bullet,X}(d)[2d]\\xrightarrow{\\sim}\\omega_{f,\\bullet}$ and $a_{f'}$ be the actual tower orientations [det-sp-tower-gamma], and let $e_\\bullet:u_\\bullet^*\\omega_{f,\\bullet}\\xrightarrow{\\sim}\\omega_{f',\\bullet}$ be the actual tower exceptional comparison [det-sp-tower-exceptional-bc]. Suppose their exact evaluations at every $n$ satisfy $(e_\\bullet)_n u_n^*(a_f)_n=(a_{f'})_n$. Then\n$$e_\\bullet u_\\bullet^*a_f=a_{f'}$$\nas morphisms in the ordinary tower derived category. More generally, exact level evaluations are jointly injective on morphisms between two sheaf towers placed in the same single degree. In particular $h=a_{f'}^{-1}e_\\bullet u_\\bullet^*a_f$ is determined by its evaluated identities on $A_{\\bullet,X'}(d)[2d]$. This is an assertion about equally shifted sheaf towers; it does not assert faithfulness of evaluation on arbitrary derived morphisms. If $\\ell$ has ramification index $e$ in $E$, the finite ring at level $n$ is $A_{E,en}=\\mathcal O_E/\\varpi_E^{en}$, so the assertion includes ramified $E$ and towers without normalization.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), passage from prime-power coefficients to finite rings and degree-zero tower maps; old split steps 3-4; agent-extracted self-contained interface, not a theorem quoted verbatim from the blueprint. Retained expanded argument: report.md, Appendix: inherited argument, old step(s) 3,4."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-coefficient-twists-detailed",
+  "def-pur-co-smoothness",
+  "def-weil-pbc-adjunction-mate",
+  "det-sp-finite-general-ring",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-gamma",
+  "det-sp-tower-exceptional-bc",
+  "def-sp-proetale-scalar-pullback-iso"
+ ],
+ "proof": [
+  {
+   "text": "Precompose the finite orientation equation by pullback of scalarComparison. Rewrite with the supplied mixed square and the primed normalization. Combine the scalar functor maps and apply the supplied R-orientation equation. Naturality of scalarPullbackProEtaleIso moves the unprimed orientation to the left. The ordered Tate scalar/pullback coherence identifies the remaining line square. Finally rewrite the unprimed normalization and cancel the pulled-back scalarComparison, an isomorphism.",
+   "uses": [
+    "lem-sp-tate-scalar-pullback-coherence",
+    "def-sp-proetale-scalar-pullback-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the proposed inverse equation with the primed orientation. Substitute the orientation equation from the preceding step. Functoriality sends piA.inv followed by piA.hom to the identity; cancel the primed orientation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For evaluation detection set J=singleFunctor(0) followed by shift(s). Fullness expresses the two given maps as J(f),J(g). Exact evaluation has the composite natural isomorphism J followed by derived evaluation = ordinary evaluation followed by finite singleFunctor(0) followed by shift(s). Naturality and cancellation of its components turn equality of evaluated derived maps into equality of ordinary component maps, using faithfulness of finite single and shift. Extensionality of strict system morphisms and faithfulness of the specified realization equivalence give f=g, hence equality of the original maps. The two universes t and v remain independent.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-exact-functor-derived-triangulated",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form h=U(a.hom) followed by the actual mate and a_prime.inv. The pulled ordered-line presentation gives an isomorphism i from its source to F[0][2d]. Apply shifted_tower_evaluation_injective to i.inv followed by h followed by i.hom and the identity. At every level the supplied finite equation and functoriality reduce h to a_prime.hom followed by a_prime.inv, hence identity. Cancel i to obtain h=identity. Full-subcategory extensionality gives the same equation there; cancel a_prime.inv to recover the orientation equation and then its identity composite.",
+   "uses": [
+    "lem-sp-pulled-ordered-line-single",
+    "det-sp-tower-exceptional-bc"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The recorded coefficient integers are a DVR and their chosen uniformizer pi generates its maximal ideal, hence pi is irreducible. The integer ell is nonzero, since it is nonzero in Q_ell and the field algebra map is injective. Choose e with ell associated to pi^e. Association invariance of emultiplicity and emultiplicity_pi(pi^e)=e identify e with the stated toNat. Associated elements generate the same principal ideal; taking (n+1)-st powers, span_singleton_pow and pow_mul give the required equality, including every ramification index.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tate-scalar-pullback-coherence",
+  "def-sp-proetale-scalar-pullback-iso",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-exact-functor-derived-triangulated",
+  "sk-def-sp-coefficient-towers",
+  "lem-sp-pulled-ordered-line-single",
+  "det-sp-tower-exceptional-bc",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Paragraph (1); N2 Lean proof: scalar cancellation using the isolated Tate square, exact shifted-single evaluation detection, tower endomorphism cancellation using the isolated line presentation, and associated-power ramification calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An orientation square commutes after scalar extension using a mixed exchange square and equality of shifted sheaf tower maps is detected by exact evaluations",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact', CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, CategoryTheory.Functor.Faithful",
+   "results": "1 hits: DerivedCategory.instFaithfulSingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: single-functor faithfulness is a cited ingredient only; it does not state scalar comparison transport or the tower evaluation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(orientation|dualizing).*(scalar|tower)|(scalar|tower).*(orientation|dualizing)",
+   "results": "1 hits: Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of a commutative orientation square through scalar extension and exact evaluations of sheaf towers",
+   "results": "8 hits: Valuation.HasExtension.instIsScalarTowerInteger, TrivSqZeroExt.isScalarTower, Algebra.Extension.instIsScalarTowerCotangent, AlgHom.extendScalars, TrivSqZeroExt.smulCommClass, LinearPMap.instIsScalarTower, TensorProduct.AlgebraTensorModule.tensorTensorTensorComm, Algebra.Extension.instIsScalarTowerRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commuting unit comparison squares descend along invertible coefficient comparisons and lift from levels for morphisms between equally shifted single sheaf complexes",
+   "results": "8 hits: CochainComplex.shiftEval, CochainComplex.shiftShortComplexFunctor', CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.XIsoOfEq_shift, CochainComplex.shiftShortComplexFunctorIso, CochainComplex.shiftShortComplexFunctor'_hom_app_τ₂, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₂, CochainComplex.shiftEval_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "(orientation|dualizing).*(scalar|tower)|(scalar|tower).*(orientation|dualizing)",
+   "results": "1 hits: Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned statements do not assert both the scalar orientation transport and single-degree tower-evaluation claims"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative square of isomorphisms remains commutative after extending scalars and equality of derived morphisms between sheaves in the same degree is detected levelwise",
+   "results": "8 hits: CategoryTheory.CatCommSq.ext_iff, CategoryTheory.CatCommSq.iso, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare, CategoryTheory.Square.isoMk, CategoryTheory.Square.noConfusion, CategoryTheory.CommSq.LiftStruct.ext_iff, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: returned statements do not assert both the scalar orientation transport and single-degree tower-evaluation claims"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, CategoryTheory.Functor.Faithful",
+   "results": "1 hits: DerivedCategory.instFaithfulSingleFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: full faithfulness of single complexes is only an ingredient, already represented by lem-weil-pbc-derived-single-fully-faithful"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of a commutative orientation square through derived scalar extension and detection of morphisms between equally shifted sheaf towers by exact level evaluations",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
+   "date": "2026-10-23",
+   "verdict": "no match: returned statements do not assert both the scalar orientation transport and single-degree tower-evaluation claims"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of scalar comparison isomorphisms proves base change compatibility of finite coefficient orientations; levelwise equality of endomorphisms of a single shifted tower sheaf implies equality in its derived category",
+   "results": "8 hits: DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instLinearShiftFunctorInt, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-23",
+   "verdict": "no match: returned statements do not assert both the scalar orientation transport and single-degree tower-evaluation claims"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-purity-bc-factors",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1): finite-coefficient orientation calculation and the sentence \"After removing the shift [2d] ... equality ... can be tested at each level\"; inherited extracted interface from old split steps 3-4",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-orientation-scalar-tower-transport",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the scalar cancellation calculation and its inverse, proved single-degree level detection using the existing fully faithful single-complex Mathlib leaf, and applied it to the actual orientation composite. All six steps are below 2000 characters. No new nodes or attachments; ramified and non-normalized cases checked. Removed the uncited derived tensor/pullback theorem from statement dependencies and used the explicit natural scalar/pullback comparison definition in the proof.",
+  "blueprint": "Realizes det-sp-purity-bc-factors, proof (1), finite scalar transport and equality of equally shifted tower sheaves; the parent supplies the geometric finite-level square, which is a hypothesis here.",
+  "tool_uses": [
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Its abelian-category and exact-evaluation clauses supply the generic heart argument; they do not replace any geometric step of the unit."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exact inverse image for finite constant coefficients shows that the tower source remains a shifted sheaf; this is a generic sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-19c586416",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-19c586416 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 6 steps, the parent det-sp-purity-bc-factors, the blueprint main-20261015 sk-prop-sp-purity-bc-factors.proof.md (1) (identical to latest), and every cited statement. The statement is unchanged and there are no new nodes. The only stmt_deps change is dropping lem-weil-pbc-ringed-topoi-derived-tensor-pullback, a theorem the statement never cites. Live still has the item unsplit. A parallel delivery of this item by Q101 (54b587ee) exists; whichever lands second is superseded at merge.\n\nStep 1: I checked the types. Mixed square, f' normalization, functoriality of (-)_A, R-equation, naturality of lambda_u (def-sp-constant-scalar-pullback-comparison, no flatness) and f normalization give the equation. Elementary and correct.\nStep 2: cancellation by an invertible map. Correct.\nStep 4: joint injectivity via componentwise tower morphisms (sk-def-sp-coefficient-towers). Correct.\nStep 5: h_n=1 from the hypothesis, tower pullback is levelwise exact (det-sp-tower-exceptional-bc, prop-weil-pbc-proetale-constant-exact), then step 4 with s=2d. Correct.\nStep 6: (l^n)=(varpi^{en}). Correct.\nEdge cases: d=0, s of either sign, A=R, A=0, non-flat Z/l^2->F_l, ramified e=2, non-normalized towers. All fine.\n\nFault C1/C4 in step 3: it re-derived without a citation that the derived functor of an exact functor is termwise, sends A[s] to F(A)[s] and commutes with shifts. That is the Mathlib leaf lem-sf-exact-functor-derived-triangulated. Steps 4 and 5 also used finite-level single faithfulness and derived-pullback single preservation without citing a node.\nFIX: steps 3 and 5 now cite lem-sf-exact-functor-derived-triangulated, step 4 cites lem-weil-pbc-derived-single-fully-faithful, and proof_deps is the union of the step uses.\n\nThe tool_uses det-sp-coefficient-towers-abelian and prop-weil-pbc-proetale-constant-exact are on route anyway; accepted. Duplicate search with rg -L found no node stating this interface. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientationScalarTowerTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.OrientationTransport.finite_scalar_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OrientationTransport.omega",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.tate",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.exchange",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.scalarComparison",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.tatePullback",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.finite_scalar_transport",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.towerEvaluation",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.shifted_tower_evaluation_injective",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.tower_orientation_transport",
+   "AlgebraicGeometry.ProEtale.OrientationTransport.ramified_coefficient_level"
+  ],
+  "file": "lean/Sheaf/Paper/OrientationScalarTowerTransport.lean",
+  "statement": "theorem finite_scalar_transport (k : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (hne : ell ≠ k.p) (r : ℕ) (hr : 1 ≤ r) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ell ^ r : ℕ) : A) = 0) (φ : coefficient ell r →+* A) (X Y X' Y' : Over (Spec (.of k.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] (f : X ⟶ Y) (v' : Y' ⟶ Y) (u' : X' ⟶ X) (f' : X' ⟶ Y') (sq : IsPullback u'.left f'.left f.left v'.left) (d : ℕ) [SmoothOfRelativeDimension d f.left] [HasCompactification f.left] [HasCompactification f'.left] [QuasiCompact f'.left] (twR : Etale.OrdinaryFiniteTwistTransport (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _)) (twA : Etale.OrdinaryFiniteTwistTransport A (ell ^ r) hA) (sX : CoefficientLineComparison φ (ell ^ r) (ell ^ r) (CharP.cast_eq_zero _ _) hA X.left) (sX' : CoefficientLineComparison φ (ell ^ r) (ell ^ r) (CharP.cast_eq_zero _ _) hA X'.left) (piR : omega (coefficient ell r) f.left ≅ tate (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) X.left d) (piR' : omega (coefficient ell r) f'.left ≅ tate (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) X'.left d) (piA : omega A f.left ≅ tate A (ell ^ r) hA X.left d) (piA' : omega A f'.left ≅ tate A (ell ^ r) hA X'.left d) (_hc : IsIso (scalarComparison φ f.left)) (_hc' : IsIso (scalarComparison φ f'.left)) (_norm : scalarComparison φ f.left ≫ piA.hom = (proScalar φ X.left).map piR.hom ≫ proTwistMap d sX) (_norm' : scalarComparison φ f'.left ≫ piA'.hom = (proScalar φ X'.left).map piR'.hom ≫ proTwistMap d sX') (_mixed : (proPullback A u'.left).map (scalarComparison φ f.left) ≫ exchange A sq = (scalarPullbackProEtaleIso φ u'.left).hom.app (omega (coefficient ell r) f.left) ≫ (proScalar φ X'.left).map (exchange (coefficient ell r) sq) ≫ scalarComparison φ f'.left) (_orientationR : exchange (coefficient ell r) sq ≫ piR'.hom = (proPullback (coefficient ell r) u'.left).map piR.hom ≫ (tatePullback (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) twR u'.left ((finiteGeneralRingPrimeSetting k ell hne r hr).diagonalExponent_isUnit X.hom) d).hom) : (exchange A sq ≫ piA'.hom = (proPullback A u'.left).map piA.hom ≫ (tatePullback A (ell ^ r) hA twA u'.left ((finiteGeneralRingPrimeSetting k ell hne r hr).diagonalExponent_isUnit X.hom) d).hom) ∧ ((proPullback A u'.left).map piA.inv ≫ exchange A sq = (tatePullback A (ell ^ r) hA twA u'.left ((finiteGeneralRingPrimeSetting k ell hne r hr).diagonalExponent_isUnit X.hom) d).hom ≫ piA'.inv)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair of H2 return on bdbf541c84ad: removed the two theorem-node additions; the general-universe evaluator is now an item-local abbrev directly over det-sp-coefficient-towers-abelian. The unchanged canonical scalarPullbackProEtaleIso is owned by the new existing:true definition node def-sp-proetale-scalar-pullback-iso. All four theorem conclusions and finite coefficient signatures are unchanged; t and v remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a03bb6bf",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN bdbf541c84ad. (1) The theorem stmt_deps lem-sp-strict-line-heart-assembly and lem-sfb-etale-proetale-scalar-mate are removed; item stmt_deps = live 18 + new def-sp-proetale-scalar-pullback-iso, and statement/proof/proof_deps are unchanged against live. (2) The item-local abbrev towerEvaluation has the same body as live SpStrictLineHeart.ev over det-sp-coefficient-towers-abelian; universes t and v stay independent. (3) The new existing:true def node owns scalarPullbackProEtaleIso. Its lean.statement is verbatim the live EtaleProEtaleScalarMate:108-114; it is real inverse-mate data, it has no owner race, and its deps (including lem-sfb-proetale-scalar-pullback-mate-invertible) do not reach the item. The module diff is only the import swap and the abbrev; the other three theorems are byte-identical to the mathematics accepted in the previous review, and lean.statement is verbatim in the file. Advisories only: the scalarComparison model differs from det-sp-finite-general-ring; the def node cites a different but equivalent invertibility lemma; the tower theorem has E in the scheme universe because the API forces it."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023556-L-582738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

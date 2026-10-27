@@ -1,0 +1,215 @@
+{
+ "id": "lem-sfb-rank-one-frobenius-extension",
+ "kind": "statement",
+ "title": "Frobenius-compatible rank-one homomorphisms",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], of characteristic exponent $p$ ($p=1$ in characteristic zero). Let $(H_1,T_1)$ and $(H_0,T_0)$ be split reductive affine $F$-group schemes [def-sc-group-scheme], with split maximal tori, whose root data have root sets $\\{\\alpha,-\\alpha\\}$ and $\\{\\beta,-\\beta\\}$ respectively. Reductivity, characters and coroots have the meanings of [lem-sfb-reductive-borel-pair-structure]; root subgroups $U_\\gamma$ and their parametrizations by the additive group $\\mathbf G_a(A)=(A,+)$ have the meanings of [lem-sfb-reductive-root-subgroup-parametrizations]. Let $h:T_1\\to T_0$ be a homomorphism such that $h^*:X^*(T_0)\\to X^*(T_1)$ is injective with finite cokernel. Suppose $q=p^e$, $e\\geq0$, and\n$$h^*(\\beta)=q\\alpha,\\qquad h\\circ\\alpha^\\vee=\\beta^\\vee\\circ(t\\mapsto t^q).$$\nThen there is a homomorphism $f:H_1\\to H_0$ restricting to $h$, mapping each $U_{\\pm\\alpha}$ onto $U_{\\pm\\beta}$. For any chosen root parametrizations $x_{\\pm\\alpha}$ and $x_{\\pm\\beta}$ there are constants $c_+,c_-\\in F^\\times$ such that\n$$f(x_{\\pm\\alpha}(a))=x_{\\pm\\beta}(c_\\pm a^q)$$\nfor every commutative $F$-algebra $A$ and $a\\in A$. Tori of arbitrary dimension and characteristic two are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.14 and 23.16, printed pp.489--490; the rank-one reduction 23.11--23.13, pp.488--489; formula (146) and its monomial consequence in the proof of Proposition 23.5, pp.485--486."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the opposite-root SL2 parametrization statement to $(H_1,T_1,\\alpha)$ and $(H_0,T_0,\\beta)$. Obtain $v_1,v_0$ sending the upper and lower unitriangular groups isomorphically to the indicated positive and negative root subgroups, with $v_1(d(s))=\\alpha^\\vee(s)$ and $v_0(d(s))=\\beta^\\vee(s)$. Apply the semidirect presentation statement to both maps. Write $E_\\alpha,E_\\beta$ for its explicit group schemes, $\\pi_1,\\pi_0$ for their faithfully flat homomorphisms, and $k_\\alpha,k_\\beta$ for their kernel isomorphisms from $\\mathbf G_m$. All hypotheses hold because each root set consists of precisely the displayed pair. No identification with a one-dimensional maximal torus is made.",
+   "uses": [
+    "lem-sfb-opposite-root-sl2-parametrizations",
+    "lem-sfb-rank-one-semidirect-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.14, printed pp.489--490, realized explicitly through the rank-one SL2 presentation of 20.32--20.33 and 21.24; formula (146), printed p.485, for the functor-of-points convention."
+   }
+  },
+  {
+   "text": "Define $P_q:\\operatorname{SL}_2\\to\\operatorname{SL}_2$ by raising every matrix entry to its $q$th power. This is the identity when $p=1$ or $e=0$. Otherwise, the binomial coefficients $\\binom pi$ for $0<i<p$ vanish in every $F$-algebra; iteration gives $(a+b)^q=a^q+b^q$. Thus matrix multiplication and determinant commute with $P_q$, so this polynomial formula is a group-scheme homomorphism over $F$. Its coordinate map fixes coefficients in $F$ and sends matrix-coordinate variables to their $q$th powers; it does not apply Frobenius to coefficients. Directly $P_q(d(s))=d(s^q)$ and $P_q(x_\\pm(a))=x_\\pm(a^q)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.14, printed pp.489--490, realized explicitly through the rank-one SL2 presentation of 20.32--20.33 and 21.24; formula (146), printed p.485, for the functor-of-points convention."
+   }
+  },
+  {
+   "text": "The root identity says $\\beta(h(t))=\\alpha(t)^q$ over every $F$-algebra. Entrywise powers therefore give\n$$P_q(C_\\alpha(t)(M))=C_\\beta(h(t))(P_q(M)).$$\nIndeed, the upper-right entry is multiplied by $\\alpha(t)^q$ and the lower-left by its inverse; diagonal entries are unchanged. Using the multiplication formula of the presentations, this identity and $h(tu)=h(t)h(u)$ show directly that\n$$\\Psi:E_\\alpha\\to E_\\beta,\\qquad (M,t)\\mapsto(P_q(M),h(t))$$\nis a group-scheme homomorphism. Set $u=\\pi_0\\Psi$, a homomorphism $E_\\alpha\\to H_0$. These are morphisms of affine $F$-schemes: their coordinates are polynomials and the given torus morphism.",
+   "uses": [
+    "lem-sfb-rank-one-semidirect-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.14, printed pp.489--490, realized explicitly through the rank-one SL2 presentation of 20.32--20.33 and 21.24; formula (146), printed p.485, for the functor-of-points convention."
+   }
+  },
+  {
+   "text": "For every $A$ and $s\\in A^\\times$ the coroot hypothesis gives\n$$\\Psi k_\\alpha(s)=(d(s^q),h(\\alpha^\\vee(s))^{-1})=(d(s^q),\\beta^\\vee(s^q)^{-1})=k_\\beta(s^q).$$\nConsequently $u$ is trivial on the entire scheme-theoretic kernel of $\\pi_1$, including over nonreduced algebras. Apply the faithfully flat group-quotient universal property to $\\pi_1:E_\\alpha\\to H_1$ and $u$ to obtain $f:H_1\\to H_0$ with $f\\pi_1=u$. The presentation supplies faithful flatness on coordinate rings and finite type; all other groups are affine of finite type by reductivity. Evaluating the identity on $(I_2,t)$ gives $f(t)=h(t)$, and evaluating it on $(x_\\pm(a),1)$ gives\n$$f(v_1(x_\\pm(a)))=v_0(x_\\pm(a^q)).$$",
+   "uses": [
+    "lem-sfb-rank-one-semidirect-presentation",
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.14, printed pp.489--490, realized explicitly through the rank-one SL2 presentation of 20.32--20.33 and 21.24; formula (146), printed p.485, for the functor-of-points convention."
+   }
+  },
+  {
+   "text": "Let $y_{i,\\pm}(a)=v_i(x_\\pm(a))$. For any root parametrizations $x_{\\pm\\alpha},x_{\\pm\\beta}$ there are $a_\\pm,b_\\pm\\in F^\\times$ with $y_{1,\\pm}(z)=x_{\\pm\\alpha}(a_\\pm z)$ and $y_{0,\\pm}(z)=x_{\\pm\\beta}(b_\\pm z)$. In fact an automorphism of the affine line with polynomial inverse has degree one (degrees multiply under composition); it fixes zero, hence is nonzero scalar multiplication. Substituting $z=a_\\pm^{-1}a$ into the preceding identity yields\n$$f(x_{\\pm\\alpha}(a))=x_{\\pm\\beta}(b_\\pm a_\\pm^{-q}a^q),$$\nso take $c_\\pm=b_\\pm a_\\pm^{-q}$. The polynomial inclusion $F[z]\\to F[a]$, $z\\mapsto c_\\pm a^q$, is injective by distinct monomial degrees; indeed $F[a]$ is free over $F[z]$ on $1,a,\\ldots,a^{q-1}$ by division by the monic polynomial $X^q-c_\\pm^{-1}z$. This proves surjectivity onto the target root subgroup as a group scheme (even faithfully flatness), without asserting surjectivity on the points of each test algebra. Every formula holds over all test algebras. The same argument covers $q=1$, characteristic two, and central tori of any dimension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.14, printed pp.489--490, realized explicitly through the rank-one SL2 presentation of 20.32--20.33 and 21.24; formula (146), printed p.485, for the functor-of-points convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-opposite-root-sl2-parametrizations",
+  "lem-sfb-rank-one-semidirect-presentation",
+  "lem-sfb-faithfully-flat-group-quotient-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit SL2 semidirect-quotient proof of the rank-one case in Proposition 23.14, using 20.32--20.33 and 21.24. This replaces the source's PGL2 lifting diagrams by the concrete coroot-kernel computation, within the same rank-one reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius|isogen|root.*datum",
+   "results": "{\"t\": \"2026-10-23T20:47:00Z\", \"tool\": \"grep\", \"query\": \"Frobenius|isogen|root.*datum\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Hom.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\"], \"digest\": \"be81b824a42770ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a homomorphism of rank one maximal tori to an isogeny using SL2 and Frobenius",
+   "results": "{\"t\": \"2026-10-23T20:47:00Z\", \"tool\": \"leansearch\", \"query\": \"Extend a homomorphism of rank one maximal tori to an isogeny using SL2 and Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.frobenius\", \"FiniteField.Extension.frob\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"Perfection.lift\", \"SpecialLinearGroup.toLinearEquiv\", \"Function.ExtendByOne.hom\", \"PerfectClosure.lift\", \"SpecialLinearGroup.baseChange\"], \"digest\": \"00b5fb2666be0e55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpecialLinearGroup, MonoidHom",
+   "results": "{\"t\": \"2026-10-23T20:47:00Z\", \"tool\": \"loogle\", \"query\": \"SpecialLinearGroup, MonoidHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SpecialLinearGroup.toGeneralLinearGroup\", \"SpecialLinearGroup.toGeneralLinearGroup_injective\", \"SpecialLinearGroup.toLinearEquiv\", \"SpecialLinearGroup.baseChange\", \"SpecialLinearGroup.toLinearEquiv_injective\", \"SpecialLinearGroup.toGeneralLinearGroup_toLinearEquiv_apply\", \"SpecialLinearGroup.coe_toGeneralLinearGroup_apply\", \"SpecialLinearGroup.mem_range_toGeneralLinearGroup_iff\"], \"digest\": \"f72e37c12a72e1a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus homomorphism between split reductive groups of semisimple rank one extends when it respects the two roots and coroots with a common Frobenius exponent",
+   "results": "{\"t\": \"2026-10-23T20:47:01Z\", \"tool\": \"leanfinder\", \"query\": \"A torus homomorphism between split reductive groups of semisimple rank one extends when it respects the two roots and coroots with a common Frobenius exponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.ext\", \"RootPairing.Hom.weightMap\", \"RootPairing.Hom.ext_iff\", \"RootPairing.Hom.root_weightMap\", \"RootPairing.ext\", \"RootPairing.ext_iff\", \"RootPairing.Hom.coroot_coweightMap\", \"RootPairing.Equiv.ext\"], \"digest\": \"5b50b886d10a5679\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one split reductive group morphisms are constructed by descending Frobenius on SL2 through a central torus presentation",
+   "results": "{\"t\": \"2026-10-23T20:47:36Z\", \"tool\": \"leanfinder\", \"query\": \"Rank one split reductive group morphisms are constructed by descending Frobenius on SL2 through a central torus presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_symm_apply_coe_coe\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\"], \"digest\": \"e817b60881b8d5b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|isogen|semidirect",
+   "results": "{\"t\": \"2026-10-23T21:45:10Z\", \"tool\": \"grep\", \"query\": \"Frobenius|isogen|semidirect\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Hom.lean\"], \"digest\": \"e947e90ac88d07fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup and Matrix.ProjectiveSpecialLinearGroup describe abstract matrix groups, not rank-one reductive group schemes or a faithfully flat presentation with the coroot kernel. SemidirectProduct.lift (GroupTheory/SemidirectProduct.lean:197-204) only assembles abstract group homomorphisms. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:58-75) preserves roots without Frobenius powers; isogenies are explicitly TODO at line 46. None specializes in one line to the geometric statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Hom",
+   "results": "{\"t\": \"2026-10-23T21:45:10Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.Hom.id\", \"RootPairing.Hom.instMonoid\", \"RootPairing.Hom\", \"RootPairing.Hom.indexEquiv\", \"RootPairing.Equiv.toHom\", \"RootPairing.Hom.coweightMap\", \"RootPairing.Hom.weightMap\", \"RootPairing.Hom.comp_id\"], \"digest\": \"7b9215b3d44ff850\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup and Matrix.ProjectiveSpecialLinearGroup describe abstract matrix groups, not rank-one reductive group schemes or a faithfully flat presentation with the coroot kernel. SemidirectProduct.lift (GroupTheory/SemidirectProduct.lean:197-204) only assembles abstract group homomorphisms. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:58-75) preserves roots without Frobenius powers; isogenies are explicitly TODO at line 46. None specializes in one line to the geometric statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of maximal tori respecting roots and coroots up to a common Frobenius power extends to a rank one reductive group homomorphism",
+   "results": "{\"t\": \"2026-10-23T21:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of maximal tori respecting roots and coroots up to a common Frobenius power extends to a rank one reductive group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.weightMap\", \"RootPairing.Hom.coweightMap\", \"RootPairing.Hom.coroot_coweightMap\", \"RootPairing.Hom.coroot_coweightMap_apply\", \"RootPairing.Hom.root_weightMap\", \"RootPairing.root'In\", \"RootPairing.Hom.root_weightMap_apply\", \"RootPairing.algebraMap_coroot'In_apply\"], \"digest\": \"ad2e879acfb4ad28\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SpecialLinearGroup and Matrix.ProjectiveSpecialLinearGroup describe abstract matrix groups, not rank-one reductive group schemes or a faithfully flat presentation with the coroot kernel. SemidirectProduct.lift (GroupTheory/SemidirectProduct.lean:197-204) only assembles abstract group homomorphisms. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:58-75) preserves roots without Frobenius powers; isogenies are explicitly TODO at line 46. None specializes in one line to the geometric statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-datum-isogeny-realization",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Proposition 23.14 and 23.16, printed pp.489--490; the rank-one reduction 23.11--23.13, pp.488--489; formula (146) and its monomial consequence in the proof of Proposition 23.5, pp.485--486.",
+   "via": [
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-frobenius-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the homomorphism by entrywise Frobenius on SL2 and the given torus morphism, checked equivariance using the root equality and killed the full coroot kernel before faithfully flat descent. Reused opposite-root SL2 maps and quotient descent; one new geometric presentation lemma, not a restatement of the extension assertion. Explained arbitrary root parameters and all test algebras.",
+  "blueprint": "Retains inherited from.place below det-thm-sf-ctf-stability-direct-images proof (3), via root-datum-isogeny-realization. Realizes its rank-one Frobenius-extension prerequisite without changing the unit route. The current latest blueprint and whole imported blueprint search have no equivalent rank-one presentation or extension node. Ancestor command returns null, retained as inherited.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-a1c5eb34d",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-a1c5eb34d (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Prop 23.14/23.16 pp.489-490. The item statement matches the rank-one isogeny conditions (143): h*(β)=qα, h∘α^∨=β^∨∘Frob_q. The statement is unchanged and the base proof was empty; this is not a 2026-10-21 re-split item. New unsplit node lem-sfb-rank-one-semidirect-presentation (SL2⋊_γ T → H, (M,t)↦v(M)t) is statement-only and self-contained (B1-B4). I checked it myself: equivariance follows by agreement on x_±, D and the big cell; faithful flatness from surjectivity onto smooth H; for the kernel, v^{-1}(T)∩Ω=D via the big cell of H, then D=identity component and w∉ v^{-1}(T), so ker≅G_m. Small cases SL2, PGL2 (μ2 in char 2), GL2 and G_m^r× hold. It is not a clause of the item and has no duplicate among split-rank-one-classification, rank-one-reflections, opposite-root-sl2, chevalley-integral-rank-one or longest-weyl-open-cell. Steps: 1 opposite-root-sl2 statement gives v_α with coroot. 2 entrywise q-power is an F-linear relative Frobenius homomorphism. 3 C-compatibility from β∘h=α^q, checked entrywise. 4 Ψk_α(s)=k_β(s^q) by the coroot hypothesis; the faithfully-flat-quotient-universal hypotheses (affine finite type, faithfully flat, kernel as scheme) hold. 5 G_a automorphisms are scalars, c_±=b_±a_±^{-q}, and a↦ca^q is faithfully flat. Batch-5: the three flagged trf targets (f.g. torsion-free free, fppf base change, split torus smooth/reduced) are generic Mathlib/geometry facts outside the trace formula and Poincaré duality, so accepted. No SGA citations, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RankOneFrobeniusExtension",
+  "declaration": "AlgebraicGeometry.rankOne_frobenius_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RankOneFrobeniusExtension.lean",
+  "statement": "theorem rankOne_frobenius_extension {F : Type u} [Field F] [IsAlgClosed F] (p e : ℕ) [ExpChar F p] (H T : Fin 2 → Grp (Over (Spec (.of F)))) (iT : ∀ i : Fin 2, T i ⟶ H i) (hH : ∀ i, ReductiveTorusCentralizer.IsReductive (H i)) (hT : ∀ i, ReductiveTorusCentralizer.IsMaximalTorus (iT i)) (hsplit : ∀ i, ∃ r : ℕ, Nonempty (T i ≅ MultiplicativeType.splitTorus F r)) [∀ i, IsCommMonObj (T i).X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aH : ∀ i, ModObj (T i).X (H i).X) (hconj : ∀ i, (aH i).smul = ((iT i).hom.hom ⊗ₘ 𝟙 (H i).X) ≫ GrpObj.conj (H i).X) (Φ : ∀ i, Finset (Additive (T i ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (D : ∀ i, RootDatum (Φ i) (Additive (T i ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T i))) (hred : ∀ i, (D i).IsReduced) (hroot : ∀ i (χ : Φ i), (D i).root χ = χ.val) (hpair : ∀ i (χ : Additive (T i ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T i)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ ((D i).toLinearMap χ ν)) (hweights : ∀ i (χ : Additive (T i ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))), χ ∈ Φ i ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ (T i) (H i) (aH i) χ.toMul ≠ ⊥) (α : ∀ i, Φ i) (hrank : ∀ i (χ : Additive (T i ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))), χ ∈ Φ i ↔ χ = (α i).val ∨ χ = -(α i).val) (hreflection : ∀ i, ∃ n : 𝟙_ (Over (Spec (.of F))) ⟶ (H i).X, ∀ (W : Over (Spec (.of F))) (t : W ⟶ (T i).X), (toUnit W ≫ n) * (t ≫ (iT i).hom.hom) * (toUnit W ≫ n)⁻¹ = (t ≫ (iT i).hom.hom) * (t ≫ (α i).val.toMul.hom.hom ≫ ((D i).coroot (α i)).toMul.hom.hom ≫ (iT i).hom.hom)⁻¹) (U : Fin 2 → Bool → Grp (Over (Spec (.of F)))) (j : ∀ i ε, U i ε ⟶ H i) (hU : ∀ i ε, IsClosedSubgroupScheme (j i ε).hom.hom ∧ Smooth (U i ε).X.hom ∧ ConnectedSpace (U i ε).X.left ∧ @TorusCharacterTangent.IsStable F _ (T i) (H i) (aH i) _ (j i ε) ∧ (GrpObj.differential (j i ε).hom.hom).toLinearMap.range = @TorusCharacterTangent.weightSpace F _ (T i) (H i) (aH i) (if ε then (α i).val.toMul else (-(α i).val).toMul)) (hparameter : ∀ i ε, Nonempty (Grp.mk (StandardGroupSchemes.additive F) ≅ U i ε)) (h : T 1 ⟶ T 0) (hstar : Additive (T 0 ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) →+ Additive (T 1 ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hhstar : ∀ χ, hstar χ = Additive.ofMul (h ≫ χ.toMul)) (hinj : Function.Injective hstar) (hfinite : Finite (_ ⧸ hstar.range)) (hα : hstar (α 0).val = (p ^ e) • (α 1).val) (hcoroot : ((D 1).coroot (α 1)).toMul.hom.hom ≫ h.hom.hom = ((𝟙 (StandardGroupSchemes.multiplicative F)) ^ (p ^ e)) ≫ ((D 0).coroot (α 0)).toMul.hom.hom) : ∃ (f : H 1 ⟶ H 0) (fU : ∀ ε, U 1 ε ⟶ U 0 ε), iT 1 ≫ f = h ≫ iT 0 ∧ (∀ ε, j 1 ε ≫ f = fU ε ≫ j 0 ε) ∧ (∀ ε, Surjective (fU ε).hom.hom.left) ∧ ∀ (x : ∀ i ε, Grp.mk (StandardGroupSchemes.additive F) ≅ U i ε), ∃ c : Bool → Fˣ, ∀ (ε : Bool) (A : Type u) [CommRing A] [Algebra F A] (a : A), TorusCharacterTangent.additiveParameterPoint F a ≫ (x 1 ε).hom.hom.hom ≫ (j 1 ε).hom.hom ≫ f.hom.hom = TorusCharacterTangent.additiveParameterPoint F (algebraMap F A (c ε : F) * a ^ (p ^ e)) ≫ (x 0 ε).hom.hom.hom ≫ (j 0 ε).hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Index 1 is the source, 0 the target; Boolean signs index the two root groups. Actual character/cocharacter Hom groups, composition pairing and conjugation weights use the recorded dependencies. The normalizer reflection formula specifies that the selected coroot is the canonical geometric coroot, rather than an arbitrary abstract root-pairing coroot with a central component. The extension and its surjective root subgroup maps precede the quantifier over every choice of parametrizations; constants are units of F and formulas hold on all commutative F-algebras."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d9695f52",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim in file; only module/node/report delivered; sorry-only proof, docstrings carry source and blueprint plus the 5 proof steps; report has Worker report and Second reading by Q05. Every clause checked against Milne 23.14/23.16 and (146): ExpChar p, q=p^e; reductive/maximal/split-torus predicates and character/cocharacter/pairing/weight encoding identical to reductive_borel_pair_structure; root-subgroup characterization identical to reductive_root_subgroup_parametrizations; hα and hcoroot orientations correct (1 = source, 0 = target). hreflection is exactly the Weyl reflection, so it adds no assumption, and it is needed so a central torus cannot admit a wrong coroot (GL2 (2,0)); consistent with ReductiveRankOneReflections. Conclusion order: f and fU before parametrizations, c before A. Surjectivity is for schemes. Edge cases q=1, char 2, any central torus dimension, nonreduced A covered; same universe u as the dependencies. No duplicate statement in Mathlib or lean/Sheaf. No fixes, no compile needed."
+ }
+}

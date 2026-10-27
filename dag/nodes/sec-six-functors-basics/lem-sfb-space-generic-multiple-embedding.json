@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-space-generic-multiple-embedding",
+ "kind": "statement",
+ "title": "Generic comparison by ideal multiples on a reduced irreducible algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth], quasi-compact, and quasi-separated; the last two conditions mean that every open cover has a finite subcover and the diagonal is quasi-compact on scheme tests. Modules are on the small etale ringed site, with quasi-coherence as in [def-trf-space-quasi-coherent-module]. On a locally Noetherian space, coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. Write $\\operatorname{Supp}(M)$ for the locus of nonzero geometric stalks, with the atlas topology [def-a1-space-point-topology]. A closed immersion is representable and a closed immersion after every scheme base change [def-weil-closed-immersion]; reduced means that etale scheme charts have local rings without nonzero nilpotents, and irreducible means nonempty and not the union of two proper closed subsets. Assume $X$ is Noetherian and reduced, with $|X|$ irreducible. Let $G,H$ be coherent $\\mathcal O_X$-modules with $\\operatorname{Supp}(G)=\\operatorname{Supp}(H)=|X|$. Then there exist integers $a,b\\geq1$, a nonzero quasi-coherent ideal $J\\subseteq\\mathcal O_X$, a nonempty open subspace $V\\subseteq X$, and an injective module morphism $$\\alpha:(JG)^{\\oplus a}\\longrightarrow H^{\\oplus b}$$ such that $J|_V=\\mathcal O_V$ and $\\alpha|_V:G|_V^{\\oplus a}\\longrightarrow H|_V^{\\oplus b}$ is an isomorphism. The submodule $JG\\subseteq G$ is generated locally by products of sections of $J$ and $G$, and $(-)^{\\oplus a}$ denotes the finite direct sum of $a$ copies.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UT, lemma-property-higher-rank-cohomological, final proof paragraph, from the two ideal-power inclusions through the injective comparison map, before applying (3)(b). Inputs in that paragraph: Tag 07UQ, lemma-prepare-filter-irreducible; Tag 07UM, lemma-homs-over-open; Tag 07UK, lemma-power-ideal-kills-sheaf; Tag 07UL, lemma-Artin-Rees."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-coherent",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-trf-space-module-scheme-restriction",
+  "def-a1-space-open-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-generic-freeness] to $G$ and $H$. Intersect the resulting nonempty opens; irreducibility makes their intersection $V$ nonempty. On $V$ write $G|_V\\cong\\mathcal O_V^{\\oplus r}$ and $H|_V\\cong\\mathcal O_V^{\\oplus s}$ with $r,s\\geq1$. Set $a=s$, $b=r$. Reindexing the $rs$ summands gives an isomorphism $u:G|_V^{\\oplus a}\\to H|_V^{\\oplus b}$.",
+   "uses": [
+    "lem-sfb-space-generic-freeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UT, last proof paragraph: choice of generic ranks and common open."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-space-reduced-closed-support] for $T=|X|\\setminus|V|$, obtaining $i:Z\\hookrightarrow X$. By [lem-sfb-space-closed-immersion-quasi-coherent-modules], its defining ideal $I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ is quasi-coherent. On scheme charts it defines precisely $T$, so $I|_V=\\mathcal O_V$ and $V=X\\setminus Z(I)$. By [lem-sfb-space-noetherian-coherent-support], $I$ is coherent. Every $I^nG$ is coherent: on an affine etale chart, products of finite generating sets of $I$ and $G$ generate $I^nG$, which is a coherent submodule by the cited support lemma. Finite direct sums of coherent modules are coherent, by induction on the split exact sequences and [lem-sfb-space-coherent-kernel-cokernel-extension].",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-coherent-kernel-cokernel-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UT, choice of an ideal cutting out the complement; Tag 07UQ, choice of the ideal."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-homs-over-open] with coherent source $G^{\\oplus a}$, target $H^{\\oplus b}$ and ideal $I$. Obtain $n\\geq0$ and $f:I^n(G^{\\oplus a})\\to H^{\\oplus b}$ extending $u$. Ideal multiplication acts coordinatewise, hence $M=I^n(G^{\\oplus a})=(I^nG)^{\\oplus a}$. Both source and target are coherent by Step 2. Thus $K=\\ker f$ is coherent by [lem-sfb-space-coherent-kernel-cokernel-extension]. Restriction computes kernels sectionwise, so $K|_V=0$ and $\\operatorname{Supp}(K)\\subseteq Z(I)$.",
+   "uses": [
+    "lem-sfb-space-homs-over-open",
+    "lem-sfb-space-coherent-kernel-cokernel-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UT, extension of the comparison morphism and description of its kernel."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-power-ideal-kills], choose $d\\geq0$ with $I^dK=0$. Apply [lem-sfb-space-artin-rees] to $K\\subseteq M$ and $I$, obtaining $c\\geq0$. For $m=c+d$ its formula gives $$I^mM\\cap K=I^{m-c}(I^cM\\cap K)\\subseteq I^dK=0.$$ The restriction of $f$ to $I^mM$ therefore has zero kernel. By associativity of local products, $I^mM=(I^{n+m}G)^{\\oplus a}$.",
+   "uses": [
+    "lem-sfb-space-power-ideal-kills",
+    "lem-sfb-space-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UT, kernel annihilation and Artin-Rees; Tags 07UK and 07UL."
+   }
+  },
+  {
+   "text": "Set $J=I^{n+m}$ and let $\\alpha$ be this restriction of $f$. Products of local ideal generators define a quasi-coherent ideal, coherent by Step 2. Since $I|_V=\\mathcal O_V$, also $J|_V=\\mathcal O_V$ and $\\alpha|_V=u$. The nonempty open $V$ has nonzero structure sheaf (a nonempty scheme chart has a nonzero local ring), so $J$ cannot be zero. Thus $a,b,J,V,\\alpha$ satisfy every asserted clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UT, end of the comparison construction before applying (3)(b)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-generic-freeness",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-sfb-space-coherent-kernel-cokernel-extension",
+  "lem-sfb-space-homs-over-open",
+  "lem-sfb-space-power-ideal-kills",
+  "lem-sfb-space-artin-rees"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UT, lemma-property-higher-rank-cohomological, final proof paragraph, stopping before (3)(b); generic freeness from the proof of 07UQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two full support coherent sheaves on an integral Noetherian algebraic space have generically isomorphic positive direct powers and an ideal multiple embeds one into the other",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.le_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I J : X.IdealSheafData} {ι : Type u_1} (U : ι → ↑X.affineOpens),\\n  ⨆ i, ↑(U i) = ⊤ → (∀ (i : ι), I.ideal (U i) ≤ J.ideal (U i)) → I ≤ J\", \"doc\": \"Let $X$ be a scheme, and let $I$ and $J$ be ideal sheaf data on $X$. If a family of affine open subsets $(U_i)_{i \\\\in \\\\iota}$ covers $X$ (i.e., their union is the entire space) and for each $i$, the i\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.le_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine X] {I J : X.IdealSheafData},\\n  I.ideal ⟨⊤, ⋯⟩ ≤ J.ideal ⟨⊤, ⋯⟩ → I ≤ J\", \"doc\": \"For an affine scheme $X$, if the ideal of an ideal sheaf $I$ on $X$ at the entire space (the top open subset) is contained in the ideal of another ideal sheaf $J$ at the same open subset, then $I$ is \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_ofIdeals_le\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U))),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals I).ideal ≤ I\", \"doc\": \"For a scheme $X$ and a family of ideals $I_U$ in the ring of sections $\\\\Gamma(X, U)$ over each affine open subset $U$ of $X$, the ideal sheaf generated by this family satisfies the inclusion property:\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"Ideal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|generic.*coherent|coherent.*generic|ArtinRees",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic isomorphism of coherent sheaves extends after multiplying by an ideal and becomes injective by Artin Rees on a Noetherian algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsLocallyNoetherian X] : X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsIso φ] : IsIso (φ.app U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the induced map $\\\\phi_U$ on sections over $U$ is an isomorphism of abelian groups.\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_of_iso\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \"[IsIso φ] : IsLocallyInjective φ\", \"doc\": \"Any isomorphism between sheaves on a category equipped with a Grothendieck topology is locally injective. Specifically, if $\\\\phi: F_1 \\\\to F_2$ is an isomorphism of sheaves, then for every object $X$ i\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X.toSheafedSpace ≅ Y.toSheafedSpace) : X ≅ Y\", \"doc\": \"Given two locally ringed spaces $X$ and $Y$, if there exists an isomorphism between their underlying sheafed spaces over the category of commutative rings, then this constructs an isomorphism between \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": forgetToSheafedSpace.ReflectsIsomorphisms\", \"doc\": \"The forgetful functor from the category of locally ringed spaces to the category of sheafed spaces over commutative rings reflects isomorphisms. This means that if a morphism of locally ringed spaces \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X ⟶ Y) [IsIso f] : f.ker = ⊥\", \"doc\": \"For any isomorphism $ f: X \\to Y $ of schemes, the kernel of $ f $ is the trivial ideal sheaf (corresponding to the bottom element in the ordered structure of ideal sheaf data on $ X $).\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": IsIso ((X.ofRestrict h).stalkMap x)\", \"doc\": \"Let $X$ be a locally ringed space and $U$ an open subset of $X$. Let $X|_U$ be the restriction of $X$ to $U$. The canonical inclusion morphism $i: X|_U \\\\to X$ induces for each point $x \\\\in U$ a ring h\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common lattice generic rank comparison coherent modules dense open ideal powers injective map of finite direct sums",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.IsLattice.rank_of_pi\", \"module\": \"Mathlib/Algebra/Module/Lattice\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (K : Type u_2) [inst_1 : Field K] [inst_2 : Algebra R K] [IsDomain R]\\n  [IsPrincipalIdealRing R] {ι : Type u_4} [inst_5 : Fintype ι] [IsFractionRing R K] (M : Submodule R (ι → K))\\n  [Submodule.IsLattice K M], Module.rank R ↥M = ↑(Fintype.card ι)\", \"doc\": \"Let $\\\\iota$ be a finite type, $R$ a commutative semiring with fraction field $K$, and $M$ a submodule of the product space $K^\\\\iota$. If $K$ forms a lattice over $M$, then the rank of $M$ as an $R$-mo\"}\n  {\"name\": \"Submodule.IsLattice.rank'\", \"module\": \"Mathlib/Algebra/Module/Lattice\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (K : Type u_2) [inst_1 : Field K] [inst_2 : Algebra R K] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module K V] [inst_5 : Module R V] [inst_6 : IsScalarTower R K V] [IsDomain R]\\n  [IsPrincipalIdealRing R] [IsFractionRing R K] (M : Submodule R V) [Submod\", \"doc\": \"If $ K $ is the fraction field of a commutative semiring $ R $, and $ M $ is a submodule of an $ R $-module $ V $ such that $ K $ forms a lattice over $ M $, then the rank of $ M $ over $ R $ equals t\"}\n  {\"name\": \"Submodule.IsLattice.finrank_of_pi\", \"module\": \"Mathlib/Algebra/Module/Lattice\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (K : Type u_2) [inst_1 : Field K] [inst_2 : Algebra R K] [IsDomain R]\\n  [IsPrincipalIdealRing R] {ι : Type u_4} [inst_5 : Fintype ι] [IsFractionRing R K] (M : Submodule R (ι → K))\\n  [Submodule.IsLattice K M], Module.finrank R ↥M = Fintype.card ι\", \"doc\": \"Let $\\\\iota$ be a finite type and $K$ be the fraction ring of a commutative semiring $R$. If $M$ is a lattice submodule of the product space $K^\\\\iota$, then the finite rank of $M$ over $R$ is equal to \"}\n  {\"name\": \"Module.Grassmannian.rankAtStalk_eq\", \"module\": \"Mathlib/RingTheory/Grassmannian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type v} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {k : ℕ}\\n  (self : Module.Grassmannian R M k) (p : PrimeSpectrum R), Module.rankAtStalk (M ⧸ self.toSubmodule) p = k\", \"doc\": \"For any commutative ring $ R $, $ R $-module $ M $, natural number $ k $, and a rank $ k $ submodule $ N $ of $ M $ (represented as an element of the Grassmannian), the rank of the quotient module $ M\"}\n  {\"name\": \"iSupIndep.subtype_ne_bot_le_finrank_aux\", \"module\": \"Mathlib/LinearAlgebra/Dimension/Finite\", \"type\": \"∀ {ι : Type w} {R : Type u} {M : Type v} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [Module.IsTorsionFree R M] [Module.Finite R M] [StrongRankCondition R] {p : ι → Submodule R M},\\n  iSupIndep p → Cardinal.mk { i // p i ≠ ⊥ } ≤ ↑(Module.finrank R M)\", \"doc\": \"For a family of independent submodules $ p_i $ of an $ R $-module $ M $, the cardinality of the set $ \\\\{ i \\\\mid p_i \\\\neq \\\\{0\\\\} \\\\} $ is less than or equal to the finite rank $ \\\\operatorname{finrank}_R \"}\n  {\"name\": \"lift_rank_le_of_injective_injective\", \"module\": \"Mathlib/LinearAlgebra/Dimension/Basic\", \"type\": \"∀ {R : Type u} {R' : Type u'} {M : Type v} {M' : Type v'} [inst : Ring R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : Ring R'] [inst_4 : AddCommGroup M'] [inst_5 : Module R' M'] (i : R' → R)\\n  (j : M →+ M'),\\n  (∀ (r : R'), i r = 0 → r = 0) →\\n    Function.Injective ⇑j →\\n      (∀ (r : \", \"doc\": \"Given injective ring homomorphism $i : R' \\\\to R$ and injective additive group homomorphism $j : M \\\\to M'$ satisfying $j(i(r) \\\\cdot m) = r \\\\cdot j(m)$ for all $r \\\\in R', m \\\\in M$, the rank of $M$ over \"}\n  {\"name\": \"rank_le_of_injective_injective\", \"module\": \"Mathlib/LinearAlgebra/Dimension/Basic\", \"type\": \"∀ {R : Type u} {R' : Type u'} {M M₁ : Type v} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : Ring R'] [inst_4 : AddCommGroup M₁] [inst_5 : Module R' M₁] (i : R' → R) (j : M →+ M₁),\\n  (∀ (r : R'), i r = 0 → r = 0) →\\n    Function.Injective ⇑j → (∀ (r : R') (m : M), j (i r \", \"doc\": \"Let $R$ and $R'$ be semirings, and $M$ and $M_1$ be modules over $R$ and $R'$ respectively. If there exist injective homomorphisms $i : R' \\\\to R$ and $j : M \\\\to M_1$ such that $j(i(r) \\\\cdot m) = r \\\\cd\"}\n  {\"name\": \"rank_le_of_injective_injectiveₛ\", \"module\": \"Mathlib/LinearAlgebra/Dimension/Basic\", \"type\": \"∀ {R : Type u} {R' : Type u'} {M M₁ : Type v} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Semiring R'] [inst_4 : AddCommMonoid M₁] [inst_5 : Module R' M₁] (i : R' → R) (j : M →+ M₁),\\n  Function.Injective i →\\n    Function.Injective ⇑j → (∀ (r : R') (m : M), j (i r\", \"doc\": \"Let $ R $ and $ R' $ be semirings, and $ M $ an $ R $-module, $ M_1 $ an $ R' $-module. If there exist injective semiring homomorphism $ i : R' \\\\to R $, injective additive monoid homomorphism $ j : M \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|generic.*embedding|embedding.*generic",
+   "results": "{\"t\": \"2026-10-23T12:05:21Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|generic.*embedding|embedding.*generic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the comparison of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic isomorphism of coherent modules on an algebraic space extends after ideal multiplication to an injective morphism",
+   "results": "{\"t\": \"2026-10-23T12:05:21Z\", \"tool\": \"leansearch\", \"query\": \"Generic isomorphism of coherent modules on an algebraic space extends after ideal multiplication to an injective morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"AlgebraicGeometry.UniversallyInjective.respectsIso\", \"PresheafOfModules.IsLocallyInjective\", \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"IsLocalizedModule.map_injective_iff_localizedModuleMap_injective\", \"HomogeneousSubmodule.toSubmodule_injective\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyInjective\"], \"digest\": \"4c84e3ac3b5bc75c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the comparison of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-23T12:05:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoherent\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the comparison of coherent modules on an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two full support coherent sheaves on an integral Noetherian algebraic space admit an injective comparison between ideal multiples of positive direct powers",
+   "results": "{\"t\": \"2026-10-23T12:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"Two full support coherent sheaves on an integral Noetherian algebraic space admit an injective comparison between ideal multiples of positive direct powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"localCohomology.ideal_powers_initial\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.map_injective_of_isIntegral\"], \"digest\": \"c492a91e3fbb70d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the comparison of coherent modules on an algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-devissage",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, final proof paragraph: generic ranks, extension from an open, and removal of the supported kernel by Artin-Rees; before the property assumption is used.",
+   "via": [
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-generic-multiple-embedding",
+  "worker": "stage1",
+  "summary": "Q28: five-step proof of the generic-multiple embedding, four statement-only inputs for generic freeness, extension over an open, supported-kernel annihilation and Artin-Rees. Reused reduced closed subspaces, defining ideals, coherent subquotients and kernels. Formula m=c+d makes kernel removal explicit; statement unchanged.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). This is the inherited coherent-devissage prerequisite of finite-affine descent in the recorded alteration chain. Steps realize Tag 07UT final paragraph before (3)(b). blueprint_refs ancestor returns None for the inherited chain, retained as on the item; every new place specifies its exact Stacks input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-5e48b0e84",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-5e48b0e84 (reviewer sub-agent of L); spot-checked: First split of the item. The base item had no proof, the statement, stmt_deps and blueprint are unchanged against live, and nothing on live supersedes it. Source read: Stacks spaces-cohomology 07UT final paragraph (l.2524-2546) and 07UQ proof paragraph 2, plus the statements and proofs of 07UK, 07UL and 07UM. The 5 steps follow 07UT faithfully. Step 1 applies generic-freeness to G and H; their two opens meet in a nonempty V because |X| is irreducible, and a=s, b=r gives rank rs on both sides. Step 2 takes Z from reduced-closed-support with T=|X|\\|V| (T empty is allowed) and the quasi-coherent ideal I from closed-immersion-quasi-coherent-modules. The chart homeomorphism clause gives I|_V=O and V=X\\Z(I). Coherence of I and of every I^nG comes from noetherian-coherent-support, and finite sums from kernel-cokernel-extension. Advisory: coherent-abelian states finite sums directly in the same convention. Step 3 applies homs-over-open with source G^a and target H^b; the kernel K is coherent and supported in Z(I). Step 4 gets I^dK=0 from power-ideal-kills and c from Artin-Rees applied to K inside M; with m=c+d, I^mM∩K = I^d(I^cM∩K) ⊆ I^dK = 0, which makes 'after increasing n' precise. Step 5: J=I^{n+m} is nonzero because V is nonempty. The 4 new nodes are statement-only, self-contained and true; I tested them on edge cases (I=0, I=O, F=0, empty support, Spec k). None restates the item. No algebraic-space duplicate exists; the only matches in the DAG are the scheme versions in sec-proper-base-change and sec-picard-framework. Batch-5: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-a1-space-point-topology are general definitions, and the item's reach to them goes only through general Stacks space lemmas, neither part of the trace formula nor of Poincare duality, so acceptable. No SGA, no tool_uses, no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGenericMultipleEmbedding",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_generic_multiple_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGenericMultipleEmbedding.lean",
+  "statement": "theorem exists_generic_multiple_embedding {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (hred : ∀ T : X.EtaleSite, IsReduced (X.etaleForget.obj T)) (hirr : IrreducibleSpace (Point X.obj.obj)) (G H : X.Modules) [G.IsQuasicoherent] [H.IsQuasicoherent] (hG : ∀ T : X.EtaleSite, Scheme.Modules.IsQuasiCoherentFiniteType ((X.schemeRestriction T).obj G)) (hH : ∀ T : X.EtaleSite, Scheme.Modules.IsQuasiCoherentFiniteType ((X.schemeRestriction T).obj H)) (hsG : ∀ (T : X.EtaleSite) (x : X.etaleForget.obj T), ¬ Subsingleton (((X.schemeRestriction T).obj G).presheaf.stalk x)) (hsH : ∀ (T : X.EtaleSite) (x : X.etaleForget.obj T), ¬ Subsingleton (((X.schemeRestriction T).obj H).presheaf.stalk x)) : ∃ (a b : ℕ), 1 ≤ a ∧ 1 ≤ b ∧ ∃ (J P : X.Modules) (j : J ⟶ SheafOfModules.unit X.structureSheaf) (p : P ⟶ G), Mono j ∧ J.IsQuasicoherent ∧ ¬ IsZero J ∧ Mono p ∧ (∀ (N : X.Modules) (n : N ⟶ G), Mono n → ((∀ (T : X.EtaleSite) (r : J.val.obj (op T)) (s : G.val.obj (op T)), ∃ z : N.val.obj (op T), n.val.app (op T) z = j.val.app (op T) r • s) ↔ ∃ l : P ⟶ N, l ≫ n = p)) ∧ ∃ (V : OpenSubspace X), (pointImage V.val.ι).Nonempty ∧ ∃ α : (∏ᶜ fun _ : Fin a ↦ P) ⟶ (∏ᶜ fun _ : Fin b ↦ H), Mono α ∧ ∀ (T : X.EtaleSite), (∃ q : yoneda.obj T.obj.left ⟶ V.val.toFunctor, q ≫ V.val.ι = T.obj.hom) → IsIso ((X.etalePullback T).map j) ∧ IsIso ((X.etalePullback T).map p) ∧ IsIso ((X.etalePullback T).map α)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The ideal product is retained with its inclusion and characterized as the least submodule containing all local products; finite products represent finite direct sums. On each etale chart over the nonempty open, both the actual ideal inclusion and product inclusion, and the same comparison map, are isomorphisms. Coherence is expressed by quasi-coherence and chartwise quasi-coherent finite type under the locally Noetherian hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4443397f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Only the item lean record and stmt_deps changed (two added deps are landed with lean records, allowed under brief-stage2 l.177); one new module, verbatim statement. Clause by clause the statement matches the node and Stacks 07UT: chartwise locally Noetherian and reduced; qc as compact point space; affine-test quasi-separatedness; irreducibility includes nonempty; coherent = qcoh + chartwise finite type (= coherent under hln); full support via nonzero chart stalks; nonzero qcoh ideal J as Mono into unit; JG pinned by a least-submodule universal property; Mono α on finite products; on every chart over the nonempty open V the same j, p, α are isos. No extra hypotheses or universe restriction; edge cases checked; no duplicate algebraic-space declarations; source/blueprint/proof docstrings present; sorry only; both report sections present. Not recompiled (no change); worker reports a clean scompile."
+ }
+}

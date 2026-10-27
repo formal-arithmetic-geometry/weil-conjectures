@@ -3,6 +3,8 @@ module
 public import Mathlib.Data.Countable.Defs
 public import Mathlib.Data.Finite.Defs
 import Mathlib.Logic.Function.Basic
+import Mathlib.Logic.Equiv.Finset
+import Mathlib.Data.Set.Finite.Basic
 
 /-!
 # An uncountable almost-disjoint family of infinite subsets of the natural numbers
@@ -53,6 +55,39 @@ theorem exists_uncountable_almostDisjoint_family :
     ∃ (I : Type u) (A : I → Set ℕ),
       ¬ Countable I ∧ (∀ i : I, (A i).Infinite) ∧
         ∀ i j : I, i ≠ j → (A i ∩ A j).Finite := by
-  sorry
+  classical
+  let initialSegment (S : Set ℕ) (n : ℕ) : Finset ℕ := (Finset.range n).filter (· ∈ S)
+  let code (S : Set ℕ) (n : ℕ) : ℕ := Encodable.encode (n, initialSegment S n)
+  have code_eq {S T : Set ℕ} {n m : ℕ} (h : code S n = code T m) :
+      n = m ∧ initialSegment S n = initialSegment T m := by
+    exact Prod.mk.inj (Encodable.encode_injective h)
+  have code_injective (S : Set ℕ) : Function.Injective (code S) := by
+    intro n m h
+    exact (code_eq h).1
+  refine ⟨ULift.{u} (Set ℕ), fun S ↦ Set.range (code S.down), ?_, ?_, ?_⟩
+  · intro h
+    obtain ⟨f, hf⟩ := (countable_iff_exists_injective _).mp h
+    exact Function.cantor_injective (fun S ↦ f (ULift.up S))
+      (hf.comp (fun _ _ h ↦ congrArg ULift.down h))
+  · intro S
+    exact Set.infinite_range_of_injective (code_injective S.down)
+  · intro S T hST
+    have hdiff : ∃ k, ¬ (k ∈ S.down ↔ k ∈ T.down) := by
+      by_contra! h
+      exact hST (ULift.ext S T (Set.ext h))
+    obtain ⟨k, hk⟩ := hdiff
+    apply ((Set.finite_le_nat k).image (code S.down)).subset
+    rintro a ⟨⟨n, hn⟩, ⟨m, hm⟩⟩
+    have heq := code_eq (hn.trans hm.symm)
+    have hbound : n ≤ k := by
+      by_contra hnk
+      have hkn : k < n := Nat.lt_of_not_ge hnk
+      apply hk
+      have hp := heq.2
+      rw [← heq.1] at hp
+      have hmem := Finset.ext_iff.mp hp k
+      simpa only [initialSegment, Finset.mem_filter, Finset.mem_range,
+        hkn, true_and] using hmem
+    exact ⟨n, hbound, hn⟩
 
 end Set

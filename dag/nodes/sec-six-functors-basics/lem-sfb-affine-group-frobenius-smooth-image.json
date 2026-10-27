@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-affine-group-frobenius-smooth-image",
+ "kind": "statement",
+ "title": "Smooth image of iterated Frobenius for affine algebraic groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be an affine group scheme [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism]. Smoothness means smoothness of the structure morphism to $\\operatorname{Spec}k$ [def-sbc-smooth-morphisms]. If $\\operatorname{char}k=0$, then $G$ is smooth. If $\\operatorname{char}k=p>0$, there is an integer $r\\geq1$ such that the scheme-theoretic image $I$ of the relative Frobenius $F^r_{G/k}:G\\to G^{(p^r)}$ is a smooth affine group scheme of finite type over $k$. Here $G^{(p^r)}=G\\times_{\\operatorname{Spec}k,F_k^r}\\operatorname{Spec}k$ is the base change [def-pc-fibre-product] along the field map $a\\mapsto a^{p^r}$, and on coordinate rings the relative Frobenius is $k[G]\\otimes_{k,a\\mapsto a^{p^r}}k\\to k[G]$, $b\\otimes c\\mapsto cb^{p^r}$. Scheme-theoretic image here means $I=\\operatorname{Spec}(k[G^{(p^r)}]/\\ker((F^r_{G/k})^*))$ [def-weil-affine-spectrum]. The resulting factorization is by homomorphisms of group schemes $G\\xrightarrow{u}I\\xrightarrow{j}G^{(p^r)}$, with $j$ a closed immersion [def-weil-closed-immersion] and $j\\circ u=F^r_{G/k}$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 3.23 (Cartier), printed p.71; Proposition 3.29 and Remark 3.30, printed pp.72--73, including the group-scheme image factorization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-ring-frobenius"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=k[G]$. By [lem-sfb-affine-group-coordinate-hopf], the pullbacks of multiplication, identity and inverse make $A$ a commutative Hopf $k$-algebra, with maps $\\Delta,\\epsilon,S$, and identify its spectrum group with $G$. By [lem-pc-affine-finite-type-algebra], $A$ is finitely generated over $k$. These are the hypotheses needed for the reduced-core lemma.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-pc-affine-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 3.6 and Corollary 3.7, pp.66--67; finite generation is the affine finite-type dictionary (Stacks 01T2)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-reduced-core-nilpotent-fibre] to $A$. It supplies a finitely generated reduced Hopf subalgebra $C\\subseteq A$, with the restricted structure maps. In characteristic zero choose $C=A$; in characteristic $p>0$ choose $r\\geq1$ with $C=\\{a^{p^r}:a\\in A\\}$. Only these conclusions are used, not the lemma's extra nilpotent-fibre conclusion. By [lem-sfb-hopf-spectrum-functor], $H=\\operatorname{Spec}C$ is an affine group scheme. It is of finite type: a finite algebra generating family for $C$ gives the one-member affine cover in [def-weil-finite-type-morphism]. By [lem-weil-pbc-affine-scheme-reduced-iff], $H$ is reduced.",
+   "uses": [
+    "lem-sfb-hopf-reduced-core-nilpotent-fibre",
+    "lem-sfb-hopf-spectrum-functor",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.23 and Proposition 3.29, pp.71--73; Proposition 3.6, p.66."
+   }
+  },
+  {
+   "text": "The field $k$ is perfect: this is automatic in characteristic zero, while in characteristic $p$ every $c\\in k$ has a $p$th root because $T^p-c$ has a root in the algebraically closed field. Thus [lem-kun-geometric-reduced-perfect] applies to the reduced finite-type scheme $H$ and makes it geometrically reduced. The group-scheme smoothness theorem [lem-sfb-geometrically-reduced-group-smooth] now makes $H$ smooth. If $\\operatorname{char}k=0$, the choice $C=A$ identifies $H$ with $G$ and proves the first clause. For the rest assume $\\operatorname{char}k=p>0$ and retain the chosen $r$.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.28, p.14, and Remark 3.30, p.73; geometric reducedness over a perfect field is Stacks 020I (varieties, lemma-perfect-reduced)."
+   }
+  },
+  {
+   "text": "Set $q=p^r$ and $B=A\\otimes_{k,\\lambda\\mapsto\\lambda^q}k$. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}B=G^{(q)}$ with its stated structure map. Define $\\varphi:B\\to A$ by $b\\otimes c\\mapsto cb^q$. This is a $k$-algebra map by the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]: $b\\mapsto b^q$ is additive and multiplicative in characteristic $p$, and the balancing relation $(\\lambda b)\\otimes c=b\\otimes\\lambda^q c$ has the same image on both sides. Its image is exactly $C$: it contains every $b^q=\\varphi(b\\otimes1)$; conversely each $\\varphi(\\sum_i b_i\\otimes c_i)=\\sum_i c_i b_i^q$ lies in the $k$-subalgebra $C$. Write $\\bar\\varphi:B\\twoheadrightarrow C$ for its corestriction and $i:C\\hookrightarrow A$ for inclusion.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 2.24--2.28, pp.46--48; Proposition 3.29, pp.72--73, identification of the coordinate-ring image."
+   }
+  },
+  {
+   "text": "The group structure on $G^{(q)}$ is obtained by base changing that of $G$: its diagrams remain equal after base change. On coordinates the Hopf maps on $B$ are the corresponding scalar extensions. If $\\Delta(b)=\\sum_i b_i'\\otimes b_i''$, their compatibility with $\\varphi$ is the identity $\\Delta(cb^q)=c\\sum_i(b_i')^q\\otimes(b_i'')^q$; the other two identities are $\\epsilon(cb^q)=c\\epsilon(b)^q$ and $S(cb^q)=cS(b)^q$. Here [lem-sfb-affine-group-coordinate-hopf] supplies multiplicativity of the three maps. These equalities on pure tensors imply equality on $B$. The map $\\bar\\varphi$ preserves the restricted Hopf maps on $C$: the same equalities hold in $C$ and $C\\otimes_kC$, the latter injecting into $A\\otimes_kA$ by extending a $k$-basis of $C$ to one of $A$. The inclusion $i$ is Hopf by step 2. By [lem-sfb-hopf-spectrum-functor], $u_H=\\operatorname{Spec}i:G\\to H$ and $j_H=\\operatorname{Spec}\\bar\\varphi:H\\to G^{(q)}$ are group homomorphisms and $j_Hu_H=\\operatorname{Spec}\\varphi=F^r_{G/k}$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 2.27--2.28, pp.48--49, and Propositions 3.6 and 3.9, pp.66--67; explicit verification of the Frobenius homomorphism."
+   }
+  },
+  {
+   "text": "The map $B/\\ker\\varphi\\to C$, $b+\\ker\\varphi\\mapsto\\varphi(b)$, is well defined and injective because two representatives have the same image exactly when their difference belongs to $\\ker\\varphi$; it is surjective by step 4. It preserves the $k$-algebra operations, so it is an isomorphism. Contravariant functoriality of [def-weil-affine-spectrum] therefore identifies the specified scheme-theoretic image $I=\\operatorname{Spec}(B/\\ker\\varphi)$ with $H$. Give $I$ the group structure through this isomorphism, and use it to identify $u_H,j_H$ with $u,j$; the composition equality and the homomorphism properties persist under this identification. The map $j$ is a closed immersion by [lem-weil-pbc-closed-immersion-affine-cover-criterion], since on the single affine chart of $G^{(q)}$ its coordinate map is the surjection $B\\to B/\\ker\\varphi$. Finally $I\\cong H$ is affine, finite type and smooth by steps 2--3. This proves every positive-characteristic clause.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 3.30, p.73, image factorization; the quotient/image identification is written out, and the affine closed-immersion criterion is Stacks 01QO (lemma-closed-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sfb-hopf-reduced-core-nilpotent-fibre",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 3.6, 3.9 and 3.29, Theorem 3.23 and Remark 3.30; Sections 2.24--2.28 for relative Frobenius. Existing reduced-core lemma supplies the algebraic smoothening input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobenius|Cartier",
+   "results": "{\"t\": \"2026-10-23T14:30:24Z\", \"tool\": \"grep\", \"query\": \"Frobenius|frobenius|Cartier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field Frobenius and smooth field extensions do not give Cartier smoothness or the smooth group-scheme image of relative Frobenius. Algebra.FormallySmooth.of_perfectField assumes a field extension, not an arbitrary coordinate Hopf algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated Frobenius has smooth scheme theoretic image for an affine algebraic group over a perfect field",
+   "results": "{\"t\": \"2026-10-23T14:30:24Z\", \"tool\": \"leansearch\", \"query\": \"Iterated Frobenius has smooth scheme theoretic image for an affine algebraic group over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iterateFrobenius\", \"LinearMap.iterateFrobenius\", \"iterateFrobenius_mul_apply\", \"iterateFrobeniusEquiv_def\", \"iterateFrobenius_inj\", \"iterateFrobeniusEquiv_one_apply\", \"IsPurelyInseparable.iterateFrobenius\", \"iterateFrobenius_def\"], \"digest\": \"bdd5862bfe4ac791\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field Frobenius and smooth field extensions do not give Cartier smoothness or the smooth group-scheme image of relative Frobenius. Algebra.FormallySmooth.of_perfectField assumes a field extension, not an arbitrary coordinate Hopf algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"smooth\"",
+   "results": "{\"t\": \"2026-10-23T14:30:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"frobenius\\\", \\\"smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field Frobenius and smooth field extensions do not give Cartier smoothness or the smooth group-scheme image of relative Frobenius. Algebra.FormallySmooth.of_perfectField assumes a field extension, not an arbitrary coordinate Hopf algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type affine group scheme over algebraically closed field smooth characteristic zero and smooth image of iterated relative Frobenius in positive characteristic",
+   "results": "{\"t\": \"2026-10-23T14:30:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type affine group scheme over algebraically closed field smooth characteristic zero and smooth image of iterated relative Frobenius in positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.of_perfectField\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"IsAlgClosed.perfectRing\", \"FiniteField.frobeniusAlgEquiv\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"31d22cc0b2e24aa9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field Frobenius and smooth field extensions do not give Cartier smoothness or the smooth group-scheme image of relative Frobenius. Algebra.FormallySmooth.of_perfectField assumes a field extension, not an arbitrary coordinate Hopf algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartier theorem group schemes characteristic zero are smooth and positive characteristic Frobenius image is eventually reduced",
+   "results": "{\"t\": \"2026-10-23T14:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"Cartier theorem group schemes characteristic zero are smooth and positive characteristic Frobenius image is eventually reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectClosure.instReduced\", \"AlgebraicGeometry.IsReduced\", \"PerfectRing.ofSurjective\", \"frobenius_inj\", \"pNilradical_eq_bot_of_frobenius_inj\", \"split_by_characteristic_localRing\", \"PerfectClosure.isPRadical\", \"PerfectRing.ofFiniteOfIsReduced\"], \"digest\": \"f63f549af698a548\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field Frobenius and smooth field extensions do not give Cartier smoothness or the smooth group-scheme image of relative Frobenius. Algebra.FormallySmooth.of_perfectField assumes a field extension, not an arbitrary coordinate Hopf algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobenius|Cartier",
+   "results": "{\"t\": \"2026-10-23T18:45:55Z\", \"tool\": \"grep\", \"query\": \"Frobenius|frobenius|Cartier\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern Frobenius on rings, perfect closures, or smoothness after additional hypotheses; none supplies eventual reducedness of the finite-type Hopf power subalgebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier smoothness and reduced images of powers of Frobenius on affine algebraic groups",
+   "results": "{\"t\": \"2026-10-23T18:45:55Z\", \"tool\": \"leansearch\", \"query\": \"Cartier smoothness and reduced images of powers of Frobenius on affine algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.frobenius\", \"Algebra.smoothLocus_eq_univ_iff\", \"LinearMap.iterateFrobenius\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.of_split\", \"FiniteField.coe_frobeniusAlgHom\", \"Algebra.FormallySmooth.iff_comp_surjective\"], \"digest\": \"ef788de7b61fe0b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern Frobenius on rings, perfect closures, or smoothness after additional hypotheses; none supplies eventual reducedness of the finite-type Hopf power subalgebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.smooth_of_grpObj",
+   "results": "{\"t\": \"2026-10-23T18:45:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.smooth_of_grpObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.smooth_of_grpObj\"], \"digest\": \"140d34b9709af438\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match only: smooth_of_grpObj requires geometric reducedness, already represented by lem-sfb-geometrically-reduced-group-smooth; it does not prove eventual Frobenius image reducedness or Cartier reducedness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated relative Frobenius of a finite type affine group scheme has smooth scheme theoretic image",
+   "results": "{\"t\": \"2026-10-23T18:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated relative Frobenius of a finite type affine group scheme has smooth scheme theoretic image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"bijective_iterateFrobenius\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"fdea6bed36d34f46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern Frobenius on rings, perfect closures, or smoothness after additional hypotheses; none supplies eventual reducedness of the finite-type Hopf power subalgebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated commutative Hopf algebra over a perfect field has reduced subalgebra of sufficiently large p power elements",
+   "results": "{\"t\": \"2026-10-23T18:45:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated commutative Hopf algebra over a perfect field has reduced subalgebra of sufficiently large p power elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.perfectClosure\", \"PerfectClosure.instReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"PerfectClosure.isPRadical\", \"PerfectRing.ofFiniteOfIsReduced\", \"Subalgebra.mem_perfectClosure_iff\", \"PerfectClosure.R\", \"PerfectClosure\"], \"digest\": \"f023abf46303c986\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits concern Frobenius on rings, perfect closures, or smoothness after additional hypotheses; none supplies eventual reducedness of the finite-type Hopf power subalgebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-subgroup-character-inversion",
+  "date": "2026-10-23",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Lemma 5.16, printed pp.102--103: the negative multiple of an occurring character, including the Frobenius reduction for nonreduced groups. Multiplicative notation chi^(-m) replaces additive -m chi. Supporting input for the Frobenius reduction in Milne Lemma 5.16.",
+   "via": [
+    "lem-sfb-normal-subgroup-character-inversion",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-group-frobenius-smooth-image",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger Hopf reduced-core lemma and the existing coordinate-Hopf, Hopf-spectrum and geometrically-reduced-group smoothness nodes. Wrote the balanced relative Frobenius map, checked its image equals the chosen power subalgebra, checked all Hopf compatibilities, and identified the specified kernel quotient with that subalgebra. No new nodes and no statement correction.",
+  "blueprint": "Auxiliary for det-thm-sf-ctf-stability-direct-images proof (3), along the inherited alteration/moduli/PGL/normal-subgroup route recorded in blueprint.from.place: Milne Lemma 5.16 Frobenius reduction. Steps 1--3 realize its reduced/smooth target and steps 4--6 its iterated-relative-Frobenius factorization. Current latest blueprint searched; no node states the full item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Affine finite-type scheme to finitely generated coordinate algebra, a generic dictionary fact not supplied by this unit."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Reduced finite-type scheme over a perfect field is geometrically reduced, applied before the existing smoothness leaf; a generic geometric tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-kun-geometric-reduced-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-837149a57",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-837149a57 (reviewer sub-agent of L); spot-checked: I read the whole delivery; it has no new nodes and no fixes. The statement is unchanged and matches Milne iAG 2017 Prop 3.29 and Rem 3.30 (printed pp.72-73, which I read) and Cartier Thm 3.23: k is algebraically closed, G is affine of finite type, the relative Frobenius is b⊗c↦cb^{p^r} over k⊗_{k,F^r}, and I=Spec(B/ker φ). The proof follows Milne's route. Steps 1-2: the coordinate-Hopf leaf and lem-pc-affine-finite-type-algebra make A a f.g. Hopf algebra. The existing core lemma lem-sfb-hopf-reduced-core-nilpotent-fibre has its hypotheses met and gives a reduced f.g. Hopf subalgebra C (A in characteristic 0, A^{p^r} with r≥1 in characteristic p). Step 3: k is perfect, so lem-kun-geometric-reduced-perfect gives geometric reducedness and smooth_of_grpObj gives smoothness of H. Steps 4-5: I checked the balancing of φ, image(φ)=C, and the Δ/ε/S compatibility in characteristic p, with C⊗C↪A⊗A over a field. Step 6: B/ker φ≅C, and the 01QO criterion on the single chart Spec B gives the closed immersion. Edge cases tested: trivial group, α_p and μ_p give I=Spec k; α_{p^n} needs r≥n; G_a and G_m. No duplicates: lem-ag-cartier-reduced is a characteristic-0 matrix-group special case. No cycle: the core lemma has no proof deps, and hopf-subalgebra-faithfully-flat cites the item, not the other way round. This is not a D1 relabelling, since the item adds the geometric smoothness and the identification of the image with the kernel quotient. No SGA is cited. I accept the tool_uses lem-pc-affine-finite-type-algebra and lem-kun-geometric-reduced-perfect as generic tools. Maintainer note: blueprint.from.node is null, inherited from the base via chain and not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupFrobeniusSmoothImage",
+  "declaration": "AlgebraicGeometry.affine_group_frobenius_smooth_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupFrobeniusSmoothImage.lean",
+  "statement": "theorem affine_group_frobenius_smooth_image (k : Type u) [Field k] [IsAlgClosed k] (G : Scheme.{u}) (s : G ⟶ Spec (.of k)) [GrpObj (Over.mk s)] [IsAffine G] [LocallyOfFiniteType s] [QuasiCompact s] : (CharZero k → Smooth s) ∧ ∀ (p : ℕ) (hp : p.Prime) (hk : (p : k) = 0), ∃ r : ℕ, 1 ≤ r ∧ ∃ (hG : (p : Γ(G, ⊤)) = 0) (F : G ⟶ pullback s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r)))), F ≫ pullback.fst s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r))) = G.iterateFrobenius hp hG r ∧ F ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r))) = s ∧ ∃ hT : GrpObj (Over.mk (pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r))))), hT = Over.grpObjMkPullbackSnd ∧ ∃ _ : GrpObj (Over.mk (F.imageι ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r))))), IsAffine F.image ∧ LocallyOfFiniteType (F.imageι ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r)))) ∧ QuasiCompact (F.imageι ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r)))) ∧ Smooth (F.imageι ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r)))) ∧ ∃ (u : Over.mk s ⟶ Over.mk (F.imageι ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r))))) (j : Over.mk (F.imageι ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r)))) ⟶ Over.mk (pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk r))))), u.left = F.toImage ∧ j.left = F.imageι ∧ IsMonHom u ∧ IsMonHom j ∧ IsClosedImmersion j.left ∧ u.left ≫ j.left = F",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Relative Frobenius is uniquely specified by its two pullback projection equations, using the recorded absolute scheme and ring Frobenius declarations. The scheme-theoretic image and its factor maps are Mathlib Scheme.Hom.image, toImage and imageι. The target group structure is explicitly equal to Over.grpObjMkPullbackSnd. Added the two already-landed Frobenius definition nodes to stmt_deps; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29fe156bb",
+  "group": "Q19",
+  "result": "pass",
+  "note": "First S2 delivery; the only node changes are lean and stmt_deps (+ landed def-weil-absolute-frobenius-scheme, def-weil-ring-frobenius, both used). Checked against Milne iAG Thm 3.23/Prop 3.29/Rem 3.30 (pp.71-73). Every clause matches: alg-closed field, GrpObj (Over.mk s) + IsAffine + LFT/QC, CharZero → Smooth s, ∀ prime p with (p:k)=0 ∃ r≥1, twist = pullback along Spec(a↦a^{p^r}) with group pinned to Over.grpObjMkPullbackSnd, F fixed by projections (iterateFrobenius, s), I = F.image (kernel subscheme = Spec(B/ker) on the affine target), image group pinned by IsMonHom of the mono j, u/j = toImage/imageι, closed immersion, u≫j=F. No extra hypotheses; edge cases checked (trivial group, α_p, α_{p^n} needs large r, char-0 vacuity, one universe). No H4 duplicate (existing relative Frobenius is finite-field only). Statement verbatim, docstrings with source and blueprint, 6-step plan, no hollow defs, sorry only. Not recompiled (no changes). Advisory: Hom.image owner def-nagata-scheme-theoretic-image not in stmt_deps."
+ }
+}

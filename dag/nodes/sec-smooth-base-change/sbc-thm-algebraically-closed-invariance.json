@@ -79,7 +79,8 @@
    "text": "Apply finite-coproduct cohomology assembly to the decomposition of $C$, and apply the finite-coproduct constant-base-change square to its structure morphism over $k$. For every summand $E_a$ the target coordinate of the comparison of $x$ equals the comparison of the restriction $x_a$. Each summand comparison is bijective by steps 3 and 4. If two classes have the same image, component injectivity gives equality of every restriction, and source assembly gives equality of the classes. Given a target class, take the preimage of each of its finitely many target coordinates by the corresponding component bijection, then use source assembly to obtain a class with those restrictions. The coordinate equation and injectivity of target assembly show that it maps to the given class. This proves bijectivity of the precise pullback. For an empty index set both products are the zero group and the same argument applies.",
    "uses": [
     "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-    "lem-sc-finite-coproduct-constant-base-change-square"
+    "lem-sc-finite-coproduct-constant-base-change-square",
+    "lem-sc-curve-cohomology-connected-reduction"
    ],
    "elementary": false,
    "source": {
@@ -100,7 +101,8 @@
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lem-weil-pbc-constant-pullback-unit-continuous-map",
   "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-  "lem-sc-finite-coproduct-constant-base-change-square"
+  "lem-sc-finite-coproduct-constant-base-change-square",
+  "lem-sc-curve-cohomology-connected-reduction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -166,7 +168,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-thm-vanishing",
  "lean": {
@@ -234,18 +247,37 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a1c37faf6 (reviewer sub-agent of L); spot-checked: Read the full delivery mathematics, cited statements, source passages, and unit/chapter route. Verified canonical pullback, abelian Z/d coefficients, composite d, point components, empty curves, and duplicate candidates. Corrected one B5 citation error: Stacks 03Q1 does not state the constant-section unit formula. Whole corrected item JSON is under fixes/dag/nodes/sec-smooth-base-change/; concrete checks and accepted tool_uses are in review.md. Mathematical statements and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated curve\nover $k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. For\nevery $q\\geq0$ the pullback map\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)\n\\xrightarrow{\\ \\sim\\ }H^q((C_{k'})_{\\Et},\\mathbf Z/d\\mathbf Z)\n$$\n\nis an isomorphism.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated curve\nover $k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. For\nevery $q\\geq0$ the pullback map\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)\n\\xrightarrow{\\ \\sim\\ }H^q((C_{k'})_{\\Et},\\mathbf Z/d\\mathbf Z)\n$$\n\nis an isomorphism. Moreover, for $C$ proper and connected the computation\nof [thm-sc-proper-cohomology] is compatible with this extension of the base\nfield: the isomorphisms recorded there over $k$ and over $k'$ are matched by\nthese pullback maps, not merely abstractly isomorphic.",
   "proof": [
    {
-    "text": "This is [thm-sc-constant-invariance] of the Jacobian chapter (applied with\n$n=d$), which proves the same assertion for the constant sheaf\n$\\mathbf F_d$; this is the displayed pullback map by the definition of\nthe etale cohomology of [def-weil-pbc-etale-cohomology].",
+    "text": "A smooth separated curve over $k$ is a finite disjoint union of connected\ncomponents, each either a point (where both sides are the cohomology of a\nseparably closed field, and the map is an isomorphism) or a smooth separated\nconnected curve; cohomology takes the union to a product and the pullback map\nrespects it. For a connected curve the assertion is\n[thm-sc-constant-invariance] of the Jacobian chapter (applied with $n=d$),\nwhich proves it for the constant sheaf $\\mathbf F_d$; this is the displayed\npullback map by the definition of the etale cohomology of\n[def-weil-pbc-etale-cohomology].",
     "uses": [
      "thm-sc-constant-invariance",
      "def-weil-pbc-etale-cohomology"
     ],
     "elementary": false
+   },
+   {
+    "text": "*Compatibility in the proper case.* Let $C$ be proper and connected, of genus\n$g$; then $C_{k'}$ has the same genus ([lem-sc-genus-invariant]), so\n[thm-sc-proper-cohomology] gives $\\mathbf Z/d$, $(\\mathbf Z/d)^{2g}$,\n$\\mathbf Z/d$ on both sides. All maps below are canonical pullbacks, and the\nKummer sequence is natural in the base field. In degree $0$ the identification\nis $\\mu_d(k)=\\mu_d(k')$: a primitive $d$-th root of unity of $k$ stays primitive\nin $k'$ ([lem-sc-primitive-root]). In degree $1$ it is\n$H^1(C,\\mu_d)=\\operatorname{Pic}(C)[d]$ ([lem-sc-kummer-les]; the units of $C$\nare the $d$-divisible group $k^\\times$) together with\n$\\operatorname{Pic}^0(C)=J_C(k)$ ([thm-sc-jacobian-representability]); the\npullback is $J_C[d](k)\\to J_C[d](k')$, which is bijective because $J_C[d]$ is a\nfinite etale $k$-group scheme ([thm-av-final](b),(c)) and\n$J_{C_{k'}}=(J_C)_{k'}$ ([thm-sc-jacobian-representability]). In degree $2$ it\nis $\\operatorname{Pic}(C)/d\\to\\operatorname{Pic}(C_{k'})/d$, where both sides\nare $\\mathbf Z/d$ via the degree ([def-sc-pic0],\n[lem-sc-pic-proper-decomposition]), and the degree is preserved by base\nchange. So the three identifications are matched by the pullback maps.",
+    "uses": [
+     "lem-sc-genus-invariant",
+     "thm-sc-proper-cohomology",
+     "lem-sc-primitive-root",
+     "lem-sc-kummer-les",
+     "thm-sc-jacobian-representability",
+     "thm-av-final",
+     "def-sc-pic0",
+     "lem-sc-pic-proper-decomposition"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

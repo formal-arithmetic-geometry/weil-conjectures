@@ -1,0 +1,35 @@
+# Worker report
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-epp-kummer-pole-calculus.json` (statement, split; no exact Mathlib match), `citations.json`, and this report. No new nodes, no new Mathlib leaves. Searches actually run through msearch.py are in searches.jsonl; inherited searches in the item were retained. No Lean was written or compiled.
+2. Attachments: none. Searched WeilConjectures by the exact item tag and Kummer, lowering-the-level, cyclotomic, primitive-root and pole terminology. Existing Kummer sheaf, root-cover and cyclotomic-character declarations do not assert the item.
+3. WANTED: none. The source more-algebra.tex is locally present.
+4. No error in the item statement; it is unchanged. Stacks 09F5 has a sign typo in the integrality condition immediately after its first congruence: pi^n P(c) integral is intended, not pi^(-n) P(c) integral. The item already uses the correct explicit hypothesis v(c) >= -n/p. Stacks 09F2's proof says p=u w^(p-1) for a unit in the global cyclotomic integer ring; the argument only requires a local unit here, which the proof constructs explicitly. No global-unit assertion is used. The sign in a_1 is checked separately at p=2. The final affine-generator assertion is proved for every c in F with 1+wc nonzero, even without a pole bound.
+5. Unfinished mathematics: none. Independent maintainer review remains to be performed after delivery.
+
+## Sources and reuse
+
+Read Stacks Tag 09F2 (lemma-prepare), more-algebra.tex lines 34977 onward, and Tag 09F5 (lemma-lowering-the-level), its preceding definition of level, and both first-congruence and second-congruence. Verified tags in stacks-project/tags/tags. Read the chapter and unit records, the three-level rule in SETUP.md, and the latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. The current proof (3) contains compactification and direct-image assembly, not an Epp calculation; the item already records its historical origin through the existing mixed-level-lowering chain. Retained that provenance, including null blueprint ancestor as returned by blueprint_refs.py ancestor.
+
+DAG/blueprint searches covered 09F2, 09F5, lemma-prepare, lowering-the-level, cyclotomic, primitive roots, binomial expansion and factorization. Opened the candidate statements lem-sfb-prime-cyclotomic-degree-norm, lem-sfb-prime-root-shift-minpoly, lem-sfb-split-binomial-root-torsor, and the existing binomial/Frobenius nodes. No blueprint node states the complete item. The root-torsor node already supplies a related factorization, and Mathlib X_pow_sub_C_eq_prod (FieldTheory/KummerExtension.lean:85-94, read) supplies a general factorization; creating another specialized factorization would be unnecessary. Instead the coefficient proof uses the existing binomial expansion and prime divisibility. Semantic searches with two Kummer-polynomial phrasings and a source grep did not find the full item. All fresh searches were run with msearch.py; no invented query or result is recorded.
+
+## Not duplicates
+
+No new nodes were created. The existing binomial expansion node and the prime-binomial clause of def-weil-ring-frobenius are reused directly. The root-factorization candidate was discarded before creation.
+
+## Review by Q95
+
+I checked delivery-errors B through E against the actual item and sources. There is no new node that could be a restatement of an item clause, an elementary extraction, or a duplicate; the argument remains in the item. The statement has all its original hypotheses, and its definitions are linked to the existing DVR, field-extension and polynomial-ring nodes. Proof steps have explicit arguments and every citation was opened. citations.json contains verbatim statement text, one entry per step/cited node pair.
+
+Step 1 uses the explicit ring-homomorphism Frobenius assertion in def-weil-ring-frobenius, applied in the residue field of characteristic p, to deduce (zeta-bar - 1)^p = 0. The residue field is a field and hence has no nonzero nilpotents. Exact order p>1 supplies w != 0. def-sc-discrete-valuation-ring states that R is a local domain with a maximal ideal and uniformizer. The valuation properties used thereafter are spelled out as the meaning of the normalized additive valuation already in the statement; finite-sum bounds are repeated applications of its defining inequality.
+
+Step 2 uses the literal binomial-coefficient divisibility sentence in def-weil-ring-frobenius (not merely the name Frobenius) and the exact expansion formula in lem-pur-commutative-ring-binomial-expansion. Characteristic zero lets us use the integer b_i=choose(p,i)/p; cancellation takes place in F, with w != 0 from step 1. Expansion gives pU=(-1)^p w^(p-1) with U in 1+wR, so locality makes U a unit. This proves the valuation equality without assuming that w is a uniformizer, completeness, henselianity, or any global cyclotomic-unit claim. This is one short coefficient calculation, not a hidden independent lemma. Both cited statements explicitly contain the facts used.
+
+Step 3 again uses the exact binomial expansion and the polynomial-ring coefficient convention. For i>=2 the coefficient b_i u w^(i-1) is visibly divisible by w. For i=1 the unit identity of step 2 gives u congruent to (-1)^p modulo w. I checked the characteristic-zero p=2 case: u=1, w=2, P=T^2+T and a_1=2 lies in wR. Thus the minus sign in T^p-T is correct in all cases.
+
+Step 4 uses the polynomial-ring operations of def-weil-polynomial-ring. The identity 1+w(X+Y+wXY)=(1+wX)(1+wY) and multiplication of the defining equations give the asserted group law after cancelling nonzero w^p. This includes the direct computation omitted in 09F2; there is no unstated comparison lemma.
+
+Step 5 applies only the coefficient bounds proved in steps 2-3 and the valuation axioms stated in step 1. I checked each exponent: pt>=-n, t>=-n, and e+it>=e-in/p>=e-n for 1<=i<p. The strict inequality n<pe is used precisely for e+t>0. c=0 is separated before manipulating its infinite valuation. In particular 1+wc cannot vanish under the pole hypothesis. n=0 allows every integral c and gives error valuation at least e, as required.
+
+Step 6 uses exactly multiplicativity: pe+v(x)+v(y)>=pe-2n, with zero x or y treated first. The lower bound may be negative near n=pe; the proof does not assume otherwise. Step 7 uses the field-extension identification in def-pc-field-extension and writes both inclusions explicitly, with inverse z=(z_c-c)/(1+wc). Its only denominator assumption is stated; no algebraicity or finite-degree assumption is used.
+
+Small cases checked: p=2 over Z_2 and over a ramified DVR with v(2)=e>1; n=0; c=0; x=0 or y=0; c integral; and boundary n=pe-1. At the excluded endpoint n=pe one could take c=-1/w, showing why strictness is needed for v(wc)>0. No new hypothesis or weakening was needed. No proof step exceeds 2000 characters. All steps are elementary calculations from the cited facts and definitions; no source-only citation hides a non-elementary result. No SGA source is cited.

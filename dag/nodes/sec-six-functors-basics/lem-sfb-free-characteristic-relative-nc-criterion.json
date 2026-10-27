@@ -1,0 +1,483 @@
+{
+ "id": "lem-sfb-free-characteristic-relative-nc-criterion",
+ "kind": "statement",
+ "title": "Free characteristic criterion for relative normal crossings over an arbitrary field",
+ "statement": "Let $F$ be a field [def-weil-field], $X$ a finite-type $F$-scheme [def-weil-finite-type-morphism], and $B\\subseteq X$ a closed subset with dense open complement $j:U\\hookrightarrow X$. Let $M=\\mathcal O_X\\cap j_*\\mathcal O_U^\\times$ on the small etale site be its divisorial log structure [def-trf-log-regular-pair]. The following conditions are equivalent. (a) The triviality locus of $M$ is exactly $U$, $M$ is fine saturated [def-trf-fs-log-blowup], $(X,M)\\to(\\operatorname{Spec}F,F^\\times)$ is log smooth [def-per-fs-log-smooth-etale], and at every geometric point $\\bar x$ the characteristic monoid $\\overline M_{\\bar x}$ is isomorphic to $\\mathbf N^{r(\\bar x)}$ for some finite $r(\\bar x)\\geq0$. (b) Etale locally at every geometric point there are a neighbourhood $V\\to X$ [def-weil-etale-morphism], an integer $r\\geq0$, and a smooth $F$-morphism $c:V\\to\\mathbf A^r_F$ [def-sbc-smooth-morphisms, def-sbc-affine-space] such that the reduced closed subscheme with support $B\\times_XV$ is exactly $c^{-1}V(z_1\\cdots z_r)$, and $\\mathbf N^r\\to\\mathcal O_V$, $e_i\\mapsto c^*z_i$, is a chart for $M|_V$. The neighbourhood can be chosen so that all $r$ coordinate boundary branches pass through the chosen point. Either condition implies that $(X,B)$ is log regular, $X$ is smooth over $F$, and every intersection of any subset of the local coordinate branches is smooth over $F$ of the expected codimension. Conversely, if $X/F$ is smooth and the reduced closed subscheme with support $B$ is a relative strict normal crossings divisor [def-trf-smooth-strict-normal-crossings-divisor], then (a) and (b) hold. No perfection hypothesis on $F$ is imposed; $B=\\varnothing$ and $r=0$ are allowed. This criterion asserts local normal crossings, allowing self-intersections of global components.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.4--1.8, pp.69--70; X Proposition 1.2 with the trivial group and trivial base log structure, pp.136--139, and X Lemma 2.2 proof p.149, smooth-pair-over-a-field remark. The sharp free chart specialization gives the relative version of VIII 3.4.4; VIII Remark 4.2.2(i), p.118, is the strict intersection criterion. No Stacks tag states the logarithmic equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-trf-log-regular-pair",
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-affine-space",
+  "def-trf-smooth-strict-normal-crossings-divisor"
+ ],
+ "proof": [
+  {
+   "text": "All constructions are local near the chosen geometric point. The finite-type hypothesis makes $X$ Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. Assume (a). The trivial log field is log regular: its log ideal is zero, its local ring is a field and its characteristic has rank zero. Apply [lem-sfb-log-smooth-preserves-log-regularity] to obtain log regularity of $(X,M)$. Now [lem-trf-log-regular-sharp-chart] gives an affine pointed etale neighbourhood $V$ and a chart by $P=\\overline M_{\\bar x}\\simeq\\mathbf N^r$ inducing the specified characteristic at $\\bar x$. Write $t_i$ for the images of its basis. Each $t_i$ is a nonunit at $\\bar x$, so each branch contains that point. The chart gives the $F$-morphism $c=(t_1,\\ldots,t_r):V\\to\\mathbf A^r_F$. Log smoothness remains valid on $V$ by the strict-etale locality of [lem-sfb-log-smooth-composition-strict-base-change].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-log-smooth-preserves-log-regularity",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-sfb-log-smooth-composition-strict-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8 and 1.6, printed p.70: log regularity first, then sharp chart; X 1.2 proof, pp.136--138, free-chart specialization"
+   }
+  },
+  {
+   "text": "Give $T=\\mathbf A^r_F$ the associated log structure of $\\mathbf N^r\\to F[z_1,\\ldots,z_r]$, $e_i\\mapsto z_i$, using [lem-trf-associated-log-universal-stalks]. Its structural map to the trivial log field is log smooth by [def-per-fs-log-smooth-etale]: the chart is $0\\to\\mathbf N^r$, its group map has zero kernel and torsion-free cokernel, and its comparison is the identity. The source chart identifies $M|_V$ with the pullback of this log structure, so $c$ is strict. From [def-per-log-differential-stalk] the polynomial logarithmic differential module is free on $d\\log z_i$: the relations give $dz_i=z_i d\\log z_i$, and an inverse sends $d\\log z_i$ to $e_i$ and $df$ to $\\sum_i z_i(\\partial f/\\partial z_i)e_i$. For a unit $u$ its logarithmic image must be $u^{-1}du$. The same calculation holds on etale neighbourhoods: [lem-weil-pbc-flat-unramified-formally-etale] gives a unique lift across the square-zero algebra $B\\oplus B^r$ of the identity of any etale algebra $B$, with polynomial structure $f\\mapsto(f,\\sum_i z_i\\partial_i f\\,e_i)$. Its second component is the unique extending derivation. These extensions commute with etale restrictions by uniqueness, and passing to the geometric-stalk colimit gives the inverse there too. Thus the logarithmic differential fibre of $T/F$ at every geometric point is freely generated by the $d\\log z_i$.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-per-fs-log-smooth-etale",
+    "def-per-log-differential-stalk",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X proof of Proposition 1.2, p.138, computation of the logarithmic differential module of the chart target"
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(\\bar x)$. Apply [lem-sfb-log-cotangent-characteristic-quotient] to $V$ over the trivial log field. Its surjection $k\\otimes\\omega_{V/F}\\twoheadrightarrow k\\otimes_{\\mathbf Z}\\overline M_{\\bar x}^{\\rm gp}=k^r$ sends $d\\log t_i$ to the $i$th basis vector. Hence the map from the logarithmic differential fibre of $T/F$ to that of $V/F$ is injective: a relation among its basis images maps to the same relation among the basis vectors of $k^r$. Both log schemes are log smooth over the same base, and $c$ is strict. Thus [lem-sfb-strict-log-jacobian-criterion] makes $c$ smooth on a neighbourhood of $\\bar x$. Shrink $V$ to this neighbourhood. No separability or perfection assumption on $F$ was used.",
+   "uses": [
+    "lem-sfb-log-cotangent-characteristic-quotient",
+    "lem-sfb-strict-log-jacobian-criterion",
+    "def-per-log-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X proof of Proposition 1.2, pp.136--138, map (1) and strict Jacobian argument"
+   }
+  },
+  {
+   "text": "Record the geometry of any smooth comparison $c:V\\to\\mathbf A^r_F$. For $J\\subseteq\\{1,\\ldots,r\\}$, put $T_J=V(z_i:i\\in J)$ and $V_J=V(t_i:i\\in J)$. Then $T_J\\simeq\\mathbf A^{r-|J|}_F$ and $V_J=V\\times_TT_J$ scheme-theoretically. Work locally where $c$ has constant relative dimension $d$, using [sbc-lem-smooth-relative-dimension-locally-constant]. By [sbc-lem-affine-space-smooth] and [lem-sbc-smooth-relative-dimension-permanence], $V_J\\to T_J$ is smooth of relative dimension $d$, $V_J/F$ is smooth of relative dimension $d+r-|J|$, and $V/F$ is smooth of relative dimension $d+r$. To verify pure codimension, work on a finite-type affine neighbourhood of a generic point $\\eta$ of an irreducible component of $V_J$. The local ring of $V_J$ at $\\eta$ has dimension zero. Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to this affine intersection and to the ambient affine neighbourhood at the same point: the residue fields agree, so subtraction gives $\\dim\\mathcal O_{V,\\eta}=|J|$. This is exactly the height of the prime of that component in the ambient affine ring. Consequently every nonempty $V_J$ is smooth of the expected pure codimension $|J|$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P1, lemma-dimension-at-a-point-finite-type-field, applied at a generic point of the intersection; smooth dimension permanence: morphisms.tex Tags 01VA, 01VB and 02G1. This dimension calculation replaces the need for flat pullback of regular immersions (067P)."
+   }
+  },
+  {
+   "text": "The scheme $V$ and all the $V_J$ of Step 4 are regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. At a point $v$, discard the $t_i$ which are units in $R=\\mathcal O_{V,v}$. Each remaining quotient $R/(t_i)$ is a regular local ring, hence a domain by [lem-sc-regular-local-domain]; thus $(t_i)$ is prime. Two of these prime ideals cannot be equal: their common zero scheme would then have codimension one, whereas Step 4 gives codimension two for their intersection. Consequently the nonunit $t_i$ are pairwise nonassociated prime elements in the domain $R$. If a power of $f$ is divisible by $\\prod t_i$, primality makes every $t_i$ divide $f$; successive cancellation and pairwise nonassociation make their product divide $f$. Therefore $(\\prod t_i)$ is radical. Its zero scheme is reduced, including the empty product case, and has support the union of the coordinate branches.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S, lemma-smooth-regular; algebra.tex Tag 00NP, lemma-regular-domain; elementary prime-element argument for the product ideal"
+   }
+  },
+  {
+   "text": "In a chart by $\\mathbf N^r$, the characteristic at any point is obtained by discarding exactly the basis elements whose images are units: if a monomial is a unit in a local ring then each of its factors is a unit. Thus it is $\\mathbf N^s$ for the number $s$ of vanishing coordinates, and the triviality locus is $D(t_1\\cdots t_r)$. Under (a) this locus is $U\\times_XV$ by the added triviality-locus requirement. Step 5 now identifies the reduced closed subscheme on $B\\times_XV$ with $V(t_1\\cdots t_r)$, proving (b). Conversely, given (b), the chart makes $M$ fs, gives precisely these free characteristic monoids, and has triviality locus $U$. The compatible charts $0\\to\\mathbf N^r$ have zero kernel and torsion-free group cokernel; their comparison is exactly the assumed smooth $c$. Hence [def-per-fs-log-smooth-etale] gives (a). Its etale-local formulation applies on the covering neighbourhoods. All coordinates in the (a)-to-(b) construction vanish at the distinguished point by Step 1.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1--1.4, pp.69--70; X Proposition 1.2, pp.136--138, chart interpretation"
+   }
+  },
+  {
+   "text": "The trivial log field is log regular: its nonunit log ideal is zero, its local ring is a field of dimension zero, and its characteristic has rank zero. On the charts just proved, $0\\to\\mathbf N^r$ has injective group map and torsion-free cokernel. Apply [lem-trf-log-smooth-log-regular] to these charts to obtain log regularity of $(X,M)$; its recovered divisorial structure and its triviality locus agree with the specified pair by Step 6. Also $V/F$ is smooth by Step 4, so smoothness descends along the etale covering $V\\to X$ by [lem-trf-etale-source-smoothness]. Step 4 already proves the asserted smoothness and expected codimensions for all local branch intersections. Thus either condition gives all the stated consequences.",
+   "uses": [
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and 1.8, pp.69--70; smoothness descent: Stacks descent.tex Tag 036U, lemma-smooth-smooth-local-source"
+   }
+  },
+  {
+   "text": "For the final converse, suppose $X/F$ is smooth and $D=B_{\\rm red}$ is a relative strict normal crossings divisor as defined in [def-trf-smooth-strict-normal-crossings-divisor]. Fix $x$. Delete the finitely many components not containing $x$; call the remaining ones $C_1,\\ldots,C_r$. Each $C_i$ is smooth of codimension one, and $Z=\\bigcap_i C_i$ is smooth of pure codimension $r$. Apply [lem-pur-smooth-pair-local-coordinates] separately to $C_i\\hookrightarrow X$ to obtain a local generator $t_i$ of its ideal. In its coordinate chart the regular sequence has length one: at a generic point of $C_i$ the ambient local ring has dimension one and the quotient dimension zero, so [lem-trf-regular-sequence-dimension-formula] forces this length to be one. Shrink to a common affine neighbourhood, with $I_Z=(t_1,\\ldots,t_r)$. Apply the same smooth-pair coordinate lemma to $Z\\hookrightarrow X$: its ideal is locally generated by a coordinate regular sequence of some fixed length $b$. At a generic point of a component of $Z$ meeting this neighbourhood, the ambient local dimension is $r$ by pure codimension and the quotient local dimension is zero. Again [lem-trf-regular-sequence-dimension-formula] gives $b=r$. Hence [lem-weil-pbc-regular-sequence-conormal-free] gives a locally free conormal module of rank $r$ on this neighbourhood of $x$. The specified $r$ generators $t_i$ therefore form a basis of its fibre $(I/I^2)\\otimes\\kappa(x)$, where $I=I_{Z,x}\\subset\\mathcal O_{X,x}$.",
+   "uses": [
+    "def-trf-smooth-strict-normal-crossings-divisor",
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-trf-regular-sequence-dimension-formula",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, lemma-etale-local-structure, including its regular-sequence assertion; codimension from regular-sequence dimension drop, Mathlib/RingTheory/KrullDimension/Regular.lean, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, lines 210--214; algebra.tex Tag 00LN, lemma-regular-quasi-regular, for the conormal basis."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-conormal-sequence-smooth-immersion] to $Z\\hookrightarrow X$ over $F$; its hypothesis is the smoothness of $Z/F$, not perfection of $F$. Its injective first arrow sends the conormal basis from Step 8 to $dt_1,\\ldots,dt_r$. Thus these differentials are independent in $\\Omega_{X/F,x}\\otimes\\kappa(x)$. On the affine finite-type neighbourhood the differentials of finitely many algebra generators span this vector space, by the defining Leibniz relations. Extend the independent $dt_i$ to a basis by selecting differentials $dg_1,\\ldots,dg_s$ from that spanning family. Now [lem-pur-etale-at-point-from-differentials] makes $h=(t_1,\\ldots,t_r,g_1,\\ldots,g_s):V\\to\\mathbf A^{r+s}_F$ etale after shrinking. The projection $\\mathbf A^{r+s}_F\\to\\mathbf A^r_F$ is the affine $s$-space projection over $\\mathbf A^r_F$, so it is smooth by [sbc-lem-affine-space-smooth]. Etale maps are smooth by [def-sbc-smooth-morphisms]. Their composite $c=(t_i)$ is smooth by [lem-trf-smooth-composition].",
+   "uses": [
+    "lem-pur-conormal-sequence-smooth-immersion",
+    "lem-pur-etale-at-point-from-differentials",
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 06AA, lemma-differentials-relative-immersion-smooth; 02GU, lemma-etale-at-point; 01VA, lemma-composition-smooth; coordinate-basis extension as in more-morphisms.tex Tag 0FUE, lemma-etale-local-structure"
+   }
+  },
+  {
+   "text": "On the resulting neighbourhood construct $L$ from the prelog chart $\\mathbf N^r\\to\\mathcal O$, $e_i\\mapsto t_i$, using [lem-trf-associated-log-universal-stalks]. Its characteristic at a point is $\\mathbf N^s$ for the vanishing coordinates, and its triviality locus is $D(\\prod t_i)=X\\setminus B$ on this neighbourhood. The $0\\to\\mathbf N^r$ comparison is the smooth map of Step 9, so [lem-trf-log-smooth-log-regular] applies over the trivial log field. In addition to log regularity, its statement canonically identifies $L$ with $\\mathcal O\\cap j_*\\mathcal O_U^\\times$, which is precisely the specified $M$. Thus $\\mathbf N^r$ is a chart for $M$. Steps 4--5 show that $V(\\prod t_i)$ is reduced; its support is the union of the chosen component supports, namely $B$ here. By uniqueness of the reduced induced closed subscheme it equals $D$ on this neighbourhood. We have proved (b), and Step 6 gives (a).",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-log-smooth-log-regular",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and 1.8, pp.69--70; relative smooth-pair conclusion in X Lemma 2.2 proof, p.149"
+   }
+  },
+  {
+   "text": "If $r=0$, all products are $1$, all intersections with the empty index set are $V$, the characteristic is zero, and the comparison is the smooth structural map to $\\mathbf A^0_F=\\operatorname{Spec}F$. This handles $B=\\varnothing$ and points outside the boundary. Nothing chooses global labels for branches, so distinct local branches may belong to one global component. All field-dependent inputs above assume only that $F$ is a field and use actual smoothness of the intersections, so the argument applies unchanged to imperfect fields.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1--1.8, pp.69--70; X Lemma 2.2 proof p.149, relative smooth-pair formulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-log-smooth-preserves-log-regularity",
+  "lem-trf-log-regular-sharp-chart",
+  "lem-sfb-log-smooth-composition-strict-base-change",
+  "lem-trf-associated-log-universal-stalks",
+  "def-per-fs-log-smooth-etale",
+  "def-per-log-differential-stalk",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-sfb-log-cotangent-characteristic-quotient",
+  "lem-sfb-strict-log-jacobian-criterion",
+  "def-per-log-cotangent-comparison",
+  "sbc-lem-affine-space-smooth",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-smooth-log-regular",
+  "lem-trf-etale-source-smoothness",
+  "def-trf-smooth-strict-normal-crossings-divisor",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-trf-regular-sequence-dimension-formula",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-pur-conormal-sequence-smooth-immersion",
+  "lem-pur-etale-at-point-from-differentials",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.4, 1.8, 3.5(a), 3.7(a); X Proposition 1.2 proof, pp.136--138; relative SNC converse using Stacks 0FUE and 06AA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|divisorial.*log|log.*smooth",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth normal crossings pair over a field has a fine saturated log smooth divisorial structure",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalCrossing\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth strict normal crossings divisor over an arbitrary field has free divisorial logarithmic charts with smooth comparison to affine toric space",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_eq, NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne, AlgebraicGeometry.isSmooth_iff, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "LogSmooth|log_smooth|FsLog|characteristicMonoid|normalCrossing",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free characteristic monoids characterize smooth normal crossings boundaries in log smooth schemes over an imperfect field",
+   "results": "OK 8 hits: FreeAlgebra.charP, AlgebraicGeometry.IsSmooth, Algebra.FormallySmooth.of_perfectField, AlgebraicGeometry.IsSmooth.mk, FreeAlgebra.charZero, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"logSmooth\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A log smooth fine saturated scheme over a field with trivial log structure is smooth with relative normal crossings boundary when its characteristic monoids are free",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; ordinary smoothness and normalization do not state the logarithmic boundary criterion or nodal resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "LogSmooth|log_smooth|FsLog|characteristicMonoid|normalCrossing",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divisorial log smoothness over an arbitrary field and free characteristic monoids characterize relative normal crossings",
+   "results": "OK 8 hits: Algebra.smoothLocus, Algebra.FormallySmooth.of_perfectField, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth, Submonoid.divPairs, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.FormallySmooth.recOn",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"logSmooth\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "normal_crossing|divisorial.*log|log.*smooth",
+   "results": "OK 13 hits: Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Topology/VectorBundle/Riemannian.lean, Mathlib/Geometry/Manifold/SmoothEmbedding.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fine saturated logarithmic smooth schemes over a field with trivial log structure and characteristic monoid N^r",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.IsSmooth.casesOn, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalCrossing\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A log smooth fine saturated scheme over a field with free characteristic monoids has smooth normal crossings coordinates",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth strict normal crossings divisors admit free divisorial charts with smooth comparison to affine space",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, SmoothBumpCovering.embeddingPiTangent, SmoothBumpCovering.exists_immersion_euclidean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smoothness, smooth loci and manifold logarithms do not state a divisorial logarithmic criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts",
+   "via": [
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-free-characteristic-relative-nc-criterion",
+  "worker": "stage1",
+  "summary": "Repaired all four returned dropped citations. Established log regularity before using the live sharp-chart lemma; isolated the strict log Jacobian criterion, characteristic cotangent quotient and general log-smooth preservation as three new statement-only sfb nodes. Replaced the regular-lci omnibus input by smooth dimension permanence, the finite-type dimension formula and the existing Mathlib regular-sequence dimension-drop leaf. Retained the accepted triviality-locus correction and the other proof arguments.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction via ILO X Lemma 2.2, p.149: the relative smoothness of the free-characteristic charts in the final marked smooth pair. The ancestry tool reports no imported blueprint ancestor; inherited from.node=null and via are retained.",
+  "statement_correction": "STATEMENT-DISPUTED: divisorial logs can forget codimension-two boundary. Added triviality locus exactly U in (a), as required by ILO VI 1.4.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-trf-log-smooth-log-regular",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-pur-conormal-sequence-smooth-immersion",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-pur-etale-at-point-from-differentials",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Foundational tool used exactly as stated for sharp charts, differentials, conormal ranks, smooth geometry or log regularity; no node in the item unit supplies this local input."
+   },
+   {
+    "node": "lem-trf-log-regular-sharp-chart",
+    "why": "Generic local geometry tool: sharp characteristic charts after log regularity, unique etale square-zero lifting, or regular-local parameter algebra; no direct-image or alteration argument is imported."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic local geometry tool: sharp characteristic charts after log regularity, unique etale square-zero lifting, or regular-local parameter algebra; no direct-image or alteration argument is imported."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic finite-type algebra dimension formula, used in Step 4 at the generic point of an intersection to compute pure codimension. It replaces the dropped regular-lci calculus without invoking purity or trace theory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-associated-log-universal-stalks",
+  "sbc-lem-affine-space-smooth",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "lem-trf-log-smooth-log-regular",
+  "lem-trf-etale-source-smoothness",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-pur-conormal-sequence-smooth-immersion",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-log-regular-sharp-chart",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-d53b481fa",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-d53b481fa (reviewer sub-agent of L); spot-checked: I read the report, the full item (11 steps) and the three new statement-only nodes, plus the statements of all 37 cited nodes. The item is still unsplit live and is not on the drop list, and none of its citations is dropped. No repair note names this item and no SGA source is cited. All four points of the RETURN of 44b9fd608277 are repaired. (1) Steps 2-3: the new lem-sfb-strict-log-jacobian-criterion is ILO X 1.2 proof p.138 / Kato 3.12 (Kato recorded as WANTED). I checked that it is true: both ω are locally free, fibre-injectivity gives split injectivity near the point, and strict log smooth means smooth. (2) Step 3: the new lem-sfb-log-cotangent-characteristic-quotient is ILO X 1.2 map (1). I checked it is well defined on every relation of def-per-log-differential-stalk, including dα(m)=α(m)dlog m, where one side is 0 either way: [m]=0 for a unit, ᾱ(m)=0 otherwise. (3) Step 1: log regularity now comes from the new lem-sfb-log-smooth-preserves-log-regularity, which is ILO VI 1.8 p.70 / Kato 1994 8.2, and only then is lem-trf-log-regular-sharp-chart applied. It is not a duplicate: lem-trf-log-smooth-log-regular needs injective charts, and the per variant is dropped (line 1704). (4) Steps 4 and 8: the dropped regular-lci node is replaced by the 00P1 dimension formula at generic points and the Mathlib regular-sequence dimension leaf. I checked the arithmetic: height |J|, lengths 1 and r. Step-by-step checks: c is strict by the stalk formula of associated log structures; the dlog basis follows from unique étale derivation extension via the formal-étale lemma; the injectivity chain into k^r holds; prime non-associated t_i give a radical product; the N^s characteristic and triviality locus D(∏t_i) hold; the SNC converse uses 06AA, 02GU, a smooth projection and divisorial recovery; r=0 is handled. The statement correction (triviality locus exactly U in (a)) is right and needed: A² with the origin as boundary is a counterexample to the old (a)⇒(b), and ILO VI 1.4 requires the condition. The only citer uses log regular pairs, so it is unaffected. Edge cases checked: B=∅, self-intersecting components, imperfect F, the nodal curve. Batch-5: the full closure of the item reaches 118 sec-trace-formula nodes, all in unit sk-i-curve-zero (log, monoid and descent geometry and commutative algebra), and nothing in sec-poincare-duality or the trace units. Every listed citation (sharp chart, associated log structure, log-smooth⇒log-regular, étale-source smoothness, smooth composition, regular-sequence dimension, 0FUE, and the per/trf definitions) is generic and not a step of the trace formula or of Poincaré duality, so I accept them. I also accept the declared tool uses. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeCharacteristicRelativeNCCriterion",
+  "declaration": "AlgebraicGeometry.free_characteristic_relative_nc_criterion",
+  "declarations": [
+   "AlgebraicGeometry.IsFreeCharacteristicLogSmoothDivisorialPair",
+   "AlgebraicGeometry.RelativeNormalCrossingsChart",
+   "AlgebraicGeometry.RelativeNormalCrossingsChart.intersectionIdeal",
+   "AlgebraicGeometry.HasRelativeNormalCrossingsCharts",
+   "AlgebraicGeometry.free_characteristic_relative_nc_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeCharacteristicRelativeNCCriterion.lean",
+  "statement": "theorem free_characteristic_relative_nc_criterion {F : Type u} [Field F] (X : Scheme.{u}) [X.Over (Spec (.of F))] [LocallyOfFiniteType (X ↘ Spec (.of F))] [QuasiCompact (X ↘ Spec (.of F))] (U : X.Opens) (hU : Dense (U : Set X)) : (IsFreeCharacteristicLogSmoothDivisorialPair (X ↘ Spec (.of F)) U ↔ HasRelativeNormalCrossingsCharts (X ↘ Spec (.of F)) U) ∧ (HasRelativeNormalCrossingsCharts (X ↘ Spec (.of F)) U → ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X), ∃ C : RelativeNormalCrossingsChart (X ↘ Spec (.of F)) U t, ∀ i : ULift.{u} (Fin C.r), C.point.left (default : Spec (.of Ω)) ∈ C.W.left.zeroLocus {C.comparison.appTop (AffineSpace.coord (Spec (.of F)) i)}) ∧ ((IsFreeCharacteristicLogSmoothDivisorialPair (X ↘ Spec (.of F)) U ∨ HasRelativeNormalCrossingsCharts (X ↘ Spec (.of F)) U) → (∃ hX : IsLocallyNoetherian X, @IsDivisorialFineSaturatedLogRegularPair X U.toScheme U.ι inferInstance hX (by simpa only [DenseRange, Scheme.Opens.range_ι] using hU)) ∧ Smooth (X ↘ Spec (.of F)) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X) (C : RelativeNormalCrossingsChart (X ↘ Spec (.of F)) U t) (s : Finset (ULift.{u} (Fin C.r))), Smooth ((C.intersectionIdeal s).subschemeι ≫ C.W.hom ≫ (X ↘ Spec (.of F))) ∧ ∀ (V : C.W.left.affineOpens) (p : Ideal Γ(C.W.left, V.1)), p ∈ ((C.intersectionIdeal s).ideal V).minimalPrimes → p.height = (s.card : ℕ∞)) ∧ (Smooth (X ↘ Spec (.of F)) → (Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩).IsSmoothStrictNormalCrossingsDivisor (X ↘ Spec (.of F)) → IsFreeCharacteristicLogSmoothDivisorialPair (X ↘ Spec (.of F)) U ∧ HasRelativeNormalCrossingsCharts (X ↘ Spec (.of F)) U)",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26d0e562d",
+  "group": "O3",
+  "result": "pass",
+  "note": "Item live (split, lean null), not dropped, first S2 delivery; node unchanged apart from the lean record; statement verbatim. Clause-by-clause match: field F with no perfection assumption; finite type = LocallyOfFiniteType+QuasiCompact; B = complement of dense U. (a) uses the dependency's divisorial presheaf and structural map, triviality locus = U, fs, free characteristic, log smooth over a trivial base log structure (sectionMap forced by compatibility). (b) chart: pointed etale W, smooth F-map to AffineSpace(ULift(Fin r)), chart e_i -> c^*z_i, chart at every geometric point of W, boundary as ideal-sheaf equality (reduced structure = c^{-1}V(prod z_i)). Branches through the point; log regularity, smoothness, smooth pure-codimension branch intersections (checked true for any smooth chart); smooth relative SNC converse. Edge cases B empty, r=0, s empty, empty X, imperfect F, universes OK. No duplicate notion; helpers are real and listed; docstrings carry source places and all 11 steps; only proof is sorry. Advisory: public import of ReducedInducedClosedSubscheme could be private. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,174 @@
+{
+ "id": "def-sfb-supported-lattice-norm-coefficients",
+ "kind": "definition",
+ "title": "Supported integral coefficients, rationalization and norm inclusion",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\ell$ be prime, let $\\Omega$ be a normed field with a $\\mathbf Q_\\ell$-algebra structure, and let $E\\subset\\Omega$ be an intermediate field finite-dimensional over $\\mathbf Q_\\ell$. Let $\\mathcal O_E$ be the integral coefficient ring [def-weil-l-adic-coefficient-extension], equipped with its subspace topology in $E$. All continuous-function coefficient rings are those of [def-sfb-continuous-map-condensed-ring], bundled as commutative coefficients of [def-sfb-condensed-point-modules-geometric-base-change]. Put\n$$O=C(-,\\mathcal O_E),\\qquad A=C(-,E),\\qquad B=C(-,\\Omega).$$\nThe latter two are the norm coefficient rings of [def-sfb-field-action-geometric-transport-data]. Define $\\mathrm{supportedLatticeIntegralRing}(\\ell,E)=O$. Define the rationalization $O\\to A$ and norm inclusion $A\\to B$ by postcomposition with the actual inclusions $\\mathcal O_E\\hookrightarrow E$ and $E\\hookrightarrow\\Omega$, respectively [def-sfb-continuous-map-condensed-ring-map]. These use all continuous functions, not only functions taking values in a finite subextension.\n\nLet $K$ be a field, let $T\\to\\operatorname{Spec}K$ be a finite-type scheme, let $a:S\\hookrightarrow T$ be a locally closed immersion, and let $L_0\\in\\mathrm{Modules}(O,S)$, with notation from [def-sfb-condensed-point-modules-geometric-base-change]. The finite-type hypothesis makes $T$ Noetherian. Using the actual canonical locally closed extension $a_!$ of [def-sfb-locally-closed-coefficient-extension], the pulled-back coefficients $O_T,A_T$ of [sk-def-sfb-pulled-back-coefficients], and ordinary internal scalar extension [sk-def-sfb-change-of-scalars], define the supported rationalized lattice\n$$\\mathrm{supportedRationalizedLattice}(\\ell,E,T,a,L_0)=Q:=\\bigl(A_T\\otimes_{O_T}a_!L_0\\bigr)[0]\\in D(\\mathrm{Modules}(A,T)),$$\nwhere degree zero and the ordinary unbounded derived category use [sk-def-sfb-derived-categories]. All fields and schemes lie in universe $u$, coefficient groups in $u+1$, and derived localization in $u+2$. The construction is defined for every $L_0$; its lisse specialization uses [def-sfb-lisse-coefficient-module]. No completeness of $\\Omega$, flatness of $A\\to B$, nonempty support or positive rank is imposed.\n\nFor a scheme $T$, the norm point projection $B\\otimes^L_A\\mathcal H_A(-)\\to\\mathcal H_B(B_T\\otimes^L_{A_T}-)$ attached to these coefficients is the pointProjection of [def-sfb-field-action-geometric-transport-data] along the norm inclusion $A\\to B$, formed with the canonical point scalar comparison $\\mathrm{canonicalPointScalar}(A\\to B,T)$ of [def-sfb-canonical-point-scalar-comparison]: the transpose of insertion of $1$ followed by the canonical comparison with exact scalar restriction, not an arbitrary isomorphism.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-condensed-point-modules-geometric-base-change",
+  "def-sfb-field-action-geometric-transport-data",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-locally-closed-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-canonical-point-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics",
+  "place": "sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), finite-E geometric coefficient comparison; sk-lem-integral-models/sk-lem-integral-models-generators.md, supported integral generators"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "supported integral lisse lattice rationalization and continuous norm coefficient inclusion",
+   "results": {
+    "t": "2026-10-24T16:07:28Z",
+    "tool": "leansearch",
+    "query": "supported integral lisse lattice rationalization and continuous norm coefficient inclusion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Zlattice.FG",
+     "ZLattice.normBound_spec",
+     "ZLattice.exists_forall_abs_repr_le_norm",
+     "ZLattice.normBound",
+     "IsZLattice.mk",
+     "Algebra.isIntegral_norm",
+     "ZLattice.FG",
+     "ZLattice.module_free"
+    ],
+    "digest": "0de1c9597f22e4ec"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions rather than defining another object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous functions into integral coefficients rationalization supported lattice extension by zero",
+   "results": {
+    "t": "2026-10-24T16:07:31Z",
+    "tool": "leanfinder",
+    "query": "continuous functions into integral coefficients rationalization supported lattice extension by zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.mahlerTerm",
+     "continuousMap_mem_polynomialFunctions_closure",
+     "mahler",
+     "PadicInt.mahlerEquiv",
+     "BoundedContinuousFunction.mem_charPoly",
+     "Profinite.NobelingProof.Linear_CC'₀",
+     "Profinite.NobelingProof.Linear_CC'₁",
+     "polynomialFunctions"
+    ],
+    "digest": "4261c3e8dc00f148"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions rather than defining another object."
+  },
+  {
+   "tool": "grep",
+   "query": "pointModules|geometricScheme|supportedRationalizedLattice|supportedLatticeIntegralRing",
+   "results": {
+    "t": "2026-10-24T16:07:28Z",
+    "tool": "grep",
+    "query": "pointModules|geometricScheme|supportedRationalizedLattice|supportedLatticeIntegralRing",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions rather than defining another object."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"pointModules|geometricScheme|supportedRationalizedLattice|supportedLatticeIntegralRing\" lean/WeilConjectures lean/Sheaf; scan definition-node lean declarations; blueprint_refs.py search",
+   "results": "No upstream WeilConjectures declaration and no definition-node owner of the requested exact helpers. Existing helpers occur in CondensedGaloisGlobalDescent and SupportedLatticeNormProjection; blueprint searches geometric sections, supported lattice, condensed point, integral generators gave no matching definition unit.",
+   "date": "2026-10-24",
+   "verdict": "Attach the existing plain definitions to new definition nodes as requested by the immutable-head review; do not use the enclosing theorem as the owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-generator-projection-devissage",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), finite-E geometric coefficient comparison; sk-lem-integral-models/sk-lem-integral-models-generators.md, supported integral generators",
+   "via": [
+    "lem-sfb-geometric-generator-projection-devissage",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.SupportedLatticeNormProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.supportedRationalizedLattice",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportedLatticeIntegralRing",
+   "AlgebraicGeometry.ProEtale.supportedLatticeRationalization",
+   "AlgebraicGeometry.ProEtale.supportedLatticeNormInclusion",
+   "AlgebraicGeometry.ProEtale.supportedRationalizedLattice"
+  ],
+  "statement": "def supportedRationalizedLattice (ℓ : ℕ) [Fact ℓ.Prime]\n    {Ω : Type u} [NormedField Ω] [Algebra ℚ_[ℓ] Ω]\n    (E : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E]\n    {K : Type u} [Field K] (T : Over (Spec (.of K)))\n    [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]\n    {S : Scheme.{u}} (a : S ⟶ T.left) (ha : IsImmersion a)\n    (L₀ : Modules (supportedLatticeIntegralRing ℓ E).toMon S) :\n    DerivedCategory.{u + 2} (Modules (normCoefficients E).toMon T.left)",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns only the four existing plain definitions, including the actual rationalization and norm inclusion maps and degree-zero Q construction. It does not assert the supported-lattice projection isomorphism. Reuses the existing locally closed coefficient extension and arbitrary normed-field coefficients; no Lean source is changed. The norm point projection used with these coefficients is the existing pointProjection with canonicalPointScalar, owned by def-sfb-canonical-point-scalar-comparison (cited; reviewer fix)."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-502b56fbe",
+  "group": "Q159",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-502b56fbe",
+  "group": "Q159",
+  "result": "fix",
+  "note": "Re-delivery after the 121e H2 RETURN. The item Lean is byte-identical to the reviewed head (sha a24e…122a), and the clause-by-clause match was re-confirmed: primes, CharP, IsSepClosure, separated finite type, incomplete normed algebraic closure Ω, finite E, all-continuous A and B, constant-model Dbc; conclusions are Dbc on T, finite cone/shift generation by constructible supported lisse lattices, IsIso of the canonical pointProjection, and π pinned componentwise with CommShift and triangle morphisms. Edge cases covered (empty X, V=0, rank 0, no completeness, no flatness). The two new existing-binding definition nodes (def-sfb-condensed-point-modules-geometric-base-change, def-sfb-supported-lattice-norm-coefficients) were read against the CondensedGaloisGlobalDescent and SupportedLatticeNormProjection source; signatures are verbatim and check_new_node returns [] for both. The item's stmt_deps are the 11 base nodes plus the 2 new nodes, with no theorem citations. F1 (H2): canonicalPointScalar, used in the IsIso clause and in pinning π, is owned only by the landed def-sfb-canonical-point-scalar-comparison, which the re-delivery dropped and left unreached. FIX: fixes/def-sfb-supported-lattice-norm-coefficients.json adds it to stmt_deps, with a TeX sentence and a note line. The fixed node passes check_new_node; the owner is reached via item→new node→owner, with no cycle. No Lean change, so no compile. Advisory: pointUnit_isMonHom is owned by the global-descent theorem node, and two live def nodes still cite that theorem."
+ }
+}

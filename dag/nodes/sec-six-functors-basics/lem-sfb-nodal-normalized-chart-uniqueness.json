@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-nodal-normalized-chart-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness and residue compatibility of normalized tangent charts",
+ "statement": "Let A be a commutative local ring with its actual tangent grading [def-sfb-nodal-tangent-comparison-data] and degree-zero residue isomorphism [lem-sfb-nodal-tangent-canonical-grading]. If f∈m generates mB, then f^n divides every a∈m^n in B. Consequently two ring equivalences from the homogeneous f-chart to E satisfying the normalized division formula coincide. If f is regular in B and its basic open is all of Proj, any two normalized Proj≅Spec E isomorphisms coincide. Every such normalized isomorphism commutes with the maps to Spec(A/m) through the canonical degree-zero residue isomorphism.",
+ "stmt_deps": [
+  "def-sfb-nodal-tangent-comparison-data",
+  "lem-sfb-nodal-tangent-canonical-grading"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT (constructions (2) and (3)), 0CBU and 0CBW; the explicit comparison calculations below."
+ },
+ "proof": [
+  {
+   "text": "Map a∈m^n into B. Ideal.map_pow and mB=(f) put its image in (f^n); membership in a principal ideal provides a division coefficient b.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "Every homogeneous-localization element has a representative a/ℓ^n. Membership of its numerator in the image grading lifts it to a graded piece, and quotient surjectivity lifts it further to an element of m^n. Apply the two normalized formulas with the same division coefficient. RingEquiv.ext gives equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "Apply the preceding equality to the chart equivalences furnished by IsNormalized. A chart whose basic open is top has an isomorphism as its inclusion. Cancel that inclusion in the two chart equations and use Iso.ext.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  },
+  {
+   "text": "For n=0 the division coefficient is a itself. Thus the chart equivalence on degree-zero classes is the residue structural map after the inverse of tangentZeroIso. The lemma awayι_toSpecZero identifies this with the structural map of Proj. Cancel the isomorphism from the covering affine chart to conclude the required square.",
+   "uses": [
+    "lem-sfb-nodal-tangent-canonical-grading"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT, omitted equivalence of constructions (2) and (3); Tags 0CBU and 0CBW for branches."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-tangent-canonical-grading"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit argument filling the omitted equivalence (2)=(3) of Tag 0CBT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring homomorphism from homogeneous localization is determined by its values on homogeneous fractions",
+   "results": "{\"t\": \"2026-10-23T11:31:57Z\", \"tool\": \"leansearch\", \"query\": \"A ring homomorphism from homogeneous localization is determined by its values on homogeneous fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.map_mk\", \"HomogeneousLocalization.awayMap_mk\", \"HomogeneousLocalization.Away\", \"LocalizedModule.numeratorRingHom\", \"HomogeneousLocalization.awayMap\", \"HomogeneousLocalization\", \"HomogeneousLocalization.fromZeroRingHom\", \"HomogeneousLocalization.Away.mk\"], \"digest\": \"9d0bee10c3f19fce\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization: Away.mk_surjective and the Proj chart API prove the argument, but no existing lemma states this normalization-fraction uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away.mk_surjective",
+   "results": "{\"t\": \"2026-10-23T11:31:56Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization.Away.mk_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.mk_surjective\"], \"digest\": \"5c52e1c3dc5deee1\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization: Away.mk_surjective and the Proj chart API prove the argument, but no existing lemma states this normalization-fraction uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "chooseDecomposition|coeAddMonoidHom_of|Away.mk_surjective",
+   "results": "{\"t\": \"2026-10-23T11:12:14Z\", \"tool\": \"grep\", \"query\": \"chooseDecomposition|coeAddMonoidHom_of|Away.mk_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Decomposition.lean\", \"Mathlib/Algebra/DirectSum/Basic.lean\", \"Mathlib/Analysis/InnerProductSpace/Projection/FiniteDimensional.lean\", \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\"], \"digest\": \"e204f338db238024\"}",
+   "date": "2026-10-23",
+   "verdict": "generalization: Away.mk_surjective and the Proj chart API prove the argument, but no existing lemma states this normalization-fraction uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NodalLocalTangentNormalization",
+  "date": "2026-10-23",
+  "group": "K7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.; Uniqueness and residue compatibility of normalized tangent charts",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NodalNormalizedChartUniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNormalizedChartUniqueness.lean",
+  "declaration": "AlgebraicGeometry.NodalLocal.normalized_iso_unique",
+  "statement": "theorem normalized_iso_unique (A : Type u) [CommRing A] [IsLocalRing A] [GradedRing (tangentGrading A)] (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A) (hlinear : initialForm A 1 ⟨f, by simpa using hf⟩ ∈ tangentGrading A 1) (hreg : algebraMap A (Normalization A) f ∈ nonZeroDivisors (Normalization A)) (hgen : normalizationIdeal A = Ideal.span {algebraMap A (Normalization A) f}) (hcover : Proj.basicOpen (tangentGrading A) (initialForm A 1 ⟨f, by simpa using hf⟩) = ⊤) (i j : Proj (tangentGrading A) ≅ Spec (.of (ResidueAlgebra A))) (hi : IsNormalized A i) (hj : IsNormalized A j) : i = j",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.NodalLocal.exists_normalization_division",
+   "AlgebraicGeometry.NodalLocal.normalized_chart_equiv_unique",
+   "AlgebraicGeometry.NodalLocal.normalized_iso_unique",
+   "AlgebraicGeometry.NodalLocal.normalized_iso_over_residue"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9d4a2",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T135019-L-2824655",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 6 new modules vs live item (verbatim def move, IsNatural defeq via IsNaturalIso), item/new node records vs Lean, 3 sorry halves vs Stacks 0CBT/0CDV and nodes"
+ }
+}

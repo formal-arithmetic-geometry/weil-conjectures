@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-elliptic-adjoint-regularity",
+ "kind": "statement",
+ "title": "L2 weak elliptic regularity for bundle operators",
+ "statement": "All vector spaces are over the real field $\\mathbf R$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary, of dimension $m\\geq1$, with a smooth Riemannian metric and volume form. Let $G,H$ be smooth real vector bundles of the same finite rank, with smooth positive definite fibre metrics. Let $Q:\\Gamma^\\infty(G)\\to\\Gamma^\\infty(H)$ be a real-linear differential operator with smooth coefficients of order at most $k\\geq1$, locally $Q=\\sum_{|\\alpha|\\leq k}b_\\alpha(x)\\partial^\\alpha$, whose degree-$k$ principal symbol $\\sum_{|\\alpha|=k}b_\\alpha(x)\\xi^\\alpha:G_x\\to H_x$ is invertible for every nonzero real cotangent vector $\\xi$. Let $u$ be an $L^2$ section of $G$ (a measurable section modulo almost-everywhere equality with $\\int_N|u|^2\\,dV<\\infty$). Regard $u$ as a distributional section, and define $Qu$ in each smooth frame by the displayed differential expression using distributional derivatives. If $Qu$ is the distribution induced by a smooth section of $H$, then $u$ is the distribution induced by a smooth section of $G$; equivalently $u$ has a smooth representative.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-elliptic-weak-bundle-equation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-differential-formal-adjoint-symbol] to $Q$ with $d=k$, obtaining $Q^*:H\\to G$. On the metric bundle $B=G\\oplus H$ define $P(a,b)=(Q^*b,Qa)$. This is an order-at-most-$k$ smooth differential endomorphism. If $A=\\sigma_k(Q)(x,\\xi)$ for $\\xi\\neq0$, its symbol sends $(a,b)$ to $((-1)^k A^*b,Aa)$, with inverse $(c,e)\\mapsto(A^{-1}e,(-1)^k(A^*)^{-1}c)$. Thus $P$ has invertible degree-$k$ symbol on a single bundle. Set $w=(u,0)$ and write $f$ for the given smooth representative of $Qu$. Distributional differentiation is componentwise, so $Pw=(0,f)$.",
+   "uses": [
+    "lem-sfb-differential-formal-adjoint-symbol"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.5)--(1.7); agent block-matrix reduction of the two-bundle operator to a one-bundle operator; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "For each integer $s\\geq0$, $Pw=(0,f)$ belongs to $H^s(B)$. To check this using the norms in the cited estimate, take a finite coordinate trivializing cover and apply [lem-sfb-smooth-subordinate-partition] with closed set $S=N$. Compactness makes $N$ sigma-compact and each closed subordinate support compact inside its chart. Every derivative of the smooth localized section is bounded on that compact support, hence square integrable. Now apply [lem-sfb-weak-garding-sobolev-estimate] with $v=w$, $d=k$ and this $s$. The base is compact without boundary, $B$ has its direct-sum positive definite metric, $w$ is $L^2$, and the symbol was checked in step 1. The weak version of the estimate gives $w\\in H^{s+k}(B)$ for every $s\\geq0$ without assuming any derivatives of $w$ beforehand.",
+   "uses": [
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-weak-garding-sobolev-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2 (2.3); smooth right-hand side has finite localized Sobolev norms; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "Fix an integer $r\\geq0$. Choose an integer $s\\geq0$ so large that $s+k>r+m/2$. Step 2 gives $w\\in H^{s+k}(B)$, so [lem-sfb-bundle-sobolev-embedding], with $t=s+k$, yields a $C^r$ representative $w_r$ of this same $L^2$ class. This also supplies a continuous representative $w_0$ by taking $r=0$. The strict inequality, the dimension and the compact metric-bundle hypotheses are precisely those in the cited embedding.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2 (2.1) applied at arbitrarily large finite Sobolev order; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "Each $w_r$ is continuous and represents the same $L^2$ class $w$. By the uniqueness of the continuous representative in [lem-sfb-bundle-sobolev-embedding] applied to the $r=0$ instance in step 3, $w_r=w_0$ pointwise. Hence the single section $w_0$ is $C^r$ for every nonnegative integer $r$, which is the definition of smoothness in local coordinates. Its projection onto $G$ is smooth and equals $u$ almost everywhere. This is the requested smooth representative.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-embedding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, assembly of (2.3) and (2.1); agent argument identifying the representatives at different finite orders; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-differential-formal-adjoint-symbol",
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-weak-garding-sobolev-estimate",
+  "lem-sfb-bundle-sobolev-embedding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §1 (1.5)--(1.7), VI §2 (2.1), (2.3), printed pp.288--289, read online; local document missing. Block reduction and representative compatibility written by Q03."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If the distributional adjoint equation of an elliptic differential operator has smooth right hand side then the distributional solution is smooth",
+   "results": "{\"t\": \"2026-10-24T01:43:33Z\", \"tool\": \"leansearch\", \"query\": \"If the distributional adjoint equation of an elliptic differential operator has smooth right hand side then the distributional solution is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearPMap.adjoint_isFormalAdjoint\", \"LinearPMap.mem_adjoint_domain_iff\", \"LinearPMap.adjoint\", \"LinearPMap.adjoint_apply_of_dense\", \"LinearPMap.adjoint_apply_eq\", \"TemperedDistribution.instLaplacian\", \"SchwartzMap.laplacianCLM_eq\", \"TemperedDistribution.laplacianCLM_apply\"], \"digest\": \"df3ac183e70e7cbe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Fourier Sobolev operations, abstract partially defined adjoints and smooth bundle metrics do not assert weak elliptic regularity for a manifold differential operator."
+  },
+  {
+   "tool": "loogle",
+   "query": "TemperedDistribution.MemSobolev",
+   "results": "{\"t\": \"2026-10-24T01:43:33Z\", \"tool\": \"loogle\", \"query\": \"TemperedDistribution.MemSobolev\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Fourier Sobolev operations, abstract partially defined adjoints and smooth bundle metrics do not assert weak elliptic regularity for a manifold differential operator."
+  },
+  {
+   "tool": "grep",
+   "query": "elliptic regularity|distributional.*smooth|regularity",
+   "results": "{\"t\": \"2026-10-24T01:43:33Z\", \"tool\": \"grep\", \"query\": \"elliptic regularity|distributional.*smooth|regularity\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Distribution.lean\", \"Mathlib/Analysis/Complex/CanonicalDecomposition.lean\", \"Mathlib/Analysis/SpecialFunctions/MulExpNegMulSqIntegral.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Defs.lean\", \"Mathlib/Analysis/Calculus/Rademacher.lean\"], \"digest\": \"acd859fa43bfea1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Fourier Sobolev operations, abstract partially defined adjoints and smooth bundle metrics do not assert weak elliptic regularity for a manifold differential operator."
+  },
+  {
+   "tool": "grep",
+   "query": "elliptic|formalAdjoint|IsFormalAdjoint",
+   "results": "{\"t\": \"2026-10-24T01:50:38Z\", \"tool\": \"grep\", \"query\": \"elliptic|formalAdjoint|IsFormalAdjoint\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\"], \"digest\": \"f0ef9e360eed0c03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Fourier Sobolev operations, abstract partially defined adjoints and smooth bundle metrics do not assert weak elliptic regularity for a manifold differential operator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an elliptic differential operator applied to an L2 weak section is smooth then that section is smooth",
+   "results": "{\"t\": \"2026-10-24T01:50:42Z\", \"tool\": \"leanfinder\", \"query\": \"If an elliptic differential operator applied to an L2 weak section is smooth then that section is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsContMDiffRiemannianBundle.exists_contMDiff\", \"IsContMDiffRiemannianBundle.of_le\", \"exists_contMDiffOn_section_forall_mem_convex_of_local\", \"instIsContMDiffRiemannianBundleOfNatWithTopENat_2\", \"instIsContMDiffRiemannianBundleOfNatWithTopENat_1\", \"exists_contMDiffSection_forall_mem_convex_of_local\", \"ContMDiffOn.inner_bundle\", \"ContMDiff.inner_bundle\"], \"digest\": \"b7027a287b99362a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Fourier Sobolev operations, abstract partially defined adjoints and smooth bundle metrics do not assert weak elliptic regularity for a manifold differential operator."
+  },
+  {
+   "tool": "grep",
+   "query": "elliptic|hypoellipt|Garding|Gårding|parametrix",
+   "results": "{\"t\": \"2026-10-24T02:26:26Z\", \"tool\": \"grep\", \"query\": \"elliptic|hypoellipt|Garding|Gårding|parametrix\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean\", \"Mathlib/Analysis/Complex/AbelLimit.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\"], \"digest\": \"a9013a220abade64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searched smooth-section and Euclidean Fourier Sobolev declarations do not state smoothness of a weak solution of a variable-coefficient elliptic bundle equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak elliptic regularity for smooth differential operators on vector bundles over compact manifolds",
+   "results": "{\"t\": \"2026-10-24T02:26:26Z\", \"tool\": \"leansearch\", \"query\": \"Weak elliptic regularity for smooth differential operators on vector bundles over compact manifolds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalFrameOn.contMDiffOn_of_coeff\", \"ContMDiffSection\", \"ContMDiffSection.mdifferentiable\", \"instIsContMDiffRiemannianBundleOfSomeENatTopOfLEInfty\", \"instContMDiffVectorBundleOfSomeENatTopOfLEInfty\", \"instContMDiffVectorBundleOfNatWithTopENat\", \"IsContMDiffRiemannianBundle.of_le\", \"ContMDiffVectorBundle.of_le\"], \"digest\": \"0049da99a589646a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searched smooth-section and Euclidean Fourier Sobolev declarations do not state smoothness of a weak solution of a variable-coefficient elliptic bundle equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "TemperedDistribution.MemSobolev",
+   "results": "{\"t\": \"2026-10-24T02:26:26Z\", \"tool\": \"loogle\", \"query\": \"TemperedDistribution.MemSobolev\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searched smooth-section and Euclidean Fourier Sobolev declarations do not state smoothness of a weak solution of a variable-coefficient elliptic bundle equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An L2 distributional section satisfying an elliptic equation with smooth right hand side has a smooth representative",
+   "results": "{\"t\": \"2026-10-24T02:26:30Z\", \"tool\": \"leanfinder\", \"query\": \"An L2 distributional section satisfying an elliptic equation with smooth right hand side has a smooth representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_contMDiffOn_section_forall_mem_convex_of_local\", \"ExistsContDiffBumpBase.u_smooth\", \"SchwartzMap.integral_clm_comp_laplacian_right_eq_left\", \"TestFunction.contDiff\", \"TemperedDistribution.laplacian_toTemperedDistributionCLM_eq\", \"hasContDiffBump_of_innerProductSpace\", \"SchwartzMap.smooth'\", \"ExistsContDiffBumpBase.u\"], \"digest\": \"8820439bcc3d26ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searched smooth-section and Euclidean Fourier Sobolev declarations do not state smoothness of a weak solution of a variable-coefficient elliptic bundle equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-smooth-fredholm-decomposition",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf",
+   "via": [
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-elliptic-adjoint-regularity",
+  "worker": "stage1",
+  "summary": "Preserved the statement; reduced the two-bundle equation to a one-bundle elliptic block operator, applied weak finite-order Gårding estimates at arbitrary orders, and used Sobolev embedding and uniqueness of continuous representatives. Three supporting statement-only nodes are separated, none restating smooth-right-hand-side regularity. All new nodes were searched by the logged command, with alternative semantic phrasings.",
+  "blueprint": "Realizes the analytic regularity prerequisite below the harmonic-representative input in the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration route; preserves the inherited null ancestor and via chain as returned by blueprint_refs.py ancestor. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-050ba04fd",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-050ba04fd (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full. The item statement is byte-identical to the base, and the item is still unsplit in live and side-live with no parallel duplicate ids. Step 1: the new arbitrary-order formal-adjoint node (σ_k(Q*)=(-1)^kσ_k(Q)^*; checked on ∂, ∂² and a weighted ∂) gives the block operator P(a,b)=(Q*b,Qa) on G⊕H. I checked by hand that the stated inverse symbol works in both orders, and Pw=(0,f). Step 2: smooth (0,f) lies in every H^s, and the weak Gårding node applied to the L² w gives H^{s+k}; it needs no a-priori regularity (tested on S¹ with d/dx). Step 3: Sobolev embedding with the strict t>r+m/2 condition. Step 4: uniqueness of the continuous representative identifies all the w_r, so the section is smooth; this step is correctly marked elementary. proof_deps equals the union of uses. The new nodes are statement-only and self-contained, with searches recorded. None duplicates the closed-range sibling, the first-order adjoint nodes or the parent Fredholm node, and none restates a clause of the item. Edge cases checked: empty N, rank 0, f=0, odd k, disconnected N. There is no SGA source. Demailly VI §1–2 is not in literature/, so it is marked WANTED with proof_origin agent, and I could not check its equation numbers locally; I checked the statements myself instead. The partition-of-unity citation in step 2 is harmless but more than needed. The unit route is unchanged and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.EllipticAdjointRegularity",
+  "declaration": "RealEllipticBundle.hasSmoothRepresentative_of_elliptic_weakEquation",
+  "file": "lean/Sheaf/Analysis/EllipticAdjointRegularity.lean",
+  "statement": "theorem RealEllipticBundle.hasSmoothRepresentative_of_elliptic_weakEquation (m q k : ℕ) (hm : 1 ≤ m) (hk : 1 ≤ k) (N : Type u) [TopologicalSpace N] [T2Space N] [CompactSpace N] [ChartedSpace (Model m) N] [IsManifold (𝓘(ℝ, Model m)) ∞ N] [MeasurableSpace N] [BorelSpace N] (orientation : OrientedAtlas m N) (g : ContMDiffRiemannianMetric (𝓘(ℝ, Model m)) ∞ (Model m) (fun x : N ↦ TangentSpace (𝓘(ℝ, Model m)) x)) (μ : SmoothVolume m N) (G : MetricBundle.{u, v} m q N) (H : MetricBundle.{u, w} m q N) (Q : DifferentialOperator G H k) (hQ : Q.IsElliptic) (u : BundleSobolev.L2 (q := q) G.Fiber μ.measure) (hQu : ∃ f : Sections H, Q.WeakEquation μ.measure u f) : HasSmoothRepresentative G μ.measure u",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e49dbf961",
+  "group": "NE",
+  "result": "pass",
+  "note": "Item record changes only lean + stmt_dep def-sfb-elliptic-weak-bundle-equation; statement fields verbatim; new def node record complete, 12 declarations, real data, built on landed BundleSobolev.L2/multiPartial/Model. Clause check: compact T2 boundaryless smooth m-manifold (hm), OrientedAtlas and metric g (unused, harmless), SmoothVolume = positive smooth chart densities (more general than metric volume; theorem stays true), MetricBundle same rank q with independent fibre universes, DifferentialOperator with coefficients pinned by the operator (each |α|<=k listed once), IsElliptic = IsUnit of the degree-k symbol for xi!=0, WeakEquation = sum (-1)^|α| ∫ u_b ∂^α(b_{α,ab} φ) with tests compactly supported in V_p (sign and coefficient placement correct; not vacuous: smooth u satisfies it by integration by parts), Quotient.out invariant because chart densities are positive, conclusion = smooth section equal mu-a.e. to the same class. Edge cases empty N, q=0, m=1, odd k, α=0, f=0, universes ok. No sorry outside the theorem; docstrings carry the source place and proof steps 1-4. Maintainer note: parallel unlanded same-notion def nodes in Q45 fredholm db8b (smooth-real-differential-operator, real-metric-volume; LAND2 failed) and Q88 formal-adjoint-symbol 4f8e (smooth-differential-operator, oriented-smooth-volume); no name clash, none on base, so PASS+note; stage 3 will need bridges or the maintainer should unify them."
+ }
+}

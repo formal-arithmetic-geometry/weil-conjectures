@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Ideal.Colon
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.RingTheory.Finiteness.Ideal
 import Sheaf.RingTheory.AssociatedLocalizationFg
 import Sheaf.RingTheory.WeakAssLocalization
 
@@ -28,6 +29,42 @@ universe u v
 
 namespace Ideal
 
+private theorem exists_annihilator_eq_maximal_of_radical
+    {A : Type*} [CommRing A] [IsLocalRing A]
+    {N : Type*} [AddCommGroup N] [Module A N]
+    (hfg : (IsLocalRing.maximalIdeal A).FG) (x : N)
+    (hx : ((⊥ : Submodule A N).colon {x}).radical = IsLocalRing.maximalIdeal A) :
+    ∃ y : N, IsLocalRing.maximalIdeal A = (⊥ : Submodule A N).colon {y} := by
+  classical
+  let q := IsLocalRing.maximalIdeal A
+  let I := (⊥ : Submodule A N).colon {x}
+  have hex : ∃ n : ℕ, q ^ n ≤ I :=
+    Ideal.exists_pow_le_of_le_radical_of_fg (le_of_eq hx.symm) hfg
+  let n := Nat.find hex
+  have hn : q ^ n ≤ I := Nat.find_spec hex
+  have hn0 : n ≠ 0 := by
+    intro h
+    have htop : I = ⊤ := top_unique (by simpa [h] using hn)
+    have hx' : I.radical = q := hx
+    have : q = ⊤ := by simpa [htop, Ideal.radical_top] using hx'.symm
+    exact (IsLocalRing.maximalIdeal.isMaximal A).ne_top this
+  have hprev : ¬ q ^ (n - 1) ≤ I := Nat.find_min hex (by omega)
+  obtain ⟨r, hr, hri⟩ := SetLike.not_le_iff_exists.mp hprev
+  have hy : r • x ≠ 0 := by
+    simpa only [I, Submodule.mem_colon_singleton, Submodule.mem_bot] using hri
+  refine ⟨r • x, le_antisymm ?_ ?_⟩
+  · intro a ha
+    rw [Submodule.mem_colon_singleton, Submodule.mem_bot, smul_smul]
+    have har : a * r ∈ q ^ n := by
+      have := Ideal.mul_mem_mul (show a ∈ q from ha) hr
+      simpa [← pow_succ', Nat.sub_add_cancel (Nat.one_le_iff_ne_zero.mpr hn0)] using this
+    simpa only [I, Submodule.mem_colon_singleton, Submodule.mem_bot] using hn har
+  · apply IsLocalRing.le_maximalIdeal
+    intro htop
+    apply hy
+    have hone : (1 : A) ∈ (⊥ : Submodule A N).colon {r • x} := by rw [htop]; trivial
+    simpa only [Submodule.mem_colon_singleton, Submodule.mem_bot, one_smul] using hone
+
 /-- Source: Stacks Project, Algebra, Lemma 10.66.9, Tag 058A
 (blueprint: lem-sc-ass-weakass-fg-prime). A finitely generated prime is the annihilator of an
 element exactly when it is minimal over an element's annihilator.
@@ -47,6 +84,20 @@ theorem annihilator_eq_iff_mem_minimalPrimes_of_fg
     (p : Ideal R) (hp : p.IsPrime) (hfg : p.FG) :
     (∃ m : M, p = (⊥ : Submodule R M).colon {m}) ↔
       ∃ m : M, p ∈ ((⊥ : Submodule R M).colon {m}).minimalPrimes := by
-  sorry
+  let : p.IsPrime := hp
+  constructor
+  · rintro ⟨m, hm⟩
+    refine ⟨m, ?_⟩
+    rw [← hm, Ideal.minimalPrimes_eq_subsingleton_self]
+    exact Set.mem_singleton p
+  · intro h
+    obtain ⟨x, hx⟩ := (Module.weakly_associated_atPrime_iff (M := M) p).2.mp
+      ((Module.weakly_associated_atPrime_iff (M := M) p).1.mp h)
+    apply Module.exists_annihilator_eq_of_localization_atPrime p hfg
+    have hmap := IsLocalization.AtPrime.map_eq_maximalIdeal p (Localization.AtPrime p)
+    have hfg' : (IsLocalRing.maximalIdeal (Localization.AtPrime p)).FG := by
+      rw [← hmap]
+      exact hfg.map _
+    exact exists_annihilator_eq_maximal_of_radical hfg' x (hx.trans hmap)
 
 end Ideal

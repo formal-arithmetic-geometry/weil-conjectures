@@ -1,0 +1,273 @@
+{
+ "id": "lem-trf-free-module-sheaf-universal-property",
+ "kind": "statement",
+ "title": "Universal property and uniqueness of sheafified free modules",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $B$ a sheaf of commutative rings and $E$ a sheaf of sets on $\\mathcal C$. Write $|M|$ for the underlying sheaf of sets of a module sheaf [def-weil-sheaf-of-modules-category]. Define $B[E]$ as the module sheafification [def-weil-presheaf-modules-sheafification] of $U\\mapsto B(U)[E(U)]$, the free module [def-weil-pbc-free-module] with restrictions $\\sum b_e[e]\\mapsto\\sum(b_e|_V)[e|_V]$, and let $i_{B,E}:E\\to|B[E]|$ be induced by $e\\mapsto[e]$. For every $B$-module sheaf $M$, restriction to generators is a bijection $\\operatorname{Hom}_B(B[E],M)\\xrightarrow{\\sim}\\operatorname{Hom}(E,|M|)$, $h\\mapsto |h|\\circ i_{B,E}$, natural in $E$ and $M$. Its inverse extends $a:E\\to|M|$ by the sectionwise formula $\\sum b_e[e]\\mapsto\\sum b_ea(e)$ followed by module sheafification. More generally, if a $B$-module sheaf $P$ with $k:E\\to|P|$ has bijective restrictions $\\operatorname{Hom}_B(P,M)\\to\\operatorname{Hom}(E,|M|)$ for all $M$, then there is a unique isomorphism $p:P\\xrightarrow{\\sim}B[E]$ with $|p|\\circ k=i_{B,E}$; its inverse is the unique map $q$ with $|q|\\circ i_{B,E}=k$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04BL, lemma-universal-module, proof: construction of O_2[F] and extension of maps from its generators; normalized-realization uniqueness is the universal-property consequence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $F_E(U)=B(U)[E(U)]$, realized as finitely supported coefficient families on $E(U)$, with basis $[e]$ [def-weil-pbc-free-module]. For $v:V\\to U$, send $\\sum_e b_e[e]$ to $\\sum_e(b_e|_v)[e|_v]$; repeated restricted indices are combined by addition. This is well-defined since the family has finite support. It is additive and semilinear: restricting $c\\sum b_e[e]$ gives $\\sum(c|_v)(b_e|_v)[e|_v]$. Identity and composite restrictions agree on each $[e]$ and each coefficient, hence on every finite sum. Thus $F_E$ is a presheaf of $B$-modules. The maps $e\\mapsto[e]$ commute with restriction; composing them with the module-sheafification unit $\\eta_E:F_E\\to B[E]$ gives the stated $i_{B,E}$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof, free-module construction and generator formulas; Tag 03CY, lemma-sheafification-presheaf-modules, universal factorization."
+   }
+  },
+  {
+   "text": "Given $a:E\\to|M|$, define $T_{a,U}(\\sum_e b_e[e])=\\sum_e b_ea_U(e)$. Unique finite basis expansions make this well-defined, additive and $B(U)$-linear. For $v:V\\to U$, semilinearity in $M$ and naturality of $a$ give $(\\sum_e b_ea_U(e))|_v=\\sum_e(b_e|_v)a_V(e|_v)$, exactly $T_{a,V}$ of the restricted input. Hence $T_a:F_E\\to M$ is a module-presheaf morphism. Every such morphism is determined by its values on the basis, because $T_U(\\sum b_e[e])=\\sum b_eT_U([e])$. Conversely its basis values form a presheaf map $E\\to|M|$ by restriction compatibility. Since $E$ and $|M|$ are sheaves, these are precisely maps of sheaves of sets.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof, free-module construction and generator formulas; Tag 03CY, lemma-sheafification-presheaf-modules, universal factorization."
+   }
+  },
+  {
+   "text": "Apply the universal factorization stated in [def-weil-presheaf-modules-sheafification] to $T_a$ and the $B$-module sheaf $M$. There is a unique $B$-linear sheaf morphism $\\widehat a:B[E]\\to M$ satisfying $\\widehat a\\eta_E=T_a$. On a generator this equality says $|\\widehat a|i_{B,E}(e)=a(e)$. This constructs the inverse of restriction to generators, with exactly the sectionwise formula in the statement. The sheafification is of a module presheaf over the already given ring sheaf $B$, so no change of coefficient ring is involved.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof, free-module construction and generator formulas; Tag 03CY, lemma-sheafification-presheaf-modules, universal factorization."
+   }
+  },
+  {
+   "text": "For $h:B[E]\\to M$ let $a=|h|i_{B,E}$. The two maps $h\\eta_E$ and $T_a$ agree on every $[e]$, and by linearity on every finite sum. The uniqueness of factorization through $\\eta_E$ therefore gives $h=\\widehat a$. Together with the generator equality of step 3 this proves both inverse identities and the asserted bijection. In particular two maps out of $B[E]$ are equal whenever their composites with $i_{B,E}$ agree; this does not require $\\eta_E(U)$ to be surjective on sections.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof, free-module construction and generator formulas; Tag 03CY, lemma-sheafification-presheaf-modules, universal factorization."
+   }
+  },
+  {
+   "text": "For $f:E\\to E\\prime$, define $F_f:F_E\\to F_{E\\prime}$ on a finite sum by $\\sum_e b_e[e]\\mapsto\\sum_e b_e[f_U(e)]$. Additivity, semilinearity of restrictions and $f_V(e|_v)=f_U(e)|_v$ show it is a module-presheaf map. Sheafify to obtain $B[f]:B[E]\\to B[E\\prime]$ with $|B[f]|i_{B,E}=i_{B,E\\prime}f$. Identity and composite maps satisfy this same formula and hence agree by step 4, so this construction is functorial. Write $R_{E,M}(h)=|h|i_{B,E}$. For $g:M\\to M\\prime$ one has $R_{E,M\\prime}(g h)=|g|R_{E,M}(h)$, and for $h:B[E\\prime]\\to M$ one has $R_{E,M}(h B[f])=R_{E\\prime,M}(h)f$. These follow by substitution of the displayed generator identity and associativity. They prove naturality in both variables; the inverse bijections are natural by applying these equalities and injectivity.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof, free-module construction and generator formulas; Tag 03CY, lemma-sheafification-presheaf-modules, universal factorization."
+   }
+  },
+  {
+   "text": "Finally suppose $(P,k)$ has the stated universal property. Its bijection at $M=B[E]$ supplies a unique $p:P\\to B[E]$ with $|p|k=i_{B,E}$. The bijection just proved for $B[E]$, at $M=P$, supplies a unique $q:B[E]\\to P$ with $|q|i_{B,E}=k$. Then $|qp|k=|q|i_{B,E}=k=|\\mathrm{id}_P|k$, so injectivity of the assumed restriction map at $M=P$ gives $qp=\\mathrm{id}_P$. Similarly $|pq|i_{B,E}=|p|k=i_{B,E}$ and step 4 gives $pq=\\mathrm{id}_{B[E]}$. Thus $p$ is an isomorphism with inverse $q$. Any isomorphism obeying the same generator equation has underlying map $p$ by the assumed injectivity, which proves uniqueness of the normalized isomorphism as well as the stated characterization of its inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL, lemma-universal-module, proof, free-module construction and generator formulas; Tag 03CY, lemma-sheafification-presheaf-modules, universal factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04BL, lemma-universal-module, proof, free-module-on-a-sheaf construction, expanded using Tag 03CY; naturality and normalized uniqueness by the displayed generator calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of sectionwise free modules over a sheaf of rings is left adjoint to the underlying sheaf of sets functor",
+   "results": "8 hits; PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction, LightCondensed.freeForgetAdjunction, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, Condensed.freeForgetAdjunction, PresheafOfModules.freeAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, PresheafOfModules.sheafifyHomEquiv. No match: presheaf freeAdjunction/free_hom_ext and module sheafificationHomEquiv are separate ingredients, not a declaration for the sheafified arbitrary-generator construction and normalized realization uniqueness. SheafOfModules.freeHomEquiv uses a constant index type. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from the sheafification of a free presheaf of modules are uniquely specified by maps from its arbitrary sheaf of basis elements",
+   "results": "8 hits; SheafOfModules.freeHomEquiv, PresheafOfModules.free_hom_ext, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', SheafOfModules.freeMap, PresheafOfModules.Sheafify.instUniqueSMulCandidate, SheafOfModules.freeHomEquiv_freeMap. No match: presheaf freeAdjunction/free_hom_ext and module sheafificationHomEquiv are separate ingredients, not a declaration for the sheafified arbitrary-generator construction and normalized realization uniqueness. SheafOfModules.freeHomEquiv uses a constant index type. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeAdjunction",
+   "results": "3 hits; PresheafOfModules.freeAdjunction, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.freeAdjunction_unit_app. No match: presheaf freeAdjunction/free_hom_ext and module sheafificationHomEquiv are separate ingredients, not a declaration for the sheafified arbitrary-generator construction and normalized realization uniqueness. SheafOfModules.freeHomEquiv uses a constant index type. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeAdjunction|freeObjDesc|freeHomEquiv",
+   "results": "25 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean. No match: presheaf freeAdjunction/free_hom_ext and module sheafificationHomEquiv are separate ingredients, not a declaration for the sheafified arbitrary-generator construction and normalized realization uniqueness. SheafOfModules.freeHomEquiv uses a constant index type. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free module sheaf on an arbitrary sheaf of sets over a variable coefficient ring sheaf has a natural Hom equivalence with maps of underlying sheaves",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "freeAdjunction|sheafificationHomEquiv|freeHomEquiv",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:40-121, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75. The presheaf adjunction and sheafification are separate ingredients; freeHomEquiv for sheaves uses a constant index type, not an arbitrary sheaf of generators. No declaration found for all clauses including the normalized unique isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free module sheaf on an arbitrary sheaf of sets over a sheaf of rings has a natural universal property and a unique generator preserving isomorphism to any other universal object",
+   "results": "Hits: SheafOfModules.free, PresheafOfModules.freeObjDesc, SheafOfModules.ιFree, PresheafOfModules.freeObjDesc_app, ModuleCat.freeHomEquiv, PresheafOfModules.free, PresheafOfModules.freeObj, Condensed.free. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:40-121, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75. The presheaf adjunction and sheafification are separate ingredients; freeHomEquiv for sheaves uses a constant index type, not an arbitrary sheaf of generators. No declaration found for all clauses including the normalized unique isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeAdjunction",
+   "results": "Hits: PresheafOfModules.freeAdjunction, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.freeAdjunction_unit_app. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:40-121, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75. The presheaf adjunction and sheafification are separate ingredients; freeHomEquiv for sheaves uses a constant index type, not an arbitrary sheaf of generators. No declaration found for all clauses including the normalized unique isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of sectionwise free modules on a sheaf of sets over a sheaf of rings represents maps from the generator sheaf, naturally, and is uniquely determined by its generators",
+   "results": "Hits: SheafOfModules.freeHomEquiv, SheafOfModules.GeneratingSections.π, SheafOfModules.freeMap, SheafOfModules.ιFree, SheafOfModules.Presentation.mapGenerators, SheafOfModules.freeSection, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.presentationOfIsCokernelFree_generators. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:40-121, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75. The presheaf adjunction and sheafification are separate ingredients; freeHomEquiv for sheaves uses a constant index type, not an arbitrary sheaf of generators. No declaration found for all clauses including the normalized unique isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationHomEquiv|sheafificationAdjunction",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:40-121, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75. The presheaf adjunction and sheafification are separate ingredients; freeHomEquiv for sheaves uses a constant index type, not an arbitrary sheaf of generators. No declaration found for all clauses including the normalized unique isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from sheafification of the free presheaf of modules are equivalent to maps of its presheaf of generators into the underlying sheaf",
+   "results": "Hits: SheafOfModules.freeHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, SheafOfModules.freeMap, PresheafOfModules.sheafificationAdjunction_homEquiv_apply. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:40-121, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75. The presheaf adjunction and sheafification are separate ingredients; freeHomEquiv for sheaves uses a constant index type, not an arbitrary sheaf of generators. No declaration found for all clauses including the normalized unique isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-inverse-image-free-module",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Underived input: inverse image preserves sheaf differentials; comparison of the free-module terms in the cokernel presentation. Re-split of lem-trf-geometric-inverse-image-free-module: old step 1 (free universal property), with the normalized-realization argument of old step 4.",
+   "via": [
+    "lem-trf-geometric-inverse-image-free-module",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-free-module-sheaf-universal-property",
+  "worker": "stage1",
+  "summary": "Expanded the free presheaf construction, finite-sum extension and restriction compatibility, module-sheafification factorization, both inverse identities, naturality in generators and coefficients, and normalized uniqueness. No statement change and no new nodes: the existing module-sheafification node explicitly supplies its universal property; all other arguments are finite-basis calculations or the two inverse identities.",
+  "blueprint": "Underived free-module input in the existing ancestry to lem-trf-local-term-locality: realize the free-module and normalized-realization portions isolated by lem-trf-geometric-inverse-image-free-module; keep the current main-20261015 contracting-local-term route unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-008663790",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-008663790 (reviewer sub-agent of L); spot-checked: I read Stacks sites-modules.tex Tag 04BL (lemma-universal-module, lines 5950-6011). The item's B[E] is exactly O_2[F]: the sheafification of U↦O(U)[F(U)], with maps out of it given by [s]↦s and then sheafified. The statement is unchanged, adds no hypothesis and cites nothing from SGA. The delivery has no new nodes; the six steps cite only three Mathlib-leaf definitions. The sheafification node itself states the unique O-linear factorization through P→P^#, and step 3 uses exactly that statement on T_a into a B-module sheaf over the same ring B, so no C3/C4 fault. Steps 1, 2, 4 and 5 are finite-basis calculations: restriction adds coefficients of generators that merge, semilinearity follows from naturality of a, and maps are determined by basis values; uniqueness of the factorization gives h=â without assuming eta is surjective on sections. I checked the naturality formulas in both variables. Step 6 is the two-inverse argument: qp=id by P-injectivity, pq=id by step 4, uniqueness by injectivity at M=B[E]. I tested E empty, merging generators, B=0, objects with an empty covering and infinite E(U). Duplicate search: rg over the DAG for 04BL and for free-sheaf universal-property wording finds only the parent, the differentials cokernel node and the NL siblings geometric-free-module-hom-equivalence and normalized-free-module-comparison-calculus. Those siblings assume this representability for inverse images, so they are not duplicates and there is no cycle. Mathlib's SheafOfModules.freeHomEquiv uses a constant index type, so splitting instead of making a leaf is justified. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.FreeModuleUniversalProperty",
+  "declaration": "CategoryTheory.SheafFreeModule.freeModule_restrict_bijective",
+  "declarations": [
+   "CategoryTheory.SheafFreeModule.underlyingRaw",
+   "CategoryTheory.SheafFreeModule.restrictGenerators",
+   "CategoryTheory.SheafFreeModule.extendGenerators",
+   "CategoryTheory.SheafFreeModule.freeModuleUnit",
+   "CategoryTheory.SheafFreeModule.freeModule_restrict_bijective",
+   "CategoryTheory.SheafFreeModule.freeModule_extend_inverse",
+   "CategoryTheory.SheafFreeModule.freeModule_extend_formula",
+   "CategoryTheory.SheafFreeModule.freeModule_restrict_naturality",
+   "CategoryTheory.SheafFreeModule.freeModule_unique_iso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/FreeModuleUniversalProperty.lean",
+  "statement": "theorem freeModule_restrict_bijective (E : Sheaf J (Type w)) (M : ringedSiteModules.{w, w, vC, uC} (ring B)) : Function.Bijective (restrictGenerators B E M)",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Five theorem declarations render the bijection, its explicitly constructed inverse, the finite-sum formula, naturality in both variables, and normalized unique isomorphism with unique inverse. Helpers reuse SheafFreeModule.free and generatorRaw from the already published InverseImageFreeModule module; no new free-module notion. The inverse-image module must not receive a reverse proof import of this module, which would create an import cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-362620396",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Read node, Stacks 04BL source (l.5950-6011), all 4 stmt_deps (unchanged vs live), delivered module and report. Every clause matches: B[E] = sheafification of the sectionwise free module via the existing free; i = generatorRaw; bijectivity of h↦|h|∘i for all M; extendGenerators is the canonical adjunction inverse with both inverse identities; finite-sum formula through the sheafification unit (true by sheafificationHomEquiv + Finsupp.lift; unit surjectivity not asserted); naturality in E and M; ∃! normalized iso with its inverse characterised. No extra hypotheses; EssentiallySmall.{w} only for the sheafification instances; universes independent; statement field verbatim; docstrings carry source, blueprint id and proof steps; all sorry; helpers have real data; no Mathlib match (freeHomEquiv has a constant index type). Edge cases: empty E, B=0, infinite E(U), merging generators. Maintainer note: the item imports InverseImageFreeModule (owner lem-trf-geometric-inverse-image-free-module, whose proof_deps cite this item) for ring/free/generatorRaw, so its stage-3 proof import would be a Lean import cycle. The group can't fix this (owner outside the closure; copying would duplicate the notion). Move these definitions into a def-node module imported by both, and land without the reverse proof import. No compile run (none required; no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261023T103434-L-3139166",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.SheafFreeModule.freeModule_extend_formula",
+   "CategoryTheory.SheafFreeModule.freeModule_extend_inverse",
+   "CategoryTheory.SheafFreeModule.freeModule_restrict_bijective",
+   "CategoryTheory.SheafFreeModule.freeModule_restrict_naturality",
+   "CategoryTheory.SheafFreeModule.freeModule_unique_iso"
+  ],
+  "sorry_after": []
+ }
+}

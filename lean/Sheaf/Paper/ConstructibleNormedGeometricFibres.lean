@@ -36,6 +36,7 @@ import Sheaf.Topology.NoetherianGoodStratificationRefinement
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.InternalExtensionInverseImage
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Constructible geometric fibres for totally disconnected normed fields
 

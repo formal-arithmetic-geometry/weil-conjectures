@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-linearly-reductive-group-scheme",
+ "kind": "definition",
+ "title": "Linear reductivity of group schemes in arbitrary characteristic",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], and let $G$ be a $k$-group scheme [def-sc-group-scheme]. A finite-dimensional rational representation is a homomorphism $G\\to\\operatorname{GL}(V)$ [def-wf-algebraic-representations]. A $k$-subspace $U\\subset V$ is invariant if for every commutative $k$-algebra $A$ and every $g\\in G(A)$, the action of $g$ preserves $U\\otimes_k A$ inside $V\\otimes_k A$. A simple subrepresentation is a nonzero invariant subspace with no nonzero proper invariant subspace. The group scheme $G$ is linearly reductive if every finite-dimensional rational representation is an internal direct sum of simple subrepresentations. The zero representation is the empty direct sum. No characteristic or connectedness assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 12.52, printed p.248; Corollary 13.8, printed p.257; subrepresentations as in Chapter 4."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine group scheme is linearly reductive if every finite dimensional rational representation is a direct sum of simple representations",
+   "results": "OK 8 hits: AffineScheme, affine_isReduced_iff, IsAffine.casesOn, IsAffine.recOn, instCategoryAffineScheme, isReduced_of_isAffine_isReduced, IsAffine, Scheme.instIsSeparatedOfIsAffine. None defines linear reductivity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine group scheme is linearly reductive when every finite dimensional rational representation decomposes into simple invariant subspaces over all algebras",
+   "results": "OK 8 hits: Rep.instProjective, FDRep.instProjectiveOfNeZeroCastCard, Rep.instInjective, FDRep.simple_iff_end_is_rank_one, IsAffine, FDRep.instHasKernels, FDRep.instHasFiniteLimits, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular. These are abstract finite-group representations, not scheme-theoretic invariant subspaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LinearlyReductive|linearly.reductive|IsInvariantSubspace",
+   "results": "msearch Mathlib: OK 0 hits. rg of lean/WeilConjectures and lean/Sheaf for IsLinearlyReductive/IsInvariantSubspace returned no declarations. RationalHom.IsSimple and IsSemisimple exist only with characteristic-zero assumptions. DAG definition-node search found only adequate-moduli-space mentioning linearly reductive, which does not define it. Blueprint search linearly reductive: 0 matches.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+  "date": "2026-10-23",
+  "group": "Q140"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Milne Corollary 13.8, first paragraph: linear reductivity of the reduced cyclic closure; Definition 12.52 gives the notion.",
+   "via": [
+    "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearlyReductiveGroupScheme",
+  "declaration": "AlgebraicGeometry.IsLinearlyReductiveGroupScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearlyReductiveGroupScheme.lean",
+  "statement": "def IsLinearlyReductiveGroupScheme {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.IsInvariantRationalSubspace",
+   "AlgebraicGeometry.IsLinearlyReductiveGroupScheme"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a6c9b652",
+  "group": "Q140",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a6c9b652",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Item node diff vs side-live = lean record + 2 used def stmt_deps; other 9 dep records byte-identical; lean.statement verbatim for item and new node. Clause by clause: alg-closed k; affine finite-type H (IsAffine, LocallyOfFiniteType+QuasiCompact), no extra hyps; s : affine k k ⟶ H with recorded IsSemisimpleGroupSchemePoint; Γ = integer powers s^n; G = reduced closed immersion j with range = closure(Γ), no group structure assumed; conclusion ∃ GrpObj G, IsClosedSubgroupScheme j (IsMonHom, injective points, closed immersion) ∧ Smooth G.hom ∧ IsLinearlyReductiveGroupScheme G ∧ ∃ t, t≫j=s ∧ dense powers. New def-sfb-linearly-reductive-group-scheme: invariance over all Type-u k-algebras via A-span (=U⊗A), nonzero minimal invariant summands, iSupIndep + sup=⊤, empty family for ι=∅; matches Milne Def 12.52 / Cor 13.8 (checked in PDF); not a duplicate (RationalHom.IsSimple/IsSemisimple need CharZero and k-points). Docstrings carry source, blueprint id and the 6 steps; sorry only; proof-plan imports exist. No change, so no compile. Advisory: StandardGroupSchemes.affine (def-sc-gm-ga) comes in through the semisimple-point node."
+ }
+}

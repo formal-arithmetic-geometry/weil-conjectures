@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-native-standard-hom-representatives",
+ "kind": "statement",
+ "title": "Native derived Hom representatives with the actual source normalization",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and a separated finite-type quasi-compact $k_0$-scheme $X$. Let $\\mathcal W$ be the native pro-etale Weil coefficient-module category [def-sf-native-weil-derived-framework], and let $S=\\operatorname{standardHomModel}(\\operatorname{ihomBifunctor})$ [def-sf-standard-bifunctor-hom-model]. There exist a derived bifunctor $H:D(\\mathcal W)^{\\mathrm{op}}\\times D(\\mathcal W)\\to D(\\mathcal W)$, representative data $\\rho:\\operatorname{Representatives}(S.\\mathrm{complex},H)$ [def-sf-ringed-two-injective-models], and natural slice isomorphisms $e_L:H(-,L)\\simeq\\operatorname{derivedHom}(-,L)$. For every K-injective $K$, $(e_L)_{QK}$ followed by the actual $\\operatorname{bifunctorRHomOfComplexObjIso}$ at $\\operatorname{kInjectiveRep}(L)$ equals $H$ of the identity source and $\\operatorname{kInjectiveRepIso}(L)$ followed by $\\rho.\\mathrm{iso}(K,\\operatorname{kInjectiveRep}(L))$. Thus the representative maps compute $H$ for every arbitrary source and K-injective target, are natural in both variables, invert the prescribed quasi-isomorphisms, and the slice identification has the exact native normalization. Only the derived representative extension is asserted; no comparison under forgetting is included.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-standard-bifunctor-hom-model",
+  "def-sf-ringed-two-injective-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95, lemma-RHom-well-defined, and Tag 08J7, section-internal-hom; native product-Hom signs in lean/WeilConjectures/Algebra/Homology/BifunctorHomComplex.lean and native source comparison in lean/WeilConjectures/CategoryTheory/DerivedCategory/BifunctorHom.lean."
+ },
+ "proof": [
+  {
+   "text": "Use the bijection on homotopy classes into a K-injective complex to construct the natural source comparison from each complex K to the actual K-injective representative selected by the inverse of KInjectives.Qh. Applying the fixed-target native Hom functor gives comparison(K,I). For K-injective K this is exactly bifunctorRHomOfComplexObjIso, by the unit/counit equations. For arbitrary K and K-injective I it is invertible: represent K by a quasi-isomorphism into J, and use native source quasi-isomorphism invariance.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-native-hom-precomposition-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Make the already defined fixed-target native derived source functors functorial in the target by postcomposition. The source and target maps commute by the product projection identities. A target homotopy h induces a Hom-complex homotopy whose component at source index p is (-1)^p times postcomposition with h. Expand dS+Sd after each product projection: the source differential terms cancel by naturality and the target terms give the original homotopy equation. Thus the target functor descends to the homotopy category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose this target functor by the inverse equivalence from the derived category to the homotopy category of K-injectives and uncurry to obtain H. For K-injective I, its unit isomorphism identifies the chosen target representative with I. Compose this target isomorphism with comparison(K,I) to obtain rho.iso. Naturality of the source comparison and of the equivalence unit proves both-variable naturality. Under source and target quasi-isomorphisms the corresponding derived arrow is an isomorphism, so rho.naturality expresses the native Hom arrow as conjugation of an isomorphism and proves rho.inverts.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each L use exactly kInjectiveRep L and kInjectiveRepIso L. Apply the target functor to the image of kInjectiveRepIso L under the inverse equivalence followed by the target unit isomorphism. This gives the natural slice isomorphism e_L. Functoriality identifies its component with H of the prescribed target identification followed by the target comparison. For K-injective K, comparison(K,kInjectiveRep L) is the actual native bifunctorRHomOfComplexObjIso, proving the stated normalization by associativity. The standard model has the same underlying complex and maps as the native model.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-hom-precomposition-quasi-iso",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A95 and 08J7, using the homotopy K-injective equivalence (Stacks 070I) rather than a second product localization. The source-comparison implementation follows the proved private SingleAssembly helpers in Sheaf.WeilSheaf.DerivedHomSingleResolution; target descent and assembly by Y3, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived internal Hom bifunctor on module sheaves is computed by product total Hom into any K injective target and is natural in both variables",
+   "results": "8 hits about LightCondensed internal Hom, sheaf cohomology and PresheafOfModules.sheafifyHomEquiv. None has the native continuous-coefficient representative and normalization data.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "12 hits on K-injective complexes, homotopyZero, shifts and cocycle boundaries. They give homotopy infrastructure but no internal-Hom derived bifunctor with both-variable representative squares.",
+   "date": "2026-10-27",
+   "verdict": "Infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|bifunctorHom|IsKInjective",
+   "results": "25 Mathlib hits mostly unrelated Hom names; local rg and direct reading found bifunctorRHomOfComplexObjIso, the proved quasiIso_bifunctorHomMapLeft, and ringedRepresentatives. The first resolves only the source of a fixed slice, and the last concerns SheafOfModules, not the native Mod category. NativeWeilRowHomComparison assumes the item model.",
+   "date": "2026-10-27",
+   "verdict": "No existing normalized two-variable native or underlying representative theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived internal Hom bifunctor on sheaves of modules is computed by Hom complexes into K-injective resolutions and natural in both variables",
+   "results": "8 hits including CategoryTheory.sheafHom, injectiveResolutions and InjectiveResolution.isoRightDerivedObj; these give underived sheaf Hom or bounded-below ordinary injective resolutions, not this unbounded normalized module-object bifunctor.",
+   "date": "2026-10-27",
+   "verdict": "No complete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveHom",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison paragraph of cor-coef-verdier-weil-equivariance.proof.md; native specialization steps 6–8 of lem-sf-ringed-forget-two-injective-hom.",
+   "via": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.NativeStandardHomRepresentatives",
+  "file": "lean/Sheaf/Algebra/Homology/NativeStandardHomRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeStandardHomRepresentatives",
+  "statement": "theorem nativeStandardHomRepresentatives [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] : ∃ H : (DerivedCategory (ProEtaleWeilSheaf k₀ l X))ᵒᵖ × DerivedCategory (ProEtaleWeilSheaf k₀ l X) ⥤ DerivedCategory (ProEtaleWeilSheaf k₀ l X), ∃ ρ : Representatives (standardHomModel (ihomBifunctor k₀ l X)).complex H, ∃ e : ∀ L : DerivedCategory (ProEtaleWeilSheaf k₀ l X), Prod.sectL (DerivedCategory (ProEtaleWeilSheaf k₀ l X))ᵒᵖ L ⋙ H ≅ derivedHom k₀ l X L, ∀ (L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (K : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [K.IsKInjective], (e L).hom.app (op (DerivedCategory.Q.obj K)) ≫ (DerivedCategory.bifunctorRHomOfComplexObjIso (ihomBifunctor k₀ l X) (DerivedCategory.kInjectiveRep L) K).hom = H.map (X := (op (DerivedCategory.Q.obj K), L)) (Y := (op (DerivedCategory.Q.obj K), DerivedCategory.Q.obj (DerivedCategory.kInjectiveRep L))) (𝟙 _, (DerivedCategory.kInjectiveRepIso L).hom) ≫ (ρ.iso K (DerivedCategory.kInjectiveRep L)).hom",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeStandardHomRepresentatives"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T235832-L-1459339",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T013009-L-2357346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

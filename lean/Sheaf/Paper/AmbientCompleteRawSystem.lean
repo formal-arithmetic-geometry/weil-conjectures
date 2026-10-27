@@ -44,10 +44,33 @@ instance (priority := 3000) pbcCompleteCoefficientTorsionFree
 
 /-- The ambient complete coefficient stage before idempotent completion.
 Source: sketch32, lines 1192--1207 (blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
-abbrev pbcAmbientCompleteStage (l : ℕ) [Fact l.Prime]
+def pbcAmbientCompleteStage (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (W : Scheme.{u}) (E : Padic.FiniteCoefficientFields l Ω) : Type (u + 2) :=
   WeilConjectures.PbcRationalComplete l (pbcFiniteField.{u} l Ω E) W
+
+/-- Name the existing category structure on the unchanged raw ambient stage.
+Source: sketch32, lines 1192--1207
+(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+noncomputable instance pbcAmbientCompleteStageCategory
+    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
+    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    (W : Scheme.{u}) (E : Padic.FiniteCoefficientFields l Ω) :
+    Category (pbcAmbientCompleteStage l Ω W E) :=
+  inferInstanceAs (Category (WeilConjectures.PbcRationalComplete
+    l (pbcFiniteField.{u} l Ω E) W))
+
+/-- The existing addition on raw ambient arrows, through the named category instance.
+Source: sketch32, lines 1192--1207
+(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+noncomputable instance pbcAmbientCompleteStagePreadditive
+    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
+    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    (W : Scheme.{u}) (E : Padic.FiniteCoefficientFields l Ω) :
+    Preadditive (pbcAmbientCompleteStage l Ω W E) :=
+  inferInstanceAs (Preadditive (WeilConjectures.PbcRationalComplete
+    l (pbcFiniteField.{u} l Ω E) W))
+
 
 variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
   [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})

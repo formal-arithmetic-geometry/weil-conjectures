@@ -1,0 +1,267 @@
+{
+ "id": "lem-per-tate-maximal-residue-evaluation",
+ "kind": "statement",
+ "title": "Finite residue fields and evaluation at Tate maximal ideals",
+ "statement": "For a complete field $F$ with a nontrivial real-valued nonarchimedean absolute value and $r\\geq0$, write $T_r(F)=F\\langle x_1,\\ldots,x_r\\rangle$ for the ring of series $\\sum_{\\nu\\in\\mathbf N^r}c_\\nu x^\\nu$ such that for every $\\epsilon>0$ only finitely many $|c_\\nu|\\geq\\epsilon$, with coefficientwise addition and Cauchy multiplication. Let $\\mathfrak n$ be a maximal proper ideal of $T_r(F)$, and put $L=T_r(F)/\\mathfrak n$. Then $L$ has finite degree over $F$, meaning it is a finite $F$-module [def-weil-finitely-generated-module]. It carries a unique real-valued nonarchimedean absolute value extending that of $F$, and is complete for it. Put $a_i=x_i\\bmod\\mathfrak n\\in L$; then $|a_i|\\leq1$. For every $h=\\sum_\\nu c_\\nu x^\\nu\\in T_r(F)$ the quotient map is given by the convergent sum $$h\\bmod\\mathfrak n=\\sum_\\nu c_\\nu a^\\nu\\in L.$$ This includes $r=0$, when $L=F$ and $\\mathfrak n=0$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Conrad, Several approaches to non-archimedean geometry, §1.1 preliminary finite-extension paragraph, Exercise 1.1.4, Theorem 1.1.5(1), and the paragraph immediately following it (PDF pp.2–4); read online 2026-10-24, archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "First prove by induction on $r$ that all maximal residue fields are finite over $F$. For $r=0$, $T_0(F)=F$, whose only maximal proper ideal is zero. Suppose $r>0$ and the assertion holds for $r-1$. By [lem-trf-restricted-series-gauss-completion] the Tate rings have their complete Gauss norms and admit regrouping in the last variable. The variable $x_r$ is nonzero and is not a unit: taking the constant coefficient is a ring map to $F$ sending $x_r$ to zero. Hence $T_r(F)$ is not a field. Its maximal ideal $\\mathfrak n$ cannot be zero (otherwise its quotient would make this ring a field), so choose $0\\ne f\\in\\mathfrak n$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Conrad §1.1, Theorem 1.1.5(1), preliminary finite-extension paragraph and Exercise 1.1.4 (PDF pp.2–4). Agent reconstruction of the omitted induction and boundedness argument; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-per-tate-triangular-distinguished-coordinate] to $f$. Replace $\\mathfrak n$ by $\\sigma(\\mathfrak n)$; the induced quotient isomorphism fixes $F$, so finiteness for this quotient proves finiteness for the original one. Write $A=T_{r-1}(F)$, $D=A\\langle x_r\\rangle$ and $g=v\\sigma(f)\\in\\sigma(\\mathfrak n)$ with distinguished degree $d$. By [lem-trf-tate-weierstrass-norm-division] the ideal $(g)$ equals $(w)$ for a monic $w\\in A[x_r]$ of degree $d$, and division represents every class modulo $(w)$ by a polynomial of degree less than $d$. If $d=0$, $g$ is a unit, contradicting properness of $\\sigma(\\mathfrak n)$. Thus $d\\ge1$, and the images of $1,x_r,\\ldots,x_r^{d-1}$ generate the field $L^{\\prime}=D/\\sigma(\\mathfrak n)$ as an $A$-module.",
+   "uses": [
+    "lem-per-tate-triangular-distinguished-coordinate",
+    "lem-trf-tate-weierstrass-norm-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Conrad §1.1, Theorem 1.1.5(1), preliminary finite-extension paragraph and Exercise 1.1.4 (PDF pp.2–4). Agent reconstruction of the omitted induction and boundedness argument; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $B$ be the image of $A$ in $L^{\\prime}$. The same generators make $L^{\\prime}$ a finite $B$-module, so [lem-weil-pbc-finite-algebra-is-integral] makes every element integral over $B$. For $0\\ne b\\in B$, apply this to $b^{-1}\\in L^{\\prime}$: a relation $(b^{-1})^e+c_{e-1}(b^{-1})^{e-1}+\\cdots+c_0=0$, $e\\ge1$, gives $b^{-1}=-c_{e-1}-c_{e-2}b-\\cdots-c_0b^{e-1}\\in B$. Thus $B$ is a field and $\\ker(A\\to L^{\\prime})$ is maximal. By the induction hypothesis $B$ has a finite $F$-spanning set $b_1,\\ldots,b_t$. Products $b_jx_r^i$, $1\\le j\\le t$, $0\\le i<d$, span $L^{\\prime}$ over $F$: expand first over $B$ using step 2, and then each coefficient over $F$. This completes the induction and proves the stated finite-module assertion for $L$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Conrad §1.1, Theorem 1.1.5(1), preliminary finite-extension paragraph and Exercise 1.1.4 (PDF pp.2–4). Agent reconstruction of the omitted induction and boundedness argument; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Every element of the finite-dimensional field extension $L/F$ is algebraic: powers $1,z,\\ldots,z^e$ are linearly dependent once $e$ is the size of a finite basis. Apply [lem-trf-spectral-norm-algebraic-extension] to equip $L$ with its multiplicative nonarchimedean absolute value extending that of $F$. The compatibility with scalar multiplication in that statement makes $L$ a normed $F$-vector space. By [lem-per-finite-normed-space-complete] it is complete. By [lem-sfb-algebraic-absolute-value-unique] any other extending absolute value agrees with this one. This applies also to inseparable extensions.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-per-finite-normed-space-complete",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Conrad §1.1, Theorem 1.1.5(1), preliminary finite-extension paragraph and Exercise 1.1.4 (PDF pp.2–4). Agent reconstruction of the omitted induction and boundedness argument; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $\\pi:T_r(F)\\to L$ be the quotient map, now using the original coordinates. The isometric finite extension $F\\hookrightarrow L$ satisfies [lem-per-tate-finite-scalar-extension], which identifies $T_r(F)\\otimes_F L$ with $T_r(L)$ by $h\\otimes\\lambda\\mapsto\\lambda j(h)$, where $j$ applies the inclusion to coefficients. The bilinear map $(h,\\lambda)\\mapsto\\pi(h)\\lambda$ induces a map $\\mu:T_r(F)\\otimes_F L\\to L$ by [def-weil-pbc-module-tensor-product]. On pure tensors it preserves products, since $\\pi(hh^{\\prime})\\lambda\\lambda^{\\prime}=\\pi(h)\\lambda\\pi(h^{\\prime})\\lambda^{\\prime}$; it preserves $1$ and scalar multiplication as well. Pure tensors generate, so distributivity proves that $\\mu$ is a unital $L$-algebra map. Compose with the inverse scalar-extension isomorphism to obtain $\\chi:T_r(L)\\to L$ with $\\chi(j(h))=\\pi(h)$. By [lem-trf-restricted-series-gauss-completion], $T_r(L)$ is a complete normed $L$-algebra with $\\|1\\|=1$. Therefore [lem-per-banach-character-norm-bound] gives $|\\pi(h)|\\le\\|j(h)\\|=\\|h\\|$, the equality following coefficientwise from the isometry $F\\hookrightarrow L$. In particular $|a_i|=|\\pi(x_i)|\\le1$.",
+   "uses": [
+    "lem-per-tate-finite-scalar-extension",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-per-banach-character-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Conrad §1.1, Theorem 1.1.5(1), preliminary finite-extension paragraph and Exercise 1.1.4 (PDF pp.2–4). Agent reconstruction of the omitted induction and boundedness argument; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $h=\\sum_\\nu c_\\nu x^\\nu$, put $h_N=\\sum_{|\\nu|\\le N}c_\\nu x^\\nu$. By [lem-trf-restricted-series-gauss-completion], $\\|h-h_N\\|\\to0$. Step 5 gives $|\\pi(h)-\\pi(h_N)|\\le\\|h-h_N\\|\\to0$. For a polynomial, the homomorphism identities give $\\pi(h_N)=\\sum_{|\\nu|\\le N}c_\\nu a^\\nu$. Thus these sums converge to $\\pi(h)$. They also define the unordered convergent sum in the statement: since $|a_i|\\le1$, $|c_\\nu a^\\nu|\\le|c_\\nu|$, so outside any sufficiently large finite exponent set every finite tail has norm less than a prescribed $\\epsilon>0$ by the strong triangle inequality. Completeness of $L$ gives convergence, and the degree truncations have that same limit. For $r=0$ there is one exponent, the empty tuple; the sum is the constant coefficient and the quotient is $F/0=F$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Conrad §1.1, Theorem 1.1.5(1), preliminary finite-extension paragraph and Exercise 1.1.4 (PDF pp.2–4). Agent reconstruction of the omitted induction and boundedness argument; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-per-banach-character-norm-bound",
+  "lem-per-finite-normed-space-complete",
+  "lem-per-tate-finite-scalar-extension",
+  "lem-per-tate-triangular-distinguished-coordinate",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-trf-tate-weierstrass-norm-division",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "§1.1, PDF pp.2–4. Explicit induction from Weierstrass division and scalar-extension character bound reconstructed by Q40; Conrad states the analytic consequences but omits the induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The residue field at any maximal ideal of a Tate algebra over a complete nonarchimedean field is a finite complete extension and the quotient map is evaluation at a point of the closed unit polydisc",
+   "results": "{\"t\": \"2026-10-24T07:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"The residue field at any maximal ideal of a Tate algebra over a complete nonarchimedean field is a finite complete extension and the quotient map is evaluation at a point of the closed unit polydisc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"ArchimedeanClass.FiniteResidueField.instField\", \"Valued.ResidueField\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"ArchimedeanClass.FiniteResidueField\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsLocalRing.finite_residueField_of_compactSpace\"], \"digest\": \"c783677a30d9bf46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal power series, valuation residue fields, or quasi-finite algebras; none proves the Tate maximal-ideal theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"TateAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal power series, valuation residue fields, or quasi-finite algebras; none proves the Tate maximal-ideal theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|affinoid.*residue|residue.*affinoid",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|RestrictedPowerSeries|affinoid.*residue|residue.*affinoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal power series, valuation residue fields, or quasi-finite algebras; none proves the Tate maximal-ideal theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra maximal ideal residue field finite extension bounded evaluation coordinates",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"leansearch\", \"query\": \"Tate algebra maximal ideal residue field finite extension bounded evaluation coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"instFiniteResidueField\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\"], \"digest\": \"18fbb099e04a2d5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal power series, valuation residue fields, or quasi-finite algebras; none proves the Tate maximal-ideal theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from restricted convergent power series to its maximal residue field is bounded and evaluates the series at elements of absolute value at most one",
+   "results": "{\"t\": \"2026-10-24T07:04:09Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from restricted convergent power series to its maximal residue field is bounded and evaluates the series at elements of absolute value at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.exists_Polynomial_intValuation_lt\", \"PowerSeries.residueFieldOfPowerSeries\", \"LaurentSeries.exists_ratFunc_val_lt\", \"PowerSeries.le_gaussNorm\", \"PowerSeries.IsRestricted.convergenceSet_BddAbove\", \"PowerSeries.HasEval\", \"PowerSeries.IsRestricted.isRestricted_iff\", \"PowerSeries.gaussNorm\"], \"digest\": \"90bf719dc70f840f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal power series, valuation residue fields, or quasi-finite algebras; none proves the Tate maximal-ideal theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRestricted|restricted.*(tensor|finite|regular|maximal)|residueFieldOfPowerSeries",
+   "results": "{\"t\": \"2026-10-24T07:06:04Z\", \"tool\": \"grep\", \"query\": \"IsRestricted|restricted.*(tensor|finite|regular|maximal)|residueFieldOfPowerSeries\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\"], \"digest\": \"afdc74bddcbd311c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal power series, valuation residue fields, or quasi-finite algebras; none proves the Tate maximal-ideal theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate algebra residue field at a maximal ideal is finite and quotient evaluates convergent power series at bounded coordinates",
+   "results": "{\"t\": \"2026-10-24T07:38:05Z\", \"tool\": \"leanfinder\", \"query\": \"Tate algebra residue field at a maximal ideal is finite and quotient evaluates convergent power series at bounded coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ArchimedeanClass.FiniteResidueField\", \"instFiniteResidueField\", \"PowerSeries.residueFieldOfPowerSeries\", \"Valued.ResidueField\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"ArchimedeanClass.FiniteResidueField.mk\"], \"digest\": \"fad021147be927c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal power series residue fields and valuation residue fields do not prove the Tate maximal-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RestrictedPowerSeries\"",
+   "results": "{\"t\": \"2026-10-24T07:37:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"RestrictedPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal power series residue fields and valuation residue fields do not prove the Tate maximal-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid.*residue|restricted.*maximal",
+   "results": "{\"t\": \"2026-10-24T07:37:57Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|affinoid.*residue|restricted.*maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\"], \"digest\": \"de74313ad702c499\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal power series residue fields and valuation residue fields do not prove the Tate maximal-ideal assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal ideal of restricted multivariate power series algebra finite residue field evaluation",
+   "results": "{\"t\": \"2026-10-24T07:37:57Z\", \"tool\": \"leansearch\", \"query\": \"Maximal ideal of restricted multivariate power series algebra finite residue field evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.maximalIdeal_eq_span_X\", \"PowerSeries.residueFieldOfPowerSeries\", \"MvPolynomial.evalᵢ\", \"instFiniteResidueField\", \"MvPowerSeries.eval₂\", \"MvPowerSeries.aeval\", \"Ideal.IsMaximal.comap_piEvalRingHom\", \"PowerSeries.aeval\"], \"digest\": \"1c1c135b1323f45e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal power series residue fields and valuation residue fields do not prove the Tate maximal-ideal assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-affinoid-residual-conormal-injective",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Analytic prerequisite: finite residue field and bounded evaluation.",
+   "via": [
+    "lem-per-affinoid-residual-conormal-injective",
+    "lem-per-geometric-affinoid-jacobian-unit",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tate-maximal-residue-evaluation",
+  "worker": "stage1",
+  "summary": "Proved finite residue degree by induction using triangular distinguished coordinates and existing Weierstrass division; proved bounded evaluation by finite scalar extension and the Mathlib character norm bound. Reused spectral-norm existence and uniqueness. Added one analytic coordinate lemma and two Mathlib leaves; no statement change.",
+  "blueprint": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Analytic prerequisite: finite residue field and bounded evaluation. Steps 1–3 supply finite residue degree, step 4 the complete field structure, and steps 5–6 bounded evaluation for this inherited analytic prerequisite; current ancestor Step 3 is duality and has no separate analytic sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-restricted-series-gauss-completion",
+    "why": "Gauss completeness, norm axioms, regrouping and polynomial density are generic analytic tools already in the DAG; the perverse unit has no such analytic statement."
+   },
+   {
+    "node": "lem-trf-tate-weierstrass-norm-division",
+    "why": "Weierstrass preparation and finite remainders provide the induction step in the inherited analytic branch; this is a generic analytic tool, not a replacement of a perverse-unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-weierstrass-norm-division"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-44fcf168e",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-44fcf168e (reviewer sub-agent of L); spot-checked: I read the item, the 6 steps, the 3 new nodes, every cited statement and Conrad aws.pdf §1.1 (fetched, pdftotext pp.2-5: finite-extension paragraph, Ex 1.1.3-1.1.4, Thm 1.1.5(1)). The statement is unchanged and matches the source. Steps 1-3: induction on r with base, hypothesis and step stated (r=0 base; x_r is a nonunit via the constant-coefficient map), Weierstrass division with hypotheses exactly as the new coordinate lemma produces them (d=0 excluded by properness), and 00GK integrality to show B is a field. Step 4: spectral-norm leaf, completeness leaf, uniqueness leaf; no separability needed. Step 5: the finite scalar-extension node applies once step 4 gives an isometric complete finite extension, and the character bound is applied over L to T_r(L), which correctly gives continuity. Step 6: truncation convergence plus the ultrametric tail bound, with r=0 covered. New nodes: the coordinate lemma (BGR 5.2.4-type normalization plus multiplicative Gauss norm) is true; I tested it on constants, r=1, f=x_1 and f=x_1x_2, and it is not a duplicate of the trf closed-point-comparison, Weierstrass-division or distinguished-presentation nodes. The leaves AlgHom.norm_apply_le_self (Spectrum.lean:409-436) and FiniteDimensional.complete (FiniteDimension.lean:502-511) are one-line specializations with their hypotheses read, and neither duplicates an existing node (lem-weil-l-adic-extension-complete covers Q_l only). Batch 5: the dependency closures of lem-trf-restricted-series-gauss-completion (4 nodes), lem-trf-tate-weierstrass-norm-division (6) and lem-trf-spectral-norm-algebraic-extension (2, a Mathlib leaf) contain only generic analytic and definition nodes and never reach the trace formula, Poincare duality or batch-4 targets. They are outside the assumed statements, so they are accepted. The worker's tool_uses for Gauss completion and Weierstrass division are accepted as generic analytic tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateMaximalResidueEvaluation",
+  "declaration": "RestrictedSeries.tate_maximal_residue_evaluation",
+  "declarations": [
+   "RestrictedSeries.tateResidueScalar",
+   "RestrictedSeries.tateResidueCoordinate",
+   "RestrictedSeries.tate_maximal_residue_evaluation"
+  ],
+  "file": "lean/Sheaf/RingTheory/TateMaximalResidueEvaluation.lean",
+  "statement": "theorem tate_maximal_residue_evaluation (F : Type u) [NormedField F] [IsUltrametricDist F] [CompleteSpace F] (hF : ∃ c : F, c ≠ 0 ∧ ‖c‖ ≠ 1) (r : ℕ) (n : Ideal ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) [n.IsMaximal] : @Module.Finite F _ _ _ (tateResidueScalar F r n).toAlgebra.toModule ∧ (∃ v : AbsoluteValue (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n) ℝ, (∀ c : F, v (tateResidueScalar F r n c) = ‖c‖) ∧ IsNonarchimedean v ∧ @CompleteSpace _ v.toNormedRing.toUniformSpace ∧ (∀ w : AbsoluteValue (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n) ℝ, (∀ c : F, w (tateResidueScalar F r n c) = ‖c‖) → w = v) ∧ (∀ i : Fin r, v (tateResidueCoordinate F r n i) ≤ 1) ∧ (∀ h : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))), @HasSum _ (Fin r →₀ ℕ) _ v.toNormedRing.toUniformSpace.toTopologicalSpace (fun ν ↦ tateResidueScalar F r n (MvPowerSeries.coeff ν h.val) * ν.prod (fun i e ↦ tateResidueCoordinate F r n i ^ e)) (Ideal.Quotient.mk n h) (SummationFilter.unconditional (Fin r →₀ ℕ)))) ∧ (r = 0 → n = ⊥ ∧ Function.Bijective (tateResidueScalar F r n))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45a7238e2",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item node changed only by adding stmt_dep def-trf-restricted-series-presentation (landed; its RestrictedSeries.constants is used through tateResidueScalar). Hypotheses (NormedField, IsUltrametricDist, CompleteSpace, nontrivial hF, r : ℕ, n.IsMaximal) match the node with nothing stronger. The ring is Mathlib IsRestricted.subring at radius 1, which is the finitely-many-|c_ν|≥ε condition with the Cauchy product. Conclusions: Module.Finite F via the actual quotient∘constants algebra; ∃ AbsoluteValue v on the quotient that extends ‖·‖, is nonarchimedean and is complete in its uniform structure; uniqueness over all extending w (equivalent to the node, since an extension of a nonarchimedean value is nonarchimedean); v(a_i) ≤ 1; unconditional HasSum in the v-topology to Ideal.Quotient.mk n h; r=0 gives n=⊥ and a bijective scalar map. Helpers are real canonical maps (no choice) with source and blueprint docstrings. lean.statement is verbatim; proof is sorry with the 6-step docstring; plain imports match the Mathlib proof-dep leaves. No duplicate in Mathlib or the project (AffinoidPolynomialClosedPointComparison and GrauertRemmert are distinct). Dependency records are identical to live. No file changed, so no compile."
+ }
+}

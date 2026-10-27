@@ -1,0 +1,367 @@
+{
+ "id": "lem-per-noetherian-formal-affine-coherent-modules",
+ "kind": "statement",
+ "title": "Finite modules and coherent sheaves on a Noetherian formal affine",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and $K\\subseteq R$ a finitely generated ideal such that $R\\to\\varprojlim_{n\\geq1}R/K^n$ is an isomorphism [def-weil-pbc-adic-completion]. Put $T=\\operatorname{Spf}(R,K)$ [def-per-adic-formal-geometry], with space $V(K)$ and structure sheaf $\\varprojlim_n\\mathcal O_{\\operatorname{Spec}(R/K^n)}$. For a finite $R$-module $M$ [def-weil-finitely-generated-module], define $M^\\triangle=\\varprojlim_n\\widetilde{M/K^nM}$ on $V(K)$, where the associated sheaves [lem-weil-pbc-spec-module-tilde-sections] are regarded as sheaves on this common space. A module sheaf on $T$ is coherent when it is locally finitely generated and kernels of maps from finite free module sheaves are locally finitely generated, the ringed-space version of [pqf-def-coherent]. Then $M\\mapsto M^\\triangle$ is an exact equivalence from finite $R$-modules and $R$-linear maps to coherent $\\mathcal O_T$-modules and their module maps, with quasi-inverse $\\mathcal F\\mapsto\\Gamma(T,\\mathcal F)$. Its unit $M\\to\\Gamma(T,M^\\triangle)$ is the map to compatible residues. For finite $M,N$ the canonical multiplication-compatible maps $R^\\triangle\\to\\mathcal O_T$ and $M^\\triangle\\otimes_{\\mathcal O_T}N^\\triangle\\to(M\\otimes_RN)^\\triangle$ are isomorphisms [def-pur-sheaf-tensor-product, def-weil-module-base-change]. For every $s\\in R$, restriction to $D(s)\\cap V(K)$ identifies the section module with $\\varprojlim_n(M/K^nM)_s$, with the canonical quotient-localization restrictions. These identifications are natural in module maps.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 0AHY (section-formal-schemes-EGA), completed-localization construction. EGA I, 10.10.2 and 10.10.5, finite-module/coherent-module correspondence (archival copy WANTED). The available EGA III.1 Scholie 5.1.7 recalls I, 10.11.3-4 for coherent sheaves and compatible quotient systems; Proposition 4.8.8 recalls I, 10.10.2.3 for Hom."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-per-adic-formal-geometry",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-coherent",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-module-base-change",
+  "def-pur-sheaf-inverse-limit",
+  "def-per-adic-principal-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "For the local calculations allow any Noetherian ring $A$, finitely generated ideal $I$, and finite $A$-module $P$, without assuming $A$ complete. On $V(I)$ put $P^\\triangle=\\varprojlim_n\\widetilde{P/I^nP}$ and $\\mathcal O=\\varprojlim_n\\mathcal O_{\\operatorname{Spec}(A/I^n)}$. Limits of sheaves are computed on sections. Therefore, for $U_a=D(a)\\cap V(I)$,\n$$\\Gamma(U_a,P^\\triangle)=\\varprojlim_n(P/I^nP)_a=\\varprojlim_n P_a/(IA_a)^nP_a.$$\nThe second equality sends the residue of $p/a^e$ to the same fraction; its inverse is well defined because a fraction vanishes precisely when some further power of $a$ kills its numerator modulo $I^nP$. The tilde section theorem gives the restrictions to $U_{ab}$ as quotient-localization maps. Maps of modules act on these fractions and then coordinatewise on the limit. In particular $A^\\triangle=\\mathcal O$, including multiplication, and finite free modules give the corresponding finite free sheaves (a compatible tuple is a finite tuple of compatible sequences).",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY (section-formal-schemes-EGA), completed-localization formula; modules version using Tags 01HV and 03DB/03CO"
+   }
+  },
+  {
+   "text": "In the notation of Step 1 the operation $P\\mapsto P^\\triangle$ is exact on finite modules. Indeed, localize a short exact sequence at $a$: localization is tensor with $A_a$, localization is flat, and flat tensor preserves exactness. The localized modules remain finite: the fractions of a finite generating list generate. The ring $A_a$ is Noetherian, so exactness of completion for finite modules applies to this localized sequence and $IA_a$. Step 1 identifies the resulting exact sequence of completions with the sequence of sections on $U_a$. The $U_a$ form a basis, so this gives exactness of sheaves: a section in a kernel has, on a basic neighbourhood, a preimage under the preceding map; injectivity is also checked on that basis. Arbitrary finite-module kernels and images are finite by the Noetherian submodule theorem, so factoring a map through its image gives preservation of its kernel and cokernel as well.",
+   "uses": [
+    "lem-weil-pbc-localization-module-tensor",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization), 00HT (lemma-flat-localization), 00HD (lemma-flat), 00FN (lemma-Noetherian-permanence), 00MB (lemma-completion-flat), and 00IK (lemma-Noetherian-basic)"
+   }
+  },
+  {
+   "text": "Return to the complete ring $R$, and write $U_s=D(s)\\cap V(K)$ and $C_s=\\varprojlim_n(R/K^n)_s$. The principal-chart theorem identifies $U_s$ with $\\operatorname{Spf}(C_s,KC_s)$ and makes $C_s$ Noetherian and complete. The finite-module tensor/completion theorem over $R_s$ gives, naturally,\n$$\\Gamma(U_s,M^\\triangle)\\cong C_s\\otimes_{R_s}M_s\\cong C_s\\otimes_R M.$$\nThe last map sends $c\\otimes(m/s^e)$ to $(c/s^e)\\otimes m$, with inverse $c\\otimes m\\mapsto c\\otimes(m/1)$; $s$ is invertible in $C_s$. The quotient projections of the completion of $R_s$ give $C_s/K^nC_s\\cong(R/K^n)_s$. Tensoring this identity with $M$ gives the quotient comparison for $C_s\\otimes_RM$. Thus $M^\\triangle|_{U_s}$ is the completed associated sheaf for the finite $C_s$-module $C_s\\otimes_RM$: its quotient sheaves and transitions agree at every level. These comparisons send original elements to their residues, so agree with restriction on smaller principal opens.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-localization-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA (lemma-completion-tensor), 05GG (lemma-hathat-finitely-generated); formal-spaces.tex Tag 0AHY for charts"
+   }
+  },
+  {
+   "text": "For a finite module $P$ over any complete Noetherian chart ring $A$, let $I$ be its ideal of definition. For $n\\geq1$, apply Step 2 to $0\\to I^nP\\to P\\to P/I^nP\\to0$. Choose finite generators $b_1,\\ldots,b_t$ of $I^n$. The surjection $P^{\\oplus t}\\to I^nP$, $(p_j)\\mapsto\\sum b_jp_j$, stays surjective by Step 2. Thus the image of $(I^nP)^\\triangle\\to P^\\triangle$ is exactly the subsheaf $I^nP^\\triangle$ generated by these multiplications. Since $P/I^nP$ is killed by $I^n$, its completed associated sheaf is its ordinary associated sheaf on $\\operatorname{Spec}(A/I^n)$: its quotient tower is constant from level $n$ onwards. Hence\n$$P^\\triangle/I^nP^\\triangle\\cong\\widetilde{P/I^nP}.$$\nThe map is the $n$th residue projection and respects quotient transitions. Taking $P=A$ gives $\\mathcal O/I^n\\mathcal O=\\mathcal O_{\\operatorname{Spec}(A/I^n)}$. This uses exactness before completion; it does not assert exactness of each reduction functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), via Step 2; the quotient identification is the defining eventually constant inverse system"
+   }
+  },
+  {
+   "text": "The structure sheaf $\\mathcal O_T$ is coherent in the ringed-space sense. It is generated by $1$. Given a map $\\mathcal O_W^{\\oplus a}\\to\\mathcal O_W$ on an arbitrary open $W$ and $x\\in W$, choose a principal chart $U_s\\subseteq W$ containing $x$. Its entries lie in $\\Gamma(U_s,\\mathcal O_T)=C_s$. Form the corresponding map $C_s^{\\oplus a}\\to C_s$. Its kernel $Q$ is finite, since $C_s$ is Noetherian. Step 2 on $\\operatorname{Spf}C_s$ identifies the sheaf kernel with $Q^\\triangle$. A finite generating surjection $C_s^{\\oplus b}\\to Q$ becomes a sheaf surjection by Step 2, so this kernel is locally finitely generated. This verifies the definition on every open. Coherence of finite direct sums and cokernels on any ringed space now makes every cokernel of a finite matrix between finite free $\\mathcal O_T$-modules coherent.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01BV (definition-coherent), 01BY (lemma-coherent-abelian); kernel computation from algebra.tex Tag 00MA"
+   }
+  },
+  {
+   "text": "Every finite $R$-module $M$ has a finite presentation $R^{\\oplus a}\\to R^{\\oplus b}\\to M\\to0$: choose finite generators, then finite generators of the kernel using the Noetherian submodule theorem. Step 2 gives $\\mathcal O_T^{\\oplus a}\\to\\mathcal O_T^{\\oplus b}\\to M^\\triangle\\to0$. Step 5 makes its cokernel $M^\\triangle$ coherent. The same argument applies to every complete Noetherian chart ring. Hence the functor lands in the claimed category and is exact on the underlying module sheaves by Step 2.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BY (lemma-coherent-abelian); algebra.tex Tag 00IK (lemma-Noetherian-basic) for the finite presentation"
+   }
+  },
+  {
+   "text": "For a coherent $\\mathcal O_T$-module $\\mathcal F$, choose local finite generators. Coherence makes the kernel of the resulting finite free surjection locally finitely generated, so shrinking gives a finite presentation $\\mathcal O_W^{\\oplus a}\\xrightarrow{B}\\mathcal O_W^{\\oplus b}\\to\\mathcal F|_W\\to0$. Restrict further to a principal chart $U_s\\subseteq W$. All entries of $B$ lie in $C_s=\\Gamma(U_s,\\mathcal O_T)$. Put $P=\\operatorname{coker}(B:C_s^{\\oplus a}\\to C_s^{\\oplus b})$, a finite $C_s$-module. By Step 2 its completed associated sheaf is the cokernel of this same sheaf matrix; the cokernel universal properties give $\\mathcal F|_{U_s}\\cong P^\\triangle$. This proves a local conclusion only: no global finite presentation or surjectivity of global sections of $\\mathcal F$ has been assumed.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-per-formal-affine-principal-refinement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BW (lemma-coherent-finite-presentation), with the presentation argument written out; formal-spaces.tex Tag 0AHY for charts"
+   }
+  },
+  {
+   "text": "Set $\\mathcal F_n=\\mathcal F/K^n\\mathcal F$ on $V(K)$. Step 4 makes it a module over $\\mathcal O_{X_n}$, for $X_n=\\operatorname{Spec}(R/K^n)$. On a chart from Step 7 it is $\\widetilde{P/K^nP}$ by Step 4, so is locally finitely presented on $X_n$. It is therefore quasi-coherent by the finite-presentation theorem, and of finite type, hence coherent since $R/K^n$ is Noetherian. A quotient ring is Noetherian by lifting any ideal to $R$ and reducing a finite generating list. Quotient identities give $\\mathcal F_{n+1}/K^n\\mathcal F_{n+1}=\\mathcal F_n$. The canonical map $\\mathcal F\\to\\varprojlim_n\\mathcal F_n$ is an isomorphism: on the charts of Step 7 it is $P^\\triangle=\\varprojlim_n\\widetilde{P/K^nP}$ by Step 4 and the definition of $P^\\triangle$. Restriction commutes with this limit since limits are computed on sections. These identifications preserve the actual projections.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ (lemma-coherent-Noetherian); modules.tex Tag 01BO (lemma-finite-presentation-quasi-coherent). EGA III.1 Scholie 5.1.7 recalls the quotient-system characterization; local reconstruction supplied here"
+   }
+  },
+  {
+   "text": "Let $j_n:X_n\\hookrightarrow X=\\operatorname{Spec}R$ be the closed immersions. The closed-immersion coherent equivalence makes $j_{n,*}\\mathcal F_n$ coherent $\\mathcal O_X$-modules killed by $\\widetilde K^n$. Their quotient transitions and the identities of Step 8 make them an object of $\\mathit{Coh}(X,\\widetilde K)$. Apply the affine inverse-system theorem with $A=R$, $I=K$. The hypothesis identifies $R^\\wedge$ canonically with $R$, so it yields a finite $R$-module\n$$M=\\varprojlim_n\\Gamma(X_n,\\mathcal F_n),$$\nwith compatible isomorphisms $M/K^nM\\cong\\Gamma(X_n,\\mathcal F_n)$ and corresponding sheaf isomorphisms $\\widetilde{M/K^nM}\\cong\\mathcal F_n$ on $X_n$. Here use full faithfulness of closed pushforward to pass from its system isomorphisms on $X$ to those on $X_n$. Taking limits and using Step 8 gives $M^\\triangle\\cong\\mathcal F$. Sectionwise limits identify $M$ with $\\Gamma(T,\\mathcal F)$, including its $R$-action: multiplication on each coordinate factors through $R/K^n$. On a principal open of $X$, the closed pushforward of $\\widetilde{M/K^nM}$ has sections $(M/K^nM)_s$, the same as the associated sheaf of that module regarded as an $R$-module; thus the inverse system of 087W is precisely this pushed-forward system.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 087T (lemma-i-star-equivalence), 0EHN (section-coherent-formal), 087W (lemma-inverse-systems-affine)"
+   }
+  },
+  {
+   "text": "For finite $M,N$, a sheaf map $\\alpha:M^\\triangle\\to N^\\triangle$ gives compatible maps on quotients by $K^n$, which by Step 4 are $\\widetilde{M/K^nM}\\to\\widetilde{N/K^nN}$. Push them to $X$ and apply the morphism part of the affine inverse-system equivalence: there is a unique $R$-linear $u:M\\to N$ inducing these quotient maps. Its source and target are indeed $M,N$, since finite modules over the complete Noetherian ring $R$ are complete. The maps $u^\\triangle$ and $\\alpha$ agree after every projection to $\\widetilde{N/K^nN}$ and are equal by the sheaf-limit universal property. Conversely $u^\\triangle$ has these reductions by construction. This proves full faithfulness, and Step 9 proves essential surjectivity. The unit is precisely\n$$M\\to\\Gamma(T,M^\\triangle)=\\varprojlim_n M/K^nM,\\qquad m\\mapsto(m\\bmod K^nM)_n,$$\nan isomorphism by finite-module completeness. Step 9 and this unit identify the inverse with global sections on objects and maps. Every identification is natural since each quotient projection commutes with module maps.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 087W (lemma-inverse-systems-affine), including maps; algebra.tex Tag 00MA (lemma-completion-tensor). EGA III.1 Proposition 4.8.8 recalls EGA I 10.10.2.3 for Hom"
+   }
+  },
+  {
+   "text": "Fix a finite presentation $R^{\\oplus a}\\xrightarrow{B}R^{\\oplus b}\\to M\\to0$. Ordinary sheaf tensor with $N^\\triangle$ preserves cokernels and finite sums, so $M^\\triangle\\otimes N^\\triangle$ is the cokernel of $B:(N^\\triangle)^{\\oplus a}\\to(N^\\triangle)^{\\oplus b}$. Ordinary module tensor is right exact and gives $N^{\\oplus a}\\xrightarrow{B}N^{\\oplus b}\\to M\\otimes_RN\\to0$. All modules here are finite (pairwise tensors of finite generating lists generate). Step 2 therefore identifies $(M\\otimes_RN)^\\triangle$ with the cokernel of the same sheaf matrix. The canonical tensor map is the resulting isomorphism: on the free presentation generators it sends $e_i\\otimes n$ to their pairwise residue tensors at every level. Thus it is the specified multiplication-compatible map, natural in both variables. The unit comparison $R^\\triangle\\to\\mathcal O_T$ was the equality of inverse-limit ring sheaves in Step 1. Coherence under kernels and cokernels makes the exact sequences of module sheaves in Step 2 the same exact sequences in the coherent category. This proves exactness of the equivalence; Steps 1 and 3 already give every principal restriction and its naturality.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP (lemma-tensor-commute-colimits), part (2); algebra.tex Tag 00DF (lemma-tensor-product-exact); modules.tex Tag 01BY (lemma-coherent-abelian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-formal-affine-principal-refinement",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Assembly from Tags 087W and 087T, with completed-localization and finite-presentation arguments supplied explicitly using algebra.tex 00MA/00MB and modules.tex 01BY; compared with EGA III.1 Proposition 4.8.8 and Scholie 5.1.7. EGA I 10.10.2/10.10.5 is WANTED; this is not a transcription of its unavailable proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-noetherian-formal-affine-coherent-modules: finite modules over a complete noetherian adic ring are equivalent to coherent sheaves on its formal spectrum, by completed associated sheaf and global sections",
+   "results": "Hits read: AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormalScheme\", \"Coherent\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bFormalScheme\\b|\\bSpf\\b|formal.{0,30}coherent|coherent.{0,30}formal",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-noetherian-formal-affine-coherent-modules: coherent modules on the formal spectrum of a complete Noetherian ring are equivalent to finitely generated modules with exact completed sheafification",
+   "results": "Hits read: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, isNoetherian_of_isNoetherianRing_of_finite, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, Module.finitePresentation_of_finite, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing, Module.finitePresentation_iff_finite. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-noetherian-formal-affine-coherent-modules: global sections and completed tilde give an exact equivalence for coherent modules on an affine noetherian formal scheme",
+   "results": "Hits read: AdicCompletion.map_exact, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.noetherianSpace_of_isAffine. Ordinary schemes, algebraic completion or general module facts; none states coherent sheaves on a formal spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections give an exact equivalence between coherent sheaves on an affine formal scheme and finite modules over its complete noetherian ring",
+   "date": "2026-10-24",
+   "results": "Hits read: AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.AffineScheme.ΓIsEquiv, AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.AffineScheme.Γ. These concern ordinary schemes, forgetful sheaf functors, or algebraic completion, not coherent sheaves on a formal spectrum.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite modules over a complete Noetherian adic ring are equivalent to coherent module sheaves on its formal spectrum, with exact completed associated sheaf and global sections",
+   "date": "2026-10-24",
+   "results": "Hits read: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.map_exact, IsAdicComplete, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.flat_of_isNoetherian. These concern ordinary schemes, forgetful sheaf functors, or algebraic completion, not coherent sheaves on a formal spectrum.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed sheafification of finite modules on a noetherian formal affine is fully faithful and every coherent sheaf is recovered from its infinitesimal quotients",
+   "date": "2026-10-24",
+   "results": "Hits read: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, SheafOfModules.fullyFaithfulForget, LightCondMod.LocallyConstant.instFullModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, SheafOfModules.IsFiniteType. These concern ordinary schemes, forgetful sheaf functors, or algebraic completion, not coherent sheaves on a formal spectrum.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-formal-completion-reduction-dictionary",
+  "date": "2026-10-24",
+  "group": "Q106"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (duality/cosupport), through its existing regular-local-model/purity DAG refinement and the infinitesimal quotient dictionary in lem-per-formal-completion-reduction-dictionary: finite-module/coherent-sheaf correspondence on complete formal affine charts. The current ancestor proof itself does not state this commutative-algebra tool.",
+   "via": [
+    "lem-per-formal-completion-reduction-dictionary",
+    "lem-per-quasi-excellent-formal-affines",
+    "lem-per-regular-morphism-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-noetherian-formal-affine-coherent-modules",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eleven steps establish completed-sheaf exactness on a principal basis, quotient compatibility, coherence by finite presentation, local presentation of arbitrary coherent sheaves, and their canonical reconstruction from quotients. The existing affine quotient-system equivalence then supplies global essential surjectivity and full faithfulness. Unit, ordinary sheaf tensor, principal restrictions and naturality are checked on residues. All non-elementary inputs already exist; zero new nodes and zero new Mathlib leaves. EGA I is unavailable, so the assembly is marked agent-written from available Stacks lemmas and EGA III.1 recalls.",
+  "blueprint": "Serves the existing attribution to lem-per-artin-gabber-affine-curve, proof Step 3 regular-local-model branch, through the created.item chain ending at lem-per-formal-completion-reduction-dictionary: the coherent-module dictionary on its complete formal affine charts. Latest ancestor and unit read; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-exact-finite-modules",
+    "why": "Exact finite-module completion after localization is a generic commutative algebra tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Quotient projections of completed localizations identify their quotients; generic algebra, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "Identifies completed localization of finite modules with scalar extension; generic commutative algebra."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Its general ringed-space statement supplies coherence of finite sums and cokernels on the formal ringed space."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "why": "Transfers each ordinary quotient-spectrum sheaf to a coherent annihilated sheaf on Spec R, allowing 087W."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Preservation of cokernels by ordinary sheaf tensor is a generic ringed-site tool for the finite presentation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-69cb0e26a",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-69cb0e26a (reviewer sub-agent of L); spot-checked: Read the item and all 11 steps in full, with every cited node's statement open. The statement is byte-identical to the Q106 snapshot copy; stmt_deps adds only def-pur-sheaf-inverse-limit, which the statement uses for its inverse-limit sheaves. No new nodes. The dependency closure (703 nodes) does not reach the item, so there is no cycle. A whole-DAG scan for Spf/formal-affine plus coherent found no other node stating this equivalence. 087W (lem-weil-pbc-coherent-formal-modules-affine) covers only quotient systems on Spec A, and the delivery bridges correctly to sheaves on the formal ringed space. Sources checked: Stacks 0AHY, coherent.tex 087W (statement and proof, line 6272), modules.tex 01BY (stated for any ringed space). Hypothesis checks: step 2 exactness uses localization flat/Noetherian (00HT/00FN) plus finite-module completion exactness (00MB) on the basis D(a)∩V(I), and needs no completeness. Step 3 identifies C_s via 05GG for the f.g. ideal KR_s and 00MA(3) over R_s. Step 5 gets the principal chart in an arbitrary W from principal-refinement with U=V=T. Step 8 gets quasi-coherence and coherence of F/K^nF on X_n from 01BO and 01XZ (R/K^n is Noetherian). Step 9 uses 087T then 087W with A^∧=R. Step 10 gets the morphism part from completeness of finite modules. Step 11 uses 03EP and 00DF with the same presentation matrix. Small cases tested: K=0 (ordinary affine correspondence), K=R (forces R=0), R=k[[t]] (only unit s give nonempty D(s)∩V(K)). Accepted tool_uses: 087T, 01BY, 03EP and the completion leaves, used as generic black boxes. Implicit but elementary: K^nF as the image of multiplication by generators of K^n, and exactness of closed pushforward. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianFormalAffineCoherentModules",
+  "declaration": "AlgebraicGeometry.noetherianFormalAffine_coherentModules",
+  "declarations": [
+   "AlgebraicGeometry.adicFormalModulesToSheaf",
+   "AlgebraicGeometry.adicFormalModuleSections",
+   "AlgebraicGeometry.adicFormalModulePullback",
+   "AlgebraicGeometry.adicModuleQuotientTower",
+   "AlgebraicGeometry.adicModuleQuotientSheaves",
+   "AlgebraicGeometry.adicModuleQuotientSections",
+   "AlgebraicGeometry.adicFormalModuleUnitSection",
+   "AlgebraicGeometry.noetherianFormalAffine_coherentModules"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianFormalAffineCoherentModules.lean",
+  "statement": "theorem noetherianFormalAffine_coherentModules (R : CommRingCat.{u}) [IsNoetherianRing R] (K : Ideal R) (_hK : K.FG) [IsAdicComplete K R] : ∃ E : ObjectProperty.FullSubcategory (fun M : ModuleCat.{u} R ↦ Module.Finite R M) ≌ ObjectProperty.FullSubcategory (RingedSpace.IsCoherent (adicFormalSpec R K)), PreservesFiniteLimits E.functor ∧ PreservesFiniteColimits E.functor ∧ Nonempty (E.functor ⋙ ObjectProperty.ι (RingedSpace.IsCoherent (adicFormalSpec R K)) ≅ ObjectProperty.ι (fun M : ModuleCat.{u} R ↦ Module.Finite R M) ⋙ tilde.functor R ⋙ adicFormalModulePullback R K) ∧ ∃ (η : ObjectProperty.ι (fun M : ModuleCat.{u} R ↦ Module.Finite R M) ≅ E.functor ⋙ ObjectProperty.ι (RingedSpace.IsCoherent (adicFormalSpec R K)) ⋙ adicFormalModuleSections R K ⊤) (γ : E.inverse ⋙ ObjectProperty.ι (fun M : ModuleCat.{u} R ↦ Module.Finite R M) ≅ ObjectProperty.ι (RingedSpace.IsCoherent (adicFormalSpec R K)) ⋙ adicFormalModuleSections R K ⊤), (∀ M, η.hom.app M = (E.unitIso.hom.app M).hom ≫ γ.hom.app (E.functor.obj M)) ∧ (∃ e : (E.functor.obj ⟨ModuleCat.of R R, inferInstance⟩).obj ≅ SheafOfModules.unit (moduleRings (adicFormalSpec R K)), ∀ r : R, e.hom.val.app (op ⊤) (η.hom.app ⟨ModuleCat.of R R, inferInstance⟩ r) = adicFormalGlobalSection R K r) ∧ (∀ (M N : ModuleCat.{u} R) [Module.Finite R M] [Module.Finite R N], ∃ μ : (SheafOfModules.siteSheafTensorRight (E.functor.obj ⟨N, inferInstance⟩).obj).obj (E.functor.obj ⟨M, inferInstance⟩).obj ≅ (E.functor.obj ⟨ModuleCat.of R (M ⊗[R] N), inferInstance⟩).obj, ∀ (U : Opens (adicFormalSpec R K)) (m : M) (n : N), μ.hom.val.app (op U) (SheafOfModules.siteSheafTensorTmul _ _ (op U) (adicFormalModuleUnitSection R K (E.functor ⋙ ObjectProperty.ι _) η ⟨M, inferInstance⟩ U m) (adicFormalModuleUnitSection R K (E.functor ⋙ ObjectProperty.ι _) η ⟨N, inferInstance⟩ U n)) = adicFormalModuleUnitSection R K (E.functor ⋙ ObjectProperty.ι _) η ⟨ModuleCat.of R (M ⊗[R] N), inferInstance⟩ U (m ⊗ₜ[R] n)) ∧ ∃ p : ∀ (M : ObjectProperty.FullSubcategory (fun M : ModuleCat.{u} R ↦ Module.Finite R M)) (s : R), (Functor.const ℕᵒᵖ).obj ((adicFormalModuleSections R K (adicFormalPrincipalOpen R K s)).obj (E.functor.obj M).obj) ⟶ adicModuleQuotientSections R K M.obj s, (∀ M s, Nonempty (IsLimit (Cone.mk _ (p M s)))) ∧ (∀ M (s : R) (n : ℕ) (m : M.obj), (p M s).app (op n) (adicFormalModuleUnitSection R K (E.functor ⋙ ObjectProperty.ι _) η M (adicFormalPrincipalOpen R K s) m) = tilde.toOpen ((adicModuleQuotientTower R K M.obj).obj (op n)) (PrimeSpectrum.basicOpen s) ((K ^ (n + 1) • (⊤ : Submodule R M.obj)).mkQ m)) ∧ (∀ M (s t : R) (h : adicFormalPrincipalOpen R K (s * t) ≤ adicFormalPrincipalOpen R K s) (n : ℕ) (x : (E.functor.obj M).obj.val.obj (op (adicFormalPrincipalOpen R K s))), (p M (s * t)).app (op n) ((E.functor.obj M).obj.val.map (homOfLE h).op x) = ((adicModuleQuotientSheaves R K M.obj).obj (op n)).obj.map (homOfLE (PrimeSpectrum.basicOpen_mul_le_left s t)).op ((p M s).app (op n) x)) ∧ (∀ (M N : ObjectProperty.FullSubcategory (fun M : ModuleCat.{u} R ↦ Module.Finite R M)) (f : M ⟶ N) (s : R) (n : ℕ) (x : (E.functor.obj M).obj.val.obj (op (adicFormalPrincipalOpen R K s))), (p N s).app (op n) (((E.functor.map f).hom.val.app (op (adicFormalPrincipalOpen R K s))) x) = ((modulesSpecToSheaf.map ((tilde.functor R).map (ModuleCat.ofHom ((f.hom.hom.reduceModIdeal (K ^ (n + 1))).restrictScalars R)))).hom.app (op (PrimeSpectrum.basicOpen s))) ((p M s).app (op n) x))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The forward functor is characterized by limiting residue cones on the principal basis, with canonical residue, restriction, module-map and tensor formulas. Its O-module structure is also identified with the existing ordinary module pullback of tilde M along Spf to Spec (equivalent by finite presentation). Global sections are the quasi-inverse, and the displayed η is the compatible-residue unit. Helpers are specializations of recorded tilde, quotient, evaluation and pullback constructions; no new notion, chosen object, or extra axiom is introduced. Added the landed def-per-adic-principal-chart-data to stmt_deps for the canonical map, opens and coefficient action."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-374470779",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_dep records, AdicPrincipalChartData/AdicFormalGeometry/Coherent/sheaf-tensor declarations, module and report (Worker report + Second reading present). Node diff vs live: only lean + stmt_deps (added landed def-per-adic-principal-chart-data, used). Hypotheses exact (IsNoetherianRing, K.FG, IsAdicComplete, adicFormalSpec, Module.Finite full subcat, RingedSpace.IsCoherent = 01BV). Conclusions: equivalence with finite limits/colimits preserved, gamma = global sections, eta residue unit, e: R^tri ≅ O normalized, mu tensor iso pinned on pure tensors, limiting cones p on D(s)∩V(K) with residue/restriction/naturality clauses, plus true iso to the pullback of M~ along Spf→Spec. Helpers have real data and docstrings; single sorry; statement verbatim; no name clashes. Edge cases K=0, K=R, s=0/1, n+1 shift OK. Non-blocking: p only R-linear (node does not require C_s-linearity). No compile (no file changed)."
+ }
+}

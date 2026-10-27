@@ -8,15 +8,9 @@ module
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.Topology.WLocalComponents
-import Sheaf.Topology.StoneanCover
-import Sheaf.RingTheory.IndEtaleStability
-import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Mathlib.AlgebraicGeometry.Limits
+import Sheaf.RingTheory.IndPrincipalZariskiOfLocalRingIso
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # Realizing a Stonean cover of the components
@@ -119,6 +113,248 @@ noncomputable def stoneanCoverPointMap (C S : Type u) [CommRing C]
     {z : PrimeSpectrum C × S // ConnectedComponents.mk z.1 = f z.2} := by
   let y := WContractification.PullbackProfinite.fiberHomeo C S f q
   exact ⟨(y.1.2, y.1.1), y.2.symm⟩
+
+-- A zero in the restriction colimit already vanishes on one clopen neighbourhood.
+private theorem restriction_zero_iff {R : Type u} [CommRing R]
+    (Z : Set (ConnectedComponents (PrimeSpectrum R))) (r : R) :
+    algebraMap R (WContractification.Restriction Z) r = 0 ↔
+      ∃ W : Clopens (PrimeSpectrum R), ConnectedComponents.mk ⁻¹' Z ⊆ W ∧
+        algebraMap R (WContractification.RestrictClopen W) r = 0 := by
+  constructor
+  · intro hr
+    let top : {W : Clopens (PrimeSpectrum R) // ConnectedComponents.mk ⁻¹' Z ⊆ W} :=
+      ⟨⊤, le_top⟩
+    have heq :
+        (colimit.ι (WContractification.Restriction.diag Z) (Opposite.op top)).hom
+            (algebraMap R (WContractification.RestrictClopen top.val) r) =
+          (colimit.ι (WContractification.Restriction.diag Z) (Opposite.op top)).hom 0 := by
+      exact (((colimit.ι (WContractification.Restriction.diag Z)
+        (Opposite.op top)).hom.commutes r).trans hr).trans (map_zero _).symm
+    obtain ⟨k, g, g', hgg⟩ :=
+      (Types.FilteredColimit.isColimit_eq_iff
+        (WContractification.Restriction.diag Z ⋙ forget (CommAlgCat R))
+        (isColimitOfPreserves (forget (CommAlgCat R))
+          (colimit.isColimit (WContractification.Restriction.diag Z)))).mp heq
+    refine ⟨k.unop.val, k.unop.property, ?_⟩
+    change ((WContractification.Restriction.diag Z).map g).hom
+      (algebraMap R _ r) = ((WContractification.Restriction.diag Z).map g').hom 0 at hgg
+    exact (((WContractification.Restriction.diag Z).map g).hom.commutes r).symm.trans
+      (hgg.trans (map_zero _))
+  · rintro ⟨W, hW, hr⟩
+    let ι := (colimit.ι (WContractification.Restriction.diag Z)
+      (Opposite.op ⟨W, hW⟩)).hom
+    exact (ι.commutes r).symm.trans ((congrArg ι hr).trans (map_zero ι))
+
+private theorem idempotent_mul_eq_zero {R A : Type u} [CommRing R] [CommRing A]
+    [Algebra R A] {e r : R} (he : IsIdempotentElem e) [IsLocalization.Away e A]
+    (h : algebraMap R A r = 0) : e * r = 0 := by
+  obtain ⟨⟨_, n, rfl⟩, hn⟩ := (IsLocalization.map_eq_zero_iff (Submonoid.powers e) A r).mp h
+  have hh := congrArg (e * ·) hn
+  simpa only [← mul_assoc, ← pow_succ', he.pow_succ_eq, mul_zero] using hh
+
+private noncomputable def partitionFunctionMap {C S : Type u} [CommRing C]
+    [TopologicalSpace S] (f : C(S, ConnectedComponents (PrimeSpectrum C)))
+    (Q : DiscreteQuotient S) :
+    LocallyConstant Q C →ₐ[C] stoneanPartitionStage C S f Q where
+  toFun r a := algebraMap C _ (r a)
+  map_one' := by apply funext; intro a; exact map_one _
+  map_zero' := by apply funext; intro a; exact map_zero _
+  map_add' r r' := by apply funext; intro a; exact map_add _ _ _
+  map_mul' r r' := by apply funext; intro a; exact map_mul _ _ _
+  commutes' r := by apply funext; intro a; rfl
+
+private noncomputable def partitionFunctionCocone {C S : Type u} [CommRing C]
+    [TopologicalSpace S] [CompactSpace S]
+    (f : C(S, ConnectedComponents (PrimeSpectrum C))) :
+    Cocone (LocallyConstant.discreteQuotientDiag C S) where
+  pt := colimit (stoneanPartitionDiagram C S f)
+  ι :=
+    { app Q := CommAlgCat.ofHom (partitionFunctionMap f Q.unop) ≫
+        colimit.ι (stoneanPartitionDiagram C S f) Q
+      naturality {Q Q'} g := by
+        have hh : (LocallyConstant.discreteQuotientDiag C S).map g ≫
+              CommAlgCat.ofHom (partitionFunctionMap f Q'.unop) =
+            CommAlgCat.ofHom (partitionFunctionMap f Q.unop) ≫
+              (stoneanPartitionDiagram C S f).map g := by
+          apply CommAlgCat.hom_ext
+          apply AlgHom.ext
+          intro r
+          funext a
+          exact ((stoneanRestrictionMap _).commutes _).symm
+        simp only [← Category.assoc, hh]
+        rw [Category.assoc, colimit.w]
+        simp }
+
+private noncomputable def partitionFunction {C S : Type u} [CommRing C]
+    [TopologicalSpace S] [CompactSpace S]
+    (f : C(S, ConnectedComponents (PrimeSpectrum C))) :
+    LocallyConstant S C →ₐ[C] (colimit (stoneanPartitionDiagram C S f) : CommAlgCat C) :=
+  ((LocallyConstant.isColimitDiscreteQuotientCocone C S).desc
+    (partitionFunctionCocone f)).hom
+
+private theorem partitionFunction_apply {C S : Type u} [CommRing C]
+    [TopologicalSpace S] [CompactSpace S]
+    (f : C(S, ConnectedComponents (PrimeSpectrum C)))
+    (Q : DiscreteQuotient S) (r : LocallyConstant Q C) :
+    partitionFunction f (LocallyConstant.comapₐ C ⟨Q.proj, Q.proj_continuous⟩ r) =
+      (colimit.ι (stoneanPartitionDiagram C S f) (Opposite.op Q)).hom
+        (fun a ↦ algebraMap C _ (r a)) :=
+  DFunLike.congr_fun (congrArg CommAlgCat.Hom.hom
+    ((LocallyConstant.isColimitDiscreteQuotientCocone C S).fac
+      (partitionFunctionCocone f) (Opposite.op Q))) r
+
+private theorem partitionFunction_surjective {C S : Type u} [CommRing C]
+    [TopologicalSpace S] [CompactSpace S]
+    (f : C(S, ConnectedComponents (PrimeSpectrum C))) :
+    Function.Surjective (partitionFunction f) := by
+  classical
+  intro b
+  obtain ⟨Q, r, rfl⟩ := Concrete.isColimit_exists_rep
+    (stoneanPartitionDiagram C S f)
+    (colimit.isColimit (stoneanPartitionDiagram C S f)) b
+  choose r' hr' using fun a ↦ WContractification.Restriction.algebraMap_surjective
+    (f '' (Q.unop.proj ⁻¹' {a})) (r a)
+  refine ⟨LocallyConstant.comapₐ C ⟨Q.unop.proj, Q.unop.proj_continuous⟩
+    ⟨r', IsLocallyConstant.of_discrete r'⟩, ?_⟩
+  rw [partitionFunction_apply]
+  congr 1
+  exact funext hr'
+
+private theorem restriction_killed {R : Type u} [CommRing R]
+    (Z : Set (ConnectedComponents (PrimeSpectrum R))) {e r : R}
+    (he : IsIdempotentElem e)
+    (hZ : ConnectedComponents.mk ⁻¹' Z ⊆ (basicOpen e : Set (PrimeSpectrum R)))
+    (hr : e * r = 0) : algebraMap R (WContractification.Restriction Z) r = 0 := by
+  let W := isIdempotentElemEquivClopens ⟨e, he⟩
+  apply (restriction_zero_iff Z r).mpr
+  refine ⟨W, hZ, ?_⟩
+  have heW : (isIdempotentElemEquivClopens.symm W).val = e := by
+    exact congrArg Subtype.val (isIdempotentElemEquivClopens.symm_apply_apply ⟨e, he⟩)
+  have hh : (isIdempotentElemEquivClopens.symm W).val * r = 0 := heW ▸ hr
+  exact (IsLocalization.map_eq_zero_iff
+    (Submonoid.powers (isIdempotentElemEquivClopens.symm W).val) _ r).mpr
+    ⟨⟨_, Submonoid.mem_powers _⟩, hh⟩
+
+-- Both constructions are quotients of locally constant functions. A kernel element
+-- is killed by an idempotent equal to one on a neighbourhood of the graph. Refining
+-- a partition to make that idempotent constant compares the two kernel conditions.
+private theorem partitionFunction_zero_iff {C S : Type u} [CommRing C]
+    [TopologicalSpace S] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S]
+    (f : C(S, ConnectedComponents (PrimeSpectrum C))) (r : LocallyConstant S C) :
+    partitionFunction f r = 0 ↔
+      algebraMap (LocallyConstant S C) (WContractification.PullbackProfinite C S f) r = 0 := by
+  classical
+  constructor
+  · intro hr
+    let Q := r.discreteQuotient
+    have heq : (colimit.ι (stoneanPartitionDiagram C S f) (Opposite.op Q)).hom
+        (fun a ↦ algebraMap C _ (r.lift a)) =
+      (colimit.ι (stoneanPartitionDiagram C S f) (Opposite.op Q)).hom 0 := by
+      rw [← partitionFunction_apply, map_zero]
+      exact hr
+    obtain ⟨Q', g, g', hgg⟩ :=
+      (Types.FilteredColimit.isColimit_eq_iff
+        (stoneanPartitionDiagram C S f ⋙ forget (CommAlgCat C))
+        (isColimitOfPreserves (forget (CommAlgCat C))
+          (colimit.isColimit (stoneanPartitionDiagram C S f)))).mp heq
+    let v : Q'.unop → C := fun a ↦ r.lift (DiscreteQuotient.ofLE g.unop.le a)
+    have hv : ∀ a : Q'.unop,
+        algebraMap C (WContractification.Restriction (f '' (Q'.unop.proj ⁻¹' {a})))
+          (v a) = 0 := by
+      intro a
+      have hgg0 := hgg.trans (map_zero ((stoneanPartitionDiagram C S f).map g').hom)
+      have hh := congrFun hgg0 a
+      let ρ : WContractification.Restriction
+          (f '' (Q.proj ⁻¹' {DiscreteQuotient.ofLE g.unop.le a})) →ₐ[C]
+          WContractification.Restriction (f '' (Q'.unop.proj ⁻¹' {a})) :=
+        stoneanRestrictionMap
+          (Set.image_mono (DiscreteQuotient.fiber_subset_ofLE g.unop.le a))
+      change ρ (algebraMap C _ (v a)) = 0 at hh
+      exact (ρ.commutes (v a)).symm.trans hh
+    choose W hW hz using fun a ↦
+      (restriction_zero_iff (f '' (Q'.unop.proj ⁻¹' {a})) (v a)).mp (hv a)
+    let e : Q'.unop → C := fun a ↦ (isIdempotentElemEquivClopens.symm (W a)).val
+    let h : LocallyConstant S C :=
+      LocallyConstant.comapₐ C ⟨Q'.unop.proj, Q'.unop.proj_continuous⟩
+        ⟨e, IsLocallyConstant.of_discrete e⟩
+    have hid : IsIdempotentElem h := by
+      ext s
+      exact (isIdempotentElemEquivClopens.symm (W (Q'.unop.proj s))).property
+    have hmul : h * r = 0 := by
+      ext s
+      have hh := idempotent_mul_eq_zero
+        (isIdempotentElemEquivClopens.symm (W (Q'.unop.proj s))).property
+        (hz (Q'.unop.proj s))
+      change e (Q'.unop.proj s) * r s = 0
+      convert hh using 1
+      dsimp [v]
+      rw [DiscreteQuotient.ofLE_proj]
+      rfl
+    apply restriction_killed _ hid ?_ hmul
+    rw [WContractification.PullbackProfinite.preimage_mk_Z]
+    rintro _ ⟨⟨s, x⟩, hx, rfl⟩
+    change h s ∉ x.asIdeal
+    have hh : x ∈ (W (Q'.unop.proj s) : Set (PrimeSpectrum C)) :=
+      hW _ ⟨s, rfl, hx⟩
+    change x ∈ (basicOpen (e (Q'.unop.proj s)) : Set (PrimeSpectrum C))
+    change x ∈ (W (Q'.unop.proj s)).toOpens at hh
+    change x ∈ basicOpen (isIdempotentElemEquivClopens.symm (W (Q'.unop.proj s))).val
+    rw [basicOpen_isIdempotentElemEquivClopens_symm]
+    exact hh
+  · intro hr
+    obtain ⟨W, hW, hz⟩ := (restriction_zero_iff
+      (WContractification.PullbackProfinite.Z C S f) r).mp hr
+    let h := (isIdempotentElemEquivClopens.symm W).val
+    have hid : IsIdempotentElem h := (isIdempotentElemEquivClopens.symm W).property
+    have hmul : h * r = 0 := idempotent_mul_eq_zero hid hz
+    let Q := h.discreteQuotient ⊓ r.discreteQuotient
+    let v : Q → C := fun a ↦ r.lift (DiscreteQuotient.ofLE inf_le_right a)
+    have hv : ∀ a : Q, algebraMap C
+        (WContractification.Restriction (f '' (Q.proj ⁻¹' {a}))) (v a) = 0 := by
+      intro a
+      obtain ⟨s, rfl⟩ := Q.proj_surjective a
+      have he : IsIdempotentElem (h s) := by
+        exact DFunLike.congr_fun hid s
+      have hv' : v (Q.proj s) = r s := by
+        dsimp [v]
+        rw [DiscreteQuotient.ofLE_proj]
+        rfl
+      rw [hv']
+      apply restriction_killed _ he ?_ (DFunLike.congr_fun hmul s)
+      rintro x ⟨t, ht, hft⟩
+      have hst : h t = h s := by
+        have hh := congrArg (DiscreteQuotient.ofLE (show Q ≤ h.discreteQuotient from
+          inf_le_left)) ht
+        have hh' := congrArg (fun a ↦ h.lift a) hh
+        simp only [DiscreteQuotient.ofLE_proj] at hh'
+        exact hh'
+      have hx : LocallyConstant.toPrimeSpectrum (t, x) ∈ (W : Set _) := by
+        apply hW
+        rw [WContractification.PullbackProfinite.preimage_mk_Z]
+        exact ⟨(t, x), hft, rfl⟩
+      have hx' : LocallyConstant.toPrimeSpectrum (t, x) ∈
+          (basicOpen h : Set _) := by
+        change LocallyConstant.toPrimeSpectrum (t, x) ∈ basicOpen
+          (isIdempotentElemEquivClopens.symm W).val
+        rw [basicOpen_isIdempotentElemEquivClopens_symm]
+        exact hx
+      change h s ∉ x.asIdeal
+      change h t ∉ x.asIdeal at hx'
+      rwa [hst] at hx'
+    have heq : r = LocallyConstant.comapₐ C ⟨Q.proj, Q.proj_continuous⟩
+        ⟨v, IsLocallyConstant.of_discrete v⟩ := by
+      ext s
+      change r s = r.lift (DiscreteQuotient.ofLE inf_le_right (Q.proj s))
+      rw [DiscreteQuotient.ofLE_proj]
+      rfl
+    rw [heq, partitionFunction_apply]
+    have hz' : (fun a ↦ algebraMap C
+        (WContractification.Restriction (f '' (Q.proj ⁻¹' {a}))) (v a)) = 0 :=
+      funext hv
+    change (colimit.ι (stoneanPartitionDiagram C S f) (Opposite.op Q)).hom
+      (fun a ↦ algebraMap C (WContractification.Restriction (f '' (Q.proj ⁻¹' {a})))
+        (v a)) = 0
+    exact (congrArg _ hz').trans (map_zero _)
 
 /-- Realization of a Stonean cover by the finite partition colimit.
 
@@ -335,6 +571,83 @@ theorem stonean_cover_second_stage (C : Type u) [CommRing C]
           closedPoints (PrimeSpectrum (WContractification.PullbackProfinite C S f)) =>
         (stoneanCoverPointMap C S f q.1).1.2) ∧
       IsWContractibleRing (WContractification.PullbackProfinite C S f) := by
-  sorry
+  classical
+  let D := WContractification.PullbackProfinite C S f
+  have pb := WContractification.PullbackProfinite.isPullback C S f
+  let : IsWLocalRing D :=
+    ⟨ConnectedComponents.wlocalSpace_of_isPullback pb⟩
+  have hlocal : ∀ (q : Ideal D) [q.IsPrime], Function.Bijective
+      (Localization.localRingHom (q.comap (algebraMap C D)) q (algebraMap C D) rfl) :=
+    fun q _ ↦ (Algebra.IndZariski.bijectiveOnStalks C D).bijective_localRingHom q
+  have hclosed :=
+    ConnectedComponents.preimage_closedPoints_eq_closedPoints_of_isPullback pb
+  have hlift := ConnectedComponents.isHomeomorph_lift_of_isPullback pb
+  let : IsWStrictlyLocalRing D := by
+    refine ⟨fun m hm ↦ ?_⟩
+    have : m.IsPrime := hm.isPrime
+    let y : PrimeSpectrum D := ⟨m, inferInstance⟩
+    have hy : y ∈ closedPoints (PrimeSpectrum D) :=
+      (PrimeSpectrum.isClosed_singleton_iff_isMaximal y).mpr hm
+    have hxc : WContractification.PullbackProfinite.projSpec C S f y ∈
+        closedPoints (PrimeSpectrum C) := by
+      rw [← hclosed] at hy
+      exact hy
+    have : (m.comap (algebraMap C D)).IsMaximal :=
+      (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mp hxc
+    have := IsWStrictlyLocalRing.isStrictlyHenselianLocalRing_localization
+      (R := C) (m.comap (algebraMap C D))
+    exact IsStrictlyHenselianLocalRing.of_ringEquiv
+      (RingEquiv.ofBijective _ (hlocal m))
+  have hpoint : Function.Bijective (stoneanCoverPointMap C S f) := by
+    constructor
+    · intro q q' h
+      apply (WContractification.PullbackProfinite.fiberHomeo C S f).injective
+      apply Subtype.ext
+      exact Prod.ext (congrArg (fun z ↦ z.val.2) h) (congrArg (fun z ↦ z.val.1) h)
+    · rintro ⟨⟨x, s⟩, h⟩
+      refine ⟨(WContractification.PullbackProfinite.fiberHomeo C S f).symm
+        ⟨(s, x), h.symm⟩, ?_⟩
+      simp [stoneanCoverPointMap]
+  have hc : IsHomeomorph (fun q : closedPoints (PrimeSpectrum D) ↦
+      (stoneanCoverPointMap C S f q.val).val.2) := by
+    have heq : (fun q : closedPoints (PrimeSpectrum D) ↦
+        (stoneanCoverPointMap C S f q.val).val.2) =
+        (fun q : closedPoints (PrimeSpectrum D) ↦
+          Continuous.connectedComponentsLift
+            (WContractification.PullbackProfinite.projT C S f).continuous
+            (ConnectedComponents.mk q.val)) := by
+      funext q
+      rw [Continuous.connectedComponentsLift_apply_coe]
+      exact WContractification.PullbackProfinite.fst_fiberHomeo C S f q.val
+    rw [heq]
+    exact hlift.comp
+      (WLocalSpace.isHomeomorph_connectedComponents_closedPoints (PrimeSpectrum D))
+  refine ⟨?_, Algebra.isIndPrincipalZariski_of_bijective_localRingHom C D hlocal,
+    ?_, inferInstance, hpoint, (fun q ↦ hlocal q.asIdeal), inferInstance,
+    hclosed.symm, hc, ?_⟩
+  · let α : LocallyConstant S C →ₐ[C] D := IsScalarTower.toAlgHom C _ _
+    have hα : Function.Surjective α :=
+      WContractification.Restriction.algebraMap_surjective
+        (WContractification.PullbackProfinite.Z C S f)
+    have hk : RingHom.ker (partitionFunction f).toRingHom = RingHom.ker α.toRingHom := by
+      ext r
+      exact partitionFunction_zero_iff f r
+    let e := (Ideal.quotientKerAlgEquivOfSurjective (partitionFunction_surjective f)).symm.trans
+      ((Ideal.quotientEquivAlgOfEq C hk).trans
+        (Ideal.quotientKerAlgEquivOfSurjective hα))
+    refine ⟨e, fun Q r ↦ ?_⟩
+    have hp := partitionFunction_apply f Q ⟨r, IsLocallyConstant.of_discrete r⟩
+    change partitionFunction f _ =
+      (colimit.ι (stoneanPartitionDiagram C S f) (Opposite.op Q)).hom
+        (fun a ↦ algebraMap C _ (r a)) at hp
+    exact (congrArg e hp).symm.trans (by
+      dsimp [e]
+      erw [Ideal.quotientKerAlgEquivOfSurjective_symm_apply,
+        Ideal.quotientEquivAlgOfEq_mk, Ideal.quotientKerAlgEquivOfSurjective_mk])
+  · exact (RingHom.faithfullyFlat_algebraMap_iff).mpr
+      (WContractification.PullbackProfinite.faithfullyFlat C S f hf)
+  · have : ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum D)) :=
+      extremallyDisconnected_of_homeo hlift.homeomorph.symm
+    exact ⟨inferInstance⟩
 
 end Algebra

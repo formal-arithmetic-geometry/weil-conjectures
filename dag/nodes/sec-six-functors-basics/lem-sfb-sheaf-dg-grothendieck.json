@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-sheaf-dg-grothendieck",
+ "kind": "statement",
+ "title": "Grothendieck category of sheaf dg modules",
+ "statement": "Let $X$ be a topological space with a sheaf of commutative rings $\\mathcal O$, in the universes of [def-weil-size-convention]. Let $\\mathcal A$ be a sheaf dg $\\mathcal O$-algebra, and use left sheaf dg modules and degree-zero chain maps as in [def-sfb-sheaf-dg-module-localization]. The category of these modules is Grothendieck abelian [def-sp-grothendieck-abelian]. Its kernels, cokernels, coproducts and filtered colimits are computed on underlying graded $\\mathcal O$-module sheaves, with the induced differential and action. The forgetful functor to complexes of $\\mathcal O$-module sheaves is exact and faithful. Filtered colimits commute with every underlying cohomology sheaf $H^n$.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRJ (lemma-dgm-abelian) and 0FS9 (lemma-dgm-grothendieck-abelian), with the degreewise kernel, cokernel and colimit constructions in section-dgm-abelian; left modules by the graded opposite algebra."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small open site of $X$ in the prescribed universes. The cited sheaf-module statement gives kernels sectionwise and cokernels by module sheafification. For a dg map $f:M\\to N$, $d$ and the action preserve $\\ker f$ and $\\operatorname{im}f$ since $f(dm)=df(m)$ and $f(am)=af(m)$. Thus they restrict to the kernel and descend to the presheaf cokernel; the cited bilinear-extension statement extends the quotient action to its sheafification. The identities $d^2=0$, associativity, the unit and Leibniz rule descend because they hold before taking the quotient. The kernel and cokernel universal maps respect both structures, so they have the dg universal properties. Hom groups, zero and finite biproducts are inherited componentwise. The underlying degreewise coimage-to-image map is an isomorphism in the abelian category of module sheaves; its inverse respects action and differential by composing their commuting squares with that inverse. This proves abelianness. The forgetful functor to complexes is faithful because a dg map is precisely an underlying chain map with a property, and exact because kernels and cokernels have just been computed degreewise.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-sfb-sheaf-dg-module-localization",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FR0 (lemma-gm-abelian), 0FRJ (lemma-dgm-abelian), kernel and cokernel paragraphs."
+   }
+  },
+  {
+   "text": "For any small family $(M_t)$ take in degree $q$ the module-sheaf coproduct $\\bigoplus_t M_t^q$, which exists by the cited ringed-site theorem. Concretely it is the sheafification of the presheaf of finite sums: its universal property follows from the sheafification adjunction. Define $d((m_t)_t)=(dm_t)_t$ and $a(m_t)_t=(am_t)_t$ on these sums; the cited bilinear-extension theorem extends the action to sheaves. The dg identities and the coproduct universal property follow on each summand, then on the sheafification by uniqueness. For a small diagram $F:I\\to\\mathrm{dgMod}(\\mathcal A)$ put\n$$C=\\operatorname{coker}\\!\\left(\\bigoplus_{\\alpha:i\\to j}F(i)\\longrightarrow\\bigoplus_iF(i)\\right),$$\nwhere the component indexed by $\\alpha$ is $\\iota_jF(\\alpha)-\\iota_i$. A map out of this cokernel is exactly a family $h_i$ satisfying $h_jF(\\alpha)=h_i$, so $C$ is the colimit. The identical cokernel formula in module sheaves proves that its underlying graded sheaf is the degreewise colimit. This covers coproducts, filtered colimits, and the empty colimit.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FR0 and 0FRJ, direct sums and colimits; explicit cokernel presentation of the colimit."
+   }
+  },
+  {
+   "text": "Exactness in dg modules is now exactness in every degree of module sheaves. Apply exact filtered colimits in the cited ringed-site theorem to every degree of a diagram of short exact sequences. The degreewise-colimit construction in step 2 proves exactness of filtered colimits of dg modules. For a filtered diagram of underlying complexes $K_i$, write $Z_i^q=\\ker d_i^q$ and $B_i^q=\\operatorname{im}d_i^{q-1}$. Apply the same exact colimit functor to\n$$0\\to Z_i^q\\to K_i^q\\to B_i^{q+1}\\to0,\\qquad 0\\to B_i^q\\to Z_i^q\\to H^q(K_i)\\to0.$$\nThe inclusions $B_i^{q+1}\\hookrightarrow K_i^{q+1}$ remain monic, so the first sequence identifies the colimit of the $Z_i^q$ with the kernel of the colimit differential and the colimit of the $B_i^{q+1}$ with its image. The second sequence then identifies $\\varinjlim_iH^q(K_i)$ with $H^q(\\varinjlim_iK_i)$. These identifications use the original cocone maps, hence give the canonical comparison. No boundedness is used.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FR0 and 0FRJ, exact filtered colimit paragraphs and the following definition of underlying cohomology."
+   }
+  },
+  {
+   "text": "For an open $U$ and $n\\in\\mathbf Z$ define $E_{U,n}$ over $\\mathcal A_U$ as the graded free left module on $e,f$ of degrees $n,n+1$, with $de=f$, $df=0$. Explicitly,\n$$d(ae)=d(a)e+(-1)^{|a|}af,\\qquad d(af)=d(a)f.$$\nThe two contributions to $d^2(ae)$ are $(-1)^{|a|+1}d(a)f$ and $(-1)^{|a|}d(a)f$, so they cancel; $d^2(af)=0$. The algebra Leibniz identity gives the module Leibniz identity on both free generators. A dg map $E_{U,n}\\to M|_U$ must send $e$ to some $m\\in M^n(U)$ and $f$ to $dm$; conversely the assignments $ae\\mapsto am$, $af\\mapsto a\\,dm$ define such a map, since $d(am)=d(a)m+(-1)^{|a|}a\\,dm$. Therefore these dg maps are naturally in bijection with $M^n(U)$. This is the explicit two-generator disk calculation underlying the cone-of-identity argument; it avoids any shift-sign ambiguity for left modules.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FS8 (remark-cone-identity), local disk calculation used in the proof of Tag 0FS9."
+   }
+  },
+  {
+   "text": "Use the cited open-extension adjunction with $L=E_{U,n}$. The preceding bijection becomes\n$$\\operatorname{Hom}_{\\mathrm{dg}\\,\\mathcal A}(j_{U!}E_{U,n},M)\\simeq M^n(U).$$\nThe indexing pairs $(U,n)$ form a set in the chosen universe. Form $G=\\bigoplus_{U,n}j_{U!}E_{U,n}$ by step 2. If $h:M\\to N$ is nonzero, then some $h^n(U)$ is nonzero on a section $m$. The corresponding map $j_{U!}E_{U,n}\\to M$ has nonzero composite with $h$. Extend it to a map $G\\to M$ by taking zero on all other summands. Thus $\\operatorname{Hom}(G,h)$ is nonzero, so $\\operatorname{Hom}(G,-)$ is faithful and $G$ is a generator. Together with abelianness, all small colimits and exact filtered colimits already proved, this is exactly the cited definition of Grothendieck abelian. Steps 1--3 give all the additional clauses of the item.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-adjunction",
+    "def-weil-size-convention",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FS9 (lemma-dgm-grothendieck-abelian), generator paragraph; Tag 0FRW supplies the open adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-sheaf-dg-open-extension-adjunction",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FR0, 0FRJ, 0FS8 and 0FS9; explicit left-module disk version of the generator proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The category of sheaves of differential graded modules over a sheaf of differential graded algebras is Grothendieck abelian",
+   "results": "{\"t\": \"2026-10-24T07:39:02Z\", \"tool\": \"leanfinder\", \"query\": \"The category of sheaves of differential graded modules over a sheaf of differential graded algebras is Grothendieck abelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.sheafIsAbelian\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.instCategory\", \"instAbelianLightCondMod\"], \"digest\": \"a6b23b21999a905c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module sheaves or sheaves valued in a fixed abelian category, not modules over a varying sheaf dg algebra. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-78 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean; this requires construction of the dg-module category, not one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"Module\"",
+   "results": "{\"t\": \"2026-10-24T07:39:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGrothendieckAbelian\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"instIsGrothendieckAbelianModuleCat\", \"PresheafOfModules.instIsGrothendieckAbelian\", \"SheafOfModules.instIsGrothendieckAbelian\", \"AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian\", \"CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.EmbeddingRing\", \"CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.instRingEmbeddingRing\", \"CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.embedding\", \"CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.preservesFiniteColimits_embedding\"], \"digest\": \"a8feb909a1a821a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module sheaves or sheaves valued in a fixed abelian category, not modules over a varying sheaf dg algebra. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-78 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean; this requires construction of the dg-module category, not one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|dgModule",
+   "results": "{\"t\": \"2026-10-24T07:39:01Z\", \"tool\": \"grep\", \"query\": \"DGModule|DifferentialGraded|dgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module sheaves or sheaves valued in a fixed abelian category, not modules over a varying sheaf dg algebra. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-78 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean; this requires construction of the dg-module category, not one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of differential graded modules form a Grothendieck abelian category",
+   "results": "{\"t\": \"2026-10-24T07:39:01Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of differential graded modules form a Grothendieck abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"instIsGrothendieckAbelianModuleCat\", \"SheafOfModules.noConfusionType\", \"CategoryTheory.sheafIsAbelian\", \"SheafOfModules.instAbelian\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"SheafOfModules\"], \"digest\": \"9a19a8a234547221\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module sheaves or sheaves valued in a fixed abelian category, not modules over a varying sheaf dg algebra. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-78 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean; this requires construction of the dg-module category, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded sheaf modules have a generator and exact filtered colimits",
+   "results": "{\"t\": \"2026-10-24T07:39:03Z\", \"tool\": \"leanfinder\", \"query\": \"Differential graded sheaf modules have a generator and exact filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.presentationOfIsCokernelFree_generators\", \"SheafOfModules.Presentation\", \"SheafOfModules.GeneratingSections\"], \"digest\": \"4355c7e92333c650\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary module sheaves or sheaves valued in a fixed abelian category, not modules over a varying sheaf dg algebra. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:64-78 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean; this requires construction of the dg-module category, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of differential graded modules over a sheaf of dg algebras form a Grothendieck abelian category",
+   "results": "{\"t\": \"2026-10-24T08:11:34Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of differential graded modules over a sheaf of dg algebras form a Grothendieck abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.sheafIsAbelian\", \"instAbelianLightCondMod\", \"instAbelianCondensedMod\"], \"digest\": \"7ab6a304ad077af3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaves and fixed-category sheaves do not state the sheaf dg-module assertion. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:62-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40-44. The dg category and its varying algebra action require the constructions in this split, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"SheafOfModules\"",
+   "results": "{\"t\": \"2026-10-24T08:11:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGrothendieckAbelian\\\", \\\"SheafOfModules\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsGrothendieckAbelian\", \"SheafOfModules.instIsGrothendieckAbelian\"], \"digest\": \"5c6d41af2dece39f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaves and fixed-category sheaves do not state the sheaf dg-module assertion. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:62-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40-44. The dg category and its varying algebra action require the constructions in this split, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded sheaf modules have exact filtered colimits and a generator",
+   "results": "{\"t\": \"2026-10-24T08:11:36Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded sheaf modules have exact filtered colimits and a generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"ModuleCat.FilteredColimits.M\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"ModuleCat.FilteredColimits.M.mk\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.isColimitFreeCofan\"], \"digest\": \"c4f78b5f6ba7cf95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaves and fixed-category sheaves do not state the sheaf dg-module assertion. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:62-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40-44. The dg category and its varying algebra action require the constructions in this split, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|extensionByZero|extension_by_zero",
+   "results": "{\"t\": \"2026-10-24T08:11:11Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|DGModule|extensionByZero|extension_by_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheaves and fixed-category sheaves do not state the sheaf dg-module assertion. Read Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:62-84 and Algebra/Category/ModuleCat/Sheaf/Abelian.lean:40-44. The dg category and its varying algebra action require the constructions in this split, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ringed-dg-pushpull",
+  "date": "2026-10-24",
+  "group": "Q138"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: the category in which the transfinite injective replacement is constructed.",
+   "via": [
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-grothendieck",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Wrote kernels/cokernels, coproducts and arbitrary-colimit presentation explicitly; inherited AB5 from ordinary ringed-site module sheaves and proved its cohomology consequence via two short exact sequences. Constructed local disks and showed the coproduct of their open extensions detects every nonzero map. One new statement-only node records the open dg extension adjunction. All cited statements read; searches logged; no Lean edits or compiles.",
+  "blueprint": "Supports the inherited resolution prerequisite of lem-sfb-flat-ringed-dg-pushpull in the prerequisite chain for det-thm-sf-ctf-stability-direct-images, proof (3). Read the latest sk-thm-sf-ctf-stability and its direct-image proof. The item has no imported blueprint ancestor (blueprint_refs ancestor returns None); retained its inherited null ancestor and via chain. Whole-blueprint searches for dg module, differential graded, Grothendieck, 0FRW, 0FRA and extension by zero found no equivalent sheaf dg statement. The explicit disk construction realizes the generator argument of 0FS9 without changing the unit/chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic AB5 and small-colimit input for ordinary sheaves of modules on the small open site; the item unit has no separate ordinary ringed-site theorem."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear-extension input for quotient and sum actions after sheafification; no unit-specific result gives this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-6ac579cfb",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6ac579cfb (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement. The item statement and stmt_deps are byte-identical to side-live (that base had no proof, so this is a first split). Step 1: kernels are computed sectionwise and cokernels by module sheafification (def-weil-sheaf-of-modules-category); the cokernel action extends by bilinear-extension, whose F=A, G=presheaf cokernel, H=cokernel sheaf and O=O^# all fit, and its uniqueness clause carries the identities; the degreewise coimage→image iso gives abelianness. Step 2: coproducts come from lem-pur-ringed-site-grothendieck-abelian; I checked the colimit as a cokernel with component ι_jF(α)−ι_i, computed degreewise. Step 3: AB5 holds degreewise, and the two short exact sequences Z/B/H give H^n commutation; this is elementary. Step 4: I recomputed the disk E_{U,n}: d²(ae)=0, the module Leibniz rule holds, ae↦am is a chain map, so Hom(E,M|_U)=M^n(U), which also detects non-closed sections. Step 5: the new adjunction, natural in M, plus extension by zero over ⊕_{U,n} gives a faithful Hom(G,−); the index set is small and U=∅ is harmless; this matches def-sp-grothendieck-abelian. New node lem-sfb-sheaf-dg-open-extension-adjunction: true (degreewise ordinary j_!⊣restriction, compatible with d and action; Stacks 0FRW/0FRA); self-contained; statement only; not a clause of the item; edge cases U=∅, U=X, X=∅ and A in degree 0 hold. I searched the DAG for duplicates: the existing extension-by-zero nodes are scheme-, abelian-sheaf- or pro-étale-only, and pushpull-hom is a different adjunction, so none duplicates it. The report's source-error notes are correct: the 0FRW prose says 'right adjoint to j_*' (typo), and the 0FS8 x/y labels do not match their degrees. The two declared generic tool_uses are accepted: ringed-site Grothendieck AB5/colimits and sheafification bilinear extension. No SGA source is cited. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgGrothendieck",
+  "declaration": "CategoryTheory.SheafDg.grothendieckAbelian_degreewise",
+  "file": "lean/Sheaf/CategoryTheory/SheafDgGrothendieck.lean",
+  "statement": "theorem grothendieckAbelian_degreewise {X : TopCat.{u}} (S : Sheaf (Opens.grothendieckTopology X) CommRingCat.{max u v}) (A : Algebra S) : IsGrothendieckAbelian.{max u v} (LeftModule A) ∧ PreservesFiniteLimits (Mod.forget (D := Complex S) A.X) ∧ PreservesFiniteColimits (Mod.forget (D := Complex S) A.X) ∧ (Mod.forget (D := Complex S) A.X).Faithful ∧ (∀ (n : ℤ) (M N : LeftModule A) (f : M ⟶ N), PreservesLimit (parallelPair f 0) (Mod.forget (D := Complex S) A.X ⋙ HomologicalComplex.eval _ (ComplexShape.up ℤ) n) ∧ PreservesColimit (parallelPair f 0) (Mod.forget (D := Complex S) A.X ⋙ HomologicalComplex.eval _ (ComplexShape.up ℤ) n)) ∧ (∀ (n : ℤ) (I : Type (max u v)), PreservesColimitsOfShape (Discrete I) (Mod.forget (D := Complex S) A.X ⋙ HomologicalComplex.eval _ (ComplexShape.up ℤ) n)) ∧ (∀ (n : ℤ) (I : Type (max u v)) [SmallCategory I] [IsFiltered I], PreservesColimitsOfShape I (Mod.forget (D := Complex S) A.X ⋙ HomologicalComplex.eval _ (ComplexShape.up ℤ) n)) ∧ (∀ (n : ℤ) (I : Type (max u v)) [SmallCategory I] [IsFiltered I], PreservesColimitsOfShape I (Mod.forget (D := Complex S) A.X ⋙ HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) n))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ed875c5f",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read the node, all 3 stmt_deps (size convention; SheafDgModuleLocalization Algebra/LeftModule/Complex plus their tensor instances; Mathlib IsGrothendieckAbelian), Mod.instAbelian/Mod.isGrothendieckAbelian in WeilConjectures Monoidal/Mod/Abelian, and sdga.tex 0FRJ/0FS9. Clause mapping is exact: IsGrothendieckAbelian.{max u v} (LeftModule A) with the canonical Mod.instAbelian; degreewise preservation of kernels and cokernels of every f, of coproducts for every I (empty included) and of small filtered colimits; forget is exact (PreservesFiniteLimits/Colimits) and Faithful; homologyFunctor n preserves filtered colimits. No extra hypotheses; universes bound (coefficients max u v, consistent with def-weil-size-convention); statement verbatim; node differs from side-live only in lean; no new definitions; one theorem with sorry; source and blueprint docstrings with the 5-step proof plan; proof imports match the proof_deps' lean records; report has Worker report and Second reading by Q39. The existing Mod.isGrothendieckAbelian covers only conjunct 1, so this is not an H4 duplicate. Compile: worker's clean scompile; the later failures were server ENOSPC, not item errors. No findings."
+ }
+}

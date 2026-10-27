@@ -39,9 +39,13 @@ def global_findings(nodes):
 def stale_flag(f):
     return f.startswith('reach: ') and f.endswith(' is flagged unreachable but a target reaches it')
 
-def local_findings(after,changed):
-    """Checks needed by both the worker dry run and the landing graph check."""
+def local_findings(after,changed,before=None):
+    """Checks needed by both the worker dry run and the landing graph check.
+
+    2026-10-25 (deliverfix; the human: only compile, honesty and DAG validity refuse; a cycle the delivery did not
+    create never blocks it): with `before`, a cycle edge i -> v that already closed a cycle there is not a finding."""
     new_graph,merged=graph(after);bad=[]
+    old_graph=graph(before)[0] if before is not None else None
     for i in changed:
         d=after[i];m=dq.field(d,'merged')
         if dq.field(d,'id')!=i:bad.append(f'ids: {i} changed its id')
@@ -61,11 +65,13 @@ def local_findings(after,changed):
                         if str(u) not in pd:bad.append(f'deps: {i} step {k} uses {u}, which is not in proof_deps')
         for v in new_graph.get(i,()):
             # Existing cycles involving a delivered node also block its landing.
-            if reachable(new_graph,[v],i):bad.append(f'cycles: {i} -> {v} reaches {i}')
+            if reachable(new_graph,[v],i):
+                if old_graph is not None and v in old_graph.get(i,()) and reachable(old_graph,[v],i):continue
+                bad.append(f'cycles: {i} -> {v} reaches {i}')
     return sorted(set(bad))
 
 def check(before,after,changed):
-    bad=local_findings(after,changed)
+    bad=local_findings(after,changed,before)
     old_global=global_findings(before);new_global=global_findings(after)
     # 2026-10-16 (the human: no restrictions that refuse valid work): a dependency outside its unit's blueprint route
     # is recorded, not refused; the route order is a reading order, not a mathematical condition.

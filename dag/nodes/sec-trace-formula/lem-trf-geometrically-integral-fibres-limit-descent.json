@@ -1,0 +1,291 @@
+{
+ "id": "lem-trf-geometrically-integral-fibres-limit-descent",
+ "kind": "statement",
+ "title": "Geometrically integral fibres descend to a tail of a directed ring system",
+ "statement": "Let $I$ be a small nonempty directed set, let $(A_j)_{j\\in I}$ be a directed system of commutative rings with compatible unital transition maps, and let $A=\\varinjlim_{j\\in I}A_j$ in commutative rings [def-weil-pbc-category-colimit]. Fix $a\\in I$ and a finitely presented $A_a$-algebra $C_a$ [def-weil-pbc-finitely-presented-algebra]. Put $C_j=C_a\\otimes_{A_a}A_j$ for $j\\geq a$ and $C=C_a\\otimes_{A_a}A$ [def-weil-module-base-change] [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Suppose that for every prime $\\mathfrak p$ of $A$ the fibre ring $C\\otimes_A\\kappa(\\mathfrak p)$ is geometrically integral over the residue field $\\kappa(\\mathfrak p)$ [def-weil-residue-field] [def-pc-geometrically-irreducible]. Then there is $b\\geq a$ such that for every $j\\geq b$ and every prime $\\mathfrak q$ of $A_j$, the fibre ring $C_j\\otimes_{A_j}\\kappa(\\mathfrak q)$ is geometrically integral over $\\kappa(\\mathfrak q)$. Geometrically integral here means that its spectrum [def-weil-affine-spectrum] is nonempty, reduced and irreducible [def-pc-integral-scheme] after every extension of the residue field. No flatness or Noetherian hypothesis, and no injectivity of a transition or colimit map, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 05FG (lemma-Noetherian-approximation-geometrically-reduced) and 05FH (lemma-Noetherian-approximation-geometrically-irreducible), proofs: simultaneous constructible-locus refinement of a fixed finite-presentation model, for an arbitrary directed base-ring system."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-module-base-change",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $S_j=\\operatorname{Spec}A_j$, $S=\\operatorname{Spec}A$, $X_a=\\operatorname{Spec}C_a$, and let $f_a:X_a\\to S_a$ be the structure map. The spectrum-colimit lemma exhibits $S$ as the inverse limit of the $S_j$, with affine transitions; all $S_j$ are quasi-compact and quasi-separated by the affine-scheme lemma. The affine fibre-product formula identifies $X_a\\times_{S_a}S_j$ with $\\operatorname{Spec}C_j$ for $j\\geq a$, and $X_a\\times_{S_a}S$ with $\\operatorname{Spec}C$. The projections are the maps induced by the specified tensor-product structure maps.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "For the given finitely presented map $A_a\\to C_a$, let $E_{\\mathrm{red}}$ and $E_{\\mathrm{irr}}$ be the loci in $S_a$ supplied by the reduced-fibre-locus and irreducible-fibre-locus nodes. Both are constructible without flatness or Noetherian hypotheses. Their intersection $E=E_{\\mathrm{red}}\\cap E_{\\mathrm{irr}}$ is constructible by the Boolean-algebra clause of the constructible-subset definition. By the definitions of geometric integrality and of an integral scheme, $E$ is exactly the locus where the fibre is geometrically integral: after every field extension it is reduced, irreducible and nonempty.",
+   "uses": [
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-geometrically-irreducible-fibre-locus",
+    "def-weil-constructible-subset",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0579 (lemma-geometrically-reduced-constructible), 055B (lemma-nr-geom-irreducible-components-constructible); topology.tex Tag 005H (lemma-constructible)."
+   }
+  },
+  {
+   "text": "The component count used below detects geometric irreducibility. For a fibre $Z$ over a field $k$, choose the fixed separable closure $k_s$ and put $W=Z\\times_k k_s$. If $Z$ is geometrically irreducible, $W$ is irreducible and nonempty, so its only maximal irreducible subset is $W$ itself. Conversely, if $W$ has exactly one irreducible component $D$, the component-covering lemma gives $W=D$; thus $W$ is irreducible and nonempty. Apply the subset-geometric-irreducibility lemma to the whole subset $|Z|$ and the separably closed extension $k_s/k$ to conclude irreducibility and nonemptiness after every field extension. Thus geometric irreducibility of a fibre is equivalent to its geometric component count being $1$; the empty fibre has count $0$.",
+   "uses": [
+    "def-pd-separable-closure",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-sbc-subset-geometric-irreducibility",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055B (lemma-nr-geom-irreducible-components-constructible), level n=1; topology.tex Tag 004W (lemma-irreducible); varieties.tex Tag 054P (lemma-geometrically-irreducible-check-after-extension)."
+   }
+  },
+  {
+   "text": "For any ring map $u:A_a\\to B$, write $h:\\operatorname{Spec}B\\to S_a$ and base change $f_a$ along $h$. At $q\\in\\operatorname{Spec}B$ the fibre is the scalar extension of the fibre at $p=h(q)$: the affine fibre-product formula gives $(C_a\\otimes_{A_a}B)\\otimes_B\\kappa(q)\\cong C_a\\otimes_{A_a}\\kappa(q)$. Explicitly $(c\\otimes b)\\otimes\\lambda\\mapsto c\\otimes\\bar b\\lambda$ has inverse $c\\otimes\\lambda\\mapsto(c\\otimes1)\\otimes\\lambda$; the tensor universal property verifies these maps on pure tensors. The reduced-fibre-locus node states equality of the reduced loci under this arbitrary base change. The geometric-component-count base-change node states equality of component counts at $q$ and $p$; step 3 identifies count $1$ with geometric irreducibility on each side. Intersecting these two equivalences shows that the geometrically integral fibre locus of this base change is exactly $h^{-1}(E)$. Neither implication requires $u$ to be injective or flat.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-geometric-fibre-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0576 (lemma-base-change-fibres-geometrically-reduced), 0556 (lemma-base-change-fibres-nr-geometrically-irreducible-components), 0555 (lemma-base-change-fibres-geometrically-irreducible)."
+   }
+  },
+  {
+   "text": "Apply step 4 to $A_a\\to A$. The hypothesis says that its geometrically integral fibre locus is all of $S$, so the limit projection $S\\to S_a$ has image contained in $E$. Apply the limit-contained-in-constructible lemma at the original index $a$. Its hypotheses hold by step 1 (directed inverse system, quasi-compact quasi-separated stages, affine transitions, and the specified scheme limit) and step 2 (constructibility of $E$). It gives $b\\geq a$ such that the image of $S_j\\to S_a$ lies in $E$ for every $j\\geq b$.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05F4 (lemma-limit-contained-in-constructible), as used in the proofs of more-morphisms.tex Tags 05FG and 05FH."
+   }
+  },
+  {
+   "text": "For every $j\\geq b$, apply step 4 to $A_a\\to A_j$. Since the image of $S_j\\to S_a$ lies in $E$, every $q\\in S_j$ has geometrically reduced and geometrically irreducible fibre. After each extension of $\\kappa(q)$ this fibre is reduced and irreducible, with nonemptiness supplied by irreducibility; it is therefore integral by the integral-scheme definition. This is exactly geometric integrality of $C_j\\otimes_{A_j}\\kappa(q)$. The same single $b$ works for all $j\\geq b$ and all their primes, as required.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 05FG and 05FH (lemma-Noetherian-approximation-geometrically-reduced and lemma-Noetherian-approximation-geometrically-irreducible), final base-change step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-pd-separable-closure",
+  "def-weil-constructible-subset",
+  "def-weil-irreducible-components",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-sc-irreducible-components-cover",
+  "lem-trf-geometric-fibre-component-count-base-change",
+  "lem-trf-geometrically-irreducible-fibre-locus",
+  "lem-trf-geometrically-reduced-fibre-locus",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Proofs of Tags 05FG and 05FH, applied simultaneously to the fixed finite-presentation model using constructible loci (0579, 055B), arbitrary-base-change comparison (0576, 0556), and Limits 05F4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometricallyIntegral|geometrically_integral|GeometricallyIntegral",
+   "results": "Read 9 hits: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; geometric predicate definitions, base-change permanence and field-algebra reducedness do not supply eventual fibre integrality over a directed base colimit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically integral fibres of a finitely presented algebra descend along a directed colimit of base rings",
+   "results": "Read 8 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, Ring.DirectLimit.commRing, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, Algebra.IsGeometricallyReduced.of_forall_fg, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed; geometric predicate definitions, base-change permanence and field-algebra reducedness do not supply eventual fibre integrality over a directed base colimit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral",
+   "results": "Read 12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral.eq_geometrically, AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral, AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral, AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral, AlgebraicGeometry.GeometricallyIntegral.mk; geometric predicate definitions, base-change permanence and field-algebra reducedness do not supply eventual fibre integrality over a directed base colimit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebra over a directed colimit of rings with geometrically integral fibres has geometrically integral fibres at all sufficiently late stages",
+   "results": "Read 8 hits: RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, RingHom.QuasiFinite.of_isIntegral_of_finiteType, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, AlgebraicGeometry.IsIntegralHom.instDescScheme, Algebra.IsGeometricallyReduced.of_forall_fg, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType; geometric predicate definitions, base-change permanence and field-algebra reducedness do not supply eventual fibre integrality over a directed base colimit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(geometrically|Geometrically).*(constructible|limit|Limit)|constructible.*(integral|irreducible|reduced)",
+   "results": "Read 0 hits: ; geometric predicate definitions, base-change permanence and field-algebra reducedness do not supply eventual fibre integrality over a directed base colimit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual geometric reducedness and geometric irreducibility of every fibre of a fixed finite presentation family over a filtered ring colimit",
+   "results": "Read 8 hits: Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.affine_isReduced_iff; geometric predicate definitions, base-change permanence and field-algebra reducedness do not supply eventual fibre integrality over a directed base colimit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyIntegral|geometrically_integral|GeometricallyIntegral",
+   "results": "Read 9 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean. The hits supply definitions, base-change stability, field-level reducedness or finite-presentation factorization; none states eventual geometric integrality of every fibre over a directed base-ring colimit. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, especially lines 40–70: the geometric-integrality decomposition and base-change instances do not assert finite-stage reflection.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "1c3605be2a83bb1e"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically integral fibres of a finitely presented algebra descend along a directed colimit of base rings",
+   "results": "Read 8 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, Ring.DirectLimit.commRing, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, Algebra.IsGeometricallyReduced.of_forall_fg, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed. The hits supply definitions, base-change stability, field-level reducedness or finite-presentation factorization; none states eventual geometric integrality of every fibre over a directed base-ring colimit. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, especially lines 40–70: the geometric-integrality decomposition and base-change instances do not assert finite-stage reflection.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "61d88fa03c4ed147"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral",
+   "results": "Read 12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral.eq_geometrically, AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral, AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral, AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral, AlgebraicGeometry.GeometricallyIntegral.mk. The hits supply definitions, base-change stability, field-level reducedness or finite-presentation factorization; none states eventual geometric integrality of every fibre over a directed base-ring colimit. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, especially lines 40–70: the geometric-integrality decomposition and base-change instances do not assert finite-stage reflection.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "e37839662c173f25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically integral fibres of a finitely presented algebra descend along a directed colimit of base rings",
+   "results": "Read 8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, RingHom.finitePresentation_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsIntegralHom.instDescScheme, RingHom.EssFiniteType.isStableUnderBaseChange, AlgebraicGeometry.finite_appTop_of_universallyClosed. The hits supply definitions, base-change stability, field-level reducedness or finite-presentation factorization; none states eventual geometric integrality of every fibre over a directed base-ring colimit. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, especially lines 40–70: the geometric-integrality decomposition and base-change instances do not assert finite-stage reflection.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "8a9c80e2eb33ae20"
+  },
+  {
+   "tool": "grep",
+   "query": "(geometrically|Geometrically).*(constructible|limit|Limit)|constructible.*(integral|irreducible|reduced)",
+   "results": "Read 0 hits: . The hits supply definitions, base-change stability, field-level reducedness or finite-presentation factorization; none states eventual geometric integrality of every fibre over a directed base-ring colimit. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, especially lines 40–70: the geometric-integrality decomposition and base-change instances do not assert finite-stage reflection.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual geometric reducedness and geometric irreducibility of every fibre of a fixed finite presentation family over a filtered ring colimit",
+   "results": "Read 8 hits: Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isReduced_of_isGeometricallyReduced, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.IsReduced, Algebra.IsGeometricallyReduced.of_injective, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced. The hits supply definitions, base-change stability, field-level reducedness or finite-presentation factorization; none states eventual geometric integrality of every fibre over a directed base-ring colimit. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, especially lines 40–70: the geometric-integrality decomposition and base-change instances do not assert finite-stage reflection.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "321f19a41aaa92e7"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-noetherian-approximation",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Within the recorded 05FT approximation input, the constructible geometric fibre loci, limit-image reflection, common finite-stage containment and recovery of integral fibres (old item steps 3--5).",
+   "via": [
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometrically-integral-fibres-limit-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and assembled the simultaneous reduced/irreducible constructible-locus argument entirely from existing nodes. Wrote out the one-component criterion, tensor fibre identifications and all hypotheses of limit-image reflection; no new nodes. Searched project Lean and Mathlib; no exact attachment or Mathlib match for this item.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Within the recorded 05FT approximation input, the constructible geometric fibre loci, limit-image reflection, common finite-stage containment and recovery of integral fibres (old item steps 3--5).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "Generic test of geometric irreducibility over a separably closed field, used only to identify geometric component count 1; the unit has no separate geometric-irreducibility test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-subset-geometric-irreducibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-c0acaabfd",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-c0acaabfd (reviewer sub-agent of L); spot-checked: I read the item and all 15 cited node statements in full. Stacks 05FH (more-morphisms.tex l.9880) builds the constructible locus, shows h(S)⊂E and applies 05F4; the item runs the same mechanism for a fixed finite-presentation model over an arbitrary directed system, using the reduced and irreducible loci at once. The statement is true and matches how its one citer, lem-trf-local-noetherian-approximation step 2, uses it. Step 1 uses the Spec-colimit limit with affine transitions, qcqs affine schemes and Spec of a tensor product as the fibre product. Step 2 gets E_red and E_irr from the two locus nodes, both for an arbitrary finitely presented ring map, and their intersection is constructible by 005H; integral = nonempty + reduced + irreducible, and irreducible includes nonempty. Step 3: count 1 is equivalent to geometric irreducibility, via 004W (a space is the union of its components) and lem-sbc-subset-geometric-irreducibility with A=|Z| and Ω=k_s; elementary is fair, and the empty fibre has count 0. Step 4: the reduced locus base-changes by 0576 (in its node), the component count is invariant under any base change by 0556, and step 3 converts this to the irreducible locus. Step 5 checks every hypothesis of the 05F4 node, which is Lean-closed on slopmaster2. Step 6 is correct. proof_deps equals the union of uses. Edge cases checked: A=0, C_a=0, a constant system, reduced but reducible fibres, inseparable residue extensions. There are no new nodes. I found no duplicate: lem-zl-geometric-irreducibility-subalgebra-colimit is a different statement and the reduced-fibres limit node covers reducedness only. There is no cycle and no SGA source. The tool_use lem-sbc-subset-geometric-irreducibility is accepted as a generic black-box test over a separably closed field. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GeometricallyIntegralFibresLimitDescent",
+  "declaration": "AlgebraicGeometry.exists_eventually_geometricallyIntegral_fibres",
+  "file": "lean/Sheaf/TraceFormula/GeometricallyIntegralFibresLimitDescent.lean",
+  "statement": "theorem exists_eventually_geometricallyIntegral_fibres {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : I ⥤ CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c) (a : I) (C : Type u) [CommRing C] [Algebra (D.obj a) C] [Algebra.FinitePresentation (D.obj a) C] (hgeom : @_root_.id (∀ [Algebra (D.obj a) c.pt], Prop) (fun [Algebra (D.obj a) c.pt] ↦ ∀ p : PrimeSpectrum c.pt, GeometricallyIntegral (Spec.map (CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber (c.pt ⊗[D.obj a] C)))))) (c.ι.app a).hom.toAlgebra) : ∃ b : I, ∃ hab : a ≤ b, ∀ (j : I) (hbj : b ≤ j), @_root_.id (∀ [Algebra (D.obj a) (D.obj j)], Prop) (fun [Algebra (D.obj a) (D.obj j)] ↦ ∀ q : PrimeSpectrum (D.obj j), GeometricallyIntegral (Spec.map (CommRingCat.ofHom (algebraMap q.asIdeal.ResidueField (q.asIdeal.Fiber (D.obj j ⊗[D.obj a] C)))))) (D.map (homOfLE (hab.trans hbj))).hom.toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7d4d12c6",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Only the item's lean field differs from live; the 8 dependency copies are identical; lean.statement is verbatim the file signature. Every node clause matches: the directed preorder I : Type u is nonempty; D : I ⥤ CommRingCat.{u} with an IsColimit cocone; C is a finitely presented D.obj a-algebra; the hypothesis is GeometricallyIntegral of Spec(κ(p) → p.Fiber(c.pt ⊗ C)) for all primes of A, with the algebra structure given by the cocone map through an explicit @id instance binder (no global instance exists); the conclusion is ∃ b ≥ a, ∀ j ≥ b, ∀ primes q of A_j, the same predicate under the transition-map algebra. There are no extra hypotheses, and the fibre convention is the citer's (exists_local_noetherian_approximation). Edge cases checked: A=0, C_a=0, a constant system, reducible fibres, inseparable extensions, noninjective transitions. The proof is sorry only; the docstrings carry the source place, blueprint id and the 6 proof steps; all private proof-dep imports exist in live; no duplicate found. No file changed, so no compile."
+ }
+}

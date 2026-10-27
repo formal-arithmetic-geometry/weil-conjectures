@@ -1,0 +1,397 @@
+{
+ "id": "lem-sfb-etale-sections-finite-locally-free",
+ "kind": "statement",
+ "title": "Etale section spaces along finite locally free scheme maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $p:Z\\to U$ be a finite locally free morphism of $S$-schemes [def-pc-finite-locally-free], with possibly variable rank and rank zero. Let $W$ be an algebraic space over $S$ [def-trf-algebraic-space], and $q:W\\to Z$ a representable etale morphism, with schemes regarded as algebraic spaces by [def-trf-scheme-algebraic-space, def-weil-etale-morphism]. For every $U$-scheme $V$ put $Z_V=Z\\times_UV$ and $W_V=W\\times_UV$ [def-pc-fibre-product, lem-trf-space-fibre-products-etale-covers]. The functor\n$$V\\longmapsto\\{\\sigma:Z_V\\to W_V\\mid q_V\\circ\\sigma=\\operatorname{id}_{Z_V}\\}$$\nwith restriction by base change is represented by an algebraic space $E$ over $U$, and $E\\to U$ is etale. In particular, on etale scheme charts of $E$, the maps to $U$ are etale. No separatedness or quasi-compactness hypothesis on $q$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05XR, lemma-space-of-sections; includes the nonseparated case in the second proof paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "First, representability of $q$ and the identity scheme test $Z\\to Z$ identify $W=W\\times_ZZ$ with a scheme; its representing maps are the actual sheaf maps. Write $F$ for the displayed section functor. It is an fppf sheaf: for an fppf covering $\\{T_i\\to T\\}$ the schemes $Z_{T_i}$ cover $Z_T$ by [lem-trf-fppf-covering-base-change]. View a section as a map $a:Z_T\\to W$ satisfying $qa=\\operatorname{pr}_Z$; its map to $W_T$ is $(a,\\operatorname{pr}_T)$. The sheaf axiom for $W$ glues compatible $a_i$ uniquely, and that for $Z$ verifies the displayed equation after gluing. Thus the glued map is again a section. Under any scheme base change, $Z_T\\to T$ remains finite, flat and locally of finite presentation by [lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-qcqs-morphism-permanence].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, sheaf condition and base-change setup"
+   }
+  },
+  {
+   "text": "Suppose for now that $q:W\\to Z$ is separated. Finite maps are proper by [lem-weil-pbc-finite-proper], so $p$ is separated and locally of finite type. Etale maps are locally of finite presentation, hence locally of finite type. Composition permanence [lem-weil-pbc-proper-fp-permanence] shows that $W\\to U$ is separated and locally of finite type. Therefore [lem-sfb-unmarked-finite-open-parts-space] supplies an algebraic space $P=(W/U)_{fin}$ chartwise etale over $U$, with $P(T)$ the open subschemes $D\\subset W_T$ finite over $T$. For a section $\\sigma:Z_T\\to W_T$, the equality $q_T\\sigma=1$ makes $\\sigma$ a monomorphism. It is etale by cancellation [lem-trf-space-chartwise-etale-permanence]; hence it is an open immersion by [lem-sfb-space-etale-monomorphism-open]. Its image $D_\\sigma$ is isomorphic to $Z_T$, so is finite over $T$. This gives $F\\to P$, naturally in $T$. It is injective: on a specified $D$, the section must be the inverse of $q_T|_D$.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-unmarked-finite-open-parts-space",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, first proof paragraph: section image and finite-part functor"
+   }
+  },
+  {
+   "text": "For a test $T\\to P$, let $D\\subset W_T$ be its finite open subscheme. The map $D\\to Z_T$ is etale: it is the composite of an open immersion with the base change of $q$, using [lem-weil-pbc-etale-composition-cancellation, lem-weil-pbc-etale-base-change-finite-limits]. Consequently $D\\to T$ is flat and locally of finite presentation, by [lem-pc-flat-compose, lem-sbc-locally-finite-presentation-composition] applied to $D\\to Z_T\\to T$. It is universally closed because it is finite [lem-weil-pbc-finite-proper]. The target $Z_T\\to T$ is finite, hence locally of finite type, closed and separated. All six hypotheses of [lem-sfb-universal-isomorphism-open] now apply to $D\\to Z_T$ over $T$. Obtain an open $T^\\circ\\subset T$ such that $B\\to T$ factors through $T^\\circ$ exactly when $D_B\\to Z_B$ is an isomorphism. Such an isomorphism gives the unique section with image $D_B$ by inversion; conversely a section with that image gives precisely this isomorphism. These inverse operations commute with pullback. Hence $T\\times_PF=h_{T^\\circ}$, including its projection to $T$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-etale-morphism",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-universal-isomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, first proof paragraph: open universal isomorphism locus"
+   }
+  },
+  {
+   "text": "The preceding scheme tests show that $F\\to P$ is representable by open immersions. By [lem-sfb-presheaf-space-target-bootstrap], $F$ is an algebraic space. By [lem-a1-space-open-chart-tests] its map to $P$ is chartwise etale; composition with $P\\to U$ is chartwise etale by [lem-trf-space-chartwise-etale-permanence]. This proves the separated case over every scheme base, with variable finite locally free rank allowed. No uniform basis, constant degree or nonempty fibre was used.",
+   "uses": [
+    "lem-sfb-presheaf-space-target-bootstrap",
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, end of first proof paragraph"
+   }
+  },
+  {
+   "text": "For general $q$, choose a representable surjective etale $r:W'\\to W$ with $W'$ a disjoint union of affine schemes by [lem-a1-space-affine-etale-cover]. Both $r$ and $q'=qr$ are separated: on each affine component this follows from [lem-weil-pbc-affine-source-morphism-separated]; on the product of two distinct components their diagonals have empty intersection, while on a same-component product the diagonal is closed. Thus the whole diagonal is closed, since those products form an open cover. Composition gives $q'$ etale. Apply the separated case of steps 2--4 to $W'\\to Z\\to U$ to obtain its section space $F'$ etale over $U$, with map $F'\\to F$ given by postcomposition with $r$. For $(T,\\sigma)\\in F(T)$, put $K=W'_T\\times_{W_T,\\sigma}Z_T$. This is a scheme, and $K\\to Z_T$ is a surjective etale separated map, by base change of $r$ [lem-trf-space-representable-etale-scheme-tests, lem-weil-pbc-separated-base-change].",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-proper-morphism",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, second proof paragraph: separated cover; correcting W to W-prime in its separatedness sentence"
+   }
+  },
+  {
+   "text": "For every $B\\to T$, an element of $(T\\times_FF')(B)$ is a section $\\tau:Z_B\\to W'_B$ with $r_B\\tau=\\sigma_B$. Send it to $(\\tau,1):Z_B\\to K_B$; projection back to $W'_B$ is the inverse. Both operations are formed by the fibre-product universal property and commute with every $B'\\to B$. Thus $T\\times_FF'$ is the section functor of $K\\to Z_T\\to T$. Steps 2--4 apply because $K\\to Z_T$ is separated etale and $Z_T\\to T$ is finite locally free. They represent this functor by an algebraic space $F''$ chartwise etale over $T$. Apply [lem-sfb-finite-etale-cover-local-sections] to the surjective etale map $K\\to Z_T$ over the finite scheme $Z_T\\to T$: after a surjective etale $T'\\to T$ it has a section. The same applies after every base change to $T$, so $F''\\to T$ is surjective and $F'\\to F$ is surjective as an etale sheaf map. This verifies all scheme tests, not merely geometric fibres.",
+   "uses": [
+    "lem-sfb-finite-etale-cover-local-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, second proof paragraph: explicit fibre-product functor and surjectivity"
+   }
+  },
+  {
+   "text": "The fppf sheaf $F$ from step 1 has the cover $F'\\to F$ whose scheme-test pullbacks are the algebraic spaces $F''$ from step 6. Their maps to the tests are surjective and etale, hence flat and locally of finite presentation on scheme charts [def-weil-etale-morphism]. Therefore [lem-sfb-fppf-space-atlas-bootstrap] proves that $F$ is an algebraic space, without any assumption on its diagonal. Choose a scheme atlas $A\\to F'$ [def-trf-algebraic-space]. Its composite $A\\to F$ is representable [lem-trf-space-representable-etale-scheme-tests]. On every scheme test $T\\to F$, its pullback factors as $A\\times_FT\\to F''\\to T$; the first arrow is the base change of $A\\to F'$, the second is chartwise etale. By [lem-trf-space-chartwise-etale-permanence] this is etale, and it is surjective since both arrows are. Hence $A\\to F$ is a representable surjective etale atlas. The composite $A\\to F'\\to U$ is etale. Source-atlas detection [lem-trf-space-etale-source-atlas-detection](3) now gives that $F\\to U$ is chartwise etale, precisely including the asserted maps on etale scheme charts. Take $E=F$ with the natural section bijections already constructed.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-etale-source-atlas-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XR, lemma-space-of-sections, second proof paragraph: bootstrap and etale descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-unmarked-finite-open-parts-space",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-universal-isomorphism-open",
+  "lem-sfb-presheaf-space-target-bootstrap",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-finite-etale-cover-local-sections",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05XR, lemma-space-of-sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spaceOfSections|sectionSpace|WeilRestrict|AlgebraicSpace",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: etale permanence and the category of etale schemes do not provide the section functor or its representability; no algebraic-space or Weil-restriction construction occurs in the source grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of sections of an etale morphism along a finite flat family is representable and etale",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, RingHom.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: etale permanence and the category of etale schemes do not provide the section functor or its representability; no algebraic-space or Weil-restriction construction occurs in the source grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"section\"",
+   "results": "12 hits: AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.StructureSheaf.sectionsSubalgebra, AlgebraicGeometry.StructureSheaf.sectionsSubmodule, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.StructureSheaf.sectionsSubalgebraSubmodule, AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv, AlgebraicGeometry.Scheme.algebra_section_section_basicOpen, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: etale permanence and the category of etale schemes do not provide the section functor or its representability; no algebraic-space or Weil-restriction construction occurs in the source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite locally free Z over U and an etale algebraic space W over Z the functor of sections of W to Z is an etale algebraic space over U",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: etale permanence and the category of etale schemes do not provide the section functor or its representability; no algebraic-space or Weil-restriction construction occurs in the source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale surjection W over a finite scheme Z over U has a section after a surjective etale base change of U; for finite locally free Z the section functor is etale algebraic",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePresentation.lift_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: etale permanence and the category of etale schemes do not provide the section functor or its representability; no algebraic-space or Weil-restriction construction occurs in the source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "spaceOfSections|sectionSpace|WeilRestrict|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T21:27:35Z\", \"tool\": \"grep\", \"query\": \"spaceOfSections|sectionSpace|WeilRestrict|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale permanence or structure-sheaf sections; none represents the relative section functor by an algebraic space. The source grep has no algebraic-space or Weil-restriction construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Weil restriction of an etale morphism along a finite locally free morphism is an etale algebraic space",
+   "results": "{\"t\": \"2026-10-23T21:27:36Z\", \"tool\": \"leansearch\", \"query\": \"The Weil restriction of an etale morphism along a finite locally free morphism is an etale algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"c374ea5143af1a47\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale permanence or structure-sheaf sections; none represents the relative section functor by an algebraic space. The source grep has no algebraic-space or Weil-restriction construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T21:27:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.StructureSheaf.sectionsSubalgebra\", \"AlgebraicGeometry.StructureSheaf.sectionsSubmodule\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\", \"AlgebraicGeometry.StructureSheaf.sectionsSubalgebraSubmodule\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"AlgebraicGeometry.Scheme.algebra_section_section_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine\"], \"digest\": \"810e3f7fff040f51\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale permanence or structure-sheaf sections; none represents the relative section functor by an algebraic space. The source grep has no algebraic-space or Weil-restriction construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free morphism Z to U the functor of sections of an etale algebraic space W over Z is represented by an etale algebraic space over U",
+   "results": "{\"t\": \"2026-10-23T21:27:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite locally free morphism Z to U the functor of sections of an etale algebraic space W over Z is represented by an etale algebraic space over U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\"], \"digest\": \"a878f2fee8331a80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale permanence or structure-sheaf sections; none represents the relative section functor by an algebraic space. The source grep has no algebraic-space or Weil-restriction construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction along a finite flat finitely presented scheme map preserves etale morphisms without separatedness assumptions",
+   "results": "{\"t\": \"2026-10-23T21:28:29Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction along a finite flat finitely presented scheme map preserves etale morphisms without separatedness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"1e2a8ed236861415\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale permanence or structure-sheaf sections; none represents the relative section functor by an algebraic space. The source grep has no algebraic-space or Weil-restriction construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-locally-free-relative-hom-space",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CI (lemma-hilbert-stack-relative-space); finite Hilbert construction in examples-stacks.tex Tag 05WC. Input to the Tag 06CI proof: Weil restriction of algebraic spaces along finite locally free scheme maps. Supporting input to the Tag 05YF proof: Tag 05Y7, relative Hom spaces from a finite locally free source, before imposing compatibility with the map to Z. Tag 05Y7 proof, second paragraph, via Tag 05Y5: its scheme-test fibre product is the section space of Tag 05XR.",
+   "via": [
+    "lem-sfb-finite-locally-free-relative-hom-space",
+    "lem-sfb-finite-locally-free-weil-restriction",
+    "lem-sfb-relative-finite-hilbert-algebraic",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-sections-finite-locally-free",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 05XR in full and reused existing nodes for all supporting results. W is a scheme by the stated representability of q. Wrote the separated finite-open-part argument with all six hypotheses of Tag 05XD, then the explicit nonseparated lift functor, local surjectivity, bootstrap and atlas descent. No new nodes or Lean. Corrected a proof typo in the source, not the item statement.",
+  "blueprint": "Serves the inherited Tag 05Y7/05Y5 section-space input in the alteration/moduli/finite-Hilbert chain recorded in blueprint.from.place. The live ancestor command returns None; its null ancestor and via chain are preserved. Whole-blueprint searches for space of sections and 05XR returned zero matches; latest blueprint text supplied no matching section-space node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic Base change of an fppf covering is an fppf covering input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic Base change, affineness and properness for finite morphisms input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic Base change of a flat morphism of schemes is flat input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic Finite morphisms are proper input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Permanence of proper, separated, finite type, finitely presented morphisms and of immersions input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic Chartwise etale permanence for algebraic spaces input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic Open immersions are etale; etale morphisms compose and cancel input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic The base-change functor between small etale sites commutes with finite limits input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic Flatness is transitive input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Generic Composition preserves local finite presentation input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Generic Open scheme tests give monomorphy and etale composite charts input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic Affine etale cover by a disjoint union of affines input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic A morphism with affine source is separated input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic Scheme tests and comparison maps for representable etale morphisms input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic Separated morphisms are stable under base change (Stacks 01KU (3)) input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic Detection of etaleness through a representable source cover input in the Stacks Tag 05XR proof; this foundational scheme/algebraic-space argument does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-separated-base-change",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-d9c569d5b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-d9c569d5b (reviewer sub-agent of L); spot-checked: Read Stacks criteria.tex 05XR (both proof paragraphs) and 05XQ in full, plus the statement of all 27 cited nodes. The item statement is byte-identical to live; the extra 'representable q' hypothesis is a stronger assumption, not a weakening, and fits its one citer (relative-hom-space, where W is a scheme). No repair note exists, so the re-split rules do not apply. No new nodes. proof_deps equals the union of step uses; no cycle (closure of 10158 nodes); no SGA. Step checks: (1) q representable makes W a scheme; fppf gluing plus finite/flat/lfp permanence. (2) Separated case: finite⇒proper and étale⇒lfp⇒lft, then proper-fp-permanence(e) gives W→U separated and lft, the hypotheses of unmarked-finite-open-parts (04QH); a section is a mono, étale by chartwise cancellation, so an open immersion by space-etale-monomorphism-open; F→P is injective. (3) All six hypotheses of universal-isomorphism-open (05XD) verified for D→Z_T over T, including flat+lfp of D via flat-compose/lfp-composition; T×_P F = h_{T°}. (4) presheaf-target-bootstrap + a1-open-chart-tests + composition. (5) Affine étale cover W'; r and qr separated (affine components, diagonal local on target); K is a scheme, surjective étale separated over Z_T. (6) Section-functor bijection τ↦(τ,1) checked both ways; finite-etale-cover-local-sections (05XQ, needs only finite p) gives surjectivity. (7) fppf-space-atlas-bootstrap (04S6) gives algebraicity; atlas A→F étale surjective; source-atlas-detection(3) gives F→U chartwise étale. Edge cases: q=id, Z=∅, q:∅→Z (rank-0 open), doubled-origin line over A¹ (needs step 5). Accepted source error: 05XR says 'W→Z separated as source separated', which should be W'→Z (doubled-origin counterexample); step 5 proves the correct claim. No duplicate node for 05XR. Tool_uses for the generic trf/a1 algebraic-space foundations accepted. Batch-5: every listed citation (fppf covering base change, chartwise/representable-étale permanence, source-atlas detection, and sfb/a1 nodes reaching only def-trf-algebraic-space or lem-trf-scheme-monomorphism-separated) is a general algebraic-space definition or foundation; none is given by, or a step of, the trace formula or Poincaré duality, so no assumption leaf is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsFiniteLocallyFree",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_sections_finite_locally_free",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsFiniteLocallyFree.lean",
+  "statement": "theorem exists_etale_sections_finite_locally_free {S : Scheme.{u}} (Z U : Over S) (p : Z ⟶ U) [Scheme.Hom.IsFiniteLocallyFree p.left] (W : AlgebraicSpace S) (q : W ⟶ schemeSpace Z) (hq : IsEtale q.hom.hom) : ∃ (E : AlgebraicSpace S) (r : E ⟶ schemeSpace U) (e : ∀ V : Over U, {a : yoneda.obj V.left ⟶ E.obj.obj // a ≫ r.hom.hom = yoneda.map V.hom} ≃ {s : yoneda.obj ((Over.pullback p).obj V).left ⟶ W.obj.obj // s ≫ q.hom.hom = yoneda.map ((Over.pullback p).obj V).hom}), (∀ (V V' : Over U) (f : V' ⟶ V) (a : {a : yoneda.obj V.left ⟶ E.obj.obj // a ≫ r.hom.hom = yoneda.map V.hom}) (a' : {a : yoneda.obj V'.left ⟶ E.obj.obj // a ≫ r.hom.hom = yoneda.map V'.hom}), yoneda.map f.left ≫ a.val = a'.val → (e V' a').val = yoneda.map ((Over.pullback p).map f).left ≫ (e V a).val) ∧ (∀ (T : Over S) (c : yoneda.obj T ⟶ E.obj.obj), IsEtale c → Etale (yoneda.preimage (c ≫ r.hom.hom)).left)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1591b35bb",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read the node, source 05XR, all 8 stmt_deps and the declarations used (AlgebraicSpace/IsEtale/IsRepresentableWith, schemeSpace, IsFiniteLocallyFree, Etale, Over.pullback, chartwise/atlas-detection theorems). Lean matches clause by clause: finite locally free p with no degree; representable etale q (IsEtale) with no separatedness/qc; V : Over U is a U-scheme and Over.pullback p gives Z_V; sections are maps h_{Z_V} -> W over Z (= sections of W_V -> Z_V since W_V = W x_Z Z_V); E with r over U and e a bijection, natural for all f : V' -> V; final clause = IsChartwiseEtale r via representable_etale_scheme_tests (equivalent to atlas etaleness). Edge cases Z/U/V/W empty, q = id, non-separated q all covered. Single sorry theorem, docstrings with source/blueprint and 7 proof steps, statement verbatim, stmt_deps unchanged from live, both report sections present. Advisory: inline chartwise etaleness instead of IsChartwiseEtale, whose def node def-sfb-space-chartwise-etale-morphism (2026-10-24) is not on the delivery base; equivalent, no action. No recompile (per instructions); no files changed."
+ }
+}

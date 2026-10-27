@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-polynomial-good-locus-extension",
+ "kind": "statement",
+ "title": "Extensions of polynomial modules preserve the good locus",
+ "statement": "Let $R$ be a commutative ring, $n\\geq0$, and $P=R[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring]. For a $P$-module $N$, let $G_R(N)\\subseteq\\operatorname{Spec}R$ [def-weil-affine-spectrum] be the union of $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$ over $f\\in R$ such that $N_f$ is free over $R_f$ [def-weil-pbc-free-module] and finitely presented over $R_f[x_1,\\ldots,x_n]$ [def-sc-finitely-presented-module]. Here $R_f=R[1/f]$ [def-weil-ring-localization-away], $N_f$ is the localization of the underlying $R$-module [def-weil-pbc-module-localization-away], and the polynomial action is $x_i(m/f^a)=(x_im)/f^a$. Let $M_1\\xrightarrow{u}M_2\\xrightarrow{v}M_3$ be $P$-linear maps with $u$ injective, $v$ surjective, and $\\operatorname{im}u=\\ker v$. Then $$G_R(M_1)\\cap G_R(M_3)\\subseteq G_R(M_2).$$ Freeness here permits arbitrary, including infinite or empty, bases. No reducedness, finiteness, or nonzero-ring assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-free-module",
+  "def-sc-finitely-presented-module",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-sfb-polynomial-module-good-locus"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\mathfrak p\\in G_R(M_1)\\cap G_R(M_3)$. By the definition of these unions choose $a,b\\in R\\setminus\\mathfrak p$ such that $(M_1)_a$ is free over $R_a$ and finitely presented over $R_a[x_1,\\ldots,x_n]$, and similarly $(M_3)_b$ over $R_b$. Put $f=ab$. Primality gives $f\\notin\\mathfrak p$. It remains to prove the two good conditions for $(M_2)_f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus."
+   }
+  },
+  {
+   "text": "Use the fraction definition of module localization [def-weil-pbc-module-localization-away]. For any $P$-module $N$ and $c,d\\in R$, put $h=cd$. The identification $(N_c)_d\\cong N_h$ sends $(m/c^i)/d^j$ to $c^{k-i}d^{k-j}m/h^k$, where $k\\geq i,j$; the inverse sends $m/h^k$ to $(m/c^k)/d^k$. Changing $k$, or a representative fraction, leaves these classes unchanged by the defining equality after multiplication by a power of the denominator. Composing the two displayed formulas gives the original classes. The maps commute with addition, base scalars and each $x_i$ by the fraction formulas. For $N=R$ this identifies $(R_c)_d$ with $R_h$. For the polynomial algebra $R_c[x_1,\\ldots,x_n]$, localizing at the constant $d$ gives $(R_c)_d[x_1,\\ldots,x_n]$: the map divides every coefficient by the same power of $d$; its inverse puts a finite list of coefficient denominators over a common power. The same formulas show that localization as a polynomial module agrees with localization of its underlying base module. Apply these identifications to $(c,d)=(a,b)$ and $(b,a)$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS, proposition-localization-exact; Tag 051W, lemma-generic-flatness-locus-extension, passage to f=f_1f_3."
+   }
+  },
+  {
+   "text": "The bases of $(M_1)_a$ over $R_a$ and $(M_3)_b$ over $R_b$ remain bases after the further localizations of step 2. Indeed, for a module $F$ with basis $(e_i)$ over a ring $A$, every $m/d^j\\in F_d$ is the finite linear combination of $e_i/1$ obtained by dividing the coordinates of $m$ by $d^j$. A relation with finite support among $e_i/1$ can be put over a common power $d^j$; if it vanishes, a further power of $d$ kills the numerator in $F$, and the uniqueness of the original coordinates says that this power kills every coefficient. Thus each localized coefficient is zero. This proves existence and uniqueness of coordinates, including for an infinite or empty indexing set. Hence $(M_1)_f$ and $(M_3)_f$ are free over $R_f$ [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-localization-preserves-finite-presentation] to the commutative ring $A=R_a[x_1,\\ldots,x_n]$, the $A$-module $(M_1)_a$, and the multiplicative set of powers of the constant $b$. Step 2 identifies the resulting ring with $R_f[x_1,\\ldots,x_n]$ and the resulting module with $(M_1)_f$. This proves finite presentation of $(M_1)_f$ over that ring. Interchange $a,b$ and use $(M_3)_b$ to prove the same for $(M_3)_f$. No finite presentation over the base $R_a$ or $R_b$ is asserted or needed.",
+   "uses": [
+    "lem-trf-localization-preserves-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS, proposition-localization-exact; Tag 051W, lemma-generic-flatness-locus-extension, passage to f=f_1f_3."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-localization-short-exact] to the given short exact sequence, regarded as one of $R$-modules, and to the multiplicative set $\\{f^j:j\\geq0\\}$. We obtain $0\\to(M_1)_f\\xrightarrow{u_f}(M_2)_f\\xrightarrow{v_f}(M_3)_f\\to0$. Here $u_f(m/f^j)=u(m)/f^j$ and likewise for $v_f$. These maps are also linear over $B=R_f[x_1,\\ldots,x_n]$: they commute with localized scalars and with $x_i$ since $u,v$ were $P$-linear. Thus the same underlying exact sequence is short exact both over $R_f$ and over $B$.",
+   "uses": [
+    "lem-sc-p1-localization-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS, proposition-localization-exact; Tag 051W, lemma-generic-flatness-locus-extension, passage to f=f_1f_3."
+   }
+  },
+  {
+   "text": "Choose bases $(e_i)_{i\\in I}$ of $(M_1)_f$ and $(q_j)_{j\\in J}$ of $(M_3)_f$ over $R_f$, and for each $j$ choose $t_j\\in(M_2)_f$ with $v_f(t_j)=q_j$. The family $(u_f(e_i))_{i\\in I}$ together with $(t_j)_{j\\in J}$ is a basis: given $z$, subtract the finite combination of $t_j$ with coefficients the coordinates of $v_f(z)$, then use exactness to express the remainder in $u_f((M_1)_f)$. A finite relation among this family maps under $v_f$ to a relation among the $q_j$, whose coefficients vanish; injectivity of $u_f$ and independence of the $e_i$ kill all remaining coefficients. Thus $(M_2)_f$ is free over $R_f$ by [def-weil-pbc-free-module]. The construction uses only finite combinations even for infinite bases.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus."
+   }
+  },
+  {
+   "text": "By step 5, $u_f$ identifies $(M_1)_f$ with the $B$-submodule $K=\\ker(v_f)$ of $(M_2)_f$, so $K$ is finitely presented: compose a finite presentation of $(M_1)_f$ with this $B$-linear isomorphism. Step 4 also gives finite presentation of $(M_3)_f$, and $v_f$ is surjective. Apply [lem-trf-module-finite-presentation-of-kernel] with ring $B$, source $(M_2)_f$, target $(M_3)_f$, and map $v_f$. Its two finite-presentation hypotheses are exactly those just established. Hence $(M_2)_f$ is finitely presented over $B$.",
+   "uses": [
+    "lem-trf-module-finite-presentation-of-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0519, lemma-extension (2); Tag 051W, lemma-generic-flatness-locus-extension, last three sentences."
+   }
+  },
+  {
+   "text": "Steps 6 and 7 show that $f$ is one of the elements defining $G_R(M_2)$. Since $\\mathfrak p\\in D(f)$ by step 1, it follows that $\\mathfrak p\\in G_R(M_2)$. This proves the required inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-free-module",
+  "lem-trf-localization-preserves-finite-presentation",
+  "lem-sc-p1-localization-short-exact",
+  "lem-trf-module-finite-presentation-of-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a short exact sequence of polynomial modules the intersection of the free and finitely presented good loci of the outer modules lies in the good locus of the middle module",
+   "results": "{\"t\": \"2026-10-23T22:26:02Z\", \"tool\": \"leanfinder\", \"query\": \"In a short exact sequence of polynomial modules the intersection of the free and finitely presented good loci of the outer modules lies in the good locus of the middle module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"exact_of_isLocalized_maximal\", \"Module.FinitePresentation.exists_notMem_bijective\", \"associatedPrimes.subset_union_of_exact\", \"Module.support_of_exact\", \"exact_of_isLocalized_span\", \"ModuleCat.linearIndependent_shortExact\", \"Module.free_of_lTensor_residueField_injective\"], \"digest\": \"5291d2f608545943\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ModuleCat.free_shortExact (Algebra/Category/ModuleCat/Free.lean:167) and Module.finitePresentation_of_ker (Algebra/Module/FinitePresentation.lean:219) give the separate extension inputs, but the claimed inclusion also needs compatible principal localizations, exactness after localization and persistence of the two good conditions. No hit states the good-locus inclusion or gives it by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of free modules is free and an extension of finitely presented modules is finitely presented",
+   "results": "{\"t\": \"2026-10-23T22:26:02Z\", \"tool\": \"leansearch\", \"query\": \"An extension of free modules is free and an extension of finitely presented modules is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_free_of_surjective\", \"instFinitePresentationTensorProduct\", \"Algebra.TensorProduct.instFree\", \"IsBaseChange.free\", \"instFiniteOfFinitePresentation\", \"ModuleCat.free_shortExact\", \"Module.FinitePresentation.out\", \"Module.finitePresentation_of_projective\"], \"digest\": \"5eebaf9c5dce0019\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ModuleCat.free_shortExact (Algebra/Category/ModuleCat/Free.lean:167) and Module.finitePresentation_of_ker (Algebra/Module/FinitePresentation.lean:219) give the separate extension inputs, but the claimed inclusion also needs compatible principal localizations, exactness after localization and persistence of the two good conditions. No hit states the good-locus inclusion or gives it by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finitePresentation_of_ker",
+   "results": "{\"t\": \"2026-10-23T22:26:03Z\", \"tool\": \"loogle\", \"query\": \"Module.finitePresentation_of_ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_ker\"], \"digest\": \"b91bb0522e354c16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ModuleCat.free_shortExact (Algebra/Category/ModuleCat/Free.lean:167) and Module.finitePresentation_of_ker (Algebra/Module/FinitePresentation.lean:219) give the separate extension inputs, but the claimed inclusion also needs compatible principal localizations, exactness after localization and persistence of the two good conditions. No hit states the good-locus inclusion or gives it by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation_of_ker|free_of_split|free.*exact",
+   "results": "{\"t\": \"2026-10-23T22:26:03Z\", \"tool\": \"grep\", \"query\": \"finitePresentation_of_ker|free_of_split|free.*exact\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\"], \"digest\": \"a8e3f764648cf9be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ModuleCat.free_shortExact (Algebra/Category/ModuleCat/Free.lean:167) and Module.finitePresentation_of_ker (Algebra/Module/FinitePresentation.lean:219) give the separate extension inputs, but the claimed inclusion also needs compatible principal localizations, exactness after localization and persistence of the two good conditions. No hit states the good-locus inclusion or gives it by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence with free quotient splits and finite presentation is preserved by extensions",
+   "results": "{\"t\": \"2026-10-23T22:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"A short exact sequence with free quotient splits and finite presentation is preserved by extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_split_exact\", \"Module.finitePresentation_of_projective_of_exact\", \"Module.Presentation.ofExact\", \"ModuleCat.free_shortExact\", \"Module.Presentation.ofExact_var\", \"Module.Presentation.ofExact_G\", \"Module.Presentation.ofExact_R\", \"Module.Presentation.ofExact_relation\"], \"digest\": \"a7c8cae3e3e29a4f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ModuleCat.free_shortExact (Algebra/Category/ModuleCat/Free.lean:167) and Module.finitePresentation_of_ker (Algebra/Module/FinitePresentation.lean:219) give the separate extension inputs, but the claimed inclusion also needs compatible principal localizations, exactness after localization and persistence of the two good conditions. No hit states the good-locus inclusion or gives it by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "goodLocus|good_locus|genericFlatness|generic_flatness",
+   "results": "{\"t\": \"2026-10-23T23:28:20Z\", \"tool\": \"grep\", \"query\": \"goodLocus|good_locus|genericFlatness|generic_flatness\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole good-locus inclusion: hits supply the exactness, freeness, or finite-presentation inputs only; read ModuleCat.free_shortExact at Algebra/Category/ModuleCat/Free.lean:167 and Module.finitePresentation_of_ker at Algebra/Module/FinitePresentation.lean:219. The locus needs the common principal-open and localization arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Short exact sequences of modules preserve the locus where localization is free over the base ring and finitely presented over a polynomial ring",
+   "results": "{\"t\": \"2026-10-23T23:28:20Z\", \"tool\": \"leansearch\", \"query\": \"Short exact sequences of modules preserve the locus where localization is free over the base ring and finitely presented over a polynomial ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocalizedModule.map_exact\", \"IsLocalizedModule.map_exact\", \"ModuleCat.free_shortExact\", \"Module.freeLocus\", \"exact_of_isLocalized_span\", \"Module.free_of_isLocalizedModule\", \"Module.mem_freeLocus_of_isLocalization\", \"Module.FinitePresentation.exists_free_localizedModule_powers\"], \"digest\": \"2de9767bbae6c2ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole good-locus inclusion: hits supply the exactness, freeness, or finite-presentation inputs only; read ModuleCat.free_shortExact at Algebra/Category/ModuleCat/Free.lean:167 and Module.finitePresentation_of_ker at Algebra/Module/FinitePresentation.lean:219. The locus needs the common principal-open and localization arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.free_shortExact",
+   "results": "{\"t\": \"2026-10-23T23:28:20Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.free_shortExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.free_shortExact\"], \"digest\": \"637b13f54e59ea18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole good-locus inclusion: hits supply the exactness, freeness, or finite-presentation inputs only; read ModuleCat.free_shortExact at Algebra/Category/ModuleCat/Free.lean:167 and Module.finitePresentation_of_ker at Algebra/Module/FinitePresentation.lean:219. The locus needs the common principal-open and localization arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For modules over a polynomial algebra the intersection of the free and finitely presented good loci of the ends of a short exact sequence is contained in the good locus of the middle module",
+   "results": "{\"t\": \"2026-10-23T23:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"For modules over a polynomial algebra the intersection of the free and finitely presented good loci of the ends of a short exact sequence is contained in the good locus of the middle module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"associatedPrimes.subset_union_of_exact\", \"exact_of_isLocalized_maximal\", \"Module.support_of_exact\", \"Module.FinitePresentation.exists_notMem_bijective\", \"RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\", \"ModuleCat.linearIndependent_shortExact\", \"exact_of_isLocalized_span\"], \"digest\": \"5ab2e42f4b2493a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole good-locus inclusion: hits supply the exactness, freeness, or finite-presentation inputs only; read ModuleCat.free_shortExact at Algebra/Category/ModuleCat/Free.lean:167 and Module.finitePresentation_of_ker at Algebra/Module/FinitePresentation.lean:219. The locus needs the common principal-open and localization arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "free_shortExact|finitePresentation_of_ker|free_of_isLocalizedModule",
+   "results": "{\"t\": \"2026-10-23T23:29:47Z\", \"tool\": \"grep\", \"query\": \"free_shortExact|finitePresentation_of_ker|free_of_isLocalizedModule\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Free.lean\"], \"digest\": \"7021e6ee00f35e7b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole good-locus inclusion: hits supply the exactness, freeness, or finite-presentation inputs only; read ModuleCat.free_shortExact at Algebra/Category/ModuleCat/Free.lean:167 and Module.finitePresentation_of_ker at Algebra/Module/FinitePresentation.lean:219. The locus needs the common principal-open and localization arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence with free quotient splits and an extension of finitely presented modules is finitely presented",
+   "results": "{\"t\": \"2026-10-23T23:29:50Z\", \"tool\": \"leanfinder\", \"query\": \"A short exact sequence with free quotient splits and an extension of finitely presented modules is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_split_exact\", \"Module.finitePresentation_of_projective_of_exact\", \"Module.Presentation.ofExact\", \"Module.finitePresentation_of_free_of_surjective\", \"Module.finitePresentation_of_ker\", \"Module.Presentation.ofExact_var\", \"Module.Presentation.ofExact_G\", \"Module.finitePresentation_of_surjective\"], \"digest\": \"0b9b4176cea51ec5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole good-locus inclusion: hits supply the exactness, freeness, or finite-presentation inputs only; read ModuleCat.free_shortExact at Algebra/Category/ModuleCat/Free.lean:167 and Module.finitePresentation_of_ker at Algebra/Module/FinitePresentation.lean:219. The locus needs the common principal-open and localization arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-polynomial-module-generic-freeness",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited supporting chain below latest det-thm-sf-ctf-stability-direct-images, proof (3), via the spectral-point-space prerequisite: Tag 06RC proof, application of Tag 06QS to the stabilizer over a reduced atlas. Affine scheme input in Tag 06QS, final paragraph: apply Tag 052B to the affine scheme atlas over the reduced affine base. Algebraic input for Tag 052B: Tag 051Z, proof from the paragraph \"Proof of the case S = R[x_1, ..., x_n]\" through the end of its two inductions, before the general finite-type-algebra reduction. Supporting good-locus calculus: Tag 051W (lemma-generic-flatness-locus-extension), specialized to the polynomial algebra; equations equation-flat-and-finitely-presented and equation-good-locus.",
+   "via": [
+    "lem-sfb-reduced-polynomial-module-generic-freeness",
+    "lem-sfb-reduced-affine-generic-flat-finite-presentation",
+    "lem-sfb-space-reduced-generic-flat-finite-presentation",
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polynomial-good-locus-extension",
+  "worker": "stage1",
+  "summary": "Expanded Tag 051W into a common-denominator argument, basis calculations and applications of three existing Mathlib leaves. No new nodes: localization comparisons and basis arguments are elementary and written out; exactness and both finite-presentation inputs are cited by their actual statements. Statement unchanged.",
+  "blueprint": "Retains the inherited support chain under latest det-thm-sf-ctf-stability-direct-images, proof (3). Realizes the Tag 051W good-locus extension input in Tag 051Z, polynomial generic freeness proof. The imported ancestor tool returns None; the existing from.node=null and exact inherited place/via are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-bcd6a02f1",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-bcd6a02f1 (reviewer sub-agent of L); spot-checked: I read the whole item and all 8 steps. The statement is unchanged against clones/live and is a correct specialization of Stacks 051W (algebra.tex 28628-28673) to S=R[x_1..x_n]: the conditions on S_f always hold for a polynomial ring, so dropping them from G_R is not a weakening. Steps: (1) f=ab is outside p because p is prime. (2) The fraction formulas for (N_c)_d≅N_{cd} and for (R_c)_d[x] are correct and well defined by the equality criterion of def-weil-pbc-module-localization-away. (3) A basis stays a basis after localization; this uses annihilating powers and holds for infinite or empty bases. (4) lem-trf-localization-preserves-finite-presentation is applied to A=R_a[x], M=(M_1)_a and the powers of b, with step 2 giving the identification. (5) lem-sc-p1-localization-short-exact states exactness of the whole sequence 0→…→0, end clauses included, and the localized maps are linear over R_f[x]. (6) The extension-of-free-is-free argument is a genuine few-line elementary step. (7) lem-trf-module-finite-presentation-of-kernel is applied with K=ker v_f≅(M_1)_f. (8) The defining union gives the conclusion. Edge cases n=0, zero ring, zero modules, nilpotents and infinite bases all check out. There are no new nodes. The DAG has no duplicate (the only near hits are split-extension-free-presentation, split-exterior-comparison and the sibling good-locus-localization, all different statements). There are no SGA citations. Batch-5: both trf citations are generic Mathlib-leaf commutative-algebra facts with empty proof_deps, neither given by nor part of the proof of the trace-formula or Poincaré assumptions, so both are accepted. Inherited from.node=null is unchanged from the base."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialModuleGoodLocusExtension",
+  "declaration": "MvPolynomial.polynomialModuleGoodLocus_inter_subset_of_exact",
+  "file": "lean/Sheaf/RingTheory/PolynomialModuleGoodLocusExtension.lean",
+  "statement": "theorem polynomialModuleGoodLocus_inter_subset_of_exact (R : Type u) [CommRing R] (n : ℕ) (M₁ : Type v₁) [AddCommGroup M₁] [Module (MvPolynomial (Fin n) R) M₁] (M₂ : Type v₂) [AddCommGroup M₂] [Module (MvPolynomial (Fin n) R) M₂] (M₃ : Type v₃) [AddCommGroup M₃] [Module (MvPolynomial (Fin n) R) M₃] (u : M₁ →ₗ[MvPolynomial (Fin n) R] M₂) (v : M₂ →ₗ[MvPolynomial (Fin n) R] M₃) (hu : Function.Injective u) (hv : Function.Surjective v) (h : Function.Exact u v) : polynomialModuleGoodLocus R n M₁ ∩ polynomialModuleGoodLocus R n M₃ ⊆ polynomialModuleGoodLocus R n M₂",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62ceeaec3",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Read item node, all 7 stmt_deps, landed def module PolynomialModuleGoodLocus.lean in full, Stacks algebra.tex 28627-28673 (Tag 051W). Node unchanged vs live except lean + stmt_dep def-sfb-polynomial-module-good-locus, which is landed on the base (snapshot record has lean, reviewed_lean pass); §5-permitted. Lean: CommRing R, n:ℕ, MvPolynomial (Fin n) R, three modules with independent universes v₁ v₂ v₃, P-linear u v, Injective/Surjective/Function.Exact, conclusion G(M₁)∩G(M₃)⊆G(M₂) via reused landed polynomialModuleGoodLocus (canonical localized action, Module.Free with arbitrary basis, FinitePresentation over R_f[X]); matches node and the 051W specialization (S_f conditions automatic for a polynomial ring). Edge cases n=0, R=0, f=0 or nilpotent, zero modules, infinite bases OK; statement true in this generality. One sorry; docstrings give source place, blueprint id and 8 proof steps; lean.statement verbatim; plain proof-only import; no name collision in side-live lean/Sheaf; report has Worker report and Second reading by Q97. No compile (no change). Cosmetic: stray leading space in the module docstring."
+ }
+}

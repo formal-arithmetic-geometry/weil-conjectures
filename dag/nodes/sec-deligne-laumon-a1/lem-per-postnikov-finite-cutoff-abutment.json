@@ -1,0 +1,262 @@
+{
+ "id": "lem-per-postnikov-finite-cutoff-abutment",
+ "kind": "statement",
+ "title": "Shifted Postnikov finite cutoff and actual abutment filtration",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], with derived category $D(\\mathcal A)$ [def-weil-abstract-derived-category] and its standard cohomology and truncations [def-sbc-standard-tstructure-derived-category]. Let $T^0:D(\\mathcal A)\\to\\mathcal B$ be an additive homological functor [def-sp-homological-functor], and put $T^n(M)=T^0(M[n])$ with the canonical coherent shift comparisons. Thus the boundary for a distinguished triangle $X\\to Y\\to Z\\xrightarrow{w}X[1]$ is $T^0(w[n]):T^n(Z)\\to T^{n+1}(X)$.\nFix integers $r,c$ and assume, for every integer $b$ and $M\\in D(\\mathcal A)$, that $H^j(M)=0$ for $j<b$ implies $T^n(M)=0$ for $n<b-r$. Let $L\\in D(\\mathcal A)$ satisfy $H^j(L)=0$ for $j<c$. Suppose the maps induced by the successive truncation triangles make\n$$D^{p,q}=T^{p+q}(\\tau_{\\le q}L),\\qquad E_2^{p,q}=T^{p+q}(H^q(L)[-q])$$\nan exact couple [def-sp-exact-couple], with $\\alpha$ given by the next inclusion, $g$ by the quotient and $f$ by the boundary. Then $D^{p,q}=0$ for $q<c$ and all pages vanish unless $p\\ge-r,q\\ge c$. Its reindexing $\\widetilde D^{P,Q}=D^{P-r,Q}$, $\\widetilde E^{P,Q}=E^{P-r,Q}$ satisfies the hypotheses of [thm-sp-half-plane-convergence] with lower bound $c$. In original total degree $n$, the canonical abutment is $A_n=T^n(\\tau_{\\le n+r}L)$, and the inclusion induces an isomorphism $a_n:A_n\\xrightarrow{\\sim}T^n(L)$, natural in $L$. More generally $T^n(\\tau_{\\le m}L)\\to T^n(L)$ is an isomorphism for every $m\\ge n+r$.\nTransporting the half-plane filtration along $a_n$ and shifting its filtration index by $r$ gives exactly\n$$F^pT^n(L)=\\operatorname{im}\\bigl(T^n(\\tau_{\\le n-p}L)\\to T^n(L)\\bigr)\\qquad(p\\in\\mathbf Z).$$\nIt is finite, exhaustive and separated [def-sp-filtration, def-sp-convergence], equals $T^n(L)$ for $p\\le-r$, and is zero for $p\\ge n-c+1$. The canonical stable-page comparisons identify $E_\\infty^{p,n-p}\\cong F^pT^n(L)/F^{p+1}T^n(L)$ coherently with successive page-cohomology comparisons. Stabilization occurs for $s>\\max(q-c+1,p+r)$, $s\\ge2$. In total degree $n$ only $c\\le q\\le n+r$ occur, and $T^n(L)=0$ for $n<c-r$. For any morphism $u:L\\to L'$ with the same lower bound, the transported abutment map is $T^n(u)$, its filtration maps are restrictions to the displayed images, and its graded maps agree with the induced stable-page maps whenever the exact-couple morphism is induced by $u$. No completeness assumption on $D(\\mathcal A)$ is made.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 011T, lemma-spectral-sequence-associated-exact-couple; shifted half-plane convergence with derived truncation tail comparison; agent generalization preserving the arguments of lem-per-bounded-above-rhom-hyperext."
+ },
+ "stmt_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sp-abelian",
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtration",
+  "def-sp-homological-functor",
+  "def-weil-abstract-derived-category",
+  "thm-sp-half-plane-convergence"
+ ],
+ "proof": [
+  {
+   "text": "For $q<c$, the canonical complex $\\tau_{\\le q}L$ has zero cohomology: in degrees $j\\le q$ its cohomology is $H^j(L)=0$, and above $q$ it is zero by truncation. Thus $0\\to\\tau_{\\le q}L$ is a quasi-isomorphism and the truncation is zero in $D(\\mathcal A)$. Additivity makes its $T$-values zero, proving the asserted $D$-vanishing. The object $H^q(L)[-q]$ is zero for $q<c$ and otherwise belongs to $D^{\\ge q}$; the assumed amplitude bound with $b=q$ gives $E_2^{p,q}=0$ if $p+q<q-r$, that is $p<-r$. Every subsequent page is a kernel modulo an image in the preceding entry, so induction preserves these zero entries.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category",
+    "def-sp-exact-couple"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011S, definition-spectral-sequence-associated-exact-couple; standard truncations as in derived.tex Tag 08J5"
+   }
+  },
+  {
+   "text": "Translation of the first index preserves the three exactness identities and all the bidegrees of the assumed couple. Step 1 gives $\\widetilde D^{P,Q}=0$ for $Q<c$ and $\\widetilde E_2^{P,Q}=0$ unless $P\\ge0,Q\\ge c$. Apply [thm-sp-half-plane-convergence] with $a=c$. Original total degree $n=p+q$ becomes $N=P+Q=n+r$, and its canonical abutment is $\\widetilde D^{0,N}=D^{-r,n+r}=T^n(\\tau_{\\le n+r}L)=A_n$. The theorem gives its finite image filtration $\\widetilde F$, its canonical stable-page/graded comparisons, and stabilization for $s>\\max(Q-c+1,P)$, $s\\ge2$. Substituting $Q=q,P=p+r$ gives precisely the stated bound and the interval $c\\le q\\le n+r$.",
+   "uses": [
+    "thm-sp-half-plane-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.proof.md",
+    "place": "Proof paragraphs 1–2; Stacks Tag 011T, lemma-spectral-sequence-associated-exact-couple"
+   }
+  },
+  {
+   "text": "For any $m\\ge n+r$, use [lem-sf-derived-truncation-triangle] with $K=L,b=m+1$: its canonical triangle is $\\tau_{\\le m}L\\to L\\to R_m\\to(\\tau_{\\le m}L)[1]$, where $R_m=\\tau_{\\ge m+1}L\\in D^{\\ge m+1}$. The hypothesis gives $T^{n-1}(R_m)=T^n(R_m)=0$, since $n\\le m-r<m+1-r$. The long exact sequence [lem-sp-long-exact-of-triangle] therefore has segment $0\\to T^n(\\tau_{\\le m}L)\\to T^n(L)\\to0$. Exactness makes this middle arrow both monic and epic, hence an isomorphism in the abelian category. At $m=n+r$ it is $a_n$. Canonical truncation inclusions are natural, so for $u:L\\to L'$ they give the equality $T^n(u)a_n=a'_nT^n(\\tau_{\\le n+r}u)$. Inverting these isomorphisms proves naturality of the comparison. No infinite truncation limit is used.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-sp-long-exact-of-triangle",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; Tag 0147, definition-homological and equation-long-exact-cohomology-sequence"
+   }
+  },
+  {
+   "text": "Set $P=p+r,N=n+r$. For every integer P, compose the chosen D-term comparison with the truncation inclusion into $T^{N-r}(L)$. Naturality of successive inclusions makes these arrows a cocone on the alpha diagonal. The universal property of the chosen alpha colimit gives its comparison a with $T^{N-r}(L)$, pinned on every leg. Its zero leg is invertible by the normalization of the half-plane colimit and Step 3, so a is an isomorphism. Define F directly by the displayed images in the actual value. Truncation factorizations make these images decreasing. Since every colimit leg followed by a is the corresponding cutoff map, the image-filtration transport formula holds for every integer P. Transport along an isomorphism preserves subobject inclusions and quotients: the isomorphisms on adjacent image subobjects induce the quotient isomorphism, because their arrows into the ambient object commute with $a_n$. Consequently the theorem's canonical $E_\\infty$ comparisons and page-cohomology comparisons give the asserted graded comparisons. The filtration is top for $p\\le-r$ and bottom for $n-p<c$, equivalently $p\\ge n-c+1$, by Step 1. These endpoints imply finiteness, exhaustiveness and separatedness. Finally $n<c-r$ gives $n+r<c$, so $A_n=0$ by Step 1 and $T^n(L)=0$ by Step 3. At any page satisfying the stated strict bound, both possible differential entries vanish. The cycle and boundary towers are stationary from that page onward; their greatest-lower-bound and least-upper-bound properties identify the chosen limiting subobjects with those stable terms. The epimorphic tower projection has kernel the boundary inclusion, so the cokernel universal property gives the quotient comparison, retaining its equation with the tower projection.",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "def-sp-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.proof.md",
+    "place": "Proof paragraph 2, canonical image filtration and associated graded; Stacks Tag 0121, definition-filtered"
+   }
+  },
+  {
+   "text": "Conjugate the maps induced by u through d and e. Naturality of the canonical truncation inclusion, quotient and boundary makes them a CoupleMorphism. Apply [lem-sp-derived-couple-functoriality] to obtain maps on the already chosen limiting cycles and their quotients; its equations characterize both maps. Define the map on abutments by conjugating T^(N-r)(u) through a and a'. Its equation on every colimit leg follows from cutoff naturality. The same naturality square induces imageSubobjectMap on each displayed filtration step, and cancelling the monic inclusion shows compatibility with adjacent-step inclusions. The cokernel universal property supplies the graded map. Finally use the canonical quotient equations of Step 4 and cancel the epimorphic map from D to the infinite page. The remaining equation is precisely the image factorization naturality square, verified by cancellation of the monic image inclusion. This proves compatibility for the particular graded comparisons and limiting subobjects chosen earlier, including zero objects and empty support intervals.",
+   "uses": [
+    "lem-sp-derived-couple-functoriality",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011Q, definition-exact-couple, morphisms; Tag 011T, lemma-spectral-sequence-associated-exact-couple, canonical subquotients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-truncation-triangle",
+  "lem-sp-derived-couple-functoriality",
+  "lem-sp-long-exact-of-triangle",
+  "thm-sp-half-plane-convergence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 08J5 and 0147, together with homology.tex Tags 011T and 0121. Q5 makes the shifted half-plane argument into Lean, constructs the actual image filtration, proves arbitrary-late-page quotient compatibility, and derives naturality from the existing derived-couple functoriality theorem and image/cokernel universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological functor with shifted lower amplitude bound has finite Postnikov spectral sequence convergence to its value on a bounded below object via a finite truncation",
+   "results": "{\"t\": \"2026-10-22T07:21:50Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomological functor with shifted lower amplitude bound has finite Postnikov spectral sequence convergence to its value on a bounded below object via a finite truncation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"17291c0dc9e18cd4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure fractions and spectral-object quadrant classes do not give the shifted cutoff comparison, its actual T^n(L) image filtration and natural stable-page abutment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"trunc\"",
+   "results": "{\"t\": \"2026-10-22T07:21:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"trunc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure fractions and spectral-object quadrant classes do not give the shifted cutoff comparison, its actual T^n(L) image filtration and natural stable-page abutment."
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*spectral|spectral.*trunc|convergen|halfPlane",
+   "results": "{\"t\": \"2026-10-22T07:21:39Z\", \"tool\": \"grep\", \"query\": \"trunc.*spectral|spectral.*trunc|convergen|halfPlane\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SpectralObject/HasSpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/HasSpectralSequence.lean\", \"Mathlib/Algebra/Homology/SpectralObject/HasSpectralSequence.lean\"], \"digest\": \"57ed89f732bbba2c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure fractions and spectral-object quadrant classes do not give the shifted cutoff comparison, its actual T^n(L) image filtration and natural stable-page abutment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cutoff comparison and image filtration for the spectral sequence of a bounded below Postnikov tower with shifted half plane support",
+   "results": "{\"t\": \"2026-10-22T07:21:39Z\", \"tool\": \"leansearch\", \"query\": \"Finite cutoff comparison and image filtration for the spectral sequence of a bounded below Postnikov tower with shifted half plane support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFiltration.casesOn\", \"Ideal.Filtration.Stable.bounded_difference\", \"IsFiltration.F_lt_le_F\", \"UpperHalfPlane.atImInfty\", \"CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE\", \"HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported\", \"IsFiltration.rec\", \"MeasureTheory.Filtration.le_rightCont\"], \"digest\": \"601f4ce437540791\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: t-structure fractions and spectral-object quadrant classes do not give the shifted cutoff comparison, its actual T^n(L) image filtration and natural stable-page abutment."
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*spectral|spectral.*trunc|halfPlane|abutment",
+   "results": "{\"t\": \"2026-10-22T12:01:12Z\", \"tool\": \"grep\", \"query\": \"trunc.*spectral|spectral.*trunc|halfPlane|abutment\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give truncations, homological long exact sequences or spectral objects, not this shifted cutoff theorem with actual abutment and canonical filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postnikov spectral sequence finite truncation cutoff for a homological functor with a lower cohomological amplitude bound",
+   "results": "{\"t\": \"2026-10-22T12:01:13Z\", \"tool\": \"leansearch\", \"query\": \"Postnikov spectral sequence finite truncation cutoff for a homological functor with a lower cohomological amplitude bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.truncate\", \"ComplexShape.Embedding.truncGEFunctor\", \"CochainComplex.truncGE\", \"CochainComplex.truncLE\", \"ComplexShape.Embedding.truncLEFunctor\", \"CategoryTheory.CosimplicialObject.Truncated.trunc\", \"CochainComplex.shortComplexTruncLE\", \"ComplexShape.Embedding.truncLEFunctor_obj\"], \"digest\": \"d57f79f13bf0c09a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give truncations, homological long exact sequences or spectral objects, not this shifted cutoff theorem with actual abutment and canonical filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homological functor with lower amplitude bound evaluated on a bounded below complex is computed by a finite truncation and its Postnikov spectral sequence converges",
+   "results": "{\"t\": \"2026-10-22T12:01:24Z\", \"tool\": \"leanfinder\", \"query\": \"A homological functor with lower amplitude bound evaluated on a bounded below complex is computed by a finite truncation and its Postnikov spectral sequence converges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.quasiIso_πTruncGE_iff_isSupported\", \"CochainComplex.quasiIso_πTruncGE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\", \"HomologicalComplex.instHasHomologyTruncLE\", \"DerivedCategory.isLE_iff\"], \"digest\": \"23325709207c7506\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give truncations, homological long exact sequences or spectral objects, not this shifted cutoff theorem with actual abutment and canonical filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"trunc\"",
+   "results": "{\"t\": \"2026-10-22T12:01:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"trunc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give truncations, homological long exact sequences or spectral objects, not this shifted cutoff theorem with actual abutment and canonical filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted half plane exact couple converges to value of a cohomological functor with natural finite image filtration",
+   "results": "{\"t\": \"2026-10-22T12:02:03Z\", \"tool\": \"leanfinder\", \"query\": \"Shifted half plane exact couple converges to value of a cohomological functor with natural finite image filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homologySequence_exact₁\", \"CategoryTheory.Functor.homologySequence_exact₂\", \"CategoryTheory.Functor.homologySequence_exact₃\", \"CategoryTheory.Functor.homologySequenceComposableArrows₅_exact\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.HomologySequence.exact₁\"], \"digest\": \"0a0e4dbfa835d380\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give truncations, homological long exact sequences or spectral objects, not this shifted cutoff theorem with actual abutment and canonical filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralObjectFunctor|IsFirstQuadrant|HasSpectralSequence|convergen",
+   "results": "{\"t\": \"2026-10-22T12:02:04Z\", \"tool\": \"grep\", \"query\": \"spectralObjectFunctor|IsFirstQuadrant|HasSpectralSequence|convergen\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\"], \"digest\": \"0ea23768e0f2d3c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give truncations, homological long exact sequences or spectral objects, not this shifted cutoff theorem with actual abutment and canonical filtration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-bounded-above-rhom-hyperext",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof, Step 1, relative Verdier duality and its coefficient comparison chain: the degreewise truncation passage implicit in ILO XVII 10.1.1 p. 325 from Ext continuity to representable direct sums. Re-split of lem-per-bounded-above-rhom-hyperext: old proof Steps 6–8 (shifted half-plane, truncation tail and actual image filtration).",
+   "via": [
+    "lem-per-bounded-above-rhom-hyperext",
+    "lem-per-constructible-rhom-coproduct-continuity",
+    "lem-per-ctf-hom-universal-coefficients",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-postnikov-finite-cutoff-abutment",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Proved support and shifted half-plane application, cutoff isomorphism from the canonical tail triangle and long exact sequence, the exact transported image formula and endpoints, and natural graded compatibility. Existing nodes supply every non-elementary input; no new nodes.",
+  "blueprint": "Ancestor proof, Step 1, relative Verdier duality and its coefficient comparison chain: the degreewise truncation passage implicit in ILO XVII 10.1.1 p. 325 from Ext continuity to representable direct sums. Re-split of lem-per-bounded-above-rhom-hyperext: old proof Steps 6–8 (shifted half-plane, truncation tail and actual image filtration).",
+  "tool_uses": [
+   {
+    "node": "lem-sp-couple-morphism",
+    "why": "Generic naturality of half-plane exact-couple convergence is needed for the final compatibility clause; the perverse-curve unit has no statement giving this abstract categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-1cfd99eef",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-1cfd99eef (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes. It splits lem-per-postnikov-finite-cutoff-abutment with no new nodes and leaves the statement unchanged. It carries every argument of the old Steps 6–8 of the parent lem-per-bounded-above-rhom-hyperext (Q119 packet), plus the naturality part of old Step 9. (1) Step 1, support: τ≤q L is zero for q<c. H^q(L)[−q] lies in D^{≥q}, so the amplitude bound with b=q gives E_2=0 for p<−r. (2) Step 2, reindexing by D̃^{P,Q}=D^{P−r,Q}: it keeps the bidegrees of def-sp-exact-couple, and the hypotheses of thm-sp-half-plane-convergence hold with a=c. The abutment D^{−r,n+r}=T^n(τ≤n+r L) is correct, and the stabilization bound max(q−c+1,p+r) and range c≤q≤n+r are checked. (3) Step 3: the truncation triangle (lem-sf-derived-truncation-triangle, b=m+1) and the long exact sequence give T^{n−1}(R_m)=T^n(R_m)=0 for m≥n+r, so mono plus epi gives an isomorphism, natural in L. (4) Step 4: for P≥0 the image formula matches (N−P=n−p). For P≤0, Step 3 makes the displayed image the whole object. The endpoints p≤−r and p≥n−c+1 and the vanishing T^n(L)=0 for n<c−r are correct, and the transport of graded pieces is argued. (5) Step 5: lem-sp-couple-morphism, applied to the translated couples and conjugated by a_n, gives T^n(u), its restrictions to the images and the graded compatibility. Small cases: T^0=H^r (degenerate at p=−r; the cutoff n+r is sharp), L=k[−c], L=0 and the empty range all agree. Sources read: Stacks homology.tex Tag 011T and derived.tex Tag 08J5. The route of unit sk-p-dl-a1-perverse reaches sk-prop-av-pqf-finite and sk-prop-sf-comparison; the declared tool_use of lem-sp-couple-morphism is accepted. No duplicate exists: lem-weil-pbc-finite-postnikov-isomorphism, lem-pc-hypercohomology-left-edge-truncation, thm-sp-if-e1 and the sibling lem-per-postnikov-additive-exact-couple all state different things. Mathlib searches cover all three kinds. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PostnikovFiniteCutoffAbutment",
+  "declaration": "DerivedCategory.postnikov_finite_cutoff_abutment",
+  "declarations": [
+   "DerivedCategory.postnikovValue",
+   "DerivedCategory.postnikovD",
+   "DerivedCategory.postnikovE",
+   "DerivedCategory.postnikovAlpha",
+   "DerivedCategory.postnikovG",
+   "DerivedCategory.postnikovF",
+   "DerivedCategory.postnikovCutoffMap",
+   "DerivedCategory.postnikovLowerCategory",
+   "DerivedCategory.postnikov_finite_cutoff_abutment"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PostnikovFiniteCutoffAbutment.lean",
+  "statement": "theorem postnikov_finite_cutoff_abutment (T : DerivedCategory A ⥤ B) [T.IsHomological] (r c : ℤ) (hamp : ∀ (b n : ℤ) (M : DerivedCategory A), M.IsGE b → n < b - r → IsZero ((postnikovValue T n).obj M)) (X : postnikovLowerCategory A c → CategoryTheory.BigradedExactCouple B 0) (d : ∀ (K : postnikovLowerCategory A c) (P Q : ℤ), (X K).D P Q ≅ (postnikovD T r P Q).obj K.obj) (e : ∀ (K : postnikovLowerCategory A c) (P Q : ℤ), (X K).E P Q ≅ (postnikovE T r P Q).obj K.obj) (ha : ∀ (K : postnikovLowerCategory A c) (P Q : ℤ), (X K).alpha P Q ≫ (d K (P - 1) (Q + 1)).hom = (d K P Q).hom ≫ postnikovAlpha T r P Q K.obj) (hg : ∀ (K : postnikovLowerCategory A c) (P Q : ℤ), (X K).initialG P Q ≫ (e K P Q).hom = (d K P Q).hom ≫ postnikovG T r P Q K.obj) (hf : ∀ (K : postnikovLowerCategory A c) (P Q : ℤ), (X K).f P Q ≫ (d K (P + 2) (Q - 1)).hom = (e K P Q).hom ≫ postnikovF T r P Q K.obj) : (∀ (K : postnikovLowerCategory A c) (n m : ℤ), n + r ≤ m → IsIso (postnikovCutoffMap T n m K.obj)) ∧ (∀ (K K' : postnikovLowerCategory A c) (u : K ⟶ K') (n m : ℤ), (postnikovValue T n).map ((TStructure.t.truncLE m).map u.hom) ≫ postnikovCutoffMap T n m K'.obj = postnikovCutoffMap T n m K.obj ≫ (postnikovValue T n).map u.hom) ∧ (∀ (K : postnikovLowerCategory A c) (n : ℤ), n < c - r → IsZero ((postnikovValue T n).obj K.obj)) ∧ (∀ (K : postnikovLowerCategory A c) (P Q : ℤ), Q < c → IsZero ((X K).D P Q)) ∧ (∀ (K : postnikovLowerCategory A c) (s : ℕ) (p q : ℤ), p < -r ∨ q < c → IsZero (((X K).pageCouple s).E (p + r) q)) ∧ (∀ (K : postnikovLowerCategory A c) (s : ℕ) (n p q : ℤ), p + q = n → ¬ IsZero (((X K).pageCouple s).E (p + r) q) → c ≤ q ∧ q ≤ n + r) ∧ (∀ (K : postnikovLowerCategory A c) (s : ℕ) (p q : ℤ), (s : ℤ) + 2 > max (q - c + 1) (p + r) → ∃ z : ((X K).pageCouple s).E (p + r) q ≅ ((X K).pageCouple (s + 1)).E (p + r) q, kernel.ι (((X K).pageCouple s).d (p + r) q) ≫ z.hom = ((X K).pageCouple s).derivedEProjection (p + r) q) ∧ ∃ lim : ∀ K : postnikovLowerCategory A c, CategoryTheory.BigradedExactCouple.LimitSubobjects (X K), ∃ ab : ∀ (K : postnikovLowerCategory A c) (N : ℤ), CategoryTheory.BigradedExactCouple.AlphaColimit (X K) N, ∃ hAb : ∀ (K : postnikovLowerCategory A c) (N : ℤ), (ab K N).obj = (X K).D 0 N, ∃ a : ∀ (K : postnikovLowerCategory A c) (N : ℤ), (ab K N).obj ≅ (postnikovValue T (N - r)).obj K.obj, ∃ F : ∀ (K : postnikovLowerCategory A c) (n : ℤ), DecreasingFiltration ((postnikovValue T n).obj K.obj), ∃ hF : ∀ (K : postnikovLowerCategory A c) (n p : ℤ), (F K n).F p = imageSubobject (postnikovCutoffMap T n (n - p) K.obj), ∃ g : ∀ (K : postnikovLowerCategory A c) (p q : ℤ), (X K).pageInfinity (lim K) (p + r) q ≅ (F K (p + q)).gradedPiece p, (∀ (K : postnikovLowerCategory A c) (N : ℤ), (ab K N).ι 0 ≫ eqToHom (hAb K N) = eqToHom (by congr 1; omega)) ∧ (∀ (K : postnikovLowerCategory A c) (N P : ℤ), (ab K N).ι P ≫ (a K N).hom = (d K P (N - P)).hom ≫ eqToHom (congrArg (fun n : ℤ ↦ (postnikovValue T n).obj ((TStructure.t.truncLE (N - P)).obj K.obj)) (by omega)) ≫ postnikovCutoffMap T (N - r) (N - P) K.obj) ∧ (∀ K : postnikovLowerCategory A c, (X K).IsComplete ∧ (X K).ConvergesTo (lim K) (ab K)) ∧ (∀ (K : postnikovLowerCategory A c) (n p : ℤ), (F K n).F p = (Subobject.«exists» ((a K (n + r)).hom ≫ eqToHom (congrArg (fun k : ℤ ↦ (postnikovValue T k).obj K.obj) (by omega)))).obj (((X K).imageFiltration (n + r) (ab K (n + r))).step (p + r))) ∧ (∀ (K : postnikovLowerCategory A c) (n : ℤ), (F K n).IsFinite ∧ (F K n).IsExhaustive ∧ (F K n).IsSeparated) ∧ (∀ (K : postnikovLowerCategory A c) (n p : ℤ), p ≤ -r → (F K n).F p = ⊤) ∧ (∀ (K : postnikovLowerCategory A c) (n p : ℤ), n - c + 1 ≤ p → (F K n).F p = ⊥) ∧ (∀ (K : postnikovLowerCategory A c) (p q : ℤ), (X K).toPageInfinity (lim K) (p + r) q ≫ (g K p q).hom = (d K (p + r) q).hom ≫ eqToHom (congrArg (fun n : ℤ ↦ (postnikovValue T n).obj ((TStructure.t.truncLE q).obj K.obj)) (by omega)) ≫ factorThruImageSubobject (postnikovCutoffMap T (p + q) q K.obj) ≫ eqToHom (congrArg Subobject.underlying.obj ((hF K (p + q) p).trans (congrArg (fun k : ℤ ↦ imageSubobject (postnikovCutoffMap T (p + q) k K.obj)) (by omega))).symm) ≫ cokernel.π (Subobject.ofLE _ _ ((F K (p + q)).F_succ_le p))) ∧ (∀ (K : postnikovLowerCategory A c) (s : ℕ) (p q : ℤ), (s : ℤ) + 2 > max (q - c + 1) (p + r) → ∃ z : ((lim K).Z (p + r) q : B) ⟶ ((X K).cycleBoundaryTower.Z s (p + r) q : B), ∃ v : ((X K).pageCouple s).E (p + r) q ≅ (X K).pageInfinity (lim K) (p + r) q, z ≫ ((X K).cycleBoundaryTower.Z s (p + r) q).arrow = ((lim K).Z (p + r) q).arrow ∧ z ≫ (X K).cycleBoundaryTower.projection s (p + r) q ≫ v.hom = cokernel.π (Subobject.ofLE _ _ (CategoryTheory.BigradedExactCouple.limitBoundary_le_cycle (X K) (lim K) (p + r) q))) ∧ (∀ (K K' : postnikovLowerCategory A c) (u : K ⟶ K'), ∃ f : ∀ N : ℤ, (ab K N).obj ⟶ (ab K' N).obj, ∃ lift : ∀ n p : ℤ, ((F K n).F p : B) ⟶ ((F K' n).F p : B), ∃ gr : ∀ p q : ℤ, (F K (p + q)).gradedPiece p ⟶ (F K' (p + q)).gradedPiece p, ∃ z : ∀ p q : ℤ, ((lim K).Z (p + r) q : B) ⟶ ((lim K').Z (p + r) q : B), ∃ tInf : ∀ p q : ℤ, (X K).pageInfinity (lim K) (p + r) q ⟶ (X K').pageInfinity (lim K') (p + r) q, (∀ N : ℤ, f N ≫ (a K' N).hom = (a K N).hom ≫ (postnikovValue T (N - r)).map u.hom) ∧ (∀ N P : ℤ, (ab K N).ι P ≫ f N = (d K P (N - P)).hom ≫ (postnikovD T r P (N - P)).map u.hom ≫ (d K' P (N - P)).inv ≫ (ab K' N).ι P) ∧ (∀ n p : ℤ, lift n p ≫ ((F K' n).F p).arrow = ((F K n).F p).arrow ≫ (postnikovValue T n).map u.hom) ∧ (∀ p q : ℤ, cokernel.π (Subobject.ofLE _ _ ((F K (p + q)).F_succ_le p)) ≫ gr p q = lift (p + q) p ≫ cokernel.π (Subobject.ofLE _ _ ((F K' (p + q)).F_succ_le p))) ∧ (∀ p q : ℤ, z p q ≫ ((lim K').Z (p + r) q).arrow = ((lim K).Z (p + r) q).arrow ≫ (e K (p + r) q).hom ≫ (postnikovE T r (p + r) q).map u.hom ≫ (e K' (p + r) q).inv) ∧ (∀ p q : ℤ, cokernel.π (Subobject.ofLE _ _ (CategoryTheory.BigradedExactCouple.limitBoundary_le_cycle (X K) (lim K) (p + r) q)) ≫ tInf p q = z p q ≫ cokernel.π (Subobject.ofLE _ _ (CategoryTheory.BigradedExactCouple.limitBoundary_le_cycle (X K') (lim K') (p + r) q))) ∧ (∀ p q : ℤ, (g K p q).hom ≫ gr p q = tInf p q ≫ (g K' p q).hom))",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1eba4f8e4",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Read node, all stmt_deps (BigradedExactCouple/pageCouple, ExactCoupleConvergence LimitSubobjects/AlphaColimit/imageFiltration/pageInfinity/toPageInfinity/IsComplete/ConvergesTo, DecreasingFiltration + IsFinite/IsSeparated/IsExhaustive/gradedPiece, halfPlaneConvergence record, Mathlib IsHomological⇒Additive, truncLE/natTransTruncLEOfLE/triangleLTLTGELT), module, report (Worker report + Second reading present), citer lem-per-bounded-above-rhom-hyperext Step 3 and sibling additive-exact-couple. Node unchanged except lean; lean.statement verbatim = file signature. Couple in translated coordinates P=p+r with D≅T^{P+Q-r}(τ≤Q L), E≅T^{P+Q-r}(τ≥Qτ<Q+1 L), α/g/f pinned to inclusion/quotient/boundary with canonical shiftFunctorAdd' comparison; bidegrees checked. All conclusion clauses match the node: cutoff iso ∀m≥n+r and naturality, vanishing n<c-r, D=0 for Q<c, all-page vanishing p<-r∨q<c, support c≤q≤n+r, stabilization s+2>max(q-c+1,p+r) with canonical iso, ab normalized to D(0,N), a pinned on every cocone leg by the actual inclusion, IsComplete∧ConvergesTo, F^p=im(T^n(τ≤n-p L)→T^n L) ∀p and = transport of the half-plane filtration at index p+r, finite/exhaustive/separated, top p≤-r, bottom p≥n-c+1, canonical E∞≅gr and late-page coherence, full naturality in u (transport = T^n(u), restrictions, graded, E∞ maps). lim/ab existentials are unique. Real-data helpers, only the theorem sorry, docstrings with sources and proof steps, universes bound, no extra assumptions, no pro-étale. Advisory: couple family over all K in D^{≥c}, needed for naturality and matching the sibling's construction. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261024T190657-L-5269",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

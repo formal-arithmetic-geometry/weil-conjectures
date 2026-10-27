@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-commuting-endomorphisms-common-eigenvector",
+ "kind": "statement",
+ "title": "Common eigenvector for a finite commuting family over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], let $V\\ne0$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace], let $I$ be a finite set (possibly empty), and let $T_i:V\\to V$ be $k$-linear endomorphisms indexed by $i\\in I$. Assume $T_iT_j=T_jT_i$ for every $i,j\\in I$, where products denote composition. There exist $v\\in V\\setminus\\{0\\}$ and scalars $\\lambda_i\\in k$ for all $i\\in I$ such that $T_i(v)=\\lambda_i v$ for every $i\\in I$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.11, printed p.327, proof: the induction proving existence of a one-dimensional stable subspace; finite-family consequence."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $n=|I|$, with the assertion quantified over every nonzero finite-dimensional $k$-vector space and every commuting family indexed by an $n$-element set. For $n=0$, choose $v\\ne0$ using $V\\ne0$; the unique empty family of scalars has the required vacuous property. For the induction step take $n>0$, fix $i_0\\in I$, and put $J=I\\setminus\\{i_0\\}$, so $|J|=n-1$. The induction hypothesis is available for families on any nonzero finite-dimensional space, not just on $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.11, printed p.327, proof: restriction to an invariant eigenspace. The finite-family version here uses induction on the number of operators instead of dimension."
+   }
+  },
+  {
+   "text": "Apply [lem-zl-alg-closed-endomorphism-eigenvalue] to $T_{i_0}$ on $V$: choose $a\\in k$ and $z\\ne0$ with $T_{i_0}(z)=az$. Put $E=\\{x\\in V:T_{i_0}(x)=ax\\}$. Linearity shows that $0\\in E$, and that $T_{i_0}(bx+cy)=a(bx+cy)$ for $x,y\\in E$ and $b,c\\in k$, so $E$ is a $k$-linear subspace. It is nonzero because $z\\in E$. Apply [lem-trf-vector-space-quotient-dimension] with $U=E$ to conclude that $E$ is finite-dimensional; only its subspace-finiteness clause is used. Thus $E$ satisfies every vector-space hypothesis of the induction assertion.",
+   "uses": [
+    "lem-zl-alg-closed-endomorphism-eigenvalue",
+    "lem-trf-vector-space-quotient-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.11, printed p.327, proof: restriction to an invariant eigenspace. The finite-family version here uses induction on the number of operators instead of dimension."
+   }
+  },
+  {
+   "text": "For $j\\in J$ and $x\\in E$, compute $T_{i_0}(T_jx)=T_j(T_{i_0}x)=T_j(ax)=aT_jx$ by commutativity and linearity. Hence $T_j(E)\\subseteq E$ and $S_j=T_j|_E:E\\to E$ is linear. For $j,l\\in J$ the two composites on $x\\in E$ have ambient values $T_j(T_lx)=T_l(T_jx)$, so the restricted operators commute. Apply the induction hypothesis to $(S_j)_{j\\in J}$ on the nonzero finite-dimensional space $E$: obtain $v\\in E\\setminus\\{0\\}$ and $b_j\\in k$ with $S_j(v)=b_jv$. The inclusion $E\\subseteq V$ is injective, so this same $v$ is nonzero in $V$. Set $\\lambda_{i_0}=a$ and $\\lambda_j=b_j$ for $j\\in J$. Membership $v\\in E$ gives $T_{i_0}(v)=av$, and the equations for the restrictions give $T_j(v)=b_jv$ for every $j\\in J$. This proves the induction step and all the required equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.11, printed p.327, proof: restriction to an invariant eigenspace. The finite-family version here uses induction on the number of operators instead of dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-zl-alg-closed-endomorphism-eigenvalue"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.11, printed p.327, proof: restriction to an invariant eigenspace. The finite-family version here uses induction on the number of operators instead of dimension.",
+  "note": "Explicit finite-index induction elaborating the invariant-eigenspace argument of Milne Lemma 16.11; Milne uses dimension induction to cover arbitrary sets."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*(common|eigenvector)|eigenvector.*commut|commut.*eigenvector",
+   "results": "Search returned 7 hits: Mathlib/LinearAlgebra/Eigenspace/Basic.lean, Mathlib/LinearAlgebra/Eigenspace/Basic.lean, Mathlib/LinearAlgebra/Eigenspace/Basic.lean, Mathlib/LinearAlgebra/Eigenspace/Basic.lean, Mathlib/LinearAlgebra/Eigenspace/Basic.lean, Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/Gershgorin.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.End\", \"eigen\", \"Commute\"",
+   "results": "Search returned 2 hits: Module.End.map_add_of_iInf_genEigenspace_ne_bot_of_commute, Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite commuting family of endomorphisms of a nonzero finite dimensional vector space over an algebraically closed field has a common eigenvector",
+   "results": "Search returned 8 hits: Module.End.exists_eigenvalue, Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial, Module.End.finite_hasEigenvalue, Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute, Module.End.instFintypeEigenvalues, Module.End.HasUnifEigenvalue.exists_hasUnifEigenvector, Module.End.HasUnifEigenvalue.of_mem_spectrum, Module.End.iSup_maxGenEigenspace_eq_top",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous triangularization of an arbitrary set of pairwise commuting linear maps on a finite dimensional vector space over an algebraically closed field",
+   "results": "Search returned 8 hits: Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute, LieModule.instIsTriangularizableOfIsAlgClosed, Module.End.IsSemisimple.mul_of_commute, Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_forall_mapsTo, Module.End.IsSemisimple.of_mem_adjoin_pair, Module.End.IsSemisimple.add_of_commute, Module.End.IsSemisimple.sub_of_commute, LinearMap.IsSymmetric.iSup_iInf_eq_top_of_commute",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "common.*eigen|simultaneous.*(eigen|triang)|commuting family",
+   "results": "Search returned 19 hits: Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/Algebra/Lie/Weights/Basic.lean, Mathlib/Algebra/Lie/Weights/Basic.lean, Mathlib/Algebra/Lie/Weights/Linear.lean, Mathlib/Algebra/Lie/Weights/Linear.lean, Mathlib/Algebra/Lie/Weights/Linear.lean, Mathlib/Algebra/Lie/Sl2.lean, Mathlib/Algebra/Lie/LieTheorem.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of commuting linear endomorphisms of a nonzero finite dimensional vector space over an algebraically closed field has a nonzero simultaneous eigenvector",
+   "results": "Search returned 8 hits: Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial, Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute, Module.End.exists_eigenvalue, Module.End.HasEigenvalue.exists_hasEigenvector, LinearMap.IsSymmetric.iSup_iInf_eq_top_of_commute, LinearMap.IsSymmetric.LinearMap.IsSymmetric.directSum_isInternal_of_pairwise_commute, Module.End.mapsTo_genEigenspace_of_comm, LinearMap.IsSymmetric.iSup_iSup_eigenspace_inf_eigenspace_eq_top_of_commute",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.End\", \"HasEigenvector\"",
+   "results": "Search returned 7 hits: Module.End.HasEigenvector, Module.End.hasEigenvalue_of_hasEigenvector, Module.End.HasEigenvalue.exists_hasEigenvector, Module.End.hasEigenvector_iff, Module.End.HasEigenvector.apply_eq_smul, Module.End.HasEigenvector.pow_apply, Module.End.aeval_apply_of_hasEigenvector",
+   "date": "2026-10-23",
+   "verdict": "no match: Module.End.exists_eigenvalue (Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean:63) treats one operator; Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute (Mathlib/LinearAlgebra/Eigenspace/Pi.lean:194) gives spanning by intersections of generalized eigenspaces, not a nonzero common true eigenvector. Passing from generalized to true common eigenvectors needs an argument. JointEigenspace results assume symmetric operators. LieTheorem has characteristic hypotheses absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "common.*eigen|simultaneous.*(eigen|triang)|commuting family",
+   "results": "{\"t\": \"2026-10-23T20:17:52Z\", \"tool\": \"grep\", \"query\": \"common.*eigen|simultaneous.*(eigen|triang)|commuting family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\"], \"digest\": \"02316c8222a2f455\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-operator eigenvalue existence is already lem-zl-alg-closed-endomorphism-eigenvalue. Eigenspace/Pi.lean:194-202 gives intersections of maximal generalized eigenspaces, not true eigenvectors. JointEigenspace requires symmetric operators. Lie weights need a Lie algebra and weight/module constructions, so are not one-line specializations for the given family; the project Lie theorem also requires characteristic zero."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pairwise commuting endomorphisms on a nonzero finite dimensional vector space over an algebraically closed field admit a simultaneous eigenvector",
+   "results": "{\"t\": \"2026-10-23T20:17:53Z\", \"tool\": \"leansearch\", \"query\": \"Pairwise commuting endomorphisms on a nonzero finite dimensional vector space over an algebraically closed field admit a simultaneous eigenvector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\", \"LinearMap.IsSymmetric.iSup_iInf_eq_top_of_commute\", \"Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial\", \"Module.End.HasEigenvalue.exists_hasEigenvector\", \"Module.End.exists_eigenvalue\", \"LinearMap.IsSymmetric.LinearMap.IsSymmetric.directSum_isInternal_of_pairwise_commute\", \"LinearMap.IsSymmetric.iSup_iSup_eigenspace_inf_eigenspace_eq_top_of_commute\", \"Module.End.mapsTo_genEigenspace_of_comm\"], \"digest\": \"d1379dfbd5636f01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-operator eigenvalue existence is already lem-zl-alg-closed-endomorphism-eigenvalue. Eigenspace/Pi.lean:194-202 gives intersections of maximal generalized eigenspaces, not true eigenvectors. JointEigenspace requires symmetric operators. Lie weights need a Lie algebra and weight/module constructions, so are not one-line specializations for the given family; the project Lie theorem also requires characteristic zero."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.End\", \"eigen\", \"Commute\"",
+   "results": "{\"t\": \"2026-10-23T20:17:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.End\\\", \\\"eigen\\\", \\\"Commute\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.End.map_add_of_iInf_genEigenspace_ne_bot_of_commute\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\"], \"digest\": \"562e24ddb57c9095\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-operator eigenvalue existence is already lem-zl-alg-closed-endomorphism-eigenvalue. Eigenspace/Pi.lean:194-202 gives intersections of maximal generalized eigenspaces, not true eigenvectors. JointEigenspace requires symmetric operators. Lie weights need a Lie algebra and weight/module constructions, so are not one-line specializations for the given family; the project Lie theorem also requires characteristic zero."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite commuting family of linear endomorphisms of a nonzero finite dimensional vector space over an algebraically closed field has a common eigenvector",
+   "results": "{\"t\": \"2026-10-23T20:17:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finite commuting family of linear endomorphisms of a nonzero finite dimensional vector space over an algebraically closed field has a common eigenvector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_eigenvalue\", \"Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\", \"Module.End.finite_hasEigenvalue\", \"Module.End.instFintypeEigenvalues\", \"Module.End.HasUnifEigenvalue.exists_hasUnifEigenvector\", \"Module.End.HasUnifEigenvalue.of_mem_spectrum\", \"Module.End.iSup_maxGenEigenspace_eq_top\"], \"digest\": \"f650e62815949464\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-operator eigenvalue existence is already lem-zl-alg-closed-endomorphism-eigenvalue. Eigenspace/Pi.lean:194-202 gives intersections of maximal generalized eigenspaces, not true eigenvectors. JointEigenspace requires symmetric operators. Lie weights need a Lie algebra and weight/module constructions, so are not one-line specializations for the given family; the project Lie theorem also requires characteristic zero."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous triangularization of a family of pairwise commuting linear maps over an algebraically closed field in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T20:18:20Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous triangularization of a family of pairwise commuting linear maps over an algebraically closed field in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"Module.End.map_add_of_iInf_genEigenspace_ne_bot_of_commute\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_forall_mapsTo\", \"Module.End.IsSemisimple.mul_of_commute\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"Module.End.IsSemisimple.add_of_commute\", \"LinearMap.IsSymmetric.LinearMap.IsSymmetric.directSum_isInternal_of_pairwise_commute\"], \"digest\": \"ac24bf010fba4546\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: single-operator eigenvalue existence is already lem-zl-alg-closed-endomorphism-eigenvalue. Eigenspace/Pi.lean:194-202 gives intersections of maximal generalized eigenspaces, not true eigenvectors. JointEigenspace requires symmetric operators. Lie weights need a Lie algebra and weight/module constructions, so are not one-line specializations for the given family; the project Lie theorem also requires characteristic zero."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-commutative-group-representation-eigenline",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, first sentence: triangularize over the algebraic closure, in present proof step 1. In the Lie–Kolchin proof: Corollary 16.14 supplies the commutative quotient/base case. Supporting linear-algebra input: Milne Lemma 16.11, the common-eigenvector induction applied to coefficient endomorphisms.",
+   "via": [
+    "lem-sfb-commutative-group-representation-eigenline",
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-commuting-endomorphisms-common-eigenvector",
+  "worker": "stage1",
+  "group": "Q16",
+  "summary": "Proved the finite-family assertion by explicit induction on the size of the index set, restricting the remaining operators to a nonzero eigenspace. Reused the existing eigenvalue-existence and subspace-finiteness Mathlib leaves; no new nodes. Statement unchanged. Empty family, zero eigenvalues, scalar operators, and arbitrary characteristic are covered.",
+  "blueprint": "Supporting linear-algebra input to Milne Lemma 16.11 in the ancestry recorded in blueprint.from.place, ultimately the alteration/finiteness part of the six-functor stability route. The exact item is not an imported blueprint node; blueprint_refs ancestor reports None, retained. Search of all blueprint eigenvector/eigenvalue/commuting results finds no equivalent arbitrary-characteristic family statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-28f0b8666",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-28f0b8666 (reviewer sub-agent of L); spot-checked: I read the item and both cited statements in full, and Milne Lemma 16.11 on printed p.327 (PDF p.339). That proof finds a stable line by induction on dim V. The delivery inducts on |I| instead; that is correct for a finite family and is recorded honestly as proof_origin agent. The statement is unchanged, and the hypothesis V≠0 is needed. Step 1 sets up the induction for every nonzero finite-dimensional space, with an explicit base and step. Step 2 uses lem-zl-alg-closed-endomorphism-eigenvalue (Module.End.exists_eigenvalue), whose hypotheses all hold. It uses only the 'U finite-dimensional' clause of lem-trf-vector-space-quotient-dimension, and that node states it. Step 3 is elementary: the eigenspace is stable, the restrictions commute, and the induction hypothesis assembles the result. Small cases check out: empty family, one operator, dim 1, zero operators, and a nilpotent Jordan block. The argument works in any characteristic. There are no new nodes. The duplicate search found nothing equivalent: lem-wf-solvable-common-eigenvector is the Q̄_ℓ Lie-algebra case. Batch-5 flag: lem-trf-vector-space-quotient-dimension is a dependency-free Mathlib leaf of generic rank-nullity linear algebra. It is neither an assumed statement nor part of the proof of the trace formula or Poincaré duality, so the citation is accepted. No SGA is cited and the unit route is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CommutingEndomorphismsCommonEigenvector",
+  "declaration": "Module.End.exists_common_eigenvector_of_commute",
+  "file": "lean/Sheaf/LinearAlgebra/CommutingEndomorphismsCommonEigenvector.lean",
+  "statement": "theorem exists_common_eigenvector_of_commute {k : Type u} [Field k] [IsAlgClosed k] {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V] {I : Type w} [Finite I] (T : I → Module.End k V) (hT : ∀ i j : I, Commute (T i) (T j)) : ∃ (x : V) (μ : I → k), x ≠ 0 ∧ ∀ i : I, T i x = μ i • x",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3100fe3e2",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Clauses match the node: k alg-closed field, V nonzero (Nontrivial) finite-dimensional, I Finite and possibly empty, pairwise Commute, ∃ x ≠ 0 and μ with T i x = μ i • x. No extra hypotheses; universes u v w independent and bound. lean.statement verbatim; source-place and blueprint docstrings present, proof steps in docstring, sorry only, no defs. Mathlib/side-live searches found no duplicate (LieModule.exists_forall_lie_eq_smul* need Lie/weight structure or char 0). Live node equals snapshot except lean. Advisory: non-public proof-dep imports unused by the statement."
+ }
+}

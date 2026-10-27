@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-adjoint-kernel-central-quotient-unipotent",
+ "kind": "statement",
+ "title": "The adjoint kernel has a unipotent quotient with central kernel",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and their homomorphisms are as in [def-sc-group-scheme], and closed subgroup schemes as in [def-sc-group-scheme-subgroup]. Let $G$ be a smooth connected affine $F$-group scheme of finite type; smoothness, connectedness and finite type are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Write $\\mathfrak g=T_eG$ for the tangent space at the identity and $\\operatorname{GL}(\\mathfrak g)$ for the group scheme of invertible linear maps of this finite-dimensional vector space. Let $\\operatorname{Ad}:G\\to\\operatorname{GL}(\\mathfrak g)$ be the representation obtained by differentiating conjugation, and let $N=\\ker\\operatorname{Ad}$. Let $Z(G)$ be the closed subgroup scheme whose $A$-points commute with every element of $G(A')$ for every commutative $A$-algebra $A'$, as in [lem-sfb-affine-group-centre-base-change]. For $n\\geq1$, let $\\mathcal U_{n,F}$ be the group scheme with $\\mathcal U_{n,F}(A)$ the upper triangular $n\\times n$ matrices over $A$ with every diagonal entry $1$, under matrix multiplication. There exist $n\\geq1$, a closed subgroup scheme $U\\subseteq\\mathcal U_{n,F}$, and a group-scheme homomorphism $q:N\\to U$ whose scheme-theoretic kernel is $Z(G)\\subseteq N$. In particular, for every commutative $F$-algebra $A$ and $g\\in N(A)$, one has $q_A(g)=1$ if and only if $g\\in Z(G)(A)$. No reductivity of $G$, and no smoothness or connectedness of $N$ or $U$, is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.23, printed p.285; Theorem 14.5(a),(b), printed p.281; quotient with its scheme-theoretic kernel and affineness in Theorem 5.28 and Proposition 5.29, printed p.105. The assertion records the quotient N/Z(G) through a closed unitriangular embedding, without needing quotient terminology."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-affine-group-centre-base-change",
+  "def-sfb-adjoint-kernel-points"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-conjugation-finite-jet-kernel] to $G$ and choose $r\\geq\\max(1,r_0)$. Write $V=B/I^{r+1}$ and $J^i=I^i/I^{r+1}$. The representation $\\rho_r$ preserves these subspaces and has scheme-theoretic kernel $Z(G)$. A central element induces identity conjugation after every base change; differentiating gives $\\operatorname{Ad}=1$. Thus $Z(G)\\subseteq N$, and the restriction $h=\\rho_r|_N$ has kernel exactly $Z(G)$, on every test algebra.",
+   "uses": [
+    "lem-sfb-conjugation-finite-jet-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.23, first and third sentences of proof; Corollary 8.10, printed pp.150,285."
+   }
+  },
+  {
+   "text": "The cotangent action of $N$ is trivial, including over nonreduced test algebras. At $e$, [lem-sc-rational-tangent-cotangent-duality] identifies $\\mathfrak g$ with $(I/I^2)^\\vee$ and differentiation with dual pullback. Here is the formula after an arbitrary extension to an $F$-algebra $A$: a tangent vector is the map $f\\mapsto e^*(f)+\\epsilon\\lambda([f-e^*(f)])$ to $A[\\epsilon]/(\\epsilon^2)$, with $\\lambda:A\\otimes_F(I/I^2)\\to A$ linear. Under conjugation by $g^{-1}$ it becomes the same expression with $\\lambda$ composed with pullback on $A\\otimes_F(I/I^2)$. This follows just by substituting the pulled-back function into the displayed formula. For $g\\in N(A)$ its tangent action $\\operatorname{Ad}(g^{-1})$ is identity. Every $\\lambda$ is therefore unchanged. Applying the dual basis of the finite free module $A\\otimes_F(I/I^2)$ shows its pullback is identity. Thus $g$ acts trivially on the first ideal quotient. This is the contragredient convention used in Milne 14.23.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sfb-conjugation-finite-jet-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.23, second sentence of proof; paragraphs 10.19--10.20, printed pp.192,285."
+   }
+  },
+  {
+   "text": "For every $i\\geq1$, $I^i/I^{i+1}$ is spanned over $F$ by products of $i$ elements of $I/I^2$. Indeed, elements of $I^i$ are sums of products $b x_1\\cdots x_i$ with $x_j\\in I$, and $b$ can be replaced by its residue $e^*(b)$ modulo $I^{i+1}$. For any test algebra $A$, each $g\\in N(A)$ acts multiplicatively and identically on $A\\otimes_F(I/I^2)$ by step 2. Substitution into those products proves identity action on $A\\otimes_F(I^i/I^{i+1})$. For $i=0$ the quotient is $F$ with identity action by the jet lemma. Hence $h$ is identity on every successive quotient of $V=J^0\\supseteq J^1\\supseteq\\cdots\\supseteq J^{r+1}=0$.",
+   "uses": [
+    "lem-sfb-conjugation-finite-jet-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.23, passage to powers of the maximal ideal and the displayed flag, printed p.285."
+   }
+  },
+  {
+   "text": "Choose an $F$-basis of each $J^i/J^{i+1}$, lift it to $J^i$, and order these lifts with the deepest layer first. Together they form a basis of $V$. In this basis, $h_A(g)v-v$ lies in the span of earlier basis vectors for every basis vector $v$, every $F$-algebra $A$ and every $g\\in N(A)$, by step 3. Therefore the representing matrix is upper triangular with diagonal entries $1$. Put $n=\\dim_F V\\geq1$ (the residue quotient is $F$). This gives a homomorphism $h:N\\to\\mathcal U_{n,F}$ with the same kernel $Z(G)$ as in step 1; the matrix equations hold for arbitrary $A$, hence define the factor as a group-scheme homomorphism.",
+   "uses": [
+    "lem-sfb-conjugation-finite-jet-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.23, final flag argument; Theorem 14.5(a)⇒(b) and Corollary 14.6, printed pp.281--282,285."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $h:N\\to\\mathcal U_{n,F}$. Its hypotheses require finite-type separated group schemes over a field, with no smoothness or connectedness requirement on the source. They hold: first apply the kernel clause of that same node to $\\operatorname{Ad}:G\\to\\operatorname{GL}(\\mathfrak g)$ to obtain that $N$ is closed and of finite type; being closed in the affine $G$ it is affine and separated. Also, $\\mathcal U_{n,F}$ is affine with polynomial coordinate algebra $F[x_{ij}:i<j]$. We obtain a closed subgroup scheme $U\\subseteq\\mathcal U_{n,F}$ and $q:N\\to U$ having the same scheme-theoretic kernel as $h$, namely $Z(G)$. The kernel clause of that node gives the required equality on every $A$-point, even when $A$ has nilpotents.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, printed p.108, applied to the representation constructed in Proposition 14.23; quotient interpretation in Theorem 5.28, printed p.105."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-conjugation-finite-jet-kernel",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sfb-algebraic-group-homomorphism-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.23, printed p.285, expanded using Corollary 8.10 and the homomorphism theorem 5.39."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group the quotient of the kernel of the adjoint representation by the scheme theoretic centre is unipotent",
+   "results": "{\"t\": \"2026-10-23T20:45:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected affine algebraic group the quotient of the kernel of the adjoint representation by the scheme theoretic centre is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_quotient_center_nilpotent\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.self_module_ker_eq_center\", \"nilpotent_center_quotient_ind\", \"nilpotencyClass_quotient_center\", \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\"], \"digest\": \"129c80ab9150a632\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie-algebra adjoint kernels, abstract nilpotent-group quotients or unrelated categorical adjunctions; none constructs a unipotent quotient of the group-scheme adjoint kernel with kernel the scheme-theoretic centre."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*(kernel|center)|ker.*adjoint|IsUnipotent",
+   "results": "{\"t\": \"2026-10-23T20:46:02Z\", \"tool\": \"grep\", \"query\": \"adjoint.*(kernel|center)|ker.*adjoint|IsUnipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Complex/Module.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"Mathlib/Algebra/Lie/AdjointAction/Derivation.lean\", \"Mathlib/Analysis/Normed/Operator/ContinuousAlgEquiv.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\"], \"digest\": \"63a35f4b80623d2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie-algebra adjoint kernels, abstract nilpotent-group quotients or unrelated categorical adjunctions; none constructs a unipotent quotient of the group-scheme adjoint kernel with kernel the scheme-theoretic centre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint representation kernel of a connected algebraic group modulo its centre is a unipotent algebraic group",
+   "results": "{\"t\": \"2026-10-23T20:46:02Z\", \"tool\": \"leansearch\", \"query\": \"The adjoint representation kernel of a connected algebraic group modulo its centre is a unipotent algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"LieAlgebra.ad_ker_eq_self_module_ker\", \"LieSubalgebra.isNilpotent_ad_of_isNilpotent_ad\", \"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"LieDerivation.injective_ad_of_center_eq_bot\", \"LieDerivation.IsKilling.range_ad_eq_top\", \"LieDerivation.IsKilling.instIsKilling_range_ad\"], \"digest\": \"35c65dd9c35272f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie-algebra adjoint kernels, abstract nilpotent-group quotients or unrelated categorical adjunctions; none constructs a unipotent quotient of the group-scheme adjoint kernel with kernel the scheme-theoretic centre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"adjoint\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-23T20:46:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"adjoint\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie-algebra adjoint kernels, abstract nilpotent-group quotients or unrelated categorical adjunctions; none constructs a unipotent quotient of the group-scheme adjoint kernel with kernel the scheme-theoretic centre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine connected algebraic group its conjugation action on truncated local rings gives a faithful unipotent representation of ker Ad modulo the centre",
+   "results": "{\"t\": \"2026-10-23T20:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine connected algebraic group its conjugation action on truncated local rings gives a faithful unipotent representation of ker Ad modulo the centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieModule.ker_eq_bot\", \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\"], \"digest\": \"7f1738200793ff86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Lie-algebra adjoint kernels, abstract nilpotent-group quotients or unrelated categorical adjunctions; none constructs a unipotent quotient of the group-scheme adjoint kernel with kernel the scheme-theoretic centre."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugation.*(local|jet|infinitesimal)|ker.*conjugation|conjugation.*ker|adjoint.*kernel|unitriangular",
+   "results": "{\"t\": \"2026-10-23T21:17:17Z\", \"tool\": \"grep\", \"query\": \"conjugation.*(local|jet|infinitesimal)|ker.*conjugation|conjugation.*ker|adjoint.*kernel|unitriangular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\", \"Mathlib/Analysis/InnerProductSpace/Reproducing.lean\"], \"digest\": \"32b63c1833a46663\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The centre of a connected algebraic group is detected by its conjugation action on a finite infinitesimal neighborhood of the identity",
+   "results": "{\"t\": \"2026-10-23T21:17:18Z\", \"tool\": \"leansearch\", \"query\": \"The centre of a connected algebraic group is detected by its conjugation action on a finite infinitesimal neighborhood of the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConjAct.fixedPoints_eq_center\", \"Subgroup.center\", \"ConjAct.instGroup\", \"ConjAct.instGroupWithZero\", \"ConjClasses.mk_bijOn\", \"ConjAct.stabilizer_eq_centralizer\", \"LieAlgebra.center\", \"Subgroup.mem_center_iff\"], \"digest\": \"1223198a3876bb24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conj\"",
+   "results": "{\"t\": \"2026-10-23T21:17:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"conj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"3537b994bd08c57b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connected smooth affine algebraic group, the conjugation representation on a sufficiently high truncated local ring at the identity has scheme theoretic kernel equal to the centre",
+   "results": "{\"t\": \"2026-10-23T21:17:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a connected smooth affine algebraic group, the conjugation representation on a sufficiently high truncated local ring at the identity has scheme theoretic kernel equal to the centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.self_module_ker_eq_center\", \"LieModule.lowerCentralSeries_one_inf_center_le_ker_traceForm\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"LieDerivation.ad_ker_eq_center\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"Algebra.Extension.ker_infinitesimal\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity\"], \"digest\": \"de10c866d131e94a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "jet|infinitesimal|conjugation|adjoint",
+   "results": "{\"t\": \"2026-10-23T21:17:44Z\", \"tool\": \"grep\", \"query\": \"jet|infinitesimal|conjugation|adjoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"ddb293cbb036df4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite jet of inner automorphisms of a connected algebraic group detects its centre; the adjoint kernel acts upper unitriangularly on truncated functions at the identity",
+   "results": "{\"t\": \"2026-10-23T21:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite jet of inner automorphisms of a connected algebraic group detects its centre; the adjoint kernel acts upper unitriangularly on truncated functions at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"LieDerivation.ad_ker_eq_center\", \"LieDerivation.injective_ad_of_center_eq_bot\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"SpecialLinearGroup.mem_center_iff\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\"], \"digest\": \"9e3e16e255e55538\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme acts faithfully on a finite infinitesimal neighborhood of a fixed smooth point of an irreducible variety",
+   "results": "{\"t\": \"2026-10-23T21:18:47Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme acts faithfully on a finite infinitesimal neighborhood of a fixed smooth point of an irreducible variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"IsGaloisGroup.faithful\", \"faithfulSMul_iff\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction\", \"Nat.Combination.mulAction_faithful\", \"Nat.Combination.addAction_faithful\"], \"digest\": \"589a3071357a752e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of the adjoint kernel by the centre of a connected algebraic group is unipotent",
+   "results": "{\"t\": \"2026-10-23T21:20:12Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of the adjoint kernel by the centre of a connected algebraic group is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotencyClass_quotient_center\", \"of_quotient_center_nilpotent\", \"LieDerivation.ad_ker_eq_center\", \"commGroupOfCyclicCenterQuotient\", \"nilpotent_quotient_of_nilpotent\", \"nilpotencyClass_eq_quotient_center_plus_one\", \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"LieAlgebra.self_module_ker_eq_center\"], \"digest\": \"8bc8182b07404a36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adjoint\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T21:20:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"adjoint\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint\", \"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"LinearMap.ker_adjoint_comp_self\", \"ContinuousLinearMap.IsStarNormal.ker_adjoint_eq_ker\", \"ContinuousLinearMap.ker_adjoint_comp_self\", \"LinearMap.ker_self_comp_adjoint\", \"ContinuousLinearMap.ker_self_comp_adjoint\"], \"digest\": \"3be2e3c208066e84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the adjoint representation of a smooth connected affine group modulo its scheme theoretic centre embeds as a closed subgroup of upper unitriangular matrices",
+   "results": "{\"t\": \"2026-10-23T21:20:13Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of the adjoint representation of a smooth connected affine group modulo its scheme theoretic centre embeds as a closed subgroup of upper unitriangular matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"Matrix.SpecialLinearGroup.isEmbedding_toGL\", \"Matrix.SpecialLinearGroup.isEmbedding_mapGL\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"LieDerivation.ad_ker_eq_center\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\"], \"digest\": \"7383da14a3a92094\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group centres, Lie-algebra adjoint kernels, categorical adjunctions, topological matrix embeddings or unrelated infinitesimal extensions; none states finite-jet detection of a group-scheme action kernel or the unitriangular quotient of the adjoint kernel."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-centre-root-quotient",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465. Propositions 21.7 and 21.8, printed p.427; root weights in paragraph 21.1, printed p.425. Supporting input in the present split: Milne 21.7 proof, the sentence invoking 14.23 to make ker(Ad)/Z(G) unipotent.",
+   "via": [
+    "lem-sfb-reductive-centre-root-quotient",
+    "lem-sfb-semisimple-roots-span",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-adjoint-kernel-central-quotient-unipotent",
+  "worker": "stage1",
+  "summary": "Q95 read Milne 14.23 and 8.10. Added the strictly smaller finite-jet kernel lemma; wrote cotangent duality on arbitrary test algebras, the product argument on the associated graded, an adapted basis, and used the existing homomorphism factorization for the image. Statement unchanged.",
+  "blueprint": "The current blueprint direct-image proof (3) is the ancestor route. The inherited chain reaches Milne 21.7 via reductive-centre-root-quotient; this split realizes its 14.23 prerequisite by the finite-jet and trivial-graded-action argument. The ancestor command returns null for this inherited chain; its existing from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "General tangent/cotangent duality for the rational identity, used with an explicit dual-number calculation after arbitrary base change; the unit has no alternative tangent duality node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-rational-tangent-cotangent-duality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-25e655a04",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-25e655a04 (reviewer sub-agent of L); spot-checked: Read Milne 14.23 (p.285), and 8.9 and 8.10 (pp.150-151) with the erratum: 8.10 is correct, and 8.9 needs X reduced, which holds because G is smooth and connected. The item's statement and stmt_deps are identical to live and side-live, where the item is still unsplit; this is a first split, with no repair note and no supersession. New node lem-sfb-conjugation-finite-jet-kernel is true and I proved it myself: rho_r is a homomorphism, since phi_{gh}=phi_h∘phi_g. The kernels form a decreasing chain of closed subgroups, which stabilizes because G is noetherian. Their intersection is Z(G): B is a domain, so Krull gives ∩I^n=0, and A⊗B→∏A⊗B/I^n is injective because A is free over F. Using B/I^{r+1} instead of O_e/m^{r+1} is justified because s∉I is a unit there. I tested it on trivial G, G_m, G_a and SL_p in characteristic p (mu_p kernel). Connectedness is necessary: a nonabelian constant finite group is a counterexample. It is not a duplicate: I ran rg -L for 8.10, 8.9, 14.23 and conjugation with jet terms, and lem-sfb-affine-group-centre-base-change only constructs Z(G). It is strictly smaller than the item and is a statement only. Steps: step 1 Z(G)⊆N and ker(rho|N)=Z(G) is correct. Step 2 rechecks dual numbers over arbitrary A: D=λ∘[f−e*f], and the dual basis of the free module A⊗I/I^2 is valid; I/I^2=m/m^2 is a one-line localization, so the step is elementary. Step 3 is the product expansion mod I^{i+1}, which uses flatness of A and is correct. Step 4 orders the basis deepest layer first, giving upper unitriangular matrices with n≥1. Step 5 applies Milne 5.39 twice, first to Ad (N closed and finite type) and then to h; its hypotheses hold and the kernel clause gives Z(G). Taking U=U_n, q=h would also suffice. Batch-5: the homomorphism-factorization closure reaches lem-trf-fppf-covering-base-change, which is Stacks 021O(3), a generic fact about fppf coverings. It is neither assumed by nor part of the proofs of the trace formula or Poincaré duality, so it is accepted. tool_uses lem-sc-rational-tangent-cotangent-duality is accepted as general k-rational duality. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdjointKernelCentralQuotientUnipotent",
+  "declaration": "AlgebraicGeometry.adjointKernel_central_quotient_unipotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdjointKernelCentralQuotientUnipotent.lean",
+  "statement": "theorem adjointKernel_central_quotient_unipotent {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) (hG : SolvableGroupStructure.IsAlgebraic G) (hsm : Smooth G.X.hom) (hc : ConnectedSpace G.X.left) (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ G) (hiN : IsClosedSubgroupScheme iN.hom.hom) (hN : ∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun x : StandardGroupSchemes.affine F A ⟶ N.X ↦ x ≫ iN.hom.hom) = adjointKernelPoints G A) : ∃ n : ℕ, 0 < n ∧ ∃ (U : Grp (Over (Spec (.of F)))) (j : U.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) F) (q : N ⟶ U), IsClosedSubgroupScheme j ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (x : (Spec (.of A)).asOver (Spec (.of F)) ⟶ U.X), (∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) F A (x ≫ j)).val (ULift.up a) (ULift.up a) = 1) ∧ ∀ a b : Fin n, b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) F A (x ≫ j)).val (ULift.up a) (ULift.up b) = 0) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker q.hom.hom ↦ x ≫ GrpObj.kerι q.hom.hom ≫ iN.hom.hom) = ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A) ∧ ∀ (A : Type u) [CommRing A] [Algebra F A] (g : StandardGroupSchemes.affine F A ⟶ N.X), g ≫ q.hom.hom = 1 ↔ g ≫ iN.hom.hom ∈ ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "N is specified by its exact closed represented adjoint-kernel subfunctor on every algebra, using dual-number conjugation. Closed U in the unitriangular group is equivalently a closed subgroup of GL_n satisfying the upper unitriangular equations on all algebras. The final iff identifies the scheme-theoretic kernel with the inverse image of the recorded universal centre subfunctor; no smoothness or connectedness of N or U is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40f70c307",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Clause by clause the Lean matches the node. (1) F: Field + IsAlgClosed. (2) G: IsAlgebraic (affine, locally of finite type, quasi-compact) + Smooth + ConnectedSpace, no reductivity. (3) N is a closed subgroup (iN) whose points equal adjointKernelPoints on every Type-u F-algebra, which pins it. The new def (real set data) is g with c_*(g) commuting with every v in G(A[eps]) with p_*(v)=1, i.e. ker Ad_A by Milne 10.20, nonreduced A included. (4) Z(G) = centralizerPoints (𝟙 G), represented by lem-sfb-affine-group-centre-base-change. (5) n>0; U closed in GL(ULift Fin n) via j (IsClosedSubgroupScheme extends IsMonHom); on all A-points diagonal = 1 and entries (a,b) with b<a are 0, the same rendering as charZero_commutative_unipotent_vectorGroup; IsUnipotent correctly avoided (it includes smoothness). (6) ker-q point image equals the centre subfunctor, and the pointwise iff is stated. Edge cases n=1, trivial/commutative G, mu_p in char p and universes checked. Statement unchanged vs live; stmt_deps only add the new def node; first S2 delivery, no supersession. Searches found no existing Ad/ker Ad (tangentGroup, RankOneRoots.adjointMap differ). lean.statement fields verbatim; docstrings carry sources, blueprint ids and the 5 proof steps; proof-only imports are proof_dep modules. Advisory: centralizerPoints, IsAlgebraic and GeneralLinearGroup owner nodes are not in stmt_deps (they come in through the base-era theorem stmt_dep). No FIX, no compile run."
+ }
+}

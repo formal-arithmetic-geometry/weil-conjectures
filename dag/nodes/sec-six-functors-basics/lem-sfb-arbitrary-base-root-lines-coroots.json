@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-arbitrary-base-root-lines-coroots",
+ "kind": "statement",
+ "title": "Root weight bundles and relative coroots over arbitrary rings",
+ "statement": "Let $A$ be a nonzero commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $G/S$ a reductive group in [def-sfb-pinned-split-root-realization]. Let $M$ be a finite-rank free abelian group, and let $T=D_A(M)\\hookrightarrow G$ be a closed subgroup [def-sfb-ring-diagonalizable-group, def-weil-closed-immersion] whose geometric fibres are maximal tori. Put $M^\\vee=\\operatorname{Hom}_{\\mathbf Z}(M,\\mathbf Z)$, and let $\\chi_m:T\\to\\mathbf G_{m,A}$ be the monomial character of $m\\in M$. Write $\\mathfrak g=\\ker(G(A[\\epsilon]/(\\epsilon^2))\\to G(A))$ for the tangent $A$-module, with addition induced by group multiplication and scalar multiplication induced by $\\epsilon\\mapsto a\\epsilon$. Conjugation by $T$ induces an $A$-linear coaction $\\rho:\\mathfrak g\\to\\mathfrak g\\otimes_A A[M]$. Put $\\mathfrak g_m=\\{v:\\rho(v)=v\\otimes e^m\\}$.\n\nThe module $\\mathfrak g$ is finite projective, meaning a direct summand of a finite free module. The natural inclusion $\\operatorname{Lie}(T)\\to\\mathfrak g$ identifies $\\operatorname{Lie}(T)$ with $\\mathfrak g_0$. For every $m\\ne0$ and every point $s\\in S$, the fibre dimension of $\\mathfrak g_m$ is either zero or one. On every geometric fibre the weights with dimension one are exactly the roots of $(G_{\\bar s},T_{\\bar s})$. The tangent-module comparison with $\\operatorname{Lie}(G_B)$ under any ring map $A\\to B$ identifies $B\\otimes_A\\mathfrak g_m$ with its corresponding full-torus weight module. For $B=0$ this comparison is the zero-module identification.\n\nIf $\\alpha\\in M\\setminus\\{0\\}$ has $\\mathfrak g_\\alpha$ locally free of rank one on all of $S$, there is a group-scheme homomorphism $\\alpha^\\vee:\\mathbf G_{m,A}\\to T$ whose geometric fibres are the canonical coroots for $\\alpha$ in [lem-sfb-reductive-rank-one-reflections], namely $t\\mapsto v_\\alpha(\\operatorname{diag}(t,t^{-1}))$ for the rank-one $\\operatorname{SL}_2$ homomorphism, equivalently the unique cocharacter giving its Weyl reflection. Its formation commutes with arbitrary base change. Equivalently, under the monomial classification of homomorphisms of split tori it is a Zariski locally constant function $|S|\\to M^\\vee$. Roots and weights throughout mean torus characters, not their differentials; no Noetherian, reducedness or connectedness assumption is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Introduction to Section 4, printed pp.107-108 (the tangent weight subbundles and zero weight); Lemma 4.1.3, pp.108-109, and Theorem 4.2.6, pp.120-121 (canonical coroot on the rank-one centralizer and arbitrary base change); Definition 5.1.1 and the final localization in Lemma 5.1.3, pp.136-137. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative reductive-group structural theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sfb-pinned-split-root-realization",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-closed-immersion",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}C$ and let $c:C\\to A$ be its identity. An infinitesimal point over the identity is exactly $c+\\epsilon d$, with $d$ an $A$-derivation into the $C$-module $A$ defined by $c$: multiplicativity is precisely $d(bb')=c(b)d(b')+c(b')d(b)$. Thus, by the universal property of differentials, $\\mathfrak g=\\operatorname{Hom}_A(P,A)$ for $P=A\\otimes_{C,c}\\Omega_{C/A}$. The smooth-affine comparison says that $\\Omega_{C/A}$ is finite projective over $C$. Tensor a finite free splitting with $A$ to see that $P$ is a direct summand of a finite free $A$-module; dualizing its inclusion and retraction gives the same property for $\\mathfrak g$. Multiplication of infinitesimal group points adds their derivations: in the coproduct, the two terms linear in $\\epsilon$ reduce by the two counit identities to $d$ and $d'$. Substitution $\\epsilon\\mapsto a\\epsilon$ multiplies $d$ by $a$. Consequently this identification gives exactly the module operations in the statement.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Background on Lie functors, printed p.2; Section 4 introduction, printed p.107. Cotangent interpretation expanded by the agent."
+   }
+  },
+  {
+   "text": "For $A\\to B$, differential base change gives the cotangent module at the identity of $G_B$ as $B\\otimes_A P$. The natural map $B\\otimes_A P^*\\to(B\\otimes_A P)^*$ sends $b\\otimes f$ to $(b'\\otimes p\\mapsto bb'f(p))$. It is an isomorphism for finite free $P$, hence for its direct summand $P$ by restricting that isomorphism along the splitting. This proves the tangent-module comparison for every $B$, functorially and compatibly with successive base changes. Differentiate conjugation by the universal point of $T$ over $A[M]$ and use this comparison with $B=A[M]$ to obtain $\\rho$. The group action identities give coassociativity and the counit identity. Conjugation is linear on derivations, so $\\rho$ is $A$-linear. The same construction over $B$ is the scalar extension of $\\rho$. For $B=0$, both cotangent and tangent modules here are zero.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Background, printed p.2, and Section 4 introduction, p.107: tangent and torus-action base change; explicit direct-summand dual calculation."
+   }
+  },
+  {
+   "text": "Choose a basis of $M$ to identify it with $\\mathbf Z^r$. Apply the relative torus-bundle weight theorem to the finite projective module of step 1 and the coaction of step 2. It gives $\\mathfrak g=\\bigoplus_m\\mathfrak g_m$ with finitely many nonzero finite projective summands, and identifies $B\\otimes_A\\mathfrak g_m$ with the $m$-summand after every ring map. This summand is also the full-torus weight functor: the coaction equation implies the character equation after evaluating $A[M]\\to B'$ at any torus point, and conversely the universal point over $A[M]$ recovers the coaction equation. Thus the comparison is for characters, including in positive characteristic, rather than for their differentials.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Introduction to Section 4, printed p.107: the M-graded vector bundle and arbitrary base change."
+   }
+  },
+  {
+   "text": "At a geometric point $\\bar s$ use steps 2-3 to identify the summands with the full-torus weight spaces of $\\operatorname{Lie}(G_{\\bar s})$. The hypotheses make $G_{\\bar s}$ connected reductive and $T_{\\bar s}$ maximal. The field rank-one reflection theorem therefore gives its zero space $\\operatorname{Lie}(T_{\\bar s})$ and one-dimensional nonzero root spaces; the other nonzero characters have zero space. This proves the assertion about geometric roots. For an ordinary $s$, extension of a basis from $\\kappa(s)$ to its algebraic closure preserves its length, giving the asserted dimension zero or one over $\\kappa(s)$ as well.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Introduction to Section 4, printed p.107: reduction to geometric fibres and classical root spaces."
+   }
+  },
+  {
+   "text": "The inclusion $T\\hookrightarrow G$ induces an injective tangent map: the surjection of affine coordinate algebras in the closed-immersion definition makes restriction of derivations injective. As $T$ is commutative its image is in $\\mathfrak g_0$. Derivations of its monomials at the identity satisfy $d(e^{m+n})=d(e^m)+d(e^n)$, so $\\operatorname{Lie}(T)=\\operatorname{Hom}_{\\mathbf Z}(M,A)$, a finite free module. Both this module and $\\mathfrak g_0$ are finite projective, and the map is an isomorphism on every geometric fibre by step 4. To conclude over $A$, around each prime trivialize the two projectives. Their ranks there agree, since the fibre map is invertible. Its determinant is outside that prime, so on the further principal open where the determinant is invertible the adjugate matrix supplies an inverse. These opens cover the spectrum. Thus the tangent map identifies $\\operatorname{Lie}(T)$ with $\\mathfrak g_0$ over $A$, even if $A$ is nonreduced.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Introduction to Section 4, printed p.107: zero weight equality, with the fibre-to-bundle argument written out."
+   }
+  },
+  {
+   "text": "Now let $\\alpha$ satisfy the root-line hypothesis. In a basis of $M$ apply the relative root rank-one centralizer theorem: if $\\alpha=d\\alpha_0$ with $\\alpha_0$ primitive, put $T_\\alpha=\\ker\\chi_{\\alpha_0}$ and $H=C_G(T_\\alpha)$. The theorem gives a smooth affine finitely presented closed subgroup, reductive connected geometric fibres with roots exactly $\\{\\alpha,-\\alpha\\}$, and $\\operatorname{Lie}(H)=\\operatorname{Lie}(T)\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$; the opposite line is locally free of rank one. The torus $T$ remains fibrewise maximal in $H$: any larger torus there would be one in $G$. All these constructions commute with base change. This reduces construction of the coroot to rank one without assuming any globally constant root set for $G$.",
+   "uses": [
+    "lem-sfb-relative-root-rank-one-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.1.3 and proof, printed pp.108-109."
+   }
+  },
+  {
+   "text": "Cover $S$ by principal affine opens where the two finite projective root lines are free, using the prime-local-free theorem and intersecting the two neighborhoods. On each open choose a generator $X$ of the positive line. Step 6 verifies every hypothesis of the normalized rank-one Gauss-chart theorem. It supplies $x_+,x_-$ and a homomorphism $h:\\mathbf G_m\\to T$, characterized by the opposite-root multiplication formula with $1+uv$ invertible. This is a construction on each open; no choice of a global root-line basis is made.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-sfb-rank-one-normalized-gauss-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4, pp.110,116-118, and Theorem 4.2.6, pp.120-121: normalized local Gauss data."
+   }
+  },
+  {
+   "text": "Check this $h$ on an algebraically closed fibre $\\bar s$. By step 6, $H_{\\bar s}$ is the centralizer of $\\ker\\chi_{\\alpha_0}$, a torus of codimension one in $T_{\\bar s}$ contained in $\\ker\\chi_\\alpha$ with finite quotient $\\ker\\chi_\\alpha/\\ker\\chi_{\\alpha_0}\\cong\\mu_d$; so it is the largest subtorus $T_\\alpha$ of $\\ker\\alpha$, and $H_{\\bar s}=G_\\alpha$ in the field reflection theorem, which makes it reductive of semisimple rank one with maximal torus $T_{\\bar s}$. This is the hypothesis of the field rank-one matrix classification, which we now use. Orient the matrix factor so that $\\alpha$ is its upper off-diagonal character. The chosen $X$ is $cE_{12}$ with $c\\ne0$. The homomorphisms $x_+(u)=1+cuE_{12}$ and $x_-(v)=1+c^{-1}vE_{21}$ (or their projective classes) and $h(t)=\\operatorname{diag}(t,t^{-1})$ (or its class), all with trivial central factor, satisfy the required Gauss chart and identity. Indeed their product has entries $(1,1)=1+uv$, $(1,2)=cu$, $(2,1)=c^{-1}v$, $(2,2)=1$, and its lower-diagonal-upper factorization has diagonal $(1+uv,(1+uv)^{-1})$. Hence uniqueness in the chart theorem identifies them with the triple of step 7. In SL2 the root is $2\\chi$ and $h$ is the diagonal cocharacter; in PGL2 the root is the diagonal ratio and that ratio on $h(t)$ is $t^2$; in GL2 the root is $e_1-e_2$ and $h$ is $(1,-1)$. In each case the class of the coordinate swap normalizes the diagonal torus and is not in it, so it is the unique nonidentity element of $N_{G_\\alpha}(T)/T$, and it gives $m\\mapsto m-\\langle m,h\\rangle\\alpha$, and fixes the central factor. Thus the uniqueness clause of the field reflection theorem identifies $h$ with the canonical coroot. These calculations use no division by the residue characteristic.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-rank-one-normalized-gauss-chart",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.2.6 proof, printed pp.121-122, comparison with the classical matrix calculation; Example 4.2.5, pp.119-120."
+   }
+  },
+  {
+   "text": "On overlaps the homomorphisms $h$ just constructed have the same geometric-fibre coroots by step 8. Split-torus homomorphisms correspond to Zariski locally constant integer matrices, so equality on all geometric fibres forces equality, even over nonreduced bases. Equivalently their local functions with values in $M^\\vee$ agree and glue to a locally constant function on $|S|$. The same correspondence produces the global $\\alpha^\\vee:\\mathbf G_{m,A}\\to T$. For any $A\\to B\\ne0$, steps 2-3 and 6 preserve the root-line condition and the centralizer. Each pulled-back triple of step 7 satisfies the same Gauss identities; uniqueness gives the normalized triples over the pulled-back opens. By step 8, their torus factors are the geometric coroots there. The matrix correspondence then identifies their gluing with the pullback of $\\alpha^\\vee$. This proves arbitrary and successive base-change compatibility. If $B=0$, the source and target are group schemes over the empty scheme and their unique homomorphism is the asserted base change.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-sfb-rank-one-normalized-gauss-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.2.6, pp.120-122 (uniqueness and base change); Section 4.1, p.107 (locally constant characters), and Definition 5.1.1, p.136."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-reductive-rank-one-reflections",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-sfb-relative-root-rank-one-centralizer",
+  "lem-sfb-rank-one-normalized-gauss-chart",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-relative-split-torus-matrix-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Section 4 introduction, Lemma 4.1.3, Theorems 4.1.4 and 4.2.6; read online, local PDF WANTED. Expanded cotangent/direct-summand and matrix calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative roots of a reductive group scheme with split maximal torus are line bundles with canonical coroot homomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.coroot'In\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_4} →\\n      {N : Type u_5} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (P : RootPairing\", \"doc\": \"For a root pairing valued in an $ S $-algebra over $ R $, the flipped dual coroot functional $ \\\\text{coroot'}(i) $ maps each root index $ i $ to the dual space of the coroot span $ N $, with the image\"}\n  {\"name\": \"RootPairingCat.coweight\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → RootPairingCat R → Type v\", \"doc\": \"The coweight functor assigns to each object in the category of root pairings over a commutative ring $ R $ a type in universe $ v $, serving as part of the categorical structure defined on root pairin\"}\n  {\"name\": \"RootPairing.root'In\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_4} →\\n      {N : Type u_5} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (P : RootPairing\", \"doc\": \"For a root pairing valued in an $ S $-algebra over $ R $, the dual root functional $ \\\\text{root'}(i) $ maps each root index $ i $ to the dual space of the coroot span $ N $, with the image lying in th\"}\n  {\"name\": \"RootPairingCat.weight\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"{R : Type u} → [inst : CommRing R] → RootPairingCat R → Type v\", \"doc\": \"The function assigning to each root pairing over a commutative ring $ R $ its corresponding weight type, as an object in the category of root pairings.\"}\n  {\"name\": \"RootPairing.coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → ι ↪ N\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the injective function (embedding) from the index type $ \\\\iota $ to the module $ N $, re\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α :\", \"doc\": \"For any element $\\\\alpha$ in the index set of the root system, the root function evaluated at $\\\\alpha$ returns $\\\\alpha$ itself, i.e., $\\\\text{root}(\\\\alpha) = \\\\alpha$.\"}\n  {\"name\": \"RootPairing.mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Given a perfect pairing between $ k $-modules $ M $ and $ N $, injective functions $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) = \"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem_coroot_apply\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α :\", \"doc\": \"For a weight $\\\\alpha$ in the dual of the Cartan subalgebra $\\\\mathfrak{h}$, the coroot obtained from the root system's coroot map $\\\\text{coroot}: \\\\mathfrak{h}^* \\\\to \\\\mathfrak{h}$ coincides with the cor\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of a reductive group over a ring decomposes into torus Lie algebra and projective rank one root weight modules compatible with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"Given a root pairing $P$ with finite support indexed by $\\\\iota$ over a commutative ring $R$, the Cartan subalgebra is the Lie subalgebra of $(\\\\text{support} \\\\oplus \\\\iota) \\\\times (\\\\text{support} \\\\oplus\"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the Cartan subalgebra constructed via the Geck method is a Lie subalgebra of the matrix algebra $ \\\\text\"}\n  {\"name\": \"LieAlgebra.rootSpaceProduct_def\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  LieAlgebra.rootSpaceProduct R L H = LieAlgebra.rootSpaceWeightSpaceProduct R L H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $H$, and weights $\\\\chi_1, \\\\chi_2, \\\\chi_3 : H \\\\to R$ satisfying $\\\\chi_1 + \\\\chi_2 = \\\\chi_3$, there exists an $R$-linear Lie\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra constructed via the Geck method in the matrix algebra $ \\\\text{Mat}_{(S \\\\oplus \\\\iota) \\\\times (S \\\\oplus \\\\iota)}(R) $ is an abelian Lie subalgebra, meaning that the Lie bracket of a\"}\n  {\"name\": \"LieAlgebra.rootSpace_zero_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : H.IsCartanSubalgebra] [IsNoetherian R L],\\n  LieAlgebra.rootSpace H 0 = H.toLieSubmodule\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $\\\\mathfrak{g}$ is Noetherian as an $R$-module, then the root space of $\\\\mat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "grep",
+   "query": "coroot.*Scheme|Scheme.*coroot|reductive.*weight|root.*line.*bundle",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root line bundles and relative coroots of reductive group schemes over arbitrary rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → ι ↪ N\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the injective function (embedding) from the index type $ \\\\iota $ to the module $ N $, re\"}\n  {\"name\": \"RootPairing.root_coroot_eq_pairing\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \": P.toLinearMap (P.root i) (P.coroot j) = P.pairing i j\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, the evaluation of the linear functional associated with the root $ i $ at the coroot $ j $ equals the pairing of indices $ i $ and $ j $. Specif\"}\n  {\"name\": \"RootPairing.coroot'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(i : ι) : Dual R M\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, this constructs the linear functional in the dual module $ \\text{Hom}_R(M, R) $ associated to the coroot $ P.\\text{coroot}(i) $, obtaine\"}\n  {\"name\": \"LinearMap.IsReflective.coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.OfBilinear\", \"type\": \": M →ₗ[R] R\", \"doc\": \"Given a commutative ring $ R $, an $ R $-module $ M $, and a bilinear form $ B : M \\\\times M \\\\to R $ that is reflective at $ x \\\\in M $, the coroot is the $ R $-linear map $ \\\\text{coroot}_x : M \\\\to R $ \"}\n  {\"name\": \"RootPairing.smul_coroot_eq_of_root_eq_smul\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"[Finite ι] [IsAddTorsionFree N] (i j : ι) (t : R) (h : P.root j = t • P.root i) : t • P.coroot j = P.coroot i\", \"doc\": \"For a finite index set $\\\\iota$ and a torsion-free $R$-module $N$, given a root pairing $P$ between $R$-modules $M$ and $N$, if the root $\\\\alpha_j$ satisfies $\\\\alpha_j = t \\\\cdot \\\\alpha_i$ for indices $\"}\n  {\"name\": \"RootPairing.coroot_mem_or_neg_mem_closure_of_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseExists\", \"type\": \"(s : Set ι) (hli : LinearIndepOn R P.root s)\\n  (hsp : ∀ i, P.root i ∈ AddSubmonoid.closure (P.root '' s) ∨ -P.root i ∈ AddSubmonoid.closure (P.root '' s)) (i : ι) :\\n  P.coroot i ∈ AddSubmonoid.closure (P.coroot '' s) ∨ -P.coroot i ∈ AddSubmonoid.closure (P.coroot '' s)\", \"doc\": \"Given a set $ S $ of indices and a root pairing $ P $, if the roots indexed by $ S $ are linearly independent over $ R $ and each root $ P.root(i) $ lies in the additive submonoid generated by $ P.roo\"}\n  {\"name\": \"RootPairing.coroot'In\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.IsValuedIn\", \"type\": \"[Module S M] [IsScalarTower S R M] [FaithfulSMul S R] [P.IsValuedIn S] (i : ι) : Dual S (P.rootSpan S)\", \"doc\": \"For a root pairing valued in an $ S $-algebra over $ R $, the flipped dual coroot functional $ \\\\text{coroot'}(i) $ maps each root index $ i $ to the dual space of the coroot span $ N $, with the image\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-pinned-splitting",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Introduction to Section 4, printed pp.107-108 (the tangent weight subbundles and zero weight); Lemma 4.1.3, pp.108-109, and Theorem 4.2.6, pp.120-121 (canonical coroot on the rank-one centralizer and arbitrary base change); Definition 5.1.1 and the final localization in Lemma 5.1.3, pp.136-137. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-arbitrary-base-root-lines-coroots",
+  "worker": "stage1",
+  "summary": "Proved arbitrary-base tangent and weight comparison from existing smooth cotangent and grading statements, used geometric root spaces and a determinant argument for zero weight, reduced to the existing relative rank-one centralizer, and isolated one normalized Gauss-chart input. Explicit matrix calculations identify its torus factor on fibres; locally constant integer matrices glue it and prove base-change compatibility. No statement change; one new statement-only node, no Mathlib leaves.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3). The inherited supporting chain leads to etale pinned splitting; steps 1-5 supply its arbitrary-base root-weight input, steps 6-9 its coroot input. blueprint_refs.py ancestor returns None for this created chain, retained as null; same_as searches for coroot, weight decomposition, rank one, Gauss and opposite root found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic smooth cotangent, scalar-extension or finite-projective-localization input to the root-weight bundle calculation; it replaces no six-functor or alteration argument."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-base-change",
+    "why": "Generic smooth cotangent, scalar-extension or finite-projective-localization input to the root-weight bundle calculation; it replaces no six-functor or alteration argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic smooth cotangent, scalar-extension or finite-projective-localization input to the root-weight bundle calculation; it replaces no six-functor or alteration argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-8d5e890da",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-8d5e890da (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-rank-one-normalized-gauss-chart and every cited statement in full. Read Conrad's Reductive group schemes from the local text copy at Def 4.1.1, Ex 4.1.2, Lemma 4.1.3, Thm 4.1.4, Ex 4.2.5 and Thm 4.2.6 (pp.107-122). The item statement and stmt_deps are byte-identical to the landed N9 version; this is a first split, with no re-split note. New node: it is exactly Conrad 4.1.4 (exp_a, closed immersion, open cell) and 4.2.6 (Gauss formula with 1+XY, perfect pairing) over an arbitrary nonempty base, normalized by a generator X with Y dual to it. I checked uniqueness of the triple: x_+ by exp uniqueness, x_- by comparing open-cell coordinates (which forces c=1), and h by the formula. I checked the SL2/PGL2/GL2 matrices by hand, including characteristic 2. It is not a duplicate: the existing exponential, reflection-map and local-matrix-model nodes are Noetherian, the sl2-lifted node assumes a central extension, and the big-cell nodes are over a field. It is strictly smaller than the item. Steps 1-7 and 9 are correct as cited: smooth gives Omega finite projective; Kahler base change; the dual comparison for a summand; torus-bundle weights for any A; the field reflection theorem on geometric fibres; the determinant/adjugate argument for g_0 over nonreduced A; the arbitrary-A centralizer node; D(f) with f not in p so A_f is nonzero; and LC-matrix gluing with base change. FIX to step 8 only: it applied the rank-one classification and the reflection-uniqueness clause without checking that H at a geometric point is G_alpha. Added: ker chi_{alpha0} is the largest subtorus of ker alpha (the quotient is mu_d), so H at a geometric point is G_alpha, reductive of semisimple rank one (the classification's hypothesis), and the class of the swap is the unique nonidentity element of N_{G_alpha}(T)/T. Uses are unchanged and the step is 1750 characters. Tool uses (lem-weil-pbc smooth/Kahler/finite-projective nodes) are generic algebra; accepted. Batch-5: the paths to lem-trf-smooth-fpqc-base-descent (fpqc locality of smoothness, Stacks 02VL) are generic and were already in the base closure via the stmt_deps reductive-rank-one-reflections and pinned-split-root-realization; lem-trf-fg-torsionfree-group-free is elementary. Neither is part of the trace formula or Poincare duality, so all three flagged citations are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

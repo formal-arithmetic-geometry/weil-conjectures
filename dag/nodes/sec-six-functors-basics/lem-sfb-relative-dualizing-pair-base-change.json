@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-relative-dualizing-pair-base-change",
+ "kind": "statement",
+ "title": "Arbitrary base change of supplied coherent relative dualizing pairs",
+ "statement": "Let $f:X\\to S$ be separated, flat and locally of finite presentation, let $g:S'\\to S$ be any scheme morphism, and form $X'=X\\times_SS'$ with projection $g_X$ and morphism $f':X'\\to S'$ [def-pc-scheme], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-pc-fibre-product]. Let $(K,\\xi)$ be a supplied coherent relative dualizing pair for $f$ [def-trf-coherent-relative-dualizing-pair]. Put $K'=Lg_X^*K$ [def-pc-derived-pullback]. Under the canonical Tor-independent diagonal base-change identification $L(g_X\\times g_X)^*\\Delta_*\\mathcal O_X\\simeq\\Delta'_*\\mathcal O_{X'}$ and pullback composition, the pullback of $\\xi$ is a class $\\xi':\\Delta'_*\\mathcal O_{X'}\\to Lp_1'^*K'$. Then $(K',\\xi')$ is a coherent relative dualizing pair for $f'$. These pullbacks of objects and classes respect identity and iterated base change. No flatness of $g$ or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; algebraic input dualizing.tex Tag 0E2F, lemma-base-change-relative-dualizing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-pc-fibre-product",
+  "lem-pc-recorded-pullback-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-sfb-module-base-change-map",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "The base-changed morphism $f'$ is flat and separated by the two cited stability lemmas. On a finite-presentation affine chart $R\\to A$ for $f$, its pullback over an affine $R\\to R'$ is the presentation $R'[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$; the finite-presentation base-change lemma therefore makes $f'$ locally finitely presented. By the supplied-pair definition, $K$ is pseudo-coherent and locally of finite Tor dimension over $S$. Apply scheme relative-perfect base change to obtain these same two properties for $K'$ over $S'$. In particular both complexes have quasi-coherent cohomology by pseudo-coherence.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sbc-locally-finite-presentation",
+    "def-trf-coherent-relative-dualizing-pair",
+    "lem-sfb-scheme-relative-perfect-base-change",
+    "lem-sc-pseudo-coherent-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; finiteness of the pullback and hypotheses for the affine reduction"
+   }
+  },
+  {
+   "text": "Write $Y=X\\times_SX$, $Y'=X'\\times_{S'}X'$ and $h=g_X\\times g_X$. Each projection $Y\\to X$ is flat by base change, so $Y\\to S$ is flat by composition. Apply common-base Tor independence to the $S$-map $\\Delta:X\\to Y$ between these two flat $S$-schemes. It gives Tor independence of $\\Delta$ and $h$. The diagonal is closed, hence quasi-compact and separated. Locally on affine opens of $Y$ and $Y'$, apply Tor-independent derived base change to $\\Delta$ with perfect factor $\\mathcal O_X$ and quasi-coherent factor $\\mathcal O_X$. Closed module pushforward is exact (it preserves homology), so $R\\Delta_*\\mathcal O_X=\\Delta_*\\mathcal O_X$, and similarly for $\\Delta'$. The resulting canonical map is $d_g:Lh^*\\Delta_*\\mathcal O_X\\xrightarrow{\\sim}\\Delta'_*\\mathcal O_{X'}$. The affine maps glue since each is the restriction of the canonical base-change mate; on an affine chart they are the tensor augmentation onto the diagonal quotient.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose",
+    "lem-sfb-flat-families-tor-independent",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-closed-module-pushforward-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; the Tor-independent diagonal square and its canonical identification"
+   }
+  },
+  {
+   "text": "Derived pullback composition identifies $Lh^*Lp_1^*K$ with $Lp_1'^*Lg_X^*K=Lp_1'^*K'$, since $p_1h=g_Xp'_1$. Define $\\xi'$ to be $d_g^{-1}$ followed by $Lh^*\\xi$ and this target comparison. Thus the object and class in the question are defined globally, without making a choice of local dualizing generators.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; definition of the derived base-changed class"
+   }
+  },
+  {
+   "text": "Choose affine opens $V=\\operatorname{Spec}R\\subset S$, $U=\\operatorname{Spec}A\\subset f^{-1}V$ and $V'=\\operatorname{Spec}R'\\subset g^{-1}V$, using finite-presentation charts for $f$. Let $B=A\\otimes_R A$ and $U'=U\\times_VV'=\\operatorname{Spec}A'$. The affine derived equivalence realizes $K|_U$ by $M\\in D(A)$. The affine pseudo-coherence and relative Tor-amplitude criteria give pseudo-coherence over $A$ and one finite $R$-Tor interval for $M$. Applied to $K'|_{U'}$, they give the analogous properties of $M'$. The affine K-flat pullback comparison identifies $M'$ with $M\\otimes_A^{\\mathbf L}A'$ and identifies $Lp_1^*K|_{U\\times_VU}$ with $\\widetilde{M_1}$, $M_1=M\\otimes_{A,p_1}^{\\mathbf L}B$. To check boundedness below of $M_1$, apply relative-perfect base change to $f$ along itself: $Lp_1^*K$ is relatively perfect over the second copy of $X$. On $U\\times_VU$, the affine Tor criterion over that copy of $\\operatorname{Spec}A$ gives a finite interval; testing its tensor on $A[0]$ bounds the cohomology of $M_1$. The identical argument with $f'$ bounds $M'_1$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-pc-affine-kflat-pullback-chart-comparison",
+    "lem-sfb-scheme-relative-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; affine-local reduction and all finiteness hypotheses for internal Hom"
+   }
+  },
+  {
+   "text": "Apply quotient pseudo-coherence to $R\\to B\\twoheadrightarrow A$, with quotient multiplication, and $A[0]$, which is free of rank one over $A$. Both algebras are flat and finitely presented over $R$: geometrically their maps are $U\\times_VU\\to V$ and $U\\to V$, using flat base change and composition; their polynomial presentations give finite presentation. Thus $A[0]$ is pseudo-coherent over $B$. The same argument gives pseudo-coherence of $A'[0]$ over $B'$. On $U\\times_VU$, ordinary diagonal pushforward of $\\mathcal O_U$ is $\\widetilde A$: on standard opens this is precisely the localized quotient module. The affine algebra-class evaluation comparison now applies to $(B,A,M_1)$ and $(B',A',M'_1)$, since Step 4 checked boundedness below. It identifies each sheaf multiplication map with the associated sheaf of the corresponding algebraic transpose $m_\\gamma$, including the actual classes. The K-flat pullback comparison and Step 3 identify the second class with the derived scalar extension $\\gamma'$ of the first.",
+   "uses": [
+    "lem-sfb-flat-fp-quotient-pseudocoherent",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-trf-affine-algebra-class-evaluation-comparison",
+    "lem-pc-affine-kflat-pullback-chart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; affine diagonal algebra, internal Hom and the actual class maps"
+   }
+  },
+  {
+   "text": "The original multiplication map is an isomorphism by the supplied-pair hypothesis. Steps 4--5 and the affine equivalence therefore give $m_\\gamma:A[0]\\xrightarrow{\\sim}R\\operatorname{Hom}_B(A[0],M_1)$. In degree zero it sends $a$ to $a\\gamma$ (transpose of multiplication), so $\\gamma$ is a generator. Apply the algebraic diagonal-generator base-change lemma. It gives the diagonal Hom object $A'[0]$ and says that $\\gamma'$ generates its degree-zero Hom module, which is free of rank one over $A'$. The map $m_{\\gamma'}$ induces $a'\\mapsto a'\\gamma'$ in degree zero, an isomorphism: under any rank-one identification the generator is a unit $u$ and this map is multiplication by $u$. In every other degree both cohomologies vanish. Consequently $m_{\\gamma'}$ is an isomorphism, and the class evaluation comparison makes the required sheaf multiplication map an isomorphism on $U'\\times_{V'}U'$.",
+   "uses": [
+    "lem-sfb-algebraic-diagonal-generator-base-change",
+    "def-trf-coherent-relative-dualizing-pair",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-trf-affine-algebra-class-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; algebraic base change, including its generator clause"
+   }
+  },
+  {
+   "text": "The opens $U'\\times_{V'}U'$ used above cover a neighbourhood of the diagonal in $Y'$. On its open complement $\\Delta'_*\\mathcal O_{X'}$ is zero; restriction of derived internal Hom is internal Hom of the restrictions, hence the other side is zero as well. On the neighbourhoods, restriction of internal Hom and class evaluation identifies the tested map with the restriction of the global multiplication map. It is therefore an isomorphism everywhere: its cone has all cohomology sheaves zero on an open cover and thus globally zero. Together with Step 1 this is exactly the supplied-pair predicate for $(K',\\xi')$.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-trf-affine-algebra-class-evaluation-comparison",
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; passage from the affine test to the global pair"
+   }
+  },
+  {
+   "text": "For successive base changes $S''\\xrightarrow{k}S'\\xrightarrow{g}S$, pullback composition identifies $Lh_k^*Lh_g^*\\xi$ with $L(h_gh_k)^*\\xi$. The canonical diagonal identifications satisfy $d_{gk}=d_k\\circ Lh_k^*(d_g)$ under that composition comparison: this is horizontal pasting of the two canonical derived base-change squares for the closed diagonal, with its pullback composition identifications. Its affine normalization also sends $(a\\otimes r')\\otimes r''$ to $a\\otimes k(r')r''$ on both routes. The target comparisons commute by associativity of derived pullback composition. Substituting these two equalities in Step 3 proves equality of the two resulting classes and the usual composition comparison for the objects. For an identity base change the diagonal augmentation and target comparison are identities under the canonical unit identifications. Thus identity and iterated base change respect both objects and classes.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-base-change-horizontal-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; identity and composition of the canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-sfb-scheme-relative-perfect-base-change",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-flat-compose",
+  "lem-sfb-flat-families-tor-independent",
+  "lem-pc-tor-independent-perfect-tensor-base-change",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-pc-affine-kflat-pullback-chart-comparison",
+  "lem-sfb-flat-fp-quotient-pseudocoherent",
+  "lem-trf-affine-algebra-class-evaluation-comparison",
+  "lem-sfb-algebraic-diagonal-generator-base-change",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-derived-base-change-horizontal-pasting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2Y, lemma-base-change-relative-dualizing; algebraic input Tag 0E2F; identity/composition clause made explicit using canonical mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a supplied relative dualizing complex and diagonal class is a relative dualizing pair under arbitrary base change of flat finitely presented schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y U V : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : U ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine U] [AlgebraicGeometry.IsOpenImmersion g]\", \"doc\": \"Given a pullback square involving morphisms with affine targets, if the diagonal morphism of the original morphism satisfies property $P$, then the diagonal morphism of the pulled-back morphism satisf\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the Spec maps of the left/right inclusions into the pushout of residue fields $T.te\"}\n  {\"name\": \"AlgebraicGeometry.diagonal_SpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  CategoryTheory.Limits.pullback.diagonal (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.Tensor\", \"doc\": \"The diagonal morphism in the pullback of the morphism $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ induced by the $R$-algebra structure on $S$ is equal to the composition of the morphism $\\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.diagonal_Spec_map\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  CategoryTheory.Limits.pullback.diagonal (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.Tensor\", \"doc\": \"The diagonal morphism of the morphism $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ induced by the $R$-algebra structure on $S$ coincides with the composition of the morphism $\\\\operatorname{Spec\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state base-change stability of flat morphisms or ordinary module duals, not diagonal-class derived duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative duality diagonal class commutes with non flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {P : CategoryTheory.MorphismProperty C} [P.IsStableUnderBaseChange] [P.RespectsIso],\\n  P.diagonal.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $P$ in a category with pullbacks is stable under base change and respects isomorphisms, then the diagonal morphism property derived from $P$ is also stable under base change. Sp\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso], P.diagonal.toProperty.RespectsIso\", \"doc\": \"If a morphism property $P$ for schemes with affine targets respects isomorphisms, then the diagonal property derived from $P$ (which asserts preservation under pullbacks along open immersions from aff\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y U V : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : U ⟶ Y}\\n  [inst : AlgebraicGeometry.IsAffine U] [AlgebraicGeometry.IsOpenImmersion g]\", \"doc\": \"Given a pullback square involving morphisms with affine targets, if the diagonal morphism of the original morphism satisfies property $P$, then the diagonal morphism of the pulled-back morphism satisf\"}\n  {\"name\": \"AlgebraicGeometry.diagonal_Spec_map\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  CategoryTheory.Limits.pullback.diagonal (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.Tensor\", \"doc\": \"The diagonal morphism of the morphism $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ induced by the $R$-algebra structure on $S$ coincides with the composition of the morphism $\\\\operatorname{Spec\"}\n  {\"name\": \"AlgebraicGeometry.diagonal_SpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  CategoryTheory.Limits.pullback.diagonal (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.Tensor\", \"doc\": \"The diagonal morphism in the pullback of the morphism $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ induced by the $R$-algebra structure on $S$ is equal to the composition of the morphism $\\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state base-change stability of flat morphisms or ordinary module duals, not diagonal-class derived duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state base-change stability of flat morphisms or ordinary module duals, not diagonal-class derived duality"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*baseChange|baseChange.*dualizing|relativeDualizing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state base-change stability of flat morphisms or ordinary module duals, not diagonal-class derived duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing pair arbitrary base change flat morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": A ⊗[R] Dual R V ≃ₗ[A] Dual A W\", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A W\", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state base-change stability of flat morphisms or ordinary module duals, not diagonal-class derived duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing pair arbitrary nonflat base change diagonal class",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {V : Type u_2} →\\n      [inst_1 : AddCommMonoid V] →\\n        [inst_2 : Module R V] →\\n          {W : Type u_3} →\\n            [inst_3 : AddCommMonoid W] →\\n              [inst_4 : Module R W] →\\n                {A : Type u_4} →\\n                  [inst_5 : \", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {V : Type u_2} →\\n      [inst_1 : AddCommMonoid V] →\\n        [inst_2 : Module R V] →\\n          {W : Type u_3} →\\n            [inst_3 : AddCommMonoid W] →\\n              [inst_4 : Module R W] →\\n                {A : Type u_4} →\\n                  [inst_5 : \", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"IsBaseChange.toDual_comp_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For any $ f \\\\in \\\\text{Dual}_R(V) $ and $ v \\\\in V $, the composition of the dual map under base change from $ R $ to $ A $ with the canonical inclusion $ j: V \\\\to W $ satisfies $ \\\\text{ibc.toDual}(f)(j\"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"Module.Dual.baseChange_baseChange\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] (A : Type u_4)\\n  [inst_3 : CommSemiring A] [inst_4 : Algebra R A] {B : Type u_5} [inst_5 : CommSemiring B] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : IsScalarTower R A B] (f : Modu\", \"doc\": \"For a dual module $ V^* $ over a commutative semiring $ R $, applying successive base changes from $ R $ to $ A $ and then from $ A $ to $ B $ is canonically isomorphic to a direct base change from $ \"}\n  {\"name\": \"Module.Dual.baseChange\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {V : Type u_2} →\\n      [inst_1 : AddCommMonoid V] →\\n        [inst_2 : Module R V] →\\n          (A : Type u_4) →\\n            [inst_3 : CommSemiring A] →\\n              [inst_4 : Algebra R A] → Module.Dual R V →ₗ[R] Module.Dual A (TensorProduct R A V)\", \"doc\": \"The linear map from the dual module $\\\\text{Hom}_R(V, R)$ to $\\\\text{Hom}_A(A \\\\otimes_R V, A)$ induced by base change from $R$ to an $R$-algebra $A$, constructed by composing the base change homomorphis\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback preserves coherent relative duality for flat finitely presented schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizing.*baseChange|baseChange.*dualizing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complex arbitrary base change flat scheme morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": A ⊗[R] Dual R V ≃ₗ[A] Dual A W\", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \":\\n  cotangentComplexBaseChange R S P.Ring A =\\n    AlgebraTensorModule.cancelBaseChange P.Ring S A A Ω[P.Ring⁄R] ∘ₗ\\n      P.cotangentComplex.baseChange A ∘ₗ\\n        ((AlgebraTensorModule.cancelBaseChange P.Ring S A A P.ker).symm ≪≫ₗ P.cotangentEquiv.baseChange (A := A))\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-dualizing-pair-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0E2Y and 0E2F without Noetherian or flat-base-change assumptions. Retained the statement. Separated canonical diagonal construction, relative finiteness, the affine class test, algebraic generator preservation, global detection and composition. Reused arbitrary-ring affine criteria rather than the existing Noetherian-only pair comparison. Three strictly smaller statement-only inputs are created; no Lean or compilation.",
+  "blueprint": "The inherited ancestry has from.node=null; the current latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) is the recorded ultimate direct-image/compactification context. This item supplies the coherent duality base-change input to the marked-family/polynomial-model chain, not a replacement of the six-functor route. No blueprint node states the coherent arbitrary-base pair assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-tor-independent-perfect-tensor-base-change",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-closed-module-pushforward-homology",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-trf-affine-relative-tor-amplitude-criterion",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-affine-kflat-pullback-chart-comparison",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-trf-affine-algebra-class-evaluation-comparison",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   },
+   {
+    "node": "lem-pc-derived-base-change-horizontal-pasting",
+    "why": "Generic scheme-module derived/affine or morphism-stability tool used as stated in the indicated steps; this unit provides no replacement for this foundational comparison. All coefficients remain Zariski structure sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-tor-independent-perfect-tensor-base-change",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-pc-affine-kflat-pullback-chart-comparison",
+  "lem-trf-affine-algebra-class-evaluation-comparison",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-derived-base-change-horizontal-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-88f86353f",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-88f86353f (reviewer sub-agent of L); spot-checked: Read Stacks duality.tex 0E2Y and 0E2T, dualizing.tex 0E2C and 0E2F (full proof, including the generator clause), perfect.tex 0DI5 and more-algebra.tex 0E1T. Against live, the item's statement and stmt_deps are unchanged; there is no repair note, so this is an ordinary split. Steps 1-8 are checked against the cited statements. Step 2 applies the Tor-independent base change only on affine W of Y and W' of Y'; there the diagonal is a closed immersion, hence qcqs, and h is the b of the flat-families node (Y' = Y x_S S'). Step 4 shows M_1 bounded below via 0DI5 along f, which also follows from M_1 = M (x)_R A with A flat. Step 5 checks both hypotheses of the class-evaluation node: A[0] pseudo-coherent over B through 0E1T, and T bounded below. Step 6: H^0(m_gamma) is a -> a*gamma; a cyclic generator of a free rank-one module is a unit, so m_gamma' is an isomorphism. Step 7 uses the open-complement vanishing. Step 8 matches the horizontal-pasting node with f=Delta, g=h_g, h=h_k. The three new nodes match their sources exactly (0DI5; 0E1T (1)<=>(4); 0E2F(2) plus the generator clause under the 0E2C hypotheses). They are tested on small cases, statement-only, and not duplicates: the space/etale relative-perfect node, the Noetherian trf algebraic nodes and the polynomial base-change node are each Noetherian, etale or downstream of the item. tool_uses: I accept all 11 declared generic off-unit tools. Batch 5: lem-sfb-flat-families-tor-independent (reaching lem-trf-tor-localization-on-spec, a Tor-localization lemma), lem-trf-affine-relative-tor-amplitude-criterion and lem-trf-affine-algebra-class-evaluation-comparison are generic commutative algebra and sheaf tools. A closure check shows none reaches an imported blueprint theorem of sec-trace-formula or sec-poincare-duality, and the item (coherent duality base change) is no step of either assumption, so they stay as cited. Advisories, none blocking: compatibility of the base-change map with open restriction, naturality of the K-flat chart comparison on morphisms, and beta(id) = id are used tacitly. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDualizingPairBaseChange",
+  "declaration": "AlgebraicGeometry.isCoherentRelativeDualizingPair_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.relativeDualizingPullbackId",
+   "AlgebraicGeometry.relativeDualizingProductMap",
+   "AlgebraicGeometry.relativeDualizingProductMap_diagonal",
+   "AlgebraicGeometry.relativeDualizingOrdinaryDiagonalMap",
+   "AlgebraicGeometry.relativeDualizingDiagonalBaseChangeMap",
+   "AlgebraicGeometry.relativeDualizingBaseChangeTarget",
+   "AlgebraicGeometry.relativeDualizingBaseChangeClass",
+   "AlgebraicGeometry.relativeDualizingDiagonalBaseChangeMap_isIso",
+   "AlgebraicGeometry.isCoherentRelativeDualizingPair_baseChange",
+   "AlgebraicGeometry.relativeDualizingBaseChangeClass_id",
+   "AlgebraicGeometry.relativeDualizingBaseChangeClass_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDualizingPairBaseChange.lean",
+  "statement": "theorem isCoherentRelativeDualizingPair_baseChange {X S S' : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] (g : S' ⟶ S) (K : schemeDerivedCategory X) (ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K) (h : IsCoherentRelativeDualizingPair f K ξ) : IsCoherentRelativeDualizingPair (pullback.snd f g) ((derivedPullback (pullback.fst f g)).obj K) (relativeDualizingBaseChangeClass f (pullback.snd f g) g (pullback.fst f g) pullback.condition (relativeDualizingDiagonalBaseChangeMap_isIso f (pullback.snd f g) g (pullback.fst f g) (IsPullback.of_hasPullback f g)) K ξ)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The owning module also records the canonical diagonal augmentation, class construction, diagonal invertibility, and identity/composition equalities. The latter use the existing recorded pullback counit and composition, with no arbitrary map choice."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e23c1191",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed e4a9b25f (H2) applies exactly the prescribed fix. Lean file byte-identical (sha c6488875). Item stmt_deps swap lem-weil-pbc-module-pullback-structure-sheaf -> live def-sfb-tensor-pullback-structure-sheaf-map (record identical to live) and lem-weil-pbc-module-base-change-map-open-restriction -> new existing:true def-sfb-module-base-change-map (statement verbatim to ModuleBaseChangeMapOpenRestriction.lean l.38-42, prose matches body, source 0096/08HY, stmt_deps def-pc-scheme + lem-pc-module-pullback-adjunction since def is .choose of exists_tensorPullbackAdjunction, no other live owner). Mechanical finding: lem-pc-recorded-pullback-composition genuine (asIso of recordedDerivedPullbackCompositionLift_isIso), lem-pc-ringed-spaces-derived-pullback-composition genuine (relativeDualizingPullbackId = choose of derivedPullbackComposition_coherence, uniquely determined) -> PASS on that point. Other 10 dep records identical to live; live item has no lean record; statement/proof preserved; hypotheses separated/flat/lfp, arbitrary g, no extra assumptions; pilot gates OK; report sections present. No compile (no file changed). Maintainer note: lem-pc-derived-pullback-comparison-coherence record still points to withdrawn Sheaf module."
+ }
+}

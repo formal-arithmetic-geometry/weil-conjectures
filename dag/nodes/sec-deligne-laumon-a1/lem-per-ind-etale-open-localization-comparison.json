@@ -1,0 +1,162 @@
+{
+ "id": "lem-per-ind-etale-open-localization-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tag 03Q9 and sites-cohomology Tag 07A7; original ind-etale closed support proof steps 1, 6 and the open-unit part of 8.",
+   "via": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-codimension-one-costalk-reduction",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unit-compatible open localization comparison under affine ind-etale pullback",
+ "statement": "Let A be a commutative ring, g:T′→T an affine morphism of Noetherian schemes whose maps on sections over affine opens are ind-etale across universes [def-weil-pbc-ind-etale-algebra]. Let i:Z→T, i′:Z′→T′ be closed immersions in a Cartesian square with h:Z′→Z, and j:U→T, j′:U′→T′ their complementary open immersions. For every K in D+(T_et,ModuleCat A), there exists an isomorphism E:g*R+j_*j*K ≅ R+j′_*j′*g*K such that g*(η_j,K) followed by E.hom equals η_j′,g*K, with the specified derivedPlus ordinary open units. This concerns only ordinary inverse/direct images, not closed support right adjoints.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 and sites-cohomology Tag 07A7; original ind-etale closed support proof steps 1, 6 and the open-unit part of 8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-bounded-below-derived-adjunction",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Complementarity and the Cartesian closed square identify U′ with U×_T T′. The open immersion j is qcqs since T is Noetherian; base-changed open immersions give the complementary open j′.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q9 and 0A45; original item step 1"
+   }
+  },
+  {
+   "text": "At each t∈T′ choose an affine open of T through g(t). Its preimage is affine because g is affine. The given section-ring hypothesis gives the local ind-etale chart. Apply ordinary qcqs ind-etale base change to j and j*K; transport its comparison from the chosen fibre product to U′. Compose with the inverse-image square compositor q*j*K≅j′*g*K to obtain E.",
+   "uses": [
+    "lem-per-ind-etale-qcqs-direct-image-base-change",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9; original item step 6"
+   }
+  },
+  {
+   "text": "Transpose the asserted unit equation under the derived open adjunction j′*⊣R+j′_*. The exchange mate formula and the inverse-image compositor reduce the transpose of the left side to the identity by the triangle identity for j. The transpose of the right side is the identity by the triangle identity for j′. Injectivity of the adjunction bijection proves the unit equation.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 and original item step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-quasi-separated-morphism",
+  "lem-per-ind-etale-qcqs-direct-image-base-change",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-derived-exchange",
+  "lem-trf-bounded-below-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 and sites-cohomology Tag 07A7; original ind-etale closed support proof steps 1, 6 and the open-unit part of 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine ind etale base change ordinary open immersion derived direct image with unit compatibility",
+   "results": "No matching etale D+ theorem. Results included CategoryTheory.Adjunction.derived and AlgebraicGeometry.Scheme.Modules.restrictAdjunction.",
+   "date": "2026-10-26",
+   "verdict": "No specialization gives this statement with the specified bounded below support functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below supported kernel adjunction counit localization triangle complementary open orthogonality",
+   "results": "CategoryTheory.ObjectProperty.isLocal_trW, isColocal_trW and DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no etale support comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlus|mateEquiv_vcomp|localization.*triangle (Mathlib); module and theorem names in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates.mateEquiv_vcomp is the abstract pasting tool; exactFunctor localization exists but no specific geometric comparison. The upstream private generic shift proofs are reusable.",
+   "date": "2026-10-26",
+   "verdict": "Use existing abstract tools; the stated remaining geometric/normalization step has no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange",
+  "date": "2026-10-26",
+  "group": "A8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleOpenLocalizationComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleOpenLocalizationComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.indEtale_openLocalization_comparison",
+  "statement": "theorem indEtale_openLocalization_comparison\n    (A : Type (u + 1)) [CommRing A]\n    {Z Z' T T' U U' : Scheme.{u}} [IsNoetherian T] [IsNoetherian T']\n    (i : Z ⟶ T) (i' : Z' ⟶ T') [IsClosedImmersion i] [IsClosedImmersion i']\n    (j : U ⟶ T) (j' : U' ⟶ T') [IsOpenImmersion j] [IsOpenImmersion j']\n    (hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (hij' : Set.range i'.base = (Set.range j'.base)ᶜ)\n    (h : Z' ⟶ Z) (g : T' ⟶ T) [IsAffineHom g]\n    (hg : ∀ V : T.Opens, IsAffineOpen V →\n      RingHom.IndEtaleAcrossUniverses (g.app V).hom)\n    (sq : IsPullback h i' i g)\n    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    ∃ E :\n      (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.obj\n        ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctorPlus.obj\n          ((upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.obj K)) ≅\n      (lowerStar (ModuleCat.{u + 1} A) j').rightDerivedFunctorPlus.obj\n        ((upperStar (ModuleCat.{u + 1} A) j').mapDerivedCategoryPlus.obj\n          ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.obj K)),\n      (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map\n        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).derivedPlus.unit.app K) ≫\n        E.hom =\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j').derivedPlus.unit.app\n        ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.obj K)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091108-L-3305170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091108-L-3305170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

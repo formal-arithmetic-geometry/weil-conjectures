@@ -259,7 +259,18 @@
    "where": "proof"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-trace-perfectness",
  "split_report": {
@@ -373,5 +384,54 @@
   "group": "NG",
   "result": "pass",
   "note": "All clauses match the node: TraceFormulaCoefficientConventions supplies the datum, ℓ≠p, E, n≥1 and separated finite-type a_X with no extra hypothesis; hK is the recorded finiteTorConstructible; RΓ_c is the recorded compactSupportComplex c ⟨K,hK.1⟩ with c universally quantified; D^b_fin = IsPerfectRingComplex (bounded, finite projective terms, iso to Q.obj P) on the recorded ULift/u+1 coefficient complexes; ∀ Ω : Type u algebraically closed, xbar : Spec Ω ⟶ X; the stalk helper is the recorded finiteDerivedGeometricStalk shifted by the level equality, with ℓ-invertibility proved, not assumed. Statement verbatim; 8 dependency records identical to live; docstrings and 7-step proof present; sorry only; no hollow definition. nt_compile --json exit 0, the delivered file has no error or warning. Edge cases n=1, empty X, K=0 and non-finite-type Ω covered. Remark only: the stalk clause sits under the ∀ c binder, equivalent by Nagata."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $K\\in D^b_{ctf}(X,A)$ with structure morphism\n$a_X:X\\to\\Spec k$ separated finite type. Then\n\n$$\nR\\Gamma_c(X,K)\\in D^b_{\\mathrm{fin}}(A),\n$$\n\nand the derived geometric stalk $K_{\\bar x}=L\\bar x^*K$ lies in\n$D^b_{\\mathrm{fin}}(A)$ for every\ngeometric point\n$\\bar x$ of $X$.",
+  "proof": [
+   {
+    "text": "Let $C=R\\Gamma_c(X,K)$, with compact support as in\n[def-compact-support-direct-image-detailed], [def-trf-coefficient-conventions].\nThe finite-level constructibility theorem\n[prop-finite-compact-support-constructibility] gives a bounded\ncomplex on $\\operatorname{Spec}k$ with finite cohomology modules,\nusing the point identification of\n[def-weil-finite-coefficient-point]. This assertion alone does\nnot give perfectness over the finite local ring $A$.",
+    "uses": [
+     "def-compact-support-direct-image-detailed",
+     "def-trf-coefficient-conventions",
+     "prop-finite-compact-support-constructibility",
+     "def-weil-finite-coefficient-point"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Put $\\kappa=A/(\\pi_E)$. The narrow coefficient-change result\n[lem-fix-compact-support-coefficient-change], applied to\n$A_{E,n}\\to A_{E,1}=\\kappa$, identifies\n\n$$\nC\\otimes_A^L\\kappa\n\\xrightarrow{\\sim}R\\Gamma_c(X,K\\otimes_A^L\\kappa).\n$$",
+    "uses": [
+     "lem-fix-compact-support-coefficient-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The input on the right is bounded constructible: finite Tor amplitude\ngives boundedness, and its cohomology is constructible by restricting\nto a finite constructible stratification and taking the derived\ntensor of the finite coefficient modules, as in\n[def-weil-finite-tor-amplitude], [def-weil-finite-torsion-constructibility].\nHence the right side is bounded by\n[prop-finite-compact-support-constructibility] at the residue\nadmissible coefficient ring. The residue-field criterion of\n[lem-exc-residue-tor-test], applied on the point, now proves\nthat $C$ has finite Tor amplitude. Together with its finite\ncohomology, [lem-trf-finite-tor-amplitude-perfect] shows that\n$C$ is represented by a bounded complex of finite free\n$A$-modules.",
+    "uses": [
+     "def-weil-finite-tor-amplitude",
+     "def-weil-finite-torsion-constructibility",
+     "prop-finite-compact-support-constructibility",
+     "lem-exc-residue-tor-test",
+     "lem-trf-finite-tor-amplitude-perfect"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $K_{\\bar x}$, the exact inverse-image property\n[prop-weil-pbc-inverse-image-exact] and the finite-stalk\ncondition of [def-weil-finite-torsion-constructibility] give\nbounded finite cohomology. The tensor-vanishing definition\n[def-weil-finite-tor-amplitude] is preserved by this inverse\nimage, so the same module-theoretic perfectness criterion applies.\nThus both objects lie in the perfect category used for categorical\ntrace in [def-trf-categorical-trace].\nNo preservation of finite Tor amplitude by a package summary is used\nin this argument.",
+    "uses": [
+     "prop-weil-pbc-inverse-image-exact",
+     "def-weil-finite-torsion-constructibility",
+     "def-weil-finite-tor-amplitude",
+     "def-trf-categorical-trace"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

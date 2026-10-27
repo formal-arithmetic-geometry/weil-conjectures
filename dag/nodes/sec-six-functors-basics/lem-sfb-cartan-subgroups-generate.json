@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-cartan-subgroups-generate",
+ "kind": "statement",
+ "title": "Cartan subgroups generate a connected affine algebraic group",
+ "statement": "Let $k$ be an infinite field [def-weil-field], and let $G$ be a smooth [def-sbc-smooth-morphisms], geometrically connected [def-weil-connected-scheme], affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Closed subgroup schemes mean [def-sc-group-scheme-subgroup], tori mean [def-sfb-tori-multiplicative-type], and maximal tori mean [def-sfb-reductive-torus-centralizer-terminology]. Write $C_G(T)$ for the closed subgroup representing the centralizer functor of [lem-sfb-torus-centralizer-smooth-connected]. The collection of maximal $k$-tori of $G$ is nonempty. For every closed $k$-subgroup scheme $H\\subseteq G$, if $C_G(T)\\subseteq H$ for every maximal $k$-torus $T\\subseteq G$, then $H=G$ as closed subgroup schemes. No smoothness or connectedness assumption is imposed on $H$, and no reductivity or perfectness assumption is imposed on $G$ or $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.91, printed p.381 (generation); Corollary 17.83 and its proof, printed p.379 (existence of a maximal torus). Generation is the smallest-closed-subgroup notion introduced in section 2h, printed pp.53-56."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-torus-centralizer-smooth-connected"
+ ],
+ "proof": [
+  {
+   "text": "We first record the dimension test used below. If $J\\subseteq V$ is a closed subgroup of a smooth geometrically connected affine finite-type group and $\\dim J=\\dim V$, then $J=V$, even if $J$ is not smooth. Extend to $\\bar k$. The identity-local-dimension and rational-point base-change statements identify both group dimensions with those before extension. Smoothness is preserved and $V_{\\bar k}$ is reduced. The identity-component theorem makes the connected $V_{\\bar k}$ irreducible. The affine dimension-drop theorem therefore forces the closed subset $|J_{\\bar k}|$ to equal $|V_{\\bar k}|$. If $I$ is its defining ideal in the reduced coordinate algebra, then every element of $I$ belongs to every prime, hence is zero. Thus $I=0$. Finally a $k$-vector space maps injectively to its tensor product with $\\bar k$ (extend a basis), so the original defining ideal is zero too.",
+   "uses": [
+    "lem-ag-group-identity-local-dimension",
+    "lem-ag-rational-point-local-dimension-base-change",
+    "lem-pc-proper-base-change",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 1.34–1.37, pp.16–18; 10.15, pp.190–191; dimension argument underlying 17.77 and 17.91. Expanded scheme-theoretic dimension test."
+   }
+  },
+  {
+   "text": "There is at least the trivial torus in $G$. Dimensions of torus subgroups are integers between $0$ and $\\dim G$, since their underlying spaces are closed in $G$ and chains of irreducible closed subsets remain chains in $G$. Choose one of largest dimension. If it were strictly contained in another torus, the dimension test of step 1 applied with that torus as ambient group would rule out equal dimensions; hence the larger torus would have strictly larger dimension. This is impossible. This proves maximal-torus existence, also for every smooth connected group used below: such a group is geometrically connected because its identity is rational. A torus is geometrically reduced and geometrically connected: after any field extension, embed that field and a splitting field into an algebraically closed common overfield. Its coordinate algebra then becomes a Laurent polynomial ring, which is a domain. Injectivity of scalar extension forbids a nonzero nilpotent or a nontrivial idempotent before extension. The connectedness-idempotent criterion gives geometric connectedness, and the geometrically-reduced-group criterion gives smoothness; the diagonalizable geometric criteria also verify the split case.",
+   "uses": [
+    "def-sfb-tori-multiplicative-type",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-pc-scheme-connected-iff-idempotents"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.83 and its proof, p.379: choose a maximal torus over k; its existence under inclusion is expanded by dimension."
+   }
+  },
+  {
+   "text": "In the nilpotent case, take the central torus $T$ and unipotent quotient $q:G\\to Q$ with kernel $T$. Any torus $S$ containing $T$ has trivial map to $Q$: after splitting $S$ over $\\bar k$, apply the diagonalizable-to-unipotent theorem, then descend the equality of coordinate maps by injectivity under field extension. Thus $S\\subseteq\\ker q=T$, so $T$ is maximal. Its centrality gives $C_G(T)=G$ on every algebra, and any $H$ in the assertion equals $G$. This includes unipotent groups, for which the maximal torus can be trivial.",
+   "uses": [
+    "lem-sfb-nilpotent-central-torus-quotient",
+    "lem-sfb-diagonalizable-to-unipotent-trivial",
+    "def-sfb-reductive-torus-centralizer-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.47, p.341, and first sentence of Theorem 17.91, p.381."
+   }
+  },
+  {
+   "text": "Prove the generation assertion simultaneously for all smooth geometrically connected affine groups over $k$, by strong induction on their dimension $d$. For $d=0$ the trivial torus is maximal by step 2, and its centralizer is the whole group, proving the assertion. For $d>0$, assume the assertion for all groups of smaller dimension. First handle, at dimension $d$, groups for which the geometric Lie algebra has a noncentral semisimple element; call this the semisimple case. For such a group $V$, the tangent-span theorem supplies the nonempty family $K_X=C_V(X)^\\circ$ of smooth geometrically connected proper subgroups of smaller dimension, whose tangent spaces span $\\operatorname{Lie}(V)$.",
+   "uses": [
+    "lem-sfb-semisimple-centralizer-tangent-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.91, p.381: dimension induction and the infinite-field semisimple case. The base case and ordering of the same-dimension isogeny passage are made explicit."
+   }
+  },
+  {
+   "text": "Let $H\\subseteq V$ contain $C_V(T)$ for every maximal $k$-torus $T$ of $V$. For each $X$ in step 4 and each maximal torus $S\\subseteq K_X$, the semisimple-centralizer maximal-torus theorem makes $S$ maximal in $V$. On every commutative algebra, an element of $C_{K_X}(S)$ also belongs to $C_V(S)$, hence to $H$. Thus $H\\cap K_X$ is a closed subgroup of $K_X$ containing all its Cartan subgroups. The induction hypothesis applies to $K_X$ (strict dimension drop, same infinite base field) and gives $H\\cap K_X=K_X$. Therefore $K_X\\subseteq H$ for every $X$. No regularity is required of this intersection.",
+   "uses": [
+    "lem-sfb-semisimple-centralizer-maximal-tori",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.90 and the last two sentences of the semisimple case of Theorem 17.91, p.381."
+   }
+  },
+  {
+   "text": "Since $\\mathfrak g=\\operatorname{Lie}(V)$ is finite-dimensional and the tangent spaces of step 4 span it, choose finitely many $X_1,\\ldots,X_m$ among the indices of step 4 whose tangent spaces $\\operatorname{Lie}(K_{X_j})\\subseteq\\mathfrak g$ already span $\\mathfrak g$. Extend scalars to $\\bar k$. Each $(K_{X_j})_{\\bar k}$ and $V_{\\bar k}$ is smooth by clause (2) of the base-change node and connected by geometric connectedness; they are affine of finite type, and $(K_{X_j})_{\\bar k}\\subseteq V_{\\bar k}$ are closed subgroups. The dual-number calculus, applied with $R=\\bar k$ and to the closed inclusions $K_{X_j}\\subseteq V$, identifies $\\operatorname{Lie}(J_{\\bar k})=\\ker(J(\\bar k[\\delta])\\to J(\\bar k))$ with $\\operatorname{Lie}(J)\\otimes_k\\bar k$ naturally in $J$, so the images of $\\operatorname{Lie}((K_{X_j})_{\\bar k})$ span $\\operatorname{Lie}(V_{\\bar k})=\\mathfrak g\\otimes_k\\bar k$. By step 5, $K_{X_j}\\subseteq H$, hence $(K_{X_j})_{\\bar k}\\subseteq H_{\\bar k}$, and $H_{\\bar k}$ is a closed subgroup of $V_{\\bar k}$ (a $\\bar k$-algebra is a $k$-algebra). The tangent-generation theorem over the algebraically closed field $\\bar k$, which allows a nonsmooth $H_{\\bar k}$, gives $H_{\\bar k}=V_{\\bar k}$. If $I\\subseteq k[V]$ is the ideal of $H$, then $I\\otimes_k\\bar k$ is the ideal of $H_{\\bar k}$, hence zero, and injectivity of $I\\to I\\otimes_k\\bar k$ (extend a basis) gives $I=0$. Thus $H=V$. This proves the semisimple case at dimension $d$, with arbitrary closed $H$.",
+   "uses": [
+    "lem-sfb-semisimple-centralizer-tangent-span",
+    "lem-pc-proper-base-change",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lie-spanning inference in Theorem 17.91, p.381, with Propositions 2.47 and 2.50, pp.55–56 (formation of the generated subgroup commutes with field extension)."
+   }
+  },
+  {
+   "text": "Now let $G$ be any group of dimension $d$. The infinitesimal-isogeny reduction gives a finite faithfully flat radicial homomorphism $f:G\\to G\\prime$ with $\\dim G\\prime=d$, where $G\\prime$ is nilpotent or is in the semisimple case, and every $k$-torus of $G\\prime$ lifts as the scheme-theoretic image of a $k$-torus of $G$. Its smooth connected target is geometrically connected by the rational identity criterion. Steps 3 and 6 have already proved the generation assertion for this particular $G\\prime$ at dimension $d$; this is not an appeal to the induction hypothesis at the same dimension.",
+   "uses": [
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80, p.378, inserted into Theorem 17.91, p.381, to handle the case omitted in the printed proof."
+   }
+  },
+  {
+   "text": "Let $H\\subseteq G$ contain all the Cartan subgroups. The affine homomorphism theorem gives its closed scheme-theoretic image $H\\prime\\subseteq G\\prime$, with $H\\to H\\prime$ faithfully flat. Given a maximal $k$-torus $T\\prime\\subseteq G\\prime$, lift it to a torus $T\\subseteq G$ by step 7. The same homomorphism theorem makes $T\\to T\\prime$ faithfully flat, since $T\\prime$ is its scheme-theoretic image. The radicial torus-centralizer comparison says both that $T$ is maximal in $G$ and that $C_G(T)\\to C_{G\\prime}(T\\prime)$ is faithfully flat. Hence $C_{G\\prime}(T\\prime)\\subseteq H\\prime$: a function in the defining ideal of $H\\prime$ pulls back to zero on $C_G(T)$, and faithful flatness makes its restriction to $C_{G\\prime}(T\\prime)$ zero. Thus $H\\prime$ satisfies the generation hypothesis for $G\\prime$. Step 7 gives $H\\prime=G\\prime$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-radicial-isogeny-torus-centralizers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied isogeny passage from 17.80 to 17.91, using the scheme-theoretic homomorphism theorem 3.34, p.75, and torus-centralizer comparison."
+   }
+  },
+  {
+   "text": "The map $H\\to G\\prime$ is now surjective, and it is finite: its coordinate algebra is a quotient of the finite $k[G\\prime]$-module $k[G]$. The finite-surjective dimension theorem gives $\\dim H=\\dim G\\prime=\\dim G$. Apply step 1 to the closed subgroup $H\\subseteq G$ to obtain $H=G$ as schemes. Together with maximal-torus existence in step 2, this proves every clause. This last argument uses neither smoothness nor connectedness of $H$, and never infers equality of arbitrary subgroup schemes from equality of their Lie algebras.",
+   "uses": [
+    "lem-sc-finite-surjective-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Completion of the omitted isogeny passage in Theorem 17.91, p.381; finite surjective dimension comparison and the dimension test in step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-local-dimension-base-change",
+  "lem-pc-proper-base-change",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-wf-affine-dimension-drop",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sfb-nilpotent-central-torus-quotient",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-semisimple-centralizer-tangent-span",
+  "lem-sfb-semisimple-centralizer-maximal-tori",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-infinitesimal-isogeny-lie-reduction",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-radicial-isogeny-torus-centralizers",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.91, p.381, with Proposition 17.80, p.378, supplying the omitted bad-Lie-algebra case. Scheme-theoretic subgroup and isogeny assembly supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an infinite field every smooth connected affine algebraic group has maximal tori and no proper closed subgroup contains all their centralizers",
+   "results": "{\"t\": \"2026-10-24T08:50:47Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinite field every smooth connected affine algebraic group has maximal tori and no proper closed subgroup contains all their centralizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"LieAlgebra.engel_isBot_of_isMin\", \"LieSubalgebra.instNontrivialSubtypeMemOfIsCartanSubalgebra\", \"frattini_nilpotent\"], \"digest\": \"b81efcc21e8377ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan hits concern Lie subalgebras, not Cartan subgroup schemes. Abstract subgroup centralizer/closure identities do not imply algebraic-group generation. AlgebraicGeometry grep found no Cartan or maximal-torus declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected affine algebraic group over an infinite field is generated by centralizers of its maximal tori",
+   "results": "{\"t\": \"2026-10-24T08:47:28Z\", \"tool\": \"leanfinder\", \"query\": \"A connected affine algebraic group over an infinite field is generated by centralizers of its maximal tori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Subgroup.center_eq_infi'\", \"Subgroup.center_eq_iInf\", \"closureCommutatorRepresentatives\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"Subgroup.centralizer_univ\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\"], \"digest\": \"e9d610ddf615bb09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan hits concern Lie subalgebras, not Cartan subgroup schemes. Abstract subgroup centralizer/closure identities do not imply algebraic-group generation. AlgebraicGeometry grep found no Cartan or maximal-torus declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic group is generated as a closed subgroup scheme by all its Cartan subgroups",
+   "results": "{\"t\": \"2026-10-24T08:50:43Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic group is generated as a closed subgroup scheme by all its Cartan subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"ClosedSubgroup.ctorIdx\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra\", \"Subgroup.closure\", \"ClosedSubgroup\"], \"digest\": \"3d6de4a1a7a2401d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan hits concern Lie subalgebras, not Cartan subgroup schemes. Abstract subgroup centralizer/closure identities do not imply algebraic-group generation. AlgebraicGeometry grep found no Cartan or maximal-torus declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"closure\"",
+   "results": "{\"t\": \"2026-10-24T08:50:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubsemigroup.closure_le_centralizer_centralizer\", \"Subsemigroup.closure_le_centralizer_centralizer\", \"AddSubmonoid.closure_le_centralizer_centralizer\", \"Submonoid.closure_le_centralizer_centralizer\", \"AddSubgroup.centralizer_closure\", \"Subgroup.centralizer_closure\", \"AddSubgroup.closure_le_centralizer_centralizer\", \"Subgroup.closure_le_centralizer_centralizer\"], \"digest\": \"d5a8abccc5780686\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan hits concern Lie subalgebras, not Cartan subgroup schemes. Abstract subgroup centralizer/closure identities do not imply algebraic-group generation. AlgebraicGeometry grep found no Cartan or maximal-torus declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan|cartan|[Mm]aximal[Tt]orus",
+   "results": "{\"t\": \"2026-10-24T08:50:43Z\", \"tool\": \"grep\", \"query\": \"Cartan|cartan|[Mm]aximal[Tt]orus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan hits concern Lie subalgebras, not Cartan subgroup schemes. Abstract subgroup centralizer/closure identities do not imply algebraic-group generation. AlgebraicGeometry grep found no Cartan or maximal-torus declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over an infinite field is generated by centralizers of maximal tori",
+   "results": "{\"t\": \"2026-10-24T09:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group over an infinite field is generated by centralizers of maximal tori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Subgroup.center_eq_infi'\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"Subgroup.center_eq_iInf\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.connectedComponentOfOne\"], \"digest\": \"59163eb5e7284e81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras and abstract group centralizers are not algebraic Cartan subgroup schemes; source grep found no such geometry declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan subgroups generate connected algebraic groups over an infinite field",
+   "results": "{\"t\": \"2026-10-24T09:09:12Z\", \"tool\": \"leansearch\", \"query\": \"Cartan subgroups generate connected algebraic groups over an infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.IsCartanSubalgebra\", \"CartanMatrix.Generators.H.inj\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.IsCartanSubalgebra.mk\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\"], \"digest\": \"a39ed9a04352e33b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras and abstract group centralizers are not algebraic Cartan subgroup schemes; source grep found no such geometry declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T09:09:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras and abstract group centralizers are not algebraic Cartan subgroup schemes; source grep found no such geometry declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan|cartan|maximal.?torus|semisimple.*centralizer",
+   "results": "{\"t\": \"2026-10-24T09:09:13Z\", \"tool\": \"grep\", \"query\": \"Cartan|cartan|maximal.?torus|semisimple.*centralizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras and abstract group centralizers are not algebraic Cartan subgroup schemes; source grep found no such geometry declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cartan-product-dominance",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: apply the dominant finite product of Cartan subgroups in the proof of 17.92, following 17.91. Supporting input: Theorem 17.91, printed p.381 (generation); Corollary 17.83 and its proof, printed p.379 (existence of a maximal torus). Generation is the smallest-closed-subgroup notion introduced in section 2h, printed pp.53-56.",
+   "via": [
+    "lem-sfb-cartan-product-dominance",
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cartan-subgroups-generate",
+  "worker": "stage1",
+  "group": "Q17",
+  "summary": "Dimension induction with explicit nilpotent, semisimple-centralizer and infinitesimal-isogeny cases. Three genuine supporting statements are exposed; existing maximal-torus and isogeny reduction nodes are reused. Arbitrary closed subgroup schemes are treated via the existing tangent-generation theorem over the algebraic closure and a scheme-theoretic full-dimension test. Statement unchanged.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/PGL supporting chain through Milne 17.93(b), 17.92 and 17.91. Ancestor command returns None; inherited null ancestor and via retained, with exact Milne proof places added for all helpers. Searches of the whole blueprint found no counterpart.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "lem-ag-rational-point-local-dimension-base-change",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "lem-sc-finite-surjective-dimension",
+    "why": "Generic arbitrary-field scheme or dimension input for the explicit dimension test, base change, or the final finite isogeny comparison; the unit has no substitute. No characteristic-zero group lemma is used."
+   },
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Generic affine connectedness criterion used to check torus geometric connectedness after scalar extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-local-dimension-base-change",
+  "lem-pc-proper-base-change",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-dimension-drop",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sc-finite-surjective-dimension",
+  "lem-pc-scheme-connected-iff-idempotents"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-d9ddfafb8",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-d9ddfafb8 (reviewer sub-agent of L); spot-checked: Read Milne iAG 2.46–2.53, 17.72, 17.74–17.83 and 17.90–17.91 from the PDF, the item, all 4 new nodes and every cited statement. The item statement is unchanged and true (17.91 generation in the scheme-theoretic sense, plus 17.83 existence). Steps 1–5 and 7–9 are correct: the full-dimension test also covers nonsmooth J (checked on α_p ⊂ G_a), maximal-torus existence comes from the torus of largest dimension, the nilpotent case uses the central torus/unipotent quotient, the strong induction finishes the semisimple case at d before the isogeny case, and the radicial comparison plus faithfully flat images give H'=G' and then H=G through the finite-surjective dimension count. New nodes: tangent-span is true over imperfect infinite k (X=Y^[p^N] is rational, semisimple and noncentral, and commutes with Y), maximal-tori (17.90) is true over any k, and the radicial torus-centralizer comparison is true (k̄-point injectivity plus smooth images; maximality via 17.20 and a dimension count). None of them restates the item. FIX (1): the existing split node lem-sfb-smooth-subgroup-tangent-generation (algebraically closed field, finite family, arbitrary closed K; no cycle) already does what step 6 needs after base change to k̄ on a finite spanning subfamily. Step 6 is rewritten to cite it, with lem-pc-proper-base-change and lem-sfb-affine-group-dual-number-calculus for the Lie base change, and the ideal is descended to k. The now-unused new envelope node is dropped. lem-ag-smooth-lie-local-dimension is removed from proof_deps and tool_uses, and the split_report summary is updated. FIX (2): the radicial node's 'finite faithfully flat' now says explicitly that k[G] is a finite faithfully flat k[G']-module via f^*. Batch-5 check: lem-trf-smooth-fpqc-base-descent, lem-trf-split-lattice-torus-projection, lem-trf-flat-tensor-preserves-injection and lem-trf-smooth-at-point-fibre-criterion are generic algebra/geometry facts, not parts of the trace formula or Poincaré duality, so this is OK. The remaining generic split_report.tool_uses are accepted.; 2 file(s) fixed by the reviewer"
+ }
+}

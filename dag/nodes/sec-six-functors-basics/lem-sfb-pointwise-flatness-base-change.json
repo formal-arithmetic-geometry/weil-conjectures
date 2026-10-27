@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-pointwise-flatness-base-change",
+ "kind": "statement",
+ "title": "Flatness at a point ascends under base change and is reflected by a flat base change",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\prime\\to Y$ be morphisms of schemes [def-pc-scheme]. Form the fibre product $X\\prime=X\\times_Y Y\\prime$ [def-pc-fibre-product], with projections $a:X\\prime\\to X$ and $f\\prime:X\\prime\\to Y\\prime$. Fix $x\\prime\\in X\\prime$, and put $x=a(x\\prime)$ and $y\\prime=f\\prime(x\\prime)$. (1) If $f$ is flat at $x$, then $f\\prime$ is flat at $x\\prime$. (2) If $g$ is flat at $y\\prime$ and $f\\prime$ is flat at $x\\prime$, then $f$ is flat at $x$ [def-weil-flat-morphism]. No finite-type, finite-presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 047C, more-morphisms-lemma-flat-locus-base-change, clauses (1) and (2), specialized to the structure sheaf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $y=f(x)=g(y\\prime)$, $R=\\mathcal O_{Y,y}$, $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{Y\\prime,y\\prime}$ and $C=\\mathcal O_{X\\prime,x\\prime}$. The equality defining $y$ follows from the projection equation of the fibre product. Use the actual stalk maps to form the commutative square $R\\to A$, $R\\to B$, $A\\to C$, $B\\to C$; these are local homomorphisms of local rings by [def-weil-flat-morphism]. Set $D=A\\otimes_R B$. By [lem-pc-pullback-stalk-tensor-flat], $C$ is flat over $D$ for the map $a\\otimes b\\mapsto a_Cb_C$, whose restrictions are exactly the projection stalk maps. We use only this stated flatness, not an identification of $C$ with $D$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-flat-morphism",
+    "lem-pc-pullback-stalk-tensor-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples.tex",
+    "place": "Tag 0FLS, section-silly, paragraph containing can_z; Tag 047C, proof, diagram of local rings"
+   }
+  },
+  {
+   "text": "For (1), flatness of $f$ at $x$ means that $A$ is flat over $R$. Apply [lem-weil-pbc-flat-module-base-change] with base map $R\\to B$ and module $A$: $B\\otimes_R A$ is flat over $B$. The flip $b\\otimes a\\mapsto a\\otimes b$, with inverse $a\\otimes b\\mapsto b\\otimes a$, is a $B$-linear isomorphism onto $D$ with its second-factor $B$-action (the balancing identities show well-definedness and the two composites fix every pure tensor). Thus $D$ is flat over $B$. Apply [lem-pc-module-flat-transitive] to $B\\to D$ and the flat $D$-module $C$ from step 1. It gives that $C$ is flat over $B$, which is exactly flatness of $f\\prime$ at $x\\prime$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof specialized to the structure sheaf; Algebra Tag 00MQ, lemma-base-change-flat-up-down, (3) and (4)"
+   }
+  },
+  {
+   "text": "For (2), flatness of $g$ at $y\\prime$ gives flatness of $B$ over $R$. Apply [lem-weil-pbc-flat-module-base-change] with base map $R\\to A$ and module $B$. It gives that $D=A\\otimes_R B$ is flat over $A$. Together with step 1, [lem-pc-module-flat-transitive] for $A\\to D$ and $C$ gives flatness of $C$ over $A$. The composite $A\\to D\\to C$ is the actual stalk map of the projection $a:X\\prime\\to X$, so it is a local homomorphism between the local rings $A$ and $C$. Consequently [lem-weil-pbc-flat-local-hom-faithfully-flat] applies and $C$ is faithfully flat over $A$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof specialized to the structure sheaf; Algebra Tag 00MQ, lemma-base-change-flat-up-down, (3) and (4)"
+   }
+  },
+  {
+   "text": "The other hypothesis in (2), flatness of $f\\prime$ at $x\\prime$, says that $C$ is flat over $B$. Since $B$ is flat over $R$, [lem-pc-module-flat-transitive] for $R\\to B$ and $C$ makes $C$ flat over $R$. Its $R$-action through $B$ equals the one through $A$ by the commutative stalk square of step 1. Now apply [lem-weil-pbc-flat-permanence] to the ring map $R\\to A$ and its $A$-module $C$: $C$ is flat over $R$ and faithfully flat over $A$ by step 3, so $A$ is flat over $R$. This is flatness of $f$ at $x$ by [def-weil-flat-morphism], proving (2).",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-flat-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, lemma-flat-locus-base-change, proof specialized to the structure sheaf; Algebra Tag 00MQ, lemma-base-change-flat-up-down, (3) and (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "lem-pc-pullback-stalk-tensor-flat",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 047C, lemma-flat-locus-base-change, proof for the structure sheaf; Algebra Tag 00MQ (3),(4), expressing its descent step by Tag 039V"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of schemes, flatness of the vertical morphism at a point is preserved by base change and reflected if the horizontal base morphism is flat at the image point",
+   "results": "{\"t\": \"2026-10-22T04:38:59Z\", \"tool\": \"leanfinder\", \"query\": \"In a cartesian square of schemes, flatness of the vertical morphism at a point is preserved by base change and reflected if the horizontal base morphism is flat at the image point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.stalkMap\"], \"digest\": \"2e0102d847e73a76\"}; Flat.isStableUnderBaseChange, Flat.instFstScheme and Flat.instSndScheme concern globally flat morphisms, not flatness at a chosen point nor pointwise reflection.",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat.isStableUnderBaseChange, Flat.instFstScheme and Flat.instSndScheme concern globally flat morphisms, not flatness at a chosen point nor pointwise reflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness at a point of a scheme morphism descends from a flat extension of the base at any lifted point, and flatness ascends under arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:39:52Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness at a point of a scheme morphism descends from a flat extension of the base at any lifted point, and flatness ascends under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.generalizingMap\"], \"digest\": \"2504df5a6c5c9c48\"}; Flat.of_stalkMap, Flat.iff_flat_stalkMap, flat_iff and base-change stability do not state the two pointwise implications.",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat.of_stalkMap, Flat.iff_flat_stalkMap, flat_iff and base-change stability do not state the two pointwise implications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"IsPullback\"",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"IsPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: No hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"stalkMap\"",
+   "results": "{\"t\": \"2026-10-22T04:39:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"stalkMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"0f4a230812a640cb\"}; Flat.of_stalkMap, Flat.stalkMap and Flat.iff_flat_stalkMap do not relate two maps in a base-change square.",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat.of_stalkMap, Flat.stalkMap and Flat.iff_flat_stalkMap do not relate two maps in a base-change square."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Bb]ase[Cc]hange|[Ff]lat.*of_isPullback|[Ff]lat.*stalkMap|of_flat.*base",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"grep\", \"query\": \"flat.*[Bb]ase[Cc]hange|[Ff]lat.*of_isPullback|[Ff]lat.*stalkMap|of_flat.*base\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"68287c55775cd043\"}; AlgebraicGeometry/Morphisms/Flat.lean:82,102,106 supplies global base-change stability and stalk characterization, not the pointwise ascent/reflection pair.",
+   "date": "2026-10-22",
+   "verdict": "no match: AlgebraicGeometry/Morphisms/Flat.lean:82,102,106 supplies global base-change stability and stalk characterization, not the pointwise ascent/reflection pair."
+  },
+  {
+   "tool": "grep",
+   "query": "of_flat.*[Ff]lat|iff.*flat|flat.*iff|descend",
+   "results": "{\"t\": \"2026-10-22T04:39:50Z\", \"tool\": \"grep\", \"query\": \"of_flat.*[Ff]lat|iff.*flat|flat.*iff|descend\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"10c493df6e086f9b\"}; Morphisms/LocalFlatDescent.lean and Descent.lean concern global fpqc descent; the Flat.lean and Etale.lean hits do not assert pointwise flatness reflection after a flat base change.",
+   "date": "2026-10-22",
+   "verdict": "no match: Morphisms/LocalFlatDescent.lean and Descent.lean concern global fpqc descent; the Flat.lean and Etale.lean hits do not assert pointwise flatness reflection after a flat base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise flatness descends after flat base change in a cartesian square of schemes",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise flatness descends after flat base change in a cartesian square of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"13775dfb31cf5625\"}; Global Flat.isStableUnderBaseChange and the global IsZariskiLocalAtTarget.descendsAlong interface do not specialize in one line to the pointwise assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: Global Flat.isStableUnderBaseChange and the global IsZariskiLocalAtTarget.descendsAlong interface do not specialize in one line to the pointwise assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Bb]ase[Cc]hange|[Ff]lat.*of_isPullback|[Ff]lat.*stalkMap|of_flat.*base",
+   "results": "{\"t\": \"2026-10-22T04:58:40Z\", \"tool\": \"grep\", \"query\": \"flat.*[Bb]ase[Cc]hange|[Ff]lat.*of_isPullback|[Ff]lat.*stalkMap|of_flat.*base\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"68287c55775cd043\"}; Read the returned signatures. The scheme results assume global Flat or characterize it by flatness at every stalk; none states both implications at a fixed point. Module.Flat.isBaseChange is an algebraic ingredient, not this pointwise scheme assertion. Flat.lean:81-106 read; no exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise flatness descends after flat base change in a cartesian square of schemes",
+   "results": "{\"t\": \"2026-10-22T04:58:40Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise flatness descends after flat base change in a cartesian square of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"13775dfb31cf5625\"}; Read the returned signatures. The scheme results assume global Flat or characterize it by flatness at every stalk; none states both implications at a fixed point. Module.Flat.isBaseChange is an algebraic ingredient, not this pointwise scheme assertion. Flat.lean:81-106 read; no exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"stalkMap\"",
+   "results": "{\"t\": \"2026-10-22T04:58:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"stalkMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"0f4a230812a640cb\"}; Read the returned signatures. The scheme results assume global Flat or characterize it by flatness at every stalk; none states both implications at a fixed point. Module.Flat.isBaseChange is an algebraic ingredient, not this pointwise scheme assertion. Flat.lean:81-106 read; no exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness at one point of a scheme morphism is preserved by base change and reflected under a flat base change at the image point",
+   "results": "{\"t\": \"2026-10-22T04:58:41Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness at one point of a scheme morphism is preserved by base change and reflected under a flat base change at the image point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"3f483c054d2419de\"}; Read the returned signatures. The scheme results assume global Flat or characterize it by flatness at every stalk; none states both implications at a fixed point. Module.Flat.isBaseChange is an algebraic ingredient, not this pointwise scheme assertion. Flat.lean:81-106 read; no exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local ring map at a point of a scheme pullback square descends along a base stalk map that is flat",
+   "results": "{\"t\": \"2026-10-22T04:59:01Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local ring map at a point of a scheme pullback square descends along a base stalk map that is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"2f08d9b3cc89da87\"}; Read the returned signatures. The scheme results assume global Flat or characterize it by flatness at every stalk; none states both implications at a fixed point. Module.Flat.isBaseChange is an algebraic ingredient, not this pointwise scheme assertion. Flat.lean:81-106 read; no exact match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-flat-locus-base-change",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction; the inherited de Jong morphism-scheme/Hilbert-scheme prerequisite, through Tag 05XC: Tag 05VK and the proof of Tag 05VJ, Tag 047C, more-morphisms-lemma-flat-locus-base-change, clauses (1) and (2), specialized to the structure sheaf.",
+   "via": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-pointwise-flatness-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Proved ascent and reflection on the actual commutative stalk square using the existing tensor-stalk flatness theorem, module flat base change and transitivity, flat-local faithful flatness, and flat permanence. No new nodes. Read Stacks 047C, 00MQ, 0FLS, 00HI, 00HR and 039V; searched the project and blueprint for an attachment/duplicate and Mathlib with two semantic phrasings. Restored the inherited null blueprint ancestor from the explicit via chain.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction; its inherited de Jong morphism-scheme/Hilbert prerequisite passes through the relative-flat-locus base-change step, Tag 05XC via 05VK/05VJ, using Tag 047C (1),(2) for the structure sheaf. This item supplies precisely those pointwise implications, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pullback-stalk-tensor-flat",
+    "why": "Generic scheme fibre-product stalk calculation used as a black box for flatness over the tensor of the three input stalk rings; the unit has no alternative statement of this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-permanence",
+    "why": "Generic commutative-algebra faithful-flat descent criterion, applied to R to A and the module C; no node of this unit states that criterion. It expands the descent in Stacks 00MQ, not the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pullback-stalk-tensor-flat",
+  "lem-weil-pbc-flat-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-62d44ad7f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-62d44ad7f (reviewer sub-agent of L); spot-checked: I read the four proof steps in full and found them correct. No fixes were made. The item statement is unchanged and equals Stacks 047C (1),(2) (more-morphisms.tex, lemma-flat-locus-base-change) with F=O_X: same hypotheses, no finiteness assumptions. The route is 00MQ (3)/(4), with the descent half done through 039V. Step 1 takes from lem-pc-pullback-stalk-tensor-flat only that C is flat over D=A⊗_R B, along the projection stalk maps; it never claims C≅D or that D is local. Step 2 proves (1): 00HI gives B⊗_R A flat over B, an elementary flip identifies it with D, and Module.Flat.trans gives C flat over B. Step 3 proves the first half of (2): B is flat over R, so D is flat over A and C is flat over A. The stalk map A→C is local, so 00HR makes C faithfully flat over A. Step 4 finishes (2): C is flat over R via B, the R-actions through A and through B agree by the stalk square, and 039V with R→A and M=C gives A flat over R. There are no new nodes. No duplicate in the DAG states the pointwise pair; the global base-change node and the fibrewise criterion 039C are different statements. There is no cycle with the parent lem-sfb-relative-flat-locus-base-change, which uses exactly (1) and (2). Small cases tested: identity base change, empty fibre product, and Spec F_p→Spec Z pulled back along itself, which shows 'g flat at y'' is needed and is kept. Live checks: the item is still unsplit live, has no repair note, and neither it nor any cited node is on the route-pivot drop list. No SGA source is cited. Accepted tool_uses: lem-pc-pullback-stalk-tensor-flat and lem-weil-pbc-flat-permanence, both generic black boxes that do not replace the unit's alteration route. Blueprint field: the worker set the item's null blueprint.from.node to det-thm-sf-ctf-stability-direct-images, which is a real blueprint node and the from.node at the end of the item's via chain. I accept this as a locator correction. Maintainer note: tools/blueprint_refs.py ancestor prints None for this chain because the chain ends at a module-named created.item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointwiseFlatnessBaseChange",
+  "declaration": "AlgebraicGeometry.pointwise_flatness_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointwiseFlatnessBaseChange.lean",
+  "statement": "theorem pointwise_flatness_base_change {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) (x' : ↥(pullback f g)) : ((f.stalkMap ((pullback.fst f g) x')).hom.Flat → ((pullback.snd f g).stalkMap x').hom.Flat) ∧ ((g.stalkMap ((pullback.snd f g) x')).hom.Flat → ((pullback.snd f g).stalkMap x').hom.Flat → (f.stalkMap ((pullback.fst f g) x')).hom.Flat)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dda3eb7e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "The Lean statement (pullback f g, fst/snd stalk maps, RingHom.Flat) matches the node and Stacks 047C (1),(2) with F=O_X clause by clause. No finiteness assumptions; the source's apply only to the openness assertion. Edge cases (empty fibre product, identity, F_p/Z need for g-flat) and the single universe u are fine. Statement only, sorry proof, no definitions, docstrings carry source, blueprint id and the 4 proof steps. lean.statement matches the file verbatim. Proof-dep modules are plain imports and exist live. No duplicate in Mathlib or the project. Not yet landed live. Consistent with the parent RelativeFlatLocusBaseChange. Report sections present. No changes, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261023T105524-L-3571153",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.pointwise_flatness_base_change"
+  ],
+  "sorry_after": []
+ }
+}

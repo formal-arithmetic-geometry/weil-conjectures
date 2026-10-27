@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-decent-algebraic-field-image-closed",
+ "kind": "statement",
+ "title": "Algebraic field-valued images over closed base points are closed in decent spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with point classes and atlas topology [def-a1-space-point-topology]. Assume that every point of $|X|$ can be represented by a quasi-compact monomorphism from the spectrum of a field. Here monomorphism means injectivity of composition on morphisms from every algebraic space over $S$; quasi-compact means that after every scheme test inverse images of quasi-compact opens are quasi-compact. Let $L$ be a field [def-weil-field] and $a:\\operatorname{Spec}L\\to X$ an $S$-morphism [def-weil-affine-spectrum]. Let $s\\in S$ be the image of the unique point of $\\operatorname{Spec}L$. If $\\{s\\}$ is closed and the induced field extension $\\kappa(s)\\to L$ is algebraic (each element of $L$ satisfies a nonzero polynomial with coefficients in $\\kappa(s)$), then the image of $a$ is a closed singleton in $|X|$. The residue field $\\kappa(s)$ and its induced map are [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point); the hypothesis on field monomorphisms is decency by Tag 03JV (lemma-UR-finite-above-x), condition (4), and Definition 03I8 (definition-very-reasonable)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $x$ for the image of $a$. Let $x_0\\in\\overline{\\{x\\}}$ be arbitrary. The atlas in [def-trf-algebraic-space] supplies a representable surjective etale $p:U\\to X$ and $u_0\\in U$ over $x_0$. The field-monomorphism hypothesis is exactly the hypothesis of [lem-sfb-decent-space-etale-generalization-lifting]; apply it to $x\\leadsto x_0$ to obtain $u\\leadsto u_0$ with $p(u)=x$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-decent-space-etale-generalization-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point), proof"
+   }
+  },
+  {
+   "text": "Form $W=\\operatorname{Spec}L\\times_XU$. It is a scheme and $q:W\\to\\operatorname{Spec}L$ is etale by the scheme-test definition of representable etaleness of $p$. The unique point of $\\operatorname{Spec}L$ and $u$ have common image $x$. Thus [lem-a1-space-fibre-product-point] gives $w\\in W$ mapping to $u$. For this etale scheme morphism $q$, [lem-weil-pbc-etale-fibre-discrete-separable-points] says that the residue extension $L\\to\\kappa(w)$ is finite separable, in particular each of its elements satisfies a nonzero polynomial over $L$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-fibre-product-point",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point), proof"
+   }
+  },
+  {
+   "text": "The maps of schemes $W\\to U\\to S$ induce field inclusions $\\kappa(s)\\to\\kappa(u)\\to\\kappa(w)$, compatible with $\\kappa(s)\\to L\\to\\kappa(w)$ by commutativity of the fibre-product diagram and the definition of residue-field maps. Apply [lem-sfb-algebraic-element-tower] to the latter tower: every element of $\\kappa(w)$ is algebraic over $\\kappa(s)$. For $c\\in\\kappa(u)$ take a nonzero polynomial over $\\kappa(s)$ annihilating its image in $\\kappa(w)$. Injectivity of $\\kappa(u)\\to\\kappa(w)$ implies that the same polynomial vanishes at $c$. Thus $\\kappa(u)/\\kappa(s)$ is algebraic.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension",
+    "lem-sfb-algebraic-element-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point), proof"
+   }
+  },
+  {
+   "text": "The point $u$ maps to $s$ under $U\\to S$, and $s$ is closed by hypothesis. Apply [lem-sfb-scheme-algebraic-residue-closed-point] to conclude that $\\{u\\}$ is closed in $U$. Since $u\\leadsto u_0$, we have $u=u_0$, hence $x=p(u)=p(u_0)=x_0$. Every point of $\\overline{\\{x\\}}$ is therefore $x$, so this closure is $\\{x\\}$. The image of $a$, whose source has one point, is this closed singleton.",
+   "uses": [
+    "lem-sfb-scheme-algebraic-residue-closed-point",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-decent-space-etale-generalization-lifting",
+  "lem-a1-space-fibre-product-point",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "lem-sfb-algebraic-element-tower",
+  "lem-sfb-scheme-algebraic-residue-closed-point",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07U5 (lemma-algebraic-residue-field-extension-closed-point), proof; decency via Tag 03JV(4) and Definition 03I8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "algebraic.*[Cc]losed|[Cc]losed.*algebraic|AlgebraicSpace",
+   "results": "Search directory Mathlib/AlgebraicGeometry; 24 hits: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field point of a decent algebraic space over a closed base point has closed image if its residue field is algebraic over the base residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.LocallyRingedSpace.residueField, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"isClosed\"",
+   "results": "12 hits: AlgebraicGeometry.RingedSpace.zeroLocus_isClosed, AlgebraicGeometry.Scheme.height_of_isClosed, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed, AlgebraicGeometry.Scheme.eq_zeroLocus_of_isClosed_of_isAffine, AlgebraicGeometry.isClosedEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget, AlgebraicGeometry.instRespectsIsoSchemeTopologicallyIsClosedEmbedding",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a decent algebraic space over a scheme a field valued point above a closed point with algebraic residue field extension is closed",
+   "results": "8 hits: AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.range_fromSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic residue field extension over a closed base point forces the image of a field spectrum in a decent algebraic space to be a closed singleton",
+   "results": "8 hits: AlgebraicGeometry.Scheme.range_fromSpecResidueField, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "decent|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T13:23:07Z\", \"tool\": \"grep\", \"query\": \"decent|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes rather than decent algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]pecializ.*[Ee]tale|[Gg]eneraliz.*[Ee]tale|decent",
+   "results": "{\"t\": \"2026-10-23T13:23:07Z\", \"tool\": \"grep\", \"query\": \"[Ss]pecializ.*[Ee]tale|[Gg]eneraliz.*[Ee]tale|decent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes rather than decent algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field valued point in a decent algebraic space with algebraic residue field over a closed base point has closed image",
+   "results": "{\"t\": \"2026-10-23T13:23:07Z\", \"tool\": \"leansearch\", \"query\": \"A field valued point in a decent algebraic space with algebraic residue field over a closed base point has closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"505ee0da37512f2c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes rather than decent algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsClosed\"",
+   "results": "{\"t\": \"2026-10-23T13:23:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes rather than decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field point of a decent algebraic space over a closed base point with algebraic residue extension is a closed point",
+   "results": "{\"t\": \"2026-10-23T13:23:08Z\", \"tool\": \"leanfinder\", \"query\": \"A field point of a decent algebraic space over a closed base point with algebraic residue extension is a closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"f818c538ecf7eab8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes rather than decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closedness of the image of Spec of an algebraic field extension in an algebraic space with quasi compact field representatives",
+   "results": "{\"t\": \"2026-10-23T13:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"Closedness of the image of Spec of an algebraic field extension in an algebraic space with quasi compact field representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\"], \"digest\": \"30d98b3cb8fd897b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes rather than decent algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qs-space-rational-point-topology",
+  "date": "2026-10-23",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Algebraic field-valued images over closed base points are closed in decent spaces.",
+   "via": [
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-decent-algebraic-field-image-closed",
+  "worker": "stage1",
+  "summary": "Q102 follows 07U5: lift an arbitrary specialization into an etale chart, lift its generic endpoint into the field pullback, descend algebraicity along the residue-field tower and apply the general scheme closed-point criterion. Two strictly smaller statement-only inputs; existing point and field results reused. Statement unchanged.",
+  "blueprint": "Inherited supporting input to det-thm-sf-ctf-stability-direct-images (3), through qs-space-rational-point-topology and adequate moduli. Read latest direct-images proof (3); no chapter or unit change. The ancestor tool returns None, retained as inherited blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic surjectivity on compatible pairs of field point classes; no specialized unit construction supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme-etale residue-field calculation used on the field pullback; no unit-specific substitute."
+   },
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Existing spectrum definition supplies its singleton field spectrum, with no route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-fibre-product-point",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-affine-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-4c5528855",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4c5528855 (reviewer sub-agent of L); spot-checked: Read the full item and both new nodes against Stacks decent-spaces.tex 07U5 (statement and full proof), 03IL, 03JV(1)-(6) and 03I8, and morphisms.tex 01TE. Statement, stmt_deps, source and blueprint are unchanged from the live/side-live base, where the item is unsplit; neither new id exists live. Item decency = 03JV(4). Step 1: an atlas point u0 over x0, then the new 03IL lifting node gives u⇝u0 over x; the source's U' is a typo for U. Step 2: W=Spec L×_X U is an étale scheme over L; lem-a1-space-fibre-product-point gives w over u; lem-weil-pbc-etale-fibre-discrete-separable-points makes κ(w)/L finite separable, since the fibre is W. Step 3: residue towers agree because U→X and a are S-morphisms; lem-sfb-algebraic-element-tower plus injectivity make κ(u)/κ(s) algebraic. Step 4: the new 01TE(2) node closes {u}, so u0=u and x0=x. The proof matches 07U5 with nothing dropped. New lifting node (03IL with decency as 03JV(4)) is strictly weaker in hypothesis than lem-sfb-quasiseparated-space-etale-specializations (quasi-compact diagonal), so it is not a duplicate. New scheme node is exactly 01TE(2); the existing trf nodes need local finite type and a finite extension, and Mathlib has only the Jacobson/closed-immersion criteria. Both new nodes are statement-only and self-contained with three search kinds recorded, and were tested on small cases (A^1 generic point, a DVR with non-closed s, infinite algebraic extensions). Batch-5: def-trf-algebraic-space and def-a1-space-point-topology are general definitions; lem-a1-space-fibre-product-point is a foundational point lemma reaching sec-trace-formula only through that definition, not part of the proof of the trace formula or Poincaré duality, so all three are accepted. Tool uses (a1 fibre-product point, pbc étale fibre, affine spectrum) are generic and accepted. blueprint.from.node is null, inherited from the base, not a fault of this delivery. No SGA cited, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DecentAlgebraicFieldImageClosed",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isClosed_pointImage_of_algebraic_residueField",
+  "file": "lean/Sheaf/AlgebraicGeometry/DecentAlgebraicFieldImageClosed.lean",
+  "statement": "theorem isClosed_pointImage_of_algebraic_residueField {S : Scheme.{u}} (X : AlgebraicSpace S) (hdecent : ∀ x : Point X.obj.obj, ∃ (K : Type u) (_ : Field K) (b : Spec (CommRingCat.of K) ⟶ S) (i : yoneda.obj (Over.mk b) ⟶ X.obj.obj), schemePointMap i (IsLocalRing.closedPoint K) = x ∧ (∀ (Y : AlgebraicSpace S) (f g : Y.obj.obj ⟶ yoneda.obj (Over.mk b)), f ≫ i = g ≫ i → f = g) ∧ IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) i) (L : Type u) [Field L] (b : Spec (CommRingCat.of L) ⟶ S) (a : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (hs : IsClosed ({b (IsLocalRing.closedPoint L)} : Set S)) (halg : ∀ c : L, ∃ p : Polynomial (S.residueField (b (IsLocalRing.closedPoint L))), p ≠ 0 ∧ p.eval₂ (S.descResidueField (Scheme.stalkClosedPointTo b)).hom c = 0) : IsClosed ({schemePointMap a (IsLocalRing.closedPoint L)} : Set (Point X.obj.obj)) ∧ pointImage a = {schemePointMap a (IsLocalRing.closedPoint L)}",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-823b7307d",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Item node differs from side-live only by the new lean record; lean.statement appears verbatim in the file. Clause check: decency = 03JV(4) at every point, with a representing field map, cancellation against all AlgebraicSpace S maps and quasi-compactness via IsRepresentableWith QuasiCompact p.left (representability automatic). L, b and a give the S-morphism; hs closes {b closedPoint}; halg uses the canonical descResidueField (stalkClosedPointTo b), which agrees with residueFieldMap, and requires a nonzero eval₂ polynomial for each element. Conclusion: closed singleton and pointImage a = {schemePointMap a closedPoint}, matching 07U5. Edge cases: empty S/X vacuous; infinite and inseparable extensions and any characteristic allowed; single universe u with no restriction. No duplicate decency predicate exists; finite_of_decent_of_finite_residueField is a different statement. Only sorry, nothing hollow, docstrings carry the source place and blueprint id, proof_dep import modules all exist, no theorem stmt_deps. Not recompiled since no file was changed; the worker reported a clean scompile."
+ }
+}

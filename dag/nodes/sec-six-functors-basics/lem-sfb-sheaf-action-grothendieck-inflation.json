@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-sheaf-action-grothendieck-inflation",
+ "kind": "statement",
+ "title": "Grothendieck structure and exact inflation for sheaf-group module actions",
+ "statement": "Fix compatible universes [def-weil-size-convention]. Let $(C,J)$ be a small site with finite limits [def-weil-pbc-sites-and-cohomology], and let $R$ be a sheaf of commutative unital rings on $C$, all with values in the coefficient universe. For a sheaf of groups $K$ on $C$ with values in that universe, define $\\mathcal E_K(R)$ to consist of sheaves of $R$-modules [def-weil-sheaf-of-modules-category] together with operations $K(U)\\times M(U)\\to M(U)$, natural in $U$, satisfying the unit and associativity laws and $R(U)$-linearity in $M(U)$. Its morphisms are restriction-natural linear maps commuting with these operations, with addition defined sectionwise. Give the coefficient ring the trivial action.\n\nThe category $\\mathcal E_K(R)$ is Grothendieck abelian [def-sp-grothendieck-abelian] with this specified additive structure. The forgetful functor $U_K:\\mathcal E_K(R)\\to\\operatorname{Mod}(R)$ creates kernels and cokernels and detects exactness: kernels are sectionwise kernels, and cokernels have underlying sheaf the module sheafification of sectionwise cokernels [def-weil-presheaf-modules-sheafification], each with its induced $K$-action. In particular $U_K$ is exact and detects zero objects.\n\nFor any sheaf of groups $L$ in the same universe and any morphism of group sheaves $\\theta:L\\to K$, precomposition of actions defines an additive exact functor $\\operatorname{Inf}_\\theta:\\mathcal E_K(R)\\to\\mathcal E_L(R)$, leaving the underlying modules and maps unchanged and setting $l\\cdot_\\theta m=\\theta(l)\\cdot m$ on every object. It preserves the displayed kernels and cokernels. These assertions include $K=1$, $L=1$, and the zero ring sheaf.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-grothendieck-abelian",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-internal-equivariant-module-sheaves",
+  "def-sfb-internal-action-inflation"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a Presentation for each of K and L from lem-sfb-internal-action-site-presentation. Work inside the proof with these witnesses; no presentation is selected to define exported data. Its sheaf equivalence identifies the given action category with modules over the explicitly constructed twisted coefficient ring sheaf.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+   }
+  },
+  {
+   "text": "For each presentation, transport finite products along its sheaf equivalence using Mathlib Adjunction.hasLimitsOfShape_of_equivalence, and apply abelianOfEquivalence. This construction retains the existing sectionwise preadditive structure definitionally. Apply lem-pur-ringed-site-grothendieck-abelian to the twisted site and coefficient sheaf, then IsGrothendieckAbelian.of_equivalence to the inverse equivalence. This transfers the generator, small colimits and exact filtered colimits without reconstructing their universal properties individually.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-galois-equivalence-preserves-limits",
+    "def-sp-abelian",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+   }
+  },
+  {
+   "text": "Forgetting the action is additive by reflexivity on underlying morphisms, and faithful by extensionality of full-subcategory and subgroup morphisms. An object is zero if and only if its identity is zero; additivity and faithfulness therefore give detection of zero. The presentation creates each kernel and cokernel, so it preserves them. Mathlib Functor.preservesFiniteLimits_of_preservesKernels and its colimit dual then give preservation of finite limits and finite colimits. Apply lem-per-exact-family-detection to the singleton family to obtain the exactness equivalence for short complexes.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-per-exact-family-detection",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+   }
+  },
+  {
+   "text": "Evaluation of module sheaves preserves finite limits, giving the sectionwise kernel assertion. For a module-sheaf morphism f, let F be ordinary module sheafification and e the isomorphism given by the counit of its adjunction. Naturality of e identifies F applied to the underlying presheaf morphism with f, up to the isomorphisms on source and target. Mathlib cokernel.mapIso gives the corresponding isomorphism of cokernels. Compose its inverse with the inverse of PreservesCokernel.iso for F. This identifies cokernel f with sheafification of its presheaf cokernel.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+   }
+  },
+  {
+   "text": "Restrict an action by composing its monoid homomorphism with theta. For the naturality equation apply the old action naturality and evaluate theta.naturality on the group section. Inflation leaves every linear map unchanged, so its additivity is reflexivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+   }
+  },
+  {
+   "text": "Let U and V forget K and L actions, and let F be inflation. The equality F composed with V equals U is definitional on objects and maps. Singleton exact-family detection for V gives reflection of isomorphisms. Since V preserves finite limits and colimits between the abelian categories already constructed, it reflects both by Mathlib reflectsFiniteLimits_of_reflectsIsomorphisms and its dual. The finite limit and colimit preservation of U therefore implies that of F, using preservesFiniteLimits_of_reflects_of_preserves and its dual. Finally a short complex T is exact after inflation because its image under V is definitionally its original image under U, and the two forgetful functors detect exactness. No nontriviality or nonzero-ring hypothesis occurs.",
+   "uses": [
+    "lem-per-exact-family-detection",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated categorical input below the partial Kummer boundary-unit calculation; Returned proof steps 2–4: small action-site presentation, transfer of the Grothendieck structure, and exact restriction of actions. Exact external reference WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-action-site-presentation",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-galois-equivalence-preserves-limits",
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "lem-per-exact-family-detection",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated categorical input; X7 Lean proof uses Mathlib abelian/Grothendieck transfer, the presentation creation statements, singleton exact-family detection, and reflection of finite limits and colimits for inflation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(sheaf|Condensed).*(equivariant|inflation|invariantsAdjunction)|(equivariant|inflation|invariantsAdjunction).*(sheaf|Condensed)",
+   "results": "{\"t\": \"2026-10-22T06:01:36Z\", \"tool\": \"grep\", \"query\": \"(sheaf|Condensed).*(equivariant|inflation|invariantsAdjunction)|(equivariant|inflation|invariantsAdjunction).*(sheaf|Condensed)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf abelianness or Grothendieck results do not supply the action-site equivalence and exact action restriction; no single declaration states this sheaf-group action assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules with an internal group action are Grothendieck abelian and inflation is exact",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules with an internal group action are Grothendieck abelian and inflation is exact\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"IsGrothendieckAbelian\"",
+   "results": "{\"t\": \"2026-10-22T06:01:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Action\\\", \\\"IsGrothendieckAbelian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf abelianness or Grothendieck results do not supply the action-site equivalence and exact action restriction; no single declaration states this sheaf-group action assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site, modules with a linear action of a sheaf of groups form a Grothendieck abelian category and restriction of actions along a group sheaf homomorphism is exact",
+   "results": "{\"t\": \"2026-10-22T06:01:51Z\", \"tool\": \"leanfinder\", \"query\": \"On a small ringed site, modules with a linear action of a sheaf of groups form a Grothendieck abelian category and restriction of actions along a group sheaf homomorphism is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"instAbelianLightCondMod\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"Condensed.instAB5CondensedMod\", \"PresheafOfModules.instAbelian\"], \"digest\": \"bd5bb8bfeb2a17a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf abelianness or Grothendieck results do not supply the action-site equivalence and exact action restriction; no single declaration states this sheaf-group action assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian|equivariant|inflation",
+   "results": "{\"t\": \"2026-10-22T06:02:55Z\", \"tool\": \"grep\", \"query\": \"IsGrothendieckAbelian|equivariant|inflation\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf abelianness or Grothendieck results do not supply the action-site equivalence and exact action restriction; no single declaration states this sheaf-group action assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsGrothendieckAbelian\"",
+   "results": "{\"t\": \"2026-10-22T06:02:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"IsGrothendieckAbelian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsGrothendieckAbelian\", \"SheafOfModules.instIsGrothendieckAbelian\"], \"digest\": \"5c6d41af2dece39f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf abelianness or Grothendieck results do not supply the action-site equivalence and exact action restriction; no single declaration states this sheaf-group action assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal linear actions of a sheaf of groups on internal modules over a commutative ring object in abelian sheaves form a Grothendieck category, with underlying kernels and sheafified cokernels preserved by restriction of group action",
+   "results": "{\"t\": \"2026-10-22T06:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"Internal linear actions of a sheaf of groups on internal modules over a commutative ring object in abelian sheaves form a Grothendieck category, with underlying kernels and sheafified cokernels preserved by restriction of group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"instAbelianCondensedMod\", \"instAbelianLightCondMod\", \"SheafOfModules.instCategory\", \"PresheafOfModules.instAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.instPreadditive\"], \"digest\": \"7580801d776f59cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf abelianness or Grothendieck results do not supply the action-site equivalence and exact action restriction; no single declaration states this sheaf-group action assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(sheaf.*inflation|inflation.*sheaf|equivariant.*SheafOfModules|SheafOfModules.*equivariant)",
+   "results": "{\"t\": \"2026-10-22T06:58:53Z\", \"tool\": \"grep\", \"query\": \"(sheaf.*inflation|inflation.*sheaf|equivariant.*SheafOfModules|SheafOfModules.*equivariant)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck abelian category of equivariant module sheaves and exact inflation along a group sheaf homomorphism",
+   "results": "{\"t\": \"2026-10-22T06:58:54Z\", \"tool\": \"leansearch\", \"query\": \"Grothendieck abelian category of equivariant module sheaves and exact inflation along a group sheaf homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"CategoryTheory.sheafIsAbelian\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.instPreadditiveSheaf\", \"Action.instAbelian\"], \"digest\": \"ebc6e66d0dff2ea3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T06:58:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules with a natural linear action of a sheaf of groups on a small site form a Grothendieck abelian category and restriction of actions is exact",
+   "results": "{\"t\": \"2026-10-22T06:59:02Z\", \"tool\": \"leanfinder\", \"query\": \"Modules with a natural linear action of a sheaf of groups on a small site form a Grothendieck abelian category and restriction of actions is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"SheafOfModules.instAbelian\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB4CondensedMod\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"Condensed.instAB5CondensedMod\"], \"digest\": \"9d4330319236a4b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant|inflation|IsGrothendieckAbelian",
+   "results": "{\"t\": \"2026-10-22T06:59:37Z\", \"tool\": \"grep\", \"query\": \"equivariant|inflation|IsGrothendieckAbelian\", \"sub\": \"CategoryTheory/Action\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"PreservesFiniteColimits\"",
+   "results": "{\"t\": \"2026-10-22T06:59:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Action\\\", \\\"PreservesFiniteColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Action.instPreservesFiniteColimitsForgetOfHasFiniteColimits\", \"Action.Functor.instPreservesFiniteColimitsMapActionOfHasFiniteColimits\"], \"digest\": \"08354c06cec3c0d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a variable internal group sheaf action on sheaves of modules preserves kernels and sheafified cokernels",
+   "results": "{\"t\": \"2026-10-22T06:59:40Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a variable internal group sheaf action on sheaves of modules preserves kernels and sheafified cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"PresheafOfModules.Sheafify.add_smul\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.Sheafify.map_smul\"], \"digest\": \"8535aaf6bfafb361\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary fixed-group Action limits and ordinary module-sheaf abelianness do not state the internal sheaf-group action theorem or its inflation compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-product-action-inflation",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), categorical input to direct-image stability: small action-site presentation, Grothendieck transfer, underlying exactness and restriction of actions. The blueprint paragraph itself gives the geometric assembly rather than this categorical input; inherited ancestor command returns None.",
+   "via": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-sheaf-action-grothendieck-inflation",
+  "worker": "stage1",
+  "summary": "Reused the existing internal-action site presentation and equivariant sheafification reflector; no new nodes. Gave explicit abelian, colimit, generator and AB5 transfer arguments, applied the singleton exactness-detection lemma with all hypotheses checked, and proved the action-restriction formulas and the cokernel compatibility using unique equivariant sheafification. Item statement unchanged.",
+  "blueprint": [
+   "Paragraph (3), agent-formulated categorical input below the direct-images proof; inherited returned steps 2--4. No change to the unit route."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site theorem applied to the small action site; no result of this unit supplies general ringed-site Grothendieck structure."
+   },
+   {
+    "node": "lem-per-exact-family-detection",
+    "why": "Generic abelian exactness detection by a singleton exact zero-detecting functor; applied after proving finite-limit and finite-colimit preservation, with no change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-per-exact-family-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-38844eb74",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-38844eb74 (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, the action-site presentation's reviewed record, the proof of lem-per-exact-family-detection, unit sk-thm-sf-ctf-stability and blueprint main-20261015 direct-images proof paragraph (3). That paragraph is geometric assembly only, so the item is an agent-formulated categorical input and proof_origin=agent is correct. Shape: one commit (item and report), no new nodes, statement and stmt_deps unchanged. The item is unsplit in clones/live and side-live, so it is not superseded. It was created 2026-10-22, so it is not dropped, and there is no re-split note. All proof deps are live and unmerged, no cycle (closure of 130 nodes), no SGA. Step 1: the presentation's hypotheses (V-small site with finite limits, V-small K, commutative R with trivial action) match verbatim; C_K is small because Hom = Hom_C x K(V). Steps 2-4: the ringed-site Grothendieck theorem needs only a small site and applies to (C_K,R_K). The abelian axioms, colimits, generator (via fullness and faithfulness) and AB5 (images preserved both ways) transfer correctly through the additive equivalence. Step 5 uses the presentation's stated last paragraph: sectionwise kernels, sheafified cokernels and zero detection on restriction to C. Step 6: every hypothesis of lem-per-exact-family-detection is checked (additive; biproducts; kernels and cokernels, hence finite limits and colimits; zero detection). Step 7: the inflation laws follow from theta being a homomorphism and natural. Step 8: the reflector applied with group L to the quotient presheaf, using its uniqueness clause, identifies the theta-precomposed cokernel action with the L-cokernel action. Exactness follows from U_L Inf = U_K together with L-detection. Edge cases checked: K=1, L=1, non-surjective theta, non-abelian K, zero ring, empty covers. Duplicate search: the NZ/NE/N6 condensed action nodes are unsplit profinite special cases, not duplicates (maintainer may repoint them to this general item). Tool uses accepted: lem-per-exact-family-detection is a generic abelian lemma; lem-pur-ringed-site-grothendieck-abelian is in fact on-route via sk-def-sf-operations, so declaring it was unnecessary. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafActionGrothendieckInflation",
+  "declaration": "CategoryTheory.InternalActionSite.sheaf_action_grothendieck_inflation",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.ActionInflationExact",
+   "CategoryTheory.InternalActionSite.sheaf_action_grothendieck_inflation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafActionGrothendieckInflation.lean",
+  "statement": "theorem sheaf_action_grothendieck_inflation [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (K L : Cᵒᵖ ⥤ GrpCat.{u}) (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u})) (hL : Presheaf.IsSheaf J.toGrothendieck (L ⋙ forget GrpCat.{u})) (S : Sheaf J.toGrothendieck CommRingCat.{u}) (θ : L ⟶ K) : (∃ aK : Abelian (EquivariantSheaf (K := K) J.toGrothendieck (baseRing J.toGrothendieck S)), aK.toPreadditive = (inferInstance : Preadditive (EquivariantSheaf (K := K) J.toGrothendieck (baseRing J.toGrothendieck S))) ∧ @IsGrothendieckAbelian.{u} _ _ aK) ∧ (∃ aL : Abelian (EquivariantSheaf (K := L) J.toGrothendieck (baseRing J.toGrothendieck S)), aL.toPreadditive = (inferInstance : Preadditive (EquivariantSheaf (K := L) J.toGrothendieck (baseRing J.toGrothendieck S))) ∧ @IsGrothendieckAbelian.{u} _ _ aL) ∧ ActionForgetExact J.toGrothendieck (baseRing J.toGrothendieck S) K ∧ ActionForgetExact J.toGrothendieck (baseRing J.toGrothendieck S) L ∧ ActionInflationExact J.toGrothendieck (baseRing J.toGrothendieck S) θ",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed sectionwise action category, its specified addition, and its forgetful functor from InternalActionSitePresentation. Inflation is constructed by precomposition with the supplied natural group homomorphism. The existential abelian structures are required to have exactly the inherited preadditive structure. The two Prop-valued specification structures expand the underlying kernel/cokernel, exactness and inflation clauses; no action, map, or category is chosen from an existence theorem. The plain action-category declarations are owned by def-sfb-internal-equivariant-module-sheaves; the presentation theorem is used only as a proof dependency. Maintenance extraction (2026-10-24): the action definitions are owned by def-sfb-internal-action-inflation in InternalActionInflation, publicly re-exported here. All remaining declaration signatures and bodies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79fce984d",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Re-delivery of the 19ee72b2 H2/theorem-stmt_dep RETURN. Lean module byte-identical to the returned head. The item now cites the new existing:true definition node def-sfb-internal-equivariant-module-sheaves (13 unchanged InternalActionSitePresentation declarations: LinearAction, EquivariantPresheaf, homGroup, equivariantPreadditive, EquivariantSheaf, forgetSheaf, baseRing, ...) instead of lem-sfb-internal-action-site-presentation, which stays in proof_deps. Item node vs side-live differs only in lean and that one stmt_dep. check_existing, check_record and check_new_node are clean; the statement field is verbatim. All project declarations used are owned by stmt_deps; no cycle, no competing owner, no repair note. Mathematics re-checked: universes u, small site with finite limits, existential Abelian equal to the inherited Preadditive plus IsGrothendieckAbelian for K and L, ActionForgetExact (creation, sectionwise kernel, exactness and zero detection), real restrictLinearAction/inflateSheaf data, ActionInflationExact; edge cases K=1, L=1, zero ring, arbitrary theta. Advisory only: sheafifiedCokernel is a bare Nonempty iso. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261023T132400-L-2262818",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

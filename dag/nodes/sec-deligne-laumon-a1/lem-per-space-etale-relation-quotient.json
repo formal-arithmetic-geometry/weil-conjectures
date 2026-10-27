@@ -1,0 +1,263 @@
+{
+ "id": "lem-per-space-etale-relation-quotient",
+ "kind": "statement",
+ "title": "Effective etale equivalence-relation quotients in algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention]. Let $A,R$ be algebraic spaces over $S$ [def-trf-algebraic-space] and let $s,t:R\\to A$ be morphisms. Assume $(s,t):R\\to A\\times_S A$ is a monomorphism of sheaves and identifies $R(H)$ with an equivalence relation on $A(H)$ for every $S$-scheme $H$. Assume $s,t$ are chartwise etale [def-sfb-space-chartwise-etale-morphism]; they need not be representable by schemes. Let $F$ be the sheafification [def-weil-pbc-sheafification] on the big fppf site [def-pc-fppf-site] of $H\\mapsto A(H)/R(H)$, and let $p:A\\to F$ be the quotient map. Then $F$ is an algebraic space over $S$, $p$ is chartwise etale, and every map $h_H\\to F$ from an $S$-scheme lifts to $A$ on an etale covering of $H$. The canonical map $R\\to A\\times_F A$ is an isomorphism, with projections $s,t$. Here all fibre products of spaces are those of [lem-trf-space-fibre-products-etale-covers]. For every fppf sheaf $G$, composition with $p$ is a bijection between maps $F\\to G$ and maps $u:A\\to G$ satisfying $us=ut$. No quasi-compactness, separatedness, Noetherian or finite type assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S6 (theorem-final-bootstrap), condition (1), etale equivalence-relation specialization; kernel-pair statement: spaces-groupoids.tex Tag 046O (lemma-quotient-pre-equivalence), using monomorphy; etale presentation and local lifting via the etale scheme-relation presentation in spaces.tex theorem-presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-space-chartwise-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Put $P(H)=A(H)/R(H)$. First identify the kernel relation of $p$, without assuming $F$ algebraic. If $a,b\\in A(H)$ have $p(a)=p(b)$, [lem-weil-pbc-site-sheafification-sections-local] gives an fppf covering on which $[a]=[b]$ in $P$. Equality of equivalence classes supplies sections $r_i$ of $R$ with endpoints $a,b$. On overlaps the $r_i$ agree because $(s,t)$ is monic. Since $R$ is a sheaf, they glue uniquely to $r\\in R(H)$. Conversely such an $r$ makes $[a]=[b]$, hence $p(a)=p(b)$. Thus $R(H)\\to A(H)\\times_{F(H)}A(H)$ is bijective for every $H$. The inverse commutes with restrictions by uniqueness, giving $R\\simeq A\\times_F A$ with the specified projections. This fibre product is initially taken among sheaves.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 046O (lemma-quotient-pre-equivalence), local-equality criterion; monomorphy and the sheaf axiom give effectivity"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $a:h_V\\to A$ by [def-trf-algebraic-space]. Set $B=R\\times_{t,A,a}h_V$ and $D=h_V\\times_{a,A,s\\operatorname{pr}_R}B$. These are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. Their sections are triples $(v,r,w)$ with $a(v)=s(r)$ and $t(r)=a(w)$. The map $D\\to B$ is the base change of $a$, hence representable etale by [lem-trf-space-representable-etale-scheme-tests]. The map $B\\to h_V$ is the base change of $t$ and is chartwise etale. Composition and base change in [lem-trf-space-chartwise-etale-permanence] show that $D\\to h_V$, $(v,r,w)\\mapsto w$, is chartwise etale; interchange $s,t$ for the other projection. Moreover $j_D:D\\to h_{V\\times_S V}$ is monic, and $D(H)$ identifies with the equivalence relation $p(a(v))=p(a(w))$ by step 1. Thus, as sheaves, $D=h_V\\times_Fh_V$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), reduction (1) to (2), restricted relation; spaces-properties.tex Tags 03FT, 03FU"
+   }
+  },
+  {
+   "text": "The space $D$ is a scheme. For any representable etale chart $h_W\\to D$, the composite $W\\to V$ is etale by step 2. It is locally finitely presented by [def-weil-etale-morphism], hence locally of finite type: the finite presentation in [def-sbc-locally-finite-presentation] is in particular a finite algebra generating set, as in [def-weil-finite-type-morphism]. Apply clause (a) of [lemma-nagata-finite-type-to-separated-target] to $W\\to V\\times_S V\\to V$. Hence $W\\to V\\times_S V$ is locally of finite type for every chart, exactly the hypothesis of [lem-sfb-space-lft-monomorphism-separated-lqf] for the monomorphism $j_D$. That result gives separatedness and chartwise local quasi-finiteness of $j_D$. Its target $V\\times_S V$ is a scheme, so [lem-a1-separated-locally-qf-space-representable] represents $D$ by a scheme. Its projections to $V$ are etale scheme maps: the identity chart of this represented scheme and step 2 give representable etaleness, which agrees with scheme etaleness by [lem-trf-space-representable-etale-scheme-tests].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), reduction (1) to (2); morphisms.tex Tag 01T8; spaces-morphisms.tex Tags 0463 and 03XX"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-relation-quotient] to the scheme equivalence relation $D\\rightrightarrows V$. Write $Q=(h_V/D)^{\\#}$ and $q:h_V\\to Q$. Then $Q$ is algebraic, $q$ is representable surjective etale, and $D=h_V\\times_Qh_V$. The universal property gives $c:Q\\to F$ with $cq=pa$. We check local bijectivity. If $x,y\\in Q(H)$ have equal $c$-images, take etale local lifts $v,w$ to $V$, using the lifting clause of that same node and a common refinement. Their equal $pa$-images give a section of $D$ by step 2, so $q(v)=q(w)$; thus $x,y$ agree locally. For $f\\in F(H)$, [lem-weil-pbc-site-sheafification-sections-local] gives fppf local representatives in $P$, hence, after choosing representatives of those classes, sections $b_i\\in A(H_i)$. By [lem-a1-representable-etale-fppf-local-lifting], each $b_i$ lifts to $V$ on an etale covering which is also fppf. The sections $q(v_i)$ then lift $f$ on the resulting composite fppf covering. Thus $c$ is locally injective and locally surjective, and [lem-galois-set-sheaf-local-bijection-isomorphism] makes it an isomorphism. In particular $F$ is algebraic.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-a1-representable-etale-fppf-local-lifting",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 046P (lemma-quotient-pre-equivalence-relation-restrict), explicit local-injectivity and local-surjectivity argument; spaces.tex Tag 02WW (theorem-presentation)"
+   }
+  },
+  {
+   "text": "Under $c:Q\\simeq F$, the composite $pa=cq:h_V\\to F$ is representable surjective etale by [lem-trf-space-representable-etale-scheme-tests]. Apply [lem-trf-space-etale-source-atlas-detection], clause (3), to the atlas $a:h_V\\to A$ and $p:A\\to F$. It gives chartwise etaleness of $p$, without claiming representability of $p$. For a map $h_H\\to F$, the local-lifting clause of [lem-trf-etale-relation-quotient], transported through $c$, gives an etale covering on which it lifts to $V$, hence to $A$ via $a$. Step 1 now identifies $R$ with the algebraic-space fibre product $A\\times_F A$: its sectionwise identification is precisely the sheaf fibre product used by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-source-atlas-detection",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FS (lemma-etale-local), (2) implies (1); spaces.tex Tag 02WW; spaces-groupoids.tex Tag 046O"
+   }
+  },
+  {
+   "text": "For an fppf sheaf $G$, any equalizing map $u:A\\to G$ descends sectionwise to $P\\to G$ by $[a]\\mapsto u(a)$. It is well defined because equivalent sections are the endpoints of an $R$-section and $us=ut$; it is natural because $u$ is. Conversely a map $P\\to G$ gives such a $u$, and these operations are inverse since every equivalence class has a representative. The defining universal property [def-weil-pbc-sheafification] then extends $P\\to G$ uniquely to $F\\to G$, giving exactly the required bijection by composition with $p$. All constructions used the stated universes and arbitrary etale atlases; no quasi-compactness, separation, Noetherian or finite type hypothesis on the original spaces was used.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint), applied to the pointwise quotient presheaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-trf-etale-relation-quotient",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-trf-space-etale-source-atlas-detection",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S6 (theorem-final-bootstrap), reduction from space relations to scheme relations; spaces.tex Tag 02WW; spaces-groupoids.tex Tags 046O, 046P; sites.tex Tag 00WH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale equivalence relation in algebraic spaces has an algebraic space sheaf quotient with etale surjective quotient map and kernel pair equal to the relation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective quotients of etale groupoids with trivial stabilizers in algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of an algebraic space by an etale equivalence relation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasQuotient.Quotient\", \"module\": \"Mathlib.Algebra.Quotient\", \"type\": \"(A : outParam (Type u)) → {B : Type v} → [self : HasQuotient A B] → B → Type (max u v)\", \"doc\": \"The quotient type of a setoid $\\\\alpha$, which is the type of equivalence classes of $\\\\alpha$ under an equivalence relation.\"}\n  {\"name\": \"MulAction.orbitRel.Quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Type _\", \"doc\": \"The quotient of the set $ \\\\alpha $ by the orbit equivalence relation induced by the group action, resulting in the set of orbits under the action.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(X Y : Scheme.{u}) : Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AddAction.orbitRel.Quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(G : Type u_1) → (α : Type u_2) → [inst : AddGroup G] → [AddAction G α] → Type u_2\", \"doc\": \"The quotient type of $\\\\alpha$ by the equivalence relation where two elements are equivalent if they lie in the same orbit under the action of the additive group $G$. This partitions $\\\\alpha$ into disj\"}\n  {\"name\": \"Quot.deltaGeneratedSpace\", \"module\": \"Mathlib.Topology.Compactness.DeltaGeneratedSpace\", \"type\": \"[DeltaGeneratedSpace X] {r : X → X → Prop} : DeltaGeneratedSpace (Quot r)\", \"doc\": \"If $X$ is a delta-generated topological space and $r$ is an equivalence relation on $X$, then the quotient space $X/r$ equipped with the quotient topology is also a delta-generated space.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"instTopologicalSpaceQuot\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"{r : X → X → Prop} [t : TopologicalSpace X] : TopologicalSpace (Quot r)\", \"doc\": \"Given a topological space on a set $ X $ and an equivalence relation $ r $ on $ X $, the quotient set $ X / r $ is equipped with the quotient topology. In this topology, a subset of $ X / r $ is open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*equivalence.*relation|equivalence.*relation.*etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes, scheme open gluing, or quotients of sets; none states the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-open-separated-etale-pushout",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, final application of lemma-lift-approximation to C-prime_m and the already chosen C_(m-1). In Tag 0ALT, the open/etale pushout construction and its comparison after base change. Supporting input to the Tag 0DVJ quotient construction: effectivity and etaleness of the quotient of an etale equivalence relation in algebraic spaces.",
+   "via": [
+    "lem-per-open-separated-etale-pushout",
+    "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+    "lem-per-rig-etale-compatible-model-tower",
+    "lem-per-rig-etale-principal-reduction",
+    "lem-per-rig-etale-jacobian-algebraization",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-space-etale-relation-quotient",
+  "worker": "Q28",
+  "summary": "Reduce the algebraic-space relation to a scheme relation on an etale atlas, prove that the restricted relation is schematic using monic local finite type and separated local quasi-finite representability, and identify its scheme quotient with the specified fppf sheafification. Reuse existing nodes throughout; no new nodes. Check effectivity by local equality and sheaf gluing, chartwise etaleness by source-atlas detection, and the universal property directly.",
+  "blueprint": "Supporting input to the current split of lem-per-artin-gabber-affine-curve, Step 1 dimension-normalized duality, through the recorded ancestor chain and the Tag 0DVJ open/etale pushout quotient construction. Steps 1 and 6 provide the effective sheaf quotient; steps 2--4 reduce its construction to a scheme etale relation; step 5 supplies its atlas and chartwise etaleness.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic sheaf-theoretic tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "why": "Generic sheaf-theoretic tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic algebraic-space or scheme tool for the etale relation quotient construction; it does not replace a step of the perverse Fourier unit, which has no statement of this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-trf-etale-relation-quotient",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-8db0faf16",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-8db0faf16 (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources and the 16 cited statements; review.md has the step-by-step checks. Shape: the item becomes a 6-step split with no new nodes; it is not a re-split. The statement is unchanged and true: it is the étale case of Stacks Tag 04S6 condition (1) (bootstrap.tex, theorem-final-bootstrap). The proof follows that reduction: restrict to an étale scheme atlas (Tag 046P); j is monic and locally of finite type, so it is locally quasi-finite and separated, so the restricted relation D is a scheme. Step 1 writes out the omitted local-equality details of Tag 046O and glues by monomorphy. Step 3 hypotheses checked: W→V étale gives W→V×V locally of finite type by clause (a) of lemma-nagata-finite-type-to-separated-target; this is exactly the input of lem-sfb-space-lft-monomorphism-separated-lqf, whose output is exactly the input of lem-a1-separated-locally-qf-space-representable, which needs no quasi-compactness. Step 4 checks local injectivity and surjectivity of c:Q→F, using lem-a1-representable-etale-fppf-local-lifting (no algebraicity of F needed) and the local-bijection lemma for sheaves of sets. The equalizing condition pa∘s_D=pa∘t_D needed for c is left implicit; it is one line from ps=pt. Step 5 uses clause (3) of the source-atlas-detection lemma once F is algebraic. Step 6 is genuinely elementary. Edge cases checked: empty spaces, diagonal R, a swap relation on a disjoint union; no quasi-compactness or separatedness is used. No duplicate: the trf/sfb scheme-relation, bootstrap and groupoid-stack nodes all differ. Batch 5: each of the 7 flagged citations is a generic algebraic-space foundation (closure properties of étale maps, the scheme étale-relation quotient, local lifting, representability criteria). None is the trace formula, Poincaré duality, or a step of their proofs, so all are kept. I accept the 10 tool_uses as generic tools. No fixes."
+ }
+}

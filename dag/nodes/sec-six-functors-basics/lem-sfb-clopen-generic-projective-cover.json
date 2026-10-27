@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-clopen-generic-projective-cover",
+ "kind": "statement",
+ "title": "Selected generic components form a projective cover",
+ "statement": "Let $e$ be a field [def-weil-field], $F/e$ a finite field extension [def-pc-field-extension], and $\\ell$ a prime. Let $B$ be a nonempty proper finite-type $e$-scheme [def-weil-proper-morphism] [def-weil-finite-type-morphism] that is a finite disjoint union of integral schemes [def-pc-integral-scheme]. Let $X$ be a normal projective $F$-scheme [def-kun-projective], viewed over $e$ by $\\operatorname{Spec}F\\to\\operatorname{Spec}e$, and let $d:X\\to B$ be an $e$-morphism. Normal means every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. For each generic point $b$ of $B$, suppose a generic point $c_b$ of $X$ is chosen with $d(c_b)=b$ and with finite residue-field extension of degree prime to $\\ell$ [def-sc-generic-point] [def-weil-residue-field] [def-pc-field-tower]. Let $X^\\circ$ be the union of the irreducible components of $X$ whose generic points are the chosen $c_b$ [def-weil-irreducible-components], with their open subscheme structures. Then $X^\\circ$ is open and closed in $X$, is normal and projective over $F$, and meets the fibre over every generic point of $B$. The morphism $d|_{X^\\circ}:X^\\circ\\to B$ is projective in both the finite-projective-space and projective-bundle conventions [def-trf-projective-bundle-morphism], is surjective [def-weil-surjective-morphism], and each of its generic points maps to a generic point of $B$ with finite residue degree prime to $\\ell$. Its generic points are exactly the chosen $c_b$, with repetitions discarded. The omitted components need satisfy no degree condition.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose X 2.3 Step 2, printed p.151, componentwise refinement of the prime-to-ell alteration in diagram (2.c). Agent-extracted clopen-selection, closed-graph and closed-image arguments of returned item steps 10--12. Normal components are clopen by Stacks properties.tex Tag 033M (lemma-normal-Noetherian); projectivity over B uses the graph over the separated e-scheme B."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-weil-pbc-normal-ring",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "def-pc-field-tower",
+  "def-weil-irreducible-components",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The structure morphism $X\\to\\operatorname{Spec}F$ is proper by [lem-kun-projective-implies-proper], hence of finite type by [def-weil-proper-morphism]. The one-point scheme $\\operatorname{Spec}F$ is Noetherian: its affine coordinate ring has only the ideals $0,F$, so its single affine chart is Noetherian [pqf-def-locnoeth], and its one-point space is quasi-compact. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; projective properness as in Tag 01WC, lemma-locally-projective-proper."
+   }
+  },
+  {
+   "text": "By clause (2) of [rem-pc-regular-normal], normality and Noetherianness make the irreducible components of $X$ a finite disjoint family of clopen normal integral open subschemes. The selected components and the omitted components are each unions of members of this family, so their complementary unions are open; hence $X^\\circ$ is clopen. Its local rings are those of $X$, so it is normal. The inclusion $j:X^\\circ\\hookrightarrow X$ is also a closed immersion by [def-weil-closed-immersion]: it identifies a closed subset, and the structure-sheaf map is locally the identity on $X^\\circ$ and the map to the zero sheaf on its open complement, hence surjective. Here the open structure is exactly the restricted structure sheaf of [def-weil-open-immersion].",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M, lemma-normal-Noetherian; the subsequent clopen inclusion check is direct from the definitions."
+   }
+  },
+  {
+   "text": "Choose a closed immersion $i:X\\hookrightarrow\\mathbf P^n_F$ witnessing the hypothesis [def-kun-projective]. Since $j$ is a closed immersion, [lem-weil-pbc-closed-immersion-comp] makes $i\\circ j:X^\\circ\\hookrightarrow\\mathbf P^n_F$ a closed immersion. It witnesses projectivity of $X^\\circ$ over $F$ in the required finite-projective-space convention.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QS, lemma-composition-closed-immersion, applied to the chosen projective embedding."
+   }
+  },
+  {
+   "text": "The irreducible components of $X^\\circ$ are precisely the selected components: an irreducible subset cannot meet two complementary clopen unions, and maximality then reduces to maximality inside a single selected component [def-weil-irreducible-components]. Each such component has exactly one generic point by [lem-sc-scheme-sober]. Its chosen $c_b$ remains generic because its closure in the open subspace is the same component. Thus the generic points of $X^\\circ$ are exactly the chosen $c_b$, with repetitions discarded, and each fibre over a generic $b$ contains its $c_b$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS, lemma-scheme-sober; the component comparison is a direct clopen-subspace argument."
+   }
+  },
+  {
+   "text": "At any selected $c_b$, restriction to the open subscheme gives $\\mathcal O_{X^\\circ,c_b}=\\mathcal O_{X,c_b}$: neighbourhoods contained in $X^\\circ$ are cofinal among neighbourhoods of $c_b$ [def-weil-open-immersion]. Taking the quotients by the same maximal ideal identifies the residue fields and identifies the maps induced by $d|_{X^\\circ}$ and $d$ [def-weil-residue-field]. Consequently every generic point found in step 4 maps to its generic $b$ with exactly the assumed finite degree prime to $\\ell$. No assertion uses the omitted components.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Open subscheme restriction of the structure sheaf; elementary stalk and residue-field calculation."
+   }
+  },
+  {
+   "text": "Because $B$ is proper over $e$, it is separated over $e$ [def-weil-proper-morphism]. Apply [lem-sfb-finite-constant-projective-graph] with $k=e$, $R=X^\\circ$, $S=B$, and $c=d|_{X^\\circ}$. Its hypotheses hold by step 3 and the given finite extension $F/e$. Taking the identity $B\\to B$ and the identity base change gives a finite-projective-space closed embedding over $B$, and makes $d|_{X^\\circ}$ proper and projective in both projectivity conventions.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, with the finite-constant extension graph lemma and its stated identity base change."
+   }
+  },
+  {
+   "text": "The image $C=d(X^\\circ)$ is closed in $B$ by [lem-weil-pbc-proper-closed-image], since step 6 proves properness. Every integral summand of $B$ is irreducible [def-pc-integral-scheme] and, being clopen in the given finite disjoint union, is an irreducible component of $B$. It has a generic point $b$ by [lem-sc-scheme-sober]. Step 4 puts $b$ in $C$. By [def-sc-generic-point], the closure of $b$ is that entire summand; closedness of $C$ therefore puts every summand in $C$. They cover $B$, so $C=B$ and the restricted morphism is surjective.",
+   "uses": [
+    "lem-weil-pbc-proper-closed-image",
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6, lemma-image-proper-scheme-closed; closure of each generic point gives surjectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "rem-pc-regular-normal",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-kun-projective",
+  "lem-weil-pbc-closed-immersion-comp",
+  "def-weil-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-weil-residue-field",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-weil-pbc-proper-closed-image",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 2, printed pp.150–151, diagram (2.c); agent-extracted component-selection consequence proved using the cited Stacks results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Select one good generic point over each component in a normal projective scheme to obtain a clopen projective surjection onto a proper base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsHProjective, AlgebraicGeometry.Surjective",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsHProjective'",
+   "date": "2026-10-22",
+   "verdict": "invalid identifier in initial pattern; the additional valid Loogle query is recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|IsHProjective|graph",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"382\", \"text\": \"    ⟨(⋃₀ (irreducibleComponents X \\\\ {irreducibleComponent x}))ᶜ, by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"384\", \"text\": \"      exact TopologicalSpace.NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"385\", \"text\": \"        fun W hW ↦ isClosed_of_mem_irreducibleComponents W hW.1⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"387\", \"text\": \"    closure_sUnion_irreducibleComponents_sdiff_singleton\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"388\", \"text\": \"      TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given selected generic points over every component a normal projective scheme has an open closed component union mapping projectively and surjectively to the proper base",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a finite field extension a clopen union of normal projective components with generic image covering a proper scheme is a projective surjection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective, \"projective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|IsProjective|isClosed_range",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; 25 returned; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned facts do not state the selected-component projective-cover lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A selected union of irreducible components of a normal projective scheme is clopen projective and surjective onto a proper target when its image contains all generic points",
+   "results": "Hits: genericPoints, genericPoints.ofComponent, AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range, genericPoints.component, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, isClosed_irreducibleComponent, isClosed_of_mem_irreducibleComponents; 8 returned; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned facts do not state the selected-component projective-cover lemma or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Surjective",
+   "results": "No hits; 0 returned; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned facts do not state the selected-component projective-cover lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal projective scheme with one selected generic point above each component of a proper target has a clopen projective surjective component union",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated; 8 returned; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned facts do not state the selected-component projective-cover lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a normal projective variety choose components whose generic points cover those of the target; the restricted map is a projective surjection and preserves residue degrees",
+   "results": "Hits: AlgebraicGeometry.Scheme.residue_surjective, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization; 8 returned; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned facts do not state the selected-component projective-cover lemma or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Re-split input: ILO Expose X 2.3 Step 2, printed p.151, componentwise refinement of the prime-to-ell alteration in diagram (2.c). Agent-extracted clopen-selection, closed-graph and closed-image arguments of returned item steps 10--12. Normal components are clopen by Stacks properties.tex Tag 033M (lemma-normal-Noetherian); projectivity over B uses the graph over the separated e-scheme B.",
+   "via": [
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-clopen-generic-projective-cover",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the clopen-selection, generic-point, residue-field, projective-embedding and closed-image arguments. Reused the existing normal decomposition, finite-constant projective graph and other tool nodes; no new nodes. Searched the live Lean source and Mathlib; no exact item declaration was found.",
+  "blueprint": "Realizes the clopen-selection and projective-surjection portion extracted from lem-sfb-semilinear-sylow-good-components steps 10–12, below det-thm-sf-ctf-stability-direct-images proof (3), through its alteration/tame-boundary input; ILO X 2.3 Step 2, diagram (2.c), printed p.151. The inherited ancestor tool reports blueprint.from.node = None; its existing place and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-implies-proper tool, used only to obtain finite type over F; the unit has no replacement for this scheme-theoretic fact."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Clause (2) is the generic Noetherian-normal component decomposition; it supplies the clopen integral components, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-f962124f4",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-f962124f4 (reviewer sub-agent of L); spot-checked: I read the whole item. It is a 7-step split with 0 new nodes; statement and stmt_deps are unchanged, and it carries steps 10-12 of the Q13 parent (sylow-good-components step 4 uses exactly these conclusions). Source: ILO X 2.3 Step 2, printed pp.150-151, (2.c), read; the component selection is agent-written, so proof_origin=agent is right. Stacks 033M (properties.tex l.960) matches rem-pc-regular-normal (2). Steps: (1) projective implies proper implies finite type, and finite type over the Noetherian Spec F makes X Noetherian (01T6). (2) Normal Noetherian components are disjoint clopen, so X° is clopen and normal; the clopen inclusion is a closed immersion because O(U)=O(U∩X°)×O(U∖X°). (3) Composing with i into P^n_F makes X° projective over F. (4) The components of X° are the selected ones and the c_b stay generic. (5) Same stalks and residue fields, so the prime-to-ell degrees hold (correctly elementary). (6) Graph lemma with k=e, R=X°, S=B separated (B is proper), c=d|X°: every hypothesis checked; the identity base change gives proper and projective in both conventions. (7) The proper image is closed and contains each generic b=d(c_b), so the morphism is surjective. Edge cases: X=B=Spec F, extra components with bad degree omitted, inseparable F/e, empty X impossible. Tool uses accepted: lem-kun-projective-implies-proper and rem-pc-regular-normal, both generic. Batch-5 flag on lem-sfb-finite-constant-projective-graph: its closure reaches def-trf-projective-bundle-morphism, a general convention definition already on the item's base stmt_deps, plus generic EGA II projective-bundle facts (087S/01WE), none a step of the trace formula or Poincaré duality proofs; accepted as in the NB/NJ/Q145/Q13 reviews. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClopenGenericProjectiveCover",
+  "declaration": "AlgebraicGeometry.clopen_generic_projective_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenGenericProjectiveCover.lean",
+  "statement": "theorem clopen_generic_projective_cover (e F : Type u) [Field e] [Field F] [Algebra e F] [Module.Finite e F] (ell : ℕ) (hell : ell.Prime) (B X : Scheme.{u}) (q : B ⟶ Spec (.of e)) (p : X ⟶ Spec (.of F)) [Nonempty B] [IsProper q] (hB : ∃ (n : ℕ) (V : Fin n → B.Opens), (∀ i : Fin n, IsIntegral (V i).toScheme) ∧ Pairwise (fun i j : Fin n ↦ Disjoint (V i) (V j)) ∧ (⨆ i : Fin n, V i) = ⊤) [IsHProjective p] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (d : X ⟶ B) (hbase : d ≫ q = p ≫ Spec.map (CommRingCat.ofHom (algebraMap e F))) (c : genericPoints B → genericPoints X) (hc : ∀ b : genericPoints B, d (c b).val = b.val) (hdegree : ∀ b : genericPoints B, ∃ n : ℕ, @FieldExtension.degree (B.residueField (d (c b).val)) (X.residueField (c b).val) _ _ (d.residueFieldMap (c b).val).hom.toAlgebra = (n : WithTop ℕ) ∧ n.Coprime ell) : ∃ U : X.Opens, (U : Set X) = ⋃ b : genericPoints B, (genericPoints.component (c b)).val ∧ IsClopen (U : Set X) ∧ (∀ x : U.toScheme, IsDomain (U.toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed (U.toScheme.presheaf.stalk x)) ∧ IsHProjective (U.ι ≫ p) ∧ (∀ b : genericPoints B, ∃ x : U.toScheme, (U.ι ≫ d) x = b.val) ∧ IsHProjective (U.ι ≫ d) ∧ IsProjectiveBundle (U.ι ≫ d) ∧ Surjective (U.ι ≫ d) ∧ (∀ x ∈ genericPoints U.toScheme, (U.ι ≫ d) x ∈ genericPoints B ∧ ∃ n : ℕ, @FieldExtension.degree (B.residueField ((U.ι ≫ d) x)) (U.toScheme.residueField x) _ _ ((U.ι ≫ d).residueFieldMap x).hom.toAlgebra = (n : WithTop ℕ) ∧ n.Coprime ell) ∧ U.ι '' genericPoints U.toScheme = Set.range (fun b : genericPoints B ↦ (c b).val)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-870ec5dc3",
+  "group": "N7",
+  "result": "pass",
+  "note": "Node identical to side-live except the lean field; lean.statement verbatim in the file. All 13 stmt_dep records and declarations read (IsHProjective, IsProjectiveBundle, FieldExtension.degree, genericPoints.component, residueFieldMap, IsProper, IsIntegral, Surjective). Every hypothesis matches the node with nothing stronger: finite F/e, prime ell, nonempty proper B as a Fin-n disjoint integral open cover, normal H-projective X, e-morphism via hbase, chosen generic points with prime-to-ell degree induced by d. Every conclusion clause matches: U pinned to the selected union, clopen, normal, projective over F, meets each generic fibre, H-projective and projective-bundle, surjective, degree clause in U's residue fields, generic points equal to range c. Mathematics sound (graph over separated B, 033M). Edge cases checked: empty B excluded, single universe forced by Spec. No hollow defs, sorry only, docstrings with source and blueprint tag, report sections present. No findings, no compile needed."
+ }
+}

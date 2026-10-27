@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-open-total-generator-calculus",
+ "kind": "statement",
+ "title": "Homogeneous values of the two normalized coefficient composites",
+ "statement": "Let $\\mathcal C$ be a site, $R$ a commutative ring sheaf, $V\\in\\mathcal C$, and assume module sheafification with locally-bijective compatibility on the site and slice in a containing universe. Let $e$ be any three comparisons of [def-sf-open-total-tensor-coefficient-data] satisfying GammaNormalization, LinearNormalization and RestrictionNormalization of [def-sf-open-total-tensor-coefficient-normalization]. For every unital $R$-algebra sheaf $A$, slice complex $Q$, base complex $F$, degrees $p+q=n$, $f:W\\to V$, $x\\in Q^p(W,f)$, $y\\in F^q(W)$ and $a,b\\in A(W)$, both the left composite and the right composite of that definition send the source generator $([x]_f\\otimes y)\\otimes a$ to the target generator $[(x\\otimes a|_V)\\otimes(y|_V\\otimes1)]_f$. The inverse of the left composite sends $[(x\\otimes a|_V)\\otimes(y|_V\\otimes b)]_f$ to $([x]_f\\otimes y)\\otimes ab$. The left composite is natural in both chain maps through the canonical sourceMap and targetMap of that definition. No equality of chain maps or coefficient-transition coherence is claimed here.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+ },
+ "stmt_deps": [
+  "def-sf-open-total-tensor-coefficient-data",
+  "def-sf-open-total-tensor-coefficient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Compute the left route: the balanced comparison distributes $a,1$ to the two factors; linear moves $a$ into the extension summand; gamma places the tensor inside that summand. Each step follows the prescribed homogeneous generator equation. Their composition has the first displayed value.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sf-cbc-slice-tensor-generator-coherence",
+    "lem-sf-ringed-slice-tensor-generators",
+    "def-sf-open-total-tensor-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+   }
+  },
+  {
+   "text": "Compute the right route: scalar extension of gamma produces $[x\\otimes y|_V]_f\\otimes a$; linear gives $[(x\\otimes y|_V)\\otimes a|_V]_f$; the slice balanced comparison distributes $a,1$. RestrictionNormalization identifies its second factor with the restriction of $y\\otimes1$. The value equals that of the left route, as a section, without using any global interchange equation.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-sf-open-total-tensor-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+   }
+  },
+  {
+   "text": "Reverse gamma and linear on the two-scalar target generator, then apply the inverse balanced comparison, which multiplies $a,b$. These give the inverse formula. For naturality, maps of $Q,F$ replace $x,y$ by their images in both composites. The sheafification and tensor universal properties and the coproduct insertions in each total degree detect equality. All equations are chain equations because each constituent is a chain map; all preserve bidegrees.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-sf-open-total-tensor-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-sf-cbc-slice-tensor-generator-coherence",
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-sf-open-total-tensor-coefficient-normalization",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of scalar extension projection formula maps from homogeneous pure tensor generators",
+   "results": "8 hits including GradedTensorProduct.hom_ext; these concern graded algebra tensors, not the open sheaf chain comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing module tensor and functor APIs are used in the proof plan."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product scalar extension comparison sends scalar times tensor to scalar in first factor and unit in second factor",
+   "results": "8 hits including TensorProduct.tmul_eq_smul_one_tmul and ModuleCat.ExtendScalars.map_tmul; only sectionwise algebraic formulas.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing module tensor and functor APIs are used in the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct.*(map|Map).*tmul|map.*tmul.*tmul",
+   "results": "25 hits in ordinary tensor algebra and localization; none compares these open total tensor maps.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing module tensor and functor APIs are used in the proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenTotalTensorCoefficientInterchange",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor coefficient compatibility in the projection-formula coherence proof; interchange proof construction, generator calculation and strict coefficient assembly.",
+   "via": [
+    "lem-sf-open-total-tensor-coefficient-interchange",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenTotalTensorGeneratorCalculus",
+  "file": "lean/Sheaf/Algebra/Homology/OpenTotalTensorGeneratorCalculus.lean",
+  "declaration": "SheafOfModules.OpenTotalTensorCoefficient.normalized_composite_values",
+  "statement": "theorem normalized_composite_values (e : Comparisons.{c, v, r} R V)\n    (hg : GammaNormalization.{c, v, r} R V e)\n    (hl : LinearNormalization.{c, v, r} R V e)\n    (hr : RestrictionNormalization.{c, v, r} R V e) :\n    (∀ (A : Under R)\n      (Q : Complex.{max c v, v, r} (R.over V)) (F : Complex.{c, v, r} R)\n      (p q n : ℤ) (h : p + q = n) (W : C) (f : W ⟶ V)\n      (x : (Q.X p).val.obj (op (Over.mk f))) (y : (F.X q).val.obj (op W))\n      (a : A.right.obj.obj (op W)),\n      (((e.left R V A Q F).hom.f n).val.app (op W))\n          (sourceSection.{c, v, r} R V A Q F p q n h W f x y a) =\n        targetSection.{c, v, r} R V A Q F p q n h W f x y a 1) ∧\n    (∀ (A : Under R)\n      (Q : Complex.{max c v, v, r} (R.over V)) (F : Complex.{c, v, r} R)\n      (p q n : ℤ) (h : p + q = n) (W : C) (f : W ⟶ V)\n      (x : (Q.X p).val.obj (op (Over.mk f))) (y : (F.X q).val.obj (op W))\n      (a : A.right.obj.obj (op W)),\n      (((e.right R V A Q F).hom.f n).val.app (op W))\n          (sourceSection.{c, v, r} R V A Q F p q n h W f x y a) =\n        targetSection.{c, v, r} R V A Q F p q n h W f x y a 1) ∧\n    (∀ (A : Under R)\n      (Q : Complex.{max c v, v, r} (R.over V)) (F : Complex.{c, v, r} R)\n      (p q n : ℤ) (h : p + q = n) (W : C) (f : W ⟶ V)\n      (x : (Q.X p).val.obj (op (Over.mk f))) (y : (F.X q).val.obj (op W))\n      (a b : A.right.obj.obj (op W)),\n      (((e.left R V A Q F).inv.f n).val.app (op W))\n          (targetSection.{c, v, r} R V A Q F p q n h W f x y a b) =\n        sourceSection.{c, v, r} R V A Q F p q n h W f x y (a * b)) ∧\n    (∀ (A : Under R)\n      (Q Q' : Complex.{max c v, v, r} (R.over V)) (F F' : Complex.{c, v, r} R)\n      (u : Q ⟶ Q') (v : F ⟶ F'),\n      sourceMap.{c, v, r} R V A u v ≫ (e.left R V A Q' F').hom =\n        (e.left R V A Q F).hom ≫ targetMap.{c, v, r} R V A u v)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091052-L-3303553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091052-L-3303553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

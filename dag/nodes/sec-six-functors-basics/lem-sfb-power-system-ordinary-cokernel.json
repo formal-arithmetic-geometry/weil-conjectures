@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-power-system-ordinary-cokernel",
+ "kind": "statement",
+ "title": "The ordinary unit is the variable-power cokernel",
+ "statement": "Let l be prime, T a scheme, r any Reduction T (Rrings l T) [def-sp-tower-class-reduction, def-sp-tower-class-coefficients], and X an abelian tower [def-sp-tower-class-systems]. The composite of mu_l(X) [def-sfb-power-transition-functor] with the actual ordinary adjunction unit X → r.forget.F(r.ordinary X) is zero, and this unit is a cokernel of mu_l(X) in the abelian category of towers. This concerns ordinary extension only; no derived category, resolution, or multiplication triangle occurs.",
+ "stmt_deps": [
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-systems",
+  "def-sfb-power-transition-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower.proof.md",
+  "place": "Functorial derived completion: simultaneous tensor with quotient rings; resolution [Z --ell^n--> Z] with transitions (ell,1). For the ordinary quotient see Stacks sites-modules.tex, lemma-adjointness-tensor-restrict (03D7); for resolutions see sites-cohomology.tex, lemma-K-flat-resolution (06YS) and lemma-derived-base-change (06YY)."
+ },
+ "proof": [
+  {
+   "text": "Form the raw coefficient presheaf (n,U) ↦ ULift (ZMod (l^(n+1))) using the actual quotient transitions. Its unital map to the existing ring sheaf on the sequence site is locally bijective: on every vertical slice this is the constant-sheafification unit. All naturality squares commute because a unital ring homomorphism out of ZMod is unique.",
+   "uses": [
+    "def-sp-tower-class-coefficients",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any abelian tower killed by l^(n+1) at level n, give its sections the canonical ZMod module action. Its restrictions and horizontal maps are semilinear, since an element of ZMod is represented by an integer and additive maps preserve integer multiples. Uncurry to a module presheaf and extend its action by Mathlib module sheafification along the locally bijective coefficient map, with the identity on its underlying abelian sheaf. Thus the resulting module system has the original abelian tower as its underlying object.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "lem-cbc-sieve-module-sheafification",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section, restriction, transition and morphism equalities in Forget give an explicit natural comparison with the canonical underlying tower. Every additive map of such towers is linear for the raw residue-ring action, hence for the extended sheaf action by restrictHomEquivOfIsLocallySurjective. The supplied forgetful functor is therefore fully faithful. All coefficient systems are killed levelwise by the appropriate power, so the adjunction unit kills the variable-power morphism.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-coefficients",
+    "def-sfb-power-transition-functor",
+    "lem-cbc-sieve-module-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the categorical cokernel of the variable-power map. Its quotient is killed at level n by l^(n+1), by cancelling its epic quotient projection. Equip it with the module system constructed above. Transpose the quotient projection through the given ordinary adjunction, and use fullness to lift the map in the opposite direction obtained by cokernel descent of the actual unit. Faithfulness, the adjunction hom-equivalence and the epic quotient show the two comparison maps are inverse. Transport the cokernel cofork along this isomorphism; its second arrow is exactly the actual ordinary adjunction unit.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-systems",
+    "def-sfb-power-transition-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-coefficients",
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-systems",
+  "lem-cbc-sieve-module-sheafification",
+  "def-sfb-power-transition-functor",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower.proof.md",
+  "place": "Functorial derived completion, ordinary coefficient quotient; Stacks 03D7. Variable-modulus adaptation of the proved fixed-modulus ordinaryUnit_cokernel argument in Sheaf.Paper.DivisibleExtensionDerivedReduction; canonical module action extension uses Mathlib PresheafOfModules.sheafify and restrictHomEquivOfIsLocallySurjective."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars to a quotient integer ring system is the mapping cone of its variable multiplication natural transformation, with second arrow the derived adjunction unit",
+   "results": "Generic derived-category functors, singleFunctor and Q, and scalar-extension APIs only; no variable-power calculation.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedNatTrans",
+   "results": "No hits; unknown identifier 'Functor.leftDerivedNatTrans'. Local source inspection used the universal derived pairs and mapHomologicalComplex APIs instead.",
+   "date": "2026-10-27",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.*CokernelCofork|exists_isKFlatResolutionIndependentCoefficients",
+   "results": "Generic cokernel universal properties. Local source inspection found CochainComplex.exists_isKFlatResolutionIndependentCoefficients and DerivedChangeOfRingsCochainModel.computes. Neither identifies an arbitrary Reduction over Rrings with this model, nor computes the variable-power ordinary quotient.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic resolution and derived-extension nodes; specialized remaining steps are new."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor product with a quotient of the integers is computed by the two term resolution given by multiplication, naturally in an inverse system",
+   "results": "TensorProduct.tensorQuotientEquiv, quotTensorEquivQuotSMul, tensorQuotEquivQuotSMul and quotientTensorQuotientEquiv. These are ordinary module quotient computations; none computes variable-power sheaf-system derived extension or its unit.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf-system theorem; ordinary tensor quotient APIs are supporting algebra only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerSystemReductionTriangle",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "variable-power coefficient resolution in simultaneous Kummer reduction",
+   "via": [
+    "lem-sfb-power-system-reduction-triangle",
+    "lem-sfb-kummer-reduction-unit",
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerSystemOrdinaryCokernel",
+  "file": "lean/Sheaf/Paper/PowerSystemOrdinaryCokernel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.powerSystem_ordinary_cokernel",
+  "statement": "theorem powerSystem_ordinary_cokernel (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    (r : Reduction T (Rrings l T)) (X : Ab T) :\n    ∃ hz : (PowerTransition.multiplication l).app X ≫\n        r.model.adjunction.unit.app X = 0,\n      Nonempty (IsColimit (CokernelCofork.ofπ (r.model.adjunction.unit.app X) hz))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T094418-L-223465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T112359-L-1577372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

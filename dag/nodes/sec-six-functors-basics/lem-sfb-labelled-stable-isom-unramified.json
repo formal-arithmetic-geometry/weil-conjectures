@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-labelled-stable-isom-unramified",
+ "kind": "statement",
+ "title": "Separated finite-type unramified parameter for labelled stable isomorphisms",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth], let $n\\ge0$, and let $(W,s_1,\\ldots,s_n)$ and $(W',s'_1,\\ldots,s'_n)$ be stable pointed curves over $S$ [def-sfb-stable-pointed-curve]. Fix a permutation $\\sigma$ of $\\{1,\\ldots,n\\}$. For an $S$-scheme $T$, write $W_T=W\\times_ST$ and $W'_T=W'\\times_ST$ [def-pc-fibre-product], and write $s_{i,T},s'_{i,T}$ for the pulled-back sections. The functor sending $T$ to the $T$-isomorphisms $u:W_T\\xrightarrow{\\sim}W'_T$ satisfying $u\\circ s_{i,T}=s'_{\\sigma(i),T}$ for all $i$ is represented by an $S$-scheme $J_\\sigma$ that is separated, of finite type, and unramified [def-weil-proper-morphism, def-weil-finite-type-morphism, def-weil-unramified-morphism]. The representing bijections commute with pullback along every morphism of $S$-schemes and provide a universal labelled isomorphism. The index set has one permutation if $n=0$; the functor includes arbitrary disconnected and nonreduced test schemes.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Agent assembly of Tag 0DSQ (lemma-curves-diagonal-separated-fp), scheme realization by projective graphs; closed marking equalizers; curves.tex Tags 0E67 (lemma-smooth-vector-fields) and 0E68 (lemma-nodal-vector-fields); varieties.tex Tag 0B2G (lemma-injective-tangent-spaces-unramified). Marked relative version of the unramified Isom assertion in de Jong 1997 section 3.8; returned proof steps 1--3."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-sfb-stable-pointed-curve",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine opens $U$ covering $S$ on which the finite-type quasi-coherent modules presenting both projective-bundle morphisms have finite generators. The affine-presentation lemma supplies closed immersions of the corresponding bundles into finite projective spaces; compose with the closed immersions of $W_U,W'_U$ into those bundles. Thus both restrictions are H-projective. They are flat and finitely presented by restriction of the hypotheses in the stable-pointed definition, and their geometric fibres have dimension one. The opens $U$ are locally Noetherian. Projective morphisms are proper, hence $W_U\\to U$ and $W'_U\\to U$ are separated; separatedness is target-local, so $W,W'$ are separated over $S$.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-trf-projective-bundle-affine-presentations",
+    "lem-weil-pbc-closed-immersion-products",
+    "pqf-def-locnoeth",
+    "lem-pc-projective-proper",
+    "lem-sfb-separated-lfp-target-open-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WB (lemma-characterize-locally-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective): finite generators; projective implies proper."
+   }
+  },
+  {
+   "text": "On each $U$ apply the projective-curve graph theorem to $W_U,W'_U$. It gives a separated finitely presented $U$-scheme $J_U$ representing all relative isomorphisms, naturally on every test scheme. Its universal graph has invertible projections and gives $u=p_2p_1^{-1}$. Apply the Isom-graph gluing theorem to this open cover and these graph representatives: its hypotheses hold by step 1 and by precisely these natural graph bijections. Obtain a separated finitely presented $S$-scheme $J$ representing the unlabelled Isom functor, with the same formula for its universal isomorphism $u:W_J\\simeq W'_J$. In particular $J\\to S$ is of finite type: finite presentation includes quasi-compactness, and a finitely presented affine algebra is finitely generated.",
+   "uses": [
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-isom-graph-representatives-zariski-gluing",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), scheme graph realization; schemes.tex Tag 01JJ (lemma-glue-functors)."
+   }
+  },
+  {
+   "text": "For each $i$, let $a_i,b_i:J\\to W'$ be respectively $u\\circ s_{i,J}$ and $s'_{\\sigma(i),J}$ followed by $W'_J\\to W'$. They have the same map to $S$. Define $E_i=J\\times_{(a_i,b_i),W'\\times_SW',\\Delta_{W'/S}}W'$. Since $W'\\to S$ is separated, its diagonal is a closed immersion; hence $E_i\\to J$ is a closed immersion. Let $J_\\sigma=E_1\\times_J\\cdots\\times_JE_n$, with $J_\\sigma=J$ for $n=0$. Repeated closed base change and composition make $j:J_\\sigma\\to J$ a closed immersion. The fibre-product universal property says, for every $T\\to J$, that a factorization through $E_i$ exists exactly when $a_i|_T=b_i|_T$, and it is unique. Applying this successively shows that the points of $J_\\sigma$ are exactly the desired labelled isomorphisms. This is equality of morphisms, including their structure-sheaf maps, rather than equality only on geometric points. All these equivalences commute with pullback by the same universal property. The restriction of $u$ is the universal labelled isomorphism.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KK (definition-separated), diagonal pullback equalizers; morphisms.tex Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The closed immersion $j$ is proper, in particular of finite type. Composition with the finite-type map $J\\to S$ shows that $J_\\sigma\\to S$ is of finite type. It is separated as well: the pullback of the closed diagonal $\\Delta_{J/S}$ along $j\\times_Sj$ is $J_\\sigma\\times_JJ_\\sigma\\hookrightarrow J_\\sigma\\times_SJ_\\sigma$. Since a closed immersion is a monomorphism, the first space is $J_\\sigma$ and this map is exactly $\\Delta_{J_\\sigma/S}$. Thus the diagonal is closed by closed-immersion base change. The monomorphism assertion here follows directly from the closed-subscheme description: a map into a closed subscheme, if it exists over a fixed ambient map, is unique.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W5 (lemma-closed-immersion-proper), Tag 01T3 (lemma-composition-finite-type); schemes.tex Tag 01KK (definition-separated)."
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\operatorname{Spec}\\Omega\\to S$, an $\\Omega$-point $x$ of $(J_\\sigma)_\\Omega$, and put $R=\\Omega[\\epsilon]/(\\epsilon^2)$. The point $x$ is a labelled isomorphism $u_0:C=W_\\Omega\\simeq W'_\\Omega=C'$. Any $R$-point reducing to $x$ is a labelled isomorphism $u_\\epsilon:C_R\\simeq C'_R$ reducing to $u_0$. The composite $v=(u_0)_R^{-1}\\circ u_\\epsilon$ reduces to the identity and fixes each constant marking: $v\\circ s_{i,R}=(u_0)_R^{-1}\\circ s'_{\\sigma(i),R}=s_{i,R}$. The stable-curve definition makes $C$ nonempty, proper (by its projective embedding over the field), connected, reduced and nodal of pure dimension one. The marked points $p_i$, images of the sections $s_{i,\\Omega}$, are $\\Omega$-points of $C$. They are pairwise distinct, since disjoint sections stay disjoint after base change. They are smooth points of $C$: the open relative smooth locus $V\\subseteq W$ containing the sections is smooth over $S$, and $V_\\Omega\\subseteq C$ is smooth over $\\Omega$, because a local presentation $A[x_1,\\ldots,x_m]/(f_1,\\ldots,f_r)$ over an affine open $\\operatorname{Spec}A\\subseteq S$ base-changes to $\\Omega[x_1,\\ldots,x_m]/(\\bar f_1,\\ldots,\\bar f_r)$ and a lifting problem along a thickening of affine $\\Omega$-schemes is one over $S$. Its normalization has finitely many smooth projective connected components by the nodal-normalization model. The reduced normalization is by definition the disjoint union of the normalizations $\\widetilde C_Z$ of the irreducible components; each summand is integral, hence connected, so the summands are exactly the $C_a$. The definition's special set on $\\widetilde C_Z$ (inverse images of the nonsmooth points, which are the nodes, and of the $p_i$) is exactly $E_a$. For these sets, stability gives $2g(C_a)-2+\\#E_a>0$: use at least three points for genus zero, at least one for genus one, and $2g-2>0$ for genus at least two. The marked infinitesimal-field theorem therefore says $v=1$. Consequently $u_\\epsilon=(u_0)_R$.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-pc-projective-proper",
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-sfb-marked-nodal-infinitesimal-fields",
+    "def-sc-dual-numbers",
+    "def-weil-pbc-reduced-normalization",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0E67 (lemma-smooth-vector-fields), 0E68 (lemma-nodal-vector-fields); more-morphisms.tex Tag 02H5 (lemma-action-by-derivations), marked ideal-preservation restriction."
+   }
+  },
+  {
+   "text": "By the natural representing bijections in step 3, step 5 says that every dual-number point of every geometric fibre through every $\\Omega$-point is the constant one. The geometric tangent criterion applies because $J_\\sigma\\to S$ is locally of finite type by step 4. It gives that $J_\\sigma\\to S$ is unramified. Empty fibres satisfy the criterion vacuously. For $n=0$ the single permutation and empty intersection used above give exactly the unpointed functor; stability still excludes genus-zero components with fewer than three branches and genus-one components with no special point. No step restricts the connectedness or reducedness of $T$: step 3 represents the equations on every $S$-scheme, while dual numbers are used only to test unramifiedness.",
+   "uses": [
+    "lem-sfb-geometric-tangent-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2G (lemma-injective-tangent-spaces-unramified), geometric-fibre form with morphisms.tex Tags 02GF, 02G5 and 02G8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-curve",
+  "lem-trf-projective-bundle-affine-presentations",
+  "lem-weil-pbc-closed-immersion-products",
+  "pqf-def-locnoeth",
+  "lem-pc-projective-proper",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-sfb-projective-curve-isom-graphs",
+  "lem-sfb-isom-graph-representatives-zariski-gluing",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-sfb-marked-nodal-infinitesimal-fields",
+  "def-sc-dual-numbers",
+  "lem-sfb-geometric-tangent-unramified",
+  "def-weil-pbc-reduced-normalization",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Assembly of Tag 0DSQ graph representability, closed marking equalizers, curves.tex Tags 0E67/0E68 and varieties.tex Tag 0B2G, using existing DAG statements; no SGA route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The functor of isomorphisms of stable nodal curves preserving labelled marked sections is represented by a separated finite type unramified scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsSeparated\", \"doc\": \"Every isomorphism of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) {V : AlgebraicGeometry.Scheme} (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ V)\\n  (g : V ⟶ AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing })\\n  [AlgebraicGeometry.IsImmersion g] [CompactSpace ↥V],\\n  CategoryTheory.CategoryStruct.c\", \"doc\": \"Let $ V $ be a scheme, and let $ f: \\\\coprod_{i} \\\\operatorname{Spec}(R_i) \\\\to V $ and $ g: V \\\\to \\\\operatorname{Spec}\\\\left( \\\\prod_{i} R_i \\\\right) $ be morphisms of schemes. If $ g $ is an immersion, $ V\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso], P.diagonal.toProperty.RespectsIso\", \"doc\": \"If a morphism property $P$ for schemes with affine targets respects isomorphisms, then the diagonal property derived from $P$ (which asserts preservation under pullbacks along open immersions from aff\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰)\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic separatedness, formal unramifiedness and diagonal lemmas do not represent labelled stable-curve isomorphisms or prove their tangent vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal automorphisms of a stable marked curve vanish so its relative Isom parameter is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.FormallyUnramified (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes is formally unramified, then $ f $ is formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that the image of $V$ under $f$ is contained in $U$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic separatedness, formal unramifiedness and diagonal lemmas do not represent labelled stable-curve isomorphisms or prove their tangent vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\", \"Unramified\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic separatedness, formal unramifiedness and diagonal lemmas do not represent labelled stable-curve isomorphisms or prove their tangent vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*[Ii]som|[Ii]som.*stable|marked.*curve",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic separatedness, formal unramifiedness and diagonal lemmas do not represent labelled stable-curve isomorphisms or prove their tangent vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and unramifiedness of labelled isomorphisms between stable pointed curves",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\", \"Unramified\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism properties and unrelated stable-under-isomorphism facts do not represent stable pointed-curve Isom functors or prove their infinitesimal rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*[Ii]som|[Ii]som.*stable|marked.*curve",
+   "results": "25 hits; Mathlib/CategoryTheory/ObjectProperty/Shift.lean; Mathlib/CategoryTheory/ObjectProperty/Shift.lean; Mathlib/CategoryTheory/ObjectProperty/Shift.lean; Mathlib/CategoryTheory/ObjectProperty/Shift.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/LocalIso.lean; Mathlib/RingTheory/LocalIso.lean; Mathlib/RingTheory/RingHom/Locally.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism properties and unrelated stable-under-isomorphism facts do not represent stable pointed-curve Isom functors or prove their infinitesimal rigidity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of isomorphisms between stable pointed curves preserving labelled sections is represented by a separated finite type unramified scheme",
+   "results": "8 hits; AlgebraicGeometry.IsSeparated.instRespectsIsoScheme; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.Scheme.instOverCoverOfIsIsoOfIsOver; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism properties and unrelated stable-under-isomorphism facts do not represent stable pointed-curve Isom functors or prove their infinitesimal rigidity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and unramifiedness of labelled isomorphisms between stable pointed curves",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified.recOn; AlgebraicGeometry.FormallyUnramified.casesOn; Algebra.FormallyUnramified.iff_of_equiv; RingHom.FormallyUnramified.respectsIso; RingHom.FormallyUnramified; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.formallyUnramified_iff; AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism properties and unrelated stable-under-isomorphism facts do not represent stable pointed-curve Isom functors or prove their infinitesimal rigidity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal automorphisms of a stable marked nodal curve vanish so the relative isomorphism scheme is unramified",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.formallyUnramified_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism properties and unrelated stable-under-isomorphism facts do not represent stable pointed-curve Isom functors or prove their infinitesimal rigidity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; de Jong section 3.8, last paragraph, Isom finite unramified: labelled graph representability, closed marking equalizers, and normalized infinitesimal rigidity (returned proof steps 1--3).",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-labelled-stable-isom-unramified",
+  "worker": "stage1",
+  "summary": "Q28 reused the existing graph representation, Isom gluing, nodal infinitesimal-field vanishing and geometric unramifiedness criteria. Constructed labelled equations as closed diagonal pullbacks on all test schemes; handled projective-bundle versus H-projective conventions by affine presentations. No new nodes or statement changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; de Jong section 3.8, last paragraph, Isom finite unramified: labelled graph representability, closed marking equalizers, and normalized infinitesimal rigidity (returned proof steps 1--3).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-affine-presentations",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in the graph-and-marking construction; this supplies no replacement for the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in the graph-and-marking construction; this supplies no replacement for the unit alteration route."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in the graph-and-marking construction; this supplies no replacement for the unit alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-affine-presentations",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-4b04afa76",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-4b04afa76 (reviewer sub-agent of L); spot-checked: Read the item's statement (unchanged from base, true; edge cases: n=0, empty J, and P^1 with <=2 markings excluded by stability), all six steps, and the statement of every cited node. No new nodes, no re-split note, DAG acyclic, and the parent lem-sfb-stable-pointed-isom-finite gets exactly the separated, finite-type, unramified J_sigma it needs. Sources read: Stacks moduli-curves 0DSQ l.292 and varieties 0B2G l.3149; 0E67/0E68 are used through the existing marked-nodal node. Step 1: the projective-bundle embedding is made H-projective on affine opens via lem-trf-projective-bundle-affine-presentations plus closed-immersion composition; separatedness is checked locally on the target. Correct. Step 2: graph theorem on each open, then the gluing node; f.p. implies finite type. Correct. Step 3: the marking conditions are pullbacks of the closed diagonal of W', and equality is checked as sections in W'_T. Correct and elementary. Step 4: the closed immersion is proper, finite type composes, and the diagonal of J_sigma is the base change of Delta_J because a closed immersion is a monomorphism. Correct. Step 6: tangent criterion with locally finite type from step 4; empty fibres and n=0 are covered. Fault (one, repaired): step 5 did not check two hypotheses of lem-sfb-marked-nodal-infinitesimal-fields. It did not show the markings are distinct smooth Omega-points, and it did not show that the node's C_a/E_a match the stable definition's component normalizations and special points. The FIX adds both: disjoint sections stay disjoint after base change; the smooth locus base-changes to a smooth open, directly from the definition; and the reduced normalization is a disjoint union of integral, hence connected, summands, so the summands are the C_a and the special sets are E_a. It adds def-weil-pbc-reduced-normalization and def-sbc-smooth-morphisms to the step's uses and proof_deps; the step is now 1990 characters. Batch-5 flags, all accepted as generic: lem-trf-projective-bundle-affine-presentations is Stacks 01WB/087S projective-bundle embedding over affines, outside both assumptions; lem-trf-curve-degree-tensor-additive (reached through the graph theorem) is Stacks 0AYX degree additivity, general curve theory; def-trf-projective-bundle-morphism is a definition already in the item's base stmt_deps. The three tool_uses in split_report (projective-bundle presentations, closed-immersion products, projective implies proper) are accepted as generic black-box tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LabelledStableIsomUnramified",
+  "declaration": "AlgebraicGeometry.exists_labelled_stable_isom_unramified",
+  "file": "lean/Sheaf/AlgebraicGeometry/LabelledStableIsomUnramified.lean",
+  "statement": "theorem exists_labelled_stable_isom_unramified {S W W' : Scheme.{u}} [IsLocallyNoetherian S] (f : W ⟶ S) (f' : W' ⟶ S) (n : ℕ) (s : Fin n → (S ⟶ W)) (s' : Fin n → (S ⟶ W')) (hs : ∀ i : Fin n, s i ≫ f = 𝟙 S) (hs' : ∀ i : Fin n, s' i ≫ f' = 𝟙 S) (hstable : IsStablePointedCurve f s hs) (hstable' : IsStablePointedCurve f' s' hs') (σ : Equiv.Perm (Fin n)) : ∃ J : Over S, IsSeparated J.hom ∧ LocallyOfFiniteType J.hom ∧ QuasiCompact J.hom ∧ IsUnramified J.hom ∧ ∃ e : ∀ T : Over S, (T ⟶ J) ≃ {a : (Over.pullback T.hom).obj (Over.mk f) ≅ (Over.pullback T.hom).obj (Over.mk f') // ∀ i : Fin n, f.baseChangeSection (s i) (hs i) T.hom ≫ a.hom.left = f'.baseChangeSection (s' (σ i)) (hs' (σ i)) T.hom}, ∀ (T' T : Over S) (h : T' ⟶ T) (a : T ⟶ J), baseChangeMap f h ≫ (e T a).val.hom.left = (e T' (h ≫ a)).val.hom.left ≫ baseChangeMap f' h",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a64e2d2e",
+  "group": "NI",
+  "result": "fix",
+  "note": "Lean statement exact against the node and Stacks 0DSQ/de Jong 3.8: IsLocallyNoetherian S; landed IsStablePointedCurve f s hs for both curves; σ : Perm (Fin n); W_T = Over.pullback T.hom of Over.mk f (left = pullback f T.hom), T-isos = Iso in Over T.left; upstream baseChangeSection sections, condition u∘s_iT = s'_{σ i,T} in the right direction; J : Over S with IsSeparated, LocallyOfFiniteType ∧ QuasiCompact (record convention), IsUnramified (landed dep def); natural equivalences for every T : Over S, naturality via upstream baseChangeMap (pullback.map) in the right direction, which fixes e T' (h≫a) as the base change; universal iso e J (𝟙 J). Edge cases n=0, empty S/T/fibres, nonreduced or disconnected T, single universe u covered. No defs, proof sorry only, docstrings with source and blueprint, statement verbatim, stmt_deps unchanged and used, no duplicate found (H4). Only fault: H11 dispatcher-wording 'no second reading' section → FIX fixes/lem-sfb-labelled-stable-isom-unramified.report.md (delivered report verbatim + independent clause-by-clause second reading). No Lean change, no compile."
+ }
+}

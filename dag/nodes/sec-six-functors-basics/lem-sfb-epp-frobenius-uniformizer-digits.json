@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-epp-frobenius-uniformizer-digits",
+ "kind": "statement",
+ "title": "Finite Frobenius digit obstruction or root after a uniformizer radical",
+ "statement": "Let $p$ be prime and let $R\\subseteq S$ be an injective local map of complete discrete valuation rings of characteristic $p$ [def-sc-discrete-valuation-ring] [def-weil-pbc-adically-complete-ring]. Suppose $t$ is a uniformizer of $R$, $s$ is a uniformizer of $S$, and $s^p=t$. For each $u\\in R$, at least one of the following holds: there exist an integer $m\\geq0$, elements $b_i\\in R$ for $0\\leq i<m$, and $b\\in R$ such that $u=\\sum_{i=0}^{m-1}b_i^pt^i+bt^m$ and the residue of $b$ in $R/(t)$ is not a $p$th power; or there exists $w\\in S$ with $w^p=u$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EY, lemma-purely-inseparable-case, successive residue-digit argument in the last two proof paragraphs. The complete-ring version and the precise root ring S are supplied by Q25; the printed final paragraph names an undefined B_1."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "If a finite expansion with nonpower final residue exists, the first alternative holds. Otherwise set $r_0=u$. Maintain the identity $u=\\sum_{i<n}b_i^pt^i+r_nt^n$. It holds at $n=0$ with the empty sum. At every stage the residue of $r_n$ must be a $p$th power: otherwise this identity itself is a forbidden finite expansion with $m=n$ and $b=r_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EY, lemma-purely-inseparable-case, last two proof paragraphs; explicit complete-ring digit argument."
+   }
+  },
+  {
+   "text": "Choose a residue root of $r_n$ and lift it through the quotient map to $b_n\\in R$. Then $r_n-b_n^p\\in(t)$, so choose $r_{n+1}\\in R$ with $r_n=b_n^p+tr_{n+1}$. Substitution proves the maintained identity for $n+1$. Recursive choice gives the sequences for all $n\\geq0$. This uses only the surjectivity and kernel of the quotient map and the definition of the principal ideal $(t)$; no coefficient-field section or perfectness assumption is needed.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EY, lemma-purely-inseparable-case, last two proof paragraphs; explicit complete-ring digit argument."
+   }
+  },
+  {
+   "text": "Inside $S$ put $w_n=\\sum_{i<n}b_i s^i$. Since $w_{n+1}-w_n=b_ns^n$, the classes $w_n\\bmod(s^n)$ form a compatible family in $\\varprojlim_n S/(s^n)$. Indeed, for $j\\geq n$ the difference $w_j-w_n=\\sum_{n\\leq i<j}b_is^i$ lies in $(s^n)$. As $s$ generates the maximal ideal and $S$ is complete, the bijective canonical map in the definition of adic completeness supplies $w\\in S$ with $w-w_n\\in(s^n)$ for every $n$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EY, lemma-purely-inseparable-case, last two proof paragraphs; explicit complete-ring digit argument."
+   }
+  },
+  {
+   "text": "Frobenius is a ring homomorphism in characteristic $p$, hence $w_n^p=\\sum_{i<n}b_i^ps^{pi}=\\sum_{i<n}b_i^pt^i$ and $w^p-w_n^p=(w-w_n)^p\\in(s^{pn})$. The maintained identity gives $u-w_n^p=r_nt^n=r_ns^{pn}$, so $w^p-u\\in(s^{pn})$ for every $n$. For any $N\\geq0$ take $n=N$; since $p\\geq2$, $(s^{pn})\\subseteq(s^N)$. Thus $w^p-u$ lies in $\\bigcap_N(s^N)=0$, the separatedness included in completeness. Consequently $w^p=u$, the second alternative.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EY, lemma-purely-inseparable-case, last two proof paragraphs; explicit complete-ring digit argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-ring-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EY, lemma-purely-inseparable-case, last two proof paragraphs; explicit complete-ring digit argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a complete discrete valuation ring in characteristic p any element either has a first non pth power uniformizer digit or acquires a pth root after adjoining a pth root of the uniformizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.untiltFun\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} →\\n  [inst : CommRing O] →\\n    {p : ℕ} → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsPrecomplete (Ideal.span {↑p}) O] → PreTilt O p → O\", \"doc\": \"The function maps each element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to an element $ y \\\\in O $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $\"}\n  {\"name\": \"PreTilt.valAux\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    Valuation K NNReal →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [Algebra O K] → (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → PreTilt O p → NNReal\", \"doc\": \"The function $\\\\text{valAux}$ maps a sequence $ (f_n) $ in the pretilt $\\\\mathrm{PreTilt}(O, p)$ to a non-negative real number. If all coefficients $f_n$ are zero, it returns $0$. Otherwise, it finds th\"}\n  {\"name\": \"PreTilt.untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} → [inst : CommRing O] → {p : ℕ} → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → PreTilt O p → ℕ → O\", \"doc\": \"For a pretilt $ \\\\mathrm{PreTilt}(O, p) $ of a commutative ring $ O $ modulo prime $ p $, this function $ \\\\text{untiltAux} $ takes an element $ x \\\\in \\\\mathrm{PreTilt}(O, p) $ and a natural number $ n $\"}\n  {\"name\": \"PreTilt.instPerfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (O : Type u₂) [inst : CommRing O] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p],\\n  PerfectRing (PreTilt O p) p\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo a prime $ p $, defined as the perfection of the quotient ring $ O/(p) $, is a perfect ring with respect to $ p $. This means every element in the pretilt\"}\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"Valuation.exists_pow_Uniformizer\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {Γ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ] {K : Type u_2} [inst_1 : Field K] {v : Valuation K Γ}\\n  [hv : v.IsRankOneDiscrete] {r : ↥v.valuationSubring}, r ≠ 0 → ∀ (π : v.Uniformizer), ∃ n u, ↑r = ↑(π.val ^ n) * ↑↑u\", \"doc\": \"For any non-zero element $ r $ in the field $ K_0 $ and any uniformizer $ \\\\pi $ of the discrete valuation $ v $, there exists a natural number $ n $ and a unit $ u $ in the valuation ring such that $ \"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt and untilt concern compatible iterated pth roots modulo p, not this uniformizer expansion in characteristic p"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius image in a complete discrete valuation ring and convergent expansions in powers of a uniformizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.coeff_frobenius\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {O : Type u₂} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p] (n : ℕ)\\n  (x : PreTilt O p), (PreTilt.coeff (n + 1)) ((frobenius (PreTilt O p) p) x) = (PreTilt.coeff n) x\", \"doc\": \"For any natural number $n$ and any element $x$ in the pretilt of a commutative ring $O$ modulo a prime $p$, the $(n+1)$-th coefficient of the Frobenius endomorphism applied to $x$ is equal to the $n$-\"}\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"PreTilt.coeff_iterate_frobenius'\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {O : Type u₂} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p] (x : PreTilt O p)\\n  {m n : ℕ}, m ≤ n → (PreTilt.coeff n) ((⇑(frobenius (PreTilt O p) p))^[m] x) = (PreTilt.coeff (n - m)) x\", \"doc\": \"For any element $x$ in the pretilt of a commutative ring $O$ modulo a prime $p$, and for natural numbers $m$ and $n$ with $m \\\\leq n$, the $n$-th coefficient of the $m$-th iterate of the Frobenius endo\"}\n  {\"name\": \"PreTilt.coeff_iterate_frobenius\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {O : Type u₂} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p] (m n : ℕ)\\n  (x : PreTilt O p), (PreTilt.coeff (m + n)) ((⇑(frobenius (PreTilt O p) p))^[n] x) = (PreTilt.coeff m) x\", \"doc\": \"For any natural numbers $m$ and $n$, and any element $x$ in the pretilt of a commutative ring $O$ modulo a prime $p$, the $(m + n)$-th coefficient of the $n$-th iterate of the Frobenius endomorphism a\"}\n  {\"name\": \"PreTilt.valAux_eq\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {K : Type u₁} [inst : Field K] {v : Valuation K NNReal} {O : Type u₂} [inst_1 : CommRing O] [inst_2 : Algebra O K],\\n  v.Integers O →\\n    ∀ {p : ℕ} [inst_3 : Fact (Nat.Prime p)] [inst_4 : Fact ¬IsUnit ↑p] {f : PreTilt O p} {n : ℕ},\\n      (PreTilt.coeff n) f ≠ 0 → PreTilt.valAux K v O p f = ModP.pre\", \"doc\": \"For a commutative ring $ O $, prime $ p $, and a sequence $ f = (f_k) $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, if the $ n $-th coefficient $ f_n \\\\neq 0 $ in $ O/p $, then the auxiliary valuation $\"}\n  {\"name\": \"PreTilt.untilt_iterate_frobeniusEquiv_symm_pow\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O] (x : PreTilt O p) (n : ℕ),\\n  PreTilt.untilt ((⇑(frobeniusEquiv (PreTilt O p) p).symm)^[n] x) ^ p ^ n = PreTilt.untilt x\", \"doc\": \"For any element $x$ in the pretilt of a commutative ring $O$ modulo prime $p$ and natural number $n$, the untilt of the $n$-th iterate of the inverse Frobenius equivalence applied to $x$, raised to th\"}\n  {\"name\": \"PreTilt.valAux\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    Valuation K NNReal →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [Algebra O K] → (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → PreTilt O p → NNReal\", \"doc\": \"The function $\\\\text{valAux}$ maps a sequence $ (f_n) $ in the pretilt $\\\\mathrm{PreTilt}(O, p)$ to a non-negative real number. If all coefficients $f_n$ are zero, it returns $0$. Otherwise, it finds th\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt and untilt concern compatible iterated pth roots modulo p, not this uniformizer expansion in characteristic p"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, frobenius",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"surjective_fontaineTheta\", \"module\": \"Mathlib.RingTheory.Perfectoid.FontaineTheta\", \"type\": \" {R : Type u} [CommRing R] {p : ℕ} [Fact (Nat.Prime p)] [Fact ¬IsUnit ↑p] [IsAdicComplete (Ideal.span {↑p}) R] (hF : Function.Surjective ⇑(frobenius (ModP R p) p)) : Function.Surjective ⇑(WittVector.fontaineTheta R p)\", \"doc\": \"If the Frobenius map is surjective on `R/pR`, then the Fontaine's θ map is surjective.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt and untilt concern compatible iterated pth roots modulo p, not this uniformizer expansion in characteristic p"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|pow_char|pow.*[Ss]um",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt and untilt concern compatible iterated pth roots modulo p, not this uniformizer expansion in characteristic p"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius powers and uniformizer digit expansions over complete discrete valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valuation.Integers.maximalIdeal_pow_eq_setOf_le_v_algebraMap_pow\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \":\\n  letI : IsDomain O := hv.hom_inj.isDomain\\n  ∀ [IsDiscreteValuationRing O] {ϖ : O} (_h : Irreducible ϖ) (n : ℕ),\\n    ((IsLocalRing.maximalIdeal O ^ n : Ideal O) : Set O) = {y : O | v (algebraMap O K y) ≤ v (algebraMap O K ϖ) ^ n}\", \"doc\": \"In a discrete valuation ring $ O $ with valuation $ v $, for an irreducible element $ \\\\varpi $ (a uniformizer), the $ n $th power of the maximal ideal of $ O $ is equal to the set of elements $ y \\\\in \"}\n  {\"name\": \"Irreducible.maximalIdeal_pow_eq_setOf_le_v_coe_pow\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \"[IsDiscreteValuationRing v.integer] {ϖ : v.integer} (h : Irreducible ϖ) (n : ℕ) :\\n  ((IsLocalRing.maximalIdeal v.integer ^ n : Ideal v.integer) : Set v.integer) = {y : v.integer | v y ≤ v (ϖ : K) ^ n}\", \"doc\": \"In a discrete valuation ring, for any irreducible element $\\\\varpi$ (a uniformizer) and natural number $n$, the $n$-th power of the maximal ideal is equal to the set of elements $y$ such that the valua\"}\n  {\"name\": \"Polynomial.map_iterateFrobenius_expand\", \"module\": \"Mathlib.Algebra.Polynomial.Expand\", \"type\": \"(f : R[X]) (n : ℕ) : map (iterateFrobenius R p n) (expand R (p ^ n) f) = f ^ p ^ n\", \"doc\": \"For any polynomial $ f $ over a commutative semiring $ R $ with exponential characteristic $ p $, substituting $ X $ with $ X^{p^n} $ in $ f $ and then applying the Frobenius endomorphism (which raise\"}\n  {\"name\": \"MvPolynomial.map_expand_pow_char\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Expand\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : CommSemiring R] (p : ℕ) [inst_1 : ExpChar R p] (f : MvPolynomial σ R) (n : ℕ),\\n  (MvPolynomial.map (iterateFrobenius R p n)) ((MvPolynomial.expand (p ^ n)) f) = f ^ p ^ n\", \"doc\": \"For any multivariate polynomial $ f $ over a commutative semiring $ R $ with exponential characteristic $ p $, applying the $ n $-th iterate of the Frobenius endomorphism (raising coefficients to the \"}\n  {\"name\": \"Valuation.exists_pow_Uniformizer\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{r : K₀} (hr : r ≠ 0) (π : Uniformizer v) : ∃ n : ℕ, ∃ u : K₀ˣ, r = (π.1 ^ n).1 * u.1\", \"doc\": \"For any non-zero element $ r $ in the field $ K_0 $ and any uniformizer $ \\\\pi $ of the discrete valuation $ v $, there exists a natural number $ n $ and a unit $ u $ in the valuation ring such that $ \"}\n  {\"name\": \"MvPowerSeries.map_iterateFrobenius_expand\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Expand\", \"type\": \"(f : MvPowerSeries σ R) (n : ℕ) : map (iterateFrobenius R p n) (expand (p ^ n) (pow_ne_zero n hp) f) = f ^ p ^ n\", \"doc\": \"For a commutative ring $ R $ with prime characteristic $ p $, a multivariate power series $ f $ over $ \\\\sigma $, and a natural number $ n $, applying the $ n $-th iterate of the Frobenius endomorphism\"}\n  {\"name\": \"frobenius\", \"module\": \"Mathlib.Algebra.CharP.Lemmas\", \"type\": \": R →+* R\", \"doc\": \"The Frobenius endomorphism on a commutative semiring of characteristic $ p $ is the ring homomorphism that maps each element $ x $ to its $ p $-th power $ x^p $, utilizing the identity $ (x + y)^p = x\"}\n  {\"name\": \"Polynomial.map_frobenius_expand\", \"module\": \"Mathlib.Algebra.Polynomial.Expand\", \"type\": \"(f : R[X]) : map (frobenius R p) (expand R p f) = f ^ p\", \"doc\": \"For any polynomial $ f $ in $ R[X] $, applying the Frobenius endomorphism (which raises coefficients to the $ p $-th power) to the polynomial obtained by substituting $ X $ with $ X^p $ in $ f $ resul\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt and untilt concern compatible iterated pth roots modulo p, not this uniformizer expansion in characteristic p"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius|[Ee]xpansion|[Ss]eries|[Cc]omplete",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt and untilt concern compatible iterated pth roots modulo p, not this uniformizer expansion in characteristic p"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|digit|expansion",
+   "results": "OK 0 hits in Mathlib/RingTheory/DiscreteValuationRing: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no Frobenius digit expansion in this directory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius image and uniformizer expansions in complete discrete valuation rings",
+   "results": "OK 8 hits: Valuation.Uniformizer.ext, Valuation.Uniformizer.val, Valuation.exists_pow_Uniformizer, Polynomial.roots_expand_image_frobenius_subset, MvPowerSeries.map_iterateFrobenius_expand, PowerSeries.instIsDiscreteValuationRing, Polynomial.map_frobenius_expand, frobenius",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer factorization and polynomial or formal-power-series Frobenius identities do not state this dichotomy for arbitrary complete DVRs"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, frobenius",
+   "results": "OK 1 hits: surjective_fontaineTheta",
+   "date": "2026-10-24",
+   "verdict": "no match: surjective_fontaineTheta concerns Witt vectors, not this residue-digit dichotomy"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p a complete discrete valuation ring element either has a first non pth power residue digit or has a pth root in a complete DVR containing a pth root of the uniformizer",
+   "results": "OK 8 hits: PreTilt.untiltFun, PreTilt.valAux, PreTilt, PreTilt.exists_smodEq_untiltAux, PreTilt.valAux_one, WittVector.isDiscreteValuationRing, PreTilt.valAux_eq, PreTilt.isDomain",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt results require a compatible tower of pth roots modulo p; WittVector DVR structure does not give uniformizer digits"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|pth|expansion|digits",
+   "results": "OK 0 hits in Mathlib/RingTheory/AdicCompletion: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no Frobenius digit expansion in this directory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successively subtract pth powers and divide by a uniformizer to expand an element of an equicharacteristic complete discrete valuation ring",
+   "results": "OK 8 hits: PreTilt.untiltAux, PreTilt.untiltFun, PreTilt.coeff_def, PreTilt.coeff_pow_p, PreTilt.exists_smodEq_untiltAux, PreTilt.untiltAux_smodEq_untiltFun, PreTilt.coeff, PreTilt.mk_untilt_eq_coeff_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: PreTilt results require a compatible tower of pth roots modulo p; WittVector DVR structure does not give uniformizer digits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-purely-inseparable-degree-p",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to direct-image proof (3), Epp Tag 09EY: dichotomy between a first residue coefficient not a pth power and an infinite expansion after adjoining the uniformizer root.",
+   "via": [
+    "lem-sfb-epp-purely-inseparable-degree-p",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-frobenius-uniformizer-digits",
+  "worker": "stage1",
+  "summary": "Expanded the finite-obstruction versus infinite digit construction: explicit recursion and invariant, compatible partial-root residues in the given complete root ring S, and a Frobenius congruence plus separatedness. All inputs are existing Mathlib definition leaves; no new nodes or statement changes. Read Stacks 09EY, 0317 and 0CC6 and tested zero, immediate obstruction, positive-order obstruction and imperfect residues.",
+  "blueprint": "The latest sk-thm-sf-ctf-stability-direct-images proof (3) supplies the historical direct-image ancestor. This inherited arithmetic branch supplies the digit argument of Stacks 09EY, last two paragraphs, used in step 2 of lem-sfb-epp-purely-inseparable-degree-p. No blueprint node states this digit dichotomy; inherited null from.node and ancestry are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-74b445c65",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-74b445c65 (reviewer sub-agent of L); spot-checked: One commit with the item and its report; no new nodes, no repair note, so this is an ordinary one-level split and not a re-split. The statement matches live (unsplit) word for word. Checked against Stacks more-algebra.tex Tag 09EY, the last two proof paragraphs: the item turns the source's 'p-th power in the completion of the undefined B_1' into an explicit root in the given complete S with s^p=t. That is exactly how the parent lem-sfb-epp-purely-inseparable-degree-p uses it: step 2 applies it to B⊂D=B[S]/(S^p-t), step 3 takes the root branch and step 5 the finite branch. Step 1: excluded middle over the whole finite alternative, with an invariant that holds at n=0 from the empty sum; a nonpower residue would itself be a forbidden witness with m=n. Step 2: by def-sc-discrete-valuation-ring, m=tR, so lifting a residue root puts r_n-b_n^p in the kernel (t), which gives r_{n+1}; dependent choice builds the sequences. Step 3: w_n=Σb_i s^i is a compatible family mod s^n, and since m_S=(s), surjectivity of S→lim S/(s^n) (def-weil-pbc-adically-complete-ring) gives w. Step 4: Frobenius additivity and multiplicativity (def-weil-ring-frobenius, S of characteristic p) give w^p-u in (s^{pn}) for all n, so w^p=u by the separatedness included in the cited completeness statement. All four citations are Mathlib-leaf definitions, so no route or tool_uses issue arises; no cycle. Hand-checked small cases: u=0; u=t with p=2 (w=s); F_p(a)[[t]]⊂F_p(a)[[s]] with u=a (obstruction m=0) and u=a t^3 (m=3); and an S whose residue field has a^{1/p}, where both alternatives hold, matching 'at least one'. No duplicate found by grep for 09EY, nagata-pth-roots or pth-root, or by a scan of p-th-power statements. Mathlib searches of three kinds are recorded, with candidates rightly rejected. Inherited null blueprint.from.node is a base fault (maintainer note). The report mentions a citations.json that is not in the commit; this does not affect the delivery. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FrobeniusUniformizerDigits",
+  "declaration": "IsDiscreteValuationRing.exists_frobenius_digits_or_root",
+  "file": "lean/Sheaf/RingTheory/FrobeniusUniformizerDigits.lean",
+  "statement": "theorem exists_frobenius_digits_or_root (R : Type u) (S : Type v) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [CommRing S] [IsDomain S] [IsDiscreteValuationRing S] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [IsAdicComplete (IsLocalRing.maximalIdeal S) S] (p : ℕ) (hp : p.Prime) [CharP R p] [CharP S p] (f : R →+* S) (hf : Function.Injective f) [IsLocalHom f] (t : R) (s : S) (ht : Irreducible t) (hs : Irreducible s) (hst : s ^ p = f t) (x : R) : (∃ (m : ℕ) (c : Fin m → R) (b : R), x = (∑ i : Fin m, c i ^ p * t ^ (i : ℕ)) + b * t ^ m ∧ ¬ ∃ z : R ⧸ Ideal.span ({t} : Set R), z ^ p = Ideal.Quotient.mk (Ideal.span ({t} : Set R)) b) ∨ (∃ w : S, w ^ p = f x)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7538db80",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: p prime; R, S complete DVRs (IsDiscreteValuationRing + IsAdicComplete of maximalIdeal) with independent universes u, v; CharP p on both; injective local f; t, s uniformizers (Irreducible), s^p = f t; first alternative Fin m digits with sum + b*t^m and b not a p-th power in R/(t); second alternative w in S with w^p = f x; joined by non-exclusive ∨. Edge cases m=0, x=0, p=2, perfect/imperfect residue fields correct. Checked against Stacks 09EY last two paragraphs and the parent's step 2. lean.statement verbatim (one occurrence). Docstrings give source place, blueprint tag and all 4 proof steps. No definitions, sorry only, no stronger assumptions, non-public proof import only. Only the node's lean field changed. No duplicate in project Lean or Mathlib. No findings."
+ }
+}

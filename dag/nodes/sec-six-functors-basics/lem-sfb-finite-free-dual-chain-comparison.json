@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-finite-free-dual-chain-comparison",
+ "kind": "statement",
+ "title": "Signed scalar-free chart evaluation in the native internal module category",
+ "statement": "Let $S$ be any scheme with its small pro-étale site [def-pc-scheme, def-weil-pbc-proetale-site, def-weil-size-convention]. Let $\\Lambda$ be a commutative condensed ring, put $R_S=p_S^*\\Lambda$, and use its internal module category and ordinary uncompleted derived tensor/internal Hom [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-tensor-hom]. Let $A$ be a commutative ring with a map from the constant ring sheaf $A_S$ to $R_S$ [def-weil-pbc-constant-sheaf]. Let $P$ be a bounded cochain complex of finite free $A$-modules and put $T^i=R_S\\otimes_{A_S}(P^i)_S$ termwise. Here scalar extension is the ordinary relative tensor [def-sfb-modobj-relative-tensor]. Let $E_S$ be the section-action equivalence to modules over the section-ring sheaf $B_S$ [def-weil-pbc-internal-abelian-sheaf-module-equivalence].\n\nSet $D_P^b=\\operatorname{Hom}_A(P^{-b},A)$ with differential $d\\phi=(-1)^{b+1}\\phi d_P$, and put $D_T=R_S\\otimes_{A_S}(D_P)_S$ termwise. For every unbounded complex $F$ of internal $R_S$-modules there is a natural chain isomorphism\n$$E_S\\operatorname{Tot}(F\\otimes_{R_S}D_T)\\xrightarrow{\\sim}\\mathcal Hom_{B_S}^\\bullet(E_ST,E_SF).$$\nUse the direct-sum total differential and Hom differential of [def-pc-tensor-complex-sheaves, def-pur-hom-complex]. Under the scalar finite-free identifications, its component from $F^a\\otimes D_T^b$ is zero on $T^i$ for $i\\ne-b$, and for $i=-b$ sends $y\\otimes\\phi$ to $(x\\mapsto y\\phi(x))$. For a basis $(e_j)$ of $P^i$, the inverse coordinate is $f\\mapsto\\sum_j f(e_j)\\otimes e_j^*$. The comparison is independent of bases and compatible with slice restriction.\n\nThe native complex $D_T$ is K-flat [def-pc-kflat-complex], and the Hom complex on the right sends every K-injective augmentation of $E_SF$ to a quasi-isomorphism. After localization, the displayed chain map identifies $D_T$ with the native $R\\mathcal Hom_{R_S}(T,R_S)$ and is exactly the native evaluation transpose\n$$F\\otimes_{R_S}^{\\mathbf L}R\\mathcal Hom_{R_S}(T,R_S)\\xrightarrow{\\sim}R\\mathcal Hom_{R_S}(T,F).$$\nThe assertion concerns the native tensor and its actual closed adjunction, not an arbitrarily chosen monoidal structure on an equivalent derived category. No flatness of $R_S$ over $A_S$ and no boundedness of $F$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph, finite-free local evaluation calculation; old split step 2. Stacks Tag 08JH (lemma-Rhom-strictly-perfect) and Tag 08JJ (lemma-dual-perfect-complex), explicit signed comparison. The statement includes the scalar model and its native internal derived evaluation normalization, rather than merely the sectionwise derived isomorphism."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-modobj-relative-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-internal-section-total-comparison",
+  "def-sfb-internal-section-derived-tensor-comparison",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-scalar-perfect-dual-realization",
+  "def-sfb-ringed-ordinary-evaluation-models",
+  "def-sfb-native-derived-koszul-braiding"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary finite-free chain theorem to obtain kappa, epsilon, its normalization, naturality and the inverse in every basis.",
+   "uses": [
+    "lem-sfb-finite-free-ordinary-chain-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize a chosen finite scalar basis. The rank-one constant module is the constant ring, and extension sends it to the coefficient unit. Additivity preserves finite products, giving an isomorphism of every realized term to a finite free sheaf. Apply finite-retract dual exactness to its inverse pair. The realized complex has the original finite bounds. Bounded exact-term Hom therefore sends every quasi-isomorphism to a quasi-isomorphism.",
+   "uses": [
+    "lem-sfb-scalar-perfect-chart-finite-free",
+    "lem-sfb-ringed-site-finite-retract-dual-exact",
+    "lem-sfb-independent-bounded-exact-term-hom",
+    "def-sfb-finite-free-dual-chain-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an acyclic native Z, the section Z is acyclic. Apply the preceding Hom invariance to 0→section Z. Ordinary Hom is additive, so Hom(T,0) is zero and Hom(T,section Z) is acyclic. Transport through epsilon Z and reflect exactness through the faithful section equivalence. This proves the native acyclic tensor test. The quasi-isomorphism assertion for every K-injective augmentation follows directly from Hom invariance.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the evaluation-normalized comparison data S,M,t,theta from moduleObject_ringedSite_derived_comparison. Apply generic ordinary evaluation localization with these fixed data, kappa, epsilon, its formula and naturality, the proved acyclic tensor test and full Hom invariance. The fixed K-injective augmentation is a quasi-isomorphism, so Hom invariance makes the ordinary-to-derived Hom comparison invertible. Every factor on the right of the localization equation is now invertible. The left derived Hom comparison is also invertible. Cancel it, reflect isomorphisms through the derived section equivalence, and cancel tensor with the dual isomorphism delta. This proves the native evaluation transpose is invertible. Assemble all ordinary and derived clauses.",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-native-ordinary-evaluation-localization",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-free-ordinary-chain-comparison",
+  "lem-sfb-scalar-perfect-chart-finite-free",
+  "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "lem-sfb-independent-bounded-exact-term-hom",
+  "def-sfb-finite-free-dual-chain-models",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-native-ordinary-evaluation-localization",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "E5 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ; ordinary finite-basis calculation and generic evaluation localization separated, exact term Hom and K-flatness proved in the combining argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded finite free complex of sheaves on a ringed site and any unbounded target complex the signed tensor with its dual is naturally chain isomorphic to the internal Hom complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.HasGoodTensor₁₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"A proposition asserting that for three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with shape $c$, the composition of curried tensor product functors preserves colimits of diagra\"}\n  {\"name\": \"HomologicalComplex.rightUnitor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (which places the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself. \"}\n  {\"name\": \"HomologicalComplex.rightUnitor'_inv_comm\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"For indices $i, j$ in the complex shape $I$, the composition of the inverse right unitor isomorphism at $i$ followed by the differential $d_{i,j}$ of the tensor product complex $K \\\\otimes \\\\mathbf{1}_C\"}\n  {\"name\": \"HomologicalComplex.ιTensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a monoidal category $ \\\\mathcal{C} $, and indices $ i_1, i_2, j $ in the additive monoid $ I $ satisfying $ i_1 + i_2 = j $, this morphism maps th\"}\n  {\"name\": \"HomologicalComplex.rightUnitor'\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (placing the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself, given\"}\n  {\"name\": \"HomologicalComplex.leftUnitor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"The left unitor isomorphism establishes that tensoring the tensor unit complex (which has the monoidal unit object at index 0 and zero objects elsewhere) with any homological complex $ K $ yields an i\"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₂₃\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"The tensor product of three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, using the curried tensor product structure and complex shapes $c$, forms a trifunctor\"}\n  {\"name\": \"HomologicalComplex.HasTensor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [(CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [∀ (X₁ : C), ((CategoryTheory.MonoidalCategory.currie\", \"doc\": \"Given two homological complexes $K_1$ and $K_2$ in a category $\\\\mathcal{C}$ equipped with a monoidal structure via the curried tensor product bifunctor, this definition asserts the existence of a tens\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dualTensorHomEquiv and total-tensor infrastructure do not provide the signed sheaf-complex chain comparison, its K-injective comparison, and its normalized derived evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"tensor\", \"hom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dualTensorHomEquiv and total-tensor infrastructure do not provide the signed sheaf-complex chain comparison, its K-injective comparison, and its normalized derived evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Hh]om|[Hh]om.*finiteFree|dual.*[Cc]omplex|[Cc]omplex.*dual",
+   "results": "[grep] OK 24 hit(s)\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/CharFun.lean\", \"line\": \"58\", \"text\": \"  rw [IsGaussian.charFunDual_eq, covarianceBilinDual_self_eq_variance, integral_complex_ofReal,\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/CharFun.lean\", \"line\": \"88\", \"text\": \"  simp_rw [h'.charFunDual_eq', Complex.exp_eq_exp_iff_exists_int] at h\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Multivariate.lean\", \"line\": \"119\", \"text\": \"  simp [IsGaussian.charFunDual_eq, integral_complex_ofReal, variance_dual_stdGaussian, neg_div]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Basic.lean\", \"line\": \"253\", \"text\": \"  rw [charFunDual_prod, IsGaussian.charFunDual_eq, IsGaussian.charFunDual_eq, ← Complex.exp_add]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/HasGaussianLaw/Independence.lean\", \"line\": \"185\", \"text\": \"    rw [(hX1 i).isGaussian_map.charFunDual_eq, integral_complex_ofReal, integral_comp_id_comm,\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/HasGaussianLaw/Independence.lean\", \"line\": \"204\", \"text\": \"  simp_rw [hX.charFunDual_map_eq_fun, fun i ↦ (hX.eval i).charFunDual_map_eq_fun, ← Complex.exp_sum,\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/HasGaussianLaw/Independence.lean\", \"line\": \"298\", \"text\": \"    · rw [hX.isGaussian_map.charFunDual_eq, integral_complex_ofReal, integral_comp_id_comm,\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/HasGaussianLaw/Independence.lean\", \"line\": \"303\", \"text\": \"    · rw [hY.isGaussian_map.charFunDual_eq, integral_complex_ofReal, integral_comp_id_comm,\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Fernique.lean\", \"line\": \"52\", \"text\": \"  simp [charFunDual_eq L, integral_complex_ofReal, hμ L, neg_div]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Fernique.lean\", \"line\": \"220\", \"text\": \"  rw [charFunDual_dirac, charFunDual_eq L, h L, integral_complex_ofReal, integral_dual L]\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean\", \"line\": \"163\", \"text\": \"    hard to spot; it's `map_star` coming from `WeakDual.Complex.instStarHomClass`, which is a\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"338\", \"text\": \"`WeakDual.Complex.instStarHomClass`. -/\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"340\", \"text\": \"  { WeakDual.Complex.instStarHomClass, hF with }\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"line\": \"25\", \"text\": \"The dual version `alternatingCofaceMapComplex : CosimplicialObject C ⥤ CochainComplex C ℕ`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Equivalence.lean\", \"line\": \"115\", \"text\": \"TODO: dualise all of this as `CosimplicialObject A ⥤ CochainComplex A ℕ`. (It is unclear\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"15\", \"text\": \"between homological complexes. Moreover, we dualise the definition\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Localization.lean\", \"line\": \"301\", \"text\": \"/- By duality, the results obtained here for chain complexes could be dualized in\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/FiniteAbelian/PontryaginDuality.lean\", \"line\": \"19\", \"text\": \"finite abelian group is canonically isomorphic to its double dual (the space of complex-valued\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ComplexShape.lean\", \"line\": \"72\", \"text\": \"attribute [to_dual self (reorder := 3 4)] ComplexShape.Rel\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ComplexShape.lean\", \"line\": \"73\", \"text\": \"attribute [to_dual existing] ComplexShape.next_eq\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean\", \"line\": \"419\", \"text\": \"  simp_rw [charFunDual_apply, ← integral_prod_mul, ← Complex.exp_add, ← add_mul, ← ofReal_add,\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean\", \"line\": \"432\", \"text\": \"  simp_rw [charFunDual_apply, ← L.sum_comp_single, ofReal_sum, Finset.sum_mul, Complex.exp_sum,\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean\", \"line\": \"445\", \"text\": \"  simp_rw [charFunDual_apply, ← integral_fintype_prod_eq_prod, ← Complex.exp_sum, ← Finset.sum_mul,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dualTensorHomEquiv and total-tensor infrastructure do not provide the signed sheaf-complex chain comparison, its K-injective comparison, and its normalized derived evaluation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor of an arbitrary complex of module sheaves with the dual of a bounded finite free complex computes derived internal Hom",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"dualTensorHomEquivOfBasis\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be modules over $R$. If $M$ is a free module with a finite basis, then there is an $R$-linear isomorphism between the tensor product of the dual \"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma\"}\n  {\"name\": \"lTensorHomEquivHomLTensor.congr_simp\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"∀ (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : AddCommMonoid P] [inst_3 : AddCommMonoid Q] [inst_4 : Module R M] [inst_5 : Module R P]\\n  [inst_6 : Module R Q] [inst_7 : Module.Free R M] [inst_8 : Module.Finite R M],\\n  lTen\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $ that is free and finitely generated, and $ R $-modules $ P $ and $ Q $, the natural isomorphism between $ \\\\text{Hom}(M \\\\otimes_R P, Q) $ and $ \\\\\"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": P ⊗[R] (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q$ be $R$-modules and $M$ be a free $R$-module. There is a canonical $R$-linear isomorphism: $$ P \\\\otimes_R \\\\text{Hom}_R(M, Q) \\\\cong \\\\text{Hom}_R(M, P \\\\o\"}\n  {\"name\": \"dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N →ₗ[R] M →ₗ[R] N\", \"doc\": \"The linear map from the tensor product of the dual module of $ M $ and $ N $ to the space of $ R $-linear maps from $ M $ to $ N $, constructed via the universal property of the tensor product and rig\"}\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \"(K₁ K₂ : HomologicalComplex C c) [HasTensor K₁ K₂] : HomologicalComplex C c\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ equipped with a monoidal structure via the curried tensor product bifunctor, this constructs their tensor product as a\"}\n  {\"name\": \"rTensorHomEquivHomRTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": (M →ₗ[R] P) ⊗[R] Q ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $M, P, Q$ be $R$-modules. If $M$ is a finitely generated free module, there exists a canonical $R$-linear equivalence between the tensor product of the modul\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"(X Y Y' Z : C) [ExactPairing Y Y'] : (X ⊗ Y ⟶ Z) ≃ (X ⟶ Z ⊗ Y')\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. The eq\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dualTensorHomEquiv and total-tensor infrastructure do not provide the signed sheaf-complex chain comparison, its K-injective comparison, and its normalized derived evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed evaluation total tensor dual bounded complex finite free sheaves internal Hom arbitrary target natural chain isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.HasGoodTensor₁₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"A proposition asserting that for three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with shape $c$, the composition of curried tensor product functors preserves colimits of diagra\"}\n  {\"name\": \"HomologicalComplex.ιTensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a monoidal category $ \\\\mathcal{C} $, and indices $ i_1, i_2, j $ in the additive monoid $ I $ satisfying $ i_1 + i_2 = j $, this morphism maps th\"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₂₃\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"The tensor product of three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, using the curried tensor product structure and complex shapes $c$, forms a trifunctor\"}\n  {\"name\": \"HomologicalComplex.HasTensor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [(CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [∀ (X₁ : C), ((CategoryTheory.MonoidalCategory.currie\", \"doc\": \"Given two homological complexes $K_1$ and $K_2$ in a category $\\\\mathcal{C}$ equipped with a monoidal structure via the curried tensor product bifunctor, this definition asserts the existence of a tens\"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ equipped with a monoidal structure via the curried tensor product bifunctor, this constructs their tensor product as a\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"HomologicalComplex.rightUnitor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (which places the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module dualTensorHomEquiv and total-tensor infrastructure do not provide the signed sheaf-complex chain comparison, its K-injective comparison, and its normalized derived evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules over a pulled back condensed ring on a scheme proetale site scalar extension of a bounded finite free complex gives the signed canonical derived tensor dual internal Hom evaluation isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalClosed (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived ordinary-module, light-condensed or scalar-extension facts do not give this native pro-etale unbounded derived comparison and its specified evaluation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"CochainComplex\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived ordinary-module, light-condensed or scalar-extension facts do not give this native pro-etale unbounded derived comparison and its specified evaluation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ual|[Hh]om.*tensor|tensor.*[Hh]om",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived ordinary-module, light-condensed or scalar-extension facts do not give this native pro-etale unbounded derived comparison and its specified evaluation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free scalar complex pulled to internal coefficient modules on the proetale site has normalized tensor dual evaluation comparison against every unbounded target complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Dual.eval_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"(v : M) (a : Dual R M) : eval R M v a = a v\", \"doc\": \"For all $ v \\\\in M $ and $ a \\\\in \\\\text{Dual}\\\\, R\\\\, M $, it holds that $ \\\\text{eval}(v)(a) = a(v) $.\"}\n  {\"name\": \"dualTensorHomEquivOfBasis\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be modules over $R$. If $M$ is a free module with a finite basis, then there is an $R$-linear isomorphism between the tensor product of the dual \"}\n  {\"name\": \"contractLeft\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] M →ₗ[R] R\", \"doc\": \"The linear map that evaluates a dual module element on a module element, defined by contracting the tensor product of the dual module $ {M}^\\\\vee $ and the module $ M $ over the commutative semiring $ \"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": P ⊗[R] (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q$ be $R$-modules and $M$ be a free $R$-module. There is a canonical $R$-linear isomorphism: $$ P \\\\otimes_R \\\\text{Hom}_R(M, Q) \\\\cong \\\\text{Hom}_R(M, P \\\\o\"}\n  {\"name\": \"Module.Dual.eval_naturality\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"(f : M₁ →ₗ[R] M₂) : f.dualMap.dualMap ∘ₗ eval R M₁ = eval R M₂ ∘ₗ f\", \"doc\": \"For any $ R $-linear map $ f: M_1 \\\\to M_2 $, the composition of the double dual map $ f^{\\\\vee\\\\vee} $ with the evaluation map $ \\\\text{eval}_{R, M_1} $ equals the composition of the evaluation map $ \\\\te\"}\n  {\"name\": \"Module.IsReflexive.of_finite_of_free\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"[Module.Finite R M] [Free R M] : IsReflexive R M\", \"doc\": \"Every finite free module over a commutative semiring is reflexive, meaning the canonical evaluation map from the module to its double dual is an isomorphism of modules.\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(a : A) (f : Dual R V) (v : V) : (ibc.toDualBaseChange (a ⊗ₜ[R] f)) (j v) = a * algebraMap R A (f v)\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"transpose_dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"(f : Module.Dual R M) (m : M) :\\n  Dual.transpose (R := R) (dualTensorHom R M M (f ⊗ₜ m)) = dualTensorHom R _ _ (Dual.eval R M m ⊗ₜ f)\", \"doc\": \"For any element $ f $ in the dual module $ \\\\text{Dual}(R, M) $ and any element $ m \\\\in M $, the transpose of the linear map corresponding to the tensor product $ f \\\\otimes m $ is equal to the linear m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived ordinary-module, light-condensed or scalar-extension facts do not give this native pro-etale unbounded derived comparison and its specified evaluation normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed finite free scalar extension complex internal module objects tensor Hom comparison agrees with the native derived closed adjunction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {M : ModuleCat R}\\n  {N : ModuleCat S} (φ : (ModuleCat.extendScalars f).obj M ⟶ N) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom (((ModuleCat.extendRestrictScalarsAdj f).homEquiv M N) φ)) m =\\n    (CategoryTheory.\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the adjunction between the extension of scalars functor and the restriction of scalars functor establishes a natural bijec\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).unit.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"For a commutative ring homomorphism $ f : R \\\\to S $, the unit of the adjunction between the extension of scalars functor and the restriction of scalars functor, when applied to an element $ m $ of an \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) (x : ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars f g)) x =\\n    (CategoryTheory.Concrete\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the natural bijection between $ R $-linear maps $ X → Y^{\\text{res}} $ and $ S $-linear maps $ X^{\\text{ext}} → Y $ sends an\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.monoidalClosedHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M N P : ModuleCat R) →\\n      ((CategoryTheory.MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃\\n        (N ⟶ ((CategoryTheory.linearCoyoneda R (ModuleCat R)).obj (Opposite.op M)).obj P)\", \"doc\": \"Let $R$ be a commutative ring. For any $R$-modules $M, N, P$, there is a canonical equivalence between the set of $R$-linear maps from the tensor product $M \\\\otimes_R N$ to $P$, and the set of $R$-lin\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived ordinary-module, light-condensed or scalar-extension facts do not give this native pro-etale unbounded derived comparison and its specified evaluation normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded finite free complex over a ringed site and arbitrary unbounded complex F, tensor with the signed dual is isomorphic to the internal Hom complex and computes derived evaluation",
+   "results": "[leanfinder] OK 8 hit(s); top results: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply, LightCondensed.ihomPoints, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'; digest 0c671d10b1e83847",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module contraction and general tensor/closed infrastructure do not state the signed bounded sheaf-complex isomorphism, unbounded K-injective comparison, and native evaluation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHom|tensor.*[Hh]om.*[Ii]so|[Hh]om.*tensor.*[Ii]so",
+   "results": "[grep] OK 2 hit(s); top results: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean; digest 1f8491f235ce8ea4",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module contraction and general tensor/closed infrastructure do not state the signed bounded sheaf-complex isomorphism, unbounded K-injective comparison, and native evaluation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed dual of bounded finite free sheaf complex tensor with unbounded complex equals derived internal Hom with native evaluation",
+   "results": "[leansearch] OK 8 hit(s); top results: dualTensorHomEquivOfBasis, dualTensorHomEquiv, LinearMap.IsPerfPair.dualEval, TensorProduct.dualDistrib, PiTensorProduct.dualDistribEquiv, HomologicalComplex.ι_mapBifunctorFlipIso_hom, PiTensorProduct.dualDistrib, Module.dual_free; digest f6af57f086bad9c1",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module contraction and general tensor/closed infrastructure do not state the signed bounded sheaf-complex isomorphism, unbounded K-injective comparison, and native evaluation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"dual\"",
+   "results": "[loogle] OK 0 hit(s); top results: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module contraction and general tensor/closed infrastructure do not state the signed bounded sheaf-complex isomorphism, unbounded K-injective comparison, and native evaluation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|def dualTensorHom",
+   "results": "[grep] OK 5 hit(s); top results: 54, 170, 184, 185, 188; digest 5492b409b027c87f (grep with a file argument reports line prefixes as file names; the actual Contraction.lean source was read at lines 155–180 and 281–288)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module contraction and general tensor/closed infrastructure do not state the signed bounded sheaf-complex isomorphism, unbounded K-injective comparison, and native evaluation normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In sheaves of modules over a commutative ring object, a strictly perfect complex has signed dual and evaluation identifies tensor by its dual with derived internal Hom for arbitrary targets",
+   "results": "[leanfinder] OK 8 hit(s); top results: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Ext, CategoryTheory.Sheaf.H, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod; digest 8778d4cba02b3c44",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module contraction and general tensor/closed infrastructure do not state the signed bounded sheaf-complex isomorphism, unbounded K-injective comparison, and native evaluation normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-tensor-product",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph, finite-free local evaluation calculation; old split step 2. Stacks Tag 08JH (lemma-Rhom-strictly-perfect) and Tag 08JJ (lemma-dual-perfect-complex), explicit signed comparison.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-free-dual-chain-comparison",
+  "worker": "stage1",
+  "summary": "Q79 reuses the existing scalar-perfect-dual, bounded evaluation, exact-term Hom, and normalized native/section comparison nodes. The proof writes the finite basis inverse, derives K-flatness from Hom invariance, and treats arbitrary unbounded F by a natural K-flat-resolution square. No new nodes, statement changes or Lean edits.",
+  "blueprint": "det-lem-int-tensor-product.proof.md, first paragraph: scalar local model dual and canonical evaluation; the signed chain calculation and native normalization elaborate that paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact section-action tensor and K-flatness comparison, needed to retain the native relative tensor; the local-model unit does not prove this infrastructure."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic scalar-adjunction comparison on balanced generators, used only to identify the given scalar chart in section modules."
+   },
+   {
+    "node": "lem-sfb-scalar-perfect-dual-realization",
+    "why": "Generic signed scalar-dual realization over any ringed site, supplying the dual model and exact termwise Hom."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Generic finite-free scalar extension coordinates, used without its optional scalar-flatness hypothesis."
+   },
+   {
+    "node": "lem-sfb-ringed-site-bounded-evaluation-assembly",
+    "why": "Generic signed total/Hom assembly with bounded source and arbitrary target, not a replacement of a unit route."
+   },
+   {
+    "node": "lem-sfb-independent-bounded-exact-term-hom",
+    "why": "Generic Hom invariance under quasi-isomorphisms for bounded exact-term sources, also used to establish K-flatness directly."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site flat-term K-flat resolution for an arbitrary unbounded target."
+   },
+   {
+    "node": "lem-sfb-ringed-ordinary-evaluation-localization",
+    "why": "Generic identification of the specified ordinary evaluation formula with its derived transpose; needed for equality of maps."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic K-flat localization comparison for the actual ringed-site total tensor."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic evaluation-normalized comparison of the native closed adjunction with the independently specified ringed-site one, valid for any scheme and condensed ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-independent-bounded-exact-term-hom",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-9d2e9eb5d",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-9d2e9eb5d (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 15 proof_deps and 13 stmt_deps, the first paragraph of the main-20261015 det-lem-int-tensor-product proof, the sk-lem-int-tensor unit, and Stacks 08JH/08JJ/06YS. The delivery has no new nodes. The statement and stmt_deps match the base copy byte for byte, and no repair note or competing split exists. Search of the deps' closure (651 nodes) finds no cycle; there is no SGA citation and no merged dep. Step 1: the section-tensor comparison and the scalar adjunction (a: constant A_S to R_S, no flatness) give L=C(P) and D=C(D_P). Step 2: in the scalar perfect-dual node, -(-1)^q phi d equals the item's (-1)^{b+1} phi d_P; the node also gives exact termwise Hom and dual support [-b,-a]. Step 3 is genuinely elementary: dual-basis inverse, sheafification extension, rank 0 included. Step 4: the hypotheses of the bounded evaluation assembly hold and (-1)^{a+b+1} = -(-1)^{a+b}, so there is no extra sign. Step 5: exact-term Hom applied to 0->Z gives Tot(Z (x) D) acyclic, which is the K-flat definition with the factors in the defined order, and step 1 reflects it to D_T. Step 6: a flat-term K-flat resolution Q, plus evaluation-localization, plus the descent mu on (Q,D) with both terms flat, plus the natural square carries the result to arbitrary unbounded G. Step 7: the module-object comparison carries the evaluation counits, so the transposes agree, and D_T = RHom(T,R_S). I tested P=0, rank 0, single- and two-term complexes, unbounded F, and Z->Z/2. lem-sfb-ringed-site-strict-perfect-hom is a generic analogue, not a duplicate. I accept all 10 tool_uses as generic infrastructure. Advisory: in step 6, 'D K-flat' means Hom^.(L,O), which is K-flat through kappa."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeDualChainComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteFreeDualComparison.finiteFreeDualChainComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteFreeDualComparison.finiteFreeDualChainComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeDualChainComparison.lean",
+  "statement": "theorem finiteFreeDualChainComparison (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (hfinite : ∀ i : ℤ, Module.Finite A (P.X i)) (hfree : ∀ i : ℤ, Module.Free A (P.X i)) (l h : ℤ) (hbounded : ∀ i : ℤ, i < l ∨ h < i → IsZero (P.X i)) : ∃ κ : (complexForward Λ X).obj (chart Λ X A α (scalarDual A P)) ≅ homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) (ringedTensorUnitComplex.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)), (∀ (b : ℤ) (U : X.ProEtᵒᵖ) (r r' : (ring Λ X).obj.obj U) (z : (scalarDual A P).X b) (x : P.X (-b)), ringedOrdinaryDualValue.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) b (-b) (neg_add_cancel b) U ((κ.hom.f b).val.app U (scalarSection Λ X A α _ U r z)) (scalarSection Λ X A α _ U r' x) = r * r' * scalar Λ X A α U ((CategoryTheory.ScalarPerfectDual.coordinates A P b).hom z x)) ∧ ∃ ε : ∀ F : CochainComplex (Internal Λ X) ℤ, (complexForward Λ X).obj (internalTotalTensor Λ X F (chart Λ X A α (scalarDual A P))) ≅ homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F), (∀ F : CochainComplex (Internal Λ X) ℤ, ∃ aEF : (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj ((complexForward Λ X).obj F, homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) (ringedTensorUnitComplex.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X))) ⟶ homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F), RingedOrdinaryEvaluationFormula.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F) aEF ∧ (ε F).hom = (totalComparison Λ X F (chart Λ X A α (scalarDual A P))).hom ≫ (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).map (𝟙 ((complexForward Λ X).obj F), κ.hom) ≫ aEF) ∧ (∀ {F G : CochainComplex (Internal Λ X) ℤ} (f : F ⟶ G), (complexForward Λ X).map (tensorTargetMap Λ X A α P f) ≫ (ε G).hom = (ε F).hom ≫ ((homComplexFunctor.{u + 1, u, u + 1, u + 1} (R := ring Λ X)).obj (op ((complexForward Λ X).obj (chart Λ X A α P)))).map ((complexForward Λ X).map f)) ∧ (∀ (F : CochainComplex (Internal Λ X) ℤ) (n : ℤ) (U : X.ProEtᵒᵖ) (f : ((homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F)).X n).val.obj U) (ι : ℤ → Type (u + 1)) [∀ b : ℤ, Fintype (ι b)] (e : ∀ b : ℤ, Module.Basis (ι b) A (P.X (-b))), ((totalComparison Λ X F (chart Λ X A α (scalarDual A P))).hom.f n).val.app U (((ε F).inv.f n).val.app U f) = ∑ b : ↥(Finset.Icc (-h) (-l)), ∑ j : ι b.val, coefficientTensorGenerator.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X) ((complexForward Λ X).obj F) ((complexForward Λ X).obj (chart Λ X A α (scalarDual A P))) (n - b.val) b.val n (by omega) U (ringedOrdinaryHomValue.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F) n (-b.val) (n - b.val) (by omega) U f (scalarSection Λ X A α _ U 1 (e b.val j))) (scalarSection Λ X A α _ U 1 ((CategoryTheory.ScalarPerfectDual.coordinates A P b.val).inv ((e b.val).coord j)))) ∧ (∀ Z : CochainComplex (Internal Λ X) ℤ, Z.Acyclic → (internalTotalTensor Λ X Z (chart Λ X A α (scalarDual A P))).Acyclic) ∧ (∀ (F : CochainComplex (Internal Λ X) ℤ) (I : CochainComplex (Modules Λ X) ℤ) (η : (complexForward Λ X).obj F ⟶ I), QuasiIso η → I.IsKInjective → QuasiIso (((homComplexFunctor.{u + 1, u, u + 1, u + 1} (R := ring Λ X)).obj (op ((complexForward Λ X).obj (chart Λ X A α P)))).map η)) ∧ ∃ (S : CoefficientClosedStructure (hom Λ X)) (M : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X) (ring Λ X) S) (t : TensorComparison Λ X S M) (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅ ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X), (∀ K N : DerivedCategory.{u + 1} (Internal Λ X), (forward Λ X).map ((@BraidedCategory.braiding _ _ _ (internalBraiding Λ X) (((CondensedRing.derivedHom Λ X).obj (op K)).obj N) K).hom ≫ (CondensedRing.derivedTensorHomAdjunction Λ K).counit.app N) = (t.iso.hom.app (((CondensedRing.derivedHom Λ X).obj (op K)).obj N, K)) ≫ S.tensor.map (X := ((forward Λ X).obj (((CondensedRing.derivedHom Λ X).obj (op K)).obj N), (forward Λ X).obj K)) (Y := ((hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N), (forward Λ X).obj K)) (θ.hom.app (op K, N), 𝟙 ((forward Λ X).obj K)) ≫ S.evaluation ((forward Λ X).obj K) ((forward Λ X).obj N)) ∧ ∃ δ : DerivedCategory.Q.{u + 1}.obj (chart Λ X A α (scalarDual A P)) ≅ ((CondensedRing.derivedHom Λ X).obj (op (DerivedCategory.Q.{u + 1}.obj (chart Λ X A α P)))).obj (nativeUnit Λ X), ∀ F : CochainComplex (Internal Λ X) ℤ, IsIso (localizationTensorMap Λ X F (chart Λ X A α (scalarDual A P))) ∧ IsIso (evaluationTranspose Λ X (DerivedCategory.Q.{u + 1}.obj (chart Λ X A α P)) (DerivedCategory.Q.{u + 1}.obj F)) ∧ (forward Λ X).map ((((CondensedRing.derivedTensor Λ X).obj (DerivedCategory.Q.{u + 1}.obj F)).map δ.hom) ≫ evaluationTranspose Λ X (DerivedCategory.Q.{u + 1}.obj (chart Λ X A α P)) (DerivedCategory.Q.{u + 1}.obj F)) ≫ sectionDerivedHomMap Λ X θ (chart Λ X A α P) F = (forward Λ X).map (localizationTensorMap Λ X F (chart Λ X A α (scalarDual A P))) ≫ (localizationIso Λ X).hom.app (internalTotalTensor Λ X F (chart Λ X A α (scalarDual A P))) ≫ DerivedCategory.Q.{u + 1}.map (ε F).hom ≫ ringedOrdinaryHomComparison.{u + 1, u, u, u + 1} (Scheme.ProEt.topology X) (ring Λ X) ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c348c6985",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed a52699e2 (H2). Lean file byte-identical; only stmt_deps changed: lem-sfb-ringed-ordinary-evaluation-localization -> new existing:true def-sfb-ringed-ordinary-evaluation-models (5 plain defs ringedOrdinaryHomValue/DualValue/RingedOrdinaryEvaluationFormula/ringedHomAugmentationMap/ringedOrdinaryHomComparison in live RingedOrdinaryEvaluationLocalization l.51-118; statement verbatim; text matches bodies; no other owner; stmt_deps exist), lem-sfb-module-object-ringed-site-derived-comparison -> existing def-sfb-native-derived-koszul-braiding (internalBraiding only, on base). Theorems kept in proof_deps. Mechanical finding: lem-sfb-scalar-perfect-dual-realization is a genuine dependency, since ScalarPerfectDual.coordinates = (dual_coordinates R F).choose, fixed by its formula -> PASS on that point. Clause mapping re-checked (kappa on generators, sign (-1)^{b+1}, epsilon for every unbounded F via the evaluation formula, naturality, inverse for every basis, slice compatibility, native K-flat test, K-injective invariance, delta and native evaluation transpose); no flatness or boundedness assumed; no hollow defs; nothing beyond sorry. No compile (no file changed). Advisories: second-reading section claims no independent reading (dispatcher policy); new node uses coefficientHomSectionApply/ringedTensorUnitComplex whose owners are not in its stmt_deps; the five defs' docstrings still name the theorem node as blueprint; duplicate HasDerivedCategory instance; def-pc-kflat-complex and def-sfb-modobj-relative-tensor cited but unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-8d2b4",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T230956-L-3523151",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical); relocated 12 defs vs live item block (verbatim, realization_additive now proved); new sorry statements vs RingedOrdinaryEvaluationFormula signs and the parent conclusion clauses; node lean.statement vs Lean text"
+ }
+}

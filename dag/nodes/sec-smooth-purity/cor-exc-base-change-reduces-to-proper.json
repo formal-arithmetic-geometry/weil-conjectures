@@ -133,7 +133,18 @@
   "def-weil-pbc-derived-categories"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-existence",
  "split_report": {
@@ -192,5 +203,32 @@
   "landing": "20261019T093418-L-2308280",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ be separated finite type with a\ncompactification\n$X\\xrightarrow{j_0}\\overline X\\xrightarrow{p}Y$, and let $g:Y'\\to Y$\nbe arbitrary. If the base-change comparison\n$L\\overline g^*Rp^{\\times}\\to R(p')^{\\times}Lg^*$ is an isomorphism for\nthe proper morphism $p$, then the base-change comparison\n$Lg'^*Rf^{\\times}\\to Rf'^{\\times}Lg^*$ is an isomorphism for $f$.\nConsequently the comparison for a general separated finite-type morphism\nis reduced to its proper part, the open part being free. Here\n$Rf^{\\times}$, $Rp^{\\times}$ are the ambient right adjoints of\n[def-weil-ambient-exceptional-adjoint]. On the blueprint's coefficient\nclass [def-sf-fullcd-used-class], for finite-type schemes over\n$k=\\overline{\\mathbf F}_q$ and $A=A_{E,n}$, the ambient datum is not\nneeded: there $Rf^{\\times}$ and $Rp^{\\times}$ are the right adjoints\nrelative to the bounded-below objects of étale origin of\n[thm-sf-ambient-adjoint-class], and the reduction holds for the\ncomparisons at every bounded-below object without hypothesis. The\nunrestricted ambient datum is false in general.",
+  "proof": [
+   {
+    "text": "The compact-support functor is $Rf_!=Rp_!j_{0!}=Rp_*j_{0!}$, so by\nuniqueness of right adjoints — the uniqueness invoked in the ambient\ndatum of [def-weil-ambient-exceptional-adjoint] — the ambient right\nadjoint is\n$Rf^{\\times}\\cong j_0^*Rp^{\\times}$, and likewise\n$Rf'^{\\times}\\cong j_0'^*R(p')^{\\times}$ for the base change. The\nbase-change comparison for $f$ is therefore, by pullback composition\n([def-weil-pbc-inverse-image]), the comparison for $p$ conjugated\nby the isomorphisms $Lg'^*j_0^*\\cong j_0'^*L\\overline g^*$; it is an\nisomorphism whenever the comparison for $p$ is.",
+    "uses": [
+     "def-weil-ambient-exceptional-adjoint",
+     "def-weil-pbc-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "On the coefficient class the identifications\n$Rf^{\\times}\\cong j_0^*Rp^{\\times}$ and\n$Rf'^{\\times}\\cong j_0'^*R(p')^{\\times}$ on bounded-below objects are the\ncompactification comparisons of [thm-sf-ambient-adjoint-class] (3): both\nsides are given by $\\nu^*$ of the étale right adjoints, and on the étale\nsites $f^{\\times}\\cong j_0^*p^{\\times}$ by uniqueness of right adjoints.\nSince $Lg^*$ preserves bounded-below objects, the argument above then\nruns object-wise for every bounded-below $K$ on $Y$.",
+    "uses": [
+     "thm-sf-ambient-adjoint-class"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,246 @@
+{
+ "id": "lem-zl-curve-restriction-filtration-spectrum",
+ "kind": "statement",
+ "title": "Exact curve restriction, classical realization and local spectra",
+ "statement": "Fix $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k_0$, $\\Qlb=\\overline{\\mathbf Q}_\\ell$ and $\\iota:\\Qlb\\simeq\\mathbf C$ [def-weil-punctual-weights]. Let $X_0$ be a separated finite-type $k_0$-scheme, $m\\ge1$, $k_m=\\mathbf F_{q^m}\\subset k$, and let $h_m:C_m\\hookrightarrow X_{0,m}=X_0\\times_{k_0}k_m$ be a closed immersion with $C_m$ finite type over $k_m$ [def-weil-closed-immersion; def-weil-finite-type-morphism; def-pc-base-change]. For the classical lisse sheaves of [def-pod-lisse-l-adic-sheaves], equipped with Weil isomorphisms [def-wf-fundamental-representation], let $0=\\mathcal G_0\\subset\\cdots\\subset\\mathcal G_r=\\mathcal G$ be a finite filtration by lisse Weil subsheaves with lisse quotients $\\mathcal S_j$. Realize them in the common-stage Weil heart [def-weil-weil-sheaf-complex; def-weil-constructible-heart; def-real-common-stage-lisse]. Define $R_m$ to be constant restriction with the iterated $m$th Weil map, followed by $h_m^*$ [def-dl-a1-constant-extension-data; def-zl-constant-extension-restriction-local-data; def-weil-derived-pullback-tensor-hom]. Then $R_m$ is exact on these filtrations: $0=R_m\\mathcal G_0\\subset\\cdots\\subset R_m\\mathcal G_r=R_m\\mathcal G$ has quotients canonically $R_m\\mathcal S_j$, all classically lisse. Its geometric sheaves are ordinary pullbacks to $(C_m)_k$. The classical and common-stage identifications commute with these maps, their composites, the Weil maps and local geometric Frobenius, including iterated point transports. For each closed $z\\in C_m$, its image $x\\in X_0$ is closed, $f=[\\kappa(z):\\kappa(x)]\\ge1$, and the canonical stalk identification conjugates $F_{z,R_mH}$ to $F_{x,H}^f$ for each filtration term or quotient $H$. In particular $q_z=q_x^f$ and $\\operatorname{Eig}(F_{z,R_mH})=\\{\\alpha^f:\\alpha\\in\\operatorname{Eig}(F_{x,H})\\}$ as multisets with algebraic multiplicities [def-weil-local-frobenius-trace; def-wf-iota-real]. If $\\mathcal G$ is $\\iota$-real, so is $R_m\\mathcal G$, including when distinct eigenvalues acquire equal powers. The assertion permits $r=0$ and imposes no semisimplicity or diagonalizability hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: exact restriction, geometric local systems, classical/common-stage compatibility and reality under local Frobenius powers (old step 4 and step 5)."
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-fundamental-representation",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-real-common-stage-lisse",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-local-frobenius-trace",
+  "def-wf-iota-real",
+  "def-zl-classical-weil-filtration-transport-data",
+  "def-zl-normalized-classical-weil-realization",
+  "def-per-lisse-completed-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Install the inherited separatedness and prime-unit instances. Apply lem-zl-curve-classical-pullback-exists to the supplied R and realizations, obtaining c and lissity of all restricted classical carriers.",
+   "uses": [
+    "lem-zl-curve-classical-pullback-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-zl-curve-classical-filtration-pullback to F to obtain geometric zero and exactness proof fields. Construct the curve filtration directly with terms, quotients and arrows defined by c.classical. Apply lem-zl-classical-weil-filtration-heart-transport to F on X and to this filtration on C. Choose the curve top isomorphism as the inverse realization component followed by restriction of the given e.",
+   "uses": [
+    "lem-zl-curve-classical-filtration-pullback",
+    "lem-zl-classical-weil-filtration-heart-transport",
+    "def-zl-curve-restriction-filtration-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the defining classical term equalities to isomorphisms under the curve realization, and compose them with the realization comparison. Generic functoriality and naturality give both arrow squares. Cancel the final isomorphism to prove the restricted composite is zero; construct the isomorphism of short complexes and transfer short exactness by ShortComplex.shortExact_iff_of_iso. Transfer the zero initial term by IsZero.of_iso, first transporting the two finite zero indices explicitly along their equality so that realization functors need not unfold to identify them. Mapping the reflexive classical top equality gives heterogeneous equality with the prescribed inverse realization component followed by restriction of e.",
+   "uses": [
+    "def-zl-curve-restriction-filtration-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-zl-curve-restriction-local-powers to every realized classical term or quotient, obtaining its local conclusions, and to G itself, obtaining preservation of reality. Together with the lissity from the first step and both transport records, these are all conjuncts of the unchanged assertion. Empty indices introduce no extra condition.",
+   "uses": [
+    "lem-zl-curve-restriction-local-powers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-curve-classical-pullback-exists",
+  "lem-zl-curve-classical-filtration-pullback",
+  "lem-zl-classical-weil-filtration-heart-transport",
+  "lem-zl-curve-restriction-local-powers",
+  "def-zl-curve-restriction-filtration-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152. B7 Lean assembly via normalized classical pullback, classical filtration pullback and local residue powers; exactness is transported by an explicit short-complex isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a lisse Weil sheaf filtration to a curve over a finite constant extension is exact and sends local Frobenius eigenvalues to residue degree powers preserving reality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (G : Type u_3) →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G S] →\\n                [SMulCommClass G R S] →\\n                  (Q : Ide\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, this definition asserts\"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"AlgHom.IsArithFrobAt.restrict_apply\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {φ : S →ₐ[R] S}\\n  {Q : Ideal S} (H : φ.IsArithFrobAt Q) (x : S ⧸ Q), H.restrict x = x ^ Nat.card (R ⧸ Ideal.under R Q)\", \"doc\": \"For any element $x$ in the quotient ring $S/Q$, the image of $x$ under the restricted arithmetic Frobenius homomorphism $\\\\varphi_Q$ equals $x$ raised to the cardinality of the quotient ring $R/\\\\text{c\"}\n  {\"name\": \"IsArithFrobAt.exists_of_isInvariant\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [Finite G]\\n  [Algebra.IsInvariant R S G] [Q.IsPrime] [Finite (S ⧸ Q)], ∃ σ, IsArithFrobAt\", \"doc\": \"If $ Q $ is a prime ideal in $ S $ such that the quotient ring $ S/Q $ is finite, then there exists an element $ \\\\sigma \\\\in G $ such that $ \\\\sigma $ satisfies the arithmetic Frobenius condition at $ Q\"}\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"WittVector.instModuleFractionRingStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        (_m : ℤ) → Module (FractionRing (WittVector p k)) (WittVector.StandardOneDimIsocrystal p k _m)\", \"doc\": \"For a prime $ p $ and a commutative ring $ k $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with a canonical module structure\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classical l adic local systems and constructible Weil hearts have compatible pullback fibres and Frobenius power multisets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_1) [inst_1 : CommRing k] [inst_2 : IsDomain k] [inst_3 : CharP k p]\\n  [inst_4 : PerfectRing k p] (m : ℤ) (x : WittVector.StandardOneDimIsocrystal p k m),\\n  (WittVector.Isocrystal.frobenius p k) x = ↑p ^ m • (WittVector.FractionRing.frobeniusRingHom p\", \"doc\": \"For any integer $ m $ and element $ x $ in the standard one-dimensional isocrystal over a field $ k $ of characteristic $ p $, the Frobenius isomorphism $ \\\\Phi $ satisfies $ \\\\Phi(x) = p^m \\\\cdot \\\\varph\"}\n  {\"name\": \"WittVector.IsocrystalEquiv.frob_equivariant\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂]\\n  (self : \", \"doc\": \"Let $p$ be a prime number and $k$ be a perfect commutative ring of characteristic $p$. Let $V$ and $V_2$ be two isocrystals over $k$, with corresponding Frobenius isomorphisms $\\\\Phi_V$ and $\\\\Phi_{V_2}\"}\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"WittVector.IsocrystalEquiv\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            (V : Type u_2) →\\n              [inst_4 : AddCommGroup V] →\\n                [WittVector.Isocrystal p k V] →\\n                  \", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and additive commutative groups $ V $ and $ V_2 $ equipped with Witt vector isocrystal structures over $ k $, this defines the type o\"}\n  {\"name\": \"WittVector.Isocrystal.frob\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"{p : ℕ} →\\n  {inst : Fact (Nat.Prime p)} →\\n    {k : Type u_1} →\\n      {inst_1 : CommRing k} →\\n        {inst_2 : CharP k p} →\\n          {inst_3 : PerfectRing k p} →\\n            {V : Type u_2} →\\n              {inst_4 : AddCommGroup V} →\\n                [self : WittVector.Isocrystal p k V] → V ≃ₛₗ[WittV\", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $ equipped with a Witt vector isocrystal structure over $ k $, this defines a semilinear isomor\"}\n  {\"name\": \"WittVector.Isocrystal.frobenius\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                [inst_5 : WittVector.Isocrystal p k V] → V ≃ₛₗ[Wit\", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $ equipped with a Witt vector isocrystal structure over $ k $, this defines a semilinear isomor\"}\n  {\"name\": \"WittVector.IsocrystalEquiv.mk.inj\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ {p : ℕ} {inst : Fact (Nat.Prime p)} {k : Type u_1} {inst_1 : CommRing k} {inst_2 : CharP k p}\\n  {inst_3 : PerfectRing k p} {V : Type u_2} {inst_4 : AddCommGroup V} {inst_5 : WittVector.Isocrystal p k V}\\n  {V₂ : Type u_3} {inst_6 : AddCommGroup V₂} {inst_7 : WittVector.Isocrystal p k V₂}\\n  {toLinea\", \"doc\": \"If two Witt vector isocrystal equivalences between additive commutative groups over a perfect ring $ k $ of characteristic $ p $ share the same underlying linear equivalence over the fraction ring of \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Exact",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Functor.Exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|localFrobenius|lisse",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Data/Rel/Separated.lean\", \"line\": \"45\", \"text\": \"alias _root_.Set.Subsingleton.relIsSeparated := IsSeparated.of_subsingleton\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"line\": \"47\", \"text\": \"lemma isSeparated_iff_setRelIsSeparated :\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"103\", \"text\": \"  .of_maximal_isSeparated <| by simpa [isSeparated_iff_setRelIsSeparated] using hN\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a lisse Weil sheaf filtration to a curve over a finite constant extension is exact and sends local Frobenius eigenvalues to residue degree powers preserving reality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) : ModuleCat.of R M ⟶ (tildeInModuleCat M).obj (op U)\", \"doc\": \"For an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the restriction map from the module $ M $ localized at $ U $ to the sections of the sheaf $ \\\\widetilde{M} $ over\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"AlgEquiv.restrictNormal\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \"[Normal F E] : Gal(E/F)\", \"doc\": \"Given a normal field extension $ E/F $, the restriction map from the Galois group $ \\\\text{Gal}(E/F) $ to itself, induced by restricting algebra homomorphisms to $ E $, is bijective under scalar tower \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion (X.ofRestrict h)\", \"doc\": \"The morphism from the restricted scheme $ X|_U $ to $ X $, constructed via an open immersion $ h: U \\\\to X $, is an open immersion. This means the underlying continuous map is the open embedding $ h $,\"}\n  {\"name\": \"AlgHom.restrictNormalAux\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \"[h : Normal F E] : (toAlgHom F E K₁).range →ₐ[F] (toAlgHom F E K₂).range\", \"doc\": \"Given a normal field extension $ E $ of $ F $ and fields $ K_1, K_2 $ equipped with $ F $-algebra structures, this constructs the restriction of an $ F $-algebra homomorphism $ \\\\phi: K_1 \\\\to K_2 $ to \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.res_const'\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f g : R) (V hv) :\\n  (structureSheaf R).1.map (homOfLE hv).op (const R f g (PrimeSpectrum.basicOpen g) fun _ => id) = const R f g V hv\", \"doc\": \"For the structure sheaf on the prime spectrum of a commutative ring $ R $, the restriction of a constant section defined on a basic open set $ D(g) $ to any smaller open subset $ V \\\\subseteq D(g) $ yi\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.res_const\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f g : R) (U hu V hv i) : (structureSheaf R).1.map i (const R f g U hu) = const R f g V hv\", \"doc\": \"For any commutative ring $ R $, open sets $ U $ and $ V $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ with $ V \\\\subseteq U $, and elements $ f, g \\\\in R $, the restriction of the constant section \"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(f : M) (g : R) (U hu V hv i) : (tildeInModuleCat M).map i (const M f g U hu) = const M f g V hv\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|localFrobenius|IsAdicLisseSheaf",
+   "results": "{\"t\": \"2026-10-22T12:04:14Z\", \"tool\": \"grep\", \"query\": \"WeilSheaf|localFrobenius|IsAdicLisseSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern structure-sheaf modules, local cohomology, condensed objects or regular-category Frobenius; none states the classical/common-stage lisse Weil restriction and normalized local-operator assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of lisse adic local systems to a curve is exact, compatible with realization and local Frobenius powers",
+   "results": "{\"t\": \"2026-10-22T12:04:15Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of lisse adic local systems to a curve is exact, compatible with realization and local Frobenius powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"BDeRhamPlus\"], \"digest\": \"5cbeb03ebe2b3185\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern structure-sheaf modules, local cohomology, condensed objects or regular-category Frobenius; none states the classical/common-stage lisse Weil restriction and normalized local-operator assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T12:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Frobenius\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Regular.frobeniusMorphism_isPullback\"], \"digest\": \"80a0a65a191bea0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern structure-sheaf modules, local cohomology, condensed objects or regular-category Frobenius; none states the classical/common-stage lisse Weil restriction and normalized local-operator assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of lisse Weil sheaves under a closed immersion and finite constant extension preserves filtrations and local Frobenius power spectra",
+   "results": "{\"t\": \"2026-10-22T12:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image of lisse Weil sheaves under a closed immersion and finite constant extension preserves filtrations and local Frobenius power spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"localCohomology\", \"localCohomology.ofSelfLERadical\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"557cc7329b86644f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern structure-sheaf modules, local cohomology, condensed objects or regular-category Frobenius; none states the classical/common-stage lisse Weil restriction and normalized local-operator assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A classical l adic sheaf realized in the constructible heart commutes with inverse image and geometric stalk Frobenius",
+   "results": "{\"t\": \"2026-10-22T12:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"A classical l adic sheaf realized in the constructible heart commutes with inverse image and geometric stalk Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"BDeRhamPlus\", \"localCohomology.ofSelfLERadical\", \"localCohomology.isoSelfLERadical\", \"CondensedMod.ofSheafProfinite\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"776e5daf1a83cc43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern structure-sheaf modules, local cohomology, condensed objects or regular-category Frobenius; none states the classical/common-stage lisse Weil restriction and normalized local-operator assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-two-point-curve-constituent-purity",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 2: exact restriction, geometric local systems, classical/common-stage compatibility and reality under local Frobenius powers (old step 4 and step 5).",
+   "via": [
+    "lem-zl-two-point-curve-constituent-purity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-curve-restriction-filtration-spectrum",
+  "worker": "stage1",
+  "summary": "Q41 assembles the exact restricted filtration, classical/common-stage coherence and canonical residue-degree local Frobenius conjugacy from existing DAG statements. Preserves the imported statement; adds no nodes. Checks algebraic multiplicities, collisions, rank zero and empty schemes without a semisimplicity hypothesis.",
+  "blueprint": "thm-zl-real-mixed-by-curves paragraphs 1-2: constant extension preserves reality, pullback to the slicing curve is exact, and its local Frobenius is the residue-degree power. This item is the restriction subargument created through lem-zl-two-point-curve-constituent-purity.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Checks the finite-type separated hypotheses after constant and geometric field extensions; generic geometric permanence does not replace the curve route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Uses only that the closed curve inclusion is finite to check the comparison hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-separated-finite-type",
+    "why": "Checks separatedness and finite type of the closed curve over the extended field."
+   },
+   {
+    "node": "lem-zl-immersion-weil-local-behavior",
+    "why": "Uses its exact heart pullback and residue-isomorphism Frobenius comparison for the specified closed immersion, not its excision argument."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Uses the normalized classical integral-system and completed-module pullback comparison; no node of this unit supplies that foundational equivalence."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Uses normalized rational realization, ordinary pullback and composition compatibility, as a generic comparison tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-zl-immersion-weil-local-behavior",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-tw-lisse-rational-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-8c63e94d7",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-8c63e94d7 (reviewer sub-agent of L); spot-checked: I read the item and its 9 steps in full; the delivery adds no new nodes. The item's statement and stmt_deps are byte-identical to the live/side-live base, where it is still unsplit, and it has no repair note, so this is not a re-split. I read each cited statement and found no cycle (BFS over 17,885 nodes). Step 1: the permanence nodes (base change, closed immersion finite, finite after separated finite-type) supply the Noetherian separated finite-type hypotheses. Step 2: filtration-heart-transport gives the exact heart sequences at a common finite stage. Step 3: constant-extension (a) and immersion part 1 (valid over any F_q, hence over k_m) are both exact, so R_m is exact. Steps 4-5: diagram-realization, completed-system and rational-realization pullback comparisons (natural, with identity and composition laws) show the terms are classically lisse with ordinary-pullback geometric sheaves. The iterate-comparison lemma covers the point transports and their regrouping over F_{q^m}. Step 6: the immersion lemma gives κ(y)≅κ(z) and b. Constant-extension (a) gives F_x^e. That lemma only says 'conjugate', but the carrier is unchanged, so the stalk identification is canonical. This gives f=e and c=ab. Steps 7-8: the power-spectrum lemma (algebraic multiplicities, no semisimplicity) and def-wf-iota-real give the spectrum and reality, including collisions. Step 9 (r=0, empty C_m) is elementary. Source checked: Weil II §1.1 p.146 says the Frobenius at z is the n-th power of the Frobenius at y when [k(z):k(y)]=n. Edge cases tested: q=2,m=2,d=2 gives f=1, not m; i and -i squared collide at -1 with multiplicity 2; Jordan block; rank zero; empty or disconnected C_m. No SGA is cited. Batch-5 check: the five flagged closures reach only general definitions (def-pod-lisse-l-adic-sheaves, def-weil-local-frobenius-trace) or generic sheaf algebra (lem-pd-sheaf-scalar-tensor-inverse-formulas). The directly cited sec-poincare-duality node lem-pod-separated-finite-type-base-change is a Mathlib permanence leaf. None of these is a step of the trace formula or of Poincare duality, so all are accepted. I accept the six declared generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CurveRestrictionFiltrationSpectrum",
+  "declaration": "WeilConjectures.zl_curve_restriction_filtration_spectrum",
+  "declarations": [
+   "WeilConjectures.zl_curve_restriction_filtration_spectrum"
+  ],
+  "file": "lean/Sheaf/Paper/CurveRestrictionFiltrationSpectrum.lean",
+  "statement": "theorem zl_curve_restriction_filtration_spectrum (iota : Ω ≃+* ℂ) : ZlCurveRestrictionFiltrationSpectrum D l hl Ω X₀ m hm C₀ h₀ iota",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84ff5a4e3",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of ad0e30c2. The Lean file is byte-identical to ad0e and the item JSON differs only in stmt_deps: the theorem lem-zl-classical-weil-filtration-heart-transport is replaced by the new existing:true def node def-zl-classical-weil-filtration-transport-data (12 data decls of ClassicalWeilFiltrationHeartTransport; lean.statement matches the ZlFiltrationTransport signature; statement (1)-(4) matches the fields and asserts no existence; 10 def-only stmt_deps, all landed; no parallel owner in side-live). Precedents for this shape: AffineBase N6 3acf, NativeOpenTensorData Q25 6398. Maths re-read: R_m = R ⋙ zlWeilPull h₀, exactness, F' pinned to c.classical, e' pinned, transports, lissity, q_z=q_x^f, multiset map (·^f), canonical stalk conjugation, reality; edge cases r=0, empty C₀, rank 0, f=1 with m=2, collisions, Jordan blocks, Ω in u+1 with ULift. Gates H5/H6/H8 OK; report sections present. Advisory: zlWeilPull (def-zl-weil-ind-sheaf-category), pointRationalNormalization (def-weil-finite-coefficient-point) and sfAdicCoefficientEmbedding (def-a1-intrinsic-adic-fibre-specification) used without direct citation; the first two owners are one hop through cited defs. No file changed, no compile; worker's deliver2 --no-push OK at e3fe0a6626e."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-78654",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T022900-L-494007",
+  "kind": "interface",
+  "note": "independent cc review: B7 CurveRestrictionFiltrationSpectrum 7865: compared the moved data (Expr hashes, sandbox vs published) with the published item module, the new sorry statements with node lem-zl-curve-restriction-filtration-spectrum and the blueprint paragraph 2, and the item node with sheaf-dag"
+ }
+}

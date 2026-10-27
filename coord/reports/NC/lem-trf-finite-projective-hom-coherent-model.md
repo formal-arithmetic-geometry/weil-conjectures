@@ -1,0 +1,63 @@
+# Stage-1 report: lem-trf-finite-projective-hom-coherent-model
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-finite-projective-hom-coherent-model.json: existing statement split into four steps; Mathlib verdict no match for the whole statement. Statement and statement dependencies retained. Earlier search records retained; six actually executed searches appended from searches.jsonl.
+- citations.json: verbatim statement excerpts for every node in every step's uses.
+- report.md: this report.
+
+No new nodes and no new Mathlib leaves. The finite-product, evaluation-injection and quotient-generators arguments are explicit steps, not additional nodes. No unit/chapter file, Lean file, repository file or launcher file was written.
+
+## Attachments
+
+None. Searching lean/WeilConjectures for the exact blueprint tag found no declaration. Concept searches found StrictlyPerfectHomQuasiIso, DerivedHomFiniteFreeModel and CoherentRingPerfectComplexCohomology, but their statements do not give every clause here: the first concerns sheaf-Hom preservation of quasi-isomorphisms, the second a finite-free derived model, and the third cohomology of finite-projective terms over a coherent ring. The target G is not required to have projective terms. Thus no exact project declaration was claimed as an attachment.
+
+## WANTED
+
+None. The sources used are present locally.
+
+## Corrections and scope
+
+The imported node had no proof. I supplied the argument without changing its statement. No statement dispute or source error was found. The mathematical source of the algebraic prerequisite is Stacks 0BZK, whose proof invokes the finite-projective-complex computation; 0A66 supplies the ordinary-Hom derived model. The ancestor is lem-trf-local-term-locality through the existing relative-duality/nearby-cycle chain, not a direct assertion of this algebra lemma in the blueprint. The existing blueprint.from provenance is retained, and split_report.blueprint explains the place in that prerequisite chain. I read the current main-20261015 local-term proof and the chapter/unit records; this algebra split does not replace any of their steps or introduce an SGA route.
+
+## Searches and reuse
+
+I searched the entire DAG by tags 0A66/0BZK, titles and statements involving finite Hom, projective Hom, Noetherian modules and subquotients, and used blueprint_refs.py ancestor and search (including "finite projective"). The useful general existing statements are lem-sc-affine-projective-complex-derived-hom and lem-weil-pbc-noetherian-submodule-finite. The alternative lem-pod-projective-hom-evaluation-model additionally treats evaluation and derived tensor, which this proof does not need. Existing finite-product and module-Hom-left-exactness nodes were read but are unnecessary: coordinate generators and direct evaluation give the required elementary arguments.
+
+For the whole item I executed leanfinder twice with different phrasings, loogle with "Module.Finite, CochainComplex", leansearch, and two grep queries through the required msearch.py command. All services answered. I read the returned hits: HomComplex is AddCommGrpCat-valued (Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:566), isKProjective_of_projective gives K-projectivity only (KProjective.lean:113), and bijective_toSmallShiftedHom_of_isKProjective gives a comparison of Hom cohomology classes with localized shifted Hom (DerivedCategory/KProjective.lean:69). None supplies the full module-valued derived comparison, finite terms, precise degree interval and finite cohomology in one specialization. The bifunctor, tensor and preservation-of-homology hits do not state those conclusions either. The literal executed queries and actual returned top results are recorded in the node; the tool's original searches.jsonl is retained.
+
+## Not duplicates
+
+No new node was created, so there are no new/existing node pairs to distinguish.
+
+## Review by NC
+
+I read the full item against literature/stacks-project/more-algebra.tex, lemma-RHom-out-of-projective (Tag 0A66), literature/stacks-project/dualizing.tex, lemma-shriek-boundedness (Tag 0BZK), and literature/stacks-project/algebra.tex, lemma-Noetherian-basic (Tag 00IK). I checked the tags in tags/tags. I also opened the public Stacks pages for 0A66 and 00IK and found the same assertions. There are no new nodes needing separate source review. I opened every cited node and read its statement, rather than relying on its title or proof. I also read every statement-dependency definition: projectivity is the ordinary module notion; the Noetherian and finite-generation definitions have exactly the hypotheses used here; the total Hom has its B-action, products and signed differential; derived internal Hom specializes to the one-point site.
+
+Step 1 uses lem-sc-affine-projective-complex-derived-hom, whose statement specifically covers a bounded-above projective source, bounded-below target, product total Hom and the specialization of def-pur-derived-internal-hom to the one-point site. E is bounded above by v and G bounded below by a, so every hypothesis is available. Its recorded Lean statement also explicitly includes invertibility of the map induced by a functorial K-injective replacement, tying representation to the canonical comparison. def-sc-module-total-hom-complex gives the exact product and sign, and def-pur-derived-internal-hom gives the K-injective target defining that comparison. No preservation-of-quasi-isomorphisms theorem is being inferred from a definition. The comparison theorem is declared as a generic off-unit tool in split_report.tool_uses; no node of this unit replaces it.
+
+Step 2 uses def-weil-finitely-generated-module to choose the generators of E and G. Evaluation is linear and injective because equality on generators implies equality on every element; the coordinate-supported generators explicitly prove the target finite. The image is an actual B-submodule of that finite module. lem-weil-pbc-noetherian-submodule-finite states precisely that such a submodule is finite when B is Noetherian. Choosing preimages of its generators and using injectivity explicitly transports the generating property back. Projectivity is not needed for this elementary finite-Hom argument and was used only in Step 1.
+
+Step 3 uses only def-sc-module-total-hom-complex and the preceding finite-generation result: factors outside [u,v] are zero, restriction/extension by zero identify the product with a finite product, and coordinate generators generate it. For t<a-v and i<=v, i+t<a; for t>b-u and i>=u, i+t>b. This checks both inequalities with the correct endpoints and proves the claimed termwise vanishing. There is no infinite-product finite-generation claim. This step is marked elementary and contains its argument in full.
+
+Step 4 uses lem-weil-pbc-noetherian-submodule-finite with M=C^t and N=ker(d_C^t), so its Noetherian and finite-module hypotheses were already established. def-pc-cochain-complex-modules gives d^2=0 and hence boundaries lie in cycles. def-weil-abstract-derived-category explicitly defines cohomology as cycles modulo boundaries. def-weil-finitely-generated-module lets the images of cycle generators generate this quotient. No claim about finiteness of arbitrary submodules over non-Noetherian rings is used.
+
+I tested zero E, zero G, the zero ring, generators of length zero, u=v and a=b, and shifts: E=B in degree v with G=B in degree a attains degree a-v; E=B in degree u with G=B in degree b attains b-u. Thus neither endpoint is inadvertently excluded. Taking B=Z and G=Z/4 in one degree checks that G need not be projective or flat; its Hom terms and cohomology are still finite as modules. The signs agree with the existing Hom definition, and the image inclusion used for cohomology follows from the complex identity, without an exactness assumption on E or G.
+
+Against delivery-errors B--E: all proof inputs are existing nodes whose statements supply the claimed facts, and citations.json contains their verbatim excerpts (C1/C4). The source tags/labels are explicit, and no new statement-only node, duplicate, clause-restatement node or Mathlib leaf was manufactured. Every step has a Boolean elementary field, proof_deps is the union of uses, and each step is under 2000 characters; the complete assembly is under 3000 characters. No hidden comparison or unproved finite-product/subquotient lemma remains. The statement is unchanged. No definition is weakened, no additional hypothesis is introduced, and no compiler or Lake/build tool was run.
+
+The first delivery dry run requested more context for the cochain-identity citation (the exact d-squared-zero excerpt was shorter than its 40-character minimum). I replaced it with the complete cochain-definition sentence; the mathematical proof is unchanged.
+
+## Repair of the landing return (2026-10-23)
+
+The return in coord/returns/NC.md names the returned head d9d1a5dc88e and says the reader approved it, but landing refused a completion recorded only in the project's side DAG. I continued the retained sandbox delivery rather than replacing it with the live unsplit import. I compared its node with the current repository node: statement, statement dependencies, source, created record, chapter/unit and blueprint provenance agree; the live node has status unsplit, no proof, no proof dependencies and no split report. The retained version supplies those missing stage-1 fields and the six searches already logged in searches.jsonl. The first repair dry run rebuilt it on the tool's current server base and passed at 050962b638e. This head was a dry run only.
+
+For this repair I re-read every current statement used in the proof and every statement dependency, including the two non-definition inputs lem-sc-affine-projective-complex-derived-hom and lem-weil-pbc-noetherian-submodule-finite. They still respectively give the one-point-site bounded-above projective/bounded-below Hom representation and finite generation of every submodule of a finite module over a Noetherian ring. All ten retained citation excerpts remain literal substrings of those current statements, and every cited node exists and is unmerged. I also re-read the current recorded Lean interfaces: def-sc-module-total-hom-complex now points to the WeilConjectures moduleHomComplex twin, while def-pur-derived-internal-hom records ordinaryModuleDerivedInternalHom as the ordinary-module presentation of the existing derived internal Hom. Their natural-language statements still give exactly the module-valued Hom and derived-Hom meanings used here; neither change adds a hypothesis to this item.
+
+I adjusted Step 1 substantively to identify the canonical map, not just its source and target: for the fixed resolution eta:G -> I(G) it sends each homogeneous component f_i to eta^(i+t) composed with f_i. The products and differential agree with the total-Hom definition, and the bounded-projective computation is precisely the comparison supplied by the cited lemma. I re-read Stacks 0A66, whose proof explicitly says this induced map is a quasi-isomorphism, as well as 0BZK and 00IK in the local sources. The existing cited lemma's current recorded Lean statement explicitly includes invertibility of this map for every functorial K-injective resolution. Steps 2--4 and their Noetherian hypotheses need no changes. The refined assembly remains below 3000 characters, and no step reaches 2000 characters.
+
+I read and reused all six logged search results rather than inventing or repeating searches for an unchanged mathematical statement. I repeated the read-only project-declaration search: no exact blueprint-tag declaration exists, and the finite-free/sheaf comparison and finite-projective coherent-ring cohomology candidates still cover only different or partial assertions. Small-case checks remain those detailed above, including zero modules/ring, one-term complexes and both attained support endpoints. No new node or statement change is needed. The current main-20261015 ancestor and unit/chapter records were re-read; the existing algebraic prerequisite route and generic tool declaration remain intact. This repair is not a byte-identical re-push: Step 1 and split_report.summary record the canonical-map clarification, and this report documents the live-DAG comparison and renewed citation review. The delivery tool performs the rebase and server checks; promotion of the side completion remains L's responsibility as the return states.
+
+## Unfinished work
+
+None in the stage-1 split. Dry run and direct push are performed using the authorized delivery tool; independent maintainer review follows delivery.

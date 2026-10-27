@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-field-extension-dimension-upper-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Tor bound for the integral reductions: step 2 of lem-sf-direct-image-tor-amplitude-noetherian, retaining the numerical bound d under field extension",
+   "via": [
+    "lem-sf-direct-image-tor-amplitude-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Field extension does not increase the dimension of a locally finite type scheme",
+ "statement": "Let $k,K$ be fields and let $s:\\operatorname{Spec}K\\to\\operatorname{Spec}k$ specify a field extension [def-pc-field-extension, def-weil-affine-spectrum]. Let $X$ be a scheme [def-pc-scheme] and $a:X\\to\\operatorname{Spec}k$ be locally of finite type [def-weil-finite-type-morphism]. Then the fibre product [def-pc-fibre-product] satisfies $\\dim(X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K)\\le\\dim X$, where dimension is topological Krull dimension with empty-space value $-\\infty$ [def-kun-topological-krull-dimension]. No quasi-compactness or nonemptiness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P3, lemma-dimension-preserved-field-extension, globalized by affine opens; existing proof: lean/WeilConjectures/AlgebraicGeometry/FieldBaseChangeDimension.lean, topologicalKrullDim_pullback_le_of_field, lines 61-79"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open U = Spec A of X, local finite type of a makes A a finite type k-algebra. The pullback of U to Spec K is Spec(A tensor_k K). The affine field-extension dimension theorem, with the symmetry of the tensor factors, gives dim(U_K) = dim(U). This includes A = 0 and the empty affine open.",
+   "uses": [
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "def-weil-finite-type-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension, globalized by affine opens; existing proof: lean/WeilConjectures/AlgebraicGeometry/FieldBaseChangeDimension.lean, topologicalKrullDim_pullback_le_of_field, lines 61-79"
+   }
+  },
+  {
+   "text": "The pullbacks of all affine opens of X form an open cover of X_K. Every such open has dimension dim(U) <= dim(X), by the preceding step and monotonicity for an open subspace. Apply the dimension bound for an open cover to conclude dim(X_K) <= dim(X). If X_K is empty, the same argument gives bottom <= dim(X); no nonemptiness or quasi-compactness is used. This is the complete argument of the existing topologicalKrullDim_pullback_le_of_field proof, so no new Lean statement is introduced.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension, globalized by affine opens; existing proof: lean/WeilConjectures/AlgebraicGeometry/FieldBaseChangeDimension.lean, topologicalKrullDim_pullback_le_of_field, lines 61-79"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P3, lemma-dimension-preserved-field-extension, globalized by affine opens; existing proof: lean/WeilConjectures/AlgebraicGeometry/FieldBaseChangeDimension.lean, topologicalKrullDim_pullback_le_of_field, lines 61-79"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a finite type scheme does not increase under base change to a field",
+   "results": "Finite type and smoothness base-change stability, and module rank base change; no scheme dimension inequality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The topological Krull dimension of a fibre after a field extension is at most the dimension of the source scheme",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; localization, quotient and polynomial dimension bounds; no scheme field-extension bound.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim_pullback|ringKrullDim_tensorProduct",
+   "results": "No Mathlib hits. Direct source search found the exact existing topologicalKrullDim_pullback_le_of_field declaration in WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage",
+  "date": "2026-10-23",
+  "group": "W2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_pullback_le_of_field",
+  "statement": "theorem topologicalKrullDim_pullback_le_of_field {Z : Scheme.{u}} {k K : Type u} [Field k]\n    [Field K] (p : Z ⟶ Spec (.of k)) [LocallyOfFiniteType p] (q : Spec (.of K) ⟶ Spec (.of k)) :\n    topologicalKrullDim (pullback p q : Scheme.{u}) ≤ topologicalKrullDim Z",
+  "branch": "slopmaster2",
+  "by": "W2",
+  "date": "2026-10-23"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage",
+  "worker": "stage3",
+  "summary": "Attach the existing proved source theorem; no Lean declaration, module or sorry is added. Searches found no exact Mathlib theorem or existing blueprint node. The statement and edge cases were checked against the source proof.",
+  "blueprint": "Global dimension input for the Noetherian integral-stage direct-image Tor bound.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Generic affine field-extension dimension comparison used to explain the already proved source theorem; no integral proper-base-change unit step is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261023T135718-L-2962683",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261023T135718-L-2962683",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

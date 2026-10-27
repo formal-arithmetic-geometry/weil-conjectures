@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-smooth-section-pairing-continuous",
+ "kind": "statement",
+ "title": "Smooth sections give continuous test-density pairings",
+ "statement": "Let $N$ be a compact Hausdorff second-countable smooth real manifold without boundary [def-sfb-smooth-real-manifold], and $E\\to N$ a smooth finite-rank real vector bundle [def-sfb-smooth-real-vector-bundle]. Form $E^*$, $\\mathrm{Dens}_N$ and $E^*\\otimes\\mathrm{Dens}_N$ by [def-sfb-smooth-dual-bundle], [def-sfb-smooth-density-line] and [def-sfb-smooth-tensor-bundle]. Give $\\mathcal T(E)=\\Gamma_c^\\infty(E^*\\otimes\\mathrm{Dens}_N)$ the compact smooth section topology of [def-sfb-compact-smooth-section-topology]. For every $s\\in\\Gamma^\\infty(E)$ [def-sfb-smooth-bundle-sections] and every finite chart cover $\\mathcal A$ with subordinate smooth partition $\\rho$ as in [def-sfb-smooth-density-integral], the formula $L_s(\\phi)=J_{\\mathcal A,\\rho}(\\phi(s))$ defines a continuous real-linear functional on $\\mathcal T(E)$. Here $\\phi(s)$ is fibrewise contraction, sending $(\\lambda\\otimes\\eta,s(x))$ to $\\lambda(s(x))\\eta$, extended linearly.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: inherited Part I §3.A–3.B, printed pp.11–13 (page attribution inherited, not independently verified). Agent-stated real density convention, supporting continuity of the smooth-section embedding into distributions. No claim of reading this unavailable source."
+ },
+ "stmt_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-dual-bundle",
+  "def-sfb-smooth-density-line",
+  "def-sfb-smooth-tensor-bundle",
+  "def-sfb-compact-smooth-section-topology",
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-smooth-density-integral"
+ ],
+ "proof": [
+  {
+   "text": "In a chart with a smooth frame $e_a$ of $E$, write $s=\\sum_a s_a e_a$ and $\\phi=\\sum_a\\phi_a e^a\\otimes|dz|$. The contraction has coefficient $\\sum_a\\phi_a s_a$. Evaluation on the dual and the bilinearity relations of the tensor product show this is well defined fibrewise; changing frames cancels the inverse dual matrix with the vector matrix, and changing density generators multiplies it by exactly the density transition factor. The finite sum of products of smooth coefficient functions is smooth, so $\\phi(s)$ is a smooth density. Pointwise, $(a\\phi+b\\psi)(s)=a\\phi(s)+b\\psi(s)$. The linearity clause of [lem-sfb-density-integral-choice-independent] now proves that $L_s$ is real-linear for the specified $\\mathcal A,\\rho$.",
+   "uses": [
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-smooth-dual-bundle",
+    "def-sfb-smooth-tensor-bundle",
+    "def-sfb-smooth-density-line",
+    "lem-sfb-density-integral-choice-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Supporting analytic prerequisite in the inherited chain below (3); agent proof of the distributional section pairing. Demailly source requested in report; no analytic proof is claimed in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Choose smooth chart neighbourhoods on which $E$ has a smooth frame, by intersecting a manifold chart with a bundle trivializing neighbourhood and restricting both. They cover $N$; compactness supplies a finite subcover $(y_j:W_j\\to V_j)_{j\\in H}$ with frames $e_j$. Apply [lem-sfb-smooth-subordinate-partition] with the closed set $N$ and this finite cover to obtain $0\\leq\\theta_j\\leq1$, $\\sum_j\\theta_j=1$ and $\\operatorname{supp}\\theta_j\\subseteq W_j$. Its hypotheses hold: $N$ is Hausdorff, smooth, finite-dimensional, and compact implies sigma-compact (the countable compact cover may be constant $N$). Put $K_j=y_j(\\operatorname{supp}\\theta_j)\\subseteq V_j$. The support is closed in compact $N$, hence compact: an open cover of it extends to one of $N$ by adding its complement. Its continuous chart image is compact: pull an open cover back and take a finite subcover. Thus each $K_j$ is compact; empty supports may be retained.",
+   "uses": [
+    "def-sfb-smooth-real-manifold",
+    "def-sfb-smooth-real-vector-bundle",
+    "lem-sfb-smooth-subordinate-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Supporting analytic prerequisite in the inherited chain below (3); agent proof of the distributional section pairing. Demailly source requested in report; no analytic proof is claimed in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "Let $s_j:V_j\\to\\mathbf R^q$ and $\\phi_j:V_j\\to\\mathbf R^q$ be the coefficients in $e_j$ and $e_j^*\\otimes|dy_j|$, respectively. Extend $s_j$ arbitrarily, for example by zero, outside $V_j$; it remains continuous on $K_j$. By [lem-sfb-compact-continuous-norm-bound], choose $B_j\\geq0$ with $\\|s_j(z)\\|\\leq B_j$ on $K_j$ (replace a returned bound by its maximum with zero). By [def-sfb-compact-smooth-section-topology], $p_j(\\phi)=\\sup_{K_j}\\|\\phi_j\\|$ is one of the generating order-zero seminorms. For $z\\in K_j$, the elementary inequalities $|v_a|\\leq\\|v\\|$ and $|\\sum_a t_a|\\leq\\sum_a|t_a|$ give $|\\sum_{a=1}^q\\phi_{j,a}(z)s_{j,a}(z)|\\leq qB_jp_j(\\phi)$. The sum is zero if $q=0$, and the empty-supremum convention handles $K_j=\\varnothing$.",
+   "uses": [
+    "def-sfb-smooth-bundle-sections",
+    "def-sfb-smooth-dual-bundle",
+    "def-sfb-smooth-density-line",
+    "def-sfb-smooth-tensor-bundle",
+    "def-sfb-compact-smooth-section-topology",
+    "lem-sfb-compact-continuous-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Supporting analytic prerequisite in the inherited chain below (3); agent proof of the distributional section pairing. Demailly source requested in report; no analytic proof is claimed in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "For the chart cover $\\mathcal B=(y_j)$ and partition $\\theta$, the definition of $J_{\\mathcal B,\\theta}$ makes its $j$th integrand $h_j$ the zero extension of $(\\theta_j\\circ y_j^{-1})\\sum_a\\phi_{j,a}s_{j,a}$. It vanishes outside $K_j$ and satisfies $|h_j|\\leq qB_jp_j(\\phi)$ on $K_j$. Euclidean Lebesgue measure is finite on compact sets, so [lem-sfb-real-compact-supported-integral-bound] gives $|\\int h_j|\\leq C_jp_j(\\phi)$, where $C_j=qB_j\\operatorname{vol}(K_j)\\geq0$ is finite and independent of $\\phi$. Sum the finite inequalities and apply the choice-independence clause of [lem-sfb-density-integral-choice-independent] to the smooth density $\\phi(s)$: $$|L_s(\\phi)|=|J_{\\mathcal B,\\theta}(\\phi(s))|\\leq\\sum_{j\\in H}C_jp_j(\\phi).$$ Both chart families and partitions meet that lemma's hypotheses; this is why the originally specified charts need not trivialize $E$.",
+   "uses": [
+    "def-sfb-smooth-density-integral",
+    "lem-sfb-real-compact-supported-integral-bound",
+    "lem-sfb-density-integral-choice-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Supporting analytic prerequisite in the inherited chain below (3); agent proof of the distributional section pairing. Demailly source requested in report; no analytic proof is claimed in this blueprint paragraph."
+   }
+  },
+  {
+   "text": "For $\\epsilon>0$ put $\\delta=\\epsilon/(1+\\sum_j C_j)>0$. The finite intersection $U=\\bigcap_j\\{\\phi:p_j(\\phi)<\\delta\\}$ is a zero neighbourhood by [def-sfb-compact-smooth-section-topology]. For $\\phi\\in U$ the preceding bound gives $|L_s(\\phi)|\\leq\\delta\\sum_j C_j<\\epsilon$. At any $\\phi_0$, the translate $\\phi_0+U$ is a neighbourhood, and real-linearity gives $|L_s(\\phi_0+\\phi)-L_s(\\phi_0)|=|L_s(\\phi)|<\\epsilon$. This proves continuity directly. If $H$ is empty the estimate is zero and $U$ is the entire test space. For $N=\\varnothing$ the original integral is the empty zero sum; $q=0$ also gives the zero functional. When $m=0$, the same argument uses finite-dimensional Euclidean space $\\mathbf R^0$ and its usual Lebesgue measure; neither cited analytic bound requires positive dimension.",
+   "uses": [
+    "def-sfb-compact-smooth-section-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Supporting analytic prerequisite in the inherited chain below (3); agent proof of the distributional section pairing. Demailly source requested in report; no analytic proof is claimed in this blueprint paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-smooth-dual-bundle",
+  "def-sfb-smooth-tensor-bundle",
+  "def-sfb-smooth-density-line",
+  "lem-sfb-density-integral-choice-independent",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "lem-sfb-smooth-subordinate-partition",
+  "def-sfb-compact-smooth-section-topology",
+  "lem-sfb-compact-continuous-norm-bound",
+  "def-sfb-smooth-density-integral",
+  "lem-sfb-real-compact-supported-integral-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Supporting analytic prerequisite in the inherited chain below (3); agent proof of the distributional section pairing. Demailly source requested in report; no analytic proof is claimed in this blueprint paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pairing a smooth vector bundle section with a smooth compactly supported dual density is a continuous linear functional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContDiffMapSupportedIn.structureMapCLM\", \"module\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn\", \"type\": \"(𝕜 : Type u_1) →\\n  {E : Type u_2} →\\n    {F : Type u_3} →\\n      [inst : NontriviallyNormedField 𝕜] →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace ℝ E] →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace ℝ F] →\\n                [inst_5 : Norm\", \"doc\": \"For a given natural number $i$, this is a continuous linear map from the space $\\\\mathcal{D}^n_K(E, F)$ of $C^n$-differentiable maps with compact support in $K \\\\subseteq E$ to the space of bounded cont\"}\n  {\"name\": \"TestFunction.mkCLM_apply\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"∀ (𝕜 : Type u_1) [inst : NontriviallyNormedField 𝕜] {E : Type u_3} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [inst_3 : NormedAddCommGroup F]\\n  [inst_4 : NormedSpace ℝ F] [inst_5 : NormedSpace 𝕜 F] {n : ℕ∞} {V : Type u_6} [inst_6 : AddC\", \"doc\": \"Given a non-trivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, a locally convex topological vector space $V$ over $\\\\mathbb{R}$, and compatibility conditions betwe\"}\n  {\"name\": \"TestFunction.mkCLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"(𝕜 : Type u_1) →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a function from the space $\\\\mathcal{D}^n(\\\\Omega, F)$ of $C^n$-smooth test functions with compact support in an open subset $\\\\Omega \\\\subseteq E$ to a module $V$, which is additive, respects scala\"}\n  {\"name\": \"TestFunction.ofSupportedInCLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"(𝕜 : Type u_1) →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a compact subset $ K $ contained in an open subset $ \\\\Omega \\\\subseteq E $, this continuous linear map embeds the space $ \\\\mathcal{D}^n_K(E, F) $ of $ C^n $-smooth test functions with support in \"}\n  {\"name\": \"TestFunction.postcompCLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a continuous linear map $ T : F \\\\to F' $, this defines the continuous linear operator $ \\\\Phi $ that maps a test function $ f \\\\in \\\\mathcal{D}^n(\\\\Omega, F) $ to the composition $ T \\\\circ f \\\\in \\\\ma\"}\n  {\"name\": \"TestFunction.toBoundedContinuousFunctionCLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"(𝕜 : Type u_1) →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"A continuous linear map from the space $\\\\mathcal{D}^n(\\\\Omega, F)$ of test functions with regularity $n$ on an open subset $\\\\Omega$ of a normed space $E$ to the space of bounded continuous functions $E\"}\n  {\"name\": \"ContDiffMapSupportedIn.postcompCLM\", \"module\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn\", \"type\": \"{𝕜 : Type u_1} →\\n  {E : Type u_2} →\\n    {F : Type u_3} →\\n      {F' : Type u_4} →\\n        [inst : NontriviallyNormedField 𝕜] →\\n          [inst_1 : NormedAddCommGroup E] →\\n            [inst_2 : NormedSpace ℝ E] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : NormedSpace ℝ F\", \"doc\": \"Given normed vector spaces $E$, $F$, $F'$ over $\\\\mathbb{R}$ and a compact subset $K \\\\subseteq E$, this defines the continuous linear map that sends a $C^n$-differentiable function $f : E \\\\to F$ (suppo\"}\n  {\"name\": \"Distribution.mapCLM\", \"module\": \"Mathlib/Analysis/Distribution/Distribution\", \"type\": \"{E : Type u_1} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : NormedSpace ℝ E] →\\n      {Ω : TopologicalSpace.Opens E} →\\n        {F : Type u_2} →\\n          [inst_2 : AddCommGroup F] →\\n            [inst_3 : Module ℝ F] →\\n              [inst_4 : TopologicalSpace F] →\\n                {F' : Type u_3} \", \"doc\": \"Given a continuous linear map $ A : F \\to F' $ between topological real vector spaces, this constructs a continuous linear map between the spaces of distributions $ \\\\mathcal{D}'^n(\\\\Omega, F) $ and $ \\\\m\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution.ofFun treats a function on an open normed vector space with a specified measure. It does not give continuity of the manifold bundle-density pairing with the compact section topology; local integralAgainstBilin maps likewise need the global gluing argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth section defines a distribution by integrating its contraction with dual bundle test densities",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContMDiffSection.ctorIdx\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  {inst : NontriviallyNormedField 𝕜} →\\n    {E : Type u_2} →\\n      {inst_1 : NormedAddCommGroup E} →\\n        {inst_2 : NormedSpace 𝕜 E} →\\n          {H : Type u_3} →\\n            {inst_3 : TopologicalSpace H} →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_4}\", \"doc\": \"The constructor index for the type representing smooth sections of a vector bundle over a manifold with corners, parameterized by a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and\"}\n  {\"name\": \"ContMDiffSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              ModelWithCorners 𝕜 E H →\\n                {M : Type u_4} →\\n   \", \"doc\": \"A type representing smooth sections of a vector bundle over a manifold with corners, parameterized by a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{K}$, a mo\"}\n  {\"name\": \"ContMDiffSection.ext_iff\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {F : Type u_5} [inst_6 \", \"doc\": \"For any nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{K}$, model with corners $I: H \\\\to E$, charted space $M$ modeled on $H$, fiber bundle $V$ over $M$ with fi\"}\n  {\"name\": \"smoothSheaf.contMDiff_section\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"{U : (Opens (TopCat.of M))ᵒᵖ} (f : (smoothSheaf IM I M N).presheaf.obj U) : ContMDiff IM I ∞ f\", \"doc\": \"Every section of the smooth sheaf $\\\\mathcal{F}$ on a manifold with corners $M$ is a $C^\\\\infty$-differentiable function. Specifically, for any open subset $U \\\\subseteq M$ and any section $f \\\\in \\\\mathca\"}\n  {\"name\": \"ContMDiffSection.toFun\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_4}\", \"doc\": \"The function associated to a $C^k$-smooth section of a vector bundle over a manifold with corners, mapping each point $x$ in the manifold $M$ to an element of the fiber $V_x$ of the bundle. This funct\"}\n  {\"name\": \"ContMDiffSection.ext\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"(h : ∀ x, s x = t x) : s = t\", \"doc\": \"If two smooth sections $ s $ and $ t $ of a vector bundle over a manifold with corners agree at every point $ x $, then $ s = t $.\"}\n  {\"name\": \"ContMDiffSection.mk\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_4}\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{K}$, a model with corners $I : H \\\\to E$, a charted space $M$ modeled on $H$, and a fiber bundle $V$ over \"}\n  {\"name\": \"ContMDiffSection.coe_injective\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \": Injective ((↑) : Cₛ^n⟮I; F, V⟯ → ∀ x, V x)\", \"doc\": \"The canonical map from $ C^k $-smooth sections of a vector bundle over a manifold with corners to the space of functions assigning each point to an element of the corresponding fiber is injective.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution.ofFun treats a function on an open normed vector space with a specified measure. It does not give continuity of the manifold bundle-density pairing with the compact section topology; local integralAgainstBilin maps likewise need the global gluing argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Distribution.ofFun",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"Distribution.ofFun\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] (Ω : TopologicalSpace.Opens E) [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] (f : E → F) (μ : MeasureTheory.Measure E := by volume_tac) (n : ℕ∞) : Distribution Ω F n\", \"doc\": \"The distribution induced by a function `f : E → F` and a measure `μ`,\\nsending a test function `φ` to `∫ x, φ x • f x ∂μ`. This is the zero map if `f` is not locally\\nintegrable on `Ω`.\"}\n  {\"name\": \"Distribution.ofFun_dirac_eq_delta\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] (x : E) : Distribution.ofFun Ω 1 (MeasureTheory.Measure.dirac x) n = Distribution.delta x\", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_congr_ae\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f f' : E → F} {μ : MeasureTheory.Measure E} (h : f =ᵐ[μ.restrict ↑Ω] f') : Distribution.ofFun Ω f μ n\", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_injective\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] [BorelSpace E] [FiniteDimensional ℝ E] [CompleteSpace F] {f f' : E → F} {μ : MeasureTheory.Measure E} \", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_neg\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} {μ : MeasureTheory.Measure E} : Distribution.ofFun Ω (-f) μ n = -Distribution.ofFun Ω f μ \", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_zero\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {μ : MeasureTheory.Measure E} : Distribution.ofFun Ω 0 μ n = 0\", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_apply\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} {μ : MeasureTheory.Measure E} (hf : MeasureTheory.LocallyIntegrableOn f (↑Ω) μ) {φ : TestF\", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_eq_zero\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} {μ : MeasureTheory.Measure E} (hf : ¬MeasureTheory.LocallyIntegrableOn f (↑Ω) μ) : Distrib\", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_apply_eq_ite\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} {μ : MeasureTheory.Measure E} {φ : TestFunction Ω ℝ n} : (Distribution.ofFun Ω f μ n) φ = \", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_smul\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f : E → F} {μ : MeasureTheory.Measure E} (c : ℝ) : Distribution.ofFun Ω (c • f) μ n = c • Distributio\", \"doc\": \"\"}\n  {\"name\": \"Distribution.ofFun_add\", \"module\": \"Mathlib.Analysis.Distribution.Distribution\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {n : ℕ∞} [MeasurableSpace E] [OpensMeasurableSpace E] {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {f g : E → F} {μ : MeasureTheory.Measure E} (hf : MeasureTheory.LocallyIntegrableOn f (↑Ω) μ) (hg : Me\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution.ofFun treats a function on an open normed vector space with a specified measure. It does not give continuity of the manifold bundle-density pairing with the compact section topology; local integralAgainstBilin maps likewise need the global gluing argument."
+  },
+  {
+   "tool": "grep",
+   "query": "ofFun|ContMDiffSection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution.ofFun treats a function on an open normed vector space with a specified measure. It does not give continuity of the manifold bundle-density pairing with the compact section topology; local integralAgainstBilin maps likewise need the global gluing argument."
+  },
+  {
+   "tool": "grep",
+   "query": "ofFun|integral.*smul",
+   "results": "{\"t\": \"2026-10-24T04:19:15Z\", \"tool\": \"grep\", \"query\": \"ofFun|integral.*smul\", \"sub\": \"Analysis/Distribution/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/TemperedDistribution.lean\", \"Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean\"], \"digest\": \"95f115f8667c88ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution.ofFun treats a function on an open normed vector space with a specified measure. It does not give continuity of the manifold bundle-density pairing with the compact section topology; local integralAgainstBilin maps likewise need the global gluing argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth section defines a continuous linear functional on compact manifold dual bundle test densities by integration",
+   "results": "{\"t\": \"2026-10-24T04:48:01Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth section defines a continuous linear functional on compact manifold dual bundle test densities by integration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TestFunction.mkCLM_apply\", \"ContDiffMapSupportedIn.structureMapCLM\", \"TestFunction.mkCLM\", \"TestFunction.ofSupportedInCLM\", \"TestFunction.postcompCLM\", \"TestFunction.toBoundedContinuousFunctionCLM\", \"TestFunction.ofSupportedInLM\", \"TestFunction.coe_ofSupportedInCLM\"], \"digest\": \"19ae1a045bb55dd3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these are Euclidean test-function distribution maps or fixed-support seminorm constructions, not the manifold bundle-density pairing with its stated topology. The finite trivializing cover and assembly are still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integration against a fixed smooth section on a compact manifold is bounded by finitely many order zero section seminorms",
+   "results": "{\"t\": \"2026-10-24T04:51:57Z\", \"tool\": \"leanfinder\", \"query\": \"Integration against a fixed smooth section on a compact manifold is bounded by finitely many order zero section seminorms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.norm_apply_le_seminorm\", \"ContDiffMapSupportedIn.seminorm\", \"ContDiffMapSupportedIn.supSeminorm\", \"SchwartzMap.integralCLM\", \"ContDiffMapSupportedIn.seminorm_le_iff\", \"ContDiffMapSupportedIn.seminorm_le_iff_withOrder\", \"ContDiffMapSupportedIn.seminorm_apply\", \"MeasureTheory.lintegral_pow_le_pow_lintegral_fderiv_aux\"], \"digest\": \"79c6c050ad5deb3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these are Euclidean test-function distribution maps or fixed-support seminorm constructions, not the manifold bundle-density pairing with its stated topology. The finite trivializing cover and assembly are still required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth section induces a distribution by contraction with compactly supported dual density tests and integration",
+   "results": "{\"t\": \"2026-10-24T04:49:52Z\", \"tool\": \"leansearch\", \"query\": \"A smooth section induces a distribution by contraction with compactly supported dual density tests and integration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffSection.ctorIdx\", \"ContMDiffSection\", \"smoothSheaf.contMDiff_section\", \"ContMDiffSection.mk.inj\", \"ContMDiffSection.coeFn_mk\", \"ContMDiffSection.mdifferentiable\", \"ContMDiffSection.ext\", \"ContMDiffSection.toFun\"], \"digest\": \"6856735b0faff3d2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these are Euclidean test-function distribution maps or fixed-support seminorm constructions, not the manifold bundle-density pairing with its stated topology. The finite trivializing cover and assembly are still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "Distribution.ofFun",
+   "results": "{\"t\": \"2026-10-24T04:49:52Z\", \"tool\": \"loogle\", \"query\": \"Distribution.ofFun\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Distribution.ofFun\", \"Distribution.ofFun_dirac_eq_delta\", \"Distribution.ofFun_congr_ae\", \"Distribution.ofFun_injective\", \"Distribution.ofFun_neg\", \"Distribution.ofFun_zero\", \"Distribution.ofFun_apply\", \"Distribution.ofFun_eq_zero\"], \"digest\": \"76b06608a4ed37d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these are Euclidean test-function distribution maps or fixed-support seminorm constructions, not the manifold bundle-density pairing with its stated topology. The finite trivializing cover and assembly are still required."
+  },
+  {
+   "tool": "grep",
+   "query": "ofFun|integralAgainstBilin",
+   "results": "{\"t\": \"2026-10-24T04:49:51Z\", \"tool\": \"grep\", \"query\": \"ofFun|integralAgainstBilin\", \"sub\": \"Analysis/Distribution/\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"Mathlib/Analysis/Distribution/TestFunction.lean\"], \"digest\": \"c7fc5a7d5a8a6bdd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these are Euclidean test-function distribution maps or fixed-support seminorm constructions, not the manifold bundle-density pairing with its stated topology. The finite trivializing cover and assembly are still required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-smooth-bundle-test-distributions",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: continuity of the smooth-section embedding into distributions",
+   "via": [
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-section-pairing-continuous",
+  "worker": "stage1",
+  "summary": "Proved the pairing by a finite bundle-chart cover, smooth subordinate partition, compact coefficient bounds and supported real integral bounds, with a direct seminorm neighbourhood continuity argument. Kept the statement unchanged; two generic Mathlib leaves are new. Checked arbitrary initial chart covers, empty supports, empty manifolds, rank zero and dimension zero. Demailly is unavailable locally, so the proof is explicitly agent-written.",
+  "blueprint": "The latest direct-images proof (3) is the inherited high-level route; the item serves its later analytic prerequisite concerning distributional bundle sections, through the existing created.item chain. The blueprint has no direct analytic pairing statement. ancestor prints None; retained its null anchor and inherited via chain, with explicit analytic places on both new leaves.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-b8d6227c8",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-b8d6227c8 (reviewer sub-agent of L); spot-checked: I read the item, both new leaves and every cited statement in full (manifold, bundle, dual, density line, tensor, section topology, sections, density integral, Euclidean Lebesgue integral, choice-independence, subordinate partition), plus the parent def-sfb-smooth-bundle-test-distributions. Step 1: the contraction is well defined via the tensor product. The dual frame change (inverse transpose) cancels the vector frame change, and the density factor is exact. Linearity comes from the stated per-cover linearity clause of choice-independence. Step 2: the partition lemma's hypotheses hold (Hausdorff; sigma-compact because N is compact; modelled on R^m; S=N closed), 0<=theta<=1 holds, and each K_j is compact. Step 3: e^a⊗|dy_j| gives a legitimate order-zero generating seminorm, and |Σφ_a s_a| <= q B_j p_j(φ). Step 4: h_j vanishes off K_j because y_j is a bijection onto V_j. Lebesgue measure is finite on compacts (also for m=0), and the Bochner convention matches def-sfb-euclidean-lebesgue-integral. Choice-independence moves the bound back to the given (A,ρ). Step 5: the epsilon-delta argument with finite seminorm balls is valid, including the cases H empty and ΣC_j=0. Mathlib checks: Normed/Group/Bounded.lean:96-100 IsCompact.exists_bound_of_continuousOn; Bochner/Set.lean:489-491 and :616-618; Typeclasses/Finite.lean:330-338. No measurability of K is needed, so both leaves are true as stated and are one-line specializations. The rg -L duplicate search found only complex-valued, m>=1, integrability or majorant nodes, none of which states either fact. No restated clause, no cycle, no off-unit statement, no SGA, Demailly WANTED and agent origin honest. No fixes."
+ }
+}

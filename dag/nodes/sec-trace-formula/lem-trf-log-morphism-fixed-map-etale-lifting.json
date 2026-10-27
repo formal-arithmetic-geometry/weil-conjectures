@@ -1,0 +1,270 @@
+{
+ "id": "lem-trf-log-morphism-fixed-map-etale-lifting",
+ "kind": "statement",
+ "title": "Etale local logarithmic lifts of a prescribed scheme morphism",
+ "statement": "Let $T,Z$ be locally Noetherian schemes [pqf-def-locnoeth] with log structures $(M_T,\\alpha_T)$ and $(M_Z,\\alpha_Z)$ on their small etale sites, and fix a scheme map $g:T\\to Z$. Log structures and their morphisms mean sheaves of commutative monoids over the multiplicative structure sheaf with the unit axiom, and scheme maps with compatible inverse-image monoid-sheaf maps, as in [def-trf-fs-log-blowup]; neither fineness nor saturation is required. Let $\\{q_a:T_a\\to T\\}_{a\\in A}$ be a jointly surjective etale covering [def-weil-pbc-etale-site]. Equip $T_a$ with $M_T|_{T_a}$, so $q_a$ is strict. Suppose log morphisms $G_a:(T_a,M_T|_{T_a})\\to(Z,M_Z)$ have underlying maps $gq_a$ and agree on $T_a\\times_TT_b$ [def-pc-fibre-product].\n\nThen there is a unique homomorphism $u:g^{-1}M_Z\\to M_T$ satisfying $\\alpha_Tu=g^\\sharp\\circ g^{-1}\\alpha_Z$ and restricting to $G_a^\\flat$ for every $a$. Equivalently there is a unique log morphism $G=(g,u)$ with prescribed underlying map $g$ inducing all $G_a$. Equality of two log morphisms with underlying map $g$ is detected by these restrictions.\n\nLet in addition $(S,M_S)$ be any locally Noetherian log scheme, let $t:(T,M_T)\\to(S,M_S)$ and $z:(Z,M_Z)\\to(S,M_S)$ be log morphisms, and suppose their underlying scheme maps satisfy $zg=t$. If $zG_a=tq_a$ as log morphisms for every $a$, then $zG=t$ as log morphisms; the converse also holds. Finally, if $g$ is a scheme isomorphism and every $G_a^\\flat:(gq_a)^{-1}M_Z\\to M_T|_{T_a}$ is an isomorphism of monoid sheaves, then $G$ is a log isomorphism. Its inverse has underlying map $g^{-1}$ and induces the local inverse monoid-sheaf maps on the cover $\\{gq_a:T_a\\to Z\\}$. These assertions include uniqueness of the inverse and its compatibility with $S$ whenever the relative hypotheses hold.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69 (etale log structures and morphisms); VIII 3.3.8 final descent sentence, printed pp.107--108. Explicit fixed-scheme-map lifting, base-compatibility and inverse comparison argument of returned item steps 6 and 8; this is an agent expansion of the sheaf descent invoked by the source, not a separately numbered theorem there."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Work in a common larger universe with small site skeletons as in [def-weil-size-convention]. Put $N=g^{-1}M_Z$ and $P=M_T$ on $T_{\\mathrm{et}}$. Inverse image preserves finite products and the terminal sheaf by [lem-weil-pbc-etale-inverse-image-algebraic-structures](1), so applying it to multiplication and the unit equips $N$ with its commutative monoid structure; its axioms are the images of the monoid diagrams. By [lem-weil-pbc-etale-site-localization-open], $T_{\\mathrm{et}}/T_a$ is the small etale site of $T_a$, with the same coverings. Restriction to this slice is the inverse image along $q_a$: in the inverse-image colimit of [lem-weil-pbc-etale-inverse-image-algebraic-structures], at $W\\to T_a$ the object $(W\\to T,\\,W\\to W\\times_TT_a)$ given by the graph is final in the opposite indexing category. Indeed each pair $(V\\to T,\\,W\\to V\\times_TT_a)$ determines exactly its first projection $W\\to V$, and hence its unique arrow from this graph object before taking the opposite category. The colimit is consequently $F(W\\to T)$; these values already form the restriction sheaf, so sheafification changes nothing. The composition comparison of [lem-weil-pbc-sets-etale-inverse-image-composition-units] therefore identifies $N|_{T_a}$ with $(gq_a)^{-1}M_Z$. Its associativity makes the two identifications on a double overlap coincide. Thus the given $G_a^\\flat$ are compatible maps $u_a:N|_{T_a}\\to P|_{T_a}$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00X6 (proposition-get-morphism), 03CB (lemma-composition-morphisms-sites); localization Section 00XZ (section-localize); applied to the etale structures of ILO VI 1.1."
+   }
+  },
+  {
+   "text": "Apply the morphism clause of [lem-pe-set-sheaf-cover-descent] to the underlying sheaves of sets $N,P$, with $U=T$ the final etale object and cover $\\{T_a\\to T\\}$. The overlap hypothesis is precisely the compatibility of the $u_a$ from step 1. It supplies a unique sheaf map $u:N\\to P$ restricting to every $u_a$.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, as stated in the morphism clause of lem-pe-set-sheaf-cover-descent."
+   }
+  },
+  {
+   "text": "For each etale $W\\to T$, its pullbacks $W_a=W\\times_TT_a$ form a covering. For $x,y\\in N(W)$, the sections $u(xy)$ and $u(x)u(y)$ restrict to the same section on every $W_a$, since $u_a$ is multiplicative. The equalizer axiom of [def-weil-pbc-etale-sheaf-of-sets] implies equality on $W$; the same argument with $1$ proves $u(1)=1$. Likewise $\\alpha_Tu(x)$ and $g^\\sharp(g^{-1}\\alpha_Z(x))$ agree after every restriction, since each $G_a$ is a log morphism, hence agree in $\\mathcal O_T(W)$. Thus $u$ is a monoid-sheaf homomorphism with the required structure-map equation, and $G=(g,u)$ is a log morphism by [def-trf-fs-log-blowup]. The log structures themselves are given, so no new unit-axiom verification is needed.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69; expansion using the equalizer sheaf axiom (Stacks Tag 00VM, definition-sheaf-sets)."
+   }
+  },
+  {
+   "text": "If two log morphisms over the prescribed scheme map $g$ induce the same local morphisms, their underlying maps of set sheaves $N\\to P$ are both amalgamations of the same family. The uniqueness clause of [lem-pe-set-sheaf-cover-descent] makes them equal. A log morphism consists exactly of its scheme map and its compatible monoid-sheaf map, so this proves both uniqueness of $G$ and detection of equality by restriction.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, uniqueness; ILO VI 1.1 for log morphisms."
+   }
+  },
+  {
+   "text": "Under the relative hypotheses, $zG$ and $t$ have the same scheme map $zg=t$. Their monoid maps, with the source identified using [lem-weil-pbc-sets-etale-inverse-image-composition-units], are $u\\circ g^{-1}(z^\\flat)$ and $t^\\flat:t^{-1}M_S\\to M_T$. Associativity of that comparison identifies their restrictions with $(zG_a)^\\flat$ and $(tq_a)^\\flat$. These agree by assumption, so uniqueness in [lem-pe-set-sheaf-cover-descent] makes the two global maps equal. Conversely restricting $zG=t$ gives $zG_a=tq_a$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites, and Tag 04TQ, lemma-glue-maps (uniqueness)."
+   }
+  },
+  {
+   "text": "Now suppose $g$ is a scheme isomorphism and each $u_a$ is an isomorphism. Its inverses $v_a:P|_{T_a}\\to N|_{T_a}$ agree on double overlaps: they are inverses of the same restricted map there, and an inverse is unique. Apply [lem-pe-set-sheaf-cover-descent] to obtain $v:P\\to N$. Sectionwise separatedness as in step 3 proves that $v$ preserves multiplication and $1$. The maps $vu,\\mathrm{id}_N$ have identical restrictions, as do $uv,\\mathrm{id}_P$, so the same gluing uniqueness gives $vu=\\mathrm{id}_N$ and $uv=\\mathrm{id}_P$. Composing the equation of step 3 with $v$ gives $\\alpha_T=g^\\sharp\\circ g^{-1}\\alpha_Z\\circ v$.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, applied to the inverse maps and their composite equations; Tag 00VM, definition-sheaf-sets."
+   }
+  },
+  {
+   "text": "Write $h=g^{-1}:Z\\to T$. Because $g,h$ are inverse scheme maps, composition with them gives inverse equivalences of the small etale sites: $(W\\to T)\\mapsto(W\\to T\\xrightarrow{g}Z)$ and its reverse, preserving coverings. Under these equivalences the map $v:M_T\\to g^{-1}M_Z$ is exactly a monoid-sheaf map $w:h^{-1}M_T\\to M_Z$. The structure-sheaf map $g^\\sharp$ is invertible under the same equivalence; thus the last equation of step 6 becomes $\\alpha_Zw=h^\\sharp\\circ h^{-1}\\alpha_T$. Hence $H=(h,w)$ is a log morphism by [def-trf-fs-log-blowup]. The equations $vu=1$ and $uv=1$ give $HG=1_T$ and $GH=1_Z$, respectively. On the covering $\\{gq_a:T_a\\to Z\\}$, $w$ is the transported $v_a$, exactly the stated local inverse monoid-sheaf map. Any two inverses agree since $H=H(GH\\prime)=(HG)H\\prime=H\\prime$. Finally, if $zG=t$, then $tH=zGH=z$, so the inverse is also over $S$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1; VIII 3.3.8 final descent sentence, printed pp.107--108; explicit inverse comparison under an isomorphism of etale sites."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-pe-set-sheaf-cover-descent",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1 and VIII 3.3.8 final descent sentence; explicit assembly from Stacks 04TQ, using the existing set-sheaf gluing theorem and etale composition comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fixed scheme morphism lifts uniquely to a logarithmic morphism if lifts exist on an etale cover; compatibility with a log base and inverses can be checked locally",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism property asserting that for any valuative commutative square involving the morphism $ f : X \\to Y $, the lifting data in the square is uniquely determined (i.e., the type of liftings is a su\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence if, for every valuative commutative square involving $ f $, there exists a morphism $ X \\to B $ making the diagram c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion if, for every valuative commutative square involving $ f $, there exists a unique morphism (lift) that makes the diagram commute.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.iff\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f ↔\\n    AlgebraicGeometry.ValuativeCriterion.Existence f ∧ AlgebraicGeometry.ValuativeCriterion.Uniqueness f\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion if and only if it satisfies both the existence and uniqueness conditions. Specifically, for every valuative commutative square i\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"hom_ext\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.hom_ext\", \"module\": \"Mathlib.CategoryTheory.Limits.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} [∀ (P : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))), F.op.HasLeftKanExtension P] {Φ : CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.LeftExtension (F.comp Categ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.hom_ext_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} [∀ (P : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))), F.op.HasLeftKanExtension P] {Φ : CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.LeftExtension (F.comp Categ\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} (h : ∀ (X : Cᵒᵖ), f.app X = g.app X) : f = g\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} : f = g ↔ ∀ (X : Cᵒᵖ), f.app X = g.app X\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.free_hom_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {F : CategoryTheory.Functor Cᵒᵖ (Type u)} {G : PresheafOfModules R} {ψ ψ' : PresheafOfModules.freeObj F ⟶ G} (h : CategoryTheory.CategoryStruct.comp (PresheafOfModules.freeAdjunctionUnit R F) (CategoryTheory\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presieve.IsSheafFor.hom_ext\", \"module\": \"Mathlib.CategoryTheory.Sites.IsSheafFor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} {S : CategoryTheory.Sieve X} {P : CategoryTheory.Functor Cᵒᵖ (Type v₁)} (h : CategoryTheory.Presieve.IsSheafFor P S.arrows) (t₁ t₂ : CategoryTheory.yoneda.obj X ⟶ P) (ht : CategoryTheory.CategoryStruct.comp S.functorInclusion t₁ = CategoryT\", \"doc\": \"If `P` is a sheaf for the sieve `S` on `X`, then if two natural transformations from `yoneda.obj X`\\nto `P` agree when restricted to the subfunctor given by `S`, they are equal.\"}\n  {\"name\": \"CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] {J : CategoryTheory.GrothendieckTopology C} {P : CategoryTheory.Functor Cᵒᵖ A} (hP : CategoryTheory.Presheaf.IsSheaf J P) {I : Type u_1} {S : C} {X : I → C} (f : (i : I) → X i ⟶ S) (hf : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.IsSheaf.hom_ext\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] {E : A} {X : C} {P : CategoryTheory.Functor Cᵒᵖ A} (hP : CategoryTheory.Presheaf.IsSheaf J P) (S : J.Cover X) (e₁ e₂ : E ⟶ P.obj (Opposite.op X)) (h : ∀ \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.hom_ext\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] {F G : CategoryTheory.Sheaf J A} {f g : F ⟶ G} (h : f.hom = g.hom) : f = g\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.hom_ext_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] {F G : CategoryTheory.Sheaf J A} {f g : F ⟶ G} : f = g ↔ f.hom = g.hom\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.sheafify_hom_ext\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w} [CategoryTheory.Category.{w', w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColim\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.sheafify_hom_ext\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.HasWeakSheafify J D] {P Q : CategoryTheory.Functor Cᵒᵖ D} (η γ : CategoryTheory.sheafify J P ⟶ Q) (hQ : CategoryTheory.Presheaf.IsShea\", \"doc\": \"\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogMorphism|LogScheme|FineLog|logStructure",
+   "results": "[grep] OK 0 hit(s)\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local monoid sheaf maps over the pullback of a scheme morphism glue uniquely preserving the log base and inverse equations",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: \n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue homomorphisms of monoid sheaves from the inverse image of a target log structure, with equality over a base and inverse morphisms checked on an etale cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)}\\n  (s : (j : D.J) → F.val.obj (Opposite.op (D.U j)))\\n  (h :\\n    ∀ (i j : D.J),\\n      F.val.map (D.f i j).op (s i) = F.val.map (CategoryTheory.CategoryStruct.comp (D.f j i).op (D.t i \", \"doc\": \"For a sheaf $ F $ on the Zariski topology and gluing data $ D $ for schemes, given compatible sections $ s_j $ over the indexing category $ J $ satisfying the sheaf condition, the constructed global s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j : ι),\\n  (AlgebraicGeometry.Scheme.LocalRe\", \"doc\": \"Given a sheaf $ F $ on the category of schemes with the Zariski topology, and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $ in the presheaf category, the transpose morphism $ t_{i,j} : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) {U : AlgebraicGeometry.Scheme} {i j : ι}\\n  (a \", \"doc\": \"For schemes $X_i,X_j$ in a gluing data and a scheme $U$, if morphisms $a:U\\\\to X_i$ and $b:U\\\\to X_j$ satisfy $\\\\text{Yoneda}(a)\\\\circ f_i = \\\\text{Yoneda}(b)\\\\circ f_j$ in the presheaf category, then their\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j : ι),\\n  (AlgebraicGeometry.Scheme.LocalRe\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology, if each morphism $ f_i : \\\\text{Hom}(-, X_i) \\\\to F $ in a family is an open immersion in the presheaf category, then each $ f_i $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)} →\\n    (s : (j : D.J) → F.val.obj (Opposite.op (D.U j))) →\\n      (∀ (i j : D.J),\\n          F.val.map (D.f i j).op (s i) =\\n            F.val.map (CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given gluing data $ D $ for schemes and a sheaf $ F $ on the Zariski topology with values in a category of types, this constructs the value of $ F $ at the glued scheme $ D.\\text{glued} $ by applying t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j k : ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) {V U : AlgebraicGeometry.Scheme} (γ : V ⟶ U)\\n \", \"doc\": \"For schemes $V$ and $U$, a morphism $\\\\gamma: V \\\\to U$, and a morphism $\\\\alpha: U \\\\to X$ to a glued scheme $X$ constructed via Zariski gluing data, the Yoneda morphism $\\\\eta: h^X \\\\to F$ satisfies the n\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_toGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) {i : ι},\\n  (AlgebraicGeometry.Scheme.LocalRepr\", \"doc\": \"For each index $i$, applying the Yoneda morphism from the glued scheme to the sheaf $F$ to the inclusion morphism $X_i \\to \\text{glued}$ results in the element of $F(X_i)$ obtained via the Yoneda equiva\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "[loogle] OK 0 hit(s)\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic|log.morphism|log.scheme",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"26\", \"text\": \"where `K` is a field with a height and `h` denotes the (logarithmic) naïve height on `E(K)`.\"}\nRead all hits: etale scheme properties, Zariski scheme/sheaf gluing, or generic sheaf hom extensionality do not construct logarithmic lifts or a fine log enhancement over a fixed base. The logarithmic-height grep hit is unrelated.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic morphisms over a fixed scheme map glue uniquely from compatible maps of monoid sheaves on an etale covering",
+   "results": "{\"t\": \"2026-10-23T09:26:18Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic morphisms over a fixed scheme map glue uniquely from compatible maps of monoid sheaves on an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj\", \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\"], \"digest\": \"a8799988cafa2923\"}; Read returned hits: Zariski scheme gluing, topology-specific section gluing, generic sheaf extensionality, etale morphism properties and abstract descent-data equivalences do not state fixed-map logarithmic descent, its relative equation and its inverse clause. No logarithmic structure declarations found by grep.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogMorphism|LogScheme|EtaleLogHom|logStructure",
+   "results": "{\"t\": \"2026-10-23T09:27:14Z\", \"tool\": \"grep\", \"query\": \"LogMorphism|LogScheme|EtaleLogHom|logStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: Zariski scheme gluing, topology-specific section gluing, generic sheaf extensionality, etale morphism properties and abstract descent-data equivalences do not state fixed-map logarithmic descent, its relative equation and its inverse clause. No logarithmic structure declarations found by grep.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible homomorphisms of logarithmic structures over a fixed scheme morphism descend along an etale cover",
+   "results": "{\"t\": \"2026-10-23T09:27:14Z\", \"tool\": \"leansearch\", \"query\": \"Compatible homomorphisms of logarithmic structures over a fixed scheme morphism descend along an etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"dd859d843c270318\"}; Read returned hits: Zariski scheme gluing, topology-specific section gluing, generic sheaf extensionality, etale morphism properties and abstract descent-data equivalences do not state fixed-map logarithmic descent, its relative equation and its inverse clause. No logarithmic structure declarations found by grep.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"hom_ext\"",
+   "results": "{\"t\": \"2026-10-23T09:27:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"hom_ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.hom_ext\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.hom_ext_iff\", \"PresheafOfModules.hom_ext\", \"PresheafOfModules.hom_ext_iff\", \"PresheafOfModules.free_hom_ext\", \"CategoryTheory.Presieve.IsSheafFor.hom_ext\", \"CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows\", \"CategoryTheory.Presheaf.IsSheaf.hom_ext\"], \"digest\": \"9fc603ce708269b1\"}; Read returned hits: Zariski scheme gluing, topology-specific section gluing, generic sheaf extensionality, etale morphism properties and abstract descent-data equivalences do not state fixed-map logarithmic descent, its relative equation and its inverse clause. No logarithmic structure declarations found by grep.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing morphisms of sheaves of commutative monoids over an etale covering and checking structure map equations locally",
+   "results": "{\"t\": \"2026-10-23T09:27:25Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing morphisms of sheaves of commutative monoids over an etale covering and checking structure map equations locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"CategoryTheory.Presieve.IsSheafFor.valid_glue\"], \"digest\": \"8f0f0739a390371e\"}; Read returned hits: Zariski scheme gluing, topology-specific section gluing, generic sheaf extensionality, etale morphism properties and abstract descent-data equivalences do not state fixed-map logarithmic descent, its relative equation and its inverse clause. No logarithmic structure declarations found by grep.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-fine-log-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration reduction via log regular modifications. ILO VIII 3.3.8 final descent sentence: after the underlying scheme map has descended, glue its logarithmic lift, verify the base equation, and descend inverse log comparisons (returned item steps 6 and 8).",
+   "via": [
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-morphism-fixed-map-etale-lifting",
+  "worker": "stage1",
+  "summary": "Retained the entire fixed-map, relative and inverse statement. Gave seven explicit steps: inverse-image/slice identifications, set-sheaf map gluing, monoid and structure equations, equality detection, the relative equation, inverse sheaf gluing, and inverse logarithmic transport. Reused existing general sheaf and etale-site nodes; no new nodes. All citations were checked against their statements; no SGA route.",
+  "blueprint": "Serves the existing ancestry from lem-trf-local-term-locality Proof (1)--(2), through the log-blowup descent branch, specifically the ILO VIII 3.3.8 final descent sentence and returned parent steps 6 and 8 named in blueprint.from.place. The latest ancestor now states the contracting-correspondence route; this delivery only supplies the already-assigned supporting sheaf-descent lemma and does not alter that ancestor or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Finite-limit preservation supplies the inverse-image commutative monoid structure; the trace-formula unit has no such general site result."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Its equivalence of sites identifies the etale cover with localization; this is a generic sheaf tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Its set-sheaf composition and associativity clauses identify restrictions of logarithmic maps and their base equations; abelian-only comparisons would not suffice."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Its morphism clause supplies unique descent of maps between fixed underlying set sheaves; no log geometry or trace-formula theorem is imported from that unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-b3b29a2b8",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b3b29a2b8 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery has 7 steps, no new nodes and no repair note, so it is a first split. The statement and stmt_deps are unchanged, and proof_deps equals the union of the step uses. Source: ILO VIII 3.3.8, final descent sentence (PDF p.113), checked; Stacks 04TQ is sites-lemma-glue-maps, checked. Step 1: I checked the colimit argument; the graph pair is initial in the pairs category, so restriction to T_a is q_a^{-1}. Finite-limit clause (1) gives N its monoid structure, and the composition comparison with associativity gives overlap compatibility (c respects monoids by naturality, left implicit but elementary). Step 2 uses the morphism clause of lem-pe-set-sheaf-cover-descent with the size convention. Steps 3-6 use only the equalizer axiom and gluing uniqueness. Step 7 writes out the inverse through the site equivalence given by the isomorphism g: HG=1, GH=1, local inverses, uniqueness of the inverse and tH=z, so the word 'transport' is backed by written equations. Edge cases tested: identity cover, repeated members, empty A, trivial log structures, non-fine structures. The citer polarized-fine-log-etale-descent uses exactly the clauses provided. No duplicate found. The four generic tool_uses are accepted. No SGA source. Advisory: the latest blueprint ancestor follows the contracting-correspondence route while the item keeps the inherited log-blowup ancestry; this is for the maintainer only."
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-admissible-bounded-constructible-triangulated",
+ "kind": "statement",
+ "title": "Triangulated bounded constructibility for admissible coefficients",
+ "statement": "Let l be prime and k a field of positive characteristic p different from l. Let X be separated of finite type over k and let Λ be an admissible commutative condensed coefficient ring [sk-def-localizing-closure]. In the ordinary derived category of internal modules over Λ_X [sk-def-sfb-derived-tensor-hom], the property of bounded cohomology with finite constant scalar constructible models [sk-def-sfb-constructible] is triangulated: it contains zero, is stable under all integer shifts, and is closed under extensions in distinguished triangles.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Step 2; zero, shifts and extensions before the final devissage"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "First replace the Type-0 finite discrete coefficient A by ULift(A) in the scheme universe, using the explicit continuous-map condensed ring isomorphism induced by ULift.ringEquiv. For this coefficient use the normalized Encoding from internal modules to sheaves of ordinary ULift(A)-modules. Its constructibility comparison identifies bounded constant-model constructibility with bounded constructible homology after the exact derived equivalence. The ordinary local-model and IsConstructible predicates differ only in their cover-index universes: lift the small index in one direction and use Precoverage.Small to shrink it in the other. The fixed-scalar kernel, cokernel and extension closure proved in ConstructibleCoefficientSerre, together with its etale-origin zero model, gives a weak Serre class. The cohomology weak Serre theorem, intersected with canonical boundedness, is triangulated. Pull back this property along the exact derived encoding.",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Step 2; zero, shifts and extensions before the final devissage"
+   }
+  },
+  {
+   "text": "The finite-type scheme X is locally Noetherian and quasi-compact, hence Noetherian. For each finite subextension E, use isConstantModelConstructible_serre_padicIntegers for kernels, cokernels and short exact extensions over its actual condensed valuation ring. Zero has the rank-zero presentation, the identity cover and the trivial one-stratum stratification, even on the empty scheme. Constructibility is invariant under isomorphism. Apply the cohomology weak Serre theorem and intersect with boundedness to get triangulated bounded constructibility for O_E. The existing field-coefficient theorem gives the assertion for E and the finite-subextension-valued algebraic closure.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-integral-constant-model-heart-closure",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "det-cor-coefficient-heart-ii-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Step 2; zero, shifts and extensions before the final devissage"
+   }
+  },
+  {
+   "text": "For a monoid-object coefficient isomorphism, restrict scalars along its inverse and pull the map to X. This is an exact equivalence. The constantModel_comap_iff proof in IntegralConstantModelHeartClosure transports the finite scalar presentation on the point, then the same covers and strata; thus it preserves and reflects exactly IsConstantModelConstructible. The derived homology comparison and faithful-exact reflection of boundedness identify the bounded predicate with the inverse image of the representative predicate. Isomorphism invariance and the standard triangulated-inverse-image instance transfer triangulatedness. Finally split the six admissibility cases. The base-coefficient condensed identifications take Q_l and Z_l to the bottom finite subextension and its valuation ring. Compose these with the supplied monoid-object isomorphisms and apply the preceding finite, integral and field cases.",
+   "uses": [
+    "lem-sfb-integral-constant-model-heart-closure",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sfb-base-coefficient-condensed-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+    "place": "Step 2; zero, shifts and extensions before the final devissage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "lem-sfb-base-coefficient-condensed-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Internal-Hom devissage triangulatedness ingredient; implemented by J4 from finite coefficient encoding, integral weak Serre closure, field triangulation, and exact coefficient-isomorphism transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes form a triangulated subcategory for admissible condensed coefficients",
+   "results": "Returned CategoryTheory.Triangulated.Subcategory, DerivedCategory.instIsTriangulated, CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.IsTriangulated.mk, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic. No exact condensed-coefficient assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes with finite constant scalar models form a triangulated subcategory over admissible condensed rings",
+   "results": "Returned DerivedCategory.TStructure.t, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsLEObjSingleFunctor. No exact condensed-coefficient assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom_dual|ctf_generated|support_hom_model|BoundedConstructible.*triangulated",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DetThmSfCtfStabilityInternalHom",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Step 2; zero, shifts and extensions before the final devissage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdmissibleBoundedConstructibleTriangulated",
+  "file": "lean/Sheaf/Paper/AdmissibleBoundedConstructibleTriangulated.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.admissible_boundedConstructible_isTriangulated",
+  "statement": "theorem admissible_boundedConstructible_isTriangulated\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X : Scheme.{u}} [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) :\n    (constantModelBoundedConstructible Λ X).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T201322-L-2420949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T082249-L-2155565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

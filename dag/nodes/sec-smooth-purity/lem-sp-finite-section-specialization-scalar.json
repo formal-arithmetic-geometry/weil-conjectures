@@ -1,0 +1,148 @@
+{
+ "id": "lem-sp-finite-section-specialization-scalar",
+ "kind": "statement",
+ "title": "Scalar compatibility of normalized zero-fibre section specialization",
+ "statement": "Let A and B be finite commutative rings, φ:A→B a unital homomorphism, and N>0 with NA=0. Let S be Noetherian with N invertible. Let g:V→S be compactifiable, separated, quasi-compact and smooth of pure relative dimension d, with a closed section s satisfying s≫g=1 and the actual finite-ring section-deformation Geometry witness [lem-trf-finite-ring-section-deformation]. Work in the ordinary small-etale derived categories, using derived scalar extension Q [lem-pur-derived-change-of-rings]. Let κ_A and κ_B be isomorphisms of the actual Rees section families with the affine-line pullbacks of their section invariants, each normalized at one by the specified fibre mate [def-pur-noetherian-section-specialization-arrows]. Write δ_A and δ_B for their specified zero-fibre specialization arrows. Using the actual exceptional section coefficient maps q [def-pur-dnc-coefficient-section-maps], Q_S(δ_A) ≫ q_normal = q_(g,s) ≫ δ_B. No bundle integration, Tate exponent change, diagonal factor or smooth orientation is part of this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation: agreement at one and therefore at zero; general-ring proof (2), Steps 4--7"
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-dnc-coefficient-section-maps",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-noetherian-section-specialization-arrows"
+ ],
+ "proof": [
+  {
+   "text": "The image of N in B is φ(0)=0. Apply the section scalar/base-change theorem to the actual smooth Rees projection and the canonical squares at one and zero. Its geometric hypotheses are supplied by Geometry. This gives the coefficient squares for both fibre mates.",
+   "uses": [
+    "lem-pur-section-scalar-base-change",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-family constancy identifies the two families through the supplied normalized κ_A and κ_B. Local dualizing comparisons show their section invariants are shifted locally constant free rank-one sheaves. On any etale chart where these sheaves are free, derived scalar extension of the A-line is the B-line; this is a flat-source computation and requires no flatness of B over A. The scalar/pullback isomorphism identifies the extended pullback with the pullback of the extended invariant.",
+   "uses": [
+    "lem-pur-finite-section-family-constancy",
+    "lem-trf-section-local-dualizing-comparisons",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare q_family followed by κ_B with Q(κ_A) followed by scalar/pullback balancing and pullback of q_(g,s). After removing the common shift these are maps between pullbacks of locally constant sheaves. On an etale trivialization the maps are locally constant matrices on geometric affine-line fibres. Such fibres are connected and meet the section one, so the matrices are determined by their value there. The normalization equations and the one-fibre coefficient square make those values equal, hence the family maps are equal. This is the morphism version of the shifted-line rigidity argument, valid also for noninvertible maps. Equivalently, ordinary affine-line pullback is full on sheaves; degree-zero full faithfulness and the common shift lift this fullness to these Hom sets, and the section at one recovers every lifted map.",
+   "uses": [
+    "lem-trf-etale-shifted-line-normalized-descent",
+    "lem-trf-section-local-dualizing-comparisons",
+    "new-lem-pur-etale-a1-pullback-full",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the family identity back along zero and insert the inverse zero restrictions of κ_A and κ_B. The zero-fibre coefficient square identifies the outgoing maps, and scalar/pullback section cancellation removes the compositors. By the definition of specialization the remaining equation is Q(δ_A)≫q_normal=q_(g,s)≫δ_B. Rank zero uses the same argument with zero shift. Empty bases and zero rings give unique maps.",
+   "uses": [
+    "lem-pur-section-scalar-base-change",
+    "lem-pur-scalar-section-compositor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-section-scalar-base-change",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-pur-finite-section-family-constancy",
+  "lem-trf-section-local-dualizing-comparisons",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-etale-shifted-line-normalized-descent",
+  "new-lem-pur-etale-a1-pullback-full",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-scalar-section-compositor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation: agreement at one and therefore at zero; general-ring proof (2), Steps 4--7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized deformation to the normal cone family comparison commutes with derived scalar extension and change of finite coefficients",
+   "results": "Eight unrelated Mathlib hits; no ordinary etale derived section or integration scalar square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "deformation to normal bundle specialization followed by inverse vector bundle integration commutes with change of finite coefficients",
+   "results": "Eight unrelated Mathlib hits; no ordinary etale derived section or integration scalar square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "specialization_scalar|bundleSectionAdjoint.*scalar|scalar.*bundleSectionAdjoint; blueprint_refs coefficient specialization / integration scalar / normalized family / vector trace scalar",
+   "results": "No exact declaration in Mathlib or the adopted source library. Project PurityDncCoefficientTransport has a prime-power/finite-field theorem, whose private generic transport helper assumes invertible scalar maps not supplied here. VectorTraceScalarDescent treats a common exponent and traces, not the two-exponent zero-section adjunct square. The blueprint search found only the broader vector-bundle purity unit.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionIntegratedScalar",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "(3), Orientation: agreement at one and therefore at zero; general-ring proof (2), Steps 4--7",
+   "via": [
+    "lem-sp-finite-section-integrated-scalar",
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSectionSpecializationScalar",
+  "file": "lean/Sheaf/Paper/FiniteSectionSpecializationScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSectionSpecialization_scalar",
+  "statement": "theorem finiteSectionSpecialization_scalar {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [HasCompactification g] [IsSeparated g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s] [FiniteRingSectionDeformation.Geometry d g s] (hs : s ≫ g = 𝟙 S) (hS : IsUnit (N : Γ(S, ⊤))) (κ : NoetherianSectionSpecialization.family A g s ≅ (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj (sectionInvariant A g s)) (κ' : NoetherianSectionSpecialization.family B g s ≅ (ordinaryFinitePullback B (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj (sectionInvariant B g s)) (hκ : NoetherianSectionSpecialization.Normalized A g s hs κ) (hκ' : NoetherianSectionSpecialization.Normalized B g s hs κ') : (scalarExtension φ S).map (NoetherianSectionSpecialization.specialization A g s κ) ≫ WeilConjectures.DncCoefficientTransport.sectionMap φ (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection = WeilConjectures.DncCoefficientTransport.sectionMap φ g s ≫ NoetherianSectionSpecialization.specialization B g s κ'",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T103455-L-1086018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T103455-L-1086018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

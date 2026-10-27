@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-separable-node-quadratic-completion",
+ "kind": "statement",
+ "title": "Quadratic completion over the separable residue field of a geometric node",
+ "statement": "Let $k$ be a field and let $C$ be a scheme locally of finite type over $k$ [def-weil-finite-type-morphism], equidimensional of dimension one [def-weil-pure-dimension] (dimension as in [def-kun-topological-krull-dimension]). Let $x$ be a closed point with residue field $\\kappa=\\kappa(x)$ [def-weil-residue-field] finite separable over $k$ [def-weil-pbc-separable-algebraic-extension]. Suppose that, for an algebraic closure $\\bar k/k$ [def-weil-algebraic-closure] and a point $\\bar x$ of $C\\times_k\\bar k$ over $x$ [def-pc-fibre-product], the completed local ring is isomorphic as a ring to $\\bar k[[u,v]]/(uv)$. Put $A=\\mathcal O_{C,x}$ and $\\mathfrak m=\\mathfrak m_x$. Then $A$ is reduced (has no nonzero nilpotent elements), Noetherian [def-weil-pbc-noetherian-ring], essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra], and of Krull dimension one [def-weil-pbc-krull-dimension-ring]. There exist a $k$-algebra section $\\kappa\\to\\widehat A$ of the residue map, elements $a,b,c\\in\\kappa$ with $b^2-4ac\\ne0$, and a continuous $\\kappa$-algebra isomorphism\n$$\\widehat A\\cong\\kappa[[X,Y]]/(aX^2+bXY+cY^2),$$\ninducing the identity on the residue field. Here $\\widehat A=\\varprojlim_n A/\\mathfrak m^n$ [def-weil-pbc-adic-completion]; the power series topology has the powers of the variable ideal as neighbourhoods of zero [def-weil-pbc-multivariate-power-series]. Quotients and algebra maps use [def-weil-pbc-algebra-hom-quotient].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4D (lemma-nodal), equivalence (3) with (2), and 0C49 (lemma-nodal-algebraic), condition (3) and the coefficient-field choice in its proof; the local algebra is the local ring of an algebraic curve."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-separable-curve-geometric-local-data] with $d=1$, $K=\\bar k$ and $y=\\bar x$. Choose its $U=\\operatorname{Spec}S$, $\\mathfrak p$, $\\mathfrak q$ and $\\iota:\\kappa\\hookrightarrow K$. The germ maps identify $A=S_{\\mathfrak p}$, $\\kappa=S/\\mathfrak p$ over $k$, and the stalk at $\\bar x$ with $B=(S\\otimes_kK)_{\\mathfrak q}$, $\\mathfrak q=\\ker(s\\otimes\\lambda\\mapsto\\iota(\\bar s)\\lambda)$, including completions. So the assumed ring isomorphism is $\\widehat B\\cong K[[u,v]]/(uv)$. The node also gives Noetherianity, essential finite type and $\\dim A=1$.",
+   "uses": [
+    "lem-sfb-separable-curve-geometric-local-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), affine-neighbourhood and geometric-stalk reduction; varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic)."
+   }
+  },
+  {
+   "text": "$R=S\\otimes_kK$ is a finitely generated $K$-algebra and $R/\\mathfrak q=K$ via the structure map (step 1). By [lem-trf-geometric-node-fitting-depth] the ring isomorphism of step 1 gives $\\operatorname{Fit}_1(\\Omega_{R/K})B=\\mathfrak n$ and $\\operatorname{depth}B=1$.",
+   "uses": [
+    "lem-trf-geometric-node-fitting-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), algebraically closed case via Tag 0C4C (lemma-fitting-ideal)."
+   }
+  },
+  {
+   "text": "Since $s\\in\\mathfrak p$ gives $\\iota(\\bar s)=0$, $\\mathfrak q$ lies over $\\mathfrak p$. With $\\Omega=K$, [lem-trf-geometric-fitting-depth-descent] turns step 2 into $\\operatorname{Fit}_1(\\Omega_{S/k})A=\\mathfrak m$ and $\\operatorname{depth}A=1$.",
+   "uses": [
+    "lem-trf-geometric-fitting-depth-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), arbitrary-field paragraph: Fitting ideal and depth descend along the faithfully flat map."
+   }
+  },
+  {
+   "text": "As $\\kappa/k$ is finite separable, step 3 gives the hypotheses of [lem-trf-depth-fitting-quadratic-lci]. It supplies a $k$-algebra section $\\kappa\\to\\widehat A$ of the residue map, $a,b,c\\in\\kappa$ with $b^2-4ac\\ne0$, and a continuous isomorphism of complete local $\\kappa$-algebras $\\widehat A\\cong\\kappa[[X,Y]]/(aX^2+bXY+cY^2)$ inducing the identity on $\\kappa$, transported to $\\mathcal O_{C,x}$ through the germ identification of step 1.",
+   "uses": [
+    "lem-trf-depth-fitting-quadratic-lci"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), (5)=>(2), and Tag 0C49 (lemma-nodal-algebraic), quadratic form over the residue field."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-completion-local-invariant-descent](3) with $F=\\kappa$, $K=\\bar k$ and the $\\iota,\\mathfrak q$ of step 1, to the ring isomorphism of step 1: $A$ is reduced. With steps 1 and 4 this proves all assertions.",
+   "uses": [
+    "lem-sfb-split-completion-local-invariant-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (3)=>(1), reducedness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-separable-curve-geometric-local-data",
+  "lem-trf-geometric-node-fitting-depth",
+  "lem-trf-geometric-fitting-depth-descent",
+  "lem-trf-depth-fitting-quadratic-lci",
+  "lem-sfb-split-completion-local-invariant-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), geometric-stalk reduction, Fitting/depth descent and (5)=>(2); 0C4C (lemma-fitting-ideal); 0C49 (lemma-nodal-algebraic), quadratic normal form and reducedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|nondegenerate.*quadra",
+   "results": "{\"t\": \"2026-10-22T04:21:55Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|nondegenerate.*quadra\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field definitions and Weierstrass preparation do not classify completed rings of geometric nodes over a nonrational residue field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A node over an arbitrary field has completed local ring a nondegenerate binary quadratic hypersurface over its separable residue field",
+   "results": "{\"t\": \"2026-10-22T04:21:55Z\", \"tool\": \"leansearch\", \"query\": \"A node over an arbitrary field has completed local ring a nondegenerate binary quadratic hypersurface over its separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.instInhabitedResidueField\", \"IsLocalRing.ResidueField\", \"IsLocalRing.instCommRingResidueField\", \"IsLocalRing.residue\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\"], \"digest\": \"33066034b8755c5d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field definitions and Weierstrass preparation do not classify completed rings of geometric nodes over a nonrational residue field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"IsReduced\"",
+   "results": "{\"t\": \"2026-10-22T04:21:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"IsReduced\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field definitions and Weierstrass preparation do not classify completed rings of geometric nodes over a nonrational residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric ordinary double point of a curve with finite separable residue field has reduced local ring and completion isomorphic to the quotient by a nondegenerate binary quadratic form over its residue field",
+   "results": "{\"t\": \"2026-10-22T04:22:04Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric ordinary double point of a curve with finite separable residue field has reduced local ring and completion isomorphic to the quotient by a nondegenerate binary quadratic form over its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.minimal\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\"], \"digest\": \"b743a2ca5d74a409\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field definitions and Weierstrass preparation do not classify completed rings of geometric nodes over a nonrational residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local ring at a geometric node has a quadratic equation over its residue field in two formal power series variables",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"leanfinder\", \"query\": \"A local ring at a geometric node has a quadratic equation over its residue field in two formal power series variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"a6b9d009b322937b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field definitions and Weierstrass preparation do not classify completed rings of geometric nodes over a nonrational residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric node of a curve with finite separable residue field has completed local ring a nondegenerate binary quadratic hypersurface over its residue field",
+   "results": "{\"t\": \"2026-10-22T04:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric node of a curve with finite separable residue field has completed local ring a nondegenerate binary quadratic hypersurface over its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"686992b061e31be9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division and elliptic-curve reduction do not give the formal local classification of geometric nodes over a finite separable residue field"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|formal_binary_morse|quadratic.*completion",
+   "results": "{\"t\": \"2026-10-22T04:40:01Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|formal_binary_morse|quadratic.*completion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division and elliptic-curve reduction do not give the formal local classification of geometric nodes over a finite separable residue field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a local ring at a node of an algebraic curve is a quotient of two variable power series by a quadratic form with nonzero discriminant",
+   "results": "{\"t\": \"2026-10-22T04:40:01Z\", \"tool\": \"leansearch\", \"query\": \"The completion of a local ring at a node of an algebraic curve is a quotient of two variable power series by a quadratic form with nonzero discriminant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.instIsLocalRing\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassDiv.congr_simp\", \"isLocalRing_of_isAdicComplete_maximal\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"8a09b1cec9488c44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division and elliptic-curve reduction do not give the formal local classification of geometric nodes over a finite separable residue field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"Algebra.IsSeparable\"",
+   "results": "{\"t\": \"2026-10-22T04:40:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"Algebra.IsSeparable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division and elliptic-curve reduction do not give the formal local classification of geometric nodes over a finite separable residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A singular point geometrically isomorphic to xy equals zero admits a formal binary quadratic equation over a separable residue field",
+   "results": "{\"t\": \"2026-10-22T04:40:04Z\", \"tool\": \"leanfinder\", \"query\": \"A singular point geometrically isomorphic to xy equals zero admits a formal binary quadratic equation over a separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.Jacobian.nonsingularLift_zero\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Affine.nonsingular_iff_variableChange\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"05734dcf9418823c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division and elliptic-curve reduction do not give the formal local classification of geometric nodes over a finite separable residue field"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|formal_binary_morse|nondegenerate.*quadratic|quadratic.*completion",
+   "results": "{\"t\": \"2026-10-22T04:40:37Z\", \"tool\": \"grep\", \"query\": \"nodal|formal_binary_morse|nondegenerate.*quadratic|quadratic.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division and elliptic-curve reduction do not give the formal local classification of geometric nodes over a finite separable residue field"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT.",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separable-node-quadratic-completion",
+  "worker": "stage1",
+  "summary": "Q122 repair of the released 2026-10-22 re-split order, corrected by the reviewer: old steps 1--3 become the geometric-stalk node lem-sfb-separable-curve-geometric-local-data; old steps 4--8 are carried by the existing reviewed Q95 nodes lem-trf-geometric-node-fitting-depth, lem-trf-geometric-fitting-depth-descent and lem-trf-depth-fitting-quadratic-lci; old step 9 becomes the reducedness node lem-sfb-split-completion-local-invariant-descent. Both new nodes are statement-only unsplit nodes.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). This realizes the existing from.place: det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction, quadratic completed-local calculation underlying the nodal tangent/normalization comparison. The split stays below the unit route. The current latest blueprint direct-images proof (3) is unchanged; these two local-algebra subarguments refine the existing from.place below its alteration branch.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-node-fitting-depth",
+    "why": "Generic local algebra (Stacks 0C4D, algebraically closed case): a split-node completion over an algebraically closed field gives Fit_1 = maximal ideal and depth one; reviewed sk-i-curve-zero node, not a trace-formula statement."
+   },
+   {
+    "node": "lem-trf-geometric-fitting-depth-descent",
+    "why": "Generic local algebra (Stacks 0C4D, arbitrary-field paragraph): faithfully flat descent of the Fitting and depth conditions from the geometric stalk; reviewed sk-i-curve-zero node."
+   },
+   {
+    "node": "lem-trf-depth-fitting-quadratic-lci",
+    "why": "Generic local algebra (Stacks 0C4D (5)=>(2), 0C49): depth one and maximal first Fitting ideal over a finite separable residue field give the quadratic completion; reviewed sk-i-curve-zero node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-geometric-field-stalk-descent",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-formal-jacobian-quadratic-criterion",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-geometric-node-fitting-depth",
+  "lem-trf-geometric-fitting-depth-descent",
+  "lem-trf-depth-fitting-quadratic-lci"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-034db2c85",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-034db2c85 (reviewer sub-agent of L); spot-checked: I read in full the item, both new nodes, the old 9-step proof, the repair note (at least 2 nodes, at most 3000 chars), and Stacks curves.tex 0C4D (l.4174ff, both paragraphs), 0C49 (l.3870-3900) and 0C4C. The item statement is the same as live and true: Stacks 0C4D (3)=>(2) plus reducedness and dim 1. I checked uv in every characteristic, x^2+y^2 over R and u^2+uv+v^2 over F_2; the cusp, the double line and smooth points fail the hypothesis. No SGA is used. FAULT (duplicate): as delivered, lem-sfb-split-completion-local-invariant-descent is used only with K = kbar, and there its Fitting/depth content is the composite of two existing nodes. Both are in base, split, PASS, unit sk-i-curve-zero: lem-trf-geometric-node-fitting-depth (ring-only uv completion gives Fit_1 B = n and depth B = 1) and lem-trf-geometric-fitting-depth-descent (gives Fit_1(Omega_{S/k})A = m and depth A = 1). lem-trf-depth-fitting-quadratic-lci already gives the item's quadratic iso: k-section, discriminant nonzero, continuous, identity on kappa. The report dismissed these nodes on algebraic closedness, but that is exactly the case the item uses; this is the same finding as Q103 rational-node. FIX, with the new-node count kept at 2: (1) I repurposed the same id to the one argument no existing node carries, old step 9: L[[u,v]]/(uv) embeds in L[[u]]xL[[v]], A->B->B^ are injective for any K (faithfully flat; Krull), and a ring-only split iso makes B^, B and A reduced (0C49 (3)=>(1)). The trf Fitting stmt_dep is gone. (2) I trimmed lem-sfb-separable-curve-geometric-local-data: I removed its unused presentation/Jacobian clauses, which restated lem-trf-separable-closed-point-formal-presentation. The chart, stalk, q = ker(iota), dimension and faithful-flatness clauses remain and are checked. (3) The item proof is now 5 steps, 1738 chars: geometric data, then node-fitting-depth with R = S(x)K and R/q = K, then descent (q lies over p), then depth-fitting-quadratic-lci, then the reducedness node. proof_deps = union of uses, and the closures of the three Q95 nodes do not contain the item (no cycle). Batch 5: the flagged lem-trf-fitting-ideal-independence-base-change is general Fitting algebra (07Z6), neither assumption gives it, so I accept it; after the fix no new node cites it. The three newly cited Q95 trf nodes are pure local algebra (0C4C/0C4D) with nothing cohomological, so I accept them, and split_report.tool_uses now lists them. Only proof, proof_deps, proof_origin and split_report of the item changed.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparableNodeQuadraticCompletion",
+  "declaration": "AlgebraicGeometry.separable_node_quadratic_completion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparableNodeQuadraticCompletion.lean",
+  "statement": "theorem separable_node_quadratic_completion {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hdim : C.IsPureDimension 1) (x : C) (hx : x ∈ closedPoints C) (hfinite : @FiniteDimensional k (C.residueField x) inferInstance inferInstance (f.residueFieldAlgebraMap x).toAlgebra.toModule) (hsep : @Algebra.IsSeparable k (C.residueField x) inferInstance inferInstance (f.residueFieldAlgebraMap x).toAlgebra) (K : Type u) [Field K] [Algebra k K] [IsAlgClosure k K] (xbar : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (hxbar : pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))) xbar = x) (hgeom : Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk xbar)) ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk xbar) ≃+* (MvPowerSeries (Fin 2) K ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) K) * MvPowerSeries.X 1}))) : IsReduced (C.presheaf.stalk x) ∧ IsNoetherianRing (C.presheaf.stalk x) ∧ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ C.presheaf.Γgerm x).hom).EssFiniteType ∧ ringKrullDim (C.presheaf.stalk x) = (1 : WithBot ℕ∞) ∧ ∃ σ : C.residueField x →+* AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x), (∀ t : k, σ (f.residueFieldAlgebraMap x t) = algebraMap (C.presheaf.stalk x) _ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ C.presheaf.Γgerm x).hom t)) ∧ (∀ t : C.residueField x, AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (σ t) = t) ∧ ∃ a b c : C.residueField x, b ^ 2 - 4 * a * c ≠ 0 ∧ ∃ e : @AlgEquiv (C.residueField x) (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x)) (MvPowerSeries (Fin 2) (C.residueField x) ⧸ Ideal.span ({MvPowerSeries.C a * (MvPowerSeries.X 0) ^ 2 + MvPowerSeries.C b * (MvPowerSeries.X 0 * MvPowerSeries.X 1) + MvPowerSeries.C c * (MvPowerSeries.X 1) ^ 2} : Set (MvPowerSeries (Fin 2) (C.residueField x)))) inferInstance inferInstance inferInstance σ.toAlgebra inferInstance, @Continuous _ _ ((IsLocalRing.maximalIdeal (C.presheaf.stalk x)).map (algebraMap (C.presheaf.stalk x) (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x)))).adicTopology (TopologicalSpace.coinduced (Ideal.Quotient.mk _) (Ideal.span (Set.range (fun i : Fin 2 ↦ (MvPowerSeries.X i : MvPowerSeries (Fin 2) (C.residueField x))))).adicTopology) e ∧ ∀ h : MvPowerSeries (Fin 2) (C.residueField x), AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (e.invFun (Ideal.Quotient.mk _ h)) = MvPowerSeries.constantCoeff h",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-358449a56",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read node, source curves.tex 0C4D (3)=>(2) and 0C49 (3), all 13 stmt_deps (3 Mathlib leaves via mathlib_match: IsAlgClosure, EssFiniteType, AlgHom/quotient; pure dimension = Sheaf IsPureDimension) and residueFieldAlgebraMap. Every clause matches: lft over k, IsPureDimension 1, closed point, finite+separable via the canonical residue map, IsAlgClosure K, x̄ over x, ring-only iso of the geometric completion with K[[u,v]]/(uv); conclusions reduced/Noetherian/EssFiniteType of the structural map/ringKrullDim 1, k-compatible residue section σ, a b c with b^2-4ac≠0, AlgEquiv over σ.toAlgebra, continuity for m-adic vs quotient (X,Y)-adic topologies, residue identity via constantCoeff (implied, not stronger). Edge cases empty C, char 2, non-split nodes, κ=k, imperfect k, universes OK. Statement verbatim; only lean changed vs live; no new nodes or definitions; sorry only; docstrings carry source, blueprint and 9 steps; report sections present. No recompile (instructed); no findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

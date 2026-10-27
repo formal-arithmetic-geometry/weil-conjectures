@@ -1,0 +1,393 @@
+{
+ "id": "lem-sfb-relative-self-normalizing-quotient",
+ "kind": "statement",
+ "title": "Smooth proper homogeneous quotient under a self-normalizer hypothesis",
+ "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. A group scheme over $S$ is a group object in schemes over $S$ [def-pc-scheme], with the multiplication, identity and inverse diagrams of [def-sc-group-scheme] over this base. Let $H\\hookrightarrow G$ be a finitely presented closed subgroup [def-weil-closed-immersion] which is smooth over $S$ with nonempty geometrically connected fibres [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure of each residue field. Assume that $G$ has geometrically connected fibres and that $H$ is self-normalizing: for every $S$-scheme $W$, an element $g\\in G(W)$ satisfying $c_g(H_W)=H_W$ lies in $H(W)$. Let $Q$ be the fppf sheafification [def-weil-pbc-sheafification] of $W\\mapsto G(W)/H(W)$, where fppf coverings [def-pc-fppf-site] are jointly surjective families of flat morphisms locally of finite presentation. Then $Q$ is represented by a smooth $S$-scheme $X$. The projection $G\\to X$ is a smooth surjective right $H$-torsor: $(g,h)\\mapsto(g,gh)$ identifies $G\\times_SH$ with $G\\times_XG$. These quotient and torsor identifications commute with arbitrary base change. If for every geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$ the sheaf $G_{\\bar s}/H_{\\bar s}$ is represented by a projective $\\Omega$-scheme, then $X\\to S$ is proper [def-weil-proper-morphism]. Here projective means admitting a closed immersion into $\\mathbf P^n_\\Omega$ for some $n\\geq0$ [def-nagata-projective-space-base-change], and geometric point means [def-weil-geometric-point].",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Theorem 2.3.6(1),(2) and proof, printed pp.72--75; the paragraph beginning the proof notes local sections of G to G/H for smooth H. Quotient base change and the torsor identity are the functorial sheaf-quotient consequences. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative group-scheme assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-proper-morphism",
+  "def-nagata-projective-space-base-change",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Let $H$ act on $G$ on the left by $h\\cdot g=gh^{-1}$. This is free: $gh^{-1}=g$ implies $h=1$. Smoothness makes $H/S$ flat and locally finitely presented by [lem-pc-smooth-flat]. Apply [lem-sfb-free-flat-group-space-quotient] with base $B=S$ and $Z=G$. Its orbit presheaf is exactly the right-coset presheaf in the statement. Thus $Q$ is an algebraic space, $q:G\\to Q$ is surjective, flat and locally finitely presented, and has fppf local sections on each scheme test. Replacing the action variable by its inverse and exchanging the two factors in the relation gives the isomorphism $(g,h)\\mapsto(g,gh)$ from $G\\times_SH$ onto $G\\times_QG$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-free-flat-group-space-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH, lemma-quotient-free-action; left action h.g=g h^{-1}"
+   }
+  },
+  {
+   "text": "For a scheme $T\\to Q$, write $P=G\\times_QT$. A local lift $a:T_i\\to G$ of its section identifies $P\\times_TT_i$ with $H\\times_ST_i$ by $h\\mapsto ah$; the inverse sends $b$ to $a^{-1}b$, which belongs to $H$ by the relation isomorphism of step 1. These are inverse maps of sheaves on every test scheme. The fppf-locality and base-change assertions of [lem-sfb-space-smooth-surjective-fppf-locality] show that $P\\to T$ is smooth. Therefore $q$ is smooth in the chartwise sense. To see $Q/S$ locally of finite type, apply [lem-sfb-space-lft-smooth-fpqc-locality](iii) with smooth source cover $G\\to Q$, target cover $S\\to S$, and $G\\to S$ locally of finite type (smooth implies locally finitely presented).",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sfb-space-lft-smooth-fpqc-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 0423, lemma-descending-property-smooth; 06FC, remark-list-local-source-target, item (3)"
+   }
+  },
+  {
+   "text": "The diagonal of $Q/S$ pulls back along the fppf cover $G\\times_SG\\to Q\\times_SQ$ to the closed subscheme $G\\times_QG\\subset G\\times_SG$: it is the inverse image of $H\\subset G$ under $(g,b)\\mapsto g^{-1}b$. The cover is fppf by [lem-sfb-space-fppf-covering-calculus], using the flat locally finitely presented surjection of step 1 twice. Closed immersions are stable under base change and descend along such covers by [lem-sfb-space-closed-immersion-fppf-descent]. Hence $Q/S$ is separated. Its relative diagonal is quasi-compact, since a closed immersion is affine (the scheme-test affine description of [def-weil-closed-immersion]). As $S$ is affine, [lem-sfb-space-qcqs-source-products] shows that $Q$ is quasi-separated. Also $Q$ is quasi-compact: its point space is the continuous surjective image of the quasi-compact scheme $G$, by [lem-a1-space-point-open-calculus]. This last assertion follows directly by pulling an open cover back to $G$ and taking a finite subcover.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-closed-immersion-fppf-descent",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041F, lemma-descending-property-closed-immersion; diagonal of a quotient by a closed subgroup"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-finite-jet-normalizer-detection] and work on one of its affine opens $U$. Write $C\\twoheadrightarrow D$ for the finite free coordinate-algebra quotient of $H_n\\subset G_n$, of ranks $M$ and $r$. By [lem-sfb-free-quotient-grassmann-projective], rank-$r$ quotients of $C\\simeq\\mathcal O_U^{M}$ are classified by a projective Grassmannian $P=G_U(M,r)$ with distinguished point $\\xi$ given by $D$. Conjugation on $G_n$ acts on $C$, hence on its quotient functor and therefore on $P$. The stabilizer of $\\xi$ on a test scheme $W$ consists exactly of $g$ preserving $(H_n)_W$ as a closed subscheme. The finite-jet lemma identifies this with the normalizer of $H_W$, which is $H(W)$ by the hypothesis of the item. Consequently $g\\mapsto g\\xi$ is constant on right $H$-cosets and extends uniquely to a map $i:Q_U\\to P$ by the sheafification universal property; the target $P$ is an fppf sheaf by [lem-a1-algebraic-space-fpqc-sheaf], since fppf coverings are fpqc coverings by [lem-trf-fppf-covering-is-fpqc]. It is a monomorphism: locally lift two sections of $Q_U$ to $g,b\\in G(W)$; equality of their images says $g^{-1}b\\in H(W)$, hence their cosets agree. Equality of sections descends because $Q_U$ is a sheaf. Local lifts and equality in the sheafification are justified by [lem-weil-pbc-site-sheafification-sections-local].",
+   "uses": [
+    "lem-sfb-finite-jet-normalizer-detection",
+    "lem-sfb-free-quotient-grassmann-projective",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, p.74: Grassmannian orbit map through the finite-jet quotient"
+   }
+  },
+  {
+   "text": "The Grassmannian $P$ is quasi-compact and separated over the affine $U$: it is projective and [lem-pc-projective-proper] makes it proper. Its absolute quasi-separatedness follows from [lem-sfb-space-qcqs-source-products]. By step 3 the same quasi-compactness and quasi-separatedness hold for $Q_U$ (apply that argument over $U$). The map $i$ is locally of finite type by [lem-sfb-space-lft-cancellation], since $Q_U\\to U$ is locally of finite type. Thus [lem-sfb-space-qcqs-lft-mono-quasiaffine] makes $i$ quasi-affine, in particular representable by schemes. Since $P$ is a scheme, so is $Q_U$. On $U_i∩ U_j$, both scheme pullbacks represent the same restricted sheaf $Q$, giving canonical isomorphisms with identity and triple-cocycle equalities. Apply [lem-galois-glue] over the open cover $\\{U_i\\}$ of $S$ to obtain an $S$-scheme $X$. The local sheaf isomorphisms $h_X|_{U_i}\\simeq Q|_{U_i}$ glue uniquely, since $Q$ is a sheaf, and give $h_X\\simeq Q$.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-pc-projective-proper",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-lft-cancellation",
+    "lem-sfb-space-qcqs-lft-mono-quasiaffine",
+    "lem-galois-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, p.74: monomorphism into the Grassmannian and the quasi-affine consequence of Zariski Main"
+   }
+  },
+  {
+   "text": "Now $q:G\\to X$ is a flat surjective locally finitely presented map of schemes, and the composite $G\\to X\\to S$ is the given smooth structural map. Apply [lem-sbc-smooth-flat-surjective-source-descent] to conclude that $f:X\\to S$ is smooth. Step 2 already proved that $q$ is smooth; step 1 gives its surjectivity and right $H$-torsor relation. Both $X$ and $S$ are quasi-compact and quasi-separated by step 3. Then [lem-weil-pbc-qcqs-morphism-permanence](1) makes $f$ quasi-compact and quasi-separated; smoothness supplies local finite presentation, so $f$ is of finite presentation.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B5, lemma-smooth-fpqc-local-source; finite presentation = qc + qs + lfp"
+   }
+  },
+  {
+   "text": "For any $S'\\to S$, the map $G_{S'}\\to X_{S'}$ has fppf local sections on scheme tests by pulling back those of step 1, and its relation is $G_{S'}\\times_{S'}H_{S'}$ by the same base change of the displayed isomorphism. Hence $G_{S'}/H_{S'}\\to X_{S'}$ is an isomorphism of sheaves: a section on the right locally lifts to $g$, and two local lifts yield the same section exactly when their ratio belongs to $H$. This is precisely the local-section and local-equality characterization of sheafification in [lem-weil-pbc-site-sheafification-sections-local]. The relation map remains $(g,h)\\mapsto(g,gh)$, since pullback retains multiplication. Thus the quotient and torsor identifications commute with arbitrary base change; no assertion that the presheaf quotient is already a sheaf is needed.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WB, theorem-plus, and 00WK, lemma-sections-sheafification; apply the local description after base change"
+   }
+  },
+  {
+   "text": "Assume now the projectivity hypothesis. Step 7 identifies every geometric fibre of $X/S$ with the stated projective quotient, so it is proper by [lem-pc-projective-proper]. It is nonempty and connected: $G_{\\bar s}\\to X_{\\bar s}$ is a continuous surjection and its source is nonempty and connected by hypothesis (nonemptiness comes from the identity). The image of a connected space is connected, since a disconnection pulls back to a disconnection. Apply [lem-a1-space-point-open-calculus] for continuity and surjectivity on point spaces. To prove properness over the arbitrary ring $A$, use [lem-sfb-space-proper-strict-local-test], applicable since step 6 gives finite presentation. Fix a geometric point and put $T=\\operatorname{Spec}R$, $R=\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$. The ring $R$ is local and henselian by [lem-weil-pbc-strict-henselization-local-structure]. Base change preserves finite presentation and separatedness by [lem-weil-pbc-qcqs-morphism-permanence] and [lem-sfb-space-separated-fp-composition], and preserves smoothness by [lem-sfb-space-smooth-surjective-fppf-locality].",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-proper-strict-local-test",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1, lemma-eventually-proper, strict-local properness test; Conrad Theorem 2.3.6 proof, pp.74-75, connected proper fibres"
+   }
+  },
+  {
+   "text": "Write $Y=X\\times_ST$. Its closed fibre $Y_0$ is proper: it becomes a projective geometric fibre after an algebraic closure of the residue field, and properness descends along that faithfully flat field extension by [lem-sfb-space-proper-fpqc-descent]. The pair $(R,\\mathfrak m_R)$ is henselian. Apply [lem-sfb-scheme-henselian-proper-clopen-lift] to the entire closed fibre to obtain an open and closed subscheme $Z\\subset Y$, proper over $T$, with $Z_0=Y_0$. The map $Z\\to T$ is also flat and locally finitely presented, since $Y/T$ is smooth and restriction to an open preserves smoothness by [lem-weil-pbc-smooth-restrict-open-subschemes], followed by [lem-pc-smooth-flat]. Thus its image is open by [lem-weil-pbc-flat-lfp-open] and closed by properness. It contains the closed point, so it is all of the local scheme $T$. Every geometric fibre of $Z/T$ is therefore nonempty. It is open and closed in the corresponding connected geometric fibre of $Y/T$, so it is that whole fibre. The complement $Y\\setminus Z$ has no point, hence is empty, and $Y=Z$ is proper. The strict-local test from step 8 now proves $X/S$ proper. This argument also handles non-Noetherian and nonreduced $A$; for $A=0$ all schemes and assertions are empty.",
+   "uses": [
+    "lem-sfb-space-proper-fpqc-descent",
+    "lem-sfb-scheme-henselian-proper-clopen-lift",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CT9, lemma-split-off-proper-part-henselian; Conrad Theorem 2.3.6 proof, pp.74-75, the clopen proper part exhausts connected fibres"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-space-lft-smooth-fpqc-locality",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-space-closed-immersion-fppf-descent",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-finite-jet-normalizer-detection",
+  "lem-sfb-free-quotient-grassmann-projective",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-pc-projective-proper",
+  "lem-sfb-space-lft-cancellation",
+  "lem-sfb-space-qcqs-lft-mono-quasiaffine",
+  "lem-galois-glue",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-space-proper-strict-local-test",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-proper-fpqc-descent",
+  "lem-sfb-scheme-henselian-proper-clopen-lift",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-trf-fppf-covering-is-fpqc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Theorem 2.3.6 proof, printed pp.73-75: finite jets and Grassmannian orbit monomorphism; properness assembled with the existing Stacks henselian clopen-lifting and strict-local tests to avoid imposing a Noetherian hypothesis. Local archival Conrad PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth self-normalizing closed subgroup of a smooth affine group with connected fibers has a represented smooth quotient; the quotient is proper if its geometric fibers are projective",
+   "results": "{\"t\": \"2026-10-24T08:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth self-normalizing closed subgroup of a smooth affine group with connected fibers has a represented smooth quotient; the quotient is proper if its geometric fibers are projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"QuotientGroup.instT3Space\", \"QuotientGroup.instCompactSpaceQuotientSubgroup\", \"QuotientGroup.instLocallyCompactSpace\", \"QuotientGroup.instT2Space\", \"QuotientAddGroup.instT3Space\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"QuotientGroup.isClosedMap_coe\"], \"digest\": \"4cd30eebdc7989cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T08:46:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\"], \"digest\": \"6d7c2c7ac7bded1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "self.normaliz|homogeneous|quotient.*group",
+   "results": "{\"t\": \"2026-10-24T08:46:48Z\", \"tool\": \"grep\", \"query\": \"self.normaliz|homogeneous|quotient.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\"], \"digest\": \"3faac2113ae75a87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf coset quotient G over H of smooth group schemes is a proper scheme when H is self normalizing with projective geometric quotients",
+   "results": "{\"t\": \"2026-10-24T08:46:48Z\", \"tool\": \"leansearch\", \"query\": \"The fppf coset quotient G over H of smooth group schemes is a proper scheme when H is self normalizing with projective geometric quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper\", \"QuotientGroup.mk'\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\", \"QuotientGroup.quotientInfEquivProdNormalQuotient\"], \"digest\": \"3538812d417eb7ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic|fppf.*quotient|quotient.*sheaf",
+   "results": "{\"t\": \"2026-10-24T08:47:31Z\", \"tool\": \"grep\", \"query\": \"parabolic|fppf.*quotient|quotient.*sheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\"], \"digest\": \"2c86f5a1d27b996f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable homogeneous spaces G H for smooth algebraic group schemes, properness of a parabolic quotient over an arbitrary base",
+   "results": "{\"t\": \"2026-10-24T08:47:32Z\", \"tool\": \"leanfinder\", \"query\": \"Representable homogeneous spaces G H for smooth algebraic group schemes, properness of a parabolic quotient over an arbitrary base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"instProperSMulSubtypeMemSubgroupOfIsClosedCoe\", \"AlgebraicGeometry.IsProper.of_comp\", \"ProperSMul.isProperMap_smul_pair\", \"AlgebraicGeometry.IsProper.comp_iff\", \"properSMul_iff\", \"ProperSMul.isProperMap_smul_pair_set\"], \"digest\": \"c12405b558ce6046\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract/topological groups, normalization, affine ring quotients or general properness, not this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "self.normaliz|fppf.*quotient|quotient.*sheaf",
+   "results": "{\"t\": \"2026-10-24T09:38:54Z\", \"tool\": \"grep\", \"query\": \"self.normaliz|fppf.*quotient|quotient.*sheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\"], \"digest\": \"2c86f5a1d27b996f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract-group normalizers, scheme smoothness/permanence, and affine ring-quotient lifting; none constructs the relative homogeneous quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous space of a smooth group scheme by a connected smooth subgroup equal to its normalizer is representable over any base",
+   "results": "{\"t\": \"2026-10-24T09:38:55Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous space of a smooth group scheme by a connected smooth subgroup equal to its normalizer is representable over any base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.le_normalizer\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\", \"Subgroup.smul_coe\", \"NormalizerCondition\", \"Subgroup.conjAct_pointwise_smul_eq_self\", \"Subgroup.normalizer_eq_top\", \"AddSubgroup.normalizer_eq_top_iff\", \"Subgroup.normal_in_normalizer\"], \"digest\": \"2069e52e56061b17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract-group normalizers, scheme smoothness/permanence, and affine ring-quotient lifting; none constructs the relative homogeneous quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T09:38:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\"], \"digest\": \"6d7c2c7ac7bded1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract-group normalizers, scheme smoothness/permanence, and affine ring-quotient lifting; none constructs the relative homogeneous quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of a smooth affine group scheme by a smooth connected self-normalizing subgroup is a smooth scheme, proper when all geometric quotients are projective",
+   "results": "{\"t\": \"2026-10-24T09:38:58Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf quotient of a smooth affine group scheme by a smooth connected self-normalizing subgroup is a smooth scheme, proper when all geometric quotients are projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\"], \"digest\": \"e6e01ea12b077244\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract-group normalizers, scheme smoothness/permanence, and affine ring-quotient lifting; none constructs the relative homogeneous quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-adjoint-rank-one-flag-curve",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, construction of B=P_G(lambda), its self-normalizer and G/B, before trivializing the pointed curve. This does not assert a relative matrix-model isomorphism. Supporting input: Proposition 4.2.7, proof, p.123: apply Theorem 2.3.6 to the self-normalizing B, before the genus-zero trivialization.",
+   "via": [
+    "lem-sfb-relative-adjoint-rank-one-flag-curve",
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-self-normalizing-quotient",
+  "worker": "stage1",
+  "summary": "Constructed the algebraic-space quotient by the existing free-action theorem; used a new finite-jet normalizer detector and the existing Grassmannian/quasi-affine monomorphism lemmas to show it is a scheme; proved smoothness, the torsor identity and arbitrary base change; proved properness by henselian clopen lifting and the existing strict-local test over arbitrary A. No statement change. One new unsplit node; no new Mathlib leaf.",
+  "blueprint": "Nearest ancestor command returns None; retain the supplied provenance to det-thm-sf-ctf-stability-direct-images proof (3), auxiliary relative rank-one flag quotient in Conrad Proposition 4.2.7. Steps realize Conrad Theorem 2.3.6 proof: finite jets and Grassmannian orbit, then connected-fibre properness. Latest blueprint direct-images proof read.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme-theoretic tool for Point images, continuity, and open embeddings for algebraic spaces. It supplies a property/descent statement in the quotient argument; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-galois-glue",
+    "why": "Generic scheme-theoretic tool for Glueing of schemes along open immersions. It supplies a property/descent statement in the quotient argument; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme-theoretic tool for Smoothness descends along flat surjective locally finitely presented source maps. It supplies a property/descent statement in the quotient argument; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic scheme-theoretic tool for Local structure of the chosen strict-henselization colimit. It supplies a property/descent statement in the quotient argument; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic descent of morphisms into an algebraic space (here the Grassmannian scheme) along fpqc, hence fppf, coverings; needed so the orbit map extends through the fppf sheafification. Added by the NX maintainer reader; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic Mathlib-leaf fact that an fppf covering is an fpqc covering, used to apply fpqc descent of morphisms to the fppf sheafification in step 4. Added by the NX maintainer reader; general topology comparison, not part of the trace formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-galois-glue",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-trf-fppf-covering-is-fpqc"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-548db040a",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-548db040a (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited node statement. Conrad Thm 2.3.6 and Prop 2.1.6 have no local copy (WANTED), so I checked the mathematics directly and against the existing Q10 proof of lem-sfb-relative-smooth-subgroup-normalizer. That proof builds a Noetherian model, sums the jet ideals K_n^±, and uses finite generation, which is exactly finite-jet stabilization. Steps checked: free flat quotient with action h·g=gh^{-1}; P×_T T_i ≅ H×T_i gives smoothness by fppf locality; the diagonal pullback {g^{-1}b∈H} is closed and descends; qcqs; Grassmannian stabilizer = normalizer of H_n = normalizer of H = H, giving the orbit monomorphism; qcqs lft monomorphism ⇒ quasi-affine ⇒ scheme; Zariski glue; smooth source descent; base change via local sections; properness by the strict-local test, fpqc descent of the closed fibre's properness from k̄, the henselian clopen lift, the open+closed image, and connected geometric fibres. This works over arbitrary A. New node lem-sfb-finite-jet-normalizer-detection: true, with small cases H=G, H=1, étale G and A=0 checked; statement only, self-contained, not a duplicate (DAG search for jets/normalizer/self-normaliz; the Q10 jet nodes are ingredients for it and none states it), and not a clause of the item. Batch-5: all flagged citations reach only the general definitions def-trf-algebraic-space and def-trf-schematically-dense-open, through generic algebraic-space and Stein/Chow tools; none is a step of the trace formula or Poincaré duality, so accepted. FIX: step 4 extended the orbit map through the fppf sheafification without citing that the target P is an fppf sheaf. I added lem-a1-algebraic-space-fpqc-sheaf and lem-trf-fppf-covering-is-fpqc (a Mathlib leaf) to the step's uses and proof_deps, with tool_uses entries. No cycle; item statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSelfNormalizingQuotient",
+  "declaration": "AlgebraicGeometry.exists_relative_self_normalizing_quotient",
+  "declarations": [
+   "AlgebraicGeometry.relativeSubgroupRightTranslation",
+   "AlgebraicGeometry.relativeSubgroupCosetPresheaf",
+   "AlgebraicGeometry.relativeSubgroupFppfQuotient",
+   "AlgebraicGeometry.relativeSubgroupFppfQuotientMap",
+   "AlgebraicGeometry.exists_relative_self_normalizing_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSelfNormalizingQuotient.lean",
+  "statement": "theorem exists_relative_self_normalizing_quotient (A : Type u) [CommRing A] (G H : Over (Spec (.of A))) [GrpObj G] [GrpObj H] [IsAffineHom G.hom] [Smooth G.hom] [LocallyOfFinitePresentation G.hom] [GeometricallyConnected G.hom] (i : H ⟶ G) [IsMonHom i] [IsClosedImmersion i.left] [LocallyOfFinitePresentation i.left] [Smooth H.hom] [GeometricallyConnected H.hom] (hself : ∀ (W : Over (Spec (.of A))) (g : W ⟶ G), (∀ (V : Over (Spec (.of A))) (a : V ⟶ W), Set.range (fun h : V ⟶ H ↦ (a ≫ g) * (h ≫ i) * (a ≫ g)⁻¹) = Set.range (fun h : V ⟶ H ↦ h ≫ i)) → ∃ h : W ⟶ H, h ≫ i = g) : ∃ (X : Over (Spec (.of A))) (q : G ⟶ X), Smooth X.hom ∧ Smooth q.left ∧ Surjective q.left ∧ (∀ (T : Scheme.{u}) (t : T ⟶ Spec (.of A)), ∃ e : (Over.map t).op ⋙ uliftYoneda.{u + 1}.obj X ≅ (relativeSubgroupFppfQuotient i t).obj, Functor.whiskerLeft (Over.map t).op (uliftYoneda.{u + 1}.map q) ≫ e.hom = relativeSubgroupFppfQuotientMap i t) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ Spec (.of A)), IsPullback ((Over.pullback t).map (fst G H)) ((Over.pullback t).map (relativeSubgroupRightTranslation i)) ((Over.pullback t).map q) ((Over.pullback t).map q)) ∧ ((∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of A)), ∃ (n : ℕ) (j : ((Over.pullback t).obj X).left ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of Ω))), IsClosedImmersion j ∧ j ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of Ω)) ↘ Spec (.of Ω)) = ((Over.pullback t).obj X).hom) → IsProper X.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6c373659",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read item node, 13 stmt_dep records, Conrad Thm 2.3.6 source place, module and report. Clause check: Spec A for arbitrary CommRing; G GrpObj over S with IsAffineHom+Smooth+lfp (=fp over affine S) and GeometricallyConnected (ConnectedSpace includes nonempty; equivalent to the algebraic-closure test); i IsMonHom, closed immersion, lfp; H smooth, geom. connected; hself = subfunctor equality c_g(H_W)=H_W tested after every V→W, implies g∈H(W). Q = presheafToSheaf(fppfTopology.over T) of the coequalizer coset presheaf (real data, Type u+1 via uliftYoneda); ∃ X q with Smooth X, Smooth+Surjective q, iso e normalized by q (coset π ≫ toSheafify) for all T, IsPullback torsor (g,h)↦(g,gh) for all T (base change), properness from closed immersions of X_Ω into ProjectiveSpace(Fin(n+1);Ω) over Ω, which by the e-clause equals projective representability of G_Ω/H_Ω. No extra assumptions; edge cases A=0, H=G, H=1, n=0, empty T fine. Node differs from live only in lean; statement verbatim; helpers are real defs owned by the item, no existing coset-sheaf def (checked groupSpaceOrbitPresheaf, IsFppfGroupQuotient, IsFppfQuotient); sole sorry the theorem with 9-step docstring; worker dry-run OK 28ca1857d41. No changes, no compile."
+ }
+}

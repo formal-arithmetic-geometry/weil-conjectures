@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-kahler-coordinate-data",
+ "kind": "definition",
+ "title": "Coordinate fundamental form, closed Kähler metric, and Wirtinger derivatives",
+ "status": "split",
+ "statement": "Use the usual fields $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $n\\geq0$, let $M$ be a complex manifold without boundary modeled on $E=\\mathbf C^n$, and let $h$ be a smooth positive definite Hermitian tangent metric [def-sfb-hermitian-dolbeault-data]. For a holomorphic chart $e:U\\xrightarrow{\\sim}V\\subset E$, write $T_e(z)$ for the derivative of the transition from $e$ to the preferred tangent chart at $e^{-1}(z)$. Define the first-linear coordinate pairing $h_e(z;v,w)=\\langle T_e(z)w,T_e(z)v\\rangle_{h,e^{-1}(z)}$, reversing the arguments of the existing conjugate-first pairing. Put $H^e_{j\\bar k}(z)=h_e(z;\\partial_{x_j},\\partial_{x_k})$ and $\\omega_e(z;v,w)=\\operatorname{Re}h_e(z;iv,w)$, where $\\partial_{x_j}$ is the vector with entry $1$ at $j$ and zero elsewhere, and $\\partial_{y_j}=i\\partial_{x_j}$. The metric is Kähler when, in every compatible holomorphic chart and at every $z\\in V$, for all constant real tangent vectors $u,v,w\\in E$, $D_{\\mathbf R}(\\omega_e(-;v,w))_z(u)+D_{\\mathbf R}(\\omega_e(-;w,u))_z(v)+D_{\\mathbf R}(\\omega_e(-;u,v))_z(w)=0$; this is the coordinate definition of $d\\omega=0$. For a smooth complex-valued coefficient $f$ on an open $V\\subset E$, define $\\partial_{z_l}f=\\tfrac12(D_{\\mathbf R}f(\\partial_{x_l})-iD_{\\mathbf R}f(\\partial_{y_l}))$ and $\\partial_{\\bar z_l}f=\\tfrac12(D_{\\mathbf R}f(\\partial_{x_l})+iD_{\\mathbf R}f(\\partial_{y_l}))$, using derivatives within $V$. Compatible holomorphic charts mean the maximal atlas of the complex manifold structure.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hermitian-dolbeault-data"
+ ],
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Kong, Notes on Complex Geometry (April 9, 2025), §2.1 Theorem 2.1 and §3.3 Definition 3.18, printed p.7 / PDF page 7; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Real cyclic exterior differentiation is expanded explicitly."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Holomorphic coordinate charts of a complex manifold Hermitian metric fundamental two form Wirtinger partial derivatives",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Orientation.kahler_apply_apply\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x y : E) : o.kahler x y = ⟪x, y⟫ + ω x y • Complex.I\", \"doc\": \"For any vectors $x, y$ in a two-dimensional real inner product space $E$, the Kähler structure $o.\\text{kahler}$ evaluated at $x$ and $y$ equals the real inner product $\\\\langle x, y\\\\rangle$ plus the sy\"}\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(w z : ℂ) : Complex.orientation.kahler w z = z * conj w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"differentiableAt_complex_iff_differentiableAt_real\", \"module\": \"Mathlib.Analysis.Complex.Conformal\", \"type\": \": DifferentiableAt ℂ f x ↔ DifferentiableAt ℝ f x ∧ fderiv ℝ f x I = I • fderiv ℝ f x 1\", \"doc\": \"A function $ f $ is complex differentiable at a point $ x $ if and only if it is real differentiable at $ x $ as a function from $ \\\\mathbb{R}^2 $ to $ \\\\mathbb{R}^2 $, and its real derivative satisfies\"}\n  {\"name\": \"conformalAt_iff_differentiableAt_or_differentiableAt_comp_conj\", \"module\": \"Mathlib.Analysis.Complex.Conformal\", \"type\": \"{f : ℂ → ℂ} {z : ℂ} :\\n  ConformalAt f z ↔ (DifferentiableAt ℂ f z ∨ DifferentiableAt ℂ (f ∘ conj) (conj z)) ∧ fderiv ℝ f z ≠ 0\", \"doc\": \"A complex function $ f $ is conformal at a point $ z $ if and only if either $ f $ is complex differentiable at $ z $ or $ f $ composed with complex conjugation is complex differentiable at $ \\\\overlin\"}\n  {\"name\": \"Orientation.kahler_map_complex\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(f : E ≃ₗᵢ[ℝ] ℂ) (hf : Orientation.map (Fin 2) f.toLinearEquiv o = Complex.orientation) (x y : E) :\\n  o.kahler x y = f y * conj (f x)\", \"doc\": \"For a two-dimensional real inner product space $E$ equipped with an orientation $o$, if $f : E \\\\to\\\\cong_{\\\\mathbb{R}} \\\\mathbb{C}$ is a linear isometric equivalence such that $f$ preserves the orientati\"}\n  {\"name\": \"mdifferentiable_chart\", \"module\": \"Mathlib.Geometry.Manifold.MFDeriv.Atlas\", \"type\": \"(x : M) : (chartAt H x).MDifferentiable I I\", \"doc\": \"For any point $x$ in the manifold $M$ with corners modeled on $H$, the chart at $x$ is differentiable with respect to the model $I$.\"}\n  {\"name\": \"HarmonicAt.differentiableAt_complex_partial\", \"module\": \"Mathlib.Analysis.Complex.Harmonic.Analytic\", \"type\": \"(hf : HarmonicAt f x) : DifferentiableAt ℂ (fun z ↦ fderiv ℝ f z 1 - I * fderiv ℝ f z I) x\", \"doc\": \"If $ f $ is harmonic at $ x $, then the function $ g(z) = \\\\frac{\\\\partial f}{\\\\partial x}(z) - i\\\\frac{\\\\partial f}{\\\\partial y}(z) $, constructed from the real partial derivatives of $ f $ in the real and\"}\n  {\"name\": \"UpperHalfPlane.instChartedSpaceComplex\", \"module\": \"Mathlib.Analysis.Complex.UpperHalfPlane.Manifold\", \"type\": \": ChartedSpace ℂ ℍ\", \"doc\": \"The upper half-plane $\\\\mathbb{H} = \\\\{z \\\\in \\\\mathbb{C} \\\\mid \\\\operatorname{Im}(z) > 0\\\\}$ is equipped with a charted space structure modeled on the complex numbers $\\\\mathbb{C}$. This structure is induced\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Kähler coordinate calculus. The hits concern vector-space pairings, real Riemannian geometry, or one-variable differentiability; Mathlib has no coordinate fundamental form or closedness predicate for the existing HermitianMetric."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth positive Hermitian metric on a complex manifold with closed fundamental two form admits holomorphic coordinates normal to first order",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Bundle.ContMDiffRiemannianMetric.pos\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} [inst : NormedAddCommGroup EB] [inst_1 : NormedSpace ℝ EB] {HB : Type u_2}\\n  [inst_2 : TopologicalSpace HB] {IB : ModelWithCorners ℝ EB HB} {n : WithTop ℕ∞} {B : Type u_3}\\n  [inst_3 : TopologicalSpace B] [inst_4 : ChartedSpace HB B] {F : Type u_4} [inst_5 : NormedAddCommGroup F]\\n  \", \"doc\": \"For any smooth Riemannian metric on a vector bundle, and for any base point $b$ and non-zero vector $v$ in the fiber over $b$, the inner product $\\\\langle v, v \\\\rangle$ induced by the metric satisfies \"}\n  {\"name\": \"IsContMDiffRiemannianBundle.exists_contMDiff\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} {inst : NormedAddCommGroup EB} {inst_1 : NormedSpace ℝ EB} {HB : Type u_2}\\n  {inst_2 : TopologicalSpace HB} {IB : ModelWithCorners ℝ EB HB} {n : WithTop ℕ∞} {B : Type u_3}\\n  {inst_3 : TopologicalSpace B} {inst_4 : ChartedSpace HB B} {F : Type u_4} {inst_5 : NormedAddCommGroup F}\\n  \", \"doc\": \"Let $E \\\\to B$ be a vector bundle over a manifold $B$, with model fiber $F$. Let $n$ be an extended natural number (i.e., $n \\\\in \\\\mathbb{N} \\\\cup \\\\{\\\\infty\\\\}$). Suppose $E$ is a $C^n$ Riemannian bundle, \"}\n  {\"name\": \"IsRiemannianManifold\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/Basic\", \"type\": \"{E : Type u_1} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : NormedSpace ℝ E] →\\n      {H : Type u_2} →\\n        [inst_2 : TopologicalSpace H] →\\n          (I : ModelWithCorners ℝ E H) →\\n            (M : Type u_3) →\\n              [inst_3 : TopologicalSpace M] →\\n                [PseudoEMetricSpace M\", \"doc\": \"A charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is a Riemannian manifold if its tangent bundle is equipped with a Riemannian bundle structure, providing a s\"}\n  {\"name\": \"instIsRiemannianManifold\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/Basic\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : Bundle.RiemannianBundle fun x => TangentSpace I x] [inst_6 : IsMa\", \"doc\": \"A regular topological space $M$ equipped with a Riemannian metric (inducing a smoothly varying inner product on each tangent space $T_xM$) is a Riemannian manifold. This instance asserts that the comb\"}\n  {\"name\": \"eventually_norm_mfderivWithin_symm_extChartAt_lt\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/Basic\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : Bundle.RiemannianBundle fun x => TangentSpace I x] [inst_6 : IsMa\", \"doc\": \"For any point $x$ on a manifold with corners $M$ modeled on a normed vector space $E$ via a model with corners $I$, there exists a positive constant $C$ such that the norm of the Fréchet derivative of\"}\n  {\"name\": \"eventually_norm_mfderivWithin_symm_extChartAt_comp_lt\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/Basic\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : Bundle.RiemannianBundle fun x => TangentSpace I x] [inst_6 : IsMa\", \"doc\": \"For any point $x$ on a manifold $M$ modeled on a normed vector space $E$, there exists a constant $C > 0$ such that for all points $y$ sufficiently close to $x$, the operator norm of the Fréchet deriv\"}\n  {\"name\": \"eventually_riemannianEDist_le_edist_extChartAt\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/Basic\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : Bundle.RiemannianBundle fun x => TangentSpace I x] [inst_6 : IsMa\", \"doc\": \"For any point $x$ on a manifold $M$, there exists a positive constant $C$ such that for all points $y$ sufficiently close to $x$, the Riemannian extended distance between $x$ and $y$ is bounded above \"}\n  {\"name\": \"Manifold.exists_lt_locally_constant_of_riemannianEDist_lt\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/PathELength\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  {I : ModelWithCorners ℝ E H} {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : (x : M) → ENorm (TangentSpace I x)] [∀ (x : M), ENormSMulClass ℝ \", \"doc\": \"Given points $x,y$ on a manifold $M$ with Riemannian extended distance $d(x,y) < r$, and real numbers $a < b$, there exists a $C^1$-smooth path $\\\\gamma : [a,b] \\\\to M$ such that: (1) $\\\\gamma(a) = x$ an\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Kähler coordinate calculus. The hits concern vector-space pairings, real Riemannian geometry, or one-variable differentiability; Mathlib has no coordinate fundamental form or closedness predicate for the existing HermitianMetric."
+  },
+  {
+   "tool": "grep",
+   "query": "HermitianMetric|normalHolomorphic|KahlerManifold|KaehlerManifold",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Kähler coordinate calculus. The hits concern vector-space pairings, real Riemannian geometry, or one-variable differentiability; Mathlib has no coordinate fundamental form or closedness predicate for the existing HermitianMetric."
+  },
+  {
+   "tool": "grep",
+   "query": "chartHermitianPair|chartFundamental|wirtingerPartial|IsKahlerMetric in lean/WeilConjectures and lean/Sheaf",
+   "results": "rg returned no hits in either project source tree. A separate HermitianMetric search found ComplexManifold.HermitianMetric, metricPair, chartTangent and realCoordinateVector in lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean; these are reused.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate coordinate calculus; reuse the landed Hermitian data."
+  },
+  {
+   "tool": "DAG search",
+   "query": "Definition-node statements mentioning Hermitian metric, Wirtinger, fundamental form; blueprint_refs.py search Hermitian / Wirtinger / normal holomorphic",
+   "results": "JSON statement search found only def-sfb-hermitian-dolbeault-data, module Sheaf.Geometry.Manifold.HermitianDolbeaultData. Each of the three blueprint searches returned 0 matches. blueprint_refs.py ancestor lem-sfb-kahler-normal-holomorphic-coordinates returned no ancestor (null).",
+   "date": "2026-10-24",
+   "verdict": "Existing node provides the metric but not its fundamental form, closedness, or Wirtinger coordinate calculus."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kahler-normal-holomorphic-coordinates",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: operator identity used before deducing d-closedness by adjointness; supporting first-order input: Kong Proposition 6.12, the two commutators involving the dual Lefschetz operator, before the Laplacian comparison. Supporting input: Wenrui Kong, Notes on Complex Geometry (April 9, 2025), §3.3, Definition 3.18 and Theorem 3.19, printed p.7 (PDF page 7): the metric first jet in normal holomorphic coordinates Coordinate definitions for the closed fundamental form and its normal first jet.",
+   "via": [
+    "lem-sfb-kahler-normal-holomorphic-coordinates",
+    "lem-sfb-kahler-first-order-commutators",
+    "lem-sfb-kahler-laplacian-identity",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.KahlerCoordinateData",
+  "declaration": "ComplexManifold.IsKahlerMetric",
+  "file": "lean/Sheaf/Geometry/Manifold/KahlerCoordinateData.lean",
+  "statement": "def IsKahlerMetric (h : HermitianMetric n M) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "ComplexManifold.chartHermitianPair",
+   "ComplexManifold.chartHermitianCoefficient",
+   "ComplexManifold.chartFundamentalForm",
+   "ComplexManifold.IsKahlerMetric",
+   "ComplexManifold.wirtingerPartial",
+   "ComplexManifold.wirtingerBarPartial"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-047233346",
+  "group": "Q91",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-047233346",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Item node changes only lean + stmt_deps (+def-sfb-hermitian-dolbeault-data, +def-sfb-kahler-coordinate-data); both lean.statement fields verbatim in their files. Every clause matches the Lean: centred maximal-atlas holomorphic chart; first-linear pairing (metricPair with arguments swapped); omega = Re h(iv,w); IsKahlerMetric = cyclic coordinate dω=0 in every maximal-atlas chart, equivalent not stronger; form identity checked by hand, both sides = -Im h(v,w), sign and 1/2 correct; H(0)=δ; Wirtinger and conjugate-Wirtinger signs exact, taken within the open target at 0. Edge cases: n≥1 as in node, empty M vacuous, no universe restriction, no extra T2/compact/countability assumption. New def module: 6 real formula defs, no sorry/opaque/axiom/choice, source and blueprint docstrings present; no duplicate of these notions in Mathlib, lean/Sheaf, lean/WeilConjectures or the DAG, and citing nodes have no Lean records yet. Item docstring has the 4 proof steps; proof is sorry only; plain imports = modules of the 2 Mathlib proof_deps; report sections present; no statement change, so no citer audit. No file changed, so no compile; worker reports clean per-file compiles. Advisory only: Second reading section is the stock text."
+ }
+}

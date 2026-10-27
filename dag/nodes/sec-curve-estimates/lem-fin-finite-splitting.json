@@ -64,7 +64,44 @@
   "def-weil-pbc-strict-henselization-limit"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a finite morphism and let $\\bar s:\\operatorname{Spec}\\Omega\\to S$\nbe a geometric point with $\\Omega$ algebraically closed. Call a pointed etale\nneighbourhood $(V,\\bar v)$ of $\\bar s$ *split* if it comes with a decomposition\n$$\nX\\times_SV=\\bigsqcup_{\\bar x}X_{\\bar x}\n$$\ninto pairwise disjoint open-and-closed subschemes indexed by the points $\\bar x$\nof the finite geometric fibre of $f$ over $\\bar s$ [def-weil-pbc-geometric-fibre],\nsuch that $X_{\\bar x}$ contains the point $(\\bar v,\\bar x)$ of $X\\times_SV$. Then\nevery pointed etale neighbourhood of $\\bar s$ is refined by a split one: for\nevery $(U,\\bar u)$ there are a split neighbourhood $(V,\\bar v)$ and a morphism\n$(V,\\bar v)\\to(U,\\bar u)$ of pointed etale neighbourhoods. Each piece\n$X_{\\bar x}\\to V$ is finite, being a closed subscheme of the finite $V$-scheme\n$X\\times_SV$.",
+  "proof": [
+   {
+    "text": "The morphism $f$ is finite in the sense of\n[def-weil-pbc-scheme-conventions], hence affine. Given $(U,\\bar u)$, replace\n$U$ by an affine open neighbourhood of the image of $\\bar u$ lying over an\naffine open of $S$; we may assume $U=\\operatorname{Spec}R$ and\n$X\\times_SU=\\operatorname{Spec}C$ with $C$ a finite $R$-algebra. Let\n$A=\\mathcal O^{{\\mathrm{sh}}}_{U,\\bar u}$ be the strict henselization of\n[def-weil-pbc-strict-henselization-limit], the filtered colimit of the rings\n$A_V$ of the affine pointed etale neighbourhoods $(V,\\bar v)$ of $(U,\\bar u)$.\nThe ring $A$ is strictly henselian local (Stacks Project, Algebra, Lemma\n10.155.10, Tag [04GQ](https://stacks.math.columbia.edu/tag/04GQ)), so the\nfinite $A$-algebra $B=C\\otimes_RA=\\varinjlim_VC\\otimes_RA_V$ is a finite product\n$B=B_1\\times\\cdots\\times B_m$ of local rings (Algebra, Lemma 10.153.3 (10), Tag\n[04GG](https://stacks.math.columbia.edu/tag/04GG)). The residue field of each\n$B_k$ is finite over the separably closed residue field of $A$, hence purely\ninseparable over it; as $\\Omega$ is algebraically closed, each factor has\nexactly one $\\Omega$-point over $\\bar s$. This gives a bijection between the\nfactors and the points $\\bar x$ of the geometric fibre\n[def-weil-pbc-geometric-fibre], the factor $B_{\\bar x}$ being the one through\nwhich $\\bar x$ factors.",
+    "uses": [
+     "def-weil-pbc-scheme-conventions",
+     "def-weil-pbc-strict-henselization-limit",
+     "def-weil-pbc-geometric-fibre"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $e_{\\bar x}\\in B$ be the factor idempotents. Each comes from $C\\otimes_RA_V$\nfor some $V$, and the finitely many relations $e_{\\bar x}^2=e_{\\bar x}$,\n$e_{\\bar x}e_{\\bar x'}=0$ for $\\bar x\\ne\\bar x'$, $\\sum e_{\\bar x}=1$ and\n$\\bar x^*(e_{\\bar x'})=\\delta_{\\bar x\\bar x'}$ hold after passing to a further\nneighbourhood, since $B$ is the filtered colimit of the $C\\otimes_RA_V$. Over\nsuch a $V$ the basic opens of the idempotents decompose\n$X\\times_SV=\\operatorname{Spec}(C\\otimes_RA_V)$ into pairwise disjoint\nopen-and-closed pieces $X_{\\bar x}$, with $(\\bar v,\\bar x)\\in X_{\\bar x}$. The\nstructure map $V\\to U$ is the required morphism of pointed neighbourhoods.\nFinally $X_{\\bar x}\\to V$ is finite, as a closed subscheme of the finite\n$V$-scheme $X\\times_SV$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

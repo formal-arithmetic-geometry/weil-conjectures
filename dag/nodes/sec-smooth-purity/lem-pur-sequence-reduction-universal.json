@@ -1,0 +1,142 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 06YS (lemma-K-flat-resolution), and 0G7D (lemma-factor-through-K-flat), specialized as in parent node lem-pur-sequence-kflat-comparison-shifts."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurSequenceKFlatComparisonShifts",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-pur-sequence-reduction-universal",
+ "kind": "statement",
+ "title": "The supplied strict reduction has a normalized universal counit",
+ "statement": "Fix the finite-field datum, $\\ell\\ne p$, $E$ and finite-type $W$ of [def-weil-finite-field-fiber]. Let $S$ be a supplied coefficient calculus with its coherence [lem-coef-derived-system-evaluation-calculus] and $O$ ordinary quotient-sequence adjoints [def-pur-sequence-adjoint-resolution-data]. There exists a counit $\\epsilon:Q\\mathcal R\\to O^*Q$ making the supplied reduction $\\mathcal R$ itself a universal left-derived functor of ordinary pullback. For every flat-term K-flat complex $P$, $\\epsilon_P$ is the hom of an isomorphism whose actual finite and quotient-transition identifications satisfy CoefficientReductionPresentation [lem-coef-derived-system-evaluation-calculus]. No resolution comparisons or derived shift comparisons are asserted.",
+ "stmt_deps": [
+  "def-pur-sequence-kflat-comparison-data",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pullback] to the constant-system projection O.p. Its ordinary inverse image is B tensor_(cA) c(-). The fixed description [def-coef-ringed-sequence-site] restricts this sheaf tensor at each n to the ordinary tensor over A; [def-pur-sheaf-tensor-product] and O.tensor identify it with Q tensor_A B_n. O.tensor_transition identifies its actual horizontal maps with the quotient transitions. The universal counit is invertible on flat-term K-flat representatives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-coef-ringed-sequence-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; Tag 0940, section-derived-limits; specialization to the supplied ring map cA to B."
+   }
+  },
+  {
+   "text": "By [lem-pc-kflat-resolution] every input has a flat-term K-flat resolution. Apply [lem-sp-strict-coefficient-tensor-descent] to the coefficient quotients and their transition maps. The normalization in the supplied coherent calculus [lem-coef-derived-system-evaluation-calculus] identifies its reduction with this unique resolving descent, including finite evaluations and horizontal transitions. Transfer the universal counit from step 1 across this normalized comparison to S.reduction. Universality is invariant under that isomorphism. On each flat-term K-flat representative the counit is an isomorphism, and the normalized finite and transition identifications are precisely CoefficientReductionPresentation with O.tensor. This gives the counit and all assertions, without claiming resolution-comparison or shift data.",
+   "uses": [
+    "lem-sp-strict-coefficient-tensor-descent",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, lemma-K-flat-resolution, and 0G7D, lemma-factor-through-K-flat; normalized strict-system descent, using derived.tex Tag 06XN, lemma-find-existence-computes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-coef-ringed-sequence-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-strict-coefficient-tensor-descent",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The supplied strict reduction has a normalized universal counit; specialization of the parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal left derived functor for quotient coefficient systems identified with a supplied K-flat reduction functor by its normalized counit",
+   "results": "8 hits: CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerivedToHomotopyCategory",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor or shift infrastructure; no quotient-system normalization with the specified finite comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.HasLeftDerivedFunctor.mk', CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor or shift infrastructure; no quotient-system normalization with the specified finite comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|leftDerivedUnique",
+   "results": "14 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor or shift infrastructure; no quotient-system normalization with the specified finite comparisons."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient transport through reduction/total-limit adjunction, compatibility clause (7); The supplied strict reduction has a normalized universal counit",
+   "via": [
+    "lem-pur-sequence-kflat-comparison-shifts",
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurSequenceReductionUniversal",
+  "file": "lean/Sheaf/Paper/PurSequenceReductionUniversal.lean",
+  "declaration": "WeilConjectures.purSequenceReductionUniversal",
+  "statement": "theorem purSequenceReductionUniversal (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p) [W.Over (Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] (S : CoefficientDerivedSystemCalculus l E W) (hS : CoefficientDerivedSystemCoherence l E W S) (O : PurSequenceOrdinaryAdjoints l E W) : ∃ ε : DerivedCategory.Q ⋙ S.reduction ⟶ O.pullback.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q, S.reduction.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (scalarReductionSource l E W) (.up ℤ)) ∧ ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ) (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q), (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) (Q.X i)) → ∃ e : S.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj ((O.pullback.mapHomologicalComplex (.up ℤ)).obj Q), ε.app Q = e.hom ∧ CoefficientReductionPresentation l E W S.toCoefficientDerivedSystemReduction Q hQ ((O.pullback.mapHomologicalComplex (.up ℤ)).obj Q) e (fun n ↦ (NatIso.mapHomologicalComplex (O.tensor n) (.up ℤ)).app Q)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57002",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T204752-L-3007079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57002",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T204752-L-3007079",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); six data declarations moved to PurSequenceKFlatComparisonData vs the clone originals (verbatim except blueprint ids); the two new sorry statements vs the original conjuncts and nodes; direct importers PurSequenceComparisonTranspose and BasicRealizationShiftSquare compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-punctured-local-spectrum-closed-points",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited chain of lem-sfb-finite-type-image-immediate-boundary-point (blueprint.from.node null): Stacks Tag 0GWV, proof, paragraph beginning 'Assume S and Y affine': 'Since the punctured spectrum Spec(O_{Y,y}) \\ {y} is Jacobson (Morphisms, Lemma 02J6) we find a closed point t ... with t in E (Topology, Lemma 005X)', the selection of the immediate generalization t (item step 5).",
+   "via": [
+    "lem-sfb-finite-type-image-immediate-boundary-point",
+    "lem-sfb-normal-curve-universal-closedness-test",
+    "lem-sfb-properness-normal-curve-local-test",
+    "lem-sfb-affine-properness-formal-arc-test",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Closed points of the punctured spectrum of a Noetherian local ring meet its locally closed subsets",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring] with $A\\neq0$, let $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $U=X\\setminus\\{\\mathfrak m\\}$ with its subspace topology. For every nonempty locally closed subset $W\\subseteq U$ (an intersection of an open and a closed subset of $U$) there is a point $w\\in W$ whose singleton $\\{w\\}$ is closed in $U$. Here local means that $\\mathfrak m$ is the unique maximal ideal of $A$; $U$ may be empty, in which case the assertion is vacuous.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02J6, lemma-ubiquity-Jacobson-schemes, case (4) (Spec(R) minus the closed point is Jacobson), proved by Properties Tag 02IM, lemma-complement-closed-point-Jacobson; closed points in locally closed subsets via Topology Tag 005X (lemma-jacobson-inherited) and the definition Tag 005U."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "The closed subsets of $X$ are the sets $V(I)$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. Given a descending chain of closed sets, take their radical ideals; the radical formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq] turns it into an ascending chain of ideals. Its union is an ideal; its finite generators, supplied by [def-weil-pbc-noetherian-ring], all belong to one member, so the chain stabilizes. Thus $X$ is Noetherian as a topological space. The spectrum is Kolmogorov: by the closure formula in [lem-weil-pbc-spec-irreducible-closed-subsets-primes], equality of the closures of two points gives inclusion of their primes in both directions, hence equality. Every subspace, in particular $W$, is Kolmogorov: intersect an ambient open separating two points with that subspace.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, lemma-complement-closed-point-Jacobson, direct proof of (1): Noetherian and Kolmogorov hypotheses, expanded from definitions."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-noetherian-space-compact-subsets] to the affine scheme $X$ and its subset $W$: $W$ is quasi-compact with its subspace topology. Since $W$ is nonempty and Kolmogorov, [lem-sc-quasi-compact-kolmogorov-closed-point], with ambient space $W$ and closed subset all of $W$, supplies a point $w\\in W$ whose singleton is closed in $W$. We will show that this same point is closed in $U$.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005E, lemma-quasi-compact-closed-point, and Tag 04ZA, lemma-Noetherian-quasi-compact; the choice used in the proof of Tag 02I7."
+   }
+  },
+  {
+   "text": "Every prime of $A$ is contained in $\\mathfrak m$: use [lem-weil-pbc-proper-ideal-contained-in-maximal] and uniqueness of the maximal ideal. In particular $V(\\mathfrak m)=\\{\\mathfrak m\\}$, so $U$ is open in $X$. Write $W=O\\cap F$ with $O$ open and $F$ closed in $U$. Since $\\{w\\}$ is closed in $W$, write $\\{w\\}=W\\cap C$ with $C$ closed in $U$. Hence $\\{w\\}=O\\cap(F\\cap C)$. The closed set $F\\cap C$ contains the closure of $w$ in $U$, giving $\\{w\\}=O\\cap\\overline{\\{w\\}}^{\\,U}$. Write $\\mathfrak p$ for the prime of $w$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], this says $\\{w\\}=O\\cap V(\\mathfrak p)$, since $O\\subseteq U$. As $U$ is open, $O$ is open in $X$; consequently $\\{\\mathfrak p\\}$ is open in the whole subspace $V(\\mathfrak p)$, not just in its puncture.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, direct proof (1), the locally closed point becomes an open generic point of Spec(A/p); the subspace calculation is written out."
+   }
+  },
+  {
+   "text": "Suppose $w$ were not closed in $U$. Its closure in $U$ is $V(\\mathfrak p)\\cap U$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes], and contains a distinct point with prime $\\mathfrak q$. Step 3 gives $\\mathfrak p\\subsetneq\\mathfrak q\\subsetneq\\mathfrak m$. Put $B=A/\\mathfrak p$. By [lem-weil-pbc-quotient-local-structure], $B$ is a nonzero local ring with maximal ideal $\\mathfrak m/\\mathfrak p$. It is a domain: if $\\bar a\\bar b=0$, then $ab\\in\\mathfrak p$, so primality puts $a$ or $b$ in $\\mathfrak p$. It is Noetherian directly from finite generation: for an ideal $J\\subseteq B$, take finitely many generators of its inverse image in $A$ by [def-weil-pbc-noetherian-ring]; their images generate $J$ because $A\\to B$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-quotient-local-structure",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, direct proof (1): passage to the Noetherian local domain A/p; quotient Noetherianity expanded as in Algebra lemma-Noetherian-permanence."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $\\operatorname{Spec}B$ is homeomorphic to $V(\\mathfrak p)$ by inverse image along $A\\to B$, with inverse $\\mathfrak r\\mapsto\\mathfrak r/\\mathfrak p$; it preserves and reflects inclusion of primes, and sends the zero prime to $\\mathfrak p$. Write $\\bar{\\mathfrak q}=\\mathfrak q/\\mathfrak p$ and $\\bar{\\mathfrak m}=\\mathfrak m/\\mathfrak p$, so $(0)\\subsetneq\\bar{\\mathfrak q}\\subsetneq\\bar{\\mathfrak m}$ in $B$. By Step 3, $\\{\\mathfrak p\\}$ is open in $V(\\mathfrak p)$, so $\\{(0)\\}$ is open in $\\operatorname{Spec}B$. The basis clause (i) of [lem-weil-pbc-spec-localization-away-basic-open] at the point $(0)$ gives $\\bar x\\in B$ with $(0)\\in D(\\bar x)\\subseteq\\{(0)\\}$, so $D(\\bar x)=\\{(0)\\}$. Since $\\bar{\\mathfrak q}\\ne(0)$, $\\bar{\\mathfrak q}\\notin D(\\bar x)$, i.e. $\\bar x\\in\\bar{\\mathfrak q}\\subseteq\\bar{\\mathfrak m}$; and $\\bar x\\ne0$ because $(0)\\in D(\\bar x)$. In words: every nonzero prime of $B$ contains $\\bar x$.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IG, lemma-Noetherian-local-domain-dim-2-infinite-opens, proof: the choice of $x\\in\\mathfrak m$, $x\\ne0$, with $D(x)=\\{(0)\\}$; Tag 00E5 (lemma-spec-closed) and Tag 00E0 (14)."
+   }
+  },
+  {
+   "text": "Let $C=B/\\bar xB$; it is nonzero since $\\bar x\\in\\bar{\\mathfrak m}$, and Noetherian by the argument of Step 4 (generators of inverse images map onto generators). By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $C$ has finitely many minimal primes. Through the inclusion-preserving bijection of [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] between $\\operatorname{Spec}C$ and $V(\\bar xB)$, these are finitely many primes $P_1,\\dots,P_r$ of $B$, each minimal over $\\bar xB$, and they are all such primes. Every prime $P\\supseteq\\bar xB$ contains some $P_i$: the primes $P'$ with $\\bar xB\\subseteq P'\\subseteq P$, ordered by reverse inclusion, satisfy Zorn's hypothesis, because the intersection $I$ of a chain of primes is prime (if $a,b\\notin I$, pick chain members omitting $a$, resp. $b$; the smaller one omits both, so it omits $ab$); a minimal element is minimal over $\\bar xB$. As $\\bar{\\mathfrak m}\\supseteq\\bar xB$, $r\\ge1$. Each $P_i$ contains $\\bar x\\ne0$, so $P_i\\ne(0)$, and [lem-sfb-krull-principal-ideal-height-bound] applied to $B$, $\\bar x$ and $P_i$ gives $\\operatorname{ht}_B(P_i)\\le1$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-sfb-krull-principal-ideal-height-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FR (lemma-Noetherian-irreducible-components) applied to $R/xR$, and Tag 00KV (lemma-minimal-over-1, part (1)); replaces the dimension count of Tag 02IG via 00KW and 02IE."
+   }
+  },
+  {
+   "text": "No $P_i$ contains $\\bar{\\mathfrak m}$. Otherwise $\\bar{\\mathfrak m}\\subseteq P_i\\subseteq\\bar{\\mathfrak m}$ (every prime of the local ring $B$ lies in $\\bar{\\mathfrak m}$, as in Step 3), so $P_i=\\bar{\\mathfrak m}$ and $(0)\\subsetneq\\bar{\\mathfrak q}\\subsetneq\\bar{\\mathfrak m}$ is a strict prime chain of length $2$ inside $P_i$, contradicting $\\operatorname{ht}_B(P_i)\\le1$ from Step 6. Apply [lem-weil-pbc-prime-avoidance] with $J=\\bar{\\mathfrak m}$ and the $r\\ge1$ prime ideals $P_1,\\dots,P_r$: there is $y\\in\\bar{\\mathfrak m}$ with $y\\notin P_i$ for all $i$. In particular $y\\ne0$, since $0\\in P_1$.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DS (lemma-silly, prime avoidance), applied to the maximal ideal and the minimal primes over xR."
+   }
+  },
+  {
+   "text": "Since $y\\in\\bar{\\mathfrak m}$, the ideal $yB$ is contained in the prime $\\bar{\\mathfrak m}$, and the Zorn argument of Step 6 gives a prime $Q\\subseteq\\bar{\\mathfrak m}$ minimal over $yB$. By [lem-sfb-krull-principal-ideal-height-bound] applied to $B$, $y$ and $Q$, $\\operatorname{ht}_B(Q)\\le1$. As $y\\ne0$ lies in $Q$, $Q\\ne(0)$, so by Step 5 $\\bar x\\in Q$, and by Step 6 $Q\\supseteq P_i$ for some $i$. Now $(0)\\subsetneq P_i\\subseteq Q$; if $P_i\\ne Q$ this is a strict chain of length $2$ inside $Q$, contradicting $\\operatorname{ht}_B(Q)\\le1$. Hence $Q=P_i$ and $y\\in P_i$, contradicting Step 7. So the assumption of Step 4 was false: $\\{w\\}$ is closed in $U$, and $w\\in W$ is the required point. If $U$ is empty there is no nonempty $W$ and the assertion is vacuous.",
+   "uses": [
+    "lem-sfb-krull-principal-ideal-height-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, lemma-complement-closed-point-Jacobson, direct proof of (1), final contradiction; via Algebra Tag 00KV (lemma-minimal-over-1) in place of Tag 02IG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 02IM, lemma-complement-closed-point-Jacobson, direct proof of (1), expanded with the closed-point choice of Topology Tag 005E; the impossibility of an open generic point in a Noetherian local domain with a strict prime chain of length 2 (Algebra Tag 02IG) is proved by Krull's principal ideal theorem 00KV, finiteness of minimal primes 00FR and prime avoidance 00DS instead of the dimension count of 02IG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty locally closed subset of the punctured spectrum of a Noetherian local ring contains a point closed in the punctured spectrum",
+   "results": "Actual logged response: 8 hits; nonempty_inter_closedPoints, PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, jacobsonSpace_iff_locallyClosed, PrimeSpectrum.exists_isClosed_singleton_of_isJacobsonRing, IsLocalRing.specializes_closedPoint, PrimeSpectrum.quasiSober, IsLocalRing.isClosed_singleton_closedPoint, IsLocalRing.closed_point_mem_iff",
+   "date": "2026-10-24",
+   "verdict": "No match: the Jacobson-space results assume the puncture is Jacobson; the spectrum and localization results assume the original ring is Jacobson. No result supplies the punctured-spectrum assertion for a merely Noetherian local ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "JacobsonSpace, PrimeSpectrum",
+   "results": "Actual logged response: 2 hits; PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing, PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace",
+   "date": "2026-10-24",
+   "verdict": "No match: the Jacobson-space results assume the puncture is Jacobson; the spectrum and localization results assume the original ring is Jacobson. No result supplies the punctured-spectrum assertion for a merely Noetherian local ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The punctured spectrum of a Noetherian local ring is a Jacobson space",
+   "results": "Actual logged response: 8 hits; PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace, PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing, AlgebraicGeometry.Spec.topObj, AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isLocallyNoetherian_Spec, PrimeSpectrum.irreducibleSpace",
+   "date": "2026-10-24",
+   "verdict": "No match: the Jacobson-space results assume the puncture is Jacobson; the spectrum and localization results assume the original ring is Jacobson. No result supplies the punctured-spectrum assertion for a merely Noetherian local ring."
+  },
+  {
+   "tool": "grep",
+   "query": "punctur|JacobsonSpace|jacobsonSpace_iff_locallyClosed",
+   "results": "Actual logged response: 5 hits; 17, 19, 21, 72, 75 (subdirectory Topology/JacobsonSpace.lean)",
+   "date": "2026-10-24",
+   "verdict": "No match: the Jacobson-space results assume the puncture is Jacobson; the spectrum and localization results assume the original ring is Jacobson. No result supplies the punctured-spectrum assertion for a merely Noetherian local ring."
+  },
+  {
+   "tool": "grep",
+   "query": "punctur|[Nn]oetherian.*[Jj]acobson|[Jj]acobson.*[Ll]ocal|[Ll]ocal.*[Jj]acobson",
+   "results": "Actual logged response: 25 hits; Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Henselian.lean (subdirectory RingTheory)",
+   "date": "2026-10-24",
+   "verdict": "No match: the Jacobson-space results assume the puncture is Jacobson; the spectrum and localization results assume the original ring is Jacobson. No result supplies the punctured-spectrum assertion for a merely Noetherian local ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a Noetherian local ring away from an element of its maximal ideal is a Jacobson ring",
+   "results": "Actual logged response: 8 hits; isJacobsonRing_localization, Polynomial.jacobson_bot_of_integral_localization, instIsJacobsonRingOfKrullDimLEOfNatNat, IsJacobsonRing, isJacobsonRing_of_finiteType, IsLocalization.isMaximal_of_isMaximal_disjoint, instIsHausdorffMaximalIdeal, IsLocalization.isMaximal_iff_isMaximal_disjoint",
+   "date": "2026-10-24",
+   "verdict": "No match: the Jacobson-space results assume the puncture is Jacobson; the spectrum and localization results assume the original ring is Jacobson. No result supplies the punctured-spectrum assertion for a merely Noetherian local ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-finite-type-image-immediate-boundary-point",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-punctured-local-spectrum-closed-points",
+  "worker": "stage1",
+  "summary": "Reviewer repair (Q104 maintainer read, 2026-10-24): the delivered one-step reuse cited a node that is in the 2026-10-19 artin-gabber section of coord/route-pivot-dropped.txt (as is the Stacks 02IG node beneath it). The proof now carries the direct proof of Stacks 02IM(1) itself: Steps 1-4 give a Noetherian T0 spectrum, a point of W closed in W (04ZA/005E), an open generic point of V(p) and the quotient domain B=A/p with (0)<q<m; Steps 5-8 replace 02IG by D(x)={(0)}, finitely many minimal primes over xB of height at most 1 (00FR, 00KV), prime avoidance (00DS) and a minimal prime over yB. Every citation is a live Mathlib leaf; statement and stmt_deps unchanged.",
+  "blueprint": "Retains inherited Stacks 0GWV boundary-point selection: the punctured-spectrum closed-point input to step 5 of lem-sfb-finite-type-image-immediate-boundary-point. Latest blueprint sk-thm-sf-ctf-stability direct-image route is unchanged; no blueprint node states this ring-theoretic input. blueprint_refs ancestor returns None, retained in blueprint.from.node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-55a42996b",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-55a42996b (reviewer sub-agent of L); spot-checked: Mechanical finding confirmed (C1): the delivery's only proof step reuses lem-per-punctured-local-closed-points. That node is dropped: coord/route-pivot-dropped.txt line 1827, section 2026-10-19 artin-gabber. Its proof also runs through two more dropped nodes: the 02IG node lem-per-noetherian-local-domain-open-infinite (line 1729) and lem-per-partial-parameters-quotient-dimension (line 1762). The report does not mention the drop. The item itself is live: it is not on the list, its citer lem-sfb-finite-type-image-immediate-boundary-point (Stacks 0GWV, Step 5) is live, it is still unsplit on live and side-live, and this is its first delivery. The mathematics is generic commutative algebra (Stacks 02IM(1)) and uses none of the forbidden artin-gabber machinery, so the fault can be repaired. Repair: the whole item JSON is in fixes/dag/nodes/sec-six-functors-basics/. The proof now carries the direct proof of 02IM(1) in 8 steps. Steps 1-4 are copied from the former node: Noetherian T0 spectrum (00E0, 00ES); W quasi-compact (04ZA) and a point closed in W (005E); {p} open in V(p); B=A/p a Noetherian local domain with (0)<q<m. Steps 5-8 replace the 02IG dimension count. Step 5: D(x)={(0)} via 00E5 and the basis clause 00E0(14). Step 6: B/xB has finitely many minimal primes (00FR), so there are finitely many primes P_i minimal over xB, each of height at most 1 by Krull's principal ideal theorem (00KV, lem-sfb-krull-principal-ideal-height-bound); every prime containing x contains some P_i (Zorn, written out). Step 7: m is not contained in any P_i because it has height at least 2, so prime avoidance (00DS) gives y in m outside every P_i. Step 8: a prime Q minimal over yB has height at most 1, is nonzero so contains x, hence contains and so equals some P_i, which puts y in P_i: contradiction. Every citation is a live Mathlib leaf; no dropped id remains in the file. tool_uses is now [], proof_deps is the union of the step uses, and the statement, stmt_deps and searches are unchanged. The statement agrees with 02J6(4) and the 005U locally-closed criterion; the conclusion is closed in U, not in X, which is correct for a DVR. Small cases checked: field or Artinian ring (U empty), DVR, k[[s,t]], k[[s,t]]/(st). The citer's Step 5 uses the item exactly as stated. No SGA, no new nodes, no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PuncturedLocalClosedPoints",
+  "declaration": "PrimeSpectrum.exists_isClosed_singleton_of_isLocallyClosed_punctured",
+  "statement": "theorem exists_isClosed_singleton_of_isLocallyClosed_punctured\n    (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]\n    (W : Set {x : AlgebraicGeometry.Spec (CommRingCat.of A) |\n      x ≠ IsLocalRing.closedPoint A})\n    (hW : W.Nonempty) (hWlc : IsLocallyClosed W) :\n    ∃ w ∈ W, IsClosed ({w} : Set {x : AlgebraicGeometry.Spec (CommRingCat.of A) |\n      x ≠ IsLocalRing.closedPoint A})",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing statement restored by Q134 on 2026-10-24 for lem-per-punctured-local-closed-points. Read both the local module and current live server source via scompile.py --source. IsLocalRing includes Nontrivial; the subtype of Spec A excludes precisely the unique maximal ideal and carries its subspace topology. No new declaration or proof-route change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02af34081",
+  "group": "Q135",
+  "result": "pass",
+  "note": "First lean record of the item, existing:true binding to PrimeSpectrum.exists_isClosed_singleton_of_isLocallyClosed_punctured (Q134 owner lem-per-punctured-local-closed-points); only that record differs from side-live. Clause-by-clause match: CommRing+IsNoetherianRing+IsLocalRing (Nontrivial gives A≠0), arbitrary universe u, U = Spec subtype minus closedPoint, W Nonempty and IsLocallyClosed in U, conclusion {w} closed in U not X. Edge cases checked: field/Artinian vacuous, DVR. lean.statement verbatim to the file. H4 satisfied by reuse. No module delivered, stmt_deps not dropped, both report sections present. No compile (no file changed). Maintainer notes: owner node and module still on route-pivot drop lists (l.1818/l.1505), so remove them or the citer will hit check (c); owner docstring Step 6 cites dropped 02IG, while this item's Krull-PIT/00FR/prime-avoidance proof is a live route."
+ }
+}

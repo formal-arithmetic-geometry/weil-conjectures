@@ -103,14 +103,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystemNatural",
-  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineComplexSystemNatural.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystemNatural",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictedAffineComplexSystemNatural.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_restricted_affine_complex_system_natural",
   "statement": "theorem exists_restricted_affine_complex_system_natural {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ)\n    (U : S.Etale) [IsAffine U.left] :\n    ∃ (T : (Iᵒᵖ)ᵒᵖ ⥤ AddCommGrpCat.{v + 1}) (B : Cocone T),\n    EtaleComplexCohomologyPresentation T B ∧ ∃\n    (restrictionIso : ∀ i : (Iᵒᵖ)ᵒᵖ,\n      rawAffineRestrictedCohomology (D.obj (op i.unop.unop)).hom p\n        (F i.unop.unop) U ≅ T.obj i)\n    (restrictionLimitIso : rawAffineRestrictedCohomology c.pt.hom p (colimit H) U ≅ B.pt),\n    (∀ (i : (Iᵒᵖ)ᵒᵖ)\n      (t : rawAffineRestrictedCohomology (D.obj (op i.unop.unop)).hom p\n        (F i.unop.unop) U),\n      B.ι.app i ((restrictionIso i).hom t) = restrictionLimitIso.hom\n        (rawAffineRestrictedCohomologyMap (c.π.app (op i.unop.unop)).left\n          (D.obj (op i.unop.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop.unop))) p\n          (F i.unop.unop) (colimit H)\n          ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) U t)) ∧\n    (∀ {i j : I} (f : i ⟶ j)\n      (t : rawAffineRestrictedCohomology (D.obj (op i)).hom p (F i) U),\n      T.map ((opOpEquivalence I).inverse.map f) ((restrictionIso (op (op i))).hom t) =\n        (restrictionIso (op (op j))).hom\n          (rawAffineRestrictedCohomologyMap (D.map f.op).left\n            (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p\n            (F i) (F j) (φ f) U t))",
   "branch": "sheaf-dag",
   "by": "F1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-25 (X7): retire the duplicate Sheaf module listed in coord/retire-items.tsv. The upstream twin has the byte-identical public signature, identical four imports and the identical public proof body. Its existing consumer AbelianRawCoconeComplexPresentation already imports the upstream twin. Keep all proof and statement dependencies; only the implementation attachment changes."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -123,14 +124,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "X-c5349",
-  "group": "N1",
+  "reviewer": "C-4dd97",
+  "group": "X7",
   "result": "pass",
-  "landing": "20261013T082357-L-1640805",
+  "landing": "20261025T164744-L-1073822",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof with both DAG records, source constructions, unchanged interface, clean compilation, direct importer, and allowed axioms plus documented sorryAx."
+  "note": "independent cc review: Retired Sheaf module stub and repointed node lean record matched with the WeilConjectures twin (diff: public theorem byte-identical, only header and private-helper binder names differ), retire-items.tsv row 3346, and the import graph (zero importers of the Sheaf module)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

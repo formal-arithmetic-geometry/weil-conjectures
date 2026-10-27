@@ -302,22 +302,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.CatenaryCompletionHyperplane",
-  "declaration": "AdicCompletion.exists_prime_quotient_completion_component_dimension_pred",
+  "declaration": "IsCatenaryRing.exists_hyperplane_prime_quotient",
   "file": "lean/Sheaf/RingTheory/CatenaryCompletionHyperplane.lean",
-  "statement": "theorem exists_prime_quotient_completion_component_dimension_pred (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (hcat : IsCatenaryRing A) (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hq : q ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (d : ℕ) (hdim : ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸ q) = (d : WithBot ℕ∞)) (hleast : ∀ q' ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A), (d : WithBot ℕ∞) ≤ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸ q')) (hd : 1 < d) (hlt : (d : WithBot ℕ∞) < ringKrullDim A) : ∃ f : A, f ≠ 0 ∧ f ∈ IsLocalRing.maximalIdeal A ∧ ∃ p ∈ (Ideal.span {f}).minimalPrimes, ∃ r ∈ minimalPrimes (AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p)), ringKrullDim (A ⧸ p) + 1 = ringKrullDim A ∧ ringKrullDim (AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p) ⧸ r) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ 0 < d - 1 ∧ ((d - 1 : ℕ) : WithBot ℕ∞) < ringKrullDim (A ⧸ p)",
+  "statement": "theorem exists_hyperplane_prime_quotient (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (hcat : IsCatenaryRing A) (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hq : q ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (d : ℕ) (hdim : ringKrullDim ((AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ q) = d) (hleast : ∀ q' ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A), (d : WithBot ℕ∞) ≤ ringKrullDim ((AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ q')) (hd : 1 < d) (hdA : (d : WithBot ℕ∞) < ringKrullDim A) : ∃ f : A, f ≠ 0 ∧ f ∈ IsLocalRing.maximalIdeal A ∧ ∃ p ∈ (Ideal.span ({f} : Set A)).minimalPrimes, ∃ r : Ideal (AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p)), r ∈ minimalPrimes (AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p)) ∧ ringKrullDim (A ⧸ p) + 1 = ringKrullDim A ∧ ringKrullDim ((AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p)) ⧸ r) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ 0 < d - 1 ∧ ((d - 1 : ℕ) : WithBot ℕ∞) < ringKrullDim (A ⧸ p)",
   "branch": "newtargets-dag",
-  "by": "Q88",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.CatenaryCompletionHyperplane deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-4fbeaec19",
-  "group": "Q88",
+  "reviewer": "NT-stage2-cc-1178c6204",
+  "group": "Q37",
   "result": "pass",
-  "note": "All hypotheses (Noetherian local domain, IsCatenaryRing = 00NI, q minimal prime of the canonical maximal-ideal AdicCompletion, dim B/q = d, leastness, 1<d<dim A) and all conclusion clauses (f≠0 in m, p ∈ minimalPrimes of span{f}, r minimal prime of the completion of A/p at m.map mk p, dim(A/p)+1 = dim A, completed component dim d-1, 0<d-1<dim A/p) match the node, with the same quantifier order and no extra assumptions. Added stmt_dep def-exc-excellent-ring owns IsCatenaryRing: needed, acyclic. lean.statement is verbatim. No Mathlib or project duplicate. Docstrings have source 0AW3/00NI, the blueprint id and the six proof steps. Only sorry. nt_compile --json clean in 1.8 s."
+  "note": "Clause-by-clause match: Noetherian local domain; IsCatenaryRing (def-exc-excellent-ring record, equals the node's 00NI wording); q in minimalPrimes of AdicCompletion (maximalIdeal A) A; d : ℕ with ringKrullDim (B/q) = d, least over minimal primes, 1<d<dim A; conclusion ∃ f≠0 in m, p ∈ (span{f}).minimalPrimes, r minimal prime of AdicCompletion (m.map mk p) (A/p) (= maximal-ideal completion), dim(A/p)+1 = dim A (equivalent, dim A finite), completed component dim d-1 (no truncation, d>1), 0<d-1<dim(A/p). No extra assumptions, one universe, statement verbatim, only lean field changed, imports exist, docstrings carry source/blueprint/6 proof steps, sorry only. No Mathlib catenary duplicate. Note: side-live node has lean_removed (earlier Q88 module deleted as unreachable dead code); reachability is a question for dispatch, not a delivery fault."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/CatenaryCompletionHyperplane.lean",
+  "module": "Sheaf.RingTheory.CatenaryCompletionHyperplane",
+  "declaration": "AdicCompletion.exists_prime_quotient_completion_component_dimension_pred",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

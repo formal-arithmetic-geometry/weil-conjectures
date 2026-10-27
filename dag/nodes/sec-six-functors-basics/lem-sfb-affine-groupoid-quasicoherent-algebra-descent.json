@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+ "kind": "statement",
+ "title": "Quasi-coherent algebras and sections on an affine flat groupoid",
+ "statement": "Let $k$ be a field, $U=\\operatorname{Spec}E$ and $R=\\operatorname{Spec}L$ affine $k$-schemes, and $(U,R,s,t,e,i,c)$ a groupoid with $s,t$ finite locally free. Put $\\mathcal Z=[U/R]$. Pullback to $U$ identifies quasi-coherent $\\mathcal O_{\\mathcal Z}$-algebras with commutative $E$-algebras $A$ equipped with an algebra isomorphism $\\beta_A:A\\otimes_{E,s^\\sharp}L\\simeq A\\otimes_{E,t^\\sharp}L$ whose identity pullback is the identity and whose two successive pullbacks on composable arrows compose to its pullback along $c$. Morphisms are algebra maps compatible with these isomorphisms. For the algebra $\\mathcal A$ corresponding to $(A,\\beta_A)$, pullback identifies its global sections with $A^R=\\{a\\in A:\\beta_A(a\\otimes1)=a\\otimes1\\}$. A surjection $\\mathcal A\\twoheadrightarrow\\mathcal B$ induces a surjective equivariant map $A\\twoheadrightarrow B$. These assertions apply to arbitrary quasi-coherent algebras, not just finite-type ones. Algebraic stacks and quasi-coherent sheaves have the meanings in [def-sfb-adequate-moduli-space], and algebraic spaces have the meaning in [def-trf-algebraic-space]. A 2-fibre product retains the specified isomorphism between the two images of an object. For an affine groupoid $(U,R,s,t,e,i,c)$, the groupoid laws are those of [def-a1-scheme-groupoid-laws]; $[U/R]$ denotes the fppf stackification of the groupoid with objects $U(T)$ and arrows $R(T)$ on test schemes $T$. Tensor products of modules and their algebra structures use [def-weil-pbc-module-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06WT (proposition-quasi-coherent) and 06WV (lemma-quasi-coherent-algebraic-stack), part (1), applied to algebra objects; the explicit affine algebra and invariant-section formulation is also the first two paragraphs of Alper Proposition 8.2.1, read online at https://arxiv.org/html/1005.2398v3."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-affine-groupoid-algebra",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-groupoid-module-descent-tensor-cokernel] to the given scheme groupoid. Its quotient is exactly the specified fppf stackification, so no smoothness of $s,t$ and no etale atlas is being assumed. We obtain an equivalence on underlying quasi-coherent modules, full and faithful on all compatible module maps, preserving the structure module, tensor products and cokernels. We use the forward transport $s^*M\\simeq t^*M$, the inverse of the convention in Stacks 06WT.",
+   "uses": [
+    "lem-sfb-groupoid-module-descent-tensor-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), applied to algebra objects using the tensor-compatible module equivalence; Tag 06WN (lemma-qc-colimits) for cokernels."
+   }
+  },
+  {
+   "text": "On $U=\\operatorname{Spec}E$, [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies every quasi-coherent module $M$ with $\\widetilde{\\Gamma(U,M)}$ and identifies its maps with $E$-linear maps. For both $s,t$, [lem-weil-pbc-module-pullback-affine-sections] identifies sections of their pullbacks with $\\Gamma(U,M)\\otimes_{E,s^\\sharp}L$ and $\\Gamma(U,M)\\otimes_{E,t^\\sharp}L$. The formula $m\\otimes l\\mapsto l f^*m$ makes these identifications natural. Tensor sections are identified by [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections]. Thus multiplication $A\\otimes_E A\\to A$ and unit $E\\to A$ correspond to the scheme-sheaf multiplication and unit on $\\widetilde A$, and an algebra isomorphism $\\beta_A$ is precisely a module transport commuting with these two maps.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), applied to algebra objects using the tensor-compatible module equivalence; Tag 06WN (lemma-qc-colimits) for cokernels."
+   }
+  },
+  {
+   "text": "Given $(A,\\beta_A)$, descend its underlying module to $\\mathcal A$. By tensor compatibility the maps $\\widetilde A\\otimes\\widetilde A\\to\\widetilde A$ and $\\mathcal O_U\\to\\widetilde A$ have compatible data, because $\\beta_A$ preserves products and $1$. Fullness descends them uniquely to $\\mathcal A\\otimes\\mathcal A\\to\\mathcal A$ and $\\mathcal O_{\\mathcal Z}\\to\\mathcal A$. Apply faithfulness to the two associative composites from $\\mathcal A^{\\otimes3}$, to each unit composite from $\\mathcal A$, and to multiplication and its symmetry composite. Their restrictions are the equal maps expressing associativity, the unit laws and commutativity of $A$. These are therefore a commutative unital sheaf-algebra structure. Conversely restriction of any quasi-coherent algebra preserves these operations and gives exactly the specified identity and composition equations. The unit and counit of module descent respect the operations by faithfulness, hence are algebra isomorphisms.",
+   "uses": [
+    "lem-sfb-groupoid-module-descent-tensor-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), applied to algebra objects using the tensor-compatible module equivalence; Tag 06WN (lemma-qc-colimits) for cokernels."
+   }
+  },
+  {
+   "text": "For a compatible $E$-algebra map $h:A\\to B$, descend its underlying module map by fullness. The two product composites and the two unit maps become equal after restriction to $U$, since $h$ is multiplicative and unital; faithfulness makes them equal on $\\mathcal Z$. Thus the descended map is an algebra map. Restriction gives the converse. Uniqueness, identities and composition follow from faithfulness, proving the claimed equivalence on algebras and all morphisms.",
+   "uses": [
+    "lem-sfb-groupoid-module-descent-tensor-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), applied to algebra objects using the tensor-compatible module equivalence; Tag 06WN (lemma-qc-colimits) for cokernels."
+   }
+  },
+  {
+   "text": "A global section of a module sheaf $F$ is the same as a module map $\\mathcal O_{\\mathcal Z}\\to F$: send a compatible family $z_x$ to the maps $f\\mapsto fz_x$, and recover the family by evaluating at $1$. By full faithfulness of module descent, such maps to $\\mathcal A$ are exactly compatible maps $\\mathcal O_U\\to\\widetilde A$. By the affine adjunction these are $E$-linear maps $E\\to A$, determined by $a=h(1)$. Compatibility on $R$ says exactly $\\beta_A(a\\otimes1)=a\\otimes1$. Addition, multiplication and $1$ of sections restrict to those of $A$, so this bijection is an isomorphism of rings with $A^R$, natural in algebra maps.",
+   "uses": [
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), applied to algebra objects using the tensor-compatible module equivalence; Tag 06WN (lemma-qc-colimits) for cokernels."
+   }
+  },
+  {
+   "text": "Let $\\mathcal A\\twoheadrightarrow\\mathcal B$ be locally surjective as a sheaf map, in [def-sfb-stack-quasi-coherent-algebra]. Its module-sheaf cokernel is zero: every local representative in the quotient is zero after a covering. The cokernel assertion of module descent identifies the cokernel of $\\widetilde A\\to\\widetilde B$ on $U$ with zero. By [lem-weil-pbc-quasi-coherent-module-cokernel-image], its affine sections are $B/\\operatorname{im}(A\\to B)$, hence $A\\to B$ is surjective. It is equivariant by the morphism correspondence. All module descent, affine adjunction and tensor statements used above quantify over arbitrary modules; none introduces finite generation. This proves also the last clause.",
+   "uses": [
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent), applied to algebra objects using the tensor-compatible module equivalence; Tag 06WN (lemma-qc-colimits) for cokernels."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-groupoid-module-descent-tensor-cokernel",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WT (proposition-quasi-coherent) and Tag 06WN (lemma-qc-colimits): explicit passage from the module equivalence to algebra objects, invariant sections and surjections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebras on an algebraic quotient stack correspond to equivariant algebras on a flat affine groupoid and sections are invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk.inj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If two quasicoherent sheaf data structures constructed via local presentations are equal, then their index types are equal, their covering families are isomorphic, and their local presentations are is\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat groupoid descent for quasi coherent sheaves of algebras preserves surjections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"Module.FaithfullyFlat.surjective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Surjective ⇑(algebraMap S (TensorProduct R S T)) → Function.Surjective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra map $ S \\\\to S \\\\otimes_R T $ is surjective, then the canonical algebra map $ R \\\\to T $ is also surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.Surjective f],\\n  CategoryTheory.Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Injective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"If a ring homomorphism becomes injective after base change along a faithfully flat ring homomorphism, then the original homomorphism is injective. Formally, given commutative rings $R, S, R', S'$ with\"}\n  {\"name\": \"Module.FaithfullyFlat.lTensor_surjective_iff_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_4}\\n  {N' : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : AddCommGroup N'] [inst_5 : Module R N] [inst_6 : Module R N']\\n  (f : N →ₗ[R] N') [Module.FaithfullyFlat R M], Function.Surjective ⇑(Lin\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a faithfully flat $ R $-module. For any linear map $ f $ between $ R $-modules, $ f $ is surjective if and only if the induced linear map $ f \\\\otimes \\\\text{id\"}\n  {\"name\": \"Module.FaithfullyFlat.of_specComap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be commutative rings, and suppose $ B $ is an $ A $-algebra that is flat as an $ A $-module. If the induced map on prime spectra, given by taking preimages under the algebra homomo\"}\n  {\"name\": \"Module.FaithfullyFlat.of_comap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"If the induced map on prime spectra given by taking preimages under the canonical algebra homomorphism $ A \\\\to B $ is surjective, then $ B $ is a faithfully flat $ A $-module.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Algebra\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.coherent.*groupoid|groupoid.*quasi.coherent|equivariant.*algebra",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Subalgebra.lean\", \"line\": \"247\", \"text\": \"/-- An `L`-equivariant map of Lie modules `M → N` is `L'`-equivariant for any Lie subalgebra\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of quasi coherent algebras along finite flat affine groupoid presentation of algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a family of types indexed by the finite presentation condition of a quasicoherent sheaf, and a function that constructs an element of this family when all indexed presentations are finite, this \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Algebra\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.coherent.*groupoid|groupoid.*quasi.coherent|quotientStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of arbitrary quasi coherent algebras and invariant sections on a quotient stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(H : Subgroup G) [H.Normal] [Algebra.IsInvariant A B G] : Algebra.IsInvariant A (FixedPoints.subalgebra A B H) (G ⧸ H)\", \"doc\": \"Given a group $ G $ acting on a commutative ring $ B $ via a multiplicative semiring action, and a normal subgroup $ H \\trianglelefteq G $, the subalgebra $ B^H $ of elements fixed by $ H $ is invarian\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative algebra objects under faithfully flat groupoid descent with surjections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Surjective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"In a pushout diagram of commutative rings, if the algebra maps $ R \\to R' $ and $ R' \\to S' $ are bijective, then the induced algebra map $ R \\to S $ is faithfully flat. This requires scalar tower compat\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Injective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"If a ring homomorphism becomes injective after base change along a faithfully flat ring homomorphism, then the original homomorphism is injective. Formally, given commutative rings $R, S, R', S'$ with\"}\n  {\"name\": \"Module.FaithfullyFlat.surjective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Surjective ⇑(algebraMap S (TensorProduct R S T)) → Function.Surjective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra map $ S \\\\to S \\\\otimes_R T $ is surjective, then the canonical algebra map $ R \\\\to T $ is also surjective.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_comap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"If the induced map on prime spectra given by taking preimages under the canonical algebra homomorphism $ A \\\\to B $ is surjective, then $ B $ is a faithfully flat $ A $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_specComap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be commutative rings, and suppose $ B $ is an $ A $-algebra that is flat as an $ A $-module. If the induced map on prime spectra, given by taking preimages under the algebra homomo\"}\n  {\"name\": \"RingHom.FaithfullyFlat.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"The composition of two faithfully flat ring homomorphisms between commutative rings is again a faithfully flat ring homomorphism.\"}\n  {\"name\": \"Ideal.comap_surjective_of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B], Function.Surjective (Ideal.comap (algebraMap A B))\", \"doc\": \"If $ B $ is a faithfully flat $ A $-algebra, then the canonical ring homomorphism $ A \\\\to B $ induces a surjective map between the sets of ideals, where each ideal in $ A $ is the preimage of some ide\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits were read; they give site-local quasi-coherence, ordinary ring descent, or general sheaf functors, not module descent on a scheme groupoid quotient stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-adequate-coarse-space",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The flat affine-presentation dictionary used before taking the norm of a lift of an invariant section.",
+   "via": [
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+  "worker": "stage1",
+  "summary": "Checked general groupoid module descent against Stacks 06WT/06WN/077X and explicitly descended algebra operations and all morphisms; derived invariant sections as maps from the structure module and surjectivity using cokernels on the affine presentation. Added one statement-only module-descent input, distinguished from the existing DM etale-atlas lemma.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The flat affine-presentation dictionary used before taking the norm of a lift of an invariant section. Realizes the auxiliary affine algebra dictionary in six steps; the latest direct-images proof (3) is read, without changing its route. The imported ancestor chain currently ends with null; retained as the ancestor command reports.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "General affine scalar-extension computation on s,t; no replacement of the direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "General affine tensor comparison needed to express multiplication; no same-unit affine tensor theorem."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "General computation of cokernels on an affine scheme needed for surjectivity; no same-unit scheme cokernel computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-e88dbb807",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-e88dbb807 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps, the new node lem-sfb-groupoid-module-descent-tensor-cokernel and every cited statement in full. Sources checked: Stacks 06WT (proposition-quasi-coherent, stacks-sheaves l.2134), which holds for an arbitrary groupoid in algebraic spaces with no flatness or DM hypothesis; 06WN (qc-colimits; tensor and cokernels agree with Mod(O_X)); 0GQD; and spaces-groupoids 077X (colimits computed on U). The new node is true and self-contained. Its cocycle c^*δ=pr_1^*δ∘pr_2^*δ is correct for c(a,b)=a∘b with s(a)=t(b), and is the inverse of Stacks' α orientation. Small cases checked: trivial groupoid, μ_p/α_p, empty U, infinite modules. It is not a duplicate: qcoh-presentation-tensor-equivalence is DM/étale-only, and the affine-action descent nodes cover groups and algebras only. It is not a restatement of the parent, whose algebra structure (steps 3-4), invariant sections via Hom(O,F) and adjunction (step 5) and surjectivity via the cokernel clause plus lem-weil-pbc-quasi-coherent-module-cokernel-image(3) (step 6) are genuine arguments. Step 2's affine pullback and tensor section identifications are correctly cited and their hypotheses hold, since U and R are affine. The tool_uses of three generic lem-weil-pbc affine nodes are accepted. Batch-5: def-trf-space-quasi-coherent-module (status mathlib, general site definition) and def-sfb-stack-quasi-coherent-algebra (a definition) are general definitions outside the trace-formula and Poincaré-duality proofs, so they are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidQuasiCoherentAlgebraDescent",
+  "declaration": "CategoryTheory.affineGroupoid_quasiCoherent_algebra_descent",
+  "declarations": [
+   "CategoryTheory.GroupoidQuasiCoherentAlgebras",
+   "CategoryTheory.groupoidChartCoordinateComparison",
+   "CategoryTheory.groupoidChartRestriction",
+   "CategoryTheory.groupoidAtlasAlgebraEvaluation",
+   "CategoryTheory.groupoidPresentationAlgebraTransport",
+   "CategoryTheory.affineGroupoid_quasiCoherent_algebra_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidQuasiCoherentAlgebraDescent.lean",
+  "statement": "theorem affineGroupoid_quasiCoherent_algebra_descent (k E L : Type u) [Field k] [CommRing E] [CommRing L] [Algebra k E] [Algebra k L] (sigma tau : E →ₐ[k] L) (e : Spec (.of E) ⟶ Spec (.of L)) (i : Spec (.of L) ⟶ Spec (.of L)) (c : pullback (Spec.map (CommRingCat.ofHom sigma.toRingHom)) (Spec.map (CommRingCat.ofHom tau.toRingHom)) ⟶ Spec (.of L)) [(Spec.map (CommRingCat.ofHom sigma.toRingHom)).IsFiniteLocallyFree] [(Spec.map (CommRingCat.ofHom tau.toRingHom)).IsFiniteLocallyFree] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (a : BasedFunctor (discreteModuli (yoneda.obj ((Spec (.of E)).asOver (Spec (.of k))))) F) (P : SchemeGroupoidQuotientPresentation ((Spec.map (CommRingCat.ofHom sigma.toRingHom)).asOver (Spec (.of k))) ((Spec.map (CommRingCat.ofHom tau.toRingHom)).asOver (Spec (.of k))) e i c F a) : ∃ D : GroupoidQuasiCoherentAlgebras F P.stack.1 ≌ Scheme.AffineGroupoidAlgebra.{u, max (u + 1) v w} (Spec.map (CommRingCat.ofHom sigma.toRingHom)) (Spec.map (CommRingCat.ofHom tau.toRingHom)) e i c P.groupoid, ∃ j : D.functor ⋙ Scheme.AffineGroupoidAlgebra.forget ≅ groupoidAtlasAlgebraEvaluation P.stack.1 a, (∀ A : GroupoidQuasiCoherentAlgebras F P.stack.1, ∃ theta : pushout (D.functor.obj A).algebra.hom (Scheme.groupoidAlgebraCoordinateMap (Spec.map (CommRingCat.ofHom tau.toRingHom))) ⟶ A.obj.right.obj.obj (op (a.obj (CostructuredArrow.mk (yoneda.map ((Spec.map (CommRingCat.ofHom tau.toRingHom)).asOver (Spec (.of k))))))), IsIso theta ∧ pushout.inl _ _ ≫ theta = (j.app A).hom.right ≫ A.obj.right.obj.map (groupoidChartRestriction a ((Spec.map (CommRingCat.ofHom tau.toRingHom)).asOver (Spec (.of k)))).op ∧ pushout.inr _ _ ≫ theta = groupoidChartCoordinateComparison a (yoneda.map ((Spec.map (CommRingCat.ofHom tau.toRingHom)).asOver (Spec (.of k)))) ≫ A.obj.hom.hom.app _ ∧ pushout.inl (D.functor.obj A).algebra.hom (Scheme.groupoidAlgebraCoordinateMap (Spec.map (CommRingCat.ofHom sigma.toRingHom))) ≫ (D.functor.obj A).beta.hom ≫ theta = (j.app A).hom.right ≫ A.obj.right.obj.map (groupoidChartRestriction a ((Spec.map (CommRingCat.ofHom sigma.toRingHom)).asOver (Spec (.of k)))).op ≫ A.obj.right.obj.map (groupoidPresentationAlgebraTransport ((Spec.map (CommRingCat.ofHom sigma.toRingHom)).asOver (Spec (.of k))) ((Spec.map (CommRingCat.ofHom tau.toRingHom)).asOver (Spec (.of k))) a P.arrows).op) ∧ (∀ A : GroupoidQuasiCoherentAlgebras F P.stack.1, ∃ rho : moduliGlobalSectionsRing A.obj.right ≃+* (D.functor.obj A).invariants, ∀ z : moduliGlobalSectionsRing A.obj.right, (j.app A).hom.right (rho z).val = z.val (op (a.obj (CostructuredArrow.mk (𝟙 (yoneda.obj ((Spec (.of E)).asOver (Spec (.of k))))))))) ∧ ∀ (A B : GroupoidQuasiCoherentAlgebras F P.stack.1) (f : A ⟶ B), IsSurjectiveModuliAlgebra f.hom → Function.Surjective (D.functor.map f).val.right",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coordinate tensor products are canonical ring pushouts; universe lifts are transported by ULift.ringEquiv and Scheme.ΓSpecIso. Ring-valued identity and composition equations are Yoneda-equivalent to pullback equations. The theorem normalizes the equivalence on atlas evaluation and its arrow transport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9dcbc8698",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read item node, both delivered modules, report, and dep Lean (SchemeGroupoidQuotientPresentation, StackQuasiCoherentAlgebra, IsGroupoid, GroupoidModule). Every clause is rendered: equivalence D normalized by j to atlas evaluation; theta pushout equations pin beta to transport along P.arrows (inverse for contravariant restriction); composition direction checked by hand against P.composition and IsGroupoid (snd earlier, fst later), so canonical beta satisfies the stated cocycle and unit. New def-sfb-affine-groupoid-algebra: Hom = exactly equivariant algebra maps (Yoneda test on B⊗_t L), invariants = eqLocus beta(a⊗1)=a⊗1, no finiteness; not a duplicate (GroupoidModule is modules only). rho ring iso normalized by atlas evaluation; surjectivity of (D.map f).val.right from local surjectivity. No extra hypotheses; universes max(u+1) v w match moduliStructurePresheaf. The two added stmt_deps are landed on base; statement verbatim; docstrings and sorry-only gates OK; no files changed, no recompile. Advisory: transport def is a simpa cast."
+ }
+}

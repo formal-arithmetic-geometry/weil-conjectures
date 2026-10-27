@@ -163,7 +163,18 @@
   "latex:corollary"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-rem-sf-kv-formal",
  "split_report": {
@@ -199,5 +210,60 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-6403da54b (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited DAG statements, current/master blueprint sources, Stacks Lemma 001P, and Mathlib mate declarations. Verified variance, hypotheses, coefficient stages, exchange direction, mate composition, smooth purity transport, edge cases, route compliance, acyclicity, and no duplicate/new-node faults. Wrote review.md; no fixes needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the setting of [def-sf-datum], assume moreover that $k$ is algebraically\nclosed and that the exponent of $\\Lambda$ is invertible in $k$, and let\n$f:X\\to Y$ be separated of finite type. Then\n\n$$\nD_XLf^*\\xrightarrow{\\ \\sim\\ }Rf^!D_Y\n$$\n\nas functors $D^b_{ctf}(Y,\\Lambda)\\to D^b_{ctf}(X,\\Lambda)$, naturally in $f$.\nIf an orientation datum is fixed and $f$ is smooth of pure relative\ndimension $d$, this reads $D_XLf^*\\cong Lf^*D_Y(d)[2d]$.",
+  "proof": [
+   {
+    "text": "The Verdier exchange $D_YRf_!\\cong Rf_*D_X$ is [thm-sf-verdier-exchange],\nproved in this chapter from the tensor–Hom exchange and the projection\nformula; and the adjunctions $Lf^*\\dashv Rf_*$ and\n$Rf_!\\dashv Rf^!$ are those of [fix-prop-adjunctions]. Since $k$ is\nalgebraically closed, $D_X$ and $D_Y$ are anti-equivalences of\n$D^b_{ctf}(X,\\Lambda)$ and $D^b_{ctf}(Y,\\Lambda)$ with quasi-inverses $D_X$ and\n$D_Y$ by [lem-sf-verdier-biduality-equivalence]. Hence the right adjoint of $D_Y$ is\n$D_Y$ itself, so the right adjoint of $D_YRf_!$ is $Rf^!D_Y$ and that of\n$Rf_*D_X$ is $D_XLf^*$; passing to right adjoints, which is again the mate\ncalculus of [lem-sf-mate], gives the displayed isomorphism. The second\nassertion substitutes the orientation $Rf^!\\cong Lf^*(-)(d)[2d]$, which is\nthe content of [def-sf-orientation] as constructed in the purity\nchapter.",
+    "uses": [
+     "thm-sf-verdier-exchange",
+     "fix-prop-adjunctions",
+     "lem-sf-verdier-biduality-equivalence",
+     "lem-sf-mate",
+     "def-sf-orientation"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DualityPullback",
+  "declaration": "WeilConjectures.SixFunctorDatum.duality_pullback",
+  "declarations": [
+   "WeilConjectures.sfDualityPullbackRestriction",
+   "WeilConjectures.sfDualityExceptionalRestriction",
+   "WeilConjectures.sfDualityExceptionalId",
+   "WeilConjectures.SfDualityPullbackStage",
+   "WeilConjectures.SfDualityPullbackSmooth",
+   "WeilConjectures.sfDualityVerdierRestriction",
+   "WeilConjectures.SixFunctorDatum.finiteVerdierOnFiniteTor",
+   "WeilConjectures.SixFunctorDatum.integralVerdierOnFiniteTor",
+   "WeilConjectures.SixFunctorDatum.rationalVerdierOnFiniteTor",
+   "WeilConjectures.SixFunctorDatum.commonVerdierOnFiniteTor",
+   "WeilConjectures.SixFunctorDatum.duality_pullback"
+  ],
+  "file": "lean/Sheaf/Paper/DualityPullback.lean",
+  "statement": "theorem duality_pullback (S : SixFunctorDatum D C E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) : SfDualityPullbackStage S.finite S.toSixFunctorOperationDatum.finiteTorDomain S.finiteCoherence S.finiteVerdierOnFiniteTor ∧ SfDualityPullbackStage S.higher.integral S.toSixFunctorOperationDatum.integralFiniteTorDomain S.integralCoherence S.integralVerdierOnFiniteTor ∧ SfDualityPullbackStage S.higher.rational (fun _ ↦ ⊤) S.rationalCoherence S.rationalVerdierOnFiniteTor ∧ SfDualityPullbackStage S.closure.commonStage (fun _ ↦ ⊤) S.commonCoherence S.commonVerdierOnFiniteTor ∧ (∀ _O : SfOrientationDatum S, SfDualityPullbackSmooth S.finite S.toSixFunctorOperationDatum.finiteTorDomain S.finiteCoherence S.finiteVerdierOnFiniteTor (fun X ↦ (intrinsicFiniteTorsionConstructible C.l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X.obj.left).ι) (fun X ↦ Functor.curry.obj (sixFunctorFiniteTensor D C E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X)) (fun X d ↦ (sfOrientationReducedLine D C E n X d).obj) ∧ SfDualityPullbackSmooth S.higher.integral S.toSixFunctorOperationDatum.integralFiniteTorDomain S.integralCoherence S.integralVerdierOnFiniteTor (fun _ ↦ 𝟭 _) S.higher.integralTensor (sfOrientationIntegralLineOn D C E) ∧ SfDualityPullbackSmooth S.higher.rational (fun _ ↦ ⊤) S.rationalCoherence S.rationalVerdierOnFiniteTor (fun _ ↦ 𝟭 _) S.higher.rationalTensor (fun X d ↦ (sfRationalConstructibleLocalization C.l E X.obj.left).obj (sfOrientationIntegralLineOn D C E X d)) ∧ SfDualityPullbackSmooth S.closure.commonStage (fun _ ↦ ⊤) S.commonCoherence S.commonVerdierOnFiniteTor (fun _ ↦ 𝟭 _) S.closure.commonStageTensor (fun X d ↦ (GeneralAlgebraicallyClosedCoefficients.inclusion (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) (Padic.finiteCoefficientBase C.l C.Qbar)).obj ((sfRationalConstructibleLocalization C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar (Padic.finiteCoefficientBase C.l C.Qbar)) X.obj.left).obj (sfOrientationIntegralLineOn D C (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar (Padic.finiteCoefficientBase C.l C.Qbar)) X d))))",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four coefficient stages, natural isomorphisms on opposite finite-Tor categories, identity under normalized unit identifications, composition under the actual pullback/exceptional compositors, and the oriented smooth formula. Helpers only expand restrictions and the clauses of this statement. The finite smooth formula is displayed through the existing fully faithful ambient derived-category inclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0aad62dba",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Q76 cor-sf-duality-pullback 0aad62db: node unchanged except lean; lean.statement verbatim. All four stages (finite/integral/rational/common) use the datum's push stages and A6 duality functors restricted to finite-Tor (curry sixFunctorDomainHom flip ⟨Ra^!Λ, omegaDomain⟩, same H and dualizing as the existing *Verdier, no duplicate). chi : (f^*|).op ⋙ V_X ≅ V_Y ⋙ f^!| has the right variance. Identity clause: the identification e of identity pullback with 𝟭 is normalized by the unit law against pullComposition; it exists and is unique because identity pullback is concrete and fully faithful; excId comes only from comparison, properIdentity and adjoint uniqueness. Composition: V(pullComposition.hom.op) ≫ chi_gf ≫ sixFunctorExceptionalComposition.hom = chi_f(g^*K) ≫ f^!(chi_g K), directions checked. Smooth: ∀ SfOrientationDatum, SmoothOfRelativeDimension d, Nonempty natural iso D_X f^* ≅ f^*D_Y ⊗ T_{X,d}, with lines identical to SfOrientationDatum (reduced finite line at level n, integral, rationalized, common inclusion) and the datum's tensors; finite stage written through the fully faithful ambient inclusion. Edge cases (f identity, empty schemes, d=0, level 1, Q̄_ℓ) and universes OK. Docstrings with source and blueprint tag, single sorry, no pro-etale substitute, report sections present. Upstream etale DualityPullback is finite and pointwise only, so it is not an existing statement. Advisory: the smooth clause is a Nonempty iso rather than chi composed with purity; the second reading is an author self-check. No compile (no changes)."
  }
 }

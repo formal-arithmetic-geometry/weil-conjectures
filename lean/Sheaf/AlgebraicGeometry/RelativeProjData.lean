@@ -10,6 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebra
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import Mathlib.AlgebraicGeometry.RelativeGluing
 public import Mathlib.AlgebraicGeometry.Cover.Directed
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
+import Mathlib.Topology.Sheaves.LocallySurjective
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # Relative Proj construction data
 
@@ -29,6 +35,8 @@ restriction identification. No existence of the output is asserted here.
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
+open scoped TensorProduct DirectSum
+open TopologicalSpace
 
 noncomputable section
 
@@ -73,7 +81,8 @@ def sectionGrade (V : X.affineOpens) (n : ℕ) : AddSubgroup (A.sections V) :=
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
 Proof: apply `unit_eq` to 1 and use that the algebra structure map preserves 1. -/
 theorem sectionGrade_one (V : X.affineOpens) : 1 ∈ A.sectionGrade V 0 := by
-  sorry
+  refine ⟨A.graded.unit.val.app (op V.1) (1 : Γ(X, V.1)), ?_⟩
+  simpa using A.unit_eq V.1 1
 
 /-- Homogeneous multiplication adds degrees.
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
@@ -81,17 +90,185 @@ Proof: lift both elements to their homogeneous sheaves and apply `mul_eq`. -/
 theorem sectionGrade_mul (V : X.affineOpens) (m n : ℕ)
     (a b : A.sections V) (ha : a ∈ A.sectionGrade V m) (hb : b ∈ A.sectionGrade V n) :
     a * b ∈ A.sectionGrade V (m + n) := by
-  sorry
+  obtain ⟨a, rfl⟩ := ha
+  obtain ⟨b, rfl⟩ := hb
+  exact ⟨A.graded.mul m n V.1 a b, A.mul_eq V.1 m n a b⟩
+
+private def homogeneousProjection (n : ℕ) :
+    (A.algebra.obj.toModule : X.Modules) ⟶ (A.algebra.obj.toModule : X.Modules) :=
+  A.decomposition.inv ≫ Sigma.π A.piece n ≫ Sigma.ι A.piece n ≫ A.decomposition.hom
+
+private theorem homogeneousProjection_mem (n : ℕ) (V : X.affineOpens) (a : A.sections V) :
+    (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1 a ∈ A.sectionGrade V n := by
+  exact ⟨(A.decomposition.inv ≫ Sigma.π A.piece n).app V.1 a, rfl⟩
+
+private theorem homogeneousProjection_eq (n : ℕ) (V : X.affineOpens) (a : A.sections V)
+    (ha : a ∈ A.sectionGrade V n) : (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n))
+      V.1 a = a := by
+  obtain ⟨a, rfl⟩ := ha
+  have hp : (Sigma.ι A.piece n ≫ A.decomposition.hom) ≫ homogeneousProjection A n =
+      Sigma.ι A.piece n ≫ A.decomposition.hom := by
+    simp [homogeneousProjection]
+  exact congrArg (fun f ↦ f.app V.1 a) hp
+
+private theorem inclusion_homogeneousProjection (i j : ℕ) :
+    (Sigma.ι A.piece i ≫ A.decomposition.hom) ≫ homogeneousProjection A j =
+      if i = j then Sigma.ι A.piece i ≫ A.decomposition.hom else 0 := by
+  by_cases h : i = j
+  · subst j
+    simp [homogeneousProjection]
+  · simp [homogeneousProjection, h, Sigma.ι_π_of_ne_assoc _ h]
+
+private theorem projection_inclusion_apply (U : X.Opens) (i j : ℕ)
+    (a : Γ(A.piece i, U)) :
+    (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A j)) U ((Sigma.ι A.piece i ≫
+      A.decomposition.hom).app U a) =
+      if i = j then (Sigma.ι A.piece i ≫ A.decomposition.hom).app U a else 0 := by
+  have h := congrArg (fun f ↦ f.app U a) (inclusion_homogeneousProjection A i j)
+  split_ifs at h ⊢ <;> exact h
+
+private theorem locally_finite_sections (U : X.Opens) (s : Γ(A.algebra.obj.toModule, U))
+    (x : X) (hx : x ∈ U) :
+    ∃ (W : X.Opens) (hWU : W ≤ U), x ∈ W ∧
+      ∃ (T : Finset ℕ) (a : ∀ i, Γ(A.piece i, W)),
+        (Scheme.Modules.presheaf (X := X) A.algebra.obj.toModule).map (homOfLE hWU).op s =
+          ∑ i ∈ T, (Sigma.ι A.piece i ≫ A.decomposition.hom).app W (a i) := by
+  classical
+  let J := _root_.Opens.grothendieckTopology X
+  let H := SheafOfModules.toSheaf X.ringCatSheaf
+  let F := fun i ↦ H.obj (A.piece i)
+  let G := H.obj A.algebra.obj.toModule
+  let c : Cofan F := Cofan.mk G (fun i ↦ H.map (Sigma.ι A.piece i ≫ A.decomposition.hom))
+  have hc : IsColimit c := by
+    have hc₀ := isColimitCofanMkObjOfIsColimit H _ (Sigma.ι A.piece)
+      (coproductIsCoproduct A.piece)
+    refine IsColimit.ofIsoColimit hc₀ (Cofan.ext (H.mapIso A.decomposition) ?_)
+    intro i
+    simp [c, Functor.map_comp]
+  let P := ∐ fun i ↦ (F i).obj
+  let φ : P ⟶ G.obj := Sigma.desc fun i ↦ (c.inj i).hom
+  let ψ : (presheafToSheaf J AddCommGrpCat.{u}).obj P ⟶ G :=
+    ⟨sheafifyLift J φ G.property⟩
+  have hφ : φ = toSheafify J P ≫ ψ.hom := (toSheafify_sheafifyLift _ _ _).symm
+  have hψ : Epi ψ := by
+    refine ⟨fun {Z} g h hgh ↦ Cofan.IsColimit.hom_ext hc _ _ fun i ↦ ?_⟩
+    have e : c.inj i = (⟨Sigma.ι (fun i ↦ (F i).obj) i ≫ toSheafify J P⟩ :
+        F i ⟶ (presheafToSheaf J AddCommGrpCat.{u}).obj P) ≫ ψ := by
+      ext1
+      change _ = Sigma.ι (fun i ↦ (F i).obj) i ≫ toSheafify J P ≫ ψ.hom
+      rw [← hφ, Sigma.ι_desc]
+    rw [e, Category.assoc, Category.assoc, hgh]
+  have := (Sheaf.isLocallySurjective_iff_epi' (A := AddCommGrpCat.{u}) ψ).2 hψ
+  have hsurj : Presheaf.IsLocallySurjective J φ := by
+    rw [hφ]
+    infer_instance
+  obtain ⟨W, hWU, ⟨p, hp⟩, hxW⟩ :=
+    (TopCat.Presheaf.isLocallySurjective_iff φ).mp hsurj U s x hx
+  have hP := isColimitCofanMkObjOfIsColimit ((CategoryTheory.evaluation _ _).obj (op W)) _
+    (Sigma.ι fun i ↦ (F i).obj) (coproductIsCoproduct _)
+  obtain ⟨T, a, rfl⟩ := AddCommGrpCat.exists_eq_sum_of_isColimit_cofan hP p
+  refine ⟨W, hWU, hxW, T, a, hp.symm.trans ?_⟩
+  rw [map_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  change (Sigma.ι (fun i ↦ (F i).obj) i ≫ φ).app (op W) (a i) = _
+  rw [Sigma.ι_desc]
+  rfl
+
+private theorem finite_sections_of_local_presentations
+    (F : ℕ → Sheaf (_root_.Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    (G : Sheaf (_root_.Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    (inc : ∀ i, F i ⟶ G) (p : ℕ → (G ⟶ G))
+    (hp : ∀ (U : X.Opens) (i j : ℕ) (a : (F i).obj.obj (op U)),
+      (p j).hom.app (op U) ((inc i).hom.app (op U) a) =
+        if i = j then (inc i).hom.app (op U) a else 0)
+    (hloc : ∀ (U : X.Opens) (s : G.obj.obj (op U)) (x : X), x ∈ U →
+      ∃ (W : X.Opens) (hWU : W ≤ U), x ∈ W ∧
+        ∃ (T : Finset ℕ) (a : ∀ i, (F i).obj.obj (op W)),
+          G.obj.map (homOfLE hWU).op s = ∑ i ∈ T, (inc i).hom.app (op W) (a i))
+    (U : X.Opens) (hU : IsCompact (U : Set X)) (s : G.obj.obj (op U)) :
+    ∃ S : Finset ℕ, s = ∑ i ∈ S, (p i).hom.app (op U) s := by
+  classical
+  choose W hW hxW T a he using fun x : U ↦ hloc U s x.1 x.2
+  have hcov : (U : Set X) ⊆ ⋃ x : U, (W x : Set X) := by
+    intro x hx
+    exact Set.mem_iUnion.mpr ⟨⟨x, hx⟩, hxW ⟨x, hx⟩⟩
+  obtain ⟨K, hK⟩ := hU.elim_finite_subcover
+    (fun x : U ↦ (W x : Set X)) (fun x ↦ (W x).isOpen) hcov
+  let S := K.biUnion T
+  refine ⟨S, ?_⟩
+  have hsheaf : TopCat.Presheaf.IsSheaf (X := TopCat.of X) G.obj := G.property
+  apply hsheaf.section_ext
+  intro x hx
+  obtain ⟨y, hy⟩ := Set.mem_iUnion.mp (hK hx)
+  obtain ⟨hyK, hxy⟩ := Set.mem_iUnion.mp hy
+  refine ⟨W y, hW y, hxy, ?_⟩
+  have hnat (i : ℕ) :
+      G.obj.map (homOfLE (hW y)).op ((p i).hom.app (op U) s) =
+        (p i).hom.app (op (W y)) (G.obj.map (homOfLE (hW y)).op s) := by
+    exact (congrArg (fun f ↦ f s) ((p i).hom.naturality (homOfLE (hW y)).op)).symm
+  rw [map_sum]
+  simp_rw [hnat, he y, map_sum]
+  rw [Finset.sum_comm]
+  symm
+  apply Finset.sum_congr rfl
+  intro i hi
+  simp only [hp]
+  have hiS : i ∈ S := Finset.mem_biUnion.mpr ⟨y, hyK, hi⟩
+  simp [hiS]
+
+private theorem finite_sections (V : X.affineOpens) (s : A.sections V) :
+    ∃ S : Finset ℕ, s = ∑ i ∈ S, (Scheme.Modules.Hom.app (X := X)
+      (homogeneousProjection A i)) V.1 s := by
+  let H := SheafOfModules.toSheaf X.ringCatSheaf
+  exact finite_sections_of_local_presentations
+    (fun i ↦ H.obj (A.piece i)) (H.obj A.algebra.obj.toModule)
+    (fun i ↦ H.map (Sigma.ι A.piece i ≫ A.decomposition.hom))
+    (fun i ↦ H.map (homogeneousProjection A i)) (projection_inclusion_apply A)
+    (locally_finite_sections A) V.1 V.2.isCompact s
 
 /-- On an affine open the homogeneous section subgroups are an internal direct sum.
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
-Proof: every piece is a direct summand of the quasi-coherent underlying module, hence
-quasi-coherent. On an affine open the equivalence with modules preserves coproducts.
-Apply sections to `decomposition`; the resulting map from the direct sum is bijective.
-The inclusions are injective, so replacing each piece by its image gives this internal sum. -/
+Proof: the coproduct projections, transported through `decomposition`, are mutually
+orthogonal and act identically on the corresponding homogeneous images. Sections of the
+coproduct are locally finite sums, since sheafification of the presheaf coproduct maps
+locally surjectively to the sheaf coproduct. Compactness of the affine open gives one finite
+set of degrees for a section. Sheaf separation then expresses it as the sum of its projected
+components. This gives surjectivity of recomposition; the orthogonal projections give
+injectivity. In particular this proof does not require quasi-coherence of the pieces. -/
 theorem sectionGrade_internal (V : X.affineOpens) :
     DirectSum.IsInternal (A.sectionGrade V) := by
-  sorry
+  classical
+  let f := DirectSum.coeAddMonoidHom (A.sectionGrade V)
+  have hp (n : ℕ) (t : ⨁ i, A.sectionGrade V i) :
+      (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1 (f t) = (t n : A.sections
+        V) := by
+    induction t using DirectSum.induction_on with
+    | zero => simp [f]
+    | of i a =>
+        rw [DirectSum.coeAddMonoidHom_of, DirectSum.coe_of_apply]
+        split_ifs with h
+        · subst n
+          exact homogeneousProjection_eq A i V a a.property
+        · obtain ⟨b, hb⟩ := a.property
+          rw [← hb]
+          change (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1
+            ((Sigma.ι A.piece i ≫ A.decomposition.hom).app V.1 b) = 0
+          simpa only [if_neg h] using projection_inclusion_apply A V.1 i n b
+    | add t s ht hs =>
+        simp only [map_add, ht, hs, DirectSum.add_apply]
+        rfl
+  refine ⟨?_, ?_⟩
+  · intro t s hts
+    apply DirectSum.ext
+    intro n
+    apply Subtype.ext
+    rw [← hp n t, ← hp n s, hts]
+  · intro s
+    obtain ⟨S, hS⟩ := finite_sections A V s
+    refine ⟨∑ i ∈ S, DirectSum.of (fun i ↦ A.sectionGrade V i) i
+      ⟨(Scheme.Modules.Hom.app (X := X) (homogeneousProjection A i)) V.1 s,
+        homogeneousProjection_mem A i V s⟩, ?_⟩
+    simpa only [map_sum, DirectSum.coeAddMonoidHom_of] using hS.symm
 
 /-- The induced grading on the section ring. The decomposition is the unique inverse of
 the bijective recomposition map, not data selected from an unrestricted existence claim.
@@ -109,7 +286,10 @@ their naturality carries an element in the image to the image of its restriction
 theorem restriction_mem {V W : X.affineOpens} (h : W ≤ V) (n : ℕ)
     (a : A.sections V) (ha : a ∈ A.sectionGrade V n) :
     (A.algebra.obj.right.obj.map (homOfLE h).op).hom a ∈ A.sectionGrade W n := by
-  sorry
+  obtain ⟨a, rfl⟩ := ha
+  refine ⟨(A.piece n).val.map (homOfLE (X := X.Opens) h).op a, ?_⟩
+  exact congrArg (fun f ↦ f a)
+    ((Sigma.ι A.piece n ≫ A.decomposition.hom).val.naturality (homOfLE (X := X.Opens) h).op)
 
 /-- The graded section restriction homomorphism.
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/
@@ -120,20 +300,56 @@ def restriction {V W : X.affineOpens} (h : W ≤ V) :
 
 /-- Affine restriction extends the irrelevant ideal to the irrelevant ideal.
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
-Proof: quasi-coherence identifies each homogeneous piece on W with base change from V.
-Thus every positive-degree section on W is a finite linear combination of restrictions
-of positive-degree sections on V. These sections generate the target irrelevant ideal. -/
+Proof: quasi-coherent affine base change for the total module writes every section on W
+as the image of a tensor over sections on V. Project to a fixed positive degree using the
+sheaf coproduct projection. Naturality makes this commute with restriction, and linearity
+makes it commute with base scalars. Tensor induction shows that its image belongs to the
+extended irrelevant ideal. Every positive homogeneous section equals its own projection,
+and such sections generate the irrelevant ideal. -/
 theorem irrelevant_le {V W : X.affineOpens} (h : W ≤ V) :
     HomogeneousIdeal.irrelevant (A.sectionGrade W) ≤
       (HomogeneousIdeal.irrelevant (A.sectionGrade V)).map (A.restriction h) := by
-  sorry
+  classical
+  apply (HomogeneousIdeal.irrelevant_le _).mpr
+  intro n hn b hb
+  let F : X.Modules := A.algebra.obj.toModule
+  let : F.IsQuasicoherent := A.algebra.property
+  let : Algebra Γ(X, V.1) Γ(X, W.1) :=
+    (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom.toAlgebra
+  let : Module Γ(X, V.1) Γ(F, W.1) :=
+    Module.compHom _ (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom
+  obtain ⟨c, hc, _, ht⟩ :=
+    Scheme.Modules.quasiCoherent_affine_section_baseChange X F W V h
+  let I := (HomogeneousIdeal.irrelevant (A.sectionGrade V)).map (A.restriction h)
+  have hm (t : Γ(F, V.1) ⊗[Γ(X, V.1)] Γ(X, W.1)) :
+      (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) W.1 (c t) ∈ I := by
+    induction t using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a r =>
+        rw [ht, Scheme.Modules.Hom.app_smul]
+        have he : (Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) W.1
+            (F.presheaf.map (homOfLE (X := X.Opens) h).op a) =
+            F.presheaf.map (homOfLE (X := X.Opens) h).op
+              ((Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1 a) := by
+          exact (congrArg (fun f ↦ f a)
+            ((homogeneousProjection A n).val.naturality (homOfLE (X := X.Opens) h).op))
+        rw [he]
+        change (A.algebra.obj.hom.hom.app (op W.1)).hom r *
+          A.restriction h ((Scheme.Modules.Hom.app (X := X) (homogeneousProjection A n)) V.1 a) ∈
+            I.toIdeal
+        exact I.toIdeal.mul_mem_left _ (Ideal.mem_map_of_mem (A.restriction h)
+          (HomogeneousIdeal.mem_irrelevant_of_mem _ hn (homogeneousProjection_mem A n V a)))
+    | add t s ht hs => simpa using I.toIdeal.add_mem ht hs
+  obtain ⟨t, htb⟩ := hc.2 b
+  change b ∈ I
+  simpa only [htb, homogeneousProjection_eq A n W b hb] using hm t
 
 /-- The structural unit of the section algebra has degree zero.
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj).
 Proof: `unit_eq` exhibits its image as the inclusion of a section of the zeroth piece. -/
 theorem unit_mem (V : X.affineOpens) (r : Γ(X, V.1)) :
     (A.algebra.obj.hom.hom.app (op V.1)).hom r ∈ A.sectionGrade V 0 := by
-  sorry
+  exact ⟨A.graded.unit.val.app (op V.1) r, A.unit_eq V.1 r⟩
 
 /-- The base-ring homomorphism into degree zero; it need not be an isomorphism.
 Source: blueprint, Relative Proj, order 12 (blueprint: def-nagata-relative-proj). -/

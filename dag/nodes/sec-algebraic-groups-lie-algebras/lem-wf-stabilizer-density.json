@@ -41,7 +41,43 @@
   "def-wf-geometric-monodromy-group"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal",
+    "Matrix.GeneralLinearGroup.forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Matrix.GeneralLinearGroup.mulVec_mem_of_mem_zeroLocus_vanishingIdeal",
+     "module": "WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal",
+     "lines": [
+      599,
+      611
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Matrix.GeneralLinearGroup.forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal",
+     "module": "WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal",
+     "lines": [
+      613,
+      621
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-restriction",
  "lean": {
@@ -55,5 +91,24 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S\\subseteq V=k^n$ be a vector subspace. The stabilizer\n$\\operatorname{Stab}_{\\operatorname{GL}_n}(S)$ is Zariski closed.\nConsequently, for a subgroup $\\Gamma\\subseteq\\operatorname{GL}_n(k)$,\n$S$ is $\\Gamma$-stable if and only if it is stable under the Zariski\nclosure of $\\Gamma$. In particular, for a represented degree datum\n([d-monodromy]), $S$ is $P$-stable if and only if it is $H$-stable, and\n$W$-stable if and only if it is $G$-stable.",
+  "proof": [
+   {
+    "text": "Choose a basis whose first vectors span $S$. The condition that a\nmatrix preserve $S$ says that each lower-left matrix entry is zero,\nwhich is a finite list of polynomial equations. The stabilizer is\ntherefore closed. If $S$ is $\\Gamma$-stable, this closed stabilizer\ncontains $\\Gamma$, hence contains its Zariski closure; the converse is\nimmediate. For a represented degree datum apply this to\n$\\Gamma=\\rho(P)$ and $\\Gamma=\\rho(W)$, whose closures are $H$ and $G$ by\n[d-monodromy].",
+    "uses": [
+     "d-monodromy"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

@@ -1,0 +1,230 @@
+{
+ "id": "lem-per-regular-precomposition-smooth-image",
+ "kind": "statement",
+ "title": "Regular precomposition detects smoothness near its image",
+ "statement": "Let $Z,T,S$ be locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth]. Let $p:Z\\to T$ be a regular morphism [def-per-regular-scheme-morphism] and let $g:T\\to S$ be a morphism locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose $g\\circ p$ is regular. Then there is an open subscheme $W\\subseteq T$ containing the set-theoretic image $p(|Z|)$ such that $g|_W:W\\to S$ is smooth [def-sbc-smooth-morphisms]. Neither surjectivity nor finite presentation of $p$ is assumed.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Lemma 2.1.4(ii), printed p.8, applied to the local maps at z, p(z), and gp(z), followed by finite-presentation smoothness at p(z). This is the use in Proposition 3.3.5, printed p.25. Stacks counterparts: Tag 07NT, more-algebra-lemma-regular-permanence; Tag 07C0, more-algebra-lemma-regular-local; Tag 01V9, morphisms-lemma-smooth-at-point; Tag 00TT, algebra-lemma-characterize-smooth-over-field. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-per-regular-scheme-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Fix $z\\in Z$, put $t=p(z)$ and $s=g(t)$, and set $A=\\mathcal O_{S,s}$, $B=\\mathcal O_{T,t}$ and $C=\\mathcal O_{Z,z}$. The induced local homomorphisms $A\\to B\\to C$ compose to the stalk map of $g\\circ p$, by the composition rule for morphisms of locally ringed spaces. Applying the regular scheme/stalk criterion to $p$ and $g\\circ p$ gives regular ring maps $B\\to C$ and $A\\to C$. In particular $B\\to C$ is flat.",
+   "uses": [
+    "lem-per-regular-scheme-stalk-criterion",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07R8, lemma-regular; More on Algebra Tag 07C0, lemma-regular-local. Temkin Lemma 2.1.4(ii) uses these local maps."
+   }
+  },
+  {
+   "text": "The flat local homomorphism $B\\to C$ is faithfully flat and $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is surjective by lem-weil-pbc-flat-local-hom-faithfully-flat. Apply lem-weil-pbc-regular-permanence to $A\\to B\\to C$: its composite is regular by Step 1 and its second map is flat and surjective on spectra. Therefore $A\\to B$ is regular. This argument is made separately for each chosen $z$, so no surjectivity of $p$ is required.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-regular-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NT, lemma-regular-permanence; Algebra Tags 00HR and 00HQ, local faithful flatness and spectral surjectivity."
+   }
+  },
+  {
+   "text": "The morphism $g$ is locally of finite presentation and its source and target are locally Noetherian. Its stalk map at $t$ is precisely the regular map $A\\to B$ from Step 2. Apply lem-per-lfp-regular-stalk-smooth-neighborhood to obtain an open neighborhood of $t$ on which $g$ is smooth. Thus every $t\\in p(|Z|)$ has such a neighborhood.",
+   "uses": [
+    "lem-per-lfp-regular-stalk-smooth-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point; Varieties Tags 038U and 038X."
+   }
+  },
+  {
+   "text": "Let $W$ be the union of all open subschemes $U\\subseteq T$ for which $g|_U$ is smooth. This is open and contains $p(|Z|)$ by Step 3. Every point of $W$ belongs to such a $U$; the affine smooth charts for $g|_U$ are also charts inside $W$, so $g|_W$ is smooth by the affine-local characterization in def-sbc-smooth-morphisms. If $Z$ is empty, the same construction applies and the image condition is vacuous.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition Tag 01V5, definition-smooth, affine-local definition; identification with formal smoothness by Tag 02H6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-scheme-stalk-criterion",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-regular-permanence",
+  "lem-per-lfp-regular-stalk-smooth-neighborhood",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of 07NT with the scheme/stalk comparison and 01V9; local-cancellation route checked against Temkin Lemma 2.1.4(ii), printed p.8, online. Temkin archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of local homomorphisms descends through a regular local homomorphism; singular locus is preserved by regular precomposition",
+   "results": "8 hits: IsLocalization.isRegular_mk', RingHom.HoldsForLocalization.localRingHom, Algebra.smoothLocus_comap_of_isLocalization, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves, RingHom.isStandardSmooth_stableUnderCompositionWithLocalizationAway, RingHom.Smooth.holdsForLocalizationAway; ",
+   "date": "2026-10-24",
+   "verdict": "no match: localization regular-elements and smooth-locus lemmas do not state descent of regular ring maps through regular local precomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, RingHom.Flat",
+   "results": "0 hits: ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: localization regular-elements and smooth-locus lemmas do not state descent of regular ring maps through regular local precomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*(compos|cancel|descen)|smooth.*(locus|[Ii]sRegular)",
+   "results": "16 hits: Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match: localization regular-elements and smooth-locus lemmas do not state descent of regular ring maps through regular local precomposition",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If B to C is a regular local homomorphism of Noetherian local rings then A to B is regular exactly when A to C is regular",
+   "results": "8 hits: IsLocalRing.local_hom_TFAE, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.isLocalHom_comp, RingHom.PropertyIsLocal.StableUnderCompositionWithLocalizationAwayTarget, CommRingCat.isLocalHom_comp, IsLocalization.isRegular_mk', IsLocalRing.isRegular_of_perm, RingHom.FormallySmooth.respectsIso; ",
+   "date": "2026-10-24",
+   "verdict": "no match: localization regular-elements and smooth-locus lemmas do not state descent of regular ring maps through regular local precomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism g between locally Noetherian schemes and a regular morphism p into its source, the inverse image of the smooth locus of g is the regular locus of g composed with p",
+   "results": "8 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsSmooth, Algebra.smoothLocus_comap_of_isLocalization, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.isSmoothOfRelativeDimension_comp; ",
+   "date": "2026-10-24",
+   "verdict": "no match: localization regular-elements and smooth-locus lemmas do not state descent of regular ring maps through regular local precomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*(precomp|permanence|stalk)|smooth.*regular",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness composition, smooth-locus and descent tools do not assert regular precomposition detection",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of a finite presentation morphism descends through a faithfully flat local map when the composite has geometrically regular fibres",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, RingHom.smooth_def, RingHom.Smooth.propertyIsLocal",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness composition, smooth-locus and descent tools do not assert regular precomposition detection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Flat",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness composition, smooth-locus and descent tools do not assert regular precomposition detection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of locally Noetherian schemes is smooth near the image of a regular morphism if their composite is regular",
+   "results": "8 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness composition, smooth-locus and descent tools do not assert regular precomposition detection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-rational-smooth-models",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Temkin Proposition 3.3.5, printed p.25, use of Lemma 2.1.4 to shrink the finite-stage fibre map to a smooth neighborhood of the image.",
+   "via": [
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-precomposition-smooth-image",
+  "worker": "stage1",
+  "summary": "Checked Temkin Lemma 2.1.4(ii) online and Stacks 07R8, 07C0, 07NT, 00HR, 038U, 038X and 01V9 in local sources. Reused faithful-flat locality and regular permanence. Added only the scheme/stalk and regular-stalk-to-smooth-neighborhood comparison lemmas, both statement-only and searched. No hypothesis or conclusion changed. Refined the imported 00TT citation to the geometric regularity criterion 038X.",
+  "blueprint": "Supports the existing Temkin Proposition 3.3.5 smooth-neighborhood step, descended from lem-per-artin-gabber-affine-curve through the recorded resolution branch. Latest ancestor proof does not explicitly mention this remote supporting algebraic fact; its fixed ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic flat local algebra tool, providing spectral surjectivity at one chosen image point; no precomposition lemma in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-permanence",
+    "why": "Generic cancellation for regular ring maps through a faithfully flat map; exactly the local algebra used by Temkin, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-regular-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-b04b8dd1d",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-b04b8dd1d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement and the Stacks sources: 07R8, 07C0, 07NT, 00HR, 01V9, 038U and 038X. The Temkin paper is not in literature/ and is marked WANTED, so I could not read it; the proof is agent-written from Stacks and is complete without it. Step 1: the composition rule for locally ringed spaces and the new scheme/stalk criterion, applied to p and to g∘p, give regular maps B→C and A→C, so B→C is flat. Step 2: a flat local homomorphism is surjective on Spec (00HR node), and 07NT then gives A→B regular, using no surjectivity of p. Step 3: the new lfp node applies to g at t, with g lfp, T and S locally Noetherian, and the stalk map regular. Step 4: the union of the opens where g is smooth is genuinely elementary. lem-per-regular-scheme-stalk-criterion is true: the DAG definition is 07R8(2), and the stalk form comes from 07R8(3) with 07C0 (ring part = lem-weil-pbc-regular-local-maximal). lem-per-lfp-regular-stalk-smooth-neighborhood is true: the closed-fibre ring is O_{X_y,x}, then 038U, 038X and 01V9(2⇒1) give smoothness near x. It is not a duplicate: lem-trf-smooth-at-point-fibre-criterion is 01V9 alone and the 038X node is a global field criterion. Neither new node is a Mathlib leaf (Mathlib has no geometric regularity) or a clause of the item. Both have no proof, give blueprint.from and searches, and cite their notions. Tool uses accepted: regular-permanence and flat-local-ff, both generic. No SGA, no cycle. The parent's step 7 uses the item as stated. Small cases checked: p=id, a purely inseparable extension over an imperfect field, and a non-flat constant map. No changes. coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPrecompositionSmoothImage",
+  "declaration": "AlgebraicGeometry.exists_open_smooth_of_regular_precomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPrecompositionSmoothImage.lean",
+  "statement": "theorem exists_open_smooth_of_regular_precomposition {Z T S : Scheme.{u}} [IsLocallyNoetherian Z] [IsLocallyNoetherian T] [IsLocallyNoetherian S] (p : Z ⟶ T) (g : T ⟶ S) (hp : IsRegularSchemeMorphism p) [LocallyOfFinitePresentation g] (hcomp : IsRegularSchemeMorphism (p ≫ g)) : ∃ W : T.Opens, (∀ z : Z, p z ∈ W) ∧ Smooth (W.ι ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98932f185",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_dep records (Scheme, IsLocallyNoetherian, live IsRegularSchemeMorphism = Flat ∧ regular fibres after finite extensions K/κ(x) in Type u, LocallyOfFinitePresentation, Mathlib Smooth class), the delivered module and the report. Every clause matches: locally Noetherian Z,T,S; regular p; lfp g; regular p ≫ g; ∃ W : T.Opens with ∀ z, p z ∈ W and Smooth (W.ι ≫ g); no extra hypotheses on p. lean.statement is verbatim in the file; proof exactly by sorry; source/blueprint docstrings and all 4 proof steps present; node otherwise unchanged vs side-live; no definitions. Math checked via 00HR/07NT/038U/01V9; edge cases empty Z, p = id, non-surjective open immersion, imperfect fields. No existing duplicate in Mathlib or lean/Sheaf/WeilConjectures. Not recompiled (no file changed). Note: parallel Q23 stage-2 delivery of the same item (2f473437) is not yet landed; whichever lands second must reuse the first's declaration."
+ }
+}

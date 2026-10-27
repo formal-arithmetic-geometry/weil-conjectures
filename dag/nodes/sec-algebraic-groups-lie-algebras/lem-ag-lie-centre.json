@@ -63,7 +63,92 @@
   "lem-wf-same-lie-closed-subgroup"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_center",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison",
+     "lines": [
+      205,
+      211
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_identityComponent_center",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison",
+     "lines": [
+      213,
+      223
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.forall_commute_iff_forall_lieSubalgebra",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      534,
+      547
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.mem_lieSubalgebra_center_iff",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra",
+     "lines": [
+      588,
+      606
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-comparison"
+ "unit": "sk-p-comparison",
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $H\\subseteq\\operatorname{GL}(V)$ be a connected closed matrix group\nover $\\overline{\\mathbf Q}_\\ell$, with Lie algebra\n$\\mathfrak h=\\operatorname{Lie}(H)$ as in\n[def-wf-lie-algebra-derivation] and centre $\\mathfrak z(\\mathfrak h)$\nas in [def-wf-lie-radical-centre]. Then, regarding the Lie algebras of\n$Z(H)$ and $Z(H)^\\circ$ as subspaces of $\\mathfrak h$ via the\ndifferentials of the inclusions,\n\n$$\n\\operatorname{Lie}\\bigl(Z(H)^\\circ\\bigr)=\\operatorname{Lie}Z(H)=\\mathfrak z(\\mathfrak h).\n$$",
+  "proof": [
+   {
+    "text": "We first show that the kernel of the adjoint representation is the\ngroup centre. If\n$g\\in H$ acts trivially on $\\mathfrak h$, the closed centralizer\n$C_H(g)$ has Lie algebra $\\mathfrak h$, so\n[lem-wf-same-lie-closed-subgroup] gives $C_H(g)=H$ and\n$g\\in Z(H)$. The reverse inclusion is immediate; hence\n$Z(H)=\\ker(\\operatorname{Ad}:H\\to\\operatorname{GL}(\\mathfrak h))$.\nFor a dual-number matrix $1+\\epsilon X$,\n\n$$\n\\operatorname{Ad}(1+\\epsilon X)(Y)\n=Y+\\epsilon[X,Y].\n$$",
+    "uses": [
+     "lem-wf-same-lie-closed-subgroup"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Consequently the tangent equations of this kernel give",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$$\n\\operatorname{Lie}Z(H)\n=\\ker(d\\operatorname{Ad})\n=\\ker(\\operatorname{ad})\n=\\mathfrak z(\\mathfrak h).\n$$\nHere the centralizer $C_H(g)$ and the kernel of $\\operatorname{Ad}$\nare closed subgroup schemes defined by these equations, hence reduced\nby [lem-ag-cartier-reduced], so their equations compute their Lie\nalgebras. Finally $Z(H)^\\circ$ is open in $Z(H)$ by\n[lem-wf-algebraic-component-cosets], hence has the same tangent space\nat the identity, so $\\operatorname{Lie}(Z(H)^\\circ)=\\operatorname{Lie}Z(H)$.",
+    "uses": [
+     "lem-ag-cartier-reduced",
+     "lem-wf-algebraic-component-cosets"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
+ }
 }

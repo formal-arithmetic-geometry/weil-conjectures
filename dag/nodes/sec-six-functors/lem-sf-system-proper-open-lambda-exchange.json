@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-system-proper-open-lambda-exchange",
+ "kind": "statement",
+ "title": "Intrinsic system proper/open restriction is exchange followed by inverse unit",
+ "statement": "For a commutative square k:A→B, r:A→C, p:B→D, i:C→D with quasi-compact open immersions k,i and proper r,p, let o be the actual unbounded strict-system operations, c their normalized compositors, and a their open comparisons. For every unbounded system M on A, the prescribed lambda homomorphism P_i R_p J_k M→R_r M equals the proper exchange P_i R_p J_k M→R_r P_k J_k M followed by R_r of the inverse open unit M≅P_k J_k M. No Cartesian, boundedness, constructibility or tensor hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, restriction calculation for proper/open interchange; sites-cohomology.tex Tag 07A7, adjunction mates and composition"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof": [
+  {
+   "text": "Factor k and r through the canonical clopen lift s into B times_D C. Associativity of the normalized system pullback compositors factors the inverse-image square into the Cartesian square followed by restriction along s. Take proper mates and use the iterated-mate/conjugate identity and beta_transpose to identify the Cartesian factor with cartesianConjugate. The inverse k-open unit, transported through the open compositor, is restrictFactor followed by the inverse s-open unit. Its proper transpose is a.clopen by clopen_transpose. The remaining proper compositor and equality transport are exactly the final factors in properOpenLambda. This argument uses only units, counits and their triangle identities in the unbounded system categories, before evaluation.",
+   "uses": [
+    "lem-sf-integral-system-compositor-associativity",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-system-compositor-associativity",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B; independent open-restriction normalization calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of proper open interchange lambda is proper exchange followed by inverse open unit",
+   "results": "Eight unrelated open partial-homeomorphism/restriction results.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.conjugateIsoEquiv",
+   "results": "Zero hits.",
+   "date": "2026-10-25",
+   "verdict": "Use the source generic mate-pasting API."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenLambda|unit_app_comp_map_exchange_comp_baseChange",
+   "results": "Mathlib index: zero hits. Repository: ExchangeMate proves the Cartesian unit/exchange identity; no statement identifies the intrinsic noncartesian system lambda.",
+   "date": "2026-10-25",
+   "verdict": "The full system normalization is a separate lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProperOpenProjectionMate",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-open-projection-mate",
+   "place": "Open-restriction normalization in the system projection-mate proof; an independent geometric comparison without tensor or projection-formula hypotheses",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SystemProperOpenLambdaExchange",
+  "file": "lean/Sheaf/SixFunctors/SystemProperOpenLambdaExchange.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.systemProperOpenLambdaExchange",
+  "statement": "theorem systemProperOpenLambdaExchange\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c)\n    {A B C D : Scheme.{u}}\n    (k : A ⟶ B) (r : A ⟶ C) (p : B ⟶ D) (i : C ⟶ D)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    OpenExchangeUnitFormula (Operations.shriek l E o k) (Operations.push l E o p)\n      (pull l E i) (pull l E k) (Operations.push l E o r) (a.unit l E o c k)\n      (properExchange l E o c k r p i h) (properOpenLambda l E o c a k r p i h)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.OpenExchangeUnitFormula",
+   "WeilConjectures.IntegralSystemRealization.systemProperOpenLambdaExchange"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T023342-L-546669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T023342-L-546669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

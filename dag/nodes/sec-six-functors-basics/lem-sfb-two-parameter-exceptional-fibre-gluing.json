@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-two-parameter-exceptional-fibre-gluing",
+ "kind": "statement",
+ "title": "Exceptional-fibre gluing in two-generator regular-sequence blowup charts",
+ "statement": "Let $A$ be a commutative Noetherian ring, and let $x,y\\in A$ be such that both $(x,y)$ and $(y,x)$ are regular sequences and $k=A/(x,y)$ is a field. Set $I=(x,y)$, $Y=\\operatorname{Bl}_I(\\operatorname{Spec}A)$ and $E=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k$. On the standard blowup charts $U_x=D_+(xT)$ and $U_y=D_+(yT)$, with coordinates $t=(yT)/(xT)$ and $u=(xT)/(yT)$, the scheme-theoretic fibre has the canonical affine descriptions\n$$E\\cap U_x\\cong\\operatorname{Spec}k[t],\\qquad E\\cap U_y\\cong\\operatorname{Spec}k[u].$$\nThe scheme-theoretic overlap is $\\operatorname{Spec}k[t,t^{-1}]$, identified with the basic opens $D(t)$ and $D(u)$ in those affine lines by $u=t^{-1}$. The chart maps $t\\mapsto T_1/T_0$ and $u\\mapsto T_0/T_1$ give compatible isomorphisms to the standard charts of $\\mathbf P^1_k$, and glue, with their inverses, to a $k$-scheme isomorphism $E\\cong\\mathbf P^1_k$. The scheme $E$ is regular: every local ring at a point of either affine chart is the corresponding prime localization of $k[t]$ or $k[u]$ and is regular local.\nConventions: [def-weil-pbc-noetherian-ring], [def-weil-pbc-regular-sequence], [def-nagata-global-blowup], [def-nagata-affine-proj], [def-nagata-affine-blowup-chart-map], [def-pc-fibre-product], [def-weil-affine-spectrum], [def-nagata-projective-space-base-change], [def-weil-regular-scheme], [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Stacks Tag 0AGQ (resolve-lemma-blowup), exceptional fibre, expanded using the two charts of more-algebra.tex Tag 0BIQ (more-algebra-lemma-blowup-regular-sequence). Regularity: algebra.tex Tag 00OP (algebra-lemma-dim-affine-space). Retains old item proof steps 4--5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-nagata-global-blowup",
+  "def-nagata-affine-proj",
+  "def-nagata-affine-blowup-chart-map",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-nagata-projective-space-base-change",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-two-parameter-blowup-atlas] to the commutative Noetherian ring $A$ and the two ordered regular sequences explicitly supplied in the hypotheses. The current atlas gives the cover $Y=U_x\\cup U_y$, with $U_x=D_+(xT)$ and $U_y=D_+(yT)$, and the canonical $A$-algebra presentations $C_x=A[I/x]\\cong A[t]/(xt-y)$ and $C_y=A[I/y]\\cong A[u]/(yu-x)$. Its identifications send $t$ to $(yT)/(xT)$ and $u$ to $(xT)/(yT)$ and preserve the structure maps from $A$. Thus the tensor reductions in step 2 use these specified $A$-algebras and the overlap calculation in step 3 uses these specified homogeneous fractions. The atlas now also lists its affine-blowup, Rees-algebra, polynomial-ring and quotient-algebra conventions; none adds a local or regular-ring hypothesis on $A$.",
+   "uses": [
+    "lem-sfb-two-parameter-blowup-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, lemma-blowup-regular-sequence, applied in both orders; atlas interface"
+   }
+  },
+  {
+   "text": "Write $p:E\\to Y$ for the projection. By [lem-weil-pbc-open-fibre-product], $V_x=p^{-1}U_x=U_x\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k$ and $V_y=p^{-1}U_y$ are open subschemes of $E$ and cover it. By [lem-weil-pbc-fibre-product-affine-spectra], $V_x=\\operatorname{Spec}(C_x\\otimes_A k)$. Explicitly the $k$-algebra isomorphism $C_x\\otimes_A k\\to k[t]$ sends $[f(t)]\\otimes\\bar a$ to $\\bar a\\bar f(t)$, reducing every coefficient modulo $I$. It is well defined because $xt-y$ reduces to zero and is balanced over $A$. Its inverse sends $\\bar a$ to $1\\otimes\\bar a$ and $t$ to $[t]\\otimes1$. Both composites fix coefficients and the polynomial generator; on a pure tensor the inverse composite is $[f]\\otimes\\bar a$ by the balancing relation. Thus it is an isomorphism. The same formulas with $u$ give $C_y\\otimes_A k\\cong k[u]$. These are scheme-theoretic fibre calculations, without replacing a fibre by its set of points.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes); explicit reduction of the presentations of Tag 0BIQ"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proj-basic-open-intersection] to the Rees algebra with $f=xT$, $g=yT$, both of degree one. The overlap in $U_x$ is $D(t)$, and in $U_y$ it is $D(u)$. Pulling back to $E$ gives these same basic opens in $V_x,V_y$: a local ring map carries a unit to a unit, and if an element is a nonunit of a local ring it is in the maximal ideal and its image under a local map is a nonunit. Hence taking the inverse image of a basic open gives the basic open of the pulled-back function. By [lem-weil-pbc-affine-open-section-vanishing-prime] their rings are $k[t]_t$ and $k[u]_u$. In the common homogeneous localization, the fraction representatives of [def-nagata-homogeneous-localization-degree-zero] satisfy $((yT)/(xT))((xT)/(yT))=1$. Thus the transition sends $u$ to $t^{-1}$; it fixes $A$ and after reduction fixes $k$. Explicitly $k[u]_u\\to k[t]_t$ sends $u$ to $t^{-1}$ and $u^{-1}$ to $t$, with inverse sending $t$ to $u^{-1}$ and $t^{-1}$ to $u$. The composites fix the displayed generators. Writing $k[t,t^{-1}]=k[t]_t$ proves the claimed scheme-theoretic overlap and its two inclusions.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M4 (lemma-standard-open), 01MA (lemma-standard-open-proj); schemes.tex Tags 01I3 and 01HV for principal opens and their rings"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-projective-space-standard-charts] for $S=\\operatorname{Spec}k$ and the homogeneous index set $\\{0,1\\}$. The two opens $P_0,P_1$ cover $P=\\mathbf P^1_k$ and have rings $k[v]$, $v=T_1/T_0$, and $k[w]$, $w=T_0/T_1$. On the universal projective space over $\\mathbf Z$, [lem-weil-pbc-proj-basic-open-intersection] identifies their overlap as $D(v)=D(w)$ in these respective charts; pulling this open back to $k$ gives the same description, by the unit test used in step 3. By [lem-weil-pbc-affine-open-section-vanishing-prime] this overlap is affine with ring $k[v]_v$ in $P_0$ and $k[w]_w$ in $P_1$, so morphisms into it and the restrictions of the chart maps to it are determined by ring maps on these localizations. The homogeneous fractions have $vw=1$, so their transition is $w=v^{-1}$. The coefficient-fixing polynomial isomorphisms $k[t]\\to k[v]$, $t\\mapsto v$, and $k[u]\\to k[w]$, $u\\mapsto w$, and their inverses induce affine $k$-scheme isomorphisms by [def-weil-affine-spectrum]. On overlaps the ring square commutes: either path sends $u$ to $v^{-1}$ and fixes $k$; its inverse square commutes as well. Thus both the local scheme maps $V_x\\to P_0$, $V_y\\to P_1$ and their inverses agree on overlaps.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG (lemma-standard-covering-projective-space), Tag 01M4 (lemma-standard-open); coordinate comparison with resolve.tex Tag 0AGQ"
+   }
+  },
+  {
+   "text": "Compose the two local maps with $P_0,P_1\\hookrightarrow P$. By [lem-weil-pbc-scheme-morphism-gluing] they give $F:E\\to P$. Apply the same theorem to the inverse maps followed by $V_x,V_y\\hookrightarrow E$, obtaining $G:P\\to E$. On $V_x$ and $V_y$, respectively, $GF$ is the composite of the corresponding inverse affine isomorphisms, hence the identity. The uniqueness clause of that theorem gives $GF=\\mathrm{id}_E$. On $P_0,P_1$ it similarly gives $FG=\\mathrm{id}_P$. Each local map fixes the coefficient ring $k$; therefore its composite with the structure map to $\\operatorname{Spec}k$ is the original structure map on that open. Uniqueness under gluing makes both global maps morphisms over $k$. This gives the required $k$-scheme isomorphism with the stated chart formulas.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA (section-glueing-schemes), 01JJ (lemma-glue-functors), morphism gluing and uniqueness"
+   }
+  },
+  {
+   "text": "The field hypothesis on $k$ permits [lem-sc-p1-polynomial-regular]: both $k[t]$ and $k[u]$ are Noetherian regular rings. Every point of $E$ belongs to $V_x$ or $V_y$. By [lem-weil-pbc-affine-open-stalk-localization], its local ring is canonically the localization of that chart ring at its corresponding prime. It is regular local by the cited regular-ring statement, including the zero prime. The two regular affine neighbourhoods therefore make $E$ regular by [def-weil-regular-scheme].",
+   "uses": [
+    "lem-sc-p1-polynomial-regular",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), first sentence; schemes.tex Tag 01HV (lemma-spec-sheaves), part (6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-two-parameter-blowup-atlas",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sc-p1-polynomial-regular",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AGQ, lemma-blowup, exceptional-fibre identification, expanded by the two-generator chart calculation of Tag 0BIQ and gluing; regularity via Tag 00OQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional fibre of a blowup of a two generated regular sequence ideal is a projective line over the quotient ring with coordinate transition u equals inverse t",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, composing the inverse of the pullback isomorphism $\\\\operatorname{Spec}(\\\\\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpecTopComponent\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, there is a homeomorphism between the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ and the pr\"}\n  {\"name\": \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A}\\n  (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp\\n      (Al\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, element $f$ of degree $f_\\\\deg$, and element $x$ divisible by $f$ with degree $x_\\\\deg$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{A}_{(x)}) \\\\to \\\\ope\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"The function maps a prime ideal $ q $ in the degree-zero localization $ A_f^0 $ of a graded ring $ \\\\mathcal{A} $ to a homogeneous prime ideal in $ \\\\text{Proj}(\\\\mathcal{A}) $ that does not contain the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj overlap isomorphisms supply building blocks; the blowup fibre reduction and comparison with the projective-line charts are not an exact declaration or one-line specialization. OnePoint and Weierstrass-curve hits concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj overlap isomorphisms supply building blocks; the blowup fibre reduction and comparison with the projective-line charts are not an exact declaration or one-line specialization. OnePoint and Weierstrass-curve hits concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(divisor|fibre|fiber)|projective.*(line|blowup)|blowup.*(fiber|fibre)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\"}\n  {\"file\": \"Mathlib/Algebra/Azumaya/Basic.lean\", \"line\": \"77\", \"text\": \"  let _ : Module.Projective R B := .of_equiv e.toLinearEquiv\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"line\": \"17\", \"text\": \"This file deals with preservation of `projectiveDimension` in (semi) linear equivalences.\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"line\": \"23\", \"text\": \"* `ModuleCat.hasProjectiveDimensionLE_of_semiLinearEquiv`: a module `N` satisfy\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"line\": \"24\", \"text\": \"  `HasProjectiveDimensionLE N n` if it is semi-linear equivalent to a module `M` that\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"line\": \"27\", \"text\": \"* `ModuleCat.projectiveDimension_eq_of_semiLinearEquiv`: `projectiveDimension` is preserved\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean\", \"line\": \"30\", \"text\": \"* `ModuleCat.hasProjectiveDimensionLE_of_linearEquiv`: a module `N` satisfy\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"14\", \"text\": \"# Projective general linear group\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"25\", \"text\": \"* `Matrix.ProjectiveSpecialLinearGroup.toPGL` is the natural\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"28\", \"text\": \"* `Matrix.ProjectiveSpecialLinearGroup.isoPSLOfAlgClosed` is an isomorphism between\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"39\", \"text\": \"/-- Projective general linear group $PGL(n, R)$\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup.lean\", \"line\": \"11\", \"text\": \"# Projective Special Linear Group\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup.lean\", \"line\": \"17\", \"text\": \"* `PSL(n, R)` is a shorthand for `Matrix.ProjectiveSpecialLinearGroup (Fin n) R`\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup.lean\", \"line\": \"32\", \"text\": \"/-- A projective special linear group is the quotient of a special linear group by its center. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup.lean\", \"line\": \"33\", \"text\": \"abbrev ProjectiveSpecialLinearGroup : Type _ :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup.lean\", \"line\": \"36\", \"text\": \"/-- `PSL(n, R)` is the projective special linear group `SL(n, R)/Z(SL(n, R))`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Module/StablyFree/Basic.lean\", \"line\": \"84\", \"text\": \"  exact Projective.of_split (LinearMap.inl R M N) (LinearMap.fst R M N) (LinearMap.ext fun _ ↦ rfl)\"}\n  {\"file\": \"Mathlib/Algebra/Module/Projective.lean\", \"line\": \"83\", \"text\": \"    Projective R P ↔ ∃ s : P →ₗ[R] P →₀ R, Function.LeftInverse (linearCombination R id) s :=\"}\n  {\"file\": \"Mathlib/Algebra/Module/Projective.lean\", \"line\": \"87\", \"text\": \"    Projective R P ↔ ∃ s : P →ₗ[R] P →₀ R, Finsupp.linearCombination R id ∘ₗ s = .id := by\"}\n  {\"file\": \"Mathlib/Algebra/Module/Projective.lean\", \"line\": \"113\", \"text\": \"  projective_lifting_property f (.id : P →ₗ[R] P) (LinearMap.range_eq_top.1 hf_surj)\"}\n  {\"file\": \"Mathlib/Algebra/Module/Projective.lean\", \"line\": \"128\", \"text\": \"  projective_def'.2 <| huniv (Finsupp.linearCombination R (id : P → P))\"}\n  {\"file\": \"Mathlib/Algebra/Module/Projective.lean\", \"line\": \"167\", \"text\": \"  obtain ⟨g, hg⟩ := projective_lifting_property (Finsupp.linearCombination R id) s\"}\n  {\"file\": \"Mathlib/Algebra/Module/PID.lean\", \"line\": \"265\", \"text\": \"  obtain ⟨f, hf⟩ := Module.projective_lifting_property _ LinearMap.id (torsion R M).mkQ_surjective\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/Independence.lean\", \"line\": \"29\", \"text\": \"- Define projective linear subspaces.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj overlap isomorphisms supply building blocks; the blowup fibre reduction and comparison with the projective-line charts are not an exact declaration or one-line specialization. OnePoint and Weierstrass-curve hits concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two affine lines glued on the multiplicative group by reciprocal coordinates give the projective line and its regular local rings over a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_of_equiv\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"{P Q : Fin 3 → F} (h : P ≈ Q) : toAffine W P = toAffine W Q\", \"doc\": \"If two projective Weierstrass curve points $[X:Y:Z]$ and $[X':Y':Z']$ over a field are equivalent (i.e., there exists a unit $\\\\lambda$ such that $X' = \\\\lambda X$, $Y' = \\\\lambda Y$, $Z' = \\\\lambda Z$), \"}\n  {\"name\": \"OnePoint.smul_some_eq_ite\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"{g : GL (Fin 2) K} {k : K} :\\n  g • (k : OnePoint K) = if g 1 0 * k + g 1 1 = 0 then ∞ else (g 0 0 * k + g 0 1) / (g 1 0 * k + g 1 1)\", \"doc\": \"For any invertible 2×2 matrix $ g = \\\\begin{pmatrix} g_{00} & g_{01} \\\\\\\\ g_{10} & g_{11} \\\\end{pmatrix} $ over a field $ K $ and any element $ k \\\\in K $, the action of $ g $ on $ k $ in the one-point com\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \"(f) {m} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) : (Proj| pbo f) ≅ (Spec (A⁰_ f))\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj.mul_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": (s * t).1 x = s.1 x * t.1 x\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring assigns to each open set $ U $ the ring of sections locally represented by homogeneous fractions $ r/s $, where $ s $ is a homogeneous e\"}\n  {\"name\": \"OnePoint.smul_infty_def\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"{g : GL (Fin 2) K} :\\n  g • ∞ =\\n    (equivProjectivization K).symm\\n      (.mk K (g 0 0, g 1 0) (fun h ↦ by simpa [det_fin_two, Prod.mk_eq_zero.mp h] using g.det_ne_zero))\", \"doc\": \"For any invertible $ 2 \\\\times 2 $ matrix $ g $ over a division ring $ K $, the action of $ g $ on the point at infinity $ \\\\infty $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ corresponds\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_symm_apply\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"∀ {F : Type u} [inst : Field F] (W : WeierstrassCurve.Projective F) [inst_1 : DecidableEq F] (a : W.toAffine.Point),\\n  (WeierstrassCurve.Projective.Point.toAffineAddEquiv W).symm a = WeierstrassCurve.Projective.Point.fromAffine a\", \"doc\": \"For any field $ F $ with decidable equality and a projective Weierstrass curve $ W $ over $ F $, the inverse of the additive equivalence between projective and affine points maps each affine point $ a\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": Presheaf CommRingCat (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"A presheaf of commutative rings on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, assigning to each open set $U$ the commutative ring of sections locally represente\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj overlap isomorphisms supply building blocks; the blowup fibre reduction and comparison with the projective-line charts are not an exact declaration or one-line specialization. OnePoint and Weierstrass-curve hits concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the center in two blowup hypersurface charts reduces to polynomial rings with Laurent polynomial overlap and glues to projective one space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, composing the inverse of the pullback isomorphism $\\\\operatorname{Spec}(\\\\\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpecTopComponent\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, there is a homeomorphism between the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ and the pr\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (x :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"For a homogeneous element $ f $ of positive degree in a graded ring $ \\\\mathcal{A} $, the composition of the continuous map from the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ to the prim\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj overlap isomorphisms supply building blocks; the blowup fibre reduction and comparison with the projective-line charts are not an exact declaration or one-line specialization. OnePoint and Weierstrass-curve hits concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|blowup|blowUp|projectiveLine",
+   "results": "[grep] OK 0 hit(s) in AlgebraicGeometry (actual msearch.py call).",
+   "date": "2026-10-23",
+   "verdict": "no match: no exceptional-fibre blowup statement in the AlgebraicGeometry subtree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional fibre of a blowup of a two generated regular sequence ideal is a projective line over the quotient field",
+   "results": "Returned 8 hits: AlgebraicGeometry.Proj, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq_comap, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and fibre constructions do not identify this exceptional fibre and its coordinate gluing; Weierstrass-curve coordinate changes concern a different scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "Returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and fibre constructions do not identify this exceptional fibre and its coordinate gluing; Weierstrass-curve coordinate changes concern a different scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(fibre|fiber)|blowup.*(fibre|fiber)",
+   "results": "Returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and fibre constructions do not identify this exceptional fibre and its coordinate gluing; Weierstrass-curve coordinate changes concern a different scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional fibre of blowup of regular sequence of length two is projective line",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.instCanonicallyOverFiber, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.fiberι, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and fibre constructions do not identify this exceptional fibre and its coordinate gluing; Weierstrass-curve coordinate changes concern a different scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue the two affine lines along the punctured affine line by reciprocal coordinates to identify the exceptional divisor with projective one space",
+   "results": "Returned 8 hits: AlgebraicGeometry.Proj, WeierstrassCurve.Projective.toAffine, WeierstrassCurve.Projective.Point.fromAffine, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.projIsoSpecTopComponent, WeierstrassCurve.Affine.Point.toProjective, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.projIsoSpec. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and fibre constructions do not identify this exceptional fibre and its coordinate gluing; Weierstrass-curve coordinate changes concern a different scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-surface-maximal-blowup-geometry",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 8: identify the exceptional divisor of a regular surface-point blowup as the projective line over the center residue field.; re-split of lem-sfb-local-surface-maximal-blowup-geometry: old proof steps 4--5 (fibre quotient rings, inverse-coordinate overlap and projective-line gluing)",
+   "via": [
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-two-parameter-exceptional-fibre-gluing",
+  "worker": "stage1",
+  "summary": "Retained the statement and its hypotheses. Reused the existing two-parameter blowup atlas, affine fibre products, Proj intersections, projective-space standard charts, morphism gluing, regular polynomial-ring leaf and affine stalk localization. Wrote explicit inverse maps for coefficient reduction, overlap inversion and chart comparison; no new nodes. Replaced the insufficient maximal-localization citation 00OP in the regularity argument by the existing 00OQ leaf covering every prime. Returned-delivery repair: rebased split-owned fields onto the current item, re-read every cited statement, and revalidated step 1 against the current atlas statement, whose only change is four added construction-convention references. Made its A-algebra and homogeneous-coordinate interfaces explicit and refreshed the full atlas quote in citations.json; retained all searches and the six-step proof.",
+  "blueprint": "Realizes the inherited source place: exceptional projective-line geometry in det-thm-sf-ctf-stability-direct-images (3), through the de Jong Lemma 3.13 rational exceptional-curve prerequisite; specifically the former local-surface-maximal-blowup-geometry steps 4--5. The latest blueprint direct-image proof and unit were read; this item supplies only the already-assigned algebraic geometry prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic standard-chart and covering interface for projective space over any scheme, specialized to Spec k and two coordinates. This is a geometric tool for the assigned blowup calculation; no node of this unit states this generic chart theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-f19c95d1c",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-f19c95d1c (reviewer sub-agent of L); spot-checked: Re-delivery of the 2a41ccebccb2 FIX after the landing refused it for atlas statement drift. Diff vs 2a41: only step 1 text and the split_report summary changed; the statement, stmt_deps, proof_deps and steps 2-6 are identical. On live and side-live the item is still unsplit. Statement (resolve.tex 0AGQ l.449-505, generalized via more-algebra 0BIQ) is true; tested A=k[X,Y] with I=(X,Y), its localization, A=Z[X] with (p,X), and the generic point of k[t]. Step 1 matches the current lem-sfb-two-parameter-blowup-atlas: same hypotheses, charts D_+(xT)/D_+(yT), C_x=A[t]/(xt-y), C_y=A[u]/(yu-x), coordinates (yT)/(xT) and (xT)/(yT); the four added conventions add no hypothesis. Step 2 (01JR, 01I4): the map C_x⊗_A k ≅ k[t] and its inverse are checked. Step 3: Proj intersection with d=e=1 gives D(t), the local-ring unit argument pulls it back to E, and section-vanishing-prime(b) gives k[t]_t with tu=1. Step 5: gluing uniqueness gives GF=id, FG=id and the k-structure. Step 6: 00OQ via lem-sc-p1-polynomial-regular covers all primes, then stalk-localization(c) and def-weil-regular-scheme finish. Accepted tool_use: lem-weil-pbc-projective-space-standard-charts, because no node of this unit gives a chart interface. Batch-5 flag: lem-trf-blowup-chart-regular-sequence-presentation is the generic 0BIQ regular-sequence chart presentation, not an assumed statement and not a step of the trace formula or Poincaré duality proofs, so accepted. FIX (2a41 fix lost, re-applied): step 4 compares ring squares on the overlap D(v)=D(w) without citing the overlap ring k[v]_v=k[w]_w; I added lem-weil-pbc-affine-open-section-vanishing-prime (already in proof_deps) to the step's uses with one sentence. No new nodes, no duplicates, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TwoParameterExceptionalFibreGluing",
+  "declaration": "AlgebraicGeometry.twoParameterExceptionalFibreGluing",
+  "declarations": [
+   "AlgebraicGeometry.twoParameterIdeal",
+   "AlgebraicGeometry.TwoParameterQuotient",
+   "AlgebraicGeometry.twoParameterCenter",
+   "AlgebraicGeometry.twoParameterExceptional",
+   "AlgebraicGeometry.twoParameterExceptionalι",
+   "AlgebraicGeometry.twoParameterExceptionalBase",
+   "AlgebraicGeometry.twoParameterRees",
+   "AlgebraicGeometry.TwoParameterChartRing",
+   "AlgebraicGeometry.twoParameterRatio",
+   "AlgebraicGeometry.twoParameterChart",
+   "AlgebraicGeometry.twoParameterProjectiveOpen",
+   "AlgebraicGeometry.twoParameterProjectiveRatio"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoParameterExceptionalFibreGluing.lean",
+  "statement": "theorem twoParameterExceptionalFibreGluing {A : Type u} [CommRing A] [IsNoetherianRing A] (x y : A) (hxy : RingTheory.Sequence.IsRegular A [x, y]) (hyx : RingTheory.Sequence.IsRegular A [y, x]) [(twoParameterIdeal x y).IsMaximal] : ∃ (b : AffineBlowup (twoParameterIdeal x y) ≅ (twoParameterCenter x y).blowup) (a : Fin 2 → (Spec (.of (Polynomial (TwoParameterQuotient x y))) ⟶ twoParameterExceptional x y)) (r : ∀ i : Fin 2, TwoParameterChartRing x y i →+* Polynomial (TwoParameterQuotient x y)) (c : ∀ i : Fin 2, Spec (.of (Polynomial (TwoParameterQuotient x y))) ≅ (twoParameterProjectiveOpen (TwoParameterQuotient x y) i).toScheme) (e : twoParameterExceptional x y ≅ ProjectiveLine (Spec (.of (TwoParameterQuotient x y)))), b.hom ≫ (twoParameterCenter x y).blowupMap = AffineBlowup.toSpec (twoParameterIdeal x y) ∧ (∀ i : Fin 2, IsOpenImmersion (a i) ∧ Set.range (a i) = ((twoParameterExceptionalι x y) ⁻¹ᵁ (b.inv ⁻¹ᵁ Proj.basicOpen (reesGrading (twoParameterIdeal x y)) (twoParameterRees x y i)) : Set (twoParameterExceptional x y)) ∧ a i ≫ twoParameterExceptionalι x y = Spec.map (CommRingCat.ofHom (r i)) ≫ twoParameterChart x y i ≫ b.hom ∧ a i ≫ twoParameterExceptionalBase x y = Spec.map (CommRingCat.ofHom Polynomial.C) ∧ (∀ z : A, r i (AffineBlowup.awayAlgebraMap _ (twoParameterRees x y i) z) = Polynomial.C (Ideal.Quotient.mk (twoParameterIdeal x y) z)) ∧ r i (twoParameterRatio x y i) = Polynomial.X ∧ (c i).hom.appTop (twoParameterProjectiveRatio (TwoParameterQuotient x y) i) = (Scheme.ΓSpecIso (.of (Polynomial (TwoParameterQuotient x y)))).inv Polynomial.X ∧ (c i).hom ≫ (twoParameterProjectiveOpen (TwoParameterQuotient x y) i).ι ≫ (ProjectiveLine (Spec (.of (TwoParameterQuotient x y))) ↘ Spec (.of (TwoParameterQuotient x y))) = Spec.map (CommRingCat.ofHom Polynomial.C) ∧ a i ≫ e.hom = (c i).hom ≫ (twoParameterProjectiveOpen (TwoParameterQuotient x y) i).ι ∧ (c i).inv ≫ a i = (twoParameterProjectiveOpen (TwoParameterQuotient x y) i).ι ≫ e.inv ∧ (∀ p : PrimeSpectrum (Polynomial (TwoParameterQuotient x y)), Nonempty (((twoParameterExceptional x y).presheaf.stalk (a i p)) ≃+* Localization.AtPrime p.asIdeal) ∧ IsRegularLocalRing ((twoParameterExceptional x y).presheaf.stalk (a i p)))) ∧ Set.range (a 0) ∪ Set.range (a 1) = Set.univ ∧ (a 0) ⁻¹ᵁ ((twoParameterExceptionalι x y) ⁻¹ᵁ (b.inv ⁻¹ᵁ Proj.basicOpen (reesGrading (twoParameterIdeal x y)) (twoParameterRees x y 1))) = PrimeSpectrum.basicOpen (Polynomial.X : Polynomial (TwoParameterQuotient x y)) ∧ (a 1) ⁻¹ᵁ ((twoParameterExceptionalι x y) ⁻¹ᵁ (b.inv ⁻¹ᵁ Proj.basicOpen (reesGrading (twoParameterIdeal x y)) (twoParameterRees x y 0))) = PrimeSpectrum.basicOpen (Polynomial.X : Polynomial (TwoParameterQuotient x y)) ∧ (∃ d : Spec (.of (LaurentPolynomial (TwoParameterQuotient x y))) ≅ pullback (a 0) (a 1), d.hom ≫ pullback.fst (a 0) (a 1) = Spec.map (CommRingCat.ofHom (Polynomial.eval₂RingHom LaurentPolynomial.C (LaurentPolynomial.T 1))) ∧ d.hom ≫ pullback.snd (a 0) (a 1) = Spec.map (CommRingCat.ofHom (Polynomial.eval₂RingHom LaurentPolynomial.C (LaurentPolynomial.T (-1))))) ∧ e.hom ≫ (ProjectiveLine (Spec (.of (TwoParameterQuotient x y))) ↘ Spec (.of (TwoParameterQuotient x y))) = twoParameterExceptionalBase x y ∧ IsRegularScheme (twoParameterExceptional x y)",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full two-chart, reciprocal-overlap, normalized projective-line gluing and stalk-regularity statement. The quotient-field hypothesis is encoded by maximality of (x,y), so the field structure is the canonical quotient structure. Auxiliary definitions are concrete specializations of the recorded constructions, not postponed existence choices."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f4481f01",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Read item, 10 stmt_deps, report (Worker report + Second reading by Q140 present), module, and upstream AffineBlowup/toSpec/awayAlgebraMap/chart, ProjectiveLine, standardOpenIso (coords T_j/T_i, so ![1,0] i gives T1/T0 and T0/T1). Hypotheses exact: Noetherian, both ordered regular sequences, field = IsMaximal on literal A/(x,y); no extra assumptions, universe u throughout with ULift.{u}(Fin 2). E = categorical pullback of recorded global blowupMap. All existentials pinned: b over Spec A (blowup has no nontrivial automorphisms over its base; Q154 precedent), r_i by values on A and the actual homogeneous ratio (which generate A[I/x]), a_i by pullback components with range = preimage of D+(xT)/D+(yT), c_i by base + ratio coordinate, e by the chart cover and over k. Overlap is basicOpen X on both charts, and pullback(a0,a1) ≅ Spec k[T,T^-1] with t↦T, u↦T^-1. Stalks regular local and IsRegularScheme (recorded def). Statement field verbatim, 12 concrete helpers with source/blueprint docstrings, one sorry, only the item lean field changed vs side-live, no name clashes. Advisory: AffineBlowup/reesGrading reached via the chart-map stmt_dep rather than def-nagata-affine-blowup; stalk iso stated as Nonempty, but the canonical one follows from IsOpenImmersion. No recompile (worker scompile exit 0 + dry run bae50935c62)."
+ }
+}

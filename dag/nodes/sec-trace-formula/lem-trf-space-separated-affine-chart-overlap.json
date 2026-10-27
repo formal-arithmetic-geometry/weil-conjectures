@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-space-separated-affine-chart-overlap",
+ "kind": "statement",
+ "title": "Affine overlaps of affine charts of a separated space over an affine base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $V$ an affine $S$-scheme, and $f:X\\to V$ a separated morphism of algebraic spaces over $S$ [def-trf-algebraic-space, lem-trf-space-qc-separated-etale-local]. Thus the representable diagonal $\\Delta_f:X\\to X\\times_VX$ is a closed immersion on every scheme test [def-weil-closed-immersion]. Let $u_i:U_i\\to X$ for $i=0,1$ be etale maps from affine schemes, not necessarily surjective. Put $a_i=f\\circ u_i:U_i\\to V$ and $R=U_0\\times_XU_1$ [lem-trf-space-fibre-products-etale-covers], with projections $r_i:R\\to U_i$. Then $R$ is a scheme, the $r_i$ are etale, and its canonical map $j:R\\to U_0\\times_VU_1$ is a closed immersion of schemes. More precisely, there is a canonical isomorphism $R\\simeq X\\times_{X\\times_VX}(U_0\\times_VU_1)$ over $U_0\\times_VU_1$, identifying $j$ with the scheme test of $\\Delta_f$. The scheme $R$ is affine, and $a_0,a_1$ and $b=a_0\\circ r_0=a_1\\circ r_1:R\\to V$ are quasi-compact separated morphisms of schemes, with their usual closed-diagonal and affine-test meanings. The fibre product of schemes is [def-pc-fibre-product]. No quasi-compactness hypothesis on $X$ or $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M9 (lemma-pushforward), affine-target paragraph concerning R -> U times_Y U and the two scheme maps, specialized to a separated relative diagonal; the diagonal definition is Tag 03KM (lemma-separated-local). The mixed pair of affine etale charts has the same scheme-test formula as the displayed self-overlap."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-presheaf-pullback-etale-point-lifting] to the singleton map $u_1$ and $G=h_{U_0}$: its representable-etale conclusion, which requires no joint surjectivity, makes $R$ a scheme and $r_0$ etale. Interchange $0,1$ for $r_1$. The algebraic-space and sheaf fibre products agree by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-trf-presheaf-pullback-etale-point-lifting",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), (3), scheme-test base change; spaces.tex Tag 02X2 (lemma-fibre-product-spaces)."
+   }
+  },
+  {
+   "text": "Put $P=U_0\\times_VU_1$. On any $S$-scheme $T$, a section of $X\\times_{X\\times_VX}P$ is a triple $(x,p_0,p_1)$ with $u_0(p_0)=x=u_1(p_1)$. Send it to $(p_0,p_1)\\in R(T)$; the inverse adjoins $x=u_0(p_0)$. These maps commute with restrictions and preserve the projection to $P$. Thus they are inverse sheaf maps, hence the asserted canonical isomorphism. The fibre-product universal properties are [def-pc-fibre-product, lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9 (lemma-pushforward), affine-target paragraph: R maps to U times_Y U; explicit mixed-chart diagonal test."
+   }
+  },
+  {
+   "text": "The map $P\\to X\\times_VX$ has components $u_0\\circ\\mathrm{pr}_0,u_1\\circ\\mathrm{pr}_1$. By the definition of separatedness in [lem-trf-space-qc-separated-etale-local], its test of $\\Delta_f$ is a closed immersion of schemes. Step 2 identifies this test with $j:R\\to P$, including its map to $P$.",
+   "uses": [
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HL (definition-separated), and Tag 03KM (lemma-separated-local); Tag 03M9 diagonal-test argument with separatedness."
+   }
+  },
+  {
+   "text": "Choose spectra for the three affine schemes $U_0,U_1,V$; [def-weil-affine-spectrum] writes their maps as ring homomorphisms. Then [lem-weil-pbc-fibre-product-affine-spectra] identifies $P$ with the spectrum of the tensor product of the two chart rings over the base ring. Since $P$ is affine, the affine description in [def-weil-closed-immersion] applied to $j$ over the whole of $P$ writes $R$ as the spectrum of a quotient ring. Hence $R$ is affine.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JQ (lemma-fibre-product-affines), using Tag 01I4 (lemma-fibre-product-affine-schemes); morphisms.tex Tag 01QO (lemma-closed-immersion), affine description."
+   }
+  },
+  {
+   "text": "The singleton affine cover $\\{V\\}$ has affine inverse images $U_0,U_1,R$ under $a_0,a_1,b$. Thus [pqf-lem-affine-local-target] makes all three morphisms affine. Clause (3) of [lem-weil-pbc-affine-morphism-permanence] makes them quasi-compact and separated. The equality $a_0r_0=a_1r_1$ is the defining compatibility of $R$, and no step used quasi-compactness of $X$ or $f$.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S8 (lemma-characterize-affine), (2) implies (1), and Tag 01S7 (lemma-affine-separated)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-trf-presheaf-pullback-etale-point-lifting",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M9 (lemma-pushforward), affine-target diagonal argument, specialized to a separated diagonal and a mixed pair of charts; scheme inputs Tags 01JQ, 01QO, 01S8 and 01S7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated algebraic space over an affine scheme, the fibre product of two affine scheme charts over the space is affine, by base change of the closed diagonal",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isAffine.*pullback|IsClosedImmersion.*[Ii]sAffine",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech relation of an affine atlas of a separated algebraic space over an affine scheme is affine",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineOpenCover\", \"AlgebraicGeometry.IsAffineHom.of_comp\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a separated algebraic space is affine and any fibre product of affine schemes mapping to it over an affine base is affine",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.IsSeparated.instMap\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or scheme sites, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSeparated\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level pullback, affine and separation facts do not state the result for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre product of two affine etale charts of a separated algebraic space over an affine scheme is affine by the closed relative diagonal",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level pullback, affine and separation facts do not state the result for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isAffine.*pullback|IsClosedImmersion.*[Ii]sAffine",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level pullback, affine and separation facts do not state the result for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech relation of affine charts of a separated algebraic space over an affine scheme is affine",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.isAffine_affineOpenCover\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.IsAffineHom.of_comp\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level pullback, affine and separation facts do not state the result for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any pair of morphisms from affine schemes to a separated algebraic space over an affine base has affine fibre product, via representability of its closed diagonal",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level pullback, affine and separation facts do not state the result for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Original Step 3 of the item, under the same section-algebra input descending from lem-trf-local-term-locality: Tag 03M9 affine-target paragraph, the map R -> U times_V U, with the closed relative diagonal giving affine overlaps and quasi-compact separated scheme maps.",
+   "via": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-separated-affine-chart-overlap",
+  "worker": "stage1",
+  "summary": "Verified the mixed-chart diagonal test directly; reused representable etale pullback and scheme-level affine facts. The statement is unchanged. Added the scheme quasi-compactness and separatedness definition dependencies. No new nodes, and no atlas-surjectivity or quasi-compactness hypothesis on X is used.",
+  "blueprint": "The ancestor lem-trf-local-term-locality has no explicit affine-overlap sentence in the current blueprint. This item remains the generic algebraic-space chart input along the recorded descent chain: the inherited place names the 03M9 affine-target paragraph used by lem-trf-space-qc-separated-quasi-coherent-pushforward. Steps 1-3 justify the chart relation and its diagonal test, steps 4-5 its affine and qc separated scheme properties.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-7d48f0dc7",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-7d48f0dc7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes, statement byte-identical to live, where the item is still unsplit. Step 1: lem-trf-presheaf-pullback-etale-point-lifting with g=u_0, G=h_{U_0}, H=X and the single chart u_1. Its representable-etale clause makes R=U_0×_XU_1 a scheme with r_0 etale without using joint surjectivity; swapping the indices gives r_1. Step 2: the triple-to-pair map (x,p_0,p_1)↦(p_0,p_1) and its inverse x=u_0p_0 identify R with X×_{X×_VX}P over P; this is elementary. Step 3: the separated definition in lem-trf-space-qc-separated-etale-local (Stacks 03HL) makes that scheme test, j, a closed immersion; the diagonal is correctly relative to V, and the step does not depend circularly on step 4. Step 4: the affine clause of def-weil-closed-immersion (01QO) on P=Spec(A_0⊗_BA_1) (01JQ, pullbackSpecIso) makes R affine. Step 5: the one-element cover clause of 01S8 makes a_0, a_1 and b affine, and clause (3) of 01S7 makes them qc separated. No quasi-compactness of X or f is used. Edge cases: empty or disjoint charts give R=Spec 0; for X=V=Spec k, R=U_0×_kU_1; the line with doubled origin shows separatedness is needed. The added stmt_deps def-weil-finite-type-morphism and def-weil-proper-morphism define the scheme-level qc and separated notions the statement uses. No duplicate found in a DAG-wide statement search. Route: every cited statement is in unit sk-i-curve-zero or is a definition or Mathlib leaf; no tool_uses, no SGA. Batch-5 finding: lem-trf-presheaf-pullback-etale-point-lifting (041F(3)/03H4) is a generic fact about representable etale pullback of fppf sheaves, neither given by nor part of the proof of the trace-formula or Poincare-duality assumptions. Its 131-node closure has no trace, poincare, nt-assume or nt-target node, only generic trf definitions, so it is accepted. Advisory only: the item-level source.place, inherited from live, calls 03KM the diagonal definition; it should be 03HL, which step 3 already cites."
+ }
+}

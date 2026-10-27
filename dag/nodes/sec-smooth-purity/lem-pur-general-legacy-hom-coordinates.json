@@ -1,0 +1,258 @@
+{
+ "id": "lem-pur-general-legacy-hom-coordinates",
+ "kind": "statement",
+ "title": "Native quotient addition equals the colimit addition in the older rational pair category",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$; no structure map from $Y$ to $k$ is assumed. Let $I$ be the finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. For $E\\in I$, fix the small model $\\widetilde E=\\mathrm{Shrink}(E)$ and its algebra equivalence $s_E:\\widetilde E\\cong E$, and put $i_{EL}=s_L^{-1}\\circ(E\\hookrightarrow L)\\circ s_E$. Let $\\mathcal A_E^{\\mathrm{old}}$ be the full subcategory of the completed integral derived category whose objects are derived complete and whose reductions modulo every positive uniformizer power are finite-torsion constructible in a single finite cohomological interval independent of the power [def-weil-derived-complete-integral-detailed]. Here the specified presentation is exactly $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$, with its functors $\\mathrm{integralDerivedReduction}$. Set $C_E^{\\mathrm{old}}=\\mathcal A_E^{\\mathrm{old}}[1/\\varpi_E]$, the raw Hom scalar localization [def-weil-rationalization-karoubi], namely $\\mathrm{rationalConstructibleCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$. Its scalar transition $T^{\\mathrm{old}}_{EL}$ is $\\mathrm{rationalScalarExtension}$ along $i_{EL}$. These named presentations specify the categories and maps in the assertions below; no identification with a different presentation of the integral predicate is asserted.\n\nUse the normalized system $S^{\\mathrm{old}}$ of [lem-pur-general-legacy-stage-coherence] and its pair category $P^{\\mathrm{old}}$ [def-sf-directed-common-stage-data]. For $A=(E,K),B=(F,H)$, write $G_L=\\operatorname{Hom}_{C_L^{\\mathrm{old}}}(T^{\\mathrm{old}}_{EL}K,T^{\\mathrm{old}}_{FL}H)$ at $L\\ge E,F$, with the specified associator-conjugated transports. There is exactly one equivalence\n$$c_{A,B}:\\operatorname{Hom}_{P^{\\mathrm{old}}}(A,B)\\xrightarrow{\\sim}\\varinjlim_{L\\ge E,F}G_L$$\nsending $[L,u]$ to the structure-map image $\\iota_L(u)$ [def-weil-directed-colimit-abelian-groups]. The abelian-group structure transferred through $c_{A,B}$ is equal to the native quotient structure in which addition is represented at a common stage. Thus $c_{A,B}$ is an additive equivalence for these fixed structures, composition is bilinear, and each $j_E:C_E^{\\mathrm{old}}\\to P^{\\mathrm{old}}$ is additive [def-weil-preadditive-category].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old owning proof argument 6; AlgebraicallyClosedCoefficients.lean:627-804 (homCoordinates_existsUnique, homGroup_eq_native, homCoordinatesAddEquiv, composition_bilinear, inclusion_additive).",
+  "note": "Construction material from old argument 6 (retained verbatim): For the retained finite-field legacy realization: Identify the upstream quotient Hom with the actual abelian-group DirectLimit. Send a representative to its structure-map image and use the quotient relation for well-definedness; DirectLimit.lift supplies the inverse. Representative induction proves both inverses and uniqueness. The upstream quotient addition sends two representatives at the same stage to the representative of their sum. Group extensionality identifies the specified transferred group with the native quotient group. Consequently homCoordinates is an additive equivalence with the specified colimit group. The proved upstream composition and inclusion APIs give preadditivity and additive inclusions. Explicitly forward sends a representative (L,u) to DirectLimit.of L u; equality after a common transport makes this well defined. The inverse is DirectLimit.lift of the additive quotient constructors, compatible because mkHom_tr identifies a map with its transport. Hom induction and direct-limit induction give both inverse equations and uniqueness. At one common field L the native sum [L,u]+[L,v] is [L,u+v], and each colimit structure map is additive. Apply injectivity of c to identify the transferred binary operation with the native one. AddCommGroup.ext identifies the whole group structures, including zero and inverses. Common-stage finite bilinearity and the representative formula for j_E prove the last two assertions."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-general-legacy-stage-coherence",
+  "def-sf-directed-common-stage-data",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-preadditive-category"
+ ],
+ "proof": [
+  {
+   "text": "The old integral stage is the specified full subcategory of the completed module derived category, so it inherits the $\\mathcal O_{\\widetilde E}$-linear Hom groups and bilinear composition of [lem-weil-integral-constructible-linear]. Applying [lem-weil-linear-scalar-localization-category] gives exactly the native preadditive structure of its raw rationalization. The ambient integral scalar extension is linear by clause (3) of [lem-weil-integral-scalar-extension-well-defined]; restriction to the supplied old stages preserves this property. On rational Homs its prescribed map is $f\\otimes b\\mapsto T^{\\rm int}_{EL}(f)\\otimes i_{EL}(b)$ [def-weil-rationalization-karoubi]; linearity and distribution over finite sums of pure tensors prove that each $T^{\\rm old}_{EL}$ is additive. These statements concern the old full subcategory specified in the item; no comparison with the intrinsic presentation is used.",
+   "uses": [
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-linear-scalar-localization-category",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Preparation: stage Hom groups and additive transition maps; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "For a repeated field $L$, [lem-route-coefficient-inclusion-laws] gives $i_{LL}=\\mathrm{id}$. Use the natural self-extension unit of [lem-pur-legacy-rational-self-extension-unit], transported through that equality, to write $\\epsilon_L:T^{\\rm old}_{LL}\\cong\\mathrm{id}$. Naturality gives $\\epsilon_{L,V}\\circ T^{\\rm old}_{LL}(f)=f\\circ\\epsilon_{L,U}$ for $f:U\\to V$. Thus $T^{\\rm old}_{LL}(f)=T^{\\rm old}_{LL}(g)$ implies $f=g$ by cancellation of $\\epsilon_{L,U}$. Only these reflexive transitions need to be faithful.",
+   "uses": [
+    "lem-route-coefficient-inclusion-laws",
+    "lem-pur-legacy-rational-self-extension-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Preparation: identity coefficient inclusion and the tensor unitor; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "The associators of the specified system satisfy the cocycle by [lem-pur-general-legacy-stage-coherence]. Apply [lem-pur-faithful-stage-hom-transport] with the preadditive stages, additive transitions and faithful reflexive transitions just checked. This supplies homomorphisms $t_{LM}$ with $t_{LL}=1$ and $t_{MN}t_{LM}=t_{LN}$ on the actual groups $G_L$. The common-overfield index $J=\\{L:E,F\\le L\\}$ is nonempty (it contains $EF$) and directed (a compositum of two of its fields still contains $E,F$), by [def-weil-finite-subextension-directed-set]. Hence the abelian-group colimit in the item is defined for this specific diagram.",
+   "uses": [
+    "lem-pur-general-legacy-stage-coherence",
+    "lem-pur-faithful-stage-hom-transport",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "The colimit is filtered: apply the transport lemma to the fixed old system; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "Write $q_L(u)=[L,u]$ in the quotient Hom of [def-sf-directed-common-stage-data]. Define its native sum by $q_L(u)+q_M(v)=q_N(t_{LN}u+t_{MN}v)$ for $N\\ge L,M$, its zero by $q_N(0)$ and its negative by $-q_L(u)=q_L(-u)$. To check all choices, transport to an upper bound $R$ of the chosen stages and equality witnesses. The sum becomes $t_{LR}u+t_{MR}v$ by the additive transport and composition laws established in step 3. Replacing either representative by an equivalent one replaces its corresponding summand by an equal arrow at $R$. Zeros and negatives are likewise respected since $t_{NR}(0)=0$ and $t_{NR}(-w)=-t_{NR}(w)$. Equality at $R$ is the quotient relation, so all three operations descend.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-pur-faithful-stage-hom-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Native quotient operations: independence of stages and representatives; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "At a single stage $N$ the preceding prescription reads $q_N(u)+q_N(v)=q_N(u+v)$, because $t_{NN}=1$. For any three parallel classes, take an upper stage of their representatives and compute there. Associativity and commutativity become $q_N((u+v)+w)=q_N(u+(v+w))$ and $q_N(u+v)=q_N(v+u)$; the zero and inverse laws become $q_N(0+u)=q_N(u)$ and $q_N(-u+u)=q_N(0)$. These are precisely the abelian-group laws in $G_N$, proving the native quotient group structure. In particular every $q_N$ is a homomorphism, and $q_M(t_{LM}u)=q_L(u)$ by the defining quotient relation.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-preadditive-category",
+    "lem-pur-faithful-stage-hom-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Native quotient group axioms and the additive quotient constructors; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "Define $c(q_L(u))=\\iota_L(u)$. If $q_L(u)=q_M(v)$, the quotient relation gives $N\\ge L,M$ with $t_{LN}u=t_{MN}v$. The structure-map relations in [def-weil-directed-colimit-abelian-groups] give $\\iota_L(u)=\\iota_N(t_{LN}u)=\\iota_N(t_{MN}v)=\\iota_M(v)$, proving well-definedness. Conversely equality of these colimit elements implies equality of the two transports at some common later stage, by the representative criterion in that same node. It therefore implies equality in the quotient. Every colimit element is represented by some $\\iota_L(u)$, again by that criterion. Thus $c$ is bijective. Its inverse sends $\\iota_L(u)$ to $q_L(u)$, equivalently it is the unique colimit lift of the compatible homomorphisms $q_L$ constructed in step 5.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Coordinates: well-defined forward map, inverse and bijectivity; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "If $c'$ is any other equivalence with the stated representative formula, then $c'(q_L(u))=\\iota_L(u)=c(q_L(u))$. Every quotient class has such a representative, so the underlying functions agree and hence the equivalences agree. This proves the required existence and uniqueness with the specified normalization.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Coordinates: uniqueness on every representative; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "Given two parallel quotient arrows, move their representatives to one stage $N$, writing them $q_N(u),q_N(v)$. Then\n$$c(q_N(u)+q_N(v))=\\iota_N(u+v)=\\iota_N(u)+\\iota_N(v),$$\nsince $\\iota_N$ is a homomorphism. Consequently the transferred addition $c^{-1}(c(f)+c(g))$ equals the native $f+g$, by injectivity of $c$. Their zeros are equal since each is an identity for this same addition, and their negatives agree by uniqueness of additive inverses. Repeated additions and repeated subtractions likewise identify all natural and integer scalar multiples; the remaining group-structure fields are proofs. The two abelian-group structures are therefore equal, and $c$ is an additive equivalence for the fixed structures.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Coordinates: additivity and equality with the native quotient group; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "For composable parallel maps $f,f':A\\to B$ and $g:B\\to C$, choose one upper stage $N$ of their representative fields and write the transported arrows $u,u',v$. The composition prescription of [def-sf-directed-common-stage-data] and step 5 give\n$$g\\circ(f+f')=[N,v\\circ(u+u')]=[N,v\\circ u+v\\circ u']=g\\circ f+g\\circ f'.$$\nFor $f:A\\to B$ and $g,g':B\\to C$, the other law is\n$$(g+g')\\circ f=[N,(v+v')\\circ u]=[N,v\\circ u+v'\\circ u]=g\\circ f+g'\\circ f.$$\nBoth middle equalities hold in the preadditive stage $C_N^{\\rm old}$ of step 1. This proves bilinearity for the native groups, hence for the equal transferred groups of step 8.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-preadditive-category",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Composition: both distributivity equations at a common stage; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  },
+  {
+   "text": "Finally the specified inclusion has $j_E(f)=q_E(T^{\\rm old}_{EE}(f))$ [def-sf-directed-common-stage-data]. Its reflexive transition is additive by step 1. Therefore\n$$j_E(f+g)=q_E(T^{\\rm old}_{EE}(f)+T^{\\rm old}_{EE}(g))=j_E(f)+j_E(g),$$\nand similarly $j_E(0)=q_E(0)=0$. This is additivity of the original inclusions for the already identified Hom structures; the argument does not replace $T^{\\rm old}_{EE}$ by a literally equal identity functor.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Inclusions: representative formula and additivity; retained owning argument 6 and live lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:580-804."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-linear-scalar-localization-category",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "def-weil-rationalization-karoubi",
+  "lem-route-coefficient-inclusion-laws",
+  "lem-pur-legacy-rational-self-extension-unit",
+  "lem-pur-general-legacy-stage-coherence",
+  "lem-pur-faithful-stage-hom-transport",
+  "def-weil-finite-subextension-directed-set",
+  "def-sf-directed-common-stage-data",
+  "def-weil-preadditive-category",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Retained owning argument 6, expanded using live AlgebraicallyClosedCoefficients.lean:580-804 and StageSystem/Preadditive.lean:66-177, 210-214; no external comparison with intrinsic stages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The common stage quotient Hom of raw rational constructible categories has a unique representative normalized additive equivalence to the abelian group direct limit, with transferred group equal to the native quotient group",
+   "results": "[leanfinder] OK 8 hit(s); DirectLimit.ratCast_def, AddCommGroup.DirectLimit, AddCommGroup.DirectLimit.instInhabited, DirectLimit.instAddGroup, AddCommGroup.DirectLimit.addCommGroup, ModuleCat.directLimitCocone_pt_isAddCommGroup, DirectLimit.intCast_def, DirectLimit.instAddCommGroupWithOneOfAddMonoidHomClass",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit.linearEquiv",
+   "results": "[loogle] OK 3 hit(s); Module.DirectLimit.linearEquiv, Module.DirectLimit.linearEquiv_of, Module.DirectLimit.linearEquiv_symm_mk",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "homGroup_eq_native|homCoordinatesAddEquiv|DirectLimit.linearEquiv",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify a filtered quotient category Hom addition with its abelian group colimit by representative induction",
+   "results": "[leansearch] OK 8 hit(s); AddMonCat.FilteredColimits.colimit, AddGrpCat.FilteredColimits.colimitCoconeIsColimit, AddCommGrpCat.Colimits.Quot, AddCommGrpCat.FilteredColimits.colimit, AddMonCat.FilteredColimits.colimitCoconeIsColimit, AddGrpCat.FilteredColimits.colimit, AddMonCat.FilteredColimits.colimit_add_mk_eq, AddCommGrpCat.FilteredColimits.colimitAddCommGroup",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient Hom of a directed system of preadditive categories is canonically the direct limit of its abelian Hom groups, with the same native quotient addition",
+   "results": "8 hits: DirectLimit.add_def, DirectLimit.instAddGroup, DirectLimit.instAdd, DirectLimit.instAddCommGroupOfAddMonoidHomClass, DirectLimit.instAddCommGroupWithOneOfAddMonoidHomClass, ModuleCat.directLimitCocone_pt_isAddCommGroup, DirectLimit.sub_def, DirectLimit.instAddZeroClassOfAddMonoidHomClass",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic direct-limit operations do not identify the specified legacy pair quotient, native group structure and fixed inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.DirectLimit.lift",
+   "results": "5 hits: AddCommGroup.DirectLimit.lift_of', AddCommGroup.DirectLimit.lift_comp_of, AddCommGroup.DirectLimit.lift, AddCommGroup.DirectLimit.lift_injective, AddCommGroup.DirectLimit.lift_of",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic direct-limit operations do not identify the specified legacy pair quotient, native group structure and fixed inclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of common stage Hom representatives and abelian group direct limit have the same addition",
+   "results": "8 hits: DirectLimit.sub_def, DirectLimit.instAdd, DirectLimit.add_def, AddCommGroup.DirectLimit.addCommGroup, DirectLimit.instAddCommMonoidOfAddMonoidHomClass.congr_simp, Module.DirectLimit.addCommGroup, DirectLimit.instAddGroup, DirectLimit.instAddMonoid",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic direct-limit operations do not identify the specified legacy pair quotient, native group structure and fixed inclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "homCoordinates|homGroup_eq_native|theorem add_def|def lift|linearEquiv",
+   "results": "12 hits: Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/TensorProduct.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Algebra/Colimit/DirectLimit.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic direct-limit operations do not identify the specified legacy pair quotient, native group structure and fixed inclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Old owning proof argument 6; AlgebraicallyClosedCoefficients.lean:627-804 (homCoordinates_existsUnique, homGroup_eq_native, homCoordinatesAddEquiv, composition_bilinear, inclusion_additive).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-legacy-hom-coordinates",
+  "worker": "stage1",
+  "summary": "Preserved all clauses and the old completed-integral presentation. Expanded the quotient group construction, representative-normalized coordinate bijection and uniqueness, equality of transferred and native groups, bilinearity, and inclusion additivity. Added two statement-only input lemmas: the natural unit of legacy rational self-extension and the generic Hom-transport law with faithful reflexive functors. The explicit unit node repairs an initially overbroad use of the identity-compatibility phrase in the scalar-composition node. No new definition, no Karoubi completion, no assumptions on Y beyond being a scheme.",
+  "blueprint": "Realizes retained old owning argument 6 of def-weil-algebraically-closed-coefficients: the displayed abelian Hom colimit, native quotient addition, representative normalization, bilinear composition and additive stage inclusions. The latest two-colimit model supplies the transport/cocycle and common-stage calculus; no finite-field-to-intrinsic category comparison is invoked."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NN-ae99139e8",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-ae99139e8 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. Sources checked: blueprint det-def-sfb-filtered-two-colimit-model.proof.md ('The colimit is filtered'); AlgebraicallyClosedCoefficients.lean:380-398 (unitor) and :575-804 (homCoordinates_existsUnique, homGroup_eq_native, composition_bilinear, inclusion_additive); ScalarExtensionComposition.lean:1025-1060 and 1325-1337 (rationalConstructibleScalarUnit); StageSystem/Basic.lean (tr, cocycle, tr_tr, tr_injective). The DAG transport formula and cocycle agree with the Lean conventions. The item statement is unchanged: it keeps the old presentation and the transported i_EL, with no condition on Y. Its 10 steps are correct. Step 1 gets linearity from lem-weil-integral-constructible-linear, the raw localization and clause (3) of the well-defined lemma. Step 2 proves T_LL faithful from i_LL=id and the new unit node. Steps 4-10 are the elementary quotient/colimit calculus, with j_E(f)=[E,T_EE f] as the def node states. New node lem-pur-faithful-stage-hom-transport is true: I re-derived the cocycle/naturality composition law and idempotent+injective => identity. The faithfulness hypothesis is needed, as the Z×Z example (a,b)↦(a,a) shows. It is a general input, not a restatement of a clause of the item, and it duplicates no existing node. New node lem-pur-legacy-rational-self-extension-unit is true and is what rationalConstructibleScalarUnit constructs. lem-weil-scalar-extension-composition only says 'compatible with identity extension' and builds the unit in its proof, not its statement, so the dedicated node is the right citation. All cited statements are in unit sk-def-sf-operations, so no tool_uses are needed. No cycles, B1-B4 forms OK, 3+ search kinds recorded, no SGA. No fixes."
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-etale-graph-proper-ambient-first-side",
+ "kind": "statement",
+ "title": "First side of the product graph under proper ambient change",
+ "statement": "Fix schemes $X,Y$, a morphism $f:X\\to Y$, a compactification $c$, two proper/open/proper presentations $s,t$ [def-pur-etale-graph-presentation-maps], and a finite commutative ring $A$. Suppose $pr:P_t\\to P_s$ is proper and $q:U_t\\to U_s$ makes the open square Cartesian, with $a_tq=a_s$ and $pr p_s=p_t$. Let $D_1$ be the explicit first-neighborhood transport of [def-pur-etale-graph-proper-ambient-data]. The first graph-side maps $B_{1,s},B_{1,t}$ of [lem-sf-etale-locally-closed-graph-model] satisfy $B_{1,s}D_1=B_{1,t}$ as natural transformations. No statement about the intersection word or second side is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal); applied to the explicit product-graph formula."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-presentation-maps",
+  "def-pur-etale-graph-proper-ambient-data",
+  "lem-sf-etale-locally-closed-graph-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit product and neighborhood maps, their Cartesian squares, and their graph and projection equations.",
+   "uses": [
+    "def-pur-etale-graph-proper-ambient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the first side as the common identity insertion followed by proper ambient transport. Apply the transport composition law to the old side and the first-neighborhood transport. Both projection equations identify the resulting rectangle with the new side square. The common identity insertion gives exactly the first-side equation.",
+   "uses": [
+    "lem-pur-etale-proper-ambient-transport-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-proper-ambient-data",
+  "lem-pur-etale-proper-ambient-transport-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Proper-projection grids of the graph construction, vertical and horizontal pasting, Tags 0F7C--0F7D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper open exchange vertical horizontal pasting product graph comparison",
+   "results": "Eight hits, all concerning topology of products or set graphs; no derived exchange pasting theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper ambient change of product graph comparison extension by zero direct image coherence",
+   "results": "Eight hits on set graphs, Function.extend, and graph products, not derived-category comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosedGraph.*|LowerStarComp.*assoc",
+   "results": "msearch found no Mathlib hits. Direct rg in the two project roots found the explicit graph model and related parent theorems; the parent imports this item, so using it would be circular. Existing graph-neighborhood words also import this item transitively.",
+   "date": "2026-10-26",
+   "verdict": "No independent theorem for the three component equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonProperAmbient",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The side and intersection comparisons in the proper ambient change, before shrinking; steps 5--7 of the pairwise product-graph normalization.",
+   "via": [
+    "lem-pur-etale-graph-comparison-proper-ambient",
+    "lem-pur-etale-pairwise-product-graph-normalization",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProperAmbientFirstSide",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProperAmbientFirstSide.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphProperAmbientFirstSide",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphProperAmbientFirstSide"
+  ],
+  "statement": "theorem etaleGraphProperAmbientFirstSide\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (s t : EtaleGraphPresentation f) (pr : t.P ⟶ s.P) [IsProper pr]\n    (q : t.U ⟶ s.U) (sq : IsPullback q t.e s.e pr)\n    (hz : t.a ≫ q = s.a) (hp : pr ≫ s.p = t.p) :\n    (locallyClosedGraphSide₁ s.a s.e s.p c.i c.g\n      ((Category.assoc _ _ _).trans (s.fac.trans c.comm)) A).hom ≫\n        (s.properAmbientFirstTransport c t pr q sq hz hp A).hom =\n      (locallyClosedGraphSide₁ t.a t.e t.p c.i c.g\n      ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) A).hom",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

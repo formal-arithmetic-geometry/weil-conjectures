@@ -1,0 +1,153 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left compactification refinement comparisons commute with coefficient localization common finite field inclusions and shifts",
+   "results": "OK 8 hits, including CategoryTheory.NatTrans.commShift_iso_hom_of_localization; remaining hits concern algebraic normalization.",
+   "date": "2026-10-27",
+   "verdict": "No normalized geometric left refinement or strict-system realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of left adjoints induces conjugate natural isomorphism of right adjoints commuting with unit counit and shifts",
+   "results": "OK 8 hits including CategoryTheory.Adjunction.RightAdjointCommShift.iso and LeftAdjointCommShift.iso; adjunction shift component formulas.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate and shift tools apply to the proved assembly, but do not construct the geometric comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*refinement|refinement.*compactification",
+   "results": "OK 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib geometric refinement construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRefinementMates",
+  "date": "2026-10-27",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Normalized exceptional refinement construction, retained steps 20--21; original refinement proof steps 1--8.",
+   "via": [
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-exceptional-refinement-system-realization",
+ "kind": "statement",
+ "title": "Strict-system realization of an already normalized refinement",
+ "statement": "Fix l, Omega, D, X,Y,f, compactifications c,d and a proper refinement r as in the refinement data. Given Transport records A,B and an already constructed Mates P for them, a finite coefficient field E, operations o on the strict E-system categories and a prescribed realization package R, there exists SystemRealization A B r P E o R. Its alpha inverse is the actual intrinsic proper/open refinement word before evaluation; its primitive proper/open/inverse-unit realizations and their termwise/Roos shifts give the prescribed integralMap equality with the integral left comparison in P. This is a lifting and realization statement for an existing normalized comparison; it does not construct any stage comparison or field descent map.",
+ "stmt_deps": [
+  "def-sf-exceptional-refinement-left-data",
+  "def-sf-exceptional-refinement-system-data"
+ ],
+ "proof": [
+  {
+   "text": "On the strict semilinear systems put $\\mathsf F^a=S_{p_a}J_{j_a}$ for $a=c,d$ and form $\\mathsf C_u=c_{p_d,u}J_{j_c}\\circ S_{p_d}\\Gamma_{Q_u}:\\mathsf F^d\\to\\mathsf F^c$, with $Q_u=(j_c,j_d,1_X,u)$. The system realization theorem constructs this map intrinsically, before evaluation, and identifies its evaluated maps with the normalized finite comparisons of step 1. On $\\mathcal R_XK$ the input and both endpoints are normalized, have etale-origin constructible levels, and common cohomological/Tor bounds by integral reconstruction and system transport. Apply finite operations also to the open/proper intermediate morphisms, with their own compactifications, and take the larger of the finitely many common bounds. Since exact evaluations jointly detect isomorphisms, $\\mathsf C_u$ is invertible on this domain. Define $\\mathsf\\alpha_u=\\mathsf C_u^{-1}$. Only invertibility, never equality of maps, was detected by evaluations.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-exceptional-integral-reconstruction",
+    "lem-sf-exceptional-system-transport",
+    "lem-sf-exceptional-finite-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Section 5, Lemma 5.13, Construction 5.15; actual system operation model and evaluation."
+   }
+  },
+  {
+   "text": "Transport $\\mathcal L_Y(\\mathsf\\alpha_u\\mathcal R_X)$ through the specified identifications $F^a_R\\cong\\mathcal L_Y\\mathsf F^a\\mathcal R_X$ to define $\\alpha_{u,R}$. Integral reconstruction supplies exactly those identifications and the prescribed $r_{a,R}$. The system-realization theorem intertwines $\\Gamma_{Q_u}$ and direct-image composition with their ambient proper/open maps. It therefore gives, as an equality of actual integral transformations,\n$$r_{d,R}\\,I_Y(\\alpha_{u,R})=(C_u^{\\rm amb})^{-1}\\,r_{c,R}.$$\nHere $C_u^{\\rm amb}$ is ambient proper composition after $Rp_{d,*}e_u$. Inversion and naturality preserve the intertwining equality. Its input system equality is the intrinsic proper/open word of step 2, not a family selected from finite components. This proves the integral normalization with the same compact-support representatives.",
+   "uses": [
+    "lem-sf-exceptional-integral-reconstruction",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 5.20 and normalized reduction/total-limit transport; blueprint exceptional inverse-image construction."
+   }
+  },
+  {
+   "text": "The proper/open word commutes with shifts: its open base-change and clopen projection constituents do so on simultaneous complex models, and the direct-image shift is the adjoint of the termwise inverse-image shift. Units and counits commute with these adjoint shifts; writing a mate as unit, whiskered map and counit therefore preserves its shift square. The direct-image compositor is the conjugate of pullback composition, so the same argument applies to it. Composition, whiskering and inversion preserve shift compatibility. The constant ring sequence $C_m=A$ and evaluation give this argument at each finite coefficient; the diagram shift model imposes no normalization or constructibility assumption. For the integral maps, slotwise realization shift coherence identifies these same system shifts with the prescribed termwise/Roos-cone shifts under $r_{c,R},r_{d,R}$. Thus both left maps already constructed have the shifts required in the statement.",
+   "uses": [
+    "lem-pur-diagram-open-clopen-shift-models",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-pur-integral-realization-shift-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Section 5, Constructions 5.15 and 5.20, Lemma 5.22 and Proposition 5.24; Exceptional inverse-image paragraph on transported units, counits and integer shifts; simultaneous open/clopen cochain models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-compactification-system-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-exceptional-integral-reconstruction",
+  "lem-sf-exceptional-system-transport",
+  "lem-sf-exceptional-finite-operations",
+  "lem-pur-diagram-open-clopen-shift-models",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-pur-integral-realization-shift-coherence"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRefinementSystemRealization",
+  "file": "lean/Sheaf/Paper/ExceptionalRefinementSystemRealization.lean",
+  "declaration": "WeilConjectures.ExceptionalRefinement.exceptional_refinement_system_realization",
+  "declarations": [
+   "WeilConjectures.ExceptionalRefinement.exceptional_refinement_system_realization"
+  ],
+  "statement": "theorem exceptional_refinement_system_realization (A : Transport.{u, v} l Ω D hl c) (B : Transport.{u, v} l Ω D hl d) (r : c.Refinement d) (P : Mates.{u, v} l Ω D hl A B r) (E : FieldStage.{max u v} l) (o : Operations l E.carrier) (R : Realizations l E.carrier D o) : Nonempty (SystemRealization.{u, v} l Ω D hl A B r P E o R)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "independent cc review: item exceptional_refinement_mates assembly vs node lem-sf-exceptional-refinement-mates; new sorry statements and Transport repair vs change record, the λ(field)-conjugation counterexample and the existing commonTransitionNatural practice; new node stmt_deps vs owners of the definitions used"
+ }
+}

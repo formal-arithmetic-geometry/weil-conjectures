@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-fibre-product-atlas-tests",
+ "kind": "statement",
+ "title": "Scheme atlas of a sheaf pullback and its test schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with sheaves of sets on its big fppf site [def-pc-fppf-site, def-weil-pbc-sites-and-cohomology]. Let $F,G,H$ be sheaves with maps $f:F\\to H$ and $g:G\\to H$. Suppose $\\Delta_H$ is representable by schemes, and let $a:h_U\\to F$ and $b:h_V\\to G$ be representable surjective etale maps from $S$-schemes $U,V$, with these scheme-test properties understood as in [def-trf-algebraic-space]. Put $P(T)=\\{(x,y):f(x)=g(y)\\}\\subseteq F(T)\\times G(T)$ and $W=h_U\\times_Hh_V$, with their pointwise presheaf fibre products. Then $W$ is represented by the scheme obtained by pulling back $\\Delta_H$ along $h_{U\\times_SV}\\to H\\times H$ [def-pc-fibre-product]. The induced natural transformation $w:W\\to P$ is representable surjective etale. More precisely, for every $S$-scheme $T$ and natural transformation $t:h_T\\to P$, with components $x:h_T\\to F$ and $y:h_T\\to G$, let $A$ and $B$ represent $h_T\\times_Fh_U$ and $h_T\\times_Gh_V$. There is a canonical isomorphism $h_T\\times_PW\\cong h_{A\\times_TB}$ over $h_T$, taking a pair of lifts to the corresponding compatible $U,V$ sections. Its scheme projection is the composite $A\\times_TB\\to B\\to T$, and both arrows are surjective etale.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal), last paragraph: construction and scheme tests of the atlas."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Test the representable diagonal of H on the product U ×_S V. Yoneda preserves this binary product. For its product cone, the presheaf pullback W of a≫f and b≫g is the pullback of the diagonal: construct the lift into W from the two projections of a competing cone; the diagonal equation makes their H-images equal. Product and pullback uniqueness prove the universal property. Uniqueness of these two diagonal pullback squares gives h_D ≅ W. Its projection to h_(U×_S V) gives both required Yoneda component equations. This is the private helper diagonal_square and the first part of fibreProduct_atlas_tests.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal, last paragraph; expanded scheme-test calculation."
+   }
+  },
+  {
+   "text": "For any chosen representing square of a scheme test of a (and likewise b), compare it with the witness supplied by IsEtale or IsSurjective. Pullback uniqueness gives an isomorphism of the representing presheaves; Yoneda full faithfulness gives an isomorphism of schemes over T. Since étaleness and surjectivity respect isomorphisms, the properties hold for the projection in every chosen representing square. This is property_of_test. In particular the given α and β are étale and surjective.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal, last paragraph; expanded scheme-test calculation."
+   }
+  },
+  {
+   "text": "For the given t and representing squares h_A,h_B, map h_(A×_T B) to W by its two projections followed by qA and qB. The square with t and w commutes by the representing-square equations. Given a competing pullback cone, its U and V components and its T component lift uniquely through h_A and h_B. Their T components agree, so Yoneda preservation of the scheme pullback lifts them to h_(A×_T B). The projection equations and uniqueness follow componentwise from the three pullback universal properties. This constructs the pullback square in test_square. Its canonical isomorphism to the chosen presheaf pullback gives exactly the three asserted equations.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 04T9, lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal, last paragraph; expanded scheme-test calculation."
+   }
+  },
+  {
+   "text": "Apply the singleton base-change results to α along β. The forgetful functor Over S → Scheme preserves this pullback. Since α is étale and surjective, its base change pr_B:A×_T B→B has both properties. Lean uses MorphismProperty.of_isPullback with the Mathlib étale and surjective stability instances, the singleton specialization of the cited covering lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO, lemma-base-change-etale, and Tag 01S1, lemma-base-change-surjective; singleton case."
+   }
+  },
+  {
+   "text": "For any scheme test t, choose étale representing squares for a and b and apply the comparison just proved. It gives an actual representing square for w with projection pr_B≫β. The singleton composition results say this scheme map is étale and surjective. Project the conjunction of properties to obtain IsRepresentable, IsEtale and IsSurjective separately. Lean uses the Mathlib composition instances, the singleton specialization of the cited covering lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-composition",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0217, lemma-etale, part (2), singleton case; scheme-test definition in spaces.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 04T9, last paragraph; expanded using the three pullback universal properties and the singleton base-change and composition instances in Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For scheme atlases U to F and V to G, U fibre product over H V is a scheme and a surjective etale atlas of F fibre product over H G",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Surjective.instFstScheme, AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback, AlgebraicGeometry.Surjective.instSndScheme, AlgebraicGeometry.Scheme.Pullback.gluing, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.hasPullback_of_cover",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"atlas\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*atlas|atlas.*etale|AlgebraicSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product of two scheme etale presentations over a sheaf with representable diagonal gives an etale presentation",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given surjective etale scheme presentations of F and G and representable diagonal of H, their fibre product presentation has scheme tests A times over T B",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Surjective.instFstScheme, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop, AlgebraicGeometry.Surjective.instSndScheme, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*atlas|atlas.*etale",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, etale permanence or Zariski representability, not the sheaf-atlas construction with the asserted test isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre product of two etale presentations over a sheaf with representable diagonal has scheme tests given by fibre products",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.fiber",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, etale permanence or Zariski representability, not the sheaf-atlas construction with the asserted test isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"atlas\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, etale permanence or Zariski representability, not the sheaf-atlas construction with the asserted test isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf fibre product has a scheme atlas from two representable surjective etale maps when the target diagonal is representable",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Pullback.diagonalCover, AlgebraicGeometry.Scheme.Pullback.hasPullback_of_cover, AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.Pullback.diagonalCover_map, AlgebraicGeometry.Scheme.Pullback.gluing, AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, etale permanence or Zariski representability, not the sheaf-atlas construction with the asserted test isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable surjective etale natural transformations remain surjective etale under the product of two scheme presentations over a presheaf",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective, Algebra.IsStandardEtale.of_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, etale permanence or Zariski representability, not the sheaf-atlas construction with the asserted test isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-fibre-products-etale-covers",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized descent input below the historical ancestor lem-trf-local-term-locality: fibre products and etale-cover base changes used to apply the section-algebra proof to every scheme test. Re-split task: Scheme atlas of a sheaf pullback and its test schemes (old proof steps [3, 4]).",
+   "via": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fibre-product-atlas-tests",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04T9 into six steps: pointwise sheaf gluing, the diagonal test producing the atlas scheme, arbitrary scheme tests, the explicit natural bijection with A times_T B, and the two singleton covering permanence applications. No new nodes are needed. Statement and inherited metadata are unchanged; current project Lean has no exact finished declaration, and logged Mathlib searches find only generic tools.",
+  "blueprint": "Historical blueprint ancestor lem-trf-local-term-locality: the polarized-descent infrastructure recorded in blueprint.from.place, specifically atlas construction and scheme tests in old parent lem-trf-space-fibre-products-etale-covers proof steps 3 and 4. This expands the assigned lower-level tool, without replacing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-5a95dc43d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-5a95dc43d (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks spaces.tex Tag 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal). The item states the source's last paragraph with weaker hypotheses: only Delta_H representable plus the atlases a and b. It is true as written. The commit has 0 new nodes and leaves the statement and metadata unchanged. There is no repair note, so this is a normal first split of a Q119 child, and the item is in no dropped list. Step 1: P is a sheaf by componentwise gluing plus separation in H. This is correctly elementary; the sibling lem-trf-sheaf-pullback-diagonal cannot be cited because it needs Delta_F and Delta_G. Step 2: testing Delta_H on Z=U x_S V gives D, and forgetting the forced z gives h_D = W. Step 3: the scheme tests of a and b plus the Yoneda leaf give alpha and beta, which are surjective etale by def-trf-algebraic-space. Step 4: (tau,u,v) corresponds to (r_A,r_B) with alpha r_A = beta r_B = tau. This is the A x_T B universal property, natural and over h_T. I checked both inverse maps. Step 5: the etale-covering base-change leaf for the singleton {alpha} along beta. Step 6: the composition leaf, giving exactly the scheme-test definition. Every cited statement says what its step takes from it. All off-unit citations are Mathlib leaves or definitions, so no tool_uses are needed. Tags 02GO, 01S1 and 0217 resolve to the cited labels, and there is no SGA. Edge cases checked: T empty, F or G empty, identity atlases, and non-separated or non-qc schemes. One inherited convention, not a fault: def-trf-algebraic-space treats representable functors as sheaves without citation, and the item does the same for W. The duplicate search over dag/nodes for 04T9, times_H and representable diagonal found no node stating the item and no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreProductAtlasTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fibreProduct_atlas_tests",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fibreProductAtlasMap",
+   "AlgebraicGeometry.AlgebraicSpace.fibreProduct_atlas_tests"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreProductAtlasTests.lean",
+  "statement": "theorem fibreProduct_atlas_tests {S : Scheme.{u}} (F G H : Sheaf (Scheme.fppfTopology.over S) (Type u)) (f : F.obj ⟶ H.obj) (g : G.obj ⟶ H.obj) (hH : IsRepresentable (prod.lift (𝟙 H.obj) (𝟙 H.obj))) (U V : Over S) (a : yoneda.obj U ⟶ F.obj) (b : yoneda.obj V ⟶ G.obj) (hae : IsEtale a) (has : IsSurjective a) (hbe : IsEtale b) (hbs : IsSurjective b) : (∃ (D : Over S) (e : yoneda.obj D ≅ Limits.pullback (a ≫ f) (b ≫ g)) (p : D ⟶ prod U V), e.hom ≫ Limits.pullback.fst (a ≫ f) (b ≫ g) = yoneda.map (p ≫ prod.fst) ∧ e.hom ≫ Limits.pullback.snd (a ≫ f) (b ≫ g) = yoneda.map (p ≫ prod.snd) ∧ IsPullback (e.hom ≫ Limits.pullback.fst (a ≫ f) (b ≫ g) ≫ a ≫ f) (yoneda.map p) (prod.lift (𝟙 H.obj) (𝟙 H.obj)) (prod.lift (yoneda.map (prod.fst : prod U V ⟶ U) ≫ a ≫ f) (yoneda.map (prod.snd : prod U V ⟶ V) ≫ b ≫ g))) ∧ IsRepresentable (fibreProductAtlasMap f g a b) ∧ IsEtale (fibreProductAtlasMap f g a b) ∧ IsSurjective (fibreProductAtlasMap f g a b) ∧ ∀ (T : Over S) (t : yoneda.obj T ⟶ Limits.pullback f g) (A B : Over S) (α : A ⟶ T) (β : B ⟶ T) (qA : yoneda.obj A ⟶ yoneda.obj U) (qB : yoneda.obj B ⟶ yoneda.obj V), IsPullback qA (yoneda.map α) a (t ≫ Limits.pullback.fst f g) → IsPullback qB (yoneda.map β) b (t ≫ Limits.pullback.snd f g) → ∃ e : yoneda.obj (Limits.pullback α β) ≅ Limits.pullback t (fibreProductAtlasMap f g a b), e.hom ≫ Limits.pullback.fst t (fibreProductAtlasMap f g a b) = yoneda.map (Limits.pullback.snd α β ≫ β) ∧ e.hom ≫ Limits.pullback.snd t (fibreProductAtlasMap f g a b) ≫ Limits.pullback.fst (a ≫ f) (b ≫ g) = yoneda.map (Limits.pullback.fst α β) ≫ qA ∧ e.hom ≫ Limits.pullback.snd t (fibreProductAtlasMap f g a b) ≫ Limits.pullback.snd (a ≫ f) (b ≫ g) = yoneda.map (Limits.pullback.snd α β) ≫ qB ∧ Etale (Limits.pullback.snd α β).left ∧ Surjective (Limits.pullback.snd α β).left ∧ Etale β.left ∧ Surjective β.left",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f7728fbd",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Node differs from live only in lean; statement verbatim; no line over 100 chars. fibreProductAtlasMap is the canonical map built from a, b and 𝟙 H; only the theorem proof is sorry. Hypotheses match def-trf-algebraic-space exactly: F,G,H fppf sheaves, Delta_H IsRepresentable in the IsAlgebraicSpace form, a,b IsEtale/IsSurjective, nothing extra on F,G. W clause gives D, e and p plus an IsPullback with Delta_H along h_{U×_S V}→H×H, so D is the diagonal test; the square commutes. w is IsRepresentable/IsEtale/IsSurjective. The test clause quantifies over every representing square (same shape as IsRepresentableWith); e : h(A×_T B) ≅ h_T×_P W is the node's iso inverted and is pinned uniquely by the over-h_T equation (pr_B≫β) and the qA/qB component equations, which agree with each other. Etale/Surjective of pr_B.left and β.left hold for any representing square by the Yoneda isomorphism. Edge cases (empty T/F/G, identity atlases, non-separated) and the single universe u inherited from def-trf-algebraic-space are fine. Not a duplicate of parent fibreProduct_isAlgebraicSpace (needs algebraic spaces). Docstrings carry source 04T9 and blueprint id; the theorem docstring has all 6 steps; proof imports are the proof deps' Mathlib matches. Not recompiled per instruction; worker reports a clean scompile. Advisory: Second-reading section holds only the post-10-17 policy line."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261023T123503-L-1196897",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sp-tensor-word-comparison",
+ "kind": "statement",
+ "title": "Tensoring two finite tower-word comparison squares",
+ "statement": "Fix a prime ell, a finite coefficient extension E, tower base b, a scheme T, level n (exponent n+1), and the prescribed TensorCoordinates tc [def-sp-p1-tensor-derived-coordinates]. For arbitrary level words K,K′,L,L′ [def-sp-p1-level-words], suppose the tower arrow f:K.tower→K′.tower is compared with the finite arrow f′:K.etale→K′.etale, and g:L.tower→L′.tower with g′:L.etale→L′.etale. Then the tensor of f and g is compared, between tensorWord(tc,K,L) and tensorWord(tc,K′,L′), with the ordinary finite derived tensor of f′ and g′. The two endpoint comparisons are invertible. No purity, splitting, exceptional adjunction or concentration is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph, tensor functoriality of the two finite orientation squares; Levels tensor-word construction"
+ },
+ "stmt_deps": [
+  "def-sp-p1-level-words",
+  "def-sp-p1-tensor-derived-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Each tensorWord comparison is a composite of the site tensor isomorphism, the given derived realization isomorphism, tensor of its two endpoint comparison arrows and inverse tensorEvaluation. Invertibility follows from the two supplied WordComparisons and preservation of isomorphisms by functors.",
+   "uses": [
+    "def-sp-p1-level-words",
+    "def-sp-p1-tensor-derived-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the exact site functor, conjugate leftDerivedTensorComparison by leftDerivedFunctorIsoMapDerivedCategory. Its naturality in the first variable follows by pasting naturality of the inverse identification, of the left-derived tensor transformation, of tensoring the identification in the second argument, and of tensoring the identification in the first argument. In the second variable the displayed derived constraint is already an isomorphism of functors, so use its naturality directly. Horizontal composition gives simultaneous naturality. This is the same categorical argument as the proved private comparisonTensor_naturality of SmoothPurityMap, now pasted with the second-variable square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply realization to the site square, paste naturality of tc.derived, tensor of the two input comparison squares, and naturality of inverse tensorEvaluation. Four vertical square pastings and associativity give exactly tensorWord.comparison on each side. This works with unit words, zero arrows, empty schemes and arbitrary dimensions because it is functoriality alone.",
+   "uses": [
+    "def-sp-p1-level-words",
+    "def-sp-p1-tensor-derived-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-p1-level-words",
+  "def-sp-p1-tensor-derived-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph, tensor functoriality of the two finite orientation squares; Levels tensor-word construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring two commuting finite comparison squares gives a commuting square for the canonical derived tensor comparison of an exact site pullback and realization",
+   "results": "8 hits on site monoidal structures and Tor, none on tower words.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CommSq.vert_comp",
+   "results": "1 exact hit, used to paste the four comparison squares.",
+   "date": "2026-10-27",
+   "verdict": "generic square pasting reused"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorWord.*naturality|word_tensor|tensor_word_comparison; local rg over Sheaf, WeilConjectures and Mathlib",
+   "results": "msearch 0 hits. Local search found the private comparisonTensor_naturality in SmoothPurityMap and the source derived constraint; no public tower-word theorem.",
+   "date": "2026-10-27",
+   "verdict": "reuse the generic naturality argument; no duplicate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerOrientationEvaluation",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "(1), tower paragraph, tensor functoriality of the two finite orientation squares; Levels tensor-word construction",
+   "via": [
+    "lem-sp-tower-orientation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorWordComparison",
+  "file": "lean/Sheaf/Paper/TensorWordComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.tensor_word_comparison",
+  "statement": "theorem tensor_word_comparison {T : Scheme.{u}} (n : ℕ)\n    (tc : SpTowerP1.TensorCoordinates l E n b T)\n    {K K' L L' : SpTowerP1.LevelWord l E n T}\n    {f : K.tower ⟶ K'.tower} {g : L.tower ⟶ L'.tower}\n    {f' : K.etale ⟶ K'.etale} {g' : L.etale ⟶ L'.etale}\n    (hf : SpTowerP1.WordComparison l E n K K' f f')\n    (hg : SpTowerP1.WordComparison l E n L L' g g') :\n    SpTowerP1.WordComparison l E n\n      (SpTowerP1.tensorWord l E n b tc K L) (SpTowerP1.tensorWord l E n b tc K' L')\n      ((SpTowerShriek.tensor l E b T).map (Prod.mkHom f g))\n      (((Etale.derivedTensor (ModuleCat.{u + 1} (SpTowerP1.levelRing l E n)) T).map\n        f').app L.etale ≫\n        ((Etale.derivedTensor (ModuleCat.{u + 1} (SpTowerP1.levelRing l E n)) T).obj\n          K'.etale).map g')",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "worker": "stage3",
+  "summary": "Remaining generic tensor-functoriality substep, isolated as a strict part of the finite Psi argument; concrete and generic proof attempts exceeded the file-checking limit after local instance and irreducibility optimizations.",
+  "blueprint": "(1), tower paragraph, tensor functoriality of the two finite orientation squares; Levels tensor-word construction",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

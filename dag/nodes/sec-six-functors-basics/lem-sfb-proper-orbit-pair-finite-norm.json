@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-proper-orbit-pair-finite-norm",
+ "kind": "statement",
+ "title": "Finite invariant norm pencils from affine orbit-separated pairs",
+ "statement": "Let $F$ be any field [def-weil-field] and let $Y$ be a proper $F$-scheme [def-pc-scheme, def-weil-proper-morphism]. Let $G$ be a finite group acting on $Y$ by $F$-automorphisms, without a faithfulness assumption. Let $M$ be any invertible $\\mathcal O_Y$-module [def-sc-invertible-module] and let $a,b\\in\\Gamma(Y,M)$. For $c\\in\\Gamma(Y,M)$ define $Y_c=\\{y:c(y)\\ne0\\}$ and $Z(c)=Y\\setminus Y_c$, using residue-field fibres [def-weil-residue-field]. Assume $U=Y_a$ and $V=Y_b$ are affine and $\\bigcup_g g^{-1}Z(a)$ is disjoint from $\\bigcup_g g^{-1}Z(b)$. Using pullback and sheaf tensor product [def-pc-module-pullback, def-pur-sheaf-tensor-product], put $C=\\bigotimes_{g\\in G}g^*M$, $A=\\bigotimes_g g^*a$ and $D=\\bigotimes_g g^*b$, as sections of $C$. Then $C$ is invertible, $Z(A)=\\bigcup_g g^{-1}Z(a)$ and $Z(D)=\\bigcup_g g^{-1}Z(b)$. Both $a,b$ and $A,D$ generate their respective modules [def-weil-pbc-generating-sections]. The coordinate morphisms $f=[a:b]$ and $f_N=[A:D]$ to $\\mathbf P^1_F$ [def-weil-pbc-morphism-to-projective-space-by-sections] are finite [def-weil-finite-integral-morphism]. For the standard coordinate opens $Q_0=D_+(T_0)$ and $Q_1=D_+(T_1)$ of $\\mathbf P^1_F$, their inverse images as open subschemes are $f^{-1}Q_0=U$, $f^{-1}Q_1=V$, $f_N^{-1}Q_0=\\bigcap_g g^{-1}U$ and $f_N^{-1}Q_1=\\bigcap_g g^{-1}V$; all these opens are affine. For every $h\\in G$ the canonical pullback-composition and factor-permutation isomorphism $h^*C\\cong C$, reindexing $g$ by $gh$, carries $h^*A$ to $A$ and $h^*D$ to $D$, and $f_N\\circ h=f_N$ as scheme morphisms. No ampleness, dimension, reducedness or smoothness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Agent norm-pair argument using Tag 01NE (lemma-projective-space, equivalence of generating pairs and pullback naturality), and morphisms.tex Tag 01WN (lemma-finite-proper). Original item steps 7-10; the retained argument in the repair report also identifies the affine-chart and properness inputs by their tags and existing node ids."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-pencil-orbit-bundle-norm"
+ ],
+ "proof": [
+  {
+   "text": "Choose an ordering of the nonempty finite set $G$, and bracket all tensor products from the left. By clause (1) of [lem-weil-pbc-invertible-pullback-tensor], every $g^*M$ is invertible and induction on the number of factors makes $C$ invertible. For $c=a$ or $b$, put $N(c)=\\bigotimes_g g^*c$. By [lem-sc-nonvanishing-tensor-pullback], $Y_{g^*c}=g^{-1}Y_c$. By [lem-sc-tensor-section-affine-open], $Y_{N(c)}=\\bigcap_g g^{-1}Y_c$; taking complements gives $Z(N(c))=\\bigcup_g g^{-1}Z(c)$. The same tensor-section lemma proves these two intersections affine: the factor indexed by $1\\in G$ has nonvanishing open $U$, respectively $V$, which is affine by hypothesis. Thus this also proves affineness without assuming an arbitrary intersection of affine opens is affine.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-nonvanishing-tensor-pullback",
+    "lem-sc-tensor-section-affine-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible), 01CB (lemma-stalk-tensor-product); tensor-section affine input: properties.tex Tag 01PV, lemma-affine-cap-s-open"
+   }
+  },
+  {
+   "text": "The assumed disjointness and step 1 give $Z(A)\\cap Z(D)=\\varnothing$, so $Y_A\\cup Y_D=Y$. Since the identity element is among the translates, $Z(a)\\subseteq Z(A)$ and $Z(b)\\subseteq Z(D)$, hence $Z(a)\\cap Z(b)=\\varnothing$ and $U\\cup V=Y$. Apply [lem-weil-pbc-invertible-generating-sections-fibre] first to the invertible module $M$ and the pair $(a,b)$ and then to the invertible module $C$ and the pair $(A,D)$. Its nonzero residue-value criterion proves that both pairs generate. There is no reducedness assumption in that criterion.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CY, lemma-s-open; generation in Tag 01AM"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-morphism-to-projective-space-by-sections] with base $\\operatorname{Spec}F$, $n=1$, and each of the two generating pairs of step 2, obtaining the $F$-morphisms $f=[a:b]$ and $f_N=[A:D]$. By clause (i) of [lem-weil-pbc-projective-morphism-chart-preimage], their chart preimages are, respectively, $U,V$ and $Y_A,Y_D$. Insert the equalities from step 1 to get the four asserted preimages. Equal underlying open sets define the same open subscheme (the structure sheaf is restricted to that open), so these are equalities of open subschemes as required.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space; relative construction after Definition 01NF"
+   }
+  },
+  {
+   "text": "Apply clauses (a) and (c) of [lem-weil-pbc-projective-space-standard-charts] over the affine base $\\operatorname{Spec}F$. They say that $Q_0,Q_1$ cover $\\mathbf P^1_F$ and are affine. All four preimages in step 3 are affine, by the hypotheses for $U,V$ and step 1 for $Y_A,Y_D$. Therefore [pqf-lem-affine-local-target], applied to this two-open target cover separately for $f$ and $f_N$, shows that both morphisms are affine.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG, lemma-standard-covering-projective-space; morphisms.tex Tag 01S8, lemma-characterize-affine"
+   }
+  },
+  {
+   "text": "The structure morphism $q:\\mathbf P^1_F\\to\\operatorname{Spec}F$ is proper by [lemma-nagata-projective-space-base-change-proper] with the finite coordinate index set $\\{0,1\\}$, hence separated by [def-weil-proper-morphism]. Both maps of step 3 are over $F$, so their composites with $q$ are the given proper structure map of $Y$. Apply [lem-weil-pbc-proper-over-separated] to each commutative triangle to obtain properness of $f$ and $f_N$. Combining this with their affineness in step 4, the reverse implication of [lem-sfb-affine-proper-finite] proves that both maps are finite.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-sfb-affine-proper-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6, lemma-image-proper-scheme-closed (2); Tag 01WN, lemma-finite-proper"
+   }
+  },
+  {
+   "text": "Write the left action as $(gh)(y)=g(h(y))$. For $h\\in G$, the section-compatible tensor-pullback and composition isomorphisms of [lem-weil-pbc-invertible-pullback-tensor](2) identify $h^*C$ with $\\bigotimes_{g\\in G}(gh)^*M$. Use the factor-permutation isomorphism of [lem-weil-pbc-module-tensor-symmetric-monoidal] to move the factor labelled $g$ to position $gh$. Right multiplication by $h$ is bijective, with inverse right multiplication by $h^{-1}$, so the result is an isomorphism $\\lambda_h:h^*C\\xrightarrow{\\sim}C$. For $c=a$ and for $c=b$, the section formulas in the same two cited statements send $h^*N(c)$ first to $\\bigotimes_g(gh)^*c$ and then to $\\bigotimes_k k^*c=N(c)$. Thus $\\lambda_h(h^*A)=A$ and $\\lambda_h(h^*D)=D$ as actual sections. Repeated automorphisms in a nonfaithful action remain separate indexed factors; the permutation argument never removes them.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CD (lemma-tensor-product-pullback) and 01CA (section-tensor-product), pullback-composition and finite factor permutations"
+   }
+  },
+  {
+   "text": "By pullback compatibility in [lem-weil-pbc-projective-space-functor-of-points], the composite of $f_N\\circ h$ with $\\mathbf P^1_F\\to\\mathbf P^1_{\\mathbf Z}$ corresponds to the generating pair $(h^*C,h^*A,h^*D)$. Step 6 identifies that pair with $(C,A,D)$. The equivalent-pairs clause of the same statement therefore identifies this composite with that of $f_N$. The other components of these two maps, in $\\operatorname{Spec}F$, agree because $h$ is an $F$-automorphism. The fibre-product uniqueness in [def-weil-pbc-morphism-to-projective-space-by-sections] now proves $f_N\\circ h=f_N$ as morphisms to $\\mathbf P^1_F$. This establishes the asserted invariance on schemes, including nonreduced schemes.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space, equivalence of pairs and naturality; relative construction after Definition 01NF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-tensor-section-affine-open",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "pqf-lem-affine-local-target",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-sfb-affine-proper-finite",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-weil-pbc-projective-space-functor-of-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Norm-pair argument using Tag 01NE (lemma-projective-space); tensor-section identities from modules.tex Tags 01CA, 01CD, 01CT; affine/proper criterion morphisms.tex Tags 01S8, 01W6, 01WN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a field with a finite group action an orbit separated pair of sections with affine nonvanishing opens defines finite ordinary and invariant tensor norm morphisms to projective line",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generating pair of line bundle sections with affine charts and disjoint translated zero loci yields a finite group invariant projective line map by tensoring translates",
+   "results": "8 hits; OnePoint.smul_some_eq_ite, Projectivization.smul_mk, Projectivization.smul_def, Projectivization.instMulAction.congr_simp, Projectivization.instMulAction, AffineEquiv.constVAddHom, OnePoint.instGLAction, Projectivization.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.ProjectiveSpace",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpace'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "grep",
+   "query": "normSection|orbitBundle|pencil|twoSection",
+   "results": "0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor norms of an orbit separated pair on a proper scheme, with affine nonvanishing charts, give a finite invariant map to projective space of dimension one",
+   "results": "8 hits; AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.homOfVector",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert this scheme-theoretic construction"
+  },
+  {
+   "tool": "grep",
+   "query": "normSection|orbitBundle|invariant.*pencil|pencil.*invariant",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the combined finite invariant norm-pencil assertion for invertible sheaf sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor products of translates of a generating pair of invertible sheaf sections define a finite invariant morphism from a proper scheme to projective line",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, Module.Invertible.instTensorProduct, Module.Invertible.instTensorProduct_2, AlgebraicGeometry.IsFinite, Module.Invertible.instTensorProduct_1, AlgebraicGeometry.IsFinite.mk, Module.Invertible.rTensorEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the combined finite invariant norm-pencil assertion for invertible sheaf sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Proj",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the combined finite invariant norm-pencil assertion for invertible sheaf sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme with a finite group action and two line bundle sections having affine nonvanishing opens and disjoint orbit zero loci admits a finite invariant norm pencil to the projective line",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the combined finite invariant norm-pencil assertion for invertible sheaf sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group translates of two sections of a line bundle on a proper scheme give a G invariant finite projective coordinate map by multiplying the sections in the tensor product of all pullbacks",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord, AlgebraicGeometry.Proj.mul_apply, groupCohomology.Hilbert90.aux, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, TannakaDuality.FiniteGroup.ofRightFDRep, TannakaDuality.FiniteGroup.ofRightFDRep_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the combined finite invariant norm-pencil assertion for invertible sheaf sections"
+  },
+  {
+   "tool": "grep",
+   "query": "def fromOfGlobalSections|lemma mul_apply|theorem mul_apply",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the combined finite invariant norm-pencil assertion for invertible sheaf sections"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-curve-two-section-pencil",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "§3.4(b), printed p.606, the special-fibre finite-pencil input, strengthened to disjoint orbit zero loci for products of translates. Supporting local source: Stacks coherent.tex, Tag 02O1, lemma-kill-by-twisting, for high-power restriction to a finite zero locus. This is the norm-section replacement inside the same local-pencil construction; no quotient existence is assumed. Original item steps 7-10: norm residue fibres, section morphisms and chart preimages, affine/proper finiteness, and scheme-level invariance.",
+   "via": [
+    "lem-sfb-ample-curve-two-section-pencil",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-orbit-pair-finite-norm",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied a seven-step proof entirely from existing DAG statements. Proved norm zero-locus identities and affine norm charts, generation, coordinate chart equalities, affineness and properness of both maps, finiteness, explicit factor reindexing, and scheme-level invariance. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "Retains the inherited quotient-free norm-pencil input at de Jong §3.4(b), printed p.606, original parent steps 7-10. Read the latest sk-thm-sf-ctf-stability unit and proof: this is the existing local geometric input below its direct-image route, not a change to that route. The ancestor command returns None; the inherited from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-tensor-section-affine-open",
+    "why": "Its general finite-tensor nonvanishing and affineness criterion is the local geometric tool needed for norm charts, not a replacement for the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Its rank-one residue-fibre generation criterion turns the two disjoint zero loci into generating pairs; no statement of the six-functor unit supplies this geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-morphism-chart-preimage",
+    "why": "Its exact preimage formula for a projective-coordinate morphism supplies the chart test used here; no statement of the six-functor unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Its clauses (a) and (c) give the affine two-chart target cover required by the affine criterion; it is a generic projective-space tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Its equivalent-pairs and pullback clauses prove equality of scheme morphisms from the invariant norm pair; this is a generic representability tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-tensor-section-affine-open",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-projective-space-functor-of-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-b9485cfc3",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-b9485cfc3 (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps against every cited statement; no new nodes. Statement and stmt_deps are identical to live, where the node is unsplit with no proof. Stacks sources checked at the cited labels: 01PV (properties 4288), 01W6(2) (morphisms 9949), 01WN, 01S8, 01NE, 01NG, 01CD, 0B8L, 01CT, 01CY. Step 1: lem-sc-tensor-section-affine-open gives the intersection and affineness through the g=1 factor, so no affine-intersection assumption is made; nonvanishing-tensor-pullback gives Y_{g*c}=g^{-1}Y_c. Step 2: the generating-sections-fibre iff is applied twice. Step 3: chart-preimage (i) with s_0=a, s_1=b. Step 4: standard charts (a) and (c) over Spec F, then the Mathlib leaf 01S8. Step 5: P(n;S) proper and separated; proper-over-separated (01W6(2)) and affine+proper=finite. Step 6: the pullback-tensor (2) composition and the symmetric-monoidal permutation formula; g->gh is a bijection, so lambda_h fixes A and D. Step 7: functor-of-points pullback and equivalent-pairs clauses plus the fibre-product uniqueness of the def give f_N∘h=f_N as scheme morphisms. Edge cases: empty Y, trivial or non-faithful G, characteristic dividing |G|, nonreduced Y, a=0. Checked possible duplicates: effective-action-norm-pencil (needs integral, dominant), universal-norm-generation-open and separating-pair-open (curves) are not duplicates. Advisory: def-sfb-pencil-orbit-bundle-norm is not cited by the item; the parent's step 3 handles the comparison. 5 declared tool_uses are acceptable. 4 undeclared generic off-unit tools (invertible-pullback-tensor, nonvanishing-tensor-pullback, nagata P^n proper, module-tensor-symmetric-monoidal) are route notes only. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOrbitPairFiniteNorm",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.proper_orbit_pair_finite_norm",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.orbitTensorNormSection",
+   "AlgebraicGeometry.Scheme.Modules.PencilTensorPermutation",
+   "AlgebraicGeometry.Scheme.Modules.orbitTensorPullbackReindexIso",
+   "AlgebraicGeometry.Scheme.Modules.proper_orbit_pair_finite_norm"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOrbitPairFiniteNorm.lean",
+  "statement": "theorem proper_orbit_pair_finite_norm (F : Type u) [Field F] (Y : Scheme.{u}) (p : Y ⟶ Spec (CommRingCat.of F)) [IsProper p] (G : Type v) [Group G] [Finite G] (ρ : G →* Aut Y) (hρ : ∀ g : G, (ρ g).hom ≫ p = p) (M : Y.Modules) [M.IsInvertible] (a b : M.sections) (U V : Y.Opens) (hU : (U : Set Y) = nonvanishingLocus M (a.val (op ⊤))) (hV : (V : Set Y) = nonvanishingLocus M (b.val (op ⊤))) (haffU : IsAffineOpen U) (haffV : IsAffineOpen V) (hsep : Disjoint (⋃ g : G, (ρ g).hom ⁻¹' (nonvanishingLocus M (a.val (op ⊤)))ᶜ) (⋃ g : G, (ρ g).hom ⁻¹' (nonvanishingLocus M (b.val (op ⊤)))ᶜ)) : ∃ (hC : (pencilOrbitBundle (fun g ↦ ρ g) M).IsInvertible) (hab : Epi (M.freeHomEquiv.symm (pencilSectionPair M a b))) (hAD : Epi ((pencilOrbitBundle (fun g ↦ ρ g) M).freeHomEquiv.symm (pencilSectionPair _ (orbitTensorNormSection (fun g ↦ ρ g) M a) (orbitTensorNormSection (fun g ↦ ρ g) M b)))), (nonvanishingLocus _ ((orbitTensorNormSection (fun g ↦ ρ g) M a).val (op ⊤)))ᶜ = ⋃ g : G, (ρ g).hom ⁻¹' (nonvanishingLocus M (a.val (op ⊤)))ᶜ ∧ (nonvanishingLocus _ ((orbitTensorNormSection (fun g ↦ ρ g) M b).val (op ⊤)))ᶜ = ⋃ g : G, (ρ g).hom ⁻¹' (nonvanishingLocus M (b.val (op ⊤)))ᶜ ∧ IsFinite (pencilCoordinateMorphism p M inferInstance a b hab) ∧ IsFinite (pencilCoordinateMorphism p _ hC (orbitTensorNormSection (fun g ↦ ρ g) M a) (orbitTensorNormSection (fun g ↦ ρ g) M b) hAD) ∧ (pencilCoordinateMorphism p M inferInstance a b hab ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) (Spec (CommRingCat.of F)) ⟨0⟩) = U ∧ (pencilCoordinateMorphism p M inferInstance a b hab ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) (Spec (CommRingCat.of F)) ⟨1⟩) = V ∧ (∀ i : ULift.{u} (Fin 2), pencilCoordinateMorphism p _ hC (orbitTensorNormSection (fun g ↦ ρ g) M a) (orbitTensorNormSection (fun g ↦ ρ g) M b) hAD ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) (Spec (CommRingCat.of F)) i = ⨅ g : G, (ρ g).hom ⁻¹ᵁ (if i.down = 0 then U else V)) ∧ (∀ i : ULift.{u} (Fin 2), IsAffineOpen (pencilCoordinateMorphism p M inferInstance a b hab ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) (Spec (CommRingCat.of F)) i) ∧ IsAffineOpen (pencilCoordinateMorphism p _ hC (orbitTensorNormSection (fun g ↦ ρ g) M a) (orbitTensorNormSection (fun g ↦ ρ g) M b) hAD ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) (Spec (CommRingCat.of F)) i)) ∧ (∀ h : G, ∃ e : pencilTranslateTensor (fun g ↦ ρ g) M ((pencilGroupElements G).map (fun g ↦ g * h)) ≅ pencilOrbitBundle (fun g ↦ ρ g) M, PencilTensorPermutation (fun g ↦ ρ g) M e ∧ ((orbitTensorPullbackReindexIso ρ M h (pencilGroupElements G)) ≪≫ e).hom.app ⊤ (((tensorPullbackSectionAdjunction (ρ h).hom).unit.app (pencilOrbitBundle (fun g ↦ ρ g) M)).app ⊤ ((orbitTensorNormSection (fun g ↦ ρ g) M a).val (op ⊤))) = (orbitTensorNormSection (fun g ↦ ρ g) M a).val (op ⊤) ∧ ((orbitTensorPullbackReindexIso ρ M h (pencilGroupElements G)) ≪≫ e).hom.app ⊤ (((tensorPullbackSectionAdjunction (ρ h).hom).unit.app (pencilOrbitBundle (fun g ↦ ρ g) M)).app ⊤ ((orbitTensorNormSection (fun g ↦ ρ g) M b).val (op ⊤))) = (orbitTensorNormSection (fun g ↦ ρ g) M b).val (op ⊤) ∧ (ρ h).hom ≫ pencilCoordinateMorphism p _ hC (orbitTensorNormSection (fun g ↦ ρ g) M a) (orbitTensorNormSection (fun g ↦ ρ g) M b) hAD = pencilCoordinateMorphism p _ hC (orbitTensorNormSection (fun g ↦ ρ g) M a) (orbitTensorNormSection (fun g ↦ ρ g) M b) hAD)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing orbit tensor and tensor section owned by the added landed dependency def-sfb-pencil-orbit-bundle-norm. The helper section only converts the existing top-open tensor section to the existing compatible-family encoding. Canonical reindexing is actual pullback/tensor-composition followed by a labelled associator/braiding permutation, not an arbitrary isomorphism preserving two sections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6ba143e7",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Clause-by-clause match of proper_orbit_pair_finite_norm against node: field/proper p, finite G via ρ:G→*Aut Y with hρ (Aut_mul_def gives the left action g∘h), invertible M, a,b sections, U,V = nonvanishingLocus (residue-fibre form) with IsAffineOpen only for them, hsep orbit disjointness; conclusions ∃hC invertible, Z(A)/Z(D) unions, Epi generation of both pairs, IsFinite of both homOfGeneratingSections maps, 4 chart preimages as Y.Opens (⨅ g translates), affineness, λ_h = orbitTensorPullbackReindexIso (canonical boundaryPullbackTensorIso/tensorPullbackSectionComp/map_mul/unit) ≪≫ e with e restricted by label-indexed PencilTensorPermutation (nodup enumeration ⇒ unique by coherence) sending pulled A,D to A,D, and ρh≫f_N=f_N. Statement verbatim; node changes only lean and adds the landed def-sfb-pencil-orbit-bundle-norm stmt_dep (allowed); dep records identical to live; no name clashes; docstrings carry source and blueprint; only sorry is the theorem. Edge cases fine. No compile (no file changed). Advisory: pencilSectionPair/pencilCoordinateMorphism owned only by downstream theorem lem-sfb-ample-curve-two-section-pencil (its proof_deps cite item) → stage-3 import cycle, split note; nonvanishingLocus and standardOpen owners not in stmt_deps."
+ }
+}

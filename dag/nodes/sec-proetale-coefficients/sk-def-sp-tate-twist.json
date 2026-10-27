@@ -36,7 +36,11 @@
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sp-ell-point-reduction-ring-map",
+  "lem-sp-ell-quotient-finite-discrete",
+  "lem-sp-ell-power-ideals-nested"
+ ],
  "proof_origin": null,
  "mathlib_searches": [
   {
@@ -168,7 +172,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-1eee40655 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit/chapter route, all 20 dependencies and their cited sources, edge cases, Mathlib searches, duplicate candidates, and DAG reachability. The definition is mathematically coherent, has no new child nodes, no actual dependency cycle, and requires no repair."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.ProEtaleTateTwistsOfUniverses",
   "declaration": "AlgebraicGeometry.ProEtale.spComplexTwistOfUniverses",
@@ -190,5 +205,15 @@
   "group": "N4",
   "result": "pass",
   "note": "Every node clause (any f, ℓ invertible; roots IsIso for all n incl. 0 and Kummer squares; finite A over all annihilating exponents incl. zero ring with constantRingIso; O_E/Z_ℓ, E/Q_ℓ, Q̄_ℓ comparisons each pinned uniquely by finite projections, extendπ, colimit coprojections; SpInternalCartesian ties degree-1 module iso to τ over spCoefficientIso = α_f adjunct; signed d with zero/tensor/evaluation normalizations; natural derived iso on full unbounded D) matches without extra hypotheses. §1(B) wrapper ProEtaleTateTwistsOfUniverses is an equivalent localization-universe generalization (u+1 → w, used at standard u+2) with no site/coefficient universe equation; added stmt_dep def-cbc-strict-constant-tower-operations is landed and acyclic. lean.statement verbatim; JSON layout exact; docstrings with source/blueprint tags; 6 theorem sorries, no hollow data. nt_compile --json: both files clean (2.5 s, 12.0 s); probe confirmed spTwistFunctor.obj = spComplexTwistOfUniverses.{u+2} by rfl, #print axioms, and a control error surfaced. Remarks only: (B) record lists only the wrapper decl (established OfUniverses practice); redundant X-invertibility binder; finite α via constant-ring comparison per recorded model."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be a scheme on which $\\ell$ is invertible. Let $\\mu_{\\ell^n,X}$ be the sheaf of\n$\\ell^n$th roots of unity on $X_{\\mathrm{proét}}$; since $\\ell$ is invertible on $X$, it is\nlocally isomorphic to $(\\mathbf Z/\\ell^n\\mathbf Z)_X$. For a finite ring $A$ with $\\ell^rA=0$\nput\n$$\nA_X(1)=\\mu_{\\ell^r,X}\\otimes_{\\mathbf Z/\\ell^r\\mathbf Z}A_X,\n$$\nwhich by the Kummer maps does not depend on $r$. Put\n$$\n\\cO_{E,X}(1)=\\varprojlim_n(\\cO_E/\\ell^n)_X(1),\n$$\nand obtain $E_X(1)$ and $\\QbarX(1)$ by inverting $\\ell$ and passing to the colimit over $E$\n(compare [sk-prop-sfb-qlbar-colimit-x]); equivalently,\n$\\QbarX(1)=\\QbarX\\otimes_{\\mathbf Z_{\\ell,X}}\\mathbf Z_{\\ell,X}(1)$ with\n$\\mathbf Z_{\\ell,X}(1)=\\varprojlim_n\\mu_{\\ell^n,X}$. Each $\\Lambda_X(1)$ is locally free of rank one.\nFor $d\\ge0$, $\\Lambda_X(d)$ is the $d$-fold tensor power, $\\Lambda_X(-d)$ its dual, and\n$$\nK(d)=K\\otimes^{\\mathbf L}_{\\Lambda_X}\\Lambda_X(d)\n$$\nfor $K\\in D(X_{\\mathrm{proét}},\\Lambda)$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,269 @@
+{
+ "id": "lem-exc-bounded-flat-pullback-test",
+ "kind": "statement",
+ "title": "Bounded flat inverse-image complexes compute all target-side tensor tests",
+ "statement": "Let $f:V\\to X$ be any morphism of schemes [def-pc-scheme], and let $A$ be a finite commutative ring. On the small pro-etale sites [def-weil-pbc-proetale-site], use the constant ring sheaves $A_X,A_V$ [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category] and their canonical inverse image $f_A^*$ [def-weil-proetale-inverse-image]. Let $c\\leq d$ be integers and let $P$ be a cochain complex [def-pc-cochain-complex-modules] of flat $A_X$-module sheaves [def-pc-flat-sheaf-modules] with $P^q=0$ for $q\\notin[c,d]$. Write $Q(P)$ for its image in the ordinary unbounded derived category [def-weil-abstract-derived-category], and $D(f_A^*)$ for the functor induced by termwise inverse image, which is exact [prop-weil-pbc-proetale-constant-exact].\n\nThe termwise complex $f_A^*P$ has flat $A_V$-module terms, is zero outside $[c,d]$, and is K-flat [def-pc-kflat-complex]. There is a natural isomorphism $Q(f_A^*P)\\cong D(f_A^*)Q(P)$. For every $A_V$-module sheaf $M$ placed in degree zero, with no assumption that $M$ is pulled back from $X$, there is a natural isomorphism in $D(V_{\\mathrm{proet}},A)$\n$$D(f_A^*)Q(P)\\otimes_A^L M\\cong Q((f_A^*P)\\otimes_{A_V}M),$$\nusing derived tensor [def-weil-derived-tensor]. The complex on the right is zero outside $[c,d]$; consequently the left side has zero cohomology in every degree outside $[c,d]$ [def-weil-derived-cohomology-sheaves]. No constructibility, Noetherianity or etaleness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD, lemma-pullback-flat; bounded K-flat tensor-test application is the argument of blueprint thm-exc-explicit-preservation proof paragraph 2, expanded returned step 3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof": [
+  {
+   "text": "A finite commutative ring is Noetherian. In the fixed-ring ModuleCat-valued presentation, exactness of tensorRight is equivalent by the braiding to the two-sided flatness ObjectProperty.flat. Apply the existing fixed-scalar pro-etale pullback flatness instance upperStarPreservesFlat_moduleCat to each term. This is the same inverse image appearing in termwisePullback, and requires no condition on f.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-sfb-proetale-fixed-scalar-pullback-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat"
+   }
+  },
+  {
+   "text": "The existing upperStar is additive and exact, as recorded by its preserved finite limits and colimits instances. Its additive structure preserves zero objects, so apply map_isZero to the original interval bounds. Restrict mapDerivedCategoryFactors.symm along the full subcategory inclusion to obtain the natural termwise localization comparison; there is no boundedness premise for this comparison.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "The preserved upper bound gives IsStrictlyLE d for the pulled-back complex. Apply the existing generic monoidal-category criterion CochainComplex.kFlat_of_isStrictlyLE_of_flat with the flat terms from step 1. The Grothendieck abelian sheaf category has the exact integer-indexed colimits and tensor colimit preservation required by that criterion. This proves the actual two-sided quasi-isomorphism K-flatness predicate of the statement directly.",
+   "uses": [
+    "lem-sfb-bounded-above-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "Use the canonical lax monoidal tensorator of DerivedCategory.Q, restricted along the pulled-back complex functor and the degree-zero single functor. Its naturality in both variables is exactly LaxMonoidal.mu_natural. For a K-flat first complex, pass its K-flatness to the homotopy category; DerivedMonoidal.isIso_counit_app_app_of_kFlat_left makes the Qh tensorator invertible. The tensorator of Q is transported along quotientCompQhIso and is the composite of tensor products of isomorphisms, the Qh tensorator, the localized monoidal quotient tensorator, and quotientCompQhIso. Hence every component is invertible. Package it with asIso and compose with the inverse of the factorization comparison in the first variable. The private helpers tensorComparison, isIsoQTensor and tensorTestsIso carry out these generic operations without exposing large sheaf constructions. The second complex is arbitrary, so no descent hypothesis on M is used. The public implementation helper tensorTestFunctor constructs exactly the product followed by the uncurry of the tensor functor; strictTests and derivedTests share it. Its generic tensorTestFunctorComparison proves the comparison before concrete sheaf specialization, avoiding repeated kernel expansion. Both test functors remain definitionally equal to their original constructions. The proved private sheafQTensorIsIso checks the tensorator in the symbolic coefficient category first; its specialization has exactly the canonical fixed-ring tensorator.",
+   "uses": [
+    "def-weil-derived-tensor",
+    "lem-kun-derived-tensor-well-defined",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 06YL, construction preceding Definition 06YU (definition-derived-tor), and resolution comparison"
+   }
+  },
+  {
+   "text": "The source-library mapBifunctorSingle2Iso identifies the signed tensor with M[0] with the complex obtained by applying tensorRight M termwise. Apply map_isZero to the preserved interval bounds and evaluate this chain isomorphism in degree n, obtaining strict term vanishing. A short complex with zero middle object has zero homology, so the strict test has zero homology in that degree. Finally transport along homologyFunctor applied to the natural derived-test comparison, followed by homologyFunctorFactors. This proves the required derived cohomology vanishing, including for completely arbitrary target module sheaves.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 06YL, total tensor construction; cohomology of a representative"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-proetale-fixed-scalar-pullback-flat",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-weil-derived-tensor",
+  "lem-kun-derived-tensor-well-defined",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ and Section 06YL, assembled using the existing fixed-scalar flat-pullback and generic categorical K-flat/localization tensor APIs; sites-modules Tag 05VD and derived Tag 015F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(KFlat|K.flat|torAmplitude|Tor.amplitude).*(pullback|inverse)|pullback.*(KFlat|K.flat|torAmplitude)",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern site representable flatness, scheme flat maps, or ordinary modules; none states the bounded module-sheaf inverse-image K-flat model and arbitrary target-side tensor test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"flat\"",
+   "results": "1 hit(s): CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern site representable flatness, scheme flat maps, or ordinary modules; none states the bounded module-sheaf inverse-image K-flat model and arbitrary target-side tensor test"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a bounded flat complex of sheaves is K-flat and has the same Tor amplitude against every sheaf on the target site",
+   "results": "8 hit(s): SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.sheafPullback, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern site representable flatness, scheme flat maps, or ordinary modules; none states the bounded module-sheaf inverse-image K-flat model and arbitrary target-side tensor test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat constant ring module sheaves pulls back along any scheme morphism on proetale sites to a bounded K-flat complex computing tensor with every target module sheaf in the same degree interval",
+   "results": "8 hit(s): CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Flat.isStableUnderBaseChange, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, AlgebraicGeometry.Flat.instFstScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern site representable flatness, scheme flat maps, or ordinary modules; none states the bounded module-sheaf inverse-image K-flat model and arbitrary target-side tensor test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat sheaf cochain complex supported in an integer interval, its termwise geometric inverse image is K-flat and computes all target-side derived tensor tests with no constructibility or etale-origin assumption",
+   "results": "8 hit(s): DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.compatiblePreservingOfFlat, DerivedCategory.isLE_Q_obj_iff, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern site representable flatness, scheme flat maps, or ordinary modules; none states the bounded module-sheaf inverse-image K-flat model and arbitrary target-side tensor test"
+  },
+  {
+   "tool": "grep",
+   "query": "(KFlat|kFlat|K.flat|bounded).*flat|pullback.*flat",
+   "results": "0 hit(s): ; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback definitions and ordinary-module flatness do not supply the pro-etale bounded K-flat model with arbitrary target-sheaf tensor tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image of constant ring module sheaves sends a flat complex supported in degrees c to d to a K-flat complex and tensoring with any target sheaf has cohomology only in degrees c to d",
+   "results": "8 hit(s): Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, CategoryTheory.Sheaf.IsConstant.mem_essImage, SheafOfModules.pullbackObjFreeIso.congr_simp, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.mem_essImage_of_isConstant, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback definitions and ordinary-module flatness do not supply the pro-etale bounded K-flat model with arbitrary target-sheaf tensor tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hit(s): SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback definitions and ordinary-module flatness do not supply the pro-etale bounded K-flat model with arbitrary target-sheaf tensor tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat sheaves of modules pulls back along a morphism of ringed topoi to a K-flat complex computing derived tensor with every module sheaf on the source site",
+   "results": "8 hit(s): SheafOfModules.pullback, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Module.Flat.iff_rTensor_exact', CategoryTheory.compatiblePreservingOfFlat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback definitions and ordinary-module flatness do not supply the pro-etale bounded K-flat model with arbitrary target-sheaf tensor tests"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|K.flat",
+   "results": "0 hit(s): ; subdirectory Algebra",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback definitions and ordinary-module flatness do not supply the pro-etale bounded K-flat model with arbitrary target-sheaf tensor tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly bounded complex of flat module sheaves computes its derived tensor with an arbitrary degree zero sheaf by the ordinary tensor complex, and exact sheaf inverse image preserves the bounds",
+   "results": "8 hit(s): Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback definitions and ordinary-module flatness do not supply the pro-etale bounded K-flat model with arbitrary target-sheaf tensor tests"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-exc-explicit-preservation",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-exc-explicit-preservation",
+   "place": "Proof paragraph 2: pull back the bounded flat complex and tensor with any module sheaf on V (returned step 3, entire flat-model calculation)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-exc-bounded-flat-pullback-test",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all statement dependencies. Reused general ringed-topos flat pullback, exact-functor derived factorization, site-level bounded-above flat K-flatness and resolution-independent derived tensor; wrote the arbitrary target-sheaf tensor and interval calculation explicitly. No new nodes. Recorded fresh Mathlib searches and verbatim citation witnesses.",
+  "blueprint": "thm-exc-explicit-preservation, proof paragraph 2 / returned step 3: bounded flat pullback and tensor with any module on V; unit sk-prop-sf-rf-shriek-preservation step 3 bounded-flat-model preservation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "General ringed-topos flat-pullback theorem supplies flatness of every pulled-back term; the unit has no general flat-sheaf theorem."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness for arbitrary finite constant coefficients gives termwise derived inverse image; the unit does not prove this site-theoretic tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General ringed-site K-flat criterion applies to the bounded flat complex on V; the unit has no such general tensor tool."
+   },
+   {
+    "node": "lem-weil-derived-tensor-resolution-independent",
+    "why": "Canonical resolution comparisons identify the identity-resolution tensor model with the derived tensor functor; this general tool is not supplied by the unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-38ed9f83c",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-38ed9f83c (reviewer sub-agent of L); spot-checked: Ordinary first split of lem-exc-bounded-flat-pullback-test, the bounded-flat test that thm-exc-explicit-preservation step 3 cites. There is no re-split note. The delivery makes no new nodes, leaves the statement and stmt_deps unchanged, and proof_deps equals the union of the step uses. There is no cycle and no SGA citation. The five steps match main-20261015 thm-exc-explicit-preservation proof paragraph 2 and unit step 3. Step 1: the ringed-topos flat-pullback lemma (Stacks 05VD, checked) applies to f_proet, which is a geometric morphism by lem-weil-pbc-left-exact-site-inverse-image-tensor. Its u^*F is literally the module pullback of def-weil-proetale-inverse-image, and no flatness of c is assumed. Step 2: prop-weil-pbc-proetale-constant-exact needs only a finite ring and an arbitrary morphism. Its commutative clause, together with prop-weil-pbc-proetale-constant-ring-map, identifies its functor with f_A^*. The exact-functor factorization (Stacks 015F) gives Q(f^*P) ≅ D(f^*)Q(P) with no resolution. Step 3: sites-cohomology lemma-bounded-flat-K-flat is Tag 06YQ (checked in tags/tags); the bound d comes from step 2 and flatness from step 1. Step 4: the identity map is a K-flat resolution of the first factor in def-weil-derived-tensor's order. Resolution independence gives the canonical, natural identification, M is never resolved, and naturality is written out explicitly. Step 5 (elementary): Tot(F⊗M[0])^n = F^n⊗M, so the complex is zero outside [c,d]. Edge cases checked: V empty, A=0, c=d, A=Z/4 with M=Z/2, f=id. Overlaps checked: lem-sp-proetale-ctf-pullback-domains is only a finite-type, constructible special case. The four tool_uses are generic tools on the unit's route and are accepted. Maintainer note: the source.place of lem-pc-bounded-above-flat-kflat-site says 06YS, which should be 06YQ (06YS is the K-flat-resolution lemma)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedFlatPullbackTest",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundedFlatPullbackTest.bounded_flat_pullback_test",
+  "declarations": [
+   "tensorTestFunctor",
+   "AlgebraicGeometry.ProEtale.BoundedFlatPullbackTest.flatInterval",
+   "AlgebraicGeometry.ProEtale.BoundedFlatPullbackTest.termwisePullback",
+   "AlgebraicGeometry.ProEtale.BoundedFlatPullbackTest.strictTests",
+   "AlgebraicGeometry.ProEtale.BoundedFlatPullbackTest.derivedTests",
+   "AlgebraicGeometry.ProEtale.BoundedFlatPullbackTest.bounded_flat_pullback_test"
+  ],
+  "file": "lean/Sheaf/Paper/BoundedFlatPullbackTest.lean",
+  "statement": "theorem bounded_flat_pullback_test {V X : Scheme.{u}} (f : V ⟶ X) (A : Type (u + 1)) [CommRing A] [Finite A] (c d : ℤ) (_hcd : c ≤ d) : (∀ P : (flatInterval X A c d).FullSubcategory, (∀ q : ℤ, exactFunctor _ _ (tensorRight (((termwisePullback f A).obj P.obj).X q))) ∧ (∀ q : ℤ, q < c ∨ d < q → IsZero (((termwisePullback f A).obj P.obj).X q)) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat ((termwisePullback f A).obj P.obj)) ∧ Nonempty ((flatInterval X A c d).ι ⋙ termwisePullback f A ⋙ DerivedCategory.Q ≅ (flatInterval X A c d).ι ⋙ DerivedCategory.Q ⋙ (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory) ∧ Nonempty (derivedTests f A c d ≅ strictTests f A c d ⋙ DerivedCategory.Q) ∧ ∀ (P : (flatInterval X A c d).FullSubcategory) (M : Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} A)) (n : ℤ), n < c ∨ d < n → IsZero (((strictTests f A c d).obj (P, M)).X n) ∧ IsZero ((DerivedCategory.homologyFunctor _ n).obj ((derivedTests f A c d).obj (P, M)))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-226503fee",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clause by clause the Lean matches the node: any f, finite comm ring A in Type(u+1), flatInterval (exactFunctor tensorRight terms + IsZero outside [c,d], all chain maps), pulled-back flat terms, zero terms outside [c,d] and quasiIso.kFlat; natural iso Q∘f^* ≅ D(f^*)∘Q via mapDerivedCategory of the exact upperStar; one natural iso derivedTests ≅ strictTests⋙Q on the product (P,M) category with M arbitrary on V (needs K-flatness, not vacuous); IsZero of strict degree-n term and homologyFunctor n outside [c,d]. upperStar body = recorded proEtaleSheafInverseImage (same sheafPullback along Over.pullback @WeaklyEtale ⊤ f); derivedTensor/kFlat/exactFunctor/homologyFunctor are the recorded interfaces for fixed-ring sheaves. All 12 dep node files identical to live, only the item lean record added, statement verbatim, docstrings with sources and 5 proof steps, single sorry, helpers carry real data. Edge cases c=d, zero P/M, A=0, V empty, f=id, non-flat M ok. Advisory only: upperStar used instead of the recorded name; RingedSiteModules public import unused. No file changed, so nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261024T204612-L-3802673",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

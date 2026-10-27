@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-invertible-extension-factorial-complement",
+ "kind": "statement",
+ "title": "Extension of invertible modules across a factorial complement",
+ "statement": "Let $Z$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and $U\\subseteq Z$ an open subscheme [def-weil-open-immersion]. Assume that for every $z\\in Z\\setminus U$ the local ring $\\mathcal O_{Z,z}$ is a unique factorization domain, meaning an integral domain in which every nonzero nonunit factors as a finite product of prime elements, uniquely up to order and unit factors. Every invertible $\\mathcal O_U$-module $M$ [def-sc-invertible-module] has an extension: there are an invertible $\\mathcal O_Z$-module $\\widetilde M$ and an isomorphism $\\widetilde M|_U\\simeq M$. No density, integrality, separatedness, or uniqueness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD9 (lemma-extend-invertible-module)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "First establish the local construction for any open $V$ with $U\\subseteq V\\subseteq Z$ and any invertible module $N$ on $V$. Let $W$ be an affine open of $Z$ and put $T=V\\cap W$. Both $V$ and $T$ are locally Noetherian by [pqf-def-locnoeth]. Apply [lem-sfb-noetherian-open-immersion-qc] to $V\\hookrightarrow Z$: its inverse image $T$ of the affine open $W$ is quasi-compact. Thus $T$ is Noetherian and admits an open immersion into the affine scheme $W$. These are exactly the hypotheses needed for the quasi-affine divisor presentation, even when $V$ and $Z$ are not quasi-compact.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sfb-noetherian-open-immersion-qc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, local divisor construction and final gluing paragraph; the transfinite construction below supplies explicit coherent choices instead of the source's Zorn ordering."
+   }
+  },
+  {
+   "text": "By [lem-sfb-quasiaffine-line-effective-divisor] choose an effective Cartier divisor $D\\subset T$ with $N|_T\\simeq\\mathcal O_T(D)$. For $w\\in W\\setminus T$ one has $w\\notin V$, hence $w\\notin U$, so $\\mathcal O_{W,w}=\\mathcal O_{Z,w}$ is a UFD. Since $W$ is locally Noetherian, [lem-sfb-cartier-extension-factorial-complement] gives an effective Cartier divisor $E\\subset W$ with $E\\cap T=D$. Set $P=\\mathcal O_W(E)$ using [def-pc-divisor-line-bundle]. This is invertible and $P|_T\\simeq\\mathcal O_T(D)$: on a neighbourhood where the ideal of $E$ is $f\\mathcal O_W$, its dual is the free module with generator dual to $f$, and restricting this presentation gives the dual of the ideal of $D$. The identifications agree on overlaps because both use the same ideal inclusions. We have obtained an isomorphism $a:P|_T\\xrightarrow{\\sim}N|_T$.",
+   "uses": [
+    "lem-sfb-quasiaffine-line-effective-divisor",
+    "lem-sfb-cartier-extension-factorial-complement",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, local divisor construction and final gluing paragraph; the transfinite construction below supplies explicit coherent choices instead of the source's Zorn ordering."
+   }
+  },
+  {
+   "text": "Choose a set-indexed affine open cover $(W_\\alpha)_{\\alpha<\\kappa}$ of $Z$ and well-order its index set. Put $V_\\alpha=U\\cup\\bigcup_{\\gamma<\\alpha}W_\\gamma$ for $\\alpha\\leq\\kappa$. Starting with $N_0=M$, construct invertible modules $N_\\alpha$ on $V_\\alpha$ and isomorphisms $q_{\\beta\\alpha}:N_\\alpha|_{V_\\beta}\\xrightarrow{\\sim}N_\\beta$ for $\\beta\\leq\\alpha$, with $q_{\\alpha\\alpha}=1$ and $q_{\\delta\\alpha}=q_{\\delta\\beta}\\circ(q_{\\beta\\alpha}|_{V_\\delta})$. The following successor and limit constructions give the recursion, with all choices made in a sufficiently large fixed universe. Only a set of stages is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, local divisor construction and final gluing paragraph; the transfinite construction below supplies explicit coherent choices instead of the source's Zorn ordering."
+   }
+  },
+  {
+   "text": "At a successor stage apply steps 1 and 2 with $V=V_\\alpha$, $N=N_\\alpha$, and $W=W_\\alpha$. On the two-open cover $V_{\\alpha+1}=V_\\alpha\\cup W_\\alpha$, glue $N_\\alpha$ and $P$ using $a$ and $a^{-1}$ on their intersection, and identity maps for equal indices. Every cocycle equation is an inverse or identity equation. The module-gluing theorem [lem-weil-pbc-site-module-sheaf-gluing], applied to the Zariski site with ring sheaf $\\mathcal O_{V_{\\alpha+1}}$, supplies $N_{\\alpha+1}$ and in particular $q_{\\alpha,\\alpha+1}$. It is invertible by [def-sc-invertible-module], since on each member of the cover it is locally free of rank one; these trivializations also give quasi-coherence, since the local models are structure sheaves. For $\\beta<\\alpha$ define $q_{\\beta,\\alpha+1}=q_{\\beta\\alpha}\\circ(q_{\\alpha,\\alpha+1}|_{V_\\beta})$. Associativity and the earlier compatibility equations give all the new compatibility equations.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, local divisor construction and final gluing paragraph; the transfinite construction below supplies explicit coherent choices instead of the source's Zorn ordering."
+   }
+  },
+  {
+   "text": "At a nonzero limit stage $\\lambda\\leq\\kappa$, the set-indexed family $(V_\\beta)_{\\beta<\\lambda}$ covers $V_\\lambda$. For $\\beta\\leq\\gamma<\\lambda$ the overlap is $V_\\beta$; use the transition $q_{\\beta\\gamma}^{-1}:N_\\beta\\to N_\\gamma|_{V_\\beta}$, and the inverse transition for reversed indices. The induction equation for the $q$'s gives the cocycle equation on a triple after sorting its three indices; inverse cancellation gives every other ordering. Apply [lem-weil-pbc-site-module-sheaf-gluing] on the Zariski site of $V_\\lambda$ to obtain $N_\\lambda$ and comparison maps $q_{\\beta\\lambda}$. The overlap equation in that theorem says exactly $q_{\\beta\\lambda}=q_{\\beta\\gamma}\\circ(q_{\\gamma\\lambda}|_{V_\\beta})$. The module is invertible by [def-sc-invertible-module], because near each point it is isomorphic to one of the invertible $N_\\beta$; the same local trivializations give quasi-coherence. This completes the limit construction; no comparison map is inferred from density or uniqueness.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, local divisor construction and final gluing paragraph; the transfinite construction below supplies explicit coherent choices instead of the source's Zorn ordering."
+   }
+  },
+  {
+   "text": "The recursion now reaches $V_\\kappa=Z$. Take $\\widetilde M=N_\\kappa$ and the isomorphism $q_{0\\kappa}:\\widetilde M|_U\\xrightarrow{\\sim}M$. If the affine cover is empty then $Z=U=\\varnothing$ and take $\\widetilde M=M$; if $U=Z$ one can take $M$ immediately. The construction also permits $U=\\varnothing$, disconnected schemes and empty intersections. It proves existence with precisely the given hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, local divisor construction and final gluing paragraph; the transfinite construction below supplies explicit coherent choices instead of the source's Zorn ordering."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-sfb-quasiaffine-line-effective-divisor",
+  "lem-sfb-cartier-extension-factorial-complement",
+  "def-pc-divisor-line-bundle",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD9 (lemma-extend-invertible-module), using Tag 0AYM in its quasi-affine form and Tag 0BD8; explicit well-ordered gluing replaces the Zorn implementation of the final paragraph. Module gluing: sites.tex, Tag 04TR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on an open subscheme extends if the local rings outside the open are unique factorization domains",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → AlgebraicGeometry.StructureSheaf.Localizations R ↑x),\\n  (AlgebraicGeometry.StructureSheaf.isLocallyFraction R).pred f =\\n    ∀ (x : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑x ∈ V),\\n      \", \"doc\": \"For any open subset $U$ of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, and for any function $f$ defined on $U$ with values in the localization rings of $R$, the predicate $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → ModuleCat.Tilde.Localizations M ↑x),\\n  (ModuleCat.Tilde.isLocallyFraction M).pred f =\\n    ∀ (y : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑y ∈ V),\\n          ∃ i m s,\\n \", \"doc\": \"For any open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ f $ of the sheaf associated to an $ R $-module $ M $ over $ U $ satisfies the predic\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.RingedSpace) {U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace}\\n  (f : ↑(X.presheaf.obj (Opposite.op U))),\\n  IsUnit ((CategoryTheory.ConcreteCategory.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) f)\", \"doc\": \"Let $ X $ be a ringed space, $ U $ an open subset of $ X $, and $ f $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. The basic open set $ V = \\\\{x \\\\in U \\\\mid f_x \\\\in \\\\mathcal{O}_{X,x}^\\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (g : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ f', X.basicOpen f' = X.basicOpen g\", \"doc\": \"For any affine scheme $X$ and basic open subset $X_{f}$ defined by a section $f$ of the structure sheaf, the open subset $X_{f}$ is itself an affine scheme.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"restrict\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"ContinuousLinearMap.FredholmPackage.isInvertible_restrict\", \"module\": \"Mathlib.Analysis.Normed.Operator.Fredholm.Basic\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [NontriviallyNormedField 𝕜] [AddCommGroup E] [AddCommGroup F] [Module 𝕜 E] [Module 𝕜 F] [TopologicalSpace E] [TopologicalSpace F] {u : E →L[𝕜] F} (pkg : u.FredholmPackage) : (u.restrict ⋯).IsInvertible\", \"doc\": \"\"}\n  {\"name\": \"ContinuousLinearMap.IsFredholm.of_isInvertible_restrict\", \"module\": \"Mathlib.Analysis.Normed.Operator.Fredholm.Basic\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [NontriviallyNormedField 𝕜] [AddCommGroup E] [AddCommGroup F] [Module 𝕜 E] [Module 𝕜 F] [TopologicalSpace E] [TopologicalSpace F] [CompleteSpace 𝕜] [IsTopologicalAddGroup E] [ContinuousSMul 𝕜 E] [IsTopologicalAddGroup F] [ContinuousSMul 𝕜 F] {u : E →L[𝕜]\", \"doc\": \"Assume that `u : E →L[𝕜] F` restricts to an isomorphism between closed finite codimension\\nsubspaces `E₁` and `F₁`. Then `u` is Fredholm.\\n\\nIn fact it is enough to assume that the restriction `E₁ →L[𝕜] \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(invertible|lineBundle).*(extend|extension)|(extend|extension).*(invertible|lineBundle)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean\", \"line\": \"272\", \"text\": \"    exact (isInvertible_fderivWithin_extendCoordChange hn (IsManifold.subset_maximalAtlas he)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt.lean\", \"line\": \"397\", \"text\": \"lemma isInvertible_fderivWithin_extendCoordChange (hn : n ≠ 0)\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of Picard groups to an open subset is surjective for a locally factorial locally Noetherian scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (f ⁻¹ᵁ U).toScheme ⟶ U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": Scheme\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open embedding $h: U \\to X$, the restriction of $X$ to $U$ forms a scheme by inheriting the local affine structure thr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(hf : P f) (U : Y.Opens) : P (f ∣_ U)\", \"doc\": \"If a morphism property $P$ is Zariski local at the target and holds for a morphism $f : X \\\\to Y$, then for any open subset $U \\\\subseteq Y$, the restriction $f|_U : f^{-1}(U) \\\\to U$ also satisfies $P$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.restrict\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{U : TopCat} (X : LocallyRingedSpace.{u}) {f : U ⟶ X.toTopCat} (h : IsOpenEmbedding f) : LocallyRingedSpace\", \"doc\": \"Given a locally ringed space $ X $, an open subset $ U $ of $ X $, and an open embedding $ f: U \\to X $, the restriction of $ X $ to $ U $ constructs a new locally ringed space over $ U $. This space h\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": X ≅ Z.restrict f.isOpenEmbedding\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ between schemes, this constructs an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedding $ f_{\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.resLE\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(f : Hom X Y) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) : V.toScheme ⟶ U.toScheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$, an open subset $U$ of $Y$, and an open subset $V$ of $X$ such that $V$ is a subset of the preimage $f^{-1}(U)$, this function defines the restriction of $f$ t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles extend from open subsets of locally Noetherian schemes whose boundary local rings are factorial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian ↑U\", \"doc\": \"If $X$ is a locally Noetherian scheme and $U$ is an open subscheme of $X$, then $U$ is also a locally Noetherian scheme. This follows from the fact that any open subset of a scheme inherits the local \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {x : ↥X},\\n  IsNoetherianRing ↑(X.presheaf.stalk x)\", \"doc\": \"For any locally Noetherian scheme $ X $, the stalk of its structure sheaf at any point $ x $ is a Noetherian ring. This follows from the property that a scheme being locally Noetherian implies every p\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected every returned type; the hits concern abstract additive torsors, affine-space morphisms, ring Picard definitions, restriction of schemes, or analytic invertibility, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(invertible|lineBundle|picard).*(extend|extension)|(extend|extension).*(invertible|lineBundle|picard)",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: read every returned type; none states line extension under the factorial-complement hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of restriction of line bundles to an open subscheme with factorial boundary local rings",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Opens.toScheme, Scheme.Opens.stalkIso, IsIntegralHom.instMorphismRestrict, SurjectiveOnStalks.instOfIsOpenImmersion, morphismRestrict, IsZariskiLocalAtTarget.restrict, LocallyRingedSpace.ofRestrict_stalkMap_isIso, LocallyRingedSpace.restrict. These define open restriction or preserve morphism properties, not line extension.",
+   "date": "2026-10-24",
+   "verdict": "no match: read every returned type; none states line extension under the factorial-complement hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"restrict\"",
+   "results": "7 hits: Set.piCongrLeft_comp_domRestrict, Set.piCongrLeft_comp_restrict, Finset.piCongrLeft_comp_restrict, Finset.restrict_comp_piCongrLeft, RootPairing.rootForm_restrict_nondegenerate_of_isAnisotropic, Preorder.piCongrLeft_comp_frestrictLe, Preorder.piCongrLeft_comp_restrictLe. These are unrelated substring hits, not scheme Picard restriction.",
+   "date": "2026-10-24",
+   "verdict": "no match: read every returned type; none states line extension under the factorial-complement hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module on an open subscheme extends over a locally Noetherian scheme if the local rings of the complement are unique factorization domains",
+   "results": "8 hits: ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, IsLocallyNoetherian.component_noetherian, isLocallyNoetherian_Spec, isLocallyNoetherian_iff_of_iSup_eq_top, StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.isUnit_toStalk. These concern affine tilde sections or Noetherian stalks and covers, not extension of lines.",
+   "date": "2026-10-24",
+   "verdict": "no match: read every returned type; none states line extension under the factorial-complement hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every line bundle extends from an open subset of a locally factorial locally Noetherian scheme",
+   "results": "8 hits: ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, exists_of_res_eq_of_qcqs_of_top, exists_of_res_zero_of_qcqs_of_top, StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.exists_const. These give section representatives or denominator identities, not extension of an invertible module.",
+   "date": "2026-10-24",
+   "verdict": "no match: read every returned type; none states line extension under the factorial-complement hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-torsor-line-pullback",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; field-fibre reduction: lift an arbitrary line module to the proper abelian quotient; supporting extension input: extend an arbitrary line from the punctured chart to its regular projective-line bundle",
+   "via": [
+    "lem-sfb-split-torus-torsor-line-pullback",
+    "lem-sfb-relative-picard-cube-face-detection",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-invertible-extension-factorial-complement",
+  "worker": "stage1",
+  "summary": "Statement retained exactly after reading Tag 0BD9. Reuse the existing quasi-affine effective-divisor presentation (0AYM), Cartier extension (0BD8), quasi-compactness of open immersions into locally Noetherian schemes (01OX), and module-sheaf gluing (04TR). Spell out the successor and limit comparison maps in a set-indexed transfinite gluing; no new nodes are needed. No project declaration states the whole item without sorry.",
+  "blueprint": "Supporting extension input named in the inherited blueprint.from.place: extend a line from the punctured chart to its regular projective-line bundle, along the direct-image/alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3). Current latest blueprint read. The ancestor command returns None for this inherited non-blueprint node; its from.node/from.via are retained. Searches found no blueprint node with the general extension statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Generic effective gluing of module sheaves with supplied cocycle over an arbitrary set-indexed cover, used on the Zariski site at successor and limit stages. The unit has no other node stating this gluing theorem; it does not replace the divisor-extension route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-module-sheaf-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-f9f29b5fa",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-f9f29b5fa (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item in full: one commit, no new nodes, an item that had no proof before and no re-split note. The statement matches Stacks 0BD9 (divisors.tex lemma-extend-invertible-module) hypothesis by hypothesis. Step 1: T=V∩W is quasi-compact by lem-sfb-noetherian-open-immersion-qc (01OX) and locally Noetherian by the remark in pqf-def-locnoeth, so T is Noetherian and open in an affine scheme; no affine-intersection assumption (E1 fine). Step 2: 0AYM's quasi-affine clause (I checked the source line 'we may choose D'=∅') gives a single divisor D. 0BD8 applies with X=W and V=T, because points of W∖T are outside U and have UFD local rings. O_W(E)|_T≅O_T(D) by restricting the ideal sheaf. Steps 3–5: the transfinite recursion states its invariant (q_{αα}=1, q_{δα}=q_{δβ}∘q_{βα}|). At successor stages it glues along a and a^{-1}. At limit stages it glues with φ_{βγ}=q_{βγ}^{-1}, and the cocycle is the invariant. The output equation e_β=q_{βγ}∘e_γ| of lem-weil-pbc-site-module-sheaf-gluing (04TR, arbitrary set covers, equal indices included) gives the invariant at λ, which I checked. The glued module is invertible because it is locally isomorphic to invertible modules. No density or uniqueness is used. Edge cases checked: U=Z, U=∅, Z=∅, disconnected Z, empty overlaps, non-quasi-compact Z; the quadric-cone vertex is correctly excluded by the UFD hypothesis. Duplicates: rg for 0BD9 and extension wording finds only the special-case citer lem-sfb-smooth-dvr-generic-line-extension. Accepted tool_use: lem-weil-pbc-site-module-sheaf-gluing, a generic Zariski gluing tool; the unit has no alternative. Batch-5 flags: lem-trf-quasi-affine-canonical-affine-embedding (01P9, status mathlib) and lem-trf-ufd-height-one (0AFT, status mathlib) are generic scheme and commutative-algebra facts that are only placed in sec-trace-formula. Neither is part of the trace formula or Poincaré duality, so both citations are acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleExtensionFactorialComplement",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_invertible_extension_of_factorial_complement",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleExtensionFactorialComplement.lean",
+  "statement": "theorem exists_invertible_extension_of_factorial_complement {Z : Scheme.{u}} [IsLocallyNoetherian Z] (U : Z.Opens) (hfactorial : ∀ z : Z, z ∉ U → IsDomain (Z.presheaf.stalk z) ∧ UniqueFactorizationMonoid (Z.presheaf.stalk z)) (M : U.toScheme.Modules) [M.IsInvertible] : ∃ Mext : Z.Modules, Mext.IsInvertible ∧ Nonempty ((tensorPullback U.ι).obj Mext ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Restriction is the canonical tensor pullback along U.ι, as recorded in the additional landed statement dependency def-pc-module-pullback. The factorial hypothesis is exactly IsDomain together with UniqueFactorizationMonoid, pointwise only outside U."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e6c2e7d5",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BD9 / node clause by clause: IsLocallyNoetherian Z, arbitrary U : Z.Opens, stalk IsDomain ∧ UniqueFactorizationMonoid only for z ∉ U (UFM needs only CommMonoidWithZero, so well-formed = UFD), M : U.toScheme.Modules with recorded Scheme.Modules.IsInvertible class, conclusion ∃ invertible Mext with Nonempty ((tensorPullback U.ι).obj Mext ≅ M), existence only. tensorPullback is a declaration of the landed def-pc-module-pullback record, legitimately added to stmt_deps; node diff vs live = stmt_deps + lean only; lean.statement verbatim; single universe u, autoImplicit off. Edge cases U=⊤/⊥, empty, disconnected, non-qc, non-separated Z admitted. No defs, sorry only, Source/blueprint docstrings, proof imports exist, report has both sections. No compile run (none needed, no file changed). Minor: docstring step 6 'take M itself' means M carried over to Z (proof prose only)."
+ }
+}

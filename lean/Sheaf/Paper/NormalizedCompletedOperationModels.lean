@@ -10,6 +10,12 @@ public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Mathlib.CategoryTheory.Pi.Basic
+public import Sheaf.Paper.CoefficientClosedTensorComparison
+import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
+import Sheaf.Paper.EffectiveQuotientModelDescent
+import Sheaf.Paper.NormalizedCompletionRealization
+import Sheaf.Paper.QuotientExpressionKFlatNormalization
+import all Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization
 
 /-! # Simultaneous primitive models for completed operations
 
@@ -40,7 +46,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Compatible presentations of the *specified* operations. The tensor structures
 are normalized on K-flat total complexes by RingedSiteDualityModel; the reduction
-calculus fixes every quotient map and both adjunction projections. Completion's
+calculus fixes every quotient map and both adjunction projections. Its closed
+tensors are compared canonically through their common internal Hom. Completion's
 comparison is pinned by the actual quotient/Roos augmentation. Pullback's
 comparison is pinned on every simultaneous quotient presentation, not chosen
 separately on evaluated objects.
@@ -53,11 +60,6 @@ structure Models {S : Type s} (W : S → Scheme.{t}) where
   system : ∀ a : S, RingedSiteDualityModel.{t + 1, t, u, (max u (t + 1)) + 1}
     (coefficientSequenceTopology (Scheme.ProEt.topology (W a)))
     (coefficientSequenceCommRingSheaf l E (W a))
-  /-- These are presentations of the same system closed tensor. -/
-  system_closed : ∀ a : S, (system a).closed = (calculus a).systemClosed
-  /-- The integral tensor is the recorded ordinary tensor used by completion. -/
-  integral_closed : ∀ a : S,
-    (calculus a).integralClosed = (IntegralOnSlice.duality l E (W a) none).closed
   /-- Completion as the reduction/total-limit composite. -/
   completion : ∀ a : S, IntegralOnSlice.completion l E (W a) none ≅
     (calculus a).reduction ⋙ coefficientSequenceLimit l E (W a)
@@ -93,11 +95,12 @@ def tensorRealization (a : S) : IntegralOnSlice.completedTensor l E (W a) none �
   isoWhiskerLeft (IntegralOnSlice.duality l E (W a) none).closed.tensor (M.completion a) ≪≫
     isoWhiskerRight
       (isoWhiskerRight
-        (eqToIso (congrArg CoefficientClosedStructure.tensor (M.integral_closed a).symm))
+        (CoefficientClosedStructure.comparison
+          (IntegralOnSlice.duality l E (W a) none).closed (M.calculus a).integralClosed)
           (M.calculus a).reduction ≪≫
         (M.calculus a).reductionTensor ≪≫
         isoWhiskerLeft ((M.calculus a).reduction.prod (M.calculus a).reduction)
-          (eqToIso (congrArg CoefficientClosedStructure.tensor (M.system_closed a).symm)))
+          (CoefficientClosedStructure.comparison (M.calculus a).systemClosed (M.system a).closed))
       (coefficientSequenceLimit l E (W a))
 
 /-- The primitive tensor comparison is L(T(e_A,e_N)), after its defining realization.
@@ -143,6 +146,108 @@ structure PrimitiveLaws : Prop where
       IsNormalizedCoefficientSequence l E (W a)
         ((integralComparisonDerivedSequencePullback l E f).obj N)
 
+omit [Fact l.Prime] in
+private theorem primeUnit (X : Scheme.{t})
+    (hl : ∀ x : X, IsUnit (l : X.residueField x)) : IsUnit (l : Γ(X, ⊤)) := by
+  apply X.toRingedSpace.isUnit_of_isUnit_germ
+  intro x hx
+  have h : IsUnit (l : X.presheaf.stalk x) := by
+    apply (IsLocalRing.residue_ne_zero_iff_isUnit _).1
+    simpa only [map_natCast] using (hl x).ne_zero
+  simpa only [map_natCast] using h
+
+private theorem modelCounit (a : S)
+    (hl : ∀ x : W a, IsUnit (l : (W a).residueField x))
+    (N : coefficientSequenceDerived l E (W a))
+    (hN : IsNormalizedCoefficientSequence l E (W a) N) :
+    IsIso ((M.calculus a).adjunction.counit.app N) :=
+  ((purNormalizedReconstruction l E (W a) (primeUnit l (W a) hl)
+    (M.calculus a)).1 N hN).2
+
+private theorem normalizedIso {X : Scheme.{t}}
+    {A B : coefficientSequenceDerived l E X} (e : A ≅ B)
+    (hA : IsNormalizedCoefficientSequence l E X A) :
+    IsNormalizedCoefficientSequence l E X B := by
+  intro m n h P
+  let Em := coefficientSequenceDerivedEvaluation l E X m
+  let En := coefficientSequenceDerivedEvaluation l E X n
+  let R := normalizedDVRRes l E X h
+  let i := (En.mapIso e).hom
+  let j := (Em.mapIso e).hom
+  have hc : (fun f : En.obj B ⟶ P ↦
+      (coefficientSequenceDerivedTransition l E X h).app A ≫ R.map (i ≫ f)) =
+      (fun f : En.obj B ⟶ P ↦ j ≫
+        ((coefficientSequenceDerivedTransition l E X h).app B ≫ R.map f)) := by
+    funext f
+    dsimp only [i, j, Functor.mapIso_hom, En, Em]
+    rw [Functor.map_comp, ← Category.assoc]
+    have hn := (coefficientSequenceDerivedTransition l E X h).naturality e.hom
+    change (coefficientSequenceDerivedEvaluation l E X m).map e.hom ≫
+      (coefficientSequenceDerivedTransition l E X h).app B =
+        (coefficientSequenceDerivedTransition l E X h).app A ≫
+          R.map ((coefficientSequenceDerivedEvaluation l E X n).map e.hom) at hn
+    rw [← hn, Category.assoc]
+  have hi : Function.Bijective (fun f : En.obj B ⟶ P ↦ i ≫ f) := by
+    exact ⟨fun _ _ h ↦ (cancel_epi i).1 h,
+      fun f ↦ ⟨(En.mapIso e).inv ≫ f, by simp [i]⟩⟩
+  have hj : Function.Bijective
+      (fun f : Em.obj B ⟶ R.obj P ↦ j ≫ f) := by
+    exact ⟨fun _ _ h ↦ (cancel_epi j).1 h,
+      fun f ↦ ⟨(Em.mapIso e).inv ≫ f, by simp [j]⟩⟩
+  have hb := (hA h P).comp hi
+  rw [show ((fun f : En.obj A ⟶ P ↦
+      (coefficientSequenceDerivedTransition l E X h).app A ≫ R.map f) ∘
+        (fun f : En.obj B ⟶ P ↦ i ≫ f)) = _ from hc] at hb
+  exact ⟨fun f g he ↦ hb.1 (congrArg (fun k ↦ j ≫ k) he), fun f ↦ by
+    obtain ⟨g, hg⟩ := hb.2 (j ≫ f)
+    exact ⟨g, hj.1 hg⟩⟩
+
+private theorem modelUnit (a : S)
+    (hl : ∀ x : W a, IsUnit (l : (W a).residueField x)) :
+    IsNormalizedCoefficientSequence l E (W a) (unit l E (W := W) a) := by
+  let P : Fin 0 → CochainComplex (scalarReductionSource l E (W a)) ℤ := Fin.elim0
+  obtain ⟨N, κ, _, _, h, _, _⟩ :=
+    StrictQuotient.quotientExpressionKFlatNormalization l E (𝟙 (W a)) (𝟙 (W a))
+      hl hl hl 0 P (fun i ↦ Fin.elim0 i) (fun i ↦ Fin.elim0 i)
+  intro m n hmn Q
+  have hu : IsNormalizedCoefficientSequence l E (W a)
+      (DerivedCategory.Q.obj
+        (MonoidalCategory.tensorUnit (StrictQuotient.Complex l E (W a)))) := by
+    exact (h (W a) _ (StrictQuotient.Generated.unitY (N := N))).2.1
+  exact hu hmn Q
+
+private theorem modelTensor (a : S)
+    (hl : ∀ x : W a, IsUnit (l : (W a).residueField x))
+    (A N : coefficientSequenceDerived l E (W a))
+    (hA : IsNormalizedCoefficientSequence l E (W a) A)
+    (hN : IsNormalizedCoefficientSequence l E (W a) N) :
+    IsNormalizedCoefficientSequence l E (W a) ((tensor l E M a).obj (A, N)) := by
+  let C := M.calculus a
+  let L := coefficientSequenceLimit l E (W a)
+  let := modelCounit l E M a hl A hA
+  let := modelCounit l E M a hl N hN
+  let eA : C.reduction.obj (L.obj A) ≅ A := asIso (C.adjunction.counit.app A)
+  let eN : C.reduction.obj (L.obj N) ≅ N := asIso (C.adjunction.counit.app N)
+  let e := (C.reductionTensor).app (L.obj A, L.obj N)
+  apply normalizedIso l E (e ≪≫ C.systemClosed.tensor.mapIso (Iso.prod eA eN) ≪≫
+    (CoefficientClosedStructure.comparison C.systemClosed (M.system a).closed).app (A, N))
+  exact C.reduction_normalized _
+
+include M in
+private theorem modelPullback {a b : S} (f : W a ⟶ W b)
+    (ha : ∀ x : W a, IsUnit (l : (W a).residueField x))
+    (hb : ∀ x : W b, IsUnit (l : (W b).residueField x))
+    (N : coefficientSequenceDerived l E (W b))
+    (hN : IsNormalizedCoefficientSequence l E (W b) N) :
+    IsNormalizedCoefficientSequence l E (W a)
+      ((integralComparisonDerivedSequencePullback l E f).obj N) := by
+  let := modelCounit l E M b hb N hN
+  let e := asIso ((M.calculus b).adjunction.counit.app N)
+  apply normalizedIso l E ((integralComparisonDerivedSequencePullback l E f).mapIso e)
+  exact ((effectiveQuotientModelDescent l E E (AlgHom.id _ _) f ha hb
+    (M.calculus b) (M.calculus a) (M.calculus b) (M.roos a) (M.roos b)).1
+      ((coefficientSequenceLimit l E (W b)).obj N)).2.1
+
 /-- Simultaneous quotient and Roos models with primitive normalization.
 This is the construction part of completed-operation substitution; it makes no
 assertion about finite expressions, naturality of their recursive comparisons,
@@ -153,33 +258,58 @@ representative-normalized refinement in the original substitution proof steps
 1--6; Stacks 07A4, 07A6, 0941
 (blueprint: lem-pur-normalized-completed-operation-models).
 
-Proof: choose the canonical closed total-tensor models on the integral and
-sequence sites. Construct the reduction/total-limit adjunction by deriving the
-ordinary quotient-system tensor adjunction, computing both sides on simultaneous
-flat-term K-flat and K-injective resolutions. Use the normalized representative
-comparisons to present the calculus with integral closed structure equal to the
-specified IntegralOnSlice.duality, and the sequence closed structure equal to the
-chosen system duality. Derive the strict quotient tower and apply the natural
-Roos/total-limit comparison. On K-injectives this is the ordinary limit tuple
-with zero shifted coordinate. This gives completion; the strict augmentation
-identifies completionUnit with the adjunction unit. The finite inverse images of
-one whole reduction diagram give the pullback realizations with exactly their
-simultaneous quotient-presentation normalization. These constructions use one
-Roos comparison at each scheme, hence work simultaneously for all morphisms.
-The unit's transition adjunct is scalar multiplication with inverse insertion
-of 1. Tensor transition adjuncts are monoidal scalar extension followed by the
-tensor of the two input adjuncts. Pullback transition adjuncts are inverse scalar
-association followed by inverse image of the input adjunct. Their quotient
-cocycles hold before localization by scalar associativity. Thus these three
-operations preserve normalization. Finally normalized-DVR effectivity applied to
-the coherent reduction adjunction makes its actual counit invertible; its
-finite components are the adjoints of the total-limit projections, so this is
-the specified coherent counit, not independently chosen finite isomorphisms.
+Proof: choose the canonical quotient/limit calculus and its ordinary and derived
+completion models. Choose the sequence-site duality model and compare its closed
+tensor with the calculus tensor by the unique comparison preserving their common
+tensor-Hom adjunction. Do the same for the specified integral duality tensor.
+The strict quotient/Roos presentation descends through good representatives to
+identify completion with reduction followed by total limit. The strict quotient
+augmentation agrees sectionwise with the prescribed completion augmentation;
+uniqueness of its descent gives the displayed unit equation. Use the same Roos
+model at each scheme in all primitive quotient pullback realizations.
+The reconstruction theorem makes the actual counit invertible on normalized
+systems. The unit is the empty-input unit expression in the strict quotient
+normalization theorem. For tensor, identify the normalized inputs with reductions
+of their total limits by this counit, apply the reduction tensor comparison, and
+transport along the canonical closed-tensor comparison. Pullback of a reduction
+is normalized by effective quotient model descent; pull back the same counit
+isomorphism to handle any normalized input. Normalization is invariant under
+isomorphism by naturality of transition and the induced Hom-set bijections.
 Empty families require no choices, and none of these computations assumes
 boundedness, constructibility, or flatness of a quotient map. -/
 theorem normalizedCompletedOperationModels {S : Type s} (W : S → Scheme.{t})
     (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).residueField x)) :
     ∃ M : Models l E W, PrimitiveLaws l E M := by
-  sorry
+  classical
+  have hm (a : S) : ∃ (C : CoefficientDerivedSystemCalculus l E (W a))
+      (O : CompletionUnit.OrdinaryModel l E (W a)),
+      Nonempty (CompletionUnit.DerivedModel l E (W a) C O) := by
+    let : ∀ x : W a, Invertible (l : (W a).residueField x) :=
+      fun x ↦ (_hl a x).invertible
+    obtain ⟨C, _, O, hD⟩ := CompletionUnit.canonicalModels l E (W a)
+    exact ⟨C, O, hD⟩
+  choose C O hD using hm
+  let D (a : S) := Classical.choice (hD a)
+  have hc (a : S) := normalizedCompletionRealization l E (W a) (C a) (O a) (D a)
+    (fun x ↦ by
+      apply (IsLocalRing.residue_ne_zero_iff_isUnit _).1
+      simpa only [map_natCast] using (_hl a x).ne_zero)
+  choose c hcu using hc
+  let R (a : S) := roosModel l E (W a) (C a) (O a) (D a)
+  let T (a : S) := Classical.choice (ringedSiteDualityMaps_exists.{t + 1, t, u, (max u (t + 1)) + 1}
+    (coefficientSequenceTopology (Scheme.ProEt.topology (W a)))
+    (coefficientSequenceCommRingSheaf l E (W a)))
+  let M : Models l E W :=
+    { calculus := C
+      system := T
+      completion := c
+      completion_unit := hcu
+      roos := R
+      pullback := fun {a b} f ↦ Classical.choice
+        (primitiveQuotientRealizationComparisons l E E (AlgHom.id _ _) f (W b)
+          (_hl a) (_hl b) (_hl b) (C b) (C b) (R a) (R b)).1 }
+  exact ⟨M, ⟨fun a ↦ modelCounit l E M a (_hl a),
+    fun a ↦ modelUnit l E a (_hl a), fun a ↦ modelTensor l E M a (_hl a),
+    fun {a b} f ↦ modelPullback l E M f (_hl a) (_hl b)⟩⟩
 
 end WeilConjectures.CompletedOperations

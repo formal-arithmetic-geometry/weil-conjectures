@@ -1,0 +1,141 @@
+{
+ "id": "def-sfb-transported-constant-module-scalar-extension",
+ "kind": "definition",
+ "title": "Scalar extension of the canonically transported constant module sheaf",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,J)$ be a small site [def-weil-pbc-sites-and-cohomology], $R$ a commutative ring, $B$ a sheaf of commutative rings, and $\\alpha:\\underline R_{\\mathrm{Comm}}\\to B$ a ring-sheaf morphism, using constant sheaves [def-weil-pbc-constant-sheaf]. For an $R$-module $P$, form its constant module sheaf [def-sf-site-constant-module-functor] and transport its coefficient ring from $\\underline R_{\\mathrm{Ring}}$ to the underlying ring of $\\underline R_{\\mathrm{Comm}}$ along the canonical ring isomorphism [def-sfb-constant-module-coefficient-transport]; denote this transported module by $F_{\\mathrm{Comm}}(P)$. Define $C_B(P)$ to be the ordinary scalar extension of $F_{\\mathrm{Comm}}(P)$ along $\\alpha$ [def-pur-sheaf-tensor-product], a sheaf of modules over the underlying ring of $B$ [def-weil-sheaf-of-modules-category]. Explicitly it is the module sheafification of $U\\mapsto B(U)\\otimes_{\\underline R_{\\mathrm{Comm}}(U)}F_{\\mathrm{Comm}}(P)(U)$. For an $R$-linear map $f:P\\to Q$, define $C_B(f)$ by the induced scalar-extension map, sending a local tensor $b\\otimes x$ to $b\\otimes F_{\\mathrm{Comm}}(f)(x)$. The notation $b\\otimes p\\in C_B(P)(U)$ means the canonical pure-tensor section [def-sfb-scalar-extension-pure-tensor-section] applied to the constant-section unit $\\eta_P(p)\\in F_{\\mathrm{Comm}}(P)(U)$ and $b\\in B(U)$. No finite generation, projectivity or flatness is required for these constructions.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-sf-site-constant-module-functor",
+  "def-sfb-constant-module-coefficient-transport",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-scalar-extension-pure-tensor-section"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, section-tensor-product and the preceding change-of-rings construction; Tag 03CY, lemma-sheafification-presheaf-modules; section-constant (constant modules)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "changeOfRings|constantSheaf",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean"
+    ],
+    "n_hits": 1,
+    "note": "",
+    "sub": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "components found; the existing project extension definition is reused with existing:true, not redefined"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of a constant module sheaf along a morphism from the constant commutative ring sheaf to a ring sheaf",
+   "results": {
+    "top": [
+     "ModuleCat.ExtendScalars.map'",
+     "ModuleCat.ExtendScalars.obj'",
+     "ModuleCat.extendScalars",
+     "RestrictScalars",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor_map",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "PresheafOfModules.pullback",
+     "RestrictScalars.isScalarTower"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "components found; the existing project extension definition is reused with existing:true, not redefined"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The module sheaf obtained by extending scalars of the constant module sheaf using the sheafification of sectionwise tensor products",
+   "results": {
+    "top": [
+     "PresheafOfModules.Sheafify.module",
+     "ModuleCat.tilde",
+     "PresheafOfModules.Sheafify.smulCandidate",
+     "PresheafOfModules.Sheafify.smul",
+     "PresheafOfModules.sheafify",
+     "PresheafOfModules.Sheafify.SMulCandidate.x",
+     "PresheafOfModules.Sheafify.SMulCandidate",
+     "PresheafOfModules.toSheafify"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "components found; the existing project extension definition is reused with existing:true, not redefined"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-dual-evaluation-inverse",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2, coefficient dual of a locally constant perfect complex: the ordinary scalar extension C_B(V) and its constant pure-tensor sections in the finite-projective local model.",
+   "via": [
+    "lem-sfb-scalar-dual-evaluation-inverse",
+    "lem-sfb-scalar-perfect-dual-realization",
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantFiniteFreePresentationExtension",
+  "declaration": "CategoryTheory.ConstantFiniteFreePresentationExtension.extension",
+  "declarations": [
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.extension",
+   "CategoryTheory.ConstantFiniteFreePresentationExtension.extensionMap"
+  ],
+  "statement": "def extension (P : ModuleCat.{max u v} R) :\n    SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-node ownership of the existing concrete extension and extensionMap bodies, as requested by return L at 8c73528f6864. They apply changeOfRingsOfUniverses and changeOfRingsHomOfUniverses to the canonically transported constant module and its map; neither chooses from or uses constantFiniteFreePresentationExtension. The specialized pure-tensor composite remains an item helper using the two cited definition nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84e948458",
+  "group": "Q56",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84e948458",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery after return L (8c73528f): the theorem stmt_dep lem-sfb-constant-finite-free-presentation-extension is replaced by the new existing:true def node def-sfb-transported-constant-module-scalar-extension, which owns the plain defs extension/extensionMap (l.60-70; no .choose; statement verbatim). The landed owners def-sfb-constant-module-coefficient-transport and def-sfb-scalar-extension-pure-tensor-section are added under STMT_DEPS MAY GAIN LANDED NODES. The Lean differs from the returned head only by two public imports. Clause-by-clause check: hβ quantifies over every slice W; γ is pinned by inverseSection; γ≫β=1, β≫γ=1, IsIso; splitting independence across ranks; N=0, V=0, zero ring and non-flat B covered. New node H12 fields ok, no cycle, no competing owner. No compile (no file changed). Advisory: base-era imports; the theorem node still co-lists extension in its declarations (NY precedent)."
+ }
+}

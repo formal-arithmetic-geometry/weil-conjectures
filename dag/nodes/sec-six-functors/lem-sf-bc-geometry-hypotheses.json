@@ -1,0 +1,344 @@
+{
+ "id": "lem-sf-bc-geometry-hypotheses",
+ "kind": "statement",
+ "title": "Geometric input bounds for the package exchanges",
+ "statement": "Let $k=\\overline{\\mathbf F}_q$ have characteristic $p$ and let $\\ell\\ne p$ be prime. Let $f:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$ and $f':X'\\to Y'$ form a Cartesian square [def-weil-pbc-cartesian-square] of separated finite-type $k$-schemes and separated finite-type $k$-morphisms [def-weil-scheme-morphism-properties]. Every corner is Noetherian, quasi-compact, quasi-separated and finite-dimensional, every arrow is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and $\\ell$ is invertible on every corner. There exists $e\\ge0$ such that every geometric fibre $X_{\\bar y}$ of $f$ has topological Krull dimension at most $e$ [def-kun-topological-krull-dimension]; empty fibres have dimension $-\\infty$. If $f$ is proper, then $f'$ is proper. Every separated finite-type morphism to any of these corners admits a compactification $U\\xrightarrow{j}\\overline U\\xrightarrow{p}T$ with $j$ quasi-compact open, $p$ proper and $pj$ the given morphism [def-nagata-compactification].",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), base-change sentence; argument separated from realization steps 1,2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-compactification",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "For each corner T, quasi-compactness follows from its quasi-compact structure morphism to the affine spectrum of k [lem-weil-pbc-qcqs-over-affine]. A field is Noetherian, so LocallyOfFiniteType.isLocallyNoetherian [lem-weil-pbc-finite-type-over-noetherian] makes T locally Noetherian; combined with compactness this gives IsNoetherian T. Locally Noetherian schemes are quasi-separated. Apply [lem-kun-dimension-finite-type] to the same structure morphism for a natural dimension bound. These arguments include empty corners.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; blueprint lem-kun-dimension-finite-type and Tag 01K4 for quasi-compactness"
+   }
+  },
+  {
+   "text": "Every arrow is quasi-compact by assumption and [def-weil-finite-type-morphism], and quasi-separated by [lem-pc-separated-quasi-separated]. Derive characteristic p of k_0 from its cardinality p^a, then transport characteristic through the injective algebra map to k. Since ell is prime and differs from p, its cast to k is nonzero and hence a unit. Map this unit through the composite k to Gamma(T,top) to the stalk at t. Ring homomorphisms preserve natural casts and units, yielding invertibility on every corner, vacuously on an empty corner.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Definition 01KK, paragraph following it, using Tag 01K7; scalar inverse pulled along the k-scheme structure"
+   }
+  },
+  {
+   "text": "By Step 1, $Y$ is quasi-compact. Apply [lem-fin-finite-type-fibre-dimension-bound] to the given finite-type morphism $f$ to choose one integer $e\\ge0$ with $\\dim X_y\\le e$ for all points $y\\in Y$. This is a bound for ordinary scheme fibres, not yet for geometric fibres.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A3V, lemma-morphism-finite-type-bounded-dimension"
+   }
+  },
+  {
+   "text": "For an arbitrary field-valued point ybar : Spec Omega to Y, use Scheme.SpecToEquivOfField to obtain its image point y and residue-field map kappa(y) to Omega. Its inverse equation factors ybar through Y.fromSpecResidueField y. The ordinary fibre Z=X_y is locally of finite type over kappa(y) by [lem-pod-separated-finite-type-base-change]. For nonempty Z, apply [lem-pc-dim-base-change-affine-covers] for the induced algebra structure to obtain matching covers U_i of Z and V_i of its scalar extension. Each dim U_i is at most dim Z and hence e by [lem-weil-pbc-open-subspace-dimension-monotone]. Tensor-factor symmetry, homeomorphism invariance, and [lem-weil-pbc-dimension-preserved-field-extension] give dim V_i = dim U_i. This works for every Omega, in particular every algebraically closed Omega.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-pc-dim-base-change-affine-covers",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-dimension-preserved-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3, lemma-dimension-preserved-field-extension; matching affine charts as in Tags 01JR and 01JQ, finite type base change Tag 01T4"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-bound-open-cover] on the scalar extension, which is sober by [lem-weil-pbc-scheme-sober], to the bounds of Step 4. If Z is empty, the projection from its scalar extension makes that extension empty. An empty space has no irreducible closed subsets, so its dimension is bottom by [def-kun-topological-krull-dimension]. Finally pullbackLeftPullbackSndIso and the residue-field factorization identify the scalar extension with the given pullback X times_Y Spec Omega; its homeomorphism transports the bound. Separately the same irreducible-closed-subset argument proves that every empty geometric fibre has dimension bottom. The natural number e was chosen before ybar.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions, open-cover bound; Tag 0055, definition-Krull, empty case"
+   }
+  },
+  {
+   "text": "If $f$ is proper, [lem-weil-pbc-proper-base-change] applied along $g$ makes the projection $X\\times_Y Y\\prime\\to Y\\prime$ proper. The chosen Cartesian identification in [def-weil-pbc-cartesian-square] identifies this projection with $f\\prime$, so $f\\prime$ is proper.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W4, lemma-base-change-proper"
+   }
+  },
+  {
+   "text": "For any corner T and separated finite-type morphism h:U to T, Step 1 supplies a compact quasi-separated base. Use [thm-nagata-compactification] to obtain c=NagataCompactification h. Its open factor is quasi-compact by Compactification.quasiCompact_openImmersion [def-nagata-compactification] applied to the assumed QuasiCompact h; this is a consequence of quasi-compact cancellation against the separated proper factor, rather than a field built into Compactification.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0F41, theorem-nagata; blueprint thm-nagata-compactification and def-nagata-compactification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-nagata-compactification",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-cartesian-square",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-separated-quasi-separated",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-scheme-sober",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), geometric hypotheses; formalized by E3 using the stated seven-step route, the residue-field equivalence, and pullback pasting. Stacks Tags 01T6, 0A3V, 00P3, 01W4, 0F41."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometric.*[Ff]iber.*[Dd]im|[Nn]agata|finiteType.*[Dd]imension",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"grep\", \"query\": \"geometric.*[Ff]iber.*[Dd]im|[Nn]agata|finiteType.*[Dd]imension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/EuclideanDomain/Defs.lean\", \"Mathlib/Algebra/EuclideanDomain/Defs.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\"], \"digest\": \"b90c418973defe92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform fibre dimension bound for finite type morphisms with quasi compact base",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"leansearch\", \"query\": \"Uniform fibre dimension bound for finite type morphisms with quasi compact base\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.eq_valuativeCriterion\"], \"digest\": \"aea14dfc05a22dbb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated finite type schemes over an algebraically closed field have finite dimension and uniform geometric fibre dimension bounds and Nagata compactifications",
+   "results": "{\"t\": \"2026-10-22T06:12:26Z\", \"tool\": \"leanfinder\", \"query\": \"Separated finite type schemes over an algebraically closed field have finite dimension and uniform geometric fibre dimension bounds and Nagata compactifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite\"], \"digest\": \"9c4ff03963e5ed33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform fibre dimension bound for finite type morphisms with quasi compact base",
+   "results": "{\"t\": \"2026-10-22T06:13:43Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform fibre dimension bound for finite type morphisms with quasi compact base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"827fd5d168be16c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*[Ff]ib.*[Dd]im|[Nn]agata|finiteType.*[Dd]imension",
+   "results": "{\"t\": \"2026-10-22T07:06:45Z\", \"tool\": \"grep\", \"query\": \"geometric.*[Ff]ib.*[Dd]im|[Nn]agata|finiteType.*[Dd]imension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-morphism, Noetherianity, and properness declarations supply individual ingredients, not the joint assertion including uniform geometric fibre bound and compactifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type schemes over a field are Noetherian finite dimensional and finite type morphisms have uniformly bounded geometric fibres",
+   "results": "{\"t\": \"2026-10-22T07:06:58Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type schemes over a field are Noetherian finite dimensional and finite type morphisms have uniformly bounded geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\"], \"digest\": \"c5e7947f6b407bdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-morphism, Noetherianity, and properness declarations supply individual ingredients, not the joint assertion including uniform geometric fibre bound and compactifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type schemes over a field have finite Krull dimension and bounded geometric fibres",
+   "results": "{\"t\": \"2026-10-22T07:12:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite type schemes over a field have finite Krull dimension and bounded geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_eq_zero_of_field\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"ringKrullDim_eq_zero_of_isField\", \"Order.krullDim_ne_top_of_finiteDimensionalOrder\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"ringKrullDim_lt_top\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\"], \"digest\": \"9febaf1d24611be9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-morphism, Noetherianity, and properness declarations supply individual ingredients, not the joint assertion including uniform geometric fibre bound and compactifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-22T07:12:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.eq_valuativeCriterion\"], \"digest\": \"aea14dfc05a22dbb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-morphism, Noetherianity, and properness declarations supply individual ingredients, not the joint assertion including uniform geometric fibre bound and compactifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over a quasi compact base has a uniform bound on dimensions of all geometric fibers and admits Nagata compactification if separated",
+   "results": "{\"t\": \"2026-10-22T07:12:44Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism over a quasi compact base has a uniform bound on dimensions of all geometric fibers and admits Nagata compactification if separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"7e24f39bb6b46823\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-morphism, Noetherianity, and properness declarations supply individual ingredients, not the joint assertion including uniform geometric fibre bound and compactifications"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyNoetherian|IsNoetherian|isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-22T07:16:52Z\", \"tool\": \"grep\", \"query\": \"isLocallyNoetherian|IsNoetherian|isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms/FiniteType.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"80\", \"81\", \"82\", \"107\"], \"digest\": \"19c961e6f7c1aa62\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned finite-morphism, Noetherianity, and properness declarations supply individual ingredients, not the joint assertion including uniform geometric fibre bound and compactifications"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-base-change-domain-realization",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (4), base-change sentence; returned realization steps 1,2: Geometric input bounds for the package exchanges.",
+   "via": [
+    "lem-sf-package-base-change-domain-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-bc-geometry-hypotheses",
+  "worker": "stage1",
+  "summary": "Seven steps reuse existing nodes for every non-elementary ingredient; no new nodes. Invertibility follows by pulling a scalar inverse. Ordinary fibre bounds are extended to geometric fibres on matching affine charts, then glued by the open-cover dimension bound. Empty cases explicit. Statement unchanged.",
+  "blueprint": "prop-functor-package proof, Clause (4): geometric hypotheses for base-change and compactification applications, expanded from returned realization steps 1,2.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic geometric tool supplying uniform dimension bound for fibres of a finite-type morphism for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic geometric tool supplying finiteness of the dimension of a finite type scheme for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-pc-dim-base-change-affine-covers",
+    "why": "Generic geometric tool supplying matching affine covers under field extension for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic geometric tool supplying a separated morphism of schemes is quasi-separated for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic geometric tool supplying separated finite-type morphisms are stable under base change for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-bound-open-cover",
+    "why": "Generic geometric tool supplying a common dimension bound for an open cover bounds the whole space for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Generic geometric tool supplying krull dimension of a finite type algebra over a field is preserved by field extension for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric tool supplying a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-open-subspace-dimension-monotone",
+    "why": "Generic geometric tool supplying krull dimension does not increase on an open subspace for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic geometric tool supplying properness is stable under base change for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic geometric tool supplying a scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic geometric tool supplying the underlying space of a scheme is sober for the package base-change hypotheses; no replacement of the six-operations route."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic geometric tool supplying nagata compactification, [stacks-project] for the package base-change hypotheses; no replacement of the six-operations route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-separated-quasi-separated",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-scheme-sober",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-cb07737bd",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-cb07737bd (reviewer sub-agent of L); spot-checked: I read all 7 steps and every cited statement in full, and I make no changes. The statement and stmt_deps are identical to the live node, there are 0 new nodes, there is no cycle, and no parallel or landed delivery exists (live item is unsplit). Neither the item nor any of its deps is in route-pivot-dropped.txt. The source is prop-functor-package.proof.md l.20-22, clause (4); it uses no SGA and involves no coefficient category. Step 1: qcqs-over-affine, finite-type-over-noetherian (Spec k Noetherian is elementary) and kun-dimension-finite-type give qcqs, Noetherian and finite-dimensional corners. Step 2: the finite-type definition and separated-quasi-separated cover the arrows; invertibility of ℓ pulls back from k. Step 3: lem-fin fibre bound (0A3V) applies with Y quasi-compact. Step 4: pod base change gives X_y of finite type; pc-dim-base-change-affine-covers gives matching charts; open monotonicity and the field-extension dimension equality (topological Spec dimension) bound each chart; X_ȳ ≅ (X_y)_Ω by transitivity of fibre products, as in def-weil-geometric-fibre. Step 5: sober implies quasi-sober and T0; the open-cover bound applies, and empty fibres are handled. Step 6: proper base change along arbitrary g, with α identifying f'. Step 7: Nagata to a qcqs base. Advisory: Step 7 unfolds def-nagata-compactifiable, a stmt_dep of the cited theorem, without citing it. The off-unit generic geometry tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfBaseChangeGeometryHypotheses",
+  "declaration": "AlgebraicGeometry.sf_baseChange_geometry_hypotheses",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfBaseChangeGeometryHypotheses.lean",
+  "statement": "theorem sf_baseChange_geometry_hypotheses (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) (hell : ell.Prime) (hellp : ell ≠ D.p) {X' X Y' Y : Scheme.{u}} [X'.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))] [Y'.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X' ↘ Spec (.of D.k))] [LocallyOfFiniteType (X' ↘ Spec (.of D.k))] [QuasiCompact (X' ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y' ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of D.k))] [QuasiCompact (Y' ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) [g'.IsOver (Spec (.of D.k))] [f'.IsOver (Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated g'] [LocallyOfFiniteType g'] [QuasiCompact g'] [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f'] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (sq : ChosenCartesianSquare g' f' f g) : (∀ T : Scheme.{u}, (T = X ∨ T = Y ∨ T = X' ∨ T = Y') → IsNoetherian T ∧ CompactSpace T ∧ QuasiSeparatedSpace T ∧ (∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) ∧ (∀ t : T, IsUnit (ell : T.presheaf.stalk t))) ∧ (QuasiCompact f ∧ QuasiSeparated f) ∧ (QuasiCompact g ∧ QuasiSeparated g) ∧ (QuasiCompact g' ∧ QuasiSeparated g') ∧ (QuasiCompact f' ∧ QuasiSeparated f') ∧ (∃ e : ℕ, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), topologicalKrullDim (↑(pullback f y) : Type u) ≤ (e : WithBot ℕ∞) ∧ (IsEmpty (↑(pullback f y) : Type u) → topologicalKrullDim (↑(pullback f y) : Type u) = ⊥)) ∧ (IsProper f → IsProper f') ∧ (∀ T : Scheme.{u}, (T = X ∨ T = Y ∨ T = X' ∨ T = Y') → ∀ (U : Scheme.{u}) (h : U ⟶ T), IsSeparated h → LocallyOfFiniteType h → QuasiCompact h → ∃ c : Compactification h, QuasiCompact c.i)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the landed FiniteFieldDatum for the stated algebraic closure of a finite field; that existing definition node is added to stmt_deps. The theorem includes explicit quasi-compactness of each compactification open factor, since the current upstream Compactification structure only requires an open immersion. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eddc4d8d9",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Diff vs live node: the only changes are the lean record and the addition of the landed def-weil-finite-field-fiber (FiniteFieldDatum = algebraic closure of F_q, char p) to stmt_deps, which brief-stage2 allows. Clause-by-clause match. ChosenCartesianSquare orientation is correct (isoPullback to pullback f g, fst=g', snd=f'). Corners: IsNoetherian/CompactSpace/QuasiSeparatedSpace/∃ d dim ≤ d, and ell a unit in all stalks. The four arrows are qc∧qs. ∃ e : ℕ chosen before all geometric points Spec Ω→Y, Ω alg. closed in Type u; this contains the κ(y)-closure case and is covered by Step 4. IsProper f → IsProper f'. Compactification clause adds QuasiCompact c.i, which the node requires because the upstream structure lacks the field. Hypotheses are exactly separated finite-type k-schemes and k-morphisms, with no extra assumptions. Universes are all u, forced by Spec D.k. Empty, coincident and identity cases are covered. No definitions; only the theorem's own sorry. Docstrings carry the source place, the blueprint tag and the 7 proof steps. lean.statement is verbatim. The report sections are present. Imported proof-dep modules exist live. No change, so no compile. Advisories only: the geometric-point generalization is true; the IsEmpty conjunct is redundant; the TeX does not bracket-cite def-weil-finite-field-fiber."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261022T143139-L-975518",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

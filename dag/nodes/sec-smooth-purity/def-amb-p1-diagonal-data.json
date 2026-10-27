@@ -18,10 +18,11 @@
   "place": "Worker decomposition of the diagonal integral proof"
  },
  "stmt_deps": [
-  "def-sp-p1-diagonal-charts",
-  "def-asd-ordinary-finite-p1-arrows",
   "def-amb-p1-trace",
-  "def-asd-ordinary-supported-kummer-system"
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-sp-p1-diagonal-charts",
+  "def-z8-ordinary-finite-p1-diagonal-components"
  ],
  "proof": [],
  "proof_deps": [],
@@ -62,15 +63,14 @@
   "declarations": [
    "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace",
    "AlgebraicGeometry.Etale.projectiveLineDiagonalChartPushforward",
-   "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace_eq",
-   "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha"
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace_eq"
   ],
-  "statement": "def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj\n      ((ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧) ⟶\n      ordinaryFiniteUnit A (ProjectiveLine S)",
+  "statement": "def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    ordinaryFiniteP1DiagonalTarget A N hA S a ⟶\n      ordinaryFiniteUnit A (ProjectiveLine S)",
   "branch": "sheaf-dag",
   "by": "G4",
   "date": "2026-10-21",
   "existing": false,
-  "note": "projectiveLineDiagonalTrace and projectiveLineDiagonalAlpha moved unchanged from the item module; projectiveLineDiagonalChartPushforward (moved here by the reviewer from the Chern-components module) is the trace's prefix, and projectiveLineDiagonalTrace_eq records the factorization through projectiveLineTrace."
+  "note": "projectiveLineDiagonalTrace and projectiveLineDiagonalAlpha moved unchanged from the item module; projectiveLineDiagonalChartPushforward (moved here by the reviewer from the Chern-components module) is the trace's prefix, and projectiveLineDiagonalTrace_eq records the factorization through projectiveLineTrace. F1 representation repair: projectiveLineDiagonalAlpha retains its written signature and unit-composite body; a section local to this declaration reuses DerivedCategoryModule._proof_1/2 and ordinaryFiniteClass._proof_1/2/3. No other declaration or import changes. Z8 relocates Alpha to ProjectiveLineDiagonalMaps, retaining the F1 local instance section and specializing its identical generic constantSingleSectionUnits construction. Trace and chart direct-image maps use the unchanged canonical target from OrdinaryFiniteP1DiagonalComponents."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -83,14 +83,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-16cdf",
-  "group": "G4",
+  "reviewer": "C-1065e",
+  "group": "Z8",
   "result": "fix",
-  "landing": "20261021T014706-L-2445300",
+  "landing": "20261027T135451-L-3711227",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean (5 modules) and 6 node files vs the live clone, node statements, OrdinaryFiniteP1Datum/projectiveLineTrace interface and live sibling nodes (lem-sp-finite-p1-diagonal-*); compiled the delivered and corrected sets and the 4 direct importers; #print axioms"
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

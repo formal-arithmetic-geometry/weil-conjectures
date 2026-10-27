@@ -1,0 +1,311 @@
+{
+ "id": "lem-pur-system-singleton-scalar-extension",
+ "kind": "statement",
+ "title": "Scalar extension commutes with derived singleton extension",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe and let $a:B_\\bullet\\to C_\\bullet$ be a morphism of inverse sequences of sheaves of commutative rings, commuting with all transitions [def-weil-size-convention], [def-weil-pbc-sites-and-cohomology]. For $R=B,C$, let $\\mathscr S(R)$ be strict systems of $R_j$-module sheaves with transitions linear after scalar restriction, realized on the vertical sequence site [lem-pur-system-ringed-sequence-site], [def-weil-sheaf-of-modules-category], [def-pc-sheaf-restrict-scalars]. Use ordinary unbounded derived categories, exact evaluations $e_n^R$, and the derived singleton adjunctions $L_n^R\\dashv e_n^R$ induced from ordinary extension [def-weil-abstract-derived-category], [lem-pur-system-level-left-extension], [lem-pur-system-single-derived-extension]. Let $S_\\bullet=-\\otimes^L_{B_\\bullet}C_\\bullet$ and $S_n=-\\otimes^L_{B_n}C_n$ be change of rings, with their module-induced adjunctions to exact scalar restrictions $U_\\bullet,U_n$ [lem-pur-derived-change-of-rings], [lem-pur-sheaf-ring-derived-coefficient-adjunction].\n\nThere is a natural isomorphism of functors to $D(\\mathscr S(C))$\n$$d_n:S_\\bullet L_n^B\\xrightarrow{\\sim}L_n^C S_n.$$\nIt is the left-adjoint conjugate of $e_n^BU_\\bullet=U_ne_n^C$, for the two specified composite adjunctions, so it identifies their actual Hom transposes, units and counits. On a flat-term K-flat $B_n$-complex $Q$ [def-pc-kflat-complex], [def-pc-flat-sheaf-modules], [def-pc-cochain-complex-modules], the singleton extension and its scalar extension are K-flat with flat terms on their ringed sequence sites. The representative of $d_n$ at $j\\le n$ is\n$$(B_j\\otimes_{B_n}Q)\\otimes_{B_j}C_j\\xrightarrow{\\sim}C_j\\otimes_{C_n}(Q\\otimes_{B_n}C_n),\\qquad (b\\otimes q)\\otimes c\\longmapsto a_j(b)c\\otimes(q\\otimes1),$$\nwith the canonical symmetry convention for the scalar-extension factors. At $j>n$ it is the identity of zero, and at $j=n$ it is the multiplication identification. These are maps of actual system complexes and yield the displayed derived natural isomorphism, not just separate level isomorphisms. The isomorphisms commute with the canonical lower-singleton maps $L_n^R(R_n\\otimes^L_{R_m}(-))\\to L_m^R$ for $m\\ge n$, after scalar associators. No flatness of $a_j$ or of the coefficient transitions, and no boundedness, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; agent singleton/scalar comparison auxiliary to its representative argument.",
+  "note": "The singleton functor is an extension left adjoint, not a ringed-topos inverse image. This is an agent-formulated auxiliary, not a direct specialization of the tag."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The Hom-transpose clause follows from leftAdjointUniq_homEquiv_comp after rewriting homEquiv_ofNatIsoRight_apply for the displayed derived right square.",
+   "uses": [
+    "def-pur-system-singleton-scalar-comparisons",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply singletonSequenceOrdinary_kFlat to P over B. Apply ringed-topos K-flat pullback with the explicitly constructed identity algebraic inverse image first on the sequence site to A, then on the base site to the level scalar model. Apply singletonSequenceOrdinary_kFlat again over D to the level scalar-extended complex. This proves the six K-flatness/flat-term clauses. The singleton computes field and exact equivalence factors make its comparison invertible; scalar model computes fields make both composite comparisons invertible. The representative equation is singletonScalarDerivedIso_rep.",
+   "uses": [
+    "lem-pur-system-singleton-kflat",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-system-single-derived-extension",
+    "lem-pur-system-singleton-scalar-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the tensor formula, transpose the ordinary uniqueness component first through A and then through the sequence equivalence, yielding a strict singleton map g. Adjoint uniqueness evaluated on x identifies its nth unit value with the two target units. systemSingleTranspose and systemScalarModel_transpose_tmul express the value below n as b times the strict transition of that unit value. The target singleton transition takes its unit tensor to the unit tensor below n. The outer scalar transpose multiplies by c, and module linearity gives a_j(b)c. This proves the exact generator formula for the specified comparison, including j=n.",
+   "uses": [
+    "lem-pur-system-ordinary-single-extension",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Above n, the target singleton level is zero by systemSingleLevelAbove, transported through the unit of the sequence equivalence. The evaluated scalar ordinary isomorphism transports this vanishing to the source, and every map from the zero source is zero.",
+   "uses": [
+    "lem-pur-system-ordinary-single-extension",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The final lower-singleton compatibility is singletonScalarDerivedIso_lower, evaluated at n,m,h,P.",
+   "uses": [
+    "lem-pur-system-singleton-scalar-lower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-singleton-scalar-comparisons",
+  "lem-pur-normalized-adjunction-composition",
+  "lem-pur-system-singleton-kflat",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-system-singleton-scalar-representative",
+  "lem-pur-system-ordinary-single-extension",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-singleton-scalar-lower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Formal assembly of the parent nine-step argument using the three strict intermediate statements, adjoint uniqueness, normalized pure-tensor transposes, and identity-topos K-flat pullback; C3, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left derived extension from a singleton in ring sheaf inverse systems commutes with arbitrary change of coefficient rings",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; IsAdicComplete.StrictMono.factorPow_comp_extend; AdicCompletion.transitionMap_comp_eval; AdicCompletion.transitionMap_comp_eval_apply; PresheafOfModules.Derivation.Universal.fac; localCohomology.isoOfFinal; localCohomology",
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.restrictScalars is underived; ModuleCat.homEquiv_extendScalarsComp is ordinary ring modules, not derived singleton extension on ringed systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of ring on inverse systems intertwines singleton extension adjunctions and their derived tensor associators",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; AdicCompletion.ofTensorProduct_naturality; TensorProduct.directLimitLeft_symm_of_tmul; TensorProduct.directLimitRight_symm_of_tmul; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfPiFintype; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.restrictScalars is underived; ModuleCat.homEquiv_extendScalarsComp is ordinary ring modules, not derived singleton extension on ringed systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.restrictScalars is underived; ModuleCat.homEquiv_extendScalarsComp is ordinary ring modules, not derived singleton extension on ringed systems."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: SheafOfModules.restrictScalars is underived; ModuleCat.homEquiv_extendScalarsComp is ordinary ring modules, not derived singleton extension on ringed systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero below a selected coefficient level commutes with derived scalar extension of module sheaves",
+   "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "singleton|singleFunctor|kFlat",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scalar restriction/tensor or abstract Kan and derived functors, not the full derived singleton system comparison with its normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total left derived left Kan extension from a single level of inverse ring sheaf systems commutes with derived extension of scalars",
+   "results": "CategoryTheory.Functor.leftKanExtension; CategoryTheory.Functor.totalLeftDerived; CategoryTheory.Functor.rightDerivedDesc; CategoryTheory.Functor.LeftExtension; CategoryTheory.TwoSquare.lanBaseChange; CategoryTheory.Functor.lanCompIsoOfPreserves; CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac_app; ModuleCat.instIsLeftAdjointExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scalar restriction/tensor or abstract Kan and derived functors, not the full derived singleton system comparison with its normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scalar restriction/tensor or abstract Kan and derived functors, not the full derived singleton system comparison with its normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived singleton extension for strict inverse systems of sheaves of modules commutes with arbitrary extension of coefficient rings",
+   "results": "localCohomology.diagram; SheafOfModules.Presentation.map_π_eq; CondensedMod.ofSheafProfinite; Condensed.profiniteSolid; localCohomology.ofDiagram; LightCondMod.ofSheafLightProfinite; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; IsAdicComplete.StrictMono.factorPow_comp_extend",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scalar restriction/tensor or abstract Kan and derived functors, not the full derived singleton system comparison with its normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|homEquiv_extendScalarsComp|def restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scalar restriction/tensor or abstract Kan and derived functors, not the full derived singleton system comparison with its normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars and derived left adjoint to evaluation on a diagram of module sheaves have naturally isomorphic composites",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; PresheafOfModules.sheafificationAdjunction; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.instIsLeftAdjointExtendScalars; PresheafOfModules.sheafificationCompForgetCompToPresheaf; CondensedMod.LocallyConstant.adjunction; PresheafOfModules.freeAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary scalar restriction/tensor or abstract Kan and derived functors, not the full derived singleton system comparison with its normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-quotient-diagram-projection-evaluation",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof step 4, compose the singleton adjunction with scalar extension and compare the actual tensor transposes.",
+   "via": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-system-singleton-scalar-extension",
+  "worker": "stage1",
+  "summary": "Proved the scalar/singleton comparison by a balanced ordinary system isomorphism, proved singleton flatness and K-flatness using evaluation and tensor-acyclicity, and identified its localization with the specified composite-adjunction conjugate. Checked actual transitions, units, counits and lower-singleton maps. No new nodes and no change to the statement.",
+  "blueprint": "thm-pur-rational-and-qbar-purity, Proof Step 2 (finite coefficient extension independence), via the recorded ancestor chain; sk-thm-sf-compatibility clause (7).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-system-ordinary-single-extension",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-system-derived-evaluation",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-system-coproducts",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-system-single-derived-extension",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-normalized-adjunction-composition",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   },
+   {
+    "node": "lem-pur-system-scalar-coherence",
+    "why": "Generic ordinary/derived module, tensor, resolution or adjunction tool for the singleton/scalar representative argument; the compatibility unit does not replace its construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-ordinary-single-extension",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-system-coproducts",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-normalized-adjunction-composition",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-system-scalar-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-61270f494",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-61270f494 (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps, every cited statement and Zheng Constr. 4.1 p.21; Stacks tags 03EK/03CU/0G7E/0D6D/06YN/06YY/0FND/09T5 exist. Ordinary first split (Q95 extraction, no repair note, not dropped), statement kept, no new nodes. Checked: levelwise sheafification on the vertical sequence site (step 1); both balancings and both composites of v and its inverse (step 2); transition square via a_j rho^B = rho^C a_k, zero above n (step 3); flat terms via ringed-pullback with identity topos and no flatness of B_n->B_j (step 4); whole-system K-flatness via e_j Tot(A⊗E_n Q) = Tot(Res A_j ⊗_{B_n} Q), with exact Res, levelwise coproducts and acyclicity detection (step 5); both composites computed on flat-term K-flat representatives (step 6); normalizedAdjunction_uniqueness hypotheses matched, including the unit test (1⊗p)⊗1 -> 1⊗(p⊗1) = c.unit and identity eta/delta (step 7); units and counits (step 8); lower-singleton square, where both routes give a_j(b rho_jn t)c⊗(q⊗1) = a_j(b)c rho^C_jn(a_n t)⊗(q⊗1) (step 9). Edge cases: zero ring, j=n, j>n, m=n, the non-flat map Z->Z/2. No duplicate: compared against singleton-geometric-pullback, scalar-derived-extension, single-derived-evaluation, evaluation-kflat, scalar-model, normalized-tensor-closure. Accepted all 14 generic tool_uses. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemSingletonScalarExtension",
+  "declaration": "SheafOfModules.singletonScalarExtension",
+  "declarations": [
+   "SheafOfModules.singletonScalarExtension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SystemSingletonScalarExtension.lean",
+  "statement": "theorem singletonScalarExtension : (∀ (n : ℕ) (P : DerivedCategory (systemLevel B n)) (M : DerivedCategory (systemSequenceModules D)) (f : ((S (a.app (op n))).model.T ⋙ singletonSequenceDerived S T D n).obj P ⟶ M), ((singletonSequenceDerivedAdjunction S T B n).comp A.adjunction).homEquiv P M ((singletonScalarDerivedIso S T a A n).hom.app P ≫ f) ≫ (singletonDerivedRestrictionEvaluation a n).hom.app M = ((S (a.app (op n))).adjunction.comp (singletonSequenceDerivedAdjunction S T D n)).homEquiv P M f) ∧ (∀ (n : ℕ) (P : CochainComplex (systemLevel B n) ℤ), systemLevelKFlat B n P → CochainComplex.IsKFlatIndependentCoefficients (R := systemSequenceRing B) (((singletonSequenceOrdinary S T B n).mapHomologicalComplex (.up ℤ)).obj P) ∧ (∀ i : ℤ, IsFlatOnSite (R := systemSequenceRing B) (((singletonSequenceOrdinary S T B n).obj (P.X i)))) ∧ CochainComplex.IsKFlatIndependentCoefficients (R := systemSequenceRing D) ((A.model.E.mapHomologicalComplex (.up ℤ)).obj (((singletonSequenceOrdinary S T B n).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ i : ℤ, IsFlatOnSite (R := systemSequenceRing D) (A.model.E.obj ((singletonSequenceOrdinary S T B n).obj (P.X i)))) ∧ CochainComplex.IsKFlatIndependentCoefficients (R := systemSequenceRing D) (((singletonSequenceOrdinary S T D n).mapHomologicalComplex (.up ℤ)).obj ((((S (a.app (op n))).model.E).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ i : ℤ, IsFlatOnSite (R := systemSequenceRing D) ((singletonSequenceOrdinary S T D n).obj ((S (a.app (op n))).model.E.obj (P.X i)))) ∧ IsIso (singletonScalarSourceComparison S T a A n P) ∧ IsIso (singletonScalarTargetComparison S T a n P) ∧ (singletonScalarDerivedIso S T a A n).hom.app (DerivedCategory.Q.obj P) ≫ singletonScalarTargetComparison S T a n P = singletonScalarSourceComparison S T a A n P ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (singletonScalarOrdinaryIso S T a A n) (.up ℤ)).hom.app P)) ∧ (∀ (n : ℕ) (P : systemLevel B n) (j : ℕ) (h : j ≤ n) (U : Cᵒᵖ) (b : (B.obj (op j)).obj.obj U) (c : (D.obj (op j)).obj.obj U) (x : P.val.obj U), ((singletonScalarOrdinaryIso S T a A n).hom.app P).val.app (op (j, U.unop)) (systemModelTmul A.model ((singletonSequenceOrdinary S T B n).obj P) (op (j, U.unop)) c ((systemSingleLevelBelow S B n P h).inv.val.app U (systemModelTmul (S (B.map (homOfLE h).op)).model P U b x))) = (systemSingleLevelBelow S D n ((S (a.app (op n))).model.E.obj P) h).inv.val.app U (systemModelTmul (S (D.map (homOfLE h).op)).model ((S (a.app (op n))).model.E.obj P) U ((a.app (op j)).hom.app U b * c) (systemModelTmul (S (a.app (op n))).model P U 1 x))) ∧ (∀ (n : ℕ) (P : systemLevel B n) (j : ℕ), n < j → IsZero ((systemSequenceEvaluation D j).obj (A.model.E.obj ((singletonSequenceOrdinary S T B n).obj P))) ∧ IsZero ((systemSequenceEvaluation D j).obj ((singletonSequenceOrdinary S T D n).obj ((S (a.app (op n))).model.E.obj P))) ∧ (systemSequenceEvaluation D j).map ((singletonScalarOrdinaryIso S T a A n).hom.app P) = 0) ∧ (∀ (n m : ℕ) (h : n ≤ m) (P : DerivedCategory (systemLevel B m)), A.model.T.map (singletonLowerMap S T B h P) ≫ (singletonScalarDerivedIso S T a A m).hom.app P = (singletonScalarDerivedIso S T a A n).hom.app ((systemDerivedTensor S B h).obj P) ≫ (singletonSequenceDerived S T D n).map ((singletonScalarSquare S a n m h).hom.app P) ≫ singletonLowerMap S T D h ((S (a.app (op m))).model.T.obj P))",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The unchanged theorem is assembled from three strictly smaller intermediate statements. The pre-existing fixed constructions are publicly reexported from SystemSingletonScalarBasic, attached to def-pur-system-singleton-scalar-comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c66c727a9",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt_deps, the scalar-model, tensor-coherence, singleton and evaluation declarations, the module and report.md. d_n is leftAdjointUniq of the two specified composites after the canonical identity-on-sections square; conjunct 1 is the Hom-transpose identity in the right direction. Whole-site K-flat/flat-term clauses (one extra, true), IsIso of both representative comparisons, and d_n matching the localized ordinary system natural iso. The j<=n pure-tensor formula c⊗(b⊗x)↦a_j(b)c⊗(1⊗x) uses the recorded systemModelTmul/systemSingleLevelBelow and is checked true; j=n is the multiplication identity; j>n gives zero objects and a zero map. The lower-singleton square uses the canonical systemSingleDerivedBelow transpose and systemScalarModelDerivedComposition. SystemScalarModel is pinned (actual sheafified E, normalized unit and transpose). No extra hypotheses or universe restrictions. Edge cases n=0, j=n, j>n, m=n, non-flat maps and empty site covered. Statement verbatim, declarations list matches, docstrings carry the 9 steps, proof_dep imports present, only node change is the item lean field, no duplicate in live Sheaf. No compile (no file changed). Advisories: decls owned by non-stmt_dep nodes (ordinary-single-extension, single-derived-evaluation, scalar-coherence, scalar-model, level-left-extension-basic); two additivity instance aliases."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8be55",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T102348-L-345827",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical); SystemSingletonScalarBasic vs the clone item's 18 constructions (verbatim except blueprint tags); 3 new sorry statements vs their nodes and library normalization lemmas; 3 direct importers compiled against delivered modules (all OK); axioms of singletonScalarExtension"
+ }
+}

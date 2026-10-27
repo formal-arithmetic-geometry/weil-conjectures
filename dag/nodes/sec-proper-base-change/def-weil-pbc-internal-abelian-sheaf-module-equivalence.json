@@ -23,13 +23,18 @@
    "text": "Lift the monoidal sheafification adjunction to module objects. Its underlying unit is the ordinary sheafification unit, invertible when the underlying presheaf already is a sheaf. Full faithfulness follows by tensor-sheafification hom extensionality. This proves essential surjectivity on sectionwise module sheaves and yields the displayed equivalence.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Retain the original equivalence construction as sectionModuleEquivalenceCore, and store the same equivalence record with its functor field explicitly equal to sectionModuleFunctor. All other fields are copied from the original record. The entire resulting equivalence, including its inverse and both natural isomorphisms, is definitionally equal to the original one. This avoids expanding the full fully-faithful and essentially-surjective construction when projecting the forward functor.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 00YV, algebraic structures in a ringed topos"
+  "place": "Stacks Tag 00YV; retain the original equivalence construction and expose the same forward functor by elementary structure update, preserving the complete record definitionally."
  },
  "mathlib_searches": [
   {
@@ -90,7 +95,11 @@
   "statement": "def sectionModuleEquivalence\n    (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R] :\n    Mod (Sheaf J AddCommGrpCat.{u}) R ≌\n      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (sectionRingSheaf J R))",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-16"
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence",
+   "CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalenceCore"
+  ]
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -103,14 +112,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "X-7fe12",
-  "group": "G2",
+  "reviewer": "C-6a0bc",
+  "group": "D8",
   "result": "pass",
-  "landing": "20261016T040116-L-2417209",
+  "landing": "20261026T102357-L-347171",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+  "note": "independent cc review: delivered SectionOplaxTotalComparison proof + 3 unclaimed adapted modules vs clone 9d7fa027 and DAG nodes lem-pd-section-oplax-total-comparison / def-pd-section-total-oplax-comparison-data / def-weil-pbc-internal-abelian-sheaf-module-equivalence; 9 direct importers compiled OK against delivered sandbox"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

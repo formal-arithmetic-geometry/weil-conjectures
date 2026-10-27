@@ -1,0 +1,96 @@
+{
+ "id": "lem-pur-clopen-product-adjoints",
+ "kind": "statement",
+ "title": "Two-sided insertion adjunctions under a finite product equivalence",
+ "statement": "Let C be a preadditive category with finite biproducts, J a finite type, and D_i preadditive categories with zero objects. Equip the product category with a preadditive structure. Let E : C ≌ ∏_i D_i be an equivalence with additive inverse. If e_i : D_i → C is left adjoint to the i-th component of E, then that component is also left adjoint to e_i. These adjunctions can be chosen so that the first units are invertible, their composites with the second counits are identities, all off-diagonal restrictions of e_i are zero, and the map from K to the biproduct of e_i(E_i K) formed by the second units is invertible. This includes J empty.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TS, finite clopen gluing; the elementary finite-product Hom and biproduct calculation in step 4 of lem-pur-clopen-common-compact-support."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "In the product category define s_i by the identity in coordinate i and a zero object elsewhere. A map s_i M → N, or N → s_i M, is uniquely determined by its i-th component. These identifications are natural, giving s_i ⊣ ev_i ⊣ s_i with mutually inverse diagonal unit and counit. The coordinate projections and inclusions form a finite biproduct bicone with identity vertex. Transport both adjunctions and the bicone through E and its inverse. Uniqueness of left adjoints identifies s_i composed with E inverse with the given e_i. Transport the right adjunction through this isomorphism. The unit comparison for uniqueness of left adjoints proves the diagonal normalization; the transported bicone has projection maps exactly the right-adjunction units, so the displayed biproduct lift is an isomorphism. For the empty family the product category is the zero category and the same empty bicone argument applies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "Y3 stage 3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TS, elementary product-category calculation from the original node step 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite product of additive categories coordinate insertion is both adjoints to evaluation and gives a biproduct decomposition",
+   "results": "HasBiproduct.of_hasProduct, biproduct.total and AddCommGrpCat.biproductIsoPi give generic finite biproduct facts, but do not transport both adjunctions through an equivalence.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\" \"pi\"",
+   "results": "Query rejected by Loogle parser; local inspection of CategoryTheory.Pi.Basic found no coordinate insertion adjunction.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|Adjunction|leftAdjoint|rightAdjoint|single in CategoryTheory/Pi",
+   "results": "No coordinate insertion adjunction in Pi.Basic. Existing Sheaf finite-clopen calculus gives a bicone but no normalized two-sided adjunction to a specified left adjoint.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClopenCommonCompactSupport",
+  "date": "2026-10-26",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-common-compact-support",
+   "place": "Steps 4-5: two-sided normalized zero insertion and finite biproduct decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenProductAdjoints",
+  "file": "lean/Sheaf/Paper/ClopenProductAdjoints.lean",
+  "declaration": "clopenProductAdjoints",
+  "statement": "theorem clopenProductAdjoints {C : Type*} [Category C] [Preadditive C]\n    [HasFiniteBiproducts C] {J : Type*} [Finite J]\n    (D : J → Type*) [∀ i, Category (D i)] [∀ i, Preadditive (D i)]\n    [∀ i, HasZeroObject (D i)]\n    [Preadditive (∀ i, D i)]\n    (E : C ≌ ∀ i, D i) [E.inverse.Additive]\n    (e : ∀ i, D i ⥤ C)\n    (a : ∀ i, e i ⊣ E.functor ⋙ Pi.eval D i) :\n    ∃ b : ∀ i, E.functor ⋙ Pi.eval D i ⊣ e i,\n      (∀ i, IsIso (a i).unit) ∧\n      (∀ i M, (a i).unit.app M ≫ (b i).counit.app M = 𝟙 M) ∧\n      (∀ i k, i ≠ k → ∀ M, IsZero (((E.functor ⋙ Pi.eval D k).obj ((e i).obj M)))) ∧\n      ∀ K, IsIso (biproduct.lift (fun i ↦ (b i).unit.app K))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T203758-L-2854697",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T203758-L-2854697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

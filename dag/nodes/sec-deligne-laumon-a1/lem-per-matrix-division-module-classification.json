@@ -1,0 +1,211 @@
+{
+ "id": "lem-per-matrix-division-module-classification",
+ "kind": "statement",
+ "title": "Finite modules over a matrix algebra over a division algebra",
+ "statement": "Let $K$ be a field [def-weil-field], let $D$ be a finite-dimensional division $K$-algebra, and let $d\\geq1$. Here division means a nonzero unital ring in which every nonzero element is invertible, with a unital homomorphism $K\\to Z(D)$. Put $B=M_d(D)$ [def-weil-matrix], with row-column multiplication, and let $S=D^d$ be its column module. A left $B$-module is understood to have the induced compatible $K$-vector-space structure. Then $S$ is simple [def-weil-pbc-simple-module], every finite-dimensional left $B$-module is isomorphic to $S^{\\oplus n}$ for a unique integer $n\\geq0$, and every simple left $B$-module is isomorphic to $S$. Finally, right multiplication in every coordinate induces a $K$-algebra isomorphism $$D^{\\mathrm{op}}\\xrightarrow{\\sim}\\operatorname{End}_B(S),\\qquad a^{\\mathrm{op}}\\longmapsto((v_j)_j\\mapsto(v_ja)_j).$$ Here $D^{\\mathrm{op}}$ has the same addition as $D$ and reversed multiplication; $\\operatorname{End}_B(S)$ consists of additive $B$-linear maps with composition as multiplication.",
+ "source": {
+  "document": "literature/stacks-project/brauer.tex",
+  "place": "Tag 074E, lemma-simple-module-unique, parts (1)--(4), with Tag 074D, lemma-matrix-algebras (matrix-module equivalence)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-matrix",
+  "def-weil-pbc-simple-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $E_{ij}(a)$ for the matrix with entry $a$ in position $(i,j)$ and zero elsewhere, and $E_{ij}=E_{ij}(1)$. Let $u_i\\in S$ be the standard columns and $e=E_{11}$. Since $d\\geq1$ and $D\\ne0$, $u_1\\ne0$. Given a nonzero $v\\in S$, choose $j$ with $v_j\\ne0$. For any $w\\in S$, the matrix with entries $A_{ij}=w_iv_j^{-1}$ in column $j$ and all other columns zero satisfies $Av=w$. Thus a submodule containing $v$ contains every $w$. By [def-weil-pbc-simple-module], $S$ is simple.",
+   "uses": [
+    "def-weil-matrix",
+    "def-weil-pbc-simple-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/brauer.tex",
+    "place": "Tag 074E, lemma-simple-module-unique (4), explicit column simplicity calculation."
+   }
+  },
+  {
+   "text": "Let $N$ be finite-dimensional over $K$ and set $V=eN$. The left $D$-action on $V$ is $a\\cdot v=(aI_d)v=E_{11}(a)v$, the equality following from $ev=v$. For a finite $K$-basis $(x_t)$ of $N$, the vectors $(ex_t)$ span $V$ over $K$, since $e(\\sum_t c_tx_t)=\\sum_t c_t ex_t$. They therefore also span over $D$: the given central structural map $K\\to D$ realizes each $K$-coefficient as a $D$-coefficient. Apply [lem-per-division-ring-finite-basis] to obtain a finite left $D$-basis $b_1,\\ldots,b_n$ of $V$. This includes $N=0$, for which $n=0$.",
+   "uses": [
+    "def-weil-matrix",
+    "lem-per-division-ring-finite-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/brauer.tex",
+    "place": "Tag 074E, lemma-simple-module-unique, proof of (2), finite free module over the skew field."
+   }
+  },
+  {
+   "text": "Apply [lem-per-matrix-corner-reconstruction] with $R=D$ to get $N\\cong V^d$. If $v_i=\\sum_{t=1}^n a_{it}b_t$, send $(v_i)_{i=1}^d$ to the $n$ columns $((a_{it})_{i=1}^d)_{t=1}^n$. Uniqueness of basis coordinates gives an additive bijection $V^d\\cong S^{\\oplus n}$. It is $B$-linear because the coefficient of $b_t$ in $\\sum_j A_{ij}v_j$ is $\\sum_j A_{ij}a_{jt}$, precisely the $i$th coordinate of $A$ applied to column $t$. This proves existence of the required decomposition.",
+   "uses": [
+    "lem-per-matrix-corner-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/brauer.tex",
+    "place": "Tags 074D (lemma-matrix-algebras (1)) and 074E (lemma-simple-module-unique (2)), writing the free-coordinate identification."
+   }
+  },
+  {
+   "text": "If $S^{\\oplus n}\\cong S^{\\oplus m}$ as $B$-modules, restrict the isomorphism and its inverse to the image of $e$. Both commute with $e$ and with $aI_d$ for $a\\in D$, so this gives a left $D$-linear isomorphism $D^n\\cong D^m$, by taking the first entry in each column. Transporting the standard basis of $D^n$ along this map gives a basis of $D^m$ with $n$ elements. The uniqueness assertion of [lem-per-division-ring-finite-basis], compared with the standard $m$-element basis, gives $n=m$.",
+   "uses": [
+    "lem-per-division-ring-finite-basis",
+    "def-weil-matrix"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/brauer.tex",
+    "place": "Tag 074E, lemma-simple-module-unique (3), uniqueness of free rank after passage to the corner."
+   }
+  },
+  {
+   "text": "Let $T$ be any simple left $B$-module, without a finiteness assumption. For $0\\ne x\\in T$, $Bx$ is a nonzero submodule, hence equals $T$ by [def-weil-pbc-simple-module]. Fix a finite $K$-basis $c_1,\\ldots,c_h$ of $D$. The finitely many vectors $E_{ij}(c_t)x$ span $T$ over $K$, since the matrices $E_{ij}(c_t)$ span $B$ over $K$. Thus the preceding decomposition applies: $T\\cong S^{\\oplus n}$. Nonzeroness forces $n>0$, and if $n>1$ one summand is a nonzero proper submodule. Consequently $n=1$ and $T\\cong S$.",
+   "uses": [
+    "def-weil-matrix",
+    "def-weil-pbc-simple-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/brauer.tex",
+    "place": "Tag 074E, lemma-simple-module-unique (1),(4); finite generation of a simple module made explicit."
+   }
+  },
+  {
+   "text": "For $a\\in D$, coordinatewise right multiplication $R_a(v)=va$ is additive and $B$-linear: $(Av)a=A(va)$ by associativity and distributivity. Conversely, if $f\\in\\operatorname{End}_B(S)$, then $f(u_1)=ef(u_1)=u_1a$ for a unique $a\\in D$. Since $v=\\sum_i E_{i1}(v_i)u_1$, linearity gives $f(v)=\\sum_i E_{i1}(v_i)u_1a=va$. Hence $a\\mapsto R_a$ is bijective, with $a$ recovered as the first entry of $f(u_1)$. It preserves addition and identity, and $R_a\\circ R_b=R_{ba}$; this is precisely multiplication in $D^{\\mathrm{op}}$. For $c\\in K$, centrality gives $R_{c1_D}(v)=cv$, so the bijection preserves the $K$-algebra structure. This proves the specified isomorphism.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/brauer.tex",
+    "place": "Tag 074E, lemma-simple-module-unique (4); explicit opposite endomorphism algebra calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-matrix",
+  "def-weil-pbc-simple-module",
+  "lem-per-division-ring-finite-basis",
+  "lem-per-matrix-corner-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/brauer.tex",
+  "place": "Tags 074D (lemma-matrix-algebras (1)) and 074E (lemma-simple-module-unique (1)--(4)); expanded left-module matrix-unit and coordinate calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional left module over the matrix algebra M n D of a division algebra D is a unique direct sum of copies of the column module D n whose endomorphism algebra is D opposite",
+   "results": "{\"t\": \"2026-10-24T01:10:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite dimensional left module over the matrix algebra M n D of a division algebra D is a unique direct sum of copies of the column module D n whose endomorphism algebra is D opposite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_divisionRing\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"IsSemisimpleRing.exists_ringEquiv_pi_matrix_end_mulOpposite\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_end_mulOpposite\", \"IsMoritaEquivalent.matrix\", \"IsSimpleRing.exists_algEquiv_matrix_end_mulOpposite\"], \"digest\": \"8507dc05c28a5e84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has matrix Morita equivalence (Matrix.lean:187--194) and abstract semisimple decompositions, but the specified column module, unique multiplicity and its explicit opposite endomorphism algebra are not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional modules over the matrix algebra of a division ring are direct sums of its unique simple column module",
+   "results": "{\"t\": \"2026-10-24T01:13:11Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional modules over the matrix algebra of a division ring are direct sums of its unique simple column module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"IsSemisimpleModule\", \"IsIsotypicOfType.linearEquiv_fun\", \"IsSemisimpleRing.instMatrix\", \"isSemisimpleRing_iff_pi_matrix_divisionRing\", \"IsSemisimpleRing.isSemisimpleModule\"], \"digest\": \"2e84388db50f86db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has matrix Morita equivalence (Matrix.lean:187--194) and abstract semisimple decompositions, but the specified column module, unique multiplicity and its explicit opposite endomorphism algebra are not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classification of finite modules over a simple Artinian algebra Mat n D with endomorphism ring D opposite and unique multiplicities",
+   "results": "{\"t\": \"2026-10-24T01:13:13Z\", \"tool\": \"leanfinder\", \"query\": \"Classification of finite modules over a simple Artinian algebra Mat n D with endomorphism ring D opposite and unique multiplicities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_divisionRing\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"IsSimpleRing.exists_algEquiv_matrix_divisionRing_finite\", \"IsSimpleRing.isIsotypic\", \"IsSimpleRing.exists_algEquiv_matrix_end_mulOpposite\", \"IsSemisimpleModule.exists_end_ringEquiv\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\"], \"digest\": \"8f398bddc1f23089\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has matrix Morita equivalence (Matrix.lean:187--194) and abstract semisimple decompositions, but the specified column module, unique multiplicity and its explicit opposite endomorphism algebra are not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsMoritaEquivalent.matrix",
+   "results": "{\"t\": \"2026-10-24T01:13:14Z\", \"tool\": \"loogle\", \"query\": \"IsMoritaEquivalent.matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsMoritaEquivalent.matrix\"], \"digest\": \"947a931c0e377ceb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has matrix Morita equivalence (Matrix.lean:187--194) and abstract semisimple decompositions, but the specified column module, unique multiplicity and its explicit opposite endomorphism algebra are not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "matrixEquivalence|IsSimpleModule.*(matrix|Matrix)|end.*(matrix|Matrix)",
+   "results": "{\"t\": \"2026-10-24T01:13:14Z\", \"tool\": \"grep\", \"query\": \"matrixEquivalence|IsSimpleModule.*(matrix|Matrix)|end.*(matrix|Matrix)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Nilpotent.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\"], \"digest\": \"943d1ef2f76fda45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has matrix Morita equivalence (Matrix.lean:187--194) and abstract semisimple decompositions, but the specified column module, unique multiplicity and its explicit opposite endomorphism algebra are not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional modules over the matrix algebra of a division algebra are direct sums of copies of the column module, with endomorphisms right multiplication",
+   "results": "{\"t\": \"2026-10-24T01:58:55Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional modules over the matrix algebra of a division algebra are direct sums of copies of the column module, with endomorphisms right multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_divisionRing\", \"MatrixModCat.mem_toModuleCatObj\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\", \"IsMoritaEquivalent.matrix\", \"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end\", \"toModuleCatFromModuleCatLinearEquiv\"], \"digest\": \"ddb23f830c28a31f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: explicit matrix-corner reconstruction is in Mathlib, but the column simplicity, coordinate rearrangement, multiplicity argument, and specified opposite endomorphism algebra still need the written calculations. Wedderburn-Artin statements concern abstract simple modules and do not identify this column representation by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional modules over a matrix algebra over a division algebra have unique simple column module with endomorphism algebra opposite",
+   "results": "{\"t\": \"2026-10-24T01:59:56Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional modules over a matrix algebra over a division algebra have unique simple column module with endomorphism algebra opposite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end\", \"MulOpposite.instFiniteDimensional\", \"IsSimpleRing.exists_ringEquiv_matrix_end_mulOpposite\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleModule.exists_end_ringEquiv\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_end_mulOpposite\", \"matrixAlgEquivEndVecMulOpposite\", \"IsSemisimpleModule.exists_end_algEquiv\"], \"digest\": \"0ed13d0b785416bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: explicit matrix-corner reconstruction is in Mathlib, but the column simplicity, coordinate rearrangement, multiplicity argument, and specified opposite endomorphism algebra still need the written calculations. Wedderburn-Artin statements concern abstract simple modules and do not identify this column representation by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSimpleModule, Matrix",
+   "results": "{\"t\": \"2026-10-24T01:58:50Z\", \"tool\": \"loogle\", \"query\": \"IsSimpleModule, Matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsSemisimpleModule.exists_end_ringEquiv_pi_matrix_end\", \"IsSimpleRing.exists_ringEquiv_matrix_end_mulOpposite\", \"IsSemisimpleRing.exists_ringEquiv_pi_matrix_end_mulOpposite\", \"IsSimpleRing.exists_algEquiv_matrix_end_mulOpposite\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_end_mulOpposite\"], \"digest\": \"72d0e0799fa9d961\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: explicit matrix-corner reconstruction is in Mathlib, but the column simplicity, coordinate rearrangement, multiplicity argument, and specified opposite endomorphism algebra still need the written calculations. Wedderburn-Artin statements concern abstract simple modules and do not identify this column representation by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lem-per-matrix-division-module-classification|IsSimpleModule|mulOpposite|opposite",
+   "results": "{\"t\": \"2026-10-24T01:58:49Z\", \"tool\": \"grep\", \"query\": \"lem-per-matrix-division-module-classification|IsSimpleModule|mulOpposite|opposite\", \"sub\": \"RingTheory/Morita\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: explicit matrix-corner reconstruction is in Mathlib, but the column simplicity, coordinate rearrangement, multiplicity argument, and specified opposite endomorphism algebra still need the written calculations. Wedderburn-Artin statements concern abstract simple modules and do not identify this column representation by one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-semisimple-scalar-extension-kzero-criterion",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, regular finite-torsion local model via the tame equivariant modification in XVI 3.7; specifically Expose X Proposition 1.2, second assertion and its proof, printed p.138, equations (4)--(5), followed by the localization of Lambda in 1.3, printed pp.139--140. Specifically: Gabber preparation second assertion: integral representation lifting before equation (5). Auxiliary field-splitting input: Agent auxiliary algebra lemma for the characteristic-zero field-splitting input; proof rationale in report.md. The passage cites Serre but does not state this criterion. WANTED: Serre, Linear Representations of Finite Groups, Part III, fields of definition and Schur indices. No Stacks tag for this exact criterion was found. Supporting algebra input: Matrix-module classification used in the representation-class argument preceding ILO X Proposition 1.2, equation (5); Tag 074E (1)--(4).",
+   "via": [
+    "lem-per-semisimple-scalar-extension-kzero-criterion",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-matrix-division-module-classification",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 074D/074E in left-module form. Two new Mathlib leaves isolate general matrix-corner reconstruction and finite bases with unique rank over division rings. Proved simplicity and the explicit opposite endomorphism algebra by matrix units; decomposed finite modules by arranging basis coordinates into columns; checked arbitrary simple modules are finite before applying the decomposition. No appeal to a semisimple classification theorem.",
+  "blueprint": "Auxiliary algebra input in the existing ancestry of lem-per-artin-gabber-affine-curve, proof Step 3: integral representation lifting before ILO X Proposition 1.2 equation (5), through lem-per-semisimple-scalar-extension-kzero-criterion Step 1. This split expands its matrix-module input without changing the unit or chapter route. Latest blueprint ancestor read at literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-fed3eb548",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-fed3eb548 (reviewer sub-agent of L); spot-checked: Ordinary first split: the base item was unsplit with the same statement and there is no repair note. Read against Stacks brauer.tex 074D (lemma-matrix-algebras, l.260) and 074E (lemma-simple-module-unique, l.281); the left-module form gives End_B(D^d)=D^op, consistent with Stacks. New leaf lem-per-matrix-corner-reconstruction matches Mathlib/RingTheory/Morita/Matrix.lean:144-173 toModuleCatFromModuleCatLinearEquiv exactly (toFun single j i 1 = E_{1i}, invFun sum single i j 1 = sum E_{i1}, R-structure via Matrix.scalar = rI_d, j=0 needs d>=1). New leaf lem-per-division-ring-finite-basis takes one declaration per clause: Module.finBasis (Free.lean:334), Free.of_divisionRing (VectorSpace.lean:156) and finrank_eq_card_basis (StrongRankCondition.lean:451); it holds over any division ring, including V=0. Duplicate search (rg -L for 074D/074E, division ring/skew field, Morita/corner, column module) finds only commutative-field vector-space nodes; no blueprint statement duplicate. Steps: 1 uses v_j^{-1}v_j in the right order; 2 gets finite D-generation from the central K-structure; 3 is B-linear because the coefficient of b_t is sum_j A_ij a_jt; 4 restricts to the e-corner, giving D^n = D^m and n=m by the uniqueness clause; 5 shows any simple T is finite over K via E_ij(c_t)x, so n=1; 6 gives f(v)=va and R_a R_b=R_ba (D^op), with central K. proof_deps is the union of uses; no SGA; no tool_uses; statement unchanged. No changes made."
+ }
+}

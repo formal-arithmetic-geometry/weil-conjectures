@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-pure-transcendental-relatively-algebraically-closed",
+ "kind": "statement",
+ "title": "The base field is relatively algebraically closed in a finite purely transcendental extension",
+ "statement": "Let $L/k$ be a field extension [def-pc-field-extension]. Suppose that for a finite integer $r\\geq 0$ there is a $k$-isomorphism $L\\cong k(u_1,\\ldots,u_r)$, where $u_1,\\ldots,u_r$ are algebraically independent over $k$ [def-kun-transcendence-degree] and the right hand side is the fraction field of $k[u_1,\\ldots,u_r]$; thus $L/k$ is purely transcendental [def-trf-purely-transcendental-extension]. Then $k$ is algebraically closed in $L$: for every $\\alpha\\in L$ satisfying a nonzero polynomial with coefficients in $k$, there exists $a\\in k$ whose image under the structure embedding $k\\hookrightarrow L$ is $\\alpha$. This includes $r=0$, when $L\\cong k$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057K, lemma-local-local-structure-finite-type, proof paragraph beginning 'Let $T$ be the connected component': the field-theoretic input implicit in applying the connected-point criterion to the purely transcendental residue field. The coprime-polynomial argument is retained in report.md for the future worker."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree",
+  "def-trf-purely-transcendental-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given k-algebra equivalence e from L to F = Frac(A), with A = k[U_1,...,U_r] [def-weil-pbc-mv-polynomial-ring]. The image x = e(alpha) is integral over k: over a field, algebraicity implies integrality (Mathlib IsAlgebraic.isIntegral), and integral relations are preserved by algebra homomorphisms. The scalar assertion transports back by injectivity and the scalar-commutation equation of e.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, implicit constant-field input in the connected-component paragraph; implemented with Mathlib integral-element API."
+   }
+  },
+  {
+   "text": "Prove A is a normal domain [def-weil-pbc-normal-ring] by induction on r. For r = 0, MvPolynomial.isEmptyRingEquiv identifies A with k. For r+1, MvPolynomial.finSuccEquiv identifies A with the one-variable polynomial ring [def-weil-polynomial-ring] over the r-variable ring. Apply [lem-weil-pbc-polynomial-ring-normal-domain] to the induction hypothesis and transport integral closedness through this ring equivalence (IsIntegrallyClosed.of_equiv). Domains are supplied by the polynomial-ring instances.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A, lemma-polynomial-domain-normal; finite induction implemented using MvPolynomial.isEmptyRingEquiv and MvPolynomial.finSuccEquiv."
+   }
+  },
+  {
+   "text": "The monic relation for x over k is also a monic relation over A, by mapping its coefficients along k to A (IsIntegral.tower_top). Integral closedness [def-weil-pbc-normal-ring] therefore gives p in A with image x in F. Since A to F is injective, the same monic relation implies p is integral over k (isIntegral_algebraMap_iff). If p = 0, alpha is the image of zero.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, implicit constant-field input in the connected-component paragraph; implemented with Mathlib integral-element API."
+   }
+  },
+  {
+   "text": "If p is nonzero, the Mathlib theorem IsIntegral.isUnit makes p a unit of A: a nonzero element integral over a field is invertible in the domain containing it. Thus p divides 1 = C(1). Apply [lem-trf-mvpolynomial-divisor-nonzero-constant] with a = 1 to obtain p = C(b) for some b in k. The scalar-tower identity gives x = algebraMap(k,F)(b), and the k-algebra equivalence transports this equality to alpha = algebraMap(k,L)(b). This uses the existing divisor lemma with the simpler nonzero constant 1 rather than extracting a constant term explicitly.",
+   "uses": [
+    "lem-trf-mvpolynomial-divisor-nonzero-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean",
+    "place": "MvPolynomial.dvd_C_iff_exists, lines 93-106, applied to the unit from IsIntegral.isUnit (Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean:37-42)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-trf-mvpolynomial-divisor-nonzero-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057K implicit field-theoretic input, retaining the existing normal-polynomial-ring and constant-divisor route. R4 implements the normalization and nonzero-constant argument using IsAlgebraic.isIntegral and IsIntegral.isUnit; the finite normality induction is proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A field is relatively algebraically closed in a purely transcendental extension in finitely many variables",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.isAlgClosure_of_transcendence_basis\", \"IsTranscendenceBasis.isAlgebraic_field\", \"Transcendental.subalgebraAlgebraicClosure\", \"AlgebraicIndependent.algebraicClosure\", \"Transcendental.algebraicClosure\", \"AlgebraicClosure.isAlgebraic\", \"AlgebraicClosure.isAlgClosed\", \"IsAlgClosure.ofAlgebraic\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic/transcendence-basis and fraction-ring facts do not assert that algebraic rational functions in finitely many variables are constants"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosedIn\", \"FractionRing\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic/transcendence-basis and fraction-ring facts do not assert that algebraic rational functions in finitely many variables are constants"
+  },
+  {
+   "tool": "grep",
+   "query": "isAlgClosedIn|isAlgebraic.*(constant|algebraMap)|(constant|algebraMap).*isAlgebraic",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/Normal/Defs.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/IntermediateField/Algebraic.lean\", \"Mathlib/FieldTheory/AlgebraicClosure.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic/transcendence-basis and fraction-ring facts do not assert that algebraic rational functions in finitely many variables are constants"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic element in a multivariable rational function field is a constant",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a fraction field of a polynomial algebra over k algebraic over k belongs to k",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isAlgebraic_of_isFractionRing\", \"IsFractionRing.isAlgebraic_iff'\", \"IntermediateField.algebraAdjoinAdjoin.instIsFractionRingSubtypeMemSubalgebraAdjoinAdjoin\", \"IsFractionRing.comap_isAlgebraic_iff\", \"integralClosure.isFractionRing_of_algebraic\", \"IsFractionRing.of_field\", \"IsIntegralClosure.isFractionRing_of_algebraic\", \"IsFractionRing.isAlgebraic_iff\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic/transcendence-basis and fraction-ring facts do not assert that algebraic rational functions in finitely many variables are constants"
+  },
+  {
+   "tool": "grep",
+   "query": "isAlgebraic|algebraicClosure|IsAlgClosedIn",
+   "results": "{\"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic/transcendence-basis and fraction-ring facts do not assert that algebraic rational functions in finitely many variables are constants"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicClosure|isAlgebraic.*iff|IsAlgClosedIn",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic/transcendence-basis and fraction-ring facts do not assert that algebraic rational functions in finitely many variables are constants"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicClosure|isAlgebraic|IsAlgClosedIn",
+   "results": "{\"t\": \"2026-10-23T09:24:56Z\", \"tool\": \"grep\", \"query\": \"algebraicClosure|isAlgebraic|IsAlgClosedIn\", \"sub\": \"FieldTheory/AlgebraicIndependent\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic rational function in finitely many independent variables over a field is constant",
+   "results": "{\"t\": \"2026-10-23T09:24:56Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic rational function in finitely many independent variables over a field is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RatFunc.instIsFractionRingPolynomial\", \"RatFunc\", \"RatFunc.instSubsingleton\", \"RatFunc.instNontrivial\", \"RatFunc.transcendental_X\", \"RatFunc.num_C\", \"RatFunc.noConfusionType\", \"RatFunc.algebraMap_C\"], \"digest\": \"b2a8833f3941ad87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicIndependent, IsAlgebraic",
+   "results": "{\"t\": \"2026-10-23T09:24:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicIndependent, IsAlgebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field is algebraically closed in the fraction field of a multivariate polynomial ring over that field",
+   "results": "{\"t\": \"2026-10-23T09:24:57Z\", \"tool\": \"leanfinder\", \"query\": \"A field is algebraically closed in the fraction field of a multivariate polynomial ring over that field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure.isAlgClosed\", \"IsAlgClosed.instIsAlgClosure\", \"IsAlgClosed\", \"AlgebraicClosure.instIsAlgClosure\", \"IsAlgClosure.isAlgClosed\", \"AlgebraicClosure.instField\", \"AlgebraicClosure\", \"AlgebraicClosure.isAlgebraic\"], \"digest\": \"2dc7f87986114486\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonconstant rational function is transcendental over its coefficient field",
+   "results": "{\"t\": \"2026-10-23T09:25:39Z\", \"tool\": \"leanfinder\", \"query\": \"A nonconstant rational function is transcendental over its coefficient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RatFunc.transcendental_X\", \"RatFunc.transcendental\", \"Polynomial.transcendental\", \"RatFunc.instNontrivial\", \"RatFunc.X_ne_zero\", \"Polynomial.transcendental_X\", \"Transcendental.aeval\", \"RatFunc.instCharZero\"], \"digest\": \"c2d610d2a870854b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "grep",
+   "query": "transcendental|isAlgebraic|algebraicClosure",
+   "results": "{\"t\": \"2026-10-23T09:26:10Z\", \"tool\": \"grep\", \"query\": \"transcendental|isAlgebraic|algebraicClosure\", \"sub\": \"FieldTheory/RatFunc\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\"], \"digest\": \"359d5b68f9a58e40\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "grep",
+   "query": "totalDegree_(mul|pow|C)|totalDegree_eq_zero|eq_C_of|isIntegral",
+   "results": "{\"t\": \"2026-10-23T09:26:10Z\", \"tool\": \"grep\", \"query\": \"totalDegree_(mul|pow|C)|totalDegree_eq_zero|eq_C_of|isIntegral\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/Nilpotent.lean\", \"Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean\", \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"Mathlib/Algebra/MvPolynomial/Degrees.lean\"], \"digest\": \"198c6b7fbcb8e7ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral.*(iff|degree)|IsIntegral.*(iff|degree)|isAlgebraic.*iff|transcendental",
+   "results": "{\"t\": \"2026-10-23T09:26:47Z\", \"tool\": \"grep\", \"query\": \"isIntegral.*(iff|degree)|IsIntegral.*(iff|degree)|isAlgebraic.*iff|transcendental\", \"sub\": \"RingTheory/Polynomial\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\"], \"digest\": \"ecb2fa4d108368ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, IsIntegral",
+   "results": "{\"t\": \"2026-10-23T09:26:47Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPolynomial.isIntegral_iff_isIntegral_coeff\"], \"digest\": \"eed9da3548a8df13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial over a field is integral over the field if and only if it is constant",
+   "results": "{\"t\": \"2026-10-23T09:26:54Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial over a field is integral over the field if and only if it is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.isIntegral_iff_isIntegral_coeff\", \"instIsIntegralPolynomial\", \"MvPolynomial.isIntegral_iff_isIntegral_coeff\", \"IsIntegral.coeff\", \"IsIntegral.coeff_of_isFractionRing\", \"isIntegral_one\", \"instIsIntegrallyClosedPolynomialOfIsDomain\", \"IsIntegral.coeff_of_exists_smul_mem_lifts\"], \"digest\": \"7b13a7fedc56cdd8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem transcendental|lemma transcendental",
+   "results": "{\"t\": \"2026-10-23T09:31:06Z\", \"tool\": \"grep\", \"query\": \"theorem transcendental|lemma transcendental\", \"sub\": \"FieldTheory/RatFunc\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\"], \"digest\": \"b172db9a3c73568d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the finite multivariable field assertion: RatFunc.transcendental_of_ne_C covers one variable only; integral-coefficient and algebraic-closure results are different statements. See report for source readings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-component-pure-transcendental",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 057K local-structure ingredient in the inherited 057S flatification route of lem-trf-local-term-locality: the algebraic-closedness hypothesis for the 04KV application at the purely transcendental point; returned item proof step 2, coprime-polynomial subargument.",
+   "via": [
+    "lem-trf-smooth-component-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pure-transcendental-relatively-algebraically-closed",
+  "worker": "stage1",
+  "summary": "Unchanged statement; expanded the implicit field argument using finite induction with the existing polynomial normal-domain Mathlib leaf and one new exact Mathlib leaf for divisors of nonzero constant multivariate polynomials. Explicit polynomial normalization avoids a hidden minimal-polynomial lemma. All cited statements read, verbatim citation evidence supplied, empty-variable/zero-element and imperfect-field cases checked.",
+  "blueprint": "The inherited 057K/057S field-theoretic ingredient in the local-term-locality normal-cone route, specifically the coprime-polynomial subargument extracted from lem-trf-smooth-component-pure-transcendental. Current latest blueprint local-term proof read; the constant-field argument is an auxiliary below that route, not a change of unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-2d0336531",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-2d0336531 (reviewer sub-agent of L); spot-checked: I read the item, its four steps and the one new leaf in full. Stacks 057K (more-morphisms.tex l.13432 ff.) uses this field fact without proving it, so proof_origin by agent is right. Step 1 is an elementary reduction to Frac(k[U_1..U_r]); algebraic independence is the same as injective evaluation, and the r=0 and α=0 cases are handled. Step 2 proves normality of the polynomial ring by an explicit induction using the one-variable Mathlib leaf lem-weil-pbc-polynomial-ring-normal-domain (Stacks 030A), plus the monomial-grouping isomorphism. Step 3 is elementary: a monic relation with c_0≠0, n≥1, and normality give h∈A over α. Step 4 gets h∣C(c_0) from injectivity of A→F and then applies the new leaf to get h=C(b). The new leaf is an exact match for MvPolynomial.dvd_C_iff_exists (NoZeroDivisors.lean:93, variables CommSemiring+NoZeroDivisors at l.33/39, a≠0). It is self-contained and statement-only. I tested it on J=∅, a=0 (excluded), ℤ/4 (1+2X, showing the domain hypothesis is needed) and ℤ. The rg -L duplicate search found no equivalent node; lem-zl-relative-algebraic-closure-polynomial-quotient-field and lem-zl-field-extension-algebraically-closed-geometric assume the property rather than prove it. proof_deps equal the union of uses, there is no cycle, no SGA source, the statement is unchanged and blueprint fields are present. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FinitePurelyTranscendentalConstants",
+  "declaration": "Algebra.exists_algebraMap_eq_of_isAlgebraic_of_finite_purelyTranscendental",
+  "file": "lean/Sheaf/FieldTheory/FinitePurelyTranscendentalConstants.lean",
+  "statement": "theorem exists_algebraMap_eq_of_isAlgebraic_of_finite_purelyTranscendental {k : Type u} {L : Type v} [Field k] [Field L] [Algebra k L] (htrans : ∃ r : ℕ, Nonempty (L ≃ₐ[k] FractionRing (MvPolynomial (Fin r) k))) {α : L} (hα : IsAlgebraic k α) : ∃ a : k, algebraMap k L a = α",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7de705ddb",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field/Algebra binders with independent universes; ∃ r : ℕ, Nonempty (L ≃ₐ[k] FractionRing (MvPolynomial (Fin r) k)) renders the finite k-isomorphism to Frac k[u_1..u_r]; IsAlgebraic k α; ∃ a, algebraMap k L a = α. The purely-transcendental clause is a remark and is linked to the stmt_dep def in the docstring. r=0, α=0, char p and imperfect or finite k are covered; no extra hypotheses. Node copy differs from side-live only in lean; lean record complete and statement verbatim; stmt_deps unchanged. No definitions; only proof is sorry; module and theorem docstrings carry source, blueprint id and the 4 proof steps; lines ≤100; autoImplicit off. Mathlib and project grep (MvRatFunc, FractionRing MvPolynomial, IsAlgClosedIn, name) found no duplicate or name clash. Not recompiled (no change); worker compile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T092445-L-3433997",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

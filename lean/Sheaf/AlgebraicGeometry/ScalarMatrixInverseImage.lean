@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import Sheaf.Paper.RegularExtensionComparison
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-!
 # Inverse image of finite scalar matrices

@@ -1,0 +1,438 @@
+{
+ "id": "lem-sfb-finite-dual-hopf-module",
+ "kind": "statement",
+ "title": "The finite linear dual is a Hopf module",
+ "statement": "Let $k$ be a field [def-weil-field]. A commutative Hopf $k$-algebra here means a unital commutative $k$-algebra $A$ with $k$-algebra maps $\\Delta_A:A\\to A\\otimes_k A$, $\\epsilon_A:A\\to k$, $S_A:A\\to A$ such that $(\\Delta_A\\otimes1)\\Delta_A=(1\\otimes\\Delta_A)\\Delta_A$, $(\\epsilon_A\\otimes1)\\Delta_A=(1\\otimes\\epsilon_A)\\Delta_A=1_A$, and $\\mu_A(S_A\\otimes1)\\Delta_A=\\mu_A(1\\otimes S_A)\\Delta_A=\\eta_A\\epsilon_A$, under the usual tensor unit and associativity identifications; $\\mu_A$ and $\\eta_A$ are multiplication and unit. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let $H$ be such a commutative Hopf $k$-algebra with a finite $k$-basis [def-weil-pbc-free-module]. Put $H^*=\\operatorname{Hom}_k(H,k)$, with pointwise vector operations, and use module tensors [def-weil-pbc-module-tensor-product]. Set\n$$(h\\cdot f)(x)=f(S_H(h)x)\\qquad(h,x\\in H,\\ f\\in H^*).$$\nThere is a unique $k$-linear map $\\rho:H^*\\to H\\otimes_k H^*$ characterized by\n$$(1_H\\otimes\\operatorname{ev}_x)\\rho(f)=\\sum f(x_{(1)})x_{(2)}\\qquad(x\\in H),$$\nwhere $\\Delta_H(x)=\\sum x_{(1)}\\otimes x_{(2)}$ and $\\operatorname{ev}_x(g)=g(x)$. These formulas give a $k$-bilinear unital associative left $H$-action and a left coaction satisfying\n$$(\\Delta_H\\otimes1)\\rho=(1\\otimes\\rho)\\rho,\\qquad(\\epsilon_H\\otimes1)\\rho=1_{H^*},$$\n$$\\rho(h\\cdot f)=\\sum h_{(1)}f_{(-1)}\\otimes(h_{(2)}\\cdot f_{(0)}),\\qquad\\rho(f)=\\sum f_{(-1)}\\otimes f_{(0)}.$$",
+ "source": {
+  "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+  "place": "Zheng, Proposition 4.12(2), printed p.8, displayed action and coaction, with diagonal compatibility made explicit; independently Farnsteiner, Hopf Modules and Integrals: The Space of Integrals (26 April 2006), printed p.1. Read online at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf and https://www.math.uni-bielefeld.de/~sek/select/HopfMod2.pdf; local documents WANTED in report.md. No Stacks tag states this dual-Hopf-module construction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The action is well defined because $x\\mapsto S_H(h)x$ is $k$-linear; the formula is linear in each of $h,f$. Since $S_H$ is a unital algebra map in the hypotheses, $1\\cdot f=f$ and\n$$(h\\cdot(h'\\cdot f))(x)=f(S_H(h')S_H(h)x)=f(S_H(hh')x)=((hh')\\cdot f)(x).$$\nThe middle equality uses commutativity of $H$. Thus these formulas give the asserted bilinear unital associative left action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+    "place": "Zheng, Proposition 4.12(2), printed p.8: displayed action and convolution-defined coaction. Read online 2026-10-24 at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf; PDF absent locally (WANTED). Agent supplies all verification omitted by the source, using the diagonal action explicitly stated in this item."
+   }
+  },
+  {
+   "text": "Fix the finite basis $(e_i)_{i\\in I}$ provided by the hypothesis and write $e_i^*(x)$ for its coordinate functions. Unique coordinates give linearity of $e_i^*$ and $g=\\sum_i g(e_i)e_i^*$ for every $g\\in H^*$. For any $k$-vector space $V$, tensor bilinearity therefore gives\n$$z=\\sum_i(1_V\\otimes\\operatorname{ev}_{e_i})(z)\\otimes e_i^*\\qquad(z\\in V\\otimes_kH^*),$$\nwhere the formula is first checked on $v\\otimes g$, which generate the tensor product. In particular, all evaluations on the final factor jointly detect equality. Define the linear map $T_f:H\\to H$ by $T_f(x)=\\sum f(x_{(1)})x_{(2)}$, using the linear tensor contraction of $\\Delta_H$; it is also linear in $f$. Set\n$$\\rho(f)=\\sum_i T_f(e_i)\\otimes e_i^*.$$\nEvaluation at $x$ gives $\\sum_i e_i^*(x)T_f(e_i)=T_f(x)$. This constructs the required linear map. The displayed reconstruction with $V=H$ proves uniqueness, so it is independent of the basis.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+    "place": "Zheng, Proposition 4.12(2), printed p.8: displayed action and convolution-defined coaction. Read online 2026-10-24 at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf; PDF absent locally (WANTED). Agent supplies all verification omitted by the source, using the diagonal action explicitly stated in this item."
+   }
+  },
+  {
+   "text": "Evaluate the proposed counit identity at $x\\in H$. Step 2 and the tensor universal property give\n$$((\\epsilon_H\\otimes1)\\rho(f))(x)=\\epsilon_H(T_f(x))=\\sum f(x_{(1)})\\epsilon_H(x_{(2)})=f(x).$$\nThe last equality is the counit axiom of $H$, followed by $f$. Equality of linear functionals gives $(\\epsilon_H\\otimes1)\\rho=1_{H^*}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+    "place": "Zheng, Proposition 4.12(2), printed p.8: displayed action and convolution-defined coaction. Read online 2026-10-24 at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf; PDF absent locally (WANTED). Agent supplies all verification omitted by the source, using the diagonal action explicitly stated in this item."
+   }
+  },
+  {
+   "text": "Use the tensor associativity identification and evaluate the final $H^*$ factor at $x$. By step 2, the evaluation of $(\\Delta_H\\otimes1)\\rho(f)$ is\n$$\\Delta_H(T_f(x))=\\sum f(x_{(1)})x_{(2)}\\otimes x_{(3)}.$$\nWriting $\\rho(f)=\\sum f_{(-1)}\\otimes f_{(0)}$, the evaluation of $(1\\otimes\\rho)\\rho(f)$ is\n$$\\sum f_{(-1)}\\otimes f_{(0)}(x_{(1)})x_{(2)}=\\sum T_f(x_{(1)})\\otimes x_{(2)}=\\sum f(x_{(1)})x_{(2)}\\otimes x_{(3)}.$$\nThese expressions agree by coassociativity of $\\Delta_H$. The reconstruction in step 2 with $V=H\\otimes_kH$ shows equality of the original tensors, proving the coaction law.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+    "place": "Zheng, Proposition 4.12(2), printed p.8: displayed action and convolution-defined coaction. Read online 2026-10-24 at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf; PDF absent locally (WANTED). Agent supplies all verification omitted by the source, using the diagonal action explicitly stated in this item."
+   }
+  },
+  {
+   "text": "Derive the antipode identity needed for compatibility using the cited associative unital convolution algebra $\\operatorname{Hom}_k(H,H\\otimes_kH)$. Let $j_1(h)=h\\otimes1$ and $j_2(h)=1\\otimes h$. Componentwise tensor multiplication gives $j_1*j_2=\\Delta_H$. For any algebra map $u:H\\to H\\otimes_kH$, the two antipode axioms give $u*(uS_H)=(uS_H)*u=\\eta\\epsilon_H$. Thus $\\Delta_HS_H$ is an inverse of $\\Delta_H$, and $j_iS_H$ is an inverse of $j_i$. Associativity shows $(j_2S_H)*(j_1S_H)$ is also an inverse of $j_1*j_2$. Inverses are unique: if $p*a=1=a*q$, then $p=p*(a*q)=(p*a)*q=q$. Applying this identity and evaluating at $h$ gives\n$$\\Delta_H(S_H(h))=\\sum S_H(h_{(2)})\\otimes S_H(h_{(1)}).$$\nOnly the cited convolution multiplication, unit and associativity and the given Hopf axioms enter this short calculation; no cocommutativity or bijectivity of $S_H$ is assumed.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+    "place": "Zheng, Proposition 4.12(2), printed p.8: displayed action and convolution-defined coaction. Read online 2026-10-24 at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf; PDF absent locally (WANTED). Agent supplies all verification omitted by the source, using the diagonal action explicitly stated in this item."
+   }
+  },
+  {
+   "text": "Finally evaluate the claimed diagonal compatibility on its final $H^*$ factor at $x$. Its right side evaluates, by step 2 with argument $S_H(h_{(2)})x$, multiplicativity of $\\Delta_H$, and step 5, to\n$$\\begin{aligned}\n\\sum h_{(1)}f_{(-1)}f_{(0)}(S_H(h_{(2)})x)\n&=\\sum h_{(1)}T_f(S_H(h_{(2)})x)\\\\\n&=\\sum h_{(1)}S_H(h_{(2)})x_{(2)} f(S_H(h_{(3)})x_{(1)}).\n\\end{aligned}$$\nApply the antipode axiom to the first two factors of $(\\Delta_H\\otimes1)\\Delta_H(h)$ and then the counit identity. This gives $\\sum h_{(1)}S_H(h_{(2)})\\otimes h_{(3)}=1\\otimes h$; applying $1\\otimes S_H$ gives $\\sum h_{(1)}S_H(h_{(2)})\\otimes S_H(h_{(3)})=1\\otimes S_H(h)$. Consequently the last displayed expression is\n$$\\sum x_{(2)}f(S_H(h)x_{(1)})=T_{h\\cdot f}(x),$$\nwhich is the evaluation of $\\rho(h\\cdot f)$. Reconstruction from step 2 proves the tensor equality. Together with steps 1, 3 and 4 this proves every clause.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+    "place": "Zheng, Proposition 4.12(2), printed p.8: displayed action and convolution-defined coaction. Read online 2026-10-24 at https://math.uchicago.edu/~may/REU2020/REUPapers/Zheng,Siqi.pdf; PDF absent locally (WANTED). Agent supplies all verification omitted by the source, using the diagonal action explicitly stated in this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-convolution-linear-map-algebra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-frobenius-algebra-hopf-2020.pdf",
+  "place": "Explicit verification of the formulas of Zheng Proposition 4.12(2), printed p.8, and Farnsteiner, Hopf Modules and Integrals: The Space of Integrals, printed p.1. Both read online, local PDFs WANTED. The source leaves the checks to the reader; this proof supplies them. Step 5 uses the existing convolution-algebra Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The linear dual of a finite dimensional Hopf algebra has a compatible Hopf module action and coaction",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:35:49Z",
+    "tool": "leansearch",
+    "query": "The linear dual of a finite dimensional Hopf algebra has a compatible Hopf module action and coaction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Subspace.instModuleDualFiniteDimensional",
+     "FGModuleCat.FGModuleCatDual",
+     "FGModuleCat.FGModuleCatDual_coe",
+     "Representation.dual",
+     "Module.dualProdDualEquivDual_apply",
+     "Module.Invertible.linearEquivDual",
+     "Module.Dual.instInhabited",
+     "FGModuleCat.rightDual"
+    ],
+    "digest": "0020cad46582b44f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensionality of the dual, Representation.dual for groups, and antipode cancellation identities do not construct rho or assert its coassociativity and diagonal action compatibility. HopfAlgebra/Basic.lean and HopfAlgCat/Basic.lean contain the structures and morphisms of Hopf algebras, not this dual Hopf-module structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the dual vector space of a finite dimensional Hopf algebra the antipode action and convolution coaction satisfy Hopf module compatibility",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:37:17Z",
+    "tool": "leanfinder",
+    "query": "On the dual vector space of a finite dimensional Hopf algebra the antipode action and convolution coaction satisfy Hopf module compatibility",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HopfAlgebra.mul_antipode_rTensor_comul_apply",
+     "HopfAlgebra.mul_antipode_rTensor_comul",
+     "HopfAlgebra.mul_antipode_lTensor_comul_apply",
+     "HopfAlgebra.mul_antipode_lTensor_comul",
+     "HopfAlgebra.sum_antipode_mul_eq_smul",
+     "HopfAlgebra.sum_mul_antipode_eq_smul",
+     "CategoryTheory.HopfObj.antipode_comul₁",
+     "HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit"
+    ],
+    "digest": "9646f0279e515005"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensionality of the dual, Representation.dual for groups, and antipode cancellation identities do not construct rho or assert its coassociativity and diagonal action compatibility. HopfAlgebra/Basic.lean and HopfAlgCat/Basic.lean contain the structures and morphisms of Hopf algebras, not this dual Hopf-module structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Dual",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:37:17Z",
+    "tool": "loogle",
+    "query": "HopfAlgebra, Module.Dual",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensionality of the dual, Representation.dual for groups, and antipode cancellation identities do not construct rho or assert its coassociativity and diagonal action compatibility. HopfAlgebra/Basic.lean and HopfAlgCat/Basic.lean contain the structures and morphisms of Hopf algebras, not this dual Hopf-module structure."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|comodule|coaction|HopfModule",
+   "sub": "RingTheory/HopfAlgebra",
+   "results": {
+    "t": "2026-10-23T21:37:16Z",
+    "tool": "grep",
+    "query": "dual|comodule|coaction|HopfModule",
+    "sub": "RingTheory/HopfAlgebra",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensionality of the dual, Representation.dual for groups, and antipode cancellation identities do not construct rho or assert its coassociativity and diagonal action compatibility. HopfAlgebra/Basic.lean and HopfAlgCat/Basic.lean contain the structures and morphisms of Hopf algebras, not this dual Hopf-module structure."
+  },
+  {
+   "tool": "grep",
+   "query": "antipode.*comul|comul.*antipode|anticoalgebra|antiCoalgebra",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T22:17:49Z",
+    "tool": "grep",
+    "query": "antipode.*comul|comul.*antipode|anticoalgebra|antiCoalgebra",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean",
+     "Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean",
+     "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Basic.lean"
+    ],
+    "digest": "60bf08e09d04a944"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a finite dimensional commutative Hopf algebra is a left Hopf module via the antipode and the regular convolution coaction",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:17:49Z",
+    "tool": "leanfinder",
+    "query": "The dual of a finite dimensional commutative Hopf algebra is a left Hopf module via the antipode and the regular convolution coaction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HopfAlgCat.instHopfAlgebra",
+     "HopfAlgebra.mul_antipode_lTensor_comul_apply",
+     "CommSemiring.toHopfAlgebra",
+     "HopfAlgebra.ofAlgHom",
+     "HopfAlgCat.of_comul",
+     "HopfAlgebra.toHopfAlgebraStruct",
+     "HopfAlgebra.mul_antipode_rTensor_comul_apply",
+     "HopfAlgebra.mul_antipode_lTensor_comul"
+    ],
+    "digest": "1266857dc1e21679"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional Hopf algebra dual has a left coaction compatible with the antipode action",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:20:12Z",
+    "tool": "leansearch",
+    "query": "A finite dimensional Hopf algebra dual has a left coaction compatible with the antipode action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.HopfObj.antipode_comul",
+     "CategoryTheory.HopfObj.antipode_left",
+     "HopfAlgebra.counit_comp_antipode",
+     "HopfAlgebra.counit_antipode",
+     "HopfAlgebraStruct.antipode",
+     "HopfAlgebra.sum_antipode_mul_eq_smul",
+     "HopfAlgebra.mul_antipode_lTensor_comul_apply",
+     "CategoryTheory.HopfObj.mul_antipode₂"
+    ],
+    "digest": "3b28a3adf9d9619c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Dual",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:20:12Z",
+    "tool": "loogle",
+    "query": "HopfAlgebra, Module.Dual",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The antipode of a Hopf algebra reverses comultiplication: comul of antipode is swap composed with tensor of two antipodes composed with comul",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T22:20:13Z",
+    "tool": "leanfinder",
+    "query": "The antipode of a Hopf algebra reverses comultiplication: comul of antipode is swap composed with tensor of two antipodes composed with comul",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.HopfObj.antipode_comul₁",
+     "CategoryTheory.HopfObj.antipode_comul",
+     "CategoryTheory.HopfObj.antipode_left",
+     "CategoryTheory.HopfObj.antipode_right",
+     "CategoryTheory.HopfObj.antipode_comul₂",
+     "CategoryTheory.HopfObj.antipode_left_assoc",
+     "CategoryTheory.HopfObj.antipode_right_assoc",
+     "HopfAlgebra.mul_antipode_rTensor_comul"
+    ],
+    "digest": "346a64278917880e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  },
+  {
+   "tool": "grep",
+   "query": "antipode_comul|comul.*antipode|antipode.*comul",
+   "sub": "CategoryTheory/Monoidal",
+   "results": {
+    "t": "2026-10-23T22:21:12Z",
+    "tool": "grep",
+    "query": "antipode_comul|comul.*antipode|antipode.*comul",
+    "sub": "CategoryTheory/Monoidal",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Hopf_.lean",
+     "Mathlib/CategoryTheory/Monoidal/Hopf_.lean",
+     "Mathlib/CategoryTheory/Monoidal/Hopf_.lean",
+     "Mathlib/CategoryTheory/Monoidal/Hopf_.lean",
+     "Mathlib/CategoryTheory/Monoidal/Hopf_.lean"
+    ],
+    "digest": "294a8b0a42e0ecbd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  },
+  {
+   "tool": "grep",
+   "query": "HopfModule|Comodule|coaction|dual",
+   "sub": "RingTheory/HopfAlgebra",
+   "results": {
+    "t": "2026-10-23T22:23:04Z",
+    "tool": "grep",
+    "query": "HopfModule|Comodule|coaction|dual",
+    "sub": "RingTheory/HopfAlgebra",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HopfAlgebra axioms and structures are partial inputs only; CategoryTheory.HopfObj.antipode_comul is the general antipode anti-coalgebra identity, not the construction or laws of the dual Hopf module. Its source Mathlib/CategoryTheory/Monoidal/Hopf_.lean:259-276 was read. The full dual action/coaction construction is absent in the inspected HopfAlgebra sources."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-hopf-frobenius-form",
+  "date": "2026-10-24",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Theorem 3.31, printed pp.73--74, nilpotent-augmentation case: the explicitly asserted isomorphism A^(J) to B. The printed proof of injectivity has a gap: see report.md, Source error; this new node records the true statement only, not that argument. Repair input: finite-dimensional Hopf self-injectivity, used to construct an A-linear retraction of i. Frobenius-functional input to the self-injectivity repair: identify the regular finite Hopf algebra with its algebraic linear dual. Supporting input: The finite linear dual is a Hopf module.",
+   "via": [
+    "lem-sfb-finite-hopf-frobenius-form",
+    "lem-sfb-finite-hopf-self-injective",
+    "lem-sfb-nilpotent-hopf-basis-lifting",
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-dual-hopf-module",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Constructed the unique coaction by a finite basis; checked counit and coassociativity by evaluation. Derived the antipode anti-coalgebra identity from uniqueness of convolution inverses using the existing Mathlib leaf, then explicitly checked the diagonal compatibility. No new nodes or attachments. Sources missing locally are requested in report.md; omitted verifications are marked agent-written.",
+  "blueprint": "Retains the inherited blueprint.from.place and via chain (ancestor tool reports None): supports det-thm-sf-ctf-stability-direct-images proof (3) through the algebraic-group quotient and finite-Hopf Frobenius/self-injectivity prerequisites. The current latest unit and direct-image proof were read; this finite-Hopf algebra input is strictly below the unit route. No chapter or unit change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-9ef546ce2",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-9ef546ce2 (reviewer sub-agent of L); spot-checked: Read the item and all five cited statements in full. The statement equals the base version produced by Q75's FIX, which dropped the lem-sfb-hopf-module-fundamental sentence; only 4 base lines were deleted, so no target is weakened. There is no re-split note and there are no new nodes. proof_deps equals the union of step uses, all cited nodes are Mathlib leaves or definitions, tool_uses is not needed and there is no SGA. I re-derived each of the 6 steps independently. (1) The action is associative by commutativity and multiplicativity of S. (2) Dual-basis reconstruction z=Σ(1⊗ev_{e_i})z⊗e_i^*, checked on pure tensors, gives existence and uniqueness of ρ. (3) The counit law follows by evaluation. (4) Coassociativity is checked by evaluation with V=H⊗H; the index order is right and cocommutativity is not used. (5) ΔS=(S⊗S)τΔ follows from uniqueness of convolution inverses in Hom(H,H⊗H), using the convolution leaf and the algebra maps j_1, j_2 of the algebra-tensor node. It is short and elementary; no DAG node or Mathlib lemma states it (grepped 64 antipode nodes and Mathlib RingTheory). (6) The diagonal compatibility, Σh_(1)S(h_(2))x_(2)f(S(h_(3))x_(1))=Σx_(2)f(S(h)x_(1)), checks out. Small cases: k, k[t]/(t²) in char 2 (worked by hand), and k^G with G nonabelian. H=0 is impossible. Zheng 4.12(2) and Farnsteiner are not local; they are WANTED and proof_origin is agent, so I verified the statement directly. Its convention matches the parent frobenius-form step 1. No duplicates among the Hopf-module nodes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.FiniteDualHopfModule",
+  "declaration": "HopfAlgebra.finiteDual_hopfModule",
+  "declarations": [
+   "HopfAlgebra.finiteDualAction",
+   "HopfAlgebra.finiteDual_hopfModule"
+  ],
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/FiniteDualHopfModule.lean",
+  "statement": "theorem finiteDual_hopfModule (k : Type u) [Field k] (H : Type v) [CommRing H] [HopfAlgebra k H] (ι : Type w) [Finite ι] (basis : Module.Basis ι k H) : (∀ (h : H) (f : Module.Dual k H) (x : H), finiteDualAction k H h f x = f (antipode k h * x)) ∧ (∀ f : Module.Dual k H, finiteDualAction k H 1 f = f) ∧ (∀ (h h' : H) (f : Module.Dual k H), finiteDualAction k H h (finiteDualAction k H h' f) = finiteDualAction k H (h * h') f) ∧ ∃ ρ : Module.Dual k H →ₗ[k] H ⊗[k] Module.Dual k H, (∀ (f : Module.Dual k H) (x : H), TensorProduct.rid k H ((Module.Dual.eval k H x).lTensor H (ρ f)) = TensorProduct.lid k H (f.rTensor H (Coalgebra.comul x))) ∧ (∀ ρ' : Module.Dual k H →ₗ[k] H ⊗[k] Module.Dual k H, (∀ (f : Module.Dual k H) (x : H), TensorProduct.rid k H ((Module.Dual.eval k H x).lTensor H (ρ' f)) = TensorProduct.lid k H (f.rTensor H (Coalgebra.comul x))) → ρ' = ρ) ∧ (∀ f : Module.Dual k H, TensorProduct.assoc k H H (Module.Dual k H) ((Coalgebra.comul : H →ₗ[k] H ⊗[k] H).rTensor (Module.Dual k H) (ρ f)) = ρ.lTensor H (ρ f)) ∧ (∀ f : Module.Dual k H, TensorProduct.lid k (Module.Dual k H) ((Coalgebra.counit : H →ₗ[k] k).rTensor (Module.Dual k H) (ρ f)) = f) ∧ (∀ (h : H) (f : Module.Dual k H), ρ (finiteDualAction k H h f) = TensorProduct.map (LinearMap.mul' k H) (TensorProduct.lift (finiteDualAction k H)) (TensorProduct.tensorTensorTensorComm k H H H (Module.Dual k H) (Coalgebra.comul h ⊗ₜ[k] ρ f)))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The concrete bilinear action is transposition of multiplication by the antipode. The theorem asserts uniqueness among all linear maps satisfying the evaluation formula, as well as all action, coaction, and diagonal compatibility laws. A finite basis is an arbitrary Module.Basis indexed by a Finite type."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66f30d600",
+  "group": "Q35",
+  "result": "pass",
+  "note": "The node differs from live only in lean; the statement is verbatim in the file; one sorry. Hypotheses match (k:Field, CommRing H + HopfAlgebra; the antipode-as-algebra-map condition is automatic for commutative H; an arbitrary finite Module.Basis is equivalent to having a finite basis). finiteDualAction = transpose∘mul∘antipode is real data, so conjunct 1 holds by unfolding. Unit and associativity of the action, ∃ρ with the final-factor evaluation formula, unrestricted uniqueness, coassociativity via assoc, the counit via lid, and the diagonal compatibility (tensorTensorTensorComm then mul'⊗action = Σh1 f_-1 ⊗ h2·f_0) all match. The math was re-derived and is true without cocommutativity. Edge cases H=k, empty basis, char 2 k[t]/t², nonabelian k^G checked; universes free. No duplicate in Mathlib or the project; docstrings carry source and blueprint and the six proof steps; the report has both sections; no new nodes or dependency repairs. No compile: no file was changed."
+ }
+}

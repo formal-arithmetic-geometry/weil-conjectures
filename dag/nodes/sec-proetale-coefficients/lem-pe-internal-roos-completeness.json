@@ -1,0 +1,123 @@
+{
+ "id": "lem-pe-internal-roos-completeness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Final sentence: interpreting all finite reductions in the existing complete integral category. Reverse implication: a complete reduction Roos triangle forces canonical augmentation completeness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Internal canonical completeness from its quotient Roos triangle",
+ "statement": "Fix a prime l, a finite extension E/Q_l and a scheme X. Use the unbounded internal module derived category and positive reductions of [sk-def-pe-derived-completion]. Let K be any object, suppose its integralLevel tower has a product, and suppose the product of the specified derived tensor units K -> integralLevel_n K is the first arrow of a distinguished Roos triangle for the specified integralStep transitions [def-weil-derived-limit]. Then the canonical augmentation on a K-flat representative is invertible, i.e. K satisfies IsDerivedComplete of [sk-def-pe-derived-completion]. No boundedness, constructibility or Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md",
+  "place": "Final sentence: interpreting all finite reductions in the existing complete integral category."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat representative P of K, and the recorded distinguished Roos triangle on Q(roos P). Rotate this triangle and the assumed triangle. Their first two vertices and their first arrow are identical. The distinguished-triangle isomorphism theorem gives an isomorphism of their third vertices; reflect it through the shift equivalence to obtain K isomorphic to Q(roos P). The latter is complete by output completeness. In the existential definition of IsDerivedComplete compose its representative isomorphism with this isomorphism, retaining the same K-flat complex and invertible actual augmentation. No equality between an arbitrary triangle isomorphism and the specified augmentation is claimed.",
+   "uses": [
+    "lem-pe-internal-roos-output-complete",
+    "sk-def-pe-derived-completion",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-roos-output-complete",
+  "sk-def-pe-derived-completion",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md",
+  "place": "Rotate the two actual reduction Roos triangles, identify their first vertices by the shift equivalence, then transfer output completeness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex is derived adically complete if its canonical quotient units form a distinguished Roos triangle",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.of_bijective_iff\", \"IsAdicComplete\", \"IsAdicComplete.mk\", \"AdicCompletion.of_surjective_iff\", \"IsAdicComplete.bot\", \"AdicCompletion\", \"AdicCompletion.of_injective_iff\", \"IsAdic.isAdicComplete_iff\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact statement or one-line specialization. The library normalization and Roos/Koszul comparison are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimitTriangle\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact statement or one-line specialization. The library normalization and Roos/Koszul comparison are needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derivedComplete|restrictionIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact statement or one-line specialization. The library normalization and Roos/Koszul comparison are needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCriterionReductions",
+  "date": "2026-10-24",
+  "group": "C9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalRoosCompleteness",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalRoosCompleteness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicCompletion.isDerivedComplete_of_roos",
+  "statement": "theorem isDerivedComplete_of_roos\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    (K : DerivedCategory (Modules l E X)) [HasProduct (integralLevel l E X K)]\n    (δ : (∏ᶜ (integralLevel l E X K)) ⟶ K⟦(1 : ℤ)⟧)\n    (hδ : IsDerivedLimitTriangle (integralStep l E X K) K\n      (Pi.lift (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction\n        (quotient l E X n)).unit.app K)) δ) :\n    IsDerivedComplete l E X K",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T230621-L-3452091",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T230621-L-3452091",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

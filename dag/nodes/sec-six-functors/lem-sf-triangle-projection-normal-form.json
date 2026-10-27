@@ -1,0 +1,237 @@
+{
+ "id": "lem-sf-triangle-projection-normal-form",
+ "kind": "statement",
+ "title": "Intrinsic triangle projection expansion to the counit normal form",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps need not be separated [def-weil-scheme-morphism-properties]. On small pro-etale sites choose either $\\mathcal D_T=D(T_{\\mathrm{proet}},A_n)$ at a fixed level, or $\\mathcal D_T=D(\\mathscr S_T)$, where $\\mathscr S_T$ is the category of sheaves of $A_n$-modules $M_n$ with semilinear quotient transitions $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and componentwise transition-compatible morphisms. Use the ordinary unbounded, simultaneous ringed-diagram-site operations [lem-coef-semilinear-derived-sections]. Write $P_u=Lu^*$, $S_u=Ru_*$, $J_a=a_!$, and use the canonical conjugate compositors $d:P_uP_v\\cong P_{vu}$, $c:S_vS_u\\cong S_{vu}$, $e:J_bJ_a\\cong J_{ba}$ and normalized proper/open mate $\\Gamma_Q$ of [lem-sf-ambient-proper-open-pasting]. All equations include these compositors and the tensor associators. In the system case they are equations before evaluation or total limit, with every quotient transition retained.\nLet $j:X\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$, $i:Y\\hookrightarrow\\overline Y$ be open immersions, $q:V\\to Y$, $p:\\overline X\\to\\overline Y$, $s:\\overline Y\\to Z$ proper, and $pb=iq$. Set $f=qj$, $g=si$, $F=S_qJ_j$, $G=S_sJ_i$, $H=S_{sp}J_{bj}$, $\\gamma=\\Gamma_{(b,i,q,p)}$ and $C:S_sS_pJ_bJ_j\\cong H$ from $c,e$. Put $\\alpha=C\\circ S_s(\\gamma J_j)$. Let $\\pi_u$ be the adjunct of $(\\varepsilon_u\\otimes1)\\mu_u$, and $\\delta_a:J_aM\\otimes N\\cong J_a(M\\otimes P_aN)$ the normalized open tensor map [def-exchange-projection, lem-sf-open-tensor-normalization]. For arbitrary $K\\in\\mathcal D_X$, $L\\in\\mathcal D_Z$ set $T=P_sL$, $U=P_iT$, $M=J_jK$, $K'=K\\otimes P_jP_qU$. The following intermediate normal-form identity holds naturally in $K,L$:\n$$\\alpha_{K'}\\,G\\bigl(S_q(\\delta_j)\\pi_q\\bigr)\\,S_s(\\delta_i)\\pi_s\n=C_{K'}\\,S_sS_p\\bigl(J_b(\\delta_j)\\circ\\delta_b\\bigr)\\,S_s(\\pi_{p;J_bM,T})\\,\\pi_{s;S_pJ_bM,L}\\,(S_s\\gamma_M\\otimes1).$$\nBoth sides have source $GFK\\otimes L$ and target $HK'$. In $\\delta_b$ the tensor factor is $P_pT$, identified with $P_qU$ on $V$; in $\\delta_j$ it is $P_qU$. No Cartesian-square, Tor, constructibility or boundedness hypothesis is imposed, and no projection transformation is inverted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence: returned composition-projection-mate steps 4, 5 and 7 (local mate substitution and intrinsic system repetition); agent expansion, not a verbatim blueprint theorem"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-exchange-projection",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The existing finite-type instances use LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace to make each supplied scheme Noetherian. The Mathlib instance noetherianSpace then makes every morphism out of these spaces quasi-compact. In the system clause explicitly supply the finite-type and quasi-compact properties of each bundled structure map. Set M=J_j K and T=P_s L.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite clause of lem-sf-proper-open-projection-mate to (b,q,p,i), M and T. Let a:W≅W′ be the tensor of the canonical pullback square isomorphism, with W=M⊗P_qP_iT and W′=M⊗P_bP_pT, and v=delta_j:W→J_jK′. The mate lemma states d F(a.hom) gamma_(W′)=t e, where F=J_iS_q, G=S_pJ_b, d=delta_i J_i(pi_q), t=gamma_M⊗1_T, and e=pi_p S_p(delta_b). Insert a.hom a.inv=1 and apply naturality of gamma at a.inv followed by v. This proves d F(v) gamma_(J_jK′)=t e G(a.inv) G(v). Remove the definitional eqToHom identities in properOpenMateTensorMap. This calculation takes place in the actual unbounded finite-coefficient category.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the proved finite-ring diagram chase to the positive quotient coefficient ring. For the system clause apply lem-sf-triangle-projection-system-normal-form. Conjoin the two clauses. The system clause is a separate remaining result, not a second finite-level calculation or a conclusion recovered by evaluation.",
+   "uses": [
+    "lem-sf-triangle-projection-system-normal-form"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sf-proper-open-projection-mate",
+  "lem-sf-triangle-projection-system-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "finite clause proved by the direct categorical chase; system clause split as its own intrinsic-system result by T4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized proper open interchange projection triangle counit naturality tensor normal form",
+   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.normalize_naturality, CategoryTheory.FreeBicategory.normalize_naturality, Mathlib.Tactic.Monoidal.instMonadNormalizeNaturalityMonoidalM, CategoryTheory.FreeMonoidalCategory.normalizeObj, CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIso, Mathlib.Tactic.Bicategory.tacticBicategory_nf, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expanding compact support projection through a proper open square gives the same counit tensor composite on unbounded sheaf coefficient systems",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counitAppApp, Condensed.profiniteSolidCounit, LightCondensed.isoLocallyConstantOfIsColimit_inv, CompHausLike.LocallyConstant.incl_of_counitAppApp, LightCondensed.ihomPoints_symm_comp, Condensed.isoLocallyConstantOfIsColimit_inv, CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(triangle|interchange)|proper.*open.*projection",
+   "results": "4 hits: Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of projection formula under a mate square of adjoint functors",
+   "results": "8 hits: CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.Adjunction.homEquiv_naturality_right_square_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_obj_obj_snd_map, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_snd_map, CategoryTheory.Adjunction.homEquiv_naturality_right_square, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*projection|projection.*normal[Ff]orm|triangle.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of the counit defined projection formula with proper open interchange",
+   "results": "8 hits: CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.OverPresheafAux.counitForward_naturality₁, CategoryTheory.Comonad.counit_naturality, CategoryTheory.Equivalence.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality, CategoryTheory.Abelian.LeftResolution.π_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of tensor projection under a proper open adjunction mate triangle",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.tensorLeftHomEquiv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor projection formula commutes with the proper open comparison and composition compactification",
+   "results": "8 hits: Profinite.NobelingProof.projRestricts_eq_comp, Profinite.NobelingProof.coe_πs', Profinite.IndexFunctor.map_comp_π_app, Profinite.NobelingProof.ProjRestricts, Profinite.NobelingProof.proj_comp_of_subset, LightProfinite.proj_comp_transitionMapLE', LightProfinite.proj_comp_transitionMap', Profinite.NobelingProof.projRestricts_comp_projRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism_mate|projectionMap_mate|counit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism_mate",
+   "results": "3 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general counit/mate naturality or unrelated projections do not state this normalized proper/open triangle identity on the two specified ambient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-composition-projection-mate",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "composition/refinement sentence: returned composition-projection-mate steps 4, 5 and 7 (local mate substitution and intrinsic system repetition)",
+   "via": [
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-triangle-projection-normal-form",
+  "worker": "stage1",
+  "summary": "Expanded the intrinsic triangle normal form using the existing proper/open tensor-mate identity, explicit naturality at the inner open tensor map and at the outer projection, and intrinsic ringed-system operations. No new nodes or statement changes. Checked all cited statements and arrow domains.",
+  "blueprint": "fix-prop-projection-formula.proof.md, composition/refinement sentence: expands the local mate substitution underlying composition-projection-mate steps 4–7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian finite-type stability supplies quasi-compactness prerequisites, not a replacement projection route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic quasi-compactness of opens in Noetherian schemes verifies the existing tensor-mate lemma hypotheses."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic normalized open/proper tensor calculus used as stated; no unit step is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic first-variable naturality of the canonical ringed-topos projection is used at the outer proper direct image."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic construction of the simultaneous ordinary ringed-system adjunction and tensor projection, used before evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-f721ce29f",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-f721ce29f (reviewer sub-agent of L); spot-checked: PASS, no changes and no fixes/ files. The split has 0 new nodes; the statement and stmt_deps are unchanged, and proof_deps equals the union of the step uses. Steps: (1) The schemes are Noetherian, being of finite type over a field, so every open subset is quasi-compact and b, i are quasi-compact open immersions; v = δ_j is the arbitrary-input isomorphism of lem-sf-open-tensor-normalization; the ambient pasting node states that Γ_Q is exactly the map of the mate lemma. (2) Naturality of γ at v; I checked the substitution. (3) lem-sf-proper-open-projection-mate with (A,B,C,D)=(V,X̄,Y,Ȳ), (k,r,i,p)=(b,q,i,p), N=T; both sides match its display term for term, Λ=A_n is a finite ring, and the system clause holds before evaluation. (4) First-variable naturality of π from lem-sfb-ringed-projection-tensor-composition gives exactly the item's right side. (5) The system category is the modules over B_• on the site N×T_proet, so the ringed-topos lemmas apply, and its tensor projection is the same counit-defined π. I checked the types of both sides of the display. Stacks 0B56 (sites-cohomology.tex:13660) confirms the counit-defined π with no hypotheses. Edge cases: all maps identities, j=id, s=id, zero input, and a non-Cartesian two-point example. No duplicate found: the triple-compactification node is a Künneth word, and the Q132 triangle-assembly node overlaps the parent, not this item. The item is not a restatement of the mate lemma, since it adds two naturality moves under S_s, and it does not cite its parent, so there is no cycle. The five declared tool_uses are the generic tools already accepted on the parent; I accept them. Batch-5 flag: lem-trf-adjoint-composition-coherence is a mathlib-status pure category-theory coherence of composite adjunctions. It is not part of the trace formula or Poincaré duality. The mate lemma was also already in the item's closure on the base, through its stmt_dep lem-sf-ambient-proper-open-pasting. Accepted."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TriangleProjectionNormalForm",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.triangleProjectionNormalForm",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.TriangleProjection.finiteInput",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.TriangleProjection.finiteC",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.TriangleProjection.finiteLeft",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.TriangleProjection.finiteRight",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.triangleProjectionNormalForm"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TriangleProjectionNormalForm.lean",
+  "statement": "theorem triangleProjectionNormalForm (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) {X V B Y D Z : Spaces F} (j : X ⟶ V) (b : V ⟶ B) (i : Y ⟶ D) (q : V ⟶ Y) (p : B ⟶ D) (s : D ⟶ Z) [IsOpenImmersion j.hom.left] [IsOpenImmersion b.hom.left] [IsOpenImmersion i.hom.left] [IsProper q.hom.left] [IsProper p.hom.left] [IsProper s.hom.left] (h : b ≫ p = q ≫ i) : (∀ (K : ProperOpenDerived (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) X.obj.left) (L : ProperOpenDerived (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) Z.obj.left), TriangleProjection.finiteLeft F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) j b i q p s h K L = TriangleProjection.finiteRight F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) j b i q p s h K L) ∧ (∀ (o : WeilConjectures.IntegralSystemRealization.Operations l E) (z : WeilConjectures.IntegralSystemRealization.Realizations l E F o) (K : WeilConjectures.IntegralSystemRealization.System l E X.obj.left) (L : WeilConjectures.IntegralSystemRealization.System l E Z.obj.left), WeilConjectures.IntegralSystemRealization.TriangleProjection.systemLeft l E F o z j b i q p s h K L = WeilConjectures.IntegralSystemRealization.TriangleProjection.systemRight l E F o z j b i q p s h K L)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The positive level n+1 includes every n≥1. The system equality is intrinsic on the recorded simultaneous derived systems with their canonical normalized operation presentation. Auxiliary definitions expand both composite words, K′ and C; no projection map is inverted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf0ce14d9",
+  "group": "Q136",
+  "result": "pass",
+  "note": "First S2 delivery; only the item module is new and only the item's lean field differs from side-live (the 6 stmt_dep records equal live); statement verbatim. Clause check: Spaces F, 3 open + 3 proper instances, h: b≫p=q≫i, no Cartesian/Tor/bounded hypothesis; qc of b,i via the new Noetherian instances, not binders. finiteLeft/systemLeft = π_s ≫ S_sδ_i ≫ S_sJ_i(π_q≫S_qδ_j) ≫ S_sγ_{J_jK'} ≫ C; finiteRight/systemRight = (S_sγ_M⊗1) ≫ π_s ≫ S_sπ_p ≫ S_sS_p(δ_b ≫ J_b(M⊗sq⁻¹) ≫ J_bδ_j) ≫ C. Rederived from properOpenProjectionMate(+Systems) via γ-naturality and π_s first-variable naturality; sq.inv orientation P_bP_pT→P_qP_iT correct. γ = properOpenMate / z.properOpen.gamma (adjunct-pinned), δ pinned by projection_transpose, compositors conjugates of model-pinned pullComp, so ∀ o z ranges over no free arrows (same pattern as the landed deps). Edge cases n=0→A_1, empty schemes, identities, universes ok. Docstrings with source and blueprint, five-step proof docstring, single sorry. No recompile per instruction. Advisories: ProperOpen*/Realizations/Operations owners not in stmt_deps (already flagged on the ambient-pasting dep); spaceNoetherian duplicates the parent CompactCompositionProjection instance (different namespace, harmless); the second reading is a single-worker self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95435",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261025T164346-L-1003625",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (unchanged); moved instances/system defs vs clone (verbatim); new system sorry vs properOpenProjectionMateSystems + properProjection naturality (true, checked in Lean up to final 60 s defeq); importer TriangleProjectionCompositorContraction compiled against delivered modules"
+ }
+}

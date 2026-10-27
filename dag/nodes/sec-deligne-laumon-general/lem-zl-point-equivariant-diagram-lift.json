@@ -1,0 +1,217 @@
+{
+ "id": "lem-zl-point-equivariant-diagram-lift",
+ "kind": "statement",
+ "title": "Lifting equivariant vector-space diagrams to the point Weil heart",
+ "statement": "Fix a prime power $q=p^a$, $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Put $s=\\operatorname{Spec}k$ and let $g_s$ be geometric Frobenius. Fix a finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$. Use the raw constructible heart [def-weil-constructible-heart], Weil pairs [def-weil-weil-sheaf-complex], the specified point-fibre functor [def-weil-finite-coefficient-point], and point transport $\\iota_N:\\operatorname{Fib}_sN\\xrightarrow{\\sim}\\operatorname{Fib}_s(Lg_s^*N)$ [def-weil-frobenius-point-transport]. Write $\\omega_E=H^0\\operatorname{Fib}_{s,E}$, with degree-zero cohomology of [def-weil-coefficient-cohomology-modules].\nLet $I$ be a finite category, let $D:I\\to\\mathrm{Vect}_{E,\\mathrm{fd}}$ be a diagram, and give each $D(i)$ an automorphism $A_i$ such that $D(u)A_i=A_jD(u)$ for every arrow $u:i\\to j$. One may designate finitely many short exact sequences among its arrows. Suppose at a chosen object $i_*$ an $E$-Weil heart object $(M_*,\\theta_*)$ and a fibre isomorphism $\\eta_*:\\omega_E(M_*)\\xrightarrow{\\sim}D(i_*)$ are prescribed, satisfying $\\eta_*\\omega_E(\\theta_*)H^0(\\iota_{M_*})\\eta_*^{-1}=A_{i_*}$.\nThere are a diagram of constructible $E$-Weil sheaves $(M_i,\\theta_i)$ and specified fibre isomorphisms $\\eta_i:\\omega_E(M_i)\\xrightarrow{\\sim}D(i)$ realizing the entire given diagram. The object and fibre isomorphism at $i_*$ are exactly the prescribed ones. All diagram equations hold, each designated sequence is short exact in the underlying heart, and monomorphisms and cokernels in the vector diagram are realized as such in that heart. Under the degree-zero fibre identifications the lifted Weil map is characterized by\n$$\\omega_E(\\theta_i)=\\eta_i^{-1}A_i\\eta_i\\,H^0(\\iota_{M_i})^{-1},\\qquad\n\\omega_E(\\widetilde D(u))=\\eta_j^{-1}D(u)\\eta_i.$$\nIts inverse realizes the inverse linear map. In particular every lifted arrow satisfies $\\widetilde D(u)\\theta_i=\\theta_j Lg_s^*\\widetilde D(u)$. The local Frobenius operator [def-weil-local-frobenius-trace] on each fibre is exactly $A_i$ under $\\eta_i$. All objects, arrows and inverse Weil maps are over the same $E$. Their common-stage images over $\\Omega$ realize the scalar-extended diagram, retain its exact sequences and the prescribed object, and use the specified scalar and point-transport comparisons. These assertions hold for every finite-field datum and impose no continuity or semisimplicity on the $A_i$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-point-transport",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-coefficient-cohomology-modules"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-zl-point-equivariant-original-diagram] to obtain the original-field diagram, exact realization, specified transport, forward Weil-map formula and literal prescribed data.",
+   "uses": [
+    "lem-zl-point-equivariant-original-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each i, equality of the forward homs identifies omega(theta_i) as the iso t_i.symm followed by eta_i, A_i and eta_i.symm. Taking inverses gives exactly the required inverse formula. Substitute the forward formula into eta_i.inv ≫ t_i.hom ≫ omega(theta_i).hom ≫ eta_i.hom; cancel t_i.hom ≫ t_i.inv, eta_i.inv ≫ eta_i.hom and eta_i.hom ≫ eta_i.inv to obtain A_i.hom. This completes ZlPointDiagramRealization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every finite overfield L of F, apply [lem-zl-point-equivariant-finite-scalar] to this same realized diagram and the recorded coefficientInclusion F L. Apply [lem-zl-point-equivariant-common-stage] to include this diagram at the original stage F. Assemble their conclusions with the original-field and prescribed-data assertions.",
+   "uses": [
+    "lem-zl-point-equivariant-finite-scalar",
+    "lem-zl-point-equivariant-common-stage"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-point-equivariant-original-diagram",
+  "lem-zl-point-equivariant-finite-scalar",
+  "lem-zl-point-equivariant-common-stage"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7: original-field lift and independent coefficient-extension steps; inverse Weil formula and degree-one Frobenius equality proved directly by iso inversion and cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagram of finite dimensional vector spaces with automorphisms lifts to constructible Weil sheaves at a point via inverse point transport preserving exact sequences and a specified terminal Weil object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_continuous\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (X : Action FintypeCat (CategoryTheory.Aut F)) [inst_3 : TopologicalSpace X.V.carrier] [DiscreteTopol\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, given a continuous action $X$ of the automorphism group $\\\\mathrm{Aut}(F)$ on finite types equipped with the discrete topology, there exists an object $A \\\\in \\\\ma\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_aux\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g,\\n    LocallyConstant.\", \"doc\": \"Given a finite set $\\\\alpha$, a limit cone $C$ in the category of profinite spaces, and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$, there exists an index $j$ in the diagram category and\"}\n  {\"name\": \"Profinite.exists_locallyConstant_fin_two\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) (hC : CategoryTheory.Limits.IsLimit C)\\n  (f : LocallyConstant (↑C.pt.toTop) (Fin 2)), ∃ j g, f = LocallyConstant.comap (TopCat.Hom.hom \", \"doc\": \"In a cofiltered limit of profinite spaces, every locally constant function from the limit object to a two-element set factors through some object in the diagram via a locally constant function on that\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FullyFaithful.preimageIso lifts a supplied isomorphism only; it does not supply the point-heart realization, normalized Frobenius or exact Weil diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift an equivariant vector space diagram through the exact point fibre equivalence to the raw constructible Weil heart using natural Frobenius point transport and coefficient compatibility",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WittVector.IsocrystalEquiv.frob_equivariant\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂]\\n  (self : \", \"doc\": \"Let $p$ be a prime number and $k$ be a perfect commutative ring of characteristic $p$. Let $V$ and $V_2$ be two isocrystals over $k$, with corresponding Frobenius isomorphisms $\\\\Phi_V$ and $\\\\Phi_{V_2}\"}\n  {\"name\": \"WittVector.frobeniusEquiv\", \"module\": \"Mathlib.RingTheory.WittVector.Frobenius\", \"type\": \"[PerfectRing R p] : WittVector p R ≃+* WittVector p R\", \"doc\": \"The ring equivalence on Witt vectors over a perfect commutative ring $ R $ of characteristic $ p $, induced by the Frobenius endomorphism that raises each coefficient to its $ p $-th power. This equiv\"}\n  {\"name\": \"WittVector.Isocrystal.recOn\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"{p : ℕ} →\\n  [inst : Fact (Nat.Prime p)] →\\n    {k : Type u_1} →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                {motive : WittVector.Isocrystal p k V → Sort u} →\\n\", \"doc\": \"Given a prime $ p $, a perfect commutative ring $ k $ of characteristic $ p $, an additive commutative group $ V $, and a module structure on $ V $ over the fraction ring of Witt vectors $ W(k) $, thi\"}\n  {\"name\": \"WittVector.IsocrystalHom.mk.injEq\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂]\\n  (toLinea\", \"doc\": \"Two Witt vector isocrystal homomorphisms between isocrystals over a perfect ring of characteristic $ p $ are equal if and only if their underlying linear maps are equal, provided both satisfy Frobeniu\"}\n  {\"name\": \"WittVector.Isocrystal.frobenius\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \": V ≃ᶠˡ[p, k] V\", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $ equipped with a Witt vector isocrystal structure over $ k $, this defines a semilinear isomor\"}\n  {\"name\": \"WittVector.IsocrystalEquiv.mk\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"{p : ℕ} →\\n  [inst : Fact (Nat.Prime p)] →\\n    {k : Type u_1} →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                [inst_5 : WittVector.Isocrystal p k V] →\\n         \", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and additive commutative groups $ V $ and $ V_2 $ equipped with Witt vector isocrystal structures over $ k $, this constructs an isoc\"}\n  {\"name\": \"WittVector.Isocrystal.casesOn\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"{p : ℕ} →\\n  [inst : Fact (Nat.Prime p)] →\\n    {k : Type u_1} →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                {motive : WittVector.Isocrystal p k V → Sort u} →\\n\", \"doc\": \"Given a prime $ p $, a perfect commutative ring $ k $ of characteristic $ p $, an additive commutative group $ V $, and a module structure on $ V $ over the fraction ring of Witt vectors $ W(k) $, thi\"}\n  {\"name\": \"WittVector.Isocrystal.frob\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"{p : ℕ} →\\n  {inst : Fact (Nat.Prime p)} →\\n    {k : Type u_1} →\\n      {inst_1 : CommRing k} →\\n        {inst_2 : CharP k p} →\\n          {inst_3 : PerfectRing k p} →\\n            {V : Type u_2} →\\n              {inst_4 : AddCommGroup V} →\\n                [self : WittVector.Isocrystal p k V] → V ≃ₛₗ[WittV\", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $ equipped with a Witt vector isocrystal structure over $ k $, this defines a semilinear isomor\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FullyFaithful.preimageIso lifts a supplied isomorphism only; it does not supply the point-heart realization, normalized Frobenius or exact Weil diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.id\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" (C : Type u₁) [CategoryTheory.Category.{v₁, u₁} C] : (CategoryTheory.Functor.id C).FullyFaithful\", \"doc\": \"The identity functor is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) : Type (max (max u₁ v₁) v₂)\", \"doc\": \"Structure containing the data of inverse map `(F.obj X ⟶ F.obj Y) → (X ⟶ Y)` of `F.map`\\nin order to express that `F` is a fully faithful functor.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.instSubsingleton\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} : Subsingleton F.FullyFaithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.faithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) : F.Faithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.full\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) : F.Full\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.Full] [F.Faithful] : F.FullyFaithful\", \"doc\": \"A `FullyFaithful` structure can be obtained from the assumption the `F` is both\\nfull and faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {G : CategoryTheory.Functor C D} (e : F ≅ G) : G.FullyFaithful\", \"doc\": \"If `F` is fully faithful and `F ≅ G`, then `G` is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} (e : F.obj X ≅ F.obj Y) : X ≅ Y\", \"doc\": \"The unique isomorphism `X ≅ Y` which induces an isomorphism `F.obj X ≅ F.obj Y`\\nwhen `hF : F.FullyFaithful`.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.isoEquiv\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} : (X ≅ Y) ≃ (F.obj X ≅ F.obj Y)\", \"doc\": \"The equivalence `(X ≅ Y) ≃ (F.obj X ≅ F.obj Y)` given by `h : F.FullyFaithful`.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.comp\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {G : CategoryTheory.Functor D E} (hG : G.FullyFaithful) : (F.comp G).FullyFaithful\", \"doc\": \"Fully faithful functors are stable by composition.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofCompFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D E} [G.Faithful] (hFG : (F.comp G).FullyFaithful) : F.FullyFaithful\", \"doc\": \"If `F ⋙ G` is fully faithful and `G` is faithful, then `F` is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimage\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (self : F.FullyFaithful) {X Y : C} (f : F.obj X ⟶ F.obj Y) : X ⟶ Y\", \"doc\": \"The inverse map `(F.obj X ⟶ F.obj Y) → (X ⟶ Y)` of `F.map`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FullyFaithful.preimageIso lifts a supplied isomorphism only; it does not supply the point-heart realization, normalized Frobenius or exact Weil diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|frobeniusPointTransport|pointFiber.*[Hh]eart",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: FullyFaithful.preimageIso lifts a supplied isomorphism only; it does not supply the point-heart realization, normalized Frobenius or exact Weil diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct Weil structures from invertible endomorphisms using theta equals fibre inverse of A composed with inverse natural point transport and reflect equivariance by faithfulness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Isocrystal.term_≃ᶠˡ[_,_]_\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"Lean.TrailingParserDescr\", \"doc\": \"The notation $\\\\simeq^{\\\\mathfrak{f}, \\\\ell}$ represents an equivalence relation between isocrystals equipped with Frobenius and Verschiebung structures in the context of Witt vectors, as defined by the \"}\n  {\"name\": \"Isocrystal.term_≃ᶠⁱ[_,_]_\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"Lean.TrailingParserDescr\", \"doc\": \"The notation $ ≃^{f^i} $ denotes an equivalence in the category of isocrystals, typically involving a Frobenius map $ f $ raised to the $ i $-th power, between objects in the context of Witt vectors a\"}\n  {\"name\": \"RootPairing.Equiv.weightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → P.Aut →* M ≃ₗ[R] M\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, this defines a monoid homomorphism from the automorphism group of $ P $ to the group of $ R $-linear automorphisms of the underlying module $ M \"}\n  {\"name\": \"WittVector.IsocrystalEquiv.toLinearEquiv\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"{p : ℕ} →\\n  [inst : Fact (Nat.Prime p)] →\\n    {k : Type u_1} →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            {V : Type u_2} →\\n              [inst_4 : AddCommGroup V] →\\n                [inst_5 : WittVector.Isocrystal p k V] →\\n         \", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and additive commutative groups $ V $ and $ V_2 $ equipped with Witt vector isocrystal structures over $ k $, an isocrystal equivalen\"}\n  {\"name\": \"WittVector.StandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) → [Fact (Nat.Prime p)] → (k : Type u_1) → [CommRing k] → ℤ → Type u_1\", \"doc\": \"The standard one-dimensional isocrystal associated with a prime $ p $ and a field $ k $ of characteristic $ p $, constructed as the field of fractions of the Witt vectors over $ k $.\"}\n  {\"name\": \"WittVector.IsocrystalEquiv\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] →\\n          [inst_3 : PerfectRing k p] →\\n            (V : Type u_2) →\\n              [inst_4 : AddCommGroup V] →\\n                [WittVector.Isocrystal p k V] →\\n                  \", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and additive commutative groups $ V $ and $ V_2 $ equipped with Witt vector isocrystal structures over $ k $, this defines the type o\"}\n  {\"name\": \"WittVector.IsocrystalEquiv.mk.inj\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ {p : ℕ} {inst : Fact (Nat.Prime p)} {k : Type u_1} {inst_1 : CommRing k} {inst_2 : CharP k p}\\n  {inst_3 : PerfectRing k p} {V : Type u_2} {inst_4 : AddCommGroup V} {inst_5 : WittVector.Isocrystal p k V}\\n  {V₂ : Type u_3} {inst_6 : AddCommGroup V₂} {inst_7 : WittVector.Isocrystal p k V₂}\\n  {toLinea\", \"doc\": \"If two Witt vector isocrystal equivalences between additive commutative groups over a perfect ring $ k $ of characteristic $ p $ share the same underlying linear equivalence over the fraction ring of \"}\n  {\"name\": \"WittVector.Isocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [inst_2 : CharP k p] → [PerfectRing k p] → (V : Type u_2) → [AddCommGroup V] → Type (max u_1 u_2)\", \"doc\": \"Given a prime $ p $, a perfect ring $ k $ of characteristic $ p $, and an additive commutative group $ V $, this defines the type of Witt vector isocrystal structures on $ V $ over $ k $. An isocrysta\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FullyFaithful.preimageIso lifts a supplied isomorphism only; it does not supply the point-heart realization, normalized Frobenius or exact Weil diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|frobeniusPointTransport|pointFiber.*[Hh]eart",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general fully faithful preimages, linear exactness and Galois-category finite-set fibres do not supply the raw constructible point-heart equivalence, Frobenius point transport or the entire Weil diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift finite diagrams of linear automorphisms through the point fibre equivalence to constructible Weil sheaves preserving exact sequences",
+   "results": "OK 8 hits: LinearEquiv.conj_exact_iff_exact, Function.Exact.iff_of_ladder_linearEquiv, CategoryTheory.Localization.liftingLift, CategoryTheory.Sheaf.cartesianMonoidalCategoryLift_val, HasFibers.homLift, CategoryTheory.sheafifyLift.congr_simp, CategoryTheory.Localization.lift, LinearEquiv.canLiftContinuousLinearEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: general fully faithful preimages, linear exactness and Galois-category finite-set fibres do not supply the raw constructible point-heart equivalence, Frobenius point transport or the entire Weil diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "OK 7 hits: CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.Functor.FullyFaithful.preimageIso_hom, CategoryTheory.Functor.FullyFaithful.preimageIso_inv, CategoryTheory.Functor.FullyFaithful.isoEquiv_symm_apply, CategoryTheory.Equivalence.congrFullSubcategory_counitIso, CategoryTheory.Equivalence.congrFullSubcategory_unitIso, CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: general fully faithful preimages, linear exactness and Galois-category finite-set fibres do not supply the raw constructible point-heart equivalence, Frobenius point transport or the entire Weil diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite diagram of vector spaces with invertible Frobenius operators to constructible Weil sheaves on a geometric point, with a prescribed object and exact sequences",
+   "results": "OK 8 hits: Isocrystal.term_≃ᶠˡ[_,_]_, WittVector.StandardOneDimIsocrystal, WittVector.Isocrystal, WittVector.IsocrystalEquiv, WittVector.IsocrystalEquiv.mk.inj, WittVector.isocrystal_classification, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.frob",
+   "date": "2026-10-22",
+   "verdict": "no match: general fully faithful preimages, linear exactness and Galois-category finite-set fibres do not supply the raw constructible point-heart equivalence, Frobenius point transport or the entire Weil diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful equivalence identifies Frobenius fixed pairs with vector spaces with automorphisms using a natural isomorphism of the fibre functor and its Frobenius pullback",
+   "results": "OK 8 hits: CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, CategoryTheory.PreGaloisCategory.endEquivAutGalois, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.endEquivAutGalois_π, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber, CategoryTheory.PreGaloisCategory.endMulEquivAutGalois_pi, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π",
+   "date": "2026-10-22",
+   "verdict": "no match: general fully faithful preimages, linear exactness and Galois-category finite-set fibres do not supply the raw constructible point-heart equivalence, Frobenius point transport or the entire Weil diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "def preimageIso|def preimage|map_preimage",
+   "results": "OK 5 hits: 80, 87, 113, 133, 138",
+   "date": "2026-10-22",
+   "verdict": "no match: general fully faithful preimages, linear exactness and Galois-category finite-set fibres do not supply the raw constructible point-heart equivalence, Frobenius point transport or the entire Weil diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-point-weil-heart-flag",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6.",
+   "via": [
+    "lem-zl-point-weil-heart-flag"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-point-equivariant-diagram-lift",
+  "worker": "stage1",
+  "summary": "Q97 gives the explicit lift through the existing exact point-heart equivalence. Inverse point transport, both inverse identities, literal prescribed-object preservation, diagram relations, Weil intertwining, exact cokernels, local Frobenius and the specified scalar comparisons are checked. No new nodes are needed.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md, paragraph 7, dimension-zero Jordan filtration: realizes inverse-transport lifting, equivariant arrows, exact quotients and common-stage coefficient extension; lies below unit step 1.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic automorphism-pullback and coefficient-transition truncation compatibility ensures the lifted and scalar-extended objects lie in the raw hearts; the current unit contains no replacement for this coefficient t-structure fact."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Uses only clause 1, invertibility of specified point transport, to construct an inverse Weil isomorphism; this is a generic coefficient transport tool."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Uses clause 2 for naturality and specified scalar compatibility of point transport; this generic tool identifies the correct Weil intertwining equation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-1f25bf32f",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-1f25bf32f (reviewer sub-agent of L); spot-checked: Q97 has no new nodes; it is an 8-step agent proof of an unsplit leaf of thm-zl-real-mixed-by-curves. Source checked: main-20261015 proof paragraph 7, l.83-86 (Jordan filtration in dimension zero). The statement is unchanged and there is no re-split note. Each step was checked against the cited statements. Step 1: (M_*,eta_*) is taken literally and the other objects come from the exact heart equivalence of lem-zl-point-heart-finite-stage. Step 2: Lg_s^* commutes with H^i, so TM is in the heart (prop-constructible-truncations). t=H^0(iota) is invertible by transport-iso (1). theta=a t^{-1} goes TM->M, which matches def-weil-weil-sheaf-complex. The inverse is t a^{-1} and the prescribed compatibility forces theta_{i*}=theta_*. Step 3: path relations follow by telescoping eta. Step 4: H^0 of naturality (2) gives a_j t_j^{-1} omega(Tf) = w a t^{-1}, which is the u theta = theta' Lg^*u condition. Step 5: the exact equivalence reflects short exact sequences, monomorphisms and cokernels. Step 6: at Spec k0 with n=1, def-weil-local-frobenius-trace reduces to omega(theta) t = a, so Frobenius is A_i. Step 7: theta extends to L through the scalar pullback iso, and the scalar clause of (2) gives t_L = t ⊗ 1. Step 8: everything is represented at stage E; exactness over Omega follows from the field-extension Mathlib leaf plus reflection. Tested on rank one with arbitrary a, a unipotent Jordan block, zero spaces and arrows at i_*. A duplicate search with rg -L found only the parent. I accept the three tool_uses (truncations, transport-iso, transport-natural) as generic coefficient tools. Batch-5: the flagged lem-weil-frobenius-point-transport-natural reaches lem-weil-isomorphism-derived-pullback-comparison-normalization (sec-trace-formula). That node is general normalization of the comparison kappa for a scheme isomorphism, which defines point transport. It is neither an assumption leaf nor a step of their proofs, so it is genuinely outside, and the parent already cites it on the base. review_split.py could not resolve the symlinked chapters; that is a tool artifact."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointEquivariantDiagramLift",
+  "declaration": "WeilConjectures.zl_point_equivariant_diagram_lift",
+  "declarations": [
+   "WeilConjectures.zl_point_equivariant_diagram_lift"
+  ],
+  "file": "lean/Sheaf/Paper/PointEquivariantDiagramLift.lean",
+  "statement": "theorem zl_point_equivariant_diagram_lift (F : Padic.FiniteCoefficientFields l Ω) (I : Type w) [SmallCategory I] [FinCategory I] (V : I ⥤ ModuleCat.{u} (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)) (hV : ∀ i, FiniteDimensional (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (V.obj i)) (A : ∀ i, V.obj i ≅ V.obj i) (hA : ∀ {i j : I} (f : i ⟶ j), (A i).hom ≫ V.map f = V.map f ≫ (A j).hom) (iStar : I) (MStar : sfRationalHeart l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (Spec (.of D.k))) (thetaStar : (zlDiagramPullback D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj MStar.obj ≅ MStar.obj) (etaStar : (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj MStar.obj ≅ V.obj iStar) (hStar : etaStar.inv ≫ zlDiagramTransport D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) MStar.obj ≫ (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).map thetaStar.hom ≫ etaStar.hom = (A iStar).hom) : ∃ (G : I ⥤ sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (Spec (.of D.k))) (hG : ∀ i, sfRationalHeartProperty l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (Spec (.of D.k)) (G.obj i)) (theta : G ⋙ zlDiagramPullback D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) ≅ G) (eta : G ⋙ zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) ≅ V) (t : ∀ i, (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj (G.obj i) ≅ (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj ((zlDiagramPullback D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj (G.obj i))), ZlPointDiagramRealization D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) V A G hG theta eta t ∧ G.obj iStar = MStar.obj ∧ HEq (theta.app iStar) thetaStar ∧ HEq (eta.app iStar) etaStar ∧ (∀ (L' : Padic.FiniteCoefficientFields l Ω) (h : F ≤ L'), ZlFiniteScalarDiagram D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L') (AlgebraicallyClosedCoefficients.coefficientInclusion.{u} l Ω F L' h) V A G theta eta t) ∧ ZlCommonStageDiagram D l hl Ω F V A G theta eta t",
+  "branch": "sheaf-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definitions moved verbatim to PointEquivariantDiagramData and publicly reexported here. The theorem signature is unchanged; inverse and Frobenius formulas follow by Lean iso calculus from the original-field lift, then the finite and common-stage extension steps apply."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c46fe7fca",
+  "group": "Q55",
+  "result": "fix",
+  "note": "Lean statement and item record correct: all hypotheses/conclusion clauses match node (hStar/θ/θ⁻¹/arrow-fibre formulas in correct order; local Frobenius = n=0 localPointTransportIterate composite of def-weil-local-frobenius-trace; Weil pairs = IsoAlgebra as sfWeilComplex; exactness incl. IsColimit cokernels and parallel arrows; literal prescribed data via eq/HEq). Finite-L and common-stage clauses use specified comparisons; transport squares = H^0 of final scalar clause of frobeniusPointTransport_natural (same pointRationalFibreScalarIso/rationalPullbackScalarComparison), so true and pinned. No hollow defs, single sorry, docstrings ok, lean.statement verbatim. Only fault H11: 'Second reading by Q55' was a self-audit claiming no separate reading → fixes/lem-zl-point-equivariant-diagram-lift.report.md = worker report verbatim + independent clause-by-clause second reading. Advisory: uncited fieldDerivedHomologyIso is owned by theorem node lem-weil-cohomology-commutes-scalar-extension but is reached via cited def-weil-coefficient-cohomology-modules (which cites it and defines its stage formulas with it); rationalDerivedPullback/sfRationalScalarExtension are reached through cited defs. No Lean change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac0df",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123650-L-1887771",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature byte-identical to clone; 17 defs verbatim in new PointEquivariantDiagramData (public re-export); three new sorry statements checked against item and nodes; node fields vs Lean proof; no importers"
+ }
+}

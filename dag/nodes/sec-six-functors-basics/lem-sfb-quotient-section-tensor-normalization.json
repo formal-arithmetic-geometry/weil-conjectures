@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-normalization",
+ "kind": "statement",
+ "title": "Normalized quotient scalar tensors and section-module realization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$ and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$ put $R_T=p_T^*\\underline{\\mathcal O_E}=\\varprojlim_{m\\geq1}(A/\\pi^m)_T$ [sk-def-sfb-pulled-back-coefficients, det-prop-sfb-qlbar-colimit-x-integral-limit], and $S_T=(A/\\pi^n)_T$, the constant finite quotient ring sheaf, for a fixed $n\\geq1$. Use the ordinary unbounded derived categories $D_R(T)=D(\\operatorname{Mod}_{R_T})$, $D_S(T)=D(\\operatorname{Mod}_{S_T})$ of internal module objects, the derived module pullback and pushforward with their derived adjunction [sk-def-sfb-module-derived-pushpull], and the uncompleted relative derived tensor [sk-def-sfb-derived-tensor-hom]. Set $D_{n,T}K=K\\otimes^L_{R_T}S_T$, the derived scalar extension of [lem-pur-derived-change-of-rings].\n\nUse small pro-etale sites relative to the module universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $E_{R,T},E_{S,T}$ for the fixed internal-module/section-module equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and $\\bar D_T=-\\otimes^L_{R_T}S_T$ on section modules. For every scheme morphism $f:X\\to Y$ use the internal adjunctions $L_R\\dashv F_R,L_S\\dashv F_S$, their ringed section-module counterparts $\\bar L_R\\dashv\\bar F_R,\\bar L_S\\dashv\\bar F_S$, and the canonical derived operation comparisons [lem-pd-section-derived-pushpull-normalization]. Let $t_R,t_S$ be the actual internal pullback tensor comparisons [def-sfb-module-object-projection-map]. Let $\\lambda:L_SD_{n,Y}\\cong D_{n,X}L_R$ be the specified scalar/pullback comparison of [lem-sfb-integral-quotient-direct-image-comparison].\n\nThere is a unique natural isomorphism\n$$b_{T,U,V}:D_{n,T}(U\\otimes^L_{R_T}V)\\xrightarrow{\\sim}D_{n,T}U\\otimes^L_{S_T}D_{n,T}V$$\nwhose localization comparison on every pair of flat-term K-flat representatives [def-pc-kflat-complex, def-pc-flat-sheaf-modules] is the signed total of the ordinary balancing map $(u\\otimes v)\\otimes s\\mapsto(u\\otimes1)\\otimes(v\\otimes s)$. This is the canonical derived scalar tensor comparison, with its regular-module unit. The derived equivalences $D(E_{R,T}),D(E_{S,T})$ identify $D_{n,T}$ with $\\bar D_T$, including its $S_T$-action, and carry $b_T$ to the canonical ringed scalar tensor comparison. Under these same identifications $t_R,t_S$ become the canonical ringed pullback tensor maps, $\\lambda$ becomes the ringed scalar/pullback comparison with formula $f^{-1}(x\\otimes s)\\mapsto f^{-1}x\\otimes f^{-1}s$, and both specified adjunctions, including their units and counits, become the ringed adjunctions. These are identifications of natural transformations in the unbounded derived categories, not only of cohomology groups. No flatness of $R_T\\to S_T$, exactness of ordinary scalar extension, or boundedness is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), reduction of the canonical projection formula map: internal/section realization and scalar tensor balancing (returned proof step 1).; Stacks sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product), identity-topos specialization; internal/section normalization extracted from that construction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pd-section-derived-pushpull-normalization",
+  "def-sfb-module-object-projection-map",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme apply scalar_tensor_exists_unique. Choose its unique tensorator. Function extensionality and pointwise uniqueness prove existence and uniqueness of the entire family.",
+   "uses": [
+    "lem-sfb-quotient-scalar-tensor-exists-unique"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose for each scheme a normalized ScalarSectionData using scalar_section_exists. Keep this same family throughout the remaining clauses. scalar_unit_constraints gives both regular-unit isomorphisms and all tensor constraints. section_tensor_transport supplies the section tensorator and both its representative and conjugation normalizations for the given b.",
+   "uses": [
+    "lem-sfb-quotient-scalar-section-existence",
+    "lem-sfb-quotient-scalar-unit-constraints",
+    "lem-sfb-quotient-section-tensor-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply geometric_normalization separately to the integral and finite coefficient rings. For every specified normalized lam, section_pull_transport applied to the same chosen scalar models gives barLam with the two required normalizations. Combine the clauses to obtain ComparisonSpec. No input restrictions or coefficient flatness are added.",
+   "uses": [
+    "lem-sfb-quotient-geometric-normalization",
+    "lem-sfb-quotient-section-pull-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-geometric-normalization",
+  "lem-sfb-quotient-scalar-section-existence",
+  "lem-sfb-quotient-scalar-tensor-exists-unique",
+  "lem-sfb-quotient-scalar-unit-constraints",
+  "lem-sfb-quotient-section-pull-transport",
+  "lem-sfb-quotient-section-tensor-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 06YY, 07A4 and 07A6; original steps separated into scalar tensor existence/uniqueness, units, scalar section realization, tensor and pullback transport, and geometric normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison|scalarTensorIso|internalScalarTensor|derived.*[Tt]ensor.*[Cc]ompar",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules and flatness, not the simultaneous internal/section identification of the nonexact unbounded quotient scalar tensor, pullback comparison and adjunctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor extension along a nonflat ring object map has a unique natural tensor balancing isomorphism identified by the internal to section module equivalence",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedTensor\", \"map\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules and flatness, not the simultaneous internal/section identification of the nonexact unbounded quotient scalar tensor, pullback comparison and adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure tensor normalization determines the unique scalar tensor natural isomorphism for unbounded K flat derived internal modules after changing to a quotient coefficient ring",
+   "results": "8 hits: Module.Flat, LinearMap.tensorKerEquiv_apply, LinearMap.tensorKerEquiv, Module.Flat.toAlgebra, AdicCompletion.tensor_map_id_left_eq_map, Module.Flat.tfae_equational_criterion, LinearMap.kerLTensorEquivOfSurjective, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules and flatness, not the simultaneous internal/section identification of the nonexact unbounded quotient scalar tensor, pullback comparison and adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal module sheaves on a scheme pro etale site extension of scalars to a uniformizer quotient has a uniquely normalized unbounded derived scalar tensor balancing isomorphism computed on flat term K flat complexes",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Extension.tensorCotangentSpace, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Extension.tensorH1Cotangent, Algebra.FormallyEtale.instTensorProduct, Algebra.tensorH1CotangentOfIsLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules and flatness, not the simultaneous internal/section identification of the nonexact unbounded quotient scalar tensor, pullback comparison and adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|derived.*[Tt]ensor|[Tt]ensor.*[Dd]erived",
+   "results": "7 hits: Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar extension, pullback or flat-module facts and degreewise Tor do not give the normalized unbounded internal/section scalar tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar extension, pullback or flat-module facts and degreewise Tor do not give the normalized unbounded internal/section scalar tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars for module sheaves preserves derived tensor products and is compatible with the equivalence between internal and sectionwise modules",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, PresheafOfModules.unitHomEquiv, ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar extension, pullback or flat-module facts and degreewise Tor do not give the normalized unbounded internal/section scalar tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonflat morphism of sheaves of commutative rings derived extension of scalars is strong monoidal on unbounded derived module categories, normalized on K flat tensor representatives",
+   "results": "8 hits: LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar extension, pullback or flat-module facts and degreewise Tor do not give the normalized unbounded internal/section scalar tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor comparison of derived pullback for ringed topoi is uniquely determined by the balancing map on flat term K flat complexes and is compatible with internal module equivalences",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar extension, pullback or flat-module facts and degreewise Tor do not give the normalized unbounded internal/section scalar tensor comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-projection-comparison",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), reduction of the canonical projection formula map: internal/section realization and scalar tensor balancing (returned proof step 1).",
+   "via": [
+    "lem-sfb-integral-quotient-projection-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-quotient-section-tensor-normalization",
+  "worker": "stage1",
+  "summary": "NW retained the statement and all imported metadata. Constructed the balanced tensor map and its inverse, totalized on flat-term K-flat representatives without nonflat quotient exactness, and explicitly conjugated through the fixed scalar and tensor section comparisons. Proved uniqueness by resolving-class descent and verified the actual pullback tensors, scalar/pullback comparison, units and counits using existing normalization lemmas. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral, proof paragraph (3): the assertion that reductions of the canonical projection-formula maps are the canonical finite-coefficient maps; this item supplies its scalar-tensor and internal/section normalization component.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact section equivalence preserves relative tensor, its constraints and the flat/K-flat tests; this is the generic realization tool, not a new route for proper base change."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat representatives exist on a small ringed site, including unbounded inputs."
+   },
+   {
+    "node": "lem-pd-section-derived-tensor-normalization",
+    "why": "Identifies the specified internal derived tensor and actual pullback tensor arrow with the ringed operations."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-topos tensor comparison, specialized to identity underlying topos and the nonflat quotient ring map."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "A total tensor of two flat-term K-flat complexes is itself such a representative, also without boundedness."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Derived scalar extension is computed by K-flat representatives for an arbitrary coefficient ring map."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Flat-term K-flat localization is a representative equivalence and detects and extends natural transformations of bifunctors."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Tensor commutes with countable total-degree coproducts in the module universe."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Preserves the specified derived adjunctions with units and counits under the section equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pd-section-derived-tensor-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pd-section-derived-pushpull-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-c2178193a",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-c2178193a (reviewer sub-agent of L); spot-checked: I read all 9 steps of this first split (no new nodes, no repair note, no SGA, not superseded: live and side-live show the item unsplit). Stacks 07A4 (sites-cohomology 3684-3724) and 0G7E (3508) match steps 3 and 5: the identity topos with ring map a_T, flat-term K-flat models, the termwise 03EL isomorphism, and no flatness of R->S. Step 2: I checked by hand that the ordinary map beta and its inverse are balanced and that both composites are the identity. Step 3: Tot of flat-term K-flat complexes is again a model (kflat-total-tensor-model), P tensor S stays flat-term K-flat (ringed-topoi pullback, 0G7E clause), scalar extension commutes with direct sums, and the signs match because beta preserves bidegrees. Steps 4-6 (unit, conjugation through full faithfulness, uniqueness via site-derived-tensor-descent) are sound. Step 7: the projection-map d equals the delta_f of pd-section-derived-tensor-normalization (same ordinary oplax formula). Step 8: the parent node's lambda uses sk-prop-sfb-cartesian-coefficients, whose clause (1) is alpha_f, the same identification as internal-scalar-pullback-normalization, and the parent's own step 2 gets its lambda from that node. Step 9: pushpull-normalization for O_E and O_E/pi^n. Small case: on a point with Z_p->F_p and U=V=Z_p/p, the cohomology dimensions are 1,2,1 on both sides. Not a duplicate: def-sfb-internal-scalar-tensor-comparison requires exact scalar extension, and this item treats the non-exact quotient. Batch 5: adding the proof to the stmt-only closure adds only lem-pd-section-derived-tensor-normalization and its dep lem-pd-section-ordinary-oplax-normalization; the stmt_deps already reach lem-pd-section-derived-pushpull-normalization. Both are generic internal-vs-section comparisons of the pullback tensor (Stacks 07A4 under E_T), not given by and not part of the proof of Poincare duality or the trace formula, and other sfb nodes already cite them. Accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientSectionTensorNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.quotient_section_tensor_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.ComparisonSpec",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.quotient_section_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorNormalization.lean",
+  "statement": "theorem quotient_section_tensor_normalization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules (integral l E) T)]\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules (finite l E n) T)] :\n    ComparisonSpec (reduction l E n)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a315cd3f8",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery of c1a093cded40 (RETURN H3 F1/F2). Diff: only the module (sectionScalarElement, SectionTensorNormalized, SectionPullNormalized added to ComparisonSpec), lean.declarations +3 and the report; statement and stmt_deps unchanged. F1 repaired: barB is fixed independently of b by an ordinary e with e((m⊗n)⊗s)=(m⊗1)⊗(n⊗s) on local generators, the signed-total chain map g on flat-term K-flat section pairs, and a square through the model's universal ε and qTensor (both isos on K-flat, so barB is determined); it is the 07A4 comparison, so TensorSectionCondition has content. F2 repaired: e is fixed as the canonical internal pullIso carried across the pinned c.ordinary and the recorded pullComparison; barLam is fixed for all P by a counit square through the exact mapDerivedCategory pullback and the model counits (left-derived universal property), independent of lam. Re-checked: statement verbatim, 18 declarations listed, one sorry, docstrings with source places and blueprint tag, universes u+1/u, n+1 indexing, identity morphisms included, no flat/exact/bounded binders, not superseded in side-live. Advisory: 7 unused private proof imports (H9); the second reading is the worker's self-audit. No compile (no file changed); worker reports clean 43.9 s/39.5 s compiles and a passing deliver2 --no-push."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-sf-derived-weil-tensor-hom-adjunction",
+ "kind": "statement",
+ "title": "Native derived-Weil tensor preserves bounded constructible complexes",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme. Use the coefficient-ring sheaf $B_X$, abelian Weil-sheaf category $\\mathcal W_X$, ambient derived category $D(\\mathcal W_X)$ and its bounded constructible full subcategory $\\mathrm{WC}^{\\mathrm{der}}(X_0)$ of [def-sf-native-weil-derived-framework], and the derived tensor $\\otimes^L_{B_X}$ with diagonal Weil action of [def-sf-derived-weil-category-and-operations]. For all $A,B\\in\\mathrm{WC}^{\\mathrm{der}}(X_0)$ the object $B\\otimes^L_{B_X}A$ of $D(\\mathcal W_X)$ belongs to $\\mathrm{WC}^{\\mathrm{der}}(X_0)$: its cohomology vanishes in all but finitely many degrees, and the underlying $B_X$-module of each of its cohomology sheaves is constructible in the sense of the framework. No internal-Hom or adjunction assertion is part of this statement.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, first and fourth Hom bijections: constructibility of the tensor object to which the transposition is applied, in the actual derived-Weil realization (live DerivedHom.lean and the WeilComplex objectProperty). The tensor-Hom adjunction itself is the landed lem-sf-weil-native-closed-forgetful."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations"
+ ],
+ "proof": [
+  {
+   "text": "Let Y be the geometric fiber and aY its structural map to Spec of the algebraic closure of k₀. Base change preserves the separated finite-type hypotheses. The finite-type-over-Noetherian instances give IsNoetherian Y. Algebra.ringChar_eq gives the required characteristic inequality on the algebraic closure.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the first clause of weil_geometric_hom_constructibility to A.obj and B.obj and their subcategory properties. It identifies their native geometric realizations with constant-model bounded constructible objects. Use adicConstructibilityPredicateComparison to identify this predicate with boundedConstructible on Y.",
+   "uses": [
+    "lem-sf-weil-geometric-hom-constructibility",
+    "lem-sfb-adic-constructibility-predicate-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply boundedConstructible_tensor_closure for the finite-subextension-valued algebraic-closure condensed coefficient to the images of B and A, in that order, on the separated finite-type scheme Y over the algebraic closure. All field and characteristic hypotheses were supplied in step 1.",
+   "uses": [
+    "lem-sfb-dc-tensor-preserves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the component at (B.obj,A.obj) of nativeGeometricForget_tensorComparison. Transfer the ordinary tensor result along its inverse, first for boundedness and then through each homology functor for constructibility. Convert back through the same predicate equality and geometric cohomological criterion. This proves precisely the unchanged native tensor membership statement.",
+   "uses": [
+    "lem-sf-native-geometric-tensor-comparison",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sf-weil-geometric-hom-constructibility",
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-weil-geometric-hom-constructibility",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-dc-tensor-preserves",
+  "lem-sf-native-geometric-tensor-comparison",
+  "def-sf-derived-weil-category-and-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, first and fourth tensor transpositions. M1 uses the existing native geometric cohomological criterion and ordinary condensed tensor closure; the remaining coefficient/tensor comparison is split off explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of complexes of Frobenius equivariant sheaves is left adjoint to derived internal Hom",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat: (R : Type u) →\n  [inst : CommRing R] →\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (Cate; LightCondensed.instMonoidalClosedLightCondMod: (R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalClosed (LightCondMod R); CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\n  [inst; instMonoidalClosedCondensedSet: CategoryTheory.MonoidalClosed CondensedSet; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite: {C : Type u_1} →\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\n    (J : CategoryTheory.Grothendi; CategoryTheory.IsGrothendieckAbelian.tensorObj: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    [inst_1 : CategoryTheory.Abelian C]; instMonoidalClosedLightCondSet: CategoryTheory.MonoidalClosed LightCondSet; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    [inst_1 : CategoryTheory.Abelian C]",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom adjunction for the derived category of Weil sheaves with constructible cohomology",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ihom.adjunction: : tensorLeft A ⊣ ihom A; ModuleCat.monoidalClosedHomEquiv: (M N P : ModuleCat.{u} R) :\n  ((MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃ (N ⟶ ((linearCoyoneda R ; Rep.homEquiv: {k G : Type u} →\n  [inst : CommRing k] →\n    [inst_1 : Group G] →\n      (A B C : Rep k G) → (Categor; CategoryTheory.exp.adjunction: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    [inst_1 : CategoryTheory.MonoidalCa; CategoryTheory.Closed.adj: {C : Type u} →\n  {inst : CategoryTheory.Category.{v, u} C} →\n    {inst_1 : CategoryTheory.MonoidalCa; CategoryTheory.Types.tensorProductAdjunction: (X : Type v₁) : tensorLeft X ⊣ coyoneda.obj (Opposite.op X); CategoryTheory.MonoidalClosed.internalHomAdjunction₂: [MonoidalClosed C] : curriedTensor C ⊣₂ internalHom; CategoryTheory.ihom.ihom_adjunction_unit: : (ihom.adjunction A).unit = coev A",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.MonoidalClosed.ofEquiv:  {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj:  {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory; CategoryTheory.MonoidalClosed.ofEquiv_curry_def:  {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def:  {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [; CategoryTheory.Monoidal.Reflective.monoidalClosed:  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2,; CategoryTheory.Monoidal.Reflective.closed:  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2,; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom:  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2,; CategoryTheory.Monoidal.Reflective.isIso_tfae:  {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2,; CategoryTheory.cartesianClosedFunctorOfLeftAdjointPreservesBinaryProducts:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [; CategoryTheory.frobeniusMorphism_mate:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v, u'} D] [",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|bifunctorRHom|WeilComplex|ProEtaleWeilSheaf",
+   "results": "[grep] OK 0 hit(s); No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of bounded constructible complexes of pro etale sheaves of continuous l adic coefficient modules is bounded constructible",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category or condensed monoidal constructions, not bounded constructible closure for these native Weil coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, MonoidalCategory",
+   "results": "[loogle] OK 0 hit(s); ; loogle: unknown identifier 'MonoidalCategory'",
+   "date": "2026-10-22",
+   "verdict": "unavailable: query rejected because MonoidalCategory was not resolved; followed by the successful quoted DerivedCategory query"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*[Cc]onstructible.*tensor|[Cc]onstructible.*[Dd]erived.*[Tt]ensor|IsAdicConstructibleSheaf",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category or condensed monoidal constructions, not bounded constructible closure for these native Weil coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes with locally free constructible cohomology stable under derived tensor product",
+   "results": "[leansearch] OK 8 hit(s); DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; HomologicalComplex.tensorObj; DerivedCategory.right_fac_of_isStrictlyLE; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; HomologicalComplex.tensorHom; HomologicalComplex.monoidalCategoryStruct; DerivedCategory.TStructure.t",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category or condensed monoidal constructions, not bounded constructible closure for these native Weil coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor closure of bounded complexes with stratified locally finite free cohomology over sheaves of rings",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategoryLightCondMod; HomologicalComplex.HasGoodTensor₁₂",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category or condensed monoidal constructions, not bounded constructible closure for these native Weil coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "[loogle] OK 12 hit(s); HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory; instCategoryDerivedCategory; DerivedCategory.instHasZeroObject; DerivedCategory.instPreadditive; DerivedCategory.instHasShiftInt; DerivedCategory.singleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category or condensed monoidal constructions, not bounded constructible closure for these native Weil coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category or condensed monoidal constructions, not bounded constructible closure for these native Weil coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-cor-verdier-exchange.proof.md steps 1-2; Step 1, first and fourth Hom bijections: constructible tensor closure needed to apply the structure-morphism adjunctions on WC^der; the adjunction is lem-sf-weil-native-closed-forgetful. Serves steps 1-2 of current fix-cor-verdier-exchange, used in lem-a1-local-boundary-duality. The ancestor command returns None for the maintainer-seeded audit root.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-derived-weil-tensor-hom-adjunction",
+  "worker": "stage1",
+  "summary": "Q32: preserved the current tensor-closure statement and native B_X model; reduced through exact cohomology/tensor forgetting, identified the continuous finite-subextension coefficient, chose a common finite stratification and simultaneous weakly contractible free trivializations, used the existing derived split-model lemma, computed the finite total tensor and descended the uniform interval and constructibility. All smaller facts already have nodes; no new nodes or Mathlib leaves. No Lean written or compiled. Repair of return at 2eea88068b8: re-read the current operation definition and every cited statement, updated step 8 and its literal citation to the explicit K-flat total-tensor construction with diagonal Weil action; the tensor-closure statement and proof route remain valid.",
+  "blueprint": "Realizes the constructible-domain tensor input in fix-lem-tensor-adjunction.proof.md Step 1, first and fourth transpositions, serving fix-cor-verdier-exchange Steps 1-2. The item is a maintainer-seeded audit descendant with no imported blueprint ancestor (ancestor prints None); existing from.place and via are retained. Searches for constructible tensor, locally split, stratification and tensor found no blueprint node stating this native derived-Weil tensor assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-totally-disconnected-coefficient-realization",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "det-lem-coefficient-heart-common-stratification",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-sf-projective-cohomology-split-model",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic coefficient, site, ringed-derived or finite-stratification tool used in the explicit local tensor computation; this unit has no replacement for its stated general fact. No duality or projection-formula route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "The characterization of set-sheaf epimorphisms by local lifts transfers weak contractibility to the localized small pro-etale site of a cover member; this is a general site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-7383b776d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-7383b776d (reviewer sub-agent of L); spot-checked: This re-delivery answers the landing refusal of 2eea88068b82, which had passed review in full; the refusal was caused by a changed statement of def-sf-derived-weil-category-and-operations. I diffed the item field by field: only the text of step 8 and split_report.summary changed. The statement, stmt_deps, steps 1-7, uses, proof_deps, blueprint, unit and tool_uses are identical. Across the two snapshots, the only cited statement that changed is the operations definition. I read the new definition in full. It defines the total tensor (direct-sum total complex, d⊗1+(-1)^p 1⊗d, diagonal Weil action), defines K-flatness in W_X, and takes ⊗^L by localizing on K-flat resolutions with the native structure from lem-sf-weil-native-closed-forgetful. That lemma's statement is unchanged: U_T is exact and conservative, commutes with cohomology, and gives U(K⊗^L L) ≅ UK⊗^L UL. So the step 2 reduction holds and the item statement still matches the definition. The new step 8 sentence paraphrases the current definition accurately and adds no uncited claim. Its vanishing and constructibility argument is unchanged (09AH stratum detection outside [a+c,b+d], finite-free lissity inside, U-comparison). I re-read steps 1-7: coefficient identification, Noetherian 01T6, global stratification and common refinement, cartesian exactness plus 07A4, 0990 weakly contractible refinement with evaluation preserving epis, derived split model, and 06YS K-flat total tensor. Edge cases still hold: zero ranks, acyclic inputs, X empty. The dependency closure has no cycle. There are no new nodes, no SGA source, and the statement is not weakened. I accept the 12 generic tool_uses as before. Advisory: det-thm-sf-pf-field-tensor(1) and lem-sfb-dc-tensor-preserves could shorten steps 3-8."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeDerivedWeilTensorConstructible",
+  "declaration": "AlgebraicGeometry.WeilComplex.nativeDerivedTensor_mem_weilComplex",
+  "file": "lean/Sheaf/Paper/NativeDerivedWeilTensorConstructible.lean",
+  "statement": "theorem nativeDerivedTensor_mem_weilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (A B : WeilComplex k₀ l X) : WeilComplex.objectProperty k₀ l X ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).obj (B.obj, A.obj))",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d630255e0",
+  "group": "N6",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean; statement verbatim to the file. Clause check: k₀ finite field, Fact l.Prime, Fact (ringChar k₀ ≠ l), X over Spec k₀ with IsSeparated+LocallyOfFiniteType+QuasiCompact, exactly the variable block of DerivedWeilOperations.lean:133-135, nothing stronger; A B : WeilComplex; tensor = recorded ProEtaleWeilSheaf.nativeDerivedTensor applied to (B.obj, A.obj), node order B⊗A; conclusion WeilComplex.objectProperty = t.bounded ⊓ homologyProperty(adicConstructibleSheaf.inverseImage forget) (Category.lean:149-160), the node's WC^der membership exactly; no adjunction clause. Single universe u, autoImplicit false. Edge cases ok: zero/acyclic, empty X, rank 0, varying ranks. No name collision or existing closure theorem in side-live. Private imports = the 11 Lean-bound proof_dep modules (all exist) + the 2 Mathlib leaves' files. No hollow defs, only sorry; module and theorem docstrings carry source place, blueprint tag and all 8 steps. Worker report real; second-reading section states policy (advisory H11). Not dropped; not superseded. No files changed, no compile (worker: scompile clean, deliver2 dry run OK). Maintainer note: a released S1 keep_plan re-split note exists; statement is kept, so the binding stays valid, but the proof-step docstring and imports will need a stage-3 refresh."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-80399",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T123250-L-1849819",
+  "kind": "interface",
+  "note": "independent cc review: item proof (criterion + adicConstructibilityPredicateComparison + boundedConstructible_tensor_closure + new comparison) against node lem-sf-derived-weil-tensor-hom-adjunction; new sorry nativeGeometricForget_tensorComparison against NativeClosedComparison.tensorComparison, nativeGeometricForget, CondensedRing.derivedTensor; unit sk-prop-sf-biduality-general realized empty"
+ }
+}

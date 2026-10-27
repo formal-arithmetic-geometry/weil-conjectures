@@ -33,110 +33,40 @@
  },
  "proof": [
   {
-   "text": "Choose generators of $J$, possible since $A$ is Noetherian, and put $N=\\operatorname{Res}_{\\underline A}M$. The constant/completed coefficient equivalence applies on $X_{\\mathrm{proét}}$: its completed ring is exactly $B_X$, its completeness notion is the local one in the statement, and it identifies the reductions of $N$ and $M$ compatibly with all quotient maps. The residue complex $C$ is constructible, using the single stratum $X$ for each of its finitely many nonzero locally constant cohomology sheaves. Apply the finite-reduction structure lemma to $N,C,[a,b]$. Write $A_n=A/J^n$, $M_n=M\\otimes^L_{B_X}\\underline{A_n}$, and obtain étale $C_n$ with bounded constructible cohomology and Tor amplitude $[a,b]$, and compatible $\\alpha_n,\\beta_n$. In particular $M$ is the derived limit of this specified quotient tower after restricting scalars. No perfectness of $A_n$ over $A$ was invoked.",
+   "text": "Apply the covering-family finite-reduction model theorem. It supplies the covering family, affine weakly contractible objects V, bounded finite-projective complexes P and all finite-reduction isomorphisms.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-sfb-adic-constructible-finite-reductions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099L, 099M and 09C2; opening of the proof of Tag 09C6"
-   }
-  },
-  {
-   "text": "Work on a connected clopen component $Y$ of an affine Noetherian chart of $X$. These form an open covering. Indeed the underlying affine space is Noetherian by the cited lemma; Noetherian induction on closed subsets gives finitely many irreducible components (a minimal counterexample would be reducible into two smaller closed subsets). Grouping those finitely many components by chains of nonempty intersections gives finitely many connected components; each group and its complement are finite unions of closed components, hence clopen. Slice restriction is identified with the pro-étale site of $Y$ by the localization lemma. It is sectionwise restriction, so preserves products and kernels, and it preserves epimorphisms because their locally lifting sections lift over the same covering in the slice. It is therefore exact. It preserves constant sheaves and their inverse limits. Countable products are exact and represent derived products; consequently restriction takes the quotient Roos triangle, including its completion unit, to the same triangle on $Y$. Thus $M|_Y$ and $N|_Y$ remain complete and have the restricted compatible quotient tower. Restriction also commutes with the total tensor calculation on K-flat resolutions. Apply the finite-reduction structure lemma on $Y$, choosing these restricted markings, and henceforth replace $X$ by nonempty connected affine $Y$.",
-   "uses": [
-    "lem-sc-affine-noetherian-underlying-space",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-adic-constructible-finite-reductions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C6, connected-local reduction; Tags 099M and 0947 for restriction of completion"
-   }
-  },
-  {
-   "text": "For each $n$, apply nilpotent-reduction lissity on the étale site with coefficient ring $A_n$, ideal $J/J^n$, and bounded complex $C_n$. The ideal is nilpotent, $A_n$ is Noetherian (ideals correspond to ideals of $A$ containing $J^n$), and the normalized reduction of $C_n$ modulo $J/J^n$ is $C_1=C$. Thus all cohomology sheaves of $C_n$ are étale locally constant of finite type. The connected étale perfect-constancy lemma now applies: the Tor bound and boundedness were provided in step 1. Fix one geometric point $\\bar x$ of $Y$ and put $E_n=(C_n)_{\\bar x}$. It gives a perfect $E_n$ and one étale local constant value $E_n$ for $C_n$. Take the exact stalk of $\\beta_n$. The tensor-pullback comparison gives normalizations $E_{n+1}\\otimes^L_{A_{n+1}}A_n\\simeq E_n$. Define the transition $E_{n+1}\\to E_n$ as the scalar-extension unit followed by this normalization, considered first in $D(A_{n+1})$ and then in $D(A)$. On K-flat representatives the unit is $p\\mapsto p\\otimes1$ and reassociation is $(p\\otimes u)\\otimes v\\mapsto p\\otimes uv$; hence the stalk normalizations have the same quotient cocycles as the $\\beta_n$.",
-   "uses": [
-    "lem-weil-pbc-nilpotent-reduction-lissity",
-    "lem-sfb-connected-etale-perfect-constant",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C6, first paragraph; Tags 094I and 09BI"
-   }
-  },
-  {
-   "text": "Apply algebraic perfect inverse-limit reconstruction to the tower $E_n$ with those transitions. Its ring hypothesis is the given $A\\simeq\\varprojlim A/J^n$, and $E_1$ is perfect by step 3. Obtain a perfect $P\\in D(A)$ and projection-induced isomorphisms $P\\otimes_A^L A_n\\simeq E_n$ compatible with all transitions. Choose a bounded finite-projective representative $P^\\bullet$. Next take an affine weakly contractible pro-étale covering $\\{W_t\\to Y\\}$. The weakly contractible clause of the connected perfect-constancy lemma gives, for each $n$ and each $W=W_t$, an isomorphism $M_n|_W\\simeq\\underline{E_n}|_W\\simeq\\underline{P^\\bullet\\otimes_A A_n}|_W$. These isomorphisms need not be compatible, and no such compatibility is presumed in the next step. For every such $W$, the localization lemma identifies $Y_{\\mathrm{proét}}/W$ with $W_{\\mathrm{proét}}$. Restriction is exact, preserves sectionwise products and the finite Koszul tensor complexes, and therefore preserves their Roos completion unit, since countable products are exact. Hence $M|_W$ is locally derived complete, and restriction of the completed coefficient ring is $B_Y|_W=\\varprojlim_n\\underline{A_n}|_W$; this justifies the completion calculation on $W$ below.",
-   "uses": [
-    "lem-weil-pbc-rlim-perfect-complete",
-    "def-pc-perfect-ring-complex",
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "lem-sfb-connected-etale-perfect-constant",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C6, algebraic reconstruction by Tag 09AW, and the choice of weakly contractible cover"
-   }
-  },
-  {
-   "text": "For the completed constant model T=B tensor P, take the image of each finite-projective idempotent on a finite power of B. This is the inverse limit of the corresponding power-torsion summands, because images of idempotents are equalizers. Torsion-limit completeness and the constant/completed coefficient equivalence make the bounded complex T complete. M remains complete on each exact slice.",
-   "uses": [
-    "lem-weil-pbc-torsion-limit-sheaf-completeness",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-ringed-derived-restriction"
+    "lem-sfb-adic-finite-reduction-model-family"
    ],
    "elementary": false
   },
   {
-   "text": "Generate the sieve from the affine weakly contractible covering family. Every member U factors through an original covering object V. Restriction along U -> V is an exact functor R on completed-coefficient derived categories. Composition of sectionwise slice restriction gives R(M|V) isomorphic to M|U and R(T|V) isomorphic to T|U, with their original constant models. It is V, not arbitrary U, that is required to be affine and weakly contractible. Covering transitivity gives the stated covering sieve.",
+   "text": "Reuse AdicPerfectModel.complete_slice_model, the complete private finite-projective model argument in the completed perfect-model reduction module. Compare the strict-perfect constant functor with the commutative constant functor by constantPresentationIso. Whisker by coefficient extension, map the isomorphism to complexes and then the derived category, and use mapDerivedCategoryFactors for slice restriction. Transport completeness through this isomorphism. Independently apply slice completeness to M.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-ringed-derived-restriction"
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-sfb-adic-residue-slice-completeness"
    ],
-   "elementary": true
+   "elementary": false
+  },
+  {
+   "text": "Generate the covering sieve of the family. For a member U -> final choose its factorization U -> V_i -> final. The derived functor of overMap along U -> V_i is R. The composition comparison for exact derived functors and overFunctorMap identify successive restriction with direct restriction; their components give both required object isomorphisms. Bundle these with the two completeness assertions and all reduction isomorphisms.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
   "def-weil-pbc-ringed-derived-restriction",
-  "lem-pur-derived-change-of-rings",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-adic-constructible-finite-reductions",
-  "lem-sfb-connected-etale-perfect-constant",
-  "lem-weil-derived-countable-products-core",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-nilpotent-reduction-lissity",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-rlim-perfect-complete",
-  "lem-weil-pbc-torsion-limit-sheaf-completeness",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "lem-sfb-adic-finite-reduction-model-family",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-sfb-adic-residue-slice-completeness",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, first paragraph through perfect algebraic reconstruction, and the affine weakly contractible covering; completeness of the explicit constant model as expanded in the parent steps 4-5. Sieve refinements are handled by exact restriction."
+  "place": "Tag 09C6, finite-model construction followed by slice completeness and covering-sieve assembly; reuse of the already proved finite-projective completed-model argument."
  },
  "mathlib_searches": [
   {
@@ -215,14 +145,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-9a1f0",
-  "group": "C4",
+  "reviewer": "COMPILER",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261021T022430-L-2846381",
+  "landing": "20261025T202914-L-2765214",
   "kind": "interface",
-  "note": "independent cc review: item theorem and 6 moved defs vs quarantine/Sheaf/Paper/AdicResidueLissePerfectLift.lean (byte-identical); 4 new sorry statements vs Stacks 09C6/09C5/099M/0940; --all compile of 7 modules clean; #print axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

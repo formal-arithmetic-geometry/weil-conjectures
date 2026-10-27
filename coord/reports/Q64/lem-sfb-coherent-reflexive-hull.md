@@ -1,0 +1,52 @@
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-coherent-reflexive-hull.json`: item, unchanged statement, split into five steps.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-hom-reflexive-domain.json`: new statement-only algebra lemma, Stacks Tag 0AV3; no Mathlib match. One new node, zero Mathlib leaves.
+- `citations.json`: a verbatim quotation for each step/node citation.
+- `searches.jsonl`: unmodified msearch records; item and new-node searches were actually run. `prepare.py` is sandbox preparation material, not part of the delivery.
+
+## Attachments
+
+None. Searching `lean/WeilConjectures/` by the item tag, reflexive, bidual and double-dual notions found no declaration proving the item. The finite locally free biduality results and the quotient-of-a-DVR reflexivity results have additional hypotheses and do not attach to this item or to the new general Hom lemma.
+
+## WANTED
+
+None. All mathematical sources used are in the read-only literature tree.
+
+## Audit and changes
+
+The item statement is correct as imported. I read `divisors.tex`, `divisors-lemma-dual-reflexive` (0AY4), the following `divisors-remark-tensor`, and `more-algebra.tex`, `more-algebra-lemma-dual-reflexive` (0AV3). They assume integrality/local Noetherianity for schemes, respectively a Noetherian domain for modules, with no normality. The item initially had no proof. I retained its statement, source, statement dependencies, inherited search records and blueprint ancestry. Its proof now expands the coherence and affine identification needed to apply 0AV3; it does not merely repackage the sheaf result in a new node.
+
+The new node has exactly the 0AV3 hypotheses: M is finite, N is finite reflexive, and R is a Noetherian domain. Reflexivity is defined by the actual evaluation into the R-linear double dual. It does not assert that arbitrary finite modules are reflexive. Its empty proof and empty proof dependencies are intentional: only the item is split in this delivery. For its future worker, the source proof takes a finite presentation of M and embeds Hom(M,N) into a finite sum of N, with torsion-free quotient, then applies the reflexive-kernel lemma. That further work belongs to the new node and has not been smuggled into its statement.
+
+I read the chapter and unit records and the three-level route rules. This is a generic coherence/reflexivity tool on the already recorded reflexive-extension route; no chapter or unit route changes. `blueprint_refs.py ancestor` reports a null ancestor for this pre-existing long created-node chain. I preserved that null ancestor and extended the via list for the new node; the places identify the inherited 0EBJ converse and its 0AY4/0AV3 ingredient. I searched the whole imported blueprint using `reflexive`, `reflexive module`, `Hom.*reflexive`, `Hom(M` and `0AV3`, and searched `literature/blueprint/latest/blueprint` directly. The blueprint hits concern coefficient duality, derived biduality or categorical reflexive relations, not this coherent-module theorem.
+
+Mathlib searches used only msearch.py: LeanFinder, Loogle, grep and LeanSearch, with two semantic phrasings for the new node. I read the returned candidates against the local sources `Mathlib/LinearAlgebra/Dual/Defs.lean:210-268` and `Lemmas.lean:251-267`. In particular, LeanSearch's informal description of `Module.Dual.instIsReflecive` omits the input reflexivity assumption, but the actual source has `variable [IsReflexive R M]` before it. It therefore cannot prove that an arbitrary finite module over a domain has reflexive dual. The finite free/projective instances likewise do not establish the general Hom statement. The grep in AlgebraicGeometry found no reflexive/double-dual theorem. All searches and their returned candidates are retained; no service failure has been relabelled as absence.
+
+## Not duplicates
+
+`lem-sfb-finite-hom-reflexive-domain` vs `lem-sfb-coherent-reflexive-hull`: the new node is the module-theoretic Hom(M,N) theorem for arbitrary finite reflexive target N over a domain; the item constructs a coherent sheaf double dual and proves its evaluation is an isomorphism. Their objects and assertions differ; steps 1–3 and 5 supply the sheaf argument, rather than applying a renamed copy of the item.
+
+`lem-sfb-finite-hom-reflexive-domain` vs `lem-sfb-affine-reflexive-module-comparison`: the existing node compares module and sheaf reflexivity; it does not establish reflexivity of Hom modules. It is reused at step 5.
+
+`lem-sfb-finite-hom-reflexive-domain` vs `lem-per-reflexive-saturated-free-embedding`: the existing node characterizes an already given finite module as reflexive by existence of a saturated finite-free embedding; it does not assert that Hom(M,N) is reflexive from reflexivity of N. The new node is precisely the separate Stacks algebra lemma 0AV3.
+
+The DAG search for `0AV3` and `more-algebra-lemma-dual-reflexive` found no existing node. Searches for Hom, reflexive modules, sheaf double duals and the coherence ingredients found the existing nodes reused here. The height-one intersection criterion requires normality and is not the Hom theorem. No duplicate coherence or affine-comparison node is created.
+
+## Review by Q64
+
+I checked delivery-errors B–E with the node statements and the Stacks sources open. The item is exactly the observation after 0AY4 in `divisors-remark-tensor`. The new node is exactly `more-algebra-lemma-dual-reflexive` (0AV3); its R, M, N are introduced and its finite/reflexive hypotheses are retained. It has only a statement, no disguised proof. The Noetherian and finite-module notions point to their existing definitions, the reflexive notion is defined inline, and all TeX is singly escaped after JSON decoding. Neither item nor new node has a matching finished project declaration. The new node's searches and creation stamp are its own; the item retains its historical metadata.
+
+Step 1 uses `lem-weil-pbc-spec-tilde-free-module` with n=1 for the structure sheaf's affine quasi-coherence. The definition `pqf-def-coherent` makes the generator 1 a finite-type proof; `pqf-lem-coherent-ft-locnoeth` supplies the exact equivalence giving coherence. This is the structure-sheaf assertion of 01XZ in `coherent-lemma-coherent-Noetherian`. I do not quote the latter assertion from a node that lacks it; I give the argument using what the cited statements actually say.
+
+Step 2 implements the internal-Hom proof of 01Y2 (`coherent-lemma-tensor-hom-coherent`), whose cited Modules lemma is `lemma-internal-hom-locally-kernel-direct-sum` (01CQ). The statement of `lem-weil-pbc-coherent-hom-local-kernel` explicitly gives the local kernel with finite sums and unrestricted target. The statement of `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` gives finite sums and kernels of coherent modules. Both restriction and gluing of coherence are explicit clauses of `lem-weil-pbc-coherent-module-local-on-open-cover`. I apply these first to H, then to H-dual; the second application is legal only after the first establishes its coherence. Thus coherence of the double dual is actually proved here using existing facts.
+
+Step 3 supplies the affine reduction that 0AY4 leaves implicit when citing 0AV3. For nonempty W the domain assertion is in `def-pc-integral-scheme`, not inferred from normality. `pqf-lem-affine-open-locnoeth` supplies the Noetherian hypothesis on every affine open; this agrees with `properties-lemma-locally-Noetherian`. I explicitly checked restriction of H-dual is coherent using the open-locality node, used the coherence/quasi-coherent finite-type equivalence on W, and used clause (a) of `lem-weil-pbc-quasi-coherent-finite-type-affine` for finiteness of P. The source is `properties-lemma-finite-type-module`. For Q(W), `def-pur-sheaf-hom` states exactly the sheaf-morphism description; clauses (1) and (3) of `lem-weil-pbc-affine-tilde-gamma-adjunction` give both the required counit and the Hom bijection. The formula sends a morphism to its section map and is A-linear by the pointwise operations. This avoids treating the affine comparison node's proof as an additional theorem; only stated adjunction data are used.
+
+Step 4 uses the new 0AV3 node with M=P, N=A, and verifies its hypotheses. A is finite, and I wrote the elementary proof that its evaluation is an isomorphism using f(a)=a f(1). The already proved finiteness of P and the Noetherian-domain hypotheses from step 3 are all that 0AV3 requires. I wrote out the evaluation naturality equation for c and tested it on q and lambda, so transport of reflexivity is justified for the canonical evaluation. The remaining empty-affine case uses zero modules and does not incorrectly apply the domain lemma to the zero ring.
+
+Step 5 cites only the statement of `lem-sfb-affine-reflexive-module-comparison`, which explicitly makes (ii), reflexive sections on every affine, equivalent to (i), sheaf evaluation an isomorphism. Q is coherent by step 2 and X has exactly the required hypotheses. This is 0AY0 in `divisors-lemma-check-reflexive-on-affines`. The argument proves the whole evaluation conclusion without needing a fresh sheaf-Hom-reflexivity node. Off-unit generic sheaf/affine tools are declared in split_report.tool_uses; they implement the inherited route rather than replace a unit step.
+
+For small cases I checked H=0 (all duals zero), H=O and finite free H (ordinary evaluation), a torsion module A/(a) over a domain with a nonzero (its dual and double dual are zero), and a nonnormal domain such as k[t^2,t^3] with H=O. The last case confirms that normality was not silently needed. For the new general Hom lemma I checked M=0, N=0, M=R and M=R/(a) with a nonzero: a reflexive N is torsion free, since evaluation injects it into its double dual, so the last Hom is zero, consistent with the statement. Over a field it reduces to finite-dimensional duality. These tests distinguish the assertion from the false claim that all finite modules themselves are reflexive.
+
+Every step is less than 2000 characters. No lemma has been hidden in a long step; the one substantive new algebra ingredient is exposed as the statement-only 0AV3 node. The short isomorphism/evaluation calculations remain written in the steps. No source dispute, statement repair, route departure or unfinished work on the item remains. The only new open work is splitting the new algebra node. No Lean was written, no compiler or Lake was run, and all writes were confined to the assigned sandbox.

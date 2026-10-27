@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-site-tensor-hom-equiv",
+ "kind": "statement",
+ "title": "Currying for the independent-universe sectionwise sheaf tensor",
+ "statement": "Let C be a category in object universe a and morphism universe b, J a Grothendieck topology, and A a sheaf of commutative rings in universe r. Assume additive sheafification and its locally bijective characterization in module universe max(a,b,m). For A-module sheaves P,M,N in that universe, the recorded functor siteSheafTensorRight M has a canonical currying equivalence Hom(P tensor M,N) ≃ Hom(P,homObj M N). For a morphism φ, a section p over U, a slice object W→U and a section x of M over W, its image is φ_W(p|_W tensor x), with the tensor mapped into the sheaf tensor by the sheafification unit. This equivalence commutes with precomposition in P. It uses the existing sectionwise tensor and slice Hom, without introducing another tensor or internal Hom.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor, and Section 04TT, evaluation on the localized site."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For a presheaf tensor morphism φ and section p over U, define a map on C/U by x↦φ(p restricted to W tensor x). Naturality follows from restriction compatibility of φ and the presheaf composition law. The tensor universal property proves linearity in x, while additivity and scalar compatibility in p follow by currying the sectionwise linear map φ_W.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely evaluate a section of slice Hom on the identity slice and use the sectionwise tensor universal property. Naturality follows from naturality of the section of Hom and of its components on C/U. The first inverse identity holds on pure tensors because restriction by an identity is identity. For the second, restrict to W and evaluate on W/W; naturality identifies this with the original slice component.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the presheaf equivalence with the sheafification Hom bijection and the fully faithful forgetful functor on module sheaves. Its section formula follows because sheafification transposition precomposes with its unit, exactly the recorded local pure tensor. Naturality in P follows from naturality of that unit and of a module-sheaf morphism on restriction.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The explicit currying proof of Tag 03EO (whose proof is omitted in the source), with independent universes and the recorded siteSheafTensorRight tensor model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom adjunction for sheaves of modules on a site with independent universes",
+   "results": "ihom.adjunction and ModuleCat.monoidalClosedHomEquiv concern a pre-existing closed structure or modules over one ring; no general-site module-sheaf currying equivalence.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor Hom adjunction sheaves modules internal hom comparison equivalence right adjoint uniqueness",
+   "results": "ModuleCat.monoidalClosedHomEquiv, LightCondensed.ihomPoints and sheafification adjunctions.",
+   "date": "2026-10-27",
+   "verdict": "Only component ingredients, no equivalence for siteSheafTensorRight."
+  },
+  {
+   "tool": "grep",
+   "query": "siteSheafTensor.*Adjunction|siteSheafTensorRight.*homObj|tensorHomEquiv",
+   "results": "The source tensorHomEquiv and PresheafOfModules.homObjEquiv require a single common universe for site, morphisms, ring and modules. The independent-universe tensor model has no Hom adjunction. Blueprint searches for tensor Hom adjunction and 03EO have no match.",
+   "date": "2026-10-27",
+   "verdict": "Construct the bridge for the existing independent-universe tensor model; the old monoidal API remains untouched."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleHomComparisonCore",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Currying native evaluation on further slices in the Hom comparison. The parent records lisse biduality, ultimately used by blueprint lem-a1-local-boundary-duality; the computed ancestor is null because existing created.item records name modules rather than node IDs.",
+   "via": [
+    "lem-sf-adic-module-hom-comparison-core",
+    "lem-sf-adic-module-tensor-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorHomEquiv",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorHomEquiv.lean",
+  "declaration": "SheafOfModules.SiteTensorHom.equiv",
+  "declarations": [
+   "SheafOfModules.SiteTensorHom.curryApp",
+   "SheafOfModules.SiteTensorHom.curry",
+   "SheafOfModules.SiteTensorHom.evalId",
+   "SheafOfModules.SiteTensorHom.uncurry",
+   "SheafOfModules.SiteTensorHom.presheafEquiv",
+   "SheafOfModules.SiteTensorHom.equiv",
+   "SheafOfModules.SiteTensorHom.equiv_apply",
+   "SheafOfModules.SiteTensorHom.equiv_naturality"
+  ],
+  "statement": "def equiv (P M N : SMod) :\n    ((siteSheafTensorRight M).obj P ⟶ N) ≃ (P ⟶ homObj M N)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201629-L-3402398",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201629-L-3402398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

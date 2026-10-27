@@ -12,106 +12,76 @@
  ],
  "proof": [
   {
-   "text": "Use the monoid, prime-ideal, localization and topology definitions in [def-trf-fine-fan-blowup]. For $a\\in P$, put $F_a=\\{c\\in P:\\exists d\\in P,\\ n\\in\\mathbf N,\\ c+d=na\\}$. This contains $0,a$, is closed under addition, and has the face property: if $c+e\\in F_a$, an equation $c+e+d=na$ puts both $c$ and $e$ in $F_a$. Hence $\\mathfrak m_a=P\\setminus F_a$ is a proper prime ideal: adding an arbitrary element to a nonmember of $F_a$ cannot enter $F_a$, and its complement is closed under addition. In particular $\\mathfrak m_a\\in D(a)$. If $\\mathfrak q\\in D(a)$, then every $c\\in F_a$ avoids $\\mathfrak q$: otherwise $c+d=na$ belongs to $\\mathfrak q$, whereas all multiples of $a$ avoid it. Thus $\\mathfrak q\\subseteq\\mathfrak m_a$.",
-   "uses": [
-    "def-trf-fine-fan-blowup"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.2--3.1.4(i),(iii), printed p.98; explicit face calculation"
-   }
-  },
-  {
-   "text": "Every basic neighborhood $D(c)$ of $\\mathfrak m_a$ has $c\\in F_a$, so the previous calculation gives $D(a)\\subseteq D(c)$. Since the $D(c)$ form a basis, every open neighborhood of $\\mathfrak m_a$ contains $D(a)$. Consequently every open cover $D(a)=\\bigcup_i U_i$ has a member equal to $D(a)$: choose a member containing $\\mathfrak m_a$. This also treats $a=0$, for which $F_0=P^\\times$ and $D(0)=X$.",
-   "uses": [
-    "def-trf-fine-fan-blowup"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII Remark 3.1.4(iii), printed p.98; triviality of covers of basic opens"
-   }
-  },
-  {
-   "text": "Let $Q$ be the presheaf of commutative monoids $Q(U)=\\mathcal M_P(U)/\\mathcal M_P(U)^\\times$. Restriction sends units to units because it sends an equation $u+v=0$ to the same equation, so these quotient restrictions are well defined. By [def-trf-fine-fan-blowup], its monoid sheafification is $\\overline{\\mathcal M}_P$. Apply [lem-trf-commutative-monoid-sheafification]: the underlying set presheaf $A=|Q|$ has set sheafification $B=|\\overline{\\mathcal M}_P|$, with the same unit $\\eta:A\\to B$. Work in one universe large enough for the opens of $X$ and these coefficient sets; its open site is small there.",
+   "text": "For a commutative-monoid presheaf M on the open site, consider a nonempty open U with a point m whose every open neighborhood contains U. Mathlib's forgetful PreservesSheafification instance sends the sheafification unit to a set-valued local equivalence. Apply [lem-weil-pbc-large-set-sheafification] to this map to obtain local injectivity and surjectivity. Evaluate the covering equalizer sieve or image sieve at m. A covering arrow V -> U whose domain contains m has U <= V, hence V = U; its restriction is the identity. This proves that the actual unit component at U is bijective. This argument applies both to the local-fraction presheaf and to its sectionwise quotient by units from [def-trf-fine-fan-blowup].",
    "uses": [
     "def-trf-fine-fan-blowup",
-    "lem-trf-commutative-monoid-sheafification"
+    "lem-weil-pbc-large-set-sheafification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YR, section-sheaves-algebraic-structures, (alpha),(beta),(gamma),(epsilon); ILO VIII 3.1.3"
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.3 and Remark 3.1.4(i),(iii), printed pp.98--99; localization and sharpening in 3.1.1--3.1.2."
    }
   },
   {
-   "text": "The unit $\\eta:A\\to B=A^\\#$ is locally bijective by [lem-weil-pbc-large-set-sheafification], as follows directly from its stated criterion. First, for any sheaf $H$, its sheafification unit $\\eta_H:H\\to H^\\#$ is invertible: the universal property [def-weil-pbc-sheafification] gives $r:H^\\#\\to H$ with $r\\eta_H=1_H$, and uniqueness after precomposition with $\\eta_H$ gives $\\eta_Hr=1_{H^\\#}$. Naturality gives $\\eta^\\#\\eta=\\eta_B\\eta$; uniqueness after precomposition with $\\eta$ then gives $\\eta^\\#=\\eta_B$, which is invertible by the preceding argument. The cited criterion therefore applies to $\\eta$. In explicit terms, each section of $B(U)$ lifts to $A$ on an open cover of $U$, and any two sections of $A(U)$ with the same image agree on an open cover of $U$.",
+   "text": "For a in P, choose the greatest prime m of D(a) from [lem-trf-monoid-principal-open-face]. The localization at the complement of m equals P_a: its denominators are in the principal face F_a, so D(a) is contained in each denominator basic open, and the same lemma includes that denominator localization in P_a. Conversely powers of a lie in the prime complement. A compatible local-fraction section on D(a), as defined in [def-trf-fine-fan-blowup], is constant and can be evaluated at m. Its inverse sends q in P_a to the constant family with ambient value q, which lies in every point localization since a avoids every prime of D(a). These maps are inverse monoid homomorphisms.",
    "uses": [
-    "lem-weil-pbc-large-set-sheafification",
-    "def-weil-pbc-sheafification"
+    "def-trf-fine-fan-blowup",
+    "lem-trf-monoid-principal-open-face"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00WH (proposition-sheafification-adjoint) and 00WK (lemma-sections-sheafification); local-bijection criterion supplied by the cited existing large-set node."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.3 and Remark 3.1.4(i),(iii), printed pp.98--99; localization and sharpening in 3.1.1--3.1.2."
    }
   },
   {
-   "text": "Apply these two local conditions on $U=D(a)$. Every covering family has a member $D(a)$ itself by Step 2. A local lift over that member is a lift over $D(a)$, proving surjectivity of $\\eta_{D(a)}$; local equality on that member is equality on $D(a)$, proving injectivity. The monoid unit thus identifies $\\overline{\\mathcal M}_P(D(a))$ with $Q(D(a))=P_a/P_a^\\times$, since $\\mathcal M_P(D(a))=P_a$ by [def-trf-fine-fan-blowup]. The bijective monoid homomorphism is a monoid isomorphism: its inverse preserves sums and zero by injectivity.",
+   "text": "Apply Step 1 to both sheafification units on D(a). Transport the equivalence of Step 2 through the first unit, then through Associates, and then through the second unit. Invert the resulting multiplicative equivalence to obtain sections(a). The two units compose to a natural transformation from the sharpening of the raw local-fraction presheaf to the affine sharp presheaf. Its naturality proves the canonical numerator equation. For D(b) contained in D(a), use the localization inclusion from [lem-trf-monoid-principal-open-face]; a constant fraction family restricts to the constant family with the same ambient value. Naturality of the composite unit gives the required restriction formula.",
    "uses": [
-    "def-trf-fine-fan-blowup"
+    "def-trf-fine-fan-blowup",
+    "lem-trf-monoid-principal-open-face"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.3 and Remark 3.1.4(iii), printed p.98"
+    "place": "Expose VIII, 3.1.3 and Remark 3.1.4(i),(iii), printed pp.98--99; localization and sharpening in 3.1.1--3.1.2."
    }
   },
   {
-   "text": "For a prime $\\mathfrak p$, its complement $F$ is a face: if $c+d\\in F$ then neither $c$ nor $d$ can belong to the ideal $\\mathfrak p$. Choose finite monoid generators $e_1,\\ldots,e_r$ of $P$, and let $b$ be the sum of those generators lying in $F$, with empty sum $0$. Every expression for $f\\in F$ uses only such generators, by the face property. Thus $F$ is generated by them. Primality gives $D(b)=\\bigcap_{e_i\\in F}D(e_i)=\\bigcap_{f\\in F}D(f)$, so $D(b)$ is the smallest open neighborhood of $\\mathfrak p$. Furthermore $P_b=P-F$: since $b\\in F$ the first monoid is contained in the second, while $-e_i=(b-e_i)-b\\in P_b$ for each selected generator, so all of $F$ is invertible in $P_b$. Every germ at $\\mathfrak p$ therefore has a representative on $D(b)$, and two representatives there have equal germs only if they agree on $D(b)$, since no smaller neighborhood exists. Step 5 now identifies the stalk with $P_b/P_b^\\times=(P-F)/(P-F)^\\times$.",
+   "text": "Reindex a finite generating set of P by Fin(r). For each prime x, [lem-trf-monoid-prime-minimal-neighborhood] gives a product b of generators avoiding x, the smallest neighborhood D(b), and the equality of P_b with localization at the full complement of x. The object D(b) is terminal in the opposite neighborhood category. By Mathlib's IsColimit.isIso_ι_app_of_isTerminal the actual germ map from D(b) to the stalk defined in [def-trf-fine-fan-blowup] is an isomorphism. Invert it, compose with sections(b), and transport along the equality of localization submonoids to define stalks(x). The colimit relation identifies a germ from any D(a) containing x with restriction to D(b); Step 3 then proves the requested germ formula.",
    "uses": [
-    "def-trf-fine-fan-blowup"
+    "def-trf-fine-fan-blowup",
+    "lem-trf-monoid-prime-minimal-neighborhood"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.2 and Remark 3.1.4(ii),(iii), printed p.98; smallest-neighborhood stalk computation"
+    "place": "Expose VIII, 3.1.3 and Remark 3.1.4(i),(iii), printed pp.98--99; localization and sharpening in 3.1.1--3.1.2."
    }
   },
   {
-   "text": "The identifications in Step 5 are made by the quotient-presheaf unit, which commutes with every restriction. If $D(c)\\subseteq D(a)$, then $\\mathfrak m_c\\in D(a)$, so $a\\in F_c$ by Step 1. An equation $a+d=nc$ shows $-a=d-nc\\in P_c$. Hence the restriction $P_a\\to P_c$ exists and sends $p-ma$ to the same group-completion element $p-ma$; by [def-trf-fine-fan-blowup] it is precisely the unsharpened restriction. Passing to quotients sends $\\operatorname{cl}(p-ma)$ to $\\operatorname{cl}(p-ma)$, because units map to units. For $\\mathfrak p\\in D(a)$, the smallest neighborhood $D(b)$ of Step 6 is contained in $D(a)$; applying this formula to that restriction gives exactly the germ map induced by $P_a\\to P-F$. Thus both the restriction and germ identifications are canonical and induced by localization.",
+   "text": "Apply the numerator formula on D(1) and the germ formula at x. Naturality of germs identifies the resulting element with affineGerm(x,p), and its representing localized element has ambient value of(p). A class in Associates equals 1 precisely when its representative is a unit. In a commutative monoid this means that there is a localized v with of(p)*v = 1. The final units criterion of [lem-trf-monoid-prime-minimal-neighborhood] makes this equivalent to p not belonging to x. No additional finiteness, saturation, sharpness or torsion assumption is used.",
    "uses": [
-    "def-trf-fine-fan-blowup"
+    "def-trf-fine-fan-blowup",
+    "lem-trf-monoid-prime-minimal-neighborhood"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.2--3.1.4, printed p.98; compatibility of localization restrictions and germs"
-   }
-  },
-  {
-   "text": "The germ of the canonical section $p\\in P$ is consequently $\\operatorname{cl}(p)\\in(P-F)/(P-F)^\\times$. By the sharpening definition [def-trf-fine-fan-blowup], this class is zero exactly when $p$ is a unit in $P-F$. If $p\\in F$, its inverse $-p$ lies in $P-F$. Conversely, if $p+(q-f)=0$ with $q\\in P$ and $f\\in F$, equality inside $P^{\\mathrm{gp}}$ gives $p+q=f$ in $P$, using integrality. The face property of $F$ gives $p\\in F$. Thus the zero-germ condition is equivalent to $p\\in F$, or $p\\notin\\mathfrak p$, as required.",
-   "uses": [
-    "def-trf-fine-fan-blowup"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.1--3.1.4(i), printed p.98; units in localization and sharpening"
+    "place": "Expose VIII, 3.1.3 and Remark 3.1.4(i),(iii), printed pp.98--99; localization and sharpening in 3.1.1--3.1.2."
    }
   }
  ],
  "proof_deps": [
   "def-trf-fine-fan-blowup",
-  "lem-trf-commutative-monoid-sheafification",
-  "lem-weil-pbc-large-set-sheafification",
-  "def-weil-pbc-sheafification"
+  "lem-trf-monoid-principal-open-face",
+  "lem-trf-monoid-prime-minimal-neighborhood",
+  "lem-weil-pbc-large-set-sheafification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose VIII, 3.1.1--3.1.4, printed p.98; trivial-cover argument expanded using Stacks 00WH, 00WK and 00YR and the cited general set-sheafification criterion."
+  "place": "VIII 3.1.1--3.1.4, printed pp.98--99; direct multiplicative covering-sieve proof of the unit comparison, evaluation of compatible fractions at the greatest prime, and the terminal-neighborhood colimit calculation."
  },
  "mathlib_searches": [
   {
@@ -222,28 +192,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-affine-fan-localization-sections",
   "worker": "stage1",
-  "summary": "Proved the localization, stalk, functoriality and zero-germ clauses without changing the statement. Expanded the trivial-cover observation of ILO VIII 3.1.4(iii); reused the existing commutative-monoid sheafification leaf and the general large-universe set-sheafification criterion. All monoid-face and finite-generator calculations are explicit steps; no new nodes.",
-  "blueprint": "Preserves the historical ancestry through lem-trf-affine-fan-hom-universal to lem-trf-local-term-locality. Realizes the affine sharp-model localization input of ILO VIII 3.1.3--3.1.4 used by VIII 3.1.8(ii) in the historical strict-fan-chart local comparison; does not alter the current contracting-correspondence unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-large-set-sheafification",
-    "why": "Generic set-sheafification/local-bijection criterion in a common sufficiently large universe; the fan unit has no such general sheaf-theoretic criterion. It is only used to justify that the quotient sheafification unit is locally bijective."
-   }
-  ]
+  "summary": "Repair of the 2026-10-21/22 re-split return: preserves the exact statement and all existing metadata and searches; extracts three comparable statement-only tasks from old steps 1--2 and 7 (principal-open faces), 3--5 and 7 (monoid sheafification), 6 and 8 (prime-complement localization). The parent proof now assembles their precise statements in four steps, below 3000 characters; report.md retains all eight old arguments verbatim and allocates each to its successor task.",
+  "blueprint": "Preserves the historical ancestry through lem-trf-affine-fan-hom-universal to lem-trf-local-term-locality. Realizes the affine sharp-model localization input of ILO VIII 3.1.3--3.1.4 used by VIII 3.1.8(ii) in the historical strict-fan-chart local comparison; does not alter the current contracting-correspondence unit route. Re-split only below this existing historical ancestor: ILO VIII 3.1.3--3.1.4 supporting affine-target comparison in 3.1.8(ii). No chapter or unit route changed.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-large-set-sheafification"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NH-528484183",
-  "group": "NH",
+  "reviewer": "NT-cc-NQ-e82c0805b",
+  "group": "NQ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-528484183 (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, unit/chapter route, ILO VIII §§3.1.1–3.1.4, and Stacks Tags 00WH/00WK/00YR. All eight proof steps are mathematically valid, hypotheses and edge cases check, the coefficient category and localization maps are correct, no duplicate or circular split exists, and the generic sheafification tool use is accepted. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-e82c0805b (reviewer sub-agent of L); spot-checked: PASS. The re-split meets the human's 2026-10-21 note, and all 8 old steps are accounted for. The live item still has the 8 base steps (5323 chars) and nothing supersedes it. Mapping: old 1-2 and the localization algebra of 7 → lem-trf-monoid-principal-open-face; old 3-5 and the unit naturality of 7 → lem-trf-monoid-sheafification-trivial-covers; old 6 and 8 → lem-trf-monoid-prime-minimal-neighborhood. The germ assembly is parent steps 3-4. The three new statements are 1212/1237/1195 chars, statement-only and unsplit; the parent proof is 4 steps, 2257 chars. Source checked: ILO VIII 3.1.1-3.1.4, printed pp. 98-99 (∅ prime, basis D(f), extremal primes, trivial covers of affine sets). Math checked: F_a is a face and m_a is the largest prime of D(a); D(c)⊆D(a) iff a∈F_c, with -a=d-nc ∈ P_c; prime complement F is generated by e_i (i∈I); D(b) is the smallest neighbourhood; P_b=P-F; the units criterion uses integrality and the face property; η is bijective on trivially covered opens and natural. Edge cases: a=0 or a unit, P a group, r=0, empty and maximal prime, torsion, <2,3>⊂N; no saturation used. Each parent step's citations say what the step takes from them; statement and stmt_deps unchanged; ancestry and via correct; searches recorded with LeanSearch as unavailable; no duplicate found in the DAG; no SGA. Advisory only: (1) clause 1 of the sheafification node is the mathlib leaf lem-trf-commutative-monoid-sheafification and clause 2 follows from lem-weil-pbc-site-sheafification-sections-local, so its future proof is short. (2) The item's maintainer tool_uses still lists lem-weil-pbc-large-set-sheafification, which is no longer in proof_deps. (3) The Lean docstring still has the 8-step proof."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AffineFanLocalizationSections",
@@ -263,5 +228,26 @@
   "result": "pass",
   "note": "Read node, stmt_dep def-trf-fine-fan-blowup (unchanged vs live) and its FineFanBlowup decls, faceLocalization, the module and the report. Hypothesis IsFine only, nothing stronger. The Lean has sections/stalks ≃* Associates(faceLocalization) plus numerator, restriction and germ clauses with equal ambient values, and the literal zero-germ iff. The existential isos are uniquely pinned (P→P_a/P_a^× is surjective; every germ comes from a basic open), so nothing is hollow. Edge cases (unit a, empty and maximal prime, group P, torsion, non-saturated), single universe u. lean.statement is verbatim; docstrings have source, blueprint and 8 steps; sorry only; proof-dep imports are allowed (LargeSetSheafification is live). No duplicate. nt_compile --json clean in 7.7 s. Advisory: the second-reading section is the author's own."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082617-L-2196675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

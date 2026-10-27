@@ -1,0 +1,130 @@
+{
+ "id": "lem-per-continuous-integral-scalar-tower",
+ "kind": "statement",
+ "title": "Integral representative of the normalized scalar tower",
+ "statement": "Let l be prime, E,F,G finite extensions of Q_l, i:E→F and j:F→G coefficient embeddings, and X a noetherian finite-dimensional l-invertible scheme. For normalized realizations aE,aF,aG and FieldChange records bEF,bFG,bEG [def-per-continuous-rational-realization-data], assume their coefficient maps satisfy bEF.coefficient≫bFG.coefficient=bEG.coefficient. For each integral bounded constructible complete object K, the equation defining FieldComposition.compatibility holds at its raw rationalization QK, with the prescribed pbcRationalScalarCompComponent and pbcReductionNormalization. This is only a component equation on integral representatives; it constructs no raw comparison and assumes no natural transformation on a family of fields.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; Stacks Tags 0D6D, 0A0E and 0A0G. Expansion of the normalized comparison argument."
+ },
+ "proof": [
+  {
+   "text": "Postcompose the desired equation with extension along the composite rational coefficient map of the integral comparison, followed by the canonical reduction normalization. This map is invertible, so cancellation is legitimate.",
+   "uses": [
+    "lem-pbc-scalar-tensor-composition",
+    "lem-weil-pbc-completed-pullback-reduction-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the direct side substitute bEG.integral_normalization. The prescribed rational associator is the rationalization of the actual integral tensor associator. Naturality of aG.integral moves this associator through the integral comparison.",
+   "uses": [
+    "lem-pbc-scalar-tensor-composition",
+    "lem-weil-pbc-completed-pullback-reduction-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the iterated side use naturality of the reduction normalization and its associativity for the three maps integral-E→rational-E→rational-F→rational-G. Substitute bEF.integral_normalization, then use associativity for integral-E→integral-F→rational-F→rational-G. Substitute bFG.integral_normalization. The last associativity equation for integral-E→integral-F→integral-G→rational-G identifies the result with the direct side. Cancel the invertible postcomposition.",
+   "uses": [
+    "lem-pbc-scalar-tensor-composition",
+    "lem-weil-pbc-completed-pullback-reduction-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-scalar-tensor-composition",
+  "lem-weil-pbc-completed-pullback-reduction-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "H8 expansion of BS Remark 6.8.15 into ambient tensor calculations and integral unit cancellation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived pullback and coefficient extension comparisons obey composition and identity",
+   "results": "8 hits on scheme normalization (hom_ext, normalizationDesc_comp, toNormalization_fromNormalization and related lemmas), none on continuous coefficient tensor normalization.",
+   "date": "2026-10-27",
+   "verdict": "No match for the concrete normalized tensor and completion data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hit: CategoryTheory.Functor.leftDerivedUnique, generic uniqueness of left derived functors.",
+   "date": "2026-10-27",
+   "verdict": "A generic proof tool; it does not state the coefficient and tensor-unit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcReductionNormalization|IsNormalizedPullCounit|RationalRealizationScalar",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived extension of scalars associator is compatible with natural integral realization isomorphisms.",
+   "results": "8 hits: ModuleCat.extendScalars_assoc, extendScalars_assoc_assoc, extendScalars_assoc prime and identity coherence in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; CommRingCat.moduleCatExtendScalarsPseudofunctor in Mathlib.Algebra.Category.ModuleCat.Pseudofunctor. Read extendScalarsComp and extendScalars_assoc: ordinary ring modules, not the prescribed derived reduction and integral realization maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; ordinary pullback and tensor coherence are useful proof tools but do not state these normalized derived equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalContinuousComparisonCoherence",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: cohomology sheaves of pullback are pullbacks, via the continuous rational realization and its normalized scheme/coefficient comparisons.",
+   "via": [
+    "lem-per-rational-continuous-comparison-coherence",
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralScalarTower",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralScalarTower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.continuousIntegralScalarTower",
+  "statement": "theorem continuousIntegralScalarTower (i : E →ₐ[ℚ_[l]] F) (j : F →ₐ[ℚ_[l]] G)\n    (X : Base.{u} l) (aE : At l E X) (aF : At l F X) (aG : At l G X)\n    (bEF : FieldChange l E F i X aE aF) (bFG : FieldChange l F G j X aF aG)\n    (bEG : FieldChange l E G (j.comp i) X aE aG)\n    (hc : bEF.coefficient ≫ bFG.coefficient = bEG.coefficient)\n    (K : PbcBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E)) :\n    aG.J.map (pbcRationalScalarCompComponent l E F G i j X.scheme\n        X.dimension X.prime_unit\n        ((pbcRationalization X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)).hom ≫\n      bEG.comparison.hom.app\n        ((pbcRationalization X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K) =\n    bFG.comparison.hom.app\n        ((pbcRationalScalarExtension l E F i X.scheme X.dimension X.prime_unit).obj\n          ((pbcRationalization X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) ≫\n      (pbcDerivedExtend bFG.coefficient).map (bEF.comparison.hom.app\n        ((pbcRationalization X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K)) ≫\n      (pbcReductionNormalization bEF.coefficient bFG.coefficient bEG.coefficient\n        hc (aE.J.obj\n          ((pbcRationalization X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K))).hom",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T094422-L-223889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

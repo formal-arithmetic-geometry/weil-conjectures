@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-fibre-assassin-containment-base-change",
+ "kind": "statement",
+ "title": "Fibre-assassin containment in an open is invariant under arbitrary base change",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], let $F$ be a quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent], and let $U\\subseteq X$ be an open subscheme [def-weil-open-immersion]. For any morphism of schemes $h:S'\\to S$, put $X'=X\\times_SS'$ [def-pc-base-change], let $h_X:X'\\to X$ be the projection, and put $F'=h_X^*F$ [def-pc-module-pullback] and $U'=h_X^{-1}(U)$. If $s'\\in S'$ maps to $s\\in S$, then $$\\operatorname{Ass}_{X_s}(F_s)\\subseteq |U_s|\\quad\\Longleftrightarrow\\quad\\operatorname{Ass}_{X'_{s'}}(F'_{s'})\\subseteq |U'_{s'}|.$$ Associated points and the tensor pullbacks to scheme-theoretic fibres are as in [def-trf-relative-assassin]. No flatness or finiteness hypothesis on $h$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05KQ (lemma-base-change-assassin-in-U), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-trf-relative-assassin"
+ ],
+ "proof": [
+  {
+   "text": "Write $i_s:X_s\\to X$ and $i_{s'}:X'_{s'}\\to X'$ for the fibre projections. By [def-pc-scheme-fibre] they identify the fibre point sets with the points over $s$ and $s'$. The restriction of $h_X$ therefore gives a map $\\rho:|X'_{s'}|\\to|X_s|$. By [def-trf-relative-assassin], membership in the associated-point set of either fibre is precisely membership of its image in the corresponding relative assassin. Since $U'=h_X^{-1}(U)$, a fibre point $z'$ belongs to $U'_{s'}$ if and only if $\\rho(z')\\in U_s$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KQ (lemma-base-change-assassin-in-U), notation; Divisors Tag 05AT (definition-relative-assassin)."
+   }
+  },
+  {
+   "text": "Assume $\\operatorname{Ass}_{X_s}(F_s)\\subseteq U_s$ and take $z'\\in\\operatorname{Ass}_{X'_{s'}}(F'_{s'})$. Apply [lem-trf-relative-assassin-base-change] to $f,F,h$ and $z'$. Its forward implication gives $\\rho(z')\\in\\operatorname{Ass}_{X_s}(F_s)$, using step 1 to read relative membership in the fibre. Thus $\\rho(z')\\in U_s$, and step 1 gives $z'\\in U'_{s'}$. This proves the forward containment. The cited lemma requires only local finite type of $f$ and quasi-coherence of $F$, both among our hypotheses.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KQ, proof invoking Divisors Tag 05DC (lemma-base-change-relative-assassin), forward implication."
+   }
+  },
+  {
+   "text": "For any $z\\in\\operatorname{Ass}_{X_s}(F_s)$ put $k=\\kappa(s)$, $k'=\\kappa(s')$ and $E=\\kappa(z)$. By [lem-trf-relative-assassin-base-change] the residual fibre over $z$ is $\\operatorname{Spec}B$, where $B=k'\\otimes_kE$. The two factors are field extensions of $k$, so [lem-weil-common-extension-fields-tensor-nontrivial] gives $B\\ne0$. Its zero ideal is proper; [lem-weil-pbc-minimal-prime-over-proper-ideal] gives a minimal prime $\\mathfrak q$ over zero. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], $V(\\mathfrak q)$ is an irreducible component of $\\operatorname{Spec}B$. The point $\\mathfrak q$ is its generic point: a closed set $V(I)$ contains $\\mathfrak q$ exactly when $I\\subseteq\\mathfrak q$, so the intersection of all such closed sets is $V(\\mathfrak q)$. Consequently there exists a residual-fibre component generic point $z'$ above $z$.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change",
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, statement and proof, residual fibre; Algebra Tags 00E0 (lemma-Zariski-topology), (3)-(4), and 00ES (lemma-irreducible), (1),(3)."
+   }
+  },
+  {
+   "text": "Now assume $\\operatorname{Ass}_{X'_{s'}}(F'_{s'})\\subseteq U'_{s'}$. For any $z\\in\\operatorname{Ass}_{X_s}(F_s)$ choose the residual generic point $z'$ from step 3. The reverse implication of [lem-trf-relative-assassin-base-change] says $z'$ belongs to the relative assassin upstairs, hence to $\\operatorname{Ass}_{X'_{s'}}(F'_{s'})$ by step 1. Our assumption puts $z'$ in $U'_{s'}$; step 1 then puts $z=\\rho(z')$ in $U_s$. This proves the reverse containment. The argument also covers an empty associated-point set, and uses no property of $h$ beyond being a scheme morphism.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KQ, proof invoking Divisors Tag 05DC, reverse implication using a generic point in the residual fibre."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-trf-relative-assassin",
+  "lem-trf-relative-assassin-base-change",
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05KQ (lemma-base-change-assassin-in-U), proof via Divisors Tag 05DC; existence of a residual generic point expanded using Algebra Tags 00E0 and 00ES and the existing tensor-nontriviality leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Containment of associated points of a fibre of a finite type scheme in an open subset is invariant under arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y),\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Scheme.Hom.fiberι f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [JacobsonSpace ↥Y] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  closedPoints ↥X ⊆ ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' closedPoints ↥Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is a generalizing map is Zariski-local at the target. Specifically, for any such morphism $ f $ and any Zariski covering siev\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under a field extension all associated points of a finite type scheme module lie above associated points and each associated point has an associated point above it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (S : Submonoid R) {R' : Type u_2} [inst_1 : CommRing R'] [inst_2 : Algebra R R']\\n  [IsLocalization S R'] {M : Type u_3} {M' : Type u_4} [inst_4 : AddCommGroup M] [inst_5 : Module R M]\\n  [inst_6 : AddCommGroup M'] [inst_7 : Module R M'] (f : M →ₗ[R] M') [IsLocaliz\", \"doc\": \"If $ \\\\mathfrak{p} $ is an associated prime of the localized module $ M' $, then its contraction $ \\\\mathfrak{p}^{c} $ under the algebra map $ R \\\\to R' $ is an associated prime of the original module $ \"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (S : Submonoid R) {R' : Type u_2} [inst_1 : CommRing R'] [inst_2 : Algebra R R']\\n  [IsLocalization S R'] {M : Type u_3} {M' : Type u_4} [inst_4 : AddCommGroup M] [inst_5 : Module R M]\\n  [inst_6 : AddCommGroup M'] [inst_7 : Module R M'] (f : M →ₗ[R] M') [IsLocaliz\", \"doc\": \"Let $ R $ and $ R' $ be commutative semirings with a ring homomorphism $ \\\\varphi: R \\\\to R' $, and let $ M $ and $ M' $ be $ R $-modules such that $ M' $ is the localization of $ M $ at a submonoid $ S\"}\n  {\"name\": \"Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (S : Submonoid R) (R' : Type u_2) [inst_1 : CommRing R'] [inst_2 : Algebra R R']\\n  [IsLocalization S R'] {M : Type u_3} {M' : Type u_4} [inst_4 : AddCommGroup M] [inst_5 : Module R M]\\n  [inst_6 : AddCommGroup M'] [inst_7 : Module R M'] (f : M →ₗ[R] M') [IsLocaliz\", \"doc\": \"For a Noetherian ring $ R $, if $ M' $ is the localization of an $ R $-module $ M $ at a submonoid $ S $, then the associated primes of $ M' $ as an $ R' $-module are equal to the preimage under the l\"}\n  {\"name\": \"Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (S : Submonoid R) {R' : Type u_2} [inst_1 : CommRing R'] [inst_2 : Algebra R R']\\n  [IsLocalization S R'] {M : Type u_3} {M' : Type u_4} [inst_4 : AddCommGroup M] [inst_5 : Module R M]\\n  [inst_6 : AddCommGroup M'] [inst_7 : Module R M'] (f : M →ₗ[R] M') [IsLocaliz\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a submonoid of $ R $, and $ R' $ the localization of $ R $ at $ S $. Suppose $ M $ is an $ R $-module and $ M' $ is the localization of $ M $ at $ S $ as an $ R'\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.of_isIntegral\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [p.IsPrime] [Algebra.IsIntegral R S], Algebra.ZariskisMainProperty R p\", \"doc\": \"If $ S $ is an integral extension of $ R $, then every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $ satisfies Zariski's Main Theorem property: there exists an element $ r $ in the integral closure of $ R \"}\n  {\"name\": \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [p.IsPrime] (q : Ideal S) [inst_4 : q.IsPrime] [q.LiesOver p] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R q],\\n  ∃ s ∉ q, ∀ (q' : Ideal S), q'.IsPrime → q' ≠ q → q'.LiesOver p → s\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra of essential finite type. For a prime ideal $ \\\\mathfrak{p} \\\\subseteq R $ and a prime ideal $ \\\\mathfrak{q} \\\\subseteq S $ lying over \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"associatedPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" (R : Type u_1) [CommSemiring R] (M : Type u_2) [AddCommMonoid M] [Module R M] : Set (Ideal R)\", \"doc\": \"The set of associated primes of a module.\"}\n  {\"name\": \"Submodule.associatedPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] (N : Submodule R M) : Set (Ideal R)\", \"doc\": \"The set of associated primes of a submodule.\"}\n  {\"name\": \"associatedPrimes.nonempty\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" (R : Type u_1) [CommSemiring R] (M : Type u_2) [AddCommMonoid M] [Module R M] [IsNoetherianRing R] [Nontrivial M] : (associatedPrimes R M).Nonempty\", \"doc\": \"\"}\n  {\"name\": \"associatedPrimes.eq_empty_of_subsingleton\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] {M : Type u_2} [AddCommMonoid M] [Module R M] [Subsingleton M] : associatedPrimes R M = ∅\", \"doc\": \"\"}\n  {\"name\": \"AssociatedPrimes.mem_iff\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] {I : Ideal R} {M : Type u_2} [AddCommMonoid M] [Module R M] : I ∈ associatedPrimes R M ↔ IsAssociatedPrime I M\", \"doc\": \"\"}\n  {\"name\": \"instIsPrimeValIdealMemSetAssociatedPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] {M : Type u_2} [AddCommMonoid M] [Module R M] (I : ↑(associatedPrimes R M)) : (↑I).IsPrime\", \"doc\": \"\"}\n  {\"name\": \"Submodule.instIsPrimeValIdealMemSetAssociatedPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddCommMonoid M] [Module R M] {N : Submodule R M} (I : ↑N.associatedPrimes) : (↑I).IsPrime\", \"doc\": \"\"}\n  {\"name\": \"associatedPrimes.prod\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" (R : Type u_1) [CommSemiring R] (M : Type u_2) [AddCommMonoid M] [Module R M] (M' : Type u_3) [AddCommMonoid M'] [Module R M'] : associatedPrimes R (M × M') = associatedPrimes R M ∪ associatedPrimes R M'\", \"doc\": \"The set of associated primes of the product of two modules is equal to\\nthe union of those of the two modules.\"}\n  {\"name\": \"LinearEquiv.AssociatedPrimes.eq\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] {M : Type u_2} [AddCommMonoid M] [Module R M] {M' : Type u_3} [AddCommMonoid M'] [Module R M'] (l : M ≃ₗ[R] M') : associatedPrimes R M = associatedPrimes R M'\", \"doc\": \"\"}\n  {\"name\": \"associatedPrimes.eq_singleton_of_isPrimary\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} [CommRing R] {I : Ideal R} [IsNoetherianRing R] (hI : I.IsPrimary) : associatedPrimes R (R ⧸ I) = {I.radical}\", \"doc\": \"\"}\n  {\"name\": \"associatedPrimes.subset_of_injective\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] {M : Type u_2} [AddCommMonoid M] [Module R M] {M' : Type u_3} [AddCommMonoid M'] [Module R M'] {f : M →ₗ[R] M'} (hf : Function.Injective ⇑f) : associatedPrimes R M ⊆ associatedPrimes R M'\", \"doc\": \"If `M → M'` is injective, then the set of associated primes of `M` is\\ncontained in that of `M'`.\"}\n  {\"name\": \"biUnion_associatedPrimes_eq_compl_nonZeroDivisors\", \"module\": \"Mathlib.RingTheory.Ideal.AssociatedPrime.Basic\", \"type\": \" (R : Type u_1) [CommSemiring R] [IsNoetherianRing R] : ⋃ p ∈ associatedPrimes R R, ↑p = (↑(nonZeroDivisors R))ᶜ\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*base.?change|associated.*[Ff]ield|[Ff]ield.*associated",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Field/Subfield/Basic.lean\", \"line\": \"515\", \"text\": \"/-- The ring homomorphism associated to an inclusion of subfields. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"line\": \"324\", \"text\": \"/-- A finite place of a number field `K` is a place associated to an embedding into a completion\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"line\": \"17\", \"text\": \"associated to a number field of signature `K` and proves several existence theorems by applying\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"1102\", \"text\": \"The `realSpace` associated to a number field `K` is the real vector space indexed by the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"56\", \"text\": \"/-- An infinite place of a number field `K` is a place associated to a complex embedding. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"line\": \"48\", \"text\": \"`NumberField.InfinitePlace.Completion` for the associated completion.\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"line\": \"17\", \"text\": \"to adic spaces, `K` will be the valuation field associated to some valuation on a ring, defined in\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"17\", \"text\": \"derivation associated to a vector field is left invariant iff the field is.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct.lean\", \"line\": \"136\", \"text\": \"theorem associated_baseChange [Invertible (2 : A)] (Q : QuadraticForm R M₂) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/QuadraticForm/TensorProduct.lean\", \"line\": \"137\", \"text\": \"    associated (R := A) (Q.baseChange A) = BilinForm.baseChange A (associated (R := R) Q) := by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"line\": \"147\", \"text\": \"/-- The quotient map from finite elements on the field to the associated residue field. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"line\": \"17\", \"text\": \"the associated left-invariant vector fields `mulInvariantVectorField v` (given at a point `g` by\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"line\": \"58\", \"text\": \"/-- The invariant vector field associated to a vector `v` in the Lie algebra. At a point `g`, it\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"line\": \"60\", \"text\": \"@[to_additive /-- The invariant vector field associated to a vector `v` in the Lie algebra. At a\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"line\": \"90\", \"text\": \"taking the Lie bracket of the associated invariant vector fields, at the identity. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"line\": \"92\", \"text\": \"group is obtained by taking the Lie bracket of the associated invariant vector fields, at zero. -/]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"39\", \"text\": \"/-- The local polynomial associated to a Weierstrass curve `W` over a nonarchimedean local field.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"52\", \"text\": \"/-- The local power series associated to a Weierstrass curve over a nonarchimedean local field. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"56\", \"text\": \"/-- The local Euler factor associated to a Weierstrass curve over a nonarchimedean local field. -/\"}\n  {\"file\": \"Mathlib/Analysis/RCLike/Basic.lean\", \"line\": \"1346\", \"text\": \"/-- Given a normed field `𝕜` satisfying `IsRCLikeNormedField 𝕜`, build an associated `RCLike 𝕜`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"144\", \"text\": \"Degree of `f` at a point `x` is defined to be the degree of the associated field extension\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Div.lean\", \"line\": \"824\", \"text\": \"lemma associated_of_dvd_of_natDegree_le {K} [Field K] {p q : K[X]} (hpq : p ∣ q) (hq : q ≠ 0)\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Div.lean\", \"line\": \"829\", \"text\": \"lemma associated_of_dvd_of_degree_eq {K} [Field K] {p q : K[X]} (hpq : p ∣ q)\"}\n  {\"file\": \"Mathlib/Tactic/FieldSimp/Attr.lean\", \"line\": \"16\", \"text\": \"/-- Initialize the attribute `field` grouping the simprocs associated to the `field_simp` tactic. -/\"}\n  {\"file\": \"Mathlib/Tactic/FieldSimp/Attr.lean\", \"line\": \"19\", \"text\": \"      \\\"Attribute grouping the simprocs associated to the field_simp tactic\\\" none\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated points of fibres are contained in an open subset if and only if this holds after extending the residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(U : TopologicalSpace.Opens <| PrimeSpectrum R) : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"IsLocalRing.closed_point_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{U : TopologicalSpace.Opens (PrimeSpectrum R)} : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point $ \\\\mathfrak{m} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in an open set $ U $ if and only if $ U $ is the entire space $ \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(x : U) : PrimeSpectrum Γ(X, U)\", \"doc\": \"The function maps a point $ x $ in an affine open subset $ U $ of a scheme $ X $ to the corresponding prime ideal in the prime spectrum of the ring of global sections $ \\\\Gamma(U) $, via the canonical \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).Over (Spec (Y.residueField y))\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this constructs the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ equipped with its canonical projection morphism to $ \"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : U) (f : X.presheaf.obj (op U)) : X.evaluation x f = 0 ↔ x.val ∉ X.toRingedSpace.basicOpen f\", \"doc\": \"For a locally ringed space $X$, an open set $U$ containing a point $x$, and a section $f$ of the structure sheaf over $U$, the evaluation of $f$ at $x$ in the residue field equals zero if and only if \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-assassin-open-constructible",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: its final sentence reducing to the scheme theorem 05KR. Subinput of 05KR: first paragraph, sentence reducing from the descended model by lemma-base-change-assassin-in-U; also the final paragraph applied to an irreducible closed base change.",
+   "via": [
+    "lem-sfb-scheme-assassin-open-constructible",
+    "lem-sfb-space-assassin-containment-constructible",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibre-assassin-containment-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement, verified it verbatim against Stacks 05KQ, and expanded both implications of its 05DC reduction. Reused the existing relative-assassin base-change theorem and three Mathlib leaves to provide a residual generic lift; no new node was necessary. Checked every cited statement and wrote citations.json. Retained the imported search records and reran their five queries through msearch.py for Q128.",
+  "blueprint": "Inherited supporting-input chain for the direct-image/compactification paragraph of the latest sk-thm-sf-ctf-stability proof; specifically the use of 05KQ in the descended-model and final irreducible-closed-base-change paragraphs of 05KR. Blueprint ancestor tool returns None because the inherited created.item chain has no imported ancestor; preserved its existing from.node=null and explicit from.place/via. Searched 05KQ, 05DC, relative assassin, associated points and fibre assassin containment base change; no blueprint statement matches.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-relative-assassin-base-change",
+    "why": "Generic scheme-theoretic base-change criterion of Stacks 05DC, exactly the tool invoked by 05KQ; no result of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-relative-assassin-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-f2a4b6fcd",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-f2a4b6fcd (reviewer sub-agent of L); spot-checked: Read more-morphisms.tex 05KQ (lemma-base-change-assassin-in-U, line 7026), divisors.tex 05DC and its remark, and Algebra 00E0/00ES. The item statement matches 05KQ hypothesis by hypothesis. The statement and stmt_deps are unchanged from live/side-live, where the item is still unsplit, so nothing supersedes this delivery and there is no re-split note. There are no new nodes. Step 1 is genuinely elementary: the fibre homeomorphism from def-pc-scheme-fibre, the 'Equivalently' clause of def-trf-relative-assassin, and the square i_s∘ρ=h_X∘i_{s'}. Step 2 uses the only-if direction of 05DC; its hypotheses (f locally of finite type, F quasi-coherent) hold. Step 3 gets the residual fibre Spec(κ(s')⊗_{κ(s)}κ(z)) from the 05DC node statement. The tensor is nonzero by the field-extension leaf, a minimal prime over 0 exists by the minimal-prime leaf, V(q) is a component by 00ES, and the closure of {q} is V(q); no Noetherianity is claimed. Step 4 uses the if direction of 05DC with the one chosen generic lift, never 'every lift', which is correct for transcendental extensions. Edge cases F=0, an empty fibre, U empty and U=X hold vacuously, and the ℚ(t)⊗ℚ(i) case agrees with the steps. A duplicate search found no other 05KQ node; lem-trf-field-extension-residual-generic-components (0GSI) is a different statement and is not needed. Batch-5 finding on lem-trf-relative-assassin-base-change: it is Stacks 05DC, a generic base-change criterion. Its closure of 185 nodes is commutative algebra and definitions, with no trace-formula, Poincaré, trace-transport or assumption-leaf node, so it is outside both assumptions. The tool_use is accepted because 05KQ's own proof uses exactly this tool. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreAssassinContainmentBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.associatedPoints_fiber_subset_open_iff_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreAssassinContainmentBaseChange.lean",
+  "statement": "theorem associatedPoints_fiber_subset_open_iff_baseChange {X S S' : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (U : X.Opens) (h : S' ⟶ S) (s' : S') : associatedPoints ((tensorPullback (f.fiberι (h s'))).obj F) ⊆ (f.fiberι (h s')) ⁻¹' (U : Set X) ↔ associatedPoints ((tensorPullback ((pullback.snd f h).fiberι s')).obj ((tensorPullback (pullback.fst f h)).obj F)) ⊆ ((pullback.snd f h).fiberι s') ⁻¹' ((pullback.fst f h) ⁻¹' (U : Set X))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78b86d202",
+  "group": "N9",
+  "result": "pass",
+  "note": "Clause-by-clause match with Stacks 05KQ: LocallyOfFiniteType f; F.IsQuasiCoherentFiniteType (quasicoherent ∧ finite type, not finite presentation); U : X.Opens; arbitrary h : S' ⟶ S with no instances; X' = pullback f h with fst/snd; F' = tensorPullback (pullback.fst f h); downstairs fibre over h s'; both sides are associatedPoints (Stacks 02OJ dep def) of the fibre tensor pullbacks contained in fiberι-preimages of U and of fst⁻¹ U; ↔. Uniform Scheme.{u}; lean.statement verbatim in file; node differs from side-live only in lean, and no competing Lean delivery exists. Edge cases F=0, empty fibre, U=⊥/⊤ and transcendental extensions are covered. No defs; sorry only; docstrings carry the source place, blueprint and four proof steps. Advisory only: Fiber is a plain import but is re-exported publicly via RelativeAssassin. No compile, since no file was changed."
+ }
+}

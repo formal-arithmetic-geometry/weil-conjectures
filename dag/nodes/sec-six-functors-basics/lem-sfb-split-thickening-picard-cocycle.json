@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-split-thickening-picard-cocycle",
+ "kind": "statement",
+ "title": "Infinitesimal line bundles on a split thickening and their cocycles",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a $k$-scheme [def-pc-scheme], put $A=k[\\epsilon]/(\\epsilon^2)$ [def-sc-dual-numbers], and let $X_A=X\\times_k\\operatorname{Spec}A$ with projection $p:X_A\\to X$ and closed inclusion $j:X\\hookrightarrow X_A$ [def-pc-base-change]. Write $\\operatorname{Pic}(X)$ for the group of isomorphism classes of invertible $\\mathcal O_X$-modules under tensor product [def-sc-invertible-module]. There is a canonical isomorphism of abelian groups\n$$\\beta_X:H^1(X,\\mathcal O_X)\\xrightarrow{\\sim}\\ker\\bigl(j^*:\\operatorname{Pic}(X_A)\\to\\operatorname{Pic}(X)\\bigr),$$\nwith module cohomology as in [pqf-def-cohomology]. For an open covering $\\{U_i\\}$ and an additive Cech cocycle $c_{ij}\\in\\mathcal O_X(U_i\\cap U_j)$, $\\beta_X$ sends its image in $H^1(X,\\mathcal O_X)$ to the line bundle glued by transition units $1+\\epsilon c_{ij}$. In particular, if $L$ is invertible on $X$ and $L_A$ is invertible on $X_A$ reducing to $L$, and local frames have transition functions $t_{ij}$ for $L$ and $t_{ij}(1+\\epsilon c_{ij})$ for $L_A$, then $[L_A\\otimes p^*L^{-1}]=\\beta_X([c_{ij}])$. This description is natural for pullback and for $\\epsilon\\mapsto\\lambda\\epsilon$; tensor product corresponds to addition of cohomology classes. When $k$ is separably closed and $X$ is a smooth projective geometrically integral curve with a $k$-point and represented Picard functor [def-sc-picard-functor], the canonical Picard tangent identification [lem-sc-pic-tangent-space] sends the tangent vector represented by $\\beta_X(v)$ to $v$ (using the same transition-function convention).",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0C6R, lemma-picard-group-first-order-thickening and proof, specialized to the split thickening O_X[epsilon]; transition cocycles via cohomology.tex lemma-h1-invertible. Compatibility with the represented Picard tangent: literature/milne-abelian-varieties_AV.pdf, Chapter III Proposition 2.1, pp.90–91, map a -> 1+a epsilon."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-dual-numbers",
+  "def-pc-base-change",
+  "def-sc-invertible-module",
+  "pqf-def-cohomology",
+  "def-sc-picard-functor",
+  "lem-sc-pic-tangent-space",
+  "def-sc-module-cech-comparison",
+  "def-pc-module-cohomology-ext-resolution-equiv",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-picard-group",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "Identify the underlying spaces of $X_A$ and $X$ by $j$. On an affine open $U=\\operatorname{Spec}R$ the thickening is $\\operatorname{Spec}R[\\epsilon]$; every prime contains $\\epsilon$, and primes and basic opens correspond under reduction. Its structure sheaf on this space is $\\mathcal O_X\\oplus\\epsilon\\mathcal O_X$: on a basic open this follows from $R[\\epsilon]_f=R_f[\\epsilon]$, and the identifications agree on restrictions and hence glue. Thus this description holds on arbitrary opens, without a separatedness or finiteness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0C6R, split first-order thickening; affine description of the dual-number base change"
+   }
+  },
+  {
+   "text": "Write $F=\\mathcal O_{X,ab}$, $G=\\mathcal O_X^\\times$ and $E=\\mathcal O_{X_A}^\\times$ on the common space. There is a split exact sequence of abelian sheaves $0\\to F\\xrightarrow{e}E\\xrightarrow{r}G\\to0$, where $e(a)=1+\\epsilon a$, $r(u+\\epsilon v)=u$, and the section is $s(u)=u$. Indeed $u+\\epsilon v$ is a unit exactly when $u$ is, with inverse $u^{-1}-\\epsilon u^{-2}v$. The retraction $d:E\\to F$ is $d(u+\\epsilon v)=u^{-1}v$; multiplication gives $d(zz')=d(z)+d(z')$. In particular $de=1$, $re=0$, $rs=1$, and $e(d(z))s(r(z))=z$. These formulas commute with every restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0C6R, lemma-picard-group-first-order-thickening, proof: the map f to 1+f; explicit split case"
+   }
+  },
+  {
+   "text": "Use the long exact cohomology sequence supplied by [lem-weil-pbc-right-derived-universal-delta-functor] for global sections of abelian sheaves; the required category, enough injectives and derived-cohomology convention are those of [def-sc-topological-abelian-cohomology]. Since $s$ splits $r$ on global sections, the boundary $H^0(G)\\to H^1(F)$ is zero. Exactness therefore makes $H^1(e)$ an isomorphism onto $\\ker H^1(r)$. Equivalently its inverse there is $H^1(d)$: the split identities in step 2 remain identities after the additive functor $H^1$, giving both inverse equations.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0C6R, lemma-picard-group-first-order-thickening, long exact sequence"
+   }
+  },
+  {
+   "text": "Apply [thm-sc-hilbert-90] to both schemes, using only its Zariski assertion $\\operatorname{Pic}(Y)\\simeq H^1(Y,\\mathcal O_Y^\\times)$. By [lem-sc-picard-h1-restriction-compatibility] restriction along the closed immersion $j$ is the map induced by $r$, and the closed-pushforward cohomology identification in that statement is simply the common-space identification here. By [lem-sc-module-abelian-zariski-cohomology] the group $H^1(F)$ is the underlying additive group of the module cohomology $H^1(X,\\mathcal O_X)$ in the item. Compose these identifications with $H^1(e)$ of step 3 to define $\\beta_X$. All arrows are the specified canonical maps, so this defines the claimed canonical group isomorphism.",
+   "uses": [
+    "thm-sc-hilbert-90",
+    "lem-sc-picard-h1-restriction-compatibility",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0C6R proof; cohomology.tex Tag 09NU lemma-h1-invertible; sites-cohomology.tex Tag 03FD lemma-cohomology-modules-abelian-agree"
+   }
+  },
+  {
+   "text": "The Zariski assertion and transition-section normalization of [lem-sc-torsor-h1] identify the image of the additive cocycle $(c_{ij})$ with the $F$-torsor having local sections $a_i$ satisfying $a_j=c_{ij}+a_i$. The coefficient-map assertion of [lem-sc-torsor-h1-functoriality], applied to $e:F\\to E$, sends this to the $E$-torsor whose transition sections are $1+\\epsilon c_{ij}$. Under [thm-sc-hilbert-90] this is the frame torsor of precisely the invertible module glued with those units. We fix the convention $m_j=(1+\\epsilon c_{ij})m_i$; then the additive equation $c_{ik}=c_{ij}+c_{jk}$ is exactly the gluing equation, since $\\epsilon^2=0$. This proves the cocycle formula on any open cover, using the comparison image rather than asserting that this cover computes all of $H^1$.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "lem-sc-torsor-h1-functoriality",
+    "thm-sc-hilbert-90"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 02FQ lemma-torsors-h1, 0B8R lemma-cech-h1, 09NU lemma-h1-invertible"
+   }
+  },
+  {
+   "text": "For the displayed deformation of $L$, tensor its chosen frame with the dual of the pulled-back frame of $L$. On an overlap its transition unit becomes $t_{ij}(1+\\epsilon c_{ij})t_{ij}^{-1}=1+\\epsilon c_{ij}$. The preceding step gives $[L_A\\otimes p^*L^{-1}]=\\beta_X([c_{ij}])$. Similarly tensoring two such frame systems multiplies their units and gives $1+\\epsilon(c_{ij}+c'_{ij})$. Changing frames by $1+\\epsilon h_i$ changes the coefficients to $c_{ij}+h_j-h_i$ (using the same frame convention), so the answer depends only on the cohomology class.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B8R lemma-cech-h1, transition-section calculation; Tag 09NU lemma-h1-invertible"
+   }
+  },
+  {
+   "text": "To verify pullback explicitly, let $f:Y\\to X$ be a $k$-morphism. Every class of $H^1(F)$ admits a cocycle on some open cover $U$: by [lem-sc-torsor-h1] it is represented by a torsor, and its local sections give such a cover. Put $V_i=f^{-1}U_i$ and take normalized comparison systems $c$ for $U$ and $c'$ for $V$ by [lem-pc-cech-comparison-system-existence]. Such a system is not unique, so first check that in degree one it computes the class of step 5. Let $T$ be the $F$-torsor glued from a cocycle $(a_{ij})$ on $U$, with sections $t_i$ over $U_i$ and $t_j=a_{ij}\\cdot t_i$, and let $0\\to F\\to E_T\\to\\mathbf Z\\to0$ be the sequence of [lem-sc-torsor-h1] whose connecting map sends $1$ to the class of $T$. It is surjective on sections over every tuple intersection $U_y$, since $n[t_{y(0)}]$ lifts a locally constant $n$. By the degree-zero normalization and the connecting-map law of [def-pc-cech-comparison-system], $c^1(\\check\\delta(1))=\\delta(c^0(1))=\\delta(1)=[T]$, and $\\check\\delta(1)$ is the cocycle $[t_j]-[t_i]=a_{ij}$. Hence $c^1([a])$ is the class used in step 5, for every cocycle and every system; the same holds on $Y$ for $c'$. By [lem-pc-cech-comparison-inverse-image-unit] the inverse-image part of cohomology pullback sends the cocycle $(c_{ij})$ to its inverse-image cocycle; here every $V$-tuple intersection equals the inverse image of the corresponding $U$-tuple intersection, so its covering hypothesis holds. Naturality of $c'$ in abelian sheaves then applies to $f^{-1}\\mathcal O_X\\to\\mathcal O_Y$. Thus the resulting cocycle is $(f^\\sharp c_{ij})$. These are exactly the coefficients of the pulled-back transition units $f_A^\\sharp(1+\\epsilon c_{ij})=1+\\epsilon f^\\sharp c_{ij}$. Step 5 on $Y$ proves $f_A^*\\beta_X(v)=\\beta_Y(f^*v)$. The module-to-abelian comparison is the canonical one from step 4; thus the pullback here is the usual cohomology pullback, not a newly chosen map.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "lem-pc-cech-comparison-system-existence",
+    "def-pc-cech-comparison-system",
+    "lem-pc-cech-comparison-inverse-image-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B8R lemma-cech-h1; canonical comparison and its inverse-image/coefficient naturality (Tag 01EQ lemma-cech-cohomology)"
+   }
+  },
+  {
+   "text": "Let $\\sigma_\\lambda$ be the endomorphism of $X_A$ induced by $\\epsilon\\mapsto\\lambda\\epsilon$. It sends the transition units $1+\\epsilon c_{ij}$ to $1+\\epsilon\\lambda c_{ij}$, so by step 5 $\\sigma_\\lambda^*\\beta_X([c])$ is $\\beta_X$ of the class of $(\\lambda c_{ij})$. Take a normalized comparison system on the cover by [lem-pc-cech-comparison-system-existence]; by step 7 it computes these classes, and its naturality in abelian sheaves [def-pc-cech-comparison-system], applied to multiplication by $\\lambda$ on $F$, shows that the class of $(\\lambda c_{ij})$ is $H^1(\\lambda)$ of the class of $(c_{ij})$. Multiplication by $\\lambda$ is an $\\mathcal O_X$-module endomorphism, so by the naturality in [lem-sc-module-abelian-zariski-cohomology] $H^1(\\lambda)$ is the module-cohomology map $H^1(X,\\lambda)$, which is multiplication by $\\lambda$ on the $k$-vector space $H^1(X,\\mathcal O_X)$. Every class has the local representative used in step 7. Hence this pullback acts on $\\beta_X(v)$ as $\\beta_X(\\lambda v)$. This includes $\\lambda=0$, when the transition units are all $1$; it requires no division by $\\lambda$.",
+   "uses": [
+    "lem-pc-cech-comparison-system-existence",
+    "def-pc-cech-comparison-system",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0B8R lemma-cech-h1, coefficient naturality of the Cech comparison; Milne III Proposition 2.1, p.91"
+   }
+  },
+  {
+   "text": "Now impose the curve and representability hypotheses of the final clause. By [sk-prop-picard-pic-split], its smooth proper geometrically connected curve assertion applies (geometric integrality implies geometric connectedness), and the chosen rational point splits off the base Picard group, naturally on test schemes. For $T=\\operatorname{Spec}k$ and $T=\\operatorname{Spec}A$ these base Picard groups vanish: each space is one point, so an invertible module, being locally free of rank one, is free on the whole space. Consequently the kernel of the represented Picard functor on $A\\to k$ is the actual kernel of $j^*$ used above. By the functor-of-points definition [def-sc-scheme-tangent-space], this is the tangent space at the identity. Milne III Proposition 2.1 defines its canonical comparison with $H^1$ by the map induced by $a\\mapsto\\exp(\\epsilon a)=1+\\epsilon a$. This is exactly $e$ of step 2; therefore the inverse comparison sends $\\beta_X(v)$ to $v$. Here the exponential formula specifies which canonical identification in [lem-sc-pic-tangent-space] is meant; we do not infer equality of specified maps from the mere existence of a linear isomorphism. Tensor and scalar compatibility from steps 6 and 8 give its stated linear convention.",
+   "uses": [
+    "sk-prop-picard-pic-split",
+    "def-sc-scheme-tangent-space",
+    "lem-sc-pic-tangent-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III Proposition 2.1, pp.90–91, especially the map a to exp(a epsilon)=1+a epsilon"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-sc-topological-abelian-cohomology",
+  "thm-sc-hilbert-90",
+  "lem-sc-picard-h1-restriction-compatibility",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-torsor-h1",
+  "lem-sc-torsor-h1-functoriality",
+  "lem-pc-cech-comparison-system-existence",
+  "def-pc-cech-comparison-system",
+  "lem-pc-cech-comparison-inverse-image-unit",
+  "sk-prop-picard-pic-split",
+  "def-sc-scheme-tangent-space",
+  "lem-sc-pic-tangent-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0C6R proof for the split case; cohomology.tex Tags 02FQ, 0B8R, 09NU; sites-cohomology.tex Tag 03FD; Milne, Abelian Varieties, Chapter III Proposition 2.1, pp.90–91"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal line bundles trivial on X over dual numbers are H1 O_X by transition functions 1 plus epsilon c_ij",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.Extension.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Subsingleton P.H1Cotangent ↔ Function.Injective ⇑P.cotangentComplex\", \"doc\": \"For an $ R $-algebra extension $ S $, the first cohomology group $ H^1 $ of the cotangent complex is trivial (i.e., all elements are equal) if and only if the canonical cotangent complex map $ \\\\ker(\\\\p\"}\n  {\"name\": \"Algebra.Extension.h1Cotangentι_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (self : ↥P.cotangentComplex.ker), Algebra.Extension.h1Cotangentι self = ↑self\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 $ (defined as the kernel of the cotangent complex map $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R} $) to the cotange\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups and cotangent-complex H1 are different objects; no theorem computes the Picard group of a scheme split thickening using sheaf H1 and transition units."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of Picard group of X over dual numbers to Picard group X is first coherent cohomology of structure sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) : IdealSheafData Y\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"CommRing.Pic.mk_dual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R (Dual R M) = (Pic.mk R M)⁻¹\", \"doc\": \"For any invertible $ R $-module $ M $, the isomorphism class of its dual module $ \\\\mathrm{Dual}_R(M) $ in the Picard group $ \\\\mathrm{Pic}(R) $ is the inverse of the class of $ M $, i.e., $ [\\\\mathrm{Du\"}\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"CommRing.Pic.inv_eq_dual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(M : Pic R) : M⁻¹ = Pic.mk R (Dual R M)\", \"doc\": \"For any element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, the inverse of $ M $ under the tensor product operation is equal to the isomorphism class of its dual module, i.e., $ M^{-1} = [\\\\mathrm{D\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [IsLocalRing R] : Subsingleton (Pic R)\", \"doc\": \"For any commutative local ring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is trivial, containing only one element. This follows because every invertible $ R $-module is isomorphic to $ R $ itself, as\"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Function.MulExact (unitsToPic R A) (mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"CommRing.Pic.instCoeSortType\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": CoeSort (Pic R) (Type u)\", \"doc\": \"There is a canonical coercion from elements of the Picard group $\\\\mathrm{Pic}(R)$ to their corresponding invertible $R$-modules, where each element $M \\\\in \\\\mathrm{Pic}(R)$ is represented by its underl\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups and cotangent-complex H1 are different objects; no theorem computes the Picard group of a scheme split thickening using sheaf H1 and transition units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PicardGroup\", \"DualNumber\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups and cotangent-complex H1 are different objects; no theorem computes the Picard group of a scheme split thickening using sheaf H1 and transition units."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*(thicken|infinitesimal|epsilon)|lineBundle.*deform|picard.*tangent|units.*square.zero",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups and cotangent-complex H1 are different objects; no theorem computes the Picard group of a scheme split thickening using sheaf H1 and transition units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero thickening Picard group exact sequence H1 ideal sheaf maps to Pic X prime and transition cocycles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U V : ↑X.affineOpens),\\n  I.ideal V ≤\\n    RingHom.ker\\n      (CommRingCat.Hom.hom\\n        (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app (↑U).ι ↑V)\\n          (AlgebraicGeometry.Scheme.Hom.app (I.glueDataObjι U) ((Topologic\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and affine open subsets $U,V \\\\subseteq X$, the ideal $\\\\mathcal{I}(V)$ is contained in the kernel of the ring homomorphism obtained by composing the\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups and cotangent-complex H1 are different objects; no theorem computes the Picard group of a scheme split thickening using sheaf H1 and transition units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between H1 of structure sheaf and line bundles trivial on split dual number thickening with Cech transition functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.h1Cotangentι_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (self : ↥P.cotangentComplex.ker), Algebra.Extension.h1Cotangentι self = ↑self\", \"doc\": \"The canonical linear map from the first cotangent cohomology module $ H^1 $ (defined as the kernel of the cotangent complex map $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R} $) to the cotange\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R],\\n  (AlgebraicGeometry.StructureSheaf.globalSectionsIso R).inv =\\n    CategoryTheory.inv (AlgebraicGeometry.StructureSheaf.toOpen R ⊤)\", \"doc\": \"For a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the ring of global sections $ \\\\mathcal{O}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphism. This homomorph\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"retractionKerCotangentToTensorEquivSection\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"An equivalence between the set of linear maps retracting the cotangent kernel to tensor product map and the set of algebra homomorphisms satisfying the kernel square lift condition, established via qu\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent and group cohomology statements concern different objects; no theorem with the scheme Picard kernel, Cech formula and specified tangent compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First order deformations of a line bundle over dual numbers are classified by coherent sheaf cohomology H1",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"(P : Extension.{u} R S) : Function.Bijective (H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"groupCohomology.H1\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ModuleCat k\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, this defines the first group cohomology module $ H^1(G, A) $ as the homology of the inhomogeneous cochain complex asso\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.FormallySmooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Module.Projective A Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallySmooth R A\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if the module of Kähler differentials $ \\\\Omega_{A/R} $ is projective as an $ A $-module and the first cohomology group of the cotangent complex $ H^1 $ is tri\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent and group cohomology statements concern different objects; no theorem with the scheme Picard kernel, Cech formula and specified tangent compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"DualNumber\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent and group cohomology statements concern different objects; no theorem with the scheme Picard kernel, Cech formula and specified tangent compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "(Picard|picard|Pic\\.).*(dualNumber|DualNumber|thicken|tangent)|oneAddEps",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent and group cohomology statements concern different objects; no theorem with the scheme Picard kernel, Cech formula and specified tangent compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abel-differential-boundary",
+  "date": "2026-10-23",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family. Proof prerequisite: Chapter III Theorem 5.1(b), pp.101–103, especially the kernel-dimension computation at the end of p.103; the boundary-map formulation is the first-order local-equation refinement of that computation (explained in report.md), with Picard tangent space from Proposition 2.1, pp.90–91. Supporting general lemma: Milne III Proposition 2.1 exponential 1+a epsilon, needed to compare the explicit divisor transition functions to the canonical Picard tangent identification.",
+   "via": [
+    "lem-sfb-abel-differential-boundary",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-thickening-picard-cocycle",
+  "worker": "stage1",
+  "summary": "Expanded the split units sequence and its cohomology argument, using existing general torsor, Picard, and module-cohomology nodes. Wrote the transition, tensor, scalar, arbitrary-pullback, and Milne tangent normalization calculations. No new nodes or changes to the statement. The project dual-number kernel theorem is only a partial match.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/curve/Picard auxiliary chain recorded in blueprint.from.place; the item supplies the exponential normalization for the Abel differential argument. The ancestor command returns None for the inherited broken created.item chain; retained its existing explicit place and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "thm-sc-hilbert-90",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-sc-picard-h1-restriction-compatibility",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-sc-module-abelian-zariski-cohomology",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-sc-torsor-h1-functoriality",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-pc-cech-comparison-system-existence",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-pc-cech-comparison-inverse-image-unit",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "sk-prop-picard-pic-split",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   },
+   {
+    "node": "lem-sc-pic-tangent-space",
+    "why": "Generic cohomology, torsor, Picard or tangent interface used in the explicit split-thickening calculation; no node of the six-functor unit states this tool. The unit alteration route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "thm-sc-hilbert-90",
+  "lem-sc-picard-h1-restriction-compatibility",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-torsor-h1",
+  "lem-sc-torsor-h1-functoriality",
+  "lem-pc-cech-comparison-system-existence",
+  "lem-pc-cech-comparison-inverse-image-unit",
+  "sk-prop-picard-pic-split",
+  "lem-sc-pic-tangent-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-c91ca1de9",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-c91ca1de9 (reviewer sub-agent of L); spot-checked: Read the item's nine steps in full, every cited statement, Stacks 0C6R and its proof, and Milne AV III Prop 2.1 pp.90-91. Milne's map a->exp(a eps)=1+a eps is exactly H^1(e), so beta_X is Milne's map and the tangent clause in step 9 is an identification of definitions. Steps 1-6 are correct: split units sequence, retraction d, delta^0=0 from the section s, Hilbert 90 with the closed-restriction compatibility, module and abelian H^1 agree, cocycle convention m_j=(1+eps c_ij)m_i. Step 9: sk-prop-picard-pic-split applies (projective implies proper, geometrically integral implies connected) and Pic(Spec k)=Pic(Spec A)=0. FIX (C3/E5): step 7 used comparison systems, which def-pc-cech-comparison-system says are not unique, and step 8 used the 01EQ module comparison map; neither was shown to give the step-5 class. Step 7 now proves that in degree one every normalized system gives the torsor class: apply the connecting law to the sequence 0->F->E_T->Z->0 of lem-sc-torsor-h1, which is onto on tuple intersections. Step 8 now uses that system's naturality applied to multiplication by lambda, plus the naturality of lem-sc-module-abelian-zariski-cohomology. lem-sc-cech-h1-map-natural is removed from the uses, proof_deps and tool_uses; def-pc-cech-comparison-system is added. Batch-5 flag: def-pod-ring-scalar-extension is the generic definition of scalar extension and sk-prop-picard-pic-split is the Picard splitting; neither is part of Poincare duality or the trace formula, so no RETURN. The item is not superseded (still unsplit on live), there are no new nodes, no duplicate, and no SGA citation. Small cases checked: Spec k, P^1, elliptic curve, empty X, characteristic 2, lambda=0.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitThickeningPicardCocycle",
+  "declaration": "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.splitThickeningPicardClass",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardClass_apply",
+   "AlgebraicGeometry.Scheme.splitThickeningCocycleCoefficient",
+   "AlgebraicGeometry.Scheme.HasSplitThickeningFrames",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle_frames",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle_deformation",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle_pullback",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle_scale",
+   "AlgebraicGeometry.Scheme.splitThickeningPicardCocycle_tensor",
+   "AlgebraicGeometry.splitThickeningPicardCocycle_tangent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitThickeningPicardCocycle.lean",
+  "statement": "theorem splitThickeningPicardCocycle {k : Type u} [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] : ∃ β : ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj (Modules.unit X)) ≃+ Additive (Pic.mapHom X.dualNumbersι).ker, ∀ v, (β v).toMul.val = (splitThickeningPicardClass X v).toMul",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are recorded as seven named theorem statements, with the canonical class fixed by the constructed moduleCohomologyExtResolutionEquiv and H1(a ↦ 1+epsilon a). Three helper definitions only package this canonical map, Cech coefficient projection, and its local-frame condition. The tangent statement uses the full represented Picard functor, the existing IsPicardMul normalization, and the recorded tangentSpaceAt. It fixes the linear equivalence by its values on infinitesimal line bundles. Compile repair: the canonical class is the identical pointwise composite, with @[no_expose] and the public splitThickeningPicardClass_apply equation; its additive property is specified by the beta equivalence and tensor theorem. This avoids the expensive bundled AddMonoidHom composition. Mathematical theorem signatures are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72c72b786",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (0a10). stmt_deps now cites def node def-pc-module-cohomology-ext-resolution-equiv (on base, owns moduleCohomologyExtResolutionEquiv) instead of theorem node new-module-cohomology-ext-resolution-naturality; no other non-lean node change; 12 dep nodes byte-identical to side-live. Lean: splitThickeningPicardClass changed from bundled →+ to a @[no_expose] pointwise function with identical canonical body (moduleCohomologyExtResolutionEquiv, H1(a↦1+εa), inverse Hilbert 90) plus sorried defining-equation lemma _apply (docstring, listed in declarations); additivity still stated by the main ≃+ theorem and _tensor; all seven theorem signatures byte-identical to the earlier reviewed delivery. Clause reading (kernel β, arbitrary-cover cocycle frames m_j=(1+εc_ij)m_i, deformation, pullback via moduleCohomologyFMap, scale incl. 0, tensor, tangent pinned via full picardFunctor+IsPicardMul) matches the node; no extra hypotheses; edge cases empty X/cover, v=0, λ=0, char 2. lean.statement verbatim; all declarations present; all proofs sorry; docstrings carry sources and blueprint; no pro-étale substitute. Not compiled (no file changed); worker report gives clean scompile 27.9/38.6 s and passing dry run."
+ }
+}

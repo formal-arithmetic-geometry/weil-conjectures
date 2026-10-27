@@ -1,0 +1,104 @@
+{
+ "id": "lem-sf-proetale-derived-pullback-tensor-composition",
+ "kind": "statement",
+ "title": "Derived pro-etale tensor compositor",
+ "statement": "Let X --f--> Y --g--> Z be schemes. Let A be a symmetric monoidal Grothendieck abelian coefficient category with monoidal closed structure and functorial flat resolutions, and suppose pro-etale inverse image preserves flat objects. If the canonical upperStarComp A f g is monoidal, then its total-left-derived compositor d : L(gf)^* ≅ Lg^* ⋙ Lf^* obeys μ_(gf)(M,N) ; (d_M ⊗ d_N) = d_(M⊗N) ; Lf^*(μ_g(M,N)) ; μ_f(Lg^*M,Lg^*N) for all unbounded derived objects M,N. Here μ is the published leftDerivedUpperStarTensorComparison and d is leftDerivedUpperStarComp. [def-weil-pbc-proetale-operations] [def-sfb-finite-upper-star-comp] [def-weil-derived-tensor]",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-finite-upper-star-comp",
+  "def-weil-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; sites-modules.tex Tags 03D3 and 03EL; sites-cohomology.tex Tags 07A4 and 07A7."
+ },
+ "proof": [
+  {
+   "text": "Apply the adopted source-library generic left-derived tensor composition theorem and naturality for the monoidal ordinary upperStar compositor. Its composite derived isomorphism is definitionally leftDerivedUpperStarComp. Keep the generic tensor maps as explicit parameters with comparison equalities so the kernel need not unfold the derived categories. Express the result in native component form using leftDerivedUpperStarTensorIso and the two curried tensor maps, so coefficient specialization uses the same interface as the target.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B--0F7D; sites-modules.tex Tags 03D3 and 03EL; sites-cohomology.tex Tags 07A4 and 07A7."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7D; sites-modules.tex Tags 03D3 and 03EL; sites-cohomology.tex Tags 07A4 and 07A7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of derived inverse image tensor comparison and uniqueness of tensor comparison on K-flat representatives",
+   "results": "8 hits, including CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app and LocalizerMorphism.rightDerivedFunctorComparison_fac; none identifies the prescribed comparisons.",
+   "date": "2026-10-26",
+   "verdict": "The exact-localization API is useful, but the tensor normalization needs the source-library comparison law and representative faithfulness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-26",
+   "verdict": "Used in the parent to recover intrinsic alpha pasting from the canonical system mate law."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison|map_leftDerivedTensorComparison_app_app_comp",
+   "results": "No Mathlib hits from msearch; repository rg finds the generic source-library theorem in WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal.",
+   "date": "2026-10-26",
+   "verdict": "The source-library theorem supplies the generic tensor composition proof; no Mathlib geometric pasting theorem replaces it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AmbientProperOpenPasting",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ambient-proper-open-pasting",
+   "place": "Derived pro-etale tensor compositor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtaleDerivedPullbackTensorComposition",
+  "file": "lean/Sheaf/SixFunctors/ProEtaleDerivedPullbackTensorComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_comp",
+  "statement": "theorem leftDerivedUpperStarTensorComparison_comp\n    [NatTrans.IsMonoidal (upperStarComp A f g).inv]\n    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology R) A)) :\n    (leftDerivedUpperStarComp A f g).hom.app (((derivedTensor A R).obj K).obj M) ≫\n        L((f)^*[A]).map (leftDerivedUpperStarTensorIso A g K M).hom ≫\n        (leftDerivedUpperStarTensorIso A f (L((g)^*[A]).obj K)\n          (L((g)^*[A]).obj M)).hom =\n      (leftDerivedUpperStarTensorIso A (f ≫ g) K M).hom ≫\n        ((derivedTensor A T).map ((leftDerivedUpperStarComp A f g).hom.app K)).app\n          (L((f ≫ g)^*[A]).obj M) ≫\n        ((derivedTensor A T).obj (L((f)^*[A]).obj (L((g)^*[A]).obj K))).map\n          ((leftDerivedUpperStarComp A f g).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7fc7a",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261026T023306-L-540907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7fc7a",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261026T023306-L-540907",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs published (identical); AmbientProperOpenCalculus vs published item (verbatim block, only docstring blueprint ids differ); 2 new sorry statements vs item conjuncts 1 and 4 (verbatim); node lean records and stmt/proof deps vs Lean; 11 direct importers compiled against the delivered modules (all rc 0); #print axioms on the item, the new public theorems and private systems_laws/ordinary_tensor"
+ }
+}

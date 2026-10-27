@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.Algebra.MonoidAlgebra.Support
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import Mathlib.Algebra.Group.Torsion
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.Algebra.MonoidAlgebra.Support
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Mathlib.Algebra.Group.Torsion
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.TraceFormula.RationalConeDualFinite
 import Sheaf.RingTheory.IntegralSupportWeightedInitialDegree
@@ -22,6 +24,8 @@ We use multiplicative notation for the abelian group and its submonoid, as in
 `AlgebraicGeometry.FineFan.saturation`: the additive multiple `n • g` is written `g ^ n`.
 The canonical map on monoid algebras identifies `k[P]` with its image in `k[G]`.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-finite-graph-homology-rigidity",
+ "kind": "statement",
+ "title": "Finite loopless multigraph rigidity from its cycle lattice",
+ "statement": "Let $V$ and $E$ be finite sets, and for every $e\\in E$ specify an unordered pair of distinct vertices as its endpoints. This is a finite loopless multigraph $\\Gamma$, with parallel edges allowed; the degree of a vertex counts incident edges with multiplicity. Choose an orientation of each edge and let $H_1(\\Gamma,\\mathbf Z)=\\ker(\\partial:\\mathbf Z^E\\to\\mathbf Z^V)$, where $\\partial e=t(e)-s(e)$ and $\\mathbf Z^S$ is the free abelian group on $S$. This cycle group is a free abelian group of finite rank [lem-weil-subgroup-finite-free-abelian-group-free]. An automorphism $\\sigma$ consists of permutations of $V,E$ preserving endpoint pairs. It induces a signed permutation on $\\mathbf Z^E$, with a minus sign when the chosen orientation is reversed, and hence an action on $H_1(\\Gamma,\\mathbf Z)$. If $\\sigma$ fixes every vertex of degree at most two and acts as the identity on $H_1(\\Gamma,\\mathbf Z)$, then it fixes every vertex and every edge. No connectedness assumption is required.",
+ "source": {
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "The graph argument following Lemma 1.17, printed pp.86–87: deletion and suppression induction, followed by the finite-graph trace identity. Local PDF WANTED; primary PDF read online.",
+  "url": "https://www.numdam.org/item/PMIHES_1969__36__75_0.pdf"
+ },
+ "stmt_deps": [
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof": [
+  {
+   "text": "Use strong induction on $N=|V|+|E|$, with the assertion quantified over all loopless multigraphs and all automorphisms satisfying the two hypotheses. The case $N=0$ is empty. Changing an edge orientation multiplies its coordinate by $-1$, conjugating the boundary and automorphism operators; thus it preserves the identity-on-kernel hypothesis. Below choose convenient orientations for the affected edges and retain all others. Every reduced graph has strictly smaller $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed p.86, graph argument after Lemma 1.17: induction parameter"
+   }
+  },
+  {
+   "text": "If $x$ has degree zero, it is fixed. Remove $x$. All other degrees and the cycle kernel are unchanged, so the restriction satisfies the hypotheses. Induction fixes every remaining vertex and edge, and hence the original graph.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed p.86, isolated point reduction"
+   }
+  },
+  {
+   "text": "If $x$ has degree one, it is fixed; its unique incident edge $e=\\{x,y\\}$ is fixed and so is $y$. Remove $x,e$. For an integral cycle, its boundary coefficient at $x$ forces its $e$-coordinate to vanish, so extension by zero identifies the new cycle kernel equivariantly with the old one. Only $y$ changes degree, and $y$ is already fixed; hence every new vertex of degree at most two is fixed. Induction on the reduced graph and fixedness of $x,e$ give the conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed p.86, extremity reduction"
+   }
+  },
+  {
+   "text": "Suppose $\\deg(x)=2$, with distinct incident edges $e_1,e_2$ both joining $x$ to the same vertex $y$. The vertex $x$ is fixed, and $y$ is fixed as its only neighbour. Orient both edges from $x$ to $y$. Their difference $e_1-e_2$ is a nonzero integral cycle. Interchanging the two edges would negate this cycle, contradicting identity on the cycle kernel; thus both edges are fixed individually. Remove $x,e_1,e_2$. Extension by zero embeds the new cycle kernel equivariantly into the old one, so its action is identity. Only $y$ changes degree and it is fixed. Induction now fixes the reduced graph and thus the original graph.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed pp.86–87, first degree-two case (parallel edges)"
+   }
+  },
+  {
+   "text": "Suppose instead the two edges at the fixed degree-two vertex $x$ join it to distinct vertices $y,z$. Replace $y\\! -\\! x\\! -\\! z$ by one new edge $a=\\{y,z\\}$. This is loopless, and $\\sigma$ descends because it preserves the two-edge path setwise. Orient the path as $y\\to x\\to z$ and $a$ as $y\\to z$. In a cycle the two path coefficients agree, by its boundary coefficient at $x$. Replacing their common value by the $a$-coefficient gives an isomorphism of integral cycle kernels, with inverse replacing $a$ by the sum of the path edges. It commutes with the action: if $y,z$ are swapped, both the oriented path and $a$ acquire a minus sign; otherwise neither does. All retained vertex degrees are unchanged, so the reduced graph satisfies both hypotheses. Induction fixes its vertices and edges. Consequently $y,z$ are fixed individually; since $x$ is fixed, the two original edges are fixed individually as well. All other edges and vertices were unchanged, giving the conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed p.87, second degree-two case (suppression)"
+   }
+  },
+  {
+   "text": "We may now assume all degrees are at least three. If an edge $e=\\{x,y\\}$ and both its endpoints are fixed, delete $e$. Extension by zero embeds the new integral cycle kernel equivariantly into the old one, hence its action is identity. Only $x,y$ lose degree, and they are already fixed. Every low-degree vertex of the reduced graph is therefore fixed. Induction fixes this graph, and $e$ was fixed too. This proves the assertion in this case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed p.87, fixed edge with fixed endpoints reduction"
+   }
+  },
+  {
+   "text": "It remains that $V\\ne\\varnothing$, all degrees are at least three, and there are no fixed edges with individually fixed endpoints. Apply [lem-sfb-finite-graph-euler-trace], writing $b=\\dim_{\\mathbf Q}Z_1$ and $c=|\\pi_0|$. The action on $Z_1$ is identity: multiplying any rational cycle by a common positive denominator makes it integral, where the action is identity, and then divide back. Thus its trace is $b$. We have $f_+=0$, $f_0,f_-\\ge0$, and $f_c\\le c$. Counting incidences gives $2|E|=\\sum_v\\deg(v)\\ge3|V|$, so $|E|>|V|$ and the dimension formula yields $b=|E|-|V|+c>c$. The trace identity would give $0\\le f_0+f_-=f_c-b\\le c-b<0$, a contradiction. If $V$ is empty, looplessness forces $E$ empty, already covered by the base case. All induction cases are exhausted.",
+   "uses": [
+    "lem-sfb-finite-graph-euler-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Printed p.87, final paragraph: first Betti number and Lefschetz contradiction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-graph-euler-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "Deligne–Mumford, printed pp.86–87, graph argument following Lemma 1.17, read online. Agent-expanded coordinate checks; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a finite loopless multigraph which fixes vertices of degree at most two and acts trivially on first integral homology is identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimpleGraph.Iso.refl\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"{V : Type u_1} → {G : SimpleGraph V} → G ≃g G\", \"doc\": \"The identity isomorphism from a simple graph $ G $ to itself, defined by the identity function on its vertex set that preserves adjacency relations.\"}\n  {\"name\": \"Equiv.simpleGraph_refl\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"∀ {V : Type u_1}, (Equiv.refl V).simpleGraph = Equiv.refl (SimpleGraph V)\", \"doc\": \"The identity equivalence from a vertex set $ V $ to itself induces the identity equivalence on the corresponding simple graphs, i.e., $ (\\\\mathrm{id}_V).\\\\mathrm{simpleGraph} = \\\\mathrm{id}_{\\\\mathrm{Simp\"}\n  {\"name\": \"SimpleGraph.map_id\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"∀ {V : Type u_1} (G : SimpleGraph V), SimpleGraph.map (Function.Embedding.refl V) G = G\", \"doc\": \"For any simple graph $ G $, applying the identity embedding to $ G $ via the graph map operation results in $ G $ itself, i.e., $ G.map(\\\\mathrm{id}) = G $.\"}\n  {\"name\": \"SimpleGraph.Hom.id\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"{V : Type u_1} → {G : SimpleGraph V} → G →g G\", \"doc\": \"The identity homomorphism on a simple graph $ G $, which maps each vertex to itself and preserves adjacency. This is defined as the identity relation homomorphism for the adjacency relation of $ G $.\"}\n  {\"name\": \"SimpleGraph.Copy.ofLE_refl\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Copy\", \"type\": \"∀ {V : Type u_1} {G : SimpleGraph V}, SimpleGraph.Copy.ofLE G G ⋯ = SimpleGraph.Copy.id G\", \"doc\": \"For any simple graph $ G $ on a vertex set, the copy of $ G $ within itself via the reflexive subgraph relation $ G \\\\leq G $ is equal to the identity copy of $ G $. This asserts that applying the subg\"}\n  {\"name\": \"SimpleGraph.Embedding.refl\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"{V : Type u_1} → {G : SimpleGraph V} → G ↪g G\", \"doc\": \"The identity function on the vertex set of a simple graph $ G $ is a graph embedding, as it is injective and preserves adjacency between vertices.\"}\n  {\"name\": \"SimpleGraph.ComponentCompl.hom_refl\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Ends/Defs\", \"type\": \"∀ {V : Type u} {G : SimpleGraph V} {L : Set V} (C : G.ComponentCompl L), SimpleGraph.ComponentCompl.hom ⋯ C = C\", \"doc\": \"For any connected component $ C $ of the complement-induced subgraph on $ L $, applying the component map induced by the reflexive subset inclusion $ L \\\\subseteq L $ leaves $ C $ unchanged, i.e., $ C.\"}\n  {\"name\": \"SimpleGraph.comap_id\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"∀ {V : Type u_1} {G : SimpleGraph V}, SimpleGraph.comap id G = G\", \"doc\": \"For any simple graph $ G $ on a vertex set $ V $, the contravariant image of $ G $ under the identity function $ \\\\text{id}_V : V \\\\to V $ is equal to $ G $ itself, i.e., $ G.\\\\text{comap}(\\\\text{id}_V) =\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SimpleGraph identity maps, cycle decompositions of permutations and group homology do not prove rigidity for loopless multigraph automorphisms on their integral cycle lattice."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Graph\", \"homology\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: SimpleGraph identity maps, cycle decompositions of permutations and group homology do not prove rigidity for loopless multigraph automorphisms on their integral cycle lattice."
+  },
+  {
+   "tool": "grep",
+   "query": "(graph|multigraph).*(homology|rigidity)|(homology).*(graph|multigraph)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: SimpleGraph identity maps, cycle decompositions of permutations and group homology do not prove rigidity for loopless multigraph automorphisms on their integral cycle lattice."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite graph automorphism acting trivially on its cycle lattice and fixing vertices of degree zero one or two is trivial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Equiv.Perm.cycleType_eq_zero\", \"module\": \"Mathlib.GroupTheory.Perm.Cycle.Type\", \"type\": \"{σ : Perm α} : σ.cycleType = 0 ↔ σ = 1\", \"doc\": \"The cycle type of a permutation $\\\\sigma$ is the zero multiset if and only if $\\\\sigma$ is the identity permutation.\"}\n  {\"name\": \"groupHomology.cycles₁IsoOfIsTrivial\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \"[A.IsTrivial] : ModuleCat.of k (cycles₁ A) ≅ ModuleCat.of k (G →₀ A)\", \"doc\": \"When the representation $ A $ is trivial, the submodule of first homology cycles $ \\\\text{cycles}_1(A) $ is isomorphic to the entire module $ G \\\\to_0 A $ of $ G $-invariant finite support functions. Th\"}\n  {\"name\": \"Equiv.Perm.isCycle_iff_exists_isCycleOn\", \"module\": \"Mathlib.GroupTheory.Perm.Cycle.Basic\", \"type\": \": f.IsCycle ↔ ∃ s : Set α, s.Nontrivial ∧ f.IsCycleOn s ∧ ∀ ⦃x⦄, ¬IsFixedPt f x → x ∈ s\", \"doc\": \"A permutation $ f $ is a cycle if and only if there exists a nontrivial set $ s $ such that $ f $ acts as a cycle on $ s $ and every element not fixed by $ f $ is contained in $ s $.\"}\n  {\"name\": \"FintypeCat.instFiniteAut\", \"module\": \"Mathlib.CategoryTheory.FintypeCat\", \"type\": \"(X : FintypeCat) : Finite (Aut X)\", \"doc\": \"For any finite type $ X $, the automorphism group $ \\\\text{Aut}(X) $ consisting of all isomorphisms from $ X $ to itself is a finite set.\"}\n  {\"name\": \"Equiv.Perm.cycleFactorsFinset_eq_empty_iff\", \"module\": \"Mathlib.GroupTheory.Perm.Cycle.Factors\", \"type\": \"{f : Perm α} : cycleFactorsFinset f = ∅ ↔ f = 1\", \"doc\": \"The finite set of cycles in the decomposition of a permutation $ f $ is empty if and only if $ f $ is the identity permutation.\"}\n  {\"name\": \"Equiv.Perm.card_cycleType_eq_zero\", \"module\": \"Mathlib.GroupTheory.Perm.Cycle.Type\", \"type\": \"{σ : Perm α} : Multiset.card σ.cycleType = 0 ↔ σ = 1\", \"doc\": \"The cardinality of the cycle type of a permutation $\\\\sigma$ is zero if and only if $\\\\sigma$ is the identity permutation, i.e., $\\\\mathrm{card}(\\\\sigma.\\\\mathrm{cycleType}) = 0 \\\\leftrightarrow \\\\sigma = 1$\"}\n  {\"name\": \"SimpleGraph.subsingleton_of_ediam_eq_zero\", \"module\": \"Mathlib.Combinatorics.SimpleGraph.Diam\", \"type\": \"(h : G.ediam = 0) : Subsingleton α\", \"doc\": \"If the diameter of a simple graph $ G $ is zero, then its vertex set $ \\\\alpha $ contains at most one element (i.e., is a subsingleton).\"}\n  {\"name\": \"groupHomology.cycles₁IsoOfIsTrivial.congr_simp\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) [inst_2 : A.IsTrivial],\\n  groupHomology.cycles₁IsoOfIsTrivial A = groupHomology.cycles₁IsoOfIsTrivial A\", \"doc\": \"When the representation $ A $ is trivial, the submodule of first homology cycles $ \\\\text{cycles}_1(A) $ is isomorphic to the entire module $ G \\\\to_0 A $ of $ G $-invariant finite support functions. Th\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SimpleGraph identity maps, cycle decompositions of permutations and group homology do not prove rigidity for loopless multigraph automorphisms on their integral cycle lattice."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite multigraph automorphism rigidity from fixed low valency vertices and identity on the integer cycle space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimpleGraph.IsTutteViolator.empty\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Tutte\", \"type\": \"∀ {V : Type u_1} {G : SimpleGraph V} [Finite V], Odd (Nat.card V) → G.IsTutteViolator ∅\", \"doc\": \"For a simple graph $ G $ with vertex set $ V $, if the cardinality of $ V $ is an odd natural number, then the empty set $ \\\\emptyset $ is a Tutte violator of $ G $. This means that the number of conne\"}\n  {\"name\": \"SimpleGraph.IsCycles\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Matching\", \"type\": \"{V : Type u_1} → SimpleGraph V → Prop\", \"doc\": \"A simple graph $ G $ is called a cycle graph if for every vertex $ v $, the neighbor set of $ v $ is non-empty implies that the neighbor set has exactly two elements.\"}\n  {\"name\": \"SimpleGraph.IsTutteViolator\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Tutte\", \"type\": \"{V : Type u_1} → SimpleGraph V → Set V → Prop\", \"doc\": \"A subset $ u $ of vertices of a simple graph $ G $ is a Tutte violator if the number of connected components in the graph obtained by deleting the vertices in $ u $ that have an odd number of vertices\"}\n  {\"name\": \"SimpleGraph.labelledCopyCount\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Copy\", \"type\": \"{V : Type u_1} → {W : Type u_2} → [Fintype V] → [Fintype W] → SimpleGraph V → SimpleGraph W → ℕ\", \"doc\": \"The function computes the cardinality of the set of injective graph homomorphisms from a simple graph $ G $ to another simple graph $ H $, which corresponds to the number of distinct labeled copies of\"}\n  {\"name\": \"SimpleGraph.exists_isTutteViolator\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Tutte\", \"type\": \"∀ {V : Type u_1} {G : SimpleGraph V} [Finite V],\\n  (∀ (M : G.Subgraph), ¬M.IsPerfectMatching) → Even (Nat.card V) → ∃ u, G.IsTutteViolator u\", \"doc\": \"If a simple graph $G$ has an even number of vertices and no perfect matching, then there exists a subset $u$ of its vertex set such that the number of connected components in $G$ with an odd number of\"}\n  {\"name\": \"SimpleGraph.copyCount\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Copy\", \"type\": \"{V : Type u_1} → {W : Type u_2} → [Fintype V] → SimpleGraph V → SimpleGraph W → ℕ\", \"doc\": \"The function returns the cardinality of the set of subgraphs $ G' $ of $ G $ such that $ H $ is isomorphic to the simple graph structure of $ G' $. This counts how many distinct subgraphs of $ G $ are\"}\n  {\"name\": \"SimpleGraph.overFinIso\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Maps\", \"type\": \"{V : Type u_1} → (G : SimpleGraph V) → [inst : Fintype V] → {n : ℕ} → (hc : Fintype.card V = n) → G ≃g G.overFin hc\", \"doc\": \"Given a finite simple graph $G$ on a vertex set $V$ of cardinality $n$, this constructs an isomorphism between $G$ and the simple graph on the standard finite set $\\\\mathrm{Fin}(n)$ defined via the can\"}\n  {\"name\": \"SimpleGraph.copyCount_bot\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Copy\", \"type\": \"∀ {V : Type u_1} [inst : Fintype V] (G : SimpleGraph V), G.copyCount ⊥ = 1\", \"doc\": \"For any simple graph $ G $ on a vertex set $ V $, the number of subgraphs of $ G $ isomorphic to the empty graph (the bottom element $ \\\\bot $ in the complete atomic Boolean algebra of simple graphs) i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: SimpleGraph identity maps, cycle decompositions of permutations and group homology do not prove rigidity for loopless multigraph automorphisms on their integral cycle lattice."
+  },
+  {
+   "tool": "grep",
+   "query": "(multigraph|graph).*(homology|rigidity|lefschetz)|trace.*(homology|euler)",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: these are simple-graph Laplacian or Eulerian-walk facts, poset Euler characteristics, singular-chain definitions or algebra traces; none states the multigraph incidence-kernel dimension and equivariant trace identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite graph automorphism is identity if it fixes all low degree vertices and acts trivially on its first homology",
+   "results": "8 hits; groupHomology.cycles₁IsoOfIsTrivial_hom_apply, groupHomology.cycles₁IsoOfIsTrivial.congr_simp, SimpleGraph.Hom.id, FintypeCat.instFiniteAut, groupHomology.cycles₁IsoOfIsTrivial, SimpleGraph.Iso.refl, SimpleGraph.Subgraph.hom_apply, Equiv.simpleGraph_refl",
+   "date": "2026-10-23",
+   "verdict": "no match: these are simple-graph Laplacian or Eulerian-walk facts, poset Euler characteristics, singular-chain definitions or algebra traces; none states the multigraph incidence-kernel dimension and equivariant trace identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"homology\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: no graph homology comparison or rigidity theorem; invariant direct-sum trace facts alone do not give the graph incidence-kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism of a finite loopless multigraph fixing vertices of degree at most two and acting identically on its integral cycle group is identity",
+   "results": "8 hits; SimpleGraph.cycleGraph_degree_two_le, SimpleGraph.cycleGraph_one_eq_bot, SimpleGraph.cycleGraph_two_eq_top, SimpleGraph.cycleGraph_one_eq_top, SimpleGraph.cycleGraph_zero_eq_top, SimpleGraph.cycleGraph_zero_eq_bot, SimpleGraph.IsCycles, SimpleGraph.Iso.refl",
+   "date": "2026-10-23",
+   "verdict": "no match: these are simple-graph Laplacian or Eulerian-walk facts, poset Euler characteristics, singular-chain definitions or algebra traces; none states the multigraph incidence-kernel dimension and equivariant trace identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-action-faithful",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: The graph argument following Lemma 1.17, printed pp.86–87: deletion and suppression induction, followed by the finite-graph trace identity. Local PDF WANTED; primary PDF read online.",
+   "via": [
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-graph-homology-rigidity",
+  "worker": "stage1",
+  "summary": "Retained the statement and expanded the Deligne–Mumford deletion/suppression induction, including equivariant cycle-kernel coordinate maps and low-degree fixedness after each reduction. Separated only the general multigraph Euler dimension and trace identity as a statement-only input. Searched the live Lean source, whole DAG, current blueprint and Mathlib; no exact attachment or Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: The graph argument following Lemma 1.17, printed pp.86–87: deletion and suppression induction, followed by the finite-graph trace identity. Local PDF WANTED; primary PDF read online. This split realizes the finite-graph rigidity prerequisite of the stable Picard faithfulness input to proof (3); no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-95a22f42d",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-95a22f42d (reviewer sub-agent of L); spot-checked: Item statement unchanged. The base proof was empty and there is no re-split repair note for this item, so the 2026-10-21 rule does not apply. Steps 1-6 are elementary and each check is written out in the step: strong induction on |V|+|E|; changing an orientation conjugates both the boundary map and the action. Degree-0 and degree-1 deletion: extension by zero identifies the cycle kernels, and only the fixed neighbour loses degree. A degree-2 vertex with two parallel edges: a swap would send e1-e2 to e2-e1, so both edges are fixed. A degree-2 vertex with distinct neighbours is suppressed into one edge; I checked the signs when y and z are swapped. A fixed edge with fixed endpoints is deleted. Step 7 cites the new node. Clearing denominators gives tr(T_Z)=b; 2|E|>=3|V| gives b>c; then 0<=f_0+f_-=f_c-b<0 is a contradiction. All cases are covered. New node lem-sfb-finite-graph-euler-trace: statement only and self-contained, with trace from def-weil-endomorphism-trace. It is the Hopf trace formula plus rank-nullity with dim im(boundary)=|V|-c. Small cases checked: one edge with endpoints swapped, triangle rotation and reflection, two parallel edges swapped, empty graph. It does not restate a clause of the item. The DAG search (multigraph, dual graph, cycle lattice, Hopf/Lefschetz trace) found only nodal-curve users and the categorical supertrace nodes lem-trf-chain-supertrace and prop-trf-trace-formal-laws, which are not duplicates. The Deligne-Mumford source (pp.86-87) is not in the local literature and is marked WANTED; I checked the argument independently. The blueprint from.node is null, carried over from Q118. No SGA source is used and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.FiniteGraphHomologyRigidity",
+  "declaration": "finiteGraphHomologyRigidity",
+  "file": "lean/Sheaf/Combinatorics/FiniteGraphHomologyRigidity.lean",
+  "statement": "theorem finiteGraphHomologyRigidity (V : Type u) (E : Type v) [Finite V] [Fintype E] [DecidableEq V] (s t : E → V) (_hne : ∀ e : E, s e ≠ t e) : (∃ r : ℕ, Nonempty (Module.Basis (Fin r) ℤ (LinearMap.ker (Finsupp.linearCombination ℤ (fun e : E ↦ Finsupp.single (t e) (1 : ℤ) - Finsupp.single (s e) 1))))) ∧ ∀ (σV : Equiv.Perm V) (σE : Equiv.Perm E), (∀ e : E, (σV (s e) = s (σE e) ∧ σV (t e) = t (σE e)) ∨ (σV (s e) = t (σE e) ∧ σV (t e) = s (σE e))) → (∀ x : V, (Finset.univ.filter (fun e : E ↦ s e = x ∨ t e = x)).card ≤ 2 → σV x = x) → (∀ c : E →₀ ℤ, Finsupp.linearCombination ℤ (fun e : E ↦ Finsupp.single (t e) (1 : ℤ) - Finsupp.single (s e) 1) c = 0 → Finsupp.linearCombination ℤ (fun e : E ↦ if σV (s e) = s (σE e) then Finsupp.single (σE e) (1 : ℤ) else -Finsupp.single (σE e) 1) c = c) → σV = Equiv.refl V ∧ σE = Equiv.refl E",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f98547f52",
+  "group": "NM",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: finite V/E with independent universes, s≠t loopless with parallel edges allowed, degree = filter card of incident edges, ∂ = linearCombination(single t − single s), free finite rank of ker as first conjunct (Mathlib leaf Submodule.basisOfPid), automorphism = Perm V × Perm E preserving unordered endpoint pairs, canonical signed action negative iff orientation reversed, identity on kernel, conclusion σV=refl ∧ σE=refl, no connectedness. Only extra instance DecidableEq V (classically harmless). lean.statement verbatim in file; node otherwise identical to live, live has no lean record. Edge cases checked: empty graph, no edges, single swapped edge, parallel pair, three-edge parallel graph with endpoints swapped, triangle rotation, disconnected. No graph-homology notion in Mathlib or the project; no new definitions; only sorry; docstrings carry source place, blueprint id and full proof. Not recompiled (no file changed). Advisory: euler-trace node should reuse the same ∂ and signed-action expressions."
+ }
+}

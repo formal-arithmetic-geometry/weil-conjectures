@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E, the canonical tensor comparison on flat-term K-flat representatives; ordinary unit compatibility uses Modules on Sites, Tag 03EL."
+ },
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit interface identifications in the proof of normalization, following 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor comparison for a left derived functor is uniquely determined by its normalized square on K-flat complexes",
+   "results": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived: leftDerivedUnique, leftDerived_ext and isLeftDerivedFunctor_iff_isIso_leftDerivedLift; Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor: mapDerivedCategoryFactors and mapDerivedCategoryFactorsh; generic Tor declarations. None identifies this normalized ringed-site comparison or its model presentations.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match; use the existing project canonical representative characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One match: CategoryTheory.Functor.leftDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.LeftDerived. It gives uniqueness of a left derived functor, not the normalized tensor square or its coherence equations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalComparison_eq|normalized_cochain_tensor_diagrams|canonical_model_eq",
+   "results": "msearch grep returned zero matches. Direct repository reads found the applicable canonicalTensorDiagrams and ringedTopoiCanonicalDerivedTensorPullback interfaces; the explicit cochain presentation bridges are the remaining glue.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: the comparison mu_{g;K,Lambda(m)} before theta_K tensor theta_m; coherence of that finite derived pullback comparison from its normalized cochain square.",
+   "via": [
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-normalized-cochain-tensor-diagrams",
+ "title": "Coherence of a tensor comparison normalized by its cochain square",
+ "statement": "theorem normalized_cochain_tensor_diagrams {X Y : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : CochainPullback.Comparison.{u, u, u, u, u} f)\n    (F : Y.D ⥤ X.D)\n    (εc : DerivedCategory.Q ⋙ F ⟶ CochainPullback.pull f ⋙ DerivedCategory.Q)\n    (nu : Y.closed.tensor ⋙ F ≅ (F.prod F) ⋙ X.closed.tensor)\n    (huniversal : F.IsLeftDerivedFunctor εc\n      (HomologicalComplex.quasiIso Y.modules (.up ℤ)))\n    (hcomputes : ∀ P, Y.corner.mateFlat P → IsIso (εc.app P))\n    (hnormalized : ∀ (P Q : CochainComplex Y.modules ℤ)\n      (hP : Y.corner.mateFlat P) (hQ : Y.corner.mateFlat Q),\n      ∃ (hP' : X.corner.mateFlat ((CochainPullback.pull f).obj P))\n        (hQ' : X.corner.mateFlat ((CochainPullback.pull f).obj Q)),\n        F.map (Y.model.iso Y.J Y.A Y.closed P Q hP.1 hQ.1).hom ≫\n            nu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n            X.closed.tensor.map (Prod.mkHom (εc.app P) (εc.app Q)) =\n          εc.app (P ⊗ Q) ≫ DerivedCategory.Q.map (CochainPullback.comparison f k P Q).hom ≫\n            (X.model.iso X.J X.A X.closed ((CochainPullback.pull f).obj P)\n              ((CochainPullback.pull f).obj Q) hP'.1 hQ'.1).hom) :\n    IsIso (cochainUnitComparison f k F εc) ∧\n    (∀ M N P : Y.D,\n      (nu).hom.app (Y.closed.tensor.obj (M, N), P) ≫\n          X.closed.tensor.map (Prod.mkHom ((nu).hom.app (M, N))\n            (𝟙 (F.obj P))) ≫\n          (X.closed.monoidal.associator (F.obj M) (F.obj N) (F.obj P)).hom =\n        F.map (Y.closed.monoidal.associator M N P).hom ≫\n          (nu).hom.app (M, Y.closed.tensor.obj (N, P)) ≫\n          X.closed.tensor.map (Prod.mkHom (𝟙 (F.obj M))\n            ((nu).hom.app (N, P)))) ∧\n    (∀ M : Y.D,\n      (nu).hom.app (Y.closed.monoidal.tensorUnit, M) ≫\n          X.closed.tensor.map (Prod.mkHom (cochainUnitComparison f k F εc) (𝟙 (F.obj M))) ≫\n          (X.closed.monoidal.leftUnitor (F.obj M)).hom =\n        F.map (Y.closed.monoidal.leftUnitor M).hom) ∧\n    (∀ M : Y.D,\n      (nu).hom.app (M, Y.closed.monoidal.tensorUnit) ≫\n          X.closed.tensor.map (Prod.mkHom (𝟙 (F.obj M)) (cochainUnitComparison f k F εc)) ≫\n          (X.closed.monoidal.rightUnitor (F.obj M)).hom =\n        F.map (Y.closed.monoidal.rightUnitor M).hom) ∧\n    (∀ M N : Y.D,\n      (nu).hom.app (M, N) ≫\n          (X.symmetry.toBraidedCategory.braiding (F.obj M) (F.obj N)).hom =\n        F.map (Y.symmetry.toBraidedCategory.braiding M N).hom ≫\n          (nu).hom.app (N, M))",
+ "stmt_deps": [
+  "def-sfb-ringed-derived-comparison-data",
+  "lem-pur-finite-derived-tensor-model-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Descend the universal cochain counit through the homotopy quotient retaining its components. On the native flat-term K-flat class it is invertible by hypothesis. Resolve every homotopy object by a flat-term K-flat complex. Naturality of the counit and inversion of localized quasi-isomorphisms show that the localized ordinary pullback inverts quasi-isomorphisms within this class.",
+   "uses": [
+    "lem-pur-cochain-homotopy-derived-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Right derivability of the module pushforward follows from Grothendieck abelianity and K-injective resolutions. Use the already proved helper CategoryTheory.exists_derived in RingedToposDerivedPushforwardComposition to construct the universal right-derived functor. The resolving-class adjunction theorem supplies a right adjoint to the specified F, with its actual descended universal counit. Construct a RingedTensorEdge using this adjunction and the ordinary comparison obtained field by field from k.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-pur-finite-derived-tensor-model-bridge",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis gives exactly the representative square for nu. Restrict the recorded tensor models using the bridge, and replace the homotopy comparison components by the original cochain components. The unique canonical tensor comparison on these representatives is therefore nu. The ordinary unit presentation identifies canonicalDerivedUnitComparison with cochainUnitComparison.",
+   "uses": [
+    "lem-pur-canonical-cochain-tensor-comparison",
+    "lem-pur-finite-derived-tensor-model-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply canonicalTensorDiagrams to the constructed edge. Rewrite its tensor and unit maps by the previous identifications. Its associativity and symmetry are the required equations. Precompose each inverse-unitor identity by the image of the source forward unitor and postcompose by the target forward unitor; cancel the two inverse pairs to obtain the two forward-unitor equations.",
+   "uses": [
+    "lem-sfb-ringed-derived-tensor-diagrams"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-canonical-cochain-tensor-comparison",
+  "lem-pur-cochain-homotopy-derived-comparison",
+  "lem-pur-finite-derived-tensor-model-bridge",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-ringed-derived-tensor-diagrams",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCochainTensorDiagrams",
+  "file": "lean/Sheaf/Paper/NormalizedCochainTensorDiagrams.lean",
+  "declaration": "CategoryTheory.FiniteDerivedTensorModels.normalized_cochain_tensor_diagrams",
+  "declarations": [
+   "CategoryTheory.FiniteDerivedTensorModels.cochainUnitComparison",
+   "CategoryTheory.FiniteDerivedTensorModels.normalized_cochain_tensor_diagrams"
+  ],
+  "statement": "theorem normalized_cochain_tensor_diagrams {X Y : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : CochainPullback.Comparison.{u, u, u, u, u} f)\n    (F : Y.D ⥤ X.D)\n    (εc : DerivedCategory.Q ⋙ F ⟶ CochainPullback.pull f ⋙ DerivedCategory.Q)\n    (nu : Y.closed.tensor ⋙ F ≅ (F.prod F) ⋙ X.closed.tensor)\n    (huniversal : F.IsLeftDerivedFunctor εc\n      (HomologicalComplex.quasiIso Y.modules (.up ℤ)))\n    (hcomputes : ∀ P, Y.corner.mateFlat P → IsIso (εc.app P))\n    (hnormalized : ∀ (P Q : CochainComplex Y.modules ℤ)\n      (hP : Y.corner.mateFlat P) (hQ : Y.corner.mateFlat Q),\n      ∃ (hP' : X.corner.mateFlat ((CochainPullback.pull f).obj P))\n        (hQ' : X.corner.mateFlat ((CochainPullback.pull f).obj Q)),\n        F.map (Y.model.iso Y.J Y.A Y.closed P Q hP.1 hQ.1).hom ≫\n            nu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n            X.closed.tensor.map (Prod.mkHom (εc.app P) (εc.app Q)) =\n          εc.app (P ⊗ Q) ≫ DerivedCategory.Q.map (CochainPullback.comparison f k P Q).hom ≫\n            (X.model.iso X.J X.A X.closed ((CochainPullback.pull f).obj P)\n              ((CochainPullback.pull f).obj Q) hP'.1 hQ'.1).hom) :\n    IsIso (cochainUnitComparison f k F εc) ∧\n    (∀ M N P : Y.D,\n      (nu).hom.app (Y.closed.tensor.obj (M, N), P) ≫\n          X.closed.tensor.map (Prod.mkHom ((nu).hom.app (M, N))\n            (𝟙 (F.obj P))) ≫\n          (X.closed.monoidal.associator (F.obj M) (F.obj N) (F.obj P)).hom =\n        F.map (Y.closed.monoidal.associator M N P).hom ≫\n          (nu).hom.app (M, Y.closed.tensor.obj (N, P)) ≫\n          X.closed.tensor.map (Prod.mkHom (𝟙 (F.obj M))\n            ((nu).hom.app (N, P)))) ∧\n    (∀ M : Y.D,\n      (nu).hom.app (Y.closed.monoidal.tensorUnit, M) ≫\n          X.closed.tensor.map (Prod.mkHom (cochainUnitComparison f k F εc) (𝟙 (F.obj M))) ≫\n          (X.closed.monoidal.leftUnitor (F.obj M)).hom =\n        F.map (Y.closed.monoidal.leftUnitor M).hom) ∧\n    (∀ M : Y.D,\n      (nu).hom.app (M, Y.closed.monoidal.tensorUnit) ≫\n          X.closed.tensor.map (Prod.mkHom (𝟙 (F.obj M)) (cochainUnitComparison f k F εc)) ≫\n          (X.closed.monoidal.rightUnitor (F.obj M)).hom =\n        F.map (Y.closed.monoidal.rightUnitor M).hom) ∧\n    (∀ M N : Y.D,\n      (nu).hom.app (M, N) ≫\n          (X.symmetry.toBraidedCategory.braiding (F.obj M) (F.obj N)).hom =\n        F.map (Y.symmetry.toBraidedCategory.braiding M N).hom ≫\n          (nu).hom.app (N, M))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

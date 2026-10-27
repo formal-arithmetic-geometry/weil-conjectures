@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-abhyankar-arbitrary-dvr-branches",
+ "kind": "statement",
+ "title": "Abhyankar cancellation for arbitrary local DVR extensions",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension], and let $e\\geq1$ satisfy $\\mathfrak m_AB=\\mathfrak m_B^e$. Suppose either $A/\\mathfrak m_A$ has characteristic zero, or it has characteristic $p>0$, $p\\nmid e$, and $(B/\\mathfrak m_B)/(A/\\mathfrak m_A)$ is separable in the possibly transcendental sense [def-weil-pbc-separable-field-extension]. Let $N/K$ be any finite field extension. Write $R$ for the integral closure of $A$ in $N$ and $C$ for that of $B$ in $(L\\otimes_KN)_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. For every maximal ideal $q$ of $C$ set $n=q\\cap R$. Then $n$ is maximal and $R_n,C_q$ are discrete valuation rings [def-weil-pbc-localization-at-prime]. If $\\mathfrak m_A R_n=(nR_n)^d$ for $d\\geq1$ divisible by $e$, then $nC_q=qC_q$. Finite means finite-dimensional, reduction means quotient by nilpotents, and local means pulling back maximal ideals. No finiteness of $L/K$, module finiteness of the normalizations, or completeness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRM, lemma-abhyankar, maximal-ideal consequence of the statement via Tag 09E7, lemma-extension-dvrs-formally-smooth; local normalized branches of Tag 09EM, remark-construction."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dvr-algebraic-normalization-structure] in case (a), with $P=N$. It gives precisely that $n=q\\cap R$ is maximal and that $S=R_n$ and $T=C_q$ are DVRs; its generic product decomposition selects a field factor $F$ of $(L\\otimes_KN)_{\\mathrm{red}}$ containing $T$, with fraction field $F$. For the fraction-field assertion, any $x$ in a finite extension of $L$ becomes integral over $B$ after multiplication by a sufficiently large power of its uniformizer: scale a monic equation for $x$ so each coefficient has nonnegative valuation. Hence the component normalization has fraction field that entire field factor. The same argument over $A$ gives $\\operatorname{Frac}(S)=N$. The canonical map $S\\to T$ is local and injective: elements of $R\\setminus n$ map outside $q$, and the map $N\\to F$ is a field embedding. This proves the unconditional clauses, without any module-finiteness assumption.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM, remark-construction; Tag 0BRM, setup"
+   }
+  },
+  {
+   "text": "Assume now $e\\mid d$. Choose uniformizers $\\pi$ of $A$ and $\\tau$ of $S$. The ideal equality in the hypothesis says $\\pi=u\\tau^d$ for a unit $u\\in S$. The integer $e$ is a unit in $A$, hence in $S$, because its residue is nonzero in either allowed characteristic. Apply [lem-sfb-dvr-unit-root-normalized-lift] to $S\\to T$, $h=e$ and $u$. Write its fields as $N_2=N(r)$ and $F_2=F(r)$, and its local DVRs as $S_2,T_2$. Thus $r^e=u$, $\\mathfrak m_SS_2=\\mathfrak m_{S_2}$ and $\\mathfrak m_TT_2=\\mathfrak m_{T_2}$. Set $\\theta=r\\tau^{d/e}\\in S_2$. Then $\\theta^e=\\pi$.",
+   "uses": [
+    "lem-sfb-dvr-unit-root-normalized-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM, lemma-abhyankar, proof"
+   }
+  },
+  {
+   "text": "Put $K_0=K(\\theta)\\subseteq N_2$. By [lem-sbc-dvr-uniformizer-root-algebra], $D=A[\\theta]\\cong A[X]/(X^e-\\pi)$ is a DVR, with uniformizer $\\theta$, fraction field $K_0$, and residue field $\\kappa_A$: the quotient by $\\theta$ is $A/(\\pi)$. This DVR is the integral closure of $A$ in $K_0$. Indeed a DVR is integrally closed: if a fraction of negative valuation satisfied a monic equation, its highest power would have strictly lower valuation than every other term, impossible. Elements integral over $A$ are integral over $D$, so belong to $D$, and $D$ is integral over $A$.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM, lemma-abhyankar, proof"
+   }
+  },
+  {
+   "text": "Choose a uniformizer $\\varpi$ of $B$ and a unit $w\\in B$ with $\\pi=w\\varpi^e$. Then\n$$L\\otimes_KK_0\\cong L[X]/(X^e-\\pi)\\cong L[Y]/(Y^e-w),\\quad X=\\varpi Y.$$\nBy [lem-sfb-unit-binomial-finite-etale], $H=B[Y]/(Y^e-w)$ is finite etale over $B$. Apply [lem-sfb-finite-etale-normal-generic-components] to $\\operatorname{Spec}H\\to\\operatorname{Spec}B$. It identifies the integral closure $C_0$ of $B$ in $L\\otimes_KK_0$ with $H$: each component is the normalization in its generic field. In particular the tensor algebra is reduced. The compatible embeddings into $F_2$ select a field factor $F_0$ of $L\\otimes_KK_0$ and a branch $V$ of $C_0$ below $T_2$. The selected component of $C_0$ maps into the integrally closed DVR $T_2$ since all its elements are integral over $B$; its contracted prime is nonzero (it contains $\\varpi$), hence maximal by the dimension-one assertion below. By [lem-sfb-dvr-algebraic-normalization-structure] for $K_0/K$, $V$ is a DVR.",
+   "uses": [
+    "lem-sfb-unit-binomial-finite-etale",
+    "lem-sfb-finite-etale-normal-generic-components",
+    "lem-sfb-dvr-algebraic-normalization-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM, lemma-abhyankar, proof"
+   }
+  },
+  {
+   "text": "The etale fibre theorem [lem-weil-pbc-etale-fibre-discrete-separable-points] says the local closed fibre of $H/B$ at the selected branch is a finite separable field over $\\kappa_B$. Consequently $\\mathfrak m_BV=\\mathfrak m_V$ and $\\kappa(V)/\\kappa_B$ is finite separable. Let $a$ be the ramification index of the local injection $D\\to V$. Computing the valuation of $\\pi$ in $V$ in two ways gives $e=e a$: along $A\\to B\\to V$ its valuation is $e$, and along $A\\to D\\to V$ it is $ea$. Since $e>0$, $a=1$. Thus $\\mathfrak m_DV=\\mathfrak m_V$. In positive residue characteristic, [lem-sfb-separable-finite-top-extension] applied to $\\kappa_A\\subseteq\\kappa_B\\subseteq\\kappa(V)$ gives separability of $\\kappa(V)/\\kappa_A$. In residue characteristic zero this follows from [lem-weil-pbc-char-zero-field-extension-separable]. As $\\kappa(D)=\\kappa_A$, $D\\to V$ meets both hypotheses of the index-one base-change theorem.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sfb-separable-finite-top-extension",
+    "lem-weil-pbc-char-zero-field-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM, lemma-abhyankar, proof"
+   }
+  },
+  {
+   "text": "Apply the unconditional local clause of [lem-sfb-dvr-index-one-separable-base-change] to $D\\to V$: step 5 gives its injective local DVR map, $\\mathfrak m_DV=\\mathfrak m_V$, and separable residue extension in the possibly transcendental sense. The extension $N_2/K_0$ is finite since $N_2/K$ is finite and $K_0\\subseteq N_2$. The selected normalized branch is $S_2\\to T_2$. To check this identification, tensor associativity gives\n$$L\\otimes_KN_2\\cong(L\\otimes_KK_0)\\otimes_{K_0}N_2;$$\nthe map to $F_2$ selects $F_0$ on the right. Its image is a finite-dimensional domain over $L$, hence a field, and contains $L,N,r$, so is all of $F(r)=F_2$. It therefore selects the factor $F_2$ of $(F_0\\otimes_{K_0}N_2)_{\\mathrm{red}}$. The integral closures of $A$ and $D$ in $N_2$ agree: $D/A$ is integral, so transitivity [lem-weil-pbc-integral-transitive] gives one inclusion, and a monic equation over $A$ is also one over $D$. Likewise normalizing $B$ first in $F_0$ and then in $F_2$ gives the same integral closure as normalizing $B$ directly in $F_2$. Localizing these equalities at the contracted primes, using [lem-weil-pbc-integral-closure-commutes-localization], identifies the normalizations of $S$ and $T$ used to define $S_2,T_2$ with these selected branches. No nilpotents survive in a selected field factor. Its local clause therefore yields $\\mathfrak m_{S_2}T_2=\\mathfrak m_{T_2}$. The additional global tensor-isomorphism and reducedness clause of that theorem, which requires Noetherianity of the tensor algebra, is not used.",
+   "uses": [
+    "lem-sfb-dvr-index-one-separable-base-change",
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM, lemma-abhyankar, proof"
+   }
+  },
+  {
+   "text": "Now $\\tau$ is a uniformizer of $S_2$ because $\\mathfrak m_SS_2=\\mathfrak m_{S_2}$. Thus its image generates $\\mathfrak m_{T_2}$ by step 6. Since $T\\to T_2$ is injective local, write $\\tau=v\\rho^b$ in $T$, with $\\rho$ a uniformizer, $v$ a unit and $b\\geq1$. In $T_2$ this gives $1=b\\,v_{T_2}(\\rho)$ with both factors positive integers, hence $b=1$. Therefore $\\tau T=\\mathfrak m_T$. Finally $\\mathfrak m_S=nR_n$, and denominators from $R\\setminus n$ are units in $T=C_q$, so $nC_q=\\mathfrak m_SC_q=\\mathfrak m_T=qC_q$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRM, lemma-abhyankar, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-sfb-dvr-unit-root-normalized-lift",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sfb-unit-binomial-finite-etale",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-separable-finite-top-extension",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-sfb-dvr-index-one-separable-base-change",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRM, lemma-abhyankar, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Abhyankar lemma for arbitrary discrete valuation ring extensions: a base field extension whose ramification index is divisible by the tame ramification index makes normalized branches weakly unramified",
+   "results": "{\"t\": \"2026-10-24T04:44:29Z\", \"tool\": \"leanfinder\", \"query\": \"Abhyankar lemma for arbitrary discrete valuation ring extensions: a base field extension whose ramification index is divisible by the tame ramification index makes normalized branches weakly unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Ideal.sum_ramification_inertia\"], \"digest\": \"2f760eaf373c8e64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification-index formulas, unramifiedness consequences and number-field cyclotomic theorems do not establish tame cancellation for an arbitrary DVR extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification-index formulas, unramifiedness consequences and number-field cyclotomic theorems do not establish tame cancellation for an arbitrary DVR extension."
+  },
+  {
+   "tool": "grep",
+   "query": "abhyankar|ramificationIdx.*dvd|dvd.*ramificationIdx",
+   "results": "{\"t\": \"2026-10-24T04:44:26Z\", \"tool\": \"grep\", \"query\": \"abhyankar|ramificationIdx.*dvd|dvd.*ramificationIdx\", \"sub\": \"NumberTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\"], \"digest\": \"2528aff0c88e7567\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification-index formulas, unramifiedness consequences and number-field cyclotomic theorems do not establish tame cancellation for an arbitrary DVR extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining a root of a uniformizer eliminates tame ramification for a local extension of DVRs even with transcendental residue field extension",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"leansearch\", \"query\": \"Adjoining a root of a uniformizer eliminates tame ramification for a local extension of DVRs even with transcendental residue field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdjoinRootMonic.toIsAdjoinRoot\", \"IsAdjoinRootMonic.noConfusion\", \"IsAdjoinRoot.noConfusionType\", \"AdjoinRoot.root\", \"AdjoinRoot.instField\", \"AdjoinRoot.isAdjoinRootMonic\", \"IntermediateField.adjoin_root_eq_top_of_isSplittingField\", \"IsAdjoinRootMonic.mk\"], \"digest\": \"4df1ea9dfa7f239e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification-index formulas, unramifiedness consequences and number-field cyclotomic theorems do not establish tame cancellation for an arbitrary DVR extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a tame extension of valuation rings ramification index divides base extension index implies normalized compositum ramification index one",
+   "results": "{\"t\": \"2026-10-24T04:44:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a tame extension of valuation rings ramification index divides base extension index implies normalized compositum ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.ramificationIdx_map_self_eq_one\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Ideal.ramificationIdx_algebra_tower\", \"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\"], \"digest\": \"dbdf844a0290c802\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the ramification-index formulas, unramifiedness consequences and number-field cyclotomic theorems do not establish tame cancellation for an arbitrary DVR extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-weak-perfect-residue",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Abhyankar cancellation for arbitrary local DVR extensions.",
+   "via": [
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abhyankar-arbitrary-dvr-branches",
+  "worker": "stage1",
+  "summary": "Followed the unit-root reduction and explicit uniformizer-root calculation of Stacks 0BRM, reusing the arbitrary index-one base-change node and normalized branch structure. Two genuinely smaller statement-only inputs supply normalized unit-root lifts and finite-separable residue-tower permanence. No change to the statement. Repair of returned head 696ebb89de7: revalidated every cited statement against the current DAG; only lem-sfb-dvr-index-one-separable-base-change changed. Step 6 now names and checks its unconditional local clause, and the verbatim citation and repair report are updated; no Noetherianity is inferred.",
+  "blueprint": "Historical supporting algebra input to det-thm-sf-ctf-stability-direct-images (3), via the existing creation chain. The latest blueprint does not state this auxiliary theorem and ancestor returns None. No current unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "Generic algebra tool in the Stacks 0BRM proof: A DVR after adjoining a positive-order root of a uniformizer. No theorem of this unit supplies this generic statement; this does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic algebra tool in the Stacks 0BRM proof: The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions. No theorem of this unit supplies this generic statement; this does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-char-zero-field-extension-separable",
+    "why": "Generic algebra tool in the Stacks 0BRM proof: In characteristic zero every field extension is separable. No theorem of this unit supplies this generic statement; this does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-transitive",
+    "why": "Generic algebra tool in the Stacks 0BRM proof: A composition of integral ring maps is integral. No theorem of this unit supplies this generic statement; this does not replace a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic algebra tool in the Stacks 0BRM proof: Integral closure commutes with localization (Stacks 0307). No theorem of this unit supplies this generic statement; this does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-0dcc3c65e",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-0dcc3c65e (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra 09EM, 09EQ and 0BRM in full (lines 34037-34135). The item statement is unchanged and matches 0BRM: the hypothesis is e|d at n, the conclusion is index one via 09E7. This is a first split, not a re-split. All 7 steps verified against the cited statements. Step 1: algebraic-normalization (a) gives the DVRs, and the fraction field follows by scaling a monic equation. Step 2: e is a unit in the residue field, and theta^e = r^e tau^d = pi. Step 3: the uniformizer-root algebra is a DVR; the iso onto A[theta] is implicit but elementary, since the source is a domain so X^e-pi is irreducible over K. Step 4: the binomial algebra H=B[Y]/(Y^e-w) is finite etale, the generic-components lemma gives C_0=H and reducedness, and the branch V is selected through integrality into T_2. Step 5: the etale fibre gives m_B V=m_V; computing the valuation of pi both ways gives e=e*a, so a=1; residue separability comes from the new tower node (or the char-0 node). Step 6: uses the now-unconditional local clause of lem-sfb-dvr-index-one-separable-base-change, which answers the earlier return; the normalizations are identified by transitivity and localization of integral closure, and the F_2 factor by the image argument. Step 7: elementary valuation computation, b=1. Both new nodes are true (I checked them by proof sketches and small cases: h=1, M=L, transcendental L/k), statement-only, self-contained, strictly smaller than the item, and not duplicates: the existing sbc unit-root nodes lack the normalization branches and index-one equalities, and lem-zl-separable-permanence is algebraic only. The proof_deps closure (527 nodes) does not contain the item, so there is no cycle. The listed tool_uses are generic algebra tools and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AbhyankarArbitraryDvrBranches",
+  "declaration": "RingTheory.abhyankar_arbitrary_dvr_branches",
+  "declarations": [
+   "RingTheory.AbhyankarReducedTensor",
+   "RingTheory.abhyankarNormalizationMap",
+   "RingTheory.abhyankar_arbitrary_dvr_branches"
+  ],
+  "file": "lean/Sheaf/RingTheory/AbhyankarArbitraryDvrBranches.lean",
+  "statement": "theorem abhyankar_arbitrary_dvr_branches (A : Type uA) (B : Type uB) [CommRing A] [CommRing B] [IsDomain A] [IsDomain B] [IsDiscreteValuationRing A] [IsDiscreteValuationRing B] [Algebra A B] (hinj : Function.Injective (algebraMap A B)) [IsLocalHom (algebraMap A B)] (K : Type uK) (L : Type uL) [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra B L] [IsFractionRing B L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [IsScalarTower A B L] (e : ℕ) (he : 1 ≤ e) (hindex : (IsLocalRing.maximalIdeal A).map (algebraMap A B) = IsLocalRing.maximalIdeal B ^ e) (htame : CharZero (IsLocalRing.ResidueField A) ∨ ∃ p : ℕ, Nat.Prime p ∧ CharP (IsLocalRing.ResidueField A) p ∧ ¬ p ∣ e ∧ Algebra.IsSeparableExtension (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField B)) (N : Type uN) [Field N] [Algebra K N] [FiniteDimensional K N] [Algebra A N] [IsScalarTower A K N] (q : Ideal (integralClosure B (AbhyankarReducedTensor K L N))) [q.IsMaximal] : (q.comap (abhyankarNormalizationMap A B K L N)).IsMaximal ∧ ∃ (_hR : IsDomain (Localization.AtPrime (q.comap (abhyankarNormalizationMap A B K L N)))) (_hC : IsDomain (Localization.AtPrime q)), IsDiscreteValuationRing (Localization.AtPrime (q.comap (abhyankarNormalizationMap A B K L N))) ∧ IsDiscreteValuationRing (Localization.AtPrime q) ∧ ∀ (d : ℕ), 1 ≤ d → e ∣ d → (IsLocalRing.maximalIdeal A).map ((algebraMap (integralClosure A N) (Localization.AtPrime (q.comap (abhyankarNormalizationMap A B K L N)))).comp (algebraMap A (integralClosure A N))) = ((q.comap (abhyankarNormalizationMap A B K L N)).map (algebraMap (integralClosure A N) (Localization.AtPrime (q.comap (abhyankarNormalizationMap A B K L N))))) ^ d → (q.comap (abhyankarNormalizationMap A B K L N)).map ((algebraMap (integralClosure B (AbhyankarReducedTensor K L N)) (Localization.AtPrime q)).comp (abhyankarNormalizationMap A B K L N)) = q.map (algebraMap (integralClosure B (AbhyankarReducedTensor K L N)) (Localization.AtPrime q))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3d54f8d7",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Node diff vs live/side-live: only lean field added; lean.statement verbatim in file. Clause-by-clause vs node and Stacks 09EM/0BRM(+09E7): DVR/local/injective hypotheses, fraction-field towers, hindex, htame (CharZero or prime p∤e with Algebra.IsSeparableExtension on induced residue algebra), FiniteDimensional K N, R=integralClosure A N, C=integralClosure B ((L⊗[K]N)/nilradical) with B acting via leftAlgebra through L, n=q.comap of canonical x↦[1⊗x] map (real data, no sorry), conclusions n maximal, ∃IsDomain + DVR for R_n and C_q, ∀ d≥1, e∣d, m_A R_n=(nR_n)^d → nC_q=qC_q: all exact. No extra finiteness/Noetherian/completeness, independent universes, edge cases e=1,d=1,N=K, inseparable N, transcendental L/K covered. Docstrings with source/blueprint and 7-step proof; report has Worker report + Second reading sections; imports exist. Not recompiled (no fixes)."
+ }
+}

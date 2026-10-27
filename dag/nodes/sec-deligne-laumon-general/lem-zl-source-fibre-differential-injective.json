@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "lemma-base-change-differentials (Tag 01V0), lemma-smooth-omega-finite-locally-free (Tag 02G1), and sheaves.tex Tag 0098"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "agent": "A7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V0 with sheaves.tex stalks and pullback: dual functional argument, differential generators, and base-changed basis coordinates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free pullback module global sections tensor cotangent fibre",
+   "results": "No exact scheme differential comparison found; generic tensor pullback results only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.exists_tensorPullback_stalk_iso",
+   "results": "Stalk tensor isomorphism, but no global sections comparison.",
+   "date": "2026-10-26",
+   "verdict": "Partial match; used as an ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentialsStalkFibre global sections tensorPullback",
+   "results": "No existing theorem states this comparison or injectivity consequence.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SourceFibreDifferentialSections",
+  "date": "2026-10-26",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-source-fibre-differential-sections",
+   "place": "decomposition of the source-fibre differential sections argument",
+   "via": [
+    "lem-zl-source-fibre-differential-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T152717-L-1151112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194405-L-2364817",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_source_fibre_differential_formula"
+  ],
+  "sorry_after": []
+ },
+ "id": "lem-zl-source-fibre-differential-injective",
+ "title": "Injectivity from source-fibre differential formula",
+ "statement": "Let k be a field, f:Y -> Spec k smooth, c:B -> Spec k, U an open of Y, z a point of U, K=kappa_U(z), T a scheme, and h:T -> Spec K and g:T -> B times_k Y satisfy the source-point factorization. Let A=Gamma(T,O_T) and p:B times_k Y -> B. If an A-linear map D:A tensor_K bertiniCotangentFibre(f,U,z) -> Gamma(T,g^*Omega_p) satisfies, for every source open W containing U.ι(z), every a in Gamma(Y,W), every b in A, and every proof hV that g maps T into the inverse image of W, the formula sending b tensor the differential component of bertiniLocalFirstJet(f,U,z,W,a) to b times the restriction to T of g^*(d(pr_Y^*a)), then D is injective. [def-pc-scheme, def-pc-fibre-product, def-pc-scheme-fibre, def-pc-module-pullback, def-sc-relative-differential-sheaf, lem-zl-bertini-local-first-jets].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-sc-relative-differential-sheaf",
+  "lem-zl-bertini-local-first-jets"
+ ],
+ "proof": [
+  {
+   "text": "The relative differential stalk equivalence identifies differential germs with Kaehler generators. Every stalk element of U is represented by a germ on Y because the open immersion induces a stalk isomorphism. Thus the second components of source-local first jets span the cotangent fibre, after extending scalars to the residue field.",
+   "uses": [
+    "lem-sfb-relative-differentials-stalk",
+    "lem-zl-bertini-local-first-jets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each K-linear functional l on the cotangent fibre, extend it to an A-linear functional L on the pulled-back relative differential sections with the prescribed value on each source-local differential.",
+   "uses": [
+    "lem-zl-source-fibre-differential-functionals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formula for D with coefficient 1 shows that L composed with D agrees with the scalar extension of l on the spanning differential germs. The linear-map scalar-extension adjunction and equality on a spanning set make the two A-linear maps equal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If D(t)=0, every scalar-extended functional annihilates t. Choose any vector-space basis of the cotangent fibre. Its base-changed basis has coordinates given by the scalar-extended coordinate functionals, so all coordinates of t vanish and t=0. This includes an empty basis and the zero ring of sections.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-differentials-stalk",
+  "lem-zl-bertini-local-first-jets",
+  "lem-zl-source-fibre-differential-functionals"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceFibreDifferentialSectionsAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceFibreDifferentialSectionsAux.lean",
+  "declaration": "AlgebraicGeometry.source_fibre_differential_injective_of_formula",
+  "declarations": [
+   "AlgebraicGeometry.source_fibre_differential_injective_of_formula"
+  ],
+  "statement": "theorem source_fibre_differential_injective_of_formula {k : Type u} [Field k] {Y B T : Scheme.{u}} (f : Y ⟶ Spec (.of k)) [Smooth f] (c : B ⟶ Spec (.of k)) (U : Y.Opens) (z : U) (h : T ⟶ Spec ((U : Scheme).residueField z)) (g : T ⟶ pullback c f) (hg : g ≫ pullback.snd c f = h ≫ (U : Scheme).fromSpecResidueField z ≫ U.ι) (α : (U : Scheme).residueField z →+* Γ(T, ⊤)) (hα : α = ((Scheme.ΓSpecIso ((U : Scheme).residueField z)).inv ≫ h.appTop).hom) (D : let K := (U : Scheme).residueField z let A := Γ(T, ⊤) letI : Algebra K A := α.toAlgebra (A ⊗[K] bertiniCotangentFibre f U z) →ₗ[A] Γ((Scheme.Modules.tensorPullback g).obj (pullback.fst c f).relativeDifferentials, ⊤)) (hD : let K := (U : Scheme).residueField z let A := Γ(T, ⊤) letI : Algebra K A := α.toAlgebra ∀ (W : Y.Opens) (hz : U.ι z ∈ W) (hV : (⊤ : T.Opens) ≤ g ⁻¹ᵁ ((pullback.snd c f) ⁻¹ᵁ W)) (a : Γ(Y, W)) (b : A), D (b ⊗ₜ[K] (bertiniLocalFirstJet f U z W hz a).2) = b • ((Scheme.Modules.tensorPullback g).obj (pullback.fst c f).relativeDifferentials).presheaf.map (homOfLE hV).op (Scheme.Modules.tensorPullbackSection g (pullback.fst c f).relativeDifferentials ((pullback.snd c f) ⁻¹ᵁ W) ((pullback.fst c f).relativeDifferentialsDerivation.d (X := Opposite.op ((pullback.snd c f) ⁻¹ᵁ W)) ((pullback.snd c f).app W a)))) : let K := (U : Scheme).residueField z let A := Γ(T, ⊤) letI : Algebra K A := α.toAlgebra Function.Injective D",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-26"
+ }
+}

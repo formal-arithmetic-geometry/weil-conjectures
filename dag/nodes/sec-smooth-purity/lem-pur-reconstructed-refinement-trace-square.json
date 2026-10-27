@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-reconstructed-refinement-trace-square",
+ "kind": "statement",
+ "title": "Reconstruct the counit square from the supplied Brown square",
+ "statement": "Fix a prime $\\ell$, a normed finite extension $E/\\mathbf Q_\\ell$, a field $k$ whose characteristic is prime and different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a specified normalized compact-support comparison family $C$ [lem-pur-compact-support-condensed-realization]. Use the actual functors, maps, supplied pairs, and normalized Brown data of [def-pur-reconstructed-refinement-data]. Let $w:c\\to d$ be a refinement, $D_1,D_2$ normalized Brown packages, $L$ an integral object on $Y$, and $A_1,A_2$ supplied systems over $L$. Let $s:A_2.\\operatorname{system}\\xrightarrow{\\sim}A_1.\\operatorname{system}$ satisfy $\\theta_1\\circ s=\\rho_{12}\\circ\\theta_2$, where $\\rho_{12}$ is the actual counit-preserving Brown mate. Write $\\bar s$ for the total-limit reconstruction, $t_i:P_i(A_i.\\operatorname{object})\\to L$ for the traces obtained by applying the published representing Hom bijections to identities, and $q:P_1\\xrightarrow{\\sim}P_2$ for the inverse of the actual integral refinement map. Then $t_1\\circ P_1(\\bar s)=t_2\\circ q_{A_2.\\operatorname{object}}$. Only this integral counit square is asserted.",
+ "stmt_deps": [
+  "def-pur-reconstructed-refinement-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Transposes and\nUniqueness; parent proof Steps 4--5."
+ },
+ "proof": [
+  {
+   "text": "let e_i be the actual reduction/limit counit on the supplied systems.\nNaturality gives R(sbar) followed by e_1 equal to e_2 followed by s.\nThe Brown Hom formula and the definition of mate give its counit equation.\nApply compact support to the supplied theta square, use that equation and\nnaturality of the constructed system comparison. Insert these identities in\nPublishedFamily.trace_reduction for both traces, along with naturality of alpha\nand its actual refinement square. The two reductions of the desired integral\nmaps now agree. Reduction on derived-complete objects is fully faithful by the\nnormalized reconstruction adjunction; hence the integral maps agree. Coordinate\nequivalence preserves this calculation, including its counit factors.",
+   "uses": [
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-brown-tower-finite-site-comparison",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-reconstructed-representing-pair",
+  "lem-pur-brown-tower-finite-site-comparison",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-pur-compact-support-condensed-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Transposes and\nUniqueness; parent proof Steps 4--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative derived evaluations detect equality of maps between systems concentrated in a single degree",
+   "results": "CochainComplex.fromSingle₀Equiv and chain-map extensionality; no project geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; the project-specific normalization calculation is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a counit preserving comparison of right adjoints along an isomorphism of left adjoints",
+   "results": "Adjunction.rightAdjointUniq and its counit formulas; the Brown domain here is restricted, with explicitly transported system maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the counit uniqueness argument; no exact project statement."
+  },
+  {
+   "tool": "grep",
+   "query": "systemRefinement_(id|comp)|hom_formula|single_degree_square|condensedProjection_refinement",
+   "results": "Remote Mathlib grep: OK 0 hits. Local rg on the project found systemRefinement_id and systemRefinement_comp, Brown hom_formula, same-compactification single_degree_square, and condensedProjection_refinement; their signatures were read.",
+   "date": "2026-10-26",
+   "verdict": "These supply substeps of the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReconstructedPairRefinementCoherence",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Transposes and\nUniqueness; parent proof Steps 4--5.",
+   "via": [
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReconstructedRefinementTraceSquare",
+  "file": "lean/Sheaf/Paper/ReconstructedRefinementTraceSquare.lean",
+  "declaration": "WeilConjectures.ReconstructedPairRefinement.reconstructedRefinementTraceSquare",
+  "statement": "theorem reconstructedRefinementTraceSquare :\n    ∀ (c d : Compactification f)\n    (D₁ : At l E k C X Y f c) (D₂ : At l E k C X Y f d) (w : c.Refinement d)\n    (L : CondensedERealization.Integral l E Y.scheme)\n    (A₁ : D₁.Supplied L) (A₂ : D₂.Supplied L) (s : A₂.system ≅ A₁.system),\n    s.hom ≫ (D₁.pair L A₁).theta.hom =\n      (D₂.pair L A₂).theta.hom ≫ mate D₁ D₂ w L A₁ A₂ →\n    (support l E k C X Y f c).map (reconstructedMap D₁ D₂ L A₁ A₂ s.hom) ≫\n      D₁.trace L A₁ =\n        (comparison l E k C X Y f w).hom.app A₂.object ≫ D₂.trace L A₂",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "independent cc review: delivered ReconstructedPairRefinementData.lean vs clone item module (verbatim prefix); 5 sorried lemmas vs old Coherence fields (4 verbatim, TraceTransport generalized, true via scalar_refinement/RefinementCoherence.realization/condensedProjection_refinement); item node vs proof"
+ }
+}

@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-punctured-picard-local-extension-criterion",
+ "kind": "statement",
+ "title": "Extension of invertible modules from punctured local Picard triviality",
+ "statement": "Let $X$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] such that every local ring is an integrally closed domain [def-weil-pbc-normal-ring], and let $Z\\subseteq|X|$ be closed. For $z\\in Z$ put $R_z=\\mathcal O_{X,z}$ and $P_z=\\operatorname{Spec}R_z\\setminus\\{\\mathfrak m_z\\}$, where $\\mathfrak m_z$ is its maximal ideal [def-weil-affine-spectrum, def-weil-open-immersion]. Assume $\\dim R_z\\ge2$ [def-weil-pbc-krull-dimension-ring] and that every invertible $\\mathcal O_{P_z}$-module [def-sc-invertible-module] is trivial, for every $z\\in Z$. Then for every open $H\\subseteq X$ the restriction functor from invertible $\\mathcal O_H$-modules to invertible $\\mathcal O_{H\\setminus Z}$-modules is fully faithful and essentially surjective: every such module on $H\\setminus Z$ extends to $H$, and every morphism between restrictions of two invertible modules on $H$ extends uniquely. Empty $Z$ and empty $X$ are allowed.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 Proposition 21.13.10 together with 21.13.8 and definition 21.13.1, specialized to normal schemes and punctured-Picard triviality in local dimension >=2. Read in the online English EGA translation; local EGA IV4 WANTED.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix an open $H\\subseteq X$ and put $U=H\\setminus Z$. Cover $H$ by normal integral affine opens $W$: first choose a Noetherian affine neighbourhood by [pqf-lem-affine-open-locnoeth], then its open integral component by [rem-pc-regular-normal](2), and an affine neighbourhood inside that component. Normality and the dimension condition restrict because open subschemes have the same local rings; local Noetherianity restricts by [pqf-def-locnoeth]. For every nonempty open $T$ inside one such $W$, $T$ is integral and all points of $T\\setminus U$ have local dimension at least two. An invertible module on $T$ or $T\\cap U$ is coherent by [pqf-lem-coherent-ft-locnoeth]: its trivializations give quasi-coherence and finite type. It is reflexive since on each rank-one trivialization evaluation identifies with $\\mathcal O\\to\\mathcal Hom(\\mathcal Hom(\\mathcal O,\\mathcal O),\\mathcal O)$, the identity under evaluation at $1$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "rem-pc-regular-normal",
+    "pqf-def-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $A,B$ be two invertible modules on $H$ and $f:A|_U\\to B|_U$. On each chart $W$, [lem-sfb-normal-reflexive-open-equivalence] gives a unique map $f_W:A|_W\\to B|_W$ with the required restriction. On any overlap, cover by normal integral affine opens $T$ as in step 1 and apply the same Hom bijection to $T\\cap U\\hookrightarrow T$: the two maps agree there, hence on $T$. By morphism gluing [lem-weil-pbc-glue-sheaves-of-modules](1), they agree on the overlap and glue to a map on $H$. Uniqueness follows by the same chartwise Hom injectivity and gluing. This proves full faithfulness independently of essential surjectivity, and applies to every open subscheme of $H$.",
+   "uses": [
+    "lem-sfb-normal-reflexive-open-equivalence",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For an invertible module $L$ on $U$, work on a chart $W$ of step 1 and write $j:U\\cap W\\hookrightarrow W$. The dimension hypothesis and [lem-sfb-normal-reflexive-open-equivalence] give $F=j_*(L|_{U\\cap W})$ coherent reflexive, together with $F|_{U\\cap W}\\simeq L|_{U\\cap W}$. Let $V$ be the union of opens on which $F$ is invertible and $N=W\\setminus V$. Thus $N$ is closed and lies in $Z\\cap W$. If $N$ is nonempty, [lem-sc-noetherian-closed-subset-finite-components] gives an irreducible component $C$ and [lem-weil-pbc-scheme-sober] gives its generic point $y$. Every strict generization $t$ of $y$ in $W$ lies in $V$: otherwise its irreducible closure is contained in $N$ and contains $C$, hence equals $C$ by maximality; uniqueness of its generic point forces $t=y$. The point $y\\in Z$ satisfies $\\dim\\mathcal O_{W,y}\\ge2$.",
+   "uses": [
+    "lem-sfb-normal-reflexive-open-equivalence",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Put $R=\\mathcal O_{W,y}$, $S=\\operatorname{Spec}R$, $P=S\\setminus\\{\\mathfrak m_y\\}$ and $J=F_y$. The canonical map $c:S\\to W$ in [lem-weil-pbc-spec-local-ring-canonical-morphism] identifies $P$ with strict generizations of $y$ and preserves their local rings. The ring $R$ is Noetherian by [pqf-lem-affine-open-locnoeth] and [lem-weil-pbc-localization-noetherian], using the affine stalk description in that canonical-map node. It is a normal domain by the hypothesis on $X$, so $S$ is integral by [lem-weil-pbc-spec-domain-stalks-function-field] and normal by [lem-weil-pbc-localization-normal-domain]. The coherent module $F$ is quasi-coherent of finite type on the locally Noetherian $W$ by [pqf-lem-coherent-ft-locnoeth]. The module $J$ is finite and reflexive: [lem-sfb-affine-reflexive-module-comparison] gives reflexivity of this stalk; [lem-sbc-affine-module-germ-localization] and [lem-weil-pbc-quasi-coherent-finite-type-affine] express it as the localization of the finite module $F(W)$, whose finitely many generators still generate after localization.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sfb-affine-reflexive-module-comparison",
+    "lem-sbc-affine-module-germ-localization",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $E=\\widetilde J$ on $S$. It is coherent reflexive by [lem-sfb-affine-reflexive-module-comparison]. Since $F$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth], the counit in [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies $F$ with $\\widetilde{F(W)}$ on $W$, and the affine pullback formula [lem-weil-pbc-tilde-pullback-base-change] identifies $c^*F$ with $\\widetilde{R\\otimes_{\\mathcal O(W)}F(W)}=E$, since [lem-weil-pbc-localization-tensor-over-base], with base and algebra both $\\mathcal O(W)$ and first module $\\mathcal O(W)$, identifies this tensor with the localization $J$ of step 4. Every point of $P$ maps into $V$ by step 3. Pulling back a rank-one trivialization of $F|_V$ gives a rank-one trivialization of $E|_P$: in the tensor definition [def-pc-module-pullback], pullback of the structure sheaf is the structure sheaf. Thus $E|_P$ is invertible. The hypothesis of the item at $y$ gives an isomorphism $E|_P\\simeq\\mathcal O_P$.",
+   "uses": [
+    "lem-sfb-affine-reflexive-module-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-pc-module-pullback",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-reflexive-open-equivalence] on $S$ with complement its closed point, whose local ring is $R$ and whose dimension is at least two. Both $E$ and $\\mathcal O_S$ are coherent reflexive. The isomorphism of step 5 and its inverse extend uniquely; their composites restrict to identities, so Hom injectivity makes the composites identities. Hence $E\\simeq\\mathcal O_S$. Taking global sections and using the tilde unit [lem-weil-pbc-affine-tilde-gamma-adjunction] gives $J\\simeq R$. The coherent module $F$ is locally finitely presented by [lem-weil-pbc-coherent-local-finite-presentation]. Apply [lem-trf-finite-presentation-stalk-basis-spread] at $y$ to a basis of $J$ of rank one. It gives a neighbourhood on which $F\\simeq\\mathcal O$, contrary to $y\\in N$. Thus $N$ is empty and $F$ is invertible on all of $W$.",
+   "uses": [
+    "lem-sfb-normal-reflexive-open-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-trf-finite-presentation-stalk-basis-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  },
+  {
+   "text": "We now have extensions $F_i$ on the charts $W_i$, with isomorphisms to $L$ on $U\\cap W_i$. On $W_i\\cap W_j$ the latter give transition isomorphisms over $U$; by full faithfulness from step 2 they extend uniquely to maps $F_i\\to F_j$ on the overlap. Extend their inverses too; uniqueness forces their composites to be identities. The triple cocycle follows by the same uniqueness from its equality on $U$. Apply [lem-weil-pbc-glue-sheaves-of-modules](2) to obtain a module on $H$. It is invertible by [def-sc-invertible-module], since it is so on each chart. The chosen isomorphisms to $L$ agree with the transitions and glue, using clause (1) of the same node, to an isomorphism of its restriction with $L$. If $H$ is empty the empty cover gives the unique module. If $Z$ is empty take $L$ itself. A nonempty integral chart cannot be contained in $Z$, since its generic point has dimension zero. This also deals with the possible empty opens without imposing density as an extra hypothesis.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+    "place": "EGA IV4 21.13.10 converse, with 21.13.8 and 21.13.1; generic noninvertibility obstruction, implemented using Stacks Tags 0EBJ, 0AY0 and 0AY3. EGA read in the online English translation; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "rem-pc-regular-normal",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-sc-invertible-module",
+  "lem-sfb-normal-reflexive-open-equivalence",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sfb-affine-reflexive-module-comparison",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-trf-finite-presentation-stalk-basis-spread"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega-iv4.pdf; literature/stacks-project/divisors.tex",
+  "place": "EGA IV4 21.13.10 converse (generic obstruction), using Stacks coherent reflexive extension instead of the limit-spreading portion. Online English EGA translation read at https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html; local EGA PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a locally Noetherian normal scheme line bundles extend uniquely across a closed subset if all punctured local spectra on that subset have trivial Picard group",
+   "results": "Hits: AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaves extend over a closed subset exactly when restriction across every punctured local spectrum is an equivalence",
+   "results": "Hits: ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen, ModuleCat.Tilde.isFractionPrelocal, ModuleCat.Tilde.isLocallyFraction, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_of_res_eq_of_qcqs Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local criterion for extension of invertible sheaves across a closed subset using punctured local spectra",
+   "results": "Hits: AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ, AlgebraicGeometry.structureSheafInType, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen, ModuleCat.Tilde.isFractionPrelocal, ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.basicOpenIso, AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"PrimeSpectrum\"",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|Ramanujam|analytically.normal|[Pp]icard.*local|local.*[Pp]icard",
+   "results": "Hits: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|punctured.*[Pp]icard|[Pp]icard.*punctured|reflexive.*[Ss]heaf",
+   "results": "0 hits: .  Ring-local Picard triviality is not punctured-spectrum Picard triviality; the returned restriction and localization facts do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"restrict\"",
+   "results": "7 hits: Set.piCongrLeft_comp_domRestrict, Set.piCongrLeft_comp_restrict, Finset.piCongrLeft_comp_restrict, Finset.restrict_comp_piCongrLeft, RootPairing.rootForm_restrict_nondegenerate_of_isAnisotropic, Preorder.piCongrLeft_comp_frestrictLe, Preorder.piCongrLeft_comp_restrictLe.  Ring-local Picard triviality is not punctured-spectrum Picard triviality; the returned restriction and localization facts do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on the complement of a closed subset extend to a normal locally Noetherian scheme if all punctured local spectra at missing points of dimension at least two have trivial Picard group",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen.  Ring-local Picard triviality is not punctured-spectrum Picard triviality; the returned restriction and localization facts do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parafactorial closed pair local criterion for extension and unique extension of morphisms of invertible modules",
+   "results": "8 hits: IsLocalizedModule.lift_unique, Module.Baer.ExtensionOf.inhabited, Module.Baer.ExtensionOf.dExt, LocalizedModule.lift_unique, Module.Invertible.of_isLocalization, IsLocalizedModule.ext, Module.Invertible.instProjective, injective_of_localized_maximal.  Ring-local Picard triviality is not punctured-spectrum Picard triviality; the returned restriction and localization facts do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trivial Picard groups on punctured local spectra give equivalence of categories of invertible sheaves across a closed subset in a normal locally Noetherian scheme",
+   "results": "8 hits: CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.instSubsingletonOfIsLocalRing, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, CommRing.relPic_eq_top, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top.  Ring-local Picard triviality is not punctured-spectrum Picard triviality; the returned restriction and localization facts do not state the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Proposition 21.13.10 together with 21.13.8 and definition 21.13.1, specialized to normal schemes and punctured-Picard triviality in local dimension >=2.",
+   "via": [
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-punctured-picard-local-extension-criterion",
+  "worker": "stage1",
+  "summary": "Q115 checked the unchanged statement against EGA IV4 21.13.1, 21.13.8 and 21.13.10; supplied its generic noninvertibility obstruction using a coherent reflexive extension, and explicit full-faithfulness and gluing. Two new generic statement-only Stacks inputs, searched in DAG, latest blueprint, project Lean and Mathlib. No Lean or compiler used.",
+  "blueprint": "Inherited supporting input to the affine-boundary construction through EGA IV4 21.14.3(i), ultimately the direct-image alteration input. The inherited nearest-blueprint field is null (blueprint_refs ancestor confirms None); its from.place and via are retained. Read latest sk-thm-sf-ctf-stability direct-images proof (3). Steps 1-2 give restriction full faithfulness; 3-6 implement EGA 21.13.10 converse; 7 supplies descent to arbitrary opens.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "def-sc-invertible-module",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor-over-base",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-local-finite-presentation",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   },
+   {
+    "node": "lem-trf-finite-presentation-stalk-basis-spread",
+    "why": "Generic scheme/module/topological input used in the explicit obstruction argument; the inherited six-functor unit supplies no local coherent-module or Zariski descent replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-affine-open-locnoeth",
+  "rem-pc-regular-normal",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-trf-finite-presentation-stalk-basis-spread"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-d3e71a1e1",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-d3e71a1e1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks divisors.tex 0AY0/0AY2/0AY3/0EBJ, including the proof of 0EBJ, against the delivery. The item's statement is unchanged and correct (EGA IV4 21.13.10 with 21.13.8). Tests: A^2 at the origin satisfies the conclusion; for the cone xy=z^2 at its vertex Pic(P)=Z/2, so the hypothesis excludes it and is needed. Steps 1-7 check out: chart choice; full faithfulness via the Hom bijection and gluing (1); generic point of the non-invertible locus; R normal, Noetherian and integral; c^*F = tilde(J) via counit, tilde pullback and localization-tensor; extension across the closed point plus the 0B8J stalk-basis spread gives the contradiction; gluing (2) and the empty cases. New node lem-sfb-normal-reflexive-open-equivalence is 0EBJ plus 0345 (normal and dim>=2 give depth>=2). It is true, and no existing node is the same: lem-sbc-depth-two-hartogs-restriction gives only the unit iso, lem-sbc-depth-two-coherent-module-extension only finite-etale algebras. New node lem-sfb-affine-reflexive-module-comparison is 0AY0+0AY3 and is true, including the affine 'in particular'. Neither new node restates a clause of the item. Batch 5: lem-trf-finite-presentation-stalk-basis-spread is the generic Stacks 0B8J ringed-space module lemma. Its 13-node closure has no other trace-formula or Poincare-duality node, and it is not part of either assumption, so it is accepted as a tool. All 20 declared tool_uses are generic and accepted. FIX: steps 4 and 5 used the quasi-coherence and finite type of the coherent F without citing pqf-lem-coherent-ft-locnoeth. I added that sentence and the uses entry to both steps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-punctured-picard-local-extension-criterion.json; proof_deps already contained it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PuncturedPicardLocalExtensionCriterion",
+  "declaration": "AlgebraicGeometry.punctured_picard_local_extension_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PuncturedPicardLocalExtensionCriterion.lean",
+  "statement": "theorem punctured_picard_local_extension_criterion (X : Scheme.{u}) [IsLocallyNoetherian X] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (Z : Set X) (hZ : IsClosed Z) (hdim : ∀ z : X, z ∈ Z → 2 ≤ ringKrullDim (X.presheaf.stalk z)) (hpic : ∀ z : X, z ∈ Z → ∀ L : (puncturedSpectrum (X.presheaf.stalk z)).toScheme.Modules, L.IsInvertible → Nonempty (L ≅ SheafOfModules.unit _)) : ∀ H : X.Opens, (∀ A B : H.toScheme.Modules, A.IsInvertible → B.IsInvertible → Function.Bijective (fun f : A ⟶ B ↦ (Scheme.Modules.pullback (H.ι ⁻¹ᵁ (⟨Zᶜ, hZ.isOpen_compl⟩ : X.Opens)).ι).map f)) ∧ (∀ L : (H.ι ⁻¹ᵁ (⟨Zᶜ, hZ.isOpen_compl⟩ : X.Opens)).toScheme.Modules, L.IsInvertible → ∃ M : H.toScheme.Modules, M.IsInvertible ∧ Nonempty ((Scheme.Modules.pullback (H.ι ⁻¹ᵁ (⟨Zᶜ, hZ.isOpen_compl⟩ : X.Opens)).ι).obj M ≅ L))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dca199ddf",
+  "group": "NH",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean (S1 Q115 FIX kept); 7 stmt_dep nodes identical to side-live; lean.statement verbatim; sorry only. H3 clause by clause: IsLocallyNoetherian (no qc/Nonempty), stalkwise IsDomain ∧ IsIntegrallyClosed, Z : Set X + IsClosed, 2 ≤ ringKrullDim stalk on Z, invertible modules on upstream puncturedSpectrum (PuncturedCurveBranches:33, {closedPoint}ᶜ of Spec R_z) ≅ unit, ∀ H: Bijective Hom restriction along (H.ι ⁻¹ᵁ Zᶜ).ι for invertible A, B, and essential surjectivity with IsInvertible. Edge cases (Z/H/X empty, generic points excluded by hdim) and universe u are fine. No new defs, no duplicate punctured-spectrum def, docstrings carry source place, blueprint id and 7 proof steps, imports exist. Second-reading section uses the dispatcher no-second-worker wording (accepted). No compile (no change). Note: parallel Q83 delivery 9870f5f19 of the same item, PASS 13:18, not landed (live lean null), same mathematics (Closeds/homOfLE form); whichever lands second is a duplicate."
+ }
+}

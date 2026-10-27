@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-homogeneous-polynomial-bar-evaluation",
+ "kind": "statement",
+ "title": "Homogeneous polynomial evaluation and inhomogeneous normalization",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E/\\mathbf Q_\\ell$, and $F=E$ or $F=\\Omega$. Put $A(S)=C(S,F)$, using all continuous maps on the coherent profinite site [def-sfb-continuous-map-condensed-ring], and $L=\\mathbf Z_\\ell^r$ for $r\\geq0$, with its product topology [def-sfb-ladic-lattice]. Use internal $A$-modules and internal $L$-actions [sk-def-sfb-module-objects, def-sfb-condensed-action-module], in coefficient universes containing the site and every profinite parameter set [def-weil-size-convention].\n\nFor $n\\geq0$, let $K^n$ be the internal direct sum of copies of $A$ on the monomials in the $(n+1)r$ variables $y_0,\\ldots,y_n$, each an $r$-tuple [def-weil-pbc-mv-polynomial-ring]. Give it the diagonal action $(g\\cdot f)(y_0,\\ldots,y_n)=f(y_0-g,\\ldots,y_n-g)$, for every section $g\\in C(S,L)$, and the differential\n$$(\\delta f)(y_0,\\ldots,y_{n+1})=\\sum_{i=0}^{n+1}(-1)^if(y_0,\\ldots,\\widehat y_i,\\ldots,y_{n+1}).$$\nSet $K^n=0$ for $n<0$, and let $a:A[0]\\to K$ include the constants, with trivial action on $A$.\n\nLet $P^n$ be the internal polynomial direct sum on the $nr$ variables $x_1,\\ldots,x_n$, each an $r$-tuple, zero in negative degrees, with differential\n$$(dp)(x_1,\\ldots,x_{n+1})=p(x_2,\\ldots,x_{n+1})+\\sum_{i=1}^n(-1)^ip(x_1,\\ldots,x_i+x_{i+1},\\ldots,x_{n+1})+(-1)^{n+1}p(x_1,\\ldots,x_n).$$\n\nUse the internal homogeneous function module [def-sfb-condensed-homogeneous-functions]\n$$R_A^n=\\underline{\\operatorname{Hom}}_A(A[\\underline L^{n+1}],A),$$\nwith diagonal translation of its arguments, alternating deletion differential and constant augmentation $b:A[0]\\to R_A^\\bullet$, and put $U_A^n=\\underline{\\operatorname{Hom}}_A(A[\\underline L^n],A)$ with the inhomogeneous bar faces [def-sfb-condensed-equivariant-bar-data]. There is an internal $A$-linear equivariant cochain map $e:K\\to R_A^\\bullet$, with $ea=b$, specified on every monomial $y^m$ and every section coefficient $c\\in A(S)$ by\n$$e^n(cy^m)(s,g_0,\\ldots,g_n)=c(s)\\prod_{a=0}^n\\prod_{i=1}^r(g_a)_i^{m_{a,i}}.$$\nThis specification holds after every profinite base change $T\\to S$ as well, restricting $c$ and allowing every tuple $g_a\\in C(T,L)$. Via $\\phi(p)(y)=p(y_1-y_0,\\ldots,y_n-y_{n-1})$ and the invariant homogeneous-function identification obtained by evaluating at $(0,g_1,g_1+g_2,\\ldots,g_1+\\cdots+g_n)$, the induced cochain map $P\\to U_A^\\bullet$ is exactly polynomial evaluation:\n$$c\\prod_{a,i}x_{a,i}^{m_{a,i}}\\longmapsto\\bigl[(s,g_1,\\ldots,g_n)\\mapsto c(s)\\prod_{a,i}(g_a)_i^{m_{a,i}}\\bigr].$$\nFor $n=0$ and for $r=0$ the empty products are $1$, and the degree-zero augmentation is the given constant inclusion. These are maps with all continuous $F$-valued coefficients, including noncomplete $\\Omega$, without any assertion about higher acyclicity of $R_A^n$ or $U_A^n$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, agent-formulated homogeneous polynomial reduction: homogeneous polynomial evaluation with all profinite parameters and prefix-sum identification of the actual evaluation map (former parent step 6 and rank-zero augmentation in step 7). Exact reference WANTED; the blueprint paragraph delegates this input rather than proving it."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-ladic-lattice",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-condensed-homogeneous-functions",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-homogeneous-polynomial-bar-model"
+ ],
+ "proof": [
+  {
+   "text": "All formulas can be interpreted internally. On a polynomial monomial, a translation or a deletion gives a finite polynomial expansion, with coefficients in the section ring; restriction preserves its additions and products. The polynomial universal property therefore gives the substitutions and their identities. Extend the maps from the summands by the universal property of the internal direct sum. On functions, use precomposition on every slice family. Two successive deletions of positions $i<j$ occur in the two orders with signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$, so they cancel. This proves $\\delta^2=0$ for both homogeneous complexes. Deletion commutes with simultaneous translation, and the differences of the two constant faces cancel on constants. Thus the displayed homogeneous differentials and augmentations have the stated actions and are cochain maps.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: well-defined homogeneous complexes"
+   }
+  },
+  {
+   "text": "For each monomial $y^m$, define a section of $R_A^n$ over the terminal profinite object by its slice evaluations $x=(x_0,\\ldots,x_n)\\in C(T,L)^{n+1}\\mapsto\\prod_{a,i}(x_a)_i^{m_{a,i}}\\in C(T,F)$. The embedding $\\mathbf Z_\\ell\\to F$ preserves the restricted norm, hence is continuous. Every coordinate, finite power and finite product in this formula is continuous. The formula commutes with every $T'\\to T$, since pullback is composition and preserves pointwise products. The internal-function description in def-sfb-condensed-equivariant-bar-data therefore makes this a genuine section, not merely a function on global points. Multiplication by it gives an internal $A$-linear map from the monomial summand $A$ to $R_A^n$. The coproduct universal property gives $e^n:K^n\\to R_A^n$. Its value on $cy^m$ on the slice $T\\xrightarrow{f}S$ is $(f^*c)\\prod_{a,i}(x_a)_i^{m_{a,i}}$. This proves the stated formula and all its base changes. The construction by summands also covers sections that are only locally finite sums, without imposing a global support bound.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: construction of evaluation on the internal polynomial direct sum"
+   }
+  },
+  {
+   "text": "Let $g\\in C(S,L)$ and $x_a\\in C(T,L)$ over $f:T\\to S$. Polynomial substitution and evaluation give $e^n(g\\cdot q)_f(x)=e^n(q)_f(x_0-f^*g,\\ldots,x_n-f^*g)$. Indeed, both sides are the homomorphism evaluating each variable $y_{a,i}$ at $(x_a)_i-(f^*g)_i$, with the same restricted coefficients. The normalized homogeneous-function action has exactly this formula because $A$ has trivial $L$-action. Hence $e^n(g\\cdot q)=g\\cdot e^n(q)$ after every base change, which is equivariance in the specified action category.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-condensed-homogeneous-functions",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: equivariance of evaluation"
+   }
+  },
+  {
+   "text": "For every tuple $(x_0,\\ldots,x_{n+1})$ on every slice, evaluating a polynomial after omitting $y_i$ is evaluating the original polynomial on $(x_0,\\ldots,\\widehat{x_i},\\ldots,x_{n+1})$: the two evaluation homomorphisms agree on coefficients and variables. Taking the same alternating sum on both sides yields $e^{n+1}\\delta=\\delta e^n$. The family description of internal functions makes equality of all these evaluations equality of internal maps. Constants evaluate to the same constants, so $e^0a=b$ in degree zero and $ea=b$ as augmented cochain maps. Set $e^n=0$ in negative degrees.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: cochain and augmentation identities"
+   }
+  },
+  {
+   "text": "Apply lem-sfb-homogeneous-polynomial-invariant-coordinates with the very same $\\ell,F,L,A$ and polynomial direct sums. Its fixed-section convention includes every profinite base change, exactly as here. It supplies the cochain isomorphism $\\phi:P^\\bullet\\xrightarrow{\\sim}(K^\\bullet)^L$ by consecutive differences, with inverse given by prefix sums starting at zero. In particular it supplies that the displayed $P$ differential squares to zero. Equivariance from step 3 lets $e$ restrict to a cochain map on these invariant submodules.",
+   "uses": [
+    "lem-sfb-homogeneous-polynomial-invariant-coordinates",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: the already-existing polynomial invariant-coordinate isomorphism"
+   }
+  },
+  {
+   "text": "Write $\\chi_n$ for prefix evaluation on invariant homogeneous internal functions. To check it is the asserted identification, define its inverse on a slice family $c$ by $\\psi_n(c)(h_0,\\ldots,h_n)=c(h_1-h_0,\\ldots,h_n-h_{n-1})$. Prefix sums and differences are continuous maps of the profinite powers of $L$, so precomposing the natural families defines internal $A$-linear maps and commutes with every base change. The function $\\psi_n(c)$ is fixed under simultaneous translation since each difference is unchanged. Conversely, a fully fixed homogeneous function $H$ satisfies $H(h_0,\\ldots,h_n)=H(0,h_1-h_0,\\ldots,h_n-h_0)$: apply invariance with translating section $h_0$ on that slice. Successive differences of $(0,g_1,g_1+g_2,\\ldots,g_1+\\cdots+g_n)$ are $(g_1,\\ldots,g_n)$; its prefix reconstruction from the differences of $h$ is $(0,h_1-h_0,\\ldots,h_n-h_0)$. Thus $\\chi_n\\psi_n=1$ and $\\psi_n\\chi_n=1$ on all slice evaluations.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-homogeneous-functions",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: internal homogeneous-function invariant coordinates"
+   }
+  },
+  {
+   "text": "Put $t_0=0$ and $t_j=g_1+\\cdots+g_j$. In $(\\chi_{n+1}\\delta H)(g)$, deletion of $t_0$ gives $H(t_1,\\ldots,t_{n+1})=H(0,g_2,g_2+g_3,\\ldots,g_2+\\cdots+g_{n+1})$, by translating by $t_1=g_1$. Deletion of $t_i$ for $1\\leq i\\leq n$ changes precisely the adjacent differences $g_i,g_{i+1}$ into $g_i+g_{i+1}$; deletion of $t_{n+1}$ drops $g_{n+1}$. With the unchanged signs $(-1)^i$, these are exactly the first, interior and last terms of the displayed inhomogeneous differential. This proves $\\chi_{n+1}\\delta=d\\chi_n$ on every slice. For $n=0$, it says $H(g_1)-H(0)=0$, agreeing with $dc=c-c=0$ for trivial coefficients. Hence $\\chi$ is a cochain isomorphism, and $\\rho=\\chi\\circ e^L\\circ\\phi$ is the induced cochain map $P\\to U_A^\\bullet$.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: face-by-face differential identification"
+   }
+  },
+  {
+   "text": "For a monomial $p=c\\prod_{a,i}x_{a,i}^{m_{a,i}}$, steps 2 and 5 give $\\rho^n(p)(g)=c\\prod_{a,i}(t_a-t_{a-1})_i^{m_{a,i}}=c\\prod_{a,i}(g_a)_i^{m_{a,i}}$, on every profinite slice, since $t_a-t_{a-1}=g_a$. This is exactly the required polynomial evaluation map. In degree zero there are no difference variables, $\\phi(c)$ is constant and $\\chi_0e^0\\phi(c)=c$; thus the augmentation is the specified constant inclusion. For $r=0$, every $L$-power is terminal and every term is $A$, all substitutions and evaluations are identities, and the unnormalized differential is multiplication by $\\sum_{i=0}^{n+1}(-1)^i$ on both sides. No step used an infinite sum, a limit in $F$, or completeness: all continuous $\\Omega$-valued coefficients remain allowed.",
+   "uses": [
+    "lem-sfb-homogeneous-polynomial-invariant-coordinates",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-image input; agent argument: actual evaluation map and the empty-variable cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-homogeneous-functions",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-homogeneous-polynomial-invariant-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) delegates the open-image input; explicit internal monomial evaluation, deletion and prefix-sum argument supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "polynomial.*(cochain|bar|condensed)|(cochain|bar|condensed).*polynomial",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(cochain|bar|condensed)|(cochain|bar|condensed).*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial continuity and evaluation identities are ingredients, but none gives the equivariant internal homogeneous evaluation cochain map with augmentation and the stated inhomogeneous normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Continuous\"",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPolynomial.toMvPowerSeries_uniformContinuous\", \"MvPolynomial.continuous_eval\"], \"digest\": \"0bbb3f0dde544f90\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial continuity and evaluation identities are ingredients, but none gives the equivariant internal homogeneous evaluation cochain map with augmentation and the stated inhomogeneous normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous polynomial evaluation cochain map into continuous group cochains agrees with inhomogeneous evaluation after substituting prefix sums",
+   "results": "{\"t\": \"2026-10-22T06:02:50Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous polynomial evaluation cochain map into continuous group cochains agrees with inhomogeneous evaluation after substituting prefix sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.comp_substAlgHom\", \"Polynomial.aeval_homogenize_of_eq_one\", \"MvPolynomial.evalₗ\", \"Polynomial.toContinuousMapAlgHom\", \"MvPolynomial.eval_map\", \"ContinuousAlternatingMap.applyAddHom\", \"inhomogeneousCochains.d\", \"MvPowerSeries.eval₂Hom_eq_extend\"], \"digest\": \"e0e3505ed3dc6c8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial continuity and evaluation identities are ingredients, but none gives the equivariant internal homogeneous evaluation cochain map with augmentation and the stated inhomogeneous normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of homogeneous polynomial cochains on a p adic lattice defines an equivariant augmentation preserving map to the internal homogeneous function bar and prefix sums induce polynomial evaluation",
+   "results": "{\"t\": \"2026-10-22T06:03:01Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of homogeneous polynomial cochains on a p adic lattice defines an equivariant augmentation preserving map to the internal homogeneous function bar and prefix sums induce polynomial evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d\", \"MvPolynomial.evalᵢ\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"PolynomialModule.eval_map'\", \"PolynomialModule.comp_apply\", \"AlgebraicTopology.DoldKan.PInfty\", \"PolynomialModule.eval_map\", \"AlgebraicTopology.DoldKan.decomposition_Q\"], \"digest\": \"912d8f667f284736\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial continuity and evaluation identities are ingredients, but none gives the equivariant internal homogeneous evaluation cochain map with augmentation and the stated inhomogeneous normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial evaluation commutes with coordinate deletion and diagonal translation and the homogeneous to inhomogeneous group cochain map uses successive partial sums",
+   "results": "{\"t\": \"2026-10-22T06:03:01Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial evaluation commutes with coordinate deletion and diagonal translation and the homogeneous to inhomogeneous group cochain map uses successive partial sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.eval_polynomial_eval_finSuccEquiv\", \"MvPolynomial.evalᵢ\", \"Polynomial.aeval_homogenize_X_one\", \"Polynomial.aeval_homogenize_of_eq_one\", \"Polynomial.eval₂_homogenize_of_eq_one\", \"Polynomial.eval_homogenize\", \"MvPolynomial.eval_eq_eval_mv_eval'\", \"MvPolynomial.aeval_sumElim_pderiv_inl\"], \"digest\": \"06972ac3bc185fda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial continuity and evaluation identities are ingredients, but none gives the equivariant internal homogeneous evaluation cochain map with augmentation and the stated inhomogeneous normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(cochain|bar|condensed)|(cochain|bar|condensed).*polynomial",
+   "results": "{\"t\": \"2026-10-22T11:59:41Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(cochain|bar|condensed)|(cochain|bar|condensed).*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial evaluation map from homogeneous polynomial cochains to continuous homogeneous group cochains compatible with consecutive differences and prefix sums",
+   "results": "{\"t\": \"2026-10-22T11:59:41Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial evaluation map from homogeneous polynomial cochains to continuous homogeneous group cochains compatible with consecutive differences and prefix sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.toContinuousMap\", \"MvPolynomial.evalₗ\", \"Polynomial.toContinuousMapOnAlgHom\", \"Polynomial.toContinuousMapAlgHom\", \"Polynomial.toContinuousMapAlgHom_apply\", \"LaurentPolynomial.leval\", \"MvPolynomial.evalᵢ\", \"ContinuousAlternatingMap.applyAddHom\"], \"digest\": \"88006e6950b2d8a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"eval\"",
+   "results": "{\"t\": \"2026-10-22T11:59:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"eval\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.eval₂\", \"MvPolynomial.eval\", \"MvPolynomial.eval₂_X\", \"MvPolynomial.eval₂_eta\", \"MvPolynomial.eval₂Hom\", \"MvPolynomial.eval_zero'\", \"MvPolynomial.eval_zero\", \"MvPolynomial.aeval\"], \"digest\": \"d630fefccddb9920\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of polynomial cochains on a profinite additive group defines an internal equivariant homogeneous bar cochain map and becomes polynomial evaluation under prefix sums",
+   "results": "{\"t\": \"2026-10-22T11:59:48Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of polynomial cochains on a profinite additive group defines an internal equivariant homogeneous bar cochain map and becomes polynomial evaluation under prefix sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.MultiInd.complex\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.inhomogeneousCochainsIso\", \"inhomogeneousCochains.d\", \"groupCohomology.cochainsFunctor\", \"groupCohomology.inhomogeneousCochains\", \"groupCohomology.cochainsMap\"], \"digest\": \"6c4ff53d34e9be31\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "def (eval|eval₂|homogeneousCochains)|theorem continuous_eval",
+   "results": "{\"t\": \"2026-10-22T12:01:22Z\", \"tool\": \"grep\", \"query\": \"def (eval|eval₂|homogeneousCochains)|theorem continuous_eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/NumberTheory/Height/Projectivization.lean\", \"Mathlib/NumberTheory/Height/Projectivization.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\"], \"digest\": \"1b0f4a7dba305190\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Continuous\"",
+   "results": "{\"t\": \"2026-10-22T12:01:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPolynomial.toMvPowerSeries_uniformContinuous\", \"MvPolynomial.continuous_eval\"], \"digest\": \"0bbb3f0dde544f90\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multivariate polynomial evaluation commutes with simultaneous translations and deleting variables, with homogeneous and inhomogeneous group cochains related by partial sums",
+   "results": "{\"t\": \"2026-10-22T12:01:32Z\", \"tool\": \"leanfinder\", \"query\": \"Multivariate polynomial evaluation commutes with simultaneous translations and deleting variables, with homogeneous and inhomogeneous group cochains related by partial sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.eval_polynomial_eval_finSuccEquiv\", \"MvPolynomial.eval_eq_eval_mv_eval'\", \"MvPolynomial.aeval_sumElim\", \"MvPolynomial.aeval_ite_mem_eq_self\", \"MvPolynomial.finSuccEquiv_apply\", \"MvPolynomial.IsHomogeneous.eval₂\", \"MvPolynomial.IsHomogeneous.aeval\", \"MvPolynomial.eval_toMvPolynomial\"], \"digest\": \"ada9a3becbff9892\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this item: ordinary polynomial evaluation, continuity and abstract/topological bar cochains do not state the internal condensed polynomial comparison on all profinite slices. LeanFinder also returned ContinuousCohomology declarations from a file absent in the pinned local Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-derived-bar-comparison",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof paragraph (3), quasi-compact open immersion: the polynomial-evaluation sub-obligation of the all-continuous open-image input, specifically evaluation on all slices, augmentation and prefix-sum normalization.",
+   "via": [
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-polynomial-bar-evaluation",
+  "worker": "stage1",
+  "summary": "Constructed evaluation from monomial summands as internal slice-natural maps, checked equivariance and deletion differential, reused the existing polynomial invariant-coordinate theorem, and proved the internal function prefix identification and its faces explicitly. Kept the statement, all continuous coefficients and rank/degree-zero cases. No new nodes. Corrected the inherited null blueprint ancestor using the existing admissible-direct-image ancestry. Promotion-return repair: rebased the retained split onto the current unsplit meeting-point item, re-read all nine statement/proof inputs, and verified all 19 citation passages against their current statements; the evaluation argument and hypotheses still apply without a mathematical change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), delegated open-image calculation: homogeneous polynomial evaluation and its actual inhomogeneous normalization, with all profinite parameters."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-5e2a84038",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-5e2a84038 (reviewer sub-agent of L); spot-checked: This re-delivery follows the side-completion promotion refusal of a6af6570, which had PASSed. Compared with the a6af snapshot, the item JSON changes only split_report.date and split_report.summary; the statement, the eight steps, the uses, proof_deps, source and blueprint fields are byte-identical. In clones/live and clones/side-live the item is still unsplit with an empty proof, so no other group has taken it over, and its statement, stmt_deps, source, title and unit match live. There is no repair note, no new node and no SGA. The source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), lines 19-25. Paragraph (3) only cites other results for the open-immersion case, so the agent-written proof and the WANTED line are justified. I re-read every cited statement: mv-polynomial universal property, continuous-map ring, bar-data natural families and faces, the homogeneous action ev(g·c)(x)=g·ev(c)(x−g), the fully-fixed condition for every g∈C(T,P), and invariant-coordinates, which has the same set-up word for word and states φ:P≅K^L with the prefix inverse. I checked every step by hand: δ²=0 by sign pairing, continuity of Z_ℓ→F, equivariance with trivial A, eδ=δe with ea=b, χψ=1 via translation by h_0, χδ=dχ through the first, merged and dropped faces including n=0, and ρ(p)(g)=p(g). Edge cases also hold: r=0, where both differentials are multiplication by Σ_{i=0}^{n+1}(−1)^i; n=r=1; and noncomplete Ω, since no limits are used. proof_deps equals the union of uses, there is no cycle and no duplicate in the DAG, and the item has no tool_uses. Maintainer note: the mathematics is identical to the a6af PASS, and the earlier refusal was the promotion step, not a fault in the split."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomogeneousPolynomialBarEvaluation",
+  "declaration": "Profinite.CondensedAction.HomogeneousPolynomialBar.homogeneous_polynomial_bar_evaluation",
+  "file": "lean/Sheaf/CategoryTheory/HomogeneousPolynomialBarEvaluation.lean",
+  "statement": "theorem homogeneous_polynomial_bar_evaluation (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (r : ℕ) : Nonempty (Data ell E r) ∧ Nonempty (Data ell Ω r)",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The compatible-data type pins every map on monomials or all slice evaluations. Augmentations are their degree-zero equivariant cocycles, equivalently maps out of A[0]. Natural-number complexes are extended by zero with CondensedBar.extend. No acyclicity theorem or completeness assumption is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4d01e07f",
+  "group": "Q69",
+  "result": "fix",
+  "note": "Mathematics, Lean and records correct. Checked against the item: K (coproduct on Monomial r (n+1), translation substituting X−g, which matches HomogeneousFunctions.action with trivial J; deletion through succAbove; a = constant coprojection), P (faceVariable face 0/interior/last with (−1)^i), R (recorded HomogeneousFunctions internal Hom), b, ea=b, the e monomial formula on all T→S and tuples, FixedComplex image = FixedAll, phi via differencePolynomial, chi via prefixTuple (consistent with the BarDiagram faces), and rho = Evaluation with normalization. All Data fields are pinned, so Nonempty is the node's claim. Edge cases n=0, r=0, negative degrees, empty S/T and noncomplete Ω hold. New def-sfb-polynomial-bar-cochain-model (existing:true owner of the PolynomialDerivedBarComparison helpers; present in the commit, omitted from the snapshot) and def-sfb-homogeneous-polynomial-bar-model are sound. No DAG cycle; the proof-only import cycle is listed under §3(7). Statement verbatim; the only sorry is the theorem's. Sole fault H11: the 'Second reading by Q69' was a self-audit. FIX: fixes/lem-sfb-homogeneous-polynomial-bar-evaluation.report.md = worker report verbatim + independent clause-by-clause second reading. No Lean changed, no compile needed."
+ }
+}

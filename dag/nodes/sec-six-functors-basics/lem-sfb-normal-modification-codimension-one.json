@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-normal-modification-codimension-one",
+ "kind": "statement",
+ "title": "Proper birational modifications are isomorphisms near codimension one",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact, and let $f:Y\\to X$ be a proper birational morphism with $Y$ reduced [def-weil-proper-morphism, def-pc-reduced-scheme]. Birational means that $f$ maps the generic points of the irreducible components of $Y$ bijectively onto those of $X$ and induces isomorphisms on their local rings [def-sc-generic-point, def-weil-locally-ringed-space-morphism]. Let $U\\subseteq X$ be the maximal open subset over which $f$ is an isomorphism. Then $U$ contains (1) every codimension-zero point; (2) every codimension-one point $x$ for which $\\mathcal O_{X,x}$ is a discrete valuation ring [def-sc-discrete-valuation-ring]; (3) every point $x$ with normal local ring [def-weil-pbc-normal-ring] for which the underlying fibre $f^{-1}(\\{x\\})$ is finite; and (4) every point $x$ with normal local ring such that $f$ is quasi-finite at some $y\\in Y$ with $f(y)=x$ [pqf-def-quasifinite]. Codimension of $x$ here is $\\dim\\mathcal O_{X,x}$ [def-weil-pbc-krull-dimension-ring], and quasi-compact means every open cover has a finite subcover.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Stacks Project Tag 0BFP (varieties-lemma-modification-normal-iso-over-codimension-1), all four clauses"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-normal-ring",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "[lem-sfb-birational-generic-isomorphism-open] gives a dense isomorphism open $V_0$ containing all component generic points. Codimension-zero points are component generic points, so $V_0\\subseteq U$ proves (1).",
+   "uses": [
+    "lem-sfb-birational-generic-isomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (1)."
+   }
+  },
+  {
+   "text": "For (4), fix $x,y$ as stated. By [lem-sfb-birational-integral-normal-neighbourhood], choose an integral affine neighbourhood $T$ of $x$ with integral inverse image and restrict $f$ to $T$. Properness persists by [lem-weil-pbc-proper-base-change].",
+   "uses": [
+    "lem-sfb-birational-integral-normal-neighbourhood",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), integral reduction."
+   }
+  },
+  {
+   "text": "Choose affine source and target neighbourhoods of $y$ and $x$ witnessing [pqf-def-quasifinite]. They can be taken inside the integral neighbourhood of Step 2: take a target principal open containing $x$ inside the intersection and then a source principal open containing $y$ inside its preimage; [lem-weil-pbc-quasi-finite-at-prime-principal-localization] preserves quasi-finiteness. Rename their rings $A,C$ and their primes $\\mathfrak p,\\mathfrak q$. The map $A\\to C$ is of finite type and quasi-finite at $\\mathfrak q$. By [lem-sc-integral-function-field-affine-fraction], the affine domains $A,C$ embed in their generic local rings. Birationality identifies these with a common field $K$, the fraction field of both $A$ and $C$. The maps into $K$ agree with $f$ by functoriality of germs. By [lem-weil-pbc-affine-open-stalk-localization] the two stalks are $A_{\\mathfrak p}$ and $C_{\\mathfrak q}$. Apply [lem-sfb-quasifinite-normal-local-birational-algebra] to obtain that the actual stalk map is an isomorphism.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-quasifinite-normal-local-birational-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), affine witnesses and local algebra."
+   }
+  },
+  {
+   "text": "Properness gives local finite type and separatedness [pqf-lem-proper-basic]. Apply [lem-sfb-invertible-stalk-neighbourhood-section] to the restriction over $T$, obtaining $x\\in W\\subseteq T$ and a section $W\\to f^{-1}(W)$. Both schemes are integral, being nonempty opens of the integral schemes in Step 2. The open $V_0\\cap W$ is nonempty: the generic point of $T$ lies in both opens. Thus [lem-sfb-integral-generic-section-isomorphism] applies to this restricted map and section, giving inverse isomorphisms. Hence $x\\in U$, proving (4).",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-sfb-invertible-stalk-neighbourhood-section",
+    "lem-sfb-integral-generic-section-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), section and closed-section argument."
+   }
+  },
+  {
+   "text": "For (3), suppose $R=\\mathcal O_{X,x}$ is normal and the fibre over $x$ is finite. The fibre is nonempty: $f(Y)$ is closed by [pqf-lem-proper-basic] and contains the dense isomorphism open of Step 1, hence equals $X$. Choose $y$ above $x$. By [pqf-lem-locqf-fibre-discrete], $f$ is quasi-finite at $y$, since $f$ is locally of finite type and this fibre is finite. Clause (4), proved in Steps 2--4, now gives $x\\in U$.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "pqf-lem-locqf-fibre-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (3)."
+   }
+  },
+  {
+   "text": "For (2), birationality gives isomorphisms of generic local rings, hence algebraic extensions of the generic residue fields. Apply [lem-sfb-proper-generically-algebraic-dvr-fibre] at the codimension-one DVR point: its local ring is normal and its fibre finite. Clause (3) gives $x\\in U$. This proves all four clauses; for empty $X$ they are vacuous.",
+   "uses": [
+    "lem-sfb-proper-generically-algebraic-dvr-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (2), using the finite fibre argument of 0AB7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-birational-generic-isomorphism-open",
+  "lem-sfb-birational-integral-normal-neighbourhood",
+  "lem-weil-pbc-proper-base-change",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-quasifinite-normal-local-birational-algebra",
+  "pqf-lem-proper-basic",
+  "lem-sfb-invertible-stalk-neighbourhood-section",
+  "lem-sfb-integral-generic-section-isomorphism",
+  "pqf-lem-locqf-fibre-discrete",
+  "lem-sfb-proper-generically-algebraic-dvr-fibre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1; six-step assembly (1), (4), (3), (2), with six separate auxiliary arguments extracted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational morphism with reduced source to a Noetherian scheme is an isomorphism near codimension one points with discrete valuation local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.IsProper f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, quasi-separated, locally of finite type, and satisfies the valuative criterion, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.domain\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), IsDomain self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the associated ring $ R $ is an integral domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalIso is a definition; normalization isomorphisms assume an integral morphism; properness and DVR characterizations do not assert the codimension-one or normal finite-fibre isomorphism theorem. Scheme.Birational only defines partial isomorphisms on unspecified dense opens."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsBirational\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalIso is a definition; normalization isomorphisms assume an integral morphism; properness and DVR characterizations do not assert the codimension-one or normal finite-fibre isomorphism theorem. Scheme.Birational only defines partial isomorphisms on unspecified dense opens."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|Birational|codimension",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"16\", \"text\": \"Noetherian integral scheme at a point of codimension `1`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.Dominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"12\", \"text\": \"# Birationality and Rationality of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"15\", \"text\": \"birationality and rationality.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"21\", \"text\": \"- `Scheme.Birational X Y`: `X` and `Y` are birational, i.e. there exists a `PartialIso X Y`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"22\", \"text\": \"- `Scheme.BirationalOver sX sY`: `X` and `Y` are birational over `S` via structure maps\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"line\": \"62\", \"text\": \"applications these will be some notions of dimension or codimension. The most common notion of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"line\": \"63\", \"text\": \"dimension is `Order.height`, and the most common notion of codimension is `Order.coheight`, though\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalIso is a definition; normalization isomorphisms assume an integral morphism; properness and DVR characterizations do not assert the codimension-one or normal finite-fibre isomorphism theorem. Scheme.Birational only defines partial isomorphisms on unspecified dense opens."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper birational morphism with reduced source to a Noetherian scheme is an isomorphism near codimension one points with discrete valuation local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDiscreteValuationRing.TFAE\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.TFAE\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] [IsDomain R] (h : ¬IsField R) :\\n  List.TFAE\\n    [IsDiscreteValuationRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∃! P : Ideal R, P ≠ ⊥ ∧ P.IsPrime, (maximalIdeal R).IsPrincipal,\\n      finrank (ResidueField R) (CotangentSpace R) = 1, ∀\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, an integral domain, and not a field, the following are equivalent: (1) $ R $ is a discrete valuation ring; (2) $ R $ is a valuation ring; (3) $ \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"IsDiscreteValuationRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {inst_1 : IsDomain R} [self : IsDiscreteValuationRing R], IsLocalRing R\", \"doc\": \"Every discrete valuation ring is a local ring, meaning it has a unique maximal ideal.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f] (H : ValuativeCriterion f) : IsProper f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, quasi-separated, locally of finite type, and satisfies the valuative criterion, then $ f $ is a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalIso is a definition; normalization isomorphisms assume an integral morphism; properness and DVR characterizations do not assert the codimension-one or normal finite-fibre isomorphism theorem. Scheme.Birational only defines partial isomorphisms on unspecified dense opens."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper modification is an isomorphism near a normal point if its fibre is finite or it is quasi finite at a point above it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"Every isomorphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is Zariski-local at the source, meaning it can be verified on a Zariski open cover of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.le_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.ContainsIdentities]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], @AlgebraicGeometry.IsLocalIso ≤ P\", \"doc\": \"If a morphism property $ P $ on schemes contains identities and is Zariski-local at the source, then every local isomorphism satisfies $ P $. This follows from the fact that local isomorphisms are def\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: IsLocalIso is a definition; normalization isomorphisms assume an integral morphism; properness and DVR characterizations do not assert the codimension-one or normal finite-fibre isomorphism theorem. Scheme.Birational only defines partial isomorphisms on unspecified dense opens."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|Birational|codimension",
+   "results": "Actual msearch.py log summary: {\"t\": \"2026-10-22T04:30:34Z\", \"tool\": \"grep\", \"query\": \"birational|Birational|codimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"b6d0ed08c6292fc0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned normalization, properness, quasi-finite and closed-immersion facts do not assert all four clauses of Stacks 0BFP; Scheme.Birational is only a partial-isomorphism notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper modification is an isomorphism near a normal point whenever it is quasi finite at some point above it",
+   "results": "Actual msearch.py log summary: {\"t\": \"2026-10-22T04:30:35Z\", \"tool\": \"leansearch\", \"query\": \"A proper modification is an isomorphism near a normal point whenever it is quasi finite at some point above it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"RingHom.QuasiFinite.propertyIsLocal\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsProper\"], \"digest\": \"fb742f4228449818\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned normalization, properness, quasi-finite and closed-immersion facts do not assert all four clauses of Stacks 0BFP; Scheme.Birational is only a partial-isomorphism notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsBirational\"",
+   "results": "Actual msearch.py log summary: {\"t\": \"2026-10-22T04:30:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsBirational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned normalization, properness, quasi-finite and closed-immersion facts do not assert all four clauses of Stacks 0BFP; Scheme.Birational is only a partial-isomorphism notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational morphism from a reduced scheme to a Noetherian scheme is an isomorphism near normal points with finite fibre",
+   "results": "Actual msearch.py log summary: {\"t\": \"2026-10-22T04:30:36Z\", \"tool\": \"leanfinder\", \"query\": \"A proper birational morphism from a reduced scheme to a Noetherian scheme is an isomorphism near normal points with finite fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"1caf45919f74ec8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned normalization, properness, quasi-finite and closed-immersion facts do not assert all four clauses of Stacks 0BFP; Scheme.Birational is only a partial-isomorphism notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper birational morphisms with reduced source are isomorphisms at generic points and codimension one discrete valuation points",
+   "results": "Actual msearch.py log summary: {\"t\": \"2026-10-22T04:30:37Z\", \"tool\": \"leanfinder\", \"query\": \"Proper birational morphisms with reduced source are isomorphisms at generic points and codimension one discrete valuation points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\"], \"digest\": \"1e82cbdbc77c7ab2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned normalization, properness, quasi-finite and closed-immersion facts do not assert all four clauses of Stacks 0BFP; Scheme.Birational is only a partial-isomorphism notion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "worker": "stage1",
+  "summary": "Q08 repair of the returned side-completion landing refusal: rebase the retained six-node extraction on the current shared DAG, carrying over every current field except proof, proof_deps, proof_origin and this split_report. All fourteen step/node citation statements were re-read and still match; none of the six new ids exists in the current DAG. Retain the full original eight arguments, reports, citations and actual Mathlib searches. Correct the assembly notation by calling the dense isomorphism open V_0 and the integral affine neighbourhood T; explicitly apply section spreading over T and obtain W contained in T. This makes integrality and the nonempty isomorphism open required by the section-isomorphism lemma explicit. Statements and statement dependencies are unchanged. The released stage-1 repair note remains the authorization to replace the reviewed eight-step split; side-to-live promotion remains with L.",
+  "blueprint": "Same unit route and blueprint ancestry as the current DAG. The full eight Stacks 0BFP arguments remain allocated to six statement-only nodes and two assembly arguments in report.md. Six-step assembly: 2774 characters; every step is below 2000 characters.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "General scheme or commutative-algebra interface used in the Stacks 0BFP argument; its stated conclusion supplies the corresponding step. The current unit concerns constructibility and does not replace these generic geometry tools."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "General scheme or commutative-algebra interface used in the Stacks 0BFP argument; its stated conclusion supplies the corresponding step. The current unit concerns constructibility and does not replace these generic geometry tools."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "why": "General scheme or commutative-algebra interface used in the Stacks 0BFP argument; its stated conclusion supplies the corresponding step. The current unit concerns constructibility and does not replace these generic geometry tools."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "General scheme or commutative-algebra interface used in the Stacks 0BFP argument; its stated conclusion supplies the corresponding step. The current unit concerns constructibility and does not replace these generic geometry tools."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "General scheme or commutative-algebra interface used in the Stacks 0BFP argument; its stated conclusion supplies the corresponding step. The current unit concerns constructibility and does not replace these generic geometry tools."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "General scheme or commutative-algebra interface used in the Stacks 0BFP argument; its stated conclusion supplies the corresponding step. The current unit concerns constructibility and does not replace these generic geometry tools."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "pqf-lem-locqf-fibre-discrete",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-a8e377901",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-a8e377901 (reviewer sub-agent of L); spot-checked: Third re-split head of the same split: 6fa2dc0d and 85d4ad83 were both PASSed and then refused at landing because the side completion was not promoted. Changes since 85d4: the six new nodes are byte-identical. In the item, only proof steps 1, 2 and 4 are reworded (the dense isomorphism open is named V_0, the integral affine neighbourhood is named T, the section is spread over T so that W ⊆ T, and V_0∩W is nonempty because it contains the generic point of T), plus proof_origin.place and split_report. The new wording is correct and clearer. Compared with clones/live, the item differs only in proof, proof_deps, proof_origin and split_report; its statement and stmt_deps are identical to live. Live and side-live still carry the 8-step be0251fb proof and contain none of the six new ids. The released re-split note is met: 6 new nodes, a 2774-character assembly, and every old argument becomes a node or is kept verbatim in assembly steps 3 and 5. Sources re-read: Stacks varieties.tex l.3299-3376 (Tag 0BFP) in full, which matches all four clauses of the statement; 0AB6 and 0AB7; morphisms 0BAJ (separated and lfp, finitely many components) and 0BX6(2)(c) (lft target, locally Noetherian source). Each new node checked: (a) 0BAJ plus finitely many components gives a dense isomorphism open containing every component generic point; (b) 0BX3 gives a domain A, and f⁻¹(V) is irreducible by the bijection of component generic points, nonempty and reduced, hence integral; (c) 0BX6 gives s(x)=y with s♯_x=(f♯_y)⁻¹; (d) a section of a separated map is a closed immersion, s(ξ_X)=η_Y through the nonempty isomorphism open, so s is a surjective closed immersion into a reduced scheme and hence an isomorphism (P¹→pt shows the open must be nonempty); (e) 0AB6(1) gives quasi-finiteness above x, the fibre is discrete and quasi-compact, hence finite; (f) 00Q9 gives B_g=C_g, normality gives B_p=A_p, hence C_q=A_p. All six assembly steps check, and the hypotheses are verified (affine witnesses shrunk inside T; A⊆C⊆K via the generic stalks; p=q∩A). All 13 proof_deps have the same statements as live. No SGA source and no dropped id is cited. The tool_uses (6 generic interfaces) are accepted. Duplicate search of live by source tag found only nodes already distinguished in the report (curve-only trf nodes, the dropped lem-per-* nodes, and the sfb inputs), all created on or before 10-22. Maintainer note: please promote/land this head; the split itself has not changed since 6fa2dc0d."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalModificationCodimensionOne",
+  "declaration": "AlgebraicGeometry.normal_modification_isomorphism_open_contains",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalModificationCodimensionOne.lean",
+  "statement": "theorem normal_modification_isomorphism_open_contains {X Y : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] (f : Y ⟶ X) [IsProper f] [IsReduced Y] (hgeneric : Set.BijOn f {η : Y | ∃ C ∈ irreducibleComponents Y, IsGenericPoint η C} {η : X | ∃ C ∈ irreducibleComponents X, IsGenericPoint η C}) (hstalk : ∀ η : Y, (∃ C ∈ irreducibleComponents Y, IsGenericPoint η C) → IsIso (f.stalkMap η)) (U : X.Opens) (hU : IsGreatest {V : X.Opens | IsIso (f ∣_ V)} U) : (∀ x : X, ringKrullDim (X.presheaf.stalk x) = 0 → x ∈ U) ∧ (∀ (x : X) [IsDomain (X.presheaf.stalk x)], ringKrullDim (X.presheaf.stalk x) = 1 → IsDiscreteValuationRing (X.presheaf.stalk x) → x ∈ U) ∧ (∀ x : X, (IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) → (f ⁻¹' {x}).Finite → x ∈ U) ∧ (∀ x : X, (IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) → (∃ y : Y, f y = x ∧ f.IsQuasiFiniteAtPoint y) → x ∈ U)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed96fc09c",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read node, Stacks varieties.tex Tag 0BFP l.3299-3313, all 9 stmt_dep records, the module and the report. Hypotheses match: IsLocallyNoetherian+CompactSpace, IsProper, IsReduced Y, BijOn on component generic points plus IsIso stalkMap, and U as an input with IsGreatest for the iso opens. Clauses (1)-(4) match: ringKrullDim 0; dim 1 plus DVR (Prop instance binder); IsDomain∧IsIntegrallyClosed with a finite set fibre; quasi-finite at some y over x via the recorded IsQuasiFiniteAtPoint (Stacks 01TD). No extra hypotheses, one universe u. lean.statement verbatim; one sorry, no defs; docstrings have source, blueprint id and all 8 steps. Not dropped, no re-split note, only the lean field differs from the live node, all imports exist. Advisory: the IsGreatest U is equivalent to the existing Scheme.Hom.maximalIsomorphismOpen (nothing defined, so not a duplicate); unused private proof-route imports. Not recompiled (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

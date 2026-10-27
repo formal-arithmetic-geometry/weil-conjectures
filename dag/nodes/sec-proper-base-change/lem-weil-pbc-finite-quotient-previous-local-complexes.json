@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-previous-local-complexes",
+ "kind": "statement",
+ "title": "Previous perfect model gives local successor-coefficient complexes",
+ "statement": "Let $X$ be a locally Noetherian quasi-compact scheme, $(A,I)$ an adic coefficient datum, and $\\phi_j:\\underline{A/I^{j+1}}\\to R_j$ coefficient isomorphisms compatible with quotient transitions and completed scalar projections. Suppose the constant module functors preserve zero morphisms. Fix a derived completed-coefficient object $M$, an etale chart $V$, integers $a\\leq b$, and $n\\geq0$. Assume the nth reduction has finite-perfect local models in $[a,b]$, as defined in [def-weil-pbc-finite-perfect-quotient-model-data]. Then the explicit restricted previous object $E_n$ of [def-weil-pbc-finite-quotient-coefficient-layer-data] satisfies the local homology model predicate of [def-weil-pbc-finite-coefficient-local-homology-models] over $B=A/I^{n+2}$, with comparison $\\phi_{n+1}$ and support $[a,b]$. No residue-model, layer calculation, or successor-cohomology assumption is made.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-coefficient-local-homology-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0942, lemma-bounded, proof (1), quotient endpoint of the coefficient triangle; 094H and 094I, exact realization on the previous-model cover."
+ },
+ "proof": [
+  {
+   "text": "Regard the previous algebraic perfect complex over E=A/I^(n+1) as a B=A/I^(n+2) complex via the quotient B to E. The quotient is surjective, so finite generators over E also generate over B, and the support remains [a,b].",
+   "uses": [
+    "def-weil-pbc-finite-perfect-quotient-model-data",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient compatibility square identifies constant E-realization followed by restriction with constant B-realization. Scalar restriction, slice restriction and extension along a coefficient isomorphism are exact. Their homology comparisons and the localization representative isomorphism identify the actual previous-object homology with constant algebraic B-complex homology. Pull back the original covering sieve along each W to V.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "def-weil-pbc-finite-coefficient-local-homology-models",
+    "def-sfb-site-derived-constant-module-functor",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-coefficient-local-homology-models",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0942, lemma-bounded, proof (1), quotient endpoint of the coefficient triangle; 094H and 094I, exact realization on the previous-model cover."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite modules over a finite ring has finite homology, and exact constant sheaf realization preserves its homology",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.ShortComplex.Exact.ab_finite; CompHausLike.LocallyConstantModule.functor; Condensed.finFree; Condensed.instAB5CondensedMod; TopModuleCat.instCategoryWithHomology; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor homology comparisons are available; no matching theorem computes these explicit coefficient-filtration objects from the prescribed residue or previous local model."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*tensor.*triangle|tensor.*kernel.*triangle|restriction.*homology",
+   "results": "19 hits: Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor homology comparisons are available; no matching theorem computes these explicit coefficient-filtration objects from the prescribed residue or previous local model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.mapHomologyIso; CategoryTheory.ShortComplex.mapHomologyIso'; CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso; CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq; CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq; CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality; CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor homology comparisons are available; no matching theorem computes these explicit coefficient-filtration objects from the prescribed residue or previous local model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of a complex with the kernel of a quotient of coefficient rings gives a distinguished triangle with restriction of the previous derived scalar extension",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; DerivedCategory.triangleOfSESδ; CategoryTheory.Tor_obj; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor homology comparisons are available; no matching theorem computes these explicit coefficient-filtration objects from the prescribed residue or previous local model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite modules over a finite ring has finite homology and exact functors preserve homology",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomology_of_map_exact; CategoryTheory.Functor.PreservesHomology; CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf; CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf; CategoryTheory.Functor.exact_tfae; CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology; CategoryTheory.Functor.preservesHomologyOfExact; CategoryTheory.ShortComplex.hasLeftHomology_of_preserves",
+   "date": "2026-10-27",
+   "verdict": "General exact-functor homology comparisons are available; no matching theorem computes these explicit coefficient-filtration objects from the prescribed residue or previous local model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientCohomologyFiltrationTriangle",
+  "date": "2026-10-27",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 0942, lemma-bounded, proof (1), quotient endpoint of the coefficient triangle; 094H and 094I, exact realization on the previous-model cover.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-cohomology-filtration-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientPreviousLocalComplexes",
+  "file": "lean/Sheaf/Paper/FiniteQuotientPreviousLocalComplexes.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_previous_local_complexes",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_previous_local_complexes"
+  ],
+  "statement": "theorem finiteQuotient_previous_local_complexes\n    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (a b : ℤ) (hab : a ≤ b) (n : ℕ)\n    (hprevious : FinitePerfectModelsOn X d φ M n V a b) :\n    FiniteCoefficientLocalHomologyModels X (A ⧸ d.ideal ^ (n + 1 + 1))\n      (φ (n + 1)) (finiteQuotientPreviousObject X d M n) V a b",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T112405-L-1578179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T112405-L-1578179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

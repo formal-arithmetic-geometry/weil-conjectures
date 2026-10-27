@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-integral-support-restricted-right-adjoint",
+ "kind": "statement",
+ "title": "Preservation and right-adjoint existence for restricted integral compact support",
+ "statement": "Fix a prime l, a finite-field datum D with l ≠ D.p, finite-type D.k-schemes X,Y and a separated finite-type D.k-morphism f:X→Y, without absolute separatedness. Let c be a compactification and E a finite coefficient extension [def-sf-ring-stage-assembly-data]. The actual ambient completed-coefficient compact-support functor sends the full complete constructible finite-Tor subcategory of X into that of Y, and its literal full-subcategory restriction is a left adjoint. No scalar, adjoint shift, realization, or coherence is supplied.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.25 and Propositions 5.24 and 5.26; coefficient construction step 3"
+ },
+ "proof": [
+  {
+   "text": "extend by zero along c.i and take the proper direct image along c.g on\nnormalized finite coefficient systems. Extension by zero preserves the finite Tor\ninterval. Proper cohomological dimension enlarges its upper bound by twice a fixed\nfinite bound for c.Z, independently of the coefficient level. The finite exceptional\nadjoints have uniform bounds from a fixed finite affine cover of X and Y. Their\nunits and counits commute with coefficient quotient maps. Thus these operations\nrestrict to normalized constructible systems with common finite Tor bounds and\nform an adjunction there. Strict evaluation and derived inverse limit identify\nthis category with the complete integral constructible finite-Tor subcategory.\nTransport the adjunction across these equivalences. The proper/open realization\nof the transported left functor is its canonical integral compact-support\nrealization. Since the ambient inclusion is full and faithful, lift this realization\nand transport the adjunction to the literal restriction displayed below. This\nproves both its preservation predicate and existence of a right adjoint. No\nchoice of an adjoint is required by the statement. Empty c.Z has zero operations\nand dimension bound zero. No separatedness of X or Y over the base is used.",
+   "uses": [
+    "lem-sf-exceptional-finite-operations",
+    "lem-sf-exceptional-system-transport",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-finite-operations",
+  "lem-sf-exceptional-system-transport",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.25 and Propositions 5.24 and 5.26; transport of the normalized-system adjunction to the literal ambient compact-support restriction"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral compact support preserves constructible finite Tor complete complexes and has a right adjoint",
+   "results": "CondensedSet.compactlyGeneratedAdjunction, LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-27",
+   "verdict": "Only generic adjunctions; no constructible finite-Tor integral compact-support preservation and right-adjoint theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofIsLeftAdjoint",
+   "results": "CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.isLeftAdjoint_square_lift",
+   "date": "2026-10-27",
+   "verdict": "Only generic adjunctions; no constructible finite-Tor integral compact-support preservation and right-adjoint theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_integral_support_adjoint|finiteTorConstructibleIntegral.*IsLeftAdjoint",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "Only generic adjunctions; no constructible finite-Tor integral compact-support preservation and right-adjoint theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingStageAssembly",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Ring coefficient construction step 3: existence of an integral right adjoint to the fixed compact-support restriction",
+   "via": [
+    "lem-sf-ring-stage-assembly",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralSupportAdjoint",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralSupportAdjoint.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_integral_support_adjoint",
+  "statement": "theorem exists_integral_support_adjoint (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) (E : FieldStage.{u} l) :\n    ∃ hpres : ∀ K : finiteTorConstructibleIntegralCategory l E.carrier X,\n      finiteTorConstructibleIntegral l E.carrier Y\n        ((PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c).obj K.obj),\n    ((finiteTorConstructibleIntegral l E.carrier Y).lift\n      ((finiteTorConstructibleIntegral l E.carrier X).ι ⋙\n        PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c)\n      hpres).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T034745-L-3682420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T034745-L-3682420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

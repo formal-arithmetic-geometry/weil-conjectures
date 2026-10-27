@@ -1,0 +1,227 @@
+{
+ "id": "lem-trf-lci-residue-chart-cover-extension",
+ "kind": "statement",
+ "title": "Residue-fibre complete-intersection charts cover after field extension",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], and let $V=\\operatorname{Spec}A\\subseteq Y$ be an affine open. Let $(U_b=\\operatorname{Spec}B_b)_{b\\in J}$ be affine opens of $X$, each mapping into $V$, with $f^{-1}(V)=\\bigcup_{b\\in J}U_b$. Fix a prime $\\mathfrak p\\subset A$, put $k=\\kappa(\\mathfrak p)$, and suppose each fibre algebra $S_b=B_b\\otimes_Ak$ [def-weil-pbc-localization-at-prime] is a finite type local complete intersection over $k$ [def-weil-pbc-finite-type-algebra, def-weil-pbc-complete-intersection-over-field]. Let $k\\to K$ be any extension of fields, let $t:\\operatorname{Spec}K\\to Y$ be the composite through $\\operatorname{Spec}k\\to V$, and write $X_K=X\\times_Y\\operatorname{Spec}K$, $\\pi:X_K\\to X$ [def-pc-fibre-product]. Then the opens $W_b=\\pi^{-1}(U_b)$ cover $X_K$. For each $b$ there are isomorphisms\n$$W_b\\cong\\operatorname{Spec}(B_b\\otimes_AK)\\cong\\operatorname{Spec}(S_b\\otimes_kK)$$\nof $K$-schemes. Under the first identification, the maps to $U_b$ and $\\operatorname{Spec}K$ are the spectrum maps of $c\\mapsto c\\otimes1$ and $u\\mapsto1\\otimes u$. The second identification is induced by the $K$-algebra isomorphism $(c\\otimes a)\\otimes u\\mapsto c\\otimes au$, with inverse $c\\otimes u\\mapsto(c\\otimes1)\\otimes u$. Each $B_b\\otimes_AK$ is a finite type local complete intersection over $K$. In particular $X_K$ is locally of finite type over $K$ [def-weil-finite-type-morphism] and has an affine open cover by spectra of local-complete-intersection $K$-algebras. No condition is imposed on fibres at other primes, and $f$ need not be flat or locally of finite presentation; neither algebraicity nor algebraic closedness of $K$ is required. Empty fibres, zero algebras and empty covering families are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SJ (lemma-lci-field-change), descent/ascent; schemes.tex Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); morphisms.tex Tag 01UG (lemma-local-complete-intersection). Explicit affine-chart and balanced-tensor comparison extracted from the proof of lem-trf-syntomic-geometric-fibres-affine-criterion, original steps 1, 3 and 6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:X_K\\to\\operatorname{Spec}K$ for the second projection. The fibre-product equation gives $f\\circ\\pi=t\\circ q$. Since $t$ factors through $V$, every point of $X_K$ maps by $\\pi$ into $f^{-1}(V)$. The assumed equality $f^{-1}(V)=\\bigcup_b U_b$ therefore gives $X_K=\\bigcup_b\\pi^{-1}(U_b)$. Each $W_b=\\pi^{-1}(U_b)$ is open by continuity of the scheme morphism $\\pi$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR (lemma-open-fibre-product): inverse-image opens and the projection equation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-fibre-product] to the two maps $X\\to Y$ and $\\operatorname{Spec}K\\to Y$, using the opens $V\\subseteq Y$, $U_b\\subseteq X$ and all of $\\operatorname{Spec}K$. Its image formula identifies $U_b\\times_V\\operatorname{Spec}K$ with $W_b$, compatibly with both projections. Apply [lem-weil-pbc-fibre-product-affine-spectra] with $R=A$, its first algebra $B_b$ and its second algebra $K$. This gives $W_b\\cong\\operatorname{Spec}(B_b\\otimes_A K)$, and identifies its projections with the spectrum maps of $c\\mapsto c\\otimes1$ and $u\\mapsto1\\otimes u$. In particular this is an isomorphism over $\\operatorname{Spec}K$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines)."
+   }
+  },
+  {
+   "text": "Put $B=B_b$ and $S=B\\otimes_A k$. Define $\\Phi:S\\otimes_k K\\to B\\otimes_A K$ on pure tensors by $\\Phi((c\\otimes a)\\otimes u)=c\\otimes au$. The inner $A$-balancing relation is respected because $rc\\otimes au=c\\otimes r a u$ for $r\\in A$; the outer $k$-balancing relation is respected because $c\\otimes(aa_0)u=c\\otimes a(a_0u)$. Define $\\Psi:B\\otimes_A K\\to S\\otimes_k K$ by $\\Psi(c\\otimes u)=(c\\otimes1)\\otimes u$. For $r\\in A$, $(rc\\otimes1)\\otimes u=(c\\otimes\\bar r)\\otimes u=(c\\otimes1)\\otimes\\bar r u$, so this too respects balancing. Both formulas are additive, preserve products and the unit, and send the $K$-scalar $u$ to $1\\otimes u$. Their composites fix pure tensors: $\\Phi\\Psi(c\\otimes u)=c\\otimes u$, and $\\Psi\\Phi((c\\otimes a)\\otimes u)=(c\\otimes1)\\otimes au=(c\\otimes a)\\otimes u$. Thus they are inverse $K$-algebra isomorphisms. Taking spectra yields the claimed second isomorphism, over $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), tensor-product universal property; explicit balancing calculation for the iterated scalar extension."
+   }
+  },
+  {
+   "text": "For each $b$, apply [lem-weil-pbc-lci-field-change] to the finite type $k$-algebra $S_b$ and the given field extension $k\\to K$. It gives that $S_b\\otimes_k K$ is finite type and a local complete intersection over $K$. The $K$-algebra isomorphism $\\Phi$ of step 3 transfers these properties to $B_b\\otimes_A K$: finite algebra generators map to finite algebra generators, and the principal-open cover and polynomial quotient presentations in [def-weil-pbc-complete-intersection-over-field] map to the corresponding cover and presentations of the isomorphic algebra (the isomorphism and its inverse identify prime ideals and their strict-inclusion chains, hence preserve Krull dimensions).",
+   "uses": [
+    "lem-weil-pbc-lci-field-change",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SJ (lemma-lci-field-change), ascent direction; Tag 00S9 (definition-lci-field), invariance of the defining presentations under algebra isomorphism."
+   }
+  },
+  {
+   "text": "The opens in steps 1 and 2 are therefore an affine cover by spectra of finite type local-complete-intersection $K$-algebras. This is locally of finite type by [def-weil-finite-type-morphism]: the only affine opens of the one-point scheme $\\operatorname{Spec}K$ are itself and the empty open; their inverse images have respectively the displayed affine cover and the empty cover. No part of the construction uses any other fibre or any flatness, presentation or algebraic-closedness assumption. For a zero $S_b$, both tensor rings are zero and the corresponding chart is empty; the complete-intersection assertion is the zero-ring convention of [def-weil-pbc-complete-intersection-over-field]. If the covering family is empty, step 1 forces $X_K$ empty, and every conclusion is vacuous or the same empty-cover assertion.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1 (definition-finite-type); algebra.tex Tag 00S9 (definition-lci-field), zero-ring convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lci-field-change",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines), with algebra.tex Tag 00SJ (lemma-lci-field-change). The iterated tensor comparison is written explicitly from the tensor universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given affine charts over an affine target neighbourhood, local complete intersection residue fibre algebras give an affine local complete intersection cover of the fibre at any field valued point",
+   "results": "{\"t\": \"2026-10-22T07:20:14Z\", \"tool\": \"leansearch\", \"query\": \"Given affine charts over an affine target neighbourhood, local complete intersection residue fibre algebras give an affine local complete intersection cover of the fibre at any field valued point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Scheme.AffineCover.X\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\"], \"digest\": \"bd0637ba93741ea4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine fibres, residue-field maps, covers or generic local properties; none states complete-intersection chart descent/ascent. The RingTheory grep hit is only the comment at Extension/Presentation/Basic.lean:103, which was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine covering over a target neighbourhood with complete intersection residue fibre rings pulls back to an affine complete intersection covering over any extension of the residue field",
+   "results": "{\"t\": \"2026-10-22T07:22:27Z\", \"tool\": \"leanfinder\", \"query\": \"An affine covering over a target neighbourhood with complete intersection residue fibre rings pulls back to an affine complete intersection covering over any extension of the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\"], \"digest\": \"701a3defd0463267\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine fibres, residue-field maps, covers or generic local properties; none states complete-intersection chart descent/ascent. The RingTheory grep hit is only the comment at Extension/Presentation/Basic.lean:103, which was read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Syntomic\"",
+   "results": "{\"t\": \"2026-10-22T07:22:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine fibres, residue-field maps, covers or generic local properties; none states complete-intersection chart descent/ascent. The RingTheory grep hit is only the comment at Extension/Presentation/Basic.lean:103, which was read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalCompleteIntersection|complete.intersection|syntomic",
+   "results": "{\"t\": \"2026-10-22T07:22:16Z\", \"tool\": \"grep\", \"query\": \"IsLocalCompleteIntersection|complete.intersection|syntomic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine fibres, residue-field maps, covers or generic local properties; none states complete-intersection chart descent/ascent. The RingTheory grep hit is only the comment at Extension/Presentation/Basic.lean:103, which was read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalCompleteIntersection|lci.*baseChange|complete.intersection",
+   "results": "{\"t\": \"2026-10-23T09:36:27Z\", \"tool\": \"grep\", \"query\": \"IsLocalCompleteIntersection|lci.*baseChange|complete.intersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the only hit is the presentation-dimension comment at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103; it is not a complete-intersection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type local complete intersection algebra over a field stays a local complete intersection after extending the field",
+   "results": "{\"t\": \"2026-10-23T09:36:27Z\", \"tool\": \"leansearch\", \"query\": \"A finite type local complete intersection algebra over a field stays a local complete intersection after extending the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.baseChange\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"Algebra.Extension.localization\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IntermediateField.essFiniteType_iff\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\"], \"digest\": \"f6225876f3cf07f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Algebra.FiniteType.baseChange (FiniteStability.lean:42, source read) gives finite type only; the other hits do not give complete-intersection stability or the chart-cover statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra\", \"IsLocalCompleteIntersection\"",
+   "results": "{\"t\": \"2026-10-23T09:36:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra\\\", \\\"IsLocalCompleteIntersection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits for the complete-intersection predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine open charts of a scheme fibre after an arbitrary residue field extension are spectra of tensor products, and local complete intersection algebras remain local complete intersections",
+   "results": "{\"t\": \"2026-10-23T09:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"Affine open charts of a scheme fibre after an arbitrary residue field extension are spectra of tensor products, and local complete intersection algebras remain local complete intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\"], \"digest\": \"04c7d5139510637d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe residue-field maps and fibre constructions, not the complete-intersection chart-cover conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a finitely generated local complete intersection algebra over a field preserves the local complete intersection property",
+   "results": "{\"t\": \"2026-10-23T09:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of a finitely generated local complete intersection algebra over a field preserves the local complete intersection property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"RingHom.finiteType_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.finite_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\"], \"digest\": \"bfe881375360afb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern finite type and standard smoothness under base change, neither of which supplies complete-intersection stability for arbitrary local complete intersections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-syntomic-geometric-fibres-affine-criterion",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation used below lem-trf-nodal-etale-chart. Stacks 0CBY first proof first paragraph reduces to a finite-type integer model; its use of 0C5F requires syntomic (flat with local complete intersection fibres) descent, the first sentence of the 0C5F proof. Supporting input: Affine-local characterization of flat families with geometric complete-intersection fibres. Re-split: original steps 1 and 6, residue-fibre chart scalar extension and the covering of the field-valued fibre.",
+   "via": [
+    "lem-trf-syntomic-geometric-fibres-affine-criterion",
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lci-residue-chart-cover-extension",
+  "worker": "stage1",
+  "summary": "Five steps give the cover, the projection-compatible affine tensor chart, the explicit balanced K-algebra isomorphism, complete-intersection ascent using the existing field-change node, and local finite type with empty-case checks. No new nodes; all clauses and hypotheses retained. Searches found no exact project attachment or Mathlib match.",
+  "blueprint": "Historical local-equation input below lem-trf-local-term-locality proof (1)--(2), through lem-trf-syntomic-geometric-fibres-affine-criterion original steps 1, 3 and 6: residue-fibre scalar extension and the covering of the field-valued fibre. The newest blueprint now uses contracting correspondences; this assigned descendant supplies only its existing algebraic auxiliary statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lci-field-change",
+    "why": "The general field-extension theorem supplies complete-intersection ascent for the residue algebra in step 4; it is used as a commutative algebra tool, and no trace-formula unit node gives a more appropriate independent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lci-field-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-e01da60bb",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-e01da60bb (reviewer sub-agent of L); spot-checked: Q97 splits lem-trf-lci-residue-chart-cover-extension into 5 steps and adds no new nodes. Compared with clones/live and side-live (where it is still unsplit), the statement, stmt_deps, source and unit are unchanged, so nothing is weakened. There is no repair note for this item, so it is not a re-split answer. The parent's (3)=>(1) step gets exactly the lci cover and the local finite type it uses. Step 1: f pi = t q lies in V, so the W_b cover X_K; this is elementary. Step 2: lem-weil-pbc-open-fibre-product (01JR, schemes.tex:3198, read) applies with U=V, V=U_b, W=Spec K, and both hypotheses are explicit in the item; it gives W_b = U_b x_V Spec K. lem-weil-pbc-fibre-product-affine-spectra (01I4) with R=A then gives Spec(B_b (x)_A K) with the stated projections. Step 3: I re-checked the balanced tensor isomorphism Phi/Psi: A- and k-balancing, both composites the identity on generators, and K-linearity via 1(x)u. Step 4: lem-weil-pbc-lci-field-change (00SJ, algebra.tex:36262, read; hypotheses fields k,K and S_b of finite type) gives ascent. Transfer along the K-algebra isomorphism uses only the defining presentations and D(g) covers, and dimension is preserved by the Spec homeomorphism. Step 5: the affine opens of Spec K are Spec K and the empty set, so def-weil-finite-type-morphism holds. Zero S_b and an empty family are covered by the zero-ring convention. proof_deps equals the union of the step uses. Tags 01JR/01I4/01JQ/00SJ/01UG/01T2 match their labels; there is no SGA and no doubled TeX escaping. Duplicate check: the Q93 sibling lem-trf-lci-geometric-chart-descent is the descent direction under an lci hypothesis on X_K, so it is not a duplicate. lem-trf-lci-field-change-local is the local-ring criterion and also not a duplicate. I accept the tool use of lem-weil-pbc-lci-field-change (unit sk-thm-p1) as generic commutative algebra, since no sk-i-curve-zero node gives it. The worker wrote this tool_uses entry into split_report themself, against C8, but its content is correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LciResidueChartCoverExtension",
+  "declaration": "AlgebraicGeometry.lci_residue_chart_cover_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/LciResidueChartCoverExtension.lean",
+  "statement": "theorem lci_residue_chart_cover_extension (X Y : Scheme.{u}) (f : X ⟶ Y) (A : Type u) [CommRing A] (V : Y.Opens) (eV : V.toScheme ≅ Spec (.of A)) (J : Type w) (B : J → Type u) [∀ b, CommRing (B b)] [∀ b, Algebra A (B b)] (U : J → X.Opens) (eU : ∀ b, (U b).toScheme ≅ Spec (.of (B b))) (hchart : ∀ b, (U b).ι ≫ f = (eU b).hom ≫ Spec.map (CommRingCat.ofHom (algebraMap A (B b))) ≫ eV.inv ≫ V.ι) (hcover : f ⁻¹ᵁ V = ⨆ b, U b) (p : Ideal A) [p.IsPrime] (K : Type u) [Field K] [Algebra p.ResidueField K] [Algebra A K] [IsScalarTower A p.ResidueField K] (t : Spec (.of K) ⟶ Y) (ht : t = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ eV.inv ≫ V.ι) : letI : ∀ b, Algebra K (B b ⊗[A] K) := fun b ↦ Algebra.TensorProduct.rightAlgebra (R := A) (A := B b) (B := K) letI : ∀ b, Algebra K (p.Fiber (B b) ⊗[p.ResidueField] K) := fun b ↦ Algebra.TensorProduct.rightAlgebra (R := p.ResidueField) (A := p.Fiber (B b)) (B := K) ∀ (hfin : ∀ b, Algebra.FiniteType p.ResidueField (p.Fiber (B b))), (∀ b, @Algebra.IsLocalCompleteIntersection p.ResidueField (p.Fiber (B b)) _ _ _ (hfin b)) → (⨆ b, (pullback.fst f t) ⁻¹ᵁ U b) = ⊤ ∧ LocallyOfFiniteType (pullback.snd f t) ∧ ∀ b, ∃ hfinK : Algebra.FiniteType K (B b ⊗[A] K), @Algebra.IsLocalCompleteIntersection K (B b ⊗[A] K) _ _ _ hfinK ∧ ∃ E : (p.Fiber (B b) ⊗[p.ResidueField] K) ≃ₐ[K] (B b ⊗[A] K), (∀ (c : B b) (a : p.ResidueField) (z : K), E ((a ⊗ₜ[A] c) ⊗ₜ[p.ResidueField] z) = c ⊗ₜ[A] ((algebraMap p.ResidueField K a) * z)) ∧ (∀ (c : B b) (z : K), E.symm (c ⊗ₜ[A] z) = ((1 : p.ResidueField) ⊗ₜ[A] c) ⊗ₜ[p.ResidueField] z) ∧ ∃ (e₁ : ((pullback.fst f t) ⁻¹ᵁ U b).toScheme ≅ Spec (.of (B b ⊗[A] K))) (e₂ : ((pullback.fst f t) ⁻¹ᵁ U b).toScheme ≅ Spec (.of (p.Fiber (B b) ⊗[p.ResidueField] K))), e₁.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B b →+* B b ⊗[A] K)) ≫ (eU b).inv ≫ (U b).ι = ((pullback.fst f t) ⁻¹ᵁ U b).ι ≫ pullback.fst f t ∧ e₁.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight.toRingHom : K →+* B b ⊗[A] K)) = ((pullback.fst f t) ⁻¹ᵁ U b).ι ≫ pullback.snd f t ∧ e₂.hom = e₁.hom ≫ Spec.map (CommRingCat.ofHom E.toRingHom) ∧ e₂.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight.toRingHom : K →+* p.Fiber (B b) ⊗[p.ResidueField] K)) = ((pullback.fst f t) ⁻¹ᵁ U b).ι ≫ pullback.snd f t",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d8e39c7e",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_dep records, the module, the report (Worker report + Second reading sections present) and CompleteIntersectionOverField/LocalCompleteIntersectionFieldChange. The node differs from side-live only in lean. Hypotheses match: hchart pins the chart maps into V and the induced A-algebra; hcover; canonical κ(p) via p.Fiber (fibre convention, the source's B⊗k up to symmetry); the A→K structure is pinned by IsScalarTower; ht gives t as the composite through Spec k→V; hypotheses FiniteType+lci for every b. Conclusions: π⁻¹U_b cover X_K; snd is LocallyOfFiniteType; B_b⊗_A K is finite type and lci with the right-factor K action; E with the source formula and inverse; e₁ with both projection equations (includeLeft/includeRight); e₂ = e₁≫Spec E, over K. Edge cases: empty J, zero rings, any K, independent index universe w; Type u for the rings and K is forced by the Scheme pullback. No new defs, sorry only, source/blueprint docstrings present, no name collision. Compile not re-run (no file changed)."
+ }
+}

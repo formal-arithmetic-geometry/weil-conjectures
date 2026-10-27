@@ -1,0 +1,284 @@
+{
+ "id": "lem-fd-scalar-roos-comparison-intertwining",
+ "kind": "statement",
+ "title": "Finite-free scalar transport of the normalized Roos comparison",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All schemes $W$ below are noetherian and finite dimensional with $\\ell$ invertible, with the meaning and the common full integral constructible categories of [lem-weil-pbc-integral-stratified-perfect-characterization]. For finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $R_{E,W}=\\lim_{n\\geq1}(A_{E,n})_W$ on the small pro-etale site, and use framework and PBC completed pullbacks $F^s_{h,E},F^p_{h,E}$ of [def-weil-derived-pullback-tensor-hom, def-weil-pbc-completed-pullback]. Write $I_{W,E}$ for restriction along the quotient-normalized coefficient identity, giving the integral identity equivalence. All equalities below use these fixed identity transports; we suppress $I$ when source and target already have the same module presentation. For a scheme isomorphism $h:U\\simeq T$, let $G_{h,E}$ be ordinary derived module pullback on the completed rings. For a flat-term K-flat representative $P$ over $R_{E,T}$ set\n$$Q_{h,E}(P)_n=\\operatorname{Res}_n h_n^*(P\\otimes_{R_{E,T}}(A_{E,n})_T),\\qquad H(Q)=\\operatorname{Cone}(1-s_Q)[-1],$$\nwith the actual quotient transitions and $s_Q((x_n)_n)=(t_nx_{n+1})_n$ [def-pur-integral-derived-operations].\nFor each such tower, use the normalized derived comparison of [lem-weil-strict-roos-comparison],\n$$\\rho_Q=[\\iota_I]^{-1}[H(q)]:H(Q)\\xrightarrow{\\sim}R\\lim Q,$$\nwhere $q:Q\\to I_\\bullet$ is a K-injective tower resolution with injective terms and $\\iota_I:\\lim I_\\bullet\\to H(I_\\bullet)$ has coordinates $z\\mapsto(0,z)$. Write $b^{\\rm amb}_{h,E}:IF^s_{h,E}\\to F^p_{h,E}I$ for this comparison with the defining realization identifications, and $b^{\\rm int}_{h,E}$ for its restriction to the full integral constructible categories.\nFor $E\\subset L$, put $C_W=-\\otimes^L_{R_{E,W}}R_{L,W}$ and use $\\chi_W:C_W\\xrightarrow{\\sim}S_W$, $d_\\bullet$, $\\delta^s$, $\\delta^p=\\alpha^p$ and $\\alpha^s=F^s_{h,L}(\\chi_T)\\delta^s\\chi_U^{-1}$ with the actual normalization specified in [lem-fd-scalar-pullback-realization-identification]. The finite-free tensor product/limit transport carries $C_U(\\rho_Q)$ to $\\rho_{C_UQ}$, under the canonical product and limit identifications, with the universal units retained. In particular for every integral constructible $K$ one has, in the actual realized whole-diagram models,\n$$b_{h,L,C_TK}\\circ\\delta^s_K=\\delta^p_{IK}\\circ C_U(b_{h,E,K}).$$\nThis equality retains the strict quotient transitions and derived-limit counit. The completion-conjugated equality is\n$$F^p_{h,L}(\\chi_T^{-1})\\circ b_{h,L,S_TK}\\circ\\alpha^s_K\n=\\alpha^p_{IK}\\circ C_U(b_{h,E,K})\\circ\\chi_{U,F^s_{h,E}K}^{-1}.$$\nHere $b=b^{\\rm int}$ with the coefficient identity transports inserted. Write $J_{W,E}$ for the raw rationalization of $I_{W,E}$ [def-weil-rationalization-karoubi, def-weil-pbc-rational-category], $P_W$ for rational PBC scalar extension, $b_{h,E}$ also for the raw rationalization, and $j_W=\\chi_W^{-1}[1/\\varpi_L]$. Then\n$$F^p_{h,L}(j_T)\\circ b_{h,L,S_TK}\\circ J_{U,L}(\\alpha^s_K)\n=\\alpha^p_{J_{T,E}K}\\circ P_U(b_{h,E,K})\\circ j_{U,F^s_{h,E}K}.$$\nThe inverse of the localized integral $b$ is the rational finite-datum component. These statements use raw localization on integral objects and tensor morphisms, with no Karoubi completion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-written extraction of returned lem-fd-whole-tower-integral-pullback-comparison proof steps 9, 10. Exact arguments retained in report.md. Supporting Stacks sources: Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok; extracted normalized scalar/shift refinement, not a verbatim Stacks assertion"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-strict-roos-comparison",
+  "lem-fd-scalar-pullback-realization-identification",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-fd-finite-pullback-comparison-datum",
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-common-strict-tower-models",
+  "def-sf-integral-comparison-system-data",
+  "def-fd-scalar-pullback-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "On $U_{\\mathrm{proet}}$ write $R=R_{E,U}$, $S=R_{L,U}$ and $C=C_U$. By [lem-weil-finite-free-completed-scalar-comparison], $S$ is finite free over $R$. Termwise tensor is exact by [lem-weil-pbc-finite-free-strict-tower-transport]. It preserves countable products: after choosing an $R$-basis of $S$ its underlying $R$-module functor is a finite direct sum of identities, and the canonical comparison rearranges the two indices of $(M_{n,j})_{n,j}$; its projections are tensor of the source projections. This comparison is $S$-linear, so the underlying inverse is $S$-linear too. Countable products are exact in both module categories by [lem-weil-proetale-countable-products-exact]. Thus the exact product-preserving functor theorem applies to $C$, on the small site in the chosen module universe.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-finite-free-strict-tower-transport",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective tower and limit/product-cone comparison; agent-written application of the existing normalized functor comparison to the blueprint coefficient comparison"
+   }
+  },
+  {
+   "text": "Let $\\kappa_X:CH(X)\\to H(CX)$ be the canonical product map on both cone coordinates and $\\lambda_X:CR\\lim X\\to R\\lim(CX)$ the finite-free limit comparison. Apply [lem-cbc-exact-product-functor-strict-limit]. Its signed coordinates $(x,z)$ correspond to our coordinates $(y,x)$ by $z=-y$: the differential becomes $(dx,(1-s)x-dz)$ and the inclusion remains $(x,0)$. Both product maps are diagonal, so this sign change conjugates its $\\theta$ to $\\rho^{-1}$ with exactly the normalization of [lem-weil-strict-roos-comparison]. Its conjugation formula is therefore\n$$\\lambda_X C(\\rho_X)=\\rho_{CX}\\kappa_X.$$\nThe theorem also says this is the ordinary limit/tensor map followed by a resolution of the image tower. Hence it is the actual comparison of [lem-weil-pbc-finite-free-strict-tower-transport], rather than an unspecified triangle isomorphism. Explicitly, choose $q:X\\to I$ and $r:CI\\to J$ with injective-term K-injective targets, and write $\\beta:C\\lim I\\to\\lim CI$ for the ordinary comparison. If $e_I:\\Delta\\lim I\\to I$ and $e_J:\\Delta\\lim J\\to J$ are the strict limit cones, then\n$$r\\,C(e_I)=e_J\\,\\Delta((\\lim r)\\beta).$$\nIndeed its $n$th tower component on either side is $r_nC(\\mathrm{pr}_n)$; this is equality of strict tower chain maps. Localizing and inserting $q^{-1},r^{-1}$ gives the counit equation for the specified $\\lambda$. No claim that $CI$ is K-injective is needed.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-finite-free-strict-tower-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective tower and limit/product-cone comparison; agent-written application of the existing normalized functor comparison to the blueprint coefficient comparison"
+   }
+  },
+  {
+   "text": "Take $X=Q_{h,E}(P)$ and $Y=Q_{h,L}(P\\otimes R_{L,T})$. By [lem-fd-pullback-common-strict-tower-models], $b_E,b_L$ are the normalized $\\rho_X,\\rho_Y$ in the actual defining realizations and are natural isomorphisms on the full integral categories. By [lem-fd-scalar-pullback-realization-identification], the actual whole tower map $d:CX\\to Y$ gives $\\delta^s=H(d)\\kappa_X$ and $\\delta^p=R\\lim(d)\\lambda_X=\\alpha^p$. Naturality of [lem-weil-strict-roos-comparison] and Step 2 give\n$$\\rho_Y H(d)\\kappa_X=R\\lim(d)\\rho_{CX}\\kappa_X=R\\lim(d)\\lambda_X C(\\rho_X).$$\nInsert the defining realization identifications: this is $b_{h,L,C_TK}\\delta^s_K=\\delta^p_{IK}C_U(b_{h,E,K})$. All arrows come from strict tower maps and the normalized derived-limit comparison; thus the quotient transitions and counit of Step 2 are retained. Resolution independence and restriction to integral constructible objects follow from the two cited realization statements.",
+   "uses": [
+    "lem-fd-pullback-common-strict-tower-models",
+    "lem-fd-scalar-pullback-realization-identification",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective tower and limit/product-cone comparison; agent-written application of the existing normalized functor comparison to the blueprint coefficient comparison"
+   }
+  },
+  {
+   "text": "The formula in [lem-fd-scalar-pullback-realization-identification] is $\\alpha^s=F^s_{h,L}(\\chi_T)\\delta^s\\chi_U^{-1}$, with $\\delta^p=\\alpha^p$. Naturality of the isomorphism $b_L$ from [lem-fd-pullback-common-strict-tower-models] at $\\chi_T$ gives\n$$F^p_{h,L}(\\chi_T^{-1})b_{h,L,S_TK}F^s_{h,L}(\\chi_T)=b_{h,L,C_TK}.$$\nSubstitution followed by Step 3 gives the required integral equation\n$$F^p_{h,L}(\\chi_T^{-1})b_{h,L,S_TK}\\alpha^s_K=\\alpha^p_{IK}C_U(b_{h,E,K})\\chi_{U,F^s_{h,E}K}^{-1}.$$\nThe fixed coefficient identity transports are inserted at each source and target. These are cancellations of natural isomorphisms between the stated functors.",
+   "uses": [
+    "lem-fd-scalar-pullback-realization-identification",
+    "lem-fd-pullback-common-strict-tower-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective tower and limit/product-cone comparison; agent-written application of the existing normalized functor comparison to the blueprint coefficient comparison"
+   }
+  },
+  {
+   "text": "Apply raw localization to Step 4. By [def-weil-rationalization-karoubi, def-weil-pbc-rational-category] it keeps integral objects and sends $f$ to $f\\otimes1$. It preserves composition and inverses, so $\\chi^{-1}$ becomes $j$. By [prop-weil-pbc-scalar-extension] ordinary integral $C_U$ and its actual pullback comparison rationalize to $P_U$ and $\\alpha^p$. Thus the localized equation is\n$$F^p_{h,L}(j_T)b_{h,L,S_TK}J_{U,L}(\\alpha^s_K)=\\alpha^p_{J_{T,E}K}P_U(b_{h,E,K})j_{U,F^s_{h,E}K}.$$\nFinally [lem-fd-pullback-augmentation-counit-matching] states that $(b^{\\rm int})^{-1}$, its ambient lift and raw rationalization supply the normalized finite datum. Since localization preserves inverse, the component is precisely the inverse of this same localized $b$. No idempotents or objects are added.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-scalar-extension",
+    "lem-fd-pullback-augmentation-counit-matching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective tower and limit/product-cone comparison; agent-written application of the existing normalized functor comparison to the blueprint coefficient comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-strict-roos-comparison",
+  "lem-fd-pullback-common-strict-tower-models",
+  "lem-fd-scalar-pullback-realization-identification",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "lem-fd-pullback-augmentation-counit-matching"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, K-injective tower and limit/product-cone comparison; agent-written application of the existing normalized functor comparison to the blueprint coefficient comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension transports normalized Roos derived-limit comparisons and gives the mixed scalar pullback square after raw rationalization",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor, CommRingCat.Under.tensorProdMapEqualizerForkIsLimit, comonadicExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension commutes with Roos inverse limits and normalized comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearEquiv.extendScalarsOfSurjective_symm, ModuleCat.preservesColimit_restrictScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv_symm_apply, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(inverseLimit|inverse_limit)|roos|Roos",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimitsOfShape",
+   "results": "12 hits: CategoryTheory.Limits.PreservesLimitsOfShape, CategoryTheory.Limits.preservesLimitsOfShape_subsingleton, CategoryTheory.Limits.PreservesLimitsOfSize.preservesLimitsOfShape, CategoryTheory.Limits.PreservesLimitsOfSize.mk, CategoryTheory.Limits.PreservesLimitsOfShape.preservesLimit, CategoryTheory.Limits.preservesLimitsOfShape_of_equiv, CategoryTheory.Limits.PreservesLimitsOfShape.mk, CategoryTheory.Limits.reflectsLimitsOfShape_of_reflectsIsomorphisms",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free tensor extension transports the derived inverse limit comparison of strict module towers, preserving its augmentation and shifts",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|tensor.*inverseLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned adic module completions, Dold-Kan, direct limits, or generic limit preservation do not state the normalized strict-tower scalar/pullback comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free tensor product commutes with normalized derived inverse limit and strict tower augmentations",
+   "results": "8 hits: TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitLeft_rTensor_of, TensorProduct.toDirectLimit, ModuleCat.FreeMonoidal.μIso, TensorProduct.toDirectLimit_tmul_of, TensorProduct.directLimitLeft, Module.Free.tensor, Submodule.FG.lTensor.directLimit_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: returned adic module completions, Dold-Kan, direct limits, or generic limit preservation do not state the normalized strict-tower scalar/pullback comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimitsOfShape",
+   "results": "12 hits: CategoryTheory.Limits.PreservesLimitsOfShape, CategoryTheory.Limits.preservesLimitsOfShape_subsingleton, CategoryTheory.Limits.PreservesLimitsOfSize.preservesLimitsOfShape, CategoryTheory.Limits.PreservesLimitsOfSize.mk, CategoryTheory.Limits.PreservesLimitsOfShape.preservesLimit, CategoryTheory.Limits.preservesLimitsOfShape_of_equiv, CategoryTheory.Limits.PreservesLimitsOfShape.mk, CategoryTheory.Limits.reflectsLimitsOfShape_of_reflectsIsomorphisms",
+   "date": "2026-10-22",
+   "verdict": "no match: returned adic module completions, Dold-Kan, direct limits, or generic limit preservation do not state the normalized strict-tower scalar/pullback comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension transports the normalized Roos comparison from a strict tower cone to the derived inverse limit, compatibly with scalar pullback",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, LightProfinite.isoMapCone, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, LightProfinite.Extend.isLimitCone, AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "date": "2026-10-22",
+   "verdict": "no match: returned adic module completions, Dold-Kan, direct limits, or generic limit preservation do not state the normalized strict-tower scalar/pullback comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving countable products commutes with the normalized Roos homotopy limit comparison on strict towers",
+   "results": "8 hits: AlgebraicTopology.DoldKan.compatibility_N₂_N₁_karoubi, CategoryTheory.hoFunctor.isIso_prodComparison, CategoryTheory.Functor.mapHomotopyCategoryFactors, AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex_assoc, CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f, CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex, AlgebraicTopology.DoldKan.toKaroubiCompN₂IsoN₁, CategoryTheory.Abelian.DoldKan.comparisonN",
+   "date": "2026-10-22",
+   "verdict": "no match: returned adic module completions, Dold-Kan, direct limits, or generic limit preservation do not state the normalized strict-tower scalar/pullback comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 7–8: identity on entire quotient towers and normalized integral coherence; returned whole-tower proof steps 9, 10",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-scalar-roos-comparison-intertwining",
+  "worker": "stage1",
+  "summary": "Q20: kept the exact statement and added its missing finite-datum definition dependency; supplied normalized finite-free Roos transport, whole-tower naturality, completion conjugation and raw rationalization, using existing generic nodes only. Checked signs, actual comparison normalization, counit and inverse finite-datum direction. No new nodes.",
+  "blueprint": "Final coefficient-category sentence of def-fd-trace-function, through lem-fd-rational-coefficient-category-comparison and lem-fd-whole-tower-integral-pullback-comparison; realizes retained old Steps 9–10.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Finite freeness of the actual completed coefficient sheaves; generic coefficient comparison, no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-strict-tower-transport",
+    "why": "Exact finite-free tensor and canonical whole-tower derived-limit transport, used as a general module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products on the small pro-etale site, needed to apply the normalized strict Roos theorem."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic exact product-preserving functor comparison identifies normalized Roos transport with the ordinary derived-limit comparison, retaining the adjunction."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic natural normalized comparison for strict towers and their augmentations."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Identification of ordinary integral coefficient extension and its comparison after raw rationalization; generic coefficient tool, no route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-strict-roos-comparison",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-450059cab",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-450059cab (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node's statement. The delivery makes no new nodes, keeps the statement, and correctly adds def-fd-finite-pullback-comparison-datum to stmt_deps for the closing finite-datum sentence. proof_deps equal the union of the step uses, nothing cites SGA, and there is no cycle. Step 1: S is finite free over R (finite-free-completed-scalar-comparison), so -⊗S is exact and preserves products; products on the pro-etale site are exact for any ring sheaf, and the site is V-small. Step 2: I checked the sign by hand. Cone(1-s)[-1] in coordinates (y,x) has d=(-dy-(1-s)x,dx), and z=-y gives the cbc differential (dx,(1-s)x-dz). The zero-shifted normalization is kept, so cbc's formula gives λC(ρ_X)=ρ_{CX}κ_X. cbc's λ and the transport node's λ are the same limit-then-resolve representative, and the counit identity r C(e_I)=e_J Δ((lim r)β) checks componentwise. Step 3: b_E=ρ_X by common-strict-tower-models; realization-identification gives δ^s=H(d)κ and δ^p=Rlim(d)λ=α^p; P⊗R_L is flat-term K-flat, so b_{L,C_TK}=ρ_Y, and naturality of ρ in d closes the step. d_n is never inverted, so ramified L is fine. Step 4: naturality of b_L at χ_T cancels correctly; I checked every domain. Step 5: raw localization (rationalization-karoubi, pbc-rational-category; no Karoubi completion) together with prop-weil-pbc-scalar-extension gives the rational equation the parent's Step 5 needs. augmentation-counit-matching states that (b^int)^{-1} is the finite datum, which matches the datum's direction F^p I to I F^s. Duplicate search with rg -L: the only other hits, common-stage-comparison-descent and mixed-pullback-transformation, take this equation as hypothesis data and do not state it. Sources checked: Stacks 0941 lemma-derived-limit-is-ok (statement and proof) and the final sentence of the blueprint main-20261015 def-fd-trace-function. The six declared tool_uses are generic and accepted. Edge cases tested: E=L, h=id, zero complexes, empty scheme, ramified extension."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdScalarRoosComparisonIntertwining",
+  "declaration": "WeilConjectures.fdScalarRoosComparisonIntertwining",
+  "declarations": [
+   "WeilConjectures.fdScalarRoosTransport",
+   "WeilConjectures.fdScalarRoosIntegralIntertwining",
+   "WeilConjectures.fdScalarRoosComparisonIntertwining"
+  ],
+  "file": "lean/Sheaf/Paper/FdScalarRoosComparisonIntertwining.lean",
+  "statement": "theorem fdScalarRoosComparisonIntertwining (E₀ L₀ : Padic.FiniteCoefficientFields l Ω) (a : E₀ ≤ L₀) {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T] [dU : Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)] [iU : Fact (∀ x : U, IsUnit (l : U.presheaf.stalk x))] [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [iT : Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))] (CU : FdCoefficientComparison l Ω U) (CT : FdCoefficientComparison l Ω T) (h : U ≅ T) (bE : FdCommonStrictTowerModels l (pbcFiniteField.{u} l Ω E₀) h) (bL : FdCommonStrictTowerModels l (pbcFiniteField.{u} l Ω L₀) h) : ∃ (dE : FdPullbackComparison l Ω CU CT h E₀) (dL : FdPullbackComparison l Ω CU CT h L₀), (∀ K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E₀) T, HEq (dE.integral.inv.app K).hom (bE.actual_ambient.hom.app K)) ∧ (∀ K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω L₀) T, HEq (dL.integral.inv.app K).hom (bL.actual_ambient.hom.app K)) ∧ (∀ K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E₀) T, HEq (dE.rational.inv.app ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E₀) T).obj K)) ((pbcStageLocalization l Ω U E₀).map (bE.integral.hom.app K))) ∧ (∀ K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω L₀) T, HEq (dL.rational.inv.app ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω L₀) T).obj K)) ((pbcStageLocalization l Ω U L₀).map (bL.integral.hom.app K))) ∧ ∀ K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E₀, ∃ (KE : sfRationalConstructibleCategory l (pbcFiniteField.{u} l Ω E₀) T) (KL : sfRationalConstructibleCategory l (pbcFiniteField.{u} l Ω L₀) T), HEq KE K ∧ HEq KL (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T).T a).obj K) ∧ ∃ (bEr : (CU.family.Φ E₀).obj ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E₀) h.hom).obj K) ≅ ((pbcQbarPullFamily l Ω h.hom).Φ E₀).obj ((CT.family.Φ E₀).obj K)) (bLr : (CU.family.Φ L₀).obj ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L₀) h.hom).obj (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T).T a).obj K)) ≅ ((pbcQbarPullFamily l Ω h.hom).Φ L₀).obj ((CT.family.Φ L₀).obj (((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T).T a).obj K))), HEq bEr.hom (dE.rational.inv.app KE) ∧ HEq bLr.hom (dL.rational.inv.app KL) ∧ (CU.family.Φ L₀).map (commonStagePullbackComparison l Ω h.hom ⟨E₀, K⟩ L₀ a).hom ≫ bLr.hom ≫ ((pbcQbarPullFamily l Ω h.hom).Φ L₀).map ((CT.family.β a).inv.app K) = (CU.family.β a).inv.app ((rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E₀) h.hom).obj K) ≫ ((pbcScalarSystem l Ω U dU.out iU.out).T a).map bEr.hom ≫ ((pbcQbarPullFamily l Ω h.hom).β a).hom.app ((CT.family.Φ E₀).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Three clauses: normalized finite-free Roos transport with the whole-tower counit; ordinary and completion-conjugated integral squares; the raw rational square and identification of its inverse with the normalized finite datum. HEq only inserts the recorded finite-functor/object presentations; all b components are tied to localized integral b."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f77363a02",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Re-delivery after the d38f H2 RETURN. The Lean module is byte-identical (sha256 76a9f20d…) to the version whose mathematics was checked: 3 sorries, Roos transport, integral squares, rational square, dE/dL pinned to b. Item vs live: only stmt_deps (additions only) and lean change. The theorem stmt_deps lem-fd-pullback-common-strict-tower-models and lem-trf-integral-pullback-comparison-realization are replaced by their on-base def owners def-fd-common-strict-tower-models and def-sf-integral-comparison-system-data. New existing:true node def-fd-scalar-pullback-realization-data owns fdScalarTower, fdScalarConstantSquare, fdScalarLimitComparison, fdScalarTransportComplex, FdScalarCoefficientTransport and fdScalarActualPbc. All six are present in the live module and match the node statement (adjunct of Ĉ(ε)∘σ⁻¹; four-factor PBC composite). The statement field is verbatim, its stmt_deps are live, no SGA, no other owner node. report.md has the Worker report and Second reading sections. Advisory only: base-era uses of non-stmt_dep owner declarations (scalarPullbackOrdinary/scalarCompletionIso, coefficientConstantTowerLimit, integralComparisonConstantTower, sfIntegralConstructibleCategory). No file changed, no compile."
+ }
+}

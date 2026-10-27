@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-henselian-unavoidable-component-valuation-section",
+ "kind": "statement",
+ "title": "Absolute valuation sections through unavoidable geometric generic components",
+ "statement": "Let $R$ be a henselian discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-henselian-terminology], $K=\\operatorname{Frac}R$, $S=\\operatorname{Spec}R$, with generic point $\\eta$ and closed point $s$ [def-weil-affine-spectrum]. Fix an algebraic closure $\\Omega/K$ [def-weil-algebraic-closure], and let $B\\subseteq\\Omega$ be the integral closure of $R$ [def-weil-pbc-integral-closure]. Let $X$ be an fpqc sheaf of sets on $S$-schemes, meaning a contravariant functor satisfying the covering equalizer condition [def-weil-pbc-fpqc-covering]. Suppose some fpqc $T\\to S$ makes $X_T$ a separated flat scheme of finite presentation over $T$ [def-pc-representable-functor, def-weil-flat-morphism, def-sbc-locally-finite-presentation]; separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $X_\\eta$ and $X_s$ are represented by schemes of finite type over their fields [def-weil-finite-type-morphism]. Let $C$ be a connected component of $X_\\eta$ [def-weil-connected-scheme]. Assume $C$ is unavoidable in the following precise sense: every open subfunctor $U\\subseteq X$ with $U_s=X_s$ and $U_\\eta$ a union of connected components of $X_\\eta$ contains $C$ in its generic fibre. Here open means that inverse image on each scheme test is represented by an open subscheme [def-weil-open-immersion, def-pc-subfunctor]. Then $B$ is a local valuation ring with fraction field $\\Omega$ (for every $a\\in\\Omega^\\times$, either $a$ or $a^{-1}$ belongs to $B$). For each connected component $D$ of $C\\times_K\\Omega$ [def-pc-fibre-product] there is a section $x\\in X(\\operatorname{Spec}B)$ whose restriction to $\\operatorname{Spec}\\Omega$ lies in $D$. Its closed value lies in $X_s$. No group law or smoothness on $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X, supplies finite generic quasi-sections after a component meets the closed fibre. Agent auxiliary statement combining this with Anantharaman 4.2.1 finite-extension schematic models (printed pp.55-56) and uniqueness of the extended valuation for a henselian DVR; supports the corrected strict-local product argument following 4.2.4, not a claim made verbatim in that paper."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-pc-subfunctor",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The integral-closure lemma applied to $R\\subset K\\subset\\Omega$ makes $B$ a domain integral over $R$, integrally closed in $\\Omega$, with fraction field $\\Omega$. Its only idempotents are $0,1$: $e(e-1)=0$ in a domain. The henselian-permanence lemma therefore makes $B$ henselian local and $R\\to B$ local. In particular its closed point lies over $s$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "lem-trf-integral-component-henselian-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092X, lemma-integral-over-henselian; integral closure and its fraction field as in Algebra Tags 00GO, 0308."
+   }
+  },
+  {
+   "text": "For every finite subextension $E/K$ of $\\Omega/K$, denote the integral closure of $R$ in $E$ by $A_E$. The integral-closure lemma gives its fraction field $E$ and normality. The finite-extension Dedekind lemma makes $A_E$ Noetherian of dimension one. Henselian permanence makes this domain local, with $R\\to A_E$ local; hence the normal-local-dimension-one criterion makes $A_E$ a DVR. Here a DVR is Noetherian because all its ideals are principal, and has dimension one by the DVR equivalences, so all hypotheses of the Dedekind lemma hold. These conclusions apply also to an abstract finite extension after choosing a $K$-embedding into $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-trf-integral-component-henselian-permanence",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 09IG, lemma-integral-closure-Dedekind, and 00PD, lemma-characterize-dvr; More Algebra 092X."
+   }
+  },
+  {
+   "text": "For $a\\in\\Omega^\\times$, $E=K(a)$ is finite because $a$ is algebraic. In the DVR $A_E$, write $a=b/c$ with $b,c\\ne0$. Writing each as a unit times a power of a uniformizer gives $a=u t^n$ with $n\\in\\mathbf Z$. If $n\\ge0$ then $a\\in A_E$; otherwise $a^{-1}\\in A_E$. Since $A_E\\subseteq B$, this proves the displayed valuation-ring condition. Together with step 1 it proves the entire ring clause.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, uniformizer-power characterization; the fraction comparison is elementary."
+   }
+  },
+  {
+   "text": "Apply the finite-normalization model lemma to the given fpqc presentation of $X$. Its base $R$ is Noetherian of dimension one as in step 2. It is normal: if a fraction $a$ has negative uniformizer exponent, then $a^{-1}$ belongs to the maximal ideal; dividing a monic integral equation of degree $d$ by $a^d$ would give $1$ plus an element of that ideal equal to zero. Thus every integral fraction has nonnegative exponent and belongs to $R$. Obtain a finite extension $L/K$ and a flat separated scheme $Y$ of finite presentation representing $X_{\\operatorname{Spec}A_L}$, with $\\operatorname{Spec}A_L\\to S$ fpqc. Embed $L$ into $\\Omega$ by the algebraic-extension embedding lemma. Step 2 makes $A=A_L$ a henselian DVR with fraction field $L$. Put $S'=\\operatorname{Spec}A$, with closed point $s'$. Finite presentation implies finite type from its affine presentations, so $Y$ is Noetherian by the finite-type-over-Noetherian lemma. No finiteness of $A$ as an $R$-module is used.",
+   "uses": [
+    "lem-sfb-fpqc-finite-presentation-normalization-model",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Anantharaman, Lemma 4.2.1, printed pp.55-56 (primary Numdam scan); Stacks Tag 01T1 for the Noetherian finite-type input."
+   }
+  },
+  {
+   "text": "The finite-type $K$-scheme $X_\\eta$ is Noetherian and has finitely many irreducible components, which cover it. Partition these finitely many components by the equivalence relation generated by nonempty intersection. Each class has connected union; different classes give disjoint closed unions. Thus those unions are exactly the connected components, and each is clopen. In particular $C$ is a nonempty clopen finite-type $K$-scheme, with finitely many irreducible components. Its pullback $C_L$ is clopen in $Y_L=X_\\eta\\times_K L$ and is a closed subscheme there. The immersion $j:C_L\\to Y$ is quasi-compact: for each affine $V=\\operatorname{Spec}H\\subset Y$, $V_L=D(\\pi)=\\operatorname{Spec}H[1/\\pi]$ for a uniformizer $\\pi\\in R$, and $j^{-1}(V)$ is closed in that affine. This argument does not put any Noetherian hypothesis on the original fpqc chart.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Finite irreducible-component decomposition; Stacks Properties 01OY and Morphisms 01R8 for the subsequent quasi-compact image."
+   }
+  },
+  {
+   "text": "Let $Z\\hookrightarrow Y$ be the scheme-theoretic image of $j$. The quasi-compact image interface gives $|Z|=\\overline{|C_L|}$ and the factorization through $Z$. Formation of this image commutes with flat base change. In particular $Z_L=C_L$, since restriction to the generic fibre is flat and the image of a closed immersion is that closed subscheme. On $S''=S'\\times_S S'$ the two pullbacks of $Y$ represent the same sheaf $X_{S''}$, and the two pullbacks of $C_L$ both identify with $C\\times_S S''$. The projections $S''\\to S'$ are flat, being base changes of the fpqc map $S'\\to S$. Consequently the two pullbacks of $Z$ agree as closed subschemes under that identification. The complements $V=Y\\setminus |Z|$ therefore agree on the overlap as well.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sfb-scheme-image-flat-base-change",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R8, lemma-quasi-compact-scheme-theoretic-image, and 081I, lemma-flat-base-change-scheme-theoretic-image."
+   }
+  },
+  {
+   "text": "These compatible complements give an open subfunctor $U\\subset X$. Explicitly, for a scheme test $H\\to X$, use the fpqc cover $H'=H\\times_S S'\\to H$ and the map $H'\\to Y$. The inverse image of $V$ is an open of $H'$ whose two pullbacks agree. Open-subscheme fpqc descent gives a unique open $H_U\\subset H$. Uniqueness makes this construction compatible with every change of test scheme, so it defines the required open subfunctor. The fpqc sheaf equalizer condition identifies its pullback to $S'$ with $V$. By $Z_L=C_L$, its generic fibre is $X_\\eta\\setminus C$. If $Z_{s'}$ were empty, $V_{s'}=Y_{s'}$ and fpqc descent would give $U_s=X_s$. That would violate unavoidability, because its generic fibre is the union of all connected components other than the nonempty component $C$. Hence $Z_{s'}\\ne\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0, lemma-open-fpqc-covering; the application of unavoidability is the argument of this item."
+   }
+  },
+  {
+   "text": "The Noetherian scheme $C_L$ has finitely many irreducible components $F_1,\\ldots,F_n$, covering it. Thus $|Z|=\\bigcup_i\\overline{F_i}$, a finite union of closures inside $Y$. Some $\\overline{F_i}$ meets $Y_{s'}$. Give that closed subset its reduced induced structure $W$. It is nonempty, reduced and irreducible, hence integral. It dominates $S'$ because $F_i\\subset Y_L$ is nonempty. It is finite type over $A$: on a finite affine cover of $Y$, its coordinate rings are quotients of the finite-type coordinate algebras of $Y$. Its generic fibre is the reduced structure on $F_i$, in particular is nonempty and maps into the open subscheme $C_L\\subset Y_L$. The image containment here gives factorization through an open, without any assertion of factorization through a closed subscheme from point containment alone. Also $W_{s'}\\ne\\varnothing$ by construction.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme; the finite union of closures is a topological argument."
+   }
+  },
+  {
+   "text": "Apply dense-generic trait selection over the DVR $A$ to the integral finite-type dominant scheme $W$, its nonempty special fibre, and the nonempty open $W_L\\subset W_L$. It supplies a DVR $V$, a local injection $A\\to V$, finite fraction-field extension $E/L$, and an $S'$-map $\\operatorname{Spec}V\\to W\\to Y$. Its generic restriction lies in $C_L$, and its closed point is in $Y_{s'}$. Extend the fixed embedding $L\\hookrightarrow\\Omega$ to $E\\hookrightarrow\\Omega$ by the algebraic-extension embedding lemma. Since $E/L$ and $L/K$ are finite, $E/K$ is finite (products of finite spanning sets span the tower).",
+   "uses": [
+    "lem-sfb-dense-generic-trait-selection",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X, and Algebra 00PH as packaged in dense-generic trait selection; Fields 09GU."
+   }
+  },
+  {
+   "text": "Under that embedding, $V$ equals $A_E$. Indeed every element of $A_E$ is integral over $R\\subset V$, so belongs to $V$: otherwise its inverse is in the maximal ideal of $V$ by the uniformizer-power formula, and division of a monic integral equation by its leading power gives $1$ plus an element of that maximal ideal equal to zero. For a uniformizer $t$ of $A_E$, write $\\pi=u t^e$ in $A_E$ for the uniformizer $\\pi\\in R$. Since $R\\to A_E$ is local, $e>0$. Since $R\\to A\\to V$ is local, $\\pi$ is not a unit of $V$; $u$ is a unit there, so $t$ is not a unit there. Every $x\\in E^\\times$ has form $v t^n$ with $v\\in A_E^\\times$ and $n\\in\\mathbf Z$, by writing its numerator and denominator as uniformizer powers. If $x\\in V$ and $n<0$, then $t^{-1}=v^{-1}x t^{-n-1}\\in V$, a contradiction. Thus $V\\subset A_E$, proving equality. Pull the section of $X$ just obtained back along $\\operatorname{Spec}B\\to\\operatorname{Spec}A_E=\\operatorname{Spec}V$ to obtain $x_0\\in X(B)$. Its generic value $z_0\\in C_\\Omega$ lies in a connected component $D_0$. The underlying point $p\\in C$ has residue field $F=\\kappa(p)$ embedded in $E$, so $F/K$ is finite.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr; elementary comparison of two DVR overrings with the same fraction field."
+   }
+  },
+  {
+   "text": "Fix the prescribed component $D\\subset C_\\Omega$. By the geometric-component-surjectivity lemma applied to the nonempty connected finite-type $K$-scheme $C$, $D\\to C$ is surjective: apply the lemma to $(C_\\Omega)_{\\mathrm{red}}$, whose reduction map is the identity on underlying spaces. Step 5 supplies its finite-irreducible-component hypothesis. There is consequently a point $z\\in D$ over $p$. The fibre above $p$ is $\\operatorname{Spec}(F\\otimes_K\\Omega)$ by the affine fibre-product lemma. This algebra is finite-dimensional over $\\Omega$; its residue fields are finite over $\\Omega$ (a finite-dimensional domain is a field), and so are $\\Omega$ by algebraic closedness. Hence $z$ is an $\\Omega$-point, specified by an embedding $\\beta:F\\to\\Omega$. Write $\\alpha:F\\to\\Omega$ for the embedding specifying $z_0$.",
+   "uses": [
+    "lem-sfb-geometric-connected-component-surjective",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7, proposition-units-general, first paragraph of proof; Tags 04KZ and 038H for its component input; Schemes 01I4."
+   }
+  },
+  {
+   "text": "View $\\Omega$ as an algebraic extension of $F$ through $\\alpha$. Extend $\\beta$ to a field map $\\tau:\\Omega\\to\\Omega$ using the algebraic-extension embedding lemma. It fixes $K$. Since $\\Omega/K$ is algebraic normal, the normal-embeddings lemma, with the identity embedding as its fixed embedding, says that $\\tau$ is a $K$-automorphism. It satisfies $\\tau\\alpha=\\beta$. Integrality over $R$ is preserved by $\\tau$ and by $\\tau^{-1}$, by applying them to monic equations, so $\\tau(B)=B$. Precompose $x_0:\\operatorname{Spec}B\\to X$ with $\\operatorname{Spec}(\\tau|_B)$. On the generic fibre the resulting $\\Omega$-point corresponds to $\\tau\\alpha=\\beta$, hence is exactly $z$ and lies in $D$. This is the desired $x\\in X(B)$. The unique closed point of $\\operatorname{Spec}B$ lies above $s$ by step 1, so the closed value is in $X_s$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-sfb-normal-embeddings-automorphism-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GU, lemma-map-into-algebraic-closure, and 0BR4, lemma-normal-embeddings-differ-by-aut; monic-equation invariance and functoriality finish the argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sfb-fpqc-finite-presentation-normalization-model",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-closed-immersion",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sfb-scheme-image-flat-base-change",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "lem-sfb-dense-generic-trait-selection",
+  "lem-sfb-geometric-connected-component-surjective",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-normal-embeddings-automorphism-transitive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU plus the finite-normalization model from Anantharaman 4.2.1 (printed pp.55-56), henselian integral permanence 092X, and the explicit closure-descent and field-embedding arguments below. The item is an auxiliary synthesis, not a verbatim theorem of Anantharaman."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a henselian discrete valuation ring generic components of two flat finite presentation schemes that specialize to the closed fibre specialize simultaneously in their fibre product",
+   "results": "{\"t\": \"2026-10-24T14:26:12Z\", \"tool\": \"leanfinder\", \"query\": \"Over a henselian discrete valuation ring generic components of two flat finite presentation schemes that specialize to the closed fibre specialize simultaneously in their fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\"], \"digest\": \"1f730127025da336\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian valuation ring simultaneous specialization of geometric components of a product of flat schemes",
+   "results": "{\"t\": \"2026-10-24T14:26:12Z\", \"tool\": \"leansearch\", \"query\": \"Henselian valuation ring simultaneous specialization of geometric components of a product of flat schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianRing.mk\", \"HenselianLocalRing\", \"HenselianLocalRing.mk\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing\", \"instHenselianRingMaximalIdeal\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\"], \"digest\": \"b788e270ce1029ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Henselian\", \"Specializes\"",
+   "results": "{\"t\": \"2026-10-24T14:26:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Henselian\\\", \\\"Specializes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*speciali|speciali.*henselian|component.*speciali",
+   "results": "{\"t\": \"2026-10-24T14:26:13Z\", \"tool\": \"grep\", \"query\": \"henselian.*speciali|speciali.*henselian|component.*speciali\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"e88583a01131acae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a henselian discrete valuation ring each unavoidable geometric generic connected component of a finitely presented fpqc scheme form contains the generic value of a section over the absolute integral closure",
+   "results": "{\"t\": \"2026-10-24T14:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a henselian discrete valuation ring each unavoidable geometric generic connected component of a finitely presented fpqc scheme form contains the generic value of a section over the absolute integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"HenselianLocalRing.TFAE\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.ValuativeCommSq.field\"], \"digest\": \"30e0ee111d016c45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian valuation unique extension algebraic closure generic components integral sections of fpqc forms",
+   "results": "{\"t\": \"2026-10-24T14:35:41Z\", \"tool\": \"leansearch\", \"query\": \"Henselian valuation unique extension algebraic closure generic components integral sections of fpqc forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.ofComapInteger\", \"HenselianLocalRing.TFAE\", \"Valuation.HasExtension.mk\", \"Valuation.HasExtension\", \"PadicComplex.valuation_extends\", \"algebraicClosure.isIntegralClosure\", \"mem_algebraicClosure_iff'\", \"PadicAlgCl.valued\"], \"digest\": \"de0b7fa816c87d1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*section|section.*integralClosure|henselian.*[Cc]omponent",
+   "results": "{\"t\": \"2026-10-24T14:35:42Z\", \"tool\": \"grep\", \"query\": \"integralClosure.*section|section.*integralClosure|henselian.*[Cc]omponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsIntegralClosure\"",
+   "results": "{\"t\": \"2026-10-24T14:39:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"IsIntegralClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; morphism-property descent, Zariski local representability, general valuative criteria and valuation extensions do not give this fpqc effectivity or component-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "unavoidable|henselian.*component|component.*henselian",
+   "results": "{\"t\": \"2026-10-24T15:42:37Z\", \"tool\": \"grep\", \"query\": \"unavoidable|henselian.*component|component.*henselian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; generic point interfaces, general valuative squares, and properness results do not give sections of arbitrary finitely presented fpqc forms through unavoidable components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unavoidable geometric generic component of an fpqc sheaf over a henselian trait admits a section over the absolute integral closure",
+   "results": "{\"t\": \"2026-10-24T15:42:38Z\", \"tool\": \"leansearch\", \"query\": \"Unavoidable geometric generic component of an fpqc sheaf over a henselian trait admits a section over the absolute integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"genericPoints.ofComponent\", \"genericPoints.component\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"genericPoints.isGenericPoint_ofComponent\", \"genericPoints.isGenericPoint\", \"genericPoints\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"74bf65ec55a29554\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; generic point interfaces, general valuative squares, and properness results do not give sections of arbitrary finitely presented fpqc forms through unavoidable components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"ValuationRing\"",
+   "results": "{\"t\": \"2026-10-24T15:42:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"ValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; generic point interfaces, general valuative squares, and properness results do not give sections of arbitrary finitely presented fpqc forms through unavoidable components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian DVR absolute integral closure has a section of a finitely presented fpqc scheme form through every unavoidable geometric generic component",
+   "results": "{\"t\": \"2026-10-24T15:42:39Z\", \"tool\": \"leanfinder\", \"query\": \"A henselian DVR absolute integral closure has a section of a finitely presented fpqc scheme form through every unavoidable geometric generic component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.ZariskisMainProperty\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"748cabd4ab90540e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; generic point interfaces, general valuative squares, and properness results do not give sections of arbitrary finitely presented fpqc forms through unavoidable components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-component-minimal-envelope",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Anantharaman 4.2 Step 5 after Lemma 4.2.4: supply simultaneous specialization, through a common absolute valuation ring, for the corrected neutral-product assertion over a strictly henselian trait.",
+   "via": [
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-henselian-unavoidable-component-valuation-section",
+  "worker": "stage1",
+  "summary": "Q11 replaces the interrupted draft with a twelve-step proof using existing nodes only. Henselian permanence and finite normalization prove the valuation clause. Flat-base-change schematic images and fpqc descent of their complements turn unavoidability into a component closure meeting the special fibre on a Noetherian normalized model. Trait selection gives a finite-fraction DVR section, explicitly identified with the normalization inside B. Component surjectivity and extension of field embeddings move its generic value into any prescribed geometric component. No statement hypothesis changes and no new nodes.",
+  "blueprint": "Realizes the inherited from.place: the common absolute valuation ring supplies prescribed geometric generic sections for simultaneous specialization in the neutral-product assertion after Anantharaman 4.2.4. The latest blueprint and imported blueprint search have no identical unavoidable-component statement; inherited full via chain and same_as=[] are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "why": "Integral closure is normal and has the stated algebraic fraction field; general algebra needed before the DVR criterion."
+   },
+   {
+    "node": "lem-trf-integral-component-henselian-permanence",
+    "why": "Henselian integral domains are local, both for the finite normalizations and the absolute normalization."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Krull-Akizuki Noetherian dimension-one conclusion for finite normalization without excellence."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Applies only after normality, Noetherianity, locality and dimension one have been established."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Explicit fraction and local-overring comparison for DVRs."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "why": "Embeds finite field extensions into the fixed closure and extends a residue-field embedding."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Ensures finite component arguments are confined to the normalized finite-presentation scheme."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Finiteness of irreducible components for the clopen and finite-closure arguments."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "The finite irreducible components cover each scheme whose closure is used."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "The quasi-compact schematic image has underlying topological closure."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Descends compatible complements to opens on each scheme test."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the actual integral reduced component closure."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies the fibre over the finite-residue-field point with its tensor-product spectrum."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-irreducible-components-cover",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-65d06e144",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-65d06e144 (reviewer sub-agent of L); spot-checked: I read all 12 steps in full; the statement is unchanged, there are no new nodes and proof_deps equals the union of uses. Steps 1-3 prove B is a valuation ring with fraction field Omega: henselian permanence (092X, hypotheses met because B is a domain) and Krull-Akizuki (09IG) make each A_E local Dedekind, the normal-dim1 criterion makes it a DVR, and writing a = u t^n settles the valuation condition. Step 4: the hypotheses of the finite-normalization model hold, normality of R is proved and Y is Noetherian because finite presentation includes quasi-compactness. Steps 5-7: C is clopen and j: C_L -> Y is quasi-compact via D(pi). The scheme image Z has Z_L = C_L by 081I (checked at morphisms.tex:4965). Since A[1/pi] = L, C_L = C x_S S', so its two pullbacks to S'' coincide as subfunctors and 081I gives a compatible Z; the complement descends by 03N0, and if Z_{s'} were empty this U would violate unavoidability, since Spec A/pi has only s'. Step 8: the reduced closure W of one component is integral and finite type with W_L = F_i inside C_L. Steps 9-10: trait selection hypotheses all hold, and V = A_E by the integral-closedness and uniformizer argument. Steps 11-12: component surjectivity gives an Omega-point beta in D over p; 09GU and 0BR4 give an automorphism tau with tau alpha = beta preserving B, and the direction of composition checks out. Edge cases: Spec R plus Spec K, empty special fibre, inseparable L/K, no excellence, non-reduced X. Batch-5 flags are all generic and accepted: henselian permanence is pure 092X algebra, and the normalization-model and trait-selection nodes reach sec-trace-formula only through the Mathlib leaf saying a constructible set stable under generalization is open; neither is part of the trace formula or Poincare duality. I accept all 13 declared tool uses as generic algebra and descent black boxes. No duplicate exists ('unavoidable' appears only in the item and its parent) and no SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianUnavoidableComponentValuationSection",
+  "declaration": "AlgebraicGeometry.henselian_unavoidable_component_valuation_section",
+  "declarations": [
+   "AlgebraicGeometry.integralClosureGenericTest",
+   "AlgebraicGeometry.henselian_unavoidable_component_valuation_section"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianUnavoidableComponentValuationSection.lean",
+  "statement": "theorem henselian_unavoidable_component_valuation_section (R K Ω : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [HenselianLocalRing R] [Field K] [Algebra R K] [IsFractionRing R K] [Field Ω] [Algebra K Ω] [Algebra R Ω] [IsScalarTower R K Ω] [IsAlgClosure K Ω] (X : (Over (Spec (CommRingCat.of R)))ᵒᵖ ⥤ Type (max u v)) (hX : Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (CommRingCat.of R))) X) (hchart : ∃ (T : Scheme.{u}) (t : T ⟶ Spec (CommRingCat.of R)), Presieve.singleton t ∈ Scheme.fpqcPrecoverage (Spec (CommRingCat.of R)) ∧ ∃ Y : Over T, Nonempty (((Over.map t).op ⋙ X).RepresentableBy Y) ∧ IsSeparated Y.hom ∧ Flat Y.hom ∧ LocallyOfFinitePresentation Y.hom ∧ QuasiCompact Y.hom ∧ QuasiSeparated Y.hom) (Xη : Over (Spec (CommRingCat.of K))) (eη : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap R K)))).op ⋙ X).RepresentableBy Xη) (Xs : Over (Spec (CommRingCat.of (IsLocalRing.ResidueField R)))) (es : ((Over.map (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).op ⋙ X).RepresentableBy Xs) (hη : LocallyOfFiniteType Xη.hom ∧ QuasiCompact Xη.hom) (hs : LocallyOfFiniteType Xs.hom ∧ QuasiCompact Xs.hom) (C : Xη.left.Opens) (hC : ∃ p : Xη.left, (C : Set Xη.left) = connectedComponent p) (hunavoidable : ∀ U : Subfunctor X, (∀ (H : Over (Spec (CommRingCat.of R))) (x : X.obj (op H)), ∃ W : H.left.Opens, ∀ (Z : Over (Spec (CommRingCat.of R))) (f : Z ⟶ H), X.map f.op x ∈ U.obj (op Z) ↔ Set.range f.left ⊆ (W : Set H.left)) → (∀ H : Over (Spec (CommRingCat.of (IsLocalRing.ResidueField R))), U.obj (op ((Over.map (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).obj H)) = Set.univ) → (∃ W : Xη.left.Opens, (∀ p ∈ W, connectedComponent p ⊆ (W : Set Xη.left)) ∧ ∀ (H : Over (Spec (CommRingCat.of K))) (f : H ⟶ Xη), eη.homEquiv f ∈ U.obj (op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj H)) ↔ Set.range f.left ⊆ (W : Set Xη.left)) → ∀ (H : Over (Spec (CommRingCat.of K))) (f : H ⟶ Xη), Set.range f.left ⊆ (C : Set Xη.left) → eη.homEquiv f ∈ U.obj (op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj H))) : ∃ (_ : IsLocalRing (integralClosure R Ω)), IsFractionRing (integralClosure R Ω) Ω ∧ (∀ a : Ω, a ≠ 0 → a ∈ integralClosure R Ω ∨ a⁻¹ ∈ integralClosure R Ω) ∧ ∀ (D : Set (pullback (C := Scheme.{u}) (C.ι ≫ Xη.hom) (Spec.map (CommRingCat.ofHom (algebraMap K Ω))))) (_ : ∃ p : pullback (C := Scheme.{u}) (C.ι ≫ Xη.hom) (Spec.map (CommRingCat.ofHom (algebraMap K Ω))), D = connectedComponent p), ∃ x : X.obj (op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R Ω)))))), ∃ (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ⟶ Xη) (z : Over.mk (𝟙 (Spec (CommRingCat.of Ω))) ⟶ Over.mk (pullback.snd (C.ι ≫ Xη.hom) (Spec.map (CommRingCat.ofHom (algebraMap K Ω))))), z.left ≫ pullback.fst (C.ι ≫ Xη.hom) (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ≫ C.ι = g.left ∧ eη.homEquiv g = X.map (integralClosureGenericTest R K Ω).op x ∧ z.left (IsLocalRing.closedPoint Ω) ∈ D ∧ (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R Ω)))) (IsLocalRing.closedPoint (integralClosure R Ω)) = IsLocalRing.closedPoint R",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55304ea3c",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Lean matches the node exactly. Hypotheses: henselian DVR R, K=Frac R, IsAlgClosure Ω, B=integralClosure R Ω; fpqc sheaf X with a separated, flat, finitely presented chart (IsSeparated+Flat+LOFP+QC+QS); fibres represented and of finite type; C an open connected component (clopen because X_η is Noetherian); unavoidability over every Subfunctor (open on every test, U_s=X_s, U_η a component-saturated open, conclusion that U contains every generic test through C). Conclusion: IsLocalRing ∧ IsFractionRing ∧ valuation condition; for every component D of C×_KΩ a section x over Spec B whose generic point g is pinned by eη.homEquiv g = X.map test x and whose lift z lands in D; closed point of B maps to closed point of R. RepresentableBy keeps the functor universe separate, so Type(max u v) forces nothing. Helper integralClosureGenericTest is canonical data. No existing set-valued open-subfunctor notion, so the inline condition is right. lean.statement equals the file signature verbatim; node differs from side-live only in lean; stmt_dep records match. Edge cases checked: C nonempty so the last clause is never vacuous; empty special fibre makes the hypothesis unsatisfiable; Spec R ⊔ Spec K; non-reduced, inseparable, any characteristic. Sole fault H11: the Second reading section was a self-check; fixes/<item>.report.md keeps the Worker report verbatim and adds a real clause-by-clause second reading. No Lean changed, nothing compiled."
+ }
+}

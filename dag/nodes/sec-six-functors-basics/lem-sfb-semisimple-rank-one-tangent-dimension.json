@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-semisimple-rank-one-tangent-dimension",
+ "kind": "statement",
+ "title": "Torus and tangent dimensions of a semisimple rank-one group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. All subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Assume that $H$ is semisimple: it has no nontrivial smooth connected solvable normal subgroup, where solvable means that successive scheme-theoretic commutator subgroups eventually become trivial. Let $S\\subseteq H$ be a maximal torus, meaning a subgroup isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$ and maximal among such subgroups, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Assume that the Krull dimension of $S$ is one [def-kun-topological-krull-dimension]. There exists an isomorphism of group schemes $\\lambda:\\mathbf G_m\\xrightarrow{\\sim}S$, and the tangent space at the identity has dimension\n$$\\dim_F T_{H/F,e}=3.$$\nHere the tangent space is the vector space of dual-number points based at the identity [def-sc-scheme-tangent-space]. No restriction on the characteristic of $F$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 20.20, first paragraph of proof, printed p.415: the semisimple rank-one group has dimension 3, and choose an isomorphism from G_m onto its maximal torus. The numerical dimension assertion uses Theorem 20.16 (a) implies (d), pp.412--413. Tangent dimension equals dimension for a smooth group."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-kun-topological-krull-dimension",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof": [
+  {
+   "text": "The subgroup $S$ is nontrivial because $\\dim S=1$. Hence $H$ is not solvable: otherwise $H$ itself would be a nontrivial smooth connected solvable normal subgroup. Let $U$ be a smooth connected normal unipotent subgroup of $H$. By [lem-sfb-smooth-unipotent-solvable] it has a series $U=U_0\\supseteq\\cdots\\supseteq U_n=1$ of closed subgroups, each normal in its predecessor with commutative quotient, so every commutator of $U_a(A)$ lies in $U_{a+1}(A)$. The derived subgroups $D^aU$ exist and are smooth connected by [lem-sfb-smooth-connected-derived-subgroup], and $D^aU\\subseteq U_a$ by induction: the commutator morphism of $D^aU$ is the restriction of that of $U_a$, so it factors through the closed subgroup $D^aU\\cap U_{a+1}$, and minimality gives $D^{a+1}U\\subseteq U_{a+1}$. Hence $D^nU=1$: $U$ is solvable in the derived-series sense of the statement, and is therefore trivial. Thus $H$ is reductive. By [lem-sfb-reductive-torus-self-centralizer], $C_H(S)=S$ scheme-theoretically. The centralizer is smooth by [lem-sfb-torus-centralizer-smooth-connected], so $S$ is smooth as well. The algebraic-closure hypotheses in these results hold with base field $F$ itself.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 20.20, first proof paragraph, p.415; reductivity and centralizers: Proposition 17.61(a), p.372; Proposition 14.21, pp.284--285."
+   }
+  },
+  {
+   "text": "Choose a group-scheme isomorphism $S\\simeq\\mathbf G_m^r$ provided by the definition of torus in the statement. The tangent vectors at its identity are exactly the tuples $(1+a_i\\epsilon)_{i=1}^r$, $a_i\\in F$, by [def-sc-gm-ga, def-sc-scheme-tangent-space]. Their vector operations are coordinate addition and scalar multiplication: $(1+a\\epsilon)(1+b\\epsilon)=1+(a+b)\\epsilon$ and substitution $\\epsilon\\mapsto c\\epsilon$ sends $a$ to $ca$. Thus the coordinate vectors form a basis and $\\dim_F T_{S/F,e}=r$, including $r=0$. Since $S$ is smooth, [lem-sfb-group-tangent-dimension-smoothness] gives $r=\\dim S=1$. Inverting the chosen isomorphism now gives $\\lambda:\\mathbf G_m\\xrightarrow{\\sim}S$.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-sc-scheme-tangent-space",
+    "lem-sfb-group-tangent-dimension-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 20.20, p.415, choice of lambda; Proposition 1.37, p.18; explicit dual-number calculation filling the choice of a rank-one torus coordinate."
+   }
+  },
+  {
+   "text": "By [lem-sfb-general-borel-flag-variety], there is a Borel subgroup $B\\supseteq S$, and the Borel variety $X=\\mathcal B(H)$ is smooth, connected, projective and nonempty. Its rational points are the Borels, the action of $H(F)$ is transitive, and the stabilizer of $b_B$ is $B$ on all test algebras. In particular $B\\ne H$, since $H$ is not solvable. The orbit lemma [lem-sfb-smooth-group-orbit-geometry] gives a smooth locally closed orbit $O$ through $b_B$. It contains every closed point of $X$: closed points are rational by [lem-weil-pbc-closed-point-residue-field-base] and $H(F)$ is transitive. By [lem-sc-lft-over-field-jacobson-space], $O$ is dense in $X$. A dense locally closed subset is open; its closed complement has no closed point and hence is empty by the same density statement. Since $X$ and $O$ are reduced smooth schemes, this is equality of schemes. The orbit identification in [lem-sfb-homogeneous-orbit-quotient-geometry] therefore identifies $X$ with $H/B$.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (a) implies (b) implies (c), pp.412--413; Theorem 17.9, p.354, and the variety of Borels, Section 17f; orbit identification: Propositions 7.11--7.12, pp.141--142."
+   }
+  },
+  {
+   "text": "There are at most two Borel subgroups containing $S$. Indeed, [lem-sfb-torus-normalizer-borel-transitivity] says that they are all $nBn^{-1}$ for $n\\in N_H(S)(F)$. In the coordinate $\\lambda$, [lem-sfb-split-torus-hom-matrices] identifies a group endomorphism of $S$ with $t\\mapsto t^m$, $m\\in\\mathbf Z$. An automorphism has $m\\ell=1$ for an inverse exponent $\\ell$, so $m=1$ or $m=-1$. If $n_1,n_2$ induce the same automorphism of $S$, then $n_2^{-1}n_1\\in C_H(S)(F)=S(F)$ by [lem-sfb-reductive-torus-self-centralizer]. Since $S\\subseteq B$, conjugation by this element preserves $B$ on every algebra. Hence $n_1Bn_1^{-1}=n_2Bn_2^{-1}$. Thus the number of these Borels is at most two, in characteristic two as well: the characters $t$ and $t^{-1}$ remain distinct Laurent monomials.",
+   "uses": [
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-split-torus-hom-matrices",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16, (a) implies (b), p.412: faithful Weyl action and transitivity; Theorem 12.9(a), pp.233--234, for characters."
+   }
+  },
+  {
+   "text": "Put $d=\\dim X$. Since $B\\subsetneq H$ are smooth connected closed groups, [lem-sfb-solvable-normal-subgroup-products] gives $\\dim B<\\dim H$. The homogeneous quotient dimension formula [lem-sfb-homogeneous-quotient-krull-dimension] gives $\\dim H=\\dim B+d$, so $d\\geq1$. The fixed points of $S$ on $X$ are precisely the Borels containing $S$ by [lem-sfb-general-borel-flag-variety], so step 4 bounds their number by two. Apply [lem-sfb-proper-homogeneous-torus-fixed-bound] to $H/B=X$, which is proper by step 3: it gives at least $d+1$ such fixed rational points. Therefore $d+1\\leq2$, and $d=1$. Finally [lem-sfb-borel-quotient-proper-geometry] makes $X=H/B$ integral as well as smooth and proper.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-homogeneous-quotient-krull-dimension",
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-proper-homogeneous-torus-fixed-bound",
+    "lem-sfb-borel-quotient-proper-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16, (b) implies (c), p.413, using Corollary 20.12, p.411; quotient dimension: Proposition 5.23, p.104."
+   }
+  },
+  {
+   "text": "The action of $H$ on the smooth proper integral curve $X$ is nontrivial. Otherwise the stabilizer of $b_B$ would be $H$, whereas it is $B\\ne H$ by step 3. Thus [lem-sfb-complete-curve-connected-linear-action] gives $X\\simeq\\mathbf P^1_F$. Transport the action across this isomorphism. The representing automorphism group in [lem-sfb-projective-frames-pgl], with $r=2$, gives a group-scheme homomorphism $f:H\\to\\operatorname{PGL}_{2,F}$: the unit and composition identities of the action give the homomorphism identities. By [lem-sfb-algebraic-group-homomorphism-factorization], its scheme-theoretic kernel $K$ is a closed normal subgroup scheme of finite type. Every point of $K$ acts identically on $X$ after all base changes, so it fixes $b_B$; the stabilizer assertion of [lem-sfb-general-borel-flag-variety] gives $K\\subseteq B$ scheme-theoretically.",
+   "uses": [
+    "lem-sfb-complete-curve-connected-linear-action",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-general-borel-flag-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (c) implies (d), p.413, using Theorem 20.5 and Proposition 20.7, pp.408--410; kernel: Section 5d."
+   }
+  },
+  {
+   "text": "Let $J=(K^0)_{\\mathrm{red}}$. By [lem-sfb-locally-algebraic-group-identity-component], $J$ is smooth and connected and has the same underlying space as $K^0$. Each $h\\in H(F)$ preserves $K$ by conjugation, hence preserves its identity component and its reduced structure. Thus [lem-sfb-smooth-ambient-normality-geometric], with smooth ambient group $H$, makes $J$ normal in $H$ as a subgroup scheme. Also $J\\subseteq K\\subseteq B$ is solvable: for each integer $a\\geq0$, $D^aJ\\subseteq D^aB$ by induction, since the commutator on a subgroup is the restriction of the ambient commutator and the derived subgroup is the smallest closed subgroup containing it. The iterated derived subgroups exist and stay smooth connected by [lem-sfb-smooth-connected-derived-subgroup]. The derived series of $B$ terminates, hence so does that of $J$. Semisimplicity of $H$ now forces $J=1$. Therefore $\\dim K^0=0$. By [lem-sfb-group-neutral-component-translates], there are finitely many components of $K$ and all are isomorphic to $K^0$ by translation. Consequently $\\dim K=0$. This argument does not require $K$ itself to be reduced or smooth.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-smooth-ambient-normality-geometric",
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16 (c) implies (d), p.413, finite-kernel argument specialized to semisimple H; Propositions 1.34--1.39, pp.16--18; derived groups: Propositions 6.18--6.20, pp.129--130."
+   }
+  },
+  {
+   "text": "Let $I\\hookrightarrow\\operatorname{PGL}_{2,F}$ be the closed image in the factorization of $f$. The kernel-image dimension formula [lem-sfb-group-hom-dimension-kernel-image] gives $\\dim H=\\dim I+\\dim K=\\dim I$. The closed inclusion gives $\\dim I\\leq\\dim\\operatorname{PGL}_{2,F}$ directly from chains of irreducible closed subsets [def-kun-topological-krull-dimension]. The group $\\operatorname{PGL}_{2,F}$ of [lem-sfb-projective-frames-pgl] represents the Zariski sheaf quotient of $\\operatorname{GL}_{2,F}$ by scalar units; being a scheme it is an fpqc sheaf, so it also represents the fpqc sheaf quotient and is the group $\\operatorname{PGL}_{2,F}$ of [lem-sfb-projective-matrix-central-cover]. By [lem-sfb-projective-matrix-central-cover] with $r=2$, its dimension is $2^2-1=3$. Thus $\\dim H\\leq3$. If $\\dim H\\leq2$, then [lem-sfb-connected-group-dimension-two-solvable] would make $H$ solvable, contradicting step 1. The dimensions are finite nonnegative integers, so $\\dim H=3$.",
+   "uses": [
+    "lem-sfb-group-hom-dimension-kernel-image",
+    "def-kun-topological-krull-dimension",
+    "lem-sfb-projective-matrix-central-cover",
+    "lem-sfb-connected-group-dimension-two-solvable",
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 20.20, p.415, dimension consequence of Theorem 20.16, p.413; Proposition 5.23, p.104; Corollary 17.27, p.360; PGL dimension from Section 20c."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-tangent-dimension-smoothness] to the given smooth affine finite-type group $H$. Equality holds in its tangent-dimension inequality, so $\\dim_F T_{H/F,e}=\\dim H=3$. Together with the isomorphism $\\lambda$ constructed in step 2, this is exactly the two requested conclusions.",
+   "uses": [
+    "lem-sfb-group-tangent-dimension-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.37, p.18, applied to the dimension computation of Lemma 20.20, p.415."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "def-sc-gm-ga",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-group-tangent-dimension-smoothness",
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-proper-homogeneous-torus-fixed-bound",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-complete-curve-connected-linear-action",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-group-hom-dimension-kernel-image",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-projective-matrix-central-cover",
+  "lem-sfb-connected-group-dimension-two-solvable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.16, pp.412--413, and Lemma 20.20, first proof paragraph, p.415; Proposition 1.37, p.18. The at-most-two fixed-point bound suffices, and Corollary 17.27 supplies the lower dimension bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple algebraic group over an algebraically closed field whose maximal torus has dimension one has dimension three",
+   "results": "{\"t\": \"2026-10-23T22:27:08Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple algebraic group over an algebraically closed field whose maximal torus has dimension one has dimension three\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"LieAlgebra.rank\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieAlgebra.IsSimple.instIsSemisimple\"], \"digest\": \"f578a13ef858e773\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra rank, characteristic-zero root spaces, semisimple rings/modules, and abstract special linear groups do not give the tangent dimension of a semisimple affine group scheme in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\"",
+   "results": "{\"t\": \"2026-10-23T22:27:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSemisimpleRing\", \"instIsSemisimpleRingOfSubsingleton\", \"instIsPrincipalIdealRingOfIsSemisimpleRing\", \"IsSemisimpleModule\", \"instIsSemisimpleRingProd\", \"instIsSemisimpleRingForallOfFinite\", \"IsSemisimpleRing.isSemisimpleModule\", \"instIsSemisimpleModuleOfIsSimpleModule\"], \"digest\": \"79b68d126554816d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra rank, characteristic-zero root spaces, semisimple rings/modules, and abstract special linear groups do not give the tangent dimension of a semisimple affine group scheme in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*rank|rank.*semisimple|rank.one.*dimension|dimension.*rank.one",
+   "results": "{\"t\": \"2026-10-23T22:27:38Z\", \"tool\": \"grep\", \"query\": \"semisimple.*rank|rank.*semisimple|rank.one.*dimension|dimension.*rank.one\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra rank, characteristic-zero root spaces, semisimple rings/modules, and abstract special linear groups do not give the tangent dimension of a semisimple affine group scheme in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected semisimple group scheme of rank one is three dimensional in all characteristics",
+   "results": "{\"t\": \"2026-10-23T22:27:39Z\", \"tool\": \"leansearch\", \"query\": \"A connected semisimple group scheme of rank one is three dimensional in all characteristics\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_end_is_rank_one\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"FiniteDimensional.of_rank_eq_one\", \"simple_of_finrank_eq_one\", \"CategoryTheory.finrank_endomorphism_simple_eq_one\", \"isConnected_compl_singleton_of_one_lt_rank\", \"Module.length_eq_one\"], \"digest\": \"b323f3f3962a1b57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra rank, characteristic-zero root spaces, semisimple rings/modules, and abstract special linear groups do not give the tangent dimension of a semisimple affine group scheme in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected semisimple algebraic group with a one dimensional maximal torus has three dimensional tangent space at the identity even in positive characteristic",
+   "results": "{\"t\": \"2026-10-23T22:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected semisimple algebraic group with a one dimensional maximal torus has three dimensional tangent space at the identity even in positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.g₂\", \"LieAlgebra.rank\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.rank_le_finrank\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\"], \"digest\": \"9f36b209c3d9fbc0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra rank, characteristic-zero root spaces, semisimple rings/modules, and abstract special linear groups do not give the tangent dimension of a semisimple affine group scheme in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*rank|rank.*semisimple|rank.one.*dimension|dimension.*rank.one",
+   "results": "{\"t\": \"2026-10-23T23:35:08Z\", \"tool\": \"grep\", \"query\": \"semisimple.*rank|rank.*semisimple|rank.one.*dimension|dimension.*rank.one\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Lie-algebra results (some requiring characteristic zero), semisimple rings/modules and general smoothness definitions do not state either conclusion for semisimple affine group schemes in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected semisimple group scheme with a rank one maximal torus has three dimensional tangent space in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T23:35:08Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected semisimple group scheme with a rank one maximal torus has three dimensional tangent space in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"LieGroup\", \"LieGroup.casesOn\", \"LieGroup.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"GroupLieAlgebra\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"093529f4f713b2aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Lie-algebra results (some requiring characteristic zero), semisimple rings/modules and general smoothness definitions do not state either conclusion for semisimple affine group schemes in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\"",
+   "results": "{\"t\": \"2026-10-23T23:35:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSemisimpleRing\", \"instIsSemisimpleRingOfSubsingleton\", \"instIsPrincipalIdealRingOfIsSemisimpleRing\", \"IsSemisimpleModule\", \"instIsSemisimpleRingProd\", \"instIsSemisimpleRingForallOfFinite\", \"IsSemisimpleRing.isSemisimpleModule\", \"instIsSemisimpleModuleOfIsSimpleModule\"], \"digest\": \"79b68d126554816d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Lie-algebra results (some requiring characteristic zero), semisimple rings/modules and general smoothness definitions do not state either conclusion for semisimple affine group schemes in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple algebraic group over an algebraically closed field with a one dimensional maximal torus has dimension three",
+   "results": "{\"t\": \"2026-10-23T23:35:09Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple algebraic group over an algebraically closed field with a one dimensional maximal torus has dimension three\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.rank\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\"], \"digest\": \"a5d4037b6fdf61b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Lie-algebra results (some requiring characteristic zero), semisimple rings/modules and general smoothness definitions do not state either conclusion for semisimple affine group schemes in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tangent space at the identity of a rank one semisimple affine algebraic group has dimension three in positive characteristic",
+   "results": "{\"t\": \"2026-10-23T23:35:10Z\", \"tool\": \"leanfinder\", \"query\": \"The tangent space at the identity of a rank one semisimple affine algebraic group has dimension three in positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.rank\", \"LieAlgebra.SpecialLinear.sl_non_abelian\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.rank_le_finrank\", \"LieAlgebra.rank_le_finrank_engel\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\"], \"digest\": \"45319a9303fa064f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Lie-algebra results (some requiring characteristic zero), semisimple rings/modules and general smoothness definitions do not state either conclusion for semisimple affine group schemes in arbitrary characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-opposite-borel-intersection",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Theorem 20.16 (a) implies (b), Proposition 20.18 and Lemma 20.21, printed pp.412--415. Numerical input from Lemma 20.20, first proof paragraph: a semisimple group of rank one has dimension three; choose an isomorphism from the multiplicative group onto its maximal torus.",
+   "via": [
+    "lem-sfb-rank-one-opposite-borel-intersection",
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-rank-one-tangent-dimension",
+  "worker": "stage1",
+  "group": "Q58",
+  "summary": "Statement unchanged. Expanded Milne 20.16 and 20.20 using existing general group and flag-variety lemmas. Constructed the torus coordinate by dual numbers; bounded the Borel fixed points by two; obtained the projective-line action with zero-dimensional kernel; deduced dimension three and used smoothness. No new nodes. Avoided the existing rank-one flag/classification/opposite-Borel nodes, whose dependencies return to this item.",
+  "blueprint": "Inherited auxiliary chain for det-thm-sf-ctf-stability-direct-images proof (3), numerical input to Milne Lemma 20.20. Read the latest blueprint unit and direct-images proof (3). The ancestor command returns None: retain the existing null ancestor and full via chain. Whole-blueprint searches semisimple, maximal torus, tangent dimension and torus found no equivalent arbitrary-characteristic statement. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic geometric input: Residue fields of closed points over an algebraically closed field. Used only for the indicated group/flag scheme or its closed points; it does not replace any step of the unit route and no same-unit statement supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic geometric input: Schemes locally of finite type over a field are Jacobson. Used only for the indicated group/flag scheme or its closed points; it does not replace any step of the unit route and no same-unit statement supplies this generic fact."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic geometric input: Smooth morphisms have geometrically reduced fibres. Used only for the indicated group/flag scheme or its closed points; it does not replace any step of the unit route and no same-unit statement supplies this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-bd232b67d",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bd232b67d (reviewer sub-agent of L); spot-checked: FIX (two small links filled in). Read the item in full against Milne iAG2017 Theorem 20.16 (a)=>(b)=>(c)=>(d), Remark 20.19 and Lemma 20.20 first paragraph (pp.412-415); no SGA source is used. The statement, stmt_deps and blueprint are byte-identical to the base copy (checked against the Q60 snapshot); no new nodes. All 9 steps check against the cited statements. Step 4: Aut(G_m)={±1} plus C_H(S)=S gives at most 2 Borels containing S. Step 5: d=dim H-dim B>=1 and the fixed-point bound give d+1<=2. Step 6: X is P^1 and f: H->PGL2 has kernel K inside B. Step 7: (K^0)_red is normal and solvable, hence trivial, so dim K=0. Step 8: dim H=dim I<=3, and dim<=2 would make H solvable. Step 9: smooth, so tangent dimension = dimension = 3. Tested SL2/PGL2 including characteristic 2 (non-reduced mu_2 kernel; the argument never needs K reduced), GL2, G_m and rank 0. No cycle: no cited node's closure contains the item. Repairs: (1) step 1 went from lem-sfb-smooth-unipotent-solvable's subnormal-series solvability to the derived-series solvability of the semisimplicity hypothesis without argument; I wrote the induction D^aU in U_a and added lem-sfb-smooth-connected-derived-subgroup to the step. (2) step 8 identified the Zariski-quotient PGL2 of lem-sfb-projective-frames-pgl with the fpqc-quotient PGL2 of lem-sfb-projective-matrix-central-cover silently; I added the sheaf argument and the citation. proof_deps is unchanged as a set. Accepted tool_uses: closed-point-residue-field-base, lft-over-field-jacobson-space, sbc-lem-smooth-geometrically-reduced (generic geometry). Batch 5: all 16 flagged citations are linear-algebraic-group results that neither assumption gives and that are not steps of the trace-formula or Poincaré-duality proofs; they serve constructibility/finiteness (sk-thm-sf-ctf-stability). Their trf hits are generic tools (algebraic-space and descent definitions, the fppf base-change Mathlib leaf, projective-bundle geometry, fpqc descent). Every flagged node is already in the batch-5 closure without this delivery, and the delivery adds 0 nodes to it.; 1 file(s) fixed by the reviewer"
+ }
+}

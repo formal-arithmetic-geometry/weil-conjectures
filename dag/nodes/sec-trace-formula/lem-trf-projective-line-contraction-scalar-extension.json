@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-projective-line-contraction-scalar-extension",
+ "kind": "statement",
+ "title": "Singleton images of projective lines before and after scalar extension",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $L/k$ be a field extension [def-pc-field-extension], and let $X$ be any $k$-scheme [def-weil-scheme-over-base]. Let $r:\\mathbf P^1_k\\to X$ be a $k$-morphism, with projective line and its two standard affine charts as in [def-sc-p1-standard]. If the set-theoretic image of $r$ is a singleton $\\{x\\}$, then $x$ is a $k$-rational point and $r$ factors as the structural morphism $\\mathbf P^1_k\\to\\operatorname{Spec}k$ followed by that point. Its scalar extension $r_L:\\mathbf P^1_L\\to X\\times_kL$ [def-pc-fibre-product, def-nagata-projective-space-base-change] therefore has singleton image. Conversely, if $r_L$ has singleton image, so does $r$; equivalently contraction of a projective-line component is preserved and reflected by scalar extension. The converse uses surjectivity of $\\mathbf P^1_L\\to\\mathbf P^1_k$. These assertions apply to $f|_R$ for any $k$-morphism $f:C\\to X$ and any reduced closed component $R\\subseteq C$ [def-weil-irreducible-components, lem-weil-pbc-reduced-induced-closed-subscheme] isomorphic to $\\mathbf P^1_k$. No properness, separatedness, finite type or reducedness hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JE (example-projective-line), standard two-affine gluing and the explicit global-section intersection calculation; fibre-product associativity and faithfully flat field-extension projection. Returned Step 12; agent-written application to singleton images for the geometric exceptional-component condition of Temkin section 1.2 (PDF unavailable locally)."
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-sc-p1-standard",
+  "def-weil-algebraic-closure",
+  "def-weil-irreducible-components",
+  "def-weil-scheme-over-base",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\mathbf P^1_k$ and let $p:P\\to\\operatorname{Spec}k$ be its structure map. By [lem-sc-p1-monomial](i) with $d=0$, global sections of $\\mathcal O(0)$ are precisely scalar multiples of the monomial $1$. In [def-sc-p1-standard], the transition for $d=0$ is $1$, so the two local generators give $\\mathcal O(0)\\cong\\mathcal O_P$. Thus $p^\\sharp:k\\to\\Gamma(P,\\mathcal O_P)$ is an isomorphism of rings: on the two charts it sends $a$ to $(a,a)$. Explicitly, a compatible pair satisfies $u(t)=v(t^{-1})$ in $k[t,t^{-1}]$; comparing positive and negative exponents forces both polynomials to be the same constant.",
+   "uses": [
+    "lem-sc-p1-monomial",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JE (example-projective-line), global-section calculation; existing monomial computation at d=0"
+   }
+  },
+  {
+   "text": "Choose an affine open $j:U=\\operatorname{Spec}A\\hookrightarrow X$ containing $x$. Since $r^{-1}(U)=P$, restriction gives $r_U:P\\to U$ with $jr_U=r$: its continuous map is $r$ valued in $U$, and its sheaf map on an open $V\\subseteq U$ is the original map on the same open $V\\subseteq X$; local maps on stalks are unchanged [def-weil-open-immersion]. Write $\\rho:A\\to\\Gamma(P,\\mathcal O_P)$ for $r_U^\\sharp$ and $\\alpha=(p^\\sharp)^{-1}\\rho:A\\to k$. It is a $k$-algebra map because $r$ is over $k$ [def-weil-scheme-over-base]. By [lem-weil-pbc-morphism-into-affine-scheme], $r_U$ and $(\\operatorname{Spec}\\alpha)p$ are equal: both induce $\\rho$. Hence $r=ap$ for the $k$-point $a=j\\operatorname{Spec}\\alpha:\\operatorname{Spec}k\\to X$ [def-weil-field-valued-points]. The chart $t=0$ supplies a point of $P$, so the image of $a$ is exactly $x$. This proves rationality and the required factorization.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-scheme-over-base",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-field-valued-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine); restriction to an open subscheme, Tag 01HE (definition-immersion-locally-ringed-spaces)"
+   }
+  },
+  {
+   "text": "Base change of $r=ap$ gives $r_L=a_Lp_L$, where $a_L:\\operatorname{Spec}L\\to X_L$ is the pair consisting of $a$ after $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ and the identity of $\\operatorname{Spec}L$, and $p_L:P_L\\to\\operatorname{Spec}k\\times_k\\operatorname{Spec}L=\\operatorname{Spec}L$ is the second projection; both factorizations are the unique maps with the given projections [def-pc-fibre-product]. To identify $P_L=P\\times_kL$ with $\\mathbf P^1_L$, apply [lem-nagata-affine-proj-scalar-extension] with $R=\\mathbf Z$, $S=k$, $A=\\mathbf Z[x_0,x_1]$, $B=k[x_0,x_1]$ and $\\beta:k\\otimes_{\\mathbf Z}\\mathbf Z[x_0,x_1]\\xrightarrow{\\sim}k[x_0,x_1]$ the coefficientwise isomorphism: the square of $p$, $\\operatorname{Proj}(A)\\to\\operatorname{Spec}\\mathbf Z$ and $\\operatorname{Spec}k\\to\\operatorname{Spec}\\mathbf Z$ is cartesian, so by uniqueness of fibre products $P\\cong\\operatorname{Spec}k\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^1_{\\mathbf Z}$ over $k$. Associating the products then gives $P\\times_kL\\cong\\operatorname{Spec}L\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^1_{\\mathbf Z}$, which is $\\mathbf P^1_L$ of [def-nagata-projective-space-base-change]; this isomorphism commutes with the projections to $\\operatorname{Spec}L$ and to $P$, so it does not change images. Since $\\operatorname{Spec}L$ has one point [def-weil-affine-spectrum], $r_L$ has at most one image point. The image is nonempty: the $k$-point $t=0$ of the chart $U_0$ of [def-sc-p1-standard], $z:\\operatorname{Spec}k\\to P$, gives the point $(z\\circ(\\operatorname{Spec}L\\to\\operatorname{Spec}k),\\mathrm{id})$ of $P_L$ [def-pc-fibre-product]. It is therefore a singleton.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-nagata-projective-space-base-change",
+    "def-weil-affine-spectrum",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product), universal property and associativity; Tag 01JE (example-projective-line), rational point of the standard chart; base change of Proj via lem-nagata-affine-proj-scalar-extension"
+   }
+  },
+  {
+   "text": "Conversely, let $\\pi:P_L\\to P$ and $q:X_L\\to X$ be the projections. The morphism $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is surjective by [lem-pc-field-extension-surjective], so its pullback $\\pi$ is surjective by [lem-weil-pbc-surjective-base-change]. The defining square gives $q r_L=r\\pi$ [def-pc-fibre-product]. If $r_L(P_L)=\\{y\\}$, then $r(P)=r(\\pi(P_L))=q(r_L(P_L))=\\{q(y)\\}$. This proves reflection of contraction.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1 (lemma-base-change-surjective), applied to Spec L -> Spec k; set images in the cartesian square"
+   }
+  },
+  {
+   "text": "For the final assertion, choose the given $k$-isomorphism $e:P\\xrightarrow{\\sim}R$ and apply the preceding steps to $r=(f|_R)e$. An isomorphism is surjective, so $r(P)=(f|_R)(R)$. Its scalar extension $e_L$ is again an isomorphism: the base changes of $e$ and $e^{-1}$ compose to identities by the uniqueness clause of [def-pc-fibre-product]. Thus $r_L(P_L)=(f_L|_{R_L})(R_L)$, proving the same equivalence for the stated component.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product), base change of the two inverse morphisms; application to the given component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-monomial",
+  "def-sc-p1-standard",
+  "def-weil-open-immersion",
+  "def-weil-scheme-over-base",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-field-valued-points",
+  "def-pc-fibre-product",
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-nagata-projective-space-base-change",
+  "def-weil-affine-spectrum",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JE (example-projective-line), constant global functions; Tag 01I1 (lemma-morphism-into-affine); Morphisms Tag 01S1 (lemma-base-change-surjective). Assembly of existing nodes for the imported contraction assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from projective line over an algebraically closed field with singleton image factors through a rational point and is contracted if and only if its scalar extension is contracted",
+   "results": "{\"t\": \"2026-10-22T06:10:08Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from projective line over an algebraically closed field with singleton image factors through a rational point and is contracted if and only if its scalar extension is contracted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Affine.Point.map\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Projective.baseChange_equation\", \"WeierstrassCurve.Projective.map_nonsingular\", \"WeierstrassCurve.Projective.map_equation\", \"WeierstrassCurve.Jacobian.comp_equiv_comp\"], \"digest\": \"ee01a5a2cc5a4a4f\"}; Weierstrass point functoriality, projective spectrum and finite preimages do not state singleton-image factorization of projective-line morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from projective line with image one point are constant because k polynomial t intersect k polynomial inverse t equals k; contraction descends faithfully flat field extension",
+   "results": "{\"t\": \"2026-10-22T06:10:08Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms from projective line with image one point are constant because k polynomial t intersect k polynomial inverse t equals k; contraction descends faithfully flat field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Affine.Point.map_injective\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"WeierstrassCurve.Projective.Point.toAffine_of_equiv\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"WeierstrassCurve.Projective.map_equation\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\"], \"digest\": \"551fb7189fdb2fa4\"}; Weierstrass point functoriality, projective spectrum and finite preimages do not state singleton-image factorization of projective-line morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from projective line over an algebraically closed field with singleton image factors through a rational point and is contracted if and only if its scalar extension is contracted",
+   "results": "{\"t\": \"2026-10-22T06:09:57Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from projective line over an algebraically closed field with singleton image factors through a rational point and is contracted if and only if its scalar extension is contracted\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Weierstrass point functoriality, projective spectrum and finite preimages do not state singleton-image factorization of projective-line morphisms.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpectrum, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-22T06:09:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ProjectiveSpectrum, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpectrum'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Weierstrass point functoriality, projective spectrum and finite preimages do not state singleton-image factorization of projective-line morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective[Ll]ine.*constant|singleton.*(image|range)|[Pp]rojective.*[Cc]ontract",
+   "results": "{\"t\": \"2026-10-22T06:09:57Z\", \"tool\": \"grep\", \"query\": \"[Pp]rojective[Ll]ine.*constant|singleton.*(image|range)|[Pp]rojective.*[Cc]ontract\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\"], \"digest\": \"7eb09a73bcad4102\"}; Weierstrass point functoriality, projective spectrum and finite preimages do not state singleton-image factorization of projective-line morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*(image|range)|(image|range).*singleton|[Pp]rojective[Ll]ine.*constant|constant.*[Pp]rojective[Ll]ine",
+   "results": "{\"t\": \"2026-10-23T09:38:06Z\", \"tool\": \"grep\", \"query\": \"singleton.*(image|range)|(image|range).*singleton|[Pp]rojective[Ll]ine.*constant|constant.*[Pp]rojective[Ll]ine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\"], \"digest\": \"a28da251c082357f\"}; The returned Weierstrass, Proj properness, rational-map, affine extensionality and residue-field-point results do not state the projective-line singleton factorization together with preservation and reflection under field extension. General affine adjunction and surjective base change are already cited through existing DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from projective line with one point as image factors through Spec of the field",
+   "results": "{\"t\": \"2026-10-23T09:38:07Z\", \"tool\": \"leansearch\", \"query\": \"A map from projective line with one point as image factors through Spec of the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq_comap\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\"], \"digest\": \"9bb8dbc470324d4a\"}; The returned Weierstrass, Proj properness, rational-map, affine extensionality and residue-field-point results do not state the projective-line singleton factorization together with preservation and reflection under field extension. General affine adjunction and surjective base change are already cited through existing DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, Set.range, Set.singleton",
+   "results": "{\"t\": \"2026-10-23T09:38:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom, Set.range, Set.singleton\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned Weierstrass, Proj properness, rational-map, affine extensionality and residue-field-point results do not state the projective-line singleton factorization together with preservation and reflection under field extension. General affine adjunction and surjective base change are already cited through existing DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from projective line with singleton image factors through a rational point and remains constant after extension of the base field",
+   "results": "{\"t\": \"2026-10-23T09:38:09Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from projective line with singleton image factors through a rational point and remains constant after extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"b88f4278f4c44f42\"}; The returned Weierstrass, Proj properness, rational-map, affine extensionality and residue-field-point results do not state the projective-line singleton factorization together with preservation and reflection under field extension. General affine adjunction and surjective base change are already cited through existing DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a scheme with global functions equal to its ground field to an affine scheme are constant; contraction is reflected by a surjective base change",
+   "results": "{\"t\": \"2026-10-23T09:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms from a scheme with global functions equal to its ground field to an affine scheme are constant; contraction is reflected by a surjective base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"bed383a0fa19e3a4\"}; The returned Weierstrass, Proj properness, rational-map, affine extensionality and residue-field-point results do not state the projective-line singleton factorization together with preservation and reflection under field extension. General affine adjunction and surjective base change are already cited through existing DAG nodes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-marked-base-change",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Re-split argument: Singleton images of projective lines before and after scalar extension (returned item Steps 12,13).",
+   "via": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-line-contraction-scalar-extension",
+  "worker": "stage1",
+  "summary": "Proved the singleton-image factorization using the existing degree-zero monomial computation and affine-target adjunction; wrote the rational point and its scalar extension explicitly, and reflected singleton images using the existing surjective-base-change leaves. No new nodes or statement changes. Every cited statement was read, and the scalar extension and component identifications follow by their displayed projections.",
+  "blueprint": "Ancestor lem-trf-local-term-locality: the semistable-modification input in the nearby-cycle proof branch, through lem-trf-semistable-marked-base-change, returned Steps 12-13. This split supplies the projective-line singleton-image argument recorded in blueprint.from.place. The latest ancestor proof was read; it does not itself state this auxiliary algebraic-geometric assertion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-481de3d65",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-481de3d65 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, every cited statement, and Stacks schemes.tex Tag 01JE (example-projective-line, Gamma = k by the polynomial argument), Tag 01I1 (lemma-morphism-into-affine) and morphisms.tex Tag 01S1 (lemma-base-change-surjective). No new nodes, no SGA, statement unchanged and true. Small cases checked: X=Spec k, X=Spec k[eps], r=id, a non-separated X, transcendental L, empty X. Step 1 (lem-sc-p1-monomial(i), d=0, O(0)=O_P with g0=g1=1) is correct. Step 2 (lift through an affine open, alpha=(p^#)^{-1}rho as a k-algebra map, injectivity from lem-weil-pbc-morphism-into-affine-scheme for an arbitrary source) is correct. Step 4 (lem-pc-field-extension-surjective + lem-weil-pbc-surjective-base-change, then q r_L = r pi) is correct. Step 5 (e_L is an isomorphism by uniqueness; 'isomorphic to P^1_k' read as a k-isomorphism, as in the sibling geometric-components node) is correct. Fault C1/C4 in Step 3: it identified P x_k L with P^1_L by 'associating the products' of def-nagata-projective-space-base-change, but P = Proj k[x0,x1] (def-sc-p1-standard), so this needs base change of Proj, which no cited node gave. It also used a 't=0 chart over L' interface that the nagata definition explicitly does not provide. FIX: Step 3 now cites the existing lem-nagata-affine-proj-scalar-extension (R=Z, S=k, A=Z[x0,x1], B=k[x0,x1]); its cartesian square gives P = Spec k x_Z P^1_Z, and associating the products gives P_L = P({0,1};Spec L). Nonemptiness now comes from the point (z composed with Spec L->Spec k, id) of P_L. The step is marked non-elementary and proof_deps = union of uses. Tool use for L to record: lem-nagata-affine-proj-scalar-extension, a generic Proj base-change node from unit sk-def-nagata-sketch-data with no sk-i-curve-zero node for it, next to the already-cited def-nagata-projective-space-base-change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineContractionScalarExtension",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.range_singleton_scalarExtension_iff",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveLine.exists_rationalPoint_of_range_singleton",
+   "AlgebraicGeometry.ProjectiveLine.range_singleton_scalarExtension_iff",
+   "AlgebraicGeometry.ProjectiveLine.component_range_singleton_scalarExtension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineContractionScalarExtension.lean",
+  "statement": "theorem range_singleton_scalarExtension_iff (k L : Type u) [Field k] [IsAlgClosed k] [Field L] [Algebra k L] (X : Scheme.{u}) [X.Over (Spec (.of k))] (r : ProjectiveLine (Spec (.of k)) ⟶ X) [r.IsOver (Spec (.of k))] : (∃ y : pullback (C := Scheme.{u}) (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k L))), Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k L)))).map (r.asOver (Spec (.of k)))).left) = {y}) ↔ ∃ x : X, Set.range r = {x}",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three declarations state the rational-point factorization, the singleton-image scalar-extension equivalence, and both assertions for a reduced closed component isomorphic over k to the projective line. Scalar extension uses the canonical Over.pullback functor; its source is the fibre product, identified with the projective line over L by the existing ProjectiveSpace.isPullback_map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-030630f67",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Lean and records correct: k alg-closed, L/k any field extension, any k-scheme X (no extra hypotheses), r a k-morphism from ProjectiveLine(Spec k) (same model as the TwistData interface of def-sc-p1-standard); singleton image gives a k-point a with range {x} and p≫a=r; r_L via the canonical Over.pullback along Spec.map(algebraMap k L), target literally X×_k L, source P×_k Spec L ≅ P^1_L canonically (isPullback_map), singleton image unaffected; iff of existential singletons; component clause keeps IsReduced R, closed immersion, irreducible-component range and k-iso e, both conclusions for i≫f; lean.statement verbatim; 8 stmt_dep records used; no defs, only sorry, docstrings with source and blueprint tag; edge cases (empty X, Spec k[ε], non-separated X, r=id, any L, any characteristic) covered; common universe u. No compile run: no Lean file changed. Only fault H11: the second-reading section is the same worker's self-check -> FIX fixes/lem-trf-projective-line-contraction-scalar-extension.report.md (worker report verbatim + independent clause-by-clause second reading)."
+ }
+}

@@ -1,0 +1,169 @@
+{
+ "id": "lem-sp-ordinary-finite-chern-pullback",
+ "kind": "statement",
+ "title": "Naturality of the ordinary scalar Kummer Chern realization",
+ "statement": "For a morphism f:X→Y of schemes on which N is invertible, a ring A killed by N, and a normalized finite twist transport, let M be a Picard class on Y. If the ordinaryFiniteClass of c:A_Y→A_Y(1)[2] is its scalar Kummer Chern class, then the ordinaryFiniteClass of c pulled through the canonical constant-object comparison and the normalized shifted line comparison is the scalar Kummer Chern class of Pic.map f M [def-asd-ordinary-finite-p1-kummer-class, def-asd-ordinary-finite-p1-arrows, lem-amb-kummer-any-base].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-amb-kummer-any-base",
+  "def-sp-ordinary-finite-coefficient-records"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Resolve module sheaves and evaluate the forgotten Ext class on the integral generator. Exact inverse image and the canonical constant comparison send this generator to the generator. The normalized scalar line comparison sends each root tensor a to its pullback tensor a. Consequently ordinaryFiniteClass of the transported arrow is cohomology pullback of the original scalar class.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-kummer-class",
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-sbc-raw-scalar-derived-pullback-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+   }
+  },
+  {
+   "text": "Use naturality of the Kummer connecting map, then naturality of the Picard/frame-torsor comparison, to identify the result with the scalar Chern class of Pic.map f M. The adopted source theorem Scheme.gmCohomologyMap_toCohomologicalPicardGroup already proves this Picard naturality for arbitrary schemes; no curve-specialized interface is needed.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-sc-etale-generators-pullback-equivariant",
+    "lem-sc-etale-torsor-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+   }
+  },
+  {
+   "text": "In Lean both steps are already proved for arbitrary schemes in the module of [lem-sp-finite-p1-chern-map-base-change]: unfold the normalized arrow pullback of [def-sp-ordinary-finite-coefficient-records] to the inverse constant comparison, inverse image of c and the shifted-line comparison; its class_chern_pullback identifies the class of this arrow with the pulled-back class of c, and after rewriting with the hypothesis its kummer_class_pullback (root normalization, Kummer boundary and Picard naturality) gives the class of Pic.map f M.",
+   "uses": [
+    "lem-sp-finite-p1-chern-map-base-change",
+    "def-sp-ordinary-finite-coefficient-records"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sbc-raw-scalar-derived-pullback-iso",
+  "def-sp-ordinary-finite-coefficient-records",
+  "lem-amb-kummer-any-base",
+  "lem-sc-etale-generators-pullback-equivariant",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-sp-finite-p1-chern-map-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Kummer Chern class of the diagonal of the projective line over any base is the sum of the two hyperplane Chern classes",
+   "results": "Only unrelated elliptic-curve/projectivization results.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left.",
+   "date": "2026-10-26",
+   "verdict": "Available for adjunct algebra, not the geometric or scalar Kummer comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteClass|diagonal.*chern|chern.*diagonal",
+   "results": "No Mathlib match. Local source search found arbitrary-base bijectivity and supported normalization, but not the diagonal Picard identity or the normalized scalar Kummer pullback formula.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing comparison and normalization; separate the two missing steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first Chern class of a line bundle commutes with pullback in etale Kummer cohomology",
+   "results": "8 hits, including Scheme.Modules.pullbackComp and its pseudofunctor coherence, plus SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. None concerns the Kummer connecting class or its normalized scalar derived realization.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"map\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*(pullback|map)|chern.*pullback|pullback.*chern",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalKummerComponentFormula",
+  "date": "2026-10-26",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-diagonal-kummer-component-formula",
+   "place": "Naturality of the ordinary scalar Kummer Chern realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteChernPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteChernPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteChern_pullback",
+  "statement": "theorem ordinaryFiniteChern_pullback (A : Type (u + 1)) [CommRing A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (hX : IsUnit (N : Γ(X, ⊤))) (M : Y.Pic)\n    (c : ordinaryFiniteUnit A Y ⟶ (ordinaryFiniteLine A N hA Y)⟦(2 : ℤ)⟧)\n    (hc : ordinaryFiniteClass A Y (Scheme.finiteEtaleTateLine Y N A hA) 2 c =\n      Sheaf.H.map (ordinaryFiniteRootMap A N hA Y) 2\n        (Y.kummerδ₁ N hY (Scheme.Pic.toCohomologicalPicardGroup Y M))) :\n    ordinaryFiniteClass A X (Scheme.finiteEtaleTateLine X N A hA) 2\n        (ordinaryFiniteLinePullbackMap A N hA t f hY c) =\n      Sheaf.H.map (ordinaryFiniteRootMap A N hA X) 2\n        (X.kummerδ₁ N hX\n          (Scheme.Pic.toCohomologicalPicardGroup X (Scheme.Pic.map f M)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteLinePullbackMap",
+   "AlgebraicGeometry.Etale.ordinaryFiniteChern_pullback"
+  ],
+  "note": "ordinaryFiniteLinePullbackMap records the existing constant comparison, inverse-image map and shifted normalized line comparison. Its body is the displayed canonical composite, with no choice or postponed data. The naturality statement uses this compact interface. Reviewer fix (efdbda997e1d): the hole is closed by `import all Sheaf.AlgebraicGeometry.FiniteP1ChernMapBaseChange` and its private class_chern_pullback and kummer_class_pullback; the statement is unchanged and the theorem uses only propext, Classical.choice and Quot.sound."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules + 4 adapted modules against published clone, DAG nodes and 6 change records; delivered set built in sandbox and 7 direct importers + 4 exposed transitive users (SfP1IntegralTransport, SfP1ChartExchange, SfP1ChartMapComposition, TowerP1KernelScalarData) compiled against it, all OK; #print axioms"
+ }
+}

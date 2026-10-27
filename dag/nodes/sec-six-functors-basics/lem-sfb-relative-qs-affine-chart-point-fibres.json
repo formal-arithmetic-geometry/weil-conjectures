@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-relative-qs-affine-chart-point-fibres",
+ "kind": "statement",
+ "title": "Finite point fibres of an affine chart and its relation over a relatively quasi-separated space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with field-valued point classes and atlas topology [def-a1-space-point-topology]. Suppose the representable relative diagonal $X\\to X\\times_SX$ is quasi-compact on scheme tests, meaning that inverse images of quasi-compact opens are quasi-compact. Let $a:W\\to X$ be representable etale [def-weil-etale-morphism], where $W$ is an affine scheme (isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$ [def-weil-affine-spectrum]), and assume the composite $W\\to S$ factors through an affine open of $S$. Put $R=W\\times_XW$ with projections $s,t:R\\to W$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For every $x\\in|X|$, both sets $\\{w\\in W:a(w)=x\\}$ and $\\{r\\in R:a(s(r))=x\\}$ are finite. Empty fibres are allowed; neither $a$ nor $W\\to S$ is assumed surjective, and no finite-type or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JX, lemma-bounded-fibres: (zeta) implies (gamma); Tag 03JV, lemma-UR-finite-above-x, condition (1). The relative-diagonal hypothesis gives Zariski local absolute quasi-separatedness by spaces-properties.tex Tag 03W7, lemma-quasi-separated-quasi-compact-pieces, (1) implies (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in|X|$. If $x$ is outside the image of $|W|\\to|X|$, the first fibre is empty and so is the second, since $R\\to X$ factors through $W$. Otherwise choose $w\\in W$ above $x$. The point convention [def-a1-algebraic-space-point-classes] gives its residue-field representative $T=\\operatorname{Spec}F\\to W$, where $F=\\kappa(w)$, and hence $j:T\\to X$ representing $x$. The spectrum $T$ has one point [def-weil-affine-spectrum]. Let $V\\subset S$ be the affine open through which $W\\to S$ factors. The chosen map $T\\to W\\to S$ also factors through $V$. No quasi-compactness or monomorphism property of $j$ is assumed.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV, lemma-UR-finite-above-x, the field representative in the proof of (5) implies (1); choose it through a chart point."
+   }
+  },
+  {
+   "text": "Put $B=W\\times_ST$. Since both maps factor through the open subscheme $V$, this is $W\\times_VT$: maps into the restricted locally ringed space $V$ are determined by their composites to $S$ [def-weil-open-immersion]. Both factors and $V$ are affine, so [lem-weil-pbc-fibre-product-affine-spectra] makes $B$ affine, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Put $P=W\\times_XT$. Its map to $B$ is the scheme test of $\\Delta_{X/S}$ along the map $B\\to X\\times_SX$ induced by $(a,j)$. Indeed, on each test scheme both pullbacks consist of pairs $(u,v)$ with $a(u)=j(v)$, using the sheaf fibre product [lem-trf-space-fibre-products-etale-covers]. The relative-diagonal hypothesis therefore makes $P\\to B$ quasi-compact. The inverse image of the whole quasi-compact open $B$ is $P$, so $P$ is quasi-compact. By the scheme-test definition [def-trf-algebraic-space], $P$ is a scheme and $p:P\\to T$ is etale.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03W7, lemma-quasi-separated-quasi-compact-pieces, (1) implies (3), affine-product diagonal test; combined with decent-spaces.tex Tag 03JV field-pullback argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $p:P\\to T$ at the unique point of the field spectrum $T$. Its scheme fibre is $P$ itself, by the identity-base-change universal property [def-pc-fibre-product]. Thus $|P|$ is discrete. The covering by its open singletons has a finite subcover because $P$ is quasi-compact, so $|P|$ is finite. By [lem-a1-space-point-open-calculus], the image of $|P|\\to|W|$ is precisely $\\{w\\in W:a(w)=x\\}$, since the image of $|T|\\to|X|$ is $\\{x\\}$. This proves the first finiteness assertion, including an empty fibre.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-fibre-product",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV, lemma-UR-finite-above-x, (5) implies (1); morphisms.tex Tag 02GL, lemma-etale-over-field; spaces-properties.tex Tag 03H4, lemma-points-cartesian."
+   }
+  },
+  {
+   "text": "Put $Q=P\\times_TP$ with projection $q:Q\\to P$. The target $T$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Since $P$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $p$ quasi-compact; (3) makes its base change $q$ quasi-compact; (2) makes $Q$ quasi-compact. By [lem-weil-pbc-etale-base-change-finite-limits](1), $q$ is etale, and [lem-weil-pbc-etale-composition-cancellation](2) makes $p\\circ q:Q\\to T$ etale. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] at the unique point of $T$: again the fibre is the scheme itself, and $|Q|$ is discrete. Its singleton covering has a finite subcover, so $|Q|$ is finite.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV, lemma-UR-finite-above-x, (5) implies (1), paragraph on the quasi-compact etale field product; morphisms.tex Tags 02GO, 02GN, 02GL."
+   }
+  },
+  {
+   "text": "The canonical identification $Q\\cong R\\times_XT$ is elementary from the sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. On any test scheme a section of $Q$ is a triple $(w_1,w_2,t)$ satisfying $a(w_1)=j(t)=a(w_2)$; the same triple is exactly a section of $(W\\times_XW)\\times_XT$. The two maps keep all three entries, so are natural inverse maps and commute with the projections to $R$. (Here $R\\to X$ is $a\\circ s=a\\circ t$.) Apply [lem-a1-space-point-open-calculus] to $R\\to X$ and $T\\to X$: the image of $|R\\times_XT|\\to|R|$ is exactly $\\{r\\in R:a(s(r))=x\\}$. This is the image of the finite set $|Q|$, so the second fibre is finite as well. If $P$ is empty, so is $Q$, and both asserted images are empty.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV, lemma-UR-finite-above-x, final argument of (5) implies (1), simplified using the monomorphism supplied by (4); spaces-properties.tex Tag 03H4, lemma-points-cartesian."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-fibre-product",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV (lemma-UR-finite-above-x), field-pullback and etale-product argument of (5) implies (1). The required quasi-compactness of the chart pullback is obtained directly by the affine-product diagonal test in spaces-properties.tex Tag 03W7 (lemma-quasi-separated-quasi-compact-pieces), (1) implies (3), without assuming a globally quasi-compact field representative."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraic.?[Ss]pace.*[Ff]inite|[Ff]inite.*[Aa]lgebraic.?[Ss]pace|[Ee]tale.*[Oo]rbit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or general site structures, not point fibres of an algebraic-space chart and its relation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine etale chart of a quasi separated algebraic space has finite point fibres and so does its relation scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or general site structures, not point fibres of an algebraic-space chart and its relation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or general site structures, not point fibres of an algebraic-space chart and its relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale equivalence relations from quasi separated algebraic spaces have finite orbits on affine charts and finitely many arrows above each space point",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or general site structures, not point fibres of an algebraic-space chart and its relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space with quasi compact relative diagonal over a scheme, an affine etale chart mapping into an affine base open and its self relation have finite point fibres",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.locallyQuasiFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or general site structures, not point fibres of an algebraic-space chart and its relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale scheme chart of a relatively quasi separated algebraic space and its relation scheme have finite point fibres",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme-only finiteness and quasi-separatedness results do not state fibres on algebraic-space point classes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraic.?[Ss]pace|finite.*[Ee]tale.*[Ff]ibre",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme-only finiteness and quasi-separatedness results do not state fibres on algebraic-space point classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine etale chart of an algebraic space with quasi compact relative diagonal has finite point fibres",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.IsFinite.toIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme-only finiteness and quasi-separatedness results do not state fibres on algebraic-space point classes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme-only finiteness and quasi-separatedness results do not state fibres on algebraic-space point classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact diagonal of an algebraic space ensures all affine etale presentations and their relations have finite fibres on topological points",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, Algebra.Etale.finitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme-only finiteness and quasi-separatedness results do not state fibres on algebraic-space point classes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiseparated-space-etale-specializations",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Specialization lifting and noncollapse in etale charts of a quasi-separated space. Finiteness input before the specialization argument: Tag 03W7 (1) implies (2), followed by Tag 03JX (zeta) implies (gamma) and Tag 03JV (1).",
+   "via": [
+    "lem-sfb-quasiseparated-space-etale-specializations",
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-qs-affine-chart-point-fibres",
+  "worker": "stage1",
+  "summary": "Proved both point-fibre assertions by choosing a chart residue-field representative, testing the relative diagonal over an affine product, and using quasi-compact etale schemes over that field. Explicit projection-compatible triple identification. Removed a dependency on the field-monomorphism lemma after a concurrent live split introduced a reverse edge. No statement change and no new nodes; five actual logged searches and exact citation quotes.",
+  "blueprint": "Retains the historical from.place and via chain under det-thm-sf-ctf-stability-direct-images proof (3). Supplies the finite-fibre input before the specialization argument below Tag 0A4J. The current latest blueprint direct-images proof (3) concerns compactification; this helper is not itself an imported blueprint node, and the historical ancestor resolver returns None. No whole-blueprint match for bounded fibres, finite point fibres, field monomorphism or etale chart.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "The basic scheme fact supplies quasi-compactness of W and quasi-separatedness of Spec F; the unit does not reprove affine scheme topology."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Scheme quasi-compactness over a quasi-separated target and its base-change and source consequences make P times_F P quasi-compact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Scheme etale base change supplies Q -> P; the unit uses the standard scheme etale calculus."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Scheme etale composition supplies Q -> Spec F."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "The etale-over-a-field decomposition supplies discreteness of P and Q; no algebraic-space chart-fibre finiteness is taken from this node."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "The general point-image formula for sheaf fibre products identifies the two desired set-theoretic fibres, rather than asserting that point functors preserve fibre products bijectively."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The general sheaf fibre-product construction provides R and the sectionwise identification Q = R times_X Spec F."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The elementary scheme affine-product theorem makes W times_S Spec F affine after restricting to the given affine base open V; it supplies no algebraic-space finiteness assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-4989967df",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-4989967df (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and the statement is unchanged. Source checked: decent-spaces 03JV (lemma-UR-finite-above-x) condition (1) and its proof, 03JX, and spaces-properties 03W7 (1)=>(3). The statement is true and not weakened: S is arbitrary, the diagonal is relative, and W maps into an affine open. Step 1: residue-field representative of w, elementary. Step 2: B=W x_S T=W x_V T because an open immersion is a monomorphism. B is affine by the affine-product lemma and so quasi-compact. P=W x_X T is the diagonal test over B (checked on sections), hence quasi-compact, and etale over Spec F. Step 3: by the etale-over-field lemma, |P| is discrete and quasi-compact, hence finite. The image formula of lem-a1-space-point-open-calculus gives the W-fibre; it identifies scheme points with point classes by the DAG convention, and the direction needed is elementary. Step 4: qcqs permanence clauses (1), (3) and (2) and etale base change/composition make Q=P x_T P finite. Step 5: Q = R x_X T via triples, and the image formula gives the R-fibre. I tested the empty cases and x outside the image. The closure of 175 nodes does not contain the item, so the concurrent-helper cycle is gone. The DAG search for 03JV/03JX/03W7 found no duplicate. Declared tool_uses (generic scheme etale/qcqs calculus, point calculus, sheaf fibre products) accepted. No SGA source. Batch-5: def-a1-algebraic-space-point-classes is a general definition, and lem-a1-space-point-open-calculus is general point calculus (03H4 etc.). Each reaches sec-trace-formula only through def-trf-algebraic-space and general sheaf/space lemmas, not through any step of the trace formula or Poincare duality. Both accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeQuasiSeparatedAffineChartPointFibres",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relative_qs_affine_chart_point_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeQuasiSeparatedAffineChartPointFibres.lean",
+  "statement": "theorem relative_qs_affine_chart_point_fibres {S : Scheme.{u}} (X : AlgebraicSpace S) (hdiag : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (W : Over S) [IsAffine W.left] (a : yoneda.obj W ⟶ X.obj.obj) (ha : IsEtale a) (hbase : ∃ V : S.Opens, IsAffineOpen V ∧ ∃ b : W.left ⟶ V.toScheme, b ≫ V.ι = W.hom) (R : Over S) (s t : R ⟶ W) (hR : IsPullback (yoneda.map s) (yoneda.map t) a a) : ∀ x : Point X.obj.obj, Set.Finite {w : W.left | schemePointMap a w = x} ∧ Set.Finite {r : R.left | schemePointMap (yoneda.map s ≫ a) r = x}",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The relation scheme and its projections are specified by a representing Yoneda pullback square; the conclusion holds for every such representation. The presheaf product on Over S is the relative product over S, so hdiag is exactly the representable relative-diagonal condition with scheme QuasiCompact tests."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7d09f15f",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read the item, all 6 stmt_deps (byte-identical to live), the module, the report (Worker report and Second reading present), AlgebraicSpace.lean (IsRepresentableWith/IsEtale) and AlgebraicSpacePointClasses (Point/schemePointMap), and Stacks 03JV(1). hdiag is the relative diagonal X×_S X with QuasiCompact scheme tests; ha includes representability; hbase is an actual affine open factorization; hR is a universal Yoneda pullback square representing W×_X W (exists since a is representable); the conclusions use schemePointMap a and a∘s, matching |U|→|X| and |R|→|X|. No extra hypotheses or universes. Edge cases: empty W, x outside the image, empty X. No H4 duplicate in lean/Sheaf. Statement verbatim; only lean changed; no definitions; sorry proof; docstrings carry source and blueprint. Note: Point owner def-a1-algebraic-space-point-classes is reached via the def-a1-space-point-topology stmt_dep and its public import. No fixes."
+ }
+}

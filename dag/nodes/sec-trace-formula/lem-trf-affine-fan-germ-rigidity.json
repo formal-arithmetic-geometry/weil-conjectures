@@ -1,0 +1,189 @@
+{
+ "id": "lem-trf-affine-fan-germ-rigidity",
+ "kind": "statement",
+ "title": "Local rigidity of morphisms to a fine affine fan from section germs",
+ "statement": "Let $(T,\\mathcal A)$ be a topological space with a sheaf of commutative monoids whose stalks are sharp, let $P$ be a fine sharp monoid, and put $S(P)=(\\operatorname{Spec}_{\\mathrm{mon}}P,\\overline{\\widetilde P})$, with these notions and local monoidal-space morphisms as in [def-trf-fine-fan-blowup]. Let $V\\subseteq T$ be open, let $t\\in V$, and let $h,k:(V,\\mathcal A|_V)\\to S(P)$ be local morphisms of monoidal spaces, i.e. their stalk homomorphisms are local. Denote their pullbacks of canonical monoid sections by $\\rho_h,\\rho_k:P\\to\\Gamma(V,\\mathcal A)$. If\n$$\\operatorname{germ}_t(\\rho_h(p))=\\operatorname{germ}_t(\\rho_k(p))\\quad\\text{for every }p\\in P,$$\nthen there is an open neighborhood $U$ of $t$ with $U\\subseteq V$ such that $\\rho_h|_U=\\rho_k|_U$ and $h|_U=k|_U$ as morphisms of monoidal spaces, including both their continuous maps and their sheaf homomorphisms. The assertion also holds for the trivial monoid $P=\\{0\\}$, without choosing any generators.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, proof of Theorem 3.3.15, printed p.109, sentence shrinking U because the monoids are fine and subsequent invocation of Lemma 3.1.8(ii), printed p.99; formulated for arbitrary sharp monoidal spaces."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "If $P=\\{0\\}$, set $U=V$; both homomorphisms take $0$ to the zero section, so $\\rho_h|_U=\\rho_k|_U$, without choosing generators. Otherwise, fineness in [def-trf-fine-fan-blowup] supplies a finite generating set $E\\subset P$. For each $e\\in E$, equality of the two germs at $t$ means, by the explicit equivalence relation defining stalks in that definition, that there is an open $U_e$ with $t\\in U_e\\subseteq V$ on which $\\rho_h(e)$ and $\\rho_k(e)$ restrict equally. Put $U=\\bigcap_{e\\in E}U_e$. This finite intersection is open, contains $t$, and lies in $V$. Restricting each equality further gives equality on every generator over $U$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, proof of Theorem 3.3.15, printed p.109, sentence “Since the monoids are fine, we can shrink U”; finite-generator and germ argument made explicit."
+   }
+  },
+  {
+   "text": "In the nontrivial case, every $p\\in P$ is a finite sum $e_1+\\cdots+e_r$ of elements of $E$, allowing repetitions and the empty sum. Since restriction maps and $\\rho_h,\\rho_k$ are monoid homomorphisms, the two images of this sum over $U$ are the sums of the images of the $e_i$. Induction on $r$ gives equality: for $r=0$ both images are zero, and adjoining $e_{r+1}$ preserves equality by Step 1 and additivity. Hence $\\rho_h|_U=\\rho_k|_U$ as homomorphisms on all of $P$. Together with the trivial case of Step 1, this proves the section assertion in every case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, proof of Theorem 3.3.15, printed p.109, same shrinking sentence; extension from generators by additivity."
+   }
+  },
+  {
+   "text": "The restrictions $h|_U,k|_U$ are local morphisms: their stalk maps at $x\\in U$ are the original ones. Indeed, intersecting representative neighborhoods with the open set $U$ identifies the stalk of $\\mathcal A|_U$ at $x$ with $\\mathcal A_x$ under the germ definition of [def-trf-fine-fan-blowup]. Thus these stalks remain sharp. Pullback of each canonical section along $h|_U$ is $\\rho_h(p)|_U$, and along $k|_U$ is $\\rho_k(p)|_U$, by compatibility of sheaf maps with restriction. Apply the last assertion of [lem-trf-affine-fan-canonical-section-rigidity] to the source $(U,\\mathcal A|_U)$ and the fine sharp monoid $P$. Step 2 (or the trivial case of Step 1) supplies its equality of canonical-section homomorphisms. It yields $h|_U=k|_U$ as morphisms, including both the continuous maps and the sheaf homomorphisms.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-canonical-section-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(ii), printed p.99, uniqueness; its invocation after shrinking in the proof of Theorem 3.3.15, printed p.109."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-canonical-section-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, proof of Theorem 3.3.15, printed p.109, shrinking by fineness and invocation of Lemma 3.1.8(ii), printed p.99; expanded for arbitrary sharp monoidal spaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms from a sharp monoidal space to the affine fan of a fine sharp monoid agree near a point if their pullbacks of every canonical monoid section have equal germs there.",
+   "results": "{\"t\": \"2026-10-22T06:12:24Z\", \"tool\": \"leanfinder\", \"query\": \"Two morphisms from a sharp monoidal space to the affine fan of a fine sharp monoid agree near a point if their pullbacks of every canonical monoid section have equal germs there.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"TopCat.Presheaf.section_ext\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"TopCat.Presheaf.germ_ext\"], \"digest\": \"dd8a36f9611f1ebf\"} Read all returned signatures: scheme spreading-out lemmas require ringed schemes and germ-injectivity; section_ext tests all point germs, and germ_ext sends neighborhood equality to germ equality. None gives local equality of maps to sharp monoidal spectra. Checked SpreadingOut.lean:202--239 and Stalks.lean:419; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms to a fine affine Kato fan are determined on a neighborhood by equality of finitely many generator section germs at one point.",
+   "results": "{\"t\": \"2026-10-22T06:12:24Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms to a fine affine Kato fan are determined on a neighborhood by equality of finitely many generator section germs at one point.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.IsAffineOpen.ideal_ext_iff\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\"], \"digest\": \"c1dfe167ea8ba1ff\"} Read all returned signatures: scheme spreading-out lemmas require ringed schemes and germ-injectivity; section_ext tests all point germs, and germ_ext sends neighborhood equality to germ equality. None gives local equality of maps to sharp monoidal spectra. Checked SpreadingOut.lean:202--239 and Stalks.lean:419; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalSpace\"",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read all returned signatures: scheme spreading-out lemmas require ringed schemes and germ-injectivity; section_ext tests all point germs, and germ_ext sends neighborhood equality to germ equality. None gives local equality of maps to sharp monoidal spectra. Checked SpreadingOut.lean:202--239 and Stalks.lean:419; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FanChart|KatoFan|MonoidSpectrum|affine.*fan.*germ|fan.*germ.*equal",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"grep\", \"query\": \"FanChart|KatoFan|MonoidSpectrum|affine.*fan.*germ|fan.*germ.*equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read all returned signatures: scheme spreading-out lemmas require ringed schemes and germ-injectivity; section_ext tests all point germs, and germ_ext sends neighborhood equality to germ equality. None gives local equality of maps to sharp monoidal spectra. Checked SpreadingOut.lean:202--239 and Stalks.lean:419; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps into the spectrum of a fine sharp monoid with the same germ homomorphism at a point agree on an open neighborhood.",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"leansearch\", \"query\": \"Maps into the spectrum of a fine sharp monoid with the same germ homomorphism at a point agree on an open neighborhood.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "KatoFan|MonoidSpectrum|MonoidalSpace|fan.*germ",
+   "results": "{\"t\": \"2026-10-23T09:27:08Z\", \"tool\": \"grep\", \"query\": \"KatoFan|MonoidSpectrum|MonoidalSpace|fan.*germ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures. Scheme and ringed-space spectrum results do not apply to sharp monoidal spaces; sheaf germ/section lemmas supply only elementary ingredients, not local equality of fan morphisms. Read SpreadingOut.lean:202--241, Stalks.lean:140--145 and 419 onward, AffineScheme.lean:154--156, Gluing.lean:483 onward. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms to a fine affine fan are equal on a neighborhood when the pullbacks of monoid generators have equal germs at a point.",
+   "results": "{\"t\": \"2026-10-23T09:27:08Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms to a fine affine fan are equal on a neighborhood when the pullbacks of monoid generators have equal germs at a point.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"TopCat.Presheaf.stalk_hom_ext_iff\", \"TopCat.Presheaf.stalk_hom_ext\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.mk.congr_simp\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq\"], \"digest\": \"b3c9ea481d0b04ad\"} Read returned signatures. Scheme and ringed-space spectrum results do not apply to sharp monoidal spaces; sheaf germ/section lemmas supply only elementary ingredients, not local equality of fan morphisms. Read SpreadingOut.lean:202--241, Stalks.lean:140--145 and 419 onward, AffineScheme.lean:154--156, Gluing.lean:483 onward. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalSpace\"",
+   "results": "{\"t\": \"2026-10-23T09:27:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures. Scheme and ringed-space spectrum results do not apply to sharp monoidal spaces; sheaf germ/section lemmas supply only elementary ingredients, not local equality of fan morphisms. Read SpreadingOut.lean:202--241, Stalks.lean:140--145 and 419 onward, AffineScheme.lean:154--156, Gluing.lean:483 onward. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local morphisms from a sharp monoidal space to the spectrum of a fine monoid agree near a point if the canonical sections have equal germs.",
+   "results": "{\"t\": \"2026-10-23T09:27:17Z\", \"tool\": \"leanfinder\", \"query\": \"Local morphisms from a sharp monoidal space to the spectrum of a fine monoid agree near a point if the canonical sections have equal germs.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.StructureSheaf.const_congr\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.exists_lift_of_germInjective\"], \"digest\": \"90180e1606a4e30c\"} Read returned signatures. Scheme and ringed-space spectrum results do not apply to sharp monoidal spaces; sheaf germ/section lemmas supply only elementary ingredients, not local equality of fan morphisms. Read SpreadingOut.lean:202--241, Stalks.lean:140--145 and 419 onward, AffineScheme.lean:154--156, Gluing.lean:483 onward. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of germs of two monoid homomorphisms from a finitely generated monoid to sections of a sheaf implies equality on some open neighborhood, and hence equality of maps to a sharp monoid spectrum.",
+   "results": "{\"t\": \"2026-10-23T09:29:22Z\", \"tool\": \"leanfinder\", \"query\": \"Equality of germs of two monoid homomorphisms from a finitely generated monoid to sections of a sheaf implies equality on some open neighborhood, and hence equality of maps to a sharp monoid spectrum.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.germ_ext\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"TopCat.Presheaf.germ_eq\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.StructureSheaf.const_congr\", \"TopCat.Presheaf.section_ext\", \"ModuleCat.Tilde.toOpen_germ_apply\", \"AlgebraicGeometry.StructureSheaf.const_ext\"], \"digest\": \"30cf5e6f44269956\"} Read returned signatures. Scheme and ringed-space spectrum results do not apply to sharp monoidal spaces; sheaf germ/section lemmas supply only elementary ingredients, not local equality of fan morphisms. Read SpreadingOut.lean:202--241, Stalks.lean:140--145 and 419 onward, AffineScheme.lean:154--156, Gluing.lean:483 onward. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-fan-chart-local-comparison",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, p.109, paragraph beginning Choose a point y, restricted to strict morphisms; affine fan interpretation: 3.1.8(ii), 3.1.10(ii). Extracted argument: Expose VIII, proof of Theorem 3.3.15, printed p.109, sentence shrinking U because the monoids are fine and subsequent invocation of Lemma 3.1.8(ii), printed p.99; formulated for arbitrary sharp monoidal spaces.",
+   "via": [
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-fan-germ-rigidity",
+  "worker": "stage1",
+  "summary": "Expanded finite-generation shrinking into a finite intersection of germ-equality neighborhoods, proved equality on all monoid elements by sums, and reused the existing canonical-section rigidity node to recover the full local morphisms. Treated the trivial monoid without generators. Statement and historical blueprint ancestry retained; no new nodes and no Lean work.",
+  "blueprint": "The current latest blueprint ancestor lem-trf-local-term-locality now follows contracting correspondences and has no fan statement. This supporting node retains its recorded historical nearby-duality/alteration ancestry through log-regular desingularization. The split realizes exactly the ILO VIII 3.3.15 p.109 shrinking sentence and its 3.1.8(ii) uniqueness input already specified in blueprint.from.place; it changes no chapter or unit route. Whole-blueprint searches for affine fan and germ rigidity found no equivalent imported statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-d0dfd123d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-d0dfd123d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item gains a 3-step proof, with no new nodes and the statement unchanged. proof_deps equals the union of the step uses, and stmt_deps holds only def-trf-fine-fan-blowup. I checked the source in ILO VIII: Lemma 3.1.8(ii) on p.99, and the proof of Thm 3.3.15 on p.109 ('Since the monoids are fine, we can shrink U … follows from Lemma 3.1.8(ii)'). The proof follows that route. Step 1 is elementary: P is finitely generated (from 'fine' in the definition node), and the germ equality relation in the same definition gives one neighbourhood per generator; the finite intersection works, and P={0} is handled separately. Step 2 is elementary: equality on generators extends to all of P by additivity. Step 3 is the last assertion of lem-trf-affine-fan-canonical-section-rigidity (φ_g'=φ_g gives g'=g, point and sheaf maps included), applied to (U,A|_U). Its hypotheses hold there: restricted stalks are unchanged, so they stay sharp and the morphisms stay local, and pullback commutes with restriction. There is no cycle. The statement is true and needs finite generation; I tested P={0}, N and N². No duplicates or SGA citations, and I agree with the Mathlib 'no match'. The parent strict-fan-chart-local-comparison uses the item in the form stated. One cosmetic notation difference (overline-tilde-P vs overline-M_P, the same sheaf). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFanGermRigidity",
+  "declaration": "AlgebraicGeometry.FineFan.affine_fan_germ_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFanGermRigidity.lean",
+  "statement": "theorem affine_fan_germ_rigidity (T : SheafedSpace CommMonCat.{u}) (hT : ∀ x : T, IsSharp (stalk T.presheaf x)) (P : Type u) [CommMonoid P] (hP : IsFine P) (sP : IsSharp P) (V : Opens T) (t : V) (h k : T.restrict V.isOpenEmbedding ⟶ affine P) (hh : IsLocalMorphism h) (hk : IsLocalMorphism k) (heq : ∀ p : P, germ (T.restrict V.isOpenEmbedding).presheaf ⊤ t (by trivial) (((SheafedSpace.Γ.map h.op).hom.comp (affineSection P)) p) = germ (T.restrict V.isOpenEmbedding).presheaf ⊤ t (by trivial) (((SheafedSpace.Γ.map k.op).hom.comp (affineSection P)) p)) : ∃ U : Opens V, t ∈ U ∧ (SheafedSpace.Γ.map ((T.restrict V.isOpenEmbedding).ofRestrict U.isOpenEmbedding).op).hom.comp ((SheafedSpace.Γ.map h.op).hom.comp (affineSection P)) = (SheafedSpace.Γ.map ((T.restrict V.isOpenEmbedding).ofRestrict U.isOpenEmbedding).op).hom.comp ((SheafedSpace.Γ.map k.op).hom.comp (affineSection P)) ∧ (T.restrict V.isOpenEmbedding).ofRestrict U.isOpenEmbedding ≫ h = (T.restrict V.isOpenEmbedding).ofRestrict U.isOpenEmbedding ≫ k",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d954807cb",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 4cc8613b30ee: affinePullback (owned by theorem lem-trf-affine-fan-hom-universal) replaced by its exact body (SheafedSpace.Γ.map f.op).hom.comp (affineSection P); import and theorem stmt_dep removed, stmt_deps=[def-trf-fine-fan-blowup]. Clause check against node and FineFanBlowup.lean: SheafedSpace CommMonCat T with sharp stalks, P fine+sharp, affine P, V:Opens T, t:V, h,k local (IsLocalHom ⇔ h⁻¹(Q^×)=P^×), germ hypothesis ∀p, ∃ U:Opens V ∋ t with restricted ρ equality and ofRestrict≫h = ofRestrict≫k (full morphism). Nothing assumed beyond node, nothing missing; P={0}, empty V, V=T, non-saturated P covered; same-universe P forced by affine and harmless (FG monoid ULifts). lean.statement verbatim; node differs from main only in lean; single sorry theorem, docstrings with source/blueprint and 3 proof steps; report sections present; no H4 duplicate. No file changed, nothing compiled; worker's compile reported clean."
+ }
+}

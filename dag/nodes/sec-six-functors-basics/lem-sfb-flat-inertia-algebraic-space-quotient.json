@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-flat-inertia-algebraic-space-quotient",
+ "kind": "statement",
+ "title": "Algebraic-space quotient of a stack with flat inertia",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Its inertia stack $I_{\\mathcal X/S}$ has objects $(x,a)$ over $T$, where $x\\in\\mathcal X(T)$ and $a:x\\xrightarrow{\\sim}x$ is an automorphism; its projection sends $(x,a)$ to $x$. Assume this projection, which is representable by algebraic spaces [def-trf-algebraic-space], is flat and locally of finite presentation, tested after scheme base change on etale charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $Q$ be the fppf sheafification [def-weil-pbc-sheafification] of the presheaf $T\\mapsto\\operatorname{Ob}(\\mathcal X(T))/\\cong$ [def-pc-fppf-site]. Then $Q$ is an algebraic space and the natural map $\\pi:\\mathcal X\\to Q$ is surjective and smooth. Here the map need not be representable: smoothness is tested on a smooth scheme atlas of the source and etale scheme charts of the target. If $\\mathcal X\\to S$ is smooth, then $Q\\to S$ is smooth as well.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06QJ, proposition-when-gerbe; Tag 06QD, lemma-gerbe-over-iso-classes; Tag 0DN8, lemma-gerbe-smooth; literature/stacks-project/spaces-descent.tex Tag 0AHD, lemma-syntomic-smooth-etale-permanence (applied to a smooth scheme atlas)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-moduli-inertia",
+  "def-sfb-moduli-isomorphism-class-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $u:U\\to\\mathcal X$ and write $x$ for its object over $U$. The etale-stack convention gives an fppf stack by [lem-sfb-etale-smooth-atlas-fppf-descent]. Its representable diagonal makes $R=U\\times_{\\mathcal X}U$ an algebraic space: on $T$ it consists of $(a,b,r)$ with $r:x_a\\xrightarrow{\\sim}x_b$. Its projections $s,t:R\\to U$ are smooth and surjective by base change of the atlas, using [lem-sfb-stack-chartwise-smooth-etale-calculus]. Composition and inverse are composition and inverse of these isomorphisms. The subspace $G=R\\times_{U\\times_SU}U$ consists of automorphisms of $x$. Thus $G\\to U$ is the scheme pullback of the inertia projection. The hypothesis says exactly that $G\\to U$ is flat and locally of finite presentation; no smoothness of $G$ is claimed.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ, converse, choose smooth atlas and identify its stabilizer; Tag 06PR, lemma-presentation-inertia (objectwise identification written here)."
+   }
+  },
+  {
+   "text": "Let $G$ act on $R$ over $s:R\\to U$ by $g\\cdot r=r\\circ g^{-1}$. This is a left action, since $r\\circ h^{-1}\\circ g^{-1}=r\\circ(gh)^{-1}$. If $r\\circ g^{-1}=r$, cancellation by $r^{-1}$ gives $g=1$, on every test scheme. Apply [lem-sfb-free-flat-group-space-quotient] with $B=U$ and $Z=R$. It gives an algebraic space $A=R/G$, a surjective flat locally finitely presented map $q:R\\to A$, and fppf local lifts of its sections. Source and target are invariant. They descend to maps $s_A,t_A:A\\to U$ by the universal property [def-weil-pbc-sheafification].",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ, converse, free stabilizer action and quotient; Bootstrap Tag 06PH, lemma-quotient-free-action."
+   }
+  },
+  {
+   "text": "There is a natural isomorphism $A\\cong h_U\\times_Qh_U$ carrying $(s_A,t_A)$ to the two projections. Indeed, $r:x_a\\to x_b$ gives equal isomorphism classes, hence the map from $R$ factors through $A$. Every section of $A$ locally lifts to such an $r$. If two lifts $r_1,r_2:x_a\\to x_b$ have the same endpoints, take $g=r_2^{-1}r_1$; then $g\\cdot r_1=r_2$. They therefore give the same section of $A$. This proves injectivity after a common lifting cover and then globally by its sheaf axiom. Conversely a pair $(a,b)$ in $h_U\\times_Qh_U$ means the two classes $[x_a],[x_b]$ agree in the sheafification. By [lem-weil-pbc-site-sheafification-sections-local] they agree in the presheaf after an fppf cover, so choose local isomorphisms $r_i:x_a\\to x_b$. Their images in $A$ agree on overlaps by the cancellation calculation just made, and glue uniquely. The glued section has endpoints $(a,b)$. Pullbacks preserve this construction because the local formulas and the unique gluings do. This proves the claimed natural isomorphism, including for nonreduced test schemes.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ, converse, monomorphism of the quotient relation; Tag 06QD, lemma-gerbe-over-iso-classes, local equality of isomorphism classes."
+   }
+  },
+  {
+   "text": "The maps $s_A,t_A$ are smooth. Here is the chart argument for $s_A$, avoiding any assumption that $q$ is smooth. Choose a surjective etale scheme chart $W\\to A$, form $R_W=R\\times_AW$, and choose a surjective etale scheme chart $Z\\to R_W$. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $Z\\to W$ is surjective, flat and locally of finite presentation. Also $Z\\to R$ is etale, so $Z\\to R\\xrightarrow{s}U$ is smooth by the same calculus and step 1. Both $W$ and $U$ are schemes. Apply [lem-sbc-smooth-flat-surjective-source-descent] to $Z\\to W\\to U$ to conclude $W\\to U$ smooth. The etale-chart definition of smoothness then gives $s_A$ smooth. The identical argument with $t$ gives $t_A$ smooth. Both are surjective because the identity arrows give a section $U\\to A$ of each; a point of $U$ lifts along that section. They are consequently flat and locally of finite presentation by the cited calculus.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ, converse, descent through the stabilizer quotient, strengthened to smoothness by the chart argument of Tag 0DLS, lemma-smooth-quotient-stack; spaces-descent.tex Tag 0AHE, lemma-smooth-permanence."
+   }
+  },
+  {
+   "text": "The map $h_U\\to Q$ has fppf local lifts of sections. For $a\\in Q(T)$, [lem-weil-pbc-site-sheafification-sections-local] supplies an fppf cover and objects $y_i\\in\\mathcal X(T_i)$ whose classes represent $a$. The base changes $V_i=T_i\\times_{\\mathcal X}U\\to T_i$ are smooth surjective algebraic spaces by the atlas definition. By [lem-sfb-smooth-space-cover-etale-sections], after an etale covering of each $T_i$ they have sections, giving maps to $U$ whose objects are isomorphic to the restrictions of $y_i$. Etale maps are flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus], so these refinements are fppf coverings in [def-pc-fppf-site]. Composing covering families gives an fppf covering $\\{T_j\\to T\\}$ and maps $a_j:T_j\\to U$ representing $a|_{T_j}$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QD, local surjectivity argument; Tag 06QJ, the smooth atlas and the fppf quotient."
+   }
+  },
+  {
+   "text": "For this $a\\in Q(T)$ put $F_a=h_T\\times_Qh_U$, a sheaf over $T$. On a lifting cover from step 5 its restriction is $T_j\\times_{a_j,U,s_A}A$: a pair $(a_j,b)$ in the relation of step 3 is exactly the equality $a|_{T_j}=[x_b]$. These are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], and their projections to $T_j$ are smooth surjective by step 4 and [lem-sfb-space-smooth-surjective-fppf-locality]. Apply [lem-sfb-fppf-local-algebraic-space] to get an algebraic space representing $F_a$. Its size hypothesis is satisfied in the chosen universes: use a covering with at most one member per point of $T$, obtained by retaining for each point one member containing it, and choose all its charts in the same containing universe. Their set-indexed scheme coproduct exists by [lem-weil-pbc-scheme-coproduct-family] and lies within the site bound [def-weil-size-convention]. The fppf target locality in [lem-sfb-space-smooth-surjective-fppf-locality] now makes $F_a\\to T$ smooth and surjective. This applies to every scheme $T$ and every $a$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sfb-fppf-local-algebraic-space",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ, algebraicity of the quotient relation and Bootstrap; fppf descent of the atlas fibres as in the proof of Tag 0DLS."
+   }
+  },
+  {
+   "text": "Thus $h_U\\to Q$ is representable by algebraic spaces, smooth and surjective, by the scheme tests of step 6. In particular it is flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Since $Q$ is an fppf sheaf by construction, [lem-sfb-fppf-space-atlas-bootstrap] applies and makes $Q$ an algebraic space. The composite of the chosen smooth scheme atlas $U\\to\\mathcal X$ with $\\pi$ is precisely this smooth surjective morphism $U\\to Q$. Consequently $\\pi$ is smooth in the nonrepresentable atlas sense stated in the item. It is surjective: the local lifts to $U$ in step 5 are objects of $\\mathcal X$ over those covers. We have proved this with an arbitrary smooth atlas, so no choice of atlas has entered the conclusion.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06QJ, final Bootstrap step; Tags 06QD and 0DN8, identification with the isomorphism-class sheaf and smooth surjectivity."
+   }
+  },
+  {
+   "text": "Finally assume $\\mathcal X\\to S$ smooth. Choose the atlas $U\\to\\mathcal X$ with $U\\to S$ smooth, as allowed by [def-sfb-algebraic-moduli-stack]. Steps 1--7 give $U\\to Q$ smooth and surjective for this atlas. For a surjective etale scheme chart $V\\to Q$, the fibre product $W=U\\times_QV$ is a scheme because the diagonal of $Q$ is representable, as in [def-trf-algebraic-space]. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $W\\to V$ is smooth surjective, hence flat and locally of finite presentation, and $W\\to U$ is etale. Thus $W\\to S$ is smooth. Applying [lem-sbc-smooth-flat-surjective-source-descent] to $W\\to V\\to S$ shows that $V\\to S$ is smooth. The etale-chart test gives smoothness of $Q\\to S$. This also covers empty stacks and the empty quotient.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "spaces-descent.tex Tag 0AHD, lemma-syntomic-smooth-etale-permanence, smooth case applied on scheme charts; Tag 0AHE also applies."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-free-flat-group-space-quotient",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-trf-algebraic-space",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "def-pc-fppf-site",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-fppf-local-algebraic-space",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-size-convention",
+  "lem-sfb-fppf-space-atlas-bootstrap"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06QJ, converse stabilizer-quotient argument; Tag 06QD, isomorphism-class comparison; Tag 0DLS, smoothness by a smooth atlas and fppf source descent; spaces-descent.tex Tag 0AHD for the final clause. The proof computes the atlas fibres directly rather than introducing gerbe terminology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with flat locally finitely presented inertia is a gerbe over the algebraic space of isomorphism classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] {y : ↥Y}\\n  (e : (CategoryTheory.ConcreteCategory.hom sX.base) x = (CategoryTheory.ConcreteCategory.hom sY.base) y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat inertia algebraic stack quotient sheaf representability gerbe smooth surjective quasi compact diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": @QuasiSeparated = MorphismProperty.diagonal @QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gerbe\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]erbe|[Ii]nertia[Ss]tack|[Aa]lgebraic[Ss]tack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of isomorphism classes of objects of an algebraic stack with flat stabilizers is an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData → AlgebraicGeometry.SheafedSpace.GlueData CommRingCat\", \"doc\": \"The gluing data for sheafed spaces over the category of commutative rings, constructed by applying the forgetful functor from locally ringed spaces to sheafed spaces. This transforms the original glui\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X : AlgebraicGeometry.PresheafedSpace CommRingCat} →\\n  (Y : AlgebraicGeometry.Scheme) →\\n    (f : X ⟶ Y.toPresheafedSpace) → [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] → AlgebraicGeometry.Scheme\", \"doc\": \"Given an open immersion from a presheafed space into a scheme, this constructs the scheme structure on the presheafed space by inheriting the local affine structure through the open immersion, ensurin\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.isoSheafedSpace\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"(D : AlgebraicGeometry.LocallyRingedSpace.GlueData) → D.glued.toSheafedSpace ≅ D.toSheafedSpaceGlueData.glued\", \"doc\": \"The image of the glued locally ringed space under the forgetful functor to sheafed spaces over commutative rings is isomorphic to the glued sheafed space constructed from the gluing data transformed b\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, scheme descent, or categorical stacks; none gives this theorem for algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]nertia|[Gg]erbe|[Aa]lgebraic[Ss]pace",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf sheaf orbit quotient of a free action of a flat group algebraic space is representable by an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.Limits.SingleObj.Types.colimitEquivQuotient, CategoryTheory.Limits.SingleObj.colimitTypeRelEquivOrbitRelQuotient, Rep.quotientToCoinvariantsFunctor, Rep.coinvariantsFunctor_obj_carrier, MulAction.automorphize",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf sheafification of isomorphism classes of an algebraic stack with flat locally finitely presented inertia is an algebraic space with smooth surjective quotient morphism",
+   "results": "8 hits: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of morphisms of algebraic spaces descends along a surjective flat locally finitely presented morphism on the source",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Flat",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-23",
+   "verdict": "unavailable: Loogle index does not recognize this identifier; the alternative substring query was run"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*permanence|IsSmooth.*[Dd]escend|[Dd]escend.*IsSmooth",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces X Y B if X to Y is surjective flat locally finitely presented and X to B is smooth then Y to B is smooth",
+   "results": "8 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism of algebraic spaces can be checked after a flat locally finitely presented surjective cover of its domain",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Flat\"",
+   "results": "10 hits: RingHom.Smooth.flat, Algebra.Smooth.flat, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.instFlatOfSmooth, RingHom.Smooth.codescendsAlong_faithfullyFlat, Algebra.Smooth.of_smooth_tensorProduct_of_faithfullyFlat, AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-space-curves-smooth",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Generic flat-inertia quotient and smoothness descent, used on the stack of invertible modules.",
+   "via": [
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the stabilizer quotient, kernel-relation comparison, atlas-fibre descent, Bootstrap recognition and final smoothness descent into eight explicit steps. One new statement-only node is the general free flat group-space quotient theorem 06PH. All other inputs reuse existing nodes. No Lean attachment or Mathlib match was found; read every cited statement and source and checked arbitrary test schemes, nonsmooth stabilizers and empty objects.",
+  "blueprint": "The inherited ancestry (ancestor prints None) is preserved. The current latest blueprint direct-images proof (3) was read: this is a generic algebraic-space input below the historical alteration/Picard helper chain in blueprint.from.place, not a replacement of a unit step. Steps 1--7 realize the flat-inertia quotient input in the parent Picard-space proof; step 8 realizes its smoothness descent input.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme smoothness descent through a flat surjective locally finitely presented source cover; used only on the scheme charts Z,W,U and W,V,S. No special smooth-base-change theorem is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and etale cover calculus needed for R, G and the atlas fibres; no node of this unit replaces these foundations."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic sheafification local representatives and local equality identify the stabilizer quotient relation and give lifts to the atlas."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence of a set-indexed scheme coproduct checks the chart bound in fppf descent; no change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-0db0b1bc2",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-0db0b1bc2 (reviewer sub-agent of L); spot-checked: PASS. The item statement is identical to live, where the item is still unsplit (first split, no repair note, so the 10-21 re-split rule does not apply). The only stmt_deps addition is def-sbc-smooth-morphisms. proof_deps equal the union of step uses. Route is Stacks 06QJ converse + 06QD + 0DLS (read in stacks-morphisms.tex 6100-6260, 5878, 7485) and Bootstrap 06PH/04S6 (bootstrap.tex). New node lem-sfb-free-flat-group-space-quotient matches 06PH hypothesis by hypothesis (G×_B Z, correcting Stacks' G×_S X typo). It is statement-only and self-contained, and is strictly smaller than the item. It does not duplicate flat-groupoid-algebraic-quotient (gives a stack), per-free-finite-group-affine-quotient (finite/affine only), dm-geometric-inertia-trivial or zariski-torsor-coarse-descent. Steps checked: (1) R=Isom space, s,t base changes of the atlas, G→U the scheme pullback of inertia, flat lfp, no smoothness of G used; (2) g·r=r∘g⁻¹ is a free left action, endpoints are G-invariant; (3) A≅U×_QU via r2⁻¹r1 cancellation and the local-equality clause of sheafification, elementary; (4) 0DLS chart argument Z→W→U with scheme source descent, q never assumed smooth, section e gives surjectivity; (5) atlas fibres V_i get étale-local sections by 0CFV, étale families are fppf; (6) F_a|T_j=T_j×_U A, fppf-local algebraic space with the size bound handled, smooth/surjective descent over scheme T; (7) 04S6(3) bootstrap needs no diagonal condition; (8) W=U×_QV, W→U→S smooth, W→V fppf, so V→S smooth. Tested on empty X, X an algebraic space, and Bμ_p in characteristic p (nonsmooth G, Q=Spec k, smooth map). Batch-5 flags: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are a general definition and generic space foundations. The other four flagged nodes reach sec-trace-formula only through that definition. None is part of the trace formula or Poincaré duality proofs, so all are accepted. tool_uses (scheme source descent, space fibre products, sheafification local sections, scheme coproducts) are generic and accepted. No SGA source. Advisory only: steps 4/8 source.document names stacks-morphisms.tex for spaces-descent tags."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatInertiaAlgebraicSpaceQuotient",
+  "declaration": "AlgebraicGeometry.flat_inertia_algebraic_space_quotient",
+  "declarations": [
+   "AlgebraicGeometry.flat_inertia_algebraic_space_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatInertiaAlgebraicSpaceQuotient.lean",
+  "statement": "theorem flat_inertia_algebraic_space_quotient {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (hI : HasFlatLocallyPresentedModuliInertia F) (Q : ModuliIsoClassSheaf F) : AlgebraicSpace.IsAlgebraicSpace Q.sheaf ∧ (∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F) (b : yoneda.obj U ⟶ Q.sheaf.obj), IsSmoothModuliAtlas F U a ∧ Nonempty (ModuliTwoIso (a.comp Q.projection) (discreteModuliMap b)) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ Smooth p.left ∧ Surjective p.left) b) ∧ (IsSmoothModuliStack F → ∀ (V : Over S) (b : yoneda.obj V ⟶ Q.sheaf.obj), AlgebraicSpace.IsEtale b → Smooth V.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3764bc0df",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Item lean + stmt_deps (+2 new def nodes) only; statement verbatim; sorry-only with 8-step proof docstring. New defs def-sfb-moduli-inertia (vertical automorphism objects, f∘α=β∘f arrows, forgetful projection; flat+lfp tested on HasSpaceBaseChange projections over all étale charts) and def-sfb-moduli-isomorphism-class-sheaf (class presheaf pinned by skeleton bijection per fibre; sheaf+unit with full universal property; Mathlib presheafToSheaf constructor) satisfy H12 fields and have no existing counterpart (own search of side-live lean/Sheaf, lean/WeilConjectures, DAG). Conclusions: IsAlgebraicSpace Q.sheaf; smooth atlas a with b: h_U→Q 2-iso pinned to π∘a and smooth∧surjective on every scheme base change (= π smooth surjective by source-locality, π not assumed representable); IsSmoothModuliStack F → all étale charts of Q smooth over S. Edge cases (empty, Bμ_p char p, nonreduced, universes u v w independent) ok. Advisory only: stable-pointed conventions reached through def-sfb-algebraic-moduli-stack, not a direct stmt_dep; second reading is a self-pass. No compile (no file changed)."
+ }
+}

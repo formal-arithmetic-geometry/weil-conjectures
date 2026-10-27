@@ -1,0 +1,149 @@
+{
+ "id": "lem-sf-proper-relative-kunneth-supports",
+ "kind": "statement",
+ "title": "Proper forget-supports normalization of one relative Kunneth route",
+ "statement": "Let A be a finite commutative ring and let p:W→X, q:W→Y, f:X→S, g:Y→S form an arbitrary cartesian square. Let h:W→S with q;g=h and assume f,g,q,h proper. For arbitrary E∈D(X_et,A), K∈D(Y_et,A), let r be the specifically constructed native properSupportedKunnethRoute from Rh!(p*E⊗q*K) to Rf!E⊗Rg!K. Let c_a:Ra!→Ra* be the canonical proper comparison of [def-sp-unbounded-proper-shriek-star-comparison]. Then r⁻¹;c_h = (c_f⊗c_g);κ, where κ is the independently defined ordinary Kunneth map of [def-kun-kunneth-map] with common structural map h. The auxiliary properKunnethInput is the explicit tensor of c_f and c_g, not an arbitrary chosen isomorphism. Only one relative route is normalized; no coordinate-interchange equality is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First supported coordinate extraction before a trace; the coordinate triangle computation before applying its scalar trace"
+ },
+ "stmt_deps": [
+  "def-kun-kunneth-map",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "def-sf-supported-diagonal-calculus",
+  "def-sf-proper-supported-kunneth-route"
+ ],
+ "proof": [
+  {
+   "text": "Expand the inverse of the constructed native properSupportedKunnethRoute. Naturality moves the proper comparisons through the tensor symmetries. Replace its two supported projection maps with ordinary projection maps using the proved projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar.",
+   "uses": [
+    "lem-asd-source-proper-projection-coincidence",
+    "def-sp-unbounded-proper-shriek-star-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private exchange_supports expands the supported exchange and applies the two existing source-library compactification forget-supports comparison equations; this proves the full exchange comparison. The specified compositor is normalized by lem-sf-proper-shriek-compositor-supports, the sole remaining obligation. Naturality of the proper comparison for g and the projection coincidence then move both comparisons to the input.",
+   "uses": [
+    "lem-sf-proper-shriek-compositor-supports",
+    "def-sp-unbounded-proper-shriek-star-comparison",
+    "lem-sf-proper-refinement-forget-supports"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic kunnethMap_symmetricFactorization proves the precise symmetric ordinary projection/exchange/compositor formula from native Kunneth symmetry and the source-library flipped factorization. Substitute it and use bifunctor naturality to collect the two source proper comparisons.",
+   "uses": [
+    "lem-sf-native-kunneth-symmetric-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the abstract proper Kunneth normalization diagram. Its compositor square is properShriekComp_comp_forgetSupports; its inner and projection squares are the native support-comparison equations proved above; projection and tensor naturality give the next two squares; the proved ordinary symmetric factorization is the last square. Use the inverse-route component equation to identify the abstract left-hand composite.",
+   "uses": [
+    "lem-sf-proper-kunneth-normalization-algebra",
+    "lem-sf-proper-shriek-compositor-supports",
+    "lem-sf-native-kunneth-symmetric-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-source-proper-projection-coincidence",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-sf-proper-shriek-compositor-supports",
+  "lem-sf-proper-refinement-forget-supports",
+  "lem-sf-native-kunneth-symmetric-factorization",
+  "lem-sf-proper-kunneth-normalization-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, canonical mixed-counit transpose and proper forget-supports transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For proper morphisms the canonical relative Kunneth isomorphism with compact support agrees with the ordinary Kunneth morphism through the forget supports comparison",
+   "results": "Eight unrelated proper/support complex results, none comparing these specified relative Kunneth and forget-supports maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth projection formula base change two coordinate factorizations proper derived direct image",
+   "results": "Eight unrelated Proj pullback results; no derived Kunneth factorization. Loogle CategoryTheory.Adjunction.projectionMap returned no result.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "kunnethMap_eq|projectionMap.*symmetry|rightDerivedLowerShriek.*comp.*LowerStar; Kunneth|kunneth|forgetSupports in Mathlib/CategoryTheory/Monoidal and Mathlib/AlgebraicGeometry",
+   "results": "Mathlib has no such Kunneth statement. The source library has proved kunnethMap_eq_of_isPullback and braided pullback tensor comparison, but no Kunneth tensor symmetry and no normalization of the supported relative route.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing source-library equations; add only the missing one-route normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedFirstExtraction",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; canonical-mate step of the first coordinate calculation.",
+   "via": [
+    "lem-sf-supported-first-extraction",
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperRelativeKunnethSupports",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperRelativeKunnethSupports.lean",
+  "declaration": "AlgebraicGeometry.Etale.properRelativeKunneth_comp_forgetSupports",
+  "statement": "theorem properRelativeKunneth_comp_forgetSupports {S X Y W : Scheme.{u}}\n    {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}\n    (sq : IsPullback p q f g) (h : W ⟶ S) (w : q ≫ g = h)\n    [IsProper f] [IsProper g] [IsProper q] [IsProper h]\n    (E : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :\n    (properSupportedKunnethRoute A sq h w E K).inv ≫\n        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) h).hom.app\n          (((derivedTensor (ModuleCat.{u + 1} A) W).obj\n            ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.obj E)).obj\n              ((upperStar (ModuleCat.{u + 1} A) q).leftDerivedFunctor.obj K)) =\n      (properKunnethInput A f g E K).hom ≫\n        kunnethMap (ModuleCat.{u + 1} A) p q f g h (sq.w.trans w) w E K",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.kunnethComparisonTensorIso",
+   "AlgebraicGeometry.Etale.properKunnethInput",
+   "AlgebraicGeometry.Etale.properRelativeKunneth_comp_forgetSupports"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

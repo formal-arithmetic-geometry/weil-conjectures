@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Take the small final tail of the finite field index above a common upper bound of E and F. Since L is bounded below, the coefficient complex presentation supplies a uniformly bounded-below complex diagram N, its colimit c, stage and vertex isomorphisms, and the canonical adjunction compatibility equation.",
+   "text": "Choose a common upper bound G of E and F in the filtered category of finite coefficient fields. Use the final forgetful functor Under G → FiniteIntermediateField ℓ, reindexed by AsSmall in universe u+1. Every stage contains G and hence both E and F. Since L is bounded below, apply the coefficient complex presentation to obtain a uniformly bounded-below complex diagram N, a colimit c, stage and vertex isomorphisms, and the canonical adjunction compatibility equation.",
    "uses": [
     "def-weil-finite-subextension-directed-set",
     "lem-weil-pbc-condensed-coefficient-complex-presentation"
@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "For the localized canonical cocone, shifted additive Hom continuity is invariant under isomorphisms and shifts. Hom from zero is zero, and homColimitProperty_extensions supplies closure under distinguished extensions. Constructible single sheaves satisfy the property by sheaf Hom continuity. Bounded cohomological devissage gives continuity for K. Representatives in the filtered abelian-group colimit then factor the required morphism through a stage; transport from the canonical colimit cocone to the supplied one by its unique isomorphism.",
+   "text": "For the localized canonical cocone, shifted additive Hom continuity is invariant under isomorphisms by natural isomorphism of additive coyoneda functors, and under shifts by the shift adjunction. Hom from zero is zero; its diagram and target are zero abelian groups, so the comparison is invertible. The theorem homColimitProperty_extensions supplies closure under distinguished extensions. Constructible single sheaves satisfy the property by sheaf Hom continuity, and bounded cohomological devissage gives continuity for K. The proved private factorization lemmas in CondensedFiniteModelProofAPI use surjectivity of the abelian-group colimit comparison, the elementwise filtered-colimit representative theorem and the shift adjunction at zero to factor each arrow from K through a stage. Transport from the canonical colimit cocone to c by their unique isomorphism.",
    "uses": [
     "lem-weil-pbc-condensed-sheaf-ext-continuity",
     "lem-weil-pbc-condensed-finite-model-proof-api",
@@ -75,9 +75,9 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C2",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.md",
-  "place": "Hom paragraph; canonical Hom continuity, extension closure and bounded devissage, from existing declared inputs.",
-  "group": "F5"
+  "place": "The existing continuity/adjunction route, realized in Lean with the smallified final category Under G, the stated Hom-colimit extension theorem, and the fixed tensor comparison maps."
  },
  "mathlib_searches": [
   {
@@ -208,7 +208,22 @@
  ],
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sfb-qlbar-two-colimit",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-sfb-constructible-cocone-hom-surj",
@@ -266,13 +281,21 @@
   "note": "existing:true binding of AlgebraicGeometry.ProEtale.constructibleCocone_homSurj (TwoColimit.lean l.475, section vars Scheme.{u}, Fact ℓ.Prime, NoetherianSpace X). Clause-by-clause match with node/source: E,F in FiniteIntermediateField ℓ, K,L in BoundedConstructible via constructibleCocone, ∃ k ≥ i,j and g at stage k, f = iso.inv ≫ Φ_k.map g ≫ iso.hom (transitivity-conjugated). No stronger hypotheses, no universe restriction, statement verbatim, stmt_dep records correct. Delivery changes only the item's lean record. Edge cases (empty X, zero objects, E=F=H, non-locally-Noetherian X) covered. Probe import of TwoColimit fails on both side nt_compile and live lcompile with the pre-existing duplicate etaleModuleCohomology_isColimit_of_isFiltered (Sheaf/ vs WeilConjectures/ EtaleCohomologyFilteredColimit.lean:154), a project environment fault the delivery cannot fix. Maintainer note: dedupe or re-export that module."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F5",
+  "group": "Z6",
   "result": "pass",
-  "landing": "20261021T225118-L-3772049",
+  "landing": "20261024T223355-L-1602497",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj",
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_homInj",
+   "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj"
+  ],
+  "sorry_after": []
  }
 }

@@ -12,32 +12,19 @@ public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 public import WeilConjectures.Compactification.NagataCompactification
 
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleOpenTensor
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.Paper.SpDirectImageEtaleMate
-import Sheaf.Paper.DirectImageChangeRingTranspose
-import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
+
+import all Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
+import all Sheaf.Paper.FiniteLocalizingExceptionalPreservation
+import Sheaf.SecSmoothPurity.ProEtaleDirectImageScalarCocycle
+import Sheaf.SecSmoothPurity.ProEtaleOpenScalarCocycle
+import all Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.EtaleOriginScalarProjectionSquare
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
+import all Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison
+import Sheaf.SecSmoothPurity.SupportedEtaleTensorOrigin
+import Sheaf.AlgebraicGeometry.IntrinsicTorAmplitudeTransport
 
 /-!
 # Compact support and finite coefficient extension
@@ -52,6 +39,10 @@ comparison. All categories are ordinary uncompleted module derived categories.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedVariables false
+-- Replaying categorical transport tactics for linting duplicates elaboration work.
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
 
 universe u
 
@@ -60,6 +51,302 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
+  completedAdicDerivedChange directImageScalarComparison reductionOpenScalarIso
+  scalarExtensionFunctor_composition
+  Etale.derivedTensor Etale.lowerStar Etale.upperStar
+  Etale.rightDerivedLowerStarProjectionMap Etale.scalarTensorIso
+
+private def ReductionGood (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (K : proEtaleDerivedCategory T A) : Prop :=
+  Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor _ i).obj K)} ∧
+    (∀ i : ℤ, IsConstructibleProEtaleModuleSheaf T A
+      ((DerivedCategory.homologyFunctor _ i).obj K)) ∧
+    HasFiniteProEtaleTorAmplitude T A K
+
+private theorem reductionGood_iso {T : Scheme.{u}} {A : Type u} [CommRing A] [Finite A]
+    {K L : proEtaleDerivedCategory T A} (e : K ≅ L) (h : ReductionGood T A K) :
+    ReductionGood T A L := by
+  refine ⟨h.1.subset (fun i hi hz ↦ hi
+    (hz.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e).symm)),
+    fun i ↦ intrinsicConstructible_of_iso T A
+      ((DerivedCategory.homologyFunctor _ i).mapIso e) (h.2.1 i), ?_⟩
+  obtain ⟨a, b, ht⟩ := h.2.2
+  refine ⟨a, b, ht.1, ?_⟩
+  intro N P hN f hf hP M i hi
+  obtain ⟨q⟩ := hN
+  exact ht.2 N P ⟨q ≪≫ e.symm⟩ f hf hP M i hi
+
+private theorem bounded_iff_finite_support
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (K : DerivedCategory C) :
+    DerivedCategory.TStructure.t.bounded K ↔
+      Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor C i).obj K)} := by
+  constructor
+  · rintro ⟨⟨a, ha⟩, ⟨b, hb⟩⟩
+    apply (Set.finite_Icc a b).subset
+    intro i hi
+    exact ⟨le_of_not_gt (fun h ↦ hi ((DerivedCategory.isGE_iff K a).mp ha i h)),
+      le_of_not_gt (fun h ↦ hi ((DerivedCategory.isLE_iff K b).mp hb i h))⟩
+  · intro h
+    obtain ⟨a, ha⟩ := h.bddBelow
+    obtain ⟨b, hb⟩ := h.bddAbove
+    refine ⟨⟨a, (DerivedCategory.isGE_iff K a).mpr (fun i hi ↦ ?_)⟩,
+      ⟨b, (DerivedCategory.isLE_iff K b).mpr (fun i hi ↦ ?_)⟩⟩
+    · by_contra hz
+      exact (not_lt_of_ge (ha hz)) hi
+    · by_contra hz
+      exact (not_lt_of_ge (hb hz)) hi
+
+private theorem reductionGood_realization_iff (T : Scheme.{u})
+    (A : Type u) [CommRing A] [Finite A]
+    (K : DerivedCategory (Sheaf (ProEt.topology T)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :
+    ReductionGood T A ((sfIntrinsicDerivedEquivalence T A).functor.obj K) ↔
+      ProEtale.DerivedCategory.constructibleFiniteTor
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T K := by
+  let F := (sfIntrinsicModuleEquivalence T A).functor
+  have hc (i : ℤ) :
+      IsConstructibleProEtaleModuleSheaf T A
+        ((DerivedCategory.homologyFunctor _ i).obj (F.mapDerivedCategory.obj K)) ↔
+      IsConstructible (ULift.{u + 1, u} A)
+        ((DerivedCategory.homologyFunctor _ i).obj K) := by
+    let e := (F.mapDerivedCategoryHomologyFunctorIso i).app K
+    constructor
+    · intro h
+      exact (intrinsicRealization_constructible_iff T A _).mp
+        (intrinsicConstructible_of_iso T A e.symm h)
+    · intro h
+      exact intrinsicConstructible_of_iso T A e
+        ((intrinsicRealization_constructible_iff T A _).mpr h)
+  constructor
+  · rintro ⟨hb, hconstructible, a, b, ht⟩
+    have hbk : DerivedCategory.TStructure.t.bounded K :=
+      F.bounded_of_bounded_mapDerivedCategory_obj ((bounded_iff_finite_support _).mpr hb)
+    have hbc := ProEtale.DerivedCategory.boundedConstructible_of_homology
+      (ULift.{u + 1, u} A) hbk (fun i ↦
+        exists_isConstructibleSheaf_iso_comparisonUpperStar_obj _ ((hc i).mp (hconstructible i)))
+    exact ⟨hbc, a, b, (intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+      A T a b ht.1 K).mp ht⟩
+  · intro h
+    have hbci := ProEtale.DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic
+      _ h.1
+    refine ⟨(bounded_iff_finite_support _).mp
+      (F.bounded_mapDerivedCategory_obj hbci.1), fun i ↦ (hc i).mpr (hbci.2 i), ?_⟩
+    obtain ⟨a, b, ht⟩ := h.2
+    refine ⟨min a b, max a b, ?_⟩
+    exact (intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+      A T (min a b) (max a b) (min_le_max) K).mpr
+        (DerivedCategory.torAmplitudeIn.mono (min_le_left _ _) (le_max_right _ _) ht)
+
+private theorem reductionGood_scalar (ℓ : ℕ) [Fact ℓ.Prime]
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)
+    (hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B)
+    (T : Scheme.{u}) (K : proEtaleDerivedCategory T A) (h : ReductionGood T A K) :
+    ReductionGood T B ((scalarExtensionFunctor φ T).obj K) := by
+  obtain ⟨a, b, ht⟩ := h.2.2
+  obtain ⟨hb, hc, htor⟩ := scalarExtensionFunctor_preserves_constructible_tor
+    ℓ hA hB φ T K h.1 h.2.1 a b ht
+  exact ⟨hb, hc, a, b, htor⟩
+
+set_option maxHeartbeats 18000 in
+-- Diagnose elaboration without unfolding large derived-functor constructions indefinitely.
+private theorem reductionGood_compactSupport
+    (ℓ pchar : ℕ) [Fact ℓ.Prime] (hℓ : pchar ≠ ℓ)
+    (k : Type u) [Field k] [CharP k pchar]
+    {X Z Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) (j : X ⟶ Z) [IsOpenImmersion j]
+    (p : Z ⟶ Y) [IsProper p] (hf : j ≫ p = f)
+    (A : Type u) [CommRing A] [Finite A]
+    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)
+    (M : proEtaleDerivedCategory X A) (hM : ReductionGood X A M) :
+    ReductionGood Y A ((reductionCompactSupport A j p).obj M) := by
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  have : HasInvertibleExponent (ULift.{u + 1} A) (Spec (.of k)) := by
+    obtain ⟨n, hn⟩ := hA
+    have hz : ((ℓ ^ n : ℕ) : ULift.{u + 1} A) = 0 := by
+      apply ULift.ext
+      change ((ℓ ^ n : ℕ) : A) = 0
+      simpa only [nsmul_eq_mul, mul_one] using hn 1
+    have hne : (ℓ : k) ≠ 0 :=
+      CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ℓ.Prime) hℓ
+    have hu : IsUnit ((ℓ ^ n : ℕ) : k) := by
+      rw [Nat.cast_pow]
+      exact isUnit_iff_ne_zero.mpr (pow_ne_zero n hne)
+    exact ⟨ℓ ^ n, pow_pos (Fact.out : ℓ.Prime).pos _, hz, by
+      simpa only [map_natCast] using hu.map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
+  have : HasInvertibleExponent (ULift.{u + 1} A) Y :=
+    HasInvertibleExponent.of_hom (Y ↘ Spec (.of k))
+  let c : Compactification f := ⟨Z, p, j, hf.symm, inferInstance, inferInstance⟩
+  have : HasCompactification f := c.hasCompactification
+  let E := sfIntrinsicDerivedEquivalence X A
+  let K := E.inverse.obj M
+  have hK := reductionGood_iso (E.counitIso.app M).symm hM
+  obtain ⟨hF, R, ha⟩ := CondensedRing.ordinary_small_adjunction A k
+    (Y ↘ Spec (.of k)) f c
+  have ho := hF K ((reductionGood_realization_iff X A K).mp hK)
+  have ht := (reductionGood_realization_iff Y A _).mpr ho
+  let er := (FiniteCompactScalar.compactRealizationIso A c).app K
+  let ep := (Functor.isoWhiskerLeft
+    (sfIntrinsicExtensionByZero j A).mapDerivedCategory (properOriginPushIso A p)).app M
+  exact reductionGood_iso
+    (er.symm ≪≫ (sfIntrinsicCompactSupport c A).mapIso (E.counitIso.app M) ≪≫ ep.symm) ht
+
+private theorem isIso_of_pasted_square
+    {C : Type*} [Category C] {A B D E F G H : C}
+    (a : A ⟶ B) (b : B ⟶ D) (c : D ⟶ E) (d : E ⟶ H)
+    (e : A ⟶ F) (f : F ⟶ G) (g : G ⟶ H)
+    [IsIso a] [IsIso b] [IsIso d] [IsIso e] [IsIso f] [IsIso g]
+    (h : a ≫ b ≫ c ≫ d = e ≫ f ≫ g) : IsIso c := by
+  have : IsIso (a ≫ b ≫ c ≫ d) := by rw [h]; infer_instance
+  have : IsIso (b ≫ c ≫ d) := IsIso.of_isIso_comp_left a _
+  have : IsIso (c ≫ d) := IsIso.of_isIso_comp_left b _
+  exact IsIso.of_isIso_comp_right c d
+
+private theorem scalarMateRestriction_reflectsIso
+    {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (Y : Scheme.{u}) :
+    (scalarMateRestriction φ Y).mapDerivedCategory.ReflectsIsomorphisms := by
+  let r := scalarMateRestriction φ Y
+  have : PreservesFiniteLimits r :=
+    (Scheme.proEtaleRingRestrictScalars_properties
+      (Scheme.proEtaleConstantRingMap (T := Y) φ)).1
+  have : PreservesFiniteColimits r :=
+    (Scheme.proEtaleRingRestrictScalars_properties
+      (Scheme.proEtaleConstantRingMap (T := Y) φ)).2.1
+  have : r.ReflectsIsomorphisms :=
+    (Scheme.proEtaleRingRestrictScalars_properties
+      (Scheme.proEtaleConstantRingMap (T := Y) φ)).2.2
+  refine ⟨fun f _ ↦ ?_⟩
+  rw [DerivedCategory.isIso_iff]
+  intro n
+  have : IsIso (r.map ((DerivedCategory.homologyFunctor _ n).map f)) :=
+    (NatIso.isIso_map_iff (r.mapDerivedCategoryHomologyFunctorIso n) f).2
+      (by rw [Functor.comp_map]; infer_instance)
+  exact isIso_of_reflects_iso _ r
+
+private theorem reductionEtaleProjection_isIso
+    {R B : Type (u + 1)} [CommRing R] [CommRing B] [Finite R] [Finite B]
+    [IsNoetherianRing R] (φ : R →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+    (N : ℕ)
+    (hcd : ∀ (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)) (q : ℕ),
+      N < q → IsZero ((DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} R) p).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor _ 0).obj F))))
+    (K : Etale.DerivedCategoryModule R Z)
+    (hK : ∃ b : ℤ, ∀ q : ℤ, b < q →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) :
+    IsIso (properOriginEtaleProjection φ p K) := by
+  let BM := (ModuleCat.restrictScalars (φ)).obj
+    (ModuleCat.of (B) (B))
+  have : Finite BM := inferInstanceAs (Finite (B))
+  have : Module.Finite R BM := Module.Finite.of_finite
+  have : Module.FinitePresentation R BM := Module.finitePresentation_of_finite R BM
+  have hπ := Etale.finiteConstantProjectionComponent_isIso R p N hcd K
+    hK BM
+  let ec : Etale.scalarCoefficient (φ) Y ≅
+      (DerivedCategory.singleFunctor
+        (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) 0).obj
+          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)).obj BM) :=
+    (DerivedCategory.singleFunctor
+      (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) 0).mapIso
+        ((constantCommuteCompose Y.smallEtaleTopology
+          (ModuleCat.restrictScalars.{u + 1}
+            (φ))).app
+              (ModuleCat.of (B) (B)))
+  have : IsIso (((Etale.rightDerivedLowerStarProjectionMap
+      (ModuleCat.{u + 1} R) p).app K).app
+        (Etale.scalarCoefficient (φ) Y)) :=
+    (NatTrans.isIso_app_iff_of_iso
+      ((Etale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} R) p).app K) ec).mpr hπ
+  have hproj : IsIso (properOriginEtaleProjection φ p K) := by
+    unfold properOriginEtaleProjection
+    infer_instance
+  exact hproj
+
+set_option maxHeartbeats 18000 in
+-- Diagnose elaboration without unfolding large derived-functor constructions indefinitely.
+private theorem reductionProper_isIso
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (k : Type u) [Field k] {Z Y : Scheme.{u}}
+    [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (p : Z ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p]
+    (K : Etale.DerivedCategoryModule (ULift.{u + 1} A) Z)
+    (hb : DerivedCategory.TStructure.t.bounded K)
+    (hH : ∃ n : ℤ,
+      (properOriginEtaleTensor (RingHom.ulift.{u + 1, u + 1, u, u} φ) Z K).IsGE n) :
+    IsIso ((directImageScalarComparison φ p).app
+      ((finiteCoefficientIntrinsicDerivedComparison Z A).obj K)) := by
+  let R := ULift.{u + 1} A
+  have : IsNoetherianRing R := isNoetherian_of_finite R R
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (Z ↘ Spec (.of k))
+  have hcd (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)) (q : ℕ)
+      (hq : 2 * d < q) : IsZero ((DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} R) p).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor _ 0).obj F))) :=
+    (Etale.isZero_rightDerived_lowerStar_of_two_mul_lt R isAddTorsion_of_finite
+      (Z ↘ Spec (.of k)) (Y ↘ Spec (.of k)) p (comp_over p _) d hd F q hq).of_iso
+        ((Etale.lowerStar (ModuleCat.{u + 1} R) p).homologyRightDerivedFunctorObjSingleFunctorIso
+          F q)
+  have hplus := hb.1
+  obtain ⟨b, hb⟩ := hb.2
+  have hproj : IsIso (properOriginEtaleProjection
+      (RingHom.ulift.{u + 1, u + 1, u, u} φ) p K) :=
+    reductionEtaleProjection_isIso _ p (2 * d) hcd K
+      ⟨b, fun q hq ↦ (DerivedCategory.isLE_iff K b).mp hb q hq⟩
+  let E : DerivedCategory.Plus
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)) := ⟨K, hplus⟩
+  let U := (scalarMateRestriction φ Y).mapDerivedCategory
+  have hs := etaleOriginScalarProjectionSquare φ p E hH
+  have hm := isIso_of_pasted_square _ _ _ _ _ _ _ hs
+  have := hm
+  have : U.ReflectsIsomorphisms := scalarMateRestriction_reflectsIso φ Y
+  exact isIso_of_reflects_iso _ U
+
+private theorem pasteScalarCocycles
+    {XA ZA YA XB ZB YB XC ZC YC : Type*}
+    [Category XA] [Category ZA] [Category YA]
+    [Category XB] [Category ZB] [Category YB]
+    [Category XC] [Category ZC] [Category YC]
+    (JA : XA ⥤ ZA) (PA : ZA ⥤ YA) (JB : XB ⥤ ZB) (PB : ZB ⥤ YB)
+    (JC : XC ⥤ ZC) (PC : ZC ⥤ YC)
+    (SX : XA ⥤ XB) (SZ : ZA ⥤ ZB) (SY : YA ⥤ YB)
+    (TX : XB ⥤ XC) (TZ : ZB ⥤ ZC) (TY : YB ⥤ YC)
+    (UX : XA ⥤ XC) (UZ : ZA ⥤ ZC) (UY : YA ⥤ YC)
+    (αX : SX ⋙ TX ⟶ UX) (αZ : SZ ⋙ TZ ⟶ UZ) (αY : SY ⋙ TY ⟶ UY)
+    (eAB : JA ⋙ SZ ⟶ SX ⋙ JB) (eBC : JB ⋙ TZ ⟶ TX ⋙ JC)
+    (eAC : JA ⋙ UZ ⟶ UX ⋙ JC)
+    (gAB : PA ⋙ SY ⟶ SZ ⋙ PB) (gBC : PB ⋙ TY ⟶ TZ ⋙ PC)
+    (gAC : PA ⋙ UY ⟶ UZ ⋙ PC)
+    (hp : ∀ N, αY.app (PA.obj N) ≫ gAC.app N =
+      TY.map (gAB.app N) ≫ gBC.app (SZ.obj N) ≫ PC.map (αZ.app N))
+    (he : ∀ M, αZ.app (JA.obj M) ≫ eAC.app M =
+      TZ.map (eAB.app M) ≫ eBC.app (SX.obj M) ≫ JC.map (αX.app M))
+    (M : XA) :
+    αY.app (PA.obj (JA.obj M)) ≫ (gAC.app (JA.obj M) ≫ PC.map (eAC.app M)) =
+      TY.map (gAB.app (JA.obj M) ≫ PB.map (eAB.app M)) ≫
+        (gBC.app (JB.obj (SX.obj M)) ≫ PC.map (eBC.app (SX.obj M))) ≫
+          PC.map (JC.map (αX.app M)) := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc, hp]
+  simp only [Category.assoc]
+  rw [← PC.map_comp, he, PC.map_comp, PC.map_comp]
+  have hn := gBC.naturality (eAB.app M)
+  dsimp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+
+set_option maxHeartbeats 12000 in
+-- Keep categorical transport elaboration within a predictable resource bound.
 /-- The canonical coefficient comparison is an isomorphism in the full subcategory
 of bounded intrinsically constructible complexes of finite Tor amplitude. Membership
 is written out for both endpoints, so no etale-origin hypothesis replaces intrinsic
@@ -67,145 +354,29 @@ constructibility. No flatness or finite-projective-dimension condition is impose
 Source: blueprint main-20261015, sk-lem-sp-reduction-direct-image.md
 (blueprint: det-sp-reduction-direct-image).
 
-Proof plan (the node's steps):
-
-1. Put $p=\bar f$, and let $T_T^{A,B}$ denote scalar extension on a scheme $T$. Pullback carries
-constant $B$ to constant $B$ by [prop-weil-pbc-proetale-constant-ring-map]. Its derived tensor
-compatibility [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives a canonical identification
-$p_B^*T_Y^{A,B}\simeq T_{\bar X}^{A,B}p_A^*$; this is $B$-linear, since on tensor representatives
-its map preserves the right $B$-factor. For $N\in D(\bar X_{\mathrm{proét}},A)$ define
-$$\gamma_N^{A,B}:T_Y^{A,B}Rp_*^A N\longrightarrow Rp_*^B T_{\bar X}^{A,B}N$$ by the adjunction of
-[def-weil-pbc-proetale-operations], with transpose $$p_B^*T_Y^{A,B}Rp_*^A N\simeq T_{\bar
-X}^{A,B}p_A^*Rp_*^A N\xrightarrow{T^{A,B}(\varepsilon_N^A)}T_{\bar X}^{A,B}N.$$ Thus, under this
-pullback identification, its defining identity is
-$\varepsilon^B_{TN}\,p_B^*(\gamma_N^{A,B})=T^{A,B}(\varepsilon_N^A)$. This constructs an actual
-$B$-linear map, without an assumption on the Tor dimension of $B/A$.
-
-2. First construct the coefficient comparison as a morphism of $B$-complexes. Choose a K-flat
-resolution $P\to M$ with flat terms by [lem-pc-kflat-resolution]. The ordinary sheaf identity of
-[lem-weil-pbc-ringed-slice-extension-tensor], for the open object $X$ of $\bar X_{\mathrm{proét}}$
-(whose localized-site identification is part of [def-weil-extension-by-zero] and clause (1) of
-[lem-weil-proetale-weakly-etale-localization]), gives $(j_!G)\otimes Q\simeq j_!(G\otimes j^*Q)$.
-It extends to total tensor complexes: $j_!$ preserves direct sums because it is a left adjoint
-[lem-cbc-proetale-extension-zero]. For any acyclic complex $Q$, $j^*Q$ is acyclic by exact
-pullback [def-weil-pbc-proetale-operations], then $P\otimes j^*Q$ is acyclic by K-flatness, and
-$j_!(P\otimes j^*Q)$ is acyclic by exactness of $j_!$. Hence $j_!P$ is K-flat. The same identity
-on sheaves shows each $j_!P^i$ is flat, since both $j^*$ and $j_!$ are exact. Thus scalar
-extension on the two sides is computed by $j_!P\otimes_A B$ and $j_!^B(P\otimes_A B)$. Their
-termwise tensor comparison is $B$-linear (it preserves multiplication on the right $B$-factor),
-and is an isomorphism by the cited ordinary identity. It yields the canonical $$e_M^{A,B}:T_{\bar
-X}^{A,B}j_!^A M\xrightarrow{\sim}j_!^B T_X^{A,B}M.$$ After restriction of scalars, this is the
-derived open tensor comparison [lem-trf-open-tensor]; compatibility of $j_!$ with restriction of
-scalars is included in [lem-cbc-proetale-extension-zero]. Its restriction to $X$ is the tensor
-identity. Define $$b_{A,B}(M)=Rp_*^B(e_M^{A,B})\circ\gamma_{j_!^AM}^{A,B}.$$ These canonical
-derived comparisons are natural in $M$, without making a functorial choice of the resolution.
-
-3. The arbitrary-finite-ring equivalence [lem-weil-pbc-finite-ring-constructible-derived-origin]
-supplies a bounded constructible etale $A$-complex $L$ with $\nu_X^*L\simeq M$. Let
-$K=j_!^{\mathrm{et},A}L$. Exactness [lem-weil-pbc-extension-by-zero-exact] makes $K$ bounded. The
-sheaf comparison [lem-cbc-proetale-extension-zero-comparison] extends termwise to complexes: both
-extension-by-zero functors and $\nu^*$ are exact, so the sheaf isomorphism gives a complex
-isomorphism and survives localization at quasi-isomorphisms. Hence $\nu_{\bar X}^*K\simeq N:=j_!^A
-M$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], this also identifies $\nu_{\bar
-X}^*(K\otimes_A^L B_{\bar X,\mathrm{et}})$ with $N\otimes_A^L B_{\bar X}$. The latter is bounded:
-Step 2 identifies its underlying $A$-complex with that of $j_!^B M_B$, and $M_B$ is bounded by
-[det-sp-scalar-extension-functor]. Exactness and the sheaf unit in
-[prop-weil-pbc-site-comparison-finite-level] reflect vanishing of every cohomology sheaf:
-$H^i(\nu^*E)=\nu^*H^i(E)$ and $H^i(E)\simeq\nu_*\nu^*H^i(E)$. Thus $K\otimes_A^L B_{\bar
-X,\mathrm{et}}$ is bounded as well. Both etale arguments needed below therefore lie in $D^+$; no
-fully faithful comparison is applied to an unbounded-below tensor.
-
-4. The schemes $\bar X,Y$ and $p$ satisfy the finite-type-over-a-field hypotheses of
-[lem-kun-0f10]. By its clause (1) and [def-kun-cd] there is one $c\geq0$ killing $R^qp_*$ on every
-torsion abelian etale sheaf for $q>c$. This is also a uniform bound for etale $A$-module sheaves,
-as follows. Resolve such a sheaf $F$ by injective $A$-module sheaves, using
-[lem-weil-pbc-module-sheaves-enough-injectives], which also gives enough injectives for the
-abelian sheaf category. Forgetting the action preserves exactness, and every term is $p_*$-acyclic
-as an abelian sheaf by [lem-weil-pbc-injective-module-direct-image-acyclic]. The
-acyclic-resolution criterion, clause (2) of [lemma-weil-pbc-leray-acyclicity], identifies the
-underlying abelian sheaf of $R^qp_*^A F$ with $R^qp_*F$. The latter vanishes for $q>c$, since $F$
-is killed by a power of $\ell$. Forgetting a module action reflects the zero object, proving the
-required module-sheaf bound for all $F$.
-
-5. A finite commutative ring $A$ is Noetherian: its ideals form a finite set, so an ascending
-chain stabilizes. The finite set underlying $B$ generates it as an $A$-module, giving a finite
-free surjection $A^r\twoheadrightarrow B$; its kernel is a finite set because $A^r$ is finite, so
-it too has a finite generating set. This is a finite presentation of $B$ over $A$. Apply
-[lem-sf-projection-finite-constant] to the etale map $p$, coefficient ring $A$, the uniform bound
-$c$ from Step 4, bounded-above complex $K$ from Step 3, and constant finitely presented $A$-module
-$B$. It gives invertibility of the specified counit projection $$\pi_K:Rp_{\mathrm{et},*}^A
-K\otimes_A^L B_{Y,\mathrm{et}}\longrightarrow Rp_{\mathrm{et},*}^A(K\otimes_A^L B_{\bar
-X,\mathrm{et}}).$$ This is precisely the finite-free-resolution/finite-window tool of the
-blueprint's Steps 2–3. Its statement imposes neither finite projective dimension of $B$ nor a
-bounded constructible flat model for $K$.
-
-6. Let $d:r_YRp_{*,B}\xrightarrow{\sim}Rp_{*,A}r_{\bar X}$ be the restriction/direct-image
-comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. By
-[lem-sp-direct-image-change-ring-transpose], for every $N\in D(\bar X_{\mathrm{proét}},A)$ the
-$A$-linear map $d\circ r_Y(\gamma_N^{A,B}):Rp_{*,A}N\otimes^{\mathbf L}_AB_Y\to
-Rp_{*,A}(N\otimes^{\mathbf L}_AB_{\bar X})$ is the pro-étale projection morphism, i.e. its adjoint
-transpose under $p_A^*\dashv Rp_{*,A}$, after the tensor-pullback identification, is
-$\varepsilon^A_N\otimes^{\mathbf L}1_{B_{\bar X}}$. We use this at $N=j_!^AM$.
-
-7. Take the bounded etale $A$-complex $K$ of Step 3 with $\nu_{\bar X}^*K\simeq N=j_!^AM$; Step 3
-also shows $H=K\otimes^{\mathbf L}_AB_{\bar X,\mathrm{et}}$ is bounded, so $K,H\in D^+$ as
-required by [lem-sp-direct-image-etale-mate-isomorphism]. That node gives the map
-$t=\beta_H\,\nu_Y^*(\pi_K)\,(\beta_K^{-1}\otimes1)$ whose adjoint transpose is
-$\varepsilon^p_N\otimes1$, and $t$ is an isomorphism because $\pi_K$ is invertible by Step 5. The
-map of Step 6 has the same source, target and adjoint transpose (transported along $\nu^*K\simeq
-N$ by naturality of both transposes), so by injectivity of the adjunction bijection of
-[def-weil-pbc-proetale-operations] it equals $t$. Hence $d\circ r_Y(\gamma_N^{A,B})$ is an
-isomorphism.
-
-8. The comparison $d$ is an isomorphism by [lem-weil-pbc-ring-sheaf-change-adjunction], so Step 7
-makes $r_Y(\gamma_N^{A,B})$ invertible. Restriction of scalars reflects isomorphisms by the same
-statement; hence $\gamma_N^{A,B}$ is an isomorphism in the $B$-linear pro-étale derived category.
-With $N=j_!^AM$, Step 2's definition $b=Rp_*^B(e_M)\circ\gamma_{j_!M}^{A,B}$ is a composite of
-isomorphisms, hence an isomorphism.
-
-9. Both objects of $b$ have the claimed category membership. The restricted adjunction stated in
-[sk-prop-sf-rf-shriek-preservation] gives $Rf_{!,A}M\in\Dctf(Y,A)$ and $Rf_{!,B}M_B\in\Dctf(Y,B)$;
-its finite-commutative-coefficient hypotheses apply to $A$ and $B$. By
-[det-sp-scalar-extension-functor], $(Rf_{!,A}M)_B$ also belongs to $\Dctf(Y,B)$. This is a full
-subcategory, so the isomorphism already obtained is an isomorphism there. Naturality follows from
-the explicit counit transpose, tensor comparison, and extension-by-zero maps of Steps 1–2: for
-$u:M\to M'$ their defining adjuncts agree by naturality of the counit, and hence the corresponding
-square for $b$ commutes by injectivity of the adjunction bijection.
-
-10. We now prove the coefficient cocycle on the named proper maps. Suppress the pullback/scalar
-identifications, and identify $T^{B,C}T^{A,B}$ with $T^{A,C}$ by $\alpha$ of
-[det-sp-scalar-extension-functor]. Consider $$d_N=\gamma^{B,C}_{T^{A,B}N}\circ
-T_Y^{B,C}(\gamma_N^{A,B}).$$ Its $C$-adjoint transpose, using the defining identity in Step 1
-first for $B\to C$ and then for $A\to B$, is $$\begin{aligned} \varepsilon^C\,p_C^*(d_N)
-&=T^{B,C}(\varepsilon^B_{T^{A,B}N})\,T^{B,C}(p_B^*\gamma_N^{A,B})\\
-&=T^{B,C}\bigl(T^{A,B}(\varepsilon_N^A)\bigr)  =T^{A,C}(\varepsilon_N^A). \end{aligned}$$
-Naturality of the pullback tensor comparison justifies the first line; its associativity with
-$\alpha$ is the balancing equality $((x\otimes b)\otimes c)\mapsto x\otimes\varphi(b)c$ on K-flat
-tensor representatives, so the displayed identifications do not change this transpose. The last
-expression is the defining transpose of $\gamma_N^{A,C}$. Injectivity of the adjunction bijection
-[def-weil-pbc-proetale-operations] therefore gives the proper-map cocycle, including the indicated
-$\alpha$'s. This calculation takes place for all $N$, so it can be used at $N=j_!M$.
-
-11. The open tensor maps satisfy the same cocycle. After restriction to $X$, both composites from
-$T^{B,C}T^{A,B}j_!^AM$ to $j_!^C T^{A,C}M$ give $((m\otimes b)\otimes c)\mapsto
-m\otimes\varphi(b)c$. The domain is canonically $j_!^C(T^{B,C}T^{A,B}M)$ by Step 2, and
-$j_!^C\dashv j^{-1}$ by [lem-cbc-proetale-extension-zero]. The unit $F\to j^{-1}j_!^CF$ is the
-identity: in the presheaf construction [def-weil-extension-by-zero], by clause (4) of
-[lem-weil-proetale-weakly-etale-localization] an object $V\to X$ and every object covering it
-already factor through $X$, so the presheaf and its sheafification restrict to $F$ on
-$X_{\mathrm{proét}}$. This holds degreewise and hence in the derived categories, since both
-functors are exact. For $Z=T^{B,C}T^{A,B}M$ the adjunction now identifies
-$\operatorname{Hom}(j_!^CZ,j_!^CT^{A,C}M)$ with $\operatorname{Hom}(Z,T^{A,C}M)$, and sends a map
-to its restriction. Thus equality after restriction proves equality of the two maps in question.
-This proves, under $\alpha$, $e_M^{A,C}=e_{T^{A,B}M}^{B,C}\circ T^{B,C}(e_M^{A,B})$.  Finally
-expand $b=Rp_*(e)\gamma$. Naturality of $\gamma^{B,C}$ with respect to $e_M^{A,B}$ gives, after
-suppressing the same $\alpha$'s, $$\begin{aligned} b_{B,C}(M_B)\,T_Y^{B,C}(b_{A,B}(M))
-&=Rp_*^C(e_{M_B}^{B,C})\,\gamma^{B,C}_{j_!^BM_B}\,T_Y^{B,C}(Rp_*^B
-e_M^{A,B})\,T_Y^{B,C}(\gamma^{A,B}_{j_!^AM})\\ &=Rp_*^C(e_{M_B}^{B,C})\,Rp_*^C(T_{\bar
-X}^{B,C}e_M^{A,B})\,\gamma^{B,C}_{T^{A,B}j_!^AM}\,T_Y^{B,C}(\gamma^{A,B}_{j_!^AM})\\
-&=Rp_*^C(e_M^{A,C})\,\gamma^{A,C}_{j_!^AM}=b_{A,C}(M). \end{aligned}$$ The second equality uses
-naturality, and the third uses the open cocycle and Step 8. Reinsert $\alpha$ using its naturality
-from [det-sp-scalar-extension-functor]; the result is exactly the equation in the statement.
+Proof:
+1. Transfer the intrinsic bounded constructible finite-Tor predicate through the exact
+   fixed-coefficient realization equivalence. Homology commutes with realization, finite
+   support is equivalent to t-structure boundedness, and the Tor transport theorem
+   identifies the two Tor tests. The supported etale tensor-origin theorem supplies
+   bounded K = j_!L and H = K tensor B, together with the canonical comparison to j_!M.
+2. The existing module-sheaf direct-image bound over a field supplies one bound 2d for
+   every coefficient sheaf. The finite ring A is Noetherian and the finite A-module B
+   is finitely presented. Apply the finite-constant projection component theorem to K
+   and B. Its finite-free approximation argument uses a finite cohomological window,
+   without requiring a finite projective resolution of B over A.
+3. The normalized etale-origin scalar projection square identifies the restriction of
+   the specified B-linear proper mate with this projection, conjugated by canonical
+   tensor and direct-image isomorphisms. Cancel the source factors and reflect the
+   resulting isomorphism through restriction. Naturality transports it to j_!M.
+   Proper image of the specified open scalar isomorphism completes the comparison.
+4. The existing compact-support preservation argument in fixed coefficients, transported
+   through the compact realization isomorphism, gives intrinsic Dctf membership.
+   Apply it over A, followed by scalar preservation on Y, for the source. Apply scalar
+   preservation on X, followed by compact support over B, for the target.
+5. The companion cocycle theorem applies a categorical pasting lemma to the existing
+   proper and open cocycles. That lemma uses only functoriality, associativity and
+   naturality of the second proper comparison at the first open comparison.
 -/
 theorem reductionDirectImage_isIso
     (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ)
@@ -250,8 +421,49 @@ theorem reductionDirectImage_isIso
           ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)))) ∧
     HasFiniteProEtaleTorAmplitude Y B
       ((reductionCompactSupport B j p).obj ((scalarExtensionFunctor φ X).obj M)) := by
-  sorry
+  have hM : ReductionGood X A M := ⟨hbounded, hconstructible, hTor⟩
+  have hRf := reductionGood_compactSupport ℓ pchar hℓ k f j p hf A hA M hM
+  have hsource := reductionGood_scalar ℓ hA hB φ Y _ hRf
+  have hMB := reductionGood_scalar ℓ hA hB φ X M hM
+  have htarget := reductionGood_compactSupport ℓ pchar hℓ k f j p hf B hB _ hMB
+  have hiso : IsIso ((reductionDirectImageComparison φ j p).app M) := by
+    let E := sfIntrinsicDerivedEquivalence X A
+    let K := E.inverse.obj M
+    have hK := reductionGood_iso (E.counitIso.app M).symm hM
+    have hctf := (reductionGood_realization_iff X A K).mp hK
+    have hc := ProEtale.DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic
+      _ hctf.1
+    have torsion {R : Type u} [CommRing R]
+        (h : ∃ n : ℕ, ∀ x : R, (ℓ ^ n) • x = 0) : ∃ n : ℕ, (ℓ : R) ^ n = 0 := by
+      obtain ⟨n, hn⟩ := h
+      exact ⟨n, by simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hn 1⟩
+    have hcf (i : ℤ) : IsConstructibleProEtaleFixedModuleSheaf X (ULift.{u + 1} A)
+        ((DerivedCategory.homologyFunctor _ i).obj K) := by
+      exact (fixed_constructible_iff _ X _).mpr (hc.2 i)
+    obtain ⟨L, hL, hLc, e, hJ, hH, hJplus, hHplus, hex⟩ :=
+      SupportedEtaleTensorOrigin.supported_etale_tensor_origin ℓ (Fact.out : ℓ.Prime)
+        φ (torsion hA) (torsion hB) j K hc.1 hcf hK.2.2
+    let ei : (finiteCoefficientIntrinsicDerivedComparison Z A).obj
+          ((SupportedEtaleTensorOrigin.etaleOpen A j).obj L) ≅
+        ((sfIntrinsicExtensionByZero j A).mapDerivedCategory).obj M :=
+      (FiniteCompactScalar.intrinsicSiteFunctorIso A Z).app _ ≪≫
+      (sfIntrinsicDerivedEquivalence Z A).functor.mapIso
+        (SupportedEtaleTensorOrigin.supportedComparison A j L K e) ≪≫
+      (SupportedEtaleTensorOrigin.openPresentation A j).symm.app K ≪≫
+      ((sfIntrinsicExtensionByZero j A).mapDerivedCategory).mapIso (E.counitIso.app M)
+    have hi := reductionProper_isIso φ k p
+      ((SupportedEtaleTensorOrigin.etaleOpen A j).obj L) hJ hH.1
+    have : IsIso ((directImageScalarComparison φ p).app
+        (((sfIntrinsicExtensionByZero j A).mapDerivedCategory).obj M)) :=
+      (NatTrans.isIso_app_iff_of_iso (directImageScalarComparison φ p) ei).mp hi
+    dsimp only [reductionDirectImageComparison, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    infer_instance
+  exact ⟨hiso, hsource.1, hsource.2.1, hsource.2.2,
+    htarget.1, htarget.2.1, htarget.2.2⟩
 
+set_option maxHeartbeats 12000 in
+-- Keep categorical transport elaboration within a predictable resource bound.
 /-- The coefficient cocycle for these very comparisons, with both canonical alpha maps.
 Source: blueprint statement's last equation and proof Steps 10-11
 (blueprint: det-sp-reduction-direct-image).
@@ -295,6 +507,31 @@ theorem reductionDirectImage_cocycle
       (reductionDirectImageComparison ψ j p).app ((scalarExtensionFunctor φ X).obj M) ≫
         (reductionCompactSupport C j p).map
           ((scalarExtensionFunctor_composition φ ψ X).hom.app M) := by
-  sorry
+  have torsion {R : Type u} [CommRing R]
+      (h : ∃ n : ℕ, ∀ x : R, (ℓ ^ n) • x = 0) :
+      ∃ n : ℕ, (ℓ : R) ^ n = 0 := by
+    obtain ⟨n, hn⟩ := h
+    exact ⟨n, by simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hn 1⟩
+  have hproper := proEtaleDirectImageScalarCocycle ℓ hA hB hC φ ψ p
+  have hopen := proEtaleOpenScalarCocycle ℓ (Fact.out : ℓ.Prime)
+    (torsion hA) (torsion hB) (torsion hC) φ ψ j
+  let J₁ := (sfIntrinsicExtensionByZero j A).mapDerivedCategory
+  let J₂ := (sfIntrinsicExtensionByZero j B).mapDerivedCategory
+  let J₃ := (sfIntrinsicExtensionByZero j C).mapDerivedCategory
+  exact pasteScalarCocycles
+    J₁ (directImageConstantPush A p) J₂ (directImageConstantPush B p)
+    J₃ (directImageConstantPush C p)
+    (scalarExtensionFunctor φ X) (scalarExtensionFunctor φ Z) (scalarExtensionFunctor φ Y)
+    (scalarExtensionFunctor ψ X) (scalarExtensionFunctor ψ Z) (scalarExtensionFunctor ψ Y)
+    (scalarExtensionFunctor (ψ.comp φ) X) (scalarExtensionFunctor (ψ.comp φ) Z)
+    (scalarExtensionFunctor (ψ.comp φ) Y)
+    (scalarExtensionFunctor_composition φ ψ X).hom
+    (scalarExtensionFunctor_composition φ ψ Z).hom
+    (scalarExtensionFunctor_composition φ ψ Y).hom
+    (reductionOpenScalarIso φ j).hom (reductionOpenScalarIso ψ j).hom
+    (reductionOpenScalarIso (ψ.comp φ) j).hom
+    (directImageScalarComparison φ p) (directImageScalarComparison ψ p)
+    (directImageScalarComparison (ψ.comp φ) p)
+    hproper hopen M
 
 end AlgebraicGeometry.ProEtale

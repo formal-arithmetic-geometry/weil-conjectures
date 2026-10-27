@@ -1,0 +1,262 @@
+{
+ "id": "lem-sf-closed-partition-module-test",
+ "kind": "statement",
+ "title": "Closed-side ambient partition and module restriction test",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], let $i:Z\\hookrightarrow X$ be a closed immersion and let $j:U\\hookrightarrow X$ be its complementary open immersion [def-weil-closed-immersion, def-weil-open-immersion]. Let $(t_\\mu:T_\\mu\\hookrightarrow Z)_{\\mu\\in I}$ be a finite stratification with constructible locally closed images [def-constructible-stratification, def-weil-constructible-subset, def-weil-locally-closed-subset]. Then the original schemes $T_\\mu$, with immersions $i\\circ t_\\mu$, together with $U$ and $j$, form a finite stratification of $X$ with constructible locally closed images. Every open subset of $X$ is retrocompact and quasi-compact; in particular $j$ is quasi-compact. Empty strata are permitted. No reduction of $Z$ or $T_\\mu$ is required.\n\nLet $A$ be a finite commutative ring and use constant rings and actual module inverse images on small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-proetale-inverse-image]. Let $P$ be an $A_X$-module sheaf and $N$ an $A_Z$-module sheaf equipped with isomorphisms $i_A^*P\\cong N$ and $j_A^*P\\cong0$. The canonical composition comparisons give natural $A_{T_\\mu}$-linear isomorphisms\n$$(i\\circ t_\\mu)_A^*P\\cong(t_\\mu)_A^*i_A^*P\\cong(t_\\mu)_A^*N.$$\nIf each $(t_\\mu)_A^*N$ is locally constant with finite geometric module stalks [def-weil-proetale-locally-constant-sheaf, def-weil-proetale-geometric-stalk], this extended partition witnesses finite constructibility of $P$ [def-weil-proetale-constructible-sheaf]: the old strata have those restrictions and the additional stratum has the constant zero-module sheaf. For $X=\\varnothing$, a single empty stratum may be retained.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 02V0, lemma-composition-immersion; properties.tex Tags 01OW (lemma-locally-Noetherian) and 01OZ (lemma-Noetherian-topology); topology.tex Tag 04ZA (lemma-Noetherian-quasi-compact); pro-etale module restriction by canonical inverse-image composition. Old item steps 1, 4 and 5, with the supplied closed restriction replacing the closed-image counit."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-locally-closed-subset",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-noetherian-complementary-stratifications] to $T=X$, the closed immersion $i$, its complementary open immersion $j$ (so $j(U)=|X|\\setminus i(Z)$) and the given finite stratification $(t_\\mu:T_\\mu\\hookrightarrow Z)_{\\mu\\in I}$ of $Z$. Its second clause states that the family of actual composites $(i\\circ t_\\mu:T_\\mu\\hookrightarrow X)_{\\mu\\in I}$ together with $j:U\\hookrightarrow X$ is a finite stratification of $X$ by constructible locally closed subschemes, with the original stratum schemes $T_\\mu$ unchanged, $U$ with its given scheme structure, and empty strata or empty $U$ allowed. Its first clause states that every subset of $|X|$ is quasi-compact and that $j$ is a quasi-compact morphism. In particular, for opens $V,W\\subseteq X$ the set $V\\cap W$ is quasi-compact, so every open $V$ is retrocompact by the definition in [def-weil-constructible-subset]. The constructibility of the images of the $t_\\mu$ in $Z$ is not needed for this.",
+   "uses": [
+    "lem-sfb-noetherian-complementary-stratifications",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); schemes.tex Tag 02V0 (lemma-composition-immersion); topology.tex Tags 04ZA (lemma-Noetherian-quasi-compact), 005G (definition-constructible)"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-proetale-module-pullback-composition] with $f=i$, $g=t_\\mu$, and $\\Lambda=A$. Its comparison uses precisely the canonical constant-section coefficient maps and gives $(i\\circ t_\\mu)_A^*P\\cong(t_\\mu)_A^*i_A^*P$, naturally and $A_{T_\\mu}$-linearly. Applying the functor $(t_\\mu)_A^*$ to the supplied isomorphism $i_A^*P\\cong N$ and composing gives the displayed comparison with $(t_\\mu)_A^*N$.",
+   "uses": [
+    "lem-pur-proetale-module-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "On each old stratum compose the comparison of step 2 with its given local constant-module trivializations. Isomorphisms induce inverse maps on the stalk colimits [def-weil-proetale-geometric-stalk], so the stalks remain finite. On $U$ use $j_A^*P\\cong0$: the constant presheaf with value the zero module is already a sheaf (every compatible family has its unique zero amalgamation), hence its sheafification is the zero module sheaf. The identity cover makes it locally constant [def-weil-proetale-locally-constant-sheaf]; its geometric stalk is zero, since the pointed-neighbourhood diagram is nonempty and all its modules are zero. The partition of step 1 therefore satisfies [def-weil-proetale-constructible-sheaf]. It has $|I|+1\\geq1$ strata. Empty strata impose no stalk conditions; for $X=\\varnothing$ one may keep just its single empty stratum. No scheme was replaced by a reduction.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AJ (definition-constructible); the global finite-partition convention is that of the cited project definition; zero-module argument written by worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-complementary-stratifications",
+  "def-weil-constructible-subset",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Assembly from the existing Noetherian complementary-stratification node (Stacks 01OW/01OZ/04ZA/02V0), sites-modules.tex 03D8, and the project finite pro-etale constructibility definition; realizes the retained closed-side partition argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(stratif|constructib).*(closed|complement)|(closed|complement).*(stratif|constructib)",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion extends locally closed finite partition by open complement with restriction of module sheaves on proetale sites",
+   "results": "OK 8 hits; AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.instIsClosedImmersionMorphismRestrict, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsImmersion.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsImmersion\"",
+   "results": "OK 1 hits; AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite locally closed stratification of a closed subscheme of a Noetherian scheme by its open complement and compare constant coefficient proetale module sheaf restrictions using inverse image composition",
+   "results": "OK 8 hits; ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_const, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, ModuleCat.Tilde.res_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing specified finite locally constant sheaf models along a closed subspace and complementary open stratum without reducing the strata",
+   "results": "OK 8 hits; TopCat.GlueData.ofOpenSubsets_toGlueData_V, LocallyConstant.piecewise, LocallyConstant.piecewise', TopCat.Presheaf.IsGluing, TopCat.GlueData.MkCore.t_inter, LocallyConstant.piecewise_apply_right, TopCat.GlueData.ofOpenSubsets, TopCat.GlueData.ofOpenSubsets_toGlueData_t",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of two immersions of schemes is an immersion",
+   "results": "OK 8 hits; AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.IsImmersion.comp_iff, AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsImmersion.of_comp, AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty, AlgebraicGeometry.IsPreimmersion.comp, AlgebraicGeometry.IsPreimmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsPreimmersion.comp_iff",
+   "date": "2026-10-22",
+   "verdict": "partial match only: generic immersion composition is used as a separate Mathlib leaf; it does not state the module restriction test"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif|closedComplement|pullbackComp [AlgebraicGeometry]",
+   "results": "OK 14 hits; Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary scheme modules, generic ringed-site pullback, constructible sets, or section vanishing, and do not give the stated partition with canonical pro-etale module restrictions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of a proetale module sheaf from finite locally constant restrictions on a closed partition and zero on the complementary open",
+   "results": "OK 8 hits; Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, SheafOfModules.mk, ModuleCat.tildeInModuleCat, SheafOfModules.GeneratingSections.mk, SheafOfModules.IsFiniteType.mk, LocallyConstant.freeOfProfinite, ModuleCat.Tilde.const",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary scheme modules, generic ringed-site pullback, constructible sets, or section vanishing, and do not give the stated partition with canonical pro-etale module restrictions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "OK 2 hits; PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary scheme modules, generic ringed-site pullback, constructible sets, or section vanishing, and do not give the stated partition with canonical pro-etale module restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite stratification of a closed subscheme by the open complement and test constructibility of proetale module sheaves with prescribed closed restriction and zero open restriction",
+   "results": "OK 8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.reduce_to_affine_global, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary scheme modules, generic ringed-site pullback, constructible sets, or section vanishing, and do not give the stated partition with canonical pro-etale module restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "instance comp|theorem comp|lemma comp [AlgebraicGeometry/Morphisms/Immersion.lean]",
+   "results": "OK 2 hits; 146, 222",
+   "date": "2026-10-22",
+   "verdict": "partial match only: generic immersion composition is used as a separate Mathlib leaf; it does not state the module restriction test"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of immersions of schemes is an immersion",
+   "results": "OK 8 hits; AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.IsImmersion.comp_iff, AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty, AlgebraicGeometry.isOpenImmersion_isMultiplicative, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsPreimmersion.comp, AlgebraicGeometry.IsOpenImmersion.comp, AlgebraicGeometry.isOpenImmersion_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "partial match only: generic immersion composition is used as a separate Mathlib leaf; it does not state the module restriction test"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion.comp",
+   "results": "OK 1 hits; AlgebraicGeometry.IsImmersion.comp",
+   "date": "2026-10-22",
+   "verdict": "partial match only: generic immersion composition is used as a separate Mathlib leaf; it does not state the module restriction test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed partition of a closed subscheme extended by the complementary open witnesses constructibility for a sheaf whose restrictions are finite locally constant and zero",
+   "results": "OK 8 hits; PrimeSpectrum.ConstructibleSetData, PrimeSpectrum.BasicConstructibleSetData, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Topology.IsLocallyConstructible.isConstructible, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, PrimeSpectrum.BasicConstructibleSetData.g, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, Topology.IsConstructible.isLocallyConstructible",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary scheme modules, generic ringed-site pullback, constructible sets, or section vanishing, and do not give the stated partition with canonical pro-etale module restrictions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-finite-immersion-constructibility-interval",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Finite-stage paragraph: comparison of restriction vertices on constructible strata; retained detailed proof of lem-sf-finite-immersion-constructibility-interval, old steps 1, 4 and 5 (Noetherian topology, ambient closed-side partition and restriction test)",
+   "via": [
+    "lem-sf-finite-immersion-constructibility-interval"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-closed-partition-module-test",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Reused the existing Noetherian open-subscheme theorem and canonical pro-etale constant-coefficient module pullback composition. Added only a Mathlib leaf for general composition of immersions. Wrote the ambient partition and zero-module checks explicitly, retaining all original stratum schemes and allowing the empty scheme. Reviewer repair (Q117 maintainer reader): the re-derived Noetherian-topology and ambient-partition steps are replaced by a citation of the existing complementary-stratification node, which states that partition with the original stratum schemes; the delivered immersion-composition leaf was dropped as a duplicate of clause (e) of the existing proper/finite-presentation permanence leaf.",
+  "blueprint": "Finite-stage paragraph of prop-sf-open-closed-triangle-all-stages: closed-side constructible restriction vertices, via retained detailed steps 1, 4 and 5 (ambient partition through the existing complementary-stratification node) of lem-sf-finite-immersion-constructibility-interval.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-noetherian-complementary-stratifications",
+    "why": "Generic Noetherian topology and closed-side extension of a finite stratification by the complementary open; it states exactly the ambient partition this item needs, and no node of this unit states it."
+   },
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Generic module inverse-image composition on the actual small pro-etale sites supplies the coefficient-linear restriction comparison; no theorem of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-noetherian-complementary-stratifications",
+  "lem-pur-proetale-module-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-6f7375fc2",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-6f7375fc2 (reviewer sub-agent of L); spot-checked: Read the item, the new leaf and every cited node's statement in full, and checked the Stacks tags 02V0, 01OW, 01OZ, 04ZA, 005G, 03D8 and 09AJ, plus Mathlib Immersion.lean:146-148 and 155-158. No SGA is cited. The statement is unchanged and true; tested on X, Z, U or I empty, empty strata, A=0, P=N=0 and the thickening Spec k -> Spec k[e]/e^2. The constructibility definition's inverse image (def-weil-pbc-proetale-operations along c=c^f_A) is the same construction as def-weil-proetale-inverse-image. Step 3 (lem-pur-proetale-module-pullback-composition with f=i, g=t_mu, any commutative Lambda, on route via sk-def-sf-operations) and the elementary step 4 (zero sheaf, transfer of local constancy and finite stalks along an isomorphism) are correct. Two C5 faults, repaired: (1) the new leaf lem-sf-immersion-composition duplicates clause (e) of the existing Mathlib leaf lem-weil-pbc-proper-fp-permanence ('if f and g are immersions, so is g o f', IsImmersion IsMultiplicative), so it is dropped. (2) The delivered steps 1-2 re-derive the existing base node lem-sfb-noetherian-complementary-stratifications (NQ, 2026-10-22). That node states that every subset of |T| is quasi-compact, that j is quasi-compact, and that (i o t_b) together with j is a finite constructible locally closed stratification with the stratum schemes unchanged and empty strata allowed. The corrected item replaces steps 1-2 by one step citing it; retrocompactness follows in one line from def-weil-constructible-subset. Steps 3-4 are kept apart from renumbering, proof_deps is recomputed, and split_report.tool_uses now declares the NQ node (a generic Noetherian-topology tool from unit sk-lem-integral-models) in place of the no-longer-cited open-subscheme leaf. No cycle: the NQ node has no proof dependencies. The maintainer should accept the NQ tool use.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfClosedPartitionModuleTest",
+  "declaration": "AlgebraicGeometry.Scheme.sf_closed_partition_module_test",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfClosedPartitionRestrictionIso",
+   "AlgebraicGeometry.Scheme.sf_closed_partition_module_test"
+  ],
+  "file": "lean/Sheaf/Paper/SfClosedPartitionModuleTest.lean",
+  "statement": "theorem sf_closed_partition_module_test {X Z U : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (hji : Set.range j = (Set.range i)ᶜ) (S : FiniteLocallyClosedStratification Z) (hS : ∀ μ : Fin S.n, Topology.IsConstructible (S.stratum μ)) : (∀ V : Set X, IsOpen V → IsRetrocompact V ∧ IsCompact V) ∧ QuasiCompact j ∧ ∃ (R : Stratification X) (e : Fin (S.n + 1) ≃ Fin R.n), (∀ a : Fin (S.n + 1), (⟨R.domain (e a), R.immersion (e a)⟩ : Σ W : Scheme.{u}, W ⟶ X) = Fin.snoc (α := fun _ : Fin (S.n + 1) ↦ Σ W : Scheme.{u}, W ⟶ X) (fun μ : Fin S.n ↦ (⟨S.domain μ, S.immersion μ ≫ i⟩ : Σ W : Scheme.{u}, W ⟶ X)) (⟨U, j⟩ : Σ W : Scheme.{u}, W ⟶ X) a) ∧ ∀ (A : Type u) [CommRing A] [Finite A] (P : proEtaleRingModules X (proEtaleConstantRing X A)) (N : proEtaleRingModules Z (proEtaleConstantRing Z A)) (h : proEtaleConstantModulePullback i A P ≅ N) (hzero : IsZero (proEtaleConstantModulePullback j A P)), (∀ μ : Fin S.n, Nonempty (proEtaleConstantModulePullback (S.immersion μ ≫ i) A P ≅ proEtaleConstantModulePullback (S.immersion μ) A N)) ∧ Nonempty (proEtaleConstantModulePullback j A P ≅ proEtaleConstantModuleSheaf U A (0 : ModuleCat.{u + 1} (ULift.{u + 1} A))) ∧ ((∀ μ : Fin S.n, IsLocallyConstantProEtaleModuleSheafOfUniverses.{u, u} (S.domain μ) A (proEtaleConstantModulePullback (S.immersion μ) A N) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ S.domain μ), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing (S.domain μ) A) (proEtaleConstantModulePullback (S.immersion μ) A N))) → (0 < R.n ∧ ∀ a : Fin R.n, IsLocallyConstantProEtaleModuleSheaf (R.domain a) A (proEtaleConstantModulePullback (R.immersion a) A P) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ R.domain a), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing (R.domain a) A) (proEtaleConstantModulePullback (R.immersion a) A P))) ∧ IsConstructibleProEtaleModuleSheaf X A P)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f584c6e86",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read item, 13 stmt_dep records, module, report (Worker report + Second reading by Q78 present) and the live decls: FiniteLocallyClosedStratification, Scheme.Stratification (constructible), IsConstructibleProEtaleModuleSheaf, both local-constancy predicates (agree at t=u), proEtaleConstantModulePullback, proEtaleConstantRingModulePullbackComposition (its .choose is fixed uniquely by the conjugation/sections normalization), noetherian_complementary_stratifications (the geometry clause matches exactly, scheme/map pair equality, no reduction). Hypotheses not stronger than the node. Conclusion uses the same R with 0<R.n plus the intrinsic predicate. Zero stratum ≅ constant zero sheaf. Edge cases: X/Z/U empty, S.n=0, A=0. Statement verbatim; node differs from live only in lean (live None); docstrings/blueprint tags/one sorry OK. Advisories: Nonempty restriction-iso conjunct redundant given the helper def; OfUniverses.{u,u} vs common-universe local-constancy predicate are the same notion. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261023T123558-L-1215746",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.sf_closed_partition_module_test"
+  ],
+  "sorry_after": []
+ }
+}

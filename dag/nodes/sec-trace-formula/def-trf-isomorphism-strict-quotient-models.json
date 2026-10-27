@@ -1,0 +1,208 @@
+{
+ "id": "def-trf-isomorphism-strict-quotient-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Strict quotient and inverse-image Roos notation",
+   "via": [
+    "lem-trf-isomorphism-multiplication-cone-descent",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Strict quotient and inverse-image Roos notation",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use its small pro-etale site with the fixed independent universes [def-weil-pbc-proetale-site, def-weil-size-convention], completed integral coefficient sheaf $\\widehat R_W$ [def-weil-completed-integral-coefficients], and ordinary unbounded module-sheaf derived category [def-weil-abstract-derived-category]. Write $B_{W,n}=(R/\\varpi^{n+1})_W$. Define $D_W(Q)$ to be the entire strict tower $Q\\otimes_{\\widehat R_W}B_{W,n}$ restricted to completed modules, with its actual quotient transitions [lem-coef-derived-system-evaluation-calculus, lem-pur-integral-operations-well-defined]. For an isomorphism $g:X\\to Y$, let $G$ be the exact coefficient-transported inverse image [def-weil-inverse-image-pullback-comparison], let $G_{\\rm cx}$ and $G_{\\rm tow}$ be its termwise complex and tower functors, and put $T_D=1-s_D$ and $T_{GD}=1-s_{GD}$ on the respective countable products. Define $\\phi_D:G_{\\rm cx}(\\prod D_n)\\to\\prod G_{\\rm cx}D_n$ by the canonical product projections. For the simultaneous coefficient calculus $S$ [lem-coef-derived-system-evaluation-calculus] and normalized Roos model $r$ [def-trf-integral-comparison-realization-models], define the predicate on a natural isomorphism $\\rho$ from $q$ followed by $S.{\\rm reduction}$ and total limit to $D_W$ followed by $H$ and derived localization $Q$: for every good representative $P$, every strict simultaneous system $K$ and specified whole-system adjunction-coherent derived presentation $e$ with finite comparisons $\\kappa_n$, there is a strict tower isomorphism $a$ from the completed restriction of $K$ to $D_W(P)$, taking the restricted section $x$ to $\\kappa_n(x)$, and $\\rho_P=QH(a)\\circ r_K\\circ{\\rm limit}(e)$. Here $q$ is good-representative localization, and $H$ is the actual mapping cocone of $1-s$. The six strict quotient and inverse-image constructions are unchanged; the completion normalization requires the existing whole-system adjunction coherence, which fixes e before taking any limit.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-scheme-morphism-properties",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-strict-roos-comparison",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), with sites-modules.tex Tags 03CZ/03EK; explicit strict quotient/cone argument, original multiplication-cone node steps 1--2 (definitions)"
+ },
+ "proof": [
+  {
+   "text": "Keep the strict quotient, inverse-image, difference and product constructions. In the completion normalization test the same section and derived-limit equations on presentations satisfying IsIntegralComparisonPresentationCoherent. This pins e by injective adjunction Hom bijections to the strict tensor-unit map specified by kappa. It excludes the invisible derived twists allowed by finite evaluations alone. Canonical ordinary/derived quotient presentations satisfy this equation by their Hom normalization.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "def-trf-completion-unit-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-completion-unit-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "06YY, 07A6, 0941: whole-system adjunction coherence, P4 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict quotient towers, scalar extension along a ring isomorphism, and natural product comparison on mapping cocones and derived limits",
+   "results": "8 hits, including CategoryTheory.Limits.Cocones.extendIso, Submodule.Quotient.isScalarTower, and CategoryTheory.Limits.IsLimit.extendIso; no strict coefficient-system or normalized Roos assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "11 hits: piComparison, piComparison_comp_π, map_lift_piComparison and instIsIsoPiComparison in Mathlib.CategoryTheory.Limits.Shapes.Products and Preserves.Shapes.Products; these supply the product API, not the entire tower/cocone/normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionRingIso|mapHomologicalComplexIso|ReductionPresentation",
+   "results": "11 hits, including CochainComplex.mappingCone.mapHomologicalComplexIso in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:639 and its descShortComplex compatibility; no strict quotient-system normalization. The source was read.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication identifies strict quotient pullback towers under a scheme isomorphism; inverse image commutes with their Roos cocone; simultaneous reduction realizes completion",
+   "results": "8 hits concerning Scheme.Pullback.pullbackP1Iso and open-cover pullback refinements. None addresses these module-sheaf strict systems.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.IsomorphismStrictQuotientModels",
+  "file": "lean/Sheaf/TraceFormula/IsomorphismStrictQuotientModels.lean",
+  "declaration": "WeilConjectures.trfQuotientTowerFunctor",
+  "declarations": [
+   "WeilConjectures.trfQuotientTowerFunctor",
+   "WeilConjectures.trfInverseImageComplex",
+   "WeilConjectures.trfInverseImageTower",
+   "WeilConjectures.trfQuotientDifference",
+   "WeilConjectures.trfInverseQuotientDifference",
+   "WeilConjectures.trfQuotientProductComparison",
+   "WeilConjectures.TrfCompletionRoosNormalized"
+  ],
+  "statement": "def trfQuotientTowerFunctor (W : Scheme.{t}) : CochainComplex (integralTowerModules l E W) ℤ ⥤ ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26",
+  "note": "Six strict quotient constructions unchanged. TrfCompletionRoosNormalized explicitly repaired to require whole-system adjunction-coherent presentations; see P4 change record."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "worker": "stage3",
+  "summary": "A strict part of the existing ten-step argument, extracted without changing the parent statement. Complete proof in words accompanies the exact Lean statement.",
+  "blueprint": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Strict quotient and inverse-image Roos notation"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29c11",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T092852-L-3475163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ac9fc",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T130628-L-3484579",
+  "kind": "interface",
+  "note": "independent cc review: TrfCompletionRoosNormalized coherence premise vs T6 invisible-twist counterexample and the S9 pullback precedent; item proof vs coherentQuotientModelComparison/fixedCalculusModels/ordinaryQuotientTowerComparison; adapted modules compiled in sandbox against the published IntegralReductionTowerCanonical"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "P4 stage 2",
+  "old_statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use its small pro-etale site with the fixed independent universes [def-weil-pbc-proetale-site, def-weil-size-convention], completed integral coefficient sheaf $\\widehat R_W$ [def-weil-completed-integral-coefficients], and ordinary unbounded module-sheaf derived category [def-weil-abstract-derived-category]. Write $B_{W,n}=(R/\\varpi^{n+1})_W$. Define $D_W(Q)$ to be the entire strict tower $Q\\otimes_{\\widehat R_W}B_{W,n}$ restricted to completed modules, with its actual quotient transitions [lem-coef-derived-system-evaluation-calculus, lem-pur-integral-operations-well-defined]. For an isomorphism $g:X\\to Y$, let $G$ be the exact coefficient-transported inverse image [def-weil-inverse-image-pullback-comparison], let $G_{\\rm cx}$ and $G_{\\rm tow}$ be its termwise complex and tower functors, and put $T_D=1-s_D$ and $T_{GD}=1-s_{GD}$ on the respective countable products. Define $\\phi_D:G_{\\rm cx}(\\prod D_n)\\to\\prod G_{\\rm cx}D_n$ by the canonical product projections. For the simultaneous coefficient calculus $S$ [lem-coef-derived-system-evaluation-calculus] and normalized Roos model $r$ [def-trf-integral-comparison-realization-models], define the predicate on a natural isomorphism $\\rho$ from $q$ followed by $S.{\\rm reduction}$ and total limit to $D_W$ followed by $H$ and derived localization $Q$: for every good representative $P$, every strict simultaneous system $K$ and specified derived presentation $e$ with finite comparisons $\\kappa_n$, there is a strict tower isomorphism $a$ from the completed restriction of $K$ to $D_W(P)$, taking the restricted section $x$ to $\\kappa_n(x)$, and $\\rho_P=QH(a)\\circ r_K\\circ{\\rm limit}(e)$. Here $q$ is good-representative localization, and $H$ is the actual mapping cocone of $1-s$. These are the existing seven definitions, relocated without changing any term or signature.",
+  "what": "Correct the false every-presentation normalization by requiring IsIntegralComparisonPresentationCoherent; no change to any of the six other definitions. The T6 invisible-twist counterexample applies unchanged. See the change record for all consumers, including quarantine mirrors.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "06YY, 07A6, 0941; ordinary tensor/limit adjunction and derived whole-system comparison."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-isomorphism-multiplication-cone-descent",
+    "holds": true,
+    "note": "Strict quotient constructions and formulas unchanged; the named completion predicate now quantifies only over whole-system coherent presentations. The correction is explicit and the actual canonical comparisons are retained."
+   },
+   {
+    "id": "lem-trf-isomorphism-quotient-roos-comparison",
+    "holds": true,
+    "note": "Strict quotient constructions and formulas unchanged; the named completion predicate now quantifies only over whole-system coherent presentations. The correction is explicit and the actual canonical comparisons are retained."
+   },
+   {
+    "id": "lem-trf-isomorphism-strict-quotient-multiplication",
+    "holds": true,
+    "note": "Strict quotient constructions and formulas unchanged; the named completion predicate now quantifies only over whole-system coherent presentations. The correction is explicit and the actual canonical comparisons are retained."
+   },
+   {
+    "id": "lem-trf-strict-quotient-completion-realization",
+    "holds": true,
+    "note": "Strict quotient constructions and formulas unchanged; the named completion predicate now quantifies only over whole-system coherent presentations. The correction is explicit and the actual canonical comparisons are retained."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use the actual Functor.ofOpSequence of unrestricted quotient complexes and transitions, flip it, apply inverse image termwise, and form the canonical product comparison and difference endomorphisms. The normalization predicate is the displayed equation on all simultaneous presentations. All seven bodies are copied verbatim, with no chosen data or proof holes added.",
+    "uses": [
+     "lem-pur-integral-operations-well-defined",
+     "lem-coef-derived-system-evaluation-calculus",
+     "def-weil-inverse-image-pullback-comparison",
+     "def-trf-integral-comparison-realization-models"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-integral-operations-well-defined",
+   "lem-coef-derived-system-evaluation-calculus",
+   "def-weil-inverse-image-pullback-comparison",
+   "def-trf-integral-comparison-realization-models"
+  ]
+ }
+}

@@ -1,0 +1,265 @@
+{
+ "id": "lem-sp-arithmetic-system-right-adjoint",
+ "kind": "statement",
+ "title": "Exact floor extension right adjoint for arithmetic restriction of varying-ring systems",
+ "statement": "Let $\\mathcal C$ be a small site and $B_1\\leftarrow B_2\\leftarrow\\cdots$ sheaves of commutative rings. Let $\\mathscr S(B)$ be the abelian category of strict semilinear systems of $B_k$-module sheaves, with componentwise exactness, and use its ordinary unbounded derived category [lem-pur-system-level-left-extension, def-weil-abstract-derived-category]. Fix $e\\geq1$, put $B_r=(B_{en})_{n\\geq1}$ and let $U:\\mathscr S(B)\\to\\mathscr S(B_r)$ retain the levels $en$. Restriction of scalars is as in [def-pc-sheaf-restrict-scalars]. Define\n$$ (JC)_k=\\begin{cases}0&k<e,\\\\ \\operatorname{Res}_{B_k\\to B_{e\\lfloor k/e\\rfloor}} C_{\\lfloor k/e\\rfloor}&k\\geq e.\\end{cases} $$\nTransitions are induced by those of $C$ when the floor index changes, are identities of underlying sheaves within each block, and are zero into the prefix $k<e$. This defines an additive exact functor $J$ right adjoint to $U$. The natural Hom bijection sends $f:D\\to JC$ to $(f_{en}:D_{en}\\to C_n)_n$; its inverse sends $g:UD\\to C$ to the zero components below $e$ and the composites $D_k\\to\\operatorname{Res}D_{e\\lfloor k/e\\rfloor}\\xrightarrow{\\operatorname{Res}g_{\\lfloor k/e\\rfloor}}(JC)_k$ otherwise. One has $UJ=\\mathrm{id}$, counit the identity, and the unit $D\\to JUD$ has identity components at $en$.\n\nThe induced termwise functors preserve quasi-isomorphisms and give an adjunction $D(U)\\dashv D(J)$ on the ordinary unbounded derived categories with these localized unit and counit [def-weil-exact-derived-adjunction]. If a ring sheaf $A$ has compatible maps to all $B_k$, let $\\mathcal L_B$ and $\\mathcal L_{B_r}$ be total derived inverse limit after forgetting scalars to $A$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. There is a natural isomorphism $\\mathcal L_B JC\\cong\\mathcal L_{B_r}C$ compatible with every selected limit projection. No exactness of countable products is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Normalization paragraph of det-sp-integral-adjunction-bijection: Adjunction, arithmetic restriction/right adjoint; retained steps 1, 3 and projection identification of step 4; extracted intermediate assertion of the retained proof, with explicit formulas; Bhatt–Scholze Definitions 3.5.2–3.5.3 and Lemma 3.5.7, pp. 24–26"
+ },
+ "stmt_deps": [
+  "lem-pur-system-level-left-extension",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-sp-strict-tower-arithmetic-restriction-data",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "text": "Define r(n)=e(n+1)-1 by OrderEmbedding.ofStrictMono. Positivity of e gives strict monotonicity after subtracting one. For e≤k+1, q=(k+1)/e is positive and e*q≤k+1; subtract one to obtain hf. Apply the ordinary exact floor-extension theorem to this specific r and hf.",
+   "uses": [
+    "lem-sp-arithmetic-system-floor-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+   }
+  },
+  {
+   "text": "Copy the eleven ordinary fields from the constructed ArithmeticSystemOrdinaryFloorData. Exact-functor preservation of homology gives both quasi-isomorphism fields by typeclass inference. Unfold the specified exact-derived adjunction and use Adjunction.localization_unit_app and localization_counit_app. The standard factorization isomorphisms cancel, giving precisely the derived_unit and derived_counit equations, so this builds ArithmeticSystemFloorData without a new hole.",
+   "uses": [
+    "def-sp-arithmetic-system-adjunction-data",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; exact localization of the given degreewise adjunction"
+   }
+  },
+  {
+   "text": "For every common coefficient map α, construct β by selecting α at r(n); naturality is the naturality of α at the image of each index arrow. Its component formula is definitional. Apply the common-coefficient floor-limit comparison to the already constructed R, its ordinary floor data d, this β, and the given derived-limit pair RF,η. Package its two scalar-forgetting functors and comparison with the constructed β.",
+   "uses": [
+    "lem-sp-arithmetic-system-floor-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-arithmetic-system-floor-extension",
+  "def-sp-arithmetic-system-adjunction-data",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-arithmetic-system-floor-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Lean assembly of the two separate ordinary-construction and coefficient-limit obligations; arithmetic embedding and exact localization proved directly by B6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subsequence.*adjoint|adjoint.*subsequence|floor.*system|system.*floor",
+   "results": "0 hits: ; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint to subsequence restriction of strict inverse systems of modules over varying quotient ring sheaves",
+   "results": "8 hits: ModuleCat.instIsRightAdjointRestrictScalars, Rep.instIsRightAdjointActionModuleCatRes, SheafOfModules.hasLimit, SheafOfModules.PullbackConstruction.adjunction, InverseSystem.limit, Rep.instIsLeftAdjointActionModuleCatRes, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.hasLimitsOfShape; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact right adjoint to restriction of varying ring sheaf inverse systems to arithmetic subsequence using floor indices and zero prefix",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, Profinite.NobelingProof.CC_exact, Condensed.profiniteSolid, Profinite.NobelingProof.succ_exact, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictRingSystem|SystemScalar|coinduct.*sheaf|sheaf.*coinduct",
+   "results": "0 hits: ; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightKanExtension\"",
+   "results": "12 hits: CategoryTheory.Functor.HasRightKanExtension, CategoryTheory.Functor.rightKanExtension, CategoryTheory.Functor.isRightKanExtensionId, CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit, CategoryTheory.Functor.IsRightKanExtension, CategoryTheory.Functor.rightKanExtensionCounit, CategoryTheory.Functor.HasRightKanExtension.mk, CategoryTheory.Functor.coneOfIsRightKanExtension; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to every e-th level of a diagram of sheaves of modules over a tower of rings has an exact coinduction functor",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod, Profinite.NobelingProof.succ_exact, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4CondensedMod, Condensed.hasExactLimitsOfShape, Condensed.hasExactColimitsOfShape, LightCondensed.instCountableAB4StarLightCondMod; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact right adjoint to arithmetic subsequence restriction of inverse systems of sheaves of modules over varying rings, extension by floor and zero prefix",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, Condensed.profiniteSolid, localCohomology.diagram, CondensedMod.ofSheafProfinite, Condensed.profiniteSolidCounit, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.profiniteSolidification, localCohomology.ofDiagram. Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint. Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsequence.*adjoint|adjoint.*subsequence|floor.*system|system.*floor",
+   "results": "0 hits: . Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to every e-th level of a diagram of module sheaves over an inverse sequence of rings has an exact right adjoint",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Condensed.instAB5CondensedMod, Profinite.NobelingProof.succ_exact, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Condensed.freeForgetAdjunction, CondensedMod.ofSheafProfinite. Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Arithmetic subsequence restriction of strict inverse systems of module sheaves admits an exact floor extension right adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.PullbackConstruction.adjunction, Rep.instIsRightAdjointActionModuleCatRes, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, PresheafOfModules.instIsRightAdjointPushforward, ModuleCat.extendRestrictScalarsAdj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.hasLimit. Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightKanExtension\"",
+   "results": "12 hits: CategoryTheory.Functor.HasRightKanExtension, CategoryTheory.Functor.rightKanExtension, CategoryTheory.Functor.isRightKanExtensionId, CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit, CategoryTheory.Functor.IsRightKanExtension, CategoryTheory.Functor.rightKanExtensionCounit, CategoryTheory.Functor.HasRightKanExtension.mk, CategoryTheory.Functor.coneOfIsRightKanExtension. Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictRingSystem|SystemScalar|coinduct.*sheaf|sheaf.*coinduct",
+   "results": "0 hits: . Returned signatures concern generic adjunctions, constant-ring restriction or unrelated condensed modules; none states the varying-ring arithmetic floor-extension theorem with its derived-limit projection comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-normalized-equivalence",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization paragraph of det-sp-integral-adjunction-bijection: Adjunction, arithmetic restriction/right adjoint; retained steps 1, 3 and projection identification of step 4",
+   "via": [
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-arithmetic-system-right-adjoint",
+  "worker": "stage1",
+  "summary": "Constructed and verified the floor-extension functor and its natural Hom bijection, computed both triangles, localized the exact adjunction, and applied the existing constant-coefficient arithmetic-restriction theorem to its underlying A-tower. No new nodes or statement changes.",
+  "blueprint": "Normalization/Adjunction paragraph of det-sp-integral-adjunction-bijection, via det-sp-normalized-equivalence: arithmetic restriction/right adjoint and selected projection comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Its strict-system category and componentwise exactness supply the ambient categories; no geometric purity result or left-extension construction is substituted for the unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Only its general exactness of restriction of scalars on a small ringed site is used; the unit has no separate scalar-exactness lemma."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "General exact-functor localization is used to descend the explicitly constructed U and J; it is a categorical tool."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "The item specifies this localization convention for the actual adjunction."
+   },
+   {
+    "node": "lem-sp-strict-tower-arithmetic-restriction",
+    "why": "The general constant-coefficient strict-tower comparison supplies cofinality with selected projections after forgetting scalars; it does not replace the varying-ring adjunction argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "This is the total derived inverse-limit functor expressly specified in the item, without exact products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-7f23e825e",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-7f23e825e (reviewer sub-agent of L); spot-checked: Read in full: the item's 6 steps, all 8 cited statements, the blueprint Adjunction paragraph (sk-lem-sp-tower-equivalence.proof.md l.5-11), Stacks derived.tex 015F (l.5884), and the parent's use of the item in det-sp-normalized-equivalence. The statement and stmt_deps are unchanged from the Q77 import, there are no new nodes, and proof_deps equals the union of the step uses. The floor extension is the right Kan extension along n->en: the comma category {n: en<=k} has initial object floor(k/e), and the empty limit gives the zero prefix. Checked by hand: block transitions are B_{k+1}-semilinear because B_{k+1}->B_k->B_{en} = B_{k+1}->B_{en}; at a boundary the square for g uses t_{en,e(n+1)}; maps into JC are forced by f_k=(Res f_{eq(k)})t; triangles reduce to U eta=1 and eta_J=1. Exactness comes from Res_phi exact for an arbitrary sheaf-ring map plus componentwise cohomology in S(B). The derived adjunction comes from exact-functor factorization and def-weil-exact-derived-adjunction. For the limit comparison, r_e F_B J C = F_r C on complexes, and lem-sp-strict-tower-arithmetic-restriction on Mod(A) gives a natural rho with p_n rho = p_{en} and no exact-products assumption. Cases e=1 and e=2 checked. No duplicate: only lem-pur-etale-system-cofinal-mate came close, and it treats left-extension mates. No cycle (577-node closure). No SGA. Accepted the six declared generic tool_uses. Cosmetic: the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ArithmeticSystemRightAdjoint",
+  "declaration": "SheafOfModules.arithmeticSystemRightAdjoint",
+  "declarations": [
+   "SheafOfModules.arithmeticSystemRightAdjoint"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ArithmeticSystemRightAdjoint.lean",
+  "statement": "theorem arithmeticSystemRightAdjoint (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (e : ℕ) (_he : 1 ≤ e) : ∃ (r : ℕ ↪o ℕ), (∀ n : ℕ, r n = e * (n + 1) - 1) ∧ ∃ (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k) (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B) (_hadd : R.Additive) (_hlim : PreservesFiniteLimits R) (_hcolim : PreservesFiniteColimits R), Nonempty (ArithmeticSystemFloorData B e r hf R) ∧ (∀ (A : Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) [HasDerivedCategory.{z} (SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A))] [HasDerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A))] (RF : DerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A)) ⥤ DerivedCategory.{z} (SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A))) (η : CategoryTheory.StrictTowerArithmetic.limitComplex _ ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A)) (.up ℤ)) → (∀ I, CochainComplex.IsKInjective I → IsIso (η.app I)) → ∃ (β : (Functor.const ℕᵒᵖ).obj A ⟶ selectedSystemRings B r), (∀ n : ℕ, β.app (op n) = α.app (op (r n))) ∧ ∃ (F : ArithmeticSystemScalarForgetting B A α) (G : ArithmeticSystemScalarForgetting (selectedSystemRings B r) A β), Nonempty (ArithmeticSystemLimitData B e r R A α β F G RF η))",
+  "branch": "sheaf-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-caff381c4",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Re-delivery after 0aa4 RETURN H2. The module is byte-identical to 0aa4; the node differs from side-live only in its lean binding and in stmt_deps gaining def-sp-strict-tower-arithmetic-restriction-data (owns StrictTowerArithmetic.restriction/limitComplex/limitMap) and def-pur-system-level-left-extension-basic (owns StrictRingSystem/systemRestriction/selectedSystemRings/systemSubsequence). Both are landed definition nodes. There is no cycle (52-node closure), and statement/proof/proof_deps are unchanged. Re-checked: r n = e(n+1)-1 agrees with StrictTowerArithmetic.index; floor-extension record fixes level/prefix/transition/map; Hom bijection, UJ=id, identity counit and unit; exact-derived adjunction normalized; limitMap = limit.pre gives p_n rho = p_{e(n+1)}; no exact products, flatness or universe restriction. Edge cases e=1 and e=2 hold. No hollow definitions; docstrings and report sections present. No compile: nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical); moved records vs old item lines 47-188 (verbatim); two new sorry statements vs the item and plan steps 1-4/6 (true, strictly smaller); sandbox compile + #print axioms (sorryAx only from the two split statements); node stmt_deps vs the declarations used in their statements"
+ }
+}

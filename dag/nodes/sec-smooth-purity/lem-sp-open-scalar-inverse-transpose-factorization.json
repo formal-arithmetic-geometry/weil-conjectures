@@ -1,0 +1,260 @@
+{
+ "id": "lem-sp-open-scalar-inverse-transpose-factorization",
+ "kind": "statement",
+ "title": "Inverse-transpose factorization for open source composition",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. All schemes are separated of finite type over $k$, and all maps are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\varphi:A\\to B$ be a unital homomorphism of finite commutative rings killed by powers of $\\ell$, and choose $N=\\ell^n\\geq1$ annihilating both. On either the ordinary etale or pro-etale site let $\\mathcal C_{T,R}=D^b_{ctf}(T,R)$ mean the full category of constant-$R$ module complexes with bounded constructible cohomology and finite Tor amplitude: tensor with any degree-zero module sheaf has cohomology in one fixed finite interval [def-weil-pbc-derived-categories, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude, det-sp-et-proet-adjunction-transfer]. Write $T_T=-\\otimes^L_{A_T}B_T$ [det-sp-scalar-extension-functor, lem-pur-derived-change-of-rings].\nLet $f:X\\to Y$ be a separated finite-type morphism and $j:U\\hookrightarrow X$ a quasi-compact open immersion; put $g=fj$ [def-weil-open-immersion]. Choose compactifications with separated finite-type middle schemes [def-weil-compactifications-refinements]. On the pro-etale finite-Tor categories let $F_{h,R}=Rh_{!,R}\\dashv G_{h,R}=h_R^!$ have counit $\\epsilon_{h,R}$, for $h=f,g$ and $R=A,B$ [sk-prop-sf-rf-shriek-preservation]. Let $J_R=Dj_{!,R}\\dashv U_R=j_R^*$ have its actual open counit $v_R$ [det-sf-mate-open-restriction]. Use the canonical compact-support composition and refinement comparisons to identify $F_{g,R}=F_{f,R}J_R$ and, adjunction-preservingly, $G_{g,R}=U_RG_{f,R}$ [def-weil-pbc-composite-adjunction, lem-sp-et-proet-coefficient-compatibility]. Let $b_f:T_YF_{f,A}\\xrightarrow{\\sim}F_{f,B}T_X$, $b_g:T_YF_{g,A}\\xrightarrow{\\sim}F_{g,B}T_U$, and $b_j:T_XJ_A\\xrightarrow{\\sim}J_BT_U$ be the specified proper-counit/open-tensor comparisons [det-sp-reduction-direct-image], with $b_j$ normalized by the identity proper compactification of $j$.\nFor $K\\in\\mathcal C_{Y,A}$ put $M=G_{f,A}K$ and $L=U_AM=G_{g,A}K$. Then the following equalities hold for these specified comparisons on arbitrary pro-etale finite-Tor input, including comparisons through any common refinement:\n$$\\epsilon_{g,R,H}=\\epsilon_{f,R,H}\\circ F_{f,R}(v_{R,G_{f,R}H})\\qquad(H\\in\\mathcal C_{Y,R}),$$\n$$b_g(L)=F_{f,B}(b_j(L))\\circ b_f(J_AL),$$\nand\n$$\\begin{aligned}\nT_Y(\\epsilon_{g,A,K})\\circ b_g(L)^{-1}\n={}&T_Y(\\epsilon_{f,A,K})\\circ b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))\\circ F_{f,B}(b_j(L)^{-1}).\n\\end{aligned}$$\nThe last equality is between morphisms $F_{g,B}T_UL\\to T_YK$. No smoothness of $f$, flatness of $B$ over $A$, or exceptional scalar mate is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality: coefficient/composition square on all finite-Tor pro-etale objects, composite counit, and inverse-naturality factorization (returned proof steps 1 and 4)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-et-proet-adjunction-transfer",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-open-immersion",
+  "def-weil-compactifications-refinements",
+  "sk-prop-sf-rf-shriek-preservation",
+  "det-sf-mate-open-restriction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "det-sp-reduction-direct-image",
+  "def-sp-intrinsic-ctf-refinement-comparison",
+  "sk-def-sp-normalized-towers",
+  "def-sp-finite-intrinsic-open-adjunction",
+  "def-sp-finite-intrinsic-open-square",
+  "def-sp-reduction-direct-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the stipulated adjunction-preserving identifications with $F_{f,R}J_R\\dashv U_RG_{f,R}$. The composite adjunction definition gives its counit at $H$ as $\\epsilon_{f,R,H}\\circ F_{f,R}(v_{R,G_{f,R}H})$. This proves the first equality for each $R=A,B$ and every $H$; the actual open counit is the inner counit, not an arbitrarily chosen map.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits"
+   }
+  },
+  {
+   "text": "For any $Q\\in\\mathcal C_{U,A}$, the finite-Tor comparison equivalence supplies $E\\in D^b_{ctf}(U_{et},A)$ and an isomorphism $s:\\nu_U^*E\\xrightarrow{\\sim}Q$. Its hypotheses are exactly the standing schemes and the finite rings of this item. The same node ensures that $E_B$ and the etale compact-support images used in composition lie in the required finite-Tor categories. Thus the etale-origin input condition of the coefficient-composition theorem can be met without restricting $Q$.",
+   "uses": [
+    "lem-sp-etale-ctf-chart-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality: open-source composition"
+   }
+  },
+  {
+   "text": "The definition of the normalized comparison is $b_{i,p}=Rp_{*,B}(e_i)\\circ\\gamma_p(i_!^A(-))$. For the identity proper compactification of $j$, the proper factor $\\gamma_{1_X}$ is identity under the canonical identity-functor identifications: its defining transpose is the scalar extension of the identity counit. Hence the comparison for $j$ in the coefficient-composition theorem is exactly the specified $b_j=e_j$, with its fixed open normalization.",
+   "uses": [
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality: open-source composition"
+   }
+  },
+  {
+   "text": "Apply the coefficient-composition equality to the inner map $j$ and outer map $f$ on $\\nu_U^*E$. Under the specified compositors it gives $a_{\\nu^*E}=d_{\\nu^*E}$, where $a_Q=b_g(Q)$ and $d_Q=F_{f,B}(b_j(Q))\\circ b_f(J_AQ)$. These are natural maps from $S=T_YF_{g,A}$ to $V=F_{g,B}T_U$. For the isomorphism $s$ of Step 2, naturality gives $a_QS(s)=V(s)a_{\\nu^*E}=V(s)d_{\\nu^*E}=d_QS(s)$. Cancel the invertible $S(s)$. Taking $Q=L$ proves the second equality on the arbitrary input in the statement.",
+   "uses": [
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL6 (remark-Rf-lower-shriek-change-of-rings) and 0F7J (lemma-shriek-composition); normalized coefficient-composition square"
+   }
+  },
+  {
+   "text": "Invert Step 4 at $L$ and use functoriality: $b_g(L)^{-1}=b_f(J_AL)^{-1}\\circ F_{f,B}(b_j(L)^{-1})$. Naturality of $b_f$ at $v_{A,M}:J_AL\\to M$ reads $F_{f,B}(T_X(v_{A,M}))\\circ b_f(J_AL)=b_f(M)\\circ T_Y(F_{f,A}(v_{A,M}))$. Multiplying by the two inverses yields $T_Y(F_{f,A}(v_{A,M}))\\circ b_f(J_AL)^{-1}=b_f(M)^{-1}\\circ F_{f,B}(T_X(v_{A,M}))$. Substitute this and Step 1 into $T_Y(\\epsilon_{g,A,K})\\circ b_g(L)^{-1}$; associativity gives exactly the last displayed equality. Its successive objects, starting at the right, are $F_{g,B}T_UL$, $F_{f,B}T_XJ_AL$, $F_{f,B}T_XM$, $T_YF_{f,A}M$, and $T_YK$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality: open-source composition"
+   }
+  },
+  {
+   "text": "For any specified refinement comparison $\\phi_R:F_{h,R}^c\\xrightarrow{\\sim}F_{h,R}^{c\\prime}$, the cited refinement equation is $b_h^{c\\prime}T_Y(\\phi_A)=\\phi_BT_Ub_h^c$ on etale-origin inputs. Both sides are natural transformations with source $T_YF_{h,A}^c$. Applying naturality at $s:\\nu^*E\\simeq Q$ as in Step 4 and cancelling $T_YF_{h,A}^c(s)$ proves the same equation for all finite-Tor inputs. The cited theorem includes every common refinement and coherent composition. Use these coefficient squares in Steps 3--5 and the stipulated counit-preserving adjunction identifications in Step 1; the same substitutions prove the displayed equalities for those comparisons as well.",
+   "uses": [
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL6 and 0F7J; canonical refinement and common-refinement squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-sp-etale-ctf-chart-domain",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality paragraph: explicit composite-counit and inverse-naturality calculation, using the existing normalized coefficient-coherence statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficient change and an open immersion into the source, factor the inverse compact support coefficient comparison followed by the composite adjunction counit into the two scalar comparisons and open counit",
+   "results": "{\"t\": \"2026-10-22T05:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"For finite coefficient change and an open immersion into the source, factor the inverse compact support coefficient comparison followed by the composite adjunction counit into the two scalar comparisons and open counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\"], \"digest\": \"76ac90ac4978f49e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-22T05:55:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp, CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek.*scalar|scalar.*shriek|comp_counit|counit_comp",
+   "results": "{\"t\": \"2026-10-22T05:55:27Z\", \"tool\": \"grep\", \"query\": \"shriek.*scalar|scalar.*shriek|comp_counit|counit_comp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"809de87f2f7fa802\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor the coefficient extended counit for compact support of a composite with an open immersion using inverse naturality of the coefficient comparison",
+   "results": "{\"t\": \"2026-10-22T05:55:28Z\", \"tool\": \"leansearch\", \"query\": \"Factor the coefficient extended counit for compact support of a composite with an open immersion using inverse naturality of the coefficient comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc\"], \"digest\": \"70dc730f2342592d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension of a compact support composite adjunction counit composed with the inverse coefficient map has a factorization through the inverse coefficient map of the outer morphism and the extension by zero counit",
+   "results": "{\"t\": \"2026-10-22T05:56:02Z\", \"tool\": \"leanfinder\", \"query\": \"The scalar extension of a compact support composite adjunction counit composed with the inverse coefficient map has a factorization through the inverse coefficient map of the outer morphism and the extension by zero counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.RestrictionCoextensionAdj.unit'\"], \"digest\": \"129d5e5fad75b9be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies abstract composite counits and mate identities, but does not identify these specified pro-etale compact-support/scalar maps or their actual open counit; see report for source reads"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived compact support and extension of finite coefficient rings, the comparison for precomposition by an open immersion factors into the two coefficient comparisons, and inverse naturality factors the composite counit",
+   "results": "{\"t\": \"2026-10-23T04:05:52Z\", \"tool\": \"leanfinder\", \"query\": \"For derived compact support and extension of finite coefficient rings, the comparison for precomposition by an open immersion factors into the two coefficient comparisons, and inverse naturality factors the composite counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc\", \"AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_assoc\"], \"digest\": \"8a47952b903583d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction/naturality or ordinary module and open-immersion results do not establish the specified pro-etale compact-support coefficient and refinement comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit|counit_comp|inv_naturality",
+   "results": "{\"t\": \"2026-10-23T04:06:10Z\", \"tool\": \"grep\", \"query\": \"comp_counit|counit_comp|inv_naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean\"], \"digest\": \"14425a65b9fac9a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction/naturality or ordinary module and open-immersion results do not establish the specified pro-etale compact-support coefficient and refinement comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-23T04:06:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp, CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction/naturality or ordinary module and open-immersion results do not establish the specified pro-etale compact-support coefficient and refinement comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient extended counit of a compact support composite with an open immersion factors using inverse naturality of the scalar comparison",
+   "results": "{\"t\": \"2026-10-23T04:06:10Z\", \"tool\": \"leansearch\", \"query\": \"The coefficient extended counit of a compact support composite with an open immersion factors using inverse naturality of the scalar comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc\"], \"digest\": \"619f2497c59c8e0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction/naturality or ordinary module and open-immersion results do not establish the specified pro-etale compact-support coefficient and refinement comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural isomorphism between functors, its inverse naturality at an open adjunction counit rewrites the inverse scalar comparison of a composite compact support adjunction",
+   "results": "{\"t\": \"2026-10-23T04:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a natural isomorphism between functors, its inverse naturality at an open adjunction counit rewrites the inverse scalar comparison of a composite compact support adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"CategoryTheory.Adjunction.leftAdjointCompIso_inv_app\", \"CompHausLike.LocallyConstant.adjunction_counit\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"LightCondensed.ihomPoints_symm_comp\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"fc796f34362288a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction/naturality or ordinary module and open-immersion results do not establish the specified pro-etale compact-support coefficient and refinement comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|def comp :|inv_naturality",
+   "results": "{\"t\": \"2026-10-23T04:08:17Z\", \"tool\": \"grep\", \"query\": \"comp_counit_app|def comp :|inv_naturality\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"ae89ec32d22e8edc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction/naturality or ordinary module and open-immersion results do not establish the specified pro-etale compact-support coefficient and refinement comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-open-exceptional-scalar-locality",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality: coefficient/composition square on all finite-Tor pro-etale objects, composite counit, and inverse-naturality factorization (returned proof steps 1 and 4)",
+   "via": [
+    "lem-sp-open-exceptional-scalar-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sp-open-scalar-inverse-transpose-factorization",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Proved the composite counit by its definition, matched the identity-proper open comparison, extended the existing etale-origin composition/refinement equations to all finite-Tor inputs using the existing comparison equivalence and explicit naturality cancellation, and wrote out the inverse-naturality factorization. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes det-sp-reduction-exceptional.proof.md Locality: the adjunctions compose and b is compatible with extension by zero. The present node proves only the left-adjoint/counit factorization used before taking exceptional transposes.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Generic normalized compact-support coefficient composition/refinement coherence is used as a black box; it is already named in the item, and the reduction unit does not separately state these squares."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-e5939c483",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e5939c483 (reviewer sub-agent of L); spot-checked: I read the item in full, all four cited statements, blueprint main-20261015 det-sp-reduction-exceptional.proof.md (Locality paragraph) and Stacks 0DV0, 0F7J and 0GL6. The statement is byte-identical to the earlier Q117 delivery, there are no new nodes and no repair note exists for this item. Step 1: substituting J,U,F_f,G_f into the composite counit of def-weil-pbc-composite-adjunction gives the first equality. Step 2: lem-sp-etale-ctf-chart-domain gives the finite-Tor etale/pro-etale equivalence for every standing scheme and R=A,B, so every Q has an etale antecedent; its hypotheses match the item's. Step 3: for the identity proper factor, gamma_1 is the identity, so b_j=e_j, which is the coefficient-compatibility map for the compactification (j,1_X). Step 4: the composition equation applied at nu*E extends to every input Q by the naturality cancellation, which is valid because b is defined and natural on the whole ambient category. Step 5: I recomputed the inverse-naturality algebra; it is correct and the chain of objects composes. Step 6: the refinement square extends the same way. Edge cases checked: j=id, U empty, K=0, A=B, and the nonflat map Z/l^2->Z/l. No SGA source is used. I accept lem-sp-et-proet-coefficient-compatibility as a generic coherence tool. Batch-5: chart-domain reaches lem-pod-etale-stalk-tensor-scalar (a generic stalk-tensor fact) and direct-image-comparison is a definition reaching lem-trf-site-functorial-flat-resolution (generic flat resolutions, already reached through the existing stmt_deps). Neither is a step of the trace formula or of Poincare duality, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.OpenScalarInverseTransposeFactorization",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenInverseTranspose.openScalarInverseTransposeFactorization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.support",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.extension",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.restriction",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.openAdjunction",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.composition",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.compositeAdjunction",
+   "AlgebraicGeometry.ProEtale.OpenInverseTranspose.openScalarInverseTransposeFactorization"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/OpenScalarInverseTransposeFactorization.lean",
+  "statement": "theorem openScalarInverseTransposeFactorization (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hℓ : p ≠ ℓ) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (n : ℕ) (_hN : 1 ≤ ℓ ^ n) (_hA : (ℓ ^ n : A) = 0) (_hB : (ℓ ^ n : B) = 0) {U X Y : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] (c : Compactification f) (d : Compactification (j ≫ f)) [c.Z.Over (Spec (.of k))] [d.Z.Over (Spec (.of k))] [LocallyOfFiniteType (c.Z ↘ Spec (.of k))] [QuasiCompact (c.Z ↘ Spec (.of k))] [IsSeparated (c.Z ↘ Spec (.of k))] [LocallyOfFiniteType (d.Z ↘ Spec (.of k))] [QuasiCompact (d.Z ↘ Spec (.of k))] [IsSeparated (d.Z ↘ Spec (.of k))] [c.i.IsOver (Spec (.of k))] [c.g.IsOver (Spec (.of k))] [d.i.IsOver (Spec (.of k))] [d.g.IsOver (Spec (.of k))] (hFA : ∀ Q : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor Y A ((reductionCompactSupport A c.i c.g).obj Q.obj)) (hJA : ∀ Q : spFiniteConstructibleTorCategory U A, spFiniteConstructibleTor X A ((sfIntrinsicDerivedOpen A j).obj Q.obj)) (hUA : ∀ Q : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor U A ((sfIntrinsicDerivedPullback A j).obj Q.obj)) (hGA : ∀ Q : spFiniteConstructibleTorCategory U A, spFiniteConstructibleTor Y A ((reductionCompactSupport A d.i d.g).obj Q.obj)) (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A) (adjA : support A c hFA ⊣ GA) (hFB : ∀ Q : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor Y B ((reductionCompactSupport B c.i c.g).obj Q.obj)) (hJB : ∀ Q : spFiniteConstructibleTorCategory U B, spFiniteConstructibleTor X B ((sfIntrinsicDerivedOpen B j).obj Q.obj)) (hUB : ∀ Q : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor U B ((sfIntrinsicDerivedPullback B j).obj Q.obj)) (hGB : ∀ Q : spFiniteConstructibleTorCategory U B, spFiniteConstructibleTor Y B ((reductionCompactSupport B d.i d.g).obj Q.obj)) (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B) (adjB : support B c hFB ⊣ GB) (hSU : ∀ Q : spFiniteConstructibleTorCategory U A, spFiniteConstructibleTor U B ((scalarExtensionFunctor φ U).obj Q.obj)) (hbf : ∀ Q : spFiniteConstructibleTorCategory X A, IsIso ((reductionDirectImageComparison φ c.i c.g).app Q.obj)) (hbg : ∀ Q : spFiniteConstructibleTorCategory U A, IsIso ((reductionDirectImageComparison φ d.i d.g).app Q.obj)) (K : spFiniteConstructibleTorCategory Y A) : (∀ H : spFiniteConstructibleTorCategory Y A, (compositeAdjunction A j c d hFA hJA hUA hGA GA adjA).counit.app H = (composition A j c d hFA hJA hGA).hom.app ((restriction A j hUA).obj (GA.obj H)) ≫ (support A c hFA).map ((openAdjunction A j hJA hUA).counit.app (GA.obj H)) ≫ adjA.counit.app H) ∧ (∀ H : spFiniteConstructibleTorCategory Y B, (compositeAdjunction B j c d hFB hJB hUB hGB GB adjB).counit.app H = (composition B j c d hFB hJB hGB).hom.app ((restriction B j hUB).obj (GB.obj H)) ≫ (support B c hFB).map ((openAdjunction B j hJB hUB).counit.app (GB.obj H)) ≫ adjB.counit.app H) ∧ ((scalarExtensionFunctor φ Y).map ((composition A j c d hFA hJA hGA).hom.app ((restriction A j hUA).obj (GA.obj K))).hom ≫ (reductionDirectImageComparison φ c.i c.g).app ((sfIntrinsicDerivedOpen A j).obj ((restriction A j hUA).obj (GA.obj K)).obj) ≫ (reductionCompactSupport B c.i c.g).map ((reductionOpenScalarIso φ j).hom.app ((restriction A j hUA).obj (GA.obj K)).obj) = (reductionDirectImageComparison φ d.i d.g).app ((restriction A j hUA).obj (GA.obj K)).obj ≫ ((composition B j c d hFB hJB hGB).hom.app ⟨(scalarExtensionFunctor φ U).obj ((restriction A j hUA).obj (GA.obj K)).obj, hSU ((restriction A j hUA).obj (GA.obj K))⟩).hom) ∧ (@inv _ _ _ _ ((reductionDirectImageComparison φ d.i d.g).app ((restriction A j hUA).obj (GA.obj K)).obj) (hbg ((restriction A j hUA).obj (GA.obj K))) ≫ (scalarExtensionFunctor φ Y).map ((compositeAdjunction A j c d hFA hJA hUA hGA GA adjA).counit.app K).hom = ((composition B j c d hFB hJB hGB).hom.app ⟨(scalarExtensionFunctor φ U).obj ((restriction A j hUA).obj (GA.obj K)).obj, hSU ((restriction A j hUA).obj (GA.obj K))⟩).hom ≫ (reductionCompactSupport B c.i c.g).map ((reductionOpenScalarIso φ j).inv.app ((restriction A j hUA).obj (GA.obj K)).obj) ≫ (reductionCompactSupport B c.i c.g).map ((scalarExtensionFunctor φ X).map ((openAdjunction A j hJA hUA).counit.app (GA.obj K)).hom) ≫ @inv _ _ _ _ ((reductionDirectImageComparison φ c.i c.g).app (GA.obj K).obj) (hbf (GA.obj K)) ≫ (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual compactification support, exact open extension/pullback, localized open counit and specified scalar maps. The three displayed equations are expressed with explicit canonical compositor boundary maps; both coefficient counits are quantified over all inputs. Preservation and IsIso witnesses only expose the stipulated restrictions and inverse maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bd815f7a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read item, 19 deps, both modules, report, live decls. All four conjuncts match the node (eq.1 composite counits ∀H for A,B; eq.2 coefficient-composition with both compositor boundaries; eq.3 inverse-naturality factorization, re-derived from eq.1/eq.2 + naturality of b_f at v). Hypotheses: only actual-functor D_ctf preservation and IsIso of b_f/b_g (true via reductionDirectImage_isIso), arbitrary right adjoints (unique). New node def-sp-intrinsic-ctf-refinement-comparison: refinementModel = siteRefinement conjugated by supportPresentation; ∃!-pinned (origin theorem proved for all X + D^+ full faithfulness), no intrinsic duplicate found (Clopen/fixedRefinement/refinementAtWitness are other functors/categories). Advisories: transitive owners (def-sp-finite-intrinsic-pullback, directImageConstantPush), coordinate bridge to landed parent OpenExceptionalScalarLocality needed in stage 3, def-pur-origin cite unused in Lean, _hN vacuous, H11 dispatcher wording."
+ }
+}

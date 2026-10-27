@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+ "kind": "statement",
+ "title": "A noncentral geometric semisimple Lie element gives a smaller nonunipotent group over an infinite field",
+ "statement": "Let $k$ be a field [def-weil-field], and fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All groups below are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group which becomes $\\mathbf G_m^r$ over $\\bar k$, for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Unipotent means admitting, for some $n\\geq1$, a closed immersion [def-weil-closed-immersion] into the upper unitriangular group $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]: its $A$-points are upper triangular matrices with all diagonal entries $1$, for every commutative $k$-algebra $A$. For a smooth group $J$, $\\mathfrak j=\\operatorname{Lie}(J)=T_{J/k,e}$ is the tangent space at the identity [def-sc-scheme-tangent-space], with the Lie bracket induced by group commutators [def-wf-lie-algebra]. The adjoint action $\\operatorname{Ad}(g)$ is the differential at the identity of conjugation by $g$. A tangent element is semisimple if its image under the differential of a faithful closed linear representation of $J$ is diagonalizable over $\\bar k$. It is noncentral if $[X,Y]\\ne0$ for some $Y\\in\\mathfrak j$. Suppose $k$ is infinite. Let $G$ be smooth and connected, and suppose $\\operatorname{Lie}(G_{\\bar k})$ contains a noncentral semisimple element. Then there exists a noncentral semisimple $X\\in\\mathfrak g$ such that the adjoint stabilizer functor $C_G(X)(A)=\\{g\\in G(A):\\operatorname{Ad}(g)(X\\otimes1)=X\\otimes1\\}$ is represented by a smooth closed subgroup $C\\subsetneq G$. The identity component $K=C^\\circ$, with its open-subscheme structure, is a smooth connected affine closed $k$-subgroup of $G$, with $\\dim K<\\dim G$, and $K$ is not unipotent. Here dimension is Krull dimension [def-kun-topological-krull-dimension]. In particular the conclusions concern $C^\\circ$ even when $C$ is disconnected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-semisimple-lie-element",
+  "def-wf-lie-algebra-derivation",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-dual-number-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a closed embedding $i:G\\hookrightarrow\\operatorname{GL}_{m,k}$ by [lem-sfb-affine-group-faithful-linear-representation]. By [lem-sfb-affine-group-dual-number-calculus] its differential is injective, so identify $\\mathfrak g$ with a matrix subspace. The dual-number conjugation formula gives $\\operatorname{Ad}(g)Z=gZg^{-1}$ and, on differentiating, $\\operatorname{ad}(Y)Z=YZ-ZY$. Choose a basis of $\\mathfrak g$, of dimension $d$. The coefficients $f_1,\\ldots,f_d$ in $$\\det(T-\\operatorname{ad}(Y))=T^d+f_1(Y)T^{d-1}+\\cdots+f_d(Y)$$ are polynomial functions of the coordinates of $Y$: the entries of $\\operatorname{ad}(Y)$ are linear and the determinant is its permutation sum. For the given geometric noncentral semisimple element $S\\in\\operatorname{Lie}(G_{\\bar k})=\\mathfrak g\\otimes_k\\bar k$, its image under some faithful closed representation of $G_{\\bar k}$ is diagonalizable; the arbitrary-field faithful detection clause of [lem-sfb-algebraic-lie-additive-jordan], applied over $\\bar k$ to that closed immersion and to the rational representation $i_{\\bar k}$, shows that $di(S)$ is diagonalizable. Diagonalize $di(S)$. Commutation on all matrices is diagonal in the matrix-unit basis, with eigenvalues the differences of its diagonal entries. Its invariant subspace $\\mathfrak g_{\\bar k}$ is a sum of eigenspaces, by polynomial spectral projections. Hence $\\operatorname{ad}(S)$ is diagonalizable and nonzero. Some eigenvalue is nonzero, so its characteristic polynomial is not $T^d$. Thus some $f_i$ is nonzero.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-algebraic-lie-additive-jordan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.78, printed pp.377–378; 10.19–10.24, matrix adjoint formula."
+   }
+  },
+  {
+   "text": "Choose such a nonzero coefficient $f_i\\in k[y_1,\\ldots,y_d]$. A nonzero polynomial over an infinite field cannot vanish at every rational tuple: induct on the number of variables, choose values of the first $d-1$ variables making one nonzero coefficient in the last variable nonzero, and then avoid the finitely many roots of the resulting nonzero one-variable polynomial. For zero variables a nonzero constant already has nonzero value. Consequently choose $Y\\in\\mathfrak g(k)$ with $f_i(Y)\\ne0$. Then $\\operatorname{ad}(Y)$ has a nonzero eigenvalue over $\\bar k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.79, printed p.378; explicit polynomial-density argument."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=0$, apply [lem-sfb-algebraic-lie-additive-jordan] to $Y$ over the perfect field $k$ and put $X=Y_s$. Functoriality for the adjoint representation says that $\\operatorname{ad}(X)$ is the semisimple part of $\\operatorname{ad}(Y)$; its nonzero eigenvalue from step 2 persists, so $X$ is noncentral. If $\\operatorname{char}k=p>0$, use [lem-sfb-restricted-rational-differentiation] and put $X=Y^{[p^N]}$ for sufficiently large $N$. It lies in $\\mathfrak g(k)$ and $di(X)=di(Y)^{p^N}$, while $\\operatorname{ad}(X)=\\operatorname{ad}(Y)^{p^N}$. Apply [lem-sfb-algebraic-lie-additive-jordan] over $\\bar k$ to write $di(Y)=M_s+M_n$ with commuting diagonalizable $M_s$ and nilpotent $M_n$. Choose $p^N$ at least a nilpotence exponent of $M_n$. The binomial formula in characteristic $p$ gives $di(X)=M_s^{p^N}$, which is diagonalizable; and the nonzero eigenvalue of $\\operatorname{ad}(Y)$ remains nonzero on raising it to $p^N$. Thus also in this case $X$ is rational, semisimple and noncentral. No Jordan part is assumed rational over an imperfect field.",
+   "uses": [
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-restricted-rational-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.74 and 17.79, printed pp.377–378; Sections 10l and 11e for restricted powers; the imperfect-field rationality detail is supplied explicitly."
+   }
+  },
+  {
+   "text": "Put $M=di(X)$ and write $G=\\operatorname{Spec}A$. Let $I\\subseteq A$ be generated by the entries of $gM-Mg$ of the universal matrix $g\\in G(A)$. Then $C=\\operatorname{Spec}(A/I)$ is closed, affine and of finite type; it represents the required adjoint stabilizer on every commutative $k$-algebra, by the matrix formula and tangent injectivity in [lem-sfb-affine-group-dual-number-calculus]. A product or inverse of matrices commuting with $M$ again commutes with $M$, so the group laws restrict, giving a closed subgroup. For $Z\\in\\mathfrak g$, the element $1+\\epsilon\\,di(Z)$ belongs to $C(k[\\epsilon]/\\epsilon^2)$ exactly when $di(Z)M-Mdi(Z)=0$. Therefore $$\\operatorname{Lie}(C)=\\{Z\\in\\mathfrak g:[Z,X]=0\\}.$$ Noncentrality makes this a proper subspace, and in particular $C\\ne G$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.76–17.77, printed p.377: scheme equations and dual-number calculation."
+   }
+  },
+  {
+   "text": "Infinitesimal conjugation by $1+\\epsilon M$ induces a derivation $D:A\\to A$, since it is an algebra automorphism over the dual numbers reducing to the identity; [lem-sfb-affine-group-dual-number-calculus] ensures that this conjugation preserves $G$. On universal matrix entries it has values $(Mg-gM)_{ab}$, and on $\\det(g)^{-1}$ it is zero, since determinant is invariant under conjugation. These elements generate $A$ as an algebra, so the Leibniz rule gives $I=(D(A))$. Over $\\bar k$, write $M=PZP^{-1}$ with $Z$ diagonal, with diagonal entries $\\lambda_a$, and use the coordinates $x'=P^{-1}xP$. On $\\bar k[x'_{ab},\\det(x')^{-1}]$, $D$ is diagonal on monomials: $x'_{ab}$ has eigenvalue $\\lambda_a-\\lambda_b$ and $\\det(x)^{-1}$ has eigenvalue zero. The defining ideal of $G_{\\bar k}$ is $D$-stable, because infinitesimal conjugation preserves the subgroup. A stable subspace of this direct sum of eigenspaces is a sum of its eigenspaces: for each vector its finitely many eigencomponents are recovered by Lagrange interpolation polynomials in $D$. Thus the quotient $A\\otimes_k\\bar k$ also has an eigenspace decomposition for $D$. Apply [lem-sfb-semisimple-derivation-zero-smooth] to this smooth affine algebra $A$ to conclude that $C=\\operatorname{Spec}(A/I)$ is smooth over $k$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-semisimple-derivation-zero-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.76, printed p.377, omitted semisimple-derivation modification of Lemma 13.6, printed p.256."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-type-group-identity-subgroup] to the finite-type group $C$. Its identity component $K=C^\\circ$ is a connected open and closed subgroup scheme. By [lem-pc-open-immersion-smooth-composition] it is smooth. The closed immersions into $C$ and then $G$ exhibit it as a closed affine finite-type subgroup: on affine coordinate rings these are successive quotients. Its tangent space at the identity is the same as that of $C$. Indeed the image of every dual-number tangent map has just the identity as its underlying point, and hence factors uniquely through the open subscheme $K$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]; this factorization is inverse to the tangent map of $K\\hookrightarrow C$. Therefore $\\operatorname{Lie}(K)=\\operatorname{Lie}(C)$ as subspaces of $\\mathfrak g$.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34, printed pp.16–17; 17.81, printed p.379, read with the identity component as in 17.91, p.381."
+   }
+  },
+  {
+   "text": "For $J=K,G$, smoothness and [lem-ag-smooth-lie-local-dimension] give $\\dim_k\\operatorname{Lie}(J)=\\dim\\mathcal O_{J,e}$, and [lem-ag-group-identity-local-dimension] identifies the latter with $\\dim J$. Step 4 and step 6 make $\\operatorname{Lie}(K)=\\ker(\\operatorname{ad}(X))$ a proper subspace of the finite-dimensional $\\mathfrak g$. Extend a basis of this kernel by a vector outside it and then to a basis of $\\mathfrak g$; consequently $$\\dim K=\\dim_k\\ker\\operatorname{ad}(X)<\\dim_k\\mathfrak g=\\dim G.$$ Both cited dimension results allow arbitrary fields; no algebraically closed or characteristic-zero specialization is being used.",
+   "uses": [
+    "lem-ag-smooth-lie-local-dimension",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.37, printed p.18, and Proposition 10.15, printed pp.190–191; dimension drop in 17.81, p.379."
+   }
+  },
+  {
+   "text": "The alternating bracket gives $[X,X]=0$, so step 4 and step 6 put $X$ in $\\operatorname{Lie}(K)$; noncentrality gives $X\\ne0$. If $K$ were unipotent as in the statement, choose its closed embedding into $\\mathcal U_{n,k}\\subset\\operatorname{GL}_{n,k}$. Its tangent matrices are strictly upper triangular: substituting $1+\\epsilon N$ in the defining equations sets diagonal and lower entries of $N$ to zero. Thus the image of $X$ is nilpotent. The arbitrary-field faithful detection assertion of [lem-sfb-algebraic-lie-additive-jordan], applied to $K$, forces the image of $X$ in the original faithful representation $i|_K$ to be nilpotent as well. That image is the diagonalizable matrix $M$ of step 3. A diagonalizable nilpotent matrix has every eigenvalue zero and is therefore zero. Tangent injectivity of $di$ from [lem-sfb-affine-group-dual-number-calculus] gives $X=0$, a contradiction. Hence $K$ is not unipotent.",
+   "uses": [
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 17.75, printed p.377; Theorem 14.5, printed pp.281–282; semisimple-centralizer case of 17.81, p.379."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-algebraic-lie-additive-jordan",
+  "lem-sfb-restricted-rational-differentiation",
+  "lem-sfb-semisimple-derivation-zero-smooth",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-group-identity-local-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 17.74–17.79 and 17.81, printed pp.377–379; the positive-characteristic rationality argument, semisimple-derivation scheme calculation and identity-component repair are made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an infinite field a smooth connected affine algebraic group whose geometric Lie algebra has a noncentral semisimple element has a smaller dimensional smooth connected nonunipotent subgroup",
+   "results": "{\"t\": \"2026-10-24T04:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"Over an infinite field a smooth connected affine algebraic group whose geometric Lie algebra has a noncentral semisimple element has a smaller dimensional smooth connected nonunipotent subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\", \"LieAlgebra.engel_isBot_of_isMin\", \"LieAlgebra.rank_le_finrank_engel\", \"LieModule.exists_isRegular_of_finrank_le_card\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\"], \"digest\": \"67e1a525607fb3bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existence of Cartan or regular elements in an abstract Lie algebra does not give a rational semisimple element, a smooth group centralizer, or a connected nonunipotent subgroup of smaller dimension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of the centralizer of a noncentral semisimple rational Lie algebra element is smooth proper and nonunipotent",
+   "results": "{\"t\": \"2026-10-24T04:58:41Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of the centralizer of a noncentral semisimple rational Lie algebra element is smooth proper and nonunipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsRegular\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\", \"LieSubalgebra.engel\", \"LieAlgebra.isRegular_iff_finrank_engel_eq_rank\"], \"digest\": \"747c656ee3604b37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existence of Cartan or regular elements in an abstract Lie algebra does not give a rational semisimple element, a smooth group centralizer, or a connected nonunipotent subgroup of smaller dimension."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra, \"centralizer\"",
+   "results": "{\"t\": \"2026-10-24T04:58:35Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra, \\\"centralizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existence of Cartan or regular elements in an abstract Lie algebra does not give a rational semisimple element, a smooth group centralizer, or a connected nonunipotent subgroup of smaller dimension."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*centralizer|centralizer.*semisimple",
+   "results": "{\"t\": \"2026-10-24T04:58:35Z\", \"tool\": \"grep\", \"query\": \"semisimple.*centralizer|centralizer.*semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existence of Cartan or regular elements in an abstract Lie algebra does not give a rational semisimple element, a smooth group centralizer, or a connected nonunipotent subgroup of smaller dimension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over an infinite field a smooth connected affine algebraic group whose geometric Lie algebra has a noncentral semisimple element has a smaller dimensional smooth connected nonunipotent subgroup",
+   "results": "{\"t\": \"2026-10-24T04:58:36Z\", \"tool\": \"leansearch\", \"query\": \"Over an infinite field a smooth connected affine algebraic group whose geometric Lie algebra has a noncentral semisimple element has a smaller dimensional smooth connected nonunipotent subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupLieAlgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieGroup.casesOn\", \"LieGroup.recOn\", \"LieAlgebra.IsSemisimple.non_abelian_of_isAtom\", \"instLieRingGroupLieAlgebra.congr_simp\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsSimple.instIsSemisimple\"], \"digest\": \"28fa50504ba2174d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: existence of Cartan or regular elements in an abstract Lie algebra does not give a rational semisimple element, a smooth group centralizer, or a connected nonunipotent subgroup of smaller dimension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an infinite field a geometric noncentral semisimple Lie element gives a smaller smooth connected nonunipotent centralizer subgroup",
+   "results": "{\"t\": \"2026-10-24T07:07:25Z\", \"tool\": \"leanfinder\", \"query\": \"Over an infinite field a geometric noncentral semisimple Lie element gives a smaller smooth connected nonunipotent centralizer subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsRegular\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\", \"LieAlgebra.isRegular_iff_finrank_engel_eq_rank\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.engel_isBot_of_isMin\"], \"digest\": \"24456034c0fc9530\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern regular/Cartan elements of abstract Lie algebras, with no rational semisimple tangent element, smooth scheme-theoretic stabilizer, or nonunipotent connected subgroup of smaller dimension."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra, \"centralizer\"",
+   "results": "{\"t\": \"2026-10-24T07:08:49Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra, \\\"centralizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern regular/Cartan elements of abstract Lie algebras, with no rational semisimple tangent element, smooth scheme-theoretic stabilizer, or nonunipotent connected subgroup of smaller dimension."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*centralizer|centralizer.*semisimple",
+   "results": "{\"t\": \"2026-10-24T07:08:49Z\", \"tool\": \"grep\", \"query\": \"semisimple.*centralizer|centralizer.*semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern regular/Cartan elements of abstract Lie algebras, with no rational semisimple tangent element, smooth scheme-theoretic stabilizer, or nonunipotent connected subgroup of smaller dimension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A noncentral semisimple element in the geometric Lie algebra over an infinite field gives a proper smooth nonunipotent identity component of a rational Lie centralizer",
+   "results": "{\"t\": \"2026-10-24T07:08:50Z\", \"tool\": \"leansearch\", \"query\": \"A noncentral semisimple element in the geometric Lie algebra over an infinite field gives a proper smooth nonunipotent identity component of a rational Lie centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isRegular\", \"LieAlgebra.IsRegular\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.isRegular_def\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieAlgebra.IsSemisimple.mk\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\"], \"digest\": \"452a325064972d87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern regular/Cartan elements of abstract Lie algebras, with no rational semisimple tangent element, smooth scheme-theoretic stabilizer, or nonunipotent connected subgroup of smaller dimension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a semisimple Lie element centralizer is smooth and nonunipotent and has smaller dimension when the element is noncentral",
+   "results": "{\"t\": \"2026-10-24T07:08:56Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a semisimple Lie element centralizer is smooth and nonunipotent and has smaller dimension when the element is noncentral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsRegular\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieSubalgebra.engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieAlgebra.isRegular_iff_finrank_engel_eq_rank\"], \"digest\": \"0db43cee01eb5688\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern regular/Cartan elements of abstract Lie algebras, with no rational semisimple tangent element, smooth scheme-theoretic stabilizer, or nonunipotent connected subgroup of smaller dimension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282.",
+   "via": [
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+  "worker": "stage1",
+  "summary": "Split Milne 17.81 semisimple-centralizer reduction with explicit rationality over imperfect infinite fields, polynomial coefficient choice, closed centralizer equations, smoothness through a semisimple derivation, the actual identity component, tangent dimension drop and representation-independent nonunipotence. Two genuine supporting lemmas are stated only; the group-scheme component and dimension infrastructure is reused. Statement unchanged.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, at the Milne 17.81 semisimple-centralizer case beneath torus-free-implies-unipotent-arbitrary-field. Read current latest direct-images proof (3). The ancestor command prints empty: retain supplied null from.node and inherited via list, with precise from.place; no matching Lie Jordan or semisimple-derivation blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-lie-local-dimension",
+    "why": "General smooth-identity tangent/local-dimension equality, needed over the arbitrary base field; this unit has only the algebraically closed group-tangent-dimension-smoothness version."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "General finite-type group identity/global-dimension equality; used solely for the dimension calculation, with no alternative group-theoretic route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "General open-subscheme factorization supplies equality of the two tangent spaces for an open identity component; no unit-specific route replaces this scheme fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-5bb92f7fa",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-5bb92f7fa (reviewer sub-agent of L); spot-checked: FIX: all 8 steps and both new nodes read in full and checked against Milne iAG2017 pp.377-379 (17.74-17.81); the item statement is unchanged. The fault: step 1 diagonalized di(S) for the chosen embedding i, but the item defines semisimplicity through some faithful closed representation of G_k̄, so the transfer was missing. Repaired by citing the arbitrary-field faithful-detection clause of lem-sfb-algebraic-lie-additive-jordan over k̄ in step 1 (it was already in proof_deps); step 5 now also writes out the diagonalizing coordinate change x'=P^{-1}xP. Both new nodes are true, statement-only and strictly smaller than the item. The Jordan node is Milne 17.74 limited to rational representations, which is correct: Milne's version for abstract Lie representations is false. The derivation node holds because the eigen-grading is an action of the diagonalizable, linearly reductive group D(Λ), whose fixed-point ideal is (D(A)), and smoothness descends from k̄ to k. Edge cases tested: A=0, D=0, x∂_x, Euler derivation in characteristic p, G_a, G_m, μ_p. Duplicate search found nothing equal: multiplicative-jordan, semisimple-fixed-subscheme, torus-fixed-scheme, linearly-reductive-dense-fixed and regular-quotient-parameter all differ. The characteristic-p step uses p^N restricted powers (the coaction clause of restricted-rational-differentiation) and does not assume Jordan parts are rational over an imperfect field. Tool uses accepted: lem-ag-smooth-lie-local-dimension and lem-ag-group-identity-local-dimension (generic, arbitrary k); the declared lem-weil-pbc-morphism-factors-through-open-subscheme is a Mathlib leaf. Batch-5 finding: lem-trf-finite-type-component-open-qc (a component of a finite-type k-scheme is open and quasi-compact) is general scheme topology, not part of the trace formula or Poincare duality, so the finding is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.InfiniteFieldSemisimpleCentralizerReduction",
+  "declaration": "AlgebraicGeometry.exists_semisimple_lie_centralizer_reduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/InfiniteFieldSemisimpleCentralizerReduction.lean",
+  "statement": "theorem exists_semisimple_lie_centralizer_reduction {k : Type u} [Field k] [Infinite k] (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (hgeom : ∃ S : GrpObj.Lie ((MultiplicativeType.baseChange (K := Ω)).obj G).X, GrpObj.HasDiagonalizableFaithfulLieImage Ω ((MultiplicativeType.baseChange (K := Ω)).obj G) S ∧ ∃ Y : GrpObj.Lie ((MultiplicativeType.baseChange (K := Ω)).obj G).X, ⁅S, Y⁆ ≠ 0) : ∃ X : GrpObj.Lie G.X, GrpObj.HasDiagonalizableFaithfulLieImage Ω G X ∧ (∃ Y : GrpObj.Lie G.X, ⁅X, Y⁆ ≠ 0) ∧ ∃ (C : Grp (Over (Spec (.of k)))) (i : C ⟶ G), IsClosedSubgroupScheme i.hom.hom ∧ ¬ IsIso i.hom.hom.left ∧ IsAffine C.X.left ∧ LocallyOfFiniteType C.X.hom ∧ QuasiCompact C.X.hom ∧ Smooth C.X.hom ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] (g : points G.X R), (∃ c : points C.X R, c ≫ i.hom.hom = g) ↔ points.map G.X (TrivSqZeroExt.inlAlgHom k R R) g * points.map G.X (AffineGroupDualNumberCalculus.dualMap (Algebra.ofId k R)) (GrpObj.tangentPoint X) = points.map G.X (AffineGroupDualNumberCalculus.dualMap (Algebra.ofId k R)) (GrpObj.tangentPoint X) * points.map G.X (TrivSqZeroExt.inlAlgHom k R R) g) ∧ ∃ (K : Grp (Over (Spec (.of k)))) (j : K ⟶ C), IsOpenImmersion j.hom.hom.left ∧ Set.range j.hom.hom.left = connectedComponent (GrpObj.onePoint C.X) ∧ IsClosedSubgroupScheme (j ≫ i).hom.hom ∧ IsAffine K.X.left ∧ LocallyOfFiniteType K.X.hom ∧ QuasiCompact K.X.hom ∧ Smooth K.X.hom ∧ ConnectedSpace K.X.left ∧ topologicalKrullDim K.X.left < topologicalKrullDim G.X.left ∧ ¬ (∃ n : ℕ, 0 < n ∧ ∃ r : K ⟶ Grp.mk (GeneralLinearGroup (ULift.{u} (Fin n)) k), IsClosedSubgroupScheme r.hom.hom ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (x : points K.X R), (∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R (x ≫ r.hom.hom)).val ⟨a⟩ ⟨a⟩ = 1) ∧ (∀ a b : Fin n, b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R (x ≫ r.hom.hom)).val ⟨a⟩ ⟨b⟩ = 0))",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The centralizer functor is pinned by commutation of the constant lift of g with the scalar-extended tangent point of X; this is exactly the defining Ad-stabilizer identity. The open immersion j and its exact connected-component image fix the open-subscheme structure on C^0. Nonunipotence is the negation of a positive-size closed unitriangular embedding on every test algebra, without any geometric-points-only replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a70cb1fde",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Re-delivery after landing refused 30450226 (its DualNumberCoefficientMap module re-declared AffineGroupDualNumberCalculus.dualMap). Now def-sfb-dual-number-coefficient-map is existing:true (no file) pointing at the live calculus dualMap; body DualNumber.mapRingHom h.toRingHom + commutes' matches the node (a+bε↦h(a)+h(b)ε); statement verbatim in live file. Item module byte-identical to the PASSed 30450226 except it publicly imports the live calculus module; SemisimpleLieElement.lean identical; no cycle. Item record differs from side-live only in lean and 4 added def stmt_deps (wf-lie-algebra-derivation, semisimple-lie-element, dual-number-coefficient-map, tori-multiplicative-type); no theorem stmt_dep. All clauses re-checked vs node/Milne 17.74–17.81: infinite k, IsAlgClosure Ω, affine finite-type smooth connected G, hgeom on the real base change, rational semisimple noncentral X, closed proper smooth C representing Ad-stabilizer on every R (incl. R=0), K open immersion onto identity component, closed affine smooth connected, Krull dim drop, negated closed unitriangular embedding; HasDiagonalizableFaithfulLieImage non-hollow. Edge cases: disconnected C, char p/imperfect k, n=1, R=0. Neither the item nor its new nodes are landed by others (Q92 parallel retired). One sorry, docstrings/report sections present. No file changed, no compile."
+ }
+}

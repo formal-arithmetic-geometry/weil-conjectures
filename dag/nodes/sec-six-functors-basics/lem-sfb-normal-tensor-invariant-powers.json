@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-normal-tensor-invariant-powers",
+ "kind": "statement",
+ "title": "Invariant powers in a reduced normal field tensor product",
+ "statement": "Let $K$ be a field, let $L/K$ be any field extension, and let $E/K$ be a finite-dimensional normal field extension [def-pc-field-extension]. Here normal means that the minimal polynomial over $K$ of each element of $E$ splits into linear factors in $E[T]$. Give $T=L\\otimes_KE$ its commutative algebra multiplication $(l\\otimes e)(l^{\\prime}\\otimes e^{\\prime})=ll^{\\prime}\\otimes ee^{\\prime}$ [lem-weil-pbc-algebra-tensor-pushout-universal-property], and put $R=T/\\sqrt{(0)}$, where $\\sqrt{(0)}$ is the ideal of nilpotent elements. The map $L\\to R$ is $l\\mapsto\\overline{l\\otimes1}$. The group $G=\\operatorname{Aut}_K(E)$ acts by $\\sigma(\\overline{l\\otimes e})=\\overline{l\\otimes\\sigma(e)}$. For every $x\\in R$ fixed by all $\\sigma\\in G$, there are an integer $N\\geq1$ and $l\\in L$ with $x^N=\\overline{l\\otimes1}$. If $\\operatorname{char}K=0$, one can take $N=1$; if $\\operatorname{char}K=p>0$, one can take $N=p^r$ for some integer $r\\geq0$. Neither separability of $E/K$ nor any finiteness assumption on $L/K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EU, lemma-galois-relative, proof: invariant elements in the reduced tensor algebra; corrected invariant-power formulation for normal extensions that may be inseparable."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Finite dimension makes $E/K$ algebraic: the powers of each element are linearly dependent over $K$. Put $S=E^G$. By [lem-weil-pbc-normal-extension-purely-inseparable-then-galois], $S$ is an intermediate field, $S/K$ is purely inseparable and $E/S$ is separable and normal. A finite $K$-spanning set of $E$ also spans over $S$, so $E/S$ is finite. Every $K$-automorphism fixes $S$ by its definition, and every $S$-automorphism fixes $K$; hence $G=\\operatorname{Aut}_S(E)$, which is finite by [lem-weil-pbc-finite-galois-fixed-field]. In characteristic zero $S=K$ by [def-weil-pbc-finite-purely-inseparable-extension].",
+   "uses": [
+    "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030M (lemma-normal-case), 09I1 (lemma-finite-Galois), 09HE (definition-purely-inseparable)."
+   }
+  },
+  {
+   "text": "Write $\\pi:T\\to R$ for the quotient. The maps $l\\otimes e\\mapsto l\\otimes\\sigma(e)$ are mutually inverse ring automorphisms by [lem-weil-pbc-algebra-tensor-pushout-universal-property]; they preserve nilpotents, so $\\pi$ is equivariant for the stated action. Choose $t\\in T$ with $\\pi(t)=x$. In characteristic zero, step 1 makes $E/K$ finite separable. By [lem-weil-pbc-finite-separable-tensor-field-reduced], with the tensor factors interchanged, $T$ is reduced, so $\\pi$ is injective. Thus $t$ is fixed by $G$; put $y=t$ and $q=1$. In characteristic $p>0$, for each $\\sigma\\in G$ the difference $d_\\sigma=\\sigma(t)-t$ is nilpotent because $\\pi(d_\\sigma)=0$. Choose $n_\\sigma\\geq1$ with $d_\\sigma^{n_\\sigma}=0$. Finiteness of $G$ gives $a\\geq0$ with $p^a\\geq n_\\sigma$ for all $\\sigma$. By [def-weil-ring-frobenius], $\\sigma(t^{p^a})-t^{p^a}=d_\\sigma^{p^a}=0$. Put $q=p^a$ and $y=t^q$. In either case $y\\in T^G$ and $\\pi(y)=x^q$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU, lemma-galois-relative, proof: lift a reduced invariant and raise to a power. Reducedness in characteristic zero uses Algebra Tag 030U, lemma-separable-extension-preserves-reducedness; Frobenius is the ring calculation after Varieties Tag 03SM."
+   }
+  },
+  {
+   "text": "Choose a $K$-basis $(b_i)$ of $L$ by [lem-weil-pbc-vector-space-basis-through-vector]. By [def-weil-vector-space-scalar-extension], $(b_i\\otimes1)$ is an $E$-basis of $T=L\\otimes_KE$. Write $y=\\sum_{i\\in I}b_i\\otimes e_i$ with $I$ finite. The action sends this sum to $\\sum_{i\\in I}b_i\\otimes\\sigma(e_i)$. Since $y$ is fixed, uniqueness of basis coordinates gives $\\sigma(e_i)=e_i$ for every $\\sigma$, so each $e_i\\in S$. This uses no finiteness of $L/K$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU, lemma-galois-relative, proof: the fixed-tensor calculation; basis-coordinate details supplied by Q94. Compare Varieties Tag 038B, lemma-closed-fixed-by-Galois, invariant coefficients."
+   }
+  },
+  {
+   "text": "In characteristic zero $S=K$, so the sum in step 3 equals $l\\otimes1$ with $l=\\sum_{i\\in I}b_i e_i\\in L$, by tensor balancing. As $q=1$, applying $\\pi$ gives $x=\\overline{l\\otimes1}$, as required with $N=1$. In characteristic $p>0$, by [def-weil-pbc-finite-purely-inseparable-extension] choose $r_i\\geq0$ with $e_i^{p^{r_i}}\\in K$. Take $b=\\max(\\{r_i:i\\in I\\}\\cup\\{0\\})$, so every $e_i^{p^b}\\in K$. Frobenius and the tensor multiplication of [lem-weil-pbc-algebra-tensor-pushout-universal-property] give, using [def-weil-ring-frobenius], $y^{p^b}=\\sum_{i\\in I}b_i^{p^b}\\otimes e_i^{p^b}=l\\otimes1$, where $l=\\sum_{i\\in I}b_i^{p^b}e_i^{p^b}\\in L$. Apply $\\pi$ and use $q=p^a$ to obtain $x^{p^{a+b}}=\\overline{l\\otimes1}$. The exponent $N=p^{a+b}$ is positive. The empty sum gives $l=0$ and $b=0$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-ring-frobenius",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HE, definition-purely-inseparable; corrected completion of More on Algebra Tag 09EU, lemma-galois-relative, invariant-power subargument. Frobenius is the ring calculation after Varieties Tag 03SM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EU, lemma-galois-relative, invariant-power argument, corrected using Fields Tag 030M because normal need not imply separable. Q94 supplies finite-difference Frobenius lifting and basis-coordinate details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite normal extension of fields base changed to any field has reduced tensor algebra whose invariant elements under the normal extension automorphisms are purely inseparable over the base field",
+   "results": "OK; 8 hits; IsPurelyInseparable.normal, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.exists_pow_mem_range_tensorProduct, perfectClosure.isPurelyInseparable, IsPurelyInseparable.of_injective_comp_algebraMap, IsPurelyInseparable.tower_bot, IsPurelyInseparable.tower_top, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar",
+   "date": "2026-10-24",
+   "verdict": "no match: the purely inseparable tensor power lemmas assume the entire extension is purely inseparable; the requested result starts with a normal extension and a fixed element of the reduced tensor algebra, requiring an invariant-lift and fixed-field argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If E over K is a finite normal field extension and L over K any field extension then every automorphism invariant element of the reduced tensor product L tensor E has a positive power in L",
+   "results": "OK; 8 hits; IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, Algebra.prod_embeddings_eq_finrank_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, IsPurelyInseparable.pow_mem, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-24",
+   "verdict": "no match: the purely inseparable tensor power lemmas assume the entire extension is purely inseparable; the requested result starts with a normal extension and a fixed element of the reduced tensor algebra, requiring an invariant-lift and fixed-field argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, TensorProduct",
+   "results": "OK; 4 hits; IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable",
+   "date": "2026-10-24",
+   "verdict": "no match: the purely inseparable tensor power lemmas assume the entire extension is purely inseparable; the requested result starts with a normal extension and a fixed element of the reduced tensor algebra, requiring an invariant-lift and fixed-field argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed elements of reduced tensor products of normal field extensions are purely inseparable over the base changed field",
+   "results": "OK; 8 hits; isPurelyInseparable_iff, IsPurelyInseparable.inseparable', isPurelyInseparable_iff_natSepDegree_eq_one, separableClosure.isPurelyInseparable, IsPurelyInseparable.inseparable, IsPurelyInseparable, IsPurelyInseparable.isAlgebraic, IsPurelyInseparable.instOfHasExponent",
+   "date": "2026-10-24",
+   "verdict": "no match: the purely inseparable tensor power lemmas assume the entire extension is purely inseparable; the requested result starts with a normal extension and a fixed element of the reduced tensor algebra, requiring an invariant-lift and fixed-field argument."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_mem_range_tensorProduct|exists_pow_pow_mem_range_tensorProduct_of_expChar|fixedField",
+   "results": "OK; 3 hits; Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the purely inseparable tensor power lemmas assume the entire extension is purely inseparable; the requested result starts with a normal extension and a fixed element of the reduced tensor algebra, requiring an invariant-lift and fixed-field argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite normal field extension the fixed field of all base field automorphisms is purely inseparable over the base field",
+   "results": "OK; 8 hits; FixedPoints.normal, IsGalois.fixedField_top, IntermediateField.isPurelyInseparable_bot, IsGaloisGroup.fixedPoints_eq_bot, perfectClosure.isPurelyInseparable, IsGalois.of_fixedField_normal_subgroup, IsGalois.of_fixed_field, IsGalois.of_fixedField_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: purely inseparable tensor-power lemmas require the extension itself to be purely inseparable; Galois invariant/geometry lemmas do not give fixed elements of the reduced tensor for a general normal extension. Existing DAG nodes supply the component results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every automorphism invariant element of the reduced tensor product of a normal field extension has a prime power in the base field",
+   "results": "OK; 8 hits; Algebra.isInvariant_of_isGalois', Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, IsPurelyInseparable.pow_mem, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, InfiniteGalois.mem_range_algebraMap_iff_fixed, IntermediateField.normal_iff_forall_map_eq, IsGalois.normalBasis_apply, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar",
+   "date": "2026-10-24",
+   "verdict": "no match: purely inseparable tensor-power lemmas require the extension itself to be purely inseparable; Galois invariant/geometry lemmas do not give fixed elements of the reduced tensor for a general normal extension. Existing DAG nodes supply the component results."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, fixedField",
+   "results": "OK; 0 hits; ; loogle: unknown identifier 'fixedField'",
+   "date": "2026-10-24",
+   "verdict": "invalid query: Loogle reported unknown identifier fixedField; retried with IsPurelyInseparable, TensorProduct"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_pow_mem_range_tensorProduct_of_expChar|fixedField_purelyInseparable|isInvariant_of_isGalois",
+   "results": "OK; 6 hits; Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean, Mathlib/RingTheory/Invariant/Galois.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: purely inseparable tensor-power lemmas require the extension itself to be purely inseparable; Galois invariant/geometry lemmas do not give fixed elements of the reduced tensor for a general normal extension. Existing DAG nodes supply the component results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed elements of reduced tensor products for finite normal not necessarily separable field extensions have characteristic powers in the scalar field",
+   "results": "OK; 8 hits; IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, IsPurelyInseparable.hasExponent_of_finiteDimensional, top_fixedByFinite, Algebra.isInvariant_of_isGalois, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, FixedPoints.normal, FixedPoints.isSeparable",
+   "date": "2026-10-24",
+   "verdict": "no match: purely inseparable tensor-power lemmas require the extension itself to be purely inseparable; Galois invariant/geometry lemmas do not give fixed elements of the reduced tensor for a general normal extension. Existing DAG nodes supply the component results."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, TensorProduct",
+   "results": "OK; 4 hits; IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable",
+   "date": "2026-10-24",
+   "verdict": "no match: purely inseparable tensor-power lemmas require the extension itself to be purely inseparable; Galois invariant/geometry lemmas do not give fixed elements of the reduced tensor for a general normal extension. Existing DAG nodes supply the component results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-normal-base-branch-conjugacy",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09EU, lemma-galois-relative, and its transitive action on the normalized maximal ideals; completeness makes the lower normalization local. Field-algebra input to the branch argument: an invariant element in the reduced tensor has a positive power in the scalar field; no normalization or ramification assertion.",
+   "via": [
+    "lem-sfb-epp-normal-base-branch-conjugacy",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-tensor-invariant-powers",
+  "worker": "stage1",
+  "summary": "Four-step split with zero new nodes. Retained the already corrected statement exactly. Use the existing normal fixed-field decomposition, finite Galois group, finite-separable tensor reducedness, basis/scalar-extension, tensor multiplication and Frobenius nodes. Lift an invariant by a common p-power of finitely many nilpotent differences, compare basis coordinates, and take a common p-power of the purely inseparable fixed coefficients. Characteristic zero gives N=1. Rechecked every cited statement and all hypotheses; no attachment states the full reduced normal-tensor assertion.",
+  "blueprint": "Ancestor command returns None; retain the historical from.node=null and inherited via chain. This is the invariant-power algebra subargument of Tag 09EU supporting the historical alteration route of det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint proof (3), read in literature/blueprint/latest, has no separate statement of this auxiliary result. Whole-blueprint searches for fixed field, normal tensor invariant, invariant powers and tensor found no equivalent item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "why": "Generic algebra tool: finite separable field tensor products are reduced, applied only after the fixed field becomes K in characteristic zero. It does not replace the unit route; no node of this unit states this algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-vector-space-basis-through-vector",
+    "why": "Generic vector-space basis existence used to expose fixed coefficients of a tensor. This is a standard tool independent of the six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-vector-space-basis-through-vector"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-b4f959fdc",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-b4f959fdc (reviewer sub-agent of L); spot-checked: Read the item, its 4 steps and the 8 cited node statements in full, plus the citer lem-sfb-epp-normal-base-branch-conjugacy. Statement is unchanged from base and gives the citer exactly what it uses (x^N=l⊗1 for a G-fixed idempotent). Source 09EU (more-algebra.tex l.34609) read: its 'K=(K_1)^G' is false for inseparable normal K_1, and the report's counterexample K=F_p(u), E=K(u^{1/p}) checks out. Fields 030M sets E_insep=E^Aut, matching step 1; tags 030M/09I1/09HE/030U/03SM/09EU verified. Step 1: algebraic follows from finite dimension; the normal-then-Galois node gives S=E^G; E/S is finite Galois, so Aut_K(E)=Aut_S(E) is finite. Step 2: σ⊗ comes from pushout UP(2). Char 0 uses finite-separable-tensor-reduced with factors swapped. Char p takes p^a ≥ all nilpotence orders of σ(t)-t (G finite); Frobenius applies since p·1=0 in T. Step 3: the scalar-extension node's basis clause gives coordinates e_i∈S. Step 4: common p^b over the finite support gives y^{p^b}=l⊗1, so N=p^{a+b} (N=1 in char 0). Edge cases checked: E=K, E/K purely inseparable, E/K separable, L=K, L=E=K(u^{1/p}) (non-reduced), x=0, char 0. No duplicates found by a DAG scan: tensor-kernel-inseparable-invariants needs T a field; tensor-field-extension-galois-invariants needs fixed field = base. No new nodes. Accepted tool_uses: finite-separable-tensor-field-reduced and vector-space-basis-through-vector (generic algebra). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.NormalTensorInvariantPowers",
+  "declaration": "Algebra.TensorProduct.exists_pow_eq_scalar_of_normal_invariant",
+  "file": "lean/Sheaf/FieldTheory/NormalTensorInvariantPowers.lean",
+  "statement": "theorem exists_pow_eq_scalar_of_normal_invariant (K : Type u) (L : Type v) (E : Type w) [Field K] [Field L] [Field E] [Algebra K L] [Algebra K E] [FiniteDimensional K E] [Normal K E] (x : (L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)) (hx : ∀ (σ : E ≃ₐ[K] E) (t : L ⊗[K] E), Ideal.Quotient.mk (nilradical (L ⊗[K] E)) t = x → Ideal.Quotient.mk (nilradical (L ⊗[K] E)) (Algebra.TensorProduct.map (AlgHom.id K L) σ.toAlgHom t) = x) : (∃ (N : ℕ), 1 ≤ N ∧ ∃ (l : L), x ^ N = Ideal.Quotient.mk (nilradical (L ⊗[K] E)) (l ⊗ₜ[K] (1 : E))) ∧ (CharZero K → ∃ (l : L), x = Ideal.Quotient.mk (nilradical (L ⊗[K] E)) (l ⊗ₜ[K] (1 : E))) ∧ (∀ (p : ℕ), 0 < p → CharP K p → ∃ (r : ℕ) (l : L), x ^ (p ^ r) = Ideal.Quotient.mk (nilradical (L ⊗[K] E)) (l ⊗ₜ[K] (1 : E)))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da776cf90",
+  "group": "NN",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; lean.statement verbatim once in NormalTensorInvariantPowers.lean; imports (NormalExtensionFixedField, FiniteSeparableTensorFieldReduced, CharP.Lemmas) exist; no name/module clash. Clauses match: independent universes u/v/w, [FiniteDimensional K E][Normal K E] with no separability and no finiteness of L; R = L⊗E ⧸ nilradical; hx over all σ and all lifts t is equivalent to fixedness under the descended action and is not vacuous; conjuncts give ∃N≥1 l, CharZero→N=1, and ∀p>0 CharP→p^r. True via 09EU+030M (char 0: Galois, so reduced and invariants = L; char p: nilpotent differences, p-power lift, coefficients in purely inseparable E^G). Edge cases x=0/1, E=K, L=K, purely inseparable E (K=F_p(u), E=L=K(u^{1/p})), separable E, transcendental L, r=0, N=0/p=0 excluded all OK. Docstrings have source + blueprint + 4 proof steps; sorry only; no defs; report has Worker report and Second reading sections. No Mathlib/project duplicate (IsPurelyInseparable.exists_pow_mem_range_tensorProduct needs whole extension purely inseparable; TensorFieldExtensionGaloisInvariants is unreduced with fixed field = base). No compile run (no change)."
+ }
+}

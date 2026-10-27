@@ -1,0 +1,198 @@
+{
+ "id": "lem-trf-algebraic-field-tower-rationality",
+ "kind": "statement",
+ "title": "Rigidity of an algebraic field tower with one rational endpoint",
+ "statement": "Let $k,K,L$ be fields [def-weil-field], with $k$ algebraically closed [def-weil-algebraic-closure]. Let $i:k\\to K$ and $\\alpha:K\\to L$ be unital field homomorphisms [def-pc-field-extension], and set $j=\\alpha\\circ i:k\\to L$. Assume that $L$ is algebraic over $K$ through $\\alpha$: each $z\\in L$ is a root of a nonzero polynomial with coefficients in $\\alpha(K)$. If either $i$ or $j$ is bijective, then all three specified maps $i,j,\\alpha$ are bijective. The conclusion concerns these maps, not merely abstract isomorphisms between the fields.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tags 09GQ (definition-algebraically-closed) and 09GR (lemma-algebraically-closed), triviality of algebraic extensions; the two-alternative tower argument is the expansion of old Step 3 of lem-trf-etale-completed-local-ring-iso."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "All three specified maps are injective, by [def-pc-field-extension]. Explicitly, if a unital field homomorphism $f$ killed a nonzero $a$, then $1=f(a)f(a^{-1})=0$, impossible in its target field; applying this to a difference gives injectivity. It therefore remains to prove surjectivity in the two alternatives.",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GQ (definition-algebraically-closed) and 09GR (lemma-algebraically-closed); elementary assembly for the specified tower maps"
+   }
+  },
+  {
+   "text": "Suppose $i$ is bijective. Fix $z\\in L$. Algebraicity supplies a nonzero $P(T)=\\sum_{r=0}^{n}\\alpha(b_r)T^r$ with $b_r\\in K$ and $P(z)=0$. Choose $a_r\\in k$ with $i(a_r)=b_r$ and put $Q(T)=\\sum_{r=0}^{n}a_rT^r$. Then $P(T)=\\sum_{r=0}^{n}j(a_r)T^r$ because $j=\\alpha\\circ i$. Some coefficient of $P$ is nonzero, so the corresponding $a_r$ is nonzero; thus $Q\\ne0$ and $z$ is algebraic over $k$ through $j$. Apply [lem-weil-pbc-algebraic-over-algebraically-closed-subfield] with its $k'=k$, its target field $k=L$, its homomorphism $\\alpha=j$, and its element $x=z$. Its algebraic-closedness hypothesis is precisely the hypothesis on our $k$, and the required algebraicity is the equation just obtained. Hence $z=j(a)$ for some $a\\in k$. This proves $j$ surjective and also $\\alpha$ surjective, since $z=\\alpha(i(a))$. Together with Step 1 and the assumed bijectivity of $i$, all three maps are bijective.",
+   "uses": [
+    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GQ (definition-algebraically-closed) and 09GR (lemma-algebraically-closed); elementary assembly for the specified tower maps"
+   }
+  },
+  {
+   "text": "Suppose instead that $j$ is bijective. For each $z\\in L$, choose $a\\in k$ with $j(a)=z$; then $z=\\alpha(i(a))$, proving surjectivity of $\\alpha$. For each $b\\in K$, choose $a\\in k$ with $j(a)=\\alpha(b)$. The equality $\\alpha(i(a))=\\alpha(b)$ and the injectivity of $\\alpha$ from Step 1 imply $i(a)=b$, proving surjectivity of $i$. Step 1 now gives bijectivity of $i$ and $\\alpha$, while $j$ was assumed bijective. This case needs neither algebraicity nor algebraic closedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GQ (definition-algebraically-closed) and 09GR (lemma-algebraically-closed); elementary assembly for the specified tower maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Expansion of the two-alternative tower argument using Tags 09GQ and 09GR; coefficient substitution and cancellation written by Q55"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Algebra.IsAlgebraic",
+   "results": "{\"t\": \"2026-10-22T06:43:11Z\", \"tool\": \"loogle\", \"query\": \"IsAlgClosed, Algebra.IsAlgebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"IsAlgClosure.mk\", \"IsAlgClosed.lift\", \"isAlgClosure_iff\", \"IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two\", \"Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly\", \"IsAlgClosed.surjective_domRestrict_of_isAlgebraic\", \"IsAlgClosed.surjective_restrictDomain_of_isAlgebraic\", \"IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic\"], \"digest\": \"477b9cdebbd2f61a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual algebraically-closed extension and algebraic-embedding lemmas do not assert the disjunctive three-map tower statement; deriving algebraicity through the supplied map and treating the second alternative remain arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a tower of field homomorphisms k to K to L with k algebraically closed and L algebraic over K, if either k to K or k to L is bijective then both structure maps and K to L are bijective",
+   "results": "{\"t\": \"2026-10-22T06:43:21Z\", \"tool\": \"leanfinder\", \"query\": \"In a tower of field homomorphisms k to K to L with k algebraically closed and L algebraic over K, if either k to K or k to L is bijective then both structure maps and K to L are bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.bijective_of_isScalarTower'\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower\", \"Algebra.IsAlgebraic.algHom_bijective₂\", \"IsPurelyInseparable.bijective_comp_algebraMap\", \"IsPurelyInseparable.bijective_restrictDomain\", \"AlgHom.normal_bijective\", \"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Algebra.IsAlgebraic.algHom_bijective\"], \"digest\": \"8d9954ccd2078347\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual algebraically-closed extension and algebraic-embedding lemmas do not assert the disjunctive three-map tower statement; deriving algebraicity through the supplied map and treating the second alternative remain arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "bijective.*(isIntegral|isAlgebraic)|surjective.*comp|comp.*surjective",
+   "results": "{\"t\": \"2026-10-22T06:43:30Z\", \"tool\": \"grep\", \"query\": \"bijective.*(isIntegral|isAlgebraic)|surjective.*comp|comp.*surjective\", \"sub\": \"FieldTheory/IsAlgClosed\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"d5748da659068d04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual algebraically-closed extension and algebraic-embedding lemmas do not assert the disjunctive three-map tower statement; deriving algebraicity through the supplied map and treating the second alternative remain arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If k is algebraically closed and L is algebraic over K in a field tower k to K to L, either k to K or k to L being an isomorphism forces all three maps to be isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:43:31Z\", \"tool\": \"leansearch\", \"query\": \"If k is algebraically closed and L is algebraic over K in a field tower k to K to L, either k to K or k to L being an isomorphism forces all three maps to be isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.embEquivOfIsAlgClosed\", \"IsAlgClosure.ofAlgebraic\", \"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Algebra.IsAlgebraic.tower_bot\", \"IntermediateField.isAlgebraic_tower_top\", \"Algebra.IsAlgebraic.tower_top\", \"IsAlgClosure.equivOfEquiv.congr_simp\", \"isAlgClosure_iff\"], \"digest\": \"8c969da201a4c224\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual algebraically-closed extension and algebraic-embedding lemmas do not assert the disjunctive three-map tower statement; deriving algebraicity through the supplied map and treating the second alternative remain arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If either endpoint of a tower k to K to L is rational over algebraically closed k and L over K is algebraic, then every field map in the tower is bijective",
+   "results": "{\"t\": \"2026-10-22T06:43:41Z\", \"tool\": \"leanfinder\", \"query\": \"If either endpoint of a tower k to K to L is rational over algebraically closed k and L over K is algebraic, then every field map in the tower is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.bijective_of_isScalarTower'\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower\", \"Algebra.IsAlgebraic.algHom_bijective₂\", \"IsPurelyInseparable.bijective_comp_algebraMap\", \"IsPurelyInseparable.bijective_restrictDomain\", \"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Algebra.IsAlgebraic.algHom_bijective\", \"AlgHom.normal_bijective\"], \"digest\": \"9ffda6330ca64082\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual algebraically-closed extension and algebraic-embedding lemmas do not assert the disjunctive three-map tower statement; deriving algebraicity through the supplied map and treating the second alternative remain arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a tower of field homomorphisms k to K to L with k algebraically closed and L algebraic over K, if either k to K or k to L is bijective then all maps are bijective",
+   "results": "{\"t\": \"2026-10-23T04:55:05Z\", \"tool\": \"leanfinder\", \"query\": \"In a tower of field homomorphisms k to K to L with k algebraically closed and L algebraic over K, if either k to K or k to L is bijective then all maps are bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Algebra.IsAlgebraic.algHom_bijective₂\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower'\", \"Field.embProdEmbOfIsAlgebraic\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower\", \"IsAlgClosed.surjective_restrictDomain_of_isAlgebraic\", \"Field.embEquivOfIsAlgClosed\", \"AlgHom.normal_bijective\"], \"digest\": \"5e7d03df251b770b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the disjunctive three-map statement: algebraically closed integral-extension bijectivity is an ingredient; scalar-tower bijectivity lemmas additionally require a reverse algebra homomorphism. Existing elementwise Mathlib leaf reused; coefficient substitution and the two cases require assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_bijective_of_isIntegral|bijective_of_isScalarTower",
+   "results": "{\"t\": \"2026-10-23T04:55:59Z\", \"tool\": \"grep\", \"query\": \"algebraMap_bijective_of_isIntegral|bijective_of_isScalarTower\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Normal/Defs.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"b66108a594c4bd46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the disjunctive three-map statement: algebraically closed integral-extension bijectivity is an ingredient; scalar-tower bijectivity lemmas additionally require a reverse algebra homomorphism. Existing elementwise Mathlib leaf reused; coefficient substitution and the two cases require assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic extension of an algebraically closed field is trivial and its structure map is bijective",
+   "results": "{\"t\": \"2026-10-23T04:56:00Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic extension of an algebraically closed field is trivial and its structure map is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"IsPurelyInseparable.bijective_algebraMap_of_isSeparable\", \"algebraicClosure.isAlgebraic\", \"IsAlgClosed.ringHom_bijective_of_isIntegral\", \"Field.embEquivOfIsAlgClosed\", \"IsAlgClosed.surjective_restrictDomain_of_isAlgebraic\", \"AlgHom.normal_bijective\"], \"digest\": \"07fe31b2b1b05525\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the disjunctive three-map statement: algebraically closed integral-extension bijectivity is an ingredient; scalar-tower bijectivity lemmas additionally require a reverse algebra homomorphism. Existing elementwise Mathlib leaf reused; coefficient substitution and the two cases require assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Algebra.IsAlgebraic",
+   "results": "{\"t\": \"2026-10-23T04:56:00Z\", \"tool\": \"loogle\", \"query\": \"IsAlgClosed, Algebra.IsAlgebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"IsAlgClosure.mk\", \"IsAlgClosed.lift\", \"isAlgClosure_iff\", \"IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two\", \"Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly\", \"IsAlgClosed.surjective_domRestrict_of_isAlgebraic\", \"IsAlgClosed.surjective_restrictDomain_of_isAlgebraic\", \"IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic\"], \"digest\": \"477b9cdebbd2f61a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the disjunctive three-map statement: algebraically closed integral-extension bijectivity is an ingredient; scalar-tower bijectivity lemmas additionally require a reverse algebra homomorphism. Existing elementwise Mathlib leaf reused; coefficient substitution and the two cases require assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a composite of field embeddings from an algebraically closed field is surjective or the first embedding is surjective and the second is algebraic then both embeddings are bijections",
+   "results": "{\"t\": \"2026-10-23T04:56:50Z\", \"tool\": \"leanfinder\", \"query\": \"If a composite of field embeddings from an algebraically closed field is surjective or the first embedding is surjective and the second is algebraic then both embeddings are bijections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.algHom_bijective₂\", \"IsAlgClosed.surjective_restrictDomain_of_isAlgebraic\", \"Field.embEquivOfIsAlgClosed\", \"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Field.embProdEmbOfIsAlgebraic\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower'\", \"IsAlgClosed.ringHom_bijective_of_isIntegral\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower\"], \"digest\": \"759d4e2a5d23c226\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the disjunctive three-map statement: algebraically closed integral-extension bijectivity is an ingredient; scalar-tower bijectivity lemmas additionally require a reverse algebra homomorphism. Existing elementwise Mathlib leaf reused; coefficient substitution and the two cases require assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-completed-local-ring-iso",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via Stacks Tags 0478 and 039M: an étale map over an algebraically closed residue field preserves the point and completed local ring. Subargument extracted from lem-trf-etale-completed-local-ring-iso: old Step 3: both structural residue-field alternatives, j = alpha i, and the actual residue-field map",
+   "via": [
+    "lem-trf-etale-completed-local-ring-iso",
+    "lem-trf-nodal-point-etale-locality",
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-algebraic-field-tower-rationality",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its three definition dependencies. Wrote injectivity, the bijective-first-map case with coefficient substitution and the existing algebraic-element Mathlib leaf, and the bijective-composite case with explicit preimages and cancellation. No new nodes. Retained the inherited searches and added the actual Q55 search results. No source discrepancy.",
+  "blueprint": "Historical semistable auxiliary branch named in blueprint.from.place, extracted from old Step 3 of lem-trf-etale-completed-local-ring-iso: rationality at either residue-field endpoint forces the actual residue-field map to be bijective. The current contracting-correspondence proof of the ancestor is not replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-083fbf779",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-083fbf779 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement and stmt_deps are unchanged, and they match the citer's use: lem-trf-etale-completed-local-ring-iso Step 3 applies it with K=κ(x), L=κ(y), j=α∘i. Step 1 (injectivity): def-pc-field-extension says a field homomorphism is injective, and the inline 1=f(a)f(a⁻¹) argument is correct. Step 2 (i bijective): each coefficient α(b_r) is rewritten as j(i⁻¹b_r), so the polynomial stays nonzero with coefficients in j(k). The hypotheses of the Mathlib leaf lem-weil-pbc-algebraic-over-algebraically-closed-subfield (IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic, IsAlgClosed/Basic.lean:245) hold with k'=k, target L, map j, x=z. So j is surjective, and α is surjective too. Step 3 (j bijective): preimages plus cancelling the injective α prove the case, elementary and correct. Edge cases tested: identity maps; R→C shows algebraic closedness is needed; L=K(t) shows algebraicity is needed in the first alternative. Stacks fields.tex 09GQ (lines 900-904) and 09GR (910-943) were read, and the tags were checked in tags/tags. No SGA is used. The only cross-unit citation is a Mathlib leaf, so no tool_uses are needed. A DAG search found no duplicate tower lemma; the finite-extension triviality nodes need finiteness. IsAlgClosed.algebraMap_bijective_of_isIntegral is an ingredient, not a one-line leaf of the item. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.AlgebraicFieldTowerRationality",
+  "declaration": "IsAlgClosed.bijective_field_tower_of_bijective_or_comp",
+  "file": "lean/Sheaf/FieldTheory/AlgebraicFieldTowerRationality.lean",
+  "statement": "theorem bijective_field_tower_of_bijective_or_comp {k : Type u} {K : Type v} {L : Type w} [Field k] [Field K] [Field L] [IsAlgClosed k] (i : k →+* K) (α : K →+* L) (halg : ∀ z : L, ∃ p : Polynomial K, p ≠ 0 ∧ p.eval₂ α z = 0) (hbij : Function.Bijective i ∨ Function.Bijective (α.comp i)) : Function.Bijective i ∧ Function.Bijective (α.comp i) ∧ Function.Bijective α",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35566ae0a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Lean IsAlgClosed.bijective_field_tower_of_bijective_or_comp matches node clause by clause: Field k/K/L in independent universes, [IsAlgClosed k], i : k →+* K, α : K →+* L, j literally α.comp i, algebraicity through α as ∃ p ≠ 0, p.eval₂ α z = 0 (= IsAlgebraic for α.toAlgebra), hypothesis Bijective i ∨ Bijective (α.comp i), conclusion bijectivity of all three specified maps. No extra assumptions; stmt_deps records support IsAlgClosed and RingHom presentation. Edge cases (identity, R→C, k(t), j-case needs nothing) consistent; statement true. No Mathlib/live duplicate or name/path clash. Docstrings carry Stacks 09GQ/09GR source place, blueprint id and the 3 proof steps; sorry only; lean.statement verbatim; report has Worker report + Second reading by Q36 (author self-reread, disclosed). Not recompiled per instructions; worker compile clean."
+ }
+}

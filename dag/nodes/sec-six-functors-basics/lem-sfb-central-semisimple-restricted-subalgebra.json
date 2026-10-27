@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-central-semisimple-restricted-subalgebra",
+ "kind": "statement",
+ "title": "The central semisimple tangent subspace is a restricted invariant subalgebra",
+ "statement": "Let $k$ be a field [def-weil-field], with an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All group schemes are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smooth and connected mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Tori and groups of multiplicative type have the meanings of [def-sfb-tori-multiplicative-type]. For a smooth group $J$, write $\\mathfrak j=T_{J/k,e}$ [def-sc-scheme-tangent-space], with bracket induced by commutators [def-wf-lie-algebra]; $\\operatorname{Ad}$ is the differential of conjugation. Fix a faithful closed linear representation of $J$ into $\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]. A tangent vector is semisimple if its matrix in this representation is diagonalizable over $\\bar k$, and is central if its bracket with every tangent vector is zero. Nilpotent for a group means that it has a finite descending central series of closed normal subgroup schemes with commutators lowering the series. In characteristic $p>0$, $X^{[p]}$ denotes the tangent vector whose left invariant derivation on $k[J]$ is the $p$-fold composite of the derivation of $X$. A restricted Lie subalgebra means a $k$-linear subspace closed under brackets and $X\\mapsto X^{[p]}$. Let $J$ be smooth and connected, assume that $J$ is not nilpotent, and suppose every semisimple element of $\\mathfrak j_{\\bar k}$ is central. Then $k$ has positive characteristic $p$. The set $\\mathfrak s(J)=\\{X\\in\\mathfrak j:X\\text{ is semisimple}\\}$ is a restricted Lie subalgebra, and the adjoint action of $J$ on this subspace is trivial as a group-scheme representation. Moreover $\\bar k\\otimes_k\\mathfrak s(J)$ is exactly the subspace of all semisimple elements of $\\mathfrak j_{\\bar k}$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-sc-general-linear-group",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $\\operatorname{char}k=0$. For $Y\\in\\mathfrak j$, apply [lem-sfb-algebraic-lie-additive-jordan] over the perfect field $k$ to write $Y=Y_s+Y_n$. The semisimple vector $Y_s$ is central by the geometric hypothesis, hence $\\operatorname{ad}(Y)=\\operatorname{ad}(Y_n)$. The same node, for the rational adjoint representation, says this last endomorphism is nilpotent. Thus every adjoint operator is nilpotent. [lem-sfb-charzero-ad-nilpotence-group-criterion] makes $J$ nilpotent, contrary to hypothesis. Consequently $\\operatorname{char}k=p>0$ for a prime $p$.",
+   "uses": [
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-charzero-ad-nilpotence-group-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.80, p.378: characteristic-zero exclusion; 17.74, p.377."
+   }
+  },
+  {
+   "text": "Identify $\\mathfrak j$ with its image in $\\operatorname{Mat}_n(k)$ under the fixed faithful differential, injective by [lem-sfb-algebraic-lie-additive-jordan]. Let $Z=\\{X\\in\\mathfrak j:[X,Y]=0\\text{ for every }Y\\in\\mathfrak j\\}$. These are homogeneous linear equations, so $Z$ is a vector subspace; solving these equations by row reduction also gives $Z_{\\bar k}=Z(\\mathfrak j_{\\bar k})$. Matrices in $Z$ commute. By [lem-sfb-restricted-rational-differentiation], matrix $p$th power represents the restricted operation and $\\operatorname{ad}(X^{[p]})=\\operatorname{ad}(X)^p$. Hence $Z$ is closed under $p$th powers.",
+   "uses": [
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-restricted-rational-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.80, p.378; restricted differentiation preceding 11.36, p.223."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-commuting-p-power-stable-image] to the commuting matrix space $Z$. Its stable image $Z_\\infty$ is a $k$-linear subspace closed under $p$th powers, consisting exactly of the geometrically diagonalizable matrices in $Z$. Every semisimple vector of $\\mathfrak j$ lies in $Z$ by hypothesis, and conversely a diagonalizable member of $Z$ is semisimple by the stated definition. Thus $\\mathfrak s(J)=Z_\\infty$. The same argument over $\\bar k$, using $Z_{\\bar k}=Z(\\mathfrak j_{\\bar k})$ and the geometric centrality hypothesis, identifies $\\bar k\\otimes_k\\mathfrak s(J)$ with all geometric semisimple elements. Since $[Z,Z]=0$ and $0$ is semisimple, brackets of elements of $\\mathfrak s(J)$ belong to it. Matrix $p$th powers are restricted powers by step 2, giving the restricted Lie subalgebra assertion.",
+   "uses": [
+    "lem-sfb-commuting-p-power-stable-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.80 first reduction, p.378; explicit stable-image descent."
+   }
+  },
+  {
+   "text": "For each $X\\in\\mathfrak s(J)$, [lem-sfb-semisimple-tangent-stabilizer] gives a smooth closed adjoint stabilizer $C\\subseteq J$ with $\\operatorname{Lie}(C)=\\mathfrak j$, since $X$ is central. Work over $F=\\bar k$. Connectedness of $J_F$ follows from [lem-sbc-connected-rational-point-geometrically-connected], applied to the identity section. The base change $C_F$ is smooth over $F$. By [lem-sfb-finite-type-group-identity-subgroup], $(C_F)^0$ is a connected open and closed subgroup. It is smooth by [lem-pc-open-immersion-smooth-composition]. Its tangent space equals that of $C_F$: a dual-number point at the identity factors through this open subscheme, since its underlying space has only that point. By the scalar-extension isomorphism of [lem-sfb-affine-group-lie-tangent-calculus], natural in the inclusion $C\\to J$, the image of $\\operatorname{Lie}(C_F)\\cong F\\otimes_k\\operatorname{Lie}(C)=F\\otimes_k\\mathfrak j$ in $\\operatorname{Lie}(J_F)\\cong F\\otimes_k\\mathfrak j$ is everything. So the tangent space of $(C_F)^0$ spans $\\operatorname{Lie}(J_F)$. Apply [lem-sfb-smooth-subgroup-tangent-generation] with the one subgroup $(C_F)^0$ and containing subgroup $C_F$ to get $C_F=J_F$. Writing $C$ as the quotient by an ideal $I$ of $k[J]$, this equality says $I\\otimes_k F=0$, so $I=0$: any nonzero vector in $I$ would remain nonzero after extension of a vector-space basis. Thus $C=J$ as group schemes.",
+   "uses": [
+    "lem-sfb-semisimple-tangent-stabilizer",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.76–17.77, p.377; full-tangent subgroup criterion 10.15–10.17, pp.190–191."
+   }
+  },
+  {
+   "text": "Choose a $k$-basis $X_1,\\ldots,X_r$ of $\\mathfrak s(J)$. Step 4 says that for every commutative $k$-algebra $A$ and $g\\in J(A)$ one has $\\operatorname{Ad}(g)(X_i\\otimes1)=X_i\\otimes1$ for each $i$. By $A$-linearity, $\\operatorname{Ad}(g)(\\sum_i a_i(X_i\\otimes1))=\\sum_i a_i(X_i\\otimes1)$ for every tuple $(a_i)\\in A^r$. This is precisely triviality of the group-scheme representation on $\\mathfrak s(J)$, including $r=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "17.77 and 17.80, pp.377–378; basis calculation on all algebra-valued points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-lie-additive-jordan",
+  "lem-sfb-charzero-ad-nilpotence-group-criterion",
+  "lem-sfb-restricted-rational-differentiation",
+  "lem-sfb-commuting-p-power-stable-image",
+  "lem-sfb-semisimple-tangent-stabilizer",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "17.74, 17.76–17.77, 17.80, pp.377–378; explicit stable-image descent and all-algebras fixedness supplied by Q100."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a smooth connected affine algebraic group is not nilpotent but every geometric semisimple Lie element is central then the characteristic is positive and its semisimple Lie elements form an adjoint stable restricted Lie subalgebra",
+   "results": "{\"t\": \"2026-10-24T07:03:50Z\", \"tool\": \"leanfinder\", \"query\": \"If a smooth connected affine algebraic group is not nilpotent but every geometric semisimple Lie element is central then the characteristic is positive and its semisimple Lie elements form an adjoint stable restricted Lie subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\"], \"digest\": \"ae7af592f6f80a5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan and abstract Lie-center results do not concern semisimple tangent vectors of an algebraic group or their descent and restricted p-operation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central diagonalizable tangent vectors of an algebraic group form a p Lie subalgebra invariant under conjugation",
+   "results": "{\"t\": \"2026-10-24T07:03:49Z\", \"tool\": \"leanfinder\", \"query\": \"Central diagonalizable tangent vectors of an algebraic group form a p Lie subalgebra invariant under conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra\", \"LieSubalgebra.engel\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraCartanSubalgebra\", \"LieAlgebra.zeroRootSubalgebra\", \"LieAlgebra.center\", \"RootPairing.GeckConstruction.cartanSubalgebra\"], \"digest\": \"48efab1b37d0e15f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan and abstract Lie-center results do not concern semisimple tangent vectors of an algebraic group or their descent and restricted p-operation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RestrictedLieAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:03:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"RestrictedLieAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan and abstract Lie-center results do not concern semisimple tangent vectors of an algebraic group or their descent and restricted p-operation."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*central|central.*semisimple|restricted.*Lie",
+   "results": "{\"t\": \"2026-10-24T07:03:44Z\", \"tool\": \"grep\", \"query\": \"semisimple.*central|central.*semisimple|restricted.*Lie\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Submodule.lean\"], \"digest\": \"b65982a5d9810cd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan and abstract Lie-center results do not concern semisimple tangent vectors of an algebraic group or their descent and restricted p-operation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimple tangent vectors form an adjoint invariant restricted Lie subalgebra in positive characteristic",
+   "results": "{\"t\": \"2026-10-24T07:03:44Z\", \"tool\": \"leansearch\", \"query\": \"Semisimple tangent vectors form an adjoint invariant restricted Lie subalgebra in positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieSubalgebra.ad_comp_incl_eq\", \"LieSubalgebra.noConfusion\", \"LieSubalgebra.isNilpotent_ad_of_isNilpotent_ad\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"Module.End.IsSemisimple.restrict\", \"LieSubalgebra.mk\"], \"digest\": \"7337488e9ff61e2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan and abstract Lie-center results do not concern semisimple tangent vectors of an algebraic group or their descent and restricted p-operation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semisimple tangent vectors of a smooth connected affine algebraic group all central form a restricted Lie subalgebra and commute with scalar extension",
+   "results": "{\"t\": \"2026-10-24T07:51:03Z\", \"tool\": \"leanfinder\", \"query\": \"Semisimple tangent vectors of a smooth connected affine algebraic group all central form a restricted Lie subalgebra and commute with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.engel\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.center\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\", \"LieAlgebra.zeroRootSubalgebra\", \"LieSubalgebra.self_mem_engel\"], \"digest\": \"f47bf13ff331ac3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie centres, Cartan theory and operator semisimplicity do not include the group-scheme fixedness and imperfect-field descent clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic group central diagonalizable tangent vectors descend over an imperfect field",
+   "results": "{\"t\": \"2026-10-24T07:51:02Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic group central diagonalizable tangent vectors descend over an imperfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_perfectField\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable'\", \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\"], \"digest\": \"fa40c09cdd1d9e6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie centres, Cartan theory and operator semisimplicity do not include the group-scheme fixedness and imperfect-field descent clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RestrictedLieAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"RestrictedLieAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie centres, Cartan theory and operator semisimplicity do not include the group-scheme fixedness and imperfect-field descent clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "central.*semisimple|semisimple.*central|restricted.*Lie",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"grep\", \"query\": \"central.*semisimple|semisimple.*central|restricted.*Lie\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"Mathlib/Algebra/Lie/Submodule.lean\", \"Mathlib/Geometry/Manifold/MFDeriv/Basic.lean\", \"Mathlib/Geometry/Manifold/HasGroupoid.lean\"], \"digest\": \"ae6005e8a869efe6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie centres, Cartan theory and operator semisimplicity do not include the group-scheme fixedness and imperfect-field descent clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimple tangent subspace of an algebraic group is central and restricted",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"leansearch\", \"query\": \"Semisimple tangent subspace of an algebraic group is central and restricted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isFinitelySemisimple_iff'\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"Module.End.isSemisimple_restrict_iff\", \"Module.End.IsFinitelySemisimple.restrict\", \"LieAlgebra.IsSemisimple.isSimple_of_isAtom\", \"IsSemisimpleModule\", \"GroupLieAlgebra\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\"], \"digest\": \"802c79f18d55e4f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie centres, Cartan theory and operator semisimplicity do not include the group-scheme fixedness and imperfect-field descent clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinitesimal-isogeny-lie-reduction",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction.",
+   "via": [
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-central-semisimple-restricted-subalgebra",
+  "worker": "stage1",
+  "summary": "Preserve the statement. Exclude characteristic zero via algebraic additive Jordan decomposition and a general nilpotence criterion; apply the commuting p-power stable-image lemma to the Lie centre for imperfect-field descent; prove scheme-theoretic fixedness from smooth semisimple stabilizers and full tangent generation. Three new general statement-only prerequisites, no Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction. Realizes exactly the central-semisimple prerequisite of the infinitesimal-isogeny reduction; no departure from the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic geometric connectedness / open smoothness tool used only in the smooth full-tangent stabilizer argument."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic geometric connectedness / open smoothness tool used only in the smooth full-tangent stabilizer argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-open-immersion-smooth-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-b5f8501e7",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-b5f8501e7 (reviewer sub-agent of L); spot-checked: FIX: I read the item, the 3 new nodes, all 9 cited statements and Milne iAG pp.376-378 (17.74, 17.76, 17.77, 17.80). The item restates the 17.80 sentence: if G is not nilpotent and every geometric semisimple element is central, then char p>0 and the semisimple vectors form an Ad-stable p-Lie subalgebra. It adds the clause that kbar tensor s(J) is the whole geometric semisimple subspace. Step 1: the Jordan node, applied to the embedding and to Ad, gives ad(Y)=ad(Y_n) nilpotent; with the new char-0 criterion this is a contradiction. Step 2: by restricted-rational-differentiation, the centre Z is a commuting matrix space closed under p-th powers. Step 3: the stable-image lemma gives s(J)=Z_inf and its kbar base change. Step 4: the smooth stabilizer C has full Lie algebra, and tangent-generation over kbar gives C=J. Step 5 (elementary) is correct. The new nodes are all true and none duplicates an existing node. (a) Char-0 criterion: Engel, then Ad G unipotent and ker Ad=Z(G) in char 0, so G is nilpotent; it fails in char p (G_a semidirect G_m with weight p). (b) Stable image: I checked every clause, including the base-change formula from a basis, the semilinear bijection on the semisimple subspace S over kbar, and W cap (kbar tensor W_inf)=W_inf. (c) Stabilizer node = Milne 17.76. I searched both Lie chapters; adjoint-kernel-central-quotient, lie-normalizer-centralizer, infinite-field-centralizer-reduction, semisimple-derivation-zero-smooth and lem-ag-lie-centre are not duplicates. I accept the tool_uses (connected-rational-point, open-immersion-smooth Mathlib leaf) as generic. Batch-5 flag: finite-type-group-identity-subgroup reaches lem-trf-finite-type-component-open-qc, which says connected components of finite-type schemes are open and quasi-compact. That is general topology, neither the trace formula nor Poincare duality, so I do not return the delivery for it. Fix: step 4 used Lie(C_F)=F tensor Lie(C) -> Lie(J_F) without citing it, and used smoothness of C_F without saying so. I added a citation of lem-sfb-affine-group-lie-tangent-calculus (scalar-extension clause; on base, same unit, no cycle) to the step's uses and to proof_deps, and stated that C_F is smooth. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-central-semisimple-restricted-subalgebra.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CentralSemisimpleRestrictedSubalgebra",
+  "declaration": "AlgebraicGeometry.central_semisimple_restricted_subalgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/CentralSemisimpleRestrictedSubalgebra.lean",
+  "statement": "theorem central_semisimple_restricted_subalgebra (k : Type u) [Field k] (J : Grp (Over (Spec (.of k)))) (n : Type u) [Fintype n] [DecidableEq n] (r : GeneralLinearGroup.RationalHom J.X n) [IsMonHom r] [IsClosedImmersion r.left] (haff : IsAffine J.X.left) (hft : LocallyOfFiniteType J.X.hom) (hqc : QuasiCompact J.X.hom) (hsm : Smooth J.X.hom) (hconn : ConnectedSpace J.X.left) (hnil : ¬ ∃ (m : ℕ) (C : Fin (m + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (m + 1), C j ⟶ J), (∀ j : Fin (m + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsNormalSubgroupScheme (i j).hom.hom) ∧ IsIso (i 0) ∧ Nonempty (C (Fin.last m) ≅ Grp.trivial _) ∧ (∀ j : Fin m, ∃ l : C j.succ ⟶ C j.castSucc, l ≫ i j.castSucc = i j.succ) ∧ ∀ (j : Fin m) (A : Type u) [CommRing A] [Algebra k A] (g : points J.X A) (c : points (C j.castSucc).X A), ∃ z : points (C j.succ).X A, z ≫ (i j.succ).hom.hom = g * (c ≫ (i j.castSucc).hom.hom) * g⁻¹ * (c ≫ (i j.castSucc).hom.hom)⁻¹) (hcentral : ∀ X ∈ Submodule.span (AlgebraicClosure k) (Set.range fun x : GrpObj.Lie J.X ↦ (r.differential x).map (algebraMap k (AlgebraicClosure k))), (∃ P : (Matrix n n (AlgebraicClosure k))ˣ, ((↑(P⁻¹) : Matrix n n (AlgebraicClosure k)) * X * (↑P : Matrix n n (AlgebraicClosure k))).IsDiag) → ∀ Y ∈ Submodule.span (AlgebraicClosure k) (Set.range fun y : GrpObj.Lie J.X ↦ (r.differential y).map (algebraMap k (AlgebraicClosure k))), Commute X Y) : ∃ p : ℕ, p.Prime ∧ CharP k p ∧ ∃ S : LieSubalgebra k (GrpObj.Lie J.X), (∀ x : GrpObj.Lie J.X, x ∈ S ↔ ∃ P : (Matrix n n (AlgebraicClosure k))ˣ, ((↑(P⁻¹) : Matrix n n (AlgebraicClosure k)) * (r.differential x).map (algebraMap k (AlgebraicClosure k)) * (↑P : Matrix n n (AlgebraicClosure k))).IsDiag) ∧ (∀ x ∈ S, ∃ y ∈ S, r.differential y = r.differential x ^ p) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (g : points J.X A) (X : Matrix n n A), X ∈ Submodule.span A ((fun x : GrpObj.Lie J.X ↦ (r.differential x).map (algebraMap k A)) '' (S : Set (GrpObj.Lie J.X))) → Commute (r.points A g : Matrix n n A) X) ∧ (∀ X ∈ Submodule.span (AlgebraicClosure k) (Set.range fun x : GrpObj.Lie J.X ↦ (r.differential x).map (algebraMap k (AlgebraicClosure k))), (∃ P : (Matrix n n (AlgebraicClosure k))ˣ, ((↑(P⁻¹) : Matrix n n (AlgebraicClosure k)) * X * (↑P : Matrix n n (AlgebraicClosure k))).IsDiag) ↔ X ∈ Submodule.span (AlgebraicClosure k) ((fun x : GrpObj.Lie J.X ↦ (r.differential x).map (algebraMap k (AlgebraicClosure k))) '' (S : Set (GrpObj.Lie J.X))))",
+  "branch": "sheaf-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-695d4c68b",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (a1e75d14). The Lean file is byte-identical (sha256 3127d408…) to the version whose mathematics the earlier review checked clause by clause and found faithful; I re-read the signature against the node and found no mismatch. The only change to the item node is the added stmt_dep def-wf-lie-algebra-derivation (plus the lean record vs live). That node has landed, owns GrpObj.Lie/RationalHom/differential, and its 342-node closure does not reach the item, so there is no cycle. lean.statement is verbatim in the file. The report has Worker report, Second reading by Q144 and a Returned delivery repair section. Gates: by sorry only, source/blueprint docstrings, 5 proof steps. Not landed in live (no A7). No file changed, so no compile. Note N1 carried over: p-closure via matrix p-th power of the injective dr is accepted; a bridge may be needed once a canonical [p] lands."
+ }
+}

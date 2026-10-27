@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-space-complete-local-map-effectivity",
+ "kind": "statement",
+ "title": "Complete local points of algebraic spaces are effective",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], with algebraic spaces over $S$ [def-trf-algebraic-space] and universes as in [def-weil-size-convention]. Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] with a unique maximal ideal $\\mathfrak m$, and a specified morphism $\\operatorname{Spec}A\\to S$ [def-weil-affine-spectrum]. Assume that $A\\to\\varprojlim_{n\\geq1}A/\\mathfrak m^n$ is an isomorphism of rings. For every algebraic space $B$ over $S$, restriction is a bijection\n$$\\operatorname{Mor}_S(\\operatorname{Spec}A,B)\\longrightarrow\\varprojlim_{n\\geq1}\\operatorname{Mor}_S(\\operatorname{Spec}(A/\\mathfrak m^n),B).$$\nThe set on the right consists of families $b_n$ with $b_n=b_{n+1}|_{\\operatorname{Spec}(A/\\mathfrak m^n)}$. Neither separatedness nor a finite-type hypothesis on $B$ is required.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 0AQH, lemma-map-into-algebraic-space, statement and first displayed equation of its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "First record the elementary scheme calculation, valid for any complete local ring $(R,\\mathfrak n)$ and any scheme $Z$. By [lem-weil-pbc-morphism-from-spec-local-ring], a compatible family $z_n:\\operatorname{Spec}(R/\\mathfrak n^n)\\to Z$ is a common closed-point image $z\\in Z$ and compatible local maps $\\mathcal O_{Z,z}\\to R/\\mathfrak n^n$. The inverse-limit isomorphism gives exactly one ring map $\\mathcal O_{Z,z}\\to R$ with these reductions. It is local: the inverse image of $\\mathfrak n$ is the maximal ideal of $\\mathcal O_{Z,z}$, as is seen modulo $\\mathfrak n$. Applying the same classification gives exactly one morphism $\\operatorname{Spec}R\\to Z$ with the prescribed restrictions. This also proves injectivity, since reduction modulo $\\mathfrak n$ determines $z$ and all reductions determine the stalk map. This calculation is natural in $Z$ and in the local quotient maps, by the explicit stalk-map formula in that classification. For $S$-schemes the result is over $S$: compare the two composites to the scheme $S$ using the injectivity just proved. No Noetherian or separation assumption on $Z$ was used.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQG (lemma-map-into-scheme), including its omitted injectivity; direct elementary derivation from Schemes Tag 01J6 (lemma-morphism-from-spec-local-ring)."
+   }
+  },
+  {
+   "text": "Prove injectivity for the algebraic space $B$, uniformly for every complete Noetherian local $S$-algebra $R$. If $b,c:\\operatorname{Spec}R\\to B$ have equal reductions, pull back the representable diagonal of [def-trf-algebraic-space] along $(b,c)$ to obtain a scheme $T$ with $T\\to\\operatorname{Spec}R$ representing their equalizer. By [lem-pc-yoneda], its points over a scheme are exactly maps on which $b$ and $c$ agree. The equal reductions give compatible maps $\\operatorname{Spec}(R/\\mathfrak n^n)\\to T$: uniqueness follows because an equalizer is a monomorphism. Step 1 algebraizes them to $t:\\operatorname{Spec}R\\to T$. Its composite to $\\operatorname{Spec}R$ is the identity by the scheme injectivity of step 1. Thus $t$ is a section of the equalizer, so $b=c$. Only representability of the diagonal is needed; no separatedness of $B$ is assumed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH (lemma-map-into-algebraic-space), injectivity paragraph; replace its completed-stalk argument by Tag 0AQG applied to the same scheme equalizer."
+   }
+  },
+  {
+   "text": "For surjectivity fix a compatible family $(b_n)$ and put $k=A/\\mathfrak m$. Choose a surjective representable etale atlas $U\\to B$ with $U$ a scheme, using [def-trf-algebraic-space]. By [lem-trf-space-fibre-products-etale-covers], $V=U\\times_{B,b_1}\\operatorname{Spec}k$ is a nonempty scheme etale over $\\operatorname{Spec}k$. By [lem-weil-pbc-etale-fibre-discrete-separable-points], choose a component $\\operatorname{Spec}k'\\subset V$, where $k'/k$ is finite separable. Its map to $U$ lifts the restriction of $b_1$ to $k'$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH, surjectivity: choice of U and finite separable k-prime/k (lines 7052–7067); Morphisms Tag 02GL (lemma-etale-over-field)."
+   }
+  },
+  {
+   "text": "Completeness and [lem-weil-pbc-complete-pair-henselian] make $A$ henselian. By [lem-weil-pbc-henselian-finite-etale-field-lift] choose a finite etale $A$-algebra $A'$ with $A'/\\mathfrak mA'\\cong k'$. It is a complete Noetherian local ring with maximal ideal $\\mathfrak m'=\\mathfrak mA'$: [lem-weil-pbc-finite-over-complete-local-product] writes it as a finite product of complete Noetherian local rings; [lem-weil-pbc-finite-algebra-local-radical] puts $\\mathfrak mA'$ inside every maximal ideal. Maximal ideals of $A'$ thus correspond to those of the field $A'/\\mathfrak mA'$, so there is exactly one and it is $\\mathfrak mA'$. There can consequently be only one nonzero local product factor. In particular $\\mathfrak m'^n=\\mathfrak m^nA'$ for every $n\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-henselian-finite-etale-field-lift",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH, finite etale extension R-prime/R; Algebra Tags 04GM, 04GK (lemma-henselian-cat-finite-etale), 0325 (lemma-quotient-complete-local)."
+   }
+  },
+  {
+   "text": "Set $A'_n=A'/\\mathfrak m^nA'$ and let $b'_n:\\operatorname{Spec}A'_n\\to B$ be the restriction of $b_n$. Start with the chosen lift $u'_1:\\operatorname{Spec}k'\\to U$. If $u'_n$ has been constructed over $b'_n$, the closed immersion $\\operatorname{Spec}A'_n\\hookrightarrow\\operatorname{Spec}A'_{n+1}$ has square-zero ideal $\\mathfrak m^nA'/\\mathfrak m^{n+1}A'$, because $2n\\ge n+1$. It is a first order thickening of affine $S$-schemes [def-sbc-first-order-thickening]. Apply [lem-sfb-etale-space-infinitesimal-lifting] to $U\\to B$, $b'_{n+1}$, and $u'_n$ to obtain a unique $u'_{n+1}$ extending $u'_n$ and lying over $b'_{n+1}$. Induction produces a compatible tower $(u'_n)$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-sfb-etale-space-infinitesimal-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH, construction of the compatible u-prime_n (lines 7072–7077); spaces-more-morphisms.tex Tag 0616 (lemma-etale-formally-etale)."
+   }
+  },
+  {
+   "text": "Apply the scheme calculation of step 1 to $A'$ and $U$ to obtain $u':\\operatorname{Spec}A'\\to U$ with restrictions $u'_n$. Let $b'$ be its composite to $B$. Thus $b'|_{\\operatorname{Spec}A'_n}=b'_n$ for every $n$ by the commuting lifting squares in step 5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH, algebraization by Tag 0AQG (lines 7077–7079)."
+   }
+  },
+  {
+   "text": "Check descent on $C=A'\\otimes_AA'$. It is finite over $A$: products of any two finite module generating sets generate its tensor product. Its spectrum is etale over $\\operatorname{Spec}A$, by etale base change and composition [lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-etale-composition-cancellation]. By [lem-weil-pbc-finite-over-complete-local-product], write $C=\\prod_j C_j$ with $C_j$ complete Noetherian local. Each $\\mathfrak mC_j$ is proper by [lem-weil-pbc-finite-algebra-local-radical], and each local quotient $C_j/\\mathfrak mC_j$ is a factor of the finite etale $k$-algebra $C/\\mathfrak mC$. By [lem-weil-pbc-etale-algebra-over-field-product] the latter is a finite product of fields, so each of its nonzero local factors is a field. Consequently $\\mathfrak mC_j$ is the maximal ideal of $C_j$. The two pullbacks of $b'$ to $\\operatorname{Spec}C_j$ agree modulo $\\mathfrak m^nC_j$ for every $n$: both restrictions are the pullback of the original $b_n$, since both $A$-algebra maps $A'\\to C_j$ induce the same structural map $A\\to C_j$. Apply the injectivity of step 2 to each $C_j$. Hence the two maps on $\\operatorname{Spec}C$ agree, using the finite-product spectrum identification [lem-weil-pbc-finite-affine-coproduct-spectrum] and the uniqueness part of the sheaf condition of [def-trf-algebraic-space].",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH, overlap and injectivity (lines 7080–7090); Algebra Tags 0325 and 00U3. Explicitly identify the maximal ideals on the local factors to justify the use of step 2."
+   }
+  },
+  {
+   "text": "Finally $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is an fppf covering: it is etale and therefore flat and locally of finite presentation [def-weil-etale-morphism], and is surjective by [lem-weil-pbc-flat-local-hom-faithfully-flat], since $A\\to A'$ is flat and local. This meets exactly [def-pc-fppf-site]. The fppf sheaf $B$ [def-trf-algebraic-space], with its points identified with morphisms by [lem-pc-yoneda], therefore descends $b'$ using the equality on the overlap proved in step 7. Obtain $b:\\operatorname{Spec}A\\to B$. For each $n$, base change of the covering is an fppf covering [def-weil-pbc-sites-and-cohomology]. The restriction of $b$ and $b_n$ agree on it, both being $b'_n$; the separatedness part of the sheaf condition makes them equal. This supplies the omitted final compatibility in Tag 0AQH and proves surjectivity. Together with step 2 it proves the stated bijection.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-pc-fppf-site",
+    "def-trf-algebraic-space",
+    "lem-pc-yoneda",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AQH, fppf descent and its omitted final verification (lines 7091–7094); Topologies Tag 021L (definition-fppf-covering); Sites Tag 00VM (definition-sheaf)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-trf-algebraic-space",
+  "lem-pc-yoneda",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-finite-etale-field-lift",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "def-sbc-first-order-thickening",
+  "lem-sfb-etale-space-infinitesimal-lifting",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 0AQH (lemma-map-into-algebraic-space), following its etale-chart and fppf-descent route; scheme calculation from Tag 01J6 and simplified equalizer injectivity from Tag 0AQG, with the omitted final descent compatibility written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a complete Noetherian local ring spectrum to an algebraic space are the inverse limit of morphisms from its Artinian quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace → AlgebraicGeometry.LocallyRingedSpace → Type u\", \"doc\": \"A continuous map between the underlying topological spaces together with a morphism of sheaves of commutative rings that induces local ring homomorphisms on stalks\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R (Ideal.pow_le_pow_right hle)).comp (f n) = f m) : A →ₐ[R] S\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) : Spec.locallyRingedSpaceObj S ⟶ Spec.locallyRingedSpaceObj R\", \"doc\": \"Given commutative rings $ R $ and $ S $ and a ring homomorphism $ f : R → S $, this constructs the morphism of locally ringed spaces from $ \\\\operatorname{Spec}(S) $ to $ \\\\operatorname{Spec}(R) $. It c\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.subring\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subring ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subring of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_{m,\"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ I $ be an ideal of $ R $ such that $ \\\\mathfrak{m} $ is a minimal prime ideal containing $ I $. Then the quotient ring $ R/I $ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isArtinianScheme_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{R : CommRingCat} : IsArtinianScheme (Spec R) ↔ IsArtinianRing R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is Artinian if and only if the commutative ring $R$ is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.Spec.map\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{R S : CommRingCat} (f : R ⟶ S) : Spec S ⟶ Spec R\", \"doc\": \"Given a ring homomorphism $ f : R → S $, this constructs the contravariant morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ induced by $ f $, using the locally ringed space stru\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom treats affine ring maps, and SpecToEquivOfLocalRing treats scheme targets; neither proves effectivity for arbitrary algebraic-space targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space valued points over a complete local Noetherian ring are equivalent to compatible points over all powers of the maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion =\\n  AlgebraicGeometry.ValuativeCriterion.Existence ⊓ AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"doc\": \"For a morphism of schemes, the valuative criterion is equivalent to the conjunction of the existence and uniqueness conditions, i.e., ValuativeCriterion = Existence ∧ Uniqueness.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence = (AlgebraicGeometry.topologically @SpecializingMap).universally\", \"doc\": \"The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (R : CommRingCat) →\\n    [IsLocalRing ↑R] → (AlgebraicGeometry.Spec R ⟶ X) ≃ (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, there is a bijection between morphisms from $\\\\operatorname{Spec}(R)$ to $X$ and pairs $(x, \\\\varphi)$, where $x$ is a point in $X$ and $\\\\varphi : \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f₁ f₂ : (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }},\\n  f₁ = f₂ ↔ ∃ (h₁ : f₁.fst = f₂.fst), ↑f₁.snd = CategoryTheory.CategoryStruct.comp (X.presheaf.stalkCongr ⋯).hom ↑f₂.snd\", \"doc\": \"Two pairs consisting of a point in a scheme $X$ and a local homomorphism from the stalk at that point to a ring $R$ are equal if and only if their points are equal and their homomorphisms are related \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.iff\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f ↔\\n    AlgebraicGeometry.ValuativeCriterion.Existence f ∧ AlgebraicGeometry.ValuativeCriterion.Uniqueness f\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion if and only if it satisfies both the existence and uniqueness conditions. Specifically, for every valuative commutative square i\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).fst =\\n    (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the first component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi: \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom treats affine ring maps, and SpecToEquivOfLocalRing treats scheme targets; neither proves effectivity for arbitrary algebraic-space targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Scheme.Hom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom treats affine ring maps, and SpecToEquivOfLocalRing treats scheme targets; neither proves effectivity for arbitrary algebraic-space targets."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*into.*algebraic.*space|algebraic.*space.*complete|Spf",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.liftAlgHom treats affine ring maps, and SpecToEquivOfLocalRing treats scheme targets; neither proves effectivity for arbitrary algebraic-space targets.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|complete.*local.*map",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effectivity of compatible algebraic space valued points over quotients of a complete local ring",
+   "results": "8 hits: AdicCompletion.evalOneₐ, AdicCompletion.evalₐ, PowerSeries.algEquivQuotientWeierstrassDistinguished, algebra_finiteType_of_liesOver, instIsAlgebraicQuotientIdealResidueField, Ideal.Quotient.algebraOfLiesOver, AdicCompletion.ofAlgEquiv, Algebra.FormallyUnramified.quotient",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, AlgebraicGeometry.Scheme.Hom",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a complete local Noetherian ring spectrum to an algebraic space are equivalent to compatible points over its maximal ideal power quotients",
+   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, AlgebraicGeometry.specZIsTerminal, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.ValuativeCriterion.Existence.eq",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible morphisms from Artinian quotients of a complete local ring to a scheme extend uniquely to its spectrum",
+   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.ValuativeCriterion.uniqueness, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Scheme.isArtinianScheme_Spec",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "grep",
+   "query": "SpecToEquivOfLocalRing|liftAlgHom",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/Algebra/Lie/UniversalEnveloping.lean, Mathlib/Algebra/Lie/UniversalEnveloping.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible morphisms from infinitesimal quotients of a complete local ring to an arbitrary scheme have a unique algebraization",
+   "results": "8 hits: IsAdicComplete.algHom_ext, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp, AlgebraicGeometry.Scheme.Hom.liftQuotient, Algebra.FormallyUnramified.ext, IsAdicComplete.mkₐ_comp_liftAlgHom, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, IsAdicComplete.mk_liftAlgHom",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SpecToEquivOfLocalRing, IsAdicComplete",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete local ring R and any scheme X, morphisms Spec R to X biject with compatible morphisms Spec R mod maximal ideal powers to X; node lem-sfb-scheme-complete-local-points",
+   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply, AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local ring maps into an adically complete local ring classify compatible scheme valued points on its infinitesimal neighborhoods",
+   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, AlgebraicGeometry.ValuativeCommSq.K, AlgebraicGeometry.ValuativeCommSq.R, AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.ValuativeCriterion.Existence.eq",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates classify scheme-valued local points or lift affine ring maps, not arbitrary algebraic-space points; the scheme calculation in step 1 uses the existing classification node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-formal-effectivity",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W9 (lemma-coherent-existence), Situation 08KB (situation-coherent). Subargument in quot.tex Tag 08W9: recovering the morphism to B (first paragraph), via Artin Tag 07X8 Case II and formal-spaces Tag 0AQH.",
+   "via": [
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-complete-local-map-effectivity",
+  "worker": "stage1",
+  "summary": "Read Stacks 0AQH and its scheme case 0AQG. Proved scheme comparison directly from the existing local-point classification and completeness, then applied it to the scheme equalizer for injectivity. Followed the finite etale chart lift and descent proof, checking maximal ideals on overlap factors and the omitted final reduction compatibility. No statement change and no new nodes: all non-elementary inputs already exist.",
+  "blueprint": "Inherited prerequisite chain for sk-thm-sf-ctf-stability: compactification/direct-image preservation, through coherent-family formal effectivity. The item is the Tag 0AQH auxiliary input, not a new blueprint statement. Read the current latest unit proof, its proper/open direct image and compactification paragraph; no same-statement blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings: used for the complete-local chart/descent calculation in Stacks 0AQH; the unit supplies no replacement for this auxiliary algebraic-space input."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic A complete pair is henselian: used for the complete-local chart/descent calculation in Stacks 0AQH; the unit supplies no replacement for this auxiliary algebraic-space input."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-field-lift",
+    "why": "Generic Lifting one finite separable residue extension: used for the complete-local chart/descent calculation in Stacks 0AQH; the unit supplies no replacement for this auxiliary algebraic-space input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic Finite algebras over a complete Noetherian local ring are products of complete local rings: used for the complete-local chart/descent calculation in Stacks 0AQH; the unit supplies no replacement for this auxiliary algebraic-space input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-finite-etale-field-lift",
+  "lem-weil-pbc-finite-over-complete-local-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-db64346a4",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-db64346a4 (reviewer sub-agent of L); spot-checked: Read Stacks formal-spaces.tex Tags 0AQH and 0AQG in full. The item statement is unchanged from live (unsplit) and matches 0AQH. There is no repair note and no parallel split. All 8 steps are correct and each cited statement says what the step takes from it. Step 1: scheme case from morphism-from-spec-local-ring plus completeness; locality via φ_1; the over-S property by injectivity at Z=S; elementary. Step 2: injectivity via the representable-diagonal equalizer scheme T (a monomorphism by Yoneda); step 1 gives a section t with p∘t=id, so b=c without the source's lft/completed-stalk argument. Step 3: the atlas fibre over b_1 is etale and surjective over k, and one point Spec k' is taken from it. Step 4: A' is henselian-lifted with A'/mA'≅k' as κ-algebras; local-radical forces a unique maximal ideal mA', so there is one complete factor. Step 5: m^{2n}⊂m^{n+1} gives first-order thickenings; the lifting is applied to the atlas with the base case explicit. Step 6: algebraize u'. Step 7: C=A'⊗A' is finite and etale over A, so a product of complete local C_j; mC_j is maximal because C/mC is a product of fields; both pullbacks reduce to b_n∘(A→C_j), so step 2 applies per factor, then the coproduct spectrum and sheaf uniqueness finish. Step 8: the fppf covering is etale and surjective by flat-local; descent, then the source-omitted compatibility b|_{A_n}=b_n via the base-changed covering. Edge cases checked: m=0, nilpotent m, nontrivial k'/k, several C_j, non-separated B, empty B. Duplicate search on 0AQH/0AQG found only the parent node; no SGA cited. Tool_uses: trf fibre products is off-route and accepted as generic; the pbc entries are on-route via sk-thm-p1. Batch-5: lem-trf-space-fibre-products-etale-covers is a generic algebraic-space foundation, outside both assumptions. lem-sfb-etale-space-infinitesimal-lifting reaches trf only through def-trf-algebraic-space, which is already a base stmt_dep and a general definition. Both are accepted. Advisory: the trf citation in step 3 is redundant given the definition. The report mentions citations.json/searches.jsonl, but these are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCompleteLocalMapEffectivity",
+  "declaration": "AlgebraicGeometry.bijective_completeLocalPointRestriction",
+  "declarations": [
+   "AlgebraicGeometry.completeLocalQuotientOver",
+   "AlgebraicGeometry.completeLocalQuotientMap",
+   "AlgebraicGeometry.completeLocalQuotientTransition",
+   "AlgebraicGeometry.completeLocalQuotientRestriction",
+   "AlgebraicGeometry.CompleteLocalPointFamily",
+   "AlgebraicGeometry.completeLocalPointRestriction",
+   "AlgebraicGeometry.bijective_completeLocalPointRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCompleteLocalMapEffectivity.lean",
+  "statement": "theorem bijective_completeLocalPointRestriction {S : Scheme.{u}} (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (f : Spec (.of A) ⟶ S) (B : AlgebraicSpace S) : Function.Bijective (completeLocalPointRestriction f B)",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical restriction to the subtype of consecutively compatible points of A/m^(n+1), with all quotient schemes, transition inclusions and section maps explicitly constructed. Points are sections of the recorded algebraic-space fppf sheaf, hence exactly S-morphisms by Yoneda. IsAdicComplete is the recorded completion-isomorphism condition, not an extra assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cc5acfdf",
+  "group": "Q148",
+  "result": "fix",
+  "note": "0AQH statement exact: B : AlgebraicSpace S with sections at Over.mk f (Yoneda), [IsNoetherianRing][IsLocalRing][IsAdicComplete maximalIdeal] (completion iso, no stronger), families over A/m^(n+1) compatible step by step via Ideal.Quotient.factor, real restriction helpers, Function.Bijective; no separated/finite-type assumption; universe u as in the recorded AlgebraicSpace; lean.statement verbatim; imports exist; edge cases (field, Artinian, empty B, non-affine S) covered. Only fault H11: second reading said none took place (dispatcher wording) -> FIX fixes/lem-sfb-space-complete-local-map-effectivity.report.md = worker report verbatim + clause-by-clause second reading. No Lean change, no compile needed."
+ }
+}

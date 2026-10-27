@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-finite-type-alg-cl-heart-finite-image",
+ "kind": "statement",
+ "title": "Finite-field sheaf model for an algebraic-closure direct image",
+ "statement": "Fix a prime ell and a characteristic-p field k, with p prime and p != ell. Let X and Y be separated finite-type k-schemes and f:X -> Y a k-morphism [sk-def-sfb-dc-setting]. Use the pulled-back condensed coefficient rings [sk-def-sfb-condensed-ring], stratified locally finitely presented constructible module objects [sk-def-sfb-bounded-constructible], and the ordinary ambient derived direct image [sk-def-sfb-module-derived-pushpull]. Let Qbar_ell be the algebraic-closure coefficient ring [sk-def-sfb-qlbar-condensed]. For each constructible Qbar_ell,X-module F there exist a finite intermediate extension E/Q_ell inside Qbar_ell, a constructible E_X-module N, and an isomorphism L(Qbar_ell,Y tensor_{E_Y} -)(Rf_{*,E}(N[0])) ~= Rf_{*,Qbar_ell}(F[0]). Here the coefficient inclusion is [def-sfb-subfield-to-qlbar-coefficient-map]. No upper bound for either direct image is part of this statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(3); Proposition 6.8.14; Remark 6.8.15; finite-stage paragraph"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-subfield-to-qlbar-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field makes X locally Noetherian, and the quasi-compact structural map makes X compact. Hence X is Noetherian. Apply exists_constructible_finiteCoefficient_model to F, obtaining a finite intermediate field E, a constructible E-module N and an isomorphism of the ordinary scalar extension of N with F. This is directly sheaf descent; no derived model or truncation is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-condensed-finite-presentation-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flat algebraic-closure scalar extension is exact. Apply singleFunctorCompLeftDerivedFunctorIso to identify its left derived functor on N[0] with the single complex of its ordinary extension, and compose with the single functor applied to the descended sheaf isomorphism. This gives L(extension)(N[0]) isomorphic to F[0].",
+   "uses": [
+    "lem-sfb-qlbar-flat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Separatedness of the structural map gives a quasi-separated target space. Compactness of X and Noetherianity give QuasiCompact f and QuasiSeparated f. The single complex N[0] lies in D-plus with lower bound zero. Apply isIso_derivedPushHom_padicAlgCl_of_boundedBelow to this object. Turn the canonical coefficient-change map into an isomorphism and compose it with Rf_* of the isomorphism of the preceding step. The result is exactly the asserted scalar-extension model for the direct image.",
+   "uses": [
+    "lem-sfb-qlbar-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qlbar-direct-image-comparison",
+  "lem-sfb-qlbar-flat",
+  "lem-weil-pbc-condensed-finite-presentation-descent",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(3); Proposition 6.8.14; Remark 6.8.15; finite-stage paragraph; direct sheaf descent via the existing finite-presentation descent theorem, followed by the bounded-below coefficient-change mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a constructible sheaf in degree zero along a finite type morphism over a field is bounded above for ell adic coefficients",
+   "results": "Eight generic sheaf pushforward and condensed module hits; no finiteness theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLE\", \"rightDerivedFunctor\"",
+   "results": "Three generic derived-functor hits, no coefficient finiteness.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*rightDerived|rightDerived.*constructible|finite.*cohomological.*dimension",
+   "results": "No Mathlib matches. The source library has finite-coefficient finiteness; general integral/rational/algebraic-closure interfaces have import paths back to this item.",
+   "date": "2026-10-25",
+   "verdict": "No usable acyclic theorem for the new coefficient-specific obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search single bound; unit ball direct image; finite type cohomological bound",
+   "results": "All three searches returned zero matching blueprint nodes. Read the original planned integral, rational and finite-stage interfaces; the new statements specialize their argument to sheaves and abstract normed coefficients.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate acyclic interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeDirectImageSingleBound",
+  "date": "2026-10-25",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Proposition 6.8.4(3); Proposition 6.8.14; Remark 6.8.15; finite-stage paragraph",
+   "via": [
+    "lem-sfb-dc-lower-star-single-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeAlgClHeartFiniteImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeAlgClHeartFiniteImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteTypeAlgClHeart_finiteImage",
+  "statement": "theorem finiteTypeAlgClHeart_finiteImage\n    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))\n    (hF : IsConstructibleModuleObject\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) F) :\n    ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ)\n      (N : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n        (padicSubfieldRingObj X.left ℓ E)),\n      IsConstructibleModuleObject (padicSubfieldRingObj X.left ℓ E) N ∧\n      Nonempty (\n        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y.left ℓ E)).leftDerivedFunctor.obj\n          ((R((f.left)_*⟦Profinite.continuousMapRingObj E.1⟧)).obj\n            ((DerivedCategory.singleFunctor _ 0).obj N)) ≅\n        ((R((f.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261025T123705-L-1890145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T162143-L-329122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -193,7 +193,32 @@
   "item": "def-weil-pbc-truncation-exact-couples",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "DerivedCategory.truncation_triangle"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "DerivedCategory.truncation_triangle",
+     "module": "WeilConjectures.CategoryTheory.TruncationTriangle",
+     "lines": [
+      112,
+      286
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
@@ -237,5 +262,70 @@
   "landing": "20261012T173853-L-3302824",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be an abelian category with derived category $D(\\mathcal A)$ [def-weil-abstract-derived-category], a triangulated category [def-weil-triangulated-category], with cohomology functors $H^n$ and shift $[1 ]$, $(M[1 ])^r=M^{r+1}$, $d_{M[1 ]}=-d_M$. For a complex $K$ of $\\mathcal A$ and $q\\in\\mathbf Z$ let $\\tau_{\\leq q}K$ be the canonical truncation, the subcomplex $\\cdots\\to K^{q-2}\\to K^{q-1}\\to\\Ker(d^q_K)\\to0\\to\\cdots$ of $K$ (the truncation of the standard t-structure [def-sbc-standard-tstructure-derived-category]), so that $\\tau_{\\leq q-1}K\\subseteq\\tau_{\\leq q}K$, and let $H^q(K)[-q ]$ be the complex with the single object $H^q(K)$ placed in degree $q$. Let $i_q:\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K$ be the inclusion and $j_q:\\tau_{\\leq q}K\\to H^q(K)[-q ]$ the morphism of complexes which in degree $q$ is the projection $\\Ker(d^q_K)\\to H^q(K)$ and zero in the other degrees. Then there is a unique morphism $k_q:H^q(K)[-q ]\\to(\\tau_{\\leq q-1}K)[1 ]$ in $D(\\mathcal A)$ such that\n$$\n \\tau_{\\leq q-1}K\\xrightarrow{\\,i_q\\,}\\tau_{\\leq q}K\\xrightarrow{\\,j_q\\,}H^q(K)[-q ]\\xrightarrow{\\,k_q\\,}(\\tau_{\\leq q-1}K)[1 ]\n$$\nis a distinguished triangle $T_q(K)$ of $D(\\mathcal A)$ (namely $k_q=\\delta\\circ\\bar j_q^{-1}$, where $\\delta$ is the boundary morphism of the distinguished triangle of the short exact sequence of complexes $0\\to\\tau_{\\leq q-1}K\\to\\tau_{\\leq q}K\\to\\tau_{\\leq q}K/\\tau_{\\leq q-1}K\\to0$ and $\\bar j_q:\\tau_{\\leq q}K/\\tau_{\\leq q-1}K\\to H^q(K)[-q ]$ is the quasi-isomorphism induced by $j_q$). The triangle is functorial in $K$: $\\tau_{\\leq q}$, $\\tau_{\\leq q-1}$ and $H^q(-)[-q ]$ preserve quasi-isomorphisms and so act on morphisms of $D(\\mathcal A)$ [lem-weil-pbc-truncation-descends], and for every morphism $f:K\\to L$ of $D(\\mathcal A)$ between complexes $K,L$ the triple $(\\tau_{\\leq q-1}f,\\tau_{\\leq q}f,H^q(f)[-q ])$ is a morphism of triangles $T_q(K)\\to T_q(L)$. If $K$ is bounded below (as a complex, or only in cohomology: $H^n(K)=0$ for $n\\ll0$), so are the three terms; in particular for $\\mathcal A=\\Ab(T_{\\Et})$ the triangle lies in $\\Dplus(T_{\\Et})$ [def-weil-pbc-derived-categories].",
+  "proof": [
+   {
+    "text": "**Step 1.** **Step 1 (the short exact sequence of truncations).** By [lem-weil-pbc-truncation-step-ses] (a), (b), the inclusion $i_q$ sits in a short exact sequence of complexes $0\\to\\tau_{\\leq q-1}K\\xrightarrow{i_q}\\tau_{\\leq q}K\\xrightarrow{p_q}M_q(K)\\to0$, where $M_q(K)=\\tau_{\\leq q}K/\\tau_{\\leq q-1}K$ is the two-term complex $K^{q-1}/\\Ker d^{q-1}\\to\\Ker d^q$ in degrees $q-1,q$ (it is not $H^q(K)[-q ]$ itself), and $j_q=\\bar j_q\\circ p_q$ with $\\bar j_q:M_q(K)\\to H^q(K)[-q ]$ a quasi-isomorphism.",
+    "uses": [
+     "lem-weil-pbc-truncation-step-ses"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** **Step 2 (the triangle of the short exact sequence).** By [lem-weil-pbc-complex-ses-triangle] applied to the sequence of Step 1 there is $\\delta:M_q(K)\\to(\\tau_{\\leq q-1}K)[1 ]$ in $D(\\mathcal A)$ such that $\\tau_{\\leq q-1}K\\xrightarrow{i_q}\\tau_{\\leq q}K\\xrightarrow{p_q}M_q(K)\\xrightarrow{\\delta}(\\tau_{\\leq q-1}K)[1 ]$ is distinguished.",
+    "uses": [
+     "lem-weil-pbc-complex-ses-triangle"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 3.** **Step 3 (existence of $k_q$).** Since $\\bar j_q$ is a quasi-isomorphism, its image in the localization $D(\\mathcal A)$ is an isomorphism [def-weil-abstract-derived-category]. Put $k_q=\\delta\\circ\\bar j_q^{-1}$. Then $(\\mathrm{id},\\mathrm{id},\\bar j_q)$ is an isomorphism from the triangle of Step 2 to $(\\tau_{\\leq q-1}K,\\tau_{\\leq q}K,H^q(K)[-q ],i_q,j_q,k_q)$: the squares read $i_q\\circ\\mathrm{id}=\\mathrm{id}\\circ i_q$, $\\bar j_q\\circ p_q=j_q\\circ\\mathrm{id}$ (Step 1) and $k_q\\circ\\bar j_q=\\delta=\\mathrm{id}[1 ]\\circ\\delta$. A triangle isomorphic to a distinguished triangle is distinguished (TR1 of [def-weil-triangulated-category]), so $T_q(K)$ is distinguished.",
+    "uses": [
+     "def-weil-abstract-derived-category",
+     "def-weil-triangulated-category"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 4.** **Step 4 (a vanishing of morphisms).** For complexes $K,L$: $\\Hom_{D(\\mathcal A)}\\bigl((\\tau_{\\leq q-1}K)[1 ],H^q(L)[-q ]\\bigr)=0$. Indeed $\\tau_{\\leq q-1}K$ is a complex with zero terms in degrees $>q-1$, so $(\\tau_{\\leq q-1}K)[1 ]$ has zero terms in degrees $>q-2$ and lies in $D(\\mathcal A)^{\\leq q-2}$; $H^q(L)[-q ]$ has zero terms in degrees $<q$ and lies in $D(\\mathcal A)^{\\geq q}\\subseteq D(\\mathcal A)^{\\geq q-1}$ [def-sbc-standard-tstructure-derived-category]. By axiom 2 of a t-structure, shifted by $q-2$ ($\\Hom(A,B[-1 ])=0$ for $A\\in D^{\\leq0}$, $B\\in D^{\\geq0}$, i.e. $\\Hom(D^{\\leq n},D^{\\geq n+1})=0$) [def-weil-t-structure], every morphism between them is zero.",
+    "uses": [
+     "def-sbc-standard-tstructure-derived-category",
+     "def-weil-t-structure"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 5.** **Step 5 (uniqueness of $k_q$).** Let $k'_q$ be another morphism making $(\\tau_{\\leq q-1}K,\\tau_{\\leq q}K,H^q(K)[-q ],i_q,j_q,k'_q)$ distinguished. Apply [lem-weil-pbc-triangle-morphism-extension] (2) to the triangles $T=(\\ldots,k_q)$, $T'=(\\ldots,k'_q)$, $g=\\mathrm{id}_{\\tau_{\\leq q}K}$, $f=\\mathrm{id}$, $h=\\mathrm{id}$: the squares $i_q\\circ\\mathrm{id}=\\mathrm{id}\\circ i_q$ and $\\mathrm{id}\\circ j_q=j_q\\circ\\mathrm{id}$ commute and $\\Hom((\\tau_{\\leq q-1}K)[1 ],H^q(K)[-q ])=0$ by Step 4, so $(\\mathrm{id},\\mathrm{id},\\mathrm{id})$ is a morphism of triangles, i.e. $k'_q=k_q$ (this is BBD 1.1.10 (ii), part (3) of the lemma). So the 'unique' of the statement holds: although in general the third arrow completing two given arrows to a distinguished triangle is not unique, here $\\Hom(X[1 ],Z)=0$ for the first and third terms.",
+    "uses": [
+     "lem-weil-pbc-triangle-morphism-extension"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 6.** **Step 6 (functoriality).** Let $f:K\\to L$ be a morphism of $D(\\mathcal A)$ between complexes. By [lem-weil-pbc-truncation-descends] there are morphisms $a=\\tau_{\\leq q-1}f$, $b=\\tau_{\\leq q}f$, $c=H^q(f)[-q ]$ in $D(\\mathcal A)$ with $b\\circ i_q=i_q\\circ a$ and $c\\circ j_q=j_q\\circ b$ (naturality of $i_q$, $j_q$ on $D(\\mathcal A)$). Apply [lem-weil-pbc-triangle-morphism-extension] (2) to the distinguished triangles $T_q(K)$, $T_q(L)$ (Step 3) and $g=b$: since $\\Hom((\\tau_{\\leq q-1}K)[1 ],H^q(L)[-q ])=0$ (Step 4), $(a,b,c)$ is a morphism of triangles, i.e. also $k_q(L)\\circ c=a[1 ]\\circ k_q(K)$. (For $f=Q(\\phi)$ a morphism of complexes this is also the image of the morphism of short exact sequences of [lem-weil-pbc-truncation-step-ses] (c) under the naturality of [lem-weil-pbc-complex-ses-triangle].)",
+    "uses": [
+     "lem-weil-pbc-truncation-descends",
+     "lem-weil-pbc-triangle-morphism-extension",
+     "lem-weil-pbc-truncation-step-ses",
+     "lem-weil-pbc-complex-ses-triangle"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 7.** **Step 7 (bounded below).** If $K$ is a bounded below complex, so are its subcomplexes $\\tau_{\\leq q}K$, $\\tau_{\\leq q-1}K$, and $H^q(K)[-q ]$ has one nonzero term. If only $H^n(K)=0$ for $n<n_0$: $H^n(\\tau_{\\leq q}K)=H^n(K)$ for $n\\leq q$ and $=0$ for $n>q$ (the cohomology of the canonical truncation, read off degreewise: in degree $q$, $\\Ker d^q/\\Im d^{q-1}$), likewise for $q-1$, and $H^n(H^q(K)[-q ])$ is $H^q(K)$ for $n=q$ and $0$ otherwise; so all three have $H^n=0$ for $n<\\min(n_0,q)$ and lie in $D^+$; for $\\mathcal A=\\Ab(T_{\\Et})$ this is $\\Dplus(T_{\\Et})$ [def-weil-pbc-derived-categories].",
+    "uses": [
+     "def-weil-pbc-derived-categories"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

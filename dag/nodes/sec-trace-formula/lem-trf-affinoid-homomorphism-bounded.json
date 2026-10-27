@@ -1,0 +1,422 @@
+{
+ "id": "lem-trf-affinoid-homomorphism-bounded",
+ "kind": "statement",
+ "title": "Automatic boundedness of homomorphisms of strict affinoid algebras",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $A,B\\ne0$ be commutative unital $K$-algebras, each with a Tate quotient Banach norm from an affinoid quotient presentation [def-trf-restricted-series-presentation]. Every unital $K$-algebra homomorphism $f:A\\to B$ is bounded: there is a real $D>0$ such that $\\|f(a)\\|_B\\le D\\|a\\|_A$ for every $a\\in A$. In particular $f$ is continuous. No finite-module, injectivity, reducedness, or separability assumption on $f$ is required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Theorem 1.2.6(2), printed p.6 (PDF p.6); also Kedlaya tate-algebras.pdf, Corollary 11 and Proposition 10, PDF p.7. Strict affinoid algebras only. Read online 2026-10-24; archival copies WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given presentations $T_r\\twoheadrightarrow A$ and $T_s\\twoheadrightarrow B$. Apply [lem-trf-affinoid-polynomial-closed-point-comparison] with polynomial ideal $J=0$ to see that each Tate algebra is Noetherian. Apply [lem-weil-pbc-surjective-image-noetherian] to the two presentations; hence $A$ and $B$ are Noetherian. Their norms and completeness are already assumptions; no continuity of $f$ has been used.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Every ideal $I$ of either algebra $C=A,B$ is closed. Indeed Noetherianity means that $I=(c_1,\\ldots,c_t)$ by [def-weil-pbc-noetherian-ring]. The map $C^t\\to C$, $(a_i)\\mapsto\\sum_i a_ic_i$, is $C$-linear with image $I$. Both modules are finite and complete with their maximum norms, and their $C$-actions satisfy the required bound with constant $1$ by submultiplicativity. Thus [lem-trf-affinoid-finite-module-strictness] says its image is closed. Coordinatewise Cauchy limits give completeness of $C^t$; $t=0$ handles $I=0$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-trf-affinoid-finite-module-strictness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "For a maximal ideal $\\mathfrak m\\subset B$, [lem-trf-affinoid-supremum-seminorm-calculus], applied to the nonzero algebra $B$ with its given surjective $K$-algebra presentation $T_s\\twoheadrightarrow B$, says that the field $B/\\mathfrak m$ is finite over $K$. Apply [lem-trf-noetherian-residue-finite-quotients] to the Noetherian algebra $B$ (step 1). The ideals $I=\\mathfrak m^n$, for all maximal $\\mathfrak m$ and $n\\ge1$, have finite-dimensional quotients $B/I$ and their intersection is zero. Write $\\mathcal S$ for this family.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-noetherian-residue-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix $I\\in\\mathcal S$ and put $J=f^{-1}(I)$. This is an ideal of $A$, closed by step 2, as is $I$ in $B$. The formula $\\bar f_I:A/J\\to B/I$, $a+J\\mapsto f(a)+I$, is well-defined, $K$-linear and injective: its kernel consists precisely of the cosets of elements of $J$. Since $B/I$ is finite-dimensional, so is $A/J$: the images of any linearly independent list remain independent, so a list cannot have length exceeding a finite basis of $B/I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Equip $A/J$ and $B/I$ with their vector-space quotient topologies. By [lem-trf-closed-subspace-hausdorff-quotient] these are Hausdorff topological $K$-vector spaces. The field $K$ is complete and nontrivially valued, so [lem-sfb-finite-dimensional-linear-map-continuous] applies to $\\bar f_I$ and proves it continuous. The quotient maps are continuous by [lem-sfb-finite-dimensional-quotient-open]. Consequently $h_I:A\\to B/I$, $a\\mapsto f(a)+I$, is continuous, since $h_I=\\bar f_I\\circ q_J$. This does not assume that $f$ is continuous.",
+   "uses": [
+    "lem-trf-closed-subspace-hausdorff-quotient",
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "lem-sfb-finite-dimensional-quotient-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $a_j\\to a$ in $A$ and $f(a_j)\\to b$ in $B$. For each $I\\in\\mathcal S$, continuity proved in step 5 shows $h_I(a_j)\\to h_I(a)$ and $q_I(f(a_j))\\to q_I(b)$. These are the same sequence in the Hausdorff space $B/I$, so uniqueness of limits gives $f(a)+I=b+I$. Hence $b-f(a)\\in I$ for every $I\\in\\mathcal S$, and step 3 gives $b=f(a)$. The sequential criterion of [lem-trf-banach-closed-graph-continuity] now proves $f$ continuous: a unital $K$-algebra homomorphism is $K$-linear, and $A,B$ are complete normed $K$-spaces by assumption.",
+   "uses": [
+    "lem-trf-banach-closed-graph-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-continuous-linear-map-norm-bound] to this continuous $K$-linear map to obtain $D>0$ with $\\|f(a)\\|_B\\le D\\|a\\|_A$ for all $a$. Nontriviality of the absolute value is exactly the hypothesis of that norm-bound lemma. The argument used neither injectivity nor finiteness of $f$, and the separating family uses all maximal-ideal powers, so it did not assume reducedness or separability.",
+   "uses": [
+    "lem-trf-continuous-linear-map-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+    "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-affinoid-finite-module-strictness",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-noetherian-residue-finite-quotients",
+  "lem-trf-closed-subspace-hausdorff-quotient",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-sfb-finite-dimensional-quotient-open",
+  "lem-trf-banach-closed-graph-continuity",
+  "lem-trf-continuous-linear-map-norm-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kskedlaya.org/18.727/tate-algebras.pdf",
+  "place": "Proposition 10 and Corollary 11, PDF p.7; agent reconstruction, using powers of maximal ideals for the separating family and citing every analytic input. Archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every K algebra homomorphism between strict affinoid Banach K algebras is continuous and bounded",
+   "results": {
+    "t": "2026-10-24T09:36:01Z",
+    "tool": "leanfinder",
+    "query": "Every K algebra homomorphism between strict affinoid Banach K algebras is continuous and bounded",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgHom.instContinuousLinearMapClassOfAlgHomClass",
+     "ContinuousAlgHom.instContinuousMapClass",
+     "ContinuousAlgHom.continuous",
+     "AlgHom.toContinuousLinearMap",
+     "ContinuousAlgHom.cont",
+     "ContinuousAlgHom.uniformContinuous",
+     "AlgHom.norm_apply_le_self",
+     "ContinuousAlgHom"
+    ],
+    "digest": "0c8c801e2764ea94"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AlgHom.toContinuousLinearMap and norm_apply_le_self have scalar-field target, while ContinuousAlgHom assumes continuity; neither proves automatic boundedness for an arbitrary strict affinoid target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebra homomorphism between affinoid algebras is bounded for their quotient Banach norms",
+   "results": {
+    "t": "2026-10-24T09:39:36Z",
+    "tool": "leansearch",
+    "query": "Every algebra homomorphism between affinoid algebras is bounded for their quotient Banach norms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.IsBoundedWrt",
+     "AlgHom.norm_apply_le_self_mul_norm_one",
+     "RingHom.IsBounded",
+     "AlgHom.norm_apply_le_self",
+     "NonUnitalStarAlgHom.norm_apply_le",
+     "NonUnitalStarAlgHom.nnnorm_apply_le",
+     "BoundedContinuousFunction.AlgHom.compLeftContinuousBounded_apply_apply",
+     "contraction_of_isPowMul_of_boundedWrt"
+    ],
+    "digest": "f78d4766b6750b85"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AlgHom.toContinuousLinearMap and norm_apply_le_self have scalar-field target, while ContinuousAlgHom assumes continuity; neither proves automatic boundedness for an arbitrary strict affinoid target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgHom\", \"Continuous\"",
+   "results": {
+    "t": "2026-10-24T09:39:37Z",
+    "tool": "loogle",
+    "query": "\"AlgHom\", \"Continuous\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ContinuousAlgHom",
+     "ContinuousAlgHom.id",
+     "ContinuousAlgHom.instMonoid",
+     "ContinuousAlgHom.instMul",
+     "ContinuousAlgHom.instOne",
+     "ContinuousAlgHom.Simps.apply",
+     "ContinuousAlgHom.instFunLike",
+     "ContinuousAlgHom.toAlgHom"
+    ],
+    "digest": "89d41152c36eb8ff"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AlgHom.toContinuousLinearMap and norm_apply_le_self have scalar-field target, while ContinuousAlgHom assumes continuity; neither proves automatic boundedness for an arbitrary strict affinoid target."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|continuous.*AlgHom",
+   "results": {
+    "t": "2026-10-24T09:40:18Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|continuous.*AlgHom",
+    "sub": "Analysis/Normed/Algebra",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AlgHom.toContinuousLinearMap and norm_apply_le_self have scalar-field target, while ContinuousAlgHom assumes continuity; neither proves automatic boundedness for an arbitrary strict affinoid target."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|affinoid",
+   "results": {
+    "t": "2026-10-24T09:36:00Z",
+    "tool": "grep",
+    "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|affinoid",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean"
+    ],
+    "digest": "d9971d9d4126cfac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: AlgHom.toContinuousLinearMap and norm_apply_le_self have scalar-field target, while ContinuousAlgHom assumes continuity; neither proves automatic boundedness for an arbitrary strict affinoid target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian Banach algebra ideals finite dimensional quotients trivial intersection closed graph algebra homomorphism continuous",
+   "results": {
+    "t": "2026-10-24T13:52:21Z",
+    "tool": "leanfinder",
+    "query": "Noetherian Banach algebra ideals finite dimensional quotients trivial intersection closed graph algebra homomorphism continuous",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "QuotientMapQuotient.isNoetherian",
+     "instFiniteQuotientIdealOfIsMaximal",
+     "IsNoetherianRing.orzechProperty",
+     "IsHausdorff.of_le_jacobson",
+     "IsLocalRing.isOpen_iff_finite_quotient",
+     "Submodule.ClosedComplemented.of_quotient_finiteDimensional",
+     "IsNoetherianRing.isClosed_ideal",
+     "IsHausdorff.of_isDomain"
+    ],
+    "digest": "3754c9454694f081"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousAlgHom assumes continuity; scalar-valued automatic continuity has a field target, while the item has an arbitrary possibly nonreduced strict affinoid target. The closed graph theorem is a tool and not the affinoid theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "automatic continuity algebra homomorphisms affinoid algebras closed graph theorem",
+   "results": {
+    "t": "2026-10-24T13:52:25Z",
+    "tool": "leansearch",
+    "query": "automatic continuity algebra homomorphisms affinoid algebras closed graph theorem",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousAlgHom.cont",
+     "ContinuousAlgHom.continuous",
+     "AlgHom.instContinuousLinearMapClassOfAlgHomClass",
+     "ContinuousAlgHom.mk",
+     "ContinuousAlgHom",
+     "ContinuousAlgHom.Simps.apply",
+     "ContinuousAlgHom.instAlgHomClass",
+     "ContinuousAlgHom.copy"
+    ],
+    "digest": "441d03ac23928d8f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousAlgHom assumes continuity; scalar-valued automatic continuity has a field target, while the item has an arbitrary possibly nonreduced strict affinoid target. The closed graph theorem is a tool and not the affinoid theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsBounded, AlgHom.norm_apply_le_self_mul_norm_one, ContinuousAlgHom",
+   "results": {
+    "t": "2026-10-24T13:52:26Z",
+    "tool": "loogle",
+    "query": "RingHom.IsBounded, AlgHom.norm_apply_le_self_mul_norm_one, ContinuousAlgHom",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousAlgHom assumes continuity; scalar-valued automatic continuity has a field target, while the item has an arbitrary possibly nonreduced strict affinoid target. The closed graph theorem is a tool and not the affinoid theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any unital homomorphism between quotients of Tate algebras over a complete nonarchimedean field is bounded",
+   "results": {
+    "t": "2026-10-24T13:58:48Z",
+    "tool": "leanfinder",
+    "query": "Any unital homomorphism between quotients of Tate algebras over a complete nonarchimedean field is bounded",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PreTilt.untilt",
+     "RingHom.IsBounded",
+     "contraction_of_isPowMul",
+     "RingHom.IsBoundedWrt",
+     "contraction_of_isPowMul_of_boundedWrt",
+     "IsAdicComplete.mk_liftAlgHom",
+     "AdicCompletion.evalOneₐ_liftAlgHom",
+     "IsAdicComplete.liftRingHom"
+    ],
+    "digest": "e2d84d3cd044122c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousAlgHom assumes continuity; scalar-valued automatic continuity has a field target, while the item has an arbitrary possibly nonreduced strict affinoid target. The closed graph theorem is a tool and not the affinoid theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|IsRestricted.*continuous|automatic.*continuity",
+   "results": {
+    "t": "2026-10-24T13:58:48Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|IsRestricted.*continuous|automatic.*continuity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ContinuousAlgHom assumes continuity; scalar-valued automatic continuity has a field target, while the item has an arbitrary possibly nonreduced strict affinoid target. The closed graph theorem is a tool and not the affinoid theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-finite-galois-envelope",
+  "date": "2026-10-24",
+  "group": "Q64"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: Finite Galois envelopes after Tate normalization. Supporting input for the two structural norm bounds; independent of spectral norm completeness.",
+   "via": [
+    "lem-trf-affinoid-finite-galois-envelope",
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-homomorphism-bounded",
+  "worker": "stage1",
+  "summary": "Seven-step closed-graph proof following Kedlaya Proposition 10 and Corollary 11. Reuses existing Tate Noetherianity, finite-module strictness, finite residues, quotient-projection continuity and finite-dimensional linear continuity. New general algebra separation lemma is statement-only; two analytic/topological tools are Mathlib leaves. Item statement unchanged; no Lean or compilation. Maintainer reader FIX: step 3 cites the in-unit lem-trf-affinoid-supremum-seminorm-calculus (finite residue fields of nonzero affinoid algebras) instead of the off-unit lem-per-tate-maximal-residue-evaluation; the tool use is withdrawn.",
+  "blueprint": "Read latest/main-20261024 lem-trf-local-term-locality and sk-i-curve-zero: they now give the contracting-correspondence route. This inherited analytic input remains below the historical normalization chain recorded in blueprint.from; the split only supplies its automatic-boundedness prerequisite and changes no unit route. No blueprint statement about affinoids or either new generic analytic tool was found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-449ded180",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-449ded180 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes, all cited statements, Kedlaya tate-algebras pp.6-7 (Lemma 9, Prop 10 with proof, Cor 11) and Conrad aws Thm 1.2.6(2); both PDFs were downloaded and read. Mathlib checked: Topology/Algebra/Module/Basic.lean l.330/333/339-342 and Analysis/Normed/Operator/Banach.lean l.28, 532-533, 537, 551. The item statement matches Conrad 1.2.6(2) and is unchanged. Steps 1-7 are correct and follow Kedlaya Prop 10, with all hypotheses checked: ideals closed via finite-module strictness, constant 1, A≠0; Hausdorff quotients; finite-dim continuity; sequential closed graph; norm bound. Using powers of maximal ideals as the separating family is needed for nonreduced B (tested on K[ε]/ε²). New node lem-trf-noetherian-residue-finite-quotients is true (filtration m^i/m^{i+1}; Krull 00IP plus localization 00HN) and tested on R=0, a finite field ext, K[x] and dual numbers; it is unsplit, generic and not a duplicate (DAG regex scans; Mathlib has only local/Jacobson versions). The two Mathlib leaves are verified exactly (closed graph over a NontriviallyNormedField with complete E,F; quotient TVS instances). No cycles. FIX (C7): step 3 used the off-unit lem-per-tate-maximal-residue-evaluation via a declared tool_use, but the in-unit reviewed node lem-trf-affinoid-supremum-seminorm-calculus states exactly that A/m is finite over K for nonzero affinoid A. I repointed step 3 to it, updated proof_deps, set split_report.tool_uses to [] (no tool_uses accepted), and checked that it does not reach the item. Corrected item in fixes/dag/nodes/sec-trace-formula/lem-trf-affinoid-homomorphism-bounded.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidHomomorphismBounded",
+  "declaration": "RestrictedSeries.affinoid_homomorphism_bounded",
+  "file": "lean/Sheaf/RingTheory/AffinoidHomomorphismBounded.lean",
+  "statement": "theorem affinoid_homomorphism_bounded (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (A : Type v) [NormedCommRing A] [Nontrivial A] [Algebra K A] (B : Type w) [NormedCommRing B] [Nontrivial B] [Algebra K B] (hA : IsAffinoidQuotient K A (algebraMap K A)) (hB : IsAffinoidQuotient K B (algebraMap K B)) (f : A →ₐ[K] B) : (∃ D : ℝ, 0 < D ∧ ∀ a : A, ‖f a‖ ≤ D * ‖a‖) ∧ Continuous f",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32abebd35",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Read item node, def-weil-field, def-trf-restricted-series-presentation and IsAffinoidQuotient (side-live RestrictedSeriesPresentation.lean l.53-61; Mathlib gaussNorm). Hypotheses match exactly: NontriviallyNormedField+IsUltrametricDist+CompleteSpace K; NormedCommRing+Nontrivial+Algebra K for A,B with no NormedAlgebra; IsAffinoidQuotient with scalar algebraMap supplies completeness, surjective scalar-compatible presentation and quotient Gauss norm; arbitrary f : A →ₐ[K] B. Conclusion has both clauses (∃ D>0 bound ∧ Continuous f). Independent universes u v w. Edge cases n=0, noninjective evaluation, nonreduced K<T>/(T^2), any characteristic; zero algebras excluded as in node. Node diff = lean record only; lean.statement verbatim. Single sorry theorem, docstrings with Conrad/Kedlaya places, blueprint tag and 7 proof steps; imports = stmt deps + existing proof-dep module + Mathlib leaf files. No duplicate in Mathlib/project. Report has Worker report and Second reading by Q81 (self-check). No file changed, so no compile."
+ }
+}

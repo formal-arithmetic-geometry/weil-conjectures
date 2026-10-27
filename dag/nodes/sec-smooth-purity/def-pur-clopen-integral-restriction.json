@@ -1,0 +1,139 @@
+{
+ "id": "def-pur-clopen-integral-restriction",
+ "kind": "definition",
+ "title": "Canonical completed coefficient and ordinary integral restriction",
+ "statement": "For an open immersion $j:Y\\to X$ of schemes [def-weil-open-immersion], use the small pro-etale sites [def-weil-pbc-proetale-site]. Restrict ring sheaves by precomposition with the site inclusion and module sheaves by the corresponding sectionwise restriction. For a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and its positive quotient rings, define the constant coefficient comparison by the sheafification adjunction. The completed coefficient comparison is the unique map from the completed coefficient sheaf on $Y$ to the restricted completed coefficient sheaf on $X$ [def-weil-completed-integral-coefficients] commuting with every finite quotient projection; it is an isomorphism. Define ordinary integral module restriction [def-weil-sheaf-of-modules-category] as sectionwise restriction followed by scalar restriction along this isomorphism. It is additive and exact. Apply it degreewise, to strict towers, and to unbounded derived categories [def-weil-abstract-derived-category]. Define the actual strict and derived reduction-tower functors using [def-weil-integral-reduction-tower, def-weil-integral-derived-reduction]. These are the unchanged canonical restriction definitions formerly recorded with the integral descent statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08TC, derived-definition-derived-limit, and derived-lemma-products immediately following it. Agent finite-clopen strict-cone and integral completeness application, old item steps 7 and 9; strict models of def-pur-integral-derived-operations and def-weil-integral-scalar-extension."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-derived-reduction",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along the open-site composition is continuous and cocontinuous. The sheafification comparison therefore identifies the constant ring sheaves, naturally in the finite quotient ring. Restriction preserves inverse limits. Apply its limit comparison and the levelwise constant isomorphisms to obtain an isomorphism between restricted and component coefficient limits. Lift its inverse through the fully faithful forgetful functor from commutative ring sheaves to ring sheaves. Every projection equation follows from the limit comparison equation. Joint monicity of the restricted limit projections proves uniqueness. This includes the empty scheme.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar restriction along a ring-sheaf isomorphism has inverse restriction along its inverse. Both round-trip maps are the identity on additive sections, hence give an additive equivalence. Open module restriction is additive and preserves finite limits and colimits. Their composite is therefore additive and exact. The remaining functors apply this exact restriction degreewise or descend it through quasi-isomorphisms.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "C3: extraction of the existing restriction interface, proof by constant-sheaf comparison, preservation of limits, and scalar equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along an open immersion preserves finite limits and colimits and is additive",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrict_map\"]}",
+   "date": "2026-10-25",
+   "verdict": "Scheme.Modules.restrict treats the structure sheaf; use the existing pro-etale module restriction for the completed coefficient ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.restrictScalars\"",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars_obj\", \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"PresheafOfModules.restrictScalarsObj_obj\", \"PresheafOfModules.restrictScalars_map_app\", \"PresheafOfModules.restrictScalarsObj_map\", \"SheafOfModules.restrictScalars\"]}",
+   "date": "2026-10-25",
+   "verdict": "Use the library site restriction and construct the scalar isomorphism equivalence from sectionwise round trips; no exact sheaf scalar equivalence found."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Ee]quivalence",
+   "results": "{\"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"]}",
+   "date": "2026-10-25",
+   "verdict": "Use the library site restriction and construct the scalar isomorphism equivalence from sectionwise round trips; no exact sheaf scalar equivalence found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClopenRoosIntegralDescent",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, canonical completed coefficient restriction used in strict towers and integral descent",
+   "via": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-pur-clopen-roos-integral-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenIntegralRestriction",
+  "file": "lean/Sheaf/Paper/ClopenIntegralRestriction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.clopenIntegralModuleRestriction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralSiteSmall",
+   "WeilConjectures.PurityFiniteSetting.clopenConstantMap",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletionMap_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletionMap",
+   "WeilConjectures.PurityFiniteSetting.clopenCompletionMapIsIso",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralModuleRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestriction_exact",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestrictionAdditive",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestrictionLimits",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralRestrictionColimits",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralDerivedRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralDerivedRestrictionShift",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralComplexRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralStrictRestriction",
+   "WeilConjectures.PurityFiniteSetting.clopenIntegralComplexTowers",
+   "WeilConjectures.PurityFiniteSetting.clopenStrictReductionFunctor",
+   "WeilConjectures.PurityFiniteSetting.clopenDerivedReductionFunctor"
+  ],
+  "statement": "def clopenIntegralModuleRestriction {Y X : Scheme.{u}} (j : Y ⟶ X) [IsOpenImmersion j] :\n    scalarReductionSource l E X ⥤ scalarReductionSource l E Y",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7931",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T201537-L-2571216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7931",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T201537-L-2571216",
+  "kind": "interface",
+  "note": "independent cc review: public decl types/values of new ClopenIntegralRestriction + Augmented + item (sandbox) vs published ClopenRoosIntegralDescent/AugmentedIntegralDescent by Expr hash and normalized dumps; node/report vs Lean; axioms of 7 proved decls"
+ }
+}

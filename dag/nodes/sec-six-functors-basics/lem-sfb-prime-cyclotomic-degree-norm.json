@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-prime-cyclotomic-degree-norm",
+ "kind": "statement",
+ "title": "Degree and shifted-root norm of a prime cyclotomic field",
+ "statement": "Let $K$ be a field of characteristic zero and let $p$ be a prime integer. Let $\\eta\\in K$ have multiplicative order exactly $p$, meaning $\\eta^p=1$ and $\\eta^j\\ne1$ for $1\\leq j<p$. Let $E=\\mathbf Q(\\eta)\\subseteq K$ be the smallest subfield containing the rational numbers and $\\eta$ [def-pc-field-extension]. Then $E/\\mathbf Q$ is finite of degree $[E:\\mathbf Q]=p-1$ [def-weil-vector-space-dimension], and its field norm satisfies $$N_{E/\\mathbf Q}(\\eta-1)=(-1)^{p-1}p.$$ Here $N_{E/\\mathbf Q}(x)$ is the determinant of multiplication by $x$ on the rational vector space $E$ [def-weil-endomorphism-determinant].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: minimal polynomial of the shifted primitive prime root and its norm."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Put $x=\\eta-1\\in E$. Apply [lem-sfb-prime-root-shift-minpoly] in the characteristic-zero field $E$, where $\\eta$ still has exact order $p$, to obtain its minimal polynomial $P(T)=\\sum_{j=0}^{p-1}(T+1)^j$. In particular $P(x)=0$.",
+   "uses": [
+    "lem-sfb-prime-root-shift-minpoly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof and its displayed minimum polynomial."
+   }
+  },
+  {
+   "text": "Since $p\\geq2$, the last summand $(T+1)^{p-1}$ is monic of degree $p-1$, and every earlier summand has smaller degree. Thus $P$ is monic, nonzero, and has degree $p-1$. Substitution of $T=0$ gives $P(0)=\\sum_{j=0}^{p-1}1=p$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof and its displayed minimum polynomial."
+   }
+  },
+  {
+   "text": "We have $\\mathbf Q(x)=E$: one inclusion follows from $x=\\eta-1\\in E$ and the other from $\\eta=x+1\\in\\mathbf Q(x)$. The polynomial $P$ proves that $x$ is algebraic. Apply [lem-weil-pbc-minimal-polynomial-quotient-field-iso] to identify $E=\\mathbf Q(x)$ with $\\mathbf Q[T]/(P)$. By [lem-weil-pbc-monic-quotient-free] the latter has basis $1,T,\\ldots,T^{p-2}$. Its image is a basis of $E$, so $E/\\mathbf Q$ is finite and has degree $p-1$.",
+   "uses": [
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof and its displayed minimum polynomial."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-field-norm-minpoly] to $\\mathbf Q\\subseteq E$ and $x$. Here $m=\\deg P=p-1$ and $\\mathbf Q(x)=E$, so $e=\\dim_E E=1$, using the basis consisting of $1$. Consequently $N_{E/\\mathbf Q}(\\eta-1)=((-1)^{p-1}P(0))^1=(-1)^{p-1}p$. This determinant norm is exactly the norm specified in the statement, including when $p=2$.",
+   "uses": [
+    "lem-sfb-finite-field-norm-minpoly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof and its displayed minimum polynomial."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-prime-root-shift-minpoly",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sfb-finite-field-norm-minpoly"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof and its displayed minimum polynomial."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The field norm of one minus a primitive p-th root of unity is p when p is prime",
+   "results": "{\"t\": \"2026-10-23T09:22:53Z\", \"tool\": \"leanfinder\", \"query\": \"The field norm of one minus a primitive p-th root of unity is p when p is prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.norm_toInteger_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.norm_toInteger_sub_one_of_prime_ne_two\", \"IsCyclotomicExtension.norm_zeta_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.norm_toInteger_sub_one_eq_one\", \"IsCyclotomicExtension.norm_zeta_pow_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.norm_toInteger_pow_sub_one_of_prime_ne_two\"], \"digest\": \"a760c2b7c3b776ef\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPrimitiveRoot, Algebra.norm",
+   "results": "{\"t\": \"2026-10-23T09:22:54Z\", \"tool\": \"loogle\", \"query\": \"IsPrimitiveRoot, Algebra.norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.norm_eq_one_of_linearly_ordered\", \"IsPrimitiveRoot.norm_eq_one\", \"IsPrimitiveRoot.norm_eq_neg_one_pow\", \"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.sub_one_norm_isPrimePow\", \"IsPrimitiveRoot.norm_of_cyclotomic_irreducible\", \"IsPrimitiveRoot.sub_one_norm_eq_eval_cyclotomic\", \"IsPrimitiveRoot.norm_sub_one_two\"], \"digest\": \"a2f19e3ee0df20c2\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_sub_one_of_prime_ne_two|finrank.*totient|finrank.*[Cc]yclotomic|isCyclotomicExtension.*adjoin",
+   "results": "{\"t\": \"2026-10-23T09:25:16Z\", \"tool\": \"grep\", \"query\": \"norm_sub_one_of_prime_ne_two|finrank.*totient|finrank.*[Cc]yclotomic|isCyclotomicExtension.*adjoin\", \"sub\": \"NumberTheory/Cyclotomic\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\"], \"digest\": \"617bce206e2e9122\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimal polynomial over the rationals of a primitive p-th root of unity minus one is the p-th cyclotomic polynomial evaluated at X plus one",
+   "results": "{\"t\": \"2026-10-23T09:26:58Z\", \"tool\": \"leanfinder\", \"query\": \"The minimal polynomial over the rationals of a primitive p-th root of unity minus one is the p-th cyclotomic polynomial evaluated at X plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.minpoly_sub_one_eq_cyclotomic_comp\", \"Polynomial.cyclotomic_eq_minpoly\", \"Polynomial.cyclotomic_eq_minpoly_rat\", \"Polynomial.cyclotomic_prime_mul_X_sub_one\", \"IsPrimitiveRoot.minpoly_dvd_cyclotomic\", \"Polynomial.eval_one_cyclotomic_prime\", \"Polynomial.cyclotomic\", \"Polynomial.cyclotomic_prime\"], \"digest\": \"192e298fc1cd7194\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.*(sub|add|comp)|cyclotomic.*prime|finrank",
+   "results": "{\"t\": \"2026-10-23T09:26:59Z\", \"tool\": \"grep\", \"query\": \"minpoly.*(sub|add|comp)|cyclotomic.*prime|finrank\", \"sub\": \"NumberTheory/Cyclotomic\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\"], \"digest\": \"27aea0a12dc1bf94\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomic_eq_minpoly_rat|cyclotomic_prime|irreducible_rat|isCyclotomicExtension.*|minpoly_sub_one",
+   "results": "{\"t\": \"2026-10-23T09:30:54Z\", \"tool\": \"grep\", \"query\": \"cyclotomic_eq_minpoly_rat|cyclotomic_prime|irreducible_rat|isCyclotomicExtension.*|minpoly_sub_one\", \"sub\": \"RingTheory/Polynomial/Cyclotomic\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Eval.lean\"], \"digest\": \"1fca7527e587f7e3\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational field generated by a primitive prime p root of unity has degree p minus one and norm of zeta minus one equal to signed p",
+   "results": "{\"t\": \"2026-10-23T09:30:54Z\", \"tool\": \"leansearch\", \"query\": \"A rational field generated by a primitive prime p root of unity has degree p minus one and norm of zeta minus one equal to signed p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two'\", \"IsCyclotomicExtension.norm_zeta_sub_one_of_prime_ne_two\", \"IsCyclotomicExtension.Rat.associated_norm_zeta_sub_one\", \"IsPrimitiveRoot.norm_of_cyclotomic_irreducible\", \"IsPrimitiveRoot.norm_toInteger_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two\", \"IsCyclotomicExtension.norm_zeta_pow_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.norm_toInteger_sub_one_of_prime_ne_two\"], \"digest\": \"8fa29f04efa10660\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field generated over Q by a primitive p-th root of unity is a cyclotomic extension of degree p-1",
+   "results": "{\"t\": \"2026-10-23T09:31:01Z\", \"tool\": \"leanfinder\", \"query\": \"A field generated over Q by a primitive p-th root of unity is a cyclotomic extension of degree p-1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CyclotomicField.isCyclotomicExtension\", \"CyclotomicField.instIsCyclotomicExtensionSingletonNatSetOfCharZero\", \"IsPrimitiveRoot.adjoin_isCyclotomicExtension\", \"IsPrimitiveRoot.intermediateField_adjoin_isCyclotomicExtension\", \"CyclotomicField.instIsCyclotomicExtensionSingletonNatSetOfNat\", \"IsCyclotomicExtension.Rat.finrank\", \"CyclotomicField\", \"IsPrimitiveRoot.integralPowerBasis_dim\"], \"digest\": \"d276c03346dab80e\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPrimitiveRoot, IsCyclotomicExtension",
+   "results": "{\"t\": \"2026-10-23T09:31:02Z\", \"tool\": \"loogle\", \"query\": \"IsPrimitiveRoot, IsCyclotomicExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsCyclotomicExtension.exists_isPrimitiveRoot\", \"IsCyclotomicExtension.union_of_isPrimitiveRoot\", \"IsCyclotomicExtension.iff_singleton\", \"IsPrimitiveRoot.adjoin_isCyclotomicExtension\", \"isCyclotomicExtension_singleton_iff_eq_adjoin\", \"IsCyclotomicExtension.mk\", \"isCyclotomicExtension_iff\", \"IsCyclotomicExtension.algEquiv_eq_of_apply_eq\"], \"digest\": \"6aa37dfef3379bb1\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "grep",
+   "query": "isCyclotomicExtension|finiteDimensional|finrank|minpoly_sub_one",
+   "results": "{\"t\": \"2026-10-23T09:31:02Z\", \"tool\": \"grep\", \"query\": \"isCyclotomicExtension|finiteDimensional|finrank|minpoly_sub_one\", \"sub\": \"NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"27\", \"30\", \"36\", \"37\"], \"digest\": \"3638a1fe1b3b2324\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The norm over Q of a primitive root of prime order minus one is p, with negative sign at p=2",
+   "results": "{\"t\": \"2026-10-23T09:33:27Z\", \"tool\": \"leansearch\", \"query\": \"The norm over Q of a primitive root of prime order minus one is p, with negative sign at p=2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.norm_toInteger_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.prime_norm_toInteger_sub_one_of_prime_ne_two'\", \"IsPrimitiveRoot.norm_sub_one_of_prime_ne_two\", \"IsCyclotomicExtension.norm_zeta_pow_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.prime_norm_toInteger_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.norm_toInteger_sub_one_of_prime_ne_two\", \"IsPrimitiveRoot.norm_pow_sub_one_of_prime_ne_two\"], \"digest\": \"ed1c16f3990fcbc1\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_sub_one_of_prime_ne_two|theorem finrank|minpoly_sub_one_eq_cyclotomic_comp",
+   "results": "{\"t\": \"2026-10-23T09:34:07Z\", \"tool\": \"grep\", \"query\": \"norm_sub_one_of_prime_ne_two|theorem finrank|minpoly_sub_one_eq_cyclotomic_comp\", \"sub\": \"NumberTheory/Cyclotomic\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\", \"Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean\"], \"digest\": \"1fd37ece5a78e511\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate, not a one-line specialization as packaged: cyclotomic finrank and odd-prime norm formulas exist, but this statement constructs the generated intermediate field inside an arbitrary characteristic-zero ambient field and includes p=2. Record remains unsplit; local source read at Cyclotomic/Basic.lean:469-495, PrimitiveRoots.lean:180 and 465-472, and Polynomial/Cyclotomic/Roots.lean:178-191."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimal polynomial over Q of a primitive prime p root of unity minus one is the sum of (X+1)^j for j from zero to p-1",
+   "results": "{\"t\": \"2026-10-23T11:55:34Z\", \"tool\": \"leanfinder\", \"query\": \"The minimal polynomial over Q of a primitive prime p root of unity minus one is the sum of (X+1)^j for j from zero to p-1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.minpoly_sub_one_eq_cyclotomic_comp\", \"Polynomial.cyclotomic_prime_mul_X_sub_one\", \"Polynomial.cyclotomic_prime\", \"Polynomial.cyclotomic_eq_minpoly_rat\", \"Polynomial.eval_one_cyclotomic_prime\", \"Polynomial.cyclotomic_eq_minpoly\", \"Polynomial.cyclotomic_prime_pow_eq_geom_sum\", \"Polynomial.cyclotomic'\"], \"digest\": \"e8e9f495a2e75a8b\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomic_eq_minpoly_rat|theorem cyclotomic_prime|add_algebraMap",
+   "results": "{\"t\": \"2026-10-23T11:59:04Z\", \"tool\": \"grep\", \"query\": \"cyclotomic_eq_minpoly_rat|theorem cyclotomic_prime|add_algebraMap\", \"sub\": \"RingTheory/Polynomial/Cyclotomic\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Expand.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Expand.lean\"], \"digest\": \"5ed4c417e760676f\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial over the rationals of a primitive prime root of unity shifted by minus one",
+   "results": "{\"t\": \"2026-10-23T11:59:04Z\", \"tool\": \"leansearch\", \"query\": \"Minimal polynomial over the rationals of a primitive prime root of unity shifted by minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.minpoly_sub_one_eq_cyclotomic_comp\", \"Polynomial.cyclotomic_eq_minpoly_rat\", \"Polynomial.cyclotomic'\", \"Polynomial.cyclotomic'_eq_X_pow_sub_one_div\", \"Polynomial.cyclotomic_eq_minpoly\", \"Polynomial.int_coeff_of_cyclotomic'\", \"IsPrimitiveRoot.minpoly_dvd_cyclotomic\", \"IsPrimitiveRoot.minpoly_eq_cyclotomic_of_irreducible\"], \"digest\": \"f94bcc458b4fb77f\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPrimitiveRoot, minpoly",
+   "results": "{\"t\": \"2026-10-23T11:59:05Z\", \"tool\": \"loogle\", \"query\": \"IsPrimitiveRoot, minpoly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.totient_le_degree_minpoly\", \"IsPrimitiveRoot.is_roots_of_minpoly\", \"IsPrimitiveRoot.minpoly_eq_pow_coprime\", \"IsPrimitiveRoot.pow_isRoot_minpoly\", \"IsPrimitiveRoot.minpoly_eq_pow\", \"IsPrimitiveRoot.separable_minpoly_mod\", \"IsPrimitiveRoot.squarefree_minpoly_mod\", \"IsPrimitiveRoot.minpoly_dvd_x_pow_sub_one\"], \"digest\": \"28c85664a0edec49\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (add_algebraMap|sub_algebraMap)",
+   "results": "{\"t\": \"2026-10-23T11:59:27Z\", \"tool\": \"grep\", \"query\": \"theorem (add_algebraMap|sub_algebraMap)\", \"sub\": \"FieldTheory/Minpoly/Field.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"174\", \"191\"], \"digest\": \"242d9cff98b654f6\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (cyclotomic_eq_minpoly_rat|cyclotomic_prime|sub_algebraMap)",
+   "results": "{\"t\": \"2026-10-23T12:02:32Z\", \"tool\": \"grep\", \"query\": \"theorem (cyclotomic_eq_minpoly_rat|cyclotomic_prime|sub_algebraMap)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Minpoly/Field.lean\", \"Mathlib/FieldTheory/Minpoly/IsConjRoot.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean\"], \"digest\": \"bfa3e38a76b0fc9d\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A primitive root of prime order has minimal polynomial the geometric sum after translating the root by minus one",
+   "results": "{\"t\": \"2026-10-23T12:02:35Z\", \"tool\": \"leanfinder\", \"query\": \"A primitive root of prime order has minimal polynomial the geometric sum after translating the root by minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.minpoly_sub_one_eq_cyclotomic_comp\", \"Polynomial.cyclotomic_eq_minpoly\", \"IsPrimitiveRoot.minpoly_eq_pow\", \"Polynomial.cyclotomic_eq_minpoly_rat\", \"Polynomial.cyclotomic_prime\", \"IsPrimitiveRoot.minpoly_eq_cyclotomic_of_irreducible\", \"IsPrimitiveRoot.minpoly_dvd_x_pow_sub_one\", \"Polynomial.cyclotomic_prime_mul_X_sub_one\"], \"digest\": \"3daa9942ca8006bd\"}",
+   "date": "2026-10-23",
+   "verdict": "match: shifted minimal polynomial by the one-line rewrite minpoly.sub_algebraMap, Polynomial.cyclotomic_eq_minpoly_rat, Polynomial.cyclotomic_prime; exact source lines in mathlib_match.how."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-integer-root-unity-congruence",
+  "date": "2026-10-23",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declaration": "IsCyclotomicExtension.finrank, IsPrimitiveRoot.norm_sub_one_of_prime_ne_two', IntermediateField.isCyclotomicExtension_singleton_iff_eq_adjoin",
+  "file": "Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+  "how": "Sources read: finrank at line 180, odd-prime norm at 465-472; the generated-field criterion is Mathlib/NumberTheory/Cyclotomic/Basic.lean:941-946. Setting up the generated field, its cyclotomic structure and treating p=2 require assembly, so not claimed as a direct leaf."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Lemma 14.5, printed p.63, and the eigenvalue argument of Proposition 14.4(b), printed p.62: general finite-free-ring formulation using its left regular representation; the finite-order conclusion uses characteristic-zero semisimplicity. Auxiliary linear/arithmetic input: Chapter I, Lemma 14.5, printed p.63 (PDF p.69); the root-of-unity statement over a characteristic-zero field. Supporting arithmetic input: Degree and shifted-root norm of a prime cyclotomic field.",
+   "via": [
+    "lem-sfb-algebraic-integer-root-unity-congruence",
+    "lem-sfb-finite-free-ring-congruence-torsion",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-prime-cyclotomic-degree-norm",
+  "worker": "stage1",
+  "summary": "Followed Milne I Lemma 14.5. Reduced both conclusions to the shifted minimal polynomial, polynomial degree/constant-coefficient calculation, existing quotient-field and monic-quotient bases, and the existing signed minimal-polynomial norm formula. One new Mathlib leaf gives the shifted minimal polynomial by direct rewriting. Statement and all inherited metadata preserved.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), arithmetic prerequisite in the level-rigidity chain. Read the latest blueprint direct-images proof (3) and its unit. blueprint_refs ancestor returns None, faithfully retained. The auxiliary argument is Milne Lemma 14.5, displayed minimum polynomial and norm computation."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-583444bfa",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-583444bfa (reviewer sub-agent of L); spot-checked: Shape: one commit, a first split of the unsplit item (no re-split note). Live still shows the item unsplit, so no parallel group superseded it. Item statement and metadata are byte-identical to live; no SGA cited. Source: Milne AV I Lemma 14.5, printed p.63 (PDF p.69), read; its displayed minimum polynomial (X+1)^{p-1}+...+1 and the norm (-1)^{p-1}p match the item and all four steps. New node lem-sfb-prime-root-shift-minpoly: self-contained (exact order and minimal polynomial defined inline), no proof, and true: Phi_p(T+1), checked at p=2 (T+2) and p=3 (T^2+3T+3). Mathlib match checked in source: minpoly.sub_algebraMap (Minpoly/Field.lean:191, no integrality hypothesis), cyclotomic_eq_minpoly_rat (Cyclotomic/Roots.lean:178: IsPrimitiveRoot, 0<n, CharZero) and cyclotomic_prime (Cyclotomic/Basic.lean:367) give a genuine short specialization. It is not a restated clause and not foldable, since its content is the irreducibility of Phi_p. rg -L duplicate search over cyclotomic, roots of unity and minimal polynomials found no duplicate (brauer-splitting, eisenstein, henselian roots of unity and generic norm/quotient leaves are all different). Steps: (1) the new node applied inside E gives P=minpoly(x), x=eta-1. (2) Elementary: P is monic of degree p-1 with P(0)=p. (3) Q(x)=E, and the hypotheses of minimal-polynomial-quotient-field-iso and monic-quotient-free are checked, so [E:Q]=p-1. (4) finite-field-norm-minpoly with m=p-1 and e=1; its determinant norm is exactly the item's norm. Edge cases: p=2 gives E=Q and N(-2)=-2; p=3 gives norm 3. proof_deps equal the union of step uses. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.PrimeCyclotomicDegreeNorm",
+  "declaration": "IsPrimitiveRoot.prime_adjoin_finrank_norm_sub_one",
+  "file": "lean/Sheaf/NumberTheory/PrimeCyclotomicDegreeNorm.lean",
+  "statement": "theorem prime_adjoin_finrank_norm_sub_one {K : Type u} [Field K] [CharZero K] {p : ℕ} (hp : p.Prime) {η : K} (hη : IsPrimitiveRoot η p) : FiniteDimensional ℚ (IntermediateField.adjoin ℚ {η}) ∧ Module.finrank ℚ (IntermediateField.adjoin ℚ {η}) = p - 1 ∧ Algebra.norm ℚ (IntermediateField.AdjoinSimple.gen ℚ η - 1) = (-1 : ℚ) ^ (p - 1) * (p : ℚ)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56eb69883",
+  "group": "NS",
+  "result": "pass",
+  "note": "New module Sheaf.NumberTheory.PrimeCyclotomicDegreeNorm with one sorried theorem IsPrimitiveRoot.prime_adjoin_finrank_norm_sub_one; the item node changes only by its lean record (diff vs side-live). Clauses match the node: CharZero field K in any universe, p.Prime, IsPrimitiveRoot η p (= exact order p), E = IntermediateField.adjoin ℚ {η} with the canonical rat algebra; conclusions FiniteDimensional, finrank = p-1, Algebra.norm (gen-1) = (-1)^(p-1)*p, where Algebra.norm = LinearMap.det of lmul by rfl (def-weil-endomorphism-determinant, status mathlib). Edge cases: p=2 gives E=Q and norm -2; odd p gives p; p=0,1 excluded. lean.statement verbatim; source and blueprint docstrings and the 4 proof steps present; imports exist; no name collision; Mathlib analogues are odd-prime or IsCyclotomicExtension only, so the new theorem is justified. No compile needed since nothing was changed. No findings."
+ }
+}

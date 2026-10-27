@@ -1,0 +1,399 @@
+{
+ "id": "lem-per-ordinary-alteration-cover-base-change",
+ "kind": "statement",
+ "title": "Geometrically reduced flat base change of ordinary alteration covers",
+ "statement": "Let $S,S'$ be reduced Noetherian schemes [def-pc-reduced-scheme, def-weil-pbc-noetherian-ring], and let $h:S'\\to S$ be flat [def-weil-flat-morphism] with geometrically reduced fibres: for every field $K$ and map $\\operatorname{Spec}K\\to S$, the scheme $S'\\times_S\\operatorname{Spec}K$ is reduced. Use the ordinary alteration category and topology of [def-per-ordinary-alteration-topology]. For every object $T\\to S$ of $\\operatorname{alt}/S$, the ordinary fibre product $T\\times_SS'$ [def-pc-fibre-product] is reduced and is an object of $\\operatorname{alt}/S'$. If $(T_i\\to S)_i$ is a finite ordinary alteration covering, then $(T_i\\times_SS'\\to S')_i$ is a finite ordinary alteration covering. No finite-type hypothesis on $h$ is required. In particular this applies when $h$ is regular [def-per-regular-scheme-morphism], meaning flat with geometrically regular fibres, and when $h$ is a flat finitely presented nodal curve morphism [def-trf-nodal-geometric-fibres]. On any reduced Noetherian scheme $R$, the finite family of its nonempty reduced irreducible components [def-weil-irreducible-components] is an ordinary alteration covering of $R$. The empty scheme has the empty such covering.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.2.3 (fourth bullet), 1.2.5--1.2.8, 2.3.1--2.3.4, printed pp.24--28, ordinary case (parameter 1), with geometrically reduced flat base change so that reduction of the products is unnecessary. Component covering: II 1.2.8 and the proper-surjective generator. The arbitrary Noetherian flat completion base change is used in VII 3.2, printed p.82."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-flat-morphism",
+  "def-per-ordinary-alteration-topology",
+  "def-pc-fibre-product",
+  "def-trf-nodal-geometric-fibres",
+  "def-per-regular-scheme-morphism",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Fix the prime $2$ only to invoke the existing generator-base-change theorem; the underlying category $\\operatorname{alt}/S$ is independent of that choice. The hypothesis on $h$ implies its finite-residue-extension reducedness hypothesis, by taking $K$ to be each such extension. That theorem therefore says that $F(T)=T\\times_S S'$ is an object of $\\operatorname{alt}/S'$ for every $T$, and defines a functor on all morphisms. By the object definition its source is reduced, is finite type over $S'$, and satisfies both required generic-point conditions. This proves the first assertion, including reducedness of the ordinary, unreduced fibre product. Neither the theorem nor this specialization assumes $h$ finite type.",
+   "uses": [
+    "lem-per-alteration-generators-reduced-base-change",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.2 and 1.2.3, fourth bullet; the stronger all-field reducedness assumption implies the finite-extension assumption of the cited node."
+   }
+  },
+  {
+   "text": "The same theorem states that $F$ preserves the terminal object and every categorical fibre-product cone. These are assertions about the underlying alteration categories, which are identical for the ordinary and prime-to-$2$ topologies. Thus they apply here without any assertion that the categorical product is the whole ordinary scheme product. For use below, the alteration calculus identifies that categorical product with the reduced union of the dominating components of the ordinary product.",
+   "uses": [
+    "lem-per-alteration-generators-reduced-base-change",
+    "def-per-ordinary-alteration-topology",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.5--1.2.6, and flat base-change comparison of the dominant parts."
+   }
+  },
+  {
+   "text": "For a jointly surjective etale family $(U_a\\to T)_a$ in $\\operatorname{alt}/S$, the ordinary base-change lemma gives a jointly surjective etale family over $T'=T\\times_S S'$. The ordinary scheme product $U_a\\times_T T'$ is canonically $U_a\\times_S S'$: a map to either is precisely a pair of maps to $U_a$ and $S'$ agreeing over $S$. Its members are objects by step 1. Likewise a proper surjective generator $U\\to T$ pulls back to a proper surjective map $U\\times_S S'\\to T'$ by proper and surjective base change. Hence $F$ sends both classes of ordinary generators to ordinary generators, without imposing any residue-degree condition on an etale cover.",
+   "uses": [
+    "def-per-ordinary-alteration-topology",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 2.1.1 at parameter 1, 2.3.1 and 2.3.4; Stacks morphisms.tex Tags 02GO (lemma-base-change-etale), 01S1 (lemma-base-change-surjective), 01W4 (lemma-base-change-proper)."
+   }
+  },
+  {
+   "text": "We check that the generator families are stable under categorical pullback, on either base $B=S$ or $B=S'$. For objects $U\\to T\\leftarrow V$, put $C=U\\times_T V$. Its categorical product is $C_{\\mathrm{md}}$ by the alteration calculus. If $U\\to T$ is etale, the dominant-part etale comparison gives $C_{\\mathrm{md}}\\simeq C\\times_V V_{\\mathrm{md}}=C$, since the reduced maximally dominant object $V$ equals $V_{\\mathrm{md}}$. The etale base-change lemma gives joint surjectivity for a whole family. If $U\\to T$ is proper surjective, ordinary base change makes $C\\to V$ proper surjective; the proper-surjection clause of the dominant-part theorem makes $C_{\\mathrm{md}}\\to V_{\\mathrm{md}}=V$ proper surjective. Thus categorical pullbacks are again generators. All schemes in these dominant-part applications are finite type over the Noetherian $B$, as in the categorical-product clause of the calculus.",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "lem-per-dominant-part-coreflection",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.5--1.2.8 and Remark 2.3.2, verification of pullback stability of the two ordinary generator classes."
+   }
+  },
+  {
+   "text": "On either alteration category form a precoverage $P$ consisting of singleton isomorphisms and all families obtained by iterated composition of the two generator classes. Precisely, use well-founded rooted trees: the children at a non-leaf vertex form a generator family or an isomorphism, and the arrows from the leaves to the root form the resulting family. Grafting trees proves composition stability. Pull a tree back along an arrow by pulling back the family at the root and then each subtree; well-founded induction and step 4 prove pullback stability. This allows arbitrary branching; no uniform bound on tree heights is assumed. Each tree family covers for the ordinary topology by well-founded induction using local character. Conversely $P$ contains the generators. Minimality therefore identifies its generated topology with the ordinary topology. The cited stable-precoverage membership theorem now says that every ordinary covering sieve contains one of these tree families.",
+   "uses": [
+    "lem-per-generated-precoverage-covering-sieve",
+    "def-weil-pbc-topos",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 2.3.1--2.3.3, explicit closure under composition; stable-precoverage membership: Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean:166--201."
+   }
+  },
+  {
+   "text": "Apply $F$ to a tree family. It sends its root generator to a generator by step 3 and its singleton isomorphisms to isomorphisms. Inductively it sends each subtree family to a covering family, so local character makes the family of all image leaf composites covering. Now let $R$ be the sieve generated by the given finite covering $(T_i\\to S)_i$. Step 5 supplies a tree family $(A_a\\to S)_a$ contained in $R$. Each leaf arrow factors through some $T_i\\to S$, so its image factors through $F(T_i)\\to F(S)=S'$. The latter generated sieve therefore contains the covering image tree family and is covering by local character (or upward closure). Its index set is the original finite set of indices $i$, so this is exactly the asserted finite covering, with ordinary fibre products. This passage does not replace an ordinary cover by a prime-to-$2$ cover.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 2.3.4, generator argument expanded using the precoverage of step 5."
+   }
+  },
+  {
+   "text": "For a regular $h$, fix $s\\in S$ and put $k=\\kappa(s)$. By the definition of a regular morphism, the scheme-theoretic fibre over $s$ remains regular after every finite field extension $E/k$. Its regular local rings are domains by the cited theorem, hence reduced (a nilpotent in a domain is zero); so the stalkwise definition makes that fibre reduced. For an affine open $\\operatorname{Spec}A$ of the fibre over $k$, its pullback after $E/k$ has coordinate ring $A\\otimes_kE$, which is therefore reduced. The finite-purely-inseparable test gives reducedness of $A\\otimes_kK$ for every field extension $K/k$. These affine pullbacks cover the scalar-extended fibre; the affine reducedness and open-cover criteria show it is reduced. Every field-valued point factors through the residue field of its image, so fibre-product associativity gives the all-field hypothesis of the item. Flatness is part of regularity. This argument does not require arbitrary scalar-extended fibres to remain Noetherian regular schemes.",
+   "uses": [
+    "def-per-regular-scheme-morphism",
+    "lem-sc-regular-local-domain",
+    "def-weil-regular-scheme",
+    "def-pc-reduced-scheme",
+    "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-reduced-scheme-open-cover",
+    "def-pc-fibre-product",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Stacks algebra.tex Tag 00NP, lemma-regular-domain; Tag 030V, lemma-geometrically-reduced-finite-purely-inseparable-extension; properties.tex Tag 02IT; schemes.tex Tags 01J2, 01I4 and 01JQ."
+   }
+  },
+  {
+   "text": "For the nodal case take a point $s$ of $S$ and an algebraic closure $\\Omega$ of $\\kappa(s)$. Finite presentation gives a finite-type geometric fibre. Its nonsmooth closed points have completed local rings $\\Omega[[u,v]]/(uv)$ by the specified nodal-geometric-fibre condition. The cited nodal closed-point theorem applies even when the completed-ring isomorphisms are only ring isomorphisms, and gives reducedness of this geometric fibre; it needs no extra equidimensionality or nonemptiness assumption. The algebraic-closure test then says the fibre over $\\kappa(s)$ is geometrically reduced. Every field-valued point of $S$ factors through the residue field of its image; associativity of fibre products identifies its fibre with a scalar extension of this fibre. Thus the all-field reducedness hypothesis holds. Flatness is already assumed, so steps 1--6 apply.",
+   "uses": [
+    "def-trf-nodal-geometric-fibres",
+    "lem-trf-nodal-points-reduced-algebraically-closed",
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "def-pc-fibre-product",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Stacks curves.tex Tag 0E37, lemma-facts-about-nodal-curves (reduced completed local rings), with the one-field version cited here; varieties.tex Tag 035X, lemma-geometrically-reduced."
+   }
+  },
+  {
+   "text": "Finally fix a reduced Noetherian $R$. The component-cover clause of the alteration calculus, applied with the prime $2$, states that its finite family of reduced irreducible components covers for the prime-to-$2$ topology. That topology is contained in the ordinary one: a prime-to-$2$ decomposed etale generator is a jointly surjective etale family, and a proper surjective maximally prime-to-$2$ finite generator is a proper surjective map in the same category. Thus every such generator covers for the ordinary topology, and the minimality in its definition gives the inclusion of topologies. The component family is therefore an ordinary covering. Components are nonempty by the irreducibility convention. When $R$ is empty there are no components, and the empty etale family is jointly surjective onto it, so its empty generated sieve covers by the ordinary generator definition.",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "def-per-prime-to-ell-alteration-topology",
+    "def-per-ordinary-alteration-topology",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.8, 2.1.1 and 2.3.1--2.3.3; component cover by the finite proper component coproduct and its open summands, as recorded in the cited calculus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-alteration-generators-reduced-base-change",
+  "def-per-ordinary-alteration-topology",
+  "lem-per-alteration-cover-calculus",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-per-dominant-part-coreflection",
+  "lem-per-generated-precoverage-covering-sieve",
+  "def-weil-pbc-topos",
+  "lem-sc-regular-local-domain",
+  "def-weil-regular-scheme",
+  "def-pc-reduced-scheme",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-reduced-scheme-open-cover",
+  "def-weil-residue-field",
+  "def-trf-nodal-geometric-fibres",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "def-per-prime-to-ell-alteration-topology",
+  "def-per-regular-scheme-morphism",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.2.3, 1.2.5--1.2.8 and 2.3.1--2.3.4, ordinary parameter 1; explicit generator-closure argument; regular and nodal consequences from Stacks 00NP and 0E37."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-base-change: Ordinary alteration coverings are stable under dominant finite type base change using reduced dominating components and under regular base change using the usual fibre products",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp', AlgebraicGeometry.Scheme.instOverPullbackCoverOverProp, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp_X",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?[Rr]egular|[Ll]og[Ss]cheme",
+   "results": "Actual logged hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lteration|[Uu]niformi[sz]ation|[Ll]ogRegular",
+   "results": "Actual logged hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-ordinary-alteration-cover-base-change: Base change of covers for the alteration topology formed from etale surjections and proper generically finite surjections",
+   "results": "Actual logged hits: CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage, AlgebraicGeometry.Scheme.Cover.Over.isOver_map, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver', AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp', CategoryTheory.Precoverage.IsStableUnderBaseChange, AlgebraicGeometry.Scheme.overPretopology, AlgebraicGeometry.Scheme.Cover.changeProp, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alteration\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-base-change: Proper generically finite and etale generated topology on reduced schemes with generic finite maps preserves covers by dominant pullback and geometrically regular scalar extension",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp', AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp', AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-base-change: Flat geometrically reduced base change of reduced Noetherian schemes sends finite ordinary alteration covers to covers using ordinary scheme fibre products and reduced irreducible components refine such a cover",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp', AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_X, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp', AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_I₀, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat geometrically reduced base change preserves covers for the ordinary alteration topology on reduced Noetherian schemes",
+   "results": "{\"t\": \"2026-10-24T08:00:53Z\", \"tool\": \"leanfinder\", \"query\": \"Flat geometrically reduced base change preserves covers for the ordinary alteration topology on reduced Noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instOverXBind\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.instOverBind\", \"AlgebraicGeometry.Scheme.Cover.Over.isOver_map\"], \"digest\": \"c1a6e61a958769b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lteration|[Mm]aximal.*[Dd]ominan",
+   "results": "{\"t\": \"2026-10-24T08:01:15Z\", \"tool\": \"grep\", \"query\": \"[Aa]lteration|[Mm]aximal.*[Dd]ominan\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary alteration covers generated by etale and proper surjective maps remain covering after flat geometrically reduced base change",
+   "results": "{\"t\": \"2026-10-24T08:01:16Z\", \"tool\": \"leansearch\", \"query\": \"Ordinary alteration covers generated by etale and proper surjective maps remain covering after flat geometrically reduced base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePrecoverageOfIsStableUnderBaseChange\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange.mk\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Cover.Over.mk.noConfusion\"], \"digest\": \"a9b987360287fbc4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced generically finite schemes with etale and proper surjective generated Grothendieck topology covering families under scalar extension",
+   "results": "{\"t\": \"2026-10-24T08:02:12Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced generically finite schemes with etale and proper surjective generated Grothendieck topology covering families under scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.IsFinite\"], \"digest\": \"43b268a6a749aaff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "grep",
+   "query": "CoverPreserving|coverPreserving.*(generate|of_)|cover_preserving",
+   "results": "{\"t\": \"2026-10-24T08:02:45Z\", \"tool\": \"grep\", \"query\": \"CoverPreserving|coverPreserving.*(generate|of_)|cover_preserving\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"62a57ac3fb85ddef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "grep",
+   "query": "coverPreserving|CoverPreserving|isContinuous.*(generate|of_)",
+   "results": "{\"t\": \"2026-10-24T08:04:16Z\", \"tool\": \"grep\", \"query\": \"coverPreserving|CoverPreserving|isContinuous.*(generate|of_)\", \"sub\": \"CategoryTheory/Sites/Precoverage\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving pullbacks and sending generating covering presieves to covering sieves preserves all covers of the generated Grothendieck topology",
+   "results": "{\"t\": \"2026-10-24T08:04:22Z\", \"tool\": \"leanfinder\", \"query\": \"A functor preserving pullbacks and sending generating covering presieves to covering sieves preserves all covers of the generated Grothendieck topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CoverPreserving\", \"CategoryTheory.CoverPreserving.cover_preserve\", \"CategoryTheory.Functor.IsCocontinuous.cover_lift\", \"CategoryTheory.Functor.inducedTopology_coverPreserving\", \"CategoryTheory.Functor.cover_lift\", \"CategoryTheory.Functor.IsCoverDense.functorPullback_pushforward_covering\", \"CategoryTheory.Functor.IsDenseSubsite.coverPreserving\", \"CategoryTheory.Functor.isContinuous_of_coverPreserving\"], \"digest\": \"80611c233cf09711\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor is continuous for Grothendieck topologies generated by pullback stable precoverages if it preserves pullbacks and sends generating covers to covers",
+   "results": "{\"t\": \"2026-10-24T08:05:02Z\", \"tool\": \"leanfinder\", \"query\": \"Functor is continuous for Grothendieck topologies generated by pullback stable precoverages if it preserves pullbacks and sends generating covers to covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isContinuous_of_coverPreserving\", \"CategoryTheory.Functor.IsContinuous\", \"CategoryTheory.CoverPreserving\", \"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.Functor.IsCoverDense.isContinuous\", \"CategoryTheory.Functor.IsCocontinuous.cover_lift\", \"CategoryTheory.Functor.IsDenseSubsite.instIsContinuous\", \"CategoryTheory.Functor.cover_lift\"], \"digest\": \"a22f400e87583df3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "grep",
+   "query": "isContinuous_toGrothendieck_of_pullbacksPreservedBy|lemma CoverPreserving.of_isContinuous",
+   "results": "{\"t\": \"2026-10-24T08:07:05Z\", \"tool\": \"grep\", \"query\": \"isContinuous_toGrothendieck_of_pullbacksPreservedBy|lemma CoverPreserving.of_isContinuous\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\"], \"digest\": \"8eee18d047357343\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving pullbacks and sending generating covers to generating covers is continuous for the associated Grothendieck topologies and preserves covering sieves",
+   "results": "{\"t\": \"2026-10-24T08:07:05Z\", \"tool\": \"leansearch\", \"query\": \"A functor preserving pullbacks and sending generating covers to generating covers is continuous for the associated Grothendieck topologies and preserves covering sieves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsContinuous.mk\", \"CategoryTheory.Functor.IsContinuous\", \"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.Functor.IsCocontinuous.cover_lift\", \"CategoryTheory.CoverPreserving.mk\", \"CategoryTheory.Functor.isContinuous_of_coverPreserving\", \"CategoryTheory.Functor.cover_lift\", \"CategoryTheory.Functor.IsCocontinuous.mk\"], \"digest\": \"092c0fe2d0b8b12a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy",
+   "results": "{\"t\": \"2026-10-24T08:07:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy\"], \"digest\": \"228d4ba8d8620150\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: generic scheme/site results do not state ordinary alteration-category base change and its special cases; categorical continuity candidates were read in Sites/Continuous.lean:317--330 and Sites/CoverPreserving.lean:176--186."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-local-nodal-dimension-reduction",
+  "date": "2026-10-24",
+  "group": "Q99"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Newest blueprint ancestor lem-per-artin-gabber-affine-curve.proof.md, Step 3 (Verdier-duality branch), through the inherited regular-neighbourhood/ordinary weak-uniformization input. ILO VII 3.1--4.2 is the local geometric subargument, stopping before VII 4.3. Expose II 1.2.3 (fourth bullet), 1.2.5--1.2.8, 2.3.1--2.3.4, printed pp.24--28, ordinary case (parameter 1), with geometrically reduced flat base change so that reduction of the products is unnecessary. Component covering: II 1.2.8 and the proper-surjective generator. The arbitrary Noetherian flat completion base change is used in VII 3.2, printed p.82.",
+   "via": [
+    "lem-per-complete-local-nodal-dimension-reduction",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ordinary-alteration-cover-base-change",
+  "worker": "stage1",
+  "summary": "Q158: statement retained verbatim. Reused existing object-and-categorical-product base-change theorem; proved preservation of the ordinary generators and their generated topology explicitly, without imposing prime-to-ell conditions on ordinary etale covers. Checked regular and nodal consequences and component/empty cases. No new nodes.",
+  "blueprint": "Latest lem-per-artin-gabber-affine-curve.proof.md Step 3, through the recorded completion/weak-uniformization ancestor chain. This split supplies the ordinary alteration-cover base-change input of ILO VII 3.2; ILO II 1.2.3 and 2.3.4 provide the local argument. No alteration statement is itself a node of the current imported blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-points-reduced-algebraically-closed",
+    "why": "One-field reducedness for nodal geometric fibres, including the ring-isomorphism convention; a generic geometric tool absent from this unit."
+   },
+   {
+    "node": "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "why": "Passes from a reduced algebraically closed fibre to reducedness after every field extension; a generic field-extension tool absent from this unit."
+   },
+   {
+    "node": "def-weil-pbc-topos",
+    "why": "Only the definition of sieve topology and local character is used in the generator argument."
+   },
+   {
+    "node": "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "why": "All-field reducedness of regular fibres from finite-extension regularity, without finite-type assumptions; no result in this unit supplies this algebraic criterion."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Step 7 takes only its statement that a regular local ring is a domain, applied to local rings of regular finite scalar extensions of fibres; a generic commutative-algebra fact (Stacks 00NP) that no node of this unit states. Added by the maintainer reader Q158: the off-unit statement was cited undeclared."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "def-weil-pbc-topos",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-sc-regular-local-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-eac2596b4",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-eac2596b4 (reviewer sub-agent of L); spot-checked: The mathematics is sound; two small citation faults fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-ordinary-alteration-cover-base-change.json. Statement and stmt_deps were unchanged from the base (Q99 snapshot); there are no new nodes. Sources read at the cited places: ILO Exposé II 1.1.7-1.2.9 and 2.1.1-2.3.4, pp. 23-28 (1.2.3 fourth bullet, 1.2.6 categorical products (X×Y)_md, 1.2.8, 2.3.1 generators at ℓ=1, Remark 2.3.2 generating families not closed under composition, 2.3.4 flat base change), and VII 3.2. All nine steps check. Steps 1-2: the generator theorem's hypotheses follow from the all-field hypothesis, and the alteration category does not depend on ℓ. Step 3: the étale, proper and surjective base-change Mathlib leaves. Step 4: the étale and proper-surjective clauses of dominant-part-coreflection, with V_md=V. Steps 5-6: the tree precoverage satisfies all four hypotheses of the generated-precoverage leaf (isomorphism discrepancies at the leaves are absorbed by grafting singleton isos), then induction over trees. Step 7: regular case through finite extensions only, then the finite-inseparable test. Step 8: nodal case via the ring-isomorphism nodal lemma and the 035X algebraic-closure test. Step 9: prime-to-2 topology ⊆ ordinary topology by minimality, plus the empty case. Dropped-route check: lem-per-artin-gabber-affine-curve is not above this item. It is reached through the sfb Gabber-finiteness chain (det-thm-sf-ctf-stability-direct-images → … → lem-per-complete-local-nodal-dimension-reduction), so citing alteration-cover-calculus, generators-reduced-base-change, dominant-part-coreflection and generated-precoverage is legitimate. Batch-5 check: the dependency closure (288 nodes) contains only generic scheme-theory trf nodes (geometric-reducedness tests, reduced open cover, nodal reducedness, finite-residue points, two definitions) and no sec-poincare-duality, sk-* or nt-* node; none is given by either assumed leaf or is a step of their proofs, so all are accepted. Fault 1: off-unit statement lem-sc-regular-local-domain used in step 7 without a declaration; added to split_report.tool_uses. Fault 2 (B3): the statement's 'regular … geometrically regular', 'nodal curve morphism' and 'irreducible components' were uncited; added [def-per-regular-scheme-morphism], [def-trf-nodal-geometric-fibres] and [def-weil-irreducible-components], plus stmt_deps, step-7/9 uses and proof_deps; the meaning is unchanged and no cycle is created. Accepted tool_uses: the three trf lemmas and lem-sc-regular-local-domain.; 1 file(s) fixed by the reviewer"
+ }
+}

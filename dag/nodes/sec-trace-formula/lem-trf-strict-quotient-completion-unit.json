@@ -17,14 +17,16 @@
  ],
  "proof": [
   {
-   "text": "Use the degreewise tensor M.quotient(P) as a simultaneous quotient presentation. The finite equations are D.reduction_evaluation; transition compatibility is M.transition. The normalization of rho yields a strict tower isomorphism a fixing these finite comparisons. Its section equation and the ordinary adjunction-unit tensor formula identify the first cone coordinate with the actual quotient-unit tuple. Both shifted coordinates vanish. The cone decomposition of the identity proves equality of whole chain maps. The existing actual-unit-at-complex formula, followed by rho, cancels the reduction comparison and restriction factors, while r=D.roos inverse cancels the Roos comparison. Localize the chain equality.",
+   "text": "Construct the canonical simultaneous quotient presentation using the degreewise tensor model. Its double adjunction transpose is the ordinary tensor-unit transpose (derivedTranspose), and ordinary_unit_section gives its strict finite section formula, hence it satisfies IsIntegralComparisonPresentationCoherent. Apply the coherently normalized rho to this presentation. Use the degreewise tensor M.quotient(P) as a simultaneous quotient presentation. The finite equations are D.reduction_evaluation; transition compatibility is M.transition. The normalization of rho yields a strict tower isomorphism a fixing these finite comparisons. Its section equation and the ordinary adjunction-unit tensor formula identify the first cone coordinate with the actual quotient-unit tuple. Both shifted coordinates vanish. The cone decomposition of the identity proves equality of whole chain maps. The existing actual-unit-at-complex formula, followed by rho, cancels the reduction comparison and restriction factors, while r=D.roos inverse cancels the Roos comparison. Localize the chain equality.",
    "uses": [
     "def-trf-completion-unit-models",
     "lem-trf-completion-unit-strict-quotient-model",
     "def-trf-integral-comparison-realization-models",
     "lem-trf-isomorphism-multiplication-cone-descent",
     "def-trf-strict-quotient-cone-augmentation",
-    "lem-pur-integral-ambient-operation-models"
+    "lem-pur-integral-ambient-operation-models",
+    "lem-trf-coherent-quotient-model-comparison",
+    "lem-trf-coherent-primitive-reduction-presentation"
    ],
    "elementary": false
   }
@@ -35,12 +37,14 @@
   "def-trf-integral-comparison-realization-models",
   "lem-trf-isomorphism-multiplication-cone-descent",
   "def-trf-strict-quotient-cone-augmentation",
-  "lem-pur-integral-ambient-operation-models"
+  "lem-pur-integral-ambient-operation-models",
+  "lem-trf-coherent-quotient-model-comparison",
+  "lem-trf-coherent-primitive-reduction-presentation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Clauses (2)–(3), explicit strict quotient augmentation and multiplication cancellation."
+  "place": "Clauses (2)–(3), explicit strict quotient augmentation and multiplication cancellation. P4 (2026-10-26): supply canonical double-adjunction presentation coherence before applying normalized rho; all remaining cone and unit arguments unchanged."
  },
  "mathlib_searches": [
   {
@@ -133,13 +137,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H7",
-  "result": "pass",
-  "landing": "20261022T022041-L-432706",
+  "reviewer": "C-ac9fc",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T130628-L-3484579",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: TrfCompletionRoosNormalized coherence premise vs T6 invisible-twist counterexample and the S9 pullback precedent; item proof vs coherentQuotientModelComparison/fixedCalculusModels/ordinaryQuotientTowerComparison; adapted modules compiled in sandbox against the published IntegralReductionTowerCanonical"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

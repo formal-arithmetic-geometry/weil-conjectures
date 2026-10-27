@@ -1,0 +1,35 @@
+# Q146 stage-1 delivery
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-finite-normal-cover-affine-field-data.json` (statement; split; no whole-statement Mathlib match), `citations.json`, and this report. No new nodes and no new Mathlib leaves. `searches.jsonl` contains the five actual current search results; earlier item searches are retained unchanged.
+2. Attachments: none for this item. The existing `AlgebraicGeometry.Scheme.exists_germToFunctionField_eq` belongs to the already attached `lem-sc-function-field-sections-glue` and is used as a tool. No upstream declaration found by item tag or concept states the whole item without sorry.
+3. WANTED: none.
+4. The mathematical statement is unchanged. The inherited blueprint.from.node was null despite a valid provenance chain. Repaired it to `det-thm-sf-ctf-stability-direct-images`, whose identity is explicitly recorded on `lem-sfb-admissible-direct-image`; retained the via chain. The latest blueprint proof (3) is the compactification assembly, while the inherited alteration/tame-boundary explanation is auxiliary provenance, not a new unit route. No unit realization was edited: the item is not its key node.
+5. Nothing left unfinished in the one-level split. All non-elementary inputs already have DAG nodes.
+
+## Search results and reuse
+
+Read the inherited five Mathlib search records (2026-10-22), then ran current leanfinder, loogle, grep, leansearch and a second leanfinder phrasing through msearch.py. All services returned successfully. The searches found finite affine-section maps (`IsFinite.finite_app`, source lines 39–42), finite/integral morphism predicates, function-field constructions and normalization, but no single declaration for the complete item. The finite-domain fraction-degree leaf was checked against Mathlib/RingTheory/Algebraic/Integral.lean:696–701, and the generic fraction-field leaf against Mathlib/AlgebraicGeometry/FunctionField.lean:37–55 and 148 onward. Search of the DAG and the whole imported blueprint for function field, normal scheme, integrally closed, generic, and finite surjective found the existing inputs used below, avoiding new lemmas. The latest unit statement and direct-images proof, plus the chapter record, were read.
+
+## Review by Q146
+
+I read Divisors Tag 0BD3 (`divisors-lemma-norm-in-normal-case`) in full, especially the first paragraph and its fraction-field square. That proof takes the affine fields and their finite extension for granted; this split supplies those details instead of repeating the norm theorem. For affine normality I read Properties Tags 033L (`properties-lemma-integral-normal`) and 0358 (`properties-lemma-normal-integral-sections`), and Algebra Tag 030B (`algebra-lemma-normality-is-local`). The proof uses the existing generic-field gluing statement so that no new local-normality lemma is needed. This expanded assembly is marked agent-written.
+
+Step 1 uses exactly the surjective-map definition to make inverse images nonempty, the locally-ringed morphism definition for continuity, the generic-point definition for closure, and the scheme-sobriety node for uniqueness. The open/closed argument is written out; no theorem that every dominant map preserves generic points is silently assumed.
+
+Step 2 uses the actual finite-morphism definition, which explicitly provides affine inverse images and finite section modules for every affine target open. The existing affine fraction-field node explicitly gives domain coordinate rings, field generic stalks, injective germ maps and quotient expressions, for arbitrary integral schemes, not just curves. Surjectivity ensures both opens are nonempty. No Noetherian hypothesis has been added.
+
+Step 3 uses the locally-ringed morphism definition and the explicit germ/colimit description of stalks. The ring map on the generic stalk is unital and therefore injective between fields; the inverse argument is displayed. Its value on a representative section proves the square, and the square proves affine injectivity. Nothing about normality of Y is needed.
+
+Step 4 applies the existing Mathlib leaf for finite injective domain algebras. Its statement has exactly the hypotheses furnished by steps 2–3 and has no normality or Noetherian assumption. I checked that the induced field map is the map on quotients and wrote the quotient formula identifying it with iota, rather than merely asserting transport. Positivity of dimension follows directly from a basis spanning a field with 1 nonzero. Local affineness and nonemptiness give at least one affine open.
+
+Step 5 uses the stalk-in-function-field node, whose statement explicitly identifies L as the fraction field of each local ring and states how the section germs embed. The same monic equation therefore makes the chosen t integral over each local ring. The integrally-closed-domain hypothesis applies to these exact local rings, with its explicit meaning from the normal-ring definition. The gluing node's statement applies to any nonempty open in an integral scheme and one element of the function field regular at every point; it produces the section needed. This is declared a generic tool use from another unit. Its upstream source theorem at WeilConjectures/Mathlib/AlgebraicGeometry/FunctionField.lean:90 was read. There is no reliance on a Noetherian local criterion or on a normality hypothesis for Y.
+
+Step 6 uses only the stalk colimit/germ relation and the morphism-of-sheaves restriction compatibility. The germ relation itself equates a section and its restriction on the smaller neighbourhood. Both preimages are nonempty; the compatibility identifies every affine extension with the same actual generic-stalk map, so all degrees equal d.
+
+For C4 I opened every cited node's statement, and citations.json contains an exact verbatim statement for every cited node of each step (including definitions). For C1 every non-elementary fact is one of those statements; field-map injectivity, topology of generic points, germ restriction and basis nonemptiness are written elementary arguments. No step exceeds 2000 characters and none hides an uncited sublemma. All sources are Stacks or existing project/Mathlib inputs, with no prohibited SGA source.
+
+I tested identity maps, a finite extension of fields viewed as spectra, purely inseparable finite covers, a non-Noetherian normal affine base, and an integral nonnormal source. These retain all conclusions and require no separability, smoothness, source normality, flatness or global affineness. Empty affine opens are explicitly excluded; integral schemes are nonempty; the degree is positive rather than merely nonnegative. The statement does not assert A is normal. No source or statement dispute was found. B1–B10 create no new-node obligations; C1–C8, D1–D5 and E1–E7 were checked by the arguments above. In particular no clause was relabelled as a new node, no dependency cycles were introduced, and no proof of a cited node is used in place of its statement.
+
+## Validation
+
+The server review_split check passed with zero new nodes. The required deliver.py dry run and delivery are run after this report is written.

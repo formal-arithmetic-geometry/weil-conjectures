@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-space-local-fibre-dimension-open",
+ "kind": "statement",
+ "title": "Openness of bounded local fibre dimension for algebraic spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a morphism from an algebraic space [def-trf-algebraic-space]. Point spaces have the atlas topology [def-a1-space-point-topology]. Assume $f$ is locally of finite type on etale scheme charts [def-weil-finite-type-morphism]. For $t\\in T$ put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$ [def-weil-residue-field, def-weil-affine-spectrum, lem-trf-space-fibre-products-etale-covers]. For $x\\in|X|$, put $t=f(x)$. A chart at $x$ means a representable etale map $U\\to X$ from an affine scheme and a point $u\\in U$ mapping to $x$. Write $U_t=U\\times_T\\operatorname{Spec}\\kappa(t)$ and $\\widetilde u\\in U_t$ for the unique point mapping to $u$. Write $\\dim_{\\widetilde u}U_t$ for the minimum of the Krull dimensions of open neighbourhoods of $\\widetilde u$ in $U_t$ [def-kun-topological-dimension-at-point, def-kun-topological-krull-dimension]. Define $\\delta_f(x)=\\sup_{(U,u)}\\dim_{\\widetilde u}U_t$ over these charts. Then every chart at $x$ has $\\dim_{\\widetilde u}U_t=\\delta_f(x)$, and $\\delta_f(x)$ is a finite nonnegative integer. For every integer $d\\geq0$, the subset $W_d=\\{x\\in|X|:\\delta_f(x)\\leq d\\}$ is open in $|X|$. No quasi-compactness, properness, flatness, finite-presentation or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NT (lemma-openness-bounded-dimension-fibres), with the chart definition in Tag 04NM (definition-dimension-fibre), relative-dimension clause (3); restricted to a scheme target."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine etale covering family $a_i:U_i\\to X$ supplied by lem-a1-space-affine-etale-cover. Every $x\\in|X|$ has a lift $u_i\\in U_i$, so the family of charts occurring in the supremum defining $\\delta_f(x)$ is nonempty. The same covering lemma says that every representable etale map from a scheme to $X$ is open on point spaces. The composites $U_i\\to T$ are locally of finite type by the hypothesis on $f$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03FX (lemma-cover-by-union-affines) and 03BX (lemma-topology-points), clause (3)"
+   }
+  },
+  {
+   "text": "Fix two charts $(U,u)$ and $(V,v)$ at $x$, and put $t=f(x)$. The fibre product $R=U\\times_XV$ is a scheme, and lem-a1-space-fibre-product-point supplies $r\\in R$ mapping to the specified $u$ and $v$. Its two projections are etale: they are base changes of the chart maps. Their base changes over $\\operatorname{Spec}\\kappa(t)$ give etale maps $R_t\\to U_t$ and $R_t\\to V_t$, by chartwise etale permanence. The distinguished point $\\widetilde r\\in R_t$ maps to $\\widetilde u$ and $\\widetilde v$: all three are the unique points over $r,u,v$ in these scheme fibres. Apply lem-sfb-etale-topological-dimension-at-point to both maps to obtain $\\dim_{\\widetilde u}U_t=\\dim_{\\widetilde r}R_t=\\dim_{\\widetilde v}V_t$. Thus all chart values agree. Since step 1 made the chart family nonempty, its supremum is this common value, proving every chart value equals $\\delta_f(x)$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-fibre-product-point",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-pc-scheme-fibre",
+    "lem-sfb-etale-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04NL (lemma-dimension-at-point), 04N4 (lemma-dimension-at-point-local); chart interpretation in spaces-morphisms.tex Tag 04NM (definition-dimension-fibre), clause (3)"
+   }
+  },
+  {
+   "text": "For a chart $(U,u)$ the morphism $U\\to T$ is locally of finite type, hence so is $U_t\\to\\operatorname{Spec}\\kappa(t)$ by lem-weil-pbc-lft-base-change. By the definition of locally finite type choose an affine open neighbourhood $H$ of $\\widetilde u$ in $U_t$ whose coordinate ring is a finitely generated $\\kappa(t)$-algebra; the single affine $H$ is of finite type over this field. By lem-kun-dimension-finite-type, $\\dim H<\\infty$. The minimum defining $\\dim_{\\widetilde u}U_t$ is at most $\\dim H$, and it is nonnegative because every neighbourhood contains $\\widetilde u$. Hence the common value from step 2 is a finite nonnegative integer.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-finite-type-morphism",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4 (lemma-base-change-finite-type); finite-type-field dimension as in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md"
+   }
+  },
+  {
+   "text": "Fix $d\\geq0$. For each affine chart $a_i:U_i\\to X$ of step 1, apply lem-weil-pbc-local-fibre-dimension-open to the locally finite type scheme morphism $U_i\\to T$. It gives an open set $E_{i,d}=\\{u\\in U_i:\\dim_{\\widetilde u}(U_i)_{f(a_i(u))}\\leq d\\}$. Step 2 identifies it with $a_i^{-1}(W_d)$. Surjectivity of the covering family therefore gives $W_d=\\bigcup_i a_i(E_{i,d})$: each image is contained in $W_d$, and every point of $W_d$ has a chart lift belonging to $E_{i,d}$. Each image is open by the openness assertion of lem-a1-space-affine-etale-cover, so their union is open. For empty $X$ the union and $W_d$ are both empty.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NT (lemma-openness-bounded-dimension-fibres), proof; scheme input Morphisms Tag 02FZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-fibre-product-point",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-pc-scheme-fibre",
+  "lem-sfb-etale-topological-dimension-at-point",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-kun-dimension-finite-type",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-local-fibre-dimension-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NT (lemma-openness-bounded-dimension-fibres), proof, with the chart independence in Tag 04NM via descent.tex Tags 04NL and 04N4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of algebraic spaces the locus in the source where local fibre dimension is at most d is open",
+   "results": "8 hits: AlgebraicGeometry.isOpenMap_of_generalizingMap, instLocallyOfFiniteTypeResLE, Algebra.isOpen_unramifiedLocus, Algebra.isOpen_smoothLocus, instIsZariskiLocalAtSourceTopologicallyIsOpenMap, LocallyOfFiniteType, Algebra.isOpen_etaleLocus, locallyOfFiniteType_of_isOpenImmersion. These concern schemes and other open loci, not local fibre dimension for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper semicontinuity on the source of the local dimension of fibres for locally finite type algebraic space morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism being a generalizing map on the underlying topological spaces is Zariski-local at the source. This means that for any scheme morphism, if its restriction to a Zariski\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is a generalizing map is Zariski-local at the target. Specifically, for any such morphism $ f $ and any Zariski covering siev\"}\n  {\"name\": \"upperSemicontinuous_iff\", \"module\": \"Mathlib/Topology/Semicontinuity/Defs\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : Preorder β] {f : α → β},\\n  UpperSemicontinuous f ↔ ∀ (x : α), UpperSemicontinuousAt f x\", \"doc\": \"A function $ f : \\\\alpha \\\\to \\\\beta $ is upper semicontinuous if and only if it is upper semicontinuous at every point $ x \\\\in \\\\alpha $. This equivalence states that the global property of upper semicon\"}\n  {\"name\": \"UpperSemicontinuous.upperSemicontinuousAt\", \"module\": \"Mathlib/Topology/Semicontinuity/Defs\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : Preorder β] {f : α → β},\\n  UpperSemicontinuous f → ∀ (x : α), UpperSemicontinuousAt f x\", \"doc\": \"If a function $ f $ is upper semicontinuous on $ \\\\alpha $, then for every point $ x \\\\in \\\\alpha $, the function $ f $ is upper semicontinuous at $ x $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"IsOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDimension|local.*fibre.*dimension|local.*fiber.*dimension|04NT",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero`: Etale is equivalent to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"99\", \"text\": \"lemma eq_smoothOfRelativeDimension_zero : @Etale = @SmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"102\", \"text\": \"  have : @RingHom.Etale = @RingHom.IsStandardSmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"103\", \"text\": \"    ext; apply RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"108\", \"text\": \"lemma iff_smoothOfRelativeDimension_zero : Etale f ↔ SmoothOfRelativeDimension 0 f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"26\", \"text\": \"- `AlgebraicGeometry.SmoothOfRelativeDimension`: A morphism of schemes `f : X ⟶ Y` is smooth of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"135\", \"text\": \"class SmoothOfRelativeDimension : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"136\", \"text\": \"  exists_isStandardSmoothOfRelativeDimension : ∀ (x : X), ∃ (U : Y.Opens) (_ : IsAffineOpen U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"138\", \"text\": \"    IsStandardSmoothOfRelativeDimension n (f.appLE U V e).hom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"140\", \"text\": \"@[deprecated (since := \\\"2026-02-09\\\")] alias IsSmoothOfRelativeDimension := SmoothOfRelativeDimension\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"line\": \"582\", \"text\": \"  have : Algebra.IsStandardSmoothOfRelativeDimension 0 R (Localization.Away Δ) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"314\", \"text\": \"theorem IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential [Nontrivial S] (n : ℕ)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"315\", \"text\": \"    [IsStandardSmoothOfRelativeDimension n R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"317\", \"text\": \"  obtain ⟨_, _, _, _, ⟨P, hP⟩⟩ := ‹IsStandardSmoothOfRelativeDimension n R S›\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"320\", \"text\": \"lemma IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth [Nontrivial S]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"322\", \"text\": \"    IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = n := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"26\", \"text\": \"- `Etale.iff_isStandardSmoothOfRelativeDimension_zero`: An `R`-algebra `S` is\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"90\", \"text\": \"theorem Etale.iff_isStandardSmoothOfRelativeDimension_zero :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"91\", \"text\": \"    Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"95\", \"text\": \"    simp [IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"27\", \"text\": \"- `Algebra.IsStandardSmooth.relativeDimension`: If `S` is `R`-standard smooth this is the dimension\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"30\", \"text\": \"- `Algebra.IsStandardSmoothOfRelativeDimension n`: `S` is `R`-standard smooth of relative dimension\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"78\", \"text\": \"(see `IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential`).\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"80\", \"text\": \"noncomputable def IsStandardSmooth.relativeDimension [IsStandardSmooth R S] : ℕ :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"88\", \"text\": \"class IsStandardSmoothOfRelativeDimension : Prop where\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The source points where the fibre dimension at a point is at most n form an open subset for a locally finite type morphism of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocallyConstant.isOpen_fiber\", \"module\": \"Mathlib.Topology.LocallyConstant.Basic\", \"type\": \"{f : X → Y} (hf : IsLocallyConstant f) (y : Y) : IsOpen {x | f x = y}\", \"doc\": \"For a locally constant function $ f : X \\\\to Y $, the fiber over any point $ y \\\\in Y $, defined as $ \\\\{x \\\\in X \\\\mid f(x) = y\\\\} $, is an open set in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFiniteType f] : LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ is locally of finite type and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [LocallyOfFiniteType f] : JacobsonSpace (f.fiber y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[IsOpenImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyQuasiFinite f] : LocallyQuasiFinite (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is locally quasi-finite, then the restriction of $ f $ to $ V $ is also locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of algebraic spaces the bounded local fibre dimension locus on the source is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is an open map is Zariski-local at the source. That is, for any scheme morphism, if there exists a Zariski-open cover of its \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ is locally of finite type and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of being an open map for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes is an open map (i.e., its underlying continuous map s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, smooth relative dimension or other open loci; none states the algebraic-space local fibre dimension assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dimension at a source point of an algebraic space morphism is independent of etale chart and is upper semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, smooth relative dimension or other open loci; none states the algebraic-space local fibre dimension assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDimAt\", \"IsOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, smooth relative dimension or other open loci; none states the algebraic-space local fibre dimension assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "04NT|04N4|local.*fi(bre|ber).*dimension|relativeDimension",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero`: Etale is equivalent to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"99\", \"text\": \"lemma eq_smoothOfRelativeDimension_zero : @Etale = @SmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"102\", \"text\": \"  have : @RingHom.Etale = @RingHom.IsStandardSmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"103\", \"text\": \"    ext; apply RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"108\", \"text\": \"lemma iff_smoothOfRelativeDimension_zero : Etale f ↔ SmoothOfRelativeDimension 0 f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"26\", \"text\": \"- `AlgebraicGeometry.SmoothOfRelativeDimension`: A morphism of schemes `f : X ⟶ Y` is smooth of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"135\", \"text\": \"class SmoothOfRelativeDimension : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"136\", \"text\": \"  exists_isStandardSmoothOfRelativeDimension : ∀ (x : X), ∃ (U : Y.Opens) (_ : IsAffineOpen U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"138\", \"text\": \"    IsStandardSmoothOfRelativeDimension n (f.appLE U V e).hom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"140\", \"text\": \"@[deprecated (since := \\\"2026-02-09\\\")] alias IsSmoothOfRelativeDimension := SmoothOfRelativeDimension\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"314\", \"text\": \"theorem IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential [Nontrivial S] (n : ℕ)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"315\", \"text\": \"    [IsStandardSmoothOfRelativeDimension n R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"317\", \"text\": \"  obtain ⟨_, _, _, _, ⟨P, hP⟩⟩ := ‹IsStandardSmoothOfRelativeDimension n R S›\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"320\", \"text\": \"lemma IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth [Nontrivial S]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"322\", \"text\": \"    IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = n := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"26\", \"text\": \"- `Etale.iff_isStandardSmoothOfRelativeDimension_zero`: An `R`-algebra `S` is\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"90\", \"text\": \"theorem Etale.iff_isStandardSmoothOfRelativeDimension_zero :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"91\", \"text\": \"    Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"95\", \"text\": \"    simp [IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"27\", \"text\": \"- `Algebra.IsStandardSmooth.relativeDimension`: If `S` is `R`-standard smooth this is the dimension\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"30\", \"text\": \"- `Algebra.IsStandardSmoothOfRelativeDimension n`: `S` is `R`-standard smooth of relative dimension\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"78\", \"text\": \"(see `IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential`).\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"80\", \"text\": \"noncomputable def IsStandardSmooth.relativeDimension [IsStandardSmooth R S] : ℕ :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"88\", \"text\": \"class IsStandardSmoothOfRelativeDimension : Prop where\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"line\": \"277\", \"text\": \"public theorem _root_.Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, smooth relative dimension or other open loci; none states the algebraic-space local fibre dimension assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For algebraic spaces locally of finite type over a scheme the source locus of local fibre dimension at most n is open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      ((finiteType_appLE :\\n            ∀ {U : Y.Opens},\\n              AlgebraicGeometry.IsAffineOpen U →\\n                ∀ {V : X.Opens},\\n                  AlgebraicGeometry.IsAffin\", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, smooth relative dimension or other open loci; none states the algebraic-space local fibre dimension assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4Q, lemma-dimension-fibres-proper, the upper semicontinuity half of the proof of 0D4R. Supporting input: openness of the bounded local fibre-dimension locus upstairs, used to form the closed subset Z_d in the proof of 0D4Q.",
+   "via": [
+    "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-local-fibre-dimension-open",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved chart independence by a common etale scheme refinement and Tag 04N4; proved pointwise finiteness on a finite-type affine neighbourhood of the scheme fibre; descended the existing scheme openness result by open images of affine charts. One new statement-only node, no Mathlib leaves, no Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4Q, lemma-dimension-fibres-proper, the upper semicontinuity half of the proof of 0D4R. Supporting input: openness of the bounded local fibre-dimension locus upstairs, used to form the closed subset Z_d in the proof of 0D4Q.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic atlas-existence and open-image tool for algebraic spaces; used to choose charts and descend the scheme open locus. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of common scheme refinements of etale algebraic-space charts. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic point-lifting criterion supplies a refinement point above the two specified chart points. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale composition and base-change tool ensures the refinement maps of fibres are etale. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic scheme finite-type base-change tool applied to a residue-field fibre. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality tool for a finite-type affine scheme over a field. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "Scheme openness is precisely the input used by Stacks 04NT; the algebraic-space statement is assembled from it. No node of this unit supplies this generic assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-fibre-product-point",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-lft-base-change",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-local-fibre-dimension-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-ab931443a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ab931443a (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, the statement of every cited node, and the Stacks sources: descent.tex 04N4 (statement and proof), spaces-morphisms 04NM(3) and 04NT (with proof). The item statement is unchanged from base and matches 04NT/04NM(3) restricted to a scheme target. There is no repair note and the base proof was empty, so the re-split rules do not apply. Step 1: lem-a1 gives a surjective affine étale atlas and open |t| for representable étale t; taking the affine components as charts is an elementary one-line fact. Step 2: R=U×_XV is a scheme by fibre-products-etale-covers; fibre-product-point gives r over the given u and v; R_t→U_t is the base change of an étale map; def-pc-scheme-fibre makes the lifts unique; applying 04N4 to both maps gives chart independence; the supremum equals the common value because the chart set is nonempty. Step 3: lft base change to κ(t), one finite-type affine H containing ũ, and lem-kun-dimension-finite-type give a finite, nonnegative local dimension (pointwise only). Step 4: this is the 04NT proof, with scheme openness from lem-weil-pbc-local-fibre-dimension-open and W_d = ∪a_i(E_{i,d}) open because |a_i| is an open map. The new node lem-sfb-etale-topological-dimension-at-point is exactly 04N4. It is self-contained, statement-only, and has real search records. I tested it on an open immersion, the generic point of A^1, a finite separable field extension and an empty source. It is not a duplicate: lem-trf-etale-cover-field-curve-nodality is only a special case (algebraically closed, Noetherian), the local-ring lemma is a different invariant, and nothing matches in the DAG or the main-20261015 blueprint. It does not restate a clause of the item. The declared tool_uses are all generic and accepted. Batch-5: lem-a1-space-affine-etale-cover and lem-a1-space-fibre-product-point reach sec-trace-formula only through the definition def-trf-algebraic-space. lem-trf-space-chartwise-etale-permanence is a foundational étale-permanence lemma for algebraic spaces that neither the trace formula nor Poincaré duality gives, and it is not a step of their proofs. All three are accepted. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceLocalFibreDimensionOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.localFibreDimension_chart_finite_isOpen",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.localFibreDimension",
+   "AlgebraicGeometry.AlgebraicSpace.localFibreDimension_chart_finite_isOpen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceLocalFibreDimensionOpen.lean",
+  "statement": "theorem localFibreDimension_chart_finite_isOpen {T : Scheme.{u}} (X : AlgebraicSpace T) (hft : ∀ (U : Over T) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) : (∀ (x : Point X.obj.obj) (U : Over T) (a : yoneda.obj U ⟶ X.obj.obj), IsAffine U.left → IsEtale a → ∀ v : U.left, schemePointMap a v = x → topologicalKrullDimAt (U.hom.asFiber v) = localFibreDimension X x) ∧ (∀ x : Point X.obj.obj, ∃ d : ℕ, localFibreDimension X x = (d : WithBot ℕ∞)) ∧ (∀ d : ℕ, IsOpen {x : Point X.obj.obj | localFibreDimension X x ≤ (d : WithBot ℕ∞)})",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The structural map of X : AlgebraicSpace T is the morphism to the scheme target T; U.hom is its composite with a scheme chart. The helper localFibreDimension constructs the stated supremum with real data. No atlas or representative is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c98f467ce",
+  "group": "N0",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and Stacks 04NM(3)/04NT: scheme target T, X : AlgebraicSpace T with structure map f, point topology = final topology over IsEtale charts, hft = local finite type on étale scheme charts (node wording, equivalent to an atlas, not stronger), affine representable étale chart lifts via schemePointMap, U_t = Mathlib U.hom.fiber with asFiber point, dim = topologicalKrullDimAt (same as scheme isOpen_localFibreDimension_le). localFibreDimension is a real iSup, not hollow. All three conclusions present; no extra qc/proper/flat/fp/Noetherian/universe assumptions. Edge cases (empty X, d=0, non-closed points, universes) ok. Only the item's lean field changed; statement verbatim; public imports for statement modules, plain imports for every recorded proof-dep module; docstrings carry source place, blueprint id and 4-step proof; sorry-only. No duplicate algebraic-space fibre-dimension notion in side-live or slopmaster2. Advisory: asFiber not in def-pc-scheme-fibre declarations. Not recompiled per instruction; worker reports a clean compile."
+ }
+}

@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-dedekind-lft-generic-subgroup-closure",
+ "kind": "statement",
+ "title": "Flat generic subgroup closure in a Dedekind lft-group",
+ "statement": "Let $D$ be a Dedekind domain, $E=\\operatorname{Frac}D$ and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $M$ be a separated commutative $S$-group scheme, locally of finite type, and let $J\\hookrightarrow M_E$ be a closed finite-type $E$-subgroup scheme [def-pc-scheme, def-pc-base-change, def-weil-closed-immersion]. There is a closed subgroup scheme $C\\hookrightarrow M$, called the schematic closure of $J$, whose ideal on each affine open $U=\\operatorname{Spec}B\\subset M$ is\n$$I_U=\\ker\\bigl(B\\longrightarrow\\Gamma(U_E\\times_{M_E}J,\\mathcal O)\\bigr).$$\nIt is separated, commutative, flat [def-weil-flat-morphism] and locally of finite type over $S$, and $C_E=J$ as closed subschemes of $M_E$. For every flat $S$-scheme $X$ and every $S$-morphism $f:X\\to M$ whose generic restriction factors through $J$, there is a unique factorization $X\\to C\\hookrightarrow M$. A Dedekind domain means a Noetherian integrally closed domain of Krull dimension one. A commutative group scheme over the indicated base has multiplication, identity and inverse morphisms satisfying the commutative group diagrams, as in the field case [def-sc-group-scheme]; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Locally of finite type means that affine coordinate algebras are locally finitely generated over those of the base [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 4, proof, printed p.291 (PDF page 297), flat schematic subgroup closure; compare the finite-type version in 7.1 Corollary 6, printed p.175 (PDF page 181). Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $a:J\\to M_E\\to M$. For each affine $U=\\operatorname{Spec}B\\subset M$, its inverse image is the closed subscheme $J\\times_{M_E}U_E$ of the affine $U_E=\\operatorname{Spec}(B\\otimes_D E)$, hence is affine. Thus $a$ is quasi-compact. Apply [lemma-nagata-scheme-image-ideal-qc] to obtain its closed scheme-theoretic image $i:C\\hookrightarrow M$ and the factorization of $a$. Since $a$ is quasi-compact, that node gives injectivity on sections of $\\mathcal O_C\\to a^{\\mathrm{im}}_*\\mathcal O_J$; over $C\\cap U=\\operatorname{Spec}(B/\\ker(a)(U))$ this says $B/\\ker(a)(U)\\to\\Gamma(a^{-1}(U),\\mathcal O_J)$ is injective, i.e. $\\ker(a)(U)=\\ker(B\\to\\Gamma(U_E\\times_{M_E}J,\\mathcal O))$, exactly the displayed ideal $I_U$. Its quasi-coherence supplies compatibility with restriction and gluing, so these quotients define one closed subscheme, even if $M$ is not quasi-compact.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R6 and 01R8 (lemma-scheme-theoretic-image and lemma-quasi-compact-scheme-theoretic-image); affine inverse-image check"
+   }
+  },
+  {
+   "text": "Write $T=D\\setminus\\{0\\}$, and let $K_U\\subset T^{-1}B=B\\otimes_D E$ be the ideal of $J\\cap U_E$. Then $I_U$ is its contraction. Extension back to $T^{-1}B$ recovers $K_U$: if $b/t\\in K_U$, then $b/1\\in K_U$, hence $b\\in I_U$; the reverse inclusion follows from the ideal property. Therefore $T^{-1}(B/I_U)=(T^{-1}B)/K_U$. These identifications respect the quotient maps and restrictions, proving $C_E=J$ as closed subschemes. Also $B/I_U$ injects into the $E$-algebra $(T^{-1}B)/K_U$ by the definition of $I_U$. For $0\\ne d\\in D$, if $d\\bar b=0$ then its image is killed by the unit $d$ in that algebra, hence is zero and $\\bar b=0$. Thus every displayed affine quotient is $D$-torsion-free.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Affine localization calculation in the construction of Tag 01R8"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dedekind-torsionfree-module-flat] to $B/I_U$ to obtain $D$-flatness. For $x\\in C\\cap U$, let $\\mathfrak q$ be its prime in $B/I_U$ and $\\mathfrak p$ its contraction to $D$. By [lem-weil-pbc-flat-local-ring-maps], $D_{\\mathfrak p}\\to(B/I_U)_{\\mathfrak q}$ is flat. These are precisely the local rings of $S$ and $C$ at the corresponding points. The affine charts $C\\cap U$ cover $C$; the pointwise definition of flatness now proves $C\\to S$ flat. No finite generation of a coordinate ring as a $D$-module was used.",
+   "uses": [
+    "lem-sfb-dedekind-torsionfree-module-flat",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW (more-algebra-lemma-dedekind-torsion-free-flat), part (1); Tag 01U5, stalkwise flatness"
+   }
+  },
+  {
+   "text": "Let $X$ and $f$ be as in the factorization clause. Cover $f^{-1}(U)$ by affine opens $V=\\operatorname{Spec}A$. The affine flatness criterion gives $A$ flat over $D$; [lem-trf-flat-module-torsionfree-domain] gives injectivity of every nonzero scalar. For $b\\in I_U$, its pullback $f^\\sharp(b)\\in A$ becomes zero in $T^{-1}A$ because $f_E$ factors through $J$ and $b$ vanishes there. The defining equality of fractions gives $t f^\\sharp(b)=0$ for some $t\\in T$, so torsion-freeness gives $f^\\sharp(b)=0$. The ring map therefore descends uniquely through $B/I_U$. The resulting maps $V\\to C\\cap U$ agree on overlaps: a morphism through a closed immersion is uniquely determined by its composite, since the sheaf map defining a closed immersion is surjective and its underlying space is a subspace. They glue to the required unique $X\\to C$. This uses no quasi-compactness or finite-type hypothesis on $X$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0538 (more-algebra-lemma-flat-torsion-free), and affine ideal-vanishing calculation"
+   }
+  },
+  {
+   "text": "The identity base $S$ is flat over itself, since tensoring with $D$ is the identity. Both $C$ and $C\\times_S C$ are flat over $S$: the projection $C\\times_S C\\to C$ is flat by [lem-weil-pbc-flat-morphism-base-change], and its composite with $C\\to S$ is flat by [lem-pc-flat-compose]. Apply Step 4 to $e_M:S\\to M$, to $\\operatorname{inv}_M\\circ i:C\\to M$, and to $m_M\\circ(i\\times i):C\\times_S C\\to M$. Their generic restrictions land in $J$, because $C_E=J$ and $J$ is a subgroup. This gives morphisms $e_C:S\\to C$, $\\operatorname{inv}_C:C\\to C$ and $m_C:C\\times_S C\\to C$, compatible with $i$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent extension of the closure construction: restrict the group operations using Step 4"
+   }
+  },
+  {
+   "text": "For associativity, compose both maps $C\\times_S C\\times_S C\\to C$ with $i$. They become the two associative multiplication maps in $M$ and are equal. Cancel $i$ using uniqueness for maps through a closed immersion, proved in Step 4. Apply the same cancellation to the two unit equations, the two inverse equations and $m_C=m_C\\circ\\mathrm{swap}$. The corresponding equations hold in $M$. Thus these operations make $C$ a commutative $S$-group scheme and $i$ a subgroup immersion. This is the same definition as [def-sc-group-scheme], with the base $\\operatorname{Spec}k$ replaced by $S$, explicitly stipulated in the item.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Group diagrams for the schematic closure, cancellation through its closed inclusion"
+   }
+  },
+  {
+   "text": "Let $V=\\operatorname{Spec}A'\\subseteq S$ be any affine open. Since $M$ is locally of finite type, the preimage $M_V$ has an affine open cover by $U=\\operatorname{Spec}B$ with $B$ a finitely generated $A'$-algebra; then $B/I_U$ is generated over $A'$ by the images of the same finite list. The opens $C\\cap U=\\operatorname{Spec}(B/I_U)$ cover $C_V$, giving local finite type by [def-weil-finite-type-morphism]. For separatedness, the inverse image of $\\Delta_M$ under $C\\times_S C\\to M\\times_S M$ is $C\\times_M C=C$, since $i$ is a monomorphism. Its immersion is $\\Delta_C$. A base change of a closed immersion is closed: on affine charts it is $A\\to A/I$ tensored to $A'\\to A'/IA'$, still surjective, with closed vanishing locus. Thus the closed diagonal of $M$ pulls back to a closed diagonal of $C$. Together with Steps 2–6 this proves every clause.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Affine quotient and diagonal arguments for inherited local finite type and separatedness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-scheme-image-ideal-qc",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "lem-sfb-dedekind-torsionfree-module-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-flat-compose",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Affine schematic-image proof following Tags 01R6 and 01R8, with Tag 0AUW from more-algebra.tex and explicit ideal-vanishing/group-diagram arguments. BLR source PDF not locally available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"schematicClosure\"",
+   "results": "{\"t\": \"2026-10-24T05:03:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"schematicClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned flatness criteria, topological subgroup closure, and specTargetImageFactorization for an affine target. None gives the flat schematic subgroup closure and its universal factorization; the Dedekind torsion-free flat instance covers only the module-flatness subargument."
+  },
+  {
+   "tool": "grep",
+   "query": "schematicClosure|schematic.closure|generic.*[Ss]ubgroup|[Ss]ubgroup.*closure",
+   "results": "{\"t\": \"2026-10-24T05:03:18Z\", \"tool\": \"grep\", \"query\": \"schematicClosure|schematic.closure|generic.*[Ss]ubgroup|[Ss]ubgroup.*closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Units/Regulator.lean\", \"Mathlib/NumberTheory/NumberField/Units/Regulator.lean\", \"Mathlib/NumberTheory/NumberField/Units/Regulator.lean\", \"Mathlib/NumberTheory/NumberField/Units/Regulator.lean\", \"Mathlib/NumberTheory/NumberField/Units/Regulator.lean\"], \"digest\": \"95a9cee6cc79f216\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned flatness criteria, topological subgroup closure, and specTargetImageFactorization for an affine target. None gives the flat schematic subgroup closure and its universal factorization; the Dedekind torsion-free flat instance covers only the module-flatness subargument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closure of a generic fibre subgroup in a separated group scheme over a Dedekind ring is flat",
+   "results": "{\"t\": \"2026-10-24T05:03:19Z\", \"tool\": \"leansearch\", \"query\": \"Closure of a generic fibre subgroup in a separated group scheme over a Dedekind ring is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"Subgroup.isClosed_topologicalClosure\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Subgroup.closure\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"4e373c98845f7f97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned flatness criteria, topological subgroup closure, and specTargetImageFactorization for an affine target. None gives the flat schematic subgroup closure and its universal factorization; the Dedekind torsion-free flat instance covers only the module-flatness subargument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic closure of a closed subgroup of the generic fibre of a locally finite type group over a Dedekind domain is flat and admits factorization from flat schemes",
+   "results": "{\"t\": \"2026-10-24T05:03:22Z\", \"tool\": \"leanfinder\", \"query\": \"Schematic closure of a closed subgroup of the generic fibre of a locally finite type group over a Dedekind domain is flat and admits factorization from flat schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\"], \"digest\": \"23bc83bf9d2e097f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned flatness criteria, topological subgroup closure, and specTargetImageFactorization for an affine target. None gives the flat schematic subgroup closure and its universal factorization; the Dedekind torsion-free flat instance covers only the module-flatness subargument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scheme morphisms whose generic fibre lands in a closed subgroup factor through its scheme theoretic closure over a Dedekind base",
+   "results": "{\"t\": \"2026-10-24T05:03:23Z\", \"tool\": \"leanfinder\", \"query\": \"Flat scheme morphisms whose generic fibre lands in a closed subgroup factor through its scheme theoretic closure over a Dedekind base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"14aa3609e43d0130\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned flatness criteria, topological subgroup closure, and specTargetImageFactorization for an affine target. None gives the flat schematic subgroup closure and its universal factorization; the Dedekind torsion-free flat instance covers only the module-flatness subargument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic closure of a subgroup of the generic fiber over a Dedekind domain is a flat closed subgroup scheme",
+   "results": "{\"t\": \"2026-10-24T06:54:41Z\", \"tool\": \"leanfinder\", \"query\": \"Schematic closure of a subgroup of the generic fiber over a Dedekind domain is a flat closed subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"instFlatAtPrime\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"043f555793151ee5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"schemeTheoreticImage\"",
+   "results": "{\"t\": \"2026-10-24T06:54:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, \\\"schemeTheoreticImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTheoreticImage|schematicClosure|schematic.closure",
+   "results": "{\"t\": \"2026-10-24T06:54:41Z\", \"tool\": \"grep\", \"query\": \"schemeTheoreticImage|schematicClosure|schematic.closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic closure of a subgroup of the generic fibre over a Dedekind domain is flat and a subgroup",
+   "results": "{\"t\": \"2026-10-24T06:55:06Z\", \"tool\": \"leansearch\", \"query\": \"The scheme theoretic closure of a subgroup of the generic fibre over a Dedekind domain is flat and a subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"394985176099743c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat scheme over an integral domain has schematically dense generic fiber so maps to a closed subscheme factor if they do generically",
+   "results": "{\"t\": \"2026-10-24T06:55:07Z\", \"tool\": \"leanfinder\", \"query\": \"A flat scheme over an integral domain has schematically dense generic fiber so maps to a closed subscheme factor if they do generically\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsDominant\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.isDominant_iff\"], \"digest\": \"a31b710a0da87357\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"image\", \"ker\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T06:55:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"image\\\", \\\"ker\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "instOfIsDedekindDomainOfIsTorsionFree|flat_iff_torsion_eq_bot|IsDedekindDomain R|IsTorsionFree R M",
+   "results": "{\"t\": \"2026-10-24T06:58:55Z\", \"tool\": \"grep\", \"query\": \"instOfIsDedekindDomainOfIsTorsionFree|flat_iff_torsion_eq_bot|IsDedekindDomain R|IsTorsionFree R M\", \"sub\": \"RingTheory/Flat/TorsionFree.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"26\", \"66\", \"93\", \"125\", \"133\"], \"digest\": \"b41e591b2137af50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: flatness interfaces and topological density do not give schematic subgroup closure with arbitrary-flat-source factorization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-neron-lft-descent",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Trait-extension input: construct the ambient Néron lft-model, BLR 10.1 Proposition 4 proof: Flat generic subgroup closure in a Dedekind lft-group",
+   "via": [
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-lft-generic-subgroup-closure",
+  "worker": "stage1",
+  "summary": "Constructed the closure as a quasi-compact scheme image; proved generic identification by contraction-extension and flatness by torsion-freeness. Wrote the arbitrary-flat-source factorization and group operations explicitly. One new Mathlib leaf, no statement changes.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs ancestor returns None). Refines the existing trait-extension/BLR subgroup-closure place recorded in blueprint.from: affine closure, flatness, factorization and inherited operations."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NW-2fa22082b",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-2fa22082b (reviewer sub-agent of L); spot-checked: FIX: two wording repairs to the item's proof text; statement, stmt_deps and uses lists unchanged. I read every step against the statements of the cited nodes, Stacks 01R6/01R8 (morphisms.tex 797-885), 0AUW(1) (more-algebra.tex 4954) and Mathlib Flat/TorsionFree.lean:138/143. Step 1: J×_{M_E}U_E is closed in the affine U_E, so a is quasi-compact; the nagata node's injectivity on sections gives ker(a)(U)=I_U. The delivered text claimed a 'full sheaf kernel' clause the node does not state, so the text now uses its section-injectivity. Step 2: contraction/extension T^{-1}I_U=K_U is correct (b/1=t·(b/t)); B/I_U embeds in an E-algebra, so it is torsion-free, including when J∩U_E is empty. Step 3: new leaf, then lem-weil-pbc-flat-local-ring-maps, then pointwise flatness; correct. Step 4: affine criterion plus flat⇒torsion-free kills f^♯(b); uniqueness and gluing come from the closed immersion being a monomorphism; no quasi-compactness of X needed. Steps 5-6: flatness of C×_S C, generic restrictions landing in J, axioms by cancelling i; correct. Step 7: the delivered text proved local finite type only over V=S, while def-weil-finite-type-morphism needs every affine V of S; the text now runs the argument over arbitrary V=Spec A'. Separatedness via (i×i)^{-1}Δ_M=C is correct. New node lem-sfb-dedekind-torsionfree-module-flat: exact Mathlib leaf (instance at line 143; IsDedekindDomain = Noetherian, dimension ≤1, integrally closed domain). Not a duplicate of the PID/valuation-ring/DVR-f.g. nodes, and strictly smaller than the item. Batch-5 flag: lem-trf-flat-module-torsionfree-domain is a Mathlib leaf of generic commutative algebra (flat⇒torsion-free over a domain) with no proof closure, and no other DAG node states it; it is not part of the trace formula or Poincaré duality, so accepted. BLR is absent locally; the proof is marked agent-written with a WANTED line. No SGA, no route citations, no tool_uses needed. Statement tested on J=M_E with M non-flat, trivial J, nonreduced J, D a field, and a non-flat special-fibre X (the flatness hypothesis is necessary).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DedekindGenericSubgroupClosure",
+  "declaration": "AlgebraicGeometry.exists_dedekind_generic_subgroup_closure",
+  "file": "lean/Sheaf/AlgebraicGeometry/DedekindGenericSubgroupClosure.lean",
+  "statement": "theorem exists_dedekind_generic_subgroup_closure (D : Type u) [CommRing D] [IsDedekindDomain D] (_hDdim : ringKrullDim D = 1) (E : Type u) [Field E] [Algebra D E] [IsFractionRing D E] (M : Grp (Over (Spec (CommRingCat.of D)))) [IsCommMonObj M.X] [IsSeparated M.X.hom] [LocallyOfFiniteType M.X.hom] (J : Grp (Over (Spec (CommRingCat.of E)))) (j : J.X ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj M.X) [IsMonHom j] [IsClosedImmersion j.left] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] : ∃ (C : Grp (Over (Spec (CommRingCat.of D)))) (i : C.X ⟶ M.X), IsMonHom i ∧ IsClosedImmersion i.left ∧ IsCommMonObj C.X ∧ IsSeparated C.X.hom ∧ Flat C.X.hom ∧ LocallyOfFiniteType C.X.hom ∧ (∀ U : M.X.left.affineOpens, RingHom.ker (i.left.app U).hom = RingHom.ker ((j.left ≫ pullback.fst M.X.hom (Spec.map (CommRingCat.ofHom (algebraMap D E)))).app U).hom) ∧ (∃ e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj C.X ≅ J.X, e.hom ≫ j = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).map i) ∧ (∀ (X : Over (Spec (CommRingCat.of D))) (_hX : Flat X.hom) (f : X ⟶ M.X), (∃ g : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj X ⟶ J.X, g ≫ j = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).map f) → ∃! g : X ⟶ C.X, g ≫ i = f)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dda928166",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsDedekindDomain + ringKrullDim=1 (exact Dedekind, fields excluded as node), IsFractionRing E, M Grp over Spec D with IsCommMonObj/IsSeparated/LocallyOfFiniteType only, J Grp over Spec E with lft+qc (finite type per dep record), j closed immersion IsMonHom into canonical Over.pullback group transport; conclusion closed subgroup C, affine ideal = RingHom.ker of section maps (pins C; closed immersion affine so LHS = I_U), separated/commutative/flat/lft, C_E≅J over Spec E compatible with j, unique factorization for every flat X with no finiteness. Edge cases (trivial/nonreduced J, J disjoint from affine U, field D, universes) ok. Statement field verbatim, only lean record differs from live node, docstrings with source and blueprint and 7 proof steps, no defs, proof sorry, report sections present. Not recompiled (no change). Maintainer note: parallel Q49 delivery 786fbd441 of the same node (exists_dedekind_lft_generic_subgroup_closure, different module) also PASSed; land only one as the node record."
+ }
+}

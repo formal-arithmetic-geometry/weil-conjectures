@@ -1,0 +1,517 @@
+{
+ "id": "lem-sfb-nowhere-dense-section-cover-image",
+ "kind": "statement",
+ "title": "Nowhere dense images through a finite closed section cover",
+ "statement": "Let $q:W\\to X$ be a finite locally free morphism of schemes [def-pc-finite-locally-free]. Suppose there are finitely many closed subschemes $i_j:W_j\\hookrightarrow W$ [def-weil-closed-immersion] whose underlying sets cover $|W|$, and each composite $W_j\\to W\\to X$ is an isomorphism. If $A\\subseteq|W|$ is closed and nowhere dense (the interior of its closure is empty), then $q(A)$ is closed and nowhere dense in $|X|$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HX, proof after Tag 03HW: the paragraph beginning 'Assume that Y is a finite union of closed subsets' and the contradiction paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $C_j=i_j(|W_j|)\\subseteq|W|$. By [def-weil-closed-immersion], $C_j$ is closed and $|W_j|\\to C_j$ is a homeomorphism. The isomorphism $q i_j$ and its inverse induce inverse continuous maps, so $h_j=q|_{C_j}:C_j\\to|X|$ is a homeomorphism. Put $B_j=A\\cap C_j$ and $E_j=h_j(B_j)$. Each $B_j$ is closed in $C_j$, hence each $E_j$ is closed in $|X|$. The cover gives $q(A)=\\bigcup_j E_j$, a finite union of closed subsets, so $q(A)$ is closed. If the index set is empty then $W$ and $A$ are empty and the conclusion holds.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, lemma-image-nowhere-dense-finite, finite closed section-cover paragraph and its contradiction argument"
+   }
+  },
+  {
+   "text": "Fix a section, relabelled $C_1$. Suppose $B_1$ contains a nonempty relatively open subset $V\\subseteq C_1$. Process the remaining finitely many $C_j$ one at a time, maintaining that $V$ is nonempty, open in $C_1$, contained in $B_1$, and for every processed index either $V\\subseteq C_j$ or $V\\cap C_j=\\varnothing$. Since $C_j$ is closed [def-weil-closed-immersion], $V\\cap C_j$ is closed in $V$. If it is a proper subset, replace $V$ by its nonempty open complement $V\\setminus C_j$. Otherwise retain $V$. Shrinking preserves all earlier decisions and the maintained properties. This gives a partition $I_1\\amalg I_2$ of the indices with $1\\in I_1$, $V\\subseteq C_j$ for $j\\in I_1$ and $V\\cap C_j=\\varnothing$ for $j\\in I_2$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, lemma-image-nowhere-dense-finite, finite closed section-cover paragraph and its contradiction argument"
+   }
+  },
+  {
+   "text": "Set $U=h_1(V)$, a nonempty open subset of $|X|$. For $j\\in I_1$, the inclusion $V\\subseteq C_j$ and injectivity of $h_j$ show $C_j\\cap q^{-1}(U)=V$: a point over $x\\in U$ must be the unique point of $V$ over $x$. For $j\\in I_2$, $C_j$ misses $V$. Using the cover of $|W|$ therefore gives $V=q^{-1}(U)\\setminus\\bigcup_{j\\in I_2}C_j$. This is open in $|W|$: $q$ is continuous and the union on the right is a finite union of closed subsets [def-weil-closed-immersion]. But $\\varnothing\\ne V\\subseteq A$, contradicting that the closed subset $A$ has empty interior. Thus every $B_j$ has empty interior in $C_j$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, lemma-image-nowhere-dense-finite, finite closed section-cover paragraph and its contradiction argument"
+   }
+  },
+  {
+   "text": "For each $j$, a nonempty open subset of $|X|$ contained in $E_j$ would have nonempty open inverse image under $h_j$ contained in $B_j$, contrary to the preceding steps. Thus the closed subsets $E_j$ all have empty interior. To finish, the union of two closed subsets $D,F$ of empty interior also has empty interior: if $O\\subseteq D\\cup F$ is open, then $O\\setminus F$ is open and contained in $D$, hence empty; consequently $O\\subseteq F$, hence $O=\\varnothing$. Induction on the finite index set, starting with the empty subset, shows $q(A)=\\bigcup_j E_j$ has empty interior. Since it is closed by step 1, it is nowhere dense. This is the elementary finite-union argument in Topology Tag 03HO (lemma-nowhere-dense), written out here rather than made a new node.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HX, lemma-image-nowhere-dense-finite, finite closed section-cover paragraph and its contradiction argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HX, lemma-image-nowhere-dense-finite, finite closed section-cover paragraph and its contradiction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map covered by finitely many closed subspaces each mapping homeomorphically onto its target sends closed nowhere dense subsets to nowhere dense subsets",
+   "results": {
+    "t": "2026-10-23T23:13:40Z",
+    "tool": "leanfinder",
+    "query": "A continuous map covered by finitely many closed subspaces each mapping homeomorphically onto its target sends closed nowhere dense subsets to nowhere dense subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsInducing.isNowhereDense_image",
+     "IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph",
+     "image_subset_closure_compl_image_compl_of_isOpen",
+     "Profinite.NobelingProof.isClosed_C'",
+     "isClosed_property3",
+     "OpenPartialHomeomorph.IsImage.closure",
+     "isClosed_property2",
+     "TopologicalSpace.IsOpenCover.isClosedMap_iff_restrictPreimage"
+    ],
+    "digest": "def7c4ec35f58ff8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic inducing-map, covering-map and closed-map lemmas do not give the finite closed section-cover argument; the grep searched the GDelta topology directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme finite locally free over X covered by finitely many closed sections maps a closed nowhere dense subset to a nowhere dense subset of X",
+   "results": {
+    "t": "2026-10-23T23:13:41Z",
+    "tool": "leanfinder",
+    "query": "A scheme finite locally free over X covered by finitely many closed sections maps a closed nowhere dense subset to a nowhere dense subset of X",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget",
+     "AlgebraicGeometry.dominant_eq_topologically",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.IsDominant",
+     "AlgebraicGeometry.instIsDominantιCoborderRange"
+    ],
+    "digest": "adc8116f6415ad4f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic inducing-map, covering-map and closed-map lemmas do not give the finite closed section-cover argument; the grep searched the GDelta topology directory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite closed section cover of a finite locally free morphism sends a closed nowhere dense subset to a nowhere dense image",
+   "results": {
+    "t": "2026-10-23T23:07:48Z",
+    "tool": "leansearch",
+    "query": "A finite closed section cover of a finite locally free morphism sends a closed nowhere dense subset to a nowhere dense image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsInducing.isNowhereDense_image",
+     "IsNowhereDense",
+     "IsNowhereDense.mono",
+     "IsNowhereDense.image_val",
+     "IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph",
+     "IsNowhereDense.closure",
+     "AlgebraicGeometry.Scheme.Hom.isClosedMap",
+     "IsNowhereDense.subset_of_closed_isNowhereDense"
+    ],
+    "digest": "b05e245db0120f21"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic inducing-map, covering-map and closed-map lemmas do not give the finite closed section-cover argument; the grep searched the GDelta topology directory."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, IsNowhereDense",
+   "results": {
+    "t": "2026-10-23T23:13:40Z",
+    "tool": "loogle",
+    "query": "IsClosedMap, IsNowhereDense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic inducing-map, covering-map and closed-map lemmas do not give the finite closed section-cover argument; the grep searched the GDelta topology directory."
+  },
+  {
+   "tool": "grep",
+   "query": "nowhere.?dense|isNowhereDense",
+   "results": {
+    "t": "2026-10-23T23:13:39Z",
+    "tool": "grep",
+    "query": "nowhere.?dense|isNowhereDense",
+    "sub": "Topology/GDelta",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean"
+    ],
+    "digest": "e0d544d54ea0385f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: generic inducing-map, covering-map and closed-map lemmas do not give the finite closed section-cover argument; the grep searched the GDelta topology directory."
+  },
+  {
+   "tool": "grep",
+   "query": "isNowhereDense.*(union|iUnion)|IsNowhereDense.union",
+   "results": {
+    "t": "2026-10-23T23:43:25Z",
+    "tool": "grep",
+    "query": "isNowhereDense.*(union|iUnion)|IsNowhereDense.union",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite union of nowhere dense subsets is nowhere dense",
+   "results": {
+    "t": "2026-10-23T23:43:25Z",
+    "tool": "leansearch",
+    "query": "A finite union of nowhere dense subsets is nowhere dense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsMeagre.union",
+     "IsNowhereDense",
+     "IsNowhereDense.mono",
+     "isMeagre_iUnion",
+     "isMeagre_biUnion",
+     "IsMeagre",
+     "isMeagre_iff_countable_union_isNowhereDense",
+     "Set.Finite.dense_sInter"
+    ],
+    "digest": "2c20545cca9f5e43"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNowhereDense, _ ∪ _",
+   "results": {
+    "t": "2026-10-23T23:43:25Z",
+    "tool": "loogle",
+    "query": "IsNowhereDense, _ ∪ _",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IsNowhereDense.union"
+    ],
+    "digest": "4d2e06b62de10c6e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of two nowhere dense sets has closure with empty interior",
+   "results": {
+    "t": "2026-10-23T23:43:26Z",
+    "tool": "leanfinder",
+    "query": "The union of two nowhere dense sets has closure with empty interior",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsNowhereDense.closure",
+     "IsNowhereDense",
+     "IsNowhereDense.isMeagre",
+     "IsNowhereDense.mono",
+     "isNowhereDense_empty",
+     "isNowhereDense_iff_disjoint",
+     "interior_union_isClosed_of_interior_empty",
+     "IsNowhereDense.subset_of_closed_isNowhereDense"
+    ],
+    "digest": "7be09949f79e9da4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite union of nowhere dense subsets of a topological space is nowhere dense",
+   "results": {
+    "t": "2026-10-23T23:43:27Z",
+    "tool": "leanfinder",
+    "query": "A finite union of nowhere dense subsets of a topological space is nowhere dense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsMeagre.union",
+     "isMeagre_iUnion",
+     "isMeagre_iff_countable_union_isNowhereDense",
+     "isMeagre_biUnion",
+     "IsNowhereDense.isMeagre",
+     "IsMeagre",
+     "IsMeagre.empty",
+     "BaireSpace"
+    ],
+    "digest": "ea1a3384b6d9112a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNowhereDense|isNowhereDense",
+   "results": {
+    "t": "2026-10-23T23:43:54Z",
+    "tool": "grep",
+    "query": "IsNowhereDense|isNowhereDense",
+    "sub": "Topology/GDelta",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean"
+    ],
+    "digest": "04a3d2cf6ebcfcb8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "grep",
+   "query": "nowhere.?dense|isNowhereDense",
+   "results": {
+    "t": "2026-10-23T23:44:33Z",
+    "tool": "grep",
+    "query": "nowhere.?dense|isNowhereDense",
+    "sub": "Topology/GDelta",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean",
+     "Mathlib/Topology/GDelta/Basic.lean"
+    ],
+    "digest": "e0d544d54ea0385f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite closed section cover of a finite locally free morphism sends a closed nowhere dense subset to a nowhere dense image",
+   "results": {
+    "t": "2026-10-23T23:44:34Z",
+    "tool": "leansearch",
+    "query": "A finite closed section cover of a finite locally free morphism sends a closed nowhere dense subset to a nowhere dense image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsInducing.isNowhereDense_image",
+     "IsNowhereDense",
+     "IsNowhereDense.mono",
+     "IsNowhereDense.image_val",
+     "IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph",
+     "IsNowhereDense.closure",
+     "AlgebraicGeometry.Scheme.Hom.isClosedMap",
+     "IsNowhereDense.subset_of_closed_isNowhereDense"
+    ],
+    "digest": "b05e245db0120f21"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, IsNowhereDense",
+   "results": {
+    "t": "2026-10-23T23:44:34Z",
+    "tool": "loogle",
+    "query": "IsClosedMap, IsNowhereDense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme finite locally free over X covered by finitely many closed sections maps a closed nowhere dense subset to a nowhere dense subset of X",
+   "results": {
+    "t": "2026-10-23T23:44:35Z",
+    "tool": "leanfinder",
+    "query": "A scheme finite locally free over X covered by finitely many closed sections maps a closed nowhere dense subset to a nowhere dense subset of X",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget",
+     "AlgebraicGeometry.dominant_eq_topologically",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.IsDominant",
+     "AlgebraicGeometry.instIsDominantιCoborderRange"
+    ],
+    "digest": "adc8116f6415ad4f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map covered by finitely many closed subspaces each mapping homeomorphically onto its target sends closed nowhere dense subsets to nowhere dense subsets",
+   "results": {
+    "t": "2026-10-23T23:44:36Z",
+    "tool": "leanfinder",
+    "query": "A continuous map covered by finitely many closed subspaces each mapping homeomorphically onto its target sends closed nowhere dense subsets to nowhere dense subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsInducing.isNowhereDense_image",
+     "IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph",
+     "image_subset_closure_compl_image_compl_of_isOpen",
+     "Profinite.NobelingProof.isClosed_C'",
+     "isClosed_property3",
+     "OpenPartialHomeomorph.IsImage.closure",
+     "isClosed_property2",
+     "TopologicalSpace.IsOpenCover.isClosedMap_iff_restrictPreimage"
+    ],
+    "digest": "def7c4ec35f58ff8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: inducing maps need not include q, and the section-cover shrinking argument is not supplied by the generic topology results. The online finite-union hit IsNowhereDense.union is absent from the pinned Mathlib and is proved in project StratificationDense.lean:50; the elementary closed-set special case is written in step 4."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-image-nowhere-dense",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Point-avoidance step: for a fixed h the bad set W minus W-prime is closed nowhere dense; its finite image can be removed from V to obtain an entire good fibre. Supporting argument: Stacks 03HX final paragraph, finite closed section-cover case before descent.",
+   "via": [
+    "lem-sfb-finite-image-nowhere-dense",
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nowhere-dense-section-cover-image",
+  "worker": "stage1",
+  "summary": "Checked the finite closed section-cover argument of Stacks 03HX. Wrote the shrinking induction, its invariant and the exact open-subset identity. Closedness follows directly from the section homeomorphisms. Wrote the elementary two-closed-set argument and its finite induction rather than introducing a redundant finite-union node. No new nodes or statement changes.",
+  "blueprint": "The inherited blueprint.from has node null; preserved it and its full via chain. This split realizes its named supporting argument, Stacks 03HX final paragraph, finite closed section-cover case before descent, below det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint proof (3) was read; no blueprint node states this topological input."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-c37e4508f",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-c37e4508f (reviewer sub-agent of L); spot-checked: Read the item in full. The delivery creates no new nodes and leaves the statement unchanged. I checked it against Stacks morphisms.tex Tag 03HX (lemma-image-nowhere-dense-finite), last paragraph (finite closed section cover). The item's hypotheses match it; the extra finite-locally-free hypothesis is unused and harmless, and is supplied by the parent lem-sfb-finite-image-nowhere-dense, step 2. Step 1: def-weil-closed-immersion makes each C_j closed and homeomorphic to |W_j|, and the isomorphism q∘i_j makes h_j a homeomorphism, so q(A)=∪E_j is closed; the empty index set is handled. Step 2: the shrinking induction states its invariant and both cases. Step 3: I verified C_j∩q^{-1}U=V for j∈I_1 by injectivity of h_j, so V=q^{-1}U∖∪_{I_2}C_j is open and nonempty inside A, a contradiction. Step 4: empty interior transfers through h_j, and Topology 03HO for two closed sets is written out with a finite induction; this is elementary under C1. Small cases tested: two disjoint sections, two sections meeting at the origin over A^1, a nonreduced point, empty X. No duplicate in dag/nodes: the grep for 03HX, 03HO and 'nowhere dense' finds only the parent and the unrelated lem-pc-nowhere-dense-dim-zero. The pinned Mathlib has no IsNowhereDense.union, as the report says. No SGA is cited, no cycle results and there are no fixes. The null blueprint.from.node follows the parent's pattern. No repair note exists, so the re-split rules do not apply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NowhereDenseSectionCoverImage",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isClosed_and_isNowhereDense_image_of_finite_closed_section_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/NowhereDenseSectionCoverImage.lean",
+  "statement": "theorem Scheme.Hom.isClosed_and_isNowhereDense_image_of_finite_closed_section_cover {W X : Scheme.{u}} (q : W ⟶ X) [q.IsFiniteLocallyFree] {J : Type v} [Finite J] (Wj : J → Scheme.{u}) (i : ∀ j : J, Wj j ⟶ W) [∀ j : J, IsClosedImmersion (i j)] (hcover : ∀ w : W, ∃ j : J, w ∈ Set.range (i j)) [∀ j : J, IsIso (i j ≫ q)] (A : Set W) (hA : IsClosed A) (hnd : IsNowhereDense A) : IsClosed (q '' A) ∧ IsNowhereDense (q '' A)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-223095653",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 03HX section-cover paragraph clause by clause: q.IsFiniteLocallyFree (recorded FiberDegree class, no degree), Finite J (empty allowed), IsClosedImmersion (i j), point cover via Set.range, IsIso (i j ≫ q) on the composite, A closed + IsNowhereDense (Mathlib def = interior (closure A) = ∅), conclusion IsClosed ∧ IsNowhereDense of q '' A. No extra assumptions; universes u,v independent and bound; lean.statement verbatim; stmt_deps correct; no defs/new nodes/dep changes/statement_change; proof is sorry only; source and blueprint docstrings present, declaration docstring has the 4 proof steps; report has Worker report and Second reading by Q23 (a self-review). No existing duplicate in Mathlib or the project Lean. Not recompiled (no file changed); worker reports a clean scompile."
+ }
+}

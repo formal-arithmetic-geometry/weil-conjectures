@@ -1,0 +1,74 @@
+# Stage-1 report: lem-sfb-marked-nodal-infinitesimal-fields
+
+## 1. Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-marked-nodal-infinitesimal-fields.json`: the item, split in ten steps; its statement and statement dependencies are unchanged. Not a Mathlib leaf.
+- `citations.json`: verbatim statement excerpts (the full statement in each case) for all 27 step/node citations.
+- No new nodes; no new Mathlib leaves; no unit record changed. `searches.jsonl` is the command-produced search log.
+
+The sandbox initially contained only dispatcher brief markers. There was no earlier split, report or search log to reuse. I copied the current item, retained its source, blueprint fields and inherited searches, and appended only searches actually run in this session. No repository file, Lean file or launcher file was written; no git, compiler or Lake command was run.
+
+## 2. Attachments
+
+None. Searched the current `lean/WeilConjectures/` for the exact blueprint id, nodal curves, vector fields and infinitesimal automorphisms, then examined the curve directory's derivation hits. None states this item. General tangent-space or invariant-group-vector-field declarations do not give this marked nodal assertion.
+
+## 3. WANTED
+
+None. The needed Stacks sources are local: `curves.tex`, `varieties.tex`, `algebra.tex`, `more-algebra.tex`, and `more-morphisms.tex`.
+
+## 4. Corrections and route
+
+The item is true and its statement has not been changed. There is no STATEMENT-DISPUTED claim about the item. Its empty marking list and its genus bounds are intentional.
+
+The chapter, unit, SETUP's three levels and the current blueprint direct-image proof were read. This item is a supporting rigidity argument below the already recorded stable pointed Isom input; it does not change the alteration/direct-image route. `tools/blueprint_refs.py ancestor` returns `None` for this existing created-node chain, matching the inherited `blueprint.from.node = null`; its detailed place and via list were preserved. Searches for “infinitesimal marked”, “vector field”, “vector fields”, “derivation” and “normalization” found no blueprint node stating this item. The latter broad searches did expose definitions and generic tools, which are reused rather than copied into new nodes.
+
+All supporting facts already have nodes. In particular the uniformizer differential basis, localization/completion of derivations, completed curve normalization, faithful-flat module injectivity, differential invertibility, canonical degree, rational-section divisors and divisor realization are existing statements. Thus no extra “nodal derivations equal normalized derivations” or “smooth vector field zero bound” node was created to restate a clause of this item.
+
+### Source error
+
+Stacks `curves.tex`, Tag 0E68 (`lemma-nodal-vector-fields`), writes an uncompleted local exact sequence with the product of the two normalization branch stalks and then treats their uniformizers as elements of the original local ring with product zero. This inference fails at an irreducible node. For example over the complex numbers the projective cubic
+
+$$y^2z=x^2(x+z)$$
+
+is integral and has a node at $(0:0:1)$. Its local ring there is a domain. The equal-residue subring of the product of its two branch DVRs has nonzero zero divisors $(u,0)$ and $(0,v)$, so it cannot be that domain. A finite normalization stalk is semilocal, and need not be the product of its localizations at the branches. The analogous product statement is valid after completion. Steps 2–6 use exactly this completed statement, supplied by the existing 0C3V node, and descend membership by faithful flatness. The assertion of 0E68 remains true; only that proof's uncompleted inference is repaired. Accordingly `proof_origin.by` is `agent`, with the local source and correction explicitly identified.
+
+The unit has no replacement for the generic curve and commutative-algebra tools used here. Their individual roles are declared in `split_report.tool_uses`; none replaces a unit-level proof route. Existing Mathlib leaves and definition nodes need no off-unit permission entry.
+
+## 5. Unfinished work
+
+None at the stage-1 level of this item. Existing dependency nodes retain their own states. No claim of a Lean proof is made. The maintainer's independent mathematical review remains the normal delivery review.
+
+## Not duplicates
+
+No new nodes were created. DAG searches by 0E67, 0E68, 02H5, vector-field/derivation terms and normalization terms were read; the generic supporting nodes, rather than new duplicates, appear in `proof_deps`. Existing 0E67/0E68 mentions in this item's source are not treated as a theorem citation proving the item.
+
+## Mathlib searches
+
+Ran the required msearch command with this item's group and id for LeanFinder, Loogle, grep and LeanSearch, plus a second LeanFinder phrasing and a follow-up grep for the returned square-zero correspondence. All six calls succeeded and their exact queries/results are appended to the item from `searches.jsonl`.
+
+The first LeanFinder result included `derivationToSquareZeroEquivLift`; the follow-up grep located its definition at `Mathlib/RingTheory/Derivation/ToSquareZero.lean:116`, and I read lines 108–124. It is a ring-algebra equivalence between derivations into a square-zero ideal and lifts of a fixed quotient map. It does not identify the global scheme automorphism group with the normalized curve fields or prove the genus bounds. Step 1 writes out its elementary dual-number specialization and gluing directly. Loogle returns the abstract structure `Derivation` (read its definition in `Basic.lean`); the second natural-language search returns Weierstrass equations and differential-geometric objects. LeanSearch returns differential-geometric vector-field identities. The algebraic-geometry grep has no nodal/vector-field/infinitesimal automorphism hit. None is a match for the item. No unavailable service is presented as a negative result.
+
+## Review by N0
+
+I read Stacks 0E67 and 0E68, including their proofs and the fixed-point definition immediately preceding them, and 02H5's formula for a difference of infinitesimal maps. For the completed correction I read 0C3V in `varieties.tex`, 07PE in `more-algebra.tex`, 00MA and 00MC in `algebra.tex`, and the uniformizer lemma 0C1E in `curves.tex`. I also read 0B40's section-degree argument. There are no new nodes requiring a separate source review.
+
+For every cited dependency I opened its JSON and read its statement. The entries of `citations.json` are taken from those statements, not their proofs. Here is the step-by-step check of what they supply and what the argument proves itself.
+
+1. `def-sc-dual-numbers` supplies the actual dual-number ring, not an infinitesimal-automorphism theorem. The proof computes the formula, inverse, composition and marked-section condition. The formula works in every characteristic and is restriction-compatible. Preservation of the marked ideal is equivalent to zero evaluation because the point is k-rational and the derivation kills k.
+2. `lem-weil-pbc-finite-type-over-noetherian` supplies Noetherianity because C is proper and hence finite type over the Noetherian field spectrum. `lem-weil-pbc-completion-dimension` transfers dimension one from the completed node; the prime-ideal calculation for that completed ring is written explicitly. `lem-trf-reduced-curve-normalization-genus` supplies finite normalization and a finite smooth proper component decomposition; its hypotheses are proper, reduced, pure dimension one over an algebraically closed field, with nonemptiness now dealt with explicitly before application. `lem-sc-smooth-normal` and clause (2) of `lem-per-componentwise-normalization-properties` give the isomorphism over the smooth locus. `lem-trf-curve-normalization-completion` really does give finite integral closure and its identification after completion; a curve local ring at a node is reduced, essentially of finite type and one-dimensional. `lem-trf-ordinary-point-delta-branches` supplies exactly two normalization points at an ordinary node. `lem-sc-proper-dim-one-projective` applies to each proper one-dimensional component and supplies the projectivity in the setup. The finite support of the defect sheaf, together with node defect one from the ordinary-point node, also explicitly proves that the node set and each E_a are finite. None of these nodes assumes the original curve is integral globally.
+3. `lem-weil-pbc-power-series-normal-domain` applies to the field k, which is a Noetherian normal domain, giving normality of each one-variable factor. The equal-constant-pair map, idempotent integral extension, and fraction calculation are explicitly written out. `lem-weil-pbc-completion-finite-module-tensor` applies because A is Noetherian and B is finite over A; its comparison is the canonical map, so the completion really is the P of the prior calculation.
+4. `lem-weil-pbc-local-completion-faithfully-flat` applies to the Noetherian local A, and `lem-weil-pbc-faithfully-flat-universally-injective` explicitly applies to every A-module, including Q(A)/B, which need not be finite. The two membership tests are short quotient-and-injectivity arguments; I did not assume that all elements of the completed normalization come from rational elements. This step is elementary relative to the two cited results.
+5. `lem-weil-pbc-derivation-extends` states both the completion construction and the unique localization formula, not just the definition of a derivation. The displayed uv calculation proves ideal preservation; division by a characteristic or by 2 is never used. The Laurent-series quotient formula agrees on Q(A), and step 4 is what turns completed regularity into membership in B. Vanishing of residues on B implies preservation of each localized branch maximal ideal by the quotient rule.
+6. The same extension node applies to the ring B and ideal m_A B, with no requirement that B be local. The completed derivation is continuous, and evaluation is continuous because each branch residue ideal contains m_A B. Vanishing of evaluation after derivation extends from dense B to P. The explicit idempotent identity shows the two factors are preserved even in characteristic two. The equal-residue subring is therefore preserved, and the B/A membership test is exactly what descends the map to A.
+7. The localization uniqueness in `lem-weil-pbc-derivation-extends` guarantees compatibility of the actual maps on overlaps. I checked the uniqueness in rational rings rather than merely asserting that local maps “transport”. Smooth markings have one preimage and the same ideal there. The finite component set obtained in step 2 justifies replacing product by direct sum. These are canonical inverse additive constructions.
+8. `lem-sc-smooth-connected-curve-local-rings` explicitly supplies integrality, and `lem-kun-closed-point-field` supplies finite residue degree at every closed point. Algebraic closedness then identifies the residue field with k. `def-sc-relative-differential-sheaf` gives the universal derivation on affine charts and restriction compatibility; `lem-sc-canonical-sheaf` gives invertibility; `lem-pc-tensor-dual-invertible` gives the invertible dual. A section of the dual is by definition an O-linear map into O. `lem-a1-uniformizer-differential-basis` assumes a smooth separated integral finite-type curve and a finite separable residue extension. These hold on the smooth connected component over algebraically closed k; the uniformizer generates the point ideal. The displayed Leibniz calculation proves that fixing the point is exactly vanishing of the section.
+9. `lem-sc-canonical-degree` uses the same H1 genus as the item's definition and gives degree 2g-2. `def-sc-pic0` gives degree as a homomorphism with rational points of degree one; invertibility of the tangent line then gives degree 2-2g. `lem-sc-smooth-connected-curve-local-rings` supplies integrality and injective local-to-generic restriction, so a nonzero global section is a nonzero rational section. `def-sc-rational-section-divisor` defines its local orders by those DVR valuations and includes finite support. `lem-sc-line-bundle-rational-section` explicitly gives the isomorphism O(div(s)) to the line bundle, which is exactly what is needed to identify its degree with the sum of zero orders. Regular local coefficients have nonnegative valuation and vanishing means positive valuation. This proves all three genus claims; no unnamed zero-counting theorem is being used.
+10. The genus arithmetic gives at least three special points on a rational component and at least one on a genus-one component. Step 9 then kills each summand; higher genus was already zero. This is the elementary final deduction, not a new node restating the conclusion.
+
+I tested smooth P1 with zero, one, two and three distinct markings (the space can have dimensions 3, 2, 1 and 0 respectively), a smooth elliptic curve with no markings and with one marking, and a smooth genus-two component with no markings. A rational self-nodal component has two distinct normalization preimages; with no further marking it may have a one-dimensional infinitesimal automorphism space, consistent with equality rather than strict stability. One further distinct marking kills it. These cases also check that branch points are counted on the normalization, including both branches on the same component, and that no stability assumption was accidentally used in the identification. The completed model and idempotent calculation also work in characteristic two. The empty curve is handled before the nonempty normalization lemma is invoked. There are no non-elementary proof steps longer than 2000 characters, no hidden new lemma moved into an overlong step, and no dependency path returns to this item.
+
+I corrected the uncompleted-stalk argument, made the empty case explicit, and corrected the faithful-flat universal-injectivity source tag to 05CK. The statement remains faithful to Stacks' vector-field assertion and marked-ideal convention. I checked delivery-errors B–E: no new node form/duplicate issues arise; all non-elementary external results are actual cited statements; the dual-number, completed local and divisor arguments carry the item's content rather than relabel its clauses; all hypotheses and edge cases above are accounted for.
+
+The initial full dry run passed. A final C1 audit then made the Noetherianity, completion-dimension, integrality and finite-residue-field citations explicit (all already existing nodes); the delivery is rechecked after these additions.
+
+The setup also explicitly cites the existing proper-dimension-one projectivity lemma for the normalization components and derives finiteness of the node set from finite support and positive node defect. I read its Stacks source 0A26 in varieties.tex. No new node was needed.

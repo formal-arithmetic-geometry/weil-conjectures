@@ -1,0 +1,437 @@
+{
+ "id": "lem-sfb-nodal-completed-normalization-model",
+ "kind": "statement",
+ "title": "Completed normalization model and branch geometry of a nodal curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $C$ be a nonempty proper reduced $k$-scheme of pure dimension one [def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pure-dimension], smooth except at nodes [def-sbc-smooth-morphisms], meaning that each nonsmooth point $x$ has completed local ring $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $\\nu:\\widetilde C\\to C$ be its reduced normalization [def-weil-pbc-reduced-normalization] and $S$ its nonsmooth locus. Then $C$ is Noetherian (quasi-compact and locally covered by spectra of Noetherian rings) [pqf-def-locnoeth], $S$ is a finite set of closed $k$-points, and $\\nu$ is finite [def-weil-finite-integral-morphism]. There are finitely many smooth projective connected components $C_a$ of $\\widetilde C$, and $\\nu$ is an isomorphism over $C\\setminus S$. For each $x\\in S$, let $(A,\\mathfrak m)=\\mathcal O_{C,x}$ and let $Q(A)$ be the localization obtained by inverting all non-zero-divisors. The integral closure $B\\subset Q(A)$ of $A$ [def-weil-pbc-integral-closure] is canonically $(\\nu_*\\mathcal O_{\\widetilde C})_x$, is finite over $A$, and has exactly two maximal ideals, both with residue field $k$, corresponding to the two points of $\\nu^{-1}(x)$. The local ring $A$ has dimension one [def-weil-pbc-krull-dimension-ring]. For any chosen nodal presentation of $\\widehat A$, its normalization is $P=k[[u]]\\times k[[v]]$ with $\\widehat A\\hookrightarrow P$ given by $h\\mapsto(h(u,0),h(0,v))$. Its image consists exactly of pairs with equal constant terms, and $Q(\\widehat A)=k((u))\\times k((v))$, where $k((t))$ denotes Laurent series with finitely many negative powers. The canonical maps identify $B\\otimes_A\\widehat A=\\varprojlim_n B/\\mathfrak m^nB$ with $P$ as $\\widehat A$-algebras [def-weil-module-base-change]; the two residue maps from $B$ are the restrictions of the two constant-term maps on $P$. Consequently the inverse images of $S$ and of any finite set of smooth closed points form a finite set on each $C_a$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E68 (lemma-nodal-vector-fields), normalization setup and completed replacement of its branch-ring calculation; varieties.tex Tag 0C3V (lemma-normalization-same-after-completion); algebra.tex Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain)."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-module-base-change",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "def-weil-pure-dimension",
+  "pqf-def-locnoeth",
+  "def-pc-projective-morphism",
+  "def-trf-normalization-pushforward-stalk",
+  "def-weil-pbc-laurent-series"
+ ],
+ "proof": [
+  {
+   "text": "Properness includes finite type and separatedness. The spectrum of the field $k$ is Noetherian: its coordinate ring has just the ideals $(0)$ and $(1)$. Therefore lem-weil-pbc-finite-type-over-noetherian makes $C$ Noetherian, including quasi-compactness. By lem-weil-pbc-noetherian-finitely-many-components its reduced irreducible components form a finite family $Z_a$. Each has dimension one by the pure-dimension hypothesis. We use precisely their disjoint union of function-field normalizations, as prescribed by def-weil-pbc-reduced-normalization.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W1 (definition-proper), 01T6 (lemma-finite-type-noetherian); component normalization Tag 0CDV (lemma-normalization-in-terms-of-components)"
+   }
+  },
+  {
+   "text": "Apply lem-trf-normalization-singular-skyscraper to $C$: the field is algebraically closed, $C$ is reduced and finite type, and all its irreducible components have dimension one. Its nonsmooth locus is the set $S$ in the question, hence is finite and consists of closed points with residue field $k$. The same statement gives finiteness of $\\nu$ and identifies $(\\nu_*\\mathcal O_{\\widetilde C})_x$ with the integral closure of $A=\\mathcal O_{C,x}$ in $Q(A)$. Denote this canonical algebra by $B$.",
+   "uses": [
+    "lem-trf-normalization-singular-skyscraper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (1)--(4), and finite-type perfect-field specialization"
+   }
+  },
+  {
+   "text": "For each reduced component $Z_a$, its closed inclusion in proper $C$ makes $Z_a$ proper, by the closed-immersion and composition clauses of lem-weil-pbc-proper-fp-permanence. It is integral, finite type, and of dimension one. Apply lem-sc-normalization-properties: $C_a=Z_a^\\nu$ is integral, proper, of dimension one, and smooth since the algebraically closed field is perfect (in characteristic $p>0$, every $a\\in k$ has a $p$-th root because $T^p-a$ splits). Apply lem-sc-proper-dim-one-projective to conclude that $C_a$ is projective. An integral nonempty scheme is connected, so these finitely many disjoint summands are exactly the connected components of $\\widetilde C$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-normalization-properties",
+    "lem-sc-proper-dim-one-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); Tag 0A26 (lemma-dim-1-proper-projective)"
+   }
+  },
+  {
+   "text": "Since $S$ is a finite set of closed points, $U=C\\setminus S$ is open. It is a smooth curve by definition of $S$, so its local rings are normal by lem-sc-smooth-normal. The restriction clause (2) of lem-per-componentwise-normalization-properties applies to the locally Noetherian scheme $C$ and its normal open $U$, and gives $\\nu^{-1}(U)\\simeq U$ over $U$.",
+   "uses": [
+    "lem-sc-smooth-normal",
+    "lem-per-componentwise-normalization-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035K (lemma-normalization-localization); Tag 0H7D (lemma-normalization-trivial)"
+   }
+  },
+  {
+   "text": "Fix $x\\in S$. By lem-sc-scheme-stalk-dimension-generalization-chains, $\\dim A$ is the supremum of the lengths of chains of irreducible closed subsets starting at $\\{x\\}$. Every such chain lies in an irreducible component of $C$, of dimension one, so has length at most one. A component containing $x$ has dimension one and thus is not $\\{x\\}$; the chain $\\{x\\}\\subsetneq Z_a$ has length one. Thus $\\dim A=1$. The ring $A$ is reduced by def-pc-reduced-scheme. Choose a Noetherian affine neighbourhood; its localization at $x$ is Noetherian by lem-weil-pbc-localization-noetherian. An affine finite-type neighbourhood $\\operatorname{Spec}T$ identifies $A$ with $T_{\\mathfrak p_x}$, so $A$ is essentially of finite type over $k$ in the explicit localization sense of def-weil-pbc-essentially-finite-type-algebra.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-essentially-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ (lemma-codimension-local-ring); algebra.tex Tag 00QM (definition-essentially-finite-p-t)"
+   }
+  },
+  {
+   "text": "Apply lem-trf-curve-normalization-completion to this reduced, one-dimensional local algebra essentially of finite type over $k$. It states that $B$ is finite over $A$ and that $B\\otimes_A\\widehat A$ is canonically the integral closure of $\\widehat A$ in $Q(\\widehat A)$, with the structural embedding extending $A\\to\\widehat A$. In particular this step uses the finite-type hypothesis: it does not assert normalization commutes with completion for arbitrary Noetherian local rings.",
+   "uses": [
+    "lem-trf-curve-normalization-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3V (lemma-normalization-same-after-completion), completion clause; Tag 0C3S (lemma-pre-delta-invariant)"
+   }
+  },
+  {
+   "text": "Write $R=k[[u,v]]/(uv)$ using the chosen nodal presentation. A series has a unique expression modulo $(uv)$ of the form $c+u f(u)+v g(v)$: its mixed monomials form $uv$ times the series obtained by lowering both exponents by one. The coefficientwise map $h\\mapsto(h(u,0),h(0,v))$ has kernel exactly $(uv)$. It therefore embeds $R$ in $P=k[[u]]\\times k[[v]]$, with image precisely the pairs $(f,g)$ satisfying $f(0)=g(0)$. For such a pair the inverse is represented by $f(u)+g(v)-f(0)$. These identities follow directly from the coefficient definition of formal power series.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Case I; explicit coefficient calculation"
+   }
+  },
+  {
+   "text": "In this equal-constant subring a pair is a non-zero-divisor exactly when both its coordinates are nonzero: use that each one-variable series ring is a domain; if a coordinate is zero, multiplication by the nonzero element $(u,0)$ or $(0,v)$ in the opposite coordinate kills the pair. Thus localization embeds $Q(R)$ in $k((u))\\times k((v))$, since the Laurent series rings are fields. For any Laurent pair $(F,G)$ choose $N>0$ large enough that $u^NF$ and $v^NG$ have strictly positive order (zero coordinates cause no restriction). Both $(u^NF,v^NG)$ and the denominator $(u^N,v^N)$ belong to $R$, and the denominator is a non-zero-divisor. Their quotient is $(F,G)$. Hence $Q(R)=k((u))\\times k((v))$.",
+   "uses": [
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-laurent-series-field",
+    "def-weil-pbc-laurent-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), Laurent series in its proof; explicit localization calculation"
+   }
+  },
+  {
+   "text": "Inside $Q(R)$ put $e=(1,0)$. For $(f,g)\\in P$ set $c=f(0)-g(0)$; then $(f,g)-ce\\in R$. Thus $P$ is generated over $R$ by $1,e$, and is integral over $R$ by lem-weil-pbc-finite-algebra-is-integral. Apply lem-weil-pbc-power-series-normal-domain to the Noetherian normal domain $k$: both factors $k[[u]]$ and $k[[v]]$ are integrally closed in their fraction fields. These fraction fields are the indicated Laurent fields, since a Laurent series becomes a power series after multiplication by a power of its variable. If $(F,G)\\in Q(R)$ satisfies a monic polynomial over $R$, its coordinate equations are monic equations over the two series rings, whence $F\\in k[[u]]$ and $G\\in k[[v]]$. This proves that the integral closure of $R$ in $Q(R)$ is exactly $P$, with the specified embedding.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-power-series-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral) and 0BI0 (lemma-power-series-over-Noetherian-normal-domain); curves.tex Tag 0C4A Case I"
+   }
+  },
+  {
+   "text": "Combining steps 6 and 9 identifies $B\\otimes_A\\widehat A$ with $P$ as $\\widehat A$-algebras. Since $A$ is Noetherian and $B$ finite, lem-weil-pbc-completion-finite-module-tensor gives the canonical isomorphism $\\widehat A\\otimes_A B\\simeq\\varprojlim_n B/\\mathfrak m^n B$; interchange the two tensor factors. The formula is $a\\otimes b\\mapsto(a_n b\\bmod\\mathfrak m^n B)_n$, so it preserves multiplication and the unit, not just addition and scalars. We obtain precisely the canonical algebra identifications of the statement; no identification of the uncompleted semilocal ring $B$ with a product of local rings is made.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), part (3), its canonical map and multiplicativity"
+   }
+  },
+  {
+   "text": "By lem-weil-pbc-local-completion-local-ring, $\\mathfrak m\\widehat A$ is the maximal ideal of $\\widehat A$, so in the nodal coordinates it is $(u,v)$. Its extension to $P$ is $u k[[u]]\\times v k[[v]]$. Reducing $B\\otimes_A\\widehat A=P$ modulo this ideal gives the canonical isomorphism $B/\\mathfrak mB\\simeq P/\\mathfrak mP=k\\times k$: explicitly the tensor reduction sends $b\\otimes a$ to $\\bar b\\bar a$ and has inverse $\\bar b\\mapsto b\\otimes1$. Every maximal ideal of $B$ contains $\\mathfrak mB$ by lem-weil-pbc-finite-algebra-local-radical. The ring $k\\times k$ has exactly two prime ideals: in a prime quotient one of the complementary idempotents $(1,0),(0,1)$ must vanish, and the other field factor has zero prime ideal. Consequently $B$ has exactly two maximal ideals with residue field $k$, and its two quotient maps are the restrictions of the constant-term maps of $P$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion), and 04GG (lemma-characterize-henselian), finite-algebra radical argument"
+   }
+  },
+  {
+   "text": "The two maximal ideals just found give exactly the two points of $\\nu^{-1}(x)$. To check this with the actual normalization, take an affine neighbourhood $\\operatorname{Spec}T$ of $x$. By lem-per-componentwise-normalization-affine-charts its inverse image is the spectrum of the product of the integral closures of the minimal-prime quotients of $T$. Localizing this algebra at $T\\setminus\\mathfrak p_x$ gives its stalk $B$: integral closure commutes with localization by lem-weil-pbc-integral-closure-commutes-localization, and the stalk is the integral closure already identified in step 2. The fibre ring is therefore $B\\otimes_A k=B/\\mathfrak mB$. The prime and residue-field identifications of lem-weil-pbc-fibre-ring-primes-residue-fields give exactly the two points and their residue maps computed in step 11, compatibly with the canonical map from $B$.",
+   "uses": [
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization); algebra.tex Tags 0307 (lemma-integral-closure-localize), 00E6 (remark-fundamental-diagram), 0H9M (remark-local-ring-fibre)"
+   }
+  },
+  {
+   "text": "Finally, a finite morphism has finite fibres by lem-weil-pbc-finite-closed-map-finite-fibres. Thus the inverse image under $\\nu$ of the finite set $S$, or of any finite set of smooth closed points, is a finite union of finite sets. Intersecting this set with any component $C_a$ preserves finiteness, proving the last assertion (and covering $S=\\varnothing$).",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02NU (lemma-finite-quasi-finite) and 02NH (lemma-quasi-finite), finite fibres"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-laurent-series",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-componentwise-normalization-properties",
+  "lem-sc-normalization-properties",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sc-smooth-normal",
+  "lem-trf-curve-normalization-completion",
+  "lem-trf-normalization-singular-skyscraper",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-laurent-series-field",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-power-series-normal-domain",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E68 (lemma-nodal-vector-fields), normalization setup, with the completed branch calculation of Tag 0C4A and varieties.tex Tags 0C1R, 0C3V. Explicit assembly from existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derivations of a reduced nodal local algebra extend uniquely to its normalization and fix both branch points",
+   "results": "{\"t\": \"2026-10-22T06:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Derivations of a reduced nodal local algebra extend uniquely to its normalization and fix both branch points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Differential.uniqueDifferentialAlgebraFiniteDimensional\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyUnramified.ext\", \"Algebra.Extension.homInfinitesimal\", \"derivationToSquareZeroEquivLift\", \"liftOfDerivationToSquareZero_mk_apply'\"], \"digest\": \"1889ea7e2ead1822\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a proper nodal curve has smooth projective components and its completed normalization at a node is the product of two power series rings",
+   "results": "{\"t\": \"2026-10-22T06:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a proper nodal curve has smooth projective components and its completed normalization at a node is the product of two power series rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"1224659f4807b2b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of derivations preserving the conductor from a normalization to a nodal local ring using faithfully flat completion",
+   "results": "{\"t\": \"2026-10-22T06:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of derivations preserving the conductor from a normalization to a nodal local ring using faithfully flat completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"aeval_derivative_mem_differentIdeal\", \"Algebra.IsEtaleAt\", \"liftOfDerivationToSquareZero_mk_apply'\", \"Algebra.IsUnramifiedAt\", \"Algebra.smoothLocus\", \"Algebra.Etale\", \"Algebra.Generators.cMulXSubOneCotangent\"], \"digest\": \"aa376069cc23b070\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|normalization.*completion|completion.*normalization",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"grep\", \"query\": \"nodal|normalization.*completion|completion.*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IntegralClosure",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IntegralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IntegralClosure'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: loogle: unknown identifier 'IntegralClosure'; corrected pattern recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed normalization at an ordinary node is the product of two formal branches",
+   "results": "{\"t\": \"2026-10-22T06:00:28Z\", \"tool\": \"leansearch\", \"query\": \"Completed normalization at an ordinary node is the product of two formal branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"normalize_apply\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"ONote.mul_nf\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"NONote.repr_mul\", \"NormalizationMonoid\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc\"], \"digest\": \"85cec2c19e36dea6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|integralClosure",
+   "results": "{\"t\": \"2026-10-22T06:01:47Z\", \"tool\": \"grep\", \"query\": \"normalization|integralClosure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"b0ee0308cc067d37\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, integralClosure",
+   "results": "{\"t\": \"2026-10-22T06:01:48Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract relative normalization, Laurent series and Weierstrass preparation do not give this nodal completed model with its scheme branch geometry"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|normalization.*completion|completion.*normalization",
+   "results": "{\"t\": \"2026-10-23T04:16:42Z\", \"tool\": \"grep\", \"query\": \"nodal|normalization.*completion|completion.*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative scheme normalization, normalization monoids and Weierstrass integral models do not state the completed nodal branch model and its global geometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of the completed local ring of a nodal algebraic curve is the product of its two formal branches",
+   "results": "{\"t\": \"2026-10-23T04:16:43Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of the completed local ring of a nodal algebraic curve is the product of its two formal branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instNormalizationMonoid\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"9dc9d22c81e76f87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative scheme normalization, normalization monoids and Weierstrass integral models do not state the completed nodal branch model and its global geometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, integralClosure",
+   "results": "{\"t\": \"2026-10-23T04:16:43Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative scheme normalization, normalization monoids and Weierstrass integral models do not state the completed nodal branch model and its global geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a proper reduced nodal curve has smooth projective components and completed normalization k[[u]] times k[[v]]",
+   "results": "{\"t\": \"2026-10-23T04:16:46Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a proper reduced nodal curve has smooth projective components and completed normalization k[[u]] times k[[v]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"cb9af3ead4b99188\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative scheme normalization, normalization monoids and Weierstrass integral models do not state the completed nodal branch model and its global geometry"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|integralClosure",
+   "results": "{\"t\": \"2026-10-23T04:18:29Z\", \"tool\": \"grep\", \"query\": \"normalization|integralClosure\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"15\", \"17\", \"19\", \"20\"], \"digest\": \"b17fd62ffa4551f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative scheme normalization, normalization monoids and Weierstrass integral models do not state the completed nodal branch model and its global geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of k[[x,y]]/(xy) in its total quotient ring and two branches of the normalization of an algebraic curve",
+   "results": "{\"t\": \"2026-10-23T04:18:40Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of k[[x,y]]/(xy) in its total quotient ring and two branches of the normalization of an algebraic curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isIntegral\", \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"3a11ccea4738c3d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative scheme normalization, normalization monoids and Weierstrass integral models do not state the completed nodal branch model and its global geometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-marked-nodal-infinitesimal-fields",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Infinitesimal marked automorphisms and normalized vector fields; returned proof steps 2--3: global geometry and completed normalization",
+   "via": [
+    "lem-sfb-marked-nodal-infinitesimal-fields",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-completed-normalization-model",
+  "worker": "stage1",
+  "summary": "Kept the statement and split its proof into thirteen steps using only existing DAG nodes. Verified finite-type and pure-dimension hypotheses, separated the completed equal-constant ring calculation from the semilocal uncompleted normalization, and proved the branch residue compatibility by reduction modulo the maximal ideal. No new nodes.",
+  "blueprint": "Realizes the inherited place: det-thm-sf-ctf-stability-direct-images proof (3), the marked-plurinodal reduction through the stable-pointed-curve rigidity prerequisite, specifically lem-sfb-marked-nodal-infinitesimal-fields returned steps 2--3. The recorded created.item chain has no imported ancestor (blueprint_refs.py ancestor prints None); its existing from.node=null and via are retained, and its concrete from.place already specifies this route. Searches normalization, nodal, and integral closure found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-reduced-normalization",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-per-componentwise-normalization-affine-charts",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-per-componentwise-normalization-properties",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-trf-curve-normalization-completion",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-trf-normalization-singular-skyscraper",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-normal-domain",
+    "why": "Generic normalization, curve geometry, completion or commutative algebra input used in the explicit nodal calculation; this unit supplies no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-reduced-normalization",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-componentwise-normalization-properties",
+  "lem-sc-proper-dim-one-projective",
+  "lem-trf-curve-normalization-completion",
+  "lem-trf-normalization-singular-skyscraper",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-power-series-normal-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-04b9d16af",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-04b9d16af (reviewer sub-agent of L); spot-checked: Read the whole item (13 steps, no new nodes; statement and stmt_deps unchanged) and the statement of each of its 28 proof_deps. Read Stacks 0E68 (curves.tex l.6699): the delivery correctly computes the branches only after completion, avoiding 0E68's product claim, which is false for the uncompleted semilocal B. Tags 0C1R, 0C3V, 0C4A, 0BI0, 0A26, 0CDV and 035Q are checked against their labels. Hypotheses check out step by step. Step 2 (skyscraper): finite type, reduced, pure dimension 1 matches the topological dimension 1 the node requires. Step 3: Z_a proper via closed immersion and composition; algebraically closed implies perfect. Step 4: U is a smooth curve in the sense of def-sc-curves, so normal; clause (2) of lem-per-componentwise-normalization-properties applies. Steps 5–6: the completion node's hypotheses (reduced, dimension 1, essentially of finite type) are established first. Steps 7–9: the kernel is (uv), the image is the equal-constant pairs, Q(R)=k((u))×k((v)) via the denominator (u^N,v^N), and P is the integral closure via 0BI0, all checked by hand. Steps 10–12: algebra isomorphism, B/mB=k×k, exactly two maximal ideals, fibre via the fibre-ring node. Tested P^1 (S empty), a reducible split node versus the irreducible nodal cubic, characteristic 2, and disconnected C. Batch-5 check: lem-trf-curve-normalization-completion (0C3V) and lem-trf-normalization-singular-skyscraper (0C1R) are generic normalization/completion algebra. Their full closures contain only generic trf lemmas (DVR branches, flat birational, regular implies smooth), no Poincaré-duality, trace-transport or nt-target node. They are not steps of either assumed theorem, so the citations are accepted. Artin–Gabber route check: the two lem-per-componentwise-normalization nodes are not dropped (present, not merged, cited by other live splits). They are generic Stacks 035P/035Q facts whose closures contain no forbidden input. The 10-19 rule binds only lem-per-artin-gabber-affine-curve and its children, and this item is outside that closure; accepted at steps 4 and 12. Advisory: the existing unsplit lem-trf-equal-constant-normalization-residue-quotient states the step-9 calculation, which the delivery proves inline instead (no duplicate node created). Declared tool_uses are generic and accepted. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalCompletedNormalizationModel",
+  "declaration": "AlgebraicGeometry.Scheme.nodal_completed_normalization_model",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.nodalNormalizationBranchResidue",
+   "AlgebraicGeometry.Scheme.nodal_completed_normalization_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalCompletedNormalizationModel.lean",
+  "statement": "theorem nodal_completed_normalization_model (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsProper (C ↘ Spec (.of k))] [IsReduced C] (hC : Nonempty C) (hpure : C.IsPureDimension 1) (hnodal : ∀ x : C, x ∉ (C ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (S : Set C) (hS : S = {x : C | x ∉ (C ↘ Spec (.of k)).smoothLocus}) : IsNoetherian C ∧ S.Finite ∧ (∀ x : S, IsClosed ({x.val} : Set C) ∧ ∃ r : C.residueField x.val ≅ CommRingCat.of k, Spec.map r.inv = C.fromSpecResidueField x.val ≫ (C ↘ Spec (.of k))) ∧ IsFinite C.fromReducedNormalization ∧ Finite (irreducibleComponents C) ∧ (∀ Z : irreducibleComponents C, ConnectedSpace ((C.reducedNormalizationComponent Z).normalization) ∧ Smooth ((Sigma.ι (fun Z : irreducibleComponents C ↦ (C.reducedNormalizationComponent Z).normalization) Z) ≫ C.fromReducedNormalization ≫ (C ↘ Spec (.of k))) ∧ IsProjective ((Sigma.ι (fun Z : irreducibleComponents C ↦ (C.reducedNormalizationComponent Z).normalization) Z) ≫ C.fromReducedNormalization ≫ (C ↘ Spec (.of k)))) ∧ IsIso (pullback.snd C.fromReducedNormalization (C ↘ Spec (.of k)).smoothLocus.ι) ∧ (∀ (Z : irreducibleComponents C) (T : Set C), T.Finite → (∀ t ∈ T, IsClosed ({t} : Set C) ∧ t ∈ (C ↘ Spec (.of k)).smoothLocus) → {z : (C.reducedNormalizationComponent Z).normalization | ((Sigma.ι (fun Z : irreducibleComponents C ↦ (C.reducedNormalizationComponent Z).normalization) Z) ≫ C.fromReducedNormalization) z ∈ S ∪ T}.Finite) ∧ (∀ x : S, Module.Finite (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val) ∧ Nonempty ((normalizationPushforwardStalk C x.val) ≃ₐ[(C.presheaf.stalk x.val)] integralClosure (C.presheaf.stalk x.val) (FractionRing (C.presheaf.stalk x.val))) ∧ ringKrullDim (C.presheaf.stalk x.val) = (1 : WithBot ℕ∞) ∧ ∀ α : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}), ∃ (i : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) →ₐ[(C.presheaf.stalk x.val)] (AdicCompletion ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) (normalizationPushforwardStalk C x.val))) (e : (AdicCompletion ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) (normalizationPushforwardStalk C x.val)) ≃+* (PowerSeries k × PowerSeries k)), (∀ (n : ℕ) (a : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val))) (b : (C.presheaf.stalk x.val)), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) n a = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) ^ n) b → AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) n (i a) = Ideal.Quotient.mk (((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) ^ n) (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val) b)) ∧ Function.Injective i ∧ (∀ h : MvPowerSeries (Fin 2) k, e (i (α.symm (Ideal.Quotient.mk _ h))) = (PowerSeries.mk (fun n ↦ MvPowerSeries.coeff (Finsupp.single 0 n) h), PowerSeries.mk (fun n ↦ MvPowerSeries.coeff (Finsupp.single 1 n) h))) ∧ (∀ p : (PowerSeries k × PowerSeries k), (∃ a : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)), e (i a) = p) ↔ PowerSeries.constantCoeff p.1 = PowerSeries.constantCoeff p.2) ∧ (∃ E : (AdicCompletion ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) (normalizationPushforwardStalk C x.val)) ≃+* integralClosure (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val))), ∀ a : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)), E (i a) = algebraMap (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) (integralClosure (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)))) a) ∧ (∃ tensor : @AlgEquiv (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) ((AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) ⊗[(C.presheaf.stalk x.val)] (normalizationPushforwardStalk C x.val)) (PowerSeries k × PowerSeries k) inferInstance inferInstance inferInstance inferInstance (e.toRingHom.comp i.toRingHom).toAlgebra, ∀ (a : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val))) (b : (normalizationPushforwardStalk C x.val)), tensor (a ⊗ₜ[(C.presheaf.stalk x.val)] b) = e (i a * AdicCompletion.of ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) (normalizationPushforwardStalk C x.val) b)) ∧ (∃ q : (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val))) ≃+* (LaurentSeries k × LaurentSeries k), ∀ a : (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)), q (algebraMap (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val)) (FractionRing (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)) (C.presheaf.stalk x.val))) a) = (algebraMap (PowerSeries k) (LaurentSeries k) (e (i a)).1, algebraMap (PowerSeries k) (LaurentSeries k) (e (i a)).2)) ∧ (∃ (y : Fin 2 ≃ {y : C.reducedNormalization // C.fromReducedNormalization y = x.val}) (r : ∀ a : Fin 2, C.reducedNormalization.residueField (y a).val ≅ CommRingCat.of k) (M : Fin 2 ≃ {J : Ideal (normalizationPushforwardStalk C x.val) // J.IsMaximal}) (res : ∀ a : Fin 2, ((normalizationPushforwardStalk C x.val) ⧸ (M a).val) ≃+* k), (∀ a : Fin 2, Function.Surjective (nodalNormalizationBranchResidue k C x.val (y a) (r a)) ∧ RingHom.ker (nodalNormalizationBranchResidue k C x.val (y a) (r a)) = (M a).val ∧ ∀ b : (normalizationPushforwardStalk C x.val), res a (Ideal.Quotient.mk (M a).val b) = nodalNormalizationBranchResidue k C x.val (y a) (r a) b) ∧ (∀ b : (normalizationPushforwardStalk C x.val), nodalNormalizationBranchResidue k C x.val (y 0) (r 0) b = PowerSeries.constantCoeff (e (AdicCompletion.of ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) (normalizationPushforwardStalk C x.val) b)).1 ∧ nodalNormalizationBranchResidue k C x.val (y 1) (r 1) b = PowerSeries.constantCoeff (e (AdicCompletion.of ((IsLocalRing.maximalIdeal (C.presheaf.stalk x.val)).map (algebraMap (C.presheaf.stalk x.val) (normalizationPushforwardStalk C x.val))) (normalizationPushforwardStalk C x.val) b)).2)))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned 237aacc27e99. All global and local clauses use the canonical normalization. The pushforward stalk and algebra instance are owned by existing definition node def-trf-normalization-pushforward-stalk; completion types are written with Mathlib.AdicCompletion directly. The branch-residue helper is the actual stalkPushforward followed by residue and a residue-field identification. Tensor comparison is an AlgEquiv for the coordinate-induced completed-base action, fixed on all pure tensors. Only FractionRing of the completed base is identified with the Laurent product."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6654f91c1",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery of returned 237aacc27e99. All return points repaired. Statement field verbatim; one sorry; item changes only lean and stmt_deps, which gained 3 landed nodes (def-trf-normalization-pushforward-stalk, def-pc-projective-morphism, def-weil-pbc-laurent-series). Hypotheses: alg. closed k, proper reduced nonempty C, IsPureDimension 1, ring-iso node hypothesis on the nonsmooth locus. Conclusions: IsNoetherian C; S finite with closed k-points compatible with the structure map; IsFinite nu; the actual reducedNormalization summands are finitely many, connected, Smooth and IsProjective (no empty-family loophole); IsIso over smoothLocus; finite preimages of S union T on each summand; local: B = actual pushforward stalk, Module.Finite, A-algebra iso to integralClosure A (FractionRing A) (automatically unique); ringKrullDim A = 1; for every alpha: i pinned at every quotient level and injective, e pinned by the axis formula, image = equal constant terms, E to the integral closure of A-hat, q only on FractionRing A-hat (false qA removed), canonical tensor AlgEquiv, two fibre points and two maximal ideals tied to the actual residue maps and the constant-term maps. Edge cases: S empty, nodal cubic, reducible node, char 2, universes. Advisory: branch residue fields are ring isos, not k-compatible; required by the ring-iso alpha and derivable from finiteness. No fixes, no compile."
+ }
+}

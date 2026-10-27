@@ -3,29 +3,146 @@
  "blueprint": {
   "is": "def-pur-td-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Trace–diagonal datum",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be separated finite type; Put\n$W=X\\times_YX$ with projections $p_1,p_2$ and\ndiagonal $\\Delta$, and let $L\\in D^b_{ctf}(X,\\Lambda)$ be\ntensor-invertible. A *trace–diagonal datum* for $(f,L)$ is a\npair\n\n$$\n\\operatorname{tr}_f:Rf_!L\\longrightarrow\\Lambda_Y,\n\\qquad\n\\operatorname{cl}_\\Delta:\\Delta_!\\Lambda_X\\longrightarrow p_2^*L.\n$$\n\nThe *induced functor* (a functor by [lem-weil-derived-tensor-functorial]) is\n\n$$\nG_L:D^b_{ctf}(Y,\\Lambda)\\longrightarrow D^b_{ctf}(X,\\Lambda),\n\\qquad G_L(K)=Lf^*K\\otimes^L_{\\Lambda_X}L,\n$$\n\nand $\\operatorname{tr}_f$ defines, via the projection formula, the\n*counit*\n\n$$\n\\epsilon_K:Rf_!G_L(K)\\cong K\\otimes^L_{\\Lambda_Y}Rf_!L\n\\xrightarrow{\\ \\operatorname{id}\\otimes\\operatorname{tr}_f\\ }K;\n$$\n\n$\\operatorname{cl}_\\Delta$ defines, the *unit*\n\n$$\n\\eta_A:A\\cong Rp_{2!}\\bigl(p_1^*A\\otimes^L_{\\Lambda_W}\\Delta_!\\Lambda_X\\bigr)\n\\xrightarrow{\\ \\operatorname{id}\\otimes\\operatorname{cl}_\\Delta\\ }\nRp_{2!}\\bigl(p_1^*A\\otimes^L_{\\Lambda_W}p_2^*L\\bigr)\n\\cong G_L(Rf_!A).\n$$\n\nThe two *triangular composites* are the composites\n\n$$\nRf_!A\\xrightarrow{\\ Rf_!\\eta_A\\ }Rf_!G_LRf_!A\n\\xrightarrow{\\ \\epsilon_{Rf_!A}\\ }Rf_!A\n$$\n\nand\n\n$$\nG_LK\\xrightarrow{\\ \\eta_{G_LK}\\ }G_LRf_!G_LK\n\\xrightarrow{\\ G_L\\epsilon_K\\ }G_LK,\n$$\n\nnatural in $A\\in D^b_{ctf}(X,\\Lambda)$ and\n$K\\in D^b_{ctf}(Y,\\Lambda)$.",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be separated finite type between the finite-type $k$-schemes of those conventions; put\n$W=X\\times_YX$ with projections $p_1,p_2$ and\ndiagonal $\\Delta$, and let $L\\in D^b_{ctf}(X,\\Lambda)$ be\ntensor-invertible, meaning that there are an object $L^{-1}$ and an isomorphism $L\\otimes^L_{\\Lambda_X}L^{-1}\\cong\\Lambda_X$. A *trace–diagonal datum* for $(f,L)$ is a\npair\n\n$$\n\\operatorname{tr}_f:Rf_!L\\longrightarrow\\Lambda_Y,\n\\qquad\n\\operatorname{cl}_\\Delta:\\Delta_!\\Lambda_X\\longrightarrow p_2^*L.\n$$\n\nUse the fibre product of [def-pc-fibre-product]; the diagonal is the unique map with $p_1\\Delta=p_2\\Delta=\\operatorname{id}_X$. All unmarked pullbacks in the displayed formulas are derived pullbacks of [def-weil-derived-pullback-tensor-hom], and $\\Delta_!$ means $R\\Delta_!$ of [def-compact-support-direct-image-detailed]. As required by [def-pur-conventions], the construction is made directly for $\\Lambda=A_{E,n}$; its higher-coefficient versions mean the separately specified transports in the purity chapter.\n\nThe *induced functor* is\n\n$$\nG_L:D^b_{ctf}(Y,\\Lambda)\\longrightarrow D^b_{ctf}(X,\\Lambda),\n\\qquad G_L(K)=Lf^*K\\otimes^L_{\\Lambda_X}L,\n$$\n\nand $\\operatorname{tr}_f$ defines, via the projection formula, the\n*counit*\n\n$$\n\\epsilon_K:Rf_!G_L(K)\\cong K\\otimes^L_{\\Lambda_Y}Rf_!L\n\\xrightarrow{\\ \\operatorname{id}\\otimes\\operatorname{tr}_f\\ }K;\n$$\n\n$\\operatorname{cl}_\\Delta$ defines the *unit*\n\n$$\n\\eta_A:A\\cong Rp_{2!}\\bigl(p_1^*A\\otimes^L_{\\Lambda_W}\\Delta_!\\Lambda_X\\bigr)\n\\xrightarrow{\\ \\operatorname{id}\\otimes\\operatorname{cl}_\\Delta\\ }\nRp_{2!}\\bigl(p_1^*A\\otimes^L_{\\Lambda_W}p_2^*L\\bigr)\n\\cong G_L(Rf_!A).\n$$\n\nThe two *triangular composites* are the composites\n\n$$\nRf_!A\\xrightarrow{\\ Rf_!\\eta_A\\ }Rf_!G_LRf_!A\n\\xrightarrow{\\ \\epsilon_{Rf_!A}\\ }Rf_!A\n$$\n\nand\n\n$$\nG_LK\\xrightarrow{\\ \\eta_{G_LK}\\ }G_LRf_!G_LK\n\\xrightarrow{\\ G_L\\epsilon_K\\ }G_LK,\n$$\n\nnatural in $A\\in D^b_{ctf}(X,\\Lambda)$ and\n$K\\in D^b_{ctf}(Y,\\Lambda)$.\n\nThe formulas specify composites of the following canonical maps, rather than arbitrary isomorphisms of their values. The compact-support projection is the transformation of [def-exchange-projection], inverted on the finite-Tor domain by [lem-weil-finite-compact-projection-formula]. The needed finite-Tor etale origins are supplied by [lem-sfb-constructible-local-tor-etale-origin]: the global Tor interval of an object of $D^b_{ctf}$ gives the local Tor condition of that lemma by [lem-sfb-proetale-tor-local-global], and its constructible cohomology sheaves are affine-locally constructible by restricting their finite constructible stratification to each affine open. Tensor symmetry is the signed derived symmetry of [lem-pur-derived-tensor-additive-constraints]; the unit constraint is induced by multiplication $P\\otimes_{\\Lambda_X}\\Lambda_X\\to P$ on a K-flat representative. The first isomorphism in the unit is the inverse of\n$$\n Rp_{2!}(Lp_1^*A\\otimes^L R\\Delta_!\\Lambda_X)\n \\cong Rp_{2!}R\\Delta_!(L\\Delta^*Lp_1^*A)\n \\cong A.\n$$\nHere the first arrow is projection for $\\Delta$, the pullback comparison uses [lem-weil-pbc-proetale-derived-pullback-composition, lem-pur-proetale-constant-ring-composition, lem-pur-proetale-derived-pullback-identity] and $p_1\\Delta=\\operatorname{id}_X$, and the second uses compact-support composition [thm-sf-comp-composition] and $p_2\\Delta=\\operatorname{id}_X$. At the identity, use the trivial compactification $(\\operatorname{id},\\operatorname{id})$, whose functor is the identity. The final isomorphism in the unit is\n$$\n Rp_{2!}(Lp_1^*A\\otimes^L Lp_2^*L)\n \\cong (Rp_{2!}Lp_1^*A)\\otimes^L L\n \\cong Lf^*Rf_!A\\otimes^L L,\n$$\nusing inverse projection for $p_2$ and the inverse of the canonical compact-support exchange for the Cartesian self-square of $f$ [thm-cbc-finite-level-proetale]. In the middle arrow defining $\\eta_A$, $Rp_{2!}$ is applied to $1_{Lp_1^*A}\\otimes\\operatorname{cl}_\\Delta$. No triangular identity is part of the datum: the two displayed composites are simply natural endomorphisms.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.md",
   "place": "node def-pur-td-datum, order 1955"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "lem-weil-derived-tensor-functorial",
+  "def-pc-fibre-product",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-derived-tensor",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "lem-weil-derived-tensor-functorial",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sfb-constructible-local-tor-etale-origin",
+  "lem-sfb-proetale-tor-local-global",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-pur-proetale-derived-pullback-identity",
+  "thm-sf-comp-composition",
+  "thm-cbc-finite-level-proetale"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For twisted_preserves, use the completed source-library theorem constructibleFiniteTor_leftDerivedFunctor_upperStar_obj to preserve the native finite-Tor constructible property under pullback. For tensor closure, extract bounded constructible etale origins of both factors from the definition of that property. Reflect their Tor intervals with torAmplitudeIn_mapDerivedCategory_iff, apply the native etale constructibleFiniteTor_tensor theorem, and transport the result through the monoidal comparison and the two origin isomorphisms. Tensor and pullback functoriality give the displayed action of G_L on morphisms. This avoids the intrinsic constant-ring pullback and tensor wrappers.",
+   "uses": [
+    "lem-asd-source-finite-etale-tensor-ctf",
+    "lem-exc-comparison-tor-interval",
+    "lem-weil-derived-tensor-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.proof.md",
+    "place": "Functoriality and the canonical component formulas of def-pur-td-datum.md; native finite-coefficient realization"
+   }
+  },
+  {
+   "text": "For shriek_preserves, the fixed finite coefficient quotient has a positive invertible annihilating exponent, supplied by finiteComparedInvertibleExponent. Apply constructibleFiniteTor_rightDerivedLowerShriekOfCompactification to the chosen Nagata compactification. For diagonal_inputs, transport the etale tensor unit through the canonical comparison unit isomorphism, and apply native pullback preservation to p1.",
+   "uses": [
+    "lem-sf-native-finite-tor-preservation",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.proof.md",
+    "place": "Functoriality and the canonical component formulas of def-pur-td-datum.md; native finite-coefficient realization"
+   }
+  },
+  {
+   "text": "Use the canonical maps of def-pur-finite-trace-canonical-maps (projectionCore, contractionCore, exchangeCore, signedSymmetry, unitRight), from which the unit and counit are composed. For counit naturality compose the proved native projection naturality square, signed symmetry, tensor naturality for the fixed trace, and right unit naturality. For unit naturality use lem-pur-finite-diagonal-contraction-naturality and invert its square, use tensor naturality for the fixed diagonal class, then lem-pur-finite-diagonal-exchange-naturality. Apply Rp2! to the tensor square and compose all three equalities by associativity. This is a genuine reduction: neither lower statement contains the datum trace or diagonal class, nor the complete unit composite. The generic canonical data has been extracted verbatim into its own definition module, avoiding an import cycle.",
+   "uses": [
+    "def-pur-finite-trace-canonical-maps",
+    "lem-pur-finite-diagonal-contraction-naturality",
+    "lem-pur-finite-diagonal-exchange-naturality",
+    "lem-weil-derived-tensor-functorial",
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.proof.md",
+    "place": "Functoriality and the canonical component formulas of def-pur-td-datum.md; native finite-coefficient realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-source-finite-etale-tensor-ctf",
+  "lem-exc-comparison-tor-interval",
+  "lem-weil-derived-tensor-functorial",
+  "lem-sf-native-finite-tor-preservation",
+  "def-pur-co-smoothness",
+  "lem-pur-finite-diagonal-contraction-naturality",
+  "lem-pur-finite-diagonal-exchange-naturality",
+  "lem-pur-derived-tensor-additive-constraints",
+  "def-pur-finite-trace-canonical-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-a1-inv/def-pur-td-datum.proof.md",
+  "place": "Functoriality and the canonical component formulas of def-pur-td-datum.md; native finite-coefficient realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Trace diagonal datum for a separated finite type scheme morphism consisting of a compact support trace and a supported diagonal class defining a unit and counit",
+   "results": "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange; AlgebraicGeometry.IsImmersion.instDiagonalScheme; AlgebraicGeometry.IsSeparated.instMap; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal; AlgebraicGeometry.HasAffineProperty.diagonal_iff; AlgebraicGeometry.diagonal_Spec_map",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TraceDiagonal|traceDiagonal|diagonalClass|trace_diagonal",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace diagonal datum compact support functor twisted pullback unit counit",
+   "results": "CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.Functor.diag_ε; CompHausLike.LocallyConstant.adjunction; CompHausLike.LocallyConstant.counit; CategoryTheory.Limits.pullback.diagonal; CategoryTheory.PullbackShift.adjunction",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A trace morphism from compactly supported pushforward of an invertible complex and a coevaluation supported on the diagonal induce natural transformations between shriek pushforward and twisted inverse image",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.ExponentiableMorphism.coev_ev; SheafOfModules.pushforwardSections_unitHomEquiv; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact support trace and diagonal class define natural unit and counit for pullback tensor an invertible complex",
+   "results": "CategoryTheory.ihom.coev; CategoryTheory.Adjunction.unit; CategoryTheory.Dial.tensorUnitImpl; HomologicalComplex.rightUnitor'_inv; HomologicalComplex.instHasTensorTensorUnit_1; HomologicalComplex.tensorUnit; CompHausLike.LocallyConstant.adjunction; CategoryTheory.Limits.pullback.diagonal",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|upperShriek|compactSupport|projectionFormula",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,7 +161,18 @@
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-inv",
  "blueprint_update": {
@@ -60,5 +188,103 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "def-pur-td-datum",
+  "worker": "stage1",
+  "summary": "Retained both datum arrows, twisted pullback, the unit and counit, and both natural triangular composites. Named the existing fibre-product, compact-support, finite-Tor projection, self-square exchange, signed tensor and pullback/composition comparisons that type the construction. Expanded the blueprint functoriality proof using the narrower existing finite-coefficient preservation lemmas, avoiding cycles through the broad six-functor summaries. No new nodes. The finite-stage scope and later coefficient transport are exactly the convention stipulated by def-pur-conventions.",
+  "blueprint": "All formulas of latest def-pur-td-datum.md and the sole functoriality sentence of def-pur-td-datum.proof.md. No change to the weak A1-invariance unit statement or its route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic finite-coefficient pullback preservation types G_L; the A1-invariance unit supplies no preservation theorem."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic finite-Tor tensor closure types G_L; it is not a replacement proof of A1-invariance."
+   },
+   {
+    "node": "lem-weil-derived-tensor-functorial",
+    "why": "The explicit blueprint proof uses tensor functoriality to define G_L on maps."
+   },
+   {
+    "node": "lem-sf-native-finite-tor-preservation",
+    "why": "Generic compact-support preservation types the already specified triangular endomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-derived-tensor-functorial",
+  "lem-sf-native-finite-tor-preservation"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NC-19ccc28a3",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-19ccc28a3 (reviewer sub-agent of L); spot-checked: I read the item, the latest/main-20261015/master blueprint text, unit sk-prop-a1-inv, every cited node's statement and the three citers in full. There are no new nodes. The blueprint pair, G_L, ε, η and both triangular composites are kept verbatim. The additions (finite-type k-schemes; the explicit meaning of tensor-invertible; the finite-stage Λ=A_{E,n} with higher-coefficient transports, copied from def-pur-conventions; the canonical-map paragraph) do not weaken the definition. Map checks: (1) The counit is PF_f with the ctf object K pulled back, as lem-weil-finite-compact-projection-formula requires, plus signed symmetry σ. (2) The first unit iso is PF_Δ with Lp_1^*A in D^b_ctf(W) by pullback-tor-amplitude, LΔ^*Lp_1^*≅id by the three pullback lemmas, and Rp_{2!}RΔ_!≅R(id)_!=id by thm-sf-comp-composition. (3) The last unit iso is PF_{p_2} and then the inverse of the thm-cbc-finite-level-proetale exchange for X'=W, g'=p_1, f'=p_2, g=f; its direction f^{-1}Rf_!→Rp_{2!}p_1^{-1} is correct and Y is qcqs. (4) Both composites are typed in ctf by lem-sf-native-finite-tor-preservation(i). Step 1 (pullback-tor-amplitude, tensor-ctf(ii), tensor functoriality) is correct. Edge cases checked: f=id, X empty, tr=0 or cl=0, L=Λ_X. No cycle (closure 13612 nodes). Fault C1/C4: the origin lemma needs local Tor dimension and affine-locally constructible cohomology, but D^b_ctf objects have a global Tor interval; the global-to-local step lem-sfb-proetale-tor-local-global was used without being cited. FIX: the statement now names it (added to stmt_deps; no cycle; it reaches neither sec-trace-formula nor sec-poincare-duality) and states the elementary restriction of the stratification to affine opens. Cosmetic: K\\prime→K' in step 1, and step 1 now also covers the unit's target. Batch-5 check: lem-weil-finite-compact-projection-formula is the general projection isomorphism, outside both assumptions; its path to the PD chapter goes only through the generic lem-pod-lisse-module-sheaves-as-module-objects. lem-sfb-constructible-local-tor-etale-origin is an étale/pro-étale comparison; its path to the TF chapter goes only through the Mathlib-leaf mate identity lem-trf-iterated-square-mates. Neither is a step of TF or PD, so both are accepted. Tool_uses accepted: the four generic step-1 lemmas. No SGA source is used, and no Lean is attached (the WeilConjectures TraceDiagonalDatum is on ambient categories).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTraceDiagonalDatum",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.coefficientFinite",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.D",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Ctf",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.one",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.pull",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.push",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.tensor",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Invertible",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.compactification",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.shriek",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.shriek₂",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.twisted",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.twisted_preserves",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.shriek_preserves",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.diagonal_inputs",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.functor",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.compactFunctor",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.projection",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.diagonalPullback",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.diagonalContraction",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.diagonalExchange",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.counitMap",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.unitMap",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.counit_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.unit_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.counit",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.unit",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.leftTriangle",
+   "AlgebraicGeometry.ProEtale.FiniteTraceDiagonal.Datum.rightTriangle"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTraceDiagonalDatum.lean",
+  "statement": "structure Datum [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (L : Ctf P X) (_hL : Invertible P L)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The unchanged generic canonical maps are reexported from FiniteTraceDiagonalCanonicalMaps. Four preservation/counit clauses are proved; unit naturality is reduced to the two canonical contraction and exchange naturality statements."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e478df7c",
+  "group": "NF",
+  "result": "pass",
+  "note": "Node unchanged except for the lean field; statement verbatim. Hypotheses match def-pur-conventions (finite-type k-schemes, separated finite-type k-morphism, L in Dctf, Invertible as an existence with no ctf requirement on the inverse) and none is stronger. Trace and diagonal-class types correct. Counit = symmetry, inverse projection for f, symmetry, 1 tensor tr, right unit; directions checked. Unit = inverse of (symmetry, projection for Delta, left unit, Delta^*p1^* = id, compactSection with canonical origin composition and trivial-compactification identity), then Rp2!(1 tensor cl), then inverse projection for p2 and inverse self-square base change (direction f^*Rf! to Rp2!p1^* correct). Triangular composites composed correctly, no identity imposed. Signed symmetry is the localized Koszul braiding, so the upstream etale Etale.TraceDiagonalDatum with its existence-chosen symmetry is rightly not used as existing. Five sorried typing/naturality clauses are true and carry proof docstrings; source and blueprint docstrings present. Advisory only: likely duplicate section instance binders on Datum; duplicate Finite instance; fixed-module Rf! versus the recorded intrinsic one, consistent with the derived-tensor repair. No compile run (none required)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6565d",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T202718-L-3479550",
+  "kind": "interface",
+  "note": "independent cc review: Item FiniteTraceDiagonalDatum and node def-pur-td-datum against the clone. The 15-declaration extraction is byte-identical; contraction/exchange naturality statements checked against contractionCore/exchangeCore (true; projection and base-change naturality partly checked in Lean)."
  }
 }

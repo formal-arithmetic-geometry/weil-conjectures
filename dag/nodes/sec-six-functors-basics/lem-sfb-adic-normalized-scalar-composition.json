@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-adic-normalized-scalar-composition",
+ "kind": "statement",
+ "title": "Normalized scalar composition is uniqueness of left adjoints",
+ "statement": "For composable ring-sheaf maps f:R→S and g:S→V on a small site, let af, ag and ah be adjunctions for the specified derived extension and restriction functors of f, g and f≫g, respectively. Suppose their units are the specified normalized adicFiniteUnit maps of [lem-sfb-adic-finite-reduction-data]. Compose af and ag and transport its right adjoint by adicFiniteDresComp(f,g). Its uniqueness comparison with ah equals the scalar-composition isomorphism specified by adicFiniteExtendComp_existsUnique(f,g).",
+ "stmt_deps": [
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ, tensor/restriction adjunction; sites-cohomology.tex, Tag 06YY, K-flat derived scalar extension and composition."
+ },
+ "proof": [
+  {
+   "text": "On a K-flat representative, the normalized derived unit computes the derived Hom equivalence as localization of the ordinary tensor/restriction Hom equivalence followed by resFactors. This follows by the unit formula and naturality of resFactors.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply that formula successively for f and g; scalar extension preserves K-flatness. The exact-restriction compositor respects resFactors. The ordinary composite unit is insertion of one for f≫g, because ordinary balancing sends 1 tensor (1 tensor x) to 1 tensor x. Naturality of restriction composition moves ordinary balancing to the final position. Thus the uniqueness comparison of the composed adjunction satisfies the normalization defining derived scalar balancing.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the uniqueness clause of adicFiniteExtendComp_existsUnique to identify these two isomorphisms.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pc-kflat-complex",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pur-exact-restriction-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; combine the specified K-flat computation normalization with uniqueness of adjoints and the ordinary adjunction in Tag 03CZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars commutes with quotient coefficient transition via restriction of scalars and adjunction",
+   "results": "8 generic module tensor and scalar-restriction hits.",
+   "verdict": "No identification of the specified normalized derived balancing.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatIso",
+   "results": "No matching declaration; NatIso is not a valid search term in this query.",
+   "verdict": "Local Mathlib search finds leftAdjointUniq and its Hom-equivalence formula as the generic building blocks.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*leftAdjointUniq|mapDerivedCategory.*(counit|comp)",
+   "results": "9 hits, including leftAdjointUniq Hom-equivalence calculations and exact derived restriction composition.",
+   "verdict": "Use these generic APIs; no lemma identifies our chosen normalized scalar comparison.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueQuotientTensorSuccessor",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof: the reductions of K and of Res K modulo pi_E coincide; normalize the composite tensor/restriction adjunction to compare the quotient transitions.",
+   "via": [
+    "lem-sfb-adic-residue-quotient-tensor-successor",
+    "lem-sfb-adic-residue-quotient-tensor-model",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicNormalizedScalarComposition",
+  "file": "lean/Sheaf/Paper/AdicNormalizedScalarComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteExtendComp_leftAdjointUniq",
+  "statement": "theorem adicFiniteExtendComp_leftAdjointUniq (f : R ⟶ S) (g : S ⟶ V)\n    (af : extend f ⊣ dres f) (ag : extend g ⊣ dres g)\n    (ah : extend (f ≫ g) ⊣ dres (f ≫ g))\n    (hf : af.unit = adicFiniteUnit f) (hg : ag.unit = adicFiniteUnit g)\n    (hh : ah.unit = adicFiniteUnit (f ≫ g)) :\n    ((af.comp ag).ofNatIsoRight (adicFiniteDresComp f g)).leftAdjointUniq ah =\n      (adicFiniteExtendComp_existsUnique f g).exists.choose",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T135851-L-4069834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T135851-L-4069834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

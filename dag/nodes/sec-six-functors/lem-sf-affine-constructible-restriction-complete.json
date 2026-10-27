@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-affine-constructible-restriction-complete",
+ "kind": "statement",
+ "title": "Completeness under ordinary restriction through an affine open and a finite open-closed tree",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, $X$ any scheme, and $K$ a derived-complete complex of completed integral $E$-coefficient sheaves on $X_{\\mathrm{proet}}$ [def-weil-derived-complete]. Let $U$ be an affine open of $X$ and $T$ a finite qcqs open-closed tree on $U$ [def-sfb-qcqs-open-closed-tree]. For every path $p$ of $T$ ending at $S$, every qcqs scheme $V$, and every weakly etale $r:V\\to S$, ordinary uncompleted derived pullback of $K$ along $r$ followed by $p$ followed by $U\\hookrightarrow X$ [def-sf-ordinary-integral-derived-pullback] is complete in the completed-coefficient slice sense [def-fix-qcqs-completion-ordinary-models]. No constructibility or projective-model conclusion is included.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, lemma-closed-immersion, and 09BL, lemma-closed-immersion-affines-apply; Bhatt--Scholze Lemma 6.5.8"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sf-ordinary-integral-derived-pullback",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the path to see that p.toRoot followed by U inclusion is an immersion. Repeat the existing ordinary restriction exactness proof without its unused compactness hypotheses. The immersion and weakly etale inverse images preserve small limits. Uniqueness of left adjoints identifies the composite; the finite-projection equations then identify the completed coefficient map and show it invertible. Transfer limit preservation to module pullback via its conservative underlying abelian sheaf functor.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-proetale-immersion-algebraic-limits-universes",
+    "lem-fix-proetale-ringed-pullback-underlying-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized quotient module comparisons form an isomorphism of augmented strict quotient towers. The additive product mapping-cocone comparison gives the Roos comparison. The ordinary restriction functor is a left adjoint and preserves finite limits, hence exact. Descend the Roos comparison to derived completion, retaining the specified unit equation.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-quotient-restriction",
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-comparison-unit",
+    "lem-fix-qcqs-completion-unit-restriction",
+    "lem-fix-ordinary-quotient-module-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate intrinsic completeness to the legacy predicate using an auxiliary prime different from ell. The canonical-unit criterion makes the source unit invertible. Its image and the completion comparison are invertible, so the unit equation makes the target unit invertible. Apply the target criterion and the proved ordinary-derived-pullback comparison isomorphism to return to the ordinaryIntegralDerivedPull presentation.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-fix-qcqs-completion-unit-criterion",
+    "lem-fix-constructible-residue-tree"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-residue-tree",
+  "lem-fix-ordinary-quotient-module-comparison",
+  "lem-fix-proetale-immersion-algebraic-limits-universes",
+  "lem-fix-proetale-ringed-pullback-underlying-universes",
+  "lem-fix-qcqs-completion-comparison-unit",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-fix-qcqs-completion-unit-restriction",
+  "lem-fix-qcqs-ordinary-quotient-restriction",
+  "lem-fix-qcqs-ordinary-restriction-exact",
+  "lem-fix-qcqs-ordinary-restriction-models",
+  "lem-sf-derived-complete-legacy-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BL and 09C3; Bhatt--Scholze Lemmas 6.5.5--6.5.8; existing normalized restriction proof with unnecessary ambient qcqs hypotheses omitted"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary proetale pullback of a derived complete integral complex along an immersion preserves derived completeness",
+   "results": "Eight general etale morphism and pullback-category hits; none is the completed-coefficient restriction or residue refinement. Local project search found the existing qcqs restriction proof whose underlying ingredients have no qcqs assumption.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match; reuse the project restriction and chart APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfSize\", \"SheafOfModules\"",
+   "results": "SheafOfModules.forgetPreservesLimitsOfSize and evaluationPreservesLimitsOfSize; two presheaf analogues. These support limits but do not identify completed-coefficient pullback or the quotient unit.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfDerivedComplete|constructible_residue_tree|ordinaryCompositeCompletionUnit_isIso",
+   "results": "msearch Mathlib grep returned no hits. Project rg found ConstructibleResidueTree, QcqsCompletionUnitRestriction and QcqsOrdinaryRestrictionExact. Their private proved helpers supply the normalization, residue-model and limit arguments.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing project proofs locally; avoid their extra ambient hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteTorAffineProjectiveCharts",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "\"Thus coherence is inherited from the individual maps on the stated domains\"; ordinary tensor completeness on the stated integral finite-Tor domain, via common projective charts: Completeness under ordinary restriction through an affine open and a finite open-closed tree",
+   "via": [
+    "lem-sf-finite-tor-ordinary-tensor-complete",
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-finite-tor-affine-projective-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AffineConstructibleRestrictionComplete",
+  "file": "lean/Sheaf/SixFunctors/AffineConstructibleRestrictionComplete.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.affineConstructibleRestrictionComplete",
+  "statement": "theorem affineConstructibleRestrictionComplete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) (K : DerivedCategory (scalarReductionSource.{u, u} l E X))\n    (hK : IsSfDerivedComplete l E X K)\n    (U : X.Opens) [IsAffine U.toScheme]\n    (tree : QcqsOpenClosedTree U.toScheme)\n    {S : Scheme.{u}} (p : tree.Path S)\n    (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]\n    (r : V ⟶ S) [WeaklyEtale r] :\n    IntegralOnSlice.IsComplete l E V none\n      ((ordinaryIntegralDerivedPull l E (r ≫ p.toRoot ≫ U.ι)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T034618-L-3665902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T034618-L-3665902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-relative-linearized-line-sections-coaction",
+ "kind": "statement",
+ "title": "Laurent coaction on sections of a linearized line over a ring",
+ "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $r\\geq0$, and $C=A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$. Write $T=\\operatorname{Spec}C=\\mathbf G_{m,S}^r$, where $C$ has $A$-basis $t^u$ for $u\\in\\mathbf Z^r$, $t^ut^v=t^{u+v}$, $\\Delta(t^u)=t^u\\otimes t^u$, $\\varepsilon(t^u)=1$, and antipode $t^u\\mapsto t^{-u}$. Let $f:X\\to S$ be a separated finite-type morphism of schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], let $a:T\\times_S X\\to X$ be an $S$-action satisfying the unit and associativity identities [def-pc-fibre-product], and let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module] with a $T$-linearization. A $T$-linearization of an invertible module $M$ means an isomorphism $\\theta:p_2^*M\\xrightarrow{\\sim}a^*M$ on $T\\times_S X$ [def-pc-module-pullback], restricting to $1_M$ along the identity and satisfying $\\theta_{gh,x}=\\theta_{g,hx}\\theta_{h,x}$ on $T\\times_S T\\times_S X$ as an equality of pulled-back sheaf maps. Put $V=\\Gamma(X,L)$. There is an $A$-linear map $c:V\\to V\\otimes_A C$ with $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\varepsilon)c=1_V$. Its normalization is the following: for every commutative $A$-algebra $B$ and $g\\in T(B)=(B^\\times)^r$, the pullback to $X_B=X\\times_S\\operatorname{Spec}B$ of $(1\\otimes\\operatorname{ev}_g)c(s)$ is the section $g\\cdot s_B$ given by $(g\\cdot s_B)(x)=\\theta_{g,g^{-1}x}(s_B(g^{-1}x))$; here $\\operatorname{ev}_g(t^u)=\\prod_\\nu g_\\nu^{u_\\nu}$, and the notation means equality of sections via pullback along the automorphism $x\\mapsto g^{-1}x$, not merely equality at geometric points. If $c(s)=s\\otimes t^u$, this gives $g\\cdot s_B=\\operatorname{ev}_g(t^u)s_B$ for every $B$. No normality, Noetherianity, properness, finite generation of $V$, or flatness of $B$ is assumed. In particular no assertion that $V\\otimes_A B\\to\\Gamma(X_B,L_B)$ is an isomorphism for nonflat $B$ is included.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero for the flat Laurent algebra C and its tensor square. The normalized section coaction is an agent-formulated consequence of that base-change map and the explicit linearization identity and cocycle, not a verbatim assertion of 02KH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sfb-equivariant-coherent-gzero",
+  "def-sfb-scheme-groupoid-module"
+ ],
+ "proof": [
+  {
+   "text": "The morphism $f$ is quasi-compact by the definition of finite type [def-weil-finite-type-morphism], and is quasi-separated by [lem-pc-separated-quasi-separated]. The module $L$ is quasi-coherent by [def-sc-invertible-module]. For $R=C$ and $R=D=C\\otimes_A C$, the displayed Laurent bases give $R\\cong\\bigoplus_I A$ as $A$-modules (with $I=\\mathbf Z^r$ or $I=\\mathbf Z^r\\times\\mathbf Z^r$). Consequently $N\\otimes_A R\\cong\\bigoplus_I N$; tensoring an injection with $R$ remains injective, component by component. Thus $A\\to R$ is flat by [def-weil-pbc-flat-ring-map], and $\\operatorname{Spec}R\\to S$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. These verify all hypotheses of degree-zero flat base change, without a finiteness condition on the section module.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "def-sc-invertible-module",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  },
+  {
+   "text": "For every $A$-algebra $B$ define $\\beta_B:V\\otimes_A B\\to\\Gamma(X_B,L_B)$ by $s\\otimes b\\mapsto b\\,p_B^*s$, using the pullback unit of [def-pc-module-pullback]. For $B=C,D$ this is the degree-zero canonical base-change map, hence is an isomorphism by [lem-pc-flat-base-change-cohom]. For a map $\\varphi:B\\to B'$ let $j:X_{B'}\\to X_B$ be the induced morphism [def-pc-fibre-product]. Directly on a pure tensor, $j^*\\beta_B(s\\otimes b)=\\varphi(b)p_{B'}^*s=\\beta_{B'}(s\\otimes\\varphi(b))$. Additivity proves this equality on every tensor. This naturality uses no flatness of $B'$ and makes no assertion that $\\beta_{B'}$ is invertible.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-flat-base-change-cohom",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  },
+  {
+   "text": "Put $Y=T\\times_S X$, $p:Y\\to X$, and $q=a\\circ(i\\times1):Y\\to X$, so $q(g,x)=g^{-1}x$. The morphism $b:Y\\to Y$, $b(g,x)=(g,g^{-1}x)$, is obtained by the fibre-product universal property [def-pc-fibre-product]; the action identities give $a\\circ b=p$ and $p\\circ b=q$ as scheme maps. Pullback of $\\theta$ therefore gives an isomorphism $\\lambda=b^*\\theta:q^*L\\to p^*L$, using composition of pullbacks [def-pc-module-pullback]. Define $K(s)=\\lambda(q^*s)\\in\\Gamma(Y,p^*L)$ and $c(s)=\\beta_C^{-1}K(s)$, identifying $Y=X_C$ by exchanging factors. Both pullback of sections and $\\lambda$ respect the $A$-action, since all morphisms are over $S$; hence $c$ is $A$-linear.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  },
+  {
+   "text": "For $g\\in T(B)$, the morphism $j_g:X_B\\to Y$ is $(g,p_B)$. Its coordinate map on $C$ is $\\operatorname{ev}_g$, since $t^u\\mapsto\\prod_\\nu g_\\nu^{u_\\nu}$. Pulling back $\\beta_C(c(s))=K(s)$ and using Step 2 gives $\\beta_B((1\\otimes\\operatorname{ev}_g)c(s))=j_g^*K(s)$. The identities $qj_g=p_B\\circ\\alpha_{g^{-1}}$ and $bj_g=(g,p_B\\circ\\alpha_{g^{-1}})$ show that the right hand side is $\\theta_{g,g^{-1}x}(s_B(g^{-1}x))$, namely $g\\cdot s_B$. Here $\\alpha_{g^{-1}}:X_B\\to X_B$ is the inverse action automorphism. These are identities of pullback sheaf maps and their sections by [def-pc-module-pullback], so the formula holds over arbitrary $B$, including nonreduced and nonflat algebras.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  },
+  {
+   "text": "Over any $A$-algebra $B$, apply the same pullback-sheaf formula to an arbitrary section $v$ of $L_B$. For $g,h\\in T(B)$ the composite $g\\cdot(h\\cdot v)$ has, in pullback notation, the expression $\\theta_{g,g^{-1}x}\\theta_{h,h^{-1}g^{-1}x}v(h^{-1}g^{-1}x)$. Pull back the stated cocycle $\\theta_{gh,y}=\\theta_{g,hy}\\theta_{h,y}$ along $y=h^{-1}g^{-1}x$. Since $hy=g^{-1}x$ and $(gh)^{-1}x=h^{-1}g^{-1}x$, this expression equals $(gh)\\cdot v$. The unit identity similarly gives $1\\cdot v=v$. Composition of these pulled-back maps is justified by [def-pc-module-pullback]. Each operator is $B$-linear because the action automorphisms are over $\\operatorname{Spec}B$ and the linearization is a module-sheaf isomorphism.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  },
+  {
+   "text": "Take $B=D=C\\otimes_A C$ and the two universal points $g,h\\in T(D)$ corresponding to $t^u\\mapsto t^u\\otimes1$ and $t^u\\mapsto1\\otimes t^u$. Write the finite sums $c(s)=\\sum_i s_i\\otimes f_i$ and $c(s_i)=\\sum_j s_{ij}\\otimes f_{ij}$. By Step 4 and the $D$-linearity in Step 5, $g\\cdot(h\\cdot s_D)=\\sum_{i,j} f_{ij}(g)f_i(h)(s_{ij})_D$, which is exactly $\\beta_D((c\\otimes1)c(s))$. Step 4 for $gh$ gives $(gh)\\cdot s_D=\\beta_D((1\\otimes\\Delta)c(s))$, since evaluation at $gh$ is $\\Delta:C\\to D$ on every Laurent monomial. Step 5 equates these sections. The injectivity of $\\beta_D$ from [lem-pc-flat-base-change-cohom] proves $(c\\otimes1)c=(1\\otimes\\Delta)c$. This tests equality at the universal pair over $D$, with an injective section comparison, rather than at geometric points.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  },
+  {
+   "text": "In Step 4 take $B=A$ and the identity point, whose evaluation is $\\varepsilon$. Since $\\beta_A:V\\otimes_A A\\to V$ is the canonical identification and $1\\cdot s=s$ by Step 5, one gets $(1\\otimes\\varepsilon)c(s)=s$. Finally if $c(s)=s\\otimes t^u$, the formula of Step 4 reads $g\\cdot s_B=\\operatorname{ev}_g(t^u)s_B$. The only inverse section comparisons used were $\\beta_C$ and $\\beta_D$, both flat cases; all other specializations were pullbacks of an already constructed section.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; agent construction from the displayed action, linearization unit and cocycle in this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "def-sc-invertible-module",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-pc-module-pullback",
+  "lem-pc-flat-base-change-cohom",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; explicit inverse-action section construction and sheaf-map cocycle computation supplied by Q38."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A linearized invertible sheaf on a quasi compact separated scheme over a ring with a split torus action has a Laurent Hopf coaction on its global sections",
+   "results": "{\"t\": \"2026-10-24T04:06:12Z\", \"tool\": \"leanfinder\", \"query\": \"A linearized invertible sheaf on a quasi compact separated scheme over a ring with a split torus action has a Laurent Hopf coaction on its global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"LaurentPolynomial.instHopfAlgebra\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"TensorProduct.tacticHopf_tensor_induction_With__\", \"ModuleCat.tilde\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"ModuleCat.instAddCommGroupObjOppositeOpensCarrierTopValTildeInType\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"c7b6f8361232ec1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"coaction\"",
+   "results": "{\"t\": \"2026-10-24T04:06:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"coaction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|[Cc]omodule|lineariz.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-24T04:06:09Z\", \"tool\": \"grep\", \"query\": \"coaction|[Cc]omodule|lineariz.*[Ss]ection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a linearized line bundle over an affine ring carry a rational algebraic group action via flat base change",
+   "results": "{\"t\": \"2026-10-24T04:06:09Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of a linearized line bundle over an affine ring carry a rational algebraic group action via flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.Γ\", \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Rep.linearization\", \"Rep.linearization_single\", \"SpecialLinearGroup.baseChange_apply_coe\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen\", \"Rep.linearizationOfMulActionIso\"], \"digest\": \"759667674b0a08b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative group actions on sections of an equivariant invertible sheaf over a commutative ring are comodules over the Laurent polynomial Hopf algebra",
+   "results": "{\"t\": \"2026-10-24T04:06:11Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplicative group actions on sections of an equivariant invertible sheaf over a commutative ring are comodules over the Laurent polynomial Hopf algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instIsCocomm\", \"ModuleCat.instModuleElemForallObjCompForgetSections\", \"ModuleCat.Tilde.smul_section_apply\", \"Rep.instMonoidalActionTypeLinearization\", \"ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType\", \"ContinuousCohomology.instLinearActionTopModuleCatI\", \"ContinuousCohomology.Iobj_ρ_apply\", \"ModuleCat.instAddCommMonoidElemForallObjCompForgetSections\"], \"digest\": \"710cded6517fafe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linearized line bundle on a quasi compact separated scheme with a split torus action induces a Laurent Hopf coaction on global sections",
+   "results": "{\"t\": \"2026-10-24T04:34:38Z\", \"tool\": \"leanfinder\", \"query\": \"A linearized line bundle on a quasi compact separated scheme with a split torus action induces a Laurent Hopf coaction on global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"TensorProduct.tacticHopf_tensor_induction_With__\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.comul_C_mul_T\", \"LaurentPolynomial.comul_C_mul_T_self\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.instIsCocomm\", \"LaurentPolynomial.comul_C\"], \"digest\": \"4fd9fdeb70f69f47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Hopf algebra structures on Laurent polynomials or generic section/pullback constructions, not the relative equivariant line-bundle section coaction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"coaction\"",
+   "results": "{\"t\": \"2026-10-24T04:34:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"coaction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Hopf algebra structures on Laurent polynomials or generic section/pullback constructions, not the relative equivariant line-bundle section coaction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|[Cc]omodule|lineariz.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-24T04:34:39Z\", \"tool\": \"grep\", \"query\": \"coaction|[Cc]omodule|lineariz.*[Ss]ection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Hopf algebra structures on Laurent polynomials or generic section/pullback constructions, not the relative equivariant line-bundle section coaction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of an equivariant invertible sheaf form a comodule over the coordinate Hopf algebra of a split torus",
+   "results": "{\"t\": \"2026-10-24T04:34:40Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of an equivariant invertible sheaf form a comodule over the coordinate Hopf algebra of a split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Γ_obj\", \"CategoryTheory.Sheaf.Γ\", \"SheafOfModules.sectionsFunctor_obj\", \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"AlgebraicGeometry.AffineScheme.Γ\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv\", \"AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\"], \"digest\": \"52696425facd3694\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Hopf algebra structures on Laurent polynomials or generic section/pullback constructions, not the relative equivariant line-bundle section coaction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the rational representation on global sections of a G linearized quasi coherent sheaf using flat base change and the inverse action",
+   "results": "{\"t\": \"2026-10-24T04:35:53Z\", \"tool\": \"leanfinder\", \"query\": \"Construct the rational representation on global sections of a G linearized quasi coherent sheaf using flat base change and the inverse action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tilde\", \"ModuleCat.tildeInModuleCat\", \"ModuleCat.Tilde.smul_section_apply\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\", \"PresheafOfModules.Sheafify.SMulCandidate.x\", \"ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType\"], \"digest\": \"bcfaff06fb7ecfda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are Hopf algebra structures on Laurent polynomials or generic section/pullback constructions, not the relative equivariant line-bundle section coaction theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-diagonal-projective-embedding",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Equivariant projective embedding before selecting boundary-avoiding weight charts. Supporting section construction: pass from the linearized very ample line to finite Laurent-weight components of immersion sections.",
+   "via": [
+    "lem-sfb-relative-torus-diagonal-projective-embedding",
+    "lem-sfb-relative-split-torus-invariant-affines",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-linearized-line-sections-coaction",
+  "worker": "stage1",
+  "summary": "Constructed the coaction via the inverse action, the pulled-back linearization, and degree-zero flat base change. Proved specialization without assuming nonflat base-change isomorphisms and checked coassociativity at the universal pair using the injective flat comparison. Reused existing nodes throughout; no new nodes. Removed the field-only multiplicative-group citation because the relative torus is already defined explicitly in the statement.",
+  "blueprint": "Supports the relative torus invariant-affine/projective-embedding input in the inherited chain to det-thm-sf-ctf-stability-direct-images, itself the direct-image clause of sk-thm-sf-ctf-stability. Supplies its finite Laurent-weight section construction. The ancestry command reports from.node = None; inherited from.place and via are retained. Whole-blueprint searches for coaction and linearized found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic separation implication verifies the quasi-separated hypothesis of flat base change; it does not replace a unit-level route step."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic degree-zero flat base change for quasi-coherent sheaves supplies the two Laurent section comparison isomorphisms; no equivariant coaction is asserted by that node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-d42d44c08",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-d42d44c08 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item JSON and the Q38 report with its Review section, and no new nodes. The statement is unchanged from the live/side-live unsplit version, except that it drops the cite [def-sc-gm-ga]. That node defines G_m over a field, while this item is over an arbitrary ring and spells out the Laurent Hopf structure itself, so the drop is a citation cleanup that changes no hypothesis. The item has no Lean owner. There is no repair note, so this is a first split and the re-split rules do not apply. Source: Stacks coherent.tex 02KH (lemma-flat-base-change-cohomology, lines 948-970) matches lem-pc-flat-base-change-cohom, whose proof names the canonical map b⊗z↦b p^*z. Step 1 checks every flat-base-change hypothesis: finite type gives qc, separated gives qs (lem-pc-separated-quasi-separated), L is quasi-coherent by def-sc-invertible-module, and C and C⊗C are free over A, hence flat, so Spec is flat by the mathlib leaf. Step 2: the naturality of β_B holds on pure tensors with no flatness, and β is inverted only for C and D. Step 3: I checked a∘b=p and p∘b=q, and λ=b^*θ goes L_{g^{-1}x}→L_x, the correct direction. Step 4: q j_g=p_B α_{g^{-1}} and b j_g=(g,p_Bα_{g^{-1}}) recover the statement's g·s_B over any B. Step 5: the cocycle pulled back at y=h^{-1}g^{-1}x gives the action law. Step 6: I recomputed g·(h·s_D)=β_D((c⊗1)c(s)) and (gh)·s_D=β_D((1⊗Δ)c(s)) at the universal pair; injectivity of β_D gives coassociativity. Step 7: the counit and the weight clause follow directly. The normalization agrees with the parent's use in its step 5, θ_{g,x}(v(x))=g^u v(gx). Duplicates: the only close node is the field version lem-sfb-linearized-qcoherent-cohomology-coaction in the same unit; the ring-base torus item is not a special case of it. I accept both declared tool_uses, lem-pc-separated-quasi-separated and lem-pc-flat-base-change-cohom, as generic tools. Edge cases r=0, zero ring, empty X, trivial action with a character, and nonflat or nonreduced B all hold. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeLinearizedLineSectionsCoaction",
+  "declaration": "AlgebraicGeometry.RelativeLinearizedLineSections.exists_normalized_coaction",
+  "declarations": [
+   "AlgebraicGeometry.RelativeLinearizedLineSections.Coordinate",
+   "AlgebraicGeometry.RelativeLinearizedLineSections.torus",
+   "AlgebraicGeometry.RelativeLinearizedLineSections.sections",
+   "AlgebraicGeometry.RelativeLinearizedLineSections.pullSection",
+   "AlgebraicGeometry.RelativeLinearizedLineSections.thetaAt",
+   "AlgebraicGeometry.RelativeLinearizedLineSections.coefficientAt",
+   "AlgebraicGeometry.RelativeLinearizedLineSections.exists_normalized_coaction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeLinearizedLineSectionsCoaction.lean",
+  "statement": "theorem exists_normalized_coaction (A : Type u) [CommRing A] (r : ℕ) (X : Over (Spec (.of A))) [ModObj (torus A r).X X] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (L : X.left.Modules) [L.IsInvertible] (D : EquivariantCoherent.ActionGroupoidModel (torus A r).X X) (theta : (Scheme.groupoidModulePullback (EquivariantCoherent.source (torus A r).X X)).obj L ≅ (Scheme.groupoidModulePullback (EquivariantCoherent.target (torus A r).X X)).obj L) (hunit : Scheme.groupoidModuleUnitLaw (EquivariantCoherent.source (torus A r).X X) (EquivariantCoherent.target (torus A r).X X) (EquivariantCoherent.identityArrow (torus A r).X X) D.laws.source_id D.laws.target_id L theta.symm) (hcocycle : Scheme.groupoidModuleCocycleLaw (EquivariantCoherent.source (torus A r).X X) (EquivariantCoherent.target (torus A r).X X) D.comp D.laws.source_comp D.laws.target_comp L theta.symm) : ∃ c : sections A X L →ₗ[A] (sections A X L ⊗[A] Coordinate A r), (∀ s : sections A X L, (TensorProduct.assoc A (sections A X L) (Coordinate A r) (Coordinate A r)) ((LinearMap.rTensor (Coordinate A r) c) (c s)) = TensorProduct.map (LinearMap.id : sections A X L →ₗ[A] sections A X L) (Coalgebra.comul : Coordinate A r →ₗ[A] Coordinate A r ⊗[A] Coordinate A r) (c s)) ∧ (∀ s : sections A X L, (TensorProduct.rid A (sections A X L)) (TensorProduct.map (LinearMap.id : sections A X L →ₗ[A] sections A X L) (Coalgebra.counit : Coordinate A r →ₗ[A] A) (c s)) = s) ∧ (∀ (W : Over (Spec (.of A))) (j : W ⟶ (torus A r).X ⊗ X) (s : sections A X L) (n : ℕ) (v : Fin n → sections A X L) (f : Fin n → Coordinate A r), c s = ∑ i, v i ⊗ₜ[A] f i → ∑ i, coefficientAt W j (f i) • pullSection (j.left ≫ EquivariantCoherent.target (torus A r).X X) L (v i) = (thetaAt L theta W j).hom.app ⊤ (pullSection (j.left ≫ EquivariantCoherent.source (torus A r).X X) L s)) ∧ (∀ (s : sections A X L) (m : Fin r → ℤ), c s = s ⊗ₜ[A] (AddMonoidAlgebra.single (ULift.up m) 1) → ∀ (W : Over (Spec (.of A))) (j : W ⟶ (torus A r).X ⊗ X), (thetaAt L theta W j).hom.app ⊤ (pullSection (j.left ≫ EquivariantCoherent.source (torus A r).X X) L s) = coefficientAt W j (AddMonoidAlgebra.single (ULift.up m) 1) • pullSection (j.left ≫ EquivariantCoherent.target (torus A r).X X) L s)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normalization is written on arbitrary test schemes at (g,x): ev_g(c(s))(gx) = theta_(g,x)(s(x)). Pulling along (g,g^-1 x) on X_B is exactly the specified inverse-action formula for all A-algebras B; finite tensor presentations describe the canonical section comparison, without requiring any nonflat section comparison to be invertible. ActionGroupoidModel only presents the given action with its canonical group-coordinate composition. Added existing definition-node dependencies own the Laurent torus and normalized action-groupoid interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65550f788",
+  "group": "O4",
+  "result": "pass",
+  "note": "Item node unchanged except lean + 3 added landed def stmt_deps (ring-diagonalizable-group, equivariant-coherent-gzero, scheme-groupoid-module; no cycle); 9 dep records byte-identical to side-live; lean.statement verbatim. Clause match: CommRing A, Laurent AddMonoidAlgebra with group-like Mathlib coalgebra, torus = hopfSpec ringDiagonalizableGroup, IsSeparated+LOFT+QC, ModObj action, ActionGroupoidModel D unique (comp pinned by group_coordinate + IsGroupoid source law), IsInvertible L, theta p2*L≅a*L; hunit/hcocycle on theta.symm verified: groupoidModuleCocycleLaw at ((g,hy),(h,y)) gives β_{gh,y}=β_{h,y}β_{g,hy}, i.e. θ_{gh,x}=θ_{g,hx}θ_{h,x}. Coassoc/counit correct; normalization on arbitrary test arrows Σf_i(g)(gx)*v_i=θ_{g,x}(x*s) equivalent to node's g·s_B via b(g,y)=(g,g⁻¹y), sign consistent with parent step 5; weight clause = n=1 case; no nonflat β invertibility claimed. Edge cases r=0, zero A, empty X, n=0, nonflat/nilpotent W fine. Helpers real, docstrings with source+blueprint, proof sorry only. Note: lem-pc-flat-base-change-cohom record is field-only (stage-3 concern, acknowledged in report). No compile (no file changed)."
+ }
+}

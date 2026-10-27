@@ -1,0 +1,120 @@
+{
+ "id": "def-pur-point-cyclotomic-section-data",
+ "kind": "definition",
+ "title": "Section formulas for the point cyclotomic action",
+ "statement": "For a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell$, and a finite extension $E/\\mathbf Q_\\ell$, put $s=\\operatorname{Spec}k$ and let $U=(s,\\operatorname{id})$ be the final object of its pro-etale site. Use geometric Frobenius $g$, the restriction map, and the canonical comma arrow [def-weil-frobenius-point-transport]. Define the section arrow $j:U\\to g^*U$ as the comma arrow followed by $g^*$ of restriction. For each root sheaf [def-pur-roots-of-unity-sheaf], its section action is its inverse-image adjunction unit, followed by the root comparison [def-pur-roots-of-unity-inverse-image], followed by restriction along $j$. Define the root-limit action by the rootSection comparison of [def-weil-frobenius-coefficient-twists] followed by restriction along $j$. For integral or finite coefficients and each signed line $B(m)$ [def-coefficient-twists-detailed], define the section action by the corresponding module inverse-image unit, the specified signedLineMaps or finiteSignedLineMaps comparison [def-weil-frobenius-coefficient-twists], then restriction along $j$. Scalar multiplication uses the constant-section map, with its quotient-compatible completion for integral coefficients. Positive generators are the recorded pure root tensors, evaluation uses the identity slice of the internal Hom [def-pur-sheaf-hom], and the successor tensor is the defining sheaf-tensor pure-section map [def-pur-sheaf-tensor-product]. The constant coefficient action is the same unit/comparison/restriction composite. These are the existing section formulas of the parent cyclotomic-action statement, extracted unchanged.",
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281 (root action, tensor powers, duals); geometric convention in Deligne Weil II (1.1.7), pp. 150-151; returned item steps 5-7"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-point-transport",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "Deligne I (2.2); existing section formulas extracted verbatim from lem-pur-point-signed-cyclotomic-action"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pro-etale point signed cyclotomic action section definitions coefficient scalar map and root inverse image comparison",
+   "results": "8 hits in CyclotomicCharacter: modularCyclotomicCharacter.aux and aux_spec, cyclotomicCharacter and spec, toFun_spec, modularCyclotomicCharacter.toFun_spec and toFun_spec', modularCyclotomicCharacter'.spec'. These are field cyclotomic characters, not these sheaf section formulas.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointIntegralSectionMap|proEtaleRootsOfUnityInverseImageMap|signedLineMaps",
+   "results": "0 Mathlib hits. The project formulas already exist in the parent module and are moved verbatim, not redefined.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The action on sections of signed Tate twists over an algebraic closure is the inverse image unit followed by the canonical comparison and restriction to the final object",
+   "results": "8 hits: actionUnitNatIso_inv_app, Sheaf.ΓRes, Scheme.Modules.restrictFunctorId_inv_app_app, SheafOfModules.sectionsFunctor_map, PreGaloisCategory.AutGalois, Scheme.Modules.pushforwardId_inv_app_app, Sheaf.ΓNatIsoSheafSections, Scheme.Opens.topIso_inv. General section and unit formulas, not the specified signed-line construction.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSignedCyclotomicAction",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "the root-tower, coefficient extension, tensor and dual section formulas used to state geometric Frobenius scalar action",
+   "via": [
+    "lem-pur-point-signed-cyclotomic-action",
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSignedCyclotomicActionData",
+  "file": "lean/Sheaf/Paper/PointSignedCyclotomicActionData.lean",
+  "declaration": "WeilConjectures.PointSignedCyclotomicAction.sectionArrow",
+  "declarations": [
+   "WeilConjectures.PointSignedCyclotomicAction.point",
+   "WeilConjectures.PointSignedCyclotomicAction.finalObject",
+   "WeilConjectures.PointSignedCyclotomicAction.sectionArrow",
+   "WeilConjectures.PointSignedCyclotomicAction.rootAction",
+   "WeilConjectures.PointSignedCyclotomicAction.rootValue",
+   "WeilConjectures.PointSignedCyclotomicAction.rootLimitAction",
+   "WeilConjectures.PointSignedCyclotomicAction.coefficientRing",
+   "WeilConjectures.PointSignedCyclotomicAction.line",
+   "WeilConjectures.PointSignedCyclotomicAction.action",
+   "WeilConjectures.PointSignedCyclotomicAction.generator",
+   "WeilConjectures.PointSignedCyclotomicAction.scalars",
+   "WeilConjectures.PointSignedCyclotomicAction.scalarAt",
+   "WeilConjectures.PointSignedCyclotomicAction.scale",
+   "WeilConjectures.PointSignedCyclotomicAction.evaluate",
+   "WeilConjectures.PointSignedCyclotomicAction.tensor",
+   "WeilConjectures.PointSignedCyclotomicAction.constantAction"
+  ],
+  "statement": "def sectionArrow : finalObject D ⟶\n    (proEtaleBaseChange (frobeniusPointIso D).hom).obj (finalObject D)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25",
+  "note": "Attachment migration only: all sixteen existing data declarations are moved verbatim and publicly reexported by the original module. No new mathematical object or definition body is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-54049",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T163532-L-691593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-54049",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T163532-L-691593",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to clone; 16 data defs verbatim vs clone; root_limit = item conjunct (he dropped, true via unique coordinatewise purTwistZlAction); signed_section_scalar = item scalar conjunct at b=1; combined scratch compile + #print axioms (sorryAx from the 2 sublemmas only); 0 importers"
+ }
+}

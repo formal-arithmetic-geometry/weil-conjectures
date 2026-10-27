@@ -1,0 +1,286 @@
+{
+ "id": "lem-dl-a1-heart-connected-lisse-strata",
+ "kind": "statement",
+ "title": "Continuous realization of heart objects has connected lisse strata",
+ "statement": "Fix the finite-field and coefficient datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}k_0$ and $\\Qlb=\\overline{\\mathbf Q}_\\ell$ of [def-weil-finite-field-fiber]. Let $E/\\mathbf Q_\\ell$ be a finite subextension of $\\Qlb$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Use the raw rationalized category $D^b_c(T,E)$ [def-weil-rationalization-karoubi], the common-finite-stage category $D^b_c(T,\\Qlb)$ [def-weil-pbc-qbar-category], and their standard pairs and constructible hearts [def-weil-constructible-standard-tstructure, def-weil-constructible-heart]. Let $J_T$ be the specified derived extension-of-scalars equivalence of [lem-weil-pbc-condensed-e-realization] to constructible complexes of modules over the continuous coefficient ring $E_T^c$, where $E_T^c(V)=C(|V|,E)$ on the small pro-etale site. The categories [def-weil-derived-complete-integral-detailed] and [def-weil-pbc-bounded-constructible-complete] used to define its rational source agree with the same completed ring sheaf and reductions. For every $F\\in\\Sh_c(T,E)$, $J_T(F)$ is concentrated in degree zero. There is a finite good stratification $T=\\coprod_\\alpha S_\\alpha$ by reduced locally closed subschemes, where good means that the closure of each stratum is a union of strata, such that for $a_\\alpha:S_\\alpha\\hookrightarrow T$ the canonical derived pullback [def-weil-derived-pullback-tensor-hom] comparison is an isomorphism\n$$J_{S_\\alpha}(La_\\alpha^*F)\\cong a_\\alpha^*J_T(F)\\quad\\text{in }D(\\operatorname{Mod}(E^c_{S_\\alpha})).$$\nBoth sides are lisse sheaves in degree zero: pro-etale locally finite free over $E^c_{S_\\alpha}$. Each $S_\\alpha$ has finitely many open connected components $C$, and every nonempty such $C$ has a $k$-rational point $x:s\\to C$ and one finite rank $r_C\\ge0$, constant on $C$. The empty scheme admits the empty stratification. The restrictions $La_\\alpha^*F$ lie in the lisse rational heart of [lem-tw-lisse-rational-realization]; the displayed isomorphism uses its specified pullback comparison.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, Definitions 6.8.3 and 6.8.6, Proposition 6.8.14(2), Remark 6.8.15; continuous realization bridge and connected lisse strata (returned proof Steps 5–6). Stacks Tags 04MF, topology-lemma-locally-Noetherian-locally-connected, and 00FV, algebra-theorem-nullstellensatz."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-qbar-category",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-constructible-heart",
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-tw-lisse-rational-realization"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian. Apply the finite-type-over-Noetherian lemma to $T\\to\\operatorname{Spec}k$ and the finite-type dimension bound. Thus $T$ is Noetherian and finite dimensional, and $\\ell$ is a unit in every local ring because it is nonzero in $k$. The integral stratified-perfect characterization identifies the two integral categories in the statement, including their completed coefficients and reductions. Its closure under cohomology and truncation ensures that the standard pairs in use are the same pairs of ambient integral degree bounds and their rationalizations.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11 and Proposition 6.8.11(3); verification of the scheme and integral-category hypotheses"
+   }
+  },
+  {
+   "text": "Write $B_T=\\varprojlim_n(\\mathcal O_E/\\varpi^n)_T$ and $A_T=B_T[1/\\varpi]$, as in the current lisse-localization-restriction statement. The continuous-coefficients lemma identifies $B_T$ with the continuous integral coefficient sheaf and $A_T$ with $E_T^c$, canonically by finite quotient maps and localization. Thus the functor $J_T$ of the condensed realization is precisely the functor induced by $K\\mapsto A_T\\otimes^L_{B_T}K$, transported through that ring isomorphism. The lisse-localization-restriction lemma states exact scalar localization, its cohomology formula for every integer, and preservation of both localized standard halves for this raw rational functor. Since $F$ belongs to both halves, $M=J_T(F)$ has cohomology only in degree zero. This uses the two integral representatives allowed by the two halves, not an integral heart lattice or a lisse hypothesis on $F$. The condensed realization identifies its target with bounded complexes having stratified locally finite free cohomology over this same $E_T^c$. Hence $M=\\mathcal H^0(M)[0]$ has a finite locally closed lisse partition. The strict-tower slice-limit clause of the changed lemma is not needed here.",
+   "uses": [
+    "lem-tw-lisse-localization-restriction",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3, 6.8.6, 6.8.8 and Proposition 6.8.14(2): degree zero and the finite lisse partition"
+   }
+  },
+  {
+   "text": "Refine that finite partition by the Noetherian good-refinement lemma. Give every new locally closed subset $S$ its reduced induced structure: choose an open $U\\subset T$ in which $S$ is closed and apply the reduced-induced-closed-subscheme lemma inside $U$. By the locally-closed-stratum lemma, each inclusion $a:S\\hookrightarrow T$ so obtained is an immersion and $S$ is a separated finite-type $k$-scheme (composition of separated and of finite-type morphisms, $U$ being quasi-compact in the Noetherian $T$). The continuous coefficient restriction lemma identifies $a^{-1}E_T^c$ with $E_S^c$ for the immersion $a:S\\hookrightarrow T$. Restricting a local basis of $M$ to the inverse-image charts therefore keeps a finite free basis. The good property concerns only the underlying subsets, so this choice of reduced structure preserves it.",
+   "uses": [
+    "lem-sfb-noetherian-good-stratification-refinement",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, topology.tex, lemma-noetherian-partition-refined-by-stratification; reduced induced structure and §6.8 locally closed coefficient restriction"
+   }
+  },
+  {
+   "text": "For each $a:S\\hookrightarrow T$, the integral pullback of the statement is the strict-tower completed pullback: the integral-pullback comparison lemma gives a natural isomorphism $\\gamma_{a,K}:La^*K\\cong La^*_{\\mathrm{comp}}K$ for every integral representative $K$ of $F$ (derived complete by definition of the integral category, with $\\ell$ invertible on $S,T$), matching the defining finite-reduction projections and $\\mathcal O_E$-linear, hence passing to raw rationalizations. Through $\\gamma_a$, the normalized continuous rational derived realization compares $J_S(La^*F)$ with $E_S^c\\otimes^L_{a^{-1}E_T^c}a^{-1}M$. For a locally closed immersion it states that this is the exact ordinary inverse image $a^*M$; its scalar-extension formulas agree with the specified $J$. This proves the displayed comparison and puts both sides in degree zero, locally finite free. The lisse rational realization is essentially surjective onto finite locally free modules and fully faithful. Choose its lisse heart preimage $L$ of $a^*M$. Full faithfulness of the ambient $J_S$ lifts the sheaf isomorphism $J_S(La^*F)\\cong J_S(L)$ and its inverse; faithfulness makes the composites identities. Thus $La^*F\\cong L$ is in the lisse rational heart. The pullback comparison is the specified scalar-extension comparison of that lisse realization, since both send each pulled-back basis vector to the same basis vector.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-tw-lisse-rational-realization",
+    "lem-a1-integral-pullback-completed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15 and the normalized lisse pullback comparison; no flatness assumption on arbitrary scalar maps"
+   }
+  },
+  {
+   "text": "Each stratum $S$ is Noetherian. The connected-component lemma gives finitely many open components $C$. Transfer its finite locally free continuous module to the pulled condensed coefficient model through the canonical coefficient-ring isomorphism. The stratified-lattice-rank lemma applies to that module and says that its rank loci are clopen and exhaust $S$, including rank zero. A connected nonempty $C$ meets exactly one such locus: two nonempty disjoint clopen parts would disconnect $C$. Its rank is consequently one finite integer $r_C\\geq0$. The coefficient-ring isomorphism preserves finite free bases, so this is also the rank of both continuous modules in the displayed comparison.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "det-lem-stratified-lattice-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3; Stacks Tags 04MF and 04ME; rank loci of the finite locally free coefficient module"
+   }
+  },
+  {
+   "text": "A nonempty component $C$ is quasi-compact, being closed in the Noetherian stratum, and is a finite-type $k$-scheme, being an open subscheme of it. Its underlying space is Kolmogorov: on an affine neighbourhood distinct primes are distinguished by a basic open; if one point lies outside that neighbourhood, the neighbourhood itself distinguishes them. The quasi-compact Kolmogorov closed-point lemma therefore gives a closed point $c$ of $C$. The closed-point residue-field lemma applies to $C\\to\\operatorname{Spec}k$, since $k$ is algebraically closed, and identifies $k\\to\\kappa(c)$ with an isomorphism. Composing its inverse on spectra with the canonical residue-field point yields a section $x:\\operatorname{Spec}k\\to C$. This uses no smoothness or irreducibility assumption. If $T$ is empty take the empty good stratification; every assertion about components is vacuous, and the degree-zero assertion already holds by Step 2.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Stacks Tag 00FV, algebra.tex, theorem-nullstellensatz; closed-point existence in a quasi-compact Kolmogorov space"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-lem-stratified-lattice-rank",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+  "lem-kun-dimension-finite-type",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-tw-lisse-localization-restriction",
+  "lem-tw-lisse-rational-realization",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, Definitions 6.8.3, 6.8.6, 6.8.8, Proposition 6.8.14(2), Remark 6.8.15; assembly with existing DAG comparisons and Stacks 09Y5, 04MF, 00FV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The continuous coefficient realization of a rational adic heart object has a finite good stratification with connected lisse strata of constant rank and a rational point on each nonempty component",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {y : N} {n : ℕ},\\n      f x ≡ y [SMOD I ^ n • ⊤\", \"doc\": \"Given a surjective linear map $ f : M \\\\to N $ composed with the quotient map to $ N/(I^n \\\\cdot N) $, for any $ x \\\\in M $, $ y \\\\in N $, and natural number $ n $, if $ f(x) \\\\equiv y \\\\mod I^n \\\\cdot N $, \"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {y : N} {n : ℕ}, y ∈ I ^ n • ⊤ → ∃ x ∈ I ^ n • ⊤, f x \", \"doc\": \"Given a surjective linear map from the quotient module $ M/(I \\bullet M) $ to $ N/(I \\bullet N) $, for any element $ y $ in the $ n $-th power submodule $ I^n \\bullet N $ and natural number $ n $, there \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible rational adic sheaf admits connected constant rank strata under its continuous ring sheaf realization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n     \", \"doc\": \"For any open set $U$ in the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, any section $s$ of the structure sheaf $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}$ over $U$, and any point $x \"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.n\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → PrimeSpectrum.BasicConstructibleSetData R → ℕ\", \"doc\": \"A function that assigns a natural number to each basic constructible set data in the prime spectrum of a ring.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) (x : ↥U),\\n  ∃ f g i,\\n    ↑x ∈ PrimeSpectrum.basicOpen g ∧\\n      AlgebraicGeometry.StructureSheaf.const R f g (PrimeSpe\", \"doc\": \"For any open set $U$ in the prime spectrum $\\\\operatorname{Spec}(R)$, any section $s$ of the structure sheaf $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}$ over $U$, and any point $x \\\\in U$, there exist elemen\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"rank\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] : IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatRank\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.IsFinite f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : IsLocallyConstant (AlgebraicGeometry.Scheme.Hom.finrank f)\", \"doc\": \"The rank of a finite flat locally finitely presented morphism is locally constant.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|lisse).*(stratif|rank)|(stratif|rank).*lisse",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The continuous coefficient realization of a rational adic heart object has a finite good stratification with connected lisse strata of constant rank and a rational point on each nonempty component",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.continuous_coe\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \": Continuous ((↑) : RatFunc K → K⸨X⸩)\", \"doc\": \"The canonical embedding from the field of rational functions over a field $ K $ to the ring of Laurent series over $ K $ is continuous with respect to the topology induced by the $ X $-adic valuation.\"}\n  {\"name\": \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A : Type*} [Category* A] [HasFiniteColimits A] [HasWeakSheafify (coherentTopology CompHaus.{u}) A] :\\n  HasFiniteColimits (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits and the category of compact Hausdorff spaces equipped with the coherent Grothendieck topology admits weak sheafification into $\\\\mathcal{A}$, then the ca\"}\n  {\"name\": \"LightCondensed.IsDiscrete\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondensed.{u} C)\", \"doc\": \"A sheaf $ X $ in the category of light condensed sheaves is constant if it is isomorphic to the sheafification of a constant presheaf with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A J : Type*} [Category* A] [Category* J] [HasColimitsOfShape J A]\\n  [HasWeakSheafify (coherentTopology CompHaus.{u}) A] : HasColimitsOfShape J (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and the category of condensed objects in $\\\\mathcal{A}$ has weak sheafification with respect to the coherent Grothendieck topology on compact Ha\"}\n  {\"name\": \"Rat.continuous_coe_real\", \"module\": \"Mathlib.Topology.Instances.Rat\", \"type\": \": Continuous ((↑) : ℚ → ℝ)\", \"doc\": \"The canonical embedding of the rational numbers $\\\\mathbb{Q}$ into the real numbers $\\\\mathbb{R}$, which maps each rational number to its equivalence class in the Cauchy completion, is a continuous func\"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(v : HeightOneSpectrum R) : v.adicCompletion ℚ ≃A[ℚ] ℚ_[primesEquiv v]\", \"doc\": \"For a height one prime ideal $ v $ in the integral closure of $ \\\\mathbb{Z} $ in $ \\\\mathbb{Q} $, the adic completion of $ \\\\mathbb{Q} $ with respect to the valuation induced by $ v $ is canonically equi\"}\n  {\"name\": \"LightCondSet.LocallyConstant.iso\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor ≅ LightCondensed.discrete (Type u)\", \"doc\": \"The functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces is naturally isomorphic to the discrete (constant sheaf) functor in the category of light condensed sets\"}\n  {\"name\": \"CondensedSet.LocallyConstant.iso\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor ≅ discrete (Type (u + 1))\", \"doc\": \"An isomorphism between the functor constructing sheaves of locally constant functions on compact Hausdorff spaces and the discrete functor embedding types into condensed sets, established via the adju\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary scheme modules, topological stalks, ring spectra or generic homology; none states the specified adic coefficient-category and point-section assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-constructible-fibres-exact",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-exact",
+ "blueprint": {
+  "from": {
+   "node": "p-dl-a1-exact",
+   "place": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence (geometric-stalk detection); §6.8, Definitions 6.8.3 and 6.8.6, Proposition 6.8.14(2), Remark 6.8.15; continuous realization bridge and connected lisse strata (returned proof Steps 5–6). Stacks Tags 04MF, topology-lemma-locally-Noetherian-locally-connected, and 00FV, algebra-theorem-nullstellensatz.",
+   "via": [
+    "lem-dl-a1-constructible-fibres-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-heart-connected-lisse-strata",
+  "worker": "stage1",
+  "summary": "Six-step assembly using existing category, realization, good-refinement, rank and closed-point lemmas. Statement unchanged; no new nodes, no Lean attachment, no SGA route. Checks distinguish the general finite-type rational-point argument from the inapplicable smooth density lemma. Repair of the landing refusal: re-read every current proof dependency, explicitly identify B_T[1/varpi] with the continuous coefficient ring in Step 2 using the existing continuous-coefficients lemma, and refresh the exact-localization citation; the changed strict-tower clause is not used. Reviewer repair (Q03 cc, 2026-10-23): Step 3 cites the new statement-only node lem-dl-a1-locally-closed-stratum-separated-finite-type for separatedness and finite type of the strata; Step 4 cites lem-a1-integral-pullback-completed-comparison to identify the specified integral pullback with the completed pullback of the realization lemma.",
+  "blueprint": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence: the connected lisse strata needed for geometric-stalk zero detection; via lem-dl-a1-constructible-fibres-exact. The present steps supply degree-zero realization, good stratification, normalized restriction, ranks and rational points.",
+  "tool_uses": [
+   {
+    "node": "det-lem-stratified-lattice-rank",
+    "why": "Generic clopen rank loci for lisse coefficient modules; no weight or curve argument is replaced."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-type dimension bound verifies the realization hypotheses; it replaces no weight argument."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Identifies the actual completed pullback with derived continuous module inverse image, exact for immersions."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic closed-point existence for each nonempty quasi-compact component."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic finite open-component theorem for the Noetherian strata."
+   },
+   {
+    "node": "lem-sfb-noetherian-good-stratification-refinement",
+    "why": "Generic finite good refinement of the lisse partition; no such topological refinement lemma is in the item unit."
+   },
+   {
+    "node": "lem-tw-lisse-localization-restriction",
+    "why": "Exact scalar localization preserves the specified standard halves, so realization of the heart is in degree zero."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "The equivalence with finite locally free continuous modules recovers the lisse rational heart and fixes the specified comparison."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Nullstellensatz identifies closed residue fields with the algebraically closed base, without a smoothness assumption."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "The specified scalar realization and its constructible target provide the finite lisse partition and full faithfulness."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Transfers the continuous coefficient module to the pulled condensed model used by the rank lemma."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Identifies the continuous coefficient rings under the actual locally closed immersions."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity verifies the source hypotheses; the weight-exactness unit contains no scheme Noetherianity lemma."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the two explicitly required integral categories and their standard degree bounds."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the required reduced strata in open neighbourhoods."
+   },
+   {
+    "node": "lem-a1-integral-pullback-completed-comparison",
+    "why": "Identifies the specified integral pullback of the statement with the strict-tower completed pullback used by the continuous rational realization lemma (reviewer repair, Step 4)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-lem-stratified-lattice-rank",
+  "lem-kun-dimension-finite-type",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-tw-lisse-localization-restriction",
+  "lem-tw-lisse-rational-realization",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-a1-integral-pullback-completed-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-eb7643c8a",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-eb7643c8a (reviewer sub-agent of L); spot-checked: S1 first split of lem-dl-a1-heart-connected-lisse-strata, read in full. No new nodes were delivered and the statement is unchanged. Only Step 2 changed from the prior head 54684fc: it now cites the continuous-coefficients immersion-restriction lemma to identify B_T[1/ϖ] with E_T^c. Steps 1-6 were checked against every cited statement. Step 1: Noetherian and finite-dimensional, ℓ invertible, the two integral categories are identified by the stratified-perfect characterization. Step 2: the heart realizes in degree 0 because the localized halves go to the ambient halves (lisse-localization-restriction), with no lattice assumed. Step 3: good refinement of a DCC space (09Y5). Step 4: lifting through full faithfulness plus essential surjectivity of the lisse realization. Step 5: finitely many open components, clopen rank loci (det-lem-stratified-lattice-rank), condensed≅continuous for totally disconnected E. Step 6: quasi-compact T0 component, closed point, κ(c)=k by Nullstellensatz, no smoothness. BS 6.8.14(2) was checked in the PDF. Empty, rank-0, nonreduced and singular cases are covered. Two citation faults (C1/C3) are fixed. (1) Step 3 asserted that the reduced strata are separated finite-type k-schemes, which J_S of the condensed realization requires, but had no node for separatedness (composition of separated morphisms). No DAG node gives it, so I added the statement-only unsplit node lem-dl-a1-locally-closed-stratum-separated-finite-type (Stacks 01KU, 01T3, 01T5, 01T6; Mathlib candidates IsSeparated.stableUnderComposition, isSeparated_of_mono, IsImmersion.comp) and cited it in Step 3. (2) Step 4 equated the statement's integral pullback (def-weil-derived-pullback-tensor-hom) with the completed pullback (def-weil-pbc-completed-pullback) of lem-per-continuous-rational-derived-realization without a citation. It now cites the existing lem-a1-integral-pullback-completed-comparison (γ: Lg*K≅Lg*_comp K for derived-complete K, ℓ invertible). This adds no trf or pod node to the closure and no cycle. Batch-5 flag: the cite of lem-per-continuous-rational-derived-realization reaches lem-trf-geometric-inverse-image-exact, which is general topos exactness of a geometric-morphism inverse image. It is neither assumed statement nor part of their proofs, so it is accepted. Fixed item and new node are under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

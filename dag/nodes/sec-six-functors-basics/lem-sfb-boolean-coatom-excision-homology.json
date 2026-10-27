@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-boolean-coatom-excision-homology",
+ "kind": "statement",
+ "title": "Homology consequence of derived Boolean coatom excision",
+ "statement": "Let $E$ be a finite set with $|E|\\geq2$, let $a\\in E$, and put $v=E\\setminus\\{a\\}$. For a finite set $F$, let $P_F=\\{S\\subseteq F:\\varnothing\\ne S\\ne F\\}$ ordered by inclusion, and let $B_F=C(P_F;\\mathbf Q)$ be its augmented strict-chain complex [def-sfb-augmented-poset-chains], with homology as in [def-weil-pbc-module-chain-complex-homology]. For every integer $n$, applying $H^{-n}$ to the derived isomorphism of [lem-sfb-boolean-coatom-excision-derived] and identifying the homology of its explicitly specified suspension gives an isomorphism of rational vector spaces $H_n(B_E)\\cong H_{n-1}(B_v)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, contextual motivation only. Agent-formulated extraction of the retained proof of lem-sfb-product-chain-proper-interval-homology, steps 5–6, per-degree consequence only; no exact combinatorial assertion in the blueprint. Exact reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-augmented-poset-chains",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-sfb-boolean-coatom-excision-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n\\in\\mathbf Z$. All hypotheses of lem-sfb-boolean-coatom-excision-derived are precisely those of the present statement. Write $f=Q(\\check\\theta\\circ\\check p):Q(\\check B_E)\\to Q(\\check B_v)[1]$ for its isomorphism. The cohomology functor $H^{-n}$ specified by the derived-category definition in the statement dependencies sends $f$ and $f^{-1}$ to inverse rational linear maps: functoriality sends their two compositions to the identity maps. Hence $H^{-n}(Q(\\check B_E))\\cong H^{-n}(Q(\\check B_v)[1])$.",
+   "uses": [
+    "lem-sfb-boolean-coatom-excision-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category, together with the preceding discussion in Tag 05RR, section-derived-categories; cohomology functors on the localization."
+   }
+  },
+  {
+   "text": "The factorization isomorphism DerivedCategory.homologyFunctorFactors identifies the homology of Q applied to a reversed complex with the homology of that reversed complex. Reversal is restriction along the integer shape embedding q ↦ -q. Apply HomologicalComplex.restrictionHomologyIso at q=-n to identify the source with H_n(B_E). For the target, apply the standard derived homology shift isomorphism, (DerivedCategory.homologyFunctor (ModuleCat ℚ) 0).shiftIso 1 (-n) (1-n), giving H^{-n}(Q(check B_v)[1]) ≅ H^{1-n}(Q(check B_v)). Apply homologyFunctorFactors and restrictionHomologyIso once more, now at q=1-n, to identify this with H_{n-1}(B_v). These generic isomorphisms incorporate the shift differential sign and apply to every integer degree, including zero terms.",
+   "uses": [
+    "lem-sfb-boolean-coatom-excision-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010V, section-complexes, definition of chain homology; Tags 011G and 011H, definition-shift-cochain and definition-cohomology-shift. Explicit kernel/image computation for the suspension specified by lem-sfb-boolean-coatom-excision-derived."
+   }
+  },
+  {
+   "text": "Compose the isomorphism of step 1 with the source and target identifications of step 2 to obtain $H_n(B_E)\\cong H_{n-1}(B_v)$. Its inverse is the composite of the inverse identifications with $H^{-n}(f^{-1})$, so the conclusion is an isomorphism of rational vector spaces for each $n\\in\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category, together with the preceding discussion in Tag 05RR, section-derived-categories; cohomology functors on the localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-boolean-coatom-excision-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is contextual motivation only; agent-written per-degree extraction of derived Boolean coatom excision. Lean implements the Stacks 05RU, 010V, 011G and 011H identifications using Mathlib homologyFunctorFactors, the derived homology ShiftSequence, and restrictionHomologyIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Boolean.*homolog|coatom.*homolog|proper.subset.*homolog|poset.*homolog",
+   "results": "{\"t\": \"2026-10-22T06:12:51Z\", \"tool\": \"grep\", \"query\": \"Boolean.*homolog|coatom.*homolog|proper.subset.*homolog|poset.*homolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: restrictionHomologyIso and homologyShiftIso concern generic reindexing/shift. They do not supply the Boolean coatom derived isomorphism; this consequence has that derived result as its sole mathematical proof input, as required by the derived-form rule."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"BooleanAlgebra\"",
+   "results": "{\"t\": \"2026-10-22T06:12:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"homology\\\", \\\"BooleanAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: restrictionHomologyIso and homologyShiftIso concern generic reindexing/shift. They do not supply the Boolean coatom derived isomorphism; this consequence has that derived result as its sole mathematical proof input, as required by the derived-form rule."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Applying homology to Boolean coatom excision gives an isomorphism H_n of the augmented proper subset complex with H_{n-1} for the smaller set",
+   "results": "{\"t\": \"2026-10-22T06:12:52Z\", \"tool\": \"leansearch\", \"query\": \"Applying homology to Boolean coatom excision gives an isomorphism H_n of the augmented proper subset complex with H_{n-1} for the smaller set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restrictionHomologyIso\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_hom\", \"HomologicalComplex.hasHomology_of_iso\", \"HomologicalComplex.homologyIsoSc'\", \"HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE'\", \"HomotopyCategory.homologyShiftIso_hom_app\", \"HomologicalComplex.homologyMapIso_hom\", \"HomologicalComplex.extendHomologyIso\"], \"digest\": \"2132ec8559da6cd6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: restrictionHomologyIso and homologyShiftIso concern generic reindexing/shift. They do not supply the Boolean coatom derived isomorphism; this consequence has that derived result as its sole mathematical proof input, as required by the derived-form rule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced homology of the proper subset poset of a finite set is isomorphic in degree n to that of the proper subset poset with one element removed in degree n minus one",
+   "results": "{\"t\": \"2026-10-22T06:13:21Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced homology of the proper subset poset of a finite set is isomorphic in degree n to that of the proper subset poset with one element removed in degree n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.homologyπ_restrictionHomologyIso_hom\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_inv\", \"HomologicalComplex.pOpcycles_restrictionOpcyclesIso_inv\", \"HomologicalComplex.restrictionOpcyclesIso\", \"HomologicalComplex.pOpcycles_restrictionOpcyclesIso_hom\", \"AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace\", \"HomologicalComplex.restrictionHomologyIso_hom_homologyι\", \"ChainComplex.alternatingConstHomologyZero\"], \"digest\": \"6f61830dc44389a0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: restrictionHomologyIso and homologyShiftIso concern generic reindexing/shift. They do not supply the Boolean coatom derived isomorphism; this consequence has that derived result as its sole mathematical proof input, as required by the derived-form rule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced rational homology of the order complex of a Boolean proper interval satisfies a one-degree suspension recurrence",
+   "results": "{\"t\": \"2026-10-22T06:13:22Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced rational homology of the order complex of a Boolean proper interval satisfies a one-degree suspension recurrence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Q_succ\", \"ChainComplex.instHasHomologyNatObjAlternatingConst\", \"AlgebraicTopology.DoldKan.P_succ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.hσ'_eq_zero\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.hσ\"], \"digest\": \"1006c89a305148ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: restrictionHomologyIso and homologyShiftIso concern generic reindexing/shift. They do not supply the Boolean coatom derived isomorphism; this consequence has that derived result as its sole mathematical proof input, as required by the derived-form rule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying homology to a derived Boolean coatom excision isomorphism gives H_n of proper subset chains isomorphic to H_{n-1} of the smaller Boolean complex",
+   "results": "{\"t\": \"2026-10-23T11:37:09Z\", \"tool\": \"leanfinder\", \"query\": \"Applying homology to a derived Boolean coatom excision isomorphism gives H_n of proper subset chains isomorphic to H_{n-1} of the smaller Boolean complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restrictionHomologyIso\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_hom\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_inv\", \"HomologicalComplex.restrictionHomologyIso_inv_homologyι\", \"HomologicalComplex.restrictionHomologyIso_hom_homologyι\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_inv_assoc\", \"HomologicalComplex.restrictionHomologyIso_inv_homologyι_assoc\", \"HomologicalComplex.restrictionOpcyclesIso\"], \"digest\": \"6c8141f03df84804\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic restriction/extension homology isomorphisms, alternating constant complexes, representation resolutions and Finset.ssubsets do not state Boolean coatom excision; they do not supply the required derived isomorphism. The grading and sign identification from the supplied derived isomorphism is elementary."
+  },
+  {
+   "tool": "grep",
+   "query": "Boolean.*homolog|coatom.*homolog|proper.subset.*homolog|poset.*homolog",
+   "results": "{\"t\": \"2026-10-23T11:37:45Z\", \"tool\": \"grep\", \"query\": \"Boolean.*homolog|coatom.*homolog|proper.subset.*homolog|poset.*homolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic restriction/extension homology isomorphisms, alternating constant complexes, representation resolutions and Finset.ssubsets do not state Boolean coatom excision; they do not supply the required derived isomorphism. The grading and sign identification from the supplied derived isomorphism is elementary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced homology of proper subsets of a finite set satisfies a suspension recurrence after removing one element",
+   "results": "{\"t\": \"2026-10-23T11:37:45Z\", \"tool\": \"leansearch\", \"query\": \"Reduced homology of proper subsets of a finite set satisfies a suspension recurrence after removing one element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finset.ssubsets\", \"Topology.RelCWComplex.Finite.recOn\", \"CategoryTheory.ShortComplex.HomologyData.noConfusion\", \"SSet.Finite.recOn\", \"CategoryTheory.ShortComplex.HomologyData.recOn\", \"Topology.RelCWComplex.Finite.rec\", \"Topology.RelCWComplex.FiniteDimensional.recOn\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\"], \"digest\": \"3ee595271bdc04c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic restriction/extension homology isomorphisms, alternating constant complexes, representation resolutions and Finset.ssubsets do not state Boolean coatom excision; they do not supply the required derived isomorphism. The grading and sign identification from the supplied derived isomorphism is elementary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"BooleanAlgebra\"",
+   "results": "{\"t\": \"2026-10-23T11:37:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"homology\\\", \\\"BooleanAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic restriction/extension homology isomorphisms, alternating constant complexes, representation resolutions and Finset.ssubsets do not state Boolean coatom excision; they do not supply the required derived isomorphism. The grading and sign identification from the supplied derived isomorphism is elementary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism from augmented Boolean proper subset chains to the suspension of the smaller Boolean complex in the derived category induces H_n(B_E) isomorphic to H_{n-1}(B_v)",
+   "results": "{\"t\": \"2026-10-23T11:37:47Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism from augmented Boolean proper subset chains to the suspension of the smaller Boolean complex in the derived category induces H_n(B_E) isomorphic to H_{n-1}(B_v)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"HomologicalComplex.alternatingConstHomologyIsoOdd\", \"HomologicalComplex.alternatingConstHomologyIsoEven\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_hom\", \"HomologicalComplex.homologyπ_restrictionHomologyIso_inv\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CochainComplex.ConnectData.homologyIsoNeg\", \"HomologicalComplex.homologyπ_extendHomologyIso_inv\"], \"digest\": \"0a2e3f174dbdd261\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic restriction/extension homology isomorphisms, alternating constant complexes, representation resolutions and Finset.ssubsets do not state Boolean coatom excision; they do not supply the required derived isomorphism. The grading and sign identification from the supplied derived isomorphism is elementary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-product-chain-proper-interval-homology",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. Extraction of retained proof steps 5–6, per-degree consequence only.",
+   "via": [
+    "lem-sfb-product-chain-proper-interval-homology",
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-boolean-coatom-excision-homology",
+  "worker": "stage1",
+  "summary": "Q106 checked the derived excision interface and obtained the per-degree recurrence by applying the cohomology functor, then explicitly comparing kernels and images under reversal and suspension. No new nodes or statement changes. Added the existing derived-category definition to stmt_deps for the cohomology functor already named in the statement. The sole mathematical proof dependency remains the derived-form node, as required for a per-degree consequence.",
+  "blueprint": "Latest blueprint direct-images paragraph (3), open immersion direct image, is context only. The three steps realize the homology consequence of the retained Boolean excision argument (parent steps 5–6); no exact combinatorial assertion is in the blueprint. Ancestor command returns None, so inherited null ancestry and via chain are retained; coatom, homology suspension and proper subset searches found no blueprint duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-3abb73109",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-3abb73109 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. Delivery shape: one commit with no new nodes. The statement is unchanged from base; stmt_deps gains only def-weil-abstract-derived-category, which supplies the H^{-n} and Q the statement already uses. The item is not split in live or side-live, it is the first delivery, and there is no re-split note. Rule fit: brief-stage1 §60 says a per-degree consequence is its own node whose only proof dependency is the derived-form node; proof_deps here is exactly [lem-sfb-boolean-coatom-excision-derived], and there is no cycle. Step 1 applies the cohomology functor to the derived isomorphism f; functoriality gives inverse maps, so it is elementary. Step 2: I checked that the reversed suspension (ΣB_v)ˇ^q=(B_v)_{-q-1} with differential -d_{-q-1} equals B̌_v[1] under the definition node's shift ((K[1])^r=K^{r+1}, differential -d). This also matches Stacks 011G, homology.tex 3427-3438. At q=-n the cycles and boundaries are ker/im of ±d_{n-1}, ±d_n, so the quotient is H_{n-1}(B_v). The left side is H_n(B_E) via H∘Q≅H, and Q commuting with shifts is stated in the definition node. Step 3 composes the isomorphisms and gives the inverse. Tags 010V/011G/011H/05RR/05RU match their labels in the tags file. Small cases agree: |E|=2 gives H_0(B_E)=Q≅H_{-1}(B_v)=Q[-1] in degree -1 and zero elsewhere; |E|=3 gives the hexagon (H_1)≅B_v of size 2 (H_0). No duplicate in the DAG, no Mathlib leaf, no SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BooleanCoatomExcisionHomology",
+  "declaration": "AlgebraicTopology.AugmentedPosetChains.BooleanCoatom.excision_homology",
+  "file": "lean/Sheaf/AlgebraicTopology/BooleanCoatomExcisionHomology.lean",
+  "statement": "theorem excision_homology {E : Type u} [DecidableEq E] [Fintype E] (a : E) (hcard : 2 ≤ Fintype.card E) (n : ℤ) : Nonempty ((booleanComplex (Finset.univ : Finset E)).homology n ≅ (booleanComplex (coatom a)).homology (n - 1))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66865cb9f",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Node delta = lean record only; statement verbatim. Clauses: E Fintype (any universe u, DecidableEq harmless), hcard 2≤card, a, v=coatom a=univ.erase a, P_F=Proper F (nonempty ∧ ⊂F), B_F=booleanComplex=recorded AugmentedPosetChains.complex ℚ, ∀ n:ℤ, Nonempty(H_n(B_E) ≅ H_{n-1}(B_v)) in ModuleCat ℚ. Degree H^{-n}(Q(B̌_v)[1])=H_{n-1}(B_v) checked against dep reversal/reversalSuspensionIso. Nonempty acceptable: node says 'an isomorphism', not canonical; derived node pins IsIso(derivedComparison); sole citer (product-chain-proper-interval-homology step 3) uses only zero/dimension. Edge cases |E|=2 (empty P_v, Q in deg -1), negative n OK. No defs, sorry proof, docstrings with source/blueprint/proof steps, no line >100, no H4 duplicate (excision_homology absent in side-live). Advisory: redundant public import ShortComplex.HomologicalComplex; second reading by same worker. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T091754-L-3374104",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

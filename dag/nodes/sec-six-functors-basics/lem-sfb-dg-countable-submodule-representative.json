@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-dg-countable-submodule-representative",
+ "kind": "statement",
+ "title": "Countable DG submodule representing countable cohomology",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(A,d_A)$ be an associative unital $\\mathbf Z$-graded ring with $d_A:A^i\\to A^{i+1}$, $d_A^2=0$, and $d_A(ab)=d_A(a)b+(-1)^ia\\,d_A(b)$ for $a\\in A^i$. A right differential graded $A$-module means a graded right $A$-module $M$ with $d_M:M^j\\to M^{j+1}$, $d_M^2=0$, and $d_M(ma)=d_M(m)a+(-1)^jm\\,d_A(a)$ for $m\\in M^j$. Cohomology is $H^i(M)=\\ker(d_M:M^i\\to M^{i+1})/\\operatorname{im}(d_M:M^{i-1}\\to M^i)$; a quasi-isomorphism is a DG module map inducing isomorphisms on all these groups. Countable means countable in the sense of [def-sfb-countable-set]. Assume the set $\\coprod_i A^i$ is countable. Let $N$ be a right differential graded $A$-module such that every $H^i(N)$ is countable. There exists a graded right $A$-submodule $M\\subseteq N$, stable under $d_N$, such that $\\coprod_i M^i$ is countable and the inclusion $M\\hookrightarrow N$ is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-countable-set",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the injection-into-$\\mathbf N$ definition [def-sfb-countable-set]. Subsets of a countable set are countable by restricting its injection; the image of any map from a countable set is countable by assigning each image element the least code of a preimage. A product of two countable sets is countable: compose their injections with $(a,b)\\mapsto 2^a(2b+1)$, whose injectivity follows by removing the maximal power of $2$. The degree set $\\mathbf Z$ is countable via $i\\mapsto 2i$ for $i\\geq0$ and $i\\mapsto-2i-1$ for $i<0$. These explicit coding observations will be used below.",
+   "uses": [
+    "def-sfb-countable-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  },
+  {
+   "text": "For a set $T\\subseteq\\coprod_i N^i$ of homogeneous elements, put $U=T\\cup d_N(T)$, with degrees retained, and define $G(T)^k$ to consist of all finite sums $\\sum_{\\ell}u_\\ell a_\\ell$ with $u_\\ell\\in U$, homogeneous $a_\\ell\\in A$, and $|u_\\ell|+|a_\\ell|=k$. Include the empty sum $0\\in N^k$. Addition concatenates lists, negatives replace $a_\\ell$ by $-a_\\ell$, and right multiplication replaces it by $a_\\ell b$. Thus $G(T)$ is a graded right submodule containing $T$ (use $1\\in A^0$). Since $d_N(U)\\subseteq U\\cup\\{0\\}$ and $d_N(u a)=d_N(u)a+(-1)^{|u|}u d_A(a)$, differentiating a displayed sum produces another such sum in degree $k+1$. Hence $G(T)$ is a DG submodule.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  },
+  {
+   "text": "If $T$ is countable, then $U=T\\cup d_N(T)$ is countable by the image observation and the binary-union clause of [lem-trf-countable-unions]. The alphabet $U\\times\\coprod_i A^i$ is countable by the product coding and the hypothesis on $A$. Its finite lists are countable by [lem-sfb-countable-finite-lists]. For each degree $k$, the lists satisfying the degree condition in the preceding step form a subset, and summation maps this subset onto $G(T)^k$, so that $G(T)^k$ is countable. Apply the countable-family union clause of [lem-trf-countable-unions] to the subsets $\\{k\\}\\times G(T)^k$ of $\\coprod_i N^i$, indexed by the countable set $\\mathbf Z$: the entire homogeneous set of $G(T)$ is countable. In particular the degree-labelled zeros from empty lists cause no exception.",
+   "uses": [
+    "lem-trf-countable-unions",
+    "lem-sfb-countable-finite-lists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  },
+  {
+   "text": "For every $i\\in\\mathbf Z$ and $h\\in H^i(N)$ choose a cycle $z_{i,h}\\in N^i$ representing $h$, using the surjection $\\ker d_N^i\\to H^i(N)$ in the definition of cohomology. For fixed $i$ its chosen representatives form a countable image of the countable group $H^i(N)$. The degree-labelled union $S=\\{z_{i,h}\\}_{i,h}$ is countable by [lem-trf-countable-unions] and the coding observations. Set $M_0=G(S)$. The two preceding steps make $M_0$ a countable DG submodule of $N$. Each $z_{i,h}$ remains a cycle in $M_0$, so $H^i(M_0)\\to H^i(N)$ is surjective.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  },
+  {
+   "text": "Inductively suppose $M_n\\subseteq N$ is a DG submodule with countable homogeneous set. Let $B_n$ be the subset of homogeneous elements $b\\in M_n^i$ such that $d_N b=0$ and $b=d_N y$ for some $y\\in N^{i-1}$. It is countable as a subset of the homogeneous set of $M_n$. For each such degree-labelled $b$ choose one $y_b\\in N^{i-1}$ with $d_N y_b=b$. The homogeneous set $P_n=\\{y_b:b\\in B_n\\}$ is countable by the image observation. The union $T_n=(\\coprod_i M_n^i)\\cup P_n$, regarded inside $\\coprod_i N^i$, is countable by [lem-trf-countable-unions]. Define $M_{n+1}=G(T_n)$. Steps 2–3 prove the induction claim and give $M_n\\subseteq M_{n+1}$. Every cycle of $M_n$ which is a boundary in $N$ is now a boundary in $M_{n+1}$, because its chosen primitive lies there.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  },
+  {
+   "text": "Set $M^i=\\bigcup_{n\\in\\mathbf N}M_n^i$ inside $N^i$. Two elements of $M^i$ lie together in $M_{\\max(n,m)}^i$, so their sum and negatives lie in $M^i$; multiplication by a homogeneous element of $A$ and the differential preserve the union because they preserve every stage. Thus $M$ is a graded right DG submodule of $N$. Its homogeneous set is $\\bigcup_n\\coprod_i M_n^i$, a countable union of countable subsets of $\\coprod_i N^i$, hence countable by [lem-trf-countable-unions].",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  },
+  {
+   "text": "The inclusion $M\\hookrightarrow N$ induces a surjection on $H^i$ because all the chosen cycles $z_{i,h}$ already lie in $M_0$. For injectivity, take a cycle $b\\in M^i$ whose class vanishes in $H^i(N)$. Choose $n$ with $b\\in M_n^i$. Vanishing means exactly $b=d_N y$ for some $y\\in N^{i-1}$, so $b\\in B_n$. Its chosen primitive $y_b$ lies in $M_{n+1}^{i-1}\\subseteq M^{i-1}$ and satisfies $d_M y_b=b$. Hence $[b]=0$ in $H^i(M)$. All cohomology maps are bijective homomorphisms and therefore isomorphisms, which is the stated definition of quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-countable-set",
+  "lem-trf-countable-unions",
+  "lem-sfb-countable-finite-lists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction. Expanded the source's same-type-of-argument sentence using its preceding explicit adjoining-primitives construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.*(subcomplex|submodule)|countable.*quasi.?iso",
+   "results": "1 hits: Mathlib/Algebra/Module/ZLattice/Basic.lean; Mathlib/Algebra",
+   "date": "2026-10-24",
+   "verdict": "no match: support/truncation and K-projectivity statements do not construct a countable DG submodule; the lattice instance is topological."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable differential graded submodule quasi isomorphic to a module with countable cohomology",
+   "results": "8 hits: quasiIso_comp, QuasiIso, HomologicalComplex.quasiIso, quasiIso_of_isIso, CategoryTheory.ShortComplex.QuasiIso.isIso, CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles, CategoryTheory.ShortComplex.quasiIso_of_isIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "date": "2026-10-24",
+   "verdict": "no match: support/truncation and K-projectivity statements do not construct a countable DG submodule; the lattice instance is topological."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"QuasiIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: support/truncation and K-projectivity statements do not construct a countable DG submodule; the lattice instance is topological."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a countable differential graded algebra with countable cohomology contains a countable differential graded submodule inducing an isomorphism on all cohomology",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.cm5b, CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKProjective_of_projective, CochainComplex.cm5b.I_X, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.IsKProjective.leftOrthogonal",
+   "date": "2026-10-24",
+   "verdict": "no match: support/truncation and K-projectivity statements do not construct a countable DG submodule; the lattice instance is topological."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex with countable homology over a countable DG ring has a countable quasi isomorphic subcomplex stable under the ring action",
+   "results": "8 hits: HomologicalComplex.isSupported_iff_of_quasiIso, HomologicalComplex.isGrothendieckAbelian, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplexUpToQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, HomotopyCategory.subcategoryAcyclic, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "no match: support/truncation and K-projectivity statements do not construct a countable DG submodule; the lattice instance is topological."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(subcomplex|submodule)|countable.*quasi.?iso",
+   "results": "{\"t\": \"2026-10-24T00:33:23Z\", \"tool\": \"grep\", \"query\": \"countable.*(subcomplex|submodule)|countable.*quasi.?iso\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/ZLattice/Basic.lean\"], \"digest\": \"240f387d2bae8ff8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-isomorphism definitions, truncation support, K-projectivity and a discrete lattice instance do not construct a countable DG submodule stable under a DG ring action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A countable differential graded submodule inducing isomorphisms on all cohomology groups",
+   "results": "{\"t\": \"2026-10-24T00:33:23Z\", \"tool\": \"leansearch\", \"query\": \"A countable differential graded submodule inducing isomorphisms on all cohomology groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"CategoryTheory.ShortComplex.quasiIso_of_isIso\", \"CategoryTheory.ShortComplex.QuasiIso\", \"CategoryTheory.ShortComplex.isIso_homologyMap_of_isIso\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"CochainComplex.isIso_homologyπ₀\", \"CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE\"], \"digest\": \"0653c0507b8867cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-isomorphism definitions, truncation support, K-projectivity and a discrete lattice instance do not construct a countable DG submodule stable under a DG ring action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"QuasiIso\"",
+   "results": "{\"t\": \"2026-10-24T00:33:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Countable\\\", \\\"QuasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-isomorphism definitions, truncation support, K-projectivity and a discrete lattice instance do not construct a countable DG submodule stable under a DG ring action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a countable differential graded ring with countable cohomology contains a countable quasi-isomorphic DG submodule",
+   "results": "{\"t\": \"2026-10-24T00:33:25Z\", \"tool\": \"leanfinder\", \"query\": \"A module over a countable differential graded ring with countable cohomology contains a countable quasi-isomorphic DG submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"CochainComplex.IsKProjective\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"994bbaa815473f1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-isomorphism definitions, truncation support, K-projectivity and a discrete lattice instance do not construct a countable DG submodule stable under a DG ring action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded complex over a countable DG algebra has a countable quasi-isomorphic submodule if its cohomology is countable",
+   "results": "{\"t\": \"2026-10-24T00:34:07Z\", \"tool\": \"leanfinder\", \"query\": \"An unbounded complex over a countable DG algebra has a countable quasi-isomorphic submodule if its cohomology is countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.isSupported_iff_of_quasiIso\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CochainComplex.IsKInjective\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"373bb0a74e12cb43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-isomorphism definitions, truncation support, K-projectivity and a discrete lattice instance do not construct a countable DG submodule stable under a DG ring action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-semi-free-resolution",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRM, lemma-countable, proof (2) to (1), countable module representative and countable property-(P) resolution paragraphs; Tags 09KN, lemma-good-quotient, and 09KP, lemma-resolve. The homogeneous basis and height are the graded splittings in property (P). Supporting subargument: Tag 0CRM, lemma-countable, proof (2) to (1), paragraph beginning Assume A is countable: countable module representative, by the same adjoining-primitives argument as the preceding subalgebra construction.",
+   "via": [
+    "lem-sfb-dg-countable-semi-free-resolution",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-countable-submodule-representative",
+  "worker": "stage1",
+  "summary": "Kept the statement after reading Stacks 0CRM. Expanded the omitted module argument into explicit homogeneous generation, its DG Leibniz check and finite-list countability, cohomology representatives, successive adjoining of all ambient-boundary primitives, and elementwise verification at the union. Reused the existing countable-union leaf and added only the exact List.countable Mathlib leaf. No DG or cohomology theorem is hidden in a subordinate node.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting 0CRM countable-module representative argument, through the existing via chain. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), the unit section and its proof. Preserved the inherited null blueprint ancestor exactly as blueprint_refs.py ancestor reports; no unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-db8e1f3af",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-db8e1f3af (reviewer sub-agent of L); spot-checked: I read Stacks dga.tex 0CRM lemma-countable, proof (2)=>(1): the subalgebra A_n construction and the 'Assume A is countable' sentence. The item statement is unchanged and true. It assumes countable ∐A^i and countable H^i(N), and is exactly what the parent lem-sfb-dg-countable-semi-free-resolution applies. The 7 steps write out the details the source omits. Step 2: G(T) is generated by T∪d(T); d-stability follows from Leibniz and d(U)⊆U∪{0}. Step 3: G(T) is countable via product coding, the List leaf and the ℤ-indexed union, and empty lists give 0 in each degree. Step 4: cohomology representatives give surjectivity. Step 5: an induction (base in step 4) adjoins chosen primitives of the cycles of M_n that bound in N. Step 6: the union is a DG submodule, countable by the ℕ-sequence union. Step 7: injectivity and surjectivity are checked elementwise, with no hidden colimit-exactness. proof_deps equal the union of the steps' uses. The new node lem-sfb-countable-finite-lists is an exact match for Mathlib List.countable (Mathlib/Logic/Equiv/List.lean:66, only [Countable α]). It is statement-only and self-contained; its blueprint from/via is inherited correctly. An rg -L duplicate search found no duplicate, and it restates none of the item's clauses. Batch-5 flag: lem-trf-countable-unions is a general set-theory Mathlib leaf (Set.Countable.biUnion / countable_iUnion / union) with empty closure. It is neither part of the trace formula or Poincaré duality nor implied by them, so the citation is accepted and needs no tool_uses. This is a first split (no re-split note), with no SGA citations and no route change. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCountableSubmoduleRepresentative",
+  "declaration": "CategoryTheory.DgAlgebra.exists_countable_submodule_quasiIso",
+  "file": "lean/Sheaf/CategoryTheory/DgCountableSubmoduleRepresentative.lean",
+  "statement": "theorem exists_countable_submodule_quasiIso (A : Algebra.{u}) (hA : Countable (Σ i : ℤ, A.X.X i)) (N : RightModule A) (hN : ∀ i : ℤ, Countable (((underlying A).obj N).homology i)) : ∃ (M : RightModule A) (ι : M ⟶ N), (∀ i : ℤ, Function.Injective (((underlying A).map ι).f i)) ∧ Countable (Σ i : ℤ, ((underlying A).obj M).X i) ∧ QuasiIso ((underlying A).map ι)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e6ac3e20",
+  "group": "NV",
+  "result": "pass",
+  "note": "First delivery (live node has no lean record). Statement theorem CategoryTheory.DgAlgebra.exists_countable_submodule_quasiIso checked clause by clause against the node and Stacks 0CRM (2)=>(1): A : Algebra.{u} (Mon in ℤ-cochain complexes = assoc unital DG ring with Leibniz), N : RightModule A, hA Countable (Σ i, A.X.X i), hN ∀ i Countable homology; conclusion ∃ M ι with degreewise injective ι (= DG submodule), Countable Σ M^i, QuasiIso. No extra hypotheses, all degrees ℤ, single universe u fixed by the landed dg framework; statement verbatim; added stmt_dep def-sfb-dg-derived-category is landed on the base and used. Only sorry; source and blueprint docstrings and 7 proof steps present; no defs, no duplicate in side-live/Mathlib; report has Worker report and Second reading by NV sections. No compile (no file changed)."
+ }
+}

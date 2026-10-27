@@ -66,7 +66,7 @@ theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}}
     DerivedCategory.Plus.ι.mapIso qJ.symm
   obtain ⟨e, ht, hr⟩ := smallModel_exists_strictLocalInjectiveSourceSections f s K n Q J q
   obtain ⟨he, htransition, hrestriction⟩ :=
-    injectiveSections_strictLocal_comparison f s K n Q J q
+    smallModel_injectiveSections_strictLocal_comparison f s K n Q J q
   let := he
   let E := fun i ↦ e i ≪≫ asIso (representativeSectionsComparison
     ((strictLocalNeighbourhoodProjection f s).app i) q n)

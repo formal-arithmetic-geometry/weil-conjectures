@@ -1,0 +1,178 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge",
+  "date": "2026-10-21",
+  "group": "Z6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting for the canonical derived base change map followed by the single module tensor pullback counit",
+   "results": "Eight hits about algebraic tensor base change cancellation and dual base change; none about derived sheaf mates or Leray edges.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Leray\", \"naturality\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray.*naturality|baseChange.*pasting|single.*[Cc]omposition",
+   "results": "15 hits, concerning combinatorics, single functors and analytic composition; no derived module base-change statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Leray edge on global cohomology classes for a commutative square of ringed spaces, identified with top derived base change via the inverse top cohomology comparison",
+   "results": "Eight hits about ordinary sheaf pullback and restriction naturality; none identifies the cohomology map with the specified total-derived mate and top comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the degree-one Leray edge map under a commutative square of schemes and a coefficient morphism, identified with top derived pullback",
+   "results": "AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; AlgebraicGeometry.Scheme.Hom.naturality; CategoryTheory.CatCommSq.iso_hom_naturality_assoc; AlgebraicGeometry.Scheme.evaluation_naturality; AlgebraicGeometry.Scheme.isoSpec_hom_naturality; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; CategoryTheory.CatCommSq.iso_hom_naturality; CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary sheaf pullback, categorical pullback pasting, or generic derived single functors; none states the normalized derived sheaf mate comparison"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "0GKA structure-cohomology input in the 0GKV case (b) used by the classical torsion constructibility proof: canonical affine Leray/derived-base-change identifications and their compatibility with an arrow W to V of etale base objects (former proof steps 4 and 5).; coherent affine edge proof step 6: whole-open top-degree derived/presheaf compatibility, with canonical coefficient morphism",
+   "via": [
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-top-degree-leray-square",
+ "title": "Top-degree derived base change on global Leray classes in a commutative square",
+ "statement": "Let f:X\\to S, q:Y\\to T, g:T\\to S and p:Y\\to X be scheme morphisms with pf=qg [def-pc-scheme]. Let F and M be module sheaves on X and Y and let a:p^*F\\to M [def-weil-sheaf-of-modules-category, def-pc-module-pullback]. Put C=Rf_*(F[0]) and assume H^i(C)=0 for i>1 [def-pc-derived-category, def-pc-derived-direct-image]. Let d:Lg^*C\\to Rq_*(M[0]) be the single-degree base-change composite followed by Rq_*(a[0]) [def-weil-pbc-single-degree-module-base-change-composite]. Let κ:H^1(Lg^*C)\\xrightarrow{\\sim}g^*H^1(C) be the specified top comparison [lem-weil-pbc-derived-pullback-top-cohomology]. Let ε_f and ε_q be the cocycle Leray edges [lem-pc-leray-degenerate-sections], transported to total-derived cohomology by the canonical total/classical comparison. Let s_g be global section pullback induced by the normalized tensor adjunction unit, identifying g^{-1}(S)=T [lem-pc-module-pullback-adjunction]. For every x\\in H^1(X,F), one has ε_q(p_a^*x)=Γ(T,H^1(d)κ^{-1})(s_g(ε_f(x))). Here p_a^* is precisely the module-cohomology map for the ordinary adjunct of a [def-weil-pbc-module-cohomology-fmap]. No cartesian, affine, flatness or invertibility hypothesis on d is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images; Tag 01FB, remark-explain-arrow; Tag 08HY, remark-base-change. Top-adjunction identification as in lem-weil-pbc-derived-adjunction-top-edge."
+ },
+ "proof": [
+  {
+   "text": "Uniqueness of the section-normalized tensor adjunction identifies it with the adjunction chosen in exists_tensorPullbackAdjunction. Apply derivedModuleBaseChange_transpose and naturality in the coefficient map; naturality of the canonical single direct-image comparison identifies the transpose with derivedSquareUnitMap of the ordinary adjunct of a.",
+   "uses": [
+    "lem-weil-pbc-derived-square-unit-map",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The target Rq_*(M[0]) is in D≥0 by the existing single-module right-derived lower-bound theorem. Apply derivedAdjunction_topEdge in degree one to get its local-class edge e and the equality between the ordinary top-cohomology adjunct and H¹ of the derived transpose followed by e.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-top-edge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply globalLeray_unitSquare to the ordinary adjunct of a and e. This uses the existing arbitrary-square local class theorem and the single-morphism classical Leray/restricted-resolution identification.",
+   "uses": [
+    "lem-weil-pbc-global-leray-unit-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the ordinary tensor adjunction at the whole open. Naturality of the coefficient sheaf map across Opens.map_top identifies its section-level adjunct with topDegreeSectionPullback followed by the cohomology map. Combine this with the preceding two equalities.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-derived-adjunction-top-edge",
+  "lem-weil-pbc-derived-square-unit-map",
+  "lem-weil-pbc-global-leray-unit-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4, 01FB, 08HY; assembled from the stated derived square transpose, top adjunction edge and global cocycle square. G3, 2026-10-26."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-single-degree-module-base-change-composite",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-derived-pullback-top-cohomology"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TopDegreeLeraySquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/TopDegreeLeraySquare.lean",
+  "declaration": "AlgebraicGeometry.topDegreeLeray_commutativeSquare",
+  "statement": "theorem topDegreeLeray_commutativeSquare\n    {X S Y T : Scheme.{u}} (f : X ⟶ S) (q : Y ⟶ T) (g : T ⟶ S) (p : Y ⟶ X)\n    (hs : p ≫ f = q ≫ g) (F : X.Modules) (M : Y.Modules)\n    (a : (Scheme.Modules.tensorPullback p).obj F ⟶ M)\n    (hC : (topDegreeDerivedImage.{u, w} f F).IsLE 1) :\n    let C := topDegreeDerivedImage.{u, w} f F\n    let d := topDegreeBaseChangeMap.{u, w} f q g p hs F M a\n    let κ := derivedPullbackTopCohomology g 1 C hC\n    letI : IsIso κ := (Classical.choose_spec\n      (derivedPullback_topCohomology g 1 C hC)).2.1\n    ∀ x : topDegreeCohomologyOnBase f F,\n      topDegreeLerayEdge q M (topDegreeCohomologyPullback f q p F M a x) =\n      (RingedSpace.globalSectionsFunctor T.toRingedSpace).map\n        (inv κ ≫ ((DerivedCategory.homologyFunctor.{w, u, u + 1}\n          (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 1)).map d)\n          (topDegreeSectionPullback g (((DerivedCategory.homologyFunctor.{w, u, u + 1}\n            (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 1)).obj C)\n              (topDegreeLerayEdge f F x))",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.topDegreeModuleCategory",
+   "AlgebraicGeometry.topDegreeModulePreadditive",
+   "AlgebraicGeometry.topDegreeModuleAbelian",
+   "AlgebraicGeometry.topDegreeCohomologyOnBase",
+   "AlgebraicGeometry.topDegreeCohomologyPullback",
+   "AlgebraicGeometry.topDegreeClassicalLerayEdge",
+   "AlgebraicGeometry.topDegreeClassicalLerayEdge_isIso",
+   "AlgebraicGeometry.topDegreeDerivedImage",
+   "AlgebraicGeometry.topDegreeLerayComparison",
+   "AlgebraicGeometry.topDegreeLerayEdge",
+   "AlgebraicGeometry.topDegreeSectionPullback",
+   "AlgebraicGeometry.topDegreeTensorBaseChange",
+   "AlgebraicGeometry.topDegreeBaseChangeMap",
+   "AlgebraicGeometry.topDegreeLeray_commutativeSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-53e2d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261022T114331-L-608771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f989a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T065756-L-3232285",
+  "kind": "interface",
+  "note": "independent cc review: Delivered TopDegreeLeraySquare/GlobalLerayUnitSquare/LerayEdgeRestrictedResolution + 3 consumer adaptations vs clone ad190c25771: theorem statement unchanged, delegated def bodies identical terms (schemeSingleCohomologyComparison = same Mathlib iso); original CoherentAffineBaseChangeEdge fails at 727 against delivered deps (forced); sandbox axioms = propext/Classical.choice/Quot.sound (+sorryAx from the new statement and sorried dependencies); lerayEdge_restrictedResolution checked true against the cocycle-pinned edge"
+ }
+}

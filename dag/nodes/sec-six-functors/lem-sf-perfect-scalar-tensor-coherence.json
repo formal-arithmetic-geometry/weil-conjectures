@@ -186,6 +186,22 @@
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 064B (lemma-morphisms-from-projective-complex), combined with more-algebra.tex Tag 06Y6 (lemma-derived-base-change); explicit transport via the Hom bijections"
    }
+  },
+  {
+   "text": "For the record-valued interface, collect the witnesses and the eighteen equations of perfect_scalar_tensor_coherence in CoherenceData and Normalized. To prove uniqueness, take two normalized records. On bounded finite-projective models, their tensor components agree after postcomposition with the tensor of modelMap and the localization tensor comparison. These postcomposition maps are isomorphisms: projective terms are flat, bounded-above flat complexes are K-flat, extension of scalars preserves K-flatness by lem-pc-kflat-extension-of-scalars, and the derived localization tensor comparison is invertible on a K-flat argument. Cancel these maps. Cancel the localization unit comparison to identify the coefficient units, and modelMap for the composite ring map to identify the tower components. The identity model equation directly identifies the identity components. Every perfect object is isomorphic to a bounded finite-projective model; the respective naturality equations transport these four equalities along those isomorphisms. Function extensionality identifies each data field, and proof irrelevance identifies the remaining propositional fields. This establishes unique normalized record existence from the existing existential coherence theorem without redoing its construction.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-kflat-extension-of-scalars",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y6 and 0GWN; uniqueness by the stated model normalizations and naturality, using the existing derived localization comparison maps"
+   }
   }
  ],
  "proof_deps": [
@@ -199,14 +215,16 @@
   "lem-pc-derived-tensor-second-factor-functor",
   "def-pc-perfect-ring-complex",
   "lem-pc-ring-derived-map-representative",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-extension-of-scalars"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tags 06Y6 and 0GWN, supplemented by derived.tex Tag 064B; explicit balanced coherence argument on finite-projective models",
   "group": "Q123",
-  "date": "2026-10-21"
+  "date": "2026-10-21",
+  "note": "Q7, 2026-10-23: retain the original thirteen-step construction plan for the still-unproved existential theorem; append the implemented proof of unique normalized record existence, with K-flat scalar extension and cancellation of model comparisons."
  },
  "mathlib_searches": [
   {
@@ -378,5 +396,27 @@
   "group": "NN",
   "result": "pass",
   "note": "Read item, 4 new def nodes and modules, extended PerfectScalarTensorCoherence, PointFdQbar, StageSystem. Every node hypothesis matches an IntegralData clause (CoreMonoidal tau, Koszul symmetry, semilinear additive StageSystem with cocycle, identity/tower monoidality, phi identity/tower/tensor/unit squares with the canonical coherenceData tensorator). The existential rational and common-stage structures are all pinned: literal objects, the pure-tensor formula, 1⊗constraints, kappa/omega pinned by modelMap, phi by the integral square, G by phi-conjugation, sourceAt by mkHom classes, target tensor via the fully faithful realization. Formulas hold at every L and every base field; transport equation is explicit. HEq pins rest on provable ring-map equalities. Mechanical theorem stmt_dep: the statement uses coherenceData = .choose of the recorded ∃! theorem, so it genuinely depends on the constructed object → PASS on that point. Note: symmetry is a plain def in the theorem module (NG base). H13 dep repair: live file is a byte prefix; record superset (8+4 decls, by/note). Statements verbatim. No compile (no changes). Advisories: transitive owners of fieldDerivedScalarExtension/pointFiniteDimensional; Rat/D abbrev names."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261023T151936-L-425602",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

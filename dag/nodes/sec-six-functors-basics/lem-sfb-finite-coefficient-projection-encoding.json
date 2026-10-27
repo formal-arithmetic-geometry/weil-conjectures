@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-finite-coefficient-projection-encoding",
+ "kind": "statement",
+ "title": "Finite coefficient encoding identifies the canonical projection arrows",
+ "statement": "With A, R, e, E and F_T as in [def-sfb-finite-coefficient-operation-encoding], let p:X -> Y be any scheme morphism and let K,M be arbitrary unbounded internal R-module complexes on X,Y. The specified internal right-adjoint projection at K,M is invertible if and only if the ordinary fixed-A pro-etale right-adjoint projection at F_X K,F_Y M is invertible. Neither properness, constructibility nor boundedness is assumed; this is a change of coefficient presentation, independent of the projection formula.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Coefficient transport and clauses (2)--(3), canonical-map identifications."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-coefficient-operation-encoding",
+  "def-sfb-module-object-projection-map",
+  "lem-sfb-finite-coefficient-tensor-pullback-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-coefficient-tensor-pullback-encoding] to obtain the tensor-compatible pullback square between the native bundled contexts. These bundles construct exactly the published adjunctions and tensor comparisons; the unchanged canonical-map iff lemmas are proved by unfolding and rfl.",
+   "uses": [
+    "lem-sfb-finite-coefficient-tensor-pullback-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the mate beta of alpha under the two specified derived geometric adjunctions. Both coefficientEncoding functors are equivalences by [def-sfb-finite-coefficient-operation-encoding]. The proved source-library isIso_mateEquiv_app_of_isIso, applied to their equivalence adjunctions, makes every component of beta invertible. No separate right-derived adjoint-square normalization is required.",
+   "uses": [
+    "def-sfb-finite-coefficient-operation-encoding"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing categorical comparison [lem-sp-categorical-projection-mate-square] to these data. If the internal projection is invertible, its encoded map is invertible, and cancellation of the tensor and beta isomorphisms makes the ordinary projection invertible. Conversely, invertibility of the ordinary projection makes the right hand side of the comparison equality invertible. Cancel the invertible factors beta and the image of the tensor/alpha comparisons to show that the encoded internal projection is invertible. Reflection of isomorphisms by the coefficient equivalence proves invertibility of the internal projection. The two directions give the stated iff for the unchanged canonical projection arrows.",
+   "uses": [
+    "lem-sp-categorical-projection-mate-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-coefficient-tensor-pullback-encoding",
+  "def-sfb-finite-coefficient-operation-encoding",
+  "lem-sp-categorical-projection-mate-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Tensor/pullback compatibility from steps 1--2, followed by the existing source-library projection-mate comparison and equivalence reflection; Lean assembly by H7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*(exchange|projection).*encoding|encoding.*(exchange|projection)",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "loogle: Unknown constant `CategoryTheory.Adjunction.rightAdjointProjectionMap`",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact normalized equivalence between internal modules over a finite condensed ring and fixed coefficient proetale sheaves identifies the unit square counit base change mate and projection formula morphism",
+   "results": "Condensed.profiniteSolidCounit; LightCondMod.LocallyConstant.adjunction; CondensedMod.LocallyConstant.adjunction; Condensed.profiniteSolid; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.ihomPoints_symm_comp; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-23",
+   "verdict": "No match for the normalized derived operation comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of categories preserves and reflects invertibility and identifies adjunction mates, base change maps and projection formula morphisms under tensor and geometric adjunction comparisons",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.Functor.adjunction; CategoryTheory.Adjunction.isEquivalencePreservesLimits; CategoryTheory.Equivalence.toAdjunction; CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence; CategoryTheory.MorphismProperty.map_inverseImage_eq_of_isEquivalence; CategoryTheory.Functor.preservesProjectiveObjects_of_isEquivalence; CategoryTheory.Functor.reflectsColimits_of_isEquivalence",
+   "date": "2026-10-24",
+   "verdict": "General adjunction, equivalence and underived module-sheaf pullback comparisons; no match for the specified geometric derived operation statement. Reuse the recorded source-library proof or construct the operation from the existing geometric adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperBaseChange",
+  "date": "2026-10-23",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof, coefficient transport and canonical exchange/projection comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientProjectionEncoding",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientProjectionEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientProjectionEncoding",
+  "statement": "theorem finiteCoefficientProjectionEncoding\n    (e : Mon.mk R ≅ Mon.mk (coefficient A))\n    (E : ∀ T : Scheme.{u}, Encoding A T)\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj R X)))\n    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj R Y))) :\n    CondensedRing.finiteCoefficientProjectionIsIso R p K M ↔\n      ProEtale.ordinaryFiniteCoefficientProjectionIsIso (ULift.{u + 1} A) p\n        ((coefficientEncoding A e X (E X)).obj K)\n        ((coefficientEncoding A e Y (E Y)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-23",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteCoefficientProjectionIsIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteCoefficientProjectionIsIso_iff",
+   "AlgebraicGeometry.ProEtale.ordinaryFiniteCoefficientProjectionIsIso",
+   "AlgebraicGeometry.ProEtale.ordinaryFiniteCoefficientProjectionIsIso_iff",
+   "AlgebraicGeometry.ProEtale.ordinaryFiniteCoefficientProjectionIsIso_of_iso",
+   "AlgebraicGeometry.ProEtale.ordinaryFiniteCoefficientProjectionIsIso_of_iso_of_isIso",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.finiteCoefficientProjectionEncoding"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T202221-L-2695356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

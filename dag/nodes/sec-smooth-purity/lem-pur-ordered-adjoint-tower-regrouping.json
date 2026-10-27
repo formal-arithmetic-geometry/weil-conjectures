@@ -1,0 +1,240 @@
+{
+ "id": "lem-pur-ordered-adjoint-tower-regrouping",
+ "kind": "statement",
+ "title": "Regrouping an ordered tower of adjoint comparisons",
+ "statement": "Let $r\\geq0$, let $\\mathcal C_0,\\ldots,\\mathcal C_r$ be categories, and for $0\\leq i\\leq j\\leq r$ let $P_{ij}:\\mathcal C_j\\to\\mathcal C_i$ have right adjoint $G_{ij}$, and let $F_{ij}:\\mathcal C_i\\to\\mathcal C_j$ be another functor. Use identity functors and identity adjunctions when $i=j$. Suppose natural isomorphisms $\\alpha_{ijk}:P_{ij}P_{jk}\\cong P_{ik}$ and $\\phi_{ijk}:F_{ik}\\cong F_{jk}F_{ij}$ are given, satisfying the associativity pentagons and unit equations. Let $c_{ijk}:G_{ik}\\cong G_{jk}G_{ij}$ be the adjunction conjugate of $\\alpha_{ijk}$, using the composite adjunction whose counit is $\\varepsilon_{ij}\\circ P_{ij}(\\varepsilon_{jk})$. Adjunction, composite adjunction and conjugation have the meanings of [def-weil-pbc-composite-adjunction], [def-weil-pbc-adjunction-conjugate]. For each $i<r$ choose a natural transformation $\\eta_i:F_{i,i+1}\\to G_{i,i+1}$. Define $\\Gamma_{ii}=1$ and recursively\n$$\\Gamma_{i,j+1,K}=c_{i,j,j+1,K}^{-1}\\circ\\eta_{j,G_{ij}K}\\circ F_{j,j+1}(\\Gamma_{ij,K})\\circ\\phi_{i,j,j+1,K}.$$\nThen the $c$ satisfy their associativity pentagon and identity equations, every $\\Gamma_{ij}$ is natural, and for every $i\\leq j\\leq k\\leq r$ and $K\\in\\mathcal C_i$,\n$$\\Gamma_{ik,K}=c_{ijk,K}^{-1}\\circ\\Gamma_{jk,G_{ij}K}\\circ F_{jk}(\\Gamma_{ij,K})\\circ\\phi_{ijk,K}.$$\nIn particular every parenthesization of a fixed ordered list of the $\\eta_i$ gives the same transformation under these specified comparisons. No transformation is assumed invertible, and no permutation of the ordered list is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Proof Step 2, reassociation pentagon and units; returned proof Steps 3--4, mate coherence and ordered-block induction; agent-written extraction of the detailed argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [
+  {
+   "text": "First transfer the specified coherence, rather than choosing new right-adjoint comparisons. Fix $i\\leq j\\leq k\\leq l$. The assumed left-comparison equation is\n$$\\alpha_{ikl}\\circ(\\alpha_{ijk}P_{kl})=\\alpha_{ijl}\\circ(P_{ij}\\alpha_{jkl}).$$\nApply conjugation between $P_{il}\\dashv G_{il}$ and the triple composite adjunction. By [def-weil-pbc-adjunction-conjugate], conjugation reverses vertical composition. Clause 2 of [lem-weil-pbc-mate-pasting], with identity non-adjoint sides and an identity square in the unchanged factor, says that the conjugates of $\\alpha_{ijk}P_{kl}$ and $P_{ij}\\alpha_{jkl}$ are respectively $G_{kl}(c_{ijk})$ and $c_{jkl}G_{ij}$. Thus the conjugated equality is\n$$G_{kl}(c_{ijk})\\circ c_{ikl}=(c_{jkl}G_{ij})\\circ c_{ijl}. \\tag{C}$$\nThe two triple composite adjunctions used here agree under the canonical functor associator: their Hom bijections are the same three successive bijections of [def-weil-pbc-composite-adjunction], merely parenthesized differently. Their associator components on objects and arrows are identities. Hence this calculation also includes the canonical associators, rather than presupposing an extra coherence theorem. For a repeated adjacent index the corresponding left comparator is the specified unitor, and the identity-adjunction Hom bijection is the identity. Conjugation of this identity is the identity by clause 4 of [lem-weil-pbc-mate-pasting]. This proves all right-comparison unit equations as well as (C).",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+    "place": "Proof Step 2 (ordered reassociation only); detailed agent-written mate calculation and induction, using Mathlib/CategoryTheory/Adjunction/Mates.lean, mateEquiv_hcomp and conjugateEquiv_comp"
+   }
+  },
+  {
+   "text": "Every $c_{ijk}$ is a natural isomorphism by [def-weil-pbc-adjunction-conjugate]. Naturality of $\\Gamma$ follows by induction on the interval length: $\\Gamma_{ii}$ is the identity transformation, and the recursive expression is a composite of $\\phi$, a functor applied to a natural transformation, a component of the natural transformation $\\eta_j$ at $G_{ij}(-)$, and $c^{-1}$. For a map $u:K\\to K'$, the four naturality squares compose to the naturality square for this expression; applying $F_{j,j+1}$ to the inductive square preserves its equality. The unit equations imply $\\Gamma_{i,i+1}=\\eta_i$, since the recurrence with $j=i$ has only identity comparisons and $\\Gamma_{ii}=1$.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+    "place": "Proof Step 2 (ordered reassociation only); detailed agent-written mate calculation and induction, using Mathlib/CategoryTheory/Adjunction/Mates.lean, mateEquiv_hcomp and conjugateEquiv_comp"
+   }
+  },
+  {
+   "text": "We prove the displayed block identity for all $i\\leq j\\leq k$ by induction on $k-j$, uniformly in $i,j$ and the input object. When $k=j$, its right side reduces to $\\Gamma_{ij}$ by $\\Gamma_{jj}=1$, functoriality of the identity functor and the unit comparisons proved in Step 1. If $i=j$ the assertion likewise reduces to $\\Gamma_{jk}$, so repeated-index cases are included. For the successor step put $l=k+1$, $H=F_{kl}$, $J=G_{kl}$, $A=\\Gamma_{ij,K}$ and $b=\\Gamma_{jk}$. Substitute the inductive formula for $\\Gamma_{ik,K}$ into the recurrence for $\\Gamma_{il,K}$, and distribute $H$ over composition. This gives, with composition read right to left,\n$$\\Gamma_{il,K}=c_{ikl,K}^{-1}\\eta_{k,G_{ik}K}\\,H(c_{ijk,K}^{-1})\\,H(b_{G_{ij}K})\\,HF_{jk}(A)\\,H(\\phi_{ijk,K})\\,\\phi_{ikl,K}. \\tag{E}$$\nAll factors are typed using $A:F_{ij}K\\to G_{ij}K$ and $b_M:F_{jk}M\\to G_{jk}M$; in particular the next naturality substitution involves a morphism in $\\mathcal C_k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+    "place": "Proof Step 2 (ordered reassociation only); detailed agent-written mate calculation and induction, using Mathlib/CategoryTheory/Adjunction/Mates.lean, mateEquiv_hcomp and conjugateEquiv_comp"
+   }
+  },
+  {
+   "text": "In (E) use naturality of $\\eta_k:H\\to J$ on $c_{ijk,K}^{-1}:G_{jk}G_{ij}K\\to G_{ik}K$:\n$$\\eta_{k,G_{ik}K}H(c_{ijk,K}^{-1})=J(c_{ijk,K}^{-1})\\eta_{k,G_{jk}G_{ij}K}.$$\nInvert (C) from Step 1 to obtain\n$$c_{ikl,K}^{-1}J(c_{ijk,K}^{-1})=c_{ijl,K}^{-1}c_{jkl,G_{ij}K}^{-1}.$$\nThe assumed $F$-coherence and then naturality of $\\phi_{jkl}$ on $A$ give respectively\n$$H(\\phi_{ijk,K})\\phi_{ikl,K}=\\phi_{jkl,F_{ij}K}\\phi_{ijl,K},\\qquad HF_{jk}(A)\\phi_{jkl,F_{ij}K}=\\phi_{jkl,G_{ij}K}F_{jl}(A).$$\nReplacing these three adjacent substrings in (E), associativity of morphism composition yields\n$$\\Gamma_{il,K}=c_{ijl,K}^{-1}\\bigl(c_{jkl,G_{ij}K}^{-1}\\eta_{k,G_{jk}G_{ij}K}H(b_{G_{ij}K})\\phi_{jkl,G_{ij}K}\\bigr)F_{jl}(A)\\phi_{ijl,K}.$$\nThe parenthesized factor is exactly the defining recurrence for $\\Gamma_{jl,G_{ij}K}$. This is the required block identity for $(i,j,l)$ and completes the induction. The only adjunction-coherence input to this computation was (C), obtained from [lem-weil-pbc-mate-pasting] and [def-weil-pbc-adjunction-conjugate]; all remaining substitutions are the displayed naturality equations, functoriality and the assumed $F$-coherence.\n\nFinally induct on the number of leaves in a binary parenthesization of a fixed consecutive interval. A single leaf evaluates to $\\eta_i=\\Gamma_{i,i+1}$ by Step 2; the empty interval evaluates to the identity. At the root of any larger tree there is a cut $j$ of its interval $[i,k]$. By induction its subtrees evaluate to $\\Gamma_{ij}$ and $\\Gamma_{jk}$. The root operation is precisely $c_{ijk}^{-1}(\\Gamma_{jk}G_{ij})F_{jk}(\\Gamma_{ij})\\phi_{ijk}$, which the block identity of Steps 3--4 identifies with $\\Gamma_{ik}$. Thus every such tree has the same value. This is an induction on the actual evaluation of trees and needs no theorem asserting that rotations connect parenthesizations. For $r=0$ only the empty interval occurs. No cancellation or inversion of an $\\eta_i$ or a $\\Gamma_{ij}$ has been used.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+    "place": "Proof Step 2 (ordered reassociation only); detailed agent-written mate calculation and induction, using Mathlib/CategoryTheory/Adjunction/Mates.lean, mateEquiv_hcomp and conjugateEquiv_comp"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Step 2; explicit ordered-block induction and mate-pasting calculation by Q157"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between coherent contravariant functors extend to ordered towers and respect regrouping using mates of composite adjunctions",
+   "results": "; 8 hits: CategoryTheory.mateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_hcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "; 12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|conjugateEquiv_id",
+   "results": "; 14 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of adjunction mates and induction for iterated natural transformations",
+   "results": "; 8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc, CategoryTheory.Adjunction, CategoryTheory.comp_rightAdjointMate_assoc, CategoryTheory.Bicategory.mateEquiv, CategoryTheory.Bicategory.Adj.Bicategory.associator, CategoryTheory.Adjunction.leftAdjointCompNatTrans, CategoryTheory.mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv. Generic mates, counits, braiding or unrelated algebra/analysis hits do not state this ordered-tower or concrete compact-support assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.whiskerLeft",
+   "results": "loogle: unknown identifier 'CategoryTheory.whiskerLeft'; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "query error: corrected namespace in the subsequent Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a coherent tower of adjoint functors, arbitrary ordered natural transformations to the right adjoints have iterated composites independent of regrouping",
+   "results": "; 8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc, CategoryTheory.Adjunction.leftAdjointCompNatTrans_app, CategoryTheory.Adjunction.leftAdjointCompNatTrans, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match for the full ordered-tower assertion; the standard conjugation and coherence results are inputs only"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_(whiskerLeft|whiskerRight|associator_hom|leftUnitor_hom|rightUnitor_hom)|regroup|ordered.*tower",
+   "results": "; 14 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full ordered-tower assertion; the standard conjugation and coherence results are inputs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Functor.whiskerLeft",
+   "results": "; 4 hits: CategoryTheory.conjugateEquiv_whiskerLeft, CategoryTheory.conjugateEquiv_whiskerRight, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "building blocks only: whiskering and structural conjugation identities; use existing mate-pasting leaf instead of creating duplicate facts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent natural transformations between pseudofunctors on a finite linearly ordered category are determined by adjacent arrows, with composition independent of parenthesization",
+   "results": "; 8 hits: CategoryTheory.Pseudofunctor.mapComp'₀₁₃_hom_comp_whiskerLeft_mapComp'_hom_app, CategoryTheory.Pseudofunctor.mapComp, CategoryTheory.Pseudofunctor.StrongTrans.naturality, CategoryTheory.Pseudofunctor.StrongTrans.associator, CategoryTheory.ComposableArrows.hom_ext₃_iff, CategoryTheory.NatTrans.ofSequence_app, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp, CategoryTheory.Pseudofunctor.StrongTrans.mk",
+   "date": "2026-10-22",
+   "verdict": "no match for the full ordered-tower assertion; the standard conjugation and coherence results are inputs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction conjugation sends whiskering of natural transformations to whiskering by the right adjoint, and sends associators and unitors to the opposite associators and unitors",
+   "results": "; 8 hits: CategoryTheory.conjugateEquiv_whiskerRight, CategoryTheory.conjugateEquiv_whiskerLeft, CategoryTheory.Bicategory.conjugateEquiv_whiskerRight, CategoryTheory.Bicategory.conjugateEquiv_whiskerLeft, CategoryTheory.Bicategory.conjugateEquiv_apply', CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.conjugateEquiv_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "building blocks only: whiskering and structural conjugation identities; use existing mate-pasting leaf instead of creating duplicate facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, \"associator\"",
+   "results": "; 1 hits: CategoryTheory.conjugateEquiv_associator_hom",
+   "date": "2026-10-22",
+   "verdict": "building blocks only: whiskering and structural conjugation identities; use existing mate-pasting leaf instead of creating duplicate facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, \"Unitor\"",
+   "results": "; 2 hits: CategoryTheory.conjugateEquiv_leftUnitor_hom, CategoryTheory.conjugateEquiv_rightUnitor_hom",
+   "date": "2026-10-22",
+   "verdict": "building blocks only: whiskering and structural conjugation identities; use existing mate-pasting leaf instead of creating duplicate facts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugate equivalence for adjunctions commutes with whiskering and sends associator hom and left and right unitor hom to the corresponding right adjoint constraints",
+   "results": "; 8 hits: CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.Bicategory.conjugateEquiv_apply', CategoryTheory.Bicategory.toNatTrans_conjugateEquiv, CategoryTheory.Bicategory.conjugateEquiv, CategoryTheory.Bicategory.conjugateEquiv_apply, CategoryTheory.conjugateEquiv_iso",
+   "date": "2026-10-22",
+   "verdict": "building blocks only: whiskering and structural conjugation identities; use existing mate-pasting leaf instead of creating duplicate facts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-affine-space-composition-law",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Step 2, reassociation pentagon and units; returned proof Steps 3--4, mate coherence and ordered-block induction",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordered-adjoint-tower-regrouping",
+  "worker": "stage1",
+  "group": "Q157",
+  "summary": "Proved mate coherence with the existing Mathlib-leaf pasting node, naturality, the full ordered-block induction and tree evaluation. No new nodes: potential whiskering lemmas are specializations of the already existing pasting statement. Statement unchanged; project attachment search found no complete declaration.",
+  "blueprint": "prop-pur-affine-space-composition-law proof Step 2, reassociation pentagon, units and ordered regrouping. Does not import the permutation assertion in original Step 4."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-8d1e7f8f6",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-8d1e7f8f6 (reviewer sub-agent of L); spot-checked: Read the item's 4 steps in full, together with the statements of def-weil-pbc-composite-adjunction, def-weil-pbc-adjunction-conjugate and lem-weil-pbc-mate-pasting (all Mathlib leaves) and the main-20261015 blueprint proof of prop-pur-affine-space-composition-law. One commit, no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit with no reviewed record and no repair note. Step 1: I re-derived (C) G_kl(c_ijk)c_ikl=(c_jkl G_ij)c_ijl. It follows from the α pentagon by conjugation, which reverses composition, and from mate-pasting clause 2 with identity squares (clause 4) giving the whiskered conjugates G_kl(c_ijk) and c_jkl G_ij. The unit equations come from the identity-adjunction conjugate. Step 2: naturality and Γ_{i,i+1}=η_i are correct, using the units and the isomorphism clause. Steps 3-4: I checked every factor of the expansion (E). The η_k naturality at c_ijk^{-1} (a morphism of C_k), the inverse of (C), the φ pentagon and the φ_jkl naturality at A all have the right types and order. The resulting bracket is literally the recurrence for Γ_jl, and the induction is set up uniformly with its base cases. Tree evaluation is a structural induction. Edge cases r=0, length 1, empty blocks and non-invertible η are fine. The item asserts only ordered regrouping; the parent's permutation step is carried by its Step 5 node, so no target is weakened. lem-trf-adjoint-composition-coherence and lem-sc-left-adjoint-composition-iso-associativity are not duplicates: one goes the other direction, the other assumes equal right adjoints and gives the pentagon only. All three kinds of Mathlib search are recorded. No SGA. Unit sk-prop-an; all citations are leaves, so no tool_uses are needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrderedAdjointTowerRegrouping",
+  "declaration": "CategoryTheory.orderedAdjointTower_regrouping",
+  "declarations": [
+   "CategoryTheory.OrderedAdjointTowerData",
+   "CategoryTheory.OrderedAdjointTowerData.comparison",
+   "CategoryTheory.OrderedAdjointTowerData.diagonal",
+   "CategoryTheory.OrderedAdjointTowerData.join",
+   "CategoryTheory.OrderedAdjointTowerData.gamma",
+   "CategoryTheory.OrderedAdjointTowerTree",
+   "CategoryTheory.OrderedAdjointTowerTree.eval"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OrderedAdjointTowerRegrouping.lean",
+  "statement": "theorem orderedAdjointTower_regrouping (r : ℕ) (C : Fin (r + 1) → Type u) [∀ i : Fin (r + 1), Category.{v} (C i)] (T : OrderedAdjointTowerData r C) (eta : ∀ j : Fin r, T.F j.castSucc j.succ (Nat.le_succ _) ⟶ T.G j.castSucc j.succ (Nat.le_succ _)) : (∀ (i j k l : Fin (r + 1)) (hij : i ≤ j) (hjk : j ≤ k) (hkl : k ≤ l) (X : C i), (T.comparison i k l (hij.trans hjk) hkl).hom.app X ≫ (T.G k l hkl).map ((T.comparison i j k hij hjk).hom.app X) = (T.comparison i j l hij (hjk.trans hkl)).hom.app X ≫ (T.comparison j k l hjk hkl).hom.app ((T.G i j hij).obj X)) ∧ (∀ (i k : Fin (r + 1)) (h : i ≤ k), T.comparison i i k le_rfl h = (T.G i k h).leftUnitor.symm ≪≫ isoWhiskerRight (eqToIso (T.G_id i)).symm (T.G i k h)) ∧ (∀ (i k : Fin (r + 1)) (h : i ≤ k), T.comparison i k k h le_rfl = (T.G i k h).rightUnitor.symm ≪≫ isoWhiskerLeft (T.G i k h) (eqToIso (T.G_id k)).symm) ∧ (∀ (i j : Fin (r + 1)) (h : i ≤ j) (X Y : C i) (f : X ⟶ Y), (T.F i j h).map f ≫ (T.gamma eta j i h).app Y = (T.gamma eta j i h).app X ≫ (T.G i j h).map f) ∧ (∀ (i j k : Fin (r + 1)) (hij : i ≤ j) (hjk : j ≤ k) (X : C i), (T.gamma eta k i (hij.trans hjk)).app X = (T.phi i j k hij hjk).hom.app X ≫ (T.F j k hjk).map ((T.gamma eta j i hij).app X) ≫ (T.gamma eta k j hjk).app ((T.G i j hij).obj X) ≫ (T.comparison i j k hij hjk).inv.app X) ∧ (∀ (i j : Fin (r + 1)) (h : i ≤ j) (tree : OrderedAdjointTowerTree r i j h), tree.eval T eta = T.gamma eta j i h)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a5d45bf9",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, both Mathlib-leaf stmt_deps (Adjunction.comp/comp_counit_app, conjugateIsoEquiv), blueprint Step 2 source, module and report. Data/hyps match node: interval-only P,G,F,adj; diagonal identity equalities + HEq id adjunction; alpha/phi pentagons and four unit laws correctly typed; c = conjugateIsoEquiv adj_ik (adj_jk.comp adj_ij) alpha with node's counit; eta arbitrary, no IsIso; gamma genuine Fin.induction recurrence phi, F(Gamma), eta at G_ij, c^-1. Six conjuncts: c pentagon (C), two c unit laws, naturality (by NatTrans construction), block identity in node's factor order, all ordered trees eval to Gamma (empty subtrees follow from block identity). Edge cases r=0, repeated indices, one-edge fine. Only lean field changed vs live; statement verbatim; no name clash; docstrings with source/blueprint/proof steps; lines<=100; imports used; only sorry. Advisory: second reading is a same-session self-check; report mentions preflight 'below' with nothing there. No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261024T191719-L-472906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.orderedAdjointTower_regrouping"
+  ],
+  "sorry_after": []
+ }
+}

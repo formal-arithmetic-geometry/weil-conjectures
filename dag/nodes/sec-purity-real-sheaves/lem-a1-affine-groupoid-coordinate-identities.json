@@ -1,0 +1,226 @@
+{
+ "id": "lem-a1-affine-groupoid-coordinate-identities",
+ "kind": "statement",
+ "title": "Coordinate-ring identities for affine groupoid composition",
+ "statement": "Let $A,B$ be commutative rings, $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Let $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$ and $c:R\\times_{s,U,t}R\\to R$ define a groupoid scheme [def-a1-groupoid-scheme], with $c(\\alpha,\\beta)=\\alpha\\circ\\beta$. Put $\\sigma=s^\\sharp$, $\\tau=t^\\sharp:A\\to B$ and $\\varepsilon=e^\\sharp:B\\to A$. Give the first factor of $D=B\\otimes_{\\sigma,A,\\tau}B$ its $A$-structure through $\\sigma$ and the second through $\\tau$ [def-weil-pbc-module-tensor-product], with the tensor-product ring structure [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Then $R\\times_{s,U,t}R\\cong\\operatorname{Spec}D$ [def-pc-fibre-product] with projections dual to $p_0(b)=b\\otimes1$ and $p_1(b)=1\\otimes b$. Under this identification put $\\Delta=c^\\sharp:B\\to D$. These ring maps satisfy $\\varepsilon\\sigma=\\varepsilon\\tau=\\mathrm{id}_A$, $p_0\\sigma=p_1\\tau$, $\\Delta\\sigma=p_1\\sigma$, and $\\Delta\\tau=p_0\\tau$. In particular $\\sigma,\\tau$ are injective. The set $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$ is a unital subring, and the restrictions of $\\sigma$ and $\\tau$ to $C$ coincide.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C8 (groupoids-lemma-basis), first diagram and notation; Tag 02YE (groupoids-lemma-diagram), source and target identities; old proof steps 1-2."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with base ring $A$, first algebra the copy of $B$ with structure map $\\sigma$, and second algebra the copy with structure map $\\tau$. Supply these two algebra structures explicitly to Mathlib pullbackSpecIso. By [def-weil-affine-spectrum], $s=\\operatorname{Spec}(\\sigma)$ and $t=\\operatorname{Spec}(\\tau)$; transport the pullback along these equalities to obtain $F:R\\times_{s,U,t}R\\cong\\operatorname{Spec}D$. The projection formulas for pullbackSpecIso give $F^{-1}q_0=\\operatorname{Spec}(p_0)$ and $F^{-1}q_1=\\operatorname{Spec}(p_1)$. Precompose the defining pullback equality $s q_0=t q_1$ by $F^{-1}$, substitute the projection formulas, and use contravariant functoriality and faithfulness of Spec to obtain $p_0\\sigma=p_1\\tau$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes, displayed formula and its proof; applied with the two specified A-algebra structures."
+   }
+  },
+  {
+   "text": "By [def-a1-groupoid-scheme], $s\\circ e=t\\circ e=\\mathrm{id}_U$. The contravariant functoriality in [def-weil-affine-spectrum] sends these equations to $e^\\sharp\\circ s^\\sharp=e^\\sharp\\circ t^\\sharp=\\mathrm{id}_A$, that is, $\\varepsilon\\sigma=\\varepsilon\\tau=\\mathrm{id}_A$. If $\\sigma(a)=\\sigma(a^{\\prime})$, applying $\\varepsilon$ gives $a=a^{\\prime}$; the identical argument for $\\tau$ proves that both maps are injective.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0231, definition-groupoid, following paragraph: e is a section of both s and t; Tag 03C8, lemma-basis, coordinate-ring notation."
+   }
+  },
+  {
+   "text": "Let $q_0,q_1$ be the two projections of the composable-pair scheme, identified in step 1. The convention $c(\\alpha,\\beta)=\\alpha\\circ\\beta$ gives $s\\circ c=s\\circ q_1$ and $t\\circ c=t\\circ q_0$ in [def-a1-groupoid-scheme]. By the contravariant functoriality of [def-weil-affine-spectrum] and $q_j^\\sharp=p_j$, these become $c^\\sharp\\circ s^\\sharp=p_1\\circ s^\\sharp$ and $c^\\sharp\\circ t^\\sharp=p_0\\circ t^\\sharp$. Setting $\\Delta=c^\\sharp$ proves $\\Delta\\sigma=p_1\\sigma$ and $\\Delta\\tau=p_0\\tau$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02YE, lemma-diagram, commutativity of the lower-right square and top triangle; Tag 03C8, lemma-basis, first diagram."
+   }
+  },
+  {
+   "text": "Since $\\sigma,\\tau$ are unital ring homomorphisms, $0,1\\in C$. If $a,b\\in C$, then $\\sigma(a-b)=\\sigma(a)-\\sigma(b)=\\tau(a)-\\tau(b)=\\tau(a-b)$ and $\\sigma(ab)=\\sigma(a)\\sigma(b)=\\tau(a)\\tau(b)=\\tau(ab)$. Thus $C$ is a unital subring of $A$. For each $a\\in C$, the equality $\\sigma(a)=\\tau(a)$ is its defining condition, so the restrictions to $C$ coincide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8, lemma-basis, invariant ring C and the lower equalizer row; closure verified directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 0231 (definition-groupoid), 02YE (lemma-diagram) and 03C8 (lemma-basis), first diagram and notation; affine fibre-product identification from schemes.tex, Tag 01I4 (lemma-fibre-product-affine-schemes). P2 formalization derives tensor balancing by applying faithfulness of Spec to the defining pullback square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Groupoid, Algebra.TensorProduct",
+   "results": "Recorded output: 0 hits; . loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-22",
+   "verdict": "no match: coalgebra/groupoid and affine-space hits do not give the two distinct A-structures and these coordinate-ring identities"
+  },
+  {
+   "tool": "grep",
+   "query": "HopfAlgebroid|affineGroupoid|groupoid.*[Cc]oalgebra|[Cc]oalgebra.*groupoid",
+   "results": "Recorded output: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: coalgebra/groupoid and affine-space hits do not give the two distinct A-structures and these coordinate-ring identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine groupoid yields split source and target ring maps and a comultiplication into their twisted tensor product satisfying the source target identities",
+   "results": "Recorded output: 8 hits; GroupLike, CategoryTheory.HopfObj.term𝒮, IsGroupLikeElem.comul_eq_tmul_self, GroupLike.val, GroupLike.isGroupLikeElem_val, GroupLike.instGroup, isGroupLikeElem_iff, IsGroupLikeElem",
+   "date": "2026-10-22",
+   "verdict": "no match: coalgebra/groupoid and affine-space hits do not give the two distinct A-structures and these coordinate-ring identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate rings of an affine groupoid have a counit and comultiplication compatible with the source and target algebra maps",
+   "results": "Recorded output: 8 hits; BialgCat.of_counit, Bialgebra.ofAlgHom, CoalgebraStruct.comul, Coalgebra.counitCoalgHom, Bialgebra.mk', CoalgebraStruct.counit, Coalgebra.toCoalgebraStruct, Bialgebra.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: coalgebra/groupoid and affine-space hits do not give the two distinct A-structures and these coordinate-ring identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Spec\"",
+   "results": "Recorded output: 3 hits; Quiver.FreeGroupoid.lift_spec, CategoryTheory.FreeGroupoid.lift_spec, StructureGroupoid.LocalInvariantProp.section_spec",
+   "date": "2026-10-22",
+   "verdict": "no match: coalgebra/groupoid and affine-space hits do not give the two distinct A-structures and these coordinate-ring identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Source target and identity axioms of a groupoid scheme induce identities on the coordinate rings of its affine composable pairs",
+   "results": "Recorded output: 8 hits; AlgebraicGeometry.AffineSpace.reindex_id, AlgebraicGeometry.AffineSpace.map_id, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_id, AlgebraicGeometry.Scheme.affineOpenCover_f, AlgebraicGeometry.AffineSpace.map_appTop_coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp, AlgebraicGeometry.Scheme.toSpecΓ_isoSpec_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: coalgebra/groupoid and affine-space hits do not give the two distinct A-structures and these coordinate-ring identities"
+  },
+  {
+   "tool": "grep",
+   "query": "HopfAlgebroid|affineGroupoid|groupoid.*[Cc]oalgebra|[Cc]oalgebra.*groupoid",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern affine maps/spaces, free groupoids, compatible sections or coordinate rings; none states all affine groupoid coordinate identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine groupoid has source and target ring maps with a common retraction and composition comultiplication into a tensor product",
+   "results": "8 hits: AffineMap.comp_assoc, AffineMap.comp, AffineEquiv.coe_mul, AffineMap.coe_mul, AffineEquiv.one_def, AffineEquiv.group, GroupLike.ctorIdx, AffineEquiv.mul_def",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern affine maps/spaces, free groupoids, compatible sections or coordinate rings; none states all affine groupoid coordinate identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Spec\"",
+   "results": "3 hits: Quiver.FreeGroupoid.lift_spec, CategoryTheory.FreeGroupoid.lift_spec, StructureGroupoid.LocalInvariantProp.section_spec",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern affine maps/spaces, free groupoids, compatible sections or coordinate rings; none states all affine groupoid coordinate identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine groupoid schemes induce identities on coordinate rings: source target identity composition and tensor product of composable pairs",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.reindex_id, AlgebraicGeometry.AffineSpace.map_id, AlgebraicGeometry.Scheme.toSpecΓ_isoSpec_inv, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_id, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.map_toSpecMvPoly",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern affine maps/spaces, free groupoids, compatible sections or coordinate rings; none states all affine groupoid coordinate identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Source target and identity axioms of a groupoid scheme induce identities on coordinate rings and the invariant functions form a subring",
+   "results": "8 hits: RingCat.sectionsSubring, AlgebraicGeometry.specTargetImage, AlgebraicGeometry.Scheme.affineBasisCoverRing, AlgebraicGeometry.StructureSheaf.sectionsSubring, AlgebraicGeometry.Scheme.AffineCover.X, AlgebraicGeometry.ΓRestrictAlgebra, AlgebraicGeometry.Scheme.AffineCover.obj, AlgebraicGeometry.AffineSpace.coord",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern affine maps/spaces, free groupoids, compatible sections or coordinate rings; none states all affine groupoid coordinate identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-basis-descent",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tag 03C8 (groupoids-lemma-basis), finite nonempty index-set case. Extracted supporting argument: Tag 03C8 (groupoids-lemma-basis), first diagram and notation; Tag 02YE (groupoids-lemma-diagram), source and target identities; old proof steps 1-2.",
+   "via": [
+    "lem-a1-affine-groupoid-basis-descent",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-affine-groupoid-coordinate-identities",
+  "worker": "stage1",
+  "summary": "Q88 checked the composition/projection convention in Stacks 02YE and 03C8, reused the existing affine-fibre-product Mathlib leaf, and wrote out the counit, source-target, injectivity and invariant-subring calculations. No statement change or new nodes.",
+  "blueprint": "This supporting coordinate calculation realizes the first diagram and notation of Stacks 03C8 inside the recorded historical affine-quotient support of lem-a1-affine-hc0. The latest blueprint lem-a1-affine-hc0.proof.md (sk-lem-wrp-hc2) now uses the condensed finite-level comparison route; it has no separate coordinate-ring assertion. The item preserves its established supporting-node ancestry and changes neither ancestor nor unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-d571f576f",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d571f576f (reviewer sub-agent of L); spot-checked: Read the item in full. The statement is unchanged, there are 0 new nodes, and the empty proof is replaced by 4 steps; no repair note names this item, so this is an ordinary split. The fibre-product convention matches Stacks: R x_{s,U,t} R corresponds to D = B tensor_{sigma,A,tau} B, with p_0 = b tensor 1 and p_1 = 1 tensor b, as in the proof of Tag 03C8 (groupoids.tex l.4375). The convention c(alpha,beta) = alpha o beta gives sc = s pr_1 and tc = t pr_0, which matches def-a1-groupoid-scheme and the diagram of Tag 02YE (l.3873). So Delta sigma = p_1 sigma and Delta tau = p_0 tau, consistent with c(t(x_i)) = p_0(t(x_i)) in the 03C8 proof. Step 1 rests on the statements of the Mathlib leaves lem-weil-pbc-fibre-product-affine-spectra (pullbackSpecIso, applied to (B,sigma) and (B,tau), with s = Spec sigma by uniqueness in def-weil-affine-spectrum) and lem-weil-pbc-algebra-tensor-pushout-universal-property clause (1), which gives p_0 sigma = p_1 tau. Steps 2 and 3 dualize se = te = id (Stacks 0231, following paragraph) and the source/target composition equations; step 4 shows C is a subring. All of this is elementary and correct. I tested the trivial groupoid, the pair groupoid over Z and the zero ring with no problems. proof_deps equals the union of the uses lists. The only citer, lem-a1-affine-groupoid-basis-descent step 1, uses exactly these identities with the same factor order. Not duplicates: lem-sfb-affine-group-coordinate-hopf, lem-a1-twisted-tensor-invariant-coefficients (takes these identities as hypotheses) and lem-a1-affine-relation-comparison-preparation. No SGA is used, no target is weakened, and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidCoordinateIdentities",
+  "declaration": "AlgebraicGeometry.affineGroupoid_coordinate_identities",
+  "declarations": [
+   "AlgebraicGeometry.affineGroupoidTensorRing",
+   "AlgebraicGeometry.affineGroupoidTensorLeft",
+   "AlgebraicGeometry.affineGroupoidTensorRight",
+   "AlgebraicGeometry.affineGroupoid_coordinate_identities"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidCoordinateIdentities.lean",
+  "statement": "theorem affineGroupoid_coordinate_identities (A B : CommRingCat.{u}) (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (_hG : IsGroupoidScheme s t e i c) : (Spec.preimage e).hom.comp (Spec.preimage s).hom = RingHom.id A ∧ (Spec.preimage e).hom.comp (Spec.preimage t).hom = RingHom.id A ∧ Function.Injective (Spec.preimage s).hom ∧ Function.Injective (Spec.preimage t).hom ∧ (Spec.preimage s).hom.domRestrict (RingHom.eqLocus (Spec.preimage s).hom (Spec.preimage t).hom) = (Spec.preimage t).hom.domRestrict (RingHom.eqLocus (Spec.preimage s).hom (Spec.preimage t).hom) ∧ ∃ F : pullback s t ≅ Spec (affineGroupoidTensorRing (Spec.preimage s) (Spec.preimage t)), F.inv ≫ pullback.fst s t = Spec.map (affineGroupoidTensorLeft (Spec.preimage s) (Spec.preimage t)) ∧ F.inv ≫ pullback.snd s t = Spec.map (affineGroupoidTensorRight (Spec.preimage s) (Spec.preimage t)) ∧ (affineGroupoidTensorLeft (Spec.preimage s) (Spec.preimage t)).hom.comp (Spec.preimage s).hom = (affineGroupoidTensorRight (Spec.preimage s) (Spec.preimage t)).hom.comp (Spec.preimage t).hom ∧ (Spec.preimage (F.inv ≫ c)).hom.comp (Spec.preimage s).hom = (affineGroupoidTensorRight (Spec.preimage s) (Spec.preimage t)).hom.comp (Spec.preimage s).hom ∧ (Spec.preimage (F.inv ≫ c)).hom.comp (Spec.preimage t).hom = (affineGroupoidTensorLeft (Spec.preimage s) (Spec.preimage t)).hom.comp (Spec.preimage t).hom",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-359b8c1f1",
+  "group": "Q88",
+  "result": "pass",
+  "note": "I read the node, the source places (Stacks 03C8/02YE/0231/01I4), all 5 stmt_dep records and their declarations, the module and the report. Every clause matches: εσ=ετ=id, σ and τ injective, eqLocus subring with equal domRestricts, and ∃F : pullback s t ≅ Spec(B⊗_{σ,A,τ}B) pinned by fst=Spec p₀ and snd=Spec p₁ (unique by the pullback universal property), p₀σ=p₁τ, Δ=preimage(F.inv≫c) with Δσ=p₁σ and Δτ=p₀τ, consistent with the IsGroupoidScheme composition fields. The helpers are real Mathlib tensor constructions with explicit σ/τ structures, not hollow. lean.statement is verbatim; the node's non-lean fields equal live; no other group has landed this item. Edge cases checked: zero ring, trivial groupoid, pair groupoid, single universe u. The report has both required sections. Advisory H9: the plain Maps import is proof-only. I compiled nothing because I changed no file."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T070419-L-3583086",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

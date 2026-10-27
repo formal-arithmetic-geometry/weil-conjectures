@@ -91,7 +91,40 @@
    }
   },
   {
-   "text": "UNRESOLVED / STATEMENT-DISPUTED: the second clause asks for the original unrefined cutoff for every lisse rational source. The repaired rational lemma only gives a refined maximum in general, and gives the original cutoff conditional on a global integral lattice in its fixed source model. That hypothesis is absent here. The inequality from the refined maximum to the original cutoff is not supplied and the rational node records it as invalid in general. The Lean theorem uniformConstructibleExt remains sorry with its original statement unchanged; this is a partial delivery, not a proof or decomposition of that theorem.",
+   "text": "Additional proved partial clause uniformConstructibleExt_latticeModel: retain the finite source model and its pinned coefficient map from the rational theorem. Under the global-lisse-integral-lattice antecedent on this very model, use its unrefined stratum estimate. Convert the displayed cutoff to a natural number using uniformConstructibleExt_cutoff. Filter an arbitrary constructible target by the coefficient-heart filtration, factor each locally closed target immersion through its image, and apply the conditional estimate to each lisse quotient. Covariant Ext exactness and the canonical quotient/top-subobject isomorphisms give the same displayed cutoff for every constructible target. The chosen finite model is independent of the target; no existence of its global lattice is asserted.",
+   "uses": [
+    "det-uniform-constructible-ext-rational",
+    "sk-lem-coefficient-heart",
+    "lem-sc-abelian-ext-covariant-exact",
+    "sk-def-cd",
+    "sk-lem-base-field-cd",
+    "def-pc-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "opening paragraph, target-filtration reduction; rational detail final global-source-lattice clause as corrected in its DAG node"
+   }
+  },
+  {
+   "text": "Proved partial clause uniformConstructibleExt_normalConnectedSource: suppose the original source S is nonempty, connected, compact and has normal stalks. Its immersion into the standing X makes it locally Noetherian. Retain the exact finite source model supplied by uniformConstructibleExt_latticeModel. Apply the normal finite-coefficient lattice theorem to this model. Its integerInclusion is definitionally rationalExtIntegralInclusion. Transport the finite free local models along the cartesian coefficient comparison to match CondensedRing.LocallyFree, retaining the same lattice inclusion and its invertible adjoint. The conditional original-cutoff conclusion now applies to all constructible targets. This proves the original second clause for this supported class of sources, with both rational coefficient choices, and does not assert a global lattice for an arbitrary source.",
+   "uses": [
+    "lem-sfb-normal-lisse-finite-coefficient-lattice",
+    "det-uniform-constructible-ext-rational",
+    "sk-lem-coefficient-heart",
+    "lem-sc-abelian-ext-covariant-exact",
+    "sk-def-cd",
+    "sk-lem-base-field-cd",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "opening lisse-stratum estimate; normal-source lattice existence is the additional hypothesis case of thm-lisse-qlbar-representations, clause (4)"
+   }
+  },
+  {
+   "text": "UNRESOLVED / STATEMENT-DISPUTED: the unconditional second clause still asks for the original unrefined cutoff for every lisse rational source. The repaired rational lemma supplies this only with a global integral lattice in the fixed finite model. uniformConstructibleExt_latticeModel handles target devissage under that antecedent; uniformConstructibleExt_normalConnectedSource now supplies the antecedent on a nonempty connected normal source. Neither asserts it on an arbitrary nonnormal source or compares the refined maximum with the original cutoff. The original theorem uniformConstructibleExt retains its original statement and whole-proof sorry. This is a further partial proof, not a proof or decomposition of that theorem.",
    "uses": [
     "det-uniform-constructible-ext-rational"
    ],
@@ -107,15 +140,16 @@
   "det-uniform-constructible-ext-rational",
   "lem-coef-ext-contravariant-six-term",
   "lem-sc-abelian-ext-covariant-exact",
+  "lem-sfb-normal-lisse-finite-coefficient-lattice",
   "sk-def-cd",
   "sk-lem-base-field-cd",
   "sk-lem-coefficient-heart"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
   "place": "opening paragraph: target and source filtrations and finite cohomological dimensions",
-  "note": "X9 partial stage-3 proof: existence and cutoff finiteness compiled; original explicit-cutoff clause disputed and unproved."
+  "note": "T9 adds the proved original-cutoff case of a nonempty connected normal source. Existing unconditional and conditional declarations are unchanged; the unconditional original-cutoff statement remains disputed and unproved. The normal lattice theorem is used only to discharge the already explicit conditional antecedent in this special case, not to replace the unit route."
  },
  "mathlib_searches": [
   {
@@ -234,7 +268,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-fccd5cb49 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit, chapter route, cited DAG statements, blueprint proof, and Stacks sources. The four proof steps are mathematically sound, hypotheses and coefficient categories match, edge cases check out, no new nodes or duplicates exist, and the unit realization repair is within scope. Review written to review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.UniformConstructibleExt",
   "declaration": "AlgebraicGeometry.ProEtale.uniformConstructibleExt",
@@ -247,7 +292,9 @@
   "declarations": [
    "AlgebraicGeometry.ProEtale.uniformConstructibleExt_exists",
    "AlgebraicGeometry.ProEtale.uniformConstructibleExt_cutoff",
-   "AlgebraicGeometry.ProEtale.uniformConstructibleExt"
+   "AlgebraicGeometry.ProEtale.uniformConstructibleExt",
+   "AlgebraicGeometry.ProEtale.uniformConstructibleExt_latticeModel",
+   "AlgebraicGeometry.ProEtale.uniformConstructibleExt_normalConnectedSource"
   ]
  },
  "reviewed_lean": {
@@ -259,13 +306,13 @@
   "note": "Read node, blueprint _section/proof and det-* lemmas, all 8 stmt_deps with their Lean (cohomologicalDimension/relativeCohomologicalDimension, ConstantModelConstructible, condensedRingObj, Abelian.Ext, FiniteFieldDatum, coefficientHeart/IsLisseCoefficientModule (finite free locally), formalClosedSupportAssertions, compactificationOverField). Lean matches clause by clause: Λ=E⊂Q̄ℓ finite or Q̄ℓ as in coefficientHeart; X separated finite type over F_q or its closure per proof step 1 (needed for finite cd); ∀C ∃d:ℕ ∀N ∀q>d Subsingleton of ambient Ext; second conjunct gives the exact finite cutoff cd(j)+cd(S)+2 for i_*v_!L with range i = complement of range j; the extra qcqs binders hold automatically on Noetherian X. Edge cases (C=0, N=0, empty X/S, extreme factorizations, L=0, q=d) and universes checked. No definitions, proof only sorry, docstrings carry source/blueprint and proof plan, lean.statement matches the file exactly, node diff is lean-only, report has both sections. nt_compile --json reproduced clean (exit 0, 12.0 s); probe gives axioms propext/sorryAx/Classical.choice/Quot.sound. No findings; second reading is a disclosed self-check."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X9",
+  "reviewer": "C-f0456",
+  "group": "T9",
   "result": "pass",
-  "landing": "20261019T034351-L-425989",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261026T202237-L-3445340",
+  "kind": "interface",
+  "note": "independent cc review: delivered UniformConstructibleExt.lean, ConstructibleCompactness.lean and item node against clone live 31fb70d2; new theorem against has_lattice_of_normal and uniformConstructibleExt_latticeModel signatures; #print axioms on scratch copy"
  }
 }

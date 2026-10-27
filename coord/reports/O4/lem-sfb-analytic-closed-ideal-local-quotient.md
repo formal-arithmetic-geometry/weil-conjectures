@@ -1,0 +1,64 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-six-functors-basics/lem-sfb-analytic-closed-ideal-local-quotient.json: existing item, now split, statement unchanged.
+- dag/nodes/sec-six-functors-basics/lem-sfb-holomorphic-coordinate-division.json: one new statement-only analytic lemma, unsplit, no Mathlib match.
+- citations.json: seven step/node records, checked as verbatim substrings of the cited statements.
+
+Attachments: none. Searching lean/WeilConjectures for the blueprint id, analytification, holomorphic germs, closed ideals and local quotients found no declaration of the project giving this analytic ideal comparison. The analytically-unramified ring results concern completions, not holomorphic germs. No Lean was written or compiled.
+
+WANTED: literature/serre-gaga.pdf, Serre, Géométrie algébrique et géométrie analytique, §1 no.1 (printed p.3), §2 no.6 Proposition 4 (printed pp.10–11), §3 no.10 Proposition 11 (printed p.18), for both the item and its holomorphic coordinate-division prerequisite. The PDF is absent locally. I read these passages online at https://www.numdam.org/article/AIF_1956__6__1_0.pdf without downloading or changing the literature directory. The item's proof_origin is agent, because the new proof is a smooth-coordinate argument rather than Serre's general proof. The new node's source explicitly calls the coordinate-division statement agent-formulated; Serre does not state that lemma verbatim.
+
+The original item was statement-only. Its source's “§6” and “§10” refer to numbered subsections no.6 and no.10, within §§2 and 3. Its mathematical statement is correct for smooth schemes; no correction, hypothesis change or statement dispute is needed. Serre Proposition 4 treats an algebraic subvariety using vanishing ideals. Here the smoothness of the schemes prevents a reduced/nonreduced discrepancy, and the proof works directly with the scheme-theoretic kernel I, not an assumed radical ideal. Proposition 11 uses precisely the local quotient in its tensor calculation.
+
+What remains: only the new analytic coordinate-division node requires a future split. Nothing in the item is left without an argument or a named prerequisite.
+
+## Searches and blueprint route
+
+Read AGENTS.md, GOAL.md, the worker role, the stage-1 brief and stage document, SETUP.md's three levels, the item's chapter/unit records, and delivery-errors B–E in full. There is no repair note for the item. The sandbox initially had no node, report or searches; the current repository item was copied once. Read the latest blueprint's sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). This prerequisite remains within the inherited GAGA/Kodaira branch below that paragraph; no chapter, unit or proof route was changed. The ancestor command returns None, so the existing null blueprint ancestor is retained, and the exact supporting place and via chain are recorded.
+
+Whole-DAG searches included analytification/analytic ideal/local ring, holomorphic germs, Hadamard, coordinate division, Taylor remainder, conormal, and Tags 00RU and 06AA. The quotient differential sequence already exists as lem-weil-pbc-jacobi-zariski-differential-maps; the still more suitable scheme-level residue-field sequence already exists as lem-pur-conormal-sequence-smooth-immersion. I used the latter, rather than making either into a new node. The whole-blueprint search tool was run for analytic ideal, conormal, Hadamard, holomorphic, surjection differentials, coordinate division, Taylor remainder, closed immersion analytic, and holomorphic coordinate; there was no matching blueprint statement for the item or new node. The conormal search hits about normal bundles and curve differential definitions do not give holomorphic division.
+
+The generic conormal fibre sequence is a tool from another unit, sk-prop-an. It supplies exactly the algebraic differential-kernel computation, not a new route for the six-functor unit. This use is explained in split_report.tool_uses for maintainer review; no maintainer-owned tool_uses field was written.
+
+All new Mathlib searches used the required msearch.py, and the exact queries and results remain in searches.jsonl. For the item, two different semantic phrasings, LeanSearch, Loogle and grep returned algebraic closed immersion and vanishing ideal statements; none compare algebraic and holomorphic stalks. The inherited Mathlib search history is retained and the new records added.
+
+For coordinate division, both semantic phrasings, LeanSearch, Loogle and two grep searches were read. The analytic factorization candidates are univariate: Mathlib/Analysis/Analytic/Order.lean:377, AnalyticAt.exists_eventuallyEq_sum_add_pow_mul, and the dslope results in Analysis/Analytic/IsolatedZeros.lean assume the input is a scalar field. Reading their source shows they do not assert analytic dependence on additional complex parameters. The MvPowerSeries evaluation/Weierstrass hits concern formal series over topological rings, without a convergence result for holomorphic germs. HasFPowerSeriesAt.analyticAt only converts an already supplied convergent expansion; it does not construct the division coefficients. Thus the new statement is unsplit, not a false Mathlib leaf. All services used answered successfully; no unavailable service was recorded as a negative result.
+
+## Not duplicates
+
+lem-sfb-holomorphic-coordinate-division vs lem-sfb-analytic-closed-ideal-local-quotient: the new node is a parameter-dependent Taylor remainder identity for arbitrary holomorphic functions on coordinate vector spaces; it contains no schemes, algebraic ideal, closed immersion or local-ring quotient.
+
+lem-sfb-holomorphic-coordinate-division vs lem-sfb-monomial-local-completion: the existing node concerns formal series and adic completion of polynomial monomial quotients over a field, not convergence or jointly holomorphic coefficient functions.
+
+lem-sfb-holomorphic-coordinate-division vs lem-sfb-smooth-analytification-cotangent: the existing theorem constructs manifolds, embeddings and the cotangent comparison, but asserts no coordinate division formula.
+
+lem-sfb-holomorphic-coordinate-division vs lem-sfb-hartogs-punctured-affine-extension: the existing statement extends functions across an isolated missing point in dimension at least two; it gives no division along a coordinate slice.
+
+lem-sfb-holomorphic-coordinate-division vs lem-sfb-cauchy-transform-parameters: the existing statement solves an inhomogeneous antiholomorphic derivative equation with smooth real parameters; it does not assert holomorphic coordinate division.
+
+## Analytic prerequisite and small cases
+
+The new node is a genuine reusable analytic input, not a clause moved out of the item. Its intended proof, retained here rather than hidden in its statement, is the convergent-series Hadamard argument: write H as a convergent power series in (z,t). Remove all monomials having z-degree zero. Assign each remaining monomial to the least j with positive z_j exponent and divide that monomial by z_j. These r disjoint subseries give H_j. On a smaller positive polydisc of radius rho inside a polydisc of absolute convergence, the sum of absolute values of the divided terms is at most rho^{-1} times the original absolute sum there. Thus each new series converges, and summing its coordinate multiples gives the required identity. Proving this multivariable convergence and coefficient regrouping, rather than assuming separate-variable division preserves joint holomorphy, is the analytic work this new node exposes.
+
+I tested the new statement for r=0 (empty sum), d=0 (no parameters), r=d=0 (constant germ), H depending only on t (zero remainder), H=z_1 z_2 (nonunique coefficients, so no uniqueness is claimed), and H=z_1 exp(t_1)/(1-z_2) near zero. Polydiscs are shrunk before dividing coefficient series; no uniform convergence on the original boundary is claimed. These tests require no extra nonvanishing hypothesis on a coordinate.
+
+## Review by O4
+
+I read Serre no.1, Proposition 4 and Proposition 11 online. Proposition 4 states ideal generation, and Proposition 11 explicitly substitutes the ambient quotient into the tensor expression. I also read Stacks morphisms.tex:7429–7454, Tag 06AA, label lemma-differentials-relative-immersion-smooth, and its full existing conormal-fibre node. The source requires the immersed source to be smooth, which the item has. The node, unlike the bare sheaf statement, explicitly includes residue-field exactness and the df generator formula. Therefore the proof never takes an unstated tensor-exactness assertion from the definition of tensor product.
+
+Step 1 uses the full statement of lem-sfb-smooth-analytification-cotangent: both manifolds, the closed holomorphic embedding, regular functions mapping to the same holomorphic functions, and the cotangent isomorphism on df. Evaluating a complex point gives residue field C directly, since constants map identically to C. Commutation with the differential map follows on its generating df, so no unproved general comparison of analytic ideals is smuggled into that citation. The inclusion IB in the kernel uses only this commutation and the definition of I.
+
+Step 2 uses the displayed exact sequence and generator formula of lem-pur-conormal-sequence-smooth-immersion, with that node's (Z,X,k,z) equal to the item's (X,Y,C,x_0). Smoothness is required of X and holds; no smoothness of i is asserted. Exactness gives n-d independent normal differentials from actual elements of I, by finite-dimensional basis selection. A germ in I has zero restriction on some neighbourhood by the definition of a stalk, and finitely many f_j permit one common neighbourhood. This avoids replacing the kernel by an arbitrary set-theoretic vanishing ideal.
+
+Step 3 uses the analytic function-operations node to form F, the derivative-rules node for its tuple derivative, and clauses (1)–(3) of the inverse toolkit for a biholomorphic inverse. I checked that the toolkit is for finite-dimensional complex normed vector spaces; both applications take place in ordinary manifold charts. The selected covectors make the ambient derivative invertible, and their complements restrict to a basis on X by Step 2, making the source derivative invertible as well. No constant dimension over the entire scheme or connectedness is assumed.
+
+Step 4 is an explicit elementary neighbourhood argument using the two inverses already constructed. It writes i s(t)=F^{-1}(0,t), and uses the topological embedding from Step 1 to exclude other parts of X after shrinking. Thus a mere containment of images is not confused with an equality of the local submanifolds, and there is no unstated holomorphic constant-rank theorem.
+
+Step 5 cites the composition clause of the function-operations node and the exact identity in the new coordinate-division statement. I checked the domains: h becomes a germ in t, H becomes a germ in (z,t), and the equality H(0,t)=0 holds on a whole slice neighbourhood by Step 4. The coefficients H_j are jointly holomorphic, precisely what the new node asserts. The resulting expression is a finite B-linear combination of the images of the selected f_j in I. Together with Step 1 it proves equality with the full extended ideal, without having assumed those f_j generate I algebraically.
+
+Step 6 proves bijectivity and the B-algebra condition directly using the formula [b] maps to rho(b). Its inverse respects operations by injectivity. No first-isomorphism theorem node is needed for this elementary argument.
+
+For the item I checked the identity immersion (r=0), a point in affine space (d=0), the graph v=u^2 in A^2 (normal equation v-u^2), varying dimensions on disjoint components, and the empty source. The proof is local at the specified point and imposes no global dimension assumption. A nonreduced closed subscheme would invalidate the smooth-source cotangent argument and is correctly excluded by the original hypotheses. No new theorem strengthens the item into a statement about arbitrary singular analytic spaces. Every step is under 2000 characters; no long-step sublemma is concealed. During writing I corrected a search-log index before completing the item; no search results were invented or rerun. The seven citation quotes were checked against the current node statements. The new node has no proof, proof dependencies or proof sketch in its statement; its complete definition of a germ makes it readable by itself. No SGA is cited.
+
+The first full delivery dry run required a node citation in the new statement, despite its inline definitions. I added the existing def-weil-field citation for the usual complex field and its stmt_dep, after opening that definition and verifying it defines exactly a field. This changes no mathematical assertion. The citation record for Step 5 was refreshed to the full new statement.

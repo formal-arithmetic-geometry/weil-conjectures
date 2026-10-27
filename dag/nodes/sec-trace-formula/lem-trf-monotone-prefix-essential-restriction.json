@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-monotone-prefix-essential-restriction",
+ "kind": "statement",
+ "title": "Monotone diagrams under degree prefixes and essential restriction",
+ "statement": "Let $n\\in\\mathbf N$ and let $D\\subseteq\\mathbf N^n$ be closed under addition by $\\mathbf N^n$ and under each operation $\\alpha\\mapsto\\alpha-\\alpha_p e_p+\\alpha_p e_v$ for $p<v$. Let $\\alpha_1,\\ldots,\\alpha_s$ enumerate its coordinatewise minimal elements in increasing lexicographic order of $(|\\alpha|,\\alpha_1,\\ldots,\\alpha_n)$. Set $d_i=|\\alpha_i|$ and $\\Delta_i=\\{\\beta:\\alpha_i+\\beta\\notin\\bigcup_{h<i}(\\alpha_h+\\mathbf N^n)\\}$, as in supported homogeneous division [def-trf-supported-homogeneous-division]. For $u\\in\\mathbf N$, put $I_u=\\{i:d_i\\le u\\}$ and $D_{\\le u}=\\bigcup_{i\\in I_u}(\\alpha_i+\\mathbf N^n)$. Then $D_{\\le u}$ is additive and closed under the same coordinate moves; its ordered minimal vertices are exactly the retained $\\alpha_i$, and their quotient supports are the original $\\Delta_i$. Put $J=\\{j:\\exists i,\\alpha_i(j)>0\\}$ with its inherited order. This is a final segment of $\\{1,\\ldots,n\\}$. For $\\bar\\alpha_i=\\alpha_i|_J$ the diagram $\\bar D=\\bigcup_i(\\bar\\alpha_i+\\mathbf N^J)$ is additive and closed under the whole-coordinate moves between ordered indices of $J$, and $(\\bar\\alpha_i)$ is exactly its ordered minimal vertex family, with unchanged degrees. If $\\iota:\\mathbf N^J\\to\\mathbf N^n$ extends by zero outside $J$, then\n$$\\bar\\Delta_i=\\{\\beta\\in\\mathbf N^J:\\iota(\\beta)\\in\\Delta_i\\},\\qquad\\mathbf N^J\\setminus\\bar D=\\{\\gamma:\\iota(\\gamma)\\notin D\\}.$$\nThe same restriction assertions hold separately for each $D_{\\le u}$, using its own essential-variable set $J_u=\\{j:\\exists i\\in I_u,\\alpha_i(j)>0\\}$. These conclusions include empty prefixes, $D=\\varnothing$, $D=\\mathbf N^n$ and $n=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13 for the inherited route; Bierstone--Milman, Invent. Math. 128 (1997), Section 7, condition (7.2)(2), and section 8 applied in Theorem 9.6, printed p.282: degree prefixes and restriction to variables occurring in vertices; combinatorial preservation assertions written out by the agent. Journal PDF read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf. No Stacks tag states this specialized result; BM paper absent from repository literature."
+ },
+ "stmt_deps": [
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Write $a\\le b$ for coordinatewise comparison. For $x\\in D$, the finite nonempty set $\\{a\\in D:a\\le x\\}$ has an element $a$ of least total degree. If $b\\in D$, $b\\le a$ and $b\\ne a$, then $|b|<|a|$, a contradiction. Hence $a$ is a listed minimal vertex. Conversely, any vector dominating a vertex belongs to $D$ by additive closure. Thus $x\\in D$ if and only if $\\alpha_h\\le x$ for some $h$. This uses only the finite vertex list already assumed in the statement, not a finiteness theorem for all antichains.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  },
+  {
+   "text": "The set $I_u$ is an initial segment because degrees are nondecreasing in the prescribed ordering. The union defining $D_{\\le u}$ is additive. Every retained vertex remains minimal: a smaller element of $D_{\\le u}\\subseteq D$ would contradict its minimality in $D$. Conversely a minimal element of the union dominates some retained vertex and must equal it. The inherited ordering is therefore the required degree-lexicographic ordering. For retained $i$, every $h<i$ is retained, since $d_h\\le d_i\\le u$; hence the earlier-vertex union defining its quotient support is identical to the original one in [def-trf-supported-homogeneous-division]. This proves the asserted equality of supports without any reindexing ambiguity.",
+   "uses": [
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  },
+  {
+   "text": "Fix $p<v$ and let $T(x)=x-x_p e_p+x_p e_v$. Coordinatewise, $T$ sets coordinate $p$ to zero, replaces coordinate $v$ by $x_v+x_p$, and leaves the others unchanged. In particular $T(x+y)=T(x)+T(y)$ and $|T(x)|=|x|$. If $x=\\alpha_i+b\\in D_{\\le u}$, monotonicity of $D$ gives $T(\\alpha_i)\\in D$. Step 1 gives a vertex $\\alpha_h\\le T(\\alpha_i)$, whence $d_h\\le|T(\\alpha_i)|=d_i\\le u$. Thus $T(x)=\\alpha_h+(T(\\alpha_i)-\\alpha_h)+T(b)$ lies in $D_{\\le u}$. Subtraction here is coordinatewise between comparable nonnegative vectors. This proves closure under every required move, including $x_p=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  },
+  {
+   "text": "Suppose $p\\in J$ and $p<v$. Choose $i$ with $\\alpha_i(p)>0$. If $v\\notin J$, every vertex has zero $v$th coordinate. By monotonicity and Step 1, there is a vertex $\\alpha_h\\le T(\\alpha_i)$. At $p$ it is zero; at $v$ it is zero by the supposition; elsewhere it is at most $\\alpha_i$. Consequently $\\alpha_h\\le\\alpha_i$ and the inequality is strict at $p$, contradicting minimality of $\\alpha_i$. Thus $v\\in J$. This is precisely that $J$ is a final segment, with the empty segment allowed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  },
+  {
+   "text": "Every vertex vanishes off $J$, so $\\iota(\\bar\\alpha_i)=\\alpha_i$. For any $\\gamma\\in\\mathbf N^J$ one has $\\bar\\alpha_i\\le\\gamma$ if and only if $\\alpha_i\\le\\iota(\\gamma)$. The same coordinate check shows that restriction and zero extension preserve and reflect comparisons between vertices, and preserve their degrees. Thus the restricted vertices are distinct and pairwise incomparable. A minimal element of their generated union equals a generating vertex, and a vector of the union below a generating vertex must equal it. This proves that these are exactly its minimal vertices. For unequal vertices the first differing coordinate belongs to $J$, all deleted coordinates being zero in both; hence restriction preserves their degree-lexicographic ordering. Additivity of the generated union is immediate by adding to its witness vertex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  },
+  {
+   "text": "By Step 1 and the comparison in Step 5, $\\gamma\\in\\bar D$ if and only if $\\iota(\\gamma)\\in D$, proving the complementary-support equality. If $p<v$ are in $J$ and $\\gamma\\in\\bar D$, zero extension commutes with the coordinate move: $\\iota(T\\gamma)=T(\\iota\\gamma)$. The latter belongs to $D$, so $T\\gamma\\in\\bar D$. Finally, by the quotient-support definition in [def-trf-supported-homogeneous-division], $\\beta\\in\\bar\\Delta_i$ means that no $h<i$ satisfies $\\bar\\alpha_h\\le\\bar\\alpha_i+\\beta$. Step 5 identifies each such inequality with $\\alpha_h\\le\\alpha_i+\\iota\\beta$; the absence of these inequalities means exactly $\\iota\\beta\\in\\Delta_i$. This proves both support identities and the required closure.",
+   "uses": [
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  },
+  {
+   "text": "Steps 2–3 show that each prefix meets the original hypotheses with exactly its retained ordered vertices. Apply the arguments of Steps 4–6 to that diagram and that list, using its own set $J_u$; this gives all the asserted prefix restriction statements. For an empty list the generated diagram is empty, the essential set is empty, there are no quotient supports, and its complement in $\\mathbf N^{\\varnothing}=\\{0\\}$ is $\\{0\\}$. This covers empty prefixes and $D=\\varnothing$. For $D=\\mathbf N^n$ the sole vertex is $0$, every $u\\in\\mathbf N$ retains it, $J=\\varnothing$, the restricted diagram is $\\{0\\}$, its quotient support is $\\{0\\}$, and both complements are empty. If $n=0$, $\\mathbf N^0=\\{0\\}$, so these empty and full cases exhaust the possibilities; all coordinate moves are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate argument for the combinatorial preservation assertion; compare Bierstone–Milman 1997, §7 (7.1), pp.261–262, and §8, p.273, read online at the journal PDF URL in source.place. ILO VIII 2.3.11–2.3.13, pp.93–94, supplies only the inherited parent route."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Direct finite-coordinate proof; ILO VIII 2.3.11–2.3.13 is inherited context only. Compared with Bierstone–Milman 1997 §7 (7.1) and §8, pp.261–262 and 273 (journal PDF read online, absent from local literature)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monotone-prefix-essential-restriction: a monotone additive monomial diagram remains monotone after retaining vertices of bounded degree or deleting unused variables and essential variables form a final segment",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplexCategoryGenRel.simplicialEvalσ_monotone\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms\", \"type\": \"∀ (L : List ℕ), Monotone (SimplexCategoryGenRel.simplicialEvalσ L)\", \"doc\": \"For any list $ L $ of natural numbers, the function $ \\\\text{simplicialEvalσ}(L) $ is monotonic, meaning that if $ j \\\\leq k $, then $ \\\\text{simplicialEvalσ}(L, j) \\\\leq \\\\text{simplicialEvalσ}(L, k) $.\"}\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.mono\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms\", \"type\": \"∀ {m : ℕ} {L : List ℕ} {n : ℕ}, m ≤ n → SimplexCategoryGenRel.IsAdmissible m L → SimplexCategoryGenRel.IsAdmissible n L\", \"doc\": \"If $ m \\\\leq n $ and a list $ L $ of natural numbers is admissible for $ m $ in the context of simplex category generators and relations, then $ L $ is also admissible for $ n $.\"}\n  {\"name\": \"Tuple.monotone_proj\", \"module\": \"Mathlib/Data/Fin/Tuple/Sort\", \"type\": \"∀ {n : ℕ} {α : Type u_1} [inst : LinearOrder α] (f : Fin n → α), Monotone Tuple.graph.proj\", \"doc\": \"For any tuple $ f : \\\\mathrm{Fin}(n) \\\\to \\\\alpha $, the projection function from the graph of $ f $ to $ \\\\alpha $, which maps each pair $ (a, i) $ to $ a $, is monotone with respect to the lexicographic\"}\n  {\"name\": \"SimplexCategory.II.monotone_map'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/II\", \"type\": \"∀ {n m : ℕ} (f : Fin (n + 1) →o Fin (m + 1)), Monotone (SimplexCategory.II.map' f)\", \"doc\": \"For any order-preserving map $ f : \\\\mathrm{Fin}(n+1) \\\\to \\\\mathrm{Fin}(m+1) $, the function $ \\\\mathrm{map'}(f) : \\\\mathrm{Fin}(m+2) \\\\to \\\\mathrm{Fin}(n+2) $ defined by taking the minimum element of a con\"}\n  {\"name\": \"Finsupp.mapDomain_mono\", \"module\": \"Mathlib/Data/Finsupp/Order\", \"type\": \"∀ {ι : Type u_1} {κ : Type u_2} {α : Type u_3} [inst : AddCommMonoid α] [inst_1 : PartialOrder α] [IsOrderedAddMonoid α]\\n  {f : ι → κ}, Monotone (Finsupp.mapDomain f)\", \"doc\": \"The function $\\\\text{mapDomain } f$ is monotone with respect to the pointwise preorder on finite support functions. That is, for any function $f : \\\\alpha \\\\to \\\\beta$ and finite support functions $v, w :\"}\n  {\"name\": \"SSet.stdSimplex.monotone_apply\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex\", \"type\": \"∀ {n i : ℕ} (x : (SSet.stdSimplex.obj (SimplexCategory.mk n)).obj (Opposite.op (SimplexCategory.mk i))),\\n  Monotone fun j => x j\", \"doc\": \"For any natural numbers $n$ and $i$, and for any element $x$ in the standard $n$-simplex $\\\\Delta^n$ evaluated at the object $i$ in the opposite simplex category, the function $x : [i] \\\\to [n]$ is mono\"}\n  {\"name\": \"BoxIntegral.Box.monotone_face\", \"module\": \"Mathlib/Analysis/BoxIntegral/Box/Basic\", \"type\": \"∀ {n : ℕ} (i : Fin (n + 1)), Monotone fun I => I.face i\", \"doc\": \"For any index $i$ in $\\\\mathrm{Fin}(n+1)$, the function mapping a box $I$ in $(n+1)$-dimensional space to its $i$-th face (an $n$-dimensional box) is monotone with respect to the partial order of box i\"}\n  {\"name\": \"Composition.monotone_sizeUpTo\", \"module\": \"Mathlib/Combinatorics/Enumerative/Composition\", \"type\": \"∀ {n : ℕ} (c : Composition n), Monotone c.sizeUpTo\", \"doc\": \"For any composition $ c $ of a natural number $ n $, the function that maps an index $ i $ to the sum of the first $ i $ parts of $ c $ is monotonic with respect to the standard preorder $ \\\\leq $ on n\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finsupp.DegLex and ordinary monotone maps do not assert closure of whole-coordinate-move diagrams under degree prefixes and essential-variable restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.DegLex",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Finsupp.DegLex\", \"module\": \"Mathlib.Data.Finsupp.MonomialOrder.DegLex\", \"type\": \" {α : Type u_1} (r : α → α → Prop) (s : ℕ → ℕ → Prop) : (α →₀ ℕ) → (α →₀ ℕ) → Prop\", \"doc\": \"`Finsupp.DegLex r s` is the homogeneous lexicographic order on `α →₀ M`,\\nwhere `α` is ordered by `r` and `M` is ordered by `s`.\\nThe type synonym `DegLex (α →₀ M)` has an order given by `Finsupp.DegLex\"}\n  {\"name\": \"Finsupp.DegLex.wellFounded\", \"module\": \"Mathlib.Data.Finsupp.MonomialOrder.DegLex\", \"type\": \" {α : Type u_1} {r : α → α → Prop} [Std.Trichotomous r] (hr : WellFounded (Function.swap r)) {s : ℕ → ℕ → Prop} (hs : WellFounded s) (hs0 : ∀ ⦃n : ℕ⦄, ¬s n 0) : WellFounded (Finsupp.DegLex r s)\", \"doc\": \"\"}\n  {\"name\": \"Finsupp.degLex_def\", \"module\": \"Mathlib.Data.Finsupp.MonomialOrder.DegLex\", \"type\": \" {α : Type u_1} {r : α → α → Prop} {s : ℕ → ℕ → Prop} {a b : α →₀ ℕ} : Finsupp.DegLex r s a b ↔ Prod.Lex s (Finsupp.Lex r s) (Finsupp.degree a, a) (Finsupp.degree b, b)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finsupp.DegLex and ordinary monotone maps do not assert closure of whole-coordinate-move diagrams under degree prefixes and essential-variable restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|essential.?[Vv]ariable|prefixVertices|quotientSupport",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Finsupp.DegLex and ordinary monotone maps do not assert closure of whole-coordinate-move diagrams under degree prefixes and essential-variable restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-monotone-prefix-essential-restriction: degree prefixes and restriction to variables appearing in minimal generators preserve a strongly stable exponent diagram and its ordered quotient supports",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monotone-prefix-essential-restriction: minimal monomial generators under whole coordinate moves force unused variables to be an initial segment and truncation preserves monotonicity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.restrictSupport_mono\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Basic\", \"type\": \"∀ {σ : Type u} (R : Type v) [inst : CommSemiring R] {s t : Set (σ →₀ ℕ)},\\n  s ⊆ t → MvPolynomial.restrictSupport R s ≤ MvPolynomial.restrictSupport R t\", \"doc\": \"For any commutative semiring $ R $ and type $ \\\\sigma $, if $ s \\\\subseteq t $ are subsets of the set of finite support functions $ \\\\sigma \\\\to_0 \\\\mathbb{N} $, then the submodule of multivariate polynomi\"}\n  {\"name\": \"Profinite.NobelingProof.Products.isGood_mono\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I]\\n  {l : Profinite.NobelingProof.Products I} {o₁ o₂ : Ordinal.{u}},\\n  o₁ ≤ o₂ →\\n    Profinite.NobelingProof.Products.isGood (Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o₁)\\n        l →\\n    \", \"doc\": \"If a product $ l $ in the lexicographically ordered set of strictly decreasing chains is 'good' with respect to the set $ \\\\pi_C(\\\\text{ord}_I^{-1}(<\\\\alpha)) $ for some ordinal $ \\\\alpha $, then it remai\"}\n  {\"name\": \"MvPolynomial.exists_restrict_to_vars\", \"module\": \"Mathlib/Algebra/MvPolynomial/Supported\", \"type\": \"∀ {σ : Type u_1} {s : Set σ} (R : Type u_2) [inst : CommRing R] {F : MvPolynomial σ ℤ},\\n  ↑F.vars ⊆ s → ∃ f, ∀ (x : σ → R), f (x ∘ Subtype.val) = (MvPolynomial.aeval x) F\", \"doc\": \"Let $ R $ be a commutative ring and $ \\\\sigma $ a type indexing variables. If $ F \\\\in R[\\\\sigma] $ is a multivariate polynomial whose variables are contained in a subset $ s \\\\subseteq \\\\sigma $, then the\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    [inst : LinearOrder I] →\\n      [inst_1 : WellFoundedLT I] →\\n        {o : Ordinal.{u}} →\\n          IsClosed C →\\n            Profinite.NobelingProof.contained C (Order.succ o) →\\n              (ho : o < Ordinal.type fun x1 x2 => x1 < x2) →\\n                ⊤ ≤\", \"doc\": \"Given a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ ho $, if the top element of the $\\\\mathbb{Z}$-module lies in the span of evaluations of products stric\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.smaller_mono\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o₁ o₂ : Ordinal.{u}},\\n  o₁ ≤ o₂ → Profinite.NobelingProof.GoodProducts.smaller C o₁ ⊆ Profinite.NobelingProof.GoodProducts.smaller C o₂\", \"doc\": \"For ordinals $o₁$ and $o₂$, if $o₁ ≤ o₂$, then the set $\\\\text{smaller } C o₁$ is a subset of $\\\\text{smaller } C o₂$.\"}\n  {\"name\": \"MvPolynomial.supported_strictMono\", \"module\": \"Mathlib/Algebra/MvPolynomial/Supported\", \"type\": \"∀ {σ : Type u_1} {R : Type u} [inst : CommSemiring R] [Nontrivial R], StrictMono (MvPolynomial.supported R)\", \"doc\": \"For a nontrivial commutative semiring $ R $ and a type $ \\\\sigma $, the function assigning to each subset $ S \\\\subseteq \\\\sigma $ the subalgebra of multivariate polynomials over $ R $ supported on $ S $\"}\n  {\"name\": \"WittVector.remainder_vars\", \"module\": \"Mathlib/RingTheory/WittVector/MulCoeff\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.remainder p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)\", \"doc\": \"For any natural number $n$, the set of variables in the remainder term of the Witt vector construction is a subset of the Cartesian product of the universal set and the finite set $\\\\{0, 1, \\\\dots, n\\\\}$\"}\n  {\"name\": \"SimplexCategoryGenRel.IsAdmissible.mono\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms\", \"type\": \"∀ {m : ℕ} {L : List ℕ} {n : ℕ}, m ≤ n → SimplexCategoryGenRel.IsAdmissible m L → SimplexCategoryGenRel.IsAdmissible n L\", \"doc\": \"If $ m \\\\leq n $ and a list $ L $ of natural numbers is admissible for $ m $ in the context of simplex category generators and relations, then $ L $ is also admissible for $ n $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Finsupp.DegLex and ordinary monotone maps do not assert closure of whole-coordinate-move diagrams under degree prefixes and essential-variable restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|essential.?[Vv]ariable|prefixVertices|quotientSupport",
+   "results": "{\"t\": \"2026-10-23T14:36:42Z\", \"tool\": \"grep\", \"query\": \"monotone.?diagram|essential.?[Vv]ariable|prefixVertices|quotientSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; ordinary degree bounds, degree-lex order, monomial-ideal membership and polynomial support equivalences do not state this diagram preservation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal monomial generators of an upward closed exponent diagram under whole coordinate moves, truncation by degree and restriction to essential variables",
+   "results": "{\"t\": \"2026-10-23T14:36:42Z\", \"tool\": \"leansearch\", \"query\": \"Minimal monomial generators of an upward closed exponent diagram under whole coordinate moves, truncation by degree and restriction to essential variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.truncFun'\", \"MvPowerSeries.truncFun\", \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"MvPolynomial.monomial_le_degreeOf\", \"MvPolynomial.mem_ideal_span_monomial_image\", \"MvPolynomial.basisMonomials\", \"MvPolynomial.degrees_monomial\", \"MonomialOrder.span_leadingTerm_eq_span_monomial'\"], \"digest\": \"6b62370b7c5f955c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; ordinary degree bounds, degree-lex order, monomial-ideal membership and polynomial support equivalences do not state this diagram preservation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.DegLex",
+   "results": "{\"t\": \"2026-10-23T14:36:42Z\", \"tool\": \"loogle\", \"query\": \"Finsupp.DegLex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Finsupp.DegLex\", \"Finsupp.DegLex.wellFounded\", \"Finsupp.degLex_def\"], \"digest\": \"d242065e71a0e225\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; ordinary degree bounds, degree-lex order, monomial-ideal membership and polynomial support equivalences do not state this diagram preservation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An upward closed subset of natural exponent vectors closed under moving a whole coordinate to a later coordinate stays so after retaining minimal generators of bounded total degree",
+   "results": "{\"t\": \"2026-10-23T14:36:45Z\", \"tool\": \"leanfinder\", \"query\": \"An upward closed subset of natural exponent vectors closed under moving a whole coordinate to a later coordinate stays so after retaining minimal generators of bounded total degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"ChevalleyThm.degBound\", \"MvPolynomial.restrictTotalDegree\", \"MvPolynomial.restrictTotalDegree_le_restrictDegree\", \"MvPolynomial.degreesLE\", \"MvPolynomial.exists_degree_lt\"], \"digest\": \"a01f2585c4d5ed5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; ordinary degree bounds, degree-lex order, monomial-ideal membership and polynomial support equivalences do not state this diagram preservation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal generators of an additive monomial diagram with whole coordinate transfers have a final segment of essential variables; deleting unused coordinates preserves quotient supports",
+   "results": "{\"t\": \"2026-10-23T14:41:57Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal generators of an additive monomial diagram with whole coordinate transfers have a final segment of essential variables; deleting unused coordinates preserves quotient supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"IsAddIndecomposable.baseOf_subset_pos\", \"Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval\", \"Mathlib.Tactic.Linarith.elimMonom\", \"FirstOrder.Ring.mvPolynomialSupportLEEquiv\", \"MvPolynomial.mem_support_finSuccEquiv\", \"MvPolynomial.mem_image_support_coeff_finSuccEquiv\"], \"digest\": \"102e8851584d8a40\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; ordinary degree bounds, degree-lex order, monomial-ideal membership and polynomial support equivalences do not state this diagram preservation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-initial-diagram-stabilization",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-invariant branch of lem-trf-local-term-locality via ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction. Exact lower input: BM 1997 section 8, Theorem 8.1 and Lemma 8.5, printed pp.274--275, used in the finite testing paragraph concluding Theorem 9.6, p.282. Subargument: Section 7, condition (7.2)(2), and section 8 applied in Theorem 9.6, printed p.282: degree prefixes and restriction to variables occurring in vertices; combinatorial preservation assertions written out by the agent.",
+   "via": [
+    "lem-trf-initial-diagram-stabilization",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monotone-prefix-essential-restriction",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement in seven elementary coordinate steps from the stated finite vertex family and the supported-division definition. Included a finite-box proof of domination by a vertex, a generator-level transfer argument for degree prefixes, the minimality contradiction proving the final-segment property, and explicit coordinate comparisons for both support identities. Checked empty/full diagrams, empty prefixes and n=0; no new nodes.",
+  "blueprint": "Historical auxiliary branch of lem-trf-local-term-locality through lem-trf-initial-diagram-stabilization, serving degree prefixes and essential-variable restriction in its finite-testing argument (BM §7 (7.1), §8 and application in Theorem 9.6). The latest blueprint local-term node follows contracting correspondences; this delivery preserves the inherited auxiliary ancestry and changes no chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-3481e1720",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-3481e1720 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit, with the item unchanged in statement, status split, 7 steps, no new nodes, and stmt_deps = proof_deps = [def-trf-supported-homogeneous-division]. The definitions match the item's notation exactly: monotone diagram with whole-coordinate moves i<j, ordered vertices in degree-lex order, Delta_i, degree prefix, essential variables. Each step checks out. Step 1: a least-degree element of {a in D : a <= x} is a listed vertex. Step 2: the prefix keeps exactly the retained vertices and the original Delta_i, since every h<i is retained. Step 3: the prefix is monotone via a vertex alpha_h <= T(alpha_i) with d_h <= d_i. Step 4: J is a final segment, because alpha_h <= T(alpha_i) together with v not in J forces alpha_h < alpha_i, contradicting minimality. Steps 5-6: restriction and zero extension preserve and reflect comparisons, which gives the vertices, degrees, degree-lex order, the identity complement of D-bar = iota^{-1}(complement of D), Delta-bar_i = iota^{-1}(Delta_i), and closure under moves. Step 7: prefixes with their own J_u, and the edge cases D empty, D = N^n, n = 0 and the empty prefix are all correct. All steps are genuinely elementary. My own brute-force test of 734 monotone diagrams (n <= 3, all prefixes, gamma up to 4) found 0 failures. No duplicate in the DAG: the coefficient-locus, exact-block, homogeneous-division and stabilization nodes only use prefixes and restrictions as notation. There is no off-route citation and no SGA. Mathlib searches of three kinds are recorded. The statement covers what Step 4 of the citer lem-trf-initial-diagram-stabilization uses, including prefix followed by restriction. BM 1997 is recorded as WANTED, and proof_origin is agent."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonotonePrefixEssentialRestriction",
+  "declaration": "MonomialDiagram.monotone_prefix_essential_restriction",
+  "declarations": [
+   "MonomialDiagram.essentialVariablesLinearOrder",
+   "MonomialDiagram.monotone_prefix_essential_restriction"
+  ],
+  "file": "lean/Sheaf/RingTheory/MonotonePrefixEssentialRestriction.lean",
+  "statement": "theorem monotone_prefix_essential_restriction (n s : ℕ) (D : Set (Fin n →₀ ℕ)) (a : Fin s → Fin n →₀ ℕ) (hD : IsMonotone D) (ha : IsOrderedVertexFamily D a) : (∀ u : ℕ, IsMonotone (generated (prefixVertices a u)) ∧ IsOrderedVertexFamily (generated (prefixVertices a u)) (prefixVertices a u) ∧ ∀ i : {i : Fin s // (a i).degree ≤ u}, quotientSupport (prefixVertices a u) i = quotientSupport a i.val) ∧ ((∀ p v : Fin n, p < v → (∃ i : Fin s, a i p ≠ 0) → ∃ i : Fin s, a i v ≠ 0) ∧ IsMonotone (generated (essentialVertices a)) ∧ IsOrderedVertexFamily (generated (essentialVertices a)) (essentialVertices a) ∧ (∀ i : Fin s, (essentialVertices a i).degree = (a i).degree) ∧ (∀ i : Fin s, quotientSupport (essentialVertices a) i = {b : EssentialVariables a →₀ ℕ | Finsupp.embDomain (Function.Embedding.subtype _) b ∈ quotientSupport a i}) ∧ (generated (essentialVertices a))ᶜ = {g : EssentialVariables a →₀ ℕ | Finsupp.embDomain (Function.Embedding.subtype _) g ∉ D}) ∧ (∀ u : ℕ, (∀ p v : Fin n, p < v → (∃ i : {i : Fin s // (a i).degree ≤ u}, prefixVertices a u i p ≠ 0) → ∃ i : {i : Fin s // (a i).degree ≤ u}, prefixVertices a u i v ≠ 0) ∧ IsMonotone (generated (essentialVertices (prefixVertices a u))) ∧ IsOrderedVertexFamily (generated (essentialVertices (prefixVertices a u))) (essentialVertices (prefixVertices a u)) ∧ (∀ i : {i : Fin s // (a i).degree ≤ u}, (essentialVertices (prefixVertices a u) i).degree = (prefixVertices a u i).degree) ∧ (∀ i : {i : Fin s // (a i).degree ≤ u}, quotientSupport (essentialVertices (prefixVertices a u)) i = {b : EssentialVariables (prefixVertices a u) →₀ ℕ | Finsupp.embDomain (Function.Embedding.subtype _) b ∈ quotientSupport (prefixVertices a u) i}) ∧ (generated (essentialVertices (prefixVertices a u)))ᶜ = {g : EssentialVariables (prefixVertices a u) →₀ ℕ | Finsupp.embDomain (Function.Embedding.subtype _) g ∉ generated (prefixVertices a u)})",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b24fff3d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read the item node, the dependency def-trf-supported-homogeneous-division (IsMonotone, IsOrderedVertexFamily, generated, quotientSupport, prefixVertices, EssentialVariables, essentialVertices) and the delivered module. The Lean matches every node clause: prefix monotonicity, its ordered vertices and its original quotient supports (index i.val); J is a final segment; the restricted diagram is monotone with the restricted vertices as its exact ordered vertex family and unchanged degrees; quotient supports and complement identified through Finsupp.embDomain extension by zero; the same assertions for each prefix with its own J_u and complement against D_{<=u}. No extra hypotheses or universe restriction. The helper essentialVariablesLinearOrder is the inherited subtype order (inferInstanceAs), listed and docstringed, with no other order on EssentialVariables in lean/Sheaf. Edge cases covered: empty prefix, D empty, D full, n=0. lean.statement is verbatim in the file, the only sorry is the item proof, and only the record's lean field changed relative to live. Docstrings carry the source, the blueprint id and the 7 proof steps. The report has both sections. No compile run (no change)."
+ }
+}

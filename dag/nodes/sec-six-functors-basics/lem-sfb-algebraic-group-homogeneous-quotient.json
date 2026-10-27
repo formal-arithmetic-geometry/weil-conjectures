@@ -1,0 +1,397 @@
+{
+ "id": "lem-sfb-algebraic-group-homogeneous-quotient",
+ "kind": "statement",
+ "title": "Homogeneous quotients of finite-type group schemes by closed subgroups",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a separated finite-type $k$-group scheme [def-sc-group-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $j:L\\hookrightarrow G$ be a closed subgroup scheme [def-sc-group-scheme-subgroup, def-weil-closed-immersion]; no normality, smoothness or affineness is assumed. There exist a separated finite-type $k$-scheme $X$ and a $k$-morphism $p:G\\to X$ that is flat [def-weil-flat-morphism], surjective, and of finite presentation, meaning locally of finite presentation, quasi-compact and quasi-separated [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. For every $k$-scheme $T$, the map $p_T:G(T)\\to X(T)$ satisfies\n$$p_T(a)=p_T(b)\\quad\\Longleftrightarrow\\quad a^{-1}b\\in j_T(L(T)).$$\nHere $G(T)=\\operatorname{Mor}_k(T,G)$ and similarly for $L$ and $X$. For every $x\\in X(T)$ there is an fpqc covering $\\{T_a\\to T\\}$ [def-weil-pbc-fpqc-covering] such that each restriction $x|_{T_a}$ belongs to the image of $p_{T_a}$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.28 and its following sentence, printed p.105; Definition 5.20, printed p.104 (coset fibres and local lifts); Proposition 5.25, printed p.105 (faithful flatness). Finite presentation: Stacks morphisms.tex Tag 01TX, lemma-noetherian-finite-type-finite-presentation, and the finite-presentation permanence lemma; finite type over a field is Noetherian. Test-scheme version is the affine-local form of Definition 5.20."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Work over $\\operatorname{Spec}k$ and regard schemes as algebraic spaces. The closed subscheme $L$ of $G$ is finite type: on each member of a finite affine cover of $G$, its coordinate ring is a quotient of a finitely generated $k$-algebra, and these closed inverse images form a finite affine cover of $L$. Since a field is Noetherian, locally finite type implies locally finite presentation by the cited lemma. Every $k$-algebra is flat over $k$: a vector-space basis identifies tensoring with it with a direct sum of copies of the original vector space, preserving exactness. Thus $L\\to\\operatorname{Spec}k$ is flat and locally of finite presentation. Define the left $L$-action on $G$ by $l\\cdot g=g j(l)^{-1}$. The identity and action laws follow from inversion reversing products; cancellation and monicity of $j$ give freeness on every test scheme.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 setup; field-flatness and finite-type affine calculation"
+   }
+  },
+  {
+   "text": "Apply the free flat action quotient to obtain the algebraic space $F=G/L$ and a surjective flat locally finitely presented $q:G\\to F$. Its kernel-pair isomorphism, with inversion of the $L$ coordinate, reads $G\\times_k L\\simeq G\\times_F G$, $(g,l)\\mapsto(g,g j(l))$. Left multiplication by any $h\\in G(T)$ commutes with the right $L_T$-action. It therefore induces an automorphism of the orbit presheaf over $T$ and, by the universal property of sheafification, an automorphism of $F_T$. The same construction with the universal $h$ gives a left $G$-action on $F$, with $q(g)=g\\cdot q(1)$; all group identities hold by their identities before sheafification.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 quotient and left translations; Stacks Tag 06PH"
+   }
+  },
+  {
+   "text": "The pullback of $\\Delta_{F/k}$ by $q\\times q:G\\times_kG\\to F\\times_k F$ is $G\\times_FG\\hookrightarrow G\\times_kG$. By the kernel-pair formula this is the inverse image of $j:L\\hookrightarrow G$ under $(a,b)\\mapsto a^{-1}b$, hence a closed immersion (on affine tests it is a quotient by the extended ideal). The covering calculus makes $q\\times q$ an fppf covering, so closed-immersion descent makes $\\Delta_{F/k}$ closed. In particular its scheme tests are quasi-compact. Thus $F$ is separated over $k$ and satisfies the diagonal hypothesis of the dense-scheme-open lemma.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-closed-immersion-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "separatedness of G/L from the closed subgroup; Stacks Tag 0420"
+   }
+  },
+  {
+   "text": "Apply source descent to $G\\xrightarrow q F\\to\\operatorname{Spec}k$: both maps are representable by algebraic spaces, $q$ is surjective flat lfp, and the composite is locally finite type. Hence $F\\to\\operatorname{Spec}k$ is locally finite type. The continuous surjection $|G|\\to|F|$ makes $|F|$ quasi-compact, since $|G|$ is quasi-compact. As $\\operatorname{Spec}k$ is quasi-separated, the qcqs permanence lemma applied to $F\\to\\operatorname{Spec}k$ shows that this morphism is quasi-compact. It is therefore finite type. Closed diagonals are quasi-compact, and $\\operatorname{Spec}k$ has quasi-compact absolute diagonal; the diagonal factorization through $F\\times_kF$ shows that $F$ is quasi-separated absolutely. The same holds for $G$. The qcqs permanence lemma now implies that $q$ is quasi-compact and quasi-separated. Together with its local finite presentation this gives finite presentation.",
+   "uses": [
+    "lem-sfb-representable-lft-fppf-source-descent",
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "finiteness properties of the homogeneous quotient; Stacks Tags 06EW and 01TX"
+   }
+  },
+  {
+   "text": "For each finite intermediate field $K$ of a fixed algebraic closure of $k$, let $V[K]$ be the union of all open subspaces of $F_K$ represented by schemes. This union is itself represented by a scheme: its representable open subfunctors form a Zariski covering, so apply the existing representability criterion. The index family is a set of open subsets of $|F_K|$, in the fixed universe. Each such union is stable under every left translation by $G(K)$, since translation is an automorphism and sends a scheme open to a scheme open. For $K\\subseteq K'$, $(V[K])_{K'}\\subseteq V[K']$, since a base change of a scheme open is a scheme open. The sheaf property needed by the criterion holds because algebraic spaces are fpqc sheaves, hence Zariski sheaves.",
+   "uses": [
+    "lem-pc-schemes-criterion",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 Step 1: maximal schematic opens and translation invariance"
+   }
+  },
+  {
+   "text": "The dense-scheme-open lemma supplies a dense scheme open $V\\subseteq F$. It is nonempty since $q(1)$ is a point of $F$. Surjectivity of $q$ makes $q^{-1}V$ a nonempty open of $G$. Choose a nonempty principal affine open inside it, lying in a finite-type affine chart of $G$, and then a maximal ideal of its nonzero coordinate ring. Its residue field is finite over $k$ by the closed-point field lemma. After embedding that finite extension in the fixed algebraic closure, obtain $k_1/k$ and $g_0\\in G(k_1)$ with $q(g_0)\\in V[k_1](k_1)$. For every finite $K/k_1$, this point remains in $V[K]$. For any $g\\in G(K)$, left translation by $g g_0^{-1}$ sends $q(g_0)$ to $q(g)$, so $q(G(K))\\subseteq V[K]$.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 Step 1: replace generic quotient construction by Stacks dense schematic open"
+   }
+  },
+  {
+   "text": "Apply finite-extension open exhaustion to the fixed finite-type scheme $G_{k_1}$ and to $W[K]=q_K^{-1}(V[K])$ for all finite $K/k_1$ in the fixed algebraic closure. Step 5 gives compatibility under extension and Step 6 gives $G_K(K)\\subseteq W[K]$. Thus $W[K]=G_K$ for some finite $K/k_1$. As $q_K$ is surjective by base change, $V[K]=F_K$. Consequently $F_K$ is represented by a scheme $Y$. By base-change stability of finite type and separatedness, $Y$ is separated and finite type over $K$.",
+   "uses": [
+    "lem-sfb-finite-extension-open-exhaustion",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.36 and B.37 Step 1: representability after a finite extension"
+   }
+  },
+  {
+   "text": "The left $G_K$-action on $Y$ has the $K$-point $o=q_K(1)$ with orbit map $q_K$. Base change preserves that this map is flat, surjective and locally of finite presentation. The conditional homogeneous-scheme affine-neighbourhood lemma therefore applies, so every finite subset of $Y$ lies in an affine open. Notice that a scheme $Y$ has already been obtained in Step 7; this use supplies the descent condition, not existence of the quotient.",
+   "uses": [
+    "lem-sfb-homogeneous-scheme-finite-set-affine",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 Step 2: affine neighbourhoods on the existing quotient"
+   }
+  },
+  {
+   "text": "The identification $Y\\simeq F_K$ gives a descent datum $D$ on $Y$ for $s:\\operatorname{Spec}K\\to\\operatorname{Spec}k$: the two pullbacks over $K\\otimes_kK$ both identify with the pullback of $F$, and their comparison satisfies the cocycle by cancellation of these identifications. These are schemes, since they are base changes of $Y$. A finite basis of $K/k$ makes $s$ finite flat and of finite presentation; it is surjective. Step 8 and the invariant-affine-neighbourhood theorem therefore give a transport-invariant affine neighbourhood of every point of $Y$. The invariant-affine-descent-gluing theorem then gives a $k$-scheme $X$ and an identification $X_K\\simeq Y$ inducing $D$.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-pd-invariant-affine-neighbourhoods",
+    "lem-pd-invariant-affine-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 Step 3 and B.26: effective finite-field descent"
+   }
+  },
+  {
+   "text": "For each $k$-scheme $T$, the finite faithfully flat map $T_K\\to T$ is an fpqc cover. Apply fpqc sheaf descent to both $F$ and the scheme $X$, viewed as an algebraic space. Their sections over $T$ are the respective equalizers for $T_K$ and $T_K\\times_TT_K$. The compatible identification $X_K\\simeq F_K$ identifies these equalizers, naturally in $T$. Hence $X\\simeq F$ as sheaves. Transport $q$ to $p:G\\to X$. This identification carries the separated finite-type structure map of $F$ and all four established properties of $q$ (flat, surjective, locally finitely presented, qc and qs) to $X$ and $p$. Thus $X$ and $p$ have the claimed geometric properties.",
+   "uses": [
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "B.37 Step 3: identify the descended scheme with the quotient sheaf"
+   }
+  },
+  {
+   "text": "Evaluate $G\\times_k L\\simeq G\\times_XG$, $(g,l)\\mapsto(g,g j(l))$, on an arbitrary $k$-scheme $T$. If $p_T(a)=p_T(b)$, the pair $(a,b)$ gives an $l\\in L(T)$ with $b=a j_T(l)$, so $a^{-1}b\\in j_T(L(T))$. Conversely this equality produces a point of the kernel pair and therefore $p_T(a)=p_T(b)$. This uses all test schemes, not only fields or geometric points.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 5.20 and Proposition 5.24: coset fibres on all test schemes"
+   }
+  },
+  {
+   "text": "Given $x:T\\to X$, set $T'=T\\times_XG$. The projection $T'\\to T$ is flat and surjective by the covering calculus, and quasi-compact by base-change stability of quasi-compactness. For each affine open $A\\subseteq T$, its inverse image in $T'$ is quasi-compact and has a finite affine open cover; the images of those affines cover $A$. Thus the singleton $\\{T'\\to T\\}$ is an fpqc covering in the specified definition. The other projection $T'\\to G$ lifts $x|_{T'}$, which proves the local-lift clause, including arbitrary non-affine $T$.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 5.20: fpqc local sections from the quotient map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-sheafification",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-kun-closed-point-field",
+  "lem-pc-schemes-criterion",
+  "lem-pd-invariant-affine-descent-gluing",
+  "lem-pd-invariant-affine-neighbourhoods",
+  "lem-sfb-finite-extension-open-exhaustion",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-sfb-homogeneous-scheme-finite-set-affine",
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "lem-sfb-representable-lft-fppf-source-descent",
+  "lem-sfb-space-closed-immersion-fppf-descent",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix B, B.36 and B.37 Steps 1–3, printed pp.604–606; replace B.35 by Stacks 06PH free-action algebraic-space quotient and the existing dense-scheme-open lemma; closed diagonal and fpqc lift checks supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-23T13:08:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/profinite cosets and Galois categories, not homogeneous schemes; Scheme.LocalRepresentability.isRepresentable requires a supplied relatively representable open atlas. Group/Abelian.lean:35 only treats the unit section; no general subgroup quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion|IsMonHom|quotient|Quotient",
+   "results": "{\"t\": \"2026-10-23T13:25:09Z\", \"tool\": \"grep\", \"query\": \"IsClosedImmersion|IsMonHom|quotient|Quotient\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"31b217e169b739bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/profinite cosets and Galois categories, not homogeneous schemes; Scheme.LocalRepresentability.isRepresentable requires a supplied relatively representable open atlas. Group/Abelian.lean:35 only treats the unit section; no general subgroup quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotients of finite type group schemes by arbitrary closed subgroup schemes are representable homogeneous spaces with faithfully flat finitely presented orbit maps",
+   "results": "{\"t\": \"2026-10-23T13:37:51Z\", \"tool\": \"leanfinder\", \"query\": \"Quotients of finite type group schemes by arbitrary closed subgroup schemes are representable homogeneous spaces with faithfully flat finitely presented orbit maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Action.FintypeCat.term_⧸ₐ_\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\"], \"digest\": \"71fdb1c2d9a4f2f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/profinite cosets and Galois categories, not homogeneous schemes; Scheme.LocalRepresentability.isRepresentable requires a supplied relatively representable open atlas. Group/Abelian.lean:35 only treats the unit section; no general subgroup quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subgroup scheme of a separated algebraic group over a field the fppf coset sheaf is a separated finite type scheme and the projection is a faithfully flat finitely presented torsor",
+   "results": "{\"t\": \"2026-10-23T13:26:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed subgroup scheme of a separated algebraic group over a field the fppf coset sheaf is a separated finite type scheme and the projection is a faithfully flat finitely presented torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\"], \"digest\": \"222d19e5bc009d04\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/profinite cosets and Galois categories, not homogeneous schemes; Scheme.LocalRepresentability.isRepresentable requires a supplied relatively representable open atlas. Group/Abelian.lean:35 only treats the unit section; no general subgroup quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separated finite type group scheme G over a field and a closed subgroup H, there exists a separated finite type scheme G/H and an fppf quotient projection whose fibres on test scheme points are H cosets",
+   "results": "{\"t\": \"2026-10-23T13:37:51Z\", \"tool\": \"leansearch\", \"query\": \"For a separated finite type group scheme G over a field and a closed subgroup H, there exists a separated finite type scheme G/H and an fppf quotient projection whose fibres on test scheme points are H cosets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.fintypeQuotientRightRel\", \"QuotientAddGroup.isClosedMap_coe\", \"QuotientGroup.instT2Space\", \"QuotientAddGroup.fintype\", \"Finite.of_finite_quot_finite_subgroup\", \"DoubleCoset.Quotient\", \"QuotientGroup.mk'_apply\", \"Subgroup.finite_quotient_of_finite_quotient_of_index_ne_zero\"], \"digest\": \"599f968b519f1aa8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/profinite cosets and Galois categories, not homogeneous schemes; Scheme.LocalRepresentability.isRepresentable requires a supplied relatively representable open atlas. Group/Abelian.lean:35 only treats the unit section; no general subgroup quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type group scheme modulo an arbitrary closed subgroup over a field is a scheme with a faithfully flat finitely presented quotient map",
+   "results": "{\"t\": \"2026-10-23T14:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type group scheme modulo an arbitrary closed subgroup over a field is a scheme with a faithfully flat finitely presented quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"Group.fintypeOfDomOfCoker\", \"QuotientGroup.fg\", \"ModN.instFinite\"], \"digest\": \"61f1544c02d53b7b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite quotient results do not construct a scheme quotient; LocalRepresentability needs an existing representable open cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T14:32:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite quotient results do not construct a scheme quotient; LocalRepresentability needs an existing representable open cover."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|homogeneous|coset",
+   "results": "{\"t\": \"2026-10-23T14:34:49Z\", \"tool\": \"grep\", \"query\": \"quotient|homogeneous|coset\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite quotient results do not construct a scheme quotient; LocalRepresentability needs an existing representable open cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous space for an algebraic group over a field admits a scheme quotient by any closed subgroup",
+   "results": "{\"t\": \"2026-10-23T14:41:11Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous space for an algebraic group over a field admits a scheme quotient by any closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientAddGroup.instT2Space\", \"QuotientAddGroup.isClosedMap_coe\", \"QuotientGroup.instT2Space\", \"QuotientGroup.instT3Space\", \"AddAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"instProperSMulSubtypeMemSubgroupOfIsClosedCoe\", \"QuotientGroup.isClosedMap_coe\", \"t2Space_quotient_mulAction_of_properSMul\"], \"digest\": \"32650242e2504397\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite quotient results do not construct a scheme quotient; LocalRepresentability needs an existing representable open cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf coset sheaf of a finite type algebraic group by a closed subgroup is representable by a scheme even for non smooth non affine groups",
+   "results": "{\"t\": \"2026-10-23T14:52:39Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf coset sheaf of a finite type algebraic group by a closed subgroup is representable by a scheme even for non smooth non affine groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Representation.ofQuotient\", \"Rep.quotientToInvariantsFunctor\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\"], \"digest\": \"7baa0ff33da1538d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite quotient results do not construct a scheme quotient; LocalRepresentability needs an existing representable open cover."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-homomorphism-factorization",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof: existence of G/N, expanded to the independent homogeneous-space theorem 5.28 for arbitrary closed subgroups.",
+   "via": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-group-homogeneous-quotient",
+  "worker": "stage1",
+  "summary": "Construct the fppf homogeneous algebraic space using the existing free-action quotient, descend its closed diagonal and finite type, obtain schematicity after a finite field extension using Milne B.36, and descend the resulting scheme using the conditional AF property and existing invariant-affine descent. Three new statement-only lemmas; reuse the existing representability criterion. The statement is unchanged.",
+  "blueprint": "Preserves the inherited algebraic-group prerequisite of the direct-image stability route; realizes Milne 5.28/B.37 invoked in the parent homomorphism-factorization proof. The latest blueprint is literature/blueprint/latest (current direct-images proof, paragraph (3)); this lower-level quotient construction replaces no unit step. The inherited from.node is null and its recorded via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "def-pd-descent-datum",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-pd-invariant-affine-descent-gluing",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-pd-invariant-affine-neighbourhoods",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic algebraic-space, scheme gluing or finite descent tool used exactly as stated in the numbered proof; the item unit has no alternative statement of this foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pd-descent-datum",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-sheafification",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-kun-closed-point-field",
+  "lem-pc-schemes-criterion",
+  "lem-pd-invariant-affine-descent-gluing",
+  "lem-pd-invariant-affine-neighbourhoods",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-4926a1e4f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-4926a1e4f (reviewer sub-agent of L); spot-checked: Read the whole delivery. The item is still unsplit in live, there is no repair note, and its statement and stmt_deps are unchanged. Sources checked: Milne iAG Theorem 5.28, Lemma B.36 and Theorem B.37 Steps 1–3 (pp.604–606), and Stacks 0420 (spaces-descent l.1601), 06PH and 06NH. Milne's quasi-projective B.35 is replaced by the free-flat algebraic-space quotient plus the dense scheme open. That route is legitimate, and the route then follows B.36 and B.37. All 12 steps were checked against the statements they cite. Free left action g·j(l)^{-1}; kernel-pair reparametrization; (q×q)^*Δ = inverse image of L, with q×q fppf by covering calculus; scheme locus V[K] via lem-pc-schemes-criterion; rational point by Zariski's lemma; B.36 hypotheses over k1; the affine-neighbourhood lemma's output equals the invariant-affine-neighbourhoods input, whose output equals the descent-gluing input; fpqc equalizers along T_K→T; local lifts by T×_X G. One fault, repaired: step 4 inferred quasi-compactness of F→Spec k from quasi-compactness of |F| ('over the one-point affine base this says'). Step 4 now applies the already-cited qcqs permanence lemma (F quasi-compact, Spec k quasi-separated). Text only; uses unchanged. All three new nodes are true and not duplicates. Closed-immersion fppf descent: Stacks 0420 (fppf ⊂ fpqc); I compared it with the trf étale-cover, atlas-locality, scheme-fpqc, qc-separated and qc-immersion nodes. Open exhaustion: Milne B.36, which I proved independently via decreasing closed images and a normal closure. Homogeneous finite-subset-affine: B.37 Step 2 for Y ≅ G/Stab; it assumes the scheme, so it does not restate the item (D1). Edge cases tested: L=1, L=G, α_p, a non-normal subgroup, an inseparable K. The off-unit tool uses are generic foundations and are accepted. Batch-5 flags: def-trf-scheme-algebraic-space, def-trf-algebraic-space, the jointly-surjective-family definition and lem-trf-space-fibre-products-etale-covers are general algebraic-space definitions and foundations, outside the trace formula and Poincaré duality. All the sfb/a1 nodes reach sec-trace-formula only through the definition def-trf-algebraic-space. All accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomogeneousQuotient",
+  "declaration": "AlgebraicGeometry.exists_homogeneousQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousQuotient.lean",
+  "statement": "theorem exists_homogeneousQuotient (k : Type u) [Field k] (G L : Over (Spec (.of k))) [GrpObj G] [GrpObj L] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (j : L ⟶ G) [IsClosedSubgroupScheme j] : ∃ (X : Over (Spec (.of k))) (p : G ⟶ X), IsSeparated X.hom ∧ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom ∧ Flat p.left ∧ Surjective p.left ∧ LocallyOfFinitePresentation p.left ∧ QuasiCompact p.left ∧ QuasiSeparated p.left ∧ (∀ (T : Over (Spec (.of k))) (a b : T ⟶ G), a ≫ p = b ≫ p ↔ a⁻¹ * b ∈ Set.range (fun l : T ⟶ L ↦ l ≫ j)) ∧ (∀ (T : Over (Spec (.of k))) (x : T ⟶ X), ∃ (I : Type u) (T' : I → Over (Spec (.of k))) (f : ∀ i, T' i ⟶ T), Presieve.ofArrows (fun i ↦ (T' i).left) (fun i ↦ (f i).left) ∈ Scheme.fpqcPrecoverage T.left ∧ ∀ i, ∃ g : T' i ⟶ G, g ≫ p = f i ≫ x)",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47083aa38",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; item not yet landed. Lean matches every node clause: Field k; GrpObj G over Spec k with IsSeparated+LocallyOfFiniteType+QuasiCompact; IsClosedSubgroupScheme j (recorded Defs.lean:100 = IsMonHom + R-point injectivity + IsClosedImmersion); X separated finite type; p Flat/Surjective/LFP/QC/QS; coset clause a⁻¹*b ∈ range(·≫j) on all k-schemes T; fpqc local lifts via Scheme.fpqcPrecoverage, Type u index (singleton suffices). No extra hypotheses or universe restriction; autoImplicit off. Edge cases checked: L=1, L=G, non-normal L, α_p, non-affine G, empty T. No new defs; proof is sorry only; source/blueprint docstrings and all 12 proof steps present; statement verbatim; 11 imported proof-dep modules exist in side-live; both report sections present. No compile run (no FIX); worker reports clean compiles (5.5 s, 7.7 s)."
+ }
+}

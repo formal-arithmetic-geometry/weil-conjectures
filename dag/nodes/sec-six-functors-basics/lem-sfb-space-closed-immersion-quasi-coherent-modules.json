@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+ "kind": "statement",
+ "title": "Quasi-coherent modules and ideals along a closed immersion of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $i:Z\\hookrightarrow X$ be a closed immersion of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Here closed immersion means representable by closed immersions of schemes after every base change to a scheme [def-weil-closed-immersion]. Work on the small etale sites, with module sheaves [def-weil-sheaf-of-modules-category], quasi-coherence [def-trf-space-quasi-coherent-module], and the direct image $i_*$ along the induced morphism of topoi [def-weil-pbc-sites-and-cohomology, def-trf-space-etale-module-functors]. Then $i_*\\mathcal O_Z$ is quasi-coherent over $\\mathcal O_X$, the map $i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_Z$ is surjective, and its kernel $\\mathcal I$ is a quasi-coherent sheaf of ideals of $\\mathcal O_X$. The functor $i_*:\\operatorname{QCoh}(Z)\\to\\operatorname{QCoh}(X)$, with scalar action through $i^\\sharp$, is exact and fully faithful, with essential image precisely the quasi-coherent $\\mathcal O_X$-modules $\\mathcal F$ such that $\\mathcal I\\mathcal F=0$. The last condition means that multiplication by every local section of $\\mathcal I$ on every local section of $\\mathcal F$ is zero. No nilpotence, finite-type, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03MB (lemma-closed-immersion-ideals), first sentence, and 04CJ (lemma-i-star-equivalence), part (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-quasi-coherent-ideal"
+ ],
+ "proof": [
+  {
+   "text": "First verify the hypotheses of the general quasi-coherent pushforward theorem. On each affine scheme test $U=\\operatorname{Spec}R\\to X$, representable closedness gives $Z\\times_XU=\\operatorname{Spec}(R/J)$ for an ideal $J$, so this source is quasi-compact. These quotient maps are monomorphisms: two ring maps out of $R/J$ agreeing after $R\\to R/J$ agree on every residue class. Checking this on scheme charts shows that $i$ is a monomorphism of sheaves, hence its diagonal is an isomorphism and is a closed immersion on every scheme test. Thus $i$ is quasi-compact and separated in the terminology of the cited locality node. The general pushforward theorem now makes $i_*G$ quasi-coherent for every quasi-coherent $G$. In particular apply it to $G=\\mathcal O_Z$, whose one-generator presentation makes it quasi-coherent.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 04CG (lemma-closed-immersion-quasi-compact), 04CH (lemma-closed-immersion-separated), and 03M9 (lemma-pushforward); the quotient-ring verification is written out."
+   }
+  },
+  {
+   "text": "For every affine etale scheme chart $U=\\operatorname{Spec}R\\to X$, the base-changed closed immersion has source $V=\\operatorname{Spec}(R/J)$. The etale direct-image restriction comparison identifies $(i_*\\mathcal O_Z)(U)$ with $\\Gamma(V,\\mathcal O_V)=R/J$, and $i^\\sharp(U)$ with $R\\twoheadrightarrow R/J$. Every etale test scheme is covered by affine opens, so each local section of $i_*\\mathcal O_Z$ has local lifts to $\\mathcal O_X$. This proves surjectivity as a map of sheaves, without asserting surjectivity on arbitrary nonaffine section rings. Its kernel $\\mathcal I$ is an ideal by multiplicativity. Both source and target are quasi-coherent (step 1), so the cited kernel theorem makes $\\mathcal I$ quasi-coherent.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), first paragraph of proof; Tag 03LX for etale restriction; Tag 03M1 for kernels."
+   }
+  },
+  {
+   "text": "Apply the exactness and conservativity clause of [lem-sfb-space-stalk-ideal-pullback] using identity thickenings of the space in question and the identity square; their ideals are zero and hence square-zero, so this clause applies to every algebraic space without imposing a square-zero hypothesis on the present immersion. At a geometric point $\\bar z$ of $Z$ write $\\bar x=i\\bar z$, $A=\\mathcal O_{X,\\bar x}$, and $B=\\mathcal O_{Z,\\bar z}$. The closed direct-image stalk comparison, applied to the underlying abelian sheaf of $\\mathcal O_Z$, identifies $(i_*\\mathcal O_Z)_{\\bar x}$ with $B$. Since this comparison is restriction of germs it respects products and identifies the structure map with $A\\to B$. Exactness of module stalks applied to step 2 gives $B=A/\\mathcal I_{\\bar x}$. At a geometric point outside $Z$, the direct-image stalk is zero, and the same exact sequence gives $\\mathcal I_{\\bar x}=\\mathcal O_{X,\\bar x}$.",
+   "uses": [
+    "lem-sfb-space-closed-pushforward-geometric-stalks",
+    "lem-sfb-space-stalk-ideal-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DK1 (lemma-stalk-push-closed), corrected subscripts, and Tag 03MB; spaces-properties.tex Tag 04K5 and sites-modules.tex Tag 04EQ."
+   }
+  },
+  {
+   "text": "Use the canonical adjunction $i^*\\dashv i_*$ of module sheaves. The ordinary-complex clause of the cited stalk-tensor calculus gives $(i^*H)_{\\bar z}=H_{\\bar x}\\otimes_A B$: specialize its square to $f=\\mathrm{id}_X$, $g=i$, so $g'=i$, and put $H$ in degree zero. For $H=i_*G$, the closed stalk comparison makes the counit at $\\bar z$ the map $G_{\\bar z}\\otimes_A B\\to G_{\\bar z}$, $m\\otimes b\\mapsto bm$. As $A\\twoheadrightarrow B$ by step 3, its inverse is $m\\mapsto m\\otimes1$: lifting $b$ to $a\\in A$ gives $bm\\otimes1=m\\otimes b$. The stalk criterion proves the counit is an isomorphism for every $G$. It follows that $i_*$ is fully faithful: the inverse to the map on Hom sets sends $\\alpha:i_*G\\to i_*G'$ to $\\varepsilon_{G'}\\circ i^*(\\alpha)\\circ\\varepsilon_G^{-1}$; naturality and the adjunction triangle identities give both inverse equations. Restricting to the full quasi-coherent subcategories gives the required full faithfulness.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-geometric-stalk-tensor-calculus",
+    "lem-sfb-space-closed-pushforward-geometric-stalks",
+    "lem-sfb-space-stalk-ideal-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04CJ (lemma-i-star-equivalence), proof of (2) and full faithfulness in (3); sites-modules.tex Tag 05V5. Tensor inverse and Hom inverse are explicit."
+   }
+  },
+  {
+   "text": "Every $i_*G$ is annihilated by $\\mathcal I$: a local element of the kernel of $\\mathcal O_X\\to i_*\\mathcal O_Z$ acts by zero under the specified scalar action. Conversely let $F$ be quasi-coherent and $\\mathcal IF=0$. The cited pullback theorem makes $G=i^*F$ quasi-coherent. Consider the canonical unit $\\eta_F:F\\to i_*i^*F$. At $\\bar x=i\\bar z$, the closed stalk comparison and the ordinary pullback-stalk formula used in step 4 identify its stalk with $F_{\\bar x}\\to F_{\\bar x}\\otimes_A(A/\\mathcal I_{\\bar x})$, $m\\mapsto m\\otimes1$; this normalization follows from the local-tensor description of the canonical adjunction. Since $\\mathcal I_{\\bar x}F_{\\bar x}=0$, the inverse sends $m\\otimes\\bar a$ to $am$, independent of the lift of $\\bar a$. Outside $Z$, step 3 and $\\mathcal IF=0$ give $F_{\\bar x}=0$, while the closed direct-image stalk is zero. Thus all stalk maps of $\\eta_F$ are isomorphisms, so $F\\cong i_*G$. This proves the essential-image assertion.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-geometric-stalk-tensor-calculus",
+    "lem-sfb-space-closed-pushforward-geometric-stalks",
+    "lem-sfb-space-stalk-ideal-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04CJ (lemma-i-star-equivalence), essential-image argument; spaces-properties.tex Tag 03GA and sites-modules.tex Tag 05V5."
+   }
+  },
+  {
+   "text": "Finally take a short exact sequence of quasi-coherent modules on $Z$. At a geometric point of $X$ on $Z$, its direct-image stalk sequence is the original exact stalk sequence by the natural closed stalk comparisons. At a point outside $Z$ it is the zero sequence. To reflect exactness, take each kernel modulo image in the direct-image sequence. Exact stalk functors send this obstruction module to zero, and joint detection of isomorphisms applied to its map to zero forces the obstruction module itself to be zero. Thus the direct-image sequence is exact in all $\\mathcal O_X$-modules. Kernels and cokernels of maps between quasi-coherent modules are the same as in all module sheaves by the cited closure theorem, so the sequence is exact in $\\operatorname{QCoh}(X)$ as well. This proves exactness, with no finiteness or nilpotence assumptions.",
+   "uses": [
+    "lem-sfb-space-closed-pushforward-geometric-stalks",
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04CJ (lemma-i-star-equivalence), part (3); exactness supplied explicitly from Tag 0DK1 and spaces-properties.tex Tag 04K5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-closed-pushforward-geometric-stalks",
+  "lem-sfb-space-stalk-ideal-pullback",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-geometric-stalk-tensor-calculus",
+  "lem-sfb-space-module-pullback-quasicoherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03MB and 04CJ, with the geometric-stalk proof of unit, counit and exactness expanded using 0DK1, 04K5, 04EQ and 05V5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of algebraic spaces the structure sheaf quotient has quasi coherent ideal and pushforward identifies quasi coherent modules with modules annihilated by that ideal",
+   "results": "[leanfinder] OK 8 hit(s).  Logged top results: AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData. Source subdirectory: all Mathlib. Digest: b3874dcc9e6a509b.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCoherent\"",
+   "results": "[loogle] OK 0 hit(s).  Logged top results: none. Source subdirectory: all Mathlib. Digest: 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]losed[Ii]mmersion.*[Qq]uasi[Cc]oherent|[Qq]uasi[Cc]oherent.*[Cc]losed[Ii]mmersion|annihilat.*pushforward",
+   "results": "[grep] OK 0 hit(s).  Logged top results: none. Source subdirectory: AlgebraicGeometry. Digest: 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a closed algebraic subspace are equivalent by direct image to quasi coherent modules on the ambient space killed by the defining ideal",
+   "results": "[leanfinder] OK 8 hit(s).  Logged top results: AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, ModuleCat.tilde, SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop_ideal. Source subdirectory: all Mathlib. Digest: 522d8e0b153a8d01.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of algebraic spaces the kernel of the map from the structure sheaf to the direct image structure sheaf is quasi coherent and direct image has essential image modules annihilated by the kernel",
+   "results": "[leansearch] OK 8 hit(s).  Logged top results: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion. Source subdirectory: all Mathlib. Digest: 994fe33254fe68a0.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|closedImmersion.*quasicoherent|quasicoherent.*closedImmersion",
+   "results": "0 hits; top results: none. Subdirectory: AlgebraicGeometry. Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return scheme closed immersions, Zariski module sheaves, or local quasi-coherent presentations, not the algebraic-space small-etale theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion of algebraic spaces pushforward quasi coherent modules ideal essential image",
+   "results": "8 hits; top results: AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map. Subdirectory: all Mathlib. Digest: 84575840daf99aa4. ",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return scheme closed immersions, Zariski module sheaves, or local quasi-coherent presentations, not the algebraic-space small-etale theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Quasicoherent\"",
+   "results": "0 hits; top results: none. Subdirectory: all Mathlib. Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return scheme closed immersions, Zariski module sheaves, or local quasi-coherent presentations, not the algebraic-space small-etale theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves on a closed subspace equivalent to modules annihilated by the ideal",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.localGeneratorsData_I, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, ModuleCat.tilde. Subdirectory: all Mathlib. Digest: 639a16d8c1137a30. ",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return scheme closed immersions, Zariski module sheaves, or local quasi-coherent presentations, not the algebraic-space small-etale theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of algebraic spaces exact fully faithful pushforward quasi coherent modules killed by defining ideal",
+   "results": "8 hits; top results: AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.Spec_iff. Subdirectory: all Mathlib. Digest: ecd64bc60c3f856f. ",
+   "date": "2026-10-23",
+   "verdict": "no match: searches return scheme closed immersions, Zariski module sheaves, or local quasi-coherent presentations, not the algebraic-space small-etale theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-first-order-ringed-description",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps); section-thickenings for the ideal of a closed immersion. Supporting input: Stacks 03MB and 04CJ(3), applied to the defining ideal of the first-order thickening in the forward direction.",
+   "via": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "worker": "stage1",
+  "summary": "Checked Stacks 03MB and 04CJ on small etale sites, retaining every clause and all generality. Reused existing quasi-coherent module tools and the exact-conservative stalk clause of the ideal-pullback node via identity thickenings. Isolated only the missing closed abelian direct-image stalk lemma. Wrote the canonical unit, counit, tensor inverses and exactness explicitly; corrected the transposed subscripts in source Tag 0DK1.",
+  "blueprint": "Supports the existing recorded det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, specifically 03MB and 04CJ(3) in the forward direction of the first-order ringed description. Latest blueprint proof (3) is compactification/direct-image stability; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Provides the chartwise meaning and criterion for quasi-compact separated space morphisms in step 1. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "General 03M9 pushforward tool supplies preservation of quasi-coherence; the item proves the additional closed-immersion assertions. No node of this unit states this generic tool."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "General 03LX comparison computes the structure map on affine etale charts in step 2. No node of this unit states this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-etale-module-pushforward-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-4e3d3fa3c",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-4e3d3fa3c (reviewer sub-agent of L); spot-checked: I read the item, the one new node and every cited statement in full, plus Stacks 03MB, 04CJ (statement and proof), 0DK1 (with proof) and 04E5. The item's statement is unchanged from live except for a new notion stmt_dep, def-trf-space-etale-module-functors, which only names the module direct image. It matches 03MB and 04CJ(3). There is no dependency cycle. Step 1: i is quasi-compact (affine tests give Spec R/J) and separated (i is a monomorphism, so its diagonal is an isomorphism); then the 03M9 node applies. Step 2: the 03LX node gives R->R/J on affine charts, hence sheaf surjectivity, and the kernel is quasi-coherent by 03M1. Step 3: the exact/conservative stalk clause of lem-sfb-space-stalk-ideal-pullback holds via the identity square (zero ideal is square-zero); no other DAG node states it for algebraic spaces. With the new node this gives B=A/I at points of Z and I=A off Z. Step 4: the tensor-calculus node with f=id, g=i gives the counit stalk m⊗b↦bm with inverse m↦m⊗1 (A->>B), and the Hom-set inverse proves full faithfulness. Step 5: unit stalk F->F/IF is an isomorphism because IF=0, and F=0 off Z. Step 6: natural stalk comparison, then joint detection on kernel/image, then 03M1. The route uses stalks instead of Stacks' projection formula; every non-elementary input is cited, so D1/D2/E are clear. New node: it states 0DK1 with the transposed subscripts corrected, (i_*A)_x̄≅A_z̄, and vanishing off Z from 04E5(2). It is true: Z×_X Spec Ω is empty or the point. Checked i=id and Z=∅. It is statement-only, self-contained, sourced by tag/label, and not a duplicate: grep -R for 0DK1/04FX/04E5/stalk-push-closed finds only Noetherian-coherent or scheme nodes. Batch 5: def-trf-space-etale-module-functors and def-trf-algebraic-space are general definitions. lem-trf-space-qc-separated-etale-local (03KG/03KM), lem-trf-space-qc-separated-quasi-coherent-pushforward (03M9) and lem-trf-space-etale-module-pushforward-restriction (03LX) are foundational facts that neither assumption gives and that are not steps of the trace formula or Poincare duality, so all are accepted. I accept those three trf lemmas as other-unit generic tools; they are listed in split_report.tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedImmersionQuasiCoherentModules",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closedImmersion_quasiCoherent_modules",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.quasiCoherentDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.closedImmersion_quasiCoherent_modules"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedImmersionQuasiCoherentModules.lean",
+  "statement": "theorem closedImmersion_quasiCoherent_modules {S : Scheme.{u}} {Z X : AlgebraicSpace S} (i : Z ⟶ X) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) : ∃ (hqc : ∀ M : Z.Modules, M.IsQuasicoherent → ((moduleDirectImage i).obj M).IsQuasicoherent) (I : QuasiCoherentIdeal X), ((moduleDirectImage i).obj (SheafOfModules.unit Z.structureSheaf)).IsQuasicoherent ∧ Epi (moduleStructureMap i) ∧ I.val = kernelSubobject (moduleStructureMap i) ∧ PreservesFiniteLimits (quasiCoherentDirectImage i hqc) ∧ PreservesFiniteColimits (quasiCoherentDirectImage i hqc) ∧ (quasiCoherentDirectImage i hqc).Full ∧ (quasiCoherentDirectImage i hqc).Faithful ∧ (∀ F : QCoh X, (∃ G : QCoh Z, Nonempty (F ≅ (quasiCoherentDirectImage i hqc).obj G)) ↔ ∀ (V : X.EtaleSite) (a : (I.val : X.Modules).val.obj (op V)) (m : F.obj.val.obj (op V)), (I.val.arrow.val.app (op V) a) • m = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the actual ObjectProperty.lift of moduleDirectImage through the existing full QCoh subcategories. The theorem supplies its quasi-coherence proof, then states exactness as preservation of finite limits and finite colimits, full faithfulness, and the essential image by local ideal annihilation. The ideal is the existing QuasiCoherentIdeal with underlying subobject equal to kernelSubobject of the existing canonical moduleStructureMap; Epi means sheaf surjectivity, not sectionwise surjectivity. Only lean and additions of the two already-landed definition dependencies change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7057e3dc",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Lean and records are right. Closed immersion is IsRepresentableWith(IsClosedImmersion p.left), the encoding landed space modules use; no extra hypotheses. Conclusion: i_*O_Z quasi-coherent; Epi moduleStructureMap (sheaf surjectivity, using the landed owner); I : QuasiCoherentIdeal fixed as kernelSubobject; PreservesFiniteLimits/Colimits; Full and Faithful; essential image iff every local ideal section annihilates every local section over all etale V. Helper quasiCoherentDirectImage restricts moduleDirectImage to QCoh with real data; no existing equivalent. Added stmt_deps def-sfb-space-module-structure-map and def-sfb-space-quasi-coherent-ideal are landed, no cycle. Statement verbatim, imports exist, edge cases (i=id, Z empty, X empty) covered. Only fault: H11, the second reading is a self-review by the same worker; fixed in fixes/lem-sfb-space-closed-immersion-quasi-coherent-modules.report.md (worker report verbatim plus an independent clause-by-clause second reading). No compile needed: only report.md changes."
+ }
+}

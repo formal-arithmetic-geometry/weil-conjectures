@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-projection-presentation-coordinate",
+ "kind": "statement",
+ "title": "Presentation level coordinate assembly",
+ "statement": "For the finite purity projection data and an etale finite-Tor presentation Ke of K, the smooth purity reassociation followed by the presentation tensor map equals projectionSourceIso followed by affineSpacePurityComparison and inverse projectionTargetMap. This is the coordinate-level equation before transport to the intrinsic realization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
+ },
+ "stmt_deps": [
+  "def-pur-projection-purity-coordinates",
+  "lem-pur-projection-unit-integration",
+  "lem-pur-affine-ordered-integration-transposes",
+  "def-pur-smooth-purity-map"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the presentation tensor map: it is the tensor with the inverse diagonal orientation followed by theta. Replace the inverse orientation by the coefficient-unit integration mate [lem-pur-projection-unit-integration]. The tensor integration equation [lem-pur-projection-tensor-integration] says that the result followed by projectionTargetMap is projectionSourceIso followed by the integration transpose, which equals affineSpacePurityComparison by [lem-pur-affine-ordered-integration-transposes]. Compose with the inverse of the invertible projectionTargetMap [def-pur-projection-purity-coordinates].",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "lem-pur-projection-unit-integration",
+    "lem-pur-projection-tensor-integration",
+    "lem-pur-affine-ordered-integration-transposes",
+    "def-pur-projection-purity-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "lem-pur-projection-unit-integration",
+  "lem-pur-projection-tensor-integration",
+  "lem-pur-affine-ordered-integration-transposes",
+  "def-pur-projection-purity-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor compatibility of exceptional integration transposes with the dualizing object",
+   "results": "8 hits, contraction and module-dual identities and tensorRightHomEquiv_tensor; no scheme exceptional functor normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth purity isomorphism for an affine space projection equals the iterated affine line integration transpose",
+   "results": "8 affine coordinate scheme formulas; no exceptional integration transpose. Loogle purity returned compiler IR declarations only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|diagonalAffineMate|tensorTraceIntegrated; blueprint_refs search projection purity and tensor trace transpose",
+   "results": "Mathlib has no geometric purity comparison. Library has the generic tensor-trace identity and the normalized diagonal orientation, but not the present coordinate compatibility. Existing vector unit transpose statements import the item and cannot be its prerequisites.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionPurityAgreement",
+  "date": "2026-10-26",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Model diagonal/DNC integration normalization and final canonical reassociations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionTensorIntegration",
+  "file": "lean/Sheaf/Paper/ProjectionTensorIntegration.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projection_presentation_coordinate",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projection_presentation_coordinate"
+  ],
+  "statement": "theorem projection_presentation_coordinate\n    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)\n    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]\n    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (AffineLinePurity.Ring (projectionSetting F C E n)) Y)\n    (Ke : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)\n    (hKe : etaleFiniteTor (projectionSetting F C E n).Coefficient Y Ke)\n    (eK : (ProEtale.VectorIntegrationSite.comparison\n      (projectionSetting F C E n).Coefficient Y).obj Ke ≅ K.obj) (d : ℕ) :\n    let P := projectionSetting F C E n\n    letI : Y.Over (Spec (.of P.field.k)) := ⟨aY⟩\n    letI : (iteratedAffineLine Y d).Over (Spec (.of P.field.k)) :=\n      ⟨towerBase aY d⟩\n    letI : (iteratedAffineLineProj Y d).IsOver (Spec (.of P.field.k)) := ⟨rfl⟩\n    letI : LocallyOfFiniteType (Y ↘ Spec (.of P.field.k)) :=\n      inferInstanceAs (LocallyOfFiniteType aY)\n    letI : QuasiCompact (Y ↘ Spec (.of P.field.k)) :=\n      inferInstanceAs (QuasiCompact aY)\n    letI := (projection_geometry Y d).1\n    letI := (projection_geometry Y d).2\n    letI := projection_smooth Y d\n    letI := projectionTarget_isIso F C E n Y aY K Ke hKe eK d\n    (P.smoothPurityReassociation (iteratedAffineLine Y d) d\n      ((P.smoothPurityPullback (iteratedAffineLineProj Y d)).obj K.obj)).hom ≫\n      P.smoothPurityTensorMapInPresentation (iteratedAffineLineProj Y d) d\n        (Y ↘ Spec (.of P.field.k)) K.obj Ke eK =\n    (projectionSourceIso F C E n Y aY K.obj d).hom ≫\n      affineSpacePurityComparison P Y aY K Ke hKe eK d ≫\n        inv (projectionTargetMap F C E n Y aY K.obj d)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new sorried lemmas in ProjectionTensorIntegration against node lem-pur-projection-purity-agreement, smoothPurityMap/existsUnique_smoothPurityTensorMap and ordered_integration_transposes; 7 direct importers compiled"
+ }
+}

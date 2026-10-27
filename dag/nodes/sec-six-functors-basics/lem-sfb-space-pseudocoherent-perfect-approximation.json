@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-space-pseudocoherent-perfect-approximation",
+ "kind": "statement",
+ "title": "Perfect approximations to pseudo-coherent complexes on qcqs algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$, with its small etale structure sheaf [def-trf-algebraic-space]. Suppose that its point space is quasi-compact (every open cover has a finite subcover) and its absolute diagonal is quasi-compact. Use module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]; write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. A perfect object is etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $E\\in D(\\mathcal O_X)$ be pseudo-coherent, meaning that etale locally on affine scheme charts it is represented by a bounded-above complex of finite free structure modules. Then $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, and for every $a\\in\\mathbf Z$ there are $P,C\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and a distinguished triangle $P\\xrightarrow{u}E\\to C\\to P[1]$ such that $P$ is perfect, $H^i(u)$ is an isomorphism for every $i>a$, and $H^a(u)$ is surjective. No Noetherian, separatedness, finite-type or base-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HP, theorem-approximation, with T=X in Tags 08HI (definition-approximation-holds) and 08HJ (definition-approximation); Tag 08JL, lemma-pseudo-coherent, for quasi-coherent cohomology."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-pseudocoherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "First check quasi-coherence. On the affine etale charts in the hypothesis, represent $E$ by the indicated bounded-above finite free complex. Finite free structure modules have the identity local presentation, hence are quasi-coherent. Kernels, images and cokernels of maps between quasi-coherent modules are quasi-coherent, so each cohomology of this complex is quasi-coherent. The etale chart criterion therefore gives $E\\in D_{\\mathrm{QCoh}}$. The same argument applies to every perfect object: a direct summand of a finite free module is the image of its idempotent endomorphism, so its terms and cohomologies are quasi-coherent. Moreover $E$ is $b$-pseudo-coherent for every integer $b$: brutally truncate each finite free model below $b$. The resulting bounded finite free complex maps to the model, agrees on cohomology above $b$, and surjects in degree $b$ because it omits only the incoming boundaries.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-sfb-space-supported-perfect-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JL (lemma-pseudo-coherent), local-complex argument; Tag 08HI and sites-cohomology.tex Tag 08FT."
+   }
+  },
+  {
+   "text": "For a qcqs etale object $Y\\to X$, use the property $\\mathsf A(Y)$. Its affine base case follows from the existing scheme affine theorem. Indeed, if $Y$ is an affine scheme and $T$ has quasi-compact complement, choose the integer $r$ supplied by the scheme property $\\mathsf A(Y)$. Given an admissible small-etale $F$, write $F\\cong\\epsilon_Y^*F_0$ under the derived quasi-coherent equivalence. Etale detection of pseudo-coherence makes $F_0$ $(m-r)$-pseudo-coherent. Support outside $T$ is preserved and reflected: restrict the pullback comparison to any open in the complement, where the exact faithful functor $\\epsilon^*$ preserves and reflects zero cohomology. Apply the scheme property with this same $r$ to get $P_0\\to F_0$. Exact pullback gives $\\epsilon_Y^*P_0\\to F$ with the required cohomology maps; etale detection of perfectness and the same restriction comparison give perfectness and support. Thus $\\mathsf A(Y)$ holds, including the empty affine scheme.",
+   "uses": [
+    "def-sfb-space-supported-perfect-approximation",
+    "lem-sfb-affine-supported-perfect-approximation",
+    "def-sfb-supported-perfect-approximation-property",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-detects-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HM (lemma-approximation-affine), comparison with perfect.tex Tag 08EQ and Tags 08EM/08EN; Tags 071Q, 08HE, 08HG."
+   }
+  },
+  {
+   "text": "Apply the qcqs distinguished-square induction principle to this property. In a square $(U\\subset W,V\\to W)$ quantified over there, $W$ is qcqs, $U$ is quasi-compact, $V$ is affine, and the overlap is qcqs and hence quasi-compact, as part of the induction theorem's domain assertion. The supported approximation square-step theorem therefore applies to $\\mathsf A(U)$ and gives $\\mathsf A(W)$; the induction hypotheses on $V$ and the overlap need not be used. The affine case just proved supplies the other premise. The induction principle yields $\\mathsf A(X)$.",
+   "uses": [
+    "def-sfb-space-supported-perfect-approximation",
+    "lem-sfb-space-qcqs-distinguished-square-induction",
+    "lem-sfb-space-supported-approximation-square-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HP (theorem-approximation), using Tags 08GP (lemma-induction-principle) and 08HN (lemma-induction-step)."
+   }
+  },
+  {
+   "text": "In $\\mathsf A(X)$ choose $T=|X|$, whose complement is empty and whose open immersion is quasi-compact. Let $r$ be its witness and set $m=a$. Step 1 gives $(a-r)$-pseudo-coherence of $E$ and membership in $D_{\\mathrm{QCoh}}$; the support hypothesis outside $T$ is vacuous. The defining conclusion gives a perfect $P$ and $u:P\\to E$ inducing isomorphisms for $i>a$ and a surjection for $i=a$. The quasi-coherence argument of step 1 also gives $P\\in D_{\\mathrm{QCoh}}$.",
+   "uses": [
+    "def-sfb-space-supported-perfect-approximation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 08HI, 08HJ: specialization of approximation to full support."
+   }
+  },
+  {
+   "text": "Complete $u$ to a distinguished triangle $P\\to E\\to C\\to P[1]$ in the module derived category, using its triangulated structure and TR1. The cohomology long exact sequence expresses $H^i(C)$ as an extension of $\\operatorname{coker}(H^i(P)\\to H^i(E))$ by $\\ker(H^{i+1}(P)\\to H^{i+1}(E))$. Both ends are quasi-coherent by kernel/cokernel closure, and extension closure gives quasi-coherence of the middle. Thus $C\\in D_{\\mathrm{QCoh}}$, and the full subcategory contains the displayed triangle. This argument applies for every integer $a$ and introduces none of the excluded geometric hypotheses.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-qcoh-extension-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HP with full support; cone completion in the derived category, and spaces-properties.tex Tag 03M1 for quasi-coherent closure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-sfb-space-supported-perfect-approximation",
+  "lem-sfb-affine-supported-perfect-approximation",
+  "def-sfb-supported-perfect-approximation-property",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "lem-sfb-etale-detects-perfect",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-sfb-space-supported-approximation-square-step",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-space-qcoh-extension-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HP (theorem-approximation), with Tags 08HM, 08HN, 08GP and full-support specialization of 08HI/08HJ; local quasi-coherence as in 08JL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect approximation of pseudo coherent complexes on quasi compact quasi separated algebraic spaces by bounded complexes of finite locally free modules",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?[Cc]oherent|perfect.*[Aa]pprox|[Aa]pprox.*[Pp]erfect",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect approximation of pseudo coherent derived complexes on quasi compact quasi separated algebraic spaces",
+   "results": "8 hits: HasDerivedCategory.standard, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q, SheafOfModules.quasicoherentDataOfIsFinitePresentation, DerivedCategory.Q",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every pseudo coherent derived object on a qcqs algebraic space admits a perfect complex mapping to it inducing isomorphisms in sufficiently high cohomological degrees",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complexes on quasi compact quasi separated algebraic spaces admit perfect approximations above every cohomological degree",
+   "results": "{\"t\": \"2026-10-23T19:47:15Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudo coherent complexes on quasi compact quasi separated algebraic spaces admit perfect approximations above every cohomological degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\"], \"digest\": \"2f2ff0e9724c29fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: bounded representatives and qcqs scheme section lemmas do not provide perfect approximations on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T19:47:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: bounded representatives and qcqs scheme section lemmas do not provide perfect approximations on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|perfect.*approxim|approxim.*perfect",
+   "results": "{\"t\": \"2026-10-23T19:47:13Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent|perfect.*approxim|approxim.*perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: bounded representatives and qcqs scheme section lemmas do not provide perfect approximations on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect approximation of pseudo coherent derived objects on algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T19:47:13Z\", \"tool\": \"leansearch\", \"query\": \"Perfect approximation of pseudo coherent derived objects on algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"perfectSpace_of_module\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"PerfectClosure.mk\", \"Algebra.FormallySmooth.casesOn\", \"perfect_iff_eq_derivedSet\", \"PerfectClosure\", \"Algebra.FormallySmooth.of_perfectField\", \"instHasOuterApproxClosedOfPseudoMetrizableSpace\"], \"digest\": \"d1039f98f1037a8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: bounded representatives and qcqs scheme section lemmas do not provide perfect approximations on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every pseudo coherent object on a quasi separated compact algebraic space is approximated by a finite locally free complex with prescribed cohomology isomorphisms",
+   "results": "{\"t\": \"2026-10-23T19:47:57Z\", \"tool\": \"leanfinder\", \"query\": \"Every pseudo coherent object on a quasi separated compact algebraic space is approximated by a finite locally free complex with prescribed cohomology isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\"], \"digest\": \"409133904bd4da6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: bounded representatives and qcqs scheme section lemmas do not provide perfect approximations on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-to-pseudocoherent-tests",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CWH, lemma-perfect-enough. Proof of Tag 0CWH: choose a perfect approximation to (X,E,m-N-1-b), and take its cone in D_QCoh.",
+   "via": [
+    "lem-sfb-space-perfect-to-pseudocoherent-tests",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-pseudocoherent-perfect-approximation",
+  "worker": "stage1",
+  "summary": "Read Stacks 08HP and its affine/induction inputs, together with 08JL. Reused the existing qcqs algebraic-space induction and scheme affine approximation, transporting the latter through existing exact etale/Zariski comparisons. Created the supported property and distinguished-square induction step, not a restatement of the full-support approximation theorem. Wrote the full-support substitution and cone quasi-coherence argument. Statement unchanged.",
+  "blueprint": "The current latest sk-thm-sf-ctf-stability-direct-images proof (3) was read. This realizes the inherited generic perfect-approximation prerequisite in the alteration/duality lineage recorded in blueprint.from.place. The ancestor command returns None; retained the inherited null ancestor and explicit via list rather than inventing one.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic exact cohomology sequence for the cone, needed to verify its quasi-coherence; no unit-route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-f5ae43208",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-f5ae43208 (reviewer sub-agent of L); spot-checked: Stage-1 Q42 f5ae4320: the five-step proof is correct and faithfully follows Stacks spaces-perfect 08HP. I read 08JL, 08HI/08HJ, 08HM, 08HN and 08HP in the source. Step 1 checks quasi-coherent cohomology on charts (03M1 kernel/cokernel closure plus the chart criterion, as in 08JL) and gets b-pseudo-coherence for every b by brutal truncation. Step 2 is the affine base 08HM: the scheme A(Y) from lem-sfb-affine-supported-perfect-approximation, moved to the étale site through the D_QCoh equivalence and the pseudo-coherence and perfectness descent nodes. Support moves across because ε^* is exact and faithful and commutes with restriction to open subschemes. Step 3 uses the 08GP induction; that node puts U×_W V in its domain, so the overlap is quasi-compact. Step 4 is the elementary substitution T=|X|, m=a. Step 5 puts the cone in D_QCoh using the long exact sequence, kernel/cokernel closure and extension closure. New def-sfb-space-supported-perfect-approximation matches 08HI/08HJ; new square-step = 08HN with W qcqs (true; scheme analogue 08ER), neither restates the item, and there is no algebraic-space duplicate (rg over 08HI/08HJ/08HN/08HP and 'perfect approximation'). The batch-5 flags are accepted. def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, and the item already cited def-trf-algebraic-space on the base. The other flagged citations reach trf only through those definitions or through the generic Zariski/étale comparison square 03FH/03LC. None is a step of the trace formula or Poincaré duality proofs. The off-unit tool use of the long exact sequence is accepted, and no SGA is cited. FIX (B3) in the new definition: it used |Y| without a citation and 'geometric point stalks' with no defining node. I added [def-a1-space-point-topology] and [def-a1-space-open-subspace], phrased 'supported on T' as zero restriction to the open subspace Y∖T (equivalent, and the form step 2 already uses), and added both ids to stmt_deps. File: fixes/dag/nodes/sec-six-functors-basics/def-sfb-space-supported-perfect-approximation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePseudoCoherentPerfectApproximation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_perfect_approximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePseudoCoherentPerfectApproximation.lean",
+  "statement": "theorem exists_perfect_approximation {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (E : X.DerivedModules) (hE : X.IsPseudoCoherent E) : X.derivedQCohProperty E ∧ ∀ a : ℤ, ∃ (P C : X.DerivedQCoh) (u : P.obj ⟶ E) (v : E ⟶ C.obj) (δ : C.obj ⟶ P.obj⟦(1 : ℤ)⟧), Triangle.mk u v δ ∈ distTriang X.DerivedModules ∧ SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P.obj ∧ (∀ i : ℤ, a < i → IsIso ((DerivedCategory.homologyFunctor X.SmallModules i).map u)) ∧ Epi ((DerivedCategory.homologyFunctor X.SmallModules a).map u)",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfa63667e",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 08HP/08HI/08HJ/08JL: CompactSpace (Point X.obj.obj); IsAbsolutelyQuasiSeparated (absolute, 0AHR(3)); IsPseudoCoherent (local bounded-above finite-free models on affine etale model, quasi-iso to restriction); conclusion derivedQCohProperty E ∧ ∀ a, ∃ P C : DerivedQCoh, u v δ with distinguished Triangle.mk, IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} P, IsIso H^i(u) for i>a, Epi H^a(u) in module sheaves. No extra hypotheses; w free; edge cases (empty X, zero E, rank 0, all a, unbounded below) covered. Node delta vs side-live = lean record + 4 landed def stmt_deps (all used, none theorems); statement verbatim; no dep changes, no new nodes, no duplicate or parallel declaration; docstrings with source/blueprint and 5 proof steps; only sorry. Advisories: Point/SmallModules owners reached transitively; Pretriangulated import likely redundant; second reading is a self-check. No file changed, no compile."
+ }
+}

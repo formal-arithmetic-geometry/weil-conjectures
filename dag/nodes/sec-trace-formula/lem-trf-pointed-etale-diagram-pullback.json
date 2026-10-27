@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-pointed-etale-diagram-pullback",
+ "kind": "statement",
+ "title": "Pullback of a pointed etale chart diagram through arbitrary base change and open restrictions",
+ "statement": "Let $f_0:X_0\\to S_0$ and $Y\\to T$ be morphisms of schemes [def-pc-scheme]. Suppose schemes $U_0,V_0$ carry etale morphisms $p_0:U_0\\to X_0$, $e_0:V_0\\to S_0$ [def-weil-etale-morphism], morphisms $w_0:U_0\\to V_0$, $\\tau_0:V_0\\to T$, and an etale $V_0$-morphism $m_0:U_0\\to Y\\times_{T,\\tau_0}V_0$ [def-pc-fibre-product], such that $e_0\\circ w_0=f_0\\circ p_0$ and $\\operatorname{pr}_{V_0}\\circ m_0=w_0$. Fix $u_0\\in U_0$ and put $x_0=p_0(u_0)$. Let $f:X\\to S$ be any scheme morphism, let $X^\\circ\\subseteq X$ and $S^\\circ\\subseteq S$ be open subschemes [def-weil-open-immersion] with $f(X^\\circ)\\subseteq S^\\circ$, and let $c:S^\\circ\\to S_0$ be a morphism together with an $S^\\circ$-isomorphism $X^\\circ\\cong X_0\\times_{S_0}S^\\circ$. Fix $x\\in X^\\circ$ whose projection to $X_0$ is $x_0$. Define\n$$V=V_0\\times_{S_0}S^\\circ,\\qquad U=U_0\\times_{X_0}X^\\circ.$$\nThen the projections followed by the open inclusions give etale morphisms $e:V\\to S$ and $p:U\\to X$. There are canonical isomorphisms\n$$U\\cong U_0\\times_{S_0}S^\\circ\\cong U_0\\times_{V_0}V,$$\na morphism $w:U\\to V$ and an etale $V$-morphism $m:U\\to Y\\times_{T,\\tau}V$, where $\\tau=\\tau_0\\circ\\operatorname{pr}_{V_0}$, satisfying $e\\circ w=f\\circ p$ and $\\operatorname{pr}_V\\circ m=w$. The map $m$ is the base change of $m_0$ under these canonical isomorphisms. There exists $u\\in U$ projecting to the specified $u_0$ and $x$, so in particular $p(u)=x$. For every $a\\in\\Gamma(T,\\mathcal O_T)$, writing $h_0=\\tau_0^*a$ and $h=\\operatorname{pr}_{V_0}^*h_0$, one has $h=\\tau^*a$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, first paragraph (pulling the finite-type diagram back); Morphisms Tag 01S1, lemma-base-change-surjective, for retention of the marked point; returned parent steps 8--9."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $f^\\circ:X^\\circ\\to S^\\circ$ for the restriction of $f$, $\\alpha:X^\\circ\\xrightarrow{\\sim}X_0\\times_{S_0}S^\\circ$ for the given isomorphism, and $q:X^\\circ\\to X_0$ for its first projection. Let $a:U\\to U_0$ and $t:U\\to X^\\circ$ be the defining projections, and put $b=f^\\circ t$. Set $P=U_0\\times_{S_0}S^\\circ$, using $f_0p_0=e_0w_0$ as the structure map of $U_0$. The map $U\\to P$ is $(a,b)$. Its inverse sends the projections $(a',b')$ of $P$ to the pair $(a',\\alpha^{-1}(p_0a',b'))$ defining a map to $U$. Both composites are identities because they preserve the two defining projections. Likewise $P\\to U_0\\times_{V_0}V$ is $(a',(w_0a',b'))$, and its inverse takes $(a',v)$ to $(a',\\operatorname{pr}_{S^\\circ}v)$. These are inverse by the same projection check. Every parenthesized pair here is a pair of scheme morphisms; existence and equality follow from the universal property in [def-pc-fibre-product]. These give precisely the asserted canonical isomorphisms.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, first paragraph; expansion of the base-change identification using Schemes Tag 01JP, definition-fibre-product"
+   }
+  },
+  {
+   "text": "The projection $V\\to S^\\circ$ is the base change of $e_0$, and $t:U\\to X^\\circ$ is the base change of $p_0$. Both are etale by [lem-weil-pbc-etale-scheme-base-change], whose arbitrary-base-change hypothesis permits the given $c$ and $q$. The inclusions $i_S:S^\\circ\\hookrightarrow S$ and $i_X:X^\\circ\\hookrightarrow X$ are open immersions, hence etale, and etale morphisms compose by clauses (1)--(2) of [lem-weil-pbc-etale-composition-cancellation]. Thus $e=i_S\\operatorname{pr}_{S^\\circ}$ and $p=i_Xt$ are etale.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale)"
+   }
+  },
+  {
+   "text": "Put $Z_0=Y\\times_TV_0$, $Z=Y\\times_TV$, and $y_0=\\operatorname{pr}_Ym_0$. Step 1 defines $w=(w_0a,b):U\\to V$. Define $m=(y_0a,w):U\\to Z$ and $r=(\\operatorname{pr}_Y,\\operatorname{pr}_{V_0}\\operatorname{pr}_V):Z\\to Z_0$. These pairs are compatible over $T$ since $m_0$ is over $V_0$ and $\\tau=\\tau_0\\operatorname{pr}_{V_0}$. They satisfy $rm=m_0a$ and $\\operatorname{pr}_Vm=w$. To check the square $(m,a,r,m_0)$ is cartesian, take any scheme $Q$ with maps $A:Q\\to U_0$, $B:Q\\to Z$ satisfying $m_0A=rB$. Their $V_0$ projections give $w_0A=\\operatorname{pr}_{V_0}\\operatorname{pr}_VB$, so Step 1 and [def-pc-fibre-product] give a unique $L:Q\\to U$ with $aL=A$ and $wL=\\operatorname{pr}_VB$. The $Y$ projections of the same equality give $y_0A=\\operatorname{pr}_YB$; hence $mL=B$ by the universal property of $Z$. Uniqueness follows from the projections of $U_0\\times_{V_0}V$. This proves that this specified $m$ is the base change of $m_0$, including its compatibility with the model diagram.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, first paragraph; expansion of the base change of the etale model map using Schemes Tag 01JP, definition-fibre-product"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-scheme-base-change] to the etale scheme morphism $m_0:U_0\\to Z_0$ and the arbitrary scheme morphism $r:Z\\to Z_0$. The cartesian square established in Step 3 therefore makes $m$ etale. It is a $V$-morphism because $\\operatorname{pr}_Vm=w$. Also $ew=i_Sb=i_Sf^\\circ t=fi_Xt=fp$, by the restriction identity $i_Sf^\\circ=fi_X$. This proves all asserted diagram identities.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO, lemma-base-change-etale; applied to the cartesian square of Step 3"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-base-change-image] to $p_0:U_0\\to X_0$, $q:X^\\circ\\to X_0$, their fibre product $U$ with projections $a,t$, and the singleton subset $C=\\{u_0\\}$. It gives $t(a^{-1}(\\{u_0\\}))=q^{-1}(p_0(\\{u_0\\}))$. Since $q(x)=x_0=p_0(u_0)$, $x$ belongs to the right side. Membership in the left side supplies $u\\in U$ with $a(u)=u_0$ and $t(u)=x$. Thus $p(u)=x$ in $X$. No equality of residue fields or rational-point lifting is required.",
+   "uses": [
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1, lemma-base-change-surjective, proof, subset-image identity; Tag 0495, lemma-when-point-maps-to-pair"
+   }
+  },
+  {
+   "text": "For a scheme morphism, pullback of global regular functions is the map on structure-sheaf sections; composition of scheme morphisms [def-pc-scheme] composes these maps contravariantly. Thus, for every $a\\in\\Gamma(T,\\mathcal O_T)$, $\\operatorname{pr}_{V_0}^*(\\tau_0^*a)=(\\tau_0\\operatorname{pr}_{V_0})^*a=\\tau^*a$. This is the required equality $h=\\tau^*a$.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IJ, definition-scheme; composition of the structure-sheaf maps of scheme morphisms; function in the right-hand model of Curves Tag 0CBY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, first paragraph; explicit expansion of its base-change sentence, with Morphisms Tags 02GN, 02GO, 02GP and 01S1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjective.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*surjective|etale.*pullback|pullback.*etale",
+   "results": "{\"t\": \"2026-10-22T06:00:10Z\", \"tool\": \"grep\", \"query\": \"surjective.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*surjective|etale.*pullback|pullback.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\"], \"digest\": \"b1d1d3284d153bc9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale chart at a point pulls back to an etale chart at every point above it under arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T06:00:10Z\", \"tool\": \"leansearch\", \"query\": \"An etale chart at a point pulls back to an etale chart at every point above it under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\"], \"digest\": \"e7d5088389b21641\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-22T06:00:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.instFstScheme\", \"AlgebraicGeometry.Etale.instSndScheme\", \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"773501778a59f3d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull back a commutative etale chart diagram of schemes along an arbitrary base change and open restrictions while retaining a point over a prescribed lift of the original point",
+   "results": "{\"t\": \"2026-10-22T06:00:21Z\", \"tool\": \"leanfinder\", \"query\": \"Pull back a commutative etale chart diagram of schemes along an arbitrary base change and open restrictions while retaining a point over a prescribed lift of the original point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"415b7b25582f9e7c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(pullback|preimage)|pullback.*(exists|surjective)|mkPreimage",
+   "results": "{\"t\": \"2026-10-22T06:00:42Z\", \"tool\": \"grep\", \"query\": \"exists.*(pullback|preimage)|pullback.*(exists|surjective)|mkPreimage\", \"sub\": \"AlgebraicGeometry/PullbackCarrier.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"294\", \"295\", \"306\", \"308\"], \"digest\": \"e18add082b367c91\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary scheme morphisms the points of a fibre product map surjectively to pairs of points with a common image; use this to retain a marked point when changing the base of an etale chart diagram",
+   "results": "{\"t\": \"2026-10-22T06:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary scheme morphisms the points of a fibre product map surjectively to pairs of points with a common image; use this to retain a marked point when changing the base of an etale chart diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\", \"AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback\", \"AlgebraicGeometry.Surjective.instFstScheme\", \"AlgebraicGeometry.Surjective.instSndScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback\"], \"digest\": \"dafd70565b56598c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_preimage_pullback|Triplet.exists_preimage|Etale.instFstScheme|Etale.instSndScheme",
+   "results": "{\"t\": \"2026-10-22T06:01:09Z\", \"tool\": \"grep\", \"query\": \"exists_preimage_pullback|Triplet.exists_preimage|Etale.instFstScheme|Etale.instSndScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"ed76958f853f613b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete diagram statement: etale base-change instances and Scheme.Pullback.exists_preimage_pullback cover individual clauses; the two iterated-product identifications, compatibility of the induced model map, open restrictions and marked-point lifting require an assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_preimage_pullback|instIsStableUnderBaseChangeScheme|pullbackAssoc|pullbackRightPullbackFstIso",
+   "results": "{\"t\": \"2026-10-23T04:24:46Z\", \"tool\": \"grep\", \"query\": \"exists_preimage_pullback|instIsStableUnderBaseChangeScheme|pullbackAssoc|pullbackRightPullbackFstIso\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"a53dfca83759d537\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits cover etale base change, pullback categories or individual projection/point identities; the two canonical identifications, model-map square, open compositions and global-function identity require the assembly in the proof. Relevant declarations were read in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:69-93 and PullbackCarrier.lean:306-308, 420-430."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change a diagram of etale charts of schemes retaining a marked point and preserving the pullback of a global regular function",
+   "results": "{\"t\": \"2026-10-23T04:24:47Z\", \"tool\": \"leansearch\", \"query\": \"Base change a diagram of etale charts of schemes retaining a marked point and preserving the pullback of a global regular function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instOverPullbackCoverOver'\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"16a11d9dd1402585\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits cover etale base change, pullback categories or individual projection/point identities; the two canonical identifications, model-map square, open compositions and global-function identity require the assembly in the proof. Relevant declarations were read in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:69-93 and PullbackCarrier.lean:306-308, 420-430."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-23T04:24:47Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "unavailable: this pattern used the old identifier IsEtale, which this Loogle index did not recognize; the same pattern was rerun with Etale."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull back a commutative diagram of etale scheme charts along a base change and open restrictions with a prescribed point and compatible global function",
+   "results": "{\"t\": \"2026-10-23T04:24:57Z\", \"tool\": \"leanfinder\", \"query\": \"Pull back a commutative diagram of etale scheme charts along a base change and open restrictions with a prescribed point and compatible global function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.hy\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.hx\"], \"digest\": \"727e095baa507f58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits cover etale base change, pullback categories or individual projection/point identities; the two canonical identifications, model-map square, open compositions and global-function identity require the assembly in the proof. Relevant declarations were read in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:69-93 and PullbackCarrier.lean:306-308, 420-430."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-23T04:25:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.instFstScheme\", \"AlgebraicGeometry.Etale.instSndScheme\", \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"773501778a59f3d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits cover etale base change, pullback categories or individual projection/point identities; the two canonical identifications, model-map square, open compositions and global-function identity require the assembly in the proof. Relevant declarations were read in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:69-93 and PullbackCarrier.lean:306-308, 420-430."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism to a fibre product with a model scheme remains etale after changing the base; iterated pullbacks identify the chart and lift any compatible pair of points",
+   "results": "{\"t\": \"2026-10-23T04:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism to a fibre product with a model scheme remains etale after changing the base; iterated pullbacks identify the chart and lift any compatible pair of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"9a5b4778a0d22487\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits cover etale base change, pullback categories or individual projection/point identities; the two canonical identifications, model-map square, open compositions and global-function identity require the assembly in the proof. Relevant declarations were read in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:69-93 and PullbackCarrier.lean:306-308, 420-430."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-etale-local-model",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation (1.a) of ILO VI Proposition 1.9 (citing SGA 7 XV 1.3.2 / de Jong 2.23), here in the form of Stacks Tag 0CBY used by step 3 of lem-trf-nodal-etale-chart. Re-split: Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, first paragraph (pulling the finite-type diagram back); Morphisms Tag 01S1, lemma-base-change-surjective, for retention of the marked point; returned parent steps 8--9.",
+   "via": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pointed-etale-diagram-pullback",
+  "worker": "stage1",
+  "summary": "Q145: retained the statement and its four notion dependencies; expanded both iterated fibre-product isomorphisms and the cartesian model-map square from their universal properties, applied existing Mathlib-leaf nodes for etale base change/open composition and the subset-image formula for the specified point, and wrote out pullback of the global function. No new nodes, attachments, missing sources, statement disputes or unproved extra assumptions.",
+  "blueprint": "Historical nearby-duality/alteration input recorded in blueprint.from under lem-trf-local-term-locality (1)--(2), via the listed nodal-family nodes: realizes precisely the arbitrary-base-change/open-restriction sentence of Stacks 0CBY first proof, first paragraph, used in returned parent steps 8--9. The current main-20261015 locality proof uses contracting correspondences; this auxiliary split does not replace or alter that unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-d5933d88b",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-d5933d88b (reviewer sub-agent of L); spot-checked: Six-step split of an unchanged statement with no new nodes. Statement, stmt_deps and blueprint.from are unchanged. proof_deps equals the union of the step uses. There is no repair note, so the 2026-10-21 re-split rule does not apply, and there is no SGA citation. Source: Stacks 0CBY (curves.tex:5077), first proof, first paragraph ('the lemma follows ... by base change'). The item expands exactly that sentence, and parent lem-trf-nodal-family-etale-local-model step 5 uses exactly its clauses, including h = tau^*a. Checks: step 1 needs c f° = f_0 q, which follows from alpha being an S°-isomorphism, and gives both inverse pairs U ≅ U_0×_{S_0}S° ≅ U_0×_{V_0}V, the composite being (a,w). Step 2 is 02GO base change plus clauses (1)–(2) for the open immersions and composition. Step 3: m=(y_0 a,w) and r satisfy r m = m_0 a, and I verified the cartesian check, including uniqueness via w L' = pr_V B. Step 4: étaleness follows by base change. Identifying m with the chosen projection up to an isomorphism uses the uniqueness clause plus (1)+(2); this is only advisory. Also e w = f p. Step 5: the subset-image lemma with C={u_0} gives t(a^{-1}(u_0)) = q^{-1}(x_0), which contains x; existence only. Step 6 is functoriality of section pullback. Edge cases checked: identity base change, empty X°, residue extensions, arbitrary Y→T. No duplicates in the DAG (searched for 0CBY, the iterated-product notation and étale chart pullback). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedEtaleDiagramPullback",
+  "declaration": "AlgebraicGeometry.exists_pointed_etale_diagram_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedEtaleDiagramPullback.lean",
+  "statement": "theorem exists_pointed_etale_diagram_pullback {X0 S0 Y T U0 V0 X S X' S' : Scheme.{u}} (f0 : X0 ⟶ S0) (y : Y ⟶ T) (p0 : U0 ⟶ X0) (e0 : V0 ⟶ S0) [Etale p0] [Etale e0] (w0 : U0 ⟶ V0) (τ0 : V0 ⟶ T) (m0 : U0 ⟶ pullback y τ0) [Etale m0] (hw0 : w0 ≫ e0 = p0 ≫ f0) (hm0 : m0 ≫ pullback.snd y τ0 = w0) (u0 : U0) (f : X ⟶ S) (iX : X' ⟶ X) (iS : S' ⟶ S) [IsOpenImmersion iX] [IsOpenImmersion iS] (f' : X' ⟶ S') (hf' : f' ≫ iS = iX ≫ f) (c : S' ⟶ S0) (α : X' ≅ pullback f0 c) (hα : α.hom ≫ pullback.snd f0 c = f') (x : X') (hx : (α.hom ≫ pullback.fst f0 c) x = p0 u0) : Etale (pullback.snd e0 c ≫ iS) ∧ Etale (pullback.snd p0 (α.hom ≫ pullback.fst f0 c) ≫ iX) ∧ ∃ (β : pullback p0 (α.hom ≫ pullback.fst f0 c) ≅ pullback (p0 ≫ f0) c) (γ : pullback (p0 ≫ f0) c ≅ pullback w0 (pullback.fst e0 c)) (w : pullback p0 (α.hom ≫ pullback.fst f0 c) ⟶ pullback e0 c) (m : pullback p0 (α.hom ≫ pullback.fst f0 c) ⟶ pullback y (pullback.fst e0 c ≫ τ0)) (r : pullback y (pullback.fst e0 c ≫ τ0) ⟶ pullback y τ0), β.hom ≫ pullback.fst (p0 ≫ f0) c = pullback.fst p0 (α.hom ≫ pullback.fst f0 c) ∧ β.hom ≫ pullback.snd (p0 ≫ f0) c = pullback.snd p0 (α.hom ≫ pullback.fst f0 c) ≫ f' ∧ γ.hom ≫ pullback.fst w0 (pullback.fst e0 c) = pullback.fst (p0 ≫ f0) c ∧ γ.hom ≫ pullback.snd w0 (pullback.fst e0 c) ≫ pullback.snd e0 c = pullback.snd (p0 ≫ f0) c ∧ w = β.hom ≫ γ.hom ≫ pullback.snd w0 (pullback.fst e0 c) ∧ Etale m ∧ w ≫ pullback.snd e0 c ≫ iS = pullback.snd p0 (α.hom ≫ pullback.fst f0 c) ≫ iX ≫ f ∧ m ≫ pullback.snd y (pullback.fst e0 c ≫ τ0) = w ∧ m ≫ pullback.fst y (pullback.fst e0 c ≫ τ0) = pullback.fst p0 (α.hom ≫ pullback.fst f0 c) ≫ m0 ≫ pullback.fst y τ0 ∧ r ≫ pullback.fst y τ0 = pullback.fst y (pullback.fst e0 c ≫ τ0) ∧ r ≫ pullback.snd y τ0 = pullback.snd y (pullback.fst e0 c ≫ τ0) ≫ pullback.fst e0 c ∧ IsPullback (pullback.fst p0 (α.hom ≫ pullback.fst f0 c)) m m0 r ∧ (∃ z : ↥(pullback p0 (α.hom ≫ pullback.fst f0 c)), pullback.fst p0 (α.hom ≫ pullback.fst f0 c) z = u0 ∧ pullback.snd p0 (α.hom ≫ pullback.fst f0 c) z = x ∧ (pullback.snd p0 (α.hom ≫ pullback.fst f0 c) ≫ iX) z = iX x) ∧ (∀ a : T.presheaf.obj (Opposite.op ⊤), (pullback.fst e0 c).appTop (τ0.appTop a) = (pullback.fst e0 c ≫ τ0).appTop a)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf6bee7b1",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read the node, its 4 stmt_deps (pullback/fst/snd, Scheme/Hom, Etale, IsOpenImmersion; all existing Mathlib), Stacks curves.tex:5077 (0CBY, first proof, first paragraph), the module and report.md. Hypotheses match exactly: étale p0/e0/m0, hw0, hm0, open immersions iX/iS with restriction f', S°-iso α with hα, hx: q x = p0 u0; no extra assumptions, single universe u, all variables bound. Conclusion: e and p étale; canonical β and γ, each fixed by its projection equations (γ's V0-component is forced); w = β≫γ≫snd; m étale with pr_V m = w and pr_Y m = a≫m0≫pr_Y; r fixed by its projections; IsPullback a m m0 r (m is the base change of m0); e∘w = f∘p; a point z over u0 and x with p z = iX x; h = τ*a via appTop. None weaker or stronger than the node. Edge cases (empty opens/schemes, identity base change) covered. No defs or new nodes, sorry only, source and blueprint docstrings plus the 6-step plan, lean.statement verbatim, live node unchanged except lean, nothing landed under the name. Not recompiled (no change). No findings."
+ }
+}

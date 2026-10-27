@@ -16,20 +16,23 @@
   "place": "the corresponding isolated parent-proof steps"
  },
  "stmt_deps": [
-  "def-coefficient-twists-detailed",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof": [
   {
    "text": "a rank-one trivialization over the constant coefficient ring is a constant\nrank-one module model; hence the line is locally constant. Pull a trivializing cover\nback to each member of a constructible stratification and refine its locally constant\nmodels. The tensor then has model M tensor A, canonically isomorphic to M. Thus it\nhas the same finite stalks and the same finite partition, including on the empty scheme.\nFor Tor amplitude choose flat-term K-flat models P for K and Q for a test module M.\nTensor by the line is exact, so it preserves acyclic complexes and the vanishing of\ncohomology in each degree. Associativity and symmetry identify\n(P tensor L) tensor Q with (P tensor Q) tensor L. Tensor by L preserves the direct\nsums in total tensor, being a left adjoint. The complex P tensor L is still K-flat\nand has flat terms: its tensor with an acyclic complex is an exact line twist of\nan acyclic tensor. Consequently this rebracketing computes both derived tensors.\nApply the assumed Tor interval of K to M, then exact line tensor; the same ordered\ninterval works for all module sheaves M, with no constructibility assumption on M.",
    "uses": [
-    "def-coefficient-twists-detailed",
     "def-weil-finite-torsion-constructibility",
     "def-weil-finite-tor-amplitude",
     "lem-pc-sheaf-modules-tensor-closed",
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "lem-route-site-tensor-second-map-naturality"
    ],
    "elementary": false,
    "source": {
@@ -39,17 +42,21 @@
   }
  ],
  "proof_deps": [
-  "def-coefficient-twists-detailed",
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude",
   "lem-pc-sheaf-modules-tensor-closed",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-route-site-tensor-second-map-naturality",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "R2",
+  "date": "2026-10-26",
   "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
-  "place": "parent proof, isolated intermediate interface"
+  "place": "Keep the existing local-line argument and proved Lean theorem; correct its dependency metadata to the generic sheaf tensor constructions actually used."
  },
  "mathlib_searches": [
   {
@@ -117,14 +124,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G5",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261020T051323-L-1634726",
+  "landing": "20261026T002350-L-80243",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

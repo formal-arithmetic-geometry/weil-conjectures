@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-finite-intrinsic-verdier-bounds",
+ "kind": "statement",
+ "title": "Finite intrinsic Verdier preservation with the sharp interval",
+ "statement": "Fix a finite-field datum D, prime l different from its characteristic, a finite extension E of Q_l, and a separated finite-type scheme X over D.k. At index n (coefficient exponent n+1), let M be an intrinsic bounded constructible complex with Tor amplitude [a,b], and let dim X <= d. The actual ambient derived internal Hom from M into integralDualizingFiniteTerm is intrinsic bounded constructible, has Tor amplitude [-b-2d,-a], and has cohomological support in that same interval. This is a single finite-level result, with no integral completeness assumption.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "First paragraph: finite constructibility and uniform interval."
+ },
+ "stmt_deps": [
+  "def-sf-integral-verdier-models",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "prop-coef-integral-dualizing",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Use the constructible descent and interval reflection clauses of coefFiniteHomSiteDescent to choose an etale finite-Tor origin with the given interval.",
+   "uses": [
+    "lem-coef-finite-hom-site-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The etale unit is finite-Tor constructible, hence so is its geometric dualizing complex. Apply verdier_preservation_strata to the etale origin and supplied dimension bound.",
+   "uses": [
+    "thm-weil-etale-geometric-biduality",
+    "lem-weil-verdier-preservation-strata",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized site Hom comparison and finiteDualizingOrigin, composing with the exact-functor composition isomorphism, to identify the intrinsic dual with the comparison image of the etale dual. Transport constructibility and Tor amplitude through this isomorphism.",
+   "uses": [
+    "lem-coef-finite-hom-site-descent",
+    "lem-coef-finite-dualizing",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite-coefficient flat-model theorem to choose a complex with terms zero outside the desired interval. Its homology vanishes there, and the homology localization comparison transfers this vanishing to the derived dual.",
+   "uses": [
+    "lem-sf-flat-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-hom-site-descent",
+  "thm-weil-etale-geometric-biduality",
+  "lem-weil-verdier-preservation-strata",
+  "lem-weil-structure-direct-images-constructible",
+  "lem-coef-finite-dualizing",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sf-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "First paragraph: finite constructibility and uniform interval."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SignedSymmetry|finiteIntrinsicVerdier|reductionPairing|ringedSiteBidual",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\", \"IsIso\", \"bidual\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent signed derived tensor presentations and evaluation naturality; intrinsic finite Verdier Tor bounds and biduality; compatibility of scalar reduction with evaluation",
+   "results": "8 hits: Module.Dual.eval_naturality, contractLeft, DFinsupp.comul_comp_lapply, dualTensorHomEquiv, MvPolynomial.scalarRTensor_apply_tmul_apply, LinearMap.IsPerfPair.dualEval, FGModuleCat.FGModuleCatEvaluation, PiTensorProduct.dualDistrib_apply",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralVerdier",
+  "date": "2026-10-25",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "First paragraph: finite constructibility and uniform interval.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteIntrinsicVerdierBounds",
+  "file": "lean/Sheaf/SixFunctors/FiniteIntrinsicVerdierBounds.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.finiteIntrinsicVerdier_bounds",
+  "statement": "theorem finiteIntrinsicVerdier_bounds (n : ℕ)\n    (M : DerivedCategory (scalarReductionTarget.{u, u} l E X n))\n    (hM : intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) X M)\n    (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    (a b : ℤ) (hTor : HasProEtaleTorAmplitude X\n      (Padic.coefficientExtensionRing l E (n + 1)) M a b) :\n    let N := (finiteDual l E X n (integralDualizingFiniteTerm l E D X n)).obj (op M)\n    intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) X N ∧\n      HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))\n        N (-b - 2 * (d : ℤ)) (-a) ∧\n      proEtaleCohomologicalSupport N ⊆ Set.Icc (-b - 2 * (d : ℤ)) (-a)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6b177",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T043424-L-1751131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6b177",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T043424-L-1751131",
+  "kind": "interface",
+  "note": "independent cc review: Item and 6 delivered modules (moved model block diffed against clone 939ea7dd; comparison and integralDerivedReduction body changes checked definitional) with nodes thm-coef-integral-verdier, def-sf-integral-verdier-conclusion-predicate, 5 new nodes (lean.statement = signatures), the two change records and the report; axioms printed; all 18 direct importers compiled against the delivery"
+ }
+}

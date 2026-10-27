@@ -159,7 +159,18 @@
   "thm-sp-grothendieck"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-fullcd-etale-origin",
  "split_report": {
@@ -210,5 +221,40 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-865fa4dc4 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, source passages, and unit/chapter route in full. The finite-field counterexample justifies the explicit source correction; the injective-complex comparison and both implications preserve FullCD’s exact quantifiers. No new nodes, duplicates, cycles, or repairable faults found. Accepted six declared generic tool uses. Detailed checks are in review.md; no target coefficient comparison is inferred from the seeded route."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the setting of [def-weil-full-cohomological-dimension] the condition\n$\\operatorname{FullCD}(p,A;c)$ is equivalent to the following statement: for\nevery object $V\\to Y$ of $Y_{\\Proet}$\n([def-weil-pbc-proetale-site]), every affine weakly contractible object\n$W\\to V$ of $V_{\\Proet}$ and every sheaf $\\mathcal F$ of\n$A$-modules on $\\overline X_{\\Proet}$, with $p_V$ and $(p_V)_*$ as in\nthe derived direct image of [def-weil-pbc-direct-image], one has\n\n$$\nH^r\\bigl((\\overline X\\times_YW)_{\\Proet},\\mathcal F|_{\\overline X\\times_YW}\\bigr)=0\n\\qquad(r\\in\\mathbf Z,\\ r>c),\n$$\n\nthe cohomology being that of the small pro-étale site of the source\n$\\overline X\\times_YV$ base-changed along $W\\to V$, which is\n$\\overline X\\times_YW$.\n\n*The test objects must be weakly contractible.* The same vanishing over\nevery object $V\\to Y$ of $Y_{\\Proet}$, with $\\overline X\\times_YV$ in\nplace of $\\overline X\\times_YW$, is not equivalent to\n$\\operatorname{FullCD}(p,A;c)$: for $p=\\mathrm{id}_Y$ the higher direct\nimages vanish, so $\\operatorname{FullCD}(\\mathrm{id}_Y,A;0)$ holds, while\n$H^r(V_{\\Proet},\\mathcal F|_V)\\neq0$ for some $r>0$ in general (for\ninstance $V=Y$ a smooth projective connected curve over $\\overline{\\mathbf F}_q$\nand $\\mathcal F$ the constant sheaf $A$, with\n$H^2(Y_{\\Proet},A)\\cong H^2(Y_{\\Et},A)\\cong A(-1)\\neq0$). The Leray argument of\nthe proof collapses only over weakly contractible bases.",
+  "proof": [
+   {
+    "text": "*Auxiliary fact.* Let $T$ be a scheme, let $W\\to T$ be an object of\n$T_{\\Proet}$ every pro-étale covering family of which contains a member\nadmitting a section – a weakly contractible object, the objects whose\nexistence in abundance is Stacks Project, Pro-étale Cohomology, Lemma\n61.13.4, [Tag 0990](https://stacks.math.columbia.edu/tag/0990), and\nwhich are the ones used in [lem-sf-proetale-vanishing-detection]. Then\n$H^q(W,\\mathcal G)=0$ for every $q>0$ and every sheaf $\\mathcal G$ of\n$A$-modules on $T_{\\Proet}$: the functor\n$\\mathcal G\\mapsto\\mathcal G(W)$ is left exact, and it is right exact\nbecause for a surjection $\\mathcal G\\to\\mathcal G'$ and a section of\n$\\mathcal G'$ over $W$ there is a covering family of $W$ on which the\nsection lifts, and one of its members admits a section $W\\to W_i$ along\nwhich the lift pulls back. Hence the global-sections functor of the site\nover $W$ is exact and its higher derived functors vanish.",
+    "uses": [
+     "lem-sf-proetale-vanishing-detection"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The Leray identification.* Fix an object $V\\to Y$ of $Y_{\\Proet}$, a sheaf\n$\\mathcal F$ of $A$-modules on $\\overline X_{\\Proet}$, and put\n$\\mathcal Q^r=\\mathcal H^r(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV}))$\n([def-weil-derived-cohomology-sheaves]). For an object $W\\to V$ of\n$V_{\\Proet}$ the sections of $(p_V)_*\\mathcal G$ over $W$ are the sections of\n$\\mathcal G$ over $\\overline X\\times_VW=\\overline X\\times_YW$, so\n$\\Gamma\\bigl((\\overline X\\times_YW)_{\\Proet},-\\bigr)=\\Gamma\\bigl(W,-\\bigr)\\circ(p_V)_*$\non sheaves on $(\\overline X\\times_YV)_{\\Proet}$, and the Leray spectral\nsequence of this composite, which exists by [thm-sp-grothendieck], has\n$E_2^{p,q}=H^p\\bigl(W,\\mathcal Q^q\\bigr)$. If $W$ is weakly contractible,\nthe auxiliary fact (with $T=V$) kills the terms with $p>0$, so the spectral\nsequence collapses at $p=0$:\n\n$$\nH^r\\bigl((\\overline X\\times_YW)_{\\Proet},\\mathcal F|_{\\overline X\\times_YW}\\bigr)\n\\cong\\mathcal Q^r(W).\n$$\n\nFor a general object $W$ the terms with $p>0$ survive, which is why the\nstatement only tests weakly contractible $W$ (for $p=\\mathrm{id}_Y$ and\n$W=V$ the left side is $H^r(V_{\\Proet},\\mathcal F|_V)$ while $\\mathcal Q^r=0$\nfor $r>0$).",
+    "uses": [
+     "def-weil-derived-cohomology-sheaves",
+     "thm-sp-grothendieck"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The condition implies the vanishing.* Assume\n$\\operatorname{FullCD}(p,A;c)$. By its relative clause $\\mathcal Q^r=0$ for\n$r>c$, so by the identification\n$H^r\\bigl((\\overline X\\times_YW)_{\\Proet},\\mathcal F|_{\\overline X\\times_YW}\\bigr)=\\mathcal Q^r(W)=0$\nfor $r>c$ and every affine weakly contractible $W\\to V$.\n*The vanishing implies the condition.* Assume the vanishing of the\nstatement and fix $V\\to Y$ and $\\mathcal F$. For every affine weakly\ncontractible object $W\\to V$ of $V_{\\Proet}$ the identification gives\n$\\mathcal Q^r(W)=0$ for $r>c$. The affine weakly\ncontractible objects of $V_{\\Proet}$ detect the vanishing of a sheaf by\n[lem-sf-proetale-vanishing-detection](i), so $\\mathcal Q^r=0$ for\n$r>c$. As $V$ was arbitrary this is the relative clause of\n$\\operatorname{FullCD}(p,A;c)$, and $V=Y$ gives the absolute clause; this is\nalso the form of the test recorded in\n[cor-sf-fullcd-weakly-contractible-test].",
+    "uses": [
+     "lem-sf-proetale-vanishing-detection",
+     "cor-sf-fullcd-weakly-contractible-test"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

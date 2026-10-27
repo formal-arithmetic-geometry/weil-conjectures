@@ -1,0 +1,119 @@
+{
+ "id": "lem-diagonal-completed-ordinary-square",
+ "kind": "statement",
+ "title": "Ordinary direct image under completed coefficient realizations",
+ "statement": "For prime l, any scheme morphism f:X to S and any two CompletedRealizations eX,eS of [def-sfb-diagonal-coefficient-reference], there exists a CompletedOrdinarySquare l f eX eS of [lem-diagonal-completed-push-square]. Its natural isomorphism from completed direct image followed by eS to eX followed by condensed direct image is normalized by the given underlying-sheaf comparisons. No derived model, line class or supported source is asserted.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-diagonal-completed-push-square"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1); initial coefficient and supported-source identification, expanded in lem-diagonal-completed-frame proof"
+ },
+ "proof": [
+  {
+   "text": "Define the underlying isomorphism by eS.underlying at the completed direct image, followed by direct image of the inverse of eX.underlying. For a local condensed coefficient a, pull it back through the normalized regular-module isomorphism bS. Apply the single-site action identity at S and X. The coefficient-only compatibility identifies the two scalar sections, and the explicit completed direct-image action is the action of a times one on the source module. The sectionwise tensor comparison is jointly detecting, so these identities prove that the underlying isomorphism is linear.",
+   "uses": [
+    "lem-sfb-diagonal-completed-section-action",
+    "lem-sfb-diagonal-completed-scalar-push",
+    "lem-sfb-diagonal-completed-push-action"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the underlying isomorphisms as internal module isomorphisms. Naturality follows by faithfulness of forgetting and the naturality of the two underlying comparisons. The normalization follows by functoriality and cancellation of eX.underlying.inv against eX.underlying.hom.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-completed-section-action",
+  "lem-sfb-diagonal-completed-scalar-push",
+  "lem-sfb-diagonal-completed-push-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient/direct-image identification",
+  "note": "Explicit construction and proof from two strictly smaller statements: a one-site action identity and a coefficient-only direct-image identity. This is a decomposition, not net hole closure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between modules over isomorphic ring sheaves preserves direct images and the canonical derived unit on acyclic objects",
+   "results": "Eight hits, including ModuleCat.restrictScalarsEquivalenceOfRingEquiv and SheafOfModules.pushforwardSections_unitHomEquiv; no complete normalized sheaf comparison.",
+   "date": "2026-10-26",
+   "verdict": "Existing scalar and module APIs are tools; the normalized coefficient statements are absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence commuting with ordinary direct image transports its normalized acyclic degree zero supported source through the derived functor universal unit",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactors, mapDerivedCategorySingleFunctor and Abelian.Ext.mapExactFunctor_hom. No supported-source or completed-coefficient existence theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing exact-derived and single-object comparison APIs for the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "CompletedRealization|CompletedOrdinarySquare|NormalizedSource|restrictScalarsEquivalence",
+   "results": "Local rg of both library roots found the definitions and the original frame hole, but no realization or ordinary-square existence theorem. Mathlib supplies general scalar restriction and exact-derived APIs. DAG search found no duplicate normalized comparison statement.",
+   "date": "2026-10-26",
+   "verdict": "These separate construction steps are not already declared."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCompletedFrame",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial coefficient and supported-source identification",
+   "via": [
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientOrdinarySquare",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientOrdinarySquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficientOrdinarySquare_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficientOrdinarySquare_exists"
+  ],
+  "statement": "theorem completedCoefficientOrdinarySquare_exists (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (eX : CompletedRealization l X) (eS : CompletedRealization l S) :\n    Nonempty (CompletedOrdinarySquare l f eX eS)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T183249-L-3697987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T222802-L-695899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

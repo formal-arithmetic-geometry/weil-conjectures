@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-local-homology-models",
+ "kind": "statement",
+ "title": "Finite bounded local algebraic models imply controlled cohomology",
+ "statement": "Let $X,B,R,\\phi,C,K,V,a,b$ and the local homology model predicate be as defined in [def-weil-pbc-finite-coefficient-local-homology-models]. Suppose $B$ is a finite commutative ring and the actual constant module functor preserves zero morphisms. If the predicate holds for $K$, then $H^q(K)|_V=0$ for every $q<a$ or $b<q$. Moreover, for each $q$ and each etale $W\\to V$, there is a covering sieve on $W$ on whose charts $Z$ the restriction $H^q(K)|_Z$ is isomorphic to $C(N)|_Z$ for some finitely generated $B$-module $N$.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-coefficient-local-homology-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094H and 094I: finite algebraic homology and descent of the cohomological bounds."
+ },
+ "proof": [
+  {
+   "text": "For an algebraic model P, finite generation over the finite ring makes each term a finite set. Its cycles inject into its degree-q term, and homology is a quotient of the cycles. Thus algebraic homology is a finite set and hence a finitely generated B-module.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-local-homology-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Outside the support, the degree-q term and hence its homology are zero. Apply the additive realization and slice restriction, and use the model isomorphism to obtain zero on each chart.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-local-homology-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Push the etale covering sieve forward to the pro-etale site. Over any object of the slice over V, pull back this sieve. Each covering arrow factors through a zero chart; evaluating that zero restriction makes the section vanish. Sheaf separatedness now implies global slice vanishing. For the local finite model take N to be the finite algebraic homology established above.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-local-homology-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-coefficient-local-homology-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094H and 094I: finite algebraic homology and descent of the cohomological bounds."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite modules over a finite ring has finite homology, and exact constant sheaf realization preserves its homology",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.ShortComplex.Exact.ab_finite; CompHausLike.LocallyConstantModule.functor; Condensed.finFree; Condensed.instAB5CondensedMod; TopModuleCat.instCategoryWithHomology; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+   "date": "2026-10-27",
+   "verdict": "The generic exact-functor and homology APIs do not package bounded finite algebraic local models and etale-to-pro-etale slice zero detection. Reuse those APIs in the proved general argument."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*tensor.*triangle|tensor.*kernel.*triangle|restriction.*homology",
+   "results": "19 hits: Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean",
+   "date": "2026-10-27",
+   "verdict": "The generic exact-functor and homology APIs do not package bounded finite algebraic local models and etale-to-pro-etale slice zero detection. Reuse those APIs in the proved general argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.mapHomologyIso; CategoryTheory.ShortComplex.mapHomologyIso'; CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso; CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq; CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq; CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality; CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-27",
+   "verdict": "The generic exact-functor and homology APIs do not package bounded finite algebraic local models and etale-to-pro-etale slice zero detection. Reuse those APIs in the proved general argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of a complex with the kernel of a quotient of coefficient rings gives a distinguished triangle with restriction of the previous derived scalar extension",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; DerivedCategory.triangleOfSESδ; CategoryTheory.Tor_obj; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-27",
+   "verdict": "The generic exact-functor and homology APIs do not package bounded finite algebraic local models and etale-to-pro-etale slice zero detection. Reuse those APIs in the proved general argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite modules over a finite ring has finite homology and exact functors preserve homology",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomology_of_map_exact; CategoryTheory.Functor.PreservesHomology; CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf; CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf; CategoryTheory.Functor.exact_tfae; CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology; CategoryTheory.Functor.preservesHomologyOfExact; CategoryTheory.ShortComplex.hasLeftHomology_of_preserves",
+   "date": "2026-10-27",
+   "verdict": "The generic exact-functor and homology APIs do not package bounded finite algebraic local models and etale-to-pro-etale slice zero detection. Reuse those APIs in the proved general argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientCohomologyFiltrationTriangle",
+  "date": "2026-10-27",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 094H and 094I: finite algebraic homology and descent of the cohomological bounds.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-cohomology-filtration-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientLocalHomologyModels",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientLocalHomologyModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_local_homology_models",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteCoefficient_local_homology_models"
+  ],
+  "statement": "theorem finiteCoefficient_local_homology_models\n    (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]\n    [(koszulConstantFunctor X B).PreservesZeroMorphisms]\n    {R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}\n    (φ : adicConstantRing X B ⟶ R)\n    (K : DerivedCategory (SheafOfModules.{t + 1}\n      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)))\n    (V : X.Etale) (a b : ℤ)\n    (h : FiniteCoefficientLocalHomologyModels X B φ K V a b) :\n    (∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((SheafOfModules.overFunctor _ ((toProEt X).obj V)).obj\n        ((DerivedCategory.homologyFunctor _ q).obj K))) ∧\n    DerivedCategory.homologyProperty\n      (fun F ↦ ∀ (W : X.Etale) (_g : W ⟶ V),\n        ∃ S : Sieve W, S ∈ X.smallEtaleTopology W ∧\n          ∀ (Z : X.Etale) (f : Z ⟶ W), S f →\n            ∃ N : ModuleCat.{t} B, Module.Finite B N ∧ Nonempty\n              ((SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj F ≅\n                (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n                  ((finiteCoefficientConstantFunctor X B φ).obj N))) K",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T112405-L-1578179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T112405-L-1578179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

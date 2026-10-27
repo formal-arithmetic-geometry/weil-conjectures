@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-integral-open-reduction-quotient-square",
+ "kind": "statement",
+ "title": "Open reduction respects the canonical consecutive quotient arrows",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and independent site and coefficient universes [def-weil-l-adic-coefficient-extension]. Let $j:X\\hookrightarrow V$ be an open immersion of schemes [def-weil-scheme-morphism-properties]. Write $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$ and $\\widehat R_W=\\lim_n B_{W,n}$ for $W=X,V$ [def-weil-completed-integral-coefficients], and $S_n^W$ for restriction from $B_{W,n}$-modules to $B_{W,n+1}$-modules along the actual quotient [def-coef-normalized-dvr-tower]. Fix the slice transport and exact open operations $o$, coefficient reduction calculi $S_V,S_X$, generator-normalized tensor comparison $\\theta$, and strict normalized comparison $r$ of [lem-sf-integral-open-reduction-comparison]. Let $J_n$ denote the actual finite extension by zero and $j_!$ the completed extension. There exist natural isomorphisms $e_n:S_n^X J_{n+1}\\cong J_n S_n^V$ in diagrammatic composition order, each sending the generator $[x]_a$ in the extension over $B_{V,n+1}$ to the generator with the same section in the extension over $B_{V,n}$. For every derived-complete $K\\in D(\\widehat R_X)$ [def-weil-derived-complete], set $L=j_!K$ and let $K_n,L_n$ be the derived finite reductions. Let $d^W_n(H):H_{n+1}\\to S_n^W H_n$ be the transpose of the level-$n$ scalar-extension unit followed by the inverse of the canonical successive-restriction comparison [def-weil-integral-derived-reduction, def-weil-integral-derived-restriction-of-scalars]. Let $\\alpha_n:L_n\\cong J_nK_n$ be evaluation of $r$ through the two reduction evaluations and the canonical exact open-system evaluation [def-trf-compact-support-system-evaluation-diagram]. Then, in $D(B_{V,n+1})$, $d^V_n(L)\\,S_n^V(\\alpha_n)=\\alpha_{n+1}\\,J_{n+1}(d^X_n(K))\\,D(e_n)_{K_n}$, where $D(e_n)$ is the standard exact localization square. The assertion concerns only the open extension and its actual quotient arrows; it imposes no proper morphism or compactification.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0GL1, lemma-j-shriek-and-tensor. Agent-formulated consecutive-quotient normalization of the strict comparison recorded in lem-sf-integral-open-reduction-comparison, expanding parent proof Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-coef-normalized-dvr-tower",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "def-trf-compact-support-system-evaluation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the generator-normalized finite scalar restriction isomorphisms and their quotient square on explicit K-flat tensor models.",
+   "uses": [
+    "lem-sf-integral-open-tensor-quotient-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution Q of a representative of K. Its localized quasi-isomorphism gives Q(Q) isomorphic to K. Transport the defining distinguished Roos triangle along this isomorphism, so Q(Q) is complete.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the strict-model finite-component identification to Q and its completeness. It supplies K-flatness of the open extension and identifies the actual alpha_n with the explicit beta_n(Q), at both consecutive levels. Substitute these equalities into the tensor-model quotient square.",
+   "uses": [
+    "lem-sf-integral-open-tensor-representative"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both sides of the quotient square are natural in the complete input: scalar quotient maps are adjunction-unit transposes, evaluated r and the reduction/open-evaluation comparisons are natural, and the derived restriction square is natural. Precompose with finite reduction of j_! of the representative isomorphism, apply those naturality equations and the established square for Q(Q), and cancel this isomorphism. This gives the asserted square for K with the original ordinary isomorphisms and generator equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-open-tensor-quotient-model",
+  "lem-pc-kflat-resolution",
+  "lem-sf-integral-open-tensor-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0GL1, lemma-j-shriek-and-tensor. Agent-formulated consecutive-quotient normalization of the strict comparison recorded in lem-sf-integral-open-reduction-comparison, expanding parent proof Step 1. T3: explicit tensor-model quotient square, finite strict-model component identification, and proved resolution/naturality transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension by zero commutes with coefficient quotients, compatibly with the adjunction units and reduction transitions",
+   "results": "8 hits: Adjunction.derivedη_fac_app_assoc, derivedη, derivedε, DerivedCategory.instHasZeroObject, cochainsFunctor zero morphisms, ProjectiveResolution.extEquivCohomologyClass_zero, InjectiveResolution.extEquivCohomologyClass_zero, HomologicalComplex.extend.d_none_eq_zero. Generic derived adjunctions and zero maps, no normalized open quotient square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrictScalars\"",
+   "results": "12 hits concerning PresheafOfModules restrictScalars, its module objects, faithfulness, additivity, limits and colimits. None states the open-extension derived quotient square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|localizedSystemExtension).*restrictScalars|restrictScalars.*(extensionByZero|localizedSystemExtension)",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompactSupportProperImageTower",
+  "date": "2026-10-25",
+  "group": "S6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Integral construction: the specified compact-support quotient transitions equal those for the proper image after open extension, parent Step 1, the strict open-comparison quotient square.",
+   "via": [
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenReductionQuotientSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenReductionQuotientSquare.lean",
+  "declaration": "WeilConjectures.integralOpenReductionQuotientSquare",
+  "statement": "theorem integralOpenReductionQuotientSquare\n    (SV : CoefficientDerivedSystemCalculus l E V)\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (tensor : IntegralOpenReduction.TensorComparison l E j o)\n    (r : IntegralOpenReduction.Comparison l E j o SV SX tensor) :\n    ∃ ordinary : ∀ n : ℕ,\n      normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n          IntegralOpenReduction.finiteExtension l E j o (n + 1) ≅\n        IntegralOpenReduction.finiteExtension l E j o n ⋙\n          normalizedDVRModuleRes l E V (Nat.le_succ n),\n      (∀ (n : ℕ) (M : normalizedDVRModules l E X n) (W : V.ProEt)\n        (a : W ⟶ IntegralOpenReduction.openObject j),\n        HEq (fun x : ((normalizedDVRModuleRes l E X (Nat.le_succ n)).obj M).val.obj\n            (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) ↦\n          ((ordinary n).hom.app M).val.app (op W)\n            (IntegralOpenReduction.finiteExtensionSection l E j o (n + 1)\n              ((normalizedDVRModuleRes l E X (Nat.le_succ n)).obj M) W a x))\n          (fun x : M.val.obj (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) ↦\n            IntegralOpenReduction.finiteExtensionSection l E j o n M W a x)) ∧\n      let reductionMap (W : Scheme.{t}) (K : DerivedCategory (scalarReductionSource l E W))\n          (n : ℕ) :\n          (coefficientFiniteDerivedExtension l E W (n + 1)).obj K ⟶\n            (normalizedDVRRes l E W (Nat.le_succ n)).obj\n              ((coefficientFiniteDerivedExtension l E W n).obj K) :=\n        ((coefficientFiniteAdjunction l E W (n + 1)).homEquiv _ _).symm\n          ((coefficientFiniteAdjunction l E W n).unit.app K ≫\n            (compactSupportSystemRestrictionComp l E W (Nat.le_succ n)).inv.app\n              ((coefficientFiniteDerivedExtension l E W n).obj K))\n      let alpha (K : (IntegralOpenReduction.complete l E X).FullSubcategory) (n : ℕ) :\n          (coefficientFiniteDerivedExtension l E V n).obj\n              ((IntegralOpenReduction.shriek l E j o).obj K.obj) ≅\n            (compactSupportCanonicalJLevel l E j o n).obj\n              ((coefficientFiniteDerivedExtension l E X n).obj K.obj) :=\n        ((SV.reductionEvaluation n).app ((IntegralOpenReduction.shriek l E j o).obj K.obj)).symm ≪≫\n          (coefficientSequenceDerivedEvaluation l E V n).mapIso (r.r.app K) ≪≫\n          (compactSupportCanonicalJEvaluation l E j o n).app (SX.reduction.obj K.obj) ≪≫\n          (compactSupportCanonicalJLevel l E j o n).mapIso ((SX.reductionEvaluation n).app K.obj)\n      let openRestriction (n : ℕ) :\n          normalizedDVRRes l E X (Nat.le_succ n) ⋙\n              compactSupportCanonicalJLevel l E j o (n + 1) ≅\n            compactSupportCanonicalJLevel l E j o n ⋙\n              normalizedDVRRes l E V (Nat.le_succ n) := by\n        letI := normalizedDVRModuleRes_limits l E X (Nat.le_succ n)\n        letI := normalizedDVRModuleRes_colimits l E X (Nat.le_succ n)\n        letI := normalizedDVRModuleRes_limits l E V (Nat.le_succ n)\n        letI := normalizedDVRModuleRes_colimits l E V (Nat.le_succ n)\n        exact Functor.mapDerivedCategorySquareIso (ordinary n)\n  ∀ (K : (IntegralOpenReduction.complete l E X).FullSubcategory) (n : ℕ),\n    reductionMap V ((IntegralOpenReduction.shriek l E j o).obj K.obj) n ≫\n        (normalizedDVRRes l E V (Nat.le_succ n)).map (alpha K n).hom =\n      (alpha K (n + 1)).hom ≫\n        (compactSupportCanonicalJLevel l E j o (n + 1)).map (reductionMap X K.obj n) ≫\n        (openRestriction n).hom.app\n          ((coefficientFiniteDerivedExtension l E X n).obj K.obj)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a978b",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T050928-L-3874375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T222758-L-695038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

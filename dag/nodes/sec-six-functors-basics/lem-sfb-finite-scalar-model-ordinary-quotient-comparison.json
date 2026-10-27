@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-finite-scalar-model-ordinary-quotient-comparison",
+ "kind": "statement",
+ "title": "Derived-to-ordinary reduction comparison for finite scalar local models",
+ "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_F$ with its $\\ell$-adic topology, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. Let $V$ be any scheme on its small pro-étale site [def-weil-pbc-proetale-site, def-weil-size-convention]. Put $B_V=p_V^*\\underline A$, where the coefficient ring on the point is the condensed ring of continuous $A$-valued functions [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Work with ordinary uncompleted module-object derived categories [sk-def-sfb-module-derived-pushpull]. Let $M$ be a $B_V$-module with a finite constant scalar local model: on a pro-étale cover $\\{U_i\\to V\\}$ it is $B_{U_i}\\otimes_{\\underline A}\\underline{P_i}$ for finitely presented scalar $A$-modules $P_i$ [sk-def-sfb-constructible].\nFor $n\\ge1$ form the strict tower complexes\n$$D_n=[M\\xrightarrow{\\pi^n}M]\\quad\\text{in degrees }-1,0,\\qquad Q_n=(M/\\pi^nM)[0].$$\nThe transition $D_{n+1}\\to D_n$ is $(\\pi,1)$, and that of $Q$ is the actual quotient map [def-weil-inverse-system]. There is a strict map $e:D_\\bullet\\to Q_\\bullet$, zero in degree $-1$ and the quotient in degree $0$. With total right derived inverse limit on strict towers [lem-weil-pbc-ringed-strict-tower-homotopy-limit], the canonical map\n$$R\\varprojlim e:R\\varprojlim_n D_n\\xrightarrow{\\sim}R\\varprojlim_n Q_n$$\nis an isomorphism in the ordinary derived category. It is natural for every actual $B_V$-module map between such models. The augmentation $M[0]\\to D_n$ is the identity in degree $0$; under this isomorphism its derived-limit map is the one induced by the actual quotient augmentation $M[0]\\to Q_n$. Scalar torsion is allowed, with no global bound on the torsion exponents of the local models, and no quasi-compactness, Noetherianity or invertibility of $\\ell$ is assumed. The assertion is a comparison of two limits, not a levelwise identification of derived and ordinary reductions, and does not itself assert completeness of $M$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: passing from integral finite scalar models to their ordinary finite quotients, including torsion models Agent-formulated general lemma extracted from the integral comparison argument."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Work on one member $U_i$ of the model cover, and write $P=P_i$. Finite presentation gives a surjection $v:A^r\\to P$ with $r$ finite. The valuation-ring theorem makes $A$ a DVR. Apply Smith normal form to $N=\\ker v\\subset A^r$: there are bases $e_1,\\ldots,e_r$ of $A^r$ and $w_1,\\ldots,w_s$ of $N$, $s\\le r$, with $w_j=a_je_j$. Each $a_j$ is nonzero because $w_j$ is a basis vector of the submodule. Write $a_j=u_j\\pi^{b_j}$ with $u_j$ a unit and $b_j\\ge0$ by the DVR factorization theorem; rescaling the corresponding basis vector absorbs $u_j$. Thus the specified surjection fits into $0\\to A^s\\xrightarrow{\\operatorname{diag}(\\pi^{b_j})}A^r\\xrightarrow{v}P\\to0$. Taking the cokernel coordinate by coordinate gives $P\\cong A^{r-s}\\oplus\\bigoplus_{j=1}^s A/(\\pi^{b_j})$. A summand with $b_j=0$ is zero; $s=0$ and $r=0$ are allowed.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-saturation-line-smith-normal-form",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion; the existing Smith-normal-form leaf supplies the diagonal bases."
+   }
+  },
+  {
+   "text": "Put $B=B_{U_i}$. The integral quotient normalization states that $B$ is flat over the discrete constant scalar ring sheaf and that multiplication by every positive power of $\\pi$ on $B$ is injective. Use the finite-constant-model meaning of [sk-def-sfb-constructible]: its scalar $A$ and $P$ are constant sheaves acting through the scalar map into $B$. The exact constant finite-free presentation theorem applied to the short exact sequence in step 1 identifies $M|_{U_i}$ with the cokernel of the same diagonal matrix over $B$. Consequently $M|_{U_i}\\cong B^{r-s}\\oplus\\bigoplus_j B/\\pi^{b_j}B$. Let $c_i=\\max(\\{1\\}\\cup\\{b_j\\})$. Every kernel $K_n|_{U_i}=\\ker(\\pi^n:M|_{U_i}\\to M|_{U_i})$ lies in the displayed quotient summands, since the free summand has zero kernel. Those summands are all killed by $\\pi^{c_i}$. Hence $\\pi^{c_i}K_n|_{U_i}=0$ for every $n\\ge1$. The decomposition is used only to establish this bound, not to define any comparison morphism.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sfb-integral-quotient-resolution-normalization",
+    "lem-sfb-constant-finite-free-presentation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat); apply the cited normalized coefficient and finite-presentation statements."
+   }
+  },
+  {
+   "text": "Globally define $K_n=\\ker(\\pi^n:M\\to M)$, with transition multiplication by $\\pi$. This is well defined since $\\pi^n(\\pi x)=\\pi^{n+1}x$. For the strict map $e_n:D_n\\to Q_n$, the cone convention of [def-weil-abstract-derived-category] gives $C_n=\\operatorname{Cone}(e_n)$ as $[M\\xrightarrow{-\\pi^n}M\\xrightarrow{q_n}M/\\pi^nM]$ in degrees $-2,-1,0$. The inclusion $K_n[2]\\to C_n$ into degree $-2$ is a quasi-isomorphism: its cohomology in degree $-2$ is $K_n$, in degree $-1$ is $\\ker(q_n)/\\pi^nM=0$, and in degree $0$ is $\\operatorname{coker}(q_n)=0$. The cone transition is $(\\pi,1,\\bar q_n)$ in these three degrees. Therefore these inclusions commute strictly with the kernel-tower transitions. In particular a zero transition of the kernel tower gives a zero transition of the cone tower in the derived category. All assertions remain true after exact slice restriction.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sp-slice-restriction-strict-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category); direct calculation with the cone convention and exact restriction of the cited slice theorem."
+   }
+  },
+  {
+   "text": "On the slice at $U_i$, the transition $K_{n+c_i}|_{U_i}\\to K_n|_{U_i}$ is exactly multiplication by $\\pi^{c_i}$, and is zero by step 2. The compatible quasi-isomorphisms in step 3 thus show that $C_{n+c_i}|_{U_i}\\to C_n|_{U_i}$ is zero in the ordinary derived category. Apply the strict-tower homotopy-limit theorem on this small ringed slice site to $e|_{U_i}$. Its cone-tower criterion gives that the actual morphism $R\\varprojlim(e|_{U_i})$ is an isomorphism. This uses derived products as in that theorem, without asserting exactness of ordinary countable products or replacing the derived limit by a termwise limit.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), combined with the pro-zero cone criterion of the cited strict-tower theorem."
+   }
+  },
+  {
+   "text": "The natural slice/strict-derived-limit isomorphism of [lem-sp-slice-restriction-strict-derived-limit], applied to the strict morphism $e$, identifies the restriction of $R\\varprojlim e$ with $R\\varprojlim(e|_{U_i})$. Both its source and target are the ordinary uncompleted derived objects used throughout. The latter map is invertible for every $i$ by step 4. Joint conservativity of pro-étale cover restriction for condensed module complexes therefore makes $R\\varprojlim e$ invertible on $V$. There is no maximum of the $c_i$ in this argument: each is used solely on its own slice. The empty scheme case is covered as well, since cover restriction is jointly conservative there and the module category is zero.",
+   "uses": [
+    "lem-sp-slice-restriction-strict-derived-limit",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5, proof, conservativity of cover restriction; the cited slice theorem supplies compatibility with strict derived inverse limit."
+   }
+  },
+  {
+   "text": "For an actual $B_V$-linear map $f:M\\to M'$, use $(f,f)$ on $D_n$ and the induced quotient map $\\bar f_n$ on $Q_n$. The identities $f\\pi^n=\\pi^nf$, $q'_nf=\\bar f_nq_n$ show that these are chain maps, commute with $(\\pi,1)$ and the quotient transitions, and satisfy $e'_nD_n(f)=Q_n(f)e_n$. Thus they form a commutative square of strict towers. Applying the functor $R\\varprojlim$ gives the asserted naturality of its isomorphism. The chain augmentation $a_n:M[0]\\to D_n$ is the identity in degree $0$ and satisfies $e_na_n=q_n$ exactly. This equality is compatible with transitions, so the same derived functor sends it to the equality of maps from the derived limit of the constant $M[0]$ tower. Precompose with the canonical $M[0]\\to R\\varprojlim\\operatorname{const}(M[0])$, induced by the diagonal/limit adjunction and the right-derived unit. It gives $(R\\varprojlim e)\\,a_D=a_Q$. Thus the compared augmentations are the ones from the actual quotient maps; the proof does not need to identify the derived limit of the constant tower with $M[0]$.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), functorial strict-tower model; explicit chain-map and coaugmentation equalities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-abstract-derived-category",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Agent-written local torsion-kernel argument supporting the integral-model passage beneath det-sf-comp-coherence-refinement (2); the blueprint does not supply this argument. Foundational inputs are the cited existing nodes and Stacks tags."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf with locally bounded uniformizer power torsion has derived inverse limit of derived reductions equal to derived inverse limit of ordinary quotient sheaves",
+   "results": "{\"t\": \"2026-10-23T21:48:12Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf with locally bounded uniformizer power torsion has derived inverse limit of derived reductions equal to derived inverse limit of ordinary quotient sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"localCohomology.isoSelfLERadical\", \"AdicCompletion.factor_evalₐ_eq_eval\", \"localCohomology.ofDiagram\", \"AdicCompletion.factor_eval_eq_evalₐ\", \"localCohomology.ofSelfLERadical\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\"], \"digest\": \"8ab960462ca4db32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar adic completion, group torsion exponents and unrelated derived declarations do not compare strict towers of derived and ordinary sheaf reductions, including their canonical augmentations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For bounded torsion modules the cone of the map from derived adic reductions to ordinary quotients is a pro zero inverse system",
+   "results": "{\"t\": \"2026-10-23T21:48:10Z\", \"tool\": \"leansearch\", \"query\": \"For bounded torsion modules the cone of the map from derived adic reductions to ordinary quotients is a pro zero inverse system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.asLimitCone\", \"AdicCompletion.map_zero\", \"Profinite.lim'\", \"Profinite.asLimit'\", \"AdicCompletion\", \"IsAdicComplete.of_lift\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.of_injective_iff\"], \"digest\": \"7243402a3d4584c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar adic completion, group torsion exponents and unrelated derived declarations do not compare strict towers of derived and ordinary sheaf reductions, including their canonical augmentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"lim\"",
+   "results": "{\"t\": \"2026-10-23T21:48:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"lim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar adic completion, group torsion exponents and unrelated derived declarations do not compare strict towers of derived and ordinary sheaf reductions, including their canonical augmentations"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.?torsion|torsion.*(pro.zero|inverse.limit)|derived.*completion",
+   "results": "{\"t\": \"2026-10-23T21:48:10Z\", \"tool\": \"grep\", \"query\": \"bounded.?torsion|torsion.*(pro.zero|inverse.limit)|derived.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Torsion.lean\", \"Mathlib/GroupTheory/Torsion.lean\", \"Mathlib/Data/ZMod/Basic.lean\"], \"digest\": \"d38a4fb454e3441f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar adic completion, group torsion exponents and unrelated derived declarations do not compare strict towers of derived and ordinary sheaf reductions, including their canonical augmentations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar local models of integral l adic module sheaves are canonically the derived inverse limit of their ordinary quotients not only their derived reductions",
+   "results": "{\"t\": \"2026-10-23T21:50:16Z\", \"tool\": \"leanfinder\", \"query\": \"Finite scalar local models of integral l adic module sheaves are canonically the derived inverse limit of their ordinary quotients not only their derived reductions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.incl\", \"AdicCompletion.of_apply\", \"AdicCompletion.eval\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"IsAdicComplete\", \"AdicCompletion.submodule\", \"AdicCompletion.eval_of\"], \"digest\": \"c061c32b910f9145\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar adic completion, group torsion exponents and unrelated derived declarations do not compare strict towers of derived and ordinary sheaf reductions, including their canonical augmentations"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(pro.zero|inverse.limit)|derived.*completion|strict.*tower",
+   "results": "{\"t\": \"2026-10-23T22:30:10Z\", \"tool\": \"grep\", \"query\": \"torsion.*(pro.zero|inverse.limit)|derived.*completion|strict.*tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\"], \"digest\": \"ddd05ec8e069ad68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary scalar adic completion, limits of sheaves, local cohomology or derived cohomology vanishing; none compares these strict sheaf reduction towers with local torsion bounds and the specified augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a sheaf with locally bounded uniformizer power torsion the inverse limit of the torsion kernel tower with multiplication transitions vanishes",
+   "results": "{\"t\": \"2026-10-23T22:30:10Z\", \"tool\": \"leansearch\", \"query\": \"For a sheaf with locally bounded uniformizer power torsion the inverse limit of the torsion kernel tower with multiplication transitions vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules.hasLimit\", \"SheafOfModules.hasLimitsOfShape\", \"ProfiniteGrp.isIso_toLimit\", \"TopCat.isSheaf_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"SheafOfModules.Presentation.isColimit\", \"TopCat.instHasLimitsOfShapeSheaf\"], \"digest\": \"86d80c000b5d198f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary scalar adic completion, limits of sheaves, local cohomology or derived cohomology vanishing; none compares these strict sheaf reduction towers with local torsion bounds and the specified augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"lim\"",
+   "results": "{\"t\": \"2026-10-23T22:30:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"lim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary scalar adic completion, limits of sheaves, local cohomology or derived cohomology vanishing; none compares these strict sheaf reduction towers with local torsion bounds and the specified augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of derived uniformizer reductions of a locally finitely presented scalar module sheaf equals the derived limit of its ordinary quotients",
+   "results": "{\"t\": \"2026-10-23T22:30:12Z\", \"tool\": \"leanfinder\", \"query\": \"Derived inverse limit of derived uniformizer reductions of a locally finitely presented scalar module sheaf equals the derived limit of its ordinary quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.of_apply\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.eval_of\", \"AdicCompletion.evalₐ_mk\", \"AdicCompletion.eval_comp_of\", \"AdicCompletion\", \"AdicCompletion.factor_evalₐ_eq_eval\", \"AdicCompletion.mk_apply_coe\"], \"digest\": \"7b3ff24d33a9686d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary scalar adic completion, limits of sheaves, local cohomology or derived cohomology vanishing; none compares these strict sheaf reduction towers with local torsion bounds and the specified augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a ringed topos a tower locally killed by a fixed number of transition maps has zero derived inverse limit",
+   "results": "{\"t\": \"2026-10-23T22:30:13Z\", \"tool\": \"leanfinder\", \"query\": \"In a ringed topos a tower locally killed by a fixed number of transition maps has zero derived inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.ofDiagram\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"localCohomology.diagram\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"3abfa39ae0bdac5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary scalar adic completion, limits of sheaves, local cohomology or derived cohomology vanishing; none compares these strict sheaf reduction towers with local torsion bounds and the specified augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.zero|derived.*completion|IsDerivedLimit",
+   "results": "{\"t\": \"2026-10-23T22:32:50Z\", \"tool\": \"grep\", \"query\": \"pro.zero|derived.*completion|IsDerivedLimit\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary scalar adic completion, limits of sheaves, local cohomology or derived cohomology vanishing; none compares these strict sheaf reduction towers with local torsion bounds and the specified augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-integral-model-restriction-tower",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: passing from integral finite scalar models to their ordinary finite quotients, including torsion models",
+   "via": [
+    "lem-sfb-supported-integral-model-restriction-tower",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-scalar-model-ordinary-quotient-comparison",
+  "worker": "stage1",
+  "summary": "Six steps: diagonal scalar presentation over the DVR, local uniform torsion-kernel bound, strict cone/kernel quasi-isomorphism, pro-zero slice comparison, cover-local gluing, and explicit map/augmentation naturality. Reuses existing nodes only. Statement retained; no completeness, quasi-compactness or global torsion bound is introduced.",
+  "blueprint": "Makes precise the integral finite-model comparison used underneath det-sf-comp-coherence-cocycle, Refinement isomorphisms, through det-sf-comp-coherence-refinement (2); the current blueprint contains no explicit proof of this reduction-comparison input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring theorem used only to establish the DVR hypothesis for scalar Smith normal form; no compactification argument is replaced."
+   },
+   {
+    "node": "lem-sfb-integral-quotient-resolution-normalization",
+    "why": "Generic normalized integral coefficient theorem provides flatness over constant scalars and injectivity of powers of the uniformizer on any scheme; no unit statement otherwise provides those facts."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Generic exact constant presentation theorem identifies the local scalar presentation with the same matrix over the coefficient sheaf; it does not replace a compactification step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic strict derived-limit functor and pro-zero cone criterion, already needed in the item statement; used without proper-base-change hypotheses."
+   },
+   {
+    "node": "lem-sp-slice-restriction-strict-derived-limit",
+    "why": "Generic ringed-slice theorem permits the comparison to be checked separately on each model slice without a global torsion bound."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic cover-local detection theorem for ordinary condensed module derived categories glues the slice comparisons; no compactification route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sp-slice-restriction-strict-derived-limit",
+  "lem-zl-condensed-cover-restriction-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-af8ff321a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-af8ff321a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all six steps, plus the statement of every cited node. There are no new nodes. The item is still unsplit on live and on side-live, and its statement and stmt_deps are byte-identical to live. There is no repair note, so this is not a re-split. The statement is true and not weakened. I tested P=0, P=A^r, P=A/π^b (where the levelwise comparison fails but the limits agree) and an infinite union with no common exponent. The parent (step 4 of lem-sfb-supported-integral-model-restriction-tower) uses exactly the isomorphism, its compatibility with the augmentations, and naturality. Step 1: finite presentation, the DVR theorem (clauses 2 and 4), the Smith normal form leaf and the unit-times-uniformizer-power leaf (Noetherian local domain with m=πB) give 0→A^s→A^r→P→0 with the diagonal matrix diag(π^{b_j}); a_j≠0 because it multiplies a basis vector. Step 2: the normalization node applied to U_i (B flat over the constant sheaf A, π^j injective) and the constant presentation node on (U_i)_proet give M|U_i ≅ B^{r-s}⊕⊕B/π^{b_j}, which matches the meaning in sk-def-sfb-constructible(1). So π^{c_i} kills K_n|U_i for every n. Step 3: I recomputed the cone with C(f)^r=L^r⊕K^{r+1}, d=[[d_L,f],[0,-d_K]]. It is [M -π^n→ M -q_n→ M/π^n], K_n[2]→C_n is a quasi-isomorphism, and the transitions (π,1,q̄) commute with the kernel transitions. Step 4: on the small slice site, the strict-tower node's cone criterion applies with the transition from n+c_i to n. Step 5: the natural slice/R lim isomorphism, applied to the morphism e, plus cover conservativity for any condensed ring, scheme and pro-étale family; no global torsion bound is used. Step 6: an elementary equality of strict maps gives naturality and (R lim e)a_D=a_Q. Sources checked: Stacks 00PD, 093J, 093M, 0941 and 05RU (tags present, 093J and 0941 text read); HRS Lemma 4.5 (proof, conservativity); the latest blueprint's det-sf-comp-coherence-refinement (2) and the cocycle proof's Refinement isomorphisms paragraph. The blueprint gives no explicit argument, so proof_origin=agent is correct. Duplicate search with rg -L (power-torsion-limit-complete, actual-completed-reduction-reconstruction, principal-reduction-cone-calculus, scalar-model-finite-flat-resolution, finite-scalar-local-model-complete) found no node stating this comparison. All six tool_uses are acceptable as generic tools; the DVR theorem and the strict-tower node are actually on route through units the unit cites. Advisory, as on the PASSed sibling (Q10): the statement names module-object categories, while the strict-tower, slice and conservativity tools are about sheaves of modules over the section ring. The fixed internal/section equivalence identifies them. No SGA source is cited. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteScalarOrdinaryQuotientComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.finiteScalarOrdinaryQuotientComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.constant",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.source",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.powers",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.constantComplex",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.derivedTower",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.quotientTower",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.quotientUnit",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.derivedUnit",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.comparison",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.sourceMap",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.constantMap",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.powers_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.derivedMap",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.quotientMap",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.limitComplex",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.diagonal",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.limitUnit",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.Modules",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.scalar",
+   "AlgebraicGeometry.ProEtale.FiniteScalarOrdinaryComparison.finiteScalarOrdinaryQuotientComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteScalarOrdinaryQuotientComparison.lean",
+  "statement": "theorem finiteScalarOrdinaryQuotientComparison (L : DerivedCategory.{w} (ℕᵒᵖ ⥤ Modules l E V) ⥤ DerivedCategory.{w} (Modules l E V)) (η : limitComplex (A := Modules l E V) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L) [L.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules l E V) (.up ℤ))] : (∀ (M : Modules l E V), HasFiniteConstantLocalModel (IntegralQuotient.integral l E) V M → IsIso (L.map (DerivedCategory.Q.map (comparison (scalar l E V) M)))) ∧ (∀ (M N : Modules l E V), HasFiniteConstantLocalModel (IntegralQuotient.integral l E) V M → HasFiniteConstantLocalModel (IntegralQuotient.integral l E) V N → ∀ f : M ⟶ N, L.map (DerivedCategory.Q.map (derivedMap (scalar l E V) f)) ≫ L.map (DerivedCategory.Q.map (comparison (scalar l E V) N)) = L.map (DerivedCategory.Q.map (comparison (scalar l E V) M)) ≫ L.map (DerivedCategory.Q.map (quotientMap (scalar l E V) f))) ∧ (∀ (M : Modules l E V), HasFiniteConstantLocalModel (IntegralQuotient.integral l E) V M → limitUnit L η M (derivedUnit (scalar l E V) M) ≫ L.map (DerivedCategory.Q.map (comparison (scalar l E V) M)) = limitUnit L η M (quotientUnit (scalar l E V) M))",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The strict source and constant target towers carry one natural scalar-power morphism. Its cone and its categorical cokernel in the abelian tower category give the specified D and Q, including actual quotient transitions. The right-derived functor is quantified with its canonical universal-property unit; no arbitrary comparison map or completeness assumption is used. Generic abelian-category helpers are specialized to the published integral module-object category, retaining the small site universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ead71beba",
+  "group": "N7",
+  "result": "pass",
+  "note": "Snapshot item node differs from side-live base only in lean; statement verbatim; 20 decls listed; docstrings with source+blueprint and 6-step proof plan. H3 clause check: integral = continuous O_F condensed ring, scalar = λ⁻¹≫(π▷M)≫λ with multiplication l E V 0 = π^1; HasFiniteConstantLocalModel recorded predicate; D_n = mappingCone(single₀ powers) = [M -π^{n+1}-> M] with (π,1) transitions; Q_n = levelwise cokernel with actual quotient transitions; comparison = descShortComplex (0, quotient); R lim via L, η, IsRightDerivedFunctor matching the ringedStrictTowerHomotopyLimitIndependentCoefficients interface; conjuncts iso / naturality for all f between models / augmentation via constLimAdj diagonal + η. Edge cases M=0, A^r, A/π^b (b=0), empty V, unbounded local exponents covered. No hollow data; powers_naturality is a named sorried theorem (H5-allowed). Advisory: IntegralQuotient.integral/multiplication owned by def-sfb-integral-quotient-coefficients, not in S1 stmt_deps (precedent advisory); ringedSiteModules vs module-object tools as in S1 review. No fix, no compile."
+ }
+}

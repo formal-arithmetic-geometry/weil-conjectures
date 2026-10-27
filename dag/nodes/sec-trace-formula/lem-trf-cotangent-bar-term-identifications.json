@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-cotangent-bar-term-identifications",
+ "kind": "statement",
+ "title": "Derived cotangent identifications of the three polynomial-pair bar terms",
+ "statement": "Let $A\\to B\\to C$ be homomorphisms of commutative rings. On the small identity-cover polynomial presentation sites $\\mathcal C_1=\\mathcal C_{B/A}$, $\\mathcal C_2=\\mathcal C_{C/A}$, $\\mathcal C_3=\\mathcal C_{C/B}$ and pair site $\\mathcal E=\\mathcal C_{C/B/A}$, put $F_1(P)=\\Omega_{P/A}\\otimes_P B$, $F_2(Q)=\\Omega_{Q/A}\\otimes_Q C$, $F_3(S)=\\Omega_{S/B}\\otimes_S C$, and $M_1=g_1^{-1}F_1\\otimes_B C$, $M_2=g_2^{-1}F_2$, $M_3=g_3^{-1}F_3$ as in [lem-trf-cotangent-differential-presheaf-ses]. Write $X_i=K_{\\mathcal E}^C(M_i)$ for the category bar complexes [def-trf-derived-colimit-bar-system], regarded in $D(C)$ [def-weil-abstract-derived-category]. Let $c_i$ be the bar reindexing comparisons of [lem-trf-cotangent-lower-shriek] and $\\theta_{T/S}$ the standard cotangent comparisons of [lem-trf-cotangent-sheaf-model]. Each value $F_1(P)$ is a free, hence flat, $B$-module: for $P=A[x_s]$ it is $\\bigoplus_s B\\,\\mathrm dx_s$, and tensoring with this value carries a short exact sequence to its direct sum indexed by $s$. There are canonical isomorphisms in $D(C)$\n$$\\alpha_1:X_1\\xrightarrow{\\sim}L_{B/A}\\otimes_B^{\\mathbf L}C,\\qquad\\alpha_2:X_2\\xrightarrow{\\sim}L_{C/A},\\qquad\\alpha_3:X_3\\xrightarrow{\\sim}L_{C/B}.$$\nPrecisely, $\\alpha_2=\\theta_{C/A}c_2$ and $\\alpha_3=\\theta_{C/B}c_3$. Under the sectionwise equality $M_1=g_1^{-1}(F_1\\otimes_B C)$, $\\alpha_1$ is the composite of $c_1(F_1\\otimes_B C)$, the flat-presheaf bar-tensor comparison of [lem-trf-derived-colimit-change-rings], and $\\theta_{B/A}\\otimes^{\\mathbf L}1$. Its middle comparison identifies $(P_n\\to\\cdots\\to P_0,x\\otimes c)$ with $(P_n\\to\\cdots\\to P_0,x)\\otimes c$. The target $L_{B/A}\\otimes_B^{\\mathbf L}C$ is represented by the termwise tensor with $C$ of the bounded-above free standard differential complex of [lem-trf-cotangent-resolution-coherence]. These assertions hold without flatness of $B\\to C$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QX (proposition-triangle), identification of the three terms using Tags 08QW (lemma-triangle-compute-lower-shriek) and 08PU (lemma-compute-cotangent-complex); sites-cohomology Tag 08Q8 (lemma-change-of-rings), flat-presheaf bar-tensor form."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-differential-presheaf-ses",
+  "def-trf-derived-colimit-bar-system",
+  "def-weil-abstract-derived-category",
+  "lem-trf-cotangent-lower-shriek",
+  "lem-trf-cotangent-sheaf-model",
+  "lem-trf-derived-colimit-change-rings",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "proof": [
+  {
+   "text": "For $P=A[x_s]$, apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] and extend scalars along $P\\to B$. This gives $F_1(P)=\\bigoplus_s B\\,\\mathrm dx_s$, including arbitrary and empty variable sets. Tensoring a short exact sequence with this module gives its direct sum over $s$: injectivity, kernels and surjectivity are checked coordinatewise, with finite support. Thus every value of $F_1$ is flat, with no condition on $B\\to C$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PU (lemma-compute-cotangent-complex), flatness argument; Algebra Tag 00RX (lemma-differentials-polynomial-ring)."
+   }
+  },
+  {
+   "text": "Use the common small skeletons and identity-cover topologies already specified in [lem-trf-cotangent-lower-shriek]. By [lem-trf-derived-colimit-bar], each $X_i$ represents $L\\pi_{\\mathcal E,!}^C M_i$. Precomposition is sectionwise, so at $U$ both $g_1^{-1}(F_1\\otimes_B C)$ and $M_1$ have value $F_1(u_1U)\\otimes_B C$ and restriction $F_1(u_1v)\\otimes1$ for an arrow $v$. Hence these presheaves agree. The lower-shriek node supplies isomorphisms $c_i(K)$ for every degree-zero coefficient presheaf $K$, with bar representative sending the chain $U_\\bullet$ to $u_iU_\\bullet$ and retaining its coefficient.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek); sites-cohomology Tags 08PG/08PH (derived colimit bar model and reindexing)."
+   }
+  },
+  {
+   "text": "Apply the preceding comparisons over the constant coefficient ring $C$ to $K=F_2$ and $K=F_3$. They give $X_2\\simeq L\\pi_{2,!}^C F_2$ and $X_3\\simeq L\\pi_{3,!}^C F_3$. Apply [lem-trf-cotangent-sheaf-model] to the ring maps $A\\to C$ and $B\\to C$. Its canonical isomorphisms have precisely these sources and targets $L_{C/A}$ and $L_{C/B}$. Their composites are therefore the specified $\\alpha_2=\\theta_{C/A}c_2(F_2)$ and $\\alpha_3=\\theta_{C/B}c_3(F_3)$.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-sheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QX (proposition-triangle), second and third terms; Tags 08QW and 08PU."
+   }
+  },
+  {
+   "text": "For the first term apply $c_1$ over $C$ to $F_1\\otimes_B C$. Apply [lem-trf-derived-colimit-change-rings] on $\\mathcal C_1$ with $R=B$, $S=C$, $F=F_1$. The flat-value hypothesis was proved in Step 1, and $F_1[0]$ is bounded above. Thus its flat-presheaf comparison identifies $L\\pi_{1,!}^C(F_1\\otimes_B C)$ with $(L\\pi_{1,!}^B F_1)\\otimes_B^{\\mathbf L}C$. Follow it by the image of $\\theta_{B/A}$ from [lem-trf-cotangent-sheaf-model] under derived extension of scalars. This defines $\\alpha_1$ as the required composite of isomorphisms. The change-of-rings node gives exactly $(P_n\\to\\cdots\\to P_0,x\\otimes c)\\leftrightarrow(P_n\\to\\cdots\\to P_0,x)\\otimes c$ for its middle map and expressly imposes no flatness on $C$ over $B$.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-derived-colimit-change-rings",
+    "lem-trf-cotangent-sheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QX (proposition-triangle), first term; sites-cohomology Tag 08Q8 (lemma-change-of-rings), flat-presheaf bar form."
+   }
+  },
+  {
+   "text": "By [lem-trf-cotangent-resolution-coherence], $L_{B/A}$ is represented by $D=s(\\Omega^1_{P^{\\mathrm{std}}_\\bullet/A}\\otimes_{P^{\\mathrm{std}}_\\bullet}B)$, zero in positive degrees. Every $P^{\\mathrm{std}}_n$ is polynomial over $A$, so [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] makes $D^{-n}=F_1(P^{\\mathrm{std}}_n\\to B)$ free over $B$; Step 1 proves its flatness. Let $\\mathcal T$ be the one-object site whose only covering sieve is the maximal one; it is small in the chosen coefficient universe. By [lem-trf-one-point-derived-ring-identification], evaluation identifies $\\underline B$-module sheaves with $B$-modules, sheaf tensor with ordinary tensor (so the terms of $D$ stay flat), K-flat complexes with K-flat complexes, and $D(\\underline B),D(\\underline C)$ with $D(B),D(C)$; it turns the derived change of rings of [lem-pur-derived-change-of-rings] along $\\underline B\\to\\underline C$ into the ordinary derived scalar extension $-\\otimes_B^{\\mathbf L}C$ used in [lem-trf-derived-colimit-change-rings], with the same resolution computation isomorphisms. Apply [lem-weil-pbc-independent-bounded-flat-kflat] on $\\mathcal T$ with ring $\\underline B$: $D$ is K-flat. Apply [lem-pur-derived-change-of-rings], clause (2), on $\\mathcal T$ with $B\\to C$ and the identity resolution $D\\to D$. It represents $L_{B/A}\\otimes_B^{\\mathbf L}C$ by the termwise tensor $D\\otimes_B C$, as asserted. All three comparisons above use the canonical maps supplied by their cited statements; composition and applying the derived scalar-extension functor preserve isomorphisms.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), specialized to the point; derived change of rings by K-flat models. Cotangent Tags 08PN/08PU identify the standard model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-trf-cotangent-lower-shriek",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-cotangent-sheaf-model",
+  "lem-trf-derived-colimit-change-rings",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-one-point-derived-ring-identification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QX (proposition-triangle), identification of its three terms; Tags 08PU/08QW; sites-cohomology Tags 08Q8/06YQ, with the existing explicit bar-model comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived colimits of polynomial presentation differential presheaves identify canonically with cotangent complexes and the derived scalar extension for a tower of rings",
+   "results": "8 hits; top=['Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.cotangentComplex', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Presentation.differentials.comm₂₃', 'Algebra.Extension.tensorCotangentSpace', 'Algebra.Extension.toKaehler']; note=; digest=4326b29965cd9d98. Full output retained in lem-trf-cotangent-bar-term-identifications.search-0.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.cotangentComplex is a linear map for a single presentation, not the full standard simplicial derived object. Its base-change formulas (Extension/Cotangent/Basic.lean:53-65,98-117) and generic flat tensor exactness do not give these polynomial-pair derived-colimit comparison isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\"",
+   "results": "12 hits; top=['Ideal.Cotangent', 'IsLocalRing.CotangentSpace', 'Ideal.instAddCommGroupCotangent', 'Ideal.instInhabitedCotangent', 'Ideal.instSMulCotangentOfAlgebra', 'IsLocalRing.subsingleton_cotangentSpace_iff', 'Ideal.instModuleCotangentOfAlgebra', 'Ideal.instModuleQuotientCotangent']; note=; digest=25417320754f3cfa. Full output retained in lem-trf-cotangent-bar-term-identifications.search-1.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.cotangentComplex is a linear map for a single presentation, not the full standard simplicial derived object. Its base-change formulas (Extension/Cotangent/Basic.lean:53-65,98-117) and generic flat tensor exactness do not give these polynomial-pair derived-colimit comparison isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(colimit|bar|tensor)|derived.*colimit.*differential [sub=RingTheory]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean', 'Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean']; note=; digest=6dffa014bb5f7d5c. Full output retained in lem-trf-cotangent-bar-term-identifications.search-2.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.cotangentComplex is a linear map for a single presentation, not the full standard simplicial derived object. Its base-change formulas (Extension/Cotangent/Basic.lean:53-65,98-117) and generic flat tensor exactness do not give these polynomial-pair derived-colimit comparison isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of the cotangent complex is computed by the category bar complex of flat polynomial differential presheaves",
+   "results": "8 hits; top=['Module.Flat.rTensor_shortComplex_exact', 'Rep.barComplex', 'PresheafOfModules.HasDifferentials.exists_universal_derivation', 'PresheafOfModules.Derivation', 'Module.Flat.lTensor_shortComplex_exact', \"PresheafOfModules.Derivation'\", \"PresheafOfModules.Derivation'.app\", 'PresheafOfModules.Derivation.ctorIdx']; note=; digest=363c47cf4d2e5456. Full output retained in lem-trf-cotangent-bar-term-identifications.search-3.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.cotangentComplex is a linear map for a single presentation, not the full standard simplicial derived object. Its base-change formulas (Extension/Cotangent/Basic.lean:53-65,98-117) and generic flat tensor exactness do not give these polynomial-pair derived-colimit comparison isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison isomorphism between derived lower shriek of Kahler differentials and standard simplicial cotangent complex with change of coefficient ring",
+   "results": "8 hits; top=['Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Presentation.differentials.comm₁₂', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.Generators.H1Cotangent.δ_comp_equiv', 'KaehlerDifferential.endEquivAuxEquiv']; note=; digest=bb98dec1e82376f5. Full output retained in lem-trf-cotangent-bar-term-identifications.search-4.txt.",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.cotangentComplex is a linear map for a single presentation, not the full standard simplicial derived object. Its base-change formulas (Extension/Cotangent/Basic.lean:53-65,98-117) and generic flat tensor exactness do not give these polynomial-pair derived-colimit comparison isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(colimit|bar|tensor)|derived.*colimit.*differential [sub=RingTheory]",
+   "results": "25 hits; top=['Mathlib/RingTheory/Etale/Descent.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Ideal/CotangentBaseChange.lean', 'Mathlib/RingTheory/Ideal/CotangentBaseChange.lean']; note=; digest=b33ab1dcd9f10c7c. Returned types read; Extension/Cotangent/Basic.lean:53-117 concerns a presentation linear map, Kaehler/Polynomial.lean:60-105 supplies only the existing polynomial-basis leaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of cotangent complex computed by free simplicial polynomial differential complex",
+   "results": "8 hits; top=['HomologicalComplex.tensorObj', 'instFreeMvPolynomialKaehlerDifferential', 'Derivation.tensorProductTo_tmul', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'KaehlerDifferential.D_tensorProductTo', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplex', 'Algebra.Extension.tensorCotangent']; note=; digest=2097544a32f273fc. Returned types read; Extension/Cotangent/Basic.lean:53-117 concerns a presentation linear map, Kaehler/Polynomial.lean:60-105 supplies only the existing polynomial-basis leaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\"",
+   "results": "12 hits; top=['Ideal.Cotangent', 'IsLocalRing.CotangentSpace', 'Ideal.instAddCommGroupCotangent', 'Ideal.instInhabitedCotangent', 'Ideal.instSMulCotangentOfAlgebra', 'IsLocalRing.subsingleton_cotangentSpace_iff', 'Ideal.instModuleCotangentOfAlgebra', 'Ideal.instModuleQuotientCotangent']; note=; digest=25417320754f3cfa. Returned types read; Extension/Cotangent/Basic.lean:53-117 concerns a presentation linear map, Kaehler/Polynomial.lean:60-105 supplies only the existing polynomial-basis leaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived colimit of polynomial Kahler differential presheaf identifies with cotangent complex and derived scalar extension",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplex_mk', 'KaehlerDifferential.D_apply', 'Algebra.Extension.cotangentComplex', 'KaehlerDifferential.D_tensorProductTo', \"PresheafOfModules.DifferentialsConstruction.derivation'\", 'KaehlerDifferential.DLinearMap_apply', \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", 'KaehlerDifferential.endEquivAuxEquiv']; note=; digest=4aaf53823deb417a. Returned types read; Extension/Cotangent/Basic.lean:53-117 concerns a presentation linear map, Kaehler/Polynomial.lean:60-105 supplies only the existing polynomial-basis leaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of category bar homology of flat presheaves with cotangent complexes under change of rings",
+   "results": "8 hits; top=['Algebra.H1Cotangent.map', 'Algebra.Extension.tensorH1Cotangent', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.H1Cotangent.map', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex']; note=; digest=82f49a0246b23ab9. Returned types read; Extension/Cotangent/Basic.lean:53-117 concerns a presentation linear map, Kaehler/Polynomial.lean:60-105 supplies only the existing polynomial-basis leaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-transitivity-triangle",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Re-split component: old step 4: the three specified term comparisons, flat values and the derived scalar-extension model.",
+   "via": [
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-cotangent-bar-term-identifications",
+  "worker": "stage1",
+  "summary": "Q25: assemble all three canonical derived identifications from existing lower-shriek, sheaf-model and flat-presheaf change-of-rings nodes. Prove sectionwise tensor/precomposition equality and flatness of arbitrary polynomial differential values, and justify the standard free model by point-site K-flatness. No new nodes or statement changes.",
+  "blueprint": "Retains the recorded historical support chain from lem-trf-local-term-locality through cotangent transitivity: realizes old transitivity Step 4, its three term comparisons and free scalar-extension model. This auxiliary ring argument does not replace either current sk-i-curve-zero unit step. Whole-blueprint searches for cotangent and bar term found no matching statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic K-flatness of bounded-above flat complexes, applied on the one-object identity-cover site; this unit has no such general result."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic computation of derived scalar extension by a K-flat model on the point; the cotangent unit uses this tool to justify its standard-complex representative."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-7ca5d2307",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-7ca5d2307 (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps, no new nodes. Statement and stmt_deps are identical to the base, where the item was unsplit with an empty proof (created by Q19's re-split of the transitivity triangle; no repair note exists for this item). I read all 8 cited statements, the statement-only deps and the three citers. In Stacks I read cotangent.tex 08QX proposition-triangle (lines 1370-1404), 08QW (1290), 08PU (329) and sites-cohomology 08Q8 (10209). 08Q8's display order does not typecheck, as the report says; the DAG change-rings node states the correctly typed version and the item uses that. The checks: Step 1 gets free values from the polynomial-basis leaf with S=B, and flatness by finite support, including the empty/infinite variable cases and B=0. Step 2: bar theorem plus lower-shriek c_i for any constant R; the sectionwise tensor equality holds because the identity-cover topology makes sheafification trivial. Step 3: c_2/c_3 with R=C composed with sheaf-model θ for A→C and B→C, sources and targets checked. Step 4: change-rings with R=B, S=C, F=F_1[0]; it needs only flat values and no flatness of C over B, and θ_{B/A}⊗^L1 is well typed. No cycle. One fault, C1/C3, in Step 5: it applies the sheaf tools bounded-flat-kflat and lem-pur-derived-change-of-rings on the one-object site, but asserts without citation that its module sheaves are ordinary B-modules. Moving the ordinary complex D, its flatness and K-flatness to that site, and identifying lem-pur's change of rings with ordinary −⊗^L_B C, is exactly the statement of the in-unit node lem-trf-one-point-derived-ring-identification. Sibling nodes lem-trf-cotangent-flat-base-change and lem-trf-tor-independent-cotangent-base-change cite it for the same move, and it has no cycle with the item. The FIX cites it in Step 5 and adds it to uses and proof_deps, so proof_deps is still the union of uses; the step is 1575 characters. Both declared tool uses (independent-bounded-flat-kflat and pur-derived-change-of-rings) are accepted as generic tools. I found no duplicate: the only related node, lem-sfb-standard-sheaf-cotangent-flat-functorial-model, is a sheaf-level node in another unit. same_as=[] is correct. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentBarTermIdentifications",
+  "declaration": "Algebra.CotangentBarTerms.identifications_nonempty",
+  "declarations": [
+   "Algebra.CotangentSheaf.largeModules",
+   "Algebra.CotangentSheaf.largeModules_preservesFiniteLimits",
+   "Algebra.CotangentSheaf.largeModules_preservesFiniteColimits",
+   "Algebra.CotangentSheaf.fullLowerShriek",
+   "Algebra.CotangentSheaf.largeDifferentialComplex",
+   "Algebra.CotangentSheaf.largeCotangent",
+   "Algebra.CotangentSheaf.FullResolutionLift",
+   "Algebra.CotangentSheaf.fullEvaluation",
+   "Algebra.CotangentSheaf.fullEvaluation_additive",
+   "Algebra.CotangentSheaf.fullEvaluationElement",
+   "Algebra.CotangentSheaf.FullPreservesBoundary",
+   "Algebra.CotangentSheaf.FullResolutionComparison",
+   "Algebra.CotangentSheaf.FullDifferentialFormula",
+   "Algebra.CotangentSheaf.FullModel",
+   "Algebra.CotangentSheaf.fullTheta",
+   "Algebra.CotangentSheaf.fullModel_nonempty",
+   "Algebra.CotangentBarTerms.coefficientMap",
+   "Algebra.CotangentBarTerms.first",
+   "Algebra.CotangentBarTerms.second",
+   "Algebra.CotangentBarTerms.third",
+   "Algebra.CotangentBarTerms.barObject",
+   "Algebra.CotangentBarTerms.IsFirstComposite",
+   "Algebra.CotangentBarTerms.Identifications",
+   "Algebra.CotangentBarTerms.identifications_nonempty"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentBarTermIdentifications.lean",
+  "statement": "theorem identifications_nonempty {A B C : CommRingCat.{u}} (f : A ⟶ B) (g : B ⟶ C) (coh : CotangentResolution.Coherence.{u}) (bar : CategoryColimitBarSystem.{u + 1}) (low : LowerShriekData f g bar) (F1 : SiteCoefficients f) (F2 : SiteCoefficients (f ≫ g)) (F3 : SiteCoefficients g) (m1 : FullModel coh bar f F1) (m2 : FullModel coh bar (f ≫ g) F2) (m3 : FullModel coh bar g F3) (change : CategoryColimitChangeRings bar (Site f) (coefficientMap g)) : Identifications f g coh bar low F1 F2 F3 m1 m2 m3 change",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The item owns its full-site comparison helpers largeModules through fullModel_nonempty as well as the bar-term identifications. The helper existence theorem supplies the normalized comparisons needed on the already recorded full presentation sites and SiteCoefficients, with actual ULift coefficient transport; it does not replace the landed CotangentSheafModel/exists_model record or its arbitrary-square and resolution-naturality clauses. Both postponed theorems have source and complete proof docstrings. No construction is chosen from an uncharacterized existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93bfc4206",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 8442c6f6. All 7 stmt_dep JSONs byte-identical to live (cmp), including Q37 lem-trf-cotangent-sheaf-model (CotangentSheafModel/exists_model, 28 decls); item node differs from live only in lean. Repair is option (b) of the return: module = pure concatenation of 8442's CotangentFullSiteModel.lean and the item module (header/imports, one open line, blueprint tags only); 16 full-site helpers plus fullModel_nonempty listed in lean.declarations; no import cycle; no name clash in live/side-live. Item clauses re-checked: M_i via first/second/thirdModule (live defs: sectionwise equality definitional), low.comparison indices 0/1/2 match projections, alpha2/alpha3 = model.inv ≫ c_i ≫ fullTheta, IsFirstComposite with flatBar counit, middle_formula, free/flat/coordinates/tensor_exact, standard representative via point.counit, no flatness of g, no universe restriction. Statement verbatim; all 24 declarations present; exactly 2 sorries (both theorem proofs); docstrings carry source and blueprint tags; imports exist live. Advisories: fullModel_nonempty is a second postponed theorem with no DAG node (allowed by the return's option b; precedent advisory) - suggest a §1(A) full-site model node for siblings; second reading is again a self-reading. No compile (no file changed); worker reports clean scompile, 51.4 s."
+ }
+}

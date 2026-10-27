@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-affine-restriction-equation",
+ "kind": "statement",
+ "title": "Pointwise equation for the canonical affine restriction",
+ "statement": "For f:X→S, G an X-module, q a natural number, h:V′→V in S.Etale and x in degree-q ordinary module cohomology of the canonical coefficient on V×_S X, affineRealizationRestriction f G q h applied to x is moduleCohomologyFMap of the induced base-change morphism and the tensor adjoint of tensorSectionsComp followed by the coefficient transport along b.w, applied to x [def-weil-pbc-affine-cohomology-comparison-data]. No affine, compactness, separatedness, or quasi-coherence hypothesis is needed for this defining equation. The induced morphism and its coefficient map are the constructed affineRealizationChartMap and affineRealizationCoefficientMap [def-weil-pbc-affine-pullback-coefficient-map].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03Q8 and 01FD; defining equation of the tensor-composition restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-affine-cohomology-comparison-data",
+  "def-weil-pbc-affine-pullback-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Unfold affineRealizationRestriction and the typed chart map to identify the same tensorCompositeCohomologyRestriction. Apply tensorCompositeCohomologyRestriction_eq_coefficient. The defining equation of affineRealizationCoefficientMap identifies its coefficient argument with the generic coefficient morphism. Apply congruence through the tensor adjunction and moduleCohomologyFMap, compose these morphism equalities, and evaluate with ConcreteCategory.congr_hom. No quasi-coherence or geometric hypothesis is used; empty charts, zero modules, identity arrows and all degrees are included.",
+   "uses": [
+    "def-weil-pbc-affine-cohomology-comparison-data",
+    "def-weil-pbc-affine-pullback-coefficient-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-affine-cohomology-comparison-data",
+  "def-weil-pbc-affine-pullback-coefficient-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03Q8 and 01FD; defining equation of the tensor-composition restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The affine cohomology restriction evaluates as module cohomology fmap of the canonical tensor adjunction coefficient map",
+   "results": "Eight hits about group-cohomology restriction natural transformations and maps; none concerns the project affine restriction.",
+   "date": "2026-10-26",
+   "verdict": "No matching defining equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "ConcreteCategory.congr_hom",
+   "results": "No hits; identifier not indexed.",
+   "date": "2026-10-26",
+   "verdict": "No matching project-specific equation."
+  },
+  {
+   "tool": "grep",
+   "query": "affineRealizationRestriction",
+   "results": "No Mathlib hits. Local source has the definition and its consumers, but no evaluation theorem.",
+   "date": "2026-10-26",
+   "verdict": "New evaluation API required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-comparison-pullback",
+   "place": "Final step identifying the prescribed ordinary restriction with its moduleCohomologyFMap."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRestrictionEquation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRestrictionEquation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationRestriction_apply",
+  "statement": "theorem affineRealizationRestriction_apply {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) (q : ℕ) {V V' : S.Etale} (h : V' ⟶ V)\n    (x : (RingedSpace.moduleCohomology (Limits.pullback V.hom f).toRingedSpace q).obj\n      (affineRealizationCoefficient f G V)) :\n    affineRealizationRestriction f G q h x =\n      moduleCohomologyFMap (affineRealizationChartMap f h)\n        ((Classical.choose\n          (exists_tensorPullbackAdjunction (affineRealizationChartMap f h))).homEquiv\n          _ _ (affineRealizationCoefficientMap f G h)) q x",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ }
+}

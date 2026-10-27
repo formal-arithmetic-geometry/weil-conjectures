@@ -1,0 +1,174 @@
+{
+ "id": "lem-sfb-proetale-cech-product-class-recovery",
+ "kind": "statement",
+ "title": "Recovery from coinduced Cech pieces in a product-closed triangulated class",
+ "statement": "Let $\\Lambda$ be any commutative condensed ring, $V$ a quasi-compact quasi-separated scheme, and $N$ an actual module for its pulled-back coefficient $\\Lambda_V$ [def-pc-scheme, def-weil-pbc-scheme-conventions, sk-def-sfb-module-derived-pushpull]. Let $\\{b_i:U_i\\to V\\}_{i\\in I}$ be a small pro-etale covering family with every $U_i$ affine [def-weil-pbc-proetale-site, def-weil-size-convention, lem-weil-pbc-affine-scheme-qcqs]. Let $P$ be any full replete triangulated object property of the ordinary derived module category of $V$, closed under all small derived products [def-weil-triangulated-subcategory, def-weil-category-product, def-weil-abstract-derived-category]. Suppose that for every $i$, every quasi-compact quasi-separated scheme $W$ and every weakly etale quasi-compact quasi-separated $r:W\\to U_i$ [sk-def-pe-morphisms, def-weil-quasi-separated-morphism], $$P\\bigl(R(r b_i)_*((r^*b_i^*N)[0])\\bigr).$$ The inverse images and direct image are the actual coefficient-compatible module operations [def-sfb-module-upper-star, sk-def-sfb-module-derived-pushpull]. Then $P(N[0])$. The hypothesis includes all finite Cech intersections over $V$, which need not be affine or weakly contractible. This theorem concerns an arbitrary class $P$; it does not assert stability of any generated hull under pullback or pushforward, nor require filtered-colimit or retract closure. No coefficient admissibility or weak-contractibility hypothesis is imposed. The empty scheme and empty covering, zero ring, zero module and identity covering are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Steps 1 and 7--9 of the assigned descent proof; Stacks sites-cohomology.tex, Tag 03FC (lemma-injective-module-trivial-cech) for the coherent augmented model. Agent assembly of finite intersections, quotient total truncations and the product fibre. Exact full-hull reference WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-triangulated-subcategory",
+  "def-weil-category-product",
+  "def-weil-abstract-derived-category",
+  "sk-def-pe-morphisms",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-module-upper-star"
+ ],
+ "proof": [
+  {
+   "text": "If $V$ is empty, its module category is zero and triangulated zero and repleteness prove the assertion. Otherwise take a finite affine refinement of the given covering. Replacing each refinement member by its original $U_i$ still gives a covering: every affine test's finite quasi-compact covering refinement for the smaller family is also a refinement for the enlarged family. Thus retain a finite list $U_1,\\ldots,U_t$ of the original affine objects. Each $b_i$ is qcqs by affine qcqs and qcqs morphism permanence. Every finite fibre product $U_{i_0\\ldots i_n}$ over $V$ is a qcqs site object, by the finite-cover subsite geometry. In particular all its projections to $V$ and to $U_{i_0}$ are qcqs by the same permanence result. No assertion that these intersections are affine or weakly contractible is used.",
+   "uses": [
+    "lem-sfb-finite-affine-cover-refinement-general",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the specified supported hull; Sections 3-4 for coefficients and Lemma 5.3(1) only for bounded continuity. The generator-level coinduction obligation is separately stated, not attributed to HRS."
+   }
+  },
+  {
+   "text": "Apply the coherent augmented Cech pushforward model to the identity morphism and the epimorphic cover sheaf formed from the finite list. Its total represents $N[0]$. Each column is the finite product over index tuples of $R(r b_{i_0})_*((r^*b_{i_0}^*N)[0])$, where $r$ projects the corresponding intersection to $U_{i_0}$. All intersections and projections are qcqs and weakly etale by finite-family geometry. Slice localization and internal module transport identify the actual coefficients and restrictions, and finite-product injective resolutions give the derived column comparison. The hypothesis therefore puts every factor in $P$; product closure and repleteness put the columns in $P$.",
+   "uses": [
+    "lem-sfb-cech-pushforward-augmented-model",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "det-pe-products-derived",
+    "lem-weil-pbc-finite-product-injective-resolutions",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $T_m=\\operatorname{Tot}(B^{n,q}:0\\le n\\le m)$, with the horizontal differential out of column $m$ discarded. These are quotient complexes of the full total, with chain projections $T_m\\to T_{m-1}$. Their kernels are the column $B^{m,\\bullet}[-m]$, with vertical differential $(-1)^m d$. The degreewise short exact sequence gives the distinguished triangle with this column and the two successive $T$'s. Induction from $T_0=B^{0,\\bullet}$, using the preceding step, shifts and extensions, gives $P(QT_m)$ for all $m$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projections of the tower $T_m$ split as maps of graded modules. Its termwise limit is $T=\\operatorname{Tot}B$, since in total degree $r$ only $0\\le n\\le r$ occur. There is a degreewise short exact sequence of complexes $0\\to T\\to\\prod_mT_m\\xrightarrow{1-s}\\prod_mT_m\\to0$, where $(sx)_m$ is the projection of $x_{m+1}$. To see epimorphy, choose $x_0=0$ and recursively choose $x_{m+1}$ projecting to $x_m-y_m$ using the graded splitting; its kernel consists exactly of compatible sequences. The products represent derived products. Each belongs to $P$ by the preceding step; the short-exact triangle, rotation and shift closure put $QT$ in $P$. The augmented-total isomorphism in the second step yields $P(N[0])$. ",
+   "uses": [
+    "det-pe-products-derived",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-affine-cover-refinement-general",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-sfb-cech-pushforward-augmented-model",
+  "det-pe-products-derived",
+  "lem-weil-pbc-finite-product-injective-resolutions",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Steps 1 and 7--9 of the assigned descent proof; Stacks sites-cohomology.tex, Tag 03FC (lemma-injective-module-trivial-cech) for the coherent augmented model. Agent assembly of finite intersections, quotient total truncations and the product fibre."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated subcategory closed under products contains a module if it contains the derived pushforwards of all Cech intersections of a finite covering",
+   "results": "{\"t\": \"2026-10-25T15:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"A triangulated subcategory closed under products contains a module if it contains the derived pushforwards of all Cech intersections of a finite covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"DerivedCategory.IsGE\", \"SheafOfModules.LocalGeneratorsData.coversTop\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"29cd98d3a1eeee8c\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A replete triangulated subcategory closed under products contains the total of a nonnegative Cech double complex when every column belongs to it",
+   "results": "{\"t\": \"2026-10-25T15:35:07Z\", \"tool\": \"leansearch\", \"query\": \"A replete triangulated subcategory closed under products contains the total of a nonnegative Cech double complex when every column belongs to it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Subcategory\", \"CategoryTheory.Pretriangulated.productTriangle_distinguished\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₁\", \"CategoryTheory.Pretriangulated.productTriangle_obj₂\", \"HomologicalComplex₂.total\", \"CategoryTheory.ObjectProperty.IsTriangulated.mk\", \"HomologicalComplex.instHasMapProdObjGradedObjectFunctorMapBifunctorXMapBifunctorMapObjπ\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\"], \"digest\": \"4e1b1259c53eaff9\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "{\"t\": \"2026-10-25T15:07:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsTriangulated\", \"CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift\", \"CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\", \"CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂\"], \"digest\": \"7934f335ea18b330\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedModelHull|Cech.*[Tt]otal.*[Pp]roduct",
+   "results": "{\"t\": \"2026-10-25T15:07:36Z\", \"tool\": \"grep\", \"query\": \"supportedModelHull|Cech.*[Tt]otal.*[Pp]roduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedModelHullProetaleDescent",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Substep: Steps 1 and 7--9 of the assigned descent proof; Stacks sites-cohomology.tex, Tag 03FC (lemma-injective-module-trivial-cech) for the coherent augmented model. Agent assembly of finite intersections, quotient total truncations and the product fibre.",
+   "via": [
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProetaleCechProductClassRecovery",
+  "file": "lean/Sheaf/Paper/ProetaleCechProductClassRecovery.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.proetale_cech_product_class_recovery",
+  "statement": "theorem proetale_cech_product_class_recovery\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]\n    (N : Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V))\n    (I : Type (u + 1)) (U : I → V.ProEt)\n    (hcover : Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈\n      Scheme.proetalePrecoverage.coverings V)\n    (haffine : ∀ i : I, IsAffine (U i).left)\n    (P : ObjectProperty (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V))))\n    (htri : P.IsTriangulated) (hiso : P.IsClosedUnderIsomorphisms)\n    (hprod : ∀ (J : Type (u + 1))\n      (K : J → DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1}) (condensedRingObj Λ V)))\n      (c : Cone (Discrete.functor K)), IsLimit c → (∀ j : J, P (K j)) → P c.pt)\n    (hpieces : ∀ (i : I) (W : Scheme.{u})\n      [CompactSpace W] [QuasiSeparatedSpace W]\n      (r : W ⟶ (U i).left) [WeaklyEtale r] [QuasiCompact r] [QuasiSeparated r],\n      P ((CondensedRing.moduleObjectDerivedPushforward Λ (r ≫ (U i).hom)).obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((CondensedRing.upperStar Λ r).obj\n            ((CondensedRing.upperStar Λ (U i).hom).obj N))))) :\n    P ((DerivedCategory.singleFunctor _ 0).obj N)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164033-L-941227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164033-L-941227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-flat-tensor-comparison",
+ "kind": "statement",
+ "title": "Bounded flat comparison for the explicit ordinary coefficient tensor complex",
+ "statement": "Let $X$ be a scheme, $A$ a commutative ring in the scheme universe, $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and $P$ an $A$-module cochain complex [def-weil-abstract-derived-category] strictly supported in an integer interval $[a,b]$, with every term flat. Use ordinary completed constant realization $H$ and the explicit ordinary coefficient tensor construction [lem-weil-pbc-finite-perfect-adic-free-tensor-cone], so $C=H(P)$ and $T_n=C\\otimes_{A_T}(A/I^{n+1})_T$, with actual coefficient transition maps. Choose any left adjoints $L_n$ to the exact derived quotient restrictions. Then the levelwise localization $Q(T)$ is isomorphic, as a whole diagram, to the canonical derived quotient diagram of $Q(P)$ [lem-weil-pbc-finite-perfect-adic-quotient-diagram] followed by completed derived constant realization. Moreover $Q(C)$ is isomorphic to the completed derived constant realization of $Q(P)$. No projectivity or finiteness of the terms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse, the displayed completed finite-projective quotient complex; Modules on Sites, Tags 093J--093M, and Cohomology on Sites, Tag 06YQ."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-finite-perfect-adic-free-tensor-cone",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary completed scalar-extension exactness and the natural coefficient tensor balancing comparison. Compose with exact constant realization to obtain exact H. Apply the comparison degreewise to P and transpose complexes of diagrams to diagrams of complexes; localization commutes with H by its exact derived factorization.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-ordinary-coefficient-comparison",
+    "def-weil-pbc-finite-perfect-adic-tower-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A strictly bounded-above complex of flat A-modules is K-flat. The explicit algebraic level maps are therefore invertible. Consecutive naturality of those prescribed maps assembles a natural transformation by NatTrans.ofOpSequence. Objectwise invertibility gives a diagram isomorphism, including every transition.",
+   "uses": [
+    "lem-sfb-bounded-above-flat-kflat",
+    "lem-weil-pbc-adic-ordinary-tensor-levels",
+    "lem-weil-pbc-adic-ordinary-tensor-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact completed scalar extension E has its exact derived functor E.mapDerivedCategory as a left derived functor. Its selected completed derived extension has the universal left-derived comparison supplied by the normalized scalar-extension data. Uniqueness of left derived functors identifies these two functors. The exact derived composition isomorphism for constant realization followed by E identifies H.mapDerivedCategory with the prescribed completed derived realization. Whisker the algebraic diagram isomorphism with this exact derived H and compose the degreewise comparisons for the first conclusion. The exact factorization at P and the same derived-composition comparison give the cone-point isomorphism. Only the upper bound is used; the original statement and both bound binders stay unchanged.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-finite-perfect-adic-ordinary-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-perfect-adic-ordinary-coefficient-comparison",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "lem-sfb-bounded-above-flat-kflat",
+  "lem-weil-pbc-adic-ordinary-tensor-levels",
+  "lem-weil-pbc-adic-ordinary-tensor-transition",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse, the displayed completed finite-projective quotient complex; Modules on Sites, Tags 093J--093M, and Cohomology on Sites, Tag 06YQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of flat modules computes derived extension of scalars, compatibly with a diagram of quotient coefficient rings",
+   "results": "8 hits including ModuleCat.extendScalarsComp, Module.Flat.rTensor_shortComplex_exact and ModuleCat.preservesFiniteLimits_extendScalars_of_flat.",
+   "date": "2026-10-27",
+   "verdict": "No result for the completed coefficient presentation or natural derived quotient diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Module.Flat\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*[Ff]lat.*[Dd]erived|[Cc]onstant.*[Tt]ensor.*[Cc]omparison|tensorRight.*piComparison",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project K-flat and derived scalar comparison declarations; Mathlib does not state this coefficient-specific comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicCanonicalComparison",
+  "date": "2026-10-27",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof of Tag 09C6 and the integral-lattice sentence of thm-weil-pbc-finite-extension: identify the completed finite-projective quotient complex before the inverse-limit argument. Bounded flat comparison for the explicit ordinary coefficient tensor complex.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-canonical-comparison",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicFlatTensorComparison",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicFlatTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicFlatTensor_comparison",
+  "statement": "theorem finitePerfectAdicFlatTensor_comparison\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤\n      DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))))\n    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction d.ideal n)\n    (P : CochainComplex (ModuleCat.{t} A) ℤ) (a b : ℤ)\n    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Flat A (P.X i)) :\n    Nonempty (finitePerfectAdicTensorComplexDiagram X d P ⋙ DerivedCategory.Q ≅\n      finitePerfectAdicQuotientDiagram d.ideal L adj (DerivedCategory.Q.obj P) ⋙\n        finitePerfectAdicDerivedConstant X A ⋙\n          completedAdicDerivedChange X (completedAdicScalar X d)) ∧\n    Nonempty (DerivedCategory.Q.obj (finitePerfectAdicOrdinaryComplex X d P) ≅\n      (completedAdicDerivedChange X (completedAdicScalar X d)).obj\n        ((finitePerfectAdicDerivedConstant X A).obj (DerivedCategory.Q.obj P)))",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T034712-L-3676432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T064434-L-2176103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

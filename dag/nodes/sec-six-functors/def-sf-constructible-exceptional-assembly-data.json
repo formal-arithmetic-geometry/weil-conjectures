@@ -1,0 +1,113 @@
+{
+ "id": "def-sf-constructible-exceptional-assembly-data",
+ "kind": "definition",
+ "title": "Normalization and left refinement inputs for coefficient assembly",
+ "statement": "Fix the finite-field datum D, prime l different from D.p, algebraic closure Omega, finite-type schemes X,Y and separated finite-type map f of the coefficient construction data. Given ring, rational and common-stage construction records R,F,M, CoefficientConstructionNormalization says ring left realizations commute with inherited shifts, the scalar shifts are independent of compactification, and rationalization q is literally identity on represented objects, and the closed-stage left functor sends each common-stage transition isomorphism (i ≤ j) to the conjugate of the rational scalar q between the common fields by the common-stage q maps (commonTransitionNatural). The closed category is the pair category, whose arrows between different finite stages are not images of one stage inclusion; this field pins the closed left functors on them. CoefficientLeftRefinements gives, for each proper refinement and every stage, only a shift-compatible isomorphism of left functors, normalized by the canonical proper/open word at ring stages, raw localization at rational stages, and conjugation by common-stage q at the closed stage. The right map used in the ring normalization predicate is the explicit adjunction conjugate, not an assumed right refinement.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-sf-constructible-exceptional-refinement-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Normalization and left refinement inputs for coefficient assembly; normalized coefficient construction in the existing assembly node."
+ },
+ "proof": [
+  {
+   "text": "Use the published inherited finite and integral inclusion shifts. Record the additional normalization properties and the left geometric refinement maps with their two descent equations. No existence assertion is part of either definition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Proposition 5.24; synthesis of the existing normalized construction steps."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble compatible compact support exceptional adjunctions for finite integral rational coefficients and common finite fields",
+   "results": "MeasureTheory.Integrable.exists_hasCompactSupport_lintegral_sub_le, MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le, MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le, HasCompactSupport.exist_eLpNorm_sub_le_of_continuous, exists_lt_rieszContentAux_add_pos, HasCompactSupport.exists_simpleFunc_approx_of_prod, MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le, exists_continuous_sum_one_of_isOpen_isCompact",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_coefficient_construction|CoefficientConstructionRing|exceptionalIntegralReconstruction",
+   "results": "No matches.",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category constructible exceptional adjunction coefficient field descent normalized compactification refinement",
+   "results": "CategoryTheory.Adjunction.derivedη.congr_simp, HasDerivedCategory.standard, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCoefficientConstruction",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Normalization and left refinement inputs for coefficient assembly",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleExceptionalCoefficientAssemblyData",
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalCoefficientAssemblyData.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.CoefficientLeftRefinements",
+  "statement": "structure CoefficientLeftRefinements\n    (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))\n    (F : CoefficientConstructionFields.{u, v} l Ω D hl R)\n    (M : CoefficientConstructionCommon.{u, v} l Ω D hl R F)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.constructionInclusionShift",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.CoefficientConstructionNormalization",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.CoefficientLeftRefinements"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1106a",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T100757-L-3622475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1106a",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T100757-L-3622475",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module, ConstructionData (verbatim move of old item, diffed against clone), RefinementMate, AssemblyData, Stages, LeftRefinements and 6 node files against the node statements, GeneralAlgebraicallyClosedCoefficients pair-category definitions, and the 3 direct importers (compiled)"
+ }
+}

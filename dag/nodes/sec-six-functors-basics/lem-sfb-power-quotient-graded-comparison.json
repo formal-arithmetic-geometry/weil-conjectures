@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-power-quotient-graded-comparison",
+ "kind": "statement",
+ "title": "Canonical graded comparison from ideal-power quotient isomorphisms",
+ "statement": "Let $\\varphi:A\\to C$ be a homomorphism of commutative rings and let $I\\subseteq A$, $J\\subseteq C$ be ideals with $\\varphi(I)\\subseteq J$. Use the quotient and ideal-power conventions of [def-weil-pbc-algebra-hom-quotient] and the associated graded rings of [def-weil-pbc-associated-graded-ring]. For $n\\ge1$, let $Q_n(\\varphi):A/I^n\\to C/J^n$ be $[a]\\mapsto[\\varphi(a)]$. The homogeneous formulas\n$$G_r(\\varphi):I^r/I^{r+1}\\longrightarrow J^r/J^{r+1},\\qquad [a]_r\\longmapsto[\\varphi(a)]_r\\quad(r\\ge0)$$\ndefine a degree-preserving unital graded ring homomorphism $G(\\varphi)=\\bigoplus_{r\\ge0}G_r(\\varphi)$. It satisfies $G(\\varphi)((a\\bmod I)x)=(\\varphi(a)\\bmod J)G(\\varphi)(x)$ for every $a\\in A$ and $x\\in\\operatorname{gr}_I(A)$. If every $Q_n(\\varphi)$, $n\\ge1$, is an isomorphism, then every $G_r(\\varphi)$ and $G(\\varphi)$ are isomorphisms; identifying $A/I$ with $C/J$ by $Q_1(\\varphi)$ makes $G(\\varphi)$ an isomorphism of graded $A/I$-algebras.\nFor any second ideal-preserving homomorphism $\\varphi':(A',I')\\to(C',J')$ and homomorphisms $\\alpha:A\\to A'$, $\\gamma:C\\to C'$ with $\\alpha(I)\\subseteq I'$, $\\gamma(J)\\subseteq J'$ and $\\gamma\\varphi=\\varphi'\\alpha$, the canonical maps satisfy\n$$Q_n(\\gamma)Q_n(\\varphi)=Q_n(\\varphi')Q_n(\\alpha),\\qquad G(\\gamma)G(\\varphi)=G(\\varphi')G(\\alpha).$$\nHere $Q_n$ and $G$ for each of these maps are given by the same representative formulas for its specified source and target ideals. For arbitrary composable ideal-preserving homomorphisms $u:(R,K)\\to(S,L)$ and $v:(S,L)\\to(T,M)$ of commutative rings, these maps also satisfy $Q_n(vu)=Q_n(v)Q_n(u)$, $G(vu)=G(v)G(u)$, $Q_n(\\mathrm{id})=\\mathrm{id}$ and $G(\\mathrm{id})=\\mathrm{id}$. The functoriality assertions require no quotient isomorphism hypotheses; the isomorphism criterion requires no formal etaleness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion, extracted as a comparison criterion assuming the ideal-power quotient isomorphisms; canonical maps and their functoriality on representatives."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof": [
+  {
+   "text": "For $r\\ge1$, $I^r$ consists of finite sums of products of $r$ elements of $I$: induct on $r$ using $I^{r+1}=I^rI$ and absorb any ring coefficient into the last factor. The same holds for $J$. Applying $\\varphi$ term by term therefore gives $\\varphi(I^r)\\subseteq J^r$; for $r=0$ this just says $\\varphi(A)\\subseteq C$. Consequently $[a]\\mapsto[\\varphi(a)]$ descends to $Q_n$ for every $n\\ge1$, since a difference in $I^n$ maps into $J^n$. The induced map preserves addition, multiplication and $1$ because $\\varphi$ does.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  },
+  {
+   "text": "For $a\\in I^r$, define $G_r([a]_r)=[\\varphi(a)]_r$. Step 1 puts this in $J^r/J^{r+1}$. If $[a]_r=[b]_r$, the quotient-module coset definition gives $a-b\\in I^{r+1}$, so $\\varphi(a)-\\varphi(b)\\in J^{r+1}$ and the target classes agree. The identities $\\varphi(a+b)=\\varphi(a)+\\varphi(b)$ and $\\varphi(0)=0$ prove additivity. On the direct sums define $(Gx)_r=G_r(x_r)$; its support is contained in the finite support of $x$, so this is an additive, degree-preserving map.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  },
+  {
+   "text": "Apply the existing ring-structure theorem to $(A,I)$ and $(C,J)$. For homogeneous representatives its multiplication formula and the ring-map identity give $G_{r+s}([ab]_{r+s})=[\\varphi(ab)]_{r+s}=[\\varphi(a)\\varphi(b)]_{r+s}=G_r([a]_r)G_s([b]_s)$. Every homogeneous class has a representative, so this proves preservation of homogeneous products. Expand two arbitrary elements as finite sums of homogeneous components; distributivity and additivity extend the equality to their products. The degree-zero unit $[1]_0$ maps to $[\\varphi(1)]_0=[1]_0$. The same theorem gives the scalar formula: on a homogeneous $[b]_r$, both sides of $G((a\\bmod I)[b]_r)=(\\varphi(a)\\bmod J)G([b]_r)$ equal $[\\varphi(a)\\varphi(b)]_r$. Additivity extends it to every finite sum.",
+   "uses": [
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  },
+  {
+   "text": "Assume now that every $Q_n$ is an isomorphism. For any $r\\ge0$, if $G_r([a]_r)=G_r([b]_r)$, then $\\varphi(a-b)\\in J^{r+1}$. Thus $Q_{r+1}(\\overline{a-b})=0$. Its injectivity implies $a-b\\in I^{r+1}$, hence $[a]_r=[b]_r$. This proves injectivity of every $G_r$, using only a positive quotient index even when $r=0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  },
+  {
+   "text": "For $r=0$, $G_0=Q_1$ under $I^0=A$ and $J^0=C$, so it is surjective. For $r\\ge1$ and $c\\in J^r$, surjectivity of $Q_{r+1}$ supplies $a\\in A$ with $\\varphi(a)-c\\in J^{r+1}$. Ideal powers are descending: every generator $xy$ of $J^rJ$ lies in $J^r$, hence $J^{r+1}\\subseteq J^r$. Thus $\\varphi(a)\\in J^r$ and $Q_r([a])=0$. Injectivity of $Q_r$ gives $a\\in I^r$. The element $[a]_r$ is now a legitimate preimage of $[c]_r$ under $G_r$. Together with step 4, this proves homogeneous-piece bijectivity.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  },
+  {
+   "text": "If $Gx=Gy$, equality of every component and injectivity of $G_r$ give $x_r=y_r$ for every $r$, hence $x=y$. For a target family $y$ supported on a finite set $T$, take the unique preimage $x_r$ of $y_r$ for $r\\in T$ and set $x_r=0$ elsewhere. This finite-support family satisfies $Gx=y$. Thus $G$ is bijective. Its inverse respects addition, products and the unit because applying the injective map $G$ to each required identity gives that identity in the target; it preserves degree by the componentwise construction. Transport the $C/J$-algebra structure to an $A/I$-algebra structure via the ring isomorphism $Q_1$. The scalar equality of step 3 then proves that $G$ is an isomorphism of graded $A/I$-algebras.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  },
+  {
+   "text": "For the commuting square, both $Q_n(\\gamma)Q_n(\\varphi)$ and $Q_n(\\varphi\\prime)Q_n(\\alpha)$ send $[a]$ to $[\\gamma\\varphi(a)]=[\\varphi\\prime\\alpha(a)]$. Both graded composites send a homogeneous $[a]_r$ to the same classes in degree $r$ by exactly this equality. Quotient classes have representatives and direct-sum elements are finite sums of homogeneous classes, so these are equal maps. For composable $u,v$, both $Q_n(vu)$ and $Q_n(v)Q_n(u)$ send $[a]$ to $[v(u(a))]$; both $G(vu)$ and $G(v)G(u)$ send $[a]_r$ to $[v(u(a))]_r$. For an identity map these formulas give $[a]\\mapsto[a]$ and $[a]_r\\mapsto[a]_r$. The same representative and finite-sum arguments give all composition and identity equalities. Steps 1--3 and this step used only ideal preservation, so none of these functoriality assertions assumes quotient isomorphisms or formal etaleness.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion; elementary representative argument extracting the implication from power-quotient isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules",
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal): explicit representative proof of the associated-graded implication, whose argument is omitted in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*(map|equiv|bijective|functor)|AssociatedGraded.*(map|equiv|bijective|functor)",
+   "results": "{\"t\": \"2026-10-22T06:01:05Z\", \"tool\": \"grep\", \"query\": \"associatedGraded.*(map|equiv|bijective|functor)|AssociatedGraded.*(map|equiv|bijective|functor)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quotientEquiv assumes a ring equivalence before quotienting; powQuotPowSuccEquivMapMkPowSuccPow identifies a single subquotient with an ideal image; completion transition maps and cotangent maps do not give the graded algebra comparison or its functoriality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"map\"",
+   "results": "{\"t\": \"2026-10-22T06:01:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AssociatedGraded\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quotientEquiv assumes a ring equivalence before quotienting; powQuotPowSuccEquivMapMkPowSuccPow identifies a single subquotient with an ideal image; completion transition maps and cotangent maps do not give the graded algebra comparison or its functoriality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms of all ideal power quotients of two commutative rings induce an isomorphism of their associated graded rings",
+   "results": "{\"t\": \"2026-10-22T06:01:06Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms of all ideal power quotients of two commutative rings induce an isomorphism of their associated graded rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientEquiv\", \"Ideal.polynomialQuotientEquivQuotientPolynomial\", \"idealFactorsEquivOfQuotEquiv\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\", \"Ideal.Quotient.factorPow\", \"Ideal.Quotient.factorPowSucc\", \"Ideal.Quotient.algEquivOfEqMap\", \"AdjoinRoot.Polynomial.quotQuotEquivComm\"], \"digest\": \"d6f642b47187a7cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quotientEquiv assumes a ring equivalence before quotienting; powQuotPowSuccEquivMapMkPowSuccPow identifies a single subquotient with an ideal image; completion transition maps and cotangent maps do not give the graded algebra comparison or its functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal preserving ring map inducing isomorphisms modulo every positive ideal power induces a canonical isomorphism on associated graded algebras, natural in commuting squares",
+   "results": "{\"t\": \"2026-10-22T06:01:19Z\", \"tool\": \"leanfinder\", \"query\": \"An ideal preserving ring map inducing isomorphisms modulo every positive ideal power induces a canonical isomorphism on associated graded algebras, natural in commuting squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.transitionMap_ideal_mk\", \"Ideal.powQuotPowSuccEquivMapMkPowSuccPow\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.transitionMapₐ\", \"localCohomology.isoSelfLERadical\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\"], \"digest\": \"d150fd4c346a8e69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quotientEquiv assumes a ring equivalence before quotienting; powQuotPowSuccEquivMapMkPowSuccPow identifies a single subquotient with an ideal image; completion transition maps and cotangent maps do not give the graded algebra comparison or its functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "associated.?graded|AssociatedGraded",
+   "results": "{\"t\": \"2026-10-22T06:01:43Z\", \"tool\": \"grep\", \"query\": \"associated.?graded|AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomologicalBicomplex.lean\"], \"digest\": \"c725915828948c6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quotientEquiv assumes a ring equivalence before quotienting; powQuotPowSuccEquivMapMkPowSuccPow identifies a single subquotient with an ideal image; completion transition maps and cotangent maps do not give the graded algebra comparison or its functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of the tangent cone algebra: an ideal preserving homomorphism gives a multiplicative degree preserving direct sum map I^r/I^(r+1) to J^r/J^(r+1); bijective maps on all truncated rings imply this map is bijective",
+   "results": "{\"t\": \"2026-10-22T06:01:56Z\", \"tool\": \"leanfinder\", \"query\": \"Functoriality of the tangent cone algebra: an ideal preserving homomorphism gives a multiplicative degree preserving direct sum map I^r/I^(r+1) to J^r/J^(r+1); bijective maps on all truncated rings imply this map is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.FormallyEtale.comp_bijective\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.Generators.cotangentRestrict_bijective_of_isCompl\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"StandardEtalePresentation.lift_bijective\"], \"digest\": \"d25bd6ef005d2402\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: quotientEquiv assumes a ring equivalence before quotienting; powQuotPowSuccEquivMapMkPowSuccPow identifies a single subquotient with an ideal image; completion transition maps and cotangent maps do not give the graded algebra comparison or its functoriality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal preserving homomorphism inducing isomorphisms modulo every positive power induces a natural graded algebra isomorphism on associated graded rings",
+   "results": "{\"t\": \"2026-10-23T09:26:09Z\", \"tool\": \"leanfinder\", \"query\": \"An ideal preserving homomorphism inducing isomorphisms modulo every positive power induces a natural graded algebra isomorphism on associated graded rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.ofAlgHom\", \"AdicCompletion.ofAlgEquiv_apply\", \"DirectSum.decomposeRingEquiv\", \"AdicCompletion.ofAlgEquiv\", \"Ideal.powQuotPowSuccEquivMapMkPowSuccPow\", \"DirectSum.decomposeAlgEquiv\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"DirectSum.decomposeAlgEquiv_apply\"], \"digest\": \"7f51fa475455c672\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal subquotient equivalences and internal graded decompositions do not state this comparison for an ideal-preserving map; quotientEquiv assumes an underlying ring equivalence, which is not a hypothesis here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\", \"map\"",
+   "results": "{\"t\": \"2026-10-23T09:26:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedGraded\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal subquotient equivalences and internal graded decompositions do not state this comparison for an ideal-preserving map; quotientEquiv assumes an underlying ring equivalence, which is not a hypothesis here."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|AssociatedGraded|powQuotPowSucc",
+   "results": "{\"t\": \"2026-10-23T09:26:10Z\", \"tool\": \"grep\", \"query\": \"associatedGraded|AssociatedGraded|powQuotPowSucc\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\"], \"digest\": \"f4f175c05858005a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal subquotient equivalences and internal graded decompositions do not state this comparison for an ideal-preserving map; quotientEquiv assumes an underlying ring equivalence, which is not a hypothesis here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms on all ideal power quotient rings induce isomorphisms on the associated graded rings",
+   "results": "{\"t\": \"2026-10-23T09:26:11Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms on all ideal power quotient rings induce isomorphisms on the associated graded rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientEquiv\", \"Ideal.polynomialQuotientEquivQuotientPolynomial\", \"AdjoinRoot.Polynomial.quotQuotEquivComm\", \"Ideal.piQuotEquiv\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"idealFactorsEquivOfQuotEquiv\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\"], \"digest\": \"c91ff36dacacbf7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal subquotient equivalences and internal graded decompositions do not state this comparison for an ideal-preserving map; quotientEquiv assumes an underlying ring equivalence, which is not a hypothesis here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial map on successive filtration quotients and direct sum of ideal powers preserves multiplication; isomorphism of truncated rings implies bijective homogeneous pieces",
+   "results": "{\"t\": \"2026-10-23T09:27:33Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial map on successive filtration quotients and direct sum of ideal powers preserves multiplication; isomorphism of truncated rings implies bijective homogeneous pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective\", \"IsRingFiltration.toGradedMonoid\", \"Algebra.FormallyEtale.comp_bijective\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"DirectSum.coe_decompose_mul_of_left_mem_of_le\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\"], \"digest\": \"601210d755a18732\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal subquotient equivalences and internal graded decompositions do not state this comparison for an ideal-preserving map; quotientEquiv assumes an underlying ring equivalence, which is not a hypothesis here."
+  },
+  {
+   "tool": "grep",
+   "query": "associated.?graded|AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T09:27:33Z\", \"tool\": \"grep\", \"query\": \"associated.?graded|AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomologicalBicomplex.lean\"], \"digest\": \"c725915828948c6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal subquotient equivalences and internal graded decompositions do not state this comparison for an ideal-preserving map; quotientEquiv assumes an underlying ring equivalence, which is not a hypothesis here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-augmented-etale-associated-graded",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Old item proof Steps 5-7: homogeneous-piece bijectivity, multiplicative direct sum, scalars and canonical functoriality.",
+   "via": [
+    "lem-sfb-augmented-etale-associated-graded",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-power-quotient-graded-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the associated-graded conclusion of Stacks 0H1D into seven steps, using the existing graded ring structure theorem and quotient/direct-sum definitions. Wrote the representative checks for multiplicativity, scalar compatibility, piecewise injectivity and surjectivity (separating degree zero), finite-support inverse and every naturality formula. No new nodes or statement changes; no Lean attachment states the full item.",
+  "blueprint": "Retains the inherited local tangent-cone route and blueprint.from place: old augmented-etale-associated-graded proof Steps 5--7. The newest blueprint direct-images proof (3) supplies the surrounding six-functor route, not this elementary algebra calculation. No unit step is replaced. Searches for associated graded, 0H1D and ideal-power found no equivalent imported blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-604586054",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-604586054 (reviewer sub-agent of L); spot-checked: PASS. I read the item, its 7 steps and every cited statement in full: algebra-hom-quotient, quotient-module, direct-sum, the associated-graded def, and the structure lemma's clauses (2) and (3). Statement and metadata are byte-identical to the base copy in the Q31 parent snapshot; the delivery adds only the proof (0 new nodes), and no repair note exists. Source: Stacks 0H1D (algebra.tex l.41257, tag checked) states the graded isomorphism but its proof only builds the S/J^n→R/I^n inverses, so the agent proof origin is correct. Steps: (1) gives φ(I^r)⊆J^r and well-defined Q_n. (2) G_r is well defined and additive. (3) Products are multiplicative via the lemma's clause (2) and the scalar formula via clause (3) on both rings. (4) G_r is injective via Q_{r+1}, r=0 included. (5) G_r is surjective via surjectivity of Q_{r+1}, J^{r+1}⊆J^r and injectivity of Q_r, with r=0 as Q_1. (6) G is bijective with finite support, and transporting along Q_1 gives the A/I-algebra isomorphism. (7) The square, composition and identity statements hold by representatives using only ideal preservation. All steps check. The structure lemma belongs to another unit but is Lean-closed (existing:true, Ideal.associatedGraded*), so it is a closed tool and needs no route or tool_uses entry. Edge cases: I=J=0; I=A, J=C; ℤ→ℤ_p with (p); and k[t]→k[t]/t^2, which shows the hypothesis must cover all n. No duplicate in the DAG (gr_I/gr_J grep; the pur conormal/Rees nodes are different) and no associatedGraded in Mathlib. Advisory: one base search record about the parent's formally-étale lifting step was dropped, so the report's 'nothing dropped' is slightly wrong; harmless, 12 relevant searches remain."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerQuotientGradedComparison",
+  "declaration": "Ideal.powerQuotient_graded_comparison",
+  "file": "lean/Sheaf/RingTheory/PowerQuotientGradedComparison.lean",
+  "statement": "theorem powerQuotient_graded_comparison {A : Type u} {C : Type v} [CommRing A] [CommRing C] (φ : A →+* C) (I : Ideal A) (J : Ideal C) (hI : I ≤ J.comap φ) : (∀ n : ℕ, 1 ≤ n → ∃ Q : A ⧸ I ^ n →+* C ⧸ J ^ n, Q = powerQuotientMap φ I J hI n ∧ ∀ a : A, Q (Ideal.Quotient.mk (I ^ n) a) = Ideal.Quotient.mk (J ^ n) (φ a)) ∧ (∃ G : associatedGraded I →+* associatedGraded J, G.toAddMonoidHom = associatedGradedMap φ I J hI ∧ (∀ (n : ℕ) (x : associatedGradedPiece I n), G (DirectSum.of (fun k : ℕ => associatedGradedPiece I k) n x) = DirectSum.of (fun k : ℕ => associatedGradedPiece J k) n (associatedGradedPieceMap φ I J hI n x)) ∧ ∀ (a : A) (x : associatedGraded I), G ((Ideal.Quotient.mk I a) • x) = (Ideal.Quotient.mk J (φ a)) • G x) ∧ ((∀ n : ℕ, 1 ≤ n → Function.Bijective (powerQuotientMap φ I J hI n)) → (∀ n : ℕ, Function.Bijective (associatedGradedPieceMap φ I J hI n)) ∧ ∃ e : associatedGraded I ≃+* associatedGraded J, e.toAddMonoidHom = associatedGradedMap φ I J hI ∧ ∀ (a : A) (x : associatedGraded I), e ((Ideal.Quotient.mk I a) • x) = (Ideal.Quotient.mk J (φ a)) • e x) ∧ (∀ {A' : Type w} {C' : Type t} [CommRing A'] [CommRing C'] (φ' : A' →+* C') (α : A →+* A') (γ : C →+* C') (I' : Ideal A') (J' : Ideal C') (hI' : I' ≤ J'.comap φ') (hα : I ≤ I'.comap α) (hγ : J ≤ J'.comap γ) (hcomm : γ.comp φ = φ'.comp α), (∀ n : ℕ, 1 ≤ n → (powerQuotientMap γ J J' hγ n).comp (powerQuotientMap φ I J hI n) = (powerQuotientMap φ' I' J' hI' n).comp (powerQuotientMap α I I' hα n)) ∧ (associatedGradedMap γ J J' hγ).comp (associatedGradedMap φ I J hI) = (associatedGradedMap φ' I' J' hI').comp (associatedGradedMap α I I' hα)) ∧ (∀ {D : Type w} [CommRing D] (K : Ideal C) (L : Ideal D) (u : A →+* C) (v : C →+* D) (hu : I ≤ K.comap u) (hv : K ≤ L.comap v), (∀ n : ℕ, 1 ≤ n → powerQuotientMap (v.comp u) I L (hu.trans (Ideal.comap_mono hv)) n = (powerQuotientMap v K L hv n).comp (powerQuotientMap u I K hu n)) ∧ associatedGradedMap (v.comp u) I L (hu.trans (Ideal.comap_mono hv)) = (associatedGradedMap v K L hv).comp (associatedGradedMap u I K hu)) ∧ (∀ n : ℕ, 1 ≤ n → powerQuotientMap (RingHom.id A) I I le_rfl n = RingHom.id (A ⧸ I ^ n)) ∧ associatedGradedMap (RingHom.id A) I I le_rfl = AddMonoidHom.id (associatedGraded I)",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the published canonical powerQuotientMap, associatedGradedPieceMap and associatedGradedMap. Asserts a unital ring map with that underlying additive map, its degree and quotient-scalar formulas, bijectivity of each piece and a canonical ring equivalence under positive power-quotient bijectivity, and all functoriality laws without that premise. The scalar formula expresses the graded A/I-algebra identification along Q_1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09315a2dc",
+  "group": "NV",
+  "result": "pass",
+  "note": "Checked every clause against the node: Q_n (n≥1) pinned to powerQuotientMap with the formula [a]↦[φa]; G : gr I →+* gr J pinned by toAddMonoidHom = associatedGradedMap, with the degree formula and the A/I scalar formula; criterion under positive power-quotient bijectivity gives bijectivity of all pieces (deg 0 included) and a canonical ≃+* with the scalar formula; square, composition and identity laws stated without bijectivity or étaleness; independent universes; lean.statement byte-identical to the file; dep records equal live; report sections present; only sorry, docstring has 0H1D and the blueprint id. Edge cases r=0, I=J=0, ⊤ ideals/zero rings, all-n necessity. Maintainer note: powerQuotientMap/associatedGradedPieceMap/associatedGradedMap are owned by lem-sfb-augmented-etale-associated-graded (FormallyEtaleAssociatedGraded, Q40), whose proof_deps cite this item, so stage-3 has an import cycle; move the three defs into a def-node module that both import (precedent: PASS + split note). Advisory: the parent's naturality/comp/id theorems duplicate this item's conjuncts; no copyright header. No compile (no FIX)."
+ }
+}

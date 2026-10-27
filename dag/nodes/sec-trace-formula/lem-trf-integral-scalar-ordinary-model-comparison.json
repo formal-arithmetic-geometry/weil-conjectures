@@ -1,0 +1,108 @@
+{
+ "id": "lem-trf-integral-scalar-ordinary-model-comparison",
+ "kind": "statement",
+ "title": "Counit-normalized comparison of the ordinary scalar models",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "For a prime $\\ell$, finite coefficient fields $E,L$ over $\\mathbf Q_\\ell$, an embedding $\\iota:E\\to L$ and an arbitrary scheme $X$, there exist a natural isomorphism t from integralOrdinaryScalar to completedOrdinaryScalarExtension [lem-weil-scalar-extension-composition, lem-weil-finite-free-completed-scalar-comparison] and a natural isomorphism e between their derived models, with these properties. The sheaf map t sends every integralOrdinaryTensorSection(s,x) to completedScalarTensorSection(s,x). On every complex P, e at Q(P), followed by the universal completedScalarCounit, equals the exact-derived factorization comparison followed by Q of the termwise t. Finally, e followed by completedScalarComparison is exactly scalarCompletion [lem-weil-normalized-scalar-completion]. No completeness assumption on P or X is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-base-change (06YY), lemma-derived-limit-is-ok (0941); agent-extracted scalar normalization step of lem-trf-normalized-integral-scalar-coherence"
+ },
+ "stmt_deps": [
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-normalized-scalar-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinaryScalarModelIso from the existing scalar-constructibility construction and the universal cochain counit of completedScalarCochainModel. The left-derived universal property gives the counit-normalized natural isomorphism from integralOrdinaryDerivedScalar to completedDerivedScalarExtension. The normalized descent of the quotient-completion chain map, including its zero shifted coordinate, identifies its composite with completedScalarComparison with the actual scalarCompletion. No scheme pullback is introduced.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-normalized-scalar-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-normalized-scalar-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "06YY and 0941; pure-tensor comparison lifted through the universal derived counit, with its normalized completion map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a completed scalar realization respects the multiplication unit and the tensor associator under the finite free model",
+   "results": "8 hits, including ModuleCat.extendRestrictScalarsAdj_unit_app_apply and ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; none identifies the two specified completed derived scalar models.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hit: CategoryTheory.Adjunction.homEquiv_naturality_right. Supplies generic transposition only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralComparisonScalarCounit|isomorphismScalarModel_existsUnique",
+   "results": "Remote Mathlib grep: 0 hits. Local rg finds the defining counit in IntegralComparisonSystemData and a proved model identification in IsomorphismComparisonScalarExtension; the latter imports IntegralPullbackComparisonRealization and thus reaches the item, so it cannot be imported here.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarCounitNormalization",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-integral-scalar-ordinary-model-coherence",
+   "place": "The canonical sheaf model and its universal derived comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarOrdinaryModelComparison",
+  "file": "lean/Sheaf/Paper/IntegralScalarOrdinaryModelComparison.lean",
+  "declaration": "WeilConjectures.integralScalarOrdinaryModelComparison",
+  "statement": "theorem integralScalarOrdinaryModelComparison\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{u}) :\n    ∃ (t : integralOrdinaryScalar l E L ι X ≅\n          completedOrdinaryScalarExtension.{u, u} l E L ι X)\n      (e : integralOrdinaryDerivedScalar l E L ι X ≅\n          completedDerivedScalarExtension.{u, u} l E L ι X),\n      (∀ (N : integralTowerModules l E X) (U : X.ProEtᵒᵖ)\n        (s : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)\n        (x : N.val.obj U),\n        (t.hom.app N).val.app U (integralOrdinaryTensorSection l E L ι X N U s x) =\n          completedScalarTensorSection.{u, u} l E L ι X N U s x) ∧\n      (∀ P : CochainComplex (integralTowerModules l E X) ℤ,\n        e.hom.app (DerivedCategory.Q.obj P) ≫ completedScalarCounit.{u, u} l E L ι X P =\n          (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app P ≫\n            DerivedCategory.Q.map\n              ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P)) ∧\n      (e.hom ≫ completedScalarComparison.{u, u} l E L ι X =\n        scalarCompletion l E L ι X)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T123440-L-2300000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T123440-L-2300000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

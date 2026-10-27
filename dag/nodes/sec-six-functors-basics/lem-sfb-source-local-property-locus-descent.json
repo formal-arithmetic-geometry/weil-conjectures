@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-source-local-property-locus-descent",
+ "kind": "statement",
+ "title": "Descent of canonical source-open loci from scheme-target tests",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], and use algebraic spaces [def-trf-algebraic-space], algebraic stacks [def-sfb-algebraic-moduli-stack], and morphisms and $2$-fibre products of fibred groupoids [def-sfb-stable-pointed-moduli-groupoids]. An open subspace is a subfunctor whose scheme pullbacks are open subschemes [def-a1-space-open-subspace]; an open substack is a strictly full substack with this same scheme-pullback condition [def-weil-open-immersion]. Let $P$ be an isomorphism-invariant predicate on morphisms of algebraic spaces over $S$. Assume: (i) $P$ is stable under arbitrary base change; (ii) $P$ is fppf local on the target, meaning that for every surjective flat locally finitely presented map $T^{\\prime}\\to T$, a map $E\\to T$ has $P$ if and only if $E\\times_TT^{\\prime}\\to T^{\\prime}$ has $P$; (iii) $P$ is etale local on the source, meaning that precomposition by an etale map preserves $P$ and a jointly surjective etale family detects $P$. Here flatness, local finite presentation and etaleness are tested on scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-etale-morphism]; joint surjectivity is surjectivity on field-valued point classes. Suppose that for every locally finite type map $g:E\\to T$ with $E$ an algebraic space and $T$ a scheme there is a largest open subspace $W_g\\subseteq E$ on which $g$ has $P$, and that for every scheme map $T'\\to T$ one has $W_{g_{T'}}=W_g\\times_TT'$. Local finite type means [def-weil-finite-type-morphism] on etale charts. Extend $P$ to representable maps of algebraic stacks by requiring it on every scheme base change; representable means that all those base changes are algebraic spaces. Then every locally finite type map $f:A\\to\\mathcal Y$ from an algebraic space to an algebraic stack has a largest open subspace $W_f\\subseteq A$ on which $f$ has $P$. For every representable morphism $b:\\mathcal Z\\to\\mathcal Y$ of algebraic stacks, put $A_b=A\\times_{\\mathcal Y}\\mathcal Z$ and $f_b:A_b\\to\\mathcal Z$. The space $A_b$ is algebraic and $W_{f_b}=W_f\\times_{\\mathcal Y}\\mathcal Z$ as open subspaces of $A_b$. In particular this equality holds when $\\mathcal Z$ is any scheme. No quasi-compactness or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06M3 (lemma-local-source), source-open descent construction and (A),(B), in the scheme-target test formulation with Q = locally of finite type and R = all morphisms; the preliminary extension from scheme targets to space targets is etale descent of the same canonical opens."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-space-open-subspace",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $v:V\\to\\mathcal Y$. Since $\\mathcal Y$ has representable diagonal, the diagonal criterion makes $f:A\\to\\mathcal Y$ representable. Put $U=A\\times_{\\mathcal Y}V$, $B=V\\times_{\\mathcal Y}V$, and $R=U\\times_AU\\simeq A\\times_{\\mathcal Y}B$. The diagonal criterion and representable pullback over a space make these algebraic spaces. The chartwise calculus gives smooth surjections $U\\to A$ and $B\\to V$ and makes $g:U\\to V$ locally of finite type. For the displayed comparison, an object of $U\\times_AU$ consists of one $A$ object, two $V$ objects and isomorphisms from their images to that $A$ object's image. Composing one isomorphism with the inverse of the other gives the $B$ coordinate; retaining one comparison gives the $A\\times_{\\mathcal Y}B$ coordinate. Inserting the composite reverses this operation, including on arrows. Let $O=W_g\\subseteq U$, provided by the hypothesis.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M3 (lemma-local-source), proof of (A),(B); scheme refinements of the overlap implement the scheme-target hypothesis."
+   }
+  },
+  {
+   "text": "Let $b_1,b_2:B\\to V$ be the projections. Choose a surjective etale scheme atlas $D\\to B$. Both maps $D\\to V$ are scheme maps. The pullbacks of $g$ along them identify with the same map $h:A\\times_{\\mathcal Y}D\\to D$; the comparison uses the isomorphism between the two $\\mathcal Y$ images in the definition of $B$. It is locally of finite type by base change. Thus the assumed scheme-base-change formula identifies both inverse images of $O$ in $A\\times_{\\mathcal Y}D$ with $W_h$. The map $A\\times_{\\mathcal Y}D\\to R$ is surjective etale, so the two inverse images of $O$ in $R$ agree. Explicitly, after a scheme test of $R$, pull back this etale cover; the two open subfunctors agree on the resulting covering. Membership in either open subfunctor is etale local, since open subspaces are sheaves by their algebraic-space definition. Hence the equality holds before the cover. No largest locus over the space target $B$ has been assumed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M3 (lemma-local-source), proof of (A),(B); scheme refinements of the overlap implement the scheme-target hypothesis."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $e:H\\to U$. Then $q:H\\to A$ is smooth surjective, and $O_H=e^{-1}O$ is an open subscheme. Pulling the equality of step 2 to $H\\times_AH$ makes $O_H$ invariant. Invariant-open descent for the smooth scheme atlas $q$ gives an open substack $W\\subseteq A$ with $H\\times_AW=O_H$. This is an open subspace: $W\\to A$ is representable by schemes, and representable pullback over the algebraic space $A$ makes $W\\simeq W\\times_AA$ an algebraic space. Its pullback to $U$ equals $O$, since the two opens agree on $H$ and equality of open subfunctors is detected etale locally as in step 2.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-representable-pullback-over-space",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M3 (lemma-local-source), proof of (A),(B); scheme refinements of the overlap implement the scheme-target hypothesis."
+   }
+  },
+  {
+   "text": "For each scheme $T\\to\\mathcal Y$, set $C=T\\times_{\\mathcal Y}V$. It is a space by the diagonal criterion, and $C\\to T$ is smooth surjective, hence flat and locally finitely presented. The pullback of $W_T:=W\\times_{\\mathcal Y}T\\to T$ along this fppf map is $O\\times_VC\\to C$. Explicitly, $W_T\\times_TC\\simeq(W\\times_{\\mathcal Y}V)\\times_VC$. Since $O\\to V$ has $P$, base-change stability of $P$ and its assumed fppf target locality give $P(W_T\\to T)$. Thus $W\\to\\mathcal Y$ has extended $P$. If $J\\subseteq A$ is any open on which $f$ has extended $P$, its scheme base change $J\\times_{\\mathcal Y}V\\to V$ has $P$, so $J\\times_{\\mathcal Y}V\\subseteq O$ by maximality of $O$. Pullback to $H$ gives $J\\times_AH\\subseteq O_H$. The factorization criterion in invariant-open descent yields $J\\subseteq W$. Write $W_f=W$.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M3 (lemma-local-source), proof of (A),(B); scheme refinements of the overlap implement the scheme-target hypothesis."
+   }
+  },
+  {
+   "text": "We prove the chart identity $W_f\\times_{\\mathcal Y}T=W_{f_T}$ for every scheme $T\\to\\mathcal Y$. Form $C=T\\times_{\\mathcal Y}V$ and choose a surjective etale scheme atlas $D\\to C$. Let $E=A\\times_{\\mathcal Y}D$ and $A_T=A\\times_{\\mathcal Y}T$. Both $D\\to V$ and $D\\to T$ are scheme maps. Applied to $g:U\\to V$ and $f_T:A_T\\to T$, the assumed formula identifies the inverse images of $O$ and $W_{f_T}$ in $E$ with the same open $W_{E\\to D}$. These maps are locally of finite type by base change. Since $W_f\\times_{\\mathcal Y}V=O$, the inverse image of $W_f\\times_{\\mathcal Y}T$ in $E$ is also this open. The map $E\\to A_T$ is smooth surjective. Refine it by a surjective etale scheme atlas $K\\to E$; then $K\\to A_T$ is a smooth surjective scheme atlas. The two opens of $A_T$ have equal pullbacks to $K$, so the injectivity of invariant-open descent proves the chart identity. There is no flatness assumption on $T\\to\\mathcal Y$.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-representable-pullback-over-space",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M3 (lemma-local-source), proof of (A),(B); scheme refinements of the overlap implement the scheme-target hypothesis."
+   }
+  },
+  {
+   "text": "Let $b:\\mathcal Z\\to\\mathcal Y$ be representable. Representable pullback over $A$ makes $A_b=A\\times_{\\mathcal Y}\\mathcal Z$ a space; $f_b$ is representable and locally of finite type by base change. Apply steps 1--4 to $f_b$ to obtain its largest open $W_{f_b}$. Choose a smooth surjective scheme atlas $T\\to\\mathcal Z$. By step 5 for $f$ and for $f_b$, the two opens $W_f\\times_{\\mathcal Y}\\mathcal Z$ and $W_{f_b}$ have the same inverse image in $A_b\\times_{\\mathcal Z}T$: both equal $W_{A_b\\times_{\\mathcal Z}T\\to T}$. Refining $A_b\\times_{\\mathcal Z}T\\to A_b$ by an etale scheme atlas gives a smooth surjective scheme atlas of $A_b$, on which these opens agree. Invariant-open descent therefore gives their equality on $A_b$. A scheme $\\mathcal Z$ is included, since every scheme map to $\\mathcal Y$ is representable by the diagonal criterion. Every cover used above is an arbitrary smooth or etale atlas; no quasi-compactness or Noetherian hypothesis entered.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space",
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M3 (lemma-local-source), proof of (A),(B); scheme refinements of the overlap implement the scheme-target hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-diagonal-space-source-representability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06M3 (lemma-local-source), proof; the scheme-target variant uses etale scheme refinements, with Tag 0507 (lemma-substacks-presentation)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|largestOpen|propertyLocus|localSource|IsLocalAtTarget",
+   "results": "{\"t\": \"2026-10-23T20:00:54Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|largestOpen|propertyLocus|localSource|IsLocalAtTarget\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"37be4e837750effa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Largest open locus of a property of representable algebraic stack morphisms is constructed by smooth descent from scheme target charts and commutes with base change",
+   "results": "{\"t\": \"2026-10-23T20:00:55Z\", \"tool\": \"leansearch\", \"query\": \"Largest open locus of a property of representable algebraic stack morphisms is constructed by smooth descent from scheme target charts and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.affineLocally\"], \"digest\": \"e8fe9f5c2a34b869\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"IsLocalAtTarget\"",
+   "results": "{\"t\": \"2026-10-23T20:00:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"MorphismProperty\\\", \\\"IsLocalAtTarget\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsLocalAtTarget\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.toRespects\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.top\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.of_le\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.inf\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.of_forall_pullbackSnd\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.pullbackSnd\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.iff_of_forall_pullbackSnd\"], \"digest\": \"e5e9d0d98d053691\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A source local morphism property with canonical open loci commuting with base change for algebraic spaces over schemes descends to representable morphisms of algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T20:00:56Z\", \"tool\": \"leanfinder\", \"query\": \"A source local morphism property with canonical open loci commuting with base change for algebraic spaces over schemes descends to representable morphisms of algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universally_isLocalAtSource\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.universally_isZariskiLocalAtSource\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsLeftSchemeOfIsStableUnderBaseChange\", \"AlgebraicGeometry.IsZariskiLocalAtSource\"], \"digest\": \"e9c806a32d78cffa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical maximal open subspaces satisfying an etale source local fppf target local property descend along smooth presentations of algebraic stacks and are compatible with representable base change",
+   "results": "{\"t\": \"2026-10-23T20:01:30Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical maximal open subspaces satisfying an etale source local fppf target local property descend along smooth presentations of algebraic stacks and are compatible with representable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"920bdab5f6a022df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a locally finite type representable morphism to an algebraic stack the maximal open locus of local quasi finiteness commutes with arbitrary representable base change",
+   "results": "{\"t\": \"2026-10-23T20:02:13Z\", \"tool\": \"leansearch\", \"query\": \"For a locally finite type representable morphism to an algebraic stack the maximal open locus of local quasi finiteness commutes with arbitrary representable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.baseChange\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"AlgebraicGeometry.LocallyOfFiniteType.recOn\"], \"digest\": \"db3221e7ab2ecf40\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these scheme, ring, or abstract locality results do not construct canonical open loci for representable algebraic-stack morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalAtTarget|open substack|largest open|property locus",
+   "results": "{\"t\": \"2026-10-23T20:56:23Z\", \"tool\": \"grep\", \"query\": \"IsLocalAtTarget|open substack|largest open|property locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"37be4e837750effa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only locality, smoothness or Zariski gluing; none constructs the stated canonical locus for algebraic-stack targets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of canonical open source loci for a morphism of algebraic stacks from scheme-target tests, compatible with representable base change",
+   "results": "{\"t\": \"2026-10-23T20:56:23Z\", \"tool\": \"leansearch\", \"query\": \"Descent of canonical open source loci for a morphism of algebraic stacks from scheme-target tests, compatible with representable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"27856543844a17cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only locality, smoothness or Zariski gluing; none constructs the stated canonical locus for algebraic-stack targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty IsLocalAtTarget open substack",
+   "results": "{\"t\": \"2026-10-23T20:56:23Z\", \"tool\": \"loogle\", \"query\": \"MorphismProperty IsLocalAtTarget open substack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:33: expected end of input\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no conclusion: syntax error in the first Loogle query; corrected Loogle search recorded below"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"IsLocalAtTarget\"",
+   "results": "{\"t\": \"2026-10-23T20:56:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"MorphismProperty\\\", \\\"IsLocalAtTarget\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsLocalAtTarget\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.toRespects\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.top\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.of_le\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.inf\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.of_forall_pullbackSnd\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.pullbackSnd\", \"CategoryTheory.MorphismProperty.IsLocalAtTarget.iff_of_forall_pullbackSnd\"], \"digest\": \"e5e9d0d98d053691\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only locality, smoothness or Zariski gluing; none constructs the stated canonical locus for algebraic-stack targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change compatible largest open locus over schemes descends through smooth atlases of algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T20:56:51Z\", \"tool\": \"leanfinder\", \"query\": \"A base change compatible largest open locus over schemes descends through smooth atlases of algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"1f3ee6f2b6bd3c1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only locality, smoothness or Zariski gluing; none constructs the stated canonical locus for algebraic-stack targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant open subspaces of a smooth presentation glue to the maximal locus of a local property of a representable stack morphism",
+   "results": "{\"t\": \"2026-10-23T20:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant open subspaces of a smooth presentation glue to the maximal locus of a local property of a representable stack morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open\", \"AlgebraicGeometry.PresheafedSpace.GlueData.f_open\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\"], \"digest\": \"1e1dacb54ac3445c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only locality, smoothness or Zariski gluing; none constructs the stated canonical locus for algebraic-stack targets"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-quasifinite-fibre-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal. Auxiliary input: Tag 06ME (lemma-quasi-finite-at-point). The open quasi-finite locus and its base-change property are stacks-properties.tex Tag 06M5 (remark-local-source-apply), item (2), and spaces-morphisms.tex Tags 04NV (lemma-locally-quasi-finite-rel-dimension-0), 04NW (lemma-locally-finite-type-quasi-finite-part). Supporting descent theorem: stacks-properties.tex Tag 06M3 (lemma-local-source), with arbitrary base change and scheme-target tests.",
+   "via": [
+    "lem-sfb-stack-quasifinite-fibre-neighbourhood",
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-source-local-property-locus-descent",
+  "worker": "stage1",
+  "summary": "N9 supplies the invariant-open descent argument using existing DAG inputs only. Scheme refinements avoid assuming the hypothesis on algebraic-space targets. Proves the scheme-chart identity explicitly, then all representable base changes. Repairs doubled TeX escaping and the inherited null blueprint ancestor without changing the mathematical statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting chain recorded in blueprint.from.place: canonical quasi-finite source-open locus used by lem-sfb-stack-quasifinite-fibre-neighbourhood. This is the general descent input in that chain, following Stacks 06M3."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-48dce769c",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-48dce769c (reviewer sub-agent of L); spot-checked: I read the item in full: all 6 steps, no new nodes, the full statements of all 7 cited nodes, and Stacks 06M3 (lemma-local-source) in stacks-properties.tex, including the omitted (B) details. The statement is a scheme-target variant of 06M3 with Q = lft and R = all morphisms; it assumes the loci only over scheme targets, is not weakened, and (iii) is unused but harmless. Step 1: 045G diagonal criterion, 0300 pullback over a space, smooth surjections and lft from the calculus; the R ≃ A×_Y B identity is written out on objects and arrows. Step 2 avoids assuming loci over the space B: an etale scheme atlas D of B, both pullbacks of g isomorphic over D, etale detection of opens. Step 3: 0507 descent along H→U→A, which is smooth surjective. Step 4: P checked on every scheme T through C=T×_Y V (fppf by (i)+(ii)); maximality through the 0507 factorization clause. Step 5 fills the details 06M3 omits for the scheme-chart identity, with no flatness of T→Y used. Step 6 handles representable b through atlas T→Z and 0507 injectivity. Edge cases checked: empty A, always-true P, the parent's P = locally quasi-finite. Duplicate search over 06M3/local-source/'largest open subspace' finds only special cases (unramified locus; relation open locus with flat-lfp hypotheses). Route: the four lemmas are in the item's own unit and the other cites are definitions, so no tool_uses are needed. Searches recorded with all four tools, blueprint field present, no doubled backslashes, no SGA. Batch-5: all four flagged cites reach sec-trace-formula only through the general definition def-trf-algebraic-space; they are general stack foundations (0507, 0300, 04XB/045B/045C, 045G), not steps of the trace formula or Poincaré duality, so accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SourceLocalPropertyLocusDescent",
+  "declaration": "CategoryTheory.source_local_property_locus_descent",
+  "declarations": [
+   "CategoryTheory.SpaceMapProperty",
+   "CategoryTheory.ModuliSpaceMapProperty",
+   "CategoryTheory.IsLargestSpaceSourceOpen",
+   "CategoryTheory.HasSpaceSourceBaseChange",
+   "CategoryTheory.HasCompatibleLargestSourceOpen",
+   "CategoryTheory.source_local_property_locus_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceLocalPropertyLocusDescent.lean",
+  "statement": "theorem source_local_property_locus_descent {S : Scheme.{u}} (P : MorphismProperty (AlgebraicSpace S)) (hiso : ∀ {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (eX : X ≅ X') (eY : Y ≅ Y'), f ≫ eY.hom = eX.hom ≫ f' → (P f ↔ P f')) (hbase : ∀ {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y) (p : X' ⟶ X) (q : X' ⟶ Y'), IsPullback p.hom.hom q.hom.hom f.hom.hom g.hom.hom → P f → P q) (htarget : ∀ {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y) (p : X' ⟶ X) (q : X' ⟶ Y'), IsPullback p.hom.hom q.hom.hom f.hom.hom g.hom.hom → MapIsFlat g → MapIsLocallyOfFinitePresentation g → IsJointlySurjective (fun _ : Unit ↦ g.hom.hom) → (P f ↔ P q)) (hsource_preserve : ∀ {X Y X' : AlgebraicSpace S} (f : X ⟶ Y) (e : X' ⟶ X), MapIsLocally (@Etale) e → P f → P (e ≫ f)) (hsource_detect : ∀ {I : Type (max u z)} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (Xi : I → AlgebraicSpace S) (e : ∀ i : I, Xi i ⟶ X), (∀ i : I, MapIsLocally (@Etale) (e i)) → IsJointlySurjective (fun i : I ↦ (e i).hom.hom) → (∀ i : I, P (e i ≫ f)) → P f) (hscheme : ∀ (E : AlgebraicSpace S) (T : Over S) (g : E.obj.obj ⟶ yoneda.obj T), MapToSchemeIsLocally (@LocallyOfFiniteType) E T g → ∃ W : OpenSubspace E, IsGreatest {J : OpenSubspace E | SpaceMapProperty P (J.val.ι ≫ g)} W ∧ ∀ (T' : Over S) (b : T' ⟶ T) (E' : AlgebraicSpace S) (p : E'.obj.obj ⟶ E.obj.obj) (g' : E'.obj.obj ⟶ yoneda.obj T'), IsPullback p g' g (yoneda.map b) → ∃ W' : OpenSubspace E', W'.val = W.val.preimage p ∧ IsGreatest {J : OpenSubspace E' | SpaceMapProperty P (J.val.ι ≫ g')} W') (A : AlgebraicSpace S) (Y : BasedCategory.{v₁, w₁} (Over S)) (hY : IsAlgebraicModuliStack Y) (f : BasedFunctor (discreteModuli A.obj.obj) Y) (hf : ModuliSpaceTest (@LocallyOfFiniteType) f) : ∃ W : OpenSubspace A, IsLargestSpaceSourceOpen P A f W ∧ (∀ (Z : BasedCategory.{v₂, w₂} (Over S)) (hZ : IsAlgebraicModuliStack Z) (b : BasedFunctor Z Y), IsRepresentableByAlgebraicSpaces b → HasCompatibleLargestSourceOpen P f W b) ∧ (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), HasCompatibleLargestSourceOpen P f W t)",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Largestness and literal preimage compatibility are stated using the existing OpenSubspace. Five real Prop-valued helpers spell out representation transport, scheme-test extension, largestness, and space-valued 2-pullbacks with both projections; they are vocabulary of this node, with no chosen maps or objects. Adds only already-landed owning definition nodes to stmt_deps. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03d47c45e",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read item node, all 16 stmt_dep records, the module, report (Worker report + Second reading by Q38), and exact dep declarations (HasSpaceBaseChange, moduliTwoFiberProduct/Fst/Snd, ModuliTwoIso, discreteModuli(Map), OpenSubspace, MapIsLocally/Flat/LFP, IsJointlySurjective, MapToSchemeIsLocally, ModuliSpaceTest, IsAlgebraicModuliStack). Each clause matches the node: hiso, hbase, htarget (flat+lfp+surjective, iff, square orientation checked), source preserve/detect, hscheme with IsGreatest and literal preimage compatibility for every scheme map; conclusion gives a largest W, every representable stack base change with both 2-fibre projections pinned by ModuliTwoIso, Wb.val = W.val.preimage p and Wb largest, plus a separate scheme clause. No extra qc/Noetherian assumptions; universes declared. Node diff vs base: only lean and 5 added stmt_deps, all landed def nodes owning the declarations used. lean.statement verbatim. Helpers are real Prop formulas, no H4 duplicate found; docstrings with source+blueprint; 6-step proof docstring; sorry only. No findings; no file changed, no compile run."
+ }
+}

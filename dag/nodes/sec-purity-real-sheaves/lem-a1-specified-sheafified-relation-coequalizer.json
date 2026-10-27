@@ -1,0 +1,270 @@
+{
+ "id": "lem-a1-specified-sheafified-relation-coequalizer",
+ "kind": "statement",
+ "title": "A specified sheafification of a relation quotient has the coequalizer universal property",
+ "statement": "Let $\\mathcal C$ be a site in a fixed choice of universes, and let $A,B$ be sheaves of sets on $\\mathcal C$ [def-weil-pbc-sites-and-cohomology]. Let $s,t:B\\rightrightarrows A$ be morphisms such that for every object $T$ the function $(s_T,t_T):B(T)\\to A(T)^2$ is injective and its image $E_T$ is an equivalence relation. Let $P$ be the quotient presheaf $P(T)=A(T)/E_T$, with restrictions $[a]\\mapsto[A(f)(a)]$ for $f:T'\\to T$ and quotient map $\\pi:A\\to P$. Suppose a sheaf $Q$ and a morphism $\\eta:P\\to Q$ are a sheafification of this particular $P$ [def-weil-pbc-sheafification]: composition with $\\eta$ is a bijection $\\operatorname{Hom}(Q,H)\\to\\operatorname{Hom}(P,H)$ for every sheaf $H$. Set $q=\\eta\\circ\\pi$. Then $q\\circ s=q\\circ t$, and composition with $q$ gives a bijection\n$$\\operatorname{Hom}(Q,H)\\xrightarrow{\\sim}\\{b:A\\to H:b\\circ s=b\\circ t\\}.$$\nFor an equalizing map $b$, the unique corresponding map $c:Q\\to H$ satisfies $(c\\circ\\eta)_T([a])=b_T(a)$ for all $T,a$. Thus $(Q,q)$ is a coequalizer [def-weil-pbc-category-colimit]. If $Z$ is any sheaf with $p:A\\to Z$ that is also a coequalizer of $s,t$, the unique comparison $\\alpha:Q\\to Z$ with $\\alpha\\circ q=p$ is an isomorphism. Its inverse is the unique $\\beta:Z\\to Q$ with $\\beta\\circ p=q$, and $\\alpha\\beta=1_Z$, $\\beta\\alpha=1_Q$. Only the displayed universal property for this $P$ is assumed; a sheafification functor for all presheaves in these universes is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WH (proposition-sheafification-adjoint), universal property applied to the pointwise equivalence-relation quotient; compare Groupoids definition-quotient-sheaf and its following coequalizer paragraph in groupoids.tex. The comparison with any other coequalizer is uniqueness of the universal factorization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The statement already defines P as the chosen presheaf coequalizer of s.hom and t.hom. Mathlib coequalizer.condition_assoc therefore proves that q = π ≫ η equalizes s and t, after applying the faithful inclusion of sheaves into presheaves. The sectionwise quotient construction need not be rebuilt. The hypotheses on the image relation identify this chosen coequalizer with the quotient described in the statement; the universal-property argument works for any parallel pair.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VG, coequalizer paragraph following definition-quotient-sheaf; Mathlib coequalizer.condition_assoc."
+   }
+  },
+  {
+   "text": "Given b:A→H equalizing s,t, apply the presheaf coequalizer universal property to b.hom, obtaining d with π ≫ d = b.hom. Surjectivity of the specified hη gives c:Q→H with η ≫ c.hom = d, so q ≫ c = b. If q ≫ c′ = b, coequalizer.hom_ext gives η ≫ c′.hom = η ≫ c.hom, and injectivity of hη yields c′ = c. This proves the unique factorization hfactor without assuming a global sheafification functor.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint, specified factorization property; Categories Tag 002F."
+   }
+  },
+  {
+   "text": "For any cofork k, apply hfactor to its arrow k.π and equation k.condition. Cofork.IsColimit.ofExistsUnique assembles these unique factorizations into IsColimit (Cofork.ofπ q hq). Cofork.IsColimit.homIso then gives the asserted equivalence with equalizing arrows, with forward map definitionally composition by q.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit, specialized to a parallel pair."
+   }
+  },
+  {
+   "text": "For the unique c supplied by hfactor, apply the inclusion on homs to q ≫ c = b, then evaluate this equality at T and a. Since q.hom = π ≫ η, the resulting equation is exactly (η ≫ c.hom)_T(π_T(a)) = b_T(a). Uniqueness of c for the conjunction follows already from its first conjunct.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VG, quotient-presheaf representative formula and coequalizer paragraph."
+   }
+  },
+  {
+   "text": "For another colimiting cofork (Z,p), hfactor yields the unique α with q ≫ α = p, and its colimit property yields the unique β with p ≫ β = q. Precompose β ≫ α and 1_Z by p; associativity and the two factorization equations make them equal, so the other cofork hom_ext gives β ≫ α = 1_Z. Similarly precompose α ≫ β and 1_Q by q and use the constructed cofork hom_ext. These equations give IsIso α with inverse β. The same unique factorizations prove the nested uniqueness claims.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, uniqueness of colimits by unique factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VG, coequalizer paragraph, combined with Sites Tag 00WH and Categories Tag 002F. D3 uses the presheaf coequalizer already present in the Lean statement, Mathlib coequalizer.desc/hom_ext and Cofork.IsColimit.ofExistsUnique/homIso, instead of rebuilding sectionwise quotient descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coequalizer|preservesColimit",
+   "results": "{\"t\": \"2026-10-22T07:57:40Z\", \"tool\": \"grep\", \"query\": \"coequalizer|preservesColimit\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/CompatiblePlus.lean\", \"Mathlib/CategoryTheory/Sites/CompatiblePlus.lean\", \"Mathlib/CategoryTheory/Sites/CompatiblePlus.lean\", \"Mathlib/CategoryTheory/Sites/CompatiblePlus.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\"], \"digest\": \"fd79a351e2f46eb6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of the presheaf quotient by a sectionwise equivalence relation is a coequalizer of the relation projections in sheaves of sets",
+   "results": "{\"t\": \"2026-10-22T07:57:40Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of the presheaf quotient by a sectionwise equivalence relation is a coequalizer of the relation projections in sheaves of sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"CategoryTheory.sheafifyLift.congr_simp\", \"PresheafOfModules.sheafifyMap.congr_simp\", \"CategoryTheory.isoSheafify\", \"CategoryTheory.Sheaf.sheafifyCocone\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"CategoryTheory.GrothendieckTopology.isoSheafify\", \"CategoryTheory.plusPlusAdjunction\"], \"digest\": \"c5d98c0767c69d5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafify\", \"coequalizer\"",
+   "results": "{\"t\": \"2026-10-22T07:57:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafify\\\", \\\"coequalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a presheaf A with a natural equivalence relation E the sheafification of T maps to A(T) modulo E(T) has the universal property of coequalizer against every sheaf H",
+   "results": "{\"t\": \"2026-10-22T07:57:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a presheaf A with a natural equivalence relation E the sheafification of T maps to A(T) modulo E(T) has the universal property of coequalizer against every sheaf H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.mk\", \"CategoryTheory.GrothendieckTopology.Plus.toPlus_mk\", \"CategoryTheory.GrothendieckTopology.Plus.toPlus_eq_mk\", \"CategoryTheory.GrothendieckTopology.Plus.toPlus_apply\", \"CategoryTheory.GrothendieckTopology.Plus.meqOfSep\", \"CategoryTheory.GrothendieckTopology.toSheafify\", \"CategoryTheory.Functor.IsCoverDense.sheaf_eq_amalgamation\", \"CategoryTheory.GrothendieckTopology.toPlus_plusLift\"], \"digest\": \"a4780919b5d5e9b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from the sheafification of a pointwise quotient of a presheaf to a sheaf are exactly natural maps constant on each relation class",
+   "results": "{\"t\": \"2026-10-22T07:57:51Z\", \"tool\": \"leanfinder\", \"query\": \"Maps from the sheafification of a pointwise quotient of a presheaf to a sheaf are exactly natural maps constant on each relation class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.toPlus_eq_mk\", \"CategoryTheory.GrothendieckTopology.Plus.toPlus_mk\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\", \"CategoryTheory.GrothendieckTopology.Plus.toPlus_apply\", \"CategoryTheory.GrothendieckTopology.Plus.meqOfSep\", \"CategoryTheory.GrothendieckTopology.Plus.mk\", \"CategoryTheory.GrothendieckTopology.Plus.sep\", \"CategoryTheory.GrothendieckTopology.plus_hom_ext\"], \"digest\": \"b0b0f27df59f489e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|coequalizer",
+   "results": "{\"t\": \"2026-10-22T07:58:51Z\", \"tool\": \"grep\", \"query\": \"quotient|coequalizer\", \"sub\": \"CategoryTheory/Limits/Types/Colimits.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"97\", \"145\", \"162\"], \"digest\": \"7e8ae3309fa9c1d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitSheafifyCocone|HasWeakSheafify|sheafifyLift",
+   "results": "{\"t\": \"2026-10-22T07:58:51Z\", \"tool\": \"grep\", \"query\": \"isColimitSheafifyCocone|HasWeakSheafify|sheafifyLift\", \"sub\": \"CategoryTheory/Sites/Limits.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"184\", \"188\", \"209\", \"213\", \"220\"], \"digest\": \"0143a06ab340e5e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given only a sheafification universal property for one pointwise quotient presheaf, with no global sheafification functor, it is the coequalizer of its equivalence relation and is canonically isomorphic to any other coequalizer",
+   "results": "{\"t\": \"2026-10-22T07:58:52Z\", \"tool\": \"leansearch\", \"query\": \"Given only a sheafification universal property for one pointwise quotient presheaf, with no global sheafification functor, it is the coequalizer of its equivalence relation and is canonically isomorphic to any other coequalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafificationIso\", \"CategoryTheory.Limits.coequalizer\", \"CategoryTheory.Limits.Types.coequalizerIso\", \"CategoryTheory.Limits.PreservesCoequalizer.iso\", \"CategoryTheory.isoSheafify\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"CategoryTheory.GrothendieckTopology.isoSheafify\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\"], \"digest\": \"f7fe2716612acb1f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cofork\", \"IsColimit\", \"homEquiv\"",
+   "results": "{\"t\": \"2026-10-22T07:58:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cofork\\\", \\\"IsColimit\\\", \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitSheafifyCocone|def coequalizerColimit|def coequalizerIso",
+   "results": "{\"t\": \"2026-10-22T08:00:20Z\", \"tool\": \"grep\", \"query\": \"isColimitSheafifyCocone|def coequalizerColimit|def coequalizerIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean\", \"Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean\"], \"digest\": \"28091931c33048c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given sheaves A and B with B a sectionwise equivalence relation on A and a specified universal sheafification Q of the quotient presheaf, Q is a coequalizer without assuming a global sheafification functor",
+   "results": "{\"t\": \"2026-10-22T08:01:44Z\", \"tool\": \"leanfinder\", \"query\": \"Given sheaves A and B with B a sectionwise equivalence relation on A and a specified universal sheafification Q of the quotient presheaf, Q is a coequalizer without assuming a global sheafification functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"SheafOfModules.Presentation.isColimit\", \"CategoryTheory.GrothendieckTopology.toSheafify\", \"CategoryTheory.GrothendieckTopology.sheafify_isSheaf\", \"CategoryTheory.GrothendieckTopology.sheafification_obj\", \"CategoryTheory.GrothendieckTopology.sheafification\", \"CategoryTheory.GrothendieckTopology.sheafify\"], \"digest\": \"22eb0e01258def5c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isColimitSheafifyCocone in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184 and an already identified presheaf colimit. Types.coequalizerColimit at Mathlib/CategoryTheory/Limits/Types/Coequalizers.lean:34 treats one set quotient only. Neither states the natural sectionwise quotient and comparison result under only a specified sheafification unit for P. Sheafification existence for all small-valued presheaves on this site is not a hypothesis here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A specified sheafification of a sectionwise equivalence relation quotient is a coequalizer, without assuming a sheafification functor",
+   "results": "{\"t\": \"2026-10-23T04:11:35Z\", \"tool\": \"leansearch\", \"query\": \"A specified sheafification of a sectionwise equivalence relation quotient is a coequalizer, without assuming a sheafification functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Coequalizer\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"Function.Coequalizer.Rel.casesOn\", \"Function.Coequalizer.Rel.recOn\", \"Function.Coequalizer.Rel\", \"Function.Coequalizer.Rel.intro\", \"CategoryTheory.Limits.coequalizer\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\"], \"digest\": \"677ccbfe345a8f6f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf-colimit result in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184; its presheaf colimit must also be established. Types.coequalizerColimit in Limits/Types/Coequalizers.lean:34 treats only one set quotient. Concrete sheafifyLift_unique and sheafify_hom_ext concern the constructed sheafification, not this arbitrary specified unit. These do not give the full statement by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given sheaves A and B forming a sectionwise equivalence relation, a specified universal sheafification of the quotient presheaf represents equalizing natural transformations and is isomorphic to any coequalizer",
+   "results": "{\"t\": \"2026-10-23T04:12:08Z\", \"tool\": \"leanfinder\", \"query\": \"Given sheaves A and B forming a sectionwise equivalence relation, a specified universal sheafification of the quotient presheaf represents equalizing natural transformations and is isomorphic to any coequalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.isoSheafify\", \"CategoryTheory.plusPlusIsoSheafify\", \"CategoryTheory.toSheafify_plusPlusIsoSheafify_hom\", \"CategoryTheory.plusPlusSheafIsoPresheafToSheaf\", \"CategoryTheory.GrothendieckTopology.isoToPlus\", \"CategoryTheory.GrothendieckTopology.plusLift_unique\", \"CategoryTheory.GrothendieckTopology.isIso_toSheafify\", \"CategoryTheory.GrothendieckTopology.sheafify_isSheaf\"], \"digest\": \"147348af335a5a74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf-colimit result in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184; its presheaf colimit must also be established. Types.coequalizerColimit in Limits/Types/Coequalizers.lean:34 treats only one set quotient. Concrete sheafifyLift_unique and sheafify_hom_ext concern the constructed sheafification, not this arbitrary specified unit. These do not give the full statement by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitSheafifyCocone|HasWeakSheafify|sheafifyLift",
+   "results": "{\"t\": \"2026-10-23T04:12:29Z\", \"tool\": \"grep\", \"query\": \"isColimitSheafifyCocone|HasWeakSheafify|sheafifyLift\", \"sub\": \"CategoryTheory/Sites/Limits.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"184\", \"188\", \"209\", \"213\", \"220\"], \"digest\": \"0143a06ab340e5e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf-colimit result in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184; its presheaf colimit must also be established. Types.coequalizerColimit in Limits/Types/Coequalizers.lean:34 treats only one set quotient. Concrete sheafifyLift_unique and sheafify_hom_ext concern the constructed sheafification, not this arbitrary specified unit. These do not give the full statement by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafify\", \"coequalizer\"",
+   "results": "{\"t\": \"2026-10-23T04:12:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafify\\\", \\\"coequalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf-colimit result in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184; its presheaf colimit must also be established. Types.coequalizerColimit in Limits/Types/Coequalizers.lean:34 treats only one set quotient. Concrete sheafifyLift_unique and sheafify_hom_ext concern the constructed sheafification, not this arbitrary specified unit. These do not give the full statement by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations out of a pointwise quotient presheaf are equalizing transformations, and any chosen universal sheafification inherits this coequalizer property",
+   "results": "{\"t\": \"2026-10-23T04:13:25Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations out of a pointwise quotient presheaf are equalizing transformations, and any chosen universal sheafification inherits this coequalizer property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.toSheafify\", \"CategoryTheory.GrothendieckTopology.sheafifyLift.congr_simp\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.GrothendieckTopology.sheafify_hom_ext\", \"CategoryTheory.GrothendieckTopology.toSheafify_naturality_assoc\", \"CategoryTheory.GrothendieckTopology.toSheafification_app\", \"CategoryTheory.GrothendieckTopology.sheafifyLift_unique\", \"CategoryTheory.GrothendieckTopology.isoSheafify\"], \"digest\": \"9249d14ad58ec164\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the sheaf-colimit result in Mathlib/CategoryTheory/Sites/Limits.lean:213 assumes HasWeakSheafify at line 184; its presheaf colimit must also be established. Types.coequalizerColimit in Limits/Types/Coequalizers.lean:34 treats only one set quotient. Concrete sheafifyLift_unique and sheafify_hom_ext concern the constructed sheafification, not this arbitrary specified unit. These do not give the full statement by one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-etale-atlas-presentation",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Old presentation step 5: descent of equalizing maps through pointwise quotient classes, specified sheafification universal property, and inverse identities comparing coequalizers; auxiliary U/R presentation in the 03BZ/03XW branch of lem-a1-affine-hc0.",
+   "via": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-specified-sheafified-relation-coequalizer",
+  "worker": "stage1",
+  "summary": "Kept the statement and all original search records. Wrote six elementary steps: well-defined quotient restrictions, descent on relation classes, naturality and uniqueness, application of the supplied sheafification bijection, coequalizer interpretation, and explicit inverse identities. No new lemma is needed and no global sheafification existence is used.",
+  "blueprint": "Realizes the auxiliary U/R presentation in the 03BZ/03XW branch of lem-a1-affine-hc0, specifically the former presentation step 5 now used in lem-a1-etale-atlas-presentation step 4: quotient descent, specified sheafification and comparison of coequalizers. The current blueprint affine-hc0 proof only states the compact-support argument; this is a generic tool below its existing presentation branch."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-f5b0718d6",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-f5b0718d6 (reviewer sub-agent of L); spot-checked: I read the item in full: it has six steps and no new nodes. The statement, stmt_deps, created, blueprint.from and the inherited searches are unchanged from the statement-only base node. Sources match: Stacks groupoids 02VG (definition-quotient-sheaf; the quotient presheaf is U(T)/∼_T, and the paragraph after it says the sheafification of that presheaf is the coequalizer in sheaves of sets), sites 00WH and categories 002F, with the tag-to-label mapping checked. Cited nodes say what the steps use. def-weil-pbc-sites-and-cohomology gives natural transformations and sheaves of sets. def-weil-pbc-sheafification gives exactly the factor-uniquely universal property, and the plus construction is not used. def-weil-pbc-category-colimit gives colimits by unique factorization. Step checks: (1) restriction on P is well defined, using naturality of s and t and the fact that E is an equivalence relation; (2) πs=πt, and an equalizing b is constant on E-related pairs; (3) d is natural and unique, which gives Hom(P,H) ≅ equalizing maps; (4) uniqueness of c'q=b goes through step 3 and then injectivity of composition with η; (5) a parallel-pair cocone is the same as an equalizing arrow; (6) the αβ and βα identities follow by uniqueness, and the types check. All six steps really are elementary. The injectivity hypothesis is unused, which is harmless. Edge cases checked: empty A(T), diagonal E, indiscrete E; no global sheafification is used. Parent lem-a1-etale-atlas-presentation step 4 uses exactly α, β, both inverse identities and αq=p. No duplicate: the nearest node, lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer, is a different statement, used in the parent's step 3. Only definition nodes are cited, so there is no route problem and no tool_uses are needed. Blueprint from/same_as and the split_report blueprint entry are present. Searches are of three kinds with real verdicts, and Mathlib's isColimitSheafifyCocone needs HasWeakSheafify, so recording no match is right. No SGA is cited. This is not a re-split delivery. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpecifiedSheafifiedRelationCoequalizer",
+  "declaration": "CategoryTheory.specified_sheafified_relation_coequalizer",
+  "declarations": [
+   "CategoryTheory.specifiedRelationQuotientMap",
+   "CategoryTheory.specified_sheafified_relation_coequalizer"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpecifiedSheafifiedRelationCoequalizer.lean",
+  "statement": "theorem specified_sheafified_relation_coequalizer {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (A B : Sheaf J (Type w)) (s t : B ⟶ A) (hinj : ∀ T : C, Function.Injective (fun r : B.obj.obj (op T) ↦ (s.hom.app (op T) r, t.hom.app (op T) r))) (hrel : ∀ T : C, _root_.Equivalence (fun a b : A.obj.obj (op T) ↦ ∃ r : B.obj.obj (op T), s.hom.app (op T) r = a ∧ t.hom.app (op T) r = b)) (Q : Sheaf J (Type w)) (η : coequalizer s.hom t.hom ⟶ Q.obj) (hη : ∀ H : Sheaf J (Type w), Function.Bijective (fun c : Q ⟶ H ↦ η ≫ c.hom)) : ∃ hq : s ≫ specifiedRelationQuotientMap s t Q η = t ≫ specifiedRelationQuotientMap s t Q η, (∀ H : Sheaf J (Type w), ∃ e : (Q ⟶ H) ≃ {b : A ⟶ H // s ≫ b = t ≫ b}, ∀ c : Q ⟶ H, (e c).val = specifiedRelationQuotientMap s t Q η ≫ c) ∧ (∀ (H : Sheaf J (Type w)) (b : A ⟶ H), s ≫ b = t ≫ b → ∃! c : Q ⟶ H, specifiedRelationQuotientMap s t Q η ≫ c = b ∧ ∀ (T : C) (a : A.obj.obj (op T)), (η ≫ c.hom).app (op T) ((coequalizer.π s.hom t.hom).app (op T) a) = b.hom.app (op T) a) ∧ Nonempty (IsColimit (Cofork.ofπ (specifiedRelationQuotientMap s t Q η) hq)) ∧ (∀ (Z : Sheaf J (Type w)) (p : A ⟶ Z) (hp : s ≫ p = t ≫ p), IsColimit (Cofork.ofπ p hp) → ∃! α : Q ⟶ Z, specifiedRelationQuotientMap s t Q η ≫ α = p ∧ IsIso α ∧ ∃! β : Z ⟶ Q, p ≫ β = specifiedRelationQuotientMap s t Q η ∧ β ≫ α = 𝟙 Z ∧ α ≫ β = 𝟙 Q)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2716e971a",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Node record differs from base only in lean; lean.statement verbatim; not landed elsewhere. Hypotheses: arbitrary GrothendieckTopology J, Sheaf J (Type w), independent u/v/w universes, hinj and hrel (_root_.Equivalence of image relation) as in node; P = presheaf coequalizer s.hom t.hom, the pointwise quotient A(T)/E_T up to canonical identification, same interface as landed parent etale_atlas_presentation; hη is exactly the specified sheafification bijection for this P, no HasWeakSheafify. Conclusions: q∘s=q∘t, Hom equivalence pinned to precomposition by q, ∃! c with representative formula (implied conjunct), Nonempty IsColimit cofork, unique α iso with unique inverse β and β≫α=𝟙Z, α≫β=𝟙Q in diagrammatic order; nested ∃! conjunction loses nothing (α uniqueness from Hom equivalence, β from hypothesis IsColimit). Helper specifiedRelationQuotientMap has real data π≫η. Docstrings carry source/blueprint and six proof steps; sorry only; report has both sections. Edge cases (empty sections, diagonal/indiscrete E, empty C) covered. No compile run (no file changed). Advisory: Types.Coequalizers/FunctorCategory.Basic imports documentary only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T091356-L-3336989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -58,7 +58,68 @@
   "date": "2026-10-18",
   "existing": true
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
+     "lines": [
+      84,
+      96
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": true
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek",
+     "lines": [
+      87,
+      103
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -66,5 +127,15 @@
   "group": "Q04",
   "result": "pass",
   "note": "Checked every clause against the node and the source (proof Steps 1-6): field and primes, finite A with l^n = 0 (A = 0 allowed), separated finite-type f, s and f≫s, the same Compactification c on both sites, F_et and F_proet are the recorded Rg_*∘D(i_!) composites, nu^* is the left adjoint of proEtaleSiteComparisonModules, any given adjunction F_et ⊣ R, preservation hypothesis through isBoundedConstructible and hasTorAmplitudeIn. Conclusions: intrinsic pro-etale domain (bounded, IsConstructibleProEtaleFixedModuleSheaf on every H^i, all-module Tor), functorial etale origin E with α, H_K = E⋙R⋙nu_X^*, β on all of D^+, t equal to β^{-1}∘nu^*(ε)∘α exactly as Step 6, Hom bijection h ↦ G(h)≫t_K. Edge cases: A = 0, empty schemes, K = 0, a = b, universes not equated. Three §1(B) existing:true rebinds checked: torAmplitudeIn tests every sheaf with the derived tensor, the fixed-module constructibility matches the node, FiniteCoefficient lower shriek matches the node. Observation, not a fault: the shared pro-etale records flip back from the NC/Q91 coefficient interfaces; both forms are faithful and those modules stay landed. No hollow definitions, docstrings with source and blueprint, one sorry, lean.statement verbatim, report sections present (the second reading is an open self-check). nt_compile.py: module clean in 3.9 s; a control copy with a planted error reported it."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal A$ be a Grothendieck abelian category and let\n$c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ be a compactification of $f$\n[sk-def-nagata-sketch-data]. The *derived lower shriek along $c$* is\n\n$$\nRf_!^c:=R(g_*)\\circ D(i_!)\\colon D(X_{\\mathrm{proét}},\\mathcal A)\\to D(Y_{\\mathrm{proét}},\\mathcal A),\n$$\n\nwhere $D(i_!)$ applies the exact extension by zero $i_!$\n([def-weil-extension-by-zero], [lem-sfb-finite-extension-by-zero-exact]) levelwise,\nand $R(g_*)$ is the right derived functor [det-def-sfb-derived-categories] of the pushforward\n$g_*$ of [def-sfb-finite-lower-star].",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

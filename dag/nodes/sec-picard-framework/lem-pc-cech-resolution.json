@@ -112,7 +112,60 @@
   "def-pc-scheme"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModule",
+     "lines": [
+      191,
+      220
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.quasiIso_cechResolutionι",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution",
+     "lines": [
+      478,
+      502
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.rightAcyclic_cechResolution_X",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution",
+     "lines": [
+      563,
+      575
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.higherDirectImageIsoCechResolution",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution",
+     "lines": [
+      577,
+      592
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "split_report": {
@@ -183,5 +236,35 @@
   "landing": "20261012T151906-L-2287721",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S=\\operatorname{Spec}(A)$, let $f:X\\to S$ be a separated morphism,\nand let $X=\\bigcup_{i\\in I}U_i$ be a finite cover by affine opens. For an\n$\\mathcal O_X$-module $\\mathcal F$ and a tuple $y=(i_0,\\dots,i_p)\\in I^{p+1}$\nwrite $U_y=U_{i_0}\\cap\\dots\\cap U_{i_p}$ and $j_y:U_y\\to X$. The augmented\n(ordered) Cech complex of sheaves\n\n$$\n0\\longrightarrow\\mathcal F\\longrightarrow\n\\prod_{i\\in I} j_{i,*}(\\mathcal F|_{U_i})\\longrightarrow\n\\prod_{(i_0,i_1)\\in I^2}j_{(i_0,i_1),*}(\\mathcal F|_{U_{i_0i_1}})\\longrightarrow\\cdots,\n$$\n\nwith the alternating sum of the restriction maps as differential, is exact.\nIf $\\mathcal F$ is quasi-coherent, its non-augmented terms are\n$f_*$-acyclic, so applying $f_*$ to it computes the higher direct images:\n$R^qf_*\\mathcal F\\cong H^q\\bigl(f_*\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)\\bigr)$\nfor all $q\\ge0$. On global sections this says that the Cech complex\n$\\check C^\\bullet(\\mathcal U,\\mathcal F)$ of $A$-modules has\n$H^q(\\check C^\\bullet(\\mathcal U,\\mathcal F))\\cong\\Gamma(S,R^qf_*\\mathcal F)$.",
+  "proof": [
+   {
+    "text": "Fix a point of $X$ and a covering open $U_i$ containing it. (Exactness needs neither quasi-coherence nor affineness.)\nRestrict the augmented complex to $U_i$. This restricted cover\ncontains the entire space $U_i$ as one member; insertion of that\nindex gives a contracting homotopy of the augmented Cech complex.\nThus the complex is locally exact, and hence exact as a complex\nof sheaves. This argument does not identify a boundary stalk of\nan open direct image with zero.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The intersections $U_y$ are affine: for two affine opens this follows\nby pulling the closed diagonal of $X/S$ back to their affine\nproduct over $S$, and the general case follows by induction.\nEach $j_y$ is an affine morphism, since its inverse image in every\naffine open of $X$ is again such an affine intersection.\nBy [lem-pc-affine-morphism-hi],\n$R^qj_{y,*}(\\mathcal F|_{U_y})=0$ for $q>0$.\nFor an affine open $V\\subseteq S$, the inverse image\n$U_y\\times_S V$ is affine. The Leray spectral sequence for $j_y$\nrestricted over $V$, together with the preceding vanishing and\n[pqf-lem-affine-vanishing], gives\n\n$$\nH^q(f^{-1}V,j_{y,*}(\\mathcal F|_{U_y}))\n=H^q(U_y\\times_S V,\\mathcal F)=0\\quad(q>0).\n$$",
+    "uses": [
+     "lem-pc-affine-morphism-hi",
+     "pqf-lem-affine-vanishing"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Affine opens form a basis on $S$, so all higher direct images under\n$f$ of these Cech terms vanish. A resolution by $f_*$-acyclic\nobjects computes the right derived functors (apply $f_*$ to an\ninjective double resolution and use its two spectral sequences).\nThe terms $f_*\\check{\\mathcal C}^p$ are quasi-coherent on the affine scheme\n$S$ (direct images of quasi-coherent modules along the affine maps\n$U_y\\to S$), $\\Gamma(S,-)$ is exact on quasi-coherent modules, and\n$\\Gamma(S,f_*\\check{\\mathcal C}^p)=\\check C^p(\\mathcal U,\\mathcal F)$; so taking\nglobal sections gives the last claim.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

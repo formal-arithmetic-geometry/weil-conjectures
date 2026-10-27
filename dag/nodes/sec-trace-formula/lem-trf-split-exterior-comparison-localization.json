@@ -1,0 +1,356 @@
+{
+ "id": "lem-trf-split-exterior-comparison-localization",
+ "kind": "statement",
+ "title": "Split exterior comparison with lift independence and localization",
+ "statement": "Let $R$ be a commutative ring and let $U\\xrightarrow{i}V\\xrightarrow{p}W$ be $R$-linear maps such that $i$ is injective, $p$ is surjective and $\\operatorname{im}i=\\ker p$. Assume $W$ is projective [def-weil-pbc-projective-module]. There exists an $R$-linear section $s:W\\to V$ of $p$. For every such section, $t_s:U\\oplus W\\to V$, $t_s(u,w)=i(u)+s(w)$, is an isomorphism; its inverse sends $v$ to $(u,pv)$ where $i(u)=v-s(pv)$. These inverse maps and the section localize, and the localized sequence remains split exact at every multiplicative subset [def-weil-pbc-module-localization].\nAssume in addition that $U,W$ are free modules [def-weil-pbc-free-module] with finite bases of lengths $r,s_0\\geq0$. Use exterior powers [def-weil-pbc-exterior-algebra] and tensor products [def-weil-pbc-module-tensor-product]. Let $c_{U,W}:\\bigwedge^rU\\otimes_R\\bigwedge^{s_0}W\\xrightarrow{\\sim}\\bigwedge^{r+s_0}(U\\oplus W)$ be the canonical direct-sum comparison characterized by concatenating $(u_j,0)$ followed by $(0,w_k)$, and put $\\theta_s=(\\bigwedge^{r+s_0}t_s)\\circ c_{U,W}$. This is an $R$-linear isomorphism. For arbitrary tuples $u_1,\\ldots,u_r\\in U$, $w_1,\\ldots,w_{s_0}\\in W$ and arbitrary lifts $v_k\\in V$ with $p(v_k)=w_k$, it satisfies\n$$\\theta_s((u_1\\wedge\\cdots\\wedge u_r)\\otimes(w_1\\wedge\\cdots\\wedge w_{s_0}))=i(u_1)\\wedge\\cdots\\wedge i(u_r)\\wedge v_1\\wedge\\cdots\\wedge v_{s_0}.$$\nThe map is independent of the section and of the chosen bases; the displayed formula holds for every replacement basis and every lift tuple. For a multiplicative subset $T\\subset R$ and $A=T^{-1}R$, exterior-power and tensor localization identify $A\\otimes_R\\theta_s$ with the same construction for $i_A,p_A$; this equality is compatible with successive localizations. The assertions include $r=0$, $s_0=0$, characteristic two and the zero ring. When $r=0$ the map is the left unit identification followed by $\\bigwedge^{s_0}(p^{-1})$, when $s_0=0$ it is the right unit identification followed by $\\bigwedge^r i$, and when both vanish it is multiplication $R\\otimes_R R\\to R$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJB (lemma-det-ses), first proof, omitted verification of the local wedge isomorphism; the splitting, lift and basis invariance, localization and empty-wedge cases are made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the lifting characterization of projectivity to $\\mathrm{id}_W$ and the surjection $p$ to obtain $s$ with $ps=\\mathrm{id}_W$. Fix any such $s$. Since $p(v-s(pv))=0$, exactness and injectivity of $i$ give a unique $q_s(v)\\in U$ with $i(q_s(v))=v-s(pv)$. Applying the injective map $i$ proves that $q_s$ is additive and $R$-linear. The identities $q_si=\\mathrm{id}_U$, $q_ss=0$, $pi=0$, $ps=\\mathrm{id}_W$ and $iq_s+sp=\\mathrm{id}_V$ show directly that $(q_s,p)$ and $t_s$ are inverse linear maps. Only the lifting property already stated in the cited definition is used.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: detailed verification of the omitted local wedge construction."
+   }
+  },
+  {
+   "text": "For any multiplicative subset $T$, localize each map by $h_T(m/a)=h(m)/a$. These maps preserve sums and scalar multiplication, composition and identities by their fraction formulas. Also $(U\\oplus W)_T\\cong U_T\\oplus W_T$: send $(u,w)/a$ to $(u/a,w/a)$, with inverse $(u/a,w/b)\\mapsto(bu,aw)/(ab)$. Thus all five identities of step 1 hold over $A=T^{-1}R$, and $t_{s_T}$ has inverse $(q_{s,T},p_T)$. In particular $i_T$ is injective, $p_T$ is surjective, and if $p_T(v)=0$ then $v=i_Tq_{s,T}(v)$; hence the localized sequence is split exact. This proves the localization assertions even before any freeness assumptions.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DM (section-tensor-algebra), 07JZ (definition-localization-module), 00DK (lemma-tensor-localization), 00DL (lemma-tensor-product-localization), 0C6F (lemma-tensor-algebra-localization)."
+   }
+  },
+  {
+   "text": "The exterior map of a linear map $h:M\\to N$ is obtained by sending each tensor $m_1\\otimes\\cdots\\otimes m_n$ to $h(m_1)\\otimes\\cdots\\otimes h(m_n)$ and descending to the quotient: each defining relation $x\\otimes x$ maps to $h(x)\\otimes h(x)$. It sends a pure wedge to the wedge of the images. On these spanning wedges its composites and identity agree with the corresponding exterior maps. Apply this to the inverse maps $t_s$ and $(q_s,p)$ from step 1: $\\bigwedge^n t_s$ is an isomorphism with inverse $\\bigwedge^n(q_s,p)$, including $n=0$, where both maps are the identity on $R$.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DM (section-tensor-algebra), 07JZ (definition-localization-module), 00DK (lemma-tensor-localization), 00DL (lemma-tensor-product-localization), 0C6F (lemma-tensor-algebra-localization)."
+   }
+  },
+  {
+   "text": "Now assume the stated finite bases of $U,W$ of lengths $r,s_0$. Apply the direct-sum top-exterior theorem to $U,W$: its concatenation map is $c_{U,W}$ (inverting the displayed isomorphism there if necessary to use the concatenation direction). Composing it with the isomorphism $\\bigwedge^{r+s_0}t_s$ from step 3 gives $\\theta_s$. On a tensor of arbitrary pure wedges this composite is $i(u_1)\\wedge\\cdots\\wedge i(u_r)\\wedge s(w_1)\\wedge\\cdots\\wedge s(w_{s_0})$, since $t_s(u,0)=i(u)$ and $t_s(0,w)=s(w)$. The cited theorem supplies an isomorphism for every pair of finite bases, without any assumption that the ring is a field.",
+   "uses": [
+    "lem-sc-exterior-top-direct-sum",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: detailed verification of the omitted local wedge construction."
+   }
+  },
+  {
+   "text": "For arbitrary lifts, exactness gives $v_k=s(w_k)+i(a_k)$ for some $a_k\\in U$. Expand their wedge by multilinearity. The term with no $i(a_k)$ is the formula in step 4. Every other term has all $r$ vectors $i(u_j)$ and at least one further vector $i(a_k)$. Move one such vector next to the first block using $x\\wedge y=-y\\wedge x$. That block is the image of $u_1\\wedge\\cdots\\wedge u_r\\wedge a_k\\in\\bigwedge^{r+1}U$, which is zero by the exterior-basis theorem, as $r+1>r$. Its product with the remaining factors is zero. Thus every error term vanishes, proving exactly the asserted arbitrary-lift formula. This also works for $r=0$: then $U=0$ and $\\bigwedge^1U=0$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: detailed verification of the omitted local wedge construction."
+   }
+  },
+  {
+   "text": "Pure wedges span each exterior power, and pure tensors span their tensor product. Consequently the formula of step 5 determines the whole linear map uniquely. For a second section $s\\prime$, use $s\\prime(w_k)$ as the lift tuple in that formula: the maps $\\theta_s$ and $\\theta_{s\\prime}$ agree on every spanning tensor of pure wedges, hence are equal. The concatenation construction $c_{U,W}$ is characterized without a chosen basis, and step 5 holds for arbitrary tuples. Therefore changing either basis leaves the map unchanged and the same formula holds for all replacement bases. No determinant or change-of-basis identity is being assumed.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: detailed verification of the omitted local wedge construction."
+   }
+  },
+  {
+   "text": "Write $M_T=T^{-1}M$. The identification $A\\otimes_R M\\cong M_T$ sends $(a/t)\\otimes m$ to $am/t$, with inverse $m/t\\mapsto(1/t)\\otimes m$. It is well defined: $u(t\\prime m-tm\\prime)=0$ implies $(1/t)\\otimes m-(1/t\\prime)\\otimes m\\prime=(1/(utt\\prime))\\otimes u(t\\prime m-tm\\prime)=0$; the inverse identities and additivity follow by the tensor relations. In particular localization of a finite basis is a basis, by localizing its coordinate isomorphism $M\\cong R^n$ and using the coordinate fraction maps. The quotient construction of step 3, now with coefficients $R\\to A$, gives $g_n:\\bigwedge_R^nM\\to\\bigwedge_A^nM_T$ sending wedges to wedges of $m/1$. The cited exterior-localization theorem applies to this very map, since $M\\to M_T$ is a localization; hence $\\bigwedge_A^nM_T$ is the localization of $\\bigwedge_R^nM$. The tensor-localization theorem applied to the two exterior modules gives the comparison for their tensor product, with formula $(x/a)\\otimes(y/b)\\mapsto(x\\otimes y)/(ab)$. These are the exterior and tensor identifications used in the assertion.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-free-module",
+    "new-v2-exterior-power-localization",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DM (section-tensor-algebra), 07JZ (definition-localization-module), 00DK (lemma-tensor-localization), 00DL (lemma-tensor-product-localization), 0C6F (lemma-tensor-algebra-localization)."
+   }
+  },
+  {
+   "text": "To compare the two maps over $A$, it suffices by $A$-linearity to evaluate on $1\\otimes((u_1\\wedge\\cdots\\wedge u_r)\\otimes(w_1\\wedge\\cdots\\wedge w_{s_0}))$: these generate, since $m/t=(1/t)(m/1)$ and pure wedges and tensors span. Under the comparisons of step 7, both maps send this element to $i_T(u_1/1)\\wedge\\cdots\\wedge i_T(u_r/1)\\wedge s_T(w_1/1)\\wedge\\cdots\\wedge s_T(w_{s_0}/1)$, by the pure-wedge formula already proved. Step 2 and the localized bases in step 7 verify all hypotheses of the localized construction. Equality on these generators proves the claimed equality with $A\\otimes_R\\theta_s$. For a further localization $A\\to B$, the direct comparison and the iterated comparison both send $b\\otimes(a\\otimes m)$ to $ba\\otimes m$ and send each wedge of original vectors to the wedge of their final images; they agree on the same spanning generators. Thus the equality respects the scalar-extension associativity identifications and is compatible with every successive localization.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DM (section-tensor-algebra), 07JZ (definition-localization-module), 00DK (lemma-tensor-localization), 00DL (lemma-tensor-product-localization), 0C6F (lemma-tensor-algebra-localization)."
+   }
+  },
+  {
+   "text": "An empty basis forces its module to be zero by the basis expansion, and the exterior-basis theorem identifies degree zero with $R$ via the empty wedge $1$. If $r=0$, $p$ is an isomorphism and its unique section is $p^{-1}$; the concatenation formula becomes $a\\otimes\\omega\\mapsto a(\\bigwedge^{s_0}p^{-1})(\\omega)$, the asserted left unit map. If $s_0=0$, $i$ is an isomorphism and the formula is $\\omega\\otimes a\\mapsto a(\\bigwedge^r i)(\\omega)$, the right unit map. If both vanish it is $a\\otimes b\\mapsto ab$. Every use of alternation above is the relation $x\\wedge x=0$, never division by $2$; hence characteristic two is included. If $R$ is the zero ring, or $0\\in T$, all relevant unital modules over the corresponding zero ring are zero and all maps and inverse identities still hold.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first proof: detailed verification of the omitted local wedge construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sc-exterior-top-direct-sum",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-free-module",
+  "new-v2-exterior-power-localization",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJB (lemma-det-ses), first proof: agent supplies the omitted detailed verification, using Algebra Tags 00DM, 00DK, 00DL and 0C6F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split exact sequence with projective quotient gives a direct sum isomorphism and a top exterior power isomorphism for finite free kernel and quotient",
+   "results": "8 hits; top=['Function.Exact.splitInjectiveEquiv', 'Function.Exact.splitSurjectiveEquiv', 'lequivProdOfRightSplitExact', 'lequivProdOfLeftSplitExact', 'Function.Exact.split_tfae', 'Module.Finite.exists_comp_eq_id_of_projective', 'ModuleCat.free_shortExact', \"Function.Exact.split_tfae'\"]; note=; digest=e961bb02e6756650. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, LinearMap",
+   "results": "12 hits; top=['Module.Projective.of_split', 'LinearMap.exists_rightInverse_of_surjective', 'Function.Surjective.surjective_linearMapComp_left', 'Module.Projective.iff_split', \"Module.Projective.iff_split'\", 'Module.Projective.iff_split_of_projective', \"Module.projective_def'\", 'Module.projective_lifting_property']; note=; digest=0476be1273a9261a. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "split.*[Ee]xact|equiv.*[Pp]rod|det_eq_det_mul_det",
+   "results": "25 hits; top=['Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean', 'Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/PiTensorProduct/Finsupp.lean', 'Mathlib/LinearAlgebra/PiTensorProduct/Finsupp.lean', 'Mathlib/LinearAlgebra/PiTensorProduct/Finsupp.lean', 'Mathlib/LinearAlgebra/PiTensorProduct/Finsupp.lean']; note=; digest=b14ecac0726354df. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective quotient splits a short exact sequence and concatenating a kernel basis with lifted quotient basis induces an isomorphism of top exterior powers",
+   "results": "8 hits; top=['CategoryTheory.ShortComplex.ShortExact.splittingOfProjective', 'ModuleCat.Basis.ofShortExact', 'Module.Basis.ofSplitExact_apply', 'Module.Basis.ofSplitExact.congr_simp', 'Module.Basis.sumQuot', 'Module.Basis.ofSplitExact', 'Function.Exact.splitSurjectiveEquiv', 'Module.Projective.of_split']; note=; digest=8620f29b09f334c1. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a split exact sequence of finite free modules the wedge map formed with a section is independent of all quotient lifts and commutes with localization",
+   "results": "8 hits; top=['exact_of_isLocalized_span', 'lTensor.inverse_comp_lTensor', 'Module.Flat.exists_factorization_of_comp_eq_zero_of_free', 'LinearMap.split_surjective_of_localization_maximal', 'Function.Exact.splitInjectiveEquiv', 'retractionKerToTensorEquivSection', 'Algebra.Generators.Cotangent.exact', 'Algebra.Generators.CotangentSpace.exact']; note=; digest=4edc91064b5f369f. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A top wedge of all kernel vectors annihilates changes of lifts by kernel vectors, giving basis independent and localization compatible exterior comparison",
+   "results": "8 hits; top=['ExteriorAlgebra.ιMulti', 'ExteriorAlgebra.liftAlternating', 'exteriorPower.map_apply_ιMulti', 'ExteriorAlgebra.liftAlternating_ιMulti', 'exteriorPower.map_apply_ιMulti_family', 'exteriorPower.linearMap_ext', 'ModuleCat.exteriorPower.hom_ext_iff', 'ExteriorAlgebra.liftAlternating_comp_ιMulti']; note=; digest=c1420d104c4918b3. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map",
+   "results": "12 hits; top=['exteriorPower.map', 'exteriorPower.map_id', 'exteriorPower.map_comp_ιMulti', 'exteriorPower.map_comp', 'exteriorPower.zeroEquiv_naturality', 'exteriorPower.subtype_comp_map_eq', 'exteriorPower.oneEquiv_naturality', 'exteriorPower.map_apply_ιMulti_family']; note=; digest=61ee1a7076fe3e6a. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(wedge|exterior).*(lift|split)|ιMulti.*(localiz|map)",
+   "results": "16 hits; top=['Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/OfAlternating.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean']; note=; digest=7d9ee304e0c10fe6. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite free modules in a short exact sequence the top exterior tensor comparison is an isomorphism given by any lifts, independent of bases and compatible with localization including rank zero",
+   "results": "8 hits; top=['Module.free_of_lTensor_residueField_injective', 'rTensor.linearEquiv_of_rightInverse', 'lTensor.linearEquiv_of_rightInverse', 'rTensor.inverse_of_rightInverse', 'ModuleCat.exteriorPower.iso₁_hom_naturality_assoc', 'lTensor.inverse_of_rightInverse', 'rTensor.inverse_of_rightInverse_comp_rTensor', 'rTensor.inverse_comp_rTensor']; note=; digest=2e634d170d990596. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_eq_det_mul_det|exists_rightInverse_of_surjective|splitSurjectiveEquiv|lequivProdOfRightSplitExact",
+   "results": "25 hits; top=['Mathlib/Topology/Algebra/SeparationQuotient/Section.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Algebra/Exact/Basic.lean', 'Mathlib/Algebra/Exact/Basic.lean', 'Mathlib/Algebra/Exact/Basic.lean']; note=; digest=d8dbf6406a8fbdef. Read Function.Exact.splitSurjectiveEquiv (Mathlib/Algebra/Exact/Basic.lean:381) and LinearMap.exists_rightInverse_of_surjective (Algebra/Module/Projective.lean:111): they provide the splitting only. Read exteriorPower.map/map_apply_ιMulti (LinearAlgebra/ExteriorPower/Basic.lean:263,277) and LinearMap.det_eq_det_mul_det (LinearAlgebra/Determinant.lean:811): none supplies this top-exterior comparison with arbitrary lifts, independence and localization. The DAG direct-sum theorem is a reusable input, not this exact-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split short exact sequence of finite free modules gives a top exterior power tensor isomorphism independent of quotient lifts and compatible with localization",
+   "results": "8 hits; top=['ModuleCat.exteriorPower.iso₁', 'ModuleCat.exteriorPower.iso₁_hom_naturality_assoc', 'ModuleCat.exteriorPower.iso₁_hom_naturality', 'rTensor.linearEquiv_of_rightInverse', 'exteriorPower.oneEquiv_naturality', 'ModuleCat.exteriorPower.iso₀_hom_naturality_assoc', 'lTensor.linearEquiv_of_rightInverse', 'exteriorPower.alternatingMapLinearEquiv']; digest=3a07ab5179b47d85. Read Mathlib/Algebra/Module/Projective.lean:111 and Algebra/Exact/Basic.lean:381 (splitting only), LinearAlgebra/ExteriorPower/Basic.lean:263,277,293,298 (functorial pure-wedge maps), and LinearAlgebra/Determinant.lean:811 (endomorphism determinant identity). None states all clauses, in particular arbitrary lift independence and localization coherence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map",
+   "results": "12 hits; top=['exteriorPower.map', 'exteriorPower.map_id', 'exteriorPower.map_comp_ιMulti', 'exteriorPower.map_comp', 'exteriorPower.zeroEquiv_naturality', 'exteriorPower.subtype_comp_map_eq', 'exteriorPower.oneEquiv_naturality', 'exteriorPower.map_apply_ιMulti_family']; digest=61ee1a7076fe3e6a. Read Mathlib/Algebra/Module/Projective.lean:111 and Algebra/Exact/Basic.lean:381 (splitting only), LinearAlgebra/ExteriorPower/Basic.lean:263,277,293,298 (functorial pure-wedge maps), and LinearAlgebra/Determinant.lean:811 (endomorphism determinant identity). None states all clauses, in particular arbitrary lift independence and localization coherence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "splitSurjectiveEquiv|exists_rightInverse_of_surjective|map_apply_ιMulti|linearMap_ext",
+   "results": "25 hits; top=['Mathlib/RingTheory/LocalProperties/Injective.lean', 'Mathlib/RingTheory/LocalProperties/Exactness.lean', 'Mathlib/RingTheory/PicardGroup.lean', 'Mathlib/RingTheory/Localization/Module.lean', 'Mathlib/RingTheory/Localization/Module.lean', 'Mathlib/RingTheory/Localization/Module.lean', 'Mathlib/RingTheory/Localization/BaseChange.lean', 'Mathlib/RingTheory/Localization/BaseChange.lean']; digest=b05d65dd9f68a2bc. Read Mathlib/Algebra/Module/Projective.lean:111 and Algebra/Exact/Basic.lean:381 (splitting only), LinearAlgebra/ExteriorPower/Basic.lean:263,277,293,298 (functorial pure-wedge maps), and LinearAlgebra/Determinant.lean:811 (endomorphism determinant identity). None states all clauses, in particular arbitrary lift independence and localization coherence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top exterior power isomorphism from a split exact sequence independent of the splitting and compatible with localization",
+   "results": "8 hits; top=['exteriorPower.oneEquiv', 'exteriorPower.oneEquiv_naturality', 'ModuleCat.exteriorPower.iso₁', 'exteriorPower.zeroEquiv', 'ModuleCat.exteriorPower', 'ModuleCat.exteriorPower.iso₀', 'ModuleCat.exteriorPower.iso₀_hom_naturality', 'ModuleCat.exteriorPower.map']; digest=95df6abb52c88c80. Read Mathlib/Algebra/Module/Projective.lean:111 and Algebra/Exact/Basic.lean:381 (splitting only), LinearAlgebra/ExteriorPower/Basic.lean:263,277,293,298 (functorial pure-wedge maps), and LinearAlgebra/Determinant.lean:811 (endomorphism determinant identity). None states all clauses, in particular arbitrary lift independence and localization coherence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_eq_det_mul_det|exists_rightInverse_of_surjective",
+   "results": "14 hits; top=['Mathlib/Topology/Algebra/SeparationQuotient/Section.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/Topology/Algebra/Module/FiniteDimension.lean', 'Mathlib/LinearAlgebra/Determinant.lean', 'Mathlib/LinearAlgebra/Determinant.lean', 'Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean']; digest=a318a1a81ab473a7. Read Mathlib/Algebra/Module/Projective.lean:111 and Algebra/Exact/Basic.lean:381 (splitting only), LinearAlgebra/ExteriorPower/Basic.lean:263,277,293,298 (functorial pure-wedge maps), and LinearAlgebra/Determinant.lean:811 (endomorphism determinant identity). None states all clauses, in particular arbitrary lift independence and localization coherence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective quotient splits an exact sequence and top wedge of kernel vectors kills changes of quotient lifts in the determinant comparison",
+   "results": "8 hits; top=['LinearMap.det_eq_det_mul_det', 'Profinite.NobelingProof.succ_exact', 'Module.finitePresentation_of_projective_of_exact', 'Module.Presentation.ofExact_var', 'Module.Presentation.ofExact_G', 'CategoryTheory.ShortComplex.Exact.liftFromProjective_comp', 'Module.Presentation.ofExact_relation', 'Module.Presentation.ofExact_R']; digest=5d61382e6ece6399. Read Mathlib/Algebra/Module/Projective.lean:111 and Algebra/Exact/Basic.lean:381 (splitting only), LinearAlgebra/ExteriorPower/Basic.lean:263,277,293,298 (functorial pure-wedge maps), and LinearAlgebra/Determinant.lean:811 (endomorphism determinant identity). None states all clauses, in particular arbitrary lift independence and localization coherence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-determinant-exact-sequence",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Auxiliary module input: Determinant-line isomorphism for an exact sequence of finite projective modules. Re-split argument: Tag 0FJB (lemma-det-ses), first proof, omitted verification of the local wedge isomorphism; the splitting, lift and basis invariance, localization and empty-wedge cases are made explicit.",
+   "via": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-split-exterior-comparison-localization",
+  "worker": "stage1",
+  "summary": "Expanded the omitted finite-free wedge verification in Tag 0FJB: projective lifting and explicit inverse, localized split identities, quotient-defined exterior functor, existing direct-sum comparison, vanishing of lift-error terms by the exterior basis theorem, basis/section independence, explicit localization and successive-localization generator checks, and all empty-rank cases. Reused existing DAG tools; no new nodes. Statement and statement dependencies unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Auxiliary module input: Determinant-line isomorphism for an exact sequence of finite projective modules. Re-split argument: Tag 0FJB (lemma-det-ses), first proof, omitted verification of the local wedge isomorphism; the splitting, lift and basis invariance, localization and empty-wedge cases are made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-exterior-top-direct-sum",
+    "why": "Generic commutative-ring finite-free top-exterior direct-sum comparison, used in the local determinant construction; the trace unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "new-v2-exterior-power-localization",
+    "why": "Generic localization of exterior powers, applied to the quotient-defined pure-wedge map; this supplies the scalar comparison required by the determinant chart calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-exterior-top-direct-sum",
+  "new-v2-exterior-power-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-2e130f871",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-2e130f871 (reviewer sub-agent of L); spot-checked: I read the item, all nine cited statements and Stacks 0FJB (more-algebra.tex:36283), both proofs. The first proof omits the verification that the wedge rule is well defined and an isomorphism; under D5 that omitted verification is what this split has to supply. It is a single commit: only the item and the report change, no new nodes. The statement and stmt_deps are identical to live; proof_deps equals the union of the step uses; the TeX is clean and nothing cites SGA. No cycle: none of the 9 proof deps reaches the item. The item is unsplit in both live and side-live and has no repair note of its own; the 2026-10-21 re-split rules apply to the parent, which created this item. Step 1 uses the lifting clause stated in def-weil-pbc-projective-module, and its inverse identities check. In step 2 I verified the inverse of the direct-sum localization map; split exactness follows from iq+sp=id. Step 3 builds the exterior functor from the quotient. Step 4 meets the exact hypotheses of lem-sc-exterior-top-direct-sum, whose concatenation formula holds for arbitrary tuples. Step 5 kills each error term because it is the image of an element of ⋀^{r+1}U, which is zero (free-basis node); this is correct, including r=0 and characteristic 2. Step 6 gives section and basis independence on spanning generators. In step 7 I verified the well-definedness identity for A⊗M≅M_T; new-v2 and the tensor-localization node apply exactly, for any multiplicative subset. In step 8 the hypotheses of the localized construction are met (step 2, localized bases, s_T). It does not say why a further localization B is a localization of R; that is elementary and only advisory. Step 9 edge cases checked: r=0, s_0=0, both zero, the zero ring and 0∈T. Small case tested: ℤ²; the parent's uses of the item (split exactness after localization, the arbitrary-lift formula, localization and empty wedges) are all in the statement. Duplicate search: the 0FJB-related nodes in sec-picard-framework are sheaf-level, and lem-trf-projective-exterior-scalar-comparisons depends on the parent and is correctly not used. I accept the two declared tool uses (lem-sc-exterior-top-direct-sum, new-v2-exterior-power-localization) as generic algebra with no counterpart in unit sk-i-curve-zero. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SplitExteriorComparisonLocalization",
+  "declaration": "exteriorPower.existsUnique_splitExteriorComparison",
+  "declarations": [
+   "exteriorPower.IsSplitExteriorComparison",
+   "exteriorPower.splitExterior_exists_section",
+   "exteriorPower.splitExterior_split_localization",
+   "exteriorPower.existsUnique_splitExteriorComparison",
+   "exteriorPower.splitExteriorComparison_section_composite",
+   "exteriorPower.SplitExteriorScalarComparison",
+   "exteriorPower.existsUnique_splitExteriorScalarComparison",
+   "exteriorPower.splitExteriorComparison_localization",
+   "exteriorPower.splitExteriorComparison_successive_localization",
+   "exteriorPower.splitExteriorComparison_zero_left",
+   "exteriorPower.splitExteriorComparison_zero_right",
+   "exteriorPower.splitExteriorComparison_zero_zero"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/SplitExteriorComparisonLocalization.lean",
+  "statement": "theorem existsUnique_splitExteriorComparison (i : U →ₗ[R] V) (p : V →ₗ[R] W) (hi : Function.Injective i) (hp : Function.Surjective p) (hex : Function.Exact i p) (r s : ℕ) (bU : Module.Basis (Fin r) R U) (bW : Module.Basis (Fin s) R W) : ∃! θ : ((⋀[R]^r U) ⊗[R] (⋀[R]^s W)) ≃ₗ[R] (⋀[R]^(r + s) V), IsSplitExteriorComparison i p r s θ.toLinearMap",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The module states all clauses of this node, including splitting before freeness, the canonical comparison characterized on arbitrary lifts, the section composite, normalized localization and its successive-localization cocycles, and each empty-wedge unit formula. IsSplitExteriorComparison and SplitExteriorScalarComparison are helper interfaces for this node; every comparison is fixed on spanning wedges/tensors. Module localizations use A tensor M, canonically equivalent to LocalizedModule by Mathlib.RingTheory.Localization.BaseChange."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b2a36ade",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Lean exact against node/0FJB: splitting+inverse formula; split localization (hi/hex implied by t equivalence); ∃! θ by arbitrary-tuple/arbitrary-lift ιMulti Fin.append predicate (no section/basis ⇒ independence; r+1 wedge vanishing); θ = map t ∘ c with c = inverse of existsUnique_topDirectSum; ∃!-pinned A⊗M exterior/tensor comparisons; A⊗θ square and cancelBaseChange successive cocycles checked on generators; r=0/s=0/both, zero ring, 0∈T, char 2 covered; no duplicate (parent uses socle determinantModule); statement verbatim, 12 declarations present, docstrings ok, all sorry. Sole fault H11: 'Second reading by Q73' is a same-worker self-pass → fixes/lem-trf-split-exterior-comparison-localization.report.md (worker report verbatim + independent clause-by-clause second reading). Advisory: tensor model A⊗M for localization (canonical, noted)."
+ }
+}

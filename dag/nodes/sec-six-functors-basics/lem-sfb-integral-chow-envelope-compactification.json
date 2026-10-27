@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-integral-chow-envelope-compactification",
+ "kind": "statement",
+ "title": "Integral Chow envelope with reduced projective compactification",
+ "statement": "Let $S$ be an affine Noetherian scheme (affine and locally Noetherian [def-weil-affine-spectrum, pqf-def-locnoeth]), and let $f:R\\to S$ be separated and of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism], with $R$ integral [def-pc-integral-scheme], generic point $\\xi$ [def-sc-generic-point], and function field $L=\\kappa(\\xi)$ [def-sc-function-field]. There exist $n\\geq0$, integral Noetherian schemes $Y,Z$, a proper surjective morphism $\\pi:Y\\to R$ [def-weil-surjective-morphism], an immersion $j:Y\\to P=\\mathbf P^n_S$ [def-weil-closed-immersion, def-nagata-projective-space-base-change], a closed immersion $c:Z\\to P$, and a dense open immersion $e:Y\\to Z$ [def-weil-open-immersion], all over $S$, with $j=c\\circ e$. The morphism $Z\\to S$ is proper, and $c(Z)$ is the closure of $j(Y)$ in $P$, endowed with its reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme]. There is a nonempty dense open $U\\subseteq R$ such that $\\pi^{-1}(U)\\to U$ is an isomorphism. Via this isomorphism and $e$, both function fields $k(Y)$ and $k(Z)$ identify with $L$, and the composites of their canonical generic-point maps with $\\pi$ and $j$ are respectively the canonical map $\\operatorname{Spec}L\\to R$ and its image in $P$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1), Chow envelope and projective closure; integral refinement by reduced closure of the generic preimage. Chow input: coherent.tex Tag 0200, coherent-lemma-chow-Noetherian."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-chow-noetherian] to $f:R\\to S$. It gives $n\\geq0$, $q:T\\to R$ proper and surjective, an $S$-immersion $a:T\\to P=\\mathbf P^n_S$, and a dense open $U\\subseteq R$ over which $q$ is an isomorphism. By [def-weil-proper-morphism], $q$ is of finite type. Apply [lem-weil-pbc-finite-type-over-noetherian] first to $R\\to S$ and then to $T\\to R$: both $R$ and $T$ are Noetherian. Since $R$ is integral, it is nonempty, so its dense open $U$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200, coherent-lemma-chow-Noetherian; morphisms.tex Tag 01T6, morphisms-lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Put $W=q^{-1}(U)$, identified with $U$. It is a nonempty integral open subscheme of $T$: nonempty opens of an irreducible space are irreducible, and restriction preserves reducedness. Use [lem-weil-pbc-reduced-induced-closed-subscheme] to give $\\overline{|W|}\\subseteq T$ its reduced induced closed structure $b:Y\\hookrightarrow T$. The closure of the irreducible nonempty space $W$ is irreducible and nonempty. Thus $Y$ is integral by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, schemes-lemma-reduced-closed-subscheme; properties.tex Tag 01ON, properties-lemma-characterize-integral"
+   }
+  },
+  {
+   "text": "The restriction $b^{-1}(W)\\to W$ is a reduced closed subscheme with underlying space all of $W$. Indeed restricting its affine quotient presentation just localizes the quotient rings, and localizations of reduced rings are reduced. Since $W$ itself is reduced, uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies this restriction with $W$ itself. Consequently, for $\\pi=q\\circ b$, one has $\\pi^{-1}(U)\\cong W\\cong U$. Also $W$ is dense in $Y$ by the definition of $Y$'s underlying space.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, schemes-lemma-reduced-closed-subscheme, uniqueness and affine quotient description"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-proper], $b$ is proper and $\\pi=q\\circ b$ is proper, since $q$ is proper. Its image is closed by [lem-weil-pbc-proper-closed-image] and contains $U$, so it is all of $R$; hence $\\pi$ is surjective. The finite-type clause of properness and [lem-weil-pbc-finite-type-over-noetherian] applied to $b:Y\\to T$ show that $Y$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5, morphisms-lemma-closed-immersion-proper; 01W3, morphisms-lemma-composition-proper; 01T6, morphisms-lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Set $j=a\\circ b$. To check that this is an immersion, factor $a$ as a closed immersion $T\\hookrightarrow V$ followed by an open immersion $V\\hookrightarrow P$, as in [def-weil-closed-immersion]. The composite $Y\\hookrightarrow T\\hookrightarrow V$ is closed: on affine opens it is the composite of two surjective quotient-ring maps, which is surjective, and its underlying image is closed. Thus $j$ has the required closed-then-open factorization. As $a$ is over $S$, so is $j$, with structure map $f\\circ\\pi$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, morphisms-lemma-closed-immersion; closed-then-open definition of immersion"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-reduced-induced-closed-subscheme] again, now on the closed subset $\\overline{j(Y)}\\subseteq P$, to obtain $c:Z\\hookrightarrow P$. Its underlying space is nonempty irreducible, being the closure of the image of integral $Y$, and $Z$ is reduced; hence $Z$ is integral by [def-pc-integral-scheme]. Here $P=\\mathbf P^n_S$ is $\\mathbf P(\\{0,\\ldots,n\\};S)$ by [def-nagata-projective-space-base-change]: the finite index set has $n+1$ homogeneous coordinates, including when $n=0$. Apply [lemma-nagata-projective-space-base-change-proper] with this index set to obtain properness of $P\\to S$, so $Z\\to S$ is proper by [lem-weil-pbc-closed-immersion-proper]. Apply [lem-weil-pbc-finite-type-over-noetherian] to $P\\to S$ and to $c:Z\\to P$, using the finite-type clause of properness, to see that $P$ and $Z$ are Noetherian.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, schemes-lemma-reduced-closed-subscheme; morphisms.tex Tags 01WC, morphisms-lemma-locally-projective-proper; 01W5, morphisms-lemma-closed-immersion-proper; 01T6, morphisms-lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Use the factorization $j:Y\\hookrightarrow V\\hookrightarrow P$ of step 5. Because $j(Y)$ is closed in the open $V$, one has $\\overline{j(Y)}\\cap V=j(Y)$. The restriction $c^{-1}(V)\\to V$ is a reduced closed subscheme with this image. So is $Y\\to V$. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] gives an isomorphism $Y\\cong c^{-1}(V)$ over $V$, hence over $P$. Follow it by the open inclusion $c^{-1}(V)\\hookrightarrow Z$ to define $e$. By [def-weil-open-immersion], $e$ is open, and by construction $c\\circ e=j$. It is dense because $c(Z)=\\overline{j(Y)}$, and it is over $S$ because its composite with $c$ is $j$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, schemes-lemma-reduced-closed-subscheme, uniqueness; reduced-closure version of morphisms.tex Tag 01RG, morphisms-lemma-quasi-compact-immersion"
+   }
+  },
+  {
+   "text": "The generic point $\\xi$ of $R$ lies in $U$: every nonempty open meets the dense singleton $\\{\\xi\\}$ by [def-sc-generic-point]. Its inverse image in $W\\cong U$ is a generic point $\\eta$ of $Y$, since $W$ is dense; its image $\\zeta=e(\\eta)$ is generic in $Z$, since $e(Y)$ is dense. Open immersions induce isomorphisms on local rings by [def-weil-open-immersion]. The isomorphism $W\\cong U$ and the two open inclusions therefore identify $\\mathcal O_{Z,\\zeta}$ with $\\mathcal O_{Y,\\eta}$ and with $\\mathcal O_{R,\\xi}$. These are $k(Z),k(Y),L$, respectively, by the integral-scheme convention of [def-sc-function-field].",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-open-immersion",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RW, morphisms-definition-function-field and the preceding generic-stalk description; limits.tex Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, identification of generic fields"
+   }
+  },
+  {
+   "text": "Under precisely those stalk identifications, write $g_Y:\\operatorname{Spec}L\\to Y$, $g_Z:\\operatorname{Spec}L\\to Z$, and $g_R:\\operatorname{Spec}L\\to R$ for the canonical generic-point maps. On any affine neighbourhood, each is induced by the section-to-generic-germ homomorphism into $L$. The maps just used on stalks are induced by these same germ homomorphisms, so functoriality of $\\operatorname{Spec}$ gives $\\pi g_Y=g_R$ and $e g_Y=g_Z$. Hence $j g_Y=c g_Z$. This explicitly gives the claimed canonical generic-point compatibility in $R$ and $P$, as well as the function-field identifications; every constructed morphism is over $S$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, canonical generic-point map and its projective image; morphisms.tex Tag 01RW, morphisms-definition-function-field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-chow-noetherian",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-closed-image",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-open-immersion",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, Chow and projective-closure paragraphs, using coherent.tex Tag 0200 and schemes.tex Tag 01J3; integral refinement and explicit generic-map verification written out by Q25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral separated finite type scheme over a Noetherian base has an integral proper surjective birational modification immersed in projective space and a proper integral closure compactification",
+   "results": "{\"t\": \"2026-10-22T06:09:26Z\", \"tool\": \"leanfinder\", \"query\": \"An integral separated finite type scheme over a Noetherian base has an integral proper surjective birational modification immersed in projective space and a proper integral closure compactification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"727fe7beb3673fa2\"}; no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure.",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow lemma integral quasi projective modification over a Noetherian scheme with the same function field",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"leansearch\", \"query\": \"Chow lemma integral quasi projective modification over a Noetherian scheme with the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\"], \"digest\": \"2ee44b14c4ac4f71\"}; no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure.",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsIntegral\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsIntegral\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed\"], \"digest\": \"c37c7be1745e2563\"}; no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure.",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure."
+  },
+  {
+   "tool": "grep",
+   "query": "chow|birational|compactification",
+   "results": "{\"t\": \"2026-10-22T06:09:14Z\", \"tool\": \"grep\", \"query\": \"chow|birational|compactification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\"], \"digest\": \"307735dbc2042bf1\"}; no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure.",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a quasi projective integral scheme proper birational over a separated finite type integral scheme over an affine Noetherian base, with a proper reduced projective closure",
+   "results": "{\"t\": \"2026-10-22T06:10:05Z\", \"tool\": \"leanfinder\", \"query\": \"There exists a quasi projective integral scheme proper birational over a separated finite type integral scheme over an affine Noetherian base, with a proper reduced projective closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"9bae84b6ea1991a3\"}; no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure.",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization is an integral morphism, not the asserted proper birational modification with a projective immersion. Birational.lean defines partial isomorphisms but constructs no Chow envelope. Proj properness does not supply the envelope or its integral reduced closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral proper birational Chow modification of a separated finite type scheme with a reduced projective closure",
+   "results": "{\"t\": \"2026-10-23T04:11:35Z\", \"tool\": \"leanfinder\", \"query\": \"Integral proper birational Chow modification of a separated finite type scheme with a reduced projective closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"ed4dcecfb1c25cfc\"}; Read the hits: normalization gives integral morphisms, rational-map and birationality definitions do not construct a Chow modification, projective-spectrum properness proves no envelope existence, and the proper integral group theorem concerns group objects. None gives all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chow|birational|compactification",
+   "results": "{\"t\": \"2026-10-23T04:12:24Z\", \"tool\": \"grep\", \"query\": \"chow|birational|compactification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\"], \"digest\": \"c7cdbcb217626ff2\"}; Read the hits: normalization gives integral morphisms, rational-map and birationality definitions do not construct a Chow modification, projective-spectrum properness proves no envelope existence, and the proper integral group theorem concerns group objects. None gives all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow lemma proper surjective modification with an immersion into projective space and an isomorphism over a dense open",
+   "results": "{\"t\": \"2026-10-23T04:12:24Z\", \"tool\": \"leansearch\", \"query\": \"Chow lemma proper surjective modification with an immersion into projective space and an isomorphism over a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\"], \"digest\": \"ce16cf836725bd9f\"}; Read the hits: normalization gives integral morphisms, rational-map and birationality definitions do not construct a Chow modification, projective-spectrum properness proves no envelope existence, and the proper integral group theorem concerns group objects. None gives all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsIntegral\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T04:12:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsIntegral\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed\"], \"digest\": \"c37c7be1745e2563\"}; Read the hits: normalization gives integral morphisms, rational-map and birationality definitions do not construct a Chow modification, projective-spectrum properness proves no envelope existence, and the proper integral group theorem concerns group objects. None gives all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every separated finite type integral scheme over an affine noetherian base has a quasi projective proper birational modification with the same function field",
+   "results": "{\"t\": \"2026-10-23T04:12:28Z\", \"tool\": \"leanfinder\", \"query\": \"Every separated finite type integral scheme over an affine noetherian base has a quasi projective proper birational modification with the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"47d29b758460038f\"}; Read the hits: normalization gives integral morphisms, rational-map and birationality definitions do not construct a Chow modification, projective-spectrum properness proves no envelope existence, and the proper integral group theorem concerns group objects. None gives all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-dvr-properness-criterion",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.12, refined valuative criterion restricted to traits with generic point over the base generic point; repair extraction of original proof steps 2 and 3: integral Chow envelope and its reduced projective closure",
+   "via": [
+    "lem-sfb-generic-dvr-properness-criterion",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-chow-envelope-compactification",
+  "worker": "stage1",
+  "summary": "Reused the existing Noetherian Chow lemma and reduced-induced-closed-subscheme theorem. Constructed the integral envelope as the reduced closure of the open where the Chow map is an isomorphism, checked proper surjectivity and Noetherianity, then constructed the reduced projective closure and its open factor by uniqueness of reduced closed structures. Wrote out all field and canonical generic-point compatibilities. No new nodes; no statement changes. Repair of the landing refusal at returned head 98eb8ddc35b: revalidated every citation against the current unsplit live item and made the projective-space properness specialization explicit with n+1 homogeneous coordinates, citing the current projective-space definition.",
+  "blueprint": "Preserves the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route: the generic-DVR properness prerequisite needs an integral Chow envelope and its projective closure (Stacks 0208). The ancestor command reports null because the inherited created.item chain is broken; the inherited precise from.place and via are retained. Whole-blueprint searches for Chow and integral Chow found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-6f7aa7285",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-6f7aa7285 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item in full, all 9 steps, and the full statement of every cited node. The statement and stmt_deps are unchanged. The only change from the earlier PASSed head 98eb8ddc is in step 6, which now cites def-nagata-projective-space-base-change and takes P({0..n};S) with n+1 homogeneous coordinates. I checked against the source, Stacks limits.tex Tag 0208 (l.3927, proof of (4)=>(1)) with Chow 0200: replacing 'a component of X' with the reduced closure of q^-1(U)' is correct and gives exactly the function field L. Step checks: (1) the Chow node applies because S is affine and locally Noetherian, hence Noetherian, and R and T are Noetherian by the finite-type lemma. (2)-(3) Y is integral, and uniqueness clause (3) of 01J3 applied on W gives pi^-1(U) = U scheme-theoretically. (4) closed-immersion-proper (a)/(b) and proper-closed-image give pi proper and surjective. (5) the composite of two closed immersions is closed on affines, so it is elementary. (6) Z is integral and proper over S, and P and Z are Noetherian. (7) closure(j(Y)) meets V in j(Y), and uniqueness on V gives e with c e = j, so there is no point-set factorization (no E3 fault). (8)-(9) generic points and stalks are identified through the general integral-scheme clause of def-sc-function-field (01RW), and Spec-functoriality gives pi g_Y=g_R, e g_Y=g_Z and j g_Y=c g_Z. The citer lem-sfb-generic-dvr-properness-criterion gets every clause its steps 2-4 use. Edge cases checked: R=Spec L, n=0, T with extra components or nilpotents, S nonreduced, R not proper. Duplicates checked: chow-noetherian (not integral), lem-chow-closed-model (scheme-theoretic closure), sfb-noetherian-dvr-properness, and the invariant/conjugate generic-closure nodes (field base); none states the item. No SGA and no tool_uses. Batch-5 flag: lem-weil-pbc-chow-noetherian reaches def-trf-schematically-dense-open, a general definition of a schematically dense open placed in sec-trace-formula, through the general Nagata lemma lemma-nagata-proper-open-dense-iso. It is neither one of the assumed statements nor a step of their proofs, so it is accepted. Maintainer note: blueprint.from.node is null, inherited from the broken created.item chain; this is a base-node property."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralChowEnvelopeCompactification",
+  "declaration": "AlgebraicGeometry.exists_integral_chow_envelope_compactification",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralChowEnvelopeCompactification.lean",
+  "statement": "theorem exists_integral_chow_envelope_compactification (S R : Scheme.{u}) [IsAffine S] [IsLocallyNoetherian S] [IsIntegral R] (f : R ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ (n : ℕ) (Y Z : Scheme.{u}) (_ : IsIntegral Y) (_ : IsIntegral Z) (π : Y ⟶ R) (j : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) S) (c : Z ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) S) (e : Y ⟶ Z), IsNoetherian Y ∧ IsNoetherian Z ∧ IsProper π ∧ Surjective π ∧ IsImmersion j ∧ IsClosedImmersion c ∧ IsOpenImmersion e ∧ Dense (Set.range e) ∧ e ≫ c = j ∧ j ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) S ↘ S) = π ≫ f ∧ IsProper (c ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) S ↘ S)) ∧ c.ker = Scheme.IdealSheafData.vanishingIdeal ⟨closure (Set.range j), isClosed_closure⟩ ∧ ∃ U : R.Opens, (U : Set R).Nonempty ∧ Dense (U : Set R) ∧ IsIso (π ∣_ U) ∧ ∃ (a : Y.functionField ≅ R.functionField) (b : Z.functionField ≅ R.functionField), Spec.map a.hom ≫ Y.fromSpecFunctionField ≫ π = R.fromSpecFunctionField ∧ Spec.map a.hom ≫ Y.fromSpecFunctionField ≫ e = Spec.map b.hom ≫ Z.fromSpecFunctionField",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bfb2ec95",
+  "group": "NA",
+  "result": "pass",
+  "note": "The node is unchanged except for its lean record, and the statement appears verbatim in the module. Hypotheses match the node exactly (IsAffine + IsLocallyNoetherian S, IsSeparated/LocallyOfFiniteType/QuasiCompact f, IsIntegral R) with nothing added. Conclusion: n with ProjectiveSpace (ULift (Fin (n+1))) S is classical P^n_S, with one coordinate when n=0; Y and Z are integral and Noetherian; pi is proper and surjective; j is an immersion, c a closed immersion, e a dense open immersion; e≫c=j and j≫str=pi≫f; Z is proper over S; c.ker = vanishingIdeal of closure(range j) gives the reduced induced closure through the recorded 01J3 theorem; there is a nonempty dense U with pi restricted to U an isomorphism. The field isomorphisms a and b are uniquely fixed because fromSpecStalk is a preimmersion, hence a monomorphism. One universe u is used throughout. Edge cases checked: empty scheme, R=Spec L, n=0. The statement is reachable from ChowModification.nonempty_data by reindexing its finite coordinate type. No duplicate: exists_integral_chow_relatively_ample is over a field and gives an ample twist. Docstrings carry the source and blueprint id and all 9 proof steps; the proof is only sorry. No file changed, so nothing was recompiled."
+ }
+}

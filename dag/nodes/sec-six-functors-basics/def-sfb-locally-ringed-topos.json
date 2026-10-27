@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-locally-ringed-topos",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, first paragraph and functoriality square; Tag 04M6, middle two-isomorphism between relocalized inverse images. Locally ringed topos and local-morphism notions used in the slice-locality clause.",
+   "via": [
+    "lem-sfb-ringed-topos-slice-functoriality",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Locally ringed topoi and local geometric morphisms",
+ "statement": "Work with small sites in [def-weil-size-convention]. For a sheaf of rings $R$ on a site $\\mathcal C$, let $|R|$ denote its underlying sheaf of sets and $R^\\times$ its sheaf of units, with the inclusion $\\iota_R:R^\\times\\to |R|$. The ringed topos $(\\operatorname{Sh}(\\mathcal C),R)$ is locally ringed if (i) for every object $U$ and section $a\\in R(U)$ there is a covering sieve $V$ on $U$ such that, for every $f:W\\to U$ in $V$, either $R(f)(a)$ or $1-R(f)(a)$ is invertible in $R(W)$; and (ii) if $0=1$ in $R(U)$, the empty sieve covers $U$. Equivalently in (ii), the equalizer of the zero and one maps to $|R|$ is the initial sheaf. A ringed-topos morphism $g:(\\operatorname{Sh}(\\mathcal C),R)\\to(\\operatorname{Sh}(\\mathcal D),S)$ [def-weil-pbc-ringed-topos-morphism] is local if there exists a map $v:g^{-1}(S^\\times)\\to R^\\times$ such that the square with upper arrow $v$, left arrow $g^{-1}(\\iota_S)$, right arrow $\\iota_R$, and lower arrow $g^\\sharp:g^{-1}|S|\\to |R|$ is cartesian. When both topoi are locally ringed, these are their local morphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04H8 (definition-locally-ringed-topos), Tag 04H7 (lemma-locally-ringed-intrinsic), and Tag 04HA (definition-morphism-locally-ringed-topoi); the local section condition is lemma-locally-ringed and the nondegeneracy condition is equation-one-is-never-zero."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def units|def.*[Uu]nit|units.*RightAdjoint",
+   "results": "25 hits: Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean. Read MonCat.units and its right-adjoint instance at Mathlib/Algebra/Category/Grp/Adjunctions.lean:179-198; this supplies the units functor, not locally ringed topoi or local geometric morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole definition; reuse MonCat.units for the units sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally ringed topos sheaf of rings locally a or one minus a is invertible and zero equals one only on the empty object",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.empty, AlgebraicGeometry.LocallyRingedSpace.component_nontrivial, AlgebraicGeometry.LocallyRingedSpace.basicOpen_zero, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen, AlgebraicGeometry.Scheme.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensBot, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen. Read MonCat.units and its right-adjoint instance at Mathlib/Algebra/Category/Grp/Adjunctions.lean:179-198; this supplies the units functor, not locally ringed topoi or local geometric morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole definition; reuse MonCat.units for the units sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally ringed topos local ring sheaf local geometric morphism unit subsheaf cartesian square",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf, AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ, AlgebraicGeometry.LocallyRingedSpace.mk, AlgebraicGeometry.LocallyRingedSpace.isLocalRing, AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ, AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf. Read MonCat.units and its right-adjoint instance at Mathlib/Algebra/Category/Grp/Adjunctions.lean:179-198; this supplies the units functor, not locally ringed topoi or local geometric morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole definition; reuse MonCat.units for the units sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonCat.units",
+   "results": "6 hits: MonCat.units, instIsRightAdjointGrpCatMonCatUnits, MonCat.units_obj_coe, GrpCat.forget₂MonAdj, MonCat.val_units_map_hom_apply, MonCat.val_inv_units_map_hom_apply. Read MonCat.units and its right-adjoint instance at Mathlib/Algebra/Category/Grp/Adjunctions.lean:179-198; this supplies the units functor, not locally ringed topoi or local geometric morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole definition; reuse MonCat.units for the units sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyRingedTopos|locally ringed topos|ringed.*[Ss]lice|relocaliz",
+   "results": "Zero hits in Mathlib/CategoryTheory; no locally ringed topos or arbitrary ringed slice API.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-topos-slice-functoriality",
+  "date": "2026-10-23",
+  "group": "Q41"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocallyRingedTopos",
+  "declaration": "CategoryTheory.IsLocallyRingedTopos",
+  "declarations": [
+   "CategoryTheory.ringSheafUnderlying",
+   "CategoryTheory.ringSheafUnits",
+   "CategoryTheory.ringSheafUnitsInclusion",
+   "CategoryTheory.IsLocallyRingedTopos",
+   "CategoryTheory.RingedToposMorphism.IsLocal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocallyRingedTopos.lean",
+  "statement": "def IsLocallyRingedTopos {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e175eed3",
+  "group": "Q41",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e175eed3",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed cc92af91 (H2). Lean files byte-identical (sha256 f9bcb528/bf49343e); item statement/source/proof identical to live, only lean+stmt_deps changed. stmt_deps now all definitions: size-convention, ringed-topos-morphism, def-sfb-locally-ringed-topos, def-sfb-element-site-localization (live NK record unmodified), and new existing:true def-sfb-element-site-slice-constructions (elementObj/ObjMap/FibrePresheaf/FibrePresheafFunctor/SheafPullback/DirectSumMap/DirectSumPresheaf, all present in live RingedSheafSliceConstruction, statement verbatim) and def-sfb-ringed-sheaf-slice-adjunction-data (RingedSheafSliceAdjunctionData, statement follows every field, no existence claim). Every declaration used by the statement is owned by a cited def node; theorems only in proof_deps. Mathematics re-read: Over.post⋙Over.pullback inverse image, ringMap_eq, locality clauses, restriction/twoIso comparisons pinned by first + Over structure, id/comp coherence, single universe u. No new same-id/owner nodes landed in live. Advisories: possibly unused private Preserves.Shapes.Over import; redundant ring fields. No compile (no file changed)."
+ }
+}

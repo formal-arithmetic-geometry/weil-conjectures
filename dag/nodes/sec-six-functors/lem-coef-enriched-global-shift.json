@@ -1,0 +1,121 @@
+{
+ "id": "lem-coef-enriched-global-shift",
+ "kind": "statement",
+ "title": "Target shifts of the enriched global reconstruction comparison",
+ "statement": "Fix a prime l, a finite dimensional extension E of Q_l, and a scheme W. Use the actual coefficient categories, closed tensor-Hom structures, reduction F and total limit L of lem-coef-derived-system-evaluation-calculus, with its coherence C and the prescribed shifts sh of def-coef-reduction-limit-shift-data. For arbitrary ambient integral derived objects P and Q, let lambda(P,Q) be global Hom applied to the actual adjunction unit u_Q, followed by the specified enriched adjunction and globalLimit comparison. For every integer r, lambda(P,Q[r]) followed by the mapping-limit target shift equals the integral global Hom target shift followed by lambda(P,Q)[r]. The mapping-limit shift is global system Hom applied to the supplied reduction shift, followed by the unique ordinary-reindexing-normalized system Hom shift, derived tower sections and actual derived abelian limit shifts. The integral Hom shift is the unique ordinary-reindexing-normalized shift of lem-weil-pbc-ringed-internal-hom-exact-restriction followed by derived global sections. No completeness, constructibility or finite-type hypotheses are imposed and no invertibility, projection, H-zero, triangle or composition assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JC (derived tensor-Hom and ordinary target reindexing), Tag 0941 (derived limits); Injectives Tag 079P. Resolves the Hom-complex bookkeeping of step 4 of lem-coef-integral-mapping-limit-projections."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-reduction-limit-shift-data",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives of the integral inputs and simultaneous K-injective models of the system and its restricted tower. The integral and system tensor uncurry_model equations identify evaluation with ordinary homogeneous evaluation. The reduction tensor normalization identifies its tensor comparison with the strict scalar tensor comparison. Target reindexing is unsigned, and taking the scalar adjunct commutes with it, so the enriched comparison commutes with the ordinary target Hom shifts. Both differentials acquire the same factor (-1)^r. The unique right Hom shift normalization descends this identity to the fixed derived shifts.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use sh.limit_shift_resolution on the same replacement j and its actual shifted replacement j[r]. Use C.globalLimit_model to compute the specified globalLimit comparison from the ordinary sections/limit comparison. That ordinary comparison is characterized by its limit projections and commutes with termwise reindexing. The canonical derived-section and derived-limit units commute with shifts. Substitute these equations in the representative square, cancel representative isomorphisms, and use naturality to descend to arbitrary P and N. This proves the equality of derived maps without any appeal to joint faithfulness of finite derived projections. Precompose with global Hom of u_(Q[r]). Naturality moves the reduction shift F(Q[r])->F(Q)[r] across the enriched comparison. The supplied unit_shift equation replaces u_(Q[r]) followed by L of this shift and the L-shift by u_Q[r]. Naturality of the integral Hom target shift gives exactly the displayed square for lambda(P,Q).",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-reduction-limit-shift-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-reduction-limit-shift-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JC, 0941; extracted target-shift calculation from original item proof step 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The enriched tensor Hom comparison for a derived reduction and inverse limit adjunction commutes with the ordinary target shift of Hom complexes",
+   "results": "8 hits: total tensor unitors, cochain shift evaluation, exact-functor derived factorization shifts, enriched ordinary composition, and Tor maps. These do not give the enriched reduction/limit comparison with prescribed resolution shifts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"Adjunction\"",
+   "results": "12 hits in Mathlib.CategoryTheory.Shift.Adjunction supply general adjunction-compatible shift structures. They do not identify the fixed ordinary-reindexing Hom shifts or the simultaneous global-limit comparison.",
+   "date": "2026-10-24",
+   "verdict": "general infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*[Ss]hift|[Ss]hift.*enriched",
+   "results": "0 Mathlib hits. Local searches of Sheaf and WeilConjectures found ordinary Hom shift normalization and generic tensor-mate shift lemmas, but no matching enriched global comparison for this calculus.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMappingLimitProjections",
+  "date": "2026-10-24",
+  "group": "J3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-mapping-limit-projections",
+   "place": "Proof step 4: the mapping-complex target-shift calculation, including the actual adjunction unit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientEnrichedGlobalShift",
+  "file": "lean/Sheaf/Paper/CoefficientEnrichedGlobalShift.lean",
+  "declaration": "WeilConjectures.coefficientEnrichedGlobalShift",
+  "statement": "theorem coefficientEnrichedGlobalShift\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (C : CoefficientDerivedSystemCoherence l E W S)\n    (sh : PurReductionLimitShiftData l E W S)\n    (P Q : DerivedCategory (scalarReductionSource l E W)) (r : ℤ) :\n    integralMappingLimitMap l E W S P (Q⟦r⟧) ≫\n        integralMappingLimitTargetShift l E W S sh P Q r =\n      integralMappingLimitSourceShift l E W P Q r ≫\n        (integralMappingLimitMap l E W S P Q)⟦r⟧'",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralMappingLimitMap",
+   "WeilConjectures.integralMappingLimitSourceShift",
+   "WeilConjectures.integralMappingLimitTargetShift",
+   "WeilConjectures.coefficientEnrichedGlobalShift"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e4b5",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261024T214907-L-728139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e4b5",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261024T214907-L-728139",
+  "kind": "interface",
+  "note": "independent cc review: the three moved defs against the published item module (byte-identical, public re-import); the new sorry statement against the item's shift clause and the PurReductionLimitShiftData fields; item node proof/proof_deps/lean against the Lean proof"
+ }
+}

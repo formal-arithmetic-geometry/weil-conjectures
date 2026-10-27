@@ -16,9 +16,39 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), tame-boundary local calculation: geometric Kummer-nerve descent and its counit on the boundary strata Agent-formulated input; exact all-continuous proof/reference WANTED, not a finite-coefficient theorem."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the internal-Hom presentation law, use the universal properties of the actual coequalizers. The quotient for the published relative tensor is linear in its first factor and coequalizes the pair defining Mod.tensorLeft. After forgetting the module action, its universal property follows from coequalizer.desc, conjugating the balanced relation by the associator. Since the forgetful functor creates these coequalizers, this gives a module isomorphism. Its component carries Mod.tensorπ to Mod.tensorObjπ; cancellation on the quotient gives naturality. These are proved private helpers, adapted from the existing tensor comparison in Sheaf.WeilSheaf.NativeHomPrecompositionQuasiIso; that module is not imported.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose this quotient-preserving tensor comparison with the symmetry and transport CategoryTheory.ihom.adjunction to Mod.tensorLeft. Apply Mathlib Adjunction.rightAdjointUniq to this adjunction and Mod.ihomAdjunction. The homEquiv_symm_rightAdjointUniq_hom_app identity, precomposed with the actual quotient, is exactly the required evaluation identity. If another natural isomorphism satisfies that identity, tensorLeft_obj_hom_ext identifies its uncurried components with the canonical ones; injectivity of the adjunction hom equivalence and extensionality prove uniqueness. No new existence statement is assumed. This proof applies to arbitrary parameter objects, including the empty profinite set.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For additivity of kummerExplicitBar, use natural-transformation extensionality and evaluate at each simplex n. The equality is precisely B.bar.maps_additive f h n.len from the compatible internal bar data.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-25",
+  "document": "Existing tensor comparison proof in lean/Sheaf/WeilSheaf/NativeHomPrecompositionQuasiIso.lean, adapted as private helpers; Mathlib.CategoryTheory.Adjunction.Unique; the module docstrings and compatible bar data."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -73,10 +103,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -121,5 +155,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "Re-delivery after RETURN a0510f1c. F1 fixed: KummerRefinementNatural now requires, for every g:S'→S, a full KummerGlobalChart over g≫s/g≫i whose comparison equals the pulled-back original comparison, which is not tautological; it is used for both E and Ω in KummerStratumChart, and def-sfb-kummer-refinement cites global-chart without a cycle. F2 fixed: KummerParameterEvaluation removed; def-sfb-kummer-parameter-evaluation is existing:true on ProfiniteFunctions (verbatim); parameter_iso and the bar column use the published comparisonApp; the Mod.ihom≅ihom transport is the .choose of an evaluation-pinned ∃!. F3 fixed: four existing:true def nodes (condensed-point-pullback-comparisons, exact-derived-module-adjunction, finite-continuous-kummer-coefficient-model, tame-root-chart-geometry), verbatim and previously owned only by theorem nodes; the item gains landed def-sfb-strict-local-kummer-tame-module and derived-profinite-evaluation (allowed); the remaining theorem stmt_deps are instance/lemma uses only (advisory). F4 fixed: eight-step docstring with node ids. All lean.statement fields verbatim; no opaque/axiom; 20 sorry on Prop theorems only; no collisions, dropped nodes or dropped modules; edge cases unchanged. No compile (2026-10-21 rule). Advisory: unused _J parameter; parameter_iso is redundant with comparison_isIso; prior A1/A2 stand."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T041255-L-1126778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

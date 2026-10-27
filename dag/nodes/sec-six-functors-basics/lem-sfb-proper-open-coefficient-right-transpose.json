@@ -1,0 +1,207 @@
+{
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-direct-image-coefficient-restriction",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "stmt_deps": [
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=L_vP$, $B=L_uM$, $b=b^\\Lambda_{p,M}$ and $T=T_{Z_V}$. For the Hom bijection $\\Psi$ of $L_q\\dashv R_q$, the definition of $b$ is $b=\\Psi_{A,B}(t)$. The inverse formula in [lem-weil-pbc-adjunction-of-natural-bijection] gives $\\epsilon_{q,B}\\circ L_q(b)=\\Psi^{-1}_{A,B}(\\Psi_{A,B}(t))=t$. This proves the displayed exchange counit identity, including its specified map $a_P$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following paragraph, equivalence of (1) and (3)"
+   }
+  },
+  {
+   "text": "For the primed Hom bijection $\\Psi^{\\prime}$, the defining adjunct property of $\\gamma_{q,B}$ and the inverse formula in [lem-weil-pbc-adjunction-of-natural-bijection] give $\\epsilon^{\\prime}_{q,TB}\\circ L^{\\prime}_q(\\gamma_{q,B})=T(\\epsilon_{q,B})\\circ c_{q,R_qB}$. Expand $h_R=\\gamma_{q,B}\\circ T_V(b)$ in the definition of $\\tau$. Functoriality of $L^{\\prime}_q$ and associativity therefore give $\\tau(h_R)=T(\\epsilon_{q,B})\\circ c_{q,R_qB}\\circ L^{\\prime}_q(T_V(b))$, the first asserted expression.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "(2) Formal properties: gamma is the mate of the pullback identification; counit formula expanded using Tag 0037"
+   }
+  },
+  {
+   "text": "The inverse of the natural pullback isomorphism in [det-prop-scalar-six-pullback](1) is natural. At the morphism $b:A\\to R_qB$ this says $c_{q,R_qB}\\circ L^{\\prime}_q(T_V(b))=T(L_q(b))\\circ c_{q,A}$. Indeed, the original comparison $d=c_q^{-1}$ satisfies $L^{\\prime}_q(T_V(b))\\circ d_A=d_{R_qB}\\circ T(L_q(b))$; composing with $c_{q,R_qB}$ on the left and $c_{q,A}$ on the right gives the claimed equation. Substitute it into step 2 and use functoriality of $T$ to obtain $\\tau(h_R)=T(\\epsilon_{q,B}\\circ L_q(b))\\circ c_{q,A}$. Step 1 turns this into $T(t)\\circ c_{q,L_vP}$. Only the specified pullback comparison was inverted; neither $b$ nor $\\gamma$ was inverted.",
+   "uses": [
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.md",
+    "place": "(1), natural pullback comparison; its naturality square at b, followed by the exchange counit identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Independence paragraph, explicit right-transpose restriction calculation, using Stacks Tag 0037"
+ },
+ "id": "lem-sfb-proper-open-coefficient-right-transpose",
+ "kind": "statement",
+ "title": "Right adjoint-transpose calculation for proper open coefficient restriction",
+ "statement": "Let $k$ be a field of characteristic $p_0>0$, let $\\ell\\ne p_0$ be prime, and let $Z,Y$ be separated finite-type $k$-schemes [sk-def-sfb-dc-setting]. Let $p:Z\\to Y$ be proper, $v:V\\hookrightarrow Y$ open, and put $Z_V=Z\\times_YV$, with projections $u:Z_V\\hookrightarrow Z$ and $q:Z_V\\to V$. Let $\\Lambda\\to\\Lambda'$ be any listed coefficient map of [det-prop-scalar-six-direct-image], with its condensed and finite-subextension conventions. On ordinary unbounded module derived categories [sk-def-sfb-module-derived-pushpull] put $T_S=\\Lambda'_S\\otimes^L_{\\Lambda_S}-$ [sk-def-sfb-coefficient-change], and let $M\\in\\Dctf(Z,\\Lambda)$ [sk-def-sfb-constructible]. Write $L_f=f_\\Lambda^*$, $R_f=Rf_{*,\\Lambda}$, $L'_f=f_{\\Lambda'}^*$, $R'_f=Rf_{*,\\Lambda'}$, with units $\\eta_f,\\eta'_f$ and counits $\\epsilon_f,\\epsilon'_f$. Let $c_f:L'_fT_{\\mathrm{target}(f)}\\xrightarrow{\\sim}T_{\\mathrm{source}(f)}L_f$ be the inverse canonical pullback comparison [det-prop-scalar-six-pullback](1), and let $a:L_qL_v\\xrightarrow{\\sim}L_uL_p$ and $a':L'_qL'_v\\xrightarrow{\\sim}L'_uL'_p$ be the canonical composition comparisons for $pu=vq$. Define $\\gamma_{f,N}$ to be the $L'_f\\dashv R'_f$ adjunct of $T(\\epsilon_{f,N})\\circ c_{f,R_fN}$, as in [det-prop-scalar-six-direct-image]. For either coefficient ring define $b_{p,N}$ to be the $L_q\\dashv R_q$ adjunct of $L_u(\\epsilon_{p,N})\\circ a_{R_pN}$, using primed functors for $\\Lambda'$. Put $P=R_pM$, $t=L_u(\\epsilon_{p,M})\\circ a_P$, and define the inverse transpose over $\\Lambda'$ by $\\tau(h)=\\epsilon'_{q,T_{Z_V}L_uM}\\circ L'_q(h)$. All compositions below are read right to left.\n\nThe morphism\n$$h_R=\\gamma_{q,L_uM}\\circ T_V(b^\\Lambda_{p,M}):T_VL_vP\\longrightarrow R'_qT_{Z_V}L_uM$$\nhas inverse transpose\n$$\\begin{aligned}\n\\tau(h_R)&=T_{Z_V}(\\epsilon_{q,L_uM})\\circ c_{q,R_qL_uM}\\circ L'_q(T_V(b^\\Lambda_{p,M}))\\\\\n&=T_{Z_V}(\\epsilon_{q,L_uM}\\circ L_q(b^\\Lambda_{p,M}))\\circ c_{q,L_vP}\\\\\n&=T_{Z_V}(t)\\circ c_{q,L_vP}.\n\\end{aligned}$$\nThe exchange counit identity used in the final expression is\n$$\\epsilon_{q,L_uM}\\circ L_q(b^\\Lambda_{p,M})=L_u(\\epsilon_{p,M})\\circ a_P=t.$$\nThese equalities do not assume that either exchange map or $\\gamma$ is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Independence paragraph: restriction-characterized coefficient/refinement equation; explicit adjoint-transpose calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of applying extension of scalars to a base change morphism followed by the direct image coefficient mate equals scalar extension of the exchange counit.",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mate/counit or underived module results require additional derived comparison and coherent-compositor calculations, not one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the change of coefficients pullback isomorphism rewrites the counit transpose of coefficient change of a derived exchange map.",
+   "results": "CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_counit_app; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; PresheafOfModules.pullbackComp; CategoryTheory.PullbackShift.adjunction_counit; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mate/counit or underived module results require additional derived comparison and coherent-compositor calculations, not one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute the counit transpose of a derived base change map followed by change of condensed coefficients for sheaves of modules.",
+   "results": "CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε; CategoryTheory.Functor.totalLeftDerivedCounit; ModuleCat.RestrictionCoextensionAdj.counit'; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mate/counit or underived module results require additional derived comparison and coherent-compositor calculations, not one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mate/counit or underived module results require additional derived comparison and coherent-compositor calculations, not one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|homEquiv_counit|mateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic mate/counit or underived module results require additional derived comparison and coherent-compositor calculations, not one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_counit|counit_app_left_map_homEquiv|homEquiv_naturality_left",
+   "results": "25 hits: Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Category/UniformSpace.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Condensed/Light/Epi.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse adjunct of a composite is computed by the counit followed by the left adjoint; naturality of scalar pullback comparison gives the base change counit.",
+   "results": "8 hits: CategoryTheory.Adjunction.comp_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.comp, CategoryTheory.Over.postAdjunctionLeft_counit_app_left, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.PullbackShift.adjunction_counit",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse adjunction transpose of a coefficient direct image mate composed with scalar extension of a base change map is scalar extension of its exchange counit, by naturality.",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_apply|homEquiv_counit|homEquiv_naturality_left_symm",
+   "results": "22 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean (subdirectory CategoryTheory/Adjunction)",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a natural transformation combined with cancellation of the adjunction hom equivalence and its inverse computes a base change mate transpose.",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.ParametrizedAdjunction.homEquiv_symm_naturality_one_assoc, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma mateEquiv_counit|theorem mateEquiv_counit|def mateEquiv|lemma mateEquiv_apply",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean (subdirectory CategoryTheory/Adjunction)",
+   "date": "2026-10-24",
+   "verdict": "no match for the full displayed chain: the generic adjunction identities give its counit substitutions, but naturality of the specified derived pullback comparison must still be applied at the exchange morphism; the existing adjunction Mathlib leaf is cited instead of creating a node."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-compact-support",
+   "place": "Independence paragraph: the restriction-characterized coefficient/refinement equation, where the two adjoint-transpose calculations are computed.",
+   "via": [
+    "lem-sfb-proper-direct-image-coefficient-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-open-coefficient-right-transpose",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies retained. Three elementary calculation steps use the existing adjunction Hom-bijection Mathlib leaf and naturality of the existing pullback comparison. All exchange and coefficient counit equations are derived explicitly from the specified adjunct definitions; no invertibility of exchange or gamma is used. No new nodes or Lean edits.",
+  "blueprint": "det-prop-scalar-six-compact-support, Independence paragraph: the refine-then-compare restriction equation, specifically the right-hand inverse transpose in the proper/open coefficient restriction lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-e62040de9",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-e62040de9 (reviewer sub-agent of L); spot-checked: Read the item in full, plus every cited statement: lem-weil-pbc-adjunction-of-natural-bijection (Mathlib leaf mkOfHomEquiv/homEquiv_counit), det-prop-scalar-six-pullback (1) (natural iso for any map of condensed rings, on all unbounded K), and det-prop-scalar-six-direct-image (γ composite and the clause-(2) counit equation). Also read the parent's citing step and blueprint latest det-prop-scalar-six-compact-support.proof.md, Independence paragraph lines 12-24. Diff against live: only status/proof/proof_deps/proof_origin/searches/split_report change; statement and stmt_deps are unchanged and live is still unsplit. Step 1: b=Ψ(t), so ε_q∘L_q(b)=t, with the types of t=L_u(ε_p)∘a_P checked. Step 2: γ=Ψ'(T(ε)∘c), so ε'∘L'_q(γ)=T(ε)∘c, which gives the first expression. The adjunct definition matches the direct-image composite R'(Tε)R'(c)η' and the orientation of c. Step 3: naturality of c=d^{-1} at b:A→R_qB, then functoriality of T and step 1 give T(t)∘c_{q,L_vP}, exactly what the parent uses. Only c is inverted, so non-flat coefficient maps (Z/ℓ²→F_ℓ) are fine and constructibility of R_pM is not needed. Edge cases M=0, V=∅, Λ=Λ' all hold. Route: the pullback node is in the same unit sk-prop-scalar-six and the other dependency is a Mathlib leaf; no tool_uses. Not a duplicate: the left-transpose sibling and lem-sp-proper-open-coefficient-mate(-transposed) (other unit and setting) differ. No SGA. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProperOpenCoefficientRightTranspose",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.properOpenCoefficientRightTranspose_eq",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.properOpenCoefficientRightMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properOpenCoefficientRightTranspose",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properOpenCoefficientRightTranspose_eq"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProperOpenCoefficientRightTranspose.lean",
+  "statement": "theorem properOpenCoefficientRightTranspose_eq (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)] {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (_ha : ListedCoefficientMap ell a) {Z Y V : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (p : Z ⟶ Y) [IsProper p.left] (v : V ⟶ Y) [IsOpenImmersion v.left] (M : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Z.left)) (_hM : constantModelBoundedConstructible Λ.X Z.left M ∧ DerivedCategory.finiteTorAmplitude _ M) : (properOpenCoefficientRightTranspose a p.left v.left M = (scalarSixPull Λ' (pullback.snd p.left v.left)).map ((scalarSixChange a V.left).map ((RootCoordinateFace.exchange Λ.X (pullback.fst p.left v.left) (pullback.snd p.left v.left) p.left v.left pullback.condition).app M)) ≫ (scalarDirectImagePullbackData.theta a (pullback.snd p.left v.left)).inv.app ((RootCoordinateFace.lower Λ.X (pullback.snd p.left v.left)).obj ((scalarSixPull Λ (pullback.fst p.left v.left)).obj M)) ≫ (scalarSixChange a (pullback p.left v.left)).map ((RootCoordinateFace.adjunction Λ.X (pullback.snd p.left v.left)).counit.app ((scalarSixPull Λ (pullback.fst p.left v.left)).obj M))) ∧ (properOpenCoefficientRightTranspose a p.left v.left M = (scalarDirectImagePullbackData.theta a (pullback.snd p.left v.left)).inv.app ((scalarSixPull Λ v.left).obj ((RootCoordinateFace.lower Λ.X p.left).obj M)) ≫ (scalarSixChange a (pullback p.left v.left)).map ((scalarSixPull Λ (pullback.snd p.left v.left)).map ((RootCoordinateFace.exchange Λ.X (pullback.fst p.left v.left) (pullback.snd p.left v.left) p.left v.left pullback.condition).app M) ≫ (RootCoordinateFace.adjunction Λ.X (pullback.snd p.left v.left)).counit.app ((scalarSixPull Λ (pullback.fst p.left v.left)).obj M))) ∧ (properOpenCoefficientRightTranspose a p.left v.left M = (scalarDirectImagePullbackData.theta a (pullback.snd p.left v.left)).inv.app ((scalarSixPull Λ v.left).obj ((RootCoordinateFace.lower Λ.X p.left).obj M)) ≫ (scalarSixChange a (pullback p.left v.left)).map ((RootCoordinateFace.squareUpper Λ.X (pullback.fst p.left v.left) (pullback.snd p.left v.left) p.left v.left pullback.condition).hom.app ((RootCoordinateFace.lower Λ.X p.left).obj M) ≫ (scalarSixPull Λ (pullback.fst p.left v.left)).map ((RootCoordinateFace.adjunction Λ.X p.left).counit.app M))) ∧ ((scalarSixPull Λ (pullback.snd p.left v.left)).map ((RootCoordinateFace.exchange Λ.X (pullback.fst p.left v.left) (pullback.snd p.left v.left) p.left v.left pullback.condition).app M) ≫ (RootCoordinateFace.adjunction Λ.X (pullback.snd p.left v.left)).counit.app ((scalarSixPull Λ (pullback.fst p.left v.left)).obj M) = (RootCoordinateFace.squareUpper Λ.X (pullback.fst p.left v.left) (pullback.snd p.left v.left) p.left v.left pullback.condition).hom.app ((RootCoordinateFace.lower Λ.X p.left).obj M) ≫ (scalarSixPull Λ (pullback.fst p.left v.left)).map ((RootCoordinateFace.adjunction Λ.X p.left).counit.app M))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea73b2bef",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only the item lean record, new module ProperOpenCoefficientRightTranspose.lean and report changed; statement verbatim; first S2 delivery (earlier Q72/Q109/Q90 A7 returns were S1). Binders identical to landed scalarSixDirectImage (char p0>0, ell≠p0, sep. finite-type Z,Y over k, p proper, v open, ListedCoefficientMap, Dctf = constantModelBoundedConstructible ∧ finiteTorAmplitude). c = pinned theta.inv (L'_q T → T L_q), a = squareUpper (L_qL_v≅L_uL_p), b = RootCoordinateFace.exchange = adjunct of t, gamma = scalarDirectImageMate; h_R/tau real composites; the 4 conjuncts are the node's three tau expressions plus the exchange counit identity, in correct ≫ order; no invertibility/flatness/universe assumption; edge cases M=0, V=∅, a=id, non-flat maps covered. Advisory: owners not in the item's stmt_deps (def-sfb-listed-coefficient-maps, def-sfb-scalar-six-coefficient-interfaces, def-sfb-test-map-derived-composition, def-sfb-coordinate-face-exchange-data, theorem-module defs of lem-sfb-scalar-direct-image-mate-coherence) follow the det-prop-scalar-six-direct-image NS 95a3 precedent; self second reading; branch cosmetic. No compile (no file changed)."
+ }
+}

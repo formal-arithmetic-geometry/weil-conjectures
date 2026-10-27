@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-clopen-scalar-model-properties",
+ "kind": "statement",
+ "title": "Flat K-flat scalar model preservation and computation",
+ "statement": "Let X be a scheme and j_i:Y_i→X a finite pairwise disjoint clopen cover. Use the actual small pro-etale module sheaves, scalar extension presentations p_a and their normalized successive compositor n, exact restrictions r_i and r_D,i, canonical cochain computation morphisms c_a(P), normalized identity units, and scalar comparison interfaces of [def-pur-clopen-derived-scalar-comparison-data]. For any global and component presentations p,q with normalizations n,m, and any comparison family d, the predicates computed and extended hold. Explicitly, for every a:R→S and flat-term K-flat R-complex P, c_a(P) and c_(a_i)(r_i P) are isomorphisms. The complex E_a P has flat terms and is K-flat over S, and r_i(E_a P) has flat terms and is K-flat over S_i. No flatness of a is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0G7E; sites-modules.tex Tag 03EK and 05V4; indicated part of parent proof."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "apply K-flat ringed-topos pullback with the identity underlying topos to a.\nThis gives flatness and K-flatness over S. Apply clopen flatness and K-flatness\ndetection to R and S to restrict both input and output models. The normalized\nscalar counits are invertible on those models; the remaining factors of computation\nare canonical isomorphisms, and their composites are invertible. No flatness of a\nis used, and zero sheaves and empty components satisfy the same argument.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent restriction/scalar proof, separated into independently reusable mathematical assertions by P8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between derived functors extends uniquely from flat K-flat complexes and respects composition and identity",
+   "results": "Generic leftDerivedNatTrans and mapDerivedCategoryFactors hits; no theorem states the clopen scalar comparison or its normalized coherence.",
+   "date": "2026-10-24",
+   "verdict": "Use generic universal-derived and localization APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One exact hit in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-24",
+   "verdict": "Used for the scalar identity unit; does not itself provide comparison descent or coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyInjective_whisker|liftNatIso|mapHomologicalComplexIdIso",
+   "results": "Mathlib.CategoryTheory.Sites.PreservesLocallyBijective and Mathlib.CategoryTheory.Localization.Predicate contain generic tools.",
+   "date": "2026-10-24",
+   "verdict": "Ordinary sheafification and derived localization tools exist; their application and coherence remain explicit work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism on flat K-flat models descends to derived module sheaves and is compatible with scalar composition",
+   "results": "Generic localization and derived functor search; precise comparison and explicit coherence remain stated separately.",
+   "date": "2026-10-24",
+   "verdict": "No full match for the new assertions; use existing generic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarCompositor",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-derived-scalar-compositor",
+   "place": "Flat K-flat scalar model preservation and computation"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenDerivedScalarModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_scalar_model_properties",
+  "statement": "theorem clopen_scalar_model_properties\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hc : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (p : Presentations.{t, u} X)\n    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := X.ProEt) (J := topology X) (hD := derived.{t, u} X) @p)\n    (q : ∀ i, Presentations.{t, u} (Y i))\n    (m : ∀ i, Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := (Y i).ProEt) (J := topology (Y i)) (hD := derived.{t, u} (Y i))\n      (fun {R S} a ↦ q i (R := R) (S := S) a))\n    (d : ∀ i, Comparison.{t, u} (j i) @p\n      (fun {R S} a ↦ q i (R := R) (S := S) a)) :\n    ∀ i, (d i).computed ∧ (d i).extended",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live (identical); Data module vs the live item's interface declarations (verbatim except blueprint ids); new sorry statements vs their nodes and the pinning laws of Normalization, Units and Comparison; #print axioms of the 6 modules compiled in a sandbox"
+ }
+}

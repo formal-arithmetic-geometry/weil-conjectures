@@ -16,94 +16,47 @@
   "thm-cbc-finite-extension",
   "prop-weil-pbc-descent-functors",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-qbar-category"
+  "def-weil-pbc-qbar-category",
+  "def-cbc-qbar-normalized-exchange-model"
  ],
  "proof": [
   {
-   "text": "Work at the coefficient stages and on the completed pro-etale/raw rational categories of [thm-cbc-finite-extension]. The hypotheses in the statement are exactly its hypotheses at every stage: the compact-support square and its chosen compactifications, noetherian finite-dimensional schemes with $\\ell$ invertible, separated finite-type $f$, and arbitrary $g$. Write $H_{h,E}=Rh_{!,E}$ and $P_{u,E}=Lu^*_{\\mathrm{comp},E}$. At each finite stage that theorem supplies the actual rational exchange\n$$\\eta_E:U_E=P_{g,E}H_{f,E}\\Rightarrow V_E=H_{f',E}P_{g',E},$$\nwhich is natural in every rational morphism and has invertible components. The $\\Qlb$ category in this argument is exactly the raw pair category of [def-weil-pbc-qbar-category], formed from these same finite-stage categories.",
+   "text": "Construct a normalized composite model by [lem-cbc-qbar-exchange-model-exists]. This is only the existence clause and contains no invertibility conclusion.",
    "uses": [
-    "thm-cbc-finite-extension",
-    "def-weil-pbc-qbar-category"
+    "lem-cbc-qbar-exchange-model-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "Finite-stage isomorphy and the common-stage category; domain check"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-cbc-rational-compact-support-coefficient-coherence] to this square. It gives the exact coherent comparisons $b^f_{M/E}$ and $b^{f'}_{M/E}$ for compact support, and the pullback comparisons $d^g_{M/E},d^{g'}_{M/E}$ used in its statement. In particular the composite comparisons $b^U,b^V$ satisfy\n$$\\eta_{M,T^X_{M/E}K_E}\\,b^U_{M/E,K_E}=b^V_{M/E,K_E}\\,T^{Y'}_{M/E}(\\eta_{E,K_E}).$$\nThis is a comparison of the specified completed-then-rationalized exchange maps, rather than only of their endpoints. The unit, associator and shift equations in that lemma are precisely the coherence required for descent. The missing argument in the source is coefficient coherence for completed coefficient sheaves; its displayed finite-ring projection formula alone does not apply to $\\mathcal O_E$ or $E$.",
+   "text": "For any normalized model D, write a rational-stage object as the localization of its integral object K. Choose a finite generating tuple of the adic ideal. The constructible-completeness lemma makes K complete for this tuple. Apply complete compact-support base change to its compatible etale origins; its completed exchange is invertible. The full-subcategory inclusion reflects isomorphisms and rational localization preserves them. D.source, D.target and D.normalized identify the resulting localized arrow with the finite-stage component of D.exchange, proving that component invertible. This uses the same integral-exchange argument as finite-extension base change without transport between coefficient models.",
    "uses": [
-    "lem-cbc-rational-compact-support-coefficient-coherence"
+    "thm-cbc-complete-proetale",
+    "def-wf-tensor-product",
+    "def-cbc-qbar-normalized-exchange-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "Opening scalar-extension paragraph, with its missing completed-coefficient coherence isolated"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [prop-weil-pbc-descent-functors] first for each family $H_{h,E}$ and $P_{u,E}$ with the comparisons of step 2. Its general assertion gives their descended exact functors. Composing them gives descended functors $\\overline U,\\overline V$, whose coefficient comparisons are $b^U,b^V$; these are the two composites in the statement. The compatibility equation in step 2 makes $(\\eta_E)_E$ a compatible natural transformation, so the same proposition descends it to $\\overline\\eta:\\overline U\\Rightarrow\\overline V$. At an object $(E,K_E)$ of [def-weil-pbc-finite-stage-pair-category], its component is $[E,\\eta_{E,K_E}]$. Thus it is the descended exchange specified by the statement, with no identification with a different ambient sheaf or Karoubi category.",
+   "text": "The generic descNatTrans component is the image of the finite-stage component under the stage inclusion, so it is invertible. A natural transformation with invertible components is invertible. The descNatTrans and inclusion formulas combined with Hom.comm give the representative at every larger field after cancellation of beta with its inverse. Finally naturality for alpha.inv identifies each conjugated component with the component at the fixed K, so both displayed expressions agree. This directly proves representative independence without separately lifting a finite diagram.",
    "uses": [
     "prop-weil-pbc-descent-functors",
     "def-weil-pbc-finite-stage-pair-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "Descent of the coherent functors and of the exchange transformation"
-   }
-  },
-  {
-   "text": "By [thm-cbc-finite-extension], $v_E=\\eta_{E,K_E}^{-1}$ exists in $\\mathcal C_E(Y')$. Composition and identity in [def-weil-pbc-finite-stage-pair-category] give\n$$[E,v_E][E,\\eta_{E,K_E}]=[E,v_E\\eta_{E,K_E}]=[E,1],\\qquad [E,\\eta_{E,K_E}][E,v_E]=[E,1].$$\nConsequently $\\overline\\eta_{(E,K_E)}$ is an isomorphism for every object. The inverse equations, rather than any exactness or idempotent-completeness assertion about the colimit, prove invertibility.",
-   "uses": [
-    "thm-cbc-finite-extension",
-    "def-weil-pbc-finite-stage-pair-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "Passage of the finite-stage inverse to the common-stage category"
-   }
-  },
-  {
-   "text": "For a finite $M\\supset E$, step 2 rewrites as\n$$T^{Y'}_{M/E}(\\eta_{E,K_E})=(b^V_{M/E,K_E})^{-1}\\,\\eta_{M,T^X_{M/E}K_E}\\,b^U_{M/E,K_E}.$$\nThe left side represents the same morphism as $[E,\\eta_{E,K_E}]$ by [def-weil-pbc-finite-stage-pair-category], since both endpoints initially have coefficient field $E$ and $T_{E/E}=1$. The right side says exactly that under the prescribed coefficient identifications of source and target this representative is the $M$-coefficient isomorphism applied to $T_{M/E}K_E$. The associator equation of [lem-cbc-rational-compact-support-coefficient-coherence] makes these identifications consistent under $M\\subset N$. For two nonnested choices, enlarge to their compositum, which is an allowed common stage by the pair-category definition. They then represent the same map, proving independence of $M$.",
-   "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "lem-cbc-rational-compact-support-coefficient-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "The finite-overfield representative and independence of its stage"
-   }
-  },
-  {
-   "text": "It remains to spell out independence of the pair representing the fixed object $K$. Fix representing isomorphisms $\\alpha_E:(E,K_E)\\xrightarrow{\\sim}K$ and $\\alpha_L:(L,K_L)\\xrightarrow{\\sim}K$. The common-stage calculus [prop-weil-pbc-common-stage-calculus] realizes $\\alpha_L^{-1}\\alpha_E$ and its inverse, with their two identity equations, at one finite stage $M$. Thus it is represented there by an isomorphism $u:T^X_{M/E}K_E\\xrightarrow{\\sim}T^X_{M/L}K_L$. The finite-stage naturality in [thm-cbc-finite-extension] is the equation\n$$V_M(u)\\,\\eta_{M,T_{M/E}K_E}=\\eta_{M,T_{M/L}K_L}\\,U_M(u).$$\nPut $w=\\alpha_L^{-1}\\alpha_E$. By the morphism formula of [prop-weil-pbc-descent-functors], $\\overline V(w)$ is represented at $M$ by $(b^V_{M/L})^{-1}V_M(u)b^V_{M/E}$, and $\\overline U(w)$ is represented by $(b^U_{M/L})^{-1}U_M(u)b^U_{M/E}$. Substitute the step-5 formula for each transported exchange component into the two composites $\\overline V(w)\\overline\\eta_{(E,K_E)}$ and $\\overline\\eta_{(L,K_L)}\\overline U(w)$. After cancellation of adjacent comparison inverses, their $M$-representatives are respectively $(b^V_{M/L})^{-1}V_M(u)\\eta_{M,T_{M/E}K_E}b^U_{M/E}$ and $(b^V_{M/L})^{-1}\\eta_{M,T_{M/L}K_L}U_M(u)b^U_{M/E}$. The displayed finite-stage naturality equation identifies them. Therefore in the descended category\n$$\\overline V(\\alpha_L^{-1}\\alpha_E)\\,\\overline\\eta_{(E,K_E)}=\\overline\\eta_{(L,K_L)}\\,\\overline U(\\alpha_L^{-1}\\alpha_E).$$\nThe conjugated maps are exactly the images of the input comparison by the explicit morphism formula of [prop-weil-pbc-descent-functors]. Multiplication by $\\overline V(\\alpha_L)$ on the left and $\\overline U(\\alpha_E)^{-1}$ on the right therefore identifies the two maps to the fixed endpoints for $K$. Changing the morphism representative or enlarging $M$ does not change these classes by the common-stage calculus and descent. This proves independence of $E$ and of the representative, relative to its specified identification with $K$, entirely inside the same raw PBC coefficient categories.",
-   "uses": [
-    "prop-weil-pbc-common-stage-calculus",
-    "thm-cbc-finite-extension",
-    "prop-weil-pbc-descent-functors"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-    "place": "Final independence clause, with representing isomorphisms and naturality written explicitly"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-cbc-finite-extension",
-  "def-weil-pbc-qbar-category",
-  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "lem-cbc-qbar-exchange-model-exists",
+  "thm-cbc-complete-proetale",
+  "def-wf-tensor-product",
+  "def-cbc-qbar-normalized-exchange-model",
   "prop-weil-pbc-descent-functors",
-  "def-weil-pbc-finite-stage-pair-category",
-  "prop-weil-pbc-common-stage-calculus"
+  "def-weil-pbc-finite-stage-pair-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
-  "place": "Complete proof paragraph, expanded into explicit descent, inverse and representative-independence equations; unsupported finite-ring coefficient substitution corrected"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/_section.md",
+  "place": "Same integral/rational/common-stage route; model construction separated, finite-stage invertibility obtained by localization, and independence by descended naturality."
  },
  "mathlib_searches": [
   {
@@ -191,7 +144,107 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_fiber_charpolyRev_higherLowerShriek",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine",
+     "lines": [
+      176,
+      273
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exists_fiber_expand_charpolyRev_stalk_higherLowerShriek",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FibreCohomology",
+     "lines": [
+      337,
+      428
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-cbc-qbar`, at the spectrum of a residue field"
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      149,
+      161
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      218,
+      243
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-functor-package",
+      "lem-zl-morphism-open-closed-reduction"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekOperations",
+     "lines": [
+      95,
+      114
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -212,9 +265,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-descent-functors",
-  "prop-weil-pbc-common-stage-calculus",
-  "lem-cbc-rational-compact-support-coefficient-coherence"
+  "prop-weil-pbc-descent-functors"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -236,13 +287,6 @@
   "module": "Sheaf.Paper.QbarCompactSupportBaseChange",
   "declaration": "AlgebraicGeometry.Scheme.qbarCompactSupportBaseChange",
   "declarations": [
-   "AlgebraicGeometry.Scheme.cbcScalarOrdinaryIso",
-   "AlgebraicGeometry.Scheme.CbcCompletedScalarComparison",
-   "AlgebraicGeometry.Scheme.cbcScalarOpenInverse",
-   "AlgebraicGeometry.Scheme.cbcScalarSourceInverse",
-   "AlgebraicGeometry.Scheme.cbcScalarTargetInverse",
-   "AlgebraicGeometry.Scheme.CbcScalarInverseBetaSpec",
-   "AlgebraicGeometry.Scheme.CbcQbarExchangeModel",
    "AlgebraicGeometry.Scheme.qbarCompactSupportBaseChange"
   ],
   "file": "lean/Sheaf/Paper/QbarCompactSupportBaseChange.lean",
@@ -252,5 +296,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Second reading fixes the scalar comparisons as well as the operations and exchange: sourceBeta and targetBeta localize the canonical open-unit and proper-counit mates, with completed pullback comparisons uniquely fixed by their ordinaryToCompleted unit equations. Canonical transport uses the recorded universal counits; no extra geometric/coefficient-coherence hypothesis or replacement coefficient category is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66069",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T163938-L-913472",
+  "kind": "interface",
+  "note": "independent cc review: qbarCompactSupportBaseChange statement (byte-identical to clone) and moved model/scalar defs (bodies identical, re-exported) against thm-cbc-qbar + new nodes def-cbc-qbar-normalized-exchange-model / lem-cbc-qbar-exchange-model-exists; 6 of 7 direct importers compiled with the delivery"
  }
 }

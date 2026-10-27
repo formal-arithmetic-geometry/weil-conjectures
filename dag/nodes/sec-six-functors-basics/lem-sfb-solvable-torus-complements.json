@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-solvable-torus-complements",
+ "kind": "statement",
+ "title": "Maximal tori give sections of the solvable torus quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness, connectedness and morphism properties have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-morphism-conventions]. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial. A smooth group is unipotent if every geometric point is a unipotent matrix in a faithful linear representation, meaning $(u-I)^n=0$ for some $n\\geq1$. A torus is a group isomorphic over $F$ to $\\mathbf G_m^r$, where $r\\geq0$ and $\\mathbf G_m(A)=A^\\times$ for a commutative $F$-algebra $A$; a maximal torus is a torus subgroup maximal under inclusion. Let $H$ be smooth, connected and solvable. Let $U\\subseteq H$ be a smooth connected normal unipotent subgroup such that the fppf sheaf quotient $D=H/U$ is a torus; here fppf sheaf quotient means sheafification of $A\\mapsto H(A)/U(A)$ for faithfully flat finitely presented coverings. For every maximal torus $T\\subseteq H$, the restriction $q|_T:T\\to D$ of the quotient homomorphism is an isomorphism of group schemes.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorems 16.26(a) and 16.27(b), pp.332--333; Theorem 16.33(d), pp.335--336, identifies maximal diagonalizable complements as maximal tori when D is a torus."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-morphism-conventions",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The successive commutator subgroups give a finite normal series with commutative quotients, so the solvability hypothesis is the one used in [lem-sfb-lie-kolchin-triangular-embedding]. Apply that node over $F$ to embed $H$ as a closed subgroup of $B_n$. Write $V=H\\cap U_n$. By [lem-sfb-triangular-diagonal-kernel], the quotient $q_0:H\\to D_0=H/V$ has $V$ unipotent, a closed embedding of $D_0$ into a split torus, and a group-scheme section $s_0:D_0\\to H$. In particular $D_0$ is of multiplicative type in the sense used by [lem-sfb-unipotent-to-multiplicative-trivial].",
+   "uses": [
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30, printed pp.334–335; Theorem 16.21, p.330; Theorem 16.26(a), pp.332–333."
+   }
+  },
+  {
+   "text": "Identify $U$ with $V$ before using the section. The smooth geometric-point notion of unipotence for $U$ agrees with the scheme-theoretic notion by [lem-sfb-unipotent-to-multiplicative-trivial]. That node makes $q_0|_U:U\\to D_0$ trivial, so $U\\subseteq\\ker q_0=V$. It also makes $q|_V:V\\to D$ trivial, since $V$ is scheme-theoretically unipotent and $D$ is a torus, so $V\\subseteq\\ker q=U$; the kernel identification for $q$ is [lem-sfb-affine-normal-quotient-geometry]. These are inclusions of subgroup functors on all algebras, hence $U=V$ as subgroup schemes. Both $D_0$ and $D$ represent the same sheaf quotient $H/U$; its universal property identifies them compatibly with the quotient maps. Transport $s_0$ to a group-scheme section $s:D\\to H$ with $q s=\\operatorname{id}_D$.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.21, printed p.330, identification of the largest unipotent subgroup; Corollary 14.18(a), p.284; quotient interpretation in Section 5(j), pp.116–118."
+   }
+  },
+  {
+   "text": "Let $T\\subseteq H$ be the given maximal torus and set $K=T\\cap U$. Since $U=H\\cap U_n$, the group $K$ is a closed subgroup of $U_n$, hence is unipotent by the unitriangular definition. Apply [lem-sfb-unipotent-to-multiplicative-trivial] to the inclusion $K\\to T$; it is trivial on every algebra, so $K$ is the trivial group scheme. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $q|_T$. Its kernel is $K=1$, and it factors as $T\\to S\\hookrightarrow D$, with $S$ representing the fppf quotient $T/1$. This quotient sheaf is $T$ itself: dividing each $T(A)$ by the trivial subgroup changes nothing. Thus the induced $a:T\\xrightarrow{\\sim}S$ is an isomorphism of group schemes, not merely a bijection on $F$-points. In particular $S$ is a torus and a closed subgroup of $D$.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(b), printed p.333, first paragraph of its proof; Homomorphism Theorem 5.39, p.108."
+   }
+  },
+  {
+   "text": "Form $P=H\\times_D S$, the inverse image of $S$. By [lem-sfb-affine-normal-quotient-geometry], $P/U\\simeq S$ as fppf quotient, with the restricted quotient map. The group $P$ is a closed subgroup of the same $B_n$, and $P\\cap U_n=U$: it contains $U$ and is contained in $H$. There are two sections of $P\\to S$, namely $s|_S$ and the inclusion $T\\hookrightarrow P$ composed with $a^{-1}:S\\to T$. Here $S$ is smooth because $a:T\\xrightarrow{\\sim}S$ identifies it with a torus; also $P$ is smooth and connected by the same quotient node, since $U$ and $S$ are smooth and connected. Apply [lem-sfb-triangular-quotient-section-conjugacy] with $J=P$, $V=U$ and smooth quotient $S$ to these sections. It gives $u\\in U(F)$ such that $T=\\operatorname{Int}(u)s(S)$ as subgroup schemes of $H$. Thus $T\\subseteq\\operatorname{Int}(u)s(D)$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-triangular-quotient-section-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(a),(b), printed p.333, inverse-image subgroup and comparison of its two sections, with the smooth quotient hypothesis retained as in Summary 16.29(b), printed p.334."
+   }
+  },
+  {
+   "text": "Put $b=\\operatorname{Int}(u)\\circ s:D\\to H$. Since $q(u)=1$, for every algebra $A$ the equality $q_A(u_A s_A(d)u_A^{-1})=d$ shows $q b=\\operatorname{id}_D$. Consequently $\\ker b=1$. By [lem-sfb-algebraic-group-homomorphism-factorization], $b$ identifies $D$ with a closed subgroup $T'$ of $H$ (its fppf image is $D/1=D$). This is a torus containing $T$ by the preceding step. Maximality gives $T=T'$. On this subgroup $q b=\\operatorname{id}_D$ and $b q=\\operatorname{id}_{T'}$, so $q|_T$ is an isomorphism, as required.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(b), printed p.333, maximality conclusion; Theorem 16.33(d), p.336."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-triangular-diagonal-kernel",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-triangular-quotient-section-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.27(b), printed p.333, with Theorems 16.26(a), 16.30 and the quotient identification of Theorem 16.21. The proof constructs the containing section torus and invokes maximality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected solvable algebraic group over an algebraically closed field every maximal torus maps isomorphically onto the quotient by the unipotent radical",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n  {\"name\": \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L),\\n  H.IsCartanSubalgebra ↔ H.toLieSubmodule.IsUcsLimit\", \"doc\": \"A Lie subalgebra $\\\\mathfrak{h}$ of a Lie algebra over a commutative ring is a Cartan subalgebra if and only if it is a stabilized term in the upper central series of its underlying Lie submodule struc\"}\n  {\"name\": \"LieAlgebra.IsKilling.cartanEquivDual\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            (H : LieSubalgebra K L) → [H.IsCartanSubalgebra] → [LieAlgebra.IsKilling K L] → ↥H ≃ₗ[K] Module.Dual K ↥H\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, its Cartan subalgebra $\\\\mathfrak{h}$ is linearly isomorphic to its dual space $\\\\operatorname{Hom}_K(\\\\mathfrak{h}, K)\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H] [IsNoetherian R L],\\n  LieAlgebra.zeroRootSubalgebra R L H = H ↔ H.IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if $ L $ is a Noetherian $ R $-module, then a Lie subalgebra $ \\\\mathfrak{h} $ is a Cartan subalgebra if and only if the zero root subalgebra $ \\\\m\"}\n  {\"name\": \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  LieAlgebra.zeroRootSubalgebra R L H = H → H.IsCartanSubalgebra\", \"doc\": \"If a nilpotent Lie subalgebra $\\\\mathfrak{h}$ of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ satisfies $\\\\mathfrak{g}_0(\\\\mathfrak{h}) = \\\\mathfrak{h}$, where $\\\\mathfrak{g}_0(\\\\mathfrak{h})$ d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori complement the unipotent kernel in connected solvable linear algebraic groups",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) : IsCompl α.ker (K ∙ coroot α)\", \"doc\": \"For any weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$ of a Lie algebra $L$ over a field $K$ with non-degenerate Killing form, the kernel of $\\\\alpha$ and the $K$-span of the coroot of $\\\\alph\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : ∃ k, derivedSeries R L k = ⊥\", \"doc\": \"For a solvable Lie algebra $ L $ over a commutative ring $ R $, there exists a non-negative integer $ k $ such that the $ k $-th term of the derived series of $ L $ is the zero submodule, i.e., $ L^{(\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsLieAbelian L] : IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(x : L) : IsCompl (genWeightSpaceOf M 0 x) (posFittingCompOf R M x)\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and for each element $x \\\\in \\\\mathfrak{g}$, the generalized weight space $\\\\text{genWeightSpaceOf}(M, 0\"}\n  {\"name\": \"LieAlgebra.isSolvable_of_isNilpotent\", \"module\": \"Mathlib.Algebra.Lie.Nilpotent\", \"type\": \"(L : Type v) [LieRing L] [hL : LieModule.IsNilpotent L L] : LieAlgebra.IsSolvable L\", \"doc\": \"Every nilpotent Lie algebra is solvable. That is, if a Lie algebra $\\\\mathfrak{g}$ is nilpotent (meaning its lower central series terminates at zero after finitely many steps), then it is also solvable\"}\n  {\"name\": \"Subgroup.isComplement_univ_left\", \"module\": \"Mathlib.GroupTheory.Complement\", \"type\": \": IsComplement univ S ↔ ∃ g : G, S = { g }\", \"doc\": \"The universal subgroup of a group $ G $ and a subgroup $ S $ form a complement if and only if $ S $ is the trivial subgroup consisting of the identity element $ e $. This means the product map $ G \\\\ti\"}\n  {\"name\": \"RootPairing.isCompl_corootSpan_ker_corootForm\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \": IsCompl (P.corootSpan R) (LinearMap.ker P.CorootForm)\", \"doc\": \"The submodule generated by coroots and the kernel of the coroot bilinear form are complementary submodules of $ N $, meaning their intersection is trivial and their sum equals $ N $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"SemidirectProduct\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*torus|unipotent.*radical|torus.*complement",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"18\", \"text\": \"* `Matrix.SpecialLinearGroup.lineStab` : the unipotent radical attached to a subspace `L ⊆ ι → F`\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"31\", \"text\": \"/-- The \\\"unipotent radical\\\" attached to a subspace `L ⊆ ι → F`: the subgroup of\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"55\", \"text\": \"`PSL ι F` acting on the projective space `ℙ F (ι → F)`: the unipotent radical\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*torus|torus.*complement|unipotent.*radical",
+   "results": "3 hits; Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvability, Lie algebras, and abstract quotient groups do not state the maximal-torus group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori in connected solvable group schemes are complements to the unipotent radical",
+   "results": "8 hits; IsSolvable, LieAlgebra.radical_eq_top_of_isSolvable, IsNilpotent.to_isSolvable, LieAlgebra.maxNilpotentIdeal_le_radical, AddSubgroup.IsComplement', LieAlgebra.radicalIsSolvable, LieAlgebra.ofAbelianIsSolvable, IsSolvable.commutator_lt_top_of_nontrivial",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvability, Lie algebras, and abstract quotient groups do not state the maximal-torus group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"torus\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvability, Lie algebras, and abstract quotient groups do not state the maximal-torus group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every maximal torus of a smooth connected solvable algebraic group maps isomorphically to its quotient by a normal connected unipotent subgroup",
+   "results": "8 hits; LieAlgebra.exists_isCartanSubalgebra_engel, Subgroup.quotientCenterEmbedding_apply, Subgroup.quotientCenterEmbedding, LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, of_quotient_center_nilpotent, CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvability, Lie algebras, and abstract quotient groups do not state the maximal-torus group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: The general complement theorem supplies the section; the item explicitly constructs the inverse multiplication map and projection.",
+   "via": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-solvable-torus-complements",
+  "worker": "stage1",
+  "summary": "Read Milne 16.21, 16.26–16.27 and 16.30–16.33. Reused the existing triangular embedding, quotient splitting, unipotent-to-multiplicative vanishing, normal quotient, and homomorphism-image nodes. Identified the specified U with the triangular kernel on all algebras, proved the given torus embeds into its quotient image, compared two sections over that image, and used maximality. Created only the conjugacy-of-sections input, with statement only and logged searches; no maximal-torus clause was moved to a new node. Returned-delivery repair E2/E7: require the section-conjugacy input to have smooth diagonal quotient, as in Milne Summary 16.29(b); step 4 explicitly verifies this for S isomorphic to the torus T (and verifies P smooth). The report records the infinitesimal counterexample to the source as printed. Normalized doubled TeX escapes in proof text.",
+  "blueprint": "Supports the inherited alteration/moduli prerequisite chain below det-thm-sf-ctf-stability-direct-images (3), in the Borel-pair structure input to the rho section modules. The current latest blueprint has no separate group-theoretic node for this input. The ancestor command returns None; inherited blueprint.from.node is retained, and the new node extends its via chain. The five steps supply the complement argument used in the existing reductive Borel-pair structure split."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-7b7278bfc",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7b7278bfc (reviewer sub-agent of L); spot-checked: Re-delivery; the prior return's fault (fa6d9afef333: E2/E7) is repaired. The only new node, lem-sfb-triangular-quotient-section-conjugacy, now assumes D smooth. It is a special case of Milne iAG Summary 16.29(b), printed p.334: V = J∩U_n is unipotent, D embeds in G_m^n and is smooth multiplicative type, F is algebraically closed. I re-checked the alpha_p ⋊ mu_p counterexample to the unrestricted 16.27(a) on the coordinate ring: H^1(mu_p, alpha_p) is nonzero. With D smooth, X(D) has no p-torsion, so Milne's H^1(D,N)=0 step through 0→N→G_a→G_a/N goes through. Tested on small cases: n=1; G_m and mu_l acting on alpha_p, where the section is unique because D is reduced; G_a ⋊ G_m. The new node is statement-only, self-contained and has correct stmt_deps. It is not a duplicate of triangular-diagonal-kernel, perfect-solvable-unipotent-torus or reductive-borel-pair-structure, and it is not a clause of the item. Item statement is byte-identical to the earlier snapshot. Steps 1-5 were checked against the cited statements. Step 1: Lie-Kolchin embedding, plus the V/D_0/s_0 of triangular-diagonal-kernel. Step 2: U=V on all algebras, using the unipotent-to-multiplicative vanishing both ways and the kernel clause of the normal-quotient node. Step 3: K=T∩U is trivial without any smoothness, and factorization gives T≅T/1=S. Step 4: P/U≃S and P∩U_n=U; S smooth makes the new node apply to s|_S and ι_T∘a^{-1}. Step 5: b=Int(u)s has trivial kernel and closed image T'⊇T, so maximality gives T=T'. This matches Milne 16.27(b)/16.33(d). Batch-5: lem-trf-fppf-covering-base-change (Stacks 021O) and def-trf-scheme-cover-descent-datum are general descent infrastructure, not trace-formula or Poincaré-duality steps, so accepted. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SolvableTorusComplements",
+  "declaration": "AlgebraicGeometry.solvable_torus_complements",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SolvableTorusComplements.lean",
+  "statement": "theorem solvable_torus_complements {F : Type u} [Field F] [IsAlgClosed F] (H U D : Grp (Over (Spec (.of F)))) (hH : SolvableGroupStructure.IsAlgebraic H) (hU : SolvableGroupStructure.IsAlgebraic U) (hD : SolvableGroupStructure.IsAlgebraic D) [Smooth H.X.hom] [ConnectedSpace H.X.left] (hsolv : IsSolvableGroupScheme H.X) (iU : U ⟶ H) [IsClosedSubgroupScheme iU.hom.hom] [IsNormalSubgroupScheme iU.hom.hom] [ConnectedSpace U.X.left] (hunip : SolvableGroupStructure.IsUnipotent U) (q : H ⟶ D) (hquot : IsFppfGroupQuotient iU q) (htorus : MultiplicativeType.IsTorus D) (T : Grp (Over (Spec (.of F)))) (hT : SolvableGroupStructure.IsAlgebraic T) (iT : T ⟶ H) (hmax : ReductiveTorusCentralizer.IsMaximalTorus iT) : IsIso (iT ≫ q)",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the five already landed definition nodes added to stmt_deps: the exact scheme-theoretic derived-series predicate, affine algebraic groups and geometric unipotence, tori, maximal tori, and the canonical fppf group quotient presentation. No definitions are copied, and no node statement is corrected."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00d014257",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Item module states solvable_torus_complements with the proof sorry and no definitions. Clause by clause: F alg closed; all groups affine finite type via IsAlgebraic; H smooth+connected with scheme-theoretic derived-series solvability (IsSolvableGroupScheme); U closed normal connected, smooth+geometric unipotence via IsUnipotent; actual quotient q with IsFppfGroupQuotient (owner def-sfb-fppf-group-quotient-presentation, existing:true, landed); D torus (same as split since F is alg closed); T closed maximal torus (IsMaximalTorus); conclusion IsIso (iT ≫ q) in Grp(Over Spec F). Matches the node and Milne 16.27(b)/16.33(d); nothing stronger or missing; rank 0, U=1, H=1 and char p admitted. The five added stmt_deps are landed reviewed definition nodes owning exactly the declarations used. Node statement/proof unchanged; lean.statement verbatim; docstrings carry source, blueprint tag and the 5-step proof; no duplicate theorem in side-live. Report has Worker report and Second reading by Q36 (done by the same worker). No compile run (no file changed); no fixes."
+ }
+}

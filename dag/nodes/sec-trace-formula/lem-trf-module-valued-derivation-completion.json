@@ -1,0 +1,229 @@
+{
+ "id": "lem-trf-module-valued-derivation-completion",
+ "kind": "statement",
+ "title": "Continuous completion of a module-valued derivation",
+ "statement": "Let $k$ be a commutative ring, $A$ a commutative $k$-algebra, $I\\subseteq A$ a finitely generated ideal, $M$ an $A$-module, and $d:A\\to M$ a $k$-derivation [def-weil-pbc-kahler-differentials]. Put $C=\\varprojlim_{r\\ge1}A/I^r$ and $N=\\varprojlim_{r\\ge1}M/I^rM$ [def-weil-pbc-adic-completion], with canonical maps $\\iota:A\\to C$, $j:M\\to N$, and the componentwise $C$-action on $N$. Write $J=IC$, $Q_r=M/I^rM$, and $q_r:Q_{r+1}\\to Q_r$ for reduction. For every $r\\ge1$, the formula $d_r(a\\bmod I^{r+1})=d(a)\\bmod I^rM$ defines a $k$-derivation $d_r:A/I^{r+1}\\to Q_r$, where the scalar action is through $A/I^{r+1}\\to A/I^r$. The maps $\\delta_r:C\\to Q_r$, $\\delta_r(x)=d_r(x_{r+1})$, satisfy $q_r\\delta_{r+1}=\\delta_r$. There is a unique continuous $k$-derivation $D:C\\to N$ such that $D\\iota=jd$, where continuity means that for each $r\\ge1$ there is $s\\ge1$ with $D(J^s)\\subseteq I^rN$. Its coordinates are $(D(x))_r=\\delta_r(x)$: equivalently, if $a\\in A$ lifts $x\\bmod J^{r+1}$, then $(D(x))_r=d(a)\\bmod I^rM$. Moreover $D(J^{r+1})\\subseteq I^rN$ for every $r\\ge1$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PE (lemma-derivation-extends), proof of (1), module-valued form of the shifted quotient construction and uniqueness argument from the returned item, old Step 2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "By the derivation definition [def-weil-pbc-kahler-differentials], repeated Leibniz gives $d(a_0a_1\\cdots a_{r+1})=\\sum_{i=0}^{r+1}(\\prod_{j\\ne i}a_j)d(a_i)$. If $a_1,\\ldots,a_{r+1}\\in I$, every summand lies in $I^rM$: the $i=0$ term has $r+1$ ideal factors and every other term has $r$. Elements of $I^{r+1}$ are finite sums of these products, so additivity gives $d(I^{r+1})\\subseteq I^rM$ for every $r\\geq1$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), proof of (1), Leibniz estimate, with the same calculation for an arbitrary target module"
+   }
+  },
+  {
+   "text": "Consequently $a\\mapsto d(a)\\bmod I^rM$ kills $I^{r+1}$ and descends to $d_r:A/I^{r+1}\\to Q_r$. Two representatives differ by an element of $I^{r+1}$, so the formula is independent of the representative. Additivity, vanishing on $k$, and $d_r(\\bar a\\bar b)=\\bar a\\,d_r(\\bar b)+\\bar b\\,d_r(\\bar a)$ follow by reducing the corresponding identities for $d$; multiplication on $Q_r$ factors through $A/I^r$. This proves that $d_r$ is precisely the asserted $k$-derivation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), proof of (1), induced maps on successive quotients"
+   }
+  },
+  {
+   "text": "For $x\\in C$, lift $x_{r+2}$ to $a\\in A$. Compatibility of its coordinates gives $q_r\\delta_{r+1}(x)=d(a)\\bmod I^rM=\\delta_r(x)$. Thus $D(x)=(\\delta_r(x))_{r\\geq1}$ is a compatible sequence and defines an element of $N$, by the explicit inverse-limit description [def-weil-pbc-adic-completion] applied to the module quotients. The identities for $d_r$ give additivity and vanishing on $k$ coordinatewise. Moreover $\\delta_r(xy)=x_r\\delta_r(y)+y_r\\delta_r(x)$, since $x_{r+1},y_{r+1}$ reduce to $x_r,y_r$. This is exactly the $r$-coordinate of $D(xy)=xD(y)+yD(x)$ for the stated componentwise action. Equality of compatible sequences is coordinatewise, so $D$ is a $k$-derivation. At $x=\\iota(a)$ its coordinates are $d(a)\\bmod I^rM$, hence $D\\iota=jd$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), proof of (1), taking the limit; explicit module-valued verification of the derivation identities omitted there"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-completion-complete] first to the $A$-module $A$ and then to $M$. Its hypotheses hold because $I$ is finitely generated, with no finiteness assumption on $M$. For the coordinate maps $\\pi_t:C\\to A/I^t$ and $p_t:N\\to M/I^tM$ this gives $\\ker\\pi_t=I^tC=J^t$, $\\ker p_t=I^tN$, surjectivity of both maps, and $\\bigcap_t I^tN=0$. The equality $I^tC=(IC)^t$ follows by expanding finite sums of products on both sides. In particular, choosing a representative $a\\in A$ of $x_t$ gives $x-\\iota(a)\\in J^t$. Thus lifting modulo $J^{r+1}$ is the same as representing $x_{r+1}$, which proves the asserted equivalent coordinate formula.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), both parts, for the ring and for the module"
+   }
+  },
+  {
+   "text": "If $x\\in J^{r+1}=\\ker\\pi_{r+1}$, then $\\delta_r(x)=d_r(0)=0$. Hence $D(x)\\in\\ker p_r=I^rN$. Therefore $D(J^{r+1})\\subseteq I^rN$, proving the stated bound and continuity with $s=r+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), proof of (1), shifted-coordinate construction; ideal-adic bound using the preceding kernel identifications"
+   }
+  },
+  {
+   "text": "Let $E:C\\to N$ be any continuous $k$-derivation with $E\\iota=jd$. Fix $r\\geq1$ and choose $s_0\\geq1$ with $E(J^{s_0})\\subseteq I^rN$. Put $s=\\max(s_0,r+1)$ and choose $a\\in A$ representing $x_s$. Then $x-\\iota(a)\\in J^s$, and additivity gives $E(x)-j(d(a))\\in I^rN$. The bound already proved for $D$ gives $D(x)-j(d(a))\\in I^rN$ as well. Thus $E(x)-D(x)\\in I^rN$ for every $r$, so the separatedness from Step 4 implies $E(x)=D(x)$. This holds for every $x$, and proves uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), proof of (1), agent-supplied continuity and uniqueness argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PE (lemma-derivation-extends), proof of (1), module-valued generalization with explicit Leibniz, continuity and uniqueness checks; quotient kernels from algebra.tex Tag 05GG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a derivation from a ring into a finite module extends uniquely continuously to the adic completions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_ext'\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {T : Type u_5} [inst_3 : AddCommGroup T] [inst_4 : Module (AdicCompletion I R) T]\\n  {f g : AdicCompletion I M →ₗ[AdicCompletion I R] T},\\n  (∀ (a : AdicCompletion.AdicCauchySequence I M\", \"doc\": \"For any two linear maps from the $ I $-adic completion of an $ R $-module $ M $ (as a module over the $ I $-adic completion of $ R $) to a module $ T $, if the maps agree on all elements that are imag\"}\n  {\"name\": \"AdicCompletion.map_ext\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Sort u_6} {f g : AdicCompletion I M → N},\\n  (∀ (a : AdicCompletion.AdicCauchySequence I M), f ((AdicCompletion.mk I M) a) = g ((AdicCompletion.mk I M) a)) → f = g\", \"doc\": \"If two $ R $-module homomorphisms from the $ I $-adic completion of $ M $ to another module $ N $ agree on the image of the canonical map from $ I $-adic Cauchy sequences, then the homomorphisms are e\"}\n  {\"name\": \"AdicCompletion.map_ext'_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {T : Type u_5} [inst_3 : AddCommGroup T] [inst_4 : Module (AdicCompletion I R) T]\\n  {f g : AdicCompletion I M →ₗ[AdicCompletion I R] T},\\n  f = g ↔ ∀ (a : AdicCompletion.AdicCauchySeque\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $, and a module $ T $ over the $ I $-adic completion of $ R $, two $ R $-linear maps $ f, g $ from the $ I $-adic completion of $ M $ \"}\n  {\"name\": \"AdicCompletion.map_ext''\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f g : AdicCompletion I M →ₗ[R] N},\\n  f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M → f = g\", \"doc\": \"If two linear maps $ f, g : \\\\varprojlim M/I^nM \\\\to N $ satisfy $ f \\\\circ \\\\text{mk} = g \\\\circ \\\\text{mk} $, where $ \\\\text{mk} $ is the canonical linear embedding of $ I $-adic Cauchy sequences into the \"}\n  {\"name\": \"AdicCompletion.map_ext''_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f g : AdicCompletion I M →ₗ[R] N},\\n  f = g ↔ f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M\", \"doc\": \"Two $ R $-linear maps from the $ I $-adic completion of $ M $ to $ N $ are equal if and only if their compositions with the canonical $ R $-linear map from $ I $-adic Cauchy sequences to the completio\"}\n  {\"name\": \"IsAdicComplete.algHom_ext\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} {A : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (I : Ideal S) [IsAdicComplete I S] [inst_4 : CommRing A] [inst_5 : Algebra R A] {f g : A →ₐ[R] S},\\n  (∀ (n : ℕ), (Ideal.Quotient.mkₐ R (I ^ n)).comp f = (Ideal.Quotient.mkₐ R (I ^ n)).co\", \"doc\": \"Let $ R $ be a commutative semiring, $ A $ an $ R $-algebra, $ I $ an ideal of $ R $, and $ S $ an $ R $-algebra that is adic complete with respect to $ I $. If two algebra homomorphisms $ f, g : A \\\\t\"}\n  {\"name\": \"IsAdicComplete.lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  [IsAdicComplete I\", \"doc\": \"Let $R$ be a commutative ring, $I$ an ideal of $R$, and let $M$ and $N$ be $R$-modules. Assume that $N$ is $I$-adically complete. This definition constructs an $R$-linear map from $M$ to $N$ from a co\"}\n  {\"name\": \"Hausdorffification.lift_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [h : IsHausdorff I N] (f : M →ₗ[R] N)\\n  (g : Hausdorffification I M →ₗ[R] N), g ∘ₗ Hausdorffification.of I M = f → g = Ha\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $ with $ N $ satisfying the Hausdorff condition $ \\\\bigcap_{n \\\\geq 1} I^n N = 0 $, and linear maps $ f : M \\\\to N $ and $ g : \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: general completion maps do not extend module-valued derivations or prove their continuity and Leibniz rule"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend module valued derivation to ideal adic completion using one step shifted quotient maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AdicCompletion.map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M →ₗ[R] N) → AdicCompletion I M →ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\\\to N $, this function constructs the induced linear map between the $ I $-adic completio\"}\n  {\"name\": \"AdicCompletion.lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (f : (n : ℕ) → M \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and a compatible family of $ R $-linear maps $ f_n : M \\\\to N/I^nN $ (for $ n \\\\in \\\\mathbb{N} $) satisfying $ \\\\text{transit\"}\n  {\"name\": \"IsAdicComplete.lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  [IsAdicComplete I\", \"doc\": \"Let $R$ be a commutative ring, $I$ an ideal of $R$, and let $M$ and $N$ be $R$-modules. Assume that $N$ is $I$-adically complete. This definition constructs an $R$-linear map from $M$ to $N$ from a co\"}\n  {\"name\": \"derivationToSquareZeroOfLift\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    {B : Type w} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra R B] →\\n                (I : Ideal B) →\\n                  [inst_5 : Algebra A B\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring, forming a scalar tower with algebra homomorphisms $R \\\\to A \\\\to B$. Let $I$ be an ideal of $B$ such that $I^2 = \\\\{0\\\\}$. Let $f: \"}\n  {\"name\": \"liftOfDerivationToSquareZero_mk_apply'\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (d : Derivation R A ↥I) (x : A),\\n  (Ideal.Quotient.mk I) ↑(d x) + (algebraMap A (B ⧸ I)) x = (algebraM\", \"doc\": \"For any derivation $ d $ from $ R $ to $ A $ with values in an ideal $ I $, and for any element $ x \\\\in A $, the equation $ \\\\pi(d(x)) + \\\\pi(x) = \\\\pi(x) $ holds, where $ \\\\pi $ denotes the canonical quo\"}\n  {\"name\": \"AdicCompletion.mk\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] → AdicCompletion.AdicCauchySequence I M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical $ R $-linear map sending each $ I $-adic Cauchy sequence in an $ R $-module $ M $ to its equivalence class in the $ I $-adic completion of $ M $, where $ R $ is a commutative ring and $ \"}\n  {\"name\": \"Hausdorffification.lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → [h : IsHausdorff I N] → (M →ₗ[R] N)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $ where $ N $ satisfies the Hausdorff condition $ \\\\bigcap_{n \\\\geq 1} I^n N = 0 $, and a linear map $ f : M \\\\to N $, this con\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: general completion maps do not extend module-valued derivations or prove their continuity and Leibniz rule"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, AdicCompletion",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: general completion maps do not extend module-valued derivations or prove their continuity and Leibniz rule"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erivation.*[Cc]ompletion|[Cc]ompletion.*[Dd]erivation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: general completion maps do not extend module-valued derivations or prove their continuity and Leibniz rule"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous extension of a derivation into the completion of a finite module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"UniformSpace.Completion.continuous_extension\", \"module\": \"Mathlib.Topology.UniformSpace.Completion\", \"type\": \": Continuous (Completion.extension f)\", \"doc\": \"The extension of a function $ f : \\\\alpha \\\\to \\\\beta $ to the completion of the uniform space $ \\\\alpha $ is continuous.\"}\n  {\"name\": \"ContinuousLinearMap.completion_apply_coe\", \"module\": \"Mathlib.Topology.Algebra.LinearMapCompletion\", \"type\": \"(f : α →SL[σ] β) (a : α) : f.completion a = f a\", \"doc\": \"For any continuous linear map $ f : \\\\alpha \\\\to \\\\beta $ and any element $ a \\\\in \\\\alpha $, the extension of $ f $ to the completion of $ \\\\alpha $ evaluated at $ a $ is equal to $ f(a) $.\"}\n  {\"name\": \"AbstractCompletion.continuous_extend\", \"module\": \"Mathlib.Topology.UniformSpace.AbstractCompletion\", \"type\": \": Continuous (pkg.extend f)\", \"doc\": \"The extension of a function $ f : \\\\alpha \\\\to \\\\beta $ to the abstract completion $ \\\\hat{\\\\alpha} $ of $ \\\\alpha $ is continuous with respect to the topology induced by the uniform structure on $ \\\\hat{\\\\al\"}\n  {\"name\": \"ContinuousLinearMap.completion\", \"module\": \"Mathlib.Topology.Algebra.LinearMapCompletion\", \"type\": \"(f : α →SL[σ] β) : Completion α →SL[σ] Completion β\", \"doc\": \"Given modules $\\\\alpha$ and $\\\\beta$ over semirings $R_1$ and $R_2$ with a ring homomorphism $\\\\sigma: R_1 \\\\to R_2$, and a continuous linear map $f: \\\\alpha \\\\to \\\\beta$, this constructs the unique extensio\"}\n  {\"name\": \"UniformSpace.Completion.extensionHom\", \"module\": \"Mathlib.Topology.Algebra.UniformRing\", \"type\": \"[CompleteSpace β] [T0Space β] : Completion α →+* β\", \"doc\": \"Given a uniformly continuous ring homomorphism $ f : \\\\alpha \\\\to \\\\beta $ where $ \\\\beta $ is a complete Hausdorff ring, this constructs the unique extension of $ f $ to a ring homomorphism from the comp\"}\n  {\"name\": \"AddMonoidHom.continuous_completion\", \"module\": \"Mathlib.Topology.Algebra.GroupCompletion\", \"type\": \"(f : α →+ β) (hf : Continuous f) : Continuous (AddMonoidHom.completion f hf : Completion α → Completion β)\", \"doc\": \"If $ f : \\\\alpha \\\\to \\\\beta $ is a continuous additive monoid homomorphism between uniform additive groups, then its extension to the completions $ \\\\mathrm{Completion}(\\\\alpha) \\\\to \\\\mathrm{Completion}(\\\\b\"}\n  {\"name\": \"ContinuousLinearMap.coe_completion\", \"module\": \"Mathlib.Topology.Algebra.LinearMapCompletion\", \"type\": \"(f : α →SL[σ] β) : f.completion = Completion.map f\", \"doc\": \"Given modules $\\\\alpha$ and $\\\\beta$ over semirings $R_1$ and $R_2$ with a ring homomorphism $\\\\sigma: R_1 \\\\to R_2$, and a continuous linear map $f: \\\\alpha \\\\to \\\\beta$, there exists a unique continuous li\"}\n  {\"name\": \"UniformSpace.Completion.extension\", \"module\": \"Mathlib.Topology.UniformSpace.Completion\", \"type\": \"(f : α → β) : Completion α → β\", \"doc\": \"Given a function $ f : \\\\alpha \\\\to \\\\beta $, this defines its extension to the completion $ \\\\mathrm{Completion}(\\\\alpha) $ of the uniform space $ \\\\alpha $. If $ f $ is uniformly continuous, the extension\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: general completion maps do not extend module-valued derivations or prove their continuity and Leibniz rule"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend a module valued derivation continuously to the ideal adic completions",
+   "results": "8 hits: AdicCompletion.of, AdicCompletion.map, AdicCompletion.lift, IsAdicComplete.lift, IsAdicComplete.StrictMono.of_lift, AdicCompletion, AdicCompletion.mk, AdicCompletion.map_of",
+   "date": "2026-10-23",
+   "verdict": "no match: the completion maps are linear over A, whereas d is a k-derivation; square-zero lift results do not state the adic extension and continuity clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, AdicCompletion",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the completion maps are linear over A, whereas d is a k-derivation; square-zero lift results do not state the adic extension and continuity clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erivation.*[Cc]ompletion|[Cc]ompletion.*[Dd]erivation",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no derivation completion theorem; quotient hits concern square-zero lifts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module valued derivation extension to ideal adic completion",
+   "results": "8 hits: AdicCompletion.module, IsAdicComplete, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.of_comp_lift, IsAdicComplete.StrictMono.extend, AdicCompletion, IsAdicComplete.StrictMono.of_lift, AdicCompletion.ext_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the completion maps are linear over A, whereas d is a k-derivation; square-zero lift results do not state the adic extension and continuity clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derivation induces maps between successive ideal power quotients and a derivation on inverse limits",
+   "results": "8 hits: liftOfDerivationToSquareZero_mk_apply', liftOfDerivationToSquareZero_mk_apply, derivationToSquareZeroOfLift, KaehlerDifferential.derivationQuotKerTotal, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero, liftOfDerivationToSquareZero_apply, derivationToSquareZeroOfLift_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the completion maps are linear over A, whereas d is a k-derivation; square-zero lift results do not state the adic extension and continuity clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "completion|adic|quotient",
+   "results": "5 hits: Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no derivation completion theorem; quotient hits concern square-zero lifts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completion-kahler-differential-comparison",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Jacobian-cokernel/differential comparison in the first proof paragraph of the pointwise nodal ingredient (Curves 0C4D). Module-valued completion extension (returned comparison Step 2).",
+   "via": [
+    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-module-valued-derivation-completion",
+  "worker": "stage1",
+  "summary": "Checked 07PE(1) and 05GG and the live project declarations. Wrote the shifted module-valued quotient derivations and their compatibility, constructed the inverse-limit derivation, and checked Leibniz coordinatewise. Reused the existing Mathlib leaf for projection kernels to prove the ideal-adic bound and uniqueness. No new nodes; only twice-escaped TeX normalized in the statement.",
+  "blueprint": "Preserves the inherited local-term-locality ancestry through the nodal Jacobian/differential comparison. This algebraic auxiliary realizes the module-valued extension in the comparison node, returned Step 2; the current latest ancestor proof has only the contracting-correspondence argument and no duplicate algebraic statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-3493c8f3c",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-3493c8f3c (reviewer sub-agent of L); spot-checked: I read Stacks 07PE(1) (more-algebra.tex l.11754-11772, where the check that the limit is a derivation is omitted) and 05GG (algebra.tex l.22645-22657) at the cited places. The item's statement is unchanged apart from TeX escaping, and there are no new nodes. Step 1: the Leibniz expansion of a_0 a_1...a_{r+1} gives d(I^{r+1}) in I^rM, with the coefficient term handled. Step 2: d_r is well defined and is a derivation, since the action factors through A/I^r. Step 3: compatibility follows by lifting x_{r+2}, and coordinatewise Leibniz matches the stated componentwise C-action; this fills the gap that 07PE leaves. Step 4: lem-weil-pbc-module-completion-complete, applied to A and to M, gives ker pi_t = I^tC = J^t, ker p_t = I^tN, surjectivity and separatedness; finite generation of I is the only hypothesis used. Steps 5 and 6: the bound D(J^{r+1}) in I^rN and uniqueness via s = max(s_0, r+1) plus separatedness are correct, and uniqueness uses only additivity of E. Cited nodes say what each step takes (C3/C4). Small cases checked: I=0, I=A, M=0, k[t] with d/dt including characteristic p. The statement fits its use in Step 3 of the parent lem-trf-completion-kahler-differential-comparison. Duplicate search: lem-weil-pbc-derivation-extends is ring-valued only (the item generalizes it), and def-trf-completed-differential-extension and lem-trf-complete-derivation-truncation-reconstruction state different things, so there is no duplicate. No SGA, no re-split note, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ModuleValuedDerivationCompletion",
+  "declaration": "Derivation.exists_unique_continuous_module_completion",
+  "file": "lean/Sheaf/RingTheory/ModuleValuedDerivationCompletion.lean",
+  "statement": "theorem exists_unique_continuous_module_completion {k : Type u} {A : Type v} [CommRing k] [CommRing A] [Algebra k A] (I : Ideal A) (hI : I.FG) (M : Type w) [AddCommGroup M] [Module A M] (d : @Derivation k A M _ _ _ _ _ (Module.compHom M (algebraMap k A))) : ∃ dQ : ∀ (r : ℕ), 1 ≤ r → @Derivation k (A ⧸ I ^ (r + 1)) (M ⧸ (I ^ r • ⊤ : Submodule A M)) _ _ _ _ (Module.compHom (M ⧸ (I ^ r • ⊤ : Submodule A M)) (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ r)))) (Module.compHom (M ⧸ (I ^ r • ⊤ : Submodule A M)) (algebraMap k A)), (∀ (r : ℕ) (hr : 1 ≤ r) (a : A), dQ r hr (Ideal.Quotient.mk (I ^ (r + 1)) a) = (I ^ r • ⊤ : Submodule A M).mkQ (d a)) ∧ (∀ (r : ℕ) (hr : 1 ≤ r) (x : AdicCompletion I A), AdicCompletion.transitionMap I M (Nat.le_succ r) (dQ (r + 1) (Nat.succ_pos r) (AdicCompletion.evalₐ I (r + 2) x)) = dQ r hr (AdicCompletion.evalₐ I (r + 1) x)) ∧ ∃ D : @Derivation k (AdicCompletion I A) (AdicCompletion I M) _ _ _ _ _ (Module.compHom (AdicCompletion I M) (algebraMap k (AdicCompletion I A))), (∀ a : A, D (algebraMap A (AdicCompletion I A) a) = AdicCompletion.of I M (d a)) ∧ (∀ (r : ℕ), 1 ≤ r → ∃ s : ℕ, 1 ≤ s ∧ ∀ x : AdicCompletion I A, x ∈ (I.map (algebraMap A (AdicCompletion I A))) ^ s → D x ∈ I ^ r • (⊤ : Submodule A (AdicCompletion I M))) ∧ (∀ E : @Derivation k (AdicCompletion I A) (AdicCompletion I M) _ _ _ _ _ (Module.compHom (AdicCompletion I M) (algebraMap k (AdicCompletion I A))), (∀ a : A, E (algebraMap A (AdicCompletion I A) a) = AdicCompletion.of I M (d a)) → (∀ (r : ℕ), 1 ≤ r → ∃ s : ℕ, 1 ≤ s ∧ ∀ x : AdicCompletion I A, x ∈ (I.map (algebraMap A (AdicCompletion I A))) ^ s → E x ∈ I ^ r • (⊤ : Submodule A (AdicCompletion I M))) → E = D) ∧ (∀ (r : ℕ) (hr : 1 ≤ r) (x : AdicCompletion I A), AdicCompletion.eval I M r (D x) = dQ r hr (AdicCompletion.evalₐ I (r + 1) x)) ∧ (∀ (r : ℕ), 1 ≤ r → ∀ (x : AdicCompletion I A) (a : A), x - algebraMap A (AdicCompletion I A) a ∈ (I.map (algebraMap A (AdicCompletion I A))) ^ (r + 1) → AdicCompletion.eval I M r (D x) = (I ^ r • ⊤ : Submodule A M).mkQ (d a)) ∧ (∀ (r : ℕ), 1 ≤ r → ∀ x : AdicCompletion I A, x ∈ (I.map (algebraMap A (AdicCompletion I A))) ^ (r + 1) → D x ∈ I ^ r • (⊤ : Submodule A (AdicCompletion I M)))",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e211d9f7",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: FG ideal, arbitrary A-module, k-derivation via the canonical restricted k-action; existential d_r family on A/I^(r+1) → M/I^rM with action pulled back along Ideal.Quotient.factor (I^(r+1) ≤ I^r) from the canonical Torsion.Basic quotient action; formula; compatibility via transitionMap at coordinates r+2/r+1; D with Dι=jd, continuity (∀r≥1 ∃s≥1, J^s ↦ I^r•⊤), uniqueness over all continuous E (no extra assumptions on E), eval-coordinate clause, lift clause, and the J^(r+1) bound. AdicCompletion Algebra S instance = of∘algebraMap, module is componentwise (Mathlib Algebra.lean l.103, 308-325). Source 07PE(1) read. lean.statement verbatim equal to the file; non-lean fields identical to side-live; no name or module collision; upstream completion results are ring-valued only. Single sorry, no definitions, docstrings carry source, blueprint id and 6 proof steps; report has both required sections. Edge cases I=0, I=A, M=0, r=1, char p checked. No compile run since no file changed."
+ }
+}

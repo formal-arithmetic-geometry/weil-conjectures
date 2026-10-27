@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-dedekind-fpqc-model-finite-type-stage",
+ "kind": "statement",
+ "title": "Approximate an fpqc scheme model by a finite type flat subcover of a Dedekind base",
+ "statement": "Let $R$ be a commutative Noetherian integrally closed domain of Krull dimension at most one [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-weil-pbc-krull-dimension-ring], and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $B$ be a commutative $R$-algebra such that $\\operatorname{Spec}B\\to S$ is flat and surjective [def-weil-flat-morphism, def-weil-surjective-morphism]. Let $F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\mathit{Sets}$ be an fpqc sheaf, meaning that it satisfies the covering equalizer condition for [def-weil-pbc-fpqc-covering]. Suppose the restriction $F_{\\operatorname{Spec}B}$ is represented by a $\\operatorname{Spec}B$-scheme $P$ [def-pc-scheme, def-pc-representable-functor] whose structure morphism is of finite presentation (locally of finite presentation, quasi-compact and quasi-separated) [def-sbc-locally-finite-presentation]. There is a finitely generated $R$-subalgebra $C\\subseteq B$ [def-weil-pbc-finite-type-algebra] such that $\\operatorname{Spec}C\\to S$ is flat, surjective and of finite presentation, and $F_{\\operatorname{Spec}C}$ is represented by a $\\operatorname{Spec}C$-scheme $Q$ of finite presentation. No finite-presentation hypothesis on $B/R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM, lemma-descend-finite-presentation (objects, arrows and equalities), applied to the scheme and its canonical descent isomorphism and cocycle over the tensor-square and tensor-cube systems; combined with more-algebra.tex Tag 0AUW, lemma-dedekind-torsion-free-flat. This is the first paragraph of Anantharaman Lemma 4.2.1, printed pp.55-56, with the fpqc equalizer identification made explicit; local Anantharaman archive WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-scheme",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Let $I$ be the set of finitely generated $R$-subalgebras $C$ of $B$, ordered by inclusion. It is nonempty (the image of $R$ is a stage), directed (adjoin the union of two finite generating sets), and has union $B$ (adjoin any given element). Compatible ring maps from its stages to a ring glue uniquely by evaluation on this union, so $B=\\varinjlim_I C$. Put $U_C=\\operatorname{Spec}C$ and $U=\\operatorname{Spec}B$. By [lem-weil-pbc-limit-affine-transition], $U=\\varprojlim_I U_C$. All transition maps are affine by [lem-weil-pbc-morphism-affine-schemes-affine], and all stages are affine; in particular the stages are quasi-compact and quasi-separated. Work in a universe containing this set of subalgebras and the big fpqc site, with the size convention of [def-weil-size-convention].",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-size-convention",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; the union argument is written out here"
+   }
+  },
+  {
+   "text": "Every $C\\in I$ is already an allowable flat cover of $S$. Indeed [lem-weil-pbc-flat-ring-map-iff-flat-affine] makes $B$ a flat $R$-module. For $0\\ne a\\in R$, the injection $R\\xrightarrow{a}R$ remains injective after tensoring with $B$, by [def-weil-pbc-flat-ring-map]; thus multiplication by $a$ on $B$, and hence on its submodule $C$, is injective. Apply [lem-sfb-dedekind-torsionfree-module-flat] to $C$ with the given Noetherian, normal, dimension-at-most-one domain $R$, then [lem-weil-pbc-flat-ring-map-iff-flat-affine] to obtain flatness of $U_C\\to S$. For each prime $\\mathfrak p$ of $R$, choose a prime $\\mathfrak q$ of $B$ over it, using surjectivity of $U\\to S$. Its contraction to $C$ lies over $\\mathfrak p$, so $U_C\\to S$ is surjective. By [lem-weil-pbc-finite-type-noetherian-finite-presentation], $C$ is finitely presented over $R$. The affine presentation gives local finite presentation, and [lem-weil-pbc-qcqs-morphism-permanence](1) gives quasi-compactness and quasi-separatedness, so $U_C\\to S$ is of finite presentation. A flat surjective map of affines is a singleton fpqc covering by [def-weil-pbc-fpqc-covering]: by [lem-weil-pbc-morphism-affine-schemes-affine], over an affine open of its target its inverse image is affine and surjects onto that open. This applies also to $U\\to S$.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-pbc-flat-ring-map",
+    "lem-sfb-dedekind-torsionfree-module-flat",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1); algebra.tex Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation (3); morphisms.tex Tag 01U5, lemma-flat-characterize"
+   }
+  },
+  {
+   "text": "Write $D_C^{(n)}=C^{\\otimes_R n}$ and $D^{(n)}=B^{\\otimes_R n}$ for $n=2,3$. These tensor powers need not embed in $D^{(n)}$. Nevertheless $D^{(n)}=\\varinjlim_C D_C^{(n)}$: by [lem-weil-pbc-algebra-tensor-pushout-universal-property], a compatible family of maps $C\\otimes_R C\\to E$ is exactly two compatible families of maps $C\\to E$ agreeing on $R$, hence two maps $B\\to E$ agreeing on $R$, hence a map $B\\otimes_R B\\to E$. The same argument with three maps proves the cube assertion. It holds on every tail $C\\supseteq C_0$, since finite generating sets can be united with those of $C_0$. All stages $\\operatorname{Spec}D_C^{(n)}$ are affine, hence quasi-compact and quasi-separated, and the transition maps between them are affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Thus [lem-weil-pbc-limit-affine-transition] identifies the limits of the affine square and cube systems with $U\\times_S U$ and $U\\times_S U\\times_S U$, respectively; the affine tensor identifications, including each projection, are [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; limits.tex Tag 01YW, with the tensor-colimit universal-property calculation written here"
+   }
+  },
+  {
+   "text": "Choose the given natural representation $e:h_P\\xrightarrow{\\sim}F|_U$. On $U\\times_S U$, its pullbacks $e_1,e_2$ identify the functors of points of $p_1^*P,p_2^*P$ with the same restricted functor $F$. By [lem-galois-yoneda-fully-faithful], $e_2^{-1}e_1$ is represented by a unique isomorphism $\\delta:p_1^*P\\xrightarrow{\\sim}p_2^*P$ (represent the inverse too and use faithfulness). On the triple product the equations $(e_3^{-1}e_2)(e_2^{-1}e_1)=e_3^{-1}e_1$ give $\\delta_{23}\\delta_{12}=\\delta_{13}$, again by faithfulness. These are the actual canonical descent identifications of $F$, not an arbitrarily chosen datum on $P$. Every pulled-back scheme used here is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3).",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, lemma-yoneda, applied on each slice; the canonical cocycle is the displayed cancellation"
+   }
+  },
+  {
+   "text": "Apply [thm-pd-spreading-out](1) to $P\\to U$ and the system $(U_C)$. It gives $C_0\\in I$, a scheme $Q_0$ of finite presentation over $U_{C_0}$ and a specified $U$-isomorphism $(Q_0)_U\\simeq P$. For every $C\\supseteq C_0$ put $Q_C=Q_0\\times_{U_{C_0}}U_C$. Each $Q_C\\to U_C$ is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Use these specified isomorphisms to regard $\\delta$ and $\\delta^{-1}$ as maps between the two pullbacks of $(Q_0)_U$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1)"
+   }
+  },
+  {
+   "text": "Over $\\operatorname{Spec}D_{C_0}^{(2)}$ take the two pullbacks of $Q_0$ by the two projections. They are of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Their limit pullbacks are the source and target of $\\delta$. Apply [thm-pd-spreading-out](2) on the square system of step 3 to $\\delta$ and to $\\delta^{-1}$, choosing a common larger $C_1$ by directedness. This yields maps $d_1:p_1^*Q_{C_1}\\to p_2^*Q_{C_1}$ and $a_1$ in the reverse direction whose base changes to $B\\otimes_R B$ are precisely $\\delta$ and $\\delta^{-1}$. No flatness or surjectivity of $C_1\\to B$ is being asserted or used.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (2), on the tensor-square inverse system"
+   }
+  },
+  {
+   "text": "The two equations $a_1d_1=\\mathrm{id}$ and $d_1a_1=\\mathrm{id}$ hold at the square limit. By [thm-pd-spreading-out](3), they hold at a common later square stage $C_2$. Pull $d_{C_2}$ back along the three projections from $\\operatorname{Spec}D_{C_2}^{(3)}$ to its tensor-square. The maps $d_{23}d_{12}$ and $d_{13}$ have common source and target of finite presentation over that cube stage, by [lem-weil-pbc-qcqs-morphism-permanence](3). Their limit maps agree by step 4. Apply [thm-pd-spreading-out](3) on the cube system and enlarge to $C_3\\supseteq C_2$ so that this equation holds. The inverse equations remain true after base change. Set $C=C_3$, $V=U_C$, $Q=Q_C$, and $d=d_C$. We have obtained an isomorphism $d:p_1^*Q\\simeq p_2^*Q$ satisfying the triple cocycle, with its specified pullback equal to the canonical $\\delta$ on $P$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (3), first on squares for the inverse equations, then on cubes for the cocycle"
+   }
+  },
+  {
+   "text": "Use the big fpqc site of $S$ in the universe of step 1. By [lem-weil-pbc-fpqc-representable-descent], $h_Q$ on its slice over $V$ is a sheaf: compatible relative morphisms glue as scheme maps, and their composites to $V$ agree by uniqueness. The isomorphism $d$ induces a gluing isomorphism between its restrictions to $V\\times_S V$, satisfying the triple cocycle. Since $V\\to S$ is an fpqc cover by step 2, apply [lem-pe-set-sheaf-cover-descent] to the singleton covering. It constructs an fpqc sheaf $H$ on $S$ and an isomorphism $H|_V\\simeq h_Q$ whose overlap comparison is exactly $d$. This uses effective descent for set sheaves, and does not claim effective descent for arbitrary schemes.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, lemma-glue-sheaves, singleton case; descent.tex Tag 023Q, lemma-fpqc-universal-effective-epimorphisms"
+   }
+  },
+  {
+   "text": "Restrict the isomorphism of step 8 along $U\\to V$, and compose with the specified $Q_U\\simeq P$ and $e$. It gives $b:H|_U\\xrightarrow{\\sim}F|_U$. On $U\\times_S U$ the two restrictions of $b$ agree: the overlap for $H$ is the pullback of $d$, namely $\\delta$, and $e_2\\delta=e_1$ by its construction in step 4. The inverse maps agree as well. Apply the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] to the fpqc cover $U\\to S$, first to $b$ and then to $b^{-1}$. Their global composites are identities because their restrictions are identities and that same clause gives uniqueness. Hence $H\\simeq F$. Restricting to $V$ gives $F|_V\\simeq h_Q$. Step 2 supplies flatness, surjectivity and finite presentation of $V\\to S$, and step 5 supplies finite presentation of $Q\\to V$, exactly the required conclusion.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, applied to b and its inverse on the original cover U to S"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-size-convention",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-dedekind-torsionfree-module-flat",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-galois-yoneda-fully-faithful",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM (objects, arrows, equalities) assembled with more-algebra.tex Tag 0AUW and sites.tex Tags 04TR/04TQ; explicit tensor-square/cube and original-sheaf comparison argument by Q04. Anantharaman Lemma 4.2.1 archive unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fpqc.*fppf|descent.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*descent",
+   "results": "{\"t\": \"2026-10-24T12:35:54Z\", \"tool\": \"grep\", \"query\": \"fpqc.*fppf|descent.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"2735a855a3fab5f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module presentations, scheme property descent, and topology comparisons, not finite-type-stage representability compatible with the original fpqc sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation descent data and schemes descend from a filtered colimit of rings to a finite stage",
+   "results": "{\"t\": \"2026-10-24T12:35:54Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation descent data and schemes descend from a filtered colimit of rings to a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"RingHom.FinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"RingCat.FilteredColimits.colimit\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.isFinitePresentation\", \"CommRingCat.FilteredColimits.colimit\"], \"digest\": \"1e44612a399ec69d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module presentations, scheme property descent, and topology comparisons, not finite-type-stage representability compatible with the original fpqc sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-24T12:35:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module presentations, scheme property descent, and topology comparisons, not finite-type-stage representability compatible with the original fpqc sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf with a finitely presented scheme model over a faithfully flat algebra over a Dedekind domain has a finitely presented model over a faithfully flat finite type subalgebra",
+   "results": "{\"t\": \"2026-10-24T12:35:55Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf with a finitely presented scheme model over a faithfully flat algebra over a Dedekind domain has a finitely presented model over a faithfully flat finite type subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"82f7ce79ba9a5bcc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module presentations, scheme property descent, and topology comparisons, not finite-type-stage representability compatible with the original fpqc sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation schemes with fpqc descent data spread out from an arbitrary faithfully flat algebra to a finitely generated flat subalgebra of a Dedekind base ring",
+   "results": "{\"t\": \"2026-10-24T12:37:04Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation schemes with fpqc descent data spread out from an arbitrary faithfully flat algebra to a finitely generated flat subalgebra of a Dedekind base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"6f39e0f943660f5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned module presentations, scheme property descent, and topology comparisons, not finite-type-stage representability compatible with the original fpqc sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf represented by a finite presentation scheme over a faithfully flat algebra over a Dedekind domain is represented over a finite type faithfully flat subalgebra",
+   "results": "{\"t\": \"2026-10-24T13:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf represented by a finite presentation scheme over a faithfully flat algebra over a Dedekind domain is represented over a finite type faithfully flat subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"38a11255571e6ef5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme/module finite presentation, property descent and affine-transition factorization do not give representability over a finite type subalgebra compatible with the original sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-24T13:22:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\"], \"digest\": \"2c507d8605ee08b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme/module finite presentation, property descent and affine-transition factorization do not give representability over a finite type subalgebra compatible with the original sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*fppf|descent.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*descent",
+   "results": "{\"t\": \"2026-10-24T13:22:17Z\", \"tool\": \"grep\", \"query\": \"fpqc.*fppf|descent.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"2735a855a3fab5f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme/module finite presentation, property descent and affine-transition factorization do not give representability over a finite type subalgebra compatible with the original sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation scheme and its descent isomorphism and cocycle over an arbitrary faithfully flat algebra descend to a finite type algebra stage",
+   "results": "{\"t\": \"2026-10-24T13:23:17Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation scheme and its descent isomorphism and cocycle over an arbitrary faithfully flat algebra descend to a finite type algebra stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FinitePresentation\", \"AlgHom.FinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"01eb8b8f4beb5c8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme/module finite presentation, property descent and affine-transition factorization do not give representability over a finite type subalgebra compatible with the original sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread out a finitely presented scheme with descent datum from a filtered colimit of rings to a finite stage",
+   "results": "{\"t\": \"2026-10-24T13:23:19Z\", \"tool\": \"leanfinder\", \"query\": \"Spread out a finitely presented scheme with descent datum from a filtered colimit of rings to a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"isFinitelyPresentable\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"520f3948c18fdc13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme/module finite presentation, property descent and affine-transition factorization do not give representability over a finite type subalgebra compatible with the original sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change of a morphism of schemes locally of finite presentation quasi compact and quasi separated has all three properties",
+   "results": "{\"t\": \"2026-10-24T13:33:45Z\", \"tool\": \"leanfinder\", \"query\": \"The base change of a morphism of schemes locally of finite presentation quasi compact and quasi separated has all three properties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\"], \"digest\": \"4709e99590776269\"}",
+   "date": "2026-10-24",
+   "verdict": "match for an existing auxiliary node, not for the item: finite-presentation base-change permanence is already lem-weil-pbc-qcqs-morphism-permanence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-24T13:33:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"539987770910799b\"}",
+   "date": "2026-10-24",
+   "verdict": "match for an existing auxiliary node, not for the item: finite-presentation base-change permanence is already lem-weil-pbc-qcqs-morphism-permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "isStableUnderBaseChange|pullback_snd",
+   "results": "{\"t\": \"2026-10-24T13:33:45Z\", \"tool\": \"grep\", \"query\": \"isStableUnderBaseChange|pullback_snd\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"165\", \"166\", \"168\", \"169\", \"184\"], \"digest\": \"d72d77c335d531c9\"}",
+   "date": "2026-10-24",
+   "verdict": "match for an existing auxiliary node, not for the item: finite-presentation base-change permanence is already lem-weil-pbc-qcqs-morphism-permanence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves finite presentation quasi compactness and quasi separatedness for morphisms of schemes",
+   "results": "{\"t\": \"2026-10-24T13:33:46Z\", \"tool\": \"leansearch\", \"query\": \"Base change preserves finite presentation quasi compactness and quasi separatedness for morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\"], \"digest\": \"6e27547d1cba3966\"}",
+   "date": "2026-10-24",
+   "verdict": "match for an existing auxiliary node, not for the item: finite-presentation base-change permanence is already lem-weil-pbc-qcqs-morphism-permanence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fpqc-finite-presentation-normalization-model",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent prerequisite in the recorded creation chain: the first-paragraph finite-type-stage reduction for the fpqc scheme model in Anantharaman Lemma 4.2.1 (printed pp.55-56). The current blueprint itself records only the high-level direct-image assembly.",
+   "via": [
+    "lem-sfb-fpqc-finite-presentation-normalization-model",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-fpqc-model-finite-type-stage",
+  "worker": "stage1",
+  "summary": "Nine-step proof using only existing nodes: all finite subalgebras are flat surjective finitely presented covers; descend the model, canonical transition and inverse, then inverse and cocycle equations on square/cube systems; glue a set sheaf and identify it with F on the original fpqc cover. No statement changes or new nodes. Mathlib and project attachment searches find no exact item theorem.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait prerequisite in the creation chain: finite-type approximation of the fpqc scheme model. The current blueprint text gives only the high-level direct-image assembly; the Anantharaman reduction is an added prerequisite, not an alternative unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic tool: affine inverse limits identify Spec of the ring colimit, including the tensor-square and tensor-cube systems; the stability unit has no replacement statement."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic tool: effective descent and unique morphism gluing of set sheaves on a covering, used on the big fpqc site; the stability unit does not supply this generic site theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-52ab51684",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-52ab51684 (reviewer sub-agent of L); spot-checked: I read all nine steps in full; the mathematics is correct and the statement is unchanged from base (only status, proof, proof_deps, proof_origin, split_report, appended searches and a more precise blueprint.from.place changed; from.node stays null as on base). There are no new nodes. All 15 proof_deps exist, and a DFS over the snapshot DAG finds no cycle back to the item. Sources: Stacks 01ZM (limits.tex:2370, clauses 1-3 with affine transitions and qcqs stages) matches thm-pd-spreading-out. Stacks 0AUW(1) (more-algebra.tex:4954, Dedekind = Noetherian normal domain of dim <=1, fields included) matches lem-sfb-dedekind-torsionfree-module-flat. Anantharaman 4.2.1 is unavailable; the proof is agent-written and every non-elementary fact is a cited node. Step 2: B flat gives a torsion-free subalgebra C, which is flat by 0AUW; surjectivity comes from contracting primes of B; 00FP, the lfp definition and permanence(1) give finite presentation; 01SH plus the fpqc covering definition give a singleton fpqc cover. Step 3: colim of C^{(x)n} is B^{(x)n} by the tensor universal property, without assuming injectivity. Step 4: the canonical delta comes from Yoneda 001P on slices, with the cocycle by injectivity. Steps 5-7: 01ZM (1)/(2)/(3) on the base, square and cube systems; all sources and targets are of finite presentation by permanence(3), and flatness of C->B is never used. Step 8: h_Q is an fpqc sheaf by 023Q (structure map recovered by uniqueness), and 04TR glues H on the singleton cover V->S. Step 9: I checked e_2 delta = e_1, so b agrees on UxU; 04TQ gluing and uniqueness give H = F, hence F|_V = h_Q. Small cases tested: R a field; B=k[x,y]/(xy) with C=k[x] (B not flat over C, which the proof does not need); P empty; R->B injective by faithful flatness. Dedup search found no existing node stating the item. Accepted tool_uses: lem-weil-pbc-limit-affine-transition and lem-pe-set-sheaf-cover-descent, both generic. FIX (C1): step 3 used affineness of the transition maps of the square and cube systems, which spreading-out needs in steps 6-7, without citing it. I added one sentence and the citation lem-weil-pbc-morphism-affine-schemes-affine to that step (already in proof_deps). Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dedekind-fpqc-model-finite-type-stage.json; review in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DedekindFpqcModelFiniteTypeStage",
+  "declaration": "AlgebraicGeometry.dedekindFpqcModelFiniteTypeStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/DedekindFpqcModelFiniteTypeStage.lean",
+  "statement": "theorem dedekindFpqcModelFiniteTypeStage (R B : Type u) [CommRing R] [CommRing B] [Algebra R B] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (hRdim : ringKrullDim R ≤ 1) [Flat (Spec.map (CommRingCat.ofHom (algebraMap R B)))] [Surjective (Spec.map (CommRingCat.ofHom (algebraMap R B)))] (F : Sheaf (Scheme.fpqcTopology.over (Spec (CommRingCat.of R))) (Type v)) (P : Over (Spec (CommRingCat.of B))) [LocallyOfFinitePresentation P.hom] [QuasiCompact P.hom] [QuasiSeparated P.hom] (hP : Nonempty (Functor.RepresentableBy ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap R B)))).op ⋙ F.obj) P)) : ∃ C : Subalgebra R B, (algebraMap R C).FiniteType ∧ Flat (Spec.map (CommRingCat.ofHom (algebraMap R C))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap R C))) ∧ LocallyOfFinitePresentation (Spec.map (CommRingCat.ofHom (algebraMap R C))) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap R C))) ∧ QuasiSeparated (Spec.map (CommRingCat.ofHom (algebraMap R C))) ∧ ∃ Q : Over (Spec (CommRingCat.of C)), LocallyOfFinitePresentation Q.hom ∧ QuasiCompact Q.hom ∧ QuasiSeparated Q.hom ∧ Nonempty (Functor.RepresentableBy ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap R C)))).op ⋙ F.obj) Q)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b637dcf45",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node: R as Noetherian integrally closed domain with ringKrullDim ≤ 1; flat and surjective Spec B→S with no finiteness on B; fpqc sheaf in Type v over fpqcTopology.over S; restriction via Over.map; Mathlib RepresentableBy, whose value universe is independent of the Hom universe; P lfp/qc/qs; conclusion: finitely generated C ⊆ B, Spec C→S flat/surjective/lfp/qc/qs, and Q over C, of finite presentation, representing the same F. Edge cases: field R, empty P, B=0 excluded. Node differs from side-live only in lean; stored signature verbatim; all stmt_deps have recorded owners (RepresentableBy is in def-pc-representable-functor declarations); imported proof-dep modules exist; no hollow definitions, proof is sorry only, docstrings carry source place, blueprint tag and the nine steps; no existing declaration found. Not recompiled because no file was changed; the worker reports a clean compile. The Second reading section is the worker's own pass, as it states, and is accurate."
+ }
+}

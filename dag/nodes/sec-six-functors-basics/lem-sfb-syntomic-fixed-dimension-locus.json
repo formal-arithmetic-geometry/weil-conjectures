@@ -1,0 +1,456 @@
+{
+ "id": "lem-sfb-syntomic-fixed-dimension-locus",
+ "kind": "statement",
+ "title": "Universal syntomic locus of a fixed relative dimension",
+ "statement": "Let $g:P\\to T$ be a flat [def-weil-flat-morphism], locally finitely presented [def-sbc-locally-finite-presentation] morphism of schemes [def-pc-scheme], and let $d\\geq0$ be an integer. A scheme locally of finite type over a field is a local complete intersection if it has an affine open cover by spectra of finitely generated local-complete-intersection algebras [def-weil-pbc-complete-intersection-over-field]. Call a scheme morphism syntomic if it is flat, locally of finite presentation and all its geometric fibres [def-weil-geometric-fibre] are local complete intersections. An open subscheme is given by an open immersion [def-weil-open-immersion]. There is a largest open subscheme $L_d(g)\\subseteq P$ on which $g$ is syntomic and every nonempty geometric fibre is pure of dimension $d$ [def-weil-pure-dimension]. Its formation commutes with arbitrary scheme base change: $L_d(g_{T'})=L_d(g)\\times_TT'$ for every $T'\\to T$ [def-pc-fibre-product]. On a geometric fibre $C=P\\times_T\\operatorname{Spec}\\Omega$, where $\\Omega$ is algebraically closed [def-weil-field, def-weil-algebraic-closure], $L_d(g)_\\Omega$ is the union of all open subschemes of $C$ which are local complete intersections and pure of dimension $d$. It contains every point having a neighbourhood smooth of relative dimension $d$ [def-sbc-smooth-morphisms]. For a closed point $c\\in C$ [def-weil-closed-points], membership in $L_d(g)_\\Omega$ is equivalent to its completed local $\\Omega$-algebra [def-weil-pbc-adic-completion] being a complete intersection of Krull dimension $d$ [def-weil-pbc-krull-dimension-ring]. Here a completed local $\\Omega$-algebra is a complete intersection when it is isomorphic to $\\Omega[[t_1,\\ldots,t_r]]/(h_1,\\ldots,h_s)$ for some finite $r,s$, with the $h_i$ a regular sequence in the maximal ideal [def-weil-pbc-multivariate-power-series, def-weil-pbc-regular-sequence]. Empty sources and fibres are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02V3 (lemma-set-points-where-fibres-lci), 02NM (lemma-flat-finite-presentation-CM-fibres-relative-dimension), 02K1 (lemma-syntomic-relative-dimension), and 02NK (lemma-base-change-relative-dimension-d): syntomic locus followed by its fixed-dimension piece. Geometric complete-intersection characterization: Tag 01UF (lemma-syntomic-flat-fibres). Closed-point reformulation: varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), part (2); more-algebra.tex Tag 07NV (lemma-completion-dimension); dpa.tex Tags 09Q1 (lemma-quotient-regular-ring) and 09Q6 (lemma-check-lci-agrees), and algebra.tex Tag 00SG (lemma-lci-at-prime)."
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-pc-fibre-product",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-points",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-open-immersion",
+  "def-sfb-local-complete-intersection-over-field",
+  "def-sfb-syntomic-fixed-dimension-open"
+ ],
+ "proof": [
+  {
+   "text": "We may restrict $g$ to a source open without losing flatness or local finite presentation: the local-ring maps are unchanged, and an affine presentation near a point can be restricted to a principal affine neighbourhood inside the open. Explicitly, replacing $B=A[z_1,\\ldots,z_r]/(f_1,\\ldots,f_s)$ by $B_b$ adds a variable $u$ and the single relation $ub-1$. A finite presentation is in particular a finite-type presentation, so $g$ is locally of finite type. For any base change $T'\\to T$, [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] show that $g_{T'}$ is again flat and locally of finite presentation. These observations apply also to geometric fibres and all subsequent source opens.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9 (lemma-base-change-flat), 01TS (lemma-base-change-finite-presentation), 01TT (lemma-open-immersion-locally-finite-presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-syntomic-locus-base-change] to obtain the open $V\\subseteq P$ of points $x$ for which the local ring of $P_{g(x)}$ at $x$ is a complete-intersection local ring over $\\kappa(g(x))$. It satisfies $V(g_{T'})=p^{-1}V(g)$ for the projection $p:P\\times_TT'\\to P$. By [lem-trf-lci-pointwise-criterion], the ordinary fibres of $V$ have the affine lci covers stated here. For $t\\in T$ and its chosen algebraic closure, $\\bar t:\\operatorname{Spec}\\overline{\\kappa(t)}\\to T$, the same equality of loci says that every local ring of the geometric fibre $V_{\\bar t}$ is a complete-intersection local ring over $\\overline{\\kappa(t)}$; the same criterion gives an affine lci cover of $V_{\\bar t}$, and likewise of $O_{\\bar t}$ for every open $O\\subseteq V$, whose local rings are among these. Conversely, suppose an open $W$ has lci geometric fibres, and take $x\\in W$ with $t=g(x)$. The ring $\\kappa(x)\\otimes_{\\kappa(t)}\\overline{\\kappa(t)}$ is a tensor product of two nonzero vector spaces over a field, hence nonzero, so it has a prime ideal. By [lem-weil-pbc-fibre-product-points] there is a point $x_1$ of $P_{\\bar t}=P\\times_T\\operatorname{Spec}\\overline{\\kappa(t)}$ with $p(x_1)=x$; it lies in the open $W_{\\bar t}=p^{-1}(W)$. Its local ring there, which is its local ring on $P_{\\bar t}$, is a complete intersection over $\\overline{\\kappa(t)}$ by the local-ring criterion, so $x_1\\in V(g_{\\bar t})=p^{-1}V(g)$ and hence $x\\in V(g)$. Thus $g|_V$ and its restrictions to source opens are syntomic in precisely the geometric-fibre definition stated here, and every syntomic source open lies in $V$.",
+   "uses": [
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-lci-pointwise-criterion",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02V3 (lemma-set-points-where-fibres-lci), 01UG (lemma-local-complete-intersection), 01UF (lemma-syntomic-flat-fibres); schemes.tex Tag 01JT (lemma-points-fibre-product)"
+   }
+  },
+  {
+   "text": "Every ordinary fibre of $V\\to T$ has an affine lci cover by step 2. At each $x\\in V$, its fibre is an open of $P_{g(x)}$ and has the same local ring at $x$. Thus [lem-sfb-lci-cohen-macaulay-stalks] gives depth equal to Krull dimension at every one of its points, including nonclosed points. Apply [lem-sbc-cohen-macaulay-equidimensional-fibre-pieces] with source $P$, base open $T$ and source open $W=V$. It gives pairwise disjoint opens $V_n$ covering $V$, such that every nonempty fibre of $V_n\\to T$ is pure of dimension $n$. By [lem-sbc-equidimensional-open-local-dimension], for $x\\in V_n$ the local topological dimension of the original fibre $P_{g(x)}$ at $x$ is $n$. Write this dimension as $\\nu_g(x)$. As the $V_n$ cover $V$, each $V_n$ is exactly $\\{x\\in V:\\nu_g(x)=n\\}$. Define $L_d(g)=V_d$. In particular it is an open of $P$, and its ordinary nonempty fibres are pure of dimension $d$.",
+   "uses": [
+    "lem-sfb-lci-cohen-macaulay-stalks",
+    "lem-sbc-cohen-macaulay-equidimensional-fibre-pieces",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NM (lemma-flat-finite-presentation-CM-fibres-relative-dimension); algebra.tex Tag 00SB (lemma-lci-CM); varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), parts (3),(5)"
+   }
+  },
+  {
+   "text": "Let $T'\\to T$ be arbitrary and let $x'\\in P'=P\\times_TT'$ map to $x\\in P$, with base points $t'$ and $t$. The fibre through $x'$ is $P_t\\times_{\\kappa(t)}\\kappa(t')$. On an affine neighbourhood $\\operatorname{Spec}S$ of $x$ in $P_t$, the algebra $S$ is finite type over $\\kappa(t)$ by [lem-weil-pbc-lft-affine-pairs]. The inverse-image chart is $\\operatorname{Spec}(S\\otimes_{\\kappa(t)}\\kappa(t'))$; the prime for $x'$ contracts to the prime for $x$ under $s\\mapsto s\\otimes1$. Applying [lem-weil-pbc-dimension-at-point-field-extension] to these primes gives $\\nu_{g_{T'}}(x')=\\nu_g(x)$; taking the affine neighbourhood does not change local topological dimension, since neighbourhoods contained in an open form a cofinal neighbourhood family. By step 2, $x'$ belongs to $V(g_{T'})$ exactly when $x\\in V(g)$. Using the description of $V_d$ in step 3 on both schemes gives $x'\\in L_d(g_{T'})$ exactly when $x\\in L_d(g)$. The opens are therefore equal. Under the canonical fibre-product identification of inverse-image opens this is $L_d(g_{T'})=L_d(g)\\times_TT'$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NK (lemma-base-change-relative-dimension-d), using algebra.tex Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension)"
+   }
+  },
+  {
+   "text": "The restriction to the open $L_d(g)\\subseteq V$ is syntomic by step 2. Its ordinary fibres are pure of dimension $d$ by step 3, so [lem-trf-relative-dimension-base-change] shows that its geometric fibres are pure of dimension $d$ as well. For maximality, let $W\\subseteq P$ be any open with the two required geometric-fibre properties. Step 2 gives $W\\subseteq V$. For $x\\in W$ with $t=g(x)$, [lem-weil-pbc-fibre-product-points] gives, as in step 2, a point $x_1$ of the geometric fibre $W_{\\bar t}$ over the chosen $\\overline{\\kappa(t)}$ with $p(x_1)=x$. The open $W_{\\bar t}$ of $P_{\\bar t}$ is nonempty and pure of dimension $d$, so [lem-sbc-equidimensional-open-local-dimension] gives $\\dim_{x_1}(P_{\\bar t})=d$. Take an affine neighbourhood $\\operatorname{Spec}S$ of $x$ in $P_t$, with $S$ finite type over $\\kappa(t)$ by [lem-weil-pbc-lft-affine-pairs]. Then $x_1$ lies in the open $\\operatorname{Spec}(S\\otimes_{\\kappa(t)}\\overline{\\kappa(t)})$ of $P_{\\bar t}$, as a prime lying over the prime of $x$. The equality in [lem-weil-pbc-dimension-at-point-field-extension], with local dimension unchanged on passing to an open as in step 4, gives $\\nu_g(x)=d$. Thus $x\\in V_d$, proving $W\\subseteq L_d(g)$.",
+   "uses": [
+    "lem-trf-relative-dimension-base-change",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02NK (lemma-base-change-relative-dimension-d), 02NM; varieties.tex Tag 0A21 (3),(5); algebra.tex Tag 00P4; schemes.tex Tag 01JT (lemma-points-fibre-product)"
+   }
+  },
+  {
+   "text": "For a geometric fibre $C=P\\times_T\\operatorname{Spec}\\Omega$, step 4 identifies $L_d(g)_\\Omega$ with $L_d(C\\to\\operatorname{Spec}\\Omega)$. The latter is itself an open lci scheme, pure of dimension $d$, by steps 2, 3 and 5. Conversely, if $O\\subseteq C$ is any open lci scheme pure of dimension $d$, then $O\\to\\operatorname{Spec}\\Omega$ is an open restriction of the geometric base change of the original flat, locally finitely presented $g$. Thus step 1 supplies both properties; flatness is inherited from $g$, without a new assumption on $O$. By [lem-trf-lci-pointwise-criterion] every local ring of $O$ is a complete intersection. Its locus in [lem-trf-syntomic-locus-base-change] is therefore all of $O$, and stays all of the source after any geometric base change; applying the local-ring criterion again makes those fibres lci. Its pure-dimensional ordinary fibre remains pure of dimension $d$ under every field extension by [lem-trf-relative-dimension-base-change]. Hence maximality from step 5 gives $O\\subseteq L_d(C\\to\\operatorname{Spec}\\Omega)$. Since this open is one of the $O$ under consideration, it is exactly their union.",
+   "uses": [
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02V3, 01UG, 01UF and 02NK; identification of the geometric-fibre open"
+   }
+  },
+  {
+   "text": "Suppose $x$ has an open neighbourhood $H\\subseteq P$ on which $g$ is smooth of relative dimension $d$. By [lem-sbc-smooth-relative-dimension-permanence], every geometric fibre of $H\\to T$ is smooth of relative dimension $d$ over its algebraically closed base field, so is pure of dimension $d$ by [def-sbc-smooth-morphisms]. For such a smooth fibre, [lem-weil-pbc-geometric-regularity-smooth-field-criterion], taking the identity field extension, says every local ring is regular. By [lem-weil-pbc-lft-affine-pairs] and [lem-weil-pbc-affine-open-stalk-localization], it is also essentially of finite type over the field: it is a localization of a finite-type affine coordinate algebra. Such a regular local algebra is a complete-intersection local algebra by using its identity quotient and the empty regular sequence. The local-ring criterion [lem-trf-lci-pointwise-criterion] therefore gives an affine lci cover of that fibre. Step 1 supplies flatness and local finite presentation of $g|_H$, so $H$ has both properties in step 5 and $x\\in H\\subseteq L_d(g)$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VB (lemma-base-change-smooth); varieties.tex Tag 038X (lemma-geometrically-regular-smooth); morphisms.tex Tag 01UG"
+   }
+  },
+  {
+   "text": "Fix a closed point $c$ of the geometric fibre $C$ and an affine neighbourhood $U=\\operatorname{Spec}S\\subseteq C$. By [lem-weil-pbc-lft-affine-pairs], $S$ is a finitely generated $\\Omega$-algebra. Closedness of $c$ makes its prime $\\mathfrak m$ maximal. By [lem-weil-pbc-affine-open-stalk-localization], $A=\\mathcal O_{C,c}=S_{\\mathfrak m}$. The residue-field result [lem-weil-pbc-closed-point-residue-field-base] identifies $S/\\mathfrak m$ with $\\Omega$ via its given structural map, not an unspecified field isomorphism. Apply [lem-trf-separable-closed-point-formal-presentation] to $k=F=\\Omega$ (the identity extension is finite separable). It gives Noetherian local rings $A,\\widehat A$ and a surjection of $\\Omega$-algebras $\\Phi:Q=\\Omega[[t_1,\\ldots,t_r]]\\twoheadrightarrow\\widehat A$, with kernel in $(t_1,\\ldots,t_r)$. The $\\Omega$-action is the original one: the $\\Omega$-algebra section of the residue map is forced to be the structural map when $F=\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-trf-separable-closed-point-formal-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "varieties.tex Tag 0C52 (lemma-complete-local-ring-structure-as-algebra), separable case; algebra.tex Tag 00FV; schemes.tex Tag 01HV"
+   }
+  },
+  {
+   "text": "If $c$ belongs to the syntomic open $V(C\\to\\operatorname{Spec}\\Omega)$, then $A$ is a complete-intersection local $\\Omega$-algebra. By [lem-trf-lci-pointwise-criterion], write $A\\cong R/I$ as a $\\Omega$-algebra, where $R$ is regular local, essentially of finite type over $\\Omega$, and $I$ is generated by a finite regular sequence. Since $A=S_{\\mathfrak m}$ has residue field $\\Omega$, it is nonzero. Hence $I$ is proper and lies in the unique maximal ideal of $R$, as required by the kernel test. The isomorphism $A\\cong R/I$ identifies the unique maximal ideals, hence their powers and the quotients by those powers. Taking their inverse limits identifies $\\widehat A$ with $\\widehat{R/I}$ as $\\Omega$-algebras. Via this identification, $\\Phi$ is the surjection onto the completion of $R/I$ required below. By [lem-weil-pbc-power-series-field-cohen-regular-complete], the source $Q$ of $\\Phi$ in step 8 is regular local. Apply [lem-trf-regular-quotient-completion-kernel-test] to $R,I,Q,\\Phi$. It says that $\\ker\\Phi$ is generated by a finite $Q$-regular sequence $h_1,\\ldots,h_s$ in the maximal ideal. Since $\\Phi$ respects $\\Omega$, its quotient isomorphism $Q/(h_1,\\ldots,h_s)\\cong\\widehat A$ respects $\\Omega$ as well. Conversely, an isomorphism of completed local $\\Omega$-algebras to a finite-variable power series quotient by a regular sequence in its maximal ideal is in particular a ring isomorphism. By [lem-trf-completion-local-complete-intersection], applied to $S,\\mathfrak m$, it gives a principal affine lci neighbourhood of $c$. The local-ring criterion then gives that $A$ is a complete-intersection local $\\Omega$-algebra, so $c\\in V(C\\to\\operatorname{Spec}\\Omega)$. This proves the equivalence while retaining the coefficient-algebra structure in the forward direction.",
+   "uses": [
+    "lem-trf-lci-pointwise-criterion",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-trf-regular-quotient-completion-kernel-test",
+    "lem-trf-completion-local-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tags 09Q1 (lemma-quotient-regular-ring), 09Q6 (lemma-check-lci-agrees); algebra.tex Tags 00SG (lemma-lci-at-prime), 032C (remark-Noetherian-complete-local-ring-universally-catenary)"
+   }
+  },
+  {
+   "text": "At the closed point $c$, [lem-weil-pbc-closed-point-dimension-local-ring] applied on $U$ gives $\\nu_{C\\to\\operatorname{Spec}\\Omega}(c)=\\dim A$: passing to the open $U$ does not change local dimension. Since $A$ is Noetherian local by step 8, [lem-weil-pbc-completion-dimension-eq] gives $\\dim A=\\dim\\widehat A$. Together with the pointwise description $L_d=\\{c\\in V:\\nu(c)=d\\}$ in step 3 and the equivalence in step 9, this proves exactly that $c\\in L_d(g)_\\Omega$ if and only if $\\widehat A$ is a complete-intersection completed local $\\Omega$-algebra of Krull dimension $d$. All constructions and arguments include the empty source or an empty fibre: the partitions and loci there are empty, the empty scheme has pure dimension $d$ by [def-weil-pure-dimension], and the closed-point clauses have no instances. Empty regular sequences are allowed, so the regular and dimension-zero cases have not been excluded.",
+   "uses": [
+    "lem-weil-pbc-closed-point-dimension-local-ring",
+    "lem-weil-pbc-completion-dimension-eq",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), part (2); more-algebra.tex Tag 07NV (lemma-completion-dimension); topology.tex Tag 0058"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-syntomic-locus-base-change",
+  "lem-trf-lci-pointwise-criterion",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-sfb-lci-cohen-macaulay-stalks",
+  "lem-sbc-cohen-macaulay-equidimensional-fibre-pieces",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-trf-relative-dimension-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-regular-quotient-completion-kernel-test",
+  "lem-trf-completion-local-complete-intersection",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-completion-dimension-eq",
+  "def-weil-pure-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02V3 and 02NM, together with 02NK and the closed-point criteria in varieties.tex 0C52, more-algebra.tex 07NV and dpa.tex 09Q1, 09Q6. The proof combines these statements as detailed in its steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented morphism of schemes has a largest syntomic open locus of fixed pure relative dimension compatible with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth loci, smooth relative dimension and etale morphisms do not characterize syntomic complete-intersection fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic morphisms decompose into open and closed pieces of constant relative dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsClosedImmersion g₁ ∧\\n        AlgebraicGeometry.IsOpenImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g₁: X \\\\to Z $ and $ g₂: Z \\\\to Y $ such that $ g₁ $ is a closed immersion, $ g₂ $ is an o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth loci, smooth relative dimension and etale morphisms do not characterize syntomic complete-intersection fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Syntomic\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth loci, smooth relative dimension and etale morphisms do not characterize syntomic complete-intersection fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|CohenMacaulay.*[Dd]imension|[Dd]imension.*CohenMacaulay",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth loci, smooth relative dimension and etale morphisms do not characterize syntomic complete-intersection fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus of local complete intersection geometric fibres of fixed relative dimension is open in a flat finitely presented family",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsOpen (freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $n \\\\in \\\\mathbb{N}$. If for every point $x \\\\in X$, there exist open subsets $V \\\\subseteq X$ and $U \\\\subseteq Y$ such that $x \\\\in V$, $V \\\\subseteq f^{-1}(U)\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth loci, smooth relative dimension and etale morphisms do not characterize syntomic complete-intersection fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a closed geometric fibre point the syntomic fixed relative dimension locus is characterized by its completed local ring being a complete intersection of that dimension",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.smoothLocus, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.etaleLocus, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt. No syntomic or completed-complete-intersection criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness is stronger than a complete-intersection fibre condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The syntomic locus of a flat locally finitely presented scheme morphism decomposes into open subsets of fixed pure relative dimension and commutes with arbitrary base change",
+   "results": "8 hits; AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.Flat",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|CohenMacaulay|localCompleteIntersection",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat finitely presented family of schemes the local complete intersection fibres of a given pure dimension form an open locus stable under base change",
+   "results": "8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Syntomic\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a closed point over an algebraically closed field the completed local algebra is a complete intersection if and only if there is a local complete intersection neighbourhood",
+   "results": "8 hits; Algebra.IsSmoothAt, isLocalRing_of_isAdicComplete_maximal, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsEtaleAt, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.smoothLocus, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "grep",
+   "query": "instance (isStableUnderBaseChange|locallyOfFinitePresentation_isStableUnderBaseChange)",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change of a flat morphism of schemes is flat and the base change of a locally finitely presented morphism is locally finitely presented",
+   "results": "8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, Module.Flat.isBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.FinitePresentation.baseChange, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "results": "1 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented morphisms of schemes remain flat and locally of finite presentation after arbitrary base change",
+   "results": "8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits give smoothness or generic base-change permanence, not the syntomic fixed-dimension locus and completed Omega-algebra characterization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-nodal-locus-base-change",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal. Scheme-chart reduction before the nodal-open construction: restrict to the syntomic piece of relative dimension one, as in curves.tex Tag 0DSC proof, first paragraph.",
+   "via": [
+    "lem-sfb-space-nodal-locus-base-change",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-syntomic-fixed-dimension-locus",
+  "worker": "stage1",
+  "summary": "Expanded the syntomic locus into its Cohen-Macaulay pure-dimension pieces, proved universal base-change compatibility pointwise, maximality, geometric-fibre union and smooth-neighbourhood inclusion, and the coefficient-preserving completed-local-algebra criterion. Reused existing DAG nodes for every input; no new nodes. Read primary Stacks sources and every cited node statement. Normalized doubled TeX backslashes; no mathematical statement change. No exact project attachment exists. Repair of the latest promotion return at f49ba27b390: compared the retained delivery with the current unsplit DAG item and reread all 25 cited statements; all 36 full-statement quotes are unchanged. The geometric-fibre restriction and coefficient-preserving completion identifications remain explicit. Added the nonzero-residue-field argument showing that the quotient ideal is proper and contained in the regular local maximal ideal, verifying the kernel-test hypothesis at its application. The delivery tool constructs the split on current origin/sheaf-dag and preserves maintainer-owned fields. Revalidation after the return of head 8bb0cda546d: current live item remains unsplit and all 36 citation quotes match all 25 current dependency statements. Made the open-fibre stalk identification in step 3 and affine tensor-product prime correspondence in step 4 explicit; retained all prior arguments and searches.",
+  "blueprint": "Realizes the existing blueprint.from.place: the scheme-chart syntomic relative-dimension-one reduction in curves.tex Tag 0DSC, first paragraph, used before the nodal-open construction. The same argument works for every d. blueprint_refs.py ancestor reports from.node=None; retained that existing ancestry and its full via chain. This item is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-syntomic-locus-base-change",
+    "why": "Generic scheme-theoretic fibre-lci locus theorem (02V3), required for the chart reduction; the unit has no alternative locus theorem."
+   },
+   {
+    "node": "lem-trf-lci-pointwise-criterion",
+    "why": "Generic equivalence of affine lci covers and local complete-intersection rings (01UG), needed to compare the item and the locus statement."
+   },
+   {
+    "node": "lem-sbc-cohen-macaulay-equidimensional-fibre-pieces",
+    "why": "Generic 02NM pure-dimension decomposition of a flat locally finitely presented family on its CM-fibre open; the current unit supplies no dimension decomposition."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic field-scheme dimension lemma identifying the dimension labels, without substituting another route for the alteration argument."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-field-extension",
+    "why": "Generic invariance of local topological dimension under arbitrary field extensions, needed for the universal base-change equality."
+   },
+   {
+    "node": "lem-trf-relative-dimension-base-change",
+    "why": "Generic purity-of-fibre-dimension base-change theorem (02NK), upgrading ordinary fibres to geometric fibres."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base-change permanence of smooth relative dimension, for the smooth-neighbourhood inclusion only."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "why": "Generic smooth-field-scheme regularity criterion, providing the empty-regular-sequence lci argument."
+   },
+   {
+    "node": "lem-trf-separable-closed-point-formal-presentation",
+    "why": "Generic coefficient-preserving formal presentation theorem, specialized to the identity residue-field extension to preserve the given Omega action."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic regularity of a finite-variable power series ring over a field, needed for the regular-kernel test."
+   },
+   {
+    "node": "lem-trf-regular-quotient-completion-kernel-test",
+    "why": "Generic regular-local quotient/completion criterion applied to the given Omega-algebra formal presentation."
+   },
+   {
+    "node": "lem-trf-completion-local-complete-intersection",
+    "why": "Generic completion-to-principal-lci-neighbourhood criterion for the reverse closed-point implication."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
+    "why": "Generic equality of closed-point local topological dimension and local ring dimension."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension-eq",
+    "why": "Generic dimension invariance under completion of a Noetherian local ring; no alternate unit route is introduced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-syntomic-locus-base-change",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-sbc-cohen-macaulay-equidimensional-fibre-pieces",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-trf-relative-dimension-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-regular-quotient-completion-kernel-test",
+  "lem-trf-completion-local-complete-intersection",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-completion-dimension-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-3b5e1bbf5",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-3b5e1bbf5 (reviewer sub-agent of L); spot-checked: This is the fifth delivery: 7303b06b, 5cd40f8d, f49ba27b and 8bb0cda5 were all FIXed and lost when the promotion was refused. There are no new nodes and no re-split note. The statement and stmt_deps are unchanged. Against the 8bb0 FIXed node: step 3 adds that the open fibre has the same stalk, so the 02NM depth=dim hypothesis holds exactly; step 4 adds the chart Spec(S⊗κ(t')) and the prime contraction under s↦s⊗1, which is exactly the hypothesis of the 00P4 node. Both additions are correct. Fault E1/C4 is back in steps 2 and 5: x is lifted over an algebraic closure of κ(x), but def-weil-geometric-fibre (re-read) is the fibre over the chosen algebraic closure of κ(g(x)). The two differ when κ(x)/κ(t) is transcendental, e.g. at the generic point of A¹_{κ(t)}. FIXED by re-applying the earlier fixed steps 2/5 verbatim. κ(x)⊗κ(t)‾≠0, so lem-weil-pbc-fibre-product-points (01JT) gives x₁∈W_t̄ over x. In step 2, 01UG and V(g_t̄)=p⁻¹V(g) then give x∈V; in step 5, 0A21 and 00P4 on the chart S⊗κ(t)‾ give ν(x)=d. proof_deps is the union of uses (26 entries, adding fibre-product-points). I re-read all 26 dependency statements and checked each step against them. Sources checked: 02V3 (morphisms 5974), 02NM (5618), 02K1, 0C52 (varieties 4044), 09Q6 (dpa 1981) and 01JT. Key points: in step 8, σ is forced to be the structure map because F=Ω; in step 9, A≠0 gives I⊆m_R before the 09Q1 kernel test; the converse uses 09Q6 (2)⇒(1); step 10 uses 00OU and 07NV. Small cases: Spec Ω, Ω[ε]/ε², A^n at its generic point, a line ⊔ a plane, xy=0, the three coordinate axes (excluded) and the empty source. There is no duplicate in the DAG: lem-trf-nodal-open-locus is a consumer. No SGA source is used. The 6 batch-5 trf citations (02V3, 01UG, 02NK, 0C52, 09Q1, 09Q6) are generic commutative algebra, not part of the trace formula or Poincaré duality, so they are accepted. I accept the 14 declared tool uses. Maintainer: this is the fifth loss of the step 2/5 fix. Land this FIX with the promotion, or tell the worker to start from fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SyntomicFixedDimensionLocus",
+  "declaration": "AlgebraicGeometry.syntomic_fixed_dimension_locus",
+  "declarations": [
+   "AlgebraicGeometry.syntomic_fixed_dimension_locus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SyntomicFixedDimensionLocus.lean",
+  "statement": "theorem syntomic_fixed_dimension_locus {P T : Scheme.{u}} (g : P ⟶ T) [Flat g] [LocallyOfFinitePresentation g] (d : ℕ) : IsGreatest {U : P.Opens | (U.ι ≫ g).IsSyntomicOfRelativeDimension d} (g.syntomicFixedDimensionOpen d) ∧ (∀ (T' : Scheme.{u}) (b : T' ⟶ T), (pullback.snd g b).syntomicFixedDimensionOpen d = (pullback.fst g b) ⁻¹ᵁ (g.syntomicFixedDimensionOpen d)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T), (pullback.fst g t) ⁻¹ᵁ (g.syntomicFixedDimensionOpen d) = sSup {O : (pullback g t).Opens | IsLocalCompleteIntersectionOver Ω O.toScheme (O.ι ≫ pullback.snd g t) ∧ O.toScheme.IsPureDimension d}) ∧ (∀ (x : P), (∃ H : P.Opens, x ∈ H ∧ SmoothOfRelativeDimension d (H.ι ≫ g)) → x ∈ g.syntomicFixedDimensionOpen d) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) (c : ↥(pullback (C := Scheme.{u}) g t)), c ∈ closedPoints ↥(pullback (C := Scheme.{u}) g t) → (c ∈ (pullback.fst g t) ⁻¹ᵁ (g.syntomicFixedDimensionOpen d) ↔ (∃ (r s : ℕ) (h : Fin s → MvPowerSeries (Fin r) Ω), RingTheory.Sequence.IsRegular (MvPowerSeries (Fin r) Ω) (List.ofFn h) ∧ (∀ i, h i ∈ Ideal.span (Set.range (fun j : Fin r ↦ (MvPowerSeries.X j : MvPowerSeries (Fin r) Ω)))) ∧ ∃ e : (MvPowerSeries (Fin r) Ω ⧸ Ideal.span (Set.range h)) ≃+* AdicCompletion (IsLocalRing.maximalIdeal ((pullback g t).presheaf.stalk c)) ((pullback g t).presheaf.stalk c), ∀ a : Ω, e (algebraMap Ω (MvPowerSeries (Fin r) Ω ⧸ Ideal.span (Set.range h)) a) = algebraMap ((pullback g t).presheaf.stalk c) _ (((pullback.snd g t).stalkMap c).hom ((StructureSheaf.toStalk Ω ((pullback.snd g t) c)).hom a))) ∧ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal ((pullback g t).presheaf.stalk c)) ((pullback g t).presheaf.stalk c)) = (d : WithBot ℕ∞)))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of H2 from immutable head 112331191ff2: the existing plain lci predicate now has definition-node owner def-sfb-local-complete-intersection-over-field. The item cites that definition and def-sfb-syntomic-fixed-dimension-open, not the affine-criterion theorem. The two helper definitions are owned by and moved into the latter module; the theorem signature and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74d6ed359",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery fixes the 1123 H2 return. Item stmt_deps now cite def-sfb-local-complete-intersection-over-field (new, existing:true owner of IsLocalCompleteIntersectionOver; statement matches the def clause by clause, 01UG/00S9; no other owner, since the trf extension node owns only OverExtension; no cycle, as the theorem module imports and deps are low-level) and def-sfb-syntomic-fixed-dimension-open (new module; IsSyntomicOfRelativeDimension and the sSup syntomicFixedDimensionOpen moved verbatim; real data, docstrings with source and blueprint, no theorem). Theorem signature and sorry byte-identical to the returned head, so the earlier clause and edge-case check stands. lean.statement fields verbatim; no clash with live names or ids. Nothing compiled: no file changed."
+ }
+}

@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-space-dense-open-valuative-proper",
+ "kind": "statement",
+ "title": "Properness from valuation extensions starting in a dense open",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Give spaces the atlas topology [def-a1-space-point-topology]. For morphisms of spaces, separated means that the representable diagonal is a closed immersion on every scheme test [def-weil-closed-immersion]; quasi-compact means that for every affine scheme $T$ and every map $T\\to Y$ to the target of a morphism $f:Z\\to Y$, the algebraic space $Z\\times_YT$ has quasi-compact underlying point space (every open cover has a finite subcover); quasi-separated means that the diagonal is quasi-compact. Locally of finite type and locally of finite presentation are tested on etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated, and locally of finite presentation. Proper means separated, of finite type, and universally closed, where universally closed means closed on underlying spaces after every algebraic-space base change (agreeing with the scheme convention [def-weil-proper-morphism]). Let $p:H\\to X$ be a separated finite-type morphism of algebraic spaces, and let $h:V\\hookrightarrow H$ be a quasi-compact open immersion with dense image in the atlas topology. Open immersion means representable with an open immersion on every scheme test [def-weil-open-immersion]. Suppose the following extension property holds. For every valuation ring $R$ [def-trf-valuation-ring] with fraction field $K$ [def-weil-field], every map $v:\\operatorname{Spec}K\\to V$, and every map $x:\\operatorname{Spec}R\\to X$ with $p h v=x|_{\\operatorname{Spec}K}$, there are an injective local homomorphism of valuation rings $R\\to R'$ (so $\\mathfrak m_{R'}\\cap R=\\mathfrak m_R$), its fraction-field extension $K\\to K'$, and a map $z:\\operatorname{Spec}R'\\to H$ whose composite to $X$ is the pullback of $x$ and whose restriction to $\\operatorname{Spec}K'$ is the pullback of $h v$. Then $p$ is proper. No Noetherian, rank-one, discreteness, or finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089G (lemma-refined-valuative-criterion-universally-closed), conditions (1)--(4), specialized to a quasi-compact dense open and separated finite-type p; uniqueness is supplied by the closed diagonal (Tag 03KU, lemma-separated-implies-valuative, proved by the closed equalizer on a valuation domain)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-trf-valuation-ring",
+  "def-weil-field",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary valuation diagram $\\eta:\\operatorname{Spec}K\\to H$, $a:\\operatorname{Spec}A\\to X$ for $p$, without assuming that $\\eta$ factors through $V$. The hypothesis on $h$ is quasi-compactness on affine scheme tests, exactly as required by the stacked-valuation node. Apply the stacked-valuation configuration to obtain $C,\\mathfrak q,D,L,E,F,b,\\alpha,u$ and the four stated compatibility equations. In particular $D=C_{\\mathfrak q}$, $E=C/\\mathfrak q$ dominates $A$, the generic map of $\\alpha$ is $hu$, and the closed restriction of $\\alpha$ is $\\eta_F$. This is a point-moving input with no lifting hypothesis; it does not assert properness.",
+   "uses": [
+    "lem-sfb-space-dense-open-stacked-valuation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, proof up to the definition of C"
+   }
+  },
+  {
+   "text": "Apply the hypothesis of the item to the valuation ring $C$ with fraction field $L$, the map $u:\\operatorname{Spec}L\\to V$, and $b:\\operatorname{Spec}C\\to X$. The required generic compatibility is $p h u=b|_{\\operatorname{Spec}L}$, obtained by restricting $p\\alpha=bj_D$. We obtain an injective local map $C\\to C_1$, fraction field $L_1$, and $z:\\operatorname{Spec}C_1\\to H$ over $b$ with generic map $(hu)_{L_1}$. These are exactly the hypotheses supplied, with no need to descend this lift to $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, application of assumption (4)"
+   }
+  },
+  {
+   "text": "As a $C$-module, $C_1$ is torsion-free: for $0\\ne c\\in C$, injectivity makes its image nonzero in the domain $C_1$, so $c x=0$ implies $x=0$. The torsion-free valuation-module lemma gives flatness. Locality gives $\\mathfrak m_C C_1\\subseteq\\mathfrak m_{C_1}\\ne C_1$, and $C$ has only the maximal ideal $\\mathfrak m_C$ (its nonunits form an ideal: for two nonunits divisibility comparability writes one as a multiple of the other, so their sum is a nonunit), so the flat maximal-ideal criterion gives faithful flatness. Surjectivity on prime spectra then gives a prime $\\mathfrak q_1\\subset C_1$ with inverse image $\\mathfrak q$.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-trf-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, prime lifting; Tag 0539 (more-algebra-lemma-valuation-ring-torsion-free-flat), Tag 00HP (algebra-lemma-ff), Tag 00HQ (algebra-lemma-ff-rings)"
+   }
+  },
+  {
+   "text": "Put $D_1=(C_1)_{\\mathfrak q_1}$ and $E_1=C_1/\\mathfrak q_1$. Both are valuation domains. Indeed any pair of nonzero elements in a valuation domain is comparable for divisibility; this passes to a prime quotient, and to a localization by putting two fractions over a common denominator. Comparability is the valuation criterion for their fraction fields. Since $\\mathfrak q_1\\cap C=\\mathfrak q$, the fraction map $D\\to D_1$ is injective and local: $c/s$ maps into $\\mathfrak q_1D_1$ exactly when $c\\in\\mathfrak q$. The induced map $E\\to E_1$ is injective, and it is local since $\\mathfrak m_{C_1}\\cap C=\\mathfrak m_C$. Thus $E_1$ dominates $E$ and hence $A$. Its fraction field $F_1$ is the residue field of $D_1$, and the ring maps induce $K\\hookrightarrow F\\hookrightarrow F_1$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, localizations and prime quotients; Tag 088Y (algebra-lemma-make-valuation-rings)"
+   }
+  },
+  {
+   "text": "Compare the two maps $\\operatorname{Spec}D_1\\to H$ given by $z|_{\\operatorname{Spec}D_1}$ and $\\alpha\\operatorname{Spec}(D\\to D_1)$. Their composites to $X$ coincide by $pz=b\\operatorname{Spec}(C\\to C_1)$ and $p\\alpha=bj_D$, and their generic restrictions both equal $(hu)_{L_1}$. Their equalizer is the pullback of $\\Delta_{H/X}$ along this pair. By the separatedness hypothesis, this scheme test of the diagonal is a closed immersion $Z\\hookrightarrow\\operatorname{Spec}D_1$. The generic point factors through $Z$. Apply the closed-factorization lemma with $Y=\\operatorname{Spec}D_1$ and $g=\\mathrm{id}$: the identity factors through $Z$, so the two maps are equal. The cited factorization lemma concerns schemes, exactly as needed for this equalizer, despite $H$ and $X$ being spaces.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lemma-nagata-valuation-factor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, uniqueness comparison; Tag 03KU (lemma-separated-implies-valuative), closed equalizer proof"
+   }
+  },
+  {
+   "text": "Restrict $z$ along $\\operatorname{Spec}E_1\\to\\operatorname{Spec}C_1$ and call the result $w$. Its composite with $p$ is $a\\operatorname{Spec}(A\\to E_1)$: the map $C\\to E_1$ factors through $E=C/\\mathfrak q$, so use $bi_E=a\\operatorname{Spec}(A\\to E)$. Restrict the equality of the preceding step to the residue field $F_1$ of $D_1$. The left side is $w|_{\\operatorname{Spec}F_1}$, since $C_1\\to F_1$ factors through $E_1$. The right side is the pullback of $\\alpha|_{\\operatorname{Spec}F}=\\eta_F$. Thus $w|_{\\operatorname{Spec}F_1}=\\eta_{F_1}$. Together with the injective local map $A\\to E_1$ this supplies the extended lift for the original arbitrary diagram.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, final prime-quotient paragraph"
+   }
+  },
+  {
+   "text": "The arbitrary diagram of step 1 therefore admits a lift after an extension of valuation rings. Finite type of $p$ includes quasi-compactness on every affine scheme test by the corrected definition in the statement, so the extended valuative existence criterion applies and makes $p$ universally closed. The assumed separatedness and finite type, together with universal closedness, are precisely properness as defined in the statement. No rank, discreteness, Noetherian, or finite-presentation restriction has been used.",
+   "uses": [
+    "lem-sfb-space-qc-valuative-existence-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KA (lemma-quasi-compact-existence-universally-closed), then definition of proper"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-affine-spectrum",
+  "lem-sfb-space-dense-open-stacked-valuation",
+  "lem-sfb-space-qc-valuative-existence-closed",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lemma-nagata-valuation-factor-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089G (lemma-refined-valuative-criterion-universally-closed), proof of (1)--(4), and Tag 03KU for the equalizer comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Refined valuative criterion: a quasi compact map is universally closed if valuation diagrams starting in a quasi compact dense open admit unique extensions after valuation ring extension",
+   "results": "8 hit(s); AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.ValuativeCriterion.iff, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.ValuativeCriterion, AlgebraicGeometry.ValuativeCriterion.uniqueness, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:88-105 and its properness results concern all generic diagrams for scheme maps, not generic diagrams restricted to one dense open of an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness tested by valuation rings with generic point in a fixed dense open subscheme",
+   "results": "8 hit(s); AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.universallyClosed_eq_universallySpecializing, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.UniversallyClosed.out",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:88-105 and its properness results concern all generic diagrams for scheme maps, not generic diagrams restricted to one dense open of an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"ValuationRing\"",
+   "results": "0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:88-105 and its properness results concern all generic diagrams for scheme maps, not generic diagrams restricted to one dense open of an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "valuative|ValuationRing|universallyClosed",
+   "results": "25 hit(s); Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:88-105 and its properness results concern all generic diagrams for scheme maps, not generic diagrams restricted to one dense open of an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refined valuative criterion for universal closedness using a dense open algebraic space",
+   "results": "8 hit(s); AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.Scheme.Hom.isClosedMap",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:88-105 and its properness results concern all generic diagrams for scheme maps, not generic diagrams restricted to one dense open of an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness for algebraic spaces from valuation extensions whose generic point lies in a fixed dense open",
+   "results": "{\"t\": \"2026-10-23T11:59:43Z\", \"tool\": \"leanfinder\", \"query\": \"Properness for algebraic spaces from valuation extensions whose generic point lies in a fixed dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\"], \"digest\": \"2b1fb1023cac249a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean concern schemes and all generic diagrams, not this dense-open extension criterion for spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.ValuativeCriterion",
+   "results": "{\"t\": \"2026-10-23T11:59:44Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.ValuativeCriterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.eq_valuativeCriterion\"], \"digest\": \"978b60fcac9bacd3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean concern schemes and all generic diagrams, not this dense-open extension criterion for spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "ValuativeCriterion|UniversallyClosed",
+   "results": "{\"t\": \"2026-10-23T12:00:31Z\", \"tool\": \"grep\", \"query\": \"ValuativeCriterion|UniversallyClosed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"5329033ed668d649\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean concern schemes and all generic diagrams, not this dense-open extension criterion for spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal closedness of algebraic spaces tested on a dense open by extensions of valuation rings",
+   "results": "{\"t\": \"2026-10-23T12:00:31Z\", \"tool\": \"leansearch\", \"query\": \"Universal closedness of algebraic spaces tested on a dense open by extensions of valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"ValuativeExtension\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instUniversallyClosedMorphismRestrict\", \"ValuativeTopology\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"Valued.isClosed_sphere\"], \"digest\": \"c7456ca26ba5c922\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean concern schemes and all generic diagrams, not this dense-open extension criterion for spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Valuative criterion restricted to a dense open subset and allowing dominating valuation ring extensions",
+   "results": "{\"t\": \"2026-10-23T12:06:12Z\", \"tool\": \"leanfinder\", \"query\": \"Valuative criterion restricted to a dense open subset and allowing dominating valuation ring extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"ValuativeExtension\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq\", \"AlgebraicGeometry.ValuativeCommSq.R\"], \"digest\": \"6acbdcd3ff642f88\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean concern schemes and all generic diagrams, not this dense-open extension criterion for spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|dense.*valuative|valuative.*dense",
+   "results": {
+    "t": "2026-10-23T13:31:54Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|dense.*valuative|valuative.*dense",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: grep found no hits. LeanFinder candidates IsProper.of_valuativeCriterion (ValuativeCriterion.lean:341) and IsSeparated.valuativeCriterion concern schemes and all generic diagrams, with no dense-open algebraic-space extension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces, a separated morphism locally of finite type and quasi compact on affine scheme tests is proper if valuation diagrams starting in a dense quasi compact open admit lifts after dominating valuation ring extensions",
+   "results": {
+    "t": "2026-10-23T13:31:55Z",
+    "tool": "leanfinder",
+    "query": "For algebraic spaces, a separated morphism locally of finite type and quasi compact on affine scheme tests is proper if valuation diagrams starting in a dense quasi compact open admit lifts after dominating valuation ring extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsProper.of_valuativeCriterion",
+     "AlgebraicGeometry.isProper_eq",
+     "AlgebraicGeometry.IsProper",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated",
+     "AlgebraicGeometry.ValuativeCriterion.existence",
+     "AlgebraicGeometry.isProper_iff",
+     "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.IsSeparated.valuativeCriterion"
+    ],
+    "digest": "47b9c6703bd5ff60"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: grep found no hits. LeanFinder candidates IsProper.of_valuativeCriterion (ValuativeCriterion.lean:341) and IsSeparated.valuativeCriterion concern schemes and all generic diagrams, with no dense-open algebraic-space extension criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-weak-chow",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, proof of the properness claim: refined valuative criterion.",
+   "via": [
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-dense-open-valuative-proper",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the former topological quasi-compactness convention is insufficient for arbitrary targets (the etale map A^1 to A^1/Z is a counterexample). Corrected quasi-compactness of p and h to affine scheme tests, as in Stacks 03HE and 03KG. Retained all seven steps of the 089G proof and both statement-only inputs. Repaired weak-Chow step 4 by citing the existing space qcqs permanence node for p and h. Retry 2026-10-24: reuse the newly landed lem-sfb-space-qc-valuative-existence-closed for step 7 and remove the now-duplicate ordinary criterion node.",
+  "blueprint": "The current latest det-thm-sf-ctf-stability-direct-images proof (3), compactification branch, via the recorded weak-Chow and eventually-proper prerequisites. Below the unit this realizes the full argument of Stacks 089G, not a new route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-valuation-torsionfree-flat",
+    "why": "Generic valuation-module flatness used only to lift a prime; no trace-formula theorem or local substitute is used."
+   },
+   {
+    "node": "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+    "why": "Generic commutative algebra criterion makes the local flat extension faithfully flat; no six-functor-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic prime-existence theorem supplies a prime over q; no six-functor-unit node supplies it."
+   },
+   {
+    "node": "lemma-nagata-valuation-factor-closed",
+    "why": "Generic affine scheme closed-factorization lemma applied only to the equalizer scheme of two maps to H."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Foundational sheaf fibre-product universal property for the equalizer; no trace-formula argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lemma-nagata-valuation-factor-closed",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-554f7e017",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-554f7e017 (reviewer sub-agent of L); spot-checked: Repair of the f54123ac RETURN (E1/E2, topological qc convention, counterexample A^1 -> A^1/Z). Live item still unsplit, so not superseded; no repair note. Item statement: only the qc sentence changed, to the affine-test form (Stacks lemma-quasi-compact-local (3), equivalent to definition-quasi-compact l.1036). That is exactly the hypothesis of 089G(1) and 03KA(1); stmt_deps unchanged; A^1/Z now excluded since A^1 x_X A^1 = ⊔_Z A^1 is not qc. The item is worker-created, not a target; the correction restores the source. Its only citer, lem-sfb-space-weak-chow, equals live. Its step 4, landed separately in maintenance b189096, proves the corrected hypotheses: H and V are quasi-compact, H is separated, and X is absolutely quasi-separated, so lem-sfb-space-qcqs-permanence applies to p and h. Checked. Steps 2-6 and the new node are byte-identical to f541. Step 1 wording is aligned with the node's affine-test h; step 7 cites the landed lem-sfb-space-qc-valuative-existence-closed (03KA with 03IX extensions) instead of the earlier duplicate, which is removed. Its square-lift form matches: A'=E_1 ⊂ K'=F_1 dominating A. New node checked against the 089G proof up to C. Dictionary: D=A', q=m_{A'}, E=A'', L=K', F=K''. All four equations hold; R lands in C because R -> K'' factors through φ(A); only qc of h is used (089E/089B). Small cases V=H (C=A, q=0), H empty and A a field all check. It does not restate the item. Steps 3-6 checked elementwise: torsion-free flat (0539); local flat into a nonzero closed fibre gives faithfully flat (00HP), then prime lifting (00HQ); D_1/E_1 contraction and locality; equalizer = pullback of the closed diagonal, then lemma-nagata-valuation-factor-closed with g=id; residue-field restriction. No duplicates: 089G/088Z grep finds only scheme versions (sk-lem-nagata-sketch-dense-valuative, 0GWX normal-curve test). Batch-5 flags: def-trf-algebraic-space, def-a1-space-point-topology and def-trf-valuation-ring are definitions; lem-trf-space-fibre-products-etale-covers is foundations (02X2); lem-trf-valuation-torsionfree-flat is algebra (0539); lem-sfb-space-qc-valuative-existence-closed is 03KA, reached only via the space definition. None is a trace-formula or PD step, so all accepted. No SGA. Maintainer note: other sfb/pbc nodes with the topological qc convention listed in the report need auditing where 03KA/089G meets a non-qs target."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceDenseOpenValuativeProper",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsProper_of_denseOpen_valuative",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceDenseOpenValuativeProper.lean",
+  "statement": "theorem mapIsProper_of_denseOpen_valuative {H X V : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))} (p : H ⟶ X) (h : V ⟶ H) (hpsep : MapIsSeparated p) (hpft : MapIsFiniteType p) (hh : IsRepresentableWith (fun _ _ f ↦ IsOpenImmersion f.left) h.hom.hom) (hqc : MapIsQuasiCompact h.hom.hom) (hd : Dense (pointImage h.hom.hom)) (hext : ∀ (R : Type u) [CommRing R] [IsDomain R] [ValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (v : yoneda.obj (Over.mk (specULiftZIsTerminal.from (Spec (.of K)))) ⟶ V.obj.obj) (x : yoneda.obj (Over.mk (specULiftZIsTerminal.from (Spec (.of R)))) ⟶ X.obj.obj), v ≫ h.hom.hom ≫ p.hom.hom = yoneda.map (Over.homMk (U := Over.mk (specULiftZIsTerminal.from (Spec (.of K)))) (V := Over.mk (specULiftZIsTerminal.from (Spec (.of R)))) (Spec.map (CommRingCat.ofHom (algebraMap R K))) (specULiftZIsTerminal.hom_ext _ _)) ≫ x → ∃ (R' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : ValuationRing R') (ι : R →+* R') (hι : Function.Injective ι) (_ : IsLocalHom ι) (z : yoneda.obj (Over.mk (specULiftZIsTerminal.from (Spec (.of R')))) ⟶ H.obj.obj), z ≫ p.hom.hom = yoneda.map (Over.homMk (U := Over.mk (specULiftZIsTerminal.from (Spec (.of R')))) (V := Over.mk (specULiftZIsTerminal.from (Spec (.of R)))) (Spec.map (CommRingCat.ofHom ι)) (specULiftZIsTerminal.hom_ext _ _)) ≫ x ∧ yoneda.map (Over.homMk (U := Over.mk (specULiftZIsTerminal.from (Spec (.of (FractionRing R'))))) (V := Over.mk (specULiftZIsTerminal.from (Spec (.of R')))) (Spec.map (CommRingCat.ofHom (algebraMap R' (FractionRing R')))) (specULiftZIsTerminal.hom_ext _ _)) ≫ z = yoneda.map (Over.homMk (U := Over.mk (specULiftZIsTerminal.from (Spec (.of (FractionRing R'))))) (V := Over.mk (specULiftZIsTerminal.from (Spec (.of K)))) (Spec.map (CommRingCat.ofHom (IsFractionRing.lift (A := R) (K := K) (g := (algebraMap R' (FractionRing R')).comp ι) ((IsFractionRing.injective R' (FractionRing R')).comp hι)))) (specULiftZIsTerminal.hom_ext _ _)) ≫ v ≫ h.hom.hom) : MapIsProper p",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2 of returned head 740d4fc9aea9: the signature uses Mathlib Spec, Spec.map, Over.mk and Over.homMk with the unique structure map specULiftZIsTerminal.from. The stacked-valuation theorem is only a proof dependency and is not added to stmt_deps. Reuses the landed property definition owners; no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbd6e8a0f",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery of 740d4fc9aea9 (RETURN H2). Signature now uses Mathlib Spec/Spec.map/Over.mk/Over.homMk with specULiftZIsTerminal; definitionally the same as the old stackedValuationSpec, so the statement is unchanged. Theorem node lem-sfb-space-dense-open-stacked-valuation removed from stmt_deps and kept in proof_deps; only additions are the landed def owners def-sfb-space-morphism-properties and def-sfb-proper-curve-moduli. Node otherwise matches live; lean.statement matches the file verbatim. Clause check: separated and finite-type p; representable open, affine-test quasi-compact, dense h; extension hypothesis over every valuation ring and fraction field, injective local R->R', FractionRing R' with IsFractionRing.lift; conclusion MapIsProper. Universe u used throughout, no extra hypotheses. Edge cases checked. Gates met: sorry only, docstrings with 089G/03KU and blueprint tag, report sections present. No fixes; no compile (worker reports clean)."
+ }
+}

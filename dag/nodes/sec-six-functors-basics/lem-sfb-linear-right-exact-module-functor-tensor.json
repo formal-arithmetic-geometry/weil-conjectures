@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-linear-right-exact-module-functor-tensor",
+ "kind": "statement",
+ "title": "A right exact linear module functor preserving sums is tensoring by its value on the ring",
+ "statement": "Let $R$ be a commutative ring, and let $F:\\operatorname{Mod}_R\\to\\operatorname{Mod}_R$ be a functor on the category of all $R$-modules in a fixed universe containing $R$. Suppose its maps on hom modules are $R$-linear, that it takes every exact sequence $M_1\\to M_2\\to M_3\\to0$ to an exact sequence $F(M_1)\\to F(M_2)\\to F(M_3)\\to0$, and that it preserves every direct sum indexed by a set in this universe (the canonical coproduct comparison is an isomorphism [def-weil-pbc-category-colimit]). For $m\\in M$ write $u_m:R\\to M$ for $r\\mapsto rm$. The $R$-bilinear rule $(x,m)\\mapsto F(u_m)(x)$ defines a natural $R$-linear isomorphism $\\theta_M:F(R)\\otimes_R M\\xrightarrow{\\sim}F(M)$, where the tensor product represents $R$-bilinear maps.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise: any right exact R-linear module functor commuting with direct sums is tensoring with an R-module; the canonical map is written explicitly here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=F(R)$ and $T(M)=N\\otimes_R M$. The rule $b_M(x,m)=F(u_m)(x)$ is linear in $x$, because $F(u_m)$ is a module homomorphism. Since $u_{m+m'}=u_m+u_{m'}$ and $u_{rm}=r u_m$, linearity of $F$ on hom modules gives $b_M(x,m+m')=b_M(x,m)+b_M(x,m')$ and $b_M(x,rm)=r b_M(x,m)$. Thus the stated tensor universal property gives the linear map $\\theta_M:T(M)\\to F(M)$. For $a:M\\to M'$, the equality $a u_m=u_{a(m)}$ gives $F(a)\\theta_M(x\\otimes m)=\\theta_{M'}(x\\otimes a(m))$. Equality on pure tensors, hence the tensor universal property, proves naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+   }
+  },
+  {
+   "text": "For $M=R$, $u_r=r\\,\\mathrm{id}_R$, so $\\theta_R(x\\otimes r)=rx$. Its inverse is $x\\mapsto x\\otimes1$: the two composites are identities because $rx\\otimes1=x\\otimes r$. This verifies the normalization at the rank-one free module without choosing any isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+   }
+  },
+  {
+   "text": "For a set $I$ in the fixed universe let $P_I=R^{(I)}$ be finitely supported coefficient families, with basis vectors $e_i$ and coprojections $j_i:R\\to P_I$. This is the coproduct: a map out is uniquely prescribed by its values on the $e_i$, by the formula $\\sum_i r_i e_i\\mapsto\\sum_i r_i f(e_i)$ [def-weil-pbc-category-colimit]. Define $\\alpha_I:N\\otimes_R P_I\\to N^{(I)}$ by $\\alpha_I(x\\otimes\\sum_i r_i e_i)=\\sum_i\\iota_i(r_i x)$. The right side is bilinear, by addition of finite coefficient families and the module laws, so it defines a linear map. Define $\\beta_I:N^{(I)}\\to N\\otimes_R P_I$ by $\\beta_I(\\sum_i\\iota_i(x_i))=\\sum_i x_i\\otimes e_i$. These maps are inverse: $\\alpha_I\\beta_I$ fixes each $\\iota_i(x)$, while $\\beta_I\\alpha_I(x\\otimes\\sum_i r_i e_i)=\\sum_i r_i x\\otimes e_i=x\\otimes\\sum_i r_i e_i$. The formulas include $I=\\varnothing$, when both sides are zero.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+   }
+  },
+  {
+   "text": "The direct-sum comparison $c_I:N^{(I)}\\to F(P_I)$ is characterized by $c_I\\iota_i=F(j_i)$ [def-weil-pbc-category-colimit] and is an isomorphism by the hypothesis on $F$. On each summand, $\\theta_{P_I}\\beta_I\\iota_i(x)=\\theta_{P_I}(x\\otimes e_i)=F(j_i)(x)$, since $u_{e_i}=j_i$. Uniqueness of a map from a direct sum therefore gives $\\theta_{P_I}\\beta_I=c_I$. Since $\\beta_I$ and $c_I$ are isomorphisms, so is $\\theta_{P_I}$ for every set $I$ in the fixed universe.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+   }
+  },
+  {
+   "text": "Given $M$, take $I$ to be its underlying set and let $p:P_I\\to M$ send $e_m$ to $m$. This is surjective because $p(e_m)=m$. Let $J$ be the underlying set of $\\ker p$, and define $d:P_J\\to P_I$ by sending $e_k$ to the element $k\\in\\ker p\\subseteq P_I$. Then $\\operatorname{im}d=\\ker p$: one inclusion follows from $pd=0$, and the other from $d(e_k)=k$. Thus $P_J\\xrightarrow{d}P_I\\xrightarrow{p}M\\to0$ is exact. Both $I$ and $J$ are sets of the original universe, because kernels are subsets and finitely supported families over $R$ remain in that universe.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-tensor-right-exact], applied to $P_J\\xrightarrow{d}P_I\\xrightarrow{p}M\\to0$ and the arbitrary module $N=F(R)$, the row $T(P_J)\\xrightarrow{T(d)}T(P_I)\\xrightarrow{T(p)}T(M)\\to0$ is exact. The corresponding row $F(P_J)\\xrightarrow{F(d)}F(P_I)\\xrightarrow{F(p)}F(M)\\to0$ is exact by the given right exactness of $F$. Step 1 supplies the commuting vertical maps $\\theta$, and step 4 makes the first two vertical maps isomorphisms. No flatness of $N$ is used.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF, lemma-tensor-product-exact; applied to the explicit free presentation in step 5."
+   }
+  },
+  {
+   "text": "Surjectivity of $\\theta_M$ follows explicitly: for $y\\in F(M)$, choose $b\\in F(P_I)$ with $F(p)b=y$ and then $a\\in T(P_I)$ with $\\theta_{P_I}a=b$; naturality gives $\\theta_M(T(p)a)=y$. For injectivity, if $z\\in T(M)$ and $\\theta_M z=0$, choose $a\\in T(P_I)$ with $T(p)a=z$. Exactness gives $b\\in F(P_J)$ with $F(d)b=\\theta_{P_I}a$. Write $b=\\theta_{P_J}c$. Naturality and injectivity of $\\theta_{P_I}$ yield $a=T(d)c$, whence $z=T(p)T(d)c=0$. Thus $\\theta_M$ is a bijective linear map, whose inverse is linear by applying $\\theta_M$ to the addition and scalar identities. Multiplying the naturality equation by the inverse components proves their naturality, completing the natural linear isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), exercise on right exact linear module functors preserving direct sums (expanded by the worker)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Eilenberg.?Watts|Watts|rightExact.*tensor|tensor.*rightExact",
+   "results": "OK: 14 hits; Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean, Mathlib/RingTheory/Extension/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean, Mathlib/RingTheory/Coalgebra/Quotient.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: module tensor right exactness, tensor distributivity, monoidal module structures and free-category extensions do not reconstruct an arbitrary linear functor from F(R)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An R linear right exact functor on modules preserving arbitrary direct sums is tensoring with its value on R",
+   "results": "OK: 8 hits; rTensor_exact, TensorProduct.coe_directSumRight', TensorProduct.directSumRight', CategoryTheory.tensoringRight_linear, lTensor_exact, TensorProduct.directSumRight_comp_rTensor, CategoryTheory.term_⥤ᵣ_, CategoryTheory.RightExactFunctor.of",
+   "date": "2026-10-23",
+   "verdict": "no match: module tensor right exactness, tensor distributivity, monoidal module structures and free-category extensions do not reconstruct an arbitrary linear functor from F(R)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Eilenberg\"",
+   "results": "OK: 2 hits; CategoryTheory.Comonad.Coalgebra.eilenbergMoore, CategoryTheory.Monad.Algebra.eilenbergMoore",
+   "date": "2026-10-23",
+   "verdict": "no match: module tensor right exactness, tensor distributivity, monoidal module structures and free-category extensions do not reconstruct an arbitrary linear functor from F(R)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An R linear right exact functor from R modules to R modules preserving arbitrary direct sums is naturally isomorphic to tensor product with its value on R",
+   "results": "OK: 8 hits; ModuleCat.instMonoidalClosed, ModuleCat.instMonoidalLinear, FGModuleCat.tensorUnit_obj, ModuleCat.MonoidalCategory.rightUnitor_def, CategoryTheory.IsGrothendieckAbelian.tensorObj, ModuleCat.instMonoidalFree, ModuleCat.instMonoidalPreadditive, ModuleCat.monoidalCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: module tensor right exactness, tensor distributivity, monoidal module structures and free-category extensions do not reconstruct an arbitrary linear functor from F(R)."
+  },
+  {
+   "tool": "grep",
+   "query": "Linear.*PreservesColimits|PreservesColimits.*Linear|tensor.*NatIso|NatIso.*tensor",
+   "results": "OK: 1 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean (Mathlib/Algebra/Category/ModuleCat)",
+   "date": "2026-10-23",
+   "verdict": "no match: module tensor right exactness, tensor distributivity, monoidal module structures and free-category extensions do not reconstruct an arbitrary linear functor from F(R)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eilenberg Watts theorem reconstruct a colimit preserving linear functor on the category of modules from its value at the free rank one module",
+   "results": "OK: 8 hits; CategoryTheory.Free.liftUnique, CategoryTheory.Free.lift_linear, CategoryTheory.Free.ext, ModuleCat.adj, CategoryTheory.Free.lift_obj, CategoryTheory.Free.lift, ModuleCat.instIsRightAdjointForget, ModuleCat.adj_homEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: module tensor right exactness, tensor distributivity, monoidal module structures and free-category extensions do not reconstruct an arbitrary linear functor from F(R)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eilenberg Watts theorem linear right exact functor on modules preserving direct sums is tensor with its value on the ring",
+   "results": "OK: 8 hits; CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, ModuleCat.instMonoidalLinear, ModuleCat.instMonoidalClosed, ModuleCat.instMonoidalPreadditive, CategoryTheory.monoidalLinearOfFaithful, ModuleCat.monoidalCategory, FGModuleCat.instIsMonoidalModuleCatIsFG",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give tensor right exactness, distributivity, the free R-linear category, or a chosen tensor-Hom adjoint, not reconstruction of an arbitrary module functor F."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Watts\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give tensor right exactness, distributivity, the free R-linear category, or a chosen tensor-Hom adjoint, not reconstruction of an arbitrary module functor F."
+  },
+  {
+   "tool": "grep",
+   "query": "Eilenberg.?Watts|Watts|rightExact.*tensor|tensor.*rightExact",
+   "results": "OK: 14 hits; Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Extension/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean, Mathlib/RingTheory/Coalgebra/Quotient.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give tensor right exactness, distributivity, the free R-linear category, or a chosen tensor-Hom adjoint, not reconstruction of an arbitrary module functor F."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An R linear right exact functor on modules preserving arbitrary direct sums is tensoring with its value on R",
+   "results": "OK: 8 hits; rTensor_exact, TensorProduct.coe_directSumRight', TensorProduct.directSumRight', CategoryTheory.tensoringRight_linear, lTensor_exact, TensorProduct.directSumRight_comp_rTensor, CategoryTheory.term_⥤ᵣ_, CategoryTheory.RightExactFunctor.of",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give tensor right exactness, distributivity, the free R-linear category, or a chosen tensor-Hom adjoint, not reconstruction of an arbitrary module functor F."
+  },
+  {
+   "tool": "grep",
+   "query": "Linear.*PreservesColimits|PreservesColimits.*Linear|tensor.*NatIso|NatIso.*tensor",
+   "results": "OK: 1 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; directory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give tensor right exactness, distributivity, the free R-linear category, or a chosen tensor-Hom adjoint, not reconstruction of an arbitrary module functor F."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between right exact coproduct preserving linear functors on modules is an isomorphism if its component at the rank one free module is an isomorphism",
+   "results": "OK: 8 hits; CategoryTheory.Free.ext, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj, CategoryTheory.Free.liftUnique, ModuleCat.exteriorPower.natIso₁, CategoryTheory.Functor.linear_of_iso, CategoryTheory.Free.embeddingLiftIso, CondensedMod.IsSolid.isIso_solidification_map, MatrixModCat.counitIso",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give tensor right exactness, distributivity, the free R-linear category, or a chosen tensor-Hom adjoint, not reconstruction of an arbitrary module functor F."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-top-degree-base-change",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: top-degree base change and top-degree tensor projection, applied locally with d=1 before Nakayama and before lifting fibre sections. Algebra prerequisite in the proof of Stacks top-cohomology-functor (b): the exercise identifying a right exact linear module functor preserving sums with tensoring by its value on the rank-one free module.",
+   "via": [
+    "lem-sfb-top-degree-base-change",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-linear-right-exact-module-functor-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the omitted Stacks 0EX3 exercise into the canonical bilinear map, its naturality, explicit finite-support free-module comparisons, a same-universe free presentation, and a right-exact diagram chase. Reused the existing tensor-right-exact Mathlib leaf; no new nodes and no statement change.",
+  "blueprint": "Auxiliary algebra for top-degree base change (Stacks 0EX3(b)), through the recorded chain to det-thm-sf-ctf-stability-direct-images, proof (3). Read the current latest blueprint: that node uses proper and open direct-image stability; this is a generic algebra tool below its recorded refinement, not a replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-d139aa76c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-d139aa76c (reviewer sub-agent of L); spot-checked: I read the source: Stacks limits.tex Tag 0EX3 (lemma-top-cohomology-functor), proof of (b), where the source leaves this result as an exercise. The item states that exercise exactly: R-linear, right exact, preserves direct sums. It also gives the canonical map x⊗m↦F(u_m)(x), and that is the map parent lem-sfb-top-degree-base-change step 4 uses. The live item is unsplit and has no repair note, so the delivery is not superseded and is not a re-split order. Against live, only proof, proof_deps, proof_origin, status, split_report and the appended mathlib_searches changed. The statement, stmt_deps and blueprint are unchanged. proof_deps equals the union of the step uses. Step by step: 1 (bilinearity via u_{rm}=r u_m and linearity on Hom; naturality from a u_m=u_{a(m)}) is correct. 2 (θ_R, F(r·id)=r·id) is correct. 3 (explicit N⊗R^(I)≅N^(I), including I=∅) is correct. 4 (θ_{P_I}β_I=c_I by uniqueness out of the coproduct, using u_{e_i}=j_i, so it uses the canonical comparison) is correct. 5 (same-universe free presentation, im d=ker p) is correct. 6 cites lem-weil-pbc-tensor-right-exact; its second clause, for arbitrary N, says exactly what the step needs, and it is Mathlib lTensor_exact at RightExactness.lean:294. 7: I redid both directions of the surjectivity/injectivity chase and they hold. Edge cases tested: F=N⊗-, F=0, R=0, F=(R/I)⊗- (not flat), and Hom(P,-) for finite projective P. Both cited nodes are status mathlib, so the route is clean and there are no tool_uses. There is no SGA. There are no new nodes, and rg over dag/nodes and Mathlib found no duplicate or Watts declaration. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleFunctorTensor",
+  "declaration": "ModuleCat.exists_tensorLeft_iso_of_rightExact_preservesCoproducts",
+  "file": "lean/Sheaf/CategoryTheory/ModuleFunctorTensor.lean",
+  "statement": "theorem exists_tensorLeft_iso_of_rightExact_preservesCoproducts (R : Type u) [CommRing R] (F : ModuleCat.{u} R ⥤ ModuleCat.{u} R) [F.Additive] [F.Linear R] (hRightExact : ∀ (M₁ M₂ M₃ : ModuleCat.{u} R) (f : M₁ ⟶ M₂) (g : M₂ ⟶ M₃), Function.Exact f g → Function.Surjective g → Function.Exact (F.map f) (F.map g) ∧ Function.Surjective (F.map g)) (hSums : ∀ (I : Type u), PreservesColimitsOfShape (Discrete I) F) : ∃ θ : tensorLeft (F.obj (ModuleCat.of R R)) ≅ F, ∀ (M : ModuleCat.{u} R) (x : F.obj (ModuleCat.of R R)) (m : M), (θ.hom.app M) (TensorProduct.tmul R x m) = (F.map (ModuleCat.ofHom (LinearMap.toSpanSingleton R M m))) x",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-180601205",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; no new nodes, dependency modules or statement change. Lean matches the node clause by clause: R:Type u CommRing, F:ModuleCat.{u} R ⥤ ModuleCat.{u} R, [F.Additive][F.Linear R] = linear on Hom; hRightExact = exact plus surjective in and out, no left exactness; hSums = PreservesColimitsOfShape (Discrete I) for all I:Type u, equivalent to the canonical sigma comparison being iso and including I=∅; conclusion ∃ θ : tensorLeft F(R) ≅ F with θ(x⊗m)=F(ofHom(toSpanSingleton R M m)) x, which pins θ completely. Source Stacks 0EX3 proof of (b) exercise checked in limits.tex. Edge cases R=0, F=0, I=∅, non-flat Z/2⊗- and infinite I all covered. No Watts declaration in Mathlib or Sheaf, no module path collision. Statement field verbatim; stmt_dep publicly imported, proof dep lTensor_exact plain import; sorry-only proof; docstring follows the 7 steps; lines ≤100; report has both sections. No compile run (no file changed)."
+ }
+}

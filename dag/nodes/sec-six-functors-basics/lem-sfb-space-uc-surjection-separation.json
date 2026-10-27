@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-space-uc-surjection-separation",
+ "kind": "statement",
+ "title": "Separation descends under universally closed surjections of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. Let $f:X\\to Y$ be surjective on point spaces and universally closed, meaning that every algebraic-space base change induces a closed map on point spaces [def-sfb-space-morphism-properties]. If $X$ is quasi-separated, then $Y$ is quasi-separated. If the absolute diagonal of $X$ is a closed immersion, then the absolute diagonal of $Y$ is a closed immersion as well; here closed immersions are representable and closed immersions on scheme tests [def-weil-closed-immersion]. No finite type or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05Z2 (lemma-image-universally-closed-separated), parts (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-space-change-base-to-integers] to regard $X,Y$ as spaces over $B=\\operatorname{Spec}\\mathbf Z$. The same scheme atlases give the same point spaces and topology. Any space $T\\to Y$ over $B$ acquires an $S$-structure through $Y\\to S$, and the equivalence and fibre-product assertion identify $X\\times_YT$ with its original $S$-space fibre product. Thus universal closedness of $f$ still holds for all these tests. The hypotheses on the absolute diagonals are exactly those in the question; no identification with the relative diagonals over $S$ is made.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05Z2, reduction of (1),(2) to (3),(4) over Spec Z; change of base is spaces.tex Tags 03I4 and 04SG."
+   }
+  },
+  {
+   "text": "Write $A=X\\times_BX$, $C=Y\\times_BY$, and $F=f\\times_Bf:A\\to C$. Factor $F$ as $X\\times_BX\\to X\\times_BY\\to Y\\times_BY$. The two factors are base changes of $f$, on the second and first coordinates respectively. For any further base change each is closed by the definition of universal closedness, and their composite is closed because the image of a closed set under the first map and then the second is closed. Hence $F$ is universally closed. The equality $F\\Delta_X=\\Delta_Yf$ follows by comparing the two projections of the sheaf fibre products.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05Z2, first diagram and paragraph; Tags 03IS and 03IU, elementary base-change and composition arguments."
+   }
+  },
+  {
+   "text": "For any algebraic space $T\\to C$, set $P=T\\times_CA$, $R=T\\times_CX$, and $Q=T\\times_CY$, where $X\\to C$ is $F\\Delta_X$ and $Y\\to C$ is $\\Delta_Y$. Then $R=P\\times_AX$ and $R=Q\\times_YX$: both equalities follow sectionwise by retaining the same coordinates and their equalities. Thus $R\\to Q$ is a base change of $f$. By the point-fibre-product surjectivity in [lem-a1-space-point-open-calculus], $|R|\\to|Q|$ is surjective. The same node gives continuity of every point map. This uses surjectivity on point spaces, without assuming that $f$ is representable.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05Z2, both test-space arguments; spaces-properties.tex Tag 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "Assume $X$ is quasi-separated and take $T$ affine. By [lem-sfb-space-universally-closed-quasicompact] applied to $F$, $P$ is quasi-compact. Choose an affine surjective etale atlas $U\\to P$ by [lem-sfb-qc-space-affine-etale-atlas]. Since $\\Delta_X$ is quasi-compact, $U\\times_AX$ is quasi-compact. It maps onto $R=P\\times_AX$ on point spaces, by the base-change point-surjectivity from [lem-a1-space-point-open-calculus]. The continuous images $|U\\times_AX|\\twoheadrightarrow|R|\\twoheadrightarrow|Q|$ are quasi-compact: pull back an open covering, choose a finite subcover, and use surjectivity. Consequently every affine test $Q$ of $\\Delta_Y$ is quasi-compact, proving that $Y$ is quasi-separated.",
+   "uses": [
+    "lem-sfb-space-universally-closed-quasicompact",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05Z2, first medskip paragraph, with the compact-source reduction expanded using spaces-properties.tex Tag 03H6."
+   }
+  },
+  {
+   "text": "Now assume $\\Delta_X$ is a closed immersion. By [lem-sfb-space-closed-subspace-proper] it is universally closed. The composition argument of step 2 shows $F\\Delta_X$ is universally closed. For arbitrary $T\\to C$ retain step 3: $h:R\\to T$ is universally closed and $p:R\\to Q$ is surjective on points. If $E\\subseteq|Q|$ is closed, continuity of $|p|$ makes $|p|^{-1}(E)$ closed, so its image under $|h|$ is closed in $|T|$. Surjectivity identifies this image with the image of $E$ under $|Q|\\to|T|$. Thus $Q\\to T$ is closed for every algebraic-space test $T$, and $\\Delta_Y$ is universally closed.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-proper",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05Z2, second medskip paragraph: universal closedness of the target diagonal, with closed-set cancellation written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-diagonal-scheme-tests] to $Y\\to B$. For every scheme $T\\to C$, its diagonal test $d:D=Y\\times_CT\\to T$ is a scheme morphism, locally of finite type and a monomorphism. Step 5 makes $d$ universally closed, in particular after all scheme base changes. It is quasi-compact by [lem-weil-pbc-universally-closed-quasi-compact] and separated by [lem-trf-scheme-monomorphism-separated]. Thus it is of finite type (local finite type plus quasi-compact) and proper by the scheme definitions [def-weil-finite-type-morphism, def-weil-proper-morphism]. The equivalence [lem-pc-proper-monomorphism-closed] makes $d$ a closed immersion. This holds for every scheme test and the diagonal is representable, so $\\Delta_Y$ is a closed immersion, as required.",
+   "uses": [
+    "lem-sfb-space-diagonal-scheme-tests",
+    "lem-weil-pbc-universally-closed-quasi-compact",
+    "lem-trf-scheme-monomorphism-separated",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05Z2, final paragraph; Tag 03HK (lemma-properties-diagonal), parts (1)-(3); etale.tex Tag 04XV (lemma-characterize-closed-immersion), (1),(2),(6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-change-base-to-integers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-universally-closed-quasicompact",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-diagonal-scheme-tests",
+  "lem-weil-pbc-universally-closed-quasi-compact",
+  "lem-trf-scheme-monomorphism-separated",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-pc-proper-monomorphism-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05Z2 (lemma-image-universally-closed-separated), proof of (1),(2) via absolute diagonals."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective universally closed morphism of algebraic spaces descends quasi-separatedness and separatedness from source to target",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.UniversallyClosed.of_comp_surjective, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.instQuasiCompactOfUniversallyClosed, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyClosed\", \"IsSeparated\"",
+   "results": "Actual logged search: 2 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ss]urjective.*[Ss]eparated|[Ss]eparated.*[Uu]niversallyClosed",
+   "results": "Actual logged search: 4 hits; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If X is separated or quasi-separated and X to Y is universally closed and surjective then Y is separated or quasi-separated, for algebraic spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.UniversallyClosed.of_comp_surjective, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separatedness of the image of a separated algebraic space under a universally closed surjection",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.IsSeparated.hasAffineProperty",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective universally closed morphisms of algebraic spaces descend quasi-separatedness and separatedness",
+   "results": {
+    "t": "2026-10-23T13:07:30Z",
+    "tool": "leanfinder",
+    "query": "Surjective universally closed morphisms of algebraic spaces descend quasi-separatedness and separatedness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.UniversallyClosed.of_comp_surjective",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated",
+     "AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget",
+     "AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "54df62791629d893"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|universallyClosed.*[Ss]eparated|quasiSeparatedSpace_of_surjective",
+   "results": {
+    "t": "2026-10-23T13:08:30Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|universallyClosed.*[Ss]eparated|quasiSeparatedSpace_of_surjective",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean"
+    ],
+    "digest": "3785810f36291d2f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"IsSeparated\"",
+   "results": {
+    "t": "2026-10-23T13:08:30Z",
+    "tool": "loogle",
+    "query": "\"UniversallyClosed\", \"IsSeparated\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated",
+     "AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated"
+    ],
+    "digest": "5451923e9b34bea4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed surjection from a separated algebraic space has separated target",
+   "results": {
+    "t": "2026-10-23T13:09:36Z",
+    "tool": "leansearch",
+    "query": "A universally closed surjection from a separated algebraic space has separated target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isProper_eq",
+     "AlgebraicGeometry.UniversallyClosed",
+     "AlgebraicGeometry.universallyClosed_isStableUnderBaseChange",
+     "AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated",
+     "AlgebraicGeometry.IsProper.toUniversallyClosed",
+     "AlgebraicGeometry.UniversallyClosed.mk",
+     "AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant",
+     "AlgebraicGeometry.IsIntegralHom.instUniversallyClosed"
+    ],
+    "digest": "bc1f081579cf5bf2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-separatedness and closedness of the diagonal descend to the image of a universally closed surjection",
+   "results": {
+    "t": "2026-10-23T13:09:37Z",
+    "tool": "leanfinder",
+    "query": "Quasi-separatedness and closedness of the diagonal descend to the image of a universally closed surjection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated",
+     "AlgebraicGeometry.quasiSeparated_iff",
+     "AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact"
+    ],
+    "digest": "d45472b6adb0cdca"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*[Uu]niversallyClosed|[Uu]niversallyClosed.*[Mm]ono|isClosedImmersion_iff|isClosedImmersion_of",
+   "results": {
+    "t": "2026-10-23T13:11:36Z",
+    "tool": "grep",
+    "query": "closedImmersion.*[Uu]niversallyClosed|[Uu]niversallyClosed.*[Mm]ono|isClosedImmersion_iff|isClosedImmersion_of",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean"
+    ],
+    "digest": "c93640ad7284243e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations are for Scheme, not arbitrary algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean:34-42, 158-168 and Morphisms/Proper.lean:106-112; the quasi-separatedness hits likewise quantify over schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 05Z2 (lemma-image-universally-closed-separated), parts (1) and (2).",
+   "via": [
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-uc-surjection-separation",
+  "worker": "stage1",
+  "summary": "Follow Tag 05Z2 using absolute diagonals, explicit point-surjectivity and closed-set cancellation, with one new statement-only input (04XW). Reuse existing scheme tests and Mathlib leaves. No statement change or added hypotheses.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). The retained from.place locates this supporting Tag 05Z2 input below the alteration/formal-effectivity chain; six steps realize its two diagonal arguments. blueprint_refs ancestor returns None as in the inherited provenance, so preserve null rather than invent an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-space continuity and surjectivity of points of arbitrary algebraic-space fibre products; this unit has no equivalent point calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-5032e53f7",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-5032e53f7 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 05Z2 (spaces-morphisms lemma-image-universally-closed-separated) and Tag 04XW (lemma-universally-closed-quasi-compact) in full. The item is 05Z2 parts (1) and (2) in absolute form, its statement is unchanged, and no hypothesis was added. The six steps follow the source and match the statements they cite. Step 1 reduces to Spec Z via the change-base-to-integers node, clauses (1)-(3). Step 2 shows f×f is universally closed by pasting two base changes of f. Step 3 identifies R=P×_A X=Q×_Y X, and the point-calculus image clause makes |R|→|Q| surjective with no representability needed. Step 4 uses the new 04XW node to make |P| quasi-compact for affine T, takes an affine atlas (which needs no quasi-separatedness), and pushes compactness through two continuous surjections. Step 5 gets universal closedness of Δ_Y from the closed-immersion-is-proper node by closed-set cancellation, against all space tests. Step 6 combines the diagonal scheme-test node with Mathlib leaves 04XU, isSeparated_of_mono and IsClosedImmersion.iff_isProper_and_mono to show d is proper and a monomorphism, hence a closed immersion. The new node 04XW is statement-only and self-contained; its affine-scheme test is equivalent to Stacks' quasi-compact-space test by 03HF. It has three kinds of Mathlib search (hits are schemes only), blueprint search returned 0, and rg -L over the DAG found only scheme analogues (04XU, 09MQ, 04XV, 04Y0), so it is not a duplicate. It is strictly smaller than the item. Small cases checked: the infinite disjoint union of Spec k over Spec k, empty X, and f an isomorphism. Batch-5: every listed citation is an algebraic-space foundation or a definition, and lem-trf-scheme-monomorphism-separated is a Mathlib leaf. None is a step of the trace formula or Poincaré duality, so all are accepted. Tool uses accepted: lem-a1-space-point-open-calculus, which is declared, and lem-trf-space-fibre-products-etale-covers, which is undeclared but is the generic fibre-product lemma already accepted on 167 nodes of this unit. Remark only: lem-sfb-space-separated-diagonal-closed (04Y0) would also close step 6. No SGA. The item is not superseded: it is still unsplit in live and side-live. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceUCSurjectionSeparation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separation_of_surjective_universallyClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceUCSurjectionSeparation.lean",
+  "statement": "theorem separation_of_surjective_universallyClosed {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) (hsurj : Function.Surjective (mapPoint f.hom.hom)) (hclosed : MapIsUniversallyClosed f) : ((∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) → ∀ (U V : Over S) (a : yoneda.obj U ⟶ Y.obj.obj) (b : yoneda.obj V ⟶ Y.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) ∧ ((∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → ∃ (W : Over S) (p : W ⟶ U) (q : W ⟶ V), IsPullback (yoneda.map p) (yoneda.map q) a b ∧ IsClosedImmersion (prod.lift p.left q.left)) → ∀ (U V : Over S) (a : yoneda.obj U ⟶ Y.obj.obj) (b : yoneda.obj V ⟶ Y.obj.obj), IsAffine U.left → IsAffine V.left → ∃ (W : Over S) (p : W ⟶ U) (q : W ⟶ V), IsPullback (yoneda.map p) (yoneda.map q) a b ∧ IsClosedImmersion (prod.lift p.left q.left))",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Both independent absolute separation implications, using the equivalent affine-pair tests of Stacks 0AHR and 0AHS. The product in prod.lift p.left q.left is the absolute product of schemes over Spec Z, not the product in Over S. No base separation or representability of f is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d59d1659c",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, module, report, Stacks 05Z2/0AHR/0AHS and dep Lean (AlgebraicSpace, Point, pointTopologicalSpace, MapIsUniversallyClosed, mapPoint). Hypotheses exact: surjective mapPoint and MapIsUniversallyClosed, nothing extra. Absolute qs rendered by the 0AHR affine-pair compactness test, same spelling as landed modules; absolute separatedness by the 0AHS(2) form, a representing W with prod.lift in Scheme (over Spec Z) a closed immersion. Independent U,V S-structures give the absolute diagonal. IsPullback orientation checked. Edge cases: empty X, isomorphism, non-separated S, qs-not-separated X. lean.statement verbatim, only the lean field changed vs side-live, not superseded, no duplicate notion, docstrings with source/blueprint/six steps, sorry only, proof-dep Mathlib imports. Advisory: mapPoint is owned by def-sfb-proper-curve-moduli, reached via def-sfb-space-morphism-properties. No fixes, no compile."
+ }
+}

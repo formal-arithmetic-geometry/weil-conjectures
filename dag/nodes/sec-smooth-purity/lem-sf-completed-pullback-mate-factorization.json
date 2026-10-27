@@ -21,26 +21,23 @@
  ],
  "proof": [
   {
-   "text": "Write $H=F_D$, $\\widetilde H=F_D^{\\mathrm{Tow}}$, $M=K_\\bullet$, and use right-to-left composition. Put $a_K=\\widetilde H(i_K)j_K^{-1}:\\Delta_YHK\\to\\widetilde HM$. The definition of completed pullback first applies pullback to the strict quotient augmentation and then applies the canonical constant-tower/derived-limit unit. Counit normalization identifies this pulled augmentation with $a_K$, on constant towers and on the entire quotient tower. Consequently the actual map is\n$$\\alpha^F_K=L_Y(a_K)v_{Y,HK}.$$\nTo check the normalization on representatives, take the flat-term K-flat representative $P$ used by that definition, its quotient tower $P_\\bullet$, and a target K-injective tower resolution $r:F(P_\\bullet)\\to J_\\bullet$. The actual construction is the chain map $FP\\to\\lim J_n$ whose components are $r_nF(P\\to P_n)$. The canonical derived adjunction takes exactly this strict augmentation to that chain map: its unit factors the compatible component maps through the ordinary limit. Thus the displayed expression describes the specified map, including its resolution and localization comparisons. This uses the existing K-injective model for total right derived limit and the existing canonical derived adjunction; it does not assert that $F$ preserves K-injectives.",
+   "text": "Write $H=F_D$, $\\widetilde H=F_D^{\\mathrm{Tow}}$, $M=K_\\bullet$ and $a_K=\\widetilde H(i_K)j_K^{-1}$. Apply [lem-sf-completed-augmentation-adjunct] with the given exact pullback and its original counit normalization. It identifies the actual specified comparison, including the K-injective representative, as $\\alpha^F_K=L_Y(a_K)v_{Y,HK}$, naturally in every unbounded $K$. In Lean, use completed_augmentation_adjunct.1 for the equality and .2.1 for naturality.",
    "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-sf-exact-pullback-counit-normalization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-coef-derived-tower-counit-projections"
+    "lem-sf-completed-augmentation-adjunct"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization proof Step 6 / immersion comparison Step 5; agent-written expansion of the actual strict augmentation and its adjunction mate."
+    "place": "Returned localization Step 6 / immersion-comparison Step 5; assembly of the normalized augmentation adjunct and coherent exact tower counit evaluation."
    }
   },
   {
-   "text": "Set $h=\\operatorname{comp}_K:K\\to L_XM$. Expand the definition of $\\beta_M$ and move $H(h)$ past $v_Y$ by its naturality. Naturality of $j^{-1}$ for $h$ gives\n$$\\begin{aligned}\n\\beta_M H(h)\n &=L_Y\\bigl(\\widetilde H(\\varepsilon_{X,M})j^{-1}_{L_XM}\\Delta_YH(h)\\bigr)v_{Y,HK}\\\\\n &=L_Y\\bigl(\\widetilde H(\\varepsilon_{X,M}\\Delta_Xh)j_K^{-1}\\bigr)v_{Y,HK}.\n\\end{aligned}$$\nThe first move is $v_{Y,HL_XM}H(h)=L_Y\\Delta_YH(h)v_{Y,HK}$, and the second is $j^{-1}_{L_XM}\\Delta_YH(h)=\\widetilde H(\\Delta_Xh)j_K^{-1}$. These are substitutions of naturality and functoriality, with no preservation-of-limit assumption.",
+   "text": "Set $h=\\operatorname{comp}_K:K\\to L_XM$. Expand the definition of $\\beta_M$ and move $H(h)$ past $v_Y$ by its naturality. Naturality of $j^{-1}$ for $h$ gives\n$$\\begin{aligned}\n\\beta_M H(h)\n &=L_Y\\bigl(\\widetilde H(\\varepsilon_{X,M})j^{-1}_{L_XM}\\Delta_YH(h)\\bigr)v_{Y,HK}\\\\\n &=L_Y\\bigl(\\widetilde H(\\varepsilon_{X,M}\\Delta_Xh)j_K^{-1}\\bigr)v_{Y,HK}.\n\\end{aligned}$$\nThe first move is $v_{Y,HL_XM}H(h)=L_Y\\Delta_YH(h)v_{Y,HK}$, and the second is $j^{-1}_{L_XM}\\Delta_YH(h)=\\widetilde H(\\Delta_Xh)j_K^{-1}$. These are substitutions of naturality and functoriality, with no preservation-of-limit assumption. This is formalized by the private generic adjunction lemma mate_augmentation, avoiding any unfolding of the concrete derived categories.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization proof Step 6 / immersion comparison Step 5; agent-written expansion of the actual strict augmentation and its adjunction mate."
+    "place": "Returned localization Step 6 / immersion-comparison Step 5; assembly of the normalized augmentation adjunct and coherent exact tower counit evaluation."
    }
   },
   {
@@ -49,48 +46,35 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization proof Step 6 / immersion comparison Step 5; agent-written expansion of the actual strict augmentation and its adjunction mate."
+    "place": "Returned localization Step 6 / immersion-comparison Step 5; assembly of the normalized augmentation adjunct and coherent exact tower counit evaluation."
    }
   },
   {
-   "text": "For the canonical target adjunction, the existing counit-projection theorem says $p_n=\\operatorname{ev}_n(\\varepsilon_{Y,\\widetilde HM})$. The formula from Step 1 and counit naturality give\n$$\\varepsilon_{Y,\\widetilde HM}\\Delta_Y\\alpha^F_K\n =\\varepsilon_{Y,\\widetilde HM}\\Delta_YL_Y(a_K)\\Delta_Yv_{Y,HK}\n =a_K\\varepsilon_{Y,\\Delta_YHK}\\Delta_Yv_{Y,HK}=a_K.$$\nEvaluate this identity at $n$. Since $\\operatorname{ev}_n\\Delta_Y=\\mathrm{id}$, its left side is $p_n\\alpha^F_K$. The counit-normalized exact evaluation comparison and $j$ identify its right side $\\operatorname{ev}_n(a_K)$ with $H(q_{n,K})$. Hence $p_n\\alpha^F_K=F_D(q_{n,K})$.",
+   "text": "Apply [lem-sf-exact-tower-augmented-counit-evaluation] to $\\mathcal A=\\operatorname{Mod}(B_X)$, $\\mathcal B=\\operatorname{Mod}(B_Y)$ and $i=i_K$. Its $b$ is $\\alpha^F_K$ by Step 1; its normalized $q_n,p_n$ are the specified $q_{n,K},p_n$. It gives $p_n\\alpha^F_K=H(q_{n,K})$ and $H(\\rho_{m,n})p_m=p_n$, including the identity-index case. For $m\\ge n\\ge r$, the quotient law of [def-weil-pbc-adic-coefficient-datum] and the inverse-system convention [def-weil-inverse-system] give $\\rho_{n,r}\\rho_{m,n}=\\rho_{m,r}$, so the same theorem gives $H(\\rho_{n,r})H(\\rho_{m,n})p_m=H(\\rho_{m,r})p_m=p_r$. Naturality follows from its commuting-pair formula with $u=(K\\mapsto K_\\bullet)(f)$ and the natural quotient augmentation. Steps 2–3 are equalities of morphisms before projection. No completeness of $K$ or product preservation by $F$ has entered. For the specified projection normalization, reuse the proved private helpers derivedCounit_unit and limitCounitProjection_eq from CompletedDirectImageLimits [prop-weil-pbc-direct-image-limits]. The complex unit is the existing right-derived unit on the homotopy quotient. Its universal property follows from the K-injective derivability structure and completedRlim_computation; its canonical adjunction counit equation is derivedCounit_unit. The equality limitCounitProjection_eq identifies the actual published projection with evaluation of that same counit. Supply these as the normalization parameters of exact_tower_augmented_counit_evaluation. Its third, fourth and fifth conjuncts give the finite augmentation, transition, and composite-transition clauses. Expand the canonical comparison definitions; mapDerivedCategoryNatIso of the inverse comparison has inverse definitionally equal to mapDerivedCategoryNatIso of the forward comparison. This also handles equal indices. No hypotheses or definitions change.",
    "uses": [
-    "lem-coef-derived-tower-counit-projections",
-    "lem-sf-exact-pullback-counit-normalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization proof Step 6 / immersion comparison Step 5; agent-written expansion of the actual strict augmentation and its adjunction mate."
-   }
-  },
-  {
-   "text": "The target counit is a morphism in the derived strict tower category, so its evaluations commute with every evaluation transition. Its source is the constant tower on $L_Y\\widetilde HM$, hence has identity transitions. Its target transition is $H(\\rho_{m,n})$, by the termwise exact functor and its normalized evaluation identifications. Therefore $H(\\rho_{m,n})p_m=p_n$ for all $m\\ge n$. For $m\\ge n\\ge r$, the strict quotient law gives\n$$H(\\rho_{n,r})H(\\rho_{m,n})p_m=H(\\rho_{m,r})p_m=p_r;$$\nfor equal indices the transition is the identity. The quotient law here is induced by the coefficient quotient maps, whose composites are the direct quotient maps. Naturality in $K$ follows by applying the functors and natural transformations $i,j,v,\\varepsilon$ to any morphism $K\\to K'$; each displayed equality is an equality of their composites. All constructions are on unbounded derived categories. Neither invertibility of $\\operatorname{comp}_K$ nor product preservation by $F$ was used.",
-   "uses": [
-    "lem-coef-derived-tower-counit-projections",
-    "def-weil-inverse-system",
+    "lem-sf-exact-tower-augmented-counit-evaluation",
     "def-weil-pbc-adic-coefficient-datum",
-    "lem-sf-exact-pullback-counit-normalization"
+    "def-weil-inverse-system",
+    "prop-weil-pbc-direct-image-limits"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization proof Step 6 / immersion comparison Step 5; agent-written expansion of the actual strict augmentation and its adjunction mate."
+    "place": "Returned localization Step 6 / immersion-comparison Step 5; assembly of the normalized augmentation adjunct and coherent exact tower counit evaluation."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-completed-pullback",
-  "lem-sf-exact-pullback-counit-normalization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-coef-derived-tower-counit-projections",
+  "lem-sf-completed-augmentation-adjunct",
+  "lem-sf-exact-tower-augmented-counit-evaluation",
+  "def-weil-pbc-adic-coefficient-datum",
   "def-weil-inverse-system",
-  "def-weil-pbc-adic-coefficient-datum"
+  "prop-weil-pbc-direct-image-limits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-  "place": "Returned localization proof Step 6 / immersion comparison Step 5; agent-written expansion of the actual strict augmentation and its adjunction mate. Supporting constructions read in Stacks sites-cohomology.tex Tags 0940/0941 and derived.tex Tags 09T5/0FND; completion context in proetale.tex Tag 099N (2),(5)."
+  "place": "Returned localization Step 6 / immersion-comparison Step 5; assembly of the normalized augmentation adjunct and coherent exact tower counit evaluation.; P3 Lean assembly, 2026-10-23, using the already proved canonical counit/projection normalization helpers from CompletedDirectImageLimits."
  },
  "mathlib_searches": [
   {
@@ -186,33 +170,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sf-completed-pullback-mate-factorization",
   "worker": "stage1",
-  "summary": "Retained all hypotheses and conclusions; made the actual comparison into the adjunct of the pulled strict augmentation using the existing counit normalization. Expanded the mate, unit naturality, counit naturality and triangle identity to prove the factorization. Derived projection, transition and composite compatibility from the existing derived-tower counit-projection theorem. No new nodes. Clarified the statement citation for the assumed canonical adjunction, which the old ringed-limit citation alone does not state.",
-  "blueprint": "prop-sf-localization-all-stages, returned localization Step 6 / old immersion-comparison Step 5: ordinary-to-completed comparison, actual inverse-limit mate, finite projections and quotient transitions.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic K-injective model for the specified total right derived limit; the localization unit does not construct this model."
-   },
-   {
-    "node": "lem-coef-derived-tower-counit-projections",
-    "why": "Generic canonical derived constant-tower adjunction and evaluation of its counit as the specified inverse-limit projection; this normalizes the maps inside the localization argument."
-   }
-  ]
+  "summary": "Repair of the explicit 2026-10-22 re-split return. Kept the statement and its hypotheses verbatim. Extracted the actual K-injective augmented-adjunct identification and normalized exact-tower augmented counit evaluation as two comparable independent statement-only nodes. Retained the full mate/naturality/triangle calculation in the parent, now a short assembly. Original five-step argument is preserved verbatim in the report with an argument-to-node map. No Lean edits or compilation.",
+  "blueprint": "prop-sf-localization-all-stages returned Step 6 / immersion-comparison Step 5: actual comparison, inverse-limit mate, finite projections, strict composite transitions and naturality. New adjunct node carries old Step 1; new coherent evaluation node carries old Steps 4–5; parent keeps old Steps 2–3.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-coef-derived-tower-counit-projections"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NK-b134eaaa9",
-  "group": "NK",
+  "reviewer": "NT-cc-Q79-5bee742a2",
+  "group": "Q79",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-b134eaaa9 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read all five steps in full. This is an ordinary first split of an item that had no proof: NV created it unsplit in 9ae4c040, there is no repair note, the live copy is still unsplit, nothing cited is dropped, and no SGA source is used. The delivery adds no new nodes. Its only statement change adds lem-coef-derived-tower-counit-projections as the citation for the canonical adjunction Δ⊣Rlim. That is warranted, because the ringed-limit node gives only the K-injective model. The hypotheses and conclusions are unchanged, and the added dependency creates no cycle. Step 1 unwinds def-weil-pbc-completed-pullback and the α^F_K of lem-sf-exact-pullback-counit-normalization into L_Y(a_K)v_{Y,HK}, with a_K=H̃(i_K)j_K^{-1}. The definition's canonical map C→RlimΔC is the unit of the induced adjunction: Stacks Tag 0FND (derived.tex l.9517ff) builds the derived Hom bijection as the colimit over resolutions of the chain-level adjunct, so this is what the cited node states (C3 holds). Steps 2-3 are the mate/unit naturality and the triangle identity. I checked them, and they agree with the existing Mathlib leaf lem-pur-mate-unit-compatibility plus naturality of β. Citing that leaf would be optional and is not a fault. Step 4 gives ε_{H̃M}Δ_Y(α)=a_K, and evaluating at n with e_n(ε)=π_n gives p_nα=F_D(q_n). Step 5 uses naturality of the evaluation transitions on the counit morphism and the strict quotient composition law. I accept the tool uses of the ringed strict-tower limit and the derived-tower counit projections; both are generic category tools. Edge cases hold: g=id (β=id by the triangle identity), K=0, and the non-complete K=B[1/ℓ]. Mathlib searches cover all three kinds. None of the four mate and tower-normalization nodes I checked states this identity."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-5bee742a2 (reviewer sub-agent of L); spot-checked: This answers the human re-split note (released 2026-10-22; base = live NK five-step proof). The item statement, stmt_deps and Lean fields are unchanged against live, and the proof is now 2368 characters. Old step 1 (the augmentation is the derived adjunct; canonical C→RlimΔC = unit v by Stacks 0FND, derived.tex l.9517; K-injective representative r_nF(P→P_n)) became the new node lem-sf-completed-augmentation-adjunct (2304 characters). Old steps 4-5 (counit evaluation, projections, transitions, composites, naturality) became the general exact-functor node lem-sf-exact-tower-augmented-counit-evaluation (2704 characters). Old steps 2-3 (elementary mate/triangle substitutions) are kept verbatim in the parent; that is acceptable glue. Nothing was summarised or dropped, and neither node restates the item. I checked every identity of node 2 by hand: ε'Δ'(b)=a, the t/j/s coherences, p_nb=H(q_n) via e_n(ε)=π_n, the transitions, and the naturality L'H̃(u)b_i=b_{i'}H(f). Edge cases i=0, F=id, m=n, and K=B[1/ℓ] (zero tower, no completeness used) all hold. Duplicate candidates read and rejected: exact-pullback-counit-normalization, cbc constant-derived-limit-resolution-unit (advisory proof tool), completed-quotient-unit-normalization, counit-projections, tower-derived-evaluation-normalization, cochain-augmentation-descent, mate-unit-compatibility. No SGA used; Stacks 09T5 (l.9596) and 0941 (l.5067) verified. FIX: node 2 uses Δ'⊣L' from lem-coef-derived-tower-counit-projections, which assumes K-injective tower resolutions exist, but node 2 did not cite where they come from on module sheaves of an arbitrary small site. I added [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to its statement and stmt_deps; no cycle results.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SfCompletedPullbackMateFactorization",
@@ -238,5 +213,27 @@
   "group": "NE",
   "result": "pass",
   "note": "Node changes only in lean; statement verbatim; no stmt_dep added. All clauses match: limitMate = unit_Y ≫ Rlim(constantIso.hom (= j⁻¹) ≫ F^Tow ε_X); completionUnit = L_X(i_K)v_X; α^F = the dependency's exactAugmentation; conjuncts give the factorization, p_nα=F_D(q_n), transitions for all a≤b, composites, naturality in every unbounded K; no completeness/product/universe extras. completedConstantRlimUnit equals the derived-adjunction unit by the ∃! representative pin, so conjunct 1 is true. Helpers are canonical composites; only the theorem is sorry; docstrings complete. Advisories: conjunct 4 follows from 3; plain defs come from theorem-owned modules (stmt_dep from stage 1, not added); unused OfSequence import. No file changed, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261023T135218-L-2851938",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

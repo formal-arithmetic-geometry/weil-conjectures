@@ -5,24 +5,55 @@
  "status": "split",
  "statement": "For a commutative ring A of universe u+1, a natural number N and hA:(N:A)=0, and schemes of universe u [def-pc-scheme], define the following canonical-arrow interface in the ordinary unbounded etale module derived categories [def-weil-pbc-derived-categories], using inverse image [def-weil-pbc-inverse-image], derived tensor [def-kun-derived-tensor] and the projective line P=ProjectiveLine(S) with projection q [def-nagata-projective-space-base-change]. Write 1_T for the constant A-sheaf in degree zero and L_T for the concrete positive finite Tate sheaf in degree zero [def-asd-finite-etale-tate-sheaf]. Use the scalar Kummer class and its module-derived realization of [def-asd-ordinary-finite-p1-kummer-class]. A normalized transport system consists of inverse-image isomorphisms for roots and L_T, normalized by the roots' inclusion in G_m and by the pure-tensor section equation of [lem-asd-etale-finite-twist-pullback]. Use these to define the shifted twisted unit and the adjunct of a derived Chern class. The ordered projection map is the symmetry conjugate specified by [lem-amb-proper-coproducts-projection]; define G_q= Lq^* followed by tensoring on the right with L_P[2]. Define the projective-line exchange using [def-kun-unbounded-exchange] and the exact/left-derived inverse-image comparison, and define the comparison f_P^*G_q -> G_q' f^* from tensor pullback, the inverse-image composition square and the normalized shifted line transport.",
  "stmt_deps": [
-  "def-pc-scheme",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-kun-derived-tensor",
+  "def-kun-unbounded-exchange",
   "def-nagata-projective-space-base-change",
+  "def-pc-scheme",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-inverse-image",
-  "def-kun-derived-tensor",
-  "def-asd-finite-etale-tate-sheaf",
-  "lem-asd-etale-finite-twist-pullback",
   "lem-amb-proper-coproducts-projection",
-  "def-kun-unbounded-exchange",
-  "def-asd-ordinary-finite-p1-kummer-class"
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-z8-etale-single-pullback-comparisons"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
   "place": "Agent-written ordinary-etale coefficient interface for the diagonal-kernel proof; decomposition and trace in thm-amb-p1-decomposition.md and def-amb-p1-trace.md; Kummer sequence: Stacks Tag 03PL, etale-cohomology.tex, lemma-kummer-sequence; unbounded proper exchange: Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Name the canonical exact-derived single-degree comparison with the cached embeddings, then compose it with the exact/left-derived inverse-image comparison to obtain ordinaryFiniteSinglePullbackIso. Use this comparison and the cached embedding mapIso in ordinaryFiniteShiftedLinePullback. Unfolding the new definitions recovers the same canonical comparison and shifted transport; no mathematical datum changes.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-kummer-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct ordinaryFiniteUnitPullback by the cached ordinaryFiniteSinglePullbackIso followed by ordinaryFiniteSingleFunctor.mapIso of the canonical constant-sheaf comparison. The existing genericConstantIso expands to exactly these factors, so the morphism data are definitionally unchanged; the existing public import is preserved. The shifted-line and exact single-degree comparison equations expose the existing definitions. All equations follow by reflexivity. Reuse the HasSheafify and IsGrothendieckAbelian proposition instances stored in DerivedCategoryModule when elaborating these constructions, so the canonical localization arguments match before taking object maps. The inverse-image functor and every existing public signature remain unchanged.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the generic shifted-single comparison to the finite Tate line, supplying the existing cached single functors and their canonical comparison explicitly. The constructor applies shift commutation followed by the shifted comparison and coefficient isomorphism, exactly the original composite. Retain the public defining equation with its original reflexivity proof.",
+   "uses": [
+    "lem-z8-etale-single-pullback-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "lem-z8-etale-single-pullback-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+   "place": "The specified O(1) Kummer component and its base-change comparison."
+  },
+  "why": "Cache the same explicitly constructed canonical data and expose its defining equations; all old constructions unfold to the original formulas."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -92,7 +123,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "lean": {
@@ -116,14 +158,20 @@
    "AlgebraicGeometry.Etale.ordinaryFiniteTensorPullback",
    "AlgebraicGeometry.Etale.ordinaryFiniteTensorRightMapIso",
    "AlgebraicGeometry.Etale.ordinaryFiniteTwistedPullbackComparison",
-   "AlgebraicGeometry.Etale.ordinaryFiniteP1RightBaseChange"
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1RightBaseChange",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSingleExactPullbackIso",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSinglePullbackIso",
+   "AlgebraicGeometry.Etale.ordinaryFiniteUnitPullback_eq",
+   "AlgebraicGeometry.Etale.ordinaryFiniteShiftedLinePullback_eq",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSingleExactPullbackIso_eq"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Arrows.lean",
   "statement": "def ordinaryFiniteP1RightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) {S' S : Scheme.{u}} (f : S' ⟶ S) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤))) (K : DerivedCategoryModule A S) : (ordinaryFinitePullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)).obj ((ordinaryFiniteP1Right A N hA S).obj K) ≅ (ordinaryFiniteP1Right A N hA S').obj ((ordinaryFinitePullback A f).obj K)",
   "branch": "newtargets-dag",
   "by": "Q43",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": " A2 caches the canonical degree-zero functor and its single-degree comparisons without changing any existing signature or mathematical data. X7 constructs the canonical degree-zero functor with its named object as the explicit object field, caches the canonical Ext equivalence and exposes defining equations. No data or mathematical statement changes; the current constant unit is preserved and the same generic constant comparison is expressed by its cached factorization. F1 repair of C-240da preserves the current published constructions and every auxiliary constant; the canonical finite adjunction record and proved component equations live in the separate OrdinaryFiniteCoefficientRecords module. No interface or published definition body in this module is changed by F1. Z8 specializes only the shifted comparison through its definitionally identical generic construction. X7 comparison equations, local attributes and single-iso unit-pullback body are retained."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -140,5 +188,15 @@
   "group": "Q43",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, dependencies, source clauses, canonical maps, signatures, universes, edge cases, reports and pilot gates. All four modules passed scompile.py server confirmation within per-file limits. No fixes required; no repository mutations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
  }
 }

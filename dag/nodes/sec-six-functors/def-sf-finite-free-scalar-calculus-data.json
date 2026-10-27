@@ -1,0 +1,115 @@
+{
+ "id": "def-sf-finite-free-scalar-calculus-data",
+ "kind": "definition",
+ "title": "Conclusion data for normalized finite-free scalar calculus",
+ "statement": "Let C be an essentially small site in the universes of the constant-module sheaf derived categories [def-weil-sheaf-of-modules-category, def-weil-pbc-derived-categories], J its topology, and A and B commutative rings with an A-algebra structure and a specified finite basis of B indexed by Fin r. Ordinary extension E is sheafified postcomposition by B tensor_A -, with its scalar adjunction, and U is ordinary scalar restriction [def-pc-sheaf-restrict-scalars]. FiniteFreeScalarDescent packages exactness of E and U, the universal exact derived descent, the localized scalar adjunction with its explicit unit and counit factorizations, conservativity of derived U, the natural finite-basis biproduct decomposition pinned by its inclusions, and preservation of K-flatness [def-pc-kflat-complex]. FiniteFreeScalarTensorCalculus adds a sheaf balancing isomorphism U(EM tensor_B N) to M tensor_A UN with its two pure-tensor formulas. FiniteScalarDerivedTensorModels packages the corresponding natural derived isomorphism with its homogeneous-summand and localization-tensorator normalization. For arbitrary properties bcA and bcB of the two derived categories, FiniteFreeScalarCalculus adds this derived comparison, preservation of bcA into bcB, and preservation of each Tor interval tested against all degree-zero module sheaves [def-weil-finite-tor-amplitude]. These are conclusion structures over fixed existing functors and tensor products, with no selected data from existence theorems.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Finite-free extension proof paragraphs 1-2: the normalized scalar-calculus conclusion structures; extracted verbatim from the parent module."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-proetale-modules",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Finite-free extension proof paragraphs 1-2: the normalized scalar-calculus conclusion structures; extracted verbatim from the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of scalar module sheaves exact functor derived adjunction and normalized tensor cancellation",
+   "results": "8 hits: PresheafOfModules.free, PresheafOfModules.freeAdjunction, SheafOfModules.freeFunctor, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.restrictCoextendScalarsAdj, Algebra.TensorProduct.instFree",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact finite free extension of scalars sheaves derived tensor projection formula preserves Tor amplitude",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Module.Flat.rTensor_shortComplex_exact, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|isZero.*mapDerivedCategory|restrictScalars.*Reflects",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeDerivedScalarCalculus",
+  "date": "2026-10-25",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Finite-free extension proof paragraphs 1-2: the normalized scalar-calculus conclusion structures; extracted verbatim from the parent module.",
+   "via": [
+    "lem-sf-finite-free-derived-scalar-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeScalarCalculusData",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarCalculusData.lean",
+  "declaration": "AlgebraicGeometry.FiniteFreeScalarCalculus",
+  "statement": "structure FiniteFreeScalarCalculus [Algebra A B] (r : ℕ) (basis : Module.Basis (Fin r) A B) (bcA : ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)))) (bcB : ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)))) extends FiniteFreeScalarTensorCalculus J r basis",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.finiteScalarTensorModelsCompatible",
+   "CategoryTheory.FiniteScalarDerivedTensorModels",
+   "AlgebraicGeometry.finiteScalarExtension",
+   "AlgebraicGeometry.finiteScalarAdjunction",
+   "AlgebraicGeometry.finiteScalarExtension_additive",
+   "AlgebraicGeometry.finiteScalarPure",
+   "AlgebraicGeometry.finiteScalarTensorPure",
+   "AlgebraicGeometry.FiniteFreeScalarDescent",
+   "AlgebraicGeometry.FiniteFreeScalarTensorCalculus",
+   "AlgebraicGeometry.FiniteFreeScalarCalculus",
+   "AlgebraicGeometry.finiteScalarProEtaleSmall"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeScalarCalculusData vs clone item module (verbatim extraction, public re-export); item theorem signature vs clone (identical); two new sorried statements vs the item's FiniteFreeScalarCalculus fields; direct importers NormalizedStageCoefficientCalculus and RamifiedScalarSystemTranspose compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

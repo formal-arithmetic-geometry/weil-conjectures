@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-quasi-reductive-special-connectedness",
+ "kind": "statement",
+ "title": "Connected special fibre of a quasi-reductive model over a DVR",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $K$, residue field $k$, and an algebraic closure $\\bar k$ of $k$ [def-weil-algebraic-closure]. Let $\\mathcal G=\\operatorname{Spec}B$ be affine over $\\operatorname{Spec}A$ [def-weil-affine-spectrum], where $B$ is a finitely generated flat $A$-algebra [def-weil-pbc-flat-ring-map]. Suppose $\\mathcal G$ is equipped with multiplication $\\mathcal G\\times_A\\mathcal G\\to\\mathcal G$, an identity $\\operatorname{Spec}A\\to\\mathcal G$, and an inverse, satisfying the group diagrams of [def-sc-group-scheme] with base $\\operatorname{Spec}A$; the fibre product is [def-pc-fibre-product]. Assume its generic fibre $\\mathcal G_K$ is smooth [def-sbc-smooth-morphisms] and geometrically connected, meaning connected after every field extension of $K$. Let $H$ be the connected component containing the identity in the reduced scheme underlying $\\mathcal G_{\\bar k}$. Suppose $H$, with its induced group law, is reductive: smooth, connected, affine of finite type, with no nontrivial smooth connected normal unipotent closed subgroup; unipotent means unipotent matrices in a faithful linear representation. Assume\n$$\\dim H=\\dim\\mathcal G_K,$$\nwhere dimension is Krull dimension of the underlying scheme. Then $\\mathcal G_{\\bar k}$ is connected [def-weil-connected-scheme]. There is no restriction on the residue characteristic and no smoothness hypothesis on $\\mathcal G$ over $A$.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally: G. Prasad and J.-K. Yu, On quasi-reductive group schemes, Theorem 1.2(c), printed pp.1-2; finite-type proof in Proposition 4.4(i) and the first paragraph of Section 5, printed pp.8-9. Read online at https://arxiv.org/pdf/math/0405381. Geometric form obtained by the local extension of DVRs used at the start of Section 5. Milne iAG (2017), printed p.509, cites Prasad-Yu (2006)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-kun-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-group-model-potential-smooth-normalization] to the given affine flat finite-type group. Obtain $A\\to R$ with residue field the specified $\\bar k$, a smooth affine model $\\mathcal N$, and a finite surjective special-fibre homomorphism $q:\\mathcal N_{\\bar k}\\to\\mathcal G_{\\bar k}$. Its generic fibre is $\\mathcal G_K\\times_K L$, hence geometrically connected by the hypothesis on $\\mathcal G_K$. The target special fibre is literally the one in the conclusion, since the residue embedding was fixed.",
+   "uses": [
+    "lem-sfb-group-model-potential-smooth-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Proposition 3.4, Corollary A.4 and the local-extension reduction in Section 5"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-group-cover-reductive-neutral] to $q$ over the algebraically closed field $\\bar k$. Its source is smooth and its target has reduced neutral component $H$, reductive by hypothesis. It follows that $(\\mathcal N_{\\bar k})^0$ is reductive. This application permits inseparable finite kernels, including in characteristic $2$.",
+   "uses": [
+    "lem-sfb-finite-group-cover-reductive-neutral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Proposition 4.3 first paragraph, finite normalization case in Proposition 4.4(i)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-model-reductive-neutral-lift] over the henselian ring $R$. The preceding step verifies the special-fibre hypothesis and Step 1 verifies geometric connectedness of the generic fibre. Obtain a split reductive open affine subgroup $\\mathcal D\\subseteq\\mathcal N$ with $\\mathcal D_L=\\mathcal N_L$ and $\\mathcal D_{\\bar k}=(\\mathcal N_{\\bar k})^0$.",
+   "uses": [
+    "lem-sfb-smooth-model-reductive-neutral-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.5 and Proposition 4.3 first paragraph"
+   }
+  },
+  {
+   "text": "Let $E=R[\\mathcal N]$. By its integral-closure construction in Step 1, $E=C$ is a subring of its generic coordinate algebra $E[1/\\pi]=L[\\mathcal N_L]$; generic restriction identifies $\\mathcal N(R)$ with a subgroup $M\\subseteq\\mathcal N_L(L)$. Indeed, maps $E\\to R$ agreeing in $L$ agree in $R$. For each $f\\in E[1/\\pi]$, write $f=\\pi^{-a}e$ with $e\\in E$ and $a\\geq0$. Every $x\\in M$ satisfies $e(x)\\in R$, so $v(f(x))\\geq-a$. Thus $M$ is bounded in precisely the sense of [lem-sfb-split-reductive-integral-maximal-bounded]. The inclusion $\\mathcal D\\subseteq\\mathcal N$ gives $\\mathcal D(R)\\subseteq M$, and that lemma yields $M=\\mathcal D(R)$.",
+   "uses": [
+    "lem-sfb-split-reductive-integral-maximal-bounded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.7 and Proposition 4.3 second paragraph; coordinate argument for boundedness"
+   }
+  },
+  {
+   "text": "Every $\\bar k$-point of $\\mathcal N_{\\bar k}$ lifts to an $R$-point of $\\mathcal N$: since $\\mathcal N=\\operatorname{Spec}E$ is smooth, [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] says $E$ is a smooth $R$-algebra, and [lem-trf-henselian-smooth-algebra-lifting] with base ring $R$, target algebra $R$, and ideal its maximal ideal lifts any map $E\\to\\bar k$ to $E\\to R$. The pair is henselian because $R$ is henselian local. Step 4 says this lift lies in $\\mathcal D(R)$. Equality of its generic point with that of a $\\mathcal D$-section means equality of the $\\mathcal N$-sections (by the injectivity just checked). Hence its reduction lies in $\\mathcal D_{\\bar k}$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-henselian-smooth-algebra-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section 3.3 and Proposition 4.3; Stacks Tag 0H74, lemma-lift-smooth-henselian; Tags 01V6 and 02H6"
+   }
+  },
+  {
+   "text": "The smooth $\\bar k$-scheme $\\mathcal N_{\\bar k}$ has dense $\\bar k$-points by [lem-pc-rational-points-dense]. Its identity component is closed, and it is $\\mathcal D_{\\bar k}$ by Step 3. Step 5 puts every rational point in this closed subset, so density gives $|\\mathcal N_{\\bar k}|=|\\mathcal D_{\\bar k}|$. Thus $\\mathcal N_{\\bar k}$ is connected.",
+   "uses": [
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Proposition 4.3 second paragraph, using rational-point density instead of uniqueness of smooth models"
+   }
+  },
+  {
+   "text": "The map $q$ of Step 1 is continuous and surjective. If its target were the disjoint union of two nonempty open subsets, their inverse images would be disjoint nonempty opens covering $\\mathcal N_{\\bar k}$, contradicting Step 6. Therefore $\\mathcal G_{\\bar k}$ is connected, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Proposition 4.4(i), connectedness descent along the finite normalization cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-group-model-potential-smooth-normalization",
+  "lem-sfb-finite-group-cover-reductive-neutral",
+  "lem-sfb-smooth-model-reductive-neutral-lift",
+  "lem-sfb-split-reductive-integral-maximal-bounded",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-pc-rational-points-dense"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Prasad--Yu Proposition 4.4(i), via 3.4, 4.3, 3.5 and 3.7, read online; local copy WANTED. Coordinate boundedness and final section/density argument written out by Q23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsConnected\"",
+   "results": "{\"t\": \"2026-10-24T01:13:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsConnected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConnected_preimage_singleton\", \"AlgebraicGeometry.Scheme.Hom.isConnected_preimage\"], \"digest\": \"a25daf007284efc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are definitions of flat or quasi-finite morphisms, good reduction of Weierstrass curves, connected fibres already assumed geometrically connected, and abstract Galois categories. None gives connectedness from reductivity of the reduced special identity component and equality of dimensions."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?reductive|Prasad|special.*fib.*connect",
+   "results": "{\"t\": \"2026-10-24T01:13:43Z\", \"tool\": \"grep\", \"query\": \"quasi.?reductive|Prasad|special.*fib.*connect\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are definitions of flat or quasi-finite morphisms, good reduction of Weierstrass curves, connected fibres already assumed geometrically connected, and abstract Galois categories. None gives connectedness from reductivity of the reduced special identity component and equality of dimensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi reductive group scheme over a discrete valuation ring has connected special fibre",
+   "results": "{\"t\": \"2026-10-24T01:13:43Z\", \"tool\": \"leansearch\", \"query\": \"A quasi reductive group scheme over a discrete valuation ring has connected special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\", \"WeierstrassCurve.isGoodReduction_iff\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"Algebra.QuasiFinite.rec\"], \"digest\": \"10abfa373d8b92e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are definitions of flat or quasi-finite morphisms, good reduction of Weierstrass curves, connected fibres already assumed geometrically connected, and abstract Galois categories. None gives connectedness from reductivity of the reduced special identity component and equality of dimensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine flat group over a discrete valuation ring with connected smooth generic fibre and reductive reduced special identity component of equal dimension has connected special fibre",
+   "results": "{\"t\": \"2026-10-24T01:13:45Z\", \"tool\": \"leanfinder\", \"query\": \"Affine flat group over a discrete valuation ring with connected smooth generic fibre and reductive reduced special identity component of equal dimension has connected special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"c94de6f302da16c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are definitions of flat or quasi-finite morphisms, good reduction of Weierstrass curves, connected fibres already assumed geometrically connected, and abstract Galois categories. None gives connectedness from reductivity of the reduced special identity component and equality of dimensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connectedness of the special fibre of an affine flat model of a connected algebraic group when the reduced special identity component is reductive of the generic dimension",
+   "results": "{\"t\": \"2026-10-24T01:13:46Z\", \"tool\": \"leanfinder\", \"query\": \"Connectedness of the special fibre of an affine flat model of a connected algebraic group when the reduced special identity component is reductive of the generic dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\", \"CategoryTheory.PreGaloisCategory.nonempty_fiber_of_isConnected\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AddTorsor.connectedSpace\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction\", \"CategoryTheory.PreGaloisCategory.PreservesIsConnected.preserves\"], \"digest\": \"a9f7c1c2a52bb0f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are definitions of flat or quasi-finite morphisms, good reduction of Weierstrass curves, connected fibres already assumed geometrically connected, and abstract Galois categories. None gives connectedness from reductivity of the reduced special identity component and equality of dimensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat affine group scheme over a discrete valuation ring with smooth connected generic fibre and reductive special identity component of equal dimension has connected geometric special fibre",
+   "results": "{\"t\": \"2026-10-24T02:00:16Z\", \"tool\": \"leanfinder\", \"query\": \"A flat affine group scheme over a discrete valuation ring with smooth connected generic fibre and reductive special identity component of equal dimension has connected geometric special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\"], \"digest\": \"e9fa9550e6a29b49\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic normalization, flat morphisms, good reduction of elliptic curves and connectedness already assumed do not state this group-scheme connectedness theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi reductive group schemes over a valuation ring have connected special fibre",
+   "results": "{\"t\": \"2026-10-24T02:00:16Z\", \"tool\": \"leansearch\", \"query\": \"Quasi reductive group schemes over a valuation ring have connected special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\", \"WeierstrassCurve.isGoodReduction_iff\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\"], \"digest\": \"a7e80aa4877edbff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic normalization, flat morphisms, good reduction of elliptic curves and connectedness already assumed do not state this group-scheme connectedness theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsConnected\"",
+   "results": "{\"t\": \"2026-10-24T02:00:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsConnected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConnected_preimage_singleton\", \"AlgebraicGeometry.Scheme.Hom.isConnected_preimage\"], \"digest\": \"a25daf007284efc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic normalization, flat morphisms, good reduction of elliptic curves and connectedness already assumed do not state this group-scheme connectedness theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?reductive|Prasad|special.*fib.*connect",
+   "results": "{\"t\": \"2026-10-24T02:00:17Z\", \"tool\": \"grep\", \"query\": \"quasi.?reductive|Prasad|special.*fib.*connect\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic normalization, flat morphisms, good reduction of elliptic curves and connectedness already assumed do not state this group-scheme connectedness theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric connectedness of a group scheme special fibre without smoothness in residue characteristic two",
+   "results": "{\"t\": \"2026-10-24T02:00:22Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric connectedness of a group scheme special fibre without smoothness in residue characteristic two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.FormallyUnramified\", \"WeierstrassCurve.IsGoodReduction\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"WeierstrassCurve.reduction\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"c6c6328000793f36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic normalization, flat morphisms, good reduction of elliptic curves and connectedness already assumed do not state this group-scheme connectedness theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-chevalley-weyl-atlas",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions.",
+   "via": [
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quasi-reductive-special-connectedness",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Followed Prasad--Yu finite-model proof; extracted four genuine structural inputs: potential smooth normalization, finite-cover reductivity of the neutral component, split reductive neutral models, and maximal boundedness. Wrote coordinate boundedness, smooth henselian lifting, density and connected-image arguments explicitly. No Lean written or compiled.",
+  "blueprint": "Current latest blueprint searched. Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/moduli/PGL/Chevalley-atlas chain recorded in blueprint.from.place; the four inputs implement exclusion of extra special-fibre components. Inherited blueprint.from.node is null because the live creation chain is broken; retained as printed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine dictionary converts smoothness of the normalization into smoothness of its coordinate algebra for henselian lifting; no unit-specific substitute."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic henselian lifting theorem applied to R and its maximal ideal; not a replacement of any unit-route step."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic density of rational points on a smooth scheme over a separably closed field; used only after all integral sections have been controlled."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-pc-rational-points-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-fe40c3147",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-fe40c3147 (reviewer sub-agent of L); spot-checked: Read the delivery in full and checked it against Prasad–Yu (arXiv math/0405381, not local; fetched the PDF and read it with pdftotext): definition and Theorem 1.2 (pp.1-2), 3.1-3.7, 4.3-4.5, Section 5 first paragraph, and Appendix A.1-A.9 (A.2, A.4, A.6). The item statement and stmt_deps are byte-identical to the live base, which is unsplit with no repair note. The statement is Theorem 1.2(c) with finite type assumed; its dimension hypothesis is unused because it is automatic once the normalization is finite, and it is kept. Steps: (1) potential smooth normalization gives a henselian DVR R with residue field kbar, a smooth N and a finite surjective q on special fibres; (2) the finite-cover node applies with U = N_kbar, V = G_kbar and H reductive, and all hypotheses hold; (3) the neutral-model node gives a split reductive D with D_L = N_L and D_kbar = N_kbar°; (4) E = C lies in B_R⊗L, so N(R) is bounded and maximality gives N(R) = D(R) — calculation checked; (5) the smooth-iff lemma plus Stacks 0H74 lifting with A = R, I = m, henselian by def-weil-pbc-henselian-terminology; injectivity of generic restriction puts the reduction in D_kbar; (6) rational-point density gives N_kbar connected; (7) the continuous surjective image is connected. All four new nodes are statement-only, true and not restatements of the item: the normalization node via completion, Cohen extension and Cor A.4/Thm A.6 (finite ext of complete DVR keeps residue kbar; G_R reduced since flat with smooth generic fibre); the finite-cover node by image-of-U° finite index and R_u(U°) inside a finite kernel (tested on μ_p, Frobenius, SO_{2n+1}→Sp_{2n}); the neutral-lift node by PY 3.5 + SGA3 XIX 2.5 and splitting over a strictly henselian base (r = 0 allowed); the maximal-bounded node is PY 3.7 / BT 4.6.31, using BT's boundedness and a henselian base (G_m case checked). The DAG search (hyperspecial, maximal bounded, Raynaud, smoothening, neutral component, Chevalley scheme, isogeny, split reductive and others) found no duplicates; the near hits central-isogeny-solvable-normal-lift, reductive-normal-subgroup-torus-finiteness and smooth-group-proper-neutral state other things. Batch-5 flag on lem-trf-henselian-smooth-algebra-lifting: it is Stacks 0H74, generic henselian lifting with only pbc commutative-algebra proof_deps, neither a step of the trace formula nor of Poincaré duality, and no non-trf node states 0H74; accepted. The declared tool uses (smooth-iff, 0H74 lifting, rational density) are accepted as generic. blueprint.from.node null is inherited from the broken ancestor chain and propagated with exact places; not a delivery fault. Cosmetic only: a missing space in the maximal-bounded node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiReductiveSpecialConnectedness",
+  "declaration": "AlgebraicGeometry.quasiReductive_special_connected",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiReductiveSpecialConnectedness.lean",
+  "statement": "theorem quasiReductive_special_connected (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (Ω : Type u) [Field Ω] [Algebra (IsLocalRing.ResidueField A) Ω] [IsAlgClosure (IsLocalRing.ResidueField A) Ω] (B : Type u) [CommRing B] [Algebra A B] [Algebra.FiniteType A B] [Module.Flat A B] (G : Grp (Over (Spec (.of A)))) (e : G.X ≅ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A B)))) [Smooth (pullback.snd G.X.hom (Spec.map (CommRingCat.ofHom (algebraMap A K))))] [GeometricallyConnected (pullback.snd G.X.hom (Spec.map (CommRingCat.ofHom (algebraMap A K))))] (H : Grp (Over (Spec (.of Ω)))) (j : H ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom ((algebraMap (IsLocalRing.ResidueField A) Ω).comp (IsLocalRing.residue A))))).mapGrp.obj G) [IsClosedImmersion j.hom.hom.left] [IsReduced H.X.left] (hH : Set.range j.hom.hom.left = connectedComponent (GrpObj.onePoint ((Over.pullback (Spec.map (CommRingCat.ofHom ((algebraMap (IsLocalRing.ResidueField A) Ω).comp (IsLocalRing.residue A))))).mapGrp.obj G).X)) (hred : ReductiveTorusCentralizer.IsReductive H) (hdim : topologicalKrullDim H.X.left = topologicalKrullDim (pullback (C := Scheme.{u}) G.X.hom (Spec.map (CommRingCat.ofHom (algebraMap A K))))) : ConnectedSpace (pullback (C := Scheme.{u}) G.X.hom (Spec.map (CommRingCat.ofHom ((algebraMap (IsLocalRing.ResidueField A) Ω).comp (IsLocalRing.residue A)))))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The affine presentation is an isomorphism over Spec A. H is presented by a reduced closed subgroup immersion whose topological image is the connected component of the identity; this uniquely determines the reduced neutral subscheme and its induced group law. Reuses the landed reductivity and dimension declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba7585b39",
+  "group": "NX",
+  "result": "pass",
+  "note": "Item node, all 10 stmt_dep records, report and module read. Only diffs from live: the lean record plus two landed def stmt_deps (IsReductive, topologicalKrullDim) that the Lean uses; lean.statement verbatim. Clauses: IsDiscreteValuationRing A, IsFractionRing K, canonical ResidueField with IsAlgClosure Ω, FiniteType and Flat B with an Over-iso G.X ≅ Spec B, generic fibre Smooth and Mathlib GeometricallyConnected (checked: every field extension). H is a reduced closed-immersion Grp subobject with range the connected component of onePoint, which fixes the reduced structure and induced law and always exists; GrpObj.identityComponent is the open non-reduced notion, so no H4 duplicate. IsReductive body matches the node; dimensions are topologicalKrullDim; conclusion is ConnectedSpace of the geometric special fibre. No extra hypotheses; one universe u; edge cases (trivial G, char 2, non-reduced fibre, nonemptiness) covered. Sorry only; docstrings give source, blueprint and 7 steps; proof_dep modules are plain imports and exist in side-live. No change made, so no compile run."
+ }
+}

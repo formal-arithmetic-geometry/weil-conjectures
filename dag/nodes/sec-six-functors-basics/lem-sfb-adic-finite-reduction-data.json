@@ -1,0 +1,174 @@
+{
+ "id": "lem-sfb-adic-finite-reduction-data",
+ "kind": "statement",
+ "title": "Canonical normalized scalar maps and finite reduction tower",
+ "statement": "On a small ringed site the ordinary tensor unit is uniquely specified by insertion of one. Restriction composes by the identity on sections. Scalar extension composes by the balancing map $(v\\otimes s)\\otimes m\\mapsto v g(s)\\otimes m$. These induce the unique derived units and reassociations specified on K-flat representatives. On the coefficient-sized etale and pro-etale sites of a scheme, the recorded comparison inverse image commutes with scalar extension by the uniquely normalized insertion comparison. For a commutative ring $A$ and ideal $J$, use the actual maps $A\\to A/J^{n+1}$ and their quotient factors to define the derived reductions, the reassociations $\\rho_{m,n}$, and the inverse tower over $A$ using these units and exact scalar restriction. Every construction and signature is unchanged from the parent module. The comparison data now supplies its finite-limits proof explicitly; proof irrelevance makes its value definitionally identical to the old value. The notions and ambient categories are those of [def-pc-scheme, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, lem-pur-derived-change-of-rings, def-weil-pbc-site-comparison-morphism, def-weil-pbc-algebra-hom-quotient]. The etale and pro-etale sites are [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], and the complete-object predicate is the one supplied by [lem-weil-pbc-constant-completion-equivalence, def-weil-pbc-locally-derived-ringed-ideal-complete].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes; Tag 09AL, lemma-compare-constructible-derived; parent proof steps specified below."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
+ ],
+ "proof": [
+  {
+   "text": "Construct ordinary tensor units, scalar reassociation and coefficient comparison by their tensor/restriction adjunctions. The scalar unit is insertion of one and reassociation is the pure-tensor balancing map; their unique sectionwise normalizations determine the comparisons. Derive the tensor/restriction adjunction on K-flat representatives, use change_preserves_kFlat_quasiIso, and transport the unit along the unique left-derived isomorphism. Perform the unit calculation over abstract abelian categories in a proved private helper before specialization. Use the resolving-class uniqueness interface for natural transformations. For scalar composition use resolving_comparison_iso on representatives where both computations are invertible, extend its equation to every representative by naturality, and assemble the composition over abstract ordinary functors. For the derived scalar/pullback square apply the already proved private resolving_module_square_iso from [lem-weil-pbc-constant-completion-equivalence]; pull_flat_kFlat and change_flat_kFlat supply the four invertible computations. Keep the termwise square and composition typed with explicit composite cochain functors through definitional wrappers. Name the four existing normalization predicates so the canonical choices retain precisely their former specifications. Use the native Mathlib abelian instance and state the existing section-module structure explicitly. These wrappers and instance data are definitionally equal to the original expressions. Use the actual quotient maps, their composition equalities and these normalized comparisons to construct rho and the quotient transition. The original module publicly reexports the moved construction API; all original mathematical statements and data values are retained. The private left-derived uniqueness wrapper is defined by the original Mathlib uniqueness isomorphism and has a proved computation formula. Folding it and ordinary adjunctions prevents repeated expansion. Restriction composition reuses resCompIso and its section formula; uniqueness follows by the faithful underlying functor. Package flat-term K-flat representatives in a private proposition structure. Its proved resolution, scalar and geometric preservation, and computation APIs supply the resolving class and invertible comparisons in the two derived comparison proofs. The scalar-composition normalization proof applies those APIs directly. A proved generic helper reverses the comparison equation and converts its resolving-class guard before specializing to native sheaf categories. Private construction helpers use no_expose; public exposure and visibility are preserved. The scalar Hom equivalence projects from the named adjunction, and its pointwise lemmas keep that construction folded. A private constructed module-restriction helper separates ring-linearity from ordinary adjoint uniqueness. Ordinary adjoint uniqueness and transport of its sectionwise normalization are proved over abstract categories before specializing to the scalar square. The derived functor and its computation comparison project from one named copy of the original DerivedPull package. Inside the derived proofs, explicitly retain the native preadditive field in the local native abelian record, as in the adopted ConstantCompletionEquivalence proof.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-resolving-class-derived-adjunction",
+    "lem-weil-pbc-ringed-topos-induced-modules",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-route-small-model-comparison-pullback-preserves-finite-limits",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-resolving-class-derived-adjunction",
+  "lem-weil-pbc-ringed-topos-induced-modules",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-route-small-model-comparison-pullback-preserves-finite-limits",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C2 and 09AL; explicit normalization and decomposition of parent proof by T1.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded Tor amplitude survives nilpotent coefficient reduction and derived inverse limit",
+   "results": "Eight results: ordinary AdicCompletion and TensorProduct direct-limit results; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE gives bounded representatives only.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived complete constructible complex reductions modulo powers ideal bounded Tor amplitude",
+   "results": "Eight results: localCohomology and ordinary AdicCompletion results; none concerns derived sheaf reduction towers.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*finite.*reduction|nilpotent.*[Tt]or|[Tt]or.*nilpotent",
+   "results": "Nine unrelated Mathlib hits, in JordanChevalley, Lie weights, WittVector, divided powers, smooth rings, and factorial nat casts.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicConstructibleFiniteReductions",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof invoking Stacks 09C2 in the integral criterion; Canonical normalized scalar maps and finite reduction tower",
+   "via": [
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteReductionData",
+  "file": "lean/Sheaf/Paper/AdicFiniteReductionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit_existsUnique",
+  "statement": "theorem adicFiniteOrdinaryUnit_existsUnique {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :\n    ∃! e : 𝟭 (Mod R) ⟶ change f ⋙ res f,\n      ∀ M : Mod R, (underlying R).map (e.app M) = insertion f M",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnitComplex",
+   "AlgebraicGeometry.Scheme.adicFiniteUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteUnit",
+   "AlgebraicGeometry.Scheme.adicFiniteResComp_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteResComp",
+   "AlgebraicGeometry.Scheme.adicFiniteDresComp",
+   "AlgebraicGeometry.Scheme.adicFiniteChangeComp_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteChangeComp",
+   "AlgebraicGeometry.Scheme.adicFiniteExtendComp_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteExtendComp",
+   "AlgebraicGeometry.Scheme.adicFiniteComparisonData",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryPullback",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryPullbackAdditive",
+   "AlgebraicGeometry.Scheme.adicFinitePullback",
+   "AlgebraicGeometry.Scheme.adicFinitePullbackComparison",
+   "AlgebraicGeometry.Scheme.adicFiniteConstantMap",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison",
+   "AlgebraicGeometry.Scheme.adicFiniteComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteComparison",
+   "AlgebraicGeometry.Scheme.adicFiniteCoeff",
+   "AlgebraicGeometry.Scheme.adicFiniteQuotient",
+   "AlgebraicGeometry.Scheme.adicFiniteFactor",
+   "AlgebraicGeometry.Scheme.adicFiniteQuotientComp",
+   "AlgebraicGeometry.Scheme.adicFiniteFactorComp",
+   "AlgebraicGeometry.Scheme.adicFiniteExtension",
+   "AlgebraicGeometry.Scheme.adicFiniteConstantComp",
+   "AlgebraicGeometry.Scheme.adicFiniteExtensionComp",
+   "AlgebraicGeometry.Scheme.adicFiniteAmbient",
+   "AlgebraicGeometry.Scheme.adicFiniteComplete",
+   "AlgebraicGeometry.Scheme.adicFiniteEtale",
+   "AlgebraicGeometry.Scheme.adicFiniteReduction",
+   "AlgebraicGeometry.Scheme.adicFiniteRho",
+   "AlgebraicGeometry.Scheme.adicFiniteUnderlying",
+   "AlgebraicGeometry.Scheme.adicFiniteTransition",
+   "AlgebraicGeometry.Scheme.adicFiniteComplexSquare",
+   "AlgebraicGeometry.Scheme.adicFiniteUnitFormula",
+   "AlgebraicGeometry.Scheme.adicFiniteExtendCompFormula",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparisonFormula",
+   "AlgebraicGeometry.Scheme.adicFiniteComparisonFormula",
+   "AlgebraicGeometry.Scheme.adicFinitePullbackData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-52b50",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T100410-L-14247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-52b50",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T100410-L-14247",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs published (identical); moved Data module vs published item prefix per declaration (named predicates/defeq bodies only); 4 new sorry statements vs Stacks 09C2/09AL and their nodes; 3 direct + 3 transitive importers compiled against delivery (all OK)"
+ }
+}

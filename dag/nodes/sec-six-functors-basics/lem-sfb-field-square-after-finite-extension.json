@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-field-square-after-finite-extension",
+ "kind": "statement",
+ "title": "Square difference after a finite field extension",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X_i\\to\\operatorname{Spec}k$ for $i=1,2,3$ be smooth separated morphisms of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] whose schemes are geometrically integral over $k$ [def-pc-geometrically-irreducible], meaning integral after every field extension. Separated means that the diagonal is a closed immersion. Put $C=X_1\\times_kX_2\\times_kX_3$, $P=X_1\\times_kX_1\\times_kX_2\\times_kX_2$, and let $\\pi:P\\times_kX_3\\to P$ be projection. For an invertible module $A$ on $C$ [def-sc-invertible-module], write $r_{ab}:P\\times_kX_3\\to C$, $r_{ab}(x_0,x_1,y_0,y_1,z)=(x_a,y_b,z)$ for $a,b\\in\\{0,1\\}$, and define its square difference on $P\\times_kX_3$ by $$D(A)=r_{00}^*A\\otimes r_{11}^*A\\otimes(r_{01}^*A)^{-1}\\otimes(r_{10}^*A)^{-1},$$ where inverse means the dual invertible module and all products, pullbacks and tensors are those of [def-pc-fibre-product, def-pc-module-pullback, def-pur-sheaf-tensor-product]. Then there exist a finite field extension $K/k$ [def-pc-field-extension, def-pc-field-tower], i.e. $[K:k]<\\infty$, and an invertible module $N_K$ on $P_K=P\\times_k\\operatorname{Spec}K$ such that, writing $A_K$ for the pullback of $A$ to $C_K=C\\times_k\\operatorname{Spec}K$ and $D(A_K)$ for the same square difference formed over $K$ with the base-changed maps $(r_{ab})_K$, one has $D(A_K)\\cong\\pi_K^*N_K$ on $P_K\\times_KX_{3,K}$.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo Proposition 5.2(ii), Claim 5.2.1 and the first paragraph of its proof, printed pp.11-12 (finite-extension square assertion); local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-sfb-product-square-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "We will use the following geometry throughout, over $k$ and over any later field extension. Finite products of the factors are smooth by smooth base change and composition, and geometrically irreducible by the product theorem. Smooth geometric normality supplies geometric reducedness, so these products are geometrically integral and normal. They are locally Noetherian: on affine charts a finitely presented algebra over a field is finitely generated, hence the locally-finite-type Noetherian lemma applies. Each product projection used below is smooth, hence flat and locally of finite presentation; it is locally of finite type. Nonempty affine opens of the factors remain geometrically integral: their base changes are nonempty opens in integral schemes. Restrictions of smoothness to opens follow directly from its affine-local definition. Finite-type composition and base change give finite type for the products. Their diagonals are composites of base changes of the factor diagonals, hence are closed immersions; this verifies separatedness of $Z$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sc-geometrically-irreducible-product",
+    "lem-trf-smooth-geometrically-normal",
+    "pqf-lem-locnoeth-lft",
+    "lem-pc-smooth-flat",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  },
+  {
+   "text": "Apply the finite-closed-set rational-lifts lemma to the surjective morphism $X_1\\amalg X_2\\amalg X_3\\to\\operatorname{Spec}k\\amalg\\operatorname{Spec}k\\amalg\\operatorname{Spec}k$, with each factor mapped to its corresponding component and with the three points as the finite closed set. These schemes are finite type: the given finite-presentation maps are quasi-compact and have finitely generated affine coordinate algebras. The lemma gives one finite extension $K/k$ and points $x_*\\in X_{1,K}(K)$, $y_*\\in X_{2,K}(K)$ and $z_*\\in X_{3,K}(K)$. Work over $K$ from now on and suppress its subscript. Choose affine neighbourhoods $U\\subset X_1$ of $x_*$ and $V\\subset X_2$ of $y_*$. They have the geometry checked in Step 1; affineness and the finite-presentation affine charts show finite type.",
+   "uses": [
+    "lem-sfb-finite-closed-set-rational-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  },
+  {
+   "text": "On $U\\times_KV\\times_KX_3$ restrict $A_K$ to $A'$ and form the invertible module $$B=A'\\otimes a^*(A')^{-1}\\otimes b^*(A')^{-1}\\otimes c^*A',$$ where $a(x,y,z)=(x_*,y,z)$, $b(x,y,z)=(x,y_*,z)$, and $c(x,y,z)=(x_*,y_*,z)$. Pullback preserves tensor products and their invertibility. On $x=x_*$ the first two factors cancel and the last two cancel; on $y=y_*$ the first and third cancel and the second and fourth cancel. Thus $B$ is trivial on both coordinate slices. These are isomorphisms of invertible modules, obtained by reordering tensor factors and evaluation against their duals, rather than assertions about numerical classes.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  },
+  {
+   "text": "Put $Z=X_3\\times_KX_3$ and let $q_0,q_1:U\\times_KV\\times_KZ\\to U\\times_KV\\times_KX_3$ select the first or second $X_3$ coordinate. Set $H=q_0^*B\\otimes(q_1^*B)^{-1}$. The tensor identities and Step 3 make $H$ trivial on both $x=x_*$ and $y=y_*$. Step 1 gives that $Z$ is smooth separated finite type and geometrically integral. The clopen-locus lemma therefore applies to $(U,V,Z,H)$. The point $(z_*,z_*)$ lies in $E(H)$, since the two pulled-back factors agree there and cancel. An integral scheme is connected; a nonempty open and closed subset of a connected space is the whole space. Thus $E(H)=|Z|$, in particular the fibre of $H$ at the generic point of $Z$ is trivial.",
+   "uses": [
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  },
+  {
+   "text": "Apply generic-line pullback descent to $f:U\\times_KV\\times_KZ\\to Z$ and $H$. Step 1 supplies locally Noetherian source and target and normal integral target. The projection is flat and locally of finite type, and its fibres $(U\\times_KV)_{\\kappa(t)}$ are nonempty integral by geometric integrality. Step 4 supplies generic-fibre triviality. We obtain $H\\cong f^*J$ for an invertible $J$ on $Z$. Pull back along $s:Z\\to U\\times_KV\\times_KZ$, $s(t)=(x_*,y_*,t)$. Since $fs=\\mathrm{id}_Z$ and $s^*H$ is trivial by the slice triviality, $J\\cong\\mathcal O_Z$. Consequently $H$ is trivial on the entire product.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  },
+  {
+   "text": "Pull $H\\cong\\mathcal O$ back along $(x,y,z)\\mapsto(x,y,z,z_*)$. If $B_*=B|_{U\\times_KV\\times\\{z_*\\}}$ and $p:U\\times_KV\\times_KX_3\\to U\\times_KV$, this says $B\\otimes(p^*B_*)^{-1}\\cong\\mathcal O$, hence $B\\cong p^*B_*$. On $Q=U\\times_KU\\times_KV\\times_KV$ take the same four-term square as in the statement. Each correction $a^*A'$, $b^*A'$, $c^*A'$ in Step 3 omits $x$, $y$, or both. Its four square factors therefore cancel in pairs: for a factor independent of $x$, $r_{00}=r_{10}$ and $r_{11}=r_{01}$ on that factor, and for one independent of $y$, $r_{00}=r_{01}$ and $r_{11}=r_{10}$. It follows that $D(A_K)|_{Q\\times_KX_3}\\cong D(B)\\cong\\pi_Q^*D(B_*)$, where $D(B_*)$ is an invertible module on $Q$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  },
+  {
+   "text": "The nonempty open $Q\\subset P_K$ contains the generic point $\\eta$ of the integral scheme $P_K$. Restricting Step 6 to the fibre over $\\eta$ shows that $D(A_K)_\\eta$ is pulled back from a one-dimensional $\\kappa(\\eta)$-vector space, hence is trivial after choosing a basis. Apply generic-line pullback descent again, now to $\\pi_K:P_K\\times_KX_{3,K}\\to P_K$. Step 1 gives a normal integral locally Noetherian base and locally Noetherian source; this projection is flat and locally of finite type and every residue-field fibre is nonempty integral because $X_{3,K}$ is geometrically integral. The lemma gives an invertible module $N_K$ on all of $P_K$ and $D(A_K)\\cong\\pi_K^*N_K$, as required. The extension $K/k$ is the finite extension already constructed in Step 2.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.2, proof of Claim 5.2.1, smooth finite-presentation specialization; tensor rigidification and diagonal argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-trf-smooth-geometrically-normal",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-smooth-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-closed-set-rational-lifts",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-birigidified-affine-triviality-locus",
+  "lem-sfb-normal-noetherian-generic-line-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo Claim 5.2.1, online source read; explicit smooth-case assembly using its clopen input and Stacks Tag 0BD7; local Guo copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on three smooth separated finite presentation geometrically integral schemes over a field has a square difference pulled back after a finite field extension",
+   "results": "{\"t\": \"2026-10-24T03:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle on three smooth separated finite presentation geometrically integral schemes over a field has a square difference pulled back after a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\"], \"digest\": \"aec557e6745ae40f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned pullback-carrier and tensor declarations do not state the geometric square theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Picard square difference pullback invertible module finite field extension",
+   "results": "{\"t\": \"2026-10-24T03:59:28Z\", \"tool\": \"loogle\", \"query\": \"Picard square difference pullback invertible module finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Picard`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle reported unknown identifier Picard and no theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "squareDifference|theorem.of.the.square|Picard.admiss|Norm.*Pic",
+   "results": "{\"t\": \"2026-10-24T03:59:28Z\", \"tool\": \"grep\", \"query\": \"squareDifference|theorem.of.the.square|Picard.admiss|Norm.*Pic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no relevant Mathlib source declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite extension field square theorem for line bundle on product of smooth geometrically integral schemes",
+   "results": "{\"t\": \"2026-10-24T03:59:29Z\", \"tool\": \"leansearch\", \"query\": \"finite extension field square theorem for line bundle on product of smooth geometrically integral schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.isSquare_two_iff\", \"FiniteField.isSquare_iff\", \"FiniteField.isSquare_of_char_two\", \"FiniteField.instFieldExtension\", \"FiniteField.isSquare_neg_one_iff\", \"FiniteField.Extension\", \"FiniteField.instFiniteExtension_1\", \"FiniteField.isSquare_odd_prime_iff\"], \"digest\": \"75e7429c6fff5a90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-field scalar and quadratic-square results, not this line-bundle theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A doubly rigidified line bundle on the product of two smooth geometrically integral varieties with a connected smooth parameter scheme is trivial if one parameter fibre is trivial",
+   "results": "{\"t\": \"2026-10-24T04:27:48Z\", \"tool\": \"leanfinder\", \"query\": \"A doubly rigidified line bundle on the product of two smooth geometrically integral varieties with a connected smooth parameter scheme is trivial if one parameter fibre is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"hom_trivializationAt\", \"hom_trivializationAt_baseSet\", \"hom_trivializationAt_target\", \"Bundle.Trivial.trivialization.isLinear\", \"hom_trivializationAt_apply\", \"Bundle.Trivial.continuousLinearEquivAt_trivialization\", \"Bundle.Trivial.symmₗ_trivialization\"], \"digest\": \"c766df7988fb2823\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.of.the.(cube|square)|rigidif|Picard|IsInvertible",
+   "results": "{\"t\": \"2026-10-24T04:30:45Z\", \"tool\": \"grep\", \"query\": \"theorem.of.the.(cube|square)|rigidif|Picard|IsInvertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trivial fibre locus of a line bundle on a product of two geometrically integral affine varieties rigidified along two rational point slices is open and closed",
+   "results": "{\"t\": \"2026-10-24T04:30:45Z\", \"tool\": \"leansearch\", \"query\": \"The trivial fibre locus of a line bundle on a product of two geometrically integral affine varieties rigidified along two rational point slices is open and closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.open_baseSet\", \"Pretrivialization.open_target\", \"Pretrivialization.open_baseSet\", \"FiberBundle.prod_trivializationAt'\", \"FiberPrebundle.isOpen_source\", \"FiberBundleCore.open_source'\", \"Trivialization.recOn\", \"VectorBundleCore.trivializationAt\"], \"digest\": \"b5d2e7e053760895\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-24T04:30:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInvertible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"VectorField.pullback_eq_of_not_isInvertible\", \"VectorField.pullbackWithin_eq_of_not_isInvertible\"], \"digest\": \"21a371168037510a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidif|Picard|trivial.*locus|locus.*trivial",
+   "results": "{\"t\": \"2026-10-24T04:31:10Z\", \"tool\": \"grep\", \"query\": \"rigidif|Picard|trivial.*locus|locus.*trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean\", \"Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean\", \"Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\"], \"digest\": \"3664ea62718090c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theorem of the cube for line bundles on smooth varieties implies a square condition after finite field extension",
+   "results": "{\"t\": \"2026-10-24T04:31:10Z\", \"tool\": \"leansearch\", \"query\": \"The theorem of the cube for line bundles on smooth varieties implies a square condition after finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.c_relation_of_char_two\", \"FiniteField.isSquare_odd_prime_iff\", \"FiniteField.isSquare_of_char_two\", \"FiniteField.isSquare_two_iff\", \"FiniteField.isSquare_iff\", \"WeierstrassCurve.c_relation_of_char_three\", \"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\", \"IsSepClosed.exists_eq_mul_self\"], \"digest\": \"6015ebff8fe62b3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard group of a product of two varieties modulo line bundles from either factor has no variation in a connected smooth algebraic family",
+   "results": "{\"t\": \"2026-10-24T04:31:10Z\", \"tool\": \"leansearch\", \"query\": \"Picard group of a product of two varieties modulo line bundles from either factor has no variation in a connected smooth algebraic family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.ext_iff\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk.congr_simp\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.unitsQuotEquivRelPic\", \"CommRing.Pic.mk_tensor\"], \"digest\": \"5f0c0121df20377b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After a finite extension of a field, the four term square difference of a line bundle on a product of three smooth geometrically integral schemes is pulled back from the first two doubled factors",
+   "results": "{\"t\": \"2026-10-24T04:31:12Z\", \"tool\": \"leanfinder\", \"query\": \"After a finite extension of a field, the four term square difference of a line bundle on a product of three smooth geometrically integral schemes is pulled back from the first two doubled factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\"], \"digest\": \"15c5f14bcfc033fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a family of invertible sheaves on two geometrically normal affine varieties trivial on both coordinate axes is trivial is open and closed in a smooth integral parameter scheme",
+   "results": "{\"t\": \"2026-10-24T04:31:13Z\", \"tool\": \"leanfinder\", \"query\": \"The locus where a family of invertible sheaves on two geometrically normal affine varieties trivial on both coordinate axes is trivial is open and closed in a smooth integral parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"292072a2a954c4d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T04:32:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mul_eq_tensor\"], \"digest\": \"e7cb255b44488ed1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-product-square-power",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo Proposition 5.2(ii), Claim 5.2.1: after finite field extension, the square condition holds for the line bundle; this is the finite-extension input to the item.",
+   "via": [
+    "lem-sfb-field-product-square-power"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-square-after-finite-extension",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Isolated only the nonproper doubly rigidified-family clopen-locus input as one statement-only node. Explicitly normalized A, applied the diagonal and connectedness argument, trivialized the resulting family via generic-line descent and a section, expanded all square cancellations, and used generic-line descent to restore the full factors. All other inputs reuse existing nodes. No Lean compilation.",
+  "blueprint": "This auxiliary has no imported blueprint ancestor: blueprint_refs.py ancestor returns None, as in the live record. It serves Guo Proposition 5.2 Claim 5.2.1 below the field-product-square-power auxiliary of sk-thm-sf-ctf-stability. The current unit and chapter were read; their route and statements are unchanged. The seven steps realize the source rigidification/clopen/diagonal/square argument in the already-smooth case.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme geometry or invertible-module tensor identities used as a black box to check the smooth-case auxiliary; no node of the item unit supplies this fact and no unit step is replaced."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic permanence of geometric properties for product and field-extension hypothesis checks; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic permanence of geometric properties for product and field-extension hypothesis checks; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-trf-smooth-geometrically-normal",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NW-5b5627245",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-5b5627245 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-birigidified-affine-triviality-locus and the statements of all 11 cited nodes in full. I also read Guo (amplenew-1, March 2026) §5.1, Prop 5.2 and the proof of Claim 5.2.1 on pp.11-13. The repository has no local copy of Guo, so the WANTED line is justified. The item statement is unchanged. It is Guo's square sq(L_K;X1_K,X2_K), and the signs of D(A) match s(L;X1,X2). The route follows Guo's proof: a rational point after a finite extension, rigidification, the clopen locus E in Z=X3xX3, the diagonal point (z*,z*) in E, connectedness, a section of X3. Because the factors are already smooth, Guo's perfect-closure/Chow/Hartogs reduction is not needed. Guo's shrinking step (i) is done explicitly with Tag 0BD7, applied in Steps 5 and 7. Step checks: Step 2 applies finite-closed-set-rational-lifts to X1⊔X2⊔X3 → three copies of Spec k; this map is surjective because integral schemes are nonempty. Step 3: both slice cancellations of B are correct (a=id and b=c on x=x*; b=id and a=c on y=y*). Step 4: the new node's hypotheses hold for (U,V,Z,H). Step 5: 0BD7 gives H≅f*J, and the section (x*,y*,id) trivializes J. Step 6: in the square, a factor that does not depend on x cancels in the pairs r00/r10 and r11/r01, and a factor that does not depend on y cancels in r00/r01 and r11/r10, so D(B)≅π_Q*D(B*). Step 7: the generic point η lies in Q; 0BD7 for π_K then gives N_K. proof_deps equals the union of the step uses. The new node satisfies B1-B3, has searches with all three kinds of tool (no match), and has correct created/blueprint fields. Small-case tests: a point factor; T a point; U=V=E∖O, where the doubly rigidified Pic is ≅End(E), a discrete invariant, and a constant Poincaré family gives an empty E; G_m/A^1. Arithmetic twists at non-closed points cannot occur, by H^1(Gal, units) and Rosenlicht. The node is true, is Guo's representability/see-saw input, and is strictly smaller than the item. No duplicate: the cube, see-saw, relative-Picard and normal-square-descent nodes all need proper factors, group schemes or a given square. The nine declared tool uses are generic scheme/module facts and are accepted. Batch 5: lem-trf-smooth-composition (01VA), lem-trf-smooth-geometrically-normal (056T) and lem-trf-flat-module-torsionfree-domain (reached through lem-sfb-normal-noetherian-generic-line-pullback) are general commutative algebra/scheme facts. None is a step of the trace formula or Poincaré duality, so these citations are fine. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldSquareAfterFiniteExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_fieldSquare_after_finite_extension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.squareDifferenceAfterBaseChange",
+   "AlgebraicGeometry.Scheme.Modules.exists_fieldSquare_after_finite_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldSquareAfterFiniteExtension.lean",
+  "statement": "theorem exists_fieldSquare_after_finite_extension (k : Type u) [Field k] (X₁ X₂ X₃ : Over (Spec (CommRingCat.of k))) [Smooth X₁.hom] [IsSeparated X₁.hom] [LocallyOfFinitePresentation X₁.hom] [QuasiCompact X₁.hom] [GeometricallyIntegral X₁.hom] [Smooth X₂.hom] [IsSeparated X₂.hom] [LocallyOfFinitePresentation X₂.hom] [QuasiCompact X₂.hom] [GeometricallyIntegral X₂.hom] [Smooth X₃.hom] [IsSeparated X₃.hom] [LocallyOfFinitePresentation X₃.hom] [QuasiCompact X₃.hom] [GeometricallyIntegral X₃.hom] (A : ((X₁ ⨯ X₂) ⨯ X₃).left.Modules) [IsInvertible A] : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K) (_ : Module.Finite k K), ∃ N : (Limits.pullback (squareParameter X₁ X₂).hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules, IsInvertible N ∧ Nonempty (squareDifferenceAfterBaseChange X₁ X₂ X₃ (Spec.map (CommRingCat.ofHom (algebraMap k K))) ((tensorPullback (pullback.fst ((X₁ ⨯ X₂) ⨯ X₃).hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj A) ≅ (tensorPullback (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map (squareProjection X₁ X₂ X₃)).left)).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the existing squareParameter, squareCoordinate, squareDifference and squareProjection through the definition node def-sfb-product-square-coordinates. The helper expands the square on the base change using the actual base-changed coordinate maps and the pulled-back module A_K; it contains no postponed data or arbitrary maps. Repair of H2: no statement dependency on the normal-product-square-descent theorem remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-144acbe39",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Re-delivery of d626a2fa: H2 resolved (item stmt_deps now cite new def-sfb-product-square-coordinates with existing:true record on the four landed plain defs in NormalProductSquareDescent; normal-product-square-descent theorem dropped); H9 resolved (unused private imports and FieldTower removed; NormalProductSquareDescent re-exports the needed classes; worker reports clean scompile). Item differs from side-live only in stmt_deps/lean; lean.statement verbatim; maths unchanged and correct (smooth, separated, LFP+QC, geometrically integral; Module.Finite K in Type u; literal A_K and base-changed r_ab; signs +,+,-,- with homObj duals; Nonempty iso; single sorry). F1 fixed: the new node claimed left-associated tensor, but Mathlib ⊗ is infixr (Monoidal/Category.lean:117), so squareDifference is right-associated; fixes/def-sfb-product-square-coordinates.json changes only that sentence to right association with the explicit formula. No Lean change, no compile."
+ }
+}

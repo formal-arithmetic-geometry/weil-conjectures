@@ -1,0 +1,144 @@
+{
+ "id": "lem-a1-normal-geometric-cover-universe-descent",
+ "kind": "statement",
+ "title": "Small finite etale subcovers of universe-enlarged normal geometric coverings",
+ "statement": "Let X be a connected, locally Noetherian, quasi-compact scheme in universe u [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], with local rings integrally closed domains [def-weil-pbc-normal-ring]. Let X↑ denote its canonical universe enlargement to u+1 [def-trf-scheme-universe-enlargement]. Let Z be a nonempty scheme in u+1 and q:Z→X↑ an etale morphism satisfying the full unique valuative lifting criterion for valuation rings [def-trf-valuation-ring]. Then there are a scheme Y in universe u, a finite etale surjective p:Y→X, and a morphism i:Y↑→Z over X↑, so i composed with q equals the canonical enlargement of p. No sheaf or section is part of this assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proof of Lemma 7.4.10; universe transport spelled out using literature/stacks-project/schemes.tex, section glueing-schemes (Tag 01JA), and literature/stacks-project/morphisms.tex, section-integral (Tag 01WG) and lemma-finite-local."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-trf-scheme-universe-enlargement",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "On affine charts canonical enlargement replaces A by ULift A. The spectrum homeomorphisms and stalk ring equivalences glue by the affine-colimit universal property of [def-trf-scheme-universe-enlargement]. This transports connectedness, compactness, local Noetherianity and the normal local domain condition to the enlarged base. The affine case is the colimit over a category with terminal object (Spec A, identity). Localizing the same chart construction identifies the overlap maps, hence the glued homeomorphism and stalk equivalences.",
+   "uses": [
+    "def-trf-scheme-universe-enlargement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose z in the nonempty Z. Apply [lem-a1-normal-geometric-cover-components] to q over the enlarged base. All base hypotheses come from the preceding step, and q has the assumed etaleness and full valuation lifting. The connected component indexed by z is an open subscheme W whose structural map r is finite, etale and surjective; its open inclusion is a map to Z over the enlarged base.",
+   "uses": [
+    "lem-a1-normal-geometric-cover-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each original affine chart Spec A, the inverse image in W is Spec B for a finite ULift A-algebra B, by [def-weil-finite-integral-morphism]. A finite module is the image of a finite power of its base ring; since ULift A is u-small, B is u-small (Mathlib Module.Finite.small). Transfer the ring and algebra operations to a small carrier. The overlap identifications transfer as well and retain both inverse identities and the cocycle equations. Glue these affine models, using [def-pc-scheme] and the gluing construction of Tag 01JA, to a scheme Y and map p:Y to X. Affine local recognition and invariance under ring equivalences give finiteness and etaleness of p. The spectrum homeomorphisms show surjectivity. The enlarged affine models glue to an isomorphism of the enlargement of Y with W over the enlarged X. Compose its map with W into Z to obtain i. Its equality over the base is exactly i followed by q equals the canonical enlargement of p.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-trf-scheme-universe-enlargement",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-universe-enlargement",
+  "lem-a1-normal-geometric-cover-components",
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S8",
+  "date": "2026-10-23",
+  "reason": "The geometric component argument is Bhatt--Scholze 7.4.10; explicit universe transport and small finite-algebra gluing use the cited Stacks constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite etale schemes over a small ring have small models in the universe of the base ring",
+   "results": "IsFinite.toIsAffineHom; Algebra.Etale.finitePresentation; no scheme universe transport theorem.",
+   "date": "2026-10-23",
+   "verdict": "No complete match. These give the local algebraic input, not descent across the canonical scheme enlargement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale morphisms over a canonically universe enlarged scheme descend to the original universe because finite algebras over small rings are small",
+   "results": "Scheme.Etale.forgetFullyFaithful, Scheme.smallEtalePretopology, Scheme.Etale; no universe-descent result.",
+   "date": "2026-10-23",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Small\", \"Finite\"",
+   "results": "Module.Finite.small; Algebra.FiniteType.small; RingHom.FiniteType.exists_smallRepr.",
+   "date": "2026-10-23",
+   "verdict": "Local algebra smallness exists; no scheme gluing and normal component theorem with the required universes."
+  },
+  {
+   "tool": "grep",
+   "query": "universeLift|Finite.small|FiniteType.small",
+   "results": "Module.Finite.small and Algebra.FiniteType.small; no schemeUniverseLift in Mathlib. Repository search finds only SchemeUniverseEnlargement, UniverseEnlargedEtaleRealization and ProEtaleUniverseLiftCover, none stating finite etale descent. Blueprint universe search: no duplicate.",
+   "date": "2026-10-23",
+   "verdict": "A separate geometric universe-transport statement is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecPurity.NormalLocallyConstantFiniteSection",
+  "date": "2026-10-23",
+  "group": "S8"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Finite etale component selection in the normal monodromy argument; universe transport made necessary by the larger representing geometric covering.",
+   "via": [
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalGeometricCoverUniverseDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGeometricCoverUniverseDescent.lean",
+  "declaration": "AlgebraicGeometry.normalGeometricCover_universeDescent",
+  "statement": "theorem normalGeometricCover_universeDescent\n    {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X] [CompactSpace X]\n    (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧\n      IsIntegrallyClosed (X.presheaf.stalk x))\n    {Z : Scheme.{u + 1}} [Nonempty Z]\n    (q : Z ⟶ schemeUniverseLift.{u, u + 1} X) (hetale : Etale q)\n    (hval : ValuativeCriterion q) :\n    ∃ (Y : Scheme.{u}) (p : Y ⟶ X),\n      IsFinite p ∧ Etale p ∧ Surjective p ∧\n      ∃ i : schemeUniverseLift.{u, u + 1} Y ⟶ Z,\n        i ≫ q = schemeUniverseLiftMap.{u, u + 1} p",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-23"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-6060b",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261023T135343-L-2877310",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-6060b",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261023T135343-L-2877310",
+  "kind": "interface",
+  "note": "independent cc review: 6060b15f files vs PASSed head a06011f4 (diff: only `set_option warn.sorry false` removed + change record + report text); live deps unchanged; sandbox compile of both delivered modules and both direct importers (exit 0), #print axioms"
+ }
+}

@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-quasifinite-closed-nowhere-dense-image",
+ "kind": "statement",
+ "title": "Quasi-finite images of closed nowhere dense subsets",
+ "statement": "Let $f:Y\\to X$ be a quasi-finite morphism of schemes [def-pc-scheme], [pqf-def-quasifinite]. If $T\\subseteq |Y|$ is closed and nowhere dense, then $f(T)\\subseteq |X|$ is nowhere dense. Here a subset is nowhere dense when the interior of its closure is empty; no closedness of $f(T)$ is asserted. Empty schemes and the empty subset are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03J2, lemma-image-nowhere-dense-quasi-finite, statement."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "For every affine open $V\\subseteq X$, finite type in [pqf-def-quasifinite] and [def-weil-finite-type-morphism] gives a finite affine open covering $f^{-1}(V)=\\bigcup_{i=1}^{n}U_i$. Put $g_i=f|_{U_i}:U_i\\to V$ and $T_i=T\\cap U_i$. Each $T_i$ is closed in $U_i$ and has empty interior: an open subset of $U_i$ contained in $T_i$ is also open in $Y$ and contained in the closed nowhere dense $T$, hence empty. Thus $T_i$ is nowhere dense in $U_i$. We will prove that each $g_i(T_i)$ is nowhere dense in $V$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J2, lemma-image-nowhere-dense-quasi-finite, proof."
+   }
+  },
+  {
+   "text": "Check the hypotheses for affine factorization. By [lem-weil-pbc-lft-affine-pairs], the finite-type map $f$ induces a finite-type ring map on every affine pair. Affine opens of $U_i$ and $V$ are affine opens of $Y$ and $X$, and their section rings and induced maps are unchanged by restriction. The reverse implication of that same criterion makes $g_i$ locally of finite type. As a map between affine schemes it is affine by [lem-weil-pbc-morphism-affine-schemes-affine], hence quasi-compact by [lem-weil-pbc-affine-morphism-permanence](3), so it is of finite type by [def-weil-finite-type-morphism]. For $v\\in V$, its set-theoretic fibre is $U_i\\cap f^{-1}(v)$ with the subspace topology. Each singleton is open there since it is open in the original fibre. The fibre homeomorphism of [def-pc-scheme-fibre] identifies this with isolation in the scheme fibre. Consequently $g_i$ is quasi-finite in the exact sense of [pqf-def-quasifinite](3).",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "def-pc-scheme-fibre",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J2, lemma-image-nowhere-dense-quasi-finite, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-finite-affine-open-in-finite] to $g_i$, whose source and target are affine by construction and which is quasi-finite by step 2. Obtain an affine scheme $Z_i$, an open immersion $j_i:U_i\\to Z_i$ and a finite map $\\pi_i:Z_i\\to V$ with $g_i=\\pi_i\\circ j_i$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-affine-open-in-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J2, lemma-image-nowhere-dense-quasi-finite, proof."
+   }
+  },
+  {
+   "text": "Put $C_i=\\overline{j_i(T_i)}$ in $Z_i$. By [def-weil-open-immersion], $j_i$ identifies $U_i$ with an open subset $O_i$ of $Z_i$. Since $T_i$ is closed in $U_i$, $C_i\\cap O_i=j_i(T_i)$. If $H\\subseteq C_i$ is open in $Z_i$, then $H\\cap O_i$ is open in $O_i$ and contained in its nowhere dense subset $j_i(T_i)$, so it is empty. Every point of $H$ would then have the neighbourhood $H$ disjoint from $j_i(T_i)$, contradicting membership in its closure. Thus $H=\\varnothing$ and $C_i$ is closed and nowhere dense. This is the elementary argument of Topology Tag 03J0 (lemma-image-nowhere-dense-open), including invariance under the displayed homeomorphism.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 03J0, lemma-image-nowhere-dense-open, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-image-nowhere-dense] to the finite morphism $\\pi_i$ and the closed nowhere dense $C_i$. Its statement gives a closed nowhere dense $\\pi_i(C_i)$ in $V$. The inclusion $g_i(T_i)\\subseteq\\pi_i(C_i)$ implies $\\overline{g_i(T_i)}\\subseteq\\pi_i(C_i)$, so $g_i(T_i)$ is nowhere dense. Only this inclusion is used; $g_i(T_i)$ need not be closed.",
+   "uses": [
+    "lem-sfb-finite-image-nowhere-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J2, lemma-image-nowhere-dense-quasi-finite, proof."
+   }
+  },
+  {
+   "text": "Now $f(T)\\cap V=\\bigcup_{i=1}^{n}g_i(T_i)$. A finite union of nowhere dense sets is nowhere dense: for two such sets $A,B$, any open $H\\subseteq\\overline A\\cup\\overline B$ has $H\\setminus\\overline A$ open and contained in $\\overline B$, hence empty; then $H\\subseteq\\overline A$ gives $H=\\varnothing$. Induct on $n$, starting with the empty union. This proves the assertion on every affine $V$ (Topology Tag 03HO). Finally, for an open $V$, closure satisfies $\\overline{f(T)}\\cap V=\\overline{f(T)\\cap V}^{\\,V}$: neighbourhoods of a point in $V$ may be intersected with $V$. If an open $H$ of $X$ lies in $\\overline{f(T)}$, its intersection with every member $V$ of the affine cover is empty by the local result. Thus $H=\\varnothing$, as required (Topology Tag 03HP). Empty schemes, empty $T$, and empty finite covers are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 03HO (lemma-nowhere-dense) and 03HP (lemma-nowhere-dense-local), proofs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-quasifinite",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+  "def-weil-open-immersion",
+  "lem-sfb-finite-image-nowhere-dense"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03J2, lemma-image-nowhere-dense-quasi-finite, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite morphism of schemes sends closed nowhere dense subsets to nowhere dense subsets",
+   "results": "{\"t\": \"2026-10-24T00:12:38Z\", \"tool\": \"leansearch\", \"query\": \"A quasi finite morphism of schemes sends closed nowhere dense subsets to nowhere dense subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"RingHom.QuasiFinite.of_finite\", \"AlgebraicGeometry.isClosedMap_iff_specializingMap\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\"], \"digest\": \"435e0a2680803591\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiFinite, IsNowhereDense",
+   "results": "{\"t\": \"2026-10-24T00:12:38Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.QuasiFinite, IsNowhereDense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.QuasiFinite'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "nowhereDense|nowhere_dense|IsNowhereDense",
+   "results": "{\"t\": \"2026-10-24T00:12:38Z\", \"tool\": \"grep\", \"query\": \"nowhereDense|nowhere_dense|IsNowhereDense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a closed nowhere dense subset under a quasi finite morphism of schemes is nowhere dense",
+   "results": "{\"t\": \"2026-10-24T00:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a closed nowhere dense subset under a quasi finite morphism of schemes is nowhere dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.instIsDominantιCoborderRange\"], \"digest\": \"ecee41fbc5110bf8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, \"dense\"",
+   "results": "{\"t\": \"2026-10-24T00:13:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, \\\"dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite scheme maps preserve nowhere denseness of closed subsets of the source",
+   "results": "{\"t\": \"2026-10-24T00:13:16Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi finite scheme maps preserve nowhere denseness of closed subsets of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.isQuasiSeparated_preimage\"], \"digest\": \"9deee49d82f472f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "NowhereDense|nowhere.dense.*image|image.*nowhere.dense",
+   "results": "{\"t\": \"2026-10-24T00:14:58Z\", \"tool\": \"grep\", \"query\": \"NowhereDense|nowhere.dense.*image|image.*nowhere.dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/MeasureTheory/Measure/OpenPos.lean\", \"Mathlib/MeasureTheory/Measure/OpenPos.lean\", \"Mathlib/MeasureTheory/Measure/OpenPos.lean\"], \"digest\": \"19f44d244fe349fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give quasi-finiteness, constructible images, dominant maps to schematic images, or the definition of nowhere dense; none states preservation of nowhere denseness by a quasi-finite scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite morphism of schemes maps closed nowhere dense subsets to nowhere dense subsets",
+   "results": "{\"t\": \"2026-10-24T00:48:49Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi finite morphism of schemes maps closed nowhere dense subsets to nowhere dense subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\"], \"digest\": \"78268da0fb535992\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme hits concern quasi-finiteness, dominance or constructibility; the topological IsInducing image lemma covers embeddings only and does not imply the quasi-finite morphism assertion. Read GDelta/Basic.lean:200-262 and the returned types."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, \"dense\"",
+   "results": "{\"t\": \"2026-10-24T00:50:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, \\\"dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme hits concern quasi-finiteness, dominance or constructibility; the topological IsInducing image lemma covers embeddings only and does not imply the quasi-finite morphism assertion. Read GDelta/Basic.lean:200-262 and the returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "nowhereDense|nowhere_dense|IsNowhereDense",
+   "results": "{\"t\": \"2026-10-24T00:50:03Z\", \"tool\": \"grep\", \"query\": \"nowhereDense|nowhere_dense|IsNowhereDense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme hits concern quasi-finiteness, dominance or constructibility; the topological IsInducing image lemma covers embeddings only and does not imply the quasi-finite morphism assertion. Read GDelta/Basic.lean:200-262 and the returned types."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite morphism of schemes sends a closed subset with empty interior to a set whose closure has empty interior",
+   "results": "{\"t\": \"2026-10-24T00:50:54Z\", \"tool\": \"leansearch\", \"query\": \"A quasi finite morphism of schemes sends a closed subset with empty interior to a set whose closure has empty interior\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"RingHom.QuasiFinite.of_finite\", \"Algebra.QuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\"], \"digest\": \"b11a50d0427c59a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme hits concern quasi-finiteness, dominance or constructibility; the topological IsInducing image lemma covers embeddings only and does not imply the quasi-finite morphism assertion. Read GDelta/Basic.lean:200-262 and the returned types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a closed nowhere dense subset under a finite type morphism with isolated fibre points is nowhere dense",
+   "results": "{\"t\": \"2026-10-24T00:50:54Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a closed nowhere dense subset under a finite type morphism with isolated fibre points is nowhere dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsInducing.isNowhereDense_image\", \"IsNowhereDense.image_val\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"IsPreirreducible.preimage_of_dense_isPreirreducible_fiber\"], \"digest\": \"04cdde0cd926772f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme hits concern quasi-finiteness, dominance or constructibility; the topological IsInducing image lemma covers embeddings only and does not imply the quasi-finite morphism assertion. Read GDelta/Basic.lean:200-262 and the returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "isNowhereDense_image|IsNowhereDense|isConstructible_image",
+   "results": "{\"t\": \"2026-10-24T00:52:04Z\", \"tool\": \"grep\", \"query\": \"isNowhereDense_image|IsNowhereDense|isConstructible_image\", \"sub\": \"Topology/GDelta\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\", \"Mathlib/Topology/GDelta/Basic.lean\"], \"digest\": \"04a3d2cf6ebcfcb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme hits concern quasi-finiteness, dominance or constructibility; the topological IsInducing image lemma covers embeddings only and does not imply the quasi-finite morphism assertion. Read GDelta/Basic.lean:200-262 and the returned types."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-henselian-fibrewise-section-density",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: Geometric fibre density of strict-henselian sections. Supporting input: the quasi-finite image of the closed complement of the prescribed geometric-fibre open in an affine etale chart is nowhere dense.",
+   "via": [
+    "lem-sfb-strict-henselian-fibrewise-section-density",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quasifinite-closed-nowhere-dense-image",
+  "worker": "stage1",
+  "summary": "Verified Stacks 03J2 and supplied its affine reduction, existing 03GU factorization and existing 03HX finite-image theorem. Expanded all topology arguments and checked restriction retains finite type and isolated fibres. No new nodes and no statement change. Searched current Lean, DAG, latest blueprint and Mathlib.",
+  "blueprint": "Realizes the final supporting prerequisite in the inherited from.place: quasi-finite avoidance of the closed complement in an affine etale chart, below det-thm-sf-ctf-stability-direct-images proof (3). The ancestor tool returns None, so from.node=null and the inherited via chain are preserved. Read the latest six-functors-basics/sk-thm-sf-ctf-stability unit and direct-images proof; this is a generic scheme-theoretic tool below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+    "why": "Generic affine Zariski-main factorization (03GU) used exactly in the source proof 03J2; this six-functor unit has no competing factorization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-affine-open-in-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-b00dbf109",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-b00dbf109 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has no new nodes and leaves the statement unchanged: it matches Stacks 03J2 (morphisms.tex l.15254) word for word, with no closedness claimed. The six steps follow the Stacks proof in order. Step 1 gets a finite affine cover from the finite-type clause of def-weil-finite-type-morphism, and T_i has empty interior because opens of U_i are opens of Y. Step 2 shows the restriction g_i is quasi-finite: local finite type by 01T2 in both directions; affine, hence quasi-compact (01SH and permanence (3)); and isolated fibre points through the def-pc-scheme-fibre homeomorphism. Step 3 uses only the statement of 03GU (lem-weil-pbc-quasi-finite-affine-open-in-finite). Step 4 is 03J0 written out correctly. Step 5 uses the statement of lem-sfb-finite-image-nowhere-dense (03HX) plus g_i(T_i) ⊂ π(C_i). Step 6 writes out 03HO and 03HP correctly, including the empty union. proof_deps equals the union of the step uses; the 399-node closure has no cycle; there is no SGA citation. I found no duplicate in the DAG (grep for 03J2 and for nowhere dense with quasi-finite), and the item is still unsplit on live. I accept the 03GU tool_use as the source's own tool, with no unit alternative. Small cases: empty X, Y or T; the punctured axis in A² shows the closure in step 4 is needed; infinitely many copies of A¹ show quasi-compactness is needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteClosedNowhereDenseImage",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isNowhereDense_image_of_isQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteClosedNowhereDenseImage.lean",
+  "statement": "theorem Scheme.Hom.isNowhereDense_image_of_isQuasiFinite {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : f.IsQuasiFinite) (T : Set Y) (hT : IsClosed T) (hTd : IsNowhereDense T) : IsNowhereDense (f '' T)",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb815c2b9",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement matches node/Stacks 03J2 clause by clause: {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : f.IsQuasiFinite = LocallyOfFiniteType ∧ QuasiCompact ∧ isolated fibre points, Stacks 01TD(3)) (T : Set Y) closed, IsNowhereDense T ⊢ IsNowhereDense (f '' T); no closedness claimed, no extra hypotheses; empty X/Y/T covered. Node copy differs from live only in lean; lean.statement verbatim in file; docstrings carry source place, blueprint id and six proof steps; proof sorry only; no defs; proof imports plain. No duplicate in Sheaf/WeilConjectures/Mathlib (only IsInducing.isNowhereDense_image). Second-reading section is the standard post-10-17 placeholder. No findings; nothing compiled since no file changed."
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-normalized-signed-line-pullback-exists",
+ "kind": "statement",
+ "title": "Existence of normalized signed pullback comparisons for one line",
+ "statement": "For the sites, size convention, ringed-site coefficient map a, locally trivial rank-one source L and isomorphism p:F_a(L)≅L′ of [def-pur-signed-line-pullback-normalization-data], there exists a family P_m:F_a(L^[m])≅L′^[m] for every integer m satisfying SignedLinePullbackNormalized. This asserts existence only, for one line, without scalar-extension squares or uniqueness. Use the signed powers of [lem-pur-signed-line-scalar-tensor-tower].",
+ "stmt_deps": [
+  "def-pur-signed-line-pullback-normalization-data",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (tensor pullback), 0GMX (internal-Hom pullback), 0FNY (finite free dual), 04J0 (localization); blueprint/latest prop-weil-twist-preserves.proof.md, tensor powers and internal Homs."
+ },
+ "proof": [
+  {
+   "text": "Construct the comparison F(M tensor N) -> F(M) tensor F(N) explicitly: pair the two adjunction-unit images, lift the bilinear pairing to the presheaf tensor, descend through module sheafification, and transpose under module pullback. The two adjunction identities give the pure-tensor formula. Tensoring isomorphisms is obtained by sheafifying their sectionwise tensor. Adjunction-unit naturality and tensor generation give bifunctor naturality of the comparison. When N is the coefficient unit, the comparison followed by the pulled-unit comparison and tensor right unitor is the pullback of the source right unitor. Preservation of a terminal object makes U final, so Mathlib pullbackObjUnitToUnit is invertible. Hence the tensor comparison is invertible when N is globally trivial.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the normalized tensor-restriction comparison and the canonical pullback localization comparison. Their square with the constructed tensor pullback comparison commutes: transpose under the slice adjunction and test on pure tensors, where the two localization-unit identities identify both sides. On each chart where L is trivial the slice tensor pullback comparison is invertible by the preceding step. Cover preservation sends the source covering family to a target covering family, and Sheaf.isIso_of_coversTop and reflection of isomorphisms by toSheaf give global invertibility of the tensor comparison with L. Independently, positive powers restrict to the unit by tensor-restriction, tensoring the chart isomorphisms, and the tensor right unitor.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Start the positive family with p in degree one, and recursively compose the constructed invertible tensor comparison with the tensor of the previous family member and p. Use pullbackObjUnitToUnit in degree zero. Its adjunction identity is the coefficient-map normalization; the constructed tensor formula gives exactly the positive recursion. The local power charts give the finite locally free hypothesis for finite_free_dual_pullback, with rank one and the cover index lifted to the coefficient universe. In negative degree compose that evaluation-defined dual comparison with precomposition by the inverse positive isomorphism. The internal-Hom composition identities prove this factor invertible; evaluation cancels the positive isomorphism with its inverse and the dual theorem gives exactly the required negative normalization. Assemble the integer-indexed family by cases on integers.",
+   "uses": [
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "def-pur-sheaf-hom",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK/03EL: adjunction-unit tensor comparison, checked on rank-one charts; Tag 04J0: pullback localization; Tags 0GMX/0FNY: evaluation-defined finite locally free dual pullback. Explicit proof by N3."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of module sheaves preserves tensor product and unit, normalized on adjunction unit sections",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; pullbackObjFreeIso; pullbackIso. No theorem for normalized signed powers or arbitrary coefficient scalar squares.",
+   "date": "2026-10-24",
+   "verdict": "Use existing unit/dual APIs; the signed existence and naturality arguments remain separate."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.unit",
+   "results": "Six unit/free comparison lemmas, including pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. No signed comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "No exact replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "signedLinePower|SignedLinePullbackNormalized|pullback.*tensor",
+   "results": "Seven unrelated Mathlib hits. Repository search finds existing SignedLineScalarTensorTower, generic ModulePullbackTensorIso, and FiniteFreeDualPullback; no actual mixed-universe signed comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing dependencies and state only the two separate parts not already declared."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedLineScalarPullbackSquare",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-scalar-pullback-square",
+   "place": "Separate construction of one normalized family",
+   "via": [
+    "lem-pur-signed-line-scalar-pullback-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedLinePullbackExistence",
+  "file": "lean/Sheaf/Paper/SignedLinePullbackExistence.lean",
+  "declaration": "SheafOfModules.exists_signedLinePullbackNormalized",
+  "statement": "theorem exists_signedLinePullbackNormalized\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (hcover : CoverPreserving J K U)\n    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}\n    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶\n      (U.sheafPushforwardContinuous RingCat J K).obj\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))\n    (L : ringedSiteModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (L' : ringedSiteModules.{max u v w}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))\n    (hL : ∃ (I : Type u) (V : I → C), J.CoversTop V ∧\n      ∀ i : I, Nonempty (L.over (V i) ≅\n        unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over (V i))))\n    (p : (ringedSitePullbackFunctor a\n      (module_pushforward_isRightAdjoint_of_universes a)).obj L ≅ L') :\n    ∃ P : ∀ m : ℤ, (ringedSitePullbackFunctor a\n      (module_pushforward_isRightAdjoint_of_universes a)).obj\n        (signedLinePower.{u, v, w} L m) ≅ signedLinePower.{u, v, w} L' m,\n      SignedLinePullbackNormalized a L L' p P",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-929d5",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184859-L-3243522",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T013227-L-3943329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

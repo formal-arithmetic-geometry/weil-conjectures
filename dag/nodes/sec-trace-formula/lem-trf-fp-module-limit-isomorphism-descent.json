@@ -1,0 +1,242 @@
+{
+ "id": "lem-trf-fp-module-limit-isomorphism-descent",
+ "kind": "statement",
+ "title": "Specified isomorphisms of finitely presented modules descend to a later stage",
+ "statement": "Let $I$ be a small nonempty directed set, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i:Z\\to Z_i$ be its limit in the category of schemes [def-pc-scheme]. Here being a limit means $q_{ji}\\circ q_j=q_i$ for $j\\geq i$, and for every scheme $T$ and family $t_i:T\\to Z_i$ satisfying $q_{ji}\\circ t_j=t_i$ there is a unique morphism $t:T\\to Z$ with $q_i\\circ t=t_i$ for every $i$. For a sheaf of modules [def-weil-sheaf-of-modules-category], finite presentation means that every point has an open neighbourhood $U$ on which there is an exact sequence $\\mathcal O_U^m\\to\\mathcal O_U^n\\to F|_U\\to0$ for finite $m,n$. All pullbacks are tensor pullbacks [def-pc-module-pullback], with iterated pullbacks identified by their canonical composition isomorphisms. Fix $i\\in I$, finitely presented $\\mathcal O_{Z_i}$-modules $F_i,G_i$, and an isomorphism $\\phi:q_i^*F_i\\xrightarrow{\\sim}q_i^*G_i$. There exist $k\\geq i$ and morphisms $$u_k:q_{ki}^*F_i\\to q_{ki}^*G_i,\\qquad v_k:q_{ki}^*G_i\\to q_{ki}^*F_i$$ such that $$v_k\\circ u_k=1_{q_{ki}^*F_i},\\qquad u_k\\circ v_k=1_{q_{ki}^*G_i},\\qquad q_k^*u_k=\\phi,\\qquad q_k^*v_k=\\phi^{-1}.$$ The last two equations use the canonical identifications $q_k^*q_{ki}^*F_i\\cong q_i^*F_i$ and $q_k^*q_{ki}^*G_i\\cong q_i^*G_i$. Thus $u_k$ is an isomorphism lifting the specified $\\phi$, including its inverse, between the pullbacks of the fixed finite-stage models.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), (3); Tag 0B8W, lemma-descend-invertible-modules, proof of (2), sentence asserting that the descended evaluation becomes an isomorphism after increasing the stage."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-affine-morphism",
+  "def-trf-affine-limit-tensor-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved tensor-pullback finite-presentation theorem [lem-pc-tensor-pullback-finite-presentation] to the two fixed models and to each transition map used below. This supplies finite presentation of their pullbacks at the common stage; no flatness is used.",
+   "uses": [
+    "lem-pc-tensor-pullback-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), (3); Tag 0B8W, lemma-descend-invertible-modules, proof of (2)."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-trf-fp-modules-affine-limit-descent] first to $\\phi$, obtaining $a\\ge i$ and $u_a:q_{ai}^*F_i\\to q_{ai}^*G_i$, and then to $\\phi^{-1}$, obtaining $b\\ge i$ and $v_b:q_{bi}^*G_i\\to q_{bi}^*F_i$. Their limit pullbacks are the specified maps, rather than merely some isomorphisms between the same objects. The cited node has exactly the given qcqs and affine-transition hypotheses.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), (3); Tag 0B8W, lemma-descend-invertible-modules, proof of (2)."
+   }
+  },
+  {
+   "text": "Choose j above a and b by directedness. Define refineMap by pulling each map to j and conjugating with the canonical composition comparisons. To identify the section-normalized comparisons in the statement with those of [lem-pc-tensor-pullback-composition-associativity], first use uniqueness of the normalized adjunction of [def-pc-module-pullback] to identify it with the adjunction chosen by the existing tensor-pullback theorem. The unit formula for adjoint uniqueness then identifies the two comparisons, including the equality transport along the cone equation. Apply the cited associativity identity and naturality of the composition comparisons: refineMap preserves the specified conjugated limit pullback. Thus the two maps f and g at j pull back to phi and its inverse. After conjugating their composites, the inverse identities of phi show that their limit pullbacks are identities.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-tensor-pullback-composition-associativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), (3); Tag 0B8W, lemma-descend-invertible-modules, proof of (2)."
+   }
+  },
+  {
+   "text": "Use finite presentation from Step 1 and clause (3) of [lem-trf-fp-modules-affine-limit-descent] at j for f composed with g versus the identity of F_j, and for g composed with f versus the identity of G_j. Obtain a_prime and b_prime above j, then choose k above both. Naturality of the canonical finite-stage composition comparisons shows that equality persists from a_prime or b_prime to k. Pull f and g to k and conjugate with the finite-stage comparison to the direct pullbacks of the original models at i. Functoriality and cancellation of the comparison isomorphisms give both inverse identities. The specified limit pullback equations persist by the associativity and naturality calculation of Step 3. These are exactly the four required equations.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "def-pc-module-pullback",
+    "lem-pc-tensor-pullback-composition-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), (3); Tag 0B8W, lemma-descend-invertible-modules, proof of (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-tensor-pullback-composition-associativity",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-trf-fp-modules-affine-limit-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), (3); Tag 0B8W, lemma-descend-invertible-modules, proof of (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(iso|isomorphism).*(descend|[Ff]inite[Pp]resentation)|(descend|[Ff]inite[Pp]resentation).*(iso|isomorphism)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Pp]resentation|[Ff]initely[Pp]resented",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"8\", \"line\": \"public import Mathlib.Algebra.Category.Ring.FinitePresentation\", \"text\": \"\"}\n  {\"file\": \"11\", \"line\": \"public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"text\": \"\"}\n  {\"file\": \"1158\", \"line\": \"section LocallyOfFinitePresentation\", \"text\": \"\"}\n  {\"file\": \"1163\", \"line\": \"/-- See `Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation` for the general case. -/\", \"text\": \"\"}\n  {\"file\": \"1164\", \"line\": \"private nonrec lemma Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\", \"text\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between pullbacks of finitely presented module sheaves to a qcqs inverse limit with affine transitions descends as an isomorphism at a later stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰.affineRefinement.openCover).I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso f 𝒰 i).inv\\n      ((CategoryTh\", \"doc\": \"For a morphism $ f : X ⟶ Y $, an open cover $ \\\\mathcal{U} $ of $ Y $, and an index $ i $, the inverse of the isomorphism between pullback constructions satisfies $ (\\\\mathcal{U}.\\\\text{pullbackCoverAffi\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (𝒰 : Y.OpenCover) →\\n      (i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰.affineRefinement.openCover).I₀) →\\n        (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰.affineRefinement.openCover).X i ≅\\n          (CategoryTheor\", \"doc\": \"An isomorphism between the pullback of the affine refinement's open cover along a morphism $ f $ and the pullback of the affine cover of an original open cover component along the pullback homomorphis\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of the category of finitely presented quasi coherent sheaves over a directed inverse limit gives eventual lifting of a specified isomorphism and both inverse identities",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n    ((S : LightProfinite) →\\n        CategoryTheory.Limits.IsColimit (F.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))) →\\n      (F ≅\\n        LightCondensed.locallyConst\", \"doc\": \"Given a contravariant functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type} $, if for every light profinite space $ S $ the cocone constructed from $ S $'s limit cone is a colimit for the co\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n    ((S : Profinite) → CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op)) →\\n      (F ≅\\n        Condensed.locallyConstantPresheaf\\n          (F.obj (FintypeCat.toProfinite.op.ob\", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ such that for every profinite space $ S $, the image of the limit cone $ S.asLimitCone $ under $ F $ satisfies the colimit condition, t\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} →\\n  (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite)) →\\n    (X : Type u) →\\n      CategoryTheory.Limits.IsLimit c →\\n        [∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)] →\\n          CategoryTheory.Limits.IsColimit ((LightCondensed.locall\", \"doc\": \"The presheaf of locally constant functions on the opposite category of light profinite spaces, constructed from a diagram of finite types, satisfies the universal property of a colimit. Specifically, \"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite))\\n  (X : Type u) (hc : CategoryTheory.Limits.IsLimit c) [inst : ∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)]\\n  (s :\\n    CategoryTheory.Limits.Cocone\\n      ((F.comp FintypeCat.toLightProf\", \"doc\": \"Given a limit cone $ c $ with epimorphic projections and a cocone $ s $ over the diagram of locally constant presheaves, the application of the colimit's universal morphism $ \\\\text{desc} $ to a locall\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    [CategoryTheory.IsCofiltered I] →\\n      {F : CategoryTheory.Functor I FintypeCat} →\\n        (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite)) →\\n          (X : Type (u + 1)) →\\n            CategoryTheory.Limits.IsLimit c →\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(X : Type u) →\\n  (S : LightProfinite) →\\n    CategoryTheory.Limits.IsColimit\\n      ((LightCondensed.locallyConstantPresheaf X).mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))\", \"doc\": \"The colimit of the locally constant presheaf diagram over the opposite category of light profinite spaces is established by leveraging the finality of the inverse double opposite equivalence for the n\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism and its inverse between finitely presented sheaves of modules descend to a finite stage of a directed inverse limit of schemes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Iso",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.toSheafCompSheafToPresheafIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) : (SheafOfModules.toSheaf R).comp (CategoryTheory.sheafToPresheaf J AddCommGrpCat) ≅ (SheafOfModules.forget R).comp (PresheafOfModules.toPresheaf R.obj)\", \"doc\": \"The canonical isomorphism between\\n`SheafOfModules.toSheaf R ⋙ sheafToPresheaf J AddCommGrpCat.{v}`\\nand `SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.val`.\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCatOfIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) (X Y : Cᵒᵖ) (hX : CategoryTheory.Limits.IsInitial X) (hY : CategoryTheory.Limits.IsInitial Y) (φ : X ≅ Y) : SheafOfModules.forgetToSheafModuleCat R X hX ≅ (SheafOfModu\", \"doc\": \"Isomorphism on `forgetToSheafModuleCat` when given isomorphic initial objects.\"}\n  {\"name\": \"PresheafOfModules.sheafificationCompToSheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"The sheafification of presheaves of modules commutes with the functor which\\nforgets the module structures.\"}\n  {\"name\": \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"The sheafification of presheaves of modules commutes with the functor which\\nforgets the module structures.\"}\n  {\"name\": \"SheafOfModules.freeSumIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] (I J✝ : Type u) : SheafOfModules.free I ⨿ SheafOfModules.free J✝ ≅ SheafOfMo\", \"doc\": \"A binary coproduct of free sheaves of modules is the free sheaf\\nof modules on the sum type.\"}\n  {\"name\": \"SheafOfModules.mapFreeIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"Let `F` be a functor from the category of sheaves of `R`-modules to sheaves of `S`-modules.\\nIf `F` preserves coproducts and `unit S ≅ F.obj (unit R)`, then `F` preserves free sheaves of\\nmodules.\"}\n  {\"name\": \"SheafOfModules.mapFreeIso_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFreeIso_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"**Alias** of `SheafOfModules.ιFree_mapFreeIso_hom`.\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFreeIso_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"**Alias** of `SheafOfModules.map_ιFree_mapFreeIso_inv`.\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFreeIso_hom_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasWeakSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] {C' : Type u₂} [CategoryTheory.Category.{v₂, u₂} C'] {J' : CategoryTheory.Gr\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "grep",
+   "query": "(descend|isLimit).*(pullback|FinitePresentation)|(pullback|FinitePresentation).*(descend|isLimit)",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf sections, local finite presentation, or construction of module isomorphisms; none states specified isomorphism descent for module sheaves in this inverse system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms between finitely presented module sheaves descend along inverse limits of schemes with affine transitions",
+   "results": "8 hits; SheafOfModules.isFinitePresentation, PresheafOfModules.isoMk, SheafOfModules.IsFinitePresentation.mk, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, AlgebraicGeometry.Scheme.Modules.inv_app, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf sections, local finite presentation, or construction of module isomorphisms; none states specified isomorphism descent for module sheaves in this inverse system."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.Iso",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf sections, local finite presentation, or construction of module isomorphisms; none states specified isomorphism descent for module sheaves in this inverse system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified isomorphism of finitely presented module sheaves over an inverse limit of qcqs schemes with affine transitions descends with its inverse to a later stage",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf sections, local finite presentation, or construction of module isomorphisms; none states specified isomorphism descent for module sheaves in this inverse system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of Hom sets for finitely presented quasi coherent modules over a cofiltered limit of schemes implies an invertible arrow lifts at a finite stage",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf sections, local finite presentation, or construction of module isomorphisms; none states specified isomorphism descent for module sheaves in this inverse system."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-invertible-affine-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Extracted subargument: The eventual-isomorphism part of the line-bundle descent input: lift a map and its inverse, then descend both inverse identities at one upper stage (old item steps 4--5).",
+   "via": [
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fp-module-limit-isomorphism-descent",
+  "worker": "stage1",
+  "summary": "The statement is unchanged. Specified map descent and eventual equality are supplied by the existing general qcqs node, not by the Picard nodes with extra Noetherian affine-base hypotheses. Descend the given isomorphism and its inverse, synchronize stages, enforce both inverse identities, and check the canonical pullback comparisons. No new nodes are needed.",
+  "blueprint": "Realizes the eventual-isomorphism subargument of the line-bundle descent input below lem-trf-local-term-locality, through the ancestor chain recorded in blueprint.from: the assertion in Stacks 0B8W (2) that the descended evaluation becomes an isomorphism, using 01ZR (2),(3). The current latest blueprint ancestor and unit retain the contracting-correspondence route; this is a generic algebraic descent input below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-pullback-composition-associativity",
+    "why": "Generic coherence of canonical tensor-pullback comparison isomorphisms when moving the two lifts and their inverse identities among stages; no statement of this unit supplies the associativity formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-pullback-composition-associativity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-ad2175183",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-ad2175183 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes and the statement is unchanged; I checked it against Stacks limits.tex 01ZR (1)-(3) and the 0B8W proof of (2), whose sentence 'after increasing i further it is an isomorphism' is exactly what the item states. Step 1: tensor pullback preserves finite presentation (cokernels go through the left adjoint, O^n pulls back to O^n); this is genuinely elementary. Step 2: clause (2) of lem-trf-fp-modules-affine-limit-descent (same unit, hypotheses word for word, specified-map lift in conjugated form, matching its Lean record) is applied to phi and to phi^-1. Step 3: directedness gives a stage j above both, and the associativity coherence lem-pc-tensor-pullback-composition-associativity makes q_j^*(vu)=1 and q_j^*(uv)=1. Step 4: clause (3) at index j for both identities, an upper stage k, and conjugation give all four required equations. There is no cycle (checked the closures of all three cited nodes). Edge cases checked: constant system, zero modules, empty limit; no flatness or countability is used. Accepted tool use: lem-pc-tensor-pullback-composition-associativity, generic coherence from sk-thm-picard-semicon. Advisory: lem-pc-tensor-pullback-finite-presentation states the Step 1 fact; the step's short elementary argument is acceptable without citing it. There is no SGA citation and the blueprint fields are fine."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLimitIsomorphismDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePresentation_iso_descent_affineLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLimitIsomorphismDescent.lean",
+  "statement": "theorem finitePresentation_iso_descent_affineLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ j : Iᵒᵖ, CompactSpace (D.obj j)] [∀ j : Iᵒᵖ, QuasiSeparatedSpace (D.obj j)] [∀ {j k : Iᵒᵖ} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (i : I) (F_i G_i : (D.obj (op i)).Modules) (hF : F_i.IsFinitePresentation) (hG : G_i.IsFinitePresentation) (φ : (tensorPullback (c.π.app (op i))).obj F_i ≅ (tensorPullback (c.π.app (op i))).obj G_i) : ∃ (k : I) (hik : i ≤ k) (u_k : (tensorPullback (D.map (homOfLE hik).op)).obj F_i ⟶ (tensorPullback (D.map (homOfLE hik).op)).obj G_i) (v_k : (tensorPullback (D.map (homOfLE hik).op)).obj G_i ⟶ (tensorPullback (D.map (homOfLE hik).op)).obj F_i), u_k ≫ v_k = 𝟙 ((tensorPullback (D.map (homOfLE hik).op)).obj F_i) ∧ v_k ≫ u_k = 𝟙 ((tensorPullback (D.map (homOfLE hik).op)).obj G_i) ∧ (affineLimitTensorPullbackComparison D c hik F_i).inv ≫ (tensorPullback (c.π.app (op k))).map u_k ≫ (affineLimitTensorPullbackComparison D c hik G_i).hom = φ.hom ∧ (affineLimitTensorPullbackComparison D c hik G_i).inv ≫ (tensorPullback (c.π.app (op k))).map v_k ≫ (affineLimitTensorPullbackComparison D c hik F_i).hom = φ.inv",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of H2 on b5c789450944: the canonical comparison is a plain definition, now owned by def-trf-affine-limit-tensor-pullback-comparison (existing:true). The item cites that definition in stmt_deps; lem-trf-fp-modules-affine-limit-descent remains only in proof_deps. The Lean file and signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2dec8102",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at b5c7. The Lean file is byte-identical to the b5c7 version I checked clause by clause, and lean.statement is verbatim in it. Against live, the item differs only in the added lean record and in stmt_deps, where the theorem node lem-trf-fp-modules-affine-limit-descent is replaced by the new definition node def-trf-affine-limit-tensor-pullback-comparison; the theorem node stays in proof_deps. The new node is existing:true on the real live definition (statement verbatim in FinitePresentationAffineLimitDescent.lean), describes it exactly (inverse of tensorPullbackSectionComp, then eqToIso along c.w, unit m to 1⊗m), assumes nothing extra, and cites def-pc-scheme, def-weil-sheaf-of-modules-category and def-pc-module-pullback with sources 01ZR (2) and 0097. Gates: nothing hollow, proof is sorry only, source and blueprint docstrings present, real Worker report and Second reading by Q19 sections. Advisory: the existing definition's docstring still names the theorem node as its blueprint node. No compile, since there is no fix and the file is unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T094435-L-226731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

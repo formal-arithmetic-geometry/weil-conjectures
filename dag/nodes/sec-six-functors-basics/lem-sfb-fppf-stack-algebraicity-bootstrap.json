@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+ "kind": "statement",
+ "title": "Algebraicity of a stack with a representable fppf algebraic-space cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $\\mathcal Y$ be a stack in groupoids on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Thus isomorphism presheaves are sheaves and covering descent data for objects are effective. Let $A$ be an algebraic space over $S$ [def-trf-algebraic-space], regarded as a discrete fibred groupoid, and let $f:A\\to\\mathcal Y$ be a morphism of fibred groupoids [def-sfb-stable-pointed-moduli-groupoids]. Suppose $f$ is representable by algebraic spaces: for every $S$-scheme $T$ and $y\\in\\mathcal Y(T)$, the $2$-fibre product $A\\times_{\\mathcal Y}T$ is equivalent to an algebraic space $A_y$ over $T$. Suppose every projection $A_y\\to T$ is flat and locally of finite presentation, tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation], and surjective, meaning that every field-valued point of $T$ lifts after a field extension. Then $\\mathcal Y$ is an algebraic stack [def-sfb-algebraic-moduli-stack]. No representability hypothesis on the diagonal of $\\mathcal Y$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06DC (theorem-bootstrap), with the source stack represented by the algebraic space A."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-fppf-stackification"
+ ],
+ "proof": [
+  {
+   "text": "First derive the diagonal, following Tag 05XW. For $y_1,y_2\\in\\mathcal Y(T)$ let $I=\\operatorname{Isom}_T(y_1,y_2)$, an fppf sheaf by hypothesis. Put $A_i=A\\times_{\\mathcal Y,y_i}T$ and $B=A\\times_ST$. The $A_i$ are algebraic spaces by the assumption on $f$; $B$ and $P=A_1\\times_BA_2$ are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], using [lem-sfb-space-change-base-to-integers] to regard these as spaces over $T$. A section of $P$ consists of a common $(a,t)$ and isomorphisms $\\alpha_i:f(a)\\simeq y_i|_t$. Send it to $\\alpha_2\\alpha_1^{-1}\\in I$. For every scheme $Z\\to T$ and $\\phi\\in I(Z)$, $P\\times_IZ\\simeq A_1\\times_TZ$: choose $\\alpha_1$, then necessarily $\\alpha_2=\\phi\\alpha_1$. This is natural, with inverse forgetting $\\alpha_2$. The resulting projection is surjective flat locally finitely presented by the singleton base-change clause of [lem-sfb-space-fppf-covering-calculus]. Thus [lem-sfb-fppf-space-atlas-bootstrap] makes $I$ an algebraic space. These are exactly the scheme pullbacks of the diagonal, so the diagonal is representable; no diagonal hypothesis has been used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XW (lemma-flat-finite-presentation-surjective-diagonal), proof"
+   }
+  },
+  {
+   "text": "For every $d\\geq1$ form $H_d=\\mathcal H_d(f)$ and $L_d=\\mathcal L_d(f)$ using [def-sfb-relative-finite-hilbert-groupoids]. By [lem-sfb-relative-finite-hilbert-algebraic], $H_d$ is algebraic: the source is the given space $A$, and all its scheme fibres have precisely the assumed surjective flat locally finitely presented projections. By [lem-sfb-relative-finite-hilbert-lci-open] the inclusion $L_d\\to H_d$ has open scheme pullbacks. Apply [lem-sfb-open-stack-algebraic-lfp] to obtain that $L_d$ is algebraic. Choose a smooth surjective scheme atlas $q_d:V_d\\to L_d$ as in [def-sfb-algebraic-moduli-stack]. Let $g_d:V_d\\to\\mathcal Y$ forget the finite family. Step 1 and [lem-sfb-stack-diagonal-space-source-representability] show that every $g_d$ is representable by algebraic spaces.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-relative-finite-hilbert-algebraic",
+    "lem-sfb-relative-finite-hilbert-lci-open",
+    "lem-sfb-open-stack-algebraic-lfp",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-diagonal-space-source-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DC (theorem-bootstrap), proof"
+   }
+  },
+  {
+   "text": "The inclusion $L_d\\to H_d$ has locally finitely presented scheme pullbacks: an open immersion is etale by [lem-weil-pbc-open-immersion-etale], hence locally finitely presented by [def-weil-etale-morphism]. The atlas $q_d$ also has locally finitely presented space pullbacks, because its smooth etale scheme charts are locally finitely presented by [def-sbc-smooth-morphisms]; [lem-sfb-space-local-properties-chart-test] identifies the chart and space properties. Therefore [lem-sfb-representable-lfp-object-limit-test] gives relative object descent for each of these two maps. Given an affine directed limit $T=\\lim T_i$, $v\\in V_d(T)$, and an identification $g_d(v)\\simeq y_i|_T$, first descend its $H_d$ object over $y_i$ by [lem-sfb-relative-finite-hilbert-limit-descent]. Next descend its $L_d$ object over this $H_d$ object using the inclusion, and finally descend $v$ over that $L_d$ object using $q_d$. At each stage retain the specified comparison isomorphism; their composites identify $g_d(v_j)$ with $y_i|_{T_j}$. This is the relative object-descent property for $g_d$. Apply the converse of [lem-sfb-representable-lfp-object-limit-test] to this representable map: all $V_d\\times_{\\mathcal Y}T\\to T$ are locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-representable-lfp-object-limit-test",
+    "lem-sfb-relative-finite-hilbert-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DC (theorem-bootstrap), proof"
+   }
+  },
+  {
+   "text": "The map $g_d$ has etale-local compatible square-zero object lifts. Given affine $T_0\\hookrightarrow T'$, $v_0\\in V_d(T_0)$, $y'\\in\\mathcal Y(T')$ and $g_d(v_0)\\simeq y'|_{T_0}$, apply [lem-sfb-relative-finite-hilbert-lci-lift] to $q_d(v_0)$. Obtain $l'\\in L_d(T')$ and its compatible identification with $y'$. The smooth space $E=V_d\\times_{L_d,l'}T'$ has the specified $T_0$-point. Choose a surjective etale scheme chart $C\\to E$. Its pullback $C_0\\to T_0$ along this point is a surjective etale scheme cover by [lem-trf-space-fibre-products-etale-covers]. By [sbc-lem-thickening-etale-site] it lifts to an etale cover $C'\\to T'$. Replace $C'$ by affine open pieces $B'_a$, with $B_{a0}=B'_a\\times_{T'}T_0$. The map $C\\to T'$ is smooth by the chart definition, so [def-sbc-smooth-morphisms] extends each $B_{a0}\\to C$ to $B'_a\\to C$ over $T'$. Projection through $E$ gives $v'_a:B'_a\\to V_d$ and compatible isomorphisms $g_d(v'_a)\\simeq y'|_{B'_a}$ restricting to the specified data on $B_{a0}$. The $B'_a$ cover $T'$; the fibre-product data retain the original comparison isomorphism.",
+   "uses": [
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "sbc-lem-thickening-etale-site",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DC (theorem-bootstrap), proof"
+   }
+  },
+  {
+   "text": "Fix $T\\to\\mathcal Y$ and $Z_d=V_d\\times_{\\mathcal Y}T$, an algebraic space locally finitely presented over $T$ by steps 2--3. Choose a surjective etale scheme chart $W\\to Z_d$. By [lem-sfb-space-local-properties-chart-test], $W\\to T$ is locally finitely presented. Given affine $B_0\\hookrightarrow B'$ over $T$ and $B_0\\to W$, step 4 gives an affine etale cover $B'_a\\to B'$ and maps $B'_a\\to Z_d$ extending its composite. The pullback $D_a=W\\times_{Z_d}B'_a$ is a scheme etale over $B'_a$ by [lem-trf-space-fibre-products-etale-covers], with the prescribed section over $B_{a0}$. Its map to $B'_a$ is flat and unramified by [def-weil-etale-morphism]. Thus [lem-weil-pbc-flat-unramified-formally-etale] extends this section to $B'_a\\to D_a$, giving etale-local lifts to $W$. Apply [lem-sfb-etale-local-infinitesimal-lifts-smooth] to the scheme map $W\\to T$ to obtain smoothness. The property smooth is etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties], so [lem-sfb-space-etale-presentation-property-criterion] with target chart $T\\to T$ makes $Z_d\\to T$ smooth.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-sfb-etale-local-infinitesimal-lifts-smooth",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DC (theorem-bootstrap), proof"
+   }
+  },
+  {
+   "text": "For a field-valued object $y\\in\\mathcal Y(k)$, the given fibre $A_y$ is nonempty and locally finitely presented over $k$. Apply [lem-sfb-relative-finite-hilbert-lci-field] to obtain $Z\\to A_y$ with $Z/k$ finite locally free of some positive degree $d$, unramified and lci. Its map to $A_y$ is exactly a pair $(x,\\alpha:y|_Z\\simeq f(x))$ by the definition of the 2-fibre product, hence gives $l\\in L_d(k)$ by [def-sfb-relative-finite-hilbert-groupoids]. The surjectivity of $q_d$ gives, after a field extension $k\\subseteq K$, a $K$-point of $V_d$ mapping isomorphically to $l|_K$. Consequently the family $(g_d)_{d\\geq1}$ is jointly surjective on field-valued objects.",
+   "uses": [
+    "lem-sfb-relative-finite-hilbert-lci-field",
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DC (theorem-bootstrap), proof"
+   }
+  },
+  {
+   "text": "Form the countable scheme coproduct $V=\\coprod_{d\\geq1}V_d$ by [lem-weil-pbc-scheme-coproduct-family], in the universe of [def-weil-size-convention]. The objects $g_d$ glue to a map $g:V\\to\\mathcal Y$ by stack descent on its disjoint open cover. The diagonal from step 1 and [lem-sfb-stack-diagonal-space-source-representability] make $g$ representable. For every scheme $T\\to\\mathcal Y$, its pullback is the coproduct of the $Z_d$ of step 5: on test schemes this is the decomposition into inverse images of the open summands of $V$. Each etale scheme chart of this pullback decomposes into open pieces mapping to the $Z_d$, so its composite to $T$ is smooth by step 5 and [lem-weil-pbc-smooth-local-on-source]. Thus $g$ is smooth. Step 6 makes $g$ surjective. Finally the fppf stack $\\mathcal Y$ is an etale stack since etale coverings are fppf by [lem-sfb-space-fppf-covering-calculus]. Together with step 1 and the smooth surjective scheme atlas $g$, these are precisely [def-sfb-algebraic-moduli-stack].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06DC (theorem-bootstrap), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "lem-sfb-relative-finite-hilbert-algebraic",
+  "lem-sfb-relative-finite-hilbert-lci-open",
+  "lem-sfb-open-stack-algebraic-lfp",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-representable-lfp-object-limit-test",
+  "lem-sfb-relative-finite-hilbert-limit-descent",
+  "lem-sfb-relative-finite-hilbert-lci-lift",
+  "def-trf-algebraic-space",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-sfb-etale-local-infinitesimal-lifts-smooth",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-relative-finite-hilbert-lci-field",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-size-convention",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06DC (theorem-bootstrap), proof; diagonal argument from Tag 05XW. The countable Hilbert-stack coproduct is implemented by the coproduct of individual smooth scheme atlases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A stack in groupoids admitting a representable surjective flat locally finitely presented morphism from an algebraic space is an algebraic stack",
+   "results": "8 hits; recorded declarations: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism descent, smoothness, Artinian schemes, and abstract categorical quotients do not assert algebraicity of a stack in groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicStack|flatGroupoid|quotientStack|bootstrap",
+   "results": "0 hits; recorded declarations: none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism descent, smoothness, Artinian schemes, and abstract categorical quotients do not assert algebraicity of a stack in groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stack with a representable fppf cover by an algebraic space has a smooth scheme atlas",
+   "results": "8 hits; recorded declarations: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.affineOpenCover",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism descent, smoothness, Artinian schemes, and abstract categorical quotients do not assert algebraicity of a stack in groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "0 hits; recorded declarations: none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism descent, smoothness, Artinian schemes, and abstract categorical quotients do not assert algebraicity of a stack in groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin bootstrap algebraicity theorem from a faithfully flat locally finitely presented algebraic space cover of a stack",
+   "results": "8 hits; recorded declarations: AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instIsLocallyArtinianXScheme, AlgebraicGeometry.IsArtinianScheme, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, AlgebraicGeometry.isLocallyArtinian_iff_openCover, AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian, AlgebraicGeometry.IsArtinianScheme.finite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism descent, smoothness, Artinian schemes, and abstract categorical quotients do not assert algebraicity of a stack in groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and categorical representability, not algebraicity of fibred-groupoid stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stack with representable flat locally finitely presented surjective algebraic space cover is algebraic",
+   "results": "8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Scheme.JointlySurjective, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and categorical representability, not algebraicity of fibred-groupoid stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicStack|flatGroupoid|quotientStack|bootstrap",
+   "results": "8 hits; Mathlib/RingTheory/Jacobson/Ring.lean, Mathlib/RingTheory/Jacobson/Ring.lean, Mathlib/Combinatorics/Hall/Basic.lean, Mathlib/Combinatorics/Matroid/Constructions.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and categorical representability, not algebraicity of fibred-groupoid stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stack with a representable fppf cover by an algebraic space has a smooth scheme atlas",
+   "results": "8 hits; AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.affineOpenCover",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and categorical representability, not algebraicity of fibred-groupoid stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-groupoid-algebraic-quotient",
+  "date": "2026-10-23",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation.",
+   "via": [
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+  "worker": "stage1",
+  "summary": "Read Tag 06DC and its Hilbert-stack inputs. Derived the diagonal by the existing space bootstrap, then built individual lci-Hilbert atlases, proved local finite presentation by three successive relative object descents, and proved smoothness by etale-local compatible square-zero lifts and scheme infinitesimal criteria. Six new statement-only nodes: the actual Hilbert groupoids and five smaller source inputs. No statement correction or new diagonal/algebraicity restatement.",
+  "blueprint": "The ancestor command returns None, agreeing with inherited null from.node. The inherited place/via trace is retained. This split realizes the Tag 06DC bootstrap prerequisite of the flat-groupoid quotient used in the inherited stable-moduli alteration route. The newest blueprint direct-image proof no longer spells out this chain; no unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space, scheme-atlas or relative object-descent tool used in the Stacks 06DC construction; it does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic algebraic-space, scheme-atlas or relative object-descent tool used in the Stacks 06DC construction; it does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic algebraic-space, scheme-atlas or relative object-descent tool used in the Stacks 06DC construction; it does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic algebraic-space, scheme-atlas or relative object-descent tool used in the Stacks 06DC construction; it does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic algebraic-space, scheme-atlas or relative object-descent tool used in the Stacks 06DC construction; it does not replace the unit alteration/direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic algebraic-space, scheme-atlas or relative object-descent tool used in the Stacks 06DC construction; it does not replace the unit alteration/direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-immersion-etale",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-a5d0b131a",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-a5d0b131a (reviewer sub-agent of L); spot-checked: I read all of it against Stacks criteria.tex: 05XW, 06DC (full proof), 06CI, section-lci, 06CL, 06D8, 06D9, 06DA, 06CW, 06CX, 06CH and equation-limit-preserving. The item statement is unchanged against the base (live and side-live are unsplit) and agrees with 06DC with X = algebraic space A. Nothing was weakened. Step 1 re-derives the diagonal as in 05XW: Isom_T(y1,y2) is an fppf sheaf, P = A1 x_B A2 maps to I by a2 a1^-1 with P x_I Z = A1 x_T Z, and the space-atlas bootstrap applies over T. Steps 2-3: H_d is algebraic by the 06CI node, L_d is open by the 06CL node, giving an atlas q_d, and g_d is representable from the diagonal. Relative object descent composes through p_d (06CH node), j_d and q_d (06CX forward), then 06CX in reverse gives lfp. Step 4: the 06D9 node, a chart of E = V_d x_{L_d} T', the 03SI thickening lift and formal smoothness of C -> T' give etale-local lifts with the comparison iso kept. Step 5: formally etale section lifts plus the etale-local lifting criterion make every chart smooth. Step 6 uses the 06DA node with k fixed. Step 7: countable coproduct, disjoint gluing, etale stack via covering calculus (1)/(4). The six new nodes are true, statement-only, and neither duplicates nor restates the item. Tested d=1 with F=id, zero ideal, nonreduced/inseparable slices, empty Y. The alternatives the worker avoided (smooth-space-affine-infinitesimal-lift, stack-infinitesimal-smooth-criterion) both reach the item, so citing them would make a cycle. Batch 5: every listed citation is generic algebraic-space, fibred-groupoid or scheme-smoothness foundation (def-trf-algebraic-space, space fibre products, the sfb space nodes, stable-pointed-moduli conventions reaching only a projective-bundle definition, trf smooth-composition), never a trace-formula or Poincare-duality step; accepted. Artin-gabber point: lem-per-etale-local-infinitesimal-lifts-smooth is a generic 04AM/03P2/02H6 criterion whose closure has no Qbar/adic/middle t-structure/Gabber/de Jong content, and its use at step 5 is justified. But it is on route-pivot-dropped.txt (line 1523), and a reachable node may not cite it. FIXES (3, in fixes/dag/nodes/sec-six-functors-basics/): (1) new reviewer node lem-sfb-etale-local-infinitesimal-lifts-smooth with the same statement, unsplit, created.item = this item; step 5 repointed, proof_deps recomputed, dropped id removed from tool_uses; the closure now has no dropped id and no cycle. (2) The groupoid definition now cites the existing def-weil-pbc-koszul-regular-sequence and def-weil-closed-immersion, and its unramified wording matches def-weil-unramified-morphism. (3) The relative-hilbert-algebraic node now cites def-trf-algebraic-space-jointly-surjective-family. Step 3 wording was also corrected (etale implies lfp via def-weil-etale-morphism). Accepted tool_uses: space fibre products, open-immersion-etale, 03SI thickening, flat-unramified-formally-etale, scheme coproduct, smooth local on source. Full checks are in review.md.; 4 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfStackAlgebraicityBootstrap",
+  "declaration": "CategoryTheory.fppf_stack_algebraicity_bootstrap",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfStackAlgebraicityBootstrap.lean",
+  "statement": "theorem fppf_stack_algebraicity_bootstrap {S : Scheme.{u}} (Y : BasedCategory.{v, w} (Over S)) (hstack : IsFppfModuliStack Y) (A : AlgebraicSpace S) (f : BasedFunctor (discreteModuli A.obj.obj) Y) (hcover : ∀ (T : Over S) (y : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T y Z p ∧ (∀ (U : Over S) (b : yoneda.obj U ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → Flat (yoneda.preimage (b ≫ p)).left ∧ LocallyOfFinitePresentation (yoneda.preimage (b ≫ p)).left) ∧ SpaceMapIsSurjective Z T p) : IsAlgebraicModuliStack Y",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d5bf21d0",
+  "group": "NP",
+  "result": "fix",
+  "note": "Lean statement exact against node and Stacks 06DC: IsFppfModuliStack Y (owner def-sfb-fppf-stackification added to stmt_deps, landed Q27), A as discreteModuli A.obj.obj, f BasedFunctor, ∀ T y ∃ Z p with HasSpaceBaseChange ∧ étale-chart Flat/LocallyOfFinitePresentation (same pattern as SpaceMapIsSmooth; SpaceMapIsFppf is space-to-space, no duplicate) ∧ SpaceMapIsSurjective (equivalent to field-point lifting); conclusion IsAlgebraicModuliStack, no diagonal hypothesis, no extra assumptions or universe restriction. lean.statement verbatim; node diff only stmt_deps+lean; by sorry, no defs; docstrings with source place, blueprint id and 7-step proof; imports exist. Sole fault H11: the second-reading section is the worker's self-check → FIX: fixes/lem-sfb-fppf-stack-algebraicity-bootstrap.report.md (Worker report verbatim plus an independent clause-by-clause second reading)."
+ }
+}

@@ -1,0 +1,169 @@
+{
+ "id": "lem-r9-graph-compositor-base-change",
+ "kind": "statement",
+ "title": "Base change of the explicit product-graph compositor",
+ "statement": "Let A be a finite commutative ring. For arbitrary schemes X,Y,Z,X',Y',Z', let f:X→Y, g:Y→Z, f':X'→Y', g':Y'→Z', a:X'→X, b:Y'→Y, c:Z'→Z form Cartesian squares (a,f',f,b), (b,g',g,c), and (a,g'f',gf,c). Supply compactifications of f,g,gf,f',g',g'f' [lem-etale-unbounded-compact-support-composition], and assume only f',g',g'f' quasi-compact. Work in the ordinary unbounded etale A-module derived categories. Write F_v for the compact-support functor of the supplied compactification, L_v for left-derived inverse image, and Ex_v for rightDerivedLowerShriekBaseChangeMap of the supplied square. Let E:F_gf≅F_f⋙F_g and E':F_g'f'≅F_f'⋙F_g' be exactly sfGraphCompactSupportCompIso on those compactifications. Then for every M, L_c(E_M);Ex_g(F_f M);F_g'(Ex_f(M)) = Ex_gf(M);E'_(L_a M). Canonical functor associators are understood. No quasi-compactness of f,g,gf, Noetherianity, boundedness or constructibility is assumed. Input comparisons and their normalizations are [lem-r9-exact-exchange-pasting], [lem-pur-etale-graph-comparison-base-change], [lem-pur-etale-graph-comparison-interchange], and [lem-pur-etale-proper-open-exchange-cube].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7F and 0F7J; explicit normalization and factor pasting in lem-route-exists-right-derived-lower-shriek-comp-iso"
+ },
+ "stmt_deps": [
+  "lem-r9-exact-exchange-pasting",
+  "lem-pur-etale-graph-comparison-base-change",
+  "lem-pur-etale-graph-comparison-interchange",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-etale-unbounded-compact-support-composition"
+ ],
+ "proof": [
+  {
+   "text": "Build the proper product graph diagram and identify its normalized diagram compositor with sfGraphCompactSupportCompIso. Use graph shrinking comparison, the graph cocycle, Cartesian normalization of the proper/open interchange and naturality.",
+   "uses": [
+    "lem-etale-unbounded-compact-support-composition",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-pur-etale-proper-open-exchange-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the diagram factor by factor using fibre-product universal properties. Apply proper and open exact exchange pasting and the arbitrary-base-change proper/open cube. Paste these identities, moving factors by naturality.",
+   "uses": [
+    "lem-r9-exact-exchange-pasting",
+    "lem-pur-etale-proper-open-exchange-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the graph comparison base-change theorem and the open presentation normalization at both endpoints. Its quasi-compact refinement normalization identifies the pulled-back compactification comparisons with the prescribed common-refinement isomorphisms.",
+   "uses": [
+    "lem-pur-etale-graph-comparison-base-change",
+    "lem-pur-etale-graph-from-open-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the pulled graph diagram and the primed chosen graph diagram by graph/interchange compatibility. The cocycle cancels the source and composite comparison factors; naturality moves the middle comparison past the source exchange.",
+   "uses": [
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-pur-etale-graph-comparison-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the exact pullbacks to left-derived pullbacks by their canonical comparison isomorphisms. The proper mate transport and inverse open exchange transport identify exactly rightDerivedLowerShriekBaseChangeMap. Cancel the pullback comparison isomorphisms to obtain the required equality. Reuse the proved exact_exchange_transport helper from UnboundedEtaleCompactSupportComparisons; its statement has no Noetherian or quasi-compact hypothesis.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-etale-unbounded-compact-support-composition",
+  "lem-pur-etale-graph-comparison-interchange",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-r9-exact-exchange-pasting",
+  "lem-pur-etale-graph-comparison-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-etale-graph-from-open-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "R9: explicit factorwise proof of the parent graph compositor argument, retaining ordinary unbounded categories and the original hypotheses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfGraphCompactSupportCompositionBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphCompactSupportCompIso_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphCompactSupportCompIso_baseChange"
+  ],
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphCompactSupportCompositionBaseChange.lean",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-25",
+  "statement": "theorem sfGraphCompactSupportCompIso_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y Z X' Y' Z' : Scheme.{u}}\n    {f : X ⟶ Y} {g : Y ⟶ Z} {f' : X' ⟶ Y'} {g' : Y' ⟶ Z'}\n    {a : X' ⟶ X} {b : Y' ⟶ Y} {c : Z' ⟶ Z}\n    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]\n    [HasCompactification f'] [HasCompactification g'] [HasCompactification (f' ≫ g')]\n    [QuasiCompact f'] [QuasiCompact g'] [QuasiCompact (f' ≫ g')]\n    (sqf : IsPullback a f' f b) (sqg : IsPullback b g' g c)\n    (sqh : IsPullback a (f' ≫ g') (f ≫ g) c)\n    (M : DerivedCategoryModule A X) :\n    L((c)^*[ModuleCat.{u + 1} A]).map\n        ((sfGraphCompactSupportCompIso A f g\n          (HasCompactification.compactification f)\n          (HasCompactification.compactification g)\n          (HasCompactification.compactification (f ≫ g))).hom.app M) ≫\n      (rightDerivedLowerShriekBaseChangeMap A sqg).app\n        (R(f)_![ModuleCat.{u + 1} A].obj M) ≫\n      R(g')_![ModuleCat.{u + 1} A].map\n        ((rightDerivedLowerShriekBaseChangeMap A sqf).app M) =\n    (rightDerivedLowerShriekBaseChangeMap A sqh).app M ≫\n      (sfGraphCompactSupportCompIso A f' g'\n        (HasCompactification.compactification f')\n        (HasCompactification.compactification g')\n        (HasCompactification.compactification (f' ≫ g'))).hom.app\n          (L((a)^*[ModuleCat.{u + 1} A]).obj M)"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "via": [],
+   "place": "The ancestor command returns null because the created.item chain ends at a Lean module. Actual textual provenance: prop-asd-smooth-base-change.proof.md, coherences (i) and (iii), through lem-route-exists-right-derived-lower-shriek-comp-iso; its steps 4-7 require factorwise proper/open exchange pasting and normalization of the product-graph compositor."
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence",
+  "date": "2026-10-25",
+  "group": "R9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived base change mates commute with composition and identity and compactly supported graph composition",
+   "results": "8 hits: scheme-module pullback conjugation and generic exponentiable morphism identities; none states the exact etale exchange equation.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"comp\"",
+   "results": "10 hits including mateEquiv_vcomp, mateEquiv_hcomp and conjugateEquiv_mateEquiv_vcomp; used through the library compact-support formalism.",
+   "date": "2026-10-25",
+   "verdict": "generic mate laws used"
+  },
+  {
+   "tool": "grep",
+   "query": "exactDerivedBaseChangeMap|mapDerivedCategoryOpenImmersionLowerShriekComp|graph.*Comp.*baseChange",
+   "results": "No Mathlib match. Local library has the factors and generic mate laws, but no graph compositor base-change equality.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism for compact support derived direct image compatible with projection formula and base change",
+   "results": "Scheme.Modules.pushforwardComp and analogous presheaf composition maps; no etale compact-support coherence match.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp in Mathlib.CategoryTheory.Adjunction.Mates; the generic mate law underlying the proper/open pasting argument.",
+   "date": "2026-10-25",
+   "verdict": "generic law used"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|ProjectionCompCompatible",
+   "results": "Mathlib generic mate-pasting laws and local library compatibility predicates; no graph compositor base-change theorem.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T203017-L-2775381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T203017-L-2775381",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sf-projection-torsion-object-constant",
+ "kind": "statement",
+ "title": "Constant-module projection formula for a bounded torsion object over Noetherian coefficients",
+ "statement": "Let $k$ be a field, $\\Lambda$ a Noetherian commutative ring [def-weil-pbc-noetherian-ring], and $f:X\\to Y$ a separated $k$-morphism between schemes of finite type over $k$ [def-weil-scheme-over-base, def-weil-finite-type-morphism, def-weil-proper-morphism]. Work in the ordinary unbounded derived categories of small-etale module sheaves [def-weil-pbc-derived-categories], with the module-sheaf derived direct image $Rf_*$ [def-weil-pbc-direct-image] and uncompleted derived tensor [def-kun-derived-tensor]. Let $E\\in D^b(X_{\\mathrm{et}},\\Lambda)$ have Tor amplitude in a finite interval $[u,v]$ for integers $u\\leq v$ [def-kun-tor-amplitude], and suppose $N\\cdot\\mathrm{id}_E=0$ for an integer $N\\geq1$ invertible on $Y$. For every $\\Lambda$-module $M$, with constant module sheaves $\\underline M_X,\\underline M_Y$ [def-kun-constant-sheaf], the canonical counit-defined projection morphism [def-kun-projection-formula-map]\n$$\n\\mathrm{PF}_f(E,\\underline M_Y):\\quad\nRf_*E\\otimes_\\Lambda^{\\mathbf L}\\underline M_Y[0]\n\\longrightarrow Rf_*\\bigl(E\\otimes_\\Lambda^{\\mathbf L}\\underline M_X[0]\\bigr)\n$$\nis an isomorphism in $D(Y_{\\mathrm{et}},\\Lambda)$, natural in $E$ and $M$. No finite generation, finite presentation, flatness, or finite projective dimension of $M$ is assumed; $E$ need not be constructible.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F12, lemma-pull-out-constant-mod-n, its direct-sum/triangle/unit argument adapted to relative direct image and a bounded torsion object over a possibly nontorsion Noetherian coefficient ring. This is an agent-stated extension, not the literal statement of the tag; the required relative constant-coefficient assertion is also explicitly invoked in lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean, docstring preceding torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-kun-derived-tensor",
+  "def-kun-constant-sheaf",
+  "def-kun-projection-formula-map",
+  "def-kun-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Finite-type schemes over k are locally Noetherian, hence quasi-separated, and X is quasi-compact. Thus f is qcqs. Apply torsionEtaleCohomologicalDimension_finite_of_finiteType to obtain cd(f) < infinity, using its relative clause only.",
+   "uses": [
+    "lem-kun-0f10",
+    "def-kun-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let C = constantFunctor Lambda Y, L the derived inverse image, R the derived direct image, and T tensor with E. Whisker rightDerivedLowerStarProjectionMapApp by C, giving tau from C followed by tensor with R(E) to (C followed by L followed by T) followed by R. The existing etale triangulated and shift instances make both functors exact and tau shift-compatible. This is the original module-sheaf projection mate. The existing isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_self proves invertibility at the degree-zero constant Lambda, from projection-unit normalization. Transport it across mapDerivedCategorySingleFunctor to give invertibility of tau at Lambda[0].",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-kun-projection-formula-map",
+    "lem-kun-derived-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/DirectImageTorAmplitude.lean",
+    "place": "rightDerivedLowerStarProjectionMapApp, isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_self, isIso_rightDerivedLowerStarProjectionMapApp_of_iso; ConstantTensorProjection.lean, preservesColimitsOfShape_constantFunctor; LowerShriekProjectionShift.lean shift instance; Triangulated.lean exactness instances."
+   }
+  },
+  {
+   "text": "For every P, the additive functor tensoring on the right by P maps N id_E = 0 to N id_(E tensor P) = 0. For a family P_i in D(Lambda), set K_i = T(L(C(P_i))). Apply the fixed-exponent coproduct comparison theorem with the original Lambda, exponent N, and the relative bound of Step 1. PreservesCoproduct.of_iso_comparison turns its invertible sigmaComparison into preservation by R of this particular diagram. Constants preserve coproducts as an exact coproduct-preserving functor induced on derived categories; L preserves them by its adjunction, and tensor preserves them by the derived tensor coproduct theorem. The composite target therefore preserves the coproduct of P_i. The source preserves it for the same reason. No global coproduct-preservation assertion for R over arbitrary coefficients is made.",
+   "uses": [
+    "lem-sf-fixed-exponent-derived-coproducts",
+    "lem-kun-derived-tensor-direct-sums",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedModuleFreeGeneration to the property IsIso(tau.app P). Step 2 and NatTrans.isIso_app_shift_iff give every shifted rank-one generator; identify ULift Lambda with Lambda via ULift.moduleEquiv. For a coproduct cofan, naturality and Step 3 give IsIso at its point by NatTrans.isIso_app_of_isColimit_cofan. The triangle-isomorphism theorem gives closure under third vertices, and NatTrans.isIso_app_of_retract gives retract closure. Hence tau is invertible at every P.",
+   "uses": [
+    "lem-pc-derived-module-free-generation",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at M[0]. The canonical mapDerivedCategorySingleFunctor isomorphism identifies C(M[0]) with the degree-zero constant module sheaf. NatTrans.isIso_app_iff_of_iso then gives exactly the component of rightDerivedLowerStarProjectionMap in the theorem statement. No inverse-image constant-module bridge is needed because the stated target is already expressed using the existing derived inverse image. Naturality is inherited from that original transformation.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f10",
+  "def-kun-cd",
+  "def-kun-constant-sheaf",
+  "def-kun-projection-formula-map",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-sf-fixed-exponent-derived-coproducts",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pc-derived-module-free-generation",
+  "lem-sf-triangle-two-out-of-three"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F12, lemma-pull-out-constant-mod-n, direct-sum/triangle/unit proof, adapted relatively using the fixed-exponent comparison; implemented by A3 using the existing etale projection-unit and shift APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Ff]ormula|[Cc]onstant.*[Tt]ensor|[Tt]ensor.*[Cc]onstant",
+   "results": "Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/PiTensorProduct.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/TensorProduct/Pi.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula with constant coefficients for etale sheaves",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, CompHausLike.LocallyConstant.counit_app_val, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.rec, CategoryTheory.constantSheafAdj_counit_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctorObj_π_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula for derived pushforward with an arbitrary constant module and a bounded torsion etale complex",
+   "results": "SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTorAmplitude|tor.amplitude|[Dd]erived.*[Pp]rojection|[Pp]rojection.*[Dd]erived",
+   "results": "Mathlib/CategoryTheory/Monad/Algebra.lean, Mathlib/CategoryTheory/Monad/Algebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "SheafOfModules.pushforwardId, SheafOfModules.pushforward, SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver, SheafOfModules.overPushforwardOverAdj, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived direct image commutes with derived tensor product against constant modules for a torsion complex",
+   "results": "CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor', Rep.Tor_map",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|pull.out.constant",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant module derived projection formula for torsion etale complexes",
+   "results": "; 8 hits: Algebra.FormallyEtale.instTensorProduct, KaehlerDifferential.isBaseChange_of_formallyEtale, MvPFunctor.const.get_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Submodule.IsCompl.projection.congr_simp, HomologicalComplex.homologyπ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with arbitrary direct sums of etale complexes annihilated by a fixed integer when the morphism has finite torsion cohomological dimension",
+   "results": "; 8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula for etale derived pushforward tensor an arbitrary constant module and a bounded complex killed by an integer over a Noetherian ring",
+   "results": "; 8 hits: localCohomology.diagram, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Etale.exists_subalgebra_fg, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Extension.tensorCotangentSpace",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstant.*[Tt]ensor|[Tt]ensor.*[Cc]onstant|[Pp]rojection.*[Dd]erived",
+   "results": "; 6 hits: Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean, Mathlib/CategoryTheory/Monad/Algebra.lean, Mathlib/CategoryTheory/Monad/Algebra.lean, Mathlib/RingTheory/TensorProduct/Pi.lean, Mathlib/RingTheory/PiTensorProduct.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction counit gives an isomorphism Rf E derived tensor constant M to Rf of E tensor constant M for every module M",
+   "results": "; 8 hits: CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, LightCondensed.instMonoidalClosedLightCondMod, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, LightCondensed.free_internallyProjective_iff_tensor_condition, ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-direct-image-tor-amplitude-noetherian",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sfb-proper-base-change-integral, integral reductions and their direct images; specifically the arbitrary-constant-coefficient projection formula invoked in the docstring of AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing. The imported item's created.item is null, so blueprint_refs.py ancestor reports no computable ancestor; the textual blueprint anchor is retained here.",
+   "via": [
+    "lem-sf-direct-image-tor-amplitude-noetherian"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-projection-torsion-object-constant",
+  "worker": "stage1",
+  "summary": "Proved the relative constant-module projection formula by the Stacks 0F12 generator route. Isolated fixed-annihilator coproduct preservation over arbitrary coefficients, so no all-module cohomological-dimension hypothesis or lift of E to Lambda/N is silently assumed. No changes to the statement; one new statement-only node; all searches logged.",
+  "blueprint": "Supports det-thm-sfb-proper-base-change-integral and the integral-reduction Tor-bound use in lem-sf-direct-image-tor-amplitude-noetherian. Computable created.item ancestry has no blueprint ancestor; the existing textual anchor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-0f10",
+    "why": "Generic Finite cohomological dimension of finite-type morphisms used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   },
+   {
+    "node": "lem-kun-derived-tensor-direct-sums",
+    "why": "Generic Derived tensor products preserve direct sums used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic Isomorphism on two terms of a distinguished triangle used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Generic Generation of a module derived category by shifts of the ring used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic Geometric inverse image preserves constant module sheaves used as stated in the numbered proof; the integral proper-image unit has no substitute for this ordinary etale/homological-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-0f10",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-pc-derived-module-free-generation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-7fc364ded",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-7fc364ded (reviewer sub-agent of L); spot-checked: I read the whole split: Stacks 0F10, 0F11 and 0F12 (etale-cohomology.tex l.20015-20200, statements and proofs), 0D6J(3), and every cited node statement. 0F12 is absolute and needs a torsion ring; the item is an agent extension over any ring with torsion E, and its statement is kept, not weakened. The steps check out. Step 1: lem-kun-0f10(1) gives cd(f)<inf for a k-morphism of finite-type k-schemes, for all torsion sheaves. Step 2: lem-weil-pbc-ringed-projection-mate-exact supplies exactness, shift compatibility, naturality and alpha=1 at the unit; this is the same mate as def-kun-projection-formula-map; c_Y is exact and a left adjoint. Step 3: coproducts pass through c_Y, f^{-1} and the tensor; then the new node with n=N, since N*id=0 passes through the tensor. Step 4: Lambda[j], third vertex by lem-sf-triangle-two-out-of-three, coproducts, and retracts (inverse F(r)alpha_Q^{-1}G(i), checked); lem-pc-derived-module-free-generation then covers all of D(Lambda). Step 5: lem-sfb-geometric-inverse-image-constant-module (any ring, any module) gives f^{-1}M_Y = M_X. New node lem-sf-fixed-exponent-derived-coproducts: statement only and self-contained, sources 0F11 and 0D6J by label, five searches. It is true: forget to Z via 0D6J(3); A tensor^L Z/n = Cone(n) = A + A[1] when n=0 on A, so A is a retract of an object over Z/n where 0F11(1) applies. Small cases checked: Lambda=Q, Lambda=Z/n, empty family, n=1. It is not a restatement of the item and not a duplicate: lem-kun-0f11 is Z/n only, lem-etale-qcqs-finite-dimension-derived-coproducts and lem-exc-direct-image-coproducts need cd bounded for all modules, and the remaining candidates are proper or pro-etale. Nothing in the DAG states the item either (lem-kun-0f12 is absolute; lem-per-excellent-etale-constant-projection is Z/l^m ctf). No SGA is cited and this is not a re-split item. I accept the seven declared generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionObjectConstantProjection",
+  "declaration": "AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionObjectConstantProjection.lean",
+  "statement": "theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ] (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] (E : DerivedCategoryModule Λ X) (_hbounded : ∃ c d : ℤ, E.IsGE c ∧ E.IsLE d) (a b : ℤ) (_hab : a ≤ b) (_hTor : DerivedCategory.hasTorAmplitudeIn Λ X a b E) (N : ℕ) (_hNpos : 1 ≤ N) (_hN : N • 𝟙 E = 0) (_hNY : IsUnit (N : Γ(Y, ⊤))) (M : ModuleCat.{u + 1} Λ) : IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app E).app ((_root_.DerivedCategory.singleFunctor _ 0).obj ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f244de37a",
+  "group": "NF",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: k field, Λ:Type(u+1) Noetherian, X,Y finite type over Spec k (LocallyOfFiniteType+QuasiCompact), f IsOver + IsSeparated (no properness), E bounded (∃ IsGE/IsLE), recorded hasTorAmplitudeIn a≤b, 1≤N, N•𝟙E=0, IsUnit N in Γ(Y,⊤), arbitrary M:ModuleCat.{u+1} Λ; conclusion IsIso of recorded rightDerivedLowerStarProjectionMap at (E, singleFunctor 0 (constantSheaf M)); argument order checked in LowerStarProjection.lean; target Lf^*(M_Y) vs M_X differs only by a canonical iso, so IsIso is the same. lean.statement verbatim; docstrings with source and blueprint; 5 proof steps; sorry only; proof-dep imports match records; node = live except lean; no competing delivery; citer lem-sf-direct-image-tor-amplitude-noetherian uses this form. Advisory: Mathlib Adjunction.Limits import stands in for unrecorded lem-weil-pbc-left-adjoint-preserves-colimits."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261023T134733-L-2743943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

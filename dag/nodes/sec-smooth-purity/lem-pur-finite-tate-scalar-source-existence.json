@@ -1,0 +1,194 @@
+{
+ "id": "lem-pur-finite-tate-scalar-source-existence",
+ "kind": "statement",
+ "title": "Existence of normalized finite Tate balancing and source compatibilities",
+ "statement": "Let φ : A → B be a unital map of finite commutative rings killed by a positive integer N, and let X be a scheme on which N is invertible. For the actual scalar/single, shift, tensor and pullback comparisons and predicates in [def-pur-finite-tate-scalar-source-data], there exists a family β_r : Q_X(A_X(r)) ≅ B_X(r) satisfying the generator, degree-zero and tensor-power balancing equations, the single/unit and shifted-line normalization, invertibility of every unbounded source map, and the coefficient-unit and zero-power source equations. This assertion does not include uniqueness of β or the flat-single comparison for arbitrary flat sheaves.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, finite reduction: ordinary Tate balancing, scalar/single unit, tensor and shift source; old Step 7"
+ },
+ "stmt_deps": [
+  "def-pur-finite-tate-scalar-source-data"
+ ],
+ "proof": [
+  {
+   "text": "For $M=A_T$, compose the comparison just computed with $A_T\\otimes_A A'_T\\to A'_T$, $a\\otimes b\\mapsto\\varphi(a)b$. Its inverse sends $b$ to $1\\otimes b$: the two composites are the identity by the balancing relation $a\\otimes b=1\\otimes\\varphi(a)b$. The scalar adjunction unit sends $a$ to $a\\otimes1$, so the composite sends it to $\\varphi(a)$. This identifies the composite with the specified normalized coefficient-unit map $u_T$, with no unspecified unit automorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), ordinary multiplication normalization"
+   }
+  },
+  {
+   "text": "By [lem-asd-finite-etale-twist-line], every $A_T(r)$ is flat. Define the ordinary line balancing map $\\beta_1:(A_T\\otimes_{\\mathbf Z/N}\\mu_{N,T})\\otimes_A A'_T\\to A'_T\\otimes_{\\mathbf Z/N}\\mu_{N,T}$ by $(a\\otimes z)\\otimes b\\mapsto\\varphi(a)b\\otimes z$. It is balanced over both rings; its inverse is $b\\otimes z\\mapsto(1\\otimes z)\\otimes b$, and the balancing relation verifies both composites on pure tensors. These sectionwise formulas commute with restrictions and therefore induce inverse maps after sheafification. For $r>1$ the identical construction on $r$ root-of-unity factors sends $(\\bigotimes_i(a_i\\otimes z_i))\\otimes b$ to $b\\prod_i\\varphi(a_i)\\otimes(\\bigotimes_i z_i)$, using the canonical regrouping of the tensor powers. Its inverse inserts $1$ in each $A$ factor. At $r=0$ use multiplication from Step 3. Thus $q_{A_T(r)}$ followed by $\\beta_r$ is the required unshifted line isomorphism.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PK (section-kummer), 040M (groupoids.tex, example-roots-of-unity), 03RV (lemma-characterize-finite-locally-constant); explicit tensor balancing"
+   }
+  },
+  {
+   "text": "The scalar tensorator is the comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for the identity topos with ring map $A_T\\to A'_T$. On flat K-flat representatives it is the ordinary balancing isomorphism $((x\\otimes y)\\otimes b)\\mapsto(x\\otimes1)\\otimes(y\\otimes b)$; its inverse multiplies the two $A'$ coefficients. Consequently the $r$-factor formula in Step 4 is precisely the tensor power of the rank-one formula, with these specified tensorators. Applying termwise scalar extension to a shifted complex commutes with the shift: both have terms $P^{i+n}\\otimes_A A'$ and differential $(-1)^n(d_P\\otimes1)$. Localizing this equality gives the specified scalar/shift comparison. Shift the line map by $2r$ to obtain $l_{T,r}$. At $r=0$ this is Step 3; all rearrangements of line factors here have even degree and introduce sign $+1$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); Tag 06YY (lemma-derived-base-change); termwise shifted flat models"
+   }
+  },
+  {
+   "text": "Put $L=A_X(r)[2r]$. The specified map is the following composite:\n$$Q_X(f^*K\\otimes_A^L L)\\xrightarrow{\\mu}Q_X(f^*K)\\otimes_{A'}^LQ_XL\\xrightarrow{\\lambda^{-1}\\otimes l_{X,r}}f^*(Q_YK)\\otimes_{A'}^LA'_X(r)[2r].$$\nHere $\\mu$ is the ringed-topos tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and $\\lambda:f^*Q_Y\\xrightarrow{\\sim}Q_Xf^*$ is the canonical scalar/pullback identification specified before the bounded-below mate assertion in [lem-pur-etale-scalar-mate-projection]. That identification concerns all ordinary unbounded derived inputs; none of the later hypotheses on its mate $J$ are being used. Each arrow is an isomorphism, so their composite gives $a_{f,K}$ for every $K$, without flatness of $A'$ over $A$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), and canonical scalar/pullback identification; blueprint cor-pur-vector-bundle-purity proof, paragraph 2"
+   }
+  },
+  {
+   "text": "Check the claimed boundary normalizations on representatives, not by choosing new isomorphisms. Choose a flat-term K-flat representative $P$ for $K$ by [lem-pc-kflat-resolution]; pullback preserves this class by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The scalar/pullback identification is ordinary coefficient balancing on $f^*P$, with the scalar insertion $x\\mapsto x\\otimes1$, as specified in [lem-pur-etale-scalar-mate-projection]. For $K=A_Y[0]$ the tensorator sends $(a\\otimes v)\\otimes b$ to $(a\\otimes1)\\otimes(v\\otimes b)$. Multiplication on the first factor and $\\beta_r$ on the second send this to $\\beta_r((av)\\otimes b)$, exactly the line comparison of Steps 3--5. For $r=0$ and general homogeneous $x\\in f^*P$, the same calculation sends $(x\\otimes a)\\otimes b$ to $(x\\otimes1)\\otimes\\varphi(a)b$, whose right unitor is $x\\otimes\\varphi(a)b$. Applying the source unitor first gives this same element under scalar/pullback. These are balanced sheaf maps and chain maps in each degree; hence their localized maps are equal. This proves both normalizations for the actual comparisons, including unbounded $K$. Alternatively transport the tensor and pullback unit equations in lem-pur-etale-compact-scalar-coherence, and use the scalar right-unit equation at zero power.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-pur-scalar-right-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product); explicit unit calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-asd-finite-etale-twist-line",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-pc-kflat-resolution",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-scalar-right-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, ordinary Tate coefficient reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension along a nonflat finite ring quotient preserves etale Tate lines with canonical balancing map",
+   "results": "Algebra.IsEtaleAt.comp; Algebra.Etale.comp; RingHom.Etale.toAlgebra; Algebra.FormallyEtale.comp; Algebra.Etale.exists_subalgebra_fg; StandardEtalePair.instFormallyEtaleRing; RingHom.etale_algebraMap; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*[Tt]wist|[Tt]wist.*[Ss]calar|[Ss]calar.*[Tt]wist",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat derived change of rings normalized unit sends x to x tensor one and ordinary Tate scalar comparison is balancing",
+   "results": "Algebra.FormallyUnramified.one_tmul_mul_elem; Algebra.FormallyUnramified.lmul_elem; Algebra.FormallyUnramified.comp_sec; Algebra.FormallyUnramified.sec; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; KaehlerDifferential.tensorKaehlerEquiv_left_inv; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale finite Tate line derived coefficient extension normalized scalar unit",
+   "results": "Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; PadicInt.unitCoeff; Algebra.FormallyEtale.of_restrictScalars; Algebra.instEtaleOfIsStandardEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; LinearEquiv.smulOfUnit; Rep.linearization_η_hom_apply; Algebra.EssFiniteType.aux",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of a flat sheaf placed in degree zero is ordinary tensor and its adjunction comparison is the identity",
+   "results": "comonadicExtendScalars; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_id_comp; Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or monoidal infrastructure does not state the normalized derived ordinary-etale Tate comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived extension of scalars is strong monoidal and commutes with inverse image of sheaves and shifts",
+   "results": "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; LightCondensed.instMonoidalLightCondSetLightCondModFree; SheafOfModules.pushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or monoidal infrastructure does not state the normalized derived ordinary-etale Tate comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTateScalarSourceNormalization",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-tate-scalar-source-normalization",
+   "place": "construction of the balancing family and its compatibilities",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTateScalarSourceExistence",
+  "file": "lean/Sheaf/Paper/FiniteTateScalarSourceExistence.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finite_tate_scalar_source_normalization_exists",
+  "statement": "theorem finite_tate_scalar_source_normalization_exists [Finite A] [Finite B]\n    (φ : A →+* B) (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (hB : (N : B) = 0)\n    (X : Scheme.{u}) (hX : ∀ x : X, IsUnit (N : X.presheaf.stalk x)) :\n    ∃ β : ∀ r : ℕ,\n        (Etale.purityScalarSheaf φ X).obj (Scheme.finiteEtaleTateTwist X N A hA r) ≅\n          Scheme.finiteEtaleTateTwist X N B hB r,\n      IsFiniteTateScalarBalancing φ N hA hB X β ∧\n      IsFiniteTateScalarLineNormalized φ N hA hB X β ∧\n      IsFiniteTateScalarSourceInvertible φ N hA hB X β ∧\n      IsFiniteTateScalarSourceUnitNormalized φ N hA hB X β ∧\n      IsFiniteTateScalarSourceZeroNormalized φ N hA hB X β ",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-709c9",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261025T202103-L-2672233",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-709c9",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261025T202103-L-2672233",
+  "kind": "interface",
+  "note": "independent cc review: item proof (flat-single via kFlat_single + purityAdjunctionSingleMap_eq_representative; uniqueness by generator/induction; existence hole) vs node lem-pur-finite-tate-scalar-source-normalization; adapted EtaleDerivedScalarTensor/VectorPurityScalarSingle vs published sheaf-dag d1fa4910 (after T7 take-out 73427fd8534) and the C-95241 fixes; fixed set compiled + 35 direct importers"
+ }
+}

@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-closed-limit-stabilization",
+ "kind": "statement",
+ "title": "A locally finitely presented limit of closed-immersion systems eventually equals a stage",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], and with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme. A closed immersion of algebraic spaces is a representable morphism whose every scheme base change is a closed immersion [def-weil-closed-immersion]. Local finite type and local finite presentation are tested on compatible etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Let $B$ be an algebraic space, let $I$ be a small nonempty directed set, and let $(C_i)_{i\\in I}$ be an inverse system over $B$ whose transition morphisms are closed immersions. Assume every $C_i$ is quasi-compact, every $C_i\\to B$ is locally of finite type, and the limit $C=\\varprojlim_i C_i$ exists in algebraic spaces over $B$. If $C\\to B$ is locally of finite presentation, then there exists $i_0\\in I$ such that the canonical projection $C\\to C_i$ is an isomorphism for every $i\\geq i_0$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0828 (lemma-finite-type-eventually-closed), clause (3), with Y equal to the limit X"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose $a\\in I$ and restrict to $I_{\\geq a}$. This tail is nonempty and directed. It has the same limit: a compatible tail cone extends uniquely to an index $k$ by choosing $j\\geq a,k$ and composing its $j$-component with $C_j\\to C_k$; a common upper bound proves independence of $j$. Apply [lem-sfb-space-relative-lfp-permanence] to $C\\to C_a\\to B$. The composite is locally of finite presentation by hypothesis and $C_a\\to B$ is locally of finite type, so $C\\to C_a$ is locally of finite presentation.",
+   "uses": [
+    "lem-sfb-space-relative-lfp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0828(3), choose 0; Tag 05WT (spaces-morphisms-lemma-finite-presentation-permanence)"
+   }
+  },
+  {
+   "text": "By [lem-trf-space-qc-finite-affine-atlas-refinement], choose an affine scheme $U_a$ and a representable surjective etale atlas $U_a\\to C_a$. For $i\\geq a$ set $U_i=C_i\\times_{C_a}U_a$. These are schemes closed in $U_a$, by the assumed scheme-test definition of closed immersion [def-weil-closed-immersion]. For $j\\geq i\\geq a$, $U_j=C_j\\times_{C_i}U_i$ is the base change of the closed immersion $C_j\\to C_i$ along the scheme $U_i\\to C_i$, so the same scheme-test definition makes the transition $U_j\\to U_i$ a closed immersion. The affine-quotient clause of [def-weil-closed-immersion] makes every $U_i$ affine, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Also $U_i\\to U_a$ is locally of finite type: on affine opens its ring map is a quotient, generated as an algebra by the empty set [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0828(3), affine surjective etale chart; Tag 03H6 (spaces-properties-lemma-quasi-compact-affine-cover)"
+   }
+  },
+  {
+   "text": "The scheme-test definition of a closed immersion [def-weil-closed-immersion] makes every transition affine: every affine scheme test has a closed, hence affine, scheme source. Apply [lem-sfb-space-affine-limits-schematic-stages] to this system. Its sheaf limit is a limit in algebraic spaces over $B$ and is therefore canonically the given $C$. Its projection to $C_a$ is affine, so $U=C\\times_{C_a}U_a$ is an affine scheme. The same cited node gives $U\\cong\\varprojlim_{i\\geq a}U_i$. Scheme objects are the representable sheaves $h_T$ [def-trf-scheme-algebraic-space]: a natural transformation $h_T\\to h_U$ is determined by its value on $1_T$, namely a scheme map $T\\to U$, and naturality recovers composition with that map. Thus the same cone is also a scheme limit.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0828(3), U = lim U_i; Tag 07SF (lemma-directed-inverse-system-has-limit), (1)-(2)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-local-properties-chart-test] with property locally of finite presentation to $C\\to C_a$, using target chart $U_a\\to C_a$ and the identity scheme chart of $C\\times_{C_a}U_a=U$. Step 1 supplies its hypothesis, and step 3 supplies that $U$ is a scheme. It follows that $U\\to U_a$ is locally of finite presentation.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0828(3), finite presentation on the affine chart; spaces-morphisms.tex Tag 0410 (lemma-finite-presentation-local)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-closed-limit-lfp-stabilization] with scheme base $U_a$ and system $(U_i)_{i\\geq a}$. Step 2 gives quasi-compact stages, closed immersion transitions and locally finite type structure maps. Steps 3 and 4 give its scheme limit and locally finite presentation of the limit over $U_a$. Thus there is $i_0\\geq a$ such that the canonical $U\\to U_i$ is an isomorphism for every $i\\geq i_0$.",
+   "uses": [
+    "lem-weil-pbc-closed-limit-lfp-stabilization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0828(3), reduction to affine schemes; limits.tex Tag 081B (lemma-finite-type-eventually-closed), (3)"
+   }
+  },
+  {
+   "text": "Fix $i\\geq i_0$. By [lem-trf-space-fibre-products-etale-covers], $U_i\\to C_i$ is representable surjective etale, and the pullback of $C\\to C_i$ along it is $U\\to U_i$. For any scheme $T\\to C_i$, the scheme $T\\times_{C_i}U_i\\to T$ is surjective etale, hence an fppf cover [def-weil-etale-morphism, def-pc-fppf-site]. The isomorphism $U\\to U_i$ gives exactly one lift to $C$ on this cover and on its double overlap. The two restricted lifts therefore agree and glue uniquely by the sheaf axiom for $C$ [def-trf-algebraic-space]. Consequently every $T\\to C_i$ has exactly one lift to $C$, naturally in $T$. The resulting inverse natural transformation proves $C\\to C_i$ an isomorphism.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0828(3), descent of the chart isomorphism by the fppf sheaf condition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-lfp-permanence",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-closed-limit-lfp-stabilization",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0828 (lemma-finite-type-eventually-closed), proof of (3), with existing scheme stabilization Tag 081B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A directed inverse system of quasi compact algebraic spaces with closed immersion transition maps stabilizes if the limit is locally finitely presented over the initial space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {j \", \"doc\": \"Given a cofiltered or empty category $\\\\mathcal{I}$ and a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes where all transition morphisms are affine, let $j$ be an object in $\\\\mathcal{I}$. Suppose fo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limits of closed subspaces with a locally finite presentation limit eventually equal that limit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {j \", \"doc\": \"Given a cofiltered or empty category $\\\\mathcal{I}$ and a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes where all transition morphisms are affine, let $j$ be an object in $\\\\mathcal{I}$. Suppose fo\"}\n  {\"name\": \"InverseSystem.piLTLim\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"{ι : Type u_6} →\\n  [inst : LinearOrder ι] →\\n    {X : ι → Type u_7} →\\n      {i : ι} → Order.IsSuccPrelimit i → InverseSystem.piLT X i ≃ ↑(InverseSystem.limit InverseSystem.piLTProj i)\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and a family of types $X : \\\\iota \\\\to \\\\mathrm{Type}$, when $i \\\\in \\\\iota$ is a prelimit element (having no immediate predecessor), there is a canonical equivalen\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"InverseSystem.piLTLim_symm_apply\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} [inst : LinearOrder ι] {X : ι → Type u_7} {i : ι} (hi : Order.IsSuccPrelimit i)\\n  {f : ↑(InverseSystem.limit InverseSystem.piLTProj i)} (k : ↑(Set.Iio i)) {l : ↑(Set.Iio i)} (hl : ↑l < ↑k),\\n  (InverseSystem.piLTLim hi).symm f l = ↑f k ⟨↑l, hl⟩\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and a family of types $X : \\\\iota \\\\to \\\\mathrm{Type}$, when $i \\\\in \\\\iota$ is a prelimit element (having no immediate predecessor), the inverse of the canonical e\"}\n  {\"name\": \"Profinite.exists_locallyConstant\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1}\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g, f = LocallyConstant.comap (TopC\", \"doc\": \"In the category of profinite spaces, given a cofiltered limit cone $ C $ with apex $ X $ and a locally constant function $ f : X → α $, there exists an object $ j $ in the diagram and a locally consta\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]losed.*[Ll]imit.*[Pp]resentation|[Ll]imit.*[Ss]tabiliz",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse limit of quasi compact algebraic spaces with closed immersion transitions and locally finitely presented limit over the first stage is eventually an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (U : c.pt.Opens) (hU : IsCompact (U : Set c.pt)) :\\n  ∃ (i : I) (V : (D.obj i).Opens), IsCompact (V : Set (D.obj i)) ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"InverseSystem.isNatEquiv_piEquivLim\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"[InverseSystem f] (H : ∀ x l, (equivLim x).1 l = f l.2.le x) : IsNatEquiv f (piEquivLim nat equivLim hi)\", \"doc\": \"For a linearly ordered index set $\\\\iota$ and an inverse system $F$ with transition maps satisfying a naturality condition, if $i \\\\in \\\\iota$ is a prelimit element (having no immediate predecessor), the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsQuasiAffine c.pt] : ∃ i, IsQuasiAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"Profinite.isIso_asLimitCone_lift\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": IsIso ((limitConeIsLimit.{u, u} X.diagram).lift X.asLimitCone)\", \"doc\": \"For any profinite space $X$, the canonical morphism from the cone exhibiting $X$ as the inverse limit of its discrete quotients to the limit cone in the category of profinite spaces is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"ProfiniteGrp.isIso_toLimit\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : IsIso (toLimit P)\", \"doc\": \"For any profinite group $P$, the canonical continuous group homomorphism from $P$ to the inverse limit of its finite quotient groups (indexed by open normal subgroups) is an isomorphism. This establis\"}\n  {\"name\": \"Profinite.isIso_indexCone_lift\", \"module\": \"Mathlib.Topology.Category.Profinite.Product\", \"type\": \": IsIso ((limitConeIsLimit.{u, u} (indexFunctor hC)).lift (indexCone hC))\", \"doc\": \"The lift of the index cone in the category of profinite spaces, constructed via the universal property of the limit cone, is an isomorphism. This means that the index cone is a limit cone and the lift\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme-specific or general categorical limit statements, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Morphisms/Separated.lean:130-133 and AffineTransitionLimit.lean:635-639,690-696; their objects have type Scheme. The global grep contains no AlgebraicSpace declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]losed.*[Ll]imit.*[Pp]resentation|[Ll]imit.*[Ss]tabiliz",
+   "results": "Actual search: 0 hits; . ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidate declarations concern schemes or profinite spaces, whereas the item is for algebraic spaces. Read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:635-640,690-697 and Morphisms/FinitePresentation.lean:40-47. The global algebraic-space grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse limit of quasi compact algebraic spaces with closed immersion transitions and locally finitely presented limit is eventually isomorphic to every later stage",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.compactSpace_of_isLimit, InverseSystem.limit, AlgebraicGeometry.exists_preimage_eq, InverseSystem.pEquivOnGlue, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.globalEquiv, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'. ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidate declarations concern schemes or profinite spaces, whereas the item is for algebraic spaces. Read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:635-640,690-697 and Morphisms/FinitePresentation.lean:40-47. The global algebraic-space grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsLimit\"",
+   "results": "Actual search: 0 hits; . ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidate declarations concern schemes or profinite spaces, whereas the item is for algebraic spaces. Read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:635-640,690-697 and Morphisms/FinitePresentation.lean:40-47. The global algebraic-space grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed inverse system of quasi compact algebraic spaces with closed immersion transition maps stabilizes if its limit is locally of finite presentation over the base",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit. ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidate declarations concern schemes or profinite spaces, whereas the item is for algebraic spaces. Read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:635-640,690-697 and Morphisms/FinitePresentation.lean:40-47. The global algebraic-space grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented inverse limit of closed subspaces eventually equals a finite stage",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, Profinite.exists_locallyConstant_finite_nonempty, Profinite.NobelingProof.CC_exact, Profinite.exists_locallyConstant_finite_aux, Profinite.NobelingProof.fin_comap_jointlySurjective, Profinite.exists_locallyConstant_fin_two, Profinite.exists_locallyConstant. ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidate declarations concern schemes or profinite spaces, whereas the item is for algebraic spaces. Read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:635-640,690-697 and Morphisms/FinitePresentation.lean:40-47. The global algebraic-space grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-eventual-monomorphism",
+  "date": "2026-10-23",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: the graph into the limit becomes a monomorphism at a finite stage; Tag 0828(4), final sentence: apply part (3) to the closed-immersion system of kernel pairs over its fixed initial stage.",
+   "via": [
+    "lem-sfb-space-eventual-monomorphism",
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-closed-limit-stabilization",
+  "worker": "stage1",
+  "summary": "Q17 checked Stacks 0828(3) and its affine-chart reduction, reused existing 05WT, 03H6, 07SF and scheme 081B nodes, and wrote six steps with explicit hypotheses and elementary sheaf descent. No statement change and no new nodes. Searched project Lean, DAG, current blueprint and Mathlib; no exact Lean attachment or Mathlib match.",
+  "blueprint": "The inherited ancestry serves det-thm-sf-ctf-stability-direct-images proof (3), via alteration and finite-presentation approximation; this item realizes the 0828(3) closed-kernel-pair stabilization input already recorded in blueprint.from.place. The latest direct-image proof (3) states compactification assembly; no change to its unit route is made.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-limit-lfp-stabilization",
+    "why": "Generic scheme stabilization, Stacks 081B(3), is the scheme case explicitly used by the algebraic-space 0828(3) proof; this unit has no substitute for that scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-limit-lfp-stabilization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-45a0af721",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-45a0af721 (reviewer sub-agent of L); spot-checked: Read in full the item (statement unchanged from live, where it is still unsplit; 6 steps; no new nodes), every cited statement, and Stacks spaces-limits Tag 0828(3) with its proof. The item is 0828(3) with Y=X, hypothesis by hypothesis. The route follows the source: tail plus 05WT permanence (step 1); affine atlas from 03H6 with closed affine U_i that are locally of finite type over U_a (step 2); 07SF sheaf limit identified with C, affine projection, base change U=lim U_i, and a correct Yoneda argument that this is also a scheme limit (step 3); 0410 chart test with V=U_a and the identity of U, giving U->U_a locally of finite presentation (step 4); scheme 081B(3) node with every hypothesis met (step 5); descent of the isomorphism by the fppf sheaf axiom (step 6, elementary). For step 6 I checked uniqueness on the double overlap: lifts to C of any map to C_i that factors through U_i match maps to U over U_i, and there is exactly one. Edge cases checked: empty C_a (Spec 0), singleton index, no least element, constant system. The proof_deps closure does not contain the item, so there is no cycle. No SGA. Fault C4, fixed: step 2 justified the transitions U_j->U_i by lem-weil-pbc-closed-immersion-base-change, a lemma about schemes, but U_j is the base change of the space closed immersion C_j->C_i. The fix rewrites the sentence to use the item's scheme-test definition and removes the lemma from step 2's uses and from proof_deps. Batch-5 check: lem-trf-space-qc-finite-affine-atlas-refinement and def-trf-scheme-algebraic-space are general foundations of algebraic spaces, and the three sfb nodes reach sec-trace-formula only through def-trf-algebraic-space; every trf node in the closure is a generic scheme, space or descent lemma, none from Poincaré duality or the trace formula, so all five are accepted. Tool use: the scheme 081B(3) node lem-weil-pbc-closed-limit-lfp-stabilization (sk-thm-properbasechange) is what the source itself reduces to, and this unit has no node for it; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceClosedLimitStabilization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_isIso_projection_of_closed_limit_locallyOfFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceClosedLimitStabilization.lean",
+  "statement": "theorem exists_isIso_projection_of_closed_limit_locallyOfFinitePresentation {S : Scheme.{u}} (B : AlgebraicSpace S) {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over B) (hqc : ∀ i : Iᵒᵖ, ∃ (U : Over S) (a : yoneda.obj U ⟶ (D.obj i).left.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hlft : ∀ i : Iᵒᵖ, MapIsLocally (@LocallyOfFiniteType) (D.obj i).hom) (hclosed : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (D.map f).left.hom.hom) (c : Cone D) (hc : IsLimit c) (hlfp : MapIsLocallyOfFinitePresentation c.pt.hom) : ∃ i₀ : I, ∀ i : I, i₀ ≤ i → IsIso (c.π.app (op i)).left",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-577dfebc7",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 0828(3) (Y=X) clause by clause: B arbitrary AlgebraicSpace S; I : Type u directed nonempty preorder; D : Iᵒᵖ ⥤ Over B (direction checked); closed transitions via IsRepresentableWith IsClosedImmersion (same pattern as landed MapIsSeparated); qc via CompactSpace étale-surjective atlas (node's own definition, no existing space-qc predicate); lft/lfp via landed MapIsLocally chart tests; IsLimit in Over B; conclusion ∃ i₀, ∀ i ≥ i₀, IsIso of canonical projection. No extra assumptions; edge cases (empty stages/limit, constant system, no least index) covered; universes consistent. Node diff vs live: lean + added landed def-sfb-space-morphism-properties stmt_dep (allowed). lean.statement verbatim. Docstrings with source/blueprint and 6 proof steps; only sorry; proof-only imports exist, no cycle. Report has Worker report and Second reading by Q07. No findings."
+ }
+}

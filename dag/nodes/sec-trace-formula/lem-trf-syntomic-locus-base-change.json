@@ -15,7 +15,8 @@
   "def-pc-fibre-product",
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
-  "def-trf-complete-intersection-local-algebra"
+  "def-trf-complete-intersection-local-algebra",
+  "def-sfb-complete-intersection-fibres"
  ],
  "proof": [
   {
@@ -60,14 +61,16 @@
    }
   },
   {
-   "text": "For each $t\\in V$, the fibre of $U\\to V$ is $\\operatorname{Spec}D_t$, where $D_t=B\\otimes_R\\kappa(t)$ by [lem-weil-pbc-fibre-product-affine-spectra]. By [lem-weil-pbc-presentation-base-change], it has the presentation $D_t=\\kappa(t)[t_1,\\ldots,t_n]/(\\overline h_1,\\ldots,\\overline h_c)$. By [def-weil-pbc-relative-global-complete-intersection], either $D_t=0$ or $\\dim D_t=n-c$. In either case $D_t$ is a global complete intersection over $\\kappa(t)$ by [def-weil-pbc-complete-intersection-over-field], hence a local complete intersection (the single principal open $D(1)$ covers its spectrum). By [lem-trf-lci-pointwise-criterion], every local ring of $\\operatorname{Spec}D_t$ is a complete-intersection local ring. By [lem-weil-pbc-open-preimage-fibre-product], this fibre is the open subspace $U\\cap X_t$ of $X_t$; its local ring at any of its points is unchanged, since a germ can be represented on a neighbourhood inside that open. Thus every $y\\in U$ belongs to $V_f$. Each $x\\in V_f$ has such an open neighbourhood $U\\subseteq V_f$, so $V_f$ is their union and is open.",
+   "text": "For an affine relative-global-complete-intersection chart $U=\\operatorname{Spec}B$ over $V=\\operatorname{Spec}R$ and a point $x\\in U$ above $s$, the inverse image of $U$ in $X_s$ is affine by [lem-weil-pbc-open-preimage-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra]. Its section algebra is canonically $\\kappa(s)\\otimes_R B$, with the actual scalar maps induced by the morphisms. By [lem-weil-pbc-relative-global-complete-intersection-base-change], the mapped polynomial presentation remains a relative global complete intersection over $\\kappa(s)$. Evaluate its fibre condition at the zero prime of that field, whose residue field is canonically the field itself. The tensor-unit isomorphism identifies this fibre with the presented algebra. Thus this algebra is zero or has dimension the number of variables minus the number of equations, and is a global complete intersection by [def-weil-pbc-complete-intersection-over-field]. Its principal localization at 1 is again global by [lem-weil-pbc-global-complete-intersection-principal-localization], so the singleton family $D(1)$ witnesses that it is a local complete intersection. By [lem-trf-lci-pointwise-criterion], every localization at a prime is a complete-intersection local algebra. The affine-open stalk localization identifies the stalk at the canonical fibre point with such a localization, with compatible residue-field scalars. Consequently every $x\\in U$ is in $V_f$. The charts supplied in step 3 therefore form open neighbourhoods contained in $V_f$, proving that $V_f$ is open.",
    "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-presentation-base-change",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
     "def-weil-pbc-relative-global-complete-intersection",
     "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-global-complete-intersection-principal-localization",
     "lem-trf-lci-pointwise-criterion",
-    "lem-weil-pbc-open-preimage-fibre-product"
+    "lem-weil-pbc-affine-open-stalk-localization"
    ],
    "elementary": false,
    "source": {
@@ -99,15 +102,16 @@
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
   "lem-trf-syntomic-pointwise-local-model",
-  "lem-weil-pbc-presentation-base-change",
   "def-weil-pbc-relative-global-complete-intersection",
   "def-weil-pbc-complete-intersection-over-field",
-  "lem-trf-lci-pointwise-criterion"
+  "lem-trf-lci-pointwise-criterion",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-global-complete-intersection-principal-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), its proof via Algebra Tag 00SI and Morphisms Tag 01UE; the source-open maximality argument is written out."
+  "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), its proof via Algebra Tag 00SI and Morphisms Tag 01UE; the source-open maximality argument is written out. Lean realization by Y2: affine sections of cartesian squares use Mathlib isIso_pushoutSection_of_isAffineOpen and Algebra.IsPushout.equiv; affine stalks use IsAffineOpen.isLocalization_stalk. The local-ring formulations are bridged by proved private equivalences. The openness step uses the existing relative-global-complete-intersection base-change theorem and principal-localization theorem instead of repeating their presentation argument."
  },
  "mathlib_searches": [
   {
@@ -223,9 +227,7 @@
   "module": "Sheaf.TraceFormula.SyntomicLocusBaseChange",
   "declaration": "AlgebraicGeometry.syntomic_locus_base_change",
   "declarations": [
-   "AlgebraicGeometry.Scheme.Hom.IsCompleteIntersectionAtFiberPoint",
    "AlgebraicGeometry.Scheme.Hom.fiberCompleteIntersectionLocus",
-   "AlgebraicGeometry.Scheme.Hom.HasCompleteIntersectionFibres",
    "AlgebraicGeometry.syntomic_locus_base_change"
   ],
   "file": "lean/Sheaf/TraceFormula/SyntomicLocusBaseChange.lean",
@@ -233,7 +235,8 @@
   "branch": "newtargets-dag",
   "by": "Q125",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "Maintenance 2026-10-24, Q51 return ca68d1b97d4c: IsCompleteIntersectionAtFiberPoint and HasCompleteIntersectionFibres move verbatim to Sheaf.AlgebraicGeometry.CompleteIntersectionFibres, owned by def-sfb-complete-intersection-fibres. This module publicly imports that definition module; the locus definition, theorem and all proofs are unchanged. The extraction removes the need for consumers to cite an unused theorem."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -243,5 +246,26 @@
   "result": "pass",
   "note": "Read node, 8 stmt_deps (+ Fiber.lean asFiber/fiber API, CompleteIntersectionLocalAlgebra def), Stacks 02V3 (morphisms.tex 5974-5989), module, report (Worker report + Second reading present). Clauses match: LocallyOfFiniteType binder; fibre stalk over κ(s) with canonical ΓSpecIso/appLE/germ scalars; V_f via canonical f.asFiber; ∀ S' g with f'=pullback.snd, g'=pullback.fst and set equality without flat/lfp; flat→lfp→∃ U : X.Opens, ↑U = V_f ∧ IsGreatest over opens with flat, lfp, all-fibre-local-ring CI restriction. Empty cases covered, no extra hypotheses, same-universe S' standard. Helper defs are the node's own notions, real data, listed in declarations; no duplicate in side lean/Mathlib. Node diff = lean + landed def-trf-complete-intersection-local-algebra in stmt_deps (permitted); statement verbatim; imports match statement + proof_deps. nt_compile --json clean 2.5 s rc 0. Advisory: two pre-existing 00SD def nodes (def-trf-complete-intersection-local vs -algebra); stage 3 needs a bridge."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261023T132432-L-2272242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

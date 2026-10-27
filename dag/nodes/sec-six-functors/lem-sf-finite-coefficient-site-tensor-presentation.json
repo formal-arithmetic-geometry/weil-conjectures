@@ -1,0 +1,162 @@
+{
+ "id": "lem-sf-finite-coefficient-site-tensor-presentation",
+ "kind": "statement",
+ "title": "Resolving tensor presentation for finite coefficient site descent",
+ "status": "split",
+ "statement": "At every positive finite coefficient level, take the full subcategory P of etale complexes whose termwise inverse images are intrinsically K-flat. Restriction along P times P to the product etale derived category is fully faithful on functors into the intrinsic derived category. The source localization tensorator on these representatives is the inverse of a natural isomorphism, whose components are the specified finiteHomEtaleTensorModel maps. The termwise inverse-image chain tensor comparisons assemble naturally and have exactly the specified finiteHomNuChainTensor components. The source representative predicate is the one in [lem-sf-etale-kflat-tensor-presentation].",
+ "stmt_deps": [
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-sf-finite-coefficient-site-chain-tensor",
+  "def-pc-kflat-complex",
+  "lem-sf-finite-coefficient-site-tensor-naturality",
+  "lem-sf-etale-kflat-tensor-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final site-transport paragraph; Stacks Project, Cohomology on Sites, Tags 06YN and 07A4."
+ },
+ "proof": [
+  {
+   "text": "The resolving representative theorem gives the fully faithful restriction on pairs.",
+   "uses": [
+    "lem-sf-finite-coefficient-kflat-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect intrinsic K-flatness to etale K-flatness, then apply the etale K-flat localization presentation, whose inverse components are the specified representative maps. Retain the shared model-map carrier and its heterogeneous component certificate until generic descent, where its homogeneous instance is converted back to ordinary equality.",
+   "uses": [
+    "lem-sf-finite-coefficient-kflat-reflection",
+    "lem-sf-etale-kflat-tensor-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the specified pointwise chain tensor comparisons for the third assertion.",
+   "uses": [
+    "lem-sf-finite-coefficient-site-tensor-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-kflat-tensor-presentation",
+  "lem-sf-finite-coefficient-kflat-reflection",
+  "lem-sf-finite-coefficient-kflat-representatives",
+  "lem-sf-finite-coefficient-site-tensor-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-22",
+  "note": "Proof preparation for the finite coefficient site tensor comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of functors along resolving K-flat representatives of a derived category is fully faithful",
+   "results": [
+    "DerivedCategory.instFullSingleFunctor",
+    "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactors",
+    "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh"
+   ],
+   "date": "2026-10-22",
+   "verdict": "Generic localization APIs are available; use the existing resolving-representative restriction theorem after constructing the finite-coefficient K-flat resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": "0 hits; unknown identifier Functor.FullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "No specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "resolvingRepresentativesFullyFaithfulWhiskering|kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj",
+   "results": "0 Mathlib search hits. Repository search found the resolving restriction theorem and the adopted flat-resolution preservation theorem.",
+   "date": "2026-10-22",
+   "verdict": "Use the stated repository declarations; prove the transport to intrinsic coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat resolutions give fully faithful restriction and a tensor localization comparison on representative complexes",
+   "results": {
+    "t": "2026-10-22T03:42:54Z",
+    "tool": "leansearch",
+    "query": "K-flat resolutions give fully faithful restriction and a tensor localization comparison on representative complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.of_isLocalizedModule",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.iff_flat_tensorProduct",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "RingHom.Flat.ofLocalizationSpanTarget",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_rTensor_exact"
+    ],
+    "digest": "1ffd95b2275ffd76"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact match: returned module-flatness and ordinary tensor exactness results do not combine the three resolving derived-category presentation assertions. The theorem combines the proved representative, source tensor and naturality lemmas."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientSiteHomArrow",
+  "date": "2026-10-22",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sf-finite-coefficient-site-hom-arrow",
+   "place": "Resolving tensor presentation for finite coefficient site descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientSiteTensorPresentation",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSiteTensorPresentation.lean",
+  "declaration": "WeilConjectures.finiteHomNuTensorPresentation",
+  "statement": "theorem finiteHomNuTensorPresentation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (n : ℕ) :\n    let K := CochainComplex (Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1, u}\n        (Padic.coefficientExtensionRing l E (n + 1))))) ℤ\n    let P : ObjectProperty K := fun P ↦\n      @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        X.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _)\n        (Scheme.ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)\n        ((finiteHomNuComplex l E X n).obj P)\n    let t : K × K ⥤ K := finiteHomCochainTensorGeneral _\n    let Q := finiteHomEtaleQ l E X n\n    let U := finiteHomNuComplex l E X n\n    let S := (finiteHomEtaleClosed l E X n).tensor\n    FiniteHomTensorPresentationAux (normalizedDVRDerived l E X n) Q U t\n      (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X)\n        (integralCoefficientCommRingSheaf l E X n)) S P\n      (finiteHomEtaleTensorModel l E X n) (finiteHomNuChainTensor l E X n)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-22",
+  "declarations": [
+   "WeilConjectures.FiniteHomTensorPresentationAux",
+   "WeilConjectures.finiteHomNuTensorPresentation"
+  ],
+  "note": " The comparison family retains its heterogeneous component equation through FiniteHomChainTensorNaturalityAux; the abstract uniqueness helper converts the equality certificate between native witnesses to ordinary equality. This shares the same data and does not weaken the presentation."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 91a912d9 vs prior FIXed head 4ada08f3 (cmp: all Lean/node files identical, only change record status + report differ) and live (CoefficientRingedTensorHomModel and importer IntegralTensorReductionTowerComparison unchanged); fixed set of 10 modules compiled with run_set, exit 0; checker rule stage3_delivery.py:602-606 (Status must start with open)"
+ }
+}

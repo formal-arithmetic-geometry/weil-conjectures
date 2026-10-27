@@ -1,0 +1,321 @@
+{
+ "id": "lem-trf-projective-exterior-scalar-comparisons",
+ "kind": "statement",
+ "title": "Coherent scalar extension for exterior powers, duals and determinant wedges",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings and $V$ a direct summand of a finite free $A$-module [def-weil-pbc-projective-module]. For $r\\ge0$, using exterior powers [def-weil-pbc-exterior-algebra] and ordinary module tensor [def-weil-pbc-module-tensor-product], the maps\n$$B\\otimes_A\\bigwedge_A^rV\\longrightarrow\\bigwedge_B^r(B\\otimes_AV),\\quad b\\otimes(v_1\\wedge\\cdots\\wedge v_r)\\longmapsto b((1\\otimes v_1)\\wedge\\cdots\\wedge(1\\otimes v_r)),$$\n$$B\\otimes_A V^\\vee\\longrightarrow(B\\otimes_AV)^\\vee,\\quad b\\otimes\\lambda\\longmapsto\\bigl(b'\\otimes v\\longmapsto bb'\\lambda(v)\\bigr),\\qquad V^\\vee=\\operatorname{Hom}_A(V,A),$$\nare isomorphisms, natural in $V$; the dual map is natural for the contravariant dual action. They commute with evaluation, ordinary tensor symmetry, and the identity and associativity identifications of scalar extension. For the variable-rank determinant modules [def-trf-projective-determinant-module], the top exterior comparisons induce an isomorphism $s_V:B\\otimes_A\\det_A(V)\\cong\\det_B(B\\otimes_AV)$, natural for isomorphisms of finite projective modules, including the unit comparison for $V=0$. For every short exact sequence $0\\to U\\to V\\to W\\to0$ of finite projective $A$-modules, the scalar extension of its kernel-first wedge map $\\gamma:\\det_A(U)\\otimes_A\\det_A(W)\\cong\\det_A(V)$ [lem-trf-projective-determinant-exact-sequence] agrees, via these comparisons, with the kernel-first wedge map of the scalar-extended sequence. No flatness hypothesis on $B$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0FJ9 (section-determinants), 0FJB (lemma-det-ses); affine scalar-extension assertion in perfect.tex Tag 0FJY (remark-functorial-det)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-projective-determinant-module",
+  "lem-trf-projective-determinant-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha:A\\to B$. Tensor balancing gives the comparison\n$B\\otimes_A(M\\otimes_AN)\\cong(B\\otimes_AM)\\otimes_B(B\\otimes_AN)$ by $b\\otimes(m\\otimes n)\\mapsto(b\\otimes m)\\otimes(1\\otimes n)$, with inverse $(b\\otimes m)\\otimes(c\\otimes n)\\mapsto bc\\otimes(m\\otimes n)$. Units, symmetry and successive scalar extension are given respectively by multiplication, interchange of the module entries, and $c\\otimes(b\\otimes m)\\mapsto c\\beta(b)\\otimes m$ for $B\\xrightarrow{\\beta}C$. Each inverse and each constraint equation follows by substitution on pure tensors, which span. Tensoring a retract $V\\xrightarrow{i}A^n\\xrightarrow{p}V$, $pi=1$, remains a retract since $(1\\otimes p)(1\\otimes i)=1$; the explicit coordinate maps identify $B\\otimes_AA^n$ with $B^n$. Thus $V_B$ is finite projective, without any flatness assumption.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra), tensor conventions; explicit balanced-map argument for scalar constraints and preservation of a finite-free retract."
+   }
+  },
+  {
+   "text": "The same retract supplies a finite dual frame: put $v_j=p(e_j)$ and $\\lambda_j=e_j^*i$, so $v=\\sum_j\\lambda_j(v)v_j$. Consequently every $\\lambda\\in V^\\vee$ satisfies $\\lambda=\\sum_j\\lambda(v_j)\\lambda_j$. Define $d_V(b\\otimes\\lambda)(c\\otimes v)=bc\\alpha(\\lambda(v))$; both tensor relations and $B$-linearity follow from this formula. An inverse is\n$h\\longmapsto\\sum_j h(1\\otimes v_j)\\otimes\\lambda_j$.\nIndeed $d_V$ of this sum, evaluated at $c\\otimes v$, is $c\\sum_jh(1\\otimes v_j)\\alpha(\\lambda_j(v))=h(c\\otimes v)$. Conversely the inverse applied to $d_V(b\\otimes\\lambda)$ is $\\sum_jb\\alpha(\\lambda(v_j))\\otimes\\lambda_j=b\\otimes\\lambda$. These calculations establish invertibility and show that the inverse does not depend on the retract.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), finite-free retract characterization; explicit finite-frame calculation filling the dual scalar comparison."
+   }
+  },
+  {
+   "text": "By the exterior universal property, the alternating map $(v_j)\\mapsto(1\\otimes v_1)\\wedge\\cdots\\wedge(1\\otimes v_r)$ induces, after tensor balancing, the stated $B$-linear map $c_{r,V}$. To construct its inverse, extend the formula\n$((b_1\\otimes v_1),\\ldots,(b_r\\otimes v_r))\\mapsto(\\prod_jb_j)\\otimes(v_1\\wedge\\cdots\\wedge v_r)$\nadditively in each entry. Replacing $b_j\\alpha(a)\\otimes v_j$ by $b_j\\otimes av_j$ leaves this value unchanged, so repeated tensor universality makes it a $B$-multilinear map on $V_B^r$. It is alternating: when two arguments equal $\\sum_k b_k\\otimes v_k$, the terms with the same summand twice vanish and the terms indexed by $(k,l)$ and $(l,k)$ cancel by $v_k\\wedge v_l=-v_l\\wedge v_k$. This uses alternation, not division by $2$. The universal property over $B$ now gives a map from $\\bigwedge_B^rV_B$. Both composites are the identity on pure wedges by the displayed formulas, hence on their spans. For $r=0$ these maps are multiplication $B\\otimes_AA\\cong B$ and its inverse. This construction in fact works for every $A$-module.",
+   "uses": [
+    "lem-trf-exterior-power-universal-property",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra), alternating quotient; explicit scalar-extension construction from the universal property."
+   }
+  },
+  {
+   "text": "For an $A$-linear map $f:V\\to W$, both exterior naturality composites send $b\\otimes(v_1\\wedge\\cdots\\wedge v_r)$ to $b\\bigwedge_j(1\\otimes f(v_j))$. For $\\mu\\in W^\\vee$, both sides of $d_V(1\\otimes f^\\vee)=f_B^\\vee d_W$ evaluated on $c\\otimes v$ give $bc\\alpha(\\mu(f(v)))$. Evaluation after scalar extension and evaluation after $d_V$ likewise both give $bc\\alpha(\\lambda(v))$; interchanging tensor factors changes $bc$ to $cb$, which is equal. Exterior products commute with $c$ because concatenating the two wedge tuples before or after applying $c$ gives the same wedge, with the same scalar product. Under $A\\to B\\xrightarrow{\\beta}C$, the two exterior maps on $c\\otimes(b\\otimes\\bigwedge_jv_j)$ both give $c\\beta(b)\\bigwedge_j(1\\otimes v_j)$. The two dual maps evaluated on $t\\otimes v$ both give $ct\\beta(b)\\beta\\alpha(\\lambda(v))$. For identity scalar extension the formulas reduce to multiplication by the original scalars. Spanning pure tensors and wedges proves all these equations and compatibility with the ordinary tensor associators and symmetry of step 1.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra); generator calculations for exterior and dual naturality, products, evaluation, symmetry, units and scalar towers."
+   }
+  },
+  {
+   "text": "Taking all degrees together, the maps $c_{r,V}$ give a multiplicative map of exterior algebras, by the product calculation in step 4. Define a map $s_V:B\\otimes_AD_A(V)\\to D_B(V_B)$ by $b\\otimes x\\mapsto b\\,\\bigwedge(v\\mapsto1\\otimes v)(x)$. For $x\\in D_A(V)$ its image wedges to zero with $1\\otimes v$ for every $v$, since it is the image of $x\\wedge v=0$. Every element of $V_B$ is a sum of $c\\otimes v$, so it wedges to zero with every element of $V_B$. This proves that the formula lands in the socle and is balanced. No assertion that tensoring preserves annihilators has been used; invertibility will be proved on charts.",
+   "uses": [
+    "def-trf-projective-determinant-module",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJA (remark-determinant-as-socle); explicit restriction of the multiplicative exterior scalar map to the socle."
+   }
+  },
+  {
+   "text": "Choose a finite standard free cover $A_{f_a}$ for $V$; the images $g_a=\\alpha(f_a)$ generate $1$ in $B$. Tensor balancing identifies $(V_B)_{g_a}$ with $B_{g_a}\\otimes_{A_{f_a}}V_{f_a}$, so it is free on the extended basis. Chart descent identifies $D_A(V)_{f_a}$ and $D_B(V_B)_{g_a}$ with the respective top exterior powers, including zero charts. The tensor identification for the source is explicit:\n$(B\\otimes_AD_A(V))_{g_a}\\cong B_{g_a}\\otimes_{A_{f_a}}D_A(V)_{f_a}$,\n$(b\\otimes x)/g_a^k\\mapsto(b/g_a^k)\\otimes(x/1)$, with inverse $(b/g_a^k)\\otimes(x/f_a^l)\\mapsto(b\\otimes x)/g_a^{k+l}$.\nThe localized $s_V$ is the top-degree map of step 3, by its wedge formula, hence an isomorphism. Here the localizations of the socles are supplied by chart descent, rather than by tensor exactness. To obtain a global inverse, let $y\\in D_B(V_B)$ and apply the local inverses to $y/1$. On overlaps they agree, since each is inverse to the same localized $s_V$. Module cover exactness glues these to a unique $x\\in B\\otimes_AD_A(V)$. Uniqueness makes $y\\mapsto x$ $B$-linear. Each inverse identity holds locally, and the injectivity clause of module cover exactness makes it hold globally. Thus $s_V$ is the required isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-trf-projective-determinant-chart-descent",
+    "lem-weil-pbc-cover-module-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJ9 (section-determinants), 0FJA (remark-determinant-as-socle); affine pullback assertion of perfect.tex Tag 0FJY (remark-functorial-det). Inverse gluing uses algebra.tex Tag 00EK (lemma-cover-module)."
+   }
+  },
+  {
+   "text": "For an isomorphism $f:V\\cong W$, the exterior algebra map carries the socle of $V$ to that of $W$: every $w$ is $f(v)$, so the annihilation equation is preserved. Exterior naturality from step 4 therefore restricts to naturality of $s$. The exterior identity and scalar-tower equations restrict in the same way, so the determinant comparisons obey the identity and associativity constraints. For $V=0$, chart descent identifies both determinant modules with their rings by the empty wedge; the map $s_0$ is $b\\otimes a\\mapsto b\\alpha(a)$. This proves the unit normalization, also for the zero ring and for rings on which the ranks vary.",
+   "uses": [
+    "def-trf-projective-determinant-module",
+    "lem-trf-projective-determinant-chart-descent",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJA (remark-determinant-as-socle) and 0FJ9 (section-determinants); restriction of the already proved generator equations; empty-wedge normalization."
+   }
+  },
+  {
+   "text": "For $0\\to U\\xrightarrow{i}V\\xrightarrow{p}W\\to0$, projectivity of $W$ gives a section $t$. The maps $U\\oplus W\\to V$, $(u,w)\\mapsto i(u)+t(w)$, and $v\\mapsto(u,pv)$ with $i(u)=v-t(pv)$ are inverse. Tensoring their inverse equations shows that the extended sequence is split exact; its three terms are finite projective by step 1. Choose a simultaneous standard free cover for $U,W$ by multiplying members of their finite free covers; these products generate $1$ and the split isomorphism also makes $V$ free there. On such a chart choose bases $u_1,\\ldots,u_r$, $w_1,\\ldots,w_s$ and lifts $t(w_j)$. The determinant exact-sequence formula before and after scalar extension, and the maps $s$, both send the tensor of their top wedges to\n$(1\\otimes i(u_1))\\wedge\\cdots\\wedge(1\\otimes i(u_r))\\wedge(1\\otimes t(w_1))\\wedge\\cdots\\wedge(1\\otimes t(w_s))$.\nAn arbitrary scalar multiplies this expression on both sides; these pure wedge tensors span the chart source. Thus the square with $B\\otimes_A\\gamma_{i,p}$, $s_U\\otimes s_W$ (using step 1), $s_V$, and $\\gamma_{i_B,p_B}$ commutes locally. The equality-detection clause of module cover exactness, applied to the difference at each source element, makes it commute globally. Empty basis lists give exactly the same argument when either rank is zero. No tensor preservation of a nonsplit exact sequence is invoked.",
+   "uses": [
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-weil-pbc-cover-module-exact",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), first-proof kernel-first wedge formula; base extension checked on that formula; algebra.tex Tag 00EK detects the resulting equality globally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-projective-module",
+  "lem-trf-exterior-power-universal-property",
+  "def-weil-pbc-exterior-algebra",
+  "def-trf-projective-determinant-module",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-projective-determinant-chart-descent",
+  "lem-weil-pbc-cover-module-exact",
+  "lem-weil-pbc-ses-projective-quotient-splits",
+  "lem-trf-projective-determinant-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0FJ9/0FJA/0FJB and perfect.tex Tag 0FJY give the determinant constructions and pullback intent. The explicit arbitrary-scalar exterior inverse, finite-frame dual inverse and coherence calculations fill the omitted affine details using algebra.tex Tags 00DM and 00EK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exterior power and dual of a finite projective module commute with arbitrary extension of scalars compatibly with evaluation and split exact sequence wedge isomorphisms",
+   "results": "8 hits: exteriorPower.pairingDual, exteriorPower.oneEquiv_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality_assoc, exteriorPower.pairingDual_apply_apply_eq_one, ModuleCat.exteriorPower.iso₁_hom_naturality, exteriorPower.pairingDual_ιMulti_ιMulti, exteriorPower.zeroEquiv_naturality, exteriorPower.alternatingMapLinearEquiv_symm_map. IsBaseChange.toDualBaseChange only handles finite free duals; exteriorPower.alternatingMapLinearEquiv is a universal property. Neither supplies finite-projective exterior scalar comparison with variable-rank determinant and short-exact-sequence compatibility; not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exterior power base change canonical linear equivalence for projective modules with compatible determinant of a short exact sequence",
+   "results": "8 hits: IsBaseChange.linearMapRightBaseChangeEquiv, exteriorPower.alternatingMapLinearEquiv, IsBaseChange.toDualBaseChange, exteriorPower.oneEquiv_naturality, exteriorPower.alternatingMapLinearEquiv_symm_map, ModuleCat.exteriorPower.iso₁_hom_naturality_assoc, ModuleCat.exteriorPower.map, exteriorPower.zeroEquiv_naturality. IsBaseChange.toDualBaseChange only handles finite free duals; exteriorPower.alternatingMapLinearEquiv is a universal property. Neither supplies finite-projective exterior scalar comparison with variable-rank determinant and short-exact-sequence compatibility; not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change exterior powers dual finite projective module evaluation determinant short exact sequence wedge lifts",
+   "results": "8 hits: exteriorPower.alternatingMapToDual_apply_ιMulti, IsBaseChange.dual, IsBaseChange.toDual, IsBaseChange.toDualBaseChange_tmul, IsBaseChange.toDual_apply, Module.Dual.baseChange_baseChange, exteriorPower.pairingDual_ιMulti_ιMulti, LinearMap.det_baseChange. IsBaseChange.toDualBaseChange only handles finite free duals; exteriorPower.alternatingMapLinearEquiv is a universal property. Neither supplies finite-projective exterior scalar comparison with variable-rank determinant and short-exact-sequence compatibility; not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\"",
+   "results": "12 hits: ExteriorAlgebra.exteriorPower, exteriorPower.presentation.Rels, exteriorPower.presentation.Rels.add, exteriorPower.presentation.Rels.smul, exteriorPower.presentation.Rels.alt, exteriorPower.presentation.relations, exteriorPower.presentation.relations_G, exteriorPower.presentation.relations_R. IsBaseChange.toDualBaseChange only handles finite free duals; exteriorPower.alternatingMapLinearEquiv is a universal property. Neither supplies finite-projective exterior scalar comparison with variable-rank determinant and short-exact-sequence compatibility; not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base.change",
+   "results": "0 hits: . IsBaseChange.toDualBaseChange only handles finite free duals; exteriorPower.alternatingMapLinearEquiv is a universal property. Neither supplies finite-projective exterior scalar comparison with variable-rank determinant and short-exact-sequence compatibility; not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toDualBaseChange|IsBaseChange.dual|gamma.*det|det.*exact",
+   "results": "6 hits: Mathlib/LinearAlgebra/Matrix/Gershgorin.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean. IsBaseChange.toDualBaseChange only handles finite free duals; exteriorPower.alternatingMapLinearEquiv is a universal property. Neither supplies finite-projective exterior scalar comparison with variable-rank determinant and short-exact-sequence compatibility; not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior powers and duals of finite projective modules commute with extension of scalars coherently with determinant exact sequence wedge maps",
+   "results": "{\"t\": \"2026-10-23T09:52:09Z\", \"tool\": \"leanfinder\", \"query\": \"Exterior powers and duals of finite projective modules commute with extension of scalars coherently with determinant exact sequence wedge maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exteriorPower.pairingDual\", \"exteriorPower.alternatingMapToDual\", \"exteriorPower.pairingDual_ιMulti_ιMulti\", \"exteriorPower.alternatingMapToDual_apply_ιMulti\", \"exteriorPower.oneEquiv_naturality\", \"ModuleCat.exteriorPower.iso₁_hom_naturality_assoc\", \"ModuleCat.exteriorPower.iso₁_hom_naturality\", \"ModuleCat.exteriorPower.map\"], \"digest\": \"b4b1c10a48a7b5d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: exteriorPower.alternatingMapLinearEquiv supplies only the alternating universal property; IsBaseChange.toDualBaseChange (Dual/BaseChange.lean:117) assumes finite free at line 111. Neither gives arbitrary finite-projective determinant socles and exact-sequence scalar compatibility. Read both source files."
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.alternatingMapLinearEquiv",
+   "results": "{\"t\": \"2026-10-23T09:55:29Z\", \"tool\": \"loogle\", \"query\": \"exteriorPower.alternatingMapLinearEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"exteriorPower.alternatingMapLinearEquiv\", \"exteriorPower.alternatingMapLinearEquiv_comp_ιMulti\", \"exteriorPower.alternatingMapLinearEquiv_apply_ιMulti\", \"exteriorPower.alternatingMapLinearEquiv_symm_apply\", \"exteriorPower.alternatingMapLinearEquiv_comp\", \"exteriorPower.alternatingMapLinearEquiv_ιMulti\", \"exteriorPower.alternatingMapLinearEquiv_symm_map\"], \"digest\": \"762b1502b4ea0c94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: exteriorPower.alternatingMapLinearEquiv supplies only the alternating universal property; IsBaseChange.toDualBaseChange (Dual/BaseChange.lean:117) assumes finite free at line 111. Neither gives arbitrary finite-projective determinant socles and exact-sequence scalar compatibility. Read both source files."
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingMapLinearEquiv|toDualBaseChange",
+   "results": "{\"t\": \"2026-10-23T09:55:30Z\", \"tool\": \"grep\", \"query\": \"alternatingMapLinearEquiv|toDualBaseChange\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basic.lean\"], \"digest\": \"8972819def0fd1f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: exteriorPower.alternatingMapLinearEquiv supplies only the alternating universal property; IsBaseChange.toDualBaseChange (Dual/BaseChange.lean:117) assumes finite free at line 111. Neither gives arbitrary finite-projective determinant socles and exact-sequence scalar compatibility. Read both source files."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exterior powers finite projective module arbitrary scalar extension coherent dual evaluation determinant short exact sequence",
+   "results": "{\"t\": \"2026-10-23T09:56:20Z\", \"tool\": \"leansearch\", \"query\": \"Exterior powers finite projective module arbitrary scalar extension coherent dual evaluation determinant short exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra.exteriorPower\", \"exteriorPower.oneEquiv\", \"ModuleCat.exteriorPower\", \"exteriorPower.alternatingMapToDual_apply_ιMulti\", \"exteriorPower.pairingDual_ιMulti_ιMulti\", \"ModuleCat.exteriorPower.functor\", \"ModuleCat.exteriorPower.iso₀\", \"exteriorPower.alternatingMapToDual\"], \"digest\": \"ce080c5efdec1757\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: exteriorPower.alternatingMapLinearEquiv supplies only the alternating universal property; IsBaseChange.toDualBaseChange (Dual/BaseChange.lean:117) assumes finite free at line 111. Neither gives arbitrary finite-projective determinant socles and exact-sequence scalar compatibility. Read both source files."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical exterior algebra base change isomorphism and finite projective dual base change naturality",
+   "results": "{\"t\": \"2026-10-23T09:56:31Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical exterior algebra base change isomorphism and finite projective dual base change naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.toDualBaseChange\", \"IsBaseChange.dual\", \"IsBaseChange.toDualBaseChange_tmul\", \"IsBaseChange.toDual\", \"ModuleCat.exteriorPower.iso₁_hom_naturality\", \"Module.Dual.baseChange_baseChange\", \"IsBaseChange.toDual_apply\", \"ModuleCat.exteriorPower.iso₁_hom_naturality_assoc\"], \"digest\": \"960732a4c4f646b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: exteriorPower.alternatingMapLinearEquiv supplies only the alternating universal property; IsBaseChange.toDualBaseChange (Dual/BaseChange.lean:117) assumes finite free at line 111. Neither gives arbitrary finite-projective determinant socles and exact-sequence scalar compatibility. Read both source files."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-two-term-determinant",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Affine two-term determinant functors from good diagrams. Supporting argument: Tags 0FJ9 (section-determinants), 0FJB (lemma-det-ses); affine scalar-extension assertion in perfect.tex Tag 0FJY (remark-functorial-det).",
+   "via": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-exterior-scalar-comparisons",
+  "worker": "stage1",
+  "summary": "Constructed explicit exterior and finite-projective dual scalar inverses and checked all coherence equations on pure generators. Restricted the exterior map to the socle without assuming tensor preserves annihilators, proved invertibility by existing determinant charts and module-cover gluing, and checked the kernel-first exact-sequence square on free charts. Reused all existing local freeness, socle descent, splitting and determinant nodes. One new exact Mathlib leaf supplies the alternating universal property. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Affine two-term determinant functors from good diagrams. Supporting argument: Tags 0FJ9 (section-determinants), 0FJB (lemma-det-ses); affine scalar-extension assertion in perfect.tex Tag 0FJY (remark-functorial-det). This split supplies the scalar-coherence input to the affine two-term determinant auxiliary; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic finite-projective local freeness supplies determinant charts; no statement in the curve-zero unit gives this module theorem."
+   },
+   {
+    "node": "lem-weil-pbc-cover-module-exact",
+    "why": "Generic unique gluing and equality detection for arbitrary modules on a finite principal cover globalize the determinant inverse and wedge square; no curve-zero node supplies this module theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ses-projective-quotient-splits",
+    "why": "Generic splitting of an exact sequence with projective quotient ensures exactness after arbitrary scalar extension; this is a module tool below the fixed unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-cover-module-exact",
+  "lem-weil-pbc-ses-projective-quotient-splits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-27dc5bbb1",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-27dc5bbb1 (reviewer sub-agent of L); spot-checked: PASS, no fixes written; full review in review.md. Statement and stmt_deps are unchanged and there is no re-split note. Steps: (1) the tensor constraints and the retract survive scalar extension with no flatness; (2) dual frame v_j=p(e_j), lambda_j=e_j^*i, and both inverse composites checked by hand; (3) exterior inverse (b_j⊗v_j)↦(∏b_j)⊗∧v_j is balanced and alternating by pair cancellation, so it holds in characteristic 2, with r=0 and r>rank covered; (4) naturality, dual naturality, evaluation, symmetry, multiplicativity and the A→B→C tower checked on generators; (5) s_V=b·∧(ι)(x) lands in the socle without assuming tensor preserves annihilators; (6) the g_a=α(f_a) generate 1 in B, chart descent applies over A and over B (V_B finite projective by step 1), the localized s_V is c_{n_a}, and the inverse glues by cover exactness; (7) isomorphisms preserve the socle, and s_0=bα(a); (8) the split ses stays exact, and on a simultaneous free cover the kernel-first γ formula with lifts 1⊗t(w_j) matches, with equality detected by cover exactness. Sources read: Stacks 0FJA (socle model), 0FJB (both proofs; the first omits details, which the item supplies), perfect 0FJY l.10337 ('clear from the affine construction'); tags 00DM/00NX/00EK resolve correctly; no SGA. New node lem-trf-exterior-power-universal-property is an exact Mathlib leaf: alternatingMapLinearEquiv at ExteriorPower/Basic.lean:212, _apply_ιMulti at :228, linearMap_ext at :205-206, CommRing at :43. It is self-contained, its searches are real, it duplicates no DAG node and restates no clause of the item. No DAG node duplicates the item. No cycle: the item's dependency closure has 44 general-algebra nodes and does not contain the item. Accepted tool_uses: lem-weil-pbc-finite-projective-standard-free-cover, lem-weil-pbc-cover-module-exact, lem-weil-pbc-ses-projective-quotient-splits, all generic module lemmas used as black boxes. Batch-5: both flagged citations are outside the assumed statements and are not steps of their proofs. lem-trf-exterior-power-universal-property is the generic Mathlib universal property of exterior powers. lem-trf-projective-determinant-chart-descent is generic determinant algebra, already in the closure of the item's stmt_dep lem-trf-projective-determinant-exact-sequence, and its closure has no trace-formula, Poincaré or sk- nodes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.ProjectiveExteriorScalarComparisons",
+  "declaration": "Module.projectiveScalarComparisons",
+  "declarations": [
+   "Module.IsExteriorScalarComparison",
+   "Module.IsDualScalarComparison",
+   "Module.IsDeterminantScalarComparison",
+   "Module.projectiveScalarComparisons",
+   "Module.scalarComparisons_naturality",
+   "Module.scalarDual_evaluation",
+   "Module.scalarTensor_symmetry",
+   "Module.scalarExterior_product",
+   "Module.scalarDeterminant_naturality",
+   "Module.scalarComparisons_identity",
+   "Module.scalarExterior_tower",
+   "Module.scalarDual_tower",
+   "Module.scalarDeterminant_tower",
+   "Module.scalarDeterminant_zero",
+   "Module.scalarDeterminant_exactSequence"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/ProjectiveExteriorScalarComparisons.lean",
+  "statement": "theorem projectiveScalarComparisons [Module.Finite A V] [Module.Projective A V] : (∀ r : ℕ, ∃! e : (B ⊗[A] (⋀[A]^r V)) ≃ₗ[B] (⋀[B]^r (B ⊗[A] V)), IsExteriorScalarComparison r e) ∧ (∃! e : (B ⊗[A] Dual A V) ≃ₗ[B] Dual B (B ⊗[A] V), IsDualScalarComparison e) ∧ (∃! e : (B ⊗[A] determinantModule A V) ≃ₗ[B] determinantModule B (B ⊗[A] V), IsDeterminantScalarComparison e)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a010deb5",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Every node clause is rendered: (1) unique-by-formula exterior (ambient scalarExtensionMap + ιMulti wedge formula), dual (b*b'*α(λx)) and socle-determinant comparisons, for finite projective V over arbitrary A→B with no flatness; (2) naturality for arbitrary f, with the dual direction reversed; (3) evaluation via rid/distribBaseChange, and symmetry as the step-1 tensor constraint; (4) identity (lid) and tower (cancelBaseChange) for exterior, dual and determinant, checked on generators; (5) determinant naturality for isomorphisms; (6) V=0 unit using the determinantModule_zero normalizations; (7) SES: base-change exactness plus ∃ eB with IsDeterminantExactSequenceMap and the kernel-first square through distribBaseChange. Edge cases r=0, zero module and zero ring, char 2 and variable rank are covered; universes are independent. No hollow definitions (three Prop formula predicates); 12 sorry theorems with source, blueprint and proof docstrings; lean.statement verbatim; node otherwise unchanged and not landed elsewhere; imports exist. No Mathlib or project duplicate (toDualBaseChange needs free). No compile, since nothing was changed; the worker's compile was clean."
+ }
+}

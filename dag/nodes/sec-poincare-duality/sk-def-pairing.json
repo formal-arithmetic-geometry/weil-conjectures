@@ -159,5 +159,45 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b588814fe (reviewer sub-agent of L); spot-checked: Checked the item against the current main-20261015 blueprint section sk-def-pairing (order 2762) and the current sk-def-pairing-data, sk-def-ops, sk-def-set and sk-def-perfect sections. The written-out setting matches sk-def-set: no properness and no admissibility; pure dimension d is equivalent to smooth of relative dimension d. The category is pro-etale D^b_ctf with the constructible exceptional adjunction, as in sk-def-ops. The twists, including the completed integral unit, follow def-coefficient-twists-detailed. The evaluation is the transpose of id_{K^vee}, and ev_K(d) is associator, then ev tensor 1, then left unitor; this agrees with slopmaster2 twistedEvaluation. The three-arrow composite is the source's; the [2d] shift moves through tensor and R Gamma_c by the canonical isomorphisms. Perfectness takes the adjoint D -> C^vee, in the right direction. The disputed wording is justified: 'is not concentrated' is false for X_0=Spec F_q, d=0, so 'need not be' is correct, and P^1 gives degrees -2 and 0. 'Selects the top-degree summand' became 'induces the normalized trace on H_c^{2d}'; these agree because the complex sits in degrees <=0, and nothing is weakened. All five dependencies say what the item takes from them. The unit has no proof steps, so citations are empty, there are no tool_uses, and there is no cycle (DFS). def-sf-pairing is correctly in same_as. The slopmaster2 Pairing.lean has [Finite Lambda] and an etale, non-normalized orientation, so no attachment is correct. Edge cases checked: K=0, C=D=0, the zero pairing on Lambda (not perfect), d=0. One B3 fault, repaired: the written-out setting used smooth, separated, finite type, geometrically connected, pure dimension, base change and the finite-field datum without citations. The fix file adds def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism, def-pc-geometrically-irreducible, def-weil-pure-dimension, def-pc-base-change, def-weil-finite-field-fiber and sk-def-set to the statement and to stmt_deps, with no mathematical change; it is at fixes/dag/nodes/sec-poincare-duality/sk-def-pairing.json.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.poincarePairing",
+    "AlgebraicGeometry.Etale.TateOrientation.poincarePairing",
+    "AlgebraicGeometry.Etale.IsPerfectPairing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.IsPerfectPairing",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.TensorStructure",
+     "lines": [
+      118,
+      134
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.Etale.poincarePairing",
+    "AlgebraicGeometry.Etale.TateOrientation.poincarePairing"
+   ],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "A pairing $P\\otimes^{\\mathbf L}Q\\to\\Lambda$ of perfect complexes, a morphism in\n$D(\\Lambda)$, is *perfect* if its adjoint $Q\\to R\\operatorname{Hom}_\\Lambda(P,\\Lambda)$\nis an isomorphism.\n\n*Complement.* Let $X/k$ be smooth and separated of pure dimension $d$, with $k$\nalgebraically closed, let $\\Lambda$ be an admissible coefficient ring, let\n$K\\in\\Dctf(X,\\Lambda)$ be perfect over $\\Lambda_X$, and put\n$K^\\vee=\\cHom_X(K,\\Lambda_X)$, with evaluation\n$\\ev_K:K\\otimes^{\\mathbf L}K^\\vee\\to\\Lambda_X$. Let\n\n$$\n\\operatorname{Tr}_X:R\\Gamma_c\\bigl(X,\\Lambda_X(d)\\bigr)[2d]\\longrightarrow\\Lambda\n$$\n\nbe the map induced on $R\\Gamma_c$ by the smooth trace of $a_X$ [sk-def-sp-trace].\nThe *derived Poincaré pairing* is the composite\n\n$$\n\\begin{aligned}\n\\beta_K:\\ R\\Gamma_c(X,K)\\otimes^{\\mathbf L}_\\Lambda R\\Gamma\\bigl(X,K^\\vee(d)\\bigr)[2d]\n&\\xrightarrow{\\ \\smile_c\\ }\nR\\Gamma_c\\bigl(X,K\\otimes^{\\mathbf L}K^\\vee(d)\\bigr)[2d]\\\\\n&\\xrightarrow{\\ R\\Gamma_c(\\ev_K(d))[2d]\\ }\nR\\Gamma_c\\bigl(X,\\Lambda_X(d)\\bigr)[2d]\n\\xrightarrow{\\ \\operatorname{Tr}_X\\ }\\Lambda,\n\\end{aligned}\n$$\n\nwhere $\\smile_c$ is the mixed-support cup product, formed from the projection\nformula for $Ra_{X!}$ and the counit $a_X^*Ra_{X*}\\to\\mathrm{id}$. The evaluation\narrow lands in $R\\Gamma_c(X,\\Lambda_X(d))[2d]$, whose cohomology is not\nconcentrated in degree $0$ (for $X=\\mathbf P^1_k$, $d=1$, $K=\\Lambda_X$ it lives in\ndegrees $-2$ and $0$); the smooth trace $\\operatorname{Tr}_X$ selects the\ntop-degree summand and fixes the normalization.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ }
 }

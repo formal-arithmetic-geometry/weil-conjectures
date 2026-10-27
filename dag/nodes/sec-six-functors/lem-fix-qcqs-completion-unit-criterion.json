@@ -1,0 +1,136 @@
+{
+ "id": "lem-fix-qcqs-completion-unit-criterion",
+ "kind": "statement",
+ "title": "Canonical quotient completion unit criterion without scheme finiteness",
+ "statement": "Fix a prime ell and a finite extension E/Q_ell [def-weil-l-adic-coefficient-extension]. For any scheme T [def-pc-scheme], let B_T be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients] and let eta:H -> C_T(H) be the specified strict quotient/Roos completion unit in D(B_T) [def-pur-integral-derived-operations, def-weil-abstract-derived-category]. Then for every H, eta_H is invertible if and only if H is derived complete [def-weil-derived-complete]. No quasi-compactness, quasi-separatedness or invertibility hypothesis on ell in T is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul. The coefficient datum is the existing principal Koszul strict replacement datum."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved principal Koszul strict replacement coefficient_datum to obtain the adic datum whose ideal is spanned by the chosen coefficient uniformizer.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, 09BL, 09BM, 09AH, 04TQ; Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10. Model/descent details: sites-cohomology.tex Tags 06YY and 0941."
+   }
+  },
+  {
+   "text": "Choose a good representative of H by essential surjectivity of qGood. Apply the intrinsic Roos completeness equivalence, whose conditions five and one are respectively invertibility of this specified completion unit and derived completeness. Choose the auxiliary prime 3 if ell=2, and 2 otherwise.",
+   "uses": [
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, 09BL, 09BM, 09AH, 04TQ; Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10. Model/descent details: sites-cohomology.tex Tags 06YY and 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-a1-principal-koszul-strict-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; algebraization.tex Tag 0A0E, lemma-derived-completion-koszul. The coefficient datum is the existing principal Koszul strict replacement datum."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived completion unit is an isomorphism exactly for derived complete complexes, and restriction to a covering family reflects isomorphisms",
+   "results": "DerivedCategory.instIsIsoMapCochainComplexIntQ; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; DerivedCategory.instEssSurjCochainComplexIntQ; IsAdicComplete.of_comp_lift, plus unrelated Kan extension units.",
+   "date": "2026-10-25",
+   "verdict": "No matching derived quotient-tower completion or pro-etale local conservativity theorem; exact functor localization is reusable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completion unit is invertible if and only if an object is derived complete, and restriction to a covering family reflects isomorphisms",
+   "results": "Eight general sheaf isomorphism results; none gives the specified derived completion unit. Local search found WeilConjectures.roosIntrinsicCompletenessEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing intrinsic completeness equivalence; no direct Mathlib completion-locality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "piComparison; piComparison_comp_π; map_lift_piComparison; piComparison_comp_π_assoc; map_lift_piComparison_assoc; instIsIsoPiComparison; PreservesProduct.of_iso_comparison; inv_piComparison_comp_map_π.",
+   "date": "2026-10-25",
+   "verdict": "These supply product-coordinate identities, not geometric coefficient restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|ordinaryDerivedPull|roosUnit",
+   "results": "msearch grep returned zero hits. Local rg found the canonical slice completion unit, the item-owned ordinaryDerivedPull and the intrinsic Roos completeness equivalence.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the existing models and equivalence, with separate geometric restriction and local-conservativity interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompletionUnitLocality",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.",
+   "via": [
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompletionUnitCriterion",
+  "file": "lean/Sheaf/Paper/QcqsCompletionUnitCriterion.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.canonicalCompletionUnitCriterion",
+  "statement": "theorem canonicalCompletionUnitCriterion\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : Scheme.{t}) :\n    (∀ H : D l E T none,\n      IsIso ((completionUnit l E T none).app H) ↔ IsComplete l E T none H)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-640b7",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162253-L-392015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-640b7",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162253-L-392015",
+  "kind": "interface",
+  "note": "independent cc review: item signature vs clone (identical); moved 22-decl block vs old item lines 40-728 (verbatim, doc refs only); node lean.statements vs delivered signatures; importer SfProEtaleProjectionFormula compiled in sandbox against all 8 delivered modules; #print axioms on proved decls"
+ }
+}

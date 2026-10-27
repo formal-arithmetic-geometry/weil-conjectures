@@ -1,0 +1,487 @@
+{
+ "id": "lem-sfb-space-proj-degree-one-quotients",
+ "kind": "statement",
+ "title": "Degree-one line quotients give maps to relative Proj over an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ be a commutative unital graded $\\mathcal O_X$-algebra on the small etale site [def-trf-etale-graded-module-algebra], with $\\mathcal A_0=\\mathcal O_X$ and each degree quasi-coherent [def-trf-space-quasi-coherent-module]. Assume that $\\mathcal A$ is generated in degree one, meaning that the multiplication maps $\\mathcal A_1^{\\otimes n}\\to\\mathcal A_n$ are surjective for all $n\\geq1$. Let $p:P_X(\\mathcal A)\\to X$ be the relative Proj of [lem-sfb-space-relative-proj-scheme-tests]. Given an $S$-morphism $f:Y\\to X$, a line module $L$ on $Y$ (a module locally isomorphic to $\\mathcal O_Y$), and a graded unital algebra map $\\psi:f^*\\mathcal A\\to\\bigoplus_{n\\geq0}L^{\\otimes n}$ whose degree-one map is surjective as a map of sheaves, there is a canonical $S$-morphism $r_{f,L,\\psi}:Y\\to P_X(\\mathcal A)$ satisfying $p\\circ r_{f,L,\\psi}=f$. Pullback and tensor are those of [def-trf-space-etale-module-functors, def-pur-sheaf-tensor-product]. The canonical map is normalized as follows: after any scheme charts on $X$ and $Y$, on a locus trivializing $L$ where the image of a degree-one homogeneous section $a$ generates $L$, it lands in $D_+(a)$ and the map on degree-zero homogeneous fractions sends $v/a^n$ to $\\psi_n(v)/\\psi_1(a)^n$. Here the quotient is taken in the chosen trivialization of $L$; changing that trivialization cancels the same unit to the power $n$ in numerator and denominator. No quasi-compactness, quasi-separatedness, Noetherian, or finite generation assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1), applied to the line-quotient datum; its scheme-test representation gives the algebraic-space-source formulation by etale descent. Chart normalization is Tag 0D2Z (lemma-invertible-map-into-relative-proj)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-relative-proj-scheme-tests",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-space-line-module-proj-input"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $V\\to X$. The fibre product $Y_V=Y\\times_XV$ is an algebraic space, and $Y_V\\to Y$ is surjective etale. Choose a scheme atlas $T\\to Y_V$ and put $t:T\\to Y$ for the composite. It is a representable surjective etale scheme presentation: for an $S$-scheme $W$ and $h_W\\to Y$, the test $W\\times_YY_V=W\\times_XV$ is a scheme, surjective etale over $W$, and $W\\times_YT=(W\\times_XV)\\times_{Y_V}T$ is a scheme, surjective etale over it; a composite of surjective etale scheme morphisms is surjective etale. Write $g:T\\to V$. Both $R=T\\times_YT$ and $V_2=V\\times_XV$ are schemes, by representability of the diagonals. The two maps $R\\rightrightarrows T\\to V$ give $R\\to V_2$. These are scheme overlaps, not assumed affine. Let $P=P_X(\\mathcal A)$; its scheme-test comparison identifies $V\\times_XP$ with $\\operatorname{Proj}_V((\\mathcal A|_V)_{\\mathrm{Zar}})$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  },
+  {
+   "text": "Restrict the given data to these etale charts. Put $\\mathcal A_V=(\\mathcal A|_V)_{\\mathrm{Zar}}$ and $L_T=(L|_T)_{\\mathrm{Zar}}$. The scheme Zariski--etale equivalence identifies $L_T$ with an ordinary invertible module and identifies $g^*\\mathcal A_V$ with the Zariski form of $t^*f^*\\mathcal A$. Use the specified composition comparison and the tensor comparison to transport $\\psi|_T$ to a graded map $\\psi_T:g^*\\mathcal A_V\\to\\bigoplus_{n\\geq0}L_T^{\\otimes n}$. Multiplication and units are transported degreewise. The degree-one map remains surjective: etale restriction is localization of the site, and the additive equivalence preserves cokernels and hence epimorphisms. The same construction applies to $R\\to V_2$ and to refinements of these charts. No flatness of $f$ is used.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-sfb-space-module-tensor-composition",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  },
+  {
+   "text": "On an affine base open $U=\\operatorname{Spec}A_0\\subset V$ and an affine $W=\\operatorname{Spec}B\\subset g^{-1}U$ trivializing $L_T$, write $\\psi_T(a)=b_a e$ for $a\\in\\mathcal A_{V,1}(U)$. The affine pullback formula identifies the degree-one source on $W$ with $\\mathcal A_{V,1}(U)\\otimes_{A_0}B$. At any $w\\in W$, surjectivity onto $B_w e$ expresses $e$ as a finite $B_w$-linear combination of these images. Thus the $b_a$ generate the unit ideal in $B_w$. Since $B_w$ is local, some $b_a$ is a unit there. Hence the opens $D(b_a)$, with $a$ in degree one, cover $W$. Varying $U,W$ proves that the degree-one generator loci cover all of $T$. This is a local argument, so it requires no finite cover or finite generation of the algebra.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  },
+  {
+   "text": "Apply the existing scheme fraction-chart atlas to $(g,\\mathcal A_V,L_T,\\psi_T)$. On each generator locus $T_a$ it supplies a map to $D_+(a)$ with $v/a^n\\mapsto\\psi_{T,n}(v)/\\psi_{T,1}(a)^n$. Its statement gives agreement of these maps inside relative Proj on every pairwise intersection, including different affine base opens. Step 3 shows that the degree-one loci already cover $T$. Scheme-morphism gluing therefore gives a unique $q:T\\to\\operatorname{Proj}_V(\\mathcal A_V)$ with these formulas. The chart maps are over their base affine opens (the degree-zero structural scalar maps to its pullback), so $q$ is over $V$. The same construction gives $q_2:R\\to\\operatorname{Proj}_{V_2}(\\mathcal A|_{V_2})$. Compose $q$ with $V\\times_XP\\to P$ to obtain $\\widetilde q:T\\to P$.",
+   "uses": [
+    "lem-trf-line-proj-affine-chart-atlas",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-sfb-space-relative-proj-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  },
+  {
+   "text": "For each projection $s_i:R\\to T$, consider the commutative scheme square with lower map $\\operatorname{pr}_i:V_2\\to V$ and upper map $s_i$. The data on $R\\to V_2$ are the pullbacks of those on $T\\to V$: both are restrictions of the original data, with the tensor-normalized composition comparisons of step 2. The scheme chart-pullback statement applies to $q_2$ and $q$ and gives $c_i\\circ q_2=q\\circ s_i$, where $c_i$ is the relative-Proj comparison for $V_2\\to V$. Its hypotheses require only the displayed commutative square and the fraction formulas established in step 4, not a cartesian square or a flat morphism. Scheme-test compatibility for $P$ identifies both compositions $\\operatorname{Proj}_{V_2}(\\mathcal A|_{V_2})\\to P$ with the same projection to $P$. Consequently $\\widetilde q\\circ s_1=\\widetilde q\\circ s_2$. This proves the actual descent equation.",
+   "uses": [
+    "lem-trf-line-proj-chart-pullback",
+    "def-sfb-space-module-tensor-composition",
+    "lem-sfb-space-relative-proj-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  },
+  {
+   "text": "Apply etale chart-morphism descent to the presentation $t:T\\to Y$, target $P$, and invariant open $O=T$. The equality in step 5 is precisely its required relation. Since the open is the whole atlas, the descended open subspace is all of $Y$. We obtain a unique $S$-morphism $r:Y\\to P$ with $r\\circ t=\\widetilde q$. After precomposition with $t$, both $p\\circ r$ and $f$ equal $f\\circ t$, because $q$ is over $V$. The equality-detection clause of the same descent statement, with target $X$, implies $p\\circ r=f$.",
+   "uses": [
+    "lem-trf-etale-open-chart-morphism-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  },
+  {
+   "text": "The construction is independent of the atlases: two choices have a common etale scheme refinement obtained by fibre products and a scheme atlas; applying step 5 to its scheme comparison squares identifies the two maps there. Descent detects their equality on $Y$. The same comparison with any further scheme charts shows that $r$ has the required fraction normalization on them. Uniqueness follows by covering each such chart by its degree-one generator loci and using scheme gluing, then etale descent. Finally, replacing a frame $e$ by $ue$ replaces the coefficient of $\\psi_n(v)$ by $u^{-n}$ times that coefficient and that of $\\psi_1(a)$ by $u^{-1}$ times its coefficient; their ratio is unchanged. Thus the canonical map has exactly the specified normalization. Empty charts contribute the unique empty-domain map; the argument nowhere requires a nonempty space.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-line-proj-chart-pullback",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-trf-etale-open-chart-morphism-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-module-tensor-composition",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-relative-proj-scheme-tests",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "lem-trf-line-proj-affine-chart-atlas",
+  "lem-trf-line-proj-chart-pullback",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 085D (lemma-relative-proj-generated-in-degree-1), part (1): scheme construction and etale descent; Tag 0D2Z (lemma-invertible-map-into-relative-proj), scheme-chart characterization (3). The omitted localization/descent details are supplied using Constructions Tags 01NK and 01O9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|generatedInDegreeOne|invertible.*[Pp]roj|[Pp]roj.*invertible",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections is a scheme-source construction from a homomorphism into global functions, not relative Proj over an algebraic space with a possibly nontrivial line module. Module.Invertible.instProjective is an ordinary module projectivity instance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Proj represents line bundles with a surjective graded map from an algebra generated in degree one",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum",
+     "ProjectiveSpectrum.mk",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.termProj|_",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec"
+    ],
+    "digest": "449e0cc3a014f4a1",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections is a scheme-source construction from a homomorphism into global functions, not relative Proj over an algebraic space with a possibly nontrivial line module. Module.Invertible.instProjective is an ordinary module projectivity instance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"invertible\"",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Module.Invertible.instProjective"
+    ],
+    "digest": "9bbe547ee3df5801",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections is a scheme-source construction from a homomorphism into global functions, not relative Proj over an algebraic space with a possibly nontrivial line module. Module.Invertible.instProjective is an ordinary module projectivity instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of a degree one generated graded algebra on an algebraic space parametrizes invertible quotients of its degree one part",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso",
+     "AlgebraicGeometry.projIsoSpecTopComponent",
+     "AlgebraicGeometry.Proj.awayι"
+    ],
+    "digest": "eeb800b96a661d7a",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections is a scheme-source construction from a homomorphism into global functions, not relative Proj over an algebraic space with a possibly nontrivial line module. Module.Invertible.instProjective is an ordinary module projectivity instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded algebra map to tensor powers of a line bundle surjective in degree one defines a morphism to relative Proj over an algebraic space",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective"
+    ],
+    "digest": "fbd5f84a208110b3",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections is a scheme-source construction from a homomorphism into global functions, not relative Proj over an algebraic space with a possibly nontrivial line module. Module.Invertible.instProjective is an ordinary module projectivity instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative Proj over a scheme or algebraic space represents invertible sheaf quotients of a degree-one generated graded algebra",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "ProjectiveSpectrum",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+     "AlgebraicGeometry.projIsoSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso"
+    ],
+    "digest": "224b7b2215373bde",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections has scheme source and a scalar global-section ring homomorphism, not a line-module quotient over an algebraic-space base; homogeneous-localization chart declarations cover only the local algebra. Module.Invertible.instProjective is module projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativeProj|invertible.*[Pp]roj|[Pp]roj.*invertible",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections has scheme source and a scalar global-section ring homomorphism, not a line-module quotient over an algebraic-space base; homogeneous-localization chart declarations cover only the local algebra. Module.Invertible.instProjective is module projectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded algebra map to tensor powers of an invertible sheaf surjective in degree one gives a canonical morphism to relative Proj",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.toSpecZero",
+     "AlgebraicGeometry.Proj.awayι_toSpecZero",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections.congr_simp",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.Proj.isSeparated"
+    ],
+    "digest": "83ac3efd2f96de0c",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections has scheme source and a scalar global-section ring homomorphism, not a line-module quotient over an algebraic-space base; homogeneous-localization chart declarations cover only the local algebra. Module.Invertible.instProjective is module projectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"invertible\"",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Module.Invertible.instProjective"
+    ],
+    "digest": "9bbe547ee3df5801",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections has scheme source and a scalar global-section ring homomorphism, not a line-module quotient over an algebraic-space base; homogeneous-localization chart declarations cover only the local algebra. Module.Invertible.instProjective is module projectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local homogeneous fractions define the canonical map from an invertible quotient to relative Proj",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.Proj.awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection",
+     "HomogeneousLocalization.Away.mk",
+     "AlgebraicGeometry.Proj.basicOpenToSpec",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec"
+    ],
+    "digest": "caf2632f2daad950",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections has scheme source and a scalar global-section ring homomorphism, not a line-module quotient over an algebraic-space base; homogeneous-localization chart declarations cover only the local algebra. Module.Invertible.instProjective is module projectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical map from a line bundle quotient to a relative Proj with local homogeneous fraction formula",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.awayι",
+     "AlgebraicGeometry.Proj.awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction"
+    ],
+    "digest": "2f3e954f53ddbbbf",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Proj.fromOfGlobalSections has scheme source and a scalar global-section ring homomorphism, not a line-module quotient over an algebraic-space base; homogeneous-localization chart declarations cover only the local algebra. Module.Invertible.instProjective is module projectivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-blowup-universal-property",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 086C (lemma-composition-admissible-blowups), with Tag 086B (definition-admissible-blowup).. Supporting Tag 085Y (lemma-blowing-up-two-ideals). Universal-lifting input, Tag 085U: the two lifts and inverse verification in the proof of Tag 085Y. Tag 085U proof, existence paragraph: apply degree-one relative-Proj functoriality (085D) to the graded quotient onto the Cartier ideal powers.",
+   "via": [
+    "lem-sfb-space-blowup-universal-property",
+    "lem-sfb-space-blowup-product-ideal-comparison",
+    "lem-sfb-space-compose-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proj-degree-one-quotients",
+  "worker": "stage1",
+  "summary": "Constructed the scheme fraction-chart maps from existing nodes, checked their degree-one covering and their precise overlap equation over V times_X V, and descended to the algebraic-space source. No new nodes, no statement change, and no Lean attachment.",
+  "blueprint": "The current latest sk-thm-sf-ctf-stability supplies the inherited six-functor stability route; this auxiliary node serves the existing Chow-modification/blowup prerequisite chain recorded in blueprint.from.place, specifically Tag 085U existence via Tag 085D(1). Its seven steps expand the degree-one relative-Proj map used there; blueprint_refs ancestor returns None for the inherited chain, retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic etale presentation and overlap construction for algebraic spaces; used to construct the charts in steps 1 and 7."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic identification of the small-etale quasi-coherent and line data with ordinary scheme data; needed before the unit-independent scheme Proj tools apply."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic tensor-pullback comparison for ringed topoi; transports the graded multiplication and tensor powers on charts."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine tensor-pullback section formula; used only to prove the degree-one generator cover, not as an alternate geometric route."
+   },
+   {
+    "node": "lem-trf-line-proj-affine-chart-atlas",
+    "why": "Generic scheme homogeneous-fraction chart construction, strictly below the algebraic-space-base/source conclusion. The unit has no replacement for this scheme construction."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing and equality of scheme morphisms on arbitrary open covers, used for the existing chart maps."
+   },
+   {
+    "node": "lem-trf-line-proj-chart-pullback",
+    "why": "Generic scheme fraction-chart compatibility for a commutative square, needed to prove the etale descent equation explicitly."
+   },
+   {
+    "node": "lem-trf-etale-open-chart-morphism-descent",
+    "why": "Generic descent of maps into an algebraic space from a scheme etale atlas, applied with its invariant open equal to the entire atlas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-line-proj-affine-chart-atlas",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-trf-line-proj-chart-pullback",
+  "lem-trf-etale-open-chart-morphism-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-22a610465",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-22a610465 (reviewer sub-agent of L); spot-checked: FIX with one repair. The delivery has 0 new nodes and the statement is unchanged; I read the item and all 11 cited statements in full. Source check: Stacks spaces-divisors Tag 085D (lemma-relative-proj-generated-in-degree-1, part 1) and Tag 0D2Z (lemma-invertible-map-into-relative-proj, part 3). The item's algebraic-space source Y generalizes 085D's scheme tests in the way 0D2Z does. The fraction normalization matches 0D2Z(3), and the unit cancellation (e to ue: u^{-n} over (u^{-1})^n) is correct. The extra hypotheses A_0=O_X and degree-one generation are inputs the citer (the blowup universal property) uses; nothing is weakened. No duplicate exists: every 085D/0D2Z-related node in the DAG has a scheme base or a symmetric algebra, while the item has an algebraic-space base. Steps 2-7 check out against their cited statements. Step 5 meets the chart-pullback node's hypotheses: the square needs only to commute, not be cartesian, and the scheme-test base-change compatibility makes the two maps agree, giving the real descent equation. Step 6 uses the descent node with O=T, and a second instance with target X gives p r = f. Fault fixed: step 1 claimed without argument or citation that the composite T to Y_V to Y is a representable surjective etale presentation, which the descent node in step 6 needs. I wrote out the scheme-test argument (W x_Y T = (W x_X V) x_{Y_V} T) and added the Mathlib leaf lem-weil-pbc-etale-covering-composition to the step's uses and proof_deps; the corrected item is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-proj-degree-one-quotients.json. No citation creates a cycle back to the item. I accept all 8 declared tool_uses as generic chart, descent and module-comparison tools that the unit does not replace. Batch-5 check: none of the 6 listed citations is part of the trace formula or Poincare duality. Their closures reach only sk-i-curve-zero foundations (algebraic spaces, fppf descent, the Zariski/etale qc equivalence, line modules) and one categorical coherence lemma. They contain no sec-poincare-duality node, no nt-assume leaf and no thm-trf node, so all 6 are accepted. The killed background task was a slow duplicate of a search I had already rerun in one pass; nothing depends on it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProjDegreeOneQuotients",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.existsUnique_spaceProj_degreeOne_quotient",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceQuotientTest",
+   "AlgebraicGeometry.AlgebraicSpace.spaceQuotientTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceQuotientPowerSection",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjLineQuotient",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjLineQuotient.IsSurjectiveInDegreeOne",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceProjLineQuotient.IsCanonicalMap",
+   "AlgebraicGeometry.AlgebraicSpace.existsUnique_spaceProj_degreeOne_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProjDegreeOneQuotients.lean",
+  "statement": "theorem existsUnique_spaceProj_degreeOne_quotient (C : SpaceProjCoefficients S) {X Y : AlgebraicSpace S} (A : SpaceProjInput X) (R : SpaceProjRealization C A) (_hzero : IsIso A.algebra.unit) (_hgen : ∀ (W : Over S) (g : schemeSpace W ⟶ X) (V : W.left.affineOpens), Algebra.adjoin Γ(W.left, V.1) (Set.range (fun a : (C.scheme A W g).affine.grading V 1 ↦ a.val)) = ⊤) (f : Y ⟶ X) (L : Y.Modules) (hL : Y.IsLineModule L) (ψ : SpaceProjLineQuotient C A f (lineTestFamily Y L hL)) (_hψ : ψ.IsSurjectiveInDegreeOne) : ∃! r : Y ⟶ R.space, ψ.IsCanonicalMap R r",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The homogeneous algebra map is written in its adjoint cartesian scheme-test presentation, using the existing lineTestFamily of the given small-etale line module and the normalized C.scheme coefficients. Its products, units and arbitrary scheme-base-change equations are fields, not additional input hypotheses. Degree-one surjectivity is the equivalent local lifted-basis condition. IsCanonicalMap specifies actual D_+(a) factorizations and intrinsic cross-multiplied homogeneous-fraction equations on every scheme test and source open. The coefficient and Proj realization are those of the recorded relative-Proj dependency; no additional geometric assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abe9ba163",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Item JSON differs from base only in lean and stmt_deps (+def-trf-space-line-module-proj-input, already landed with a lean record, allowed by brief-stage2 l.177); dep nodes identical to live; lean.statement verbatim; declarations complete. H3: one universe u; _hzero = A_0≅O_X; _hgen (degree-one adjoin = ⊤ on every affine of every scheme test) equivalent to sheaf surjectivity of A_1^{⊗n}→A_n via quasi-coherence and right-exact pullback; C/R are the normalized witnesses of lem-sfb-space-relative-proj-scheme-tests, as in the landed closed-immersion citer; SpaceProjLineQuotient = adjoint scheme-test form of ψ (linear, unit, mul via tensorPowAddIso, naturality via schemeBaseChange and canonical power pullback, onto lineTestFamily of L); IsSurjectiveInDegreeOne ⇔ sheaf surjectivity by Nakayama; IsCanonicalMap gives r≫p=f, the actual D_+(a) factorization through awayι/relProjι, R.compare chart equation and frame-free fraction formula q(v/a^n)•ψ1(a)^n=ψn(v), which pins q and b; ρ/tensorPowAddIso conventions consistent by the triangle identity; ∃! justified by generator-chart cover and sheaf property. Edge cases (empty spaces, degree-0-only algebra, n=0, nilpotent a) fine. No duplicates (GradedLineMap and IsGeneratedInDegreeOne are scheme-base only). Docstrings with source/blueprint and 7-step proof; sorry only. Advisory: lineProjFramePower/lineProjScalar owned by theorem node lem-trf-line-proj-affine-chart-atlas (proof_dep only), SpaceProj* structures by theorem stmt_dep present on base, per precedent. No compile (no change)."
+ }
+}

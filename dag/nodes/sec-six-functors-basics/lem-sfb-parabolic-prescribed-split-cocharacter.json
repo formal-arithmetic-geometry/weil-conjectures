@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-parabolic-prescribed-split-cocharacter",
+ "kind": "statement",
+ "title": "A prescribed maximal split torus contains a defining parabolic cocharacter",
+ "statement": "Let $k$ be any field [def-weil-field] and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth, affine of finite type and geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after extension to an algebraic closure. Unipotent means admitting a faithful finite-dimensional matrix representation in which all geometric points are unipotent matrices. A split torus is a group scheme isomorphic over $k$ to $\\mathbf G_{m,k}^r$, $r\\geq0$, where $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. A parabolic $k$-subgroup $P\\subseteq G$ means a smooth geometrically connected closed subgroup [def-weil-closed-immersion] whose fppf right-coset sheaf $G/P$ is represented by a proper finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. Here the coset sheaf is the sheafification of $A\\mapsto G(A)/P(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras, and $G(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,G)$. A minimal parabolic is one containing no strictly smaller parabolic $k$-subgroup; proper means $P\\ne G$. Let $P\\subseteq G$ be a parabolic $k$-subgroup, and let $S\\subseteq P$ be a closed split torus maximal under inclusion among the closed split tori of $P$. There is a $k$-group homomorphism $\\lambda:\\mathbf G_{m,k}\\to S$ such that, for every commutative $k$-algebra $A$, the subgroup $P(A)$ is exactly the set of $g\\in G(A)$ for which the map $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends from $\\mathbf G_{m,A}$ to an $A$-morphism $\\mathbf A^1_A\\to G_A$. Here $\\mathbf A^1_A=\\operatorname{Spec}A[t]$, and $\\lambda$ is viewed in $G$ through $S\\subseteq P\\subseteq G$. The statement includes $P=G$, the trivial torus, and finite or imperfect $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.1, printed p.544, converse and Galois averaging in a maximal torus of P; choose that torus through the prescribed S. The prescribed-torus choice is the preparatory assertion in the proof of Theorem 25.6(b), printed p.546, before the centralizer and semidirect-product conclusions. Only P=P(lambda) is asserted here, with no centralizer, Levi or conjugacy conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-parabolic-containing-geometric-maximal-torus] to $D=S$ to obtain $S\\subseteq T\\subseteq P$ with $T$ geometrically maximal in $G$. By [lem-sfb-multiplicative-character-antiduality], choose a finite Galois extension $L/k$ splitting $T$: the continuous action on its finitely generated character group factors through a finite quotient. Write $\\Gamma=\\operatorname{Gal}(L/k)$. Apply [lem-sfb-split-parabolic-root-sign-cone] over $L$ to $T_L\\subseteq P_L\\subseteq G_L$. It gives $\\mu\\in X_*(T_L)$ with $\\Phi_P=\\{\\alpha:\\langle\\alpha,\\mu\\rangle\\geq0\\}$. Both $\\Phi$ and $\\Phi_P$ are $\\Gamma$-stable: conjugation on the $k$-defined inclusion $\\operatorname{Lie}(P)\\subseteq\\operatorname{Lie}(G)$ permutes its character-weight spaces.",
+   "uses": [
+    "lem-sfb-parabolic-containing-geometric-maximal-torus",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-parabolic-root-sign-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, p.544, converse: choose T and a cocharacter over a splitting field."
+   }
+  },
+  {
+   "text": "In the abelian cocharacter group put $\\nu_L=\\sum_{\\sigma\\in\\Gamma}\\sigma\\mu$. The sum is $\\Gamma$-fixed, so character antiduality gives a $k$-homomorphism $\\nu:\\mathbf G_m\\to T$. For each root $\\alpha$, one has $\\langle\\alpha,\\sigma\\mu\\rangle=\\langle\\sigma^{-1}\\alpha,\\mu\\rangle$. If $\\alpha\\in\\Phi_P$, every term is nonnegative; if $\\alpha\\notin\\Phi_P$, every term is strictly negative. The latter sum is strictly negative because $\\Gamma$ contains its identity. Thus $\\nu_L\\in C(P_L,T_L)$, and [lem-sfb-split-parabolic-root-sign-cone] gives $P_L=P_{\\nu_L}$ as subgroup functors. The field-extension clause of [lem-sfb-reductive-cocharacter-parabolic-geometry] identifies $(P_\\nu)_L=P_{\\nu_L}$. Consequently $P=P_\\nu$: their closed-subgroup ideals in $k[G]$ become equal after tensoring with $L$, and equality descends because tensoring a $k$-vector-space quotient with the nonzero field $L$ detects zero. This also proves equality on nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-parabolic-root-sign-cone",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, p.544, Galois averaging and equation (166)."
+   }
+  },
+  {
+   "text": "It remains to put $\\nu$ in the prescribed $S$. Since $T$ is commutative, define $f:S\\times\\mathbf G_m\\to T$ by $f(s,t)=s\\nu(t)$. On characters it gives $f^*:X^*(T)\\to X^*(S\\times\\mathbf G_m)\\simeq\\mathbf Z^{r+1}$, where $S\\simeq\\mathbf G_m^r$. Its image $N$ is a subgroup of a finite free abelian group, hence finite free by [lem-weil-subgroup-finite-free-abelian-group-free]. Its Galois action is trivial, since it lies in the character group of the split source. Character antiduality therefore constructs a split torus $D_k(N)$ and a closed immersion $D_k(N)\\hookrightarrow T$ from the surjection $X^*(T)\\twoheadrightarrow N$, through which $f$ factors. Restricting this factorization to the two factors shows that its image contains $S$ and $\\nu(\\mathbf G_m)$ scheme-theoretically. It lies in $T\\subseteq P$; maximality of the split torus $S$ forces $D_k(N)=S$ as closed subgroups. Hence $\\nu$ factors as a $k$-homomorphism $\\lambda:\\mathbf G_m\\to S$, and step 2 gives precisely the required equality $P(A)=P_\\lambda(A)$ for every $A$. If $P=G$ the zero cocharacter already works; if $S$ is trivial this argument forces $\\nu=0$ and $P=G$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.6(b), p.546, prescribed split torus; Theorem 12.23, p.240, character interpretation of the split image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-parabolic-containing-geometric-maximal-torus",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-split-parabolic-root-sign-cone",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.1, printed p.544, converse and averaging; Theorem 25.6(b), p.546, prescribed-torus assertion; Theorem 12.23, p.240."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]arabolic|[Cc]ocharacter|[Ll]evi",
+   "results": "{\"t\": \"2026-10-24T07:04:02Z\", \"tool\": \"grep\", \"query\": \"[Pp]arabolic|[Cc]ocharacter|[Ll]evi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/Topology/Sheaves/LocallySurjective.lean\"], \"digest\": \"7b7083fcd61cb6ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\", \"cocharacter\"",
+   "results": "{\"t\": \"2026-10-24T07:04:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\", \\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A parabolic subgroup of a reductive group over a field is the limit subgroup of a cocharacter in any prescribed maximal split torus it contains",
+   "results": "{\"t\": \"2026-10-24T07:04:12Z\", \"tool\": \"leanfinder\", \"query\": \"A parabolic subgroup of a reductive group over a field is the limit subgroup of a cocharacter in any prescribed maximal split torus it contains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"frattini\", \"Subgroup.widthInfty\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"Subgroup.strictPeriods\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\"], \"digest\": \"87b34fb5eb45b94b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]plit[Tt]orus|[Uu]nipotent.*[Cc]onjug|[Cc]ocharacter|[Pp]arabolic[Ss]ubgroup",
+   "results": "{\"t\": \"2026-10-24T07:08:11Z\", \"tool\": \"grep\", \"query\": \"[Ss]plit[Tt]orus|[Uu]nipotent.*[Cc]onjug|[Cc]ocharacter|[Pp]arabolic[Ss]ubgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every parabolic subgroup of a reductive group is defined by a one parameter subgroup of a chosen maximal split torus contained in the parabolic",
+   "results": "{\"t\": \"2026-10-24T07:08:12Z\", \"tool\": \"leansearch\", \"query\": \"Every parabolic subgroup of a reductive group is defined by a one parameter subgroup of a chosen maximal split torus contained in the parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.IsParabolic\", \"Subgroup\", \"Subgroup.one\", \"Sylow.subtype.congr_simp\", \"ClosedSubgroup\"], \"digest\": \"a03cf9c44d85fc11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed maximal k split torus of a parabolic subgroup contains a k cocharacter whose associated parabolic equals that subgroup",
+   "results": "{\"t\": \"2026-10-24T07:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed maximal k split torus of a parabolic subgroup contains a k cocharacter whose associated parabolic equals that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.corootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.IsKilling.biSup_corootSubmodule_eq_cartan\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra'\"], \"digest\": \"6bb1b3c9f43c9691\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "def IsConj|def Splitting|isParabolic_iff_of_upperTriangular",
+   "results": "{\"t\": \"2026-10-24T07:10:31Z\", \"tool\": \"grep\", \"query\": \"def IsConj|def Splitting|isParabolic_iff_of_upperTriangular\", \"sub\": \"GroupTheory/GroupExtension\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/GroupExtension/Defs.lean\"], \"digest\": \"ecd9f72965004525\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|parabolic|IsMaximalTorus",
+   "results": "{\"t\": \"2026-10-24T07:37:26Z\", \"tool\": \"grep\", \"query\": \"cocharacter|parabolic|IsMaximalTorus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no parabolic subgroup scheme or prescribed rational cocharacter result; matrix parabolic and abstract Lie-algebra hits do not apply."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parabolic subgroups of a reductive algebraic group correspond to cocharacters in a prescribed maximal split torus by Galois averaging",
+   "results": "{\"t\": \"2026-10-24T07:38:04Z\", \"tool\": \"leansearch\", \"query\": \"Parabolic subgroups of a reductive algebraic group correspond to cocharacters in a prescribed maximal split torus by Galois averaging\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.GeneralLinearGroup.isParabolic_conj_iff\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.isParabolic_conj'_iff\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.GeneralLinearGroup.isParabolic_conj_iff'\", \"Matrix.isParabolic_conj_iff\", \"fixingAddSubgroup_fixedPoints_gc\", \"InfiniteGalois.GaloisCoinsertionIntermediateFieldSubgroup\"], \"digest\": \"c50ea2dfbec686de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no parabolic subgroup scheme or prescribed rational cocharacter result; matrix parabolic and abstract Lie-algebra hits do not apply."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a parabolic subgroup and a maximal split torus inside it over any field there exists a cocharacter of that torus whose limit subgroup is the parabolic",
+   "results": "{\"t\": \"2026-10-24T07:38:09Z\", \"tool\": \"leanfinder\", \"query\": \"Given a parabolic subgroup and a maximal split torus inside it over any field there exists a cocharacter of that torus whose limit subgroup is the parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.corootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.biSup_corootSubmodule_eq_cartan\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\"], \"digest\": \"64d8b34952ebdb92\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no parabolic subgroup scheme or prescribed rational cocharacter result; matrix parabolic and abstract Lie-algebra hits do not apply."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|parabolic",
+   "results": "{\"t\": \"2026-10-24T07:39:10Z\", \"tool\": \"grep\", \"query\": \"cocharacter|parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\"], \"digest\": \"db0dd23749b54941\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no parabolic subgroup scheme or prescribed rational cocharacter result; matrix parabolic and abstract Lie-algebra hits do not apply."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-minimal-parabolic-split-centralizers",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Theorem 25.1, printed p.544, converse and Galois averaging in a maximal torus of P; choose that torus through the prescribed S. The prescribed-torus choice is the preparatory assertion in the proof of Theorem 25.6(b), printed p.546, before the centralizer and semidirect-product conclusions. Only P=P(lambda) is asserted here, with no centralizer, Levi or conjugacy conclusion.",
+   "via": [
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-parabolic-prescribed-split-cocharacter",
+  "worker": "stage1",
+  "summary": "Followed Milne 25.1: containing geometric maximal torus, split root-sign cone, explicit Galois averaging, faithful field descent, then a split image in the torus forces factorization through S. Two supporting statements created; all cited statements checked; original statement retained.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, field conjugacy through minimal parabolic centralizers. Steps 1--2 implement Milne 25.1; step 3 implements the prescribed-torus preparatory assertion in 25.6(b). The inherited nearest blueprint ancestor is null and is retained as printed by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-b7aaf80a7",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-b7aaf80a7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement, and Milne iAG2017 at printed p.544 (Thm 25.1 and eq. 166), p.546 (25.6(b): λ can be chosen in S), pp.453-455 (21.91-21.92) and p.379 (17.82-17.83). The item statement is true and matches 25.6(b); it is unchanged. Step 1: lem-sfb-parabolic-containing-geometric-maximal-torus gives S⊆T⊆P with T geometrically maximal, so T_L is a split maximal torus of G_L (elementary faithful-flatness argument). Antiduality gives a finite Galois splitting field L, and Φ_P is Γ-stable because Lie(P) is defined over k. Step 2: summing over Γ keeps the strict sign (every term is <0 for α∉Φ_P because Φ_P is exactly the ≥0 set), so ν_L∈C(P_L,T_L). The root-sign iff and the field-extension clause of lem-sfb-reductive-cocharacter-parabolic-geometry give P_L=P_{ν_L}, and the ideal equality descends by faithful flatness. Step 3: N=im f* is Galois-trivial and free (Mathlib leaf). The antiduality closed-immersion criterion gives a split torus D_k(N) with S⊆D_k(N)⊆T⊆P, so maximality of S puts ν in S. This argument avoids the rational conjugacy of maximal split tori, which would be circular. New nodes: both are true (Milne 17.82/17.10; 21.91-21.92 and (166)). Both are statement-only, self-contained and strictly smaller than the item. I tested them on GL_2 with the Borel (a>b), P=G, a torus, and anisotropic SL_1(H)/R. Duplicate search over about 11 sfb candidates found none. No cycle. No off-unit route; no SGA. Batch-5 flags: lem-trf-projective-exterior-scalar-comparisons (scalar extension of exterior powers and duals) and lem-trf-fppf-covering-base-change (Mathlib leaf) are generic tools, neither the trace formula, Poincaré duality, nor a step of their proofs, so I accept both. No fixes."
+ }
+}

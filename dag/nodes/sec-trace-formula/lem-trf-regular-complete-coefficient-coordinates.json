@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-regular-complete-coefficient-coordinates",
+ "kind": "statement",
+ "title": "Coordinates over a specified coefficient field in a complete regular local ring",
+ "statement": "Let $k$ be a field, let $(C,\\mathfrak p)$ be a nonzero commutative Noetherian regular local ring of finite Krull dimension $d$ [def-weil-pbc-noetherian-ring, def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring], complete for $\\mathfrak p$ [def-weil-pbc-adically-complete-ring], and let $c:k\\to C$ be a ring map inducing an isomorphism $k\\xrightarrow{\\sim}C/\\mathfrak p$. For every $t_1,\\ldots,t_d\\in\\mathfrak p$ generating $\\mathfrak p$, the continuous $k$-algebra homomorphism $k[[T_1,\\ldots,T_d]]\\to C$, with coefficients mapped by $c$ and $T_i\\mapsto t_i$ [def-weil-pbc-multivariate-power-series], is an isomorphism of complete local $k$-algebras. For $d=0$ the list is empty and this says that $c:k\\to C$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2) and its proof, choosing any basis of the cotangent space; lines 45036–45066."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "For every d, including d = 0, form P = k[[T_1,...,T_d]]. The field branch of [lem-weil-pbc-power-series-field-cohen-regular-complete] gives a local domain of dimension d, complete for its maximal ideal I, and identifies I with the variables ideal. The Cohen-ring branch is impossible since k is a field. Apply [lem-weil-pbc-power-series-universal-property-complete] to c and t to obtain f with f(C(a)) = c(a) and f(X_i) = t_i.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mapping the span of the variables by f gives the span of t, hence I.map f = maximalIdeal C. Every residue class is the residue of some c(a) by hres, hence is the image of the constant series C(a). The target is Hausdorff for I.map f, since this is its maximal ideal. The source is precomplete for I. Apply [lem-weil-pbc-complete-source-surjective-mod-ideal] to obtain surjectivity of f.",
+   "uses": [
+    "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If a nonzero x lies in ker f, the domain property of P makes x a nonzerodivisor. Apply [lem-trf-surjective-kernel-nonzerodivisor-dimension-drop] directly to f. It gives dim C + 1 <= dim P. Both dimensions equal the finite integer d, so this contradicts d + 1 <= d. Therefore f is injective. No calculation of the constant coefficient of x, or exact dimension formula for a principal quotient, is needed.",
+   "uses": [
+    "lem-trf-surjective-kernel-nonzerodivisor-dimension-drop"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form e = RingEquiv.ofBijective f. Its coefficient and variable equations are those of f. Ideal.map_pow and I.map f = maximalIdeal C give (I^r).map f = (maximalIdeal C)^r for every natural r, including zero. Ideal.comap_map_of_bijective gives the required comap equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "When d = 0, MvPowerSeries.isEmptyEquiv says every F equals C(constantCoeff F). Surjectivity of f therefore implies surjectivity of c, since f agrees with c on constants. A unital map from the field k to the nontrivial local ring C is injective, so c is bijective.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-trf-surjective-kernel-nonzerodivisor-dimension-drop",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C0S(2), proof, lines 45055–45066; implemented by J9 using Mathlib surjective_of_mk_map_comp_surjective and the direct dimension inequality ringKrullDim_succ_le_of_surjective, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "regular.*power.series|power.series.*regular|coefficientField|coefficient_field",
+   "results": "{\"t\": \"2026-10-22T05:02:14Z\", \"tool\": \"grep\", \"query\": \"regular.*power.series|power.series.*regular|coefficientField|coefficient_field\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete regular local algebra over its residue field is a formal power series ring",
+   "results": "{\"t\": \"2026-10-22T05:02:15Z\", \"tool\": \"leansearch\", \"query\": \"A complete regular local algebra over its residue field is a formal power series ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instIsLocalRing\", \"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.WithPiTopology.instCompleteSpace\", \"PowerSeries.isNoetherianRing\", \"PowerSeries.instIsDomain\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.maximalIdeal_eq_span_X\"], \"digest\": \"adcf3e69fcee7b3e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"MvPowerSeries\"",
+   "results": "{\"t\": \"2026-10-22T05:02:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"MvPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete noetherian regular local ring with a specified coefficient field is isomorphic as an algebra to a power series ring over that field, with any regular system of parameters as variables",
+   "results": "{\"t\": \"2026-10-22T05:02:16Z\", \"tool\": \"leanfinder\", \"query\": \"A complete noetherian regular local ring with a specified coefficient field is isomorphic as an algebra to a power series ring over that field, with any regular system of parameters as variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.instIsDiscreteValuationRing\", \"LaurentSeries.powerSeriesRingEquiv\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\"], \"digest\": \"55f216ed1fa2ff15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem for an equicharacteristic complete regular local ring as a formal power series algebra over any chosen coefficient field",
+   "results": "{\"t\": \"2026-10-22T05:02:32Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen structure theorem for an equicharacteristic complete regular local ring as a formal power series algebra over any chosen coefficient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"622957ec3ce3f6f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*power.series|power.series.*regular|coefficientField|coefficient_field",
+   "results": "{\"t\": \"2026-10-22T05:19:56Z\", \"tool\": \"grep\", \"query\": \"regular.*power.series|power.series.*regular|coefficientField|coefficient_field\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned univariate Weierstrass preparation/division, power-series residue/local/completeness facts, or no hits; none states the complete regular local coordinate theorem for a specified coefficient map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen structure theorem complete regular local ring power series over coefficient field",
+   "results": "{\"t\": \"2026-10-22T05:19:57Z\", \"tool\": \"leansearch\", \"query\": \"Cohen structure theorem complete regular local ring power series over coefficient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.ker_coeff_eq_max_ideal\", \"PowerSeries.instIsLocalRing\", \"PowerSeries.mk\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.WithPiTopology.instCompleteSpace\", \"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.isNoetherianRing\"], \"digest\": \"0538388cc6b5adb4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned univariate Weierstrass preparation/division, power-series residue/local/completeness facts, or no hits; none states the complete regular local coordinate theorem for a specified coefficient map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"MvPowerSeries\"",
+   "results": "{\"t\": \"2026-10-22T05:19:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"MvPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned univariate Weierstrass preparation/division, power-series residue/local/completeness facts, or no hits; none states the complete regular local coordinate theorem for a specified coefficient map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete regular local ring with a specified coefficient field is isomorphic to the formal power series ring by any generating system of parameters",
+   "results": "{\"t\": \"2026-10-22T05:19:58Z\", \"tool\": \"leanfinder\", \"query\": \"A complete regular local ring with a specified coefficient field is isomorphic to the formal power series ring by any generating system of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorization.elim\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\"], \"digest\": \"168ec7f0a48cf064\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned univariate Weierstrass preparation/division, power-series residue/local/completeness facts, or no hits; none states the complete regular local coordinate theorem for a specified coefficient map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem equicharacteristic complete regular local algebra is power series ring",
+   "results": "{\"t\": \"2026-10-22T05:20:11Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen structure theorem equicharacteristic complete regular local algebra is power series ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"fa1d092d932e30e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned univariate Weierstrass preparation/division, power-series residue/local/completeness facts, or no hits; none states the complete regular local coordinate theorem for a specified coefficient map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-cohen-flat-presentation",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Supporting relative Cohen presentation of completed flat local maps with regular closed fibre. Single-ring input: coordinates for a complete regular local ring with a specified coefficient field, Stacks 0C0S(2).",
+   "via": [
+    "lem-trf-relative-cohen-flat-presentation",
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-regular-complete-coefficient-coordinates",
+  "worker": "stage1",
+  "summary": "Read Stacks 0C0S(2), 032C, 0315 and 00KW; retain the specified coefficient field and arbitrary d-element generating list. Supply construction, complete-source surjectivity, kernel dimension contradiction, inverse continuity and the empty-list case using existing DAG inputs only. No statement change or new node.",
+  "blueprint": "Supports the inherited historical nearby-duality/alteration branch of lem-trf-local-term-locality through the relative Cohen presentation of completed flat local maps; realizes the single-ring coordinate input specified by the item blueprint.from.place, using Stacks 0C0S(2). No change to the current contracting-local-term route or the unit statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic algebraic input: power series over a field are Noetherian local domains, complete, with residue field k and dimension d; this unit has no replacement for these ring facts."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Generic complete-ring evaluation of a multivariate series at elements of the ideal of completeness, with its truncation formula; no trace-formula-specific construction replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "why": "Generic successive-approximation criterion for surjectivity of a ring map from a complete source; used exactly as Stacks 0C0S invokes 0315."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-cbcff67a6",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-cbcff67a6 (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full, and Stacks algebra.tex Tag 0C0S(2) and its proof at lines 45036-45066 (it uses 0315 and 00KW). The statement matches clause (2): it fixes the coefficient map c and takes any d generators of p, which for dim C = d are exactly a basis of p/p^2. The citer lem-trf-relative-cohen-flat-presentation uses the item with exactly this specified-coefficient form. Step 1 (d=0): the empty list generates p, so p=0 and C=k via c; the zero-variable series ring is k by the definition node. Step 2: the universal-property node is applied with a=p and alpha=c; its truncation formula gives psi(I^r) inside p^r, so psi is continuous. Step 3: IC=p, the constants make P->C/p onto, P is I-complete by clause (3) of the Cohen-regular node, and C is p-Hausdorff; these are exactly the hypotheses of the 0315 Mathlib leaf. Step 4: a nonzero f in the kernel has f(0)=0 because k->C/p is injective, so f lies in I and is a nonzerodivisor (P is a domain). The 00KW leaf then gives dim P/fP = d-1, while C is a quotient of P/fP, so d <= d-1, a contradiction. Step 5: psi(I^r)=p^r and bijectivity give psi^-1(p^r)=I^r, so the inverse is continuous. Edge cases: C=k; C=k[[U]] with T->uU for a unit u; and C=k[[U,V]]/(UV), which the hypotheses exclude (dim 1 but two generators needed). Imperfect or characteristic-p k is harmless because c is given. Duplicates: lem-per-prime-field-complete-coordinate-model is existence-only and on the route-pivot dropped list, the pbc full-coordinates and parameter-quotient nodes assume the target is already a power-series ring, and no node states the item. Route: neither the item, its citer, its via ancestors nor its deps are in route-pivot-dropped.txt; there is no repair note and no SGA source. I accept the three generic pbc algebra tool_uses. No new nodes and no fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularCompleteCoefficientCoordinates",
+  "declaration": "IsLocalRing.exists_ringEquiv_regular_complete_coefficients",
+  "file": "lean/Sheaf/RingTheory/RegularCompleteCoefficientCoordinates.lean",
+  "statement": "theorem exists_ringEquiv_regular_complete_coefficients (k : Type u) [Field k] (C : Type v) [CommRing C] [IsRegularLocalRing C] [IsAdicComplete (maximalIdeal C) C] (d : ℕ) (hdim : ringKrullDim C = (d : WithBot ℕ∞)) (c : k →+* C) (hres : Function.Bijective ((residue C).comp c)) (t : Fin d → C) (ht : ∀ i : Fin d, t i ∈ maximalIdeal C) (hgen : Ideal.span (Set.range t) = maximalIdeal C) : (∃ e : MvPowerSeries (Fin d) k ≃+* C, (∀ a : k, e (MvPowerSeries.C a) = c a) ∧ (∀ i : Fin d, e (MvPowerSeries.X i) = t i) ∧ (∀ r : ℕ, Ideal.comap e.toRingHom (maximalIdeal C ^ r) = Ideal.span (Set.range (MvPowerSeries.X : Fin d → MvPowerSeries (Fin d) k)) ^ r)) ∧ (d = 0 → Function.Bijective c)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ada59ee7",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps, Stacks 0C0S(2) lines 45036-45066, the module and the report (real Worker report + Second reading by Q54). Every hypothesis matches exactly: IsRegularLocalRing (local+Noetherian+nontrivial), ringKrullDim = d, IsAdicComplete for the maximal ideal, residue∘c bijective, t : Fin d in and generating m. The conclusion's ring equiv is pinned to the canonical evaluation by its C/X equations (uniqueness in exists_ringHom_of_isAdicComplete); comap m^r = I^r gives two-sided adic continuity; the d=0 clause is present. Edge cases d=0, unit coordinate change, char p and the zero ring are correct. Node differs from live only in lean; statement verbatim; imports as stage-2 rule 7 (public for the statement, plain for proof deps); docstrings carry source and the five steps; sorry only; no defs, no new nodes. Own duplicate search found no existing statement. No compile (no change). Advisory: ht and the d=0 clause are redundant but restate the node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261023T105124-L-3498471",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

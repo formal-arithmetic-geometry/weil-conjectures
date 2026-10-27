@@ -1,0 +1,137 @@
+{
+ "id": "lem-pod-reindexing-tensor-signed-shifts",
+ "kind": "statement",
+ "title": "Signed shifts of fixed normalized tensor reindexing",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and an isomorphism g:X→Y with l invertible. Let D be a PodCompletionReindex satisfying its Laws and T a PodCompletedTensorReindex over D satisfying its Laws. There are signed tensor-shift models SY at Y and SX at X such that PodReindexSignedShifts g D T SY SX holds. This includes CommShift for the actual reduction and limit maps, both signed limit/Roos equations, both tensor-shift generator and representative-model equations and the left- and right-factor tensor squares for every integer shift. Definitions: [def-weil-l-adic-coefficient-extension], [def-weil-scheme-morphism-properties], [def-weil-derived-complete-integral-detailed], [def-pod-completion-reindex-models], [def-pod-completion-tensor-reindex-models], [def-pod-completion-tensor-normalization], [def-pod-completion-reindex-shifts].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded in parent node proof: Signed shifts of fixed normalized tensor reindexing."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization",
+  "def-pod-completion-reindex-shifts"
+ ],
+ "proof": [
+  {
+   "text": "construct left and right tensor-shift comparisons by relabeling the total tensor summands on flat-term K-flat representatives. The right comparison has the Koszul factor (-1)^(pr); the left comparison has its prescribed sign. The signed total differentials verify these are chain isomorphisms for every integer shift, and the quotient transitions commute with them. Localize these maps to get SY and SX with their Generators laws. Apply the same two-coordinate Roos realization used in T.Model to obtain their Model laws. On a shifted Roos complex the second coordinate is multiplied by (-1)^r, while the first is the projection-defined shift/product comparison. D.shiftSource.Laws and D.shiftTarget.Laws fix exactly these maps. D.LimitModel therefore supplies the two PodLimitSignedShift identities. On the coherent reduction system, shifting commutes with the quotient tensor generator map, proving CommShift of D.reduction.hom; the diagonal Roos equation proves CommShift of D.limit.hom. Finally reindexing preserves degrees and integer signs, so both tensor-shift squares agree on all homogeneous summands and descend through T.Model. This verifies negative shifts, shift zero, empty schemes and zero inputs too. .",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pod-reindexing-signed-roos-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5, expanded in parent node proof: Signed shifts of fixed normalized tensor reindexing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pod-reindexing-signed-roos-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strictly partial reduction of lem-pod-reindexing-completion-unit-tensor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact reindexing commutes with signed shifts of completed tensor and shifted Roos inverse limit cone",
+   "results": "PiTensorProduct.map_comp_reindex_eq; PiTensorProduct.map_reindex; PiTensorProduct.map_reindex_symm; Orientation.reindex_neg; PiTensorProduct.lift_comp_reindex; PiTensorProduct.lift_reindex_symm; PiTensorProduct.map_comp_reindex_symm; PiTensorProduct.reindex_trans",
+   "date": "2026-10-25",
+   "verdict": "No match: these are generic algebraic or categorical results, not the representative-normalized derived pro-etale assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact reindexing equivalence commutes with derived completion and completed tensor, compatibly with identity, composition and signed shifts",
+   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; HomologicalComplex.HasGoodTensor₁₂; DerivedCategory.singleFunctorIsoCompQ; HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Tor",
+   "date": "2026-10-25",
+   "verdict": "No match: these are generic algebraic or categorical results, not the representative-normalized derived pro-etale assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*tensor|tensor.*reindex|Roos.*shift|substitution",
+   "results": "Mathlib/FieldTheory/PurelyInseparable/Exponent.lean; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean; Mathlib/LinearAlgebra/TensorAlgebra/ToTensorPower.lean; Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean; Mathlib/Util/TermReduce.lean; Mathlib/LinearAlgebra/TensorProduct/Basis.lean; Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "No match: these are generic algebraic or categorical results, not the representative-normalized derived pro-etale assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: Signed shifts of fixed normalized tensor reindexing.",
+   "via": [
+    "lem-pod-reindexing-completion-unit-tensor",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorSignedShifts",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorSignedShifts.lean",
+  "declaration": "WeilConjectures.podReindexingTensorSignedShifts",
+  "statement": "theorem podReindexingTensorSignedShifts\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hT : PodCompletedTensorReindex.Laws l E g D T) :\n    ∃ SY : PodTensorSignedShift l E Y, ∃ SX : PodTensorSignedShift l E X,\n      PodReindexSignedShifts l E g D T SY SX",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pod-reindexing-completion-unit-tensor",
+  "worker": "U2",
+  "summary": "Signed shifts of fixed normalized tensor reindexing; exact Lean signature and full representative proof in the module docstring.",
+  "blueprint": "prop-pod-dual-tate-data-compatibility Steps 1 and 5",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Use its generic resolution, realization or substitution calculus as a black box; this supplies no replacement for the Weil unit route."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Use its generic resolution, realization or substitution calculus as a black box; this supplies no replacement for the Weil unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123949-L-1921632",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123949-L-1921632",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

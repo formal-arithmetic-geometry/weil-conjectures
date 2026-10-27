@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-finite-hopf-dual-pairing",
+ "kind": "statement",
+ "title": "Finite free Hopf duals and primitive-generator pairing criterion",
+ "statement": "Let $R$ be a commutative ring. Let $B$ be an associative unital Hopf $R$-algebra, finite free as an $R$-module [def-weil-pbc-free-module], with cocommutative comultiplication. Here Hopf means that its comultiplication and counit are unital algebra maps, coassociativity and the two counit identities hold, and its antipode $S$ satisfies $m(S\\otimes1)\\Delta=m(1\\otimes S)\\Delta=\\eta\\varepsilon$. Tensor products are over $R$ [def-weil-pbc-module-tensor-product]. Then $B^\\vee=\\operatorname{Hom}_R(B,R)$ is a commutative Hopf $R$-algebra with $(fg)(b)=(f\\otimes g)(\\Delta_B b)$, unit $\\varepsilon_B$, coproduct determined by $(\\Delta f)(b\\otimes b')=f(bb')$, counit $f\\mapsto f(1)$ and antipode $f\\mapsto f\\circ S_B$. For every commutative $R$-algebra $T$, evaluation gives a Hopf algebra isomorphism $T\\otimes_R B^\\vee\\simeq(T\\otimes_R B)^\\vee$, with $(t\\otimes f)(t'\\otimes b)=tt'f(b)$. Suppose in addition that $B$ is generated as an $R$-algebra by a set $P$ of primitive elements: $\\Delta b=b\\otimes1+1\\otimes b$ and $\\varepsilon_B(b)=0$ for $b\\in P$. Let $C$ be any commutative Hopf $R$-algebra (not required finite or flat). Give $C^*=\\operatorname{Hom}_R(C,R)$ convolution multiplication $(a*a')(c)=(a\\otimes a')(\\Delta_Cc)$. For every unital $R$-algebra map $r:B\\to C^*$, define its transpose $t_r:C\\to B^\\vee$ by $t_r(c)(b)=r(b)(c)$. Then $t_r$ is a Hopf algebra homomorphism if and only if for every $b\\in P$ and $c,c'\\in C$,\n$$r(b)(cc')=\\varepsilon_C(c)r(b)(c')+r(b)(c)\\varepsilon_C(c').$$\nConversely every Hopf algebra map $t:C\\to B^\\vee$ has a unique such convolution-algebra transpose $r$. These correspondences are natural, and the displayed formulas commute with extension of scalars whenever the pairings are scalar extended.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.35, printed pp.222--223, finite-dual construction; Definition 3.3 and discussion 3.4, pp.65--66. General finite-free base-ring pairing criterion extracted from the algebraic construction underlying Proposition 11.36, p.223; the criterion in this ring generality is agent-supplied, not a claim of a separately stated theorem in Milne."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=B^\\vee$. Choose a finite basis $(e_i)$ of $B$ as in [def-weil-pbc-free-module], and write $e_i^*(\\sum_j a_je_j)=a_i$. Every $f\\in A$ has the unique expansion $f=\\sum_i f(e_i)e_i^*$, so $A$ is finite free. By [lem-sfb-convolution-linear-map-algebra], applied to the coalgebra $B$ and algebra $R$, its convolution product is associative with unit $\\varepsilon_B$. It is commutative because $\\Delta_B$ is cocommutative: $(fg)(b)=(f\\otimes g)(\\Delta_B b)=(g\\otimes f)(\\Delta_B b)=(gf)(b)$. By [lem-sfb-finite-free-tensor-dual], transposing multiplication $m_B$ gives a unique linear map $\\Delta_A:A\\to A\\otimes A$ with $(\\Delta_Af)(b,b')=f(bb')$. Define $\\varepsilon_A(f)=f(1_B)$ and $S_A(f)=f\\circ S_B$. Here evaluation of a tensor of functionals means the product of their values.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-sfb-convolution-linear-map-algebra",
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "The tensors $e_i\\otimes e_j$ form a basis of $B\\otimes B$: expand each factor, and apply the product functionals $e_i^*\\otimes e_j^*$ to recover its coefficients. The same argument works for three factors. Thus [lem-sfb-finite-free-tensor-dual], iterated, permits testing identities in $A^{\\otimes n}$ on $n$ elements of $B$ for $n=2,3$. Both iterated coproducts of $f$ evaluate at $(b,b',b'')$ as $f((bb')b'')=f(b(b'b''))$. Hence $\\Delta_A$ is coassociative. The two counit composites evaluate at $b$ as $f(1_Bb)=f(b)=f(b1_B)$. This proves both counit identities.",
+   "uses": [
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "Write $\\Delta_Bb=\\sum b_1\\otimes b_2$ and $\\Delta_Bb'=\\sum b'_1\\otimes b'_2$; these denote arbitrary finite tensor presentations, not unique components. Since $\\Delta_B$ is an algebra map, $\\Delta_A(fg)$ evaluated at $(b,b')$ is $\\sum f(b_1b'_1)g(b_2b'_2)$. This is also the evaluation of $(\\Delta_Af)(\\Delta_Ag)$, using the convolution product in each tensor factor. Injectivity in [lem-sfb-finite-free-tensor-dual] proves equality. Also $\\Delta_A(1_A)(b,b')=\\varepsilon_B(bb')=\\varepsilon_B(b)\\varepsilon_B(b')$, proving unit compatibility. Finally $\\varepsilon_A(fg)=(fg)(1_B)=f(1_B)g(1_B)$ because $\\Delta_B(1_B)=1_B\\otimes1_B$, and $\\varepsilon_A(1_A)=\\varepsilon_B(1_B)=1_R$. Linearity supplies scalar compatibility. Thus $A$ is a commutative bialgebra.",
+   "uses": [
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "Evaluate $m_A(S_A\\otimes1)\\Delta_A f$ at $b$. Its value is $\\sum f(S_B(b_1)b_2)=f(\\varepsilon_B(b)1_B)=\\varepsilon_B(b)f(1_B)$ by the first antipode identity in $B$. Similarly $m_A(1\\otimes S_A)\\Delta_A f$ evaluates as $\\sum f(b_1S_B(b_2))=\\varepsilon_B(b)f(1_B)$. These are exactly the values of $\\eta_A\\varepsilon_A(f)$, since $1_A=\\varepsilon_B$. The evaluations are justified by the tensor-dual formula of [lem-sfb-finite-free-tensor-dual]. Both antipode identities follow; hence the stated operations make $A$ a commutative Hopf algebra.",
+   "uses": [
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "For any commutative $R$-algebra $T$, the scalar-extended Hopf operations are defined on pure tensors by extending the original linear maps, with $(t\\otimes b)(u\\otimes b')=tu\\otimes bb'$ and $\\Delta_{B_T}(t\\otimes b)=\\sum(t\\otimes b_1)\\otimes_T(1\\otimes b_2)$. Each Hopf axiom on pure tensors is the scalar extension of that axiom for $B$; pure tensors generate by [def-weil-pbc-module-tensor-product]. The family $(1\\otimes e_i)$ is a $T$-basis, with coefficient maps $t\\otimes b\\mapsto t e_i^*(b)$, as the unique basis expansion in [def-weil-pbc-free-module] shows. The displayed evaluation map $\\theta:T\\otimes A\\to(B_T)^\\vee$ is therefore invertible, with inverse $h\\mapsto\\sum_i h(1\\otimes e_i)\\otimes e_i^*$. For the product, both $\\theta((t\\otimes f)(u\\otimes g))$ and $\\theta(t\\otimes f)\\theta(u\\otimes g)$ take $v\\otimes b$ to $tuv\\sum f(b_1)g(b_2)$. For coproducts both sides evaluated at $(v\\otimes b,w\\otimes b')$ give $tvw f(bb')$; [lem-sfb-finite-free-tensor-dual] over $T$ detects equality. Unit, counit and antipode compatibility respectively give $v\\varepsilon_B(b)$, $t f(1_B)$ and $tv f(S_Bb)$. Thus $\\theta$ is a Hopf algebra isomorphism. No flatness of $T$ is used.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-convolution-linear-map-algebra] to $C$ and $R$; it supplies the convolution algebra $C^*$ even when $C$ is neither finite nor flat. Transposing the bilinear pairing $\\langle b,c\\rangle=r(b)(c)$ gives the linear map $t=t_r$. Because $r$ is a unital algebra map,\n$$\\langle bb',c\\rangle=\\sum\\langle b,c_1\\rangle\\langle b',c_2\\rangle,\\qquad \\langle1_B,c\\rangle=\\varepsilon_C(c).$$\nConsequently $\\Delta_A(t(c))=(t\\otimes t)\\Delta_Cc$: their evaluations at $(b,b')$ are respectively the two sides of the first identity, and [lem-sfb-finite-free-tensor-dual] detects equality. The second identity gives $\\varepsilon_A(t(c))=\\varepsilon_C(c)$. Thus $t$ is already a counital coalgebra map, without the primitive condition.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra",
+    "lem-sfb-finite-free-tensor-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "Assume the displayed primitive-generator condition. Substituting $c=c'=1_C$ gives $\\langle p,1_C\\rangle=2\\langle p,1_C\\rangle$, so $\\langle p,1_C\\rangle=0$ by subtraction, over any $R$. Since $\\Delta_C1_C=1_C\\otimes1_C$, evaluation at $1_C$ is an algebra map from the convolution algebra $C^*$ to $R$. Hence $b\\mapsto\\langle b,1_C\\rangle$ is an algebra map. It agrees with $\\varepsilon_B$ on $P$ and on scalars; multiplicativity gives agreement on every word in $P$, and linearity on every finite $R$-linear combination of words. Such combinations exhaust $B$ because $P$ generates it as an $R$-algebra. Therefore $t(1_C)=\\varepsilon_B=1_A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "We prove for every $b\\in B$ the identity\n$$E(b):\\quad\\langle b,cc'\\rangle=\\sum\\langle b_1,c\\rangle\\langle b_2,c'\\rangle\\quad(c,c'\\in C).$$\nIt holds on scalars because $r(1_B)=\\varepsilon_C$ and $\\varepsilon_C$ is multiplicative. On $p\\in P$ it is exactly the assumed condition, using $\\Delta_Bp=p\\otimes1+1\\otimes p$. It is closed under addition and scalar multiplication by linearity of $r$ and $\\Delta_B$. If $E(x),E(y)$ hold, use $r(xy)=r(x)*r(y)$ and $\\Delta_C(cc')=\\sum c_1c'_1\\otimes c_2c'_2$. Then\n$$\\langle xy,cc'\\rangle=\\sum\\langle x,c_1c'_1\\rangle\\langle y,c_2c'_2\\rangle=\\sum\\langle x_1,c_1\\rangle\\langle x_2,c'_1\\rangle\\langle y_1,c_2\\rangle\\langle y_2,c'_2\\rangle=\\sum\\langle x_1y_1,c\\rangle\\langle x_2y_2,c'\\rangle.$$\nThe middle factors commute in $R$, and the last equality uses convolution twice; $\\Delta_B(xy)=\\sum x_1y_1\\otimes x_2y_2$. Thus $E(xy)$ holds. Induction on word length followed by linearity proves $E(b)$ for all $b$. It says exactly $t(cc')(b)=(t(c)t(c'))(b)$; hence $t$ is an algebra map as well as the coalgebra map of Step 6. The only convolution facts used are the formula and associativity of [lem-sfb-convolution-linear-map-algebra].",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "Such a bialgebra map $t:C\\to A$ respects antipodes by the following explicit inverse argument. In the associative convolution algebra $\\operatorname{Hom}_R(C,A)$ of [lem-sfb-convolution-linear-map-algebra], with unit $e=\\eta_A\\varepsilon_C$, put $u=t\\circ S_C$ and $v=S_A\\circ t$. Multiplicativity and unit compatibility of $t$ give $u*t=t*u=e$ by the two antipode identities in $C$. The coalgebra and counit compatibilities give $v*t=t*v=e$ by the two antipode identities in $A$. Therefore $u=u*(t*v)=(u*t)*v=v$. Thus $t$ is a Hopf map. Conversely, if $t_r$ is a Hopf map, its multiplicativity gives $\\langle p,cc'\\rangle=(t_r(c)t_r(c'))(p)$; inserting $\\Delta_Bp=p\\otimes1+1\\otimes p$ and $r(1_B)=\\varepsilon_C$ yields exactly the required generator identity. This proves both directions.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "Given a Hopf map $t:C\\to A$, define $r(b)(c)=t(c)(b)$. This is $R$-linear in both variables. Evaluating $\\Delta_A t(c)=(t\\otimes t)\\Delta_Cc$ at $(b,b')$ gives $r(bb')(c)=\\sum r(b)(c_1)r(b')(c_2)$; evaluating counit compatibility gives $r(1_B)(c)=\\varepsilon_C(c)$. Hence $r$ is a unital convolution-algebra map. Its generator identity follows from multiplicativity of $t$ as in Step 9. Transposition twice leaves every value $\\langle b,c\\rangle$ unchanged, so it is an inverse correspondence, and equality on all $b,c$ proves uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  },
+  {
+   "text": "For a Hopf map $\\beta:B'\\to B$, replacing the pairing by $\\langle\\beta(b'),c\\rangle$ sends $r$ to $r\\circ\\beta$ and $t$ to $\\beta^\\vee\\circ t$; for $\\gamma:C'\\to C$, replacing it by $\\langle b,\\gamma(c')\\rangle$ sends $r(b)$ to $r(b)\\circ\\gamma$ and $t$ to $t\\circ\\gamma$. Thus transposition is natural wherever these data are defined. For any $R\\to T$, the scalar-extended pairing is\n$$\\langle u\\otimes b,v\\otimes c\\rangle_T=uv\\langle b,c\\rangle.$$\nBilinearity makes it balanced. Every convolution, unit, coproduct and antipode formula above evaluated on pure tensors is its old value multiplied by the participating scalars; pure tensors generate by [def-weil-pbc-module-tensor-product]. Under $\\theta$ of Step 5, the transposed map is therefore exactly $T\\otimes t$, and the other transpose is the map into $\\operatorname{Hom}_T(T\\otimes C,T)$ specified by this pairing. This asserts no isomorphism $T\\otimes C^*\\cong(T\\otimes C)^*$ for infinite $C$. The generator condition persists for $1\\otimes P$, which still generates $T\\otimes B$. Successive scalar extensions multiply the same scalars, so all comparison formulas are compatible with composition.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-sfb-convolution-linear-map-algebra",
+  "lem-sfb-finite-free-tensor-dual",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.35, pp.222–223; Definition 3.3 and discussion 3.4, pp.65–66. Explicit finite-free ring and generator-pairing calculations supplied by Q134."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HopfAlgebra.*dual|dual.*HopfAlgebra|bialgebra.*pairing|pairing.*bialgebra",
+   "results": "{\"t\": \"2026-10-24T08:16:32Z\", \"tool\": \"grep\", \"query\": \"HopfAlgebra.*dual|dual.*HopfAlgebra|bialgebra.*pairing|pairing.*bialgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide Hopf constructors, antipode identities, transpose linear maps and projectivity of duals; none constructs the finite dual Hopf structure with this primitive-generator transpose criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite projective Hopf algebra linear dual bialgebra and transposed Hopf pairing",
+   "results": "{\"t\": \"2026-10-24T08:16:32Z\", \"tool\": \"leansearch\", \"query\": \"Finite projective Hopf algebra linear dual bialgebra and transposed Hopf pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.dual_projective\", \"Module.dual_finite\", \"Module.Dual.transpose_apply\", \"Module.Dual.transpose\", \"LinearMap.dualMap\", \"RootPairing.Hom.weight_coweight_transpose_apply\", \"LinearMap.dualMap_def\", \"transpose_dualTensorHom\"], \"digest\": \"0ae6fdc4e41e7af4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide Hopf constructors, antipode identities, transpose linear maps and projectivity of duals; none constructs the finite dual Hopf structure with this primitive-generator transpose criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"Dual\"",
+   "results": "{\"t\": \"2026-10-24T08:16:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"Dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide Hopf constructors, antipode identities, transpose linear maps and projectivity of duals; none constructs the finite dual Hopf structure with this primitive-generator transpose criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite free cocommutative Hopf algebra over a commutative ring, its linear dual is a commutative Hopf algebra; transpose maps and test algebra maps by primitive generators",
+   "results": "{\"t\": \"2026-10-24T08:16:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite free cocommutative Hopf algebra over a commutative ring, its linear dual is a commutative Hopf algebra; transpose maps and test algebra maps by primitive generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommSemiring.toHopfAlgebra\", \"HopfAlgebra.ofAlgHom\", \"HopfAlgCat.of_comul\", \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"MonoidAlgebra.instHopfAlgebra\"], \"digest\": \"538590003e9ac2a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide Hopf constructors, antipode identities, transpose linear maps and projectivity of duals; none constructs the finite dual Hopf structure with this primitive-generator transpose criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra map into the convolution dual of a bialgebra transposes to a bialgebra homomorphism if its generating elements satisfy the dual coproduct identities",
+   "results": "{\"t\": \"2026-10-24T08:16:38Z\", \"tool\": \"leanfinder\", \"query\": \"An algebra map into the convolution dual of a bialgebra transposes to a bialgebra homomorphism if its generating elements satisfy the dual coproduct identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BialgHom.ofAlgHom\", \"Bialgebra.ofAlgHom\", \"Bialgebra.comulAlgHom\", \"Bialgebra.comulAlgHom_apply\", \"BialgHom.ofAlgHom_apply\", \"Bialgebra.toLinearMap_comulAlgHom\", \"Bialgebra.comul_algebraMap\", \"BialgEquiv.toLinearMap_ofAlgEquiv\"], \"digest\": \"f73b69aaadcd3c25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide Hopf constructors, antipode identities, transpose linear maps and projectivity of duals; none constructs the finite dual Hopf structure with this primitive-generator transpose criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free cocommutative Hopf algebra dual Hopf algebra and primitive generator pairing criterion",
+   "results": "{\"t\": \"2026-10-24T08:46:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free cocommutative Hopf algebra dual Hopf algebra and primitive generator pairing criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HopfAlgebra.sum_mul_antipode_eq_smul\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"CommSemiring.toHopfAlgebra\", \"HopfAlgebra.mul_antipode_rTensor_comul_apply\", \"HopfAlgebra.mul_antipode_lTensor_comul_apply\", \"HopfAlgCat.of_comul\"], \"digest\": \"2141948bbcada771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give Hopf constructors, antipode axioms, and ordinary linear duality, but no finite-free Hopf dual with the primitive-generator pairing criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Dual",
+   "results": "{\"t\": \"2026-10-24T08:48:26Z\", \"tool\": \"loogle\", \"query\": \"HopfAlgebra, Module.Dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give Hopf constructors, antipode axioms, and ordinary linear duality, but no finite-free Hopf dual with the primitive-generator pairing criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*Hopf|Hopf.*dual|map_antipode",
+   "results": "{\"t\": \"2026-10-24T08:48:26Z\", \"tool\": \"grep\", \"query\": \"dual.*Hopf|Hopf.*dual|map_antipode\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HopfAlgebra/Convolution.lean\"], \"digest\": \"84910254e305568c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give Hopf constructors, antipode axioms, and ordinary linear duality, but no finite-free Hopf dual with the primitive-generator pairing criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linear dual of a finite free Hopf algebra and Hopf pairing on primitive algebra generators",
+   "results": "{\"t\": \"2026-10-24T08:48:27Z\", \"tool\": \"leansearch\", \"query\": \"Linear dual of a finite free Hopf algebra and Hopf pairing on primitive algebra generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subspace.instModuleDualFiniteDimensional\", \"FGModuleCat.FGModuleCatDual\", \"Module.dual_free\", \"Module.dualPairing_apply\", \"Module.finite_dual_iff\", \"FGModuleCat.exactPairing\", \"LinearMap.dualPairing_nondegenerate\", \"Module.Basis.toDualEquiv\"], \"digest\": \"289b30977b96be0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give Hopf constructors, antipode axioms, and ordinary linear duality, but no finite-free Hopf dual with the primitive-generator pairing criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bialgebra pairing between a primitively generated Hopf algebra and any commutative Hopf algebra is determined by infinitesimal derivations on the generators",
+   "results": "{\"t\": \"2026-10-24T08:49:14Z\", \"tool\": \"leanfinder\", \"query\": \"A bialgebra pairing between a primitively generated Hopf algebra and any commutative Hopf algebra is determined by infinitesimal derivations on the generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HopfAlgebra.ofAlgHom\", \"Bialgebra.ofAlgHom\", \"HopfAlgebra\", \"CommSemiring.toHopfAlgebra\", \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"HopfAlgCat.of_comul\", \"HopfAlgebra.sum_mul_antipode_eq_smul\"], \"digest\": \"b9a6d3dea15a4ec4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits give Hopf constructors, antipode axioms, and ordinary linear duality, but no finite-free Hopf dual with the primitive-generator pairing criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-height-one-integration-hom-correspondence",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Propositions 11.35--11.37 and Corollary 11.38, printed pp.222--223 (height-one subgroup correspondence and quotient); Proposition 17.80 proof, p.378, for its toral central specialization. The central multiplicative-kernel clause spells out the height-one subgroup attached to a trivial-adjoint toral restricted subalgebra. Supporting input in Q102: Propositions 11.35--11.37 and the first sentence of the proof of Corollary 11.38, printed pp.222--223; Definition 10.39 and Theorem 10.40, pp.206--207. The relative Hom formula is the finite-dual Hopf-algebra formulation of Proposition 11.36, valid after a commutative base-algebra extension, not an appeal to geometric-point faithfulness. The correction to Proposition 11.36 in the book errata, printed p.644, removes the duplicated Lie(phi). Supporting input for integration: Proposition 11.35, printed pp.222--223, finite-dual construction; Definition 3.3 and discussion 3.4, pp.65--66. General finite-free base-ring pairing criterion extracted from the algebraic construction underlying Proposition 11.36, p.223; the criterion in this ring generality is agent-supplied, not a claim of a separately stated theorem in Milne.",
+   "via": [
+    "lem-sfb-height-one-integration-hom-correspondence",
+    "lem-sfb-height-one-restricted-quotient",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-hopf-dual-pairing",
+  "worker": "stage1",
+  "summary": "Q134 retains the statement and gives the finite-dual operations, all Hopf axioms, arbitrary scalar extension, and the generator-pairing equivalence by explicit evaluations and word induction. Reuses the existing tensor-dual and convolution Mathlib leaves; no new nodes. No project declaration attaches.",
+  "blueprint": "Nearest blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports. Realizes the finite-dual prerequisite to height-one integration in the inherited det-thm-sf-ctf-stability-direct-images alteration chain: Milne Proposition 11.35 finite dual and the primitive-generator construction underlying Proposition 11.36. Whole latest-blueprint searches for Hopf and primitive-generator pairing found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-6816dca57",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-6816dca57 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 11 steps in full. Read the statements of the four cited nodes. lem-sfb-finite-free-tensor-dual (dualDistribEquiv) and lem-sfb-convolution-linear-map-algebra (convAlgebra, valid for any coalgebra) are Mathlib leaves in the same unit; def-weil-pbc-free-module and def-weil-pbc-module-tensor-product are definitions. Read Milne iAG Prop. 11.35–11.36 at printed pp.222–223 and Def. 3.3 at p.65. The ring-level criterion goes beyond Milne, and the proof is honestly marked agent. Compared with the live and side-live clones: statement, stmt_deps, source and blueprint are unchanged, the node was unsplit, and there is no repair note, so no re-split rules apply. No new nodes, no off-unit citations, no tool_uses. Recomputed every step. Step 3: Δ(fg) = ΔfΔg because Δ_B is an algebra map. Step 4: the antipode needs only the antipode identities of B. Step 5: checked the inverse of θ on a basis, with no flatness of T. Step 6: t_r is a counital coalgebra map. Step 7: r(p)(1) = 0 by subtraction, so no characteristic-2 issue. Step 8: the word induction (base case, scalars, product step) only commutes factors in R. Step 9: the antipode argument u = u*(t*v) = (u*t)*v = v in Hom(C,A) is correct. Step 10: transposition is inverse and unique. Step 11: naturality, and the scalar-extended pairing gives T⊗t under θ without claiming T⊗C* ≅ (T⊗C)*. Edge cases R=0, B=R with P empty, T=0, characteristic 2, and F_p[x]/(x^p) are all consistent. Duplicate search found no node stating this: finite-coalgebra-dual-base-change is field-only and finite-dual-hopf-module is about an action/coaction. Mathlib has no dual-Hopf structure (checked by grep). The only citer, height-one-integration, uses exactly the proved clauses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.FiniteDualPairing",
+  "declaration": "HopfAlgebra.finiteDual_pairing_criterion",
+  "declarations": [
+   "HopfAlgebra.finiteDualCoalgebraData",
+   "HopfAlgebra.finiteDual_bialgebra_axioms",
+   "HopfAlgebra.finiteDualCoalgebra",
+   "HopfAlgebra.finiteDualBialgebra",
+   "HopfAlgebra.finiteDualAntipode",
+   "HopfAlgebra.finiteDual_antipode_axioms",
+   "HopfAlgebra.finiteDualHopfAlgebra",
+   "HopfAlgebra.finiteDual_formulas",
+   "HopfAlgebra.finiteDualBaseChange",
+   "HopfAlgebra.finiteDual_baseChange",
+   "HopfAlgebra.finiteDual_baseChange_comp",
+   "HopfAlgebra.finitePairingTranspose",
+   "HopfAlgebra.finiteDual_pairing_criterion",
+   "HopfAlgebra.finiteDual_pairing_natural",
+   "HopfAlgebra.finiteDual_pairing_baseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/FiniteDualPairing.lean",
+  "statement": "theorem finiteDual_pairing_criterion (C : Type w) [CommRing C] [HopfAlgebra R C] (P : Set B) (hgen : Algebra.adjoin R P = ⊤) (hprim : ∀ b ∈ P, Coalgebra.comul (R := R) b = b ⊗ₜ[R] (1 : B) + (1 : B) ⊗ₜ[R] b ∧ Coalgebra.counit (R := R) b = 0) : (∀ r : B →ₐ[R] WithConv (Module.Dual R C), ((∃ t : C →ₐc[R] WithConv (Module.Dual R B), t.toLinearMap = finitePairingTranspose r.toLinearMap ∧ ∀ c, t (antipode R c) = antipode R (t c)) ↔ ∀ b ∈ P, ∀ c c' : C, r b (c * c') = Coalgebra.counit c * r b c' + r b c * Coalgebra.counit c')) ∧ (∀ t : C →ₐc[R] WithConv (Module.Dual R B), ∃! r : B →ₐ[R] WithConv (Module.Dual R C), finitePairingTranspose r.toLinearMap = t.toLinearMap)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The node is realized by the listed declarations together: concrete dual Hopf operations and named axiom statements, their five evaluation formulas, the canonical Hopf base-change isomorphism and composition coherence, the primitive-generator criterion and unique converse, naturality, and scalar-extended pairings. WithConv is Mathlib's existing convolution dual, linearly identical to Hom_R(B,R). All theorem proofs are sorry. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dd0b22d3",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (Module.Free, TensorProduct), report and the full module. Clause-by-clause match: B as Ring + HopfAlgebra + Free + Finite + IsCocomm; dual = WithConv (Module.Dual R B) with Mathlib convolution product and unit; real coproduct (dualDistribEquiv.symm ∘ mul'.dualMap), counit eval 1, antipode S.dualMap; finiteDual_formulas gives all five formulas; base change is a concrete liftBaseChange map, a BialgEquiv over any commutative T, antipode-compatible, value t t' f(b), no flatness; criterion iff with the displayed identity in the node's order; converse is ∃! AlgHom r for every BialgHom t (bialgebra maps between Hopf algebras preserve antipodes); naturality and scalar-extension statements are equalities of actual maps. Re-derived Hopf axioms, criterion steps 6-10 (holds for noncommutative B, characteristic 2 handled by subtraction) and rT multiplicativity. Edge cases R=0, P empty, T=0 or non-flat, infinite C, independent universes. No hollow defs; 8 theorems each by sorry; source and blueprint docstrings; lean.statement verbatim; all 15 declarations present; no dual-Hopf in Mathlib or project; no name clash; no stmt_dep or record changes. No compile (no file changed)."
+ }
+}

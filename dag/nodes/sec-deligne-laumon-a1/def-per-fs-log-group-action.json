@@ -62,7 +62,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
@@ -78,15 +89,18 @@
    "AlgebraicGeometry.logQuotientTest",
    "AlgebraicGeometry.FSLogGroupAction.IsInvariantLogSection",
    "AlgebraicGeometry.FSLogGroupAction.IsQuotient",
-   "AlgebraicGeometry.FSLogGroupAction.InvariantDirectImage"
+   "AlgebraicGeometry.FSLogGroupAction.InvariantDirectImage",
+   "AlgebraicGeometry.EtaleLogGroupAction",
+   "AlgebraicGeometry.FSLogGroupAction.toEtaleLogGroupAction",
+   "AlgebraicGeometry.EtaleLogGroupAction.IsEquivariant"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FSLogGroupAction.lean",
   "statement": "structure FSLogGroupAction (H : Type v) [Group H] (X : FineSaturatedLogScheme.{u})",
   "branch": "newtargets-dag",
-  "by": "Q103",
-  "date": "2026-10-18",
+  "by": "Q40",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "Section 1(B): the previous IsQuotient/IsInvariantLogSection interfaces require a FineSaturatedLogScheme target. They cannot express the actual invariant log sheaf while this item is establishing its fs chart. Added the same invariant-section construction for an arbitrary scheme quotient, with the natural structural-compatible InvariantDirectImage presentation for an EtaleLogStructure target, without assuming fs. The original group action and quotient signatures are preserved; their test object and invariant predicate specialize the general constructions by definition. No original action or quotient notion changes."
+  "note": "Section 1(B): the recorded fs-only action cannot express the item’s strict inert etale map before the source log scheme is known to be fs. This module retains FSLogGroupAction exactly and adds EtaleLogGroupAction, its fs forgetful map, and general equivariance for an arbitrary EtaleLogStructure."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -97,11 +111,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b3ead00cf",
-  "group": "Q103",
+  "reviewer": "NT-stage2-cc-256249661",
+  "group": "Q40",
   "result": "pass",
-  "note": "Item statement matches node/ILO VI 3.5(b), 3.7(b)-(c): all hypotheses present and not stronger (sigma pinned to the action's pullback, log-section eigen identity with the unit, trivial residue/stratum, invertible order, fixed root, module-finite). All conclusions present: fs/sharp P, P^gp=L as range of the canonical map (injective since integral), finite index, nQ^gp in L, b=a|P, invariant chart via InvariantDirectImage + IsChart + pullback = a + characteristic bijection; global chart on Spec B is equivalent to 'near the closed point' because B is strictly henselian; B/J->A/I pinned to the natural map. Neighbourhood theorem keeps the actual chart germ. def-per-fs-log-group-action 1(B) repair is purely additive over live, InvariantDirectImage is not hollow, record changes only lean. nt_compile --json: both files clean (9.6 s/9.3 s); importers VeryTameFSLogAction, VeryTameLogQuotient, VeryTameEquivariantSharpChart, GabberLogSmoothEquivariantModification clean. Statement verbatim, docstrings with source and blueprint, sorry only. Advisory: strictLocalRing/IsFineSaturatedMonoid owned by def-trf-log-regular-pair, not in stmt_deps (same pattern as landed siblings); second-reading section is an author self-check."
+  "note": "Clause-by-clause match. Y: FineSaturatedLogScheme (locally Noetherian + fs), [Y.scheme.IsSeparated], IsLogRegular, FSLogGroupAction H with [Finite H] in universe v. T = veryTameLocus: every geometric lift satisfies IsVeryTameAt, the verbatim pointwise form of the existing IsVeryTame (order a unit in Ω, Associated germs, stratum ring difference in nonunitIdeal), so one notion only. Conclusions: open and H-invariant (iff). Arbitrary Y'/M' with EtaleLogGroupAction, IsEquivariant (CompEq order checked), IsStrictEtale and the canonical inertia iff; Y' locally Noetherian, fs and log regular is concluded, and a'.veryTameLocus = v⁻¹T; Y' not assumed separated. §1(B) dependency modules keep live text and only add declarations; live dependency records equal the base; the added LogIdealChartPresentation import is acyclic and already in every importer's closure; new names have no clashes. Statements verbatim; docstrings carry source, blueprint id and Steps 1-5; sorry only. Edge cases checked: empty Y, Y' and T; trivial H; residue characteristic dividing the inertia order; trivial log structure; non-surjective v. No compile (no file changed). Nit: $Y\\prime$ in node text."
  }
 }

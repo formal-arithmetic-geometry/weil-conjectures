@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-relative-pseudocoherence-composition",
+ "kind": "statement",
+ "title": "Relative pseudo-coherence under composition with a pseudo-coherent base",
+ "statement": "Let $X\\xrightarrow{f}Y\\to S$ be morphisms of schemes [def-pc-scheme], with $X\\to S$, $Y\\to S$ and $f$ locally of finite type [def-pc-morphism-conventions]. Suppose that $\\mathcal O_Y[0]$ is pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex]. For every integer $m$ and every $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], $E$ is $m$-pseudo-coherent relative to $Y$ if and only if $E$ is $m$-pseudo-coherent relative to $S$. There is no quasi-coherence hypothesis on $E$ and no Noetherian hypothesis on the schemes.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine cover of $S$ by $W=\\operatorname{Spec}R$; over each $W$ choose affine opens $V=\\operatorname{Spec}A$ covering its inverse image in $Y$, and over each $V$ choose affine opens $U=\\operatorname{Spec}B$ covering $f^{-1}V$. Such covers exist by the locally-finite-type definition. The all-affine-charts lemma supplies closed embeddings $k:V\\hookrightarrow\\mathbf A^n_W$ and $i:U\\hookrightarrow T=\\mathbf A^r_V$. Put $Q=\\mathbf A^{n+r}_W$, and let $j:T\\hookrightarrow Q$ be obtained from $k$ by adjoining the $r$ coordinates; write $l=ji$. Explicitly, from $R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ one gets $R[x_1,\\ldots,x_n,t_1,\\ldots,t_r]\\twoheadrightarrow A[t_1,\\ldots,t_r]\\twoheadrightarrow B$. These surjections show directly that $j$ and $l$ are closed immersions, and $j$ is the base change of $k$ by $\\mathbf A^r_W\\to W$. The integers $n,r\\geq0$ are independent of the approximation degree $m$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-weil-closed-immersion",
+    "def-nagata-relative-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "For every integer $a$, apply the all-affine-charts criterion to $\\mathcal O_Y[0]$ and the pair $(V,W)$: $Rk_*(\\mathcal O_V[0])$ is $a$-pseudo-coherent. The relative definition, with the single charts $V,W,k$, implies that $\\mathcal O_V[0]$ is pseudo-coherent relative to $W$. The polynomial projection $\\mathbf A^r_W\\to W$ is flat by the polynomial-projection lemma. Apply flat relative base change to obtain pseudo-coherence of $\\mathcal O_T[0]$ relative to $\\mathbf A^r_W$. Indeed its derived pullback is $\\mathcal O_T[0]$: tensor the free rank-one structure module with the new structure ring in the derived-pullback formula. Now apply the all-affine-charts criterion to the embedding $j:T\\hookrightarrow\\mathbf A^n_{\\mathbf A^r_W}=Q$, for every $a$. Thus $Rj_*(\\mathcal O_T[0])$ is absolutely pseudo-coherent on $Q$ (all finite stages).",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-sfb-relative-pseudocoherence-flat-base-change",
+    "def-pc-derived-pullback",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Closed-immersion direct image is exact on underlying abelian sheaves by the cited exactness lemma. For module sheaves the same assertion follows by retaining the scalar actions on kernels and cokernels. Consequently $Ri_*,Rj_*,Rl_*$ are computed on every representing complex by termwise $i_*,j_*,l_*$. For an open $H\\subset Q$ and each term $F$, $(j_*i_*F)(H)=F(i^{-1}j^{-1}H)=(l_*F)(H)$, with the same scalar action. Hence, for $K=Ri_*(E|_U)$, there is an identification $Rj_*K\\cong Rl_*(E|_U)$. This also justifies the ordinary structure-module pushforwards used in step 2. In particular $Rj_*(\\mathcal O_T[0])=(j_*\\mathcal O_T)[0]$, so step 2 gives pseudo-coherence of the ordinary pushed-forward structure module.",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Fix the integer $m$ in the statement. Apply the closed-pushforward pseudo-coherence lemma to $j:T\\hookrightarrow Q$ and $K=Ri_*(E|_U)\\in D(\\mathcal O_T)$. Steps 2 and 3 supply its sole extra hypothesis, the pseudo-coherence of $(j_*\\mathcal O_T)[0]$. Using step 3, it gives $Ri_*(E|_U)$ absolutely $m$-pseudo-coherent if and only if $Rl_*(E|_U)$ absolutely $m$-pseudo-coherent. It imposes no quasi-coherence or boundedness hypothesis on $E|_U$.",
+   "uses": [
+    "lem-sfb-closed-pushforward-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "If $E$ is $m$-pseudo-coherent relative to $Y$, the all-affine-charts criterion makes $Ri_*(E|_U)$ absolutely $m$-pseudo-coherent for every chosen $(U,V,i)$. Step 4 gives the same property for $Rl_*(E|_U)$. For each $W$, the chosen $U$ cover the inverse image of $W$ in $X$ and $l:U\\hookrightarrow\\mathbf A^{n+r}_W$ is a closed immersion over $W$; these are exactly the witnesses in the relative definition for $E$ over $S$. Conversely, if $E$ is $m$-pseudo-coherent relative to $S$, the all-affine-charts criterion applied to $(U,W,l)$ gives the property for $Rl_*(E|_U)$, and step 4 gives it for $Ri_*(E|_U)$. The chosen $V$ cover $Y$, and for each $V$ the chosen $U$ cover $f^{-1}V$, so the relative definition with embeddings $i$ proves the assertion over $Y$. This proves both directions for every integer $m$.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-sfb-relative-pseudocoherence-flat-base-change",
+  "def-pc-derived-pullback",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-closed-immersion-pushforward-exact",
+  "def-pc-derived-direct-image",
+  "lem-sfb-closed-pushforward-pseudocoherence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UT, lemma-composition-relative-pseudo-coherent, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If the structure sheaf of Y is pseudo coherent relative to S then a complex on X is m pseudo coherent relative to Y if and only if relative to S",
+   "results": "{\"t\": \"2026-10-23T13:39:09Z\", \"tool\": \"leanfinder\", \"query\": \"If the structure sheaf of Y is pseudo coherent relative to S then a complex on X is m pseudo coherent relative to Y if and only if relative to S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\"], \"digest\": \"8fd4a99b658514bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T13:39:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Pp]seudo|[Pp]seudo.*[Cc]oher",
+   "results": "{\"t\": \"2026-10-23T13:39:06Z\", \"tool\": \"grep\", \"query\": \"relative.*[Pp]seudo|[Pp]seudo.*[Cc]oher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"Mathlib/CategoryTheory/Bicategory/Coherence.lean\", \"Mathlib/CategoryTheory/Bicategory/Coherence.lean\"], \"digest\": \"67d43dc76d379310\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of relatively pseudo coherent morphisms preserves and reflects relative pseudo coherence of complexes",
+   "results": "{\"t\": \"2026-10-23T13:39:06Z\", \"tool\": \"leansearch\", \"query\": \"Composition of relatively pseudo coherent morphisms preserves and reflects relative pseudo coherence of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"CategoryTheory.MorphismProperty.relative_isStableUnderComposition\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"CochainComplex.HomComplex.Cochain.comp\", \"SSet.RelativeMorphism.comp\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"CategoryTheory.MorphismProperty.IsStableUnderComposition\", \"quasiIso_iff_comp_left\"], \"digest\": \"d826c0c5246fbef6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X to Y to S with Y pseudo coherent over S compare finite free polynomial chart approximations relative to either base",
+   "results": "{\"t\": \"2026-10-23T13:39:10Z\", \"tool\": \"leanfinder\", \"query\": \"For X to Y to S with Y pseudo coherent over S compare finite free polynomial chart approximations relative to either base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"c20a51310fefcf43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo.?coher|pseudo.?coher.*relative",
+   "results": "{\"t\": \"2026-10-23T18:01:32Z\", \"tool\": \"grep\", \"query\": \"relative.*pseudo.?coher|pseudo.?coher.*relative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherence of complexes is unchanged by composition with a pseudo coherent scheme morphism",
+   "results": "{\"t\": \"2026-10-23T18:01:33Z\", \"tool\": \"leansearch\", \"query\": \"Relative pseudo coherence of complexes is unchanged by composition with a pseudo coherent scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\"], \"digest\": \"a4f8b86e08e6ec81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T18:01:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare pseudo coherence relative to two bases using closed embeddings into polynomial affine spaces",
+   "results": "{\"t\": \"2026-10-23T18:01:34Z\", \"tool\": \"leanfinder\", \"query\": \"Compare pseudo coherence relative to two bases using closed embeddings into polynomial affine spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\"], \"digest\": \"c5319532dcd3bf0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex on X is m pseudo coherent relative to Y if and only if relative to S when O_Y is pseudo coherent relative to S",
+   "results": "{\"t\": \"2026-10-23T18:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"A complex on X is m pseudo coherent relative to Y if and only if relative to S when O_Y is pseudo coherent relative to S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\"], \"digest\": \"baf5cbc18f7cb447\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, equivalence (2) and (3): apply composition-relative-pseudo-coherent to id:P -> P after establishing relative pseudo-coherence of the structure sheaf.",
+   "via": [
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-pseudocoherence-composition",
+  "worker": "stage1",
+  "summary": "Followed Stacks 09UT using compatible affine polynomial charts, flat relative base change of the structure sheaf, and absolute closed-pushforward detection. Reused the existing all-affine-charts criterion and polynomial-flatness leaf. Added two strictly smaller statement-only prerequisites, with logged Mathlib searches. Wrote the closed-image composition and cover assembly explicitly; retained the statement without additional hypotheses. Corrected the n/r index typo in the source proof.",
+  "blueprint": "Supporting prerequisite of 09UU below det-thm-sf-ctf-stability-direct-images clause (3), along the inherited perfect-test/cohomology-and-base-change chain in blueprint.from.place. The ancestor command returns None; preserve that inherited null ancestor and via chain. The latest blueprint has no separate equivalent assertion. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-closed-immersion-pushforward-exact",
+    "why": "Generic Zariski sheaf exactness, applied to underlying abelian sheaves to compute the closed-immersion module direct images termwise; no node of this unit provides that exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-closed-immersion-pushforward-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-7885903f7",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-7885903f7 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full, with every cited statement, against Stacks more-morphisms 09UT (l.17235), 09UR (l.17110), 09UU, 09VC/09UJ and perfect.tex 09VA (l.2926-3007). Item statement and stmt_deps are byte-identical to live, which is still unsplit; there is no repair note. It matches 09UT hypothesis by hypothesis and is not weakened. Step 1 builds compatible polynomial charts (k, i, j = base change of k, l = j∘i) by explicit surjections and fixes the source's n/m index typo. Step 2 uses all-affine-charts, then flat base change along A^r_W→W (mathlib flat leaf) with Lq^*O_V[0]=O_T[0], then all-affine-charts at j, so Rj_*O_T is pc. Step 3 uses exact i_* to get termwise derived images and Rj_*Ri_*=Rl_*. Step 4 is 09VA for j. Step 5 assembles chart witnesses both ways correctly. New flat-base-change node = exact flat specialization of 09UR (flat implies Tor-independent; arbitrary E, fixed m). New closed-pushforward node = 09VA specialized to schemes, keeping the needed i_*O_Z pc hypothesis. Both are statement-only, self-contained and strictly smaller than the item. Their blueprint via/place are verified to extend the item's. Not duplicates of 09VG closed-support, 0DI5, 0DII, local-on-source, flat-lfp, or NX's parallel 09VC/09VD/09VE nodes. No cycle: the all-affine-charts proof does not use 09UT. Off-unit tool use lem-sc-closed-immersion-pushforward-exact (generic 01AX exactness) accepted. No SGA. Advisory: lft of f' is implicit in the flat-base-change statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePseudoCoherenceComposition",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_comp_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePseudoCoherenceComposition.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_comp_iff [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) [LocallyOfFiniteType f] [LocallyOfFiniteType g] [LocallyOfFiniteType (f ≫ g)] (hY : IsPseudoCoherentRelativeTo g ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings Y.toRingedSpace)))) (m : ℤ) (E : schemeDerivedCategory X) : IsMPseudoCoherentRelativeTo f m E ↔ IsMPseudoCoherentRelativeTo (f ≫ g) m E",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a9d65dcf",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09UT (more-morphisms l.17234) clause by clause: X,Y,S schemes; f:X→Y, g:Y→S with composite f≫g; LocallyOfFiniteType on f, g, f≫g (the third is redundant but harmless as a Prop class); hY = IsPseudoCoherentRelativeTo g of singleFunctor 0 of SheafOfModules.unit, the all-degrees predicate, rendered like the landed closed-pushforward theorem; ∀ m:ℤ, E unbounded in schemeDerivedCategory X; iff with the same E and m. No added hypotheses; HasDerivedCategory.{w} family matches the dependency binder; universes u,w independent. Node differs from side-live only in lean; statement verbatim in file; sorry only; source/blueprint docstrings and 5 proof steps present; no duplicate found by rg; imports exist; report has Worker report + Second reading. No changes, no compile run (worker dry run OK)."
+ }
+}

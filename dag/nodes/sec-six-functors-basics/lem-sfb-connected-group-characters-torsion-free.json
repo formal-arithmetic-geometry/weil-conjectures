@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-connected-group-characters-torsion-free",
+ "kind": "statement",
+ "title": "Characters of a smooth connected group have no torsion",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $X^*(G)=\\operatorname{Hom}_{F\\text{-grp}}(G,\\mathbf G_m)$ for the abelian group of characters, with addition given by multiplication of values, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. For every smooth connected group $G$, the abelian group $X^*(G)$ is torsion free: for every integer $n\\geq1$ and every character $\\chi$, the identity $\\chi^n=1$ of group-scheme morphisms implies $\\chi=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.19, proof, printed p.392; Theorem 18.25, proof, printed p.393: X(G) is torsion-free because G is smooth and connected."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}A$. By [lem-weil-pbc-smooth-scheme-over-field-regular], the smooth $F$-scheme $G$ is regular and locally Noetherian. It is nonempty (its identity is an $F$-point) and connected, so [lem-sc-regular-connected-integral] makes it integral. Applying [def-pc-integral-scheme] to the nonempty affine open $G$ itself shows that $A$ is an integral domain.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S, lemma-smooth-regular; properties.tex Tags 0569, lemma-regular-normal, and 033N, lemma-normal-locally-Noetherian."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and $\\chi^n=1$. By the affine contravariance of [def-weil-affine-spectrum] and $\\mathbf G_m=\\operatorname{Spec}F[t,t^{-1}]$ of [def-sc-gm-ga], the character corresponds to an $F$-algebra map $\\chi^*:F[t,t^{-1}]\\to A$. Set $u=\\chi^*(t)$. The multiplication formula $m^*(t)=t\\otimes t$ makes the coordinate of $\\chi^n$ equal to $u^n$, while the trivial character sends $t$ to $1$; hence $u^n=1$ in $A$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.19, proof, printed p.392; Theorem 18.25, proof, printed p.393; explicit coordinate-ring argument supplying the implicit torsion-freeness assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-alg-closed-linear-factorization] to the nonzero polynomial $T^n-1\\in F[T]$. Its leading coefficient is $1$, so $T^n-1=\\prod_j(T-a_j)$ with $a_j\\in F$. Evaluate this finite product at $u$ in $A$ to obtain $0=\\prod_j(u-a_j1_A)$. In a domain a finite product is zero only if one factor is zero, by induction using the absence of zero divisors (the empty product is $1\\ne0$). Thus $u=a_j1_A$ for some $j$. Repeated roots cause no difficulty.",
+   "uses": [
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.19, proof, printed p.392; Theorem 18.25, proof, printed p.393; explicit coordinate-ring argument supplying the implicit torsion-freeness assertion."
+   }
+  },
+  {
+   "text": "The identity section of [def-sc-group-scheme] gives an $F$-algebra map $\\epsilon:A\\to F$. A group homomorphism preserves the identity: its value there is an idempotent in the group $F^\\times$, hence $1$. Therefore $\\epsilon(u)=1$; since $u=a_j1_A$, this says $a_j=1$ and hence $u=1$. The map $\\chi^*$ now fixes scalars and sends both $t$ and $t^{-1}$ to $1$, so on every Laurent monomial, and thus every finite Laurent sum, it agrees with the trivial character. By [def-weil-affine-spectrum], $\\chi=1$ as a scheme morphism and hence as a group-scheme morphism. This proves the asserted torsion-freeness.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.19, proof, printed p.392; Theorem 18.25, proof, printed p.393; explicit coordinate-ring argument supplying the implicit torsion-freeness assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "lem-weil-alg-closed-linear-factorization",
+  "def-sc-group-scheme",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.19, proof, printed p.392; Theorem 18.25, proof, printed p.393; explicit coordinate-ring argument supplying the implicit torsion-freeness assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The group of algebraic characters from a smooth connected affine algebraic group to the multiplicative group is torsion free",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulChar.finite\", \"module\": \"Mathlib/NumberTheory/MulChar/Duality\", \"type\": \"∀ {M : Type u_1} {R : Type u_2} [inst : CommMonoid M] [inst_1 : CommRing R] [Finite Mˣ] [IsDomain R],\\n  Finite (MulChar M R)\", \"doc\": \"If the group of units of a commutative monoid $ M $ is finite and $ R $ is a domain, then the set of multiplicative characters from $ M $ to $ R $ is finite.\"}\n  {\"name\": \"CharacterModule.exists_character_apply_ne_zero_of_ne_zero\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"∀ {A : Type uA} [inst : AddCommGroup A] {a : A}, a ≠ 0 → ∃ c, c a ≠ 0\", \"doc\": \"For any non-zero element $a$ in an additive commutative group $A$, there exists a character $c$ (a group homomorphism from $A$ to the additive circle $\\\\mathbb{Q}/\\\\mathbb{Z}$) such that $c(a) \\\\neq 0$ i\"}\n  {\"name\": \"CharacterModule.int\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"Type\", \"doc\": \"The character module of the additive commutative group $\\\\mathbb{Z}$ is the additive monoid of group homomorphisms from $\\\\mathbb{Z}$ to the additive circle $\\\\mathbb{Q}/\\\\mathbb{Z}$, where $\\\\mathbb{Q}/\\\\m\"}\n  {\"name\": \"MulChar.commGroup\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"{R : Type u_1} → [inst : CommMonoid R] → {R' : Type u_2} → [inst_1 : CommMonoidWithZero R'] → CommGroup (MulChar R R')\", \"doc\": \"The set of multiplicative characters from a commutative monoid $ R $ to a commutative monoid with zero $ R' $ forms a commutative group under pointwise multiplication. This structure ensures the multi\"}\n  {\"name\": \"AddChar.instFintype\", \"module\": \"Mathlib/Analysis/Fourier/FiniteAbelian/Orthogonality\", \"type\": \"(G : Type u_1) → (R : Type u_3) → [inst : AddCommGroup G] → [inst_1 : RCLike R] → [Finite G] → Fintype (AddChar G R)\", \"doc\": \"For any finite additive commutative group $ G $ and real closed-like structure $ R $, the set of additive characters from $ G $ to $ R $ is finite.\"}\n  {\"name\": \"CharacterModule\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"(A : Type uA) → [AddCommGroup A] → Type uA\", \"doc\": \"The character module of an additive commutative group $A$ is the additive monoid of homomorphisms from $A$ to the additive circle $\\\\mathbb{Q}/\\\\mathbb{Z}$, where the additive circle is defined as the q\"}\n  {\"name\": \"CharacterModule.instAddCommGroup\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"(A : Type uA) → [inst : AddCommGroup A] → AddCommGroup (CharacterModule A)\", \"doc\": \"The character module of an additive commutative group $ A $, consisting of homomorphisms from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $, forms an additive commutative group under pointwis\"}\n  {\"name\": \"CharacterModule.instFunLikeAddCircleRatOfNat\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"(A : Type uA) → [inst : AddCommGroup A] → FunLike (CharacterModule A) A (AddCircle 1)\", \"doc\": \"The character module of an additive commutative group $ A $ is equipped with a function-like structure, where each element is a homomorphism from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A character of finite order on a connected reduced algebraic group is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulChar.finite\", \"module\": \"Mathlib/NumberTheory/MulChar/Duality\", \"type\": \"∀ {M : Type u_1} {R : Type u_2} [inst : CommMonoid M] [inst_1 : CommRing R] [Finite Mˣ] [IsDomain R],\\n  Finite (MulChar M R)\", \"doc\": \"If the group of units of a commutative monoid $ M $ is finite and $ R $ is a domain, then the set of multiplicative characters from $ M $ to $ R $ is finite.\"}\n  {\"name\": \"AddChar.forall_apply_eq_zero\", \"module\": \"Mathlib/Analysis/Fourier/FiniteAbelian/PontryaginDuality\", \"type\": \"∀ {α : Type u_1} [inst : AddCommGroup α] {a : α} [Finite α], (∀ (ψ : AddChar α ℂ), ψ a = 1) ↔ a = 0\", \"doc\": \"For any element $ a $ in an additive commutative group $ \\\\alpha $, all additive characters $ \\\\psi : \\\\alpha \\\\to \\\\mathbb{C} $ satisfy $ \\\\psi(a) = 1 $ if and only if $ a = 0 $.\"}\n  {\"name\": \"AddChar.PrimitiveAddChar.prim\", \"module\": \"Mathlib/NumberTheory/LegendreSymbol/AddCharacter\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {R' : Type v} [inst_1 : Field R'] (self : AddChar.PrimitiveAddChar R R'),\\n  self.char.IsPrimitive\", \"doc\": \"Given a primitive additive character $\\\\chi$ from a commutative ring $R$ to the multiplicative group of a field $R'$, the corresponding additive character $\\\\chi_{\\\\text{char}}$ from $R$ to the cyclotomi\"}\n  {\"name\": \"MulChar.orderOf_pos\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"∀ {M : Type u_1} [inst : CommMonoid M] {R : Type u_2} [inst_1 : CommMonoidWithZero R] [Finite Mˣ] (χ : MulChar M R),\\n  0 < orderOf χ\", \"doc\": \"For any multiplicative character $\\\\chi$ from a commutative monoid $M$ to a commutative monoid with zero $R$, if the group of units $M^\\\\times$ is finite, then the order of $\\\\chi$ is a positive integer,\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"module\": \"Mathlib/NumberTheory/MulChar/Duality\", \"type\": \"∀ (M : Type u_1) (R : Type u_2) [inst : CommMonoid M] [inst_1 : CommRing R] [Finite M]\\n  [HasEnoughRootsOfUnity R (Monoid.exponent Mˣ)] [Nontrivial R] {a : M}, a ≠ 1 → ∃ χ, χ a ≠ 1\", \"doc\": \"Let `M` be a finite commutative monoid and let `R` be a non-trivial integral domain. Let `n` be the exponent of the group of units of `M`. Suppose that `R` contains at least `n` distinct `n`-th roots \"}\n  {\"name\": \"AddChar.exists_apply_ne_zero\", \"module\": \"Mathlib/Analysis/Fourier/FiniteAbelian/PontryaginDuality\", \"type\": \"∀ {α : Type u_1} [inst : AddCommGroup α] {a : α} [Finite α], (∃ ψ, ψ a ≠ 1) ↔ a ≠ 0\", \"doc\": \"For a finite additive commutative group $\\\\alpha$ and an element $a \\\\in \\\\alpha$, there exists an additive character $\\\\psi : \\\\alpha \\\\to \\\\mathbb{C}$ such that $\\\\psi(a) \\\\neq 1$ if and only if $a$ is not t\"}\n  {\"name\": \"MulChar.apply_mem_rootsOfUnity_orderOf\", \"module\": \"Mathlib/NumberTheory/MulChar/Lemmas\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [Finite F] {R : Type u_2} [inst_2 : CommRing R] (χ : MulChar F R) {a : F},\\n  a ≠ 0 → ∃ ζ ∈ rootsOfUnity (orderOf χ) R, ↑ζ = χ a\", \"doc\": \"For any multiplicative character $\\\\chi : F^\\\\times \\\\to R^\\\\times$ from the multiplicative group of a field $F$ to the multiplicative group with zero of a ring $R$, and for any non-zero element $a \\\\in F$\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Character\", \"IsTorsionFree\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]haracter.*[Tt]orsion[Ff]ree|[Tt]orsion[Ff]ree.*[Cc]haracter|characterGroup",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The group of algebraic characters from a smooth connected affine algebraic group to the multiplicative group is torsion free",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsMulTorsionFree.of_not_isOfFinOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \"∀ {G : Type u_1} [inst : CommGroup G], (∀ ⦃a : G⦄, a ≠ 1 → ¬IsOfFinOrder a) → IsMulTorsionFree G\", \"doc\": \"In a commutative group, if every element distinct from the identity has infinite order, then the group is multiplicatively torsion-free.\"}\n  {\"name\": \"IsAddTorsionFree.of_not_isOfFinAddOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \"∀ {G : Type u_1} [inst : AddCommGroup G], (∀ ⦃a : G⦄, a ≠ 0 → ¬IsOfFinAddOrder a) → IsAddTorsionFree G\", \"doc\": \"If every non-zero element of an additive commutative group $ G $ does not have finite additive order, then $ G $ is torsion-free.\"}\n  {\"name\": \"IsAffineMonoid.toIsMulTorsionFree\", \"module\": \"Mathlib.Algebra.AffineMonoid.Basic\", \"type\": \"∀ {M : Type u_1} {inst : CommMonoid M} [self : IsAffineMonoid M], IsMulTorsionFree M\", \"doc\": \"Every affine monoid is multiplicatively torsion-free, meaning that for any element $a$ in the monoid and positive integer $n$, if $a^n = 1$ then $a = 1$.\"}\n  {\"name\": \"AddCommGroup.isAddTorsionFree_iff_torsion_eq_bot\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \"∀ (G : Type u_1) [inst : AddCommGroup G], IsAddTorsionFree G ↔ AddCommGroup.torsion G = ⊥\", \"doc\": \"An additive commutative group $ G $ is torsion-free if and only if its torsion subgroup equals the trivial subgroup $\\\\{0\\\\}$.\"}\n  {\"name\": \"MulChar.finite\", \"module\": \"Mathlib.NumberTheory.MulChar.Duality\", \"type\": \"[Finite Mˣ] [IsDomain R] : Finite (MulChar M R)\", \"doc\": \"If the group of units of a commutative monoid $ M $ is finite and $ R $ is a domain, then the set of multiplicative characters from $ M $ to $ R $ is finite.\"}\n  {\"name\": \"isAddTorsionFree_iff_not_isOfFinAddOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \"∀ {G : Type u_1} [inst : AddCommGroup G], IsAddTorsionFree G ↔ ∀ ⦃a : G⦄, a ≠ 0 → ¬IsOfFinAddOrder a\", \"doc\": \"For any additive commutative group $ G $, $ G $ is torsion-free if and only if every non-zero element of $ G $ has infinite additive order.\"}\n  {\"name\": \"CommGroup.isMulTorsionFree_iff_torsion_eq_bot\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \": IsMulTorsionFree G ↔ CommGroup.torsion G = ⊥\", \"doc\": \"A commutative group $G$ is multiplicatively torsion-free if and only if its torsion subgroup is trivial, i.e., $\\\\text{IsMulTorsionFree } G \\\\leftrightarrow \\\\text{Torsion}(G) = \\\\{1\\\\}$.\"}\n  {\"name\": \"isMulTorsionFree_iff_not_isOfFinOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \": IsMulTorsionFree G ↔ ∀ ⦃a : G⦄, a ≠ 1 → ¬IsOfFinOrder a\", \"doc\": \"For a group $ G $, $ G $ is multiplicatively torsion-free if and only if every non-identity element of $ G $ has infinite order.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]haracter.*[Tt]orsion[Ff]ree|[Tt]orsion[Ff]ree.*[Cc]haracter|characterGroup",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract MulChar/AddChar and CharacterModule concern different objects; IsAffineMonoid already assumes torsion-freeness. None gives the scheme-character theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite order algebraic character of a smooth connected algebraic group is trivial",
+   "results": "Actual returned hits: MulChar.pow_card_eq_one, MulChar.trivial, MulChar.orderOf_pos, AddChar.forall_apply_eq_zero, AddChar.exists_apply_ne_zero, AddChar.instInhabited, AddChar.coe_eq_one, FDRep.character",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract MulChar/AddChar and CharacterModule concern different objects; IsAffineMonoid already assumes torsion-freeness. None gives the scheme-character theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Character\", \"IsTorsionFree\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract MulChar/AddChar and CharacterModule concern different objects; IsAffineMonoid already assumes torsion-freeness. None gives the scheme-character theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The group of scheme characters of a smooth connected affine group over an algebraically closed field is torsion free",
+   "results": "Actual returned hits: IsAffineMonoid.toIsMulTorsionFree, QuotientGroup.instIsMulTorsionFree, not_isTorsion_of_isMulTorsionFree, CommGroup.isMulTorsionFree_iff_torsion_eq_bot, CharacterModule.int, MulChar.finite, IsAffineAddMonoid.toIsAddTorsionFree, CharacterModule.exists_character_apply_ne_zero_of_ne_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract MulChar/AddChar and CharacterModule concern different objects; IsAffineMonoid already assumes torsion-freeness. None gives the scheme-character theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite order morphism of algebraic group schemes from a connected smooth group to the multiplicative group is the trivial character",
+   "results": "Actual returned hits: MulChar.finite, MulChar.exists_apply_ne_one_iff_exists_monoidHom, MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity, AddChar.forall_apply_eq_zero, CommGroup.monoidHom_mulEquiv_of_hasEnoughRootsOfUnity, MulChar.mulEquiv_units, PontryaginDual.map_one, CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract MulChar/AddChar and CharacterModule concern different objects; IsAffineMonoid already assumes torsion-freeness. None gives the scheme-character theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.19, proof, printed p.392; Theorem 18.25, proof, printed p.393: X(G) is torsion-free because G is smooth and connected.",
+   "via": [
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-connected-group-characters-torsion-free",
+  "worker": "stage1",
+  "summary": "Supplied the implicit Milne torsion-freeness argument using existing smooth-regular and connected-regular-integral nodes, polynomial splitting, and the character value at the identity. No new nodes, no statement changes, and no characteristic restriction. Read all cited statements and checked affine contravariance and positive-characteristic repeated roots.",
+  "blueprint": "The inherited provenance chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the semisimple multiplicative universal cover: Milne Proposition 18.19 and Theorem 18.25 use torsion-freeness of X(G). The current latest blueprint direct-images proof (3) is the direct-image preservation assembly; this is its existing supporting algebraic-group leaf, not a change of unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-a-field regularity, used for the coordinate domain of G; the current unit has no such algebraic-geometric lemma."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic connected regular scheme integrality, used on G; it is already Lean-closed and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-cfb535e84",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-cfb535e84 (reviewer sub-agent of L); spot-checked: I read the item and all 8 cited statements in full; I made no fixes. Delivery shape: one commit (item + report), no new nodes, no repair note, statement and stmt_deps unchanged, fresh searches of all three kinds with no match. Source: Milne iAG2017, printed p.392 Prop 18.19 proof and p.393 Thm 18.25 proof, both say 'X(G) torsion-free because G smooth and connected' without proof, so proof_origin=agent is correct. Step 1: Stacks 056S (varieties lemma-smooth-regular) via lem-weil-pbc-smooth-scheme-over-field-regular gives regular and locally Noetherian; G is nonempty (identity point) and connected, so lem-sc-regular-connected-integral (0569/033N, Lean-closed) makes it integral; def-pc-integral-scheme on U=G gives A a domain. Step 2: affine Spec bijection plus G_m coproduct m*(t)=t⊗t give u^n=1 in A. Step 3: Mathlib-leaf factorization of T^n-1 with c=1, so in the domain u=a_j; repeated roots are harmless. Step 4: χ(e)^2=χ(e) in F^× gives ε(u)=1, so a_j=1 and u=1; the F-algebra map is then trivial on Laurent sums, so χ=1 as a morphism. Edge cases: n=1, Spec F, G_m, G_a; μ_p in characteristic p (connected, not smooth) and μ_n (smooth, disconnected) show both hypotheses are needed. The citer semisimple-multiplicative-universal-cover applies it to smooth connected P and Q, which matches. rg -L over dag/nodes found no duplicate. I accept the tool_uses smooth-scheme-over-field-regular and regular-connected-integral as generic black boxes. No SGA is cited. The null blueprint.from.node is inherited from the creating chain, not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedGroupCharactersTorsionFree",
+  "declaration": "AlgebraicGeometry.character_eq_one_of_pow_eq_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedGroupCharactersTorsionFree.lean",
+  "statement": "theorem character_eq_one_of_pow_eq_one (F : Type u) [Field F] [IsAlgClosed F] (G : Over (Spec (.of F))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] (n : ℕ) (hn : 1 ≤ n) (χ : G ⟶ StandardGroupSchemes.multiplicative F) [IsMonHom χ] (hχ : χ ^ n = 1) : χ = 1",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc69574a2",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Only the lean record changed on the item; one sorry theorem, no definitions. The Lean matches the node clause by clause: IsAlgClosed F; G : Over (Spec F) with GrpObj and IsAffine; LocallyOfFiniteType+QuasiCompact (recorded finite-type conjunction); Smooth; ConnectedSpace (includes nonempty). χ : G ⟶ StandardGroupSchemes.multiplicative F (the def-sc-gm-ga record, GrpObj instance multiplicativeGroup) with IsMonHom. Powers and 1 are Mathlib's pointwise Hom group. n : ℕ with 1 ≤ n; the conclusion is equality of morphisms. No extra hypotheses (no char/n/reduced/rational-point assumptions); universe u explicit; lean.statement verbatim; lines ≤ 82 chars. Plain imports are the proof_dep modules (Regular, Splits, Laurent), as brief-stage2 §6 requires. Source and blueprint docstrings and the 4-step proof plan are present; the name is unused elsewhere; no duplicate notion; Worker report and Second reading sections present. Edge cases n=1, Spec F, G_m, G_a, p|n checked; μ_p and μ_n show both hypotheses are needed. Per the 2026-10-21 rule no recompile; the worker reports clean compiles."
+ }
+}

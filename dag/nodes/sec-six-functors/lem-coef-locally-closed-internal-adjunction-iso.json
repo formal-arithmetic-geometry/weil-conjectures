@@ -1,0 +1,140 @@
+{
+ "id": "lem-coef-locally-closed-internal-adjunction-iso",
+ "kind": "statement",
+ "title": "Invertibility of the specified locally closed internal adjunction",
+ "statement": "Let $A$ be a finite commutative ring, $j:S\\hookrightarrow Z$ an open immersion and $g:Z\\hookrightarrow X$ a closed immersion of schemes [def-weil-open-immersion, def-weil-closed-immersion]. Work in ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories]. For arbitrary complexes $L$ on $S$ and $M$ on $X$, the specified evaluation-defined map $I_{L,M}=\\mathrm{internalAdjunction}(A,g,j,L,M)$ [def-coef-internal-adjunction-comparison-maps] from $Rg_*Rj_*R\\mathcal Hom_A(L,j^*Rg^!M)$ to $R\\mathcal Hom_A(Rg_*j_!L,M)$ is an isomorphism. Its projection map is closed proper projection followed by inverse open projection. Neither the endpoints nor the arrow are replaced. No constructibility or Tor assumption is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 3: stratum internal adjunction, with the specified proper/open projection and evaluation normalization"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-coef-internal-adjunction-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "Fix L. Compose the closed proper projection map at j_!L with pullback whiskering of the inverse open projection. This gives an isomorphism of functors from tensoring with g_*j_!L to g-star followed by j-star, tensoring with L, and g_*j_!. Closed projection is invertible for a finite ring; the open projection is the published isomorphism.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the ordinary pullback/direct-image adjunctions with tensor-Hom and the compact-support exceptional adjunction. Conjugate the isomorphism of Step 1 along this composite and tensor-Hom on X. Mathlib conjugateEquiv_iso proves that the resulting natural transformation is invertible.",
+   "uses": [
+    "def-coef-internal-adjunction-comparison-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply conjugateEquiv_counit to identify its component at M. Expanding the composite adjunction counits gives projection, then compact direct image of tensor applied to the ordinary counit followed by evaluation, then exceptional counit. Transpose by tensor-Hom. This is exactly the definition of internalAdjunction, so it is invertible.",
+   "uses": [
+    "def-coef-internal-adjunction-comparison-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-etale-proper-projection-formula-finite",
+  "lem-pur-etale-open-derived-tensor",
+  "def-coef-internal-adjunction-comparison-maps"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 3: stratum internal adjunction, with the specified proper/open projection and evaluation normalization",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The conjugate of an invertible natural transformation under two adjunctions is invertible",
+   "results": "CategoryTheory.conjugateEquiv_iso and seven companion conjugate-equivalence results. These prove the generic categorical step, but do not identify the specified geometric internalAdjunction. Read Mates.lean conjugateEquiv_counit and conjugateEquiv_iso.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalAdjunction.*[Ii]so",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical internal adjunction for an open immersion followed by a closed immersion is the invertible conjugate of its projection formula",
+   "results": "8 hits about Scheme.Modules restriction adjunctions, ringed-space open restrictions and factorization of immersions. None is the ordinary derived etale internal Hom arrow.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyClosedHomGenerator",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Paragraph 3: stratum internal adjunction, with the specified proper/open projection and evaluation normalization",
+   "via": [
+    "lem-coef-locally-closed-hom-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyClosedInternalAdjunctionIso",
+  "file": "lean/Sheaf/Paper/LocallyClosedInternalAdjunctionIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.locallyClosedInternalAdjunction_isIso",
+  "statement": "theorem locallyClosedInternalAdjunction_isIso\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S Z X : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g]\n    (j : S ⟶ Z) [IsOpenImmersion j]\n    (L : DerivedCategoryModule A S) (M : DerivedCategoryModule A X) :\n    IsIso (internalAdjunction A g j L M)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "mathlib": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

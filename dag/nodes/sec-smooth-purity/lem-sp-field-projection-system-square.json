@@ -1,0 +1,246 @@
+{
+ "id": "lem-sp-field-projection-system-square",
+ "kind": "statement",
+ "title": "The scalar projection square in the whole coefficient-system category",
+ "statement": "Fix the global finite-field datum of [def-pur-conventions], with algebraic closure $k$ of characteristic $p$ and a prime $\\ell\\ne p$. Let $E\\subset F$ be finite extensions of $\\mathbf Q_\\ell$, with valuation rings $R=\\mathcal O_E\\subset S=\\mathcal O_F$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms, def-sf-setting]. For $T=X,Y$, put $A_{n,T}=(R/\\ell^n)_T$, $B_{n,T}=(S/\\ell^n)_T$ on the small pro-etale site, and use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Write $\\mathcal N_A(T),\\mathcal N_B(T)$ for their normalized constructible subcategories with uniform cohomological and Tor bounds [sk-def-sp-normalized-towers], and $C_T=-\\otimes^L_{A_{\\bullet,T}}B_{\\bullet,T}$ for scalar extension of whole systems [lem-coef-semilinear-derived-sections]. Twists mean [def-coefficient-twists-detailed]. Write $P_A=Rf_{!,A,\\bullet}\\dashv G_A=f^!_{A,\\bullet}$ and $P_B\\dashv G_B$ for the specified tower adjunctions, with units $\\eta_A,\\eta_B$ and counits $\\epsilon_A,\\epsilon_B$ [det-sp-tower-gluing]. Fix the same compactification for the two compact-support functors [det-sp-tower-shriek-levels]. Let $b:C_YP_A\\xrightarrow{\\sim}P_BC_X$ be the coefficient comparison formed by the proper direct-image coefficient mate followed by the open-extension tensor identification, as in [lem-sp-field-shriek-system-comparison]. Use the whole-system pullback, tensor and coefficient identifications of [lem-coef-semilinear-derived-sections]. For $K\\in\\mathcal N_A(Y)$ and $W\\in\\mathcal N_A(X)$ let\n$$\\pi_A(K,W):K\\otimes^LP_AW\\longrightarrow P_A(f_A^*K\\otimes^LW)$$\nbe the specified compact-support projection transformation, including tensor symmetry [def-exchange-projection], and define $\\pi_B$ in the same way. There is an equality of morphisms in the ordinary derived category of $B$-coefficient systems\n$$b_{f_A^*K\\otimes^LW}\\circ C_Y\\pi_A(K,W)=\\pi_B(C_YK,C_XW)\\circ(1\\otimes b_W).$$\nAll four corners use the canonical monoidal scalar comparison $C(K\\otimes^LW)\\simeq CK\\otimes^LCW$ and $C_Xf_A^*\\simeq f_B^*C_Y$, not unspecified identifications of their values. The proper part is the counit-defined exchange/projection square on the ringed topoi of coefficient systems [lem-weil-pbc-ringed-exchange-tensor-coherence]; the open part uses the extension-by-zero tensor comparison from the same compactification. This equality holds before level evaluation, so it remains valid when the projection maps are inverted on the two-input finite-Tor etale-origin domain of [det-sp-tower-shriek-levels](2a). No Cartesian-square hypothesis on the coefficient square is imposed.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square; returned step 7 third paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "lem-coef-semilinear-derived-sections",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-field-shriek-system-comparison",
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-sp-field-shriek-system-models",
+  "def-coef-semilinear-system-models",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-ringed-sequence-site",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the canonical signed symmetry and scalar tensor comparisons from lem-sp-field-projection-tensor-construction. Unfold the compactification projection: leftProjection is leftProper followed by proper image of leftOpen; the adjacent symmetry and inverse symmetry cancel.",
+   "uses": [
+    "lem-sp-field-projection-tensor-construction",
+    "def-sp-field-projection-factor-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proper-factor square at j_{A,!}W and the open-factor square at W. Naturality of the proper coefficient mate moves C_Y Rp_{A,*}(leftOpen) past that mate. Substitute the open-factor square inside Rp_{B,*}, and then substitute the proper-factor square. Naturality of the counit projection, proved using the adjunction Hom equivalence and naturality of its counit and tensorator, moves beta_W through leftProper_B. Functoriality combines the two tensor maps into 1 tensor b_W. This proves ProjectionSystemSquare on all derived inputs.",
+   "uses": [
+    "lem-sp-field-projection-proper-square",
+    "lem-sp-field-projection-open-square",
+    "def-sp-field-projection-factor-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the supplied isomorphism witnesses hA and hB, precompose the proposed inverted equality by the epimorphism C_Y(leftProjection_A). Functoriality of C_Y identifies C_Y(pi_A) C_Y(pi_A^{-1}) with the identity. Substitute the square just proved, and cancel pi_B pi_B^{-1}. This proves exactly the requested inverted equality. The formal conclusion supplies both invertibility witnesses as hypotheses, so this cancellation does not require a new proof that scalar extension preserves normalized objects.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-field-projection-factor-data",
+  "lem-sp-field-projection-open-square",
+  "lem-sp-field-projection-proper-square",
+  "lem-sp-field-projection-tensor-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square; Lean factorization, naturality pasting, and inverse cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The actual compact support projection formula maps on l adic coefficient systems commute with finite free extension of coefficient fields",
+   "results": "[leanfinder] OK 8 hit(s); IsAdicComplete.StrictMono.factorPow_comp_extend: ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R; AdicCompletion.pi_apply_coe: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\n  [inst_1 : (i : ι) → Add; IsAdicComplete.StrictMono.mkQ_comp_lift: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R; IsAdicComplete.StrictMono.of_comp_lift: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R; IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion: ∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Fie; AdicCompletion.factor_eval_eq_evalₐ: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n • ⊤ ≤ I ^ n),\n ; IsAdicComplete.StrictMono.of_lift: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R; AdicCompletion.factor_evalₐ_eq_eval: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n ≤ I ^ n • ⊤),\n ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper coefficient exchange and open extension tensor maps give a commuting projection square before evaluation on derived coefficient towers",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val: ∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\n  [ins; PolynomialLaw.toFun'_eq_of_diagram: ∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Ty; PolynomialLaw.toFun'_eq_of_inclusion: ∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Ty; PolynomialLaw.toFun_eq_rTensor_φ_toFun': ∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Ty; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul: ∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\n  [ins; PolynomialLaw.factorsThrough_toFunLifted_π: ∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Ty; PolynomialLaw.isCompat': ∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Ty; PolynomialLaw.isCompat_apply': ∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Ty",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.leftAdjointOplaxMonoidal:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.rightAdjointLaxMonoidal:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.IsMonoidal:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.instIsMonoidal:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.instIsMonoidal_1:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.isMonoidal_comp:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε:  {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {inst✝¹ : CategoryTheory.MonoidalCategory C} {D : ; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.unit_app_unit_comp_map_η:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.map_η_comp_η:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor; CategoryTheory.Adjunction.ε_comp_map_ε:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [Categor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|rightMate",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The actual compact support projection formula maps on l adic coefficient systems commute with finite free extension of coefficient fields",
+   "results": "[leansearch] OK 8 hit(s); Rep.coinvariantsTensorFreeToFinsupp: : (A ⊗ free k G α).ρ.Coinvariants →ₗ[k] (α →₀ A); Algebra.PreSubmersivePresentation.ofHasCoeffs_map: ∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\n  [ins; Pi.comul_coe_finsupp: (x : n →₀ M) : comul (R := R) ⇑x = map lcoeFun lcoeFun (comul x); IsAdicComplete.StrictMono.of_lift: (x : M) : of I N (lift I ha f hf x) = AdicCompletion.lift I (extend ha f) (factorPow_comp_extend ha f hf) x; Rep.finsuppToCoinvariantsTensorFree: : (α →₀ A) →ₗ[k] Coinvariants (A ⊗ (free k G α)).ρ; Finsupp.lcoeFun: : (α →₀ M) →ₗ[R] α → M; IsAdicComplete.StrictMono.factorPow_comp_extend: {m n : ℕ} (hle : m ≤ n) : factorPow I N hle ∘ₗ extend ha f n = extend ha f m; Profinite.NobelingProof.πJ: : LocallyConstant (π C (· ∈ s)) ℤ →ₗ[ℤ] LocallyConstant C ℤ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projection.*[Tt]ensor",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module facts or basic site definitions; no whole-system coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact support projection square commutes with scalar extension of finite coefficient fields in derived coefficient systems",
+   "results": "8 hits; Profinite.NobelingProof.CC_comp_zero; Profinite.NobelingProof.CC_exact; Profinite.NobelingProof.GoodProducts.square_commutes; Profinite.NobelingProof.Linear_CC'₁; IsAdicComplete.StrictMono.factorPow_comp_extend; Profinite.NobelingProof.Linear_CC'₀; Profinite.NobelingProof.πs'; Profinite.NobelingProof.πs",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction monoidal structure, ordinary module scalar adjunctions and elementary tensor interchange do not state the ringed coefficient-system compact-support square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.projectionFormulaMap CategoryTheory.Adjunction",
+   "results": "0 hits; . loogle: Unknown constant `CategoryTheory.Adjunction.projectionFormulaMap`",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction monoidal structure, ordinary module scalar adjunctions and elementary tensor interchange do not state the ringed coefficient-system compact-support square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula exchange square for compact supports and finite scalar extension",
+   "results": "8 hits; ContDiffMapSupportedIn.coe_smul; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.ExtendRestrictScalarsAdj.counit; TopCat.Presheaf.SheafConditionEqualizerProducts.res_π; TestFunction.ofSupportedInLM; IsBaseChange.finsuppPow; Algebra.PreSubmersivePresentation.ofHasCoeffs_map",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction monoidal structure, ordinary module scalar adjunctions and elementary tensor interchange do not state the ringed coefficient-system compact-support square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate commutes with counit defined tensor projection and extension by zero in a ringed topos",
+   "results": "8 hits; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction monoidal structure, ordinary module scalar adjunctions and elementary tensor interchange do not state the ringed coefficient-system compact-support square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction monoidal structure, ordinary module scalar adjunctions and elementary tensor interchange do not state the ringed coefficient-system compact-support square"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|exchange.*tensor|tensor.*exchange",
+   "results": "25 hits; Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean; Mathlib/CategoryTheory/Enriched/FunctorCategory.lean; Mathlib/CategoryTheory/Enriched/FunctorCategory.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Sites/Point/Monoidal.lean; Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction monoidal structure, ordinary module scalar adjunctions and elementary tensor interchange do not state the ringed coefficient-system compact-support square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-field-extension-towers",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), projection square; returned step 7 third paragraph",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-field-projection-system-square",
+  "worker": "stage1",
+  "summary": "Five-step compactification calculation: define the two proper/open factors, specialize ringed exchange/projection coherence to coefficient maps on whole sequence topoi, prove the open square by restriction and full faithfulness, paste with an explicit naturality calculation and tensor symmetries, and compose with inverses on the stated domain. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the projection-square paragraph of det-sp-field-extension-towers, specifically the proper counit-defined exchange square, the open extension-by-zero tensor comparison, and the assertion before level evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic counit exchange/projection identity used for the proper factor on ringed sequence topoi. The field-extension unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic realization of system operations, tensors and ordinary adjunction mates before evaluation. The field-extension unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Definition of the specified compactification projection as proper counit projection followed by open tensor comparison. The field-extension unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-unit normalization and full faithfulness, explicitly including arbitrary ringed diagram topoi; used only for the open factor. The field-extension unit has no replacement for this general tool."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Generic tower construction and projection invertibility on the explicitly stated two-input finite-Tor etale-origin domain. The field-extension unit has no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-coef-semilinear-derived-sections",
+  "def-exchange-projection",
+  "lem-sf-open-tensor-normalization",
+  "det-sp-tower-shriek-levels"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-f91b9bc37",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-f91b9bc37 (reviewer sub-agent of L); spot-checked: I read the whole split, which has 5 steps, no new nodes and an unchanged statement, against blueprint main-20261015 sk-lem-sp-field-extension-towers.proof.md (2). It is the system-level form of the accepted finite-level step 4 of det-sp-reduction-compatibilities. Step 1 matches def-exchange-projection (PF=Rp_*(gamma)pi_p) and the definition of b in lem-sp-field-shriek-system-comparison. Step 2 is an exact specialization of lem-weil-pbc-ringed-exchange-tensor-coherence to the commuting square p_A,p_B over (id,A->B), with E=J_AW and Q=K, and that lemma needs no Cartesian or flatness assumption. Step 3 uses lem-sf-open-tensor-normalization, which covers diagram topoi of inverse systems: j^*beta=1, j^*gamma=1 and full faithfulness of j_!. I re-derived the Step 4 pasting through naturality of e at gamma, Steps 2 and 3, and naturality of q_B; the symmetry conversion is correct. I checked the edge cases: identity extension, p=id, j=id, zero inputs and ramified F/E. I found no duplicate: lem-coef-ramified-scalar-system-transpose and prop-sf-mixed-cup-coefficient-change do not state this square. I accept the 5 declared tool_uses as generic tools. I made two FIXes in fixes/dag/nodes/sec-smooth-purity/lem-sp-field-projection-system-square.json. (1) Step 3 asserted without argument that the two restricted composites are the same identification (E5); I spelled them out and checked them on flat K-flat representatives, where both are the underived balancing map. (2) Step 5 applied det-sp-tower-shriek-levels (2a) on the O_F side without checking that C_YK and C_XW lie in its domain (E1); I added the check: det-sp-scalar-extension-functor (2) keeps constructibility and the Tor amplitude, and the etale-origin witness is nu^{-1}(K^et tensor B_n). det-sp-scalar-extension-functor is added to the step 5 uses and to proof_deps; it is on the unit route via sk-lem-sp-reduction -> sk-def-sp-scalar-extension.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldProjectionSystemSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.field_projection_system_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.field_projection_system_square"
+  ],
+  "file": "lean/Sheaf/Paper/FieldProjectionSystemSquare.lean",
+  "statement": "theorem field_projection_system_square (X Y : Scheme.{u}) [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] (d : ℕ) [SmoothOfRelativeDimension d f] [IsSeparated f] (c : Compactification f) : ∃ t : ProjectionTensorComparisons P D, ∀ (E F : Index P) (h : E ≤ F) (K : SpTowerShriek.D P.coefficients.l E.val Y) (W : SpTowerShriek.D P.coefficients.l E.val X), normalized P D E Y K → normalized P D E X W → ProjectionSystemSquare P D t h c K W ∧ ∀ (hA : IsIso (leftProjection P D t E c K W)) (hB : IsIso (leftProjection P D t F c ((D.scalars E F h Y).T.obj K) ((D.scalars E F h X).T.obj W))), @InvertedProjectionSystemSquare.{u} P D t E F h X Y f c K W hA hB",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eaab6254b",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 560a (H2). The module is byte-identical. The item node differs from side-live only in stmt_deps (added def-sp-field-shriek-system-models, def-coef-semilinear-system-models, def-coef-ringed-tensor-hom-model, def-coef-ringed-sequence-site, def-pc-kflat-complex) and the lean record. Each added node's lean record lists the used declarations (Models/comparison/normalized/Index/coefficientMap; ScalarTensorComparisonModel/systemRing/totalTensor/ScalarData; coefficientTensorGenerator; coefficientSequenceTopology; IsKFlatIndependentCoefficients). Statement, proof, proof_deps and source are unchanged, so no H7 and no statement_change. Maths re-checked: leftProjection = sym ≫ SpTowerShriek.projection(c,W,K) ≫ F(sym) is π_A; projectionTarget uses PullComparison.derived.symm (C_X f_A^* ≅ f_B^* C_Y), correctly oriented; the square C_Y π_A ≫ b ≫ P_B(target) = scalar ≫ (1⊗b_W) ≫ π_B matches the node; the inverted form follows; t is pinned by the signed symmetry model and ScalarTensorComparisonModel; one common c; no Cartesian hypothesis. Edge cases E=F, ramified, zero, empty, d=0 and universes u+1/u are fine. One sorry; docstrings ok. Advisory: Compactification owner uncited, consistent with the landed siblings; proof-only imports. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature and relocated five data declarations vs clone (identical, public re-export); three new sorried squares/constructions vs Models/Geometry/Operations pinning fields (open_unit, openTensor_mate, tensorPullback_eq, PullComparison.representative)"
+ }
+}

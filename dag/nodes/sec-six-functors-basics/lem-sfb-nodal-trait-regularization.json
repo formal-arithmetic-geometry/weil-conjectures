@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-nodal-trait-regularization",
+ "kind": "statement",
+ "title": "Regularization of smooth-generic nodal families",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $X\\to S$ be projective [def-kun-projective], flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], with nonempty nodal geometric fibres. Assume $X_K$ is smooth [def-sbc-smooth-morphisms]. There is a finite sequence $T=X_m\\to\\cdots\\to X_0=X$ in which every arrow is the blowup of a reduced closed point where the total scheme $X_j$ is not regular [def-nagata-global-blowup, def-weil-regular-scheme]. Every $X_j\\to S$ remains projective, flat and finitely presented with nodal geometric fibres, and $T$ is regular. All centres lie in the special fibre. The composite is an isomorphism on the generic fibre and on the relative smooth locus of $X$. Each arrow is proper [def-weil-proper-morphism] with nonempty geometrically connected fibres. A nodal geometric fibre here is reduced of pure dimension one, and each nonsmooth closed point has completed local ring $\\Omega[[x,y]]/(xy)$ [def-weil-geometric-fibre, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The intermediate geometric fibres need not be connected. The regular scheme $T$ is a finite disjoint union of integral regular surfaces of dimension two. Local rings at generic points of its special-fibre components are DVRs.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), with charts in Tag 0CDC (example-blowup). Projectivity and geometrically connected exceptional fibres are consequences of the displayed blowup charts; disconnected geometric fibres are permitted."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pure-dimension",
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nodal-trait-finite-singular-charts] to $X/S$. Its hypotheses hold without connectedness: $X$ is Noetherian and its nonregular points form a finite set $E$ of closed special-fibre points. Each $x\\in E$ has a chosen pointed model of exponent $n_x\\geq2$; no intrinsic or choice-independent exponent is needed.",
+   "uses": [
+    "lem-sfb-nodal-trait-finite-singular-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), first paragraph."
+   }
+  },
+  {
+   "text": "For a selected $x$ with chosen exponent $n$, induct on $\\lfloor n/2\\rfloor$. By [lem-sfb-nodal-point-blowup-local-descent] one reduced-point blowup preserves the nodal flat locally finitely presented family, is unchanged away from $x$, and removes all nonregular points above $x$ if $n=2,3$. For $n\\geq4$ there is exactly one nonregular descendant, with pointed model exponent $n-2$; apply the induction hypothesis, since $\\lfloor(n-2)/2\\rfloor=\\lfloor n/2\\rfloor-1$. At every blowup [lem-sfb-nodal-point-blowup-projective-fibres] applies: the current scheme is Noetherian and projective, the chosen pointed model supplies its local hypothesis, and local descent supplies flatness and local finite presentation. It retains projectivity, finite presentation and nonempty family fibres, and gives proper arrows with nonempty geometrically connected fibres. Thus at most $\\lfloor n/2\\rfloor$ arrows remove $x$ without altering the other points of $E$. Induct now on $|E|$: for $E=\\varnothing$ use the identity tower; otherwise this finite tower reduces $|E|$ by one. The concatenated finite tower ends in a regular $T$.",
+   "uses": [
+    "lem-sfb-nodal-point-blowup-local-descent",
+    "lem-sfb-nodal-point-blowup-projective-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), point-blowup comparison and nested finite induction, with Tag 0CDC (example-blowup)."
+   }
+  },
+  {
+   "text": "Every centre is special by step 1, reapplied to each stage. Each arrow is an isomorphism off its centre by [thm-nagata-global-blowup-complement], hence on the generic fibre. Over the original relative smooth locus the composite stays an isomorphism: this locus is regular by [lem-sfb-nodal-trait-finite-singular-charts]; if its current inverse image is isomorphic to it, it is regular and contains no next nonregular centre, so the next complement isomorphism preserves this assertion. This proves both isomorphism clauses.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-sfb-nodal-trait-finite-singular-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), singular centres and the complement isomorphism."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-regular-trait-curve-surface-components] to $T/S$. It is H-projective by step 2 (by hypothesis if the tower is empty), hence proper by [lem-kun-projective-implies-proper], and it is flat, Noetherian and regular by step 2; its reduced special fibre follows from nodality. The local dimension upper bound two and equality two at closed special points follow by applying [lem-sfb-nodal-trait-finite-singular-charts] to this last family, whose generic fibre stayed smooth. The cited component theorem gives the required finite disjoint union of integral regular surfaces and DVR stalks at all special-component generic points.",
+   "uses": [
+    "lem-sfb-regular-trait-curve-surface-components",
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-nodal-trait-finite-singular-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Terminal regular output of Tag 0CDE; properties.tex Tags 033M and 04MU and algebra.tex Tag 00PD as in the cited component theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-nodal-point-blowup-local-descent",
+  "lem-sfb-nodal-point-blowup-projective-fibres",
+  "lem-sfb-nodal-trait-finite-singular-charts",
+  "lem-sfb-regular-trait-curve-surface-components",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), proof via Tag 0CDD and the explicit charts of Tag 0CDC; projectivity, geometric connectedness, component dimensions and DVR conclusions expanded using the cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Resolve a nodal curve over a discrete valuation ring with smooth generic fibre by blowing up singular closed points preserving nodal fibres",
+   "results": "{\"t\": \"2026-10-22T04:21:03Z\", \"tool\": \"leanfinder\", \"query\": \"Resolve a nodal curve over a discrete valuation ring with smooth generic fibre by blowing up singular closed points preserving nodal fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.minimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.exists_isIntegral\"], \"digest\": \"95da41c2c88b0577\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and smooth base change do not resolve general nodal families by point blowups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semistable curve singularities xy equals uniformizer power have a regular semistable resolution without base extension",
+   "results": "{\"t\": \"2026-10-22T04:21:01Z\", \"tool\": \"leansearch\", \"query\": \"Semistable curve singularities xy equals uniformizer power have a regular semistable resolution without base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.IsGoodReduction.mk\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Affine.Point.some.elim\"], \"digest\": \"3fd1392b6a1a567b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and smooth base change do not resolve general nodal families by point blowups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T04:22:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and smooth base change do not resolve general nodal families by point blowups."
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|nodal|desingular",
+   "results": "{\"t\": \"2026-10-22T04:21:01Z\", \"tool\": \"grep\", \"query\": \"semistable|nodal|desingular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and smooth base change do not resolve general nodal families by point blowups."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|desingular",
+   "results": "{\"t\": \"2026-10-22T04:43:51Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|desingular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal equations concern elliptic curves, not point-blowup resolution of arbitrary nodal families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of a semistable curve over a discrete valuation ring by blowups of nodes",
+   "results": "{\"t\": \"2026-10-22T04:43:51Z\", \"tool\": \"leansearch\", \"query\": \"Resolution of a semistable curve over a discrete valuation ring by blowups of nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\"], \"digest\": \"c5adbca806bd7c4d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal equations concern elliptic curves, not point-blowup resolution of arbitrary nodal families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nodal curve over a discrete valuation ring with smooth generic fibre becomes regular by finitely many blowups at its singular closed points",
+   "results": "{\"t\": \"2026-10-22T04:43:52Z\", \"tool\": \"leanfinder\", \"query\": \"A nodal curve over a discrete valuation ring with smooth generic fibre becomes regular by finitely many blowups at its singular closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"8b4378ddaaa779a3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal equations concern elliptic curves, not point-blowup resolution of arbitrary nodal families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T04:44:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal equations concern elliptic curves, not point-blowup resolution of arbitrary nodal families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-nodal-trait-regularization",
+  "worker": "stage1",
+  "summary": "Repairs the superseded stage-2 rebind by preserving the entire current NS lean record, its owning file and all other maintainer fields. Implements the current human re-split instruction: four statement-only tasks retain original steps 1--3, 4--6, 7--8 and 11--12; the item carries only model-choice/nested induction, complement and terminal-structure assembly. Statement unchanged. All twelve old arguments and original report retained in report.md with a responsibility map, exact logged searches, source and citation audit.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; unchanged unit route. New nodes separate the finite-singularity setup, one local blowup, projective/geometric-fibre control, and terminal component geometry. Item retains original induction steps 9--10. blueprint_refs.py ancestor returns null, inherited explicitly.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic complement isomorphism for the ordinary blowup, used for the generic fibre and preservation of the original smooth locus. The unit contains no different construction of this complement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-principal-ideal-dvr",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-nodal-family-etale-source-locality",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-weil-pbc-unramified-base-change-open",
+  "rem-pc-regular-normal",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-geometrically-connected-algebraic-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-f884f63c1",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-f884f63c1 (reviewer sub-agent of L); spot-checked: This answers the released human re-split note of 2026-10-22, which applies (identical in live and side-live). The item's statement, lean record and review fields are unchanged; only proof, proof_deps and split_report differ from live. The four new statement-only nodes take over old steps 1-3, 4-6, 7-8 and 11-12, are of comparable size (about 2.8k, 3.1k, 2.0k and 1.7k characters of the old proof) and are true. The item keeps the nested induction and the complement invariant (old steps 9-10), in 2,596 characters. Checks against Stacks models.tex 0CDC/0CDD/0CDE (l.5839-6075), with Divisors 0805/02NS and 033M/04MU/00PD for the inputs. (a) finite-singular-charts: 'finitely presented' includes qc+qs per def-sbc-locally-finite-presentation, so X is Noetherian and the singular set is finite. ab-pi^n is regular iff n=1. The flat dimension formula gives local dimension at most 2, and exactly 2 at closed special points. (b) local-descent: charts are at=pi, rs=pi^{n-2}, bt'=pi. For n=3, rs=pi is regular, which correctly fixes the 0CDE wording. For n>=4 there is a unique kappa-rational residual singular point, and the Cartesian squares and the covering above x hold. (c) projective-fibres: the tangent cone is ab-pi^2 (a smooth conic, also in characteristic 2) or ab (two lines). (d) components: flatness and properness make each component meet both fibres with dimension 2. A/piA is a field, so m=(pi) and 00PD gives a DVR. Small cases tested: xy=pi^2,3,4, a non-split conic, P^1_R, a disjoint union, the empty scheme, and xy=0 excluded. A DAG-wide duplicate scan found no duplicates (it includes trf fitting and projective-nodal geometry, sfb chart calculus, the etale model, point-blowup-fibre-defects and projective-affine-base-blowup). No new node restates an item clause. There is no SGA, the mechanical fields are complete, and thm-nagata-global-blowup-complement is accepted as a tool use. FIX 1 (C): projective-fibres concluded only connected geometric fibres (over an algebraic closure), while the item needs geometrically connected fibres; the old step-8 argument via lem-weil-geometrically-connected-algebraic-closure had been dropped. The statement now concludes that every fibre b^{-1}(y) is nonempty and geometrically connected over kappa(y), with geometric fibres connected as a consequence. FIX 2 (C): item step 4 now cites lem-kun-projective-implies-proper for properness of T (needed for the empty tower), and uses and proof_deps are updated. Both fixed files are under fixes/dag/nodes/sec-six-functors-basics/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalTraitRegularization",
+  "declaration": "AlgebraicGeometry.exists_nodal_trait_regularization",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalTraitRegularization.lean",
+  "statement": "theorem exists_nodal_trait_regularization (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] [Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K))))] (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback f g) ∧ IsReduced (pullback f g) ∧ (pullback f g).IsPureDimension 1) (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)) (x : ↥(pullback f g)), IsClosed ({x} : Set ↥(pullback f g)) → x ∉ (pullback.snd f g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f g).presheaf.stalk x)) ((pullback f g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) : ∃ (m : ℕ) (Y : Fin (m + 1) → Scheme.{u}) (e₀ : Y 0 ≅ X) (b : ∀ j : Fin m, Y j.succ ⟶ Y j.castSucc) (p : ∀ j : Fin (m + 1), Y j ⟶ X), p 0 = e₀.hom ∧ (∀ j : Fin m, p j.succ = b j ≫ p j.castSucc) ∧ (∀ j : Fin m, ∃ (x : Y j.castSucc) (hx : IsClosed ({x} : Set (Y j.castSucc))) (e : Y j.succ ≅ (Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowup), e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowupMap = b j ∧ ¬ IsRegularLocalRing ((Y j.castSucc).presheaf.stalk x) ∧ (p j.castSucc ≫ f) x = IsLocalRing.closedPoint R) ∧ (∀ j : Fin m, IsProper (b j) ∧ GeometricallyConnected (b j)) ∧ (∀ j : Fin (m + 1), IsHProjective (p j ≫ f) ∧ Flat (p j ≫ f) ∧ LocallyOfFinitePresentation (p j ≫ f) ∧ QuasiCompact (p j ≫ f) ∧ QuasiSeparated (p j ≫ f) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback (p j ≫ f) g) ∧ IsReduced (pullback (p j ≫ f) g) ∧ (pullback (p j ≫ f) g).IsPureDimension 1 ∧ ∀ x : ↥(pullback (p j ≫ f) g), IsClosed ({x} : Set ↥(pullback (p j ≫ f) g)) → (¬ ∃ V : (pullback (p j ≫ f) g).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd (p j ≫ f) g)) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (p j ≫ f) g).presheaf.stalk x)) ((pullback (p j ≫ f) g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) ∧ IsRegularScheme (Y (Fin.last m)) ∧ IsIso (pullback.snd (p (Fin.last m)) (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))) ∧ IsIso (p (Fin.last m) ∣_ f.smoothLocus) ∧ (∃ (n : ℕ) (U : Fin n → (Y (Fin.last m)).Opens), (∀ i : Fin n, IsClosed (U i : Set (Y (Fin.last m)))) ∧ (∀ i j : Fin n, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i : Fin n, U i) = ⊤ ∧ ∀ i : Fin n, IsIntegral (U i).toScheme ∧ IsRegularScheme (U i).toScheme ∧ topologicalKrullDim ↥((U i).toScheme) = 2) ∧ ∀ Z : Set ↥((p (Fin.last m) ≫ f).fiber (IsLocalRing.closedPoint R)), Z ∈ irreducibleComponents ↥((p (Fin.last m) ≫ f).fiber (IsLocalRing.closedPoint R)) → ∀ ξ : (p (Fin.last m) ≫ f).fiber (IsLocalRing.closedPoint R), IsGenericPoint ξ Z → ∃ hdomain : IsDomain ((Y (Fin.last m)).presheaf.stalk ((p (Fin.last m) ≫ f).fiberι (IsLocalRing.closedPoint R) ξ)), @IsDiscreteValuationRing ((Y (Fin.last m)).presheaf.stalk ((p (Fin.last m) ≫ f).fiberι (IsLocalRing.closedPoint R) ξ)) inferInstance hdomain",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5754edf09",
+  "group": "NS",
+  "result": "pass",
+  "note": "Read the node, all 17 stmt_dep records, report (Worker report + Second reading present), and module. Every clause matches the node: DVR R with fraction field K; IsHProjective/Flat/LocallyOfFinitePresentation; hfib/hnodal with the landed sibling's convention; smooth X_K; tower built from the actual arrow composites; reduced closed-point blowup via vanishingIdeal + blowupMap, non-regular centre in the special fibre; per-stage projective/flat/fp/qc/qs plus nodal fibres; T regular; isomorphism on the generic fibre and over f.smoothLocus; IsProper + GeometricallyConnected (universe u, includes nonempty); finite clopen partition into integral regular pieces of topologicalKrullDim 2; DVR stalks at generic points of special-fibre components. Edge cases checked: m=0, regular nodes not forced, no universe vacuity, no extra assumptions. lean.statement byte-identical to the file; docstrings carry the source place, the blueprint id and the 12 proof steps; only the lean field differs from live. Advisory: def-pc-geometrically-irreducible record omits Mathlib GeometricallyConnected; proof-only NodalFamilyEtaleSourceLocality import omitted (not a module file). No faults; no recompile since no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

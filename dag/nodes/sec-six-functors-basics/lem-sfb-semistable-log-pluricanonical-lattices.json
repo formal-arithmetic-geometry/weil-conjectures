@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-semistable-log-pluricanonical-lattices",
+ "kind": "statement",
+ "title": "Invariance of logarithmic pluricanonical lattices of semistable models",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ [def-sc-discrete-valuation-ring, def-pc-field-extension] and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $f_i:X_i\\to S$, for $i=1,2$, be projective flat finitely presented morphisms with nonempty connected reduced one-dimensional geometric fibres, all of whose singularities are ordinary double points, and let $a_{i1},\\ldots,a_{in}$ be disjoint sections in their relative smooth loci, with $n\\ge0$. The conventions for these families, their Cartier divisors $D_i$ and their canonical relative dualizing modules $\\omega_{X_i/R}$ are those of [lem-sfb-nodal-log-canonical-reconstruction], without its positivity assumption. Write $L_i=\\omega_{X_i/R}(D_i)$ [def-pc-divisor-line-bundle]. For every $K$-isomorphism $u:(X_1)_K\\xrightarrow{\\sim}(X_2)_K$ sending the marked sections according to a permutation, the canonical pullback on logarithmic pluricanonical forms satisfies, for every integer $m\\ge0$, $$u^*\\!\\left(\\operatorname{im}\\big(H^0(X_2,L_2^{\\otimes m})\\to H^0((X_2)_K,(L_2)_K^{\\otimes m})\\big)\\right)=\\operatorname{im}\\big(H^0(X_1,L_1^{\\otimes m})\\to H^0((X_1)_K,(L_1)_K^{\\otimes m})\\big).$$ The restriction maps displayed here are injective. The equalities respect multiplication and the unit, so identify the graded $R$-subalgebras given by these images in the identified generic section algebras [def-sc-invertible-section-ring]. Stability is not assumed; the generic fibre may already be nodal.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Agent logarithmic section-lattice formulation of the common-model comparison underlying Tag 0E97 (lemma-unique-stable-model), proof. Tag 0E97 itself assumes a smooth unmarked generic curve and does not state this generalization. The marked and persistently nodal comparison is a new prerequisite, motivated by de Jong 1997 section 3.8; a local pointed-curve reference is WANTED (Knudsen, The projectivity of the moduli space of stable curves II, sections 1--2)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-section-ring"
+ ],
+ "proof": [
+  {
+   "text": "Relabel the second marking by the prescribed permutation. By [lem-sfb-common-nodal-model] choose $Y$, $p_i:Y\\to X_i$ and finite closed special-fibre sets $Z_i$ with $p_i^{-1}U_i\\cong U_i$, $U_i=X_i\\setminus Z_i$, and $(p_2)_K=u\\circ(p_1)_K$. The families $X_i$ and $Y$ satisfy the marked nodal hypotheses. By [lem-sfb-nodal-log-canonical-reconstruction] their canonical logarithmic modules $L_i,L_Y$ are invertible, without positivity.",
+   "uses": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-nodal-log-canonical-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Common-model and Hartogs argument inspired by Tag 0E97 (lemma-unique-stable-model), not its verbatim proof. The marked and persistently nodal common-domination and logarithmic-pullback inputs are separately named prerequisites; 0E97 alone is insufficient."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-curve-line-depth] to each $X_i$ and $L_i$, and also to $Y,L_Y$. Their special fibres are reduced pure curves and all three families are flat of finite type. It gives injectivity of every generic restriction and depth at least two at each $z\\in Z_i$, as well as Noetherian total spaces.",
+   "uses": [
+    "lem-sfb-flat-curve-line-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Common-model and Hartogs argument inspired by Tag 0E97 (lemma-unique-stable-model), not its verbatim proof. The marked and persistently nodal common-domination and logarithmic-pullback inputs are separately named prerequisites; 0E97 alone is insufficient."
+   }
+  },
+  {
+   "text": "Each $p_i$ is proper and respects the relabelled sections by step 1. Use [lem-sfb-nodal-log-dualizing-pullback] to obtain $\\alpha_i:p_i^*L_i\\to L_Y$, canonically an isomorphism on $p_i^{-1}U_i$. Apply [lem-sfb-modification-line-section-comparison] with $M=L_i$, $N=L_Y$, $Z=Z_i$. Its boundary depth hypothesis is step 2; its other hypotheses are step 1. Its generic map is precisely $(p_i)_K^*$ by the normalization of $\\alpha_i$. Writing $A_{i,m}$ and $A_{Y,m}$ for the respective generic restriction images, we obtain $(p_i)_K^*A_{i,m}=A_{Y,m}$ in every degree, including zero, and these comparisons preserve tensor multiplication and the unit.",
+   "uses": [
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-modification-line-section-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Common-model and Hartogs argument inspired by Tag 0E97 (lemma-unique-stable-model), not its verbatim proof. The marked and persistently nodal common-domination and logarithmic-pullback inputs are separately named prerequisites; 0E97 alone is insufficient."
+   }
+  },
+  {
+   "text": "Thus $(p_1)_K^*A_{1,m}=A_{Y,m}=(p_2)_K^*A_{2,m}$. Since $(p_2)_K=u\\circ(p_1)_K$, functoriality of pullback gives $(p_2)_K^*=(p_1)_K^*u^*$. Cancel the bijection $(p_1)_K^*$ to obtain $A_{1,m}=u^*A_{2,m}$. The algebra compatibilities supplied in step 3 pass through this cancellation; the operations are precisely those of [def-sc-invertible-section-ring]. Equivalently $u^*(s\\otimes t)=u^*s\\otimes u^*t$ and $u^*(1)=1$. Step 2 gives both claimed injections. No degree is rescaled.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Common-model and Hartogs argument inspired by Tag 0E97 (lemma-unique-stable-model), not its verbatim proof. The marked and persistently nodal common-domination and logarithmic-pullback inputs are separately named prerequisites; 0E97 alone is insufficient."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-section-ring",
+  "lem-sfb-common-nodal-model",
+  "lem-sfb-flat-curve-line-depth",
+  "lem-sfb-modification-line-section-comparison",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "lem-sfb-nodal-log-dualizing-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Common-model and Hartogs argument inspired by Tag 0E97 (lemma-unique-stable-model), not its verbatim proof. The marked and persistently nodal common-domination and logarithmic-pullback inputs are separately named prerequisites; 0E97 alone is insufficient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic isomorphisms of semistable marked curves over a discrete valuation ring identify their log pluricanonical section lattices",
+   "results": "{\"t\": \"2026-10-22T03:45:13Z\", \"tool\": \"leanfinder\", \"query\": \"Generic isomorphisms of semistable marked curves over a discrete valuation ring identify their log pluricanonical section lattices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.isMinimal_iff\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.ValuativeCommSq.mk.inj\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"4241dfc6388c02a3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and rational maps from a function field do not compare logarithmic pluricanonical lattices for arbitrary nodal pointed models; the source grep has no such construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"canonical\"",
+   "results": "{\"t\": \"2026-10-22T03:45:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"canonical\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.CanonicallyOver\", \"AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback_over\", \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\"], \"digest\": \"65099c3a2f6a202b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and rational maps from a function field do not compare logarithmic pluricanonical lattices for arbitrary nodal pointed models; the source grep has no such construction."
+  },
+  {
+   "tool": "grep",
+   "query": "pluricanonical|semistable.*canonical|canonical.*semistable",
+   "results": "{\"t\": \"2026-10-22T03:45:08Z\", \"tool\": \"grep\", \"query\": \"pluricanonical|semistable.*canonical|canonical.*semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and rational maps from a function field do not compare logarithmic pluricanonical lattices for arbitrary nodal pointed models; the source grep has no such construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log canonical section rings of semistable marked curve models over a DVR are invariant under changing the model",
+   "results": "{\"t\": \"2026-10-22T03:45:09Z\", \"tool\": \"leansearch\", \"query\": \"Log canonical section rings of semistable marked curve models over a DVR are invariant under changing the model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.baseChange_integralModel_eq\", \"WeierstrassCurve.integralModel.congr_simp\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.exists_isIntegral\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\"], \"digest\": \"4693a34a37880fc2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and rational maps from a function field do not compare logarithmic pluricanonical lattices for arbitrary nodal pointed models; the source grep has no such construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Birational invariance of relative logarithmic pluricanonical sections for nodal curve models over a trait",
+   "results": "{\"t\": \"2026-10-22T03:45:17Z\", \"tool\": \"leanfinder\", \"query\": \"Birational invariance of relative logarithmic pluricanonical sections for nodal curve models over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"WeierstrassCurve.IsMinimal\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\"], \"digest\": \"741a7064415f08c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations and rational maps from a function field do not compare logarithmic pluricanonical lattices for arbitrary nodal pointed models; the source grep has no such construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic pluricanonical lattices of marked semistable curves over a discrete valuation ring are independent of the model",
+   "results": "{\"t\": \"2026-10-22T04:02:42Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic pluricanonical lattices of marked semistable curves over a discrete valuation ring are independent of the model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"9ac0ff7f10a321df\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern Weierstrass equations, generic rational maps and nonsingular points; they do not compare logarithmic pluricanonical lattices of general nodal models."
+  },
+  {
+   "tool": "grep",
+   "query": "pluricanonical|semistable.*canonical|canonical.*semistable",
+   "results": "{\"t\": \"2026-10-22T04:03:00Z\", \"tool\": \"grep\", \"query\": \"pluricanonical|semistable.*canonical|canonical.*semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern Weierstrass equations, generic rational maps and nonsingular points; they do not compare logarithmic pluricanonical lattices of general nodal models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "{\"t\": \"2026-10-22T04:03:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern Weierstrass equations, generic rational maps and nonsingular points; they do not compare logarithmic pluricanonical lattices of general nodal models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Birational invariance of log pluricanonical sections of nodal pointed curves over a trait",
+   "results": "{\"t\": \"2026-10-22T04:03:12Z\", \"tool\": \"leansearch\", \"query\": \"Birational invariance of log pluricanonical sections of nodal pointed curves over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.nonsingular_of_equiv\", \"WeierstrassCurve.Projective.map_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.Projective.nonsingular_of_equiv\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.Affine.map_nonsingular\"], \"digest\": \"a6044f136bc1ee2d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern Weierstrass equations, generic rational maps and nonsingular points; they do not compare logarithmic pluricanonical lattices of general nodal models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semistable-log-pluricanonical-lattices",
+  "worker": "stage1",
+  "summary": "Q108 repairs the released 5231-character proof by extracting two independent statement-only prerequisites of comparable proof effort: flat-curve generic injectivity and boundary depth (old steps 1--2), and graded section comparison across a line morphism using Hartogs (old steps 4--5,7). The common-model construction and canonical logarithmic line map remain existing inputs; the short assembly performs their application and the old step-6 cancellation. The statement and all maintainer metadata are preserved. After the landing return, rebased the retained split on the current live node, reread every existing assembly citation and its current hypotheses, verified all seven verbatim citation quotes, and explicitly bound the generic image notation in step 3. Current common-model and logarithmic-pullback inputs are now split; the assembly uses only their unchanged statements. On the 2026-10-23 retry, explicitly rebased the four worker-owned proof fields onto the current live JSON, revalidated all seven assembly quotes, and made the properness and marking checks for the logarithmic pullback explicit in step 3. The retained original-proof.json still equals the current live seven-step proof verbatim; all of its arguments remain accounted for in the extraction map.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; expands the semistable logarithmic-lattice input in the stable-pointed trait-extension argument, itself serving the alteration reduction in det-thm-sf-ctf-stability-direct-images, proof (3).; Q108 re-split follows the identical common-model/Hartogs route, with two parallelizable prerequisites."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-hartogs-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-53a3d6db0",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-53a3d6db0 (reviewer sub-agent of L); spot-checked: Third push of the released 2026-10-22 re-split. It is not superseded: the live and side-live item still carries N5's 7-step proof, and neither new id is live. Compared with fdf9 (PASS, landing refused for sync), the only changes are wording in node 1's source.place, a properness/markings sentence in assembly step 3, and the split_report; statement, stmt_deps, lean and proof_deps are unchanged. Node 2 is byte-identical to d92d. Accounting: old steps 1-2 are in lem-sfb-flat-curve-line-depth; old steps 4-5 and 7 are in lem-sfb-modification-line-section-comparison; old step 3 is the existing common-nodal-model; old step 6 is the elementary cancellation. Nothing was dropped, the assembly is about 1.9k characters, and the two nodes are of comparable size and neither restates the item. Node 1 is true. The proof uses 01T6; flat ⊗ π for torsion-freeness; s/1=0 in A_π gives π^r s=0; and B=O/π (0HA1), which is reduced of dim 1, so m is not associated and depth B≥1 (00LL). Then 0337 gives depth ≥2. Edge cases: the generic point of X_k has depth 1, so restricting to closed points is right; uv-π^e is non-normal with depth 2; u²-πv shows reducedness is needed; an empty fibre is vacuous. Node 2 is true. Injectivity follows from depth≥1 on Z. Surjectivity uses Hartogs 0E9I on X, then p^{-1}U ⊇ Y_K plus π-torsion-freeness of flat Y; no depth on Y is needed. β_m(A_X)=A_Y follows from the commuting restriction square. Checked Z=∅, m=0 and πα (excluded). Assembly hypotheses were checked against the statements of common-nodal-model, nodal-log-dualizing-pullback and reconstruction. Reduced and pure-dim-1 special fibres come from the geometric fibres, and the depth needed at Z_i comes from node 1. rg -L found no duplicate, and no SGA is cited. FIX (B2/B3, lost since d92d): node 2 uses the special fibre, generic restriction, p_K and α_K without introducing k or the fibres, and does not cite def-pc-fibre-product. I re-applied d92d's corrected file, which differs from this head only in statement and stmt_deps. Maintainer note: the item's 5 inherited tool_uses are stale (they are now inputs of the new nodes); refresh at merge.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemistableLogPluricanonicalLattices",
+  "declaration": "AlgebraicGeometry.semistable_log_pluricanonical_lattices",
+  "declarations": [
+   "AlgebraicGeometry.nodalLogPowerRestriction",
+   "AlgebraicGeometry.NodalLogSectionAlgebraLaws",
+   "AlgebraicGeometry.IsNodalLogGenericComparison",
+   "AlgebraicGeometry.semistable_log_pluricanonical_lattices"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemistableLogPluricanonicalLattices.lean",
+  "statement": "theorem semistable_log_pluricanonical_lattices (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (η : Spec (.of K) ⟶ Spec (.of R)) (hη : η = Spec.map (CommRingCat.ofHom (algebraMap R K))) (P Q : MultipointedCurve (Spec (.of R))) [IsHProjective P.x] [IsHProjective Q.x] (n : ℕ) (p : (∐ fun _ : Fin n ↦ Spec (.of R)) ≅ P.D) (q : (∐ fun _ : Fin n ↦ Spec (.of R)) ≅ Q.D) (hp : p.hom ≫ P.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (.of R)))) (hq : q.hom ≫ Q.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (.of R)))) (hPsmooth : ∀ z : P.D, P.i z ∈ P.x.smoothLocus) (hQsmooth : ∀ z : Q.D, Q.i z ∈ Q.x.smoothLocus) (hPnodal : HasNodalGeometricFibres P.x) (hQnodal : HasNodalGeometricFibres Q.x) (hPgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback P.x t) ∧ (pullback P.x t).IsPureDimension 1) (hQgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback Q.x t) ∧ (pullback Q.x t).IsPureDimension 1) (D : MarkedNodalDualizingDegreesData P) (E : MarkedNodalDualizingDegreesData Q) (v : pullback P.x η ≅ pullback Q.x η) (hv : v.hom ≫ pullback.snd Q.x η = pullback.snd P.x η) (d : pullback P.d η ≅ pullback Q.d η) (hd : d.hom ≫ pullback.snd Q.d η = pullback.snd P.d η) (hmarks : P.markingBaseChange η ≫ v.hom = d.hom ≫ Q.markingBaseChange η) : ∃ c : (Scheme.Modules.tensorPullback v.hom).obj ((Scheme.Modules.tensorPullback (pullback.fst Q.x η)).obj (markedNodalLine Q E.omega)) ≅ (Scheme.Modules.tensorPullback (pullback.fst P.x η)).obj (markedNodalLine P D.omega), IsNodalLogGenericComparison P Q D E η v c ∧ (∀ m : ℕ, Function.Injective (nodalLogPowerRestriction (pullback.fst P.x η) (markedNodalLine P D.omega) m) ∧ Function.Injective (nodalLogPowerRestriction (pullback.fst Q.x η) (markedNodalLine Q E.omega) m) ∧ (nodalLogPullbackSection v.hom ((Scheme.Modules.tensorPullback (pullback.fst Q.x η)).obj (markedNodalLine Q E.omega)) ((Scheme.Modules.tensorPullback (pullback.fst P.x η)).obj (markedNodalLine P D.omega)) c m ⊤) '' Set.range (nodalLogPowerRestriction (pullback.fst Q.x η) (markedNodalLine Q E.omega) m) = Set.range (nodalLogPowerRestriction (pullback.fst P.x η) (markedNodalLine P D.omega) m)) ∧ NodalLogSectionAlgebraLaws R P.x (pullback.fst P.x η ≫ P.x) (markedNodalLine P D.omega) ((Scheme.Modules.tensorPullback (pullback.fst P.x η)).obj (markedNodalLine P D.omega)) (nodalLogPowerRestriction (pullback.fst P.x η) (markedNodalLine P D.omega)) ∧ NodalLogSectionAlgebraLaws R Q.x (pullback.fst Q.x η ≫ Q.x) (markedNodalLine Q E.omega) ((Scheme.Modules.tensorPullback (pullback.fst Q.x η)).obj (markedNodalLine Q E.omega)) (nodalLogPowerRestriction (pullback.fst Q.x η) (markedNodalLine Q E.omega)) ∧ NodalLogSectionAlgebraLaws R (pullback.fst Q.x η ≫ Q.x) (pullback.fst P.x η ≫ P.x) ((Scheme.Modules.tensorPullback (pullback.fst Q.x η)).obj (markedNodalLine Q E.omega)) ((Scheme.Modules.tensorPullback (pullback.fst P.x η)).obj (markedNodalLine P D.omega)) (fun m ↦ nodalLogPullbackSection v.hom ((Scheme.Modules.tensorPullback (pullback.fst Q.x η)).obj (markedNodalLine Q E.omega)) ((Scheme.Modules.tensorPullback (pullback.fst P.x η)).obj (markedNodalLine P D.omega)) c m ⊤)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded normalized marked-nodal dualizing data without positivity, the actual tensor-unit restriction and the existing homogeneous section-ring operations. The generic comparison is fixed by the log fundamental classes, not chosen up to a scalar. The finite generic marking isomorphism is equivalent to a permutation of the split sections. N5 landed a stage-1 split only; this adds the missing stage-2 Lean record."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06ba8eba3",
+  "group": "NK",
+  "result": "pass",
+  "note": "Lean matches node: DVR/fraction field; MultipointedCurve+IsHProjective+HasNodalGeometricFibres+reduced pure-dim-1 geometric fibres = reconstruction conventions, no stronger hypotheses; n split disjoint smooth sections (n=0 ok); d = permutation of generic markings. D/E arbitrary but canonical via MarkedNodalDualizingDegreesData.canonical. c pinned uniquely by IsNodalLogGenericComparison (differentials pullback map iso for the localization; da-agreement; log fundamental class iso on dense smooth unmarked locus of reduced generic fibre), existence via base_change+hmarks. Conclusion: injectivity for P and Q, Set.range equality u*(im_Q)=im_P for all m, algebra laws (add, R-linear, GMul, GOne of def-sc-invertible-section-ring) for both restrictions and the pullback. Only the lean field changed; statement verbatim; docstrings/source/blueprint/7-step plan present; no hollow defs. Advisory: plain defs from theorem stmt_dep lem-sfb-nodal-log-canonical-reconstruction (already cited at stage 1); MultipointedCurve etc. owners reached only via reconstruction. No file changed so no compile run; worker reported clean compile and dry run."
+ }
+}

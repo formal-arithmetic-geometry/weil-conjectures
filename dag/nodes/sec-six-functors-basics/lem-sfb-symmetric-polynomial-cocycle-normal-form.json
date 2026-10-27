@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-symmetric-polynomial-cocycle-normal-form",
+ "kind": "statement",
+ "title": "Normal form for symmetric polynomial additive two-cocycles",
+ "statement": "Let $k$ be a field [def-weil-field] of prime characteristic $p>0$ [def-pc-field-characteristic]. Use polynomial rings [def-weil-polynomial-ring, def-weil-pbc-mv-polynomial-ring]. Define $c_p(X,Y)\\in k[X,Y]$ to be the reduction of the integer polynomial $-\\sum_{j=1}^{p-1}(\\binom pj/p)X^jY^{p-j}$; the displayed integer coefficients are divided by $p$ before reduction to $k$. Let $f\\in k[X,Y]$ satisfy $f(X,0)=f(0,Y)=0$, $f(X,Y)=f(Y,X)$, and\n$$f(Y,Z)-f(X+Y,Z)+f(X,Y+Z)-f(X,Y)=0\\quad\\text{in }k[X,Y,Z].$$\nThere exist an integer $r\\geq0$, elements $a_0,\\ldots,a_r\\in k$, and $b\\in k[T]$ with $b(0)=0$ such that\n$$f(X,Y)=\\sum_{i=0}^{r}a_i c_p(X,Y)^{p^i}+b(X)+b(Y)-b(X+Y).$$\nNo perfection assumption on $k$ is required; $f=0$ is allowed, with all $a_i=0$ and $b=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 15.26, printed p.316, with the symmetric cocycles and coboundaries of Proposition 15.10 and Corollary 15.11, printed pp.308-309. The assertion here is its existence clause written as an explicit polynomial identity, with the same sign for f_1=c_p."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-field-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\delta b=b(X)+b(Y)-b(X+Y)$. The polynomial definitions [def-weil-polynomial-ring, def-weil-pbc-mv-polynomial-ring] give a finite decomposition $f=\\sum_n f_n$, where $f_n$ is the sum of the monomials of total degree $n$. Normalization and symmetry hold separately for each $f_n$. Every substitution in the cocycle identity preserves total degree, so comparison of the degree-$n$ terms makes each $f_n$ a cocycle. Normalization kills the pure monomials, hence $f_0=f_1=0$. We prove by strong induction on $n$ that every such homogeneous cocycle has the required finite normal form, with $b(0)=0$. Degrees $0,1$ have the zero representation. In the remaining steps fix $n\\geq2$ and write $h=\\sum_{i=1}^{n-1}u_iX^iY^{n-i}$, so symmetry says $u_i=u_{n-i}$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 1."
+   }
+  },
+  {
+   "text": "Put $A=u_{n-1}$. For each $1\\leq i\\leq n-1$, compare the coefficient of $X^iY^{n-1-i}Z$ in the cocycle identity for $h$. The term $h(Y,Z)$ contributes zero because $i>0$, and $h(X,Y)$ contributes zero because the exponent of $Z$ is one. In $-h(X+Y,Z)$ only $-u_{n-1}(X+Y)^{n-1}Z$ contributes, giving $-A\\binom{n-1}{i}$. In $h(X,Y+Z)$ the contribution is $(n-i)u_i$. Thus, in $k$,\n$$(n-i)u_i=A\\binom{n-1}{i}.\\tag{*}$$\nHere and below integers mean their images under $\\mathbf Z\\to k$ [def-pc-field-characteristic]; the binomial expansion follows by distributing the finite product of copies of $X+Y$ and counting which factors supply $X$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-field-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 2."
+   }
+  },
+  {
+   "text": "If $p\\nmid n$, the image of $n$ in $k$ is nonzero [def-pc-field-characteristic] and invertible [def-weil-field]. Apply (*) also at $n-i$ and use symmetry to obtain $iu_i=A\\binom{n-1}{i-1}$. Adding the two identities gives $nu_i=A\\binom ni$: the binomial coefficient counts subsets according to whether a fixed element belongs to them. Consequently\n$$h=\\frac{A}{n}\\big((X+Y)^n-X^n-Y^n\\big)=\\delta\\big(-\\tfrac{A}{n}T^n\\big).$$\nThis proves the inductive assertion in these degrees with every Witt coefficient zero and $b(0)=0$.",
+   "uses": [
+    "def-pc-field-characteristic",
+    "def-weil-field",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 3."
+   }
+  },
+  {
+   "text": "If $n=p$, put $d_i=\\binom pi/p\\in\\mathbf Z$ for $1\\leq i\\leq p-1$. These are integers: $i!\\binom pi=p(p-1)\\cdots(p-i+1)$ is divisible by $p$, whereas $i!$ is prime to $p$. The integer identity $(p-i)d_i=\\binom{p-1}{i}$ follows by writing out the factorials and cancelling before reduction. By (*) we have $(p-i)u_i=A(p-i)d_i$ in $k$. Since $1\\leq p-i<p$, this factor is nonzero and invertible [def-pc-field-characteristic, def-weil-field], giving $u_i=Ad_i$. The sign in the statement's definition is therefore respected:\n$$h=A\\sum_{i=1}^{p-1}d_iX^iY^{p-i}=-A c_p(X,Y).$$\nTake $a_0=-A$, all further coefficients zero, and $b=0$. This includes $p=2$, where $c_2=-XY$.",
+   "uses": [
+    "def-pc-field-characteristic",
+    "def-weil-field",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 4."
+   }
+  },
+  {
+   "text": "It remains to treat $p\\mid n$ and $n>p$. The index $i=n-p$ lies between $1$ and $n-1$, so (*) gives $0=p u_{n-p}=A\\binom{n-1}{p-1}$ in $k$. The latter binomial coefficient has image $1$: multiply it by $(p-1)!$ and use\n$$(p-1)!\\binom{n-1}{p-1}=\\prod_{j=1}^{p-1}(n-j)\\equiv\\prod_{j=1}^{p-1}(-j)\\pmod p.$$\nThe factor $(p-1)!$ is invertible in $k$, and $(-1)^{p-1}=1$ in $k$ (for $p=2$, $-1=1$). Hence $A=0$. Now (*) says $(n-i)u_i=0$. Whenever $p\\nmid i$, also $p\\nmid(n-i)$, so inversion forces $u_i=0$. Thus every surviving exponent of both variables is divisible by $p$. All cancellations used only the characteristic and field definitions [def-pc-field-characteristic, def-weil-field].",
+   "uses": [
+    "def-pc-field-characteristic",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 5."
+   }
+  },
+  {
+   "text": "Set $m=n/p<n$ and define $g(U,V)=\\sum_{j=1}^{m-1}u_{pj}U^jV^{m-j}$. The previous step gives $h(X,Y)=g(X^p,Y^p)$; $g$ is homogeneous of degree $m$, normalized and symmetric by its coefficients [def-weil-pbc-mv-polynomial-ring]. For $0<j<p$, the same factorial argument as in step 4 gives $p\\mid\\binom pj$, so $(X+Y)^p=X^p+Y^p$ in characteristic $p$. Substitute $h=g(X^p,Y^p)$ in its cocycle equation. Its left side is the substitution $(U,V,W)=(X^p,Y^p,Z^p)$ in\n$$g(V,W)-g(U+V,W)+g(U,V+W)-g(U,V).$$\nThis substitution is injective: distinct monomials $U^aV^bW^c$ map to distinct monomials $X^{pa}Y^{pb}Z^{pc}$, leaving their coefficients unchanged. Therefore the displayed polynomial is zero. This proves the cocycle hypothesis needed to apply the strong induction hypothesis to $g$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-field-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 6."
+   }
+  },
+  {
+   "text": "By that induction hypothesis choose $g=\\sum_{i=0}^{s}a_i c_p(U,V)^{p^i}+\\delta b(U,V)$ with $b(0)=0$. Replacing $(U,V)$ by $(X^p,Y^p)$ gives\n$$h=\\sum_{i=0}^{s}a_i c_p(X,Y)^{p^{i+1}}+\\delta\\widetilde b(X,Y),\\qquad \\widetilde b(T)=b(T^p).$$\nIndeed the binomial identity from step 6, iterated over finite sums, gives $c_p(X^p,Y^p)=c_p(X,Y)^p$: every coefficient of $c_p$ is an integer image, fixed by $z\\mapsto z^p$ because this map is additive and sends $1$ to $1$. Also $b(X^p)+b(Y^p)-b(X^p+Y^p)=\\widetilde b(X)+\\widetilde b(Y)-\\widetilde b(X+Y)$. Insert zero as the coefficient at index $0$, and note $\\widetilde b(0)=0$. This closes the divisible-degree induction. Coefficients $a_i$ themselves were unchanged, so no surjectivity of Frobenius on $k$ was used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-polynomial-ring",
+    "def-pc-field-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 7."
+   }
+  },
+  {
+   "text": "Apply the now-proved homogeneous assertion to the finitely many $f_n$ of step 1. Pad their finite coefficient lists by zeros to a common last index $r\\geq0$, and add the lists and their polynomials $b_n$. Coefficientwise polynomial addition [def-weil-polynomial-ring, def-weil-pbc-mv-polynomial-ring] gives $a_i=\\sum_n a_{n,i}$, $b=\\sum_n b_n$, $b(0)=0$, and $f=\\sum_{i=0}^{r}a_i c_p^{p^i}+\\delta b$. For $f=0$, simply take $r=0$, $a_0=0$ and $b=0$. Every step worked in $k$ using only nonzero integer inverses, not roots of elements, so the stated absence of a perfection hypothesis is justified.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26, printed p.316, coefficient-identity argument; explicit agent-supplied detail, step 8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-field-characteristic",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 15.26, printed p.316: supplies the coefficient-comparison route but omits its deduction. The explicit homogeneous strong induction and all coefficient calculations here are supplied by Q01."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p every normalized symmetric polynomial two cocycle for the additive group is a sum of Frobenius powers of the Witt cocycle modulo a polynomial coboundary",
+   "results": "8 hits: WittVector.exists_frobenius_solution_fractionRing_aux, frobeniusPolyAux, frobeniusPolyRat, frobeniusRotationCoeff, frobeniusPolyAux_eq, exists_frobenius_solution_fractionRing, bind₁_frobeniusPolyRat_wittPolynomial, dvd_sub_sum_teichmuller_iterateFrobeniusEquiv_coeff. These concern Witt polynomials or Frobenius equations, not cocycle classification.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not classify normalized symmetric polynomial two-cocycles modulo polynomial coboundaries."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WittVector\", \"cocycle\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not classify normalized symmetric polynomial two-cocycles modulo polynomial coboundaries."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*cocycle|cocycle.*symmetric|Witt.*coboundary",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not classify normalized symmetric polynomial two-cocycles modulo polynomial coboundaries."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric polynomial cocycles of the additive group in prime characteristic classified by Witt polynomials modulo coboundaries",
+   "results": "8 hits: wittPolynomial, WittVector.wittAdd, wittPolynomial_eq_sum_C_mul_X_pow, WittVector.frobeniusPoly, polyOfInterest, wittPow, instCommRing, wittOne. Witt polynomial constructions do not classify all symmetric polynomial cocycles.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not classify normalized symmetric polynomial two-cocycles modulo polynomial coboundaries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lazard lemma a symmetric polynomial satisfying f(y,z)-f(x+y,z)+f(x,y+z)-f(x,y)=0 in characteristic p is a sum of Witt cocycles and b(x)+b(y)-b(x+y)",
+   "results": "8 hits: WittVector.polyOfInterest, wittPolyProdRemainder, wittAdd, xInTermsOfW, mul_polyOfInterest_aux4, remainder, mul_polyOfInterest_aux3, mul_polyOfInterest_aux2. These are Witt multiplication and coordinate identities, not symmetric polynomial cocycle normal forms.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not classify normalized symmetric polynomial two-cocycles modulo polynomial coboundaries."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*cocycle|cocycle.*polynomial|Lazard",
+   "results": "1 hit: Mathlib/RingTheory/Flat/EquationalCriterion.lean:44, a comment about Lazard's theorem on flat modules; unrelated to polynomial cocycles.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not classify normalized symmetric polynomial two-cocycles modulo polynomial coboundaries."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*cocycle|cocycle.*symmetric|Lazard|pderiv.*zero|zero.*pderiv",
+   "results": "OK; 15 hits; top: Mathlib/Algebra/MvPolynomial/PDeriv.lean, Mathlib/Algebra/MvPolynomial/PDeriv.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean, Mathlib/Algebra/Polynomial/Bivariate.lean, Mathlib/RingTheory/MvPowerSeries/Derivative.lean, Mathlib/RingTheory/MvPowerSeries/Derivative.lean, Mathlib/RingTheory/MvPowerSeries/Derivative.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cohomology, Witt equations, and partial-derivative primitives do not give the stated polynomial classification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lazard classification of homogeneous symmetric polynomial two cocycles over a field of prime characteristic modulo polynomial coboundaries",
+   "results": "OK; 8 hits; top: CochainComplex.HomComplex.coboundaries, groupCohomology.H2π_eq_zero_iff, LieModule.Cohomology.mem_twoCocycle_iff, groupCohomology.cocycles₂, groupCohomology.coboundaries₂_le_cocycles₂, LieModule.Cohomology.twoCocycle, groupCohomology.H2π_eq_iff, CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cohomology, Witt equations, and partial-derivative primitives do not give the stated polynomial classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"pderiv\"",
+   "results": "OK; 12 hits; top: MvPolynomial.pderiv, MvPolynomial.pderiv_X_self, MvPolynomial.pderiv_X_of_ne, MvPolynomial.pderiv_def, MvPolynomial.pderiv_eq_zero_of_notMem_vars, MvPolynomial.pderiv_one, MvPolynomial.pderiv_X, MvPolynomial.pderiv_C. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cohomology, Witt equations, and partial-derivative primitives do not give the stated polynomial classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every symmetric normalized polynomial additive two cocycle in characteristic p is a sum of powers of the Witt cocycle and a coboundary",
+   "results": "OK; 8 hits; top: groupCohomology.H2π_eq_iff, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_iff, groupCohomology.IsCoboundary₂, WittVector.RecursionBase.solution_spec', groupCohomology.IsMulCoboundary₂, groupCohomology.mem_cocycles₂_iff, groupCohomology.isCoboundary₂_of_mem_coboundaries₂, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cohomology, Witt equations, and partial-derivative primitives do not give the stated polynomial classification."
+  },
+  {
+   "tool": "grep",
+   "query": "cocycle.*polynomial|polynomial.*cocycle|sum_X_mul_pderiv|euler",
+   "results": "OK; 5 hits; top: Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean, Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean, Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean, Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean, Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cohomology, Witt equations, and partial-derivative primitives do not give the stated polynomial classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous symmetric polynomial f satisfying the additive cocycle identity is a coboundary unless its degree is a power of the characteristic",
+   "results": "OK; 8 hits; top: groupCohomology.isCoboundary₂_of_mem_coboundaries₂, groupCohomology.isCoboundary₁_of_mem_coboundaries₁, groupCohomology.coboundaries₂, Algebra.Generators.H1Cotangent.δAux_X, groupCohomology.isMulCoboundary₂_of_mem_coboundaries₂, groupCohomology.coboundaries₂_le_cocycles₂, groupCohomology.IsCoboundary₂, groupCohomology.isMulCoboundary₁_of_mem_coboundaries₁. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cohomology, Witt equations, and partial-derivative primitives do not give the stated polynomial classification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-additive-subgroup-commutative-extensions-witt",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups. Present split: Commutative extensions of additive subgroups are Witt pullbacks. Proposition 15.27, printed p.316, including its displayed extension (113). The perfect-field restriction is sufficient for its use in the proof of Proposition 14.48, printed p.296. Supporting polynomial input: Milne Lemma 15.26, the normal form used before the restriction argument of Proposition 15.27.",
+   "via": [
+    "lem-sfb-additive-subgroup-commutative-extensions-witt",
+    "lem-sfb-zero-verschiebung-primitive-generation",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symmetric-polynomial-cocycle-normal-form",
+  "worker": "stage1",
+  "summary": "Expanded Milne 15.26 into an explicit homogeneous coefficient induction. The cocycle coefficient recurrence handles prime-to-p degrees, degree p, and descent through variable p-th powers in larger divisible degrees. All calculations are written out as elementary steps, so no new nodes are needed. Added the existing field-characteristic definition citation without changing the mathematical statement. No perfectness, coefficient p-th roots, or unproved project Lean declaration is used.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), through the inherited alteration/algebraic-group support chain in blueprint.from.place. The immediate parent uses exactly the polynomial identity. blueprint_refs.py ancestor returns None, so the inherited null ancestor and via chain are retained; whole-blueprint searches found no polynomial-cocycle or Lazard duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-885e37331",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-885e37331 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017. p.316: f_1 is defined just before Lemma 15.26; f_1 = (x^p+y^p-(x+y)^p)/p equals the item's c_p, and 15.26 omits its own deduction (it cites Lazard Lemme 3). pp.308-309, Prop 15.10 / Cor 15.11: symmetric cocycles modulo B^2. The item statement is mathematically unchanged; the only edit adds the citation def-pc-field-characteristic. The parent lem-sfb-additive-subgroup-commutative-extensions-witt step 4 uses exactly this existence form. I recomputed all 8 elementary steps by hand. Step 2: the coefficient of X^iY^{n-1-i}Z gives (n-i)u_i = A binom(n-1,i). Step 3: for p not dividing n, n u_i = A binom(n,i), so h = delta(-(A/n)T^n), sign checked. Step 4: (p-i)(binom(p,i)/p) = binom(p-1,i), so h = -A c_p, including p=2. Step 5: for p | n and n > p, binom(n-1,p-1) is 1 mod p, so A=0 and u_i=0 whenever p does not divide i. Steps 6-7: Frobenius descent to g of degree n/p; I checked that g is symmetric and normalized, that the monomial substitution is injective, and that c_p(X^p,Y^p) = c_p^p. No p-th roots are taken, so the proof works for imperfect k. Step 8: the finite assembly handles f=0. The strong induction states its claim and its base case. The four cited definitions (field, characteristic, k[T], multivariate polynomials) say what the steps take from them, and proof_deps equals the union of the uses. Own small-case test: the full cocycle-plus-symmetry system over F_p has a 1-dimensional kernel for p=2,3,5 and every degree 2-27. No new nodes. No duplicate found: the Witt-extension and disjoint-cocycle nodes are different statements. No Lean exists for this id, there is no SGA use, and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SymmetricPolynomialCocycleNormalForm",
+  "declaration": "MvPolynomial.symmetric_polynomial_cocycle_normal_form",
+  "file": "lean/Sheaf/RingTheory/SymmetricPolynomialCocycleNormalForm.lean",
+  "statement": "theorem symmetric_polynomial_cocycle_normal_form {k : Type u} [Field k] (p : ℕ) (hp : p.Prime) [CharP k p] (f : MvPolynomial (Fin 2) k) (hX : aeval ![(Polynomial.X : Polynomial k), 0] f = 0) (hY : aeval ![0, (Polynomial.X : Polynomial k)] f = 0) (hsym : aeval ![X (1 : Fin 2), X 0] f = f) (hcocycle : aeval ![(X 1 : MvPolynomial (Fin 3) k), X 2] f - aeval ![X (0 : Fin 3) + X 1, X 2] f + aeval ![X (0 : Fin 3), X 1 + X 2] f - aeval ![X (0 : Fin 3), X 1] f = 0) : ∃ (r : ℕ) (a : Fin (r + 1) → k) (b : Polynomial k), b.eval 0 = 0 ∧ f = (∑ i : Fin (r + 1), C (a i) * (-∑ j ∈ Finset.Ioo 0 p, C ((p.choose j / p : ℕ) : k) * X (0 : Fin 2) ^ j * X 1 ^ (p - j)) ^ (p ^ (i : ℕ))) + Polynomial.aeval (X (0 : Fin 2)) b + Polynomial.aeval (X (1 : Fin 2)) b - Polynomial.aeval (X (0 : Fin 2) + X 1) b",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17aa4981e",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Every clause matches the node and Milne 15.26: normalization f(T,0)=f(0,T)=0 in k[T], symmetry, the cocycle identity in MvPolynomial (Fin 3) k with the node's order and signs, exists r and a : Fin (r+1) -> k, b with b.eval 0 = 0, and c_p = -sum_{0<j<p} C((choose p j / p : N)) X^j Y^(p-j) with the division before the cast and the sign matching Milne's f_1. p.Prime with CharP k p only excludes p = 0; no perfectness assumption; universe u is unrestricted. Edge cases p=2 (c_2=-XY), r=0, f=0 and finite or imperfect k are all covered. lean.statement is verbatim the file signature; the snapshot node differs from live only in its lean field and no dependency records changed. The item is not landed live, so there is no parallel supersession. Step 4 of the parent lem-sfb-additive-subgroup-commutative-extensions-witt uses exactly this form. No definitions are introduced, the proof is sorry, the docstrings carry the source, blueprint tag and 8 proof steps, imports are Mathlib only, and the Worker report and Second reading by Q78 sections are present. Not recompiled per the instruction (worker reports a clean compile). Advisory only: the Field.Defs and CharP.Defs imports are transitively redundant."
+ }
+}

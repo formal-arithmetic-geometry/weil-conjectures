@@ -1,0 +1,387 @@
+{
+ "id": "lem-sfb-reduced-curve-dualizing-module",
+ "kind": "statement",
+ "title": "Dualizing module and finite-support exclusion on a proper reduced curve",
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be a nonempty proper reduced $k$-scheme of pure dimension one [def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pure-dimension]. There exists a coherent $\\mathcal O_C$-module $\\omega_C$ [pqf-def-coherent], called its dualizing module, with a natural $k$-linear isomorphism\n$$\\operatorname{Hom}_{\\mathcal O_C}(\\mathcal F,\\omega_C)\\cong\\operatorname{Hom}_k(H^1(C,\\mathcal F),k)$$\nfor every coherent $\\mathcal O_C$-module $\\mathcal F$, where module maps and cohomology are those of [def-weil-sheaf-of-modules-category, def-sc-ringed-space-module-cohomology]. The pair consisting of $\\omega_C$ and this natural isomorphism determines $\\omega_C$ up to the unique isomorphism respecting it. For every generic point $\\eta$ of an irreducible component [def-sc-generic-point, def-weil-irreducible-components], the stalk $(\\omega_C)_\\eta$ [def-weil-pbc-module-stalk] is one-dimensional over the field $\\mathcal O_{C,\\eta}$. Every coherent submodule of $\\omega_C$ whose stalks at all these generic points are zero is zero. Equivalently, a morphism of coherent modules to $\\omega_C$ is zero if all its component-generic stalk maps are zero. Finally,\n$$\\chi(C,\\omega_C)=-\\chi(C,\\mathcal O_C)$$\nfor the Euler characteristic of [def-pc-euler-characteristic]. No connectedness, smoothness, geometric reducedness or condition $H^0(C,\\mathcal O_C)=k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0BS2 (lemma-duality-dim-1), (2),(5); 0BS3 (lemma-duality-dim-1-CM), (1),(2),(4); 0BS5 (lemma-euler), second identity. Reduced pure-dimensional-one specialization; generic-field rank and exclusion of zero-dimensional submodules spell out the Cohen-Macaulay module assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-module-stalk",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:C\\to\\operatorname{Spec}k$. Properness includes finite type. Thus $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is flat over the field by [lem-pc-flat-field]. On affine charts finite type over the Noetherian field implies finite presentation by [lem-weil-pbc-finite-type-noetherian-finite-presentation]; properness supplies quasi-compactness and separatedness. Apply [lem-sfb-proper-flat-dualizing-polynomial-model] to obtain the right adjoint $f^!$ and set $K=f^!k[0]$. By [lem-sfb-proper-field-algebraic-dualizing], $K$ has bounded coherent cohomology and every stalk is an algebraic dualizing complex.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-flat-field",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-proper-field-algebraic-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2 (lemma-duality-dim-1), proof: construction of the proper adjoint complex."
+   }
+  },
+  {
+   "text": "Every local ring has dimension at most one: its prime chains give chains in an affine open of $C$. Reducedness and [lem-weil-pbc-serre-criterion-reduced] give depth at least $\\min(1,\\dim A)=\\dim A$; the opposite inequality is [lem-weil-pbc-depth-le-support-dimension] applied to $M=A$. Hence every local ring is Cohen–Macaulay. At a closed point $x$ the dimension is one: a zero-dimensional local ring would make $x$ generic for an irreducible component, and a closed generic point gives a zero-dimensional component, contrary to pure dimension one. The prime/local-point correspondence used here is [lem-weil-pbc-primes-of-localization].",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS3 (lemma-duality-dim-1-CM), hypotheses; reduced dimension-one argument in Tag 0E33 proof."
+   }
+  },
+  {
+   "text": "At every closed point $x$, [lem-sfb-proper-dualizing-closed-stalk-normalized] normalizes $K_x$ and [lem-sfb-normalized-cm-local-dualizing-concentration] with $d=1$ gives $K_x\\cong H^{-1}(K_x)[1]$. Therefore $H^j(K)_x=0$ for $j\\ne-1$, using exactness of stalks [lem-weil-pbc-module-stalk-exact]. Each coherent $H^j(K)$ has closed support by [lem-weil-pbc-finite-type-module-support-closed]. The space $C$ is quasi-compact by properness and Kolmogorov by [lem-sc-scheme-sober]: two points with the same closure would be two generic points of that irreducible closed subset. Thus [lem-sc-quasi-compact-kolmogorov-closed-point] gives a closed point in any nonempty support, a contradiction. Thus $K$ is concentrated in degree $-1$. Put $\\omega=H^{-1}(K)$; it is coherent, and [lem-sf-derived-concentrated-single] gives $K\\cong\\omega[1]$ in the derived category.",
+   "uses": [
+    "lem-sfb-proper-dualizing-closed-stalk-normalized",
+    "lem-sfb-normalized-cm-local-dualizing-concentration",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sf-derived-concentrated-single",
+    "lem-sc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2 and 0BS3: concentration and dualizing module."
+   }
+  },
+  {
+   "text": "For coherent $F$, the fully faithful degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful], the isomorphism $K\\cong\\omega[1]$, and the adjunction give\n$$\\operatorname{Hom}(F,\\omega)=\\operatorname{Hom}_{D(C)}(F[1],K)=\\operatorname{Hom}_{D(k)}(R\\Gamma(C,F)[1],k[0])=\\operatorname{Hom}_k(H^1(C,F),k).$$\nThe last equality is the degreewise Hom bijection of [lem-trf-field-complex-cohomology-splitting]: only degree zero of the target contributes, and $H^0(R\\Gamma(F)[1])=H^1(C,F)$. All three comparisons are natural and $k$-linear; on the last Hom group a map is sent to its cohomology map.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2 (5), its adjunction calculation; Tag 0BS3 (3)."
+   }
+  },
+  {
+   "text": "The representing pair is unique by the following explicit argument. For two pairs, their duality maps give natural bijections $T_F:\\operatorname{Hom}(F,\\omega)\\to\\operatorname{Hom}(F,\\omega')$. Set $u=T_\\omega(1)$ and $v=T_{\\omega'}^{-1}(1)$. Naturality gives $T_F(h)=u\\circ h$; applying this and its inverse to identities gives $vu=1$ and $uv=1$. Any isomorphism respecting the representing maps equals $T_\\omega(1)=u$. This uses only coherent test modules, including the two representing modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2, uniqueness footnote (Yoneda argument written out)."
+   }
+  },
+  {
+   "text": "For a component-generic point $\\eta$, [lem-weil-pbc-reduced-noetherian-total-ring-fractions](1), on an affine neighbourhood, makes $F=\\mathcal O_{C,\\eta}$ a field. Put $V=\\omega_\\eta$. Steps 1 and 3 give $K_\\eta\\cong V[1]$ and the scalar-action isomorphism $F[0]\\to R\\operatorname{Hom}_F(K_\\eta,K_\\eta)$ [lem-sfb-proper-field-algebraic-dualizing]. Compute this Hom using [def-pur-derived-internal-hom] on the one-object ringed site. By [lem-trf-field-complex-cohomology-splitting], every acyclic $F$-complex $A$ is contractible, say $1_A=dh+hd$. For any chain map $f:A\\to V[1]$, the maps $fh$ give a null homotopy, since $f(dh+hd)=d(fh)+(fh)d$. Thus $V[1]$ itself is K-injective by [def-pur-kinjective-complex]. The derived-Hom definition permits this target model, giving the $F$-linear identification\n$$R\\operatorname{Hom}_F(V[1],V[1])=\\operatorname{Hom}_F^\\bullet(V[1],V[1])=\\operatorname{End}_F(V)[0].$$\nThe complex has only degree zero and zero differential; the homothety sends $a$ to $a\\,1_V$. Hence $F\\to\\operatorname{End}_F(V)$ is an $F$-linear isomorphism. In particular $V\\ne0$, since otherwise $F\\cong0$. Fix $v\\ne0$. For each $w\\in V$, [lem-sfb-linear-map-extension-prescribed-value] with $P=0$, $U=V$ gives $g\\in\\operatorname{End}_F(V)$ with $g(v)=w$. Surjectivity of homothety gives $g=a\\,1_V$, so $w=av$. Therefore $v$ is a basis of $V$ and $\\dim_FV=1$.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-sfb-proper-field-algebraic-dualizing",
+    "def-pur-derived-internal-hom",
+    "lem-trf-field-complex-cohomology-splitting",
+    "def-pur-kinjective-complex",
+    "lem-sfb-linear-map-extension-prescribed-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), proof: generic invertibility; Tag 0BS2 construction; scalar-action definition in dualizing.tex Tag 0A7B (definition-dualizing), with the field K-injective computation written out."
+   }
+  },
+  {
+   "text": "Let $N\\subseteq\\omega$ be coherent with all component-generic stalks zero. Its support is closed by [lem-weil-pbc-finite-type-module-support-closed] and has dimension at most zero: any strict chain of two points in that support, preceded by a component-generic point of $C$, would give a chain of length two in $C$; the first point cannot already be generic since all generic stalks vanish. Apply [lem-pc-zero-support-finite-scheme] with the trivial invertible module to write $N=i_*G$ on a finite affine $k$-scheme, with $H^1(C,N)=H^1(\\operatorname{Spec}A,G)=0$ by [pqf-lem-affine-vanishing]. Step 4 gives $\\operatorname{Hom}(N,\\omega)=0$. Thus the inclusion is zero, so $N=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-pc-zero-support-finite-scheme",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E, proof: exclusion of modules supported in closed points; alternative direct use of Tag 0BS2 (5)."
+   }
+  },
+  {
+   "text": "For a map $F\\to\\omega$ of coherent modules, its image is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (image is the kernel of its coherent cokernel). Exactness of stalks [lem-weil-pbc-module-stalk-exact](4) identifies the image stalks with the images of the stalk maps. If all component-generic maps vanish, step 7 annihilates this image, so the map is zero. Conversely apply this assertion to the inclusion of a coherent submodule to recover step 7.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E proof, finite-support exclusion as a morphism criterion."
+   }
+  },
+  {
+   "text": "Apply the adjunction to $\\mathcal O_C[1-j]$ for each integer $j$. The structure-sheaf Hom identification [lem-pc-derived-structure-sheaf-hom-hypercohomology] and field-complex splitting [lem-trf-field-complex-cohomology-splitting] give\n$$H^j(C,\\omega)\\cong\\operatorname{Hom}_k(H^{1-j}(C,\\mathcal O_C),k).$$\nFor $j=0,1$ these swap $H^0$ and $H^1$. For $j>1$ the right side vanishes because a module in degree zero has no negative derived global cohomology (its injective resolution begins in degree zero). For $j<0$ the left side vanishes for the same reason, so field splitting also gives $H^i(C,\\mathcal O_C)=0$ for $i>1$. Finiteness is [lem-pc-euler-characteristic-well-defined] and dual dimensions agree by [lem-sfb-linear-dual-dimension-rank]. Hence\n$$\\chi(C,\\omega)=h^1(C,\\mathcal O_C)-h^0(C,\\mathcal O_C)=-\\chi(C,\\mathcal O_C).$$\nThe calculation uses the whole space $H^0(C,\\mathcal O_C)$, without identifying it with $k$.",
+   "uses": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "lem-trf-field-complex-cohomology-splitting",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-sfb-linear-dual-dimension-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS5 (lemma-euler), proof, via the shifted adjunction of Tag 0BS3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-flat-field",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-sfb-proper-field-algebraic-dualizing",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-sfb-proper-dualizing-closed-stalk-normalized",
+  "lem-sfb-normalized-cm-local-dualizing-concentration",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sf-derived-concentrated-single",
+  "lem-sc-scheme-sober",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-pur-derived-internal-hom",
+  "def-pur-kinjective-complex",
+  "lem-sfb-linear-map-extension-prescribed-value",
+  "lem-pc-zero-support-finite-scheme",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sfb-linear-dual-dimension-rank"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0BS2, 0BS3, 0BS5 and 0E3E; normalization and Cohen–Macaulay concentration exposed as local prerequisites; finite-support exclusion by duality and affine vanishing. Repair: the field homothety calculation is written out from the K-injective derived-Hom definition and the existing field splitting theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper reduced curve has a coherent dualizing sheaf representing the dual of first coherent cohomology with Euler characteristic minus that of the structure sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{R : CommRingCat.{u}} [H : _root_.IsReduced R] : IsReduced (Spec R)\", \"doc\": \"If $ R $ is a reduced commutative ring (i.e., $ R $ has no nonzero nilpotent elements), then the scheme $ \\\\operatorname{Spec}(R) $ is reduced, meaning all its local rings have no nonzero nilpotent ele\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W W_1 : WeierstrassCurve K) (e_W : W = W_1)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGood\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, if two Weierstrass curves $ W $ and $ W_1 $ over $ K $ are equal, then $ W $ has good reduction if and only if $ W_1 $ has good reduction\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"{W : WeierstrassCurve K} [IsMinimal R W] : IsGoodReduction R W ↔ (W.reduction R).IsElliptic\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality on a proper Cohen Macaulay curve Hom of a coherent sheaf into the dualizing module is the dual of H1",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomologyIsoExt\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) → (n : ℕ) → groupCohomology A n ≅ ((Ext k (Rep k G) n).obj (Opposite.op (Rep.trivial k G k))).obj A\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ k $-representation $ A $ of $ G $, the $ n $-th group cohomology module $ H^n(G, A) $ is isomorphic to the $ n $-th extension group $ \\\\text{Ext}^n_\"}\n  {\"name\": \"Rep.standardResolution.extIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (V : Rep k G) →\\n        (n : ℕ) →\\n          ((Ext k (Rep k G) n).obj (Opposite.op (Rep.trivial k G k))).obj V ≅\\n            HomologicalComplex.homology ((Rep.standardComplex k G).linearYonedaObj k V) n\", \"doc\": \"For a commutative ring $ k $, group $ G $, representation $ V $ in $ \\\\text{Rep}(k, G) $, and natural number $ n $, there is an isomorphism between the $ n $-th Ext group $ \\\\text{Ext}^n(\\\\text{trivial }\"}\n  {\"name\": \"FGModuleCat.exactPairing\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → (V : FGModuleCat K) → CategoryTheory.ExactPairing V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"For any field $ K $ and finitely generated $ K $-module $ V $, there exists an exact pairing between $ V $ and its dual module $ \\\\text{Hom}_K(V, K) $, constructed via coevaluation and evaluation maps \"}\n  {\"name\": \"CharacterModule.homEquiv\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"{R : Type uR} →\\n  [inst : CommRing R] →\\n    {A : Type uA} →\\n      [inst_1 : AddCommGroup A] →\\n        {B : Type uB} →\\n          [inst_2 : AddCommGroup B] →\\n            [inst_3 : Module R A] →\\n              [inst_4 : Module R B] → (A →ₗ[R] CharacterModule B) ≃ₗ[R] CharacterModule (TensorProduct R A B\", \"doc\": \"For a commutative ring $ R $ and additive commutative $ R $-modules $ A $, $ B $, this establishes an $ R $-linear equivalence between the space of $ R $-linear maps $ A →ₗ[R] \\text{CharacterModule}(B)\"}\n  {\"name\": \"CharacterModule.dual_rTensor_conj_homEquiv\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {A : Type uA} [inst_1 : AddCommGroup A] (A' : Type u_1) [inst_2 : AddCommGroup A']\\n  {B : Type uB} [inst_3 : AddCommGroup B] [inst_4 : Module R A] [inst_5 : Module R A'] [inst_6 : Module R B]\\n  (f : A →ₗ[R] A'),\\n  ↑CharacterModule.homEquiv.symm ∘ₗ CharacterModule.\", \"doc\": \"For a linear map $ f: A \\to A' $ over a ring $ R $, the composition of the inverse homomorphism equivalence, the dual of the right tensor product of $ f $ with a module $ B $, and the homomorphism equi\"}\n  {\"name\": \"FGModuleCat.FGModuleCatCoevaluation\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (V : FGModuleCat K) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorUnit (FGModuleCat K) ⟶\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"The coevaluation morphism from the identity object (the base field $ K $) to the tensor product of a finitely generated $ K $-module $ V $ with its dual module $ V^* $, which is part of the monoidal s\"}\n  {\"name\": \"rTensor_injective_iff_lcomp_surjective\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {A : Type uA} [inst_1 : AddCommGroup A] {A' : Type u_1} [inst_2 : AddCommGroup A']\\n  {B : Type uB} [inst_3 : AddCommGroup B] [inst_4 : Module R A] [inst_5 : Module R A'] [inst_6 : Module R B]\\n  {f : A →ₗ[R] A'},\\n  Function.Injective ⇑(LinearMap.rTensor B f) ↔ Func\", \"doc\": \"The character module of an additive commutative group $ A $, consisting of homomorphisms from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $, is equipped with an $ R $-module structure. Scalar\"}\n  {\"name\": \"FGModuleCat.rightDual\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → (V : FGModuleCat K) → CategoryTheory.HasRightDual V\", \"doc\": \"For any field $ K $ and any finitely generated $ K $-module $ V $, the dual module $ \\\\text{Hom}_K(V, K) $ is a right dual of $ V $ in the category of finitely generated $ K $-modules. This establishes\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|CohenMacaulay|serreDuality",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/ColimitsClosure.lean\", \"line\": \"19\", \"text\": \"(We deduce these results about the closure under colimits by dualising the\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean\", \"line\": \"24\", \"text\": \"All the results are obtained by dualising the results in the file `Embedding.TruncGEHomology`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\", \"line\": \"1140\", \"text\": \"the same `Q` and `H` fields. This is obtained by dualising `LeftHomologyData.ofEpiOfIsIsoOfMono'`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\", \"line\": \"1172\", \"text\": \"the same `Q` and `H` fields. This is obtained by dualising `LeftHomologyData.ofEpiOfIsIsoOfMono`.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizing module on a singular reduced curve is generically rank one and has no nonzero subsheaf supported on finitely many points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"Module.rankAtStalk_self\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] [Nontrivial R], Module.rankAtStalk R = 1\", \"doc\": \"For any non-trivial commutative semiring $ R $, the rank of $ R $ as a module over itself localized at any prime ideal $ \\\\mathfrak{p} $ is 1. Specifically, the rank of $ R $ over the localization $ R_\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}\n  {\"name\": \"WeierstrassCurve.Affine.Nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → R → R → Prop\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if it satisfies the Weierstrass equation $W.Equation(x, y)$ and at least one of the partial derivative evaluations $W\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (x : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XClass W' x ≠ 0\", \"doc\": \"For any element $x$ in a non-trivial ring $R$, the equivalence class of $X - x$ in the coordinate ring of an affine Weierstrass curve $W'$ over $R$ is non-zero. This follows from the construction of t\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"For any commutative ring $ R $ and any Weierstrass curve over $ R $, a point on the Jacobian (which is the curve itself) is nonsingular if and only if every representative of its equivalence class und\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|SerreDuality|CohenMacaulay",
+   "results": "0 hits: . Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: . Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dualizing module on a proper reduced curve represents the dual of first coherent cohomology",
+   "results": "8 hits: Module.Dual, CommRing.Pic.mk_dual, CommRing.Pic.inv_eq_dual, Module.Dual.instIsReflecive, Module.Dual.instInhabited, FGModuleCat.FGModuleCatDual, Module.subsingleton_dual_iff, Module.dual_projective. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality coherent sheaves proper reduced pure one dimensional scheme dualizing module",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, FGModuleCat.exactPairing, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, CategoryTheory.Sheaf.H, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, FGModuleCat.rightRigidCategory, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical sheaf singular curves generically rank one Serre duality Euler characteristic negative",
+   "results": "8 hits: WeierstrassCurve.IsElliptic, WeierstrassCurve.Affine.Nonsingular, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Affine.FunctionField, WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.CoordinateRing.instSubsingleton, WeierstrassCurve.Affine.nonsingular_iff'. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "date": "2026-10-23",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic",
+   "via": [
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reduced-curve-dualizing-module",
+  "worker": "stage1",
+  "summary": "Constructed omega as the actual H^-1 of the proper adjoint dualizing complex; proved concentration through normalized closed stalks and reduced local S1. Derived representing duality, explicit uniqueness, generic rank one, finite-support exclusion and Euler sign; two local coherent-duality prerequisites are statement-only nodes. No statement correction. Repair of C1/C3 route-pivot return: expanded the complete algebraic dualizing definition inline in both prerequisites; step 3 uses scheme sobriety and the quasi-compact Kolmogorov closed-point leaf; step 6 computes the F-linear homothety with the K-injective model V[1] and the existing prescribed-value linear-map Mathlib leaf. Removed all three dropped dependencies and their tool-use entries; no additional nodes or statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-serre-criterion-reduced",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-zero-support-finite-scheme",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Generic algebraic/coherent-sheaf or homological tool in the Stacks 0BS2–0BS5 curve-duality argument; no coefficient six-functor route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-pc-zero-support-finite-scheme",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-pc-euler-characteristic-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-1f8ae1f92",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-1f8ae1f92 (reviewer sub-agent of L); spot-checked: Re-delivery after the d945ff11 RETURN, whose only faults were three cited ids on the 2026-10-19 route-pivot drop list. I diffed the three delivered files against d945. The item statement and steps 1,2,4,5,7,8,9 are unchanged; I re-read them and the d945 step checks still hold. Repairs: (a) both new nodes now write the normalized algebraic dualizing complex inline: bounded injective model, finitely generated H^j, A->RHom(K,K) iso, RHom(kappa,K)=kappa[0]. This matches Stacks 0A7B/0A7M and the cited places 0AWL (duality.tex l.5586) and 0AWS (dualizing.tex l.3625). Both nodes are true and not duplicates. (b) Step 3 gets a closed point in each nonempty closed support from quasi-compactness, Kolmogorov via lem-sc-scheme-sober (generic-point uniqueness) and lem-sc-quasi-compact-kolmogorov-closed-point; correct. (c) Step 6: an acyclic F-complex is contractible by lem-trf-field-complex-cohomology-splitting, so f=d(fh)+(fh)d and V[1] is K-injective (def-pur-kinjective-complex). def-pur-derived-internal-hom then gives Hom^*(V[1],V[1])=End_F(V)[0]. The scalar map is the F-linear homothety, so it is bijective; with lem-sfb-linear-map-extension-prescribed-value (P=0) this gives dim V=1. This closes the F-linearity gap. Mechanical: 66 cited ids intersected with route-pivot-dropped.txt gives an empty set; all ids exist; no SGA; proof_deps equals the union of the step uses; the item is still unsplit in live and side-live, with no repair note. Batch-5 flags are all generic and accepted: polynomial-model (coherent Grothendieck duality, reaching only the definition def-trf-coherent-relative-dualizing-pair), proper-field-algebraic-dualizing (0AWX commutative algebra), field-complex-splitting (linear algebra), euler-characteristic-well-defined (coherent finiteness via the Chow/Nagata definition). None is a step of the trace formula or of Poincare duality. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedCurveDualizingModule",
+  "declaration": "AlgebraicGeometry.exists_reducedCurveDualizingPair",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyOverField",
+   "AlgebraicGeometry.ReducedCurveDualizingPair",
+   "AlgebraicGeometry.exists_reducedCurveDualizingPair"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedCurveDualizingModule.lean",
+  "statement": "theorem exists_reducedCurveDualizingPair (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsProper (C ↘ Spec (.of k))] [IsReduced C] [Nonempty C] (hPure : C.IsPureDimension 1) : ∃ D : ReducedCurveDualizingPair k C, (∀ D' : ReducedCurveDualizingPair k C, ∃! e : D.omega ≅ D'.omega, ∀ (F : C.Modules) (hF : RingedSpace.IsCoherent C.toRingedSpace F) (a : F ⟶ D.omega), D'.duality F hF (a ≫ e.hom) = D.duality F hF a) ∧ (∀ (Z : Set C), Z ∈ irreducibleComponents C → ∀ η : C, IsGenericPoint η Z → IsField (C.presheaf.stalk η) ∧ Nonempty (((RingedSpace.moduleStalkFunctor C.toRingedSpace η).obj D.omega) ≃ₗ[ C.presheaf.stalk η] C.presheaf.stalk η)) ∧ (∀ (N : C.Modules), RingedSpace.IsCoherent C.toRingedSpace N → ∀ i : N ⟶ D.omega, Mono i → (∀ (Z : Set C), Z ∈ irreducibleComponents C → ∀ η : C, IsGenericPoint η Z → Subsingleton ((RingedSpace.moduleStalkFunctor C.toRingedSpace η).obj N)) → IsZero N) ∧ (∀ (F : C.Modules), RingedSpace.IsCoherent C.toRingedSpace F → ∀ a : F ⟶ D.omega, (a = 0 ↔ ∀ (Z : Set C), Z ∈ irreducibleComponents C → ∀ η : C, IsGenericPoint η Z → (RingedSpace.moduleStalkFunctor C.toRingedSpace η).map a = 0)) ∧ D.omega.eulerChar k = -Scheme.Modules.eulerChar k (SheafOfModules.unit C.ringCatSheaf)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coherent in this item means clause 3 of pqf-def-coherent, Stacks Project Modules, Tag 01BV: finite type with finite-type kernels of every map from a finite free module on every open. The statement uses AlgebraicGeometry.RingedSpace.IsCoherent through the direct import WeilConjectures.AlgebraicGeometry.Coherent, which gives exactly this clause. The landed pqf-def-coherent Lean record (Q25 IsQuasiCoherentFiniteType) is preserved unchanged; this delivery does not rebind that dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44d864778",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Re-delivery of 0d82 (H13 RETURN) applies all four corrections: pqf-def-coherent.json and all 11 dependency records are byte-identical to live (Q25 IsQuasiCoherentFiniteType kept); the item module's sha256 is identical to 0d82, whose statement was already judged correct; the item lean.note says IsCoherent = Stacks 01BV, clause 3; the §1(B) paragraph is removed from the report. Re-checked: IsCoherent (Coherent.lean:44) is finite type plus finite-type kernels. Duality and naturality use the actual H¹ map, with ∃! e respecting the duality. Generic stalk: IsField and ≃ₗ[O_η] O_η. Mono into ω with zero generic stalks gives IsZero; the morphism criterion is an iff; χ(ω) = −χ(O_C). No added hypotheses. Statement verbatim, 9-step docstring, sorry-only proof, source and blueprint docstrings present, all 21 project imports exist live, no supersession. No compile (2026-10-21 rule); the worker reports clean scompile and dry run."
+ }
+}

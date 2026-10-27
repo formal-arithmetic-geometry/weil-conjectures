@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-space-graphs-open-in-hilbert",
+ "kind": "statement",
+ "title": "Graphs form an open subfunctor of the Hilbert functor for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with algebraic spaces and morphisms as in [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For morphisms of algebraic spaces, flatness and local finite presentation are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Finite presentation means local finite presentation, quasi-compactness and quasi-separatedness (the diagonal is quasi-compact); quasi-compact means that inverse images of quasi-compact opens are quasi-compact. A closed immersion of spaces is a representable morphism whose scheme base changes are closed immersions [def-weil-closed-immersion]. Separated means that the diagonal is a closed immersion. Proper means separated, of finite type and universally closed; finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying topological spaces after every algebraic-space base change [def-weil-finite-type-morphism, def-weil-proper-morphism]. Let $Z\\to B$ and $W\\to B$ be morphisms of algebraic spaces over $S$, with $Z\\to B$ proper, flat and of finite presentation and $W\\to B$ separated. Put $Z_T=Z\\times_BT$ and $W_T=W\\times_BT$ for a scheme $T\\to B$. Let $\\mathcal H(T)$ consist of closed subspaces $D\\subset Z_T\\times_TW_T$ proper, flat and of finite presentation over $T$, with inverse-image transition maps. The graphs $\\Gamma_f=(\\mathrm{id},f)$ define a natural injective transformation $\\gamma:(T\\mapsto\\operatorname{Hom}_T(Z_T,W_T))\\to\\mathcal H$. For every scheme $T\\to B$ and $D\\in\\mathcal H(T)$, there is an open subscheme $V_D\\subset T$ such that for every $T'\\to T$, the projection $D_{T'}\\to Z_{T'}$ is an isomorphism if and only if $T'\\to T$ factors through $V_D$. Under the injection $\\gamma_{T'}$, the family $D_{T'}$ belongs to the image exactly when this projection is an isomorphism; in that case the unique associated morphism is $\\operatorname{pr}_2|_{D_{T'}}\\circ(\\operatorname{pr}_1|_{D_{T'}})^{-1}$. Equivalently, $h_T\\times_{\\mathcal H}\\operatorname{Mor}_B(Z,W)\\simeq h_{V_D}$, where $h_T(T')=\\operatorname{Hom}_B(T',T)$ and $\\operatorname{Mor}_B(Z,W)(T')=\\operatorname{Hom}_{T'}(Z_{T'},W_{T'})$. Thus the image of $\\gamma$ is an open subfunctor of $\\mathcal H$: its inverse image on every scheme test is an open subscheme. No finite-presentation assumption is imposed on $W\\to B$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb and quot-lemma-Mor-into-Hilb-open, including the explicit first-projection isomorphism criterion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-space-relative-morphism-values",
+  "def-sfb-space-hilbert-family-values"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme $T\\to B$, [lem-sfb-space-flat-proper-fp-locality] gives that $Z_T\\to T$ is proper, flat and of finite presentation. By [lem-sfb-space-separated-fp-composition], $W_T\\to T$ is separated. The same permanence statement applies to every family $D\\to T$ in $\\mathcal H(T)$ after every $T'\\to T$. Thus their structural morphisms remain proper, flat and of finite presentation.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, proof: base-change paragraph."
+   }
+  },
+  {
+   "text": "Representable closed immersions remain closed immersions under algebraic-space base change: a scheme test of the new map is a scheme test of the old map, so the required represented scheme and its closed immersion are already supplied by the definition in the statement. For $f:Z_T\\to W_T$, the square with left map $(\\mathrm{id},f):Z_T\\to Z_T\\times_TW_T$, right map $\\Delta_{W_T/T}:W_T\\to W_T\\times_TW_T$, bottom map $(f\\operatorname{pr}_1,\\operatorname{pr}_2)$, and top map $f$ is cartesian: its pairs satisfy $f(z)=w$, so $z\\mapsto(z,f(z))$ is the inverse parametrization. The fibre-product universal property is [lem-trf-space-fibre-products-etale-covers]. Since $W_T\\to T$ is separated, its diagonal is a representable closed immersion. Hence the graph is closed. As a space over $T$ this closed family is $Z_T$, so Step 1 supplies all three Hilbert conditions. The same closed-immersion base-change argument and Step 1 show that the transition maps preserve $\\mathcal H$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, quot-lemma-Mor-into-Hilb, graph paragraph; explicit cartesian-square argument of spaces-morphisms-lemma-semi-diagonal."
+   }
+  },
+  {
+   "text": "The graph construction commutes with every base change. Indeed, after pulling back to $T'$ the graph map has projections $\\mathrm{id}_{Z_{T'}}$ and $f_{T'}$, so it equals $(\\mathrm{id},f_{T'})$ by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. Its represented closed subobject is therefore the graph of $f_{T'}$. For identity or composite base changes the same argument compares their two projections and gives the required equality. This proves naturality of $\\gamma$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, natural transformation; explicit fibre-product verification."
+   }
+  },
+  {
+   "text": "For a closed family $j:D\\hookrightarrow Z_T\\times_TW_T$, write $k=\\operatorname{pr}_1j$ and $l=\\operatorname{pr}_2j$. If $k$ is invertible, set $f=l k^{-1}$. Then $(\\mathrm{id},f)k$ has projections $k,l$, hence equals $j$ by [lem-trf-space-fibre-products-etale-covers]. The isomorphism $k$ identifies the closed subobject $D$ with the graph of $f$. Conversely the first projection of a graph has inverse its graph parametrization. Thus the image criterion is exactly that $k$ is invertible, and its inverse image is uniquely $l k^{-1}$. In particular equal graph subobjects recover equal morphisms, proving injectivity. This argument applies after every base change.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, recovery of a morphism from its graph."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-universal-isomorphism-open] to $A=D$, $C=Z_T$, base $T$ and $f=k$. Its hypotheses on $D\\to T$ hold because $D$ is a Hilbert family: finite presentation includes local finite presentation, and properness includes universal closedness. For $Z_T\\to T$, Step 1 gives properness, which includes separatedness, finite type (hence local finite type) and universal closedness (hence closedness for the identity base change). These meanings are exactly [def-sfb-space-morphism-properties]. All six hypotheses hold, without any finite-presentation condition on $W\\to B$. The lemma supplies an open subspace of $T$, represented by an open subscheme $V_D\\subseteq T$, and its universal condition gives $k_{T'}$ invertible exactly when $T'\\to T$ factors through $V_D$.",
+   "uses": [
+    "lem-sfb-space-universal-isomorphism-open",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1B, quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism (05XD)."
+   }
+  },
+  {
+   "text": "On a scheme $T'\\to B$, a point of $h_T\\times_{\\mathcal H}\\operatorname{Mor}_B(Z,W)$ is a pair $(h,f)$ with $h:T'\\to T$ and $\\Gamma_f=D_{T'}$. Step 4 says there is exactly one such $f$ if $k_{T'}$ is invertible and none otherwise. Step 5 identifies this condition with a factorization $h:T'\\to V_D\\hookrightarrow T$, which is unique because an open subscheme inclusion is a monomorphism [def-weil-open-immersion]. Thus the inverse bijections send $(h,f)$ to its factorization and send a factorization to $(h,l_{T'}k_{T'}^{-1})$. Pullback preserves inverse maps: pulling back $kk^{-1}=1$ and $k^{-1}k=1$ shows that the pulled-back inverse is the inverse of $k_{T'}$. Together with Step 3 this proves naturality of both bijections. Therefore the displayed pullback functor is $h_{V_D}$ over $h_T$, as claimed.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1B, final sentence: explicit functor pullback and natural bijections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-universal-isomorphism-open",
+  "def-sfb-space-morphism-properties",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A and 0D1B; explicit fibre-product and graph-recovery calculations fill in their functor identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The graph map from relative morphisms of algebraic spaces to the Hilbert functor is representable by open immersions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : S.OpenCover} [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀]\\n  [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] (d : AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰)\\n  {i j : 𝒰.I₀} (hij : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (d.functor.map h\", \"doc\": \"For any morphism $i \\to j$ in the zeroth component category $\\\\mathcal{U}_0$ of an open cover $\\\\mathcal{U}$, the corresponding morphism of schemes induced by the relative gluing data functor is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i : ι),\\n  AlgebraicGeometry.IsOpenImmersion (\", \"doc\": \"For each index $i$, the canonical morphism from the scheme $X_i$ to the glued scheme constructed from the gluing data is an open immersion. This asserts that the inclusion of each component scheme int\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y S X' Y' S' : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) (f' : X' ⟶ S') (g' : Y' ⟶ S') (i₁ : X ⟶ X')\\n  (i₂ : Y ⟶ Y') (i₃ : S ⟶ S') (e₁ : CategoryTheory.CategoryStruct.comp f i₃ = CategoryTheory.CategoryStruct.comp i₁ f')\\n  (e₂ : CategoryTheory.CategoryStruct.comp g i₃ = CategoryTheory.C\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j k : ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] {i j k : J}\\n  (x :\\n    ↥(CategoryTheory.Li\", \"doc\": \"Given a locally directed diagram of schemes where all morphisms are open immersions, for any pullback diagram involving the canonical open inclusions $V_{i,j}$ and $V_{i,k}$, there exists an index $l$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe scheme gluing, open immersions, or module Hom; none treats graph families of arbitrary algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs form an open subfunctor of the Hilbert functor for a proper flat finitely presented source and separated target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (i : I)\\n  (U : (D.obj i).Opens) (j : CategoryTheory.Over i),\\n  AlgebraicGeometry.IsOpenImmersion ((AlgebraicGeometry.opensDiagramι D i U).app j)\", \"doc\": \"For a diagram $D : I \\to \\text{Sch}$ of schemes indexed by a category $I$, and an open subset $U$ of $D(i)$, the natural transformation $\\\\iota$ associated to the open subset diagram functor has componen\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {J : Type u_1}\\n  [inst : CategoryTheory.Category.{v_1, u_1} J] (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left] {i j : J} (f : i ⟶ \", \"doc\": \"For any morphism $ f $ in the appropriate category, applying the composition of the forgetful functors (first forgetting the morphism property and then forgetting the over category structure) results \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : S.OpenCover} [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀]\\n  [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] (d : AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰)\\n  {i j : 𝒰.I₀} (hij : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (d.functor.map h\", \"doc\": \"For any morphism $i \\to j$ in the zeroth component category $\\\\mathcal{U}_0$ of an open cover $\\\\mathcal{U}$, the corresponding morphism of schemes induced by the relative gluing data functor is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i : ι),\\n  AlgebraicGeometry.IsOpenImmersion (\", \"doc\": \"For each index $i$, the canonical morphism from the scheme $X_i$ to the glued scheme constructed from the gluing data is an open immersion. This asserts that the inclusion of each component scheme int\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe scheme gluing, open immersions, or module Hom; none treats graph families of arbitrary algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"graph\", \"open\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe scheme gluing, open immersions, or module Hom; none treats graph families of arbitrary algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|graph.*[Hh]ilbert|[Hh]ilbert.*graph",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe scheme gluing, open immersions, or module Hom; none treats graph families of arbitrary algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Hom functor embeds as the open locus of graphs in the Hilbert functor of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M N : X.Modules) : Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensFunctor_map_homOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{U V : X.Opens} (e : U ≤ V) : (Scheme.Hom.opensFunctor f).map (homOfLE e) = homOfLE (f.image_mono e)\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, the induced functor on open subsets maps the inclusion morphism from $ U $ to $ V $ in $ X $ to the inclusion morphism from $ f(U) $ to $ f(V) $ in $ Y \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": X.Opens ⥤ Y.Opens\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, the functor maps each open subset $ U \\\\subseteq X $ to its image $ f(U) \\\\subseteq Y $, which is open because $ f $ is an open map. Morphisms between op\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpaceHom_val\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (toLocallyRingedSpaceHom Y f).toShHom = InducedCategory.homMk f\", \"doc\": \"Given an open immersion $ f : X \\to Y $ where $ Y $ is a locally ringed space, the morphism from the locally ringed space structure on $ X $ to $ Y $ constructed via the induced category equals the mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensFunctor.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f f_1 : X ⟶ Y) (e_f : f = f_1) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.Scheme.Hom.opensFunctor f = AlgebraicGeometry.Scheme.Hom.opensFunctor f_1\", \"doc\": \"If two open immersion morphisms $ f, f_1: X \\to Y $ between schemes are equal, then the functors they induce on the open subsets of $ X $ (mapping each open subset to its image in $ Y $) are also equal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_image_of_le\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens},\\n  U ≤ V → (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U ≤ (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj V\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq V $ are open subsets of $ X $, then the image of $ U $ under the functor induced by $ f $ satisfies $ f(U) \\\\subseteq f(V) $.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : LocallyRingedSpace} (f : X ⟶ Y) [H : LocallyRingedSpace.IsOpenImmersion f] : Opens X ⥤ Opens Y\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of locally ringed spaces, the functor maps each open subset $ U \\\\subseteq X $ to its image $ f(U) \\\\subseteq Y $, which is open because $ f $ is an open map. Morphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_top_eq_opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": f ''ᵁ ⊤ = f.opensRange\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, the image of the entire space $ X $ (represented by the top element $ \\\\top $) under the induced functor on open subsets coincides with the open subset \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe scheme gluing, open immersions, or module Hom; none treats graph families of arbitrary algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|graph.*Hilbert|Hilbert.*graph",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"graph\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative morphism functor of algebraic spaces is the open locus of graphs in the proper Hilbert functor",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.opensFunctor, AlgebraicGeometry.Scheme.restrictFunctor_obj_hom, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor, AlgebraicGeometry.Scheme.Hom.image_top_eq_opensRange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs of morphisms of algebraic spaces form an open subfunctor of the Hilbert functor when the source is proper flat finitely presented",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom, AlgebraicGeometry.Scheme.Hom.opensRange, AlgebraicGeometry.Scheme.Hom.image, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor, AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι, AlgebraicGeometry.Scheme.Hom.mem_opensRange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph map from relative Hom of algebraic spaces into Hilbert families is representable by open immersions",
+   "results": "8 hits; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor, AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι, AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.Scheme.IsLocallyDirected.t, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-map, descent, and isomorphism characterizations do not give the universal base isomorphism locus for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hom-representability",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor.",
+   "via": [
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-graphs-open-in-hilbert",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0D1A/0D1B and general-space 05XD, searched the project, DAG, blueprint and Mathlib. Reused space permanence nodes; created only the general-space universal-isomorphism locus, since the existing one is scheme-only. Expanded graph closedness, naturality, recovery and the representable-open functor pullback. Normalized inherited double TeX escapes; no mathematical statement change.",
+  "blueprint": "Inherited ancestor is null, confirmed by blueprint_refs ancestor; retained its via chain and precise de Jong / graph-Hilbert source place. Steps 1--4 realize 0D1A and the criterion in 0D1B; Steps 5--6 realize its use of 05XD and open representability. The latest blueprint direct-images step (3) remains the inherited route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-2a51fe6af",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-2a51fe6af (reviewer sub-agent of L); spot-checked: The item statement and blueprint block are byte-identical to live, the item is still unsplit on live/side-live, and there is no repair note. I read Stacks 0D1A/0D1B (quot.tex l.3140-3210): the 6 steps realize them faithfully, and W→B is only separated, as in the source. Step 1 cites the space flat/proper/fp and separated base-change nodes; I checked both statements give exactly what is used. Steps 2-4 are genuinely elementary from the fibre-product universal property: the graph square is cartesian (03KO), representable closed immersions are stable under base change by the inline definition, f = l k^{-1} recovers the morphism, and naturality holds. Step 5 applies the new node to p = D→T (lfp, flat, univ. closed) and q = Z_T→T (lft, closed, separated from proper), with f = k = pr1 and q∘k = p over T; all six hypotheses hold and nothing is needed on W. Step 6 obtains h_T ×_H Mor = h_{V_D} via the open-immersion monomorphism. The new node lem-sfb-space-universal-isomorphism-open is Tag 05XD (spaces-more-morphisms l.11792) verbatim, with all six hypotheses and arbitrary algebraic-space base change. It is self-contained and statement-only, with every notion cited (def-sfb-space-morphism-properties, def-a1-space-open-subspace). It is not a duplicate: the existing lem-sfb-universal-isomorphism-open and the 05XA/05XC nodes are scheme-only, and D and Z_T are spaces. I tested it on f = id, on A empty, and on Spec k→Spec k[ε] (U empty: bijective on points is not enough). The item is consistent for Z = W = B = Spec k, where H(T) is the clopen subschemes and V_D = D. Batch-5 flags: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, def-sfb-space-morphism-properties, def-a1-space-open-subspace and lem-sfb-space-flat-proper-fp-locality are general definitions or permanence facts about algebraic spaces, not the trace formula, Poincaré duality or steps of their proofs, so they are accepted as generic. The trf fibre-product node is an acceptable generic tool use. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceGraphsOpenInHilbert",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_graphs_open_in_hilbert",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.space_graphs_open_in_hilbert"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceGraphsOpenInHilbert.lean",
+  "statement": "theorem space_graphs_open_in_hilbert {S : Scheme.{u}} {Z W B : AlgebraicSpace S} (z : Z ⟶ B) (w : W ⟶ B) (hz_proper : MapIsProper z) (hz_flat : MapIsFlat z) (hz_lfp : MapIsLocallyOfFinitePresentation z) (hz_qc : MapIsQuasiCompact z.hom.hom) (hz_qs : MapIsQuasiCompact (pullback.diagonal z.hom.hom)) (hw_separated : MapIsSeparated w) : ∃ (M H : (SchemeTests B.obj.obj)ᵒᵖ ⥤ Type (u + 1)) (eM : ∀ T : SchemeTests B.obj.obj, M.obj (op T) ≃ RelativeMorphism z w T) (eH : ∀ T : SchemeTests B.obj.obj, H.obj (op T) ≃ SpaceHilbertFamily (relativeProductMap z w) T) (γ : M ⟶ H), (∀ (T' T : SchemeTests B.obj.obj) (h : T' ⟶ T) (f : M.obj (op T)), (eM T' (M.map h.op f)).val = relativeSpaceMap z h ≫ (eM T f).val) ∧ (∀ (T' T : SchemeTests B.obj.obj) (h : T' ⟶ T) (D : H.obj (op T)), ∃ d : (eH T' (H.map h.op D)).space ⟶ (eH T D).space, IsPullback d (eH T' (H.map h.op D)).inclusion (eH T D).inclusion (relativeSpaceMap (relativeProductMap z w) h)) ∧ (∀ (T : SchemeTests B.obj.obj) (f : M.obj (op T)), ∃ e : (eH T (γ.app (op T) f)).space ≅ relativeSpace z T, e.hom ≫ relativeSpaceGraph z w T (eM T f) = (eH T (γ.app (op T) f)).inclusion) ∧ (∀ T : SchemeTests B.obj.obj, Function.Injective (γ.app (op T))) ∧ (∀ (T : SchemeTests B.obj.obj) (D : H.obj (op T)), (∃ f : M.obj (op T), γ.app (op T) f = D) ↔ IsIso (eH T D).first) ∧ (∀ (T : SchemeTests B.obj.obj) (D : H.obj (op T)) (e : (eH T D).space ≅ relativeSpace z T), e.hom = (eH T D).first → ∃! f : M.obj (op T), γ.app (op T) f = D ∧ (eM T f).val = e.inv ≫ (eH T D).second) ∧ (∀ (T : SchemeTests B.obj.obj) (D : H.obj (op T)), ∃ (V : SchemeTests B.obj.obj) (j : V ⟶ T), IsOpenImmersion j.left.left ∧ (∀ (T' : SchemeTests B.obj.obj) (h : T' ⟶ T), IsIso (eH T' (H.map h.op D)).first ↔ ∃ a : T' ⟶ V, a ≫ j = h) ∧ ∃ β : uliftYoneda.{u + 1}.obj V ⟶ M, IsPullback β (uliftYoneda.{u + 1}.map j) γ (uliftYonedaEquiv.{u + 1}.symm D))",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The presheaves are specified, up to their natural equivalences, by exact relative-morphism and Hilbert-family values and the canonical precomposition / inverse-image transitions. The graph is fixed by an isomorphism over the ambient space. Includes injectivity, image iff first projection is invertible, unique inverse-projection recovery, universal open locus, and the presheaf pullback square. Type (u+1) accommodates closed subobjects; representables use uliftYoneda. No restriction on finite presentation of W."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5461388a6",
+  "group": "NI",
+  "result": "fix",
+  "note": "Lean matches node and Stacks 0D1A/0D1B clause by clause: Z->B MapIsProper/Flat/lfp+qc+qs; W->B only MapIsSeparated; Mor/Hilb values, transitions (precomposition, IsPullback inverse image) and graph (relativeSpaceGraph=(id,f)) pinned; injectivity, image iff IsIso first, unique pr2∘pr1^-1 recovery, open V (IsOpenImmersion j.left.left) with universal criterion, uliftYoneda IsPullback; universes u/u+1 fine; edge cases ok; no hollow defs, docstrings, verbatim statements, lines<=100. FIX: new node def-sfb-space-relative-morphism-values cited theorem lem-trf-space-enlarged-etale-ringed-site-model for enlargedFibreProduct/schemeSpace -> fixes/def-sfb-space-relative-morphism-values.json swaps to landed owners def-trf-scheme-algebraic-space + def-sfb-space-sheaf-fibre-product (TeX cites updated); no Lean change. Advisory: MapIsQuasiCompact/SchemeTests owners only transitively cited; parallel unlanded N8 hilbertFamilies / Q09 homTestFiber duplicate these notions in theorem modules; second reading is an author rereading."
+ }
+}

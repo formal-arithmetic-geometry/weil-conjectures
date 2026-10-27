@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-integral-canonical-realization-square",
+ "kind": "lemma",
+ "title": "Realization intertwining for canonical expression pairs",
+ "statement": "Fix a finite field datum D, a prime l different from its characteristic, a finite extension E of Q_l, system operations o and ambient models a. Suppose the natural comparison family c on finite geometric expressions obeys RecursionLaws. For geometric expressions e,t on the same finite input family, an input K in the full domain of both expressions, and an actual CanonicalPair (s,r) of a system arrow and its independently prescribed completed integral arrow, the whole-system realization satisfies L(s) followed by c_t = c_e followed by r. This asserts only intertwining of the two prescribed arrows; it makes no finite scalar projection or completion-invertibility assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons and inherited equations, expanded strict-system realization argument."
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply integralBasicGeneratorSquare for CanonicalPair.basic, with its prescribed inverse completion transport. This case alone is left to the smaller basic-generator node.",
+   "uses": [
+    "lem-sf-integral-basic-generator-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the CanonicalPair derivation. Identity uses the functor identity law and proof irrelevance. Composition rewrites the two induction hypotheses, retaining the explicitly supplied intermediate geometric and admissible domain. Push uses naturality of the fixed proper comparison. Pull cancels the image of the actual normalized counit, rewrites the two pull recursion equations, and applies the pullback model naturality and the child square. Tensor repeats that cancellation in the product category and applies both child squares before the completed tensor functor.",
+   "uses": [
+    "lem-sf-integral-expression-recursion",
+    "lem-pod-unrestricted-normalized-reconstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For shriek rewrite the two shriek recursion equations, use integralOpenRealizationNaturality on the child system map, and apply the child square through ringedOpen. For compactSupport rewrite supportRecursion and perform that same open step followed by naturality of the proper comparison. Child geometric and Good conditions are projections of the recursive domains. No coefficient evaluation faithfulness is used.",
+   "uses": [
+    "lem-sf-integral-open-realization-naturality",
+    "lem-sf-integral-expression-recursion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-basic-generator-square",
+  "lem-sf-integral-expression-recursion",
+  "lem-pod-unrestricted-normalized-reconstruction",
+  "lem-sf-integral-open-realization-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Repair D1: actual CanonicalPair induction, with separate basic-generator and open-naturality steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Recursive realizations of finite geometric expressions intertwine canonical generator and context morphisms under derived reduction limit adjunction",
+   "results": "sSetTopAdj and generic Adjunction.rec; no strict-system expression theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use project primitives and adjunction naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_naturality_right_square_iff\"",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff in Mathlib.CategoryTheory.Adjunction.Basic; a general transpose-square equivalence.",
+   "date": "2026-10-26",
+   "verdict": "Provides formal mate calculus, not the normalized geometric generator comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*expression|compactSupport.*projection|support.*counit in Mathlib/CategoryTheory/Adjunction and Mathlib/AlgebraicGeometry",
+   "results": "No matches. Basic.lean contains counit naturality and homEquiv_naturality_right_square_iff; no coefficient-system constructions.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExpressionCoefficientSquares",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence, canonical generators and finite outer contexts.",
+   "via": [
+    "lem-sf-integral-expression-coefficient-squares",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralCanonicalRealizationSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralCanonicalRealizationSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralCanonicalRealizationSquare",
+  "statement": "theorem integralCanonicalRealizationSquare (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (o : Operations l E) (a : AmbientModels l E o)\n    (comparison : ExpressionRecursion.Comparisons l E D o)\n    (laws : RecursionLaws l E D o a comparison)\n    {I : Type u} [Finite I]\n    {X : I → Over (Spec (CommRingCat.of D.k))}\n    {W : Over (Spec (CommRingCat.of D.k))}\n    (e t : Expression _ I X W) (ge : e.geometric) (gt : t.geometric)\n    (K : (e.domain l E o).FullSubcategory) (ht : t.domain l E o K.obj)\n    (s : e.systemObj l E o ((inputReduction l E X).obj K.obj) ⟶\n      t.systemObj l E o ((inputReduction l E X).obj K.obj))\n    (r : (e.evaluate (integralInterpretation l E)).obj K.obj ⟶\n      (t.evaluate (integralInterpretation l E)).obj K.obj)\n    (h : CanonicalPair l E o a.compositors a.openComparisons a.canonicalBridge a.properOpen\n      a.ringedModels a.ringedOpenComparisons a.ringedProperOpen\n      ((inputReduction l E X).obj K.obj) K.obj e t s r) :\n    (coefficientSequenceLimit l E W.left).map s ≫\n      (comparison t gt).hom.app ⟨K.obj, ht⟩ =\n    (comparison e ge).hom.app K ≫ r",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201551-L-3394761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201551-L-3394761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

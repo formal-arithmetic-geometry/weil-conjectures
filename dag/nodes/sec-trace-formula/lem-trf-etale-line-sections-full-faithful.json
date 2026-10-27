@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-etale-line-sections-full-faithful",
+ "kind": "statement",
+ "title": "Full faithfulness in canonical tensor-section coordinates",
+ "statement": "Let X be a scheme and A a functor from its ordinary invertible modules to its etale line modules [def-trf-scheme-etale-line-comparison-data]. Suppose additive-sheaf isomorphisms alpha_L identify A(L) with the canonical tensor-section sheaf, respecting scalar multiplication, and identify A(h) with the global sections of every tensor-pulled module map. Then A is full and faithful, for all module morphisms.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
+ },
+ "stmt_deps": [
+  "def-trf-scheme-etale-line-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Invertible modules are quasi-coherent. Apply [lem-trf-etale-extension-free-presentations-hom]. Compose alpha with the inverse of its scalar-linear tensor-section comparison to obtain objectwise module-sheaf isomorphisms from A(L) to extension(L). The two morphism formulas imply naturality of these isomorphisms. Conjugation identifies the Hom map of A with the bijective Hom map of extension. Lift preimages through the full subcategory and cancel the conjugating isomorphisms for injectivity.",
+   "uses": [
+    "lem-trf-etale-extension-free-presentations-hom",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-extension-free-presentations-hom",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), full faithfulness and descent proof, specialized to local rank-one frames; Tag 05VG finite local freeness; Tag 03LC (1). Frame computations and gluing details are expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "A functor is an equivalence if it is full faithful and essentially surjective",
+   "results": [
+    "CategoryTheory.Functor.IsEquivalence.mk",
+    "CategoryTheory.Functor.asEquivalence"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Mathlib supplies the categorical assembly; the specified tensor-section comparisons are project-specific."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Functor.asEquivalence",
+   "results": [
+    "CategoryTheory.Functor.asEquivalence",
+    "CategoryTheory.Functor.asEquivalence_functor"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Retains exactly the original functor in the resulting equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_comp_of_isSheaf; etaleExtension_free_presentations_hom; etale_line_frame_transition_units; etale_framed_line_effective_gluing",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+    "Sheaf/AlgebraicGeometry/EtaleExtensionFreePresentationsHom.lean",
+    "Sheaf/AlgebraicGeometry/EtaleLineFrameTransitionUnits.lean",
+    "Sheaf/AlgebraicGeometry/EtaleFramedLineEffectiveGluing.lean"
+   ],
+   "date": "2026-10-26",
+   "verdict": "The existing lemmas give the mathematical inputs; linear conjugation and frame transport supply the glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TraceFormula.SchemeEtaleInvertibleComparison",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Full faithfulness in canonical tensor-section coordinates in the rank-one comparison used for polarized scheme descent",
+   "via": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TraceFormula.EtaleLineSectionsFullFaithful",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/EtaleLineSectionsFullFaithful.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_line_sections_fullFaithful",
+  "statement": "theorem etale_line_sections_fullFaithful {X : Scheme.{u}} (A : TrfInvertibleModules X ⥤ TrfEtaleLineModules X) (α : ∀ L : TrfInvertibleModules X, trfLineSections (A.obj L) ≅ trfInvertibleSections L) (hscalar : ∀ (L : TrfInvertibleModules X) (U : X.Etale) (r : Γ(U.left, ⊤)) (s : (A.obj L).obj.val.obj (op U)), (α L).hom.hom.app (op U) (r • s) = (((Modules.tensorPullback U.hom).obj L.obj).smul r).hom ((α L).hom.hom.app (op U) s)) (hmap : ∀ (L K : TrfInvertibleModules X) (h : L.obj ⟶ K.obj) (U : X.Etale) (s : (A.obj L).obj.val.obj (op U)), (α K).hom.hom.app (op U) ((trfComparisonMap A h).val.app (op U) s) = ((Modules.tensorPullback U.hom).map h).app ⊤ ((α L).hom.hom.app (op U) s)) : A.Full ∧ A.Faithful",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9daea",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T082814-L-2225263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9daea",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T082814-L-2225263",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement + lean.statement vs clone (unchanged); moved defs vs original (verbatim, public re-export); FF/EssSurj Lean vs new nodes; adapted NormalizedComparisons (1 import line, cycle-forced) vs clone; §3b 7 importers OK"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "def-sf-adic-realization-isomorphism-data",
+ "kind": "definition",
+ "title": "Normalized family data for adic realization isomorphisms",
+ "status": "split",
+ "statement": "Package the definitions `GeometricSpace`, `SpaceData`, `integralRealizationAgreement`, `FamilyCore`, and `Family` from the normalized adic realization construction.  A geometric space is a separated, quasi-compact, finite-type scheme over the fixed geometric point.  SpaceData contains the native realization, its section-module equivalence, exactness, essential image, tensor and finite-normalization data, and Hom laws.  FamilyCore contains this data for every space, ring and integral reindexing data for every scheme isomorphism, module identity and composition, common-stage comparison and source identity, tensor reindexing, and the specified unit.  Family adds pointwise module identity and composition normalization, integral realization agreement on every finite stage, source identity, identity and composition equations, tensor and coefficient-unit compatibility, and the evaluation-transpose Hom compatibility.  These are definition packages, with no existence assertion, and use the fixed coefficient and reindexing notions of [def-sf-native-adic-realization-data], [def-sf-native-adic-finite-normalization], [def-sf-native-adic-reindexing-data], [def-sf-native-adic-tensor-reindexing], and [def-weil-finite-field-fiber].",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-native-adic-realization-data",
+  "def-sf-native-adic-finite-normalization",
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.8 and Remark 6.8.15; HRS Lemma 7.9; normalized comparison package in the published adic realization module."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized family of adic constructible realization functors compatible with arbitrary scheme isomorphism pullback and tensor internal Hom identity composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackId, pullbackComp, Hom.normalizationDiagram, Hom.toNormalization_normalizationDesc, SheafOfModules.pullbackIso, Hom.ι_toNormalization_assoc, Modules.instAdditivePullback, Modules.pseudofunctor.",
+   "date": "2026-10-24",
+   "verdict": "No normalized native-coefficient realization family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of native adic realization data with normalized scheme isomorphism reindexing comparisons for tensor evaluation scalar extension identity and composition",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_eval_apply, AdicCompletion, tensor_map_id_left_eq_map, coe_ofTensorProductEquivOfFiniteNoetherian, ofTensorProduct_tmul, ofTensorProductEquivOfFiniteNoetherian_symm_of, ofTensorProduct_naturality, ofTensorProductEquivOfFiniteNoetherian_apply.",
+   "date": "2026-10-24",
+   "verdict": "No realization family package."
+  },
+  {
+   "tool": "grep",
+   "query": "RingReindex|IntegralReindex|integralRealizationAgreement|FamilyCore",
+   "results": "msearch Mathlib: 0 hits. Direct project rg finds the native reindexing definitions and the exact FamilyCore, Family and integralRealizationAgreement in Sheaf/Paper/AdicQbarConstructibleRealization.lean. DAG rg and blueprint_refs search identify no standalone definition node for Family. Upstream WeilConjectures has no item-id match.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact published project definitions, giving their package an acyclic definition-node interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-realization-isomorphism-normalization",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The normalized comparison package needed by the arbitrary-scheme-isomorphism clause of the adic realization obligation.",
+   "via": [
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.AdicRealizationFamilyData",
+  "declaration": "WeilConjectures.AdicQbarRealization.Family",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.GeometricSpace",
+   "WeilConjectures.AdicQbarRealization.SpaceData",
+   "WeilConjectures.AdicQbarRealization.integralRealizationAgreement",
+   "WeilConjectures.AdicQbarRealization.FamilyCore",
+   "WeilConjectures.AdicQbarRealization.Family"
+  ],
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The five existing definitions are moved unchanged from AdicQbarConstructibleRealization to their own acyclic definition interface. The original module publicly reexports them; normalization imports this owner directly, so the existence theorem can use its stated normalization dependency without an import cycle.",
+  "statement": "structure Family (D : FiniteFieldDatum.{u}) extends FamilyCore l D",
+  "file": "lean/Sheaf/Paper/AdicRealizationFamilyData.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c09854ea",
+  "group": "Q119",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c09854ea",
+  "group": "Q119",
+  "result": "fix",
+  "note": "H3 fixed: the conclusion ∃ F : Family with (F.data T).realization = R T and tensor ≍ A T also asserted SpaceData.presentation (sectionFunctor IsEquivalence, a real theorem not in Realization or the deps) and HomLaws for the given R/A, which the node neither states nor proves. Added hypotheses P (presentation) and H (HomLaws); exactness, full faithfulness and essential image follow from R+P. No stmt_deps change. fixes/AdicRealizationIsomorphismNormalization.lean + lem-sf-adic-realization-isomorphism-normalization.lean-record.json (statement verbatim); nt_compile --json clean in 2.6 s, control compile errors as expected. Otherwise clause-by-clause correct: comparison pinned by integralRealizationAgreement (specified completion map inverse, balanced reindexing), tensor/unit/Hom (permitted pairs), identity (sourceId_unit)/composition, arbitrary non-k-linear g, edge cases and universes fine; both new existing:true def nodes well-formed and acyclic. M1 maintainer note: the item imports the parent module AdicQbarConstructibleRealization (parent lem-sf-adic-qbar-constructible-realization proof_deps contain the item) through existing:true def-sf-adic-realization-isomorphism-data, a stage-3 import cycle the group cannot fix (parent outside closure); move the five package defs into a def-node-owned module. Advisories: the final mixed-square clause is comparison naturality (content carried by integral_normalization); Second-reading section uses dispatcher wording (H11 advisory); def-sf-native-adic-* owners reached only via the new def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-31dd2",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261025T013854-L-4029309",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature + moved Family defs (verbatim) vs clone and change record; node proof/proof_deps vs Lean proof; delivered modules + 5 of 7 direct importers compiled in sandbox"
+ }
+}

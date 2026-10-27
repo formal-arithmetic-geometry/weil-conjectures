@@ -1,0 +1,123 @@
+{
+ "id": "lem-zl-source-fibre-differential-sections",
+ "kind": "statement",
+ "title": "Sections of pulled-back differentials over a fixed source point",
+ "statement": "Let k be a field, f:Y -> Spec k smooth, and c:B -> Spec k any scheme morphism [def-pc-scheme, def-pc-fibre-product]. Let U be an open of Y, z a point of U, K=kappa_U(z), and T any scheme. Suppose h:T -> Spec K and g:T -> B times_k Y satisfy g composed with the source projection = h composed with Spec K -> U -> Y [def-pc-scheme-fibre]. Let A=Gamma(T,O_T) and alpha:K -> A be the global-section map of h. Write p:B times_k Y -> B and use ordinary tensor module pullback [def-pc-module-pullback]. There is an injective A-linear map D:A tensor_K bertiniCotangentFibre(f,U,z) -> Gamma(T,g^*Omega_p) [def-sc-relative-differential-sheaf, lem-zl-bertini-local-first-jets]. For every source open W containing U.ι(z), every a in Gamma(Y,W), every b in A, and every proof that g maps T into V=pr_Y^{-1}(W), D sends b tensor the differential component of the local first jet of a to b times the restriction to T of g^*(d(pr_Y^*a)). No section family, invertible sheaf, universal equation, or singular-locus hypothesis is present.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "lemma-base-change-differentials (Tag 01V0), lemma-smooth-omega-finite-locally-free (Tag 02G1); sheaves.tex, pullback stalks (Tag 0098)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-sc-relative-differential-sheaf",
+  "lem-zl-bertini-local-first-jets"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a source-fibre differential map with the displayed pure-tensor formula from the comparison theorem, then apply the separate injectivity theorem.",
+   "uses": [
+    "lem-zl-source-fibre-differential-formula",
+    "lem-zl-source-fibre-differential-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-source-fibre-differential-formula",
+  "lem-zl-source-fibre-differential-injective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "T3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Differential base-change comparison and injectivity decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of a finite locally free differential sheaf along a morphism factoring through a residue field point has global sections equal to the tensor product of the section ring and the cotangent fibre",
+   "results": "Scheme.Pullback.ofPointTensor; Scheme.Pullback.Triplet tensor residue-field projections.",
+   "date": "2026-10-26",
+   "verdict": "These describe residue-field tensor products of points, not differential module sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.rid",
+   "results": "TensorProduct.AlgebraTensorModule.rid and rid_tmul, with scalar-extension variants.",
+   "date": "2026-10-26",
+   "verdict": "The scalar tensor cancellation is available; it supplies no scheme differential comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentialsStalkFibre|exists_tensorPullback_stalk_iso",
+   "results": "msearch grep returned zero hits; local rg found ConormalSequenceSmoothImmersion and Modules.TensorPullbackStalk.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing cotangent fibre and stalk comparison; no existing theorem asserts their global-sections comparison after arbitrary h."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniFibreJetComparison",
+  "date": "2026-10-26",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0FD6 universal first-jet calculation: differential base change and constant cotangent-fibre sections; steps 2 and the differential part of step 3 of lem-zl-bertini-fibre-jet-comparison",
+   "via": [
+    "lem-zl-bertini-fibre-jet-comparison",
+    "lem-zl-bertini-singular-fibre-jet-tensor",
+    "lem-zl-bertini-singular-fibre-polynomial-equations",
+    "lem-zl-bertini-singular-fibre-equations",
+    "lem-zl-bertini-singular-first-order-model",
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceFibreDifferentialSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceFibreDifferentialSections.lean",
+  "declaration": "AlgebraicGeometry.exists_source_fibre_differential_sections",
+  "declarations": [
+   "AlgebraicGeometry.exists_source_fibre_differential_sections"
+  ],
+  "statement": "theorem exists_source_fibre_differential_sections\n    {k : Type u} [Field k] {Y B T : Scheme.{u}}\n    (f : Y ⟶ Spec (.of k)) [Smooth f] (c : B ⟶ Spec (.of k))\n    (U : Y.Opens) (z : U)\n    (h : T ⟶ Spec ((U : Scheme).residueField z)) (g : T ⟶ pullback c f)\n    (hg : g ≫ pullback.snd c f = h ≫ (U : Scheme).fromSpecResidueField z ≫ U.ι)\n    (α : (U : Scheme).residueField z →+* Γ(T, ⊤))\n    (hα : α = ((Scheme.ΓSpecIso ((U : Scheme).residueField z)).inv ≫ h.appTop).hom) :\n    let K := (U : Scheme).residueField z\n    let A := Γ(T, ⊤)\n    letI : Algebra K A := α.toAlgebra\n    ∃ D : (A ⊗[K] bertiniCotangentFibre f U z) →ₗ[A]\n        Γ((Scheme.Modules.tensorPullback g).obj (pullback.fst c f).relativeDifferentials, ⊤),\n      Function.Injective D ∧\n      ∀ (W : Y.Opens) (hz : U.ι z ∈ W)\n        (hV : (⊤ : T.Opens) ≤ g ⁻¹ᵁ ((pullback.snd c f) ⁻¹ᵁ W))\n        (a : Γ(Y, W)) (b : A),\n        D (b ⊗ₜ[K] (bertiniLocalFirstJet f U z W hz a).2) =\n          b • ((Scheme.Modules.tensorPullback g).obj\n            (pullback.fst c f).relativeDifferentials).presheaf.map (homOfLE hV).op\n              (Scheme.Modules.tensorPullbackSection g (pullback.fst c f).relativeDifferentials\n                ((pullback.snd c f) ⁻¹ᵁ W)\n                ((pullback.fst c f).relativeDifferentialsDerivation.d\n                  (X := Opposite.op ((pullback.snd c f) ⁻¹ᵁ W))\n                  ((pullback.snd c f).app W a)))",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261026T130519-L-3470586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T152717-L-1151112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

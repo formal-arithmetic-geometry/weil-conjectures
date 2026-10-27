@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-finite-field-product-tensor-detection",
+ "kind": "statement",
+ "title": "Tensor detection through a finite field-product embedding",
+ "statement": "Let $k$ be a field [def-weil-field] [def-pc-field-extension], let $A,B$ be commutative $k$-algebras, let $I$ be a finite set, and let $(K_i)_{i\\in I}$ be extension fields of $k$. Put $P=\\prod_{i\\in I}K_i$ with coordinatewise operations, and let $j:B\\to P$ be an injective unital $k$-algebra homomorphism. Use tensor products [def-weil-pbc-module-tensor-product] with multiplication $(x\\otimes a)(y\\otimes b)=xy\\otimes ab$ and unit $1\\otimes1$. Then the canonical map $\\Phi:P\\otimes_kA\\to\\prod_{i\\in I}(K_i\\otimes_kA)$, $(x_i)_i\\otimes a\\mapsto(x_i\\otimes a)_i$, is a unital $k$-algebra isomorphism, and the map $\\Theta:B\\otimes_kA\\to\\prod_{i\\in I}(K_i\\otimes_kA)$, $b\\otimes a\\mapsto(j(b)_i\\otimes a)_i$, is injective. If $A\\otimes_kK_i$ is reduced for every $i\\in I$, then $B\\otimes_kA$ is reduced. Reduced means that the only nilpotent element is zero. The set $I$ may be empty, with empty product the zero ring; neither $A$ nor $B$ is assumed nonzero or finitely generated.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, last two sentences: passage through a finite product of fields and reducedness after tensoring."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For each $i$, let $p_i:P\\to K_i$ be projection and let $s_i:K_i\\to P$ insert an element in coordinate $i$ and zero elsewhere; these are $k$-linear, and $s_i$ need not preserve the ring unit. Enumerate the finite set $I$ as $i_1,\\dots,i_t$ with $t=|I|\\ge0$ and apply [lem-weil-pbc-tensor-finite-product] with $R=k$, $P_m=K_{i_m}$ for $1\\le m\\le t$, and $N=A$: there is a unique $k$-linear map $\\Phi:P\\otimes_kA\\to\\prod_{i\\in I}(K_i\\otimes_kA)$ with $(x_i)_i\\otimes a\\mapsto(x_i\\otimes a)_i$, i.e. with $i$-coordinate $p_i\\otimes1_A$, and it is an isomorphism of $k$-modules. Explicitly, its inverse is $\\Psi((z_i)_i)=\\sum_{i\\in I}(s_i\\otimes1_A)(z_i)$ [def-weil-pbc-module-tensor-product]: on pure tensors $p_js_i=\\delta_{ij}$ gives $\\Phi\\Psi=1$ and $\\sum_is_ip_i=1_P$ gives $\\Psi\\Phi=1$. For $I=\\varnothing$ the leaf's case $t=0$ applies: $P=0$ and $P\\otimes_kA=0$.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, last two sentences, expanded finite-product tensor argument; tensor universal property in Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "The linear isomorphism $\\Phi$ preserves multiplication: for pure tensors $x\\otimes a,y\\otimes b$, its $i$-coordinate on their product is $x_iy_i\\otimes ab=(x_i\\otimes a)(y_i\\otimes b)$. Bilinearity of multiplication and generation by pure tensors [def-weil-pbc-module-tensor-product] extend the equality to all elements. Its value on $1_P\\otimes1_A$ is $(1_{K_i}\\otimes1_A)_i$, the target unit. Thus it is a unital $k$-algebra isomorphism, including the empty-product case. Likewise the tensor-induced map $j\\otimes1_A$ is multiplicative and unital: on pure tensors the calculation is $j(bb')\\otimes aa'=j(b)j(b')\\otimes aa'$, and the unit maps to $j(1_B)\\otimes1_A=1_P\\otimes1_A$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, last two sentences, expanded finite-product tensor argument; tensor universal property in Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "The $k$-module $A$ is flat by [lem-weil-pbc-module-over-field-flat]. Apply [lem-weil-pbc-flat-tensor-exact] to the exact sequence $0\\to B\\xrightarrow{j}P\\to P/j(B)$ of $k$-modules; the quotient here is a module quotient, not a quotient algebra. It follows that $j\\otimes1_A:B\\otimes_kA\\to P\\otimes_kA$ is injective. Its composite with the isomorphism $\\Phi$ is injective and on $b\\otimes a$ has coordinates $j(b)_i\\otimes a$. This composite is exactly $\\Theta$. No finiteness condition on the vector spaces is used.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, last two sentences, expanded finite-product tensor argument; tensor universal property in Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "Assume each $A\\otimes_kK_i$ is reduced. The swap $\\tau_i:K_i\\otimes_kA\\to A\\otimes_kK_i$ of [lem-weil-pbc-module-tensor-comm] sends $t\\otimes a$ to $a\\otimes t$. It is a ring isomorphism: the product formula gives $\\tau_i((t\\otimes a)(u\\otimes b))=ab\\otimes tu=(a\\otimes t)(b\\otimes u)$, extended by bilinearity, and it preserves $1\\otimes1$. By step 2, $\\Theta=\\Phi\\circ(j\\otimes1_A)$ (step 3) is multiplicative. If $z\\in B\\otimes_kA$ satisfies $z^n=0$ for some $n\\ge1$, then $\\Theta(z)^n=\\Theta(z^n)=0$, so $\\tau_i(\\Theta(z)_i)^n=0$ for every $i$. Reducedness of $A\\otimes_kK_i$ implies $\\tau_i(\\Theta(z)_i)=0$, so each $\\Theta(z)_i=0$. Thus $\\Theta(z)=0$ and its injectivity gives $z=0$. For $I=\\varnothing$, the coordinate conclusion is vacuous and equality in the singleton empty product still gives $\\Theta(z)=0$; for zero $A$ or $B$ the same calculation applies.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-comm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, last two sentences, expanded finite-product tensor argument; tensor universal property in Tag 00CX (lemma-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-module-tensor-comm",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, last two sentences, expanded finite-product tensor argument; tensor universal property in Tag 00CX (lemma-tensor-product)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsReduced.*tensor|tensor.*[Ii]sReduced|piRight|piLeft",
+   "results": "{\"t\": \"2026-10-22T05:59:00Z\", \"tool\": \"grep\", \"query\": \"IsReduced.*tensor|tensor.*[Ii]sReduced|piRight|piLeft\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangePi.lean\", \"Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\"], \"digest\": \"0bbcd25f90b0c13c\"} Read GeometricallyReduced.lean: the instance only treats algebraic extensions; Flat/Basic.lean:642 is the finite-subalgebra criterion; TensorProduct/Pi.lean:54 gives only the product isomorphism, not injectivity of Theta and reducedness descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reducedness of a tensor product descends along an injection into a finite product of fields whose scalar extensions are reduced",
+   "results": "{\"t\": \"2026-10-22T05:59:01Z\", \"tool\": \"leansearch\", \"query\": \"Reducedness of a tensor product descends along an injection into a finite product of fields whose scalar extensions are reduced\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read GeometricallyReduced.lean: the instance only treats algebraic extensions; Flat/Basic.lean:642 is the finite-subalgebra criterion; TensorProduct/Pi.lean:54 gives only the product isomorphism, not injectivity of Theta and reducedness descent.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a k algebra B injects into a finite product of fields Ki and each Ki tensor k A is reduced then B tensor k A is reduced",
+   "results": "{\"t\": \"2026-10-22T05:59:10Z\", \"tool\": \"leanfinder\", \"query\": \"If a k algebra B injects into a finite product of fields Ki and each Ki tensor k A is reduced then B tensor k A is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_injective\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\"], \"digest\": \"d1b47d650bd72a03\"} Read GeometricallyReduced.lean: the instance only treats algebraic extensions; Flat/Basic.lean:642 is the finite-subalgebra criterion; TensorProduct/Pi.lean:54 gives only the product isomorphism, not injectivity of Theta and reducedness descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an embedding into finitely many field extensions preserves injectivity and detects nilpotents coordinatewise",
+   "results": "{\"t\": \"2026-10-22T05:59:34Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring an embedding into finitely many field extensions preserves injectivity and detects nilpotents coordinatewise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\", \"IntermediateField.LinearDisjoint.isDomain\", \"IntermediateField.LinearDisjoint.isDomain'\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"IntermediateField.LinearDisjoint.of_isField\", \"Subalgebra.LinearDisjoint.of_isField'\"], \"digest\": \"5e0d1754dd2b57bc\"} Read GeometricallyReduced.lean: the instance only treats algebraic extensions; Flat/Basic.lean:642 is the finite-subalgebra criterion; TensorProduct/Pi.lean:54 gives only the product isomorphism, not injectivity of Theta and reducedness descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsReduced",
+   "results": "{\"t\": \"2026-10-22T05:59:34Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_field_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"6aedc5d1084cedbf\"} Read GeometricallyReduced.lean: the instance only treats algebraic extensions; Flat/Basic.lean:642 is the finite-subalgebra criterion; TensorProduct/Pi.lean:54 gives only the product isomorphism, not injectivity of Theta and reducedness descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T05:59:54Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.curry_injective\", \"LinearMap.lTensor_inj_iff_rTensor_inj\", \"TensorProduct.AlgebraTensorModule.curry_injective\", \"LinearMap.liftBaseChange_injective_iff\", \"TensorProduct.sum_tmul_basis_left_injective\", \"TensorProduct.sum_tmul_basis_right_injective\", \"Algebra.TensorProduct.mk_one_injective_of_isScalarTower\", \"Algebra.IsEpi.injective_lift_mul\"], \"digest\": \"75fbffbf35a5f865\"} Read GeometricallyReduced.lean: the instance only treats algebraic extensions; Flat/Basic.lean:642 is the finite-subalgebra criterion; TensorProduct/Pi.lean:54 gives only the product isomorphism, not injectivity of Theta and reducedness descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective algebra homomorphism into a finite product of fields remains injective after tensoring over a field and detects reducedness",
+   "results": "{\"t\": \"2026-10-23T04:18:38Z\", \"tool\": \"leanfinder\", \"query\": \"An injective algebra homomorphism into a finite product of fields remains injective after tensoring over a field and detects reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\"], \"digest\": \"10ffa70930c98546\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsReduced",
+   "results": "{\"t\": \"2026-10-23T04:18:39Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_field_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"6aedc5d1084cedbf\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced.*tensor|tensor.*[Ii]sReduced|piRight",
+   "results": "{\"t\": \"2026-10-23T04:18:39Z\", \"tool\": \"grep\", \"query\": \"IsReduced.*tensor|tensor.*[Ii]sReduced|piRight\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/TotallySplit.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/TensorProduct/IsBaseChangePi.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\"], \"digest\": \"867117b45daed32b\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring an injection into a finite product of field extensions detects reducedness",
+   "results": "{\"t\": \"2026-10-23T04:18:40Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring an injection into a finite product of field extensions detects reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced.casesOn\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"TensorProduct.map_injective_of_flat_flat_of_isDomain\"], \"digest\": \"080c3ebb3dcdb59b\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products commute with tensor products of algebras and an embedding into reduced algebras implies reducedness",
+   "results": "{\"t\": \"2026-10-23T04:25:57Z\", \"tool\": \"leanfinder\", \"query\": \"Finite products commute with tensor products of algebras and an embedding into reduced algebras implies reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"dd70eeca7a18a73b\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.piRight",
+   "results": "{\"t\": \"2026-10-23T04:25:58Z\", \"tool\": \"loogle\", \"query\": \"Algebra.TensorProduct.piRight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.piRight\", \"Algebra.TensorProduct.piRight_tmul\"], \"digest\": \"014fc34ed058c9a2\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def piRight|piRight_tmul",
+   "results": "{\"t\": \"2026-10-23T04:25:58Z\", \"tool\": \"grep\", \"query\": \"def piRight|piRight_tmul\", \"sub\": \"RingTheory/TensorProduct\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/TensorProduct/Pi.lean\", \"Mathlib/RingTheory/TensorProduct/Pi.lean\", \"Mathlib/RingTheory/TensorProduct/Pi.lean\"], \"digest\": \"ea75806e92a4f3f4\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:49-102 and Flat/Basic.lean:642-660; these have different hypotheses/conclusions. Read TensorProduct/Pi.lean:25-60: Algebra.TensorProduct.piRight gives only the product-isomorphism clause (with tensor swaps), not the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-reduced-base-change",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the separable-scalar-restriction ingredient in the ancestor proof, namely the passage to a finite separable constants extension; in its separable-constants chain, Tag 034N finite-field-product tensor detection",
+   "via": [
+    "lem-trf-geometrically-reduced-base-change",
+    "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "lem-trf-geometrically-integral-curve-factorization",
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-field-product-tensor-detection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the implicit finite-product reduction in Stacks 034N using an explicit finite-sum inverse, product/unit calculations, the existing field-flatness and flat-tensor-exactness leaves, and a coordinatewise nilpotent calculation after tensor symmetry. No new nodes: the additional calculations are elementary from the cited universal property. Checked empty index and zero algebras.",
+  "blueprint": "The finite-field-product tensor-detection ingredient of the separable-constants chain beneath lem-trf-local-term-locality, via lem-trf-geometrically-reduced-base-change; realizes its source Tag 034N last two proof sentences. The current blueprint ancestor itself states local-term locality, not this algebra lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-28918c80e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-28918c80e (reviewer sub-agent of L); spot-checked: Q53 lem-trf-finite-field-product-tensor-detection @28918c80: I read the whole delivery. It is one commit with no new nodes and a statement byte-identical to base. The live node is unsplit and there is no repair note, so this is a first split and no other group superseded it. Source: Stacks algebra.tex l.10129-10151, Tag 034N (tags l.4098). The item writes out the final sentence that the source leaves implicit (assume R is a finite product of fields): tensor commutes with finite products, injectivity comes from flatness over a field, and reducedness is checked coordinatewise. The citer lem-trf-geometrically-reduced-base-change uses the same orientation, A⊗K_i reduced. Step checks: step 1's hand-built inverse is correct but re-proves the existing Mathlib leaf lem-weil-pbc-tensor-finite-product (TensorProduct.piLeft, Pi.lean:115, t≥0 included). The report's DAG search missed this node (C5). FIX: step 1 now cites it, with I enumerated as i_1..i_t, P_m=K_{i_m}, N=A, and elementary set to false; proof_deps updated. Step 2 (Φ and j⊗1 unital and multiplicative on pure tensors) is correct. Step 3: the field-flat leaf plus the 'in particular' clause of flat-tensor-exact, in N⊗M orientation, give injectivity of B⊗A→P⊗A over the module quotient P/j(B), and Φ∘(j⊗1)=Θ on generators. Step 4: the swap's multiplicativity is proved in the step itself, since the cited node does not assert it. FIX clarification: I added the missing line that Θ is multiplicative by step 2, so Θ(z)^n=Θ(z^n). Edge cases checked: I=∅ (B=0), |I|=1, A=0, a diagonal into two fields, and necessity of the hypothesis via k=F_p(t), K=A=B=k(t^{1/p}). Duplicate search covered rg over product-of-fields and tensor-reduced nodes; only the piLeft leaf overlaps and it is now cited. The Mathlib searches cover all three kinds and there is no whole-item match. All cited nodes are Mathlib leaves or definitions, so the route is fine and no tool_uses are needed. The corrected item is under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteFieldProductTensorDetection",
+  "declaration": "Algebra.finite_field_product_tensor_detection",
+  "file": "lean/Sheaf/RingTheory/FiniteFieldProductTensorDetection.lean",
+  "statement": "theorem finite_field_product_tensor_detection (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] (B : Type w) [CommRing B] [Algebra k B] (I : Type t) [Finite I] (K : I → Type s) [∀ i, Field (K i)] [∀ i, Algebra k (K i)] (j : B →ₐ[k] (∀ i, K i)) (hj : Function.Injective j) : (∃ Φ : ((∀ i, K i) ⊗[k] A) ≃ₐ[k] (∀ i, K i ⊗[k] A), ∀ (x : ∀ i, K i) (a : A) (i : I), Φ (x ⊗ₜ[k] a) i = x i ⊗ₜ[k] a) ∧ Function.Injective (AlgHom.pi fun i : I ↦ Algebra.TensorProduct.map ((Pi.evalAlgHom k K i).comp j) (AlgHom.id k A)) ∧ ((∀ i : I, IsReduced (A ⊗[k] K i)) → IsReduced (B ⊗[k] A))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6dfdba319",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, Tag 034N place, 3 stmt_deps (Field, Algebra, TensorProduct), module and report. Clause match: k field; A,B CommRing+Algebra k with no extra hypotheses; I Finite, empty allowed; K i Field+Algebra k; j AlgHom + injective; Φ ∃ AlgEquiv pinned by its pure-tensor coordinate equation, so canonical; Θ = AlgHom.pi of TensorProduct.map ((evalAlgHom i).comp j) id, injective; (∀ i, IsReduced (A⊗K i)) → IsReduced (B⊗A), orientation as in node. Edge cases: I=∅ forces B=0, A or B zero allowed, 5 independent universes. Snapshot node = live node except lean (live had no lean); first S2 delivery; lean.statement verbatim in file; no defs; sole sorry; source and blueprint docstrings with 4-step proof plan; Mathlib names verified (Pi.evalAlgHom, IsReduced); no duplicate (piLeft/piRight cover only Φ). Both report sections present; second reading is the same worker's second pass. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-diagonal-kummer-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof steps 5--7: normalized finite source, strict Kummer target, and equality of the full finite Cartier boundary",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized Kummer computation of the simultaneous diagonal boundary",
+ "statement": "Let ell be prime and invertible on an arbitrary scheme Y, put W=P1_Y times_Y P1_Y, and let D be a simultaneous derived reduction of scalar extension as in [def-sfb-diagonal-system-interface]. Suppose a is the invertible canonical derived single counit at the supported integral constant. Then there exist a strict Z_ell-module system H, an identification of its underlying abelian tower with the actual roots-of-unity tower, and an isomorphism b from D applied to shifted comparison units to H[2]. At each positive exponent n+1 the source and target identifications preserve respectively the quotient generator and the specified roots-to-Tate-line map. Under these identifications, the degree-two Ext class corresponding to a inverse followed by D of the positive integral boundary followed by b equals the complete finite Cartier class restricted from the residue coefficients to Z_ell.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Proof steps 5--7: normalized finite source, strict Kummer target, and equality of the full finite Cartier boundary"
+ },
+ "proof": [
+  {
+   "text": "Pull invertibility of ell to the surface. At each level the ordinary source quotient theorem supplies an isomorphism satisfying DiagonalSourceNormalization. Unfold that predicate to obtain its generator equation while retaining the original normalization.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-sfb-diagonal-source-quotient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strict Kummer target transport to obtain one strict system, its roots identification and derived comparison, and normalized finite target isomorphisms. Its arbitrary-arrow formula applies to the integral diagonal boundary. The named negativeExtProduct is exactly the negative Yoneda product, without any change of sign convention.",
+   "uses": [
+    "lem-sfb-kummer-strict-target-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved finite Cartier normalization. It first uses sign cancellation and full scalar-adjunct Cartier uniqueness to identify the residue-linear class, then applies coefficient restriction to this equality. Its conclusion is exactly the finite-class predicate of the diagonal interface.",
+   "uses": [
+    "lem-sfb-diagonal-finite-cartier-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the proved sheaf Kummer assembly to the diagonal surface, the supported integral source and the pole boundary. Supply the normalized ordinary quotient, its generator equation, and the proved finite Cartier normalization implication. The scheme assembly supplies the single strict target and substitutes its evaluated-arrow equation into the exact original finite-class predicate, preserving both normalizations.",
+   "uses": [
+    "lem-sfb-sheaf-kummer-transport-assembly",
+    "lem-sfb-canonical-sheaf-ext"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-diagonal-source-quotient-normalization",
+  "lem-sfb-kummer-strict-target-transport",
+  "lem-sfb-diagonal-finite-cartier-normalization",
+  "lem-sfb-sheaf-kummer-transport-assembly",
+  "lem-sfb-canonical-sheaf-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), source and target paragraphs, and step (4); implementation of the source quotient and the strict Kummer target, followed by the full Cartier adjunct characterization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A simultaneous left derived reduction functor into strict inverse systems of torsion sheaves, whose derived inverse limit is completion",
+   "results": "8 hits: localCohomology.diagram, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, BDeRhamPlus",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.IsLeftDerivedFunctor'",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalDerivedReduction|diagonalTowerSystem",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of abelian sheaves as total derived inverse limit of simultaneous prime power quotient towers, with constant p-adic scalar action",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.ofSheafProfinite, localCohomology.diagram, LightCondAb.ofSheafLightProfinite, AdicCompletion",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.exists_quasiIso_flat_kFlat",
+   "results": "0 hits: ; loogle: unknown identifier 'CochainComplex.exists_quasiIso_flat_kFlat'",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalCompletionSpec|DiagonalCycleSystemSpec|DerivedReduction",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient tower of integral sheaves, derived by one resolution, has a natural unit into its derived inverse limit and gives derived completion",
+   "results": "8 hits: AdicCompletion.of_apply, BDeRhamPlus, AdicCompletion.eval_comp_of, AdicCompletion, AdicCompletion.factorₐ_evalₐ_one, AdicCompletion.eval_of, AdicCompletion.incl, IsAdicComplete.of_lift",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "One simultaneous derived reduction to a strict tower of prime power quotients, computed on torsion free complexes",
+   "results": "8 hits: Module.torsion_by_prime_power_decomposition, Submodule.exists_isInternal_prime_power_torsion_of_pid, Submodule.exists_isInternal_prime_power_torsion, DerivedCategory.right_fac_of_isStrictlyLE, Submodule.isInternal_prime_power_torsion_of_is_torsion_by_ideal, Submodule.QuotientTorsion.instIsTorsionFree, instIsScalarTowerAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl_2",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer reduction of the integral Cartier boundary in the derived category of strict inverse systems of modules",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp, KummerDedekind.quotMapEquivQuotQuotMap.congr_simp, WeierstrassCurve.reduction, Condensed.instAB4CondensedMod, AlgebraicTopology.DoldKan.toKaroubiCompN₂IsoN₁_inv_app, Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total derived inverse limit of prime power reductions of abelian sheaves is the derived completion reflector",
+   "results": "8 hits: AdicCompletion, AdicCompletion.subring, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Presheaf.isSheaf_of_isSheaf_comp, AdicCompletion.sumInv_comp_sum, ProfiniteGrp.isIso_toLimit, Profinite.asLimitConeIso, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext.mapExactFunctor",
+   "results": "0 hits: ; loogle: unknown identifier 'Ext.mapExactFunctor'",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer exact sequence identifies the reduction of the Cartier extension boundary with the finite cycle class",
+   "results": "8 hits: Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Extension.H1Cotangent.map, Algebra.Generators.H1Cotangent.exact_δ_map",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec in Mathlib, WeilConjectures and Sheaf",
+   "results": "No Mathlib or WeilConjectures declaration of the simultaneous predicate. Existing Sheaf declarations are this item and its consumers. Mathlib supplies cokernels, functor-category evaluation, and localization universal properties.",
+   "date": "2026-10-24",
+   "verdict": "Construct the simultaneous functor and use the existing source lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerSystem",
+  "date": "2026-10-24",
+  "group": "H9"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalKummerReduction",
+  "file": "lean/Sheaf/Paper/DiagonalKummerReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_kummer_reduction",
+  "statement": "theorem diagonal_kummer_reduction (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})\n    (hY : IsUnit (ℓ : Γ(Y, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))\n    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)) ≅\n      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj (diagonalIntegralSource Y)))\n    (ha : a.hom = diagonalDerivedSingleCounit ℓ\n      (diagonalScalarExtension ℓ (diagonalSurface Y)) D (diagonalIntegralSource Y)) :\n    diagonalBoundaryTarget ℓ Y hY D a",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb77b",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T101147-L-3663305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

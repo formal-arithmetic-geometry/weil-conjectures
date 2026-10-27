@@ -1,0 +1,98 @@
+{
+ "id": "lem-sf-weil-native-row-hom-eta-eq",
+ "kind": "statement",
+ "title": "Identify the transported derived comparison",
+ "statement": "The normalized transported comparison is equal to the supplied derived comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison, naturality of evaluation, and transposition paragraph; native refinement of lem-sf-weil-native-closed-forgetful."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "lem-sf-ringed-forget-two-injective-hom"
+ ],
+ "proof": [
+  {
+   "text": "STATEMENT-DISPUTED: arbitrary NativeHomRepresentatives do not normalize a comparison. Negating the native representative model and the comparison preserves compatibility but changes the comparison on a nonzero internal Hom over characteristic-zero coefficients. Withdrawn; the parent now constructs its witnesses with m.derived itself.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison paragraph; explicit standard-to-row sign conjugation and localization naturality, formalized by D2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed symmetric monoidal structure with a specified internal Hom bifunctor evaluation and tensor comparison",
+   "results": "MonoidalClosed, exp.ev, MonoidalClosed.closed and internalHom provide abstract closedness, but not the specified native representative models or derived forgetful comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convert the row signed internal Hom complex to the standard cohomological differential using sign (-1)^(n*p)",
+   "results": "HomComplex differential formulas and ordinary sheaf tensor maps were returned, but none gives the native comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"Iso\"",
+   "results": "Componentwise complex isomorphism APIs only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHomObj|sign.*HomComplex|homComplex.*sign",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRowHomComparison",
+  "date": "2026-10-27",
+  "group": "B6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ancestor command returns None for the native obligation. This is the stated native refinement of the internal-Hom/evaluation/transposition paragraph in cor-coef-verdier-weil-equivariance.",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T180846-L-3412566",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c4bf4",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T194521-L-2384465",
+  "kind": "interface",
+  "note": "independent cc review: delivered NativeWeilRowHomComparison.lean (both public statements unchanged, proofs sorry-free, axioms clean) and the three node files against NativeWeilClosedModels definitions; disputed eta_eq counterexample (negate weilRepresentatives.model and η) checked; importer NativeWeilClosedForgetful compiled against the delivered item"
+ }
+}

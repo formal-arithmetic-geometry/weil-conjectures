@@ -1,0 +1,203 @@
+{
+ "id": "lem-sfb-borel-quotient-lifting",
+ "kind": "statement",
+ "title": "Lifting Borel subgroups along quotients of connected algebraic groups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A group is solvable if its successive scheme-theoretic derived subgroups eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. A Borel subgroup is a maximal smooth connected solvable subgroup. Let $G,H$ be smooth and connected and let $q:G\\to H$ be a homomorphism such that $F[H]\\to F[G]$ is faithfully flat, meaning that extension of scalars is exact and detects zero modules. For every Borel subgroup $C\\subseteq H$ there is a Borel subgroup $B\\subseteq G$ such that $q|_B:B\\to C$ is faithfully flat and finitely presented. Here finitely presented means locally of finite presentation, quasi-compact and quasi-separated [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. No finiteness, centrality or multiplicative-type assumption is imposed on $\\ker q$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.20, printed pp.357--358, Borel assertion and its surjectivity onto the Borel subgroups of the quotient; Theorem 5.39, printed p.108, for the faithfully flat map onto the scheme-theoretic image, with its finite presentation as in lem-sfb-algebraic-group-homomorphism-factorization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-quotient-borel-torus-images] with $A=G$, $D=H$ and $f=q$. Its field, affineness, finite-type, smoothness, connectedness and coordinate-ring faithful-flatness hypotheses are exactly those here. Its assertion that every Borel subgroup of $D$ is an image gives a Borel $B\\subseteq G$ with scheme-theoretic image $q(B)=C$. The same statement gives faithful flatness of $h=q|_B:B\\to C$, in the coordinate-ring sense required here. The remaining issue is finite presentation, which is not asserted by that node.",
+   "uses": [
+    "lem-sfb-quotient-borel-torus-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, Borel-image assertion on printed p.357 and the conjugacy argument for prescribed Borels on p.358."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $h:B\\to C$. These groups are affine of finite type by the hypotheses. They are separated: for an affine group with coordinate ring $R$, the diagonal is induced by the surjection $R\\otimes_F R\\to R$, $a\\otimes b\\mapsto ab$, so it is a closed immersion [def-weil-closed-immersion], exactly the separatedness condition [def-weil-proper-morphism]. The factorization gives $B\\xrightarrow{r}I\\xrightarrow{i}C$, with $r$ faithfully flat and finitely presented and $i$ a closed immersion. Write $A=F[C]$, $S=F[B]$. By [def-weil-closed-immersion], $I=\\operatorname{Spec}(A/J)$ for an ideal $J$, and $A\\to S$ factors through $A/J$. This map is injective directly from the faithful flatness obtained in step 1: if $a\\in A$ maps to zero, tensor the inclusion $aA\\hookrightarrow A$ with $S$. Exactness makes the resulting map injective, whereas it is zero because $a$ acts as zero on $S$. Hence $(aA)\\otimes_A S=0$; detection of zero modules gives $aA=0$ and $a=0$. Thus $J=0$, so $i$ is an isomorphism over $C$. Identifying $I$ with $C$ in this way, $r$ is $h$. Its local finite presentation, quasi-compactness and quasi-separatedness therefore give precisely the finite presentation required. No property of $\\ker q$ was used.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, printed p.108, and Remark 5.40 (uniqueness of the image factorization); elementary affine-ring verification that a faithfully flat homomorphism has full image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.20, printed pp.357--358; Theorem 5.39 and Remark 5.40, printed p.108. Assembly of existing general statements with the explicit affine-ring argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of connected smooth affine algebraic groups sends Borel subgroups to Borel subgroups and every Borel subgroup of the target lifts",
+   "results": "{\"t\": \"2026-10-23T14:53:22Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of connected smooth affine algebraic groups sends Borel subgroups to Borel subgroups and every Borel subgroup of the target lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_of_surjective\", \"Group.rank_le_of_surjective\", \"Subgroup.isCoatom_comap_of_surjective\", \"map_derivedSeries_eq\", \"frattini_le_comap_frattini_of_surjective\", \"Sylow.mapSurjective_surjective\", \"nilpotent_of_surjective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\"], \"digest\": \"4bc005a8e4e6890b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group images, subgroup coatoms, Galois-category quotients and scheme flatness do not lift Borel subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroups lift along faithfully flat quotient maps of connected algebraic group schemes",
+   "results": "{\"t\": \"2026-10-23T14:57:27Z\", \"tool\": \"leanfinder\", \"query\": \"Borel subgroups lift along faithfully flat quotient maps of connected algebraic group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_mono_of_isConnected\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"4d64e44cb7325729\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group images, subgroup coatoms, Galois-category quotients and scheme flatness do not lift Borel subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a Borel subgroup under a quotient of algebraic groups is Borel",
+   "results": "{\"t\": \"2026-10-23T14:53:21Z\", \"tool\": \"leansearch\", \"query\": \"The image of a Borel subgroup under a quotient of algebraic groups is Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientAddGroup.image_coe\", \"QuotientGroup.image_coe\", \"QuotientGroup.map_mk'_self\", \"QuotientAddGroup.map_normal\", \"QuotientAddGroup.quotientQuotientEquivQuotientAux_mk\", \"Subgroup.map\", \"QuotientGroup.borelSpace\", \"QuotientAddGroup.borelSpace\"], \"digest\": \"c58a2be2132fece6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group images, subgroup coatoms, Galois-category quotients and scheme flatness do not lift Borel subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\"",
+   "results": "{\"t\": \"2026-10-23T14:53:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"BorelSubgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group images, subgroup coatoms, Galois-category quotients and scheme flatness do not lift Borel subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel.subgroup|normalizer.*borel|borel.*normalizer",
+   "results": "{\"t\": \"2026-10-23T14:53:20Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borel.subgroup|normalizer.*borel|borel.*normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group images, subgroup coatoms, Galois-category quotients and scheme flatness do not lift Borel subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel.subgroup|borel.*quotient|quotient.*borel",
+   "results": "{\"t\": \"2026-10-23T20:15:41Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borel.subgroup|borel.*quotient|quotient.*borel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, measurable Borel spaces, formally smooth algebra lifts, or affine flatness criteria; none states lifting of algebraic Borel subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every Borel subgroup of a quotient algebraic group is the image of a Borel subgroup of the source",
+   "results": "{\"t\": \"2026-10-23T20:15:42Z\", \"tool\": \"leansearch\", \"query\": \"Every Borel subgroup of a quotient algebraic group is the image of a Borel subgroup of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.borelSpace\", \"QuotientGroup.le_comap_mk'\", \"QuotientGroup.comapMk'OrderIso\", \"QuotientAddGroup.borelSpace\", \"QuotientGroup.map_mk'_self\", \"AddCosetSpace.borelSpace\", \"Submodule.map_div\", \"QuotientAddGroup.le_comap_mk'\"], \"digest\": \"65b542368a619c25\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, measurable Borel spaces, formally smooth algebra lifts, or affine flatness criteria; none states lifting of algebraic Borel subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\"",
+   "results": "{\"t\": \"2026-10-23T20:15:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"BorelSubgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, measurable Borel spaces, formally smooth algebra lifts, or affine flatness criteria; none states lifting of algebraic Borel subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroups lift along faithfully flat quotient homomorphisms of smooth connected affine algebraic groups",
+   "results": "{\"t\": \"2026-10-23T20:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"Borel subgroups lift along faithfully flat quotient homomorphisms of smooth connected affine algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.mk_lift\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\"], \"digest\": \"4c0830f1b60f0f2a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, measurable Borel spaces, formally smooth algebra lifts, or affine flatness criteria; none states lifting of algebraic Borel subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of maximal connected solvable subgroup schemes under surjective maps of connected linear algebraic groups are maximal connected solvable and exhaust such subgroups",
+   "results": "{\"t\": \"2026-10-23T20:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"Images of maximal connected solvable subgroup schemes under surjective maps of connected linear algebraic groups are maximal connected solvable and exhaust such subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_of_surjective\", \"frattini_le_comap_frattini_of_surjective\", \"Function.Surjective.lieAlgebra_isSolvable\", \"map_derivedSeries_eq\", \"derivedSeries_le_map_derivedSeries\", \"solvable_of_ker_le_range\", \"upperCentralSeries.map\", \"solvable_of_solvable_injective\"], \"digest\": \"75c4b303438cc8e2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, measurable Borel spaces, formally smooth algebra lifts, or affine flatness criteria; none states lifting of algebraic Borel subgroup schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-isogeny-borel-comparison",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Proposition 17.20 supplies a Borel mapping onto the prescribed Borel before identifying its full inverse image.",
+   "via": [
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-quotient-lifting",
+  "worker": "stage1",
+  "summary": "NV: reused the existing more general Borel-and-torus image theorem, then obtained finite presentation from the existing group-homomorphism factorization. Wrote the affine separatedness and faithful-flat injectivity arguments explicitly. Statement unchanged, no new nodes, no attachment, no Lean writing or compilation.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) auxiliary Milne route through multiplicative-isogeny Borel comparison. Latest blueprint searched: this algebraic-group auxiliary is not separately stated there. Inherited blueprint.from.node is null, as the ancestor command reports; the place and via chain are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-e6bad9d15",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-e6bad9d15 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. Item: statement, stmt_deps, source and blueprint are unchanged from live; live and side-live are still unsplit, there are no new nodes and no SGA. Sources checked in Milne iAG2017: Prop 17.20 and its proof (pp.357-358, image of a Borel is Borel; every Borel of Q is q(gBg^-1) by 17.9) and Thm 5.39/Rem 5.40 (p.108). Step 1: lem-sfb-quotient-borel-torus-images (same unit, unsplit) has the same F and the same affine/smooth/connected/solvable/Borel and coordinate-ring faithful-flatness conventions. It states explicitly that every Borel of D is f(B) with B->f(B) faithfully flat. The step does not take finite presentation from it. Step 2: lem-sfb-algebraic-group-homomorphism-factorization applies to B and C (affine, finite type, separated via the surjective multiplication R⊗R->R and def-weil-closed-immersion/def-weil-proper-morphism). It gives h=i∘r with r faithfully flat and finitely presented. C is affine, so I=Spec(A/J), and J ⊆ ker(A->S)=0 by the exactness and zero-detection argument (checked: (aA)⊗S injects into S with image aS=0). So i is an isomorphism and h is LFP, qc and qs. Citations are consistent: brackets = uses, proof_deps = union of uses, no cycle, no off-unit statements. Batch 5: the factorization node reaches lem-trf-fppf-covering-base-change, a Mathlib leaf (Precoverage.mem_coverings_of_isPullback with fppfPrecoverage, 021O(3)). It is generic stability of fppf coverings under base change and not part of the trace formula or Poincaré duality; I concur with the Q43 review. No other trf or pod statement is in that proof closure. Edge cases G->1, SL2->PGL2, Frobenius on G_m (mu_p kernel) and G_m×G_a->G_m all fit, with no kernel hypothesis used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelQuotientLifting",
+  "declaration": "AlgebraicGeometry.exists_borelGroupScheme_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientLifting.lean",
+  "statement": "theorem exists_borelGroupScheme_lift {F : Type u} [Field F] [IsAlgClosed F] (G H : Over (Spec (.of F))) [GrpObj G] [GrpObj H] [IsAffine G.left] [IsAffine H.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth G.hom] [ConnectedSpace G.left] [Smooth H.hom] [ConnectedSpace H.left] (q : G ⟶ H) [IsMonHom q] (hq : q.left.appTop.hom.FaithfullyFlat) (C : Over (Spec (.of F))) [GrpObj C] (iC : C ⟶ H) (hC : IsBorelGroupScheme iC) : ∃ (B : Over (Spec (.of F))) (_ : GrpObj B) (iB : B ⟶ G), IsBorelGroupScheme iB ∧ ∃ r : B ⟶ C, IsMonHom r ∧ iB ≫ q = r ≫ iC ∧ r.left.appTop.hom.FaithfullyFlat ∧ LocallyOfFinitePresentation r.left ∧ QuasiCompact r.left ∧ QuasiSeparated r.left",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-231afdcdb",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item Lean exists_borelGroupScheme_lift matches lem-sfb-borel-quotient-lifting clause by clause: alg. closed F; affine finite-type (LocallyOfFiniteType+QuasiCompact) smooth connected GrpObj over Spec F; IsMonHom q with q.left.appTop faithfully flat (= F[H]→F[G], both affine); every Borel iC gives Borel iB and r:B⟶C, IsMonHom, iB≫q=r≫iC, r coordinate-ring faithfully flat (B, C closed in affine groups, hence affine), LFP∧QC∧QS; no kernel/extra/universe assumptions; statement verbatim. New def-sfb-borel-subgroup-scheme = Milne Def 17.6 (closed subgroup, smooth, connected, scheme-theoretic IsSolvableGroupScheme reused from landed Semisimple.lean, maximality by factorization over all closed smooth connected solvable D in universe u); real, not hollow; no Borel predicate/def node in side-live lean or dag; record layout as accepted def-sfb-semisimple-group-scheme. Only stmt_deps(+new node) and lean differ from live. sorry only; source/blueprint docstrings and proof plan present; proof_dep plain imports OK; report has Worker report and Second reading by NC. Edge cases G→1, identity, Frobenius μ_p, SL2→PGL2, Gm×Ga→Gm fine. No compile (no file changed)."
+ }
+}

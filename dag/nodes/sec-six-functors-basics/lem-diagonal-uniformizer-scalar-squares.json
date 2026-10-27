@@ -1,0 +1,132 @@
+{
+ "id": "lem-diagonal-uniformizer-scalar-squares",
+ "kind": "statement",
+ "title": "Perfect uniformizer reduction commutes with arbitrary direct image",
+ "statement": "Let l be prime, E a finite intermediate extension in the algebraic closure of Q_l, pi an element generating the maximal ideal of its integer ring O_E, and n a natural number. Write a for the actual condensed reduction O_E -> O_E/(pi)^(n+1) [def-sfb-diagonal-coefficient-diagrams]. For every morphism f:X -> S of schemes and every full universal integral DiagonalRightDerived model R [def-sfb-diagonal-coefficient-category], there is a full-unit-normalized RestrictionSquare [def-sfb-diagonal-coefficient-scalars] between R and the canonical quotient right-derived model [lem-diagonal-canonical-right-derived]. For every unbounded integral derived object K on X, the scalar mate of this square at K is an isomorphism. This assertion contains no regular or Tate-line endpoint, no supported-source identification, and no trace.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-scalars",
+  "lem-diagonal-canonical-right-derived",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), finite free coefficient argument for the cofinal uniformizer quotients"
+ },
+ "proof": [
+  {
+   "text": "Construct the full-unit-normalized restriction/direct-image square for the actual quotient reduction by transporting the two-term finite-free uniformizer resolution through the universal right-derived units.",
+   "uses": [
+    "lem-diagonal-uniformizer-restriction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the constructed square, identify its scalar mate after exact restriction with the projection comparison of the two-term finite-free resolution; the projection comparison is invertible on every complex and restriction reflects isomorphisms.",
+   "uses": [
+    "lem-diagonal-uniformizer-restriction-mate-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the square and its pointwise mate isomorphisms into ScalarSquareIsomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-uniformizer-restriction-square",
+  "lem-diagonal-uniformizer-restriction-mate-isIso"
+ ],
+ "proof_origin": {
+  "by": "S2 stage-3 worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), decomposed into normalized square existence and mate invertibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo a uniformizer power commutes with unbounded derived direct image because the quotient has a two-term finite free resolution",
+   "results": "Eight hits on local cohomology and adic completion transition maps, not a derived scalar/direct-image mate. Local rg found integralFiniteScalarPerfectModel, whose coefficient integers and geometric-mate encoding must be compared with the actual PadicAlgCl integers and full-unit RestrictionSquare here.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing finite perfect-model argument; no direct Mathlib comparison is available."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.pushHomOfComapIso",
+   "results": "Zero hits, unknown identifier in Mathlib search. Local library defines the named mate and its normalization in DiagonalCoefficientScalars.",
+   "date": "2026-10-27",
+   "verdict": "The project supplies the mate definition; Mathlib does not supply this source compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar.*[Ff]lat|scalar.*[Ss]upport|uniformizer.*[Dd]erived",
+   "results": "Six unrelated Mathlib hits in complex polynomials, group homology, Haar measure, and multivariate polynomial support. Local rg in lean/Sheaf and lean/WeilConjectures located the closed-localization, regular scalar multiplication, internal/section flatness, and integral finite scalar perfect-model modules.",
+   "date": "2026-10-27",
+   "verdict": "Reuse those interfaces; the normalized comparison for the concrete coefficients still needs a bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerScalarFrame",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-uniformizer-scalar-frame",
+   "place": "Paragraph (1), finite free coefficient argument for the cofinal uniformizer quotients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerScalarSquares",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerScalarSquares.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_scalar_squares",
+  "statement": "theorem diagonal_uniformizer_scalar_squares\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (R : DiagonalRightDerived\n      (CondensedRing.lowerStar (Profinite.padicIntegersRingObj.{u} l E.1) f)) :\n    Nonempty (ScalarSquareIsomorphisms (quotientMap l E π n) f R)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarSquareIsomorphisms",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_square",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_mate_isIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_scalar_squares"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T222730-L-687372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T012905-L-2344306",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_mate_isIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_square"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_mate_isIso"
+  ]
+ }
+}

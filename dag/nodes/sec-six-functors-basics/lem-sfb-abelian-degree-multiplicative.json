@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-abelian-degree-multiplicative",
+ "kind": "statement",
+ "title": "Multiplicativity of the degree extended by zero",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $A/k$ be an abelian variety [def-sc-abelian-variety] of positive dimension. For a group-scheme endomorphism $a:A\\to A$ [def-sc-group-scheme], let $d(a)$ be the order of its finite kernel if $a$ is an isogeny, and zero otherwise [def-sc-isogeny]. Then $d(\\mathrm{id}_A)=1$ and $d(a\\circ b)=d(a)d(b)$ for all endomorphisms $a,b$; no separability assumption is imposed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §7, printed p.32, identification of isogeny degree with function-field degree; Remark 10.11, printed p.47; multiplicativity used in Lemma 10.22 and Proposition 10.20, printed pp.51–52."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-isogeny"
+ ],
+ "proof": [
+  {
+   "text": "The identity has scheme-theoretic kernel $\\operatorname{Spec}k$: on every test scheme its kernel consists only of the identity section. It is surjective, hence is an isogeny, and its kernel algebra is $k$, of dimension one. Thus $d(\\mathrm{id}_A)=1$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-isogeny"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I §7, Proposition 7.1 and following degree paragraph, printed p.32; Remark 10.11, printed p.47."
+   }
+  },
+  {
+   "text": "Put $c=a\\circ b$. If $c$ is an isogeny, its surjectivity implies that $a$ is surjective. Since source and target are both $A$, [lem-sfb-equal-dimension-isogeny-criterion] makes $a$ an isogeny. Also $\\ker b$ is a closed subscheme of $\\ker c$: on test schemes $b(x)=0$ implies $a(b(x))=0$; both kernels are closed subgroup schemes of $A$ by [lem-sc-kernel-subgroup]. Explicitly their defining ideals satisfy $\\mathcal I_{\\ker c}\\subseteq\\mathcal I_{\\ker b}$, since pulling back the equations of the unit along $a\\circ b$ gives equations vanishing on $b=0$. As $\\ker c=\\operatorname{Spec}C$ is finite over $k$, the subscheme $\\ker b$ is $\\operatorname{Spec}(C/J)$ for an ideal $J$; the quotient of the finite-dimensional vector space $C$ is finite-dimensional. Thus $\\ker b$ is finite over $k$. Apply [lem-sfb-finite-kernel-equal-dimension-isogeny] with both varieties equal to $A$ and the given algebraically closed field: $b$ is surjective. Together with its finite kernel, this makes $b$ an isogeny.",
+   "uses": [
+    "def-sc-isogeny",
+    "def-sc-group-scheme",
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-equal-dimension-isogeny-criterion",
+    "lem-sfb-finite-kernel-equal-dimension-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I §7, Proposition 7.1 and following degree paragraph, printed p.32; Remark 10.11, printed p.47."
+   }
+  },
+  {
+   "text": "Conversely, if $a,b$ are isogenies, $a\\circ b$ is surjective as a composite of surjective maps, so [lem-sfb-equal-dimension-isogeny-criterion] makes it an isogeny. By [lem-sc-isogeny-degree], the three maps are finite flat, and their structure-sheaf pushforwards have constant ranks $d(a),d(b),d(a\\circ b)$. Apply [lem-sfb-finite-kernel-equal-dimension-isogeny] to each map, whose kernel is finite: all three maps are finite locally free. Their finite locally free degrees in [def-pc-finite-locally-free] are the ranks just identified. Apply [lem-sfb-finite-locally-free-degree-composition] to $b$ followed by $a$ to get degree $d(b)d(a)$. Evaluate the two constant degree formulas at the identity point of $A$, which exists by its group structure: $d(a\\circ b)=d(b)d(a)=d(a)d(b)$.",
+   "uses": [
+    "lem-sfb-equal-dimension-isogeny-criterion",
+    "lem-sc-isogeny-degree",
+    "def-pc-finite-locally-free",
+    "lem-sfb-finite-locally-free-degree-composition",
+    "def-sc-group-scheme",
+    "lem-sfb-finite-kernel-equal-dimension-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I §7, Proposition 7.1 and following degree paragraph, printed p.32; Remark 10.11, printed p.47."
+   }
+  },
+  {
+   "text": "If either $a$ or $b$ is not an isogeny, step 2 shows that $a\\circ b$ is not an isogeny. The defining zero extension therefore gives $d(a\\circ b)=0=d(a)d(b)$. This and step 3 cover all pairs. All degrees above are dimensions of finite kernel algebras, so the proof counts scheme length, including inseparable kernels, and never replaces it by the number of geometric points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I §7, Proposition 7.1 and following degree paragraph, printed p.32; Remark 10.11, printed p.47."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-isogeny",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-equal-dimension-isogeny-criterion",
+  "lem-sfb-finite-kernel-equal-dimension-isogeny",
+  "lem-sc-isogeny-degree",
+  "def-pc-finite-locally-free",
+  "lem-sfb-finite-locally-free-degree-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §7, Proposition 7.1 and following degree paragraph, printed p.32; Remark 10.11, printed p.47."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isogeny|degree.*compos|compos.*degree",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: composition of polynomials and elliptic-curve changes of variables do not state isogeny-degree multiplicativity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: composition of polynomials and elliptic-curve changes of variables do not state isogeny-degree multiplicativity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of a composite of abelian variety endomorphisms is the product of degrees with degree zero for nonisogenies",
+   "results": "8 hits; top: Polynomial.natDegree_comp, Polynomial.natDegree_comp_eq_of_mul_ne_zero, Polynomial.natDegree_comp_le, Polynomial.natDegree_iterate_comp, IntermediateField.LinearDisjoint.rank_sup, LinearMap.det_comp, LinearMap.detAux_comp, Polynomial.degreeMonoidHom",
+   "date": "2026-10-23",
+   "verdict": "no match: composition of polynomials and elliptic-curve changes of variables do not state isogeny-degree multiplicativity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isogeny degrees multiply under composition of morphisms of abelian varieties",
+   "results": "8 hits; top: WeierstrassCurve.Affine.Point.map_map, WeierstrassCurve.VariableChange.instMul, WeierstrassCurve.VariableChange.mul_def, WeierstrassCurve.map_map, CategoryTheory.MorphismProperty.IsMultiplicative.instIsomorphisms, CategoryTheory.Iso.trans_hom, WeierstrassCurve.VariableChange.map_map, CategoryTheory.Iso.trans_def",
+   "date": "2026-10-23",
+   "verdict": "no match: composition of polynomials and elliptic-curve changes of variables do not state isogeny-degree multiplicativity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isogeny degree extended by zero is a multiplicative function on all endomorphisms of a positive dimensional abelian variety",
+   "results": "8 hits; top: WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.VariableChange.instMul, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le",
+   "date": "2026-10-23",
+   "verdict": "no match: composition of polynomials and elliptic-curve changes of variables do not state isogeny-degree multiplicativity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a composite of isogenies of abelian varieties is the product of the degrees",
+   "results": "8 hits; Polynomial.natDegree_comp, WeierstrassCurve.Affine.Point.map_map, Polynomial.natDegree_comp_le, WeierstrassCurve.map_map, Polynomial.natDegree_comp_eq_of_mul_ne_zero, Polynomial.natDegree_iterate_comp, WeierstrassCurve.VariableChange.map_map, WeierstrassCurve.VariableChange.mul_def",
+   "date": "2026-10-23",
+   "verdict": "no match: these are polynomial degrees, point maps, additive endomorphisms or ideal-sheaf kernels, not the required abelian-variety degree theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are polynomial degrees, point maps, additive endomorphisms or ideal-sheaf kernels, not the required abelian-variety degree theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|isogenyDegree",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: these are polynomial degrees, point maps, additive endomorphisms or ideal-sheaf kernels, not the required abelian-variety degree theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree extended by zero for nonisogenies is multiplicative on endomorphisms of an abelian variety",
+   "results": "8 hits; AddMonoid.End.instMul, Polynomial.degreeMonoidHom, RatFunc.intDegree_mul, HomogeneousLocalization.NumDenSameDeg.deg_mul, MvPolynomial.degreeOf_mul_eq, AddMonoid.End, RatFunc.natDegree_num_mul_right_sub_natDegree_denom_mul_left_eq_intDegree, RatFunc.intDegree_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: these are polynomial degrees, point maps, additive endomorphisms or ideal-sheaf kernels, not the required abelian-variety degree theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Order of the scheme theoretic kernel defines a monoid homomorphism on abelian variety endomorphisms when nonisogenies have degree zero",
+   "results": "8 hits; AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.Hom.le_ker_comp, AlgebraicGeometry.Scheme.Hom.ker_comp, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso, AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso, AlgebraicGeometry.Scheme.kerFunctor_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: these are polynomial degrees, point maps, additive endomorphisms or ideal-sheaf kernels, not the required abelian-variety degree theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-tate-charpoly",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I §7, printed p.32, identification of isogeny degree with function-field degree; Remark 10.11, printed p.47; multiplicativity used in Lemma 10.22 and Proposition 10.20, printed pp.51–52.",
+   "via": [
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-degree-multiplicative",
+  "worker": "stage1",
+  "summary": "Proved the identity, reflected the isogeny property from a composite using a closed finite kernel and the existing equal-dimension criteria, multiplied finite locally free degrees, and treated nonisogenies by the zero extension. Reused both existing isogeny criteria and the existing kernel-order/rank theorem. One new statement-only node records multiplication of constant finite locally free degrees, with searches and edge cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I §7, printed p.32, identification of isogeny degree with function-field degree; Remark 10.11, printed p.47; multiplicativity used in Lemma 10.22 and Proposition 10.20, printed pp.51–52. This split supplies precisely the multiplicative degree input to the abelian Tate characteristic-polynomial argument; current latest direct-image proof (3) is read as context, with inherited auxiliary ancestry retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Closed subgroup-scheme kernels permit the elementary quotient-algebra argument in step 2; this is a generic group-scheme tool."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "The existing kernel-order equals finite-flat rank theorem is the generic geometric tool needed to multiply degrees."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup",
+  "lem-sc-isogeny-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-e02ed4188",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-e02ed4188 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full. Milne AV §7 p.32 (definition of isogeny, Prop 7.1, degree paragraph: α_*O_A locally free of rank deg), p.46 (deg 0 for non-isogenies) and Remark 10.11 p.47 agree with the statement, which is unchanged against side-live, and the item is still unsplit live. Step 1: ker id = Spec k, order 1, elementary. Step 2: c surjective ⇒ a surjective ⇒ a is an isogeny by lem-sfb-equal-dimension-isogeny-criterion (hypotheses hold for A→A). ker b is a closed subscheme of the finite ker c via lem-sc-kernel-subgroup, so ker b = Spec C/J is finite with nilpotents kept. lem-sfb-finite-kernel-equal-dimension-isogeny (k algebraically closed) then makes b surjective, hence an isogeny. Step 3: the composite is an isogeny. lem-sc-isogeny-degree gives ranks d(·). The finite-kernel criterion supplies finite locally free (finite presentation), and the def-pc-finite-locally-free fibre degree equals the rank since the maps are affine. The new node gives d(a)d(b), compared at e ∈ A. Step 4: contrapositive of step 2 plus the zero extension, elementary. New node lem-sfb-finite-locally-free-degree-composition is true (Stacks 02KC plus Artinian semilocal fibre freeness via Algebra 02M9, tags checked). I tested Y_z empty ⇒ s=0, S empty, r=0 and nonreduced fibres. It is not elementary and not a restatement of the item. No duplicate in the DAG: lem-trf-finite-locally-free-composition gives permanence only, Stacks 02NZ is the integral function-field degree. Mathlib FlatRank.lean has no general finrank_comp. B1–B7 hold. proof_deps = union of uses; no cycle (closure of 318 nodes); no SGA. Accepted tool_uses: lem-sc-kernel-subgroup and lem-sc-isogeny-degree, both generic abelian-variety tools. Inherited null blueprint from.node is a base matter. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.EndomorphismDegreeMultiplicative",
+  "declaration": "AlgebraicGeometry.abelianEndomorphismDegree_multiplicative",
+  "declarations": [
+   "AlgebraicGeometry.abelianEndomorphismDegree",
+   "AlgebraicGeometry.abelianEndomorphismDegree_multiplicative"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/EndomorphismDegreeMultiplicative.lean",
+  "statement": "theorem abelianEndomorphismDegree_multiplicative {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (hpos : 0 < IsAbelianVariety.dim A) : abelianEndomorphismDegree (𝟙 A) = 1 ∧ ∀ (a b : A ⟶ A) [IsMonHom a] [IsMonHom b], abelianEndomorphismDegree (b ≫ a) = abelianEndomorphismDegree a * abelianEndomorphismDegree b",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper defines exactly the d(a) introduced by this node, using the recorded isogenyDegree on the isogeny branch and zero otherwise. The theorem retains positive dimension and algebraically closed base; composition b ≫ a means a ∘ b."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4df6a3a29",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Clause-by-clause match: k field + IsAlgClosed, A : Over (Spec k) with GrpObj + IsAbelianVariety, hpos : 0 < dim A, a b with IsMonHom; helper abelianEndomorphismDegree := if IsIsogeny a then isogenyDegree a else 0 (isogenyDegree = finrankΓ of GrpObj.ker, i.e. scheme length, nonreduced kernels counted) is exactly the node's d, with real data and docstrings, listed in lean.declarations; conclusion d(𝟙)=1 ∧ ∀ a b, d(b ≫ a)=d a * d b with b≫a = a∘b. No stronger hypotheses, single universe u matches upstream. Edge cases checked: id, zero map, dim 0 excluded as in node, char p/inseparable. Node differs from side-live only in lean; statement verbatim in file; imports fine (Isogeny plain proof import); one sorry, 4-step proof docstring; no name collision and no existing zero-extended degree in Lean or DAG. Report has Worker report and Second reading sections. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-polynomial-graded-hilbert-syzygy",
+ "kind": "statement",
+ "title": "Graded Hilbert syzygy for a polynomial ring in any finite number of variables",
+ "statement": "Let $k$ be a field [def-weil-field], let $m\\geq0$ be an integer, and let $S=k[x_1,\\ldots,x_m]$ [def-weil-pbc-mv-polynomial-ring], with $S_a$ the $k$-span of monomials of total degree $a$ for $a\\geq0$ and $S_a=0$ for $a<0$. Let $M=\\bigoplus_{b\\in\\mathbf Z}M_b$ be a finitely generated $S$-module [def-weil-finitely-generated-module] with $S_aM_b\\subseteq M_{a+b}$. For an integer $d$, define the graded shift by $S(d)_b=S_{d+b}$. There exist finite sets $I_0,\\ldots,I_m$, integers $d_{j,r}$ for $r\\in I_j$, and degree-preserving $S$-linear maps forming an exact sequence\n$$0\\longrightarrow F_m\\longrightarrow\\cdots\\longrightarrow F_0\\longrightarrow M\\longrightarrow0,\\qquad F_j=\\bigoplus_{r\\in I_j}S(d_{j,r}).$$\nExactness means injectivity at the left end, surjectivity onto $M$, and equality of each image with the next kernel. Empty sets, $M=0$, arbitrary integer generator degrees, and $m=0$ (so $S=k$ and $F_0\\to M$ is an isomorphism) are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OQ (proposition-finite-gl-dim-polynomial-ring), global dimension m, together with Tag 0EKB (lemma-graded-NAK), finite homogeneous generation and graded Nakayama. The degree-preserving finite shifted-free enhancement is an agent-extracted algebraic consequence of these results, not the literal statement of 00OQ."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "For any finite graded $S$-module $N$, take finite generators and replace each by its finitely many homogeneous components. The resulting finite family $n_r\\in N_{e_r}$ generates $N$: the span contains every original generator, while all the components are themselves in $N$. Put $C(N)=\\bigoplus_r S(-e_r)$ and send its r-th basis vector to $n_r$. This map is surjective by generation. Its basis vector has degree $e_r$ since $S(-e_r)_b=S_{b-e_r}$; multiplication therefore shows that the map preserves degree.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), proof: replacement by homogeneous generators and the map in part (4)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-polynomial-ring-field-regular-ring], $S$ is Noetherian. Set $K_0=M$. For $0\\leq j<m$, assuming $K_j$ finite and graded, use step 1 to choose $q_j:F_j=C(K_j)\\twoheadrightarrow K_j$ and set $K_{j+1}=\\ker q_j$. This kernel is graded: applying $q_j$ to the homogeneous decomposition of an element gives zero in each distinct degree, so every component is again in the kernel. It is finite by [lem-weil-pbc-noetherian-submodule-finite], since $F_j$ has a finite basis. This proves the induction, starting from the given finite $M$. Composing $q_j$ with $K_j\\hookrightarrow F_{j-1}$ for $j\\geq1$ gives an exact partial resolution $0\\to K_m\\to F_{m-1}\\to\\cdots\\to F_0\\to M\\to0$ when $m>0$. Every $F_j$ is projective: in the direct-summand characterization its underlying free module is a summand of itself by the identity maps.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring), first sentence, and 00IK (lemma-Noetherian-basic), submodule assertion; explicit graded free-cover induction."
+   }
+  },
+  {
+   "text": "[lem-sfb-polynomial-projective-dimension-bound] supplies a projective resolution of $M$ of length at most $m$. For $m>0$, apply [lem-weil-pbc-projective-resolution-kernel-projective] with $d=m$ to the partial resolution of step 2: all its $F_j$ are projective, so its leftmost kernel $K_m$ is projective. For $m=0$ use the same node's length-zero assertion to see that $K_0=M$ is projective; no partial resolution is needed.",
+   "uses": [
+    "lem-sfb-polynomial-projective-dimension-bound",
+    "lem-weil-pbc-projective-resolution-kernel-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring), global dimension bound, and 00O5 (lemma-independent-resolution), terminal-kernel assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-connected-graded-projective-free] to $A=S$ and $P=K_m$: the total-degree grading is nonnegative, its degree-zero part is $k$, and steps 2 and 3 give finite generation and ungraded projectivity. Let $F_m=\\bigoplus_r S(-e_r)\\xrightarrow{\\sim}K_m$ be its degree-preserving isomorphism. For $m>0$ compose with the inclusion $K_m\\hookrightarrow F_{m-1}$. The composition is injective and its image is exactly the kernel at $F_{m-1}$; every other image-kernel equality and the augmentation surjectivity are inherited from step 2. For $m=0$ the isomorphism $F_0\\cong K_0=M$ itself is the augmentation. Put $d_{j,r}=-e_{j,r}$ for every chosen basis degree. These are precisely the requested shifts and degree-preserving maps.",
+   "uses": [
+    "lem-sfb-connected-graded-projective-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), homogeneous-basis consequence isolated in lem-sfb-connected-graded-projective-free; splicing by the kernel inclusion."
+   }
+  },
+  {
+   "text": "If $M=0$, choose every $I_j$ empty and every map zero; the sequence is exact. If an intermediate $K_j$ vanishes, choose its cover zero and all later kernels and covers zero. Negative generator degrees are allowed throughout because the shifts use all integers. Thus neither a nonzero module nor a nonempty basis nor a positive number of variables was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Explicit empty-family and zero-module cases of the preceding construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-projective-module",
+  "lem-sfb-polynomial-projective-dimension-bound",
+  "lem-weil-pbc-projective-resolution-kernel-projective",
+  "lem-sfb-connected-graded-projective-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 00OQ, 00O5, 00IK and the graded Nakayama consequence of 0EKB. Stacks does not state the graded resolution verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite graded module over k[x_1,...,x_m] admits an exact resolution by finite sums of degree shifts S(d), vanishing above homological degree m",
+   "results": "OK 8 hits: GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, Module.finitePresentation_of_projective_of_exact, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.complex_exactAt_succ, CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ, CategoryTheory.ProjectiveResolution.exact₀, CategoryTheory.ProjectiveResolution.ofComplex.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert syzygy finite free graded resolution bounded by number of polynomial variables, including integer degree shifts",
+   "results": "OK 8 hits: CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.instHasProjectiveDimensionLTHAddNat, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, CategoryTheory.instHasProjectiveDimensionLTHAddNat_1, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, CategoryTheory.projectiveDimension, ModuleCat.projectiveResolution.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert syzygy theorem for finitely generated graded modules over a polynomial ring over a field",
+   "results": "OK 8 hits: Polynomial.isNoetherianRing, MvPolynomial.isNoetherianRing_fin, MvPolynomial.isNoetherianRing, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, Ideal.is_fg_degreeLE, Ideal.homogeneous_span, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, Polynomial.hilbertPoly_mul_one_sub_pow_add.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"resolution\"",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "syzygy|graded.*free.*resolution|graded.*projective.*free|global[Dd]imension.*[Pp]olynomial",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated integer graded module over k[x1,...,xm] has a graded finite free resolution of length at most m",
+   "results": "OK 8 hits: HomogeneousLocalization.Away.span_mk_prod_pow_eq_top, HomogeneousLocalization.Away.finiteType, CategoryTheory.HasProjectiveDimensionLE, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, CategoryTheory.HasProjectiveDimensionLT, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite. ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"resolution\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.syzygy|graded.*free.*resolution|graded.*projective.*free",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-coherent-finite-twist-resolution",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA/Kodaira prerequisite: graded algebra input for the finite twist resolution; Hilbert syzygy before sheafification.",
+   "via": [
+    "lem-sfb-projective-coherent-finite-twist-resolution",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polynomial-graded-hilbert-syzygy",
+  "worker": "stage1",
+  "summary": "NK: explicit finite homogeneous free-cover induction, existing Noetherian submodule and terminal-projective-kernel lemmas, new ungraded polynomial dimension bound and connected-graded projective homogeneous-basis input. Statement unchanged; zero modules, m=0, and shift signs checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA/Kodaira prerequisite: graded algebra input for the finite twist resolution; Hilbert syzygy before sheafification. Steps realize the algebraic Hilbert-syzygy input before sheafification; the current latest direct-image proof (3) supplies the ambient context. The inherited ancestry resolves to null under blueprint_refs.py ancestor; it is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-resolution-kernel-projective",
+    "why": "Generic algebraic terminal-syzygy theorem; no node of this unit states this projectivity criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-resolution-kernel-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-9bac31a9d",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-9bac31a9d (reviewer sub-agent of L); spot-checked: Read the item's 5 steps, both new nodes and every cited statement. Sources checked in Stacks algebra.tex: 00OQ (global dimension n), 0EKB parts (1)-(4) with proof, and 05CF/00O5/00IK, all tag-confirmed. Step 1 (homogeneous cover, S(-e)_b=S_{b-e}) is elementary. Step 2: Noetherianity from lem-weil-pbc-polynomial-ring-field-regular-ring and finite kernels from noetherian-submodule-finite; kernels are graded, the partial resolution is exact at every F_j, and the free modules are projective via the summand form of def-weil-pbc-projective-module. Step 3: the new bound plus kernel-projective (e=d-1=m-1; d=0 clause for m=0). The tool_use of kernel-projective (sk-thm-p1, generic dimension shifting) is accepted. Step 4: the new homogeneous-basis node applied to K_m, spliced by the inclusion, with d=-e. Step 5: empty and zero cases. Edge cases tested: m=0, M=0, M=S(3), M=k over k[x]. New node polynomial-projective-dimension-bound is exactly the upper bound of 00OQ, true and self-contained; no DAG node states the global bound (only 00O7 local, 00O8, 065T, 00LP, regularity and Krull dimension). New node connected-graded-projective-free is true (0EKB(4) cover, 05CF splitting so ker is a finite graded summand, L/A_+L=0, 0EKB(1)); tested on A=k and on A=k[t]/(t^2), where graded k is not projective. Neither node restates the item, and the only nearby existing node, lem-sc-p1-graded-nakayama-free, covers 2 variables only. Searches recorded; no Mathlib or project Lean match (only two-variable GradedSyzygy). Statement unchanged, no SGA, not superseded in live. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialGradedHilbertSyzygy",
+  "declaration": "MvPolynomial.exists_graded_free_resolution_finite",
+  "file": "lean/Sheaf/RingTheory/PolynomialGradedHilbertSyzygy.lean",
+  "statement": "theorem exists_graded_free_resolution_finite {k : Type u} [Field k] (m : ℕ) {M : Type v} [AddCommGroup M] [Module (MvPolynomial (Fin m) k) M] [Module.Finite (MvPolynomial (Fin m) k) M] (ℳ : ℤ → AddSubgroup M) (hℳ : DirectSum.IsInternal ℳ) (hsmul : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin m) k) (x : M), s ∈ homogeneousSubmodule (Fin m) k n → x ∈ ℳ j → s • x ∈ ℳ ((n : ℤ) + j)) : ∃ (F : Fin (m + 1) → ModuleCat.{u} (MvPolynomial (Fin m) k)) (𝒢 : ∀ i : Fin (m + 1), ℤ → AddSubgroup (F i)) (r : Fin (m + 1) → ℕ) (d : ∀ i : Fin (m + 1), Fin (r i) → ℤ) (b : ∀ i : Fin (m + 1), Module.Basis (Fin (r i)) (MvPolynomial (Fin m) k) (F i)) (f : ∀ (j : ℕ) (hj : j < m), F ⟨j + 1, Nat.succ_lt_succ hj⟩ →ₗ[MvPolynomial (Fin m) k] F ⟨j, Nat.lt_succ_of_lt hj⟩) (q : F 0 →ₗ[MvPolynomial (Fin m) k] M), (∀ i : Fin (m + 1), DirectSum.IsInternal (𝒢 i)) ∧ (∀ (i : Fin (m + 1)) (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin m) k) (x : F i), s ∈ homogeneousSubmodule (Fin m) k n → x ∈ 𝒢 i j → s • x ∈ 𝒢 i ((n : ℤ) + j)) ∧ (∀ (i : Fin (m + 1)) (a : Fin (r i)), b i a ∈ 𝒢 i (-(d i a))) ∧ (∀ (i : ℕ) (hi : i < m) (j : ℤ) (x : F ⟨i + 1, Nat.succ_lt_succ hi⟩), x ∈ 𝒢 ⟨i + 1, Nat.succ_lt_succ hi⟩ j → f i hi x ∈ 𝒢 ⟨i, Nat.lt_succ_of_lt hi⟩ j) ∧ (∀ (j : ℤ) (x : F 0), x ∈ 𝒢 0 j → q x ∈ ℳ j) ∧ (m = 0 → Function.Injective q) ∧ (∀ (j : ℕ) (hj : j < m), j + 1 = m → Function.Injective (f j hj)) ∧ (∀ h : 0 < m, LinearMap.range (f 0 h) = LinearMap.ker q) ∧ (∀ (j : ℕ) (hj : j + 1 < m), LinearMap.range (f (j + 1) hj) = LinearMap.ker (f j (Nat.lt_of_succ_lt hj))) ∧ Function.Surjective q",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6267e3c9",
+  "group": "NH",
+  "result": "pass",
+  "note": "MvPolynomial.exists_graded_free_resolution_finite matches the node clause by clause: k field, MvPolynomial (Fin m) k with m:ℕ (0 allowed), Module.Finite, internal ℤ-grading with homogeneousSubmodule compatibility (n=0 case gives k-subspaces). F_i given by a Fin (r i) basis in degree -(d i a); the internal grading is then forced to be the ⊕S(d) grading. Degree-preserving f, q; left injectivity (m=0 via q), every range=ker equality (checked m=1,2), surjectivity. Edge cases M=0, m=0, k over k[x], arbitrary shifts, universes (F in ModuleCat.{u}, M in v) OK. Same interface as the landed two-variable exists_graded_free_resolution_two; no duplicate, no Mathlib match. lean.statement verbatim; only lean differs from live; sorry only; docstrings carry source, blueprint id and 5 steps; private imports are proof-dep modules; report has Worker report and Second reading by NH. No findings."
+ }
+}

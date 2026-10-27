@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-space-geometric-points-conservative",
+ "kind": "statement",
+ "title": "Geometric points of algebraic spaces: topos points, conservativity and inverse image",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $T$ an algebraic space over $S$ [def-trf-algebraic-space], using the universes and small-site convention of [def-weil-size-convention]. A geometric point $\\bar t$ is a map $\\operatorname{Spec}\\Omega\\to T$ with $\\Omega$ algebraically closed. A pointed etale neighbourhood is an etale scheme $U\\to T$ together with a lift $\\bar t\\to U$; arrows are maps over $T$ respecting the lifts. For a sheaf of sets $F$ on $T_{\\mathrm{et}}$, define $F_{\\bar t}$ as the colimit of $F(U)$ over the opposite of this neighbourhood category. This functor is the inverse image of a point $p_{\\bar t}:\\mathbf{Set}\\to\\operatorname{Sh}(T_{\\mathrm{et}})$, where a point means an adjunction $p^{-1}\\dashv p_*$ with $p^{-1}$ preserving finite limits [def-weil-pbc-ringed-topos-morphism, with the ring structures omitted]. A map of sheaves of sets on $T_{\\mathrm{et}}$ is injective, respectively surjective, if and only if its maps on all geometric stalks are injective, respectively surjective. In particular these stalks jointly detect isomorphisms. For every morphism $h:T\\to W$ of algebraic spaces over $S$, the geometric morphism on small etale topoi sends $p_{\\bar t}$ to $p_{h\\bar t}$: there are canonical natural identifications $(h^{-1}F)_{\\bar t}\\cong F_{h\\bar t}$ for every sheaf $F$ on $W_{\\mathrm{et}}$, compatible with the maps on stalk rings and with algebraic operations carried by sheaves.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 04K0 (lemma-stalk-gives-point), 04K2(4) (lemma-stalk-pullback), and 04K5 (theorem-exactness-stalks). Use geometric points of T, as in the first sentence of 04K5 and its proof; the final sentence there prints S for X."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-space-pointed-etale-abelian-stalk",
+  "def-trf-geometric-morphism",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-space-pointed-set-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\bar t$. Put $L(U)=\\operatorname{Hom}_T(\\operatorname{Spec}\\Omega,U)$ and, for a set $A$, define $P_A(U)=\\operatorname{Map}(L(U),A)$, with restriction by precomposition. This is a sheaf. Indeed a covering $\\{U_i\\to U\\}$ is a jointly surjective etale family of schemes by the definition of the small site. Every $l\\in L(U)$ lifts to some $l_i\\in L(U_i)$ by the cited geometric-point lifting lemma, applied to the scheme $U$ and the geometric point $l$ with the original algebraically closed field $\\Omega$. Given matching functions $a_i:L(U_i)\\to A$, set $a(l)=a_i(l_i)$. Two lifts $l_i,l_j$ of $l$ give a unique lift to $U_i\\times_U U_j$ by the scheme fibre-product universal property; the matching condition therefore makes $a(l)$ independent of both choices. This gives the unique glued function, also when $L(U)$ is empty. Functoriality in $A$ is postcomposition, so $A\\mapsto P_A$ is a functor to sheaves. All sets and neighbourhood colimits lie in the fixed universe.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-pc-fibre-product",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8, lemma-point-pushforward-sheaf (1), explicit matching-family proof; lifting input: etale-cohomology.tex Tag 03PR, lemma-geometric-lift-to-cover"
+   }
+  },
+  {
+   "text": "There is a natural adjunction $F\\mapsto F_{\\bar t}\\dashv(A\\mapsto P_A)$. Explicitly a function $b:F_{\\bar t}\\to A$ gives the sheaf map $\\alpha_U(s)(l)=b([U,l,s])$. Conversely a sheaf map $\\alpha:F\\to P_A$ gives $b([U,l,s])=\\alpha_U(s)(l)$. The latter respects every colimit relation because naturality says $\\alpha_V(F(f)s)(l)=\\alpha_U(s)(f l)$ for $f:V\\to U$; the two recipes are inverse and natural in $F,A$. The colimit here is exactly the opposite-neighbourhood colimit in the statement. The cited conservative-stalk node states that this same functor preserves finite limits. Taking $p_{\\bar t}^{-1}F=F_{\\bar t}$ and $(p_{\\bar t})_*A=P_A$ therefore gives a point of the topos in the stated sense of an adjunction with left exact left adjoint.",
+   "uses": [
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y8, lemma-point-pushforward-sheaf (2), and 00YA, lemma-point-site-topos (1); spaces-properties.tex Tag 04K0, lemma-stalk-gives-point, identifies this stalk"
+   }
+  },
+  {
+   "text": "Apply the cited conservative-stalk node with $X=T$. Its colimit uses the same pointed etale scheme neighbourhoods, and it states precisely the equivalences between monomorphisms, epimorphisms and isomorphisms of sheaves and injective, surjective and bijective maps on all geometric stalks. Thus it gives the claimed injectivity and surjectivity criteria (surjectivity of sheaves means local surjectivity, or epimorphism), and joint detection of isomorphisms. In particular no assertion of surjectivity on sections of every object is used. For $T=\\varnothing$ its stated empty-space clause gives the same conclusions despite the empty family of geometric points.",
+   "uses": [
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K5, theorem-exactness-stalks, first assertion and proof"
+   }
+  },
+  {
+   "text": "For $h:T\\to W$, use the canonical small-etale geometric morphism of the enlarged ringed-site model. Apply the cited chart-comparison node to get $c_F:(h^{-1}F)_{\\bar t}\\xrightarrow{\\sim}F_{h\\bar t}$ naturally in $F$. That node is phrased over $\\operatorname{Spec}\\mathbf Z$, so first apply [lem-sfb-space-change-base-to-integers] to $S\\to\\operatorname{Spec}\\mathbf Z$: by its clause (1) $j_!T$ and $j_!W$ are algebraic spaces over $\\operatorname{Spec}\\mathbf Z$ and $j_!h$ is a morphism of them, and by its clause (3) the small etale sites of $T$ and $j_!T$ (and of $W$ and $j_!W$) are identified with their coverings and structure sheaves, carrying $V\\mapsto V\\times_WT$ to the base-change functor of $j_!h$. Geometric points correspond, since any scheme over $T$ acquires its unique compatible $S$-structure by composition. Hence the topos morphism and ring map of the chart-comparison node for $j_!h$ are those for the present $h$, and so is its stalk comparison. This identifies inverse images of the two points; their right adjoints are then canonically identified by the same adjunction bijections. For algebraic compatibility, naturality with the projections from $F^n$ gives $c_{F^n}=c_F^n$ under the finite-product identifications, and the terminal-object case gives compatibility with constants. Naturality with each operation $F^n\\to F$ now says $c_F$ preserves it; the same argument with products of different sheaves covers scalar actions. Finally the structural ring map $h^{-1}\\mathcal O_W\\to\\mathcal O_T$ from the ringed-site model gives on stalks the composite $\\mathcal O_{W,h\\bar t}\\xrightarrow{c_{\\mathcal O_W}^{-1}}(h^{-1}\\mathcal O_W)_{\\bar t}\\to\\mathcal O_{T,\\bar t}$. This is the canonical stalk-ring map, with its chartwise description supplied by the chart-comparison node. Thus the point comparison respects ring maps and the algebraic operations as asserted.",
+   "uses": [
+    "lem-sfb-space-etale-pullback-chart-comparison",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K2, lemma-stalk-pullback (4), using the canonical ringed morphism and chart restrictions; finite-operation compatibility follows by naturality with operations and projections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-etale-pullback-chart-comparison",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 04K0, lemma-stalk-gives-point; 04K2(4), lemma-stalk-pullback; 04K5, theorem-exactness-stalks; adjunction spelled out from sites.tex Tags 00Y8 and 00YA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric points form a conservative family of points of the small etale topos of an algebraic space, and inverse image sends stalks to stalks at the image point",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instIsOverMapStalkMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.stalkMap_congr_point, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.Scheme.stalkMap_congr_point_assoc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic site points and scheme etale categories do not establish geometric-point realization or enough points for algebraic spaces; the whole-Mathlib AlgebraicSpace grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebraic space has geometric points given by filtered colimits over pointed etale neighborhoods; all geometric fibers detect injective and surjective maps of sheaves",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.IsEtale.instIsSmooth. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic site points and scheme etale categories do not establish geometric-point realization or enough points for algebraic spaces; the whole-Mathlib AlgebraicSpace grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small etale topoi of algebraic spaces have enough geometric points and stalks commute with inverse image",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.stalkMap_germ, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic site points and scheme etale categories do not establish geometric-point realization or enough points for algebraic spaces; the whole-Mathlib AlgebraicSpace grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point",
+   "sub": "",
+   "results": "Search succeeded; 12 hits: CategoryTheory.GrothendieckTopology.Point, CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFiber, CategoryTheory.GrothendieckTopology.Point.initiallySmall, CategoryTheory.GrothendieckTopology.Point.isCofiltered, CategoryTheory.GrothendieckTopology.Point.uniqueFiberObj, CategoryTheory.GrothendieckTopology.Point.isTerminalFiberObj, CategoryTheory.GrothendieckTopology.Point.presheafFiber. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic site points and scheme etale categories do not establish geometric-point realization or enough points for algebraic spaces; the whole-Mathlib AlgebraicSpace grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|geometricPoint|EnoughPoints|sheafFiber",
+   "sub": "CategoryTheory/Sites",
+   "results": "Search succeeded; 25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic site points and scheme etale categories do not establish geometric-point realization or enough points for algebraic spaces; the whole-Mathlib AlgebraicSpace grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace",
+   "sub": "",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic site points and scheme etale categories do not establish geometric-point realization or enough points for algebraic spaces; the whole-Mathlib AlgebraicSpace grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|geometric.*conservative|etale.*point",
+   "sub": "AlgebraicGeometry",
+   "results": "Search succeeded; 3 hits: Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale points, ordinary topological stalks and abstract site points do not give all clauses for algebraic spaces; Mathlib has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric point of an algebraic space gives a point of its small etale topos whose stalk commutes with inverse image",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.PresheafedSpace.stalkMap.isIso, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.Scheme.Hom.stalkMap, TopCat.Presheaf.stalk, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale points, ordinary topological stalks and abstract site points do not give all clauses for algebraic spaces; Mathlib has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks on an algebraic space small etale topos define points, detect monomorphisms and epimorphisms, and commute with inverse image",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.stalkwise, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.Scheme.IsGermInjective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale points, ordinary topological stalks and abstract site points do not give all clauses for algebraic spaces; Mathlib has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point",
+   "sub": "",
+   "results": "Search succeeded; 12 hits: CategoryTheory.GrothendieckTopology.Point, CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFiber, CategoryTheory.GrothendieckTopology.Point.initiallySmall, CategoryTheory.GrothendieckTopology.Point.isCofiltered, CategoryTheory.GrothendieckTopology.Point.uniqueFiberObj, CategoryTheory.GrothendieckTopology.Point.isTerminalFiberObj, CategoryTheory.GrothendieckTopology.Point.presheafFiber. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale points, ordinary topological stalks and abstract site points do not give all clauses for algebraic spaces; Mathlib has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace",
+   "sub": "",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale points, ordinary topological stalks and abstract site points do not give all clauses for algebraic spaces; Mathlib has no AlgebraicSpace occurrence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of sets on an algebraic space, the colimit over pointed etale neighborhoods is a left exact left adjoint with right adjoint A mapped to functions from geometric lifts into A",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits, TopCat.Sheaf.instIsLeftAdjointPullback, instIsLeftAdjointPresheafStalkFunctor, CategoryTheory.sheafToPresheaf_isRightAdjoint, CategoryTheory.instIsRightAdjointSheafΓ, AlgebraicGeometry.SheafedSpace.colimit_exists_rep, TopCat.Sheaf.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale points, ordinary topological stalks and abstract site points do not give all clauses for algebraic spaces; Mathlib has no AlgebraicSpace occurrence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-stalk-ideal-pullback",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 06BH (lemma-deform), both directions. Supporting input: the stalk and ideal comparisons underlying the etale-chart reduction in Tag 06BH. General geometric-point input for the stalk reduction in Tag 06BH, independent of thickenings.",
+   "via": [
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-geometric-points-conservative",
+  "worker": "stage1",
+  "summary": "Reused existing conservative geometric-stalk and ringed chart-comparison nodes rather than duplicating their clauses. Constructed the skyscraper right adjoint and its sheaf gluing and adjunction explicitly; checked naturality with operations and structural rings. Statement unchanged; no new nodes.",
+  "blueprint": "Supporting geometric-point input in the ancestry recorded by blueprint.from.place, beneath det-thm-sf-ctf-stability-direct-images (3). The latest blueprint direct-image proof uses compactification and proper/open preservation; this split is a site-theoretic prerequisite, not a replacement of that route. The ancestor command returns None, so the inherited null from.node and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Canonical small-etale ringed morphism for an algebraic-space map, used as a site-theoretic black box; this is a prerequisite to geometric-stalk compatibility, not a replacement of the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-237c57645",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-237c57645 (reviewer sub-agent of L); spot-checked: Read the whole item: statement unchanged, 4 steps, no new nodes. Read the statements of all cited nodes and Stacks 04K0, 04K2(4), 04K5 (first sentence; the 'geometric points of S' typo is not used), 00Y8 and 00YA. Step 1: the skyscraper sheaf check via the 03PR lift lemma (same Ω), with overlap lifts from the fibre product; correct and elementary. Step 2: explicit adjunction, with naturality identical to the colimit relations; finite-limit preservation is taken from the conservative node's statement; correct. Step 3: cites the conservative node's mono/epi/iso clause, including the empty space; correct. Step 4: operation compatibility via naturality with projections and operations, and the stalk ring map as the explicit composite; correct. I accept 'canonical' in the chart-comparison node as natural in F, as in Stacks 04K2(4). C1/E1 fault in step 4: the chart-comparison node assumes algebraic spaces over Spec Z, but T and W are over S; the inline line 'forgetting S changes neither site nor coverings' does not show that j_!T and j_!W are algebraic spaces over Z. FIX: step 4 now cites the existing reviewed same-unit node lem-sfb-space-change-base-to-integers (clauses (1) and (3)), also added to proof_deps; no cycle, and it is on the base. Batch 5: lem-trf-space-enlarged-etale-ringed-site-model is the general enlarged étale site / ringed morphism for algebraic spaces. It is not part of the trace formula or Poincaré duality and is already a stmt_dep of the cited chart-comparison node, so it is accepted as generic, and its declared tool use is accepted. No duplicate or restated nodes (D1 does not apply), no SGA. Edge cases tested: T empty, h = id, a scheme chart, and h not representable.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGeometricPointsConservative",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.geometricStalk_mono_epi_iso_iff",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleMorphism",
+   "AlgebraicGeometry.AlgebraicSpace.smallDirectImageChartSection",
+   "AlgebraicGeometry.AlgebraicSpace.inverseImageChartSection",
+   "AlgebraicGeometry.AlgebraicSpace.IsGeometricStalkComparison",
+   "AlgebraicGeometry.AlgebraicSpace.geometricStructureSets_isSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.geometricStructureSets",
+   "AlgebraicGeometry.AlgebraicSpace.IsGeometricStructuralMap",
+   "AlgebraicGeometry.AlgebraicSpace.pointedSetStalk_isPoint",
+   "AlgebraicGeometry.AlgebraicSpace.geometricStalk_mono_epi_iso_iff",
+   "AlgebraicGeometry.AlgebraicSpace.geometricStalk_inverseImage",
+   "AlgebraicGeometry.AlgebraicSpace.geometricStalk_structureMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGeometricPointsConservative.lean",
+  "statement": "theorem geometricStalk_mono_epi_iso_iff (X : AlgebraicSpace S) {F G : Sheaf X.etaleTopology (Type (max (u + 1) w))} (α : F ⟶ G) : (Mono α ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), Function.Injective ((X.pointedSetStalk x).map α)) ∧ (Epi α ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), Function.Surjective ((X.pointedSetStalk x).map α)) ∧ (IsIso α ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), Function.Bijective ((X.pointedSetStalk x).map α))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are stated in this module: the literal pointed-neighbourhood set colimit and its germs; the point adjunction and finite-limit preservation; the mono/epi/iso stalk criteria; the uniquely germ-normalized natural inverse-image comparison with its finite-product equation; and the chart-normalized structural map with its stalk formula. The named sheaf-condition obligation supports the real ULift regular-function sheaf. Added statement dependencies are already-landed interfaces used literally; no statement correction. Maintenance H2 extraction: pointedSetStalk and pointedSetGerm now belong to def-sfb-space-pointed-set-stalk / AlgebraicSpaceSetStalk, publicly imported here; all remaining declaration bodies and signatures are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2a45e830",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, Stacks 04K0/04K2(4)/04K5, the module and dep declarations (PointedEtale, enlargedSmallDirectImage(_geometric), enlargedSetEquivalence, enlargedChartLift, GeometricMorphism). All clauses rendered faithfully: literal pointed-neighbourhood set stalk; point = ∃ right adjoint + PreservesFiniteLimits; Mono/Epi/IsIso iff Injective/Surjective/Bijective on all geometric stalks; ∃! germ-normalized natural iso (h^{-1}F)_x ≅ F_{hx} (uniqueness valid by local unit-image sections + 03PR lifting; product clause = naturality, as in node proof); ∃! chart-pinned structure map with stalk formula over normalized e. Mechanical theorem-stmt_dep finding: statement genuinely uses enlargedSmallDirectImage_geometric.choose/choose_spec (the constructed geometric morphism, no def node supplies it) → PASS on that point. Statement verbatim; no cycle from added stmt_deps; no name clashes or duplicate notion (geometric-stalk-models is ring/module on affine basis; abelian stalk reused category); no extra hypotheses; edge cases T=∅, n=0, h=id fine. Advisory H9: unused RingedToposMorphism public import and EtalePoint private import. No file changed, no compile."
+ }
+}

@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-two-field-scalar-algebraicity",
+ "kind": "statement",
+ "title": "Two locally finite type field structures on an algebraic space give algebraically dependent scalars",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $E/S$ be an algebraic space [def-trf-algebraic-space]. Let $k_1,k_2$ be fields [def-weil-field] with maps $\\operatorname{Spec}k_i\\to S$, and let $p_i:E\\to\\operatorname{Spec}k_i$ be $S$-morphisms. Assume each $p_i$ is locally of finite type: for every representable etale scheme chart $U\\to E$ [def-weil-etale-morphism], the scheme map $U\\to\\operatorname{Spec}k_i$ is locally of finite type [def-weil-finite-type-morphism]. Let $F$ be a field and $e:\\operatorname{Spec}F\\to E$ an $S$-morphism [def-weil-affine-spectrum]. Write $j_i:k_i\\hookrightarrow F$ for the field homomorphism induced by $p_i e$. Then for every $\\lambda\\in k_1$, the element $j_1(\\lambda)$ is algebraic over $j_2(k_2)$: it is a root of a nonzero polynomial with coefficients in $j_2(k_2)$ [def-weil-polynomial-ring]. The assertion also holds with $1$ and $2$ interchanged. No reducedness, connectedness, quasi-compactness or finite-type hypothesis on $E\\to S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04MK (proposition-unique-base-field), applied on the reduced closure of a point in an etale scheme chart, then mapped into a common extension of the point field. This is the scalar consequence of the integral-closure equality, allowing arbitrary algebraic spaces via their defining etale charts."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $q:U\\to E$. By the scheme-test definition, $V=U\\times_E\\operatorname{Spec}F$ is a scheme and $V\\to\\operatorname{Spec}F$ is surjective, so choose $v\\in V$. The canonical residue-field morphism $\\operatorname{Spec}L\\to V$, $L=\\kappa(v)$, gives a field embedding $h:F\\hookrightarrow L$ and a map $u:\\operatorname{Spec}L\\to U$ with $qu=e\\operatorname{Spec}h$. In particular the two scalar maps to $L$ obtained through $U$ are exactly $h j_i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y (definition-algebraic-space), atlas and scheme-test surjectivity; schemes.tex Tag 01J9 (lemma-characterize-points), preceding discussion of residue-field morphisms"
+   }
+  },
+  {
+   "text": "Choose an affine open $U_0\\subseteq U$ containing the image of the unique point of $\\operatorname{Spec}L$. Write $U_0\\cong\\operatorname{Spec}A$. The map $u$ factors through $U_0$ and therefore gives a ring map $\\psi:A\\to L$. By hypothesis $p_iq:U\\to\\operatorname{Spec}k_i$ is locally of finite type. Applying the all-affine-pairs criterion to $U_0$ and $\\operatorname{Spec}k_i$ shows that $A$ is finitely generated as a $k_i$-algebra for each $i$. Write $\\alpha_i:k_i\\to A$ for these scalar maps; functoriality gives $\\psi\\alpha_i=h j_i$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01IJ (definition-scheme), and 01HI (lemma-restrict-map-to-opens); morphisms.tex Tag 01T2 (lemma-locally-finite-type-characterize), (1) implies (2)"
+   }
+  },
+  {
+   "text": "Set $\\mathfrak p=\\ker\\psi$ and $B=A/\\mathfrak p$. Since $L$ is a field, $1\\notin\\mathfrak p$ and $ab\\in\\mathfrak p$ implies $a\\in\\mathfrak p$ or $b\\in\\mathfrak p$; hence $B$ is a nonzero domain. The induced map $\\bar\\psi:B\\hookrightarrow L$ is injective. If $a_1,\\ldots,a_n$ generate $A$ over $k_i$, their images generate $B$ over $k_i$. Thus $Z=\\operatorname{Spec}B$ has both structure maps locally of finite type, by the affine-cover definition. Write $\\rho_i:k_i\\hookrightarrow B$ for the scalar maps; they are injective because their composites with $\\bar\\psi$ are the embeddings $h j_i$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), affine prime-quotient reduction supplied here; elementary quotient-generator argument"
+   }
+  },
+  {
+   "text": "The domain $B$ is reduced: if $b^n=0$ with $n>0$, repeated cancellation in a domain gives $b=0$. The affine reducedness criterion makes $Z$ reduced. Its zero ideal is prime, and $V((0))=\\operatorname{Spec}B$ is irreducible by the prime-spectrum criterion; it contains the zero prime, so it is nonempty. Irreducibility implies connectedness. Consequently $Z$ satisfies all the topological and reducedness hypotheses needed for scalar-field uniqueness.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-pc-irreducible-space-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J2 (lemma-affine-reduced); algebra.tex Tag 00ES (lemma-irreducible), (2); topology.tex immediately after Tag 004V (definition-irreducible-components)"
+   }
+  },
+  {
+   "text": "Apply scalar-field uniqueness to the nonempty connected reduced scheme $Z$ and its two locally finite type field structures. Its global-section ring is $B$. Let $C_i\\subset B$ be the subring of elements satisfying a monic polynomial over $\\rho_i(k_i)$; the cited theorem gives $C_1=C_2$. For $\\lambda\\in k_1$, $\\rho_1(\\lambda)$ belongs to $C_1$ by the polynomial $T-\\rho_1(\\lambda)$. Hence it belongs to $C_2$: there are $n\\ge1$ and $c_0,\\ldots,c_{n-1}\\in k_2$ such that $\\rho_1(\\lambda)^n+\\sum_{r<n}\\rho_2(c_r)\\rho_1(\\lambda)^r=0$ in $B$. Degree zero cannot occur because a monic constant polynomial is $1$ and $B$ is nonzero.",
+   "uses": [
+    "lem-sfb-connected-reduced-scalar-field-uniqueness",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), equality of integral closures, specialized to the affine domain B"
+   }
+  },
+  {
+   "text": "Apply $\\bar\\psi$ to the equation. Using $\\bar\\psi\\rho_i=h j_i$, it becomes $h(j_1(\\lambda)^n+\\sum_{r<n}j_2(c_r)j_1(\\lambda)^r)=0$. The field homomorphism $h$ is injective, so the expression inside $h$ is zero in $F$. Thus $T^n+\\sum_{r<n}j_2(c_r)T^r\\in j_2(k_2)[T]$ annihilates $j_1(\\lambda)$. It is nonzero because its leading coefficient is $1$. Interchanging the two indices in the same argument proves the other assertion. The construction used only one point of an atlas and one affine neighbourhood, so imposes none of the additional global hypotheses excluded in the statement.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04MK (proposition-unique-base-field), polynomial consequence and elementary reflection along an injective field homomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-affine-spectrum",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-pc-irreducible-space-connected",
+  "lem-sfb-connected-reduced-scalar-field-uniqueness",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04MK (proposition-unique-base-field), scalar consequence via an affine prime quotient in an etale atlas; supporting scheme facts cited in the steps. Compare stacks-morphisms.tex Tag 0DTM, proof of lemma-universally-injective-point."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space locally of finite type over two fields the images of the two fields at every point are algebraic over each other",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType; AlgebraicGeometry.finite_appTop_of_universallyClosed; Algebra.finite_of_essFiniteType_of_isAlgebraic; AlgebraicGeometry.LocallyOfFiniteType.stalkMap; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; AlgebraicGeometry.isField_of_universallyClosed; Algebra.EssFiniteType.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two locally finite type field structures on an algebraic space have the same relative algebraic closure in a residue field",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicClosure.isAlgClosed; algebraicClosure.algebraicClosure_eq_bot; AlgebraicClosure.instCharZero; algebraicClosure; algebraicClosure.algEquivOfAlgEquiv; IsAlgClosure.ofAlgebraic; AlgebraicClosure.instIsAlgClosureOfIsAlgebraic; algebraicClosure.isAlgClosure",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"IsAlgebraic\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "grep",
+   "query": "unique.base.field|two.field.structures|AlgebraicSpace.*[Aa]lgebraic",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness up to algebraicity of two fields of scalars on a finite type algebraic space",
+   "results": "[leanfinder] OK 8 hit(s). Algebra.finite_of_essFiniteType_of_isAlgebraic; Algebra.IsAlgebraic.isAlgebraic_iff_top; Algebra.IsIntegral.isAlgebraic_iff_top; Algebra.EssFiniteType.algHom_ext; Algebra.IsAlgebraic.isAlgebraic_iff_bot; Algebra.IsAlgebraic.bijective_of_isScalarTower'; IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two; Algebra.IsAlgebraic.algHom_bijective₂",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced connected scheme locally of finite type over two fields the integral closures of both fields in global sections are equal",
+   "results": "[leanfinder] OK 8 hit(s). integralClosure.isFractionRing_of_finite_extension; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral; AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier; AlgebraicGeometry.affine_isIntegral_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated integral domain over two different subfields has the same algebraic closure of either subfield",
+   "results": "[leansearch] OK 8 hit(s). algebraicClosure; algebraicClosure.algEquivOfAlgEquiv; Subalgebra.algebraicClosure_eq_integralClosure; algebraicClosure.isIntegralClosure; Ring.instFiniteDimensionalFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure; mem_algebraicClosure_iff'; integralClosure_le_algebraicClosure; algebraicClosure.isAlgebraic",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"integralClosure\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "grep",
+   "query": "unique.base.field|integralClosure.*ground|ground.*field",
+   "results": "[grep] OK 2 hit(s). Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean; Mathlib/Combinatorics/Matroid/IndepAxioms.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of a field of definition up to algebraic extension for a scheme of finite type over two fields",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.ValuativeCommSq.field; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField; AlgebraicGeometry.IsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: relative algebraic closure definitions and transitivity lemmas do not compare two independent fields of scalars. The scheme global-section results found in Proper.lean require universal closedness, absent here; the local finite type declarations alone do not assert algebraic dependence of the two scalar images."
+  },
+  {
+   "tool": "grep",
+   "query": "unique.base.field|two.field.structures|AlgebraicSpace.*[Aa]lgebraic",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern residue-field maps, integral closures for a fixed scalar structure, or universally closed morphisms. They do not compare two independent locally finite type field structures; universal closedness is absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two fields acting on the same locally finite type scheme have the same integral closure in global sections",
+   "results": "[leansearch] OK 8 hit(s). Field.instIsIntegrallyClosed; IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn; IsIntegrallyClosed.of_equiv; Ring.NormalClosure; IsLocalization.Away.integralClosure; integralClosure.isIntegralClosure; isIntegrallyClosed_iff_isIntegralClosure; IsIntegrallyClosed.of_isIntegrallyClosedIn",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern residue-field maps, integral closures for a fixed scalar structure, or universally closed morphisms. They do not compare two independent locally finite type field structures; universal closedness is absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"IsAlgebraic\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern residue-field maps, integral closures for a fixed scalar structure, or universally closed morphisms. They do not compare two independent locally finite type field structures; universal closedness is absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space locally of finite type over two fields has algebraic images of either field in each residue field",
+   "results": "[leanfinder] OK 8 hit(s). instIsAlgebraicResidueFieldOfIsIntegral; AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.Scheme.SpecToEquivOfField; Algebra.QuasiFinite.instResidueField; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; Algebra.QuasiFinite.instFiniteResidueField; RingHom.EssFiniteType.residueFieldMap",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern residue-field maps, integral closures for a fixed scalar structure, or universally closed morphisms. They do not compare two independent locally finite type field structures; universal closedness is absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of ground fields up to algebraic dependence for a scheme locally of finite type over two fields",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField; AlgebraicGeometry.ValuativeCommSq.field; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern residue-field maps, integral closures for a fixed scalar structure, or universally closed morphisms. They do not compare two independent locally finite type field structures; universal closedness is absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-universally-injective-point-lift",
+  "date": "2026-10-23",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Geometric points of a universal homeomorphism from a stack. Supporting input: same-field lifting over the topological image, before concluding surjectivity on geometric objects. Supporting input to Stacks 0DTM: Two locally finite type field structures on an algebraic space give algebraically dependent scalars. The current latest blueprint has direct-image preservation in paragraph (3); the inherited descendant creation chain has no machine-resolvable blueprint ancestor.",
+   "via": [
+    "lem-sfb-stack-universally-injective-point-lift",
+    "lem-sfb-stack-universal-homeomorphism-geometric-points",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-two-field-scalar-algebraicity",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reduced a field-valued point to a nonzero prime quotient of an affine etale chart, applied the existing connected reduced scalar-field uniqueness node (04MK), and reflected a monic relation along F to L. All auxiliary scheme facts reuse existing nodes; no new nodes. Checked all cited statements, edge cases, Mathlib searches, and latest blueprint direct-image paragraph (3).",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): supports the inherited alteration/coarse-space/point-lifting chain recorded in blueprint.from.place. Ancestor command reports None; inherited lineage and via are retained. No unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-2524834b3",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-2524834b3 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, every cited statement, and the sources: varieties.tex 04MK proposition-unique-base-field and stacks-morphisms.tex 0DTM lemma-universally-injective-point. The mathematics is correct. Step 1 picks a point v of U×_E Spec F, which is nonempty by representability and surjectivity of the atlas, and passes to L=κ(v). Step 2 takes an affine U_0 with u factoring through it; lft-affine-pairs makes A finitely generated over each k_i. Step 3 forms the prime quotient B=A/ker ψ, a nonzero domain of finite type over both k_i (elementary). Step 4 shows Spec B is reduced, irreducible, hence connected, and nonempty (01J2, 00ES(2)). Step 5 applies the existing same-unit node lem-sfb-connected-reduced-scalar-field-uniqueness (04MK+04MI, nonempty connected reduced, both maps lft) to get C_1=C_2 and a monic relation of degree ≥1, since B≠0. Step 6 reflects the relation along the injective h. No new nodes and no tool_uses are needed: the cited nodes are Mathlib leaves, definitions or same-unit. There is no cycle, since the uniqueness node is unsplit. The statement is unchanged and not weakened, and it matches its citer lem-sfb-stack-universally-injective-point-lift step. Edge cases checked: E empty, nonreduced or disconnected E, generic point, equal maps, λ=0, large F. No duplicate found (04MK search gives 4 nodes). No SGA. FIX: added def-weil-affine-spectrum to step 1 uses, since h:F→L is Spec-full-faithfulness or the residue field of Spec F; it was already in proof_deps, so proof_deps is unchanged. Nothing else was changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceTwoFieldScalarAlgebraicity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.scalar_algebraicity_of_two_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceTwoFieldScalarAlgebraicity.lean",
+  "statement": "theorem scalar_algebraicity_of_two_locallyOfFiniteType {S : Scheme.{u}} (E : AlgebraicSpace S) (k₁ k₂ F : Type u) [Field k₁] [Field k₂] [Field F] (s₁ : Spec (CommRingCat.of k₁) ⟶ S) (s₂ : Spec (CommRingCat.of k₂) ⟶ S) (sF : Spec (CommRingCat.of F) ⟶ S) (p₁ : E.obj.obj ⟶ yoneda.obj (Over.mk s₁)) (p₂ : E.obj.obj ⟶ yoneda.obj (Over.mk s₂)) (hp₁ : ∀ (U : Over S) (a : yoneda.obj U ⟶ E.obj.obj), IsEtale a → LocallyOfFiniteType (yoneda.preimage (a ≫ p₁)).left) (hp₂ : ∀ (U : Over S) (a : yoneda.obj U ⟶ E.obj.obj), IsEtale a → LocallyOfFiniteType (yoneda.preimage (a ≫ p₂)).left) (e : yoneda.obj (Over.mk sF) ⟶ E.obj.obj) (j₁ : k₁ →+* F) (j₂ : k₂ →+* F) (hj₁ : (yoneda.preimage (e ≫ p₁)).left = Spec.map (CommRingCat.ofHom j₁)) (hj₂ : (yoneda.preimage (e ≫ p₂)).left = Spec.map (CommRingCat.ofHom j₂)) : (∀ x : k₁, ∃ P : Polynomial k₂, P ≠ 0 ∧ P.eval₂ j₂ (j₁ x) = 0) ∧ (∀ x : k₂, ∃ P : Polynomial k₁, P ≠ 0 ∧ P.eval₂ j₁ (j₂ x) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fae414f7",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read item, 7 stmt_deps, AlgebraicSpace.lean (IsRepresentableWith/IsEtale/IsAlgebraicSpace), module, report. Clause-by-clause match: E : AlgebraicSpace S; p_i S-maps to yoneda(Over.mk s_i); hp_i LFT on every IsEtale chart (no surjectivity, as node); e S-point; j_i pinned by hj_i via Spec.map (canonical, Spec fully faithful); both conclusions nonzero poly over other field via eval₂; no extra hyps on E. Universe u for fields forced by Spec in Scheme.{u}. Edge cases ok (E empty, x=0/1, equal fields different embeddings, generic points). lean.statement verbatim; node differs from live only by lean; no duplicate/parallel delivery; docstrings with source + blueprint + 6 steps; no definitions, sorry only; worker scompile exit 0, dry run OK. No findings."
+ }
+}

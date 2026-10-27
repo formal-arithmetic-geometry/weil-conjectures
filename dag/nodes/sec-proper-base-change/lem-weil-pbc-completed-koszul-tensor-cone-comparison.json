@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-tensor-cone-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Order 1248, strict tensor augmentation in the Koszul reconstruction proof; Stacks 099M, proof of lemma-naive-completion, total tensor of the finite Koszul augmentation",
+   "via": [
+    "lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero",
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor comparison for the normalized completed Koszul cone towers",
+ "statement": "For the actual strict functors of [lem-weil-pbc-completed-koszul-tensor-quotient-augmentation], let beta be any natural augmentation normalized on the Koszul unit and zero on all total summands with nonzero exterior degree. For every unbounded complex P of completed coefficient module sheaves, the entire strict cone tower of beta at P is isomorphic to left tensor by P of the strict cone tower of beta at the cochain tensor unit. This is an isomorphism of towers of cochain complexes, before localization; no K-flatness or pro-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proetale.tex, proof of lemma-naive-completion, finite total tensor of the Koszul augmentation; sites-cohomology.tex, lemma-K-flat-quasi-isomorphism (06YP); the signed tensor-cone formula as stated by lem-pc-tensor-mapping-cone-iso."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-weil-pbc-completed-koszul-coefficient-cone-realization"
+ ],
+ "proof": [
+  {
+   "text": "At a fixed level use completedKoszulTensorAugmentationComponent. Its coefficient map is obtained from beta at the cochain unit by the source left unitor and the quotient single-complex comparison. The now-proved invertibility of the actual completed degree-zero Koszul unit and the two unit normalization equations fix its degree-zero component. Total summand detection proves the square for arbitrary P, with nonzero exterior degrees zero by hz.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-tensor-augmentation-component"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build the source comparison by tensoring the Koszul left unitor. Build the target comparison by tensoring the inverse single-degree-zero comparison at the cochain unit, composing with the left unitor, and then using the single-degree-zero comparison at P. Prove the latter jointly natural in P and the quotient module using its explicit inverse summand formula. The two comparisons commute with successive transitions by unitor naturality and this single-complex naturality. NatTrans.ofOpSequence supplies strict natural transformations and their pointwise isomorphisms. These constructions are checked for arbitrary object sequences before specialization to the completed Koszul and quotient objects.",
+   "uses": [
+    "def-weil-pbc-koszul-reconstruction-models",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of a cone complex of towers is naturally its levelwise cone tower, by the additive cone comparison for evaluation. Apply CochainComplex.mapBifunctorMappingCone2Iso at each level and its existing naturality theorem at the strict transition squares. Transfer the resulting cone tower along the two isomorphisms of arrows from the normalization square. The inverse square and mappingCone.map_comp and map_id prove the inverse identities. Compose the four strict tower isomorphisms to obtain the claimed Nonempty, with exactly the signed total-tensor cone convention.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-koszul-tensor-augmentation-component",
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M finite Koszul tensor augmentation; explicit normalization by total summands, strict sequence naturality, and the existing natural signed tensor-cone comparison. Proof by P5, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized augmentation from a Koszul total tensor complex to the quotient tensor complex equals tensor of its value at the tensor unit",
+   "results": "8 hits: HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, HomologicalComplex.instHasTensorXTensorUnit, HomologicalComplex.ιTensorObj, HomologicalComplex.instHasTensorXTensorUnit_1, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized Koszul augmentation cone commutes with tensoring by an arbitrary unbounded complex",
+   "results": "8 hits: CochainComplex.augmentTruncate, ChainComplex.augment, CategoryTheory.CosimplicialObject.instCategoryAugmented, CategoryTheory.CosimplicialObject.Augmented, CochainComplex.augment, ChainComplex.truncateAugment, CategoryTheory.Idempotents.DoldKan.N, HomologicalComplex.tensorObj",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(cone|augment)|completed.*koszul",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*tensor|tensor.*mappingCone",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -i koszul.*(cone|augment)|completed.*koszul in Mathlib/Algebra/Homology and Mathlib/RingTheory; rg tensor cone in Mathlib/Algebra/Homology",
+   "results": "No matching declarations. Source-library analogues AdicResidueKoszulCoefficientConeComparison and FlatConstantTensorProZeroCones use respectively a different coefficient-slice/dual model and generic tensor-cone APIs, not this finite model identification.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; the cited generic APIs supply part of the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorQuotientConeProZero",
+  "date": "2026-10-27",
+  "group": "V3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorConeComparison",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorConeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulTensorConeComparison",
+  "statement": "theorem completedKoszulTensorConeComparison\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A)\n    (β : completedKoszulTensorTower T d r a ⟶\n      (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ))\n    (hu : ∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n      completedAdicKoszulTensorUnit T d r a P n ≫\n        (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n          completedQuotientTensorUnit T d P n)\n    (hz : ∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),\n      completedKoszulTensorSummand T d r a P n p q ≫\n          ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n            (β.app P)).app (op n)).f (p + q) = 0)\n    (P : CochainComplex (CompletedAdicModules T d) ℤ) :\n    Nonempty\n      ((CochainComplex.mappingCone\n        (β.app (𝟙_ (CochainComplex (CompletedAdicModules T d) ℤ)))).asFunctor ⋙\n          tensorLeft P ≅ (CochainComplex.mappingCone (β.app P)).asFunctor)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T012955-L-2354127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

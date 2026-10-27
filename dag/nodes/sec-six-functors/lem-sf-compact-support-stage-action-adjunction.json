@@ -1,0 +1,157 @@
+{
+ "id": "lem-sf-compact-support-stage-action-adjunction",
+ "kind": "statement",
+ "title": "Adjunction for the realized common-stage compact-support action",
+ "statement": "Let l be prime and D be a finite-field datum, with l different from D.p. Let f : X → Y be a separated finite-type morphism of finite-type D.k-schemes, with no absolute separatedness assumption, and fix a compactification c of f. Let P be a normalized CoefficientConstruction at the auxiliary algebraic closure ULift(PadicAlgCl l), and let S be any StageAction l D hl P c of the locally finite adic compact-support realization [lem-sf-locally-finite-adic-compact-support-realization]. Thus its finite left functors and scalar comparisons are the rational functors and q-comparisons in P [lem-sf-constructible-exceptional-coefficient-construction]. Then the actual S.system.functor on the unlifted common-stage categories is a left adjoint.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Common finite-field passage and final exceptional-adjunction sentence; rational coefficient adjunction descent"
+ },
+ "stmt_deps": [
+  "lem-sf-locally-finite-adic-compact-support-realization",
+  "lem-sf-constructible-exceptional-coefficient-construction"
+ ],
+ "proof": [
+  {
+   "text": "At each unlifted finite coefficient stage take the right functor and adjunction of P.ring.operation c (.rational (finiteField l E)). Transport its left functor along S.finite. Identify each stage-system transition with the published rational scalar functor using stageSystem_existsUnique, and transport the invertible b of P.fields.rationalComparison along those transition equalities. The defining counit equation and S.scalar give the counit square for S.system.beta.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Common finite-field passage and final exceptional-adjunction sentence; rational coefficient adjunction descent"
+   }
+  },
+  {
+   "text": "Prove the right stage coherence directly from S.system.coh and these counit squares: transpose both proposed composites under the final finite adjunction, precompose with the two invertible left comparisons, use their naturality and the two counit squares, and finish with naturality of the stage associator and S.system.coh. This constructs a coherent right stage morphism without separately invoking coefficient_construction_coherence. Transposing the counit square and using the adjunction triangles gives the unit square. Thus the finite units and counits give compatible Hom records for the identity and composite stage morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Common finite-field passage and final exceptional-adjunction sentence; rational coefficient adjunction descent"
+   }
+  },
+  {
+   "text": "Apply StageSystem.Morphism.adjunction to the right stage morphism, finite adjunctions, and compatible unit and counit records. Extract its IsLeftAdjoint property. The descent retains the original unlifted finite coefficient categories, includes repeated stages, and applies unchanged to zero objects and empty schemes.",
+   "uses": [
+    "lem-coef-qbar-stage-adjunction-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Common finite-field passage and final exceptional-adjunction sentence; rational coefficient adjunction descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-qbar-stage-adjunction-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Common finite-field passage and final exceptional-adjunction sentence; rational coefficient adjunction descent; direct finite counit-transpose proof of right stage coherence (W4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An adjunction of compatible functors at every stage of a filtered diagram descends to its filtered colimit category",
+   "results": "Generic colim left adjoint, filtered colimit/finite limit comparison and filtered-colimit preservation; no StageSystem or normalized coefficient-action theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "Unknown identifier in Mathlib; no hits. The project has the conditional StageSystem.Morphism.adjunction, which is used in step 3 after building the right stage data.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem.*adjunction|adjunction.*StageSystem|StageAction|stage.system.functor in Mathlib and lean/Sheaf",
+   "results": "StageSystemAdjunction provides descent once the right stage morphism and compatible unit/counit records are supplied. LocallyFiniteAdicCompactSupportRealization defines StageAction but does not give its right adjoint. No existing theorem assembles its finite rational adjunctions.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.CompactSupportBrownConstructibility",
+  "date": "2026-10-27",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Common finite-field passage and final exceptional-adjunction sentence; rational coefficient adjunction descent",
+   "via": [
+    "lem-sf-native-brown-right-constructible",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportStageActionAdjunction",
+  "file": "lean/Sheaf/Paper/CompactSupportStageActionAdjunction.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.compactSupport_stageAction_isLeftAdjoint",
+  "statement": "theorem compactSupport_stageAction_isLeftAdjoint\n    (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    {f : X ⟶ Y} [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (P : ConstructibleExceptionalCoefficients.CoefficientConstruction l\n      (ULift.{u} (PadicAlgCl l)) D hl (f := f)) (c : Compactification f)\n    (S : StageAction l D hl P c) : S.system.functor.IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-sf-locally-finite-adic-compact-support-realization",
+    "why": "Generic coefficient and categorical descent input for the supplied StageAction; no Verdier biduality or alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-coefficient-construction",
+    "why": "Generic coefficient and categorical descent input for the supplied StageAction; no Verdier biduality or alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-coefficient-coherence",
+    "why": "Generic coefficient and categorical descent input for the supplied StageAction; no Verdier biduality or alternative geometric route is substituted."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic coefficient and categorical descent input for the supplied StageAction; no Verdier biduality or alternative geometric route is substituted."
+   },
+   {
+    "node": "lem-coef-qbar-stage-adjunction-descent",
+    "why": "Generic coefficient and categorical descent input for the supplied StageAction; no Verdier biduality or alternative geometric route is substituted."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T222714-L-684805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T235953-L-1475010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

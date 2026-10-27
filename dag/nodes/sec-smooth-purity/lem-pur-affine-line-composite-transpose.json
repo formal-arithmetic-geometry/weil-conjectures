@@ -1,0 +1,309 @@
+{
+ "id": "lem-pur-affine-line-composite-transpose",
+ "kind": "statement",
+ "title": "Affine-line evaluation and the composite exceptional transpose",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. All schemes and morphisms below are separated finite type over $k$ [def-weil-scheme-morphism-properties]. Work with the small pro-etale derived categories, derived pullback and tensor [def-weil-derived-pullback-tensor-hom], compact supports [def-compact-support-direct-image-detailed], Tate twists [def-coefficient-twists-detailed], and $D^b_{ctf}$ as in [def-weil-finite-tor-amplitude]. Write $\\otimes=\\otimes_A^L$ and $\\rho$ for the right tensor unitor. For an affine-line projection $u:L\\to B$ [def-sbc-affine-space], set $F_uH=Lu^*H\\otimes A_L(1)[2]$ and let $t_B:Ru_!A_L(1)[2]\\to A_B$ be the normalized integration of [def-pur-affine-line-purity-comparison]. Let $\\Pi^u_H:Ru_!F_uH\\xrightarrow{\\sim}H\\otimes Ru_!A_L(1)[2]$ be exactly its inverse projection transformation with the two tensor symmetries, and put\n$$b_{u,H}=\\rho_H(1_H\\otimes t_B)\\Pi^u_H:Ru_!F_uH\\longrightarrow H.$$\nFor $H\\in D^b_{ctf}(B,A)$ these maps form a natural transformation, and under the canonical tensor-unit identifications\n$$b_{u,A_B}=t_B.$$\nLet $p:X\\to Y$, let $q:\\mathbf A^1_X\\to X$, and let $M\\in D^b_{ctf}(X,A)$ and $K\\in D^b_{ctf}(Y,A)$. Use the constructible exceptional adjoints and their counits $\\varepsilon$ [def-weil-exceptional-inverse-image]. Then $Rp^!K$ is in $D^b_{ctf}(X,A)$, so $\\gamma_{q,Rp^!K}$ of [def-pur-affine-line-purity-comparison] is defined. For any $\\theta:M\\to Rp^!K$, set\n$$J=\\varepsilon_{p,K}Rp_!(\\theta):Rp_!M\\to K,\\qquad\n\\alpha=\\alpha_{p,q}:Rp_!Rq_!\\xrightarrow{\\sim}R(pq)_!,$$\nwhere $\\alpha$ is the normalized comparison of [thm-sf-comp-composition], and let $c:R(pq)^!\\xrightarrow{\\sim}Rq^!Rp^!$ be its adjunction conjugate with the composite adjunction convention [def-weil-pbc-composite-adjunction, def-weil-pbc-adjunction-conjugate]. The actual exceptional transpose of\n$$\\Theta=c_K^{-1}\\gamma_{q,Rp^!K}F_q(\\theta):F_qM\\longrightarrow R(pq)^!K$$\nsatisfies\n$$\\varepsilon_{pq,K}R(pq)_!(\\Theta)=J\\,Rp_!(b_{q,M})\\,\\alpha_{F_qM}^{-1}.$$\nAll source complexes in these adjunctions are bounded below of etale origin; no ambient exceptional adjunction on arbitrary pro-etale complexes is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration paragraph: the affine-line counit and its iteration; returned trace-factorization Steps 2--3 and the exceptional-input admissibility in Step 1"
+ },
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-scheme-morphism-properties",
+  "thm-sf-comp-composition",
+  "def-pur-affine-space-comparison",
+  "thm-nagata-compactification"
+ ],
+ "proof": [
+  {
+   "text": "First check admissibility using the existing ordinary etale preservation API. For the given representative Ke, its bounded-below property makes the unit Ke -> Rnu_* nu^* Ke an isomorphism. Compose that isomorphism with Rnu_*(eK) to identify Ke with Rnu_* K, and transport ordinary constructible finite-Tor membership across it. The coefficient exponent ell^(level+1) annihilates the finite ring and is invertible on the target. Apply AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek (WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek) to Rnu_* K. By definition its output is exceptionalAntecedent, proving exceptionalInput without chart bounds or reflection of pro-etale finite-Tor membership. The same ordinary preservation argument applies to q and pq. By [lem-sf-proetale-constructible-origin](ii), $M,K,N,Rq^!N,R(pq)^!K$ have bounded etale representatives; hence the counits $\\varepsilon_{q,N}$, $\\varepsilon_{p,K}$, $\\varepsilon_{pq,K}$, the composite counit and the units used for the conjugate $c$ are all evaluated on bounded-below etale-origin objects. The construction in [def-pur-affine-line-purity-comparison] gives bounded-below etale-origin witnesses for $F_qM,F_qN$ (exact pullback followed by tensor with the etale Tate line and shift by $2$). By [thm-sf-comp-composition], $Rq_!$ preserves the bounded-below etale-origin class, so $Rq_!F_qM$ is also an allowed source for the $p$-adjunction. The natural Hom bijections of [thm-sf-ambient-adjoint-class](2)--(3), as used in that definition, therefore apply to all the displayed objects and respect the chosen comparisons. No adjunction on other pro-etale source objects is needed.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "def-pur-affine-line-purity-comparison",
+    "thm-sf-comp-composition",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity"
+   }
+  },
+  {
+   "text": "Put $T=A_L(1)[2]$ and $V=Ru_!T$. The canonical projection map is natural in its second input and invertible on these inputs by [lem-weil-finite-compact-projection-formula]; with the two symmetries specified in [def-pur-affine-line-purity-comparison], its inverse gives, for $h:H\\to H'$,\n$$\\Pi^u_{H'}\\,Ru_!(F_uh)=(h\\otimes1_V)\\Pi^u_H.$$\nThe trace $t_B:V\\to A_B$ is fixed. Tensor bifunctoriality and naturality of the right unitor now give\n$$b_{u,H'}Ru_!(F_uh)=\\rho_{H'}(1\\otimes t_B)(h\\otimes1_V)\\Pi^u_H=h\\rho_H(1\\otimes t_B)\\Pi^u_H=h b_{u,H}.$$\nThis is the required natural transformation; it also applies to $h=\\theta:M\\to N$.",
+   "uses": [
+    "lem-weil-finite-compact-projection-formula",
+    "def-pur-affine-line-purity-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity"
+   }
+  },
+  {
+   "text": "Check the tensor-unit component of the actual projection map, rather than merely its invertibility. At the chosen compactification $(j,r)$ of $u$, [def-exchange-projection] defines $\\operatorname{PF}_{u,T,A_B}$ as the proper projection map followed by $Rr_*$ of the open tensor comparison. The proper map is the identity under the tensor-unit identifications by the last sentence of [lem-weil-pbc-ringed-projection-mate-exact]. The open comparison is also the identity under these identifications: [lem-sf-open-tensor-normalization] makes its restriction the identity and makes derived $j_!$ fully faithful, hence restriction detects equality between these two maps of objects in its image. Thus $\\operatorname{PF}_{u,T,A_B}$ is the identity after the canonical unit identifications. The inner symmetry $A_L\\otimes T\\to T\\otimes A_L$ becomes the identity and the outer symmetry $V\\otimes A_B\\to A_B\\otimes V$ becomes $\\lambda_V^{-1}$, with $\\lambda$ the left unitor. Hence $\\Pi^u_{A_B}=\\lambda_V^{-1}$, and\n$$b_{u,A_B}=\\rho_{A_B}(1\\otimes t_B)\\lambda_V^{-1}=t_B,$$\nby naturality of $\\lambda$ and $\\rho_{A_B}=\\lambda_{A_B}$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity"
+   }
+  },
+  {
+   "text": "For $N=Rp^!K$ the definition of the line comparison is exactly $\\gamma_{q,N}=\\Phi_q(b_{q,N})$ [def-pur-affine-line-purity-comparison]. Inverting its adjunction Hom bijection gives\n$$\\varepsilon_{q,N}\\,Rq_!(\\gamma_{q,N})=b_{q,N}.$$\nPrecompose with $Rq_!F_q(\\theta)$ and use Step 2 to obtain the equality of maps $Rq_!F_qM\\to N$\n$$\\varepsilon_{q,N}\\,Rq_!(\\gamma_{q,N}F_q\\theta)=b_{q,N}Rq_!F_q\\theta=\\theta b_{q,M}.$$\nThis uses only the defining transpose, not isomorphy of the purity comparison.",
+   "uses": [
+    "def-pur-affine-line-purity-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity"
+   }
+  },
+  {
+   "text": "Write $P=Rp_!$, $Q=Rq_!$, $V=R(pq)_!$, and $R=R(pq)^!$. The counit of $PQ\\dashv Rq^!Rp^!$ is\n$$e_K=\\varepsilon_{p,K}\\,P(\\varepsilon_{q,Rp^!K})$$\nby [def-weil-pbc-composite-adjunction]. By the conjugate definition [def-weil-pbc-adjunction-conjugate] and the equivalent transpose formula in [def-weil-pbc-adjunction-mate], the conjugate $c$ of $\\alpha:PQ\\to V$ satisfies\n$$e_K\\,PQ(c_K)=\\varepsilon_{pq,K}\\,\\alpha_{RK}.$$\nFor any arrow $a:W\\to RK$, naturality of $\\alpha$ gives\n$$\\varepsilon_{pq,K}V(a)\\alpha_W=e_K\\,PQ(c_Ka).$$\nThese equations concern the normalized $\\alpha$ of [thm-sf-comp-composition] and exactly its conjugate, so there is no additional choice of a right-adjoint isomorphism. Since $\\alpha_W$ is invertible, this calculates the actual $pq$-transpose as $e_KPQ(c_Ka)\\alpha_W^{-1}$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity"
+   }
+  },
+  {
+   "text": "Apply Step 5 with $W=F_qM$ and $a=\\Theta=c_K^{-1}\\gamma_{q,N}F_q\\theta$. Cancel $c_Kc_K^{-1}$ and use the equality in Step 4 inside $P$:\n$$\\begin{aligned}\n\\varepsilon_{pq,K}R(pq)_!(\\Theta)\n&=\\varepsilon_{p,K}\\,P\\bigl(\\varepsilon_{q,N}Q(\\gamma_{q,N}F_q\\theta)\\bigr)\\alpha_{F_qM}^{-1}\\\\\n&=\\varepsilon_{p,K}\\,P(\\theta b_{q,M})\\alpha_{F_qM}^{-1}\\\\\n&=(\\varepsilon_{p,K}P\\theta)\\,P(b_{q,M})\\alpha_{F_qM}^{-1}\\\\\n&=J\\,Rp_!(b_{q,M})\\alpha_{F_qM}^{-1}.\n\\end{aligned}$$\nThe third line is functoriality of $P$, and the last line is the definition of $J$. This proves the stated identity for every $\\theta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-comparison",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "C1",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration paragraph, affine-line counit and inductive formula Tr_{p_j}=Tr_{p_{j-1}} composed with Rp_{j-1!}(Tr_{r_j}); expanded by an agent into the normalized exceptional-transpose identity; partial Lean implementation: ordinary etale preservation for Step 1 and canonical naturality for Step 2 (2026-10-26)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and tensor unit normalization of the projection formula affine line counit and the exceptional transpose under a composite compact support adjunction",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint of a composite exceptional inverse image purity map is the previous transpose composed with the pushed forward twisted affine line integration",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.homEquiv_counit; CategoryTheory.Adjunction.comp_counit_app_assoc Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(counit|transpose)|purity.*comp|integration.*natural",
+   "results": "No hits. Mathlib/AlgebraicGeometry searched. Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transpose of the composite of an affine line purity comparison with an exceptional inverse image comparison is the iterated compact support counit",
+   "results": "Module.Dual.transpose_comp; Module.Dual.transpose_apply; Module.Dual.transpose; Matrix.comp_map_transpose; Matrix.comp_transpose; AffineMap.comp; AffineEquiv.coe_trans; AffineEquiv.trans_apply Read returned signatures: generic adjunction, tensor-unitor, scheme pullback, or measure-integration results do not state this finite etale compact-support comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(counit|transpose)|purity.*comp|integration.*natural",
+   "results": "No hits. Source subdirectory: Mathlib/AlgebraicGeometry. The generic categorical hits supply formulas, not the geometric finite-coefficient statement as a one-line specialization. Read Basic.lean:565-586 and Mates.lean:270-302 for the relevant formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transpose under the composite exceptional adjunction equals successive compact support counits and affine line integration",
+   "results": "CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app; CategoryTheory.Under.postAdjunctionLeft_counit_app; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.counitAsIsoOfIso The generic categorical hits supply formulas, not the geometric finite-coefficient statement as a one-line specialization. Read Basic.lean:565-586 and Mates.lean:270-302 for the relevant formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app The generic categorical hits supply formulas, not the geometric finite-coefficient statement as a one-line specialization. Read Basic.lean:565-586 and Mates.lean:270-302 for the relevant formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and unit normalization of affine line integration and the exceptional transpose of a composite purity map",
+   "results": "AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.AffineSpace.map_reindex; AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc; AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc The generic categorical hits supply formulas, not the geometric finite-coefficient statement as a one-line specialization. Read Basic.lean:565-586 and Mates.lean:270-302 for the relevant formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula at the tensor unit is identity and the adjunction conjugate of a left functor comparison intertwines composite counits",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.unit_app_unit_comp_map_η; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.map_η_comp_η_assoc; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε The generic categorical hits supply formulas, not the geometric finite-coefficient statement as a one-line specialization. Read Basic.lean:565-586 and Mates.lean:270-302 for the relevant formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|homEquiv_counit|conjugateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean Source subdirectory: Mathlib/CategoryTheory/Adjunction. The generic categorical hits supply formulas, not the geometric finite-coefficient statement as a one-line specialization. Read Basic.lean:565-586 and Mates.lean:270-302 for the relevant formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-space-trace-factorization",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Integration paragraph: the affine-line counit and its iteration; returned trace-factorization Steps 2--3 and the exceptional-input admissibility in Step 1",
+   "via": [
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-affine-line-composite-transpose",
+  "worker": "stage1",
+  "summary": "Explicit finite-coefficient admissibility, naturality, tensor-unit normalization and composite counit calculation; no new nodes or statement changes. All prerequisites are existing statements, with direct citation quotes.",
+  "blueprint": "The Integration paragraph of current sk-prop-an identifies the affine-line counit at constants and its inductive iteration under compact-support composition and the projection formula. Steps 1--3 make its domain, naturality and unit normalization explicit; Steps 4--6 compute the exceptional transpose for the iteration. The nearest blueprint ancestor is prop-pur-affine-space-composition-law; its current proof Steps 1--2 reassociate the ordered affine-line comparisons. No coordinate-permutation assertion is used.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Finite-coefficient exceptional preservation types N=Rp^!K before the affine-line definition; the unit assumes this typing but does not prove general preservation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic unit component of the counit-defined derived projection map; no geometric purity result is substituted."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic normalized open projection comparison and full faithfulness prove the unit component for the chosen compactification. No unit-specific purity assertion is replaced."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "The current Integration paragraph explicitly uses the projection formula. This existing finite-coefficient theorem supplies invertibility and naturality of its specified compactified pro-etale map, without replacing any purity step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-finite-compact-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-e71abdf3f",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-e71abdf3f (reviewer sub-agent of L); spot-checked: I read the source: main-20261015 sk-prop-an, the Integration paragraph at lines 10-26, where Tr_{p_j} is built from compact-support composition and the projection formula. I also read every cited statement. The delivery adds six agent-written steps to the item, which Q113 created statement-only. It has no new nodes and leaves the statement and stmt_deps unchanged. There is no SGA. The re-split note belongs to the parent, so it does not apply here. Steps 2-6 check out. Step 2: naturality comes from the composite definition in def-exchange-projection plus the invertibility and naturality in lem-weil-finite-compact-projection-formula. Step 3: by the last sentence of lem-weil-pbc-ringed-projection-mate-exact, pi at the tensor unit is the identity. lem-sf-open-tensor-normalization gives j^*gamma = id and full faithfulness of j_!. I recomputed the symmetries (rho s = lambda), giving Pi = lambda_V^{-1}, and b = t by naturality of lambda. Step 4 inverts the Hom bijection Phi of the definition, which is natural in the source. Step 5: the conjugate direction tau: L_2 -> L_1 gives tau^c: R_1 -> R_2, which matches c: R(pq)^! -> Rq^!Rp^!. Its transpose is eps_{pq} alpha_R, and the composite counit matches def-weil-pbc-composite-adjunction. Step 6: I checked each line. Edge cases: theta = 0, p = id (alpha is the identity by the normalization clause) and empty X all work. FIX: Step 1 showed only that N = Rp^!K is in D^b_ctf. Steps 4-6 also need counits at Rq^!N and R(pq)^!K and the units for c. I added one sentence that applies thm-sf-preservation-class(2) to q and to pq and lists these objects as etale-origin through lem-sf-proetale-constructible-origin(ii). The cited nodes do not change. Batch 5: the lem-weil-finite-compact-projection-formula citation is accepted. It is the general projection formula, not a step of the trace formula or of Poincare duality. It is already in the item's closure as a stmt_dep of def-pur-affine-line-purity-comparison. The flagged lem-pod-lisse-module-sheaves-as-module-objects is a foundational lisse/FLC fact. Accepted tool_uses: thm-sf-preservation-class, lem-sf-open-tensor-normalization, lem-weil-finite-compact-projection-formula and lem-weil-pbc-ringed-projection-mate-exact, all generic tools for the Integration paragraph. Not duplicates: def-pur-proetale-affine-line-counit and lem-sp-affine-line-scalar-mates.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineLineCompositeTranspose",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineLineEvaluation.composite_transpose",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.changeSupport",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.evaluation",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.evaluation_naturality",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.comparedLeftUnit",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.unitTensor",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.unitSource",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.trace",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.evaluation_unit",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.linePlus",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.lineWitness",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.support",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.exceptionalImage",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.exceptionalAntecedent",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.counit",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.exceptionalInput",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.exceptionalPlus",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.standingEvaluation",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.compositor",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.inverseConjugate",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.theta",
+   "AlgebraicGeometry.ProEtale.AffineLineEvaluation.composite_transpose"
+  ],
+  "file": "lean/Sheaf/Paper/AffineLineCompositeTranspose.lean",
+  "statement": "theorem composite_transpose {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (p : X ⟶ Y) [LocallyOfFiniteType p] [QuasiCompact p] [IsSeparated p] (M : D P X) (Me : Etale.DerivedCategoryModule (Ring P) X) (hMe : etaleFiniteTor (Ring P) X Me) (eM : (comparison (Ring P) X).obj Me ≅ M) (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y) (hKe : etaleFiniteTor (Ring P) Y Ke) (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) (t : M ⟶ (exceptionalImage P aY p).obj K.obj) : (support P aY ((AffineSpace PUnit.{u + 1} X ↘ X) ≫ p)).map (theta P aY p M K Ke hKe eK t) ≫ counit P aY ((AffineSpace PUnit.{u + 1} X ↘ X) ≫ p) K = (compositor P aY p M Me hMe eM).inv ≫ (support P aY p).map (standingEvaluation P X (p ≫ aY) M Me hMe eM) ≫ (support P aY p).map t ≫ counit P aY p K",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four statements give naturality, unit evaluation, exceptional-input finite-Tor admissibility, and the actual composite transpose. All helper data are canonical constructions. Reuse the landed affine-space module only for its lineSource, lineComparison and compositionInverse; add its owning node and Nagata to stmt_deps. The natural-language statement and reviewed stage-1 proof remain unchanged. No ambient exceptional adjunction, arbitrary map, or divisibility restriction is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-937555993",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read the node, all 14 stmt_dep records, the module and the dependency sources (AffineSpacePurityComparison, AffineLinePurityComparison, AffineLinePurityCoordinateMaps, the UpperShriek HomEquiv, fixedCompactSupportOriginIso, Nagata). Every clause matches: b = projectionTensorTrace (rho(1⊗t)Pi), naturality, unit normalization via unitSource and trace, Rp^!K finite-Tor stated as a theorem, J, alpha = originCompositionAmbient, c^-1 = compositionInverse (transpose of alpha^-1 ≫ Rp_!(eps_q) ≫ eps_p), Theta = lineSource.map t ≫ lineComparison ≫ c^-1, and the main identity in diagrammatic order. The standing/chart compactification transports both come from the canonical etale comparison. Theorem stmt_dep thm-nagata-compactification: the statement needs HasCompactification for general p and q≫p, available only from the Nagata instance (an object the theorem constructs), so PASS on that point. Added def-pur-affine-space-comparison is a landed owner node with no cycle. Statement field verbatim, all 21 declarations recorded, no hollow definitions or arbitrary maps, sorry only, docstrings complete, universes as in the landed deps. Nothing changed, so nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261025T204423-L-2953157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

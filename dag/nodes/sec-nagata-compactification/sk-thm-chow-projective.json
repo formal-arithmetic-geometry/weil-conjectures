@@ -86,5 +86,78 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-thm-chow-projective",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ChowModification.nonempty_data",
+    "AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ChowModification.nonempty_data",
+     "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+     "lines": [
+      259,
+      282
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace",
+     "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+     "lines": [
+      364,
+      381
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be proper with $S$ qcqs. There are a proper surjection\n$\\pi:\\widetilde X\\to X$ and a closed immersion\n$i_S:\\widetilde X\\hookrightarrow\\mathbf P^n_S$ such that $f\\pi=q_Si_S$, where\n$q_S:\\mathbf P^n_S\\to S$ is the projection. Moreover\n\n$$\ni_X=(\\pi,i_S):\\widetilde X\\hookrightarrow X\\times_S\\mathbf P^n_S=\\mathbf P^n_X\n$$\n\nis a closed immersion. Both $\\pi$ and $f\\pi$ are projective.",
+  "proof": [
+   {
+    "text": "The version of Chow's lemma in Stacks 0202 gives a proper surjection\n$\\pi:\\widetilde X\\to X$ and an immersion $i_S:\\widetilde X\\to\\mathbf P^n_S$\nover $S$ for every separated $X\\to S$ of finite type with $S$ qcqs. Here\n$f\\pi$ is proper. A map from a proper $S$-scheme to a separated $S$-scheme is\nproper, because its graph is closed and the projection of the product to the\ntarget is proper. Therefore $i_S$ is a proper immersion, hence a closed\nimmersion.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the second assertion, factor $i_X$ as the graph of $\\pi$ followed by the\nbase change of $i_S$:\n\n$$\n\\widetilde X\\longrightarrow\\widetilde X\\times_SX\\longrightarrow\n\\mathbf P^n_S\\times_SX.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The first arrow is closed because $X\\to S$ is separated, and the second is\nclosed because $i_S$ is. Their composite is $i_X$. Hence $\\pi$, which is $i_X$\nfollowed by the projection $\\mathbf P^n_X\\to X$, and $f\\pi=q_Si_S$ are\nprojective.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The form of Chow's lemma used here, for separated $X\\to S$ of finite type over\na qcqs base, follows from the Noetherian one ([thm-chow-lemma]). Embed $X$ by\nStacks 01ZJ as a closed subscheme of some $X_0$ that is separated and of finite\npresentation over $S$ ([prop-nagata-finite-type-closed-in-fp]), descend $X_0$ to a\nNoetherian stage ([prop-nagata-noetherian-inverse-system], [lemma-nagata-separated-eventually]), apply the Noetherian\nform of Chow's lemma there, and base change the resulting proper surjective\ncover to $S$. Pulling this cover back to the closed subscheme $X$ gives a\nsource that is closed in the source of the cover of $X_0$, so its map to\nprojective space is still an immersion; its map to $X$ is proper and\nsurjective by base change.",
+    "uses": [
+     "thm-chow-lemma",
+     "prop-nagata-finite-type-closed-in-fp",
+     "prop-nagata-noetherian-inverse-system",
+     "lemma-nagata-separated-eventually"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

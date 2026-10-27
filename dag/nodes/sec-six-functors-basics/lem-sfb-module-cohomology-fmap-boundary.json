@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-module-cohomology-fmap-boundary",
+ "kind": "statement",
+ "title": "Cohomology f-maps between exact module rows respect their connecting maps",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Let $E:0\\to E_1\\xrightarrow{u}E_2\\xrightarrow{v}E_3\\to0$ and $F:0\\to F_1\\xrightarrow{u'}F_2\\xrightarrow{v'}F_3\\to0$ be short exact sequences [def-weil-pbc-exact-sequence] of Zariski $\\mathcal O_Y$-modules and $\\mathcal O_X$-modules respectively [def-weil-sheaf-of-modules-category]. Suppose $\\phi_j:E_j\\to f_*F_j$ are $\\mathcal O_Y$-linear coefficient maps, with $f_*u'\\circ\\phi_1=\\phi_2\\circ u$ and $f_*v'\\circ\\phi_2=\\phi_3\\circ v$. Use the canonical maps $T_f^q(\\phi_j):H^q(Y,E_j)\\to H^q(X,F_j)$ induced by $f$-maps [def-weil-pbc-module-cohomology-fmap], and right-derived global-section cohomology [pqf-def-cohomology]. If $\\delta_E^q:H^q(Y,E_3)\\to H^{q+1}(Y,E_1)$ and $\\delta_F^q:H^q(X,F_3)\\to H^{q+1}(X,F_1)$ are the canonical connecting maps of these long exact sequences, then for every $q\\geq0$ one has $$T_f^{q+1}(\\phi_1)\\circ\\delta_E^q=\\delta_F^q\\circ T_f^q(\\phi_3).$$ The equality uses the $\\mathcal O_Y(Y)$-module structures, with scalars on the target restricted along $f^\\sharp$. No flatness of $f$ and no quasi-coherence or acyclicity of the six modules is required. In particular it applies to the adjunction-unit coefficient maps for a flat pullback, and to compatible coefficient maps over an automorphism.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 01F9 (equation-functorial-derived) and section-cohomology-sheaves (equation-cohomology-modules); Tag 05TE (lemma-right-derived-delta-functor). Compatibility of the specified f-map with the two boundary maps is an agent-written consequence of these resolution constructions, not a verbatim assertion of either tag."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-cohomology-fmap",
+  "pqf-def-cohomology",
+  "def-sc-module-cohomology-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Choose compatible injective resolutions $F_j\\to I_j^\\bullet$ of $F$ and $E_j\\to J_j^\\bullet$ of $E$, zero in negative degrees, with degreewise split short exact rows $I_1\\to I_2\\to I_3$ and $J_1\\to J_2\\to J_3$. These exist by the scheme-module enough-injectives theorem and the object horseshoe lemma. Put $A_j=f_*I_j$ termwise. Its row is still split exact: applying the additive functor $f_*$ to the inclusion, projection and splitting identities preserves those identities. The section rows of $I$ and $J$ are likewise split exact. No assertion that $f_*$ preserves arbitrary exact sequences or injectives is needed.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-injective-resolution-ses",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), objects in degree zero; cohomology.tex Tag 01FB (remark-explain-arrow)"
+   }
+  },
+  {
+   "text": "Write $s_j:E_j[0]\\to J_j$ for the augmentations and $a_j:E_j[0]\\to A_j$ for $E_j\\xrightarrow{\\phi_j}f_*F_j\\to f_*I_j$. The two coefficient squares and the horseshoe augmentation squares say precisely that $(a_j)$ is a morphism of rows. In each degree form $Q_j=\\operatorname{Coker}((s_j,-a_j):E_j[0]\\to J_j\\oplus A_j)$, with differential induced from the direct sum. These differentials exist because $(s_j,-a_j)$ is a cochain map. Its components are monomorphisms since $s_j$ is monomorphic. Apply the snake lemma to the map of short exact rows $E[0]\\to J\\oplus A$ in each degree: its three kernels vanish, so the three cokernels $Q_1\\to Q_2\\to Q_3$ form a short exact row, including both endpoint zeros. Denote the canonical cochain maps by $b_j:J_j\\to Q_j$ and $t_j:A_j\\to Q_j$; the quotient relation gives $b_js_j=t_ja_j$. Both families are morphisms of rows.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010H (lemma-snake), applied degreewise to graph maps; agent-written simultaneous pushout of the resolution diagrams of cohomology.tex Remark 01FB"
+   }
+  },
+  {
+   "text": "Put $C_j=\\operatorname{Coker}(s_j:E_j[0]\\to J_j)$ as a complex. Since $s_j$ is an injective resolution, it is a quasi-isomorphism; the long exact sequence for $0\\to E_j[0]\\to J_j\\to C_j\\to0$ gives $H^n(C_j)=0$ for all $n$. The pushout short-exact-sequence lemma, applied degreewise to $0\\to E_j[0]^n\\to J_j^n\\to C_j^n\\to0$ along $a_j^n$, identifies its pushout with the displayed quotient $Q_j^n$ and gives $0\\to A_j\\xrightarrow{t_j}Q_j\\to C_j\\to0$. Its long exact sequence now gives that every $t_j$ is a quasi-isomorphism. All these complexes vanish below degree zero.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/homology.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 1 pushout comparison; Tag 0117 (lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "Apply the complex horseshoe lemma to the short exact nonnegative row $Q_1\\to Q_2\\to Q_3$. It gives a short exact row $K_1\\to K_2\\to K_3$ of nonnegative complexes of injectives and a row morphism $r_j:Q_j\\to K_j$ of quasi-isomorphisms. Set $\\lambda_j=r_jt_j:A_j\\to K_j$ and $\\beta_j=r_jb_j:J_j\\to K_j$. Then $\\lambda_j$ is a quasi-isomorphism and $\\beta_js_j=\\lambda_ja_j$, the precise augmentation equation required for the $f$-map construction. The $K$ row splits in each degree: injectivity of $K_1^n$ extends its identity over the monomorphism $K_1^n\\to K_2^n$, giving a retraction. Thus its section row is split exact. By the pushforward-injectives sections theorem, $\\Gamma(Y,\\lambda_j):\\Gamma(X,I_j)\\to\\Gamma(Y,K_j)$ is a quasi-isomorphism, despite the possible failure of $f_*I_j$ to be a complex of injectives.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-ses-complexes",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), part (2); Tag 01FB (remark-explain-arrow), with 01EZ (lemma-before-Leray)"
+   }
+  },
+  {
+   "text": "Write $\\partial_J,\\partial_I,\\partial_K$ for the homology boundaries of the three split exact section rows. The canonical resolution identifications $\\iota_{J_j}^q:H^q(Y,E_j)\\simeq H^q\\Gamma(Y,J_j)$ and $\\iota_{I_j}^q:H^q(X,F_j)\\simeq H^q\\Gamma(X,I_j)$ identify the canonical module-cohomology boundaries with $\\partial_J$ and $\\partial_I$. Here the canonical boundary is that of Tag 05TE: $H^q$ of $R\\Gamma$ applied to the boundary of the distinguished triangle of $0\\to E_1[0]\\to E_2[0]\\to E_3[0]\\to0$, read through the single-object identifications. To check this identification, apply the fixed horseshoe derived-triangle comparison to $v=\\Gamma(Y,-)$ and $v=\\Gamma(X,-)$, which are additive and left exact by the global-sections theorem. Its image-row hypotheses hold because the rows split, and extension by zero remains exact, including degree zero. The endpoint homology equations in that comparison, together with the nonnegative-complex derived-boundary comparison, turn the third square of its triangle morphism into $\\iota_{J_1}^{q+1}\\delta_E^q=\\partial_J^q\\iota_{J_3}^q$ and $\\iota_{I_1}^{q+1}\\delta_F^q=\\partial_I^q\\iota_{I_3}^q$. This checks the boundary convention rather than assuming the horseshoe and triangle constructions agree.",
+   "uses": [
+    "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "lem-sc-p1-nat-complex-derived-boundary",
+    "lem-sc-global-sections-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/homology.tex",
+    "place": "Tag 05TE (lemma-right-derived-delta-functor), via the fixed horseshoe comparison; Tags 0117 (lemma-long-exact-sequence-cochain), 014Q (definition-distinguished-triangle), 0152 (lemma-derived-canonical-delta-functor)"
+   }
+  },
+  {
+   "text": "For either section-row morphism $m=\\Gamma\\beta$ from $\\Gamma J$ to $\\Gamma K$, or $m=\\Gamma\\lambda$ from $\\Gamma I$ to $\\Gamma K$, the split-boundary formula proves the required square directly. A cocycle $z$ in the third complex has a lift $w$ in the middle complex. There is a unique $x$ in the first complex with $i(x)=dw$; it is a cocycle since $i(dx)=d^2w=0$ and $i$ is injective. The boundary is $[x]$. The element $m_2(w)$ lifts $m_3(z)$ and $d(m_2w)=m_2(dw)=i_K(m_1x)$, so the target boundary is $[m_1x]$. Hence $\\partial_K^qH^q(\\Gamma\\beta_3)=H^{q+1}(\\Gamma\\beta_1)\\partial_J^q$ and $\\partial_K^qH^q(\\Gamma\\lambda_3)=H^{q+1}(\\Gamma\\lambda_1)\\partial_I^q$. The split-boundary formula allows this choice of lift: replacing a chosen split lift by $w$ adds $i(y)$, changing $x$ by $dy$, hence not its class.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-connecting-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011J (lemma-ses-termwise-split-cochain) and 011K (lemma-ses-termwise-split-long-cochain); lift calculation for the two row morphisms"
+   }
+  },
+  {
+   "text": "Set $B_j^q=H^q(\\Gamma\\beta_j)$ and $L_j^q=H^q(\\Gamma\\lambda_j)$; each $L_j^q$ is invertible by Step 4. The choices in Step 4 satisfy every clause of the defining $f$-map resolution diagram. Independence of those choices therefore gives $T_f^q(\\phi_j)=(\\iota_{I_j}^q)^{-1}(L_j^q)^{-1}B_j^q\\iota_{J_j}^q$. From Step 6, multiply the $\\lambda$ identity by inverses and then use the $\\beta$ identity to get $$\\partial_I^q(L_3^q)^{-1}B_3^q=(L_1^{q+1})^{-1}\\partial_K^qB_3^q=(L_1^{q+1})^{-1}B_1^{q+1}\\partial_J^q.$$ Substitute the two identities of Step 5 and cancel the resolution identifications. This is exactly $\\delta_F^qT_f^q(\\phi_3)=T_f^{q+1}(\\phi_1)\\delta_E^q$.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01F9 (equation-functorial-derived), 01FA (equation-functorial), 01FB (remark-explain-arrow); agent-written cancellation of the two boundary squares"
+   }
+  },
+  {
+   "text": "The equality is also an equality of $\\mathcal O_Y(Y)$-linear maps: each $T_f^q(\\phi_j)$ has the linear lift with target scalars restricted along $f^\\sharp$ given by the basic-linearity theorem, and the connecting maps are module-linear, as is also evident from their section-complex boundary formula. Restriction of scalars changes no underlying elements, so the equality just proved is the same equality between these linear maps. The construction used only the hypotheses displayed in the statement, for every $q\\geq0$. A flat pullback gives an exact sequence $f^*E$ whenever that specialization is made, and naturality of its adjunction unit supplies the two required coefficient squares; for an automorphism any compatible coefficient maps meet the same hypotheses. These are therefore instances of the equality already proved.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-linearity",
+    "lem-weil-pbc-complex-ses-connecting-formula",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F9 (equation-functorial-derived), whose target is the derived category of modules over the global section ring; equation-cohomology-modules (Tag 0714)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-p1-horseshoe-derived-triangle-comparison",
+  "lem-sc-p1-nat-complex-derived-boundary",
+  "lem-weil-pbc-complex-ses-connecting-formula",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-injective-resolution-ses-complexes",
+  "lem-weil-pbc-module-cohomology-fmap-basic-linearity",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-snake-lemma-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/homology.tex",
+  "place": "Remark 01FB and Equation 01F9; Lemma 013T; Lemma 010H and Lemmas 0117, 011J, 011K. Simultaneous pushout and boundary cancellation written by Q43; not asserted verbatim by Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomology.*(fmap|boundary)|fmap.*(δ|connecting)|connecting.*(pullback|sheaf)",
+   "results": "OK 3 hits: Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Geometry/Manifold/PartitionOfUnity.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: complex homology boundary naturality is available, but constructing the specified f-map on module-sheaf derived sections on different schemes is not a one-line specialization. Loogle also returns Sheaf.H.δ_naturality for a newer index: its ExactSequences.lean file is absent from the pinned Mathlib; even that result concerns one site of abelian sheaves, not the stated module f-map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"δ\"",
+   "results": "OK 6 hits: CategoryTheory.sheafToPresheaf_δ, CategoryTheory.GrothendieckTopology.Point.instIsIsoδFunctorOppositePresheafFiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_δ, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_δ_assoc, CategoryTheory.Sheaf.H.δ, CategoryTheory.Sheaf.H.δ_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match: complex homology boundary naturality is available, but constructing the specified f-map on module-sheaf derived sections on different schemes is not a one-line specialization. Loogle also returns Sheaf.H.δ_naturality for a newer index: its ExactSequences.lean file is absent from the pinned Mathlib; even that result concerns one site of abelian sheaves, not the stated module f-map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of connecting homomorphisms in module sheaf cohomology for a morphism of ringed spaces and compatible maps of exact sequences",
+   "results": "OK 8 hits: CategoryTheory.ShortComplex.SnakeInput.naturality_δ_assoc, HomologicalComplex.HomologySequence.δ_naturality_assoc, groupCohomology.δ, HomologicalComplex.HomologySequence.δ_naturality, groupCohomology.δ.congr_simp, PresheafOfModules.Hom.naturality, PresheafOfModules.Hom.naturality_assoc, SheafOfModules.pushforwardNatTrans_app_val_app_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: complex homology boundary naturality is available, but constructing the specified f-map on module-sheaf derived sections on different schemes is not a one-line specialization. Loogle also returns Sheaf.H.δ_naturality for a newer index: its ExactSequences.lean file is absent from the pinned Mathlib; even that result concerns one site of abelian sheaves, not the stated module f-map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes compatible coefficient maps between short exact sequences of module sheaves induce maps on sheaf cohomology commuting with connecting homomorphisms",
+   "results": "OK 8 hits: groupCohomology.mapCocycles₁_comp_i, SnakeLemma.δ'_eq, SnakeLemma.δ_eq, groupCohomology.mapCocycles₂_comp_i, groupCohomology.mapShortComplexH1_comp, CategoryTheory.ShortComplex.ShortExact.δ_apply, CategoryTheory.ShortComplex.ShortExact.δ_apply', groupCohomology.δ₁_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: complex homology boundary naturality is available, but constructing the specified f-map on module-sheaf derived sections on different schemes is not a one-line specialization. Loogle also returns Sheaf.H.δ_naturality for a newer index: its ExactSequences.lean file is absent from the pinned Mathlib; even that result concerns one site of abelian sheaves, not the stated module f-map."
+  },
+  {
+   "tool": "grep",
+   "query": "δ_naturality|connecting|pullback",
+   "results": "OK 1 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean [subdirectory CategoryTheory/Sites/SheafCohomology]",
+   "date": "2026-10-24",
+   "verdict": "no match: complex homology boundary naturality is available, but constructing the specified f-map on module-sheaf derived sections on different schemes is not a one-line specialization. Loogle also returns Sheaf.H.δ_naturality for a newer index: its ExactSequences.lean file is absent from the pinned Mathlib; even that result concerns one site of abelian sheaves, not the stated module f-map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of module sheaves: an f-map between two exact coefficient sequences on different ringed spaces commutes with the long exact cohomology boundary",
+   "results": "OK 8 hits: SnakeLemma.δ_eq, SnakeLemma.δ'_eq, HomologicalComplex.HomologySequence.δ_naturality, HomologicalComplex.HomologySequence.δ_naturality_assoc, groupCohomology.δ_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.ShortComplex.ShortExact.δ_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: complex homology boundary naturality is available, but constructing the specified f-map on module-sheaf derived sections on different schemes is not a one-line specialization. Loogle also returns Sheaf.H.δ_naturality for a newer index: its ExactSequences.lean file is absent from the pinned Mathlib; even that result concerns one site of abelian sheaves, not the stated module f-map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of connecting homomorphisms for coefficient f-maps between module sheaf cohomology on different ringed spaces",
+   "results": "OK 8 hits: groupCohomology.π_map_apply, groupCohomology.mapCocycles₁_comp_i, groupCohomology.mapCocycles₂_comp_i, groupCohomology.mapCocycles₁_comp_i_assoc, groupCohomology.π_map, groupCohomology.cocyclesMap_cocyclesIso₀_hom_f, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc, groupCohomology.π_map_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide complex boundary formulas, ordinary same-site abelian-sheaf naturality, or underived pushforward maps; none constructs the stated module-sheaf f-map boundary square across schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "δ_naturality|moduleCohomology|fmap.*boundary",
+   "results": "OK 6 hits: Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean [subdirectory CategoryTheory]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide complex boundary formulas, ordinary same-site abelian-sheaf naturality, or underived pushforward maps; none constructs the stated module-sheaf f-map boundary square across schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of sheaves of modules over different ringed spaces connecting homomorphism compatibility with coefficient maps to pushforward",
+   "results": "OK 8 hits: SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardSections, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardCongr_hom_app_val_app, SheafOfModules.pushforward, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide complex boundary formulas, ordinary same-site abelian-sheaf naturality, or underived pushforward maps; none constructs the stated module-sheaf f-map boundary square across schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of ringed spaces and compatible maps of two short exact coefficient sequences induces commuting connecting homomorphisms on derived global sections",
+   "results": "OK 8 hits: HomologicalComplex.HomologySequence.δ_naturality, HomologicalComplex.HomologySequence.δ_naturality_assoc, SnakeLemma.δ_eq, SnakeLemma.δ'_eq, CategoryTheory.ShortComplex.ShortExact.δ_eq, CategoryTheory.ShortComplex.ShortExact.δ_apply', SnakeLemma.δ', CategoryTheory.ShortComplex.ShortExact.δ_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide complex boundary formulas, ordinary same-site abelian-sheaf naturality, or underived pushforward maps; none constructs the stated module-sheaf f-map boundary square across schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Finite rational cohomology and character filtrations for homogeneous bundles. Supporting input to lem-sfb-flag-cohomology-finite-exact: construct the coaction using the universal element of S over F[S], and obtain coaction-equivariant connecting maps before the filtration argument; generic coefficient-map boundary naturality used in the universal-element coaction construction",
+   "via": [
+    "lem-sfb-linearized-qcoherent-cohomology-coaction",
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-module-cohomology-fmap-boundary",
+  "worker": "stage1",
+  "summary": "Statement retained. Constructed a common row of injective complexes using a graph pushout, with exactness from the existing snake lemma and quasi-isomorphism from the existing pushout and long-exact-sequence nodes. The two resulting section-row morphisms give explicit boundary squares; the fixed horseshoe/derived comparison checks the canonical boundary convention. Cancel their invertible vertical maps to recover the specified f-map. All inputs already have DAG nodes: no new node is needed. Restored the inherited null blueprint ancestor to the existing det-thm-sf-ctf-stability-direct-images using its recorded via chain.",
+  "blueprint": "Supporting input for the coefficient-map boundary square in lem-sfb-linearized-qcoherent-cohomology-coaction, below direct-images proof (3); current blueprint latest/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. All steps are generic homological-algebra tools for this pre-existing branch, with no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic The tensor-formula pullback of modules is left adjoint to pushforward used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "why": "Generic Fixed horseshoe comparison of derived triangles used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-sc-p1-nat-complex-derived-boundary",
+    "why": "Generic Nonnegative complex boundaries agree with derived triangle boundaries used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic Flat module pullback is exact and direct image preserves injectives used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-ses",
+    "why": "Generic Injective resolutions of a short exact sequence (horseshoe lemma) used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-ses-complexes",
+    "why": "Generic Injective resolutions of a short exact sequence of bounded below complexes used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-fmap-basic-linearity",
+    "why": "Generic Linearity property of module cohomology maps used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "why": "Generic Functoriality of the maps on cohomology induced by f-maps used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "why": "Generic Global sections of a resolution of the direct image of injectives is a quasi-isomorphism used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic Pushout of a short exact sequence along a morphism used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Generic Sheaves of modules on a scheme have enough injectives used for the explicit resolution and boundary calculation; the constructibility unit has no replacement for this homological-algebra input."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Step 5 needs Gamma(Y,-) and Gamma(X,-) additive and left exact, the hypothesis of the fixed horseshoe derived-triangle comparison; the constructibility unit has no node for this generic fact (added by the maintainer reader Q43 review)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-p1-horseshoe-derived-triangle-comparison",
+  "lem-sc-p1-nat-complex-derived-boundary",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-injective-resolution-ses-complexes",
+  "lem-weil-pbc-module-cohomology-fmap-basic-linearity",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-sc-global-sections-left-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-3d79c8370",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-3d79c8370 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full. There are no new nodes. I read every cited node's statement and the Stacks sources: Remark 01FB (cohomology.tex l.2391), 05TE (derived.tex l.5681), the 013T proof Step 1 pushout, and 010H, 0117, 011J/011K, 014Q and 0152, with tags checked. The statement is not changed and its citer lem-sfb-linearized-qcoherent-cohomology-coaction uses it as stated. Steps 1-4 are correct. The resolutions come from the object horseshoe, split rows survive f_* and Γ, and (s,-a) is a monic row morphism. I checked a_2u=f_*(α)a_1 with the horseshoe square and the coefficient square. The snake lemma gives a short exact Q-row. The pushout node with arbitrary u, plus the long exact sequence, gives t as a quasi-isomorphism. The complex horseshoe gives K, and βs=λa is exactly the f-map augmentation equation. The pushforward-injectives quasi-iso node applies hypothesis by hypothesis. I redid the lift calculation in Step 6 and the cancellation in Step 7. Fault (C1/C4) in Step 5: the horseshoe derived-triangle comparison needs v=Γ left exact, and that was not cited. FIX: added lem-sc-global-sections-left-exact to Step 5 uses and proof_deps, with a split_report.tool_uses entry. I also added a sentence that δ_E is the 05TE triangle boundary, which is the convention the third square computes. The duplicate search over f-map and connecting-map nodes found nothing; horseshoe-delta-functor covers only a single functor. The blueprint ancestor det-thm-sf-ctf-stability-direct-images agrees with the via chain. I accept all twelve tool_uses as generic black boxes. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBoundary",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapBoundary.lean",
+  "statement": "theorem moduleCohomologyFMap_boundary {X Y : Scheme.{u}} (f : X ⟶ Y) (E : ShortComplex (SheafOfModules.{u} Y.ringCatSheaf)) (F : ShortComplex (SheafOfModules.{u} X.ringCatSheaf)) (hE : E.ShortExact) (hF : F.ShortExact) (φ₁ : E.X₁ ⟶ (pushforward f).obj F.X₁) (φ₂ : E.X₂ ⟶ (pushforward f).obj F.X₂) (φ₃ : E.X₃ ⟶ (pushforward f).obj F.X₃) (_h₁₂ : φ₁ ≫ (pushforward f).map F.f = E.f ≫ φ₂) (_h₂₃ : φ₂ ≫ (pushforward f).map F.g = E.g ≫ φ₃) (q : ℕ) : ∃ (T₁ : (RingedSpace.moduleCohomology Y.toRingedSpace (q + 1)).obj E.X₁ ⟶ (ModuleCat.restrictScalars f.appTop.hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace (q + 1)).obj F.X₁)) (T₃ : (RingedSpace.moduleCohomology Y.toRingedSpace q).obj E.X₃ ⟶ (ModuleCat.restrictScalars f.appTop.hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F.X₃)), (forget₂ _ AddCommGrpCat.{u}).map T₁ = moduleCohomologyFMap f φ₁ (q + 1) ∧ (forget₂ _ AddCommGrpCat.{u}).map T₃ = moduleCohomologyFMap f φ₃ q ∧ (@RingedSpace.moduleCohomologyBoundary Y.toRingedSpace (HasDerivedCategory.standard _) (HasDerivedCategory.standard _) E hE q) ≫ T₁ = T₃ ≫ (ModuleCat.restrictScalars f.appTop.hom).map (@RingedSpace.moduleCohomologyBoundary X.toRingedSpace (HasDerivedCategory.standard _) (HasDerivedCategory.standard _) F hF q)",
+  "branch": "sheaf-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conclusion specifies the unique module-linear lifts by equality of their underlying maps with moduleCohomologyFMap, and asserts the boundary equality in ModuleCat after restriction along f.appTop.hom. Canonical boundaries are the existing RingedSpace.moduleCohomologyBoundary, with HasDerivedCategory.standard passed explicitly, so no derived-category existence hypothesis is added. Added the already-landed boundary definition node to stmt_deps; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-941a0f9e1",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Read the item node, all six statement dependencies, the boundary definition (side-live ModuleCohomologyBoundary.lean:35), the basic-linearity lift form, the delivered module and report. Hypotheses: f : X ⟶ Y, two ShortComplex rows of SheafOfModules with ShortExact, φⱼ into the pushforward, both squares in diagrammatic order; all match. T₁ and T₃ are existential but pinned to moduleCohomologyFMap by the faithful forget₂, with the same restrictScalars f.appTop.hom form as moduleCohomologyFMap_basic_linearity. δ is the canonical moduleCohomologyBoundary with HasDerivedCategory.standard, so no extra hypothesis. The equality δ_E ≫ T₁ = T₃ ≫ restrictScalars.map δ_F holds for all q : ℕ, q = 0 included. No flatness, quasi-coherence, acyclicity or universe restriction. The node diff against side-live is only the lean record and the added stmt_dep def-sc-module-cohomology-boundary (landed 2026-10-11, used in the Lean). lean.statement matches the file verbatim. No new definitions, docstrings give source and blueprint, proof is sorry only, report sections present. No findings."
+ }
+}

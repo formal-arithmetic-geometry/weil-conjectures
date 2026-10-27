@@ -1,0 +1,126 @@
+{
+ "id": "def-trf-point-transport-tower-realization-specification",
+ "kind": "definition",
+ "title": "Explicit seven-property canonical point realization specification",
+ "statement": "Fix the finite-field datum D, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with integer ring $\\mathcal O_E$, as in [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$. Use the canonical data of [def-trf-integral-point-transport-canonical-data], the strict finite maps of [lem-trf-point-transport-strict-quotient], and the actual integral point transport of [def-weil-frobenius-point-transport]. Define pointTransportTowerRealizationSpec to assert existence of a natural strict tower map U, a natural source augmentation alpha, and a natural target Roos isomorphism beta, with exactly these seven conditions: (1) every finite component of U on every complex is the prescribed restriction followed by the finite pullback tensor generator; (2) the unshifted augmentation coordinate at each n is the quotient tensor unit, sending x to 1 tensor x; (3) its entire shifted coordinate is zero; (4) the unshifted coordinate of beta is the exact-section map of the sheaf-level product projection; (5) the shifted coordinate is the corresponding shifted sheaf-level projection; (6) on each good representative with integral constructible derived-complete localization, alpha becomes invertible and the specified actual integral transport followed by the pullback and section comparisons and beta equals alpha followed by the Roos map of U; (7) the actual integral transport is natural for every morphism of integral constructible derived objects. All equalities use the actual quotient tower and both coordinates. This named proposition is equivalent to the original formula with all constructions expanded.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map; implementation module PointTransportTowerRealizationSpec"
+ },
+ "stmt_deps": [
+  "def-trf-integral-point-transport-canonical-data",
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-point-transport-strict-quotient"
+ ],
+ "proof": [
+  {
+   "text": "The predicate is the displayed seven-condition formula. In both directions unfold the predicate and the six named canonical data presentations, together with the named module localization and section comparison. The existing canonical presentations give precisely the fully expanded original formula. This is checked by the private theorem pointTransportTowerRealizationSpec_iff_expanded.",
+   "uses": [
+    "def-trf-integral-point-transport-canonical-data",
+    "lem-trf-point-transport-cone-comparison-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-point-transport-canonical-data",
+  "lem-trf-point-transport-cone-comparison-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map; implementation module PointTransportTowerRealizationSpec"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact evaluation of inverse towers commutes with the two-coordinate Roos mapping cocone, natural quotient augmentation, and finite Frobenius point transport",
+   "results": "Generic limits and cocone comparison equations, tensor quotient maps, and inverse Frobenius on perfect rings; no coefficient-sheaf point construction. Existing project constructions are reused.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only; project-specific interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone",
+   "results": "Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone: mappingCocone, fst, snd, liftCochain and projection equations. These are the generic ingredients, not the specified integral point data.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransportTowerRealization|finitePointIterate|mapHomologicalComplex.*mappingCocone|ofOpSequence",
+   "results": "Mathlib.CategoryTheory.Functor.OfSequence supplies ofOpSequence and NatTrans.ofOpSequence. No specialized realization or finite point iterate; source constructions already exist in Sheaf.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match; reuse the project API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerRealization",
+  "group": "G6",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), Explicit seven-property canonical point realization specification",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportTowerRealizationSpec",
+  "file": "lean/Sheaf/Paper/PointTransportTowerRealizationSpec.lean",
+  "declaration": "WeilConjectures.pointTransportTowerRealizationSpec",
+  "statement": "def pointTransportTowerRealizationSpec (hl : l ≠ D.p) : Prop",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery b2da vs returned 8fe8 (diff -r: LFTN split removed, C5 fix and item stmt_deps fix taken, Lean otherwise identical); spec vs published statement (earlier defeq check, published blob unchanged cb8c8b5c887); delivered set + 3 direct importers compiled in sandbox; #print axioms; nodes vs Lean"
+ }
+}

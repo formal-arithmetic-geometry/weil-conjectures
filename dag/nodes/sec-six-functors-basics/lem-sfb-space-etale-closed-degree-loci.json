@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-space-etale-closed-degree-loci",
+ "kind": "statement",
+ "title": "Closed bounded-degree loci for a separated etale chart",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with atlas topology on field-valued point classes [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A geometric point is a map $\\operatorname{Spec}\\Omega\\to X$ from an algebraically closed field [def-weil-geometric-point], and its geometric fibre is the sheaf fibre product with this map. Quasi-compact means quasi-compact on scheme tests, or, for a space, that every open cover has a finite subcover. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Separated for a morphism means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Etale means representable etale on scheme tests [def-trf-algebraic-space, def-weil-etale-morphism]. Integral means representable and integral on scheme tests [def-weil-finite-integral-morphism]; in particular its pullback to an affine scheme is affine. Open immersions are representable by open immersions on scheme tests [def-weil-open-immersion]. Let $f:W\\to X$ be a quasi-compact separated etale morphism with $W$ a scheme. Suppose some integer $N$ bounds the cardinalities of all geometric fibres. For every integer $r\\geq0$, the subset $D_r\\subseteq|X|$ of points with geometric fibre cardinality at most $r$ is closed. Consequently, if a dense open subspace $O\\subseteq X$ has all these cardinalities at most $r$, the same bound holds on all of $X$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), etale specialization of its closed degree filtration."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-open-subspace",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Fix $r\\geq0$ and put $m=r+1$. Construct $P_1=W$ and $P_{k+1}=P_k\\times_XW$ for $1\\leq k<m$. By [lem-trf-space-fibre-products-etale-covers] these are algebraic spaces and each $P_{k+1}$ is a scheme, since $P_k$ is a scheme and $W\\to X$ is representable etale. The projection $P_{k+1}\\to P_k$ is a base change of $f$. The base-change and composition clauses of [lem-trf-space-chartwise-etale-permanence] therefore prove inductively that $P_k\\to X$ is etale. Its scheme source makes this representable etale. Write $p_1,\\ldots,p_m:P_m\\to W$ for its coordinates. On every test scheme its sections are exactly $m$ sections of $W$ with a common image in $X$, by the fibre-product universal property.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03FT (lemma-composition-etale) and 03FU (lemma-base-change-etale); spaces.tex Tag 02X2 (lemma-fibre-product-spaces)."
+   }
+  },
+  {
+   "text": "For each $1\\leq i<j\\leq m$, pull back $\\Delta_f:W\\to W\\times_XW$ along $(p_i,p_j):P_m\\to W\\times_XW$. Separatedness in the hypothesis says precisely that this scheme test is a closed immersion $E_{ij}\\to P_m$. Its image is closed by [def-weil-closed-immersion]. Let $C_m$ be the open subscheme of $P_m$ complementary to the finite union of these images [def-pc-scheme]. A field-valued tuple factors through $E_{ij}$ exactly when its two coordinates agree: this is the diagonal pullback universal property. It factors through $C_m$ exactly when none of those equalities holds. Indeed a map from a field spectrum factors through an open subscheme precisely when its single image point lies in the open, by the restriction description of [def-weil-open-immersion]. For $m=1$ the union is empty and $C_1=W$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Separation-axiom definition of a separated morphism; finite pairwise equality loci from its diagonal, expanded directly on scheme tests."
+   }
+  },
+  {
+   "text": "The inclusion $C_m\\hookrightarrow P_m$ is an open immersion of schemes, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). Compose it with $P_m\\to X$ using [lem-trf-space-chartwise-etale-permanence]; the resulting $q_m:C_m\\to X$ is representable etale since its source is a scheme. Apply [lem-a1-space-etale-open-image] to obtain its open image $I_m\\subseteq X$. That node also says that for every $g:G\\to X$ the point image of $C_m\\times_XG\\to G$ is the pullback open $I_m\\times_XG$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IR (lemma-etale-open), with the arbitrary-base-change image clause of Tag 03H4 (lemma-points-cartesian); morphisms.tex Tag 02GP (lemma-open-immersion-etale)."
+   }
+  },
+  {
+   "text": "Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be any geometric point. Its pullback $W_{\\bar x}$ is an etale scheme over $\\Omega$, by representability of $f$. By the first clause of [lem-kun-0ezp], $W_{\\bar x}$ is a disjoint union of copies of $\\operatorname{Spec}\\Omega$. This clause applies because an algebraically closed field is separably closed. Each point is thus one distinct $\\Omega$-valued section. Evaluating the fibre products of step 1 at $\\operatorname{Spec}\\Omega$, and removing the equality loci of step 2, identifies the $\\Omega$-sections of $(C_m)_{\\bar x}$ with ordered $m$-tuples of pairwise distinct points of $W_{\\bar x}$. Also $(C_m)_{\\bar x}$ is etale by base change, so the same first clause says it is nonempty if and only if it has an $\\Omega$-section. The image-base-change clause of [lem-a1-space-etale-open-image] now gives $x\\in|I_m|$ if and only if $(C_m)_{\\bar x}$ is nonempty, equivalently $|W_{\\bar x}|$ has at least $m$ points. In particular the inequality is independent of the chosen geometric representative. As $m=r+1$, this proves $|I_m|=|X|\\setminus D_r$.",
+   "uses": [
+    "lem-kun-0ezp",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), clause (1); etale-cohomology.tex Tag 09Z9 (lemma-normal-scheme-with-alg-closed-function-field), field specialization underlying the first clause of lem-kun-0ezp."
+   }
+  },
+  {
+   "text": "Step 3 makes $|I_{r+1}|$ open, so step 4 makes $D_r$ closed. If $O$ is the dense open in the statement, its point set is contained in $D_r$. Every closed subset containing a dense subset contains its closure, namely all of $|X|$. Thus $D_r=|X|$, proving the final assertion. The argument includes $r=0$ (the complement is the image of $W$), the empty base, the empty chart, and $r\\geq N$ (then no tuple of $r+1$ distinct fibre points exists).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), strict degree-decrease paragraph following the invocation of Tag 07S8; the closure inference is elementary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-a1-space-etale-open-image",
+  "lem-kun-0ezp",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), etale closed degree filtration, and Tag 09YB (lemma-there-is-a-scheme-integral-over), density consequence. Agent-written configuration-space proof of this specialization, using spaces-properties.tex Tags 03FT, 03FU, 03IR, 03H4 and morphisms.tex Tag 02GL; no stratification theorem is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact separated etale morphism to an algebraic space the locus of geometric fibres of cardinality at most n is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsClosedMap)\", \"doc\": \"The property that a scheme morphism is a closed map (in the topological sense) is Zariski local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism is Zariski local at the target. Specifically, for any universally closed morphism $ f: X \\to Y $ of schemes and any Zariski covering sieve $ S $ on $\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every universally closed morphism of schemes is quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is universally closed (i.e., all base changes of $ f $ induce closed maps on the und\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsClosedMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lower semicontinuity of the number of points in separated etale geometric fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [Algebra.IsSeparable K L]\\n  [Algebra.EssFiniteType K L], Algebra.FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale, IsClosed",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Etale'",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Cc]ard|[Cc]ard.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed degree loci of separated etale algebraic space morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = unramifiedLocus R A ∩ smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, IsClosed",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, IsClosed",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated etale morphism the locus where a geometric fibre has at most r points is closed",
+   "results": "{\"t\": \"2026-10-23T12:20:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a separated etale morphism the locus where a geometric fibre has at most r points is closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\"], \"digest\": \"a0a243162cf0255a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned etale-locus, finite-fibre and scheme-only results do not state closed cardinality sublevels for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Cc]ard|[Cc]ard.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T12:24:04Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Ee]tale.*[Cc]ard|[Cc]ard.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned etale-locus, finite-fibre and scheme-only results do not state closed cardinality sublevels for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed sublevel loci for the number of points in geometric fibres of a separated etale morphism",
+   "results": "{\"t\": \"2026-10-23T12:24:04Z\", \"tool\": \"leansearch\", \"query\": \"Closed sublevel loci for the number of points in geometric fibres of a separated etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"Algebra.mem_etaleLocus_iff\", \"IsLocallyConstant.isClosed_fiber\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\"], \"digest\": \"bf12764021a9266e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned etale-locus, finite-fibre and scheme-only results do not state closed cardinality sublevels for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, IsClosed",
+   "results": "{\"t\": \"2026-10-23T12:24:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, IsClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned etale-locus, finite-fibre and scheme-only results do not state closed cardinality sublevels for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lower semicontinuity of geometric fibre cardinality of a separated etale morphism of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T12:24:05Z\", \"tool\": \"leanfinder\", \"query\": \"Lower semicontinuity of geometric fibre cardinality of a separated etale morphism of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"7a1d391aea55612b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned etale-locus, finite-fibre and scheme-only results do not state closed cardinality sublevels for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: strict degree decrease on the complement of the chosen section.",
+   "via": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-closed-degree-loci",
+  "worker": "stage1",
+  "summary": "Proved closed degree sublevels by removing pairwise diagonals in the (r+1)-fold etale chart product and identifying its open image on geometric fibres. Reused existing nodes; no new nodes, no statement change, no Lean writing or compilation. Checked the empty and zero-degree cases and the dense-open consequence.",
+  "blueprint": "Supports the strict-degree-decrease input in the inherited provenance: det-thm-sf-ctf-stability-direct-images proof (3), through the finite integral scheme-cover argument (Stacks 09YB). The current latest blueprint direct-images proof (3) was read; this item is a supporting geometry lemma, not a replacement of a unit step. The recorded nearest blueprint ancestor is null (existing broken ancestry), retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and scheme representability of etale chart products; the unit has no competing construction."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic base-change and composition calculus for etale maps of spaces, needed to form configuration charts."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic openness of a representable etale image and its equality after arbitrary base change; no unit-specific lemma replaces it."
+   },
+   {
+    "node": "lem-kun-0ezp",
+    "why": "Only the first clause, describing etale schemes over a separably closed field as disjoint copies of its spectrum; no cohomology assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-space-etale-open-image",
+  "lem-kun-0ezp"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-43ced3ab0",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-43ced3ab0 (reviewer sub-agent of L); spot-checked: I read the item in full; it has 5 steps and no new nodes, the statement is unchanged, and proof_deps equals the union of the step uses. The proof forms the (r+1)-fold chart product P_m and removes the pairwise diagonal pullbacks E_ij. These are closed by the item's own separatedness hypothesis, which leaves an open C_m. The étale image I_m is open, and its base-change clause (lem-a1-space-etale-open-image) identifies the geometric fibre of C_m with ordered (r+1)-tuples of distinct fibre points. That fibre description uses the first clause of lem-kun-0ezp, which is valid because objects of the small étale site are all étale U→T and an algebraically closed field is separably closed. So |I_{r+1}| = |X| minus D_r, and the dense-open clause follows. Two small implicit steps are standard and need no repair: a field point lying in the image of a closed immersion factors through it, and the base change of an open immersion is an open immersion. Source check: Stacks decent-spaces Tag 07S8 (line 1436) and the proof of Tag 09YB (lines 1855-1866, where the degree of a quasi-compact étale map does not rise under specialization, applied with a dense open). The item matches this exactly; there is no SGA citation. Small cases: W = X⊔X gives D_1 empty; an open immersion gives D_0 = X minus U; empty X or W, r=0 and r≥N all work. The affine line with doubled origin shows separatedness is needed, and step 2 uses it. No duplicate: the a1 affine diagonal-complement and groupoid rank-strata nodes are scheme or finite-locally-free statements. Batch-5 flags: lem-a1-space-etale-open-image (openness of étale images) and lem-trf-space-chartwise-etale-permanence (étale permanence for algebraic spaces) are general algebraic-space foundations. Neither is a statement or proof step of the trace formula or Poincaré duality, so I accepted both as tool_uses. The null blueprint.from.node was inherited from the N7 split that created the item, so it is not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleClosedDegreeLoci",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_closed_degree_loci",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleClosedDegreeLoci.lean",
+  "statement": "theorem etale_closed_degree_loci {S : Scheme.{u}} (W : Over S) (X : AlgebraicSpace S) (f : yoneda.obj W ⟶ X.obj.obj) (hqc : IsQuasiCompactPresheafMap f) (hsep : IsSeparatedPresheafMap f) (het : IsEtale f) (hbound : ∃ N : ℕ, ∀ (x : PointRepresentative X.obj.obj) [IsAlgClosed x.K], Cardinal.mk (Point (Limits.pullback f (yonedaEquiv.symm x.value))) ≤ (N : Cardinal)) : ∀ r : ℕ, ∃ D : Set (Point X.obj.obj), IsClosed D ∧ (∀ (x : PointRepresentative X.obj.obj) [IsAlgClosed x.K], Quot.mk _ x ∈ D ↔ Cardinal.mk (Point (Limits.pullback f (yonedaEquiv.symm x.value))) ≤ (r : Cardinal)) ∧ (∀ O : OpenSubspace X, Dense (pointImage O.val.ι) → (∀ (x : PointRepresentative X.obj.obj) [IsAlgClosed x.K], Quot.mk _ x ∈ pointImage O.val.ι → Cardinal.mk (Point (Limits.pullback f (yonedaEquiv.symm x.value))) ≤ (r : Cardinal)) → ∀ (x : PointRepresentative X.obj.obj) [IsAlgClosed x.K], Cardinal.mk (Point (Limits.pullback f (yonedaEquiv.symm x.value))) ≤ (r : Cardinal))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The source is the scheme W : Over S via its actual Yoneda presheaf. The theorem supplies a closed point subset characterized on every algebraically closed field representative, and the dense-open consequence. Geometric fibre cardinalities use Cardinal.mk of Point of the actual presheaf pullback, avoiding Nat.card on possibly infinite types. Four already recorded definition nodes are added to stmt_deps for the point classes, open subspaces, quasi-compact affine-test predicate and separated diagonal; no definitions are duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-293b30270",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: W : Over S with Yoneda map f; IsQuasiCompactPresheafMap/IsSeparatedPresheafMap/AlgebraicSpace.IsEtale are the recorded owners; geometric fibre = Point of presheaf pullback along yonedaEquiv.symm x.value for IsAlgClosed representatives, Cardinal.mk; ∃ D closed characterized on every alg-closed representative (determines D_r uniquely since every class has such a rep); dense-open clause with same r. No extra hypotheses, single universe u. Four added stmt_deps are recorded live def nodes with exact declarations. Statement verbatim, unchanged node text, only sorry, source/blueprint docstrings with 5 proof steps, proof-only imports exist. Edge cases r=0, empty X/W, open immersion, r≥N fine. Not recompiled (no change)."
+ }
+}

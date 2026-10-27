@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-semilocal-constant-rank-basis",
+ "kind": "statement",
+ "title": "A constant-rank locally free module over a semilocal ring has a basis",
+ "statement": "Let $R$ be a commutative semilocal ring, meaning that $R$ has only finitely many maximal ideals, and let $M$ be an $R$-module. Let $n\\geq0$ be an integer. Assume that there are finitely many elements $t_1,\\ldots,t_m\\in R$ generating the unit ideal such that $M_{t_i}$ is a free $R_{t_i}$-module with a basis of $n$ elements for every $i$ [def-weil-ring-localization-away], [def-weil-pbc-module-localization-away], [def-weil-pbc-free-module]. Then $M$ has an $R$-basis indexed by $\\{1,\\ldots,n\\}$, equivalently $M\\cong R^{\\oplus n}$. The zero ring, $n=0$, and an empty principal cover of the zero ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M9, lemma-locally-free-semi-local-free; constant rank expressed by a finite principal-open free cover."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "If $R$ is the zero ring, every $z\\in M$ satisfies $z=1z=0z=0$. Thus $R^{\\oplus n}\\to M$ is the unique bijection, and the all-zero family indexed by $\\{1,\\ldots,n\\}$ is a basis by [def-weil-pbc-free-module]. This covers the empty principal cover as well. Henceforth suppose $R\\ne0$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9, lemma-locally-free-semi-local-free, proof hints; explicit finite Chinese-remainder construction."
+   }
+  },
+  {
+   "text": "Enumerate the finitely many distinct maximal ideals as $\\mathfrak q_1,\\ldots,\\mathfrak q_s$. For every $a$, some $t_i$ lies outside $\\mathfrak q_a$: otherwise their unit-ideal linear combination $1$ would belong to $\\mathfrak q_a$. Apply [lem-a1-local-trivialization-residue-rank] to this $t_i$, with $E=R$, $P=M$ and $r=n$. It gives $M_{\\mathfrak q_a}\\cong R_{\\mathfrak q_a}^{\\oplus n}$ and $\\dim_{R/\\mathfrak q_a}(M/\\mathfrak q_aM)=n$. Choose a basis $(\\bar x_{a,k})_{1\\le k\\le n}$ of each of these residue modules and representatives $x_{a,k}\\in M$.",
+   "uses": [
+    "lem-a1-local-trivialization-residue-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9, lemma-locally-free-semi-local-free, proof hints; explicit finite Chinese-remainder construction."
+   }
+  },
+  {
+   "text": "For $a\\ne b$, the ideal $\\mathfrak q_a+\\mathfrak q_b$ strictly contains $\\mathfrak q_a$ (distinct maximal ideals cannot contain one another), hence equals $R$. Choose $u_{ab}\\in\\mathfrak q_b$ and $v_{ab}\\in\\mathfrak q_a$ with $u_{ab}+v_{ab}=1$. Put $e_a=\\prod_{b\\ne a}u_{ab}$. Modulo $\\mathfrak q_a$ every factor is $1$, so $e_a\\equiv1$; modulo $\\mathfrak q_b$ for $b\\ne a$ the factor $u_{ab}$ is zero, so $e_a\\equiv0$. The empty product when $s=1$ is $1$. This proves the needed Chinese-remainder weights directly from maximality, without asserting that the $e_a$ are idempotent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9, lemma-locally-free-semi-local-free, proof hints; explicit finite Chinese-remainder construction."
+   }
+  },
+  {
+   "text": "For $1\\le k\\le n$ define $x_k=\\sum_{a=1}^s e_ax_{a,k}$. In $M/\\mathfrak q_bM$ this sum reduces to $\\bar x_{b,k}$ by the congruences of step 3. Thus the images of the single family $(x_k)$ form a basis in every maximal residue module. For $n=0$ all these families are empty; the same calculation is vacuous and valid.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9, lemma-locally-free-semi-local-free, proof hints; explicit finite Chinese-remainder construction."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-basis-of-maximal-residue-bases] with $E=R$, $P=M$, $r=n$ and the prescribed vectors $x_k$. Its maximal-localization hypothesis is exactly step 2, and its prescribed-residue-basis hypothesis is step 4. It yields that $R^{\\oplus n}\\to M$, $(c_k)\\mapsto\\sum_k c_kx_k$, is bijective, equivalently that $(x_k)_{1\\le k\\le n}$ is the required $R$-basis. Its statement includes rank zero.",
+   "uses": [
+    "lem-a1-basis-of-maximal-residue-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9, lemma-locally-free-semi-local-free, proof hints; explicit finite Chinese-remainder construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-a1-local-trivialization-residue-rank",
+  "lem-a1-basis-of-maximal-residue-bases"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M9, lemma-locally-free-semi-local-free, proof hints; explicit finite Chinese-remainder construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nonempty_basis_of_flat_of_finrank_eq|free_of_flat_of_finrank_eq|free_of_locus|IsLocallyFree.*[Ff]ree",
+   "results": "4 hits: Mathlib/RingTheory/LocalRing/Module.lean; Mathlib/RingTheory/LocalRing/Module.lean; Mathlib/RingTheory/LocalRing/Module.lean; Mathlib/RingTheory/PicardGroup.lean (Mathlib/RingTheory)",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq is a candidate, but assumes finite flatness and dimensions of maximal residue quotients; converting the stated principal-localization hypothesis to those hypotheses requires local-to-global module results, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free constant rank modules over semilocal rings are free",
+   "results": "8 hits: Module.free_of_flat_of_finrank_eq; Module.nonempty_basis_of_flat_of_finrank_eq; Module.free_of_flat_of_isLocalRing; Module.free_of_maximalIdeal_rTensor_injective; Module.FinitePresentation.exists_free_localizedModule_powers; Module.isLocallyConstant_rankAtStalk; Module.Invertible.free_iff_linearEquiv; Module.freeLocus",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq is a candidate, but assumes finite flatness and dimensions of maximal residue quotients; converting the stated principal-localization hypothesis to those hypotheses requires local-to-global module results, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.nonempty_basis_of_flat_of_finrank_eq",
+   "results": "1 hits: Module.nonempty_basis_of_flat_of_finrank_eq",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq is a candidate, but assumes finite flatness and dimensions of maximal residue quotients; converting the stated principal-localization hypothesis to those hypotheses requires local-to-global module results, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free module of constant rank r over a commutative semilocal ring has a basis with r elements",
+   "results": "8 hits: Module.nonempty_basis_of_flat_of_finrank_eq; Module.finBasis; Module.basisOfFiniteTypeTorsionFree'; Module.free_of_flat_of_finrank_eq; Module.finBasisOfFinrankEq; invariantBasisNumber_of_nontrivial_of_commRing; Module.exists_basis_of_span_of_flat; Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq is a candidate, but assumes finite flatness and dimensions of maximal residue quotients; converting the stated principal-localization hypothesis to those hypotheses requires local-to-global module results, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a ring with finitely many maximal ideals, a module free of rank n on a finite principal open cover is isomorphic to R to the n",
+   "results": "8 hits: Module.free_of_flat_of_finrank_eq; Module.nonempty_basis_of_flat_of_finrank_eq; CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum; invariantBasisNumber_of_nontrivial_of_commRing; CommRing.Pic.instFreeAsModuleOfNat; Module.free_of_finite_type_torsion_free'; Module.isOpen_freeLocus; Module.free_of_finite_type_torsion_free",
+   "date": "2026-10-23",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq is a candidate, but assumes finite flatness and dimensions of maximal residue quotients; converting the stated principal-localization hypothesis to those hypotheses requires local-to-global module results, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_basis_of_flat_of_finrank_eq|pi_tensorProductMk_quotient_surjective",
+   "results": "{\"t\": \"2026-10-23T19:22:18Z\", \"tool\": \"grep\", \"query\": \"nonempty_basis_of_flat_of_finrank_eq|pi_tensorProductMk_quotient_surjective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"5efd2750fb6b2d06\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq (Mathlib/RingTheory/LocalRing/Module.lean:395) assumes finite flatness and dimensions of tensor fibres. The item supplies a finite principal-free cover; conversion of that cover is not a one-line specialization. Other PID/local-ring hits have stronger hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free constant rank module over a semilocal ring is free",
+   "results": "{\"t\": \"2026-10-23T19:22:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite locally free constant rank module over a semilocal ring is free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_finrank_eq\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.free_of_flat_of_isLocalRing\", \"Module.free_of_finite_type_torsion_free'\", \"Module.freeLocus\", \"Module.finite_of_rank_eq_one\", \"Module.Invertible.free_iff_linearEquiv\"], \"digest\": \"ff5db36f93a2b1ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq (Mathlib/RingTheory/LocalRing/Module.lean:395) assumes finite flatness and dimensions of tensor fibres. The item supplies a finite principal-free cover; conversion of that cover is not a one-line specialization. Other PID/local-ring hits have stronger hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.nonempty_basis_of_flat_of_finrank_eq",
+   "results": "{\"t\": \"2026-10-23T19:22:19Z\", \"tool\": \"loogle\", \"query\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.nonempty_basis_of_flat_of_finrank_eq\"], \"digest\": \"0478d5fcb4b1554c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq (Mathlib/RingTheory/LocalRing/Module.lean:395) assumes finite flatness and dimensions of tensor fibres. The item supplies a finite principal-free cover; conversion of that cover is not a one-line specialization. Other PID/local-ring hits have stronger hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module free of rank n on a finite principal cover of a semilocal ring has a basis indexed by Fin n",
+   "results": "{\"t\": \"2026-10-23T19:22:20Z\", \"tool\": \"leanfinder\", \"query\": \"A module free of rank n on a finite principal cover of a semilocal ring has a basis indexed by Fin n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.basisOfFiniteTypeTorsionFree'\", \"Submodule.basisOfPid\", \"Module.basisOfFiniteTypeTorsionFree\", \"Module.Basis.SmithNormalForm.bN\", \"Submodule.basisOfPidOfLESpan\", \"Submodule.nonempty_basis_of_pid\", \"Ideal.ringBasis\", \"Submodule.smithNormalFormBotBasis\"], \"digest\": \"b5cd737368f2cf4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq (Mathlib/RingTheory/LocalRing/Module.lean:395) assumes finite flatness and dimensions of tensor fibres. The item supplies a finite principal-free cover; conversion of that cover is not a one-line specialization. Other PID/local-ring hits have stronger hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite flat module over a ring with finitely many maximal ideals has a basis of size n if every residue field tensor product has dimension n",
+   "results": "{\"t\": \"2026-10-23T19:23:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite flat module over a ring with finitely many maximal ideals has a basis of size n if every residue field tensor product has dimension n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.free_of_flat_of_finrank_eq\", \"Module.exists_basis_of_basis_baseChange\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"Module.rankAtStalk_eq\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.free_of_flat_of_isLocalRing\", \"Module.free_of_lTensor_residueField_injective\"], \"digest\": \"202804b867b19f4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Module.nonempty_basis_of_flat_of_finrank_eq (Mathlib/RingTheory/LocalRing/Module.lean:395) assumes finite flatness and dimensions of tensor fibres. The item supplies a finite principal-free cover; conversion of that cover is not a one-line specialization. Other PID/local-ring hits have stronger hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Module.nonempty_basis_of_flat_of_finrank_eq",
+  "file": "Mathlib/RingTheory/LocalRing/Module.lean",
+  "line": 395,
+  "why": "Finite flat and maximal-residue dimension formulation; needs the locally-free-to-finite-flat comparison and residue-rank identification."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-locally-free-degree-composition",
+  "date": "2026-10-23",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 10.9 and Remark 10.11, pp.46–48; Proposition 10.20 and proof, pp.50–52. Rational extension by clearing denominators as in Remark 10.11. Supporting input in the present split: Chapter I §7, printed p.32, identification of isogeny degree with function-field degree; Remark 10.11, printed p.47; multiplicativity used in Lemma 10.22 and Proposition 10.20, printed pp.51–52. Rank multiplication for the finite locally free morphisms underlying two isogenies, including nonreduced fibres. Semilocal constant-rank freeness, Stacks Tag 02M9, in the fibre-algebra rank calculation.",
+   "via": [
+    "lem-sfb-finite-locally-free-degree-composition",
+    "lem-sfb-abelian-degree-multiplicative",
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semilocal-constant-rank-basis",
+  "worker": "stage1",
+  "summary": "Expanded the three hints of Stacks 02M9: reused the existing local-trivialization/residue-rank and prescribed-basis criteria, and supplied the finite Chinese-remainder weights and their module calculation explicitly. No new nodes and no statement changes. Zero ring, empty cover, rank zero, and one maximal ideal checked.",
+  "blueprint": "The inherited from.place traces the algebraic rank calculation below det-thm-sf-ctf-stability-direct-images (3), via lem-sfb-finite-locally-free-degree-composition. The newest blueprint direct-images proof (3) is the compactification/direct-image assembly; this is its inherited supporting algebra input, not a new assertion that the newest blueprint explicitly states 02M9. Steps realize all three hints of the item source 02M9. Blueprint searches for semilocal, constant rank, residue bases and 02M9 found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-local-trivialization-residue-rank",
+    "why": "Generic commutative algebra comparison of a principal trivialization with a maximal localization and its residue module; the same-unit nodes do not state this comparison."
+   },
+   {
+    "node": "lem-a1-basis-of-maximal-residue-bases",
+    "why": "Generic algebra criterion for a prescribed family to be a basis, given its maximal localizations and residues; used after explicitly constructing the family by the source 02M9 route, not replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-local-trivialization-residue-rank",
+  "lem-a1-basis-of-maximal-residue-bases"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-a430a470c",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-a430a470c (reviewer sub-agent of L); spot-checked: I read the item, the source and both cited nodes in full; the mathematics is correct and there are no changes. The item keeps its statement and stmt_deps, with 5 steps and no new nodes; it is not a re-split delivery. It is Stacks Tag 02M9 (algebra.tex l.19291) with constant rank n given by a finite principal free cover, faithful and not weakened. The steps carry out the source's three hints. Step 1: in the zero ring M=0, so the zero family is a basis by def-weil-pbc-free-module. Step 2: some t_i lies outside each maximal ideal q_a; lem-a1-local-trivialization-residue-rank then gives M_q≅R_q^n and dim M/qM=n, and every hypothesis is met. Step 3: since q_a+q_b=R, the CRT weights e_a=Π u_ab satisfy e_a≡1 mod q_a and ≡0 mod q_b; the empty product covers s=1 and no idempotence is claimed. Step 4: x_k=Σ e_a x_{a,k} reduces to x̄_{b,k} in each M/q_bM. Step 5: lem-a1-basis-of-maximal-residue-bases applies, with its hypotheses supplied by steps 2 and 4. Small cases checked: zero ring with an empty cover, a field, k×k', n=0, and a nonreduced local ring. Duplicate search: lem-a1-semilocal-submodule-basis and lem-a1-simultaneous-residue-bases both need an infinite residue field, so neither is a generalization usable here. Mathlib's nonempty_basis_of_flat_of_finrank_eq remains only a candidate. Accepted tool_uses: the two sk-p-real-rankin nodes are generic commutative algebra, used as black boxes for exactly the 02M9 hints; the unit has no route node for this, and neither cited node depends back on the item. No SGA citation. The inherited blueprint ancestry is unchanged, and the only citer, lem-sfb-finite-locally-free-degree-composition, is unaffected."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SemilocalConstantRankBasis",
+  "declaration": "Module.semilocal_constant_rank_basis",
+  "file": "lean/Sheaf/RingTheory/SemilocalConstantRankBasis.lean",
+  "statement": "theorem semilocal_constant_rank_basis {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] [Finite (MaximalSpectrum R)] (n m : ℕ) (t : Fin m → R) (ht : Ideal.span (Set.range t) = ⊤) (hfree : ∀ i : Fin m, Nonempty (Module.Basis (Fin n) (Localization.Away (t i)) (LocalizedModule.Away (t i) M))) : Nonempty (Module.Basis (Fin n) R M)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85c3736d4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02M9 (algebra.tex l.19291): semilocal = [Finite (MaximalSpectrum R)]; arbitrary module, independent universe v; cover t : Fin m → R spanning ⊤; Fin n bases of LocalizedModule.Away over Localization.Away (recorded stmt_dep declarations, checked in pinned Mathlib); conclusion Nonempty (Basis (Fin n) R M) ≅ R^n. Zero ring, empty cover (forces zero ring), n=0 and one maximal ideal covered; no extra instances. Node changed only by lean record; statement verbatim in file; sorry-only proof; docstrings carry source place, blueprint id and 5 steps. No duplicate in Mathlib or project (nonempty_basis_of_flat_of_finrank_eq needs Finite+Flat; SemilocalSubmoduleBasis needs infinite residue field). Proof deps' interfaces consistent. Report has Worker report and Second reading by NJ. No fixes."
+ }
+}

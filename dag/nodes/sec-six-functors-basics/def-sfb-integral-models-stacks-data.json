@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-integral-models-stacks-data",
+ "kind": "definition",
+ "title": "Integral coefficient maps and Stacks adic predicate",
+ "statement": "For a prime l and a finite extension E of Q_l, define the discrete condensed valuation ring and its first residue ring by constant sheafification. The scalar map sends each scalar to its constant continuous function. Pull back both maps to a scheme X. Restriction is the termwise derived restriction along the scalar map. On a Noetherian X, stacksConstructible of a discrete integral complex L means local derived completeness for the kernel of the first residue map, after the section-module and small-site equivalences, together with constant-model constructible cohomology and finite relative Tor amplitude for its first derived reduction. The coefficient maps and small-site transports are actual sheaf and module constructions. The separately named residueCondition is the last two conjuncts, without completeness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)–(2): coefficient-presentation comparison in det-lem-integral-models-stacks"
+ },
+ "stmt_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-site-derived-constant-module-functor",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite constant stratified models under isomorphism of completed coefficient sheaves",
+   "date": "2026-10-24",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app, CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+   "verdict": "No exact match for the specified coefficient presentation comparison; generic constant-sheaf, scalar-restriction or etale declarations do not identify these local predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant stratified models under isomorphism of completed coefficient sheaves",
+   "date": "2026-10-24",
+   "results": "8 hits: FirstOrder.Language.Structure.FG.mem_age_of_equiv, RingHom.EssFiniteType.respectsIso, FirstOrder.Language.Hereditary.is_equiv_invariant_of_fg, Algebra.IsStandardSmooth.hcongr_5, FirstOrder.Language.age.is_equiv_invariant, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, FirstOrder.Language.Equiv.fg_iff",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsEquivalence\"",
+   "date": "2026-10-24",
+   "results": "3 hits: AlgCat.instIsEquivalenceRestrictScalarsToRingHom, AlgCat.instIsEquivalenceRestrictScalarsToRingHomSymm, ModuleCat.restrictScalars_isEquivalence_of_ringEquiv",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*[Cc]omplet|[Cc]omplet.*stratif",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsStacks",
+  "date": "2026-10-24",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Unit proof (1)–(2): Integral coefficient maps and Stacks adic predicate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsStacksData",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsStacksData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.stacksConstructible",
+  "statement": "def stacksConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X] :\n    ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X)))",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteSheaf",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteObj",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteObj_comm",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.constantToContinuous",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.sectionMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallRing",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallModules",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallDerivedObject",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integersObj",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integersObj_comm",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarPointMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarPointMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.stacksConstructible",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueCondition",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueCondition_iso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical); moved Data block vs original item block (verbatim); new sorry statements vs blueprint unit steps (1)-(2) and Stacks 099C/099M/09C2/09AL; item node proof_deps vs Lean proof; both direct importers compiled against the delivery"
+ }
+}

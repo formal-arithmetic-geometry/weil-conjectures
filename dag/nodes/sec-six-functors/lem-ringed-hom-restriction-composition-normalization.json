@@ -1,0 +1,145 @@
+{
+ "id": "lem-ringed-hom-restriction-composition-normalization",
+ "kind": "statement",
+ "title": "Composition preserves normalization of derived internal Hom comparisons",
+ "statement": "Let R,S,Z be commutative ring sheaves on small sites, with unbounded derived categories in one localization universe [def-weil-abstract-derived-category]. Let F:R-modules to S-modules, G:S-modules to Z-modules and V:R-modules to Z-modules be additive exact functors, and let c:F composed with G isomorphic to V. Assume F preserves K-injective complexes. Let a,b be specified ordinary Hom comparisons for F,G and e,s specified derived Hom comparisons, normalized against a,b by the representative equation [lem-ringed-hom-restriction-comparison-descent]. Then the transported composite of e,s along mapDerivedCategoryCompIso inverse followed by mapDerivedCategoryNatIso(c) is normalized against the transported composite of a,b along mapHomologicalComplexCompIso(c). This asserts no existence of comparisons and no equality with an independently chosen direct comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "lem-ringed-hom-restriction-comparison-descent"
+ ],
+ "proof": [
+  {
+   "text": "Fix L and K-injective I. Apply G to the normalization equation for e at L,I. Since F(I) is K-injective, use the normalization equation for s at F(L),F(I). Naturality of s moves the F localization-factorization isomorphisms through s, and composing the two equations gives normalization for the composite before transporting c.",
+   "uses": [
+    "lem-ringed-hom-restriction-comparison-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+   }
+  },
+  {
+   "text": "Use naturality of the augmentation on the complex isomorphism induced by c. The localization-factorization equations for mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify the representative transport with the specified derived transport. Cancel the intermediate invertible factors. This is exactly the normalization equation asserted.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-ringed-hom-restriction-comparison-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ringed-hom-restriction-comparison-descent",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB, expanded using the construction of Tags 08J7 and 0A95"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived internal Hom natural comparisons compose and are uniquely determined by K-injective representatives",
+   "results": "InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality and isoRightDerivedObj_hom_naturality, bounded injective-resolution naturality only.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded internal Hom normalization, its descent, or composition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between composite exact functors on derived categories commutes with localization factorization and composition of natural transformations",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, leftDerivedNatTrans_comp and leftDerivedNatTrans_fac_assoc.",
+   "date": "2026-10-25",
+   "verdict": "General derived-functor composition and factorization, not normalized internal Hom comparison pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext, fullyFaithfulWhiskeringLeft and liftNatIso",
+   "date": "2026-10-25",
+   "verdict": "General descent and extensionality only; no internal-Hom normalization or coherent restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Rr]estrict|[Rr]estrict.*homComplex",
+   "results": "No Mathlib match; project ElementRestrictionHom provides a private ordinary comparison without a coherence equation, InternalHomOverNaturality gives the sheaf factor naturality.",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the new statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedInternalHomExactRestriction",
+  "date": "2026-10-25",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "via": [
+    "lem-route-ringed-internal-hom-restriction",
+    "lem-sf-ringed-rhom-derived-complete",
+    "lem-sf-rational-thick-evaluation"
+   ],
+   "place": "prop-sf-dualizable-hom.proof.md first paragraph: local Hom computation via ambient derived-Hom restriction in lem-sf-ringed-rhom-derived-complete"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedHomRestrictionComposition",
+  "file": "lean/Sheaf/Algebra/Homology/RingedHomRestrictionComposition.lean",
+  "declaration": "CategoryTheory.RingedHomRestriction.composite_normalized",
+  "statement": "theorem composite_normalized\n    {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {N : GrothendieckTopology E}\n    (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u})\n    (Z : Sheaf N CommRingCat.{u})\n    [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules S)]\n    [HasDerivedCategory.{w} (Modules Z)]\n    (F : Modules R ⥤ Modules S) (G : Modules S ⥤ Modules Z) (V : Modules R ⥤ Modules Z)\n    [F.Additive] [G.Additive] [V.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (c : F ⋙ G ≅ V)\n    (hF : ∀ I : Complex R, I.IsKInjective →\n      CochainComplex.IsKInjective ((F.mapHomologicalComplex (.up ℤ)).obj I))\n    (a : ordinary R ⋙ F.mapHomologicalComplex (.up ℤ) ≅\n      ((F.mapHomologicalComplex (.up ℤ)).op.prod\n        (F.mapHomologicalComplex (.up ℤ))) ⋙ ordinary S)\n    (b : ordinary S ⋙ G.mapHomologicalComplex (.up ℤ) ≅\n      ((G.mapHomologicalComplex (.up ℤ)).op.prod\n        (G.mapHomologicalComplex (.up ℤ))) ⋙ ordinary Z)\n    (e : derivedInternalHom.{u, w} J R ⋙ F.mapDerivedCategory ≅\n      (F.mapDerivedCategory.op.prod F.mapDerivedCategory) ⋙ derivedInternalHom.{u, w} K S)\n    (s : derivedInternalHom.{u, w} K S ⋙ G.mapDerivedCategory ≅\n      (G.mapDerivedCategory.op.prod G.mapDerivedCategory) ⋙ derivedInternalHom.{u, w} N Z)\n    (he : Normalized R S F a e) (hs : Normalized S Z G b s) :\n    Normalized R Z V (composite (Functor.mapHomologicalComplexCompIso c (.up ℤ)) a b)\n      (composite ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫\n        Functor.mapDerivedCategoryNatIso c) e s)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T164521-L-1029987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261025T203051-L-2780712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.RingedHomRestriction.composite_normalized"
+  ],
+  "sorry_after": []
+ }
+}

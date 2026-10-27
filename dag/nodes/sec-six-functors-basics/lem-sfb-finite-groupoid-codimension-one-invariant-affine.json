@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+ "kind": "statement",
+ "title": "Invariant affine neighbourhoods of codimension-one finite groupoid orbits",
+ "statement": "Let $K$ be a field [def-weil-field], and let $(U,R,s,t,e,i,c)$ be a groupoid in $K$-schemes [def-a1-groupoid-scheme]. Assume $s,t:R\\to U$ are finite [def-weil-finite-integral-morphism], and $U$ is separated over $K$ and locally Noetherian [def-weil-proper-morphism, pqf-def-locnoeth]. Let $u\\in U$, and let $O(u)$ be its orbit, the set of points $t(r)$ for points $r\\in R$ with $s(r)=u$; field-valued points may be compared after a common field extension. Assume $\\dim\\mathcal O_{U,v}\\leq1$ for every $v\\in O(u)$, where $\\mathcal O_{U,v}$ is the structure-sheaf stalk and ring dimension is [def-weil-pbc-krull-dimension-ring]. Then there is an affine open subscheme $W\\subseteq U$ [def-pc-scheme] with $O(u)\\subseteq W$ and $s^{-1}(W)=t^{-1}(W)$ as open subschemes of $R$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABI (lemma-find-affine-codimension-1); the field-relative separatedness implies absolute separatedness because Spec K is separated."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The identity, inverse and composition laws make $O=t(s^{-1}(\\{u\\}))$ an equivalence class of points: for composition choose a common extension of the two residue fields over the common intermediate point. The finite fibre of $s$ shows that $O$ is finite. Every affine open of $U$ has Noetherian coordinate ring, and each stalk is a localization of such a ring, hence Noetherian. Locally finite irreducible components imply that a quasi-compact open meets only finitely many components (take a finite subcover of the witnessing neighbourhoods). The diagonal of $\\operatorname{Spec}K$ over $\\mathbf Z$ is closed: its affine ring map $K\\otimes_{\\mathbf Z}K\\to K$ is surjective, since $a$ is the image of $a\\otimes1$. The map $U\\times_KU\\to U\\times_{\\mathbf Z}U$ is its base change. Composing this closed immersion with the given relative diagonal proves absolute separatedness of $U$. Apply the common-affine-neighbourhood lemma to the finite set $O$, using its assumed local dimension bound, to obtain an affine open $A_0\\subseteq U$ containing $O$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), first paragraph, finite orbit and common affine neighbourhood (Tag 09NN)"
+   }
+  },
+  {
+   "text": "Set $C=t(s^{-1}(U\\setminus A_0))$. It is closed because $s$ is continuous and $t$ is closed. It is a union of orbits by inverse and composition. An orbit meeting $U\\setminus A_0$ cannot be $O$, so $O\\cap C=\\varnothing$. The identity arrow gives $U\\setminus A_0\\subseteq C$. Thus $U_0=U\\setminus C$ is an invariant open containing $O$ and contained in $A_0$. The Noetherian scheme $A_0$ has Noetherian open subscheme $U_0$. Restriction to this invariant open is harmless: any invariant open of $U_0$ is open and invariant in $U$. Henceforth replace $U$ by $U_0$; it has an immersion into an affine scheme and is Noetherian.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), first paragraph, closed saturation and quasi-affine reduction"
+   }
+  },
+  {
+   "text": "Apply integral orbit-cover descent to the reduction $U_{\\mathrm{red}}\\hookrightarrow U$: it is a closed immersion and hence integral, its underlying map is the identity, and it meets every orbit. The restricted groupoid still has finite source and target. In general for a closed immersion $T\\hookrightarrow U$, its restricted arrow scheme is $T\\times_U R\\times_U T$; its source is the composite of a closed immersion into $R\\times_{s,U}T$ with the finite base change of $s$, and similarly for the target. This composite is finite: on affine charts a quotient of a finite module is finite. Reduction preserves the prime chains and the local dimension bounds. It therefore suffices to work with reduced $U$, remembering to descend the final invariant affine back to the original $U$.",
+   "uses": [
+    "lem-sfb-integral-orbit-affine-descent",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-a1-groupoid-scheme",
+    "pqf-lem-finite-integral-lft",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), second paragraph, reduction via Tag 0ABE"
+   }
+  },
+  {
+   "text": "Choose the invariant open $W$ and closed thickening $W\\prime\\subseteq W$ of the almost-dense-flat-locus lemma. Since $W$ is reduced, the ideal of a closed subscheme with the same underlying space is zero: on each reduced affine chart its elements lie in every prime and hence in the zero nilradical. Thus $W\\prime=W$, so the restricted maps on $W$ are finite locally free. Put $T=\\overline{|W|}_{\\mathrm{red}}$. Its inclusion is integral, and $U=t(s^{-1}(|T|))$ says precisely that it meets every orbit. Choose $u\\prime\\in O(u)\\cap T$ and apply integral orbit-cover descent once more. Proving the result on $T$ suffices, since the descended invariant open contains $u\\prime$, hence all of $O(u)$. Closed-subscheme local rings are quotients, so their prime chains are a subset of the original chains and the dimension bounds persist. Replace $U$ by $T$, $u$ by $u\\prime$, and restrict the groupoid; now $W$ is dense as well as open, invariant, and finite locally free for the restricted groupoid.",
+   "uses": [
+    "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+    "lem-sfb-integral-orbit-affine-descent",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), second paragraph, almost dense locus (0ABA) and closed reduction (0ABE)"
+   }
+  },
+  {
+   "text": "All replacements are closed subschemes of the preceding Noetherian scheme and retain an immersion into an affine scheme; finite type quotient charts are Noetherian, and closed subsets of quasi-compact spaces are quasi-compact. Their source and target maps remain finite by the restricted-arrow calculation above. If $u\\in W$, its entire orbit lies in $W$. The common-affine-neighbourhood lemma applies inside the separated locally Noetherian open $W$, with the same local rings at orbit points and finitely many irreducible components on quasi-compact opens. Then finite-locally-free invariant-affine shrinking gives the required invariant affine in $W$ and hence in $U$. The remembered integral descents finish this case. Otherwise $O(u)\\cap W=\\varnothing$; assume this case for the remaining steps.",
+   "uses": [
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-sfb-locally-free-groupoid-invariant-affine",
+    "lem-sc-locnoeth-components-locally-finite",
+    "pqf-def-locnoeth",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), third paragraph, the case u in W (03JE)"
+   }
+  },
+  {
+   "text": "Consider every strict generalization $\\xi$ of any $v\\in O(u)$. The local dimension bound implies that $\\xi$ has no strict generalization: a chain $\\eta\\leadsto\\xi\\leadsto v$ would give a length-two prime chain in $\\mathcal O_{U,v}$. Thus $\\xi$ is a component generic point: a component through $\\xi$ exists by the component-cover lemma, and its unique generic point (scheme sobriety) generalizes $\\xi$, hence equals $\\xi$. It lies in the dense open $W$; it is outside $O(u)$ by orbit incomparability. There are finitely many such points $\\xi_1,\\ldots,\\xi_m$, because the Noetherian scheme $U$ has finitely many irreducible components. The list may be empty.",
+   "uses": [
+    "lem-sfb-finite-groupoid-orbit-incomparability",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-sc-generic-point",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), third paragraph, strict generalizations of the distinguished orbit"
+   }
+  },
+  {
+   "text": "The $R_W$-orbit of each $\\xi_j$ consists of component generic points. As in step 6, a point of a scheme is a component generic point exactly when it has no proper generalization (component-cover lemma and sobriety; conversely, the closure of a generalization of a component generic point contains that component, so maximality and uniqueness of generic points force equality). Choose an arrow $r$ with $s_W(r)=\\xi_j$. Any generalization $r\\prime$ of $r$ has $s_W(r\\prime)$ a generalization of $\\xi_j$, hence $s_W(r\\prime)=\\xi_j$; on affine charts of the finite, hence integral, map $s_W$, integral incomparability forces $r\\prime=r$. Thus $r$ has no proper generalization. Let $v$ be a generalization of $t_W(r)$. Since $t_W$ is finite locally free, hence flat by definition, flat generalization lifting gives $r\\prime$ generalizing $r$ with $t_W(r\\prime)=v$; then $r\\prime=r$ and $v=t_W(r)$. So $t_W(r)$ has no proper generalization in $W$, nor in $U$, because a generalization in $U$ of a point of the open $W$ lies in $W$. Hence $t_W(r)$ is a generic point of an irreducible component of $W$ and of $U$.",
+   "uses": [
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-weil-finite-integral-morphism",
+    "def-sc-generic-point",
+    "pqf-lem-finite-integral-lft",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), third paragraph, generic orbits under finite locally free maps"
+   }
+  },
+  {
+   "text": "Fix an immersion $j:U\\to\\operatorname{Spec}A$ inherited from the preceding replacements. Let $H=\\overline{j(U)}$. The image $j(U)$ is open in $H$, and $j(W)$ is open in $j(U)$, hence open in $H$. Choose ideals $I,J\\subseteq A$ with $V(I)=H\\setminus j(U)$ and $V(J)=H\\setminus j(W)$; these are closed subsets of $\\operatorname{Spec}A$. Thus $V(I)\\cup j(U)=H$, $V(J)\\cup j(W)=H$, and both required disjointness conditions hold. The finite maps on the locally Noetherian schemes $U$ and $W$ are of finite presentation. Apply the almost-invariant-function lemma to $W$, $j|_W$, $J$, and the list $\\xi_j$. It gives $f\\in J$ with $F=j^{-1}D(f)\\subseteq W$ affine and invariant, containing all $\\xi_j$. The inclusion follows because $j(U\\setminus W)\\subseteq V(J)$; invariance in $W$ and invariance of $W$ imply invariance in $U$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-sfb-finite-groupoid-almost-invariant-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), fourth paragraph, boundary ideal and almost invariant f (0ABF)"
+   }
+  },
+  {
+   "text": "Let $Z$ be the reduced induced closed subscheme on $U\\setminus F=j^{-1}V(f)$. Its underlying set is a union of orbits, although $Z$ need not be scheme-theoretically invariant. Restrict the groupoid using $R_Z=Z\\times_U R\\times_U Z$. Its maps are finite by the closed-immersion/finite-base-change calculation in step 3. Over common field extensions this restriction retains exactly the arrows whose endpoints lie in $Z$, so the $R_Z$-orbit of $u$ is precisely $O(u)$. Every strict generalization of a point of $O(u)$ was among the $\\xi_j$ and belongs to $F$. There are therefore no strict generalizations inside $Z$ at any orbit point: all points of $O(u)$ are generic points of components of $Z$. This proves the local dimension-zero assertion directly from the prime chains.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-finite",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), fifth paragraph, reduced closed complement and dimension drop"
+   }
+  },
+  {
+   "text": "The finite groupoid on $Z$ is of finite presentation, since $Z$ is locally Noetherian. Restrict $j$ to $Z$. The ideal $I$ from step 8 is disjoint from $j(Z)$ and $V(I)\\cup j(Z)$ is closed: it is the complement of the open $j(F)$ in $H$. Apply the almost-invariant-function lemma to this immersion, $I$, and the point $u$, whose whole orbit is now generic in $Z$. Obtain $h\\in I$ such that $Z_h=Z\\cap j^{-1}D(h)$ is affine, invariant for the restricted groupoid, and contains $O(u)$. No scheme-theoretic invariance of $Z$ in $U$ was assumed or used.",
+   "uses": [
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-sfb-finite-groupoid-almost-invariant-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), sixth paragraph, almost invariant h on the closed complement (0ABF)"
+   }
+  },
+  {
+   "text": "Work only on the invariant affine $F\\subseteq W$. Its arrow scheme $R_F$ is affine since its source $s_F$ is finite and $F$ is affine. Form the determinant norm $g=\\operatorname{Norm}_{s_F}(t_F^*(j^*h|_F))\\in\\Gamma(F,\\mathcal O_F)$. The norm-chart theorem constructs it even with varying local rank. The affine groupoid norm lemma makes $g$ invariant. The prime norm criterion, applied on the finite free charts, says that $g(x)\\ne0$ exactly when $h(t(r))\\ne0$ for every arrow $r$ with $s(r)=x$. The identity arrow then gives $F_g\\subseteq j^{-1}D(h)$. Invariance of $g$ gives invariance of $F_g$ in $F$ and thus in $U$. Moreover $F_g$ is affine, being the principal open of the affine scheme $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-pd-finite-locally-free-norm-charts",
+    "lem-a1-affine-groupoid-invariant-norm",
+    "lem-pd-finite-free-norm-prime-criterion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), seventh paragraph, determinant norm (03BH), restricted to the affine F"
+   }
+  },
+  {
+   "text": "Set $V=F_g\\cup Z_h$ as a subset of $U$. It contains $O(u)$ and is a union of orbits, since $F$ and its complement $|Z|$ are invariant and each of the two pieces is invariant for the corresponding restriction. It is constructible: $F_g$ is open and $Z_h$ is locally closed in the Noetherian space $U$. To show $V$ open we check stability under generalization; $F_g$ already is open, so only a specialization $x\\leadsto z$ with $z\\in Z_h$ needs consideration. If $x\\in Z$, nonvanishing of $h$ at $z$ implies its nonvanishing at $x$, so $x\\in Z_h$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), seventh paragraph, definition of V and first generalization case"
+   }
+  },
+  {
+   "text": "If instead $x\\notin Z$, then $x\\in F$. Suppose $x\\notin F_g$. The norm criterion supplies $r_1\\in R_F$ with $s(r_1)=x$ and $h(t(r_1))=0$. Since $s:R\\to U$ is closed, the closed-map specialization lemma lifts $x\\leadsto z$ to $r_1\\leadsto r_2$ with $s(r_2)=z$. The zero locus of the global section $j^*h$ is closed, so $h(t(r_2))=0$. But $t(r_2)$ is in the orbit of $z$, hence in $Z_h$ by invariance there; this contradicts its zero value of $h$. Therefore every such $x$ lies in $F_g$, establishing stability under generalization. On each affine chart of $U$ the constructible subset $V$ is now generalization stable, so the spectrum constructibility lemma makes it open. These local opens show that $V$ is open in $U$.",
+   "uses": [
+    "lem-pd-finite-free-norm-prime-criterion",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-closed-map-specializing",
+    "lem-trf-spectrum-constructible-generalization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), seventh paragraph, specialization lifting proves openness of V"
+   }
+  },
+  {
+   "text": "We have $V\\subseteq j^{-1}D(h)$, hence an immersion $j\\prime:V\\to\\operatorname{Spec}A_h$. It is quasi-compact, since $V$ is an open subscheme of the Noetherian $U$. For the image $f\\prime\\in A_h$ of $f$, its inverse-image principal open is $F_g$, which is affine. Also $j\\prime(V)\\cap V(f\\prime)=j(Z_h)$ is closed in $\\operatorname{Spec}A_h$: the equality $V(I)\\cup j(U)=H$ and $h\\in I$ imply $j(U)\\cap D(h)=H\\cap D(h)$, closed in $D(h)$, and intersecting with $V(f)$ gives exactly $j(Z_h)$. Apply the immersion-principal-affineness criterion to $(j\\prime,f\\prime)$ to obtain that $V$ is affine. It is invariant and contains $O(u)$. Finally apply the two integral orbit-cover descents remembered in steps 3 and 4, and include the resulting open into the original invariant open from step 2. This gives the asserted affine $W$ in the original $U$ with equality of source and target inverse-image opens.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-immersion-principal-affineness",
+    "lem-sfb-integral-orbit-affine-descent",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABI (lemma-find-affine-codimension-1), last paragraph, affineness by 0ABH and descent back to the original scheme"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-trf-codimension-one-points-affine-neighbourhood",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-integral-orbit-affine-descent",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "pqf-lem-finite-integral-lft",
+  "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-reduced-scheme",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "pqf-def-locnoeth",
+  "lem-sfb-finite-groupoid-orbit-incomparability",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-generic-point",
+  "lem-weil-pbc-integral-incomparability",
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-sfb-finite-groupoid-almost-invariant-function",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-a1-affine-groupoid-invariant-norm",
+  "lem-pd-finite-free-norm-prime-criterion",
+  "def-weil-affine-spectrum",
+  "def-weil-constructible-subset",
+  "lem-trf-closed-map-specializing",
+  "lem-trf-spectrum-constructible-generalization-open",
+  "lem-sfb-immersion-principal-affineness",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABI (lemma-find-affine-codimension-1), proof, lines 2817--2949; determinant norm taken only on the affine F as the source explicitly permits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite groupoid on a separated locally Noetherian scheme has an invariant affine neighbourhood of an orbit of codimension at most one points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U → ∃ W, AlgebraicGeometry.IsAffineOpen W ∧ x ∈ W ∧ W.carrier ⊆ ↑U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U →\\n    ∃ R f,\\n      AlgebraicGeometry.IsOpenImmersion f ∧\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⊆ ↑U\", \"doc\": \"For any point $x$ in an open subset $U$ of a scheme $X$, there exists an affine scheme $\\\\operatorname{Spec}(R)$ and an open immersion $f: \\\\operatorname{Spec}(R) \\\\to X$ such that $x$ lies in the image \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite source and target maps of a scheme groupoid every orbit whose local rings have dimension at most one lies in an invariant affine open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.affineOpenCover.I₀ = X.affineCover.I₀\", \"doc\": \"For any scheme $X$, the index type $I_0$ of the affine open cover of $X$ is equal to the index type $I_0$ of the affine cover of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.Opens → Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.directedAffineCover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.directedAffineCover.I₀ = ↑X.affineOpens\", \"doc\": \"For any scheme $ X $, the zeroth component $ I_0 $ of the directed affine cover of $ X $ is equal to the set of affine open subsets of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsAffine\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*affine|affine.*invariant|[Gg]roupoid[Ss]cheme",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Analysis/Convex/AmpleSet.lean\", \"line\": \"23\", \"text\": \"- `AmpleSet.{pre}image`: being ample is invariant under continuous affine equivalences;\"}\n  {\"file\": \"Mathlib/Analysis/Convex/AmpleSet.lean\", \"line\": \"25\", \"text\": \"- `AmpleSet.vadd`: in particular, ample-ness is invariant under affine translations\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant affine neighbourhood for a finite scheme groupoid near codimension one points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) : ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W.1 ⊆ U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) :\\n  ∃ R, ∃ (f : Spec R ⟶ X), IsOpenImmersion f ∧ x ∈ Set.range f ∧ Set.range f ⊆ U\", \"doc\": \"For any point $x$ in an open subset $U$ of a scheme $X$, there exists an affine scheme $\\\\operatorname{Spec}(R)$ and an open immersion $f: \\\\operatorname{Spec}(R) \\\\to X$ such that $x$ lies in the image \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(P : ∀ (X : Scheme) (_ : X), Prop) (h₁ : ∀ R x, P (Spec R) x)\\n  (h₂ : ∀ {X Y} (f : X ⟶ Y) [IsOpenImmersion f] (x : X), P X x → P Y (f x)) : ∀ (X : Scheme) (x : X), P X x\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-space-dimension-one-scheme",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD.",
+   "via": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "worker": "stage1",
+  "summary": "Followed Tag 0ABI in full: invariant quasi-affine shrinking, integral reductions, almost dense finite locally free locus, generic-orbit functions, norm locus, specialization openness and principal-part affineness. Reused existing 09NN, norm and topology nodes; six new statement-only lemmas; no statement change. Rebased the returned side completion onto the current live DAG and reread every cited statement. The 09NN common-affine node has acquired a reviewed split since returned head caf2ff56f54; its statement is unchanged, and its exact separatedness, component-finiteness, Noetherian-local-ring and local-dimension hypotheses are verified in steps 1 and 5. All other existing cited nodes are unchanged against that returned head; all 66 verbatim citation pairs pass. Retained approved proof, supporting statements, citations and logged searches; updated the current-base repair report.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) support chain recorded in blueprint.from.place: Tag 0ADD requires Tag 0ABI for finite groupoid codimension-one orbits. Steps 1--2 are the first paragraph of 0ABI, 3--5 its reductions and flat case, 6--10 its generic and closed-complement functions, and 11--14 its norm-locus conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   },
+   {
+    "node": "lem-trf-codimension-one-points-affine-neighbourhood",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-generalizations-lift",
+    "why": "Generic flat generalization lifting (Mathlib leaf) shows in step 7 that the flat target map of the restricted groupoid sends an arrow without proper generalization to a point without proper generalization, exactly as 0ABI uses flatness of t_W; it replaces a citation of a node of the dropped 2026-10-19 alteration route."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   },
+   {
+    "node": "lem-pd-finite-locally-free-norm-charts",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-invariant-norm",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   },
+   {
+    "node": "lem-pd-finite-free-norm-prime-criterion",
+    "why": "Generic scheme/groupoid tool used exactly at the cited Stacks 0ABI subargument; no node of this unit states this input. It does not replace the alteration or six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-trf-codimension-one-points-affine-neighbourhood",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-a1-affine-groupoid-invariant-norm",
+  "lem-pd-finite-free-norm-prime-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-ea77b8653",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-ea77b8653 (reviewer sub-agent of L); spot-checked: Fourth push of the same split; the FIXes of 508e2bfb, caf2ff56 and e024667e were each lost at landing. The item and all six new nodes are identical to the e024 head in every field except the item's split_report text, and step 7 still cited lem-per-flat-maximal-dominance-base-change (ILO Exposé II, a dropped 2026-10-19 route node). The delivery gives no justification at a named step for that citation. I re-read the mathematics on this head: Stacks 0ABI (more-groupoids.tex 2806-2949) in full; 0ABA, 0ABE, 0ABF, 0ABG and 0ABH; 03JE (groupoids.tex 4925); and every cited statement I relied on. All 14 steps match 0ABI. Step 1: absolute separatedness via the closed diagonal of Spec K over Z, with all three 09NN hypotheses checked. Steps 3 and 4: both 0ABE descents meet every orbit, and W'=W on reduced U. Step 8: F ⊆ W since j(U∖W) ⊆ V(J). Step 10: V(I) ∪ j(Z) = H∖j(F) is closed. Step 11: the norm is taken only on the affine invariant F. Step 13: generalization-stability via the closed-map lift and saturation of Z. Step 14: h ∈ I makes j(U) ∩ D(h) = H ∩ D(h), so 0ABH applies. The six new nodes faithfully state their sources (0ABG's R-for-U typo corrected), are statement-only and true on small cases (m=0, F empty, f=1, identity groupoid). They are not duplicates: the other 03JE citers concern finite group quotients. Batch-5: the three trf citations are generic Stacks 09NN, Topology 0066 and Algebra 00I0; the closure of the 09NN node holds only generic 09NN sub-lemmas, so all three are accepted. FIX: step 7 now argues directly. Integral incomparability shows the arrow r has no proper generalization. Since t_W is finite locally free, hence flat, lem-weil-pbc-flat-generalizations-lift (03HV) shows t_W(r) has none in W or U. Component cover plus scheme sobriety then make it a component generic point. Step 6 gains the missing component-cover and sobriety citations (C1). The dropped id is removed from proof_deps and tool_uses. The statement is unchanged and no node is dropped. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-groupoid-codimension-one-invariant-affine.json. Maintainer note: the same FIX has now been lost three times.; 1 file(s) fixed by the reviewer"
+ }
+}

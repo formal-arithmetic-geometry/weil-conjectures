@@ -1,0 +1,493 @@
+{
+ "id": "lem-sfb-etale-splits-isolated-purely-inseparable",
+ "kind": "statement",
+ "title": "Etale splitting of isolated fibre points into finite pieces with purely inseparable residue fields",
+ "statement": "Let $\\mathcal U\\in\\mathcal V$ be the universes of [def-weil-size-convention]. Let $f:X\\to S$ be a separated, locally of finite type morphism of $\\mathcal U$-small schemes [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $s\\in S$, and let $x_1,\\ldots,x_n$ be pairwise distinct isolated points of the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre, def-weil-residue-field]; isolated means that the singleton is open in this fibre. There exist a $\\mathcal U$-small scheme $U$, an etale morphism $a:U\\to S$ [def-weil-etale-morphism], a point $u\\in U$ with $a(u)=s$, nonnegative integers $m_i$, and a decomposition\n$$U\\times_S X=W\\amalg\\coprod_{i=1}^n\\coprod_{j=1}^{m_i}V_{i,j}$$\ninto pairwise disjoint open and closed subschemes [def-pc-fibre-product, def-weil-open-immersion]. The induced extension $\\kappa(s)\\to\\kappa(u)$ is finite separable (finite-dimensional and separable algebraic). Each $V_{i,j}\\to U$ is finite [def-weil-finite-integral-morphism], its fibre over $u$ consists of exactly one point $v_{i,j}$, that point maps to $x_i$ in $X_s$, and $\\kappa(v_{i,j})/\\kappa(u)$ is finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. No point of $W$ over $u$ maps to any $x_i$. Here the map to $X_s$ is induced on the fibre by $\\kappa(s)\\to\\kappa(u)$. The empty list $n=0$ is allowed; $W$ is not required to be finite, and no flatness of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02LO, lemma-etale-splits-off-quasi-finite-part-technical-variant, statement and proof at lines 12136-12168. The finite separability of the pointed etale neighbourhood residue extension is the general fibre description in morphisms.tex, lemma-etale-over-field."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-etale-local-finite-multiple-points] (Tag 02LM) to the prescribed points, regarding them as points of $X$ via the homeomorphism $X_s\\to f^{-1}(s)$ in [def-pc-scheme-fibre]. Its hypotheses are precisely local finite type and pairwise distinct isolated fibre points; separatedness is not needed yet. Obtain an etale pointed neighbourhood $(U_0,u_0)\\to(S,s)$ and finitely many finite open subschemes $V_\\alpha\\subset Y=U_0\\times_S X$, indexed by $\\alpha=(i,j)$, whose fibres at $u_0$ are singletons $v_\\alpha$ with finite purely inseparable residue extensions. The distinguished points are all distinct, and every point of $Y_{u_0}$ mapping to any prescribed $x_i$ is one of these $v_{i,j}$. Write $q:Y\\to U_0$ for the projection.",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-multiple-points",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LO, lemma-etale-splits-off-quasi-finite-part-technical-variant, reduction to Tag 02LM, lemma-etale-makes-quasi-finite-finite-multiple-points-var"
+   }
+  },
+  {
+   "text": "The residue extension $\\kappa(s)\\to\\kappa(u_0)$ is finite separable: choose affine neighbourhoods $u_0\\in B\\subset U_0$ and $s\\in A\\subset S$ with $a(B)\\subset A$. The affine-local characterization in [def-weil-etale-morphism] makes the restricted map etale. Apply [lem-weil-pbc-etale-algebra-residue-field-separable] to its coordinate ring map and the primes representing $u_0,s$. These are the required scheme residue fields: restriction of the structure sheaf to an open does not change its stalks or their residue fields, by [def-weil-open-immersion] and [def-weil-residue-field].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-open-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field (2), affine-local form via Algebra Tag 00U3, lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separated-base-change], $q:Y\\to U_0$ is separated. Each $V_\\alpha\\to U_0$ is proper by [lem-weil-pbc-finite-proper]. Apply [lem-weil-pbc-proper-over-separated] with proper source $V_\\alpha\\to U_0$, separated target $Y\\to U_0$, and the open inclusion $V_\\alpha\\hookrightarrow Y$: this inclusion is proper. Its image is closed, since proper means universally closed by [def-weil-proper-morphism]. Thus every $V_\\alpha$ is both open and closed in $Y$.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-over-separated",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LO proof via Tag 02LN, lemma-etale-splits-off-quasi-finite-part-technical; Schemes Tag 01KU, Morphisms Tags 01WN and 01W6"
+   }
+  },
+  {
+   "text": "For distinct indices $\\alpha,\\beta$, the intersection $C_{\\alpha\\beta}=V_\\alpha\\cap V_\\beta$ is closed in $V_\\alpha$. Since $V_\\alpha\\to U_0$ is proper, its image $q(C_{\\alpha\\beta})$ is closed by [def-weil-proper-morphism]. This image avoids $u_0$: any point in the intersection above $u_0$ would have to equal both unique fibre points $v_\\alpha$ and $v_\\beta$, contrary to their distinctness. Delete the union of these finitely many closed images, obtaining an open neighbourhood $U\\subset U_0$ of $u_0$. All intersections of the restricted pieces are empty. With no pairs the deleted union is empty.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LO proof via Tag 02LN, removal of the closed images of pairwise intersections"
+   }
+  },
+  {
+   "text": "Let $u$ be $u_0$ regarded as a point of $U$, and restrict every $V_{i,j}$ to $U$. By [lem-weil-pbc-finite-morphism-permanence] (a) the restricted pieces are finite over $U$. They are clopen, being inverse images of clopen subsets. The open inclusion $U\\hookrightarrow U_0$ is etale and its composite $a:U\\to S$ is etale by [lem-weil-pbc-etale-composition-cancellation]. The open inclusions identify the stalks and residue fields at $u$ and at all retained $v_{i,j}$ with the old ones ([def-weil-open-immersion], [def-weil-residue-field]); hence both the finite separability of $\\kappa(u)/\\kappa(s)$ and the finite purely inseparable extensions at $v_{i,j}$ persist. Restriction discards only points whose base image is outside $U$, so all distinguished fibre points remain and no other point over $u$ is introduced. The identification of the restricted total space with $U\\times_S X$ is the iterated fibre-product identification, from [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LO proof via Tag 02LN, shrinking the base; Morphisms Tags 01WL and 02GN"
+   }
+  },
+  {
+   "text": "In $U\\times_S X$ set $W$ equal to the complement of the finite union of the restricted $V_{i,j}$, with the induced open subscheme structure of [def-weil-open-immersion]. The union is open and closed (a finite union of clopen subsets), so $W$ is open and closed as well. The pieces are pairwise disjoint after step 4 and together with $W$ cover the total space. On a disjoint open cover, the structure sheaf restricts to the sheaves of the pieces, and its gluing axiom gives exactly the disjoint-union scheme decomposition in the statement. This argument also covers an empty index set: $W$ is then the whole total space.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LO proof via Tag 02LN, final decomposition"
+   }
+  },
+  {
+   "text": "Finally suppose a point of $W$ above $u$ maps to $x_i$. In $Y$ it is a point above $u_0$ and $x_i$, so the exhaustion assertion of [lem-weil-pbc-etale-local-finite-multiple-points] identifies it with some $v_{i,j}$. That point lies in the retained $V_{i,j}$ and therefore cannot lie in its complement $W$. This contradiction proves the required avoidance clause. For $n=0$ it is vacuous; no finiteness of $W$ and no flatness of $f$ have been used.",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-multiple-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LO statement, avoidance clause, using exhaustion in Tag 02LM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-finite-multiple-points",
+  "def-pc-scheme-fibre",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02LO, lemma-etale-splits-off-quasi-finite-part-technical-variant: use the proof of Tag 02LN with Tag 02LM in place of Tag 02LL; finite separability by Tag 02GL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "02LO|purelyInseparable|purely_inseparable|exists_etale_isCompl",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:41:16Z",
+    "tool": "grep",
+    "query": "02LO|purelyInseparable|purely_inseparable|exists_etale_isCompl",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean"
+    ],
+    "digest": "f6b8d668cf08f0d3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme candidate AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53, gives one finite clopen piece containing a lift of one point. It gives neither purely inseparable special-fibre residue fields nor singleton special fibres nor simultaneous exhaustion over the prescribed points. The ring-level idempotent theorem assumes an already finite algebra; etale field decomposition concerns etale morphisms, whereas f here need not be etale or flat."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split finite open closed pieces of a scheme over an etale neighbourhood with purely inseparable residue fields at prescribed isolated fibre points",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:41:16Z",
+    "tool": "leansearch",
+    "query": "Split finite open closed pieces of a scheme over an etale neighbourhood with purely inseparable residue fields at prescribed isolated fibre points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+     "separableClosure.isPurelyInseparable",
+     "IsPurelyInseparable.normal",
+     "AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk",
+     "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+     "IsPurelyInseparable.casesOn",
+     "Algebra.FormallyEtale.iff_isSeparable",
+     "AlgebraicGeometry.Scheme.Hom.discrete_fiber"
+    ],
+    "digest": "2d75e2af7a422572"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme candidate AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53, gives one finite clopen piece containing a lift of one point. It gives neither purely inseparable special-fibre residue fields nor singleton special fibres nor simultaneous exhaustion over the prescribed points. The ring-level idempotent theorem assumes an already finite algebra; etale field decomposition concerns etale morphisms, whereas f here need not be etale or flat."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"IsCompl\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:41:16Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"IsFinite\", \"IsCompl\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme candidate AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53, gives one finite clopen piece containing a lift of one point. It gives neither purely inseparable special-fibre residue fields nor singleton special fibres nor simultaneous exhaustion over the prescribed points. The ring-level idempotent theorem assumes an already finite algebra; etale field decomposition concerns etale morphisms, whereas f here need not be etale or flat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally finite type morphism admits an etale neighbourhood decomposing off finitely many finite clopen pieces over given isolated fibre points, with purely inseparable residue fields",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:41:17Z",
+    "tool": "leanfinder",
+    "query": "A separated locally finite type morphism admits an etale neighbourhood decomposing off finitely many finite clopen pieces over given isolated fibre points, with purely inseparable residue fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "Algebra.FormallyEtale.of_isSeparable_aux",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+     "AlgebraicGeometry.IsEtale",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "AlgebraicGeometry.Scheme.Etale"
+    ],
+    "digest": "ecff45c10069ad94"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme candidate AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53, gives one finite clopen piece containing a lift of one point. It gives neither purely inseparable special-fibre residue fields nor singleton special fibres nor simultaneous exhaustion over the prescribed points. The ring-level idempotent theorem assumes an already finite algebra; etale field decomposition concerns etale morphisms, whereas f here need not be etale or flat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous etale splitting of isolated fibre points into finite disjoint open and closed schemes with radicial special fibres, Stacks 02LO",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:41:54Z",
+    "tool": "leanfinder",
+    "query": "Simultaneous etale splitting of isolated fibre points into finite disjoint open and closed schemes with radicial special fibres, Stacks 02LO",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "AlgebraicGeometry.IsEtale",
+     "Algebra.exists_etale_of_isEtaleAt",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "Algebra.etaleLocus",
+     "Algebra.isOpen_etaleLocus",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime"
+    ],
+    "digest": "fd7ffe9f9ee7944e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme candidate AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53, gives one finite clopen piece containing a lift of one point. It gives neither purely inseparable special-fibre residue fields nor singleton special fibres nor simultaneous exhaustion over the prescribed points. The ring-level idempotent theorem assumes an already finite algebra; etale field decomposition concerns etale morphisms, whereas f here need not be etale or flat."
+  },
+  {
+   "tool": "grep",
+   "query": "02LO|purelyInseparable|purely_inseparable|exists_etale_isCompl",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T21:28:46Z",
+    "tool": "grep",
+    "query": "02LO|purelyInseparable|purely_inseparable|exists_etale_isCompl",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean"
+    ],
+    "digest": "f6b8d668cf08f0d3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the Zariski main theorem candidate only supplies one finite clopen piece; the ring candidates assume finite or etale algebras and do not give the singleton, purely inseparable, simultaneous exhaustion clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated locally finite type scheme morphism splits finite pieces with singleton purely inseparable fibres after etale localization",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:28:46Z",
+    "tool": "leansearch",
+    "query": "A separated locally finite type scheme morphism splits finite pieces with singleton purely inseparable fibres after etale localization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isProper_eq",
+     "AlgebraicGeometry.IsFinite.of_comp",
+     "AlgebraicGeometry.isSeparated_of_injective",
+     "Algebra.FormallyEtale.iff_isSeparable",
+     "Algebra.FormallyEtale.of_isSeparable_aux",
+     "AlgebraicGeometry.IsSeparated",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated"
+    ],
+    "digest": "7b504d94eb4c18aa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the Zariski main theorem candidate only supplies one finite clopen piece; the ring candidates assume finite or etale algebras and do not give the singleton, purely inseparable, simultaneous exhaustion clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsFinite",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:28:46Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsFinite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "loogle: unknown identifier 'AlgebraicGeometry.IsEtale'; corrected by the subsequent loogle query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale neighbourhood splitting isolated fibre points into finite clopen pieces with purely inseparable residue extensions",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:28:47Z",
+    "tool": "leanfinder",
+    "query": "Etale neighbourhood splitting isolated fibre points into finite clopen pieces with purely inseparable residue extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+     "Algebra.isOpen_etaleLocus",
+     "Algebra.etaleLocus",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "Algebra.exists_etale_of_isEtaleAt",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "Algebra.IsEtaleAt"
+    ],
+    "digest": "283975ef8c7000c3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the Zariski main theorem candidate only supplies one finite clopen piece; the ring candidates assume finite or etale algebras and do not give the singleton, purely inseparable, simultaneous exhaustion clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:29:20Z",
+    "tool": "loogle",
+    "query": "\"etale\", \"IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Algebra.IsFiniteSplit.instEtale",
+     "Algebra.IsFiniteSplit.instOfIsSepClosedOfEssFiniteTypeOfFormallyEtale",
+     "Algebra.IsFiniteSplit.exists_tensorProduct_of_etale"
+    ],
+    "digest": "c929a16d31fb3e28"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the Zariski main theorem candidate only supplies one finite clopen piece; the ring candidates assume finite or etale algebras and do not give the singleton, purely inseparable, simultaneous exhaustion clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous etale splitting of isolated fibre points with radicial special fibres Stacks 02LO",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:29:21Z",
+    "tool": "leanfinder",
+    "query": "Simultaneous etale splitting of isolated fibre points with radicial special fibres Stacks 02LO",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePresentation",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+     "Algebra.exists_etale_of_isEtaleAt",
+     "Algebra.IsEtaleAt",
+     "Algebra.etaleLocus",
+     "StandardEtalePair.instEtaleRing"
+    ],
+    "digest": "a773a8da4fec5c60"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the Zariski main theorem candidate only supplies one finite clopen piece; the ring candidates assume finite or etale algebras and do not give the singleton, purely inseparable, simultaneous exhaustion clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-open-geometric-chart-family",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: finite-part parameter scheme and its residue-field point used before the affine quasi-splitting. Unmarked finite-part algebraic space used in the proof of Tag 04RI, first paragraph (Proposition 04QH). Supporting input for 04QH: Tag 04QG (lemma-finite-surjective-etale-cover), scheme-case proof: choices of finite unions of the split pieces and geometric-point surjectivity; preceded by the reduction of Tag 04PG (lemma-finite-lives-on-locally-quasi-finite-part). The family is restricted to one choice per finite subset of each fixed geometric fibre, then shrunk to affine neighbourhoods. Local input in Tag 04QG: apply More on Morphisms, lemma-etale-splits-off-quasi-finite-part-technical-variant to finitely many isolated fibre points before taking unions of the resulting pieces.",
+   "via": [
+    "lem-sfb-finite-open-geometric-chart-family",
+    "lem-sfb-unmarked-finite-open-parts-space",
+    "lem-sfb-section-marked-finite-parts-scheme",
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-splits-isolated-purely-inseparable",
+  "worker": "stage1",
+  "summary": "Reused the existing closed Tag 02LM node, proved the finite opens closed via properness and separatedness, removed closed images of intersections, and verified all residue and exhaustion clauses after open restriction. No new node and no statement change.",
+  "blueprint": "Supporting Tag 02LO input at the existing from.place: etale splitting used in Tag 04QG before taking finite unions of pieces. Retained the inherited ancestry (ancestor tool returns None). Latest blueprint sk-thm-sf-ctf-stability direct-images proof (3) read; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-finite-multiple-points",
+    "why": "Generic scheme-local Tag 02LM input to Tag 02LO, already proved closed; provides finite open pieces with purely inseparable singleton fibres and exhaustion."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "Generic affine etale residue-field theorem to justify the finite separable pointed-neighbourhood extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-finite-multiple-points",
+  "lem-weil-pbc-etale-algebra-residue-field-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-fc9c3fcb9",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-fc9c3fcb9 (reviewer sub-agent of L); spot-checked: I read all seven steps of the split, every cited node's statement, and Stacks more-morphisms.tex lines 12040-12168 (Tags 02LM, 02LN, 02LO). There are no new nodes and no statement change. The statement matches 02LO hypothesis by hypothesis. Its one extra clause, that kappa(s)->kappa(u) is finite separable, is true for any etale map (Tag 02GL) and is proved in step 2. Step 1 takes only what the statement of 02LM gives: finite open pieces with singleton fibres, finite purely inseparable residue extensions, exhaustion, and distinct points. Its Lean is closed in slopmaster2. Steps 3-4 are the proof of 02LN with each fact cited to a node: separated base change, finite implies proper, proper over separated gives clopen pieces, and the closed images of the pairwise intersections miss u0 because the special points are distinct, so U can be shrunk. Step 5 cites finite base change (a) and etale composition (1)+(2), and checks that residue fields, singletons and exhaustion survive restriction. Steps 6-7 are elementary: the clopen complement W, and avoidance from the exhaustion clause. Edge cases tested: n=0, m_i=0, several lifts of one point, characteristic 0, nonreduced fibres; W is never assumed finite and flatness is never used. Whole-DAG grep for 02LO, 02LN, technical-variant and splits-off finds no duplicate; 02LP, 02LK, 04HM and 03X5 state different results. The two declared tool_uses are accepted: 02LM is a generic Lean-closed tool named by the blueprint's Tag 04QG route, and the residue-field lemma is a Mathlib leaf. No SGA citations. blueprint.from.node is null, inherited from the parent chain and not caused by this delivery. Remarks needing no change: U being U-small is covered by def-weil-size-convention and the U-universe Lean statement of 02LM; step 2's affine-chart reading of the etale definition suffices."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSplitsIsolatedPurelyInseparable",
+  "declaration": "AlgebraicGeometry.exists_etale_splits_isolated_purelyInseparable",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSplitsIsolatedPurelyInseparable.lean",
+  "statement": "theorem exists_etale_splits_isolated_purelyInseparable {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] (s : S) (n : ℕ) (x : Fin n → f.fiber s) (hdistinct : Function.Injective x) (hisolated : ∀ i : Fin n, IsOpen ({x i} : Set (f.fiber s))) : ∃ (U : Scheme.{u}) (a : U ⟶ S) (u : U), Etale a ∧ ∃ (hu : a u = s), ((S.residueFieldCongr hu.symm).hom ≫ a.residueFieldMap u).hom.Finite ∧ @Algebra.IsSeparable (S.residueField s) (U.residueField u) _ _ ((S.residueFieldCongr hu.symm).hom ≫ a.residueFieldMap u).hom.toAlgebra ∧ ∃ (m : Fin n → ℕ) (W : (pullback a f).Opens) (V : (i : Fin n) → Fin (m i) → (pullback a f).Opens) (v : (i : Fin n) → (j : Fin (m i)) → (V i j).toScheme), IsCompl W (⨆ i : Fin n, ⨆ j : Fin (m i), V i j) ∧ (∀ (i : Fin n) (j : Fin (m i)), IsClosed (V i j : Set ↥(pullback a f))) ∧ Pairwise (fun b c : (i : Fin n) × Fin (m i) ↦ Disjoint (V b.1 b.2) (V c.1 c.2)) ∧ (∀ (i : Fin n) (j : Fin (m i)), IsFinite ((V i j).ι ≫ pullback.fst a f) ∧ ∃ (hv : ((V i j).ι ≫ pullback.fst a f) (v i j) = u), (∀ w : (V i j).toScheme, ((V i j).ι ≫ pullback.fst a f) w = u → w = v i j) ∧ ((V i j).ι ≫ pullback.snd a f) (v i j) = f.fiberι s (x i) ∧ ((U.residueFieldCongr hv.symm).hom ≫ ((V i j).ι ≫ pullback.fst a f).residueFieldMap (v i j)).hom.Finite ∧ @IsPurelyInseparable (U.residueField u) ((V i j).toScheme.residueField (v i j)) _ _ ((U.residueFieldCongr hv.symm).hom ≫ ((V i j).ι ≫ pullback.fst a f).residueFieldMap (v i j)).hom.toAlgebra) ∧ (∀ w : W.toScheme, (W.ι ≫ pullback.fst a f) w = u → ∀ i : Fin n, (W.ι ≫ pullback.snd a f) w ≠ f.fiberι s (x i))",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8eb6c6b4a",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_etale_splits_isolated_purelyInseparable to node/Stacks 02LO: only IsSeparated+LocallyOfFiniteType; injective x : Fin n → f.fiber s with open singletons; Etale a, a u = s, canonical κ(s)→κ(u) Finite+IsSeparable; IsCompl W (⨆V) + IsClosed V + sigma-Pairwise disjoint = clopen partition of pullback a f; IsFinite pieces, unique point over u, Finite+IsPurelyInseparable canonical residue maps; W-avoidance. Image comparison in X via fiberι equivalent (fiberι injective onto f⁻¹(s)). n=0, m i=0, char 0 checked. No existing decl (Mathlib exists_etale_isCompl_of_quasiFiniteAt single piece; 02LM lacks decomposition). Node diff only lean; statement verbatim; no defs, sorry proof, docstrings with source/blueprint/steps; report sections present. No findings."
+ }
+}

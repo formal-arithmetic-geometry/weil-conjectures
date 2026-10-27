@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-space-fibre-dimension-supremum",
+ "kind": "statement",
+ "title": "Finite type algebraic-space fibre dimension as a supremum of local relative dimensions",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a morphism from an algebraic space [def-trf-algebraic-space]. Point spaces have the atlas topology [def-a1-space-point-topology]. Assume $f$ is locally of finite type on etale scheme charts [def-weil-finite-type-morphism]. For $t\\in T$ put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$ [def-weil-residue-field, def-weil-affine-spectrum, lem-trf-space-fibre-products-etale-covers]. For $x\\in|X|$, put $t=f(x)$. A chart at $x$ means a representable etale map $U\\to X$ from an affine scheme and a point $u\\in U$ mapping to $x$. Write $U_t=U\\times_T\\operatorname{Spec}\\kappa(t)$ and $\\widetilde u\\in U_t$ for the unique point mapping to $u$. Write $\\dim_{\\widetilde u}U_t$ for the minimum of the Krull dimensions of open neighbourhoods of $\\widetilde u$ in $U_t$ [def-kun-topological-dimension-at-point, def-kun-topological-krull-dimension]. Define $\\delta_f(x)=\\sup_{(U,u)}\\dim_{\\widetilde u}U_t$ over these charts. Assume in addition that $f$ is quasi-compact, meaning that its pullback to every quasi-compact scheme has a quasi-compact scheme atlas, so $f$ is of finite type. Define $n_f(t)$ to be the supremum of the topological Krull dimensions of all affine schemes with a representable etale map to $X_t$, with empty supremum $-\\infty$. Then\n$$n_f(t)=\\sup_{x\\in|X|,\\ f(x)=t}\\delta_f(x)\\in\\{-\\infty,0,1,2,\\ldots\\}.$$\nThe fibre is empty exactly when there is no $x\\in|X|$ with $f(x)=t$, in which case both suprema are $-\\infty$. If the fibre is nonempty, its dimension is the largest integer $\\delta_f(x)$ among points over $t$. No separatedness, properness, flatness or finite-presentation hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D4M (lemma-dimension-fibre), equality of (1) and (2) and its proof for a scheme target; dimension on charts is spaces-properties.tex Tags 04N5 (definition-dimension-at-point) and 04N6 (definition-dimension)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-space-local-fibre-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t\\in T$ and an affine open $V\\subset T$ containing it. Put $X_V=X\\times_TV$. The quasi-compactness hypothesis gives a quasi-compact scheme atlas of $X_V$; [lem-trf-space-qc-finite-affine-atlas-refinement] replaces it by a surjective etale atlas $a:U\\to X_V$ with $U$ affine. The composite $U\\to X$ is etale: on each scheme test it is the composite of the etale atlas projection and the open immersion induced by $V\\subset T$, by [lem-weil-pbc-etale-composition-cancellation]. The compatible-chart meaning of local finite type [def-weil-finite-type-morphism] gives that $U\\to V$ is locally of finite type. Set $P=U\\times_V\\operatorname{Spec}\\kappa(t)$. It is affine by [lem-weil-pbc-fibre-product-affine-spectra] and locally of finite type over $\\kappa(t)$ by [lem-weil-pbc-lft-base-change]. Its affine source is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so its structure morphism to the spectrum of a field is quasi-compact: that target has only the opens empty and itself. Hence $P$ is finite type over the field by the definition. Base change gives a surjective etale atlas $P\\to X_t$ by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4M (lemma-dimension-fibre), proof, last paragraph with scheme target and residue-field fibre; chart invariance uses descent.tex Tag 04N4."
+   }
+  },
+  {
+   "text": "For a point $x\\in|X|$ over $t$, choose $u\\in U$ over $x$. Such $u$ exists because the atlas surjects onto $X_V$ and [lem-a1-space-point-open-calculus] gives a point of $X_V$ above the compatible pair $(x,t)$. The scheme-fibre homeomorphism [def-pc-scheme-fibre] gives a unique $p\\in P$ above $u$. Consider any other affine etale chart $b:W\\to X$ and $w\\in W$ over $x$. The scheme $R=U\\times_XW$ has etale projections, and [lem-a1-space-point-open-calculus] gives $r\\in R$ over $(u,w)$. The unique point of the scheme fibre $R_t$ over $r$ maps to $p$ and to the point $\\widetilde w\\in W_t$. Its projections to $P$ and $W_t$ are etale by the scheme-test definition in [def-trf-algebraic-space]. Apply [lem-sfb-etale-topological-dimension-at-point] to both projections: $\\dim_pP=\\dim_{\\widetilde w}W_t$. Thus every term defining $\\delta_f(x)$ has the value $\\dim_pP$, and at least one term occurs, namely $(U,u)$. Therefore $\\delta_f(x)=\\dim_pP$, independently of every choice.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-pc-scheme-fibre",
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4M (lemma-dimension-fibre), proof, last paragraph with scheme target and residue-field fibre; chart invariance uses descent.tex Tag 04N4."
+   }
+  },
+  {
+   "text": "For any affine etale chart $B\\to X_t$ and any $b\\in B$, lift $b$ to a point $r$ of $B\\times_{X_t}P$, using surjectivity of the base-changed atlas [lem-trf-space-fibre-products-etale-covers]. Write $p$ for its image in $P$. Both projections are etale, so [lem-sfb-etale-topological-dimension-at-point] gives $\\dim_bB=\\dim_pP\\leq\\dim P$. The supremum formula [lem-weil-pbc-dimension-supremum-local-dimensions] now gives $\\dim B\\leq\\dim P$. Since $P$ itself is an affine etale chart of $X_t$, taking the supremum over $B$ yields $n_f(t)=\\dim P$. This compares chart dimension only; no identification with $\\dim|X_t|$ is used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-etale-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4M (lemma-dimension-fibre), proof, last paragraph with scheme target and residue-field fibre; chart invariance uses descent.tex Tag 04N4."
+   }
+  },
+  {
+   "text": "Every $p\\in P$ maps to a point $x\\in|X|$ over $t$, and step 2 gives $\\dim_pP=\\delta_f(x)$. Conversely every such $x$ has a lift $p$ as constructed in step 2. Hence the two families have the same set of values. Taking suprema and using [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\\sup_{f(x)=t}\\delta_f(x)=\\sup_{p\\in P}\\dim_pP=\\dim P=n_f(t)$.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4M (lemma-dimension-fibre), proof, last paragraph with scheme target and residue-field fibre; chart invariance uses descent.tex Tag 04N4."
+   }
+  },
+  {
+   "text": "By [lem-kun-dimension-finite-type], the finite type scheme $P$ over $\\kappa(t)$ has finite dimension. If $P$ is nonempty its local dimensions are nonnegative integers bounded by this finite dimension. Their nonempty set has a largest element, and its supremum is that element. Steps 2 and 4 transfer attainment to a point $x$ over $t$. Finally the atlas and step 2 show that $P$ is nonempty exactly when a point $x$ over $t$ exists, and that this is equivalent to $X_t$ being nonempty. If $X_t$ is empty, any scheme mapping to it is empty; all chart dimensions and both displayed suprema are $-\\infty$. This proves the empty clause and excludes $+\\infty$ without any extra separation or flatness hypothesis.",
+   "uses": [
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4M (lemma-dimension-fibre), proof, last paragraph with scheme target and residue-field fibre; chart invariance uses descent.tex Tag 04N4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "lem-a1-space-point-open-calculus",
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-etale-topological-dimension-at-point",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D4M (lemma-dimension-fibre), proof, last paragraph with scheme target and residue-field fibre; chart invariance uses descent.tex Tag 04N4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of algebraic spaces each nonempty fibre has finite dimension equal to the maximum of local relative dimensions at its points",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IsFinite.finite_preimage_singleton, IsFinite, Scheme.Hom.discrete_fiber, instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, LocallyQuasiFinite, LocallyOfFiniteType, Scheme.Hom.finite_preimage. These concern scheme fibres and do not give the algebraic-space chart-dimension comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of a finite type algebraic space fibre is finite and is the supremum of the relative dimensions at points over the base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] (y : ↥Y),\\n  (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y}).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y),\\n  AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Scheme.Hom.fiberι f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"fiber\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "grep",
+   "query": "04NM|0D4M|dimension.*fibres|dimension.*fibers|dim.*fiber",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"271\", \"text\": \"  have : IsClosedImmersion (f.fiberToSpecResidueField x) :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite type algebraic spaces the dimension of a fibre computed on etale charts equals the maximum of its local fibre dimensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|dimension.*fibre|dimension.*fiber",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres and standard smooth relative dimension do not state the algebraic-space chart supremum comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space fibre dimension equals maximum local dimension on affine etale charts",
+   "results": "8 hits: Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.etaleLocus_eq_univ_iff, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres and standard smooth relative dimension do not state the algebraic-space chart supremum comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"dimension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres and standard smooth relative dimension do not state the algebraic-space chart supremum comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebraic space over a scheme the dimension of its fibre is the supremum of local relative dimensions on etale charts",
+   "results": "8 hits: Algebra.IsStandardSmooth.relativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres and standard smooth relative dimension do not state the algebraic-space chart supremum comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Dd]im|[Dd]im.*[Ee]tale",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres and standard smooth relative dimension do not state the algebraic-space chart supremum comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The supremum of dimensions of affine etale charts of a finite type algebraic space fibre is attained at a point",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.etaleLocus, Algebra.isOpen_etaleLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Etale, Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres and standard smooth relative dimension do not state the algebraic-space chart supremum comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4Q, lemma-dimension-fibres-proper, the upper semicontinuity half of the proof of 0D4R. Supporting input: the comparison of fibre chart dimension with the supremum of relative dimensions in 0D4M, used for y in f(Z_d) iff n_f(y)>d in 0D4Q.",
+   "via": [
+    "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fibre-dimension-supremum",
+  "worker": "stage1",
+  "summary": "Compared the unchanged statement with Stacks 0D4M, 04N5 and 04N6. Reduced to a finite type affine residue-field atlas, proved chart independence by common etale refinements, compared all affine fibre charts with that atlas, and reindexed local dimensions. Reuses the concurrently landed Descent 04N4 node of Q11 for local topological dimension under etale morphisms; creates no new nodes. Empty and mixed-dimensional fibres are included.",
+  "blueprint": "The inherited added input has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). This realizes the final affine-atlas argument of Stacks 0D4M below the direct-image unit paragraph (3); the latest blueprint direct-image proof was read.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic lifting compatible field-valued point classes to a fibre product; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of dimension over a field; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products and etale atlas base change; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic finite affine atlas refinement, with no separatedness assumption; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic quasi-compactness of the affine fibre chart; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic topological dimension supremum formula; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic etale composition and open-immersion calculus; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre product description; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic scheme local finite type under base change; the direct-image unit supplies no replacement for this foundational scheme/space tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-kun-dimension-finite-type",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-da159517f",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-da159517f (reviewer sub-agent of L); spot-checked: I read the delivery in full. It splits the unchanged item into 5 steps and adds no new nodes. The steps follow the last paragraph of Stacks 0D4M (spaces-more-morphisms l.7168-7180). Step 1: the qc atlas refinement (03H6) gives an affine atlas U of X_V; P = U x_V Spec kappa(t) is affine and of finite type over the field, and P -> X_t is a surjective etale atlas. Step 2: chart independence is proved inline through R = U x_X W; R_t -> P and R_t -> W_t are etale by the scheme-test definition, and 04N4 (descent l.5173, cited through the existing Q11 node lem-sfb-etale-topological-dimension-at-point) gives the equal local dimensions. Step 3: any affine chart B of X_t has dim B <= dim P (04N4 plus 0B7I), so n_f(t) = dim P. Steps 4 and 5 are elementary: reindexing, and finiteness from lem-kun-dimension-finite-type. Every cited statement supports its use. No separatedness is used. Small cases tested: A^1 with an extra point, empty fibre, t outside the image, imperfect residue field, non-separated X. The sibling lem-sfb-space-local-fibre-dimension-open also states chart independence; the item reproves it inline, which is redundant but correct and creates no duplicate node. Batch-5 flags: lem-a1-space-point-open-calculus (Stacks 03H4/03H5/03BX point calculus; its closure reaches only the definition def-trf-algebraic-space) and lem-trf-space-qc-finite-affine-atlas-refinement (Stacks 03H6/03E4) are general algebraic-space foundations. Neither is part of the statement or proof of the trace formula or Poincare duality, so both are accepted as generic. All 9 tool_uses are generic scheme/space tools and are accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreDimensionSupremum",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fibre_dimension_eq_supremum",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.residueFibrePresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.pointLiesOver",
+   "AlgebraicGeometry.AlgebraicSpace.fibre_dimension_eq_supremum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFibreDimensionSupremum.lean",
+  "statement": "theorem fibre_dimension_eq_supremum {T : Scheme.{u}} (X : AlgebraicSpace T) (hft : ∀ (U : Over T) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → LocallyOfFiniteType U.hom) (hqc : ∀ (V : Over T), CompactSpace V.left → ∃ (U : Over T) (a : yoneda.obj U ⟶ Limits.prod X.obj.obj (yoneda.obj V)), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (t : T) : ((⨆ (U : Over T) (_ : IsAffine U.left) (a : yoneda.obj U ⟶ residueFibrePresheaf X t) (_ : IsEtale a), topologicalKrullDim U.left) = ⨆ (x : Point X.obj.obj) (_ : pointLiesOver X t x), localFibreDimension X x) ∧ (IsEmpty (Point (residueFibrePresheaf X t)) ↔ ¬ ∃ x : Point X.obj.obj, pointLiesOver X t x) ∧ (IsEmpty (Point (residueFibrePresheaf X t)) → (⨆ (U : Over T) (_ : IsAffine U.left) (a : yoneda.obj U ⟶ residueFibrePresheaf X t) (_ : IsEtale a), topologicalKrullDim U.left) = ⊥ ∧ (⨆ (x : Point X.obj.obj) (_ : pointLiesOver X t x), localFibreDimension X x) = ⊥) ∧ (Nonempty (Point (residueFibrePresheaf X t)) → ∃ (d : ℕ) (x : Point X.obj.obj), pointLiesOver X t x ∧ localFibreDimension X x = (d : WithBot ℕ∞) ∧ (⨆ (U : Over T) (_ : IsAffine U.left) (a : yoneda.obj U ⟶ residueFibrePresheaf X t) (_ : IsEtale a), topologicalKrullDim U.left) = (d : WithBot ℕ∞))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The structural morphism is encoded by X : AlgebraicSpace T. The canonical residue-field fibre is the presheaf product over the terminal h_T. The theorem spells out the affine-chart supremum rather than using the topological dimension of Point. Reuses the real-data localFibreDimension definition through def-sfb-space-local-fibre-dimension, which binds its existing landed declaration. The separate chart-independence/openness theorem is not a statement dependency. pointLiesOver expresses the base image through field-valued representatives without choosing one."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11b6b4721",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 25773a0e885b. Lean module byte-identical (diff); item node changes only stmt_deps (theorem lem-sfb-space-local-fibre-dimension-open replaced by new def-sfb-space-local-fibre-dimension) and lean.note. New def node binds existing:true to landed plain def AlgebraicGeometry.AlgebraicSpace.localFibreDimension (signature verbatim with live l.47-48, no file field), statement matches the iSup component by component and Stacks 04NM(3) scheme-target, stmt_deps all live definition nodes. Item clauses re-checked: hft/hqc not stronger, residueFibrePresheaf = X x_T Spec k(t) real data, pointLiesOver representative-independent, four conjuncts (equality, empty iff, both bottom, attained finite d) match the node; edge cases and universes fine; only sorry in theorem; docstrings carry source/blueprint/proof. No compile needed (no file changed); worker scompile and deliver2 dry run OK."
+ }
+}

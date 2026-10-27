@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-epp-compatible-coefficient-dvrs",
+ "kind": "statement",
+ "title": "Compatible coefficient DVRs for the complete Epp pair",
+ "statement": "Let $p$ be prime and let $A\\to B$ be an injective local map of complete discrete valuation rings [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring]. Write $K=\\operatorname{Frac}(A)$, $M=\\operatorname{Frac}(B)$ [def-pc-field-extension], $k=A/\\mathfrak m_A$, and $l=B/\\mathfrak m_B$. Suppose $k$ is algebraically closed (every nonconstant polynomial has a root) of characteristic $p$ and, inside $l$, $k=\\bigcap_{n\\geq0}\\{x^{p^n}:x\\in l\\}$. Fix a uniformizer $\\pi$ of $A$. Then there are complete discrete valuation rings $A_0,D$, injective local maps $A_0\\to A$, $A_0\\to D$, $D\\to B$, and a commutative square with the given $A\\to B$, such that: $A_0/\\mathfrak m_{A_0}=k$ compatibly with $A_0\\to A$; $D/\\mathfrak m_D=l$ compatibly with $D\\to B$; the residue map of $A_0\\to D$ is the given $k\\hookrightarrow l$; $\\mathfrak m_{A_0}D=\\mathfrak m_D$; and $B$ is a finite $D$-module (finitely many elements span it over $D$). Thus $M/\\operatorname{Frac}(D)$ is finite-dimensional. If $K$ has characteristic $p$, one may choose $A_0=k[[t]]$ with $t\\mapsto\\pi$ and $A_0\\to A$ an isomorphism; $k[[t]]$ denotes the ring of formal power series in one variable [def-weil-pbc-multivariate-power-series]. If $K$ has characteristic zero, one may choose $A_0$ and $D$ to be Cohen rings [def-weil-pbc-cohen-ring] for $k$ and $l$, respectively (complete DVRs with uniformizer the integer $p$). Local means pulling back maximal ideals. No finite generation of $l/k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F9, theorem-epp, proof paragraphs setting k equal to the perfect core, choosing a Cohen ring or k[[t]], and choosing the upper coefficient DVR Lambda before the reduction to Tag 09F8. These paragraphs use Cohen structure and adic lifting; this statement records their compatible structural construction, not existence of an Epp extension."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Cohen ring $C$ with a specified residue isomorphism $C/pC\\cong k$ using [lem-weil-pbc-cohen-rings-exist]. Apply [lem-weil-pbc-cohen-ring-lift-complete-local] to $R=A$ and this isomorphism to obtain $c:C\\to A$ inducing the identity on $k$. If $\\operatorname{char}K=0$, put $A_0=C$. The map is local: an element reduces to zero in $A$ exactly when its class in $C/pC$ is zero. It is injective, since a nonzero element of the DVR $C$ is $up^n$ with $u$ a unit and its image is nonzero in the characteristic-zero domain $A$. If $\\operatorname{char}K=p$, the map $c$ kills $p$ and factors through the specified quotient $C/pC=k$, giving a section $s:k\\to A$ of the residue map. This field map is injective.",
+   "uses": [
+    "lem-weil-pbc-cohen-rings-exist",
+    "lem-weil-pbc-cohen-ring-lift-complete-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  },
+  {
+   "text": "In characteristic $p$, put $A_0=k[[t]]$ and $D=l[[t]]$. By [lem-weil-pbc-power-series-field-cohen-regular-complete] with one variable these are complete Noetherian local domains with maximal ideal $(t)$ and residue fields $k,l$. Since $t\\ne0$, [lem-sc-principal-ideal-dvr] makes them DVRs. Apply [lem-weil-pbc-power-series-adic-evaluation] with coefficient map $s:k\\to A$, ideal $\\mathfrak m_A$ and $t\\mapsto\\pi$ to construct $a:A_0\\to A$. This is an isomorphism: for $x\\in A$, recursively choose $a_n\\in k$ as the residue of $x_n$, starting with $x_0=x$, and put $x_{n+1}=(x_n-s(a_n))/\\pi$. Then $x-\\sum_{i<N}s(a_i)\\pi^i\\in\\pi^NA$ for every $N$, so completeness and the evaluation formula give $x=a(\\sum a_it^i)$. If a nonzero series has first nonzero coefficient $a_n$, its image is $\\pi^n$ times an element with nonzero residue $a_n$, hence is nonzero. Apply the same evaluation lemma to the coefficient inclusion $k\\hookrightarrow l\\hookrightarrow D$ with $t\\mapsto t$ to obtain $h:A_0\\to D$. Its residue map is the given inclusion; it is local and injective by the same first-nonzero-coefficient argument, and $h(t)=t$ gives $\\mathfrak m_{A_0}D=\\mathfrak m_D$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-sc-principal-ideal-dvr",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  },
+  {
+   "text": "In characteristic zero choose a Cohen ring $D$ with specified residue $D/pD=l$ using [lem-weil-pbc-cohen-rings-exist]. The zero-variable Cohen case of [lem-weil-pbc-field-cohen-power-series-formally-smooth] says that $\\mathbf Z\\to A_0$ is formally smooth for the $(p)$-adic topology. Apply [lem-weil-pbc-fs-adic-lift-into-complete] with base $R=\\mathbf Z$, source $S=A_0$, target ring $D$, $I=J=pD$, and residue map $A_0\\to k\\hookrightarrow l=D/pD$. Here $D$ is $I$-adically complete, $J$ is closed since $J+I^m=J$, $J^1\\subseteq I$, and the residue map kills $\\mathfrak m_{A_0}$, so $r=t=1$ suffice in the lifting lemma. We obtain $h:A_0\\to D$ with the prescribed residue map. It sends the integer $p$ to $p$, so it preserves uniformizers and $\\mathfrak m_{A_0}D=\\mathfrak m_D$. It is local by the injectivity of $k\\to l$, and injective because a nonzero element $up^n$ has nonzero image in the domain $D$.",
+   "uses": [
+    "lem-weil-pbc-cohen-rings-exist",
+    "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  },
+  {
+   "text": "For each $x\\in k$, the polynomial $X^p-x$ has a root in the algebraically closed field $k$. Thus every element of $k$ is a $p$th power. For every finitely generated subextension $E/k$ inside $l$, [lem-weil-pbc-perfect-field-separating-basis] supplies a separating transcendence basis. Consequently $l/k$ is separable in exactly the possibly transcendental sense of [def-weil-pbc-separable-field-extension]; there is no hypothesis that $l/k$ itself be finitely generated. The map $h$ constructed in the relevant characteristic case is an injective local DVR map with index one and residue extension $l/k$. Hence [lem-sfb-dvr-index-one-adic-formal-smoothness] shows that $D$ is formally smooth over $A_0$ for the $\\mathfrak m_D$-adic topology.",
+   "uses": [
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension",
+    "lem-sfb-dvr-index-one-adic-formal-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  },
+  {
+   "text": "Give $B$ its $A_0$-algebra structure through $a:A_0\\to A\\to B$. Apply [lem-weil-pbc-fs-adic-lift-into-complete] with $R=A_0$, $S=D$, target ring $B$, $I=J=\\mathfrak m_B$, and $g:D\\to D/\\mathfrak m_D=l=B/\\mathfrak m_B$. This is an $A_0$-algebra map since both residue maps restrict to the specified $k\\hookrightarrow l$. Completeness of $B$ gives the $I$-adic hypothesis; $J+I^m=J$ proves closedness; $J^1\\subseteq I$ and $g(\\mathfrak m_D)=0$ give $t=r=1$. The lemma produces an $A_0$-algebra map $b:D\\to B$ with residue identity, so $bh=A_0\\to A\\to B$, proving the required square. This map is local. For the common uniformizer $q=p$ in mixed characteristic or $q=t$ in equal characteristic, $b(q)$ is respectively $p\\ne0$ in $B$ or the given image of $\\pi\\ne0$. Thus a nonzero $uq^n\\in D$ cannot map to zero, and $b$ is injective.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  },
+  {
+   "text": "Write $q$ for this uniformizer of $D$. Since $b$ is injective and local, in the DVR $B$ one can write $b(q)=u\\beta^e$ for a uniformizer $\\beta$, a unit $u$, and an integer $e\\ge1$. Then $qB=\\mathfrak m_B^e$. The classes of $1,\\beta,\\ldots,\\beta^{e-1}$ generate $B/qB$ over $D/qD=l$: given $x\\in B$, choose $d_0\\in D$ with the same residue as $x$, divide $x-b(d_0)$ by $\\beta$, choose $d_1$ with the residue of the quotient, and repeat $e$ times. This gives $x-\\sum_{i<e}b(d_i)\\beta^i\\in\\beta^eB=qB$. Moreover $\\bigcap_nq^nB=\\bigcap_n\\mathfrak m_B^{en}=0$, since completeness of $B$ includes separatedness and $en$ is cofinal. The ring $D$ is $(q)$-adically complete. Thus all three hypotheses of [lem-weil-pbc-finite-over-complete-ring] hold for $A=D$, $I=qD$, $M=B$, and $B$ is finite over $D$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  },
+  {
+   "text": "Put $F=\\operatorname{Frac}(D)$. Localizing a finite spanning set of $B$ over $D$ shows that $T=F\\otimes_DB=(D\\setminus\\{0\\})^{-1}B\\subseteq M$ is a finite-dimensional $F$-vector space and a domain. For nonzero $x\\in T$, multiplication by $x$ is an injective endomorphism of this finite-dimensional space, hence surjective; in particular $xy=1$ for some $y\\in T$. Thus $T$ is a field containing $B$ and contained in $M=\\operatorname{Frac}(B)$, so $T=M$. This proves the final finite-dimensionality assertion. The construction has preserved all specified residue identifications and, in equal characteristic, the chosen image of $t$ is exactly $\\pi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-rings-exist",
+  "lem-weil-pbc-cohen-ring-lift-complete-local",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-sc-principal-ideal-dvr",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "def-weil-pbc-separable-field-extension",
+  "lem-sfb-dvr-index-one-adic-formal-smoothness",
+  "lem-weil-pbc-finite-over-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F9, theorem-epp, the two coefficient-DVR preparation paragraphs before lemma-special-case; supporting Tags 0328, 032A, 07NJ, 09E7 and 031D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete DVR extension with algebraically closed lower residue field factors through a Cohen ring or power series coefficient DVR; the upper DVR is finite over a weakly unramified coefficient DVR",
+   "results": "{\"t\": \"2026-10-24T04:44:35Z\", \"tool\": \"leanfinder\", \"query\": \"A complete DVR extension with algebraically closed lower residue field factors through a Cohen ring or power series coefficient DVR; the upper DVR is finite over a weakly unramified coefficient DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"HenselianLocalRing\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"PowerSeries.exists_isWeierstrassFactorization\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"HenselianLocalRing.TFAE\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\"], \"digest\": \"fe1cdfddff170767\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-series DVR instances, Cohen examples and individual formal-smoothness lifting statements do not supply the compatible coefficient square with finite upper DVR and prescribed lower uniformizer."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-series DVR instances, Cohen examples and individual formal-smoothness lifting statements do not supply the compatible coefficient square with finite upper DVR and prescribed lower uniformizer."
+  },
+  {
+   "tool": "grep",
+   "query": "CohenRing|cohen.*ring|coefficient.*valuation|valuation.*coefficient",
+   "results": "{\"t\": \"2026-10-24T04:44:26Z\", \"tool\": \"grep\", \"query\": \"CohenRing|cohen.*ring|coefficient.*valuation|valuation.*coefficient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/OfPrime.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/Polynomial/Subring.lean\", \"Mathlib/RingTheory/Valuation/Minpoly.lean\"], \"digest\": \"a0b4ec4684751425\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-series DVR instances, Cohen examples and individual formal-smoothness lifting statements do not supply the compatible coefficient square with finite upper DVR and prescribed lower uniformizer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen structure gives a common coefficient DVR and a uniformizer preserving residue field enlargement over which a complete DVR is finite",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"leansearch\", \"query\": \"Cohen structure gives a common coefficient DVR and a uniformizer preserving residue field enlargement over which a complete DVR is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"Valuation.Uniformizer.mk'\", \"PowerSeries.instIsDiscreteValuationRing\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"Valuation.Uniformizer\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsLocalRing.finrank_CotangentSpace_eq_one\"], \"digest\": \"7a0e741409b26677\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-series DVR instances, Cohen examples and individual formal-smoothness lifting statements do not supply the compatible coefficient square with finite upper DVR and prescribed lower uniformizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a perfect subfield of the residue field compatibly into complete valuation rings using Cohen rings and adic formal smoothness",
+   "results": "{\"t\": \"2026-10-24T04:44:36Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a perfect subfield of the residue field compatibly into complete valuation rings using Cohen rings and adic formal smoothness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"Algebra.FormallySmooth.of_perfectField\", \"Ideal.ResidueField.liftₐ\", \"PreTilt\", \"IsLocalRing.ResidueField.lift\", \"PreTilt.untiltFun\", \"Algebra.instFormallyUnramifiedResidueField\", \"Ideal.ResidueField.lift\"], \"digest\": \"da7b078b63a240d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-series DVR instances, Cohen examples and individual formal-smoothness lifting statements do not supply the compatible coefficient square with finite upper DVR and prescribed lower uniformizer."
+  },
+  {
+   "tool": "grep",
+   "query": "CohenRing|coefficient.*valuation|valuation.*coefficient",
+   "results": "{\"t\": \"2026-10-24T05:16:59Z\", \"tool\": \"grep\", \"query\": \"CohenRing|coefficient.*valuation|valuation.*coefficient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/Valuation/Minpoly.lean\", \"Mathlib/RingTheory/Valuation/Minpoly.lean\", \"Mathlib/RingTheory/Valuation/Minpoly.lean\"], \"digest\": \"a8be6c285556043d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ramification-index definitions and unrelated valuation/perfection constructions; no compatible coefficient-DVR square or Cohen structure statement occurs in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor a map of complete discrete valuation rings through coefficient rings with ramification index one",
+   "results": "{\"t\": \"2026-10-24T05:17:00Z\", \"tool\": \"leansearch\", \"query\": \"Factor a map of complete discrete valuation rings through coefficient rings with ramification index one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_map_self_eq_one\", \"Ideal.map_algebraMap_eq_finset_prod_pow\", \"Ideal.ramificationIdx\", \"Ideal.ramificationIdxIn_eq_ramificationIdx\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff\", \"Ideal.le_pow_ramificationIdx\", \"Ideal.Quotient.algebraMap_quotient_pow_ramificationIdx\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_factors_count\"], \"digest\": \"c8080274ad916ace\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ramification-index definitions and unrelated valuation/perfection constructions; no compatible coefficient-DVR square or Cohen structure statement occurs in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCohenRing",
+   "results": "{\"t\": \"2026-10-24T05:17:00Z\", \"tool\": \"loogle\", \"query\": \"IsCohenRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsCohenRing'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ramification-index definitions and unrelated valuation/perfection constructions; no compatible coefficient-DVR square or Cohen structure statement occurs in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible Cohen rings inside an injective map of complete discrete valuation rings, with finite upper valuation ring and identical residue fields",
+   "results": "{\"t\": \"2026-10-24T05:17:04Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible Cohen rings inside an injective map of complete discrete valuation rings, with finite upper valuation ring and identical residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"PreTilt\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"PreTilt.untiltFun\", \"BDeRhamPlus\", \"HenselianLocalRing\", \"Valuation.HasExtension.algebraMap_injective\", \"PreTilt.exists_smodEq_untiltAux\"], \"digest\": \"9d1814d8c94b9cbb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ramification-index definitions and unrelated valuation/perfection constructions; no compatible coefficient-DVR square or Cohen structure statement occurs in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure and lifting a separable extension of residue fields compatibly into complete valuation rings",
+   "results": "{\"t\": \"2026-10-24T05:17:05Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen structure and lifting a separable extension of residue fields compatibly into complete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"IsSepClosed.lift_def\", \"Ideal.ResidueField.liftₐ\", \"IsLocalRing.ResidueField.lift\", \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"Ideal.ResidueField.lift\", \"Tilt.instField\", \"IsLocalRing.ResidueField.lift_residue_apply\"], \"digest\": \"0c33b2c14080c519\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return ramification-index definitions and unrelated valuation/perfection constructions; no compatible coefficient-DVR square or Cohen structure statement occurs in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-weak-perfect-residue",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Compatible coefficient DVRs for the complete Epp pair.",
+   "via": [
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-compatible-coefficient-dvrs",
+  "worker": "stage1",
+  "summary": "Q54 checked Stacks 09F9 coefficient preparation and retained the statement. Built the compatible square by Cohen lifting and adic lifting, with explicit equal-characteristic evaluation and finite-generation arguments. One new statement-only node is the 09E7 adic formal-smoothness criterion; other generic inputs already exist. No finite generation of l/k is used.",
+  "blueprint": "Historical supporting algebra for det-thm-sf-ctf-stability-direct-images, proof (3), via the Epp coefficient-DVR preparation. Stacks 09F9, theorem-epp, final preparation paragraph: the index-one map to the upper coefficient DVR is adically formally smooth. The latest blueprint no longer states this auxiliary algebra result.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-rings-exist",
+    "why": "Generic commutative-algebra input Cohen rings exist used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-ring-lift-complete-local",
+    "why": "Generic commutative-algebra input Lifting a prescribed Cohen-ring residue isomorphism used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic commutative-algebra input Power series over a field or a Cohen ring: complete regular local domain used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic commutative-algebra input Evaluation of finite-variable power series in an adically complete ring used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+    "why": "Generic commutative-algebra input Formal smoothness of power series over a characteristic-zero field or Cohen ring used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "Generic commutative-algebra input Adic formal smoothness gives lifts into complete rings along closed ideals used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-ring",
+    "why": "Generic commutative-algebra input A Hausdorff module over a complete ring that is finite modulo the ideal is finite used in the Stacks 09F9 coefficient construction; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-rings-exist",
+  "lem-weil-pbc-cohen-ring-lift-complete-local",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-finite-over-complete-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-bb2c3e61b",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-bb2c3e61b (reviewer sub-agent of L); spot-checked: I read Stacks 09F9 (theorem-epp), including the final two coefficient preparation paragraphs, and 09E7. The 7 steps follow the Stacks route: a Cohen ring or k[[t]] mapping to A, then A0→D with fs via 09E7, then a lift D→B via 07NJ, then B finite over D via 031D. I read the full statement of every cited node and checked each hypothesis against it. Step 1: c:C→A induces id_k, so it is local; it is injective in char 0 (up^n), and in char p it factors through k as a section. Step 2: the evaluation node's uniqueness clause gives surjectivity of k[[t]]→A, and injectivity uses F=t^nG with a unit residue. Step 3: adic lift with R=Z, I=J=pD, r=t=1. Step 4: k is perfect, so l/k satisfies def-weil-pbc-separable-field-extension (2) via the separating-basis node, and the new node applies. Step 5: g is an A0-algebra map in both characteristics (the char p check uses s a section and t↦π↦0); b is local, and injective because b(p)≠0 or b(t)=π≠0. Step 6: qB=m_B^e, β-adic digits span B/qB, and separatedness plus completeness of D give the three 031D hypotheses. Step 7 is an elementary finite-domain argument. Every item clause is proved and no target was weakened; the perfect-core hypothesis is unused but kept. The new node lem-sfb-dvr-index-one-adic-formal-smoothness is exactly 09E7 (2)⇒(1), statement only, with notions defined or cited. I tested it on k[[t]]→l[[t]] and checked that the ramified and inseparable cases are excluded. It is not a duplicate: I grepped for 09E7, 07NQ and formally smooth with DVR terms. The closest nodes, lem-weil-pbc-flat-formally-smooth-closed-fibre-adic, lem-sfb-dvr-index-one-separable-base-change and lem-per-perfect-residue-coefficient-dvr, state different results; the last one's lifting needs k'≅C/πC, which fails for ramified B. The seven generic pbc tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppCompatibleCoefficientDVRs",
+  "declaration": "IsDiscreteValuationRing.exists_epp_compatible_coefficient_dvrs",
+  "file": "lean/Sheaf/RingTheory/EppCompatibleCoefficientDVRs.lean",
+  "statement": "theorem exists_epp_compatible_coefficient_dvrs (p : ℕ) (hp : p.Prime) (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (B : Type v) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] (f : A →+* B) [IsLocalHom f] (hf : Function.Injective f) [CharP (IsLocalRing.ResidueField A) p] [IsAlgClosed (IsLocalRing.ResidueField A)] (hcore : Set.range (IsLocalRing.ResidueField.map f) = ⋂ n : ℕ, Set.range (fun x : IsLocalRing.ResidueField B ↦ x ^ (p ^ n))) (π : A) (hπ : IsLocalRing.maximalIdeal A = Ideal.span {π}) : ∃ (A₀ : Type u) (D : Type v) (_ : CommRing A₀) (_ : CommRing D) (_ : IsDomain A₀) (_ : IsDomain D) (_ : IsDiscreteValuationRing A₀) (_ : IsDiscreteValuationRing D) (_ : IsAdicComplete (IsLocalRing.maximalIdeal A₀) A₀) (_ : IsAdicComplete (IsLocalRing.maximalIdeal D) D) (a : A₀ →+* A) (h : A₀ →+* D) (b : D →+* B) (_ : IsLocalHom a) (_ : IsLocalHom h) (_ : IsLocalHom b) (_ : Function.Injective a) (_ : Function.Injective h) (hb : Function.Injective b) (eA : IsLocalRing.ResidueField A₀ ≃+* IsLocalRing.ResidueField A) (eD : IsLocalRing.ResidueField D ≃+* IsLocalRing.ResidueField B), b.comp h = f.comp a ∧ IsLocalRing.ResidueField.map a = eA.toRingHom ∧ IsLocalRing.ResidueField.map b = eD.toRingHom ∧ eD.toRingHom.comp (IsLocalRing.ResidueField.map h) = (IsLocalRing.ResidueField.map f).comp eA.toRingHom ∧ Ideal.map h (IsLocalRing.maximalIdeal A₀) = IsLocalRing.maximalIdeal D ∧ @Module.Finite D B _ _ b.toAlgebra.toModule ∧ @FiniteDimensional (FractionRing D) (FractionRing B) _ _ (IsFractionRing.map (K := FractionRing D) (L := FractionRing B) hb).toAlgebra.toModule ∧ (CharP (FractionRing A) p → ∃ e : PowerSeries (IsLocalRing.ResidueField A) ≃+* A₀, a (e PowerSeries.X) = π ∧ Function.Bijective a ∧ ∀ c : IsLocalRing.ResidueField A, eA (IsLocalRing.residue A₀ (e (PowerSeries.C c))) = c) ∧ (CharZero (FractionRing A) → IsCohenRing p A₀ ∧ IsCohenRing p D)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e86f8455",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Node unchanged apart from lean (matches side-live); lean.statement matches the file verbatim. Every hypothesis matches the node: p prime, complete DVRs A,B with injective local f, FractionRing/ResidueField objects, IsAlgClosed+CharP on k, hcore exactly range(map f)=⋂ range(x^(p^n)), uniformizer as maximalIdeal=span{π}. Every conclusion matches: A₀:Type u, D:Type v (Cohen rings exist in the field's universe), local injective a,h,b, square b∘h=f∘a, residue equivalences eA,eD compatible with a,b, residue of h = map f, map h m_A₀ = m_D, Module.Finite via b.toAlgebra, FiniteDimensional via IsFractionRing.map hb. Char p: k[[t]]≃A₀ with t↦π, a bijective, constants compatible; char 0: IsCohenRing p A₀ ∧ IsCohenRing p D; one witness serves both since char K ∈ {0,p}. IsCohenRing is a real definition matching def-weil-pbc-cohen-ring; private proof-input imports all exist. No hollow definitions, only sorry, source and blueprint docstrings with all 7 proof steps, no extra assumptions or universe restrictions, report sections present. No compile: no fix; worker reports a clean scompile. No findings."
+ }
+}

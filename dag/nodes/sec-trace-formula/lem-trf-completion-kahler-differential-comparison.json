@@ -20,13 +20,23 @@
  ],
  "proof": [
   {
-   "text": "Every ideal of the field $k$ is zero or contains a unit and is $(1)$, hence is finitely generated. Thus $k$ is Noetherian by [def-weil-pbc-noetherian-ring]. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to the given finite-type $k$-algebra $S$, then [lem-weil-pbc-localization-noetherian] to its localization at $S\\setminus\\mathfrak p$: $S$ and $A=S_{\\mathfrak p}$ are Noetherian. The same definition now makes $\\mathfrak m$ finitely generated. Put $M=\\Omega_{A/k}$. The symbol presentation in [def-weil-pbc-kahler-differentials] and repeated Leibniz expansion show that the differentials of a finite set of algebra generators generate $\\Omega_{S/k}$. By [lem-weil-pbc-kahler-differentials-localization], their images generate $M$ over $A$. Define $N=M^\\wedge=\\varprojlim_{r\\ge1}M/\\mathfrak m^rM$. Since $A$ is Noetherian and $M$ finite, [lem-weil-pbc-completion-finite-module-tensor] identifies $M\\otimes_A\\widehat A$ with $N$. Since $\\mathfrak m$ is finitely generated, [lem-weil-pbc-module-completion-complete], applied to $M$ and to $A$, gives completeness and separatedness, $Q_r:=N/\\mathfrak m^rN\\cong M/\\mathfrak m^rM$, and $B_r:=\\widehat A/\\mathfrak m^r\\widehat A\\cong A/\\mathfrak m^r$. All identifications are the canonical projections.",
+   "text": "Every ideal of $k$ is $(0)$ or $(1)$, so $k$ is Noetherian. Finite-type Noetherianity and localization give Noetherian $S$ and $A$; thus $\\mathfrak m$ is finitely generated. Put $M=\\Omega_{A/k}$. Leibniz expansion shows that differentials of algebra generators generate $\\Omega_{S/k}$, and localization of differentials shows that $M$ is finite over $A$.",
    "uses": [
     "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-localization-noetherian",
     "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FM (section-Noetherian), 00FN (lemma-Noetherian-permanence), 00RT (lemma-differentials-localize), 00MA (lemma-completion-tensor), 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Put $N=\\varprojlim_{r\\ge1}M/\\mathfrak m^rM$. Finite-module completion, after the tensor flip $m\\otimes c\\mapsto c\\otimes m$, identifies $M\\otimes_A\\widehat A$ with $N$ by $m\\otimes c\\mapsto c\\,j(m)$, where $j$ is the completion map. Completeness gives separated $N$, $Q_r=N/\\mathfrak m^rN=M/\\mathfrak m^rM$, and $B_r=\\widehat A/\\mathfrak m^r\\widehat A=A/\\mathfrak m^r$, all canonically, with surjective projections.",
+   "uses": [
     "lem-weil-pbc-completion-finite-module-tensor",
     "lem-weil-pbc-module-completion-complete"
    ],
@@ -37,81 +47,49 @@
    }
   },
   {
-   "text": "For $r\\ge1$, Leibniz expansion gives $\\mathrm d(\\mathfrak m^{r+1})\\subseteq\\mathfrak m^rM$. For $x\\in\\widehat A$ choose $a\\in A$ lifting $x$ modulo $\\mathfrak m^{r+1}\\widehat A$ and set $\\delta_r(x)=\\mathrm da\\bmod\\mathfrak m^rM\\in Q_r$. This is independent of the lift by that inclusion. Lifts of $x+y$ and $xy$ may be chosen as $a+b$ and $ab$; the derivation identities in [def-weil-pbc-kahler-differentials] then show that $\\delta_r$ is a $k$-derivation with scalar action through $B_r$. A lift modulo $\\mathfrak m^{r+2}$ is also a lift modulo $\\mathfrak m^{r+1}$, so $q_r\\delta_{r+1}=\\delta_r$, where $q_r:Q_{r+1}\\to Q_r$ is reduction. By the completeness bijection of [lem-weil-pbc-module-completion-complete], these coordinates define a $k$-derivation $\\widehat d:\\widehat A\\to N$ extending $\\mathrm d$. They give $\\widehat d(\\mathfrak m^{r+1}\\widehat A)\\subseteq\\mathfrak m^rN$, proving continuity. For another continuous extension $D$ and fixed $r$, choose $s\\ge r+1$ with $D(\\mathfrak m^s\\widehat A)\\subseteq\\mathfrak m^rN$ and lift $x$ to $a\\in A$ modulo $\\mathfrak m^s\\widehat A$. Both $D(x)$ and $\\widehat d(x)$ equal $\\mathrm da$ modulo $\\mathfrak m^rN$. Separatedness gives $D=\\widehat d$.",
+   "text": "Apply [lem-trf-module-valued-derivation-completion] to $I=\\mathfrak m$ and $d=\\mathrm d$. This gives the unique continuous extension $D:\\widehat A\\to N$, the bound $D(\\mathfrak m^{r+1}\\widehat A)\\subseteq\\mathfrak m^rN$, and its lift formula at every $r\\ge1$. This proves (i).",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-module-completion-complete"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition 07BK and Lemma 00RO (universal derivation); Tag 05GG (lemma-hathat-finitely-generated), explicit quotient-coordinate construction."
-   }
-  },
-  {
-   "text": "The composite $\\widehat d\\circ\\sigma:F\\to M^\\wedge$ is a $k$-derivation. By the universal property in [def-weil-pbc-kahler-differentials] it factors through $\\Omega_{F/k}$, which is zero by [lem-trf-separable-field-differentials-vanish]. Thus $\\widehat d\\circ\\sigma=0$, so $\\widehat d$ is also an $F$-derivation for the $F$-action induced by $\\sigma$.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-trf-separable-field-differentials-vanish"
+    "lem-trf-module-valued-derivation-completion"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4D, algebraically closed Jacobian paragraph and arbitrary-field descent; expanded with Algebra Tags 00RS, 00RT, 00RU and More Algebra Tag 0C34."
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PE (lemma-derivation-extends), proof of (1), module-valued form of the shifted quotient construction and uniqueness argument from the returned item, old Step 2."
    }
   },
   {
-   "text": "Put $D_r=\\Omega_{B_r/F}$ and let $t_r:D_{r+1}\\to D_r$ be induced by $B_{r+1}\\to B_r$. The composite $A\\to B_r\\xrightarrow{\\mathrm d}D_r$ is a $k$-derivation because $\\sigma$ is a $k$-algebra section. The universal property in [def-weil-pbc-kahler-differentials] gives an $A$-linear map $M\\to D_r$ sending $\\mathrm da$ to $\\mathrm d(a\\bmod\\mathfrak m^r)$. The target is a $B_r$-module, so the map kills $\\mathfrak m^rM$. Using [lem-weil-pbc-module-completion-complete] gives a $B_r$-linear map $\\alpha_r:Q_r\\to D_r$. On each generator $\\mathrm da\\bmod\\mathfrak m^{r+1}M$ both $t_r\\alpha_{r+1}$ and $\\alpha_rq_r$ give $\\mathrm d(a\\bmod\\mathfrak m^r)$; hence $t_r\\alpha_{r+1}=\\alpha_rq_r$. Therefore $\\Phi:N\\to\\varprojlim_rD_r$ is the $\\widehat A$-linear map with $(\\Phi(y))_r=\\alpha_r(y_r)$ for $y_r=y\\bmod\\mathfrak m^rN$.",
+   "text": "Apply [lem-trf-adic-differential-quotient-interleaving] to this $D$ and the given finite separable $F/k$ and section. Reindex [def-trf-continuous-kahler-differentials] by $r=n+1$. With $E_r=\\Omega_{B_r/F}$ obtain $D\\sigma=0$ and $\\alpha_r,\\beta_r$ with their four identities. Define $\\Phi(y)_r=\\alpha_r(y_r)$ and $\\Psi(z)_r=\\beta_r(z_{r+1})$. The first transition identity makes $\\Phi(y)$ compatible. For $\\Psi$, $q_r\\beta_{r+1}(z_{r+2})=\\beta_rt_{r+1}(z_{r+2})=\\beta_r(z_{r+1})$; completeness identifies this family with an element of $N$. Both maps are $\\widehat A$-linear. The composite identities give $(\\Psi\\Phi y)_r=q_r(y_{r+1})=y_r$ and $(\\Phi\\Psi z)_r=t_r(z_{r+1})=z_r$ at every $r\\ge1$, so they are inverse.",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-module-completion-complete"
+    "lem-trf-adic-differential-quotient-interleaving",
+    "lem-weil-pbc-module-completion-complete",
+    "def-trf-continuous-kahler-differentials"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition 07BK, Lemma 00RO (universal property and differential symbols); Tag 05GG (lemma-hathat-finitely-generated)."
+    "place": "Tag 00RO (lemma-universal-omega), universal derivation and differential symbols; agent expansion to the coefficient-field and adjacent-quotient comparisons in the returned item, old Steps 3-6."
    }
   },
   {
-   "text": "For every $r\\ge1$, Step 2 gives $\\delta_r:\\widehat A\\to Q_r$ killing $\\mathfrak m^{r+1}\\widehat A$; Step 3 shows that it kills $\\sigma(F)$. It induces an $F$-derivation $B_{r+1}\\to Q_r$, where scalars act through $B_{r+1}\\to B_r$. By [def-weil-pbc-kahler-differentials] obtain a $B_{r+1}$-linear map $\\beta_r:D_{r+1}\\to Q_r$ with $\\beta_r(\\mathrm d(x\\bmod\\mathfrak m^{r+1}))=\\delta_r(x)$. On differential symbols the identity $q_r\\delta_{r+1}=\\delta_r$ yields $q_r\\beta_{r+1}=\\beta_rt_{r+1}:D_{r+2}\\to Q_r$; hence it holds on the generated module. For a compatible sequence $z=(z_r)_r$ in $\\varprojlim_rD_r$, define $\\Psi(z)$ by $(\\Psi(z))_r=\\beta_r(z_{r+1})\\in Q_r$. Indeed $q_r\\beta_{r+1}(z_{r+2})=\\beta_rt_{r+1}(z_{r+2})=\\beta_r(z_{r+1})$. The completeness bijection in [lem-weil-pbc-module-completion-complete] identifies this compatible sequence with an element of $N$. The maps are $\\widehat A$-linear since the scalar actions on $Q_r$ factor through $B_r$.",
+   "text": "For $x\\in\\widehat A$ lift it by $a\\in A$ modulo $\\mathfrak m^{r+1}\\widehat A$. The lift formula and $\\alpha_r$ give $(\\Phi D(x))_r=\\mathrm d(x\\bmod\\mathfrak m^r)$, hence $\\Phi D=\\widehat{\\mathrm d}_F$. This includes the required images of $\\mathrm da\\otimes1$. Those tensors generate by the symbol presentation of $M$ and scalar extension; therefore their images determine any $\\widehat A$-linear map uniquely, proving (ii).",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-module-completion-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition 07BK, Lemma 00RO (universal property and generators); Tag 05GG (lemma-hathat-finitely-generated); explicit shifted component maps."
-   }
-  },
-  {
-   "text": "For each $r\\ge1$ the following identities have the indicated domains: $\\beta_r\\alpha_{r+1}=q_r:Q_{r+1}\\to Q_r$ and $\\alpha_r\\beta_r=t_r:D_{r+1}\\to D_r$. For the first, the generating class of $\\mathrm da$ maps to $\\mathrm d(a\\bmod\\mathfrak m^{r+1})$ and then to $\\mathrm da\\bmod\\mathfrak m^rM$, exactly its reduction. For the second, every $b\\in B_{r+1}$ has a lift $a\\in A$ by Step 1; $\\beta_r(\\mathrm db)=\\mathrm da\\bmod\\mathfrak m^rM$, and applying $\\alpha_r$ gives $\\mathrm d(b\\bmod\\mathfrak m^r)$, as does $t_r$. These symbols generate by [def-weil-pbc-kahler-differentials], so linearity proves both identities. Now for $y\\in N$, $(\\Psi\\Phi(y))_r=\\beta_r\\alpha_{r+1}(y_{r+1})=q_r(y_{r+1})=y_r$. For a compatible $z=(z_r)_r$, $(\\Phi\\Psi(z))_r=\\alpha_r\\beta_r(z_{r+1})=t_r(z_{r+1})=z_r$. Componentwise equality, with [lem-weil-pbc-module-completion-complete] for $N$, proves that $\\Phi$ and $\\Psi$ are inverse. No index zero or omitted first component is used.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-module-completion-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition 07BK, Lemma 00RO (differential generators); Tag 05GG (lemma-hathat-finitely-generated); the two explicit levelwise composite identities."
-   }
-  },
-  {
-   "text": "For every $x\\in\\widehat A$ and $r\\ge1$, choose $a\\in A$ lifting $x$ in $B_{r+1}$. By Step 2, $\\widehat d(x)\\bmod\\mathfrak m^rN=\\mathrm da\\bmod\\mathfrak m^rM$, so $(\\Phi\\widehat d(x))_r=\\alpha_r(\\mathrm da\\bmod\\mathfrak m^rM)=\\mathrm d(x\\bmod\\mathfrak m^r)$. Thus $\\Phi\\widehat d=\\widehat{\\mathrm d}_F$ on every element, including those outside $A$. The formula also gives the prescribed value on every $\\mathrm da\\otimes1$. Since these elements generate $M\\otimes_A\\widehat A$ over $\\widehat A$ (the symbol presentation of [def-weil-pbc-kahler-differentials] followed by scalar extension), their prescribed images determine any $\\widehat A$-linear map uniquely. This proves the uniqueness in (ii), while Step 2 already proves (i).",
-   "uses": [
+    "lem-trf-module-valued-derivation-completion",
+    "lem-trf-adic-differential-quotient-interleaving",
     "def-weil-pbc-kahler-differentials"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition 07BK, Lemma 00RO (differential symbols and universal property); direct coordinate calculation."
+    "place": "Tag 00RO (lemma-universal-omega), universal derivation and differential symbols; agent expansion to the coefficient-field and adjacent-quotient comparisons in the returned item, old Steps 3-6."
    }
   }
  ],
  "proof_deps": [
+  "def-trf-continuous-kahler-differentials",
   "def-weil-pbc-kahler-differentials",
   "def-weil-pbc-noetherian-ring",
-  "lem-trf-separable-field-differentials-vanish",
+  "lem-trf-adic-differential-quotient-interleaving",
+  "lem-trf-module-valued-derivation-completion",
   "lem-weil-pbc-completion-finite-module-tensor",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-kahler-differentials-localization",
@@ -191,10 +169,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-completion-kahler-differential-comparison",
   "worker": "stage1",
-  "summary": "Repair of returned head 46564afece: explicitly establish Noetherianity of k, S and A and finite generation of m using existing DAG leaves before completion; construct the extension by quotient coordinates; define the shifted reverse map at level r using beta_r on level r+1; prove both composites at every positive index; include verbatim citation evidence both in citations.json and in the delivered report. Statement unchanged; no new nodes.",
+  "summary": "Repair of the 2026-10-22 re-split return: preserve the statement and all arguments, distributing the module-valued shifted derivation extension and finite-level differential interleaving into two independent statement-only unsplit nodes. Retain Noetherian/finite-module preparation, the explicit shifted inverse-limit assembly, and all-element compatibility and uniqueness in the parent. No Lean changes. Promotion/rebase repair: compared the retained returned work with the current DAG, reread all cited statements, validated all 14 quotations, and distinguished the newly present 07PE nodal-descent node in the report. Resumed after the provider interruption: fresh server dry run passed at 4abc7a6f524; verified current citation statements and the existing TeX encoding again, without changing the assembly argument. Latest promotion-return repair: rechecked every citation against the current read DAG and retained the unchanged statement and two helper tasks; made Step 4 explicit about reindexing continuous differentials and the reverse-map compatibility equation. The fresh initial server preflight passed at 912988cdcd2; delivery is rebuilt on the current server DAG. Current promotion-return repair: re-read every cited statement against the current shared DAG; the original parent still agrees in all fields with original-node.json, and both helpers are still absent from the live DAG. Explicitly identify the tensor flip and canonical completion-map normalization in assembly Step 2, so the theorem normalization follows from the tensor-completion leaf with its opposite factor convention.",
   "blueprint": "Realizes the Jacobian-cokernel/differential comparison in the first proof paragraph of Curves Tag 0C4D by supplying the completion-to-continuous-differentials comparison used by lem-trf-completed-jacobian-differentials.",
   "tool_uses": [
    {
@@ -227,12 +205,12 @@
   "lem-weil-pbc-localization-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-NE-938f31b58",
-  "group": "NE",
+  "reviewer": "NT-cc-Q140-f02a4b7e3",
+  "group": "Q140",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-938f31b58 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. Verified completion hypotheses, shifted inverse-limit maps, both composites including r=1, and edge cases. All 18 citation quotations match; no cycles, duplicates, prohibited dependencies, or long-step violations found. Detailed checks written to review.md; no fixes needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-f02a4b7e3 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the duplicate candidates in full, and proved the new nodes by hand. The mathematics is correct. This is the 5th delivery of the re-split. Both new nodes are byte-identical to heads ef50, 7de6, 1f77 and 52b5. Compared with 52b5, the item changes only split_report and proof Step 2. Step 2 now states the tensor flip m⊗c↦c⊗m and the map m⊗c↦c·j(m). This matches lem-weil-pbc-completion-finite-module-tensor, whose map is c_P(a⊗x)=a·ι_P(x) with Â on the left and which is bijective for finite M, so the change is correct. The fault, repeated: the item again drops the stmt_deps def-trf-completed-jacobian-presentation and def-trf-formal-local-presentation. Both are still in the stmt_deps on live and side-live, and they own Algebra.CompletedDifferentials and Algebra.LocalCompletion, which the item's unchanged Lean statement uses. The earlier FIXes for this drop were lost 4 times, so I re-applied it: fixes/dag/nodes/sec-trace-formula/lem-trf-completion-kahler-differential-comparison.json is the delivered file with both ids appended and nothing else changed. Its stmt_deps now equal live, and its statement and lean record are equal to live. Checks: Step 4 reindexes def-trf-continuous-kahler-differentials by r=n+1 (E_n=Ω_{B/J^{n+1}}). The composites (ΨΦy)_r=q_r(y_{r+1})=y_r and (ΦΨz)_r=t_r(z_{r+1})=z_r hold, including r=1. Step 5 gives ΦD=d̂_F by lifting modulo J^{r+1}. Node 1: d(I^{r+1})⊆I^rM; the bound comes from D(cι(i))=c·j(di)+i·D(c); uniqueness uses a lift plus separatedness for finitely generated I (05GG); the edge cases I=0, I=A, M=0 and nilpotent I hold. Node 2: Dσ=0 because Ω_{F/k}=0; α_r exists because σ is a k-algebra map; β_r comes from the bound and the F-linearity; all four identities hold on generators; the case A=k[t]_(t), F=k shows the shift is needed. Re-split: old Step 2 became node 1, old Steps 3-6 became node 2, and the rest stays as the 5-step assembly; proof_deps equal the union of uses. Q31 lem-trf-complete-derivation-truncation-reconstruction overlaps partially but is not a duplicate (maintainer note). No SGA source is used, and the 5 inherited generic pbc tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.CompletionKaehlerDifferentialComparison",
@@ -256,5 +234,16 @@
   "result": "pass",
   "note": "Immutable module matches the node and source; dependencies, declarations, docstrings, edge cases, report sections, route compliance, and scompile local/server evidence checked."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

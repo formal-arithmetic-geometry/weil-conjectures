@@ -1,0 +1,125 @@
+{
+ "id": "lem-sp-normalized-tate-line-comparison",
+ "kind": "statement",
+ "title": "Comparison of the normalized degree-one Tate object with the finite-root line",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and fix the adopted-source normalized Tate datum with the following meaning: its degree-one object is a locally constant finite rank-one sheaf placed in degree zero, its derived pullback comparisons are coherent, and it underlies natural multiplicative Kummer classes whose coordinate boundary has invertible exceptional adjunct over every separated finite-type scheme over a field. Let $N>0$ satisfy $N\\Lambda=0$, and let $X$ be any scheme [def-pc-scheme] on which $N$ is invertible. In the ordinary unbounded etale module derived category [def-weil-pbc-derived-categories], there exists an isomorphism $\\Lambda_X(1)\\cong (\\mu_{N,X}\\otimes_{\\mathbf Z/N}\\Lambda_X)[0]$, with the concrete right-hand sheaf defined by [def-asd-finite-etale-tate-twist]. Only the degree-one object is compared; no adjunction, trace, or compatibility with a selected Kummer class is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Comparison of the normalized degree-one Tate object with the finite-root line; refinement of lem-normalized-projective-line-adjunction proof step 1 or 2."
+ },
+ "proof": [
+  {
+   "text": "Construct the normal integral Noetherian universal base Spec(ULift Z)[1/N]. Both coefficient lines on it are locally constant: one by the given Tate datum, the other by the primitive-root trivializing cover. The localization universal property gives X -> V. This also covers N=1 and the zero coefficient ring.",
+   "uses": [
+    "lem-asd-finite-etale-tate-local-line"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sp-normalized-tate-line-over-field to the generic stalk field of V. Transport through the given Tate-object pullback and the finite-root pullback comparison. Full faithfulness of the degree-zero single functor yields an isomorphism between the generic pullbacks of the two sheaves.",
+   "uses": [
+    "lem-sp-normalized-tate-line-over-field",
+    "lem-asd-finite-etale-tate-line-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual generic-point adjunction units on both locally constant sheaves are isomorphisms by lem-sp-normal-generic-locally-constant-unit. Compose the first unit, direct image of the generic comparison, and the inverse second unit. Apply single0, then pull back along X -> V and compose the Tate pullback comparison, the single0/pullback comparison, and the finite-root pullback comparison.",
+   "uses": [
+    "lem-sp-normal-generic-locally-constant-unit",
+    "lem-asd-finite-etale-tate-line-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-tate-local-line",
+  "lem-sp-normalized-tate-line-over-field",
+  "lem-asd-finite-etale-tate-line-comparison",
+  "lem-sp-normal-generic-locally-constant-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Y8: the universal-base, generic-field comparison and adjunction-unit descent argument, with both new intermediate theorems fully proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized Kummer Tate line roots of unity comparison",
+   "results": "Kummer field-extension/root-of-unity lemmas and categorical derived adjunctions only; no etale Tate-line comparison or projective diagonal-kernel adjunction.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Kummer Tate line is isomorphic to roots of unity tensored with finite coefficient ring",
+   "results": "Cyclotomic characters for the coefficient comparison; ordinary Scheme.Modules.pullbackPushforwardAdjunction and SheafOfModules pullback adjunctions for the diagonal kernel. None has this statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTateLine|finiteP1AdjunctionOfIntegrals|kummer.*[Nn]orm; projective.*[Aa]djunction|[Aa]djunction.*projective",
+   "results": "No comparison/kernel names in Mathlib. Projective adjunction hits concern projective objects. Repository has a Noetherian concrete P1 adjunction, arbitrary-base splitting/integrals and an affine-base trace adjunction; none has this interface.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.NormalizedProjectiveLineAdjunction",
+  "date": "2026-10-26",
+  "group": "R8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-amb-affine-space-adjunction",
+   "place": "Proof, first paragraph: projective-line adjunction used before open-chart composition; Comparison of the normalized degree-one Tate object with the finite-root line",
+   "via": [
+    "lem-normalized-projective-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.NormalizedTateLineComparison",
+  "file": "lean/Sheaf/SmoothPurity/NormalizedTateLineComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_normalizedTateLineComparison",
+  "statement": "theorem nonempty_normalizedTateLineComparison\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]\n    [HasTateTwist.IsNormalized Λ] (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)\n    (X : Scheme.{u}) [HasInvertibleExponent Λ X] (hX : IsUnit (N : Γ(X, ⊤))) :\n    Nonempty (tateObject Λ X 1 ≅\n      (_root_.DerivedCategory.singleFunctor _ 0).obj\n        (Scheme.finiteEtaleTateLine X N Λ hΛ))",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261025T181038-L-4067995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203847-L-2863491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

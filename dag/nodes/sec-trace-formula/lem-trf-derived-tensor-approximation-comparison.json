@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-derived-tensor-approximation-comparison",
+ "kind": "statement",
+ "title": "Cohomological approximation bound for a tensor of two morphisms",
+ "statement": "Let $R$ be a commutative ring and let $P,K,Q,L\\in D(R)$ [def-weil-abstract-derived-category]. Use the K-flat derived tensor product of [lem-pc-derived-tensor-second-factor-functor], specialized to $R\\to R$. Let $\\alpha:P\\to K$ and $\\beta:Q\\to L$ be morphisms, and let $n,m,a,b\\in\\mathbf Z$. Suppose $H^i(\\alpha)$ is an isomorphism for $i>n$ and is surjective for $i=n$, and $H^i(\\beta)$ is an isomorphism for $i>m$ and is surjective for $i=m$. Assume $H^i(K)=0$ for $i>a$ and $H^j(Q)=0$ for $j>b$. Set $t=\\max(n+b,a+m)$. Then the derived tensor morphism\n$$\\alpha\\otimes_R^{\\mathbf L}\\beta:P\\otimes_R^{\\mathbf L}Q\\longrightarrow K\\otimes_R^{\\mathbf L}L$$\ninduces an isomorphism on $H^i$ for every $i>t$ and a surjection on $H^t$. No freeness, pseudo-coherence, lower bound, or finite Tor-dimension assumption on the four objects is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, proof of (1), tensor approximation assertion (details omitted); expanded by the returned cone-triangle argument"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "In $D(R)$, apply TR1 to choose distinguished triangles $P\\xrightarrow{\\alpha}K\\to C_\\alpha\\to P[1]$ and $Q\\xrightarrow{\\beta}L\\to C_\\beta\\to Q[1]$. The long exact sequence gives $H^r(P)\\to H^r(K)\\to H^r(C_\\alpha)\\to H^{r+1}(P)\\to H^{r+1}(K)$. For $r\\ge n$ its first arrow is surjective and its last arrow is injective, by the hypotheses on $\\alpha$. Exactness therefore gives $H^r(C_\\alpha)=0$. The same argument for $\\beta$ gives $H^r(C_\\beta)=0$ for $r\\ge m$. Thus the cones have upper bounds $n-1$ and $m-1$, respectively.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category, TR1; Tags 05RS and 0148, lemma-cohomology-homological and the long exact cohomology sequence"
+   }
+  },
+  {
+   "text": "Regard modules as sheaves on the one-point ringed site, as in the tensor functor used in the statement. Choose flat-term K-flat representatives of $Q$ and $K$ using the K-flat resolution theorem. Exact descent of tensoring with a fixed such representative applies on either side. Consequently tensor the first triangle by $Q$ on the right and the second by $K$ on the left. They give distinguished triangles $P\\otimes_R^{\\mathbf L}Q\\xrightarrow{f}K\\otimes_R^{\\mathbf L}Q\\to C_\\alpha\\otimes_R^{\\mathbf L}Q\\to(P\\otimes_R^{\\mathbf L}Q)[1]$ and $K\\otimes_R^{\\mathbf L}Q\\xrightarrow{g}K\\otimes_R^{\\mathbf L}L\\to K\\otimes_R^{\\mathbf L}C_\\beta\\to(K\\otimes_R^{\\mathbf L}Q)[1]$, where $f=\\alpha\\otimes1_Q$ and $g=1_K\\otimes\\beta$. The normalized identifications in exact descent are with the K-flat derived tensor of the statement, including these morphisms.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064M and 06Y6, definition-derived-tor and lemma-derived-base-change; exact K-flat descent on both sides as in sites-cohomology.tex Tag 06YU"
+   }
+  },
+  {
+   "text": "Apply the existing upper-bound theorem to $(C_\\alpha,Q)$ with bounds $(n-1,b)$, and to $(K,C_\\beta)$ with bounds $(a,m-1)$. The resulting upper bounds are $n+b-1$ and $a+m-1$. Equivalently, $H^r(C_\\alpha\\otimes_R^{\\mathbf L}Q)=0$ for $r\\ge n+b$ and $H^r(K\\otimes_R^{\\mathbf L}C_\\beta)=0$ for $r\\ge a+m$. Since $t=\\max(n+b,a+m)$, both third vertices in step 2 have zero cohomology in every degree $r\\ge t$.",
+   "uses": [
+    "lem-weil-pbc-source-derived-tensor-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, omitted tensor estimate; supplied by DerivedCategory.isLE_tensor in lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean:441-449"
+   }
+  },
+  {
+   "text": "For each triangle $X\\xrightarrow{h}Y\\to C\\to X[1]$ in step 2, the long exact sequence contains $H^{i-1}(C)\\to H^i(X)\\xrightarrow{H^i(h)}H^i(Y)\\to H^i(C)$. If $i>t$, both outside terms vanish by step 3, so $H^i(h)$ is an isomorphism. If $i=t$, the right outside term vanishes, so $H^t(h)$ is surjective. Apply this to $h=f$ and $h=g$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RS and 0148, long exact cohomology sequence of a distinguished triangle"
+   }
+  },
+  {
+   "text": "Bifunctoriality identifies $g\\circ f=(1_K\\otimes\\beta)\\circ(\\alpha\\otimes1_Q)=\\alpha\\otimes\\beta$. The natural transformations in the second tensor argument commute with morphisms in the first, and cohomology preserves composition. Hence above $t$ its cohomology map is a composite of two isomorphisms, and at $t$ a composite of two surjections. These are exactly the assertions.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, lemma-derived-base-change, and lemma-functoriality-derived-base-change; tensor bifunctoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-source-derived-tensor-upper-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJE, lemma-tensor-pseudo-coherent, omitted approximation assertion; cone-triangle expansion using Tags 0145, 05RS, 064M and 06Y6 and the existing upper-bound node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let f:P to K and g:Q to L in the derived category of modules induce cohomology isomorphisms above n and m and surjections at n and m; if K is bounded above a and Q above b then f tensor g is an isomorphism above max(n+b,a+m) and surjective there",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.cm5b, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective. Hits concern fractions and factorization in the derived category, not the tensor connectivity estimate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connectivity estimate for the tensor product of two morphisms in a derived category using the cohomological bounds of their mapping cones",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, CochainComplex.instIsMultiplicativeIntDegreewiseEpiWithInjectiveKernel, CochainComplex.cm5b, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX. Second phrasing: fraction and CM5b lemmas do not bound the tensor of two approximate isomorphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"quasiIso\"",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of approximate quasi-isomorphisms of bounded above derived module complexes preserves the cohomology approximation with bound max(n+b,a+m)",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.congr, HomologicalComplex.tensorHom, QuasiIso, quasiIso_comp, TensorProduct.lid', quasiIsoAt_comp, TensorProduct, CategoryTheory.ShortComplex.QuasiIso. tensorHom constructs a chain map; QuasiIso and quasiIsoAt_comp compose isomorphisms, with no threshold tensor estimate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor.*(isLE|homology|quasiIso)|(isLE|homology|quasiIso).*tensor)",
+   "results": "16 hits: Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean, Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean. CategoryTheory hits are tensor adjunctions and exactness, not the asserted derived-morphism bound.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor.*[Aa]pproxim|[Aa]pproxim.*tensor|isIso.*tensor|tensor.*isIso)",
+   "results": "0 hits: . Targeted Algebra/Homology grep has no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor.*(isLE|IsLE|quasiIsoAt)|((isLE|IsLE|quasiIsoAt).*tensor))",
+   "results": "21 hits: Mathlib/Analysis/Convex/Cone/TensorProduct.lean, Mathlib/Algebra/Lie/Loop.lean, Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean. The broad grep returned tensor adjunction and basis lemmas; the targeted Algebra/Homology grep returned no hits. No derived tensor approximation estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A mapping cone bound gives a tensor product of approximate quasi-isomorphisms an upper cohomological isomorphism and surjectivity cutoff",
+   "results": "8 hits: CochainComplex.mappingCone, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'.congr_simp, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapTrianglehIso, DerivedCategory.triangleOfSESIso, CochainComplex.mappingCone.mapTriangleIso. The eight hits construct mapping cones and their additive-functor comparisons or SES triangles; none gives the tensor connectivity estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsLE\"",
+   "results": "12 hits: TensorProduct.equivFinsuppOfBasisLeft, TensorProduct.equivFinsuppOfBasisLeft_symm_apply, TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply, TensorProduct.equivFinsuppOfBasisLeft_apply_tmul, TensorProduct.equivFinsuppOfBasisLeft_apply, TensorProduct.equivFinsuppOfBasisLeft_symm, CategoryTheory.ihom.instIsLeftAdjointTensorLeft, CategoryTheory.instIsLeftAdjointTensorLeft. The 12 hits are tensor basis equivalences and tensor adjunction instances; none gives a cohomological threshold for tensor morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of two morphisms that are cohomology isomorphisms above n and m and surjections at n and m has approximation cutoff max(n+b,a+m) when K and Q vanish above a and b",
+   "results": "8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.Tor, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Tor', DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE. The eight hits concern derived fractions, the standard t-structure or Tor functors; none states the two-morphism tensor approximation estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper connectivity estimate for tensor morphisms by bounding cones with a t-structure in a derived category",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.TStructure.t, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE. The eight hits concern derived fractions, the standard t-structure or Tor functors; none states the two-morphism tensor approximation estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor.*[Aa]pproxim|[Aa]pproxim.*tensor|tensor.*quasiIsoAt|quasiIsoAt.*tensor)",
+   "results": "0 hits: . The broad grep returned tensor adjunction and basis lemmas; the targeted Algebra/Homology grep returned no hits. No derived tensor approximation estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-pseudocoherent-tensor-closure",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Complete-local step of that detection: tensor nonvanishing for bounded-above coherent complexes over a local ring; its closure clause $C\\otimes^{\\mathbf L}_AW\\in D^-_{\\mathrm{fg}}(A)$ (Stacks Tag 0DJE). Re-split of tensor-closure input: finite-stage tensor approximation comparison, returned proof steps 3--5.",
+   "via": [
+    "lem-trf-pseudocoherent-tensor-closure",
+    "lem-trf-local-derived-tensor-nonvanishing",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-derived-tensor-approximation-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the full statement, including the boundary surjection and absence of freeness or Tor-dimension assumptions. Proved it by two cone triangles, exact tensor descent in each variable, the existing derived tensor upper bound, and explicit long exact sequence chases. Reused all necessary nodes: no new nodes or leaves. Rechecked project attachment candidates, Mathlib searches, cited statements and edge cases.",
+  "blueprint": "The finite-stage tensor approximation input of lem-trf-pseudocoherent-tensor-closure serves the ancestor lem-trf-local-term-locality proof (1)--(2), along the recorded semistable/relative-duality chain. Steps 1--5 expand precisely the omitted tensor estimate in Stacks Tag 0DJE; no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Use the existing K-flat tensor functor and its natural second-argument maps on the one-point site; generic homological algebra, not a replacement of the trace-formula unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Use existence of flat-term K-flat representatives on the one-point site to invoke exact fixed tensor descent; a generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Use exact tensor descent in both variables, including connecting maps, for arbitrary module complexes; a generic tensor tool."
+   },
+   {
+    "node": "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "why": "Use the already proved upper cohomological tensor bound twice on cones; no pseudo-coherence or geometry is used in this generic bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-source-derived-tensor-upper-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-c00734ee3",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c00734ee3 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults, so nothing is repaired. The delivery is one commit with no new nodes. Compared with live (unsplit there), the statement, stmt_deps and blueprint fields are unchanged; there is no repair note, so the re-split rule does not apply, and no other group has split this item. Source: Stacks more-algebra.tex l.16498-16513 (Tag 0DJE, lemma-tensor-pseudo-coherent) omits this estimate ('details omitted'), so the item supplies it with a cone argument marked agent-written. Step 1: TR1 cones; in the long exact sequence H^r(P)->H^r(K)->H^r(C_a)->H^{r+1}(P)->H^{r+1}(K), for r>=n the first map is onto and the last is injective, so the cones vanish from n and m upward. Step 2: the first triangle comes from exactness of -(x)^L Q (pc second-factor node, clause 2). The second comes from K(x)^L N = Tot(F(x)N), natural in N (pc clauses 2-3), together with exactness of B -> F(x)B from the kflat-fixed node, with F a flat-term K-flat resolution from lem-pc-kflat-resolution. The step's last sentence is terse, but the cited statements support it. Step 3: the upper-bound node applied to (C_a,Q) and (K,C_b) gives n+b-1 and a+m-1, both below t. That node's 'source K-flat tensor' is the same K-flat derived tensor up to canonical isomorphism, and the parent uses it the same way. Step 4: at i=t only surjectivity is claimed, which is correct. Step 5: g.f = a(x)b by naturality. Tests: the field example with alpha=0 and P=R[-n] (R -> 0 at t=n) shows the -1 and the endpoint surjectivity are sharp; the identity case and zero objects are consistent. The hypotheses (bounds on K and Q, t=max(n+b,a+m)) match the use in parent lem-trf-pseudocoherent-tensor-closure step 3. Duplicate search (0DJE grep, about 30 pseudo-coherent tensor nodes) found nothing that states this. Accepted tool_uses: lem-pc-derived-tensor-second-factor-functor, lem-pc-kflat-resolution, lem-weil-pbc-kflat-fixed-tensor-triangulated, lem-weil-pbc-source-derived-tensor-upper-bound, all generic homological algebra. No SGA. proof_deps equals the union of uses, and the longest step is 849 characters."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorApproximationComparison",
+  "declaration": "DerivedCategory.derivedTensor_approximation_comparison",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorApproximationComparison.lean",
+  "statement": "theorem derivedTensor_approximation_comparison {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] {P K Q L : DerivedCategory (ModuleCat.{u} R)} (α : P ⟶ K) (β : Q ⟶ L) (n m a b : ℤ) (hα : ∀ i : ℤ, n < i → IsIso ((homologyFunctor (ModuleCat.{u} R) i).map α)) (hαn : Epi ((homologyFunctor (ModuleCat.{u} R) n).map α)) (hβ : ∀ i : ℤ, m < i → IsIso ((homologyFunctor (ModuleCat.{u} R) i).map β)) (hβm : Epi ((homologyFunctor (ModuleCat.{u} R) m).map β)) (hK : ∀ i : ℤ, a < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj K)) (hQ : ∀ i : ℤ, b < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj Q)) : (∀ i : ℤ, max (n + b) (a + m) < i → IsIso ((homologyFunctor (ModuleCat.{u} R) i).map (α ⊗ₘ β))) ∧ Epi ((homologyFunctor (ModuleCat.{u} R) (max (n + b) (a + m))).map (α ⊗ₘ β))",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc1333c04",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Node unchanged vs live except the new lean record; lean.statement verbatim in file. Hypotheses hα/hαn/hβ/hβm/hK/hQ and the two-part conclusion (IsIso above max(n+b)(a+m), Epi at it) match the node exactly, with no extra assumptions and arbitrary universe w. The cone argument checks: cones vanish from n and m up, tensored cones are bounded by n+b-1 and a+m-1 via isLE_tensor, the long exact sequences give iso above and epi at the cutoff, and α⊗β = (α▷Q)≫(K◁β). Stacks 0DJE omits these details and the node is the agent-written general form. ⊗ₘ is the upstream K-flat derived monoidal instance (hasDerivedMonoidalCategory), the same one used by the landed parent pseudocoherent-tensor-closure and by the upper-bound node (isLE_tensor). Note, not blocking: its owner node lem-sfb-derived-monoidal is not in stmt_deps; this follows the landed parent's convention, and a stage-2 fix cannot change stmt_deps. Proof is sorry only, no definitions, docstrings carry source and blueprint, no existing declaration, report has both required sections. No compile run (no file changed)."
+ }
+}

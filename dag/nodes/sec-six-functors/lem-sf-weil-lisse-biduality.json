@@ -1,0 +1,223 @@
+{
+ "id": "lem-sf-weil-lisse-biduality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: the canonical map $P\\to P^{\\vee\\vee}$ is an isomorphism (stage $\\overline{\\mathbf Q}_\\ell$, Weil sheaves) (lem-sf-hom-finite-projective)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Biduality of a lisse Weil sheaf",
+ "statement": "Let $k_0$ be a finite field, $k$ an algebraic closure of $k_0$, $\\ell\\ne\\operatorname{char}(k_0)$ a prime, and $\\overline{\\mathbf Q}_\\ell$ an algebraic closure of $\\mathbf Q_\\ell$ (Lean `PadicAlgCl ℓ`). Let $X$ be any $k_0$-scheme and put $\\bar X=X\\times_{k_0}k$. Use the small pro-etale site of $\\bar X$ [def-weil-pbc-proetale-site], with the universes of [def-weil-size-convention]. Let $R=\\overline{\\mathbf Q}_{\\ell,\\bar X}$ be the adic coefficient ring sheaf: on an object $U$ its sections are continuous functions $U\\to\\overline{\\mathbf Q}_\\ell$ whose values, locally on $U$, span a finite-dimensional $\\mathbf Q_\\ell$-subspace, with pointwise ring operations and restriction by precomposition (Lean `ProEtale.adicConstantSheaf`). Let $g=\\operatorname{id}_X\\times\\operatorname{Spec}(\\gamma)$, where $\\gamma$ is inverse to $z\\mapsto z^{\\#k_0}$ on $k$, and let $T=(g^{-1})_*$ on $R$-module sheaves [def-weil-sheaf-of-modules-category], with coefficients identified by pullback of functions. Thus $T$ is Frobenius pullback, realized by reindexing along an automorphism.\n\nLet $P=(M,\\theta:TM\\xrightarrow{\\sim}M)$ be a lisse Weil sheaf (Lean `WeilSheaf k₀ ℓ X`, `P.IsLisse`): $M$ is pro-etale locally a finite direct sum of copies of $R$, with ranks allowed to vary. Weil morphisms are morphisms of fixed pairs [def-weil-endofunctor-fixed-pair-category]. Put $D(M)=\\mathcal Hom_R(M,R)$ [def-pur-sheaf-hom]. The Weil dual $P^\\vee$ has underlying module $D(M)$ and structure $TD(M)\\cong\\mathcal Hom_{TR}(TM,TR)\\xrightarrow{\\sim}D(M)$ given by precomposition with $\\theta^{-1}$ and the coefficient identification $TR\\cong R$ (Lean `WeilSheaf.dual`). This dual is again lisse. Then $P$ is isomorphic, as a Weil sheaf, to $(P^\\vee)^\\vee$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.md",
+  "place": "lem-sf-hom-finite-projective: the canonical map $P\\to P^{\\vee\\vee}$ is an isomorphism (stage $\\overline{\\mathbf Q}_\\ell$, Weil sheaves); Lean: upstream file lean/WeilConjectures/WeilSheaf/VerdierDual.lean, declaration AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual (module WeilConjectures.WeilSheaf.VerdierDual, lines 229-231, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "For the underlying native adic module of P apply [lem-sf-adic-lisse-bidual-invertible]. This gives invertibility of the specific transpose d = adicNativeBidual, not an arbitrary identification with the double dual.",
+   "uses": [
+    "lem-sf-adic-lisse-bidual-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  },
+  {
+   "text": "Uncurry the Frobenius-equivariance equation for d. Precompose with the isomorphism 1 tensor theta_dual. The evaluation compatibility dual_evaluation_str for P and its dual, naturality of the lax monoidal comparison, and compatibility with symmetry reduce both sides to the same braided evaluation, by [lem-sf-adic-native-bidual]. Injectivity of uncurrying proves equivariance; this is the private proved lemma bidual_frobenius.",
+   "uses": [
+    "lem-sf-adic-native-bidual"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  },
+  {
+   "text": "The equivariant d is a morphism in the actual full subcategory of constructible Weil sheaves. Its image under inclusion followed by forgetting Frobenius is invertible by step 1. Both functors reflect isomorphisms, so d is invertible. Take asIso d.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+    "place": "Finite-free bidual evaluation is the identity, followed by locality and stability under restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-lisse-bidual-invertible",
+  "lem-sf-adic-native-bidual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.proof.md",
+  "place": "Native Lean assembly by G2, preserving the finite-projective evaluation and tensor-Hom route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dual of dual of finite locally free module sheaf isomorphism, internal hom from locally free sheaf is tensor with dual",
+   "results": "Module.IsReflexive.of_finite_of_free, Module.evalEquiv, dualTensorHomEquivOfBasis (Mathlib.LinearAlgebra.Dual.*, Contraction): module-level statements only, nothing for pro-étale Weil sheaves",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\" (name substring)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'IsReflexive ; WeilSheaf|WeilComplex|weilSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "IsReflexive: module-level only (RingTheory/PicardGroup.lean, LinearAlgebra/RootSystem/*); WeilSheaf: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bidual evaluation of a locally free finite rank lisse pro-etale Weil sheaf with Frobenius is an isomorphism",
+   "results": "SheafOfModules.ιFree_mapFree_inv; WittVector.instIsocrystalStandardOneDimIsocrystal; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; WittVector.isocrystal_classification; WittVector.IsocrystalEquiv.toLinearEquiv; AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; WittVector.IsocrystalEquiv; CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state biduality for pro-etale adic Weil sheaves with the specified Frobenius structure."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|dual_dual|reflexive",
+   "results": "Mathlib/CategoryTheory/Equivalence.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state biduality for pro-etale adic Weil sheaves with the specified Frobenius structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bidual of a finite locally free module sheaf with Frobenius structure is canonically isomorphic to itself",
+   "results": "Module.IsReflexive.of_finite_of_free; Module.Dual.instIsReflecive; Module.evalEquiv; LinearMap.IsPerfPair.dualEval; Module.IsReflexive; Module.finite_dual_iff; Lat.dualEquiv; FGModuleCat.FGModuleCatDual",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state biduality for pro-etale adic Weil sheaves with the specified Frobenius structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.ihom, CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "none; loogle: unknown identifier 'CategoryTheory.Mod.ihom'",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state biduality for pro-etale adic Weil sheaves with the specified Frobenius structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bidual\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state biduality for pro-etale adic Weil sheaves with the specified Frobenius structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal closed category the canonical double dual evaluation is natural and commutes with a monoidal equivalence",
+   "results": "CategoryTheory.ihom.coev_naturality; CategoryTheory.ihom.coev_naturality_assoc; CategoryTheory.ihom.ev_naturality_assoc; CategoryTheory.ihom.ev_naturality; CategoryTheory.ihom.ev_coev_assoc; CategoryTheory.ihom.coev_ev_assoc; CategoryTheory.MonoidalClosed.compTranspose; CategoryTheory.exp.coev_ev_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state biduality for pro-etale adic Weil sheaves with the specified Frobenius structure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      227,
+      231
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.VerdierDual",
+  "file": "lean/WeilConjectures/WeilSheaf/VerdierDual.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.nonempty_iso_dual_dual"
+  ],
+  "statement": "theorem nonempty_iso_dual_dual (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :\n    Nonempty (P ≅ (P.dual hP).dual hP.dual) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-lisse-biduality",
+  "worker": "stage1",
+  "summary": "Q54 repairs the released 2026-10-22 human re-split order. The unchanged statement now has three short assembly steps using three statement-only unsplit nodes: native adic Hom/localization comparison; ordinary locally finite-free sheaf bidual evaluation; and reindexing/contragredient equivariance. Every argument of all six returned steps is allocated explicitly and retained verbatim in report.md for the future workers; all new searches were run with msearch.py.",
+  "blueprint": "The finite-free and restriction/locality sentences of lem-sf-hom-finite-projective and the lisse biduality used by lem-a1-local-boundary-duality: old steps 1 and 3 localization to the comparison lemma, old steps 2-4 evaluation/descent to ordinary biduality, and old steps 5-6 to equivariance. The imported unit/chapter route and statement are unchanged.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-27bd9a4dc",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-27bd9a4dc (reviewer sub-agent of L); spot-checked: Re-split check passed. Every argument of the six-step base proof now sits in a new node with its own statement. Old step 1 and the localization part of old step 3 went to lem-sf-adic-module-slice-hom-comparison. Old step 2, the dual-basis inverse from step 3 and the cover-local isomorphism of step 4 went to lem-sf-locally-free-sheaf-evaluation-biduality. Old steps 5-6 went to lem-sf-reindexed-sheaf-bidual-equivariance. The three nodes are of comparable size and two are generic (an arbitrary ringed site; an arbitrary reindexing automorphism), so none restates the item. The item proof is a 3-step assembly of about 1.5 kB. I checked the steps against main-20261015 lem-sf-hom-finite-projective.proof.md (the finite-free sentence and the locality sentence), Stacks 0E8H (lemma-internal-hom-restriction, sites-modules.tex line 3775) and 03EO(2), and the Lean Dual.lean dualStr (lines 205-235) and Adic/Constructible.lean:84 IsAdicLisseSheaf (a covering family of X with pullback trivializations). I recomputed c(Tδv)(bμ)=s(μ(v))=δ(av)(bμ) and aT(h)=hc. I tested empty index sets (every sieve covers, so all sheaves are 0), rank 0, varying ranks and a rank-one α. The cover meets the all-domain sieve hypothesis by base change. Not duplicates: def-weil-pbc-internal-abelian-sheaf-module-equivalence, def-sfb-modobj-internal-hom, lem-sfb-ringed-site-finite-retract-dual-exact (needs a global retract), lem-sfb-ringed-site-perfect-duality (derived), cor-coef-verdier-weil-equivariance, and the same-day Q02 sibling lem-sf-evaluation-bidual-comparison-transport (an abstract monoidal transport with a different statement). No off-unit citations and no SGA. FIX (B3): the comparison node used 'native adic module pullback j^*' with no definition and no citation. I defined it inline (inverse image j^{-1} of the underlying sheaf, then extension of scalars along j^{-1}R_Y→R_U, which is the identity) in fixes/dag/nodes/sec-six-functors/lem-sf-adic-module-slice-hom-comparison.json. Maintainer notes: the item's merge-owned tool_uses still lists the four base-era tool lemmas, which the new proof no longer cites, and should be cleared at merge. The base reviewed record on the item will be replaced at merge.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso",
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso"
+  ]
+ }
+}

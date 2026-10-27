@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-intrinsic-reduction-conservative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-pf-proetale",
+   "place": "Integral paragraph: apply the direct completed-coefficient adic projection argument, finite reduction and conservativity steps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite reductions detect integral constructible isomorphisms",
+ "statement": "For the completed coefficient sheaf of a finite extension E of Q_l on any scheme Y, let M,N be integral constructible objects [def-weil-derived-complete-integral-detailed]. If every finite derived scalar reduction [def-weil-integral-derived-reduction] of a morphism f:M→N is invertible, then f is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Finite reduction of the canonical completed-coefficient projection and conservativity of derived-complete objects."
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Take a distinguished cone of f. Integral constructibles form a triangulated subcategory, so the cone is derived complete.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived reduction is exact; its cone triangle has invertible first arrow, hence zero third object. Exact restriction of scalars preserves its zero object.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-restriction-of-scalars-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each factor of the canonical augmented Roos product is zero. Product extensionality kills both product objects, and the completeness triangle kills the cone. Therefore f is invertible.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-restriction-of-scalars-exact",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Finite reduction of the canonical completed-coefficient projection and conservativity of derived-complete objects. The current derived-Nakayama blueprint node uses a condensed-coefficient presentation; this lemma supplies the concrete scalarReductionSource/Roos specialization, with a complete proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite reduction detects isomorphisms of derived complete complexes projection formula",
+   "results": "8 hits: HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, ShortComplex.HomologyData.ofIso_left_π, HomologicalComplex.isIso_pOpcycles, pOpcyclesIso, CochainComplex.isKProjective_of_iso, pOpcyclesIso_hom_inv_id, pOpcyclesIso.congr_simp, pOpcyclesIso_hom_inv_id_assoc. These are generic localization or homology facts, not finite scalar reduction conservativity for the completed sheaf.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived compact support projection formula pro etale finite coefficients completed integral coefficients",
+   "results": "Eight hits inspected; generic algebraic etale and period-ring results, no map for these completed coefficient sheaves.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"IsIso\"",
+   "results": "Zero hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMapOfCompactification|completedAdic_levelwise_isomorphism_cones",
+   "results": "Mathlib search zero hits. Local source search found the finite-coefficient pro-etale projection theorem, and found the older adic theorem uses discrete etale coefficients.",
+   "date": "2026-10-25",
+   "verdict": "no completed-coefficient match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfProEtaleProjectionFormula",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-pf-proetale",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralReductionConservative",
+  "file": "lean/Sheaf/Paper/SfIntegralReductionConservative.lean",
+  "declaration": "WeilConjectures.sfIntegralReduction_conservative",
+  "statement": "theorem sfIntegralReduction_conservative\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (Y : AlgebraicGeometry.Scheme.{u})\n    {M N : DerivedCategory (scalarReductionSource l E Y)} (f : M ⟶ N)\n    (hM : sfIntegralConstructible l E Y M) (hN : sfIntegralConstructible l E Y N)\n    (hf : ∀ n : ℕ, IsIso ((scalarReductionDerivedExtension l E Y n).map f)) :\n    IsIso f",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T023016-L-513324",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T023016-L-513324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

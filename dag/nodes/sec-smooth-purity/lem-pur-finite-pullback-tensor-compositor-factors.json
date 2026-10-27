@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-compositor-factors",
+ "kind": "statement",
+ "title": "Exact derived composition in ordinary finite representative coordinates",
+ "status": "split",
+ "statement": "For composable h:Z→X and f:X→Y, the intrinsic derived pullback compositor, followed by h* of the finite ordinary computation map for f and the computation map for h at the ordinary f-pullback of P, equals the computation map for h≫f followed by Q of the specified ordinary termwise compositor. This holds for every unbounded complex P, without flatness or invertibility assumptions. All computation maps and compositors are the concrete coordinate constructions of def-pur-finite-pullback-tensor-representative-data.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; ordinary tensor formula in sites-modules.tex, lemma-tensor-product-pullback (03EL); unit and adjunction composition in sites.tex (00YV)."
+ },
+ "proof": [
+  {
+   "text": "Functor.mapDerivedCategoryNatIso respects composition of natural isomorphisms and their left and right whiskerings. Apply these identities to the definition of the conjugated ordinary module compositor. Its localized compositor is the intrinsic derived compositor conjugated by the three realized comparisons.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-representative-data",
+    "def-sp-finite-intrinsic-open-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the ordinary exact functors, mapDerivedCategoryCompIso_hom_app_factors and mapDerivedCategoryNatIso_fac identify the localized compositor followed by the two ordinary computation maps with the direct computation map followed by Q of the termwise compositor. Naturality moves the realization maps across these computation maps; cancel their inverse pairs to obtain the claimed equation. The generic transport_fac lemma carries out these cancellations.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-representative-data",
+    "def-sp-finite-intrinsic-open-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit normalization and composition calculation in the proof of Tag 07A4, using the existing unit-normalized finite realizations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "The total tensor comparison for module pullback commutes with composition of inverse image functors",
+   "results": "8 hits: MorphismProperty.Over.pullbackComp formulas, Scheme.Modules.pseudofunctor_mapComp_inv_τl, Limits.pullbackComparison and Over.pullbackComp. These are scheme base-change or ordinary pullback compositors, not the specified signed tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical tensor pullback comparison is compatible with composition of pullback functors",
+   "results": "8 hits: PresheafOfModules.pullbackComp, Over pullback tensor component formulas, and ChosenPullbacksAlong.unit_pullbackComp_hom_assoc. No representative normalization or signed total-tensor composition theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Loogle SheafOfModules.pullbackComp additionally finds ordinary compositor associativity and unit laws only."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]omp|[Cc]omp.*[Tt]ensor in Mathlib; proEtaleCanonicalTensorPullback, cochain_composition_tensor and composition_representatives in the project",
+   "results": "Mathlib hits concern tensor algebra or Over pullback. Project proEtaleCanonicalTensorPullback supplies the ordinary-model representative square. FiniteDerivedComparisonNormalization and cochainPullbackTensorCoherence use a separate generalized-element-normalized presentation; no adapter identifies their comparison and compositor with the fixed finite realization here. The generic categorical square pasting proof is reused as private proved helpers.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate specialized square or chain equation. Latest blueprint sec-smooth-purity search has no additional exact statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorCompositionRepresentatives",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Finite pullback/tensor composition, ordinary total-complex calculation and representative normalization.",
+   "via": [
+    "lem-pur-finite-pullback-tensor-composition-representatives",
+    "lem-pur-finite-pullback-tensor-composition-representatives",
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorCompositorFactors",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorCompositorFactors.lean",
+  "declaration": "WeilConjectures.FinitePullbackTensorRep.compositor_fac",
+  "declarations": [
+   "WeilConjectures.FinitePullbackTensorRep.compositor_fac"
+  ],
+  "statement": "theorem compositor_fac {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)\n    (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) :\n    (sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom.app\n        (DerivedCategory.Q.obj P) ≫\n        (finiteDerivedPullback l E n h).map ((factors l E f n).hom.app P) ≫\n        (factors l E h n).hom.app ((pull l E f n).obj P) =\n      (factors l E (h ≫ f) n).hom.app P ≫\n        DerivedCategory.Q.map ((complexComp l E f h n).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222735-L-688410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222735-L-688410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

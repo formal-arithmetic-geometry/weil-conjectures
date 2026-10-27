@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-frobenius-adjacent-borel-reflection",
+ "kind": "statement",
+ "title": "A simple-root wall changes a Frobenius-kernel highest vector reversibly",
+ "statement": "Let $F$ be an algebraically closed field of prime characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected affine $F$-group scheme [def-sc-group-scheme]. Here semisimple means smooth, connected and of finite type with no nontrivial smooth connected solvable normal subgroup; solvable means that iterated commutator subgroup schemes eventually become trivial. Simply connected means that every surjective homomorphism from a semisimple group scheme with finite central kernel is an isomorphism, where finite means finite-dimensional coordinate algebra and central means commuting after every scalar extension. Fix a split maximal torus $T\\subseteq C\\subseteq S$ and a Borel subgroup $C$. A split torus is a product of copies of $\\mathbf G_m$, with $\\mathbf G_m(D)=D^\\times$; maximal means maximal under inclusion, and Borel means maximal smooth connected solvable closed subgroup. Write $U=R_u(C)$ for its largest smooth connected normal unipotent subgroup; unipotent means unipotent geometric matrices in a faithful representation. Use $C=U\\rtimes T$, the character lattice $X^*(T)=\\operatorname{Hom}(T,\\mathbf G_m)$, positive roots $\\Psi$ in $\\operatorname{Lie}(C)$, their simple-root base $\\Delta_C$, and coroots from [lem-sfb-reductive-borel-pair-structure]. The pairing is determined by $\\mu\\circ\\alpha^\\vee(t)=t^{\\langle\\mu,\\alpha^\\vee\\rangle}$. Choose $\\alpha\\in\\Delta_C$. Let $n_\\alpha\\in N_S(T)(F)$ represent the reflection $s_\\alpha(\\chi)=\\chi-\\langle\\chi,\\alpha^\\vee\\rangle\\alpha$ of [lem-sfb-reductive-rank-one-reflections], where $N_S(T)(F)$ consists of the elements conjugating $T$ to itself. Put $C'=n_\\alpha Cn_\\alpha^{-1}$. Its positive roots are $(\\Psi\\setminus\\{\\alpha\\})\\cup\\{-\\alpha\\}$.\n\nFix $r\\ge1$ and $q=p^r$. For every affine $F$-group $K$, put $K^{(q)}=\\operatorname{Spec}(F[K]\\otimes_{F,a\\mapsto a^q}F)$ and $K_r=\\ker(F^r_{K/F}:K\\to K^{(q)})$, where the relative Frobenius has coordinate map $c\\otimes a\\mapsto ac^q$ [def-weil-affine-spectrum, def-weil-pbc-module-tensor-product]. Assume $S_r$ is finite. For its closed subgroup kernels use $\\operatorname{Dist}(K_r)=\\operatorname{Hom}_F(F[K_r],F)$, with product $(ab)(f)=(a\\otimes b)(\\Delta_K f)$ and unit evaluation at the identity [def-sfb-affine-group-distribution-calculus]. Regard their distribution algebras as subalgebras of $A=\\operatorname{Dist}(S_r)$ by the duals of coordinate restriction. Choose arbitrary root parametrizations $x_{\\pm\\alpha}:\\mathbf G_a\\xrightarrow{\\sim}U_{\\pm\\alpha}$ [lem-sfb-reductive-root-subgroup-parametrizations], with $\\mathbf G_a(D)=(D,+)$, and put $d_{\\pm\\alpha}^{(j)}(f)=[t^j]x_{\\pm\\alpha}^*f$ for $0\\le j<q$ on the $r$th kernels.\n\nLet $\\mu\\in X^*(T)$ satisfy the integer equality $\\langle\\mu,\\alpha^\\vee\\rangle=q-1$. Let $V$ be any left unital $A$-module, meaning an $F$-vector space with a unital $F$-algebra map $A\\to\\operatorname{End}_F(V)$, and $w\\in V$. Extend a character of $T$ to a Borel containing $T$ by composing with its projection onto $T$ along its unipotent radical. Write $\\widetilde\\mu_C$ for this extension of $\\mu$ to $C$. Suppose\n$$b\\cdot w=b(\\widetilde\\mu_C|_{C_r})w\\qquad(b\\in\\operatorname{Dist}(C_r)).$$\nSet $\\mu'=\\mu-(q-1)\\alpha$ and $w'=d_{-\\alpha}^{(q-1)}w$, and let $\\widetilde{\\mu'}_{C'}$ be the extension of $\\mu'$ to $C'$. One has\n$$b'\\cdot w'=b'(\\widetilde{\\mu'}_{C'}|_{C'_r})w'\\qquad(b'\\in\\operatorname{Dist}(C'_r)),$$\nand there is $\\kappa\\in F^\\times$ such that\n$$d_\\alpha^{(q-1)}w'=\\kappa w.$$\nIn particular $w\\ne0$ implies $w'\\ne0$. No rational $S$-action on $V$ and no lower bound on $p$ are assumed; the assertion includes $p=2$ and every $r\\ge1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated finite-kernel adjacent-Borel lemma. Geometric inputs: review of SL2, 20.37--20.41, printed pp.422--423; rank-one homomorphism and reflection, Theorem 21.11, printed pp.428--430; root bases, C.21--C.22, printed p.612. Milne does not state this finite-kernel module lemma. WANTED: Jantzen, Representations of Algebraic Groups (2003), II.3.18 and II.9, for the infinitesimal intertwining calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-rank-one-reflections",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-affine-group-distribution-calculus",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sfb-affine-frobenius-kernel-distributions"
+ ],
+ "proof": [
+  {
+   "text": "Put $m=q-1$. We may use points of the finite group scheme $S_r$ on $V$ without assuming a rational $S$-action. Indeed, choose an $F$-basis $(c_i)$ of $F[S_r]$ and its dual basis $(a_i)$ in $A$. Define $\\rho(v)=\\sum_i(a_i v)\\otimes c_i$. Evaluating the two coassociativity expressions against $a\\otimes b$ gives respectively $(ab)v$ and $a(bv)$; evaluating the counit gives $1_Av=v$. Thus this is a coaction, independent of the basis, and gives an action of $S_r(D)$ on $V\\otimes_F D$ for every commutative $F$-algebra $D$. For a closed subgroup $K\\subseteq S_r$, the equality $bv=b(\\chi)v$ for all $b\\in F[K]^*$ is equivalent, by dual-basis evaluation, to $\\rho_K(v)=v\\otimes\\chi$, hence to $kv=\\chi(k)v$ on every test algebra. In particular the hypothesis makes $w$ fixed by $U_r$ and a $T_r$-eigenvector of character $\\mu$.",
+   "uses": [
+    "def-sfb-affine-group-distribution-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 10, distributions and coordinate coactions; agent finite-dimensional dual-basis calculation, using the convolution and coaction definitions in def-sfb-affine-group-distribution-calculus."
+   }
+  },
+  {
+   "text": "Choose the homomorphism $v_\\alpha:\\operatorname{SL}_2\\to S$ of the cited opposite-root parametrization node. Write $y_\\pm(t)=v_\\alpha(I_2+tE_{12/21})$ and $h(z)=\\alpha^\\vee(z)$. These give compatible coordinates on $U_{\\pm\\alpha}$ and satisfy $v_\\alpha(\\operatorname{diag}(z,z^{-1}))=h(z)$. The given coordinates have the form $x_\\pm(t)=y_\\pm(a_\\pm t)$ for $a_\\pm\\in F^\\times$: composing two isomorphisms with $\\mathbf G_a$ gives a polynomial automorphism of the affine line with polynomial inverse, so its degree is one, and its constant term is zero. Set $E_j(f)=[t^j]y_+^*f$ and $F_j(f)=[t^j]y_-^*f$, $0\\le j<q$. Then $d_{\\alpha}^{(j)}=a_+^jE_j$ and $d_{-\\alpha}^{(j)}=a_-^jF_j$. Every group homomorphism commutes with relative Frobenius: on coordinate rings this is just $f^*(c^q)=f^*(c)^q$. Thus $v_\\alpha$ restricts to $\\operatorname{SL}_{2,r}\\to S_r$, so all subsequent truncated matrix calculations act on the module of step 1.",
+   "uses": [
+    "lem-sfb-opposite-root-sl2-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b)--(e), printed pp.429--430, and 21.24, p.432; agent coordinate rescaling and Frobenius naturality."
+   }
+  },
+  {
+   "text": "Apply the standard-parabolic Levi statement with $I=\\{\\alpha\\}$. Its Levi $L$ has roots $\\{\\alpha,-\\alpha\\}$, and $P=R\\rtimes L$, $C=R\\rtimes C_L$, where $R$ is normal in $P$ and $C_L=C\\cap L$. The rank-one reflection statement gives a representative in $L$ of $s_\\alpha$. Any chosen $n_\\alpha$ differs from this representative by an element of $T(F)$; hence $n_\\alpha\\in L(F)$ and it normalizes $R$. The Borel-pair statement and the root-product coordinates applied to the reductive group $L$ give $C_L=U_\\alpha\\rtimes T$; there is only one positive root. Its conjugate has the single positive root $-\\alpha$, so $n_\\alpha C_Ln_\\alpha^{-1}=U_{-\\alpha}\\rtimes T$, by the same two statements. Consequently $C'=R\\rtimes(U_{-\\alpha}\\rtimes T)$. These are identities of group schemes, not just of their $F$-points. They restrict to Frobenius kernels: Frobenius commutes with multiplication, and under each product isomorphism its kernel is the product of the kernels of the factors. In particular $C'_r$ has underlying scheme $R_r\\times U_{-\\alpha,r}\\times T_r$. Conjugation by $n_\\alpha$ carries the $\\beta$-weight space of $\\operatorname{Lie}(C)$ to the $s_\\alpha\\beta$-weight space, so the positive roots of $C'$ are $s_\\alpha(\\Psi)$. Here $s_\\alpha\\alpha=-\\alpha$; a root $\\beta\\in\\Psi\\setminus\\{\\alpha\\}$ is not a multiple of $\\alpha$, since $\\mathbf Q\\alpha\\cap\\Phi=\\{\\pm\\alpha\\}$ by the rank-one reflection statement, so it has a positive coefficient at a simple root other than $\\alpha$. The root $s_\\alpha\\beta=\\beta-\\langle\\beta,\\alpha^\\vee\\rangle\\alpha$ keeps that coefficient, hence is positive by the same-sign property of the Borel-pair statement. As $s_\\alpha$ is injective, $s_\\alpha(\\Psi)=(\\Psi\\setminus\\{\\alpha\\})\\cup\\{-\\alpha\\}$, as asserted in the statement.",
+   "uses": [
+    "lem-sfb-standard-parabolic-levi-charts",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.90 and Theorem 21.91, printed pp.453--454 (Levi and radical); Theorem 21.11(d), p.429 (reflection in the rank-one centralizer); Theorem 21.68(a),(b), p.445 (Borel product)."
+   }
+  },
+  {
+   "text": "Let $v_0=F_mw$, so $w'=a_-^m v_0$. Since $R\\subseteq U$, step 1 says $w$ is fixed by $R_r$. Normality of $R$ in $P$ implies that $U_{-\\alpha,r}$ normalizes $R_r$ (conjugation commutes with Frobenius). For any test algebra $D$, $g\\in U_{-\\alpha,r}(D)$ and $z\\in R_r(D)$, one has $z(gw)=g((g^{-1}zg)w)=gw$. Use the universal point $g=y_-(t)$ over $F[t]/(t^q)$, and compare the coefficient of $t^m$. This gives $zv_0=v_0$ after every scalar extension: coefficients are compared over $D[t]/(t^q)$. Thus $R_r$ fixes $v_0$ and $w'$. This explicitly supplies the invariant-subspace argument for finite kernels.",
+   "uses": [
+    "lem-sfb-standard-parabolic-levi-charts",
+    "def-sfb-affine-group-distribution-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.91, printed pp.453--454, normality in the Levi semidirect product; agent three-factor conjugation identity and coefficient extraction."
+   }
+  },
+  {
+   "text": "For any test algebra $D$ and $z\\in T_r(D)$ the root conjugation formula gives $z y_-(t)z^{-1}=y_-(\\alpha(z)^{-1}t)$. Apply this identity to $w$, use $zw=\\mu(z)w$, and compare coefficients in $D[t]/(t^q)$. It yields $zv_0=\\mu(z)\\alpha(z)^{-m}v_0=\\mu'(z)v_0$, and the same holds for $w'$. This uses the full characters on $T_r$, including its nonreduced points, rather than differentials of weights.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.19, formula (135), printed p.431; agent coefficient extraction in the negative-root coordinate."
+   }
+  },
+  {
+   "text": "The additive-group identity $y_-(s)y_-(t)=y_-(s+t)$ can be evaluated over $F[s,t]/(s^q,t^q)$, since $(s+t)^q=s^q+t^q=0$. By the definition of $F_j$, its action on $w$ is $\\sum_{j=0}^{m}(s+t)^j F_jw$. The coefficient of $t^m$ is exactly $F_mw$ and has no $s$-dependence: terms with $j<m$ have too small degree and there is no term with $j>m$. On the left the same coefficient is $y_-(s)v_0$. Therefore $U_{-\\alpha,r}$ fixes $v_0$ and $w'$.",
+   "uses": [
+    "def-sfb-affine-group-distribution-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 10, coordinate coactions; agent calculation in the coordinate algebra of the additive Frobenius kernel, using the root coordinates of step 2."
+   }
+  },
+  {
+   "text": "By the product isomorphism in step 3, every $D$-point of $C'_r$, for every $F$-algebra $D$, has the form $z_-ut$ with $z_-\\in R_r(D)$, $u\\in U_{-\\alpha,r}(D)$ and $t\\in T_r(D)$. Steps 4--6 give $(z_-ut)w'=\\mu'(t)w'$. This is the extended character $\\widetilde{\\mu'}_{C'}$ evaluated on this point: $R_u(C')=n_\\alpha Un_\\alpha^{-1}$ contains $R=n_\\alpha Rn_\\alpha^{-1}$ and $U_{-\\alpha}=n_\\alpha U_\\alpha n_\\alpha^{-1}$ (step 3), so the projection $C'=R_u(C')\\rtimes T\\to T$ of the Borel-pair statement sends $z_-ut$ to $t$. Equivalently, evaluating at the universal point in $D=F[C'_r]$ gives $\\rho_{C'_r}(w')=w'\\otimes\\widetilde{\\mu'}_{C'}$. Apply any $b'\\in F[C'_r]^*$ to the second factor to obtain the required distribution eigenvector equality.",
+   "uses": [
+    "def-sfb-affine-group-distribution-calculus",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 10, coordinate coactions; agent application of the finite duality of step 1 to the group-scheme product from step 3."
+   }
+  },
+  {
+   "text": "For recovery work over $D=F[u,v]/(u^q,v^q)$ and put $a=1+uv$. The element $a$ is a unit and $a^q=1$. Direct multiplication of determinant-one $2\\times2$ matrices gives, in the compatible coordinates of step 2,\n$$y_+(u)y_-(v)=y_-(v/a)h(a)y_+(u/a).$$\nAll factors lie in the corresponding $r$th Frobenius kernels: $(u/a)^q=(v/a)^q=0$ and $a^q=1$. Since $U_{\\alpha,r}$ fixes $w$ and $h(a)w=a^{\\langle\\mu,\\alpha^\\vee\\rangle}w=a^m w$, applying the identity to $w$ gives\n$$\\sum_{i,j=0}^{m}u^iv^j E_iF_jw=\\sum_{j=0}^{m}v^j(1+uv)^{m-j}F_jw.$$\nThe coefficient of $u^mv^m$ on the left is $E_mF_mw$. On the right a term with $j>0$ has $u$-degree at most $m-j<m$; the $j=0$ term contributes $[u^mv^m](1+uv)^m w=w$. Hence $E_mF_mw=w$. This is a polynomial calculation with integer coefficients reduced to $F$; it divides by no factorial and uses no assertion about global $S$-modules.",
+   "uses": [
+    "lem-sfb-opposite-root-sl2-parametrizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Review of SL2, 20.37--20.41, printed pp.422--423, and Theorem 21.11, pp.429--430; agent explicit Gauss matrix multiplication and coefficient calculation."
+   }
+  },
+  {
+   "text": "Finally step 2 and $E_mF_mw=w$ imply\n$$d_\\alpha^{(m)}w'=a_+^ma_-^m E_mF_mw=(a_+a_-)^m w.$$\nTake $\\kappa=(a_+a_-)^m\\in F^\\times$. If $w'=0$, the displayed equality forces $w=0$. This also covers $w=0$ without choosing a scalar depending on $w$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent scalar substitution following the compatible root coordinates and the explicit coefficient calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-affine-group-distribution-calculus",
+  "lem-sfb-opposite-root-sl2-parametrizations",
+  "lem-sfb-standard-parabolic-levi-charts",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.11; 21.19; Theorem 21.68; Proposition 21.90 and Theorem 21.91 for the geometric inputs. Agent proof by finite dual-basis coactions and an explicit truncated SL2 Gauss calculation; no claim that Milne states the finite-kernel lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FrobeniusKernel|baby.?Verma|Dist.*Borel|adjacent.*Borel",
+   "results": "{\"t\": \"2026-10-24T10:56:27Z\", \"tool\": \"grep\", \"query\": \"FrobeniusKernel|baby.?Verma|Dist.*Borel|adjacent.*Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Probability/Kernel/IonescuTulcea/Traj.lean\", \"Mathlib/Probability/Kernel/CondDistrib.lean\", \"Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean\", \"Mathlib/MeasureTheory/Measure/LevyProkhorovMetric.lean\", \"Mathlib/MeasureTheory/Measure/LevyProkhorovMetric.lean\", \"Mathlib/MeasureTheory/Function/ConvergenceInDistribution.lean\", \"Mathlib/MeasureTheory/Function/ConvergenceInDistribution.lean\"], \"digest\": \"31d1632525968efc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern measure-theoretic Borel distributions, not algebraic-group distribution algebras"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a positive characteristic algebraic group representation restricted to a Frobenius kernel a highest weight vector of simple coroot weight p^r-1 is carried to the reflected highest weight by the top negative divided power",
+   "results": "{\"t\": \"2026-10-24T10:56:27Z\", \"tool\": \"leansearch\", \"query\": \"In a positive characteristic algebraic group representation restricted to a Frobenius kernel a highest weight vector of simple coroot weight p^r-1 is carried to the reflected highest weight by the top negative divided power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot_isNonZero\", \"LinearMap.frobenius\", \"LieAlgebra.IsKilling.reflectRoot.congr_simp\", \"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.Equiv.reflection_weightEquiv\", \"RootPairing.reflection_apply\", \"RootPairing.reflection\"], \"digest\": \"eb84c4058d6ffe3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieModule\", \"Weight\"",
+   "results": "{\"t\": \"2026-10-24T10:56:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"LieModule\\\", \\\"Weight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieModule.Weight.zero_apply\", \"LieModule.Weight\", \"LieModule.Weight.coe_zero\", \"LieModule.weightSpace\", \"LieModule.genWeightSpace\", \"LieModule.genWeightSpaceOf\", \"LieModule.Weight.IsNonZero\", \"LieModule.Weight.IsZero\"], \"digest\": \"9cf373de015fb98c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one intertwining operators between baby Verma modules for two Borel subgroups related by a simple reflection are invertible at a weight whose coroot coordinate is p^r-1",
+   "results": "{\"t\": \"2026-10-24T10:56:29Z\", \"tool\": \"leanfinder\", \"query\": \"Rank one intertwining operators between baby Verma modules for two Borel subgroups related by a simple reflection are invertible at a weight whose coroot coordinate is p^r-1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"LieModule.chainBot\", \"LieModule.chainTop\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\"], \"digest\": \"07235dacbb0daa2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A top root divided power changes a highest vector to a highest vector for the adjacent Borel in a Frobenius kernel module and the opposite divided power recovers it when the coroot weight is p to the r minus one",
+   "results": "{\"t\": \"2026-10-24T10:56:30Z\", \"tool\": \"leanfinder\", \"query\": \"A top root divided power changes a highest vector to a highest vector for the adjacent Borel in a Frobenius kernel module and the opposite divided power recovers it when the coroot weight is p to the r minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.chainTop\", \"LieModule.chainTopCoeff\", \"LieModule.chainBotCoeff\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add\", \"LieModule.chainTopCoeff_add_one\", \"LieModule.coe_chainTop'\", \"LieModule.coe_chainTop\"], \"digest\": \"a49410ee9733a330\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "grep",
+   "query": "FrobeniusKernel|hyperalgebra|Dist.*SL2|dividedPower.*(comm|mul)|normalOrder",
+   "results": "{\"t\": \"2026-10-24T11:27:20Z\", \"tool\": \"grep\", \"query\": \"FrobeniusKernel|hyperalgebra|Dist.*SL2|dividedPower.*(comm|mul)|normalOrder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DividedPowerAlgebra/Init.lean\", \"Mathlib/RingTheory/DividedPowerAlgebra/Init.lean\", \"Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean\", \"Mathlib/RingTheory/DividedPowers/RatAlgebra.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"Mathlib/RingTheory/DividedPowers/Basic.lean\"], \"digest\": \"8cad0dac1965415d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern commutative divided-power ideals, characteristic-zero Lie weights or abstract root pairings, or measure-theoretic Borel distributions; none states the finite group-scheme highest-vector change and recovery"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalEnvelopingAlgebra\", \"sl2\"",
+   "results": "{\"t\": \"2026-10-24T11:27:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversalEnvelopingAlgebra\\\", \\\"sl2\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern commutative divided-power ideals, characteristic-zero Lie weights or abstract root pairings, or measure-theoretic Borel distributions; none states the finite group-scheme highest-vector change and recovery"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the rth Frobenius kernel of SL2 the product of positive and negative divided powers is a sum of negative divided powers times binomial torus distributions times positive divided powers",
+   "results": "{\"t\": \"2026-10-24T11:27:23Z\", \"tool\": \"leanfinder\", \"query\": \"For the rth Frobenius kernel of SL2 the product of positive and negative divided powers is a sum of negative divided powers times binomial torus distributions times positive divided powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DividedPowers.OfInvertibleFactorial.mul_dpow\", \"DividedPowers.OfInvertibleFactorial.dpow_mul_of_add_lt\", \"DividedPowers.OfInvertibleFactorial.dpow_add_of_lt\", \"DividedPowers.mul_dpow\", \"PreTilt.coeff_frobenius\", \"PreTilt.coeff_iterate_frobenius\", \"DividedPowers.OfInvertibleFactorial.dpow_add\", \"DividedPowers.OfInvertibleFactorial.dpow_comp_of_mul_lt\"], \"digest\": \"4ef3481d1a5cc3d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern commutative divided-power ideals, characteristic-zero Lie weights or abstract root pairings, or measure-theoretic Borel distributions; none states the finite group-scheme highest-vector change and recovery"
+  },
+  {
+   "tool": "grep",
+   "query": "FrobeniusKernel|baby.?Verma|Dist.*Borel|adjacent.*Borel",
+   "results": "{\"t\": \"2026-10-24T11:28:14Z\", \"tool\": \"grep\", \"query\": \"FrobeniusKernel|baby.?Verma|Dist.*Borel|adjacent.*Borel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Probability/Kernel/IonescuTulcea/Traj.lean\", \"Mathlib/Probability/Kernel/CondDistrib.lean\", \"Mathlib/MeasureTheory/Function/ConvergenceInDistribution.lean\", \"Mathlib/MeasureTheory/Function/ConvergenceInDistribution.lean\", \"Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean\", \"Mathlib/MeasureTheory/Measure/LevyProkhorovMetric.lean\", \"Mathlib/MeasureTheory/Measure/LevyProkhorovMetric.lean\"], \"digest\": \"2c72ea246354c024\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern commutative divided-power ideals, characteristic-zero Lie weights or abstract root pairings, or measure-theoretic Borel distributions; none states the finite group-scheme highest-vector change and recovery"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A highest vector of coroot weight p^r minus one for a Frobenius kernel becomes a highest vector for the adjacent Borel under the top negative root divided power and the positive divided power recovers it",
+   "results": "{\"t\": \"2026-10-24T11:28:14Z\", \"tool\": \"leansearch\", \"query\": \"A highest vector of coroot weight p^r minus one for a Frobenius kernel becomes a highest vector for the adjacent Borel under the top negative root divided power and the positive divided power recovers it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.coroot\", \"LieAlgebra.IsKilling.coroot_neg\", \"LieAlgebra.IsKilling.coroot_mem_corootSpace\", \"DividedPowers.DPMorphism.ker\", \"LieAlgebra.IsKilling.reflectRoot\", \"DividedPowers.ofInjective\", \"DividedPowers.ofRingEquiv\", \"RootPairing.Base.toCoweightBasis_repr_coroot\"], \"digest\": \"5d2e228b9e338400\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern commutative divided-power ideals, characteristic-zero Lie weights or abstract root pairings, or measure-theoretic Borel distributions; none states the finite group-scheme highest-vector change and recovery"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing Borel subgroup by a simple reflection on highest weight vectors in a finite Frobenius kernel representation via root subgroup coefficient operators",
+   "results": "{\"t\": \"2026-10-24T11:28:15Z\", \"tool\": \"leanfinder\", \"query\": \"Changing Borel subgroup by a simple reflection on highest weight vectors in a finite Frobenius kernel representation via root subgroup coefficient operators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"LieModule.coe_chainTop'\"], \"digest\": \"61248d1067e0e21b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern commutative divided-power ideals, characteristic-zero Lie weights or abstract root pairings, or measure-theoretic Borel distributions; none states the finite group-scheme highest-vector change and recovery"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-steinberg-top-distribution-recovery",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18, simplicity of the infinitesimal induced module at (p^r-1)rho, before II.3.19 and Kempf II.4.5; compatible G_rT notation in II.9.1. Use the infinitesimal argument, not global induced-module dimensions or Weyl filtrations. Supporting infinitesimal input: Top positive distributions recover the Steinberg highest vector. Supporting local calculation: move a highest vector across one simple-root wall, then undo that move by the opposite top divided power.",
+   "via": [
+    "lem-sfb-steinberg-top-distribution-recovery",
+    "lem-sfb-steinberg-infinitesimal-induced-simple",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-frobenius-adjacent-borel-reflection",
+  "worker": "stage1",
+  "summary": "Retained the statement and all its hypotheses. Supplied a nine-step proof using existing opposite-root SL2 parametrizations, standard-parabolic Levi structure and Borel root coordinates. The finite-dual construction works for every distribution module. An explicit Gauss coefficient calculation proves recovery, including p=2 and r>1; arbitrary parameter scalings give the nonzero scalar. No new nodes are needed.",
+  "blueprint": "The inherited from.place records the supporting local calculation in the infinitesimal Steinberg argument below det-thm-sf-ctf-stability-direct-images, proof (3). Steps 3--7 perform the change across one simple wall; steps 2,8,9 undo it by the opposite top coefficient. Read the latest blueprint direct-images proof (3); its node route is unchanged. The inherited ancestry is broken at Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs ancestor returns null; its existing from.node and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NW-359f0f43d",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-359f0f43d (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged against clones/live and side-live, and the proof has 9 steps. There are no new nodes and this is not a re-split. Source checks: each cited statement says what its step takes. In particular the opposite-root SL2 node gives v_alpha with x_+ to U_alpha, x_- to U_-alpha and diag to alpha-coroot (Milne 21.24, p.432). The Levi-charts node gives R x| L = P and R x| B_I = C with L_I = C(T_alpha) = G_alpha of the rank-one node (Milne 21.90/21.91, pp.453-454). The root-subgroup node gives conjugation formula (135) for all T(A), the one in Milne 21.19. Recomputed checks: the dual-basis coaction (coassociativity is equivalent to associativity, and the point action is a left action); the Gauss identity y-(v/a)h(a)y+(u/a) = [[1+uv,u],[v,1]] with a^q=1 and (u/a)^q=0; the coefficient comparisons over D[t]/(t^q) and F[s,t]/(s^q,t^q); the u^m v^m comparison giving E_m F_m w = w; and kappa = (a+a-)^m. Small cases p=2 (m=1, via [e,f]=h) and q=3 agree. No duplicate exists (sl2-lifted-root-gauss, unipotent socle, steinberg-induced-simple, sl2-diagonal-kernel do not state it), and there is no cycle. Batch 5: the newly cited opposite-root-sl2, standard-parabolic-levi-charts and borel-root-product-coordinates add no sec-trace-formula or sec-poincare-duality node beyond the closure the unchanged base stmt_deps already reach, and no thm-* of those chapters is reached. The flagged lem-trf-fg-torsionfree-group-free, lem-trf-smooth-fpqc-base-descent and lem-trf-fppf-covering-base-change are general Mathlib leaves outside both assumptions, so accepted. FIX (proof only): (1) step 3 now proves the asserted positive roots (Psi minus alpha) union {-alpha} of C' via Ad(n_alpha), Q alpha cap Phi = {±alpha} (rank-one node) and the same-sign property (borel-pair node). (2) Step 7 now justifies that the extended character of mu' sends z_- u t to mu'(t), since R and U_-alpha lie in R_u(C') = n U n^-1; borel-pair is added to the step's uses and was already in proof_deps. Maintainer note: blueprint from.node is null, inherited from the base node because its ancestry is broken at Sheaf.SixFunctors.CtfStabilityDirectImages.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FrobeniusAdjacentBorelReflection",
+  "declaration": "AlgebraicGeometry.BorelDistributions.frobenius_adjacent_borel_reflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FrobeniusAdjacentBorelReflection.lean",
+  "statement": "theorem frobenius_adjacent_borel_reflection (F : Type u) [Field F] [IsAlgClosed F] (S T B : Grp (Over (Spec (.of F)))) [IsAffine S.X.left] [IsAffine B.X.left] (U : Scheme.{u}) [U.Over (Spec (.of F))] [GrpObj (U.asOver (Spec (.of F)))] [IsAffine U] (p : ℕ) [Fact p.Prime] [CharP F p] (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (jT : T ⟶ B) (iU : Grp.mk (U.asOver (Spec (.of F))) ⟶ B) (hTB : jT ≫ iB = iT) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsBorelGroupScheme iB.hom.hom) (hU : IsClosedSubgroupScheme iU.hom.hom ∧ IsNormalSubgroupScheme iU.hom.hom ∧ Smooth (U ↘ Spec (.of F)) ∧ ConnectedSpace U ∧ SolvableGroupStructure.IsUnipotent (Grp.mk (U.asOver (Spec (.of F)))) ∧ ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ Grp.mk (U.asOver (Spec (.of F))), f ≫ iU = iN) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] [ModObj T.X S.X] [ModObj T.X B.X] (hconjS : γ[T.X,S.X] = (iT.hom.hom ⊗ₘ 𝟙 S.X) ≫ GrpObj.conj S.X) (hconjB : γ[T.X,B.X] = (jT.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) [P.IsReduced] (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ TorusCharacterTangent.weightSpace T S χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ TorusCharacterTangent.weightSpace T B α.val.toMul ≠ ⊥) (πT : B ⟶ T) (hπT : jT ≫ πT = 𝟙 T) (hker : IsPullback iU.hom.hom (toUnit (U.asOver (Spec (.of F)))) πT.hom.hom η[T.X]) (hsd : IsIso ((fst (U.asOver (Spec (.of F))) T.X ≫ iU.hom.hom) * (snd (U.asOver (Spec (.of F))) T.X ≫ jT.hom.hom))) (α : b.support) (r : ℕ) (hr : 1 ≤ r) (n : RankOneRoots.normalizer iT) (σ : T ≅ T) (hσ : σ.hom.hom.hom ≫ iT.hom.hom = (toUnit T.X ≫ n.val) * iT.hom.hom * (toUnit T.X ≫ n.val)⁻¹) (hreflection : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), σ.inv.hom.hom ≫ χ.toMul.hom.hom = χ.toMul.hom.hom / α.val.val.toMul.hom.hom ^ (P.toLinearMap χ (P.coroot α.val))) (B' : Grp (Over (Spec (.of F)))) [IsAffine B'.X.left] (iB' : B' ⟶ S) (e : B ≅ B') (he : e.hom.hom.hom ≫ iB'.hom.hom = (toUnit B.X ≫ n.val) * iB.hom.hom * (toUnit B.X ≫ n.val)⁻¹) [ModObj T.X B'.X] (hconjB' : γ[T.X,B'.X] = ((σ.inv ≫ jT ≫ e.hom).hom.hom ⊗ₘ 𝟙 B'.X) ≫ GrpObj.conj B'.X) (xp xm : Grp.mk (StandardGroupSchemes.additive F) ⟶ S) (hxp : IsClosedSubgroupScheme xp.hom.hom ∧ TorusCharacterTangent.IsStable T S xp ∧ (GrpObj.differential xp.hom.hom).toLinearMap.range = TorusCharacterTangent.weightSpace T S α.val.val.toMul) (hxm : IsClosedSubgroupScheme xm.hom.hom ∧ TorusCharacterTangent.IsStable T S xm ∧ (GrpObj.differential xm.hom.hom).toLinearMap.range = TorusCharacterTangent.weightSpace T S (-α.val.val).toMul) (Sr Br Br' : Grp (Over (Spec (.of F)))) [IsAffine Sr.X.left] [IsAffine Br.X.left] [IsAffine Br'.X.left] (iSr : Sr ⟶ S) (iBr : Br ⟶ B) (iBr' : Br' ⟶ B') (hSr : IsFrobeniusKernel iSr (p ^ r)) (hBr : IsFrobeniusKernel iBr (p ^ r)) (hBr' : IsFrobeniusKernel iBr' (p ^ r)) [FiniteDimensional F (RationalHighestWeight.coordinateAlgebra Sr)] (kB : Br ⟶ Sr) (kB' : Br' ⟶ Sr) (hkB : kB ≫ iSr = iBr ≫ iB) (hkB' : kB' ≫ iSr = iBr' ≫ iB') (dp dm : fullDual (.of F) Sr.X.left) (hdp : push iSr dp = dividedPower (.of F) S.X.left xp.hom.hom (p ^ r - 1)) (hdm : push iSr dm = dividedPower (.of F) S.X.left xm.hom.hom (p ^ r - 1)) (mu : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hmu : P.toLinearMap mu (P.coroot α.val) = (p ^ r : ℕ) - (1 : ℤ)) (V : Type v) [AddCommGroup V] [Module F V] (ρ : fullDual (.of F) Sr.X.left →ₐ[F] Module.End F V) (w : V) (hw : ∀ z : fullDual (.of F) Br.X.left, ρ (push kB z) w = z ((RationalHighestWeight.coordinateMap iBr) (RationalHighestWeight.characterElement (πT ≫ mu.toMul))) • w) : (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), (χ ≠ 0 ∧ TorusCharacterTangent.weightSpace T B' χ.toMul ≠ ⊥) ↔ (∃ β : Φ, b.IsPos β ∧ β ≠ α.val ∧ χ = β.val) ∨ χ = -α.val.val) ∧ (∀ z : fullDual (.of F) Br'.X.left, ρ (push kB' z) (ρ dm w) = z ((RationalHighestWeight.coordinateMap iBr') (RationalHighestWeight.characterElement (e.inv ≫ πT ≫ σ.hom ≫ (mu - (p ^ r - 1) • α.val.val).toMul))) • (ρ dm w)) ∧ (∃ κ : Fˣ, ρ dp (ρ dm w) = (κ : F) • w) ∧ (w ≠ 0 → ρ dm w ≠ 0)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7db9c0697",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read the item node, all stmt_deps (borel-pair, rank-one reflections, root-subgroup parametrizations, distribution calculus, the new def-sfb-affine-frobenius-kernel-distributions), the delivered modules and report. Item node changes only stmt_deps(+new def node) and lean vs side-live. Clause-by-clause match: hsc is the form of the merged simplyConnected_character_lattice; T/B/U/root datum/pairing/positivity verbatim from reductive_borel_pair_structure; n in RankOneRoots.normalizer with sigma=Int(n) and reflection formula as in reductive_rankOne_reflections; B' presented by e with he=n iB n^-1 and torus inclusion sigma.inv>>jT>>e composing to iT, transported projection e.inv>>piT>>sigma (identity on that torus, kernel nUn^-1), so the extended mu' character is correct; xp/xm arbitrary (closed, T-stable, tangent image = root space, identified with U_{±α} by root-subgroup uniqueness); dp/dm pinned by push to dividedPower q-1 (unique by surjective restriction, existence checked); integer hmu; V arbitrary universe, unital algebra map, w may be 0; all four conclusions present (positive roots of C', C'_r eigen identity, kappa in F^x, nonvanishing). New definitions not hollow: J_q = span{c^q : counit c = 0} is the relative-Frobenius kernel ideal (recomputed), IsFrobeniusKernel = closed subgroup with that coordinate kernel, push = precomposition with coordinateMap; source/blueprint docstrings present. No duplicate in Sheaf/WeilConjectures/Mathlib/slopmaster2/DAG (only the alpha_p height-one case). One sorry, explicit universes, nine-step proof docstring, both report sections present. No compile run (no fix)."
+ }
+}

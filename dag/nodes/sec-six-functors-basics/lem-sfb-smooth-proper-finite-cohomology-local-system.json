@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-smooth-proper-finite-cohomology-local-system",
+ "kind": "statement",
+ "title": "Smooth proper finite-coefficient cohomology is locally constant",
+ "statement": "Let $f:X\\to S$ be a smooth proper morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism], and let $\\ell$ be a prime invertible on $S$. Put $\\mathbf F_\\ell=\\mathbf Z/\\ell\\mathbf Z$. Let $F$ be a sheaf of $\\mathbf F_\\ell$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category] which is etale locally isomorphic to the constant sheaf of a finite-dimensional $\\mathbf F_\\ell$-vector space [def-weil-pbc-constant-sheaf]. For every integer $q\\geq0$, $R^qf_*F$ is etale locally isomorphic to the constant sheaf of a finite-dimensional $\\mathbf F_\\ell$-vector space. Higher direct images have the convention of [def-weil-pbc-direct-image]. No Noetherian hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GLI, proposition-loc-cst-torsion, specialized to the Noetherian coefficient ring F_ell; includes the non-Noetherian-base reduction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Convert the given module-linear constant finite-module charts into IsFiniteLocallyConstantSheaf using finite_locally_constant_module_values_iff. Inverse image preserves this property. Proper base change, the Plus homology/inverse-image comparison, and the single-functor comparison identify the restriction of the higher direct image to an affine base open with the corresponding higher direct image after base change. These are the already proved module-valued APIs in SmoothProperLocallyConstant and UpperLowerStarCoherence. Thus it suffices to prove the affine-base assertion; finite local constancy then glues by IsFiniteLocallyConstantSheaf.of_openCover.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "det-properbasechange-modules",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over an arbitrary affine base, properness gives a quasi-compact quasi-separated source. The trivial one-stratum partition makes F constructible, and boundedConstructible_singleFunctor_obj shows that F[0] has constructible cohomology. Apply compact-support constructibility to any compactification of f. Since f is proper, rightDerivedLowerShriekIsoRightDerivedLowerStar identifies this compact-support object with Rf_*F[0]. The proved constructibility comparison and the homologyRightDerivedLowerStarSingleIsoPlus comparison therefore show that G = H^q(Rf_*F[0]) is constructible.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-etale-compactification-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Stalkwise invertibility of ell gives invertibility in global sections by the ringed-space unit criterion. The proved module-valued smooth-proper specialization API isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_isProper, followed by bijective_cospecializationMap_of_isIso_globalSectionsUpperStarMap, makes every strict-localization cospecialization map of G bijective. This is the module-valued form of smooth proper prime-to-characteristic specialization, avoiding a detour through underlying abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the constructible cospecialization criterion to G over the arbitrary affine base. It supplies finite local constancy directly, so no Noetherian model or local-system descent is needed. The affine-cover reduction in step 1 proves the assertion on S. Finally finite_locally_constant_module_values_iff supplies constant finite module models; over the finite ring ULift (ZMod ell), Module.Finite and finiteness of the underlying set give the required conversions.",
+   "uses": [
+    "lem-sfb-constructible-cospecialization-local-system",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "det-properbasechange-modules",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+  "lem-sfb-constructible-cospecialization-local-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W9",
+  "date": "2026-10-23",
+  "reason": "Compiled proof using existing module-valued smooth proper specialization and compact-support constructibility. Generalize the constructible-topology criterion, whose proof needs no Noetherian base, and thereby omit the Noetherian approximation part of Stacks 0GLI. No unit-level route changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper smooth pushforward of finite locally constant etale sheaves with invertible torsion is locally constant",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \": Sheaf K A ⥤ Sheaf J A\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, this functor maps a sheaf $ \\\\mathcal{F} $ on $ \\\\mathcal{D} $ (with respect to\"}\n  {\"name\": \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"{F : X.Presheaf C} (h : F.IsSheaf) : (f _* F).IsSheaf\", \"doc\": \"Given a continuous map $ f : X \\to Y $ and a sheaf $ F $ on $ X $, the pushforward sheaf $ f_*F $ on $ Y $ satisfies the sheaf condition.\"}\n  {\"name\": \"TopCat.Sheaf.pushforward\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : X.Sheaf C ⥤ Y.Sheaf C\", \"doc\": \"The pushforward functor induced by a continuous map $ f: X \\to Y $, which maps the category of sheaves on $ X $ to the category of sheaves on $ Y $ by taking each sheaf on $ X $ to its direct image she\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": SheafOfModules.{v} R ⥤ SheafOfModules.{v} S\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor_map_val\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : CompHausLike.HasExplicitFiniteCoproducts P] [inst_1 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  {X Y : Type (max u w)} (f :\", \"doc\": \"Given a predicate $P$ on topological spaces with explicit finite coproducts and pullbacks, and assuming every effective epimorphism in the category of $P$-spaces is surjective, for any morphism $f : X\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"TopCat.Sheaf.pushforward_obj_val\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) (F : X.Sheaf C) : ((pushforward C f).obj F).1 = f _* F.1\", \"doc\": \"For a continuous map $ f: X \\to Y $ and a sheaf $ F $ on $ X $, the underlying presheaf of the pushforward sheaf $ f_*F $ is equal to the pushforward of the underlying presheaf of $ F $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, condensed locally constant functors, finite flat scheme rank or etale morphisms, not local constancy of higher etale direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyConstant\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatRank\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.IsFinite f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : IsLocallyConstant (AlgebraicGeometry.Scheme.Hom.finrank f)\", \"doc\": \"The rank of a finite flat locally finitely presented morphism is locally constant.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, condensed locally constant functors, finite flat scheme rank or etale morphisms, not local constancy of higher etale direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*[Hh]igher|[Hh]igher.*locallyConstant|IsLocallyConstant.*[Dd]irect|[Dd]irect.*IsLocallyConstant",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, condensed locally constant functors, finite flat scheme rank or etale morphisms, not local constancy of higher etale direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a finite locally constant sheaf under a proper smooth scheme morphism are finite locally constant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"For each type $X$, this functor constructs a sheaf on the opposite category of compact Hausdorff-like spaces $\\\\mathbf{CompHausLike}_P^\\\\text{op}$ with values in $\\\\mathrm{Type}$. The sheaf assigns to ea\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsFinite g],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes, where $ g $ is finite. Then the composition $ f \\\\circ g $ is a finite morphism if and only if $ f $ is a finite morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, condensed locally constant functors, finite flat scheme rank or etale morphisms, not local constancy of higher etale direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper etale cohomology with finite prime to characteristic coefficients forms a local system",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, condensed locally constant functors, finite flat scheme rank or etale morphisms, not local constancy of higher etale direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper smooth higher direct images of finite locally constant etale sheaves are finite locally constant over any base scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) (F : Sheaf J D) :\\n  IsConstant J F ↔ L.essImage F\", \"doc\": \"A sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is constant if and only if $ F $ lies in the essential image of a functo\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor_obj_val\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : CompHausLike.HasExplicitFiniteCoproducts P] [inst_1 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (X : Type (max u w)),\\n  ((C\", \"doc\": \"For any predicate $P$ on topological spaces with explicit finite coproducts and pullbacks, and under the condition that effective epimorphisms in $\\\\mathbf{CompHausLike}_P$ are surjective on underlying\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondSet.{u})\\n  (h : ∀ S : LightProfinite.{u}, IsColimit <| X.val.mapCocone (coconeRightOpOfCone S.asLimitCone)) :\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n",
+   "verdict": "no match: ordinary scheme morphism properties, constant sheaves and condensed local constancy do not assert smooth proper higher-direct-image local constancy",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyConstant\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatRank\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.IsFinite f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : IsLocallyConstant (AlgebraicGeometry.Scheme.Hom.finrank f)\", \"doc\": \"The rank of a finite flat locally finitely presented morphism is locally constant.\"}\n",
+   "verdict": "no match: ordinary scheme morphism properties, constant sheaves and condensed local constancy do not assert smooth proper higher-direct-image local constancy",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*[Hh]igher|[Hh]igher.*locallyConstant|IsLocallyConstant.*[Dd]irect|[Dd]irect.*IsLocallyConstant",
+   "results": "[grep] OK 0 hit(s)\n",
+   "verdict": "no match: ordinary scheme morphism properties, constant sheaves and condensed local constancy do not assert smooth proper higher-direct-image local constancy",
+   "date": "2026-10-22"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper etale cohomology with finite prime to characteristic coefficients forms a local system",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "verdict": "no match: ordinary scheme morphism properties, constant sheaves and condensed local constancy do not assert smooth proper higher-direct-image local constancy",
+   "date": "2026-10-22"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Local-system input for the smooth full-level cover, before choosing a frame.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-smooth-proper-finite-cohomology-local-system",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0GLI for arbitrary base schemes. Proved the Noetherian case using existing 0GL0 constructibility, smooth-proper specialization, and finite-stalk specialization criterion, then descended the smooth proper model and its finite local system and used derived module proper base change. Added only the missing 0GL2 finite-local-system limit descent input. Statement unchanged; no Lean or build was written or run.",
+  "blueprint": "Realizes the smooth-curve abelian-level rigidification local-system prerequisite below det-thm-sf-ctf-stability-direct-images (3), through the recorded chain. The imported ancestor lookup returns None, so inherited blueprint.from.node is retained; from.place and via identify the actual source clause.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smoothness and properness persist in the local affine reductions and after increasing the approximation stage; the unit does not separately state scheme-morphism permanence."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Identifies inverse images of constant module models with the same modules, for preserving the finite-vector-space trivializations; this generic constant-sheaf fact is not a direct-image stability assertion."
+   },
+   {
+    "node": "det-properbasechange-modules",
+    "why": "Supplies the derived module proper-exchange isomorphism for a torsion single sheaf and arbitrary base change, including Spec A -> S_j; finite-type-over-a-field coefficient packages of this unit do not cover this base."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exactness and constant-coefficient compatibility permit taking cohomology of the derived exchange while retaining the module structure; this is a general topoi fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Checks qcqs hypotheses for proper schemes over the affine original and approximation bases, required by the finiteness and limit-descent theorems."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compactification-constructibility",
+    "why": "Gives finite-ring etale constructibility for the identity-open proper compactification over a qcqs base, without assuming a base field; it is a fixed-finite-coefficient finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Identifies stalks on a locally closed stratum and its etale neighbourhood with the original stalk, used to extract finiteness from constructible local models."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Identifies the geometric stalk of a constant finite module with its underlying finite abelian group."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "why": "Gives precisely the pointed-neighbourhood specialization isomorphisms for R^q f_*F with prime coefficients invertible on an arbitrary base."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+    "why": "Turns finite stalks plus the specified bijective specialization maps into finite local constancy on the Noetherian stage."
+   },
+   {
+    "node": "lemma-nagata-ring-finite-type-subalgebras",
+    "why": "The directed finite-Z-subalgebra presentation permits choosing a cofinal tail containing ell inverse, so invertibility holds at every model stage."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Supplies the inverse-limit presentation of the affine base using finite-type-over-Z stages and affine transition maps; this generic approximation is not stated in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-noetherian-stage",
+    "why": "Descends the proper finitely presented scheme to a proper model in the chosen approximation, before imposing eventual smoothness."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "Makes the already chosen finitely presented model smooth at a later stage; proper-model descent alone does not give smoothness."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-over-limit",
+    "why": "Identifies the base-changed source schemes as an affine-transition inverse system with limit X, which is the hypothesis of the new local-system descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "det-properbasechange-modules",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-3e883d16d",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-3e883d16d (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the new node, every cited statement, Stacks 0GLI (more-etale 4786-4865) and 0GL2 (etale-cohomology 12636-12677). The route is a faithful specialization of 0GLI to Λ=F_ℓ with ℓ invertible, so the annihilator split and the f(X) step are vacuous. The proof is: local on S; 0GL0 with the identity compactification gives constructibility; then finite stalks; then smooth-proper specialization plus the 0GKC criterion over a Noetherian base; then 01ZM approximation over a cofinal ℓ^{-1} subsystem; then proper-noetherian-stage plus descend-smooth; then 0GL2 descent of F; then derived module proper base change back to Spec A. Steps 6-9 make explicit what Stacks leaves implicit. Every hypothesis checks: qcqs, finite presentation, the D^+ torsion clause, Noetherian only where the criterion needs it, matching sp conventions. Small cases tested: field base, X empty, non-Noetherian product-of-fields base, disconnected X with varying ranks. The new node lem-sfb-finite-local-system-affine-limit-descent is exactly the essential-surjectivity half of 0GL2(3) (finite Λ is Noetherian, finite type = finite) and is true. It is no restatement of the item and duplicates no node: whole-DAG search for 0GL2 and for limit + locally constant found nothing, and the constructible limit-descent nodes give constructibility only. Side-live still has the item unsplit. No cycle (closure of 10452 nodes). No SGA. Batch-5 flags all accepted as generic: det-properbasechange-modules→lem-pod-lisse-module-sheaves-as-module-objects (0DV5), etale-compactification-constructibility→lem-trf-sieve-dense-subsite-comparison (03A0 site equivalence), smooth-proper-specialization→lem-trf-bounded-below-derived-adjunction (generic derived adjunction); none is a step of the trace formula or of Poincaré duality. FIX (one fault, C-type missing citation): step 3 identified the Λ-module G_q=H^q(Rf_*F[0]) from the 0GL0 node with the item's abelian R^qf_*F, which is also what the specialization lemma uses, without citation. I added det-pbc-conventions-module-cohomology(3) (For R^qu_*F ≅ R^qu_*For F) to the step-3 text, uses and proof_deps. Statement unchanged; corrected item JSON is under fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperFiniteCohomologyLocalSystem",
+  "declaration": "AlgebraicGeometry.Etale.finite_localSystem_higherDirectImage_smooth_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperFiniteCohomologyLocalSystem.lean",
+  "statement": "theorem finite_localSystem_higherDirectImage_smooth_proper {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [IsProper f] (ell : ℕ) [Fact ell.Prime] (hunit : ∀ s : S, IsUnit (ell : S.presheaf.stalk s)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))) (hF : ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage X, ∀ i : 𝒰.I₀, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)), Module.Finite (ULift.{u + 1} (ZMod ell)) M ∧ Nonempty (F.over (𝒰.etalePrecoverageToEtale i) ≅ (constantSheaf (X.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))).obj M)) (q : ℤ) (hq : 0 ≤ q) : ∃ 𝒱 : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ j : 𝒱.I₀, ∃ N : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)), Module.Finite (ULift.{u + 1} (ZMod ell)) N ∧ Nonempty (((DerivedCategory.Plus.homologyFunctor _ q).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))).over (𝒱.etalePrecoverageToEtale j) ≅ (constantSheaf (S.smallEtaleTopology.over (𝒱.etalePrecoverageToEtale j)) (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))).obj N)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46def46eb",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Every clause of the Lean matches the node: smooth+proper Mathlib classes; Fact ell.Prime with IsUnit at every stalk of S; ULift ZMod ell coefficients; F in Sheaf X.smallEtaleTopology (ModuleCat); hF = etale Scheme.Cover with Module.Finite M and a module-linear iso to constantSheaf on the over-site; q:ℤ with 0≤q; R^q f_* = Plus.homologyFunctor q of the recorded rightDerivedLowerStarPlus (a genuine rightDerivedFunctorPlus) on singleFunctor 0. The conclusion has the same local-system form on S. No Noetherian or field hypothesis; the upstream isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper needs a finite-type base over a field, so it is not existing:true. Edge cases checked: q=0, ell=2, empty schemes, zero sheaf, disconnected base. The node differs from side-live only in lean; the statement is verbatim; sorry only; no defs; docstrings carry source, blueprint and 9 steps; no SGA or pro-etale substitute; all imports exist; report has both sections and repairs the H1/H2 RETURN of 6bc2. Advisory A1: ModuleCat-valued encoding instead of ringedSiteModules, forced by the direct-image record; moduleSheaf_constantRing_equivalence exists. Not recompiled per instruction; worker reports clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261023T132331-L-2256119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

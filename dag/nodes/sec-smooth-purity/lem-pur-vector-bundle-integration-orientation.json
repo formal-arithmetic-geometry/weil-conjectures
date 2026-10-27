@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-vector-bundle-integration-orientation",
+ "kind": "statement",
+ "title": "Integration identifies a normalized ordinary vector-bundle orientation",
+ "statement": "Fix a finite purity setting $P$ with $\\Lambda=A_{E,n}$, for arbitrary finite $E/\\mathbf Q_\\ell$ and $n\\geq1$ [def-pur-conventions]. Let $S$ be an affine finite-type $k$-scheme with structure map $a_S$ [def-weil-finite-type-morphism], let $F$ be locally free of constant rank $d\\geq0$, and let $\\pi:V\\to S$ be its vector-bundle projection [def-asd-vector-bundle-zero-section]. In the ordinary small-etale derived category, put $\\omega_\\pi=R\\pi^!\\Lambda_S$ and $Q_V=\\Lambda_V(d)[2d]$ in the specified base-coefficient presentation [def-pur-diagonal-dualizing-data, def-coefficient-twists-detailed]. Let $t$ be any normalized finite-twist transport, and let $c_t:\\pi^*(\\Lambda_S(d)[2d])\\xrightarrow{\\sim}Q_V$ be its canonical Tate coefficient pullback [def-amb-vector-integration]. For every isomorphism $e:\\omega_\\pi\\xrightarrow{\\sim}Q_V$ satisfying the coordinate-counit normalization of [def-pur-diagonal-dualizing-data], one has $e^{-1}=\\operatorname{adj}_\\pi(\\int_\\pi)\\circ c_t^{-1}$, where $\\int_\\pi:R\\pi_!\\pi^*(\\Lambda_S(d)[2d])\\to\\Lambda_S$ is the actual vector integration of [def-amb-vector-integration] and $\\operatorname{adj}_\\pi$ is the fixed exceptional adjunction. In particular this includes an empty base and rank zero.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-asd-vector-bundle-zero-section",
+  "def-coefficient-twists-detailed",
+  "def-amb-vector-integration",
+  "def-pur-diagonal-dualizing-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4: vector-bundle integration identifies the normal model orientation; vector-bundle orientation proof, Steps 1–3"
+ },
+ "proof": [
+  {
+   "text": "Reuse the proved Tate normal-form helper from ordinary orientation rigidity. It constructs the shifted finite Tate sheaf by induction on d using flatness, Tate products and derived tensor shift addition. The source is a sheaf shifted by 2d; the given isomorphism e makes its dualizing target concentrated in the same degree.",
+   "uses": [
+    "lem-pur-diagonal-ordinary-orientation-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite_type_frames to obtain a finite affine frame cover of S and its inverse-image cover of V. For each frame form v from the concrete trivializationMap, the affine-space base map, and inverse affineTraceAffineSpaceIso. Its projection equation is v;p_d=j;pi. The chart is etale and separated, finite type and quasi-compact; Noetherianity provides the compactifications. Empty bases and d=0 require no nonemptiness condition.",
+   "uses": [
+    "lem-pur-vector-bundle-finite-type-frames"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a normalized projective-line family by exists_ordinaryFiniteP1Adjunction and identify its twist transport with the arbitrary t by transport uniqueness. Choose the constructed canonical compact-support normalization N. Evaluate the given orientation normalization and vectorIntegration_ordinary_frame_counit at each frame with these same data. Their right hand sides agree; cancel the invertible source-etale locality to identify the restrictions of e.inv and the actual integration adjunct.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-pur-vector-integration-ordinary-frame-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved map_eq_of_cover helper from ordinary orientation rigidity. Homology in degree -2d is injective on maps from an object <=-2d to an object >=-2d. Naturality of the left-derived/exact pullback comparison and the exact functor homology isomorphism transports the frame equalities to equality of restricted sheaf maps. Jointly-surjective open pullbacks are jointly faithful on sheaves. The cohomology maps agree, hence the global arrows agree.",
+   "uses": [
+    "lem-pur-diagonal-ordinary-orientation-rigidity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pur-diagonal-ordinary-orientation-rigidity",
+  "lem-pur-vector-bundle-finite-type-frames",
+  "lem-pur-vector-integration-ordinary-frame-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X9",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, separating the ordinary one-frame counit equation from its proved global descent",
+  "note": "The global Lean proof is complete from the single local frame statement. A proof-only import all reuses the already proved private Tate concentration and cohomology/sheaf equality-test helpers from ordinary orientation rigidity. No existing helper or interface changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized orientation of a smooth vector bundle projection is inverse to the exceptional adjoint transpose of integration along the fibres",
+   "results": "8 hits on topological vector-bundle trivializations and tangent-bundle equivalences; no exceptional inverse image or integration orientation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including Adjunction.homEquiv, homEquiv_apply, homEquiv_symm_apply and comp_homEquiv. These provide the formal Hom bijection but do not identify vector integration with a normalized orientation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundleIntegration.*orientation|DiagonalOrientationNormalization",
+   "results": "0 hits from the Mathlib search service. Local rg found VectorBundleDiagonalOrientation, whose theorem requires P.extension = bottom and therefore does not cover this item.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncChartNormalization",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Step 1: vector-bundle purity of the tangent bundle in the standard-coordinate diagonal/DNC assemblies; chart proof Step 4, bundle integration model calculation",
+   "via": [
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorBundleIntegrationOrientation",
+  "file": "lean/Sheaf/Paper/VectorBundleIntegrationOrientation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorBundleIntegration_orientation_inv",
+  "statement": "theorem vectorBundleIntegration_orientation_inv (P : PurityFiniteSetting.{u})\n    (S : Scheme.{u}) [IsAffine S] (aS : S ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aS] [QuasiCompact aS]\n    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates) :\n    letI := isNoetherian_of_locallyOfFiniteType aS\n    letI := (Etale.vectorIntegration_geometry S d F).1\n    letI := (Etale.vectorIntegration_geometry S d F).2.1\n    letI := isNoetherian_of_locallyOfFiniteType (VectorBundleZeroSection.π S d F ≫ aS)\n    letI : HasCompactification (VectorBundleZeroSection.π S d F) := inferInstance\n    ∀ e : P.diagonalOrdinaryDualizing (VectorBundleZeroSection.π S d F) ≅\n        P.diagonalTwistEtale (VectorBundleZeroSection.scheme S d F) d,\n      P.DiagonalOrientationNormalization d (VectorBundleZeroSection.π S d F) aS e →\n      e.inv =\n        (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n          P.diagonalExponent_annihilates t (VectorBundleZeroSection.π S d F)\n          (P.diagonalExponent_isUnit aS) d).inv ≫\n        (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} P.Coefficient)\n          (VectorBundleZeroSection.π S d F)).homEquiv _ _\n            (Etale.vectorBundleIntegration P.diagonalExponent\n              (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n              P.diagonalExponent_annihilates S (P.diagonalExponent_isUnit aS) d F)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27",
+  "note": "Ordinary bundle model calculation at arbitrary finite coefficient extensions. No normal cone or isomorphism presenting it appears. Existing bottom-extension vectorBundleDiagonalOrientation cannot supply this all-extension statement."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T235851-L-1462691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T013008-L-2357188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

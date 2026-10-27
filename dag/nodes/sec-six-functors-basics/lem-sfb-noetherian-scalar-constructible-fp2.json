@@ -1,0 +1,425 @@
+{
+ "id": "lem-sfb-noetherian-scalar-constructible-fp2",
+ "kind": "statement",
+ "title": "Hom and Yoneda Ext1 continuity for the Noetherian scalar-model heart",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E$, discrete for $A$ and norm-topological otherwise. Its condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets [sk-def-localizing-closure]. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site], in the universes of [def-weil-size-convention], set $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ be the ordinary uncompleted internal module category [sk-def-sfb-module-derived-pushpull]. Let $\\mathcal C_X$ be its full replete subcategory of finite constant scalar-model constructible modules [sk-def-sfb-constructible]; in particular finitely presented integral torsion scalar models are allowed. For every $C\\in\\mathcal C_X$ and every small filtered diagram $(M_i)$ of arbitrary objects of $\\mathcal A_X$ [def-weil-pbc-category-colimit], both canonical maps\n$$\\varinjlim_i\\operatorname{Hom}_{\\mathcal A_X}(C,M_i)\\longrightarrow\\operatorname{Hom}_{\\mathcal A_X}(C,\\varinjlim_iM_i),\\qquad\n\\varinjlim_i\\operatorname{Ext}^1_{\\mathrm{Yon},\\mathcal A_X}(C,M_i)\\longrightarrow\\operatorname{Ext}^1_{\\mathrm{Yon},\\mathcal A_X}(C,\\varinjlim_iM_i)$$\nare bijective. Here $\\operatorname{Ext}^1_{\\mathrm{Yon}}(C,M)$ is the abelian group of equivalence classes of short exact sequences $0\\to M\\to B\\to C\\to0$ in the ambient module category, with its usual Baer sum; the comparison uses pushout along $M_i\\to\\varinjlim M_i$. The assertions include injectivity, not only factorization of extension classes. No constructibility of the $M_i$, uniform cohomological-dimension bound, or completion is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1),(2), Theorem 6.2(3), and finite scalar resolutions on constructible strata. The integral scalar rings are DVRs, so finite scalar modules have finite free resolutions; finite discrete rings instead use finite initial segments of resolutions by finite free modules. WANTED: an explicit printed statement including arbitrary finite nonregular A and Yoneda Ext1 in this exact generality."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-yoneda-ext-one-functor"
+ ],
+ "proof": [
+  {
+   "text": "Work with ordinary ringed-site module sheaves via the evaluation-compatible derived equivalence [lem-sfb-module-object-ringed-site-derived-comparison]. By [lem-weil-pbc-module-sheaves-colimits-forgetful] and [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], filtered module-sheaf colimits are exact and their cohomology is computed by taking filtered colimits of cohomology sheaves: kernels and cokernels commute with these colimits. The Noetherian scheme X has Noetherian underlying space by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Every subset of that space is quasi-compact by [lem-sfb-noetherian-space-compact-subsets]; hence X is quasi-separated as well as quasi-compact. These facts apply also to open and closed subschemes appearing in a finite stratification. The ringed-site category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian] and has enough injectives by [lem-sp-grothendieck-enough-injectives].",
+   "uses": [
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, proof of (1): exact filtered colimits and qcqs cohomology prerequisites"
+   }
+  },
+  {
+   "text": "On a chart where a finite constant local model L equals B\\otimes_{\\underline R}\\underline P, construct an augmented resolution F^\\bullet\\to L[0] with F^a finite free and F^a=0 for a>0. For R=\\mathcal O_E use [lem-sfb-finite-constant-model-two-term-free-resolution]; R=\\mathbf Z_\\ell is the case E=\\mathbf Q_\\ell. For R=\\mathbf Q_\\ell,E,\\Omega, apply the field clause of [lem-sfb-scalar-finite-free-resolutions] and the rank-preserving scalar extension of [lem-sfb-constant-finite-free-presentation-extension], giving a degree-zero resolution. In particular this uses the scalar field \\Omega itself, without restricting continuous functions to finite subextensions. For finite R=A, identify B with the constant A-ring using [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant]. Choose a finite free surjection A^{r_0}\\to P. Its kernel K_1 is a finite set because A^{r_0} is finite; the map A^{K_1}\\to K_1 sending basis vectors to their labels is surjective. Repeat on its finite kernel. The composites give an exact augmented resolution by finite free A-modules in degrees at most zero. Exact constant sheafification, from [lem-sfb-constant-finite-free-presentation-extension], gives the required F^\\bullet. No finite projective dimension of P is asserted.",
+   "uses": [
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "lem-sfb-scalar-finite-free-resolutions",
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free: resolution hypothesis; agent finite-ring resolution construction"
+   }
+  },
+  {
+   "text": "Write H_T(K,N)=R\\mathcal Hom_{\\Lambda_T}(K,N). Fix a small filtered diagram N_i in D^{\\ge c}. Good truncation replaces degree c by coker(d^{c-1}) and all lower terms by zero, retaining the higher terms and their maps; this is functorial and supplies target representatives zero below c, by [def-sbc-standard-tstructure-derived-category]; exactness in step 1 preserves their colimit. On any chart of step 2, [lem-weil-pbc-ringed-site-bounded-free-rhom-model] represents H_T(L,N_i) by the ordinary Hom complex. Its degree n term is the finite sum \\bigoplus_{c-n\\le a\\le0}(N_i^{a+n})^{r_a}, with differential d_N f-(-1)^n f d_F. Each term commutes with the filtered colimit, and the termwise comparison commutes with that differential. It is therefore an isomorphism of complexes, induced by the original target cocone. Slice restriction is exact by [lem-pur-site-restriction-module-adjunction-exact]; it commutes with colimits because colimits are sheafified sectionwise colimits (step 1), and slice restriction commutes with abelian sheafification by [lem-cbc-sieve-slice-sheafification]. Internal Hom restricts to this computation by [lem-weil-pbc-ringed-internal-hom-exact-restriction], and these restrictions identify the module-object Hom by step 1. Apply [lem-sfb-sheaf-cover-local-isomorphism] to each cohomology sheaf to obtain the global internal-Hom comparison isomorphism for L. Moreover H_T(L,N) lies in D^{\\ge c} by [lem-weil-pbc-proetale-internal-hom-lower-bound], since L is a sheaf in degree zero. Thus L satisfies the property P_T defined in [lem-sfb-rhom-continuity-triangle-closure], with d_L=0.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-weil-pbc-proetale-internal-hom-lower-bound",
+    "lem-sfb-rhom-continuity-triangle-closure",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-sieve-slice-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free; finite-diagonal colimit calculation and local testing"
+   }
+  },
+  {
+   "text": "Let t:S\\hookrightarrow V be a reduced closed immersion into an open subscheme of X, and let L on S have a finite constant local model. Its open complement is quasi-compact by step 1, so [lem-sfb-open-closed-internal-hom-formulas] applies and identifies H_V(t_*L,N) with t_*H_S(L,Rt^!N). By [lem-sfb-closed-support-bounded-continuity], Rt^! preserves a common cohomological lower bound and commutes with filtered colimits of such targets. Apply step 3 to the resulting bounded-below diagram on S. Ordinary t_* is exact by [lem-weil-pbc-condensed-open-closed-recollement] and is left adjoint to the underived support functor by [det-lem-formal-closed-support-adjunction]; it therefore commutes with sheaf colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. Consequently the displayed formula gives P_V(t_*L), with bound zero. Naturality of the internal-Hom formula identifies this comparison with the evaluation-induced map for the original cocone.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "lem-sfb-closed-support-bounded-continuity",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "det-lem-formal-closed-support-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), closed-stratum support argument via the support triangle"
+   }
+  },
+  {
+   "text": "For every open v:V\\hookrightarrow X and t,L as in step 4, [lem-sfb-rhom-continuity-open-extension] gives P_X(v_!t_*L). The class P_X contains zero, is invariant under isomorphism and closed under shifts and extensions by [lem-sfb-rhom-continuity-triangle-closure]. Apply [lem-sfb-bounded-finite-model-generation] to this class: X has Noetherian underlying space, the coefficients are a commutative condensed ring, and step 4 followed by open extension verifies every required generator. Thus P_X(C[0]) holds for every C in the stated scalar-model constructible heart, including integral torsion models. This application uses only finitely many strata and triangles for C.",
+   "uses": [
+    "lem-sfb-rhom-continuity-open-extension",
+    "lem-sfb-rhom-continuity-triangle-closure",
+    "lem-sfb-bounded-finite-model-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), finite stratification induction; the finite-ring sources use step 2 instead of dualizability"
+   }
+  },
+  {
+   "text": "Apply step 5 to N_i=M_i[0]. We obtain colim_i H_X(C,M_i[0])\\simeq H_X(C,(colim_iM_i)[0]). Every internal Hom here lies in D^{\\ge0}, by [lem-weil-pbc-proetale-internal-hom-lower-bound]. Choose functorial good truncation representatives zero in negative degrees, as in [def-sbc-standard-tstructure-derived-category]. Since X is qcqs, [det-pe-bounded-continuity-sections], with U=X, common lower bound zero and coefficient sheaf \\Lambda_X, gives for q=0,1 the isomorphisms colim_i H^q(R\\Gamma(X,H_X(C,M_i[0])))\\simeq H^q(R\\Gamma(X,H_X(C,(colim_iM_i)[0]))). Exact filtered colimits allow the same truncation representatives for the source colimit in step 5. All maps remain those of the original cocone; there is no cohomological-dimension bound or completion in this argument.",
+   "uses": [
+    "lem-weil-pbc-proetale-internal-hom-lower-bound",
+    "def-sbc-standard-tstructure-derived-category",
+    "det-pe-bounded-continuity-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, final assertion: compose internal Hom continuity with bounded-below derived sections continuity"
+   }
+  },
+  {
+   "text": "By [lem-pur-rhom-global-sections] and shift compatibility in [lem-weil-pbc-ringed-internal-hom-exact-restriction], the groups of step 6 are Hom_{D(\\mathcal A_X)}(C[0],M_i[q]) and the analogous group for colim_i M_i. At q=0 this is ordinary Hom: choose a nonnegative injective resolution using [lem-weil-pbc-complex-injective-resolution-mono] and step 1, and apply [lem-weil-pbc-ext-via-injective-resolution]. For this resolution 0\\to M\\to I^0\\to I^1\\to\\cdots gives H^0 Hom(C,I^\\bullet)=ker(Hom(C,I^0)\\to Hom(C,I^1))=Hom(C,M), directly from the kernel universal property. At q=1, [lem-coef-yoneda-derived-ext-comparison] identifies the derived group naturally with Yoneda Ext^1. Its naturality in M sends an extension to its pushout along M_i\\to colim_i M_i, and respects Baer sum. Hence the q=0,1 isomorphisms of step 6 are exactly both maps in the statement. Since these are isomorphisms, equality of two Hom maps or extension classes in the colimit is also detected in the source colimit; both injectivity and surjectivity follow.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XU and 06XV, lemma-yoneda-extension and lemma-ext-1; sites-cohomology internal Hom global sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-proetale-internal-hom-lower-bound",
+  "lem-sfb-rhom-continuity-triangle-closure",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-sfb-closed-support-bounded-continuity",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-rhom-continuity-open-extension",
+  "lem-sfb-bounded-finite-model-generation",
+  "det-pe-bounded-continuity-sections",
+  "lem-pur-rhom-global-sections",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1),(2) and its final assertion; finite-ring finite-free-resolution extension via Stacks Tag 08JI, and Yoneda comparison Tags 06XU/06XV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Ext.*colim|Ext.*filtered|Constructible.*Ext|constructible.*finite.*present",
+   "results": "25 hits; [\"Mathlib/Condensed/AB.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module finite presentation or filtered-colimit results do not assert this pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible pro etale module sheaves on a Noetherian scheme are FP2 objects for finite discrete rings and topological l adic coefficients",
+   "results": "8 hits; [\"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation.casesOn\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.mk\", \"SheafOfModules.Presentation.IsFinite.mk\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module finite presentation or filtered-colimit results do not assert this pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.IsFiltered",
+   "results": "0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module finite presentation or filtered-colimit results do not assert this pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom and Ext one from a finite constant scalar model constructible pro etale module on a Noetherian scheme commute with filtered colimits of arbitrary modules for finite discrete and l adic coefficient rings",
+   "results": "8 hits; [\"Condensed.profiniteSolid\", \"localCohomology.diagram\", \"Condensed.instAB5CondensedMod\", \"CondensedMod.IsSolid\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"localCohomology.ofDiagram\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module finite presentation or filtered-colimit results do not assert this pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Ext.*[Ff]iltered|Ext.*[Cc]olimit",
+   "results": "3 hits; [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module finite presentation or filtered-colimit results do not assert this pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits preserve global Hom and Yoneda Ext1 from a constructible internal module with finite constant scalar presentations on a Noetherian pro etale scheme",
+   "results": "8 hits; [\"preservesFilteredColimits_coyoneda\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.instAB5CondensedMod\", \"localCohomology.diagram\", \"instHasColimitsCondensedMod\", \"CommRingCat.preservesFilteredColimits_coyoneda\", \"Condensed.instAB4CondensedMod\", \"Ext\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module finite presentation or filtered-colimit results do not assert this pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom and Yoneda Ext1 from constructible scalar model pro etale module sheaves commute with filtered colimits",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, LightCondensed.ihomPoints_apply, LightCondMod.hom_naturality_apply, LightCondensed.lanPresheafExt_hom, PresheafOfModules.colimitCocone_ι_app_app, PresheafOfModules.colimitPresheafOfModules_map, LightCondensed.ihom_map_val_app, Condensed.lanPresheafExt_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: generic finite presentation, sheaf AB5 and colimit infrastructure do not prove constructible pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Ext.*[Ff]iltered|Ext.*[Cc]olimit",
+   "results": "25 hits: Mathlib/Condensed/AB.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/FieldTheory/CardinalEmb.lean, Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic finite presentation, sheaf AB5 and colimit infrastructure do not prove constructible pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented constructible sheaves have Hom and Ext one commuting with filtered colimits",
+   "results": "8 hits: CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, preservesColimit_coyoneda_of_finitePresentation, CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, HomologicalComplex.instHasFilteredColimitsOfSize, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.ObjectProperty.isFinitelyPresentable",
+   "date": "2026-10-24",
+   "verdict": "no match: generic finite presentation, sheaf AB5 and colimit infrastructure do not prove constructible pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.IsFiltered",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic finite presentation, sheaf AB5 and colimit infrastructure do not prove constructible pro-etale Hom and Yoneda Ext1 continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent source derived sheaf Hom preserves filtered colimits of bounded below targets",
+   "results": "8 hits: CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: generic finite presentation, sheaf AB5 and colimit infrastructure do not prove constructible pro-etale Hom and Yoneda Ext1 continuity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-complex-heart-filtered-approximation",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), preservation of direct sums on the localizing hull: corrected Noetherian heart route; finite presentation and extension-class continuity.",
+   "via": [
+    "lem-sfb-finite-complex-heart-filtered-approximation",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-noetherian-scalar-constructible-fp2",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing DAG tools only: finite-free local scalar resolutions, finite Hom diagonals, support/open continuity, finite-stratum generation, bounded-below sections and natural Yoneda comparison. The finite nonregular discrete case uses an unbounded finite-free resolution, not finite Tor amplitude. No statement correction or new nodes.",
+  "blueprint": "det-sf-comp-coherence-cocycle, via the existing refinement/localizing-hull and Noetherian-heart chain: the scalar-heart finite presentation and extension-class continuity input to lem-sfb-finite-complex-heart-filtered-approximation; current blueprint refinement proof (2), preservation of direct sums on the localizing hull.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic Module-object and ringed-site derived internal Hom agree; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "why": "Generic Finite scalar local models have two-term finite-free sheaf resolutions; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Generic Exact constant finite free presentations after flat sheaf scalar extension; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Generic Finite discrete condensed rings are constant; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Generic Constant coefficient rings under scheme inverse image; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic Bounded-above finite-projective sheaf Hom model; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-internal-hom-lower-bound",
+    "why": "Generic Cohomological lower bound for pro-etale internal Hom; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-rhom-continuity-triangle-closure",
+    "why": "Generic Triangle closure of bounded-target internal-Hom continuity; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-open-closed-internal-hom-formulas",
+    "why": "Generic Derived internal Hom for open extension and closed support; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-closed-support-bounded-continuity",
+    "why": "Generic Bounded-below continuity for open direct image and closed support; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Generic Open/closed recollement for condensed coefficient modules; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "det-lem-formal-closed-support-adjunction",
+    "why": "Generic Sections with closed support: adjunction and fiber triangle for all coefficients; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-rhom-continuity-open-extension",
+    "why": "Generic Open extension preserves bounded-target internal-Hom continuity; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-sfb-bounded-finite-model-generation",
+    "why": "Generic Finite generation of bounded finite-model constructible complexes by strata; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "det-pe-bounded-continuity-sections",
+    "why": "Generic Cohomology on a qcqs object commutes with bounded-below filtered colimits; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic Global sections of the derived internal Hom; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-coef-yoneda-derived-ext-comparison",
+    "why": "Generic Yoneda extensions and derived Ext in every positive degree; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic Bounded below complexes embed quasi-isomorphically into complexes of injectives; supplies the explicitly cited ringed-site, resolution, support, finite-stratum or derived-Hom infrastructure. The unit has no separate version of this tool; the compactification route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-proetale-internal-hom-lower-bound",
+  "lem-sfb-rhom-continuity-triangle-closure",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-sfb-closed-support-bounded-continuity",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-rhom-continuity-open-extension",
+  "lem-sfb-bounded-finite-model-generation",
+  "det-pe-bounded-continuity-sections",
+  "lem-pur-rhom-global-sections",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-complex-injective-resolution-mono"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-f0ecb5b98",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-f0ecb5b98 (reviewer sub-agent of L); spot-checked: I read all seven steps and the statements of all 32 cited nodes. The delivery adds no new nodes, and the item's statement, stmt_deps, blueprint and maintainer fields are unchanged; only proof, proof_deps, proof_origin, mathlib_searches, split_report and status differ from side-live. Live has the item unsplit and there is no repair note, so it is not superseded. Sources: I read HRS 2305.18131 Lemma 5.3(1),(2), its proof and final assertion, Remark 5.4 and Theorem 6.2(3). The route follows HRS: stratification induction, the support/open adjunctions, and continuity of RΓ on bounded-below colimits. The one departure is that HRS uses dualizability of the lisse piece, while the delivery uses a local finite-free resolution with the bounded Hom model of Stacks 08JI (label checked in sites-cohomology.tex). This gives d=0 and covers finite nonregular A, so by=agent is correct. Coefficient cases: two-term resolution for O_E and Z_l (torsion allowed); field clause plus the flatness-free isomorphism clause for Q_l, E and the full Ω; for finite A, B ≅ constant A by the two constant-ring lemmas, then a recursive resolution by finite free modules. Hypotheses checked: qc open complement for the closed-support formulas; topological Noetherianity of X and V for closed-support continuity, open extension and generation; qcqs U=X for det-pe; the two definitions of Rt^! agree as right adjoints of t_*; t_* is exact and a left adjoint. Step 7 uses the natural Yoneda comparison (06XU/06XV) and the q=0 kernel computation, which gives both injectivity and surjectivity. Edge cases tested: F_l[ε]/ε², O_E/π^m, Ω rank 0, empty X, zero ring. Every off-route citation is a declared tool use (19, all generic black boxes, accepted), a Mathlib leaf or a definition. There is no SGA citation. Duplicate candidates (sk-thm-constructible-compactness, lem-trf-bounded-constructible-derived-hom-continuity, lem-per-constructible-rhom-coproduct-continuity) are on other sites or have other hypotheses, so same_as=[] is correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NoetherianScalarConstructibleFp2",
+  "declaration": "AlgebraicGeometry.ProEtale.noetherian_scalar_constructible_fp2",
+  "file": "lean/Sheaf/Paper/NoetherianScalarConstructibleFp2.lean",
+  "statement": "theorem noetherian_scalar_constructible_fp2 (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hC : IsConstantModelConstructible Λ X C) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (M : I ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) [HasColimit M] : IsIso (colimit.post M (preadditiveCoyoneda.obj (Opposite.op C))) ∧ ∀ c : YonedaDerivedExtComparison (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), IsIso (colimit.post M (c.yonedaExtOneFunctor C))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Both canonical maps are IsIso of colimit.post. The first uses the existing additive coyoneda. The second uses the actual endpoint-fixed Yoneda quotient and Baer group, with its pushout functor transported via the recorded normalized comparison; it is asserted for every such comparison. The six coefficient cases are explicit because IsLocalizingAdmissibleCoefficient also includes the distinct finite-subextension-valued algebraic-closure ring, which this node does not allow. No statement correction; no derived completion, finite Tor-amplitude condition, constructible-target assumption, or cohomological-dimension bound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dec6d83b8",
+  "group": "NE",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: six coefficient disjuncts as in the landed sibling FiniteComplexHeartFilteredApproximation (Ω = all continuous functions); IsLocallyNoetherian+CompactSpace; recorded IsConstantModelConstructible; any small filtered I : Type (u+1); IsIso colimit.post for preadditiveCoyoneda and for the Yoneda Ext1 functor. The naturality and baer_sum fields of YonedaDerivedExtComparison force pushout and the Baer group for every c, so ∀ c is harmless and non-vacuous (nonempty theorem). Edge cases checked: X empty, zero ring, C=0, F_ℓ[ε]/ε². The new def-sfb-yoneda-ext-one-functor is a real bundled helper, not a duplicate of the unbundled mapOne. F1 fixed: that new node cited the theorem lem-coef-yoneda-derived-ext-comparison for the plain structure owned by the existing:true def-pur-yoneda-derived-ext-comparison-data (landed before base); fixes/def-sfb-yoneda-ext-one-functor.json swaps the stmt_dep and the statement bracket. No Lean change, no compile; worker reports clean compiles (3.6 s / 6.6 s). Advisory: the item's statement uses the structure directly while its stmt_deps reach the owner only through the new def node."
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+  "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega$, discrete for $A$ and norm-topological otherwise. Its condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets; for $\\Omega$ this means all continuous functions, with no finite-subextension restriction [sk-def-localizing-closure]. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site], in the universes of [def-weil-size-convention], set $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ be the ordinary uncompleted internal module category [sk-def-sfb-module-derived-pushpull]. Let $\\mathcal C_X$ be its full replete subcategory of finite constant scalar-model constructible modules [sk-def-sfb-constructible]; in particular finitely presented integral torsion scalar models are allowed. For every $C\\in\\mathcal C_X$ and every small filtered diagram $(M_i)$ of arbitrary objects of $\\mathcal A_X$ [def-weil-pbc-category-colimit], both canonical maps\n$$\\varinjlim_i\\operatorname{Hom}_{\\mathcal A_X}(C,M_i)\\longrightarrow\\operatorname{Hom}_{\\mathcal A_X}(C,\\varinjlim_iM_i),\\qquad\n\\varinjlim_i\\operatorname{Ext}^1_{\\mathrm{Yon},\\mathcal A_X}(C,M_i)\\longrightarrow\\operatorname{Ext}^1_{\\mathrm{Yon},\\mathcal A_X}(C,\\varinjlim_iM_i)$$\nare bijective. Here $\\operatorname{Ext}^1_{\\mathrm{Yon}}(C,M)$ is the abelian group of equivalence classes of short exact sequences $0\\to M\\to B\\to C\\to0$ in the ambient module category, with its usual Baer sum; the comparison uses pushout along $M_i\\to\\varinjlim M_i$. The assertions include injectivity, not only factorization of extension classes. No constructibility of the $M_i$, uniform cohomological-dimension bound, or completion is assumed.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-qcqs-finite-complex-heart-filtered-closure",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   }
+  ]
+ }
+}

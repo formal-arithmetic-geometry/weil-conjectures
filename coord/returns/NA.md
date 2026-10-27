@@ -67,3 +67,19 @@ L: independent stage-2 immutable head 3f532b32d618: H4: head 3f532b32 (module by
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-coherence: lem-weil-pbc-proetale-projection-formula-tensor-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+## lem-sfb-space-module-flat-point-chart-independence (2026-10-24 17:16 UTC, branch head no branch)
+
+(the landing tools, head 14a235875) the delivery did not land: (merge queue) your landing 20261024T160232-NA-1402545-1064 was taken out of the candidate: the global build of 167c362509 failed in Sheaf.AlgebraicGeometry.FlatSpaceDerivedPushforwardBaseChange Sheaf.AlgebraicGeometry.SpaceFibreRegularSliceFlat Sheaf.AlgebraicGeometry.SpaceFlatEtaleRingedComparison Sheaf.AlgebraicGeometry.SpaceGenericLineSectionInjectivity Sheaf.AlgebraicGeometry.SpaceGeometricStalkTensorCalculus Sheaf.AlgebraicGeometry.SpaceModuleFlatArbitraryCharts; this change is a possible cause (the compiler's full messages: coord/build-errors/<module>.txt in the clone)
+
+## lem-sfb-space-generic-line-section-injectivity (2026-10-24 17:16 UTC, branch head no branch)
+
+(the landing tools, head 1efe21d07) the delivery did not land: (merge queue) your landing 20261024T161301-NA-1855665-1219 was taken out of the candidate: the global build of 167c362509 failed in Sheaf.AlgebraicGeometry.FlatSpaceDerivedPushforwardBaseChange Sheaf.AlgebraicGeometry.SpaceFibreRegularSliceFlat Sheaf.AlgebraicGeometry.SpaceFlatEtaleRingedComparison Sheaf.AlgebraicGeometry.SpaceGenericLineSectionInjectivity Sheaf.AlgebraicGeometry.SpaceGeometricStalkTensorCalculus Sheaf.AlgebraicGeometry.SpaceModuleFlatArbitraryCharts; this change is a possible cause (the compiler's full messages: coord/build-errors/<module>.txt in the clone)
+
+## lem-sfb-invariant-power-exact-sequences (2026-10-24 17:47 UTC, branch head d1516d1cc0e)
+
+L: independent stage-2 immutable head d1516d1cc0ef: the new node def-sfb-invariant-symmetric-power-lifting exists on sheaf-dag now (another delivery created it): return the delivery
+
+## lem-pd-conjugate-tensor-localization-counit (2026-10-24 17:52 UTC, branch head e7bdbc6bfde)
+
+L: independent stage-2 immutable head e7bdbc6bfde8: H2: delivery added stmt_dep lem-sf-cochain-tensor-model-rigidity, a theorem node, only for its plain definitions (cochainTensorTotal, cochainTensorFlatRepresentatives, and the choose whose hom is pinned to the def cochainTensorRepresentativeArrow); no dependence on the theorem's conclusion. Cite a definition node owning these definitions instead, e.g. side-live def-weil-pbc-tensor-descent-representative-comparison (TensorFlatRepresentative, SiteTensorComplexFunctor, tensorDescentPair; not on this delivery's base, so no FIX possible), or add a def node in the delivery, and drop the theorem from stmt_deps. In the same re-delivery fix H3: the final ∃! v,(θ0≫v=θ)∧(counit eq) only gives uniqueness among v satisfying both clauses; split to ∃ v, ((∀M N, θ0≫v=θ) ∧ ∀v', (∀M N, θ0≫v'=θ) → v'=v) ∧ ∀U V, …. Everything else checked OK: universes, hypotheses on A and E (Braided = strong monoidal), flat/acyclic/K-flat preservation both ways, t/κ/θ0/ε^A directions, ε^R pinned by NativeCounitNormalized, ε^c and θ existence+uniqueness, all-complex counit clause, edge cases, docstrings, single sorry. No compile (no file changed).
+

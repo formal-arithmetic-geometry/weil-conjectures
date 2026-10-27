@@ -1,20 +1,15 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q102
+Authors: SHEAF group A7
 -/
 module
 
-public import Sheaf.SixFunctors.IntegralOpenReductionComparison
-import Sheaf.Algebra.Homology.RingedOpenTotalTensorKFlat
-public import Sheaf.Paper.SemilinearDerivedSections
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Adjunction.Limits
+public import Sheaf.SixFunctors.OpenSemilinearTensorModelData
+import Sheaf.SixFunctors.OpenSemilinearOrdinaryComparison
+import Sheaf.SixFunctors.OpenSemilinearReductionDescent
+import all Sheaf.Algebra.Homology.RingedOpenTotalTensorKFlat
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # Simultaneous open tensor comparison before scalar restriction
 
@@ -30,268 +25,295 @@ transformations of strict semilinear systems, before any localization or forgett
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option genInjectivity false
-set_option genSizeOf false
-set_option genSizeOfSpec false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 open WeilConjectures.SemilinearSections
-
 namespace WeilConjectures.OpenSemilinearTensor
-
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The existing ordinary open operations, including their actual adjunctions.
-Source: Stacks 03DI--03DJ, 0E8I (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev Operations := IntegralOpenReduction.Operations l E j
+attribute [local irreducible] CategoryTheory.Limits.limit HasDerivedCategory.standard
+  scalarReductionExistence scalarReductionDerivedExistence
+  SheafOfModules.monoidalCategory completedIntegralCoefficientSheafUnrestricted
+  SheafOfModules.extensionByZeroPresheaf SheafOfModules.overFunctor
 
-variable (o : Operations l E j)
+private theorem inverseInsertion {C : Type*} [Category* C]
+    {A B D H : C} (e : A ≅ D) (d : H ≅ B) (f : A ⟶ B) (g : D ⟶ H)
+    (h : g ≫ d.hom = e.inv ≫ f) : f ≫ d.inv = e.hom ≫ g := by
+  have hh := congrArg (fun k ↦ e.hom ≫ k ≫ d.inv) h
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id,
+    Category.comp_id] using hh.symm
 
-/-- Termwise ordinary open extension, without imposing a representative condition.
-Source: Stacks 0GL1 (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev extensionComplex :=
-  (IntegralOpenReduction.extension l E j o).mapHomologicalComplex (.up ℤ)
+open CategoryTheory.MonoidalCategory in
+private def tensorComparisonNatIso {A B : Type*} [Category* A] [Category* B]
+    [MonoidalCategory A] [MonoidalCategory B] (F : A ⥤ B) (T : B ⥤ A)
+    (μ : ∀ M N, F.obj M ⊗ N ≅ F.obj (M ⊗ T.obj N))
+    (hn : ∀ {M M' : A} {N N' : B} (f : M ⟶ M') (g : N ⟶ N'),
+      (F.map f ⊗ₘ g) ≫ (μ M' N').hom =
+        (μ M N).hom ≫ F.map (f ⊗ₘ T.map g)) (M : A) :
+    tensorLeft (F.obj M) ≅ T ⋙ tensorLeft M ⋙ F :=
+  NatIso.ofComponents (fun N ↦ μ M N) (by
+    intro N N' g
+    have h := hn (𝟙 M) g
+    rw [F.map_id M] at h
+    simpa only [Functor.comp_map, tensorLeft, curriedTensor_obj_map, id_tensorHom] using h)
 
-/-- Termwise ordinary restriction.
-Source: Stacks 0GL1 (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev restrictionComplex :=
-  (IntegralOpenReduction.restriction l E j o).mapHomologicalComplex (.up ℤ)
+open CategoryTheory.MonoidalCategory in
+private theorem tensorLeft_exact_of_comparison {A B : Type*} [Category* A] [Category* B]
+    [MonoidalCategory A] [MonoidalCategory B] (F : A ⥤ B) (T : B ⥤ A)
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    (μ : ∀ M N, F.obj M ⊗ N ≅ F.obj (M ⊗ T.obj N))
+    (hn : ∀ {M M' : A} {N N' : B} (f : M ⟶ M') (g : N ⟶ N'),
+      (F.map f ⊗ₘ g) ≫ (μ M' N').hom =
+        (μ M N).hom ≫ F.map (f ⊗ₘ T.map g)) (M : A)
+    (hM : exactFunctor A A (tensorLeft M)) :
+    exactFunctor B B (tensorLeft (F.obj M)) := by
+  let : PreservesFiniteLimits (tensorLeft M) := hM.1
+  let : PreservesFiniteColimits (tensorLeft M) := hM.2
+  let : PreservesFiniteLimits (tensorLeft M ⋙ F) :=
+    comp_preservesFiniteLimits (tensorLeft M) F
+  let : PreservesFiniteColimits (tensorLeft M ⋙ F) :=
+    comp_preservesFiniteColimits (tensorLeft M) F
+  let : PreservesFiniteLimits (T ⋙ tensorLeft M ⋙ F) :=
+    comp_preservesFiniteLimits T (tensorLeft M ⋙ F)
+  let : PreservesFiniteColimits (T ⋙ tensorLeft M ⋙ F) :=
+    comp_preservesFiniteColimits T (tensorLeft M ⋙ F)
+  have ht : exactFunctor B B (T ⋙ tensorLeft M ⋙ F) :=
+    ⟨(show PreservesFiniteLimits (T ⋙ tensorLeft M ⋙ F) from inferInstance),
+      (show PreservesFiniteColimits (T ⋙ tensorLeft M ⋙ F) from inferInstance)⟩
+  exact (exactFunctor B B).prop_of_iso
+    (tensorComparisonNatIso F T μ hn M).symm ht
 
-/-- The published total tensor, with its direct sums and signed differential.
-Source: Stacks 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev total (T : Scheme.{t}) := totalTensor.{t + 1, t, max u (t + 1)} (ProEt.topology T)
-  (completedIntegralCommRingSheafUnrestricted l E T)
+attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
+  WeilConjectures.SemilinearSections.hasDerived in
+open CategoryTheory.MonoidalCategory in
+private theorem totalComparison_of_ordinary (o : Operations l E j)
+    (μ : OrdinaryTensorComparison l E j o)
+    (hn : OrdinaryNaturality l E j o μ) (hg : OrdinaryGenerators l E j o μ) :
+    Nonempty (TotalComparison l E j o) := by
+  let : EssentiallySmall.{max u (t + 1)} U.ProEt := essentiallySmallSelf _
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  let A := scalarReductionSource l E U
+  let B := scalarReductionSource l E X
+  let RU : Sheaf (ProEt.topology U) CommRingCat.{max u (t + 1)} :=
+    completedIntegralCommRingSheafUnrestricted l E U
+  let RX : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)} :=
+    completedIntegralCommRingSheafUnrestricted l E X
+  let : HasSheafify (ProEt.topology U) AddCommGrpCat.{max u (t + 1)} :=
+    abelianSheafify.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t + 1)} :=
+    abelianSheafify.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+  let : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    locallyBijective.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    locallyBijective.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{t + 1, t, max u (t + 1)} RU
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{t + 1, t, max u (t + 1)} RX
+  let : MonoidalCategory A := SheafOfModules.monoidalCategory.{t, t + 1, max u (t + 1)} RU
+  let : MonoidalCategory B := SheafOfModules.monoidalCategory.{t, t + 1, max u (t + 1)} RX
+  let : MonoidalPreadditive A :=
+    SheafOfModules.cochainModulesPreadditive.{t + 1, t, max u (t + 1)} RU
+  let : MonoidalPreadditive B :=
+    SheafOfModules.cochainModulesPreadditive.{t + 1, t, max u (t + 1)} RX
+  let H : A ⥤ A ⥤ A := curriedTensor A
+  let H' : B ⥤ B ⥤ B := curriedTensor B
+  let Fext : A ⥤ B := IntegralOpenReduction.extension l E j o
+  let T : B ⥤ A := IntegralOpenReduction.restriction l E j o
+  let : PreservesFiniteLimits Fext := IntegralOpenReduction.extensionLimits l E j o
+  let : PreservesFiniteColimits Fext := IntegralOpenReduction.extensionColimits l E j o
+  let : PreservesColimitsOfSize.{0, 0} Fext :=
+    (IntegralOpenReduction.ordinaryAdjunction l E j o).leftAdjoint_preservesColimits
+  let : H.PreservesZeroMorphisms :=
+    SheafOfModules.ringedOpenTensorZero.{t + 1, t, max u (t + 1)} RU
+  let : ∀ M, (H.obj M).PreservesZeroMorphisms :=
+    SheafOfModules.ringedOpenTensorObjZero.{t + 1, t, max u (t + 1)} RU
+  let : H'.PreservesZeroMorphisms :=
+    SheafOfModules.ringedOpenTensorZero.{t + 1, t, max u (t + 1)} RX
+  let : ∀ M, (H'.obj M).PreservesZeroMorphisms :=
+    SheafOfModules.ringedOpenTensorObjZero.{t + 1, t, max u (t + 1)} RX
+  let : ∀ (P C : CochainComplex A ℤ), HomologicalComplex.HasMapBifunctor P C H (.up ℤ) :=
+    SheafOfModules.ringedOpenHasTotalTensor.{t + 1, t, max u (t + 1)} RU
+  let : ∀ (P C : CochainComplex B ℤ), HomologicalComplex.HasMapBifunctor P C H' (.up ℤ) :=
+    SheafOfModules.ringedOpenHasTotalTensor.{t + 1, t, max u (t + 1)} RX
+  let : (H ⋙ (Functor.whiskeringLeft B A A).obj T).PreservesZeroMorphisms :=
+    SheafOfModules.precompose_preservesZero H T
+  let : ∀ M, ((H ⋙ (Functor.whiskeringLeft B A A).obj T).obj M).PreservesZeroMorphisms :=
+    SheafOfModules.precompose_obj_preservesZero H T
+  let : ∀ (P : CochainComplex A ℤ) (C : CochainComplex B ℤ),
+      HomologicalComplex.HasMapBifunctor P C (H ⋙ (Functor.whiskeringLeft B A A).obj T) (.up ℤ) :=
+    SheafOfModules.precompose_hasTotal H T
+  obtain ⟨Φ, hι, hnat⟩ := SheafOfModules.comparisonFromComponents_exists Fext T H H'
+    (fun M N ↦ (μ M N).symm) (by
+      intro M M' N N' a b
+      have h := SheafOfModules.inverse_square (μ M N) (μ M' N')
+        (ordinaryTensorHom.{t + 1, t, max u (t + 1)} (ProEt.topology X) RX (Fext.map a) b)
+        (Fext.map (ordinaryTensorHom.{t + 1, t, max u (t + 1)}
+          (ProEt.topology U) RU a (T.map b)))
+        (hn a b)
+      simpa only [H, H', curriedTensor_map_app, curriedTensor_obj_map,
+        ordinaryTensorHom, ← tensorHom_def, Iso.symm_hom] using h)
+    H.map₂CochainComplex H'.map₂CochainComplex
+    (fun P C p q n h ↦ HomologicalComplex.ιMapBifunctor P C H (.up ℤ) p q n h)
+    (fun P C p q n h ↦ HomologicalComplex.ιMapBifunctor P C H' (.up ℤ) p q n h)
+    ⟨rfl, fun _ _ _ _ _ _ ↦ HEq.rfl⟩ ⟨rfl, fun _ _ _ _ _ _ ↦ HEq.rfl⟩
+  refine ⟨⟨μ, (fun Q F ↦ (Φ Q F).symm), hn, hg, ?_, ?_⟩⟩
+  · intro Q F a b d h
+    exact inverseInsertion (μ (Q.X a) (F.X b))
+      ((HomologicalComplex.eval _ _ d).mapIso (Φ Q F)) _ _ (hι Q F a b d h)
+  · intro Q Q' F F' f g
+    have h := SheafOfModules.inverse_square (Φ Q F) (Φ Q' F') _ _ (hnat Q Q' F F' f g)
+    exact h
 
-/-- The published ordinary sheaf tensor.
-Source: Stacks 03EK (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev tensor (T : Scheme.{t}) := ordinaryTensor.{t + 1, t, max u (t + 1)}
-  (ProEt.topology T) (completedIntegralCommRingSheafUnrestricted l E T)
+set_option maxHeartbeats 50000 in
+-- Keep this exactness proof below the default elaboration budget.
+attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
+  WeilConjectures.SemilinearSections.hasDerived in
+open CategoryTheory.MonoidalCategory in
+private theorem flat_of_ordinary (o : Operations l E j)
+    (μ : OrdinaryTensorComparison l E j o) (hn : OrdinaryNaturality l E j o μ)
+    (M : scalarReductionSource l E U)
+    (hM : SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1)}
+      (R := completedIntegralCommRingSheafUnrestricted l E U) M) :
+    SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1)}
+      (R := completedIntegralCommRingSheafUnrestricted l E X)
+      ((IntegralOpenReduction.extension l E j o).obj M) := by
+  let : EssentiallySmall.{max u (t + 1)} U.ProEt := essentiallySmallSelf _
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  let A := scalarReductionSource l E U
+  let B := scalarReductionSource l E X
+  let RU : Sheaf (ProEt.topology U) CommRingCat.{max u (t + 1)} :=
+    completedIntegralCommRingSheafUnrestricted l E U
+  let RX : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)} :=
+    completedIntegralCommRingSheafUnrestricted l E X
+  let : HasSheafify (ProEt.topology U) AddCommGrpCat.{max u (t + 1)} :=
+    abelianSheafify.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t + 1)} :=
+    abelianSheafify.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+  let : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    locallyBijective.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    locallyBijective.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{t + 1, t, max u (t + 1)} RU
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{t + 1, t, max u (t + 1)} RX
+  let : MonoidalCategory A := SheafOfModules.monoidalCategory.{t, t + 1, max u (t + 1)} RU
+  let : MonoidalCategory B := SheafOfModules.monoidalCategory.{t, t + 1, max u (t + 1)} RX
+  let : MonoidalPreadditive A :=
+    SheafOfModules.cochainModulesPreadditive.{t + 1, t, max u (t + 1)} RU
+  let : MonoidalPreadditive B :=
+    SheafOfModules.cochainModulesPreadditive.{t + 1, t, max u (t + 1)} RX
+  let : SymmetricCategory A := SheafOfModules.cochainModulesSymmetric.{t + 1, t, max u (t + 1)} RU
+  let : SymmetricCategory B := SheafOfModules.cochainModulesSymmetric.{t + 1, t, max u (t + 1)} RX
+  let Fext : A ⥤ B := IntegralOpenReduction.extension l E j o
+  let T : B ⥤ A := IntegralOpenReduction.restriction l E j o
+  let : PreservesFiniteLimits Fext := IntegralOpenReduction.extensionLimits l E j o
+  let : PreservesFiniteColimits Fext := IntegralOpenReduction.extensionColimits l E j o
+  let : PreservesFiniteLimits T := by
+    let : PreservesFiniteLimits
+        (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j)) :=
+      SheafOfModules.localizedSystemRestrictionLimits.{t + 1, t, max u (t + 1)} RX
+        (IntegralOpenReduction.openObject j)
+    change PreservesFiniteLimits
+      (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j) ⋙
+        o.integral.inverse)
+    exact comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits T := by
+    let : PreservesFiniteColimits
+        (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j)) :=
+      SheafOfModules.localizedSystemRestrictionColimits.{t + 1, t, max u (t + 1)} RX
+        (IntegralOpenReduction.openObject j)
+    change PreservesFiniteColimits
+      (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j) ⋙
+        o.integral.inverse)
+    exact comp_preservesFiniteColimits _ _
+  have hm : exactFunctor A A (tensorLeft M) :=
+    (exactFunctor A A).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso (R := RU) M ≪≫
+        (BraidedCategory.tensorLeftIsoTensorRight M).symm) hM
+  have he : exactFunctor B B (tensorLeft (Fext.obj M)) :=
+    tensorLeft_exact_of_comparison Fext T μ (by
+      intro M M' N N' f g
+      simpa only [ordinaryTensorHom] using hn f g) M hm
+  exact (exactFunctor B B).prop_of_iso
+    (BraidedCategory.tensorLeftIsoTensorRight (Fext.obj M) ≪≫
+      (SheafOfModules.siteSheafTensorRightIso (R := RX) (Fext.obj M)).symm) he
 
-/-- The recorded summand insertion in the total tensor, with no extra sign.
-Source: Stacks 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev summand (T : Scheme.{t}) := tensorSummand.{t + 1, t, max u (t + 1)}
-  (ProEt.topology T) (completedIntegralCommRingSheafUnrestricted l E T)
+attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
+  WeilConjectures.SemilinearSections.hasDerived in
+open CategoryTheory.MonoidalCategory in
+private theorem kflat_of_totalComparison (o : Operations l E j)
+    (c : TotalComparison l E j o) : KFlatPreservation l E j o := by
+  let : EssentiallySmall.{max u (t + 1)} U.ProEt := essentiallySmallSelf _
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  let A := scalarReductionSource l E U
+  let B := scalarReductionSource l E X
+  let RU : Sheaf (ProEt.topology U) CommRingCat.{max u (t + 1)} :=
+    completedIntegralCommRingSheafUnrestricted l E U
+  let RX : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)} :=
+    completedIntegralCommRingSheafUnrestricted l E X
+  let : HasSheafify (ProEt.topology U) AddCommGrpCat.{max u (t + 1)} :=
+    abelianSheafify.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t + 1)} :=
+    abelianSheafify.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+  let : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    locallyBijective.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)} :=
+    locallyBijective.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{t + 1, t, max u (t + 1)} RU
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{t + 1, t, max u (t + 1)} RX
+  let : MonoidalCategory A := SheafOfModules.monoidalCategory.{t, t + 1, max u (t + 1)} RU
+  let : MonoidalCategory B := SheafOfModules.monoidalCategory.{t, t + 1, max u (t + 1)} RX
+  let : MonoidalPreadditive A :=
+    SheafOfModules.cochainModulesPreadditive.{t + 1, t, max u (t + 1)} RU
+  let : MonoidalPreadditive B :=
+    SheafOfModules.cochainModulesPreadditive.{t + 1, t, max u (t + 1)} RX
+  let : SymmetricCategory A := SheafOfModules.cochainModulesSymmetric.{t + 1, t, max u (t + 1)} RU
+  let : SymmetricCategory B := SheafOfModules.cochainModulesSymmetric.{t + 1, t, max u (t + 1)} RX
+  let : ∀ (P C : CochainComplex A ℤ),
+      HomologicalComplex.HasMapBifunctor P C (curriedTensor A) (.up ℤ) :=
+    SheafOfModules.ringedOpenHasTotalTensor.{t + 1, t, max u (t + 1)} RU
+  let : ∀ (P C : CochainComplex B ℤ),
+      HomologicalComplex.HasMapBifunctor P C (curriedTensor B) (.up ℤ) :=
+    SheafOfModules.ringedOpenHasTotalTensor.{t + 1, t, max u (t + 1)} RX
+  let Fext : A ⥤ B := IntegralOpenReduction.extension l E j o
+  let T : B ⥤ A := IntegralOpenReduction.restriction l E j o
+  let : PreservesFiniteLimits Fext := IntegralOpenReduction.extensionLimits l E j o
+  let : PreservesFiniteColimits Fext := IntegralOpenReduction.extensionColimits l E j o
+  let : PreservesFiniteLimits T := by
+    let : PreservesFiniteLimits
+        (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j)) :=
+      SheafOfModules.localizedSystemRestrictionLimits.{t + 1, t, max u (t + 1)} RX
+        (IntegralOpenReduction.openObject j)
+    change PreservesFiniteLimits
+      (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j) ⋙
+        o.integral.inverse)
+    exact comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits T := by
+    let : PreservesFiniteColimits
+        (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j)) :=
+      SheafOfModules.localizedSystemRestrictionColimits.{t + 1, t, max u (t + 1)} RX
+        (IntegralOpenReduction.openObject j)
+    change PreservesFiniteColimits
+      (SheafOfModules.localizedSystemRestriction RX (IntegralOpenReduction.openObject j) ⋙
+        o.integral.inverse)
+    exact comp_preservesFiniteColimits _ _
+  intro Q hQ _hf
+  apply (SheafOfModules.kFlat_totalTensor_iff RX _).mpr
+  exact SheafOfModules.kFlat_map_of_presented_comparison Fext T
+    (SheafOfModules.acyclic_map Fext) (SheafOfModules.acyclic_map T)
+    (curriedTensor A).map₂CochainComplex (curriedTensor B).map₂CochainComplex rfl rfl
+    (fun P C ↦ (c.chain P C).symm) Q
+      ((SheafOfModules.kFlat_totalTensor_iff RU Q).mp hQ)
 
-/-- Identify a restricted section through the actual slice-equivalence counit.
-This writes the canonical identification, rather than assuming an arbitrary map of sections.
-Source: Stacks 03DJ (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def restrictedSection (N : scalarReductionSource l E X) (V : X.ProEt)
-    (a : V ⟶ IntegralOpenReduction.openObject j)
-    (y : ((IntegralOpenReduction.restriction l E j o).obj N).val.obj
-      (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a)))) : N.val.obj (op V) :=
-  (o.integral.counitIso.hom.app
-    ((SheafOfModules.localizedSystemRestriction.{t + 1, t, max u (t + 1)}
-      (completedIntegralCommRingSheafUnrestricted l E X)
-      (IntegralOpenReduction.openObject j)).obj N)).val.app (op (Over.mk a))
-    (((eqToHom o.integralFunctor.symm).app
-      ((IntegralOpenReduction.restriction l E j o).obj N)).val.app (op (Over.mk a)) y)
-
-/-- The family of ordinary open tensor isomorphisms.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev OrdinaryTensorComparison :=
-  ∀ (M : scalarReductionSource l E U) (N : scalarReductionSource l E X),
-    tensor l E X ((IntegralOpenReduction.extension l E j o).obj M) N ≅
-      (IntegralOpenReduction.extension l E j o).obj
-        (tensor l E U M ((IntegralOpenReduction.restriction l E j o).obj N))
-
-/-- The family of signed total tensor chain isomorphisms.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-abbrev TotalTensorComparison :=
-  ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)
-    (F : CochainComplex (scalarReductionSource l E X) ℤ),
-    (total l E X).obj ((extensionComplex l E j o).obj Q, F) ≅
-      (extensionComplex l E j o).obj
-        ((total l E U).obj (Q, (restrictionComplex l E j o).obj F))
-
-/-- Naturality of the ordinary isomorphism in both module maps.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def OrdinaryNaturality (μ : OrdinaryTensorComparison l E j o) : Prop :=
-  ∀ {M M' : scalarReductionSource l E U}
-    {N N' : scalarReductionSource l E X} (f : M ⟶ M') (g : N ⟶ N'),
-    ordinaryTensorHom.{t + 1, t, max u (t + 1)} (ProEt.topology X)
-        (completedIntegralCommRingSheafUnrestricted l E X)
-        ((IntegralOpenReduction.extension l E j o).map f) g ≫ (μ M' N').hom =
-      (μ M N).hom ≫ (IntegralOpenReduction.extension l E j o).map
-        (ordinaryTensorHom.{t + 1, t, max u (t + 1)} (ProEt.topology U)
-          (completedIntegralCommRingSheafUnrestricted l E U) f
-          ((IntegralOpenReduction.restriction l E j o).map g))
-
-/-- The ordinary comparison on every extension-sheafification generator.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def OrdinaryGenerators (μ : OrdinaryTensorComparison l E j o) : Prop :=
-  ∀ (M : scalarReductionSource l E U) (N : scalarReductionSource l E X)
-    (V : X.ProEt) (a : V ⟶ IntegralOpenReduction.openObject j)
-    (x : M.val.obj (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))))
-    (y : ((IntegralOpenReduction.restriction l E j o).obj N).val.obj
-      (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a)))),
-    ((μ M N).hom.val.app (op V))
-      (tensorSection.{t + 1, t, max u (t + 1)} (ProEt.topology X)
-        (completedIntegralCommRingSheafUnrestricted l E X) _ N (op V)
-        (IntegralOpenReduction.extensionSection l E j o M V a x)
-        (restrictedSection l E j o N V a y)) =
-      IntegralOpenReduction.extensionSection l E j o _ V a
-        (tensorSection.{t + 1, t, max u (t + 1)} (ProEt.topology U)
-          (completedIntegralCommRingSheafUnrestricted l E U) M _
-          (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) x y)
-
-/-- Each total summand is the displayed ordinary comparison, without extra signs.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def TotalSummands (μ : OrdinaryTensorComparison l E j o)
-    (φ : TotalTensorComparison l E j o) : Prop :=
-  ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)
-    (F : CochainComplex (scalarReductionSource l E X) ℤ)
-    (a b d : ℤ) (h : a + b = d),
-    summand l E X ((extensionComplex l E j o).obj Q) F a b d h ≫ (φ Q F).hom.f d =
-      (μ (Q.X a) (F.X b)).hom ≫
-        (IntegralOpenReduction.extension l E j o).map
-          (summand l E U Q ((restrictionComplex l E j o).obj F) a b d h)
-
-/-- Naturality in both chain maps of the total comparison.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def TotalNaturality (φ : TotalTensorComparison l E j o) : Prop :=
-  ∀ {Q Q' : CochainComplex (scalarReductionSource l E U) ℤ}
-    {F F' : CochainComplex (scalarReductionSource l E X) ℤ} (f : Q ⟶ Q') (g : F ⟶ F'),
-    (total l E X).map (Prod.mkHom ((extensionComplex l E j o).map f) g) ≫
-        (φ Q' F').hom =
-      (φ Q F).hom ≫ (extensionComplex l E j o).map
-        ((total l E U).map (Prod.mkHom f ((restrictionComplex l E j o).map g)))
-
-/-- Ordinary and total comparisons with the generator and summand normalizations.
-Source: Stacks 0E8I, 012Z (blueprint: lem-sf-open-semilinear-tensor-model). -/
-structure TotalComparison where
-  ordinary : OrdinaryTensorComparison l E j o
-  chain : TotalTensorComparison l E j o
-  ordinary_naturality : OrdinaryNaturality l E j o ordinary
-  generators : OrdinaryGenerators l E j o ordinary
-  summands : TotalSummands l E j o ordinary chain
-  naturality : TotalNaturality l E j o chain
-
-/-- A single ordinary reduction functor, retaining every quotient square before deriving.
-Its evaluation comparisons are natural in modules, not chosen separately for each complex.
-Source: Stacks 06YY, 0941 (blueprint: lem-sf-open-semilinear-tensor-model). -/
-structure OrdinaryReduction (T : Scheme.{t}) where
-  functor : scalarReductionSource l E T ⥤ coefficientSequenceModules l E T
-  [additive : functor.Additive]
-  evaluation : ∀ n : ℕ, functor ⋙ coefficientSequenceEvaluation l E T n ≅
-    scalarReductionExtension l E T n
-  quotient : ∀ (M : scalarReductionSource l E T) (m n : ℕ) (h : n ≤ m),
-    (coefficientSequenceTransition l E T h).app (functor.obj M) ≫
-        (normalizedDVRModuleRes l E T h).map ((evaluation n).hom.app M) =
-      (evaluation m).hom.app M ≫ (coefficientOrdinaryQuotient l E T h).app M
-
-attribute [instance] OrdinaryReduction.additive
-
-/-- Evaluation on complexes is the termwise ordinary evaluation, with its composition
-comparisons inserted explicitly. Source: Stacks 0941
-(blueprint: lem-sf-open-semilinear-tensor-model). -/
-def OrdinaryReduction.complexEvaluation {T : Scheme.{t}} (A : OrdinaryReduction l E T)
-    (Q : CochainComplex (scalarReductionSource l E T) ℤ) (n : ℕ) :
-    ((coefficientSequenceEvaluation l E T n).mapHomologicalComplex (.up ℤ)).obj
-      ((A.functor.mapHomologicalComplex (.up ℤ)).obj Q) ≅
-        ((scalarReductionExtension l E T n).mapHomologicalComplex (.up ℤ)).obj Q :=
-  (NatIso.mapHomologicalComplex (A.evaluation n) (.up ℤ)).app Q
-
-/-- The specified simultaneous computation, with both the quotient equations and the
-actual scalar-unit augmentation. Source: Stacks 06YS, 06YY, 0941
-(blueprint: lem-sf-open-semilinear-tensor-model). -/
-structure Computation {T : Scheme.{t}} (S : CoefficientDerivedSystemCalculus l E T)
-    (A : OrdinaryReduction l E T) (Q : CochainComplex (scalarReductionSource l E T) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (J := ProEt.topology T) (R := completedIntegralCommRingSheafUnrestricted l E T) Q) where
-  iso : S.reduction.obj (DerivedCategory.Q.obj Q) ≅
-    DerivedCategory.Q.obj ((A.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-  presentation : CoefficientReductionPresentation l E T S.toCoefficientDerivedSystemReduction
-    Q hQ _ iso (A.complexEvaluation l E Q)
-  augmentation : IntegralOpenReduction.AugmentedPresentation l E T S Q _ iso
-    (A.complexEvaluation l E Q)
-
-/-- Open extension preserves the actual independent-coefficient K-flat predicate.
-Source: Stacks 0GL1, 06YS, 0941 (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def KFlatPreservation : Prop :=
-  ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ),
-    CochainComplex.IsKFlatIndependentCoefficients
-      (R := completedIntegralCommRingSheafUnrestricted l E U) Q →
-      flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology U)
-        (completedIntegralCommRingSheafUnrestricted l E U) Q →
-      CochainComplex.IsKFlatIndependentCoefficients
-        (R := completedIntegralCommRingSheafUnrestricted l E X)
-        ((extensionComplex l E j o).obj Q)
-
-/-- The ordinary strict-system isomorphism applied termwise to complexes.
-Source: Stacks 0941 (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def ordinaryChain (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
-    (e : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅
-      AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o)
-    (Q : CochainComplex (scalarReductionSource l E U) ℤ) :
-    (AX.functor.mapHomologicalComplex (.up ℤ)).obj ((extensionComplex l E j o).obj Q) ≅
-      ((IntegralOpenReduction.systemExtension l E j o).mapHomologicalComplex (.up ℤ)).obj
-        ((AU.functor.mapHomologicalComplex (.up ℤ)).obj Q) :=
-  HomologicalComplex.Hom.isoOfComponents (fun i ↦ e.app (Q.X i))
-    (fun i k _h ↦ (e.hom.naturality (Q.d i k)).symm)
-
-/-- The strict chain comparison localizes under the canonical augmented computations.
-Source: Stacks 0GL1, 06YS, 0941 (blueprint: lem-sf-open-semilinear-tensor-model). -/
-def RepresentativeSquare (SX : CoefficientDerivedSystemCalculus l E X)
-    (SU : CoefficientDerivedSystemCalculus l E U)
-    (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
-    (r : IntegralOpenReduction.shriek l E j o ⋙ SX.reduction ≅
-      SU.reduction ⋙ IntegralOpenReduction.J l E j o)
-    (ordinary : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅
-      AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o)
-    (hk : KFlatPreservation l E j o) : Prop :=
-  ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (R := completedIntegralCommRingSheafUnrestricted l E U) Q)
-    (hf : flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology U)
-      (completedIntegralCommRingSheafUnrestricted l E U) Q),
-    ∃ (cU : Computation l E SU AU Q hQ)
-      (cX : Computation l E SX AX ((extensionComplex l E j o).obj Q) (hk Q hQ hf)),
-    r.hom.app (DerivedCategory.Q.obj Q) ≫
-        (IntegralOpenReduction.J l E j o).map cU.iso.hom ≫
-        (IntegralOpenReduction.systemExtension l E j o).mapDerivedCategoryFactors.hom.app
-          ((AU.functor.mapHomologicalComplex (.up ℤ)).obj Q) =
-      SX.reduction.map
-          ((IntegralOpenReduction.extension l E j o).mapDerivedCategoryFactors.hom.app Q) ≫
-        cX.iso.hom ≫ DerivedCategory.Q.map
-          (ordinaryChain l E j o AX AU ordinary Q).hom
-
-/-- The comparison is constructed in the strict system category. Its localization is
-fixed by the representative square on the specified augmented computations, for every
-flat-term K-flat representative, and is natural on the entire derived category.
-Source: Stacks 0GL1, 0E8I, 06YS, 0941
-(blueprint: lem-sf-open-semilinear-tensor-model). -/
-structure Comparison (SX : CoefficientDerivedSystemCalculus l E X)
-    (SU : CoefficientDerivedSystemCalculus l E U)
-    (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
-    (tensorComparison : IntegralOpenReduction.TensorComparison l E j o) where
-  totalComparison : TotalComparison l E j o
-  preservesFlatTerms : ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ),
-    CochainComplex.IsKFlatIndependentCoefficients
-      (R := completedIntegralCommRingSheafUnrestricted l E U) Q →
-    flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology U)
-        (completedIntegralCommRingSheafUnrestricted l E U) Q →
-      flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology X)
-        (completedIntegralCommRingSheafUnrestricted l E X) ((extensionComplex l E j o).obj Q)
-  kflat : KFlatPreservation l E j o
-  ordinary : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅
-    AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o
-  components : ∀ (M : scalarReductionSource l E U) (n : ℕ),
-    (coefficientSequenceEvaluation l E X n).map (ordinary.hom.app M) ≫
-        (IntegralOpenReduction.extensionEvaluation l E j o n).hom.app (AU.functor.obj M) ≫
-        (IntegralOpenReduction.finiteExtension l E j o n).map ((AU.evaluation n).hom.app M) =
-      (AX.evaluation n).hom.app ((IntegralOpenReduction.extension l E j o).obj M) ≫
-        (tensorComparison.ordinary n).hom.app M
-  r : IntegralOpenReduction.shriek l E j o ⋙ SX.reduction ≅
-    SU.reduction ⋙ IntegralOpenReduction.J l E j o
-  model : RepresentativeSquare l E j o SX SU AX AU r ordinary kflat
-
+attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
+  WeilConjectures.SemilinearSections.hasDerived in
 /-- Existence of the simultaneous, generator-normalized, unbounded open comparison.
 The input calculi and semilinear section construction are fixed, not replaced by arbitrary
 families of evaluated arrows. The section construction is the specified one: its slice
@@ -345,6 +367,22 @@ theorem openSemilinearTensorModel
       (tc : IntegralOpenReduction.TensorComparison l E j o),
       o.openSystems = sections.localization (IntegralOpenReduction.openObject j) ∧
         Nonempty (Comparison l E j o SX SU AX AU tc) := by
-  sorry
+  obtain ⟨o, AX, AU, tc, μ, ordinary, ho, hn, hg, hc⟩ :=
+    openSemilinearOrdinaryComparison l E j sections _hsections
+  obtain ⟨ct⟩ := totalComparison_of_ordinary l E j o μ hn hg
+  have hf : ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients
+        (R := completedIntegralCommRingSheafUnrestricted l E U) Q →
+      flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology U)
+        (completedIntegralCommRingSheafUnrestricted l E U) Q →
+      flatTerms.{t + 1, t, max u (t + 1)} (ProEt.topology X)
+        (completedIntegralCommRingSheafUnrestricted l E X)
+        ((extensionComplex l E j o).obj Q) := by
+    intro Q _hQ hQ i
+    exact flat_of_ordinary l E j o μ hn (Q.X i) (hQ i)
+  have hk := kflat_of_totalComparison l E j o ct
+  obtain ⟨r, hr⟩ := openSemilinearReductionDescent l E j SX SU _cX _cU
+    o AX AU ordinary hk hf
+  exact ⟨o, AX, AU, tc, ho, ⟨⟨ct, hf, hk, ordinary, hc, r, hr⟩⟩⟩
 
 end WeilConjectures.OpenSemilinearTensor

@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-contracted-smooth-curve-linearization",
+ "kind": "statement",
+ "title": "Etale local linearization of a contracted smooth group curve",
+ "statement": "Let $A$ be a commutative ring and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is a group object in schemes over $S$ [def-pc-scheme], with multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme] over this base. Put $\\mathbf G_{m,S}=\\operatorname{Spec}A[t,t^{-1}]$ with multiplication of units and $\\mathbf G_{a,S}=\\operatorname{Spec}A[x]$ with addition. For a smooth group $H/S$ [def-sbc-smooth-morphisms], write $\\operatorname{Lie}(H)=\\ker(H(A[\\epsilon]/(\\epsilon^2))\\to H(A))$, with addition from multiplication and scalar action from $\\epsilon\\mapsto a\\epsilon$. Let $U/S$ be a smooth affine group of finite presentation [def-sbc-locally-finite-presentation] with an action $a$ of $\\mathbf G_{m,S}$ by group automorphisms. Assume every geometric fibre is isomorphic as a group to $\\mathbf G_a$, and for every $A$-algebra $B$ and $u\\in U(B)$ the orbit map $t\\mapsto a(t,u)$ extends to $\\operatorname{Spec}B[t]\\to U_B$ with value $1_U$ at zero. Suppose $\\operatorname{Lie}(U)$ is locally free of rank one and the differentiated coaction is $v\\mapsto v\\otimes t^n$ for a fixed integer $n>0$. Then there is a jointly surjective family of affine etale maps $S_i\\to S$ [def-weil-etale-morphism] and group-scheme isomorphisms\n$$q_i:\\mathbf G_{a,S_i}\\xrightarrow{\\sim}U_{S_i},\\qquad q_i(t^nx)=a(t,q_i(x))$$\nafter every $S_i$-algebra extension. No invertibility of $n$ in $A$, reducedness or Noetherian hypothesis on $A$, or chosen section of $U$ away from its identity is required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Lemma 4.2.2 and its proof, printed pp.117-119, with the preceding etale-local choice of a section away from the identity, printed p.117; extracted for a general contracted smooth curve with the same hypotheses used in that proof. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative algebraic-group theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-sfb-relative-additive-coordinates",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "First make the tangent comparison valid over arbitrary $A$. Write $U=\\operatorname{Spec}C$ with augmentation $e:C\\to A$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] and [def-weil-pbc-smooth-ring-map], $\\Omega_{C/A}$ is finite projective. Thus $Q=A\\otimes_{C,e}\\Omega_{C/A}$ is finite projective: tensor an inclusion and retraction exhibiting $\\Omega_{C/A}$ as a summand of $C^N$. A tangent point with values in an $A$-algebra $B$ is exactly $c\\mapsto e(c)+\\epsilon D(c)$, where $D(cc')=e(c)D(c')+e(c')D(c)$ and $D(A)=0$. The universal property in [def-weil-pbc-kahler-differentials] identifies these points with $\\operatorname{Hom}_A(Q,B)$. The two unit identities for the comultiplication give addition of the two first-order coefficients; replacing $\\epsilon$ by $b\\epsilon$ gives scalar multiplication. These are precisely the operations used in the item.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Background on Lie functors, printed p.2; explicit affine tangent calculation supplementing the geometric-fibre weight comparison on printed pp.116–118; Stacks Tags 01V6, 02H6 and 00RO."
+   }
+  },
+  {
+   "text": "For every $A$-algebra $B$, [lem-weil-pbc-kahler-differentials-base-change] identifies the cotangent module of $U_B$ at its identity with $B\\otimes_A Q$. Since $Q$ is a summand of $A^N$, the comparison $B\\otimes_A Q^*\\to\\operatorname{Hom}_A(Q,B)$ is an isomorphism: it is the coordinate isomorphism for $A^N$, restricted by the same idempotent. This gives $\\operatorname{Lie}(U_B)=B\\otimes_A\\operatorname{Lie}(U)$. The formulas $c\\mapsto e(c)+\\epsilon D(c)$ commute with the action morphism, so this comparison respects its coaction. Consequently the tangent action after every base change, in particular every geometric fibre, has weight $n$. This uses the entire character $t^n$, not the integer $n$ acting on a Lie algebra by multiplication.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.2.2, proof, printed p.118, identifying the fibre action exponent from the Lie action; tangent base change written out from Stacks Tag 00RV."
+   }
+  },
+  {
+   "text": "Over an algebraically closed field $k$ above $S$, choose the given group isomorphism $U_k\\simeq\\mathbf G_{a,k}$. Its action is a polynomial $P(t,x)\\in k[t,t^{-1}][x]$. The action by $t^{-1}$ is its polynomial inverse and the identity is fixed. Degrees in $x$ multiply over the domain $k[t,t^{-1}]$, so $P(t,x)=c(t)x$ with $c(t)$ a Laurent unit. A Laurent unit over a field has one nonzero term, so $c(t)=d t^m$ for an integer $m$; $P(1,x)=x$ gives $d=1$. Its tangent action is the character $t^m$, hence step 2 and independence of Laurent monomials give $m=n$. Thus on every geometric fibre the action is $t.x=t^n x$, with equality of group-scheme actions, including on points over nonreduced $k$-algebras.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proof of Theorem 4.1.4 and Lemma 4.2.2, printed pp.116–118: classification of the action on each geometric additive fibre; polynomial-degree argument written out."
+   }
+  },
+  {
+   "text": "The affine morphism $U\\to S$ is separated by [lem-weil-pbc-affine-source-morphism-separated], so its identity section is closed by [lem-weil-pbc-section-separated-closed-immersion]. Let $V=U\\setminus e(S)$. It is smooth over $S$ by [lem-pc-open-immersion-smooth-composition], and surjective because every geometric fibre is $\\mathbf A^1$ minus its origin. Apply [lem-sfb-smooth-space-cover-etale-sections] to $V\\to S$ (schemes are the special case of algebraic spaces) and refine the covering schemes by affine opens. This gives a jointly surjective family of affine etale $S_i=\\operatorname{Spec}R_i\\to S$ with sections $\\sigma_i$ of $U_{S_i}$ disjoint from its identity. Smoothness persists by [lem-pc-proper-base-change](2), and a finite algebra presentation base changes by extending its coefficients. All action, contraction and tangent hypotheses persist: for contraction an $R_i$-algebra is already an $A$-algebra, and for tangent weights use step 2. Work on one such base $R$ and omit $i$. If $S$ is empty, use the empty family.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Preceding etale-local choice of a nonidentity section, printed p.117; Stacks Tags 01KT, 01VC, 01VA, 055U and 0CFV."
+   }
+  },
+  {
+   "text": "The contraction hypothesis applied to $\\sigma\\in U(R)$ gives $q:\\mathbf A^1_R\\to U_R$ with $q(1)=\\sigma$ and $q(0)=e$. It is equivariant for ordinary scaling on its source: the equality $q(tz)=a(t,q(z))$ holds for invertible $z$ by the action identity, and hence holds in general. Indeed both pullbacks of each coordinate function belong to $R[t,t^{-1},z]$, which injects into its localization at $z$, so their equality after localization implies equality. The same injection $R[z]\\hookrightarrow R[z,z^{-1}]$ proves uniqueness of the extension and compatibility with base change. On a geometric fibre, use step 3 and normalize the additive coordinate to carry $\\sigma$ to $1$. Then $q_k(z)=z^n$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.2.2, proof, printed pp.117–119"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-mu-n-fixed-subgroup-smooth] to $U_R$ and its action, obtaining the smooth finitely presented closed fixed subgroup $F=U_R^{\\mu_n}$. Formation of $F$ commutes with geometric base change. Step 3 shows $F_k=(U_R)_k$ on every geometric fibre, since $v^n=1$ makes $v^n x=x$ as a scheme-theoretic identity. The inclusion $F\\to U_R$ is locally of finite presentation by [lem-sfb-space-relative-lfp-permanence]: its composite to $\\operatorname{Spec}R$ is finitely presented and $U_R$ is finitely presented. Its source is flat by [lem-pc-smooth-flat]. Thus [lem-sfb-flat-geometric-fibre-open-criterion], isomorphism clause, gives $F=U_R$. In particular the full group scheme $\\mu_n$, including its infinitesimal points, acts trivially on $U_R$.",
+   "uses": [
+    "lem-sfb-mu-n-fixed-subgroup-smooth",
+    "lem-sfb-space-relative-lfp-permanence",
+    "lem-pc-smooth-flat",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.2.2, proof, printed p.118, mu_n-triviality; Conrad Lemma B.3.1 replaced by its existing Stacks geometric-fibre criterion node (Tags 039E, 02GM, 025G)."
+   }
+  },
+  {
+   "text": "It follows from equivariance that $q(vz)=q(z)$ for every $v\\in\\mu_n$. Write a coordinate pullback $q^*(c)=\\sum_{j\\geq0}b_jz^j$. In $R[z,v]/(v^n-1)$ invariance says $\\sum_j b_jz^j(v^j-1)=0$. The basis $1,v,\\ldots,v^{n-1}$ gives $b_j=0$ unless $n\\mid j$; this is valid even if $n=0$ in $R$. Hence $q^*(c)$ lies in the subring $R[z^n]$. The injective map $R[w]\\to R[z]$, $w\\mapsto z^n$, therefore gives a unique algebra map $\\bar q^*:C_R\\to R[w]$ with $q^*(c)=\\bar q^*(c)(z^n)$, and thus $\\bar q:\\mathbf A^1_R\\to U_R$. The identical coefficient substitution in $R[t,t^{-1},w]$ shows $\\bar q(t^n w)=a(t,\\bar q(w))$; also $\\bar q(0)=e$. No assertion about geometric points alone was used to factor $q$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.2.2, proof, printed p.118, categorical quotient by mu_n; the invariant-polynomial coefficient calculation is written out."
+   }
+  },
+  {
+   "text": "On every geometric fibre $q_k(z)=z^n$ in the normalized coordinate of step 5. Injectivity of $k[w]\\to k[z]$ gives $\\bar q_k(w)=w$, so $\\bar q_k$ is an isomorphism. Its source $\\mathbf A^1_R$ is smooth by [sbc-lem-affine-space-smooth], thus flat and locally of finite presentation by [lem-pc-smooth-flat]. Its target $U_R$ is finitely presented. By [lem-sfb-space-relative-lfp-permanence], $\\bar q$ is locally of finite presentation. Apply [lem-sfb-flat-geometric-fibre-open-criterion] again to conclude that $\\bar q$ is an isomorphism of $R$-schemes.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-smooth-flat",
+    "lem-sfb-space-relative-lfp-permanence",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.2.2, proof, printed p.118, fibral isomorphism criterion; Stacks Tags 00T7, 039E, 02GM, 025G."
+   }
+  },
+  {
+   "text": "Transfer multiplication along $\\bar q$ to a polynomial $m(x,y)\\in R[x,y]$. The identity and equivariance give $m(x,0)=x$, $m(0,y)=y$ and $m(t^n x,t^n y)=t^n m(x,y)$ in $R[t,t^{-1},x,y]$. If $b_{ij}x^iy^j$ is a term, its two $t$-exponents are $n(i+j)$ and $n$. Since $n>0$, they are distinct integers unless $i+j=1$, so Laurent coefficient comparison kills all other terms over any $R$. Hence $m=cx+dy$, and the two unit identities give $c=d=1$. Thus $\\bar q$ respects multiplication and the identity; it respects inverse as well because a multiplicative map sends the inverse to the unique inverse. Set $q_i=\\bar q$ on each cover. The polynomial equivariance identity from step 7 remains true after every $R_i$-algebra extension, giving exactly the group-scheme isomorphisms and functorial identity required.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.2.2, proof, printed p.119: homogeneity and unit identities force the additive group law."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-pc-proper-base-change",
+  "lem-sfb-mu-n-fixed-subgroup-smooth",
+  "lem-sfb-space-relative-lfp-permanence",
+  "lem-pc-smooth-flat",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Lemma 4.2.2, printed pp.117–119, read online; relative tangent and coefficient arguments supplied explicitly. Local archive missing (WANTED in report)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "contracting|linearization|linearisation|additivePolynomial",
+   "results": "{\"t\": \"2026-10-24T05:18:30Z\", \"tool\": \"grep\", \"query\": \"contracting|linearization|linearisation|additivePolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization is a free-module functor on sets with action, and standard-smooth etale charts do not identify a contracted group law or scaling action with the additive group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linearization of a contracting multiplicative group action on a smooth relative unipotent curve with a section away from the identity",
+   "results": "{\"t\": \"2026-10-24T05:18:30Z\", \"tool\": \"leansearch\", \"query\": \"Linearization of a contracting multiplicative group action on a smooth relative unipotent curve with a section away from the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearization\", \"Rep.coe_linearization_obj\", \"Rep.linearizationOfMulActionIso\", \"Rep.linearization_single\", \"Rep.coe_linearization_obj_ρ\", \"Rep.linearization_obj_ρ\", \"Rep.instMonoidalActionTypeLinearization\", \"smoothLeftMul_one\"], \"digest\": \"08e8171dc7df488f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization is a free-module functor on sets with action, and standard-smooth etale charts do not identify a contracted group law or scaling action with the additive group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-24T05:18:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization is a free-module functor on sets with action, and standard-smooth etale charts do not identify a contracted group law or scaling action with the additive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A contracted smooth one dimensional affine group scheme with pure positive multiplicative tangent weight is etale locally the additive group with that scaling action",
+   "results": "{\"t\": \"2026-10-24T05:18:37Z\", \"tool\": \"leanfinder\", \"query\": \"A contracted smooth one dimensional affine group scheme with pure positive multiplicative tangent weight is etale locally the additive group with that scaling action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"ab3c3753c64820ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Rep.linearization is a free-module functor on sets with action, and standard-smooth etale charts do not identify a contracted group law or scaling action with the additive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine group curve contracted by a multiplicative group action of positive tangent weight is etale locally the additive group with scalar action",
+   "results": "{\"t\": \"2026-10-24T07:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine group curve contracted by a multiplicative group action of positive tangent weight is etale locally the additive group with scalar action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.instMulActionVariableChange\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"WeierstrassCurve.toAffine\", \"WeierstrassCurve.VariableChange\", \"WeierstrassCurve.VariableChange.instGroup\", \"WeierstrassCurve.instSMulVariableChange\", \"WeierstrassCurve.Affine.nonsingular_iff_variableChange\"], \"digest\": \"a182935efb8bfe54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: action equivalences on abstract sets, elliptic-curve changes of variables and standard-smooth etale charts do not identify a contracted relative group law with the additive one."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T07:13:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: action equivalences on abstract sets, elliptic-curve changes of variables and standard-smooth etale charts do not identify a contracted relative group law with the additive one."
+  },
+  {
+   "tool": "grep",
+   "query": "contracted|contracting|linearization",
+   "results": "{\"t\": \"2026-10-24T07:13:37Z\", \"tool\": \"grep\", \"query\": \"contracted|contracting|linearization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: action equivalences on abstract sets, elliptic-curve changes of variables and standard-smooth etale charts do not identify a contracted relative group law with the additive one."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A contracting action of G_m on a smooth one dimensional group scheme is equivariantly isomorphic to G_a etale locally",
+   "results": "{\"t\": \"2026-10-24T07:15:03Z\", \"tool\": \"leansearch\", \"query\": \"A contracting action of G_m on a smooth one dimensional group scheme is equivariantly isomorphic to G_a etale locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.diagonalOneIsoLeftRegular\", \"AlgebraicGeometry.IsEtale\", \"isHomeomorph_smul\", \"Rep.linearizationOfMulActionIso\", \"DistribMulAction.toAddEquiv\", \"Action.HomSubtype\", \"ConjAct.ofConjAct\", \"MeasurableEquiv.smul\"], \"digest\": \"1236a388575b98db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: action equivalences on abstract sets, elliptic-curve changes of variables and standard-smooth etale charts do not identify a contracted relative group law with the additive one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative group equivariant isomorphism from an affine line with a positive weight action to a smooth unipotent group curve",
+   "results": "{\"t\": \"2026-10-24T07:15:08Z\", \"tool\": \"leanfinder\", \"query\": \"A multiplicative group equivariant isomorphism from an affine line with a positive weight action to a smooth unipotent group curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"affineHomeomorph\", \"AffineEquiv.constVAddHom\", \"WeierstrassCurve.instMulActionVariableChange\", \"WeierstrassCurve.Jacobian.Point.toAffine_smul\", \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply\", \"AffineEquiv.homothetyUnitsMulHom\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv\", \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv\"], \"digest\": \"9657c01479439564\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: action equivalences on abstract sets, elliptic-curve changes of variables and standard-smooth etale charts do not identify a contracted relative group law with the additive one."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-canonical-root-exponential",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Theorem 4.1.4, printed p.110, and its proof, pp.116-118; Remark 4.2.4. Closed canonical exponential of the root line, uniqueness and arbitrary base change.  Supporting prerequisite: Conrad, Reductive group schemes, Lemma 4.2.2 and its proof, printed pp.117-119, with the preceding etale-local choice of a section away from the identity, printed p.117; extracted for a general contracted smooth curve with the same hypotheses used in that proof.",
+   "via": [
+    "lem-sfb-relative-canonical-root-exponential",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-contracted-smooth-curve-linearization",
+  "worker": "stage1",
+  "summary": "Followed Conrad Lemma 4.2.2 via a nonidentity section, the full mu_n fixed subgroup, invariant-polynomial factorization and the geometric-fibre isomorphism criterion. Retained the statement over arbitrary rings, supplied tangent base change without invoking the Noetherian-only tangent node, and wrote the group-law polynomial comparison explicitly. One new statement-only fixed-subgroup smoothness input; all other geometric inputs already exist. No Lean attachment or Mathlib match.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor agrees). This split realizes the place already recorded in blueprint.from: the contracted smooth group curve input used before the relative root exponential, with Conrad Lemma 4.2.2 as its mathematical source. Searches of all blueprint nodes found no equivalent linearization or relative mu_n-fixed-smoothness statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), generic preservation of smoothness under a change of base, is used after passing to the etale cover; this does not replace any unit-route step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine smoothness comparison supplies finite projective differentials for the tangent calculation over arbitrary rings; no same-unit node supplies the unrestricted version."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of the affine line verifies the source hypotheses of the existing geometric-fibre isomorphism criterion; no same-unit replacement is needed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-a2de5cc7e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-a2de5cc7e (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-mu-n-fixed-subgroup-smooth and every cited statement. Conrad Reductive group schemes is not in literature/; WANTED is recorded and the proof is marked by=agent, so I checked the argument directly. This is a first split (no re-split order). Step 1: the smooth-ring-map comparison and Kähler differentials give finite projective Q. Step 2: Lie commutes with every base change and keeps weight n, without the Noetherian tangent node. Step 3: composing with the inverse forces x-degree 1, and the Laurent unit with tangent weight n gives the action t^n x on every geometric fibre, scheme-theoretically. Step 4: separated affine morphism, so the identity section is closed and its complement V is smooth and surjective; lem-sfb-smooth-space-cover-etale-sections gives affine étale charts with a section σ; base change by lem-pc-proper-base-change(2). Step 5: the orbit map of σ extends, injectivity into the localization at z gives equivariance, and q_k(z)=z^n. Step 6: the new node's F is smooth fp; lem-pc-smooth-flat, lfp-permanence and the fibre isomorphism criterion (hypotheses match: X flat lfp, Y lft, f lfp) give F=U_R, which is valid over a nonreduced base. Step 7: the basis of R[v]/(v^n-1) puts q^* into R[z^n], giving the factorization q̄ with weight-n equivariance. Step 8: A^1 is smooth and the fibre criterion makes q̄ an isomorphism, also when the characteristic divides n. Step 9: exponent comparison with n>0 gives m=x+y. New node: true (fixed points of the multiplicative-type, finite locally free μ_n on a smooth separated affine group form a smooth closed subgroup; base change is formal). Edge cases n=1, n=p in char p, trivial action and the zero ring all hold. It is self-contained with three search kinds and does not restate an item clause. An rg -L search over dag/nodes found only field-level or G_m-lifting fixed-point nodes, so it is not a duplicate. Batch 5: the smooth-space étale-section and lfp-permanence nodes reach sec-trace-formula only through def-trf-algebraic-space, a general definition. The fibre criterion reaches lem-trf-geometric-fibre-unramified-criterion, a generic unramifiedness criterion; neither is given by or part of the proof of the trace formula or Poincaré duality, so this is acceptable. Accepted tool_uses: lem-pc-proper-base-change(2), lem-weil-pbc-smooth-ring-map-iff-smooth-affine, sbc-lem-affine-space-smooth. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ContractedSmoothCurveLinearization",
+  "declaration": "AlgebraicGeometry.contracted_smooth_curve_etale_linearization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ContractedSmoothCurveLinearization.lean",
+  "statement": "theorem contracted_smooth_curve_etale_linearization (A : Type u) [CommRing A] (U : Over (Spec (.of A))) [GrpObj U] [IsAffine U.left] [Smooth U.hom] [LocallyOfFinitePresentation U.hom] [ModObj (RingGroupSchemes.multiplicative A).X U] (haut : ∀ (B : Type u) [CommRing B] [Algebra A B] (t : points (RingGroupSchemes.multiplicative A).X B) (x y : points U B), t • (x * y) = (t • x) * (t • y)) (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra A Ω], ∃ q : line A Ω ⟶ U, IsAdditiveCoordinate A U Ω q) (hcontract : ∀ (B : Type u) [CommRing B] [Algebra A B] (x : points U B), ∃ q : line A B ⟶ U, point A B B 0 ≫ q = 1 ∧ ∀ (D : Type u) [CommRing D] [Algebra A D] [Algebra B D] [IsScalarTower A B D] (t : points (RingGroupSchemes.multiplicative A).X D), point A B D (unitValue A D t) ≫ q = t • points.map U (IsScalarTower.toAlgHom A B D) x) (hrank : (GrpObj.lieAlgebraSheaf U).IsFiniteLocallyFreeOfRank 1) (n : ℕ) (hn : 0 < n) (hweight : ∀ (B : Type u) [CommRing B] [Algebra A B] (t : points (RingGroupSchemes.multiplicative A).X B) (v : points U (DualNumber B)), points.map U (TrivSqZeroExt.fstHom A B B) v = 1 → points.map (RingGroupSchemes.multiplicative A).X ((Algebra.ofId B (DualNumber B)).restrictScalars A) t • v = points.map U ((DualNumber.scale (unitValue A B t ^ n)).restrictScalars A) v) : ∃ (I : Type u) (R : I → Type u) (_ : ∀ i, CommRing (R i)) (_ : ∀ i, Algebra A (R i)), (∀ i, Etale (Spec.map (CommRingCat.ofHom (algebraMap A (R i))))) ∧ (∀ s : Spec (.of A), ∃ (i : I) (r : Spec (.of (R i))), (Spec.map (CommRingCat.ofHom (algebraMap A (R i)))) r = s) ∧ ∀ i, ∃ q : line A (R i) ⟶ U, IsAdditiveCoordinate A U (R i) q ∧ ∀ (B : Type u) [CommRing B] [Algebra A B] [Algebra (R i) B] [IsScalarTower A (R i) B] (t : points (RingGroupSchemes.multiplicative A).X B) (x : B), point A (R i) B (unitValue A B t ^ n * x) ≫ q = t • (point A (R i) B x ≫ q)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-094a3199e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Clause-by-clause check of contracted_smooth_curve_etale_linearization against the node: GrpObj over Spec A, affine+Smooth+lfp (=fp), the ModObj Gm action with haut, hgeom over alg-closed Ω:Type u via IsAdditiveCoordinate (Cartesian + additive), hcontract (q(0)=1, restriction to G_m,B = orbit), hrank via upstream lieAlgebraSheaf (=dual e^*Ω, equivalent for smooth affine U), hweight with the full character t^n via DualNumber.scale, n>0; conclusion: étale affine jointly surjective family (I may be empty), additive coordinates, t^n-equivariance after every R_i-algebra; quantifier order matches. New node def-sfb-relative-additive-coordinates: absent from Mathlib/project/DAG (StandardGroupSchemes is field-only), real data, §5 fields OK, no name clash. Item changed only in lean + stmt_deps (new node + landed def-amb-finite-locally-free-module); 7 dep node files byte-identical to base; lean.statement verbatim. Docstrings/source/blueprint/9 proof steps, sorry only. Edge cases: zero ring, n=1, n=p, universes; sanity model G_a with t^n x satisfies all hypotheses. Notes only: same-worker second reading; split torus cited transitively; lfp redundant with Smooth."
+ }
+}

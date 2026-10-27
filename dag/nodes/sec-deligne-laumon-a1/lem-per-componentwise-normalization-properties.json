@@ -14,11 +14,86 @@
   "def-weil-finite-integral-morphism",
   "def-weil-surjective-morphism",
   "def-weil-residue-field",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-componentwise-normalization-generic-properties] to $X$. Its hypothesis is precisely local Noetherianity, with no reducedness or excellence requirement. Its conclusion gives every assertion in (1), including normality as integrally closed domain stalks and the canonical isomorphism of the entire generic fibre with the residue-field spectrum. In particular this is a scheme-fibre assertion, not merely a bijection of its points.",
+   "uses": [
+    "lem-sfb-componentwise-normalization-generic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal), (1)--(2); Tag 035P (lemma-description-normalization), generic-fibre calculation; Tag 0CDV (lemma-normalization-in-terms-of-components)."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq X$ be any open subscheme. The open-subscheme assertion in [pqf-def-locnoeth] gives local Noetherianity of $U$ and of each open subscheme of $U$ or $X$. Any quasi-compact such open is therefore Noetherian, so [lem-weil-pbc-noetherian-finitely-many-components] gives finitely many irreducible components. Thus both $X$ and $U$ satisfy the quasi-compact-open finiteness hypothesis of the normalization chart and triviality lemmas used below. This reasoning does not assume that $U$ itself is quasi-compact.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Hypotheses of Tags 035P (lemma-description-normalization) and 0H7D (lemma-normalization-trivial); Properties Tag 01OV and Morphisms Tag 01T6."
+   }
+  },
+  {
+   "text": "Put $N=X^\\nu\\times_XU$; by the base-change assertion [lem-weil-pbc-open-immersion-base-change] this is the open inverse image of $U$ in $X^\\nu$. For each affine open $V\\subseteq U$, also affine in $X$, apply [lem-sfb-normalization-generic-residue-affine-charts] to $X$ and to $U$. Write $A_V=\\Gamma(V,\\mathcal O_V)$. In both applications the index set is the generic points of $V$ and the ring is the integral closure $D_V$ of $A_V$ in the product of their residue fields. The ambient stalks are unchanged on open restriction: neighbourhoods contained in the open are cofinal among neighbourhoods of a point, so their stalk colimits, residue quotients and germ maps coincide. Consequently the two rings $D_V$, their $A_V$-algebra maps, and the charts $N\\times_UV\\simeq\\operatorname{Spec}D_V\\simeq U^\\nu\\times_UV$ agree canonically. The compatibility clause of the cited chart lemma identifies restriction maps for every affine inclusion $W\\subseteq V$, in both applications, with the same projection on generic residue-field factors. Hence these chart isomorphisms and their inverses agree on affine opens in overlaps. Such affine opens cover every overlap, without requiring the overlaps themselves affine. By [lem-weil-pbc-scheme-morphism-gluing] the local maps glue in both directions, and the composites are identities since they are identities on each chart. This constructs the canonical isomorphism $N\\simeq U^\\nu$ over $U$ required by the first assertion of (2).",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-sfb-normalization-generic-residue-affine-charts",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035K (lemma-normalization-localization), via the affine construction of Tag 035P and the componentwise identification Tag 0CDV. The chart compatibility spells out the localization implicit in 035K."
+   }
+  },
+  {
+   "text": "If $U$ is normal, step 2 verifies the finite-component hypothesis of [lem-sfb-normalization-normal-locally-finite]. That lemma makes $\\nu_U:U^\\nu\\to U$ an isomorphism. Compose the isomorphism of step 3 with $\\nu_U$; because step 3 is over $U$, this composite is exactly the restriction $N\\to U$. This proves the second assertion of (2). For $U=\\varnothing$, every chart, inverse image and normalization in steps 2--4 is empty, and the glued maps are the unique maps of empty schemes.",
+   "uses": [
+    "lem-sfb-normalization-normal-locally-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H7D (lemma-normalization-trivial), applied to the open $U$."
+   }
+  },
+  {
+   "text": "For (3), apply [lem-sfb-integral-normal-generic-recognition] with $T=X$ and $a=f:Z\\to X$. Its target is locally Noetherian by assumption; its source has integrally closed domain stalks because $Z$ is normal. Its remaining hypotheses are exactly the assumed integrality of $f$, bijection of component-generic points and residue-field isomorphisms. It concludes a unique isomorphism $Z\\xrightarrow{\\sim}X^\\nu$ over $X$. This lemma even allows a source not locally Noetherian, so the stated stronger source hypothesis causes no gap. It explicitly permits nonreduced $X$ and the empty schemes. Thus (3) follows with its uniqueness clause, without assuming that generic stalks of nonreduced $X$ are fields.",
+   "uses": [
+    "lem-sfb-integral-normal-generic-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal), (3) with its footnote on reductions and (4) for uniqueness; Tag 0H7D (lemma-normalization-trivial)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-sfb-normalization-generic-residue-affine-charts",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-sfb-integral-normal-generic-recognition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035Q, 035K, 0H7D, 035P and 0CDV; assembly from existing nodes stating their normalization inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,10 +150,38 @@
    "results": "{\"t\": \"2026-10-18T23:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a Noetherian scheme commutes with open restriction, is an isomorphism on normal opens, has one point with unchanged residue field over each generic point, and is characterized by normal integral birational maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"2014468b1da2b162\"}",
    "date": "2026-10-19",
    "verdict": "no match: AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; AlgebraicGeometry.Scheme.Hom.fromNormalization; these results do not state the node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The componentwise normalization of a locally Noetherian scheme is normal integral surjective, commutes with open restriction and is characterized by integral generic point residue field isomorphisms",
+   "results": "{\"t\": \"2026-10-24T00:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"The componentwise normalization of a locally Noetherian scheme is normal integral surjective, commutes with open restriction and is characterized by integral generic point residue field isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"125f794b2d1ff32e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative-normalization APIs found, not all the componentwise absolute-normalization clauses. Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 127--227, 287--307, 377--446 and 586--612; no one-line specialization proves the item."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|normalizationPullback|IsIso",
+   "results": "{\"t\": \"2026-10-24T00:46:15Z\", \"tool\": \"grep\", \"query\": \"normalization|normalizationPullback|IsIso\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"17\", \"19\", \"20\", \"24\"], \"digest\": \"e2f17bf45c1b6886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative-normalization APIs found, not all the componentwise absolute-normalization clauses. Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 127--227, 287--307, 377--446 and 586--612; no one-line specialization proves the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a locally Noetherian scheme commutes with open subschemes and has the universal property for normal integral birational maps",
+   "results": "{\"t\": \"2026-10-24T00:46:15Z\", \"tool\": \"leansearch\", \"query\": \"Normalization of a locally Noetherian scheme commutes with open subschemes and has the universal property for normal integral birational maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"d4556ef91f768af7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative-normalization APIs found, not all the componentwise absolute-normalization clauses. Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 127--227, 287--307, 377--446 and 586--612; no one-line specialization proves the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsIntegralHom",
+   "results": "{\"t\": \"2026-10-24T00:46:16Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsIntegralHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\"], \"digest\": \"1340ef42f5c2f5ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative-normalization APIs found, not all the componentwise absolute-normalization clauses. Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 127--227, 287--307, 377--446 and 586--612; no one-line specialization proves the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normalization-completion-base-change",
@@ -107,5 +210,73 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-componentwise-normalization-properties",
+  "worker": "stage1",
+  "summary": "Reused existing generic-properties, affine generic-residue chart, normal-normalization and integral generic-recognition nodes. Wrote the open-restriction chart comparison and gluing explicitly. Preserved the statement, including empty and nonreduced cases; added three notion dependencies. No new nodes.",
+  "blueprint": "Normalization input along the existing normalized-blowup completion-descent branch below lem-per-artin-gabber-affine-curve: clause (1) supplies its local/generic structure, clause (2) its localization on open charts, and clause (3) recognition of the normal integral birational model. The current latest ancestor proof was read; this is supporting geometry below the unit, not a replacement of its perverse-Fourier route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-componentwise-normalization-generic-properties",
+    "why": "Generic scheme-normalization structure used as a black box; the unit is about perverse Fourier exactness and provides no substitute for this normalization tool."
+   },
+   {
+    "node": "lem-sfb-normalization-generic-residue-affine-charts",
+    "why": "Generic-residue affine charts with restriction compatibility identify the two normalization diagrams; this is auxiliary scheme geometry below the unit."
+   },
+   {
+    "node": "lem-sfb-normalization-normal-locally-finite",
+    "why": "Normal schemes have trivial componentwise normalization; an auxiliary normalization tool, not another route for the unit."
+   },
+   {
+    "node": "lem-sfb-integral-normal-generic-recognition",
+    "why": "Recognition of a normal integral generic-field-preserving cover supplies clause (3); the unit has no competing recognition construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-normalization-generic-residue-affine-charts",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-sfb-integral-normal-generic-recognition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-da219523f",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-da219523f (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged from the base, there are no new nodes, five steps, and proof_deps equal the union of the uses. I checked the cited Stacks tags in morphisms.tex: 035K (l.14039), 035Q (1)-(4) with the reduction footnote (l.14504), 0CDV and 0H7D. The statement is true for nonreduced X. The generic fibre is Spec κ(η) because Spec κ(η)→X factors through the reduced component. I tested the empty scheme, k[ε]/ε², the axes xy=0 with a normal open, and A¹→cusp. Step 1 is verbatim the statement of lem-sfb-componentwise-normalization-generic-properties. Step 2 gets the finitely-many-components hypothesis on quasi-compact opens of X and U from pqf-def-locnoeth and lem-weil-pbc-noetherian-finitely-many-components. Step 3 is a correct chart gluing: lem-sfb-normalization-generic-residue-affine-charts applied to X and to U gives the same D_V, its compatibility clause makes the charts agree on affine W⊆V, and overlaps are covered by affines without being assumed affine. Step 4 uses lem-sfb-normalization-normal-locally-finite on U. Step 5 matches lem-sfb-integral-normal-generic-recognition hypothesis for hypothesis, including uniqueness. There is no cycle (a closure of 168 nodes does not reach the item), no cited id is on the route-pivot dropped list, and live and side-live still have the item unsplit with no repair note. I accept the four declared lem-sfb tool_uses as generic normalization geometry. Advisory: clause (2a) is also a special case of lem-sfb-componentwise-normalization-smooth-pullback (open immersion is étale), but the written argument is complete. Maintainer note: the item is listed in coord/route-pivot-dropped.txt l.1475 but is reached again through the merged lem-sfb-nodal-completed-normalization-model step 3 and is in the queue; the list entry should be removed or the citer repointed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentwiseNormalizationProperties",
+  "declaration": "AlgebraicGeometry.Scheme.componentwiseNormalization_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentwiseNormalizationProperties.lean",
+  "statement": "theorem componentwiseNormalization_properties (X : Scheme.{u}) [IsLocallyNoetherian X] : ((∀ x : X.reducedNormalization, IsDomain (X.reducedNormalization.presheaf.stalk x) ∧ IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk x)) ∧ IsIntegralHom X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ Set.BijOn X.fromReducedNormalization {x : X.reducedNormalization | ∃ C ∈ irreducibleComponents X.reducedNormalization, IsGenericPoint x C} {x : X | ∃ C ∈ irreducibleComponents X, IsGenericPoint x C} ∧ (∀ η : X, (∃ C ∈ irreducibleComponents X, IsGenericPoint η C) → IsIso (pullback.snd X.fromReducedNormalization (X.fromSpecResidueField η)))) ∧ (∀ U : X.Opens, (∃! e : pullback X.fromReducedNormalization U.ι ≅ U.toScheme.reducedNormalization, e.hom ≫ U.toScheme.fromReducedNormalization = pullback.snd X.fromReducedNormalization U.ι) ∧ ((∀ x : U.toScheme, IsDomain (U.toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed (U.toScheme.presheaf.stalk x)) → IsIso (pullback.snd X.fromReducedNormalization U.ι))) ∧ (∀ (Z : Scheme.{u}) (_ : IsLocallyNoetherian Z) (f : Z ⟶ X) (_ : IsIntegralHom f), (∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) → Set.BijOn f {z : Z | ∃ C ∈ irreducibleComponents Z, IsGenericPoint z C} {x : X | ∃ C ∈ irreducibleComponents X, IsGenericPoint x C} → (∀ z : Z, (∃ C ∈ irreducibleComponents Z, IsGenericPoint z C) → IsIso (f.residueFieldMap z)) → ∃! e : Z ≅ X.reducedNormalization, e.hom ≫ X.fromReducedNormalization = f)",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2c710895",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Only the item lean field changed vs side-live; the statement is verbatim. Clause (1): normal stalks, IsIntegralHom, Surjective, BijOn of component generic points, and IsIso of pullback.snd for the generic residue fibre (checked by the D_p computation, also for nonreduced X). Clause (2): ∃! iso of pullback ν U.ι with U's normalization over U, where uniqueness holds because automorphisms over the base are trivial; normal U gives IsIso of the restriction. Clause (3) equals the landed existsUnique_iso_reducedNormalization_of_integral_normal_generic plus the node's local-Noetherian Z. No extra hypotheses; the same universe for Z is forced by Z ⟶ X. Edge cases: empty X and U, k[ε]/ε², xy=0, infinitely many components, non-qc. No existing equivalent in the project or Mathlib; no definitions; sorry only; docstrings carry the source and proof steps; all deps recorded. No recompile since no file was changed."
+ }
 }

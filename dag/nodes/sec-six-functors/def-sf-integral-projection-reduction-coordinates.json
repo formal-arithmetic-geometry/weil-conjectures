@@ -1,0 +1,129 @@
+{
+ "id": "def-sf-integral-projection-reduction-coordinates",
+ "kind": "definition",
+ "title": "Finite-Tor reduction and prescribed operation coordinates",
+ "statement": "For the datum of [def-fix-six-functor-datum], integral residue Tor makes every finite reduction of a bounded constructible integral input finite Tor. Lift the actual reduction functor, unchanged on objects and arrows, into the full finite-Tor subcategory. Lift the recorded pullback comparison through its full inclusion. Given any tensor-coordinate isomorphisms, define source and target coordinates of the individual compactified and proper projections using only those tensor isomorphisms and the recorded support/direct/pullback comparisons. No unproved existence witness defines an object.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Successive coefficient reductions, integral reconstruction, and coherence"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Pull invertibility of the coefficient prime to residue fields. Apply integral_residue_tor to obtain a uniform Tor interval and specialize it at the chosen reduction level.",
+   "uses": [
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Successive coefficient reductions, integral reconstruction, and coherence"
+   }
+  },
+  {
+   "text": "Use ObjectProperty.lift with the proved membership. The pullback isomorphism is the full-subcategory lift of the recorded directAdjunction left comparison. The remaining coordinates are composites and images of these specified isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Successive coefficient reductions, integral reconstruction, and coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Successive coefficient reductions, integral reconstruction, and coherence; explicit coefficient-coordinate route (P2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition coherence of compact support projection formula proper comparison associativity pentagon",
+   "results": "Eight unrelated Profinite and continuous-map projection hits; no coefficient-normalized compact support identity.",
+   "date": "2026-10-26",
+   "verdict": "Use the project finite projection laws and normalized coefficient data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.IsHomotopyLimit.bijective_milnorMap",
+   "results": "Unknown identifier; no hits in Mathlib. The project source contains the required proved Milnor injection.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source Milnor theorem with constructible finite shifted Hom groups."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*coherence|projection.*composition",
+   "results": "Five unrelated Mathlib hits; project rg locates the finite-stage laws, residue-Tor criterion and separated constructible Hom reconstruction.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib replacement for the normalized projection or the qcqs finiteness input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStageProjectionStructuralIdentities",
+  "date": "2026-10-27",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite-Tor reduction and prescribed operation coordinates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionReductionData",
+  "file": "lean/Sheaf/Paper/IntegralProjectionReductionData.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.torReduction",
+  "statement": "def torReduction (X : SixFunctorSpace D) :\n    sfIntegralConstructibleCategory C.l E X.obj.left ⥤\n      finiteTorConstructibleCategory C.l E (m + 1) (Nat.le_add_left 1 m) X.obj.left",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.IntegralProjectionReduction.stage",
+   "WeilConjectures.IntegralProjectionReduction.reduction",
+   "WeilConjectures.IntegralProjectionReduction.reduction_finiteTor",
+   "WeilConjectures.IntegralProjectionReduction.torReduction",
+   "WeilConjectures.IntegralProjectionReduction.pullIso",
+   "WeilConjectures.IntegralProjectionReduction.TensorCoordinates",
+   "WeilConjectures.IntegralProjectionReduction.tensorPullIso",
+   "WeilConjectures.IntegralProjectionReduction.sourceIso",
+   "WeilConjectures.IntegralProjectionReduction.targetIso",
+   "WeilConjectures.IntegralProjectionReduction.properSourceIso",
+   "WeilConjectures.IntegralProjectionReduction.properTargetIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T183849-L-3785139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T183849-L-3785139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

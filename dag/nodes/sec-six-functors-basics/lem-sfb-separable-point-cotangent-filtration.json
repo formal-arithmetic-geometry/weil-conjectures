@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-separable-point-cotangent-filtration",
+ "kind": "statement",
+ "title": "Finite smooth and locally free filtration of separable point reductions",
+ "statement": "Let $k$ be a field and $k_s/k$ a separable closure, meaning an algebraic separable extension which is separably closed [def-weil-field, def-pc-separably-closed]. Let $Z$ be a finite-type $k$-scheme [def-pc-scheme, def-weil-finite-type-morphism], $M$ a coherent $\\mathcal O_Z$-module [pqf-def-coherent], and $P\\subseteq Z(k_s)$ any set of $k$-morphisms $\\operatorname{Spec}k_s\\to Z$ [def-weil-affine-spectrum]. Define recursively $P_1=P$, let $Z_i\\hookrightarrow Z$ be the reduced induced closed subscheme on the closure of the images of $P_i$ [lem-weil-pbc-reduced-induced-closed-subscheme], let $U_i\\subseteq Z_i$ be the union of the opens smooth over $k$ on which $M|_{Z_i}$ is locally free of finite rank [def-sbc-smooth-morphisms, def-pc-module-pullback], and set $P_{i+1}=\\{p\\in P_i:p\\notin U_i\\}$. Locally free of finite rank means locally isomorphic to a finite direct sum of structure sheaves. Then $Z_i$ is geometrically reduced (its base change to every field extension of $k$ is reduced), $U_i$ is dense in $Z_i$, and on every affine open of $Z_i$ the intersection of the kernels of evaluation at the points of $P_i$ in that affine is zero. Moreover $Z_{i+1}\\subseteq Z_i\\setminus U_i$, and $P_{t+1}=\\varnothing$ for some finite $t\\geq0$. Thus $P$ is partitioned by $P_i\\setminus P_{i+1}$ for $1\\leq i\\leq t$. If $P\\ne\\varnothing$ and $t$ is minimal, a point of $P$ lies in $Z_t$ exactly when it belongs to $P_t$, and all such points lie in $U_t$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 Lemma 4, printed p.67, and 3.4 Theorem 2 proof, canonical partition on printed pp.72-73, PDF pp.78-79; coherent-module generalization of the restriction of relative differentials; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-def-coherent",
+  "def-weil-field",
+  "def-pc-separably-closed",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "First make the construction for an arbitrary subset $Q\\subseteq P$, writing $Y$ for its reduced closed closure. The affine description of the reduced induced structure shows that $Y\\hookrightarrow Z$ is locally a quotient of rings. On a finite affine cover witnessing finite type over $k$, those quotients are finitely generated $k$-algebras, so $Y$ is of finite type. The field $k$ is Noetherian (its only ideals are $0$ and $k$), hence $Z$ and $Y$ are Noetherian by the cited finite-type theorem. Every finite-type affine $k$-algebra is finitely presented by the cited Noetherian algebra lemma. Thus $Y\\to\\operatorname{Spec}k$ is locally of finite presentation. These conclusions apply separately to every $Q=P_i$, including $Q=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; algebra.tex Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation; BLR 3.4 Theorem 2 proof, canonical closures"
+   }
+  },
+  {
+   "text": "On an affine open $V=\\operatorname{Spec}A$ of $Y$, the images of the members of $Q$ landing in $V$ are dense: any nonempty open in $V$ is an open of $Y$ and therefore meets $Q$. Each such morphism factors through $Y$, since its map to a field kills the ideal defining the reduced closure. Let $J$ be the intersection of their evaluation kernels $A\\to k_s$. This is a radical ideal and $V(J)$ is the closure of their images, hence all of $V$. Therefore $J=\\sqrt{0}=0$, since $Y$ is reduced. This also proves the requested intersection-of-kernels clause for every affine open, without assuming that $Q$ consists of all separable points of $Y$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 and 01J4, lemma-reduced-closed-subscheme and definition-reduced-induced-scheme; BLR 3.3 property (N) and Lemma 4"
+   }
+  },
+  {
+   "text": "Let $L/k$ be finite purely inseparable. Choose a $k$-basis $e_1,\\ldots,e_r$ of $L$. The evaluations of Step 2 remain jointly injective on $A\\otimes_k L$: if $x=\\sum_j a_j\\otimes e_j$ has zero image in every $k_s\\otimes_k L$, independence of the $e_j$ over $k_s$ gives $p(a_j)=0$ for every $p$ and $j$, so all $a_j=0$. The basis remains a basis after scalar extension, by the coordinate maps $e_j\\mapsto\\delta_{ij}$. Each target $k_s\\otimes_k L$ is reduced by the separably-generated tensor theorem, applied to the reduced $k$-algebra $L$ and the separable algebraic extension $k_s/k$ (empty separating transcendence basis). A nilpotent of $A\\otimes_k L$ consequently has zero image in every target and is zero. The finite purely inseparable test now gives reducedness of $A\\otimes_k K$ for every extension $K/k$. The affine base-change chart theorem identifies these spectra with an open cover of $Y_K$; hence $Y$ is geometrically reduced. Apply this argument with $Q=P_i$ for each $i$.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "lem-weil-pbc-affine-chart-base-change-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030U (lemma-separable-extension-preserves-reducedness) and 030V (lemma-geometrically-reduced-finite-purely-inseparable-extension); schemes.tex Tags 01JR and 01I4; finite-basis expansion of BLR 3.3 Lemma 4"
+   }
+  },
+  {
+   "text": "For $j_i:Z_i\\hookrightarrow Z$, put $F_i=j_i^*M$. Since $Z$ is locally Noetherian, coherent $M$ is quasi-coherent of finite type by the cited equivalence. The two pullback lemmas give those same properties for $F_i$. Choose local affine presentations $F_i|_V=\\widetilde N$ on $V=\\operatorname{Spec}A$; the affine finite-type criterion makes $N$ finitely generated, and $A$ is reduced. Apply reduced-polynomial-module generic freeness with $R=A$, $n=0$, $P=A$, and module $N$. Its dense union of principal opens has $N_f$ free over $A_f$. These free modules have finite bases: finitely many generators use only finitely many basis coordinates, which must contain the whole basis. The tilde localization theorem identifies the restricted sheaf with a finite free structure module on each such principal open. Thus the union $W_i$ of all opens where $F_i$ is locally free of finite rank is dense: every nonempty open meets a local affine chart and then its dense generic-free open. The smooth locus $S_i$ is dense by the geometrically-reduced dense-smooth-open theorem, using Steps 1 and 3. By their definitions $U_i=S_i\\cap W_i$: at a point of the intersection, intersect smooth and free neighbourhoods. The intersection of two dense opens is dense, since any nonempty open meets the first in a nonempty open and then meets the second. This proves density of $U_i$.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sfb-reduced-polynomial-module-generic-freeness",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pur-geometrically-reduced-dense-smooth-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051Z, lemma-generic-flatness-reduced, polynomial case n=0; coherent.tex Tag 01XZ; modules.tex Tags 01BG and 01B6; properties.tex Tag 01PB; schemes.tex Tag 01HV; varieties.tex Tag 056V; BLR 3.4 Theorem 2 proof, choice of the dense free smooth open"
+   }
+  },
+  {
+   "text": "The set of images of $P_{i+1}$ is contained in the closed subset $Z_i\\setminus U_i$ of $Z$, so its closure $|Z_{i+1}|$ is contained there. This is also an inclusion of the reduced induced closed subschemes: on affine charts an inclusion of their closed sets reverses the corresponding radical ideals, giving the required quotient map. If $P_i\\ne\\varnothing$, then $Z_i\\ne\\varnothing$, and the dense open $U_i$ is nonempty; it follows that $|Z_{i+1}|\\subsetneq|Z_i|$. Notice that an arbitrary map into a nonreduced subscheme would not follow merely from image containment; here both structures are the specified reduced induced ones.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, affine radical-ideal description; BLR 3.4 Theorem 2 proof, containment of the next closure in the complement"
+   }
+  },
+  {
+   "text": "If every $P_i$ were nonempty, the nonempty family of closed subsets $\\{|Z_i|:i\\geq1\\}$ of the Noetherian scheme $Z$ would have a minimal member $|Z_j|$ by the cited minimal-element theorem. Step 5 gives the strictly smaller member $|Z_{j+1}|$, a contradiction. Thus $P_{t+1}=\\varnothing$ for some finite $t\\geq0$. The recursive identity $P_{i+1}=P_i\\setminus U_i$ and the nested sets $P_i$ give the disjoint partition by $P_i\\setminus P_{i+1}$, by telescoping. For $P=\\varnothing$ choose $t=0$, with the empty partition.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ, lemma-Noetherian-topology, and topology.tex Tag 0051; BLR 3.4 Theorem 2 proof, termination of the canonical partition"
+   }
+  },
+  {
+   "text": "Suppose $P\\ne\\varnothing$ and choose the least such $t$, so $P_t\\ne\\varnothing$. Every point in $P_t$ lies in $Z_t$ and, since $P_{t+1}=\\varnothing$, in $U_t$. Conversely, if $p\\in P\\setminus P_t$, there is a first index $j<t$ with $p\\in P_j\\setminus P_{j+1}$, so $p\\in U_j$. But $Z_t\\subseteq Z_{j+1}\\subseteq Z_j\\setminus U_j$ by Step 5 and nestedness of the closures. Thus $p$ cannot lie in $Z_t$. This proves both final assertions, also when $t=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.4 Theorem 2 proof, last nonempty stratum is permissible; printed pp.72-73 (PDF pp.78-79)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sfb-reduced-polynomial-module-generic-freeness",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of BLR 3.3 Lemma 4 and 3.4 Theorem 2 canonical partition, using Stacks 030U, 030V, 051Z, 056V and affine sheaf facts. BLR primary scan read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over a field and any subset of separable rational points, their reduced closure has a dense smooth open where a prescribed coherent module is locally free",
+   "results": "{\"t\": \"2026-10-24T09:14:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type scheme over a field and any subset of separable rational points, their reduced closure has a dense smooth open where a prescribed coherent module is locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"Algebra.isOpen_unramifiedLocus\"], \"digest\": \"e5948f4b4d72fe66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth/open-locus and rational-map results do not supply the separable-point closure density, generic module freeness and finite filtration; Group/Smooth.lean:64 assumes a group object."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyReduced.*smooth|smooth.*geometricallyReduced|freeLocus|genericFree",
+   "results": "{\"t\": \"2026-10-24T09:15:10Z\", \"tool\": \"grep\", \"query\": \"geometricallyReduced.*smooth|smooth.*geometricallyReduced|freeLocus|genericFree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"ae0e8d641a24d546\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth/open-locus and rational-map results do not supply the separable-point closure density, generic module freeness and finite filtration; Group/Smooth.lean:64 assumes a group object."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyReduced\", \"smooth\"",
+   "results": "{\"t\": \"2026-10-24T09:15:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyReduced\\\", \\\"smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth/open-locus and rational-map results do not supply the separable-point closure density, generic module freeness and finite filtration; Group/Smooth.lean:64 assumes a group object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type field scheme with a schematically dense family of separable points has a dense smooth open on which a coherent sheaf is locally free",
+   "results": "{\"t\": \"2026-10-24T09:15:10Z\", \"tool\": \"leansearch\", \"query\": \"A finite type field scheme with a schematically dense family of separable points has a dense smooth open on which a coherent sheaf is locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"bd0947b127f44552\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth/open-locus and rational-map results do not supply the separable-point closure density, generic module freeness and finite filtration; Group/Smooth.lean:64 assumes a group object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successively close separable rational points and remove the smooth locally free locus to obtain a finite descending filtration of closed subschemes",
+   "results": "{\"t\": \"2026-10-24T09:15:14Z\", \"tool\": \"leanfinder\", \"query\": \"Successively close separable rational points and remove the smooth locally free locus to obtain a finite descending filtration of closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.smoothLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\"], \"digest\": \"30bc336cb0a6f315\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth/open-locus and rational-map results do not supply the separable-point closure density, generic module freeness and finite filtration; Group/Smooth.lean:64 assumes a group object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closure of a subset of separable rational points admits a finite filtration by smooth opens on which a coherent sheaf is locally free",
+   "results": "{\"t\": \"2026-10-24T09:44:04Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced closure of a subset of separable rational points admits a finite filtration by smooth opens on which a coherent sheaf is locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\"], \"digest\": \"e539215dbbd50767\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus openness and local smooth presentations do not give the separable-point closure filtration; Group/Smooth.lean:64 requires a group object."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyReduced\", \"smooth\"",
+   "results": "{\"t\": \"2026-10-24T09:45:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyReduced\\\", \\\"smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus openness and local smooth presentations do not give the separable-point closure filtration; Group/Smooth.lean:64 requires a group object."
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*(closure|dense)|filtration.*smooth|generic.*free",
+   "results": "{\"t\": \"2026-10-24T09:45:43Z\", \"tool\": \"grep\", \"query\": \"separable.*(closure|dense)|filtration.*smooth|generic.*free\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\"], \"digest\": \"5e34ece0060b6a41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus openness and local smooth presentations do not give the separable-point closure filtration; Group/Smooth.lean:64 requires a group object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive reduced closures of separable rational points terminate after removing dense smooth locally free loci",
+   "results": "{\"t\": \"2026-10-24T09:46:21Z\", \"tool\": \"leansearch\", \"query\": \"Successive reduced closures of separable rational points terminate after removing dense smooth locally free loci\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"separableClosure.separableClosure_eq_bot\", \"separableClosure\", \"IsSepClosure.recOn\", \"separableClosure.isSepClosure\", \"IsSepClosure.sep_closed\", \"SeparableClosure\", \"separableClosureOperator\", \"separableClosure.isSeparable\"], \"digest\": \"3ce4d2851c06abe7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus openness and local smooth presentations do not give the separable-point closure filtration; Group/Smooth.lean:64 requires a group object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic density of separable points and generic freeness yield a finite stratification by smooth schemes",
+   "results": "{\"t\": \"2026-10-24T09:46:22Z\", \"tool\": \"leanfinder\", \"query\": \"Schematic density of separable points and generic freeness yield a finite stratification by smooth schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"942f656c24d91c76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus openness and local smooth presentations do not give the separable-point closure filtration; Group/Smooth.lean:64 requires a group object."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-smooth-model-smoothening",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 3.4 Theorem 2 proof, printed p.72 (PDF p.78): canonical partition of E by reduced closures of the remaining specializations and removal of the smooth locally free locus; BLR 3.3 Lemma 4 supplies geometric reducedness. Coherent-module version of the relative-differential restriction.",
+   "via": [
+    "lem-sfb-generic-smooth-model-smoothening",
+    "lem-sfb-weak-neron-family-rational-property",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separable-point-cotangent-filtration",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Complete seven-step proof of affine evaluation density, geometric reducedness via a finite-basis argument over finite purely inseparable extensions, dense smooth/free opens via existing reduced generic freeness with zero variables, strict closed descent, termination and final-stratum membership. No new nodes: all non-elementary inputs reused after reading their statements. Exact project attachment absent; Mathlib searches repeated with two phrasings and no match. Sources read, all hypotheses and empty/rank-zero/imperfect-field cases checked; citations.json records each used statement.",
+  "blueprint": "BLR 3.4 Theorem 2 proof, printed p.72 (PDF p.78): canonical partition of E by reduced closures of the remaining specializations and removal of the smooth locally free locus; BLR 3.3 Lemma 4 supplies geometric reducedness. Coherent-module version of the relative-differential restriction. The ancestor command reports None; the inherited provenance chain is preserved. Current latest sk-thm-sf-ctf-stability is unchanged by this below-node proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "Reduced tensor product with the separable algebraic field k_s, a general algebra tool; no same-unit theorem gives this field-extension fact."
+   },
+   {
+    "node": "lem-trf-geometric-reducedness-finite-inseparable-test",
+    "why": "General affine geometric reducedness criterion, used after the finite-basis calculation; not a replacement of any unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "General affine tensor-product chart for field base change, used to pass from affine rings to scheme reducedness."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General characterization of coherent modules on a locally Noetherian scheme, needed to use generic freeness."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "General preservation of quasi-coherence under tensor pullback, needed for M restricted to the reduced closures."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "General preservation of finite type under tensor pullback, needed for the same restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "General affine correspondence between finite-type quasi-coherent sheaves and finitely generated modules."
+   },
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "General geometric reducedness-to-dense-smooth-open theorem; no same-unit result states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pur-geometrically-reduced-dense-smooth-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-36fe54d6c",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-36fe54d6c (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, 7 steps, no new nodes. Step 2: the reduced-induced ideal kills each separable point, so the kernel of A→k_s is p_t; then J=∩p_t is radical with V(J)=V, hence J=0, which proves the kernel clause. Step 3: with a finite basis e_j of a finite purely inseparable L, A⊗L embeds in ∏ k_s⊗L. Each factor is reduced by 030U (algebra.tex 10152; k_s/k separable algebraic, empty transcendence basis). The 030V node (algebra.tex 10425, E=k allowed) then gives A⊗K reduced for every K, and the affine-chart node turns this into reducedness of Y_K. Step 4: 01XZ, the pullback lemmas 01BG/01B6, 01PB(a) and 051Z with n=0 on reduced charts give a dense locally free locus; a finitely generated free module has a finite basis; 01HV gives the tilde identification on D(f). 056V (varieties.tex 4694), with hypotheses from Steps 1 and 3, gives a dense smooth locus. U_i=S_i∩W_i and two dense opens meet densely. Steps 5–7: radical-ideal inclusion of the reduced closures, strictness from a nonempty dense U_i, termination by 01OZ (Z Noetherian by 01T6), telescoping partition, and the final-stratum argument are all correct. I tested P=∅ (t=0), a single separable point (t=1), the cusp (t=2), imperfect k with Z(k_s)=∅, nonreduced Z, and rank jumps on two crossing lines; no hypothesis is used that is not there. Search for duplicates (BLR 3.3/3.4, 'separable point', the item id) found nothing, and the proof_deps closure has no cycle. Batch 5: lem-trf-geometric-reducedness-finite-inseparable-test (030V) and lem-trf-polynomial-shear-leading-coefficient (Nagata shear, reached through 051Z generic freeness) are general commutative algebra; neither the trace formula nor Poincaré duality gives them and they are not steps of their proofs, so I accept both. The BLR PDF is absent locally (WANTED recorded); the proof is agent-origin on Stacks. The worker wrote tool_uses itself, which C8 reserves for L, but the entries are accurate general tools and I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparablePointCotangentFiltration",
+  "declaration": "AlgebraicGeometry.SeparablePointCotangentFiltration.separable_point_cotangent_filtration",
+  "declarations": [
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.closedHull",
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.hull",
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.hullι",
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.goodOpen",
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.remaining",
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.evaluation",
+   "AlgebraicGeometry.SeparablePointCotangentFiltration.separable_point_cotangent_filtration"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparablePointCotangentFiltration.lean",
+  "statement": "theorem separable_point_cotangent_filtration (k Ks : Type u) [Field k] [Field Ks] [Algebra k Ks] [IsSepClosure k Ks] (Z : Scheme.{u}) (f : Z ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (M : Z.Modules) (hM : RingedSpace.IsCoherent Z.toRingedSpace M) (P : Set (Spec (.of Ks) ⟶ Z)) (hP : ∀ p ∈ P, p ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k Ks))) : (∀ n : ℕ, GeometricallyReduced (hullι (remaining f M P n) ≫ f) ∧ Dense (goodOpen f M (remaining f M P n) : Set (hull (remaining f M P n))) ∧ (∀ V : (hull (remaining f M P n)).affineOpens, (⨅ (p : Spec (.of Ks) ⟶ Z) (_ : p ∈ remaining f M P n) (q : Spec (.of Ks) ⟶ hull (remaining f M P n)) (_ : q ≫ hullι (remaining f M P n) = p) (hV : ⊤ ≤ q ⁻¹ᵁ V.1), RingHom.ker (evaluation q V.1 hV)) = ⊥) ∧ (∃ j : hull (remaining f M P (n + 1)) ⟶ hull (remaining f M P n), IsClosedImmersion j ∧ j ≫ hullι (remaining f M P n) = hullι (remaining f M P (n + 1)) ∧ Set.range j ⊆ (goodOpen f M (remaining f M P n) : Set _)ᶜ)) ∧ (∃ t : ℕ, remaining f M P t = ∅ ∧ P = ⋃ i : Fin t, remaining f M P i.val \\ remaining f M P (i.val + 1) ∧ Pairwise (fun i j : Fin t ↦ Disjoint (remaining f M P i.val \\ remaining f M P (i.val + 1)) (remaining f M P j.val \\ remaining f M P (j.val + 1)))) ∧ (P.Nonempty → ∀ t : ℕ, remaining f M P t = ∅ → (∀ s : ℕ, s < t → remaining f M P s ≠ ∅) → ∀ p ∈ P, (p (IsLocalRing.closedPoint Ks) ∈ Set.range (hullι (remaining f M P (t - 1))) ↔ p ∈ remaining f M P (t - 1)) ∧ (p ∈ remaining f M P (t - 1) → p (IsLocalRing.closedPoint Ks) ∈ hullι (remaining f M P (t - 1)) '' (goodOpen f M (remaining f M P (t - 1)) : Set _)))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six helpers give the actual canonical construction and evaluation map belonging to this node. remaining n is P_(n+1); the least termination index t therefore has last nonempty closure hull (remaining (t-1)). No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ca59fe18",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Only the item node's lean field changed (no live lean yet); the statement matches the file verbatim and the record is complete. Clause-by-clause match: k, Ks with IsSepClosure; finite type = LocallyOfFiniteType + QuasiCompact; RingedSpace.IsCoherent; a set P of k-morphisms; P_{n+1} = remaining n, with removal exactly 'p not in U_i'; hull = vanishingIdeal(closure of the images).subscheme (reduced induced); goodOpen = sSup of the opens that are Smooth over k with (tensorPullback hullι M).over V IsFiniteLocallyFree (variable rank); GeometricallyReduced; Dense; evaluation-kernel infimum = ⊥ over affine opens, with evaluation = appLE + ΓSpecIso into Ks; closed immersion j with range in the complement of goodOpen; termination with a Fin t partition plus disjointness; minimal-t final clause with t-1 safe because P is nonempty. Edge cases checked: P empty, empty stages after termination, affine opens with no points, M = 0 and varying rank, imperfect k, universes. Helpers have real data and source/blueprint docstrings; the theorem docstring has the 7 steps; proof-dependency imports match the proof_deps records. Advisory: SheafOfModules.IsFiniteLocallyFree (owned by def-sc-finite-locally-free-sheaf, existing:true) is used without that stmt_dep; the node spells the notion out inline and 15 of 20 landed users also omit it, so this is a maintainer note, not a return. No compile run because no file was changed."
+ }
+}

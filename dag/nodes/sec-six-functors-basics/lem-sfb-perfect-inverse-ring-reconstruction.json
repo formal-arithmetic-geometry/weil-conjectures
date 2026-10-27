@@ -1,0 +1,186 @@
+{
+ "id": "lem-sfb-perfect-inverse-ring-reconstruction",
+ "kind": "statement",
+ "title": "Perfect reconstruction over infinitesimal inverse systems of rings",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective homomorphisms $A_{n+1}\\to A_n$ whose kernels are locally nilpotent: every element of each kernel is nilpotent. Let $A=\\varprojlim_n A_n$, the ring of compatible tuples. Use unbounded module derived categories [def-weil-abstract-derived-category] and derived extension and restriction of scalars [lem-pur-derived-change-of-rings]. Suppose $C_n\\in D(A_n)$ is perfect for every $n$, meaning isomorphic to a bounded complex of finitely generated projective $A_n$-modules [def-pc-perfect-ring-complex]. Suppose given maps $t_n:C_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}C_n$ in $D(A_{n+1})$ whose scalar-extension adjuncts $C_{n+1}\\otimes^{\\mathbf L}_{A_{n+1}}A_n\\to C_n$ are isomorphisms. Form $C=R\\varprojlim_n\\operatorname{Res}_{A\\to A_n}C_n$ in $D(A)$, using the homotopy inverse limit of [def-weil-derived-limit]. Then $C$ is perfect over $A$ and for every $n$ the projection-induced scalar-extension adjunct $C\\otimes_A^{\\mathbf L}A_n\\to C_n$ is an isomorphism in $D(A_n)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQG, lemma-Rlim-perfect-gives-perfect, alternative (2) in which every C_n is perfect."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nil-ring-perfect-derived-limit] with $T_n=C_n$, with the given ring tower and transition maps, and with $T=C$. Its hypotheses are exactly available: all transition maps are surjective with elementwise nilpotent kernels, all $C_n$ are perfect over $A_n$, and the adjuncts of $t_n$ are isomorphisms. Both limits are formed in $D(A)$ after scalar restriction, using the same homotopy inverse limit and its projections. The cited statement gives that $C$ is perfect over $A$ and that the scalar-extension adjunct of each projection $C\\to C_n$ is an isomorphism. Its map $\\rho_n$ is therefore exactly the comparison requested here, rather than an unspecified isomorphism of objects. The additional naturality and transition-compatibility conclusions of the cited statement are not needed.",
+   "uses": [
+    "lem-sfb-nil-ring-perfect-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQG, lemma-Rlim-perfect-gives-perfect, all-perfect alternative; reuse its existing stronger DAG statement lem-sfb-nil-ring-perfect-derived-limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nil-ring-perfect-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQG, lemma-Rlim-perfect-gives-perfect, all-perfect alternative, already stated with projection adjuncts by lem-sfb-nil-ring-perfect-derived-limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Perfect derived inverse limits of compatible perfect complexes over rings with locally nilpotent kernels",
+   "results": "8 hits: AdicCompletion, AdicCompletion.subring, PerfectionMap.lift_symm_apply, AdicCompletion.submodule, instHasLimitsCondensedMod, InverseSystem.piEquivLim, ProfiniteGrp.isIso_toLimit, PerfectRing.liftEquiv_symm_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: adic completion of modules, perfection of characteristic-p rings and ordinary limits of bounded-below cochain complexes do not reconstruct perfect objects of D(A)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"limit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: adic completion of modules, perfection of characteristic-p rings and ordinary limits of bounded-below cochain complexes do not reconstruct perfect objects of D(A)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible perfect complexes over surjective inverse systems of rings with locally nilpotent kernels have perfect derived inverse limit",
+   "results": "8 hits: AdicCompletion.of_surjective_iff, BDeRhamPlus, localCohomology.ofDiagram, AdicCompletion.map_exact, AdicCompletion.eval_surjective, AdicCompletion, localCohomology.hasColimitDiagram, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-24",
+   "verdict": "no match: adic completion of modules, perfection of characteristic-p rings and ordinary limits of bounded-below cochain complexes do not reconstruct perfect objects of D(A)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived inverse limit of perfect complexes with compatible reductions over infinitesimal ring thickenings is perfect",
+   "results": "8 hits: PreTilt.instPerfectRing, PerfectionMap.map, BDeRhamPlus, BDeRham, Perfection.perfectRing, PreTilt, Algebra.FormallySmooth.of_perfectField, instPerfectRingProd",
+   "date": "2026-10-24",
+   "verdict": "no match: adic completion of modules, perfection of characteristic-p rings and ordinary limits of bounded-below cochain complexes do not reconstruct perfect objects of D(A)."
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|rlim|inverseLimit|[Pp]erfect.*[Cc]omplex",
+   "results": "1 hits: Mathlib/Algebra/Homology/CochainComplexPlus.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-24",
+   "verdict": "no match: adic completion of modules, perfection of characteristic-p rings and ordinary limits of bounded-below cochain complexes do not reconstruct perfect objects of D(A)."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(limit|completion)|(limit|completion).*perfect|Rlim",
+   "results": "{\"t\": \"2026-10-23T22:38:07Z\", \"tool\": \"grep\", \"query\": \"perfect.*(limit|completion)|(limit|completion).*perfect|Rlim\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/CochainComplexPlus.lean\"], \"digest\": \"6c30f39618550551\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary limits of complexes, adic completion, ring perfection and formally smooth ring lifting do not state perfect derived reconstruction; the grep hit CochainComplexPlus.lean:60 concerns finite limits of bounded-below complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes over inverse systems of rings with nilpotent transition kernels are reconstructed by the derived inverse limit",
+   "results": "{\"t\": \"2026-10-23T22:38:08Z\", \"tool\": \"leansearch\", \"query\": \"Perfect complexes over inverse systems of rings with nilpotent transition kernels are reconstructed by the derived inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.isNatEquiv_piEquivLim\", \"HomologicalComplex.instHasLimit\", \"AdicCompletion\", \"InverseSystem.invLimEquiv.congr_simp\", \"PerfectionMap.lift_symm_apply\", \"InverseSystem.piEquivLim\", \"InverseSystem.invLimEquiv\", \"HomologicalComplex.instHasLimitsOfShape\"], \"digest\": \"ea3428ed8e7bd9ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary limits of complexes, adic completion, ring perfection and formally smooth ring lifting do not state perfect derived reconstruction; the grep hit CochainComplexPlus.lean:60 concerns finite limits of bounded-below complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"limit\"",
+   "results": "{\"t\": \"2026-10-23T22:38:08Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary limits of complexes, adic completion, ring perfection and formally smooth ring lifting do not state perfect derived reconstruction; the grep hit CochainComplexPlus.lean:60 concerns finite limits of bounded-below complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible perfect complexes over a surjective inverse sequence of rings with locally nilpotent kernels have a perfect derived inverse limit with the prescribed derived scalar extensions",
+   "results": "{\"t\": \"2026-10-23T22:38:09Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible perfect complexes over a surjective inverse sequence of rings with locally nilpotent kernels have a perfect derived inverse limit with the prescribed derived scalar extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectRing.ofSurjective\", \"PerfectionMap.surjective\", \"Algebra.FormallySmooth.of_comp_surjective\", \"BDeRhamPlus\", \"BDeRham\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"PerfectionMap.mk'\", \"PreTilt.instPerfectRing\"], \"digest\": \"a192536dc7025295\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary limits of complexes, adic completion, ring perfection and formally smooth ring lifting do not state perfect derived reconstruction; the grep hit CochainComplexPlus.lean:60 concerns finite limits of bounded-below complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of compatible bounded finite projective complexes along nil ring thickenings using homotopy inverse limits",
+   "results": "{\"t\": \"2026-10-23T22:39:01Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraization of compatible bounded finite projective complexes along nil ring thickenings using homotopy inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"IsAdicComplete.liftAlgHom\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.Extension.homInfinitesimal\"], \"digest\": \"f6165bf80e6da655\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary limits of complexes, adic completion, ring perfection and formally smooth ring lifting do not state perfect derived reconstruction; the grep hit CochainComplexPlus.lean:60 concerns finite limits of bounded-below complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-perfect-tests",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family effectivity prerequisite: spaces-flat.tex Tag 0CX7, proof invoking Tag 0CX6 (lemma-compute-against-perfect), tensor-test clause (1). Specifically Tag 0CQG, lemma-Rlim-perfect-gives-perfect, alternative (2) in which every C_n is perfect.",
+   "via": [
+    "lem-sfb-space-inverse-module-perfect-tests",
+    "lem-sfb-space-inverse-module-polynomial-model",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-inverse-ring-reconstruction",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger Tag 0CQG node lem-sfb-nil-ring-perfect-derived-limit instead of introducing a duplicate. Checked the hypotheses and the projection-induced scalar-extension adjuncts clause by clause. Preserved the statement and statement dependencies, inherited provenance and original Mathlib searches; appended five searches run under Q107. No new nodes.",
+  "blueprint": "Realizes the inherited supporting reconstruction input under proof (3) of det-thm-sf-ctf-stability-direct-images (latest blueprint: compactification/direct-image preservation), along the existing proper-support coherent-family effectivity chain. The exact supporting source is More on Algebra Tag 0CQG. Searches of all blueprint nodes for 0CQG, inverse limit perfect and nil-kernel found no equivalent imported node; same_as remains empty. This item is not a unit key node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-bc34afbc4",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-bc34afbc4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item JSON, the report, and the cited node lem-sfb-nil-ring-perfect-derived-limit. There are 0 new nodes and the proof is one step. The item is Stacks more-algebra.tex Tag 0CQG (lemma-Rlim-perfect-gives-perfect), alternative (2), all K_n perfect. I read it with its proof and the preceding Tag 0CQF; the item states it faithfully and keeps elementwise nilpotence rather than nilpotent ideals. Step 1 cites the existing unsplit node lem-sfb-nil-ring-perfect-derived-limit (Q101, same unit sk-thm-sf-ctf-stability, same chapter), which has the same hypotheses. The ring tower, the definition of perfect (def-pc-perfect-ring-complex) and the transition maps with invertible adjuncts all match. On scalar extension, the item uses lem-pur-derived-change-of-rings on the point site and the cited node uses K-flat resolutions; this is the same functor. On the limit, def-weil-derived-limit is any Roos triangle with no choice made, and the cited node quantifies over any derived limit in D(A), so the item's C is covered. The cited rho_n is exactly the item's projection-induced scalar-extension adjunct, so both conclusions follow. There is no circularity: the cited node has empty proof_deps and does not use the item. Duplicate search: 0CQG matches only this node and the space-level citers; lem-weil-pbc-rlim-perfect-complete is the I-adic case 0CQH and does not apply. Edge cases checked: the constant tower, the zero object, k[t]/(t^n), and a nil but non-nilpotent kernel F_2[x_i]/(x_i^2). There is no re-split repair note for this item, no SGA citation, and tool_uses are empty, which is correct since everything is in one unit. The Mathlib searches are real and correctly judged no match. Maintainer note: the item and lem-sfb-nil-ring-perfect-derived-limit are same-day duplicates for one notion and should be merged under stages/1-dag.md Duplicates; the one-step citation is correct until then."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PerfectInverseRingReconstruction",
+  "declaration": "DerivedCategory.perfect_inverse_ring_reconstruction",
+  "file": "lean/Sheaf/RingTheory/PerfectInverseRingReconstruction.lean",
+  "statement": "theorem perfect_inverse_ring_reconstruction (R : ℕ → Type u) [∀ n, CommRing (R n)] (φ : ∀ n, R (n + 1) →+* R n) (hsurj : ∀ n, Function.Surjective (φ n)) (hnil : ∀ n x, φ n x = 0 → IsNilpotent x) (A : Type u) [CommRing A] (q : ∀ n, A →+* R n) (hq : ∀ n, q n = (φ n).comp (q (n + 1))) (hlim : ∀ x : ∀ n, R n, (∀ n, φ n (x (n + 1)) = x n) → ∃! a : A, ∀ n, q n a = x n) [HasDerivedCategory.{w} (ModuleCat.{u} A)] [∀ n, HasDerivedCategory.{w} (ModuleCat.{u} (R n))] (L : ∀ n, DerivedCategory (ModuleCat.{u} (R (n + 1))) ⥤ DerivedCategory (ModuleCat.{u} (R n))) (adjφ : ∀ n, L n ⊣ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory) (M : ∀ n, DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} (R n))) (adjq : ∀ n, M n ⊣ (ModuleCat.restrictScalars (q n)).mapDerivedCategory) (χ : ∀ n, (ModuleCat.restrictScalars (q n)).mapDerivedCategory ≅ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory ⋙ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory) (hχ : ∀ n (C : CochainComplex (ModuleCat.{u} (R n)) ℤ), (χ n).hom.app (Q.obj C) ≫ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map ((ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app C) ≫ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategoryFactors.hom.app (((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj C) = (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app C ≫ Q.map ((NatIso.mapHomologicalComplex (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) (.up ℤ)).hom.app C)) (Eₙ : ∀ n, DerivedCategory (ModuleCat.{u} (R n))) (t : ∀ n, Eₙ (n + 1) ⟶ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.obj (Eₙ n)) (hred : ∀ n, IsIso (((adjφ n).homEquiv (Eₙ (n + 1)) (Eₙ n)).symm (t n))) (hperfect : ∀ n, IsPerfectRingComplex (Eₙ n)) [HasProduct (fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n))] (E : DerivedCategory (ModuleCat.{u} A)) (pE : E ⟶ ∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n)) (δ : (∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n)) ⟶ E⟦(1 : ℤ)⟧) (hE : IsDerivedLimitTriangle (fun n ↦ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map (t n) ≫ (χ n).inv.app (Eₙ n)) E pE δ) : IsPerfectRingComplex E ∧ (∀ n, IsIso (((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n)))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b2518621",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Re-delivery fixes prior RETURN: duplicate IsPerfectRingComplexOver module and def-pc record change removed; item uses recorded DerivedCategory.IsPerfectRingComplex at ModuleCat.{u} with free w; unused OrdinaryDerivedChangeOfRings import dropped. Dep node records identical to side-live. Clause-by-clause vs Stacks 0CQG alt (2): surjective φ, elementwise-nilpotent kernels, A via ∃! compatible-tuple property, left adjoints L/M of exact restriction (adjunct invertibility independent of choice), χ fixed canonically by hχ via restrictScalarsComp', all-level perfectness, invertible t_n adjuncts, IsDerivedLimitTriangle of Res t ≫ χ.inv; conclusion has perfectness and every projection adjunct iso. No extra assumptions; universes u,w bound. Edge cases (constant tower, zero ring, k[t]/(t^n), nil non-nilpotent kernel) covered. Docstrings carry source, blueprint and proof; only sorry; lean.statement verbatim. No file changed, no compile run. Non-blocking: DAG-level duplicate with lem-sfb-nil-ring-perfect-derived-limit should be merged later."
+ }
+}

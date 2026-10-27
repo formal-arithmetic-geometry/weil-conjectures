@@ -1,0 +1,554 @@
+{
+ "id": "lem-sf-integral-ordinary-recollement-realization",
+ "kind": "statement",
+ "title": "Ordinary completed-ring recollement realizes the integral operations",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be separated of finite type over $k$, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and the coefficient categories $D^b_c(T,A_n)$ and $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], for $T=X,Z,U$.\nPut $B_T=\\varprojlim_n(A_n)_T$ [def-weil-completed-integral-coefficients]. Write $u^*_{\\rm ord}$ and $Rf_{*,\\rm ord}$ for ordinary derived operations on $B_T$-module sheaves, and $u^*_{\\rm comp},Rf_*$ for the specified integral operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]. For $u=i,j$, the canonical ordinary-to-completed pullback comparison is invertible on derived-complete objects. For $f=i,j$ and $K\\in D^b_c(\\operatorname{dom} f,R)$ the strict-tower direct-image comparison is an isomorphism\n$$Rf_{*,\\rm ord}K\\cong R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}K_n=Rf_*K,\\qquad K_n=K\\otimes^L_{B_T}(A_n)_T.$$\nThere are also canonical isomorphisms $(Rf_*K)_n\\cong Rf_{*,n}K_n$ and $(u^*_{\\rm comp}K)_n\\cong u_n^*K_n$ in the actual finite module categories. These comparisons preserve the finite projections, quotient transitions, completion units, and the ordinary pullback/direct-image adjunction units and counits. Both pullbacks and both direct images preserve the precise integral constructible category, with one finite cohomological interval for all reductions of each image. The ambient completed-ring kernel adjoint $Ri^!_0$ of [lem-sf-ringed-closed-kernel-adjoint] restricts to this category, and for every $K\\in D^b_c(X,R)$ the ambient distinguished supported triangle $i_*Ri^!_0K\\to K\\to Rj_*j^*K\\to i_*Ri^!_0K[1]$, whose first two arrows are the exceptional counit and the open unit, lies in $D^b_c(X,R)$ and has the specified integral $i_*,j^*,Rj_*$ and their adjunction maps. In particular $i^*i_*\\cong1$, $j^*Rj_*\\cong1$, $j^*i_*=0$, and $\\operatorname{Hom}(i_*P[m],Rj_*G)=0$ there. The restricted adjoint is $R$-linear and exact, with the shift structure induced by adjunction. A morphism of integral constructible objects is invertible whenever all its reductions are invertible. No identification of the two ambient constant-ring and completed-ring module categories is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage: ordinary operations, completion and ambient restriction; returned steps 5–6 and first part of 7, integral part of 9"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-pur-completed-pushforward-models",
+  "def-derived-cochain-right-unit",
+  "def-sf-integral-constructible-linear-structure",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-a1-flat-term-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "First verify the hypotheses of the completion and ringed-support tools. The valuation ring $R$ is a DVR with finite residue field; each $A_n$ is finite and has the augmented free resolution $[R\\xrightarrow{\\varpi^n}R]$. Thus $(R,(\\varpi))$ is the Noetherian adic datum with finite perfect positive quotients. A field is Noetherian, so the finite-type scheme $X$ is Noetherian, and its open $U$ is Noetherian and quasi-compact; consequently $j$ is quasi-compact. A closed subscheme of a finite-type scheme over a field is again finite type, as follows on each affine chart by taking the quotient of a finitely generated algebra. The canonical coefficient isomorphisms $u^{-1}B_X\\cong B_{\\operatorname{dom}u}$, for $u=i,j$, commute with the finite projections and quotient transitions. All subsequent module operations use these isomorphisms.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, coefficient datum and ordinary ringed realization; Stacks 09AA, 09BM hypotheses"
+   }
+  },
+  {
+   "text": "Apply the immersion comparison to $i$ and $j$. Ordinary pullback is exact inverse image and preserves derived completeness; the actual comparison $c_{u,K}:u^*_{\\rm ord}K\\to u^*_{\\rm comp}K$ is invertible for every derived-complete $K$. The specified integral pullback is the same strict quotient-tower construction, not a newly chosen functor. Its finite-reduction comparison is an isomorphism in $D((A_n)_{\\operatorname{dom}u})$ and identifies the finite projection, successive quotients and completion unit. On integral constructible objects the ordinary inverse image is constructible and every reduction remains in the input's single cohomological interval. The two completed pullbacks are compared on one strict tower. Since $u^*$ is exact (identified coefficients), it is computed termwise, so the derived tower pullback of the reduction tower of a flat-term K-flat representative $P$ of $K$ is represented by the strict tower $\\operatorname{Res}_nu_n^*(P\\otimes_{B_X}(A_n)_X)$, which is also the tower defining the specified integral pullback. Countable products of pro-etale module sheaves are exact, so the natural Roos isomorphism $\\rho:\\mathsf C\\xrightarrow{\\sim}R\\lim$ between the product-cone model and the total derived limit of this tower applies. It commutes with every projection and carries the cone lift of the quotient augmentation to the canonical derived map. Thus $c_{u,K}$ followed by $\\rho^{-1}$ is the comparison into the specified integral pullback, with the same projections and completion unit.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, pullback comparison and reduction normalization"
+   }
+  },
+  {
+   "text": "Use the canonical quotient reconstruction of a complete complex $K$. The Roos-triangle completeness convention in the item agrees with invertibility of the canonical quotient augmentation and with intrinsic Koszul completeness. For $f=i,j$, apply the ringed direct-image/limit theorem to this augmentation. It gives\n$$d_{f,K}:Rf_{*,\\rm ord}K\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}K_n.$$\nThe right side, including its quotient-induced transitions, is exactly the specified integral $Rf_*K$. The comparison is the derived comparison of $f_*\\lim=\\lim f_*^{\\rm Tow}$, on K-injective strict towers. It therefore respects each finite projection and all transitions before evaluation; it is not an inference that equal evaluated maps must be equal. The same theorem proves completeness of the ordinary image and identifies its completion unit with direct image of the input augmentation followed by this comparison. The terms of $Rf_*^{\\rm Tow}K_\\bullet$ are $Rf_{*,\\rm ord}\\operatorname{Res}_nK_n$. The natural ring-change comparison $d_n:\\operatorname{Res}_nRf_{*,n}K_n\\xrightarrow{\\sim}Rf_{*,\\rm ord}\\operatorname{Res}_nK_n$ for $\\pi_n$ applies with the isomorphisms $c_f,c_{f,n}$ of step 1, as $\\pi_nc_f=c_{f,n}f^{-1}\\pi_n$. On a K-injective $(A_n)$-complex $J$ it is the underived identity $f_*\\operatorname{Res}_nJ=\\operatorname{Res}_nf_*J$ followed by a resolution, as is the transition identification of the integral direct image for $A_{n+1}\\to A_n$. Resolving $\\operatorname{Res}J$ first over $A_{n+1}$ and then over $B$, the composition normalization of derived pushforwards gives $d_n=d_{n+1}\\circ\\operatorname{Res}_{n+1}(\\text{transition identification})$. So the $d_n$ form a tower isomorphism, and $d_{f,K}$ lands in the specified tower with its transitions.",
+   "uses": [
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-derived-direct-image",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, ordinary direct image and strict quotient reconstruction; Stacks sites-cohomology.tex 0A07 and proetale.tex 099N"
+   }
+  },
+  {
+   "text": "The finite direct-image map used here is the scalar-extension adjunct of the $n$-th limit projection, as in the definition of the integral direct image. The complete-direct-image reduction theorem says this very adjunct is invertible in the actual finite module category, for any chosen Roos presentation of the prescribed tower. Equivalently the projection-formula comparison of the direct-image/limit theorem gives $(Rf_{*,\\rm ord}K)\\otimes^L_{B_X}(A_n)_X\\cong Rf_{*,n}K_n$. Under $d_{f,K}$ these are the specified reduction maps, with their quotient transitions and completion normalization. Together with step 2 this supplies both asserted families of finite-category isomorphisms.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, finite projection adjuncts in their module categories"
+   }
+  },
+  {
+   "text": "Retain the ordinary derived adjunction $u^*_{\\rm ord}\\dashv Ru_{*,\\rm ord}$. Its restriction to complete objects, followed by completion of the left functor, has Hom bijection given by precomposition with $c_{u,M}$ and the ordinary Hom bijection. The completion-reflector theorem and quotient/Koszul comparison identify this reflector with the specified quotient-tower completion; the preceding completeness equivalence identifies its complete objects. Hence the reflector adjunction formulas give\n$$\\eta^c_M=Ru_{*,\\rm ord}(c_{u,M})\\eta^{\\rm ord}_M,\\qquad\n\\varepsilon^c_Nc_{u,Ru_{*,\\rm ord}N}=\\varepsilon^{\\rm ord}_N.$$\nConjugate the right functor by $d_{u,N}$ from step 3. These formulas identify both integral unit and counit with the ordinary ones under the specified comparisons. At the coefficient and strict-tower level the completed-coefficient direct-image diagram theorem retains the quotient units, evaluation squares and universal-unit normalization; its finite evaluations are the ordinary finite adjunction maps. Thus the identification includes the finite projections and quotient adjunction maps, rather than just endpoints of adjunctions.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-sbc-reflector-adjunction-unit-formulas",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-pur-completed-coefficient-direct-image-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, ordinary adjunction maps under completion and strict-system realization"
+   }
+  },
+  {
+   "text": "For $f=i,j$ use integral direct-image constructibility, which applies to finite-type morphisms over any field with $\\ell$ invertible, without an algebraic-closedness assumption. It states completeness, constructibility of every $Rf_{*,n}K_n$, and one common cohomological interval for these reductions. In particular $Rj_*j^*K$ and $i_*P$ are integral constructible. Through $d_f$ this proves the same assertion for the ordinary images. The corresponding pullback assertions, with the unchanged interval, were proved in step 2. No replacement by a finite-Tor category is made.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, preservation and uniform boundedness"
+   }
+  },
+  {
+   "text": "The uniformity can also be read directly along the blueprint's induction, so finite-level boundedness is not mistaken for uniform boundedness. Put $M_n=Rf_{*,n}K_n$ and choose an interval $[a_f,b_f]$ for $M_1$, which exists by step 6. Tensor the coefficient sequence $0\\to A_1\\xrightarrow{\\varpi^{n-1}}A_n\\to A_{n-1}\\to0$ with one flat-term K-flat $B$-representative of $K$. Exact derived tensor and the short-exact-complex triangle give a triangle of restricted $B$-complexes $K_1\\to K_n\\to K_{n-1}\\to K_1[1]$. Apply exact ordinary derived direct image; the ring-change comparisons $d_1,d_n,d_{n-1}$ of step 3 identify its terms with the restricted finite images. The resulting triangle has vertices the restrictions of $M_1,M_n,M_{n-1}$. Its cohomology long exact sequence proves by induction that every $M_n$ vanishes outside $[a_f,b_f]$. Each $M_n$ is constructible by step 6, so this verifies precisely the uniform-interval condition of the item.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, triangles from successive coefficient quotients and induction on n"
+   }
+  },
+  {
+   "text": "Work now on the ambient unbounded $B$-module derived categories. The ringed kernel-adjoint theorem supplies $i_*\\dashv Ri^!_0$, $i^*\\dashv i_*$, $j^*\\dashv Rj_*$, and the actual isomorphisms $i^*i_*\\cong1$, $j^*Rj_*\\cong1$ and vanishing $j^*i_*=0$. For any ambient $P,G$ and integer $m$, its adjunction gives\n$$\\operatorname{Hom}(i_*P[m],Rj_*G)\\cong\\operatorname{Hom}(j^*i_*P[m],G)=0.$$\nIn particular this holds on the full constructible categories after steps 2–6 and preserves the units and counits of step 5.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing and integral stage, ringed ambient adjunctions"
+   }
+  },
+  {
+   "text": "Complete the actual ordinary open unit $K\\to Rj_*j^*K$ to an ambient distinguished triangle $F\\to K\\to Rj_*j^*K\\to F[1]$ by TR1 and rotation. Apply $j^*$, exact as a termwise exact module functor; the image of its middle arrow is invertible, since its composite with the invertible open counit is the identity by the triangle identity. The cohomology long exact sequence gives $j^*F=0$. On each cohomology sheaf $H^r(F)$ the supported closed-unit theorem now applies. Since $i^*,i_*$ are exact, their cohomology comparisons identify $H^r(F\\to i_*i^*F)$ with that supported sheaf unit. All these maps are invertible, so the unbounded cohomology criterion proves $F\\xrightarrow{\\sim}i_*i^*F$. This ambient support argument imposes no boundedness on $F$ or on $Ri^!_0K$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-sf-derived-homology-long-exact",
+    "lem-exc-proetale-closed-essential-image",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, construct the ambient open-unit fibre and identify closed support"
+   }
+  },
+  {
+   "text": "Apply the orthogonal-counit triangle theorem with its fully faithful left adjoint equal to ambient $i_*$, right adjoint $Ri^!_0$, middle vertex $K$, and last vertex $Rj_*j^*K$. Step 9 places $F$ in the essential image of $i_*$, and step 8 gives the required orthogonality in every shift. The theorem replaces the first map of that triangle by the actual counit, while retaining its second map, the actual open unit. It yields the ambient distinguished triangle\n$$i_*Ri^!_0K\\xrightarrow{\\varepsilon_i}K\\xrightarrow{\\eta_j}Rj_*j^*K\\longrightarrow i_*Ri^!_0K[1].$$\nFull faithfulness used here follows from the invertible counit $i^*i_*\\cong1$: the adjunction Hom bijection followed by that counit is inverse to applying $i_*$ on Hom sets.",
+   "uses": [
+    "lem-exc-orthogonal-counit-triangle",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, supported triangle with the actual exceptional counit and open unit"
+   }
+  },
+  {
+   "text": "For integral constructible $K$, steps 2 and 6 put $K$ and $Rj_*j^*K$ in the integral constructible subcategory. This is a full triangulated subcategory, so the first vertex $i_*Ri^!_0K$ of step 10 belongs to it. Apply its ordinary $i^*$, which preserves that category by step 2. The invertible closed counit identifies the result with $Ri^!_0K$. Thus the ambient adjoint restricts, the entire supported triangle lies in the precise integral category, and fullness restricts the original Hom adjunction without changing its maps. Steps 2–5 identify its displayed $i_*,j^*,Rj_*$ and maps with the specified integral ones.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, restrict the ambient kernel adjoint and triangle"
+   }
+  },
+  {
+   "text": "The restricted $i_*$ is exact: ambient closed direct image is the exact termwise module functor, and the integral subcategories carry their inherited distinguished triangles. It is $R$-linear because on a section $x$ direct image retains $r x$ as $r$ times the retained section; this equality descends through complexes and localization and the comparisons of steps 3–5. The linear-right-adjoint theorem therefore makes the restricted $Ri^!_0$ additive and $R$-linear. Equip it with the unique adjunction-induced coherent shift structure supplied by the adjunction-shift theorem. Its unit and counit are shift compatible with this structure. Apply the triangulated-right-adjoint theorem to exact $i_*$: the restricted adjoint is exact with precisely this shift structure.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sbc-linear-right-adjoint",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral part of consequences, linearity and the adjunction-induced exact structure"
+   }
+  },
+  {
+   "text": "Finally let $v:K\\to L$ be a morphism in the integral category with every finite reduction invertible. Complete it to a cone triangle; the cone $C$ is again integral constructible, by triangulated closure. Exact derived change of rings and its cohomology long exact sequence show $C_n=0$ for every $n$. The defining Roos completeness triangle for $C$ then has both product vertices zero. Its cohomology long exact sequence gives $H^r(C)=0$ for every $r$, so $C=0$ by the unbounded cohomology criterion; the cone triangle similarly makes every $H^r(v)$ invertible, hence $v$ invertible. This uses only reconstruction within $D(\\operatorname{Mod}(B_X))$, and never equates that ambient category with the one over the constant $R$-sheaf.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-derived-complete",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, reduction conservativity by the complete cone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-triangulated-category",
+  "lem-exc-orthogonal-counit-triangle",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-pc-kflat-resolution",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-completed-coefficient-direct-image-diagrams",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-sbc-linear-right-adjoint",
+  "lem-sbc-reflector-adjunction-unit-formulas",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-strict-roos-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-koszul-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage and Vanishing; ringed module refinement using Stacks 0A07, 09AA, 09BM, 09BN, 09AH, 0A8D and Bhatt–Scholze Remark 6.8.15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary completed ring sheaf derived direct image agrees with inverse limit of finite reductions and completed pullback for immersions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.liftCoborder_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.liftCoborder f) U =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometr\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.Modules → (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme_toLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y.toPresheafedSpace)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f],\\n  (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme Y f).toLocallyRingedSpace =\\n    AlgebraicGeometry.PresheafedSp\", \"doc\": \"For an open immersion $ f : X \\\\to Y $ where $ Y $ is a scheme, the locally ringed space structure on $ X $ obtained by first endowing $ X $ with the scheme structure via $ f $ and then converting to a\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑X.toTopCat) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat f.base).obj X.presheaf).obj\\n        (Opposite.op ((AlgebraicGeomet\", \"doc\": \"For an open immersion $ f: X \\to Y $ of locally ringed spaces, the composition of the inverse presheaf isomorphism $ \\\\text{invApp}_f(U) $ with the morphism $ f.c.\\\\text{app}(f(U)) $ and an arbitrary mor\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat X.toΓSpecSheafedSpace.hom.base).obj X.presheaf).obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      Z),\\n\", \"doc\": \"For any locally ringed space $X$ and element $r$ in its global sections $\\\\Gamma(X)$, the composition of the canonical localization morphism $\\\\Gamma(X)_r \\\\to \\\\mathcal{O}_X(D(r))$ with the pushforward s\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑X.toTopCat),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp f U)\\n      (f.c.app (Opposite.op ((Alg\", \"doc\": \"For each open subset $ U $ of $ X $, this constructs a morphism from the presheaf data on $ U $ in $ X $ to the presheaf data on the image $ f(U) $ in $ Y $, obtained by composing the inverse of the n\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑Y.toTopCat) (hU : ↑U ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)),\\n  CategoryTheory.CategoryStruct.comp (f.c.app (Opposite.op U))\\n     \", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of locally ringed spaces, with associated sheaf isomorphism $\\\\alpha: \\\\mathcal{O}_Y \\\\to f_*\\\\mathcal{O}_X$. For any open subset $U \\\\subseteq Y$ contained in the ima\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimits, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \" {X Y : TopCat} (A : Type u_1) [CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2} {CA : A → Type w} [(X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A] [CategoryTheory.Limits.HasLimits A] [CategoryTheory.Limits.Preserves\", \"doc\": \"The adjunction between pullback and pushforward for sheaves on topological spaces.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived.?complete|adic).*(immersion|recollement)|recollement.*complet",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral coefficient constructible recollement ordinary derived module operations comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instLinear\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Linear\", \"type\": \": Linear R (DerivedCategory C)\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and semiring $R$, its derived category inherits a canonical $R$-linear structure. This means that for any two objects in the derived category, the set of morphis\"}\n  {\"name\": \"instAB4StarModuleCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.AB\", \"type\": \": AB4Star (ModuleCat.{u} R)\", \"doc\": \"For any ring $ R $, the category of left $ R $-modules satisfies the AB4* axiom, which means it has all products and the product of any family of epimorphisms is an epimorphism.\"}\n  {\"name\": \"DerivedCategory.instAdditiveHomotopyCategoryIntUpQh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Qh (C := C)).Additive\", \"doc\": \"For any abelian category $\\\\mathcal{C}$, its derived category inherits a canonical preadditive structure. This means that for any two objects in the derived category, the set of morphisms between them \"}\n  {\"name\": \"FGModuleCat.instAbelian\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Abelian\", \"type\": \": Abelian (FGModuleCat k)\", \"doc\": \"For any Noetherian ring $ k $, the category of finitely generated left $ k $-modules forms an abelian category. This means it has all finite limits and colimits, kernels and cokernels for every morphi\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.instModule\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \": Module R (Ext X Y n)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"DerivedCategory.instAdditiveCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q (C := C)).Additive\", \"doc\": \"The canonical functor $ Q $ from the category of cochain complexes with integer indices to the derived category is additive, meaning it preserves the addition of morphisms between cochain complexes. S\"}\n  {\"name\": \"Condensed.instAB4CondensedMod\", \"module\": \"Mathlib.Condensed.AB\", \"type\": \": AB4 (CondensedMod.{u} R)\", \"doc\": \"The category of condensed modules over any ring $ R $ satisfies the AB4 axiom, meaning it has all coproducts and coproducts preserve exact sequences (are exact functors).\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete sheaves immersion inverse image preserves completion and closed support adjoint restricts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑Y.toPresheafedSpace)\\n  (hU : ↑U ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.hom.base)),\\n  Categ\", \"doc\": \"For an open immersion $ f $ between sheafed spaces and an open subset $ U $ of the target space whose underlying set is contained in the image of the base map of $ f $, the composition of the presheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.SheafedSpace.IsOpenImmers\", \"doc\": \"For a sheafed space morphism $ f : X \\to Y $ that is an open immersion, and for any open subset $ U $ of $ X $, the composition of the inverse presheaf component isomorphism $ H.\\text{invApp} $ at $ U $\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑Y.toPresheafedSpace),\\n  CategoryTheory.CategoryStruct.comp (f.hom.c.app (Opposite.op U))\\n      (Algebra\", \"doc\": \"For each open subset $ U $ of $ Y $, the composition of the natural transformation component $ f_{\\\\#} $ at $ U $ and the inverse of the presheaf isomorphism $ H^{-1} $ equals the presheaf map $ Y^\\\\# $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) {U : X.Opens} [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g] (M : Z.Modules),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictFunctorComp f g).inv.app M) \", \"doc\": \"For open immersions $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ between schemes, the functor induced by the composition $ g \\\\circ f $ on open subsets of $ X $ satisfies $ (g \\\\circ f)_*(U) = g_*(f_*(U)) $ for an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(recollement|derived.?complete.*(closed|open)|completed.*immersion)",
+   "results": "OK 0 hits; none. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full integral completed-ring recollement statement; the adjoint-exactness hits are already represented by lem-sf-triangulated-right-adjoint, and ordinary scheme modules or algebraic adic completion do not give this comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed ring sheaves integral constructible localization closed support and open direct image",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp, TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf, AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf', AlgebraicGeometry.Γ_restrict_isLocalization. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full integral completed-ring recollement statement; the adjoint-exactness hits are already represented by lem-sf-triangulated-right-adjoint, and ordinary scheme modules or algebraic adic completion do not give this comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "OK 7 hits; CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full integral completed-ring recollement statement; the adjoint-exactness hits are already represented by lem-sf-triangulated-right-adjoint, and ordinary scheme modules or algebraic adic completion do not give this comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral constructible derived complete sheaves closed open recollement ordinary completed coefficient operations",
+   "results": "OK 8 hits; BDeRhamPlus, BDeRham, CondensedMod, CondensedMod.ofSheafCompHaus, CondensedMod.IsSolid, CondensedMod.ofSheafProfinite, localCohomology.diagram, LightCondMod.ofSheafLightProfinite. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full integral completed-ring recollement statement; the adjoint-exactness hits are already represented by lem-sf-triangulated-right-adjoint, and ordinary scheme modules or algebraic adic completion do not give this comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived module sheaves inverse image direct image adic completion quotient tower adjunction counit localization triangle",
+   "results": "OK 8 hits; localCohomology.diagram, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AdicCompletion.eval_comp_of, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full integral completed-ring recollement statement; the adjoint-exactness hits are already represented by lem-sf-triangulated-right-adjoint, and ordinary scheme modules or algebraic adic completion do not give this comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral stage: ordinary operations, completion and ambient restriction; returned steps 5–6 and first part of 7, integral part of 9",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-ordinary-recollement-realization",
+  "worker": "stage1",
+  "summary": "Reused existing immersion, strict direct-image, finiteness, support and categorical tools; wrote the ordinary coefficient realization with actual projection adjuncts, uniform intervals, ambient open-unit-fibre construction and restriction of the kernel adjoint. No statement change, no new nodes, no Lean writing or compilation.",
+  "blueprint": "prop-sf-localization-all-stages: Vanishing and Integral stage, ordinary comparison of the finite-level limit construction, uniform-amplitude induction, supported fibre and restricted adjunction; exactness/linearity and complete-cone conservativity.",
+  "tool_uses": [
+   {
+    "node": "def-weil-derived-complete",
+    "why": "Generic Derived complete objects: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Generic Bounded constructible derived-complete integral coefficients: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "def-weil-derived-direct-image",
+    "why": "Generic Derived direct image: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Generic Derived pullback, tensor product, and internal Hom: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-exc-orthogonal-counit-triangle",
+    "why": "Generic A counit triangle from essential image and orthogonality: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-exc-proetale-closed-essential-image",
+    "why": "Generic The essential image of closed direct image: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-direct-image-diagrams",
+    "why": "Generic Normalized completed-coefficient direct image on strict diagrams: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Generic Roos and intrinsic completeness for completed local-field coefficients: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-sbc-linear-right-adjoint",
+    "why": "Generic A right adjoint to an additive linear functor is additive and linear: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-sbc-reflector-adjunction-unit-formulas",
+    "why": "Generic Units and counits for restriction of an adjunction through completion reflectors: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-sf-complete-direct-image-reduction",
+    "why": "Generic Canonical finite reductions of complete direct-image Roos limits for arbitrary morphisms: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic The integral derived direct image of a constructible complex along a finite-type morphism is constructible: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic Bounded constructible derived-complete integral complexes form a triangulated subcategory: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic Compatible inverse image of profinite coefficient sheaves: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic Ringed koszul reflector: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Generic Perfectness of the standard quotients: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic Direct image, derived limits, and completeness: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic Koszul and quotient reconstruction: used only for its stated coefficient, completion, derived-category or category-theory interface; the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic Natural Roos comparison between the product-cone model and total derived limit of a strict tower: added by the maintainer review to identify the ordinary tower models with the specified integral operations (steps 2, 3, 7); the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Exactness of countable products of pro-etale module sheaves: added by the maintainer review to identify the ordinary tower models with the specified integral operations (steps 2, 3, 7); the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic Derived direct image commutes with restriction of scalars along a ring-sheaf map: added by the maintainer review to identify the ordinary tower models with the specified integral operations (steps 2, 3, 7); the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Generic Finite-level direct image and coefficient restriction: added by the maintainer review to identify the ordinary tower models with the specified integral operations (steps 2, 3, 7); the supported-localization argument and adjunction maps remain those of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Normalized composition of derived direct images of ringed topoi: added by the maintainer review to identify the ordinary tower models with the specified integral operations (steps 2, 3, 7); the supported-localization argument and adjunction maps remain those of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-exc-orthogonal-counit-triangle",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-pc-kflat-resolution",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-completed-coefficient-direct-image-diagrams",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-sbc-linear-right-adjoint",
+  "lem-sbc-reflector-adjunction-unit-formulas",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NE-77c7709c3",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-77c7709c3 (reviewer sub-agent of L); spot-checked: I read the item, its 13 steps, all 34 cited statements, the parent and the main-20261015 Integral-stage/Vanishing proof. There are no new nodes and no SGA, and no cited node depends on the item or its parent. Steps 1 and 4–13 check out: the hypotheses of the kernel-adjoint, closed-essential-image, orthogonal-counit, reflector, direct-image-limits and integral-direct-image-constructible nodes are all verified; the fibre construction in step 9 and the restriction to D^b_c in step 11 are correct; conservativity uses the Roos triangle over B. Edge cases tested: Z empty, U empty, zero input, n=1, nonreduced Z. FIX for three citation faults (C4/E5). (1) Step 2 treated the immersion node's pullback (def-weil-pbc-completed-pullback, K-injective derived limit) as identical to the item's product-cone integral pullback. Repaired: u^* is exact, so both are built termwise on one strict tower, and lem-weil-strict-roos-comparison with lem-weil-proetale-countable-products-exact identifies the two models; cited. (2) Steps 3 and 7 identified the tower Rf_ord Res_n K_n from prop-weil-pbc-direct-image-limits with the specified tower Res_n Rf_{*,n} K_n without any ring-change comparison. Repaired by citing lem-weil-pbc-ring-sheaf-change-adjunction (with c_f, c_{f,n} and the projection equation) and checking that it agrees with the transitions via lem-weil-proetale-direct-image-restriction-of-scalars and lem-weil-pbc-ringed-topoi-derived-pushforward-composition. (3) Step 9 now cites derived exactness of j^*. Batch-5: lem-pod-completed-integral-scalar-regular (injectivity of multiplication by a uniformizer power on completed coefficients) and lem-pod-derived-exact-square-composition (categorical pasting) are generic and not Poincare-duality content; both accepted. I accepted the 22 generic tool_uses and added five for the new citations. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfIntegralOrdinaryRecollementRealization",
+  "declaration": "WeilConjectures.sfIntegralOrdinaryRecollement_realization",
+  "declarations": [
+   "WeilConjectures.sfOrdinaryModulePush_isRightAdjoint",
+   "WeilConjectures.sfOrdinaryModulePull",
+   "WeilConjectures.sfOrdinaryModuleAdjunction",
+   "WeilConjectures.sfOrdinaryModulePull_additive",
+   "WeilConjectures.sfOrdinaryModulePull_preservesFiniteLimits",
+   "WeilConjectures.sfOrdinaryModulePull_preservesFiniteColimits",
+   "WeilConjectures.sfOrdinaryDerivedPull",
+   "WeilConjectures.sfOrdinaryDerivedAdjunction",
+   "WeilConjectures.sfOrdinaryClosedKernel",
+   "WeilConjectures.sfOrdinaryClosedKernel_additive",
+   "WeilConjectures.sfOrdinaryClosedShriek",
+   "WeilConjectures.sfOrdinaryPushReduction",
+   "WeilConjectures.sfOrdinaryPullRoosProjection",
+   "WeilConjectures.sfOrdinaryPullRoosZeroCoordinate",
+   "WeilConjectures.sfOrdinaryPullAugmentationLeg",
+   "WeilConjectures.SfOrdinaryIntegralComparison",
+   "WeilConjectures.SfOrdinaryIntegralComparison.pushFunctor",
+   "WeilConjectures.SfOrdinaryIntegralComparison.pullFunctor",
+   "WeilConjectures.SfOrdinaryIntegralComparison.AdjunctionNormalized",
+   "WeilConjectures.sfOrdinaryConstructibleShriek",
+   "WeilConjectures.SfIntegralOrdinaryRecollement",
+   "WeilConjectures.sfIntegralOrdinaryRecollement_realization"
+  ],
+  "file": "lean/Sheaf/Paper/SfIntegralOrdinaryRecollementRealization.lean",
+  "statement": "theorem sfIntegralOrdinaryRecollement_realization (k : Type u) [Field k] (_hl : IsUnit (l : k)) {Z U X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hU : Set.range j = (Set.range i)ᶜ) : Nonempty (SfIntegralOrdinaryRecollement l E i j)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Ordinary completed-ring operations are the published completed direct image and its uniquely adjoint inverse image. Explicit records retain strict coefficient diagrams, quotient and completion normalization, the K-injective kernel counit, the actual supported triangle, the constructible restriction and its adjunction-induced shift. Added already-landed definition owners used in the signature; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-496c3840f",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Read the item, all 16 stmt_dep records, the full module and the dependency Lean (SfDerivedDirectImage, SfIntegralConstructible, SfDerivedComplete, CompletedCoefficientPushforwardModels, ProEtaleRingedClosedKernelAdjoint, IntegralDerivedOperations, IntegralOperationsPreserveConstructible). Only the item's lean and stmt_deps changed; the 7 added stmt_deps are landed def nodes and all are used. Statement is verbatim; 22 declarations recorded. Every node clause has a Lean field. Pins: pull_model fixes the pullback comparison on K-flat representatives (Roos projections, zero homotopy coordinate); push is fixed by Roos projections and reduction adjuncts (only up to phantoms, the dependency's own precision); AdjunctionNormalized gives the step-5 formulas; kernel_counit and ambient_counit fix the kernel adjoint; closed_shift_normalization and Adjunction.CommShift fix the shifts. Supported triangle, i*i_*=1, j*Rj_*=1, j*i_*=0, orthogonality in every shift, linearity, exactness and conservativity are present; the uniform interval is inside sfIntegralConstructible. The item's kernel is the B_Z transport of ringedClosedKernelShriek, not an H4 duplicate. The diagrams_unit HEq is typable because the pushforward is defeq to sfCompletedModuleDirectImage. The 5 sorry instance theorems are true named sub-claims. No extra hypotheses; universe u forced by the deps, site universe u+1 kept; edge cases empty Z/U, zero input, n=0, all shifts covered. Docstrings with 13 steps; lines at most 100; no name clashes. No file changed, so nothing compiled. Advisory: decls owned by nodes outside stmt_deps (tower-transition-endomorphism, integral-operation-complex-models, a1 finite-pullback-tower, pur finite-pullback, cohomological-support, proetale-inverse-image, scalar-extension adjunction theorem, integralPullbackFiniteComparison owned by a theorem node); kernel-adjoint stmt_dep's declarations not used in the statement; second reading is a self-reread."
+ }
+}

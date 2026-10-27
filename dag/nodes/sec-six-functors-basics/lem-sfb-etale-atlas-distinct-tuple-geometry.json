@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-etale-atlas-distinct-tuple-geometry",
+ "kind": "statement",
+ "title": "Geometry of distinct tuples in an affine etale atlas",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and sheaf fibre products [lem-trf-space-fibre-products-etale-covers], in the universes of [def-weil-size-convention]. Let $X$ be quasi-separated, meaning that its absolute diagonal is quasi-compact on scheme tests, and let $a:U\\to X$ be a representable etale morphism [def-weil-etale-morphism] with $U$ affine. For every integer $p\\geq1$, write $F_p=U\\times_X\\cdots\\times_XU$ with $p$ factors. Then $F_p$ is a quasi-compact separated scheme, where separated means that the absolute diagonal is a closed immersion [def-weil-closed-immersion]. Its natural comparison morphism $F_p\\to U\\times_{\\operatorname{Spec}\\mathbf Z}\\cdots\\times_{\\operatorname{Spec}\\mathbf Z}U$ is separated and locally quasi-finite [pqf-def-quasifinite]. Every pairwise equality locus $\\Delta_{ij}\\subset F_p$ is open and closed. Consequently $W_p=F_p\\setminus\\bigcup_{i<j}\\Delta_{ij}$ is a quasi-compact separated scheme, open and closed in $F_p$, and $W_p\\to X$ is representable etale. The open subscheme notion is [def-weil-open-immersion]. For each geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$, with $\\Omega$ algebraically closed [def-weil-algebraic-closure], $W_p(\\Omega)\\times_{X(\\Omega)}\\{\\bar x\\}$ is naturally the set of ordered $p$-tuples of pairwise distinct elements of $U(\\Omega)\\times_{X(\\Omega)}\\{\\bar x\\}$. For $p=1$ the union of equality loci is empty.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0BBN (lemma-filter-quasi-compact), first proof paragraph, combined with spaces-morphisms.tex Tag 03KN (lemma-fibre-product-after-map), (1),(4), and Tag 07ST (lemma-filter-quasi-compact-quasi-separated), final proof paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-quasifinite",
+  "def-weil-open-immersion",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}\\mathbf Z$, $F_1=U$, and $P_p=U\\times_S\\cdots\\times_SU$. By [lem-weil-pbc-affine-scheme-qcqs], $U$ is quasi-compact. Its identity is a monomorphism, hence separated by [lem-trf-scheme-monomorphism-separated]; [lem-sc-separated-over-affine-scheme-separated] applied to this identity makes $U$ absolutely separated. By [lem-sfb-space-qcqs-permanence], $a:U\\to X$ is quasi-compact because $X$ is quasi-separated; this assertion does not require $X$ quasi-compact. Induct on $p\\geq1$. If $F_p$ is a scheme etale over $X$, then $F_{p+1}=F_p\\times_XU$ is a scheme by representability of $a$, and its projection to $F_p$ is etale and quasi-compact by [lem-trf-space-chartwise-etale-permanence] and [lem-sfb-space-quasicompact-affine-tests]. Composing etale maps makes $F_{p+1}\\to X$ etale. If $F_p$ is quasi-compact, [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open] applied to the entire open $F_p$ makes $F_{p+1}$ quasi-compact. This proves simultaneously schemeness, quasi-compactness and representable etaleness for all $p$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-scheme-monomorphism-separated",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 0BBN (lemma-filter-quasi-compact), first proof paragraph, and 07ST (lemma-filter-quasi-compact-quasi-separated), final paragraph; quasi-compactness by base changing the quasi-compact chart."
+   }
+  },
+  {
+   "text": "Let $c_p:F_p\\to P_p$ be the comparison. Iterating [lem-weil-pbc-fibre-product-affine-spectra] shows $P_p$ affine. The comparison $c_1$ is the identity, hence separated and locally quasi-finite by [lem-sfb-space-fibre-product-comparison] with $A=U$ and $B=Z=T=S$. For the induction, factor $c_{p+1}$ as $F_p\\times_XU\\xrightarrow{j_p}F_p\\times_SU\\xrightarrow{k_p}P_p\\times_SU$. Here $j_p$ is the binary comparison for $F_p\\to X$, $U\\to X$, $X\\to S$. Also $k_p=c_p\\times_S1_U$ is the base change of $c_p$ along $P_p\\times_SU\\to P_p$: both its pullback description and the displayed source classify a section of $F_p$ and a section of $U$. The composite has the $p+1$ coordinate projections, so it is precisely $c_{p+1}$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-space-fibre-product-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KN (lemma-fibre-product-after-map), clause (1), iterated binary comparison; Tag 0BBN first proof paragraph."
+   }
+  },
+  {
+   "text": "Assume $c_p$ separated and locally quasi-finite. By [lem-sfb-space-fibre-product-comparison], $j_p$ is separated and locally quasi-finite. By [lem-weil-pbc-separated-lqf-base-change], applied to the scheme map $c_p$ and base-changing scheme $P_p\\times_SU$, $k_p$ is separated and locally quasi-finite. The source and target of both arrows are schemes by step 1 and ordinary scheme fibre products. By [lem-a1-scheme-lqf-composition] and [lem-sfb-space-separated-fp-composition], their composite $c_{p+1}$ is separated and locally quasi-finite. Induction proves the comparison assertion. Since $P_p$ is affine, [lem-sc-separated-over-affine-scheme-separated] then makes every $F_p$ absolutely separated.",
+   "uses": [
+    "lem-sfb-space-fibre-product-comparison",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-a1-scheme-lqf-composition",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KN (lemma-fibre-product-after-map), clause (1); Tag 0BBN first proof paragraph, absolute separation via the comparison."
+   }
+  },
+  {
+   "text": "Write $R=U\\times_XU=F_2$ and let $b:R\\to U\\times_SU$ be the comparison. The square with top $\\Delta_a:U\\to R$, bottom $\\Delta_{U/S}:U\\to U\\times_SU$, left $1_U$ and right $b$ is cartesian: on any test scheme its right-hand pullback requires the two coordinates of a pair to be the same section of $U$, and hence is uniquely that section. Step 1 gives absolute separatedness of $U$, so $\\Delta_{U/S}$ is a closed immersion. By [lem-weil-pbc-closed-immersion-base-change], $\\Delta_a$ is a closed immersion. Thus $a$ is separated, even though $X$ need not be separated. Since $a$ is etale, the first clause of [lem-sfb-space-separated-etale-diagonal-complement] says that $\\Delta_a$ is also an open immersion.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-separated-etale-diagonal-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), first proof paragraph: separatedness of U to X and its open and closed diagonal."
+   }
+  },
+  {
+   "text": "For $1\\leq i<j\\leq p$, let $r_{ij}:F_p\\to R$ retain coordinates $i,j$. Define $\\Delta_{ij}=F_p\\times_{R,\\Delta_a}U$. The fibre-product equation says exactly that coordinates $i$ and $j$ agree. It is closed by [lem-weil-pbc-closed-immersion-base-change]. It is open as well: since $\\Delta_a$ identifies $U$ with an open subscheme of $R$, this pullback is the restriction of $F_p$ to the inverse image of that open, with the restricted structure sheaf [def-weil-open-immersion]. Thus each equality locus is open and closed. The finite union of these clopen subsets is clopen, so its complement $W_p$ is clopen. It is quasi-compact by [lem-weil-pbc-closed-in-quasi-compact], since it is closed in the quasi-compact $F_p$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 0BBN (lemma-filter-quasi-compact), first paragraph (all diagonals), and 07ST (lemma-filter-quasi-compact-quasi-separated), final paragraph (quasi-compactness)."
+   }
+  },
+  {
+   "text": "The open immersion $W_p\\to F_p$ is separated by [lem-weil-pbc-separated-cancellation](a). Its composite with the separated absolute structure map of $F_p$ is separated by [lem-sfb-space-separated-fp-composition], so $W_p$ is absolutely separated. The same open immersion is etale by [lem-weil-pbc-etale-composition-cancellation](1). Composing with the representable etale $F_p\\to X$ of step 1 using [lem-trf-space-chartwise-etale-permanence] makes $W_p\\to X$ representable etale.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), first paragraph: W_p is an open and closed subscheme and is etale over X."
+   }
+  },
+  {
+   "text": "Evaluate the sheaf fibre product at $\\operatorname{Spec}\\Omega$. By the compatible-pairs definition of [lem-trf-space-fibre-products-etale-covers], a section of $F_p$ above $\\bar x$ is exactly a tuple $(u_1,\\ldots,u_p)$ with every $a(u_i)=\\bar x$. Step 5 identifies its membership in $\\Delta_{ij}$ with $u_i=u_j$. A map from the one-point spectrum of the field $\\Omega$ factors through the complementary open exactly when it avoids each equality locus. Consequently its section belongs to $W_p$ exactly when the entries are pairwise distinct, giving the asserted natural bijection. Restriction of sections commutes with all coordinate projections, so the description is natural. For $p=1$ there are no pairs, $W_1=F_1=U$, and this bijection is the identity on the fibre. Empty charts and fibres give empty tuple sets for every $p\\geq1$, as required.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), second paragraph: geometric-point interpretation of W_p, before the symmetric quotient."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-scheme-monomorphism-separated",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-space-fibre-product-comparison",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-a1-scheme-lqf-composition",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-separated-etale-diagonal-complement",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0BBN (lemma-filter-quasi-compact), first two proof paragraphs; Tag 07ST (lemma-filter-quasi-compact-quasi-separated), final paragraph, with binary comparison Tag 03KN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|configurationSpace|distinct.*[Tt]uple",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsEtale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Distinct tuples in an etale atlas of an algebraic space form an etale separated scheme with symmetric group action",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine etale chart U of a qcqs algebraic space X the open complement of pairwise diagonals in U power over X is a quasi compact separated scheme and every finite set lies in an affine open",
+   "results": "8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unordered subsets of a geometric fibre of an etale morphism are represented by the symmetric quotient of the distinct tuples",
+   "results": "8 hits: StandardEtalePresentation.toPresentation_σ', StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.Hom.asFiber, StandardEtalePair.hasMap_X, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePresentation.toPresentation_val, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.etaleLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distinct tuples in an affine etale scheme chart of a quasi separated algebraic space form a quasi compact separated clopen subscheme of the iterated fibre product",
+   "results": "{\"t\": \"2026-10-23T15:49:51Z\", \"tool\": \"leanfinder\", \"query\": \"Distinct tuples in an affine etale scheme chart of a quasi separated algebraic space form a quasi compact separated clopen subscheme of the iterated fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.pointsPi_injective\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.quasiSeparated_iff\"], \"digest\": \"856860504a69e298\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only quasi-separatedness, diagonal and pullback instances do not state the algebraic-space atlas tuple assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSeparated",
+   "results": "{\"t\": \"2026-10-23T15:50:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSeparated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only quasi-separatedness, diagonal and pullback instances do not state the algebraic-space atlas tuple assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|configurationSpace|distinct.*[Tt]uple",
+   "results": "{\"t\": \"2026-10-23T15:50:43Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|configurationSpace|distinct.*[Tt]uple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only quasi-separatedness, diagonal and pullback instances do not state the algebraic-space atlas tuple assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of pairwise diagonals in an iterated etale fibre product over an algebraic space is quasi compact separated and etale",
+   "results": "{\"t\": \"2026-10-23T15:51:06Z\", \"tool\": \"leansearch\", \"query\": \"The complement of pairwise diagonals in an iterated etale fibre product over an algebraic space is quasi compact separated and etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"90657ee2368a86b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only quasi-separatedness, diagonal and pullback instances do not state the algebraic-space atlas tuple assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre product of schemes over a quasi separated algebraic space maps quasi compact separated locally quasi finitely to the product over the integers",
+   "results": "{\"t\": \"2026-10-23T15:51:08Z\", \"tool\": \"leanfinder\", \"query\": \"Fibre product of schemes over a quasi separated algebraic space maps quasi compact separated locally quasi finitely to the product over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"AlgebraicGeometry.instQuasiSeparatedSndScheme\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.instQuasiCompactSndScheme\"], \"digest\": \"24492de4a3839b8e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only quasi-separatedness, diagonal and pullback instances do not state the algebraic-space atlas tuple assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-splitting-filtration",
+  "date": "2026-10-23",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph Supporting input: Tag 07ST proof: the quasi-compact iterated products and the clopen ordered distinct-tuple schemes W_p, before quotienting by S_p.",
+   "via": [
+    "lem-sfb-qcqs-space-splitting-filtration",
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-atlas-distinct-tuple-geometry",
+  "worker": "stage1",
+  "summary": "Q32: preserved the statement and source route. Inducted explicitly for scheme representability, etaleness and quasi-compactness without assuming X quasi-compact. Added only the general 03KN binary fibre-product comparison, and used its separated/lqf conclusions inductively against the absolute affine products. Proved a separated by the pullback of the absolute affine diagonal before using the existing clopen etale-diagonal theorem. Wrote the equality-locus pullbacks and geometric-point bijection explicitly. Read every cited statement, checked edge cases, and retained original searches plus new logged searches.",
+  "blueprint": "Newest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (of det-thm-sf-ctf-stability-direct-images), step (3), inherited alteration/approximation supporting chain in blueprint.from.place. This split realizes the 0BBN/07ST ordered-distinct-tuple geometry before the symmetric quotient. The ancestor tool returns None, retained as JSON null.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic fibre-product, scheme separation, etale permanence or affine geometry used as a black box in the Stacks 0BBN tuple construction; no alternative to a unit step is used."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic fibre-product, scheme separation, etale permanence or affine geometry used as a black box in the Stacks 0BBN tuple construction; no alternative to a unit step is used."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-composition",
+    "why": "Generic fibre-product, scheme separation, etale permanence or affine geometry used as a black box in the Stacks 0BBN tuple construction; no alternative to a unit step is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product, scheme separation, etale permanence or affine geometry used as a black box in the Stacks 0BBN tuple construction; no alternative to a unit step is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-a1-scheme-lqf-composition",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-603247945",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-603247945 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, and Stacks 0BBN, 07ST and 03KN at the cited places. The statement is unchanged. The new node lem-sfb-space-fibre-product-comparison states exactly 03KN (1),(4): representable, monomorphism, lft, separated and lqf, plus quasi-compact when h is quasi-separated. It is statement-only. I tested it on Z=T, the doubled origin and empty sources. It is not a duplicate of the 03HK diagonal nodes (no lqf/separated/qc clauses), of the 050H stack comparison, or of the a1 separated-lqf nodes. Step checks: (1) is an explicit induction for scheme, qc and representable-étale, using a qc from qcqs-permanence with no qc assumption on X. (2) The factorization c_{p+1}=(c_p×_S 1_U)∘j_p is correct on sections. (3) j_p comes from the new node, k_p from scheme base change, and the composite from lqf/separated composition; F_p is separated over the affine P_p. (4) The cartesian square pulls back Δ_{U/S}, so Δ_a is closed and a is separated, and the clopen-diagonal node applies. (5) Δ_ij are clopen, so W_p is clopen and qc; the open-immersion base change (01JR) is elementary. (6) W_p is separated and étale over X. (7) Ω-points are pairwise-distinct tuples; p=1, empty fibres and nonreduced X are all fine. Batch-5 flags: the trf monomorphism-separated (01L4), chartwise-étale permanence, space fibre products and def-trf-algebraic-space citations, and the sfb space nodes that reach trf only through the definition, are generic foundations of algebraic spaces and not steps of the trace formula or Poincaré duality, so I accept them. I accept the tool_uses (generic tools); the worker writing them itself is an advisory point under C8."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAtlasDistinctTupleGeometry",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleAtlas_distinctTuple_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAtlasDistinctTupleGeometry.lean",
+  "statement": "theorem etaleAtlas_distinctTuple_geometry (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (hqs : IsRepresentableWith (fun _ _ q ↦ QuasiCompact q.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (U : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) [IsAffine U.left] (a : yoneda.obj U ⟶ X.obj.obj) (ha : IsEtale a) (p : ℕ) (hp : 1 ≤ p) : ∃ (F : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (π : Fin p → (F ⟶ U)) (b : yoneda.obj F ⟶ X.obj.obj) (h : ∀ i : Fin p, yoneda.map (π i) ≫ a = b), Nonempty (IsLimit (WidePullbackCone.mk b (fun i ↦ yoneda.map (π i)) h)) ∧ CompactSpace F.left ∧ F.left.IsSeparated ∧ IsSeparated (Pi.lift π).left ∧ (Pi.lift π).left.IsLocallyQuasiFinite ∧ (∀ i j : Fin p, i < j → IsOpenImmersion (equalizer.ι (π i).left (π j).left) ∧ IsClosedImmersion (equalizer.ι (π i).left (π j).left)) ∧ ∃ V : F.left.Opens, (V : Set F.left) = (⋃ (i : Fin p) (j : Fin p) (_ : i < j), Set.range (equalizer.ι (π i).left (π j).left))ᶜ ∧ IsClosed (V : Set F.left) ∧ CompactSpace V.toScheme ∧ V.toScheme.IsSeparated ∧ IsEtale (yoneda.map (Over.homMk (U := Over.mk (V.ι ≫ F.hom)) V.ι rfl) ≫ b) ∧ (p = 1 → V = ⊤) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ Spec (CommRingCat.of (ULift.{u} ℤ))) (x : X.obj.obj.obj (op (Over.mk s))), ∃ e : {w : Over.mk s ⟶ Over.mk (V.ι ≫ F.hom) // b.app (op (Over.mk s)) (w ≫ Over.homMk (U := Over.mk (V.ι ≫ F.hom)) V.ι rfl) = x} ≃ {t : Fin p → (Over.mk s ⟶ U) // Function.Injective t ∧ ∀ i : Fin p, a.app (op (Over.mk s)) (t i) = x}, ∀ (w : {w : Over.mk s ⟶ Over.mk (V.ι ≫ F.hom) // b.app (op (Over.mk s)) (w ≫ Over.homMk (U := Over.mk (V.ι ≫ F.hom)) V.ι rfl) = x}) (i : Fin p), (e w).val i = w.val ≫ Over.homMk (U := Over.mk (V.ι ≫ F.hom)) V.ι rfl ≫ π i",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68daadf7e",
+  "group": "Q56",
+  "result": "fix",
+  "note": "Lean statement and node record correct: hqs = absolute diagonal quasi-compact on scheme tests; U affine, a representable étale, no surjectivity; F_p pinned by the presheaf WidePullbackCone IsLimit; F_p qc and absolutely separated; Pi.lift π in Over(Spec Z) separated and lqf (recorded 01TD predicate); Δ_ij = scheme equalizer of π_i,π_j (= node's pullback of Δ_a via the cartesian step-4 square), open and closed immersion; V = exact complement, closed, qc, separated, IsEtale over X via the actual inclusion; p=1 → V=⊤; geometric-fibre bijection with injective tuples, fixed on every coordinate. Edge cases p=1, empty U/fibres, non-separated X, universes fine; statement verbatim; only lean changed; no defs; docstrings ok; Stacks 0BBN source agrees. Only fault H11: the second reading is a self-audit ('second pass by the same worker') → FIX fixes/lem-sfb-etale-atlas-distinct-tuple-geometry.report.md (worker report word for word + independent second reading). No Lean changed, no compile."
+ }
+}

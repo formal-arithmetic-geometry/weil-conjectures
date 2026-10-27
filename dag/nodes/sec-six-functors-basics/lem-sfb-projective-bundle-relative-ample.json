@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-projective-bundle-relative-ample",
+ "kind": "statement",
+ "title": "Projective-bundle morphisms are finite type and admit a relatively ample invertible module",
+ "statement": "Let $h:X\\to S$ be a morphism of schemes [def-pc-scheme] that is projective in the projective-bundle sense [def-trf-projective-bundle-morphism]. Then $h$ is of finite type [def-weil-finite-type-morphism] and there exists an invertible $\\mathcal O_X$-module $L$ [def-sc-invertible-module] that is $h$-relatively ample. Here an invertible module $L$ on the source of a morphism $h$ is $h$-relatively ample if $h$ is quasi-compact [def-weil-finite-type-morphism] and, for every affine open $V$ of its target, $L|_{h^{-1}(V)}$ is ample in the absolute sense [def-weil-pbc-ample-invertible-module].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07RL (lemma-projective-quasi-projective), with Definition Tag 01VW(1) (definition-quasi-projective) and Definition Tag 01VH (definition-relatively-ample)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-trf-projective-bundle-morphism",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-projective-bundle-proper] to $h$ with exactly the assumed finite-type quasi-coherent projective-bundle convention. Thus $h$ is proper. Unfold [def-weil-proper-morphism]: properness includes finite type. Unfold [def-weil-finite-type-morphism]: finite type includes quasi-compactness. This proves the finite-type clause and supplies the quasi-compactness needed below.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07RL (lemma-projective-quasi-projective), proof: properness from Tag 01WC (lemma-locally-projective-proper); Tag 01W1 (definition-proper)."
+   }
+  },
+  {
+   "text": "Unpack def-trf-projective-bundle-morphism to obtain E, its quasi-coherence and finite type, and a closed immersion i into the canonical relative Proj of Sym(E), with i followed by the projection equal to h. Obtain its normalized tautological quotient D from lem-trf-projective-bundle-quotient-geometry. Put L=i^*D.line and q=pulledQuotient D h i hih. The first clause of lem-trf-line-quotient-chart-inverse-pullback supplies invertibility of L and surjectivity of q, for this actual pulled-back quotient.",
+   "uses": [
+    "def-trf-projective-bundle-morphism",
+    "def-pc-module-pullback",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-line-quotient-chart-inverse-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07RL (lemma-projective-quasi-projective), proof: L=i^*O(1); Constructions Tag 01OB (definition-projective-bundle) and the normalized quotient discussion in Section 01OA."
+   }
+  },
+  {
+   "text": "Apply lem-trf-line-quotient-homogeneous-fraction-map to q:h^*E ->> L. It supplies a relative graded line map psi for the canonical symmetric algebra, its extension of q, generation everywhere, and a morphism F with the quotient fraction charts and psi.IsCanonicalMap F. The first clause of lem-trf-line-quotient-chart-inverse-pullback applied to i shows F=i from those extension and fraction-chart properties. Substitute this equality. Since a closed immersion is an immersion (def-weil-closed-immersion), lem-trf-graded-immersion-ample-criterion applies to h,L,Sym(E),psi and i, using quasi-compactness from step 1. It gives exactly ampleness of L restricted over every affine target open. Pair this conclusion and invertibility of L with finite type from step 1.",
+   "uses": [
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "lem-trf-line-quotient-chart-inverse-pullback",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "def-weil-closed-immersion",
+    "lem-trf-graded-immersion-ample-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07RL (lemma-projective-quasi-projective), proof, expanded through Tag 01VN (lemma-ample-very-ample), whose proof uses Tag 01VJ (lemma-characterize-relatively-ample), implication (6) implies (1). The identification of the map with i is supplied by Constructions Section 01OA, as stated in the cited quotient-geometry node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-trf-graded-immersion-ample-criterion",
+  "lem-trf-line-quotient-chart-inverse-pullback",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07RL via Tag 01VN and Tag 01VJ(6); H3 implements the existing three-step plan, expanding the quotient-to-graded-map identification using the existing Constructions Tags 01OA/01O9 fraction-map and inverse-chart declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective morphism of schemes defined by a closed embedding in a finite type quasi coherent projective bundle admits a relatively ample invertible sheaf and is of finite type",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of O(1) along a closed immersion into a relative projective bundle is a relatively ample line bundle",
+   "results": "OK 8 hits: Bundle.Pullback, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.Proj.pullbackAwayιIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRelativelyAmple\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRelativelyAmple|[Rr]elatively[Aa]mple|[Pp]rojective.*[Aa]mple",
+   "results": "OK 0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRelativelyAmple|relatively.?ample|projective.*ample",
+   "results": "OK 0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: affine Proj properness, quasi-affineness and pullback constructions do not state finite type plus relative ampleness for this projective-bundle convention"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback of the twisting sheaf O(1) along a closed immersion into a projective bundle is relatively ample",
+   "results": "OK 8 hits: AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.IsImmersion.instSndScheme, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left",
+   "date": "2026-10-22",
+   "verdict": "no match: affine Proj properness, quasi-affineness and pullback constructions do not state finite type plus relative ampleness for this projective-bundle convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRelativelyAmple\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine Proj properness, quasi-affineness and pullback constructions do not state finite type plus relative ampleness for this projective-bundle convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective morphism defined by a closed immersion into the projectivization of a finite type quasi coherent module is of finite type and has a relatively ample invertible sheaf",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: affine Proj properness, quasi-affineness and pullback constructions do not state finite type plus relative ampleness for this projective-bundle convention"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjectiveBundle|ProjectiveBundle|IsVeryAmple|IsAmple",
+   "results": "OK 0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: affine Proj properness, quasi-affineness and pullback constructions do not state finite type plus relative ampleness for this projective-bundle convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact immersion into relative Proj whose invertible sheaf is pulled back from O(1) gives a relatively ample sheaf",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "no match: affine Proj properness, quasi-affineness and pullback constructions do not state finite type plus relative ampleness for this projective-bundle convention"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-bundle-composition",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, first sentence: projective morphisms are quasi-projective, by 07RL; supplies finite type and a relatively ample invertible module for both modification maps.",
+   "via": [
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-bundle-relative-ample",
+  "worker": "stage1",
+  "summary": "Proved finite type via the existing projective-bundle properness node, then constructed L=i^*O(1) and applied the existing graded-immersion ampleness criterion using the canonical quotient and map identification supplied by existing quotient geometry. No new nodes; preserved statement, original metadata and searches. All cited statements were read and quoted in citations.json. The identical existing unsplit lem-per-projective-bundle-relative-ample is flagged in the report for maintainer deduplication, not used as a replacement proof.",
+  "blueprint": "Realizes the inherited alteration-modification route recorded in blueprint.from.place, specifically the projective-to-quasi-projective input of Stacks 0C4P/07RL needed by lem-sfb-projective-bundle-composition. No imported blueprint node matches this item (blueprint_refs ancestor returns None); the inherited null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic properness for precisely the finite-type quasi-coherent projective-bundle convention, supplying finite type and quasi-compactness in the Stacks 07RL proof."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic construction of the invertible O(1), normalized quotient and its canonical relative-Proj map for arbitrary quasi-coherent E; the alteration unit has no such construction."
+   },
+   {
+    "node": "lem-trf-graded-immersion-ample-criterion",
+    "why": "Generic Stacks 01VJ(6) criterion, used to expand the very-ample-implies-ample step of Stacks 07RL/01VN, not to replace the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-invertible",
+    "why": "Generic pullback preservation of invertibility, applied to O(1) and the chosen closed immersion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-graded-immersion-ample-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-6e7851945",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-6e7851945 (reviewer sub-agent of L); spot-checked: Read the item's 3 steps in full against Stacks 07RL (morphisms.tex l.10686), whose proof uses 01VN (l.8998) via 01VJ(6). Step 1: lem-trf-projective-bundle-proper uses exactly the finite-type quasi-coherent P(E) convention; proper implies finite type implies quasi-compact. Step 2: L=i^*O(1); the quotient-geometry statement makes O(1) invertible for any quasi-coherent E, and lem-weil-pbc-invertible-pullback-invertible makes L invertible. Step 3: the quotient-geometry bijection gives q:h^*E->>L and r_{L,psi}=i as a quoted statement, which is the verification 01VN omits; U(psi)=X; i is an immersion with identity open factor. All hypotheses of lem-trf-graded-immersion-ample-criterion were checked, and its conclusion plus quasi-compactness is exactly the item's relative ampleness. Edge cases checked: empty S or X, E=0, E=O_S, E=O^{r+1}, non-locally-free E=A/(t), non-quasi-compact S. No new nodes, no changes, no SGA. Accepted tool_uses: the three trf nodes and lem-weil-pbc-invertible-pullback-invertible (generic geometry, unit route unchanged). Batch-5: the closure of the four flagged trf nodes has 300 nodes; its 17 sec-trace-formula nodes are general Proj and projective-bundle geometry (units sk-i-curve-zero, sk-lem-trf-graded-immersion-ample-criterion), and it has no Poincare-duality, trace-transport, batch-4 or nt-assume nodes. The batch-5 closure is 19801 nodes with the item and 19800 without it, so citing them adds nothing but the item. All four citations (def-trf-canonical-symmetric-graded-algebra, lem-trf-graded-immersion-ample-criterion, lem-trf-projective-bundle-proper, lem-trf-projective-bundle-quotient-geometry) are general results outside both assumptions and are accepted. Maintainer note: lem-per-projective-bundle-relative-ample (unsplit, created 2026-10-19) has the identical statement; the item is a later duplicate to merge at the maintainer level. Advisory: step 3 could also cite lem-weil-pbc-quasi-coherent-symmetric-algebra, though the cited definition's statement already carries it."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleRelativeAmple",
+  "declaration": "AlgebraicGeometry.projectiveBundle_finiteType_relativeAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleRelativeAmple.lean",
+  "statement": "theorem projectiveBundle_finiteType_relativeAmple {X S : Scheme.{u}} (h : X ⟶ S) (hh : IsProjectiveBundle h) : (LocallyOfFiniteType h ∧ QuasiCompact h) ∧ ∃ L : X.Modules, L.IsInvertible ∧ ∀ V : S.Opens, IsAffineOpen V → ∃ hL : ((Scheme.Modules.tensorPullback (h ⁻¹ᵁ V).ι).obj L).IsInvertible, @Scheme.Modules.IsAmple (h ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (h ⁻¹ᵁ V).ι).obj L) hL",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-412f9ecb2",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsProjectiveBundle (Stacks 01W8(1), E finite-type quasi-coherent, not locally free), LocallyOfFiniteType ∧ QuasiCompact, ∃ L invertible, and ampleness of the pullback along (h⁻¹ᵁ V).ι on every affine V with a propositional ∃ hL, the same form as the landed graded_immersion_ample_criterion and relative-ample base-change nodes. No extra assumptions, single universe u, statement verbatim. Only node changes are lean and the landed def-pc-module-pullback added to stmt_deps, which brief §6 allows. Edge cases (empty S, E=0, E=O_S, non-locally-free E, non-qcqs S, empty V) are covered. No definitions, sorry only, source and blueprint docstrings present, report sections present. The quotient-geometry import refusal was resolved by maintainer repair note 2026-10-22. The duplicate lem-per-projective-bundle-relative-ample is dropped (route-pivot-dropped.txt:1811) and has no Lean. No file changed, so no compile; relies on the worker's scompile pass (10.6 s/8.9 s) and the dry-run server compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261023T102900-L-2997477",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

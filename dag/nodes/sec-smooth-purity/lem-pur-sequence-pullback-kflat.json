@@ -1,0 +1,318 @@
+{
+ "id": "lem-pur-sequence-pullback-kflat",
+ "kind": "statement",
+ "title": "Exact sequence inverse image preserves K-flatness",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and schemes in a universe $u$ [def-pc-scheme]. For a scheme $W$, use its small pro-etale ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$, whose index $n\\geq0$ means $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$, with actual quotient ring maps; put $A_W=\\lim_nB_{W,n}$ and let $\\mathscr S_W$ be its category of module sheaves, equivalently strict quotient-semilinear systems [def-coef-ringed-sequence-site]. Write $e_{W,n}$ for exact evaluation, $\\operatorname{Res}_{W,n}$ for restriction along $A_W\\to B_{W,n}$ and $U_W:\\mathscr S_W\\to\\operatorname{Tow}(\\operatorname{Mod}(A_W))$ for their simultaneous exact scalar restriction. Use ordinary unbounded integer-indexed cochain and derived categories, with localization $q_W$ for $A_W$-modules, $q^s_W$ for sequence modules and $q^t_W$ for towers [def-weil-abstract-derived-category]. Use the fixed derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, with $\\mathcal L_W=R\\lim\\circ D(U_W)$, and the specified derived tensor and cochain tensor models on the sequence site [lem-coef-derived-system-evaluation-calculus]. A good integral complex is K-flat with flat terms; K-flat means that its direct-sum total tensor with every acyclic module complex is acyclic [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. All comparisons below use the actual chosen adjunctions, not arbitrary isomorphisms between their objects. No boundedness, constructibility, completeness of inputs, or invertibility of $\\ell$ on the schemes is assumed. For a scheme morphism $f:X\\to Y$, let $b_f$ on sequence sites be $(n,V)\\mapsto(n,X\\times_Y V)$. Its ring map is the actual constant-section coefficient map at every $n$; let $f^s_*:\\mathscr S_X\\to\\mathscr S_Y$ be its module direct image, $F_f:\\mathscr S_Y\\to\\mathscr S_X$ its specified left adjoint, $\\eta^f$ the unit, and $D_f=D(F_f)$ the exact induced derived inverse image [def-trf-integral-comparison-sequence-systems]. Finite module pullback $f_n^*$ is equipped with its actual adjunction unit. The direct-image/evaluation comparison is identity on sections; the fixed inverse-image/evaluation isomorphism $v_{f,n}:f_n^* e_{Y,n}\\xrightarrow{\\sim}e_{X,n}F_f$ is its inverse mate under the specified finite and sequence adjunctions. If $P$ is any K-flat coherent sequence complex on $Y$, then $F_f^cP$ is K-flat on $X$. Explicitly, K-flatness means that $\\operatorname{Tot}(Z\\otimes P)$ is acyclic for every acyclic sequence-module complex $Z$ on $Y$, and the conclusion is that $\\operatorname{Tot}(Z'\\otimes F_f^cP)$ is acyclic for every acyclic sequence-module complex $Z'$ on $X$. These are the IsKFlatIndependentCoefficients predicates at the actual sequence-site universes (objects $u+1$, morphisms $u$, modules $u+1$). No termwise-flatness assumption is made on $P$; no boundedness, normalized-system, constructibility or Tor-amplitude hypothesis is made. This is pullbackTensorSequenceGood for the actual exact inverse image along the canonical constant-section ring map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (lemma-pullback-K-flat) only covers flat-term representatives; Tag 07A4 (lemma-pullback-tensor-product). The stated extension to arbitrary K-flat complexes for the exact constant-coefficient sequence pullback is a project obligation, not a quotation of 0G7E.",
+  "lean_module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "lean_file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+  "lean_line": 395,
+  "declaration": "WeilConjectures.pullbackTensorSequenceGood"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Use coefficientTensorModelPreservation.2 to obtain K-flatness of every finite evaluation of P. For an arbitrary acyclic sequence complex Z, its evaluations are acyclic by exactness of coefficientSequenceEvaluation. The cochain tensor evaluation isomorphism identifies each evaluation of Tot(Z tensor C) with the finite total tensor. Componentwise exactness of semilinear systems therefore detects K-flatness of C from that of every evaluation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply completedTowerFinitePullbackKFlat to each finite evaluation of P, which is K-flat by Step 1. It applies to the actual integralOperationsLevelPullback, without any flat-term hypothesis.",
+   "uses": [
+    "lem-pur-completed-tower-finite-pullback-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified inverse-image/evaluation complex comparison identifies each evaluation of the actual sequence pullback with the finite pullback of the source evaluation. Transport K-flatness through this cochain isomorphism and apply the componentwise criterion of Step 1.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-completed-tower-finite-pullback-kflat",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "M3 Lean assembly: Tags 0DEN/0DEP for finite pullback through enough points, scalar extension, and componentwise sequence K-flatness. No flat-term hypothesis is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:12Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CochainComplex.IsKFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:12Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image on coherent quotient coefficient systems preserves independent coefficient K-flat complexes without termwise flatness",
+   "results": "{\"t\": \"2026-10-27T06:10:13Z\", \"tool\": \"leansearch\", \"query\": \"Exact inverse image on coherent quotient coefficient systems preserves independent coefficient K-flat complexes without termwise flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.flat_iff_lan_flat\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val\", \"CochainComplex.isKProjective_of_iso\", \"CategoryTheory.compatiblePreservingOfFlat\", \"HomologicalComplex.ExactAt.unop\", \"CochainComplex.isKInjective_of_iso\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_obj_val\", \"CategoryTheory.preservesFiniteColimits_iff_coflat\"], \"digest\": \"19e728c6c65ca2b2\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CochainComplex.IsKFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on coherent quotient coefficient systems preserves independent coefficient K-flat complexes without termwise flatness",
+   "results": "{\"t\": \"2026-10-27T06:10:21Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image on coherent quotient coefficient systems preserves independent coefficient K-flat complexes without termwise flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.rTensor_exact\"], \"digest\": \"e6996b163b4d9875\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed topos exact pullback along canonical constant coefficient maps preserves K-flat complexes on the ringed sequence site",
+   "results": "{\"t\": \"2026-10-27T06:10:22Z\", \"tool\": \"leanfinder\", \"query\": \"Ringed topos exact pullback along canonical constant coefficient maps preserves K-flat complexes on the ringed sequence site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\"], \"digest\": \"76c93c79f7375fe1\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on a ringed sequence site preserves arbitrary unbounded K-flat complexes when the target topos has enough points",
+   "results": "{\"t\": \"2026-10-27T07:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image on a ringed sequence site preserves arbitrary unbounded K-flat complexes when the target topos has enough points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"CategoryTheory.lan_flat_of_flat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.flat_of_preservesFiniteLimits\", \"CategoryTheory.RepresentablyFlat.comp\", \"CategoryTheory.preservesFiniteLimits_iff_flat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"85d15c87bf13ebc7\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: results concern ordinary sheaf pullback, categorical flatness, or ordinary module flatness, not arbitrary K-flat sequence complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat",
+   "results": "{\"t\": \"2026-10-27T07:15:10Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: results concern ordinary sheaf pullback, categorical flatness, or ordinary module flatness, not arbitrary K-flat sequence complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of an unbounded K-flat complex of sheaves of modules on a topos with enough points is K-flat",
+   "results": "{\"t\": \"2026-10-27T07:15:10Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of an unbounded K-flat complex of sheaves of modules on a topos with enough points is K-flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjFreeIso\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"SheafOfModules.pullback_comp_id\"], \"digest\": \"2596cb847d296494\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: results concern ordinary sheaf pullback, categorical flatness, or ordinary module flatness, not arbitrary K-flat sequence complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-27T07:15:10Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: results concern ordinary sheaf pullback, categorical flatness, or ordinary module flatness, not arbitrary K-flat sequence complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|coefficientSequence|StrictRingSystem",
+   "results": "{\"t\": \"2026-10-27T07:16:10Z\", \"tool\": \"grep\", \"query\": \"AlgebraicInverseImage|coefficientSequence|StrictRingSystem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary module pullback and uniqueness of adjoints do not give the sequence-site K-flat conclusion. Structural candidates were reused from the DAG instead of creating a node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of modules over a sequence of sheaves of rings is levelwise algebraic inverse image and is canonically isomorphic to any left adjoint of direct image",
+   "results": "{\"t\": \"2026-10-27T07:16:10Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of modules over a sequence of sheaves of rings is levelwise algebraic inverse image and is canonically isomorphic to any left adjoint of direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullback\"], \"digest\": \"bc493213ced8d726\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary module pullback and uniqueness of adjoints do not give the sequence-site K-flat conclusion. Structural candidates were reused from the DAG instead of creating a node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-27T07:16:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\"], \"digest\": \"ef3654c89ecf172c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary module pullback and uniqueness of adjoints do not give the sequence-site K-flat conclusion. Structural candidates were reused from the DAG instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Levelwise inverse image on inverse sequences of sheaves is a geometric morphism and transports the ring and module actions compatibly with the adjunction unit",
+   "results": "{\"t\": \"2026-10-27T07:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"Levelwise inverse image on inverse sequences of sheaves is a geometric morphism and transports the ring and module actions compatibly with the adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"df852182a042603b\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary module pullback and uniqueness of adjoints do not give the sequence-site K-flat conclusion. Structural candidates were reused from the DAG instead of creating a node."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-27T07:17:03Z\", \"tool\": \"grep\", \"query\": \"pullbackPushforwardAdjunction|leftAdjointUniq\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"328c1b5b6ffa1dee\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary module pullback and uniqueness of adjoints do not give the sequence-site K-flat conclusion. Structural candidates were reused from the DAG instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism lifts to diagrams of ring and module sheaves with the underlying set functor given pointwise, including the scalar action and the specified unit of the module adjunction",
+   "results": "{\"t\": \"2026-10-27T07:17:05Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric morphism lifts to diagrams of ring and module sheaves with the underlying set functor given pointwise, including the scalar action and the specified unit of the module adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullback\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pushforwardSections\", \"PresheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"SheafOfModules.forgetToSheafModuleCat\"], \"digest\": \"765adee13178f010\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary module pullback and uniqueness of adjoints do not give the sequence-site K-flat conclusion. Structural candidates were reused from the DAG instead of creating a node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-completed-pullback-tower-realizations",
+  "date": "2026-10-27",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.pullbackTensorSequenceGood",
+   "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+   "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+   "line": 395,
+   "statement": "theorem pullbackTensorSequenceGood {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n    (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))\n      (pullbackTensorSequenceSmall Y) (coefficientSequenceTopology (ProEt.topology Y))\n      (coefficientSequenceCommRingSheaf l E Y) P) :\n    @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (ℕ × X.ProEt) (inferInstance : Category.{u} (ℕ × X.ProEt))\n      (pullbackTensorSequenceSmall X) (coefficientSequenceTopology (ProEt.topology X))\n      (coefficientSequenceCommRingSheaf l E X)\n      (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P)",
+   "proposed_module": "Sheaf.Paper.SequencePullbackKflat",
+   "note": "Existing local declaration ownership for the released stage-1 re-split, not a closed-proof attachment. Current module is authoritative; proposed module is a future stage-2/3 extraction only."
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-sequence-pullback-kflat",
+  "worker": "stage1",
+  "summary": "Repair returned head 22c47ebcbf1: replace the unsupported identification of a GeometryOrdinary system right adjoint with the specified inverse mate of the actual direct-evaluation comparison. Identify the actual finite pullback with tensor pullback using the scalar-action-pinned module adjunction, then compute target sequence stalks directly. Statement and accepted Steps 1/3 unchanged; no new nodes.",
+  "blueprint": "Supports the finite-reduction/scalar-extension compatibility of def-weil-frobenius-coefficient-twists in the current blueprint. Realizes the extracted pullbackTensorSequenceGood obligation; computed ancestor is None, as recorded in inherited blueprint.from. Uses the current arbitrary-K-flat route of Stacks 0DEN/0DEP rather than silently adding flat terms.",
+  "retained_arguments_status": "Unverified inherited argument, not an accepted proof. Kept verbatim to satisfy the repair order; further splitting must justify every non-elementary inference.",
+  "retained_arguments": [
+   {
+    "old_step": 15,
+    "step": {
+     "text": "pullbackTensorSequenceGood: tensor commutes with inverse image by the preceding ordinary comparison.\nThe right adjoint and exact constant-coefficient pullback identify the relevant\nacyclic tests; equivalently check the flat tensor filtration termwise and use\nK-flat resolutions. This proves the independent-coefficient criterion.",
+     "uses": [
+      "lem-coef-derived-system-evaluation-calculus",
+      "def-coef-ringed-sequence-site",
+      "def-sf-strict-roos-functor",
+      "def-weil-derived-pullback-tensor-hom",
+      "lem-weil-pbc-resolving-representative-whiskering",
+      "lem-pc-kflat-resolution"
+     ],
+     "elementary": false
+    }
+   }
+  ],
+  "blueprint_ancestry_note": "The documented blueprint.from.node=null represents the broken created.item chain. The parent’s historical from.node association and exact declaration obligation remain in from.place; parent provenance fields are unchanged.",
+  "corrections": "Returned C3/C4 and E5: GeometryOrdinary does not pin its right adjoint, scalar actions or transitions. It is no longer cited. Step 2 now cites the actual direct-evaluation theorem and the inverse-mate invertibility theorem. Step 4 uses 03D7 to identify the actual finite right adjoint including addition, scalar action and restrictions, and constructs the normalized finite left-adjoint comparison. Step 5 computes stalks of F_f itself; no global system-functor comparison or transition identification is needed.",
+  "repair_of": "22c47ebcbf1",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Canonical constant-ring identification and exact algebraic inverse image, valid for every coefficient ring."
+   },
+   {
+    "node": "lem-sf-sequence-module-pullback-evaluation",
+    "why": "Invertibility of the actual evaluation inverse mate, with the direct-evaluation map and both adjunctions specified."
+   },
+   {
+    "node": "lem-sfb-proetale-enough-points",
+    "why": "Enough arbitrary topos points for every scheme, composed with sequence evaluation."
+   },
+   {
+    "node": "lem-pur-system-evaluation-topos",
+    "why": "Evaluation is a geometric inverse image, supplying actual sequence-topos points."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic finite tensor-formula module adjunction; its statement pins the right adjoint action through the actual structural map."
+   },
+   {
+    "node": "lem-sfb-ringed-topos-pullback-stalk",
+    "why": "Natural module-linear comparison for finite tensor pullback at arbitrary topos points, including differentials."
+   },
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "Ordinary-module K-flatness under arbitrary scalar extension at the computed stalk ring map."
+   },
+   {
+    "node": "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "why": "Both directions of the arbitrary unbounded K-flat stalk criterion."
+   }
+  ]
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The computed created.item ancestry is broken at the parent module name; blueprint_refs.py ancestor returns None. Documentary association retained from the parent: def-weil-frobenius-coefficient-twists, The coefficient twists commute with finite reduction and scalar extension; the coherent reduction and strict tower normalizations are the data used in the completed tensor/pullback comparison. Extracted obligation: pullbackTensorSequenceGood.",
+   "via": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NF-c33027197",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-c33027197 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement is unchanged from the unsplit base and it is true: it is Stacks 0DEP (sites-cohomology.tex l.3834) for the ringed sequence topoi, with no flat-term hypothesis. The proof follows 0DEP's own proof: 0DEN, then 05V5, then 06Y1. The return of 22c47ebcbf10 (C3/C4/E5, GeometryOrdinary right adjoint not pinned) is repaired, and GeometryOrdinary is no longer cited. Step 2: lem-pur-integral-comparison-sequence-direct-evaluation gives d_n, the identity on sections. lem-sf-sequence-module-pullback-evaluation applies under the specified adjunctions: u_f is continuous, the product with id preserves vertical covers, the ring map is rho_n sliced, and the universes are u+1/u. So the inverse mate v_n is invertible. Step 4: 03D7 gives T_n left adjoint to the pushforward acting through the adjunct of c_n. That adjunct is rho_n by def-weil-proetale-inverse-image, so this pushforward is R_n with its sections, addition and action. The normalized comparison a_n then comes from uniqueness of left adjoints, for any choice of f_n^*. Step 5: the forward clause of 0DEN at the point (f∘p) composed with Y-evaluation, then v_n^{-1}, a_n and 05V5, give r^{-1}F_fP ≅ M⊗_A B. 06Y1 applies for an arbitrary rho, and the converse clause of 0DEN applies to the Step 3 family (0992 + evaluation points; the conservativity argument is correct). Step 1 is right: the c_n of lem-pe and of the definition agree on constant generators. Lean check: F_f is defined as the leftAdjoint of pullbackTensorSequenceDirect, and the proof works for any such choice. proof_deps equals the union of uses, every cited id exists, and there is no cycle. There are no new nodes. I accept all 8 off-unit tool_uses as black-box tools. One advisory: Step 5 reuses Step 3's evaluation-point construction for Y without re-citing lem-pur-system-evaluation-topos, which is in proof_deps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "declaration": "WeilConjectures.pullbackTensorSequenceGood",
+  "statement": "theorem pullbackTensorSequenceGood {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n    (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))\n      (pullbackTensorSequenceSmall Y) (coefficientSequenceTopology (ProEt.topology Y))\n      (coefficientSequenceCommRingSheaf l E Y) P) :\n    @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (ℕ × X.ProEt) (inferInstance : Category.{u} (ℕ × X.ProEt))\n      (pullbackTensorSequenceSmall X) (coefficientSequenceTopology (ProEt.topology X))\n      (coefficientSequenceCommRingSheaf l E X)\n      (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing statement at CompletedPullbackTowerRealizations.lean:395. The section parameters are l : ℕ with Fact l.Prime and E : Type u with Field, Algebra (Padic l), and FiniteDimensional (Padic l). Both K-flat predicates explicitly use object/morphism/module universes u+1/u/u+1. The actual sequence inverse image is the chosen left adjoint to the specified sectionwise direct image along its uniquely constant-section-normalized ring map. No flat-term hypothesis. This is a stage-2 statement attachment; the existing theorem still uses sorry, and no closed-proof claim is made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7fa2c444",
+  "group": "NO",
+  "result": "pass",
+  "note": "existing:true attachment of WeilConjectures.pullbackTensorSequenceGood (CompletedPullbackTowerRealizations.lean:395, sorry). Only the item's lean field changed vs side-live; statement verbatim at line 395. F_f = (pullbackTensorSequenceDirect).leftAdjoint, proven equal to def-trf integralComparisonSequencePullback (Core:194-200); base (𝟭 ℕ).prod proEtaleBaseChange; ring map = integralComparisonSequenceRingMap. Predicate body read: ∀ acyclic F, Tot(F⊗P) acyclic (sheafified tensor), u+1/u/u+1 on both sides; no flat-term/bounded/normalized/ℓ-invertibility hypotheses. Edge cases (empty scheme, id f, zero/unbounded complexes, n=0, char ℓ) covered. True by Stacks 0DEP via 0DEN/05V5/06Y1 (node proof passed at stage 1). Advisory: the existing docstring cites the parent blueprint and the old 06YY sketch (cannot be fixed in an existing:true delivery; update at extraction); E : Type u shares the scheme universe (harmless). No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

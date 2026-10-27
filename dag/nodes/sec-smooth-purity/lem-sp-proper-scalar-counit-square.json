@@ -1,0 +1,308 @@
+{
+ "id": "lem-sp-proper-scalar-counit-square",
+ "kind": "statement",
+ "title": "Proper direct-image restriction comparison and its scalar counit square",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $A\\to B$ be a unital homomorphism of finite commutative rings and $h:Z\\to Y$ a morphism of schemes. Use ordinary uncompleted unbounded derived categories $D(W_{\\mathrm{proet}},R)$ of modules over the constant ring sheaf $R_W$, for $W=Z,Y$ and $R=A,B$ [def-weil-pbc-proetale-modules]. Put $T_W=-\\otimes^L_{A_W}B_W$ and let $r_W$ be exact scalar restriction, with the representative-normalized adjunction $T_W\\dashv r_W$ and counit $\\epsilon_W$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Write $P_R=h_R^*$, $R_R=Rh_{*,R}$ and $e^R:P_RR_R\\to1$ for the canonical geometric adjunction counit [def-weil-pbc-proetale-operations]. Let $\\chi:P_BT_Y\\xrightarrow{\\sim}T_ZP_A$ be the canonical balanced tensor/pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], computed on K-flat representatives. Let $d:r_YR_B\\xrightarrow{\\sim}R_Ar_Z$ be the normalized ring-sheaf comparison [lem-weil-pbc-ring-sheaf-change-adjunction] and put $D=d^{-1}$. Define $\\gamma_N:T_YR_AN\\to R_BT_ZN$ by its geometric transpose\n$$e^B_{T_ZN}\\circ P_B(\\gamma_N)=T_Z(e^A_N)\\circ\\chi_{R_AN}.$$\nThen $\\gamma$ is natural in every $N\\in D(Z_{\\mathrm{proet}},A)$. The composite adjunctions $P_BT_Y\\dashv r_YR_B$ and $T_ZP_A\\dashv R_Ar_Z$, with canonical left comparison $\\chi$ and right comparison $D^{-1}$, satisfy for every $H\\in D(Z_{\\mathrm{proet}},B)$\n$$e^B_H\\circ P_B(\\epsilon_Y(R_BH))\\circ\\chi^{-1}_{r_YR_BH}=\\epsilon_Z(H)\\circ T_Z(e^A_{r_ZH})\\circ T_ZP_A(D_H^{-1}).$$\nTheir specified comparisons therefore satisfy the scalar counit square\n$$\\epsilon_Y(R_BH)\\circ T_Y(D_H)=R_B(\\epsilon_Z(H))\\circ\\gamma_{r_ZH}.$$\nMoreover $D$ is exactly the direct-image restriction comparison of [lem-weil-proetale-direct-image-restriction-of-scalars]: for a K-injective $B_Z$-complex $I$ and a K-injective resolution $r_ZI\\to I'$ over $A_Z$, $D_I$ is the inverse of the class of $r_Yh_*I=h_*r_ZI\\to h_*I'$, under the canonical resolution identifications. This identification uses the same direct-image composition normalization $\\kappa$ as [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. All equations hold without properness of $h$, flatness of $B/A$, or boundedness or finite Tor amplitude of $H$ or $r_ZH$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition). Agent-formulated coefficient-square normalization; blueprint det-sp-tower-gluing, Levels paragraph; returned proof steps 1, 2 and the representative-identification part of step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sp-proetale-constant-coefficient-ring-map",
+  "def-sp-constant-scalar-pullback-comparison",
+  "def-sp-direct-image-scalar-adjunction-mate",
+  "def-weil-pbc-four-corners"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\eta^B:1\\to R_BP_B$ be the unit of the specified geometric adjunction. Its Hom bijection gives the unique arrow with the required transpose, explicitly\n$$\\gamma_N=R_B\\bigl(T_Z(e^A_N)\\circ\\chi_{R_AN}\\bigr)\\circ\\eta^B_{T_YR_AN}.$$\nFor $v:N\\to N'$, naturality of $e^A$ and $\\chi$ gives\n$$T_Z(v)\\circ T_Z(e^A_N)\\circ\\chi_{R_AN}=T_Z(e^A_{N'})\\circ\\chi_{R_AN'}\\circ P_BT_YR_A(v).$$\nNaturality of the geometric Hom bijection therefore gives $R_BT_Z(v)\\circ\\gamma_N=\\gamma_{N'}\\circ T_YR_A(v)$. This proves existence, uniqueness and naturality without assuming that $\\gamma$ is invertible.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; Tag 07A4, lemma-pullback-tensor-product; naturality of the Hom bijection."
+   }
+  },
+  {
+   "text": "Use the isomorphism $b:r_ZP_B\\xrightarrow{\\sim}P_Ar_Y$ supplied by the ring-sheaf change adjunction, with the canonical constant-coefficient identifications $c_A,c_B$ used by $P_A,P_B$ [prop-weil-pbc-proetale-constant-ring-map]. Writing $\\varphi:A\\to B$ and $\\varphi_W:A_W\\to B_W$ for the induced map, the ring-square hypothesis of that node, $\\varphi_Zc_A=c_Bh^{-1}\\varphi_Y$, holds: the adjoints of both sides send each constant section $a$ to $\\eta_Z(\\varphi(a))$, and a locally constant section is glued from constant sections on its open fibres. Apply that node's adjunct equation to $M=R_BH$, $N=H$ and $t=e^B_H$. The geometric adjunct of $t$ is $1_{R_BH}$ by the triangle identity. Its assertion thus reads\n$$r_Z(e^B_H)\\circ b_{R_BH}^{-1}=e^A_{r_ZH}\\circ P_A(d_H).$$\nThis uses the normalized $d$ of the statement, rather than choosing a new right-adjoint isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; Tag 0D6E, lemma-derived-pushforward-composition; specified restriction/pullback adjunct compatibility."
+   }
+  },
+  {
+   "text": "For $K\\in D(Y_{\\mathrm{proet}},B)$ the scalar counits satisfy\n$$P_B(\\epsilon_Y(K))\\circ\\chi^{-1}_{r_YK}=\\epsilon_Z(P_BK)\\circ T_Z(b_K^{-1}).\\tag{*}$$\nHere is the representative check, including the derived identifications. Represent $K$ by a $B_Y$-complex $C$ and choose a flat-term K-flat resolution $g:P\\to r_YC$. Since $P_A$ is exact, $P_Ag$ is a quasi-isomorphism onto $P_Ar_YC$; its source $P_AP$ is K-flat with flat terms by pullback preservation. Consequently $b_C^{-1}P_Ag:P_AP\\to r_ZP_BC$ is an admissible resolution for the scalar counit on $Z$. The scalar-adjunction normalization computes that counit by $x\\otimes b\\mapsto b\\,b_C^{-1}P_Ag(x)$. On the other side, the counit on $Y$ is $p\\otimes b\\mapsto b\\,g(p)$, and the specified balanced $\\chi^{-1}$ carries $x\\otimes b$ to the inverse image of $p\\otimes b$ when $x=h^{-1}p$. Thus both maps in (*) are the same $B_Z$-linear extension of $b_C^{-1}P_Ag$ from $P_AP$. This equality is a sheaf-tensor equality by its universal property, not an assertion that all sections are single tensors. Applying localization and cancelling the common invertible resolution comparisons proves (*) for $K$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 0G7E, lemma-pullback-K-flat; Tag 07A6, lemma-adjoint; Tag 03EL, sites-modules lemma-tensor-product-pullback. Explicit balanced-tensor calculation."
+   }
+  },
+  {
+   "text": "The counits of the two composite adjunctions are $e^B_H\\circ P_B(\\epsilon_Y(R_BH))$ and $\\epsilon_Z(H)\\circ T_Z(e^A_{r_ZH})$, respectively. Substitute (*) with $K=R_BH$ into the first, after precomposing with $\\chi^{-1}$. Naturality of $\\epsilon_Z$ at $e^B_H$ and then the equation of step 2 give\n$$\\begin{aligned}\ne^B_H\\circ P_B(\\epsilon_Y(R_BH))\\circ\\chi^{-1}_{r_YR_BH}\n&=\\epsilon_Z(H)\\circ T_Z\\bigl(r_Z(e^B_H)\\circ b_{R_BH}^{-1}\\bigr)\\\\\n&=\\epsilon_Z(H)\\circ T_Z(e^A_{r_ZH})\\circ T_ZP_A(d_H).\n\\end{aligned}$$\nSince $d=D^{-1}$, this is exactly the stated equation for the specified composite adjunctions.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; elementary substitution into the composite-adjunction counit formula."
+   }
+  },
+  {
+   "text": "For the scalar square, apply the injective geometric transposition map $u\\mapsto e^B_H\\circ P_B(u)$ to the two arrows from $T_YR_Ar_ZH$ to $R_BH$. The transpose of $\\epsilon_Y(R_BH)\\circ T_Y(D_H)$, using step 4 and naturality of $\\chi^{-1}$ at $D_H$, is\n$$\\epsilon_Z(H)\\circ T_Z(e^A_{r_ZH})\\circ\\chi_{R_Ar_ZH};$$\nindeed the adjacent factors $T_ZP_A(d_H)$ and $T_ZP_A(D_H)$ cancel. The transpose of $R_B(\\epsilon_Z(H))\\circ\\gamma_{r_ZH}$ is the same expression, by naturality of $e^B$ and the defining transpose equation of $\\gamma$. Injectivity of the Hom bijection proves the scalar counit square, with both sides natural in $H$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; equality of geometric transposes and cancellation of d composed with D."
+   }
+  },
+  {
+   "text": "Finally identify the comparison on resolutions. Let $a_W:(W,B_W)\\to(W,A_W)$ be the identity-topos coefficient morphisms and let $k=h_Aa_Z=a_Yh_B$. Exact scalar restriction is the direct image of $a_W$. By the stated meaning of the ring-sheaf comparison,\n$$d=\\kappa_{h_A,a_Z}\\circ\\kappa_{a_Y,h_B}^{-1}:r_YR_B\\longrightarrow R_Ar_Z.$$\nFor a K-injective $B_Z$-complex $I$ and a K-injective resolution $j:r_ZI\\to I'$ over $A_Z$, the resolution clause of $\\kappa_{h_A,a_Z}$ represents its component by $h_*j:r_Yh_*I=h_*r_ZI\\to h_*I'$, and asserts that this is a quasi-isomorphism. The other factor, $\\kappa_{a_Y,h_B}$, identifies $Rk(I)$ with $r_YR_B(I)$; since $r_Y$ is exact, its resolution comparison cancels under the canonical termwise restriction identifications. Thus $d_I$ is exactly the displayed class of $h_*j$, and $D_I$ is its inverse. This is precisely the comparison characterized in the direct-image restriction node. Naturality of $\\kappa$ extends the identification through resolution isomorphisms to every derived object. No step assumes that $r_ZI$ itself is K-injective, nor uses properness, flatness, boundedness or finite Tor amplitude.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 07A6, lemma-adjoint; the K-injective normalization in the cited composition theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); balanced-tensor and counit calculation realizing the Levels paragraph of det-sp-tower-gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(directImage|pushforward|pushForward).*(restrictScalars|scalarRestriction)|(restrictScalars|scalarRestriction).*(directImage|pushforward|pushForward)",
+   "results": "{\"n_hits\": 1, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"mate\"",
+   "results": "{\"n_hits\": 2, \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image coefficient restriction and scalar extension geometric counit mate compatibility",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"PresheafOfModules.restrictScalars\", \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nonflat change of constant rings the proper direct image restriction isomorphism satisfies the extension restriction scalar counit square",
+   "results": "{\"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"comonadicExtendScalars\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image coefficient restriction comparison is scalar adjoint mate of the geometric counit normalized scalar extension comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.homEquiv_extendScalarsComp\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module/presheaf facts do not identify the specified unbounded pro-etale comparisons; read Mates.lean 123-132, ModuleCat/Presheaf/Pushforward.lean 90-91 and ModuleCat/ChangeOfRings.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|scalarRestriction).*(counit|pushforward|directImage)|(counit|pushforward|directImage).*(restrictScalars|scalarRestriction)",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary module/sheaf counits or generic mates, not all clauses for the specified unbounded pro-etale comparisons. Read Mates.lean 123-132, Presheaf/Pushforward.lean 87-91, Sheaf/PushforwardContinuous.lean 274-305, Derived/Adjunction.lean 118-128, ChangeOfRings.lean 849-875."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward commutes with restriction of coefficients and respects extension restriction adjunction counits",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.Adjunction.derivedε\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary module/sheaf counits or generic mates, not all clauses for the specified unbounded pro-etale comparisons. Read Mates.lean 123-132, Presheaf/Pushforward.lean 87-91, Sheaf/PushforwardContinuous.lean 274-305, Derived/Adjunction.lean 118-128, ChangeOfRings.lean 849-875."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"mate\"",
+   "results": "{\"n_hits\": 2, \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary module/sheaf counits or generic mates, not all clauses for the specified unbounded pro-etale comparisons. Read Mates.lean 123-132, Presheaf/Pushforward.lean 87-91, Sheaf/PushforwardContinuous.lean 274-305, Derived/Adjunction.lean 118-128, ChangeOfRings.lean 849-875."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image scalar restriction comparison preserves scalar extension counits for unbounded sheaves of modules",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary module/sheaf counits or generic mates, not all clauses for the specified unbounded pro-etale comparisons. Read Mates.lean 123-132, Presheaf/Pushforward.lean 87-91, Sheaf/PushforwardContinuous.lean 274-305, Derived/Adjunction.lean 118-128, ChangeOfRings.lean 849-875."
+  },
+  {
+   "tool": "grep",
+   "query": "(directImage|pushforward|pushForward).*(restrictScalars|scalarRestriction)|(restrictScalars|scalarRestriction).*(directImage|pushforward|pushForward)",
+   "results": "{\"n_hits\": 1, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary module/sheaf counits or generic mates, not all clauses for the specified unbounded pro-etale comparisons. Read Mates.lean 123-132, Presheaf/Pushforward.lean 87-91, Sheaf/PushforwardContinuous.lean 274-305, Derived/Adjunction.lean 118-128, ChangeOfRings.lean 849-875."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical K injective derived direct image comparison for change of constant ring coefficients is compatible with composite geometric and extension restriction adjunction counits",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"note\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary module/sheaf counits or generic mates, not all clauses for the specified unbounded pro-etale comparisons. Read Mates.lean 123-132, Presheaf/Pushforward.lean 87-91, Sheaf/PushforwardContinuous.lean 274-305, Derived/Adjunction.lean 118-128, ChangeOfRings.lean 849-875."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-restriction-transition-transpose",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels paragraph: proper factor of the coefficient comparison in the actual transition transpose; old steps 1-2 and the K-injective comparison identification in step 4.",
+   "via": [
+    "lem-sp-restriction-transition-transpose",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-proper-scalar-counit-square",
+  "worker": "stage1",
+  "summary": "Retained the statement and all original metadata. Derived the composite and scalar counit equations by the specified restriction-adjunction identity, a K-flat balanced-tensor counit calculation, and explicit geometric transposes. Identified D with the inverse K-injective comparison using the same kappa normalization. Existing nodes supply all ingredients; no new nodes.",
+  "blueprint": "det-sp-tower-gluing, Levels paragraph: coefficient comparisons have the same chart description and determine the transition maps. This item supplies the proper/direct-image factor of that description.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "The normalized extension/restriction adjunction is a generic unbounded ring-sheaf tool needed to compute the actual scalar counits."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "The canonical restriction/pullback and restriction/direct-image comparisons, with their precise adjunct equation, provide the ringed-topos tool underlying the proper factor."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "The generic ringed-topos K-flat tensor/pullback comparison computes the specified left comparison, without a geometric base-change hypothesis."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions on a site is a generic homological tool used for the scalar counit computation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "K-flat preservation by ringed-topos pullback is a generic homological tool ensuring the source resolution is admissible after pullback."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "The generic direct-image composition theorem supplies the exact K-injective normalization of the two ringed-topos factorizations."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "The existing direct-image restriction theorem supplies the comparison whose specified representative normalization must be identified."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "The canonical constant-ring identifications c_A,c_B and their constant-section normalization give the ring-square hypothesis of the ring-sheaf change adjunction; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-c65496437",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-c65496437 (reviewer sub-agent of L); spot-checked: I read the item in full; it has 6 steps and no new nodes. The statement is byte-identical to the unsplit base, the item is unsplit on live and side-live, and there is no repair note. I rechecked the mathematics step by step. Step 1: gamma is defined by the geometric transpose and is natural. Step 2: the adjunct equation of lem-weil-pbc-ring-sheaf-change-adjunction with t=e^B_H gives r_Z(e^B)b^{-1}=e^A P_A(d), with b and d in the right orientations. Step 3: the K-flat representative computation of (*) is correct. b_C^{-1}P_A g is an admissible resolution because pullback is exact and preserves K-flat complexes with flat terms. The scalar counits come from normalization (2) of the coefficient adjunction, and both sides are the same B-linear extension. Step 4: both composite counits, instantiated from def-weil-pbc-composite-adjunction, reduce by (*), naturality of epsilon_Z and step 2 to the stated equation. Step 5: both transposes equal eps_Z T_Z(e^A) chi, and the transposition map is injective. Step 6: d = kappa_{h_A,a_Z} kappa_{a_Y,h_B}^{-1}. The K-injective normalization gives the class of h_*j, and D is its inverse, which matches lem-weil-proetale-direct-image-restriction-of-scalars. I tested the edge cases h=id, A=B, empty Z, non-flat B/A and unbounded input; no properness is used. The Stacks tags 07A6, 0D6D, 0D6E, 06YS and 0G7E map to the right labels in sites-cohomology.tex, and no SGA source is cited. The route matches the Levels paragraph of det-sp-tower-gluing (main-20261015). Duplicate scan found nothing equivalent: lem-sp-direct-image-change-ring-transpose, lem-sp-proetale-scalar-tensor-normalization, lem-sbc-restrict-scalars-derived-adjunction-identities, lem-asd-proper-finite-coefficient-extension and lem-sfb-geometric-coefficient-square-transport all state different things. The 7 declared tool uses are accepted. One fault, repaired (C1): step 2 used the ring-square hypothesis phi_Z c_A = c_B h^{-1}phi_Y of the ring-sheaf change lemma without citing a node for it. The fix cites prop-weil-pbc-proetale-constant-ring-map and checks the square: both sides send a constant section to a constant section, and sections are glued over the clopen fibres. The node is added to the step's uses, to proof_deps and to tool_uses. Statement unchanged. Note: chi is pinned by the statement's clause 'computed on K-flat representatives'; the cited tensor-pullback lemma is single-ring. This is consistent with lem-sp-proetale-scalar-tensor-normalization and is left as base-era wording.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProperScalarCounitSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.properScalarCounitSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.directImageScalarRestriction",
+   "AlgebraicGeometry.ProEtale.directImageScalarAdjunction",
+   "AlgebraicGeometry.ProEtale.directImageScalarRestrictionIso",
+   "AlgebraicGeometry.ProEtale.properScalarCounitSquare"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ProperScalarCounitSquare.lean",
+  "statement": "theorem properScalarCounitSquare {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {Z Y : Scheme.{u}} (h : Z ⟶ Y) : (∀ N : Z.proEtaleDerivedCategory A, (proEtaleConstantRingDerivedPullback B h).map ((directImageScalarComparison φ h).app N) ≫ (directImageConstantAdjunction B h).counit.app ((directImageScalarExtension φ Z).obj N) = (directImageScalarPullbackIso φ h).hom.app ((directImageConstantPush A h).obj N) ≫ (directImageScalarExtension φ Z).map ((directImageConstantAdjunction A h).counit.app N)) ∧ (∀ (N N' : Z.proEtaleDerivedCategory A) (v : N ⟶ N'), (directImageScalarExtension φ Y).map ((directImageConstantPush A h).map v) ≫ (directImageScalarComparison φ h).app N' = (directImageScalarComparison φ h).app N ≫ (directImageConstantPush B h).map ((directImageScalarExtension φ Z).map v)) ∧ (∀ H : Z.proEtaleDerivedCategory B, ((directImageScalarPullbackIso φ h).inv.app ((directImageScalarRestriction φ Y).obj ((directImageConstantPush B h).obj H)) ≫ (proEtaleConstantRingDerivedPullback B h).map ((directImageScalarAdjunction φ Y).counit.app ((directImageConstantPush B h).obj H)) ≫ (directImageConstantAdjunction B h).counit.app H = (directImageScalarExtension φ Z).map ((proEtaleConstantRingDerivedPullback A h).map ((directImageScalarRestrictionIso φ h).inv.app H)) ≫ (directImageScalarExtension φ Z).map ((directImageConstantAdjunction A h).counit.app ((directImageScalarRestriction φ Z).obj H)) ≫ (directImageScalarAdjunction φ Z).counit.app H) ∧ ((directImageScalarExtension φ Y).map ((directImageScalarRestrictionIso φ h).hom.app H) ≫ (directImageScalarAdjunction φ Y).counit.app ((directImageConstantPush B h).obj H) = (directImageScalarComparison φ h).app ((directImageScalarRestriction φ Z).obj H) ≫ (directImageConstantPush B h).map ((directImageScalarAdjunction φ Z).counit.app H))) ∧ (∀ (J : CochainComplex (Z.proEtaleRingModules (proEtaleConstantRing Z B)) ℤ) [J.IsKInjective] (I : CochainComplex (Z.proEtaleRingModules (proEtaleConstantRing Z A)) ℤ) [I.IsKInjective] (j : ((proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := Z) φ)).mapHomologicalComplex (.up ℤ)).obj J ⟶ I) [QuasiIso j], QuasiIso (((proEtaleConstantRingPushforward A h).mapHomologicalComplex (.up ℤ)).map j) ∧ (directImageScalarRestrictionIso φ h).hom.app (DerivedCategory.Q.obj J) ≫ (directImageScalarRestriction φ Y).map ((proEtaleConstantRingPushforward B h).rightDerivedFunctorObjQIso J).hom ≫ (proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := Y) φ)).mapDerivedCategoryFactors.hom.app (((proEtaleConstantRingPushforward B h).mapHomologicalComplex (.up ℤ)).obj J) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (proEtaleRingRestrictionDirectImage h (proEtaleConstantRing Y A) (proEtaleConstantRing Y B) (proEtaleConstantRing Z A) (proEtaleConstantRing Z B) (proEtaleConstantRingMap (T := Y) φ) (proEtaleConstantRingMap (T := Z) φ) (proEtaleConstantRingComparison h A) (proEtaleConstantRingComparison h B) (proEtaleConstantInverseImageMap_naturality h (CommRingCat.ofHom (RingHom.ulift φ))).symm) (.up ℤ)).hom.app J) ≫ DerivedCategory.Q.map (((proEtaleConstantRingPushforward A h).mapHomologicalComplex (.up ℤ)).map j) = (directImageConstantPush A h).map ((proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := Z) φ)).mapDerivedCategoryFactors.hom.app J) ≫ (directImageConstantPush A h).map (DerivedCategory.Q.map j) ≫ ((proEtaleConstantRingPushforward A h).rightDerivedFunctorObjQIso I).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published canonical scalar extension, its representative-normalized adjunction and the balanced pullback comparison. Gamma is the existing directImageScalarComparison; D is explicitly the inverse normalized ring-sheaf comparison. The final conjunct gives the inverse-of-h_*(j) formula with all localization and resolution identifications. No extra geometric, flatness, boundedness or Tor-amplitude hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c22fb0eb3",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 9538609d (H2): the Lean module is byte-identical and its maths is re-verified: gamma transpose and naturality, composite-counit equation, scalar counit square, K-injective inverse-of-h_*(j) clause; no extra hypotheses. The item's stmt_deps swap is exactly as prescribed: theorem nodes lem-fix-direct-image-scalar-exchange and lem-sp-stratum-scalar-extension removed; def-sp-proetale-constant-coefficient-ring-map, def-sp-constant-scalar-pullback-comparison and the new existing:true def-sp-direct-image-scalar-adjunction-mate added. The new node is faithful to side-live directImageConstantAdjunction and to the mateEquiv construction directImageScalarComparison, and no definition node owns either declaration on side-live. FIX: the new node's source.place cited 'Tag 0E47, remark-base-change', but remark-base-change is Tag 07A7 (0E47 is remark-compose-base-change-horizontal); corrected in fixes/def-sp-direct-image-scalar-adjunction-mate.json (whole node, flat, JSON only, nothing to compile)."
+ }
+}

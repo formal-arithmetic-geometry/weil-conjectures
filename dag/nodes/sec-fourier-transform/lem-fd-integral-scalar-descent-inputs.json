@@ -1,0 +1,171 @@
+{
+ "id": "lem-fd-integral-scalar-descent-inputs",
+ "kind": "statement",
+ "title": "Integral presentation of the normalized scalar comparison",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ and a noetherian finite-dimensional scheme T on which l is invertible [def-weil-finite-field-fiber, def-fd-coefficient-comparison-datum]. For every finite coefficient field E in $\\Omega$ fix the integral identity and raw rational equivalence recorded by FdRationalStageComparison. Write I_E for its integral functor, C_{L/E} for PBC ordinary integral extension and U_{L/E} for framework completed integral extension, with the specified shifts, associators and units [lem-fd-raw-localization-scalar-coherence, def-fd-integral-scalar-shift-structures]. Then there exist generator-normalized ordinary scalar transports o, ambient comparison isomorphisms a from integral inclusion followed by ordinary extension to completed extension followed by integral inclusion, and restricted integral comparison isomorphisms b:I_E C_{L/E}\\cong U_{L/E}I_L, with the following properties. The underlying map of b is heterogeneously equal to a. On every good cochain representative a obeys exactly the specified quotient-cocone completion lift (the chi equation of def-fd-coefficient-comparison-datum). Each I_E is exact; both composites connected by b are exact for their specified shifts, and b and its inverse commute with those shifts. The good-representative lift for b is the same chi equation after the endpoint equality cast supplied by integral_identity. For $E\\le L\\le M$, b_{M/L}^{-1} at U_{L/E}K, followed by C_{M/L}(b_{L/E}^{-1}), followed by the PBC integral associator at I_E K, equals I_M of the specified framework integral associator followed by b_{M/E}^{-1}. At equal fields b_{E/E}^{-1} followed by the PBC multiplication unit equals I_E of the framework completeness unit. All inclusions may be equal. No rational comparison or rational coherence assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-algebraically-closed-coefficients",
+  "def-per-common-stage-shift-structures",
+  "def-fd-integral-scalar-shift-structures",
+  "lem-fd-raw-localization-scalar-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Apply fdIntegralAmbientScalarNormalization to every finite-field inclusion, obtaining generator-normalized ordinary transports and ambient natural isomorphisms with their representative equations. For F=I_E followed by C and G=U followed by I_L, the integral_identity equations identify F and G after the target PBC integral inclusion with the two ambient functors. Conjugate the ambient isomorphism by these functor equalities and take its preimage under fully faithful right whiskering by the inclusion. The map_preimage equation and equality elimination show its components are heterogeneously equal to the original ambient components.",
+   "uses": [
+    "lem-fd-integral-ambient-scalar-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  },
+  {
+   "text": "Apply the proved fdIntegralStageExact to each stage. It transports the prescribed shift using integral_shift_normalization and reflects distinguished triangles through the fully faithful PBC integral inclusion.",
+   "uses": [
+    "lem-fd-integral-stage-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  },
+  {
+   "text": "The two integral_identity object equations identify the endpoints of a lifted comparison component. Equality elimination proves that composing a heterogeneous component equality with the target equality cast and the fixed representative factors preserves heterogeneous equality. Apply this to the map_preimage equality and compose with the ambient representative normalization, giving hlift without changing any completion map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  },
+  {
+   "text": "Apply the prescribed-shift restriction theorem to ordinary, the constructed b, hlift and hI. It gives both shift squares and exactness of the two composites. Apply the forward presentation normalization theorem to the same ordinary, b and hlift to obtain its forward associator and unit equations.",
+   "uses": [
+    "lem-fd-integral-scalar-restriction-exact",
+    "lem-fd-integral-scalar-presentation-forward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  },
+  {
+   "text": "For h:E≤L and k:L≤M, postcompose the desired inverse cocycle with b_(h.trans k).hom. Replace the ordinary associator followed by this map using the forward equation. Cancel C_k(b_h.inv) against C_k(b_h.hom), then cancel b_k.inv against b_k.hom. The remaining map is I_M of the framework associator. For the unit, precompose the forward multiplication/completeness unit equation with b_(refl E).inv and cancel b.hom. These operations are valid for repeated fields and prove precisely the two required inverse equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-integral-ambient-scalar-normalization",
+  "lem-fd-integral-stage-exact",
+  "lem-fd-integral-scalar-restriction-exact",
+  "lem-fd-integral-scalar-presentation-forward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion scalar comparison descends through coefficient presentation equivalence and is shift compatible coherent with tensor associators",
+   "results": "8 hits, AdicCompletion and UniformSpace.Completion scalar-action lemmas; none states the derived category presentation comparison or raw stage-system conversion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eqToHom\", \"HEq\"",
+   "results": "10 hits, including CategoryTheory.comp_eqToHom_heq, eqToHom_comp_heq and conj_eqToHom_iff_heq; useful equality-transport primitives only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|NatIso.*symm|inv.*naturality",
+   "results": "25 hits, generic naturality and inverse shift comparison lemmas; no specified integral or raw scalar comparison packaging.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse natural isomorphism between coherent scalar extension systems can be packaged as a morphism of stage systems preserving prescribed shifts",
+   "results": "8 hits including CategoryTheory.NatTrans.CommShift.of_iso_inv, CategoryTheory.NatTrans.CommShift.of_iso_symm and generic SingleFunctors inverse identities. These handle inverse shift squares, not the integral presentation or stage-system conversion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; inverse-shift primitives are available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdCompletionInverseScalarCoherence",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Coefficient-category auxiliary retained in the parent inverse-scalar comparison: integral steps 1–6 and raw presentation transport step 7.",
+   "via": [
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdIntegralScalarDescentInputs",
+  "file": "lean/Sheaf/Paper/FdIntegralScalarDescentInputs.lean",
+  "declaration": "WeilConjectures.fdIntegralScalarDescentInputs",
+  "statement": "theorem fdIntegralScalarDescentInputs\n    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (T : Scheme.{u}) [IsNoetherian T]\n    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E) :\n    ∃ (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      FdOrdinaryScalarTransport l Ω T h)\n      (comparison : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T).ι ⋙\n          integralDetailedTransport T l (pbcFiniteField.{u} l Ω E) ⋙\n            pbcAmbientScalarExtension l Ω T h ≅\n        GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T E L h ⋙\n          (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T).ι ⋙\n            integralDetailedTransport T l (pbcFiniteField.{u} l Ω L))\n      (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L),\n    (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)\n      (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T),\n      HEq ((b h).hom.app K).hom ((comparison h).hom.app K)) ∧\n    (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)\n    (P : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω E) T).FullSubcategory)\n    (hP : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T\n      (DerivedCategory.Q.obj P.obj)),\n    HEq ((comparison h).hom.app ⟨DerivedCategory.Q.obj P.obj, hP⟩ ≫\n      (integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)).map\n        ((integralScalarExtensionComparison l (pbcFiniteField.{u} l Ω E)\n          (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).hom.app P) ≫\n      (fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω L) T).hom.app\n        ((integralScalarComplexFunctor l (pbcFiniteField.{u} l Ω E)\n          (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).obj P.obj))\n      ((pbcAmbientScalarExtension l Ω T h).map\n        ((fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω E) T).hom.app P.obj) ≫\n      pbcComplexCounit (pbcCompletedScalarMap l Ω T h)\n        (((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) T).mapHomologicalComplex\n          (.up ℤ)).obj P.obj) ≫\n      DerivedCategory.Q.map ((ordinary h).completion l Ω P.obj))) ∧\n    (∀ E : Padic.FiniteCoefficientFields l Ω, (I l Ω T stage E).IsTriangulated) ∧\n    (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      NatTrans.CommShift (b h).hom ℤ ∧ NatTrans.CommShift (b h).inv ℤ) ∧\n    (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      (I l Ω T stage E ⋙ C l Ω T h).IsTriangulated ∧\n        (U l Ω T h ⋙ I l Ω T stage L).IsTriangulated) ∧\n    (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)\n      (V : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω E) T).FullSubcategory)\n      (hV : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T\n        (DerivedCategory.Q.obj V.obj)),\n      HEq (((b h).hom.app ⟨DerivedCategory.Q.obj V.obj, hV⟩).hom ≫\n        eqToHom (congrArg (fun F ↦ F.obj\n          ((U l Ω T h).obj ⟨DerivedCategory.Q.obj V.obj, hV⟩))\n          (stage L).integral_identity) ≫\n        (integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)).map\n          ((integralScalarExtensionComparison l (pbcFiniteField.{u} l Ω E)\n            (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).hom.app V) ≫\n        (fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω L) T).hom.app\n          ((integralScalarComplexFunctor l (pbcFiniteField.{u} l Ω E)\n            (pbcFiniteField.{u} l Ω L) (pbcFiniteFieldInclusion l Ω h) T).obj V.obj))\n        ((pbcAmbientScalarExtension l Ω T h).map\n          ((fdCoefficientTransportFactors l (pbcFiniteField.{u} l Ω E) T).hom.app V.obj) ≫\n        pbcComplexCounit (pbcCompletedScalarMap l Ω T h)\n          (((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) T).mapHomologicalComplex\n            (.up ℤ)).obj V.obj) ≫\n        DerivedCategory.Q.map ((ordinary h).completion l Ω V.obj))) ∧\n    (∀ {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M)\n      (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T),\n      (b k).inv.app ((U l Ω T h).obj K) ≫\n        (C l Ω T k).map ((b h).inv.app K) ≫\n        (pbcIntegralScalarAssociator l Ω T dT.out iT.out h k).hom.app\n          ((I l Ω T stage E).obj K) =\n      (I l Ω T stage M).map ((integralAssoc l Ω T h k).hom.app K) ≫\n        (b (h.trans k)).inv.app K) ∧\n    (∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T),\n      (b (le_refl E)).inv.app K ≫\n        (pbcIntegralScalarUnit l Ω T dT.out iT.out E).hom.app ((I l Ω T stage E).obj K) =\n      (I l Ω T stage E).map ((integralUnit l Ω T E).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202130-L-2677643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

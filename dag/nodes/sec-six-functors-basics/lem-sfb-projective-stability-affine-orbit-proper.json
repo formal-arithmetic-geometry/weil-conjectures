@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-projective-stability-affine-orbit-proper",
+ "kind": "statement",
+ "title": "Projective stability and properness of the affine vector orbit map",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], let $r\\geq2$, and let $E$ be an $r$-dimensional $k$-vector space. Put $G=\\operatorname{SL}(E)$, whose points over a commutative $k$-algebra $R$ are the determinant-one automorphisms of $E\\otimes_kR$ [def-sc-general-linear-group]. Let $V\\ne0$ be finite-dimensional and let $G\\to\\operatorname{GL}(V)$ be a homomorphism of $k$-group schemes, that is, a rational representation. Let $Y$ be a projective $k$-scheme [def-pc-scheme, def-kun-projective] with a $G$-action and a $G$-equivariant closed immersion $j:Y\\hookrightarrow\\mathbf P_{\\mathrm{lines}}(V)$ [def-weil-closed-immersion]. The projective space parametrizes lines, and $L=j^*\\mathcal O(1)$ is the dual tautological line with its induced linearization. Write $Y^{ss}(L)$ for the locus where some invariant section in $H^0(Y,L^{\\otimes n})$, $n>0$, is nonzero. For $y\\in Y(k)$ choose $0\\ne v\\in V$ spanning $j(y)$, and let $\\alpha_v:G\\to\\mathbf A(V)$ be the orbit morphism $g\\mapsto gv$. Here $\\mathbf A(V)=\\operatorname{Spec}(\\operatorname{Sym}_k V^\\vee)$ is affine vector space [def-weil-affine-spectrum]. Then $y\\in Y^{ss}(L)$ has orbit closed in $Y^{ss}(L)$ and scheme-theoretic stabilizer of dimension zero if and only if $\\alpha_v$ is proper [def-weil-proper-morphism]. The stabilizer represents $R\\mapsto\\{g:g y_R=y_R\\}$; dimension means Krull dimension of its underlying topological space. No characteristic, reducedness of $Y$, or smoothness of the stabilizer is assumed.",
+ "source": {
+  "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+  "place": "Chapter 2, Section 1, Proposition 2.2 (affine-cone criterion) and proof of Theorem 2.1 (valuative and elementary-divisor argument). Local book WANTED; agent reconstruction. Morrison Section 2.2, Proposition 1, printed pp.6--7 cites Theorem 2.1."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-general-linear-group",
+  "def-pc-scheme",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-sfb-projective-representation-linearization"
+ ],
+ "proof": [
+  {
+   "text": "Choose bases of $E$ and $V$. The group $G=\\operatorname{SL}(E)$ is smooth, connected, affine, finite type and reductive by [lem-sfb-special-linear-reductive]. Projectivity makes $Y$ separated and finite type: use [lem-kun-projective-implies-proper] and the definition of properness. We may therefore apply orbit geometry both to $Y$ and to affine vector space. Write $P=\\operatorname{Sym}(V^\\vee)$, $P_m$ for its degree-$m$ part, and $L=j^*\\mathcal O(1)$. By [sk-thm-picard-pn], $P_m$ is $H^0(\\mathbf P_{\\mathrm{lines}}(V),\\mathcal O(m))$. In homogeneous coordinates the section is evaluated by $p(w)$, so its action is $(g\\cdot p)(w)=p(g^{-1}w)$; consequently restriction to $Y$, multiplication, and evaluation against a chosen lift of a point are equivariant with the induced linearizations. This also fixes the lines versus quotient and O(1) sign conventions.",
+   "uses": [
+    "lem-sfb-special-linear-reductive",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "sk-thm-picard-pn"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 19.19 and Proposition 7.4; projective coordinate conventions; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "Assume first that $y$ is stable. Choose an invariant $s\\in H^0(Y,L^n)$, $n>0$, nonzero at $y$. By [lem-sfb-projective-polarization-section-algebra] applied to $\\mathbf P_{\\mathrm{lines}}(V)$ and its closed subscheme $Y$, choose $M>0$ large enough that $P_{nM}\\to H^0(Y,L^{nM})$ is surjective. Its inverse image $W$ of the invariant line $k s^M$ is finite-dimensional and invariant, with an equivariant surjection $\\lambda:W\\to k$, defined by restriction $w|_Y=\\lambda(w)s^M$. Apply [lem-sfb-haboush-symmetric-power-lift] to obtain $N>0$ and $q\\in(\\operatorname{Sym}^N W)^G$ with $\\operatorname{Sym}^N(\\lambda)(q)=1$. Multiplication into $P$ sends $q$ to an invariant homogeneous polynomial $f$ of degree $d=nMN>0$ with $f|_Y=s^{MN}$. Thus $c=f(v)\\ne0$. This power-lifting argument uses no exactness of invariants, so works in positive characteristic and for nonreduced $Y$.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "sk-thm-picard-pn",
+    "lem-sfb-haboush-symmetric-power-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 19.19; Haboush input is the cited symmetric-power statement; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "Let $I$ be the homogeneous ideal cutting out $Y$, and put $C=\\operatorname{Spec}(P/I)$ and $T=\\operatorname{Spec}(P/(I,f-c))$. These schemes are $G$-invariant: the restriction maps defining $I$ are equivariant and $f$ is invariant. By [lem-sfb-homogeneous-slice-finite-cover], vector-to-line gives a finite locally free surjection $p:T\\to Y_f$. Here $Y_f\\subset Y^{ss}(L)$, since the restriction of $f$ is an invariant section of positive degree. The orbit $O_y=Gy$ is closed in $Y_f$ by the stability assumption. Also $O_v=Gv\\subset T$ and $p(O_v)=O_y$.",
+   "uses": [
+    "lem-sfb-homogeneous-slice-finite-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.4--7.6; standard projective homogeneous charts; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "We claim $O_v$ is closed in $T$. Its closure is contained in the closed subset $p^{-1}(O_y)$. For every $w\\in p^{-1}(O_y)(k)$, its projective stabilizer is conjugate to $G_y$ and has dimension zero. By [lem-sfb-zero-dimensional-stabilizer-finite-orbit] its $k$-points form a finite set. The vector stabilizer $G_w(k)$ is a subgroup of this finite set, hence by the same lemma $\\dim G_w=0$. The dimension formula in [lem-sfb-smooth-group-orbit-geometry] gives $\\dim O_w=\\dim G$ for every such $w$, including $v$. If $\\overline{O_v}\\setminus O_v$ were nonempty, this invariant locally closed finite-type subset would have a $k$-point (apply [lem-wf-affine-nullstellensatz-vanishing] on a nonempty affine open). Its orbit would have strictly smaller dimension by orbit geometry, a contradiction. Thus $O_v$ is closed in $T$, and therefore in $\\mathbf A(V)$ since $T$ is closed there.",
+   "uses": [
+    "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.4--7.6 and orbit boundary dimension drop; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "The vector stabilizer has dimension zero by the preceding step. By [lem-sfb-zero-dimensional-stabilizer-finite-orbit], $G\\to O_v$ is finite locally free, in particular finite. As $O_v$ with its reduced induced structure is a closed subscheme of $\\mathbf A(V)$, its inclusion is finite by [lem-weil-pbc-closed-immersion-finite]. Composition [lem-weil-pbc-finite-composition] proves that $\\alpha_v$ is finite, hence proper by [lem-weil-pbc-finite-closed-map-finite-fibres].",
+   "uses": [
+    "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.15; finite orbit torsor followed by closed inclusion; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "Conversely assume $\\alpha_v$ proper. It is a morphism between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine], and finite by [lem-sfb-affine-proper-finite]. Thus [lem-weil-pbc-finite-closed-map-finite-fibres] shows that its image $O_v$ is closed and its fibre over $v$ has finitely many points. Those points are $k$-points by [lem-wf-affine-nullstellensatz-vanishing], so $G_v(k)$ is finite. The origin is not in $O_v$, since an invertible linear transformation cannot take $v\\ne0$ to zero. Give $O_v$ its reduced closed structure; it is invariant and the orbit map factors through it by [lem-sfb-smooth-group-orbit-geometry].",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-sfb-affine-proper-finite",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.4 and the affine-proper-finite equivalence; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "Write $J\\subset P$ for the ideal of this reduced closed orbit and $\\mathfrak m_0$ for the origin ideal. Since $0\\notin V(J)$ choose $a\\in J$ with $a(0)=1$, so $u=1-a\\in\\mathfrak m_0$ restricts to $1$ on $O_v$. Let $M$ be the inverse image of the constant submodule $k\\subset P/J$ under $\\mathfrak m_0\\to P/J$. It is a rational submodule, and restriction gives an equivariant surjection $M\\to k$ taking $u$ to $1$. By [lem-sfb-comodule-finite-subrepresentation], choose a finite-dimensional invariant submodule $W\\subset M$ containing $u$. Apply [lem-sfb-haboush-symmetric-power-lift] to $W\\to k$. Multiplication $\\operatorname{Sym}^N W\\to P$ sends the resulting invariant element to $F\\in\\mathfrak m_0^G$ restricting to $1$ on $O_v$. The linear action preserves degree, so every homogeneous component $F_d$ is invariant. Since $F_0=0$ and $F(v)=1$, some $d>0$ has $f:=F_d$ with $c=f(v)\\ne0$. Its restriction to $Y$ is an invariant section, proving $y\\in Y^{ss}(L)$.",
+   "uses": [
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-sfb-haboush-symmetric-power-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7 and Corollary 4.8; separation from the origin by the cited Haboush lift; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "Use this $f,d,c$ to form $T$ and $p:T\\to Y_f$ as in step 3. By [lem-sfb-homogeneous-slice-finite-cover] and [lem-weil-pbc-finite-closed-map-finite-fibres], $p$ is closed. Since $O_v$ is closed in $T$, $O_y=p(O_v)$ is closed in $Y_f$. For $g\\in G_y(k)$ write $gv=t(g)v$ with $t(g)\\in k^\\times$. Invariance and homogeneity give $c=f(gv)=t(g)^d c$, so $t(g)^d=1$. This defines a homomorphism $G_y(k)\\to\\{t\\in k^\\times:t^d=1\\}$ with kernel $G_v(k)$. The image has at most $d$ elements and the kernel is finite by step 6, so $G_y(k)$ is finite. By [lem-sfb-zero-dimensional-stabilizer-finite-orbit], $\\dim G_y=0$ as a scheme; no smoothness of this stabilizer is inferred.",
+   "uses": [
+    "lem-sfb-homogeneous-slice-finite-cover",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-zero-dimensional-stabilizer-finite-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.11--7.15; projective versus vector stabilizer; affine-cone assembly reconstructed by NH (agent)."
+   }
+  },
+  {
+   "text": "It remains to check closedness in the whole semistable locus. For any invariant $s\\in H^0(Y,L^e)$ with $e>0$, let $b$ be its scalar evaluation on $v^{\\otimes e}$. On $O_y$ the section $c^e s^d-b^d f^e$ of $L^{ed}$ vanishes: on a lift $tgv$ its two terms are both $c^e b^d t^{ed}$, using invariance of $s$ and $f$. Therefore its closed zero locus contains the closure $Z=\\overline{O_y}$ in $Y$. This assertion can also be checked on affine trivializations using [lem-wf-affine-nullstellensatz-vanishing]; orbit $k$-points are dense by that lemma. At any $z\\in Z$ where $f(z)=0$ the relation gives $c^e s(z)^d=0$, hence $s(z)=0$ in its residue field. This holds for every positive-degree invariant section, so $Z\\setminus Y_f$ is disjoint from $Y^{ss}(L)$. Within $Y_f$, $O_y$ is already closed by step 8. Consequently $Z\\cap Y^{ss}(L)=O_y$. Together with semistability and the zero-dimensional stabilizer this proves stability of $y$ and the converse implication.",
+   "uses": [
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Orbit closure argument with the explicit invariant-section equation; affine-cone assembly reconstructed by NH (agent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-special-linear-reductive",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "sk-thm-picard-pn",
+  "lem-sfb-projective-polarization-section-algebra",
+  "lem-sfb-haboush-symmetric-power-lift",
+  "lem-sfb-homogeneous-slice-finite-cover",
+  "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-sfb-affine-proper-finite",
+  "lem-sfb-comodule-finite-subrepresentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Orbit geometry, Propositions 7.4--7.15, with Haboush symmetric-power input and explicit projective cyclic-slice/section argument. GIT affine-cone criterion reconstructed; the cited MFK book is locally unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hilbert.Mumford|HilbertMumford|orbitMap.*[Pp]roper|[Pp]roper.*orbitMap",
+   "results": "{\"t\": \"2026-10-23T12:06:52Z\", \"tool\": \"grep\", \"query\": \"Hilbert.Mumford|HilbertMumford|orbitMap.*[Pp]roper|[Pp]roper.*orbitMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/ProperAction/Basic.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/ProperAction.lean\"], \"digest\": \"231105212a6a701d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective geometric invariant theory stability equivalent to properness of the affine vector orbit map",
+   "results": "{\"t\": \"2026-10-23T12:06:52Z\", \"tool\": \"leansearch\", \"query\": \"Projective geometric invariant theory stability equivalent to properness of the affine vector orbit map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"ProperConstVAdd.mk\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"Projectivization.generalLinearGroup_smul_def\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"Representation.isProj_averageMap\"], \"digest\": \"c6fad908bdf08c18\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"weight\"",
+   "results": "{\"t\": \"2026-10-23T12:06:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"weight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Mumford numerical criterion stable points of projective rational SL representations in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T12:06:53Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Mumford numerical criterion stable points of projective rational SL representations in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.isProj_averageMap\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"Rep.instProjective\", \"Projectivization.exists_smul_eq_mk_rep\", \"Rep.diagonal_succ_projective\", \"Projectivization.smul_mk\", \"Representation.self_norm_apply\", \"Representation.averageMap_invariant\"], \"digest\": \"7191696e014187b0\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*stability|stable.*orbit|orbit.*stable|affine.*cone",
+   "results": "{\"t\": \"2026-10-23T12:11:33Z\", \"tool\": \"grep\", \"query\": \"geometric.*stability|stable.*orbit|orbit.*stable|affine.*cone\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"1ee0fbb18dbc534d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper stability of a projective point and proper affine cone orbit morphism for a reductive algebraic group",
+   "results": "{\"t\": \"2026-10-23T12:11:33Z\", \"tool\": \"leansearch\", \"query\": \"Proper stability of a projective point and proper affine cone orbit morphism for a reductive algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"properSMul_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper\", \"Projectivization.generalLinearGroup_smul_def\", \"AlgebraicGeometry.IsProper.instOfIsFinite\"], \"digest\": \"2affa7e9be257227\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T12:11:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsProper\"], \"digest\": \"d7b2a0aa8516be22\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective point is GIT stable exactly when the orbit morphism from the algebraic group to the affine vector space of a lift is proper",
+   "results": "{\"t\": \"2026-10-23T12:11:34Z\", \"tool\": \"leanfinder\", \"query\": \"A projective point is GIT stable exactly when the orbit morphism from the algebraic group to the affine vector space of a lift is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"properSMul_iff\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"7bf1953f3b9697de\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: projectivization actions, topological proper actions and general properness lemmas do not identify projective GIT stability with properness of this scheme-theoretic vector orbit map. The grep proper-orbit hits were read; they concern topological group actions, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective GIT stability equivalent to properness of the vector orbit morphism",
+   "results": "{\"t\": \"2026-10-23T13:41:12Z\", \"tool\": \"leanfinder\", \"query\": \"Projective GIT stability equivalent to properness of the vector orbit morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"properSMul_iff\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\"], \"digest\": \"625a5ae2a9c92348\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological orbit properties and generic proper scheme morphisms do not give projective GIT stability versus vector-orbit properness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T13:41:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological orbit properties and generic proper scheme morphisms do not give projective GIT stability versus vector-orbit properness."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.Mumford|orbitMap.*[Pp]roper|[Pp]roper.*orbitMap",
+   "results": "{\"t\": \"2026-10-23T13:41:07Z\", \"tool\": \"grep\", \"query\": \"Hilbert.Mumford|orbitMap.*[Pp]roper|[Pp]roper.*orbitMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/ProperAction/Basic.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/ProperAction.lean\"], \"digest\": \"231105212a6a701d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological orbit properties and generic proper scheme morphisms do not give projective GIT stability versus vector-orbit properness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective stable point closed orbit finite stabilizer affine cone proper orbit map",
+   "results": "{\"t\": \"2026-10-23T13:41:08Z\", \"tool\": \"leansearch\", \"query\": \"Projective stable point closed orbit finite stabilizer affine cone proper orbit map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AddAction.ofQuotientStabilizer_mem_orbit\", \"MulAction.orbitProdStabilizerEquivGroup\", \"MulAction.subsingleton_orbit_iff_mem_fixedPoints\"], \"digest\": \"2468d71577d4d3da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological orbit properties and generic proper scheme morphisms do not give projective GIT stability versus vector-orbit properness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-mumford-projective-representation",
+  "date": "2026-10-23",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Projective stability and properness of the affine vector orbit map.",
+   "via": [
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-stability-affine-orbit-proper",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded both implications using invariant power lifting, a finite homogeneous slice over a projective chart, ordinary orbit boundary dimension drop, and the invariant-section boundary equation. Reused the existing smooth orbit geometry, Haboush, section algebra, projective-space cohomology and finite-morphism nodes. Three strictly supporting statements remain unsplit. Checked positive characteristic, nonreduced schemes and infinitesimal stabilizers.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Projective stability and properness of the affine vector orbit map. This split supplies the supporting affine-cone criterion on the inherited alteration/moduli/Gieseker route; the current blueprint direct-image proof (3) was read. The ancestor command returns None and its inherited null root and full via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-picard-pn",
+    "why": "Only the homogeneous-polynomial description of H^0(P,O(m)) is used; the present unit has no replacement for this generic projective-space coordinate calculation."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Only separated finite-type hypotheses of orbit geometry are checked using projectivity; this generic scheme property does not change the unit route."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "The generic closed-point and reduced vanishing assertions supply k-points in nonempty orbit boundaries and density on affine trivializations; no unit-specific replacement is present."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-picard-pn",
+  "lem-kun-projective-implies-proper",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-7ca4edbf5",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7ca4edbf5 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 9 steps and the 3 new nodes, plus every cited statement. The item statement and stmt_deps are byte-identical to the base copy. It is the properly-stable affine-cone criterion (MFK Prop 2.2), tested on the trivial and standard SL_r representations and on infinitesimal stabilizers. Steps: (2) the restriction-surjectivity clause of projective-polarization-section-algebra and the Haboush lift give invariant f with f|_Y=s^{MN}; (3) the slice T=Spec P/(I,f-c) is finite locally free over Y_f; (4) O_v is closed in T by the boundary dimension drop, using the zero-dim-stabilizer node in both directions; (5) G->O_v is finite locally free, then a closed immersion and composition, so finite and proper; (6) affine plus proper gives finite, closed image, G_v(k) finite and 0 not in O_v; (7) a in J with a(0)=1, the rational module M inside m_0, the finite-subrepresentation node and Haboush give F in m_0^G with F=1 on O_v, and a positive-degree component f; (8) p is finite hence closed, and t(g)^d=1 gives G_y(k) finite and dim 0; (9) c^e s^d - b^d f^e vanishes on O_y, so the closure meets Y^ss only in O_y. All steps are correct and in every characteristic. New nodes: special-linear-reductive checked against Milne 2.42 and Ex 19.19, not a duplicate of the GL/PGL nodes; homogeneous-slice-finite-cover checked by chart computation (monic t^d=c/a_i, rank d, even when p divides d), not a duplicate of projective-affine-cone-dimension; zero-dimensional-stabilizer-finite-orbit checked via the torsor iso G x H = G x_{O_x} G and fpqc descent (Milne 7.15, Stacks 02VO, 06LH), not a duplicate of homogeneous-quotient or orbit-geometry. None restates an item clause. Tool uses accepted: sk-thm-picard-pn, lem-kun-projective-implies-proper and lem-wf-affine-nullstellensatz-vanishing, all generic. Batch-5: lem-trf-proj-separated (a Mathlib leaf: Proj is separated) and lem-trf-split-lattice-torus-projection (split tori are smooth and reduced) are generic facts, not part of the trace formula or Poincare duality, so both citations are accepted. No SGA, no cycle, proof_deps equals the union of uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveStabilityAffineOrbitProper",
+  "declaration": "AlgebraicGeometry.ProjectiveRepresentation.stable_iff_vectorOrbit_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveStabilityAffineOrbitProper.lean",
+  "statement": "theorem stable_iff_vectorOrbit_proper (k : Type u) [Field k] [IsAlgClosed k] (E : Type u) [AddCommGroup E] [Module k E] [FiniteDimensional k E] (hr : 2 ≤ Module.finrank k E) (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V] (idx : Type u) [Fintype idx] [DecidableEq idx] (b : Module.Basis idx k V) (ρ : LinearGroupSchemes.specialLinear k (Module.finrank k E) ⟶ GeneralLinearGroup idx k) [IsMonHom ρ] (Y : Over (Spec (.of k))) [IsHProjective Y.hom] (j : Y ⟶ (ℙ(idx; Spec (.of k))).asOver (Spec (.of k))) [IsClosedImmersion j.left] (D : LinearizedEmbedding (G := ⟨LinearGroupSchemes.specialLinear k (Module.finrank k E)⟩) ρ j) (y : PGLLinearization.fieldTest k k ⟶ Y) (v : V) (hv : v ≠ 0) (hlift : IsVectorLift b j y v) : D.linearization.IsStable k y ↔ IsProper (vectorOrbit (G := ⟨LinearGroupSchemes.specialLinear k (Module.finrank k E)⟩) b ρ v)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c4968b9d",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read item, new def node and module, all stmt_dep records and the dependency Lean (GroupSchemeLinearization IsStable/stabilizer, LinearGroupSchemes.specialLinear, upstream GeneralLinearGroup coord and comul, ProjectiveSpace twist/twistOneSection, tensorPullbackSectionAdjunction pinned unit). Every clause matches: alg-closed k, r>=2, SL of rank finrank E, nonzero V with basis, rho with IsMonHom, IsHProjective Y, closed immersion j, k-point y with IsVectorLift, IsStable <-> IsProper vectorOrbit. Checked coordinate conventions: vectorOrbit pulls T_i back to sum_l rho_il v_l (= g v); the linearization formula with rho(g^-1)_il is the correct dual-tautological action and, because the s_i generate L, forces equivariance of j on all test schemes without adding a hypothesis. New node has all required fields and no duplicate; definitions are non-hollow; the only sorry is the theorem's. Item changed only in lean and stmt_deps (+ new node); both lean.statement fields verbatim; docstrings give source and blueprint ids and the 9 proof steps; report has both sections. Notes: IsStable, fieldTest and GL are reached only transitively through the new node's stmt_deps; hv is implied by hlift."
+ }
+}

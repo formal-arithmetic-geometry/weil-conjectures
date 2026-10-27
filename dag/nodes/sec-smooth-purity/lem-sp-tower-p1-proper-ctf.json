@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-tower-p1-proper-ctf",
+ "kind": "statement",
+ "title": "Step 3: the proper projective-line image preserves uniform Ctf towers",
+ "statement": "Fix distinct primes p,ell, a field k of characteristic p, a separated finite-type k-scheme S, a finite extension E/Q_ell and hS asserting ell invertible on S. Choose tower classes c and abelian coefficient-tower presentations DS and DP for S and P1_S [det-sp-tower-classes, det-sp-coefficient-towers-abelian]. For every K in the uniform constructible finite-Tor tower category on P1_S [sk-def-sp-normalized-towers], push(K), the recorded proper direct image conjugated by the derived realizations [def-sp-tower-p1-ctf-data], lies in the corresponding uniform category on S. No normalization or adjunction assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Step 3: the proper projective-line image preserves uniform Ctf towers; source of the expanded standing-setting restriction in lem-sp-tower-p1-uniform-ctf-domains"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-nagata-projective-space-base-change",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-pbc-etale-origin-witness",
+  "det-sp-tower-classes",
+  "def-sp-tower-p1-ctf-data"
+ ],
+ "proof": [
+  {
+   "text": "The projective-space projection q is proper. Use the existing proved ProjectiveLine.smoothOfRelativeDimension_one instance for its smooth pure relative dimension one. Both source and target are separated finite type over k by composition.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-sc-projective-line-smooth-relative-dimension-one",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain b0, o0 and the laws from tower_shriek_levels; these are proof witnesses, not data used to define a functor. Apply sp_tower_bound with this b0 and o0 to the identity-open compactification of q. Identity extension is naturally identity by its sectionwise adjunction. Uniqueness of right adjoints and of their total right derived functors compares this compactification composite with the recorded c.projective.geometry push, regardless of the normalized presentations used. The common input Tor interval [a,b] yields constructible output levels and the common interval [a,b+2]; testing with the tensor unit also bounds cohomology. Transport through exact realization and evaluation to the original DS coordinates.",
+   "uses": [
+    "sk-lem-sp-tower-bound",
+    "det-sp-tower-bound-uniform",
+    "det-sp-tower-shriek-levels",
+    "def-sp-tower-shriek-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sc-projective-line-smooth-relative-dimension-one",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sk-lem-sp-tower-bound",
+  "det-sp-tower-bound-uniform",
+  "det-sp-tower-shriek-levels",
+  "def-sp-tower-shriek-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Step 3: the proper projective-line image preserves uniform Ctf towers; source of the expanded standing-setting restriction in lem-sp-tower-p1-uniform-ctf-domains"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image along the projective line preserves uniformly bounded constructible complexes of finite Tor amplitude in a coefficient tower",
+   "results": "8 actual hits; AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, CategoryTheory.Functor.projective_obj",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: the hits are general evaluation, t-structure, or ring-theoretic results, not this tower assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniformly bounded constructible finite Tor coefficient tower is bounded below and its projective line pullback Tate twist shift two preserves the uniform intervals",
+   "results": "8 actual hits; DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Triangulated.TStructure.isGE_of_shift, CategoryTheory.Triangulated.TStructure.isLE_of_shift, CategoryTheory.Triangulated.TStructure.isGE_shift_iff, CategoryTheory.Triangulated.TStructure.isGE_shift, CategoryTheory.Triangulated.TStructure.isLE_shift_iff, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: the hits are general evaluation, t-structure, or ring-theoretic results, not this tower assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "towerP1_uniform|realization.*[Ee]val|isGE.*[Ee]valuation",
+   "results": "0 actual hits; ",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: the hits are general evaluation, t-structure, or ring-theoretic results, not this tower assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1UniformCtfDomains",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Step 3: the proper projective-line image preserves uniform Ctf towers; source of the expanded standing-setting restriction in lem-sp-tower-p1-uniform-ctf-domains",
+   "via": [
+    "lem-sp-tower-p1-uniform-ctf-domains"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1ProperCtf",
+  "file": "lean/Sheaf/Paper/TowerP1ProperCtf.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1Uniform.towerP1_push_ctf",
+  "statement": "theorem towerP1_push_ctf (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (hlp : l ≠ p) (S : Scheme.{u}) [S.Over (Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (hS : IsUnit (l : Γ(S, ⊤))) (c : TowerClasses l E S hS) (DS : SpCoefficientTowersAbelian l E S) (DP : SpCoefficientTowersAbelian l E (ProjectiveLine S)) (M : spDerivedCoefficientTowers l E (ProjectiveLine S) DP) (hM : spConstructibleTorTowers l E (ProjectiveLine S) DP M) : spConstructibleTorTowers l E S DS ((push l E c DS DP).obj M)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-32960",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T161756-L-102813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-32960",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T161756-L-102813",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerP1UniformCtfDomains + 4 new modules/nodes against clone f0d376f: theorem stmt byte-identical, 6 defs verbatim in TowerP1CtfData with public re-export and change record, 3 sorried steps against original conjuncts and finiteRing_constructibleDerived_origin/Origin/Base definitions"
+ }
+}

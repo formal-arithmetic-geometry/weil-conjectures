@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-infinitesimal-pushout-affine-charts",
+ "kind": "statement",
+ "title": "Affine charts and base-change recovery for infinitesimal scheme pushouts",
+ "statement": "Let $T\\to T^+$ be a thickening of schemes, meaning a closed immersion inducing a homeomorphism [def-weil-closed-immersion, def-pc-scheme], and let $T\\to S$ be affine (inverse images of affine opens are affine). For an $S$-scheme $X$, a $T^+$-scheme $Y$, and an isomorphism over $T$, $U=X\\times_S T\\simeq Y\\times_{T^+}T$ [def-pc-fibre-product], form the pushouts $P=S\\amalg_TT^+$ and $Z=X\\amalg_UY$ [lem-sfb-scheme-affine-thickening-pushout]. The canonical maps\n$$X\\longrightarrow Z\\times_P S,\\qquad Y\\longrightarrow Z\\times_P T^+$$\nare isomorphisms. For every affine open $P_0\\subseteq P$, the inverse images $S_0\\subseteq S$, $T^+_0\\subseteq T^+$, and $T_0\\subseteq T$ are affine. Write these four affine schemes as\n$$P_0=\\operatorname{Spec}R,\\quad S_0=\\operatorname{Spec}B,\\quad T^+_0=\\operatorname{Spec}A',\\quad T_0=\\operatorname{Spec}A.$$\nThen $A'\\to A$ is surjective with nil kernel and the canonical map $R\\to B\\times_A A'$ is an isomorphism [def-weil-affine-spectrum]. For every affine open $Z_0=\\operatorname{Spec}E\\subseteq Z$ mapping into $P_0$, its inverse images $X_0,Y_0,U_0$ in $X,Y,U$ are affine. Writing them as $\\operatorname{Spec}D,\\operatorname{Spec}C',\\operatorname{Spec}C$, respectively, and putting $I=\\ker(A'\\to A)$, the canonical maps identify\n$$C=D\\otimes_B A=C'/IC',\\qquad E=D\\times_C C',\\qquad E\\otimes_R B=D,\\qquad E\\otimes_R A'=C'.$$\nAll identifications are of algebras over the indicated base rings and commute with restriction to smaller opens. In addition, if $H$ is any scheme and compatible maps $X\\to H$, $Y\\to H$ induce $h:Z\\to H$, then for every open $H_0\\subseteq H$, the inverse images of $X,Y,U$ over $H_0$ have pushout $h^{-1}(H_0)$. No flatness, finite-presentation or finite-order assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07RT, lemma-pushout-along-thickening, structure-sheaf construction and compatible affine opens in its proof; Tag 07RV, lemma-equivalence-categories-schemes-over-pushout, final assertion F composed with G is the identity and its proof using Tag 07RU (more-algebra-lemma-module-over-fibre-product). Open restriction follows from the sheaf fibre-product construction in 07RT."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-sfb-scheme-affine-thickening-pushout",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "First record explicitly the sheaf construction of a pushout $W=V\\amalg_KK'$ with $K\\to K'$ a thickening and $a:K\\to V$ affine. Use $|K|=|K'|$ to regard $a$ as $a':|K'|\\to|V|$. On $|V|$ set\n$$\\mathcal F(O)=\\mathcal O_V(O)\\times_{\\mathcal O_K(a^{-1}O)}\\mathcal O_{K'}((a')^{-1}O).$$\nOperations and restrictions are coordinatewise. Matching pairs glue uniquely because sections of each structure sheaf glue uniquely; hence this is a sheaf of rings. Its restriction to an open $O$ is exactly the same construction on the three inverse-image open subschemes. This is an explicit construction, not an extra assertion taken from the proof of the existing pushout node.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RT, lemma-pushout-along-thickening, first paragraph of proof"
+   }
+  },
+  {
+   "text": "For affine $O=\\operatorname{Spec}D\\subseteq V$, the inverse image $K_O$ is affine by the hypothesis on $a$, and $K'_O$ is affine by [lem-weil-pbc-thickening-affine-scheme]. Write their rings $C,C'$. The closed immersion gives a surjection $C'\\twoheadrightarrow C$. Let $E=D\\times_C C'$. By [lem-sfb-ring-fibre-product-spectrum], its spectrum is the topological pushout of these spectra. Since $|K_O|\\to|K'_O|$ is a homeomorphism, the induced $|O|\\to|\\operatorname{Spec}E|$ is a homeomorphism: its inverse is induced by the identity on $|O|$ and $a'$ on $|K'_O|$; the quotient description checks both composites. For $e=(d,c')\\in E$, with common image $c\\in C$, the inverse images of $D_E(e)$ are $D_D(d)$, $D_{C'}(c')$, and $D_C(c)$. The localization formula of that same node and the principal-open spectrum identification give\n$$\\mathcal F(D_D(d))=D_d\\times_{C_c}C'_{c'}\\cong E_e.$$\nThese comparisons are induced by projections and commute with further principal localization.",
+   "uses": [
+    "lem-weil-pbc-thickening-affine-scheme",
+    "def-weil-closed-immersion",
+    "lem-sfb-ring-fibre-product-spectrum",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RT, affine construction; Tag 01Z8, lemma-diagram-localize"
+   }
+  },
+  {
+   "text": "The basic opens in step 2 form a basis. Their sheaf comparisons agree on intersections because $D(e)\\cap D(f)=D(ef)$ and the maps are the further localization maps. Thus for any open, restrict a section to these basic opens, apply the comparisons and glue; do the same with the inverse comparisons. This extends them to mutually inverse sheaf maps. Consequently $(|V|,\\mathcal F)$ is a scheme, and its open over every affine $O\\subseteq V$ is $\\operatorname{Spec}(D\\times_C C')$. The projections of $\\mathcal F$ give scheme morphisms from $V,K'$ since on these charts they are spectrum morphisms. For each chart the affine closed pinching pushout node gives unique gluing into any scheme $H$. For two charts, cover their overlap by affine opens and apply this same uniqueness there; scheme-morphism gluing gives a unique global map into $H$. Hence this construction is a pushout. By uniqueness of pushouts it is canonically the specified $W$, compatibly with both maps. In particular its sheaf and its topology, not merely an abstract affine presentation, have now been established.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-affine-closed-pinching-pushout",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RT, localization and final gluing paragraphs"
+   }
+  },
+  {
+   "text": "We check applicability also to $Z$. The map $U\\to X$ is affine: cover $X$ by affine opens $V$ whose maps into $S$ factor through affine opens $O$ of $S$. Such a cover exists by the affine-basis node. Then $T_O$ is affine and $U_V=V\\times_O T_O$ is affine by the affine-spectrum fibre-product node. The target-local criterion makes $U\\to X$ affine. The map $U\\to Y$ is a closed immersion by closed-immersion base change. It is a thickening: locally on affine opens of $T^+$ its ideal is generated on the pullback by images of elements of $I=\\ker(A'\\to A)$. The quotient-spectrum and radical nodes show $I$ consists of nilpotents because the original closed immersion is surjective on points. Every element of the extended ideal is a finite sum of multiples of such images, hence nilpotent (for nilpotence exponents $n_i$, expand power $1+\\sum(n_i-1)$). The same two nodes show the pullback closed immersion is surjective on points. Thus steps 1--3 apply both to $(S,T,T^+)$ and $(X,U,Y)$, giving the specified pushouts by their universal properties.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-lem-affine-local-target",
+    "lem-pc-closed-imm-base-change",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-sfb-scheme-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RV, lemma-equivalence-categories-schemes-over-pushout, first paragraph of proof"
+   }
+  },
+  {
+   "text": "The construction also proves open restriction. For an open $O\\subseteq W$, regard it as an open in $V$ using $|V|=|W|$. Step 1 restricts to the identical sheaf formula, and steps 2--3 prove its pushout universal property. Thus $O$ is the pushout of its inverse images in $V,K',K$. For compatible maps $X\\to H$, $Y\\to H$, their unique extension $h$ therefore has $h^{-1}(H_0)$ as the pushout of the three indicated inverse-image schemes for every open $H_0\\subseteq H$. This includes arbitrary, nonaffine opens: the proof of step 3 uses affine covers, not affineness of their intersections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RT, restriction of the fibre-product sheaf and local gluing construction"
+   }
+  },
+  {
+   "text": "Let $P_0$ be any affine open of $P$. Since $S\\to P$ is a thickening by the existing pushout node, $S_0$ is affine by the affine description of a closed immersion. Then $T_0$ is affine since $T\\to S$ is affine, and $T^+_0$ is affine by the affine-thickening lemma. Open restriction (step 5) says $P_0$ is their pushout. The affine closed pinching node says $\\operatorname{Spec}(B\\times_A A')$ is the same pushout. The unique compatible isomorphism between these pushouts is induced on rings by the canonical map $R\\to B\\times_A A'$, so that map is an isomorphism. The closed immersion gives $A'\\twoheadrightarrow A$, and its homeomorphism makes the kernel nil by the quotient-spectrum and radical nodes. This argument works for every affine $P_0$, not only the constructed chart cover.",
+   "uses": [
+    "lem-sfb-scheme-affine-thickening-pushout",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-sfb-affine-closed-pinching-pushout",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RT, compatible affine opens and structure-sheaf description"
+   }
+  },
+  {
+   "text": "Similarly fix any affine open $Z_0\\subseteq Z$ mapping into $P_0$. The thickening $X\\to Z$ makes $X_0$ affine. Affineness of $U\\to X$ makes $U_0$ affine, and the affine-thickening lemma makes $Y_0$ affine. Step 5 and the affine pinching node identify $E=D\\times_C C'$ canonically. The original isomorphism defining $U$ restricts to these inverse images, so the affine fibre-product node identifies\n$$C=D\\otimes_B A=C'\\otimes_{A'}A=C'/IC'.$$\nFor the last identification the maps are $c'\\otimes\\bar a'\\mapsto a'c'\\bmod IC'$ and $\\bar c'\\mapsto c'\\otimes1$. Changing a lift by $i\\in I$ changes the first expression by $ic'$, and the balancing relation checks both inverse equations. These are algebra identifications over the indicated bases.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-sfb-affine-closed-pinching-pushout",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RV, affine calculation with D, C prime, and C prime modulo I C prime"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-patched-module-base-change] with $N=D$, $M'=C'$ and the isomorphism of step 7. Its glued module is the underlying $R$-module of $E=D\\times_C C'$. It gives bijective canonical maps $E\\otimes_R B\\to D$ and $E\\otimes_R A'\\to C'$. Each is also a unital ring map: on pure tensors its formula is $e\\otimes b\\mapsto p_D(e)b$, respectively $e\\otimes a'\\mapsto p_{C'}(e)a'$, which preserves products of pure tensors and the unit, and hence all products by distributivity. Thus they are algebra isomorphisms. The affine fibre-product node turns them into the restrictions of the two canonical scheme maps $X\\to Z\\times_P S$ and $Y\\to Z\\times_P T^+$. Affine opens of $P$ and then of their inverse images in $Z$ cover these schemes. The local inverses agree on overlaps because they invert the same canonical map. Scheme-morphism gluing gives global inverses.",
+   "uses": [
+    "lem-sfb-patched-module-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07RV, final paragraph, reduction to Tag 07RU"
+   }
+  },
+  {
+   "text": "Finally all comparisons commute with restriction. The maps $R\\to B\\times_A A'$ and $E\\to D\\times_C C'$ send a section to its two restrictions; restricting it first gives the same pair by the sheaf restriction axioms. The tensor maps send $e\\otimes b$ to $p_D(e)b$ and $e\\otimes a'$ to $p_{C'}(e)a'$; every restriction is a ring map commuting with $p_D,p_{C'}$, so these formulas commute with restriction on generators and hence on every tensor. Quotient comparison sends a class of $c'$ to $c'\\otimes1$, also preserved by restriction. The inverse maps commute as well by uniqueness of inverses. This proves compatibility also for smaller opens not principal in the original chart. None of the arguments required flatness, finite presentation, or a common nilpotence exponent; empty opens and zero coordinate rings are allowed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 07RT and 07RV, canonical projections, tensor comparison maps and restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-sfb-ring-fibre-product-spectrum",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-affine-local-target",
+  "lem-pc-closed-imm-base-change",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-sfb-scheme-affine-thickening-pushout",
+  "lem-sfb-patched-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 07RT and 07RV, with the module calculation of Tag 07RU in more-algebra.tex; explicit restriction and affine-cover details supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme pushout along arbitrary nil thickening and affine morphism has compatible affine open charts and recovers the input schemes by base change",
+   "results": "AlgebraicGeometry.AffineScheme.hasColimits is colimits within affine schemes; isPullback_Spec_map_pushout is the opposite-direction tensor construction; other hits concern coproducts or quasi-affine morphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing schemes along an affine morphism and a thickening recovers each component by pullback and admits ring fibre product affine charts",
+   "results": "Scheme.GlueData.gluedScheme and pullback gluing concern open gluing and fibre products, not the infinitesimal pushout.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsPushout",
+   "results": "Loogle reports unknown identifier 'CategoryTheory.Limits.IsPushout'; corrected pattern was also run.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.IsPushout",
+   "results": "AlgebraicGeometry.isPullback_SpecMap_of_isPushout, isPushout_appTop_of_isPullback, and isIso_pushoutSection_iff concern scheme pullbacks and tensor ring pushouts, not scheme pushouts along thickenings. Read the returned types: Spec of a ring tensor pushout gives a scheme pullback, not the required infinitesimal scheme pushout; affine coproduct or sheaf-gluing declarations do not give recovery of compatible triples.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme pushout of an affine morphism and nil immersion has compatible affine charts",
+   "results": "Affine pullback existence and affineness, IsAffineHom.mk, coproduct affineness, and Scheme.GlueData.mk. None states recovery of triples over an infinitesimal pushout.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "thicken.*pushout|pushout.*thicken|Milnor|patching",
+   "results": "0 hits in Mathlib/AlgebraicGeometry. Read the returned types: Spec of a ring tensor pushout gives a scheme pullback, not the required infinitesimal scheme pushout; affine coproduct or sheaf-gluing declarations do not give recovery of compatible triples.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "thicken.*pushout|pushout.*thicken|Milnor|patching",
+   "results": "Actual search: 0 hits; . Subdirectory: AlgebraicGeometry. Read the returned types: Spec of a ring tensor pushout gives a scheme pullback, not the required infinitesimal scheme pushout; affine coproduct or sheaf-gluing declarations do not give recovery of compatible triples.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme pushout along nilpotent immersion and affine morphism compatible affine charts",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.HasAffineProperty.of_isPullback, AlgebraicGeometry.isPullback_SpecMap_pushout, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine. Read the returned types: Spec of a ring tensor pushout gives a scheme pullback, not the required infinitesimal scheme pushout; affine coproduct or sheaf-gluing declarations do not give recovery of compatible triples.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.IsPushout",
+   "results": "Actual search: 3 hits; AlgebraicGeometry.isPullback_SpecMap_of_isPushout, AlgebraicGeometry.isPushout_appTop_of_isPullback, AlgebraicGeometry.isIso_pushoutSection_iff. Read the returned types: Spec of a ring tensor pushout gives a scheme pullback, not the required infinitesimal scheme pushout; affine coproduct or sheaf-gluing declarations do not give recovery of compatible triples.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine charts of scheme pushouts along a nil closed immersion and an affine morphism recover each input by base change",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.isPullback_Spec_map_pushout, AlgebraicGeometry.isPullback_SpecMap_pushout, AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.instIsAffineHomDescScheme, AlgebraicGeometry.isPullback_Spec_map_isPushout. Read the returned types: Spec of a ring tensor pushout gives a scheme pullback, not the required infinitesimal scheme pushout; affine coproduct or sheaf-gluing declarations do not give recovery of compatible triples.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-pushout-flat-patching",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX: the affine-local reduction uses Tag 07RV recovery of the two input schemes and Tag 07RT compatible affine charts.",
+   "via": [
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-infinitesimal-pushout-affine-charts",
+  "worker": "stage1",
+  "summary": "Expanded the 07RT sheaf construction rather than using an unstated clause of the existing pushout node; established arbitrary affine opens and open restrictions, then applied the existing 07RU module recovery lemma to the 07RV algebra calculation. No new nodes, Lean attachments or Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX: the affine-local reduction uses Tag 07RV recovery of the two input schemes and Tag 07RT compatible affine charts. Latest direct-images proof (3) uses compactification and proper direct images; this inherited generic algebraic-geometry tool chain supports its moduli inputs without replacing any unit-level step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "General affineness of arbitrary thickenings, used on the local input schemes; the unit has no replacement."
+   },
+   {
+    "node": "lem-sfb-affine-closed-pinching-pushout",
+    "why": "General affine ring-fibre-product pushout universal property, needed to identify local and restricted charts; no unit-specific replacement."
+   },
+   {
+    "node": "lem-sfb-ring-fibre-product-spectrum",
+    "why": "General spectrum topology and principal localization of a ring pullback, needed for the explicit sheaf construction; no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-sfb-ring-fibre-product-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-8c78e6aa8",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-8c78e6aa8 (reviewer sub-agent of L); spot-checked: Read Stacks more-morphisms 07RT (l.4206-4270) and 07RV (l.4276-4340); the item matches them clause by clause, including the stronger 'every affine P_0/Z_0' form, which steps 6-7 prove. The statement and stmt_deps are identical to live, where the item is unsplit with an empty proof; there is no re-split note and no new nodes. Steps checked against each cited statement. Steps 1-3 rebuild the 07RT sheaf F and its charts from lem-sfb-ring-fibre-product-spectrum (homeomorphism plus localization) and lem-sfb-affine-closed-pinching-pushout (universal property into any scheme), and glue over affine covers of the overlaps, so no affine intersections are assumed. This is correct per C3, because the pushout node's statement lacks the sheaf formula. Step 4 checks the (X,U,Y) hypotheses: U->X affine via the affine fibre product and the target-local criterion; U->Y a thickening via the ideal IC' (lem-pc-closed-imm-base-change), nil by the zero-locus/radical nodes with no uniform exponent. Step 6: R = B x_A A' with nil kernel, for arbitrary affine P_0. Step 7: the identifications of C, including the explicit inverse C'⊗A ≅ C'/IC'. Step 8: lem-sfb-patched-module-base-change applied with exactly its R, N=D, M'=C'; the coordinatewise R-structure on E is verified and the bijections are checked to be ring maps. Steps 5 and 9 are elementary. proof_deps equal the union of uses; there is no cycle. Duplicate search over 07RT/07RU/07RV/07RX and pushout+affine-open statements found nothing: the space-pushout node cites this item, and the Ferrand and étale-patching nodes are different statements. Edge cases tested: I=0, k[eps]->k, non-flat pinching k[t,eps]/(t eps, eps^2), a non-nilpotent nil I, zero rings. Accepted tool_uses: lem-weil-pbc-thickening-affine-scheme. The other two declared tools are in the item's own unit, so declaring them is harmless. lem-pc-closed-imm-base-change is undeclared but generic and Lean-closed, so I accept it. Minor: the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InfinitesimalPushoutAffineCharts",
+  "declaration": "AlgebraicGeometry.infinitesimalPushout_recovery",
+  "declarations": [
+   "AlgebraicGeometry.infinitesimalSectionPullback",
+   "AlgebraicGeometry.infinitesimalSectionPushout",
+   "AlgebraicGeometry.infinitesimalPushout_recovery",
+   "AlgebraicGeometry.infinitesimalPushout_base_affine_chart",
+   "AlgebraicGeometry.infinitesimalPushout_total_affine_chart",
+   "AlgebraicGeometry.infinitesimalPushout_open_restriction",
+   "AlgebraicGeometry.infinitesimalSectionPullback_restriction",
+   "AlgebraicGeometry.infinitesimalSectionPushout_restriction",
+   "AlgebraicGeometry.infinitesimalQuotient_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InfinitesimalPushoutAffineCharts.lean",
+  "statement": "theorem infinitesimalPushout_recovery {T T' S P U X Y Z : Scheme.{u}} (i : T ⟶ T') (a : T ⟶ S) (j : S ⟶ P) (b : T' ⟶ P) (hi : IsThickening i) [IsAffineHom a] (hp : IsPushout a i j b) (uX : U ⟶ X) (uY : U ⟶ Y) (t : U ⟶ T) (x : X ⟶ S) (y : Y ⟶ T') (hX : IsPullback uX t x a) (hY : IsPullback uY t y i) (k : X ⟶ Z) (l : Y ⟶ Z) (hz : IsPushout uX uY k l) (p : Z ⟶ P) (hk : k ≫ p = x ≫ j) (hl : l ≫ p = y ≫ b) : IsPullback k x p j ∧ IsPullback l y p b",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The clauses are recorded by the recovery, base_affine_chart, total_affine_chart, open_restriction and three restriction compatibility theorems; the two section comparison definitions have actual universal-property data. Ring pushouts encode tensor algebras with their prescribed structure maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67e47dbb0",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause match against Stacks 07RT/07RV. The §1(C) 'over T' correction is source-based (07RV slice fibre product), the counterexample is valid, there are exactly 6 citers and 3 were spot-checked as holding. The shared t in hX/hY encodes the overlap isomorphism over T. Recovery IsPullback orientation checked. Base chart holds for every affine P0 (affineness, A'→A surjective with elementwise-nil kernel, IsIso of the canonical lift R→B×_A A'). Total chart holds for every affine Z0≤p⁻¹P0 (U0=uY⁻¹Y0 via hz.w; tensor descs; ker=IC'; E≅D×_C C'; IsPushout for E⊗B, E⊗A'). Restriction naturality and arbitrary-open pushout restriction are present and equivalent to the H0 clause. No extra hypotheses, Scheme.{u} throughout, defs are real lift/desc, theorems sorry, docstrings OK, report sections present. Notes: IsThickening is owned by def-sbc-first-order-thickening (reached via the pushout stmt_dep, meaning matches); proof_deps ring-fibre-product-spectrum and patched-module-base-change lack Lean records (stage 3). No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q01 stage 2",
+  "old_statement": "Let $T\\to T^+$ be a thickening of schemes, meaning a closed immersion inducing a homeomorphism [def-weil-closed-immersion, def-pc-scheme], and let $T\\to S$ be affine (inverse images of affine opens are affine). For an $S$-scheme $X$, a $T^+$-scheme $Y$, and an isomorphism $U=X\\times_S T\\simeq Y\\times_{T^+}T$ [def-pc-fibre-product], form the pushouts $P=S\\amalg_TT^+$ and $Z=X\\amalg_UY$ [lem-sfb-scheme-affine-thickening-pushout]. The canonical maps\n$$X\\longrightarrow Z\\times_P S,\\qquad Y\\longrightarrow Z\\times_P T^+$$\nare isomorphisms. For every affine open $P_0\\subseteq P$, the inverse images $S_0\\subseteq S$, $T^+_0\\subseteq T^+$, and $T_0\\subseteq T$ are affine. Write these four affine schemes as\n$$P_0=\\operatorname{Spec}R,\\quad S_0=\\operatorname{Spec}B,\\quad T^+_0=\\operatorname{Spec}A',\\quad T_0=\\operatorname{Spec}A.$$\nThen $A'\\to A$ is surjective with nil kernel and the canonical map $R\\to B\\times_A A'$ is an isomorphism [def-weil-affine-spectrum]. For every affine open $Z_0=\\operatorname{Spec}E\\subseteq Z$ mapping into $P_0$, its inverse images $X_0,Y_0,U_0$ in $X,Y,U$ are affine. Writing them as $\\operatorname{Spec}D,\\operatorname{Spec}C',\\operatorname{Spec}C$, respectively, and putting $I=\\ker(A'\\to A)$, the canonical maps identify\n$$C=D\\otimes_B A=C'/IC',\\qquad E=D\\times_C C',\\qquad E\\otimes_R B=D,\\qquad E\\otimes_R A'=C'.$$\nAll identifications are of algebras over the indicated base rings and commute with restriction to smaller opens. In addition, if $H$ is any scheme and compatible maps $X\\to H$, $Y\\to H$ induce $h:Z\\to H$, then for every open $H_0\\subseteq H$, the inverse images of $X,Y,U$ over $H_0$ have pushout $h^{-1}(H_0)$. No flatness, finite-presentation or finite-order assumption is required.",
+  "what": "The isomorphism of the two T-fibres was not required to be over T. Without this condition there need not be an induced map Z to P: take i and a to be identities on a scheme T with a nontrivial automorphism σ, take X=Y=T with identity structural maps, and use σ as overlap identification. The two structural maps then fail to agree on U. Require the overlap isomorphism to commute with the projections to T, as in the fibre product of slice categories in Tag 07RV.",
+  "source": {
+   "document": "literature/stacks-project/more-morphisms.tex",
+   "place": "Tag 07RV, lemma-equivalence-categories-schemes-over-pushout, fibre product (Sch/S) times_(Sch/T) (Sch/T+) and first proof paragraph"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-scheme-pushout-flat-patching",
+    "holds": true,
+    "note": "The compatible triple is an object over the common base T in Tag 07RX; its overlap identification is T-linear, so recovery and all ring charts remain available."
+   },
+   {
+    "id": "lem-sfb-proper-scheme-deformation-hull",
+    "holds": true,
+    "note": "The deformation gluing in proof step 2 explicitly identifies the deformations over A, hence over Spec A = T."
+   },
+   {
+    "id": "lem-sfb-space-relative-flat-module-pushout",
+    "holds": true,
+    "note": "Only the identity pair over the original scheme pushout is used; its overlap identification is the identity over T."
+   },
+   {
+    "id": "lem-sfb-scheme-infinitesimal-etale-patching",
+    "holds": true,
+    "note": "The etale triples and their overlap maps are over T as in Tag 07RV; the canonical unit and its chart calculations are unchanged."
+   },
+   {
+    "id": "lem-sfb-space-coherent-tangent-finite",
+    "holds": true,
+    "note": "Only the identity pair is used to identify the Artinian base pushout with its ring fibre product."
+   },
+   {
+    "id": "lem-sfb-space-affine-thickening-pushout",
+    "holds": true,
+    "note": "Scheme recovery is applied to compatible triples over T; the recorded recovery theorem already requires the overlap projection equation hφ."
+   }
+  ]
+ }
+}

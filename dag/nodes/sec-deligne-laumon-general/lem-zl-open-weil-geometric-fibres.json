@@ -1,0 +1,122 @@
+{
+ "id": "lem-zl-open-weil-geometric-fibres",
+ "kind": "statement",
+ "title": "Geometric fibres of the adjoint open Weil extension",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, an algebraic closure Qbar of Q_l in an independent universe, and an open immersion j0:U0 -> X0 of separated finite-type schemes. For every functor J left adjoint to the canonical Weil restriction along j0, there are normalized intrinsic adic coefficient fibres on U and X, with a natural input-fibre identification on the open and zero output fibres outside the open, at every algebraically closed geometric field.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-open-weil-coefficient-fibres",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-weil-algebraically-closed-coefficients",
+  "def-a1-intrinsic-adic-fibre-specification"
+ ],
+ "proof": [
+  {
+   "text": "use the normalized integral open compact-support adjunction and its\nrational/common-stage descent to identify J with the Weil lift of extension by\nzero by uniqueness of left adjoints. Choose the intrinsic normalized adic fibre\nfunctors from sfAdicCommonFiber_exists at all geometric points. On the open the\ninvertible open unit gives a natural identification of restriction of extension\nwith the original sheaf. Compose with pullback-composition and point-section\ncomparisons; these give the displayed natural iso, including both arrows in any\ndiagram. Outside the open choose its closed subscheme complement. Every such\nfield-valued point factors through that complement. restrictionIdentities gives\nzero after the complementary pullback at every integral, rational and common\nstage. The adic point comparison sends this zero object to zero. This proves\nvanishing for arbitrary algebraically closed geometric fields, including\nnonclosed image points. The scalar unit and tower identities ensure that the\nsame normalized fibres work simultaneously. Empty schemes give vacuous point\nclauses; zero sheaves and the identity immersion satisfy the same formulas.",
+   "uses": [
+    "lem-zl-open-weil-unit-and-empty-fibre",
+    "lem-zl-open-compact-support-restriction-identities",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-open-weil-unit-and-empty-fibre",
+  "lem-zl-open-compact-support-restriction-identities",
+  "lem-per-adic-heart-pullback-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient inclusion of constructible Weil sheaves and natural Frobenius square",
+   "results": "8 hits: CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, SheafOfModules.IsFiniteType.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.Presentation.IsFinite, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra.mapOfNatIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*extension|extension.*Weil|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic fibres of extension by zero natural on open and zero outside",
+   "results": "8 hits: localCohomology, IsAdicComplete.StrictMono.extend, AdicCompletion.eval_comp_of, AdicCompletion.eval_apply, IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.eval_of, AdicCompletion.incl_apply, AdicCompletion.of_apply",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem for the recorded constructible Weil coefficient categories; hits are generic topology, scalar algebra or unrelated Frobenius constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtensionByZeroPunctual",
+  "date": "2026-10-25",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-quasi-finite",
+   "place": "proof (1) and (2), open extension by zero",
+   "via": [
+    "lem-zl-extension-by-zero-punctual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenWeilGeometricFibres",
+  "file": "lean/Sheaf/Paper/OpenWeilGeometricFibres.lean",
+  "declaration": "WeilConjectures.openWeilGeometricFibres",
+  "statement": "theorem openWeilGeometricFibres : (∃ (FU : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], (Spec (.of Ω) ⟶ (D.geometricFiber U₀).left) → (generalAlgebraicallyClosedConstructibleCategory l Qbar (D.geometricFiber U₀).left ⥤ ModuleCat.{max (u + 1) v} Qbar)) (FX : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], (Spec (.of Ω) ⟶ (D.geometricFiber X₀).left) → (generalAlgebraicallyClosedConstructibleCategory l Qbar (D.geometricFiber X₀).left ⥤ ModuleCat.{max (u + 1) v} Qbar)), (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber U₀).left), SfAdicCommonFiberSpec l (D.geometricFiber U₀).left x Qbar (FU Ω x)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber X₀).left), SfAdicCommonFiberSpec l (D.geometricFiber X₀).left x Qbar (FX Ω x)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber U₀).left), Nonempty (J ⋙ zlWeilHeartCarrier D l hl Qbar X₀ ⋙ FX Ω (x ≫ zlFiberMap D j₀) ≅ zlWeilHeartCarrier D l hl Qbar U₀ ⋙ FU Ω x)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ (D.geometricFiber X₀).left), Set.range x.base ⊆ (Set.range (zlFiberMap D j₀).base)ᶜ → ∀ F : sfCommonStageWeilSheaf D l hl U₀ Qbar, IsZero ((FX Ω x).obj ((J.obj F).obj.carrier))))",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "independent cc review: item extensionByZero_punctual and its 4 new sorried lemmas against the base item conjuncts, SfPunctualEigenvalue and the owning nodes of the declarations used; moved declarations diffed against the clone; importer ReducedFrontierMixedGluing compiled with the 6 delivered modules"
+ }
+}

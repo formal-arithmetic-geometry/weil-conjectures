@@ -1,0 +1,186 @@
+{
+ "id": "lem-sfb-classical-internal-module-sections",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph, descendant finite-coefficient affine heart bound: Derived sections of an internal module with a classical underlying abelian sheaf.",
+   "via": [
+    "lem-sfb-supported-image-torsion-reductions-cd",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Derived sections of an internal module with a classical underlying abelian sheaf",
+ "statement": "Let X be a scheme [def-pc-scheme], with etale and pro-etale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site] in the universe convention [def-weil-size-convention]. Let R be a commutative ring object in condensed abelian groups, R_X its pulled-back ring object, and N an internal R_X-module [sk-def-sfb-module-objects]. Let G be an abelian sheaf on X_et and e:nu_X^*G ≅ N_Ab an isomorphism [def-weil-pbc-site-comparison-morphism]. In the ordinary uncompleted abelian derived category [def-weil-abstract-derived-category], there is an isomorphism R(condensedModuleSections R X)(N[0]) ≅ RΓ(X_et,G[0]) [def-sfb-condensed-module-sections]. No torsion, finiteness or Noetherianity hypothesis is imposed.",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Transport an injective internal module through sectionModuleEquivalence. Lift the hom universe of X.ProEt using ULiftHom; the induced topology and pushforward equivalence transport module injectivity. Apply injective_module_abelian_acyclic on this small site and identify sheaf cohomology with right-derived evaluation. The abelian sheaf equivalence preserves injectives; compRightDerivedObjIso and the identity evaluation comparison transport the resulting vanishing back. Thus the forgotten internal injective is acyclic for evaluation at the terminal object. No claim of abelian injectivity is made.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  },
+  {
+   "text": "Use the exact forgetful functor T and evaluation F in the square (T composed with F) composed with the identity isomorphic to T composed with F. The bounded-below derived base-change comparison is invertible by step 1. Evaluate it on N[0], remove the derived identity, and use the exact-forgetful single-object comparison. The bounded-below/unbounded compatibility and the terminal-object global-sections isomorphism give R(condensedModuleSections)(N[0]) isomorphic to RΓ_proet(N_Ab[0]).",
+   "uses": [
+    "src-right-derived-functor-plus-base-change-of-right-acyclic",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  },
+  {
+   "text": "G[0] is bounded below. Apply the existing generic source-library comparison unit theorem for abelian coefficients and map its isomorphism by etale derived global sections. Compose with comparisonLowerStarCompRightDerivedGlobalSectionsIso, the existing Leray comparison for the actual comparison morphism. The exact inverse-image single-object isomorphism and e identify its pro-etale input with N_Ab[0]. Compose with step 2, reversing the unit and Leray comparisons as necessary. This works for the zero coefficient ring and the empty scheme as well.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "lem-weil-pbc-derived-sections-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-weil-pbc-derived-sections-pushforward",
+  "lemma-weil-pbc-leray-acyclicity",
+  "sk-prop-sf-comparison",
+  "src-right-derived-functor-plus-base-change-of-right-acyclic",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 8, discrete torsion paragraph in the proof of Lemma 8.6; Bhatt--Scholze Section 5.1; Stacks proetale.tex, relative-comparison and compare-cohomology. V1: section-module injective acyclicity, bounded-below derived square, and the existing generic abelian comparison unit and comparison-specific Leray isomorphism. The unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension bounds derived sections of a bounded below complex with torsion cohomology concentrated in nonpositive degrees",
+   "results": "{\"t\": \"2026-10-25T06:30:51Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomological dimension bounds derived sections of a bounded below complex with torsion cohomology concentrated in nonpositive degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.isZero_of_isGE\"], \"digest\": \"28e21a4af6371cd5\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE",
+   "results": "{\"t\": \"2026-10-25T06:32:31Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsLE\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"DerivedCategory.IsLE\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"5b7ac447ee679c9d\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|isZero.*rightDerived",
+   "results": "{\"t\": \"2026-10-25T06:32:32Z\", \"tool\": \"grep\", \"query\": \"cohomologicalDimension|isZero.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\"], \"digest\": \"40e4f45cebbc571e\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient module image supported by open extension by zero and closed direct image is a classical etale sheaf",
+   "results": "{\"t\": \"2026-10-25T06:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite coefficient module image supported by open extension by zero and closed direct image is a classical etale sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.finitePresentation\", \"RingHom.Etale.ofLocalizationSpan\", \"StandardEtalePair.instEtaleRing\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\"], \"digest\": \"8d04539dbc135b0a\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|comparisonUpperStar",
+   "results": "{\"t\": \"2026-10-25T06:57:32Z\", \"tool\": \"grep\", \"query\": \"sheafPullback|comparisonUpperStar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/Topology/Sheaves/Functors.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"27429d7560154069\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|sheafCompose|essImage",
+   "results": "{\"t\": \"2026-10-25T07:17:23Z\", \"tool\": \"grep\", \"query\": \"rightDerived|sheafCompose|essImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Epi.lean\", \"Mathlib/Condensed/Epi.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\"], \"digest\": \"97830744e7953185\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-25T07:17:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf\", \"CategoryTheory.Sheaf.terminal\", \"CategoryTheory.sheafOver\", \"CategoryTheory.Sheaf.isTerminalTerminal\", \"CategoryTheory.sheafToPresheaf\", \"CategoryTheory.fullyFaithfulSheafToPresheaf\", \"CategoryTheory.instInhabitedSheafBotGrothendieckTopologyType\", \"CategoryTheory.sheafSections\"], \"digest\": \"00c5ef3d9ef86c36\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching site/coefficient assembly theorem. Hits give generic derived bounds, sheaf functors, algebraic etale loci or right-derived injective vanishing; existing project interfaces are used in the proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageTorsionReductionsCd",
+  "date": "2026-10-25",
+  "group": "E1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalInternalModuleSections",
+  "file": "lean/Sheaf/Paper/ClassicalInternalModuleSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.classical_internal_module_sections",
+  "statement": "theorem classical_internal_module_sections\n    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]\n    (X : Scheme.{u})\n    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X))\n    (G : Sheaf X.smallEtaleTopology Ab.{u + 1})\n    (e : (comparisonUpperStar Ab.{u + 1} X).obj G ≅ N.X) :\n    Nonempty\n      ((condensedModuleSections R X).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj N) ≅\n        (Etale.rightDerivedGlobalSections Ab.{u + 1} X).obj\n          ((DerivedCategory.singleFunctor _ 0).obj G))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T095052-L-3288606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T164527-L-1031527",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

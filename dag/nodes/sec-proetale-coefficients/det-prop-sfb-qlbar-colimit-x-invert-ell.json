@@ -225,7 +225,18 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-qlbar-colimit-x",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.PadicIntegersInvertEll",
   "declaration": "AlgebraicGeometry.ProEtale.padicIntegers_invertEll",
@@ -260,5 +271,47 @@
   "landing": "20261019T005306-L-2749251",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $E/\\mathbf Q_\\ell$ be finite and $X$ a scheme. Let $\\cO_{E,X}[1/\\ell]$ denote the colimit,\nin sheaves of $\\cO_{E,X}$-modules on $X_{\\mathrm{proét}}$, of\n$$\n\\cO_{E,X}\\xrightarrow{\\ \\ell\\ }\\cO_{E,X}\\xrightarrow{\\ \\ell\\ }\\cO_{E,X}\\xrightarrow{\\ \\ell\\ }\\cdots,\n$$\nwith its ring structure as the localization of $\\cO_{E,X}$ at $\\ell$. Then the map\n$\\varphi\\colon\\cO_{E,X}\\to E_X$ of [def-sfb-integers-to-subfield], together with the maps\n$\\ell^{-m}\\varphi$ on the $m$-th term, induces an isomorphism of sheaves of rings\n$$\n\\cO_{E,X}[1/\\ell]\\xrightarrow{\\ \\sim\\ }E_X .\n$$\nIn particular $\\ell$ acts invertibly on $E_X$, and $E_X$ is a flat $\\cO_{E,X}$-module.",
+  "proof": [
+   {
+    "text": "*On the point.* Let $S$ be a profinite set and $h\\in C(S,E)$. Since $S$ is compact, $h(S)$ is\ncompact, hence bounded in $E$, so $h(S)\\subseteq\\ell^{-m}\\cO_E$ for some $m$, and then\n$\\ell^mh\\in C(S,\\cO_E)$. Thus\n$$\nC(S,E)=\\bigcup_m\\ell^{-m}C(S,\\cO_E)=\\varinjlim\\bigl(C(S,\\cO_E)\\xrightarrow{\\ell}C(S,\\cO_E)\\xrightarrow{\\ell}\\cdots\\bigr),\n$$\nthe colimit of abelian groups being injective since $C(S,\\cO_E)$ is $\\ell$-torsion free.\nThese identifications are compatible with restriction along maps of profinite sets.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The colimit is a sheaf.* Profinite sets are quasi-compact in $*_{\\mathrm{proét}}$, so the\nsheaf condition for a covering involves only a finite covering family, i.e. it is a\nfinite limit; filtered colimits of abelian groups commute with finite limits. Hence the\nsectionwise colimit of the sheaves $\\underline{\\cO_E}$ is already a sheaf, and the previous\nparagraph shows that $\\underline E=\\varinjlim(\\underline{\\cO_E}\\xrightarrow{\\ell}\\underline{\\cO_E}\\to\\cdots)$\nin $\\Sh(*_{\\mathrm{proét}},\\Ab)$, the structure maps being $\\ell^{-m}$ times the inclusion\n[def-sfb-integers-to-subfield-point].",
+    "uses": [
+     "def-sfb-integers-to-subfield-point"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Pullback.* The functor $p_X^*$ is a left adjoint ([det-def-sfb-pullback-from-point]),\nso it preserves colimits, and it is additive, so it sends multiplication by $\\ell$ to\nmultiplication by $\\ell$. Applying it gives\n$E_X=\\varinjlim(\\cO_{E,X}\\xrightarrow{\\ell}\\cO_{E,X}\\to\\cdots)=\\cO_{E,X}[1/\\ell]$, the\nstructure map from the first term being $p_X^*$ of the inclusion, i.e. $\\varphi$.",
+    "uses": [
+     "det-def-sfb-pullback-from-point"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Ring structure.* $\\varphi$ is a map of ring objects [def-sfb-integers-to-subfield], and\n$\\ell$ is invertible in $E_X$ because it is invertible in $\\underline E$. By the universal\nproperty of the localization, $\\varphi$ extends uniquely to a ring map\n$\\cO_{E,X}[1/\\ell]\\to E_X$; on the $m$-th term of the colimit it is $\\ell^{-m}\\varphi$, so it\nis the isomorphism just obtained.",
+    "uses": [
+     "def-sfb-integers-to-subfield"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Flatness.* $E_X$ is a filtered colimit of free $\\cO_{E,X}$-modules of rank one; tensor\nproducts commute with colimits and filtered colimits of modules are exact, so\n$E_X\\otimes_{\\cO_{E,X}}-$ is exact.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

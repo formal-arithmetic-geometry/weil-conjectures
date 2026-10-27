@@ -1,0 +1,106 @@
+{
+ "id": "stage3-pur-integral-realization-data",
+ "kind": "definition",
+ "title": "Existing quotient and completed realization data",
+ "statement": "For l,E,W and the completed-operation models and expression syntax [def-pur-completed-operation-comparison-data], define Good(a,P) as independent K-flatness together with site-flatness of every term. QuotientPresentation(M,a,P,hP) records a Good sequence-site complex, its reduction-derived isomorphism, ordinary scalar-extension evaluation isomorphisms and the specified CoefficientReductionPresentation equations. Realization(M,N) records Good and normalized strict expression values, recursively normalized system comparisons compatible with structural maps, completed expression isomorphisms normalized by comparison, and reduction isomorphisms normalized by the coherent counit. completedArrow conjugates the derived-limit image of a strict chain map by those completed isomorphisms. ReductionLaw is its whole-system counit naturality square and every coefficient-transition square. These are the existing constructions and field types from IntegralCoherenceTower; no existence result is added.",
+ "stmt_deps": [
+  "def-pur-integral-coherence-data",
+  "def-pur-completed-operation-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorGenerator_ext|mapDerivedCategoryCompIso_hom_app_factors",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "Generic infrastructure only; no declaration states this strict sequence-site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "CategoryTheory.Functor.CoreMonoidal; CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.εIso; CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal",
+   "date": "2026-10-25",
+   "verdict": "Generic infrastructure only; no declaration states this strict sequence-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of K flat cochain sheaf tensor associators unitors and signed braiding",
+   "results": "HomologicalComplex.leftUnitor'_inv_comm_assoc; HomologicalComplex.leftUnitor'_inv_comm; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app; CategoryTheory.Sheaf.symmetricCategory; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app; CategoryTheory.Sheaf.braidedCategory; CategoryTheory.Sheaf.monoidalCategory; CochainComplex.ι_mapBifunctorShift₂Iso_hom_f",
+   "date": "2026-10-25",
+   "verdict": "Generic infrastructure only; no declaration states this strict sequence-site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg tensorGenerator_ext|mapDerivedCategoryCompIso_hom_app_factors|kFlat_single_obj_iff_flat in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs searches strict quotient, tensor coherence, structural, quotient presentation",
+   "results": "RingedTensorConstraintCompletion tensorGenerator_ext; Mathlib monoidal and adjunction operations; source-library exact localization factors; no exact result. Blueprint searches: three unrelated strict quotient nodes, zero tensor coherence nodes, 38 unrelated structural nodes, zero quotient presentation nodes.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the named generic infrastructure; these specialized statements are absent."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCoherenceTower",
+  "date": "2026-10-25",
+  "group": "B5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former coefficient-twists proof step 5: simultaneous strict quotient models, cochain tensor/pullback structural coherence, transport through derived inverse limit and the coherent reduction counit.",
+   "via": [
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.IntegralCoherenceData",
+  "file": "lean/Sheaf/Paper/IntegralCoherenceData.lean",
+  "declaration": "WeilConjectures.IntegralCoherence.Good",
+  "statement": "def Good (a : S) (P : Complex l E (W a)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.IntegralCoherence.Good",
+   "WeilConjectures.IntegralCoherence.QuotientPresentation",
+   "WeilConjectures.IntegralCoherence.Realization",
+   "WeilConjectures.IntegralCoherence.completedArrow",
+   "WeilConjectures.IntegralCoherence.ReductionLaw"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-11613",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261025T142858-L-818729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-11613",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261025T142858-L-818729",
+  "kind": "interface",
+  "note": "independent cc review: 11613abe vs reviewed c5d796 (diff -r: nodes and 6 Lean modules identical; GoodQuotientPresentation adds only private canonical instance caches); moved data vs clone item block (unchanged since 10-24); 7 delivered + Defs, RelativeProduct, Normalization, Realization (+CanonicalIdentification, ScalarLimitImage) compiled in /tmp/rv_b5ict2 on 84292a05575, all exit 0, max 27.6 s"
+ }
+}

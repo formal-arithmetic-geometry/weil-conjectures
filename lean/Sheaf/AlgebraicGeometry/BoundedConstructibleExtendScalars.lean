@@ -7,6 +7,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import Sheaf.AlgebraicGeometry.LocallyFinitelyPresentedExtendScalars
 import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
@@ -49,63 +50,6 @@ private noncomputable def pullbackExtendScalarsIso :
     (Functor.associator _ _ _).symm
   exact a.leftAdjointUniq (b.ofNatIsoRight e)
 
-lemma fp_iff_of_iso {X : Scheme.{u}}
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (e : M ≅ N) : Mod.IsFinitelyPresented R M ↔ Mod.IsFinitelyPresented R N := by
-  constructor
-  · intro h
-    rcases h with ⟨n, m, f, ⟨i⟩⟩
-    exact ⟨n, m, f, ⟨e.symm ≪≫ i⟩⟩
-  · intro h
-    rcases h with ⟨n, m, f, ⟨i⟩⟩
-    exact ⟨n, m, f, ⟨e ≪≫ i⟩⟩
-
-lemma fp_map {X Y : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (S : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [MonObj S]
-    (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
-      Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) S)
-    [F.Additive] [PreservesFiniteColimits F]
-    (e : F.obj (Mod.regular R) ≅ Mod.regular S)
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : Mod.IsFinitelyPresented R M) : Mod.IsFinitelyPresented S (F.obj M) := by
-  rcases h with ⟨n, m, f, ⟨i⟩⟩
-  let en (n : ℕ) : F.obj (Mod.finiteFree R n) ≅ Mod.finiteFree S n :=
-    F.mapBiproduct (fun _ : Fin n ↦ Mod.regular R) ≪≫ biproduct.mapIso (fun _ ↦ e)
-  let f' : Mod.finiteFree S m ⟶ Mod.finiteFree S n := (en m).inv ≫ F.map f ≫ (en n).hom
-  exact ⟨n, m, f', ⟨F.mapIso i ≪≫ PreservesCokernel.iso F f ≪≫
-    cokernel.mapIso (F.map f) f' (en m) (en n) (by simp [f'])⟩⟩
-
-
-private noncomputable def extendScalarsRegularIso :
-    (Mod.extendScalars φ).obj (Mod.regular R) ≅ Mod.regular S := by
-  let e₀ := Mod.toBimodRegularIso (R := R)
-  let B := Bimod.ofMonHom φ
-  let e₁ : B.tensorBimod ((Mod.toBimod R).obj (Mod.regular R)) ≅
-      B.tensorBimod (Bimod.regular (Mon.mk R)) :=
-    { hom := Bimod.whiskerLeft B e₀.hom
-      inv := Bimod.whiskerLeft B e₀.inv
-      hom_inv_id := by rw [← Bimod.whiskerLeft_comp_bimod, Iso.hom_inv_id];
-                       exact Bimod.whiskerLeft_id_bimod
-      inv_hom_id := by rw [← Bimod.whiskerLeft_comp_bimod, Iso.inv_hom_id];
-                       exact Bimod.whiskerLeft_id_bimod }
-  let e := e₁ ≪≫ Bimod.rightUnitorBimod B
-  exact Mod.isoMk
-    { hom := e.hom.hom
-      inv := e.inv.hom
-      hom_inv_id := congrArg Bimod.Hom.hom e.hom_inv_id
-      inv_hom_id := congrArg Bimod.Hom.hom e.inv_hom_id }
-    e.hom.left_act_hom
-
-
-omit [IsCommMonObj S] in
-lemma fp_extend
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : Mod.IsFinitelyPresented R M) :
-    Mod.IsFinitelyPresented S ((Mod.extendScalars φ).obj M) :=
-  fp_map R S (Mod.extendScalars φ) (extendScalarsRegularIso R S φ) h
-
 omit [IsCommMonObj R] in
 private lemma lfp_of_iso
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
@@ -114,17 +58,6 @@ private lemma lfp_of_iso
   rcases h with ⟨U, hU⟩
   exact ⟨U, fun i ↦ (fp_iff_of_iso ((upperStar Ab.{u + 1} (U.f i)).mapMod R |>.mapIso e)).mp
     (hU i)⟩
-
-omit [IsCommMonObj S] in
-private lemma lfp_extend
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : IsLocallyFinitelyPresented R M) :
-    IsLocallyFinitelyPresented S ((Mod.extendScalars φ).obj M) := by
-  rcases h with ⟨U, hU⟩
-  refine ⟨U, fun i ↦ ?_⟩
-  let F := upperStar Ab.{u + 1} (U.f i)
-  exact (fp_iff_of_iso ((pullbackExtendScalarsIso (U.f i) R S φ).app M).symm).mp
-    (fp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
 
 omit [IsCommMonObj S] in
 private lemma constructible_extend

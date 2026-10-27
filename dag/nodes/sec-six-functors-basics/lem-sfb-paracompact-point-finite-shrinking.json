@@ -1,0 +1,98 @@
+{
+ "id": "lem-sfb-paracompact-point-finite-shrinking",
+ "kind": "statement",
+ "title": "Point-finite covers of closed subsets admit closure-subordinate shrinkings",
+ "statement": "Let $X$ be a paracompact Hausdorff topological space, where paracompact means that every open cover admits a locally finite open refinement. Let $S\\subseteq X$ be closed, with its subspace topology [def-kun-subspace-topology], let $I$ be a set, and let $(W_a)_{a\\in I}$ be open subsets of $X$ covering $S$. Assume the cover is point-finite on $S$, meaning that $\\{a\\in I:x\\in W_a\\}$ is finite for every $x\\in S$. Then there are open subsets $(V_a)_{a\\in I}$ of $X$ such that $S\\subseteq\\bigcup_{a\\in I}V_a$ and $\\overline{V_a}\\subseteq W_a$ for every $a\\in I$, where the closure is taken in $X$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4.B, normality and shrinking discussion before Definition (4.5), and Lemma (4.6)(a), printed p.203. Precise point-finite closed-subset form: Mathlib/Topology/ShrinkingLemma.lean, exists_subset_iUnion_closure_subset:216--218; normality instance in Mathlib/Topology/Compactness/Paracompact.lean:299--300."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem exists_subset_iUnion_closure_subset|NormalSpace.of_paracompactSpace_r1Space",
+   "results": "OK 3 hits: Mathlib/Topology/ShrinkingLemma.lean, Mathlib/Topology/ShrinkingLemma.lean, Mathlib/Topology/Compactness/Paracompact.lean.  Source directory Mathlib/Topology",
+   "date": "2026-10-24",
+   "verdict": "match: exists_subset_iUnion_closure_subset; normality is supplied by the paracompact Hausdorff instance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shrinking lemma for a point finite open cover of a closed subset of a normal space",
+   "results": "OK 8 hits: exists_subset_iUnion_closure_subset, exists_subset_iUnion_closed_subset, exists_iUnion_eq_closed_subset, exists_subset_iUnion_compact_subset_t2space, exists_iUnion_eq_closure_subset, exists_locallyFinite_subset_iUnion_ball_radius_lt, exists_subset_iUnion_closure_subset_t2space, exists_iUnion_ball_eq_radius_pos_lt. ",
+   "date": "2026-10-24",
+   "verdict": "match: exists_subset_iUnion_closure_subset; normality is supplied by the paracompact Hausdorff instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_subset_iUnion_closure_subset",
+   "results": "OK 1 hits: exists_subset_iUnion_closure_subset. ",
+   "date": "2026-10-24",
+   "verdict": "match: exists_subset_iUnion_closure_subset; normality is supplied by the paracompact Hausdorff instance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a paracompact Hausdorff space a point-finite open cover of a closed subset can be shrunk so that closures of the smaller open sets lie inside the original members",
+   "results": "OK 8 hits: exists_subset_iUnion_closure_subset, precise_refinement_set, BumpCovering.exists_isSubordinate, exists_subset_iUnion_closed_subset, PartitionOfUnity.exists_isSubordinate, exists_iUnion_eq_closure_subset, exists_subset_iUnion_closure_subset_t2space, BumpCovering.exists_isSubordinate_of_locallyFinite. ",
+   "date": "2026-10-24",
+   "verdict": "match: exists_subset_iUnion_closure_subset; normality is supplied by the paracompact Hausdorff instance"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_subset_iUnion_closure_subset",
+  "file": "Mathlib/Topology/ShrinkingLemma.lean",
+  "line": 216,
+  "how": "specializes in one line: exists_subset_iUnion_closure_subset, ShrinkingLemma.lean:216--218, with s = S and u a = W_a. NormalSpace is inferred by NormalSpace.of_paracompactSpace_r1Space, Mathlib/Topology/Compactness/Paracompact.lean:299--300; Hausdorff supplies R1Space by instance inference. All remaining hypotheses and conclusions agree exactly."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-section-neighborhood-extension",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. Supporting input for smooth-module acyclicity: IV §4, Lemma (4.6)(a), Theorem (4.7), Corollary (4.8), printed pp.203--204. The printed occurrence of a neighborhood of A in (4.7) means a neighborhood of S. Supporting topological input: Closure-subordinate shrinking in Demailly IV §4, Definition (4.5) and Lemma (4.6)(a), used before the agreement-neighborhood construction in Theorem (4.7).",
+   "via": [
+    "lem-sfb-closed-section-neighborhood-extension",
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

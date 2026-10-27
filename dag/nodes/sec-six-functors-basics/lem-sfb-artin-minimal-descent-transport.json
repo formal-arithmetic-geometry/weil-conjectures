@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-artin-minimal-descent-transport",
+ "kind": "statement",
+ "title": "Minimal Artinian rings of definition under images and surjections",
+ "statement": "Let $\\Lambda$ be a commutative Noetherian local ring and $l$ a field finite as a $\\Lambda$-module [def-weil-pbc-noetherian-ring, def-weil-field]. Use $\\mathcal C_{\\Lambda,l}$ and categories cofibred in groupoids as in [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be such a category. Assume (S1): for $A_1\\to A\\leftarrow A_2$ in the test category with $A_2\\to A$ surjective, objects over the $A_i$ and a specified isomorphism of their evaluations over $A$ lift to an object over $A_1\\times_A A_2$ with compatible isomorphisms. For $x\\in\\mathcal F(A)$, define $\\mathcal S_x$ to have objects $x'\\to x$ over inclusions $A'\\subseteq A$ of $\\Lambda$-subalgebras belonging to $\\mathcal C_{\\Lambda,l}$, and arrows the commuting triangles over $x$. Such an object over $A'$ is minimal if every arrow to it in $\\mathcal S_x$ has the same underlying subring $A'$. Every object of $\\mathcal S_x$ receives an arrow from a minimal object. Given $u:y\\to x$ over $f:B\\to A$, and $y'\\to y$ over $B'\\subseteq B$, transport $y'$ to $f(B')$ and compose with $u$, obtaining $f_*(y'\\to y)$ in $\\mathcal S_x$. Then (1) $f_*$ sends every minimal object to a minimal object; (2) if $f$ is surjective, every minimal object of $\\mathcal S_x$ is isomorphic in $\\mathcal S_x$ to $f_*(y'\\to y)$ for some minimal object $y'\\to y$ of $\\mathcal S_y$. In particular the resulting map $B'\\to A'$ of their subrings is surjective, and the corresponding square of objects over $u$ commutes.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06T1 (lemma-smallest-where-descends), both clauses, and the finite-length minimality argument immediately preceding it"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-artin-schlessinger-descent-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak m=\\mathfrak m_\\Lambda$. If some $a\\in\\mathfrak m$ had nonzero image in $l$, multiplication by $a$ on the field $l$ would be surjective, so $\\mathfrak m l=l$. Nakayama applied to the finite $\\Lambda$-module $l$ would give $l=0$, a contradiction. Thus $\\mathfrak m$ annihilates $l$, and $\\ker(\\Lambda\\to l)=\\mathfrak m$ since this kernel is proper and contains the maximal ideal. Consequently $k_0=\\Lambda/\\mathfrak m$ embeds in $l$, and any finite $\\Lambda$-module generating set of $l$ spans it over $k_0$; hence $[l:k_0]<\\infty$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GG (lemma-length), preliminary discussion of the finite residue extension; its maximal-ideal assertion here follows from Tag 00DV (lemma-NAK), part (2)"
+   }
+  },
+  {
+   "text": "For each test algebra $A$, its length as an $A$-module is finite by the Artinian self-length lemma. Its only maximal ideal is $\\mathfrak m_A$, its residue field is $l$, and its contraction to $\\Lambda$ is $\\mathfrak m$ by step 1 and the specified residue identification. Apply restriction of length to $\\Lambda\\to A$ and $M=A$: the base is local, the target has one maximal ideal, and its residue extension has finite degree by step 1. It follows that $A$ has finite length as a $\\Lambda$-module. This applies equally to $B$ and every test subalgebra used below.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-weil-pbc-artinian-ring-self-finite-length",
+    "lem-exc-semilocal-restriction-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1 (lemma-smallest-where-descends), preceding finite-length paragraph; Tag 06GG (lemma-length); algebra.tex Tags 00JB (lemma-artinian-finite-length) and 02M0 (lemma-pushdown-module)"
+   }
+  },
+  {
+   "text": "Fix $z\\to x$ in $\\mathcal S_x$, over $C\\subseteq A$. Among all objects $w\\to x$ equipped with an arrow to $z\\to x$, choose one over $D\\subseteq C$ of least $\\Lambda$-module length; the set is nonempty because it contains $z\\to x$. These lengths are finite integers: every chain of $\\Lambda$-submodules of $D$ is a chain in $A$, which has finite length by step 2. A further arrow from an object over $E\\subsetneq D$ would contradict least length, since appending $D$ to a longest strict submodule chain in $E$ gives $\\operatorname{length}_\\Lambda(E)<\\operatorname{length}_\\Lambda(D)$. Therefore $w\\to x$ is minimal. An arrow over the same subring is an isomorphism because the fibre is a groupoid; its inverse still commutes with the maps to $x$. This proves the asserted existence below every object.",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1, immediately preceding paragraph: minimal objects exist by finite length; least-length argument made explicit"
+   }
+  },
+  {
+   "text": "Check that the image ring in the definition of $f_*$ is a test algebra. For $y\\prime\\to y$ over $B\\prime\\subseteq B$, put $C=f(B\\prime)$ and $q:B\\prime\\twoheadrightarrow C$. The composite $B\\prime\\to A$ is local and induces the identity on $l$. Thus $\\ker q\\subseteq\\mathfrak m_{B\\prime}$, and $J=q(\\mathfrak m_{B\\prime})$ is the kernel of the surjective residue map $C\\to l$, with $C/J\\cong l$. The ideal $J$ is nilpotent by nilpotence of $\\mathfrak m_{B\\prime}$. Any $c\\notin J$ has an inverse modulo $J$, and that inverse lifts to an inverse in $C$ using the finite geometric series for $1+j$, $j\\in J$. Hence $C$ is local with maximal ideal $J$ and marked residue field $l$. A descending chain of ideals of $C$ pulls back under $q$ to a descending chain of ideals of $B\\prime$ and therefore stabilizes; surjectivity of $q$ implies the original chain stabilizes. So $C$ is Artinian. Both $q$ and $C\\hookrightarrow A$ preserve the markings and are local, as is seen by taking kernels of the residue maps.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1, preceding construction of the image functor; nilpotence from Tag 06GH (lemma-fiber-product-CLambda), surrounding Artinian test-ring facts"
+   }
+  },
+  {
+   "text": "Here is the transport, including its compatibility over $u$. Write $i:B\\prime\\hookrightarrow B$, $j:C\\hookrightarrow A$, and write the arrows $y\\prime\\to y$ and $u$ as isomorphisms $\\beta:i_*y\\prime\\cong y$ and $\\gamma:f_*y\\cong x$ in the transport presentation. Set $x\\prime=q_*y\\prime$. The arrow $x\\prime\\to x$ is represented by $j_*q_*y\\prime\\xrightarrow{c_{j,q}}(jq)_*y\\prime=(fi)_*y\\prime\\xrightarrow{c_{f,i}^{-1}}f_*i_*y\\prime\\xrightarrow{f_*\\beta}f_*y\\xrightarrow{\\gamma}x$. The arrow $y\\prime\\to x\\prime$ is the transport arrow over $q$. This formula says exactly that its composite to $x$ equals $u\\circ(y\\prime\\to y)$. For an arrow $y_1\\prime\\to y_2\\prime$ over $B_1\\prime\\subseteq B_2\\prime$, the equality of maps $B_1\\prime\\to f(B_2\\prime)$ yields an arrow $q_{1*}y_1\\prime\\to q_{2*}y_2\\prime$ over $f(B_1\\prime)\\subseteq f(B_2\\prime)$, using that arrow and the composition constraints. Naturality and associativity of those constraints identify its composite to $x$ with the formula just given. Identity and composite arrows obey the same identities. This defines the functor $f_*:\\mathcal S_y\\to\\mathcal S_x$ and proves the commuting-triangle compatibility used below.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1, preceding construction of f_*; Tag 06GJ (definition-category-cofibred-groupoids), composition constraints"
+   }
+  },
+  {
+   "text": "Let $y\\prime\\to y$ be minimal, and let $(x\\prime\\to x)=f_*(y\\prime\\to y)$ be its image, over $C=f(B\\prime)$. Given an arrow $(x\\prime\\prime\\to x)\\to(x\\prime\\to x)$ over $A\\prime\\prime\\subseteq C$, apply (S1) to $A\\prime\\prime\\to C\\leftarrow B\\prime$, using the specified comparison $x\\prime\\prime|_C\\cong q_*y\\prime=x\\prime$. Here $q$ is surjective, so the test-ring pullback lemma applies and $D=B\\prime\\times_C A\\prime\\prime$ belongs to the test category. The first-coordinate projection identifies $D$ with $q^{-1}(A\\prime\\prime)\\subseteq B\\prime$. The lifted object $y\\prime\\prime$ maps to $y\\prime$, so composing with $y\\prime\\to y$ gives an arrow in $\\mathcal S_y$ to the minimal object. Therefore $q^{-1}(A\\prime\\prime)=B\\prime$. Since $q$ is surjective this forces $A\\prime\\prime=C$. This proves clause (1).",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1 (lemma-smallest-where-descends), proof of (1)"
+   }
+  },
+  {
+   "text": "Now assume $f:B\\twoheadrightarrow A$ and fix a minimal $x\\prime\\to x$ over $A\\prime\\subseteq A$. The test-ring pullback lemma gives $P=B\\times_A A\\prime$ in the test category. Its projection to $B$ identifies it with $f^{-1}(A\\prime)\\subseteq B$, and $P\\to A\\prime$ is surjective: lift each element of $A\\prime$ along $f$. Apply (S1) to $A\\prime\\to A\\leftarrow B$, with objects $x\\prime,y$ and their given isomorphism over $A$ coming from the two arrows to $x$. Obtain $z$ over $P$ with arrows to $y$ and $x\\prime$ whose composites to $x$ agree. Because $P\\to A\\prime$ is onto, its image ring is precisely $A\\prime$, and the arrow $z\\to x\\prime$ identifies $f_*(z\\to y)$ with $x\\prime\\to x$ in $\\mathcal S_x$.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1, proof of (2), first pullback construction"
+   }
+  },
+  {
+   "text": "Apply step 3 in $\\mathcal S_y$ to obtain an arrow $(w\\to y)\\to(z\\to y)$ with $w\\to y$ minimal, say over $B_0\\subseteq P\\subseteq B$. Functoriality from step 5 gives an arrow $f_*(w\\to y)\\to(x\\prime\\to x)$ in $\\mathcal S_x$. Minimality of $x\\prime\\to x$ implies that its source has the same underlying subring $A\\prime$, and the arrow is then an isomorphism. Thus $f(B_0)=A\\prime$ and $B_0\\to A\\prime$ is surjective. Compose $w\\to z\\to x\\prime$; the equality of its composite to $x$ with $w\\to y\\xrightarrow{u}x$ follows from the compatible (S1) square of step 7. This is the required commuting square, and proves clause (2) with $y\\prime=w$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T1, proof of (2), choice of a minimal object and final commuting square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-sfb-artin-deformation-test-category",
+  "lem-weil-pbc-artinian-ring-self-finite-length",
+  "lem-exc-semilocal-restriction-length",
+  "def-weil-pbc-module-length",
+  "lem-sfb-artin-local-test-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06T1 (lemma-smallest-where-descends), both proofs and preceding finite-length argument; finite length via algebra.tex Tags 00JB and 02M0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a deformation category satisfying Schlessinger S1 minimal Artinian subrings of definition exist are preserved by images and lift along surjections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                {C : Type u_4} →\\n                  [inst_5 : CommRing C] →\\n  \", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {C : Type u_4} [inst_5 : CommRing C] [inst_6 : Algebra R C]\\n  [inst_7 : Algebra.FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Functio\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $ that is formally smooth, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, the composition of t\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {C : Type u_4} [inst_5 : CommRing C] [inst_6 : Algebra R C]\\n  [inst_7 : Algebra.FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Functio\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Function.Surjective.isArtinianRing\", \"module\": \"Mathlib/RingTheory/Artinian/Module\", \"type\": \"∀ {R : Type u_1} [inst : Semiring R] {S : Type u_2} [inst_1 : Semiring S] {F : Type u_3} [inst_2 : FunLike F R S]\\n  [RingHomClass F R S] {f : F}, Function.Surjective ⇑f → ∀ [H : IsArtinianRing R], IsArtinianRing S\", \"doc\": \"Let $ R $ and $ S $ be semirings, and let $ f : R \\to S $ be a surjective semiring homomorphism. If $ R $ is an Artinian semiring (satisfying the descending chain condition on ideals), then $ S $ is al\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  (∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp) →\\n    Algebra.FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally smooth $ R $-algebra $ A $, a ring $ B $ with an ideal $ I $ satisfying $ I^2 = 0 $, the composition of the quotient map $ B \\to B/I $ with the algebra homomorphism $ A \\to B $ is surje\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ring formal smoothness, infinitesimal algebra extensions and categories of rings do not state minimal descent for an arbitrary groupoid-valued deformation category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal ring of definition of an object in a category cofibered in groupoids over Artinian local rings compatible with surjections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.FreydMitchell.EmbeddingRing\", \"module\": \"Mathlib.CategoryTheory.Abelian.FreydMitchell\", \"type\": \": Type (max u v)\", \"doc\": \"The ring constructed as the opposite of the endomorphism ring of a generator object in the ind-category of the opposite universe-lifted abelian category $\\\\mathrm{AsSmall}(\\\\mathcal{C})^\\\\text{op}$. This\"}\n  {\"name\": \"CommRingCat.commRing\", \"module\": \"Mathlib.Algebra.Category.Ring.Basic\", \"type\": \"(self : CommRingCat) → CommRing ↑self\", \"doc\": \"The canonical function that maps each object in the category of commutative rings to its underlying commutative ring structure.\"}\n  {\"name\": \"RingCat.sectionsSubring\", \"module\": \"Mathlib.Algebra.Category.Ring.Limits\", \"type\": \": Subring (∀ j, F.obj j)\", \"doc\": \"Given a category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{RingCat}$, the set of compatible sections (natural transformations assigning to each object $j \\\\in \\\\mathcal{J}$ an element of $F\"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ I $ be an ideal of $ R $ such that $ \\\\mathfrak{m} $ is a minimal prime ideal containing $ I $. Then the quotient ring $ R/I $ i\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImage\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Spec A) : CommRingCat\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, where $A$ is a commutative ring, this defines the coordinate ring of the scheme-theoretic image of $f$. It is the quotient ring $A / I$, wh\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyArtinian X] (U : ↑X.affineOpens),\\n  IsArtinianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For any locally Artinian scheme $X$ and any affine open subset $U \\\\subseteq X$, the ring of sections $\\\\mathcal{O}_X(U)$ associated to $U$ by the structure presheaf is an Artinian ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coproduct\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": LocallyRingedSpace\", \"doc\": \"The coproduct (colimit over a discrete diagram) of a family of locally ringed spaces indexed by a small type $\\\\iota$ is constructed by taking the colimit in the category of sheafed spaces over commuta\"}\n  {\"name\": \"RingCat.carrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Basic\", \"type\": \"RingCat → Type u\", \"doc\": \"The category of rings, where the objects are rings and the morphisms are ring homomorphisms. The carrier is a function assigning each ring in the category to its underlying type.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ring formal smoothness, infinitesimal algebra extensions and categories of rings do not state minimal descent for an arbitrary groupoid-valued deformation category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ring formal smoothness, infinitesimal algebra extensions and categories of rings do not state minimal descent for an arbitrary groupoid-valued deformation category"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]chlessinger|[Mm]inimal.*[Dd]eformation|[Dd]eformation.*[Ss]ubring",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ring formal smoothness, infinitesimal algebra extensions and categories of rings do not state minimal descent for an arbitrary groupoid-valued deformation category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smallest Artinian subalgebra over which a groupoid valued deformation descends and functoriality of this subalgebra under ring homomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgCat.sectionsSubalgebra\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Limits\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.Category.{t, v} J] →\\n        (F : CategoryTheory.Functor J (AlgCat R)) → Subalgebra R ((j : J) → ↑(F.obj j))\", \"doc\": \"Given a category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{AlgCat}(R)$, the set of compatible sections (natural transformations assigning to each object $j \\\\in \\\\mathcal{J}$ an element of \"}\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Algebra.Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"Algebra.Extension.toInfinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Hom P.infinitesimal\", \"doc\": \"The canonical homomorphism from an algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $ to its infinitesimal extension $ P/I^2 $, constructed by quotienting $ P $ by the squ\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Ideal.Algebra.kerSquareLift\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {A : Type u_1} → [inst_1 : CommRing A] → [inst_2 : Algebra R A] → Algebra (R ⧸ RingHom.ker (algebraMap R A) ^ 2) A\", \"doc\": \"Given a commutative ring $ A $ with an $ R $-algebra structure and an ideal $ I $ (the kernel of the algebra map $ R \\to A $), the quotient ring $ R/I^2 $ inherits a canonical $ R $-algebra structure. \"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"liftOfDerivationToSquareZero_mk_apply\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (d : Derivation R A ↥I) (x : A),\\n  (Ideal.Quotient.m\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with square-zero ideal $ I $, and a derivation $ d: A \\to I $ over $ R $, the quotient map applied to the lift of $ d \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ring formal smoothness, infinitesimal algebra extensions and categories of rings do not state minimal descent for an arbitrary groupoid-valued deformation category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal Artinian subrings of definition in a category cofibered in groupoids satisfying Schlessinger S1 are preserved under images and lift along surjective ring maps",
+   "results": "8 hits: Function.Surjective.isArtinianRing, isArtinianRing_rangeS, isArtinianRing_range, isArtinian_of_surjective_algebraMap, isArtinian_of_surjective, IsArtinianRing.localization_surjective, Algebra.QuasiFinite.instIsArtinianRingFiber, LinearMap.isArtinian_iff_of_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ring-theoretic finiteness, minimal prime ideals, formal smoothness or subring closure; none states minimal descent for a groupoid-valued deformation category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schlessinger condition S1 minimal ring of definition of a deformation functor object under surjections",
+   "results": "8 hits: Ideal.comap_minimalPrimes_eq_of_surjective, Ideal.minimal_primes_comap_of_surjective, AlgebraicGeometry.FormallyUnramified.recOn, Ideal.minimalPrimes_map_of_surjective, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, RingHom.FormallyUnramified.of_surjective, RingHom.FormallyUnramified",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ring-theoretic finiteness, minimal prime ideals, formal smoothness or subring closure; none states minimal descent for a groupoid-valued deformation category"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|minimal.*(descent|deformation)|smallest.*subring|cofibered.*Artin",
+   "results": "3 hits: Mathlib/Algebra/Ring/Subring/Basic.lean, Mathlib/Algebra/Ring/Subring/Defs.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ring-theoretic finiteness, minimal prime ideals, formal smoothness or subring closure; none states minimal descent for a groupoid-valued deformation category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ring-theoretic finiteness, minimal prime ideals, formal smoothness or subring closure; none states minimal descent for a groupoid-valued deformation category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object valued in groupoids over Artin local algebras has a minimal subalgebra of definition by finite length and it remains minimal after applying any ring homomorphism",
+   "results": "8 hits: isArtinianRing_iff_isFiniteLength, PrimeSpectrum.instKrullDimLEOfNatNat, Module.finite_iff_krullDimLE_zero, Module.finite_of_isArtinianRing, Algebra.QuasiFinite.iff_of_isArtinianRing, Algebra.QuasiFinite.instIsArtinianRingFiber, Module.Finite.of_quasiFinite, AlgebraicGeometry.instIsArtinianSchemeSpecOfIsArtinianRingCarrier",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ring-theoretic finiteness, minimal prime ideals, formal smoothness or subring closure; none states minimal descent for a groupoid-valued deformation category"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-versal-minimal-subring-descent",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T2, lemma-smallest-where-descends-versal, clauses (1) and (2). Supporting lemma: Tag 06T1 (lemma-smallest-where-descends), both clauses, and the finite-length minimality argument immediately preceding it",
+   "via": [
+    "lem-sfb-versal-minimal-subring-descent",
+    "lem-sfb-stack-minimal-versal-power-series",
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-artin-minimal-descent-transport",
+  "worker": "stage1",
+  "summary": "Checked Tag 06T1 and its minimality paragraph. Kept the statement intact, proved minimal-object existence by least finite module length, and spelled out image-ring admissibility, transport coherence, and the two S1 pullbacks. Reused all algebra inputs; no new nodes. Searched project Lean and the whole blueprint; no attachment or duplicate.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T2, lemma-smallest-where-descends-versal, clauses (1) and (2). Supporting lemma: Tag 06T1 (lemma-smallest-where-descends), both clauses, and the finite-length minimality argument immediately preceding it The current latest direct-images proof (3) retains the direct-image preservation route. This inherited supporting lemma supplies the Tag 06T1 input of Tag 06T2 without changing that route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-semilocal-restriction-length",
+    "why": "The generic restriction-of-length formula supplies finite length over the coefficient base for each Artinian test algebra; the deformation unit has no independent statement of this algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-semilocal-restriction-length"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-e56888dab",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-e56888dab (reviewer sub-agent of L); spot-checked: Read the Stacks formal-defos minimal-versal section (S_x, f_*, minimality remark) and Tag 06T1 with both proofs. Diffed against the Q144 copy: statement, stmt_deps, source and blueprint are unchanged; only proof, proof_deps, proof_origin, status, split_report and appended searches changed. There is no re-split repair note. There are no new nodes, and proof_deps equals the union of the step uses. Step 1: Nakayama with I=m on the finite module l gives ker(Λ→l)=m and [l:k0] finite. Step 2: the self-length leaf plus lem-exc-semilocal-restriction-length give finite Λ-length; I checked its hypotheses (local base, one maximal ideal, contraction to m, finite residue degree) and accept the declared tool use as generic commutative algebra. Step 3: the least-length choice gives a minimal object, and an arrow over the same subring is an iso in the groupoid fibre. Step 4: f(B') is a test algebra, since J=q(m_B')=C∩m_A is nilpotent, C is Artinian as a quotient, and the markings hold. Step 5: the transport formula is well typed because jq=fi, and functoriality follows from the c-coherences. Steps 6 to 8 match Stacks: in (1), (S1) is used on A''→C←B' with q onto and D≅q^{-1}(A''); in (2), P=f^{-1}(A') with P→A' onto, then a minimal object below and minimality of x' forces f(B0)=A'. Edge cases checked: Λ=l with terminal F, f=id, representable F, l[ε]→l. The citer 06T2 uses exactly clauses (1) and (2) and the surjectivity. No duplicate in the DAG (06SF, 06SG, 06T2 and 06T3 are users), no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinMinimalDescentTransport",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.artin_minimal_descent_transport",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.descentImageRing",
+   "AlgebraicGeometry.ArtinDeformation.descentImage_valid",
+   "AlgebraicGeometry.ArtinDeformation.descentImage_residue",
+   "AlgebraicGeometry.ArtinDeformation.descentImageMap",
+   "AlgebraicGeometry.ArtinDeformation.descentImage_factor",
+   "AlgebraicGeometry.ArtinDeformation.descentImage",
+   "AlgebraicGeometry.ArtinDeformation.descentImageArrow",
+   "AlgebraicGeometry.ArtinDeformation.descentImage_square",
+   "AlgebraicGeometry.ArtinDeformation.descentImage_hom_existsUnique",
+   "AlgebraicGeometry.ArtinDeformation.descentImageHom",
+   "AlgebraicGeometry.ArtinDeformation.descentImageHom_id",
+   "AlgebraicGeometry.ArtinDeformation.descentImageHom_comp",
+   "AlgebraicGeometry.ArtinDeformation.descentImageFunctor",
+   "AlgebraicGeometry.ArtinDeformation.artin_minimal_descent_transport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinMinimalDescentTransport.lean",
+  "statement": "theorem artin_minimal_descent_transport [IsNoetherianRing R] [IsLocalRing R]\n    [Module.Finite R k] (F : CofibredGroupoids.{u, v, w} R k)\n    (hS1 : IsSchlessingerOne F) :\n    (∀ (A : TestCategory R k) (x : fibre F A) (D : DescentCategory F x),\n      ∃ M : DescentCategory F x, IsMinimalDescent M ∧ Nonempty (M ⟶ D)) ∧\n    (∀ (A B : TestCategory R k) (x : fibre F A) (y : fibre F B)\n      (u : totalObject F y ⟶ totalObject F x) (D : DescentCategory F y),\n      IsMinimalDescent D → IsMinimalDescent ((descentImageFunctor u).obj D)) ∧\n    (∀ (A B : TestCategory R k) (x : fibre F A) (y : fibre F B)\n      (u : totalObject F y ⟶ totalObject F x), Function.Surjective (map u.base) →\n      ∀ D : DescentCategory F x, IsMinimalDescent D →\n      ∃ E : DescentCategory F y, IsMinimalDescent E ∧\n        ∃ e : (descentImageFunctor u).obj E ≅ D,\n          Function.Surjective (map (descentImageArrow u E ≫ e.hom.hom.left).base) ∧\n            (descentImageArrow u E ≫ e.hom.hom.left) ≫ (descentOver D).hom =\n              (descentOver E).hom ≫ u)",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Explicit maintainer H2 repair for Q35 returned head 33a28145b624: the shared S1, S_x and minimality definitions are moved unchanged to def-sfb-artin-schlessinger-descent-category. This module publicly imports that module and this node cites it in stmt_deps. Only image transport constructions and the original theorem remain here; all original declaration names and theorem signatures are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70afce00",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read node, Stacks formal-defos 06T1 (S_x/f_*/minimality paragraph and both proofs), the dependency module ArtinDeformationTestCategory (TestCategory, CofibredGroupoids, push, compIso direction, comparison, fibreProduct*) and Mathlib Pseudofunctor.Grothendieck (covariant). Hypotheses exact: IsNoetherianRing, IsLocalRing, Module.Finite R k. S1 = EssSurj of the dependency's comparison to CategoricalPullback with f2 surjective. S_x = literal subalgebras with the restricted residue marking, arrows = Over triangles. Minimality = same subring. f_* uses the range subalgebra with the canonical c_{q,j}, eqToHom, c_{i,f}^-1, f_*beta, u.fiber composite; arrows are unique by a cocartesian ∃! (true). Clauses: existence, (1) for arbitrary u, (2) under surjectivity with an iso in S_x, surjective B'->A' and the square, all as in the node. statement field verbatim; 22 declarations listed; item node differs from base only in lean; dependency record unchanged; no new nodes; no S1/S_x duplicate in DAG or Lean; docstrings and source places present; only sorry proofs; proof imports match proof_deps. Edge cases (zero ring, empty fibres, id u, universes v,w independent) fine. No compile run (no file changed). No findings."
+ }
+}

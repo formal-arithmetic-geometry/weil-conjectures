@@ -1,0 +1,476 @@
+{
+ "id": "lem-coef-dualizing-support-evaluation",
+ "kind": "statement",
+ "title": "Evaluated compact support and its scalar-adjunction transition",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties], and fix one compactification $a=pj$. Write $F_n=Rp_{*,n}j_!$ for compact support on ordinary small pro-etale module derived categories [def-weil-integral-rational-qbar-compact-support].\n\nFor $W=X,\\bar X,s$, where $j:X\\to\\bar X$ is the open immersion and $p:\\bar X\\to s$ the proper map of the compactification, use the quotient-ring sequence site $\\mathcal Q_W$ of [def-coef-ringed-sequence-site], with ring sheaf $(n,U)\\mapsto(A_n)_W(U)$ and quotient restrictions. Let $Q_\\bullet$ be any strict complex of quotient-semilinear module systems, and let $M_n$ be its level objects in $D(X_{\\mathrm{proet}},A_n)$. Write $\\sigma_{m,n}:M_m\\to\\operatorname{Res}_{m,n}M_n$ for its derived transitions, $T_W=-\\otimes^L_{(A_m)_W}(A_n)_W$, and $\\alpha_{m,n}:T_XM_m\\to M_n$ for their tensor--restriction adjoints [def-coef-normalized-dvr-tower]. Normalization of $Q_\\bullet$ is not required. Set\n$$B(Q)=\\operatorname{Res}_R R\\Gamma^{\\operatorname{Tow}}(s,Rp_*^{\\mathcal Q}j_!Q_\\bullet)\\in D(\\operatorname{Tow}(\\operatorname{Mod}(R))),$$\nwhere proper direct image and point sections (the sections functor $\\Gamma(s,-)$ at the final object of $s_{\\mathrm{proet}}$ [def-weil-finite-coefficient-point]) are derived separately, and $\\operatorname{Res}_R$ uses the actual constant maps $R\\to A_n$; no inverse limit in $n$ occurs [lem-weil-tower-category-levelwise-abelian]. Let $c_{m,n,M_m}:T_sF_mM_m\\to F_nT_XM_m$ be the canonical compact-support coefficient projection map, formed from the exact open-extension comparison and the proper-image coefficient mate [lem-coef-semilinear-derived-sections]. Let $\\eta$ be the unit of $T_s\\dashv\\operatorname{Res}_{m,n}$. Put\n$$d_{m,n}=\\operatorname{Res}_{m,n}\\bigl(F_n(\\alpha_{m,n})\\circ c_{m,n,M_m}\\bigr)\\circ\\eta_{F_mM_m}.$$\nThere are isomorphisms in $D(R)$, natural in the strict derived input,\n$$\\Theta_{Q,n}:\\operatorname{ev}_n B(Q)\\xrightarrow{\\sim}\\operatorname{Res}^{A_n}_R R\\Gamma(s,F_nM_n).$$\nFor every $m\\ge n$, $\\Theta_{Q,n}\\circ\\operatorname{ev}(t_{m,n}^{B(Q)})=R\\Gamma(s,d_{m,n})\\circ\\Theta_{Q,m}$, with constant-$R$ restriction understood. Equivalently $d_{m,n}$ is compact support applied to $\\sigma_{m,n}$ followed by the canonical coefficient-restriction comparison. These identifications respect the identity and composition of every quotient transition. If $M_n\\cong\\omega_n=Ra_n^!(A_n)_s$ and $\\alpha_{m,n}$ is the counit-defined $u_{m,n}$ of [lem-coef-finite-dualizing], then, after the identifications $M_n\\cong\\omega_n$, $c_{m,n,\\omega_m}$ is the finite pro-etale realization of the compact-support coefficient comparison $c_{X,A_m,A_n,\\omega_m}$ specified in [lem-coef-finite-dualizing], so $d_{m,n}=\\operatorname{Res}_{m,n}(F_n(u_{m,n})\\circ c_{m,n,\\omega_m})\\circ\\eta_{F_m\\omega_m}$ with that comparison. All identifications depend only on $Q_\\bullet$ and the fixed compactification.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+  "place": "Proof paragraph 2, specified natural maps before limits: separately derived ringed-sequence compact support and point sections, with the projection-transpose transition (returned trace-rectification steps 2-4).",
+  "note": "Agent-formulated extraction of the retained returned proof, following the blueprint paragraph on specified finite maps. Complete original argument and extraction map are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-finite-dualizing",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-compact-support-native-system-evaluation",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-et-proet-coefficient-transport",
+  "def-sf-compact-support-site-comparison-construction",
+  "det-sp-reduction-exceptional",
+  "def-sf-intrinsic-compact-support-restriction",
+  "lem-pod-point-sections-derived-reduction-data",
+  "def-weil-compact-support-reduction-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify modules on each $\\mathcal Q_W$ with strict quotient-semilinear systems by [def-coef-ringed-sequence-site]. Apply [lem-coef-semilinear-derived-sections] to the pro-etale geometric morphism induced by $p$, with coefficient rings $(A_n)_s$ and their inverse images $(A_n)_{\\bar X}$. Its direct image is the actual $Rp_*^{\\mathcal Q}$, and its exact open-localization operation is the actual $j_!$. The evaluation comparisons give natural isomorphisms\n$$\\psi_n:e_n(Rp_*^{\\mathcal Q}j_!Q)\\xrightarrow{\\sim}Rp_{*,n}j_!M_n=F_nM_n.$$\nExact open extension evaluates termwise; proper direct image uses the cited derived comparison, not an assertion that $e_n$ preserves K-injectives. This applies to arbitrary unbounded $Q$ and does not require its scalar-extension transitions to be invertible.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "Write $\\beta_j:T_{\\bar X}j_!^m\\xrightarrow{\\sim}j_!^nT_X$ for the exact open scalar comparison and $b_p:T_sRp_{*,m}\\to Rp_{*,n}T_{\\bar X}$ for the proper coefficient mate. The open comparison is the scalar/open adjunction comparison of [lem-fix-open-scalar-tensor-normalization]; the proper comparison is the one specified in [lem-coef-semilinear-derived-sections]. Thus the map called $c$ in the statement is\n$$c_{m,n,M}=Rp_{*,n}(\\beta_{j,M})\\circ b_{p,j_!M}.$$\nThe transition formula for proper direct image in that node, applied after exact open extension, says that under $\\psi_m,\\psi_n$ the extension-form transition is\n$$T_sF_mM_m\\xrightarrow{c_{m,n,M_m}}F_nT_XM_m\\xrightarrow{F_n(\\alpha_{m,n})}F_nM_n.$$\nIndeed the open transition is $j_!^n(\\alpha_{m,n})\\beta_j$: since $\\beta_j$ is the comparison of left adjoints with the common right adjoint $j^{-1}\\operatorname{Res}=\\operatorname{Res}j^{-1}$, the transpose of $j_!^n(\\alpha_{m,n})\\beta_j$ under $S_{\\bar X}j_!^m\\dashv j^{-1}\\operatorname{Res}$ equals that of $j_!^n(\\alpha_{m,n})$ under $j_!^nS_X\\dashv\\operatorname{Res}j^{-1}$, namely $\\operatorname{Res}(\\alpha_{m,n})\\eta=\\sigma_{m,n}$; so its scalar transpose is $j_!(\\sigma_{m,n})$ under $j_!\\operatorname{Res}=\\operatorname{Res}j_!$, the actual termwise restriction-form transition of $j_!Q$. Substituting it in $G_n(t)\\,b_p$ gives precisely the displayed word.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-fix-open-scalar-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "By the scalar adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction], the restriction-form arrow corresponding to any $v:T_sP\\to N$ is $\\operatorname{Res}(v)\\eta_P$. Applying this formula to the extension-form transition in step 2 gives\n$$\\psi_n\\,e(t_{m,n}^{Rp_*^{\\mathcal Q}j_!Q})=d_{m,n}\\,\\psi_m,$$\nwhere $d_{m,n}=\\operatorname{Res}(F_n(\\alpha_{m,n})c_{m,n,M_m})\\eta_{F_mM_m}$. All these maps are in ordinary $A_m$-module derived categories, so they also give arrows after exact constant-$R$ restriction. The scalar adjunction has no flatness or boundedness hypothesis.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "For the alternative description let $\\rho:F_m\\operatorname{Res}_X\\xrightarrow{\\sim}\\operatorname{Res}_sF_n$ be [lem-sf-compact-support-restriction-of-scalars]. The proper/open scalar mate defining $c$ is also the comparison of [def-coef-compact-support-tensor-comparison]: paste the proper counit mate and the open adjunction comparison using [lem-weil-pbc-mate-pasting]. Its defining scalar transpose is therefore\n$$\\operatorname{Res}(c_M)\\eta_{F_mM}=\\rho_{T_XM}F_m(\\eta_M).$$\nConsequently naturality of $\\rho$ at $\\alpha:T_XM_m\\to M_n$ yields\n$$d_{m,n}=\\operatorname{Res}(F_n\\alpha)\\rho_{T_XM_m}F_m\\eta_{M_m}=\\rho_{M_n}F_m(\\operatorname{Res}(\\alpha)\\eta_{M_m})=\\rho_{M_n}F_m(\\sigma_{m,n}).$$\nThis proves the claimed equivalence for the specified comparisons, rather than just identifying their objects.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-coef-compact-support-tensor-comparison",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "Let $g:\\operatorname{Sh}(s_{\\mathrm{proet}})\\to\\operatorname{Set}$ be global sections, with inverse image the constant-sheaf functor, and put the inverse system of rings $A_n$ on the punctual topos. Its inverse images are precisely $(A_n)_s$. Apply [lem-coef-semilinear-derived-sections] to $g$ and these ring systems. The resulting $Rg_{*,\\bullet}$ is $R\\Gamma^{\\operatorname{Tow}}(s,-)$: its target is the ordinary derived category of quotient-semilinear $A_n$-module systems on the point, and it takes no inverse limit. Its evaluation comparison identifies level $n$ with $R\\Gamma(s,-)$ in $A_n$-modules and carries restriction-form transitions to their derived-sections maps. Restriction along the actual maps $R\\to A_n$ changes only the module action [def-pc-sheaf-restrict-scalars]; it is exact because kernels and cokernels have unchanged underlying abelian sheaves. Evaluation commutes with it termwise. Compose this comparison with $\\operatorname{Res}^{A_n}_R R\\Gamma(s,\\psi_n)$ to define $\\Theta_{Q,n}$. Step 3 and naturality now give the required equation\n$$\\Theta_{Q,n}\\,e(t_{m,n}^{B(Q)})=R\\Gamma(s,d_{m,n})\\,\\Theta_{Q,m}$$\nin $D(R)$. Both derivations have been performed separately, as required.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "The comparisons used in steps 1 and 5 are natural on ordinary derived categories and compatible with all transition maps by [lem-coef-semilinear-derived-sections]. In the actual strict tower underlying $B(Q)$ one has $t_{n,n}=1$ and $t_{r,n}=t_{m,n}t_{r,m}$. Conjugating these equations by the isomorphisms $\\Theta$ proves their counterparts on the evaluated section objects. The same statement before sections, using $\\psi$ and scalar restriction, proves identity and composition for $d$. No conclusion is deduced from evaluations detecting equality of arbitrary morphisms. All comparison maps were specified by the actual functors for $j,p,g$ and their derived natural comparisons; hence they are natural in derived $Q$ and introduce no additional choice beyond the fixed compactification.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "For the last assertion put $A=A_m$, $B=A_n$, and first work on the etale site. The dualizing objects $\\omega_A^{\\mathrm{et}}$ and $\\omega_B^{\\mathrm{et}}$ are bounded constructible of finite Tor amplitude by [lem-coef-dualizing-construction]. Their pro-etale realizations are the $\\omega_m,\\omega_n$ in the question by [lem-weil-finite-duality-site-comparison]. Since $X$ is separated of finite type over $k$, hence quasi-compact and quasi-separated, and $A_m$ is a finite, hence Noetherian, ring, [det-pe-finite-tor-comparison-noetherian] shows that $\\omega_m\\cong\\nu_X^*\\omega_A^{\\mathrm{et}}$ is bounded constructible on $X_{\\mathrm{proet}}$ with the same finite Tor amplitude $[a,b]$, as the next lemma requires. Apply [lem-fix-reduction-open-etale-origin] to $K=\\omega_m$ and the fixed $j$. It gives bounded etale-origin witnesses for both $j_!\\omega_m$ and its derived coefficient extension. Thus the bounded-below hypotheses of the etale/pro-etale proper scalar-mate comparison hold at the object to which $Rp_*$ is applied; no such hypothesis was needed in steps 1--6.",
+   "uses": [
+    "lem-coef-dualizing-construction",
+    "lem-weil-finite-duality-site-comparison",
+    "lem-fix-reduction-open-etale-origin",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-etale-proetale-scalar-mate] to $p$ and the witnesses from step 7. It identifies the actual B-linear proper coefficient mate $b_p$ with the etale proper coefficient mate under the canonical tensor and direct-image comparisons. Its qcqs hypothesis holds since $p$ is proper. The open factor is equally the canonical one: [lem-fix-open-scalar-tensor-normalization] characterizes $\\beta_j^{-1}$ as the open adjunct of the scalar/pullback comparison followed by the open unit. [lem-fix-site-open-exchange] characterizes the site/open comparison by that same unit normalization. The scalar/pullback cube of [lem-sfb-etale-proetale-scalar-pullback-cube] commutes, so pasting their open adjunction transposes with [lem-weil-pbc-mate-pasting] identifies the two open coefficient maps. Pasting this equality with the proper equality identifies $Rp_{*,n}(\\beta_j)b_p$ with the finite pro-etale realization of the etale compact-support tensor comparison. By [lem-fix-compact-support-coefficient-change] this is precisely its canonical comparison at $\\omega_A^{\\mathrm{et}}$, the map denoted $c_{X,A,B,\\omega_A}$ in [lem-coef-finite-dualizing]. All comparisons here concern the finite constructible realizations, not an exceptional adjoint on arbitrary pro-etale objects.",
+   "uses": [
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-fix-site-open-exchange",
+    "lem-sfb-etale-proetale-scalar-pullback-cube",
+    "lem-weil-pbc-mate-pasting",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  },
+  {
+   "text": "Under $M_m\\cong\\omega_m$ and $M_n\\cong\\omega_n$, the assumed $\\alpha_{m,n}$ is the counit-defined $u_{m,n}$ of [lem-coef-finite-dualizing]. Substitute it into the already proved expression for $d_{m,n}$ in step 3, using the comparison identification of step 8. This gives exactly\n$$d_{m,n}=\\operatorname{Res}_{m,n}(F_n(u_{m,n})c_{m,n,\\omega_m})\\eta_{F_m\\omega_m}.$$\nThe isomorphisms identifying the levels merely conjugate the same natural maps. This proves the conditional dualizing clause without changing the arbitrary-input assertion.",
+   "uses": [
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-compact-support-tensor-comparison",
+  "def-coef-ringed-sequence-site",
+  "def-pc-sheaf-restrict-scalars",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-coef-dualizing-construction",
+  "lem-coef-finite-dualizing",
+  "lem-coef-semilinear-derived-sections",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-fix-reduction-open-etale-origin",
+  "lem-fix-site-open-exchange",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2, specified finite adjunction maps before limits; agent elaboration using Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI (sites-modules, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 07A6 (sites-cohomology, lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0GL1 (lemma-j-shriek-and-tensor)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(transition|evaluation)|semilinear.*(support|counit)|coefTraceFiniteTransition",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward composition, etale ring algebra and adic module evaluations do not state the varying-coefficient derived compact-support and point-sections comparison with its specified projection-transpose transitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"restrictScalars\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward composition, etale ring algebra and adic module evaluations do not state the varying-coefficient derived compact-support and point-sections comparison with its specified projection-transpose transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluating derived compact support of a quotient semilinear coefficient tower identifies its transition after finite etale proetale realization with the tensor restriction unit followed by the compact support coefficient comparison and reduction adjunct.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Algebra.etaleLocus_eq_compl_support",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "Algebra.Extension.tensorCotangentSpace",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward composition, etale ring algebra and adic module evaluations do not state the varying-coefficient derived compact-support and point-sections comparison with its specified projection-transpose transitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and semilinear transitions of separately derived proper pushforward and point sections of a strict quotient coefficient tower, identified with finite etale compact support by site comparison.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.pushforwardSections",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardNatTrans_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "TopCat.Presheaf.stalkPushforward"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward composition, etale ring algebra and adic module evaluations do not state the varying-coefficient derived compact-support and point-sections comparison with its specified projection-transpose transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation isomorphisms for quotient ring system derived compact support identify transitions with the composite scalar adjunction unit then coefficient projection formula then the reduction map.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AdicCompletion.factorₐ_evalₐ_one",
+     "AdicCompletion.factor_evalₐ_eq_eval",
+     "AdicCompletion.factor_eval_eq_evalₐ",
+     "AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+     "AdicCompletion.mk_smul_top_ofAlgEquiv_symm",
+     "AdicCompletion.eval_comp_of",
+     "AdicCompletion.evalₐ_of",
+     "AdicCompletion.mk_ofAlgEquiv_symm"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pushforward composition, etale ring algebra and adic module evaluations do not state the varying-coefficient derived compact-support and point-sections comparison with its specified projection-transpose transitions"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(transition|evaluation)|semilinear.*(support|counit)|quotient.*system.*derived",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf pushforward, adic completion or scheme sections, not derived quotient-system compact support with its specified scalar-adjunction transitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"derived\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf pushforward, adic completion or scheme sections, not derived quotient-system compact support with its specified scalar-adjunction transitions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward and global sections on inverse systems of sheaves of modules over quotient rings commute with evaluation and preserve coefficient transition maps.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "PresheafOfModules.pushforward₀",
+     "SheafOfModules.pushforward_map_val",
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "SheafOfModules.pushforwardSections_coe",
+     "SheafOfModules.pushforwardSections",
+     "PresheafOfModules.pushforward₀_obj",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+     "SheafOfModules.pushforward"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf pushforward, adic completion or scheme sections, not derived quotient-system compact support with its specified scalar-adjunction transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluating derived compact support of quotient coefficient systems commutes with level evaluation and identifies transition maps with scalar extension adjunction mates.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Profinite.NobelingProof.GoodProducts.square_commutes",
+     "AdicCompletion.transitionMap_comp_eval",
+     "localCohomology.diagram",
+     "AdicCompletion.eval_lift",
+     "AdicCompletion.transitionMap_comp_eval_apply",
+     "AdicCompletion.eval_lift_apply",
+     "Profinite.NobelingProof.CC_comp_zero",
+     "IsAdicComplete.StrictMono.mkQ_comp_lift"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf pushforward, adic completion or scheme sections, not derived quotient-system compact support with its specified scalar-adjunction transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between level evaluation of separately derived direct image and global sections on varying ring towers, respecting tensor restriction unit formulas for all reduction arrows.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_naturality",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc",
+     "ModuleCat.Tilde.toOpen_res",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality",
+     "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap",
+     "AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app",
+     "AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaf pushforward, adic completion or scheme sections, not derived quotient-system compact support with its specified scalar-adjunction transitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-tower-trace-rectification",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, specified natural maps before limits: separately derived ringed-sequence compact support and point sections, with the projection-transpose transition (returned trace-rectification steps 2-4).",
+   "via": [
+    "lem-coef-tower-trace-rectification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-dualizing-support-evaluation",
+  "worker": "stage1",
+  "summary": "Preserved the complete arbitrary-input statement and supplied evaluation, the scalar-unit transition formula, its restriction-comparison form, separately derived point sections, coherence, and finite dualizing site normalization using existing nodes only. No new nodes. No Lean or compiler invocation.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-dualizing, especially the specified finite maps before limits and its final counit-transition assertion; steps 1--6 construct and evaluate compact support before any inverse limit, steps 7--9 identify its coefficient comparison with the finite-dualizing map.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Generic Change of finite coefficients for compact support used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-fix-open-scalar-tensor-normalization",
+    "why": "Generic Open scalar comparison with unit, tensor and composition normalization used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-fix-reduction-open-etale-origin",
+    "why": "Generic Bounded etale witnesses for finite reduction and open extension used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-fix-site-open-exchange",
+    "why": "Generic Site comparison respects the normalized open base-change map used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Generic Finite-level compact-support direct image commutes with restriction of scalars used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-sfb-etale-proetale-scalar-mate",
+    "why": "Generic Étale/pro-étale comparison intertwines scalar direct-image mates used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-sfb-etale-proetale-scalar-pullback-cube",
+    "why": "Generic Etale/pro-etale inverse-image square commutes with derived scalar comparison used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "Generic Finite-stage duality under the site comparison used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used for the specified finite-level or ringed-site comparison; this unit has no alternative construction of that tool and its finite-map-before-limits route is retained."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic etale/pro-etale finite-Tor comparison used in step 7 only to verify the pro-etale bounded constructible finite-Tor hypothesis of lem-fix-reduction-open-etale-origin for omega_m; no node of this unit gives it (added by maintainer reader Q57 FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-fix-reduction-open-etale-origin",
+  "lem-fix-site-open-exchange",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-mate-pasting",
+  "det-pe-finite-tor-comparison-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-94dab0a44",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-94dab0a44 (reviewer sub-agent of L); spot-checked: I read the item and all 16 cited statements in full, plus the blueprint main-20261015 prop-coef-integral-dualizing proof (paragraph 2). The statement, stmt_deps and blueprint fields are identical to base 4654c1. There are no new nodes. Steps 1, 3, 5, 6 and 9 check against lem-coef-semilinear-derived-sections (with u = pro-etale p and with global sections to the point), the scalar adjunction transpose, exact Res_R and the strict tower identities. Step 4: Res(c)eta = rho F(eta) and d = rho F(sigma) follow by mate calculus from lem-weil-pbc-mate-pasting, with lem-weil-proetale-direct-image-restriction-of-scalars supplying the restriction comparison rho and lem-pur-sheaf-ring-derived-coefficient-adjunction (1) the K-flat normalization. Step 8: lem-sfb-etale-proetale-scalar-mate applies because p is proper, hence qcqs, and the D^+ conditions hold. The open factor is identified via the beta_j and c_j unit normalizations, the cube and pasting. Two repairs. (1) Step 2 only asserted that the open transition is j_!(alpha)beta_j; I added the conjugate argument (common right adjoint j^{-1}Res, so the transpose is j_!(sigma)). (2) Step 7 applied lem-fix-reduction-open-etale-origin without showing that omega_m is pro-etale bounded constructible of finite Tor amplitude. I now cite det-pe-finite-tor-comparison-noetherian: X is qcqs and A_m is Noetherian. I added it to proof_deps and split_report.tool_uses. Small cases: Q=0, X empty, m=n gives d=1, composition for r>=m>=n, and nonflat quotients all hold. I accept the 10 declared tool_uses. Advisory: lem-trf-compact-support-system-evaluation-coherence overlaps steps 1-3 but has no point sections, rho form or dualizing clause, so it is not a duplicate. No SGA. The fixed item is in fixes/dag/nodes/sec-six-functors/ and the details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.DualizingSupportEvaluation",
+  "declaration": "WeilConjectures.DualizingSupportEvaluation.evaluatedSupport",
+  "declarations": [
+   "WeilConjectures.DualizingSupportEvaluation.support",
+   "WeilConjectures.DualizingSupportEvaluation.sectionsTowers",
+   "WeilConjectures.DualizingSupportEvaluation.sectionsTowersLimits",
+   "WeilConjectures.DualizingSupportEvaluation.sectionsTowersColimits",
+   "WeilConjectures.DualizingSupportEvaluation.towerHasDerived",
+   "WeilConjectures.DualizingSupportEvaluation.B",
+   "WeilConjectures.DualizingSupportEvaluation.ev",
+   "WeilConjectures.DualizingSupportEvaluation.transition",
+   "WeilConjectures.DualizingSupportEvaluation.sections",
+   "WeilConjectures.DualizingSupportEvaluation.supportModel",
+   "WeilConjectures.DualizingSupportEvaluation.comparison",
+   "WeilConjectures.DualizingSupportEvaluation.sigma",
+   "WeilConjectures.DualizingSupportEvaluation.alpha",
+   "WeilConjectures.DualizingSupportEvaluation.d",
+   "WeilConjectures.DualizingSupportEvaluation.sectionTransition",
+   "WeilConjectures.DualizingSupportEvaluation.target",
+   "WeilConjectures.DualizingSupportEvaluation.sectionsEvaluation",
+   "WeilConjectures.DualizingSupportEvaluation.theta",
+   "WeilConjectures.DualizingSupportEvaluation.quotientRestrictionModel",
+   "WeilConjectures.DualizingSupportEvaluation.dNormalized",
+   "WeilConjectures.DualizingSupportEvaluation.dualizingTransition",
+   "WeilConjectures.DualizingSupportEvaluation.DualizingSiteCompatibility",
+   "WeilConjectures.DualizingSupportEvaluation.evaluatedSupport"
+  ],
+  "file": "lean/Sheaf/SixFunctors/DualizingSupportEvaluation.lean",
+  "statement": "theorem evaluatedSupport (hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (c : Compactification (X ↘ Spec (.of D.k))) : (∀ (Q : coefficientSequenceDerived l E X) {m n : ℕ} (h : n ≤ m), (transition l E h).app ((B D l E c).obj Q) ≫ (theta D l E c n).hom.app Q = (theta D l E c m).hom.app Q ≫ sectionTransition D l E c h Q) ∧ (∀ (Q : coefficientSequenceDerived l E X) {m n : ℕ} (h : n ≤ m), d l E c h Q = (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map (sigma l E X h Q) ≫ (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n h)).hom.app ((coefficientSequenceDerivedEvaluation l E X n).obj Q)) ∧ (∀ (Q : coefficientSequenceDerived l E X) (n : ℕ), sectionTransition D l E c (le_refl n) Q = 𝟙 _) ∧ (∀ (Q : coefficientSequenceDerived l E X) {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m), sectionTransition D l E c hrm Q ≫ sectionTransition D l E c hmn Q = sectionTransition D l E c (hmn.trans hrm) Q) ∧ (∀ (Q : coefficientSequenceDerived l E X) (n : ℕ), dNormalized l E c (le_refl n) Q ≫ (normalizedDVRResUnit l E (Spec (.of D.k)) n).hom.app ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj ((coefficientSequenceDerivedEvaluation l E X n).obj Q)) = 𝟙 _) ∧ (∀ (Q : coefficientSequenceDerived l E X) {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m), dNormalized l E c hrm Q ≫ (normalizedDVRRes l E (Spec (.of D.k)) hrm).map (dNormalized l E c hmn Q) ≫ (normalizedDVRResComp l E (Spec (.of D.k)) hrm hmn).hom.app ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj ((coefficientSequenceDerivedEvaluation l E X n).obj Q)) = dNormalized l E c (hmn.trans hrm) Q) ∧ (∀ {m n : ℕ} (h : n ≤ m), DualizingSiteCompatibility D l E X c h) ∧ (∀ (Q : coefficientSequenceDerived l E X) {m n : ℕ} (h : n ≤ m) (iₘ : (coefficientSequenceDerivedEvaluation l E X m).obj Q ≅ integralDualizingFiniteTerm l E D X m) (iₙ : (coefficientSequenceDerivedEvaluation l E X n).obj Q ≅ integralDualizingFiniteTerm l E D X n), sigma l E X h Q ≫ (scalarRestriction (compactSupportLevelQuotient l E m n h) X).map iₙ.hom = iₘ.hom ≫ dualizingTransition D l E X hl h → d l E c h Q = (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map iₘ.hom ≫ (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := Spec (.of D.k)) (compactSupportLevelQuotient l E m n h))).unit.app ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).obj (integralDualizingFiniteTerm l E D X m)) ≫ (scalarRestriction (compactSupportLevelQuotient l E m n h) (Spec (.of D.k))).map ((comparison l E c h).app (integralDualizingFiniteTerm l E D X m) ≫ (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map (((proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := X) (compactSupportLevelQuotient l E m n h))).homEquiv _ _).symm (dualizingTransition D l E X hl h))) ≫ (scalarRestriction (compactSupportLevelQuotient l E m n h) (Spec (.of D.k))).map ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map iₙ.inv))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Arbitrary unbounded strict quotient-semilinear inputs; actual separately derived system support and point sections; natural Theta, scalar-adjoint d, both coefficient-level and section-level coherence, and the finite-dualizing site/counit normalization. Positive exponent n is represented by index n-1. Supporting landed interface nodes are added to stmt_deps; no mathematical statement change. Returned H2 repair: sigma transports the definition-owned coefficientSequenceDerivedTransition through quotientRestrictionModel; the finite-site square directly uses definition-owned transportedRecordedReductionDirectImageComparison and reductionDirectImageComparison. The two unused theorem statement-dependencies are removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fe0ec6b8",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Re-delivery after the 0dfba0e0 RETURN (two H2 theorem stmt_deps); both repaired as instructed. sigma now uses coefficientSequenceDerivedTransition (def-coef-ringed-sequence-site) with quotientRestrictionModel: the same localized horizontal transition. proEtaleCoefficientMap is replaced by its exact body transportedRecordedReductionDirectImageComparison(reductionDirectImageComparison), both from cited def nodes. Both theorem deps and their imports are removed; CompactSupportReductionTowerData (cited def node) is imported. Mechanical finding: det-sp-reduction-exceptional supplies only the needed equation reductionConstantPush_eq (eqToIso in supportModel), so PASS on that point; lem-pod-point-sections-derived-reduction-data has kind definition, so PASS. All 8 clauses, hypotheses and edge cases re-checked (arbitrary unbounded Q, natural derived theta, d = eta then Res(c, F_n alpha), coherence, dualizing square and formula). lean.statement matches the file verbatim and all 23 declarations exist. Relative to live only lean and stmt_deps differ. No compile: no file changed; worker reports a clean scompile."
+ }
+}

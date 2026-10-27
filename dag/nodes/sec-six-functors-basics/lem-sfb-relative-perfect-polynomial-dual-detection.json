@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-relative-perfect-polynomial-dual-detection",
+ "kind": "statement",
+ "title": "Polynomial dual detects maps between relatively perfect complexes",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of arbitrary commutative rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. Fix a surjection $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$, where $n\\geq0$ [def-weil-pbc-mv-polynomial-ring]. Work in ordinary module derived categories [def-weil-abstract-derived-category], with derived tensor computed on K-flat resolutions and internal Hom [def-pur-derived-internal-hom] on the one-object ringed site. Put $C=C_{P\\to A}(P[0])[n]\\in D(A)$, where $C_{P\\to A}$ is derived coinduction with precomposition action $(a h)(a')=h(a'a)$ [def-trf-derived-coinduction]. Call $T\\in D(A)$ $R$-perfect if it is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and there exist integers $a_T\\leq b_T$ with $H^i(T\\otimes_R^{\\mathbf L}Q)=0$ for every $R$-module $Q$ and $i\\notin[a_T,b_T]$. For every $R$-perfect $Z\\in D(A)$,\n$$R\\operatorname{Hom}_A(C,Z)=0\\quad\\Longrightarrow\\quad Z=0.$$\nConsequently, for every morphism $f:X\\to Y$ between $R$-perfect objects, if $R\\operatorname{Hom}_A(C,f)$ is an isomorphism then $f$ is an isomorphism. No diagonal dualizing condition on $Z,X,Y$, no Noetherianity, and no nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent relative-perfect detection corollary of Tag 0A7C, lemma-dualizing, on residue-field fibres, together with relative-perfect Hom base change and derived Nakayama. The arbitrary-base assertion is not the statement of 0A7C."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-fp-presentation-noetherian-model] to the specified $\\pi:P\\twoheadrightarrow A$. Obtain $R_0\\subset R$, $P_0=R_0[x_1,\\ldots,x_n]\\twoheadrightarrow A_0$ with $R_0\\to A_0$ flat finitely presented and all three rings Noetherian, and $A=A_0\\otimes_{R_0}R$, $P=P_0\\otimes_{R_0}R$, compatibly with the given presentation. Put $C_0=C_{P_0\\to A_0}(P_0[0])[n]$ with the same precomposition action as in the statement.",
+   "uses": [
+    "lem-sfb-flat-fp-presentation-noetherian-model",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO, lemma-flat-finite-presentation-limit-flat; chosen-presentation enhancement stated in the cited model lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-arbitrary-polynomial-dual-properties] to $R_0\\to A_0$ and this surjection: $A_0[0]$ is perfect over $P_0$. Apply [lem-trf-algebraic-shriek-relative-perfect] to the same Noetherian rings: it gives $C_0\\in D^b_{\\mathrm{fg}}(A_0)$ and the scalar isomorphism $h_0:A_0[0]\\xrightarrow{\\sim}R\\operatorname{Hom}_{A_0}(C_0,C_0)$. Its finite-type hypothesis follows from the finite presentation already supplied. Neither assertion is applied to the possibly non-Noetherian final ring $A$.",
+   "uses": [
+    "lem-sfb-arbitrary-polynomial-dual-properties",
+    "lem-trf-algebraic-shriek-relative-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW, lemma-relative-dualizing-algebraic (1)(a),(c),(2); polynomial perfectness as in the cited arbitrary-base node."
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak q\\subset A_0$, the map $A_0\\to(A_0)_{\\mathfrak q}$ is flat by [lem-weil-pbc-localization-flat], and its target is Noetherian by [lem-weil-pbc-localization-noetherian]. Hence [lem-trf-flat-coherent-homothety-base-change], applied to $C_0,C_0$, carries $h_0$ to an isomorphism $(A_0)_{\\mathfrak q}[0]\\cong R\\operatorname{Hom}_{(A_0)_{\\mathfrak q}}((C_0)_{\\mathfrak q},(C_0)_{\\mathfrak q})$. If $(C_0)_{\\mathfrak q}=0$, this would make the nonzero local ring $(A_0)_{\\mathfrak q}$ zero, a contradiction. Thus $C_0$ has full support, and [lem-sfb-noetherian-full-support-localizing-generation] gives $A_0[0]\\in\\operatorname{Loc}_{A_0}(C_0)$. When $A_0=0$ there are no primes and the same conclusion holds.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-flat-coherent-homothety-base-change",
+    "lem-sfb-noetherian-full-support-localizing-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A, lemma-base-change-RHom, flat bounded-target case; full-support localizing-generation corollary stated in the cited node."
+   }
+  },
+  {
+   "text": "Check Tor independence for the polynomial square before applying coinduction base change. Choose a bounded finite-projective $P_0$-complex $F$ representing $A_0[0]$, available from step 2. The monomial description [def-weil-pbc-mv-polynomial-ring] makes $P_0$ free over $R_0$; the split-free description [def-weil-pbc-projective-module] then makes every $F^j$ flat over $R_0$. Both $F$ and $A_0[0]$ are K-flat over $R_0$ by [lem-pc-module-bounded-flat-kflat], using flatness of $A_0/R_0$. Therefore the exact derived extension [lem-pur-derived-change-of-rings] is computed on these two representatives by $F\\otimes_{R_0}R$ and $A_0\\otimes_{R_0}R=A[0]$, which consequently represent the same object. On the other hand $F$ is K-flat over $P_0$, again by the bounded-flat lemma, and [lem-pc-source-kflat-module-tensor-model] computes $A_0\\otimes_{P_0}^{\\mathbf L}P$ by $F\\otimes_{P_0}P=F\\otimes_{R_0}R$. This proves $A_0\\otimes_{P_0}^{\\mathbf L}P\\simeq A[0]$, the needed Tor independence.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-projective-module",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0661 (lemma-base-change-comparison) and 064K (lemma-derived-tor-quasi-isomorphism, bounded-above flat K-flat model); explicit resolution check for this square."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-coinduction-tor-independent-base-change] to $P_0\\to A_0$ and $P_0\\to P$. Its hypotheses are precisely perfectness in step 2 and Tor independence in step 4. At $N=P_0[0]$, and then shifting by $n$, it gives an isomorphism $C_0\\otimes_{A_0}^{\\mathbf L}A\\cong C_{P\\to A}(P[0])[n]=C$ in $D(A)$. In particular this preserves the coinduced $A$-action; an isomorphism merely after forgetting to $P$ would not suffice.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A6A and 0661; coinduced-action enhancement as stated in the cited base-change lemma."
+   }
+  },
+  {
+   "text": "Let $L=-\\otimes_{A_0}^{\\mathbf L}A:D(A_0)\\to D(A)$. It is exact by [lem-pur-derived-change-of-rings] and is the left adjoint to restriction in [def-zl-ring-derived-scalar-extension]. Thus it preserves coproducts: for every family $V_i$ and every $W$, adjunction identifies maps $L(\\bigoplus_iV_i)\\to W$ with $\\prod_i\\operatorname{Hom}(LV_i,W)$, which is the coproduct universal property. The preimage under $L$ of $\\operatorname{Loc}_A(C)$ is consequently closed under all the operations defining $\\operatorname{Loc}$ (functors also preserve retractions). By step 5 it contains $C_0$, so it contains $A_0[0]$ by step 3. Since $L(A_0[0])=A[0]$, we obtain $A[0]\\in\\operatorname{Loc}_A(C)$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-zl-ring-derived-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GMT, lemma-tensor-hom-adjoint, and Tag 06Y6, lemma-derived-base-change; elementary preimage-of-localizing-hull argument."
+   }
+  },
+  {
+   "text": "Now let $Z$ be any object of $D(A)$ with $R\\operatorname{Hom}_A(C,Z)=0$. Closed tensor--Hom adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] identifies $\\operatorname{Hom}(C,Z[j])$ with $\\operatorname{Hom}(A[0],R\\operatorname{Hom}_A(C,Z)[j])$, hence these groups vanish for all $j$. Let $\\mathcal S$ be the full class of $V$ with $\\operatorname{Hom}(V,Z[j])=0$ for every $j$. Exactness of Hom out of distinguished triangles [lem-weil-pbc-hom-out-of-triangle-exact] makes $\\mathcal S$ closed under triangles and shifts. The coproduct universal property makes it closed under coproducts, and a retract of zero Hom groups is zero, so it is closed under retracts. Thus $\\mathcal S$ contains $\\operatorname{Loc}_A(C)$, in particular $A[0]$. By [lem-pc-derived-module-free-generation], every object of $D(A)$ belongs to the localizing hull of $A[0]$, so $Z\\in\\mathcal S$. Taking $j=0$ gives $1_Z=0$, which makes $Z$ a zero object. This proves the requested implication, in fact without using relative perfection of $Z$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149 (lemma-representable-homological), 09SJ (definition-generators); more-algebra.tex Tag 09PB (remark-P-resolution)."
+   }
+  },
+  {
+   "text": "For a morphism $f:X\\to Y$ as in the statement, choose its cone triangle $X\\xrightarrow{f}Y\\to T\\to X[1]$. The functor $R\\operatorname{Hom}_A(C,-)$ takes this to a distinguished triangle by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. If its first map is an isomorphism, [lem-kun-distinguished-cone-zero] gives $R\\operatorname{Hom}_A(C,T)=0$. The stronger detection for all $T\\in D(A)$ established in step 7 gives $T=0$, and the same zero-cone criterion applied to the original triangle proves that $f$ is an isomorphism. This also covers zero objects and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Exactness of derived Hom and the zero-cone criterion for distinguished triangles."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-fp-presentation-noetherian-model",
+  "def-trf-derived-coinduction",
+  "lem-sfb-arbitrary-polynomial-dual-properties",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-flat-coherent-homothety-base-change",
+  "lem-sfb-noetherian-full-support-localizing-generation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-projective-module",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sfb-perfect-coinduction-tor-independent-base-change",
+  "def-zl-ring-derived-scalar-extension",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-pc-derived-module-free-generation",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZW over a flat Noetherian model (Tag 02JO), full-support generation by residue-field extraction and Noetherian induction, then perfect coinduction base change and extension of the localizing hull. This avoids an unjustified tensoring of the bounded-below Hom complex of Tag 0E1U."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]onservative|[Rr]eflectsIsomorphisms",
+   "results": "6 hits: Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; digest=4e03fe1845472073; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conservative\", \"Hom\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative dualizing complex detects vanishing of relatively perfect complexes by derived Hom",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.flip, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q, CategoryTheory.ShortComplex.hasLeftHomology_iff_op, Module.IsReflexive.of_isPerfPair, Module.dual_projective, HomologicalComplex.instHasHomologyOppositeOp; digest=2c1d2900eca32e97; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a polynomial relative dualizing complex detects isomorphisms between relatively perfect complexes over an arbitrary ring",
+   "results": "8 hits: Ext, DerivedCategory.isIso_Q_map_iff_quasiIso, CategoryTheory.ProjectiveResolution.isoExt, CochainComplex.IsKProjective.Qh_map_bijective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.IsKProjective.leftOrthogonal, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; digest=41f01bf7a0d75dbc; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from the relative polynomial dualizing complex detects zero complexes over a flat finitely presented algebra",
+   "results": "8 hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.smoothLocus_eq_compl_support_inter, Algebra.Smooth, Algebra.Smooth.flat, Algebra.FormallyEtale, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.Extension.tensorH1Cotangent; digest=d22b2bda04fa453f; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"generator\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|semidualizing|relative.*perfect",
+   "results": "1 hits: Mathlib/Algebra/Homology/HomotopyFiber.lean; digest=064930e5919f47f9; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial dual detects maps between relatively perfect complexes.",
+   "via": [
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-perfect-polynomial-dual-detection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Supplied eight steps using a flat Noetherian model of the specified polynomial presentation, full-support localizing generation there, Tor-independent perfect coinduction base change and transport of the localizing hull. Detection is proved for arbitrary objects, so the cone clause needs no extra relative-perfection closure lemma. Added two genuine statement-only inputs, with actual recorded searches, and checked zero rings and zero variables.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial dual detects maps between relatively perfect complexes. The nearest imported blueprint ancestor remains null as computed by tools/blueprint_refs.py; the detailed inherited place supplies the route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algebraic-shriek-relative-perfect",
+    "why": "Generic relative perfection of algebraic upper shriek for flat noetherian algebras used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-trf-flat-coherent-homothety-base-change",
+    "why": "Generic flat base change of bounded coherent complexes and their scalar-action morphisms used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat module complexes are k-flat used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived change of rings along a morphism of sheaves of rings, computed by k-flat resolutions used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic derived module tensor computed on a k-flat first complex used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic the derived category of a ringed site is closed symmetric monoidal used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Generic generation of a module derived category by shifts of the ring used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic derived internal hom calculus on small ringed sites used with the displayed hypotheses in the affine duality argument; no unit-level step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-trf-flat-coherent-homothety-base-change",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-derived-module-free-generation",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-9e59339b1",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-9e59339b1 (reviewer sub-agent of L); spot-checked: I read the item (8 steps, statement unchanged), both new statement-only nodes, the statement of every cited node, and Stacks 02JO(3) and 0BZW(1)(a),(c),(2); the tag-to-label table is correct for every other tag cited. This is the first delivery and live still has the item unsplit with no repair note, so it is not superseded. Steps: (1) the model node keeps the given surjection pi, which steps 4 and 5 need to identify P0 tensor R with P and A0 tensor_{P0} P with A. (2) polynomial-dual-properties gives A0 perfect over P0; algebraic-shriek-relative-perfect is applied only to the Noetherian rings R0 and A0 and gives C0 bounded with finitely generated cohomology and h0 an isomorphism. (3) Localization is flat with Noetherian target, and the homothety base-change node gives h an isomorphism at every prime q, so (C0)_q is nonzero and C0 has full support; A0=0 also holds. (4) Tor independence: F has R0-flat terms, F and A0 are K-flat over R0, lem-pur computes the scalar extension on each, and the source-K-flat tensor model gives A0 tensor^L_{P0} P = A; no flatness of R0 to R is used, and n=0 is fine. (5) The perfect coinduction base-change node with N=P0[0] gives C0 tensor^L A isomorphic to C in D(A). (6) Pulling back the localizing hull Loc(C) along the coproduct-preserving exact functor puts A in Loc(C). (7) By the closed adjunction and free generation, every Z with RHom(C,Z)=0 is zero; this is stronger than the target and does not weaken it. (8) Cone triangle and zero-cone criterion. New nodes: the flat Noetherian model is true by 02JO(3) on R_i[x]/(f) with 00FN; it is not a duplicate of pbc-flat-finite-presentation-model, trf-flat-subring-model-system or a1-fppf-integer-model, none of which keeps the given presentation. Full-support localizing generation is Neeman's support theorem; I checked the report's proof (residue-field retract, Noetherian induction via 00L0/00L4, telescope), and the cases B=0, a non-perfect E and an E without full support behave as stated. A search of the DAG found no duplicate. Both nodes have LeanSearch, LeanFinder/Loogle and grep searches recorded. Batch 5: I walked the closures of all five flagged citations. None reaches nt-assume-*, a trace-formula or Poincare theorem, or a dropped route-pivot node; their trace and Poincare chapter content is generic algebra (0BZW, 0A6A, coinduction and scalar-extension definitions, sk-lem-finite/sk-i-curve-zero lemmas). All five are accepted as generic, outside both assumptions. All 8 declared tool_uses are accepted. No SGA source is used. Advisory: the item's R-perfect hypotheses are unused by the proof; the model node could be proved from trf-flat-subring-model-system."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativePerfectPolynomialDualDetection",
+  "declaration": "ModuleCat.relativePerfect_polynomialDual_detection",
+  "file": "lean/Sheaf/RingTheory/RelativePerfectPolynomialDualDetection.lean",
+  "statement": "theorem relativePerfect_polynomialDual_detection {R A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) (hflat : RingHom.Flat φ) (hfp : RingHom.FinitePresentation φ) (n : ℕ) (p : MvPolynomial (Fin n) R →+* A) (hp : Function.Surjective p) (hcomp : p.comp MvPolynomial.C = φ) : (∀ Z : DerivedCategory (ModuleCat.{u} A), DerivedCategory.IsPseudoCoherent Z → (∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((restrictScalars φ).mapDerivedCategory.obj Z) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q))) → IsZero ((ordinaryModuleDerivedInternalHom A).obj (op (((derivedCoinduction p).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} (MvPolynomial (Fin n) R)) 0).obj (of (MvPolynomial (Fin n) R) (MvPolynomial (Fin n) R))))⟦(n : ℤ)⟧), Z)) → IsZero Z) ∧ (∀ (X Y : DerivedCategory (ModuleCat.{u} A)) (f : X ⟶ Y), DerivedCategory.IsPseudoCoherent X → (∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((restrictScalars φ).mapDerivedCategory.obj X) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q))) → DerivedCategory.IsPseudoCoherent Y → (∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((restrictScalars φ).mapDerivedCategory.obj Y) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q))) → IsIso (((Functor.curry.obj (ordinaryModuleDerivedInternalHom A)).obj (op (((derivedCoinduction p).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} (MvPolynomial (Fin n) R)) 0).obj (of (MvPolynomial (Fin n) R) (MvPolynomial (Fin n) R))))⟦(n : ℤ)⟧))).map f) → IsIso f)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a84ac43b2",
+  "group": "NS",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean. lean.statement is verbatim in the file. Checked every clause against the dependency declarations: flat and finitely presented φ; surjective p : MvPolynomial (Fin n) R →+* A with p.comp C = φ; C = (derivedCoinduction p).obj (single 0 P)⟦n⟧ with precomposition action (b·h)(b')=h(b'b); R-perfect = IsPseudoCoherent plus a separate a≤b Tor range per object, computed with the K-flat derived tensor after restriction to D(R); both conclusions go through ordinaryModuleDerivedInternalHom A (abbrev of MonoidalClosed.internalHom). No Noetherian, nontriviality or dualizing hypotheses. Edge cases n=0, A=0, a=b and zero objects covered. Shared universe u is forced by the recorded derivedCoinduction interface. Only proof is sorry; no auxiliary defs or new nodes; docstrings give source place, blueprint id and all 8 steps. Non-public imports are exactly the recorded proof-dependency modules. No existing or parallel duplicate. Note: the derived tensor is the monoidal instance underlying the recorded internal Hom; there is no separate stmt_dep and S2 cannot add one. No compile (no change)."
+ }
+}

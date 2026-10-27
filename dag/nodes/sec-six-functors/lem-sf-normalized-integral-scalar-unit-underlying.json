@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-normalized-integral-scalar-unit-underlying",
+ "kind": "statement",
+ "title": "Integral scalar unit normalization before rationalization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let l be prime, Ω an algebraic closure of Q_l, E a finite coefficient stage and T any scheme. Let S be a restricted integral identity scalar functor. Assume its inclusion is the specified completed scalar functor and its inverse realization is the specified ordinary-to-completed comparison. For any multiplication-normalized identity isomorphism e of S and every finite-Tor integral object K, its underlying derived arrow is heterogeneously equal to the underlying sfIntegralScalarUnit component on the unchanged intrinsic integral representative. This is a comparison of integral scalar units on one scheme; it has no exceptional operation, compactification, rationalization or coefficient identity-square conclusion.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, lemma-derived-base-change, and 07A6, lemma-adjoint, specialized to the identity coefficient map. The multiplication and restriction identity formulas are the exceptional coefficient construction normalizations. The comparison is an agent expansion of these constructions. Combined with the integral identity clause of the exceptional coefficient construction and the completed-line canonical restriction."
+ },
+ "proof": [
+  {
+   "text": "The included functor equality identifies the underlying scalar objects. On flat-term K-flat representatives, the adjunction unit sends x to 1 tensor x, while identity restriction is identity on sections. Tensor multiplication s tensor x to s*x is inverse to this unit. The adjunction Hom bijection identifies the transported adjunction unitor with the normalized ordinary K-flat multiplication unitor. Naturality and localization extend the calculation to all derived objects. The two ordinary derived presentations select the same universal scalar-change witness.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-sf-ring-scalar-multiplication-unit",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse realization hypothesis and the scalar-object equality identify the realization with chi inverse. Substituting the ordinary unitor calculation into e.normalized gives chi inverse followed by ordinary multiplication, exactly the completed unit. The identity clause of CompletedLineTensor.canonical_restriction identifies this with the underlying sfIntegralScalarUnit component on the same intrinsic integral object.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sf-ring-scalar-multiplication-unit",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, lemma-derived-base-change, and 07A6, lemma-adjoint, specialized to the identity coefficient map. The multiplication and restriction identity formulas are the exceptional coefficient construction normalizations. The comparison is an agent expansion of these constructions. Combined with the integral identity clause of the exceptional coefficient construction and the completed-line canonical restriction.",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of scalar extension is multiplication and commutes with localization",
+   "results": "LocalizedModule.smul_mk_one and related localized module scalar formulas; no comparison of these derived multiplication unitors.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit isomorphism of completed scalar extension is conjugate to ordinary tensor multiplication through the completion comparison",
+   "results": "ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, AdicCompletion.ofTensorProduct_tmul; no comparison of the specified derived presentations.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryUnit.*tensorIdentity|tensorIdentity.*ordinaryUnit",
+   "results": "No Mathlib hits. Project search found the two existing definitions and canonical_restriction, but no theorem comparing these two ordinary unitors.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedRationalLeftIdentity",
+  "date": "2026-10-27",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The integral scalar-unit normalization step, before rationalization.",
+   "via": [
+    "lem-sf-normalized-integral-scalar-unit",
+    "lem-sf-normalized-rational-left-identity",
+    "lem-sf-normalized-rational-left-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralScalarUnitUnderlying",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralScalarUnitUnderlying.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.normalized_integral_scalar_unit_underlying",
+  "statement": "theorem normalized_integral_scalar_unit_underlying\n    (E : FieldStage.{max u v} l) (T : Scheme.{max u v})\n    (S : Scalar.{u, v} l Ω (s := .integral E) (t := .integral E)\n      (PurCompactSupport.completedChange l E.carrier E.carrier\n        (AlgHom.id (Padic l) E.carrier)) T)\n    (hS : S.functor ⋙ RingStage.inclusion.{u, v} l Ω T (.integral E) =\n      RingStage.inclusion.{u, v} l Ω T (.integral E) ⋙\n        integralScalarExtensionOfUniverses l E.carrier E.carrier\n          (AlgHom.id (Padic l) E.carrier) T)\n    (hχ : ∀ K : C.{u, v} l Ω T (.integral E),\n      HEq (S.realization.inv.app K)\n        ((completedScalarComparison l E.carrier E.carrier\n          (AlgHom.id (Padic l) E.carrier) T).app K.obj))\n    (h : ∀ W : Scheme.{max u v},\n      (PurCompactSupport.completedChange l E.carrier E.carrier\n        (AlgHom.id (Padic l) E.carrier)).map W = 𝟙 _)\n    (e : ScalarIdentity.{u, v} l Ω h T S)\n    (K : C.{u, v} l Ω T (.integral E)) :\n    HEq ((e.iso.hom.app K).hom)\n      (((sfIntegralScalarUnit l E.carrier T 0 (Fact.out : l.Prime).ne_zero).hom.app\n        ((PurCompactSupport.finiteTorIntegralInclusion l E.carrier T).obj K)).hom)",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T123554-L-2321438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T123554-L-2321438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

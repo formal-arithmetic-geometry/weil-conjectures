@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-universal-shuffle-evaluation",
+ "kind": "statement",
+ "title": "Evaluate a fixed universal shuffle equivalence on cochain diagrams",
+ "status": "split",
+ "statement": "In $\\operatorname{Fun}(\\Delta\\times\\Delta,\\mathrm{Ab})$, let $P,Q$ be nonnegative chain complexes with specified term isomorphisms $p_n:P_n\\simeq R_{(n,n)}$ and $q_n:Q_n\\simeq\\bigoplus_{a+b=n}R_{(a,b)}$ as in [lem-sfb-free-bisimplex-projective-resolutions]. Assume on every generator that the transported $P$ boundary is the diagonal alternating coface sum and the transported $Q$ boundary is the separate sum $\\partial_1+(-1)^a\\partial_2$, with terms from zero directions omitted. Let $e:Q\\simeq_h P$ be a fixed homotopy equivalence whose forward map on each $(a,b)$ generator is the signed lattice-path sum of [lem-sfb-universal-shuffle-homotopy-inverse]. Then for any abelian category $\\mathcal C$ there are homotopy equivalences $F_X:D(X)\\simeq_h T(X)$ for all diagrams $X:\\Delta\\times\\Delta\\to\\operatorname{Ch}^{\\geq0}(\\mathcal C)$, with the concrete totals of [def-sfb-bicosimplicial-shuffle-totalizations], such that on each $(n,n,r)$ inclusion their forward maps are exactly the sum over all $\\mu\\subseteq\\{0,\\ldots,n-1\\}$ of the specified shuffle summands. No exactness, projectivity, augmentation, or derived-category data is assumed or concluded here.",
+ "stmt_deps": [
+  "def-sfb-bicosimplicial-shuffle-totalizations",
+  "lem-sfb-free-bisimplex-projective-resolutions",
+  "lem-sfb-universal-shuffle-homotopy-inverse"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application."
+ },
+ "proof": [
+  {
+   "text": "Identify each ULift free representable with the singleton finite-list representable. Enumerate the finite antidiagonal a+b=n by a list of length n+1 and identify its sum with the corresponding finite-list object. Conjugate the given differentials, maps and homotopies along these isomorphisms to the induced full subcategory of finite representable sums. This uses explicit free-group maps on generators and finite biproduct inclusions and projections; it does not choose resolutions.",
+   "uses": [
+    "def-sfb-finite-free-representables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application."
+   }
+  },
+  {
+   "text": "Apply contravariant finite representable matrix totalization to the transported equivalence. Its biproduct and antidiagonal coproduct characterizations identify the evaluated P total with D and the evaluated Q total with T. The assumed generator boundary formulas give diagonal alternating cofaces for P and the separate signed cofaces for Q; the internal sign is (-1)^n. These identifications are chain isomorphisms and carry the evaluated homotopies to actual total homotopies.",
+   "uses": [
+    "lem-sfb-finite-representable-matrix-totalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application."
+   }
+  },
+  {
+   "text": "A lattice path from (0,0) to (a,b) is determined by the subset of its horizontal-step positions, whose complement gives its vertical positions. Its coordinates at vertex i count preceding positions, hence give the two alpha maps. A vertical step before a horizontal step is precisely an inversion (i,j) with i in mu, j in mu-complement, j<i. Reindex the fixed generator formula by these subsets; the matrix entry formula then gives the specified finite-subset sum on every coproduct inclusion. Transport the evaluated inverse and both homotopies along the chain isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-free-representables",
+  "lem-sfb-finite-representable-matrix-totalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of finite sums of representable functors transports homotopy equivalences to total cochain complexes",
+   "results": "{\"t\": \"2026-10-25T04:47:30Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of finite sums of representable functors transports homotopy equivalences to total cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomotopyEquiv_homotopyHomInvId\", \"CategoryTheory.Functor.mapHomotopyEquiv\", \"CategoryTheory.Functor.mapHomotopyEquiv_hom\", \"HomotopyEquiv.rec\", \"HomologicalComplex.mapBifunctorMapHomotopy₁\", \"CochainComplex.mapBifunctor\", \"HomotopyEquiv.hom\", \"CategoryTheory.Equivalence.mapHomologicalComplex_functor\"], \"digest\": \"eb12a24df1fdf99d\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact transfer theorem. mapHomotopyEquiv applies after an additive functor has been supplied; it does not identify evaluation of these universal complexes with the specified diagonal and successive totals. The existing shuffle definitions are reused by moving them, not duplicated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive contravariant functor evaluating finite sums of representables transports a chain homotopy equivalence to a total cochain homotopy equivalence",
+   "results": "{\"t\": \"2026-10-25T04:25:02Z\", \"tool\": \"leanfinder\", \"query\": \"An additive contravariant functor evaluating finite sums of representables transports a chain homotopy equivalence to a total cochain homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomotopyEquiv\", \"instQFactorsThroughHomotopyDown\", \"CochainComplex.cm5b.homotopyEquiv\", \"CategoryTheory.Functor.mapHomotopyEquiv_homotopyHomInvId\", \"instQFactorsThroughHomotopyIntUp\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\", \"CategoryTheory.Functor.mapHomotopyEquiv_homotopyInvHomId\", \"CategoryTheory.Functor.mapHomotopyEquiv_hom\"], \"digest\": \"74f7e82df6fb8fff\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact transfer theorem. mapHomotopyEquiv applies after an additive functor has been supplied; it does not identify evaluation of these universal complexes with the specified diagonal and successive totals. The existing shuffle definitions are reused by moving them, not duplicated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyEquiv\", \"total\"",
+   "results": "{\"t\": \"2026-10-25T04:51:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyEquiv\\\", \\\"total\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact transfer theorem. mapHomotopyEquiv applies after an additive functor has been supplied; it does not identify evaluation of these universal complexes with the specified diagonal and successive totals. The existing shuffle definitions are reused by moving them, not duplicated."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|bicosimplicial|Eilenberg.Zilber",
+   "results": "{\"t\": \"2026-10-25T03:23:12Z\", \"tool\": \"grep\", \"query\": \"shuffle|bicosimplicial|Eilenberg.Zilber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/OpenPartialHomeomorph/Composition.lean\", \"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/CategoryTheory/Monoidal/Comon_.lean\", \"Mathlib/Data/Nat/Totient.lean\", \"Mathlib/Data/Nat/Totient.lean\"], \"digest\": \"cbaf41b1741cd088\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact transfer theorem. mapHomotopyEquiv applies after an additive functor has been supplied; it does not identify evaluation of these universal complexes with the specified diagonal and successive totals. The existing shuffle definitions are reused by moving them, not duplicated."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BicosimplicialShuffleTotalization",
+  "date": "2026-10-25",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application.",
+   "via": [
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.UniversalShuffleEvaluation",
+  "file": "lean/Sheaf/Algebra/Homology/UniversalShuffleEvaluation.lean",
+  "declaration": "AlgebraicTopology.BicosimplicialShuffle.evaluate_universal_shuffle",
+  "statement": "theorem evaluate_universal_shuffle\n    (P Q : ChainComplex (SimplexCategory × SimplexCategory ⥤ AddCommGrpCat.{0}) ℕ)\n    (p : ∀ n : ℕ, P.X n ≅ FreeBisimplex.representable.{0} (⦋n⦌, ⦋n⦌))\n    (q : ∀ n : ℕ, Q.X n ≅ FreeBisimplex.totalTerm.{0} n)\n    (hP : ∀ (n : ℕ) (j : SimplexCategory × SimplexCategory)\n      (α : (⦋n + 1⦌, ⦋n + 1⦌) ⟶ j),\n      (p n).hom.app j ((P.d (n + 1) n).app j\n        ((p (n + 1)).inv.app j (generator α))) =\n      ∑ k : Fin (n + 2), (-1 : ℤ) ^ k.val •\n        generator ((SimplexCategory.δ k, SimplexCategory.δ k) ≫ α))\n    (hQ : ∀ (a b : ℕ) (j : SimplexCategory × SimplexCategory)\n      (α : (⦋a⦌, ⦋b⦌) ⟶ j),\n      (q (a + b - 1)).hom.app j ((Q.d (a + b) (a + b - 1)).app j\n        ((q (a + b)).inv.app j (totalGenerator a b (a + b) rfl j α))) =\n      totalBoundary a b j α)\n    (e : HomotopyEquiv Q P)\n    (hσ : ∀ (a b : ℕ) (j : SimplexCategory × SimplexCategory)\n      (α : (⦋a⦌, ⦋b⦌) ⟶ j),\n      (p (a + b)).hom.app j ((e.hom.f (a + b)).app j\n        ((q (a + b)).inv.app j (totalGenerator a b (a + b) rfl j α))) =\n      shuffleGenerator a b j α) :\n    ∃ F : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ,\n        HomotopyEquiv (diagonalTotal X) (successiveTotal X),\n      ∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ)\n        (n r m : ℕ) (h : n + r = m),\n        diagonalInclusion X n r m h ≫ (F X).hom.f m =\n          ∑ μ : Finset (Fin n), shuffleTerm X n r m h μ",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66fc4",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T060817-L-2374026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66fc4",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T060817-L-2374026",
+  "kind": "interface",
+  "note": "independent cc review: exists_shuffle signature vs clone (identical); 12 moved defs vs clone originals (verbatim); evaluate_universal_shuffle hypotheses vs projective_resolutions/universal_shuffle_homotopy_inverse clauses and sign conventions (pathSign↔shuffleSign, shufflePathArrow↔shuffleSurjection, totalBoundary↔total ε₂); #print axioms exists_shuffle in /tmp sandbox"
+ }
+}

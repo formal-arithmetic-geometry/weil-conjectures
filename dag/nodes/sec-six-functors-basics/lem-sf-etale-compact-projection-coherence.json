@@ -1,0 +1,264 @@
+{
+ "id": "lem-sf-etale-compact-projection-coherence",
+ "kind": "statement",
+ "title": "Ordinary etale compact-support projections: tensor associativity and composition on arbitrary bases",
+ "statement": "Let $A$ be a finite commutative ring. On $D(T_{\\mathrm{et}},A)$ use the ordinary unbounded etale operations of [lem-sf-etale-ambient-adjoint-projection]. For a morphism $f:X\\to Y$ of arbitrary schemes supplied with an open-then-proper factorization, let\n$$q_f(M,P):F_f(M\\otimes_A^Lf^*P)\\xrightarrow{\\sim}F_fM\\otimes_A^LP$$\nbe the inverse of its canonical compactification projection map. It is natural in both $M\\in D(X_{\\mathrm{et}},A)$ and $P\\in D(Y_{\\mathrm{et}},A)$. Write $\\otimes=\\otimes_A^L$, and insert the canonical derived tensor associators and pullback tensor comparisons [lem-kun-inverse-image-monoidal]. For every $M,P,Q$ in these categories the following equality holds, with source $F_f(M\\otimes f^*(P\\otimes Q))$ and target $(F_fM\\otimes P)\\otimes Q$:\n$$q_f(M,P\\otimes Q)=(q_f(M,P)\\otimes1_Q)\\circ q_f(M\\otimes f^*P,Q).$$\nFor $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ and $h=gf$, supply all three morphisms with open-then-proper factorizations. The compact-support comparison of [lem-etale-unbounded-compact-support-composition] can be taken to be the graph-factorization comparison: embed the source compactifications in the product of their proper parts, use the resulting closed immersions into opens, and then proper/open interchange. For this normalized comparison $E:F_h\\xrightarrow{\\sim}F_gF_f$, one has for every $M\\in D(X_{\\mathrm{et}},A)$ and $K\\in D(Z_{\\mathrm{et}},A)$\n$$(E_M\\otimes1_K)\\circ q_h(M,K)=q_g(F_fM,K)\\circ F_g(q_f(M,g^*K))\\circ E_{M\\otimes h^*K}.$$\nThe equation uses the canonical $h^*K\\cong f^*g^*K$. Both identities concern the specified derived morphisms on the entire unbounded categories. No Noetherianity or quasi-compactness of the schemes or the open parts of the factorizations is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3, projection formula and composite counits; agent extraction of the two projection coherence inputs. Compare upstream WeilConjectures/SixFunctors/Etale/Derived/LowerShriekCompositionCoherence.lean, projectionMapAssociativity lines 61-63 and the projection clause of exists_rightDerivedLowerShriekCompIso lines 84-96 (both sorry), and the graph-factorization comparison in LowerShriekComposition.lean, nonempty_iso_rightDerivedLowerShriek_comp lines 309ff."
+ },
+ "stmt_deps": [
+  "lem-sf-etale-ambient-adjoint-projection",
+  "lem-kun-inverse-image-monoidal",
+  "lem-etale-unbounded-compact-support-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write $P_u=u^*$, $R_u=Ru_*$ and $J_j=Dj_!$. Put $\\pi_u$ for the counit-defined forward projection and $\\delta_j$ for the forward open tensor comparison. Thus for $f=rj$ the specified forward compactification projection is $p_f=R_r(\\delta_j)\\circ\\pi_r$ (with pullback composition inserted), and $q_f=p_f^{-1}$. These maps and inverses are bifunctorially natural: the defining unit and counit, the tensor bifunctor and the open comparison are natural in both arguments; invert a naturality square by multiplying by the two inverse components. Invertibility on all unbounded objects is precisely [lem-sf-etale-ambient-adjoint-projection]. The canonical derived pullback constraints are symmetric monoidal and composition-compatible by [lem-sfb-ringed-derived-monoidal-comparisons]; specialize its ringed topoi to constant $A$, so derived module pullback is the exact $u^*$.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection",
+    "def-kun-projection-formula-map",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 0GL1, lemma-j-shriek-and-tensor; the cited canonical monoidal comparison theorem"
+   }
+  },
+  {
+   "text": "For tensor associativity use the proved source theorem projectionMapOfCompactification_assoc on the supplied compactification. Rewrite its pullback comparison using leftDerivedUpperStarTensorIso_hom. Cancel the invertible projection components, reverse their order, and use inv_whiskerRight and functoriality to identify the inverses. Perform this cancellation for a generic coefficient category, and use kernel-checked heterogeneous congruence and the derived tensor object/map APIs to specialize to ModuleCat A without unfolding the large concrete derived monoidal structure. This proves sfEtaleCompactProjectionInverse_associativity with precisely its specified associators.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection",
+    "lem-route-projection-map-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekProjectionAssoc.lean",
+    "place": "projectionMapOfCompactification_assoc; source proof of the associativity node"
+   }
+  },
+  {
+   "text": "Use the proved forward projection composition square for the specified graph compositor, then cancel the three invertible projection maps. Normalize composite maps and use reassociated functoriality to cancel mapped inverse projections.",
+   "uses": [
+    "lem-sf-etale-graph-forward-projection-square",
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-route-projection-map-associativity",
+  "lem-sf-etale-graph-forward-projection-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "E4, 2026-10-25: retain proved naturality and associativity; composition is proved by pasting the separate graph-model and tail projection squares, then cancelling forward projections. The two separate square lemmas remain named holes with their own modules and nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProjectionCompCompatible|projectionMapAssociativity|rightDerivedLowerShriek|projection.*[Aa]ssoc",
+   "results": "{\"t\": \"2026-10-22T06:26:36Z\", \"tool\": \"grep\", \"query\": \"ProjectionCompCompatible|projectionMapAssociativity|rightDerivedLowerShriek|projection.*[Aa]ssoc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Data/Setoid/Partition.lean\", \"Mathlib/Analysis/InnerProductSpace/Projection/Basic.lean\", \"Mathlib/Tactic/Simps/Basic.lean\", \"Mathlib/Tactic/Simps/NotationClass.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Projections.lean\", \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean\"], \"digest\": \"1d8a0b1a760afed0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits are scheme structure-sheaf composition, ordinary module pushforward/restriction, or unrelated projections; none gives compact-support derived projection coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support projection formula natural isomorphisms are compatible with tensor associativity and composition of scheme morphisms",
+   "results": "{\"t\": \"2026-10-22T06:26:36Z\", \"tool\": \"leansearch\", \"query\": \"Derived compact support projection formula natural isomorphisms are compatible with tensor associativity and composition of scheme morphisms\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionMap\"",
+   "results": "{\"t\": \"2026-10-22T06:26:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits are scheme structure-sheaf composition, ordinary module pushforward/restriction, or unrelated projections; none gives compact-support derived projection coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of projection formula isomorphisms for compactly supported direct image on unbounded derived categories with non quasi compact open immersions",
+   "results": "{\"t\": \"2026-10-22T06:26:46Z\", \"tool\": \"leanfinder\", \"query\": \"Coherence of projection formula isomorphisms for compactly supported direct image on unbounded derived categories with non quasi compact open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\"], \"digest\": \"849def063b1fe385\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits are scheme structure-sheaf composition, ordinary module pushforward/restriction, or unrelated projections; none gives compact-support derived projection coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficient etale sheaves on arbitrary schemes admitting compactifications the compact support projection maps respect tensor associativity and compact support composition",
+   "results": "{\"t\": \"2026-10-22T06:26:47Z\", \"tool\": \"leanfinder\", \"query\": \"For finite coefficient etale sheaves on arbitrary schemes admitting compactifications the compact support projection maps respect tensor associativity and compact support composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.comp_appTop_assoc\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\", \"AlgebraicGeometry.Scheme.Hom.comp_appTop_assoc\", \"AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc\", \"AlgebraicGeometry.Scheme.comp_appLE_assoc\", \"AlgebraicGeometry.AffineSpace.homOfVector_over_assoc\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.comp_app_assoc\"], \"digest\": \"919b9a69243c396e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits are scheme structure-sheaf composition, ordinary module pushforward/restriction, or unrelated projections; none gives compact-support derived projection coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|projectionMap|properOpen",
+   "results": "{\"t\": \"2026-10-22T07:59:27Z\", \"tool\": \"grep\", \"query\": \"rightDerivedLowerShriek|projectionMap|properOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of compact support projection maps on unbounded etale derived categories",
+   "results": "{\"t\": \"2026-10-22T07:59:28Z\", \"tool\": \"leansearch\", \"query\": \"Coherence of compact support projection maps on unbounded etale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CompHausLike.precoherent\", \"CompactlySupportedContinuousMap.comp\", \"CompHausLike.LocallyConstant.counit\", \"LightProfinite.proj_comp_transitionMap\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"DerivedCategory.instEssSurjCochainComplexIntQ\"], \"digest\": \"e166a0f6b1b3bc3f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionMap\"",
+   "results": "{\"t\": \"2026-10-22T07:59:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support projection formula is compatible with tensor associativity and composition of morphisms of schemes",
+   "results": "{\"t\": \"2026-10-22T07:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derived compact support projection formula is compatible with tensor associativity and composition of morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.comp_appTop_assoc\", \"AlgebraicGeometry.Scheme.Hom.comp_appTop_assoc\", \"AlgebraicGeometry.Scheme.comp_appLE_assoc\", \"AlgebraicGeometry.Scheme.comp_app_assoc\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\", \"AlgebraicGeometry.Scheme.Hom.comp_app_assoc\"], \"digest\": \"3b7f2dc5ac83ac9f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor projection inverses of a proper direct image after an open extension by zero satisfy the module associativity and composition laws",
+   "results": "{\"t\": \"2026-10-22T08:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor projection inverses of a proper direct image after an open extension by zero satisfy the module associativity and composition laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rTensor.inverse_of_rightInverse\", \"lTensor.inverse\", \"lTensor.inverse_of_rightInverse\", \"rTensor.inverse_of_rightInverse_comp_rTensor\", \"lTensor.inverse_of_rightInverse_comp_lTensor\", \"rTensor.inverse_comp_rTensor\", \"lTensor.toFun\", \"rTensor.toFun\"], \"digest\": \"0ff563f109292e36\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exceptional-tensor-transitivity",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Unit step 3, smooth case; thm-asd-smooth-tensor.proof.md paragraph 3, projection formula followed by the composite counit. Computed ancestor is null: created.item stops at the maintainer-created smooth-dualizing node; the unit named above is the conceptual source, not a repaired provenance edge.",
+   "via": [
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-etale-compact-projection-coherence",
+  "worker": "stage1",
+  "summary": "Kept the statement. Split forward projection associativity and graph-word composition, then inverted the equations. Reused generic ringed projection coherence; added only the arbitrary-base Cartesian etale proper/open tensor square and the explicit proper-open-proper graph model. Retained the computed null ancestor of the broken imported created.item chain, while specifying the conceptual unit and exact proof place.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation step 3 via smooth dualizing invertibility and exceptional tensor transitivity; thm-asd-smooth-tensor proof paragraph 3: both transposes are the projection formula followed by the composite counit.",
+  "tool_uses": [
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-amb-open-projection-composition",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lem-etale-unbounded-compact-support-composition",
+    "why": "Generic ordinary etale/ringed-topos projection, open-extension or graph-comparison tool for the canonical projection calculation. Its stated hypotheses are used directly; it does not replace the unit smooth-purity route."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Step 6 verifies proper graph maps and open pullbacks in the arbitrary-base comparison; this is a scheme-geometric tool and does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Step 6 verifies proper graph maps and open pullbacks in the arbitrary-base comparison; this is a scheme-geometric tool and does not replace the unit route."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Step 6 verifies proper graph maps and open pullbacks in the arbitrary-base comparison; this is a scheme-geometric tool and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-ea972cccd",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-ea972cccd (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item and both new nodes in full; no fixes were needed. Item statement is unchanged from base and the live node is still unsplit (no supersession, no re-split note). Step 3: I re-derived the forward associativity p_f(M,P⊗Q)=p_f(M⊗f*P,Q)∘(p_f(M,P)⊗1) from naturality of π_r, the first ringed-projection identity and step 2's open associativity; inverting gives the stated q equation. Step 2: the open-associativity argument via flat-term representatives and tensor descent is sound, because a map into j_!G is determined on U. Steps 6-7: the geometry checks out (O→X proper by base change hence separated; a and a' proper by the proper-to-separated-target lemma). Step 7's comparison E matches the Lean e1/e3/e2 word in LowerShriekComposition.lean lines 309-380, all squares Cartesian with the right proper and open sides; step 8's inversion is correct. New node proper-open-tensor-square: Γ=R_p(J_kε)R_p(β)η is the Lean exchange (η, bc⁻¹, ε); its invertibility is Stacks 0F7B case (b) for arbitrary schemes, unbounded complexes and a finite (hence torsion) ring. I proved the tensor equation by taking adjuncts: it reduces to the sheaf-level compatibility of β with δ and t; the identity cases i=id and p=id hold. New node locally-closed-graph-model: O1=P×_Y X and O2=U×_Y C; s1, s2, s12 are proper; B1, B12, B2 match Lean eA, eC, eB; it asserts no tensor law, so it does not restate the item. Duplicates checked and ruled out: lem-amb-unbounded-proper-open-interchange and lem-amb-shriek-tensor-composition (Noetherian / separated finite-type, tower-normalized α), lem-pur-pf-refinement-compatibility (pro-étale), lem-asd-compact-support-graph-* (quasi-compact étale), lem-etale-unbounded-compact-support-composition (existence only). The tool_uses are generic ringed/étale projection and comparison nodes plus scheme-property leaves; I accept them (worker-written, maintainer note). No SGA citation. Advisory: step 7 says 'exactly the graph-factorization construction of [lem-etale-unbounded-compact-support-composition]', but that node states only existence; the specific E is fixed by the item's own statement, so this is a wording issue only. Step 6 covers q's properness only as a 'product projection' (it is a base change of ψ)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleCompactProjectionCoherence",
+  "declaration": "AlgebraicGeometry.Etale.sfEtaleCompactProjectionInverse_composition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfEtaleCompactProjectionInverse",
+   "AlgebraicGeometry.Etale.sfEtaleCompactProjectionInverse_naturality_left",
+   "AlgebraicGeometry.Etale.sfEtaleCompactProjectionInverse_naturality_right",
+   "AlgebraicGeometry.Etale.sfEtaleCompactProjectionInverse_associativity",
+   "AlgebraicGeometry.Etale.sfEtaleCompactProjectionInverse_composition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleCompactProjectionCoherence.lean",
+  "statement": "theorem sfEtaleCompactProjectionInverse_composition (A : Type (u + 1)) [CommRing A] [Finite A] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (cf : Compactification f) (cg : Compactification g) (ch : Compactification (f ≫ g)) (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) : sfEtaleCompactProjectionInverse A ch M K ≫ ((derivedTensor (ModuleCat.{u + 1} A) Z).map ((sfGraphCompactSupportCompIso A f g cf cg ch).hom.app M)).app K = (sfGraphCompactSupportCompIso A f g cf cg ch).hom.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj ((L(upperStar (ModuleCat.{u + 1} A) (f ≫ g))).obj K)) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cg).map ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cf).map (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g).hom.app K))) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cg).map (sfEtaleCompactProjectionInverse A cf M ((L(upperStar (ModuleCat.{u + 1} A) g)).obj K)) ≫ sfEtaleCompactProjectionInverse A cg ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cf).obj M) K",
+  "branch": "sheaf-dag",
+  "by": "Q158",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The definition is the inverse of the existing canonical projection, with IsIso supplied by sfEtaleAmbientAdjointProjection. The four theorems state naturality in each variable, tensor associativity, and composition for the explicit sfGraphCompactSupportCompIso, with all associators and pullback constraints inserted. Together they state every clause of the node; no new notion, extra geometric hypothesis or arbitrary comparison is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9f59fbf3",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Read item node, 3 stmt_dep records (identical to live), live SfGraphCompactSupportComposition (the graph-factorization E: P=V×_Z W, open P×_V X, graph comparisons, open over Y, inverse proper/open exchange; no Nonempty choice), projectionMapOfCompactification, leftDerivedUpperStarTensorIso/Comp, Etale derivedTensorAssociator. q = inv of canonical projection with IsIso from sfEtaleAmbientAdjointProjection (not hollow). Naturality, associativity and composition equations match the node clause by clause, with directions of μ_f, α and the h*≅f*g* compositor checked. Finite comm A incl. 0, arbitrary schemes, Compactification only (non-qc opens ok), universes as deps. lean.statement verbatim; only sorry proofs; source/blueprint docstrings and proof steps present; proof-dep modules imported; two proof-only nodes have no lean record. Advisory: leftDerivedUpperStarComp/derivedTensorAssociator have no owning node record; plain Mathlib OpenImmersion import unowned. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T201732-L-2609286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

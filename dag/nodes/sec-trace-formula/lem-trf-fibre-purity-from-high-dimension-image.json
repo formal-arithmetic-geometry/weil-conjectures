@@ -1,0 +1,226 @@
+{
+ "id": "lem-trf-fibre-purity-from-high-dimension-image",
+ "kind": "statement",
+ "title": "Image in the high fibre-dimension locus recovers purity from an upper bound",
+ "statement": "Let $f:X\\to T$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and let $d\\in\\mathbf Z_{\\ge0}$. Suppose every scheme-theoretic fibre $X_t$ [def-pc-scheme-fibre] has topological Krull dimension at most $d$ [def-kun-topological-krull-dimension]. Put\n$$E=\\{x\\in X\\mid\\dim_x(X_{f(x)})\\ge d\\},$$\nusing topological dimension at a point [def-kun-topological-dimension-at-point]. Let $g:T'\\to T$ be any morphism, and form $X'=X\\times_T T'$ [def-pc-fibre-product] with projections $p:X'\\to X$ and $f':X'\\to T'$. If $p(|X'|)\\subseteq E$, then for every $x'\\in X'$,\n$$\\dim_{x'}(X'_{f'(x')})=\\dim_{p(x')}(X_{f(p(x'))})=d,$$\nand every nonempty fibre of $f'$ is pure of dimension $d$ [def-weil-pure-dimension]. In particular every irreducible component of such a fibre has dimension $d$. Empty source or fibres are allowed. No local finite presentation, flatness, separatedness, properness or finite type hypothesis on $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EY2, lemma-descend-dimension-d, proof: final sentence recovering pure fibre dimension from the upper bound and image containment, including the component-generic-point argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-weil-pure-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\prime\\in X\\prime$, and write $x=p(x\\prime)$, $t=f(x)$ and $t\\prime=f\\prime(x\\prime)$. Finite type implies locally finite type, so lem-sc-fibre-dimension-after-base-change applies and gives $\\dim_{x\\prime}(X\\prime_{t\\prime})=\\dim_x(X_t)$. Since $x\\in E$, the right hand side is at least $d$. In the minimum defining $\\dim_x(X_t)$, the whole fibre $X_t$ is an open neighbourhood of $x$, so $\\dim_x(X_t)\\le\\dim X_t\\le d$. Antisymmetry gives both displayed local dimensions equal to $d$. This holds for every $x\\prime$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2, lemma-descend-dimension-d, final two sentences; expanded using morphisms.tex Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)."
+   }
+  },
+  {
+   "text": "Fix $t\\prime\\in T\\prime$ and put $t=g(t\\prime)$. By lem-sc-fibre-dimension-after-base-change the fibre $X\\prime_{t\\prime}$ is $Y_L$, where $Y=X_t$ and $L=\\kappa(t\\prime)$ is an extension of $k=\\kappa(t)$. The structure morphism $Y\\to\\operatorname{Spec}k$ is locally of finite type: by def-pc-scheme-fibre it is the base change of $f$, so apply lem-weil-pbc-lft-base-change. Apply lem-trf-field-extension-component-local-dimension to this $Y$ and $L/k$. For each irreducible component $D$ of $Y_L$, that lemma supplies a generic point $z$ and the equality $\\dim D=\\dim_z(Y_L)$. The preceding step, applied to this point of $X\\prime_{t\\prime}$, makes the latter dimension $d$. Thus every component has dimension $d$, which is precisely pure dimension $d$ by def-weil-pure-dimension. If the fibre or source is empty there are no points or components to check. The invoked base-change statements allow arbitrary $g$ and arbitrary residue-field extension.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-field-extension-component-local-dimension",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2, lemma-descend-dimension-d, last sentence, with its component argument made explicit using morphisms.tex Tag 02FY and varieties.tex Tag 0B1B (lemma-dimension-locally-algebraic, item-dimension-irreducibles-passing-through)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EY2, lemma-descend-dimension-d, final sentence; component-generic-point detail from varieties.tex Tag 0B1B."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism with fibre dimensions bounded above by d has pure d dimensional fibres after any base change whose source image has local fibre dimension at least d",
+   "results": "hits=8; top=['AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange', 'AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme', 'AlgebraicGeometry.instIsPreimmersionFiberι']; note=; digest=0d32a5b85eb64aff. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equidimensional|[Pp]ureDimension|[Dd]imension.*[Ff]iber|[Ff]iber.*[Dd]imension",
+   "results": "hits=1; top=['Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean']; note=; digest=2b027e3be165cb00. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a base changed finite type morphism has local fibre dimension d at every point then all its nonempty fibres are equidimensional of dimension d",
+   "results": "hits=8; top=['AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'Algebra.FiniteType.baseChange', 'AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite', 'AlgebraicGeometry.isAffineHom_isStableUnderBaseChange', 'AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite']; note=; digest=eb135f2530c6ef5c. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDimAt, topologicalKrullDim",
+   "results": "hits=0; top=[]; note=loogle: unknown identifier 'topologicalKrullDimAt'; digest=4f53cda18c2baa0c. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "krullDim|krull.*[Dd]im|[Dd]im.*[Cc]omponent",
+   "results": "hits=5; top=['Mathlib/Topology/KrullDimension.lean', 'Mathlib/Topology/KrullDimension.lean', 'Mathlib/Topology/KrullDimension.lean', 'Mathlib/Topology/KrullDimension.lean', 'Mathlib/Topology/KrullDimension.lean']; note=; digest=e12ee04c2b919575. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equidimensional fibres can be detected by a lower bound on local fibre dimensions together with an upper bound on the dimensions of all fibres after base change",
+   "results": "hits=8; top=['RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.instIsPreimmersionFiberι', 'AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme', 'Algebra.IsStandardSmoothOfRelativeDimension', 'RingHom.IsStandardSmoothOfRelativeDimension']; note=; digest=60d709b2e1530b6a. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\"",
+   "results": "hits=7; top=['topologicalKrullDim', 'IsHomeomorph.topologicalKrullDim_eq', 'topologicalKrullDim_zero_of_discreteTopology', 'Topology.IsInducing.topologicalKrullDim_le', 'topologicalKrullDim_subspace_le', 'PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim', 'AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero']; note=; digest=f76aaf991a7d90f3. Finite-type/base-change and smooth relative-dimension permanence and topological dimension monotonicity do not assert the lower/upper fibre-dimension purity criterion for an arbitrary finite-type morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equidimensional|[Pp]ureDimension|[Dd]imension.*[Ff]iber|[Ff]iber.*[Dd]imension",
+   "results": "hits=1; top=['Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean']; note=; digest=2b027e3be165cb00. Read hits: permanence of finite type and smooth relative dimension, dimension monotonicity, and existence/finiteness of components do not give the local fibre-dimension purity criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If every point of a finite type scheme over a field has the same local topological dimension then its irreducible components have that dimension",
+   "results": "hits=8; top=['AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian', 'AlgebraicGeometry.Scheme.mk.noConfusion', 'irreducibleComponents', 'AlgebraicGeometry.irreducibleSpace_of_isIntegral', 'AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced', 'mem_irreducibleComponent', 'TopologicalSpace.NoetherianSpace.finite_irreducibleComponents', 'irreducibleComponents_eq_singleton']; note=; digest=e2f25250cba8c626. Read hits: permanence of finite type and smooth relative dimension, dimension monotonicity, and existence/finiteness of components do not give the local fibre-dimension purity criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\"",
+   "results": "hits=7; top=['topologicalKrullDim', 'IsHomeomorph.topologicalKrullDim_eq', 'topologicalKrullDim_zero_of_discreteTopology', 'Topology.IsInducing.topologicalKrullDim_le', 'topologicalKrullDim_subspace_le', 'PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim', 'AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero']; note=; digest=f76aaf991a7d90f3. Read hits: permanence of finite type and smooth relative dimension, dimension monotonicity, and existence/finiteness of components do not give the local fibre-dimension purity criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local fibre dimension is unchanged by arbitrary base change for a locally finite type morphism of schemes",
+   "results": "hits=8; top=['AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme', 'AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme']; note=; digest=85d15408cb0b61c8. Read hits: permanence of finite type and smooth relative dimension, dimension monotonicity, and existence/finiteness of components do not give the local fibre-dimension purity criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism with fibre dimensions at most d has equidimensional d dimensional fibres after base change if its image lies in the locus of local fibre dimension at least d",
+   "results": "hits=8; top=['AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.isSmooth_isStableUnderBaseChange', 'RingHom.EssFiniteType.isStableUnderBaseChange']; note=; digest=b09dfc0bc59afa67. Read hits: permanence of finite type and smooth relative dimension, dimension monotonicity, and existence/finiteness of components do not give the local fibre-dimension purity criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-pure-relative-dimension-finite-stage",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: finite-stage descent of the pure relative-dimension condition used in constructing finite-type models. Subsidiary finite-stage descent, final sentence recovering pure fibre dimension from the upper bound and image containment, including the component-generic-point argument.",
+   "via": [
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-trf-marked-curve-finite-type-model",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fibre-purity-from-high-dimension-image",
+  "worker": "stage1",
+  "summary": "Q150: checked Stacks 0EY2 and 02FY, and the field-extension component lemma against 0B1B; proved the local-dimension sandwich and recovered every component dimension. Reused all ingredients; no new nodes or statement changes. Read current blueprint and searched Lean and Mathlib; no attachment or exact Mathlib match.",
+  "blueprint": "lem-trf-local-term-locality, proof (1)--(2), existing subsidiary finite-stage-model chain recorded in blueprint.from.via; this item realizes the last sentence of Stacks 0EY2 used in that chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic local fibre-dimension base-change equality and residue-field fibre identification, Stacks 02FY; does not replace the trace-formula unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic permanence of locally finite type for the fibre over a residue field; no local node of the unit is needed to duplicate this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-ab2f37f17",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-ab2f37f17 (reviewer sub-agent of L); spot-checked: PASS with no fixes, no new nodes and nothing dropped; review.md is written. One commit; the item's statement and stmt_deps are identical to live and side-live (both unsplit, no proof); there is no repair note and no SGA citation. Source: Stacks 0EY2 (limits.tex 4587-4613), whose last sentence asks for purity, and that is what the item proves; the parent lem-trf-pure-relative-dimension-finite-stage step 5 uses exactly this, since E = complement of {dim_x ≤ d-1} = {dim_x ≥ d}. Step 1: lem-sc-fibre-dimension-after-base-change matches 02FY(1) (morphisms.tex 5425-5437) for f locally of finite type and any g; the minimum in def-kun-topological-dimension-at-point with U = X_t gives dim_x(X_t) ≤ d; x in E gives ≥ d. Step 2: lem-sc identifies X'_{t'} with Y_L; def-pc-scheme-fibre plus lem-weil-pbc-lft-base-change (Mathlib leaf, 01T4) make Y lft over κ(t); lem-trf-field-extension-component-local-dimension gives dim D = dim_z(Y_L) at each component's generic point z (consistent with varieties 0B1B: only D passes through z), and step 1 makes this d. That is def-weil-pure-dimension. Small cases checked: empty, d=0, A¹ ⊔ pt with d=1, meeting components of unequal dimension. Not duplicates: lem-trf-pure-base-change-constructible-image (the converse), lem-trf-relative-dimension-base-change (assumes f pure), lem-trf-geometric-pure-fibre-point-dimension, and the field-extension lemma (no image condition). Accepted tool_uses: lem-sc-fibre-dimension-after-base-change (generic 02FY); lem-weil-pbc-lft-base-change is a Mathlib leaf, so its entry is not needed but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibrePurityFromHighDimensionImage",
+  "declaration": "AlgebraicGeometry.fibre_purity_from_high_dimension_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibrePurityFromHighDimensionImage.lean",
+  "statement": "theorem fibre_purity_from_high_dimension_image {X T T' : Scheme.{u}} (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) (hupper : ∀ t : T, topologicalKrullDim (f.fiber t) ≤ (d : WithBot ℕ∞)) (g : T' ⟶ T) (himage : Set.range (pullback.fst f g) ⊆ {x : X | (d : WithBot ℕ∞) ≤ topologicalKrullDimAt (f.asFiber x)}) : (∀ x' : ↥(pullback f g), topologicalKrullDimAt ((pullback.snd f g).asFiber x') = topologicalKrullDimAt (f.asFiber (pullback.fst f g x')) ∧ topologicalKrullDimAt (f.asFiber (pullback.fst f g x')) = (d : WithBot ℕ∞)) ∧ (∀ t' : T', Nonempty ((pullback.snd f g).fiber t') → ((pullback.snd f g).fiber t').IsPureDimension d)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df15eaa96",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read node, Stacks 0EY2 proof (limits.tex 4585-4613), all 7 stmt_dep records and exact declarations (Scheme.Hom.fiber/asFiber Mathlib Fiber.lean, IsPureDimension side-live PureDimension.lean:29, topologicalKrullDimAt KrullDimension.lean:343). Lean matches every clause: finite type = LocallyOfFiniteType+QuasiCompact, hupper over all fibres, E via topologicalKrullDimAt (f.asFiber x), arbitrary g, Set.range pullback.fst ⊆ E, chained equality dim_{x'}=dim_{p x'}=d, nonempty fibres IsPureDimension d. No extra hypotheses, universes bound, node differs from live only in lean, statement verbatim in file, sorry-only, docstrings with source and blueprint tag. Edge cases (empty, d=0, A1⊔pt, plane∪line) fine. No duplicate declaration. Private proof-dep import harmless. No findings; not recompiled (no change)."
+ }
+}

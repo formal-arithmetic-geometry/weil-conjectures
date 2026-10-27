@@ -1,0 +1,270 @@
+{
+ "id": "lem-fd-ringed-flat-single-tensor-cohomology",
+ "kind": "statement",
+ "title": "Flat degree-zero tensor commutes with cohomology on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site small relative to the universe of module sheaves, and let $R$ be a sheaf of commutative rings. Use the abelian category $\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category], its unbounded derived category $Q:\\operatorname{CoCh}(R)\\to D(R)$ and cohomology functors [def-weil-abstract-derived-category], ordinary sheaf tensor [def-pur-sheaf-tensor-product], and signed direct-sum total tensor [def-pc-tensor-complex-sheaves]. Give $D(R)$ the K-flat derived tensor and its canonical localization comparisons [lem-weil-pbc-site-derived-tensor-descent]. Let $L$ be a flat $R$-module sheaf, meaning $F_L=(-)\\otimes_R L$ is exact [def-pc-flat-sheaf-modules], and write $L[0]$ for its degree-zero complex or its image under $Q$. Then $L[0]$ is K-flat [def-pc-kflat-complex] and has flat terms. For every unbounded cochain complex $C$, the canonical degreewise identification of $\\operatorname{Tot}(C\\otimes_R L[0])$ with $(C^n\\otimes_R L,d_C^n\\otimes1_L)_n$ induces isomorphisms\n$$c^i_{C,L}:H^i(\\operatorname{Tot}(C\\otimes_R L[0]))\\xrightarrow{\\sim}H^i(C)\\otimes_R L.$$\nThey are induced by the exact tensor identifications of cycles and boundaries, and are natural in cochain maps $C\\to C'$ and arbitrary module maps $L\\to L'$ between flat sheaves. For every $K\\in D(R)$ there are isomorphisms\n$$\\gamma^i_{K,L}:\\mathcal H^i(K\\otimes_R^{\\mathbf L}L[0])\\xrightarrow{\\sim}\\mathcal H^i(K)\\otimes_R L\\qquad(i\\in\\mathbf Z),$$\nnatural simultaneously in $K$ and maps between flat $L$. Their normalization is as follows: if $K=QC$ and $p:P\\to C$ is any flat-term K-flat resolution, $\\gamma^i_{QC,L}$ is, under the canonical derived-tensor model comparison, the composite of $c^i_{P,L}$ and $H^i(p)\\otimes1_L$. It is independent of the resolution. No boundedness, constructibility or Tor-amplitude hypothesis on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor and preceding localization construction, flat degree-zero specialization; the cycle-quotient comparison and its simultaneous naturality are the agent-extracted arguments of lem-fd-flat-constructible-tensor, returned proof steps 1-2."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sf-ringed-kflat-tensor-representative-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved flat-single derived normalization theorem to obtain K-flatness and flat terms of L[0]. Transfer exactness of the defining site tensor to tensorRight L by siteSheafTensorRightIso. The existing mapBifunctorSingle₂Iso identifies total tensor with termwise tensor. Compose its image under homology with ShortComplex.mapHomologyIso to define c. ShortComplex.mapCyclesIso and the left homology data quotient equation give exactly the two cycle equations.",
+   "uses": [
+    "lem-pur-flat-single-derived-normalization",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check naturality of mapBifunctorSingle₂Iso on each direct-sum summand. If the second degree is nonzero its source is zero. On (i,0), functoriality and naturality of the single degree-zero identification give the desired square for f and g. Apply homology. ShortComplex.mapHomologyIso_hom_naturality handles f, and ShortComplex.homologyMap_mapNatTrans handles the natural transformation tensorRight L to tensorRight L' given by g. Their composition is simultaneous cochain naturality of c.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fixed-K-flat tensor triangulated descent to L[0] and invert its right comparison to obtain a with the stated representativeIso normalization. For g compare the two natural transformations on K-flat flat-term complexes P: the left fixed-factor comparison for P is natural in L[0], so its inverse gives equality there. For arbitrary K choose a K-flat flat-term quasi-isomorphism P to K. Naturality and cancellation of the invertible image of that quasi-isomorphism extend equality to K.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived cohomology to a, then the cohomology factorization isomorphism and c, and finally inverse tensor of the source cohomology factorization. This is a natural isomorphism after restriction along Q. Extend it using Localization.liftNatIso to define gamma. The lift value on QK and cancellation give the displayed representative equation. Naturality in g follows after restriction along Q from the a and c squares; Localization.natTrans_ext extends it to every derived object.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of gamma to Qp. Replace representativeIso.hom by a.inv on P using normalization, and use the representative equation for gamma at P to cancel a.hom with a.inv. Naturality of homologyFunctorFactors.inv for p gives the final formula. This holds for every specified resolution p, proving independence without a map between resolutions.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-flat-single-derived-normalization",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS and the localization preceding Tag 06YU; homology.tex Tag 010N. S3 reuses the proved flat-single normalization and fixed-factor descent; simultaneous naturality and the final resolution calculation are explicit Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*(single|homology|cohomology)|((single|homology|cohomology).*flat)",
+   "results": "25 hits: Mathlib/RingTheory/PicardGroup.lean, Mathlib/Geometry/Convex/ConvexSpace/Defs.lean, Mathlib/Geometry/Convex/ConvexSpace/Defs.lean, Mathlib/Geometry/Convex/ConvexSpace/Defs.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module-flat exactness and projective-resolution Tor do not state an unbounded ringed-site derived tensor cohomology comparison natural in both factors; exact-functor cohomology is already reused as lem-weil-pbc-exact-functor-complex-cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\", \"homology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module-flat exactness and projective-resolution Tor do not state an unbounded ringed-site derived tensor cohomology comparison natural in both factors; exact-functor cohomology is already reused as lem-weil-pbc-exact-functor-complex-cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived tensor with a flat sheaf of modules is ordinary tensor of cohomology",
+   "results": "8 hits: Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.ker_lTensor_eq, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.lTensor_shortComplex_exact, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, LinearMap.kerLTensorEquivOfSurjective",
+   "date": "2026-10-22",
+   "verdict": "no match: module-flat exactness and projective-resolution Tor do not state an unbounded ringed-site derived tensor cohomology comparison natural in both factors; exact-functor cohomology is already reused as lem-weil-pbc-exact-functor-complex-cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ringed site and any flat sheaf L, tensoring an unbounded derived complex with L in degree zero commutes naturally with cohomology in both variables",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_map_app, Rep.torIso, CategoryTheory.Tor_obj, CategoryTheory.Tor_map, Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: module-flat exactness and projective-resolution Tor do not state an unbounded ringed-site derived tensor cohomology comparison natural in both factors; exact-functor cohomology is already reused as lem-weil-pbc-exact-functor-complex-cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact tensor functor on module sheaves commutes with cohomology and its derived localization comparison is natural in maps between flat sheaves",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Rep.Tor_map, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, Rep.Tor",
+   "date": "2026-10-22",
+   "verdict": "no match: module-flat exactness and projective-resolution Tor do not state an unbounded ringed-site derived tensor cohomology comparison natural in both factors; exact-functor cohomology is already reused as lem-weil-pbc-exact-functor-complex-cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "(homology.*(tensor|exact)|tensor.*homology|mapHomologicalComplex.*homology)",
+   "results": "25 hits: Mathlib/Algebra/Homology/ExactSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module-flat exactness and projective-resolution Tor do not state an unbounded ringed-site derived tensor cohomology comparison natural in both factors; exact-functor cohomology is already reused as lem-weil-pbc-exact-functor-complex-cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor.*(homology|cohomology)|homology.*tensor|QObjTensorSingle)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctorIso\"",
+   "results": "8 hits: CategoryTheory.ShortComplex.homologyFunctorIso, CategoryTheory.ShortComplex.leftHomologyFunctorIso, CategoryTheory.ShortComplex.rightHomologyFunctorIso, HomologicalComplex.homologyFunctorIso, HomologicalComplex.homologyFunctorIso', HomologicalComplex.homologyFunctorIso_hom_app, HomologicalComplex.homologyFunctorIso_inv_app, DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat sheaf tensor exact functor cohomology unbounded derived category natural comparison",
+   "results": "8 hits: Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site and a flat module sheaf L, the cohomology of K derived tensor L equals cohomology of K tensor L, naturally in unbounded K and flat L",
+   "results": "8 hits: Module.Flat.lTensor_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|QObjTensorSingle|tensor.*[Ff]lat",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functors commute with homology of complexes and tensoring with a flat object in degree zero computes unbounded derived tensor",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|homologyMap_mapNatTrans|app_homology",
+   "results": "8 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give module tensor exactness, projective Tor, or the exact-functor cohomology comparison already reused as an existing Mathlib leaf; none gives the full unbounded ringed-site statement with the specified derived tensor normalization and both-variable naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-flat-constructible-tensor",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-prop-well-defined",
+ "blueprint": {
+  "from": {
+   "node": "thm-fd-transform-well-defined",
+   "place": "Proof first sentence: tensoring with the lisse rank-one kernel; the flat degree-zero cohomology computation in lem-fd-flat-constructible-tensor steps 1-2.",
+   "via": [
+    "lem-fd-flat-constructible-tensor"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-ringed-flat-single-tensor-cohomology",
+  "worker": "stage1",
+  "summary": "Q109 reuses the existing exact-functor cohomology Mathlib leaf and one-sided K-flat tensor normalization theorem. Six steps give the degree-zero totalization, canonical cycle-quotient comparison, explicit naturality for arbitrary maps between flat sheaves, K-flatness, localization to all derived morphisms, and the resolution normalization. No new nodes or statement changes.",
+  "blueprint": "thm-fd-transform-well-defined, proof first sentence: tensoring with the lisse rank-one kernel, as isolated by lem-fd-flat-constructible-tensor proof steps 1–2; the present item proves the flat degree-zero cohomology ingredient without boundedness.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic additivity and bifunctoriality of ordinary module-sheaf tensor, used for zero summands and natural maps; the Fourier unit supplies no such categorical infrastructure."
+   },
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Generic canonical comparison of the specified K-flat derived tensor with ordinary tensor by a fixed flat-term K-flat factor, including both-variable naturality; it implements the same tensor calculation, not a replacement Fourier route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions for arbitrary unbounded complexes, needed to ensure the normalization applies to every representative; the Fourier unit does not construct resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic K-flat derived tensor on a ringed site: Step 4 checks membership of L[0] in its resolving subcategory of flat-term K-flat complexes and Step 5 uses its specified two-sided comparison; it is the item's own derived-tensor notion (stmt_dep), and the Fourier unit constructs no derived tensor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-fdf3cd9a7",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-fdf3cd9a7 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full against every cited statement and against Stacks 06YL/06YN/06YQ/06YS/06YU (sites-cohomology.tex lines 3120–3310) and homology.tex 010N (line 1545). The item is not on the side-live route-pivot drop list and is still unsplit live, so nothing supersedes it. It has no repair note and no new nodes, and no SGA source is used. Step 1: in degree n only the (n,0) summand of Tot(C⊗L[0]) is nonzero, and the differential reduces to d_C⊗1 because d_{L[0]}=0; this holds for unbounded C. Step 2: L flat means F_L is exact, and the exact-functor leaf gives c^i together with the cycle and boundary compatibilities. Step 3: I checked the naturality in an arbitrary u:L→L' term by term. Cancelling the cycle inclusion (a mono) gives Z(τ)k_L=k_{L'}τ_Z, and then cancelling the epi q_L k_L gives the naturality square; no assumption on u is needed. Step 4: L[0] is K-flat with flat terms. Here A⊗L[0] puts L[0] on the right, matching the K-flat definition, and 0 is flat. Step 5: the right-factor form of lem-trf-site-one-sided-tensor-normalization gives a natural in C and in maps of the fixed factor. Localization (2) lifts b and its inverse, and (3) makes the u-square commute on all of D(R). Step 6: a_P=δ^{-1} because P and L[0] lie in P_R, so m=(Qp⊗1)δ is exactly the item's model comparison. Then γH^i(m)=(H^i p⊗1)c_P, which also gives independence of the resolution. Edge cases checked: L=0, L=R, acyclic C, C unbounded in both directions, u=0, and the nonflat R=Z, L=Z/2 (flatness is a hypothesis and is never dropped). Accepted tool uses: lem-pc-sheaf-modules-tensor-closed, lem-pc-kflat-resolution and lem-trf-site-one-sided-tensor-normalization. FIX: lem-weil-pbc-site-derived-tensor-descent (unit sk-thm-properbasechange, off-route) is cited in Steps 4–5 but was not declared. I added it to split_report.tool_uses as the generic derived-tensor notion; it is also the item's stmt_dep. Nothing else changed. Maintainer note: the existing unsplit lem-pur-flat-single-derived-normalization overlaps this item in its per-degree K-naturality clause but lacks naturality in L. This is not a fault of the delivery, but it is a candidate to cite this item once it is split.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedFlatSingleTensorCohomology",
+  "declaration": "SheafOfModules.FlatSingleTensor.ringed_flat_single_tensor_cohomology",
+  "declarations": [
+   "SheafOfModules.FlatSingleTensor.degreeZero",
+   "SheafOfModules.FlatSingleTensor.totalRight",
+   "SheafOfModules.FlatSingleTensor.termwiseRight",
+   "SheafOfModules.FlatSingleTensor.degreeComparison",
+   "SheafOfModules.FlatSingleTensor.totalMap",
+   "SheafOfModules.FlatSingleTensor.derivedRight",
+   "SheafOfModules.FlatSingleTensor.derivedMap",
+   "SheafOfModules.FlatSingleTensor.ringed_flat_single_tensor_cohomology"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedFlatSingleTensorCohomology.lean",
+  "statement": "theorem ringed_flat_single_tensor_cohomology {S : Type u} [Category.{v} S] [EssentiallySmall.{r} S] {J : GrothendieckTopology S} (R : Sheaf J CommRingCat.{r}) [HasDerivedCategory.{w} (Modules R)] : ∃ hs : ∀ (L : Modules R), IsFlatOnSite (J := J) (R := R) L → CochainComplex.IsKFlatIndependentCoefficients ((degreeZero R).obj L) ∧ ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (((degreeZero R).obj L).X n), ∃ a : ∀ (L : Modules R), IsFlatOnSite (J := J) (R := R) L → ((DerivedCategory.Q ⋙ derivedRight R L) ≅ (totalRight R L ⋙ DerivedCategory.Q)), ∃ c : ∀ (L : Modules R), IsFlatOnSite (J := J) (R := R) L → ∀ (K : CochainComplex (Modules R) ℤ) (i : ℤ), ((totalRight R L).obj K).homology i ≅ K.homology i ⊗ L, ∃ gamma : ∀ (L : Modules R), IsFlatOnSite (J := J) (R := R) L → ∀ i : ℤ, ((derivedRight R L ⋙ DerivedCategory.homologyFunctor (Modules R) i) ≅ (DerivedCategory.homologyFunctor (Modules R) i ⋙ tensorRight L)), (∀ (L : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (P : CochainComplex (Modules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (hPf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)), (a L hL).app P = (representativeIso R P ((degreeZero R).obj L) hP (hs L hL).1 hPf (hs L hL).2).symm) ∧ (∀ (L L' : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (hL' : IsFlatOnSite (J := J) (R := R) L') (g : L ⟶ L') (K : CochainComplex (Modules R) ℤ), (a L hL).hom.app K ≫ DerivedCategory.Q.map (totalMap R (𝟙 K) g) = derivedMap R (𝟙 (DerivedCategory.Q.obj K)) g ≫ (a L' hL').hom.app K) ∧ (∀ (L : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (K : CochainComplex (Modules R) ℤ) (i : ℤ), ∃ z : ((termwiseRight R L).obj K).cycles i ≅ K.cycles i ⊗ L, z.hom ≫ (K.iCycles i ▷ L) = ((termwiseRight R L).obj K).iCycles i ∧ ((termwiseRight R L).obj K).homologyπ i ≫ HomologicalComplex.homologyMap (degreeComparison R L K).inv i ≫ (c L hL K i).hom = z.hom ≫ (K.homologyπ i ▷ L)) ∧ (∀ (L L' : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (hL' : IsFlatOnSite (J := J) (R := R) L') (K K' : CochainComplex (Modules R) ℤ) (f : K ⟶ K') (g : L ⟶ L') (i : ℤ), HomologicalComplex.homologyMap (totalMap R f g) i ≫ (c L' hL' K' i).hom = (c L hL K i).hom ≫ (HomologicalComplex.homologyMap f i ⊗ₘ g)) ∧ (∀ (L L' : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (hL' : IsFlatOnSite (J := J) (R := R) L') (g : L ⟶ L') (K : DerivedCategory (Modules R)) (i : ℤ), (DerivedCategory.homologyFunctor (Modules R) i).map (derivedMap R (𝟙 K) g) ≫ (gamma L' hL' i).hom.app K = (gamma L hL i).hom.app K ≫ (𝟙 ((DerivedCategory.homologyFunctor (Modules R) i).obj K) ⊗ₘ g)) ∧ (∀ (L : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (K : CochainComplex (Modules R) ℤ) (i : ℤ), (DerivedCategory.homologyFunctor (Modules R) i).map ((a L hL).hom.app K) ≫ (DerivedCategory.homologyFunctorFactors (Modules R) i).hom.app ((totalRight R L).obj K) ≫ (c L hL K i).hom = (gamma L hL i).hom.app (DerivedCategory.Q.obj K) ≫ ((DerivedCategory.homologyFunctorFactors (Modules R) i).hom.app K ▷ L)) ∧ (∀ (L : Modules R) (hL : IsFlatOnSite (J := J) (R := R) L) (P K : CochainComplex (Modules R) ℤ) (p : P ⟶ K) (_hp : QuasiIso p) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (hPf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) (i : ℤ), (DerivedCategory.homologyFunctor (Modules R) i).map ((representativeIso R P ((degreeZero R).obj L) hP (hs L hL).1 hPf (hs L hL).2).hom ≫ derivedMap R (DerivedCategory.Q.map p) (𝟙 L)) ≫ (gamma L hL i).hom.app (DerivedCategory.Q.obj K) = (DerivedCategory.homologyFunctorFactors (Modules R) i).hom.app ((totalRight R L).obj P) ≫ (c L hL P i).hom ≫ (HomologicalComplex.homologyMap p i ▷ L) ≫ ((DerivedCategory.homologyFunctorFactors (Modules R) i).inv.app K ▷ L))",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b16958a4d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 8227750904f5. Node differs only in stmt_deps: theorem lem-weil-pbc-kflat-fixed-tensor-triangulated replaced by landed existing:true def-sf-ringed-kflat-tensor-representative-data (snapshot record identical to live; owns exactly Modules/ordinaryTensor/totalTensor/derivedTensor/representativeIso used here); 7 base stmt_deps retained. Lean diff is imports only: stmt_dep modules now direct public imports (incl. BifunctorSingle, HomologySequence for signature decls), SiteOneSidedTensorNormalization plain proof import (H9 advisory resolved). Statement re-read clause by clause: independent universes u,v,r,w; IsFlatOnSite = exactness of the sheafified right tensor; L[0] K-flat with flat terms; a natural iso pinned to representativeIso.symm on flat-term K-flat P, g-natural for arbitrary g; c pinned by unique cycle iso (iCycles ▷ L mono) and homologyπ equation via mapBifunctorSingle₂Iso, natural in f and g simultaneously; gamma natural iso on D(R), g-square, tied to H(a) and c via homologyFunctorFactors; normalization for every flat-term K-flat resolution gives resolution independence; no boundedness hypotheses. lean.statement verbatim in file, 8 declarations present, single sorry, source and blueprint docstrings carry six proof steps. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261023T131759-L-2151031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

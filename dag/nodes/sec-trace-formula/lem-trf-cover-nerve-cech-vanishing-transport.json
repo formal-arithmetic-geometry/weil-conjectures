@@ -1,0 +1,204 @@
+{
+ "id": "lem-trf-cover-nerve-cech-vanishing-transport",
+ "kind": "statement",
+ "title": "Cech vanishing transfers along compatible covering-nerve comparisons",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology], with coefficients and covering index sets in the common universe [def-weil-size-convention], and let $u:\\mathcal C\\to\\mathcal D$ be a functor. Let $\\mathcal U=\\{f_t:U_t\\to U\\}_{t\\in T}$ be a covering and assume that $u(\\mathcal U)=\\{u(f_t):u(U_t)\\to u(U)\\}_{t\\in T}$ is a covering. Choose tuple fibre products $W_{\\mathbf t}$ in $\\mathcal C$ and $P_{\\mathbf t}$ in $\\mathcal D$ and their omitting-factor projections as in [def-weil-pbc-site-cech-complex]. Suppose there are isomorphisms $c_{\\mathbf t}:u(W_{\\mathbf t})\\xrightarrow{\\sim}P_{\\mathbf t}$ for every tuple of positive length such that, whenever $\\delta_{W,j}:W_{\\mathbf t}\\to W_{\\mathbf t\\setminus t_j}$ and $\\delta_{P,j}:P_{\\mathbf t}\\to P_{\\mathbf t\\setminus t_j}$ omit one factor of a tuple of length at least two, $$c_{\\mathbf t\\setminus t_j}\\circ u(\\delta_{W,j})=\\delta_{P,j}\\circ c_{\\mathbf t}.$$ Let $F:\\mathcal C^{op}\\to\\mathrm{Ab}$ and $G:\\mathcal D^{op}\\to\\mathrm{Ab}$ be abelian presheaves, and let $e:F\\xrightarrow{\\sim}G\\circ u^{op}$ be a natural isomorphism of abelian presheaves. For every integer $p>0$, one has $$\\check H^p(u(\\mathcal U),G)=0\\quad\\Longrightarrow\\quad\\check H^p(\\mathcal U,F)=0,$$ where both Cech cohomology groups are defined by the chosen alternating restriction complexes [def-weil-pbc-site-cech-complex]. Neither presheaf is required to be a sheaf or injective; continuity and cocontinuity are not assumed beyond the displayed hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof: the Cech-cohomology comparison and vanishing following the displayed fibre-product identity; the comparison argument isolated for abelian presheaves with a natural coefficient isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Write $A^n=\\prod_{\\mathbf t\\in T^{n+1}}F(W_{\\mathbf t})$ and $B^n=\\prod_{\\mathbf t\\in T^{n+1}}G(P_{\\mathbf t})$ for the degree-$n$ cochains of [def-weil-pbc-site-cech-complex]. Contravariance gives $G(c_{\\mathbf t}^{-1}):G(uW_{\\mathbf t})\\to G(P_{\\mathbf t})$. Define $a_{\\mathbf t}=G(c_{\\mathbf t}^{-1})\\circ e_{W_{\\mathbf t}}$ and $b_{\\mathbf t}=e_{W_{\\mathbf t}}^{-1}\\circ G(c_{\\mathbf t})$. Functoriality and the inverse identities for $c$ and $e$ give $a_{\\mathbf t}b_{\\mathbf t}=1$ and $b_{\\mathbf t}a_{\\mathbf t}=1$. Thus $(A_n s)_{\\mathbf t}=a_{\\mathbf t}(s_{\\mathbf t})$ and $(B_n r)_{\\mathbf t}=b_{\\mathbf t}(r_{\\mathbf t})$ are mutually inverse group homomorphisms $A^n\\rightleftarrows B^n$ for every $n\\ge0$. In negative degrees use the unique maps between zero groups.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed Cech comparison; explicit componentwise comparison argument."
+   }
+  },
+  {
+   "text": "For a tuple $\\mathbf t$ of length at least two, put $\\mathbf s=\\mathbf t\\setminus t_j$. The assumed face square gives $u(\\delta_{W,j})\\circ c_{\\mathbf t}^{-1}=c_{\\mathbf s}^{-1}\\circ\\delta_{P,j}$. Applying the contravariant functor $G$ yields $G(c_{\\mathbf t}^{-1})G(u(\\delta_{W,j}))=G(\\delta_{P,j})G(c_{\\mathbf s}^{-1})$. Naturality of $e$ says $e_{W_{\\mathbf t}}F(\\delta_{W,j})=G(u(\\delta_{W,j}))e_{W_{\\mathbf s}}$. Combining these two equalities gives $a_{\\mathbf t}F(\\delta_{W,j})=G(\\delta_{P,j})a_{\\mathbf s}$. Sum this equality with the signs $(-1)^j$ in the differential formula of [def-weil-pbc-site-cech-complex], using additivity of each $a_{\\mathbf t}$. Hence $A_{n+1}d_A^n=d_B^nA_n$ for $n\\ge0$. Multiplying by the inverse degree maps gives $d_A^nB_n=B_{n+1}d_B^n$.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed Cech comparison; explicit componentwise comparison argument."
+   }
+  },
+  {
+   "text": "Fix $p>0$ and suppose $\\check H^p(u(\\mathcal U),G)=0$. By the kernel/image definition in [def-weil-pbc-site-cech-complex], every $d_B$-cocycle of degree $p$ is $d_B^{p-1}r$ for some $r\\in B^{p-1}$: its class in $\\ker d_B^p/\\operatorname{im}d_B^{p-1}$ is zero. For any $z\\in A^p$ with $d_A^pz=0$, Step 2 gives $d_B^pA_pz=0$, so choose $r$ with $d_B^{p-1}r=A_pz$. Then $d_A^{p-1}(B_{p-1}r)=B_pd_B^{p-1}r=B_pA_pz=z$. Every $A$-cocycle is therefore a boundary, and the same quotient definition gives $\\check H^p(\\mathcal U,F)=0$. Here $p-1\\ge0$; only the stipulated face compatibility, coefficient naturality, and group operations were used.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed Cech comparison; explicit componentwise comparison argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X, lemma-pullback-injective-pre-limp: expanding its displayed Cech comparison using the component formulas of 03AK/03AM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology vanishing transfers from a cover to its pullback presheaf when a functor identifies all iterated covering intersections and face maps",
+   "results": "{\"t\": \"2026-10-22T06:44:50Z\", \"tool\": \"leanfinder\", \"query\": \"Cech cohomology vanishing transfers from a cover to its pullback presheaf when a functor identifies all iterated covering intersections and face maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj\", \"CategoryTheory.Meq.pullback_refine\", \"CategoryTheory.Meq.pullback_apply\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda\"], \"digest\": \"4fe68086b455beec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the sheaf condition, Mayer-Vietoris squares, formal-coproduct Cech objects or unrelated complex exactness; no hit transfers vanishing for these chosen covering complexes across a site functor and a coefficient isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"homology\"",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the sheaf condition, Mayer-Vietoris squares, formal-coproduct Cech objects or unrelated complex exactness; no hit transfers vanishing for these chosen covering complexes across a site functor and a coefficient isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech).*([Ii]so|[Ee]xact|[Pp]recomp)|[Pp]recomp.*([Cc]ech|[Aa]cyclic)",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"grep\", \"query\": \"(cech|Cech).*([Ii]so|[Ee]xact|[Pp]recomp)|[Pp]recomp.*([Cc]ech|[Aa]cyclic)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"digest\": \"cedde1f356dd46f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the sheaf condition, Mayer-Vietoris squares, formal-coproduct Cech objects or unrelated complex exactness; no hit transfers vanishing for these chosen covering complexes across a site functor and a coefficient isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex of a precomposed abelian presheaf is acyclic when the image covering complex is acyclic and the functor preserves the covering nerve",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"leansearch\", \"query\": \"The Cech complex of a precomposed abelian presheaf is acyclic when the image covering complex is acyclic and the functor preserves the covering nerve\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport exactness of an alternating restriction cochain complex along compatible isomorphisms of all iterated intersections in a covering family",
+   "results": "{\"t\": \"2026-10-22T06:44:51Z\", \"tool\": \"leanfinder\", \"query\": \"Transport exactness of an alternating restriction cochain complex along compatible isomorphisms of all iterated intersections in a covering family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.exactAt_of_isLE\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"ChainComplex.alternatingConst_exactAt\", \"CochainComplex.ConnectData.restrictionGEIso\", \"CochainComplex.exactAt_of_isGE\", \"CochainComplex.isLE_iff\", \"CochainComplex.ConnectData.restrictionLEIso_hom_f\", \"CochainComplex.isGE_iff\"], \"digest\": \"a6e84787d145bda2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the sheaf condition, Mayer-Vietoris squares, formal-coproduct Cech objects or unrelated complex exactness; no hit transfers vanishing for these chosen covering complexes across a site functor and a coefficient isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech).*([Ii]so|[Ee]xact|[Pp]recomp)|[Pp]recomp.*([Cc]ech|[Aa]cyclic)",
+   "results": "{\"t\": \"2026-10-23T14:52:05Z\", \"tool\": \"grep\", \"query\": \"(cech|Cech).*([Ii]so|[Ee]xact|[Pp]recomp)|[Pp]recomp.*([Cc]ech|[Aa]cyclic)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"digest\": \"cedde1f356dd46f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal-coproduct/arrow Cech nerve isomorphisms require their own constructions and do not state this general-site coefficient comparison; sheaf comparison and group cohomology hits have different objects or hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms of covering nerves and natural isomorphisms of abelian presheaves induce the same Cech cohomology vanishing",
+   "results": "{\"t\": \"2026-10-23T14:52:05Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms of covering nerves and natural isomorphisms of abelian presheaves induce the same Cech cohomology vanishing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCoverDense.Types.sheafIso\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.piInters.isoOfIso\", \"CategoryTheory.Functor.IsCoverDense.presheafIso\", \"CategoryTheory.Functor.IsCoverDense.sheafIso\", \"CategoryTheory.Functor.IsCoverDense.Types.presheafIso\", \"CategoryTheory.Functor.IsCoverDense.sheafIso_hom_val\", \"CategoryTheory.GrothendieckTopology.OneHypercover.isoMk\", \"CategoryTheory.Functor.IsCoverDense.Types.sheafIso_hom_val\"], \"digest\": \"ce7c711ced0bfdba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal-coproduct/arrow Cech nerve isomorphisms require their own constructions and do not state this general-site coefficient comparison; sheaf comparison and group cohomology hits have different objects or hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"iso\"",
+   "results": "{\"t\": \"2026-10-23T14:52:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi\", \"CategoryTheory.CechNerveTerminalFrom.iso\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi_assoc\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc\", \"CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerve\", \"CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerveApp\"], \"digest\": \"6ddc8ef4568d357a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal-coproduct/arrow Cech nerve isomorphisms require their own constructions and do not state this general-site coefficient comparison; sheaf comparison and group cohomology hits have different objects or hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology vanishing transfers along a functor identifying all covering intersections and face maps with naturally isomorphic abelian presheaf coefficients",
+   "results": "{\"t\": \"2026-10-23T14:52:07Z\", \"tool\": \"leanfinder\", \"query\": \"Cech cohomology vanishing transfers along a functor identifying all covering intersections and face maps with naturally isomorphic abelian presheaf coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"LightCondAb.ofSheafLightProfinite\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"], \"digest\": \"bc910e1d29d3ac07\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal-coproduct/arrow Cech nerve isomorphisms require their own constructions and do not state this general-site coefficient comparison; sheaf comparison and group cohomology hits have different objects or hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport cocycle exactness between alternating covering cochain complexes using component group isomorphisms commuting with face restrictions",
+   "results": "{\"t\": \"2026-10-23T14:53:48Z\", \"tool\": \"leanfinder\", \"query\": \"Transport cocycle exactness between alternating covering cochain complexes using component group isomorphisms commuting with face restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.comp_d₁₂_eq\", \"groupCohomology.cocyclesMk₂_eq\", \"groupCohomology.comp_d₀₁_eq\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"groupCohomology.cocyclesMk₁_eq\", \"groupCohomology.comp_d₂₃_eq\", \"groupCohomology.isoCocycles₂_hom_comp_i_apply\", \"groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply\"], \"digest\": \"b060dd621f7f3e1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal-coproduct/arrow Cech nerve isomorphisms require their own constructions and do not state this general-site coefficient comparison; sheaf comparison and group cohomology hits have different objects or hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-site-pullback-injective-evaluation-acyclic",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization via Orgogozo Lemma 3.1.1: the ph/etale comparison used in the first descent isomorphism; bounded-below objectwise comparison in Stacks 0DD8: pullback of injective terms is evaluation-acyclic (0D6X). Extracted from the 0D6X argument: Tag 0D6X, lemma-pullback-injective-pre-limp, proof: the Cech-cohomology comparison and vanishing following the displayed fibre-product identity; the comparison argument isolated for abelian presheaves with a natural coefficient isomorphism.",
+   "via": [
+    "lem-trf-site-pullback-injective-evaluation-acyclic",
+    "lem-trf-site-object-derived-sections-pullback",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cover-nerve-cech-vanishing-transport",
+  "worker": "stage1",
+  "summary": "Expanded the comparison implicit in Stacks 0D6X into inverse component maps, the face-by-face naturality equation with contravariant directions checked, and a direct cocycle-to-boundary argument. All three steps are elementary calculations from the existing Cech definition; no new nodes, no statement changes, no added sheaf or injectivity hypotheses. Searched the current project Lean, DAG, whole imported blueprint and Mathlib; no exact attachment or leaf found.",
+  "blueprint": "Auxiliary site-theoretic comparison on the existing ancestry from lem-trf-local-term-locality: normal-cone specialization, ph/etale descent comparison, objectwise derived sections and injective evaluation acyclicity. Latest blueprint proof of lem-trf-local-term-locality, clauses (1)-(2), retains specialization to the normal cone; this split only expands the Stacks 0D6X tool and replaces no unit step.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-site-cech-complex",
+    "why": "General-site cochain product, alternating differential and kernel/image definition used as a generic definition; the trace-formula unit has no separate construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-419291f6a",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-419291f6a (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is byte-identical to base 7a5e562. The delivery adds no new nodes, and there is no repair note, so the re-split order does not apply. Source checked: Stacks 0D6X (sites-cohomology.tex lemma-pullback-injective-pre-limp). Its one-line Cech identification through u-preserved tuple fibre products and g^{-1}=u^p is isolated here as hypotheses: image covering, face-compatible isomorphisms c_t, and a natural isomorphism e:F->G∘u^op. With these, transport of vanishing in degrees p>0 is true. I re-derived the direction of a_t=G(c_t^{-1})e_{W_t} and the face identity a_t F(δ_W)=G(δ_P)a_s from contravariance plus naturality of e. All three steps use only def-weil-pbc-site-cech-complex (a)-(d): products over T^{p+1}, the alternating differential and ker/im. They are genuinely elementary. Edge cases checked: empty T, singleton T, p=1, identity data, and length-1 c_(t) not compatible with f_t (harmless). The only citer, lem-trf-site-pullback-injective-evaluation-acyclic step 2, supplies exactly these hypotheses via lem-trf-continuous-cover-nerve-comparison and lem-weil-pbc-site-injective-cech-acyclic. No duplicate found in an rg -L DAG search: lem-pbc-etale-additive-cech-pullback-chain-transfer and the continuous-cover-nerve comparison are different statements. Mathlib searches cover four tool kinds and found no match. No SGA citation. The tool_uses entry for the definition node is unnecessary (definitions are not route) but harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoverNerveCechVanishingTransport",
+  "declaration": "CategoryTheory.SiteCechComplex.isZero_cohomology_of_coverNerve",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoverNerveCechVanishingTransport.lean",
+  "statement": "theorem isZero_cohomology_of_coverNerve {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (_hJ : J.IsSiteForCoverings) (_hK : K.IsSiteForCoverings) (u : C ⥤ D) {T : Type u} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (_hcover : Presieve.ofArrows f hom ∈ J U) (_himage : Presieve.ofArrows (fun t ↦ u.obj (f t)) (fun t ↦ u.map (hom t)) ∈ K (u.obj U)) (W : SiteCechComplex f hom) (P : SiteCechComplex (fun t ↦ u.obj (f t)) (fun t ↦ u.map (hom t))) (c : ∀ (n : ℕ) (t : Fin (n + 1) → T), u.obj (W.W n t) ≅ P.W n t) (_hc : ∀ (n : ℕ) (t : Fin (n + 2) → T) (j : Fin (n + 2)), u.map (W.indexMap t j.succAbove) ≫ (c n (t ∘ j.succAbove)).hom = (c (n + 1) t).hom ≫ P.indexMap t j.succAbove) (F : Cᵒᵖ ⥤ AddCommGrpCat.{u}) (G : Dᵒᵖ ⥤ AddCommGrpCat.{u}) (_e : F ≅ u.op ⋙ G) (p : ℕ) (_hp : 0 < p) : IsZero ((P.cohomologyFunctor p).obj G) → IsZero ((W.cohomologyFunctor p).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cd0a666d",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion matches the Lean exactly: small sites in universe u with IsSiteForCoverings; covering and image covering; chosen SiteCechComplex W and P; isos c for every positive tuple length; face squares only for length >= 2 via j.succAbove, the same map as the recorded differential; e : F ≅ u.op ⋙ G; for all p > 0, IsZero of Ȟ^p(P,G) implies IsZero of Ȟ^p(W,F). No added sheaf, injectivity, continuity or limit-preservation assumption. Checked against Stacks 0D6X proof; argument re-derived, true. Edge cases: empty T, repeated indices, p=1; universes match the citer pullback-injective-evaluation-acyclic. No duplicate: the AcyclicCechEdgeCompatibility site change needs all-projection compatibility and RingedSiteCechRefinementSquare needs PreservesFiniteLimits, both private. Node changes only in lean; lean.statement verbatim; single sorry; docstrings carry source, blueprint id and the 3 proof steps. Both report sections present; the second reading was done by the author under single-worker dispatch, noted only. Not recompiled since no file changed."
+ }
+}

@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-internal-polynomial-bar-contraction",
+ "kind": "statement",
+ "title": "Internal extension of the rational polynomial bar contraction",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] equipped with a unital ring homomorphism $\\mathbf Q\\to A(*)$. Use internal $A$-modules [sk-def-sfb-module-objects], their ordinary derived category [def-weil-abstract-derived-category], and the universes of [def-weil-size-convention]. Let $r\\geq0$. In degree $n\\geq0$ let $P_{A,r}^n$ be the internal direct sum of $A$ indexed by monomials in the $nr$ variables $x_{a,i}$ ($1\\leq a\\leq n$, $1\\leq i\\leq r$), with monomials as in [def-weil-pbc-mv-polynomial-ring]. Its differential is\n$$(df)(x_1,\\ldots,x_{n+1})=f(x_2,\\ldots,x_{n+1})+\\sum_{a=1}^{n}(-1)^a f(x_1,\\ldots,x_a+x_{a+1},\\ldots,x_{n+1})+(-1)^{n+1}f(x_1,\\ldots,x_n).$$\nLet $K_{A,r}=\\bigoplus_{I\\subseteq\\{1,\\ldots,r\\}}A[-|I|]$ have zero differential, and put both complexes zero in negative degrees. Define $i_A(e_\\varnothing)=1$ and $i_A(e_{\\{i_1<\\cdots<i_q\\}})=x_{1,i_1}\\cdots x_{q,i_q}$.\n\nTake any rational contraction $(i_{\\mathbf Q},p_{\\mathbf Q},h_{\\mathbf Q})$ with the monomial formulas and finite-support property of [lem-sfb-rational-polynomial-bar-contraction]. Extend $p_{\\mathbf Q}$ and $h_{\\mathbf Q}$ on each monomial by the same finite rational coefficients, multiplied by the coefficient section of $A$. These prescriptions define internal $A$-linear maps $p_A:P_{A,r}\\to K_{A,r}$ and $h_A^q:P_{A,r}^q\\to P_{A,r}^{q-1}$, natural under every profinite restriction. They satisfy\n$$di_A=0,\\quad p_Ad=0,\\quad p_Ai_A=1,\\quad dh_A+h_Ad=1-i_Ap_A.$$\nThus the specified $i_A$ is a chain homotopy equivalence and an isomorphism $K_{A,r}\\xrightarrow{\\sim}P_{A,r}$ in $D(\\operatorname{Mod}_A)$, with inverse induced by $p_A$. This holds for the zero ring and for $r=0$, where $i_A$ is the degree-zero constant inclusion. The prescriptions involve finite sums only; there is no completeness or flatness hypothesis on $A$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item steps 1–2: internal finite-matrix extension of the rational contraction. Exact reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-rational-polynomial-bar-contraction"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-size-convention], work with a small representative of the coherent profinite site in the chosen coefficient universe. Apply [lem-sfb-condensed-action-injective-infrastructure] with $R=A$ (and trivial groups): its explicit assertion that $\\mathcal M_A$ is Grothendieck abelian, together with [def-sp-grothendieck-abelian], supplies the small coproducts and additive category used below. Let $J_n$ be the set of all monomials in the $nr$ variables of $P^n$ (with no bound on polynomial total degree) and $E_n$ the set of $n$-element subsets of $\\{1,\\ldots,r\\}$. Write their coproduct injections as $\\iota_j:A\\to P^n$ and $\\kappa_I:A\\to K^n$. By [def-weil-pbc-category-colimit], maps out of either coproduct are uniquely specified on these injections. In particular, equality on every injection proves equality of internal module maps.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-category-colimit",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F, definition-colimit, plus the explicitly cited condensed-module infrastructure"
+   }
+  },
+  {
+   "text": "Write $c_S$ for the restriction of the image of $c\\in\\mathbf Q$ in $A(*)$ to a profinite set $S$. Multiplication $a\\mapsto c_Sa$ on $A(S)$ is additive, commutes with restrictions, and commutes with the regular $A$-action, since $A$ is commutative. Internally this is $s_c=\\mu\\circ(c\\otimes1_A)\\circ\\lambda_A^{-1}$, where $c:\\mathbf1\\to A$ is the constant section. Associativity and commutativity of $\\mu$ give $s_c\\mu=\\mu(1_A\\otimes s_c)$, the action-commuting condition of [sk-def-sfb-module-objects]. Thus $s_c$ is an internal $A$-linear endomorphism of the regular module. On sections, $s_{c+c'}=s_c+s_{c'}$, $s_{cc'}=s_cs_{c'}$ and $s_1=1$. These are sheaf-map equalities because the underlying maps agree on every $S$. No injectivity of $\\mathbf Q\\to A(*)$ is used.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item steps 1–2: internal finite-matrix extension of the rational contraction. Exact reference WANTED."
+   }
+  },
+  {
+   "text": "For any of the given rational maps $T$, write its value on a basis vector as $T(e_j)=\\sum_{k\\in F_j}t_{kj}e_k$, with $F_j$ finite. Define $T_A$ by $T_A\\iota_j=\\sum_{k\\in F_j}\\iota_k s_{t_{kj}}$, using the appropriate $\\kappa$ injections for $K$. The coproduct universal property makes this an internal map; each prescribed summand is already internal-linear. Apply this to $p_{\\mathbf Q}$ and $h_{\\mathbf Q}$, whose finite support is part of [lem-sfb-rational-polynomial-bar-contraction], and to $i_{\\mathbf Q}$ and $d_{\\mathbf Q}$. The ordered inclusion has a single coefficient $1$ on each $e_I$, so its extension is the specified $i_A$. Each coface substitution in $d$ expands a monomial into a finite sum with integer coefficients; hence its extension is precisely the displayed differential. On a coefficient section $a\\in A(S)$ the formula is $a\\mapsto\\sum_k(t_{kj})_S a\\,e_k$, which is the required prescription and commutes with every restriction $S'\\to S$. This construction does not identify sections of a coproduct with a sectionwise direct sum.",
+   "uses": [
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item steps 1–2: internal finite-matrix extension of the rational contraction. Exact reference WANTED."
+   }
+  },
+  {
+   "text": "The extension preserves sums and composition. Indeed, on the $j$-th injection, if $U(e_j)=\\sum_{\\ell\\in F_j}u_{\\ell j}e_\\ell$ and $V(e_\\ell)=\\sum_{k\\in G_\\ell}v_{k\\ell}e_k$, then\n$$V_AU_A\\iota_j=\\sum_{\\ell\\in F_j}\\sum_{k\\in G_\\ell}\\iota_k s_{v_{k\\ell}u_{\\ell j}}=(VU)_A\\iota_j.$$\nBoth sums are finite, and $c\\mapsto s_c$ preserves addition and multiplication by step 2. The same computation for addition and for the identity, followed by equality on coproduct injections, proves the assertion. Apply it to the rational identities of [lem-sfb-rational-polynomial-bar-contraction]: it gives $d_A^2=0$, $d_Ai_A=0$, $p_Ad_A=0$, $p_Ai_A=1$ and $d_Ah_A+h_Ad_A=1-i_Ap_A$ in each degree, including degree zero with the negative-degree maps zero. Thus these are genuine complexes and the displayed maps and homotopy have exactly the required signs and degrees.",
+   "uses": [
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item steps 1–2: internal finite-matrix extension of the rational contraction. Exact reference WANTED."
+   }
+  },
+  {
+   "text": "The identities just proved say that $p_A$ is a chain inverse to $i_A$ up to the stated chain homotopy: one composite is exactly $1_K$ and the other is homotopic to $1_P$. In the homotopy category they therefore become inverse morphisms. By [def-weil-abstract-derived-category], $D(\\mathcal M_A)$ is equivalently the localization of that homotopy category at quasi-isomorphisms, so the images of $i_A,p_A$ remain inverse; this proves the asserted derived isomorphism, with its specified map. If $A$ is the zero ring every regular module and its coproducts are zero and all formulas still hold. If $r=0$, $E_0$ is a singleton and $E_n$ is empty for $n>0$, while every $J_n$ consists of the constant monomial: $d^n=0$ for even $n$ and $d^n=1$ for odd $n$. The construction gives the constant inclusion in degree zero and the supplied rational homotopy still satisfies the identities after extension. For $n>r$, $E_n$ is empty and $K^n=0$. Only finite sums on each source summand have occurred; no infinite summation, completeness, exact scalar extension or flatness is invoked.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sfb-rational-polynomial-bar-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013H (definition-complexes-notation) and 05RU (definition-unbounded-derived-category)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-rational-polynomial-bar-contraction",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, internal extension below the trivial-lattice reduction. The blueprint does not contain this finite-matrix argument; written from the rational contraction and coproduct universal property, with Stacks Tags 002F, 013H and 05RU for the categorical definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyEquiv\"",
+   "results": "{\"t\": \"2026-10-22T05:59:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.HomotopyEquiv.refl\", \"CategoryTheory.ShortComplex.HomotopyEquiv\", \"CategoryTheory.ShortComplex.HomotopyEquiv.symm\", \"CategoryTheory.ShortComplex.HomotopyEquiv.trans\", \"CategoryTheory.ShortComplex.HomotopyEquiv.hom\", \"CategoryTheory.ShortComplex.HomotopyEquiv.inv\", \"CategoryTheory.ShortComplex.HomotopyEquiv.symm_hom\", \"CategoryTheory.ShortComplex.HomotopyEquiv.symm_inv\"], \"digest\": \"d04e87d216279c1a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial characteristic families, Morita equivalences and abstract homotopy functoriality do not construct the specified internal polynomial maps or their monomial comparison; no one-line specialization gives this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(homotop|contract)|(homotop|contract).*polynomial",
+   "results": "{\"t\": \"2026-10-22T05:59:10Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(homotop|contract)|(homotop|contract).*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/RingTheory/Polynomial/SeparableDegree.lean\", \"Mathlib/RingTheory/Polynomial/SeparableDegree.lean\"], \"digest\": \"ac74f66c781c9df9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial characteristic families, Morita equivalences and abstract homotopy functoriality do not construct the specified internal polynomial maps or their monomial comparison; no one-line specialization gives this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial additive group bar complex of a condensed rational algebra has an internal chain homotopy equivalence with its exterior complex",
+   "results": "{\"t\": \"2026-10-22T05:59:11Z\", \"tool\": \"leansearch\", \"query\": \"The polynomial additive group bar complex of a condensed rational algebra has an internal chain homotopy equivalence with its exterior complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy\", \"Rep.barComplex\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"ChainComplex.alternatingConstHomotopyEquiv\", \"CategoryTheory.ShortComplex.HomotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"Rep.barComplex.isoStandardComplex\"], \"digest\": \"68737652e58d01dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial characteristic families, Morita equivalences and abstract homotopy functoriality do not construct the specified internal polynomial maps or their monomial comparison; no one-line specialization gives this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a rational polynomial additive bar chain contraction to internal modules over a commutative condensed rational algebra by finite monomial matrices",
+   "results": "{\"t\": \"2026-10-22T05:59:18Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a rational polynomial additive bar chain contraction to internal modules over a commutative condensed rational algebra by finite monomial matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.polyCharpolyAux\", \"LinearMap.polyCharpolyAux_map_aeval\", \"PolynomialLaw.lifts\", \"LinearMap.toMvPolynomial_comp\", \"LinearMap.polyCharpolyAux_map_eval\", \"LinearMap.toMvPolynomial_baseChange\", \"PolynomialModule.smul_apply\", \"PolynomialModule.comp\"], \"digest\": \"0bd44f0be91d5995\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial characteristic families, Morita equivalences and abstract homotopy functoriality do not construct the specified internal polynomial maps or their monomial comparison; no one-line specialization gives this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite support rational matrices on polynomial monomials induce a natural chain deformation retract in condensed modules",
+   "results": "{\"t\": \"2026-10-22T05:59:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finite support rational matrices on polynomial monomials induce a natural chain deformation retract in condensed modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MatrixModCat.counitIso\", \"fromModuleCatToModuleCatLinearEquivtoModuleCatObj\", \"ModuleCat.matrixEquivalence_counitIso\", \"MatrixModCat.unitIso\", \"ModuleCat.matrixEquivalence\", \"toModuleCatFromModuleCatLinearEquiv\", \"ModuleCat.matrixEquivalence_functor\", \"ModuleCat.matrixEquivalence_inverse\"], \"digest\": \"2aa1dc23db201a66\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial characteristic families, Morita equivalences and abstract homotopy functoriality do not construct the specified internal polynomial maps or their monomial comparison; no one-line specialization gives this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyEquiv|alternatingConstHomotopyEquiv",
+   "results": "{\"t\": \"2026-10-22T06:00:43Z\", \"tool\": \"grep\", \"query\": \"mapHomotopyEquiv|alternatingConstHomotopyEquiv\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/AlternatingConst.lean\"], \"digest\": \"2923aec5000209e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial characteristic families, Morita equivalences and abstract homotopy functoriality do not construct the specified internal polynomial maps or their monomial comparison; no one-line specialization gives this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(homotop|contract)|(homotop|contract).*polynomial",
+   "results": "{\"t\": \"2026-10-22T11:19:51Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(homotop|contract)|(homotop|contract).*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/RingTheory/Polynomial/SeparableDegree.lean\", \"Mathlib/RingTheory/Polynomial/SeparableDegree.lean\"], \"digest\": \"ac74f66c781c9df9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial laws and polynomial modules do not construct this internal bar contraction; free sheaf coproduct and general colimit declarations provide only generic categorical ingredients, not the specified maps or homotopy identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite support rational polynomial cochain homotopy extends to sheaves of modules over a rational ring",
+   "results": "{\"t\": \"2026-10-22T11:19:51Z\", \"tool\": \"leansearch\", \"query\": \"A finite support rational polynomial cochain homotopy extends to sheaves of modules over a rational ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.Hom\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"subsingleton_rat_module\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"CompHausLike.LocallyConstantModule.functor\"], \"digest\": \"f0c860edc529f6ce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial laws and polynomial modules do not construct this internal bar contraction; free sheaf coproduct and general colimit declarations provide only generic categorical ingredients, not the specified maps or homotopy identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-22T11:19:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial laws and polynomial modules do not construct this internal bar contraction; free sheaf coproduct and general colimit declarations provide only generic categorical ingredients, not the specified maps or homotopy identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite support rational polynomial bar contraction to internal modules over a condensed rational algebra",
+   "results": "{\"t\": \"2026-10-22T11:19:56Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a finite support rational polynomial bar contraction to internal modules over a condensed rational algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PolynomialLaw.lifts\", \"PolynomialLaw.lground\", \"PolynomialModule.comp\", \"PolynomialLaw\", \"PolynomialModule.polynomialModule\", \"MvPolynomial.rTensor_apply_X_tmul\", \"PolynomialModule.map\", \"PolynomialLaw.toFun_eq_rTensor_φ_toFun'\"], \"digest\": \"b3f9c73659164705\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial laws and polynomial modules do not construct this internal bar contraction; free sheaf coproduct and general colimit declarations provide only generic categorical ingredients, not the specified maps or homotopy identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Column finite rational matrices between coproducts of the regular sheaf module preserve identities and cochain homotopies",
+   "results": "{\"t\": \"2026-10-22T11:20:22Z\", \"tool\": \"leanfinder\", \"query\": \"Column finite rational matrices between coproducts of the regular sheaf module preserve identities and cochain homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.mapFree\", \"SheafOfModules.ιFree_freeMap\", \"SheafOfModules.freeCofan_inj\", \"SheafOfModules.ιFree_freeMap_assoc\", \"CategoryTheory.HomOrthogonal.matrixDecomposition_apply\", \"CategoryTheory.HomOrthogonal.matrixDecompositionAddEquiv\"], \"digest\": \"4e48ad17b1382866\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial laws and polynomial modules do not construct this internal bar contraction; free sheaf coproduct and general colimit declarations provide only generic categorical ingredients, not the specified maps or homotopy identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trivial-ladic-derived-exterior",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent polynomial-bar reduction of the trivial lattice case, former item steps 1–2: internal finite-matrix extension of the rational contraction. Exact reference WANTED.",
+   "via": [
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-polynomial-bar-contraction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Extended the rational contraction on each internal coproduct summand using global rational scalar endomorphisms; checked finite matrix composition explicitly, then passed the specified homotopy inverses to D(Mod_A). Reused existing coproduct infrastructure and definitions, so no new nodes. Checked zero coefficients, r=0, empty degree components, and the degree-zero identity; no claim that coproduct sections are globally finite polynomials. Repair of the landing return for cf626d03857: rebased the retained split onto the current DAG, re-read every statement and proof input, clarified that J_n indexes all monomials rather than total-degree-n monomials, explicitly cited the size convention in step 1, and strengthened the rational-identity citation. The statement and all current maintainer metadata are preserved; no side-completion flag is set by the worker.",
+  "blueprint": "Realizes the internal finite-matrix extension obligation beneath paragraph (3), open direct image, of main-20261015 direct-images.proof.md. The ancestor search returns None; retain the existing from.node=null and via chain. No blueprint node states this specialized extension.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Its generic universal property of a small colimit is used for coproduct summand constructions and equality; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Its homotopy-category localization description passes the explicitly constructed homotopy inverse to the ordinary derived category."
+   },
+   {
+    "node": "def-sp-grothendieck-abelian",
+    "why": "Only the defining existence of small colimits is used, after the same-unit condensed-module infrastructure supplies Grothendieck abelianness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-163794117",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-163794117 (reviewer sub-agent of L); spot-checked: Re-delivery after a landing (promotion) return of cf626d03857, which a cc reader passed earlier. The live and side-live nodes are still unsplit, so no other group has superseded this split. The statement and stmt_deps are byte-identical to live. Diffed against cf626: steps 2-5 are identical. Step 1 now states that J_n indexes all monomials in the nr variables, a genuine correction of the ambiguous 'degree-n monomials'. It also cites def-weil-size-convention, which says 'V-small skeleton', and adds it to uses and proof_deps, so proof_deps still equals the union of uses. No cycle (a dependency walk from all cited nodes does not reach the item). No new nodes; no repair note, so the re-split rule does not apply. Re-read current statements: lem-sfb-rational-polynomial-bar-contraction (same P, d, K, ordered i and explicit p; d^2=0, di=0, pd=0, pi=1, dh+hd=1-ip; h over Q with finite columns; zero algebra; r=0). The infrastructure node still says M_R is Grothendieck abelian, giving coproducts via def-sp-grothendieck-abelian. def-weil-pbc-category-colimit gives the universal property with equality on injections. def-weil-abstract-derived-category keeps the 'equivalently K(A)' clause. The module-object and condensed-ring definitions support s_c=mu(c⊗1)lambda^-1. Re-derived the matrix composition and the r=1, n=1 coface expansion. Checked the edge cases r=0 (d^n = 0 for even n, 1 for odd n), the zero ring, n>r and degree 0. Stacks tags 002F, 013H and 05RU exist with the cited labels. Blueprint main-20261015 direct-images paragraph (3) has no such argument, so agent origin with reference WANTED is correct. No SGA citation. Accepted tool_uses: the three generic definition nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalPolynomialBarContraction",
+  "declaration": "InternalPolynomialBar.contraction",
+  "declarations": [
+   "InternalPolynomialBar.finiteColumn",
+   "InternalPolynomialBar.contraction"
+  ],
+  "file": "lean/Sheaf/Paper/InternalPolynomialBarContraction.lean",
+  "statement": "theorem contraction (A : Profinite.CondensedRing.{u}) [IsCommMonObj A.X] (φ : ℚ →+* (InternalAbelianSheafModule.sectionRings (coherentTopology Profinite.{u}) A.X).obj (op (⊤_ Profinite.{u}))) (r : ℕ) (h : ∀ n : ℕ, RationalPolynomialBar.P ℚ r (n + 1) →ₗ[ℚ] RationalPolynomialBar.P ℚ r n) (hzero : (h 0).comp (RationalPolynomialBar.differential ℚ r 0) = LinearMap.id - (RationalPolynomialBar.inclusion ℚ r 0).comp (RationalPolynomialBar.projection ℚ r 0)) (hsucc : ∀ n : ℕ, (RationalPolynomialBar.differential ℚ r n).comp (h n) + (h (n + 1)).comp (RationalPolynomialBar.differential ℚ r (n + 1)) = LinearMap.id - (RationalPolynomialBar.inclusion ℚ r (n + 1)).comp (RationalPolynomialBar.projection ℚ r (n + 1))) : ∃ (s : ℚ → End (Mod.regular A.X)) (P K : CochainComplex (Modules A) ℕ) (ι : ∀ n : ℕ, ((Fin n × Fin r) →₀ ℕ) → (Mod.regular A.X ⟶ P.X n)) (κ : ∀ n : ℕ, RationalPolynomialBar.ExteriorIndex r n → (Mod.regular A.X ⟶ K.X n)) (i : K ⟶ P) (p : P ⟶ K) (H : ∀ n : ℕ, P.X (n + 1) ⟶ P.X n), (∀ (c : ℚ) (S : Profinite.{u}) (a : (InternalAbelianSheafModule.sectionRings (coherentTopology Profinite.{u}) A.X).obj (op S)), ((s c).hom.hom.app (op S)).hom a = ((InternalAbelianSheafModule.sectionRings (coherentTopology Profinite.{u}) A.X).map (terminal.from S).op).hom (φ c) * a) ∧ (∀ n : ℕ, Nonempty (IsColimit (Cofan.mk (P.X n) (ι n)))) ∧ (∀ n : ℕ, Nonempty (IsColimit (Cofan.mk (K.X n) (κ n)))) ∧ (∀ n : ℕ, K.d n (n + 1) = 0) ∧ (∀ (n : ℕ) (m : (Fin n × Fin r) →₀ ℕ), ι n m ≫ P.d n (n + 1) = finiteColumn A s (ι (n + 1)) (AddMonoidAlgebra.coeff (RationalPolynomialBar.differential ℚ r n (MvPolynomial.monomial m 1)))) ∧ (∀ (n : ℕ) (I : RationalPolynomialBar.ExteriorIndex r n), κ n I ≫ i.f n = finiteColumn A s (ι n) (AddMonoidAlgebra.coeff (RationalPolynomialBar.inclusion ℚ r n (Finsupp.single I 1)))) ∧ (∀ (n : ℕ) (m : (Fin n × Fin r) →₀ ℕ), ι n m ≫ p.f n = finiteColumn A s (κ n) (RationalPolynomialBar.projection ℚ r n (MvPolynomial.monomial m 1))) ∧ (∀ (n : ℕ) (m : (Fin (n + 1) × Fin r) →₀ ℕ), ι (n + 1) m ≫ H n = finiteColumn A s (ι n) (AddMonoidAlgebra.coeff (h n (MvPolynomial.monomial m 1)))) ∧ (∀ n : ℕ, i.f n ≫ P.d n (n + 1) = 0) ∧ (∀ n : ℕ, P.d n (n + 1) ≫ p.f (n + 1) = 0) ∧ i ≫ p = 𝟙 K ∧ P.d 0 1 ≫ H 0 = 𝟙 (P.X 0) - p.f 0 ≫ i.f 0 ∧ (∀ n : ℕ, H n ≫ P.d n (n + 1) + P.d (n + 1) (n + 2) ≫ H (n + 1) = 𝟙 (P.X (n + 1)) - p.f (n + 1) ≫ i.f (n + 1)) ∧ (∃ e : HomotopyEquiv (K.extend ComplexShape.embeddingUpNat) (P.extend ComplexShape.embeddingUpNat), e.hom = HomologicalComplex.extendMap i ComplexShape.embeddingUpNat ∧ e.inv = HomologicalComplex.extendMap p ComplexShape.embeddingUpNat) ∧ (∀ [HasDerivedCategory.{u + 2} (Modules A)], ∃ e : (DerivedCategory.Q.obj (K.extend ComplexShape.embeddingUpNat)) ≅ (DerivedCategory.Q.obj (P.extend ComplexShape.embeddingUpNat)), e.hom = DerivedCategory.Q.map (HomologicalComplex.extendMap i ComplexShape.embeddingUpNat) ∧ e.inv = DerivedCategory.Q.map (HomologicalComplex.extendMap p ComplexShape.embeddingUpNat))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coproduct complexes and arrows are existentially specified by their coproduct universal properties and every finite monomial column, so no arbitrary object or map is used in a definition. finiteColumn is the explicit finite sum implementing the node’s prescription. The rational homotopy is universally quantified with its degree-zero and successor contraction identities; the rational differential, inclusion and projection are precisely the recorded dependency constructions. Integer complexes use the standard extension by zero. The homotopy equivalence and derived isomorphism have the specified inclusion and projection as forward and inverse maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04b924109",
+  "group": "Q113",
+  "result": "pass",
+  "note": "First stage-2 delivery (live lean null); node differs from live only in lean; lean.statement verbatim with file. All clauses rendered: arbitrary commutative condensed ring A with IsCommMonObj and φ: ℚ→+* A(*) via sectionRings; P^n/K^n as cofan colimits over all monomials (Fin n×Fin r →₀ ℕ) and ExteriorIndex r n; P.d, i, p, H pinned on every injection by finiteColumn (explicit Finsupp.sum Σ s t ≫ ι) of the recorded rational differential/inclusion/projection and the universally quantified h with hzero/hsucc matching the rational dependency conventions; s c pinned sectionwise to φ(c)|S·a; di=0, pd=0, i≫p=𝟙, degree-0 and successor homotopy identities (composition order checked); HomotopyEquiv on ℤ-extensions and derived iso with hom/inv fixed to extendMap i/p (HasDerivedCategory.{u+2}, correct universe for Modules A). No extra hypotheses; zero ring, r=0, n>r, n=0 covered. No duplicate: PolynomialDerivedBar.Complex is over CondensedBar.Ring and theorem-owned. Docstrings, sorry-only, non-hollow def, report sections OK. No change, no compile."
+ }
+}

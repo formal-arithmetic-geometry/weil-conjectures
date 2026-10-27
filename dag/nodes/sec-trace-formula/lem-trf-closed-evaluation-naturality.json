@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-closed-evaluation-naturality",
+ "kind": "statement",
+ "title": "Naturality of the iterated evaluation transpose in a closed symmetric monoidal category",
+ "statement": "Let $\\mathcal C$ be a monoidal category [def-sfb-monoidal-category] with a natural symmetric braiding $\\sigma$ satisfying the hexagon identities and $\\sigma_{Y,X}\\sigma_{X,Y}=1$. Suppose it is closed: there is a bifunctor $H:\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\to\\mathcal C$ with bijections $\\operatorname{Hom}(U\\otimes V,W)\\cong\\operatorname{Hom}(U,H(V,W))$, natural in all three variables. Write $\\epsilon_{V,W}:H(V,W)\\otimes V\\to W$ for the corresponding counit. For any $K,L,M$ put $A=H(L,M)$, $B=H(K,L)$ and let $e_{K,L,M}:A\\otimes K\\to H(B,M)$ be the unique transpose of\n$$A\\otimes K\\otimes B\\xrightarrow{1_A\\otimes\\sigma_{K,B}}A\\otimes B\\otimes K\\xrightarrow{1_A\\otimes\\epsilon_{K,L}}A\\otimes L\\xrightarrow{\\epsilon_{L,M}}M,$$\nwith associators inserted. Its uncurrying with $B$ on the left is exactly\n$$B\\otimes A\\otimes K\\xrightarrow{\\sigma_{B,A}\\otimes1_K}A\\otimes B\\otimes K\\xrightarrow{1_A\\otimes\\epsilon_{K,L}}A\\otimes L\\xrightarrow{\\epsilon_{L,M}}M.$$\nFor arbitrary $u:K\\to K'$, $t:L'\\to L$ and $v:M\\to M'$, the morphism $H(u,t):H(K',L')\\to H(K,L)$ is induced by the bifunctor. The following equality holds:\n$$H(H(u,t),v)\\circ e_{K,L,M}=e_{K',L',M'}\\circ\\bigl(H(t,v)\\otimes u\\bigr).$$\nThus this uniquely specified family is covariantly natural in $K,M$ and contravariantly natural in $L$. No dualizability or invertibility hypothesis on any object or on $e$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0GWJ, remark-internal-hom-monoidal, item (5) and its two-counit construction; naturality and the left-uncurrying identity are the agent expansion of this construction, also used in more-algebra.tex Tags 0A60 (lemma-evaluate-and-more) and 0A61 (remark-sign-explanation)."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Phi_{U,V,W}$ for the assumed natural bijection and $\\mathsf U_{V,W}$ for its inverse (with $U$ understood). Naturality in $U$, applied to $1_{H(V,W)}$, gives $\\mathsf U_{V,W}(q)=\\epsilon_{V,W}\\circ(q\\otimes1_V)$ for $q:U\\to H(V,W)$. Naturality of $\\Phi$ in $V,W$, applied to the same identity, gives for $a:V'\\to V$, $b:W\\to W'$ the equation\n$$\\epsilon_{V',W'}\\circ(H(a,b)\\otimes1_{V'})=b\\circ\\epsilon_{V,W}\\circ(1_{H(V,W)}\\otimes a).$$\nIndeed both sides transpose under $\\Phi_{H(V,W),V',W'}$ to $H(a,b)$. These are direct instances of the naturality hypothesis, not extra closedness theorems. Tensor products of arrows and their componentwise composition are as in [def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0GWJ, remark-internal-hom-monoidal, evaluation (1) and two-counit transpose (5); explicit formal expansion by Q65."
+   }
+  },
+  {
+   "text": "Put $E=\\epsilon_{L,M}\\circ(1_A\\otimes\\epsilon_{K,L})\\circ\\alpha_{A,B,K}$ and\n$$S=\\alpha_{A,B,K}^{-1}\\circ(1_A\\otimes\\sigma_{K,B})\\circ\\alpha_{A,K,B}.$$\nThus $F=E\\circ S:(A\\otimes K)\\otimes B\\to M$ is precisely the displayed two-evaluation map. The bijection defines its unique transpose $e=\\Phi_{A\\otimes K,B,M}(F)$, so $\\mathsf U_{B,M}(e)=F$. Uncurrying with $B$ on the left means precomposing $F$ with $\\sigma_{B,A\\otimes K}$; on the source $(B\\otimes A)\\otimes K$ it is $F\\circ\\sigma_{B,A\\otimes K}\\circ\\alpha_{B,A,K}$. The braiding hexagon expands $\\sigma_{B,A\\otimes K}$ as\n$$\\alpha_{A,K,B}^{-1}\\circ(1_A\\otimes\\sigma_{B,K})\\circ\\alpha_{A,B,K}\\circ(\\sigma_{B,A}\\otimes1_K)\\circ\\alpha_{B,A,K}^{-1}.$$\nSubstituting into $S\\circ\\sigma_{B,A\\otimes K}\\circ\\alpha_{B,A,K}$ cancels inverse associators and then $\\sigma_{K,B}\\circ\\sigma_{B,K}=1$. The result is $\\sigma_{B,A}\\otimes1_K$. Multiplication by $E$ proves exactly the claimed left-uncurrying formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0GWJ, remark-internal-hom-monoidal, evaluation (1) and two-counit transpose (5); explicit formal expansion by Q65."
+   }
+  },
+  {
+   "text": "Put $A'=H(L',M')$, $B'=H(K',L')$, $a=H(t,v):A\\to A'$ and $h=H(u,t):B'\\to B$. The equation of step 1, first with $(a,b)=(u,t)$ and then with $(a,b)=(t,v)$, reads\n$$\\epsilon_{K,L}\\circ(h\\otimes1_K)=t\\circ\\epsilon_{K',L'}\\circ(1_{B'}\\otimes u),$$\n$$\\epsilon_{L',M'}\\circ(a\\otimes1_{L'})=v\\circ\\epsilon_{L,M}\\circ(1_A\\otimes t).$$\nThe sources are respectively $B'\\otimes K$ and $A\\otimes L'$, so these substitutions require exactly the arrows in the statement. No arrow is assumed invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0GWJ, remark-internal-hom-monoidal, evaluation (1) and two-counit transpose (5); explicit formal expansion by Q65."
+   }
+  },
+  {
+   "text": "Let $F'$ denote step 2's $F$ for $(K',L',M')$. By the inverse-bijection formula and its assumed naturality, the two morphisms whose equality is sought have uncurrying with $B'$ on the right equal respectively to\n$$v\\circ F\\circ((1_A\\otimes1_K)\\otimes h),\\qquad F'\\circ((a\\otimes u)\\otimes1_{B'}).$$\nThey have common source $(A\\otimes K)\\otimes B'$. Suppress only the associators used in the definition of $F$ (naturality of $\\alpha$ moves all arrow tensors through these associators). In the first composite use braiding naturality\n$$\\sigma_{K,B}\\circ(1_K\\otimes h)=(h\\otimes1_K)\\circ\\sigma_{K,B'}$$\nand then the first evaluation equation of step 3. The result is\n$$G=v\\circ\\epsilon_{L,M}\\circ(1_A\\otimes t)\\circ(1_A\\otimes\\epsilon_{K',L'})\\circ(1_A\\otimes(1_{B'}\\otimes u))\\circ(1_A\\otimes\\sigma_{K,B'}).$$\nHere $G$ is written on $A\\otimes(K\\otimes B')$, with the initial $\\alpha_{A,K,B'}$ understood. In the second composite use\n$$\\sigma_{K',B'}\\circ(u\\otimes1_{B'})=(1_{B'}\\otimes u)\\circ\\sigma_{K,B'}$$\nand tensor bifunctoriality to move $a$ to $\\epsilon_{L',M'}\\circ(a\\otimes1_{L'})$. Substituting the second evaluation equation of step 3 yields the identical $G$. Injectivity of the bijection now gives $H(h,v)\\circ e=e'\\circ(a\\otimes u)$, the asserted naturality. The construction and all cancellations used only the stated bijection, its naturality, and the structural axioms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0GWJ, remark-internal-hom-monoidal, evaluation (1) and two-counit transpose (5); explicit formal expansion by Q65."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0GWJ, remark-internal-hom-monoidal, evaluation (1) and two-counit transpose (5); explicit formal expansion by Q65."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category evaluation twice gives a morphism internalHom L M tensor K to internalHom (internalHom K L) M natural in all three variables",
+   "results": "8 hits; top=['CategoryTheory.MonoidalClosed.compTranspose', 'CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev', 'CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev_assoc', 'CategoryTheory.MonoidalClosed.coev_app_comp_pre_app', 'CategoryTheory.MonoidalClosed.coev_app_comp_pre_app_assoc', 'CategoryTheory.MonoidalClosed.comp', 'CategoryTheory.coev_app_comp_pre_app', 'CategoryTheory.ihom.ev_naturality_assoc']; subdirectory=; note=; digest=126e796abfe065ce",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit naturality, internal composition, currying, and Frobenius morphisms do not state the three-variable iterated-evaluation naturality and equality of its two symmetric uncurrying descriptions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"ev\"",
+   "results": "12 hits; top=['CategoryTheory.ihom.coev', 'CategoryTheory.ihom.ev', 'CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app', 'CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc', \"CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app\", 'CategoryTheory.ihom.ev_coev_assoc', \"CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app_assoc\", 'CategoryTheory.ihom.coev_naturality']; subdirectory=; note=; digest=7714ef5cc3083cb8",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit naturality, internal composition, currying, and Frobenius morphisms do not state the three-variable iterated-evaluation naturality and equality of its two symmetric uncurrying descriptions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural iterated evaluation comparison internalHom L M tensor K to internalHom (internalHom K L) M in a symmetric closed category",
+   "results": "8 hits; top=['CategoryTheory.exp.ev', 'CategoryTheory.ihom', 'CategoryTheory.ihom.ev', 'CategoryTheory.MonoidalClosed.internalHom', 'CategoryTheory.internalHom', 'CategoryTheory.ihom.ev_naturality_assoc', 'CategoryTheory.ihom.ev_naturality', 'CategoryTheory.ihom.adjunction']; subdirectory=; note=; digest=090bdee8eec0e273",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit naturality, internal composition, currying, and Frobenius morphisms do not state the three-variable iterated-evaluation naturality and equality of its two symmetric uncurrying descriptions"
+  },
+  {
+   "tool": "grep",
+   "query": "compTranspose|double.*[Hh]om|eval.*pre|ihom.*ev",
+   "results": "21 hits; top=['Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean']; subdirectory=CategoryTheory/Monoidal/Closed; note=; digest=45999c4e8dd4942e",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit naturality, internal composition, currying, and Frobenius morphisms do not state the three-variable iterated-evaluation naturality and equality of its two symmetric uncurrying descriptions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated evaluation natural transformation from [L,M] tensor K to [[K,L],M], obtained by currying the two counits and a braiding",
+   "results": "8 hits; top=['CategoryTheory.frobeniusMorphism', 'CategoryTheory.MonoidalClosed.curry_eq', 'CategoryTheory.Pi.closedCounit', 'CategoryTheory.MonoidalClosed.uncurry_eq', 'CategoryTheory.MonoidalClosed.ofEquiv_curry_def', 'CategoryTheory.MonoidalCategory.externalProductBifunctorCurried_obj_map_app_app', 'CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app', 'CategoryTheory.exp.ev']; subdirectory=; note=; digest=1070803cbfa10975",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit naturality, internal composition, currying, and Frobenius morphisms do not state the three-variable iterated-evaluation naturality and equality of its two symmetric uncurrying descriptions"
+  },
+  {
+   "tool": "grep",
+   "query": "compTranspose|uncurry_natural|uncurry_pre|ev_naturality",
+   "results": "{\"t\": \"2026-10-22T07:05:22Z\", \"tool\": \"grep\", \"query\": \"compTranspose|uncurry_natural|uncurry_pre|ev_naturality\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"ae7b6e4d4aeb3587\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide individual evaluation/currying identities or internal composition, not the full three-variable iterated-evaluation map and its two symmetric uncurrying formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transpose of iterated evaluation internalHom L M tensor K to internalHom (internalHom K L) M is natural in K L and M",
+   "results": "{\"t\": \"2026-10-22T07:05:23Z\", \"tool\": \"leansearch\", \"query\": \"The transpose of iterated evaluation internalHom L M tensor K to internalHom (internalHom K L) M is natural in K L and M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.coev_naturality_app\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"Module.Dual.transpose\", \"transpose_dualTensorHom\", \"CategoryTheory.compEvaluation\"], \"digest\": \"10cf57365b278640\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide individual evaluation/currying identities or internal composition, not the full three-variable iterated-evaluation map and its two symmetric uncurrying formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"curry\", \"natural\"",
+   "results": "{\"t\": \"2026-10-22T07:05:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"curry\\\", \\\"natural\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.curry_natural_left\", \"CategoryTheory.MonoidalClosed.uncurry_natural_left\", \"CategoryTheory.MonoidalClosed.curry_natural_right\", \"CategoryTheory.MonoidalClosed.uncurry_natural_right\", \"CategoryTheory.MonoidalClosed.curry_natural_left_assoc\", \"CategoryTheory.MonoidalClosed.uncurry_natural_right_assoc\", \"CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc\", \"CategoryTheory.MonoidalClosed.curry_natural_right_assoc\"], \"digest\": \"c9983decbc92a541\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide individual evaluation/currying identities or internal composition, not the full three-variable iterated-evaluation map and its two symmetric uncurrying formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in all three objects of the map internalHom L M tensor K to internalHom (internalHom K L) M defined by evaluation twice in a closed symmetric monoidal category",
+   "results": "{\"t\": \"2026-10-22T07:05:33Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality in all three objects of the map internalHom L M tensor K to internalHom (internalHom K L) M defined by evaluation twice in a closed symmetric monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.ihom.coev_naturality\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev_assoc\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app_assoc\"], \"digest\": \"ac51ca321f22b8b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide individual evaluation/currying identities or internal composition, not the full three-variable iterated-evaluation map and its two symmetric uncurrying formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double evaluation transpose sends a map L to M and an object K to the map from internalHom K L to M; naturality using the internal hom bifunctor and symmetric braiding",
+   "results": "{\"t\": \"2026-10-22T07:06:53Z\", \"tool\": \"leanfinder\", \"query\": \"Double evaluation transpose sends a map L to M and an object K to the map from internalHom K L to M; naturality using the internal hom bifunctor and symmetric braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exp.ev\", \"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.exp.coev\", \"CategoryTheory.MonoidalClosed.pre\", \"CategoryTheory.MonoidalClosed.curry\"], \"digest\": \"b36f606c1e27826f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide individual evaluation/currying identities or internal composition, not the full three-variable iterated-evaluation map and its two symmetric uncurrying formulas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-canonical-map",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof steps 1--2: transpose construction, equality of its symmetric descriptions, and counit naturality in K, L, M.",
+   "via": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-closed-evaluation-naturality",
+  "worker": "stage1",
+  "summary": "Q65 expands the assumed natural tensor–Hom bijection on identities, constructs the transpose, writes the single hexagon cancellation proving the left-uncurrying formula, and calculates both uncurried naturality composites. All steps are elementary instances of the hypotheses; no new node or hypothesis is needed. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof steps 1--2: transpose construction, equality of its symmetric descriptions, and counit naturality in K, L, M."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-af5a62f57",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-af5a62f57 (reviewer sub-agent of L); spot-checked: I read the item in full and recomputed all four steps by hand. The statement, stmt_deps, blueprint and created fields are byte-identical to live and side-live, where the node is still unsplit. The source is Stacks categories.tex Tag 0GWJ (remark-internal-hom-monoidal, lines 9616-9663): item (5) with X=K, Y=L, Z=M is exactly e_{K,L,M}. Since Stacks gives no proof of the naturality, proof_origin by agent is correct. Step 1: the counit formulas follow from naturality of Phi in U and in (V,W); variance checked. Step 2: the hexagon expansion of sigma_{B,A(x)K} matches the standard axiom, and after the alpha and sigma-sigma cancellations what remains is sigma_{B,A}(x)1_K. Step 3: the substitutions h=H(u,t):B'->B and a=H(t,v):A->A' have the right variance, sources and targets. Step 4: both uncurried sides reduce to the same G through braiding naturality, bifunctoriality and the two step-3 equations, and injectivity concludes. Small cases: in Sets both sides equal v(f(t(g'(u(k))))); the terminal category and modules with zero objects also work. No invertibility or dualizability is used. The only citation is def-sfb-monoidal-category, which is a notion, so there is no route or tool_use issue and no SGA. No duplicate: I read lem-pod-closed-uncurry-laws, lem-fix-monoidal-dual-hom-comparison, lem-sf-invertible-factor-hom-cancellation, lem-sfb-ringed-site-duality-maps and def-per-ringed-site-bidual-transpose. The Mathlib searches return only building blocks, so the node is not a leaf. There are no new nodes. Advisory only: steps 2 and 4 use associator naturality and bifunctoriality with uses=[]; step 1 cites def-sfb-monoidal-category for these and proof_deps contains it."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ClosedEvaluationNaturality",
+  "declaration": "CategoryTheory.closed_evaluation_naturality",
+  "declarations": [
+   "CategoryTheory.closedRightEvaluation",
+   "CategoryTheory.closedIteratedEvaluationUncurried",
+   "CategoryTheory.closedIteratedEvaluation",
+   "CategoryTheory.closed_evaluation_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ClosedEvaluationNaturality.lean",
+  "statement": "theorem closed_evaluation_naturality {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C] {H : Cᵒᵖ ⥤ C ⥤ C} (adj : (curriedTensor C).flip ⊣₂ H) (K K' L L' M M' : C) (u : K ⟶ K') (t : L' ⟶ L) (v : M ⟶ M') : (∀ q : (H.obj (op L)).obj M ⊗ K ⟶ (H.obj (op ((H.obj (op K)).obj L))).obj M, ((adj.adj ((H.obj (op K)).obj L)).homEquiv _ _).symm q = closedIteratedEvaluationUncurried adj K L M ↔ q = closedIteratedEvaluation adj K L M) ∧ ((α_ ((H.obj (op K)).obj L) ((H.obj (op L)).obj M) K).hom ≫ (β_ ((H.obj (op K)).obj L) ((H.obj (op L)).obj M ⊗ K)).hom ≫ ((adj.adj ((H.obj (op K)).obj L)).homEquiv _ _).symm (closedIteratedEvaluation adj K L M) = (β_ ((H.obj (op K)).obj L) ((H.obj (op L)).obj M)).hom ▷ K ≫ (α_ ((H.obj (op L)).obj M) ((H.obj (op K)).obj L) K).hom ≫ (H.obj (op L)).obj M ◁ closedRightEvaluation adj K L ≫ closedRightEvaluation adj L M) ∧ (closedIteratedEvaluation adj K L M ≫ (H.map (((H.map u.op).app L' ≫ (H.obj (op K)).map t).op)).app M ≫ (H.obj (op ((H.obj (op K')).obj L'))).map v = (((H.map t.op).app M ≫ (H.obj (op L')).map v) ⊗ₘ u) ≫ closedIteratedEvaluation adj K' L' M')",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2df7581f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "I read the node, Stacks categories.tex 9616-9664 (Tag 0GWJ items 1 and 5), def-sfb-monoidal-category, Mathlib ParametrizedAdjunction/curriedTensor/SymmetricCategory and the delivered module. (curriedTensor C).flip ⊣₂ H is exactly the node's bijection Hom(U⊗V,W)≅Hom(U,H(V,W)) natural in U,V,W. The counit and the transpose e are real data, and the associators match the node. Left uncurrying holds by hexagon plus symmetry, checked by hand. In naturality, H(u,t), H(t,v) and H(H(u,t),v) have the right variances, and the equation holds in Sets. lean.statement is verbatim in the file, docstrings and the 4 proof steps are present, the only sorry is the theorem proof, and there is no collision in Sheaf or WeilConjectures (closedEvaluationComparison is a different map). Advisory: conjunct 1 is a definitional uniqueness restatement. I changed no file, so no compile; the worker's server compile and deliver2 validation stand."
+ }
+}

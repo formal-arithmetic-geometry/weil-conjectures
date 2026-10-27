@@ -194,7 +194,18 @@
   "thm-weil-pbc-qbar"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-compatibility",
  "split_report": {
@@ -276,5 +287,33 @@
   "group": "O3",
   "result": "pass",
   "note": "Re-delivery after RETURN aee460c2. (1) Finite Ex_! now = ι-preimage of FiniteSource.hom ≫ (S.finiteExchangeProjection Q).2.1 ≫ FiniteTarget.inv, then S.finite.comparison to compactification'. Transports use only S.finiteSupport/finitePullback, sfIntrinsicCompactSupportComparison and a canonical unit-cancellation pull comparison with leftDerivedUpperStarIsoMapDerivedCategory.symm. Invertibility follows from finiteCompactExchange; no H4 duplicate found. (2) Pasting is now concrete: one τ/β family, β Q pinned to conj(τ.symm). β R.pasted (paste_horiz on all 3 faces / paste_vert) = horizontal (Rg'_*β_h)(β_g Rh_*) conjugated by the restricted sixFunctorDirectComposition, and vertical (β_e Rf'^!)(Re^!β_f) conjugated by sixFunctorExceptionalComposition. The shared middle face is forced for compactified squares. The generic Mathlib fields are gone. Rest as accepted before: 16 separated/finite-type hypotheses, 4 coherent stages, Adjunction.comp, β direction, square naturality, proper clause, higher-stage compactExchange. Statement verbatim, 36/36 decls, only the lean field changed, 1 sorry. nt_compile timed out at 60 s (load ~134); lcompile.run(timeout=560) clean, 41.0 s. Advisory: public import SfOpenExceptionalBaseChange is outside stmt_deps; compile is near the limit under load."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "In the setting of [def-sf-datum], let\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\\nf'\\downarrow && \\downarrow f\\\\\nY' & \\xrightarrow{g} & Y\n\\end{array}\n$$\n\nbe a Cartesian square of separated finite-type $S$-schemes. Then there is a\ncanonical isomorphism, natural in the square and compatible with the pasting\nof squares,\n\n$$\nRf^!Rg_*\\xrightarrow{\\ \\sim\\ }Rg'_*Rf'^!,\n$$\n\nthe right adjoint of the base-change isomorphism\n$\\operatorname{Ex}_!:Lg^*Rf_!\\cong Rf'_!Lg'^*$. If $g$ is proper, so that\n$g'$ is proper as well and $Rg_!=Rg_*$, $Rg'_!=Rg'_*$ by [fix-prop-adjunctions],\nthe same isomorphism reads\n\n$$\nRf^!Rg_!\\xrightarrow{\\ \\sim\\ }Rg'_!Rf'^!.\n$$",
+  "proof": [
+   {
+    "text": "The map $\\operatorname{Ex}_!$ is the canonical exchange of\n[def-exchange-projection]; that it is an isomorphism is axiom (A2), and\nin the concrete setting it is the compact-support base change on\n$\\Dctf(X,\\Lambda)$ for the admissible condensed coefficient ring $\\Lambda$\n([sk-prop-sf-cbc]). For finite $\\Lambda$ this is\n[thm-cbc-finite-torsion] and [thm-cbc-finite-level-proetale], with the proper\ncase supplied by [lemma-weil-pbc-prime-proper-base-change],\n[thm-weil-pbc-bounded-below] and [thm-weil-pbc-finite-level-proetale]; for\n$\\Lambda=E,\\Qlb$ it is [sk-thm-sfb-shriek-base-change]; for\n$\\Lambda=\\mathcal O_E$ it combines the proper base change of\n[sk-thm-sfb-proper-base-change], valid on $\\Dctf$ for every admissible\n$\\Lambda$, with extension by zero, as recorded in [sk-prop-sf-cbc]. The\nsmooth case is also given by the smooth-base-change theorem\n([sbc-thm-smooth-base-change]). The right adjoint of the composite\n$Lg^*Rf_!$ is the composite of the right adjoints in the reverse order,\n$Rf^!Rg_*$, and the right adjoint of $Rf'_!Lg'^*$ is $Rg'_*Rf'^!$: both\nadjunctions are the ones of [def-sf-datum](A1), and they are the\nadjunctions proved in [fix-prop-adjunctions]. An isomorphism of\nfunctors induces an isomorphism between their right adjoints by the\nuniqueness of adjoints, and the induced map is the mate of\n$\\operatorname{Ex}_!$ along the two pasted adjunctions, hence natural and\ncompatible with pasting by [lem-sf-mate]. The second assertion\nsubstitutes the properness identification $Rg_!=Rg_*$ of\n[fix-prop-adjunctions], which is stable under base change because\nproperness is ([lemma-weil-pbc-prime-proper-base-change] for the square).",
+    "uses": [
+     "def-exchange-projection",
+     "thm-cbc-finite-torsion",
+     "thm-cbc-finite-level-proetale",
+     "lemma-weil-pbc-prime-proper-base-change",
+     "thm-weil-pbc-bounded-below",
+     "thm-weil-pbc-finite-level-proetale",
+     "sk-thm-sfb-shriek-base-change",
+     "sbc-thm-smooth-base-change",
+     "def-sf-datum",
+     "fix-prop-adjunctions",
+     "lem-sf-mate"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

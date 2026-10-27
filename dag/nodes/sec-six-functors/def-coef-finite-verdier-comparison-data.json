@@ -1,0 +1,135 @@
+{
+ "id": "def-coef-finite-verdier-comparison-data",
+ "kind": "definition",
+ "title": "Normalized finite coefficient Verdier comparison predicate",
+ "statement": "Fix a finite-field datum D, a prime l distinct from its characteristic and a finite extension E of Q_l [def-weil-finite-field-fiber]. Let X be a separated finite-type scheme over D.k with dimension at most a natural number d [def-weil-finite-type-morphism, def-weil-proper-morphism]. Define FiniteCoefficientVerdierComparison to be the conjunction of the normalized comparison predicates on the etale and pro-etale sites at every positive coefficient level n+1. The coefficient tower is O_E/varpi_E^(n+1) with its actual quotient maps. The etale dualizing objects and their maps are the counit-defined ones [lem-coef-finite-dualizing]; the pro-etale ones are obtained by comparison pullback [lem-weil-finite-duality-site-comparison]. At one site the predicate quantifies normalized scalar tensorators, prescribed duality pairings [lem-weil-duality-pairing] and ambient natural transformations S Hom(-,omega_n) -> Hom(S(-),omega_m). For a finite-Tor constructible input K [def-weil-finite-tor-amplitude], it requires preservation of that domain, invertibility of the comparison component, its evaluation and double-dual equations, and its identity and quotient cocycle equations. For every ordered interval [a,b] of K it additionally requires both comparison endpoints to have interval [-b-2d,-a]. The scalar unit, associators and tensorator normalization are fixed by the ordinary scalar adjunction and localized cochain unit; these are not free coherence choices. The pro-etale interval uses intrinsic realization followed by the published HasProEtaleTorAmplitude predicate. This definition only packages these requirements; it does not assert their existence. The existing helper definitions and instances are relocated verbatim with it.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-constructible-complexes",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "lem-weil-finite-duality-site-comparison",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Packaging the comparison, evaluation, transpose, cocycle and interval requirements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient change Verdier duality evaluation double dual morphisms and Tor amplitude",
+   "results": "8 hits: Module.Dual.eval, eval_naturality, evalEquiv, and finite-module perfect pairing lemmas. No sheaf-derived Verdier scalar compatibility or Tor bound.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars commutes with Verdier duality evaluation and double dual morphism",
+   "results": "8 hits including ModuleCat.homEquiv_extendScalarsComp and rigid tensorLeftHomEquiv evaluation lemmas; no derived sheaf statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "12 generic Verdier localizing-subcategory declarations, no geometric duality.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dual.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*dual",
+   "results": "Mathlib hits are Verdier triangulated structures or Module.Dual.baseChange; none state either finite-sheaf compatibility diagrams or a Tor-amplitude bound.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteCoefficientVerdier",
+  "date": "2026-10-25",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-finite-verdier",
+   "place": "Comparison map, evaluation, double-dual, cocycle and Tor interval clauses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteCoefficientVerdierData",
+  "file": "lean/Sheaf/SixFunctors/FiniteCoefficientVerdierData.lean",
+  "declaration": "WeilConjectures.FiniteCoefficientVerdierComparison",
+  "declarations": [
+   "WeilConjectures.finiteVerdierOrdinaryExtension",
+   "WeilConjectures.finiteVerdierOrdinaryAdjunction",
+   "WeilConjectures.finiteVerdierOrdinaryExtension_additive",
+   "WeilConjectures.finiteVerdierOrdinaryExtension_oplax",
+   "WeilConjectures.finiteVerdierScalarRepresentativeAux",
+   "WeilConjectures.finiteVerdierScalarRepresentative",
+   "WeilConjectures.FiniteVerdierCoherentComparison",
+   "WeilConjectures.FiniteVerdierSiteComparison",
+   "WeilConjectures.finiteVerdierEtaleEvaluation",
+   "WeilConjectures.finiteVerdierProEtaleEvaluation",
+   "WeilConjectures.finiteVerdierProEtaleBiduality",
+   "WeilConjectures.finiteVerdierEtaleTensorAt",
+   "WeilConjectures.finiteVerdierEtaleHomAt",
+   "WeilConjectures.finiteVerdierEtalePairingAt",
+   "WeilConjectures.finiteVerdierEtaleEvaluationAt",
+   "WeilConjectures.finiteVerdierEtaleBidualityAt",
+   "WeilConjectures.finiteVerdierProEtaleTensorAt",
+   "WeilConjectures.finiteVerdierProEtaleHomAt",
+   "WeilConjectures.finiteVerdierProEtalePairingAt",
+   "WeilConjectures.finiteVerdierProEtaleEvaluationAt",
+   "WeilConjectures.finiteVerdierProEtaleBidualityAt",
+   "WeilConjectures.FiniteVerdierEtaleComparison",
+   "WeilConjectures.FiniteVerdierProEtaleComparison",
+   "WeilConjectures.FiniteVerdierTwoSitesComparison",
+   "WeilConjectures.FiniteCoefficientVerdierComparison"
+  ],
+  "statement": "def FiniteCoefficientVerdierComparison\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (d : ℕ) (X : Scheme.{u})\n    (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bdaf5",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T101301-L-3678653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bdaf5",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T101301-L-3678653",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry modules/nodes + def relocation (byte-identical vs clone) against node cor-coef-finite-verdier, change record, unit realized (empty); sandbox compile of 4 delivered modules + 4 direct importers all exit 0; axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

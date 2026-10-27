@@ -1,0 +1,191 @@
+{
+ "id": "lem-trf-group-section-monoid-product",
+ "kind": "statement",
+ "title": "Lifting a finite free quotient to a monoid product",
+ "statement": "Let $P,Q$ be integral commutative monoids, written additively, and let $q:P\\to Q$ be a surjective monoid homomorphism. Here integrality means injectivity of the canonical maps into the group completions $G=P^{\\rm gp}$ and $H=Q^{\\rm gp}$ [def-trf-fs-log-blowup]; identify $P\\subseteq G$ and $Q\\subseteq H$. Let $U=P^\\times=\\{u\\in P:-u\\in P\\}$ be its subgroup of units [def-trf-fine-fan-blowup]. Suppose the induced group homomorphism $\\pi:G\\to H$ is surjective with $\\ker\\pi=U$. Suppose $H$ has a finite $\\mathbf Z$-basis $e_1,\\ldots,e_r$, meaning that every element has a unique expression $\\sum_i n_i e_i$, $n_i\\in\\mathbf Z$; $r=0$ is allowed. Then there is a group homomorphism $t:H\\to G$ with $\\pi t=1_H$ and $t(Q)\\subseteq P$. Its restriction $j:Q\\to P$ is a monoid homomorphism with $qj=1_Q$. The maps\n$$F:Q\\oplus U\\longrightarrow P,\\quad F(b,u)=j(b)+u,\\qquad E:P\\longrightarrow Q\\oplus U,\\quad E(p)=(q(p),p-j(q(p)))$$\nare well-defined inverse monoid isomorphisms, and $q(F(b,u))=b$. Here $Q\\oplus U$ is the Cartesian product with componentwise addition, and the second coordinate of $E$ is computed in $G$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 3.7(a), printed p.75 (splitting the group sequence and restricting a section); VIII 3.1.11 and 3.1.26, printed pp.100,102 (local lift comparison). Agent algebraic refinement, extracting old steps 3--5, not a verbatim theorem of ILO."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Using the group completions of [def-trf-fs-log-blowup], regard $P\\subseteq G$ and $Q\\subseteq H$ as in the hypotheses. For each basis vector $e_i$, choose $g_i\\in G$ with $\\pi(g_i)=e_i$, possible by surjectivity of $\\pi$. Define $t(\\sum_i n_i e_i)=\\sum_i n_i g_i$. Unique basis coordinates make this well-defined; coordinates of a sum are the sums of the coordinates, so $t$ is additive and $t(0)=0$. Moreover $\\pi t(\\sum_i n_i e_i)=\\sum_i n_i e_i$, so $\\pi t=1_H$. Empty sums give the same construction when $r=0$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p.75: splitting the abelian-group sequence and restricting the section to Q; explicit elementary algebraic refinement by Q119."
+   }
+  },
+  {
+   "text": "For $b\\in Q$, choose $p\\in P$ with $q(p)=b$, using surjectivity of $q$. Since $\\pi|_P=q$, one has $\\pi(t(b)-p)=b-b=0$, hence $u=t(b)-p\\in\\ker\\pi=U$. The unit definition in [def-trf-fine-fan-blowup] gives $u,-u\\in P$, so $t(b)=p+u\\in P$. Thus $j=t|_Q$ takes values in $P$. In $G$ we have $j(b+b^{\\prime})=t(b+b^{\\prime})=t(b)+t(b^{\\prime})=j(b)+j(b^{\\prime})$ and $j(0)=t(0)=0$; injectivity of $P\\to G$ makes these equalities hold in $P$. Also $qj(b)=\\pi t(b)=b$ in $H$, hence in $Q$ by injectivity of $Q\\to H$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p.75: splitting the abelian-group sequence and restricting the section to Q; explicit elementary algebraic refinement by Q119."
+   }
+  },
+  {
+   "text": "For $p\\in P$, set $d(p)=p-j(q(p))\\in G$. Then $\\pi(d(p))=q(p)-qj(q(p))=0$, so $d(p)\\in U$ by the assumed kernel equality. Thus $E(p)=(q(p),d(p))$ is well-defined. For $p,p^{\\prime}\\in P$, additivity of $q$ and $j$ gives $d(p+p^{\\prime})=p+p^{\\prime}-j(q(p)+q(p^{\\prime}))=p+p^{\\prime}-j(q(p))-j(q(p^{\\prime}))=d(p)+d(p^{\\prime})$ by commutativity in $G$, and $d(0)=0-j(0)=0$. Hence $E$ preserves addition and zero, with the subgroup operations on $U$ specified in the hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p.75: splitting the abelian-group sequence and restricting the section to Q; explicit elementary algebraic refinement by Q119."
+   }
+  },
+  {
+   "text": "For $b\\in Q,u\\in U$, both $j(b)$ and $u$ lie in $P$, so $F(b,u)=j(b)+u\\in P$. In $P$, additivity of $j$ and commutativity give $F((b,u)+(b^{\\prime},u^{\\prime}))=j(b+b^{\\prime})+u+u^{\\prime}=j(b)+u+j(b^{\\prime})+u^{\\prime}=F(b,u)+F(b^{\\prime},u^{\\prime})$ and $F(0,0)=0$. Since $u\\in\\ker\\pi$, $q(u)=0$ in $H$ and hence in $Q$ by integrality of $Q$. Therefore $q(F(b,u))=qj(b)+q(u)=b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p.75: splitting the abelian-group sequence and restricting the section to Q; explicit elementary algebraic refinement by Q119."
+   }
+  },
+  {
+   "text": "For $p\\in P$, compute $F(E(p))=j(q(p))+p-j(q(p))=p$ in $G$, hence in $P$ by integrality. For $(b,u)\\in Q\\oplus U$, Step 4 gives $q(F(b,u))=b$, so $E(F(b,u))=(b,j(b)+u-j(b))=(b,u)$: the second-coordinate equality holds in $G$ and hence in its subgroup $U$. Thus $FE=1_P$ and $EF=1_{Q\\oplus U}$. Together with Steps 3--4 this proves the asserted inverse monoid isomorphisms and the projection identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p.75: splitting the abelian-group sequence and restricting the section to Q; explicit elementary algebraic refinement by Q119."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 3.7(a), printed p.75: splitting the abelian-group sequence and restricting the section to Q; explicit elementary algebraic refinement by Q119."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]plit.*[Mm]onoid|[Mm]onoid.*[Ss]plit|[Aa]ssociates.*[Pp]rod",
+   "results": "{\"t\": \"2026-10-22T05:58:46Z\", \"tool\": \"grep\", \"query\": \"[Ss]plit.*[Mm]onoid|[Mm]onoid.*[Ss]plit|[Aa]ssociates.*[Pp]rod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Ring/Ext.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\", \"Mathlib/Analysis/BoxIntegral/Partition/Split.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean\", \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\"], \"digest\": \"228d193a5b92592b\"}; Read the returned types: GroupExtension.Section lemmas only compare sections of groups. Associates.prod_mk and the factorization lemmas evaluate finite products in Associates, rather than decompose an integral monoid. Selmer groups, Picard groups and number-field unit theorems have different objects and hypotheses. No result restricts a lifted section to the positive monoid and gives these inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-group-section-monoid-product: Lift a basis of a free abelian quotient group then restrict the group section to a cancellative monoid to obtain a product with its units",
+   "results": "{\"t\": \"2026-10-22T05:58:46Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-group-section-monoid-product: Lift a basis of a free abelian quotient group then restrict the group section to a cancellative monoid to obtain a product with its units\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: GroupExtension.Section lemmas only compare sections of groups. Associates.prod_mk and the factorization lemmas evaluate finite products in Associates, rather than decompose an integral monoid. Selmer groups, Picard groups and number-field unit theorems have different objects and hypotheses. No result restricts a lifted section to the positive monoid and gives these inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Associates\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T05:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Associates\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Associates.prod_mk\", \"Associates.finsetProd_mk\", \"Associates.prod_le_prod\", \"Associates.prod_eq_one_iff\", \"Associates.prod_le_prod_iff_le\", \"Associates.FactorSet.prod\", \"Associates.prod_factors\", \"Associates.factors_prod\"], \"digest\": \"7dbb9d1d277adb80\"}; Read the returned types: GroupExtension.Section lemmas only compare sections of groups. Associates.prod_mk and the factorization lemmas evaluate finite products in Associates, rather than decompose an integral monoid. Selmer groups, Picard groups and number-field unit theorems have different objects and hypotheses. No result restricts a lifted section to the positive monoid and gives these inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-group-section-monoid-product: A surjective homomorphism of integral monoids with group kernel equal to the unit subgroup splits as a product if its target group completion has a finite integer basis",
+   "results": "{\"t\": \"2026-10-22T05:58:57Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-group-section-monoid-product: A surjective homomorphism of integral monoids with group kernel equal to the unit subgroup splits as a product if its target group completion has a finite integer basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Section.exists_eq_inl_mul\", \"GroupExtension.Section.exists_mul_eq_mul_mul_inl\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion\", \"GroupExtension.Section.exists_eq_mul_inl\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"MonoidHom.exists_range_eq_graph\", \"MonoidHom.exists_mulEquiv_range_eq_graph\"], \"digest\": \"18d10cf9cde6bb48\"}; Read the returned types: GroupExtension.Section lemmas only compare sections of groups. Associates.prod_mk and the factorization lemmas evaluate finite products in Associates, rather than decompose an integral monoid. Selmer groups, Picard groups and number-field unit theorems have different objects and hypotheses. No result restricts a lifted section to the positive monoid and gives these inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-group-section-monoid-product: An integral commutative monoid is a product of its units and another integral monoid when their group completions give an exact sequence with finite free quotient",
+   "results": "{\"t\": \"2026-10-22T05:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-group-section-monoid-product: An integral commutative monoid is a product of its units and another integral monoid when their group completions give an exact sequence with finite free quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"Algebra.GrothendieckGroup.instFG\", \"ClassGroup.mulEquivUnitsSubmoduleQuotRange\", \"NumberField.Units.instFreeIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion\", \"Set.unitEquivUnitsInteger\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\"], \"digest\": \"893ed135e9d09d15\"}; Read the returned types: GroupExtension.Section lemmas only compare sections of groups. Associates.prod_mk and the factorization lemmas evaluate finite products in Associates, rather than decompose an integral monoid. Selmer groups, Picard groups and number-field unit theorems have different objects and hypotheses. No result restricts a lifted section to the positive monoid and gives these inverse formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]plit.*[Mm]onoid|[Mm]onoid.*[Ss]plit|[Aa]ssociates.*[Pp]rod",
+   "results": "{\"t\": \"2026-10-22T07:18:11Z\", \"tool\": \"grep\", \"query\": \"[Ss]plit.*[Mm]onoid|[Mm]onoid.*[Ss]plit|[Aa]ssociates.*[Pp]rod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Ring/Ext.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\", \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean\"], \"digest\": \"8b24d4df6fc94e04\"}; GroupExtension.Defs supplies group-section definitions and equations (lines 242--308 read), not positivity or a monoid decomposition. Associates.prod_mk evaluates a product in a quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral monoid is the product of its units and a quotient monoid when the quotient group is free abelian and the kernel is the unit group",
+   "results": "{\"t\": \"2026-10-22T07:18:11Z\", \"tool\": \"leansearch\", \"query\": \"An integral monoid is the product of its units and a quotient monoid when the quotient group is free abelian and the kernel is the unit group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Con.quotientKerEquivRange\", \"MulEquiv.prodUnits\", \"NumberField.Units.instFreeIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion\", \"Prod.instSubsingletonUnits\", \"Prod.isUnit_iff\", \"Con.monoid\", \"IsUnit.submonoid\", \"Units.instMonoid\"], \"digest\": \"5864604448db3f35\"}; Con.quotientKerEquivRange identifies a quotient with an image. MulEquiv.prodUnits starts from a product, rather than constructing one. Number-field and unit-instance hits do not prove the item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupExtension\", \"Section\"",
+   "results": "{\"t\": \"2026-10-22T07:18:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupExtension\\\", \\\"Section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddGroupExtension.Section\", \"GroupExtension.Section\", \"AddGroupExtension.Section.toFun\", \"GroupExtension.Section.toFun\", \"AddGroupExtension.Section.instFunLike\", \"GroupExtension.Section.instFunLike\", \"AddGroupExtension.Splitting.toSection\", \"GroupExtension.Splitting.toSection\"], \"digest\": \"9e00a9f4c9240c99\"}; The hits define group sections and splittings and forget a splitting to a section; they assume rather than construct a homomorphic section and have no positive submonoids.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of integral commutative monoids whose group kernel is the unit subgroup and whose target group completion has a finite integer basis splits as a product with its units",
+   "results": "{\"t\": \"2026-10-22T07:18:12Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of integral commutative monoids whose group kernel is the unit subgroup and whose target group completion has a finite integer basis splits as a product with its units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.exist_unique_eq_mul_prod\", \"NumberField.Units.fun_eq_repr\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetToAssociates_surjective\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"NumberField.Units.span_basisOfIsMaxRank\", \"ClassGroup.mkMMem_surjective\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"NumberField.Units.fundSystem_mk\"], \"digest\": \"3cc257efc6f60f79\"}; The first phrasing returned number-field unit decomposition (DirichletTheorem.lean:491,506 read), with number-field hypotheses. The second phrasing returned split module sequences (ModuleCat/Biproducts.lean:179 read), which assume a section and describe whole groups, plus free-group lift formulas. None supplies the monoid positivity and inverse formulas in one specialization; those are proved explicitly below.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting an exact sequence of cancellative commutative monoids by lifting a basis of the free abelian group completion of the quotient gives an isomorphism with the product of quotient and units",
+   "results": "{\"t\": \"2026-10-22T07:24:17Z\", \"tool\": \"leanfinder\", \"query\": \"Splitting an exact sequence of cancellative commutative monoids by lifting a basis of the free abelian group completion of the quotient gives an isomorphism with the product of quotient and units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lequivProdOfLeftSplitExact\", \"lequivProdOfRightSplitExact\", \"Function.Exact.splitSurjectiveEquiv\", \"Function.Exact.splitInjectiveEquiv\", \"Module.Basis.ofSplitExact_apply\", \"FreeAbelianGroup.liftAddEquiv_apply_apply\", \"FreeAbelianGroup.liftAddEquiv_symm_apply\", \"NumberField.Units.logEmbeddingEquiv\"], \"digest\": \"cdc951913e4e4cf5\"}; The first phrasing returned number-field unit decomposition (DirichletTheorem.lean:491,506 read), with number-field hypotheses. The second phrasing returned split module sequences (ModuleCat/Biproducts.lean:179 read), which assume a section and describe whole groups, plus free-group lift formulas. None supplies the monoid positivity and inverse formulas in one specialization; those are proved explicitly below.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-monoid-unit-splitting",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: local monoid lifts in ILO VIII 3.1.11 and 3.1.26, printed pp.100,102. VI 3.7(a), printed p.75 (splitting the group sequence and restricting a section); VIII 3.1.11 and 3.1.26, printed pp.100,102 (local lift comparison). Agent algebraic refinement, extracting old steps 3--5, not a verbatim theorem of ILO.",
+   "via": [
+    "lem-trf-fine-monoid-unit-splitting",
+    "lem-trf-sharpening-fan-bijection",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-group-section-monoid-product",
+  "worker": "stage1",
+  "summary": "Q119 landing-return repair: reconstructed the item from the current unsplit shared DAG and retained the returned proof and logged searches. Re-read both full current cited statements and verified their two verbatim citation excerpts. Expanded Step 3 to show both additivity substitutions and the commutative-group rearrangement; expanded Step 5 to substitute the first coordinate before cancelling the second. Every hypothesis, source field, statement dependency and blueprint field is preserved. Rechecked rank zero, torsion units, tilted sections and nonsaturated monoids; no new nodes or Mathlib leaves. The delivery tool rebuilds the commit on the current server base for live-DAG promotion.",
+  "blueprint": "The existing historical ancestry from lem-trf-local-term-locality through nearby-duality, alteration and monoidal desingularization is retained. This algebraic child realizes the group-sequence splitting and restriction to the positive monoid used by lem-trf-fine-monoid-unit-splitting, matching ILO VI 3.7(a), p.75; VIII 3.1.11 and 3.1.26 are context only. No change to the current contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-13329d24e",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-13329d24e (reviewer sub-agent of L); spot-checked: The item is the only changed node: no new nodes, and the statement, stmt_deps, source and blueprint are unchanged from base. The statement is true, and I tested it on rank 0 (P=U, torsion units allowed), tilted sections of N×Z, the nonsaturated <2,3>×Z (t(1)∉P but t(Q)⊆P), and non-surjective N⊂Z (positivity fails, so surjectivity of q is needed). Step 1 builds t from the finite basis and the surjective π, using the group completion of def-trf-fs-log-blowup. Step 2 shows t(b)-p ∈ ker π=U ⊆ P (unit definition of def-trf-fine-fan-blowup), so t(Q) ⊆ P; j is additive and qj=1, each equality descending by injectivity into G and H. Steps 3–5 are explicit additive cancellations: E is well defined since d(p) ∈ U, qF=b uses integrality of Q, and FE=1, EF=1. proof_deps equals the union of uses, and the elementary flags are justified. I read the source ILO VI 3.7(a), p.75: it splits Q^gp→M^gp and restricts to Q, which matches the agent-refinement attribution. No SGA. Duplicates: lem-trf-integral-monoid-free-sharpening-splitting (NU) is the Q=P/U case and cites this item, so it is a citer, not a duplicate. lem-trf-chart-face-split-coordinates assumes a given section. The parent lem-trf-fine-monoid-unit-splitting step 2 meets every hypothesis. Compared with the earlier heads 1b818c00d455, 8d17400afc5e and 3b11650acca6, only the wording of steps 2–5 changed (expanded additivity and integrality descents). The mathematics is the same."
+ }
+}

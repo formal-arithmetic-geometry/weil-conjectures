@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-space-finite-fp-approximation",
+ "kind": "statement",
+ "title": "Finite space morphisms are limits of finite finitely presented morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. A finite morphism is representable by schemes and finite on every scheme test [def-weil-finite-integral-morphism]. Let $f:X\\to Y$ be finite and assume $Y$ quasi-compact and quasi-separated. There exist a small nonempty directed set $A$, spaces $X_a$ with compatible $Y$-maps, and compatible maps $p_a:X\\to X_a$, such that each $X_a\\to Y$ is finite and of finite presentation, every transition $X_b\\to X_a$ for $b\\geq a$ is a closed immersion (representable and closed on scheme tests [def-weil-closed-immersion]), hence affine, and $X\\cong\\varprojlim_a X_a$ as a space over $Y$. In particular $f=(X_a\\to Y)\\circ p_a$ for every $a$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07VR (lemma-finite-in-finite-and-finite-presentation); transitions are closed immersions and hence affine on scheme tests."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "On each scheme test a finite morphism is affine by [def-weil-finite-integral-morphism], so $f$ is affine. The relative-Spec correspondence gives the quasi-coherent algebra $\\mathcal A=f_*\\mathcal O_X$, an identification $X\\simeq\\operatorname{Spec}_Y\\mathcal A$ over $Y$, and the finiteness of $\\mathcal A$ on every affine etale chart. Apply [lem-sfb-space-finite-algebra-surjective-fp-colimit] with the given qcqs base $Y$ to obtain a small nonempty directed set $I$ and a colimit cocone $\\mathcal A_i\\to\\mathcal A$ with finite finitely presented algebras and surjective transitions.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-finite-algebra-surjective-fp-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VR (lemma-finite-in-finite-and-finite-presentation), relative-Spec proof"
+   }
+  },
+  {
+   "text": "Set $X_i=\\operatorname{Spec}_Y\\mathcal A_i$. Contravariance of the relative-Spec correspondence sends $\\alpha_{ji}$ to $t_{ji}:X_j\\to X_i$ and $\\alpha_i$ to $p_i:X\\to X_i$. Functoriality supplies the identity, composition and cone equations, including $f=(X_i\\to Y)\\circ p_i$. Its property tests give that each $X_i\\to Y$ is finite and of finite presentation: the finite presentations are algebra presentations, so no module finite-presentation assumption is made.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VR (lemma-finite-in-finite-and-finite-presentation), relative-Spec proof"
+   }
+  },
+  {
+   "text": "Choose a jointly surjective family of affine etale scheme charts $U_\\lambda=\\operatorname{Spec}R_\\lambda\\to Y$ by [lem-a1-space-affine-etale-cover]. For fixed $j\\ge i$, put $V_{i\\lambda}=X_i\\times_YU_\\lambda$. By the relative-Spec chart formula these are affine schemes $\\operatorname{Spec}(\\mathcal A_i(U_\\lambda))$; they form an etale covering of $X_i$ by the fibre-product covering lemma. The pullback of $t_{ji}$ to $V_{i\\lambda}$ is $V_{j\\lambda}\\to V_{i\\lambda}$, induced by the surjective ring map $\\alpha_{ji}(U_\\lambda)$. The affine characterization in [def-weil-closed-immersion] makes this a closed immersion. Apply [lem-sfb-space-closed-immersion-atlas-locality] to this target covering: $t_{ji}$ is representable and closed on every scheme test. On those tests it is affine by the same affine characterization, so $t_{ji}$ is affine as well.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-finite-algebra-surjective-fp-colimit",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-closed-immersion-atlas-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VR (lemma-finite-in-finite-and-finite-presentation), relative-Spec proof"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-affine-limits-schematic-stages], the sheaf limit $L=\\varprojlim_iX_i$ is an algebraic space and its projections $q_i$ are affine. Choose $i_0\\in I$ and give $L$ the map $q_{i_0}$ followed by $X_{i_0}\\to Y$. For any $i$, choose $j\\ge i,i_0$; the cone equations show that $q_i$ has the same composite to $Y$. Hence $L$ is a limit also over $Y$: a cone from $W/Y$ gives a unique map $W\\to L$, and the equation with $q_{i_0}$ makes it a $Y$-map. The map $L\\to Y$ is affine by composition of affine morphisms [lem-sfb-space-affine-locality]. The algebra colimit and relative-Spec anti-equivalence show that $(X,(p_i))$ is a limit in the full subcategory of spaces affine over $Y$: for each quasi-coherent algebra $\\mathcal B$, compatible maps $\\mathcal A_i\\to\\mathcal B$ factor uniquely through $\\mathcal A\\to\\mathcal B$. The cone $L$ is a limit in that subcategory too. The unique cone maps $X\\to L$ and $L\\to X$ are inverse, since their composites have the identity projections and uniqueness forces each to be the identity. Thus $X\\simeq L$ over $Y$, with precisely the maps $p_i$, proving the asserted limit among all spaces over $Y$.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-finite-algebra-surjective-fp-colimit",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VR (lemma-finite-in-finite-and-finite-presentation), relative-Spec proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-space-finite-algebra-surjective-fp-colimit",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07VR (lemma-finite-in-finite-and-finite-presentation), relative-Spec proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of algebraic spaces over a quasi-compact quasi-separated target is a directed inverse limit of finite finitely presented morphisms with closed immersion transition maps",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finite.*finite.*presentation|finite.*[Ii]sLimit",
+   "results": "Actual logged search: 10 hits; Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximate a finite algebraic space over a qcqs algebraic space by finite algebras of finite presentation with surjective algebra transitions",
+   "results": "Actual logged search: 8 hits; Algebra.FinitePresentation.out, AlgHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.FinitePresentation, Algebra.FinitePresentation.mk, Algebra.Smooth.finitePresentation, AlgHom.FinitePresentation.of_surjective, Algebra.FinitePresentation.of_span_eq_top_target_aux",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite quasi coherent algebra on a qcqs algebraic space is a filtered colimit of finite finitely presented algebras with surjective transitions",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.LocallyOfFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finite.*finite.*presentation|finite.*[Ii]sLimit",
+   "results": "{\"t\": \"2026-10-23T13:06:14Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|finite.*finite.*presentation|finite.*[Ii]sLimit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"ca4a2508bc8edcc0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are definitions and properties for schemes; none states the directed finite-fp approximation for algebraic spaces. The second algebra formulation was also searched; see the new algebra node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-23T13:06:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinite\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are definitions and properties for schemes; none states the directed finite-fp approximation for algebraic spaces. The second algebra formulation was also searched; see the new algebra node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite morphism of algebraic spaces with qcqs target is an inverse limit of finite finitely presented morphisms with closed immersion transitions",
+   "results": "{\"t\": \"2026-10-23T13:06:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite morphism of algebraic spaces with qcqs target is an inverse limit of finite finitely presented morphisms with closed immersion transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"1827412dadb6267c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are definitions and properties for schemes; none states the directed finite-fp approximation for algebraic spaces. The second algebra formulation was also searched; see the new algebra node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07VR (lemma-finite-in-finite-and-finite-presentation); transitions are closed immersions and hence affine on scheme tests.",
+   "via": [
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-finite-fp-approximation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Followed Tag 07VR through finite quasi-coherent algebra approximation (one new statement-only node, Tag 086Z), reused relative Spec, checked closed transitions on their own target atlas, and compared the affine-subcategory limit with the actual space limit. No Lean attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07VR (lemma-finite-in-finite-and-finite-presentation); transitions are closed immersions and hence affine on scheme tests. The four steps realize the full Tag 07VR prerequisite on the inherited route, without changing the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Only the general scheme-test definition finite implies affine is used."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic affine etale atlas existence supplies target charts; no unit-specific theorem is replaced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products and preservation of etale covering families supply the target covering of each X_i."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Only the explicit affine characterization of a closed immersion and its affineness are used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-finite-integral-morphism",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-c74303f01",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-c74303f01 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and the new node in full, and checked them against Stacks 07VR (spaces-limits lemma-finite-in-finite-and-finite-presentation, l.2744) and 086Z (lemma-finite-algebra-directed-colimit-finite-finitely-presented, l.2422); both tags were verified in tags/tags. The item statement is unchanged and matches 07VR. New node lem-sfb-space-finite-algebra-surjective-fp-colimit: it is exactly 086Z, with finiteness, algebra finite presentation and surjectivity tested on each affine étale chart; passing to the tail of large i keeps the index set small, nonempty and directed. It is statement-only and self-contained, and it holds on the small cases (empty Y, A=0, A=O_Y, R/J with J not finitely generated). No duplicates: space-integral-algebra-fp-colimit (082C) has no surjective transitions, qcoh-affine-chart-calculus is chart calculus only, and the pbc 086N/09YY nodes are about schemes. Step 1: finite⇒affine is in the definition, and relative-spec gives A=f_*O_X finite. Step 2: relative-spec functoriality and property tests give X_i/Y finite and fp, with the same fp convention as the item. Step 3: the affine étale atlas U_λ gives V_iλ=Spec A_i(U_λ), and X_j×_{X_i}V_iλ=V_jλ comes from the surjective α_ji(U_λ). Closed-immersion atlas locality is applied on the cover of X_i, so the transitions are representable closed immersions, hence affine. Step 4: affine-limits gives the space L with affine projections, which the step moves correctly from S to Y. L→Y is affine by composition, and limits of the same diagram in the affine-over-Y subcategory (anti-equivalence plus the QCAlg colimit) are unique up to isomorphism, so X≅L. I accept the declared tool_uses (finite/closed-immersion definitions, affine étale cover, fibre products/étale covers) as generic. Batch-5 flags: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-a1-space-point-topology are general definitions. The relative-spec, atlas, closed-immersion-locality, affine-limit and affine-locality nodes are foundational space results that reach sec-trace-formula only through the definition of algebraic space. None of them is part of the trace formula or Poincaré duality, so I accept all of them. No SGA, no B/C/D/E faults."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSpaceFinitePresentationLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_finitePresentation_limit_of_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSpaceFinitePresentationLimit.lean",
+  "statement": "theorem exists_finite_finitePresentation_limit_of_finite {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : IsRepresentableWith (fun _ _ g ↦ IsFinite g.left) f.hom.hom) (hqc : CompactSpace (Point Y.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ Y.obj.obj) (b : yoneda.obj V ⟶ Y.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) : ∃ (I : Type u) (_ : PartialOrder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : Iᵒᵖ ⥤ Over Y) (π : (Functor.const Iᵒᵖ).obj (Over.mk f) ⟶ D), (∀ i : Iᵒᵖ, IsRepresentableWith (fun _ _ g ↦ IsFinite g.left) (D.obj i).hom.hom.hom ∧ MapIsLocallyOfFinitePresentation (D.obj i).hom ∧ MapIsQuasiCompact (D.obj i).hom.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal (D.obj i).hom.hom.hom)) ∧ (∀ (i j : Iᵒᵖ) (a : i ⟶ j), IsRepresentableWith (fun _ _ g ↦ IsClosedImmersion g.left) (D.map a).left.hom.hom ∧ IsRepresentableWith (fun _ _ g ↦ IsAffineHom g.left) (D.map a).left.hom.hom) ∧ Nonempty (IsLimit (Cone.mk (Over.mk f) π))",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ff35991c",
+  "group": "NK",
+  "result": "pass",
+  "note": "Stage-2 statement exists_finite_finitePresentation_limit_of_finite matches the node and Stacks 07VR clause by clause. Delivery: report, item node (only the lean field differs from side-live; not landed elsewhere), one module; the statement is verbatim in the file. Hypotheses: f finite on every scheme test (IsRepresentableWith IsFinite); Y quasi-compact (CompactSpace on the point topology); Y quasi-separated via the affine-pair test of lemma-characterize-quasi-separated, nothing assumed about S, same convention as the landed integral sibling. Conclusion: I : Type u with PartialOrder, Nonempty and directed; D : Iᵒᵖ ⥤ Over Y; cone π from Over.mk f, whose Over-Y components give f = (X_a→Y)∘p_a; stages finite and finitely presented (MapIsLocallyOfFinitePresentation + MapIsQuasiCompact + quasi-compact relative diagonal); transitions closed immersions and affine on scheme tests; IsLimit in Over Y. Edge cases (empty Y, empty X, f already fp, non-f.g. ideal quotient, non-qs S) are covered. No definitions; proof is only sorry; source and blueprint docstrings and the 4 proof steps are present; no extra hypotheses. Not compiled (no FIX); the worker's compile and dry run passed. Advisory: MapIsQuasiCompact belongs to def-sfb-proper-curve-moduli, reached through the stmt_dep def-sfb-space-morphism-properties."
+ }
+}

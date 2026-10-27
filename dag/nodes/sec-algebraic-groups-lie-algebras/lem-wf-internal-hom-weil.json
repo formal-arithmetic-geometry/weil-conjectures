@@ -176,7 +176,18 @@
   "def-wf-weil-category"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-p-cyclotomic",
  "split_report": {
@@ -267,5 +278,24 @@
   "group": "Q26",
   "result": "pass",
   "note": "Every node clause matches the Lean with nothing added. W is unique: carrier, Frobenius structure (HEq to wfInternalHomFrobenius = alpha then H(phi_K^-1, phi_L)) and maps (HEq to H(u,v)) are pinned. The restricted Hom is tied to the ambient wfInternalHom by a true strict functor equality, and its ∃! holds strictly. Shifted pair = canonical localized Frobenius shift component then phi[n]. Triangle clause: covariant arrow = H(1,h) then homCommShift; contravariant arrow = sourceShift(A,1) then H(h,1), checked equal to the distinguished arrow via signedDerivedInternalHom_exact and Mathlib's triangleOpEquivalence. Double shift [s-r] is a Weil iso; additivity and E-linearity in each variable. Facts come from weilGeometricFiber_coefficientHypotheses; no universe equality. Only the 4 theorems are sorry, no hollow defs, docstrings complete, lines <=100, plain imports = proof_deps modules, lean.statement verbatim, node changed only in lean, dep records untouched. Not recompiled (no file changed); worker reports clean 49.1/46.9 s. Advisories: wfHomShiftPair repeats the upstream IsoAlgebra.hasShift formula (needs a CommShift on weilFrobeniusPullback, which is absent); wfHomCoefficientLinear has the same term as pbcScalarRationalLinear; sourceShift/homCommShift owned by proof_dep lem-weil-pbc-ringed-internal-hom-exact-restriction are .choose constructions, and stmt_deps are unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda\\in\\{E,\\Qlb\\}$. The construction of [def-wf-internal-hom] defines a\nbifunctor on Weil complexes with underlying complexes in $\\Dbc(X,\\Lambda)$,\n\n$$\nR\\mathcal Hom_{\\Lambda_X}(-,-):\\ (K,\\varphi_K),(L,\\varphi_L)\\longmapsto\n\\bigl(R\\mathcal Hom_{\\Lambda_X}(K,L),\\varphi_{\\mathcal Hom}\\bigr),\n$$\n\ncontravariant in the first and covariant in the second variable, lying over the exact\nbifunctor $R\\mathcal Hom$ on $\\Dbc(X,\\Lambda)$; the displayed composite\n$\\varphi_{\\mathcal Hom}$ is an isomorphism for every pair of Weil complexes.",
+  "proof": [
+   {
+    "text": "The pullback compatibility of [def-wf-internal-hom]\n$\\Phi_X^*R\\mathcal Hom_E(K,L)\\cong R\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)$ is the naturality of the\nderived internal Hom in both variables (exactness of\n$\\Phi_X^*$), and the composite with\n$R\\mathcal Hom_E(\\varphi_K^{-1},\\varphi_L)$ is an isomorphism: the\ntwo Frobenius isomorphisms make the composite a Weil datum, and the\ncocycle condition follows as in\n[lem-wf-tensor-weil].",
+    "uses": [
+     "def-wf-internal-hom",
+     "lem-wf-tensor-weil"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

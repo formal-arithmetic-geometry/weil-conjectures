@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-clean-open-unit-parametrized-exchange",
+ "kind": "statement",
+ "title": "Clean derived open units respect actual exchange and profinite action families",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and use the pulled-back rings $\\Lambda_W=p_W^*\\Lambda$, internal modules on small pro-etale sites, and the specified adjunctions $g^*\\dashv Rg_*$ on ordinary unbounded derived categories [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, def-weil-pbc-proetale-site, sk-def-sfb-module-derived-pushpull]. Let $j:V\\hookrightarrow X$ be an open immersion, $g:X'\\to X$ any scheme morphism, $V'=X'\\times_XV$, $j':V'\\hookrightarrow X'$, and $g_V:V'\\to V$. For $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$ write $\\eta_K:K\\to Rj_*j^*K$ and $\\eta'_{g^*K}:g^*K\\to Rj'_*j'^*g^*K$ for the actual units. Let\n$$b_{g,K}:g^*Rj_*j^*K\\longrightarrow Rj'_*j'^*g^*K$$\nbe the adjunct of $g_V^*\\varepsilon_{j^*K}$, inserting the canonical pullback-composition comparison. Then\n$$b_{g,K}\\circ g^*\\eta_K=\\eta'_{g^*K}.$$\nIf both units are invertible, then $b_{g,K}$ is invertible and\n$$g^*(\\eta_K^{-1})=(\\eta'_{g^*K})^{-1}\\circ b_{g,K}.$$\nFor a morphism $u:K\\to L$ of objects with invertible units one has $Rj_*j^*u\\circ\\eta_K=\\eta_L\\circ u$ and $u\\circ\\eta_K^{-1}=\\eta_L^{-1}\\circ Rj_*j^*u$.\nThese equations also give the following precise family statement. Let $X$ be affine, let $Q$ be profinite, and use $X[Q]$ and $V[Q]$ [def-sfb-profinite-test-objects]. Let $a:X[Q]\\to X$ be a morphism with $a^{-1}(V)=V[Q]$, let $\\operatorname{pr}:X[Q]\\to X$ be the projection, and supply an isomorphism $\\rho:a^*K\\cong\\operatorname{pr}^*K$. If the units for $K$ on $X$ and for $\\operatorname{pr}^*K$ on $X[Q]$ are invertible, the exchanges for $a$ and $\\operatorname{pr}$ are invertible and\n$$Rj_{Q,*}j_Q^*\\rho\\circ b_{a,K}\\circ a^*\\eta_K=b_{\\operatorname{pr},K}\\circ\\operatorname{pr}^*\\eta_K\\circ\\rho,$$\nwhere $j_Q:V[Q]\\hookrightarrow X[Q]$. The inverse-unit action equation is $\\rho\\circ(\\eta_{a^*K})^{-1}=(\\eta_{\\operatorname{pr}^*K})^{-1}\\circ Rj_{Q,*}j_Q^*\\rho$. These are equalities of morphisms on $X[Q]$ itself. They include an individual open-preserving automorphism with its supplied module action ($Q=*$), and apply with $X[P]$ in place of $X$ for any profinite $P$. No pointwise criterion on $Q$ or cleanness assumption on unrelated objects is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), one-term full-root boundary calculation: naturality in supplied modules, actual counit-mate exchange, and whole-profinite-family equivariance (returned item steps 5, 6 and 7). Agent-extracted input; no claim of a theorem with this full statement in the blueprint."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-profinite-test-objects",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified ordinary unbounded adjunctions of [sk-def-sfb-module-derived-pushpull]. Write $L=j^*$, $R=Rj_*$, $L\\prime=j\\prime{}^*$, $R\\prime=Rj\\prime_*$, $G=g^*$ and $H=g_V^*$. Composition of pullbacks [prop-sfb-module-left-derived-upper-star-comp], applied to the equality $g\\circ j\\prime=j\\circ g_V$, supplies the natural isomorphism $\\alpha:L\\prime G\\xrightarrow{\\sim}HL$. Thus the target identification is $R\\prime H L K\\xrightarrow{R\\prime(\\alpha_K^{-1})}R\\prime L\\prime GK$. No base-change isomorphism for direct image is being assumed.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "prop-sfb-module-left-derived-upper-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the ambient derived adjunctions and pullback square"
+   }
+  },
+  {
+   "text": "By the mate formula [def-weil-pbc-adjunction-mate], at an object $M$ of $D(V)$ the unnormalized exchange is $m_M=R\\prime(H\\varepsilon_M\\circ\\alpha_{RM})\\circ\\eta\\prime_{GRM}$. Hence the actual map in the statement is $b_{g,K}=R\\prime(\\alpha_K^{-1})\\circ m_{LK}$. Naturality of the target unit from [lem-weil-pbc-adjunction-of-natural-bijection] gives $$m_{LK}\\circ G\\eta_K=R\\prime(H\\varepsilon_{LK}\\circ\\alpha_{RLK}\\circ L\\prime G\\eta_K)\\circ\\eta\\prime_{GK}.$$ Naturality of $\\alpha$ replaces $\\alpha_{RLK}\\circ L\\prime G\\eta_K$ by $HL\\eta_K\\circ\\alpha_K$. The source triangle identity $\\varepsilon_{LK}\\circ L\\eta_K=1_{LK}$, also supplied by that adjunction node, reduces this to $R\\prime(\\alpha_K)\\circ\\eta\\prime_{GK}$. Composing with $R\\prime(\\alpha_K^{-1})$ proves $b_{g,K}\\circ g^*\\eta_K=\\eta\\prime_{g^*K}$ with exactly the specified comparison.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), actual counit-mate construction; unit and triangle calculation using Tag 0037"
+   }
+  },
+  {
+   "text": "If $\\eta_K$ and $\\eta\\prime_{g^*K}$ are invertible, the preceding identity gives $b_{g,K}=\\eta\\prime_{g^*K}\\circ g^*(\\eta_K^{-1})$. Functoriality sends the two inverse equations for $\\eta_K$ to inverse equations for its image. Thus an explicit inverse of $b_{g,K}$ is $g^*\\eta_K\\circ(\\eta\\prime_{g^*K})^{-1}$. Multiplying the displayed formula for $b_{g,K}$ on the left by $(\\eta\\prime_{g^*K})^{-1}$ gives the asserted inverse-unit exchange equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), inverse equations and functoriality"
+   }
+  },
+  {
+   "text": "Apply the unit naturality in [lem-weil-pbc-adjunction-of-natural-bijection] to $u:K\\to L$: $RL(u)\\circ\\eta_K=\\eta_L\\circ u$. If the two units are invertible, compose on the left with $\\eta_L^{-1}$ and on the right with $\\eta_K^{-1}$. Associativity and the inverse equations give $u\\circ\\eta_K^{-1}=\\eta_L^{-1}\\circ RL(u)$, proving both morphism-naturality assertions.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), paragraph after the definition: functoriality of the adjunction maps"
+   }
+  },
+  {
+   "text": "For the family put $A=a^*K$, $B=\\operatorname{pr}^*K$, $T=Rj_{Q,*}j_Q^*$ and let $e_C:C\\to TC$ be its unit. Naturality from [lem-weil-pbc-adjunction-of-natural-bijection] at the supplied isomorphism $\\rho:A\\xrightarrow{\\sim}B$ says $T\\rho\\circ e_A=e_B\\circ\\rho$. Since $e_B$ is invertible by hypothesis, this gives $e_A=(T\\rho)^{-1}\\circ e_B\\circ\\rho$, with inverse $\\rho^{-1}\\circ e_B^{-1}\\circ T\\rho$. This also proves directly $\\rho\\circ e_A^{-1}=e_B^{-1}\\circ T\\rho$. Thus the missing unit is invertible using only the supplied isomorphism, with no cleanness assertion about other objects.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), naturality at the supplied family isomorphism"
+   }
+  },
+  {
+   "text": "By [def-sfb-profinite-test-objects], $V[Q]$ is the base change of $X[Q]$ along $V\\to X$: this follows by pasting the two fibre products in the definition. The projection therefore has inverse image $V[Q]$; the same is assumed for $a$. Apply steps 2 and 3 to these two squares. Both exchanges are invertible, and $b_{a,K}\\circ a^*\\eta_K=e_A$, $b_{\\operatorname{pr},K}\\circ\\operatorname{pr}^*\\eta_K=e_B$. Substitution into the naturality equation of step 5 gives exactly $$T\\rho\\circ b_{a,K}\\circ a^*\\eta_K=b_{\\operatorname{pr},K}\\circ\\operatorname{pr}^*\\eta_K\\circ\\rho.$$ Step 5 already gives the claimed inverse-unit action equation. Every map and equality lies in the derived category on $X[Q]$ itself.",
+   "uses": [
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted whole-profinite-family compatibility: substitution of the actual units"
+   }
+  },
+  {
+   "text": "The preceding argument used no property of individual points of $Q$. For $Q=*$, the definition [def-sfb-profinite-test-objects] has $LC(*,\\mathbf Z)=\\mathbf Z$, so $X[*]=X$, and an open-preserving automorphism with its supplied module isomorphism is a special case. Moreover steps 1--6 never used affineness of the base scheme: they used only its adjunctions, pullback square, the supplied isomorphism and the two assumed invertible units. Thus they apply to the scheme $X[P]$ of [def-sfb-profinite-test-objects] and its pulled-back open for every profinite $P$, under exactly the same supplied-unit hypotheses. This proves the final assertions without any pointwise detection criterion.",
+   "uses": [
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), extracted compatibility after adding a profinite parameter"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-sfb-profinite-test-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted compatibility input. The argument is the explicit formal mate/unit calculation using Stacks Tags 07A7 and 0037; the blueprint does not itself state these family equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"unit\", \"conjugate\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the derived open exchange and whole-profinite-family equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived open adjunction the canonical base change exchange composed with the pulled back unit equals the new unit and respects parametrized actions",
+   "results": "8 hits: CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the derived open exchange and whole-profinite-family equations"
+  },
+  {
+   "tool": "grep",
+   "query": "(exchange|baseChange|base_change).*(unit|triangle)|unit.*(exchange|baseChange)",
+   "results": "12 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Enriched/HomCongr.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the derived open exchange and whole-profinite-family equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change mate sends the pulled back adjunction unit to the target unit and its inverse for profinite families of open automorphisms",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse open unit isomorphisms under canonical counit mate base change and continuous families of automorphisms",
+   "results": "8 hits: TopologicalSpace.Opens.mapComp_inv_app, TopCat.Presheaf.presheafEquivOfIso_unitIso_inv_app_app, TopologicalSpace.Opens.mapMapIso_unitIso, TopologicalSpace.OpenNhds.inclusionMapIso_inv_app, CategoryTheory.OverPresheafAux.unitAuxAuxAux_inv, TopologicalSpace.OpenNhds.inclusionMapIso, TopologicalSpace.OpenNhds.inclusionMapIso_inv, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give the derived open exchange and whole-profinite-family equations"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|homEquiv_naturality_left|unit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "generic categorical inputs only; no match for the full geometric and supplied-family statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of an adjunction unit and its inverse under an isomorphism together with base change mate compatibility",
+   "results": "8 hits: CategoryTheory.Adjunction.unit_naturality_assoc, CategoryTheory.Adjunction.unit_naturality, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit, CategoryTheory.Adjunction.inv_map_unit, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff, CategoryTheory.Adjunction.leftAdjointIdIso_inv_app, CategoryTheory.Adjunction.toCat_unit_toNatTrans",
+   "date": "2026-10-22",
+   "verdict": "generic categorical inputs only; no match for the full geometric and supplied-family statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality, CategoryTheory.Adjunction.left_triangle_components",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "generic categorical inputs only; no match for the full geometric and supplied-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change mate for two adjunctions sends pullback of the unit to the new unit using naturality of the square isomorphism and the triangle identity",
+   "results": "8 hits: CategoryTheory.unit_mateEquiv, CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.PullbackShift.adjunction_unit, CategoryTheory.unit_conjugateEquiv, CategoryTheory.unit_conjugateEquiv_symm, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Over.postAdjunctionLeft_unit_app_left",
+   "date": "2026-10-22",
+   "verdict": "generic categorical inputs only; no match for the full geometric and supplied-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a commutative square of left adjoints composed with the image of the unit equals the target unit followed by the square comparison",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.Triple.leftToRight_app_map_adj₁_unit_app, CategoryTheory.Adjunction.Triple.rightToLeft_app_adj₂_unit_app, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "generic categorical inputs only; no match for the full geometric and supplied-family statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-puncture-invariance",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), one-term full-root boundary calculation: naturality in supplied modules, actual counit-mate exchange, and whole-profinite-family equivariance (returned item steps 5, 6 and 7).",
+   "via": [
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-clean-open-unit-parametrized-exchange",
+  "worker": "stage1",
+  "summary": "Unchanged statement; derived the specified counit-mate unit identity, inverse identities, naturality and the whole-family assertion from existing categorical nodes. No new nodes. Added the canonical derived pullback compositor and mate definition as statement dependencies. All inverses are explicit and only the two assumed clean units and supplied rho are used.",
+  "blueprint": "Paragraph (3) of the main-20261015 direct-images proof, open direct image: realizes the agent-extracted actual-unit and whole-family compatibility input needed in the one-term boundary calculation. The ancestor command returns None; inherited from.node=null and via chain are retained. Blueprint searches for exchange unit, counit-mate and profinite action found no equivalent full statement.",
+  "tool_uses": [
+   {
+    "node": "prop-sfb-module-left-derived-upper-star-comp",
+    "why": "The canonical ambient derived module pullback compositor is a generic functoriality tool, used solely to form the square comparison; the ctf-stability unit supplies no such general comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-sfb-module-left-derived-upper-star-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-21aad0c02",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-21aad0c02 (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and the report, no new nodes. The statement is byte-identical to live and base, and live/side-live still have the item unsplit, so it is not superseded. This is the item's own first split (Q61 created it on 10-22 as a statement-only node from old steps 5-7 of root-tower-puncture-invariance), not a human re-split. The two added stmt_deps (mate, derived compositor) are genuinely used by the statement. Step checks: (1) α: j'^*g^*≅HL is built from two instances of prop-sfb-module-left-derived-upper-star-comp. That node holds for arbitrary f,g and Λ, so it applies to X[Q]→X, which is not of finite type. (2) I matched the mate formula of def-weil-pbc-adjunction-mate to m_M with L1=j^*, R1=Rj_*, L2=j'^*, R2=Rj'_*. I recomputed b∘g^*η_K=η' by hand from η' naturality at Gη_K, α naturality and the triangle ε_{LK}∘Lη_K=1. (3)-(5) I checked the inverse algebra. From Tρ∘e_A=e_B∘ρ the a-unit is invertible, and ρ∘e_A^{-1}=e_B^{-1}∘Tρ holds. (6) Pasting gives V[Q]=X[Q]×_X V. Substituting the two unit identities gives the displayed family equation exactly. (7) X[*]≅X, and since no step uses affineness, the result applies to X[P]; this matches how citer step 4 uses it on T[P][Q]. Sources read: Stacks 07A7 (sites-cohomology remark-base-change, l.4033), the same map as b with α made explicit; 0037 (categories definition-adjoint); blueprint main-20261015 direct-images ¶(3), recorded correctly as agent-extracted. Edge cases: K=0, j=id, V=∅, Q=∅, Q=*, ρ without a cocycle. No duplicate: def-sfb-dc-open-base-change-morphism, lem-sfb-derived-exchange-exact-normalization and lem-sfb-derived-open-square-restriction are finite-type, j_! or counit forms. No cycle (I checked the closure), no SGA, searches recorded. Accepted tool_use: prop-sfb-module-left-derived-upper-star-comp, the generic derived pullback compositor, used only for the square comparison. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CleanOpenUnitParametrizedExchange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.parametrized_exchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.squareComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.exchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.exchange_unit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.exchange_isIso_and_inverse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.unit_naturality_and_inverse",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.projection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.familyOpen",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.familyRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.familyExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.CleanOpenUnit.parametrized_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/CleanOpenUnitParametrizedExchange.lean",
+  "statement": "theorem parametrized_exchange {X : Scheme.{u}} [IsAffine X] (V : X.Opens) (Q : Profinite.{u}) (a : ((profiniteToProEtOf X).obj Q).left ⟶ X) (ha : a ⁻¹ᵁ V = familyOpen V Q) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (ρ : (moduleObjectDerivedPullback Λ.X a).obj K ≅ (moduleObjectDerivedPullback Λ.X (projection X Q)).obj K) [IsIso ((derivedUpperStarLowerStarAdjunction Λ.X V.ι).unit.app K)] [IsIso ((derivedUpperStarLowerStarAdjunction Λ.X (familyOpen V Q).ι).unit.app ((moduleObjectDerivedPullback Λ.X (projection X Q)).obj K))] : ∃ e : (moduleObjectDerivedPullback Λ.X a).obj K ≅ (moduleObjectDerivedPushforward Λ.X (familyOpen V Q).ι).obj ((moduleObjectDerivedPullback Λ.X (familyOpen V Q).ι).obj ((moduleObjectDerivedPullback Λ.X a).obj K)), e.hom = (derivedUpperStarLowerStarAdjunction Λ.X (familyOpen V Q).ι).unit.app ((moduleObjectDerivedPullback Λ.X a).obj K) ∧ IsIso (familyExchange Λ V Q a ha K) ∧ IsIso (familyExchange Λ V Q (projection X Q) rfl K) ∧ (moduleObjectDerivedPullback Λ.X a).map ((derivedUpperStarLowerStarAdjunction Λ.X V.ι).unit.app K) ≫ familyExchange Λ V Q a ha K ≫ (moduleObjectDerivedPushforward Λ.X (familyOpen V Q).ι).map ((moduleObjectDerivedPullback Λ.X (familyOpen V Q).ι).map ρ.hom) = ρ.hom ≫ (moduleObjectDerivedPullback Λ.X (projection X Q)).map ((derivedUpperStarLowerStarAdjunction Λ.X V.ι).unit.app K) ≫ familyExchange Λ V Q (projection X Q) rfl K ∧ e.inv ≫ ρ.hom = (moduleObjectDerivedPushforward Λ.X (familyOpen V Q).ι).map ((moduleObjectDerivedPullback Λ.X (familyOpen V Q).ι).map ρ.hom) ≫ inv ((derivedUpperStarLowerStarAdjunction Λ.X (familyOpen V Q).ι).unit.app ((moduleObjectDerivedPullback Λ.X (projection X Q)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four theorems jointly state every clause: exchange_unit; exchange_isIso_and_inverse; unit_naturality_and_inverse; parametrized_exchange. Helpers construct the specified total-derived counit mate and the canonical family restriction. familyOpen is the inverse-image-open model of V[Q] inside the recorded X[Q], canonically identified by pasting the defining fibre products. The family conclusion supplies the uniquely pinned a-unit isomorphism rather than assuming its invertibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb9c0d209",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Item lean-only change; statement verbatim; deps unchanged vs side-live. All clauses rendered: exchange = mateEquiv of the leftDerivedUpperStarComp square comparison at j^*K then Rj'_*(α^{-1}_K) (step-2 formula); exchange_unit, exchange_isIso_and_inverse, unit_naturality_and_inverse match diagrammatically; family theorem: affine X, arbitrary Q and a with a⁻¹V = pr⁻¹V (canonical open model of V[Q]), only the K and pr^*K units assumed, e.hom pinned to the a^*K unit, both IsIso exchanges, displayed family equation and inverse-action equation exact. Theorem dep prop-sfb-module-left-derived-upper-star-comp is genuine (its record is the canonical iso def). No hollow defs, all proofs sorry, docstrings and lines OK, universes u/u+1. Edge cases Q=∅/*, V=∅, j=id, K=0 covered. No compile run (no change); worker compiles clean 19.4/36.6 s. Maintainer note: squareComparison and the mate are definitionally condensedAmbientPullbackComparison/condensedAmbientExchange (def-weil-pbc-ambient-ringed-exchange), which the stage-1 node does not cite and H2 bars adding; advisory only."
+ }
+}

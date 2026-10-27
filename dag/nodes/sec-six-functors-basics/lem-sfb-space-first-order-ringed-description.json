@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-space-first-order-ringed-description",
+ "kind": "statement",
+ "title": "First order thickenings of algebraic spaces and their ring sheaves",
+ "statement": "Use algebraic spaces over a scheme $S$ and their small etale sites and structure sheaves [def-trf-algebraic-space, def-pc-scheme], in the universes of [def-weil-size-convention]. A first order thickening $Z\\hookrightarrow Z\\prime$ means a representable closed immersion whose ideal sheaf has square zero and whose underlying closed subset is all of $Z\\prime$; closed immersion is tested after every scheme base change, closed immersions of schemes being [def-weil-closed-immersion]. Module sheaves and quasi-coherence are [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. If $Z\\hookrightarrow Z\\prime$ is a first order thickening, restriction gives an equivalence $Z\\prime_{\\mathrm{et}}\\simeq Z_{\\mathrm{et}}$. On this common site its ring sheaf is an extension $0\\to\\mathcal J\\to\\mathcal O_{Z\\prime}\\to\\mathcal O_Z\\to0$ with square-zero quasi-coherent kernel $\\mathcal J$. Conversely, let $f:Z\\to C$ be a morphism of algebraic spaces over $S$, and let $0\\to\\mathcal J\\to\\mathcal A\\to\\mathcal O_Z\\to0$ be an exact sequence on $Z_{\\mathrm{et}}$, where $\\mathcal A$ is a sheaf of $f^{-1}\\mathcal O_C$-algebras, the last arrow is an algebra homomorphism, and $\\mathcal J$ is a square-zero ideal quasi-coherent over $\\mathcal O_Z$. There is a first order thickening $Z\\hookrightarrow Z\\prime$ over $C$ and an isomorphism $\\mathcal O_{Z\\prime}\\cong\\mathcal A$ respecting the quotient and the $f^{-1}\\mathcal O_C$-algebra structure. For two such thickenings over $C$ of the same $Z$, every homomorphism of $f^{-1}\\mathcal O_C$-algebras between their ring sheaves on the common site $Z_{\\mathrm{et}}$ inducing the identity on $\\mathcal O_Z$ comes from a unique morphism of thickenings over $C$, in the opposite direction, restricting to the identity on $Z$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps); section-thickenings for the ideal of a closed immersion."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-closed-immersion",
+  "def-sfb-space-square-zero-extension-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $i:Z\\hookrightarrow Z\\prime$. The site-identification assertion of [lem-sfb-space-square-zero-ringed-realization] applies to this first-order thickening; use its pullback equivalence to regard all ring and module sheaves on $Z_{\\mathrm{et}}$. By [lem-sfb-space-closed-immersion-quasi-coherent-modules], $\\mathcal O_{Z\\prime}\\to i_*\\mathcal O_Z$ is surjective with quasi-coherent ideal $\\mathcal J$ on $Z\\prime$. Thus its kernel sequence is exact. The first-order hypothesis says $\\mathcal J^2=0$. Apply the essential-image assertion of the same module lemma to $\\mathcal F=\\mathcal J$: its annihilation hypothesis is exactly $\\mathcal J\\mathcal J=0$. It gives a quasi-coherent $\\mathcal O_Z$-module whose direct image is $\\mathcal J$. Under the site equivalence this is the same ideal sheaf, with the quotient scalar action. Explicitly, two lifts of a local section of $\\mathcal O_Z$ differ by a section of $\\mathcal J$, whose product with $\\mathcal J$ is zero; the quotient action is therefore well-defined. This proves every assertion in the forward direction.",
+   "uses": [
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Section-thickenings, fundamental equivalence; Tags 05ZS and 05ZT; forward ideal description using spaces-morphisms.tex Tags 03MB and 04CJ(3)."
+   }
+  },
+  {
+   "text": "For the converse apply the realization assertion of [lem-sfb-space-square-zero-ringed-realization] with $X=Z$, $B=C$, and $\\mathcal G=\\mathcal J$. The given quotient endows the ideal with exactly the $\\mathcal O_Z$-action required there: lift a quotient section locally and multiply in $\\mathcal A$, independently of its lift since $\\mathcal J^2=0$. The hypotheses supply quasi-coherence, square-zero multiplication, and the $f^{-1}\\mathcal O_C$-algebra quotient; the algebras here are commutative, as in the source 05ZT (rings and algebras are commutative throughout the Stacks Project), which is the commutativity of $\\mathcal A$ that the realization assertion requires. The resulting $Z\\hookrightarrow Z\\prime$ is a first-order thickening over $C$, and the supplied ring-sheaf isomorphism respects the quotient, kernel inclusion, and base algebra structure, as required.",
+   "uses": [
+    "lem-sfb-space-square-zero-ringed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZT (lemma-first-order-thickening), with the already existing general realization node."
+   }
+  },
+  {
+   "text": "For the final assertion label the thickenings $Z\\hookrightarrow Z_1\\prime$ and $Z\\hookrightarrow Z_2\\prime$ and let $\\alpha:\\mathcal O_{Z_2\\prime}\\to\\mathcal O_{Z_1\\prime}$ be the given base-algebra map. Apply the morphism assertion of [lem-sfb-space-square-zero-ringed-realization] with both closed spaces equal to $Z$, $g=\\mathrm{id}_Z$, and $B=C$. The reduction condition in that assertion is precisely that $\\alpha$ induces the identity on $\\mathcal O_Z$. It yields a unique $C$-morphism $Z_1\\prime\\to Z_2\\prime$ inducing $\\alpha$ and restricting to $\\mathrm{id}_Z$. The order of the two labels gives the required opposite direction.",
+   "uses": [
+    "lem-sfb-space-square-zero-ringed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZN (lemma-first-order-thickening-maps), specialized to g = identity of Z."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-square-zero-ringed-realization",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 05ZS, 05ZT, 05ZN; reuse of their existing general DAG formulation, with the forward ideal claim supplied by spaces-morphisms.tex Tags 03MB and 04CJ(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Square zero thickenings of algebraic spaces correspond fully faithfully to extensions of their etale structure sheaves with quasi coherent kernels",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {Y : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).Full\", \"doc\": \"The functor from the opposite category of ideal sheaf data on a scheme $ Y $ to the over category of $ Y $, which maps each ideal sheaf data to its associated closed subscheme equipped with the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"Algebra.FormallyEtale.comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally étale algebra $ A $ over a commutative semiring $ R $, and an ideal $ I $ of a ring $ B $ with $ I^2 = 0 $, the function obtained by composing the canonical quotient homomorphism $ B \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale forgetful functors, closed subschemes, and trivial square-zero ring extensions do not realize arbitrary algebraic-space ring-sheaf thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization and uniqueness of first order algebraic space thickenings from ring sheaf extensions",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {X : AlgebraicGeometry.RingedSpace} {R : CommRingCat} {α β : X ⟶ AlgebraicGeometry.Spec.sheafedSpaceObj R}\\n  (w : α.hom.base = β.hom.base),\\n  (∀ (r : ↑R),\\n      let U := PrimeSpectrum.basicOpen r;\\n      CategoryTheory.CategoryStruct.comp\\n          (CategoryTheory.CategoryStruct.comp (AlgebraicGeom\", \"doc\": \"For any ringed space $X$ and commutative ring $R$, if two morphisms $\\\\alpha, \\\\beta : X \\\\to \\\\operatorname{Spec}(R)$ have equal underlying continuous maps and for every $r \\\\in R$ the induced maps on sec\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_eq_of_locallyRingedSpace_eq\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme}, X.toLocallyRingedSpace = Y.toLocallyRingedSpace → X = Y\", \"doc\": \"If two schemes $X$ and $Y$ have equal underlying locally ringed spaces, then $X$ and $Y$ are equal as schemes, i.e., $X = Y$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace}\\n  {local_affine :\\n    ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))}\\n  {toLocallyRingedSpace_1 : AlgebraicGeomet\", \"doc\": \"Two schemes are equal if they have the same underlying locally ringed space and satisfy the same local affine conditions, i.e., for every point, there exists an open neighborhood isomorphic to an affi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : CommRingCat}\\n  {f : R ⟶ AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)}\\n  {β : X ⟶ AlgebraicGeometry.Spec.locallyRingedSpaceObj R},\\n  CategoryTheory.CategoryStruct.comp X.toΓSpec.base (AlgebraicGeometry.Spec.locallyRingedSpaceMap f).base \", \"doc\": \"Given a locally ringed space $ X $ and a commutative ring $ R $, if a morphism $ \\\\beta: X \\\\to \\\\operatorname{Spec}(R) $ satisfies two conditions: (1) its base map agrees with the composition of the Γ-S\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.mk.inj\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"∀ {toSheafedSpace : AlgebraicGeometry.SheafedSpace CommRingCat}\\n  {isLocalRing : ∀ (x : ↑↑toSheafedSpace.toPresheafedSpace), IsLocalRing ↑(toSheafedSpace.presheaf.stalk x)}\\n  {toSheafedSpace_1 : AlgebraicGeometry.SheafedSpace CommRingCat}\\n  {isLocalRing_1 : ∀ (x : ↑↑toSheafedSpace_1.toPresheafedSpac\", \"doc\": \"If two locally ringed spaces constructed via the `mk` constructor are equal, then their underlying sheafed spaces over the category of commutative rings must also be equal. Formally, given two sheafed\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f₁ f₂ : (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }},\\n  f₁ = f₂ ↔ ∃ (h₁ : f₁.fst = f₂.fst), ↑f₁.snd = CategoryTheory.CategoryStruct.comp (X.presheaf.stalkCongr ⋯).hom ↑f₂.snd\", \"doc\": \"Two pairs consisting of a point in a scheme $X$ and a local homomorphism from the stalk at that point to a ring $R$ are equal if and only if their points are equal and their homomorphisms are related \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n      CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) →\\n    (∀ (i : n),\\n        (CategoryTheory\", \"doc\": \"If two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over $S$ agree on their composition with the structure morphism $\\\\mathbb{A}^n_S \\\\to S$ and induce identical maps on all coordina\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ext_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine X] {I J : X.IdealSheafData},\\n  I.ideal ⟨⊤, ⋯⟩ = J.ideal ⟨⊤, ⋯⟩ → I = J\", \"doc\": \"For an affine scheme $X$, if two ideal sheaf data $I$ and $J$ agree on the entire topological space (i.e., their ideals on the top open subset $\\\\top$ coincide as $I(\\\\top) = J(\\\\top)$), then $I$ and $J$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale forgetful functors, closed subschemes, and trivial square-zero ring extensions do not realize arbitrary algebraic-space ring-sheaf thickenings"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, AlgebraicGeometry.Scheme",
+   "sub": "",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" (X : AlgebraicGeometry.Scheme) : (CategoryTheory.MorphismProperty.Over @AlgebraicGeometry.IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"The category of closed subschemes is contravariantly equivalent\\nto the lattice of ideal sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [∀ (U : X.Opensᵒᵖ), CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.StructuredArrow U (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op) A] : CategoryTheory.Sheaf (AlgebraicGeometry.Scheme.Aff\", \"doc\": \"The category of sheaves on `X.AffineZariskiSite` is equivalent to the categories of sheaves\\nover `X`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.overEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X : AlgebraicGeometry.Scheme} (U : X.Opens) : SheafOfModules (CategoryTheory.Sheaf.over X.ringCatSheaf U) ≌ (↑U).Modules\", \"doc\": \"Sheaves of modules on `𝒪_X` restricted to `U` are equivalent to sheaves of `𝒪_U`-modules.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.AffineEtale\", \"type\": \" (S : AlgebraicGeometry.Scheme) (A : Type u') [CategoryTheory.Category.{u, u'} A] [CategoryTheory.Limits.HasLimits A] : CategoryTheory.Sheaf (AlgebraicGeometry.Scheme.AffineEtale.topology S) A ≌ CategoryTheory.Sheaf S.smallEtaleTopology A\", \"doc\": \"The category of sheaves on the small affine étale site is equivalent to the category of\\nsheaves on the small étale site.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ProEt.equivOfIsEmpty\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Proetale\", \"type\": \" (S : AlgebraicGeometry.Scheme) [IsEmpty ↥S] : S.ProEt ≌ CategoryTheory.Discrete PUnit.{u_1 + 1}\", \"doc\": \"If `S` is the empty scheme, the pro-étale site over `S` is a point.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale forgetful functors, closed subschemes, and trivial square-zero ring extensions do not realize arbitrary algebraic-space ring-sheaf thickenings"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|first.order.thickening|thickening",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale forgetful functors, closed subschemes, and trivial square-zero ring extensions do not realize arbitrary algebraic-space ring-sheaf thickenings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Square zero thickenings of algebraic spaces correspond fully faithfully to extensions of their etale structure sheaves with quasi coherent kernels",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"derivationOfSectionOfKerSqZero.congr_simp\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra R S] (f : P →ₐ[R] S) (hf' : RingHom.ker f ^ 2 = ⊥) (g g_1 : S →ₐ[R] P)\\n  (e_g : g = g_1) (hg : f.comp g = AlgHom.id R S),\\n  derivationOfSectionOfK\", \"doc\": \"Given commutative rings $ R $, $ P $, and $ S $ with $ R $-algebra structures on $ P $ and $ S $, let $ f : P \\\\to S $ be an algebra homomorphism whose kernel satisfies $ \\\\ker(f)^2 = 0 $. If two algebr\"}\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"(P : Extension R S) : Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"TrivSqZeroExt.liftEquiv_apply\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"∀ {S : Type u_1} {R : Type u} {M : Type v} [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]\\n  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"TrivSqZeroExt.liftEquivOfComm\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \": { f : M →ₗ[R'] A // ∀ x y, f x * f y = 0 } ≃ (tsze R' M →ₐ[R'] A)\", \"doc\": \"This equivalence establishes a bijection between pairs $(\\\\phi, f)$ consisting of an $R'$-algebra homomorphism $\\\\phi: R' \\\\to A$ and an $R'$-linear map $f: M \\\\to A$ satisfying $f(x)f(y) = 0$ for all $x,\"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n  {\"name\": \"TrivSqZeroExt.lift\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : R →ₐ[S] A) (g : M →ₗ[S] A) (hg : ∀ x y, g x * g y = 0) (hfg : ∀ r x, g (r •> x) = f r * g x)\\n  (hgf : ∀ r x, g (x <• r) = g x * f r) : tsze R M →ₐ[S] A\", \"doc\": \"Given an $ S $-algebra homomorphism $ f: R → A $ and an $ S $-linear map $ g: M → A $ satisfying $ g(x)g(y) = 0 $ for all $ x,y ∈ M $, along with compatibility conditions $ g(r ⋅ x) = f(r)g(x) $ and $\"}\n  {\"name\": \"TrivSqZeroExt.map\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(f : M →ₗ[R'] N) : TrivSqZeroExt R' M →ₐ[R'] TrivSqZeroExt R' N\", \"doc\": \"Given a linear map $ f : M \\\\to N $ over a commutative semiring $ R' $, this constructs the algebra homomorphism from the trivial square-zero extension $ R' \\\\times M $ to $ R' \\\\times N $ defined by sen\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale forgetful functors, closed subschemes, and trivial square-zero ring extensions do not realize arbitrary algebraic-space ring-sheaf thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First order thickenings of algebraic spaces are described by square zero extensions of the etale structure sheaf with quasi coherent kernel",
+   "results": "[leanfinder] OK 8 hit(s).  Logged top results: AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget, Algebra.FormallyEtale.iff_comp_bijective, AlgebraicGeometry.IsEtale, Algebra.Etale.formallyEtale. Source subdirectory: all Mathlib. Digest: 1df35b67afbc4332.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s).  Logged top results: none. Source subdirectory: all Mathlib. Digest: 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|firstOrderThickening|[Tt]hickening.*[Ss]heaf|[Ss]heaf.*[Tt]hickening",
+   "results": "[grep] OK 0 hit(s).  Logged top results: none. Source subdirectory: all Mathlib. Digest: 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotent algebraic space thickenings and maps are reconstructed from structure sheaf extensions on the common small etale site",
+   "results": "[leanfinder] OK 8 hit(s).  Logged top results: AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext, AlgebraicGeometry.Spec.basicOpen_hom_ext, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.Etale, StandardEtalePair.hom_ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι. Source subdirectory: all Mathlib. Digest: dac3caf78d4ffc3b.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize a square zero extension of the structure sheaf with quasi coherent kernel as a thickening of an algebraic space",
+   "results": "[leansearch] OK 8 hit(s).  Logged top results: TrivSqZeroExt, TrivSqZeroExt.liftEquiv_apply, Algebra.Extension.infinitesimal, liftOfDerivationToSquareZero_apply, TrivSqZeroExt.lift, TrivSqZeroExt.algebra'.congr_simp, derivationOfSectionOfKerSqZero.congr_simp, TrivSqZeroExt.instNontrivial_of_right. Source subdirectory: all Mathlib. Digest: cb69321a15d3eeb6.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, ordinary ring extensions, or local presentations of module sheaves; none states this algebraic-space theorem or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-square-zero-effectivity",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps); section-thickenings for the ideal of a closed immersion.",
+   "via": [
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-first-order-ringed-description",
+  "worker": "stage1",
+  "summary": "Reused the existing general square-zero realization and morphism node rather than creating its clauses again. Added only the arbitrary-closed-immersion quasi-coherent ideal/module theorem needed to justify the forward kernel clause. Kept the statement unchanged; verified the square-zero annihilation and quotient scalar action, and the contravariant direction of maps. No project Lean declaration states the item.",
+  "blueprint": "The latest blueprint direct-image proof (3) remains the inherited route. The historical det-thm-sf-ctf-stability-direct-images proof (3) through the proper-space effectivity prerequisites is recorded in blueprint.from.place; tools/blueprint_refs.py ancestor returns None for this inherited chain, which is retained. This split supplies only the ring-sheaf description within that prerequisite, following Stacks 05ZS/05ZT/05ZN.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-249d142cf",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-249d142cf (reviewer sub-agent of L); spot-checked: I read Stacks 05ZS, 05ZT and 05ZN (spaces-more-morphisms.tex) and 03MB, 04CJ(3) and 03M9 (spaces-morphisms.tex) at their places. The new unsplit node lem-sfb-space-closed-immersion-quasi-coherent-modules states exactly the first sentence of 03MB and 04CJ(3), with no added nilpotence or finiteness hypothesis. It passes B1-B7. I tested it on an empty Z, the identity and an affine A/I, and all three are correct. The grep for 03MB/04CJ and for space closed-immersion ideal nodes found only scheme-level pbc nodes and unrelated sfb/trf nodes, so it is not a duplicate. Step 1 uses the site-identification sentence of the realization node (05ZS) and the new node's surjectivity and essential image with F=J (J^2=0), and the quotient action check is elementary. Step 2 applies the realization clause with X=Z, B=C, G=J. Step 3 applies the morphism clause with g=id, which gives a map in the opposite direction with the correct uniqueness. FIX (E1/C4): the realization clause requires a sheaf of commutative algebras, but the item only says f^{-1}O_C-algebras. Read literally, a noncommutative twisted square-zero extension such as F_4+F_4^sigma would make the converse false. Step 2 now states the commutative reading from the Stacks convention in 05ZT. The statement is unchanged, and the corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-first-order-ringed-description.json. Batch-5 flags on def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, already in the item's base stmt_deps, so they are not part of the trace-formula or Poincare-duality proofs. There is no SGA citation, no re-split note and tool_uses is empty.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFirstOrderRingedDescription",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_first_order_ringed_description",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFirstOrderRingedDescription.lean",
+  "statement": "theorem space_first_order_ringed_description {S : Scheme.{u}} : (∀ (X X' B : AlgebraicSpace S) (f : X ⟶ B) (i : X ⟶ X') (q : X' ⟶ B), IsSpaceFirstOrderThickening i → i ≫ q = f → ∃ (T : ThickeningOverModel f i q) (G : X.QCoh) (A : SpaceSquareZeroExtension f G.obj) (γ : T.toThickeningSiteModel.rings ≅ A.algebra.obj), γ.hom ≫ A.quotient = T.quotient ∧ ∀ (U : X.EtaleSite) (V : B.EtaleSite) (a : U.obj.left ⟶ V.obj.left) (ha : U.obj.hom ≫ f.hom.hom = yoneda.map a ≫ V.obj.hom), T.base.app U V a ha ≫ γ.hom.app (op U) = A.base.app U V a ha) ∧ (∀ (X B : AlgebraicSpace S) (f : X ⟶ B) (G : X.QCoh) (A : SpaceSquareZeroExtension f G.obj), ∃ (X' : AlgebraicSpace S) (i : X ⟶ X') (q : X' ⟶ B), IsSpaceFirstOrderThickening i ∧ i ≫ q = f ∧ ∃ (T : ThickeningOverModel f i q) (γ : T.toThickeningSiteModel.rings ≅ A.algebra.obj), γ.hom ≫ A.quotient = T.quotient ∧ ∀ (U : X.EtaleSite) (V : B.EtaleSite) (a : U.obj.left ⟶ V.obj.left) (ha : U.obj.hom ≫ f.hom.hom = yoneda.map a ≫ V.obj.hom), T.base.app U V a ha ≫ γ.hom.app (op U) = A.base.app U V a ha) ∧ (∀ (X X' Y' B : AlgebraicSpace S) (f : X ⟶ B) (i : X ⟶ X') (j : X ⟶ Y') (q : X' ⟶ B) (r : Y' ⟶ B), IsSpaceFirstOrderThickening i → IsSpaceFirstOrderThickening j → i ≫ q = f → j ≫ r = f → ∀ (T : ThickeningOverModel f i q) (W : ThickeningOverModel f j r) (α : W.toThickeningSiteModel.rings ⟶ T.toThickeningSiteModel.rings), α ≫ T.quotient = W.quotient → (∀ (U : X.EtaleSite) (V : B.EtaleSite) (a : U.obj.left ⟶ V.obj.left) (ha : U.obj.hom ≫ f.hom.hom = yoneda.map a ≫ V.obj.hom), W.base.app U V a ha ≫ α.app (op U) = T.base.app U V a ha) → ∃! g' : X' ⟶ Y', i ≫ g' = j ∧ g' ≫ r = q ∧ ∀ U : X.EtaleSite, ∃ a' : (T.equivalence.inverse.obj U).obj.left ⟶ (W.equivalence.inverse.obj U).obj.left, T.reduction.app U ≫ a' = W.reduction.app U ∧ (T.equivalence.inverse.obj U).obj.hom ≫ g'.hom.hom = yoneda.map a' ≫ (W.equivalence.inverse.obj U).obj.hom ∧ (forget₂ CommRingCat RingCat).map (Scheme.Γ.map a'.left.op) = α.app (op U))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a7c65f0a",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Clause-by-clause check against Stacks 05ZS/05ZT/05ZN. Forward: restriction-equivalence site model T, plus G : X.QCoh, a SpaceSquareZeroExtension A (injective kernel, local surjectivity, square zero, quotient scalar action) and γ : T.rings ≅ A.algebra compatible with quotient and base; B = X', q = 𝟙 recovers the unbased statement. Converse matches 05ZT (commutativity per the stage-1 Q83 FIX). Maps: α : W.rings → T.rings with identity reduction and base compatibility gives ∃! g' : X' → Y' over B, restricting to id_X and inducing α on every lifted chart; direction and uniqueness correct. No extra hypotheses or universe restrictions; empty, identity, zero-kernel and affine cases checked. Added stmt_dep def-sfb-space-square-zero-extension-data is landed (Q149), used by the statement, acyclic. Not a duplicate of space_square_zero_ringed_realization, which lacks the forward QC-kernel clause. Proof is sorry only; docstrings carry source and blueprint; Worker report and Second reading sections present; not a rebind (no live lean record). No fix, so nothing compiled."
+ }
+}

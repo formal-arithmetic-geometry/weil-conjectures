@@ -1,0 +1,227 @@
+{
+ "id": "lem-per-monomial-quotient-normal-basis",
+ "kind": "statement",
+ "title": "Reduced monomial basis of a monomial minus scalar quotient",
+ "statement": "Let $A$ be a commutative ring, $n\\geq1$, $a=(a_1,\\ldots,a_n)\\in\\mathbf N^n\\setminus\\{0\\}$, and $c\\in A$. Put $P=A[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], $X^a=\\prod_iX_i^{a_i}$, and $C=P/(X^a-c)$. Let $E_a=\\{b\\in\\mathbf N^n:\\text{there exists }i\\text{ with }b_i<a_i\\}$. Then the family $(\\overline{X^b})_{b\\in E_a}$ is an $A$-module basis of $C$ [def-weil-pbc-free-module]: every element of $C$ has a unique expression $\\sum_{b\\in E_a}u_b\\overline{X^b}$ with $u_b\\in A$ and only finitely many nonzero coefficients. Zero entries of $a$, zero or invertible $c$, and rings with zero divisors are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Lemma 3.5.13(i), printed pp.250--251, exercise: agent-supplied general algebra input for the monomial presentation of Definition 3.5.11; the general basis assertion is an agent generalization, not a verbatim lemma of ILO. Its independent coefficient-reduction argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "For $v\\in\\mathbf N^n$, let $q(v)$ be the largest $q\\in\\mathbf N$ with $qa\\leq v$ coordinatewise. This exists: $0$ is allowed, and choosing $j$ with $a_j>0$ bounds $q\\leq v_j$. Put $b(v)=v-q(v)a$. Then $b(v)\\geq0$ and $b(v)\\in E_a$, since otherwise $(q(v)+1)a\\leq v$. Conversely, if $v=b+qa$ with $b\\in E_a$, choose $i$ with $b_i<a_i$; then $a_i>0$ and $(q+1)a_i>v_i$, so $q=q(v)$ and $b=b(v)$. Applying this uniqueness to $v+a=b(v)+(q(v)+1)a$ gives $q(v+a)=q(v)+1$ and $b(v+a)=b(v)$. In particular $v\\in E_a$ gives $q(v)=0$ and $b(v)=v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Definition 3.5.11 and Lemma 3.5.13(i), printed pp.250--251: agent coefficient-reduction argument for the general algebra input; the general basis assertion and this proof are not asserted verbatim in ILO."
+   }
+  },
+  {
+   "text": "Let $V\\subset P$ be the $A$-submodule of polynomials supported in $E_a$. By the finite coefficient description of the polynomial ring, define $N:P\\to V$ by $N(\\sum_v u_vX^v)=\\sum_v u_vc^{q(v)}X^{b(v)}$. This is a finite sum, supported on the image of the finite support of the input. Coefficientwise addition and scalar multiplication show directly that $N$ is $A$-linear. The last assertion of step 1 gives $N(h)=h$ for $h\\in V$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Definition 3.5.11 and Lemma 3.5.13(i), printed pp.250--251: agent coefficient-reduction argument for the general algebra input; the general basis assertion and this proof are not asserted verbatim in ILO."
+   }
+  },
+  {
+   "text": "Write $f=X^a-c$ and $I=(f)=\\{fg:g\\in P\\}$; this set is an ideal, since sums and products with arbitrary elements remain multiples of $f$, and it is the smallest ideal containing $f$. On each monomial the formulas of step 1 give $N(X^aX^v)=c^{q(v)+1}X^{b(v)}=cN(X^v)$. Expanding a finite polynomial and using linearity therefore gives $N(fg)=0$ for every $g\\in P$. Thus $N$ kills $I$. The quotient map $\\pi:P\\to C$ is surjective with kernel $I$, so if $\\pi(h)=\\pi(h\\prime)$ then $N(h)=N(h\\prime)$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Definition 3.5.11 and Lemma 3.5.13(i), printed pp.250--251: agent coefficient-reduction argument for the general algebra input; the general basis assertion and this proof are not asserted verbatim in ILO."
+   }
+  },
+  {
+   "text": "For $v=b+qa$ as in step 1, if $q=0$ then $X^v-N(X^v)=0$. If $q>0$, cancellation of consecutive terms in the finite sum gives $(T-c)\\sum_{r=0}^{q-1}T^{q-1-r}c^r=T^q-c^q$. Substituting $T=X^a$ and multiplying by $X^b$ yields $X^v-N(X^v)=(X^a-c)X^b\\sum_{r=0}^{q-1}(X^a)^{q-1-r}c^r\\in I$. Sum with the coefficients of any $h\\in P$ to obtain $h-N(h)\\in I$. Hence $\\pi(h)=\\pi(N(h))$; surjectivity of $\\pi$ proves existence of the required finite reduced expression in $C$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Definition 3.5.11 and Lemma 3.5.13(i), printed pp.250--251: agent coefficient-reduction argument for the general algebra input; the general basis assertion and this proof are not asserted verbatim in ILO."
+   }
+  },
+  {
+   "text": "If $h,h\\prime\\in V$ give two reduced expressions for the same element of $C$, step 3 gives $N(h-h\\prime)=0$. Step 2 gives $N(h-h\\prime)=h-h\\prime$, so $h=h\\prime$. Equality in the polynomial ring is coefficientwise, so the two finitely supported coefficient families on $E_a$ agree. Together with existence from step 4, this is exactly the basis property. The argument only uses $a\\ne0$ to bound the integer in step 1; it never divides by $c$ or cancels a nonzero ring element. Thus it applies also to zero entries of $a$, $c=0$, units $c$, the zero ring, and rings with zero divisors.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Definition 3.5.11 and Lemma 3.5.13(i), printed pp.250--251: agent coefficient-reduction argument for the general algebra input; the general basis assertion and this proof are not asserted verbatim in ILO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Definition 3.5.11 and Lemma 3.5.13(i), printed pp.250--251: agent coefficient-reduction argument for the general algebra input; the general basis assertion and this proof are not asserted verbatim in ILO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monomial.*quotient|quotient.*monomial|basis.*monic|normalForm",
+   "results": "{\"t\": \"2026-10-24T12:15:22Z\", \"tool\": \"grep\", \"query\": \"monomial.*quotient|quotient.*monomial|basis.*monic|normalForm\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/IsAdjoinRoot.lean\", \"Mathlib/RingTheory/IsAdjoinRoot.lean\", \"Mathlib/RingTheory/IsAdjoinRoot.lean\"], \"digest\": \"c37f24b04527bf6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial quotient by a monomial minus a constant is free over the coefficient ring with basis the unreduced monomials",
+   "results": "{\"t\": \"2026-10-24T12:15:23Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial quotient by a monomial minus a constant is free over the coefficient ring with basis the unreduced monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.free_quotient\", \"Polynomial.degreeLT.instFreeSubtypeMemSubmodule\", \"Polynomial.instFree\", \"MvPolynomial.instFree\", \"AdjoinRoot.powerBasisAux'\", \"Polynomial.coe_basisMonomials\", \"Polynomial.Monic.free_adjoinRoot\", \"MvPolynomial.modMonomial\"], \"digest\": \"cf8752eaae8ecf3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Basis",
+   "results": "{\"t\": \"2026-10-24T12:15:23Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Basis'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query error: loogle: unknown identifier 'Basis'; corrected query MvPolynomial, Module.Basis was then run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any commutative ring A and nonconstant monomial M, the quotient A[X_1,...,X_n]/(M-c) has an A-module basis consisting of monomials not divisible by M",
+   "results": "{\"t\": \"2026-10-24T12:15:24Z\", \"tool\": \"leanfinder\", \"query\": \"For any commutative ring A and nonconstant monomial M, the quotient A[X_1,...,X_n]/(M-c) has an A-module basis consisting of monomials not divisible by M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.powerBasisAux'\", \"IsAdjoinRootMonic.basis\", \"Polynomial.Monic.free_quotient\", \"AdjoinRoot.powerBasisAux\", \"IsAdjoinRootMonic.basis_one\", \"AdjoinRoot.powerBasis'\", \"WeierstrassCurve.Affine.CoordinateRing.basis\", \"WeierstrassCurve.Affine.CoordinateRing.basis_apply\"], \"digest\": \"0c9b070483d4567c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "modMonomial|divMonomial|quotient|basis",
+   "results": "{\"t\": \"2026-10-24T12:16:10Z\", \"tool\": \"grep\", \"query\": \"modMonomial|divMonomial|quotient|basis\", \"sub\": \"Algebra/MvPolynomial/Division.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"18\", \"23\", \"24\", \"47\"], \"digest\": \"7b34f0391cd0bb0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Module.Basis",
+   "results": "{\"t\": \"2026-10-24T12:16:11Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.basisMonomials\", \"MvPolynomial.basisRestrictSupport\", \"MvPolynomial.coe_basisMonomials\", \"LinearMap.toMvPolynomial_id\", \"LinearMap.toMvPolynomial\", \"LinearMap.toMvPolynomial_constantCoeff\", \"LinearMap.polyCharpolyAux\", \"LinearMap.polyCharpoly\"], \"digest\": \"7ca691b88a6aeb2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multivariate polynomial quotient by X to exponent a minus c admits unique representatives on monomials whose exponent vector is not componentwise at least a",
+   "results": "{\"t\": \"2026-10-24T12:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"Multivariate polynomial quotient by X to exponent a minus c admits unique representatives on monomials whose exponent vector is not componentwise at least a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.modMonomial\", \"MvPolynomial.divMonomial\", \"MvPolynomial.coeff_modMonomial_of_not_le\", \"MvPolynomial.modMonomial_X\", \"MvPolynomial.coeff_modMonomial_of_le\", \"MonomialOrder.div\", \"MvPolynomial.modMonomial_add_divMonomial_single\", \"MvPolynomial.monomial_modMonomial\"], \"digest\": \"8ab6a77b32bb1981\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "modMonomial|divMonomial|GroebnerBasis|normalForm",
+   "results": "{\"t\": \"2026-10-24T12:17:22Z\", \"tool\": \"grep\", \"query\": \"modMonomial|divMonomial|GroebnerBasis|normalForm\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give polynomial monomial bases, univariate monic quotients, or division by a monomial, not the basis of the multivariate quotient by a monomial minus an arbitrary scalar. MonomialOrder.div gives existence of a remainder, not this quotient basis in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*quotient|quotient.*monomial|modMonomial|normalForm",
+   "results": "{\"t\": \"2026-10-24T13:24:11Z\", \"tool\": \"grep\", \"query\": \"monomial.*quotient|quotient.*monomial|modMonomial|normalForm\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/Division.lean\", \"Mathlib/Algebra/MvPolynomial/Division.lean\", \"Mathlib/Algebra/MvPolynomial/Division.lean\", \"Mathlib/Algebra/MvPolynomial/Division.lean\", \"Mathlib/Algebra/MvPolynomial/Division.lean\"], \"digest\": \"f5cc76264366ad50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: monomial polynomial bases or support submodules, univariate monic quotients, and pure-monomial division do not state the quotient basis for an arbitrary nonzero exponent vector and arbitrary scalar in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Basis of a polynomial quotient by a monomial minus a constant over an arbitrary coefficient ring",
+   "results": "{\"t\": \"2026-10-24T13:24:11Z\", \"tool\": \"leansearch\", \"query\": \"Basis of a polynomial quotient by a monomial minus a constant over an arbitrary coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Sequence.basis\", \"Polynomial.basisMonomials\", \"Polynomial.degreeLT.basis\", \"IsLocalRing.basisQuotient_apply\", \"Polynomial.coe_basisMonomials\", \"AdjoinRoot.powerBasisAux'\", \"MvPolynomial.basisMonomials\", \"Polynomial.Monic.free_quotient\"], \"digest\": \"c07d261a5c3035af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: monomial polynomial bases or support submodules, univariate monic quotients, and pure-monomial division do not state the quotient basis for an arbitrary nonzero exponent vector and arbitrary scalar in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Module.Basis",
+   "results": "{\"t\": \"2026-10-24T13:24:12Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.basisMonomials\", \"MvPolynomial.basisRestrictSupport\", \"MvPolynomial.coe_basisMonomials\", \"LinearMap.toMvPolynomial_id\", \"LinearMap.toMvPolynomial\", \"LinearMap.toMvPolynomial_constantCoeff\", \"LinearMap.polyCharpolyAux\", \"LinearMap.polyCharpoly\"], \"digest\": \"7ca691b88a6aeb2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: monomial polynomial bases or support submodules, univariate monic quotients, and pure-monomial division do not state the quotient basis for an arbitrary nonzero exponent vector and arbitrary scalar in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a multivariate polynomial ring over any commutative ring by a nonconstant monomial minus a scalar has basis the monomials not divisible by that monomial",
+   "results": "{\"t\": \"2026-10-24T13:24:12Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of a multivariate polynomial ring over any commutative ring by a nonconstant monomial minus a scalar has basis the monomials not divisible by that monomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.basis\", \"AdjoinRoot.powerBasisAux'\", \"IsAdjoinRootMonic.basis\", \"WeierstrassCurve.Affine.CoordinateRing.basis_apply\", \"Polynomial.Monic.free_quotient\", \"MvPolynomial.basisRestrictSupport\", \"Algebra.PreSubmersivePresentation.basis\", \"IsAdjoinRootMonic.basis_one\"], \"digest\": \"5eaa1b0615826bf0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: monomial polynomial bases or support submodules, univariate monic quotients, and pure-monomial division do not state the quotient basis for an arbitrary nonzero exponent vector and arbitrary scalar in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "basis|Monic|quotient",
+   "results": "{\"t\": \"2026-10-24T13:25:17Z\", \"tool\": \"grep\", \"query\": \"basis|Monic|quotient\", \"sub\": \"RingTheory/AdjoinRoot.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"14\", \"15\", \"17\", \"61\", \"88\"], \"digest\": \"9127e7ba4b6cbf60\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: monomial polynomial bases or support submodules, univariate monic quotients, and pure-monomial division do not state the quotient basis for an arbitrary nonzero exponent vector and arbitrary scalar in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique coefficient reduction modulo X^a minus c: exponent vectors decompose as b plus q times a, yielding the reduced monomial basis",
+   "results": "{\"t\": \"2026-10-24T13:25:19Z\", \"tool\": \"leanfinder\", \"query\": \"Unique coefficient reduction modulo X^a minus c: exponent vectors decompose as b plus q times a, yielding the reduced monomial basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.modMonomial\", \"WittVector.remainder\", \"Polynomial.degreeLT.addLinearEquiv_apply_fst\", \"Polynomial.degreeLT.addLinearEquiv_apply'\", \"MvPolynomial.modMonomial_add_divMonomial\", \"Polynomial.degreeLT.addLinearEquiv_apply\", \"Polynomial.sum_modByMonic_coeff\", \"AdjoinRoot.powerBasisAux'_repr_symm_apply\"], \"digest\": \"8d3223c4b2af1ff7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: monomial polynomial bases or support submodules, univariate monic quotients, and pure-monomial division do not state the quotient basis for an arbitrary nonzero exponent vector and arbitrary scalar in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-primitive-monomial-trait-geometry",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Lemma 3.5.13(i), printed pp.250--251. General algebra input for the exercise in Lemma 3.5.13(i): reduced monomial coordinates for proving connectedness without an irreducibility theorem.",
+   "via": [
+    "lem-per-primitive-monomial-trait-geometry",
+    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-log-smooth-trait-punctual-purity",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-monomial-quotient-normal-basis",
+  "worker": "stage1",
+  "summary": "Q74 supplies the complete finite coefficient reduction proof in five elementary steps. It proves existence and uniqueness over every commutative coefficient ring without a cancellation hypothesis. Added the existing quotient-algebra definition to statement and proof dependencies. No new nodes, no new Mathlib leaves, and no change to the mathematical statement. Preserved original source, provenance and search records; recorded six searches actually run for this item.",
+  "blueprint": "Preserves the historical ancestor/via chain. The item is a general algebra input to Definition 3.5.11 and the exercise in ILO XVI Lemma 3.5.13(i) used by its creating parent lem-per-primitive-monomial-trait-geometry. The latest blueprint ancestor still supplies historical provenance, not an algebra lemma: steps 1--5 realize the independent reduced-coordinate argument rather than a new purity route. Whole-blueprint searches for monomial and reduced monomial found no matching statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-ed83256b8",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-ed83256b8 (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 cited definition nodes (all Mathlib leaves), the citer lem-per-primitive-monomial-trait-geometry, and ILO XVI Déf 3.5.11 and Lemme 3.5.13 (printed pp.250-251). The statement is byte-identical to live. The only stmt_dep added is the existing def-weil-pbc-algebra-hom-quotient, which is used: C is a quotient algebra, and steps 3-4 take surjectivity and kernel=J from it. The 5 elementary steps are correct. (1) q(v) is bounded through some a_j>0, and uniqueness follows from b_i<a_i, which gives (q+1)a_i>v_i. (2) The reduction map N is A-linear and is the identity on reduced polynomials. (3) N(X^a g)=cN(g), so N kills (f). (4) The telescoping identity T^q-c^q=(T-c)Σ uses no division, which gives existence. (5) Uniqueness follows coefficientwise. Small cases checked: n=1 a=1; a=(0,2); a=(1,1), which agrees with lem-sfb-binomial-laurent-normal-form; c=0; Z/4 with c=2; the zero ring. a=0 is correctly excluded (E_0 is empty but P/(1-c) can be nonzero). No new nodes. rg -L over the DAG finds only special cases (binomial xy-a, univariate monic), so there is no duplicate. Only Mathlib-leaf definitions are cited, so there is no route issue and no tool_uses. No repair note, so the re-split rule does not apply. No fixes."
+ }
+}

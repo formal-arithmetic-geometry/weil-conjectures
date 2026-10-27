@@ -1,0 +1,118 @@
+{
+ "id": "lem-z8-ordinary-finite-diagonal-chart-exchange",
+ "kind": "statement",
+ "title": "Ordinary Finite Diagonal Chart Exchange",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem projectiveLineDiagonalSquare (S : Scheme.{u}) (a : Bool) :\n    CommSq (projectiveLineDiagonalProjection S (!a))\n      (projectiveLineDiagonalProjection S a) (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S) :=\n  match a with\n  | false => (IsPullback.of_hasPullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)).flip.toCommSq\n  | true => (IsPullback.of_hasPullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)).toCommSq\n\n/-- The unselected coordinate of the diagonal chart is the standard projective-line map. -/\ntheorem projectiveLineDiagonalChart_other (S : Scheme.{u}) (a : Bool) :\n    (projectiveLineDiagonalChart S a).val.hom ≫ projectiveLineDiagonalProjection S (!a) =\n      ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)\n\ntheorem projectiveLineDiagonalChart_other (S : Scheme.{u}) (a : Bool) :\n    (projectiveLineDiagonalChart S a).val.hom ≫ projectiveLineDiagonalProjection S (!a) =\n      ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)\n\ntheorem ordinaryFiniteDiagonalChart_exchange\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    (derivedBaseChangeMap (ModuleCat.{u + 1} A) (projectiveLineDiagonalSquare S a)).app\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map\n        (ordinaryFiniteShiftedLinePullback A N hA t\n          (projectiveLineDiagonalProjection S (!a)) (ordinaryFiniteP1_isUnit N S hS)).hom ≫\n      ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n    (derivedBaseChangeMap (ModuleCat.{u + 1} A)\n        (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)).toCommSq).app\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n      (ordinaryFinitePushforward A (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).map\n        (ordinaryFiniteShiftedLinePullback A N hA t\n          (ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S))\n          (ordinaryFiniteP1_isUnit N S hS)).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-asd-ordinary-finite-p1-kummer-maps",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula",
+  "lem-z8-etale-chart-exchange-pasting",
+  "lem-z8-ordinary-finite-twist-composition"
+ ],
+ "proof": [
+  {
+   "text": "Identify the unchanged F1 recorded chart transport with the generic chart construction using the chart-map identification lemma. The projective-space pullback chart has the recorded selected projection and the other coordinate equal to the projective-line map. Apply chart exchange pasting with those two equalities. The normalized shifted-line composition law moves its coefficient comparison through the chart, giving the displayed exchange equation for each coordinate.",
+   "uses": [
+    "def-sfb-etale-coordinate-trace-data",
+    "lem-sp-finite-p1-diagonal-kummer-component-formula",
+    "lem-z8-etale-chart-exchange-pasting",
+    "lem-z8-ordinary-finite-twist-composition",
+    "lem-z8-ordinary-finite-diagonal-chart-exchange-aux"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-sp-finite-p1-diagonal-kummer-component-formula",
+  "lem-z8-etale-chart-exchange-pasting",
+  "lem-z8-ordinary-finite-twist-composition",
+  "lem-z8-ordinary-finite-diagonal-chart-exchange-aux"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteDiagonalChartExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalChart_exchange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalSquare",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalChart_other",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalChart_exchange"
+  ],
+  "statement": "theorem ordinaryFiniteDiagonalChart_exchange\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    (derivedBaseChangeMap (ModuleCat.{u + 1} A) (projectiveLineDiagonalSquare S a)).app\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map\n        (ordinaryFiniteShiftedLinePullback A N hA t\n          (projectiveLineDiagonalProjection S (!a)) (ordinaryFiniteP1_isUnit N S hS)).hom ≫\n      ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n    (derivedBaseChangeMap (ModuleCat.{u + 1} A)\n        (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)).toCommSq).app\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n      (ordinaryFinitePushforward A (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).map\n        (ordinaryFiniteShiftedLinePullback A N hA t\n          (ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S))\n          (ordinaryFiniteP1_isUnit N S hS)).hom",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-cartier-extension-factorial-complement",
+ "kind": "statement",
+ "title": "Extension of effective Cartier divisors across factorial local rings",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] and $V\\subset X$ an open subscheme [def-pc-scheme]. Let $D\\subset V$ be an effective Cartier divisor [def-pc-divisor-line-bundle]. Suppose that for every $x\\in X\\setminus V$ the local ring $\\mathcal O_{X,x}$ is a unique factorization domain: an integral domain in which every nonzero nonunit is a finite product of prime elements, uniquely up to order and unit factors. Then there exists an effective Cartier divisor $D^{\\mathrm{ext}}\\subset X$ with $D^{\\mathrm{ext}}\\cap V=D$ as closed subschemes of $V$. No density, separatedness or integrality of $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD8 (lemma-closure-effective-cartier-divisor)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "The open immersion $V\\hookrightarrow X$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc]. For an affine open $B\\subset X$, $D\\cap B$ is closed in the quasi-compact space $V\\cap B$, so it is quasi-compact; hence $h:D\\to X$ is quasi-compact. It is a monomorphism (a composite of the two subscheme inclusions), so its diagonal is an isomorphism and it is quasi-separated as well. Form its scheme-theoretic image $C\\subset X$ using [lemma-nagata-scheme-image-ideal-qc]. By [lemma-nagata-scheme-image-restrict-open] its restriction to $V$ is the scheme-theoretic image of the closed immersion $D\\hookrightarrow V$, which is $D$ by [lemma-nagata-scheme-image-of-closed-immersion]. Thus $C\\cap V=D$ as closed subschemes.",
+   "uses": [
+    "lem-sfb-noetherian-open-immersion-qc",
+    "def-weil-closed-immersion",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof; construction of the scheme-theoretic image and restriction to opens"
+   }
+  },
+  {
+   "text": "Fix $x\\in X\\setminus V$ and put $A=\\mathcal O_{X,x}$. Choose an affine open $\\operatorname{Spec}B$ containing $x$. Its coordinate ring is Noetherian by [pqf-lem-affine-open-locnoeth], and $A=B_{\\mathfrak p}$ by [lem-weil-pbc-affine-open-stalk-localization], so $A$ is Noetherian by [lem-weil-pbc-localization-noetherian]. It is a UFD by the hypothesis. The canonical morphism $c:\\operatorname{Spec}A\\to X$ is flat and identifies the closed-point local ring with $\\mathcal O_{X,x}$, by [lem-weil-pbc-spec-local-ring-canonical-morphism]. Therefore [lem-sfb-scheme-image-flat-base-change] identifies $C_A=C\\times_X\\operatorname{Spec}A$ with the scheme-theoretic image of $E=D\\times_X\\operatorname{Spec}A$. Set $W=c^{-1}V$. The local equations of $D$ remain nonzerodivisors after pullback: every stalk map of $c$ is an isomorphism by the same canonical-morphism lemma. Thus $E$ is an effective Cartier divisor on $W$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-scheme-image-flat-base-change",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof; reduction to the spectrum of the local UFD at a complement point"
+   }
+  },
+  {
+   "text": "The single affine chart makes $\\operatorname{Spec}A$ locally Noetherian. It is quasi-compact: a cover can be refined to basic opens $D(b)$, the $b$ generate the unit ideal (otherwise a maximal ideal misses the cover), and a finite expression for $1$ yields a finite subcover. Thus it is Noetherian, and its open $W$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Its local rings are prime localizations of $A$ by [lem-weil-pbc-affine-open-stalk-localization], hence UFDs by [lem-sfb-ufd-prime-localizations]. Apply [lem-sfb-factorial-cartier-prime-decomposition] to obtain $\\mathcal I_E=\\prod_i\\mathcal I_{E_i}^{a_i}$ with integral Cartier components having generic points $\\xi_i$ and $\\dim\\mathcal O_{W,\\xi_i}=1$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-ufd-prime-localizations",
+    "lem-sfb-factorial-cartier-prime-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof; finite decomposition into integral effective Cartier divisors"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p_i\\subset A$ correspond to $\\xi_i$. Since $W$ is open, its local ring there is $A_{\\mathfrak p_i}$; the dimension-one conclusion says that $\\mathfrak p_i$ has height one. By [lem-trf-ufd-height-one], $\\mathfrak p_i=(f_i)$. Choose the $f_i$ pairwise nonassociated; each is a nonzero prime element because $A$ is a domain and $(f_i)$ is a nonzero prime ideal. The reduced closed subscheme $V(f_i)\\cap W$ is precisely $E_i$: both are the reduced closure in $W$ of $\\xi_i$. Indeed on every affine chart meeting that closure the defining radical prime is the prime corresponding to that generic point. Hence the given equality of ideal products says that $E$ is cut out on $W$ by $F=\\prod_i f_i^{a_i}$.",
+   "uses": [
+    "lem-trf-ufd-height-one",
+    "def-pc-integral-scheme",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof; height-one primes are principal; the equation for the divisor on the open"
+   }
+  },
+  {
+   "text": "Write $J\\subset A$ for the ideal of $C_A$. By [lem-weil-pbc-scheme-image-qc-kernel], $J=\\ker(A\\to\\Gamma(E,\\mathcal O_E))$. The equation in the preceding step gives $(F)\\subset J$. Conversely, take $b\\in J$. For each $i$ choose a basic open $D(h_i)\\subset W$ containing $\\xi_i$, so $h_i\\notin(f_i)$. Its restriction satisfies $b/1\\in(F)A_{h_i}\\subset(f_i^{a_i})A_{h_i}$. The fraction equality rule gives $h_i^n b\\in(f_i^{a_i})$ for some $n$. Since the prime $f_i$ does not divide $h_i$, unique factorization implies $f_i^{a_i}\\mid b$. The $f_i$ are pairwise nonassociated, so unique factorization gives $F\\mid b$. Thus $J=(F)$. If the decomposition is empty, $E$ is empty, $F=1$, and the same kernel is $A$.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof; explicit verification that the closure ideal is the product ideal"
+   }
+  },
+  {
+   "text": "The product $F$ is nonzero in the domain $A$ (including the empty product $1$), so multiplication by $F$ is injective. At the closed point of $\\operatorname{Spec}A$, its ideal $J=(F)$ is already the stalk ideal. The canonical-morphism identification in step 2 therefore proves that $\\mathcal I_{C,x}$ is generated by a nonzerodivisor. For $x\\in V$ this follows from $C\\cap V=D$; at points outside $C$ the generator is $1$. Every stalk of $\\mathcal I_C$ is now covered. Apply [lem-sfb-stalk-nonzerodivisor-cartier-spreading] to the closed subscheme $C$ of the locally Noetherian $X$. It is an effective Cartier divisor, and the previously proved equality $C\\cap V=D$ gives the required $D^{\\mathrm{ext}}=C$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-stalk-nonzerodivisor-cartier-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof; return to stalks and spread the nonzerodivisor generators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-open-immersion-qc",
+  "def-weil-closed-immersion",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sfb-scheme-image-flat-base-change",
+  "def-pc-divisor-line-bundle",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-ufd-prime-localizations",
+  "lem-sfb-factorial-cartier-prime-decomposition",
+  "lem-trf-ufd-height-one",
+  "def-pc-integral-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "def-weil-ring-localization-away",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD8, lemma-closure-effective-cartier-divisor, proof, with the final product-ideal identification written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Effective Cartier divisors extend from an open subscheme across factorial local rings of a locally noetherian scheme",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, AlgebraicGeometry.instIsLocallyNoetherianXScheme, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.Scheme.basic_open_isOpenImmersion, AlgebraicGeometry.IsLocallyNoetherian.recOn, AlgebraicGeometry.IsLocallyNoetherian.mk, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveCartierDivisor\", \"closure\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "closure.*[Cc]artier|[Cc]artier.*closure|extend.*[Cc]artier|[Cc]artier.*extend",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of an effective Cartier divisor on an open subset is an effective Cartier divisor if local rings of the complement are UFDs",
+   "results": "8 hits: AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.zeroLocus_singleton, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern basic opens, Noetherianity, sections or ideal supports, not the asserted Cartier-divisor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend an effective Cartier divisor from an open subscheme across unique factorization local rings in a locally Noetherian scheme",
+   "results": "{\"t\": \"2026-10-23T13:56:08Z\", \"tool\": \"leanfinder\", \"query\": \"Extend an effective Cartier divisor from an open subscheme across unique factorization local rings in a locally Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.basicOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"39dbac61ef7d6f51\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basic-open sections, kernels, zero loci or image constructions; they do not assert Cartier extension across a factorial complement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\", \"closure\"",
+   "results": "{\"t\": \"2026-10-23T13:56:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cartier\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basic-open sections, kernels, zero loci or image constructions; they do not assert Cartier extension across a factorial complement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]artier.*(extend|closure)|(extend|closure).*[Cc]artier",
+   "results": "{\"t\": \"2026-10-23T13:56:05Z\", \"tool\": \"grep\", \"query\": \"[Cc]artier.*(extend|closure)|(extend|closure).*[Cc]artier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basic-open sections, kernels, zero loci or image constructions; they do not assert Cartier extension across a factorial complement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of effective Cartier divisor across factorial complement is Cartier",
+   "results": "{\"t\": \"2026-10-23T13:56:06Z\", \"tool\": \"leansearch\", \"query\": \"Schematic closure of effective Cartier divisor across factorial complement is Cartier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\"], \"digest\": \"93599c844f0cde1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basic-open sections, kernels, zero loci or image constructions; they do not assert Cartier extension across a factorial complement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A divisor on an open subscheme extends to an effective Cartier divisor when all missing stalks are UFD",
+   "results": "{\"t\": \"2026-10-23T13:56:07Z\", \"tool\": \"leanfinder\", \"query\": \"A divisor on an open subscheme extends to an effective Cartier divisor when all missing stalks are UFD\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\"], \"digest\": \"0dadff44cea26c11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are basic-open sections, kernels, zero loci or image constructions; they do not assert Cartier extension across a factorial complement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-dvr-generic-line-extension",
+  "group": "Q72",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: Extension of a generic-fibre line bundle over a smooth DVR scheme. Supporting divisor-construction input: Extension of effective Cartier divisors across factorial local rings.",
+   "via": [
+    "lem-sfb-smooth-dvr-generic-line-extension",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cartier-extension-factorial-complement",
+  "worker": "stage1",
+  "summary": "Checked Tag 0BD8 against every hypothesis; constructed the schematic closure, reduced by flat local-spectrum base change, decomposed the divisor over UFD stalks, and proved the product ideal equals its closure by explicit prime-power divisibility. Reused the existing stalk Cartier criterion. Added two Mathlib leaves, one exact closed-project attachment, and one unsplit Cartier-decomposition input. No statement correction was needed.",
+  "blueprint": "Supporting Cartier-extension input in the recorded Picard/line-extension chain serving det-thm-sf-ctf-stability-direct-images (3); current latest blueprint compactification/direct-image route is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "General algebraic-geometry tool used only for the scheme-theoretic closure/stalk argument in Tag 0BD8; it does not replace any constructibility or alteration step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-d55dbca6f",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-d55dbca6f (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0BD8 (divisors.tex) and its cited lemmas 0AG8, 0BCP, 0BCN and 081I. The item's statement matches 0BD8 exactly and is unchanged; nothing is weakened. All six steps are correct. Step 1: open immersions into a locally Noetherian scheme are quasi-compact (Mathlib leaf), and the image restricts to opens (Lean-closed), so C∩V=D. Step 2: base change to Spec O_{X,x} through the flat canonical morphism (declared tool_use, accepted as a generic tool) and the new flat-image node. Step 3: Spec A and W are Noetherian with UFD stalks (new Mathlib leaf), so the decomposition node applies. Step 4: height one plus Mathlib's 0AFT gives p_i=(f_i) and E_i=V(f_i)∩W. Step 5: I checked the kernel J=(F) by prime-power divisibility in the UFD A. Step 6: the stalk at x is (F) by the canonical-morphism clauses, and the stalk Cartier criterion finishes. Small cases checked: V=X, V=∅, D=∅, A a field, and V(x²)|D(y) in k[x,y]_(x,y), which keeps the multiplicity. New nodes: the two Mathlib leaves are verified at Noetherian.lean:204-215, UniqueFactorization.lean:79-81 and AtPrime/Basic.lean:96-100. The flat-image node is true and needed: Lean ker_pullback_snd and image.pullbackIso need only quasi-compactness and are sorry-free per the sorry map, and the only existing node is the dense special case. The decomposition node (0BCP+0BCN(2)) is true and not a duplicate. No new node restates the item, and there is no SGA. Batch 5: lem-trf-ufd-height-one is a Mathlib leaf of general commutative algebra (Stacks 0AFT) with no dependencies; neither assumption gives it and it is not part of their proofs, so it is accepted. FIX in lem-sfb-scheme-image-flat-base-change: `Y\\prime`/`g\\prime` replaced by `Y'`/`g'` (B4), and lean_candidates added for the three slopmaster2 declarations the report attaches.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierExtensionFactorialComplement",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_isInvertible_extension_of_factorial_complement",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierExtensionFactorialComplement.lean",
+  "statement": "theorem exists_isInvertible_extension_of_factorial_complement {X : Scheme.{u}} [IsLocallyNoetherian X] (V : X.Opens) (D : V.toScheme.IdealSheafData) (hD : D.IsInvertible) (hfactorial : ∀ x : X, x ∉ V → IsDomain (X.presheaf.stalk x) ∧ UniqueFactorizationMonoid (X.presheaf.stalk x)) : ∃ Dext : X.IdealSheafData, Dext.IsInvertible ∧ Dext.comap V.ι = D",
+  "branch": "sheaf-dag",
+  "by": "Q158",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6489a5dc8",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BD8 and the node clause by clause: IsLocallyNoetherian X with free universe u; V : X.Opens; D : V.toScheme.IdealSheafData with IsInvertible (affine-local nonzerodivisor generator, Invertible.lean:62); UFD = IsDomain ∧ UniqueFactorizationMonoid on stalks, only for x ∉ V; conclusion ∃ Dext invertible with Dext.comap V.ι = D (Mathlib comap = ker of pullback, so equality as closed subschemes with multiplicities). No extra hypotheses. Node record differs from live only by the lean field; lean.statement equals the file signature verbatim (script check). Docstrings carry source place, blueprint id and the six proof steps; proof is sorry only; no new nodes or defs; no duplicate declaration in Mathlib or the project. Edge cases V=∅, V=X, empty divisor, nonreduced divisor, field stalks checked. Advisory: forward-looking private proof-dep imports are harmless. Not recompiled per instructions; worker reports a clean compile."
+ }
+}

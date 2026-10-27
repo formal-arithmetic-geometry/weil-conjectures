@@ -1,0 +1,52 @@
+## Worker report
+
+This stage-2 delivery states `AlgebraicGeometry.Scheme.Modules.projective_twist_euler_section_uniqueness` in `Sheaf.AlgebraicGeometry.ProjectiveTwistEulerSectionUniqueness`. Its proof is `sorry`; no theorem is proved. The three public helper definitions contain real data and only specialize notions already present in the statement dependencies. No new node, dependency repair, statement correction, or disputed statement is needed.
+
+The previous worker's stage-1 blocker does not apply: the live node has an accepted Q160 split (2026-10-23), no Lean record, and is listed in stage 2 in the queue. The stage handoff in brief-stage2 §0 expressly permits stating this accepted split. No split is reopened.
+
+The statement and source were read together: coherent.tex `lemma-coherent-projective`, Tag 01YS (2)--(4), gives finiteness, a cohomological bound, and eventual positive-degree vanishing; varieties.tex `lemma-hilbert-polynomial-H0`, Tag 08AE, gives the reduction to H^0. The closed-immersion form follows by pushforward. The polynomial-root and empty-space arguments are the node's explicit agent arguments. The accepted node statement and all fields except `lean` are preserved.
+
+Clause-by-clause correspondence:
+
+- The field k is `{k : Type u} [Field k]`; `{N : ℕ}` encodes N ≥ 0 without a redundant inequality hypothesis. `{X : Scheme.{u}}` is arbitrary, including empty X. Universes and variables are explicitly bound; `autoImplicit` is false.
+- The precise polynomial Proj is `Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (N + 1))) k`. Its definition in `WeilConjectures.AlgebraicGeometry.ProjectiveSpace` is literally `Proj (MvPolynomial.homogeneousSubmodule ... k)` with the total-degree grading. This is not the alternate base-change construction `ℙ(...; Spec k)`. ULift only puts the finite coordinate set in the coefficient universe; it has exactly N+1 coordinates.
+- The named embedding is `(i : X ⟶ ...) [IsClosedImmersion i]`, using the dependency's Mathlib class; no extra properness, Noetherian, nonemptiness, algebraic closure, or compatibility hypothesis is assumed.
+- `(F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation]` expresses the given quasi-coherent module with a local finite presentation. Mathlib's `SheafOfModules.IsFinitePresentation` is defined by local finite presentations, and implies the quasi-coherence and finite-type predicates underlying the recorded `IsQuasiCoherentFiniteType`. Both literal node hypotheses are retained, although quasi-coherence follows from finite presentation in this API.
+- `projectiveClosedTwist i F m` is exactly `F ⊗ (tensorPullback i).obj (Proj.twist ... (m : ℤ))`. It uses the existing twist and section-normalized tensor pullback, with no second construction of either. The total-degree instance is explicit inside this definition, so consumers need no local notation or local instance to read the theorem.
+- `projectiveClosedTwistCohomology i F m q` is the dependency's `RingedSpace.moduleCohomology X.toRingedSpace q`, evaluated on that twist, then restricted to k by `ModuleCat.restrictScalars`. The ring map is the composite of `ΓSpecIso.inv` and the top-section map of `i ≫ Proj.projectiveSpaceOverAffineToSpec ... k`. Thus it is exactly the induced k-action, including on an empty X. This does not substitute the abelian-sheaf Ext model for module right-derived sections.
+- The first conjunct is `∀ m q : ℕ, FiniteDimensional k (...)`, so it covers every nonnegative twist and every cohomological degree, including twists below the later bound.
+- The second conjunct has one `∃ b : ℕ`, then `∀ m, b ≤ m → ...`. Its first clause is `∀ q, 0 < q → IsZero (...)`, so the bound is uniform in q. Its second clause is `projectiveClosedTwistEuler ... = (Module.finrank k (... 0) : ℤ)`.
+- `projectiveClosedTwistEuler` directly applies the recorded `Scheme.Modules.eulerChar` to E_m, with `OverClass.ofHom` of that same induced structure map. No arbitrary k-scheme structure or alternate Euler sum is supplied. The existing Euler characteristic is defined through ordinary cohomology; the established module/ordinary-cohomology comparison is a proof bridge, not an added hypothesis.
+- The third conjunct quantifies `P₁ P₂ : Polynomial ℚ`, gives each its own natural eventual threshold and equality between `Pᵢ.eval (m : ℚ)` and the rational cast of the degree-zero dimension, and concludes `P₁ = P₂`. It asserts uniqueness, not an additional existence claim.
+- The fourth conjunct assumes `IsEmpty X`, then says `∀ m q, IsZero (...)`, `∀ m, ...Euler... = 0`, and that every rational polynomial with the same eventual dimension property is zero. All statements apply from m=0, not merely eventually.
+- The final sentence about F=O_X is a specialization of the theorem's arbitrary F. The structure sheaf is the existing `SheafOfModules.unit X.ringCatSheaf`, quasi-coherent with the finite presentation O^0 → O → O → 0, as the node's proof records. No independent postponed theorem is introduced for this specialization.
+
+Dependency declarations and sources read:
+
+- `Mathlib.Algebra.Field.Defs`: `Field`; `Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic` and `.Scheme`: `Proj`, `Proj.basicOpen`, `projIsoSpec`; `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`: `Proj.projectiveSpaceOverAffine`, `Proj.projectiveSpaceOverAffineToSpec` (the concrete polynomial specialization of def-pc-proj).
+- `Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion`: `IsClosedImmersion` (closed embedding plus surjective stalk maps).
+- `Sheaf.AlgebraicGeometry.CoherentFiniteType`: `Scheme.Modules.IsQuasiCoherentFiniteType`; its components and the stronger local-finite-presentation hypothesis are the existing Mathlib `SheafOfModules.IsQuasicoherent`, `IsFiniteType`, `IsFinitePresentation`, whose full local-presentation definitions were read in `Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent`.
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses`: `SheafOfModules.cochainModulesMonoidal` and the publicly imported tensor interface; the module uses the established monoidal tensor `⊗` on X.Modules.
+- `Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction`: `tensorPullbackSectionAdjunction` and its publicly imported `Scheme.Modules.tensorPullback`, the explicit inverse-image/change-of-rings construction. The helper uses that exact tensorPullback, never Mathlib's alternate pullback.
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules`: `Proj.twist`, read with its grading parameters and locally-homogeneous-fraction docstring.
+- `WeilConjectures.AlgebraicGeometry.PQFCohomology`: `sheafCohomologyAndHigherDirectImages`, whose stated cohomology functors are the existing `RingedSpace.moduleCohomology`; its public source `WeilConjectures.Topology.RingedSpaceModuleCohomology` defines these as right-derived module global sections.
+- `WeilConjectures.AlgebraicGeometry.Cohomology.Defs`: `Scheme.Modules.eulerChar`, read with its induced-field-action parameters and finite-sum convention. `Scheme.Modules.H` is not used in the new cohomology helper.
+
+All recorded proof-dependency modules are imported plainly unless already public statement dependencies. These include scalar extension, closed-immersion cohomological boundedness, finiteness, Serre vanishing, projective properness, finite type over a Noetherian base, and coherent/finite-type comparison. The theorem docstring carries all six accepted proof steps, including the explicit comparison of polynomial Proj and the base-change projective-space model.
+
+Edge cases checked mathematically before writing: N=0 (one projective coordinate and no positive cohomology); empty X (all module sheaves zero, the structure map and scalar restriction still exist); F=0; m=0 and q=0 (finiteness applies without the eventual bound); arbitrary positive characteristic and finite fields (the uniqueness argument is over Q, whose natural-number points are distinct); a negative eventual threshold can always be replaced by 0 because the function's domain is ℕ. No case is excluded by the helper definitions or hypotheses.
+
+Searches for an existing exact declaration:
+
+- `msearch.py leanfinder`, query “Serre vanishing finite dimensional cohomology of twists on closed projective subschemes and uniqueness of eventual global section dimension polynomial”: 8 hits, including `AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top`, `Proj.ext`, and categorical projective-resolution lemmas; none states the result.
+- `msearch.py loogle`, query `Polynomial.eq_of_infinite_eval_eq, Module.finrank`: 0 hits.
+- `msearch.py grep`, query `eulerChar|Serre.*vanish|vanish.*twist`, Mathlib/AlgebraicGeometry: 0 hits.
+- `msearch.py leansearch`, query “Serre vanishing finite dimensional coherent sheaf cohomology projective scheme”: 8 hits about local sections, Proj's structure sheaf and proper global-function finiteness; none supplies the combined theorem.
+- `rg` of `lean/WeilConjectures` and `lean/Sheaf` for Euler characteristic, eventual polynomials, section polynomials and vanishing found the existing Euler definition, Serre theorem, MRegularConsequences, FlatGradedTailProj, and ProjectiveCoordinateRingEulerPolynomial. They provide constituents or special cases (not arbitrary F on a closed polynomial-Proj subscheme with every clause here). The latter's module was read; it concerns the graded quotient's coordinate dimensions, not this theorem.
+- Exact item-id search in both project libraries and name search for the four delivered declarations in the project, Mathlib and `dag/lean_names_upstream.json` found no existing match or collision. Wrapper search outputs are retained in sandbox `searches.jsonl`.
+
+Validation: `scompile.py Q32 lem-sfb-projective-twist-euler-section-uniqueness` compiled this module both as the sandbox module and under its library module name, with no errors or warnings (2.1 s and 2.0 s). The first compile exposed the implicit argument names of `MvPolynomial.gradedAlgebra`; they were made explicit as `(σ := ...) (R := k)` and the subsequent compile was clean. No build of the shared library was run.
+
+## Second reading by Q32
+
+No second worker was started: the dispatch brief prohibits starting other agents and says the maintainer's independent review reads this delivery. This section records that independent review remains the maintainer's responsibility; it does not claim an independent worker review.

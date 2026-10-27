@@ -1,0 +1,242 @@
+{
+ "id": "lem-sp-site-scalar-counit-pair-conjugacy",
+ "kind": "statement",
+ "title": "Explicit conjugacy of the two scalar-counit maps across site comparisons",
+ "statement": "Let $\\mathcal X_R,\\mathcal Y_R,\\mathcal X'_R,\\mathcal Y'_R$ for $R=A,B$ be categories [def-nagata-category]. All functors preserve identities and composition; all transformations below are natural, and composition is right to left with the canonical functor associators. Give functors $F_R:\\mathcal X_R\\to\\mathcal Y_R$, $H_R:\\mathcal Y_R\\to\\mathcal X_R$, $F'_R:\\mathcal X'_R\\to\\mathcal Y'_R$, $H'_R:\\mathcal Y'_R\\to\\mathcal X'_R$, and natural maps $\\epsilon_R:F_RH_R\\to1$, $\\epsilon'_R:F'_RH'_R\\to1$; these maps need not be counits of adjunctions. Give comparison functors $C_{X,R}:\\mathcal X_R\\to\\mathcal X'_R$, $C_{Y,R}:\\mathcal Y_R\\to\\mathcal Y'_R$, with $C_{Y,A}$ essentially surjective (every target object is isomorphic to one of its values). Give natural isomorphisms\n$$c_R:C_{Y,R}F_R\\xrightarrow{\\sim}F'_RC_{X,R},\\qquad r_R:H'_RC_{Y,R}\\xrightarrow{\\sim}C_{X,R}H_R$$\nsuch that for every $L\\in\\mathcal Y_R$,\n$$\\epsilon'_{R,C_{Y,R}L}=C_{Y,R}(\\epsilon_{R,L})\\circ c_R(H_RL)^{-1}\\circ F'_R(r_{R,L}).$$\nGive functors $T_X:\\mathcal X_A\\to\\mathcal X_B$, $T_Y:\\mathcal Y_A\\to\\mathcal Y_B$, $T'_X:\\mathcal X'_A\\to\\mathcal X'_B$, $T'_Y:\\mathcal Y'_A\\to\\mathcal Y'_B$ and natural isomorphisms\n$$\\delta_X:T'_XC_{X,A}\\xrightarrow{\\sim}C_{X,B}T_X,\\qquad \\delta_Y:T'_YC_{Y,A}\\xrightarrow{\\sim}C_{Y,B}T_Y.$$\nGive natural maps $q:T_YF_A\\to F_BT_X$, $q':T'_YF'_A\\to F'_BT'_X$, $a:T_XH_A\\to H_BT_Y$, $a':T'_XH'_A\\to H'_BT'_Y$. Assume the two specified comparison squares, for all $M\\in\\mathcal X_A$ and $L\\in\\mathcal Y_A$:\n$$F'_B(\\delta_{X,M})q'_{C_{X,A}M}T'_Y(c_A(M))\n=c_B(T_XM)C_{Y,B}(q_M)\\delta_{Y,F_AM},$$\n$$r_{B,T_YL}H'_B(\\delta_{Y,L})a'_{C_{Y,A}L}\n=C_{X,B}(a_L)\\delta_{X,H_AL}T'_X(r_{A,L}).$$\nDefine the parallel pairs\n$$D_L=\\epsilon_{B,T_YL}F_B(a_L)q_{H_AL},\\quad E_L=T_Y(\\epsilon_{A,L}),$$\n$$D'_K=\\epsilon'_{B,T'_YK}F'_B(a'_K)q'_{H'_AK},\\quad E'_K=T'_Y(\\epsilon'_{A,K}).$$\nSet the isomorphism\n$$Z_L=\\delta_{Y,F_AH_AL}\\circ T'_Y(c_A(H_AL)^{-1})\\circ T'_Y(F'_A(r_{A,L})).$$\nThen the following two identities hold separately, without assuming $D_L=E_L$:\n$$\\delta_{Y,L}D'_{C_{Y,A}L}=C_{Y,B}(D_L)Z_L,\\qquad\n\\delta_{Y,L}E'_{C_{Y,A}L}=C_{Y,B}(E_L)Z_L.$$\nConsequently, if $D_L=E_L$ for every $L\\in\\mathcal Y_A$, then $D'_K=E'_K$ for every $K\\in\\mathcal Y'_A$. No full faithfulness, invertibility of $q,q',a,a'$, adjunction axioms, or identification of a comparison isomorphism with an identity is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: transport the actual counit through the specified site comparison and coefficient square, then pass to arbitrary comparison-equivalent inputs; returned Steps 5--6 and first assertion of Step 7; agent-written categorical expansion of the Charts paragraph"
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $L\\in\\mathcal Y_A$ and abbreviate $M=H_AL$, $C=C_{Y,A}$, $V=C_{Y,B}$, $s=r_{A,L}:H'_ACL\\to C_{X,A}M$, and $u=\\delta_{Y,L}:T'_YCL\\to VT_YL$. Composition remains right to left. By [def-nagata-category] we may reassociate composites. Naturality here means $Q(h)\\alpha_U=\\alpha_WP(h)$ for $\\alpha:P\\to Q$ and $h:U\\to W$. Thus naturality of $\\epsilon'_B$ at $u$ and the stipulated evaluation formula at $T_YL$ give\n$$uD'_{CL}=V(\\epsilon_{B,T_YL})c_B(H_BT_YL)^{-1}F'_B\\bigl(r_{B,T_YL}H'_B(u)a'_{CL}\\bigr)q'_{H'_ACL}.$$\nThe full composite has the same source $T'_YF'_AH'_ACL$ and target $VT_YL$ as the left side; the factors inside $F'_B$ compose from $T'_XH'_ACL$ to $C_{X,B}H_BT_YL$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 1"
+   }
+  },
+  {
+   "text": "Substitute exactly the assumed right comparison square, whose argument is this $L$, into the parenthesized composite of Step 1. Functoriality of $F'_B$ then gives\n$$uD'_{CL}=V(\\epsilon_{B,T_YL})c_B(H_BT_YL)^{-1}F'_B(C_{X,B}(a_L))F'_B(\\delta_{X,M})F'_B(T'_X(s))q'_{H'_ACL}.$$\nThis substitution uses no inverse of $a_L$ or $a'_{CL}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 2"
+   }
+  },
+  {
+   "text": "Naturality of $c_B$ at $a_L:T_XM\\to H_BT_YL$, followed by composition with the inverses of its two isomorphism components, gives\n$$c_B(H_BT_YL)^{-1}F'_B(C_{X,B}(a_L))=V(F_B(a_L))c_B(T_XM)^{-1}.$$\nNaturality of $q'$ at $s:H'_ACL\\to C_{X,A}M$ gives\n$$F'_B(T'_X(s))q'_{H'_ACL}=q'_{C_{X,A}M}T'_Y(F'_A(s)).$$\nUse these two equations in Step 2. Neither equation cancels $q'$ or $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 3"
+   }
+  },
+  {
+   "text": "The assumed left comparison square at $M$ can be composed on the left with $c_B(T_XM)^{-1}$ and on the right with $T'_Y(c_A(M)^{-1})$, giving\n$$c_B(T_XM)^{-1}F'_B(\\delta_{X,M})q'_{C_{X,A}M}=V(q_M)\\delta_{Y,F_AM}T'_Y(c_A(M)^{-1}).$$\nSubstitution into Step 3, and combining the three successive $V$-images using preservation of composition, yields\n$$uD'_{CL}=V(\\epsilon_{B,T_YL}F_B(a_L)q_M)\\delta_{Y,F_AM}T'_Y(c_A(M)^{-1})T'_Y(F'_A(s))=V(D_L)Z_L.$$\nThis proves the first identity without any equality hypothesis on $D_L,E_L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 4"
+   }
+  },
+  {
+   "text": "Independently, use the stipulated evaluation formula for $R=A$ and preservation of composition by $T'_Y$:\n$$uE'_{CL}=uT'_Y(C(\\epsilon_{A,L}))T'_Y(c_A(M)^{-1})T'_Y(F'_A(s)).$$\nNaturality of $\\delta_Y$ at $\\epsilon_{A,L}:F_AM\\to L$ says\n$$uT'_Y(C(\\epsilon_{A,L}))=V(T_Y(\\epsilon_{A,L}))\\delta_{Y,F_AM}.$$\nSubstituting proves $uE'_{CL}=V(E_L)Z_L$, the second identity. This argument does not use the first identity or assume $D_L=E_L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 5"
+   }
+  },
+  {
+   "text": "Now assume $D_L=E_L$ for all $L$. Steps 4 and 5 give $uD'_{CL}=uE'_{CL}$. Compose on the left with $u^{-1}$ to obtain $D'_{CL}=E'_{CL}$. Here only $u=\\delta_{Y,L}$ is cancelled; no faithfulness of $V$ is needed. For arbitrary $K\\in\\mathcal Y'_A$, essential surjectivity as explicitly assumed provides $L$ and an isomorphism $t:CL\\xrightarrow{\\sim}K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 6"
+   }
+  },
+  {
+   "text": "Put $P=T'_YF'_AH'_A$. To spell out the naturality needed for this $t$, write $h=H'_A(t)$. Naturality of $q',a',\\epsilon'_B$, in that order, gives\n$$q'_{H'_AK}T'_Y(F'_A(h))=F'_B(T'_X(h))q'_{H'_ACL},$$\n$$a'_KT'_X(h)=H'_B(T'_Y(t))a'_{CL},\\qquad \\epsilon'_{B,T'_YK}F'_B(H'_B(T'_Y(t)))=T'_Y(t)\\epsilon'_{B,T'_YCL}.$$\nCompose these three equations to get $D'_KP(t)=T'_Y(t)D'_{CL}$. Naturality of $\\epsilon'_A$ at $t$, mapped by $T'_Y$, gives $E'_KP(t)=T'_Y(t)E'_{CL}$. Step 6 identifies the two right sides. The inverse of $P(t)$ is $P(t^{-1})$, since $P$ preserves composition and identities. Compose on the right with this inverse to deduce $D'_K=E'_K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, actual scalar-counit transport: explicit categorical calculation, step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts paragraph: explicit componentwise proof of the two independent conjugacy identities and extension along an input isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "counit.*(transport|equivalence|conjuga)|equivalence.*counit",
+   "results": "{\"t\": \"2026-10-22T05:55:41Z\", \"tool\": \"grep\", \"query\": \"counit.*(transport|equivalence|conjuga)|equivalence.*counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"397376b3d8b2f381\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence counit cancellation lemmas and toAdjunction_counit concern a single equivalence counit, not these two simultaneous coefficient/evaluation comparison formulas. One Loogle pattern had an unknown identifier; the corrected pattern only finds toAdjunction_counit and toEquivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugacy formula for both sides of a scalar counit identity under equivalences of categories and natural tensor comparisons",
+   "results": "{\"t\": \"2026-10-22T05:55:42Z\", \"tool\": \"leansearch\", \"query\": \"Conjugacy formula for both sides of a scalar counit identity under equivalences of categories and natural tensor comparisons\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-22T05:55:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Equivalence, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence counit cancellation lemmas and toAdjunction_counit concern a single equivalence counit, not these two simultaneous coefficient/evaluation comparison formulas. One Loogle pattern had an unknown identifier; the corrected pattern only finds toAdjunction_counit and toEquivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the whole pair of counit composites through an equivalence using a specified coefficient compatibility square, and detect their equality by essential surjectivity",
+   "results": "{\"t\": \"2026-10-22T05:55:57Z\", \"tool\": \"leanfinder\", \"query\": \"Transport the whole pair of counit composites through an equivalence using a specified coefficient compatibility square, and detect their equality by essential surjectivity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.trans_counitIso\", \"CategoryTheory.Equivalence.cancel_counitInv_right_assoc'\", \"CategoryTheory.Equivalence.congrRight_counitIso_hom_app\", \"CategoryTheory.Equivalence.cancel_counitInv_right_assoc\", \"CategoryTheory.Equivalence.cancel_counit_right\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀_hom_app\", \"CategoryTheory.Equivalence.congrLeft_counitIso_hom_app\", \"CategoryTheory.Equivalence.changeFunctor_counitIso_hom_app\"], \"digest\": \"d58a2b7d9c11cf80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence counit cancellation lemmas and toAdjunction_counit concern a single equivalence counit, not these two simultaneous coefficient/evaluation comparison formulas. One Loogle pattern had an unknown identifier; the corrected pattern only finds toAdjunction_counit and toEquivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under equivalences of categories and commuting coefficient squares, the two scalar counit morphisms are conjugate to the corresponding transported counit morphisms by the left comparison and tensor comparison",
+   "results": "{\"t\": \"2026-10-22T05:55:57Z\", \"tool\": \"leanfinder\", \"query\": \"Under equivalences of categories and commuting coefficient squares, the two scalar counit morphisms are conjugate to the corresponding transported counit morphisms by the left comparison and tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.counitIso_inv_app_comp_functor_map_η_inverse\", \"CategoryTheory.Equivalence.counitInv_app_comp_functor_map_η_inverse\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor\", \"CategoryTheory.Equivalence.counitIso_inv_app_comp_functor_map_η_inverse_assoc\", \"CategoryTheory.Equivalence.counitInv_app_comp_functor_map_η_inverse_assoc\"], \"digest\": \"f7612227aac82cd5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence counit cancellation lemmas and toAdjunction_counit concern a single equivalence counit, not these two simultaneous coefficient/evaluation comparison formulas. One Loogle pattern had an unknown identifier; the corrected pattern only finds toAdjunction_counit and toEquivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-22T05:56:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.counit, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.toAdjunction_counit\", \"CategoryTheory.Adjunction.toEquivalence\"], \"digest\": \"ce90d0aa975ad34a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence counit cancellation lemmas and toAdjunction_counit concern a single equivalence counit, not these two simultaneous coefficient/evaluation comparison formulas. One Loogle pattern had an unknown identifier; the corrected pattern only finds toAdjunction_counit and toEquivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugacy formula for both sides of a scalar counit identity under equivalences of categories and natural tensor comparisons",
+   "results": "{\"t\": \"2026-10-22T06:54:06Z\", \"tool\": \"leansearch\", \"query\": \"Conjugacy formula for both sides of a scalar counit identity under equivalences of categories and natural tensor comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Bicategory.conjugateEquiv_adjunction_id\", \"CategoryTheory.conjugateEquiv_adjunction_id\", \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"CategoryTheory.conjugateEquiv_apply_app\", \"CategoryTheory.Equivalence.unit_app_comp_inverse_map_η_functor\", \"CategoryTheory.Equivalence.counit_naturality_assoc\"], \"digest\": \"4c5630bb8548541a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: conjugateEquiv_counit variants compute mates for two adjunctions; equivalence counit naturality concerns one equivalence. None gives both explicit scalar-evaluation pair identities for arbitrary evaluations, the two comparison squares, and essential-surjectivity extension."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|counit_naturality|comp.*essSurj|essSurj.*comp",
+   "results": "{\"t\": \"2026-10-22T11:50:49Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv_counit|counit_naturality|comp.*essSurj|essSurj.*comp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"a9cfad356d64082b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mates.lean:285 and :291 assume two adjunctions and compute conjugateEquiv; they do not state these arbitrary-evaluation identities. Essential-surjectivity hits concern other functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport an equality between natural transformations along an essentially surjective functor and specified natural comparison isomorphisms",
+   "results": "{\"t\": \"2026-10-22T11:50:49Z\", \"tool\": \"leansearch\", \"query\": \"Transport an equality between natural transformations along an essentially surjective functor and specified natural comparison isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality_2\", \"CategoryTheory.NatTrans.congr\", \"CategoryTheory.NatTrans.mk.congr_simp\", \"CategoryTheory.Functor.essSurj_of_iso\", \"CategoryTheory.Comma.mapLeftEq\", \"CategoryTheory.NatTrans.ext\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\", \"CategoryTheory.NatTrans.naturality_1\"], \"digest\": \"9bea9a829a2afc0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: NatTrans.naturality_1 and naturality_2 describe a single transformation under an input isomorphism; they support the elementary final calculation but do not give the two comparison-square identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp",
+   "results": "{\"t\": \"2026-10-22T11:50:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit for the conjunction of naturality and functoriality; these individual definitional laws do not state the full conjugacy pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two parallel evaluation composites are conjugate across commuting squares of functors without adjunction assumptions",
+   "results": "{\"t\": \"2026-10-22T11:51:00Z\", \"tool\": \"leanfinder\", \"query\": \"Two parallel evaluation composites are conjugate across commuting squares of functors without adjunction assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm\", \"CategoryTheory.conjugateEquiv_comm\", \"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv\", \"CategoryTheory.conjugateEquiv_apply_app\", \"CategoryTheory.conjugateEquiv_comp\"], \"digest\": \"2713754276753dd6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DoldKan compatibility uses chosen equivalences, NatIso cancellation is a single naturality calculation, and conjugateEquiv/CompositionIso results require adjunctions. None specializes in one line to both identities for arbitrary evaluation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugacy of two composites built from arbitrary natural evaluation maps under natural comparison isomorphisms and commuting functor squares",
+   "results": "{\"t\": \"2026-10-22T11:51:00Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugacy of two composites built from arbitrary natural evaluation maps under natural comparison isomorphisms and commuting functor squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"AlgebraicTopology.DoldKan.Compatibility.υ\", \"CategoryTheory.NatIso.cancel_natIso_hom_right_assoc\", \"CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp\", \"CategoryTheory.Join.mapPairComp\", \"CategoryTheory.NatIso.naturality_2\", \"CategoryTheory.CatCommSq.iso_hom_naturality\"], \"digest\": \"ec396a6e14cb96c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: DoldKan compatibility uses chosen equivalences, NatIso cancellation is a single naturality calculation, and conjugateEquiv/CompositionIso results require adjunctions. None specializes in one line to both identities for arbitrary evaluation maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-chart-counit-scalar-transport",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: transport the actual counit through the specified site comparison and coefficient square, then pass to arbitrary comparison-equivalent inputs; returned Steps 5--6 and first assertion of Step 7",
+   "via": [
+    "lem-sp-chart-counit-scalar-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-site-scalar-counit-pair-conjugacy",
+  "worker": "stage1",
+  "summary": "Kept the abstract statement unchanged. Expanded the actual evaluation transport into two independent component calculations, using both stipulated comparison squares and naming each naturality equation. Extended equality from comparison images by an explicit three-square naturality calculation and cancellation of a functorial image of an input isomorphism. All steps are elementary substitutions in the stated hypotheses; no new node, adjunction axiom, faithfulness or invertibility of the coefficient arrows is used. Searched project Lean, the DAG, the entire blueprint and Mathlib; no attachment or whole-item Mathlib match was found.",
+  "blueprint": "Realizes the Charts paragraph of det-sp-reduction-exceptional: transport the actual counit through the specified site comparison and coefficient square, then pass to arbitrary comparison-equivalent inputs. This is the component calculation used by lem-sp-chart-counit-scalar-transport, not a geometric replacement route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-4c3a14329",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-4c3a14329 (reviewer sub-agent of L); spot-checked: I read the item in full: statement plus 7 steps; the delivery has no new nodes. I checked the statement against the main-20261015 sk-lem-sp-reduction-exceptional.proof.md Charts paragraph (lines 20-36). The source only says to transport the counit; this abstract calculation is agent-written and marked proof_origin agent. No SGA source is used. The statement hash equals the version the node was created with (Q01 85127a0e), so this is a first split and no target is weakened. I typed by hand every morphism in the evaluation formula, both comparison squares, D/E/D'/E' and Z_L. I then re-derived each step. Step 1: naturality of eps'_B at delta_{Y,L} plus the B evaluation formula; def-nagata-category is used only for associativity. Step 2: the right square. Step 3: naturality of c_B at a_L and of q' at r_{A,L}. Step 4: the left square conjugated by c_B^{-1} and T'_Y(c_A^{-1}), giving V(D_L)Z_L. Step 5: naturality of delta_Y at eps_{A,L}, independent of Step 4. Step 6: cancel delta_{Y,L} and use the explicit essential-surjectivity hypothesis. Step 7: naturality of q', a', eps'_B and eps'_A at t, with P(t)^{-1}=P(t^{-1}). Every step checks, and every step is genuinely elementary. Only c_A, c_B, delta_Y and t are inverted; q, q', a, a' and eps are never inverted, and C_{Y,B} is never assumed faithful. Edge cases: identity comparisons, an empty Y_A (essential surjectivity forces Y'_A empty), and zero evaluations in additive categories. The only citer, lem-sp-chart-counit-scalar-transport, takes exactly the two identities and the all-K consequence, and the statement gives both. Duplicate check: lem-sp-left-comparison-scalar-counit-pair changes only the left functor on fixed categories, and lem-pur-normalized-mate-scalar-site-transport needs adjunctions, invertible q and equivalences, so neither states this. A DAG grep finds no other node with this content. The report review is concrete and the blueprint fields are present. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteScalarCounitPairConjugacy",
+  "declaration": "CategoryTheory.site_scalar_counit_pair_conjugacy",
+  "file": "lean/Sheaf/CategoryTheory/SiteScalarCounitPairConjugacy.lean",
+  "statement": "theorem site_scalar_counit_pair_conjugacy {XA : Type uXA} {YA : Type uYA} {XB : Type uXB} {YB : Type uYB} {XA' : Type uXA'} {YA' : Type uYA'} {XB' : Type uXB'} {YB' : Type uYB'} [Category.{vXA} XA] [Category.{vYA} YA] [Category.{vXB} XB] [Category.{vYB} YB] [Category.{vXA'} XA'] [Category.{vYA'} YA'] [Category.{vXB'} XB'] [Category.{vYB'} YB'] (FA : XA ⥤ YA) (HA : YA ⥤ XA) (FB : XB ⥤ YB) (HB : YB ⥤ XB) (FA' : XA' ⥤ YA') (HA' : YA' ⥤ XA') (FB' : XB' ⥤ YB') (HB' : YB' ⥤ XB') (epsA : HA ⋙ FA ⟶ 𝟭 YA) (epsB : HB ⋙ FB ⟶ 𝟭 YB) (epsA' : HA' ⋙ FA' ⟶ 𝟭 YA') (epsB' : HB' ⋙ FB' ⟶ 𝟭 YB') (CXA : XA ⥤ XA') (CYA : YA ⥤ YA') (CXB : XB ⥤ XB') (CYB : YB ⥤ YB') [CYA.EssSurj] (cA : FA ⋙ CYA ≅ CXA ⋙ FA') (cB : FB ⋙ CYB ≅ CXB ⋙ FB') (rA : CYA ⋙ HA' ≅ HA ⋙ CXA) (rB : CYB ⋙ HB' ≅ HB ⋙ CXB) (h_eval_A : ∀ L : YA, epsA'.app (CYA.obj L) = FA'.map (rA.hom.app L) ≫ cA.inv.app (HA.obj L) ≫ CYA.map (epsA.app L)) (h_eval_B : ∀ L : YB, epsB'.app (CYB.obj L) = FB'.map (rB.hom.app L) ≫ cB.inv.app (HB.obj L) ≫ CYB.map (epsB.app L)) (TX : XA ⥤ XB) (TY : YA ⥤ YB) (TX' : XA' ⥤ XB') (TY' : YA' ⥤ YB') (deltaX : CXA ⋙ TX' ≅ TX ⋙ CXB) (deltaY : CYA ⋙ TY' ≅ TY ⋙ CYB) (q : FA ⋙ TY ⟶ TX ⋙ FB) (q' : FA' ⋙ TY' ⟶ TX' ⋙ FB') (a : HA ⋙ TX ⟶ TY ⋙ HB) (a' : HA' ⋙ TX' ⟶ TY' ⋙ HB') (h_left : ∀ M : XA, TY'.map (cA.hom.app M) ≫ q'.app (CXA.obj M) ≫ FB'.map (deltaX.hom.app M) = deltaY.hom.app (FA.obj M) ≫ CYB.map (q.app M) ≫ cB.hom.app (TX.obj M)) (h_right : ∀ L : YA, a'.app (CYA.obj L) ≫ HB'.map (deltaY.hom.app L) ≫ rB.hom.app (TY.obj L) = TX'.map (rA.hom.app L) ≫ deltaX.hom.app (HA.obj L) ≫ CXB.map (a.app L)) : (∀ L : YA, (q'.app (HA'.obj (CYA.obj L)) ≫ FB'.map (a'.app (CYA.obj L)) ≫ epsB'.app (TY'.obj (CYA.obj L))) ≫ deltaY.hom.app L = (TY'.map (FA'.map (rA.hom.app L)) ≫ TY'.map (cA.inv.app (HA.obj L)) ≫ deltaY.hom.app (FA.obj (HA.obj L))) ≫ CYB.map (q.app (HA.obj L) ≫ FB.map (a.app L) ≫ epsB.app (TY.obj L))) ∧ (∀ L : YA, TY'.map (epsA'.app (CYA.obj L)) ≫ deltaY.hom.app L = (TY'.map (FA'.map (rA.hom.app L)) ≫ TY'.map (cA.inv.app (HA.obj L)) ≫ deltaY.hom.app (FA.obj (HA.obj L))) ≫ CYB.map (TY.map (epsA.app L))) ∧ ((∀ L : YA, q.app (HA.obj L) ≫ FB.map (a.app L) ≫ epsB.app (TY.obj L) = TY.map (epsA.app L)) → ∀ K : YA', q'.app (HA'.obj K) ≫ FB'.map (a'.app K) ≫ epsB'.app (TY'.obj K) = TY'.map (epsA'.app K))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-231fef56a",
+  "group": "N8",
+  "result": "pass",
+  "note": "Lean signature matches node clause by clause: 8 categories with independent universes; eps as HA⋙FA⟶𝟭 with no adjunction; only [CYA.EssSurj]; c/r/delta orientations correct; eval formulas and both comparison squares in correct diagrammatic order; D,E,D',E',Z expanded inline; identities (1),(2) unconditional; (3) over all K:YA'. Identity (1) re-derived by hand, so the statement is true. stmt_dep def-nagata-category (mathlib Category) used. lean.statement verbatim. Docstrings have source place, blueprint id and the 7 proof steps; only sorry; no duplicate in project Lean or Mathlib; only the lean field changed vs live. Report has Worker report and Second reading by N8. No findings, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261023T131720-L-2142750",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.site_scalar_counit_pair_conjugacy"
+  ],
+  "sorry_after": []
+ }
+}

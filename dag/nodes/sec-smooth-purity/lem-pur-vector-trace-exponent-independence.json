@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-vector-trace-exponent-independence",
+ "kind": "statement",
+ "title": "Root transition preserves the independently glued pro-etale vector trace",
+ "statement": "Let l be prime, E a finite extension of Q_l, n natural, A the corresponding coefficient quotient at level n+1, S Noetherian with l invertible, and F a rank d vector bundle. For r≤s with both prime powers killing A, take the ordinary bundle coefficient map obtained by pulling back baseExponentComparison, then compare it to the pro-etale site. Its compact-support direct image followed by vectorIntegration at r equals vectorIntegration at s. The compactification and vector traces are the independently fixed constructions of [def-pur-proetale-vector-integration], and the coefficient transition is the ordered root transition of [def-pur-finite-site-coordinates]. Only this one global pro-etale trace equation is asserted, without any tensor coefficient K or transpose.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 9--10: transport ordered affine counits through the root-power transition and glue the normalized maps in vector frames. Blueprint paragraph 1, the global map of def-amb-vector-integration, and paragraph 2, restriction to trivializing opens; Stacks etale-cohomology.tex Tag 03PK, section-kummer."
+ },
+ "stmt_deps": [
+  "def-pur-proetale-vector-integration",
+  "def-pur-finite-site-coordinates",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "proof": [
+  {
+   "text": "Apply the forward projective square and inverse cancellation, then the open counit square and ordered recursion, on every trivializing open of S. Thus the local ordered integrations agree after the coefficient transition.",
+   "uses": [
+    "lem-pur-projective-exponent-square",
+    "lem-pur-affine-exponent-transport",
+    "def-pur-proetale-frame-integration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prefixes specifying localIntegration are natural in the ordered coefficient. The two resulting global pro-etale maps have the same local normalizations. The compact-support source and constant target are degree zero, so uniqueness in degree-zero gluing identifies them, equivalently the uniqueness clause in the independently constructed vector integration. This includes rank zero and the empty cover.",
+   "uses": [
+    "def-pur-proetale-vector-integration",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-vector-frame-integration-site-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-proetale-frame-integration",
+  "def-pur-proetale-vector-integration",
+  "lem-pur-affine-exponent-transport",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "lem-pur-projective-exponent-square",
+  "lem-pur-vector-frame-integration-site-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 9--10: transport ordered affine counits through the root-power transition and glue the normalized maps in vector frames. Blueprint paragraph 1, the global map of def-amb-vector-integration, and paragraph 2, restriction to trivializing opens; Stacks etale-cohomology.tex Tag 03PK, section-kummer."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integration under a morphism of finite Tate lines, inverse projection formula, and adjunction transpose",
+   "results": "8 hits, including TopCat.Presheaf.pushforwardToOfIso, ContinuousLinearMap.integral_id_map, Module.Dual.transpose and transpose_dualTensorHom. None states finite-site coefficient integration transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv, homEquiv_unit, homEquiv_counit. These supply generic Hom calculus but not the geometric root-transition equations or their coefficient integration data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*[Ee]xponent|[Ee]xponent.*[Cc]ounit|[Tt]ensor.*[Ii]ntegrat",
+   "results": "0 hits in Mathlib. Local Sheaf search finds vectorTensorComparison and vectorExponentIndependence in VectorIntegrationSiteComparison; they are reused through separate acyclic statement records.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationExponentTransposeTransport",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Proof, inverse diagonal identification: root-normalized vector-bundle integration at the normal-bundle endpoint; Root transition preserves the independently glued pro-etale vector trace",
+   "via": [
+    "lem-pur-integration-exponent-transpose-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.VectorIntegrationSiteComparison",
+  "file": "lean/Sheaf/Paper/VectorIntegrationSiteComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorExponentIndependence",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "statement": "theorem vectorExponentIndependence (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (l : Γ(S, ⊤))) (r r' : ℕ) (h : r ≤ r')\n    (hA : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (hA' : ((l ^ (r' + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0) (d : ℕ)\n    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :\n    (rightDerivedLowerShriekOfCompactification\n      (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n))\n      (Etale.vectorBundlePurityCompactification S d F)).map\n      ((comparison (Scheme.finiteTateCoefficient l E n) _).map\n        ((Etale.ordinaryFinitePullback _ (VectorBundleZeroSection.π S d F)).map\n          (baseExponentComparison l E n S hS r r' h hA hA' d).hom)) ≫\n      vectorIntegration l E n S r hA d F hS =\n        vectorIntegration l E n S r' hA' d F hS"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorTensorComparison"
+  ],
+  "sorry_after": []
+ }
+}

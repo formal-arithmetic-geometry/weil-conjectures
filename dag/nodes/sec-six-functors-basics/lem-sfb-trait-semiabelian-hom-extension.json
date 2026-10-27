@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-trait-semiabelian-hom-extension",
+ "kind": "statement",
+ "title": "Extension of semiabelian homomorphisms over a trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $F=\\operatorname{Frac}(R)$ be its fraction field, and put $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $G,H\\to T$ be smooth separated commutative group schemes of finite presentation [def-pc-scheme, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Here a commutative group scheme over $T$ consists of multiplication, inverse and identity morphisms over $T$ satisfying the commutative group identities; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Set $G_F=G\\times_T\\operatorname{Spec}F$ and $H_F=H\\times_T\\operatorname{Spec}F$ [def-pc-base-change]. Every $F$-group homomorphism $v:G_F\\to H_F$ extends to a unique $T$-group homomorphism $\\widetilde v:G\\to H$. No completeness, excellence or residue-field perfection hypothesis on $R$ is imposed.",
+ "source": {
+  "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+  "place": "G. Faltings, Finiteness Theorems for Abelian Varieties over Number Fields, Arithmetic Geometry (1986), Chapter II, section 2, Lemma 1, printed pp.10-11: the complete-DVR extension input in the opening sentence, and descent from completion for the DVR formulation. Local copy WANTED; primary-source scan read online at https://www-fourier.univ-grenoble-alpes.fr/~lefourns/contenu/Zywina/Faltings.pdf . The arbitrary-DVR formulation is an agent-extracted local input, not a verbatim theorem of the scan."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-closed-immersion",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The generic fibre $P=H_F$ is smooth by [lem-pc-proper-base-change](2). Its diagonal is the base change of the closed diagonal of $H$, hence is closed (on affine charts base change of a quotient algebra is the same quotient after tensoring). A finite affine presentation of $H$ gives a finite cover of $P$ by the algebras $C[1/\\pi]$, each finitely presented over $F$, for a uniformizer $\\pi$ of $R$. Thus $P$ is separated of finite type. Its semiabelian geometric-fibre condition is the restriction of [def-sfb-semiabelian-geometric-fibres] to geometric points over $F$. Apply [lem-sfb-semiabelian-neron-lft-existence] to obtain $(N,\\alpha)$. Its group-homomorphism mapping property, with the smooth groups $H$ and $G$, gives $j:H\\to N$ and $f:G\\to N$ satisfying $\\alpha j_F=1_P$ and $\\alpha f_F=v$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-sfb-semiabelian-neron-lft-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "Bosch–Lütkebohmert–Raynaud, Néron Models (1990), 10.1 Definition 1 (printed p.289) and 10.2 Theorem 2 (printed p.297), specialized to geometrically semiabelian groups. Local copy WANTED; primary-source scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf, PDF pages 296 and 304. The criterion uses absence of an additive subgroup after completed strict henselian fraction-field extension, which holds for a geometrically semiabelian group."
+   }
+  },
+  {
+   "text": "The map $j$ is already a $T$-group homomorphism and $j_F=\\alpha^{-1}$ is an isomorphism. Apply [lem-sfb-generically-isomorphic-semiabelian-open-immersion] with $A=H$, $B=N$, $a=j$: $H$ has all the required finite-presentation and semiabelian-fibre hypotheses, and $N$ is smooth and separated; the criterion requires no finite-type hypothesis on $N$. By [def-weil-open-immersion], identify $H$ with the open subgroup scheme $U=j(H)\\subseteq N$.",
+   "uses": [
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+    "place": "Agent generalization of Brian Conrad, Semistable reduction for abelian varieties, proof of Theorem 4.4, printed pp.12–16, especially Corollary 3.3, Lemma 4.9 and the quasi-finite birational argument. Local copy WANTED; primary lecture notes read online at https://math.stanford.edu/~conrad/DarmonCM/2011Notes/SemistableReduction.pdf . The theorem as printed has abelian generic fibre and Néron target; this statement extracts the proof for a GIVEN generically isomorphic homomorphism, where only smoothness and separatedness of the target are used. It is an agent-extracted lemma, not a verbatim assertion of Theorem 4.4."
+   }
+  },
+  {
+   "text": "Fix a geometric closed fibre over an algebraically closed field $\\Omega$. Its group $G_\\Omega$ satisfies the exact-sequence hypothesis of [lem-sfb-semiabelian-geometric-power-integrality] by [def-sfb-semiabelian-geometric-fibres]; smoothness follows from [lem-pc-proper-base-change](2), and finite type and separatedness follow by the charts of step 1. The integrality statement at $n=1$ makes $G_\\Omega$ connected. By [lem-sfb-locally-algebraic-group-identity-component], the identity component $C=(N_\\Omega)^0$ is an open subgroup, geometrically irreducible, and commutes with field extension. Put $V=U_\\Omega\\cap C$, a nonempty open subgroup of $C$. For any geometric point $x$ of $C$, work over its algebraically closed field: the two nonempty opens $V$ and $xV$ of the irreducible base change of $C$ intersect. A geometric point $y$ of their intersection has $y=xz$ for some $z\\in V$, so $x=yz^{-1}\\in U_\\Omega$. Thus $C\\subseteq U_\\Omega$. The connected image $f_\\Omega(G_\\Omega)$ contains the identity, hence lies in $C$ and therefore in $U_\\Omega$. On the generic fibre $j_F$ is an isomorphism, so $f_F$ also lands in $U_F$. The generic and closed fibres exhaust $T$; hence $f(G)\\subseteq U$. Apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to factor $f=j\\widetilde v$ uniquely with $\\widetilde v:G\\to H$.",
+   "uses": [
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-pc-proper-base-change",
+    "def-weil-open-immersion",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), identity subgroup and geometric irreducibility; elementary intersecting-open-translates argument; Schemes Tag 01HI (lemma-restrict-map-to-opens) and Tag 01IK (lemma-open-subspace-scheme), factorization through an open subscheme."
+   }
+  },
+  {
+   "text": "An open immersion is a monomorphism by its identification with an open subscheme [def-weil-open-immersion]. Compose the multiplication identity for $\\widetilde v$ with $j$: it becomes the identity for $f$ and $j$, so monicity proves it; the same argument gives the unit and inverse identities. Thus $\\widetilde v$ is a group homomorphism. Generically, $\\alpha j_F=1_P$ and $\\alpha f_F=v$ give $\\widetilde v_F=v$. If $w:G\\to H$ is another extension, then $jw$ and $f$ have the same generic restriction. The injectivity in [lem-sfb-semiabelian-neron-lft-existence], applied to the smooth scheme $G$, gives $jw=f=j\\widetilde v$; monicity gives $w=\\widetilde v$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sfb-semiabelian-neron-lft-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "Bosch–Lütkebohmert–Raynaud, Néron Models (1990), 10.1 Definition 1 (printed p.289) and 10.2 Theorem 2 (printed p.297), specialized to geometrically semiabelian groups. Local copy WANTED; primary-source scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf, PDF pages 296 and 304. The criterion uses absence of an additive subgroup after completed strict henselian fraction-field extension, which holds for a geometrically semiabelian group."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-sfb-semiabelian-neron-lft-existence",
+  "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+  "def-weil-open-immersion",
+  "lem-sfb-semiabelian-geometric-power-integrality",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+  "place": "Néron-model proof supplying the local input omitted in Faltings II §2 Lemma 1; BLR 10.2 Theorem 2 and the given-map comparison extracted from Conrad Theorem 4.4 proof. Both documents locally WANTED; online primary sources read. Works directly over arbitrary DVRs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between generic fibres of smooth semiabelian group schemes over a discrete valuation ring extends uniquely over the ring",
+   "results": "{\"t\": \"2026-10-24T02:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism between generic fibres of smooth semiabelian group schemes over a discrete valuation ring extends uniquely over the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\"], \"digest\": \"6cd39f626dbff5ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give general valuative lifting conditions, scheme morphisms, or fully faithful forgetful functors; none extends homomorphisms of semiabelian families from the fraction field."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|homomorphism.*(valuation|trait)|generic.*hom.*exten",
+   "results": "{\"t\": \"2026-10-24T02:46:24Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|homomorphism.*(valuation|trait)|generic.*hom.*exten\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give general valuative lifting conditions, scheme morphisms, or fully faithful forgetful functors; none extends homomorphisms of semiabelian families from the fraction field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of semiabelian schemes over a discrete valuation ring are determined by and extend from the generic fibre",
+   "results": "{\"t\": \"2026-10-24T02:46:24Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms of semiabelian schemes over a discrete valuation ring are determined by and extend from the generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Scheme.instCoeFunHomForallCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\"], \"digest\": \"68ccb71e9b0793ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give general valuative lifting conditions, scheme morphisms, or fully faithful forgetful functors; none extends homomorphisms of semiabelian families from the fraction field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-24T02:46:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give general valuative lifting conditions, scheme morphisms, or fully faithful forgetful functors; none extends homomorphisms of semiabelian families from the fraction field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to the fraction field is fully faithful for smooth separated semi abelian group schemes over a trait",
+   "results": "{\"t\": \"2026-10-24T02:47:31Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to the fraction field is fully faithful for smooth separated semi abelian group schemes over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace\", \"AlgebraicGeometry.Spec.fullyFaithful\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules\", \"AlgebraicGeometry.AffineScheme.forgetToScheme_full\"], \"digest\": \"836ed757d9888713\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give general valuative lifting conditions, scheme morphisms, or fully faithful forgetful functors; none extends homomorphisms of semiabelian families from the fraction field."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|Neron|Néron|homomorphism.*(valuation|trait)",
+   "results": "{\"t\": \"2026-10-24T03:14:27Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|Neron|Néron|homomorphism.*(valuation|trait)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits in AlgebraicGeometry for semiabelian, Neron or trait homomorphism extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to the fraction field is fully faithful for semi abelian schemes over a trait",
+   "results": "{\"t\": \"2026-10-24T03:14:27Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to the fraction field is fully faithful for semi abelian schemes over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"AlgebraicGeometry.AffineScheme.forgetToScheme_faithful\", \"IsFractionRing.restrictScalars_fieldEquivOfAlgEquiv\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\"], \"digest\": \"4966e668f6ba3741\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fully faithful forgetful functors, rational-map restriction and fraction-ring scalar restriction do not state semiabelian homomorphism extension. This is the second semantic phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Semiabelian\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-24T03:14:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Semiabelian\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the Semiabelian/Hom query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between generic fibres of smooth separated semiabelian group schemes over a discrete valuation ring extends uniquely over that ring",
+   "results": "{\"t\": \"2026-10-24T03:14:30Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism between generic fibres of smooth separated semiabelian group schemes over a discrete valuation ring extends uniquely over that ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\"], \"digest\": \"1ca262dde4147f42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all eight hits are general valuative criteria, not extension of homomorphisms between semiabelian families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-generic-graph-proper",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary replacement for the independent power-prolongation input: generic endomorphism extension; graph-closure argument, properness of the first projection. Local input: extend the pulled-back generic homomorphism over a DVR before evaluating it on the prescribed section.",
+   "via": [
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-semiabelian-hom-extension",
+  "worker": "stage1",
+  "summary": "Repair of C6 and D1/D2: removed the exact twin citation and supplied an independent Néron-model argument. Two genuinely different prerequisites are stated: existence of a smooth ambient model with the generic mapping property, and an open-immersion criterion for an already given generically isomorphic homomorphism. Compare H with its ambient model, use connected geometric fibres to factor the extension through H, and prove uniqueness in the ambient model. Statement unchanged. The existing opposite twin edge may remain without a cycle; duplicate canonicalization remains maintainer-owned.",
+  "blueprint": "No imported blueprint ancestor (ancestor returns None). Realizes the inherited from.place local input: extend a generic homomorphism over a DVR before evaluating it on a section in the generic-graph properness argument. New prerequisites inherit this exact local place and via chain; no unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), stability of smoothness under base change, checks the generic and geometric fibres. It is a general scheme-theoretic tool, not a replacement of a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic factorization through a prescribed open subscheme once containment of the underlying image has been proved. No unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-807e6bbd0",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-807e6bbd0 (reviewer sub-agent of L); spot-checked: Repair of the c7949e0d return (C6, D1/D2: 2-cycle with the Q08 twin lem-sfb-semiabelian-trait-hom-extension). The new head no longer cites the twin. A closure computation over the snapshot (919 nodes) reaches neither the item nor the twin, so there is no cycle; live still has the item unsplit and the twin citing it. The statement is unchanged and no re-split note applies. The four steps were checked. Step 1: P=H_F is smooth (lem-pc-proper-base-change (2)), separated and of finite type (elementary), and semiabelian by the def, which quantifies over all algebraically closed fields; the new Néron node gives j and f with αj_F=1 and αf_F=v. Step 2: the open-immersion node applies with A=H, B=N, a=j; all hypotheses hold and N needs no finite type. Step 3: G_Ω is connected by power-integrality at n=1, whose hypotheses hold (an abelian variety is a proper smooth connected group, commutative as an fppf quotient). Identity-component node on N_Ω: open translates of V meet, giving C⊆U_Ω and then f(G)⊆U, and the map factors through the open subscheme (Mathlib leaf). Step 4: monicity of the open immersion gives the homomorphism identities and v~_F=v; uniqueness comes from Néron injectivity on the smooth G. New node lem-sfb-semiabelian-neron-lft-existence matches BLR 10.1 Def 1 and 10.2 Thm 2, which hold for any DVR. The no-G_a condition holds because a G_a maps trivially to a torus and to an abelian variety. Commutativity and the homomorphism clause follow from uniqueness; the G_m case shows lft is needed. New node lem-sfb-generically-isomorphic-semiabelian-open-immersion is true by an independent proof: ℓ-power torsion of ker a_s lifts over R^sh, and rigidity of étale sections in the separated B[ℓ^m] gives a quasi-finite kernel. ZMT for a birational map to a normal B then gives an open immersion. The semiabelian source excludes the counterexample G_a with multiplication by π. Neither new node duplicates or restates the item (rg over the snapshot and live: no Néron or similar criterion node). The normal-base generalization depends on the item, so citing it would make a cycle. Batch 5: power-integrality reaches lem-trf-smooth-composition, which is generic composition of smooth morphisms, outside the trace-formula and Poincaré-duality assumptions, so accepted. No SGA citation; tool_uses (proper-base-change (2), open-subscheme factorization leaf) accepted. BLR, Conrad and Faltings are not in the local literature (marked WANTED); BLR was checked from memory of the text."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianTraitHomExtension",
+  "declaration": "AlgebraicGeometry.semiabelian_trait_hom_extension",
+  "statement": "theorem semiabelian_trait_hom_extension\n    (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]\n    (L : Type u) [Field L] [Algebra R L] [IsFractionRing R L]\n    (G H : Grp (Over (Spec (.of R)))) [IsCommMonObj G.X] [IsCommMonObj H.X]\n    [Smooth G.X.hom] [IsSeparated G.X.hom]\n    [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom]\n    [Smooth H.X.hom] [IsSeparated H.X.hom]\n    [LocallyOfFinitePresentation H.X.hom] [QuasiCompact H.X.hom]\n    (hG : HasSemiabelianGeometricFibres G)\n    (hH : HasSemiabelianGeometricFibres H)\n    (v : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R L)))).mapGrp.obj G ⟶\n      (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R L)))).mapGrp.obj H) :\n    ∃! vbar : G ⟶ H,\n      (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R L)))).mapGrp.map vbar = v",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing declaration, already landed for lem-sfb-semiabelian-trait-hom-extension. Renaming the fraction field L to F changes no hypothesis or conclusion. LocallyOfFinitePresentation and QuasiCompact, together with IsSeparated, express finite presentation. Uses the canonical group-object base-change functor and unique extension as an actual group homomorphism. No module is added; see report for the shared declaration and the independent proof-plan handoff."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9286f6d5e",
+  "group": "NL",
+  "result": "pass",
+  "note": "Delivery only sets the item's lean record existing:true to AlgebraicGeometry.semiabelian_trait_hom_extension (Q71, PASS for twin lem-sfb-semiabelian-trait-hom-extension); item had no live lean record (no rebind); JSON diff vs side-live/live shows only `lean`. Clause check: IsDiscreteValuationRing+IsDomain, IsFractionRing L, Grp(Over Spec R)+IsCommMonObj, Smooth, IsSeparated (diagonal closed immersion), LFP+QC (+QS from separated) = finite presentation, HasSemiabelianGeometricFibres (body read, matches def node), G_F via Over.pullback(Spec.map algebraMap).mapGrp = def-pc-base-change, v a Grp morphism, ∃! with exact equality; no extra hypotheses, one universe; edge cases (tori, abelian schemes, trivial group, any residue char) covered. stmt_dep records present; statement verbatim modulo line breaks; no file changed, no compile run. Maintainer notes: twin cites this item as proof_dep and both nodes now share one decl, so stage 3 must prove it via this item's Néron route (twin plan is self-application); shared docstring names only the twin's blueprint id; canonicalize the duplicate (Q97 precedent)."
+ }
+}

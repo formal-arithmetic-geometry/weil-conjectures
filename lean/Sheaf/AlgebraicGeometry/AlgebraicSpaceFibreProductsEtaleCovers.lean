@@ -8,9 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Sheaf.AlgebraicGeometry.AlgebraicSpaceJointSurjectivity
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.SheafPullbackDiagonal
+import Sheaf.AlgebraicGeometry.FibreProductAtlasTests
+import Sheaf.AlgebraicGeometry.PresheafPullbackEtalePointLifting
+import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Fibre products of algebraic spaces and pullback of étale coverings
@@ -37,6 +38,48 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.AlgebraicSpace
 
+private def explicitLimit {S : Scheme.{u}} {F G H : (Over S)ᵒᵖ ⥤ Type u}
+    (f : F ⟶ H) (g : G ⟶ H) : IsLimit (sheafPullbackCone f g) := by
+  apply evaluationJointlyReflectsLimits
+  intro T
+  refine IsLimit.equivOfNatIsoOfIso ?_ _ _ ?_
+    (Types.pullbackLimitCone (f.app T) (g.app T)).isLimit
+  · exact cospanIsoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
+  · refine Cone.ext (Iso.refl _) ?_
+    rintro (_ | _ | _)
+    all_goals rfl
+
+private theorem chosenSquare {S : Scheme.{u}}
+    {F G H : Sheaf (Scheme.fppfTopology.over S) (Type u)}
+    (f : F ⟶ H) (g : G ⟶ H) :
+    IsPullback (Limits.pullback.fst f g).hom (Limits.pullback.snd f g).hom f.hom g.hom :=
+  (IsPullback.of_hasPullback f g).map
+    (sheafToPresheaf (Scheme.fppfTopology.over S) (Type u))
+
+private noncomputable def explicitIso {S : Scheme.{u}}
+    {F G H : Sheaf (Scheme.fppfTopology.over S) (Type u)}
+    (f : F ⟶ H) (g : G ⟶ H) :
+    (sheafPullbackCone f.hom g.hom).pt ≅ (Limits.pullback f g).obj :=
+  (IsPullback.of_isLimit (explicitLimit f.hom g.hom)).isoIsPullback _ _ (chosenSquare f g)
+
+private theorem explicitIso_fst {S : Scheme.{u}}
+    {F G H : Sheaf (Scheme.fppfTopology.over S) (Type u)}
+    (f : F ⟶ H) (g : G ⟶ H) :
+    (explicitIso f g).hom ≫ (Limits.pullback.fst f g).hom =
+      (sheafPullbackCone f.hom g.hom).fst :=
+  IsPullback.isoIsPullback_hom_fst _ _ _ _
+
+private theorem representableWith_iso {S : Scheme.{u}}
+    (P : MorphismProperty (Over S)) {A B A' B' : (Over S)ᵒᵖ ⥤ Type u}
+    (eA : A ≅ A') (eB : B ≅ B') (f : A ⟶ B) (f' : A' ⟶ B')
+    (w : f ≫ eB.hom = eA.hom ≫ f') (hf : IsRepresentableWith P f) :
+    IsRepresentableWith P f' := by
+  intro T a
+  obtain ⟨U, p, q, hq, hp⟩ := hf T (a ≫ eB.inv)
+  refine ⟨U, p, q ≫ eA.hom, ?_, hp⟩
+  exact hq.of_iso (Iso.refl _) eA (Iso.refl _) eB
+    (by simp) (by simp) w (by simp)
+
 /-- The sheaf fibre product is an algebraic space and has the categorical universal
 property for algebraic-space test objects.
 Source: Stacks, Spaces, Tags 04T9 and 02X2
@@ -61,7 +104,30 @@ theorem fibreProduct_isAlgebraicSpace {S : Scheme.{u}} (F G H : AlgebraicSpace S
         ∃! l : Q.obj ⟶ Limits.pullback f.hom g.hom,
           l ≫ Limits.pullback.fst f.hom g.hom = a.hom ∧
           l ≫ Limits.pullback.snd f.hom g.hom = b.hom := by
-  sorry
+  classical
+  let P := Limits.pullback f.hom g.hom
+  let e := explicitIso f.hom g.hom
+  have hd := (sheafPullback_diagonal F.obj G.obj H.obj f.hom.hom g.hom.hom
+    F.property.1 G.property.1).2.1
+  have hd' : IsRepresentable (prod.lift (𝟙 P.obj) (𝟙 P.obj)) :=
+    representableWith_iso ⊤ e (prod.mapIso e e) _ _ (by simp [P]) hd
+  obtain ⟨U, a, hae, has⟩ := F.property.2
+  obtain ⟨V, b, hbe, hbs⟩ := G.property.2
+  obtain ⟨⟨D, d, _, _⟩, _, hwe, hws, _⟩ :=
+    fibreProduct_atlas_tests F.obj G.obj H.obj f.hom.hom g.hom.hom H.property.1
+      U V a b hae has hbe hbs
+  let c := (chosenSquare f.hom g.hom).isoPullback
+  let w := fibreProductAtlasMap f.hom.hom g.hom.hom a b
+  have hce : IsEtale (d.hom ≫ w ≫ c.inv) :=
+    representableWith_iso _ d.symm c.symm w _ (by simp) hwe
+  have hcs : IsSurjective (d.hom ≫ w ≫ c.inv) :=
+    representableWith_iso _ d.symm c.symm w _ (by simp) hws
+  refine ⟨⟨hd', D, d.hom ≫ w ≫ c.inv, hce, hcs⟩, ?_⟩
+  intro Q a b hab
+  have h : a.hom ≫ f.hom = b.hom ≫ g.hom := congrArg (fun k ↦ k.hom) hab
+  refine ⟨Limits.pullback.lift a.hom b.hom h, ⟨by simp, by simp⟩, ?_⟩
+  intro l hl
+  apply Limits.pullback.hom_ext <;> simp [hl.1, hl.2]
 
 /-- Pulling back a jointly surjective representable étale family preserves both properties.
 The fibre products are algebraic spaces by `fibreProduct_isAlgebraicSpace`.
@@ -82,7 +148,20 @@ theorem etaleCover_pullback {S : Scheme.{u}} {I : Type w}
     (∀ i : I, IsEtale (Limits.pullback.fst g.hom (h i).hom).hom) ∧
       IsJointlySurjective
         (fun i : I ↦ (Limits.pullback.fst g.hom (h i).hom).hom) := by
-  sorry
+  classical
+  have hpull := presheafPullback_etale_point_lifting G.obj H.obj (fun i ↦ (Hᵢ i).obj)
+    g.hom.hom (fun i ↦ (h i).hom.hom) he
+  constructor
+  · intro i
+    exact representableWith_iso _ (explicitIso g.hom (h i).hom) (Iso.refl _) _ _
+      (by simpa using (explicitIso_fst g.hom (h i).hom).symm) (hpull.2.2.1 i)
+  · intro K hK s x
+    obtain ⟨i, L, hL, a, y, hy⟩ := (hpull.2.2.2.2 hs).2.1 K s x
+    refine ⟨i, L, hL, a, (explicitIso g.hom (h i).hom).hom.app _ y, ?_⟩
+    have heq := congrArg (fun k ↦ k.app
+      (op (Over.mk (Spec.map (CommRingCat.ofHom a) ≫ s))))
+      (explicitIso_fst g.hom (h i).hom)
+    exact (ConcreteCategory.congr_hom heq y).trans hy
 
 /-- If the base-changed target is a scheme, the étale fibre product is a scheme.
 Representability by a scheme is expressed as an isomorphism with its Yoneda presheaf.
@@ -96,6 +175,10 @@ theorem etale_fibreProduct_isScheme {S : Scheme.{u}} (G H H' : AlgebraicSpace S)
     (g : G ⟶ H) (h : H' ⟶ H) (he : IsEtale h.hom.hom)
     (T : Over S) (e : G.obj.obj ≅ yoneda.obj T) :
     ∃ U : Over S, Nonempty ((Limits.pullback g.hom h.hom).obj ≅ yoneda.obj U) := by
-  sorry
+  classical
+  have hr := presheafPullback_etale_point_lifting G.obj H.obj (fun _ : Unit ↦ H'.obj)
+    g.hom.hom (fun _ ↦ h.hom.hom) (fun _ ↦ he)
+  obtain ⟨U, ⟨d⟩⟩ := hr.2.2.2.1 () T e
+  exact ⟨U, ⟨(explicitIso g.hom h.hom).symm ≪≫ d⟩⟩
 
 end AlgebraicGeometry.AlgebraicSpace

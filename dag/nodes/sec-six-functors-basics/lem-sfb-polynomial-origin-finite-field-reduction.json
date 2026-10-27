@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-polynomial-origin-finite-field-reduction",
+ "kind": "statement",
+ "title": "Polynomial origin localization reducing to a finite field extension",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] which is a nonzero local integral domain with unique maximal ideal $\\mathfrak m_R\\ne0$. Let $K\\subseteq L$ be fields [def-weil-field], with $R\\subseteq K=\\operatorname{Frac}(R)$, meaning that every element of $K$ is $r/s$ for $r,s\\in R$ and $s\\ne0$. Suppose $L=K(a_1,\\ldots,a_n)$ for finitely many elements of $L$. There are $r\\ge0$ and a transcendence basis $x_1,\\ldots,x_r$ of $L/K$ [def-weil-pbc-transcendence-basis] such that, putting $K_0=K(x_1,\\ldots,x_r)$ and $P=R[x_1,\\ldots,x_r]\\subseteq K_0$, the evaluation map $R[X_1,\\ldots,X_r]\\to P$ [def-weil-pbc-mv-polynomial-ring] is an isomorphism and $P$ is Noetherian. The ideal $\\mathfrak n=(\\mathfrak m_R,x_1,\\ldots,x_r)$ of $P$ is maximal, satisfies $\\mathfrak n\\cap R=\\mathfrak m_R$, and is the kernel of the surjective map $P\\to R/\\mathfrak m_R$ sending the $x_i$ to zero. The localization $B=P_{\\mathfrak n}$ [def-weil-pbc-localization-at-prime], identified with $\\{p/s\\in K_0:p,s\\in P,\\ s\\notin\\mathfrak n\\}$, is a Noetherian local integral domain which is not a field, contains $R$, and has $\\mathfrak m_B=\\mathfrak nB$, $\\mathfrak m_B\\cap P=\\mathfrak n$, and $\\mathfrak m_B\\cap R=\\mathfrak m_R$. Both $P$ and $B$ have fraction field $K_0$, and $[L:K_0]<\\infty$. If $L/K$ is algebraic, one may take $r=0$, $K_0=K$ and $B=R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph: choose a transcendence basis and localize the polynomial ring at the origin; expanded construction in the parent's former steps 1--3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] to $L/K$ to choose $x_1,\\ldots,x_r$ and put $K_0=K(x_1,\\ldots,x_r)$. Every $a_i$ is algebraic over $K_0$ by [def-weil-pbc-transcendence-basis]. Also $K_0(a_1,\\ldots,a_n)=L$: one inclusion holds inside $L$, and the other follows from $K\\subseteq K_0$ and $L=K(a_1,\\ldots,a_n)$. Hence [lem-weil-pbc-algebraic-generators-finite-extension], applied over the field $K_0$, gives $[L:K_0]<\\infty$.",
+   "uses": [
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-weil-pbc-transcendence-basis",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+   }
+  },
+  {
+   "text": "The evaluation map $R[X_1,\\ldots,X_r]\\to L$ has image $P=R[x_1,\\ldots,x_r]$ by the polynomial construction [def-weil-pbc-mv-polynomial-ring]. It is injective: a polynomial that evaluates to zero is zero as a polynomial over $K$, by algebraic independence in [def-weil-pbc-transcendence-basis], and then all its coefficients in the subring $R\\subseteq K$ are zero. Thus evaluation identifies $P$ with the polynomial ring. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to this presentation with zero defining ideal; $P$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-transcendence-basis",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+   }
+  },
+  {
+   "text": "By [lem-weil-common-extension-fields-quotient-field], $k=R/\\mathfrak m_R$ is a field. Define $\\epsilon:P\\to k$ by taking the constant coefficient modulo $\\mathfrak m_R$, using [def-weil-pbc-mv-polynomial-ring]. It is onto since constants map onto $k$. Each polynomial is its constant coefficient plus a sum $\\sum_i x_i f_i$: assign each nonconstant monomial to one variable dividing it. Therefore $\\ker\\epsilon=(\\mathfrak m_R,x_1,\\ldots,x_r)=\\mathfrak n$ and $\\mathfrak n\\cap R=\\mathfrak m_R$. This kernel is maximal: for an ideal $J$ strictly containing it, choose $f\\in J$ with $\\epsilon(f)\\ne0$ and a constant $c\\in R$ mapping to $\\epsilon(f)^{-1}$; then $1-cf\\in\\ker\\epsilon\\subset J$, so $1\\in J$. It is prime because $k$ is a field.",
+   "uses": [
+    "lem-weil-common-extension-fields-quotient-field",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+   }
+  },
+  {
+   "text": "Inside $K_0$, the set $F=\\{p/q:p,q\\in P,\\ q\\ne0\\}$ is a field: sums and products use the common-denominator formulas, and a nonzero $p/q$ has inverse $q/p$. It contains $K$, since each element of $K$ is a ratio of elements of $R$, and contains every $x_i$. The definition of $K_0$ as the smallest subfield containing $K$ and the $x_i$ [def-weil-pbc-transcendence-basis] gives $K_0\\subseteq F$; the reverse inclusion holds in $K_0$. Thus $K_0=F$ is the fraction field of $P$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+   }
+  },
+  {
+   "text": "Localize $P$ at the prime $\\mathfrak n$. The fraction description in [def-weil-pbc-localization-at-prime] identifies $B$ with $\\{p/s\\in K_0:s\\notin\\mathfrak n\\}$: denominators are nonzero since $0\\in\\mathfrak n$, and equality of fractions in either ring is exactly $ps^{\\prime}=p^{\\prime}s$, since $P$ is a subring of a field. Consequently $R\\subseteq P\\subseteq B\\subseteq K_0$ and $B$ is a nonzero integral domain. The same cited node gives locality and $\\mathfrak m_B=\\mathfrak nB$, and [lem-weil-pbc-localization-noetherian] gives Noetherianity. Finally every $z\\in K_0$ is $p/q$ with $p,q\\in P\\subseteq B$ and $q\\ne0$, so $K_0$ is also the fraction field of $B$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+   }
+  },
+  {
+   "text": "The map $\\bar\\epsilon:B\\to k$, $p/s\\mapsto\\epsilon(p)/\\epsilon(s)$, is well defined by cross multiplication, since $s\\notin\\ker\\epsilon$; the fraction formulas show it is a ring map extending $\\epsilon$. It kills $\\mathfrak nB$. Hence if $p\\in\\mathfrak m_B\\cap P=\\mathfrak nB\\cap P$, then $\\epsilon(p)=0$, giving $p\\in\\mathfrak n$; the converse follows from $p=p/1\\in\\mathfrak nB$. Thus $\\mathfrak m_B\\cap P=\\mathfrak n$ and intersecting with $R$ gives $\\mathfrak m_B\\cap R=\\mathfrak m_R$. Choose $0\\ne t\\in\\mathfrak m_R$; it remains nonzero in $B\\subseteq K_0$ and belongs to the proper ideal $\\mathfrak m_B$. A nonzero element of a proper ideal cannot be a unit, so $B$ is not a field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+   }
+  },
+  {
+   "text": "If $L/K$ is algebraic, the empty family is algebraically independent and $L$ is algebraic over $K$, hence is a transcendence basis by [def-weil-pbc-transcendence-basis]. Take $r=0$, so $K_0=K$, $P=R$ and $\\mathfrak n=\\mathfrak m_R$. By [lem-weil-pbc-local-ring-unit-criterion], every $s\\in R\\setminus\\mathfrak m_R$ has an inverse in $R$. Thus every fraction $p/s$ already belongs to $R$, proving $B=R$ inside $K$. Finiteness follows from the algebraic-generators lemma in step 1, applied with $K_0=K$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph; Tag 00E9, algebra-lemma-characterize-local-ring, equivalence of (1) and (3) for the zero-variable case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "def-weil-pbc-transcendence-basis",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-common-extension-fields-quotient-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PH, algebra-lemma-exists-dvr, first proof paragraph (polynomial origin replacement); explicit verification of the stated replacement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicIndependent|isNoetherianRing|isLocalHom|map.*maximal",
+   "results": "{\"t\": \"2026-10-22T06:13:40Z\", \"tool\": \"grep\", \"query\": \"AlgebraicIndependent|isNoetherianRing|isLocalHom|map.*maximal\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\"], \"digest\": \"315ef20203f4e239\"}; Read Mathlib/FieldTheory/FinTrdeg.lean:35-51,85-92, FieldTheory/IntermediateField/Adjoin/Algebra.lean:180-188, RingTheory/Localization/Submodule.lean:82-88 and AtPrime/Basic.lean:155-173. These give separate field-theoretic finiteness, Noetherianity and contraction ingredients, not the polynomial-origin construction with all the stated properties. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite transcendence basis reduces a finitely generated field extension of the fraction field of a Noetherian local domain to a finite extension after polynomial origin localization",
+   "results": "{\"t\": \"2026-10-22T06:13:41Z\", \"tool\": \"leansearch\", \"query\": \"A finite transcendence basis reduces a finitely generated field extension of the fraction field of a Noetherian local domain to a finite extension after polynomial origin localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTranscendenceBasis\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg\", \"Algebra.IsAlgebraic.isTranscendenceBasis_iff\", \"AlgebraicIndependent.isTranscendenceBasis_of_trdeg_le_of_finite\", \"IsTranscendenceBasis.isAlgebraic_field\", \"isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic\", \"exists_isTranscendenceBasis_subset\", \"IsTranscendenceBasis.lift_cardinalMk_eq_trdeg\"], \"digest\": \"3fce32583c151e80\"}; Read Mathlib/FieldTheory/FinTrdeg.lean:35-51,85-92, FieldTheory/IntermediateField/Adjoin/Algebra.lean:180-188, RingTheory/Localization/Submodule.lean:82-88 and AtPrime/Basic.lean:155-173. These give separate field-theoretic finiteness, Noetherianity and contraction ingredients, not the polynomial-origin construction with all the stated properties. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicIndependent, IsLocalization.AtPrime",
+   "results": "{\"t\": \"2026-10-22T06:13:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicIndependent, IsLocalization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/FieldTheory/FinTrdeg.lean:35-51,85-92, FieldTheory/IntermediateField/Adjoin/Algebra.lean:180-188, RingTheory/Localization/Submodule.lean:82-88 and AtPrime/Basic.lean:155-173. These give separate field-theoretic finiteness, Noetherianity and contraction ingredients, not the polynomial-origin construction with all the stated properties. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a nonfield Noetherian local domain R with fraction field K and finitely generated field extension L, choose a finite transcendence basis x such that the origin localization of R[x] dominates R and has fraction field K(x) with L finite over K(x)",
+   "results": "{\"t\": \"2026-10-22T06:13:55Z\", \"tool\": \"leanfinder\", \"query\": \"Given a nonfield Noetherian local domain R with fraction field K and finitely generated field extension L, choose a finite transcendence basis x such that the origin localization of R[x] dominates R and has fraction field K(x) with L finite over K(x)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteDimensionalFractionRingOfFinite\", \"Algebra.QuasiFinite.instOfIsFractionRing\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"IsIntegralClosure.finite\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"Algebra.EssFiniteType.cond\", \"integralClosure.isFractionRing_of_finite_extension\", \"exists_integral_inj_algHom_of_fg\"], \"digest\": \"aa4d8396c0d1ae4e\"}; Read Mathlib/FieldTheory/FinTrdeg.lean:35-51,85-92, FieldTheory/IntermediateField/Adjoin/Algebra.lean:180-188, RingTheory/Localization/Submodule.lean:82-88 and AtPrime/Basic.lean:155-173. These give separate field-theoretic finiteness, Noetherianity and contraction ingredients, not the polynomial-origin construction with all the stated properties. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isTranscendenceBasis|finite.*isAlgebraic|finrank.*adjoin",
+   "results": "{\"t\": \"2026-10-22T06:14:14Z\", \"tool\": \"grep\", \"query\": \"exists_isTranscendenceBasis|finite.*isAlgebraic|finrank.*adjoin\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\"], \"digest\": \"e0e07121679cc5ea\"}; Read Mathlib/FieldTheory/FinTrdeg.lean:35-51,85-92, FieldTheory/IntermediateField/Adjoin/Algebra.lean:180-188, RingTheory/Localization/Submodule.lean:82-88 and AtPrime/Basic.lean:155-173. These give separate field-theoretic finiteness, Noetherianity and contraction ingredients, not the polynomial-origin construction with all the stated properties. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoin independent variables to a local Noetherian domain and localize at the ideal generated by its maximal ideal and the variables: the new local domain dominates the old ring and has rational function fraction field",
+   "results": "{\"t\": \"2026-10-22T06:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoin independent variables to a local Noetherian domain and localize at the ideal generated by its maximal ideal and the variables: the new local domain dominates the old ring and has rational function fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsFractionRingAtPrimeFractionRing\", \"IsFractionRing.instAtPrimeFractionRing\", \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"instAlgebraAtPrimeFractionRing\", \"ValuationSubring.ofPrimeAlgebra\", \"IsLocalization.AtPrime.not_isField\"], \"digest\": \"73edf83f6bb340f4\"}; Read Mathlib/FieldTheory/FinTrdeg.lean:35-51,85-92, FieldTheory/IntermediateField/Adjoin/Algebra.lean:180-188, RingTheory/Localization/Submodule.lean:82-88 and AtPrime/Basic.lean:155-173. These give separate field-theoretic finiteness, Noetherianity and contraction ingredients, not the polynomial-origin construction with all the stated properties. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated field extension of the fraction field of a Noetherian local domain becomes finite over the fraction field of a dominating polynomial origin localization",
+   "results": "{\"t\": \"2026-10-23T09:34:38Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated field extension of the fraction field of a Noetherian local domain becomes finite over the fraction field of a dominating polynomial origin localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_ofLocalizationSpan\", \"RingHom.finiteType_ofLocalizationSpanTarget\", \"instFiniteDimensionalFractionRingOfFinite\", \"RingHom.finiteType_holdsForLocalizationAway\", \"IsIntegralClosure.finite\", \"Algebra.QuasiFinite.instOfIsFractionRing\", \"instFiniteFractionRingLocalizationAlgebraMapSubmonoidNonZeroDivisors\", \"instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl\"], \"digest\": \"c5347eadc5c10cbd\"}; Read returned source hits: FinTrdeg.lean:35-36,86-91; IntermediateField/Adjoin/Basic.lean:586-594; FiniteType.lean:187-193; Localization/Submodule.lean:82-88; AtPrime/Basic.lean:155-173. Hits provide individual ingredients already covered by existing DAG nodes, not all clauses of the polynomial-origin construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing|map_eq_maximalIdeal|not_isField",
+   "results": "{\"t\": \"2026-10-23T09:36:55Z\", \"tool\": \"grep\", \"query\": \"isNoetherianRing|map_eq_maximalIdeal|not_isField\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\"], \"digest\": \"e21a1370b6f0369e\"}; Read returned source hits: FinTrdeg.lean:35-36,86-91; IntermediateField/Adjoin/Basic.lean:586-594; FiniteType.lean:187-193; Localization/Submodule.lean:82-88; AtPrime/Basic.lean:155-173. Hits provide individual ingredients already covered by existing DAG nodes, not all clauses of the polynomial-origin construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite transcendence basis and localization of a polynomial ring at the origin reduce a finitely generated field extension to a finite extension of fraction fields",
+   "results": "{\"t\": \"2026-10-23T09:36:55Z\", \"tool\": \"leansearch\", \"query\": \"A finite transcendence basis and localization of a polynomial ring at the origin reduce a finitely generated field extension to a finite extension of fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTranscendenceBasis\", \"IsTranscendenceBasis.polynomial\", \"isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg\", \"Algebra.IsAlgebraic.isTranscendenceBasis_iff\", \"AlgebraicIndependent.isTranscendenceBasis_of_lift_trdeg_le\", \"exists_isTranscendenceBasis_subset\", \"AlgebraicIndependent.isTranscendenceBasis_of_lift_trdeg_le_of_finite\"], \"digest\": \"fb8999093f0e9b7a\"}; Read returned source hits: FinTrdeg.lean:35-36,86-91; IntermediateField/Adjoin/Basic.lean:586-594; FiniteType.lean:187-193; Localization/Submodule.lean:82-88; AtPrime/Basic.lean:155-173. Hits provide individual ingredients already covered by existing DAG nodes, not all clauses of the polynomial-origin construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicIndependent, IsLocalization.AtPrime",
+   "results": "{\"t\": \"2026-10-23T09:36:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicIndependent, IsLocalization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned source hits: FinTrdeg.lean:35-36,86-91; IntermediateField/Adjoin/Basic.lean:586-594; FiniteType.lean:187-193; Localization/Submodule.lean:82-88; AtPrime/Basic.lean:155-173. Hits provide individual ingredients already covered by existing DAG nodes, not all clauses of the polynomial-origin construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finset_isTranscendenceBasis|finiteDimensional_adjoin|finite_of_fg_of_isAlgebraic",
+   "results": "{\"t\": \"2026-10-23T09:41:09Z\", \"tool\": \"grep\", \"query\": \"exists_finset_isTranscendenceBasis|finiteDimensional_adjoin|finite_of_fg_of_isAlgebraic\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Isaacs.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/Extension.lean\", \"Mathlib/FieldTheory/Extension.lean\", \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\"], \"digest\": \"a4265167310178a6\"}; Read returned source hits: FinTrdeg.lean:35-36,86-91; IntermediateField/Adjoin/Basic.lean:586-594; FiniteType.lean:187-193; Localization/Submodule.lean:82-88; AtPrime/Basic.lean:155-173. Hits provide individual ingredients already covered by existing DAG nodes, not all clauses of the polynomial-origin construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoin algebraically independent variables to a Noetherian local domain and localize at the ideal generated by its maximal ideal and the variables to obtain a dominating nonfield local domain with rational function fraction field",
+   "results": "{\"t\": \"2026-10-23T09:41:15Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoin algebraically independent variables to a Noetherian local domain and localize at the ideal generated by its maximal ideal and the variables to obtain a dominating nonfield local domain with rational function fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\", \"IsFractionRing\", \"FunctionField.ringOfIntegers.instIsDomainSubtypeMemSubalgebraPolynomial\", \"instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl\", \"IsLocalization.AtPrime.not_isField\"], \"digest\": \"66e51630ea01fb0e\"}; Read returned source hits: FinTrdeg.lean:35-36,86-91; IntermediateField/Adjoin/Basic.lean:586-594; FiniteType.lean:187-193; Localization/Submodule.lean:82-88; AtPrime/Basic.lean:155-173. Hits provide individual ingredients already covered by existing DAG nodes, not all clauses of the polynomial-origin construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-domain-fg-field-dvr",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points). Algebraic input in the proof of Tag 0CM2: Tag 00PH with the finitely generated field extension equal to the residue field of a source point.; first paragraph of Tag 00PH: finite transcendence basis and localization at the origin (former steps 1--3)",
+   "via": [
+    "lem-sfb-local-domain-fg-field-dvr",
+    "lem-sfb-noetherian-image-boundary-dvr",
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-origin-finite-field-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the origin-localization replacement of Stacks 00PH using existing finite-basis, algebraic-generators, finite-type Noetherian and localization leaves. Explicit polynomial kernel and fraction calculations establish all domination, fraction-field and nonfield clauses. No statement change and no new nodes.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor confirms this); retain its full from.place and via chain. These steps realize the Tag 00PH origin-localization prerequisite in the alteration/properness route recorded there, associated to latest det-thm-sf-ctf-stability-direct-images proof (3)."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-942fff93f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-942fff93f (reviewer sub-agent of L); spot-checked: I checked the item's 7 steps against Stacks algebra.tex lemma-exists-dvr (Tag 00PH, line 29312), first proof paragraph (transcendence basis, then localize R[x] at (m_R,x)). The statement and stmt_deps are unchanged and there are no new nodes. All 9 cited proof nodes are Mathlib leaves, and each states what its step takes from it: finite transcendence basis, transcendence-basis definition, algebraic generators give a finite extension, MvPolynomial evaluation, finite-type Noetherian, R/m is a field, localization at a prime is local with maximal ideal pR_p, localization stays Noetherian, local-ring unit criterion. Step 1 gives [L:K0]<inf by the generators lemma over K0. Step 2: injectivity via R[X] inside K[X], then Noetherian with zero ideal. Step 3 computes the constant-coefficient kernel and proves maximality directly. Step 4: Frac P = K0. Step 5: since P is a domain the fraction relation is ps'=p's, so B embeds in K0; local, Noetherian, Frac B = K0. Step 6: the extended map shows m_B meets P in n and R in m_R, and a nonzero t in m_R shows B is not a field, which uses m_R != 0. Step 7: the empty basis gives B=R by the unit criterion. Edge cases checked: r=0, R=Z_(p) with L=Q(t), inseparable extensions (no separability used), and the excluded field case. The item meets exactly what the parent lem-sfb-local-domain-fg-field-dvr step 1 uses. Live and side-live still have the item unsplit and there is no repair note. The rg -L search for 00PH and transcendence-basis/localization finds no duplicate. No tool_uses, no SGA, and searches cover all of LeanSearch, Loogle, LeanFinder and grep."
+ }
+}

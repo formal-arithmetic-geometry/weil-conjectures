@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-proper-support-tensor-perfect",
+ "kind": "statement",
+ "title": "Perfect tensor direct image with proper support on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of finite presentation between algebraic spaces over $S$ [def-trf-algebraic-space]; finite presentation is tested on compatible etale scheme charts. All sites are taken small relative to the universe of their module sheaves [def-weil-size-convention]. Module derived categories are the unbounded localizations of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. On a ringed site, a perfect object means one locally isomorphic in that derived category to a bounded complex whose terms are direct summands of finite free structure modules. A quasi-coherent module on an algebraic space is as in [def-trf-space-quasi-coherent-module], and $D_{\\mathrm{QCoh}}$ denotes the full subcategory of objects with quasi-coherent cohomology sheaves. For morphisms of algebraic spaces use the canonical ringed small etale module functors [def-trf-space-etale-module-functors], their total derived functors $La^*\\dashv Ra_*$, and derived tensor product of modules. Derived pullback is computed by tensor pullback of K-flat resolutions with flat terms, and derived direct image by K-injective resolutions. Let $E\\in D(\\mathcal O_X)$ be perfect, and let $G^\\bullet$ be a bounded complex of quasi-coherent finitely presented $\\mathcal O_X$-modules. Finite presentation means locally admitting an exact presentation $\\mathcal O^m\\to\\mathcal O^n\\to G^i\\to0$ with finite $m,n$. Assume each $G^i$ is flat over $Y$, meaning that its geometric stalk at $\\bar x$ is flat over $\\mathcal O_{Y,f(\\bar x)}$, and that its support, with the closed subspace structure cut out by its annihilator, is proper over $Y$. Proper means separated, of finite type and universally closed. Then $Rf_*(E\\otimes^{\\mathbf L}_{\\mathcal O_X}G^\\bullet)$ is perfect in $D(\\mathcal O_Y)$ and has quasi-coherent cohomology sheaves.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Quasi-coherence: Tag 08JL (lemma-pseudo-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-derived-module-operations",
+  "def-sfb-space-flat-proper-coefficient",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "First, every perfect object $P$ on any algebraic space has quasi-coherent cohomology. Indeed, on its etale strict-perfect charts each term is a direct summand of $\\mathcal O^n$, hence is $\\ker(1-e)$ for an idempotent $e$ on $\\mathcal O^n$. The structure module is quasi-coherent by its identity presentation. Kernels, images and cokernels of quasi-coherent modules are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits], so the cohomology of the strict-perfect model is quasi-coherent. Restriction is exact by [lem-sfb-ringed-site-restriction-kflat], and quasi-coherence is local by [def-trf-space-quasi-coherent-module]. Thus $P$ has quasi-coherent cohomology; in particular $E\\in D_{\\mathrm{QCoh}}$.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JL (lemma-pseudo-coherent), local strictly perfect argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-perfect-flat-proper-model] to obtain the etale affine cover $U_a\\to Y$, the Noetherian models $(f_{a,0},E_{a,0},G_{a,0}^\\bullet)$, and the displayed derived and ordinary coefficient identifications. This descends data, not a direct image. Each $f_{a,0}$ is finitely presented, hence locally of finite type and quasi-separated; its coefficient complex is bounded coherent, relatively flat, and termwise properly supported. Therefore [lem-sfb-space-noetherian-tensor-perfect] gives a perfect object $K_{a,0}=Rf_{a,0,*}(E_{a,0}\\otimes^{\\mathbf L}G_{a,0}^\\bullet)$.",
+   "uses": [
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-space-noetherian-tensor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P, proof: descent of X, G and E, then Tag 0DKJ"
+   }
+  },
+  {
+   "text": "Put $K=Rf_*(E\\otimes^{\\mathbf L}G^\\bullet)$. Both $f$ and $f_{a,0}$ are quasi-compact and quasi-separated. Step 1 applies to $E_{a,0}$ as well. Apply [lem-sfb-space-flat-complex-base-change] first to $U_a\\to Y$ and then to $g_a:U_a\\to U_{a,0}$. The model identifications give isomorphisms $Lu_a^*K\\simeq Rf_{a,*}(Lv_a^*E\\otimes^{\\mathbf L}v_a^*G^\\bullet)\\simeq Lg_a^*K_{a,0}$. In both applications the coefficient pullback is ordinary termwise pullback, exactly as the model provides.",
+   "uses": [
+    "lem-sfb-space-flat-complex-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 0A1P and 0A1K (lemma-base-change-tensor), comparison with K_i"
+   }
+  },
+  {
+   "text": "Derived pullback of a perfect object is perfect: choose its local bounded strict-perfect models. [lem-weil-pbc-strict-perfect-ringed-pullback-model] computes their derived pullbacks by bounded termwise pullback with the same finite-free splittings. These give strict-perfect models locally on the inverse-image covering, so $Lg_a^*K_{a,0}$ is perfect. Hence $Lu_a^*K$ is perfect for every $a$. Etale pullback is restriction by [def-trf-algebraic-space], so these local models, composed with the jointly surjective etale cover $\\{U_a\\to Y\\}$, are local strict-perfect models for $K$. This is precisely perfectness on $Y$. Step 1 applied to $K$ gives its quasi-coherent cohomology.",
+   "uses": [
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P, last sentence; sites-cohomology.tex Tag 08G5 (definition-perfect) and Tag 08H6 (lemma-perfect-pullback)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-perfect-flat-proper-model",
+  "lem-sfb-space-noetherian-tensor-perfect",
+  "lem-sfb-space-flat-complex-base-change",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0A1P (lemma-base-change-tensor-perfect), perfectness proof; Tag 08JL for quasi-coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented morphism of algebraic spaces, the derived direct image of a perfect complex tensored with a bounded relatively flat finite presentation complex with proper support is perfect",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib/Algebra/Category/Ring/Under/Limits\", \"type\": \"∀ {R S : CommRingCat} [inst : Algebra ↑R ↑S] [Module.Flat ↑R ↑S],\\n  CategoryTheory.Limits.PreservesFiniteLimits (R.tensorProd S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M],\\n  CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module flatness and scheme morphism stability do not state algebraic-space tensor direct-image perfectness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper support coherent cohomology: perfect pushforward of a bounded complex flat over a non Noetherian base on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module flatness and scheme morphism stability do not state algebraic-space tensor direct-image perfectness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor complex with relatively flat finite presentation terms and proper support has perfect derived direct image on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module.FinitePresentation R M] : Module.FinitePresentation A (A ⊗[R] M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorLeft M) |>.Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} R] :\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.lTensor M) (g.lTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ M \\\\otimes_R N \\\\xr\"}\n  {\"name\": \"Module.Flat.ker_lTensor_eq\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] :\\n  LinearMap.ker (AlgebraTensorModule.lTensor S M f) =\\n    LinearMap.range (AlgebraTensorModule.lTensor S M (LinearMap.ker f).subtype)\", \"doc\": \"For a flat $ R $-module $ M $, the kernel of the $ A $-linear map $ M \\\\otimes_R N \\\\to M \\\\otimes_R Q $ induced by an $ R $-linear map $ f: N \\\\to Q $ is equal to the image of the $ A $-linear map $ M \\\\o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module flatness and scheme morphism stability do not state algebraic-space tensor direct-image perfectness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"perfect\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsReduced X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : Dense ↑(AlgebraicGeometry.Scheme.Hom.smoothLocus f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsIntegral X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : genericPoint ↥X ∈ AlgebraicGeometry.Scheme.Hom.smoothLocus f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module flatness and scheme morphism stability do not state algebraic-space tensor direct-image perfectness"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*(directImage|pushforward)|properSupport.*perfect",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module flatness and scheme morphism stability do not state algebraic-space tensor direct-image perfectness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complex proper support tensor derived direct image on algebraic spaces over an arbitrary ring",
+   "results": "Read search output: HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.recOn, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.isProper_eq",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely presented algebraic spaces a perfect complex tensor bounded relatively flat finite presentation complex with proper support has perfect derived pushforward",
+   "results": "Read search output: AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-base-change",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect).",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-support-tensor-perfect",
+  "worker": "stage1",
+  "summary": "Split the Stacks 0A1P approximation proof into etale local Noetherian data and the genuinely Noetherian tensor theorem, using existing arbitrary base change and strict-perfect pullback statements. Proved quasi-coherence directly from the existing kernel/cokernel closure. No statement change.",
+  "blueprint": "Supporting prerequisite in det-thm-sf-ctf-stability-direct-images proof (3), via the existing alteration and stable-curve chain: Stacks 0A1P perfectness, rather than an alternate six-functor route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic module or ringed-site tool for the local perfect-model argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "def-trf-space-quasi-coherent-module",
+    "why": "Generic module or ringed-site tool for the local perfect-model argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "why": "Generic module or ringed-site tool for the local perfect-model argument; the unit supplies no replacement for this general fact."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic module or ringed-site tool for the local perfect-model argument; the unit supplies no replacement for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-site-restriction-kflat",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "def-trf-algebraic-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-83bc1e06f",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-83bc1e06f (reviewer sub-agent of L); spot-checked: PASS with no changes. Item: the statement, stmt_deps, source and blueprint are unchanged from live, and the item is still unsplit on live and side-live. There is no repair note, no SGA citation and no cycle (closure of 274 nodes). Sources read: Stacks 0A1P (statement and full approximation proof), 0A1K (including the precise non-derived G pullback in its proof), 0DKJ, 09RJ, 08K0, 08K2, Situation 084W, 08H6 and 08JL. Step 1 is 08JL: a summand of O^n is ker(1-e), cohomology is quasi-coherent by qcoh-kernels-colimits, restriction is exact, and quasi-coherence is local. It is elementary and correct. Step 2: the model node supplies every hypothesis of the 0DKJ node (Noetherian Spec R_{a,0}; f_{a,0} fp, hence lft and qs; coherent, flat, properly supported G_{a,0}; perfect E_{a,0}). Step 3: lem-sfb-space-flat-complex-base-change applies twice. f and f_{a,0} are qcqs, E and E_{a,0} are in D_QCoh by Step 1, G is a bounded flat qcoh complex, and the ordinary G pullback matches the model's complex isomorphism. The models are over Spec Z, so S=Spec Z is used. Step 4 is 08H6: the strict-perfect pullback model applied on a cover, with étale pullback being restriction, gives 08G5 perfectness. New nodes: noetherian-tensor-perfect is exactly 0DKJ hypothesis by hypothesis (tested on A^1 with a skyscraper G, and on empty and zero inputs). perfect-flat-proper-model is the data paragraph of 0A1P, true via 07SK/07V7/08K0/08K2/09RJ with the 084W qcqs hypotheses met. It descends data only, so it is not a restatement of the item. Searched rg -L over 0DKJ/0A1P/08IS/09RJ/08K0/08K2/08H6/08JL: no duplicate; the scheme analogues (081G, 08EV, 09UA) and the space nodes eventually-flat, relative-perfect-base-change and etale-detects-perfect are different statements. B1-B7 hold and the searches cover three tools. Batch-5: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions, already cited by the base item statement and not part of the trace formula or Poincaré duality, so all are accepted. The four tool_uses are accepted. Advisory: the item's 'finite presentation' is read as lfp+qc+qs; the step-4 compatibility of localization with derived pullback is left implicit; the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportTensorPerfect",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properSupport_tensor_perfect",
+  "declarations": [
+   "SheafOfModules.IsLocallyStrictPerfectAtCoefficientSize",
+   "SheafOfModules.IsPerfectAtCoefficientSize",
+   "AlgebraicGeometry.AlgebraicSpace.properSupport_tensor_perfect"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportTensorPerfect.lean",
+  "statement": "theorem properSupport_tensor_perfect {S : Scheme.{u}} {X Y : AlgebraicSpace S} [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (f : X ⟶ Y) (_hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (E : X.DerivedModules) (_hE : SheafOfModules.IsPerfectAtCoefficientSize X.smallStructureRings E) (G : CochainComplex X.Modules ℤ) (_hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) (_hqc : ∀ n : ℤ, (G.X n).IsQuasicoherent) (_hfinite : ∀ n : ℤ, (G.X n).IsFinitePresentation) (_hflat : ∀ n : ℤ, ModuleIsFlatOver f (G.X n)) (_hproper : ∀ n : ℤ, HasProperAnnihilatorSupport f (G.X n)) : SheafOfModules.IsPerfectAtCoefficientSize Y.smallStructureRings ((derivedDirectImage f).obj (moduleDerivedTensorComplex X E G)) ∧ Y.derivedQCohProperty ((derivedDirectImage f).obj (moduleDerivedTensorComplex X E G))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c43f33f26",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Third delivery; R1 of 477245d (H12/H4 duplicate D(O_X)/Rf_*) resolved per recipe: item cites/imports Q115 def-sfb-space-derived-module-calculus, E : X.DerivedModules with HasDerivedCategory.{w} on SmallModules, conclusion (derivedDirectImage f).obj (moduleDerivedTensorComplex X E G) perfect via 08G5 helpers on Y.smallStructureRings and Y.derivedQCohProperty; operations node shrunk to the derived tensor on SmallModules (10 decls), duplicate direct image/instances removed. Flat-proper node/module byte-identical to the twice-accepted version. All stmt_dep records byte-identical to side-live; item differs from live only in stmt_deps and lean; lean.statement verbatim for 3 records; no name/id clashes; defs have data, theorems sorry; docstrings carry source and blueprint. Clauses match 0A1P/08G5/08JL; edge cases G=0, empty spaces, rank 0, unbounded E, non-proper f; universes bound. No compile (no files changed). Advisories: small-ringed-model only a transitive stmt_dep; Q115 derivedDualityModel chosen tensor agrees canonically with the new one; docstring chapter label for 0A1P; likely redundant HomologySequence import; second reading is a worker self-check."
+ }
+}

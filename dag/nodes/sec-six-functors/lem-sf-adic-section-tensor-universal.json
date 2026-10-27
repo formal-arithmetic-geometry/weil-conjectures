@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-adic-section-tensor-universal",
+ "kind": "statement",
+ "title": "Universal properties of adic sectionwise sheaf tensors",
+ "statement": "For a prime ℓ and scheme X, let R be comparisonRing ℓ X. For sheaves M, N, P of sectionwise R-modules, every family of R(V)-bilinear pairings M(V) × N(V) → P(V) compatible with restrictions extends uniquely to a morphism from the sectionwise sheaf tensor M ⊗ N to P, with the prescribed value on canonical pure tensors. The supporting vector-space sheafification argument extends presheaf tensor maps and detects equality of threefold sheaf tensor maps. Native module tensor morphisms are determined by their canonical pure-tensor sections, and mapping both factors maps these sections factorwise.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EO, tensor product as sheafification of the presheaf tensor and its bilinear universal property."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-adic-section-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Construct the presheaf morphism using TensorProduct.lift. The module-sheafification adjunction extends it uniquely to the sheaf tensor; the adjunction unit computes its value on pure tensors. TensorProduct.ext and injectivity of the hom-set equivalence prove uniqueness. Naturality of the unit computes tensor maps and pure-tensor pairings. For vector-space tensors, the mate of the inclusion tensorator is the monoidal sheafification comparison followed by two counits, hence an isomorphism. Tensoring its sheafification remains invertible, so the adjunction also detects threefold tensor diagrams and extends vector-space presheaf pairings. For native modules, apply Mod.tensorLeft_obj_hom_ext followed by Sheaf.tensor_hom_ext and sectionwise tensor extensionality. The two native quotient-map naturality identities and the vector-space tensorator naturality identity compute tensor maps on pure tensors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tensor and sheafification universal properties, Tag 03EK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules tensor represents natural sectionwise bilinear pairings by sheafification adjunction",
+   "results": "PresheafOfModules.sheafificationAdjunction, sheafificationHomEquiv, sheafificationAdjunction_homEquiv_apply and the pointwise presheaf tensor API; no universal-property theorem for the project siteSheafTensorRight construction.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing TensorProduct.lift and adjunction APIs to prove the sectionwise universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.lift PresheafOfModules.sheafificationAdjunction",
+   "results": "TensorProduct.lift.unique, lift_mk_compr₂, lift_compr₂, lift_comp_map and lift.tmul; no theorem for the actual sheafified site tensor.",
+   "date": "2026-10-27",
+   "verdict": "Use TensorProduct.lift followed by the existing sheafification adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "siteSheafTensor.*(ext|exists)|tensor_hom_ext",
+   "results": "Mathlib hits only for coinvariants and Day convolution. The project supplies Sheaf.tensor_hom_ext but not the sectionwise bilinear universal property.",
+   "date": "2026-10-27",
+   "verdict": "Combine the existing tensor extensionality and sheafification APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleTensorComparisonCore",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-module-tensor-comparison-core",
+   "place": "Sheafification universal-property steps of the tensor comparison proof.",
+   "via": [
+    "lem-sf-adic-module-tensor-comparison-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicSectionTensorUniversal",
+  "file": "lean/Sheaf/SixFunctors/AdicSectionTensorUniversal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicTensorComparison.sectionTensor_exists",
+  "statement": "lemma sectionTensor_exists (M N P : SectionModule (l := l) (X := X))\n    (b : ∀ V : X.ProEtᵒᵖ, M.val.obj V →ₗ[(comparisonRing l X).obj.obj V]\n      N.val.obj V →ₗ[(comparisonRing l X).obj.obj V] P.val.obj V)\n    (hb : ∀ {V W : X.ProEtᵒᵖ} (i : V ⟶ W) (x : M.val.obj V) (y : N.val.obj V),\n      b W (M.val.map i x) (N.val.map i y) = P.val.map i (b V x y)) :\n    ∃! f : (SheafOfModules.siteSheafTensorRight (A := comparisonRing l X) N).obj M ⟶ P,\n      ∀ (V : X.ProEtᵒᵖ) (x : M.val.obj V) (y : N.val.obj V),\n        f.val.app V (SheafOfModules.siteSheafTensorTmul M N V x y) = b V x y",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T201748-L-3412982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T201748-L-3412982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

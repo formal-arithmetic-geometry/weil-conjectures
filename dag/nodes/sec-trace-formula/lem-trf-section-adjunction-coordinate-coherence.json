@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-section-adjunction-coordinate-coherence",
+ "kind": "statement",
+ "title": "Global-section unit and inverse associativity equations for scheme module adjoints",
+ "statement": "Let schemes lie in the fixed size convention [def-weil-size-convention, def-pc-scheme]. For every scheme morphism $a:A\\to B$ choose a functor $L_a:\\operatorname{Mod}(\\mathcal O_B)\\to\\operatorname{Mod}(\\mathcal O_A)$ on module sheaves [def-weil-sheaf-of-modules-category] and an adjunction $L_a\\dashv a_*$. Let $c_{a,b}:L_aL_b\\simeq L_{ba}$ be the normalized left-adjoint composition isomorphism induced by the canonical composition comparison for scheme module pushforwards, and let $i_A:L_{\\mathrm{id}_A}\\simeq\\mathrm{id}$ be induced by the identity pushforward comparison. Write $u_a(F):\\Gamma(B,F)\\to\\Gamma(A,L_aF)$ for the adjunction unit on the top open, followed by restriction from its inverse image to the top open. Then three formulas hold. For $b:A\\to B$ and any module $F$ on $B$, $\\Gamma(\\mathrm{eq}_{\\mathrm{id}\\,b=b})\\Gamma(c_{\\mathrm{id}_A,b,F})u_{\\mathrm{id}_A}(L_bF)=\\mathrm{id}$. For $s\\in\\Gamma(A,L_{b\\,\\mathrm{id}_B}F)$, $\\Gamma(L_b i_B)(\\Gamma(c_{b,\\mathrm{id}_B,F}^{-1})(s))=s$. Finally, for $a:A\\to B$, $b:B\\to C$, $d:C\\to D$ and $F$ on $D$, $c_{ab,d,F}^{-1}$ followed by $c_{a,b,L_dF}^{-1}$ followed by $L_a(c_{b,d,F})$ equals $c_{a,bd,F}^{-1}$. Equality transports are those from the identity and associativity laws of scheme composition. These are the specific comparisons returned by Mathlib's leftAdjointCompIso and leftAdjointIdIso, not arbitrary isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0096–0097, adjunction for module pullback and composition; Descent Tag 03DR, normalized section restrictions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Scheme module pushforward identity and composition comparisons satisfy both unitality and associativity equations on every section, by reflexivity. Apply Mathlib leftAdjointCompIso_comp_id and leftAdjointCompIso_id_comp to transfer these two unit equations to left adjoints. The conjugate unit equation cancels the normalized identity comparison on global sections, proving the first formula. Cancelling the inverse composition comparison gives the second.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply leftAdjointCompIso_assoc to the canonical pushforward composition comparisons. Evaluate its component at F. Multiply by the inverses of the first two composition comparisons; categorical associativity and inverse cancellation give the third formula. All inverse-image-top restrictions are identity maps. No tensor construction, quasi-coherence or local trivialization is used.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0096–0097: explicit adjunction unitality and associativity on module sections, by Mathlib mate identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit and associativity coherence for the canonical composition isomorphisms of left adjoints",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc",
+     "CategoryTheory.Adjunction.comp_unit"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "Generic mate associativity and composite-unit formulas are available. The proof specializes these to module pushforward and evaluates the normalized comparisons on global sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointCompIso_assoc\"",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso_assoc"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "Used to obtain associativity for arbitrary chosen left adjoints. Inverse cancellation and section-unit identities still require the argument in this module."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|leftAdjointIdIso|unit_conjugateEquiv_symm",
+   "results": {
+    "ok": true,
+    "n_hits": 16,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso",
+     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.unit_conjugateEquiv_symm"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "Found CompositionIso, Mates and pullback coherence implementations. Reused the generic mate identities; no single declaration states the three normalized global-section equations together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TraceFormula.EtaleLineSectionsNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: interpret the polarization on each scheme atlas and its overlaps as a line module on the small etale site, compatibly with pullback (Stacks 03DX, 05VG, 03LC). Returned comparison proof steps 1–3 (normalized functor and restrictions). Generic adjunction section-coordinate calculations for normalized identity and composition.",
+   "via": [
+    "lem-trf-etale-line-sections-normalized-comparisons",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TraceFormula.SectionAdjunctionCoordinateCoherence",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/SectionAdjunctionCoordinateCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.section_adjunction_coordinate_coherence",
+  "statement": "theorem section_adjunction_coordinate_coherence\n    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)\n    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ Modules.pushforward f) :\n    let c : ∀ {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C),\n        L b ⋙ L a ≅ L (a ≫ b) :=\n      fun {_ _ _} a b ↦ Adjunction.leftAdjointCompIso (adj b) (adj a) (adj (a ≫ b))\n        (Modules.pushforwardComp a b)\n    let unit : ∀ {A B : Scheme.{u}} (a : A ⟶ B) (F : B.Modules),\n        Γ(F, ⊤) ⟶ Γ((L a).obj F, ⊤) :=\n      fun {_ _} a F ↦ ((adj a).unit.app F).app ⊤ ≫\n        ((L a).obj F).presheaf.map (homOfLE a.preimage_top.ge).op\n    (∀ {A B : Scheme.{u}} (b : A ⟶ B) (F : B.Modules),\n      unit (𝟙 A) ((L b).obj F) ≫ ((c (𝟙 A) b).hom.app F).app ⊤ ≫\n        (eqToHom (congrArg (fun f ↦ (L f).obj F) (Category.id_comp b))).app ⊤ = 𝟙 _) ∧\n    (∀ {A B : Scheme.{u}} (b : A ⟶ B) (F : B.Modules)\n      (s : Γ((L (b ≫ 𝟙 B)).obj F, ⊤)),\n      ((L b).map ((Adjunction.leftAdjointIdIso (adj (𝟙 B))\n        (Modules.pushforwardId B)).hom.app F)).app ⊤\n          (((c b (𝟙 B)).inv.app F).app ⊤ s) = s) ∧\n    (∀ {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : C ⟶ D) (F : D.Modules),\n      (c (a ≫ b) d).inv.app F ≫ (c a b).inv.app ((L d).obj F) ≫\n        (L a).map ((c b d).hom.app F) = (c a (b ≫ d)).inv.app F)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T100359-L-8423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T100359-L-8423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

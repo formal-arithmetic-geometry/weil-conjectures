@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-integral-finite-pullback-normalization",
+ "kind": "statement",
+ "title": "Finite quotient pullback normalization on a good complex",
+ "statement": "Fix l,E,Operations o, RealizationModel model, an arbitrary scheme morphism f:X→Y, a flat-term K-flat good completed-coefficient cochain complex P on Y, and n≥0. Write K=Q(P), ρ_W for the reductionEvaluation isomorphism, k for the specified pullbackTensorDerivedEvaluation and h=model.reductionPull(f). Then finiteScalarPullback(f,n) inverse at K followed by ρ_X inverse at ringedPull(f)(K) equals finiteDerivedPullback(f) of ρ_Y inverse at K, followed by k inverse at reduction(K), followed by finite evaluation of h inverse at K. The finiteScalarPullback is the canonical specified isomorphism of [def-sf-integral-finite-pullback-coordinates]. No reconstruction counit or derived proper direct image is involved.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "fix-prop-coherence.proof.md, maps built from coefficient-preserving evaluation and adjunction units/counits; Stacks 03D7 (lemma-adjoint-pullback-pushforward-modules), 03EL (lemma-tensor-product-pullback), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations",
+  "def-sp-coefficient-mate-comparisons",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-finite-pullback-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "For any additive adjunction with exact left adjoint, derive its Hom transpose equation on homotopy representatives from derivedη_fac_app and naturality of the right-derived unit. Apply normalizedAdjunction_uniqueness and localization extensionality to show that deriving the ordinary leftAdjointUniq comparison equals leftAdjointUniq of the derived adjunctions and the derived right comparison. Specialize to finiteDirectImage_eq and the two geometric module adjunctions. This identifies finiteRingPullbackIso with mapDerivedCategoryNatIso(finitePullbackIso).",
+   "uses": [
+    "def-sf-integral-finite-pullback-coordinates",
+    "def-sf-integral-system-operations",
+    "def-pur-finite-compact-support-scalar-data",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the two specified scalar/pullback presentation isomorphisms. Substitute the finite pullback identification of Step 1, and use naturality to move finiteReductionIso(Y,n) across the finite geometric pullback comparison. Thus finiteScalarPullback equals the already specified integralFiniteScalarPull; no definition or adjunction is changed.",
+   "uses": [
+    "def-sf-integral-finite-pullback-coordinates",
+    "def-sp-coefficient-mate-comparisons",
+    "lem-sf-integral-reduction-pull-finite-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralReductionPullFiniteSquare to K=Q(P). Package the evaluated reductionPull, pullbackTensorDerivedEvaluation, and finite pullback of reductionEvaluation as a composite isomorphism; its forward arrow equals reductionEvaluation(X,n) followed by integralFiniteScalarPull. Equality of isomorphisms gives equality of their inverses. Expand the inverses in reverse order, use mapIso_inv, substitute Step 2 and reassociate. This is exactly the stated equation, with no use of the good-complex property beyond its supplied object.",
+   "uses": [
+    "lem-sf-integral-reduction-pull-finite-square",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-pullback-coordinates",
+  "def-sf-integral-system-operations",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-pur-normalized-adjunction-composition",
+  "def-sp-coefficient-mate-comparisons",
+  "lem-sf-integral-reduction-pull-finite-square",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J5",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Existing finite reduction/pullback square, Stacks 07A6 adjunction normalization, and uniqueness of derived left adjoints. Reuses the already stated arbitrary-object square instead of repeating its K-flat construction; no new proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image compatibility with coefficient reduction and reconstruction counit for systems of modules",
+   "results": "{\"t\": \"2026-10-27T07:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image compatibility with coefficient reduction and reconstruction counit for systems of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"SheafOfModules.Presentation.map_π_eq\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"DirectLimit.Module.of_f\", \"Module.DirectLimit.map_comp\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"Module.DirectLimit.map\", \"AdicCompletion.eval_comp_of\"], \"digest\": \"e6551c8acaf5449f\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results are available; no declaration states this normalized finite comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "properFiniteReduction|integralProperFiniteProjection|counit_projection",
+   "results": "{\"t\": \"2026-10-27T07:23:42Z\", \"tool\": \"grep\", \"query\": \"properFiniteReduction|integralProperFiniteProjection|counit_projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results are available; no declaration states this normalized finite comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "{\"t\": \"2026-10-27T07:23:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv_naturality_left\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_naturality_left\"], \"digest\": \"e5336c4ff17a2a39\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results are available; no declaration states this normalized finite comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension pullback comparison geometric mate derived direct image coefficient systems",
+   "results": "{\"t\": \"2026-10-27T07:37:01Z\", \"tool\": \"leansearch\", \"query\": \"Canonical scalar extension pullback comparison geometric mate derived direct image coefficient systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullback\", \"VectorField.mpullback_smul_apply\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\"], \"digest\": \"1acfce98fcfb1283\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results are available; no declaration states this normalized finite comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralProperFiniteProjection",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "fix-prop-coherence.proof.md: coefficient comparisons preserve evaluation and adjunction units and counits",
+   "via": [
+    "lem-sf-integral-proper-finite-projection",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralFinitePullbackNormalization",
+  "file": "lean/Sheaf/SixFunctors/IntegralFinitePullbackNormalization.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralFinitePullback_onGood",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.integralFinitePullback_onGood"
+  ],
+  "statement": "theorem integralFinitePullback_onGood (o : Operations l E)\n    (model : RealizationModel l E o) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (n : ℕ) :\n    (finiteScalarPullback l E f n).inv.app (DerivedCategory.Q.obj P.obj) ≫\n        ((calculus l E X).reductionEvaluation n).inv.app\n          ((ringedPull l E f).obj (DerivedCategory.Q.obj P.obj)) =\n      (finiteDerivedPullback l E n f).map\n          (((calculus l E Y).reductionEvaluation n).inv.app\n            (DerivedCategory.Q.obj P.obj)) ≫\n        (pullbackTensorDerivedEvaluation l E f n).inv.app\n          ((calculus l E Y).reduction.obj (DerivedCategory.Q.obj P.obj)) ≫\n        (coefficientSequenceDerivedEvaluation l E X n).map\n          ((model.reductionPull f).inv.app (DerivedCategory.Q.obj P.obj))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T094539-L-241166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T112400-L-1577579",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

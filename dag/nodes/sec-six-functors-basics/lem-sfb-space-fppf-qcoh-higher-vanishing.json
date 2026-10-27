@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-space-fppf-qcoh-higher-vanishing",
+ "kind": "statement",
+ "title": "Quasi-coherent modules are acyclic for big-fppf to small-etale direct image",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $W$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $M$ be a quasi-coherent $\\mathcal O_W$-module on its small etale site [def-trf-space-quasi-coherent-module]. Use the enlarged etale ringed model [lem-trf-space-enlarged-etale-ringed-site-model]. Choose a standard small big site $\\mathcal B_W$ of algebraic spaces over $W$ in the size convention [def-weil-size-convention], with coverings the jointly surjective families of flat locally finitely presented morphisms, tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation], and structure sheaf $\\mathcal O(V)=\\Gamma(V,\\mathcal O_V)$. Let $M^a$ be the fppf module sheaf whose sections at $v:V\\to W$ are $\\Gamma(V,v^*M)$, with tensor-pullback restriction [def-trf-space-etale-module-functors, def-weil-sheaf-of-modules-category]. The inclusion of etale $W$-objects into $\\mathcal B_W$ induces a morphism of ringed topoi $a_W:(\\operatorname{Sh}(\\mathcal B_W),\\mathcal O)\\to(\\operatorname{Sh}(W_{\\mathrm{et}}),\\mathcal O_W)$ [def-weil-pbc-ringed-topos-morphism], whose module direct image is restriction to those objects. Then $R^i a_{W,*}(M^a)=0$ for every $i>0$, where higher direct images are computed by injective module resolutions [def-sp-injective-resolutions]. No quasi-compactness, separation or finiteness hypothesis on $W$ or $M$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-cohomology.tex",
+  "place": "Tag 0DGN, lemma-review-quasi-coherent (7), for the morphism a_W described in section-fppf-etale-modules."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-fppf-ringed-comparison"
+ ],
+ "proof": [
+  {
+   "text": "All sites here are small in the chosen universe. Their module categories are Grothendieck abelian and hence have enough injectives. Apply the ringed-site cohomology-presheaf theorem to $a_W$ and $M^a$. For $q>0$, it identifies $R^qa_{W,*}M^a$ with $P^\\#$, where $P(V)=R^q\\Gamma_{\\mathrm{Mod},V}(M^a)$ for an etale $W$-object $V$. The derived-evaluation/slice comparison identifies this group with $H^q(\\mathcal B_W/V,(M^a)_{ab}|_V)$. We will show $P(U)=0$ whenever $U\\to W$ is an affine scheme etale chart.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+    "lem-pe-ringed-site-derived-evaluation-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 072W (lemma-higher-direct-images), 03FD and 03F3; spaces-more-cohomology.tex 0DGN(7), local reduction."
+   }
+  },
+  {
+   "text": "Fix such a chart $u:U\\to W$. The slice $\\mathcal B_W/U$ is the big fppf site of spaces over $U$: send $(V\\to W,V\\to U)$ to $V\\to U$, with inverse composition by $u$. Consider its full subcategory $(\\mathit{Sch}/U)_{\\mathrm{fppf}}$. Every space over $U$ admits an etale scheme atlas, which is fppf. Scheme fppf coverings are precisely the space fppf coverings with scheme sources and target. The induced topology is therefore the scheme fppf topology: refine any space covering of a scheme by scheme atlases and compose, obtaining a scheme fppf covering; the converse uses the same covering comparison. Apply the dense-subsite equivalence with values in abelian groups to obtain restriction $E:\\operatorname{Ab}(\\mathcal B_W/U)\\simeq\\operatorname{Ab}((\\mathit{Sch}/U)_{\\mathrm{fppf}})$. All atlases and refinements are taken in the fixed size convention.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFV, lemma-compare-cohomology-other-topologies, fppf case; 0DGN proof, final paragraph; spaces-topologies.tex 03Y8, 03Y9."
+   }
+  },
+  {
+   "text": "The additive equivalence $E$ preserves kernels and cokernels by their universal properties, so it is exact. It preserves injectives: transport a monomorphism and a map to $E(I)$ through its inverse, extend the resulting map to $I$, and transport the extension back. It preserves terminal sections, since the terminal object on both sites is the same scheme $U$. Consequently, restricting an abelian injective resolution of $(M^a)_{ab}|_U$ gives an injective resolution on the scheme site with the identical complex of sections at $U$. Their cohomology groups agree.",
+   "uses": [
+    "lem-pc-fppf-dense-sheaf-equivalence",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFV, transport across the equivalence in the proof of 0DGN(7); resolution argument written out."
+   }
+  },
+  {
+   "text": "The small-etale module $u^*M$ is quasi-coherent. The scheme Zariski/etale equivalence therefore gives a quasi-coherent Zariski module $F$ on $U$ and its canonical etale comparison $F_{\\mathrm{et}}\\simeq u^*M$. For any scheme $v:T\\to U$, functoriality of that equivalence and the tensor composition comparison identify $(uv)^*M\\simeq v^*(u^*M)\\simeq(v^*F)_{\\mathrm{et}}$. Thus the restriction of $M^a$ to the scheme fppf site has sections $\\Gamma(T,v^*F)$, with the same restrictions: both send a section along $h:T'\\to T$ to its tensor pullback and then use the canonical composition map. It is exactly $F^a$. The affine-scheme fppf acyclicity lemma gives $H^q((\\mathit{Sch}/U)_{\\mathrm{fppf}},(F^a)_{ab})=0$. Together with steps 1 and 3 this proves $P(U)=0$. No assertion about preservation of injectives by the forgetful module-to-abelian functor has been used.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-sfb-space-module-tensor-composition",
+    "lem-sfb-affine-scheme-fppf-qcoh-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DEW, lemma-review-quasi-coherent, affine-cover argument for (7); spaces-more-cohomology.tex 0DGN, scheme comparison."
+   }
+  },
+  {
+   "text": "Every etale space object $V\\to W$ has an etale scheme atlas; refine its source by affine opens. This is an etale covering of $V$ by affine scheme objects over $W$, so $P$ vanishes on a covering of every object. If $N$ is any sheaf of modules and $b:P\\to N$ a presheaf map, $b_V(s)$ restricts to zero on that covering for every $s\\in P(V)$, hence is zero by separatedness of $N$. Thus every map $P\\to N$ is the zero map. The sheafification adjunction now says $P^\\#$ is initial in module sheaves, hence the zero module sheaf. Step 1 yields $R^qa_{W,*}M^a=0$ for every $q>0$. This includes $W=\\varnothing$: its empty covering forces every module sheaf to be zero. No finite atlas, quasi-compactness or separatedness of $W$ was required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pc-fppf-affine-open-cover",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DGN(7), locality, and 0DEW proof of (7), affine covers; universal-property vanishing argument expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sfb-space-module-tensor-composition",
+  "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pc-fppf-affine-open-cover",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-cohomology.tex",
+  "place": "Tag 0DGN, lemma-review-quasi-coherent (7), via the scheme affine-cover proof of etale-cohomology.tex Tag 0DEW(7); dense-subsite and resolution arguments made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on algebraic spaces have no higher direct images from the big fppf site to the small etale site and their pullback is the sheaf of sections",
+   "results": "8 hits; top results: SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherent-data definitions and scheme fppf precoverage do not assert algebraic-space higher-direct-image vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent module higher direct image big fppf small etale comparison algebraic spaces",
+   "results": "8 hits; top results: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.mk, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherent-data definitions and scheme fppf precoverage do not assert algebraic-space higher-direct-image vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"cohomology\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherent-data definitions and scheme fppf precoverage do not assert algebraic-space higher-direct-image vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|quasicoherent.*cohomology|cohomology.*quasicoherent",
+   "results": "7 hits; top results: Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherent-data definitions and scheme fppf precoverage do not assert algebraic-space higher-direct-image vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on algebraic spaces have vanishing higher direct images from the big fppf site to the small etale site",
+   "results": "8 hits: SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give definitions of quasi-coherence and fppf coverings, not algebraic-space higher-direct-image acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give definitions of quasi-coherence and fppf coverings, not algebraic-space higher-direct-image acyclicity"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|Fppf",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give definitions of quasi-coherence and fppf coverings, not algebraic-space higher-direct-image acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image of a quasi coherent module from fppf to etale is zero in positive degrees",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.casesOn, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, AlgebraicGeometry.IsEtale, SheafOfModules.QuasicoherentData.I, RingHom.Etale, SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give definitions of quasi-coherence and fppf coverings, not algebraic-space higher-direct-image acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction functor from faithfully flat sheaves of modules to etale sheaves is acyclic on quasi coherent extensions",
+   "results": "8 hits: SheafOfModules.isQuasicoherent, SheafOfModules.isFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give definitions of quasi-coherence and fppf coverings, not algebraic-space higher-direct-image acyclicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-object-fppf-derived-sections",
+  "date": "2026-10-23",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero; supporting input: 0DHE proof: compare small-etale and big-fppf sections at the base and every flat face, with one compatible resolution; Quasi-coherent modules are acyclic for big-fppf to small-etale direct image; split follows 0DGN(7) by affine chart cohomology and 072W. The current blueprint direct-images proof paragraph (3) is the inherited six-functor route; no nearest imported ancestor is machine-resolvable.",
+   "via": [
+    "lem-sfb-flat-object-fppf-derived-sections",
+    "lem-sfb-fppf-face-heart-derived-unit",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fppf-qcoh-higher-vanishing",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 0DGN(7) using the ringed cohomology presheaf, localization to a chart, dense scheme subsite, explicit transport of an abelian injective resolution, and affine fppf acyclicity. Created one genuinely smaller affine-scheme cohomology input. All citations read and quotes recorded.",
+  "blueprint": "Supports the inherited direct-images/duality/descent route of current blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); realizes the 0DGN(7) input to flat-object-fppf-derived-sections. The inherited ancestor and via chain are retained (blueprint_refs ancestor returns None).",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic site/module cohomology infrastructure for the local fppf comparison; no statement of this unit replaces this input."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic site/module cohomology infrastructure for the local fppf comparison; no statement of this unit replaces this input."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic site/module cohomology infrastructure for the local fppf comparison; no statement of this unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic site/module cohomology infrastructure for the local fppf comparison; no statement of this unit replaces this input."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic site/module cohomology infrastructure for the local fppf comparison; no statement of this unit replaces this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-1ee3b93f4",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-1ee3b93f4 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, and the sources: Stacks 0DGN(7) with its proof, 0DEW(7) with its proof, 03DW, 01XB. The item statement is unchanged from the base and matches 0DGN(7) for M^a = a_W^*M. The 5 steps check against what the cited nodes state. Step 1: 072W presheaf sheafification with no flatness, plus the 03FD/03F3 slice comparison. Step 2: Mathlib dense-subsite equivalence; I checked the induced-topology hypothesis in both directions using fppf covering-calculus (1), (3), (4). Step 3: transport of injectives, rightly marked elementary. Step 4: 03GA and the Zariski/étale equivalence with its pullback comparison (the qc/separated pushforward clause is not used); restriction compatibility rests on standard coherence of the canonical pullback comparisons (advisory). Step 5: affine étale cover and the universal property of sheafification, so P^# = 0; the empty W is covered. The new node lem-sfb-affine-scheme-fppf-qcoh-acyclic is true: 03DW(1) with τ = fppf, which needs no finiteness, plus 01XB. Tested on F = 0, U = Spec k, non-finitely-generated F; q = 0 is excluded. It is self-contained, statement-only, and strictly smaller than the item. It is not a duplicate: existing 03DW nodes are small-étale/Zariski only, pqf-lem-affine-vanishing is Zariski, and no live node created after the base covers it. FIX: the new node's source now names 03DW(1) (fppf) and 01XB with labels, keeping the 0DEW place. Batch-5: all five flagged citations reach only the generic definitions def-trf-algebraic-space and def-trf-space-quasi-coherent-module, or the generic Zariski/étale quasi-coherent equivalence (03DX/03LC). None is a step of the trace-formula or Poincaré-duality proofs, so all are accepted. No SGA source is used; the generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFppfQCohHigherVanishing",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_fppf_qcoh_higher_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFppfQCohHigherVanishing.lean",
+  "statement": "theorem space_fppf_qcoh_higher_vanishing {S : Scheme.{u}} (W : AlgebraicSpace S) (B : SpaceFppfSite W) (R : SpaceFppfRings B) (M : W.Modules) (hM : M.IsQuasicoherent) (F : SheafOfModules.{u + 1} R.rings) (_hF : IsSpaceFppfSectionExtension R M F) (i : ℕ) (hi : 0 < i) : IsZero ((R.directImage.rightDerived i).obj F)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f977517cc",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement field verbatim; node statement unchanged vs live. Checked each clause against the node and Stacks 0DGN(7)/section-fppf-etale-modules. SpaceFppfSite = small category, fully faithful and essentially surjective onto Over W, coverings_iff IsFppfCover (empty families allowed). SpaceFppfRings pins sections, operations and restriction via moduleChartScalar on every chart; ringRestriction is pinned for every chart (g is determined by Yoneda since the target is yoneda.obj A.obj.left); directImage = SheafOfModules.pushforward. IsSpaceFppfSectionExtension pins sections Γ(V,v^*M) and restriction via moduleTensorComposition∘moduleTensorSection (the unique tensor-normalised iso). rightDerived uses EnoughInjectives from Grothendieck abelian = Mathlib match of lem-sp-grothendieck-enough-injectives. Edge cases: i=0 excluded; W=∅, M=0, non-qc/non-separated W included; u+1 carrier lift on the same étale site, no universe equality; all fields true, so not vacuous. New def node is genuinely new (no big fppf site of spaces in side-live). Advisory: directImage_additive sorry duplicates generic SubterminalImageCalculus.pushforwardAdditive (stage 3 closes by it); RingedToposMorphism record not instantiated because it needs one universe on both sites, concrete GeometricMorphism + pinned ring comparison used instead. No files changed, no compile."
+ }
+}

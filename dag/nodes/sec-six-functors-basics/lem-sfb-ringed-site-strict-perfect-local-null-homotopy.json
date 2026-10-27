@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-ringed-site-strict-perfect-local-null-homotopy",
+ "kind": "statement",
+ "title": "Local null-homotopy from a strictly perfect complex into an upper-acyclic complex",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a site with a sheaf of commutative rings, with module sheaves and their integer-indexed cochain complexes and cohomology [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $U$ be an object and work on the localized ringed site $(\\mathcal C/U,\\mathcal O_U)$ [def-pur-localized-ringed-site]. Let $a\\in\\mathbf Z$ and let $P^\\bullet,K^\\bullet$ be complexes of $\\mathcal O_U$-modules. Assume $P^j=0$ outside a finite interval, each $P^j$ is a direct summand of a finite free $\\mathcal O_U$-module, $P^j=0$ for $j<a$, and $H^j(K^\\bullet)=0$ for every $j\\geq a$. For every chain map $w:P^\\bullet\\to K^\\bullet$ there is a covering $\\{U_i\\to U\\}$ on which $w$ is chain homotopic to zero: there are morphisms $h_i^j:P^j|_{U_i}\\to K^{j-1}|_{U_i}$ such that $w^j|_{U_i}=d_K^{j-1}h_i^j+h_i^{j+1}d_P^j$ for all $j\\in\\mathbf Z$. No boundedness of $K^\\bullet$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FP, lemma-local-homotopy, assertion (2)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "def-sp-ringed-topos-binary-descent-models"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout on a slice $\\mathcal C/V$ over $U$. Restriction to a further slice is exact by [lem-pur-site-restriction-module-adjunction-exact]; therefore it preserves kernels, images and their quotients, and $H^n(K|_V)=H^n(K)|_V=0$ for $n\\geq a$ [def-weil-abstract-derived-category]. Restrictions are sectionwise and relocalize as in [def-pur-localized-ringed-site]; in particular they preserve finite free modules, displayed retracts, and every equation between module maps. Thus all the hypotheses needed below persist after any covering refinement.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-abstract-derived-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy (2), finite induction on the support; Tag 08FN, lemma-local-lift-map, finite basis lifts."
+   }
+  },
+  {
+   "text": "Choose $b\\geq a$ with $P^j=0$ for $j>b$. We construct the homotopy in the finite descending order $b,b-1,\\ldots,a$. Initially set $h^j=0$ for $j>b$, so $w^j=d_K^{j-1}h^j+h^{j+1}d_P^j$ holds for $j>b$. At stage $n$ assume these identities for $j>n$, on a current covering member $V$. Put $r^n=w^n-h^{n+1}d_P^n$. The chain-map identity and the identity already obtained in degree $n+1$ give $d_K^n r^n=(w^{n+1}-d_K^n h^{n+1})d_P^n=h^{n+2}d_P^{n+1}d_P^n=0$. Hence $r^n$ factors through $Z^n=\\ker(d_K^n)$, by the defining property of a kernel [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy (2), finite induction on the support; Tag 08FN, lemma-local-lift-map, finite basis lifts."
+   }
+  },
+  {
+   "text": "Since $n\\geq a$, the quotient $Z^n/\\operatorname{im}(d_K^{n-1})=H^n(K)$ is zero. Thus the differential with codomain restricted to cycles is an epimorphism $p_n:K^{n-1}\\to Z^n$ [def-weil-abstract-derived-category]. Forgetting module structure preserves cokernels by clause (1) of [lem-weil-pbc-module-sheaves-colimits-forgetful], so this is also an epimorphism of abelian sheaves. Its sheafification hypothesis holds on these sites and their slices: ordinary abelian sheafification is among the value categories of [def-weil-pbc-sheafification]. Apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] to conclude that every section of $Z^n$ over the terminal object of $\\mathcal C/V$ lifts locally through $p_n$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy (2), finite induction on the support; Tag 08FN, lemma-local-lift-map, finite basis lifts."
+   }
+  },
+  {
+   "text": "Choose a retraction $P^n\\xrightarrow{i}\\mathcal O_V^{\\oplus t}\\xrightarrow{q}P^n$, $qi=1$. For each of the finitely many standard generators $e_\\ell$, lift the section $(r^n q)(e_\\ell)$ of $Z^n$ using Step 3. Successively refine these covers; the covering pullback and composition axioms [def-weil-pbc-sites-and-cohomology] give one covering of $V$ carrying all $t$ lifts. On each member their $\\mathcal O$-linear extension is a module-sheaf morphism $s:\\mathcal O^{\\oplus t}\\to K^{n-1}$: over $W$ it sends $(c_\\ell)$ to $\\sum c_\\ell y_\\ell|_W$, which commutes with restrictions [def-weil-sheaf-of-modules-category]. The equality $p_ns=r^nq$ holds on each generator and therefore on every section. Set $h^n=si$; then $p_nh^n=r^nqi=r^n$, giving the homotopy identity in degree $n$. For $t=0$ take the identity cover and the zero map. Restricting the previously chosen $h^j$ leaves all higher identities intact [def-pur-localized-ringed-site].",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy (2), finite induction on the support; Tag 08FN, lemma-local-lift-map, finite basis lifts."
+   }
+  },
+  {
+   "text": "Repeat Steps 2--4 for the $b-a+1$ degrees. Only finitely many coverings are composed, and their composites cover $U$ by [def-weil-pbc-sites-and-cohomology]; relocalization [def-pur-localized-ringed-site] identifies the final sheaves with $P|_{U_i}$ and $K|_{U_i}$. Set $h^j=0$ also for $j<a$. The identities in $[a,b]$ hold by construction. In every other degree $P^j=0$, so both $w^j$ and the two terms on the right are zero (in degree $a-1$ this uses $d_P^{a-1}=0$). These are exactly all the requested homotopy equations. If $P=0$ the zero homotopy on the identity cover suffices. No step requires any lower or upper bound on $K$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy (2), finite induction on the support; Tag 08FN, lemma-local-lift-map, finite basis lifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FP, lemma-local-homotopy (2), finite induction on the support; Tag 08FN, lemma-local-lift-map, finite basis lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "local.*(nullHomotop|homotopyZero)|strictlyPerfect.*homotopy|IsStrictlyPerfect",
+   "results": "{\"t\": \"2026-10-23T14:41:08Z\", \"tool\": \"grep\", \"query\": \"local.*(nullHomotop|homotopyZero)|strictlyPerfect.*homotopy|IsStrictlyPerfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a strictly perfect complex to a complex of sheaves with vanishing cohomology above a bound is locally chain homotopic to zero",
+   "results": "{\"t\": \"2026-10-23T14:41:08Z\", \"tool\": \"leansearch\", \"query\": \"A map from a strictly perfect complex to a complex of sheaves with vanishing cohomology above a bound is locally chain homotopic to zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"Homotopy.nullHomotopicMap'\", \"Homotopy.nullHomotopicMap\", \"CochainComplex.IsKInjective.homotopyZero\", \"Homotopy.nullHomotopy\", \"Homotopy.nullHomotopy'\"], \"digest\": \"74ff818980781e49\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-23T14:41:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any ringed site a chain map from a bounded complex of finite free retract module sheaves to a complex with vanishing cohomology in degrees at least a is locally null homotopic when the source vanishes below a",
+   "results": "{\"t\": \"2026-10-23T14:41:09Z\", \"tool\": \"leanfinder\", \"query\": \"On any ringed site a chain map from a bounded complex of finite free retract module sheaves to a complex with vanishing cohomology in degrees at least a is locally null homotopic when the source vanishes below a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero_def\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"fc4d401d35be9df9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local null homotopy of maps from bounded finite projective sheaf complexes into complexes whose cohomology vanishes in all source degrees",
+   "results": "{\"t\": \"2026-10-23T14:43:42Z\", \"tool\": \"leanfinder\", \"query\": \"Local null homotopy of maps from bounded finite projective sheaf complexes into complexes whose cohomology vanishes in all source degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective.homotopyZero_def\"], \"digest\": \"b7c8d0a60a9b162d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*(nullHomotop|homotopyZero)|strictlyPerfect.*homotopy|IsStrictlyPerfect",
+   "results": "{\"t\": \"2026-10-23T19:21:54Z\", \"tool\": \"grep\", \"query\": \"local.*(nullHomotop|homotopyZero)|strictlyPerfect.*homotopy|IsStrictlyPerfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective results require projective objects in the global sheaf category and an acyclic target; finite-free sheaves need not be global projective objects, and the target here is only acyclic in degrees at least a. Homotopy.nullHomotopy only constructs a homotopy from already supplied component maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed site a map from a strictly perfect complex supported in degrees at least a to a complex with zero cohomology in degrees at least a is locally null homotopic",
+   "results": "{\"t\": \"2026-10-23T19:21:55Z\", \"tool\": \"leansearch\", \"query\": \"On a ringed site a map from a strictly perfect complex supported in degrees at least a to a complex with zero cohomology in degrees at least a is locally null homotopic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.nullHomotopicMap'\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"Homotopy.nullHomotopy'\", \"Homotopy.nullHomotopy\", \"CochainComplex.IsKProjective.homotopyZero_def\"], \"digest\": \"b626f3ea33b0419f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective results require projective objects in the global sheaf category and an acyclic target; finite-free sheaves need not be global projective objects, and the target here is only acyclic in degrees at least a. Homotopy.nullHomotopy only constructs a homotopy from already supplied component maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective, Homotopy",
+   "results": "{\"t\": \"2026-10-23T19:21:55Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKProjective, Homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.mk\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero_def\"], \"digest\": \"ce088aba80c89605\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective results require projective objects in the global sheaf category and an acyclic target; finite-free sheaves need not be global projective objects, and the target here is only acyclic in degrees at least a. Homotopy.nullHomotopy only constructs a homotopy from already supplied component maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map from a bounded complex of finite free retract sheaves to a complex with cohomology zero in every source degree is locally null homotopic",
+   "results": "{\"t\": \"2026-10-23T19:21:57Z\", \"tool\": \"leanfinder\", \"query\": \"A chain map from a bounded complex of finite free retract sheaves to a complex with cohomology zero in every source degree is locally null homotopic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"ComplexShape.QFactorsThroughHomotopy\", \"instQFactorsThroughHomotopyDown\"], \"digest\": \"32f1aa8b1856fa1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective results require projective objects in the global sheaf category and an acyclic target; finite-free sheaves need not be global projective objects, and the target here is only acyclic in degrees at least a. Homotopy.nullHomotopy only constructs a homotopy from already supplied component maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective sheaf complex admits a local chain contraction for every map into a complex acyclic in the degrees occupied by the source",
+   "results": "{\"t\": \"2026-10-23T19:22:18Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded finite projective sheaf complex admits a local chain contraction for every map into a complex acyclic in the degrees occupied by the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective.homotopyZero\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective.leftOrthogonal\"], \"digest\": \"af74ce66e4036113\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the K-projective results require projective objects in the global sheaf category and an acyclic target; finite-free sheaves need not be global projective objects, and the target here is only acyclic in degrees at least a. Homotopy.nullHomotopy only constructs a homotopy from already supplied component maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-strict-perfect-local-lift",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative. Supporting input to 08HE: lemma-descend-pseudo-coherent, final paragraph: the two applications of sites-cohomology lemma-cone-pseudo-coherent. Supporting input to Tag 08FV, proof (1): Tag 08FQ, lemma-lift-through-quasi-isomorphism. Auxiliary input: Tag 08FQ proof, second sentence invoking Tag 08FP(2), lemma-local-homotopy.",
+   "via": [
+    "lem-sfb-ringed-site-strict-perfect-local-lift",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-strict-perfect-local-null-homotopy",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Stacks 08FP(2) and 08FL. Expanded finite descending homotopy induction, with cycle residuals and finite basis lifts through the existing general-site abelian epimorphism criterion and exact forgetful functor. No new nodes; no attachment. All restriction and finite-cover refinements are explicit.",
+  "blueprint": "Auxiliary input to the existing from.place chain: det-thm-sf-ctf-stability-direct-images proof (3), via the recorded descent and pseudocoherence nodes, and Stacks 08FQ proof invoking 08FP(2). Steps 2--5 realize the finite-support local homotopy argument; Step 1 supplies its slice restrictions. The inherited from.node is null, and blueprint_refs.py ancestor reports None; this metadata issue is reported without changing maintainer-owned ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Clause (1), exactness of forgetting module structure, transfers the cycles epimorphism to abelian sheaves on an arbitrary slice; this is a general ringed-site tool, not a replacement of any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-47c000fc6",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-47c000fc6 (reviewer sub-agent of L); spot-checked: Read the item and all 8 cited statements in full, plus Stacks sites-cohomology 08FL, 08FN and 08FP with its proof. The item is exactly 08FP(2); statement, stmt_deps and blueprint are unchanged against clones/live and side-live, where the item is still unsplit. No new nodes, no re-split note, no SGA. Step 2: d_K r^n = (w^{n+1} - d_K h^{n+1}) d_P^n = h^{n+2} d_P^{n+1} d_P^n = 0, base case h^j = 0 for j > b. Step 3: H^n = 0 makes p_n: K^{n-1} -> Z^n an epimorphism; the Lean-closed forgetful lemma clause (1) carries it to Ab(C/V); abelian sheafification exists on small sites (HasSheafify instance named in the epi Mathlib record); the general-site locally-surjective leaf gives the lifts. Step 4: the 08FN retract assembly is genuinely elementary (h^n = s i, p_n h^n = r^n, t lift covers intersected by axioms (ii) and (iii)). Step 5: degree a-1 uses d_P^{a-1} = 0; H^{a-1}(K) is never used; no bound on K. Edge cases checked: P = 0, t = 0, a single degree, gaps in the support, zero ring, empty covers. The off-unit tool use lem-weil-pbc-module-sheaves-colimits-forgetful is accepted (Lean-closed, generic). Advisory only: the existing lem-sf-site-finite-projective-lift states 08FN, and the inline Step 4 is acceptable. tools/review_split.py on the snapshot reports 'no such node' for every cited node, all of which exist under the symlinked chapter directories, so this is a snapshot artefact, not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteStrictPerfectLocalNullHomotopy",
+  "declaration": "CategoryTheory.ringedSite_strictPerfect_local_nullHomotopy",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteStrictPerfectLocalNullHomotopy.lean",
+  "statement": "theorem ringedSite_strictPerfect_local_nullHomotopy {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max c v r}) (U : C) (a : ℤ) (P K : CochainComplex (ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ) (hbounded : ∃ l b : ℤ, ∀ j : ℤ, j < l ∨ b < j → IsZero (P.X j)) (hfinite : ∀ j : ℤ, ∃ n : ℕ, ∃ i : P.X j ⟶ SheafOfModules.free (R := (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) (ULift.{max c v r} (Fin n)), ∃ p : SheafOfModules.free (R := (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) (ULift.{max c v r} (Fin n)) ⟶ P.X j, i ≫ p = 𝟙 (P.X j)) (hbelow : ∀ j : ℤ, j < a → IsZero (P.X j)) (hacyclic : ∀ j : ℤ, a ≤ j → IsZero (K.homology j)) (w : P ⟶ K) : ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ h : ∀ j : ℤ, (SheafOfModules.overMap ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) f).obj (P.X (j + 1)) ⟶ (SheafOfModules.overMap ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) f).obj (K.X j), ∀ j : ℤ, (SheafOfModules.overMap ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) f).map (w.f (j + 1)) = h j ≫ (SheafOfModules.overMap ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) f).map (K.d j (j + 1)) + (SheafOfModules.overMap ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) f).map (P.d (j + 1) ((j + 1) + 1)) ≫ h (j + 1)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78e0c06ce",
+  "group": "NW",
+  "result": "pass",
+  "note": "Matches Stacks 08FP(2) and the node clause by clause: finite-interval and below-a support of P, finite-free retract (i≫p=𝟙, n=0 allowed), IsZero(K.homology j) for j≥a, no bound on K, arbitrary chain map; conclusion is a covering sieve with homotopy h j:P^{j+1}|V→K^j|V via SheafOfModules.overMap and w^{j+1}=h j≫d_K+d_P≫h(j+1) for all j (shift checked). Universes: ring=module universe max c v r, forced by SheafOfModules.free plus the size convention; r arbitrary. Statement text unchanged from live; the added stmt_dep def-sp-ringed-topos-binary-descent-models is a landed definition node supplying the sheafification instances, no cycle. lean.statement verbatim; sorry only; docstrings carry source, blueprint and steps 1-5; imports exist; no duplicate notion. Second reading is the author group's own check but a real reading. No file changed, so no compile."
+ }
+}

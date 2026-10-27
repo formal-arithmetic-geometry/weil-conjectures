@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-perfect-tests-detect-pseudocoherence",
+ "kind": "statement",
+ "title": "Perfect tensor tests detect pseudo-coherence on a flat finitely presented scheme",
+ "statement": "Let $R$ be a commutative ring and let $p:X\\to\\operatorname{Spec}R$ be a separated, flat morphism of finite presentation [def-pc-scheme, def-pc-morphism-conventions, def-weil-flat-morphism]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. Suppose that for every perfect object $E\\in D(\\mathcal O_X)$ [def-pc-perfect-complex], the derived global sections $R\\Gamma(X,E\\otimes^L_{\\mathcal O_X}K)$ [def-pc-derived-direct-image, def-pc-scheme-derived-tensor-structure], viewed in the derived category of $R$-modules, are pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Then $K$ is pseudo-coherent on $X$ [def-pur-pseudo-coherent-complex]. There is no Noetherian hypothesis on $R$ and no properness hypothesis on $p$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GES, lemma-characterize-pseudo-coh-improved; Tag 09UU, lemma-check-relative-pseudo-coherence-on-charts, applied with the identity closed immersion X -> X. Flatness and finite presentation convert relative pseudo-coherence into absolute pseudo-coherence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-weil-flat-morphism",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-global-derived-rhom",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "The affine scheme $\\operatorname{Spec}R$ is quasi-compact and quasi-separated. Finite presentation of $p$ includes quasi-compactness and quasi-separatedness. Apply permanence under composition with the structure morphism of $\\operatorname{Spec}R$ to conclude that $X$ is quasi-compact and quasi-separated. These are the scheme hypotheses needed in the next two steps.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-morphism-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GES, lemma-characterize-pseudo-coh-improved: hypotheses for perfect.tex Tags 0GEN and 0CSH"
+   }
+  },
+  {
+   "text": "For every perfect $P$, the hypothesis makes $R\\Gamma(X,P\\otimes^L K)$ quasi-isomorphic to a bounded-above complex of finite free $R$-modules. Above the bound all terms, hence all cohomology modules, vanish. Thus each perfect tensor test has eventually vanishing cohomology. Apply the perfect-tensor upper-boundedness criterion on the qcqs scheme $X$ to obtain one integer $b$ with $\\mathcal H^i(K)=0$ for $i>b$. The bound may initially depend on $P$; the criterion needs no uniform test bound.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-perfect-tensor-tests-bounded-above"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GES, lemma-characterize-pseudo-coh-improved, bounded-above reduction using perfect.tex Tag 0GEN"
+   }
+  },
+  {
+   "text": "Apply the perfect-to-pseudo-coherent tensor-test lemma with $A=R$, the upper bound from step 2, and the original perfect-test hypothesis. It gives that $R\\Gamma(X,E\\otimes^L K)$ is pseudo-coherent in $D(R)$ for every pseudo-coherent $E$. All its hypotheses hold: $X$ is qcqs by step 1 and $K$ has quasi-coherent cohomology by assumption. Now the pseudo-coherent-test relative criterion, using the separated finite-presentation morphism $p$, makes $K$ pseudo-coherent relative to $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-pseudocoherent-tensor-relative-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GES, lemma-characterize-pseudo-coh-improved, using perfect.tex Tag 0CSH and Tag 0CSL, lemma-characterize-pseudo-coherent"
+   }
+  },
+  {
+   "text": "Use the flat-ambient chart criterion with $S=\\operatorname{Spec}R$, $P=X$, and $i=\\mathrm{id}_X$. The identity is a closed immersion: it is a homeomorphism onto the closed subset $X$ and the map on structure sheaves is the identity, hence surjective. The ambient map is exactly $p$, which is flat and locally of finite presentation by hypothesis. The criterion therefore makes $R(\\mathrm{id}_X)_*K$ pseudo-coherent on $X$. Direct image under the identity is the identity functor, and its derived functor is again the identity (apply it to any resolution); thus this object is $K$. This proves the required absolute pseudo-coherence.",
+   "uses": [
+    "lem-sfb-flat-ambient-relative-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UU, lemma-check-relative-pseudo-coherence-on-charts, with the identity closed immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "lem-sfb-perfect-tensor-tests-bounded-above",
+  "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+  "lem-sfb-pseudocoherent-tensor-relative-criterion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GES, lemma-characterize-pseudo-coh-improved, followed by Tag 09UU, lemma-check-relative-pseudo-coherence-on-charts with the identity closed immersion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a scheme is flat separated and finitely presented over a ring then a quasi coherent derived complex is pseudo coherent whenever all its perfect tensor tests have pseudo coherent global sections",
+   "results": "OK: 8 hits; SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.Flat, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a scheme is flat separated and finitely presented over a ring then a quasi coherent derived complex is pseudo coherent whenever all its perfect tensor tests have pseudo coherent global sections",
+   "results": "OK: 8 hits; SheafOfModules.IsFinitePresentation.mk, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.casesOn, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat, Module.Flat.iff_flat_tensorProduct, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pseudo\"",
+   "results": "OK: 12 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent",
+   "results": "OK: 0 hits;  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect pseudo coherence on a flat finitely presented scheme by derived global sections after tensoring every perfect complex",
+   "results": "OK: 8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect tensor tests detect pseudo coherence on a flat separated finitely presented scheme over any commutative ring",
+   "results": "OK: 8 hits; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallySmooth.instTensorProduct, Algebra.Smooth.flat",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor tests detect pseudo coherence on a flat separated finitely presented scheme over any commutative ring",
+   "results": "OK: 8 hits; Module.Flat.iff_flat_tensorProduct, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.iff_lTensor_injective', Module.Flat.tfae_equational_criterion, Module.Flat.iff_lTensor_injectiveₛ, Module.Flat.of_flat_tensorProduct, Module.flat_iff, Module.Flat.iff_rTensor_injectiveₛ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-acyclic-direct-image",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S.",
+   "via": [
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-tests-detect-pseudocoherence",
+  "worker": "stage1",
+  "summary": "Followed the proof of Stacks 0GES through boundedness (0GEN), perfect approximation of tensor tests (0CSH), and the relative criterion (0CSL), then used 09UU with the identity embedding. Added four statement-only tools and the relative pseudo-coherence definition; retained all hypotheses and the original conclusion. No exact Lean attachment or Mathlib match was found.",
+  "blueprint": "Realizes the inherited direct-image finiteness tool in det-thm-sf-ctf-stability-direct-images proof (3): finite presentation of the acyclic image via perfect tensor tests. Current latest blueprint direct-images proof (3) read. The inherited blueprint ancestor is null; blueprint_refs.py ancestor confirms this broken provenance chain, preserved rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine scheme qcqs fact used only to check the tensor-test criteria; no such scheme-theoretic permanence statement belongs to this unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic composition permanence used to infer X is qcqs over the affine base; it does not replace the unit route."
+   },
+   {
+    "node": "def-pc-morphism-conventions",
+    "why": "Uses the existing finite-presentation convention, including quasi-compactness and quasi-separatedness."
+   },
+   {
+    "node": "def-pc-ring-pseudo-coherent-complex",
+    "why": "Uses the bounded-above finite-free definition to get eventual test-cohomology vanishing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-morphism-conventions",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-581e44301",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-581e44301 (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, every cited node's statement, and the Stacks sources: 0GES, 0GEN (7)(b)⇒(1), 0CSH, 0CSL, 09UU, 09UI with lemma-relatively-pseudo-coherent, and 08CB. The item statement is unchanged and true. The steps follow the 0GES route: step 1 shows X is qcqs from two Mathlib leaves of sk-thm-p1 (affine-scheme-qcqs, permanence clause (2)), using that finite presentation includes qc+qs. Step 2 bounds K above via 0GEN; dropping its generator G is fine, since one exists on any qcqs scheme (Bondal–van den Bergh) and taking P=G^∨ gives (5). Step 3 applies 0CSH, whose D^- hypothesis is kept as the explicit bound b, and then 0CSL with p separated of finite presentation. Step 4 applies 09UU (1)⇔(3) for all m with P=X and i=id; flatness is used only here. proof_deps equals the union of the uses. The tool_uses (two Mathlib leaves, two definitions) are accepted. Each new node is a strictly smaller Stacks result, and none restates the item. Duplicate search (rg -L over the tags, labels and pseudo-coherence phrases) found no existing node. Nearby nodes are not duplicates: the projective-space twist test, étale pseudo-coherence descent, the algebraic-space 0GFL relative-perfection node and the trf relative-tor node. Small cases checked: empty X, the affine identity map, a field base, and shifted perfect tests (why b_P must vary). No SGA citation. The item is unsplit in live and side-live, and there is no repair note. The blueprint from.node is null by inheritance, as before. One B2 repair: def-sfb-relative-pseudo-coherent-complex used a scheme Y that was never introduced, with only a vague 'locally on Y'. The fix introduces Y and an explicit open cover W_c with maps P_c→L|_{W_c} in D(O_{W_c}). It is in fixes/dag/nodes/sec-six-functors-basics/def-sfb-relative-pseudo-coherent-complex.json and changes only the statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectTestsDetectPseudoCoherence",
+  "declaration": "AlgebraicGeometry.isPseudoCoherent_of_perfect_tensor_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectTestsDetectPseudoCoherence.lean",
+  "statement": "theorem isPseudoCoherent_of_perfect_tensor_tests (R : CommRingCat.{u}) (X : Scheme.{u}) (p : X ⟶ Spec R) [IsSeparated p] [Flat p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [HasDerivedCategory.{wΓ} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (hTests : ∀ E : schemeDerivedCategory X, Scheme.IsPerfect X E → DerivedCategory.IsPseudoCoherent ((schemeDerivedGlobalSections X ⋙ (affineGlobalSectionsRestriction p).mapDerivedCategory).obj (E ⊗ K))) : Scheme.IsPseudoCoherent X K",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing schemeDerivedGlobalSections followed by affineGlobalSectionsRestriction.mapDerivedCategory, spelling out affineDerivedGlobalSections to retain independent localization universes. Added the two landed owning nodes to stmt_deps. The accepted stage-1 statement and split are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65beb46d5",
+  "group": "NG",
+  "result": "pass",
+  "note": "Clause by clause against node and Stacks 0GES/09UU: R CommRingCat.{u}; p : X ⟶ Spec R with IsSeparated, Flat, LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (= finite presentation convention); K : schemeDerivedCategory X with schemeDerivedQCohProperty, unbounded; ∀ perfect E (Scheme.IsPerfect); test = schemeDerivedGlobalSections X ⋙ (affineGlobalSectionsRestriction p).mapDerivedCategory applied to E ⊗ K (global K-flat instance), which is exactly the body of the existing affineDerivedGlobalSections, spelled out to keep wX/wΓ/wR independent; DerivedCategory.IsPseudoCoherent over R; conclusion Scheme.IsPseudoCoherent X K (absolute). The two added stmt_deps (def-pc-global-derived-rhom, def-pc-affine-global-hom-base-change-map) are landed definition nodes that own the used declarations; node otherwise unchanged vs side-live; lean.statement verbatim; sorry only; source and blueprint docstrings with the 4 proof steps; no new nodes or helpers; no name clash. Edge cases empty X, zero R, identity p, shifted tests, non-Noetherian, non-proper: ok. Advisory: SchemeDerivedDirectImage import is unused directly. No compile run (no changes)."
+ }
+}

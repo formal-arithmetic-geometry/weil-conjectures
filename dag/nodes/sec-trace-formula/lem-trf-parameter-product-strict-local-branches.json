@@ -1,0 +1,295 @@
+{
+ "id": "lem-trf-parameter-product-strict-local-branches",
+ "kind": "statement",
+ "title": "Minimal primes of a parameter product in a strict henselization",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative regular local ring [def-weil-regular-scheme], let $x_1,\\ldots,x_r$, $r\\geq0$, be members at distinct positions of a regular system of parameters of $A$ [def-weil-pbc-regular-system-of-parameters], and let $H$ be a strict henselization of $A$ relative to a separable closure of $A/\\mathfrak m$ [def-sc-ring-strict-henselization]. Write $x_i$ also for its image in $H$, put $F=\\prod_{i=1}^r x_i$, and put $P_i=x_iH$. Each $H/P_i$ is a regular local ring and a nonzero integral domain. The $P_i$ are proper prime ideals and are pairwise incomparable: for $i\\neq j$, $x_i\\notin P_j$. The primes of $H$ minimal over $(F)$ are exactly $P_1,\\ldots,P_r$. Thus the reduced ring $(H/(F))_{\\mathrm{red}}$ has exactly $r$ minimal prime ideals, namely the images of these $P_i$, where reduction means quotient by the ideal of all nilpotent elements and a minimal prime means a prime minimal under inclusion. If $r\\geq1$, $H/(F)$ is a strict henselization of $A/(F)$ with its induced residue-field choice; every strict henselization of $A/(F)$ with that residue-field choice has a reduction with exactly $r$ minimal primes. If $r=0$, $F=1$, $H/(F)$ is the zero ring and has no prime ideals.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Local algebra for ILO Expose VIII 4.1.6 (printed p.118): Tags 00NQ (lemma-regular-ring-CM), 05WS (lemma-quotient-strict-henselization), 00NP (lemma-regular-domain), 05CK (lemma-faithfully-flat-universally-injective); more-algebra.tex Tags 06LN (lemma-henselization-regular) and 07QM (lemma-dumb-properties-henselization), part (1)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "If $r=0$, the empty product is $F=1$. Thus $(F)=H$, $H/(F)=0$, and there is no proper prime ideal containing $(F)$ or in this quotient. Every assertion indexed by $i$ is vacuous, so this proves the empty case. In the remaining steps assume $r\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Empty-product convention and the definition of a prime ideal."
+   }
+  },
+  {
+   "text": "Choose a full regular system $t_1,\\ldots,t_d$ of $A$ containing the marked positions. By [lem-sc-strict-henselization-regular], $H$ is regular local (the Noetherian hypothesis holds because $A$ is regular local). By [lem-sc-ring-strict-henselization-local-maximal-ideal], its maximal ideal is $\\mathfrak mH=(t_1,\\ldots,t_d)H$. By [lem-sc-strict-henselization-dimension], $\\dim H=\\dim A=d$. Consequently the image list $(t_1,\\ldots,t_d)$ is a regular system of parameters of $H$ by [def-weil-pbc-regular-system-of-parameters]; the marked positions remain distinct.",
+   "uses": [
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "lem-sc-strict-henselization-dimension",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension), and 07QM (lemma-dumb-properties-henselization), part (2); compare the parameter argument in the proof of 06LN."
+   }
+  },
+  {
+   "text": "For each $i$, permute the full parameter list of $H$ to put $x_i$ first. [lem-weil-pbc-regular-local-generators-regular-sequence] with $c=1$ makes $H/P_i$ regular local, and [lem-sc-regular-local-domain] makes it a nonzero domain. Hence $P_i$ is proper and prime: $ab\\in P_i$ implies that one of the classes of $a,b$ is zero in this domain. For $i\\ne j$, put $x_j$ first and $x_i$ second in the full list. The same regular-sequence theorem and [def-weil-pbc-regular-sequence] give injectivity of multiplication by $x_i$ on $H/(x_j)$. If $x_i\\in(x_j)$ that multiplication is zero, contradicting injectivity on this nonzero quotient (apply it to $1$ and $0$). Thus $x_i\\notin P_j$, which also proves pairwise incomparability.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sc-regular-local-domain",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM), 00NP (lemma-regular-domain), and 00LF (definition-regular-sequence)."
+   }
+  },
+  {
+   "text": "Each $P_i$ contains $F$. If a prime $Q$ contains $F=\\prod_i x_i$, repeated use of the defining prime-ideal implication for a product gives $x_j\\in Q$ for some $j$, hence $P_j\\subseteq Q$. If $Q\\subseteq P_i$ also, then $P_j\\subseteq P_i$ forces $j=i$ by the preceding incomparability, and $Q=P_i$. This proves each $P_i$ minimal over $(F)$. Conversely, a prime minimal over $(F)$ contains a $P_j$ and therefore equals it. The $r$ ideals are distinct.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary prime-ideal argument for a finite product, after 00NQ and 00NP."
+   }
+  },
+  {
+   "text": "For any ideal $I$ of a commutative ring $R$, preimage and image under $R\\to R/I$ give mutually inverse, inclusion-preserving correspondences between primes of $R/I$ and primes of $R$ containing $I$: the primality test on classes is exactly $ab\\in Q\\Rightarrow a\\in Q$ or $b\\in Q$. They therefore preserve minimal primes. Every prime contains every nilpotent element, since $z^n=0$ in a prime implies $z$ lies in it by repeated primality. Apply the correspondence first to $H\\to H/(F)$ and then to the quotient of $H/(F)$ by all its nilpotents. The resulting minimal primes are exactly the images of the $P_i$, so the reduction has exactly $r$ minimal primes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal correspondence for quotients and the defining prime test; reduction by nilpotents."
+   }
+  },
+  {
+   "text": "Since $r\\geq1$ and every $x_i\\in\\mathfrak m$, $I=(F)\\subseteq\\mathfrak m$. By [lem-weil-pbc-quotient-local-structure], $B=A/I$ is nonzero local with maximal ideal $\\mathfrak m/I$. Its residue field is canonically $A/\\mathfrak m$: the map sending the class of the class of $a$ to the class of $a$ is an inverse to the evident map in the other direction. Transport the chosen separable closure $K$ along this identification and apply [lem-sbc-strict-henselization-surjective-quotient-core] to the surjection $A\\to B$, $C=H$, and this transported choice $L=K$. Its kernel is $I\\subseteq\\mathfrak m$, so the lemma gives a $B$-algebra structure on the explicit quotient $H/IH$. Since $IH=(F)H$, this is the required strict henselization $H/(F)$ with the induced residue-field choice.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-sbc-strict-henselization-surjective-quotient-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WS (lemma-quotient-strict-henselization); quotient-local structure in Section 07BH."
+   }
+  },
+  {
+   "text": "By [def-sc-ring-strict-henselization], any other strict henselization of $B=A/(F)$ relative to the same $K$ is isomorphic as a $B$-algebra to the colimit of the same pointed etale-algebra diagram. The two universal properties give comparison maps in both directions; their composites are identities because their composites with every colimit leg are identities and the universal map is unique. Hence it is $B$-algebra isomorphic to $H/(F)$. A ring isomorphism carries nilpotents to nilpotents and primes to primes, preserving and reflecting inclusion, so it induces a bijection on minimal primes of the reductions. The number is therefore $r$ for every such choice.",
+   "uses": [
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition of strict henselization as a universal colimit; uniqueness from its universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dimension",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of Tags 06LN, 06LK, 07QM(2), Algebra Tags 00NQ, 00NP, 05WS, and the explicit elementary finite-product and quotient-prime arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization|minimalPrimes.*prod|prod.*minimalPrimes",
+   "results": "{\"t\": \"2026-10-22T06:01:26Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization|minimalPrimes.*prod|prod.*minimalPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: minimal-prime, Henselian-ring and regular-local definitions do not establish regular parameter quotients, incomparable extended parameter ideals, or the strict-henselian product computation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, minimalPrimes",
+   "results": "{\"t\": \"2026-10-22T06:01:26Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, minimalPrimes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: minimal-prime, Henselian-ring and regular-local definitions do not establish regular parameter quotients, incomparable extended parameter ideals, or the strict-henselian product computation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular local ring and distinct members of a regular system of parameters, the minimal primes of the product in the strict henselization are exactly the principal parameter ideals",
+   "results": "{\"t\": \"2026-10-22T06:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a regular local ring and distinct members of a regular system of parameters, the minimal primes of the product in the strict henselization are exactly the principal parameter ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"Ideal.exists_mul_mem_of_mem_minimalPrimes\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"Ideal.mem_minimalPrimes_sup\", \"Ideal.minimalPrimes_eq_comap\", \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\"], \"digest\": \"d5fa16bf1a83d94f\"}; Read the hits: minimal-prime, Henselian-ring and regular-local definitions do not establish regular parameter quotients, incomparable extended parameter ideals, or the strict-henselian product computation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The minimal prime ideals of a product of distinct regular parameters after strict henselization are exactly the principal parameter ideals",
+   "results": "{\"t\": \"2026-10-22T06:02:01Z\", \"tool\": \"leansearch\", \"query\": \"The minimal prime ideals of a product of distinct regular parameters after strict henselization are exactly the principal parameter ideals\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|regularLocalRing|RegularSequence",
+   "results": "{\"t\": \"2026-10-22T06:02:40Z\", \"tool\": \"grep\", \"query\": \"IsRegularLocalRing|regularLocalRing|RegularSequence\", \"sub\": \"RingTheory/RegularLocalRing\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\"], \"digest\": \"2e2f04963c86b39d\"}; Read the hits: minimal-prime, Henselian-ring and regular-local definitions do not establish regular parameter quotients, incomparable extended parameter ideals, or the strict-henselian product computation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular local parameter quotients remain domains in a strict henselization, and distinct parameters generate incomparable prime ideals",
+   "results": "{\"t\": \"2026-10-22T06:02:48Z\", \"tool\": \"leanfinder\", \"query\": \"Regular local parameter quotients remain domains in a strict henselization, and distinct parameters generate incomparable prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.isDomain\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing\", \"instHenselianRingMaximalIdeal\", \"Field.henselian\", \"HenselianLocalRing.TFAE\", \"HenselianRing\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"660de41fb1b57c10\"}; Read the hits: minimal-prime, Henselian-ring and regular-local definitions do not establish regular parameter quotients, incomparable extended parameter ideals, or the strict-henselian product computation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T04:18:16Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, minimalPrimes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned results: HenselianLocalRing concerns root lifting, minimalPrimes and minimalPrimes_eq_minimals are definitions, localization results do not apply to strict henselization, and none supplies all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of the product of distinct regular parameters in the strict henselization of a regular local ring",
+   "results": "{\"t\": \"2026-10-23T04:18:18Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal primes of the product of distinct regular parameters in the strict henselization of a regular local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isStronglyTranscendental_mk_of_mem_minimalPrimes\", \"HenselianLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing\", \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"HenselianLocalRing.TFAE\"], \"digest\": \"ea08de535e80200a\"}; Read returned results: HenselianLocalRing concerns root lifting, minimalPrimes and minimalPrimes_eq_minimals are definitions, localization results do not apply to strict henselization, and none supplies all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|henselization|minimalPrimes.*prod|prod.*minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T04:18:21Z\", \"tool\": \"grep\", \"query\": \"strictHensel|strict_hensel|henselization|minimalPrimes.*prod|prod.*minimalPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned results: HenselianLocalRing concerns root lifting, minimalPrimes and minimalPrimes_eq_minimals are definitions, localization results do not apply to strict henselization, and none supplies all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular local ring has distinct parameter ideals as precisely the minimal primes of their product after strict henselization",
+   "results": "{\"t\": \"2026-10-23T04:19:17Z\", \"tool\": \"leansearch\", \"query\": \"A regular local ring has distinct parameter ideals as precisely the minimal primes of their product after strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minimalPrimes\", \"Ideal.minimalPrimes\", \"IsLocalization.minimalPrimes_map\", \"HenselianLocalRing.TFAE\", \"minimalPrimes_eq_minimals\", \"instHenselianRingMaximalIdeal\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"HenselianLocalRing.casesOn\"], \"digest\": \"ed4daf2c07bba52a\"}; Read returned results: HenselianLocalRing concerns root lifting, minimalPrimes and minimalPrimes_eq_minimals are definitions, localization results do not apply to strict henselization, and none supplies all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of a strict henselization by a regular parameter is a regular local domain and faithfully flat base change contracts parameter ideals",
+   "results": "{\"t\": \"2026-10-23T04:19:20Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient of a strict henselization by a regular parameter is a regular local domain and faithfully flat base change contracts parameter ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"PreTilt.isDomain\", \"HenselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"Algebra.IsUnramifiedAt\", \"HenselianLocalRing.TFAE\", \"Field.henselian\"], \"digest\": \"249507c3774a3592\"}; Read returned results: HenselianLocalRing concerns root lifting, minimalPrimes and minimalPrimes_eq_minimals are definitions, localization results do not apply to strict henselization, and none supplies all clauses of this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nc-coordinate-max-stratum",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 4.1.6, geometric multiplicity of a coordinate divisor: local parameter-quotient and incomparable-prime argument formerly in Steps 1--2 of lem-trf-nc-coordinate-max-stratum, below the normal-crossings modification used by the ancestor specialization argument.",
+   "via": [
+    "lem-trf-nc-coordinate-max-stratum",
+    "lem-trf-nc-maximal-branch-blowup",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-product-strict-local-branches",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused existing generic local-algebra results to lift a full regular system to H, prove each parameter quotient regular and a domain and the marked ideals incomparable, then wrote the finite-product minimal-prime and reduction arguments explicitly. Used the surjective-quotient theorem with the same transported separable closure and proved invariance for every strict henselization by colimit uniqueness. Empty product checked separately. No new nodes.",
+  "blueprint": "ILO VIII 4.1.6, geometric multiplicity of a coordinate divisor: local parameter-quotient and incomparable-prime argument formerly in Steps 1--2 of lem-trf-nc-coordinate-max-stratum, below the normal-crossings modification used by the ancestor specialization argument. This supplies the coordinate-divisor geometric branch-count input of the ancestor specialization route; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Regularity of the algebraic strict henselization; no node of this unit gives this general local-algebra theorem."
+   },
+   {
+    "node": "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "why": "The maximal ideal of the algebraic strict henselization is extended from the base; used to lift the full parameter list."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Equality of local Krull dimensions, needed to recognize the lifted list as a full parameter system."
+   },
+   {
+    "node": "def-weil-pbc-regular-system-of-parameters",
+    "why": "The definition recognizes a dimension-length generating list; a notion, not a change of unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "The general parameter-quotient and permutation theorem 00NQ supplies regular quotients and injectivity for incomparable parameters."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "The general regular-local domain theorem 00NP converts the regular parameter quotients to prime ideals."
+   },
+   {
+    "node": "lem-sbc-strict-henselization-surjective-quotient-core",
+    "why": "The arbitrary local-quotient theorem 05WS, with the specified transported separable closure, supplies the strict henselization of A/(F)."
+   },
+   {
+    "node": "def-sc-ring-strict-henselization",
+    "why": "Its universal-colimit definition proves uniqueness for a fixed residue-field choice."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dimension",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "def-sc-ring-strict-henselization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-d51cd82ed",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-d51cd82ed (reviewer sub-agent of L); spot-checked: I read the whole delivery and the statement of every cited node. One commit; the item's statement, stmt_deps, unit and blueprint are unchanged; the split adds 7 steps and no new nodes. No repair note names this item, so the re-split rule does not apply. Step 1: r=0 gives F=1, so H/(F)=0. Step 2: H is regular local by lem-sc-strict-henselization-regular (A is Noetherian, which matches Stacks 06LN at more-algebra l.11195); m_H=m_A H by the maximal-ideal node, which uses the same IsStrictHenselization predicate; dim H=d by the dimension node (06LK, l.11132). So the image list is a full regular system of parameters of H. Step 3: 00NQ applied with c=1 after permuting the list, plus 00NP, makes H/x_iH a nonzero regular domain. The order (x_j,x_i,...) and the regular-sequence definition give x_i not in x_jH (this case needs d>=2). Steps 4 and 5: the finite-product argument and the prime correspondence through the quotient and the nilradical are genuinely elementary. Step 6: 05WS (algebra l.43703) through the surjective-quotient-core node, with kernel (F) inside m, residue field A/m and L the transported K; every hypothesis is met. Step 7: uniqueness follows from the colimit definition alone. Edge cases checked: a field, a DVR with r=1, and k[[s,t]] with the product st. My rg -L search of the DAG found no duplicate: reduced-cartier is about the local ring with no strict henselization, and etale-coordinate-divisor-parameters cites this item. No SGA is used. I accept the 8 generic local-algebra tool_uses. Minor, left unchanged: source.place still lists 05CK and 07QM(1) from the abandoned route."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterProductStrictLocalBranches",
+  "declaration": "Algebra.parameterProduct_strictLocal_branches",
+  "file": "lean/Sheaf/RingTheory/ParameterProductStrictLocalBranches.lean",
+  "statement": "theorem parameterProduct_strictLocal_branches (A : Type u) (K H : Type (max u v)) [CommRing A] [IsRegularLocalRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing H] [Algebra A H] (_P : StrictHenselizationPresentationIn.{u, v} A K H) (t : List A) (_ht : IsLocalRing.IsRegularSystemOfParameters t) (r : ℕ) (positions : Fin r ↪ Fin t.length) (F : A) (_hF : F = ∏ i : Fin r, t.get (positions i)) (I : Ideal A) (_hI : I = Ideal.span {F}) (J : Ideal H) (_hJ : J = Ideal.span {algebraMap A H F}) : (∀ i : Fin r, IsRegularLocalRing (H ⧸ Ideal.span {algebraMap A H (t.get (positions i))}) ∧ IsDomain (H ⧸ Ideal.span {algebraMap A H (t.get (positions i))}) ∧ (Ideal.span {algebraMap A H (t.get (positions i))}).IsPrime ∧ Ideal.span {algebraMap A H (t.get (positions i))} ≠ ⊤) ∧ (∀ i j : Fin r, i ≠ j → algebraMap A H (t.get (positions i)) ∉ Ideal.span {algebraMap A H (t.get (positions j))}) ∧ J.minimalPrimes = Set.range (fun i : Fin r ↦ Ideal.span {algebraMap A H (t.get (positions i))}) ∧ minimalPrimes ((H ⧸ J) ⧸ nilradical (H ⧸ J)) = Set.range (fun i : Fin r ↦ (Ideal.span {algebraMap A H (t.get (positions i))}).map ((Ideal.Quotient.mk (nilradical (H ⧸ J))).comp (Ideal.Quotient.mk J))) ∧ Nonempty (↥(minimalPrimes ((H ⧸ J) ⧸ nilradical (H ⧸ J))) ≃ Fin r) ∧ (0 < r → ∃ (_ : IsLocalRing (A ⧸ I)) (_ : Algebra (A ⧸ I) K), (algebraMap (A ⧸ I) K).comp (Ideal.Quotient.mk I) = algebraMap A K ∧ ∃ (_ : Algebra (IsLocalRing.ResidueField (A ⧸ I)) K) (_ : IsSepClosure (IsLocalRing.ResidueField (A ⧸ I)) K) (_ : IsScalarTower (A ⧸ I) (IsLocalRing.ResidueField (A ⧸ I)) K) (_ : Algebra (A ⧸ I) (H ⧸ J)), (algebraMap (A ⧸ I) (H ⧸ J)).comp (Ideal.Quotient.mk I) = (Ideal.Quotient.mk J).comp (algebraMap A H) ∧ Nonempty (StrictHenselizationPresentationIn.{u, v} (A ⧸ I) K (H ⧸ J)) ∧ ∀ (C : Type (max u v)) [CommRing C] [Algebra (A ⧸ I) C], Nonempty (StrictHenselizationPresentationIn.{u, v} (A ⧸ I) K C) → Nonempty (↥(minimalPrimes (C ⧸ nilradical C)) ≃ Fin r)) ∧ (r = 0 → F = 1 ∧ Subsingleton (H ⧸ J) ∧ IsEmpty (PrimeSpectrum (H ⧸ J)))",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2217c3532",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Only the item lean record and one module change; the record statement matches the file verbatim and the 3 stmt_dep records are unchanged from side-live. Clause by clause: IsRegularLocalRing A; recorded IsRegularSystemOfParameters t; distinct positions as Fin r ↪ Fin t.length; recorded StrictHenselizationPresentationIn with A : Type u and K,H : Type (max u v); F,I,J are naming equalities. Conclusions: H/P_i regular local, domain, prime, proper; x_i ∉ P_j for i≠j; J.minimalPrimes = range P_i; minimal primes of the reduction = images under the two quotient maps, with ≃ Fin r count. r>0 data is pinned by commuting equations and IsScalarTower (induced residue choice), with a presentation of H⧸J and every C in the common universe covered. r=0: F=1, zero ring, empty spectrum. No extra hypotheses. Edge cases correct: field, r=0 in positive dimension, DVR r=1, k[[s,t]] with st. Docstrings give source tags, blueprint id and 7 steps; proof is sorry; imported modules exist; no duplicate found. Not compiled (no change); worker reports a clean scompile. Notes: the 05WS core lemma is single-universe and needs transport plus projection compatibility at stage 3; source.place still lists 05CK and 07QM(1)."
+ }
+}

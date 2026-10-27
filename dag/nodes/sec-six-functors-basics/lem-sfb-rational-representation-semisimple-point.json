@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-rational-representation-semisimple-point",
+ "kind": "statement",
+ "title": "Semisimplicity of a point is detected by a faithful rational representation",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $J$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Fix integers $m,d\\geq1$ and homomorphisms of $k$-group schemes $i:J\\to\\operatorname{GL}_{m,k}$ and $r:J\\to\\operatorname{GL}_{d,k}$ [def-sc-general-linear-group]. Suppose $i$ is faithful: for every commutative $k$-algebra $A$, the map $i_A:J(A)\\to\\operatorname{GL}_m(A)$ is injective, where $J(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,J)$ [def-weil-affine-spectrum]. For every $g\\in J(k)$, if the matrix $i_k(g)$ is diagonalizable over $k$, then the matrix $r_k(g)$ is diagonalizable over $k$. Here diagonalizable means conjugate by an invertible matrix over $k$ to a diagonal matrix. No smoothness, connectedness or characteristic-zero hypothesis on $J$ or $k$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 9.19, printed p.171 (semisimplicity in one faithful representation implies semisimplicity in all representations), with Theorem 9.18, printed p.170. Over an algebraically closed field, semisimple matrices are diagonalizable."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-general-linear-group",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "For every finite-dimensional rational representation $(V,r_V)$ of $J$, put $A_V=r_V(g)$ and $\\lambda_V=(A_V)_s$, using [lem-sfb-multiplicative-jordan-linear-compatibility]. These maps are invertible. Use the representations, equivariant maps, tensor action and unit specified in [lem-sfb-tannaka-rational-point-reconstruction]. For an equivariant $f:V\\to W$, evaluation at the algebra $k$ and point $g$ gives $fA_V=A_Wf$; the intertwiner clause gives $f\\lambda_V=\\lambda_Wf$. The tensor clause gives $\\lambda_{V\\otimes W}=\\lambda_V\\otimes\\lambda_W$. For the trivial representation, $A_{\\mathbf1}=I$, whose decomposition $I=I\\cdot I$ has diagonalizable first factor and $(I-I)^1=0$. Uniqueness gives $\\lambda_{\\mathbf1}=I$. The zero representation is allowed by both cited statements.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility",
+    "lem-sfb-tannaka-rational-point-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.18 proof, printed p.170; Propositions 9.13 and 9.15, printed p.169; Theorem 9.2 conditions (a)--(c), printed p.164."
+   }
+  },
+  {
+   "text": "The family of step 1 satisfies all hypotheses of [lem-sfb-tannaka-rational-point-reconstruction]: $k$ is algebraically closed, $J$ is affine of finite type, and the maps are invertible, natural, tensor-compatible and the identity on the unit. Thus there exists $h\\in J(k)$ such that $r_V(h)=(r_V(g))_s$ for every finite-dimensional rational representation. In particular, on $k^m$ and $k^d$ one obtains $i_k(h)=(i_k(g))_s$ and $r_k(h)=(r_k(g))_s$.",
+   "uses": [
+    "lem-sfb-tannaka-rational-point-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.18 proof, printed p.170, applying Theorem 9.2 to the family of semisimple parts."
+   }
+  },
+  {
+   "text": "By hypothesis $i_k(g)$ is diagonalizable. Hence $i_k(g)=i_k(g)I_m=I_m i_k(g)$ is a decomposition with diagonalizable first factor and unipotent second factor, since $(I_m-I_m)^1=0$. Uniqueness in [lem-sfb-multiplicative-jordan-linear-compatibility] gives $(i_k(g))_s=i_k(g)$. Step 2 implies $i_k(h)=i_k(g)$. Apply faithfulness at the commutative $k$-algebra $k$ to conclude $h=g$.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9.19, printed p.171; uniqueness of the matrix decomposition in Theorem 9.11, printed pp.168--169."
+   }
+  },
+  {
+   "text": "Substitute $h=g$ into $r_k(h)=(r_k(g))_s$. The first factor supplied by [lem-sfb-multiplicative-jordan-linear-compatibility] is diagonalizable over $k$, so $r_k(g)$ is diagonalizable. No assertion about other points, smoothness or connectedness was used.",
+   "uses": [
+    "lem-sfb-multiplicative-jordan-linear-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9.19, printed p.171, conclusion in every representation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-jordan-linear-compatibility",
+  "lem-sfb-tannaka-rational-point-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 9.18 proof and Section 9.19, printed pp.170--171, using Theorem 9.2 and Propositions 9.13, 9.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-23T22:39:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Representation.IsSemisimpleRepresentation\", \"Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule\", \"Representation.isSemisimpleModule_iff_isSemisimpleRepresentation_ofModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleRepresentation\"], \"digest\": \"78740896a613262e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple element detected by one faithful algebraic group representation acts diagonalizably in every rational representation",
+   "results": "{\"t\": \"2026-10-23T22:39:10Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple element detected by one faithful algebraic group representation acts diagonalizably in every rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple.of_mem_adjoin_singleton\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Module.End.isSemisimple_sub_algebraMap_iff\", \"Module.End.IsSemisimple.isFinitelySemisimple\", \"Module.End.isFinitelySemisimple_sub_algebraMap_iff\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"IsSemisimpleModule.exists_end_algEquiv\"], \"digest\": \"0cd9d3529b2e8470\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "Jordan|IsSemisimple|diagonali[sz]able",
+   "results": "{\"t\": \"2026-10-23T22:39:26Z\", \"tool\": \"grep\", \"query\": \"Jordan|IsSemisimple|diagonali[sz]able\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"31024950681cba64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern abstract monoid representations, linear endomorphisms, or affine-scheme diagonals; none compares rational representations of an affine group scheme at one point. Searched Mathlib/RepresentationTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group element diagonalizable in one faithful rational representation is diagonalizable in all rational representations",
+   "results": "{\"t\": \"2026-10-23T22:39:26Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group element diagonalizable in one faithful rational representation is diagonalizable in all rational representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonal\", \"Rep.instInjective\", \"Rep.diagonal_succ_projective\", \"Rep.diagonalSuccIsoFree\", \"Representation.asGroupHom\", \"Representation.mem_invariants\", \"Representation.diagonal\", \"Rep.diagonalSuccIsoFree_inv_hom_single_single\"], \"digest\": \"a34c5838939e2f8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One faithful representation detects diagonalizable points in an affine group scheme over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T22:39:27Z\", \"tool\": \"leanfinder\", \"query\": \"One faithful representation detects diagonalizable points in an affine group scheme over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"Rep.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"Rep.diagonalHomEquiv_apply\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"Rep.diagonalHomEquiv\"], \"digest\": \"1758caa13906af77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "Jordan|IsSemisimple|diagonali[sz]able",
+   "results": "{\"t\": \"2026-10-23T23:28:26Z\", \"tool\": \"grep\", \"query\": \"Jordan|IsSemisimple|diagonali[sz]able\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"31024950681cba64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/RepresentationTheory/Semisimple.lean:34 defines complemented subrepresentations; the finite-group Maschke instances do not give the group-scheme assertion. Scope: Mathlib/RepresentationTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group element diagonalizable in one faithful rational representation is diagonalizable in all rational representations",
+   "results": "{\"t\": \"2026-10-23T23:28:26Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group element diagonalizable in one faithful rational representation is diagonalizable in all rational representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonal\", \"Rep.instInjective\", \"Rep.diagonal_succ_projective\", \"Rep.diagonalSuccIsoFree\", \"Representation.asGroupHom\", \"Representation.mem_invariants\", \"Representation.diagonal\", \"Rep.diagonalSuccIsoFree_inv_hom_single_single\"], \"digest\": \"a34c5838939e2f8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern diagonal representations of abstract groups, finite-group injectivity, or scheme diagonals; none states faithful detection for a point of an affine group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-23T23:28:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Representation.IsSemisimpleRepresentation\", \"Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule\", \"Representation.isSemisimpleModule_iff_isSemisimpleRepresentation_ofModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleRepresentation\"], \"digest\": \"78740896a613262e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these declarations concern semisimplicity of an entire abstract representation, not diagonalizability of one point under rational group-scheme representations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple element detected by one faithful algebraic group representation acts diagonalizably in every rational representation",
+   "results": "{\"t\": \"2026-10-23T23:28:27Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple element detected by one faithful algebraic group representation acts diagonalizably in every rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple.of_mem_adjoin_singleton\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Module.End.isSemisimple_sub_algebraMap_iff\", \"Module.End.IsSemisimple.isFinitelySemisimple\", \"Module.End.isFinitelySemisimple_sub_algebraMap_iff\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"IsSemisimpleModule.exists_end_algEquiv\"], \"digest\": \"0cd9d3529b2e8470\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the adjoin lemmas preserve semisimplicity within one endomorphism algebra; no statement identifies the images of a point under two rational representations. Read Mathlib/LinearAlgebra/Semisimple.lean:259,277."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One faithful representation detects diagonalizable points in an affine group scheme over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T23:28:50Z\", \"tool\": \"leanfinder\", \"query\": \"One faithful representation detects diagonalizable points in an affine group scheme over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"Rep.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"Rep.diagonalHomEquiv_apply\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"Rep.diagonalHomEquiv\"], \"digest\": \"1758caa13906af77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern diagonal representations of abstract groups, finite-group injectivity, or scheme diagonals; none states faithful detection for a point of an affine group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme. Supporting input: Corollary 13.8, printed p.257, first part of its proof (linear reductivity of the cyclic closure); Lemma 1.40, Theorem 1.45 and Definition 1.48, printed pp.18-20, and Proposition 1.26, printed p.13, for its reduced smooth subgroup structure. Semisimple elements and their representation criterion: 9.19, printed p.171. Supporting lemma for passage from H to its cyclic closure: Milne 9.19, faithful detection of semisimple points in arbitrary rational representations.",
+   "via": [
+    "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-representation-semisimple-point",
+  "worker": "stage1",
+  "summary": "Q30 checked Milne 9.18--9.19 and expanded faithful detection by constructing the tensor-compatible family of semisimple parts, applying existing Tannaka point reconstruction, and identifying its point with g using injectivity of i(k). Reused the two reviewed inputs already used by the unipotent analogue; no new nodes, no statement change, and no Lean attachment or Mathlib match.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), direct-image constructibility, through the inherited alteration/PGL/torus-centralizer/cyclic-closure branch specified in blueprint.from.place. Steps 1--2 realize the Milne 9.18 construction; steps 3--4 realize faithful detection in 9.19. blueprint_refs.py ancestor returns None; retain the inherited null ancestor and via chain. The whole-blueprint searches Jordan, Tannaka, semisimple point, and faithful representation found no equivalent blueprint statement. No chapter or unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-279a91fff",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-279a91fff (reviewer sub-agent of L); spot-checked: I read the item in full and it is correct. The delivery creates no new nodes. The statement and stmt_deps are identical to clones/live and clones/side-live, where the item is still unsplit; there is no repair note and no SGA source. Source check, Milne iAG2017 Thm 9.18 (printed p.170, proof via Props 9.13/9.15 + Thm 9.2) and 9.19 (p.171): the item is the semisimple half of 9.19 over an algebraically closed field, and its hypotheses match the source (affine finite type, faithful = injective on all R-points). The two cited nodes, jordan-linear-compatibility and tannaka-rational-point-reconstruction, are in the item's unit sk-thm-sf-ctf-stability, reviewed PASS on 2026-10-23, and have no cycle back to the item. I read both statements in full. Step 1 builds lambda_V=(r_V(g))_s. Naturality follows from equivariance at R=k, x=g plus the intertwiner clause. Tensor compatibility follows from the tensor clause. lambda_1=I follows from uniqueness applied to I=I*I, and V=0 is allowed. Step 2 applies Tannaka exactly as stated, giving h with r_V(h)=r_V(g)_s, and i and r are rational representations by def-sc-general-linear-group's R-points. Step 3 shows i_k(g)_s=i_k(g) by uniqueness, so h=g by injectivity at A=k. Step 4 gives r_k(g)=r_k(g)_s, which has an eigenbasis and is therefore conjugate to a diagonal matrix (an elementary one-line step). I tested g=1; G_m with t->t^n; G_a with a unipotent faithful embedding, where the hypothesis forces x=0; nonreduced mu_p in characteristic p; finite disconnected J; and repeated eigenvalues. All hold, and no step uses characteristic 0. On duplicates: def-sfb-semisimple-group-scheme-point is only a definition, and the unipotent-point node is the analogue, not this statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalRepresentationSemisimplePoint",
+  "declaration": "AlgebraicGeometry.rationalRepresentation_diagonalizable_of_faithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalRepresentationSemisimplePoint.lean",
+  "statement": "theorem rationalRepresentation_diagonalizable_of_faithful {k : Type u} [Field k] [IsAlgClosed k] (J : Over (Spec (.of k))) [GrpObj J] [IsAffine J.left] [LocallyOfFiniteType J.hom] [QuasiCompact J.hom] (m d : ℕ) (_hm : 1 ≤ m) (_hd : 1 ≤ d) (i : J ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} m) k) [IsMonHom i] (r : J ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} d) k) [IsMonHom r] (hi : ∀ (A : Type u) [CommRing A] [Algebra k A], Function.Injective (fun x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ J ↦ GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} m) k A (x ≫ i))) (g : (Spec (.of k)).asOver (Spec (.of k)) ⟶ J) (hg : ∃ (P : GL (LinearGroupSchemes.Index.{u} m) k) (a : LinearGroupSchemes.Index.{u} m → k), (↑P⁻¹ : Matrix _ _ k) * (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} m) k k (g ≫ i) : Matrix _ _ k) * (↑P : Matrix _ _ k) = Matrix.diagonal a) : ∃ (P : GL (LinearGroupSchemes.Index.{u} d) k) (a : LinearGroupSchemes.Index.{u} d → k), (↑P⁻¹ : Matrix _ _ k) * (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} d) k k (g ≫ r) : Matrix _ _ k) * (↑P : Matrix _ _ k) = Matrix.diagonal a",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e3ff6870",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read item, all six stmt_dep records (byte-identical to side-live), delivered module and report, upstream GeneralLinear.lean (GeneralLinearGroup, homMulEquiv ≃* GL n R, natural). Clause-by-clause: alg. closed k; J : Over Spec k with GrpObj, IsAffine J.left, LocallyOfFiniteType+QuasiCompact (recorded finite type); m,d≥1; i,r IsMonHom into recorded GL; faithfulness = injectivity of homMulEquiv(x≫i) for all A:Type u k-algebras (no extra hypotheses; Type u only weakens hi, proof needs A=k); g a k-point; diagonalizable = ∃ P:GL, P⁻¹MP = diagonal a, in both hg and the conclusion. No smooth/connected/char hypotheses. Edge cases m=d=1, g=1, trivial r, nonreduced/disconnected J, G_a unipotent all covered. Node diff vs live only in the lean field; statement verbatim; source+blueprint docstrings; proof steps in docstring; sorry only, no defs; no duplicate in Sheaf/WeilConjectures/Mathlib; not pro-étale. Report has Worker report + Second reading by Q91. No fixes, no compile run."
+ }
+}

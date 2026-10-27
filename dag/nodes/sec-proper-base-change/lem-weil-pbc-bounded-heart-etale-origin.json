@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-bounded-heart-etale-origin",
+ "kind": "statement",
+ "title": "Bounded derived origin from etale origin of the cohomology sheaves",
+ "statement": "Let X be a scheme and Lambda a finite commutative coefficient ring. For the exact comparison functor nu^* of [def-weil-pbc-proetale-modules], let K be a bounded object of the derived category of fixed Lambda-module sheaves on X_proet. Suppose for each q there exists a Lambda-module sheaf G_q on X_et with nu^*(G_q) isomorphic to H^q(K). Then K is isomorphic to the derived inverse image of a bounded-below etale complex. No constructibility or finite Tor-dimension hypothesis on the individual G_q is needed. The recorded source theorem proves this for arbitrary commutative Lambda; the finite-ring specialization is used here.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-compare-derived, bounded special case; source-library bounded truncation devissage"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The comparison functor is fully faithful on bounded-below complexes. Its essential image from D+ is triangulated: lift the map between the endpoint etale origins by full faithfulness, take its etale cone, and compare distinguished triangles. Shifts and zero stay in the image.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply bounded truncation devissage, DerivedCategory.prop_of_bounded, to the triangulated essential image and the heart predicate of etale origin. The single complex of nu^*G is the derived comparison of the single complex of G by exactness. The finitely many truncation triangles then put K in that image.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-compare-derived, bounded special case; source-library bounded truncation devissage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to constant scalars identifies sheaves of modules over a constant ring sheaf on an etale chart with fixed coefficient module sheaves and transports constant complexes",
+   "results": "8 hits, including SheafOfModules.restrictScalars, forgetToSheafModuleCat, evaluation and over. No etale/proetale slice descent or normalized complex transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the scalar restriction and evaluation APIs; the project-specific slice comparisons need separate statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.restrictScalars\"",
+   "results": "10 hits: sheaf and presheaf restriction of scalars and object/map formulas.",
+   "date": "2026-10-27",
+   "verdict": "These construct scalar restriction but do not supply etale origin or the normalized derived constant-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientSliceRestriction|finiteCoefficient_slice_heart_origin|plusEtaleOrigin_of_etaleOriginHomology|finiteCoefficient_slice_model_transport",
+   "results": "0 Mathlib hits. Project rg found the proved source-library plusEtaleOrigin_of_etaleOriginHomology API; it is used directly.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match; reuse the existing project bounded-origin theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent of finite locally constant module sheaves and exact change of scalars on a localized scheme site",
+   "results": "8 hits, including Scheme.smallEtaleTopology, SheafOfModules.restrictScalars, Scheme.Etale, and unrelated condensed locally constant module APIs. No etale/proetale slice comparison or marked complex transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the scalar restriction and site definitions already available; the project-specific slice coherence steps remain separate statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientEtaleSliceOrigin",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Bounded derived origin from etale origin of the cohomology sheaves; step of lem-weil-pbc-finite-coefficient-etale-slice-origin",
+   "via": [
+    "lem-weil-pbc-finite-coefficient-etale-slice-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOriginHomology",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.plusEtaleOrigin_of_etaleOriginHomology",
+  "statement": "lemma DerivedCategory.plusEtaleOrigin_of_etaleOriginHomology\n    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}\n    (hK : DerivedCategory.etaleOriginHomology Λ X K)\n    (hb : _root_.DerivedCategory.TStructure.t.bounded K) :\n    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T084350-L-3673238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T084350-L-3673238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

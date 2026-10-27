@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-stack-quasi-coherent-scheme-restriction",
+ "kind": "statement",
+ "title": "Scheme-test restriction of quasi-coherent modules on a fibred fppf site",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $p:\\mathcal C\\to\\mathit{Sch}/S$ be a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids], with its big fppf site and structure sheaf as in [def-sfb-stack-quasi-coherent-algebra]. Let $F$ be a quasi-coherent $\\mathcal O_{\\mathcal C}$-module, where quasi-coherent means locally admitting a presentation by direct sums of copies of the structure sheaf. For every object $x\\in\\mathcal C(T)$ there is a quasi-coherent Zariski $\\mathcal O_T$-module $F_x$ [pqf-def-coherent], naturally determined up to unique compatible isomorphism, such that the restriction of $F$ to the slice over $x$ is the sheaf $(u:T'\\to T)\\mapsto\\Gamma(T',u^*F_x)$ on $(\\mathit{Sch}/T)_{fppf}$; here $u^*$ is tensor pullback [def-pc-module-pullback]. In particular $F(x)=\\Gamma(T,F_x)$. For every arrow $y\\to x$ over $u:T'\\to T$ the canonical map $u^*F_x\\to F_y$ is an isomorphism; these maps are natural in $F$ and satisfy the identity and composition compatibilities of tensor pullback. The scheme-test comparison is fully faithful on each slice and identifies the structure sheaf and tensor products with the ordinary structure sheaf and tensor products. If $F\\to G$ is a morphism of quasi-coherent modules which is locally surjective as a map of sheaves on $\\mathcal C_{fppf}$, the induced map $F_x\\to G_x$ is surjective for every $x$. Conversely, if all $F_x\\to G_x$ are surjective, then $F\\to G$ is locally surjective. For any functor $a:\\mathcal D\\to\\mathcal C$ of categories fibred in groupoids over $\\mathit{Sch}/S$, precomposition $a^*F(d)=F(a(d))$ is quasi-coherent and is the tensor pullback on their big ringed fppf sites. These assertions impose no algebraicity, quasi-compactness, finiteness, or flatness hypothesis on $\\mathcal C$, $a$, or the scheme tests.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WI (lemma-characterize-quasi-coherent), Tag 06WK (lemma-quasi-coherent), and Tag 06WH (lemma-pullback-quasi-coherent); scheme comparison is descent.tex Tag 03DX (proposition-equivalence-quasi-coherent), part (1), with Tag 06VE (lemma-equivalence-quasi-coherent-limits), parts (1), (3), (4), (7). Surjections here are sheaf surjections, not left exactness on the big site."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in\\mathcal C(T)$. The projection $\\mathcal C/x\\to\\mathit{Sch}/T$ sends $z\\to x$ to its base map. It is essentially surjective by existence of lifts in [def-sfb-stable-pointed-moduli-groupoids]; for two such objects, the unique-factorisation axiom gives exactly one arrow over every compatible base arrow. Thus it is fully faithful. Coverings on both sides are exactly the families whose base maps form fppf covers, and the structure rings agree objectwise. This proves the equivalence of ringed sites, without replacing $\\mathcal C$ by isomorphism classes. The slice $\\mathcal C/x$ is also fibred in groupoids over $\\mathit{Sch}/S$ (pull a domain back and compose with its arrow to $x$). Apply [lem-sfb-fibred-fppf-ringed-inverse-image] to its projection to $\\mathcal C$. Restriction is a module-sheaf functor preserving free sums and cokernels. In the explicit local-presentation definition [def-trf-space-quasi-coherent-module], a presentation cover of any $z\\to x$ is just a presentation cover of $z$ with its arrows composed to $x$. Its presentation is unchanged on the further slice, by [def-pur-localized-ringed-site]. Consequently the restriction $R_xF$ is quasi-coherent.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "def-trf-space-quasi-coherent-module",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06W0 (lemma-localizing) and Tag 06WI (lemma-characterize-quasi-coherent), necessary direction; the proof uses only the explicit lifting axioms and local-presentation definition."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-big-fppf-quasicoherent-equivalence] with $V=T$ to $R_xF$. Its inverse gives the quasi-coherent Zariski module $F_x$ and a canonical counit $A_T(F_x)\\simeq R_xF$, identity on the Zariski opens. Hence at $u:T'\\to T$ its value is $\\Gamma(T',u^*F_x)$, and at the terminal object it gives $F(x)=\\Gamma(T,F_x)$. A module map $F\\to G$ restricts to a map $R_xF\\to R_xG$ and, by the equivalence with all module maps, determines a unique map $F_x\\to G_x$. Any other $F'_x$ with a specified comparison to $R_xF$ has exactly one compatible isomorphism to $F_x$, by full faithfulness. This proves natural determination and full faithfulness of the scheme comparison on each slice.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), forward proof applying descent.tex Tag 03DX (proposition-equivalence-quasi-coherent)(1)."
+   }
+  },
+  {
+   "text": "Let $\\alpha:y\\to x$ lie over $u:T'\\to T$. Relocalization [def-pur-localized-ringed-site] says that $R_yF$ is the restriction of $R_xF$ to the further slice. Under the equivalences in step 1 this is restriction from $\\mathit{Sch}/T$ to $\\mathit{Sch}/T'$. The base-restriction clause of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence] therefore gives $A_{T'}(u^*F_x)\\simeq R_yF\\simeq A_{T'}(F_y)$. Full faithfulness gives the canonical isomorphism $\\theta_\\alpha:u^*F_x\\simeq F_y$. It is the canonical restriction-induced map: on every open $W\\subseteq T'$ its associated-sheaf map is the identity comparison between the same value of $F$ on an object above $W$. For $\\beta:z\\to y$ over $v:T''\\to T'$, the two associated-sheaf maps obtained from $\\theta_{\\alpha\\beta}$ and $\\theta_\\beta\\circ v^*\\theta_\\alpha$ both compare restriction to $\\mathcal C/z$; relocalization is sectionwise the identity and the base-restriction comparison in the cited equivalence is compatible with composition. They are equal, and faithfulness gives equality of the module maps under $(uv)^*\\simeq v^*u^*$. Identity arrows and naturality for a map $F\\to G$ follow in the same way from identity restriction and its commuting naturality square. Thus the coherence is for the actual canonical tensor comparisons.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WK (lemma-quasi-coherent), forward proof; descent.tex Tag 03LC (proposition-equivalence-quasi-coherent-functorial)(1)."
+   }
+  },
+  {
+   "text": "On the slice over $x$, the structure sheaf is the ring sheaf of $\\mathit{Sch}/T$ from step 1. The structure-module clause of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence] thus identifies it with $\\mathcal O_T$. For quasi-coherent $F,G$, [lem-sfb-localized-site-tensor-restriction] gives $R_x(F\\otimes G)\\simeq R_xF\\otimes R_xG$. Substituting the counits of step 2 and then the tensor comparison of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence] identifies this sheaf with $A_T(F_x\\otimes_{\\mathcal O_T}G_x)$. It is quasi-coherent on every slice, so $F\\otimes G$ is quasi-coherent: a local presentation on the slice over an arbitrary object is already the local presentation required at that object. Full faithfulness gives $(F\\otimes G)_x\\simeq F_x\\otimes G_x$. On local tensors the comparison sends the two restricted sections to their tensor section, by the formulas in the two cited nodes. This fixes the canonical tensor identification and its naturality.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "descent.tex Tag 06VE (lemma-equivalence-quasi-coherent-limits)(7); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback) for localization."
+   }
+  },
+  {
+   "text": "Let $f:F\\to G$ be locally surjective. On each slice the same lifting covers show that $R_xf$ is locally surjective. Write $f_x:F_x\\to G_x$ for its ordinary comparison and $Q_x=\\operatorname{Coker}(f_x)$ in Zariski module sheaves. This is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-image]. By the ambient-cokernel clause of [lem-sfb-scheme-big-fppf-quasicoherent-equivalence], $A_T(Q_x)\\simeq\\operatorname{Coker}(R_xf)=0$: a locally surjective sheaf map has zero cokernel because the sheafified quotient is locally zero. The inverse of the equivalence gives $Q_x=0$. The cokernel description in [lem-weil-pbc-quasi-coherent-module-cokernel-image] then says every section of $G_x$ lifts Zariski locally, that is, $f_x$ is surjective. Conversely suppose all $f_x$ are surjective. Then each $Q_x=0$, so the same ambient-cokernel identity makes each $R_xf$ locally surjective. Given a section of $G(x)$, use its local lifts at the terminal object of $\\mathcal C/x$ and forget the arrows to $x$. This produces an fppf lifting cover of $x$ in $\\mathcal C$. This is precisely local surjectivity of $f$. Only cokernels are used; no left exactness of $A_T$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "descent.tex Tag 06VE (lemma-equivalence-quasi-coherent-limits)(3),(4), contrasted with (6); local sheaf surjectivity via cokernels."
+   }
+  },
+  {
+   "text": "Finally let $a:\\mathcal D\\to\\mathcal C$ be any functor over $\\mathit{Sch}/S$. By [lem-sfb-fibred-fppf-ringed-inverse-image], $H=F\\circ a$ is a module sheaf and its functor is the tensor pullback on the big ringed fppf topoi. To check its quasi-coherence directly, fix $d$ over $T$ and a presentation cover $\\{x_i\\to a(d)\\}$ for $F$. Lift each underlying map $T_i\\to T$ to $d_i\\to d$. The lifting axiom [def-sfb-stable-pointed-moduli-groupoids] supplies the unique isomorphism $a(d_i)\\simeq x_i$ over $a(d)$, since both lift the same base arrow. The objects $d_i$ cover $d$. On each slice the induced functor $\\mathcal D/d_i\\to\\mathcal C/x_i$ is again a functor of categories fibred in groupoids over $\\mathit{Sch}/S$. Its module precomposition preserves small free sums, the structure module and cokernels by [lem-sfb-fibred-fppf-ringed-inverse-image]. Apply it to the chosen exact presentation on $\\mathcal C/x_i$; it gives an exact free presentation of $H|_{d_i}$. Thus $H$ is quasi-coherent by [def-trf-space-quasi-coherent-module]. All the operations above allow arbitrary small indexing sets and arbitrary scheme arrows; no geometric flatness, algebraicity or finiteness was invoked.",
+   "uses": [
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WH (lemma-pullback-quasi-coherent), proof by sites-modules.tex lemma-local-pullback(6), written using local presentations; Tag 06WE identifies tensor pullback with precomposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-fibred-fppf-ringed-inverse-image",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06W0, 06WI, 06WK, 06WH, with descent.tex Tags 03DX(1), 03LC(1), 06VE(3),(4),(7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Fibred.*[Qq]uasi|[Cc]artesian.*[Qq]uasi|[Qq]uasi.*[Cc]artesian",
+   "results": "{\"t\": \"2026-10-23T12:07:23Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|Fibred.*[Qq]uasi|[Cc]artesian.*[Qq]uasi|[Qq]uasi.*[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T12:07:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\"], \"digest\": \"84dd5f6ef412bd8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a category fibred in groupoids are equivalent to cartesian systems of modules on affine scheme tests with tensor base change",
+   "results": "{\"t\": \"2026-10-23T12:07:24Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent modules on a category fibred in groupoids are equivalent to cartesian systems of modules on affine scheme tests with tensor base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"c7fb250a783e85a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian presheaves of modules over the affine objects of a category fibered in groupoids uniquely extend to quasi coherent sheaves for the big fppf topology",
+   "results": "{\"t\": \"2026-10-23T12:11:05Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian presheaves of modules over the affine objects of a category fibered in groupoids uniquely extend to quasi coherent sheaves for the big fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\"], \"digest\": \"82cea9fc5ca46e0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On the big fppf site of a scheme quasi coherent sheaves equal ordinary quasi coherent modules, and restriction to a scheme test preserves surjective morphisms",
+   "results": "{\"t\": \"2026-10-23T12:11:40Z\", \"tool\": \"leansearch\", \"query\": \"On the big fppf site of a scheme quasi coherent sheaves equal ordinary quasi coherent modules, and restriction to a scheme test preserves surjective morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.IsQuasicoherent.rec\"], \"digest\": \"4fa85ed33df53f91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a quasi coherent module on a category fibred in groupoids to a scheme test and recover an ordinary quasi coherent module, compatibly with pullback; surjections restrict to surjections",
+   "results": "{\"t\": \"2026-10-23T12:11:42Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a quasi coherent module on a category fibred in groupoids to a scheme test and recover an ordinary quasi coherent module, compatibly with pullback; surjections restrict to surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.QuasicoherentData.X\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.presentation\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"f99ebdecafd55e1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsQuasicoherent|quasicoherent|isQuasiCoherent",
+   "results": "{\"t\": \"2026-10-23T12:13:05Z\", \"tool\": \"grep\", \"query\": \"IsQuasicoherent|quasicoherent|isQuasiCoherent\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"92a665dd6563cb18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.Modules.restrict\"",
+   "results": "{\"t\": \"2026-10-23T12:13:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme.Modules.restrict\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"9fc374035dbbc1a6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected generic local-presentation definitions and restriction along open immersions; neither states the big-fppf/scheme-test comparison for a fibred category, its cartesian comparison, or its surjection assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Fibred.*[Qq]uasi|[Cc]artesian.*[Qq]uasi|[Qq]uasi.*[Cc]artesian",
+   "results": "{\"t\": \"2026-10-23T13:57:42Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|Fibred.*[Qq]uasi|[Cc]artesian.*[Qq]uasi|[Qq]uasi.*[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local-presentation definitions and scheme module pseudofunctors do not give the fibred big-fppf scheme-test comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent module sheaves on the big fppf site of a fibred category restrict to quasi coherent scheme modules",
+   "results": "{\"t\": \"2026-10-23T13:57:42Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent module sheaves on the big fppf site of a fibred category restrict to quasi coherent scheme modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.ctorIdx\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\"], \"digest\": \"9459f2909f7676bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local-presentation definitions and scheme module pseudofunctors do not give the fibred big-fppf scheme-test comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T13:57:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\"], \"digest\": \"84dd5f6ef412bd8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local-presentation definitions and scheme module pseudofunctors do not give the fibred big-fppf scheme-test comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a category fibred in groupoids restrict to ordinary quasi coherent modules on each scheme test, compatibly with tensor pullback and surjective morphisms",
+   "results": "{\"t\": \"2026-10-23T13:57:43Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent modules on a category fibred in groupoids restrict to ordinary quasi coherent modules on each scheme test, compatibly with tensor pullback and surjective morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\"], \"digest\": \"0996946920a2a02a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local-presentation definitions and scheme module pseudofunctors do not give the fibred big-fppf scheme-test comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover a quasicoherent sheaf from its modules on scheme valued points with base change isomorphisms, and detect epimorphisms at all these points",
+   "results": "{\"t\": \"2026-10-23T14:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"Recover a quasicoherent sheaf from its modules on scheme valued points with base change isomorphisms, and detect epimorphisms at all these points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.mk.inj\"], \"digest\": \"fa0041c74ffb4908\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local-presentation definitions and scheme module pseudofunctors do not give the fibred big-fppf scheme-test comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-affine-algebra-direct-image",
+  "date": "2026-10-23",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Affine pushforward is used to transfer arbitrary algebras on each affine etale base change back to the original stack in the affine criterion; it states no adequate-moduli conclusion. Scheme-test comparison needed before constructing the affine pushforward: recover ordinary quasi-coherent modules from the big fppf sheaf, and compare arbitrary scheme pullbacks and surjections.",
+   "via": [
+    "lem-sfb-stack-affine-algebra-direct-image",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "worker": "stage1",
+  "summary": "Reused the existing arbitrary-scheme big-fppf equivalence and localization tensor theorem; proved the slice equivalence, canonical pullback coherence and two-way surjection criterion, and added only the underlying all-module-sheaves ringed inverse-image theorem. No target statement changed. All new searches were run and logged; exactness on the big fibred sites is distinguished from mere right exactness of the Zariski-associated-module functor.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration/moduli prerequisite described in blueprint.from.place. This split supplies the scheme-test dictionary used by the affine-stack-algebra direct-image construction. The inherited created.item chain is broken above lem-sfb-admissible-direct-image, so blueprint_refs.py ancestor reports None; the inherited null ancestor and explicit place are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic ordinary-scheme quasi-coherence and local quotient description for a module-map cokernel, used only to detect surjections; the unit provides no replacement cokernel theorem."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic site fact (Stacks sites-modules 03EL): sheaf tensor product commutes with restriction to a localized ringed site, with the section-tensor formula; step 4 uses it on C/x. Unit sk-lem-formal-closed-support-ii is outside the route closure of sk-thm-sf-ctf-stability, and no node of the unit's route states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-429f95c9f",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-429f95c9f (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps), the new node lem-sfb-fibred-fppf-ringed-inverse-image, every cited statement, and Stacks stacks-sheaves 06TS/06TW/06TX/06WE/06W0/06WH/06WI. Item statement and stmt_deps are byte-identical to live (live: unsplit, no repair note, not superseded). Steps are correct: (1) C/x ≃ Sch/T, fully faithful by unique factorisation and essentially surjective by lifts, with quasi-coherence of R_xF via relocalization; (2) F_x is the inverse of the equivalence, with counit and F(x)=Γ(T,F_x); (3) θ_α from base restriction plus full faithfulness, coherence via the composition clause; (4) structure sheaf and tensors via localized-site tensor restriction plus A_T tensor clause, quasi-coherence of F⊗G on slices; (5) surjection criterion both ways using only ambient cokernels, no left exactness of A_T (06VE(6)); (6) 06WH by lifting presentation covers, a(d_i)≅x_i by unique factorisation, presentation pulled back along D/d_i→C/x_i. The new node is exactly 06TS+06TW+06WE plus exactness and colimits (true: f^*=f^{-1} is a left adjoint with unchanged ring). It is self-contained and statement-only, and is not a duplicate: whole-DAG tag and keyword search; stackification/cartesian-realization/groupoid-descent nodes differ. It is not a restatement of an item clause; it is more general and lacks the scheme comparison. Batch-5 check: all four flagged citations are general definitions (def-sfb-stable-pointed-moduli-groupoids, def-sfb-stack-quasi-coherent-algebra, def-trf-space-quasi-coherent-module) or the scheme/big-site comparison whose closure reaches only def-trf-space-quasi-coherent-module. None is a step of the trace formula or Poincaré duality, so they are accepted. FIX: step 4 uses lem-sfb-localized-site-tensor-restriction of unit sk-lem-formal-closed-support-ii, outside the route closure of sk-thm-sf-ctf-stability, and it was not declared. It is a generic tool (03EL) and is now added to the item's split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-quasi-coherent-scheme-restriction.json; nothing else changed. The declared lem-weil-pbc-quasi-coherent-module-cokernel-image is generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackQuasiCoherentSchemeRestriction",
+  "declaration": "CategoryTheory.exists_moduliSchemeRestriction",
+  "declarations": [
+   "CategoryTheory.schemeTestStructureSheaf",
+   "CategoryTheory.schemeTestModuleRings",
+   "CategoryTheory.SchemeTestModules",
+   "CategoryTheory.schemeTestModuleLift",
+   "CategoryTheory.schemeTestRingMap",
+   "CategoryTheory.schemeTestPullbackExists",
+   "CategoryTheory.schemeTestPullback",
+   "CategoryTheory.schemeTestPullbackId",
+   "CategoryTheory.schemeTestPullbackComp",
+   "CategoryTheory.schemeTestPullSection",
+   "CategoryTheory.schemeTensorPullbackGlobalSection",
+   "CategoryTheory.ModuliQCoh",
+   "CategoryTheory.schemeTestBase",
+   "CategoryTheory.schemeTestSliceHasWeakSheafify",
+   "CategoryTheory.schemeTestSliceWEqualsLocallyBijective",
+   "CategoryTheory.moduliTestHasWeakSheafify",
+   "CategoryTheory.moduliTestWEqualsLocallyBijective",
+   "CategoryTheory.schemeTestHasWeakSheafify",
+   "CategoryTheory.schemeTestWEqualsLocallyBijective",
+   "CategoryTheory.SchemeTestQCoh",
+   "CategoryTheory.schemeTestSliceTransition",
+   "CategoryTheory.ModuliSchemeRestriction",
+   "CategoryTheory.moduliPrecompositionStructureIso",
+   "CategoryTheory.moduliPrecompositionRingIso",
+   "CategoryTheory.moduliModulePrecomposition",
+   "CategoryTheory.moduliRawPrecomposition",
+   "CategoryTheory.moduliTensorPrecomposition",
+   "CategoryTheory.moduliTensorPrecompositionTmul",
+   "CategoryTheory.ModuliQuasicoherentPrecomposition",
+   "CategoryTheory.exists_moduliSchemeRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackQuasiCoherentSchemeRestriction.lean",
+  "statement": "theorem exists_moduliSchemeRestriction {S : Scheme.{u}} (C : BasedCategory.{v, w} (Over S)) (hC : IsFibredInGroupoids C) : Nonempty (ModuliSchemeRestriction C hC) ∧ ∀ (D : BasedCategory.{v, w} (Over S)) (hD : IsFibredInGroupoids D) (a : BasedFunctor D C), Nonempty (ModuliQuasicoherentPrecomposition hD hC a)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Scheme-test comparison on the actual fibred category, with complete slice-section and arrow formulas, full faithfulness for all ordinary quasi-coherent test modules, normalized tensor comparisons, local-surjection detection and literal based-functor precomposition. The existing coefficient ULift transport retains independent scheme, site-object and site-morphism universes; its pullback is explicitly compared with the recorded Scheme.Modules.tensorPullback and its section unit. One theorem obligation; all helper data are constructions from existing APIs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-896dff3c1",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Read item, all 6 stmt_deps, Stacks 06WH/06WI/06WK, full module and report. Item differs from live only in lean (live lean null, first delivery); dep copies identical; statement verbatim; 30 declarations listed; docstrings and blueprint tags present; only the main theorem is sorry. Every node clause has a field: restriction to F_x (quasi-coherent, ULift-transported O_T), full slice realization A_T(M) (sections, restriction, naturality, counit), tensorPullback agreement normalized on 1⊗s, canonical comparisons (sections, naturality, id, comp), fully faithful realization, unit and tensor comparisons with pure-tensor formula, IsLocallySurjective iff Epi on every test, precomposition as continuous left-exact inverse image with sheafified scalar extension iso and qcoh preservation. The free data are pinned up to transport; no hollow or false field; no extra hypotheses. Advisory: D and C share universes (v,w); statement uses decls of def-pur-cochain-coefficient-universe-transport and a Prop instance from theorem node lem-pur-ringed-site-module-pullback-exists-universes, which S2 cannot add to stmt_deps; plain imports are proof_dep modules. No fixes."
+ }
+}

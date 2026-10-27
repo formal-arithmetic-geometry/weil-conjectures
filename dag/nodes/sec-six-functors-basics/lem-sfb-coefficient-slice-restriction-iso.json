@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-coefficient-slice-restriction-iso",
+ "kind": "statement",
+ "title": "Coefficient slice models respect internal restriction isomorphisms",
+ "statement": "Let Λ be a commutative monoid object in condensed abelian sheaves in universe u+1, let X,Y be schemes in universe u, f:Y→X, k a commutative ring in universe u+1, and c an isomorphism from the constant k-ring sheaf on the coefficient-sized pro-etale site model of X to smallRing X (condensedRingObj Λ X). The section ring, coefficient object and section-module functor are those of [def-sfb-integral-models-stacks-data]. Let N and M be arbitrary internal modules over condensedRingObj Λ X and U an object of the coefficient-sized site of Y. If their internal inverse images along the composite of the underlying structural map U→Y with f are isomorphic, using [def-sfb-point-model-restriction-module], then their fixed-k models on the coefficient slice over U are isomorphic. Each model is obtained by smallModules, restriction of scalars along c, coefficientModelFixedScalars, the coefficient-sized scheme inverse image along f, and restriction to the slice, all the literal functors of [def-sfb-affine-locally-constructible-proetale-modules] and [det-def-sfb-constructible-local-model]. No finite presentation, finite rank, discrete point module, or cokernel is part of this assertion.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-point-model-restriction-module",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), Section 00XZ (section-localize); More on Morphisms Tags 094T (lemma-composition-weakly-etale) and 0951 (lemma-weakly-etale-permanence)"
+ },
+ "proof": [
+  {
+   "text": "Transport a constant chart along f and along the structural map g:Z→Y of U using the ring-only chart theorem. These charts identify constant scalar actions sectionwise with those of the internal coefficientMap.",
+   "uses": [
+    "lem-sfb-constant-coefficient-chart-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), Section 00XZ (section-localize); More on Morphisms Tags 094T (lemma-composition-weakly-etale) and 0951 (lemma-weakly-etale-permanence)"
+   }
+  },
+  {
+   "text": "The internal-to-section equivalence, AsSmall ringed-module equivalence, restriction along c, and the proved fixed-scalar equivalence compose to an equivalence fixedModel. The existing lowerComparison identifies internal direct image with sectionwise direct image. Its underlying additive maps are identities, and chart compatibility makes them k-linear. Conjugating this direct-image comparison by fixedModel and taking its adjunction mate gives the inverse-image square for f and for g. The functor associator compares this section-equivalence presentation with the literal smallModules presentation; carry that comparison through inverse image and slice restriction rather than reducing module data.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-integral-models-stacks-data",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), Section 00XZ (section-localize); More on Morphisms Tags 094T (lemma-composition-weakly-etale) and 0951 (lemma-weakly-etale-permanence)"
+   }
+  },
+  {
+   "text": "Use the AsSmall sheaf equivalence for fixed-k module sheaves. Identity-on-sections direct images give its pullback comparison by adjunction mates. For the weakly etale structural map g, upperStarIsoLocalizationRestriction identifies ordinary inverse image with restriction along composition into Y. The explicit sliceTo functor and its objectwise identity isomorphism to the slice forgetful functor turn the pulled-back isomorphism into an isomorphism over U.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), Section 00XZ (section-localize); More on Morphisms Tags 094T (lemma-composition-weakly-etale) and 0951 (lemma-weakly-etale-permanence)"
+   }
+  },
+  {
+   "text": "Rewrite the given internal restriction isomorphism using the internal upperStar compositor. Apply fixedModel on Z and conjugate by the two inverse-image squares. This gives an isomorphism after pulling back the two displayed fixed-k sheaves along g; the preceding slice comparison yields their isomorphism over U. No finiteness or conservativity assumption is used.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), Section 00XZ (section-localize); More on Morphisms Tags 094T (lemma-composition-weakly-etale) and 0951 (lemma-weakly-etale-permanence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-coefficient-chart-pullback",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sfb-module-upper-star-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6--03D7: compare direct images on sections and take adjunction mates; weakly etale slice localization and AsSmall transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image sheaves of modules commutes with equivalence of sites and slice localization",
+   "date": "2026-10-26",
+   "results": "8 hits, including Equivalence.sheafCongr_inverse and Functor.IsDenseSubsite.sheafEquiv_inverse.",
+   "verdict": "These provide the equivalence of sheaf categories, but not the internal-module, scalar-restriction, and scheme-slice comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-26",
+   "results": "12 hits, including Adjunction.leftAdjointUniq and unit_leftAdjointUniq_hom_app.",
+   "verdict": "Gives the categorical uniqueness step after identifying the concrete right adjoints; does not state the comparison itself."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*mapMod|mapMod.*sheafPullback|sectionModule.*pullback|pullback.*sectionModule",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits. Local rg found SectionModuleAlgebraicInverseImage and InternalModuleInverseImageComparison.",
+   "verdict": "Use those general internal/section comparison results and the existing weakly etale localization; no existing declaration states this specialized slice invariance."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscretePointPresentationTransport",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step: the reconstruction/inverse-image/localization square in forward presentation transport",
+   "via": [
+    "lem-sfb-discrete-point-presentation-transport",
+    "lem-sfb-discrete-point-presentation-refinement",
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientSliceRestrictionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientSliceRestrictionIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.coefficient_slice_iso_of_internal_restriction_iso",
+  "statement": "theorem coefficient_slice_iso_of_internal_restriction_iso\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (k : Type (u + 1)) [CommRing k]\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj Λ X))\n    (N M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)\n    (h : Nonempty (pointModelRestriction Λ f N (AsSmall.down.obj U).hom ≅\n      pointModelRestriction Λ f M (AsSmall.down.obj U).hom)) :\n    Nonempty (((Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k).obj\n      ((coefficientModelFixedScalars _ k).obj\n        ((smallModules X (condensedRingObj Λ X) ⋙ ConstantCompletion.res c.hom).obj N))).over U ≅\n      ((Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k).obj\n        ((coefficientModelFixedScalars _ k).obj\n          ((smallModules X (condensedRingObj Λ X) ⋙\n            ConstantCompletion.res c.hom).obj M))).over U)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T111821-L-1740465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T135428-L-4032900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -34,219 +34,49 @@
  ],
  "proof": [
   {
-   "text": "Put $c=\\operatorname{cd}_\\ell(j)$ and $s=\\operatorname{cd}_\\ell(S)$. The base field is algebraically closed, so its $\\ell$-cohomological dimension is zero by [sk-lem-base-field-cd]. The schemes $S,Z,X\\setminus Z$ are finite type over $k$, and $j$ is a quasi-compact open immersion between Noetherian schemes. Thus the finiteness assertion of [sk-def-cd] gives finite nonnegative integers $c,s$. We use $B_T=\\mathcal O_{E,T}$ and $A_{n,T}=(\\mathcal O_E/\\pi_E^n)_T$ for each scheme $T$.",
+   "text": "As in the original step 1, finite-type finiteness over the algebraically closed base gives c=cd_l(j) and s=cd_l(S) as natural numbers. Give Z,S,V their induced base structures; Noetherianity supplies the quasi-compactness needed by the finite-type dimension lemmas.",
    "uses": [
     "sk-lem-base-field-cd",
     "sk-def-cd"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
-    "place": "unit proof, third paragraph: finiteness of the two cohomological dimensions"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $N\\in\\Cons(X,\\mathcal O_E)$. By [sk-lem-int-integral-heart](1), $N[0]\\in\\Dbc(X,\\mathcal O_E)$. Apply [sk-lem-integral-models](2): $N$ is derived complete and its first reduction is bounded constructible of étale origin. Define the actual derived reductions $N_n=N\\otimes^L_{B_X}A_{n,X}$ with their canonical quotient transitions, all viewed also as $B_X$-complexes by restriction of scalars. The complete-reduction criterion [det-prop-integral-criterion-reductions] makes every $N_n$ bounded constructible. By [sk-thm-pe-constructible-comparison] each is classical, that is, of étale origin. Derived completeness, as stated in [sk-lem-integral-models], gives $N\\simeq R\\varprojlim_n N_n$. No separate choice of compatible complexes is needed: the quotient maps define the tower functorially.",
+   "text": "The finite-reduction estimate [lem-sf-integral-stratum-reduction-ext-bound] gives Hom(a_!L,N_n[r])=0 for r>c+s+2 for every positive actual derived reduction of a constructible N. The reconstruction lemma [lem-sf-integral-constructible-reduction-limit] supplies a product and a Roos derived-limit triangle for those levels and N[0].",
    "uses": [
-    "sk-lem-int-integral-heart",
-    "sk-lem-integral-models",
-    "det-prop-integral-criterion-reductions",
-    "sk-thm-pe-constructible-comparison"
+    "lem-sf-integral-stratum-reduction-ext-bound",
+    "lem-sf-integral-constructible-reduction-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1 and Lemmas 6.5.3--6.5.4; unit proof, third paragraph; Stacks proetale.tex Tag 099M (lemma-naive-completion) for reconstruction"
-   }
+   "elementary": false
   },
   {
-   "text": "The finite free resolution $[\\mathcal O_E\\xrightarrow{\\pi_E^n}\\mathcal O_E]$ in degrees $[-1,0]$ is supplied by [lem-weil-pbc-standard-quotients-perfect]. Its completed sheaf version still resolves $A_{n,X}$ by [lem-weil-pbc-completed-constant-sheaf-reduction]. Tensoring this bounded free model with $N[0]$ represents the underlying $B_X$-complex $N_n$ by $[N\\xrightarrow{\\pi_E^n}N]$ in degrees $[-1,0]$. Hence $H^r(N_n)=0$ outside $[-1,0]$. Its $A_{n,X}$-module structure is the one on the derived reduction, so its cohomology is killed by $\\pi_E^n$, and therefore by a power of $\\ell$. This checks the torsion hypothesis of the cohomological dimension bounds, including for torsion $N$.",
+   "text": "Write P=product N_n. Shift preserves products, so projections detect maps a_!L -> P[r]. The finite-level estimate kills all their projections in degrees r-1 and r when r>c+s+3. Shift the Roos triangle by r-1 and apply Hom exactness: a map a_!L -> N[r] factors through P[r-1], hence is zero. This proves the first clause, with d=c+s+3 and the displayed equality in WithTop N. No support inverse image is commuted with the inverse limit.",
    "uses": [
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093M (lemma-completion-flat), 093J (lemma-constant-exact); explicit length-one quotient resolution"
-   }
-  },
-  {
-   "text": "Use the derived dual $D=R\\mathcal Hom_{B_S}(L,B_S)$, not ordinary sheaf Hom. By [sk-lem-int-integral-heart](3), $L$ is dualizable and $D$ has Tor amplitude $[0,1]$. For every $B_S$-complex $M$, evaluation and coevaluation give mutually inverse maps\n$$R\\mathcal Hom_{B_S}(L,M)\\simeq D\\otimes^L_{B_S}M.$$\nIndeed, the forward transpose uses $1\\to L\\otimes D$ followed by evaluation $L\\otimes R\\mathcal Hom(L,M)\\to M$; the inverse is the transpose of $D\\otimes L\\otimes M\\to M$. Their composites are identities by the two duality triangle identities, using [def-sfb-derived-tensor-hom-adjunction-modules]. The closed-support adjunction of [sk-lem-formal-closed-support](1), and $u_!\\dashv u^*$ from [sk-def-sfb-module-lower-shriek], give\n$$\\Ext^r_X(a_!L,K)=H^rR\\Gamma(S,D\\otimes^L_{B_S}u^*R\\underline\\Gamma_ZK).$$\nHere the open adjunction derives by [lem-pc-derived-adjoint-functors]; both open functors are exact by [sk-def-sfb-module-lower-shriek] and [sk-prop-sfb-cartesian-coefficients], so their derived functors equal their termwise functors by [lem-weil-pbc-exact-functor-derived-functor]. The final identification with hypercohomology is [lem-pur-rhom-global-sections], applied also after shift by $r$. This derives the formula needed here with the derived dual. It agrees with the now corrected clause (2) of [det-lem-int-ext-formula]; the imported blueprint and unit paragraph 1 used an incorrect ordinary dual.",
-   "uses": [
-    "sk-lem-int-integral-heart",
-    "def-sfb-derived-tensor-hom-adjunction-modules",
-    "sk-lem-formal-closed-support",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-pc-derived-adjoint-functors",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JJ (lemma-dual-perfect-complex), 08JA (lemma-section-RHom-over-U); unit proof, first paragraph, corrected to the derived dual"
-   }
-  },
-  {
-   "text": "Let $D_n=D\\otimes^L_{B_S}A_{n,S}$. It has Tor amplitude $[0,1]$ over $A_{n,S}$: for an $A_{n,S}$-module $F$, associativity gives $D_n\\otimes^L_{A_{n,S}}F=D\\otimes^L_{B_S}F$, to which step 4 applies. Also $D_n$ is bounded constructible. Work on each pro-\\'etale trivializing object $V\\to S$ from the local-model hypothesis, so that $L|_V\\simeq B_V\\otimes_{\\mathcal O_E}P$ for a finitely generated $\\mathcal O_E$-module $P$. By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ is a DVR. Choose a finite free surjection $\\mathcal O_E^v\\twoheadrightarrow P$. Its kernel is finite free by [lem-sc-dvr-saturation-line-smith-normal-form], since it is a submodule of the finite free source. This gives a two-term finite free resolution of $P$. The flatness of $B_V$ over the constant $\\mathcal O_E$ sheaf from [lem-weil-pbc-completed-constant-sheaf-reduction] makes its completed extension a local bounded finite-free model of $L|_V$, with matrices over $\\mathcal O_E$. The termwise dual model, with reversed degrees and dual differentials, is a dual by evaluation on each finite-free term; the tensor-Hom transpose and the two triangle identities of step 4 identify it with $D|_V$. Reducing its matrices modulo $\\pi_E^n$ gives a bounded finite-free constant local model for $D_n|_V$. Its cohomology is locally constant with finite $A_n$-module values, since $A_n$ is finite; boundedness in $[0,1]$ was already checked by the Tor-amplitude assertion. Thus [sk-def-sfb-constructible] gives constructibility, and [sk-thm-pe-constructible-comparison] gives classicality of $D_n$. Change of coefficients and its tensor comparison are those of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to the identity topos with ring map $B_S\\to A_{n,S}$.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "sk-thm-pe-constructible-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sc-dvr-saturation-line-smith-normal-form",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ (lemma-dual-perfect-complex), termwise dual of a strictly perfect model; finite-coefficient constructible comparison, Tag 099Y"
-   }
-  },
-  {
-   "text": "Write $V=X\\setminus Z$ and $U_T=\\operatorname{Res}_n:D(A_{n,T})\\to D(B_T)$ for $T=X,V$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $u=j$, $R_T=B_T$, $S_T=A_{n,T}$ and $a_T$ the reduction projection. The required coefficient isomorphisms are [sk-prop-sfb-cartesian-coefficients](1). Their compatibility with reduction follows from naturality of pullback from the point: both composites are the pullback of $\\mathcal O_E\\to\\mathcal O_E/\\pi_E^n$. Consequently the cited lemma gives the canonical isomorphism $U_XRj_{A,*}\\simeq Rj_{B,*}U_V$, compatible with the inverse-image/direct-image adjunctions, hence with their units. The exact inverse images also commute with $U_T$ by its inverse-image comparison. Thus all finite-coefficient support fibres and their unit maps below compute the same integral-coefficient objects after restriction. No flatness of $B_T\\to A_{n,T}$ is assumed.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, label lemma-derived-pushforward-composition, applied to the two coefficient-square factorizations; Tag 07A6, label lemma-adjoint, for unit compatibility"
-   }
-  },
-  {
-   "text": "Bound $Rj_{A,*}j_A^*N_n$ on the finite-coefficient site. For a classical $A_n$-module sheaf $F$, [sk-def-cd] gives the upper bound $c$ on the underlying abelian higher direct images. The module/abelian comparison [det-pbc-conventions-module-cohomology](3) and the qcqs comparison [sk-thm-pe-direct-image-comparison] give $H^t(Rj_{A,*}F)=0$ for $t>c$. Its negative cohomology vanishes by [lem-weil-pbc-derived-functor-negative-vanishing]: module-sheaf categories on the small sites are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and direct image is additive left exact. The functor $Rj_{A,*}$ is triangulated by [lem-pc-right-derived-functor-triangulated]. Apply [lem-pur-bounded-heart-amplitude] with the class of classical $A_n$-module sheaves, heart bounds $[0,c]$, and input bounds $[-1,0]$ from step 3. Classical sheaves contain zero and are closed under isomorphism; exact pullback makes $j^*N_n$ classical. The result is the interval $[-1,c]$. The complex $j^*N_n$ comes from a bounded-below étale complex by step 2, and $j$ is qcqs, so [sk-thm-pe-direct-image-comparison] also makes its direct image classical. Step 6 identifies its coefficient restriction with the integral direct image. This proves all bounds and classicality used in the support-fibre calculation.",
-   "uses": [
-    "sk-def-cd",
-    "det-pbc-conventions-module-cohomology",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-pur-bounded-heart-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
-    "place": "paragraph 3, first bullet: torsion support bound; Stacks Tag 09A6, proetale.tex label lemma-morphism-comparison, and Tag 08J5, derived.tex label remark-truncation-distinguished-triangle"
-   }
-  },
-  {
-   "text": "By [sk-lem-formal-closed-support](1),\n$$M_n:=u^*R\\underline\\Gamma_ZN_n=u^*i^*\\operatorname{fib}(N_n\\to Rj_*j^*N_n).$$\nThe long exact sequence [lem-sf-derived-homology-long-exact] gives upper bound $c+1$ for the fibre: at degree $r>c+1$, both $H^{r-1}(Rj_*j^*N_n)$ and $H^r(N_n)$ vanish. Its lower bound is $-1$, since both $N_n$ and $Rj_*j^*N_n$ are zero below $-1$. Inverse images $i^*,u^*$ are exact by [sk-prop-sfb-cartesian-coefficients], hence preserve these cohomological bounds by [lem-weil-pbc-exact-functor-complex-cohomology]. For classicality, represent $N_n$ on the étale site by step 2. By [sk-thm-pe-direct-image-comparison] the unit and its direct image comparison form the same fibre after exact pullback from the étale site; this pullback also commutes with $i^*,u^*$. Thus $M_n$ is classical and has cohomology in $[-1,c+1]$, with its natural $A_{n,S}$-module structure.",
-   "uses": [
-    "sk-lem-formal-closed-support",
-    "lem-sf-derived-homology-long-exact",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6 (lemma-morphism-comparison); unit proof, third paragraph, first bullet"
-   }
-  },
-  {
-   "text": "Form $T_n=D\\otimes^L_{B_S}M_n=D_n\\otimes^L_{A_{n,S}}M_n$; the equality is derived tensor associativity with the quotient coefficient action. Its cohomology has upper bound $c+2$. Indeed, the finite truncation triangles of [lem-weil-pbc-truncation-triangle] filter $M_n$ by $H^t(M_n)[-t]$ for $-1\\le t\\le c+1$. Tensoring each sheaf with $D_n$ puts cohomology in $[0,1]$ by step 5, so the shifted contribution has upper bound $t+1\\le c+2$. Tensor preserves these triangles: choose K-flat models as in [lem-weil-pbc-site-derived-tensor-descent]; total tensor with the fixed model carries a mapping cone to the cone of the tensor map, with the same two summands and differential. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] gives the asserted bound by finite induction. The same argument gives lower bound $-1$. Both factors are classical and bounded below. The derived unit hypothesis of [det-pe-classical-derived-equivalence] is supplied by [sk-prop-sf-comparison] for the discrete ring $A_n$. Hence that equivalence represents them as pullbacks of bounded-below étale complexes. The étale representative of $D_n$ is bounded constructible by step 5 and [sk-thm-pe-constructible-comparison]; [det-pe-finite-tor-comparison-noetherian] reflects its Tor amplitude $[0,1]$. Applying the same finite cohomology-filtration argument on the étale site makes its tensor with the étale representative of $M_n$ bounded below (in fact in $[-1,c+2]$). The tensor pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] expresses $T_n$ as the pullback of their derived tensor. Since $T_n$ is bounded, it is a bounded classical $A_{n,S}$-complex. This argument uses no constructibility assertion for $Rj_*j^*N_n$.",
-   "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sf-derived-homology-long-exact",
-    "det-pe-classical-derived-equivalence",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "sk-thm-pe-constructible-comparison",
-    "det-pe-finite-tor-comparison-noetherian",
-    "sk-prop-sf-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YM (lemma-derived-tor-exact), 06YU (definition-derived-tor); unit proof, third paragraph, second bullet"
-   }
-  },
-  {
-   "text": "Now apply $R\\Gamma(S,-)$ to the finite cohomology filtration of $T_n$. Each $H^t(T_n)$ is classical and killed by a power of $\\ell$. The definition of $s$ in [sk-def-cd], the derived sections comparison [sk-prop-sf-comparison], and the module/abelian cohomology comparison [det-pbc-conventions-module-cohomology](2), give $H^v(S,H^t(T_n))=0$ for $v>s$. The truncation triangles [lem-weil-pbc-truncation-triangle] and the exactness and shift compatibility of $R\\Gamma$ [lem-pc-right-derived-functor-triangulated], together with [lem-sf-derived-homology-long-exact], give upper bound $t+s$ for each shifted contribution and thus upper bound $c+s+2$ for $R\\Gamma(S,T_n)$. Substituting this into the corrected formula from step 4 proves $\\operatorname{Hom}(a_!L,N_n[r])=0$ for $r>c+s+2$, uniformly in $n$ and $N$. The finite-coefficient sections bound is also the integral-coefficient bound in step 4: $F_S(B_S)=A_{n,S}$, so [lem-weil-derived-scalar-extension-restriction-adjunction] gives $\\operatorname{Hom}_{B_S}(B_S,U_ST_n[r])=\\operatorname{Hom}_{A_{n,S}}(A_{n,S},T_n[r])$. By [lem-pur-rhom-global-sections] and the tensor unit these are respectively the two hypercohomology groups in degree $r$. Thus no equality of module-valued and underlying abelian derived functors is being assumed for the completed ring.",
-   "uses": [
-    "sk-def-cd",
-    "sk-prop-sf-comparison",
-    "det-pbc-conventions-module-cohomology",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); unit proof, third paragraph, third bullet"
-   }
-  },
-  {
-   "text": "Put $b=c+s+2$ and $P=\\prod_{n\\ge1}N_n$ in $D(B_X)$. This product exists by [det-pe-products-derived]. Step 2 and [def-weil-derived-limit] give a distinguished Roos triangle $N\\to P\\xrightarrow{1-t}P\\to N[1]$. By the product universal property and the shift equivalence,\n$$\\operatorname{Hom}(a_!L,P[r])\\cong\\prod_n\\operatorname{Hom}(a_!L,N_n[r])=0\\quad(r>b).$$\nApply [lem-weil-pbc-hom-into-triangle-exact] to this triangle, shifted by $r-1$. Exactness at $\\operatorname{Hom}(a_!L,N[r])$ says every map to $N[r]$ factors through $P[r-1]$ when its composite to $P[r]$ is zero. For $r>b+1$, both groups of maps into $P[r-1]$ and $P[r]$ are zero, so every map to $N[r]$ is zero. This proves the required $c+s+3$ bound. It is exactly the one-degree loss of the Milnor argument, without needing limits to commute with any immersion inverse-image functor.",
-   "uses": [
-    "det-pe-products-derived",
     "def-weil-derived-limit",
     "lem-weil-pbc-hom-into-triangle-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08TC (definition-derived-limit), 08TB (section-derived-limit), Hom exact sequence into the Roos triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "For $C\\in\\Cons(X,\\mathcal O_E)$ use only clause (1) of [det-lem-int-ext-formula]: there is a finite filtration by distinguished triangles with pieces $a_{\\alpha,!}L_\\alpha$ in degree zero. Let $d_C$ be the maximum of the finitely many integers $\\operatorname{cd}_\\ell(j_\\alpha)+\\operatorname{cd}_\\ell(S_\\alpha)+3$, taking $d_0=0$ for the empty filtration. For fixed $N$ and $r>d_C$, every piece has zero maps to $N[r]$ by step 11. At each filtration triangle $C'\\to C''\\to a_{\\alpha,!}L_\\alpha\\to C'[1]$, [lem-weil-pbc-hom-out-of-triangle-exact](i) gives exactness of $\\operatorname{Hom}(a_{\\alpha,!}L_\\alpha,N[r])\\to\\operatorname{Hom}(C'',N[r])\\to\\operatorname{Hom}(C',N[r])$. Its outside groups are zero, so the middle group is zero. Induction from the zero object proves the assertion for $C$. The bound is independent of $N$.",
+   "text": "Place C in degree zero; its sole nonzero cohomology is C, so it is bounded constructible. Apply [det-lem-int-ext-formula](1) to obtain its finite triangle filtration. The concentration-in-degree-zero condition removes every shift. A locally closed stratum in Noetherian X is qcqs, and the complement of its closed tail is a quasi-compact open immersion, so the first clause bounds each stratum piece uniformly in N.",
    "uses": [
-    "det-lem-int-ext-formula",
+    "det-lem-int-ext-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct over the filtration. The zero starting vertex has no nonzero maps. At each distinguished triangle take the maximum of the nonnegative bounds for the first and third vertices. The contravariant Hom exact sequence factors any middle-source morphism through the third vertex when its restriction to the first is zero; both vanish beyond the maximum. Finally transport the bound along the terminal filtration isomorphism. Empty filtrations and zero objects have bound zero.",
+   "uses": [
     "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
-    "place": "unit proof, fourth paragraph, last two sentences"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "sk-lem-base-field-cd",
   "sk-def-cd",
-  "sk-lem-int-integral-heart",
-  "sk-lem-integral-models",
-  "det-prop-integral-criterion-reductions",
-  "sk-thm-pe-constructible-comparison",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "def-sfb-derived-tensor-hom-adjunction-modules",
-  "sk-lem-formal-closed-support",
-  "sk-def-sfb-module-lower-shriek",
-  "lem-pc-derived-adjoint-functors",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pur-rhom-global-sections",
-  "sk-def-sfb-constructible",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-sc-dvr-saturation-line-smith-normal-form",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "det-pbc-conventions-module-cohomology",
-  "sk-thm-pe-direct-image-comparison",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-bounded-heart-amplitude",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "det-pe-classical-derived-equivalence",
-  "det-pe-finite-tor-comparison-noetherian",
-  "sk-prop-sf-comparison",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "det-pe-products-derived",
+  "lem-sf-integral-stratum-reduction-ext-bound",
+  "lem-sf-integral-constructible-reduction-limit",
   "def-weil-derived-limit",
   "lem-weil-pbc-hom-into-triangle-exact",
   "det-lem-int-ext-formula",
@@ -254,8 +84,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
-  "place": "proof, paragraphs 3--4, with the derived-dual correction to paragraph 1 and expanded finite-truncation/Roos arguments"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
+  "place": "paragraphs (2) and final filtration paragraph; T1 formalizes the Roos and filtration arguments and isolates the finite-reduction and reconstruction steps"
  },
  "mathlib_searches": [
   {
@@ -556,7 +386,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-becf9d93a (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and its report, no new nodes, proof_deps equal to the union of the 12 steps' uses (39 ids, none missing or merged), no SGA. Statement: both clauses and the bound cd(j)+cd(S)+3 are kept, torsion L is allowed, and the completed coefficient B=O_{E,X} is kept separate from the finite A_n throughout. The explicit k=F̄_q setting is the one the only citer, sk-lem-int-ext, already uses through sk-def-sf-setting, so nothing is weakened. Source error confirmed: the blueprint's ordinary dual cHom(L,O) fails for L=O_E/π on a point, where Hom=0 but Ext^1=O_E/π. The split uses the derived dual instead, which matches the corrected det-lem-int-ext-formula(2). Sources read: Bhatt–Scholze Def 6.5.1 and Lemmas 6.5.3–6.5.4, Stacks 099M, 093M and 08JJ, and the 08TC/08TB derived limit; I checked all cited tags against tags/tags. The blueprint's 099Q is mislabeled, and the steps correctly use 099M. Steps: (1) cd finite by 0F10. (2) Derived completeness, reductions and étale origin. (3) N_n=[N→N] in [-1,0], killed by ℓ^n. (4) Formula through i_*⊣RΓ_Z (O_E is admissible) and u_!⊣u^*. (5) D_n has a finite constant local model from the DVR and Smith normal form, so it is constructible and classical. (6) Res commutes with Rj_* via ring-sheaf-change-adjunction; the coefficient square commutes. (7) Rj_*j^*N_n lies in [-1,c] by the heart-amplitude lemma. (8) The fibre lies in [-1,c+1] and is classical. (9) T_n lies in [-1,c+2] and is classical, using Tor reflection. (10) Sections bound c+s+2, through the chain of module/abelian and pro-étale/étale comparisons, with the B-to-A_n change of rings by the scalar-extension adjunction. (11) Hom into the Roos triangle, clause (iii), loses one degree: c+s+3. (12) The filtration induction gives d_C, with d_0=0. Edge cases: S=∅, Z=X, L=O_E or O_E/π on a point, torsion N, C=0. Duplicate search: the sk-lem-uniform-constructible-ext and det-uniform-constructible-ext-* nodes have different statements. I accept all 27 declared tool_uses as generic tools. No fixes. Minor, not faults: source.external still lists 099Q, and step 4 re-derives the sibling formula instead of citing it."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.IntegralStratumExtBound",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_ext_bound",
@@ -574,5 +415,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Read the item, all 4 stmt_dep records and their side-clone declarations (cohomologicalDimension/relativeCohomologicalDimension, HasFiniteConstantLocalModel/IsConstantModelConstructible, integralCoefficientRing, FiniteFieldDatum, the integral_stratum_filtration signature). Every clause matches: F̄_q datum with l≠p; separated finite-type X; completed integral coefficient (same alias as det-lem-int-ext-formula); v open, i closed, j the complement by range; L constructible with a finite constant local model, torsion allowed; ∃ d:ℕ equal to cd(j)+cd(S)+3 (finite by sk-def-cd); strict integer cutoff; Subsingleton Hom single₀(i_* v_! L) → single₀(N)⟦r⟧ in the unbounded derived category for every constructible N; second clause has d_C chosen before N. The qcqs instances are automatic for Noetherian X; no stronger assumptions. Edge cases (empty S/V/X, torsion L, C=0, negative r, single universe) are fine. Not a duplicate of the downstream integralConstructibleExt or det-uniform-constructible-ext-integral. The node changes only in lean; lean.statement is verbatim; sorry only; docstrings carry the source/blueprint tags and all 12 steps; lines ≤100. nt_compile --json: the first run timed out in dependency IntegralStratumHomFormula at load 126; the rerun at load 92 was clean, item module 3.4 s. Advisory: the unit-level sk-lem-int-ext Lean uses padicIntegersRingObj rather than integralCoefficientRing, so stage 3 needs that comparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5ca77",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261027T094521-L-238190",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs det-lem-int-ext-bound node and blueprint para (2); two new sorry statements vs their nodes and source; importer IntegralConstructibleExt compiled against the delivered modules"
  }
 }

@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-split-torus-coordinate-characters",
+ "kind": "definition",
+ "title": "Ordered coordinate characters of a split torus",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], and let $\\mathbf G_{m,k}$ be the multiplicative $k$-group scheme [def-sc-gm-ga], in the category of $k$-group schemes [def-sc-group-scheme]. For $r\\in\\mathbf N$, let $T_r=\\mathbf G_{m,k}^{r}$ be the ordered split torus [def-sfb-tori-multiplicative-type], with $T_0=1$ and $T_{r+1}=\\mathbf G_{m,k}\\times T_r$. The ordered coordinate characters are the projections $\\pi_{r,j}:T_r\\to\\mathbf G_{m,k}$ for $j\\in\\{0,\\ldots,r-1\\}$. Explicitly, the family for $r=0$ is empty, $\\pi_{r+1,0}=\\operatorname{pr}_1$, and $\\pi_{r+1,j+1}=\\pi_{r,j}\\circ\\operatorname{pr}_2$. On points over each commutative $k$-algebra $R$, the character $\\pi_{r,j}$ sends $(t_0,\\ldots,t_{r-1})$ to $t_j$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 12.14 and Example 12.15, printed p.236: products of G_m and their coordinate characters."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coordinate characters of the split torus G_m to the power r are its ordered projections to G_m",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"EuclideanSpace.projₗ\", \"module\": \"Mathlib.Analysis.InnerProductSpace.PiL2\", \"type\": \"(i : ι) : EuclideanSpace 𝕜 ι →ₗ[𝕜] 𝕜\", \"doc\": \"For each index $ i $, the linear map from the Euclidean space over $ \\\\mathbb{K} $ with index type $ \\\\iota $ to $ \\\\mathbb{K} $ that sends each vector to its $ i $-th component.\"}\n  {\"name\": \"Module.Basis.coord_apply\", \"module\": \"Mathlib.LinearAlgebra.Basis.Defs\", \"type\": \"∀ {ι : Type u_10} {R : Type u_11} {M : Type u_12} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  (b : Module.Basis ι R M) (i : ι) (a : M), (b.coord i) a = (b.repr a) i\", \"doc\": \"For any element $ a $ in the module $ M $, the coordinate function corresponding to the basis element $ i $ evaluated at $ a $ is equal to the coefficient of $ i $ in the unique representation of $ a \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.coord\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"(i : n) : Γ(𝔸(n; S), ⊤)\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, defined as the global section of the structure sheaf corresponding to the $i$-t\"}\n  {\"name\": \"LinearEquiv.coord_self\", \"module\": \"Mathlib.LinearAlgebra.Span.Basic\", \"type\": \": (coord R M x h) (⟨x, Submodule.mem_span_singleton_self x⟩ : R ∙ x) = 1\", \"doc\": \"The coordinate linear equivalence from the span of a nonzero singleton set $\\\\{x\\\\}$ to the semiring $R$ maps the element $x$ to $1$, i.e., $\\\\text{coord}(x) = 1$.\"}\n  {\"name\": \"UnitAddTorus.mFourier\", \"module\": \"Mathlib.Analysis.Fourier.AddCircleMulti\", \"type\": \": C(UnitAddTorus d, ℂ)\", \"doc\": \"For a finite type $d$ and integers $n_i$ indexed by $d$, the continuous function from the $d$-dimensional unit additive torus $\\\\prod_{i \\\\in d} \\\\mathbb{R}/\\\\mathbb{Z}$ to the complex unit circle defined\"}\n  {\"name\": \"Module.Basis.coord\", \"module\": \"Mathlib.LinearAlgebra.Basis.Defs\", \"type\": \": M →ₗ[R] R\", \"doc\": \"For a module $ M $ over a semiring $ R $ with basis $ b $, this is the linear map that sends each element of $ M $ to its coefficient corresponding to the basis element $ i $, obtained by representing\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) (i) : (map n f).appTop (coord T i) = coord S i\", \"doc\": \"For schemes $S$ and $T$, a morphism $f: S \\to T$, and an index $i$, applying the induced morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T$ to the $i$-th coordinate function on $T$ yields the $i$-th coordinat\"}\n  {\"name\": \"Module.Basis.repr_smul'\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.VectorSpace\", \"type\": \"(i : ι) (r : R) (s : S) : B.repr (algebraMap R S r * s) i = r * B.repr s i\", \"doc\": \"Let $S$ be an algebra over a commutative ring $R$, and let $B$ be a basis of $S$ as an $R$-module, indexed by a set $ι$. The function `B.repr(s)` gives the coordinates of an element $s \\\\in S$ with res\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib split-torus coordinate construction; reuse the existing project declaration AlgebraicGeometry.SplitTorusFrames.coordinate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"splitTorus\", \"coordinate\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib split-torus coordinate construction; reuse the existing project declaration AlgebraicGeometry.SplitTorusFrames.coordinate."
+  },
+  {
+   "tool": "grep",
+   "query": "splitTorus|SplitTorus|torus.*coordinate (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib split-torus coordinate construction; reuse the existing project declaration AlgebraicGeometry.SplitTorusFrames.coordinate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg SplitTorusFrames.coordinate|splitTorus lean/WeilConjectures lean/Sheaf; definition-node Lean declaration ownership; tools/blueprint_refs.py search coordinate characters",
+   "results": "The existing project declaration is AlgebraicGeometry.SplitTorusFrames.coordinate, lean/Sheaf/AlgebraicGeometry/SplitTorusTorsorFrameGeometry.lean:91. ToriMultiplicativeType.splitTorus is at ToriMultiplicativeType.lean:37; its definition node does not record coordinates. No definition node records SplitTorusFrames.coordinate. No corresponding construction in lean/WeilConjectures. blueprint_refs.py: 0 blueprint nodes match coordinate characters.",
+   "date": "2026-10-24",
+   "verdict": "Create a definition node owning the existing coordinate family; do not duplicate its Lean construction or depend on the frame-geometry theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-unipotent-torus-stable-series",
+  "date": "2026-10-24",
+  "group": "Q138"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Coordinate-character definition for the integer-weight formula on the one-dimensional quotients.",
+   "via": [
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusTorsorFrameGeometry",
+  "declaration": "AlgebraicGeometry.SplitTorusFrames.coordinate",
+  "statement": "def coordinate (k : Type u) [Field k] :\n    (r : ℕ) → Fin r → ((MultiplicativeType.splitTorus k r).X ⟶\n      StandardGroupSchemes.multiplicative k)",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "This definition node records the existing recursive coordinate projections, previously only a helper in the frame-geometry theorem module. It uses no theorem or chosen data from that theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c9277453",
+  "group": "Q138",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c9277453",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Re-delivery repairing H2 from 2de00f0f: the theorem stmt_dep lem-sfb-split-torus-torsor-frame-geometry is replaced by the new def node def-sfb-split-torus-coordinate-characters (existing:true on landed SplitTorusFrames.coordinate, module SplitTorusTorsorFrameGeometry; same pattern as landed Q18 def-sfb-split-torus-frame-model). Node fields follow §5; its TeX matches the recursive def and splitTorus ordering; no other def node owns coordinate. Item differs from side-live only in lean/stmt_deps; lean.statement is verbatim the file signature; all added stmt_deps are def nodes. Maths re-checked clause by clause (IsAlgebraic/IsUnipotent/GeometricallyConnected/SplitUnipotentLength hypotheses, R-point action laws, closed normal smooth geometrically connected series, IsIso a0, trivial last term, restricted actions, IsFppfQuotient with kernel, integer weights in G_m(R) on the Laurent coordinate); edge cases U=1/m=0, s=0, char p and non-reduced R covered. Gates: no definitions, only sorry, source/blueprint docstrings present. No compile (no file changed). Advisory: short second-reading section; NH parallel delivery cd899ce8 was returned."
+ }
+}

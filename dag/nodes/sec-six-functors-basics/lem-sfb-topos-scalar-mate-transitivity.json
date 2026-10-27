@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-topos-scalar-mate-transitivity",
+ "kind": "statement",
+ "title": "Transitivity of canonically normalized coefficient mates on sheaf topoi",
+ "statement": "Let $h:\\mathscr X\\to\\mathscr Y$ be a morphism of sheaf topoi presented by sites small in the module universe [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Fix maps of commutative ring sheaves $R_Y\\xrightarrow a S_Y\\xrightarrow b T_Y$, and take their inverse images on $\\mathscr X$. Use ordinary unbounded module derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], K-flat derived scalar extensions $E_{S/R,W},E_{T/S,W},E_{T/R,W}$ [lem-pur-derived-change-of-rings], and the derived adjunctions $L_A=h_A^*\\dashv G_A=Rh_{*,A}$ canonically derived from the ordinary module adjunction [lem-weil-pbc-ringed-projection-mate-exact], for $A=R,S,T$.\nFor each coefficient map $A\\to B$ define $\\gamma^{B/A}_K:E_{B/A,Y}G_AK\\to G_BE_{B/A,X}K$ to be the adjunct of the canonical balanced comparison $L_BE_{B/A,Y}G_AK\\cong E_{B/A,X}L_AG_AK$ followed by scalar extension of $\\varepsilon_{A,K}$ [lem-sfb-kflat-scalar-comparison-normalization]. There are canonical natural isomorphisms\n$$\\beta_W:E_{T/S,W}E_{S/R,W}\\xrightarrow{\\sim}E_{T/R,W}$$\nspecified on flat-term K-flat representatives by $t\\otimes s\\otimes p\\mapsto t b(s)\\otimes p$, with inverse $t\\otimes p\\mapsto t\\otimes1\\otimes p$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. They intertwine the composite pullback/scalar balancing maps with the balancing map for $R\\to T$, preserving the scalar-unit normalization $p\\mapsto1\\otimes p$. For every $K\\in D(R_X)$, composition right to left satisfies\n$$\\gamma^{T/R}_K\\circ\\beta_{Y,G_RK}=G_T(\\beta_{X,K})\\circ\\gamma^{T/S}_{E_{S/R,X}K}\\circ E_{T/S,Y}(\\gamma^{S/R}_K).$$\nThis is equality of the specified derived morphisms with their specified geometric counits; neither coefficient map is assumed flat and neither comparison is assumed invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (lemma-pullback-K-flat) and 0D6D (lemma-derived-pullback-composition), with the explicit categorical counit calculation of lem-sfb-pasted-mates-counit-normalization. Extracted normalized scalar-tower argument of returned proof step 5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "The normalized unit equation extends from flat-term K-flat resolving complexes to every complex by the general unit_all localization argument. This is needed because the successive-quotient theorem existentially chooses its models and cannot directly supply isomorphisms for the six models fixed in this statement. The proof constructs comparisons for those fixed models explicitly.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-derived-cokernel-adjoint-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms."
+   }
+  },
+  {
+   "text": "Construct the literal identity-on-sections restriction-composition isomorphism, as in successive derived quotient normalization, and its exact derived compositor. Construct the ordinary and derived scalar-tower isomorphisms by uniqueness of left adjoints to the composed restriction adjunction. Their unit identities determine the pure-tensor formulas: the forward map sends t tensor (s tensor x) to t b(s) tensor x, and the inverse inserts 1. The existing ScalarPullback.pure_smul_one lemma and scalar insertion suffice; all scalar factors have degree zero.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms."
+   }
+  },
+  {
+   "text": "Prove the derived representative identity by applying the Hom bijection of the composite scalar adjunction. The universal cochain comparison transposes to the ordinary unit on every cochain complex, by the preceding unit equation. Transpose the two comparisons in succession and use the exact restriction-compositor factorization. This proves the representative formula for the specified tower isomorphism. Scalar extension is ringed pullback on the identity topos, so the K-flat pullback theorem supplies the intermediate K-flat and flat-term conditions and hence invertibility of the second model comparison.",
+   "uses": [
+    "lem-sfb-derived-cokernel-adjoint-exchange",
+    "lem-pur-exact-restriction-composition",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms."
+   }
+  },
+  {
+   "text": "Check the ordinary restriction-action square after applying the faithful underlying-sheaf functor. The formula for each action is the underlying inverse-image comparison followed by the inverse comparison for the target ring; the middle comparisons cancel, and naturality supplies the restriction compositor. Apply exactSquare_comp_forward to derive this equality for the exact restriction and inverse-image functors. This uses exact localization of the restriction square rather than descent of arbitrary words of nonexact scalar extensions.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms."
+   }
+  },
+  {
+   "text": "The single-map scalar-normalization theorem supplies an invertible coefficient mate for some scalar adjunctions. Changing those adjunctions conjugates the inverse mate by the canonical invertible left-adjoint identifications, as follows from the mateEquiv conjugation rules; hence the specified coefficient mates are invertible too. Define balancing as the inverse of each specified coefficient mate. Mate the derived restriction-action square using mateEquiv_hcomp and the conjugation rules. Uniqueness of left adjoints identifies the resulting composition comparison with the tower isomorphism already normalized above. Cancel only the invertible coefficient balancing maps to obtain the required balancing square.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms."
+   }
+  },
+  {
+   "text": "Use the actual geometric adjunctions canonically derived from the given ordinary module adjunctions. The pasted-mates counit-normalization theorem computes the counit transpose of the successive geometric mates followed by beta_X. Transpose the direct mate preceded by beta_Y, apply the balancing square, and use naturality of beta_X at the R-counit. The transposes agree, so injectivity of the Hom equivalence proves the final equality. No geometric right mate is inverted.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-derived-cokernel-adjoint-exchange",
+  "lem-pur-exact-restriction-composition",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pod-derived-exact-square-composition",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-pasted-mates-counit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); agent expansion of the scalar-tower normalization for det-sf-comp-coherence-cocycle, Refinement isomorphisms. G1 Lean proof: explicit scalar towers and canonical adjoint transport, exact restriction-square localization, and the actual pasted counit calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary topoi and cartesian ring sheaves A to B to C the derived coefficient change direct image counit mates compose under K flat tensor associativity",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension transitivity intertwines pullback balancing and right adjunction mates for a geometric morphism of topoi",
+   "results": "{\"top\": [\"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "{\"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"n_hits\": 12, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*(comp|tensor)|[Ss]calar.*[Ee]xten.*[Cc]omp",
+   "results": "{\"top\": [\"Mathlib/Geometry/Manifold/SmoothApprox.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of coefficient change derived pushforward comparison maps is the comparison for composite scalar extension via the tensor associator",
+   "results": "{\"top\": [\"IsBaseChange.linearMapLeftRightHom_comp\", \"PresheafOfModules.pushforward_assoc\", \"ModuleCat.extendScalars_assoc_assoc\", \"IsBaseChange.of_comp\", \"PolynomialLaw.comp_toFun'\", \"ModuleCat.extendScalars_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|extendScalarsComp|extendScalars_assoc",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"n_hits\": 18, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170 and extendScalarsComp at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984; these give formal mate pasting and ordinary ring-module scalar composition, not the unbounded ring-sheaf representative normalization and its compatibility square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension pushforward comparison is transitive under a tower of sheaves of rings",
+   "results": "{\"top\": [\"SheafOfModules.pushforward_map_val\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforward₀_obj\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"SheafOfModules.pushforwardComp\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170 and extendScalarsComp at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984; these give formal mate pasting and ordinary ring-module scalar composition, not the unbounded ring-sheaf representative normalization and its compatibility square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "{\"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"n_hits\": 12, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170 and extendScalarsComp at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984; these give formal mate pasting and ordinary ring-module scalar composition, not the unbounded ring-sheaf representative normalization and its compatibility square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a tower of coefficient rings the comparison from tensor of derived pushforward to pushforward of derived tensor composes through tensor associativity",
+   "results": "{\"top\": [\"PresheafOfModules.pushforward_assoc\", \"PresheafOfModules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"SheafOfModules.pushforwardNatTrans_comp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170 and extendScalarsComp at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984; these give formal mate pasting and ordinary ring-module scalar composition, not the unbounded ring-sheaf representative normalization and its compatibility square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived extension of scalars for sheaves of rings on topoi is transitive and intertwines the pullback balancing isomorphism and direct image counit mates",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardNatIso\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected mateEquiv_vcomp at Mathlib/CategoryTheory/Adjunction/Mates.lean:170 and extendScalarsComp at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984; these give formal mate pasting and ordinary ring-module scalar composition, not the unbounded ring-sheaf representative normalization and its compatibility square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), proper closed-complement scalar calculation: multiplication associator, pullback balancing and pasting of the two coefficient mates, returned proof step 5.",
+   "via": [
+    "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-topos-scalar-mate-transitivity",
+  "worker": "stage1",
+  "summary": "Five-step split using existing scalar-tower normalization, finite-word K-flat descent and the explicit pasted-mate counit formula. Ordinary balancing is checked on local tensor generators, then descended with normalized comparison maps before taking the actual counit transposes. No new nodes. Corrected doubled TeX escapes and replaced an ordinary-adjunction citation with the existing canonical derived-adjunction statement; no mathematical hypotheses or conclusions changed.",
+  "blueprint": "det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms: normalized coefficient-tower calculation underlying the proper refinement scalar comparison, as identified by the item blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic existence and normalization of the actual unbounded ringed-topos derived adjunction; only this part is used, not a projection formula assertion."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic ordinary balanced tensor comparison and its representative-normalized derived identification; no same-unit statement provides that normalization."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic scalar-tower associator, naturality and scalar-unit normalization for arbitrary ring sheaves."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Generic common K-flat resolution and uniqueness of descent for finite pullback words; used only to descend the written ordinary tensor square."
+   },
+   {
+    "node": "lem-sfb-pasted-mates-counit-normalization",
+    "why": "Generic categorical counit formula for two mates and boundary arrows; it computes the actual transpose of the required composite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-pasted-mates-counit-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-b13ce73e7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-b13ce73e7 (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and every cited statement in full. The delivery has 0 new nodes. The only statement change swaps the ordinary-adjunction citation (ringed-topoi-module-adjunction) for lem-weil-pbc-ringed-projection-mate-exact, which states the derived Lf^*⊣Rf_* and its counit; the objects, hypotheses and conclusions are the same and nothing is weakened. Step 1: λ is the χ of kflat-scalar-comparison-normalization (=θ^{-1}), γ is its mate by def-weil-pbc-adjunction-mate, and β comes from successive-derived-quotient-normalization (commutative degree-0 rings, so no sign). Step 2: the ordinary balancing square agrees on local tensor generators and sheafifies. Step 3: word-descent applies to the six corners (W,A_W) with ringed pullbacks and scalar extensions as edges, and uniqueness of lifts identifies χ^L=λ and β^{0,L}=β; I checked domains and codomains (L_T H_Y F_Y M → J_X L_R M). Step 4: pasted-mates-counit-normalization instantiated with J=K, b=1, t=β_{X,K}; q equals the item's right-hand side and the transpose matches. Step 5: transpose of the left-hand side, step 3, naturality of β_X at ε_{R,K}, then injectivity of the Hom bijection. Edge cases checked: point topos with Z→Z/4→Z/2 and h=id (non-flat), identity coefficient maps, K=0. Stacks sources checked against labels: 0G7E/06YY/0D6D/07A6 at sites-cohomology.tex 3508/3585/3658/3990. No SGA. Duplicates: lem-sfb-internal-scalar-mate-transitivity is a narrower condensed pro-étale special case (advisory only); derived-scalar-mate-composition and sp-finite-tower-scalar-mates do not give the item. Batch 5: lem-trf-ringed-kflat-word-comparison-descent is generic K-flat word descent. Its 504-node closure has no trace-formula, Poincaré-duality or batch-4 theorem; the only other trf node is the generic localization-essentially-surjective. It lies outside both assumptions and is not a step of their proofs, so it is accepted, as in the Q70 PASS. Accepted tool_uses: the 5 generic off-unit inputs."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ToposScalarMateTransitivity",
+  "declaration": "SheafOfModules.ToposScalarMate.topos_scalar_mate_transitivity",
+  "declarations": [
+   "SheafOfModules.ToposScalarMate.CoefficientAdjunction",
+   "SheafOfModules.ToposScalarMate.GeometricAdjunction",
+   "SheafOfModules.ToposScalarMate.GeometricAdjunction.derived",
+   "SheafOfModules.ToposScalarMate.TowerNormalized",
+   "SheafOfModules.ToposScalarMate.topos_scalar_mate_transitivity"
+  ],
+  "file": "lean/Sheaf/Paper/ToposScalarMateTransitivity.lean",
+  "statement": "theorem topos_scalar_mate_transitivity (ha : L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map aY) ≫ (inverseRing IS).hom = (inverseRing IR).hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map aX) (hb : L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map bY) ≫ (inverseRing IT).hom = (inverseRing IS).hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map bX) (hc : L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map (aY ≫ bY)) ≫ (inverseRing IT).hom = (inverseRing IR).hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map (aX ≫ bX)) (mYa : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} aY) (mYb : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} bY) (mYc : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} (aY ≫ bY)) (mXa : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} aX) (mXb : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} bX) (mXc : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} (aX ≫ bX)) (nYa : CoefficientAdjunction mYa) (nYb : CoefficientAdjunction mYb) (nYc : CoefficientAdjunction mYc) (nXa : CoefficientAdjunction mXa) (nXb : CoefficientAdjunction mXb) (nXc : CoefficientAdjunction mXc) (gR : GeometricAdjunction h IR) (gS : GeometricAdjunction h IS) (gT : GeometricAdjunction h IT) : ∃ (βY₀ : mYa.E ⋙ mYb.E ≅ mYc.E) (βX₀ : mXa.E ⋙ mXb.E ≅ mXc.E) (βY : mYa.T ⋙ mYb.T ≅ mYc.T) (βX : mXa.T ⋙ mXb.T ≅ mXc.T) (balA : mYa.T ⋙ (inverseModules IS).mapDerivedCategory ≅ (inverseModules IR).mapDerivedCategory ⋙ mXa.T) (balB : mYb.T ⋙ (inverseModules IT).mapDerivedCategory ≅ (inverseModules IS).mapDerivedCategory ⋙ mXb.T) (balC : mYc.T ⋙ (inverseModules IT).mapDerivedCategory ≅ (inverseModules IR).mapDerivedCategory ⋙ mXc.T), TowerNormalized mYa mYb mYc βY₀ βY ∧ TowerNormalized mXa mXb mXc βX₀ βX ∧ balA.inv = θ_h IR IS ha inferInstance nYa.derived nXa.derived ∧ balB.inv = θ_h IS IT hb inferInstance nYb.derived nXb.derived ∧ balC.inv = θ_h IR IT hc inferInstance nYc.derived nXc.derived ∧ (∀ M : DerivedCategory (Modules RY), (inverseModules IT).mapDerivedCategory.map (βY.hom.app M) ≫ balC.hom.app M = balB.hom.app (mYa.T.obj M) ≫ mXb.T.map (balA.hom.app M) ≫ βX.hom.app ((inverseModules IR).mapDerivedCategory.obj M)) ∧ ∀ Z : DerivedCategory (Modules RX), βY.hom.app (gR.push.rightDerivedFunctor.obj Z) ≫ (mateEquiv (gR.derived h) (gT.derived h) balC.hom).app Z = mYb.T.map ((mateEquiv (gR.derived h) (gS.derived h) balA.hom).app Z) ≫ (mateEquiv (gS.derived h) (gT.derived h) balB.hom).app (mXa.T.obj Z) ≫ gT.push.rightDerivedFunctor.map (βX.hom.app Z)",
+  "branch": "sheaf-dag",
+  "by": "Q100",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The auxiliary declarations only bundle the specified normalized coefficient and geometric adjunctions and spell out the single-tower representative characterization. GeometricAdjunction.derived is the canonical mapDerivedCategoryRightDerivedAdjunction of its normalized ordinary module adjunction, not a freely supplied derived adjunction. The sole postponed theorem gives both canonical tower isomorphisms, their pullback balancing square, and the displayed equality of their geometric mates. All existing module, derived, scalar-extension, inverse-image, flatness and K-flatness constructions are used verbatim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b8b8c1b8a",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Read node, all 10 stmt_deps, the dependency Lean and the module. Node differs from live only in lean; statement verbatim; one module; no new nodes or dep repairs. Clause check: universes u/w as in the θ_h dep; L⊣V with finite limits plus InverseImage presentations, ring maps fixed by ha/hb (hc follows); six DerivedChangeOfRingsCochainModels with AdjunctionNormalized coefficient adjunctions; geometric adjunction = mapDerivedCategoryRightDerivedAdjunction of the normalized module adjunction; γ = mateEquiv of balancing (directions type-checked); bal.inv = θ_h (IsIso by the dep); β fixed by pure-tensor formulas and the K-flat flat-term representative square (intermediate-counit IsIso true by base change of K-flat); intertwining square and main identity match the node in ≫ order; no flatness and no IsIso on mates. Edge cases: h=id, identity and non-flat quotient ring maps, zero rings, unbounded K. Docstrings with source and blueprint; only the theorem is sorry; theorem stmt_deps unchanged from stage 1 (no finding). Not recompiled (no change; worker reports clean compile). Advisories: H11 second reading names the dispatcher policy; the third TowerNormalized clause is redundant; proof-dep plain imports unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261024T014833-L-2281282",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

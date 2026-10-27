@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-nodal-birational-base-change-geometry",
+ "kind": "statement",
+ "title": "Integral geometry of marked nodal curves after a birational base change",
+ "statement": "Let $F$ be a field [def-weil-field], $S$ an integral finite-type $F$-scheme, and $f:T\\to S$ a projective morphism in the projective-bundle convention, flat and finitely presented [def-pc-integral-scheme, def-weil-finite-type-morphism, def-trf-projective-bundle-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Assume its geometric fibres are nonempty connected reduced one-dimensional nodal curves [def-trf-nodal-geometric-fibres], and its generic fibre is smooth and geometrically integral [def-weil-geometric-fibre, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible]. Let $D\\subset S$ be closed, assume $f$ smooth over $S\\setminus D$, and let $M\\hookrightarrow T$ be a finite disjoint union of sections in the relative smooth locus [def-weil-closed-immersion]. Let $t:S_0\\to S$ be a projective birational surjection in the same convention with $S_0$ integral and smooth over $F$. Birational means an isomorphism between dense opens with equal function fields. Put $W=T\\times_SS_0$, $g:W\\to S_0$, $q:W\\to T$, $M_0=M\\times_SS_0$ [def-pc-fibre-product]. Then $S,S_0,T,W$ are Noetherian finite-type $F$-schemes, $T$ and $W$ are integral, and both $g$ and $q$ are projective in the projective-bundle convention and proper [def-weil-proper-morphism]. The morphism $g$ is flat and finitely presented with the same stated geometric fibre properties, smooth over $S_0\\setminus t^{-1}D$, with smooth geometrically integral generic fibre. The marking $M_0$ is again a finite disjoint union of sections in its smooth locus. Inverse images of dense base opens under $f$ and $g$ are dense, and $q$ is birational and surjective. If a finite group $J$ acts compatibly on $F,S,T,S_0$, makes $f,t$ equivariant and preserves $D,M$, its diagonal action on $W$ makes $g,q$ equivariant and preserves $M_0$ and $|M_0|\\cup g^{-1}(t^{-1}D)$. Actions on $F$ may be nontrivial. Empty $D$ and $M$ are allowed. Noetherian means locally Noetherian and quasi-compact [pqf-def-locnoeth].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Lemma 2.2 proof, p.149, base modification of one marked nodal curve; Stacks Tags 02V6, morphisms.tex lemma-base-change-projective, and 0C5B, curves.tex lemma-base-change-nodal-family; elementary flat generic-fibre integrality calculation in returned steps 1--3 and the base-change part of step 15."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-geometric-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Apply projective-bundle base change first to $f$ along $t$, and then to $t$ along $f$; these give respectively $g$ and $q$ projective in the required convention. Projective-bundle properness gives properness of $f,t,g,q$, hence finite type of each. A field has only the ideals $(0)$ and $(1)$, so $\\operatorname{Spec}F$ is Noetherian. Finite-type composition makes $T,W$ finite type over $F$; $S$ is so by hypothesis and $S_0$ by finite-type composition with $t$. Finite type over a Noetherian scheme now gives Noetherianity of all four schemes.",
+   "uses": [
+    "lem-sfb-projective-bundle-base-change",
+    "lem-trf-projective-bundle-proper",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02V6 (lemma-base-change-projective), 01WC (lemma-locally-projective-proper), 01T3 (lemma-composition-finite-type), 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Flat base change makes $g$ flat; finite-presentation base change makes it finitely presented. For every algebraically closed $\\Omega$ and $z:\\operatorname{Spec}\\Omega\\to S_0$, the fibre-product universal property identifies $W_z$ with $T_{tz}$ over $\\Omega$. Thus nonemptiness, connectedness, reducedness, dimension one and the completed nodal local-ring condition are exactly the assumed properties of $T_{tz}$. This uses geometric tests over arbitrary algebraically closed fields, as specified in the nodal-fibre definition, rather than identifying unrelated algebraic closures.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product",
+    "def-trf-nodal-geometric-fibres",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9 (lemma-base-change-flat) and 01TS (lemma-base-change-finite-presentation); curves.tex Tag 0C5B (lemma-base-change-nodal-family), geometric-fibre interpretation."
+   }
+  },
+  {
+   "text": "The given dense-open isomorphism for $t$ identifies the generic points and their local rings, hence their residue fields. Write the common field as $K$. Fibre-product associativity identifies $W_{\\eta_0}$ with $T_\\eta$ over this identification of fields. Consequently the generic fibre of $g$ is smooth and geometrically integral. The morphism $g$ over $S_0\\setminus t^{-1}D$ is the base change of $f$ over $S\\setminus D$, so smoothness follows from smooth base change.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VB (lemma-base-change-smooth); ILO X Lemma 2.2 proof, p.149, base modification; generic-field identification is the given dense-open isomorphism."
+   }
+  },
+  {
+   "text": "For either $h=f$ or $h=g$, its flatness and local finite presentation make $h$ open. Every nonempty source open $O$ therefore has nonempty open image in its integral base; that image contains the generic point. Thus $O$ meets the generic fibre, whose image is dense. More generally, for every dense base open $V$, the nonempty open $h(O)$ meets $V$, so $O$ meets $h^{-1}V$. This proves exactly the asserted density of inverse images of dense opens.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UA (flat locally finitely presented morphisms are universally open); density argument written here."
+   }
+  },
+  {
+   "text": "For $h=f$ or $g$, take a nonempty affine source open $\\operatorname{Spec}B$ mapping into an affine base open $\\operatorname{Spec}A$. The ring $A$ is a domain; the affine flatness criterion and flat torsion-freeness show $B\\to B\\otimes_A\\operatorname{Frac}(A)$ injective: a numerator killed in this localization is killed by some nonzero element of $A$. The mutually inverse fraction maps $b\\otimes(a/s)\\mapsto ab/s$ and $b/s\\mapsto b\\otimes(1/s)$ identify the tensor product with this localization. The affine-fibre tensor formula and affine fibre-product lemma identify its spectrum with the induced affine open of the integral generic fibre. That open is nonempty by Step 4, so its ring is a domain. Hence $B$ is a domain. These affine source opens cover the total space, which is therefore reduced.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sbc-affine-fibre-sections-tensor",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); torsion-free localization calculation written here."
+   }
+  },
+  {
+   "text": "For either total space, any two nonempty opens have nonempty inverse images in its generic fibre by Step 4. Those inverse images intersect because the generic fibre is integral. Their intersection maps into the intersection of the original opens. The total space is therefore irreducible, is nonempty because its generic fibre is, and is reduced by Step 5. The reduced-and-irreducible characterization of integrality gives $T$ and $W$ integral.",
+   "uses": [
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ON (lemma-characterize-integral); explicit generic-fibre density argument."
+   }
+  },
+  {
+   "text": "The proper birational generic-isomorphism-open lemma applies to $t$: $S$ is Noetherian by Step 1, $t$ is proper, and its generic local-ring map is the field isomorphism in Step 3. Obtain a dense open $V\\subset S$ with $t^{-1}V\\to V$ an isomorphism. Base change gives an isomorphism $q^{-1}(f^{-1}V)\\to f^{-1}V$. Both opens are dense by Step 4, so $q$ is birational; on this common dense open its generic stalk map is the identity under the induced identification, giving equality of function fields. Surjectivity of $q$ is surjective base change applied to the assumed surjectivity of $t$.",
+   "uses": [
+    "lem-sfb-birational-generic-isomorphism-open",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ (lemma-birational-isomorphism-over-dense-open), proper case; Tag 01S1 (lemma-base-change-surjective)."
+   }
+  },
+  {
+   "text": "For each marked section $s:S\\to T$, define $s_0:S_0\\to W$ by the pair $(s\\circ t,\\mathrm{id}_{S_0})$. The fibre-product equations give $g\\circ s_0=\\mathrm{id}_{S_0}$. Its image subscheme is the base change of the image of $s$, so is closed by closed-immersion base change. The base changes of two disjoint marked components remain disjoint, since their intersection is the pullback of their empty intersection; their finite union is $M_0$. Around each original marked point choose an open on which $f$ is smooth; smooth base change supplies a smooth open around each pulled-back marking. This also proves the empty-marking case.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR (lemma-base-change-closed-immersion), 01VB (lemma-base-change-smooth); section equations by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "For $j\\in J$, define $a_j:W\\to W$ by $q a_j=j_Tq$ and $g a_j=j_{S_0}g$. The two components have equal composites to $S$ because $f,t$ are equivariant. The fibre-product universal property gives $a_1=\\mathrm{id}$ and $a_j a_k=a_{jk}$, and $a_{j^{-1}}$ is the inverse. This construction is in schemes, so nontrivial field automorphisms cause no difficulty. The equations make $q,g$ equivariant. Since $M_0$ is the pullback of $M$ its image is preserved. Since $t^{-1}D$ is invariant, $g^{-1}(t^{-1}D)$ is invariant as well, hence so is their union. The same equations apply when either marking or boundary is empty.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Lemma 2.2 proof, printed p.149, equivariant successive modifications; diagonal action written by universal-property equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-bundle-base-change",
+  "lem-trf-projective-bundle-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "def-trf-nodal-geometric-fibres",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-birational-generic-isomorphism-open",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Lemma 2.2 proof, printed p.149, base modification of one nodal curve; elementary integrality, density and equivariance arguments expanded using the cited Stacks lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective flat nodal curve with integral generic fibre remains integral and projective after birational base change",
+   "results": "[leanfinder] OK 8 hit(s); WeierstrassCurve.baseChange_integralModel_eq, WeierstrassCurve.isIntegral_iff, WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.Affine.baseChange_nonsingular, WeierstrassCurve.Jacobian.baseChange_nonsingular, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Projective.baseChange_equation",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-morphism and Weierstrass results differ; GeometricallyIntegral.isIntegral_of_isLocallyNoetherian assumes all fibres integral, not merely the generic fibre; no marked nodal birational-base-change package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat family over an integral scheme has integral total space when its generic fibre is integral; projective birational base change is birational",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsIntegralHom",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-morphism and Weierstrass results differ; GeometricallyIntegral.isIntegral_of_isLocallyNoetherian assumes all fibres integral, not merely the generic fibre; no marked nodal birational-base-change package"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsIntegral",
+   "results": "[loogle] OK 4 hit(s); AlgebraicGeometry.Flat.instOfSubsingletonCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-morphism and Weierstrass results differ; GeometricallyIntegral.isIntegral_of_isLocallyNoetherian assumes all fibres integral, not merely the generic fibre; no marked nodal birational-base-change package"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*generic|generic.*integral|IsProjective.*baseChange|projective.*base.change",
+   "results": "[grep] OK 3 hit(s); Mathlib/NumberTheory/RamificationInertia/Unramified.lean:99, Mathlib/AlgebraicGeometry/FunctionField.lean:132, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean:489",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-morphism and Weierstrass results differ; GeometricallyIntegral.isIntegral_of_isLocallyNoetherian assumes all fibres integral, not merely the generic fibre; no marked nodal birational-base-change package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrality and projectivity of the pullback of a flat curve along a projective birational morphism",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, Module.Flat.of_projective, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-morphism and Weierstrass results differ; GeometricallyIntegral.isIntegral_of_isLocallyNoetherian assumes all fibres integral, not merely the generic fibre; no marked nodal birational-base-change package"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X 2.2--2.3: X Lemma 2.2 proof, printed p.149 last paragraph--p.150 first paragraph, successive application of Vidal 2004b 4.4.4; explicitly the smooth-pair-over-a-field variant of the following remark. This is one curve step, with arbitrary F and semilinear J, not the complete alteration theorem. Vidal primary article is WANTED locally.; X Lemma 2.2 proof, p.149, base modification of one marked nodal curve; Stacks Tags 02V6, morphisms.tex lemma-base-change-projective, and 0C5B, curves.tex lemma-base-change-nodal-family; elementary flat generic-fibre integrality calculation in returned steps 1--3 and the base-change part of step 15.",
+   "via": [
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-birational-base-change-geometry",
+  "worker": "stage1",
+  "summary": "Q139 checked ILO X 2.2 p.149 and Stacks base-change sources. One general projective-bundle base-change lemma is new; all other non-elementary inputs reuse existing nodes. Flat torsion-free affine localization, generic-fibre density and irreducibility, marking sections and semilinear diagonal action are written explicitly. The finite-projective-space convention is not substituted for projective-bundle projectivity.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed p.149: base modification of each marked nodal curve in the successive projective modifications.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic geometric properness tool in the precise projective-bundle convention; not a replacement for the alteration route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only smoothness under arbitrary base change is used, for the smooth complement and marked neighbourhoods."
+   },
+   {
+    "node": "lem-sbc-affine-fibre-sections-tensor",
+    "why": "Affine generic-fibre ring calculation, used with the zero prime of a domain."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-pc-proper-base-change",
+  "lem-sbc-affine-fibre-sections-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-237cb55c3",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-237cb55c3 (reviewer sub-agent of L); spot-checked: I read the whole item, all 9 steps, and the new node lem-sfb-projective-bundle-base-change, and checked every cited statement against what its step takes from it. This is a first split, not a re-split: the item is still unsplit in live and side-live with an identical statement and stmt_deps, and it has no repair note. New node: it is Stacks 02V6 (morphisms.tex lemma-base-change-projective) under the projective-bundle convention of Stacks 01W8, which is exactly def-trf-projective-bundle-morphism. It is true and self-contained, and holds in the edge cases S′=∅ and E=0. Its searches cover all three required kinds (LeanSearch, Loogle and LeanFinder, grep) and it is unsplit. It duplicates nothing: lem-pc-projective-base-change is the H-projective convention, lemma-nagata-relative-proj-base-change-arbitrary is only the relative-Proj ingredient, and lem-pur-projective-bundle-tautological-geometry requires a locally free module. Steps 1-9 are all correct. Step 1 gets projectivity of g and q from the new lemma along t and along f, properness from projective-bundle properness, and Noetherianity from finite type over Spec F. Step 2 transfers every nodal-fibre property because the definition tests every algebraically closed Ω. Step 5 shows the total space is integral: B is flat hence torsion-free over the domain A, so B injects into B⊗Frac A, the ring of a nonempty affine open of the integral generic fibre. Step 7 gets birationality of q from lem-sfb-birational-generic-isomorphism-open, using that S is Noetherian (Step 1), plus density from Step 4. Step 8 builds the sections as s_0=(st,id). Step 9 builds the diagonal action from universal-property uniqueness. I checked the source ILO X Lemma 2.2 (printed p.149-150): it gives no proof of this geometry, so proof_origin agent is right. There are no SGA citations. Batch-5: lem-trf-projective-bundle-proper is generic projective-implies-proper geometry, lem-trf-flat-module-torsionfree-domain is a Mathlib algebra leaf, and def-trf-projective-bundle-morphism is a definition. None of them belongs to the trace-formula or Poincaré-duality assumptions or their proofs, so all three are accepted. The three declared tool_uses are accepted as generic tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalBirationalBaseChangeGeometry",
+  "declaration": "AlgebraicGeometry.nodal_birational_base_change_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalBirationalBaseChangeGeometry.lean",
+  "statement": "theorem nodal_birational_base_change_geometry (F : Type u) [Field F] {S T S₀ M : Scheme.{u}} (p : S ⟶ Spec (.of F)) [IsIntegral S] [LocallyOfFiniteType p] [QuasiCompact p] (f : T ⟶ S) (hf : IsProjectiveBundle f) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (hnodal : HasNodalGeometricFibres f) [GeometricallyReduced f] (hgeneric : ∃ η : S, IsGenericPoint η Set.univ ∧ Smooth (f.fiberToSpecResidueField η) ∧ GeometricallyIntegral (f.fiberToSpecResidueField η)) (D : Closeds S) (hsmooth : Smooth (f ∣_ (⟨(D : Set S)ᶜ, D.isClosed.isOpen_compl⟩ : S.Opens))) (i : M ⟶ T) [IsClosedImmersion i] (n : ℕ) (s : Fin n → (S ⟶ T)) (hs : ∀ j : Fin n, s j ≫ f = 𝟙 S) (eM : (∐ fun _ : Fin n ↦ S) ≅ M) (hM : ∀ j : Fin n, Sigma.ι (fun _ : Fin n ↦ S) j ≫ eM.hom ≫ i = s j) (hmark : ∀ j : Fin n, Set.range (s j) ⊆ (f.smoothLocus : Set T)) (t : S₀ ⟶ S) (ht : IsProjectiveBundle t) [Surjective t] [IsIntegral S₀] [Smooth (t ≫ p)] (hbirational : ∃ (U : S.Opens) (V : S₀.Opens) (e : V.toScheme ≅ U.toScheme), Dense (U : Set S) ∧ Dense (V : Set S₀) ∧ e.hom ≫ U.ι = V.ι ≫ t) : IsNoetherian S ∧ IsNoetherian S₀ ∧ IsNoetherian T ∧ IsNoetherian (pullback (C := Scheme.{u}) f t) ∧ (LocallyOfFiniteType p ∧ QuasiCompact p) ∧ (LocallyOfFiniteType (t ≫ p) ∧ QuasiCompact (t ≫ p)) ∧ (LocallyOfFiniteType (f ≫ p) ∧ QuasiCompact (f ≫ p)) ∧ (LocallyOfFiniteType (pullback.snd f t ≫ t ≫ p) ∧ QuasiCompact (pullback.snd f t ≫ t ≫ p)) ∧ IsIntegral T ∧ IsIntegral (pullback (C := Scheme.{u}) f t) ∧ IsProjectiveBundle (pullback.snd f t) ∧ IsProper (pullback.snd f t) ∧ IsProjectiveBundle (pullback.fst f t) ∧ IsProper (pullback.fst f t) ∧ Flat (pullback.snd f t) ∧ LocallyOfFinitePresentation (pullback.snd f t) ∧ QuasiCompact (pullback.snd f t) ∧ QuasiSeparated (pullback.snd f t) ∧ HasNodalGeometricFibres (pullback.snd f t) ∧ GeometricallyReduced (pullback.snd f t) ∧ Smooth (pullback.snd f t ∣_ (⟨(t ⁻¹' (D : Set S))ᶜ, (D.isClosed.preimage t.continuous).isOpen_compl⟩ : S₀.Opens)) ∧ (∃ η₀ : S₀, IsGenericPoint η₀ Set.univ ∧ Smooth ((pullback.snd f t).fiberToSpecResidueField η₀) ∧ GeometricallyIntegral ((pullback.snd f t).fiberToSpecResidueField η₀)) ∧ IsClosedImmersion (pullback.snd i (pullback.fst f t)) ∧ (∃ e₀ : (∐ fun _ : Fin n ↦ S₀) ≅ pullback i (pullback.fst f t), ∀ j : Fin n, Sigma.ι (fun _ : Fin n ↦ S₀) j ≫ e₀.hom ≫ pullback.snd i (pullback.fst f t) = f.baseChangeSection (s j) (hs j) t) ∧ (∀ j : Fin n, f.baseChangeSection (s j) (hs j) t ≫ pullback.snd f t = 𝟙 S₀) ∧ Pairwise (fun j k : Fin n ↦ Disjoint (Set.range (f.baseChangeSection (s j) (hs j) t)) (Set.range (f.baseChangeSection (s k) (hs k) t))) ∧ (∀ j : Fin n, Set.range (f.baseChangeSection (s j) (hs j) t) ⊆ ((pullback.snd f t).smoothLocus : Set (pullback (C := Scheme.{u}) f t))) ∧ (∀ U : S.Opens, Dense (U : Set S) → Dense (f ⁻¹' (U : Set S))) ∧ (∀ U : S₀.Opens, Dense (U : Set S₀) → Dense ((pullback.snd f t) ⁻¹' (U : Set S₀))) ∧ (∃ (U : T.Opens) (V : (pullback (C := Scheme.{u}) f t).Opens) (e : V.toScheme ≅ U.toScheme), Dense (U : Set T) ∧ Dense (V : Set (pullback (C := Scheme.{u}) f t)) ∧ e.hom ≫ U.ι = V.ι ≫ pullback.fst f t) ∧ Surjective (pullback.fst f t) ∧ (∀ (J : Type v) [Group J] [Finite J] (aF : J →* (F ≃+* F)) (aS : J →* Aut S) (aT : J →* Aut T) (a₀ : J →* Aut S₀), (∀ j : J, (aS j).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (aF j⁻¹).toRingHom)) → (∀ j : J, (aT j).hom ≫ f = f ≫ (aS j).hom) → (∀ j : J, (a₀ j).hom ≫ t = t ≫ (aS j).hom) → (∀ j : J, (aS j).hom '' (D : Set S) = (D : Set S)) → (∀ j : J, (aT j).hom '' Set.range i = Set.range i) → ∃ aW : J →* Aut (pullback (C := Scheme.{u}) f t), (∀ j : J, (aW j).hom ≫ pullback.snd f t = pullback.snd f t ≫ (a₀ j).hom) ∧ (∀ j : J, (aW j).hom ≫ pullback.fst f t = pullback.fst f t ≫ (aT j).hom) ∧ (∀ j : J, (aW j).hom '' Set.range (pullback.snd i (pullback.fst f t)) = Set.range (pullback.snd i (pullback.fst f t))) ∧ ∀ j : J, (aW j).hom '' (Set.range (pullback.snd i (pullback.fst f t)) ∪ (pullback.snd f t) ⁻¹' (t ⁻¹' (D : Set S))) = Set.range (pullback.snd i (pullback.fst f t)) ∪ (pullback.snd f t) ⁻¹' (t ⁻¹' (D : Set S)))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70ffc4090",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Only the lean field changed and lean.statement matches the file verbatim. Every node clause is matched: F field; S integral and finite type via p; f IsProjectiveBundle, Flat, LFP+QC+QS; HasNodalGeometricFibres (connected, dim 1, nodal completions; no reducedness clause) plus GeometricallyReduced (equivalent to reduced geometric fibres); generic fibre via fiberToSpecResidueField; D closed with smooth restriction to its complement; marking as closed immersion with ∐S ≅ M compatible with the sections, in the smooth locus; t projective-bundle, surjective, S₀ integral and smooth over F, birational as a dense-open iso commuting with t. Conclusions: Noetherian and finite type for all four schemes; T and W integral; g and q projective-bundle and proper; g flat, fp, nodal, geometrically reduced, smooth off t⁻¹D, with smooth geometrically integral generic fibre; M₀ = pullback i q ≅ ∐S₀ with baseChangeSection (upstream pullback.lift, precedent with def-pc-fibre-product), section equations, disjoint, in the smooth locus; density for f and g; q birational and surjective; diagonal J-action pinned by both projection equations, Spec(aF j⁻¹) semilinearity consistent, set-level invariance equals subscheme-level since M and M₀ are reduced. Edge cases n=0, D empty or whole, nontrivial field action. Imports exist in side-live; docstrings carry source, blueprint id and the 9 steps; proof is sorry only. No compile (no change). No findings."
+ }
+}

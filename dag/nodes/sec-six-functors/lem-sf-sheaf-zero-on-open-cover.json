@@ -3,51 +3,49 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Fix an object $U\\to X$ of $X_{\\mathrm{et}}$. The family $\\{\\varphi_i:V_i\\to X\\}_{i\\in I}$ is a covering of the object $X$ of $X_{\\mathrm{et}}$, and $X_{\\mathrm{et}}$ is a site [def-weil-pbc-etale-site], so by the base-change axiom (iii) of a site [def-weil-pbc-sites-and-cohomology] the fibre products $U_i=U\\times_XV_i$ exist in $X_{\\mathrm{et}}$ (computed as scheme-theoretic fibre products) and $\\{U_i\\to U\\}_{i\\in I}$ is a covering of $U$. The second projection $U_i\\to V_i$ is an $X$-morphism of etale $X$-schemes, so $U_i\\to V_i$ is an object of the slice site $X_{\\mathrm{et}}/V_i$, and the section group of $F|_{V_i}$ on it is $F(U_i)$. Since $F|_{V_i}$ is the zero sheaf, $F(U_i)=0$ for every $i$. When $I$ is empty this step is vacuous (then $X$ and $U$ are empty and the covering of $U$ is the empty family).",
+   "text": "Let T be the identity etale X-scheme. The given family defines arrows V_i -> T. Its generated sieve R is covering by Mathlib Scheme.ofArrows_mem_smallEtaleTopology_iff and hcover [def-weil-pbc-etale-site]. For every test object U, pull R back along U -> T; GrothendieckTopology.pullback_stable makes this a covering sieve of U. This uses the existing topology directly, without choosing fibre products.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-weil-pbc-etale-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
-    "place": "Proof, first sentence “The assertion is local on $X$” and last sentence “Both assertions are local on the site”"
+    "place": "Proof, first and last sentences asserting locality on X and on the site"
    }
   },
   {
-   "text": "A sheaf of modules on $X_{\\mathrm{et}}$ is in particular an abelian sheaf [def-weil-sheaf-of-modules-category; def-weil-pbc-abelian-etale-sheaves], so for the covering $\\{U_i\\to U\\}_{i\\in I}$ of Step 1 the restriction map $F(U)\\to\\prod_{i\\in I}F(U_i)$ is the first arrow of an equalizer diagram and hence injective. Its target is $\\prod_i0=0$ by Step 1 (for $I=\\emptyset$ it is the empty product, also $0$). Therefore $F(U)=0$.",
+   "text": "For an arrow W -> U in the pulled-back sieve, membership in the generated sieve gives an index i and an X-morphism b : W -> V_i. Thus Over.mk b is an object of the slice at V_i. Evaluate the identity-equals-zero equation supplied by IsZero (F.over V_i) at this object. Slice restriction is presheaf composition, so this is precisely id_{F(W)} = 0 and proves IsZero F(W). The empty-family case has no such arrows and requires no choice.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-abelian-etale-sheaves"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
-    "place": "Proof, first sentence “The assertion is local on $X$” and last sentence “Both assertions are local on the site”"
+    "place": "Proof, first and last sentences asserting locality on X and on the site"
    }
   },
   {
-   "text": "Step 2 holds for every object $U$ of $X_{\\mathrm{et}}$, so every section module of $F$ is $0$. Morphisms of sheaves of modules are natural transformations with linear components [def-weil-sheaf-of-modules-category], so for every sheaf of modules $G$ there is exactly one morphism $G\\to F$ and exactly one morphism $F\\to G$ (each component has source or target $0$). Hence $F$ is a zero object, the zero sheaf on $X_{\\mathrm{et}}$.",
+   "text": "Apply Presheaf.IsSheaf.hom_ext to the identity and zero endomorphisms of F(U), using the pulled-back covering sieve. Each restricted pair has zero target F(W) by the previous step, so the pair is equal. Hence id_{F(U)} = 0 for every U. Natural transformation extensionality and Sheaf.hom_ext give id_F = 0, which implies IsZero F by IsZero.iff_id_eq_zero. All uses are generic categorical sheaf facts, valid for ModuleCat coefficients.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-abelian-etale-sheaves"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
-    "place": "Proof, first sentence “The assertion is local on $X$” and last sentence “Both assertions are local on the site”"
+    "place": "Proof, first and last sentences asserting locality on X and on the site"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-23",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-ctf.md",
-  "place": "Proof, first sentence “The assertion is local on $X$” and last sentence “Both assertions are local on the site” (the locality of vanishing, written out from the sheaf axiom)"
+  "place": "Proof, first and last sentences; the existing locality proof expressed using covering sieves and the identity-equals-zero criterion"
  },
  "status": "split",
  "created": {
@@ -143,5 +141,26 @@
   "result": "pass",
   "note": "Shape ok (one commit; module, lean-only node record verbatim with the file, report with both required sections). Each clause matches the node: arbitrary I : Type v (empty/infinite allowed), étale φ i, hcover = Mathlib ofArrows_mem_smallEtaleTopology_iff joint surjectivity, F : Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) per the recorded def-weil-pbc-etale-sheaves encoding, literal slice restriction Sheaf.over (Etale.mk (φ i)), IsZero local and global; no added hypotheses. Edge cases (I empty/X empty, identity cover, zero ring) covered; universes bound. No definitions, sorry-only proof; docstrings cite the verified blueprint place and carry the 3 proof steps; proof-dep imports match the recorded modules. nt_compile.py --json clean (5.7 s, no errors or warnings). No findings requiring repair."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261023T102640-L-2942363",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

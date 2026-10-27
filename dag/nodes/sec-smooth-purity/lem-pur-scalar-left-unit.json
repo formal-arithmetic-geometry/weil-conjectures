@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-scalar-left-unit",
+ "kind": "lemma",
+ "title": "Left unitality of normalized scalar extension",
+ "statement": "Let \\(A,B\\) be commutative rings, \\(\\varphi:A\\to B\\) a unital ring map, and \\(T\\) a scheme [def-pc-scheme]. In the ordinary unbounded derived categories of small-etale module sheaves [def-weil-pbc-derived-categories], let \\(Q:D(T_{\\mathrm{et}},A)\\to D(T_{\\mathrm{et}},B)\\), \\(\\delta:Q(K\\otimes L)\\simeq QK\\otimes QL\\), and \\(e:Q1_A\\simeq1_B\\) be the normalized scalar extension, tensor, and unit comparisons [def-pur-exceptional-coefficient-normalizations]. Then for every \\(K\\), \\(\\delta_{1_A,K};(e\\mathbin{\\triangleright}QK);\\lambda_{QK}=Q(\\lambda_K)\\). Semicolon denotes composition in application order. The predicate SiteScalarLeftUnitLaw is this equation with the site's monoidal parameters shared.",
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; agent extraction of normalized tensor and unit coherence used in more-etale.tex Tag 0GL6"
+ },
+ "proof": [
+  {
+   "text": "Apply leftUnit_on_representative to the normalized ordinary sheaf scalar functor and its derived adjoint representative. Its tensor and unit squares are the defining normalizations, and the representative at a K-flat complex is invertible. Both paths are natural transformations. Localization extensionality and a flat K-flat resolution of each complex extend the equality from these representatives to all derived objects. The chosen site tensor comparison equals the raw uniquely normalized one.",
+   "uses": [
+    "lem-pur-scalar-left-unit-transport",
+    "def-pur-exceptional-coefficient-normalizations",
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-scalar-left-unit-transport",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-sfb-exact-right-adjoint-kflat-representative"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; normalized representative descent and elementary categorical unit calculations; generic representative component and K-flat invertibility APIs keep the concrete site specialization shared"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible natural transformation between strong monoidal functors that preserves tensor products also preserves the monoidal unit",
+   "results": "Functor.Monoidal.ofLaxMonoidal; CoreMonoidal.ofLaxMonoidal; Monoidal.transport_ε; NatTrans.IsMonoidal.of_cartesianMonoidalCategory; Iso.instIsMonoidalInvFunctor; Monoidal.εIso; Monoidal.ofBifunctor; Monoidal.coreMonoidalTransport",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized scalar comparisons or the required tensor-only implication; ordinary monoidal unit laws are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom in Mathlib.CategoryTheory.Monoidal.Functor",
+   "date": "2026-10-25",
+   "verdict": "Underlying ordinary unit law; representative transport and site descent remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|IsMonoidal.of|unit.*tensor",
+   "results": "ModuleCat.Monoidal.Adjunction ordinary left_unitality; Monoidal.Category tensor/unit constructions; no scalar derived representative or pullback normalization square. Local source search also found ScalarRightUnitTransport and ExceptionalCoefficientUnitCoherence; their proved right-unit arguments guide the left-unit proof.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the new normalized left-unit or scalar/pullback tensor statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-25",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; scalar binary tensor comparison and coefficient-unit normalization",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalCoefficientLeftUnitCoherence",
+  "file": "lean/Sheaf/Paper/ExceptionalCoefficientLeftUnitCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso_left_unit",
+  "statement": "theorem tensorIso_left_unit\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    (T : Scheme.{u}) :\n    SiteScalarLeftUnitLaw (ModuleCat.{u + 1} A) (ModuleCat.{u + 1} B) T\n      (scalarExtension φ T) (tensorIso φ T) (unitIso φ T)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.SiteScalarLeftUnitLaw",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso_left_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

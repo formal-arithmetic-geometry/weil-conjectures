@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-relative-fp-module-fibre-product",
+ "kind": "statement",
+ "title": "Relative finite presentation of patched modules over a flat ambient algebra",
+ "statement": "Let $A'\\twoheadrightarrow A$ be a surjective homomorphism of commutative rings, let $B\\to A$ be a ring homomorphism, and put $I=\\ker(A'\\to A)$ and $R=B\\times_A A'=\\{(b,a'):b|_A=a'|_A\\}$ with coordinatewise ring operations. Tensor products are those of [def-weil-pbc-module-tensor-product]. Let $S$ be a commutative $R$-algebra flat over $R$, and put $S_B=S\\otimes_R B$, $S_{A'}=S\\otimes_R A'$ and $S_A=S\\otimes_R A$. Let $N$ be an $S_B$-module finitely presented over $S_B$ and flat over $B$, and let $M'$ be an $S_{A'}$-module finitely presented over $S_{A'}$ and flat over $A'$ [def-sc-finitely-presented-module, def-weil-pbc-flat-ring-map]. Given an $S_A$-linear isomorphism $\\varphi:N\\otimes_B A\\xrightarrow{\\sim}M'\\otimes_{A'} A$, put $M=M'\\otimes_{A'} A$ and form $P=N\\times_M M'$ using the maps induced by $\\varphi$ and scalar extension. Then $P$, with its coordinatewise $S$-action, is finitely presented over $S$. No finite-presentation hypothesis on $R\\to S$, no finite-generation hypothesis on $I$, and no nilpotence or Noetherian assumption is imposed; zero rings and modules are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, case of a flat ambient algebra (factorization S = S in hypothesis (3)), in Situation 08KH (situation-module-over-fibre-product)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the second assertion of [lem-sfb-flat-module-fibre-product-patching] to the flat $R$-module $S$. It identifies $S$ with $S_B\\times_{S_A}S_{A'}$ by $s\\mapsto(s\\otimes1,s\\otimes1)$. This map preserves multiplication and the unit, so the identification is one of rings. Tensor the exact sequence $I\\to A'\\to A\\to0$ with $S$ over $R$: [lem-weil-pbc-tensor-right-exact] gives $S_{A'}\\twoheadrightarrow S_A$ with kernel $IS_{A'}$. Thus the new square is another surjective ring pullback, without any finiteness assumption on $I$.",
+   "uses": [
+    "lem-sfb-flat-module-fibre-product-patching",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "For any $S_B$-module $U$, the tensor universal property [def-weil-pbc-module-tensor-product] gives $U\\otimes_{S_B}S_A\\cong U\\otimes_B A$: the maps are $u\\otimes(s\\otimes a)\\mapsto su\\otimes a$ and $u\\otimes a\\mapsto u\\otimes(1\\otimes a)$. They respect the balancing relations and are inverse on pure tensors. The same formulas with $A'$ in place of $B$ give $V\\otimes_{S_{A'}}S_A\\cong V\\otimes_{A'}A$ for any $S_{A'}$-module $V$. They commute with module maps, since both compositions send a pure tensor to the image of its module factor times the same scalar. By [lem-weil-pbc-tensor-over-quotient-ring], the latter tensor for $V=M'$ is $M'/(IS_{A'})M'$. Consequently the given $\\varphi$ makes $(N,M')$ a module-patching datum over the square in step 1, with the same fibre product $P$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "A finite presentation gives finite generators by taking the images of the standard basis in its last finite free term [def-sc-finitely-presented-module]. Therefore $N$ is finite over $S_B$ and $M'$ is finite over $S_{A'}$. Apply [lem-sfb-finite-module-fibre-product-patching] to the ring square of step 1 and the datum of step 2. It follows that $P$ is finite over $S$. Choose generators $p_1,\\ldots,p_n$ and let $q:S^n\\twoheadrightarrow P$ send $(s_i)$ to $\\sum_i s_ip_i$; set $K=\\ker q$.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-sfb-finite-module-fibre-product-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "The canonical component maps identify $P\\otimes_S S_B$ with $N$ and $P\\otimes_S S_{A'}$ with $M'$ by [lem-sfb-patched-module-base-change], applied to the same surjective square. Tensor $q$ with each component ring. Right exactness [lem-weil-pbc-tensor-right-exact] makes the resulting maps $q_B:S_B^n\\twoheadrightarrow N$ and $q_{A'}:S_{A'}^n\\twoheadrightarrow M'$ surjective. Here the free-module tensor identifications send $e_i\\otimes t$ to $te_i$, with inverse $(t_i)\\mapsto\\sum_i e_i\\otimes t_i$, by the tensor universal property [def-weil-pbc-module-tensor-product]. Write $K_B=\\ker q_B$, $K_{A'}=\\ker q_{A'}$, and let $q_A:S_A^n\\to M$ be the common scalar extension of these maps, using $\\varphi$; put $K_A=\\ker q_A$. The two maps agree because each sends the $i$th basis vector to the common image of the two components of $p_i$.",
+   "uses": [
+    "lem-sfb-patched-module-base-change",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "The sources $S_B^n$ and $S_{A'}^n$ are finitely generated by their standard bases; the targets $N$ and $M'$ are finitely presented by hypothesis. Hence [lem-trf-finite-presentation-surjective-module-kernel], applied separately over $S_B$ and $S_{A'}$ to the surjections in step 4, says that $K_B$ is finite over $S_B$ and $K_{A'}$ is finite over $S_{A'}$.",
+   "uses": [
+    "lem-trf-finite-presentation-surjective-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "Regard $0\\to K_B\\to S_B^n\\to N\\to0$ as a short exact sequence of $B$-modules. Since its quotient $N$ is flat over $B$, [lem-weil-pbc-flat-quotient-tensor-injective] says that tensoring it with $A$ over $B$ stays short exact. Under the explicit tensor identifications of steps 2 and 4 this sequence is $0\\to K_B\\otimes_B A\\to S_A^n\\xrightarrow{q_A}M\\to0$. Thus $K_B\\otimes_B A\\cong K_A$ by the map induced by the inclusion of $K_B$. The same argument over $A'$, using the flatness of the quotient $M'$ over $A'$, gives $K_{A'}\\otimes_{A'} A\\cong K_A$. These are $S_A$-linear isomorphisms: multiplication by $s\\otimes a$ acts by multiplication by $s$ on the original kernel and by $a$ on the tensor factor, and the inclusions commute with that action. The balancing formulas of step 2 identify these with $K_B\\otimes_{S_B}S_A\\cong K_A\\cong K_{A'}\\otimes_{S_{A'}}S_A$. Hence the kernels form a compatible module-patching datum over step 1's square.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "The ring identification of step 1 gives the coordinatewise identification $S^n=S_B^n\\times_{S_A^n}S_{A'}^n$. Its restriction identifies $K$ with $K_B\\times_{K_A}K_{A'}$: if $x\\in K$, its two components are killed by $q_B,q_{A'}$ and have the same reduction. Conversely, a pair in $K_B\\times_{K_A}K_{A'}$ has equal images in $S_A^n$, since both embeddings of $K_A$ are the kernel inclusion in $S_A^n$. It therefore comes from a unique $x\\in S^n$. Both components of $q(x)$ vanish; since $P=N\\times_M M'$ is literally a set of pairs, $q(x)=0$. These two restrictions are inverse and $S$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-module-fibre-product-patching] again over the square of step 1, now to the kernel datum of step 6. The component kernels are finite by step 5, so $K_B\\times_{K_A}K_{A'}$, and hence $K$, is finite over $S$. Choose $m$ generators of $K$. Their inclusions in $S^n$ define a map $S^m\\to S^n$ with image exactly $K$. Therefore $S^m\\to S^n\\xrightarrow{q}P\\to0$ is exact, which is a finite presentation by [def-sc-finitely-presented-module].",
+   "uses": [
+    "lem-sfb-finite-module-fibre-product-patching",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-module-fibre-product-patching",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-sc-finitely-presented-module",
+  "lem-sfb-finite-module-fibre-product-patching",
+  "lem-sfb-patched-module-base-change",
+  "lem-trf-finite-presentation-surjective-module-kernel",
+  "lem-weil-pbc-flat-quotient-tensor-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 08KP, lemma-relative-finitely-presented-module-over-fibre-product, proof after “Assume B′ → D′ is flat”."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented relatively flat modules glue over a Milnor square when the ambient algebra is flat over the base ring",
+   "results": "{\"t\": \"2026-10-23T11:56:14Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely presented relatively flat modules glue over a Milnor square when the ambient algebra is flat over the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.trans\", \"Module.Flat.tfae_equational_criterion\", \"Module.FaithfullyFlat\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat\"], \"digest\": \"59e438504853a33a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite presentation of a fiber product of modules over a flat algebra over a pullback ring",
+   "results": "{\"t\": \"2026-10-23T11:57:46Z\", \"tool\": \"leanfinder\", \"query\": \"Relative finite presentation of a fiber product of modules over a flat algebra over a pullback ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FinitePresentation.of_isBaseChange\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"instFinitePresentationTensorProduct\", \"Algebra.FinitePresentation.baseChange\", \"Module.FinitePresentation.trans\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Algebra.FinitePresentation.trans\"], \"digest\": \"0f8276b836b04cc8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T11:56:10Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"Module.FinitePresentation.isBaseChange_map\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"583cdbed6395ec38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fibre.product|fiber.product|Milnor",
+   "results": "{\"t\": \"2026-10-23T11:52:14Z\", \"tool\": \"grep\", \"query\": \"pullback|fibre.product|fiber.product|Milnor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\"], \"digest\": \"ea511259604b7217\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of patched modules over a fiber product of rings with relative flatness",
+   "results": "{\"t\": \"2026-10-23T11:56:10Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation of patched modules over a fiber product of rings with relative flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation\", \"Module.Presentation.finitePresentation\", \"Module.finitePresentation_of_finite\", \"Module.finitePresentation_iff_exists_presentation\", \"SheafOfModules.isFinitePresentation\", \"Module.finitePresentation_of_projective\", \"RingHom.Flat\", \"SheafOfModules.Presentation.IsFinite.mk\"], \"digest\": \"b75498b0343dbaad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of modules glued over a surjective ring pullback with relatively flat modules and a flat ambient algebra",
+   "results": "{\"t\": \"2026-10-23T13:37:50Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation of modules glued over a surjective ring pullback with relatively flat modules and a flat ambient algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.trans\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"instFinitePresentationTensorProduct\", \"Module.finitePresentation_of_surjective\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"Algebra.FinitePresentation.of_span_eq_top_target_aux\"], \"digest\": \"dce63c8b795e1c1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor base change, transitivity of finite presentation, local freeness, or preservation of finite limits by flat tensor functors; none states finite presentation of relatively flat modules patched over a surjective ring pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T13:37:50Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"Module.FinitePresentation.isBaseChange_map\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"583cdbed6395ec38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor base change, transitivity of finite presentation, local freeness, or preservation of finite limits by flat tensor functors; none states finite presentation of relatively flat modules patched over a surjective ring pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fibre.product|fiber.product|Milnor",
+   "results": "{\"t\": \"2026-10-23T13:37:50Z\", \"tool\": \"grep\", \"query\": \"pullback|fibre.product|fiber.product|Milnor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/TwoSidedIdeal/Operations.lean\", \"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\"], \"digest\": \"28489f7a7b4b9f67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor base change, transitivity of finite presentation, local freeness, or preservation of finite limits by flat tensor functors; none states finite presentation of relatively flat modules patched over a surjective ring pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented relatively flat modules patch over a fiber product of commutative rings",
+   "results": "{\"t\": \"2026-10-23T13:37:51Z\", \"tool\": \"leansearch\", \"query\": \"Finitely presented relatively flat modules patch over a fiber product of commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"Module.free_of_flat_of_isLocalRing\", \"Module.Flat.iff_flat_tensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.mk\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.of_isLocalizedModule\", \"Module.Flat.of_forall_exists_factorization\"], \"digest\": \"d9534aed727c543e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor base change, transitivity of finite presentation, local freeness, or preservation of finite limits by flat tensor functors; none states finite presentation of relatively flat modules patched over a surjective ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fiber product of modules over a Milnor square is finitely presented over a flat algebra if its two restrictions are finitely presented and flat over the base rings",
+   "results": "{\"t\": \"2026-10-23T13:37:52Z\", \"tool\": \"leanfinder\", \"query\": \"A fiber product of modules over a Milnor square is finitely presented over a flat algebra if its two restrictions are finitely presented and flat over the base rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.trans\", \"instFinitePresentationTensorProduct\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"FinitePresentation.of_isBaseChange\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"Algebra.FinitePresentation.baseChange\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"1742679c9a946545\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor base change, transitivity of finite presentation, local freeness, or preservation of finite limits by flat tensor functors; none states finite presentation of relatively flat modules patched over a surjective ring pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibre-product-algebra-flat-presentation",
+  "date": "2026-10-23",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion. Module input: 08KP (lemma-relative-finitely-presented-module-over-fibre-product, case of a flat ambient algebra (factorization S = S in hypothesis (3))).",
+   "via": [
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-fp-module-fibre-product",
+  "worker": "stage1",
+  "summary": "Followed the flat-ambient-algebra case of Stacks 08KP. Reused existing ring-pullback module patching and Mathlib leaves; wrote out the tensor identifications and the inverse on kernels. All finiteness and flatness hypotheses checked separately, including zero cases. No new nodes and no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion. Module input: 08KP (lemma-relative-finitely-presented-module-over-fibre-product, case of a flat ambient algebra (factorization S = S in hypothesis (3))). This split realizes the flat-case module input by finite generators and their compatible finite relation modules."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-4e9afe5b2",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-4e9afe5b2 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the statement of every cited node against Stacks more-algebra 08KP (lemma-relative-finitely-presented-module-over-fibre-product), whole proof including 'Assume B'→D' is flat'. The item statement is unchanged from live/base, which is still unsplit, so no supersession. The item is 08KP with D''=D'=S flat over R, and the case checks I=0, A=0, zero modules and S=0 all hold. Step 1: 0D2I with L=S gives the ring iso S≅S_B×_{S_A}S_{A'}, and right exactness gives the kernel IS_{A'}. Step 2: S_A-linear patching datum via base-change identities plus tensor-over-quotient. Step 3: 0D2H gives P finite. Step 4: 07RU plus right exactness give q_B and q_A', and q_A is well defined on the basis. Step 5: 0519(5) gives K_B and K_A' finite. Step 6: 00HL, using N flat over B and M' flat over A', gives K_B⊗A≅K_A≅K_A'⊗A. Step 7: elementary kernel inverse, using the coordinatewise S-action. Step 8: 0D2H again, then S^m→S^n→P→0. Every non-elementary fact cites a node that states it. No new nodes, no cycle (closure 12), no tool_uses, no SGA source. Batch-5: lem-trf-finite-presentation-surjective-module-kernel is a generic Mathlib leaf (Module.FinitePresentation.fg_ker) with no proof deps and no part in the trace-formula or Poincaré-duality proofs, so I accept it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeFinitePresentationFibreProduct",
+  "declaration": "Module.finitePresentation_relative_fibreProduct",
+  "file": "lean/Sheaf/RingTheory/RelativeFinitePresentationFibreProduct.lean",
+  "statement": "theorem finitePresentation_relative_fibreProduct {A : Type uA} {A' : Type uA'} {B : Type uB} [CommRing A] [CommRing A'] [CommRing B] (f : B →+* A) (g : A' →+* A) (hg : Function.Surjective g) [Algebra (f.pullback g) B] [Algebra (f.pullback g) A'] [Algebra (f.pullback g) A] (hB : algebraMap (f.pullback g) B = f.pullbackFst g) (hA' : algebraMap (f.pullback g) A' = f.pullbackSnd g) (hA : algebraMap (f.pullback g) A = f.comp (f.pullbackFst g)) (S : Type uS) [CommRing S] [Algebra (f.pullback g) S] [Module.Flat (f.pullback g) S] [Algebra B (S ⊗[f.pullback g] B)] [Algebra A' (S ⊗[f.pullback g] A')] (hSB : ∀ b : B, algebraMap B (S ⊗[f.pullback g] B) b = 1 ⊗ₜ b) (hSA' : ∀ a' : A', algebraMap A' (S ⊗[f.pullback g] A') a' = 1 ⊗ₜ a') [Algebra (S ⊗[f.pullback g] B) (S ⊗[f.pullback g] A)] [Algebra (S ⊗[f.pullback g] A') (S ⊗[f.pullback g] A)] (hBA : ∀ (s : S) (b : B), algebraMap (S ⊗[f.pullback g] B) (S ⊗[f.pullback g] A) (s ⊗ₜ b) = s ⊗ₜ f b) (hA'A : ∀ (s : S) (a' : A'), algebraMap (S ⊗[f.pullback g] A') (S ⊗[f.pullback g] A) (s ⊗ₜ a') = s ⊗ₜ g a') [IsScalarTower S (S ⊗[f.pullback g] B) (S ⊗[f.pullback g] A)] [IsScalarTower S (S ⊗[f.pullback g] A') (S ⊗[f.pullback g] A)] (N : Type uN) [AddCommGroup N] [Module (S ⊗[f.pullback g] B) N] [Module B N] [IsScalarTower B (S ⊗[f.pullback g] B) N] [Module S N] [IsScalarTower S (S ⊗[f.pullback g] B) N] [Module.FinitePresentation (S ⊗[f.pullback g] B) N] [Module.Flat B N] (M' : Type uM) [AddCommGroup M'] [Module (S ⊗[f.pullback g] A') M'] [Module A' M'] [IsScalarTower A' (S ⊗[f.pullback g] A') M'] [Module S M'] [IsScalarTower S (S ⊗[f.pullback g] A') M'] [Module.FinitePresentation (S ⊗[f.pullback g] A') M'] [Module.Flat A' M'] (φ : ((S ⊗[f.pullback g] A) ⊗[S ⊗[f.pullback g] B] N) ≃ₗ[S ⊗[f.pullback g] A] ((S ⊗[f.pullback g] A) ⊗[S ⊗[f.pullback g] A'] M')) : Module.FinitePresentation S (LinearMap.ker (((φ.toLinearMap.restrictScalars S) ∘ₗ (LinearMap.restrictScalars S (TensorProduct.mk (S ⊗[f.pullback g] B) (S ⊗[f.pullback g] A) N 1))) ∘ₗ LinearMap.fst S N M' - (LinearMap.restrictScalars S (TensorProduct.mk (S ⊗[f.pullback g] A') (S ⊗[f.pullback g] A) M' 1)) ∘ₗ LinearMap.snd S N M'))",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The fibre product is the kernel of the difference of the two canonical S-linear maps. The overlap extensions are written as S_A ⊗_{S_B} N and S_A ⊗_{S_A′} M′, canonically the node’s N ⊗_B A and M′ ⊗_{A′} A, with the isomorphism transported accordingly. Algebra-map equalities and scalar towers fix the canonical actions, and impose no finiteness or nonzero assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e87f978f9",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Read the node, all 3 stmt_dep records, Stacks 08KP and 08KH, Mathlib RingHom.pullback, and the module and report. Every clause matches: pullback = f.pullback g; algebra and tower data pinned to canonical maps by equations and always realizable; FP over S_B and S_A′ with flatness over B and A′; φ over S_A ⊗_{S_B} N ≅ S_A ⊗_{S_A′} M′, in canonical bijection with N⊗_B A ≅ M′⊗_{A′} A; conclusion FP_S of the kernel of the difference map = N ×_M M′ with coordinatewise S-action. No extra assumptions; universes separate; edge cases (A=0, S=0, g bijective, zero modules, I=0) covered. Statement verbatim; no definitions; proof is sorry; docstrings carry the source place, blueprint tag and 8 steps; plain imports are the proof-dep Mathlib modules. The live node has no lean record, so no supersession. No compile, since no file was changed. No fixes."
+ }
+}

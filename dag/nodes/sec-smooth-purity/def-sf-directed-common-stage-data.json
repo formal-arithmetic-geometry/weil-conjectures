@@ -1,0 +1,180 @@
+{
+ "id": "def-sf-directed-common-stage-data",
+ "kind": "definition",
+ "title": "General directed stage pairs and their supplied exact and shift data",
+ "statement": "Let $I$ be a nonempty directed preorder (a set in an arbitrary universe), and let $C_i$ be categories, with their object and morphism universes fixed independently of that of $I$. A stage system $S$ consists of functors $T_{ij}:C_i\\to C_j$ for $i\\le j$ and natural isomorphisms $a_{ijk}:T_{jk}T_{ij}\\xrightarrow{\\sim}T_{ik}$ satisfying\n$$a_{ikl}\\circ T_{kl}(a_{ijk})=a_{ijl}\\circ(a_{jkl})_{T_{ij}}\\quad(i\\le j\\le k\\le l).$$\nThere is no specified unitor and no requirement $T_{ii}=1$. Write $P=S.\\mathrm{PairCategory}$ for its pair category. Its objects are $(i,x)$ with $x\\in C_i$. A representative from $(i,x)$ to $(j,y)$ is $(m,u)$ with $m\\ge i,j$ and $u:T_{im}x\\to T_{jm}y$. Transport to $n\\ge m$ is\n$$u_n=a_{jmn,y}\\circ T_{mn}(u)\\circ a_{imn,x}^{-1}.$$\nMorphisms are representatives modulo equality after transport to a common upper stage; composition is represented by composition at a common stage. The identity at $(i,x)$ is $[i,1_{T_{ii}x}]$. The inclusion $j_i:C_i\\to P$ sends $x$ to $(i,x)$ and $f$ to $[i,T_{ii}(f)]$. Write $\\theta_{ij}:j_jT_{ij}\\xrightarrow{\\sim}j_i$ for the canonical identification whose component at $x$ is represented at $j$ by $a_{ijj,x}$, and write $\\delta_{(i,x),m}=\\theta_{im,x}^{-1}:(i,x)\\xrightarrow{\\sim}j_m(T_{im}x)$.\n\nAn exact-stage pair datum means such $S$, together with pretriangulated structures on the $C_i$ [def-weil-triangulated-category], and fixed preadditive, zero-object and integer-shift structures on $P$, all integer-shift functors being additive. Each $j_i$ is supplied as additive and with natural shift comparisons $\\beta_{i,n,x}:j_i(x[n])\\xrightarrow{\\sim}(j_ix)[n]$. Each $T_{ij}$ is supplied with comparisons $\\sigma_{ij,n,x}:T_{ij}(x[n])\\xrightarrow{\\sim}(T_{ij}x)[n]$ and is exact. Both families of comparisons respect the shift-zero and shift-add isomorphisms. The given $\\theta_{ij}$ commute with these comparisons: for every integer $n$,\n$$\\beta_{i,n,x}\\circ\\theta_{ij,x[n]}=\\theta_{ij,x}[n]\\circ\\beta_{j,n,T_{ij}x}\\circ j_j(\\sigma_{ij,n,x}).$$\nNo pretriangulation of $P$ is part of these data. For a triangle $U=(x\\xrightarrow f y\\xrightarrow g z\\xrightarrow h x[1])$ of $C_i$, define\n$$j_i^\\triangle U=(j_ix\\xrightarrow{j_if}j_iy\\xrightarrow{j_ig}j_iz\\xrightarrow{\\beta_{i,1,x}\\circ j_ih}(j_ix)[1]).$$\nTriangles and triangle isomorphisms mean [def-weil-pbc-triangles-with-shift]. Define the common-stage predicate\n$$D_S(V)\\ \\Longleftrightarrow\\ \\exists i\\in I\\ \\exists U\\in\\operatorname{Triangle}(C_i),\\quad U\\text{ is distinguished and }V\\cong j_i^\\triangle U.$$",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Current normalized pair-model construction, unnormalized variant read from lean/WeilConjectures/CategoryTheory/StageSystem/Basic.lean, StageSystem (lines 69-80), PairCategory and representatives (lines 153-190), inclusions and transIso (lines 388-449); exact/shift hypotheses and common-stage predicate read from lean/Sheaf/CategoryTheory/StageSystemVerdier.lean lines 24-56 and StageSystemCommonStageCones.lean lines 44-53. This is a definition of the existing data, not a new existence assertion."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A stage system consists of transition functors with coherent associator isomorphisms and its pair category has quotient morphisms at common upper stages",
+   "results": "CategoryTheory.SmallObject.SuccStruct; CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans; CategoryTheory.SmallObject.iterationFunctor; CategoryTheory.SmallObject.succStruct; CategoryTheory.SmallObject.SuccStruct.Iteration.F; CategoryTheory.OrthogonalReflection.succStruct; CategoryTheory.ComposableArrows.mkOfObjOfMapSucc_exists; CategoryTheory.Functor.OfSequence.map. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "CategoryTheory.Pseudofunctor; CategoryTheory.Pseudofunctor.id; CategoryTheory.Pseudofunctor.instInhabited; CategoryTheory.Pseudofunctor.toLax; CategoryTheory.Pseudofunctor.toOplax; CategoryTheory.Pseudofunctor.toPrelaxFunctor; CategoryTheory.Pseudofunctor.hasCoeToLax; CategoryTheory.Pseudofunctor.hasCoeToOplax. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure StageSystem|PairCategory|structure Pseudofunctor",
+   "results": "Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "directed pseudofunctor pair category common stage morphism quotient",
+   "results": "CategoryTheory.Quotient.functor; CategoryTheory.MorphismProperty.quotient; CategoryTheory.Quotient.noConfusion; CategoryTheory.Quotient.instSubsingletonHom; CategoryTheory.Quotient.noConfusionType; CategoryTheory.Quotient.mk; CategoryTheory.Quotient.essSurj_functor; CategoryTheory.Quotient.sound. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonunital coherent diagrams of categories over a directed preorder with Hom defined by common upper bound representatives",
+   "results": "LightDiagram'; LightDiagram; CategoryTheory.isCofilteredOrEmpty_of_directed_ge; CategoryTheory.isCofiltered_of_directed_ge_nonempty; CategoryTheory.IsCofiltered; CategoryTheory.IsFiltered; CategoryTheory.isFilteredOrEmpty_of_directed_le; CategoryTheory.isFiltered_of_directed_le_nonempty. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StageSystem\"",
+   "results": "No hits. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]air[Cc]ategory|[Ss]tage[Ss]ystem|[Dd]irected.*[Pp]seudo",
+   "results": "No hits. Pseudofunctor has identity comparison data not required here; Quotient keeps a fixed object category and does not construct common-stage Hom. Neither gives this pair datum.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed stage system of categories with coherent transition functors and a pair category formed from common-stage morphism representatives, together with exact shift and distinguished triangle data",
+   "results": "{\"t\": \"2026-10-27T05:49:03Z\", \"tool\": \"leanfinder\", \"query\": \"A directed stage system of categories with coherent transition functors and a pair category formed from common-stage morphism representatives, together with exact shift and distinguished triangle data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.SpectralObject\", \"CategoryTheory.Triangulated.SpectralObject.instCategory\", \"CategoryTheory.Triangulated.TStructure\", \"CategoryTheory.Pretriangulated.termDistTriang_\", \"CategoryTheory.IsTriangulated.mk'\", \"CategoryTheory.Pretriangulated.Triangle\", \"CategoryTheory.Pretriangulated\", \"CategoryTheory.IsTriangulated\"], \"digest\": \"f1f8e210a926057d\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: spectral objects, t-structures and filtered categories do not supply this stage-system quotient and its exact/shift data"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem, CategoryTheory.StageSystem.PairCategory, Pretriangulated, CommShift",
+   "results": "{\"t\": \"2026-10-27T05:49:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.StageSystem, CategoryTheory.StageSystem.PairCategory, Pretriangulated, CommShift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.StageSystem'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: Loogle rejected the project-specific identifier; the valid Pseudofunctor query below follows"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|CommonStageDistinguished|CommShift",
+   "results": "{\"t\": \"2026-10-27T05:49:03Z\", \"tool\": \"grep\", \"query\": \"StageSystem|PairCategory|CommonStageDistinguished|CommShift\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: subdirectory was mistakenly prefixed by Mathlib/; this zero-hit output is not evidence of absence; corrected searches with sub=CategoryTheory follow"
+  },
+  {
+   "tool": "leansearch",
+   "query": "directed category stage system pair category common stage morphisms exact shifts distinguished triangles",
+   "results": "{\"t\": \"2026-10-27T05:49:04Z\", \"tool\": \"leansearch\", \"query\": \"directed category stage system pair category common stage morphisms exact shifts distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.distinguishedTriangles\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"CategoryTheory.Pretriangulated.distinguished_cocone_triangle\", \"CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism\", \"CategoryTheory.IsTriangulated.mk\", \"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"CategoryTheory.Triangulated.TStructure.mk\"], \"digest\": \"076b6ff838564618\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: hits concern distinguished triangles and images under one functor; none defines the directed stage system, its unnormalized quotient pair category and the supplied exact/shift datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonunital coherent directed diagram of categories, with morphisms identified after passing to a common upper stage",
+   "results": "{\"t\": \"2026-10-27T05:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"A nonunital coherent directed diagram of categories, with morphisms identified after passing to a common upper stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightDiagram'\", \"LightDiagram\", \"CategoryTheory.IsCofiltered\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram\", \"CategoryTheory.IsFiltered\", \"CategoryTheory.IsFilteredOrEmpty\", \"CategoryTheory.Functor.IsLocallyDirected\", \"CategoryTheory.IsCofilteredOrEmpty\"], \"digest\": \"ff725b2457e0d848\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: spectral objects, t-structures and filtered categories do not supply this stage-system quotient and its exact/shift data"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "{\"t\": \"2026-10-27T05:52:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pseudofunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor\", \"CategoryTheory.Pseudofunctor.id\", \"CategoryTheory.Pseudofunctor.instInhabited\", \"CategoryTheory.Pseudofunctor.toLax\", \"CategoryTheory.Pseudofunctor.toOplax\", \"CategoryTheory.Pseudofunctor.toPrelaxFunctor\", \"CategoryTheory.Pseudofunctor.hasCoeToLax\", \"CategoryTheory.Pseudofunctor.hasCoeToOplax\"], \"digest\": \"8d266b5208aa1e7f\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: Pseudofunctor.lean:58-80 requires a mapId isomorphism to the identity, which is not part of this datum and need not exist"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|CommonStageDistinguished",
+   "results": "{\"t\": \"2026-10-27T05:52:43Z\", \"tool\": \"grep\", \"query\": \"StageSystem|PairCategory|CommonStageDistinguished\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: no StageSystem, PairCategory or CommonStageDistinguished in Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Pseudofunctor|class CommShift|def mapTriangle|class IsTriangulated",
+   "results": "{\"t\": \"2026-10-27T05:52:43Z\", \"tool\": \"grep\", \"query\": \"structure Pseudofunctor|class CommShift|def mapTriangle|class IsTriangulated\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\"], \"digest\": \"241f8de0d2d50eb8\"}",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole datum: sources read in Shift/CommShift.lean:147-154,346-348, Triangulated/Functor.lean:42-45 and Bicategory/Functor/Pseudofunctor.lean:58-80; these define individual notions or require unitors, not this general nonunital pair datum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-common-stage-verdier-exists-unique",
+  "date": "2026-10-27",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Owning coefficient-category construction: composition and distinguished triangles are represented over a common finite extension; generic commonStage_verdier_existsUnique, its finite-diagram and eventual-equation argument.",
+   "via": [
+    "lem-route-common-stage-verdier-exists-unique"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "def-sf-directed-common-stage-data",
+  "worker": "stage1",
+  "summary": "Definition-only split with the statement unchanged. Checked StageSystem.Basic, StageSystemVerdier and StageSystemCommonStageCones against every datum and formula; the two existing Mathlib definition leaves supply pretriangulated categories/exactness and triangle isomorphisms. No new nodes or proof obligations are introduced: the additive and shift structures and their compatibility are supplied data, while a pretriangulation on the pair category is expressly excluded. Kept the independent universes, nonunital reflexive transitions and canonical associator representatives. Repeated valid Mathlib searches through msearch.py and recorded their receipts separately from inherited search evidence; inspected and rejected the normalized blueprint model as an exact duplicate. No full project attachment exists.",
+  "blueprint": "The nearest imported ancestor def-weil-algebraically-closed-coefficients, sentence “Composition and distinguished triangles are represented over one common finite extension”, as made generic by the parent lem-route-common-stage-verdier-exists-unique. The current det-def-sfb-filtered-two-colimit-model statement/proof supplies normalized pair-model context only; its identity normalization is not imposed on the live StageSystem datum.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-18cd11187",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-18cd11187 (reviewer sub-agent of L); spot-checked: Definition-only split. Only status, split_report and mathlib_searches changed against the live node; the statement and stmt_deps are unchanged, and there are no new nodes. Every formula was checked against StageSystem/Basic.lean, which is sorry-free and imports only Mathlib: the cocycle (lines 69-80), tr (92-97), Rep/Rel (153-190), identity, ι, isoToStage and transIso (388-449; θ_ij,x = [j, a_ijj,x]). The exact/shift data match StageSystemVerdier.lean lines 24-35, except that the node deliberately omits IsTriangulated (C i). Its citer lem-route-common-stage-verdier-exists-unique adds that hypothesis explicitly, and lem-sf-directed-distinguished-diagram-lifting assumes no TR4. D_S matches CommonStageDistinguished (StageSystemCommonStageCones.lean:49-52). The θ equation was expanded from NatTrans.CommShift (Mathlib Shift/CommShift.lean:346-348) with the composite shift comparison and agrees. The triangle image uses mapTriangle (Triangulated/Functor.lean:42-45). Both stmt_deps (def-weil-triangulated-category, def-weil-pbc-triangles-with-shift) are Mathlib leaves that define what is used. The well-definedness facts the definition presupposes (equivalence relation, composition, category laws, ι functor, θ natural) are Lean-closed in Basic.lean, so no statement node is missing. Duplicate search: def-weil-pbc-finite-stage-pair-category and prop-weil-pbc-common-stage-calculus are the normalized FinExt special case; common-stage-cones, descent-interfaces and inverse-scalar-coherence only use the notion; no duplicate. Small cases checked: singleton with T=Id; singleton with the zero transition (valid, P trivial, ι not faithful, so leaving out the unitor is correct); repeated indices; empty I excluded. The Mathlib searches cover all three kinds, and the inconclusive ones are marked as such. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactStagePairData",
+  "declaration": "CategoryTheory.StageSystem.ExactStagePairData",
+  "file": "lean/Sheaf/CategoryTheory/ExactStagePairData.lean",
+  "statement": "structure ExactStagePairData {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I] (C : I → Type u) [∀ i : I, Category.{v} (C i)]",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Packages precisely the supplied structures and comparisons using the existing unnormalized StageSystem and PairCategory. StageSystem.CommonStageDistinguished (Sheaf.CategoryTheory.StageSystemCommonStageCones) and Functor.mapTriangle are reused unchanged for D_S and triangle images; no second definition of either construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5628c3d3",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only lean record changed vs live; statement verbatim = file. Structure ExactStagePairData matches node clause by clause: independent universes w/u/v, Preorder+IsDirectedOrder+Nonempty, existing nonunital StageSystem/PairCategory/ι/transIso (θ rep a_ijj checked in Basic transIso_hom_app_eq), stage Pretriangulated without TR4, pair preadditive/zero/additive shifts without pretriangulation, ι additive+CommShift, T CommShift+IsTriangulated, NatTrans.CommShift of transIso expands to the node's θ equation. j_i^△ = mapTriangle and D_S = CommonStageDistinguished reused verbatim. Edge cases (empty I excluded, singleton/zero transition, all n∈ℤ) ok. Not hollow, no sorry, docstrings with source and blueprint tag, report sections present, no duplicate. Advisory: CommonStageDistinguished has no owning node; lem-route uses equivalent variable block."
+ }
+}

@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-polynomial-presentation-homology",
+ "kind": "statement",
+ "title": "Representable contractibility and homology of polynomial presentations",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal V$ as in [def-weil-size-convention]. Let $A\\to B$ be a homomorphism of $\\mathcal U$-small commutative rings. Let $\\mathcal D_{B/A}$ have objects all $\\mathcal U$-small polynomial $A$-algebras $T$ with an $A$-algebra map $\\epsilon_T:T\\to B$, and arrows the $A$-algebra maps commuting with these maps to $B$; no surjectivity is required of $\\epsilon_T$. This is a $\\mathcal V$-small category. Let $Q_\\bullet\\to\\operatorname{const}B$ be an augmented simplicial $\\mathcal U$-small $A$-algebra [def-weil-pbc-simplicial-object], with each $Q_n$ polynomial, whose underlying simplicial-set augmentation is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration]. For any $T=A[E]\\to B$ in $\\mathcal D_{B/A}$ there is an isomorphism of simplicial sets\n$$\\operatorname{Hom}_{\\mathcal D_{B/A}}(T,Q_\\bullet)\\cong\\prod_{e\\in E}\\bigl(UQ_\\bullet\\times_{\\operatorname{const}(UB)}\\{\\epsilon_T(e)\\}\\bigr),$$\nwhere the right hand side consists of the generator images with their prescribed augmentations. Its map to a singleton is a trivial Kan fibration, and it is homotopy equivalent to that singleton. This holds also for empty and infinite $E$. For every $\\mathcal V$-small commutative ring $R$ and covariant functor $F:\\mathcal D_{B/A}\\to\\operatorname{Mod}_R$, form the derived colimit $\\mathbf H(\\mathcal D_{B/A},F)=\\mathbf L\\operatorname{colim}_{\\mathcal D_{B/A}}F$ in $D(R)$ [def-weil-abstract-derived-category], using projective resolutions in the abelian functor category. There is a canonical isomorphism\n$$a_Q^F:s(F(Q_\\bullet))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D_{B/A},F),$$\nwhere $s(F(Q))^{-n}=F(Q_n)$, with alternating-face differential and zero positive terms. It is natural in $F$ and in augmented simplicial algebra maps $h:Q\\to Q'$ between objects satisfying these hypotheses: $a_{Q'}^F\\,s(F(h))=a_Q^F$. The comparison is the canonical one with the bar model of the derived colimit, whose degree $-n$ is $\\bigoplus_{T_0\\to\\cdots\\to T_n}F(T_0)$ and whose faces delete vertices, applying $F$ to the first arrow for the first face.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PS (lemma-identify-pi-shriek), including the generator-fibre argument; Tag 08QI (remark-resolution); sites-cohomology.tex Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); containing-universe formulation of the category."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-abstract-derived-category",
+  "def-trf-polynomial-presentation-category",
+  "def-trf-derived-colimit-bar-system",
+  "def-trf-simplicial-derived-colimit-computation-data"
+ ],
+ "proof": [
+  {
+   "text": "Work in $\\mathcal V$. The set of $\\mathcal U$-small ring structures, algebra structures and augmentations is $\\mathcal V$-small: each underlying set is an element of $\\mathcal U$, and each structure is a finite tuple of functions between sets in $\\mathcal U$. The polynomial objects form a subset, and the arrows form subsets of the corresponding function sets. Thus $\\mathcal D_{B/A}$ is small in the working universe [def-weil-size-convention]. Augmentation compatibility says every operator $Q_n\\to Q_m$ commutes with the maps to $B$, so $Q$ is a simplicial object of this category [def-weil-pbc-simplicial-object].",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PS (lemma-identify-pi-shriek), polynomial presentation category, in the containing universe"
+   }
+  },
+  {
+   "text": "For $T=A[E]\\to B$, send $f:T\\to Q_n$ to $(f(e))_{e\\in E}$. Its inverse evaluates a polynomial at the chosen generator images; every polynomial has finite support, so this works for arbitrary $E$. The condition $\\epsilon_Qf=\\epsilon_T$ holds exactly when $\\epsilon_Q(f(e))=\\epsilon_T(e)$ for all $e$, since both maps are $A$-algebra maps. Postcomposing $f$ with any simplicial operator acts componentwise on these images. Hence these inverse bijections give the stated simplicial isomorphism. When $E=\\varnothing$ there is exactly one $A$-algebra map and the product is a singleton.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PS (lemma-identify-pi-shriek), first half of proof: generator images and the product of fibres"
+   }
+  },
+  {
+   "text": "Write $X_b=UQ_\\bullet\\times_{\\operatorname{const}(UB)}\\{b\\}$. A boundary map into $X_b$ gives a boundary in $UQ$ lying over the constant simplex $b$. The lifting property of $UQ\\to\\operatorname{const}(UB)$ supplies a simplex over $b$, hence a filler in $X_b$. Its degree-zero surjectivity supplies a vertex over $b$. Thus $X_b\\to *$ satisfies [def-weil-pbc-trivial-kan-fibration]. For a boundary in $\\prod_eX_{\\epsilon_T(e)}$, choose one such filler in each coordinate; their tuple is a simplicial filler, since all operators are componentwise. Likewise choose a vertex in every coordinate. Choice applies to the set $E$, including infinite $E$; the empty product has its unique filler and vertex. This proves that the displayed Hom simplicial set maps to $*$ by a trivial Kan fibration.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08NN (lemma-trivial-kan-base-change), 08NR (lemma-product-trivial-kan), with their boundary-lifting arguments written out"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-homotopy-equivalence] to the map of step 3. Its statement supplies a section and a homotopy from the identity to section followed by projection. The other composite is the identity of $*$. Consequently $\\operatorname{Hom}_{\\mathcal D_{B/A}}(T,Q_\\bullet)$ is homotopy equivalent to a singleton for every $T$.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NS (lemma-trivial-kan-homotopy), as used in Tag 08PS"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-derived-colimit-computation] with working universe $\\mathcal V$, $\\mathcal D=\\mathcal D_{B/A}$, the given $R,F$, and the simplicial object of step 1. Smallness is step 1 and its representable contractibility hypothesis is step 4. Its projective-resolution definition of $\\mathbf H$ is exactly the one here. The resulting canonical isomorphism is $a_Q^F$; its source has precisely the stated alternating-face differential and vanishing positive terms, and its target has the stated first-vertex bar model. The same cited statement gives naturality in $F$.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), with C=D^op; cotangent.tex Tag 08PS"
+   }
+  },
+  {
+   "text": "For an augmented simplicial algebra map $h:Q\\to Q'$, its components and augmentation compatibility give a simplicial morphism inside $\\mathcal D_{B/A}$. Repeat steps 2--4 for $Q'$. In the compatibility formula of [lem-trf-simplicial-derived-colimit-computation] take $u=\\mathrm{id}$, $\\rho=\\mathrm{id}_R$, $F'=F$, $\\theta=\\mathrm{id}_F$, and $k=h$. The displayed bar generator formula then sends every string and coefficient to itself, so $\\mathbf H(u,\\theta)=\\mathrm{id}$. Its equality is exactly $a_{Q'}^F\\,s(F(h))=a_Q^F$, with no choice of homotopy inverse entering the definition of either comparison.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), canonical comparisons; cotangent.tex Tag 08QI (remark-resolution)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-trf-simplicial-derived-colimit-computation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PS (lemma-identify-pi-shriek), generator fibres and representable contractibility; Tag 08QI (remark-resolution); sites-cohomology.tex Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), via the existing general derived-colimit comparison node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "polynomial presentation category representable simplicial Hom contractible computes derived colimit of any module valued functor",
+   "results": "8 hits; top=['CommRingCat.preservesFilteredColimits_coyoneda', 'preservesFilteredColimits_coyoneda', 'CommRingCat.preservesColimit_coyoneda_of_finitePresentation', 'Rep.standardComplex.x_projective', 'ModuleCat.projectiveResolution', 'preservesColimit_coyoneda_of_finitePresentation', 'classifyingSpaceUniversalCover.compForgetAugmented.toModule', 'PresheafOfModules.freeYoneda']; note=; digest=92da7072ec630f72. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit preservation, pointwise Kan-extension existence and free Yoneda objects do not give representable contractibility or this derived-colimit computation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"colimit\"",
+   "results": "2 hits; top=['CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit', \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\"]; note=; digest=4a83341319b4707d. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit preservation, pointwise Kan-extension existence and free Yoneda objects do not give representable contractibility or this derived-colimit computation."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*colimit|colimit.*derived|polynomial.*simplicial",
+   "results": "1 hits; top=['Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean']; note=; digest=4ec8d5b5a7d69875. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit preservation, pointwise Kan-extension existence and free Yoneda objects do not give representable contractibility or this derived-colimit computation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived colimit computed by simplicial resolution whose representable Hom simplicial sets are contractible",
+   "results": "8 hits; top=['CategoryTheory.SimplicialObject.instHasColimits', 'CategoryTheory.CosimplicialObject.instHasColimits', 'SSet.hasColimits', 'CategoryTheory.SimplicialObject.instHasColimitsOfShape', 'CategoryTheory.CosimplicialObject.Truncated.instHasColimits', 'CategoryTheory.CosimplicialObject.instHasColimitsOfShape', 'SSet.stdSimplex.isoOfRepresentableBy', 'CategoryTheory.SimplicialCategory.sHom']; note=; digest=2498a0b723d0b449. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: filtered-colimit preservation, pointwise Kan-extension existence and free Yoneda objects do not give representable contractibility or this derived-colimit computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived colimit of a module valued functor computed by a simplicial object with contractible representable Hom simplicial sets",
+   "results": "8 hits: PresheafOfModules.isColimitColimitCocone, classifyingSpaceUniversalCover.compForgetAugmented.toModule, PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork, ModuleCat.HasColimit.isColimitColimitCocone, AlgebraicTopology.DoldKan.Γ₀.obj, ModuleCat.HasColimit.colimitCocone, PresheafOfModules.colimitPresheafOfModules_obj, AlgebraicTopology.DoldKan.Γ₀; digest=471774b73a880efd",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern ordinary colimits, presentations by free Yoneda modules, Dold--Kan, simplicial augmentations, homology structures, or pointwise derived Kan extensions; none states the polynomial representable contractibility and derived-colimit comparison of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*colimit|colimit.*derived|polynomial.*simplicial",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; digest=4ec8d5b5a7d69875",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern ordinary colimits, presentations by free Yoneda modules, Dold--Kan, simplicial augmentations, homology structures, or pointwise derived Kan extensions; none states the polynomial representable contractibility and derived-colimit comparison of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of a small category computed by an augmented polynomial simplicial resolution",
+   "results": "8 hits: CategoryTheory.SimplicialObject.augment_hom_app, AugmentedSimplexCategory, CategoryTheory.CategoryWithHomology.mk, CategoryTheory.CategoryWithHomology.hasHomology, CategoryTheory.CategoryWithHomology.recOn, CategoryTheory.InjectiveResolution.hasHomology, CategoryTheory.CategoryWithHomology, CategoryTheory.CategoryWithHomology.rec; digest=9fa5609126783171",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern ordinary colimits, presentations by free Yoneda modules, Dold--Kan, simplicial augmentations, homology structures, or pointwise derived Kan extensions; none states the polynomial representable contractibility and derived-colimit comparison of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"colimit\"",
+   "results": "2 hits: CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'; digest=4a83341319b4707d",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern ordinary colimits, presentations by free Yoneda modules, Dold--Kan, simplicial augmentations, homology structures, or pointwise derived Kan extensions; none states the polynomial representable contractibility and derived-colimit comparison of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-resolution-coherence",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Re-split: small polynomial presentation category, generator fibres and derived homology (old Steps 4–6).",
+   "via": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-polynomial-presentation-homology",
+  "worker": "Q68",
+  "summary": "Kept the statement unchanged. Wrote the generator-image isomorphism and arbitrary-product boundary lifting explicitly, reused the existing trivial-Kan homotopy-equivalence node and the general simplicial derived-colimit comparison (including its naturality and bar convention). No new nodes. Checked universe bounds, empty and infinite generator sets, every cited statement, sources, and absence of dependency cycles. Repeated and recorded Mathlib searches for the item.",
+  "blueprint": "Realizes the inherited blueprint.from.place supporting input for lem-trf-local-term-locality proof (1)--(2): cotangent resolution coherence, old steps 4--6, namely the small polynomial presentation category, generator fibres and derived homology. The current blueprint ancestor contains the contracting-local-term argument, not a separate statement of this algebraic tool; its inherited intermediate route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial-set theorem supplies the actual section and homotopy from boundary lifting; the trace-formula unit has no replacement, and the source 08PS explicitly invokes 08NS."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-03c813f71",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-03c813f71 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are identical to the version created by Q18's re-split (checked against the Q18 run snapshot), so nothing is weakened. The delivery adds six steps and no new nodes. Source check: the steps follow the proof of Stacks 08PS (cotangent.tex l.229-278) exactly. Step 2 is the generator-image isomorphism Hom(A[E],Q_n) = prod_e fibre, which holds for empty and infinite E because polynomials have finite support. Step 3 writes out the boundary-lifting arguments of 08NN and 08NR (Stacks: 'immediate' and 'Omitted'). Step 4 cites the actual statement of lem-weil-pbc-trivial-kan-homotopy-equivalence (section g plus homotopy h; Stacks 08NS), a generic sk-prop-h2 tool I accept, used as 08PS uses it. Step 5 applies lem-trf-simplicial-derived-colimit-computation (08Q9, same unit, reviewed pass Q63); every hypothesis is checked, including non-surjective epsilon_T. Step 6 specializes that node's reindexing formula with u=id, rho=id, theta=id, k=h, plus 'preserves identities', which gives a_{Q'} s(F(h)) = a_Q. Edge cases tested: E empty, E infinite, B=0, F=0, and Q=const B with B polynomial. A DFS from both cited theorem nodes does not reach the item, so there is no cycle. No duplicate of 08PS/08NN/08NR exists. Maintainer note: the 'more generally' clause of the older lem-trf-cotangent-sheaf-model overlaps the item's conclusion in sheaf language; this is not a fault of this delivery. Route pivot: def-weil-pbc-trivial-kan-fibration is the classical combinatorial boundary-lifting notion (a Mathlib SSet rlp leaf) used on the Stacks 08QI/08PS polynomial-resolution route. It is not the dropped infinity/dg machinery, it was already a stmt_dep of the unchanged statement, and it is justified at step 3 and as the step-4 input. The vocabulary 'simplicial set' refers to the classical Hom simplicial sets and is acceptable. No SGA is used. The worker wrote tool_uses themselves (C8), but its content is correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialPresentationHomology",
+  "declaration": "Algebra.PolynomialHomology.computationData_exists",
+  "declarations": [
+   "Algebra.PolynomialHomology.Category",
+   "Algebra.PolynomialHomology.diagram",
+   "Algebra.PolynomialHomology.rings",
+   "Algebra.PolynomialHomology.augmentation",
+   "Algebra.PolynomialHomology.point",
+   "Algebra.PolynomialHomology.fibre",
+   "Algebra.PolynomialHomology.fibreProjection",
+   "Algebra.PolynomialHomology.homSet",
+   "Algebra.PolynomialHomology.elementEvaluation",
+   "Algebra.PolynomialHomology.fibreProduct",
+   "Algebra.PolynomialHomology.coordinateProjection",
+   "Algebra.PolynomialHomology.toSingleton",
+   "Algebra.PolynomialHomology.ComputationPackage",
+   "Algebra.PolynomialHomology.ComputationData",
+   "Algebra.PolynomialHomology.computationData_exists",
+   "Algebra.PolynomialHomology.evaluationDerived",
+   "Algebra.PolynomialHomology.colimitDerived",
+   "Algebra.PolynomialHomology.resolutionDerivedMap",
+   "Algebra.PolynomialHomology.colimitDiagram"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialPresentationHomology.lean",
+  "statement": "theorem computationData_exists {A B : CommRingCat.{u}} (f : A ⟶ B) (bar : CategoryColimitBarSystem.{max (u + 1) v}) (C : Computation bar) : Nonempty (ComputationData f bar C)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The concrete computation record specializes an abstract six-field record to avoid expensive generated checks. The colimit functor has the same object and map formulas with its derivedColimit object formula explicit. See coord/changes/polynomial-computation-record.md and coord/changes/polynomial-colimit-functor.md. The mathematical statement and six-step proof route are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f83c642c",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Item statement verified clause by clause against the node and Stacks 08PS/08QI/08Q9: polynomial presentation category = AsSmall.{v} of CotangentSites.Presentations (all Type u variable sets, no surjectivity); generator-coordinate iso pinned by its projections; trivial Kan map to singleton; IsResolution homotopy-equivalence form; comparison natural iso fixed by normalization to Computation.comparison (ResolutionRoof-pinned, first-vertex bar); naturalityResolution a_{Q'} s(F(h)) = a_Q in the right direction. Edge cases: empty/infinite E, B=0, F=0, non-surjective augmentations; universes u and max (u+1) v; lean.statement verbatim. New def nodes use existing:true ownership (accepted). F1 (H4/H13): the delivery recreates the deleted module Sheaf.AlgebraicTopology.TrivialKanFibration with a fresh def SSet.Enhanced.trivialKanFibration, a duplicate of the node's Mathlib match SSet.modelCategoryQuillen.I.rlp, which every live user takes, including the step-4 theorem exists_section_homotopy_equivalence. Fix: fixes/TrivialKanFibration.lean keeps the same name and module as abbrev := SSet.modelCategoryQuillen.I.rlp p; the item module is unchanged. nt_compile --json of the fix plus the unchanged item: 1.1 s and 23.2 s, rc 0, clean. Advisory: CotangentLowerShriek.Site uses AsSmall.{0} vs the item's AsSmall.{v}."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e79a6",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T005424-L-3486128",
+  "kind": "interface",
+  "note": "independent cc review: delivered PolynomialPresentationHomology/PolynomialSquareBarNaturality/node/change records vs clone b6a8e636f92: ComputationData six fields identical modulo exact trivialKanFibration alias expansion; colimitDiagram same obj/map; forced adaptation confirmed by original consumer failing (Unknown constant SSet.Enhanced.trivialKanFibration at 120/220/221); item + adapted consumer + CotangentBarTermIdentifications compiled together; axioms propext/Classical.choice/Quot.sound"
+ }
+}

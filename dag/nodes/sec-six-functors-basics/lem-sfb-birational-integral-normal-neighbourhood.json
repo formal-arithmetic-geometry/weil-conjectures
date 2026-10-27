@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-birational-integral-normal-neighbourhood",
+ "kind": "statement",
+ "title": "Integral neighbourhood at a normal point of a reduced birational source",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $f:Y\\to X$ be a morphism of schemes with $Y$ reduced [def-pc-scheme, def-pc-reduced-scheme], and let $x\\in X$ have normal local ring $R=\\mathcal O_{X,x}$ [def-weil-pbc-normal-ring]. Assume $f$ is birational. Birational means that $f$ maps the generic points of the irreducible components of $Y$ bijectively onto those of $X$ and induces isomorphisms $\\mathcal O_{X,f(\\eta)}\\to\\mathcal O_{Y,\\eta}$ at all these points [def-sc-generic-point, def-weil-locally-ringed-space-morphism]. There is an affine open neighbourhood $V=\\operatorname{Spec}A$ of $x$ such that the germ map $A\\to R$ is injective and both $V$ and $f^{-1}(V)$ are integral schemes [def-pc-integral-scheme, def-weil-pbc-module-stalk]. The restricted morphism is birational in the same sense.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, first paragraph of proof (4); Properties Tag 0BX3 (lemma-ring-affine-open-injective-local-ring)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-noetherian-injective-germ-neighbourhood], choose an affine open $x\\in V=\\operatorname{Spec}A$ with injective germ map $A\\to R$. The normal local ring $R$ is a domain: in [def-weil-pbc-normal-ring], take its maximal ideal $\\mathfrak m$; $R_{\\mathfrak m}$ is a normal domain, and $R\\to R_{\\mathfrak m}$ is an isomorphism since every denominator outside $\\mathfrak m$ is already a unit. Injectivity then makes $A$ a domain (if $ab=0$, one image is zero, hence one factor is zero; $1\\ne0$ follows from the unital injection). By clause (2) of [lem-weil-pbc-spec-domain-stalks-function-field], $V$ is integral.",
+   "uses": [
+    "lem-sfb-noetherian-injective-germ-neighbourhood",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), first paragraph; expanded component argument."
+   }
+  },
+  {
+   "text": "By [def-pc-integral-scheme], $V$ is nonempty and irreducible. Apply [lem-sc-irreducible-components-cover] to $x\\in X$. A component $C$ meeting $V$ restricts to a component $C\\cap V$ of $V$, and these restrictions are injective in $C$, by [lem-sc-components-open-injection]. Since the only component of the irreducible space $V$ is $V$, precisely one component $C_0$ of $X$ meets $V$. By [lem-sc-scheme-sober], it has a unique generic point $\\xi$. This point belongs to $V$: any open meeting $\\overline{\\{\\xi\\}}$ contains $\\xi$, directly from the definition of closure. Thus $\\overline{\\{\\xi\\}}\\cap V=C_0\\cap V=V$, so $\\xi$ is the generic point of $V$. Birationality of $f$ supplies exactly one component-generic point $\\eta_0$ of $Y$ with $f(\\eta_0)=\\xi$. In particular $W=f^{-1}(V)$ is nonempty.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-components-open-injection",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), first paragraph; expanded component argument."
+   }
+  },
+  {
+   "text": "For any $y\\in W$, [lem-sc-irreducible-components-cover] puts $y$ in a component $D$ of $Y$, and [lem-sc-scheme-sober] gives its generic point $\\eta_D$. Since $W$ is open and $y\\in\\overline{\\{\\eta_D\\}}$, the closure argument of Step 2 gives $\\eta_D\\in W$. Birationality says $f(\\eta_D)$ is a component-generic point of $X$. Its component meets $V$, hence is $C_0$; sobriety identifies $f(\\eta_D)=\\xi$. The injectivity on component-generic points in the hypothesis gives $\\eta_D=\\eta_0$. Consequently every $y\\in W$ lies in $\\overline{\\{\\eta_0\\}}\\cap W$, which is exactly the closure of $\\{\\eta_0\\}$ in $W$. Hence $W$ is irreducible: if $W=F\\cup G$ with $F,G$ closed, the one containing $\\eta_0$ contains its closure and equals $W$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), first paragraph; expanded component argument."
+   }
+  },
+  {
+   "text": "The open subscheme $W$ is reduced by [def-pc-reduced-scheme] and [def-weil-open-immersion]: at $y\\in W$ its local ring is $\\mathcal O_{Y,y}$. This stalk identification follows directly from germs [def-weil-pbc-module-stalk], since the neighbourhoods contained in the open $W$ are cofinal among all neighbourhoods of $y$. By [def-pc-integral-scheme], the nonempty reduced irreducible scheme $W$ is integral. The same open-stalk identification for $V\\subseteq X$ identifies the restricted stalk map at $\\eta_0$ with $\\mathcal O_{X,\\xi}\\to\\mathcal O_{Y,\\eta_0}$, which is an isomorphism by the birational hypothesis. The two integral schemes have the unique generic points $\\eta_0$ and $\\xi$, and the restriction maps the former to the latter. This proves its birationality and all the asserted conclusions.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-weil-open-immersion",
+    "def-weil-pbc-module-stalk",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), first paragraph; expanded component argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-injective-germ-neighbourhood",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-pc-integral-scheme",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-components-open-injection",
+  "lem-sc-scheme-sober",
+  "def-pc-reduced-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (4), first paragraph; expanded component argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal",
+   "results": "{\"t\": \"2026-10-22T07:39:23Z\", \"tool\": \"leanfinder\", \"query\": \"A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\"], \"digest\": \"d0c667887573f8e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exists_germ_injective supplies only the affine injective germ map; affine_isIntegral_iff and irreducible-plus-reduced supply only integrality criteria, not integrality of the whole inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsReduced\"",
+   "results": "{\"t\": \"2026-10-22T07:39:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsIntegral\\\", \\\"AlgebraicGeometry.IsReduced\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exists_germ_injective supplies only the affine injective germ map; affine_isIntegral_iff and irreducible-plus-reduced supply only integrality criteria, not integrality of the whole inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ii]ntegral|[Ii]ntegral.*[Nn]hds|injective.*germ",
+   "results": "{\"t\": \"2026-10-22T07:39:24Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ii]ntegral|[Ii]ntegral.*[Nn]hds|injective.*germ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\"], \"digest\": \"0262d3b83dfa03a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exists_germ_injective supplies only the affine injective germ map; affine_isIntegral_iff and irreducible-plus-reduced supply only integrality criteria, not integrality of the whole inverse image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal",
+   "results": "{\"t\": \"2026-10-22T07:39:24Z\", \"tool\": \"leansearch\", \"query\": \"A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\"], \"digest\": \"ce2bc593198ec483\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exists_germ_injective supplies only the affine injective germ map; affine_isIntegral_iff and irreducible-plus-reduced supply only integrality criteria, not integrality of the whole inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced scheme birational over a locally Noetherian scheme, a point with domain stalk has an integral affine neighbourhood whose entire inverse image is integral",
+   "results": "{\"t\": \"2026-10-22T07:42:15Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced scheme birational over a locally Noetherian scheme, a point with domain stalk has an integral affine neighbourhood whose entire inverse image is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\"], \"digest\": \"41682abc1bcda63f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exists_germ_injective supplies only the affine injective germ map; affine_isIntegral_iff and irreducible-plus-reduced supply only integrality criteria, not integrality of the whole inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal",
+   "results": "{\"t\": \"2026-10-23T09:30:41Z\", \"tool\": \"leanfinder\", \"query\": \"A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\"], \"digest\": \"d0c667887573f8e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization and integral-morphism results do not assert the inverse-image conclusion for a birational map. exists_germ_injective and the integral-scheme criteria supply separate ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsReduced",
+   "results": "{\"t\": \"2026-10-23T09:31:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\"], \"digest\": \"1ce57cea5eedb337\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization and integral-morphism results do not assert the inverse-image conclusion for a birational map. exists_germ_injective and the integral-scheme criteria supply separate ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ii]ntegral|[Ii]ntegral.*[Nn]hds|injective.*germ",
+   "results": "{\"t\": \"2026-10-23T09:31:25Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ii]ntegral|[Ii]ntegral.*[Nn]hds|injective.*germ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\"], \"digest\": \"e1fca6a3b0426fbe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization and integral-morphism results do not assert the inverse-image conclusion for a birational map. exists_germ_injective and the integral-scheme criteria supply separate ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal",
+   "results": "{\"t\": \"2026-10-23T09:31:26Z\", \"tool\": \"leansearch\", \"query\": \"A birational morphism with reduced source has integral inverse image over an integral affine neighbourhood of a point whose local ring is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\"], \"digest\": \"ce2bc593198ec483\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization and integral-morphism results do not assert the inverse-image conclusion for a birational map. exists_germ_injective and the integral-scheme criteria supply separate ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced scheme birational over a locally Noetherian scheme, a point with domain stalk has an integral affine neighbourhood whose entire inverse image is integral",
+   "results": "{\"t\": \"2026-10-23T09:32:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced scheme birational over a locally Noetherian scheme, a point with domain stalk has an integral affine neighbourhood whose entire inverse image is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\"], \"digest\": \"41682abc1bcda63f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization and integral-morphism results do not assert the inverse-image conclusion for a birational map. exists_germ_injective and the integral-scheme criteria supply separate ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Old step 2: normality at the maximal ideal, injective affine germ map, and bijection of component generic points after restriction.",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-birational-integral-normal-neighbourhood",
+  "worker": "stage1",
+  "summary": "Expanded the integral reduction in Stacks 0BFP using the existing injective-germ Mathlib leaf, domain spectrum criterion, component restriction, component coverage and sobriety. No new nodes or statement changes. All clauses, including the restricted birational morphism, are proved.",
+  "blueprint": "The inherited chain has no blueprint ancestor (blueprint_refs.py ancestor returns None). The inherited from.place points to det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction, then the codimension-one modification prerequisite. Steps 1--4 realize the integral affine reduction in old Step 2 of lem-sfb-normal-modification-codimension-one. The latest blueprint direct-image proof was read; its current proof (3) gives compactification and coefficient preservation, not a replacement statement of this local prerequisite."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-9cffd546b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-9cffd546b (reviewer sub-agent of L); spot-checked: This is a first split with 0 new nodes. The item is unsplit in live and side-live with a byte-equal statement, and there is no repair note for it. The item matches the first paragraph of Stacks 0BFP proof (4) (varieties.tex 3300ff). The neighbourhood comes from Properties 0BX3 case (2) (properties.tex 5384), and the Mathlib leaf lem-sfb-noetherian-injective-germ-neighbourhood has the same hypotheses. The statement drops properness and quasi-compactness, which this reduction does not need, and the parent lem-sfb-normal-modification-codimension-one step 2 uses exactly its conclusion. Step 1 is correct: R is local and normal, so R≅R_m is a domain; the injective germ map then makes A a domain, and spec-domain clause (2) makes V integral. Step 2 is correct: the cover lemma gives a component through x, components-open-injection plus the irreducibility of V gives a unique C_0 meeting V, sobriety gives its generic point ξ, ξ lies in V by the closure argument, and the bijection gives a unique η_0 over ξ. Step 3 is correct: every y in W is a specialization of some η_D that lies in W, f(η_D) is in V so it is ξ, and injectivity gives η_D=η_0, so W is irreducible; no openness of f is used. Step 4 is genuinely elementary: an open subscheme of a reduced scheme is reduced through the same stalks, W is integral, and the restricted stalk map is the original isomorphism. Hypothesis tests: dropping normality, reducedness or injectivity each breaks the statement, and the non-surjective and reducible-X cases are handled. All cited statements were read. There is no cycle and no SGA. The DAG search found only the lem-per- siblings of the parent and of the germ leaf, so there is no duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalIntegralNormalNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_integral_affine_neighbourhood_of_birational_normal_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalIntegralNormalNeighbourhood.lean",
+  "statement": "theorem exists_integral_affine_neighbourhood_of_birational_normal_stalk {X Y : Scheme.{u}} [IsLocallyNoetherian X] (f : Y ⟶ X) [IsReduced Y] (x : X) (hnormal : ∀ (p : Ideal (X.presheaf.stalk x)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ η : Y, η ∈ genericPoints Y → IsIso (f.stalkMap η)) : ∃ (V : X.Opens) (hxV : x ∈ V), IsAffineOpen V ∧ Function.Injective (X.presheaf.germ V x hxV) ∧ IsIntegral V.toScheme ∧ IsIntegral (f ⁻¹ᵁ V).toScheme ∧ Set.BijOn (f ∣_ V) (genericPoints (f ⁻¹ᵁ V).toScheme) (genericPoints V.toScheme) ∧ ∀ η : (f ⁻¹ᵁ V).toScheme, η ∈ genericPoints (f ⁻¹ᵁ V).toScheme → IsIso ((f ∣_ V).stalkMap η)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfa36f3d9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Lean theorem exists_integral_affine_neighbourhood_of_birational_normal_stalk matches node clause-by-clause: IsLocallyNoetherian X, IsReduced Y, exact inline normal-ring predicate on X.presheaf.stalk x, BijOn on Mathlib genericPoints + IsIso stalkMap at generic points; conclusion ∃ affine V ∋ x with injective germ, IsIntegral V and full preimage f⁻¹ᵁV, restricted f∣_V birational in the same two-clause sense. Statement true (Stacks 0BFP (4) first paragraph, 0BX3); edge cases (empty X/Y, non-surjective f, infinitely many components) fine; single universe, no extra assumptions. Node diff vs side-live: only lean field added; lean.statement verbatim; dep records unchanged; proof sorry; docstrings carry source, blueprint id and 4 steps; no duplicate found. Advisory H11: Second reading section is author self-check under dispatcher policy, Worker report gives full clause match. No compile needed (no file changed)."
+ }
+}

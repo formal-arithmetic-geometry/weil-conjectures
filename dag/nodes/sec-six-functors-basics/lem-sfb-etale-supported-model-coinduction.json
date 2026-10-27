@@ -1,0 +1,501 @@
+{
+ "id": "lem-sfb-etale-supported-model-coinduction",
+ "kind": "statement",
+ "title": "Etale supported-model coinduction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E$, discrete in the finite case and with its induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Use its condensed ring $P\\mapsto C(P,\\Lambda)$ of all continuous functions, its pullback $\\Lambda_T=p_T^*\\Lambda$ to each scheme $T$, the ordinary uncompleted categories $D(\\operatorname{Mod}_{\\Lambda_T})$ and actual module-derived direct images [sk-def-sfb-module-derived-pushpull]. All sites, products and indexing categories are small in the fixed universes [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. A support chain over $T$ is a finite chain $W\\to\\cdots\\to T$ of quasi-compact open immersions or closed immersions with quasi-compact open complements. Its ordinary extension $J$ composes $a_!$ on open arrows and $a_*$ on closed arrows, with identity for the empty chain [def-weil-open-immersion, def-weil-closed-immersion, def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. A finite scalar local model $L$ is pro-étale locally $\\Lambda_W\\otimes_{\\underline\\Lambda}\\underline P$ for a finitely presented scalar $\\Lambda$-module $P$ (a cokernel of a map between finite free modules), with discrete constant underlines [sk-def-sfb-constructible]. Let $\\mathcal G_T$ be the supported model hull [def-sfb-supported-model-hull]: the smallest full replete class containing all $(JL)[0]$, zero, shifts, distinguished-triangle extensions, retracts, all small derived products, and $Q(\\varinjlim_i C_i)$ for strict small filtered diagrams of complexes with a common termwise lower bound and $Q(C_i)$ in the class. Here $Q$ localizes complexes at quasi-isomorphisms and colimits are termwise. All schemes below are quasi-compact and quasi-separated (qcqs) [def-pc-scheme, def-weil-pbc-scheme-conventions].\n\nFor every qcqs étale morphism $e:S\\to T$ [def-weil-etale-morphism], every support chain over $S$, and every finite scalar local model $L$ on its source, one has\n$$Re_*((JL)[0])\\in\\mathcal G_T.$$\nNo properness, Noetherianity, finite-type base or cohomological-dimension hypothesis is imposed. Empty schemes, zero coefficients, torsion scalar modules, varying ranks and the empty chain are included. The direct image is ordinary direct image, including its boundary contributions for open immersions.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent-formulated etale subproblem below the supported generator obligation. Lemma 5.3(1) gives bounded continuity, not this generation assertion. Bhatt-Scholze Lemma 5.4.3 and Proposition 6.8.4 give finite-coefficient comparison and lattice input; exact full-generality hull reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-constructible",
+  "def-sfb-supported-model-hull",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First work with any finite discrete coefficient ring $B$ killed by a power of $\\ell$. Every finite scalar-model constructible module $H$ on a qcqs scheme $V$ has $H[0]\\in\\mathcal G_V(B)$. Indeed refine its finite constructible partition by the finite qcqs open-closed tree. Each leaf restriction is a finite scalar local model (pull back its witnessing cover and scalar presentation). At an internal vertex use $0\\to j_!j^*H\\to H\\to i_*i^*H\\to0$. Apply the exact extensions on the path to the root. Induction on this finite tree, using the short-exact-sequence triangles, expresses $H[0]$ as finite triangle extensions of the supported leaf generators. This uses only the given finite partition, not Noetherian induction.",
+   "uses": [
+    "lem-fix-constructible-open-closed-refinement",
+    "new-unbounded-pullback-finite-constant-local-model",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.1, open-closed sequence; finite partition refinement as in HRS Definition 3.3"
+   }
+  },
+  {
+   "text": "Every classical $B$-module sheaf $\\nu_V^*F$ on a qcqs $V$, in degree zero, lies in $\\mathcal G_V(B)$. The module constructible-approximation theorem writes $F$ as a small filtered colimit of constructible étale $B$-modules. The fixed-module constructibility comparison and the finite discrete encoding identify their inverse images with finite scalar-model constructible internal modules. These belong to the hull by step 1. The exact inverse image $\\nu_V^*$ is a left adjoint, so preserves that colimit. Apply the hull's strict filtered-colimit clause to their degree-zero complexes, all with lower bound zero. No finite presentation is asserted for $F$ itself.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "sk-thm-pe-classical-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SA, lemma-torsion-colimit-constructible (3); finite-coefficient pro-etale comparison BS Section 5.1"
+   }
+  },
+  {
+   "text": "More generally every bounded-below classical internal $B$-complex lies in the hull. Its cohomology sheaves are classical, since the comparison inverse image is exact, and step 2 puts each of them in the hull. The truncation triangle and the concentrated-single theorem, by induction on a finite cohomological interval, put every bounded good truncation in the hull. Choose a representative $C$ zero below a common integer $a$ (replace its degree $a$ by the cokernel of the preceding differential). The good upper truncations $\\tau_{\\leq m}C$ form a strict direct sequence by their canonical inclusions. In each fixed degree the sequence is eventually $C$, so its termwise colimit is $C$. All these truncations are zero below $a$. The specified strict bounded-below colimit closure therefore puts $QC$ in the hull. This argument does not require an unbounded colimit-continuity theorem for direct image.",
+   "uses": [
+    "sk-thm-pe-classical-sheaves",
+    "lem-sf-derived-truncation-triangle",
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-small-module-diagrams-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Agent assembly: finite Postnikov induction and the explicit strict upper-truncation colimit"
+   }
+  },
+  {
+   "text": "For $\\Lambda=B$, a finite coefficient ring, put $M=JL$ on $S$. The admissible finite support chain makes $M$ constructible: complete the chain to a finite open-closed tree, with $L$ on the specified leaf and zero on its complementary leaves. Exact support extension gives the stated restrictions; the finite discrete encoding identifies this with fixed-module constructibility. Thus the fixed-module origin theorem gives $M\\cong\\nu_S^*F$ for an étale module $F$. As $e$ is qcqs, bounded-below direct-image comparison gives $Re_*M[0]\\cong\\nu_T^*Re_{\\mathrm{et},*}F[0]$. The coefficient-direct-image conjugation makes this a comparison of the actual internal direct images. Its target is bounded below (use a nonnegative injective resolution of $F$). Step 3 proves the required membership, including boundary cohomology.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.4.3; supported finite-coefficient origin, not an identification of ordinary direct image with extension by zero"
+   }
+  },
+  {
+   "text": "Now fix $O=\\mathcal O_F$ (including $F=\\mathbf Q_\\ell$) and $M=JH$ for a supported integral finite scalar local model. Finite scalar local-model completeness and supported-extension completeness make $M[0]$ derived complete. A chain is a path in a finite qcqs open-closed tree, by adjoining the complementary siblings; take the identity pro-étale restriction in the supported-extension theorem. As in step 4, this $M$ is constructible with finite scalar local models on a finite partition. Consequently each derived reduction $M_n=M[0]\\otimes^L_O(O/\\pi^n)$ is bounded constructible in degrees $[-1,0]$. The ordinary finite-coefficient equivalence and the encoding comparison make $M_n$ an ordinary bounded complex whose cohomology sheaves are pro-étale constructible. The fixed-module constructibility-origin theorem writes each of them as $\\nu_S^*F_q$ with $F_q$ a globally constructible étale sheaf, and the fixed-module bounded-origin theorem then gives an étale-origin witness $M_n\\cong\\nu_S^*L_n$ with $L_n$ bounded. This treats torsion $H$ using derived reductions, rather than incorrectly identifying them with ordinary quotients.",
+   "uses": [
+    "lem-sfb-finite-scalar-local-model-complete",
+    "lem-sfb-supported-extension-derived-complete",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-weil-pbc-fixed-module-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 3.4 derived completion; finite scalar-model completeness and the two-term quotient computation as recorded in the cited nodes"
+   }
+  },
+  {
+   "text": "Restriction of scalars $D((O/\\pi^n)_T)\\to D(O_T)$ sends the entire finite-coefficient hull into the integral hull. It is exact, preserves termwise colimits and products (all computed on underlying sheaves), hence preserves triangles and the prescribed strict colimits; termwise products represent derived products. A finite scalar local model remains one over $O$: lift a finite presentation matrix over $O/\\pi^n$ to $O$ and adjoin the finitely many relations $\\pi^n e_j=0$ for its generators. Extending this presentation to the coefficient sheaf gives precisely its restricted scalar model, because the cokernel of $\\pi^n$ on $O_W$ is the actual quotient $k_{n,W}$ (the resolution $[O_W\\xrightarrow{\\pi^n}O_W]$ of $k_{n,W}$ with its augmentation, stated in the integral quotient direct-image theorem) and scalar extension is right exact. Scalar restriction commutes with $j_!$ and $i_*$: the same underlying sheaf and scalar action give their adjunction comparisons. Thus each restricted supported generator belongs to the integral hull, and its defining minimality gives the assertion. This is a direct preservation-of-generators argument; it makes no assertion about rationalization preserving products.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-products-derived",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Agent coefficient calculation from sectionwise limits, colimits, scalar action, and finite presentation; no new geometric generation input"
+   }
+  },
+  {
+   "text": "Set $P=Re_{*,O}(M[0])$, computed by a nonnegative injective resolution, so $P$ is bounded below. The derived adjunction and right-adjoint limit preservation show that $Re_{*,O}$ preserves products. It is triangulated, so applying it to the completion Roos triangle of $M$ identifies $P$ with the derived limit of $Re_{*,O}\\operatorname{Res}_n M_n$. Scalar-change direct-image comparison identifies this tower with $\\operatorname{Res}_n Re_{*,O/\\pi^n}M_n$. The integral quotient direct-image theorem identifies $P\\otimes^L_O(O/\\pi^n)$ with $Re_{*,O/\\pi^n}M_n$, compatibly with the quotient transitions. Hence the canonical completion unit of $P$ is invertible, and every reduction of $P$ is bounded-below classical, by the qcqs direct-image comparison and the origin witnesses in step 5.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-integral-quotient-direct-image-comparison",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.4.3 and Section 3.4; canonical quotient mate and derived-limit compatibility supplied by the cited nodes"
+   }
+  },
+  {
+   "text": "Steps 3 and 7 put every $Re_{*,O/\\pi^n}M_n$ in its finite-coefficient hull. Step 6 puts their scalar restrictions in $\\mathcal G_T(O)$. The two products in their Roos triangle therefore belong to $\\mathcal G_T(O)$; rotation and shift closure put its first object there. Step 7 identifies that object with $P=Re_{*,O}M[0]$. This proves the assertion for $\\Lambda=\\mathbf Z_\\ell,\\mathcal O_E$. Products and triangles are used in the ordinary ambient category throughout.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Agent integral assembly from finite-coefficient generation and the canonical completion triangle"
+   }
+  },
+  {
+   "text": "For the same bounded-below $P$ in step 7, the classical-adic rational generation lemma applies: its completeness hypothesis is exactly the canonical completion isomorphism proved there, and its classical finite reductions are the same $Re_{*,O/\\pi^n}M_n$. It yields $F_T\\otimes^L_{O_T}P\\in\\mathcal G_T(F)$. This is an additional coefficient input, not a consequence of the integral membership in step 8.",
+   "uses": [
+    "lem-sfb-classical-adic-rational-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Agent rational assembly: independent classical-adic coefficient input; exact external hull-generation reference WANTED"
+   }
+  },
+  {
+   "text": "There is a canonical scalar-compatible isomorphism $F_T\\otimes^L_{O_T}Re_{*,O}M[0]\\cong Re_{*,F}(F_S\\otimes_{O_S}M)[0]$. To see it, express $F_V=O_V[1/\\ell]$ by the specified repeated-$\\ell$ telescope. Flatness identifies tensor with its exact termwise telescope on $M$ and on a bounded-below representative of $P$. Bounded direct-image continuity identifies the telescope of $Re_{*,O}M$ with $Re_{*,O}$ of the telescope of $M$. The coefficient-restriction comparison identifies the latter with restriction of $Re_{*,F}$ of the localized module. The resulting map is $F_T$-linear: its $m$-th telescope leg is induced by $x\\mapsto\\ell^{-m}\\otimes x$, so multiplication by $\\ell$ and every $O$-scalar commutes with all legs. Restricted scalar functors reflect isomorphisms. This proves the comparison with the actual rational direct image and puts this direct image in the rational hull by step 9.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-pe-bounded-continuity-coefficient-restriction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1); bounded telescope calculation, Sections 3 and 5.3; flat localization as in the cited coefficient theorem"
+   }
+  },
+  {
+   "text": "Finally let $JL$ be an arbitrary rational supported finite scalar model on $S$, for $F=E$ or $\\mathbf Q_\\ell$. The supported rational lattice-generation theorem expresses $(JL)[0]$ as a finite iterated triangle extension of objects $(F_S\\otimes_{O_S}J_OH)[0]$, where $H$ is an integral finite scalar local model on the source of an admissible support chain over $S$. Its support paths represent exactly our support chains, by adjoining complementary siblings. No global lattice for $L$ or scalar lift of its connecting maps is required. The ring-object map $a:O^c\\to F^c$ supplied by that theorem need not be the standard inclusion, only an $\\ell$-localization coefficient. Its predicate provides, on every scheme, the $\\ell$-telescope cocone of $F_V$ over $O_V$ with zeroth leg $a_V$, hence flatness (a filtered colimit of free modules). These are the only properties of the inclusion that step 10 uses, so step 10 applies verbatim to $F_S\\otimes_{O_S,a}J_OH$. The triangulated functor $Re_{*,F}$ sends this finite extension construction to one whose generators lie in $\\mathcal G_T(F)$ by step 10. Finite extension and repleteness closure finish the rational cases. Zero objects, rank zero, empty chains and empty schemes persist in every step. At no point has ordinary direct image along an open been replaced by lower shriek.",
+   "uses": [
+    "lem-sfb-supported-rational-lattice-generation",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-supported-coefficient-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Agent assembly using the existing supported lattice dévissage, following the coefficient route of BS Proposition 6.8.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-open-closed-refinement",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "sk-thm-pe-classical-sheaves",
+  "lem-sf-derived-truncation-triangle",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+  "lem-sfb-finite-scalar-local-model-complete",
+  "lem-sfb-supported-extension-derived-complete",
+  "lem-sfb-finite-model-sheaf-quotient-constructible",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-products-derived",
+  "lem-sf-exact-functor-derived-triangulated",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-classical-adic-rational-hull",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-pe-bounded-continuity-coefficient-restriction",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sfb-supported-rational-lattice-generation",
+  "lem-sfb-supported-coefficient-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement (2), coefficient-transfer descendant: finite classical approximation, integral Roos reconstruction, independent rational coefficient generation, and finite lattice dévissage."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(etale|étale).*(constructible|supported).*(push|direct)|(pushforward|direct.image).*(local.system|finite.scalar)",
+   "results": "{\"t\": \"2026-10-25T11:19:58Z\", \"tool\": \"grep\", \"query\": \"(etale|étale).*(constructible|supported).*(push|direct)|(pushforward|direct.image).*(local.system|finite.scalar)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale direct image of supported finite scalar local systems with finite discrete Z_l O_E Q_l or E coefficients in a derived generation hull closed under products and bounded filtered colimits",
+   "results": "{\"t\": \"2026-10-25T11:19:58Z\", \"tool\": \"leansearch\", \"query\": \"Etale direct image of supported finite scalar local systems with finite discrete Z_l O_E Q_l or E coefficients in a derived generation hull closed under products and bounded filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"Algebra.Etale.comp\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"323fee55586f670c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-25T11:19:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀Obj\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforwardId\", \"PresheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀Obj_obj_carrier\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"digest\": \"a5f42c6937af584c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived direct image along a quasi compact etale morphism of schemes of a constructible supported finite adic or rational local system belongs to the triangulated product filtered colimit hull of supported local systems",
+   "results": "{\"t\": \"2026-10-25T11:20:00Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary derived direct image along a quasi compact etale morphism of schemes of a constructible supported finite adic or rational local system belongs to the triangulated product filtered colimit hull of supported local systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"CondensedMod.IsSolid\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"8f984dd9cd7604c9\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local systems ordinary direct image is constructed from finite scalar modules using products and filtered colimits over qcqs schemes",
+   "results": "{\"t\": \"2026-10-25T11:24:08Z\", \"tool\": \"leanfinder\", \"query\": \"Etale local systems ordinary direct image is constructed from finite scalar modules using products and filtered colimits over qcqs schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"Condensed.finFree\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"CondensedMod.ofSheafProfinite\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"CondensedMod.ofSheafCompHaus\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"c36b6b022659efb8\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale ordinary derived direct image of finite scalar local models belongs to supported product filtered colimit hull with finite l adic and rational coefficients",
+   "results": "{\"t\": \"2026-10-25T12:34:12Z\", \"tool\": \"leanfinder\", \"query\": \"Etale ordinary derived direct image of finite scalar local models belongs to supported product filtered colimit hull with finite l adic and rational coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"Algebra.Etale.finitePresentation\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.etaleLocus\"], \"digest\": \"59031e4b1c0a17de\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits are algebraic etaleness, affine limits, formal localizations of derived categories, or existence of filtered colimits; none is generation of a rationalized classical-adic complex in this ordinary supported hull"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"localization\"",
+   "results": "{\"t\": \"2026-10-25T12:52:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"DerivedCategory.Plus.instIsLocalizationPlusQhQuasiIso\", \"DerivedCategory.Plus.instIsLocalizationPlusQQuasiIso\", \"DerivedCategory.Plus.instIsLocalizationPlusQhTrWSubcategoryAcyclic\"], \"digest\": \"17d1e93e0585c88d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits are algebraic etaleness, affine limits, formal localizations of derived categories, or existence of filtered colimits; none is generation of a rationalized classical-adic complex in this ordinary supported hull"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*complete.*generat|complete.*classical.*hull|etale.*supported.*coinduc",
+   "results": "{\"t\": \"2026-10-25T12:52:53Z\", \"tool\": \"grep\", \"query\": \"rational.*complete.*generat|complete.*classical.*hull|etale.*supported.*coinduc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits are algebraic etaleness, affine limits, formal localizations of derived categories, or existence of filtered colimits; none is generation of a rationalized classical-adic complex in this ordinary supported hull"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of a bounded below derived complete proetale complex with classical torsion reductions is generated by supported finite scalar local models using products and filtered colimits",
+   "results": "{\"t\": \"2026-10-25T12:52:54Z\", \"tool\": \"leansearch\", \"query\": \"Rationalization of a bounded below derived complete proetale complex with classical torsion reductions is generated by supported finite scalar local models using products and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasFilteredColimitsOfSize\", \"ModuleCat.FilteredColimits.colimit\", \"CategoryTheory.Limits.IsIPC.mk\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CommRingCat.FilteredColimits.colimit\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"ModuleCat.FilteredColimits.M.mk\", \"instHasColimitsCondensedMod\"], \"digest\": \"affc7610caa227d2\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits are algebraic etaleness, affine limits, formal localizations of derived categories, or existence of filtered colimits; none is generation of a rationalized classical-adic complex in this ordinary supported hull"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete integral sheaf complexes on qcqs schemes with etale classical finite quotient reductions have rationalizations in the product and bounded filtered colimit triangulated hull of supported finite local systems",
+   "results": "{\"t\": \"2026-10-25T12:53:54Z\", \"tool\": \"leanfinder\", \"query\": \"Complete integral sheaf complexes on qcqs schemes with etale classical finite quotient reductions have rationalizations in the product and bounded filtered colimit triangulated hull of supported finite local systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"13f484aedc8a391a\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits are algebraic etaleness, affine limits, formal localizations of derived categories, or existence of filtered colimits; none is generation of a rationalized classical-adic complex in this ordinary supported hull"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pi complete integral complexes on the pro etale site with classical finite coefficient reductions have rationalization in the supported finite model hull",
+   "results": "{\"t\": \"2026-10-25T13:04:04Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pi complete integral complexes on the pro etale site with classical finite coefficient reductions have rationalization in the supported finite model hull\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"Algebra.FormallyEtale.instForallOfFinite\", \"instCommRingBDeRhamPlus\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.pi_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"8d50181a12a72c20\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: hits are algebraic etaleness, affine limits, formal localizations of derived categories, or existence of filtered colimits; none is generation of a rationalized classical-adic complex in this ordinary supported hull"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proetale-supported-model-coinduction",
+  "date": "2026-10-25",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Generator-level coinduction input for the Cech descent of the structural supported hull. Etale supported-model coinduction.",
+   "via": [
+    "lem-sfb-proetale-supported-model-coinduction",
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-etale-supported-model-coinduction",
+  "worker": "stage1",
+  "summary": "Split finite coinduction through constructible approximation and finite partitions; integral coinduction through completeness and classical quotient direct images; rational coinduction through one new geometric-morphism-free classical-adic coefficient generation obligation and existing supported lattice dévissage. Statement unchanged; no claim that rationalization preserves products; no local hull-descent citation that would make a cycle.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms, via refinement (2), first paragraph: realizes the étale base case of the supported coinduction input used by the pro-étale supported hull descent. This is a coefficient-generation subproblem, not a replacement of the compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "new-unbounded-pullback-finite-constant-local-model",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-fixed-module-constructible-origin",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-sf-finite-discrete-encoding-constructibility",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "det-pe-products-derived",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-sfb-integral-quotient-direct-image-comparison",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   },
+   {
+    "node": "lem-pe-bounded-continuity-coefficient-restriction",
+    "why": "Generic finite-coefficient comparison, ringed-site, scalar, or derived-category tool used with its stated hypotheses; the compactification-coherence unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-open-closed-refinement",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "sk-thm-pe-classical-sheaves",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-products-derived",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "lem-pc-right-derived-functor-triangulated",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-pe-bounded-continuity-coefficient-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NC-883a4f1de",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-883a4f1de (reviewer sub-agent of L); spot-checked: I read all 11 steps of the item, the new node lem-sfb-classical-adic-rational-hull, the statements of all 35 cited nodes, def-sfb-supported-model-hull, the parent lem-sfb-proetale-supported-model-coinduction, and HRS Lemma 5.3 with its proof and Remark 5.4. Lemma 5.3(1) gives bounded colimit continuity only, which is what step 10 uses; the WANTED markers are correct. No SGA is cited. Steps 1-4 (finite tree, 03SA approximation, truncation colimits, BS 5.2.6 for qcqs e with the conjugation), steps 7-8 (Roos triangle, the quotient comparison ρ compatible with transitions, products) and steps 9-10 (all new-node hypotheses checked; telescope, flatness and bounded continuity) are correct. I repaired three faults. (C1/C4) Step 5: the bounded-origin node needs étale constructible F_q with ν^*F_q ≅ H^q; it now cites lem-weil-pbc-fixed-module-constructible-origin. (C1) Step 6: coker(π^n on O_W)=k_{n,W} had no citation; it now cites the resolution in lem-sfb-integral-quotient-direct-image-comparison. (E4) Step 11: the lattice-generation node only asserts that some localization map a exists, possibly σφ rather than the inclusion φ; the step now says step 10 uses only the telescope and flatness that the predicate gives, and cites lem-sfb-supported-coefficient-localization. That node is in the same unit and already in the item's closure. The new node is statement-only, self-contained and searched with all three kinds; its blueprint fields are right, and no duplicate exists (only 6 nodes mention the hull). It is not a relabelling of the item. Small-case test: c_0(I,F) at a geometric point. The item needs the same object (Rj_* over a rank-1 strictly henselian valuation ring), so the node is no stronger than the item. It is an open WANTED obligation that I could not settle, but I found no counterexample. Batch-5: the paths through lem-trf-localization-essentially-surjective, lem-trf-site-functorial-flat-resolution, lem-trf-free-module-sheaf-universal-property, def-pd-section-module-operations-data and def-pod-l-adic-representations reach only generic categorical facts and definitions, not steps of the trace formula or Poincaré duality, so I accepted all seven flags. I accepted all 24 tool_uses as generic tools. The fixed item is under fixes/dag/nodes/sec-six-functors-basics/; the new node is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSupportedModelCoinduction",
+  "declaration": "AlgebraicGeometry.ProEtale.etale_supported_model_coinduction",
+  "file": "lean/Sheaf/Paper/EtaleSupportedModelCoinduction.lean",
+  "statement": "theorem etale_supported_model_coinduction (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (S T : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace T] [QuasiSeparatedSpace T] (e : S ⟶ T) [Etale e] (W : Scheme.{u}) (p : ScalarModelSupportChain S W) (L : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) (hL : HasFiniteConstantLocalModel Λ W L) : supportedModelHull Λ T ((CondensedRing.moduleObjectDerivedPushforward Λ e).obj ((DerivedCategory.singleFunctor _ 0).obj ((p.extension Λ).obj L)))",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02c8a1173",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read node, report, module, all 14 stmt_dep records and the side-live hull, constant-model, derived-pushforward and coefficient definitions. Node changed only by the added lean record; lean.statement equals the file signature verbatim; sorry-only; docstrings carry source and blueprint and all 11 steps; Worker report and Second reading by NF both present. hΛ is exactly the five non-Qbar cases of IsLocalizingAdmissibleCoefficient, identical to the landed supportedModelHull_proetale_descent. S and T qcqs, Etale e (qcqs of e follows). ScalarModelSupportChain/extension gives open lower shriek, closed lower star and nil as identity. HasFiniteConstantLocalModel is the hull's generator predicate. moduleObjectDerivedPushforward is the right derived lowerStar (ordinary direct image, not lower shriek). Conclusion is supportedModelHull Λ T. No extra hypotheses, no duplicates, no pro-etale substitute. Edge cases covered: empty schemes, zero ring, n=0, L=0, torsion, empty chain, identity or open e. No compile: no file changed."
+ }
+}

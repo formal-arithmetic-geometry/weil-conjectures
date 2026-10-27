@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-stable-pointed-curve-base-change",
+ "kind": "statement",
+ "title": "Base change preserves stable labelled pointed curves",
+ "statement": "Let $f:W\\to T$ and $a:T^{\\prime}\\to T$ be morphisms of schemes [def-pc-scheme]. Let $n\\in\\mathbf N$ and let $s_i:T\\to W$ be labelled sections, with $fs_i=\\operatorname{id}_T$. Suppose $(f,(s_i))$ is a stable pointed curve in the precise normalized-component convention [def-sfb-stable-pointed-curve]. Then $W\\times_T T^{\\prime}\\to T^{\\prime}$ [def-pc-fibre-product], equipped with the labelled sections $(s_i a,\\operatorname{id}_{T^{\\prime}})$ and their projection identities, is a stable pointed curve in the same convention. No Noetherian, nonempty-base, smooth-family, or nonzero-number-of-markings hypothesis is imposed; the family has no prescribed total genus.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "section-stable-curves and lemma-stable-curves (base-change meaning of the moduli stack); labelled convention and expanded proof from StablePointedModuliGroupoids.pullback_properties, de Jong (1997), section 3.6, and Pikaart--de Jong (1995), section 2.3.3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-curve"
+ ],
+ "proof": [
+  {
+   "text": "Unpack stability. Projectivity survives by isProjectiveBundle_pullback_snd. Flatness and local finite presentation survive by Mathlib morphism-property base change. Fix the resulting local-finite-presentation witness for the nodal-fibre predicate.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-sfb-projective-bundle-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every algebraically closed field Omega and b:Spec Omega -> T-prime, paste pullback squares to identify the new geometric fibre with W times_T Spec Omega for the composite b followed by a. The comparison is an isomorphism over Spec Omega. Transport connectedness, topological dimension, reducedness, pure dimension, and the completed nodal local-ring isomorphisms. Smooth loci are identified because the isomorphism is over Omega.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-nodal-geometric-fibres"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The section projection equation gives disjointness of the new section ranges from disjointness of the old ranges. Smoothness along each new marking follows by base change of the smooth open around the corresponding old marking. This preserves labels, including an empty label set.",
+   "uses": [
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fibre isomorphism bijects irreducible components and identifies their reduced normalizations by the universal properties of reduction and normalization. It is over Omega and identifies the preimages of the nonsmooth locus and each labelled section. Hence normalized-component genera agree (pullback of the structure sheaf along an isomorphism preserves ordinary H dimensions), and so do the encard values of special-point sets. Transfer the bounds for genus-zero and genus-one components and assemble the stability conjunction. Empty bases are covered by the universal geometric-point quantifier.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-curve",
+  "def-trf-nodal-geometric-fibres",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sfb-projective-bundle-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C7",
+  "date": "2026-10-26",
+  "note": "Expands the existing pullback_properties docstring into the explicit transport argument; source places are given in the statement and proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stable labelled pointed curves are preserved under arbitrary base change",
+   "results": "8 results, including isSmooth_isStableUnderBaseChange and generic MorphismProperty.IsStableUnderBaseChange constructors.",
+   "date": "2026-10-26",
+   "verdict": "No stable pointed curve result; generic smoothness permanence supplies only one clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a stable pointed curve is stable and geometric fibers of iterated pullbacks are isomorphic",
+   "results": "8 results including isStableUnderBaseChange.of_pullback_fst_of_isAffine and Scheme.canonicallyOverPullback.",
+   "date": "2026-10-26",
+   "verdict": "No stable pointed family theorem; library search found projective-bundle permanence but not component-stability transport."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStablePointedCurve|stable.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*stable",
+   "results": "Mathlib AlgebraicGeometry has no IsStablePointedCurve. The project defines it in StablePointedCurve; its occurrences elsewhere are hypotheses or conclusions, not this theorem.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; SemistableMarkedBaseChange uses a different multipointed-pair predicate and does not provide normalized-component stability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StablePointedModuliGroupoids",
+  "date": "2026-10-26",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Stable pointed moduli groupoids and abelian level structures. Audit anchors this inherited alteration-moduli prerequisite to paragraph (3), Rj_* preserves Dctf, in the main-20261015 blueprint proof; the intermediate admissible-direct-image creation record names a Lean module rather than a DAG node. Pullback well-definedness: Base change preserves stable labelled pointed curves.",
+   "via": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StablePointedCurveBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/StablePointedCurveBaseChange.lean",
+  "declaration": "AlgebraicGeometry.isStablePointedCurve_baseChange",
+  "statement": "theorem isStablePointedCurve_baseChange {W T T' : Scheme.{u}} (f : W ⟶ T) {n : ℕ}\n    (s : Fin n → (T ⟶ W)) (hs : ∀ i, s i ≫ f = 𝟙 T)\n    (h : IsStablePointedCurve f s hs) (a : T' ⟶ T) :\n    IsStablePointedCurve (pullback.snd f a)\n      (fun i ↦ f.baseChangeSection (s i) (hs i) a)\n      (fun i ↦ f.baseChangeSection_snd (s i) (hs i) a)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T091309-L-3330354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T091309-L-3330354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

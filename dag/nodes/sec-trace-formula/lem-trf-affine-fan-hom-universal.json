@@ -12,89 +12,57 @@
  ],
  "proof": [
   {
-   "text": "Fix $\\varphi:P\\to\\Gamma(T,\\mathcal A)$. For every open $V\\subset T$, $\\mathcal A(V)$ is sharp: an invertible section has invertible, hence zero, germs at every point, so it is zero by sheaf separation. In any commutative monoid a sum is invertible exactly when each summand is invertible (an inverse to $b+c$ gives inverses to $b$ and $c$). Consequently $\\mathfrak m_x=\\{p\\in P:\\varphi(p)_x\\ne0\\}$ is a prime ideal: it excludes $0$, is stable under addition by $P$, and its complement is closed under addition. Define $h(x)=\\mathfrak m_x$.",
+   "text": "Fix $\\varphi:P\\to\\Gamma(T,\\mathcal A)$. Apply [lem-trf-sharp-section-basic-chart-data] to obtain the continuous prime map $h_\\varphi$ and the restriction-compatible $\\theta_a$, including their numerator formula. These satisfy every hypothesis of [lem-trf-affine-fan-basic-map-local-lift], so they extend to a sheaf map with local stalk maps. Denote the resulting morphism by $G(\\varphi)$. For $a=0$, $D(0)$ is the whole spectrum and the numerator formula gives $\\Phi(G(\\varphi))(p)=\\varphi(p)$ for every $p\\in P$, where $\\Phi$ is pullback of canonical sections.",
+   "uses": [
+    "lem-trf-sharp-section-basic-chart-data",
+    "lem-trf-affine-fan-basic-map-local-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(ii), proof using (i), printed p.99; assemble basic charts and local sheaf lift"
+   }
+  },
+  {
+   "text": "For any local morphism $g$, [lem-trf-affine-fan-canonical-section-rigidity] identifies its point map and each basic-open sheaf map from $\\Phi(g)$. Step 1 gives $\\Phi(G(\\Phi(g)))=\\Phi(g)$, so the rigidity lemma gives $G(\\Phi(g))=g$. Together with $\\Phi(G(\\varphi))=\\varphi$, this proves both inverse identities and hence the claimed bijection.",
+   "uses": [
+    "lem-trf-affine-fan-canonical-section-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(ii), proof using (i), printed p.99; assemble inverse identities from point and section rigidity"
+   }
+  },
+  {
+   "text": "For a local morphism $k:(T',\\mathcal A')\\to(T,\\mathcal A)$, composition of stalk maps is local, since inverse images of units compose [def-trf-fine-fan-blowup]. Pullback of sections composes with the sheaf maps, so for every $p\\in P$ one has $\\Phi(g\\circ k)(p)=\\Gamma(k)(\\Phi(g)(p))$. Thus $\\Phi(g\\circ k)=\\Gamma(k)\\circ\\Phi(g)$, proving naturality in the source.",
    "uses": [
     "def-trf-fine-fan-blowup"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8, proof of (i), p.99: construction of the prime ideal from the stalk homomorphism; sharp case (ii)."
+    "place": "Expose VIII, Lemma 3.1.8(ii), proof using (i), printed p.99; naturality under composition of source pullbacks"
    }
   },
   {
-   "text": "One has $h^{-1}D(a)=\\{x:\\varphi(a)_x=0\\}=:V_a$. Equality of a germ to zero means equality to zero on some neighborhood, so $V_a$ is open and $\\varphi(a)|_{V_a}=0$ by separation. Since the $D(a)$ form a basis, $h$ is continuous. On $V_a$ define $P_a\\to\\mathcal A(V_a)$ by $p-na\\mapsto\\varphi(p)|_{V_a}$. If $p-na=p'-n'a$, integrality gives $p+n'a=p'+na$ in $P$, and applying $\\varphi$ gives equal images. Thus this formula is well defined and additive; it is the unique extension killing the invertible element $a$.",
+   "text": "Let $u:P\\to Q$ be a homomorphism of fine sharp monoids. By [lem-trf-affine-fan-localization-sections] with $a=0$, $\\Gamma(S(Q),\\overline{\\mathcal M}_Q)=Q/Q^\\times=Q$, since $Q$ is sharp; this identification sends the canonical section of $q$ to $q$. The same lemma identifies its stalks with localizations modulo units; by the sharpening definition [def-trf-fine-fan-blowup] these are sharp: an invertible class has representatives whose sum is a unit, so each representative is a unit and the class is zero. Step 1 applied to the canonical-section map composed with $u$ gives $S(u):S(Q)\\to S(P)$ with $S(u)^*(p)=u(p)$. Any other local morphism with these pullbacks equals $S(u)$ by Step 2. For $g:(T,\\mathcal A)\\to S(Q)$, composition of pullbacks yields $\\Phi(S(u)\\circ g)(p)=\\Phi(g)(u(p))$, hence $\\Phi(S(u)\\circ g)=\\Phi(g)\\circ u$. The identity of $S(P)$ pulls $p$ back to $p$, as does $S(\\mathrm{id}_P)$. For $v:Q\\to R$, $S(u)\\circ S(v)$ pulls $p$ back to $v(u(p))$, just as $S(v\\circ u)$ does; [lem-trf-affine-fan-canonical-section-rigidity] therefore identifies these local morphisms. This gives functoriality of $S$ and naturality in $P$.",
    "uses": [
-    "def-trf-fine-fan-blowup"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8, p.99: continuity and extension to localizations, expanding the straightforward verification."
-   }
-  },
-  {
-   "text": "The homomorphism in Step 2 kills $P_a^\\times$, since its target is sharp by Step 1. Hence it factors through $P_a/P_a^\\times=\\overline{\\mathcal M}_P(D(a))$ by [lem-trf-affine-fan-localization-sections]. These maps commute on $D(a)\\cap D(b)=D(a+b)$: both send the class of each $p\\in P$ to $\\varphi(p)$ and all localized denominators to zero. For an inclusion $D(b)\\subseteq D(a)$, use $D(a+b)=D(b)$ in this intersection calculation; the localization descriptions identify the restriction maps, so it proves restriction compatibility as well. For any open $U$ and a section on $U$, restrict to the basic opens contained in $U$, apply these maps, and glue on their inverse images in $T$. Agreement on intersections and uniqueness of sheaf gluing give a restriction-compatible sheaf map over $h$, equivalently the inverse-image sheaf map in the statement; this is the direct-section description of morphisms in [def-trf-fine-fan-blowup].",
-   "uses": [
+    "lem-trf-affine-fan-localization-sections",
     "def-trf-fine-fan-blowup",
-    "lem-trf-affine-fan-localization-sections"
+    "lem-trf-affine-fan-canonical-section-rigidity"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8, p.99: sheaf-map construction; VIII 3.1.3 and Remark 3.1.4(iii), pp.98--99, for the sharp affine sections."
-   }
-  },
-  {
-   "text": "At $x\\in T$, put $F_x=P\\setminus\\mathfrak m_x$. By [lem-trf-affine-fan-localization-sections] the source stalk is $(P-F_x)/(P-F_x)^\\times$. The constructed map sends $\\operatorname{cl}(p-f)$ to $\\varphi(p)_x$, since $f\\in F_x$ has zero image. This image is zero exactly when $p\\in F_x$. In that case $p-f$ is a unit and its class is zero. Conversely a unit has zero image in the sharp target. Hence the stalk map has inverse image of the units equal to the units, so it is local. This proves the construction gives a morphism $(T,\\mathcal A)\\to S(P)$.",
-   "uses": [
-    "def-trf-fine-fan-blowup",
-    "lem-trf-affine-fan-localization-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8, proof of (i)--(ii), p.99: local stalk factorization and descent to sharpening."
-   }
-  },
-  {
-   "text": "For any morphism $g:(T,\\mathcal A)\\to S(P)$, compose the canonical map $P\\to\\Gamma(S(P),\\overline{\\mathcal M}_P)$ with pullback of sections to obtain $\\Phi(g):P\\to\\Gamma(T,\\mathcal A)$. For $x\\in T$, locality and sharpness say $\\Phi(g)(p)_x=0$ if and only if the canonical germ of $p$ at $g(x)$ is zero. By [lem-trf-affine-fan-localization-sections] this holds exactly when $p\\notin g(x)$. Thus the point map reconstructed from $\\Phi(g)$ is exactly $g$.",
-   "uses": [
-    "def-trf-fine-fan-blowup",
-    "lem-trf-affine-fan-localization-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8(ii), statement and uniqueness of the construction, p.99."
-   }
-  },
-  {
-   "text": "The sheaf map is also determined by these pulled-back canonical sections. On $D(a)$ every section has the form $\\operatorname{cl}(p-na)$ by [lem-trf-affine-fan-localization-sections], and $\\operatorname{cl}(p-na)=\\operatorname{cl}(p)$ because $a$ is a unit in $P_a$ and therefore zero after sharpening. Its pullback must be $\\Phi(g)(p)|_{g^{-1}D(a)}$. These maps determine the maps on arbitrary opens by the sheaf gluing used in Step 3. Consequently reconstructing from $\\Phi(g)$ gives exactly $g$, including its sheaf map. Conversely, for the morphism constructed from $\\varphi$, Step 2 with $a=0$ gives the pullback $p\\mapsto\\varphi(p)$ on the whole space. The two constructions are mutual inverses.",
-   "uses": [
-    "def-trf-fine-fan-blowup",
-    "lem-trf-affine-fan-localization-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8(ii), p.99: bijectivity, with the uniqueness checks expanded on the basic opens."
-   }
-  },
-  {
-   "text": "If $k:(T',\\mathcal A')\\to(T,\\mathcal A)$ is a morphism, pullback of canonical sections gives $\\Phi(g\\circ k)=\\Gamma(k)\\circ\\Phi(g)$, by composition of the sheaf maps. For a homomorphism $u:P\\to Q$ of fine sharp monoids, the inverse construction applied to $P\\xrightarrow{u}Q=\\Gamma(S(Q),\\overline{\\mathcal M}_Q)$ defines $S(u):S(Q)\\to S(P)$; here the equality follows by [lem-trf-affine-fan-localization-sections] with $a=0$ and sharpness of $Q$. Pullback sends the canonical section $p$ to $u(p)$, so $\\Phi(S(u)\\circ g)=\\Phi(g)\\circ u$. The same calculation for identities and composites, followed by uniqueness in Step 6, proves functoriality of $S$. These two formulas prove naturality in both variables.",
-   "uses": [
-    "def-trf-fine-fan-blowup",
-    "lem-trf-affine-fan-localization-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.1.8, p.99: global-sections correspondence; naturality follows from the explicit construction and composition of pullbacks."
+    "place": "Expose VIII, Lemma 3.1.8(ii), proof using (i), printed p.99; naturality in the monoid and functoriality by canonical pullbacks"
    }
   }
  ],
  "proof_deps": [
+  "lem-trf-sharp-section-basic-chart-data",
+  "lem-trf-affine-fan-basic-map-local-lift",
+  "lem-trf-affine-fan-canonical-section-rigidity",
   "def-trf-fine-fan-blowup",
   "lem-trf-affine-fan-localization-sections"
  ],
@@ -211,19 +179,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-affine-fan-hom-universal",
   "worker": "stage1",
-  "summary": "Constructed the inverse explicitly by the prime ideal of elements with nonzero germ, localization on basic opens, quotient by units and sheaf gluing. Checked locality, both inverse identities, and naturality on canonical sections. Added one statement-only supporting lemma for sharp sections and stalks of monoid spectra (ILO VIII 3.1.3--3.1.4), not an extra universal-property clause. Statement and historical blueprint ancestry unchanged.",
-  "blueprint": "Retains the historical ancestry through the local comparison of strict fan charts, using ILO VIII 3.1.8(ii) invoked in the point-local comparison paragraph of VIII 3.3.15. The seven proof steps supply that affine-target universal property; they do not replace a current unit step."
+  "summary": "Repair of the 4399-character proof return: distribute the prime-map/basic-chart, local sheaf-lift, and point/section-rigidity arguments into three independent statement-only unsplit nodes. The parent retains the exact statement and assembles both inverse identities and naturality in four short steps. All old arguments are mapped to the new interfaces and preserved verbatim in report.md. No Lean change. After return of head 5522bf60e58, reread the current cited statements, retained the three independent interfaces, and made the sharp-stalk verification and contravariant composition calculation explicit in the assembly. On the resumed landing-refusal repair, attribute the stalk identification to the localization-sections theorem rather than the definition, and explicitly compare the identity morphism with S(id). The retained original baseline still equals the current live item. Current-head repair after the landing refusal: the fresh server dry run rebased the retained split; the naturality assembly now explicitly identifies global sections with Q/Q-units and checks the canonical sections under that identification. Current dependency statements and all citation quotes were reread. Repair of the renewed landing refusal on 2026-10-23: compared the retained original with the current item (identical), reread both external cited statements and the three interfaces, and made uniqueness of the induced S(u) explicit by Step 2; retained all statements and logged searches. The initial current-server dry run passed at d66def20e39.",
+  "blueprint": "Retains the historical ancestry through the strict fan chart comparison and ILO VIII 3.1.8(ii), used in VIII 3.3.15, p.109. The current main-20261015 locality node uses contracting correspondences; this repair does not claim the historical affine-fan branch is a replacement for that current route."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q14-6774ab44a",
-  "group": "Q14",
+  "reviewer": "NT-cc-Q145-5d20933e1",
+  "group": "Q145",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-6774ab44a (reviewer sub-agent of L); spot-checked: Read both nodes fully against ILO VIII 3.1.1–3.1.8 and 3.3.15; verified all seven steps, hypotheses, localization formulas, edge cases, duplicate candidates and route restrictions. No repairs or accepted tool_uses. Detailed checks written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-5d20933e1 (reviewer sub-agent of L); spot-checked: Fifth delivery answering the released human re-split note (2026-10-22): the base has 7 steps and 4399 characters, and the delivery must add at least 2 comparable statement-only nodes with an assembly of at most 3000 characters. The four earlier heads 5522bf60, 02f39858, 997c237d and 5ec6569d were all PASSed. Landing refused each one because the side completion is not in the live DAG, so L still has to promote it; maintainer note: re-pushing does not resolve this loop. The delivery is not superseded: clones/live and clones/side-live still hold the 7-step base, and none of the three new ids exists there. Diff against 5ec6: the three new nodes (sharp-section-basic-chart-data, affine-fan-basic-map-local-lift, affine-fan-canonical-section-rigidity) and the cited def-trf-fine-fan-blowup and lem-trf-affine-fan-localization-sections are identical field for field. Only the item's proof and split_report changed, and in the proof only Step 4 gained one sentence: 'Any other local morphism with these pullbacks equals S(u) by Step 2.' This is correct: Step 4 already cites rigidity, which equates morphisms whose canonical pullbacks agree. The item has 4 steps and 2411 characters, no step over 2000, and its statement is unchanged. I reread all the mathematics. Basic-chart data: A(V) is sharp by separation; m_x is prime because a sum is a unit iff both summands are; h^{-1}D(a)=V_a is open; lambda_a is well defined by integrality; restrictions agree because D(a) meets D(b) in D(a+b). Local lift: the maps extend uniquely from basic opens to all opens; cl(p-f) goes to phi(p)_x, which is 0 iff p is in F_x, so the stalk maps are local. Rigidity: a local map between sharp stalks sends a germ to zero only if the germ is zero, which recovers g(x); cl(p-na)=cl(p) fixes the sheaf map. Assembly: Phi G = id (a=0), G Phi = id (rigidity), naturality in T (inverse images of units compose), and in Step 4 S(Q) has sharp stalks, Gamma(S(Q)) = Q, and identities and composites follow by rigidity with the correct variance. Edge cases checked: empty T, P=0, a=0, empty V_a, Spec N with phi(n)=kn for k=0 and k>0, and non-saturated P. Source: ILO VIII 3.1.1-3.1.8, printed pp.98-99; no SGA is cited. The old arguments are spread over the three nodes at about 1500/1050/1150 characters, none restates the bijection, and none cites the parent or another new node. No fixes and no tool_uses."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AffineFanHomUniversal",
@@ -247,5 +215,16 @@
   "result": "pass",
   "note": "Read item node, stmt_dep def-trf-fine-fan-blowup (IsFine, IsSharp, MonoidPrime, spectrumSections/sharpSheaf/affine, stalk, stalkMap, IsLocalMorphism, affineSection, IsAffineMap) and ILO VIII 3.1.5-3.1.8 (PDF pp.104-105). Clauses match: arbitrary SheafedSpace CommMonCat with sharp stalks, fine sharp P, local morphisms to the recorded affine P, affinePullback = Γ(f)∘affineSection (real data), Bijective, naturality in T, and naturality in P via the unique local g with canonical-section formula (true: Γ(affine P)=P for fine sharp P, stalks of the sharpened sheaf are sharp). No stronger hypotheses; single universe u is the dep's convention and stated in the report. Edge cases (empty T, trivial P, empty prime, nonsaturated or torsion P^gp) are covered. No duplicate in side/newtargets lean, runs/2 or Mathlib. Docstrings carry the source and blueprint id with the 7 proof steps; sorry only. Statement field verbatim; node changes only lean. nt_compile --json clean (2.3 s, exit 0); broken-copy control fails as expected. Advisories: redundant inner postcomposition conjunct; composite locality implicit; placeholder second-reading section per the 2026-10-17 policy."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

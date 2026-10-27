@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-ramified-finite-tensor-sections",
+ "kind": "statement",
+ "title": "Normalized scalar tensor sections, naturality, extensionality and adjunction unit",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "On any site with module sheafification, let φ:R→S be a ring-sheaf morphism and F a functor identified on objects and maps with the existing sheafified balanced tensor [def-pur-sheaf-tensor-product, def-pur-cochain-coefficient-arrows]. Define its section tensor by transporting sheafification of s⊗x through the object equality. Maps out of F(M) are determined by values on 1⊗x, tensor sections are natural in M, and transporting the standard scalar-extension adjunction along the tensor presentation gives unit x↦1⊗x. In particular, for the specified scalar functor of [def-weil-ramified-pullback-tower-data] on any scheme pro-etale site, scalarAdjunction_unit and scalar_map_tensor give precisely these normalized formulas in its existing tensor sections. These are proved universal-property facts, not additional comparison assumptions.",
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pur-cochain-coefficient-arrows",
+  "def-weil-ramified-pullback-tower-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product: tensor sheafification and its balanced universal property. The normalized scalar adjunction is the existing def-pur-cochain-coefficient-arrows construction."
+ },
+ "proof": [
+  {
+   "text": "For a functor F with the specified object equality and map equality, transport pure tensor sections through eqToHom. Cancel that equality isomorphism and apply the sheafification Hom equivalence followed by ModuleCat.ExtendScalars.hom_ext: maps out of F(M) agree if they agree on 1 tensor x. Naturality follows by the map equality and naturality of the sheafification unit, evaluated on s tensor x.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: tensor sheafification and its balanced universal property. The normalized scalar adjunction is the existing def-pur-cochain-coefficient-arrows construction."
+   }
+  },
+  {
+   "text": "The object equality isomorphisms assemble to a natural tensor presentation by the specified map equality. Transport the existing extension/restriction adjunction along this presentation. Its unit is the transported standard unit. The sheafification adjunction unit and the normalized extension adjunction formula identify it with the sheafification image of 1 tensor x. Specialize to the scalar functor and its actual object/map witnesses; this yields scalar_map_tensor, scalarAdjunction and scalarAdjunction_unit without unfolding the derived coefficient construction. All definitions and every theorem in this module are proved.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "def-weil-ramified-pullback-tower-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: tensor sheafification and its balanced universal property. The normalized scalar adjunction is the existing def-pur-cochain-coefficient-arrows construction."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product: tensor sheafification and its balanced universal property. The normalized scalar adjunction is the existing def-pur-cochain-coefficient-arrows construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with pullback of sheaves of modules along a commutative square of rings, with pure tensor formula",
+   "results": "8 hits, including SheafOfModules.pullbackComp and pullback_assoc (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean), freeFunctorCompPullbackIso, and pullbackComp conjugacy equations.",
+   "date": "2026-10-27",
+   "verdict": "These session searches found general scalar-extension APIs. Reuse the existing normalized CochainPullback extension adjunction and Mathlib module sheafification; the generic transport and specialization are proved in this module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "12 hits, including AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, tensorInl, tensorInr, SpecTensorTo, tensorCongr, tensorCongr_symm, and AlgebraicGeometry.Scheme.Pullback.ofPointTensor.",
+   "date": "2026-10-27",
+   "verdict": "These session searches found general scalar-extension APIs. Reuse the existing normalized CochainPullback extension adjunction and Mathlib module sheafification; the generic transport and specialization are proved in this module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, extending scalars of a restricted quotient-ring pullback is the pullback over the scalar-extended quotient, with the canonical map on pure tensors.",
+   "results": "8 hits: SheafOfModules.restrictScalars, ModuleCat.ExtendScalars.map_tmul, PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalars, ModuleCat.extendScalars, PresheafOfModules.pullback, ModuleCat.ExtendScalars.obj'.",
+   "date": "2026-10-27",
+   "verdict": "These session searches found general scalar-extension APIs. Reuse the existing normalized CochainPullback extension adjunction and Mathlib module sheafification; the generic transport and specialization are proved in this module."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Cc]omp|pullback.*[Cc]omp|[Pp]ullback.*[Tt]ensor",
+   "results": "25 hits; ModuleCat/Pseudofunctor.lean uses extendScalarsComp; other hits are chiefly unrelated pullback composition. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean and project extension-tensor and coefficient-square APIs.",
+   "date": "2026-10-27",
+   "verdict": "These session searches found general scalar-extension APIs. Reuse the existing normalized CochainPullback extension adjunction and Mathlib module sheafification; the generic transport and specialization are proved in this module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedFinitePullbackComparison",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Normalized tensor-section universal-property helpers used by the finite pullback comparison; separated only for per-file compile time.",
+   "via": [
+    "lem-weil-ramified-finite-pullback-comparison",
+    "lem-weil-ramified-pullback-tower-identification",
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RamifiedFiniteTensorSections",
+  "file": "lean/Sheaf/Paper/RamifiedFiniteTensorSections.lean",
+  "declaration": "WeilConjectures.RamifiedPullback.scalarAdjunction_unit",
+  "declarations": [
+   "WeilConjectures.RamifiedPullback.TensorProof.tensorSection",
+   "WeilConjectures.RamifiedPullback.TensorProof.tensorSection_ext",
+   "WeilConjectures.RamifiedPullback.TensorProof.tensorSection_map",
+   "WeilConjectures.RamifiedPullback.TensorProof.tensorPresentation",
+   "WeilConjectures.RamifiedPullback.TensorProof.tensorAdjunction_unit",
+   "WeilConjectures.RamifiedPullback.scalar_map_tensor",
+   "WeilConjectures.RamifiedPullback.scalarAdjunction",
+   "WeilConjectures.RamifiedPullback.scalarAdjunction_unit"
+  ],
+  "statement": "theorem scalarAdjunction_unit {W : Scheme.{t}}\n    {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S)\n    (M : Mod.{t, u} R) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :\n    ((scalarAdjunction.{t, u} c).unit.app M).val.app U x = tensor.{t, u} c M U 1 x",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pur-cochain-coefficient-arrows",
+  "def-weil-ramified-pullback-tower-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T123448-L-2301724",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T123448-L-2301724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-trait-section-differential-defect-criterion",
+ "kind": "statement",
+ "title": "Differential torsion defect of a section over a trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $K$ and residue field $k$, and choose a strict henselization $A=R^{\\mathrm{sh}}$ with residue field $k^{\\mathrm{sep}}$ [def-sc-ring-strict-henselization]. Let $X\\to\\operatorname{Spec}R$ be a flat locally finite type scheme with smooth generic fibre [def-pc-scheme, def-weil-flat-morphism, def-weil-finite-type-morphism, def-sbc-smooth-morphisms]. For any $R$-morphism $a:\\operatorname{Spec}A\\to X$ set $V_a=\\Gamma(\\operatorname{Spec}A,a^*\\Omega^1_{X/R})$ [def-sc-relative-differential-sheaf, def-pc-module-pullback]. The module $V_a$ is finitely generated over the discrete valuation ring $A$; its torsion submodule $\\{v:\\exists\\,0\\ne t\\in A,\\ tv=0\\}$ has finite length [def-weil-pbc-module-length]. Writing $\\delta_X(a)$ for that length, one has $\\delta_X(a)=0$ if and only if $X\\to\\operatorname{Spec}R$ is smooth at the image of the closed point of $\\operatorname{Spec}A$. These assertions need no quasi-compactness of $X$ and no uniform bound as $a$ varies.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 opening paragraph and Lemma 1, printed p.65 (PDF page 71); local finite type refinement by restriction to an affine neighbourhood of the section. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sc-ring-strict-henselization",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Write $x=a(s_A)$ and $z=a(\\eta_A)$ for the images of the closed and generic points. A DVR is a PID, hence Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Let $\\Omega$ be an algebraic closure of $k^{\\mathrm{sep}}$ and $\\bar x:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ the closed geometric point; the separable algebraic closure of $k$ in $\\Omega$ is $k^{\\mathrm{sep}}$. By [lem-exc-affine-strict-local-ring-comparison] with $X=\\operatorname{Spec}R$, $D=R$ and $i$ the identity, the geometric strict local ring $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}R,\\bar x}$ is $R$-isomorphic to a strict henselization of $R$ relative to $k^{\\mathrm{sep}}$, compatibly with the residue identifications; two such universal colimit vertices are $R$-isomorphic, so it is $R$-isomorphic to the chosen $A$. Apply [lem-sc-strict-henselization-dvr] to $Y=\\operatorname{Spec}R$ at $\\bar x$: its local ring there is $R$, so $R\\to A$ is flat, local and injective, and $A$ is a DVR. Injectivity means the zero ideal of $A$ contracts to the zero ideal of $R$, so $z$ lies in the generic fibre $X_K$. Put $F=\\operatorname{Frac}(A)$ and $l=k^{\\mathrm{sep}}$. Choose an affine neighbourhood $U=\\operatorname{Spec}B$ of $x$ on which $B$ is a finite-type $R$-algebra. The preimage $a^{-1}U$ is an open of the local spectrum $\\operatorname{Spec}A$ containing its closed point; every prime generalizes that point, so this preimage is the whole spectrum. Thus the entire section factors through $U$. In particular no finite cover of $X$ is needed.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP3 (lemma-henselization-dvr); etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring); BLR 3.3 opening paragraph, local affine reduction"
+   }
+  },
+  {
+   "text": "Let $M=\\Gamma(U,\\Omega^1_{X/R})=\\Omega_{B/R}$. By [lem-trf-relative-differential-sheaf-base-change], relative differentials are quasi-coherent and finite type for a locally finite type morphism, with the indicated affine and base-change identifications. By [lem-weil-pbc-module-pullback-affine-sections], $V_a\\cong M\\otimes_B A$. Explicitly, if $b_1,\\ldots,b_n$ generate $B$ as an $R$-algebra, then $db_1,\\ldots,db_n$ generate $M$: the Leibniz rule expands the differential of every polynomial in the $b_i$. Consequently the elements $db_i\\otimes1$ generate $V_a$ over $A$. The same affine formula identifies $V_a\\otimes_A F$ and $V_a\\otimes_A l$ with the differential fibres at the two points, after extension of their residue fields to $F$ and $l$, respectively.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UT (lemma-differentials-affine), 01V0 (lemma-base-change-differentials), 01V2 (lemma-finite-type-differentials); Schemes 01I9"
+   }
+  },
+  {
+   "text": "Choose a surjection $A^n\\twoheadrightarrow V_a$ and put $N$ equal to its kernel. Apply [lem-sfb-pid-submodule-smith-bases] with ambient module $A^n$ and $O=A^n$. It gives a basis $e_1,\\ldots,e_n$ of $A^n$ and a basis $v_1,\\ldots,v_r$ of $N$, $r\\le n$, with $v_i=c_i e_i$. Each $c_i$ is nonzero, since $v_i$ is a basis vector. The coordinate map sends the class of $\\sum u_i e_i$ to $( (u_i\\bmod c_i)_{i\\le r},(u_i)_{i>r})$ and has kernel exactly $N$. It therefore identifies $V_a$ with $A^{n-r}\\oplus\\bigoplus_{i=1}^r A/(c_i)$. An element of this direct sum is torsion precisely when its free coordinates vanish: nonzero scalars act injectively on $A$, while $\\prod c_i$ kills all cyclic coordinates. Hence the torsion submodule $T$ is the displayed finite sum of cyclic quotients.",
+   "uses": [
+    "lem-sfb-pid-submodule-smith-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
+    "place": "Submodule.exists_smith_normal_form_of_le, Mathlib/LinearAlgebra/FreeModule/PID.lean:492-497; elementary coordinate quotient calculation"
+   }
+  },
+  {
+   "text": "By [lem-sc-dvr-dimension-one], $\\dim A=1$; $A$ is Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Each nonzero $c_i$ is a nonzerodivisor, so [lem-weil-pbc-dim-le-one-principal-quotient-finite-length] gives finite length of $A/(c_i)$. Apply [lem-weil-pbc-length-additive-short-exact] successively to the split exact sequences for a finite direct sum. It follows that $T$ has finite length and $\\delta_X(a)$ is a finite nonnegative integer. The definition [def-weil-pbc-module-length] gives length zero exactly for the zero module: a nonzero module has the strict chain $0\\subsetneq T$. Thus $\\delta_X(a)=0$ exactly when all cyclic summands in Step 3 vanish, equivalently when $V_a$ is free. Conversely a free module has no torsion because $A$ is a domain. This also includes $r=0$, $n=0$ and unit coefficients $c_i$.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+    "lem-weil-pbc-length-additive-short-exact",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 00PE (lemma-finite-length), 00IV (lemma-length-additive)"
+   }
+  },
+  {
+   "text": "If $X/R$ is smooth at $x$, [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] gives an affine neighbourhood $W$ of $x$ on which its relative differential module is free of finite rank. As in Step 1, $a$ factors through $W$. The affine pullback formula [lem-weil-pbc-module-pullback-affine-sections] makes $V_a$ a free $A$-module. Its torsion is therefore zero, and Step 4 gives $\\delta_X(a)=0$. Smoothness at a point means smoothness on an open neighbourhood, so the cited smooth-morphism assertion applies to that neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free); BLR 3.3 Lemma 1 forward implication"
+   }
+  },
+  {
+   "text": "Assume $\\delta_X(a)=0$, so Step 4 writes $V_a\\cong A^d$ for some $d\\ge0$. The point $z$ lies in $X_K$ by Step 1, and $X_K$ is smooth there by hypothesis. By [lem-weil-pbc-smooth-over-field-dimension-differentials], its differential fibre has dimension $\\dim_z X_K$ over $\\kappa(z)$. The affine base-change identification of Step 2 shows that its extension to $F$ is $V_a\\otimes_A F\\cong F^d$. A basis over $\\kappa(z)$ remains a basis after extension to $F$, so $d=\\dim_z X_K$. On the special fibre, the same identification gives $(M\\otimes_B\\kappa(x))\\otimes_{\\kappa(x)}l\\cong V_a\\otimes_A l\\cong l^d$. Again a field extension preserves the size of a finite basis, so $\\dim_{\\kappa(x)}(M\\otimes_B\\kappa(x))=d$. No assumption that $x$ or $z$ has the base field as residue field is used.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-field-dimension-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "BLR 3.3 opening paragraph and Lemma 1; Tag 00TT (lemma-characterize-smooth-over-field), implication (1) to (3)"
+   }
+  },
+  {
+   "text": "Let $e=\\dim_x X_k$, which is a finite nonnegative integer since $X_k$ is locally of finite type over a field. By [lem-weil-pbc-local-fibre-dimension-open], the subset where local fibre dimension is at most $e$ is open and contains $x$. The point $z$ generalizes $x$ because $\\eta_A$ generalizes $s_A$ and $a$ is continuous. Hence this open contains $z$ as well. Its fibre there is the generic fibre, so $d=\\dim_z X_K\\le e$. This is precisely the relative-dimension specialization comparison used in BLR; the lemma requires only local finite type, with no properness or quasi-compactness.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ (lemma-openness-bounded-dimension-fibres), reference EGA IV 13.1.3; BLR 3.3 Lemma 1 converse"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset B$ represent $x$. The local module $M_{\\mathfrak q}$ is finite, and its residue vector space has dimension $d$ by Step 6. Lift a basis of that vector space to $M_{\\mathfrak q}$. By [lem-weil-pbc-nakayama-local-generators] these $d$ lifts generate $M_{\\mathfrak q}$, hence the differential stalk at $x$. The base $\\operatorname{Spec}R$ is locally Noetherian, so [pqf-lem-lft-fp-locnoeth] makes $X/R$ locally of finite presentation. The stalk map is flat by the assumed flatness of $X/R$. Since $d\\le e=\\dim_xX_k$, [lem-trf-smooth-at-point-differential-criterion] now gives smoothness at $x$. All hypotheses of this criterion have thus been supplied: local finite presentation, local flatness, and the number of differential generators.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-trf-smooth-at-point-differential-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9 (lemma-smooth-at-point), equivalence (1) and (3); Algebra 00DV (lemma-NAK); BLR 3.3 Lemma 1 converse"
+   }
+  },
+  {
+   "text": "The constructions and comparisons above concern one fixed section and an affine neighbourhood of its closed image. Step 1 shows that this neighbourhood contains the whole section. Thus none of the conclusions uses quasi-compactness of $X$, and the finite integer $\\delta_X(a)$ is established separately for each $a$, without taking a supremum over sections or assuming a uniform bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.3 Lemma 1, as distinct from Proposition 3 (the global boundedness assertion)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-dvr",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sfb-pid-submodule-smith-bases",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+  "lem-weil-pbc-length-additive-short-exact",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-smooth-over-field-dimension-differentials",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-weil-pbc-nakayama-local-generators",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-trf-smooth-at-point-differential-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 opening paragraph and Lemma 1, printed p.65 (PDF page 71), using its flat case; primary scan read online, local PDF WANTED. Expanded with Stacks 0AP3, 01V9, 02FZ, 02G1 and elementary Smith-coordinate calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion.*smooth|smooth.*torsion|length.*[Dd]ifferential|[Dd]ifferential.*length",
+   "results": "{\"t\": \"2026-10-24T07:42:10Z\", \"tool\": \"grep\", \"query\": \"torsion.*smooth|smooth.*torsion|length.*[Dd]ifferential|[Dd]ifferential.*length\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion length Kahler differentials along DVR section smooth if and only if zero",
+   "results": "{\"t\": \"2026-10-24T07:42:10Z\", \"tool\": \"leansearch\", \"query\": \"Torsion length Kahler differentials along DVR section smooth if and only if zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.D\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"Algebra.formallyUnramified_iff\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"KaehlerDifferential.derivationQuotKerTotal\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"0bd9f0f4988bc224\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.length",
+   "results": "{\"t\": \"2026-10-24T07:42:10Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a flat generically smooth scheme over a discrete valuation ring has zero torsion in pulled back differentials exactly when it is in the smooth locus",
+   "results": "{\"t\": \"2026-10-24T07:42:16Z\", \"tool\": \"leanfinder\", \"query\": \"A section of a flat generically smooth scheme over a discrete valuation ring has zero torsion in pulled back differentials exactly when it is in the smooth locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.flat\"], \"digest\": \"c7800ea6ee790b23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neron defect at a section is finite and vanishes exactly at smooth points of a generically smooth flat trait scheme",
+   "results": "{\"t\": \"2026-10-24T07:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"Neron defect at a section is finite and vanishes exactly at smooth points of a generically smooth flat trait scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"Algebra.smoothLocus_eq_univ_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"b35f27de9f371e94\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated module over a discrete valuation ring is a direct sum of a free module and finite length torsion",
+   "results": "{\"t\": \"2026-10-24T08:15:41Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated module over a discrete valuation ring is a direct sum of a free module and finite length torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.torsion_by_prime_power_decomposition\", \"Submodule.isInternal_prime_power_torsion_of_pid\", \"Submodule.exists_isInternal_prime_power_torsion_of_pid\", \"Submodule.isInternal_prime_power_torsion\", \"Submodule.exists_isInternal_prime_power_torsion\", \"Submodule.quotientEquivDirectSum\", \"Submodule.finrank_quotient_eq_sum\", \"IsFiniteLength\"], \"digest\": \"bb1968211e1994d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.torsion, IsFiniteLength",
+   "results": "{\"t\": \"2026-10-24T08:17:38Z\", \"tool\": \"loogle\", \"query\": \"Module.torsion, IsFiniteLength\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Module.torsion'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle reported unknown identifier Module.torsion; no absence claim relies on this invalid pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(finiteLength|isFiniteLength)|finiteLength.*torsion|length_eq_zero|free.*torsion",
+   "results": "{\"t\": \"2026-10-24T08:17:38Z\", \"tool\": \"grep\", \"query\": \"torsion.*(finiteLength|isFiniteLength)|finiteLength.*torsion|length_eq_zero|free.*torsion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AlgebraTower.lean\", \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\"], \"digest\": \"e9e7937c6da4e609\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion length of differentials along a DVR section vanishes exactly at smooth points",
+   "results": "{\"t\": \"2026-10-24T08:18:08Z\", \"tool\": \"leansearch\", \"query\": \"Torsion length of differentials along a DVR section vanishes exactly at smooth points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.smoothLocus\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"RingHom.Smooth.holdsForLocalizationAway\", \"hfdifferential\", \"IsLocalRing.finrank_CotangentSpace_eq_one\"], \"digest\": \"506acbbaeb123c88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a rational point follows if the number of generators of Kahler differentials is at most the local dimension",
+   "results": "{\"t\": \"2026-10-24T08:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness at a rational point follows if the number of generators of Kahler differentials is at most the local dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"09c2b4c2b672769b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structure theorem of finitely generated modules over a principal ideal domain free part and cyclic prime power quotients",
+   "results": "{\"t\": \"2026-10-24T08:22:22Z\", \"tool\": \"leanfinder\", \"query\": \"Structure theorem of finitely generated modules over a principal ideal domain free part and cyclic prime power quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.torsion_by_prime_power_decomposition\", \"Submodule.exists_isInternal_prime_power_torsion_of_pid\", \"Submodule.isInternal_prime_power_torsion_of_pid\", \"Submodule.smithNormalForm\", \"Submodule.quotientEquivDirectSum\", \"Module.Basis.SmithNormalForm\", \"Ideal.smithNormalForm\", \"Ideal.exists_smith_normal_form\"], \"digest\": \"ccbd7931f944cad4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.equiv_free_prod_directSum",
+   "results": "{\"t\": \"2026-10-24T08:22:23Z\", \"tool\": \"loogle\", \"query\": \"Module.equiv_free_prod_directSum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.equiv_free_prod_directSum\"], \"digest\": \"9a2ee89203f11d79\"}",
+   "date": "2026-10-24",
+   "verdict": "match for auxiliary PID structure only, not the item; read Mathlib/Algebra/Module/PID.lean:259-271; existing Smith-bases node suffices, so no new leaf created."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv_free_prod_directSum",
+   "results": "{\"t\": \"2026-10-24T08:22:23Z\", \"tool\": \"grep\", \"query\": \"equiv_free_prod_directSum\", \"sub\": \"Algebra/Module/PID.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"21\", \"259\", \"276\"], \"digest\": \"1325f579ea330958\"}",
+   "date": "2026-10-24",
+   "verdict": "match for auxiliary PID structure only, not the item; read Mathlib/Algebra/Module/PID.lean:259-271; existing Smith-bases node suffices, so no new leaf created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure theorem finitely generated module over principal ideal domain product free cyclic prime power quotients",
+   "results": "{\"t\": \"2026-10-24T08:22:24Z\", \"tool\": \"leansearch\", \"query\": \"Structure theorem finitely generated module over principal ideal domain product free cyclic prime power quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.torsion_by_prime_power_decomposition\", \"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"Submodule.exists_isInternal_prime_power_torsion_of_pid\", \"Module.free_iff_isTorsionFree\", \"Submodule.finrank_quotient_eq_sum\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"FGModuleRepr.ofFinite\"], \"digest\": \"b6e7e17ee244dcf4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*smooth|smooth.*torsion|Neron.*defect|defect.*smooth",
+   "results": "{\"t\": \"2026-10-24T08:27:32Z\", \"tool\": \"grep\", \"query\": \"torsion.*smooth|smooth.*torsion|Neron.*defect|defect.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat generically smooth scheme locally of finite type over a discrete valuation ring is smooth at a section exactly when its pulled back differentials have no torsion",
+   "results": "{\"t\": \"2026-10-24T08:27:34Z\", \"tool\": \"leanfinder\", \"query\": \"A flat generically smooth scheme locally of finite type over a discrete valuation ring is smooth at a section exactly when its pulled back differentials have no torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.smoothLocus\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"1e62469d68723c7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: returned scalar structure, cotangent, or smooth-locus facts do not state the section defect equivalence and its finiteness clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-canonical-group-dilatation-defect-drop",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 7.1 finite repetition paragraph: use 3.3 Lemma 1 to detect smoothness from defect zero at the identity.",
+   "via": [
+    "lem-sfb-canonical-group-dilatation-defect-drop",
+    "lem-sfb-lft-closed-subgroup-group-smoothening",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-section-differential-defect-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the local BLR 3.3 Lemma 1 proof into affine reduction, differential module finiteness, Smith coordinates and finite torsion length, and the two smoothness implications. Reused all supporting nodes; no new nodes. Kept local finite type throughout and made the specialization inequality and residue-field extension explicit.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs.py ancestor returns None). This node realizes the defect-zero test in BLR 7.1 finite-repetition paragraph, used by lem-sfb-canonical-group-dilatation-defect-drop, via BLR 3.3 opening paragraph and Lemma 1. The existing created.item chain and blueprint.from.via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Strict henselization preserves the DVR property; a general local algebra tool required before forming the defect. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies the algebraic strict henselization relative to k^sep with the geometric strict local ring of Spec R, so that the DVR criterion 0AP3 applies to the chosen A; generic algebra (Stacks 04HX), added by the NE reader."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Affine differential finiteness, quasi-coherence and arbitrary base change; no unit-specific geometric argument is imported. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Tensor formula for ordinary quasi-coherent pullback on affines. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Dimension one of a DVR for the finite-length cyclic quotient input. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Finite free differential charts of a smooth morphism. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-dimension-differentials",
+    "why": "Generic differential dimension equals local fibre dimension over a field. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "General local fibre-dimension semicontinuity, exactly the EGA IV 13.1.3 step of BLR. The present unit contains no replacement for this generic algebraic-geometry input."
+   },
+   {
+    "node": "lem-trf-smooth-at-point-differential-criterion",
+    "why": "The general flatness plus differential-generator smoothness criterion, exactly BLR 2.2/15 and 2.4/18 in the flat case. The present unit contains no replacement for this generic algebraic-geometry input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-dvr",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-smooth-over-field-dimension-differentials",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-trf-smooth-at-point-differential-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NE-fd48017d5",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-fd48017d5 (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, every cited statement and the Stacks sources (0AP3 more-algebra:11223, 01V9 morphisms:7264, 02FZ, 02G1, 00TT, 04HX etale-cohomology:4257); the BLR 3.3 Lemma 1 statement is unchanged; there are no new nodes. Fault C1/C4: Step 1 applied lem-sc-strict-henselization-dvr, which is about the geometric strict local ring, to the item's A, which is the algebraic strict henselization relative to k^sep; nothing cited identified the two. FIXED: Step 1 now cites lem-exc-affine-strict-local-ring-comparison (04HX; no cycle, no trace-formula or Poincaré node in its closure) and adds it to proof_deps and tool_uses. It also states that R->A is injective, so z lies in X_K, and Step 6 points to that. The rest checks out: Smith coordinates give V_a = A^{n-r} plus a sum of A/(c_i); the finite-length and length-zero argument holds; smooth implies free via 02G1; the converse uses 00TT at z, then the 02FZ specialization d<=e, then Nakayama, lfp, flatness and 01V9 (1)<=>(3). Small cases: A^m_R, uv=t^2 with section (t,t) gives defect 1, empty X. Batch-5: lem-trf-relative-differential-sheaf-base-change (01UT/01V0/01V2) and lem-trf-smooth-at-point-differential-criterion (01V9) are generic results whose closures contain no trace-formula or Poincaré theorem, so both are accepted as outside the assumptions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitSectionDifferentialDefectCriterion",
+  "declaration": "AlgebraicGeometry.trait_section_differential_defect_criterion",
+  "declarations": [
+   "AlgebraicGeometry.traitSectionDifferentials",
+   "AlgebraicGeometry.traitSectionDifferentialDefect",
+   "AlgebraicGeometry.trait_section_differential_defect_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitSectionDifferentialDefectCriterion.lean",
+  "statement": "theorem trait_section_differential_defect_criterion (R K ksep A : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] [Field ksep] [Algebra (IsLocalRing.ResidueField R) ksep] [IsSepClosure (IsLocalRing.ResidueField R) ksep] [Algebra R ksep] [IsScalarTower R (IsLocalRing.ResidueField R) ksep] [CommRing A] [Algebra R A] (P : Algebra.StrictHenselizationPresentationIn.{u, u} R ksep A) (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [Flat f] [LocallyOfFiniteType f] [Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K))))] (a : Spec (.of A) ⟶ X) (ha : a ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A))) : ∃ (_ : IsDomain A) (_ : IsDiscreteValuationRing A), Module.Finite A (traitSectionDifferentials f a) ∧ traitSectionDifferentialDefect f a ≠ ⊤ ∧ (traitSectionDifferentialDefect f a = 0 ↔ ∃ U : X.Opens, a (IsLocalRing.closedPoint A) ∈ U ∧ Smooth (U.ι ≫ f))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f474ef3e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: DVR R, fraction field K, residue separable closure ksep with scalar tower, A via StrictHenselizationPresentationIn.{u,u} tied to the given Algebra R A, Flat + LocallyOfFiniteType (no QuasiCompact), smooth generic fibre via pullback.snd, R-morphism a. Conclusion: A is a DVR (Prop existentials), Module.Finite V_a, torsion length ≠ ⊤, and length = 0 iff an open neighbourhood U of a(closedPoint A) has U.ι ≫ f smooth. Helpers traitSectionDifferentials (moduleSpecΓFunctor of tensorPullback a of f.relativeDifferentials, the recorded pullback and differentials) and traitSectionDifferentialDefect (Module.length of Submodule.torsion, in ℕ∞) have real data, are the item's own notions, are listed in lean.declarations and carry source/blueprint docstrings. Searched project DAG/Lean: no duplicate. Node differs from live only in lean. Theorem docstring has all 9 proof steps; only the theorem is sorry; all imports exist in side-live; report has Worker report and Second reading by Q83 sections. Edge cases (empty X, zero module, unit Smith coefficients, non-qc X, common universe u) are fine. Not recompiled (no change); worker reports a clean compile."
+ }
+}

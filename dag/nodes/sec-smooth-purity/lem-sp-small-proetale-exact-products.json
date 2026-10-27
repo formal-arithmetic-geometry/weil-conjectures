@@ -1,0 +1,105 @@
+{
+ "id": "lem-sp-small-proetale-exact-products",
+ "kind": "statement",
+ "title": "Exact countable products on a specified small pro-etale model",
+ "statement": "Let C be a small category in universe u, J a Grothendieck topology on C, T a scheme in any universe, and e an equivalence from C to the pro-etale site of T [def-weil-pbc-proetale-site]. Assume J is the topology induced along e from the pro-etale topology. For every u-small sheaf R of commutative rings, the category of u-small R-module sheaves [def-weil-sheaf-of-modules-category] has exact countable products. No relation between the universe of T and u is imposed beyond the displayed equivalence.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), exact countable products on the chosen small pro-etale model"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport the ring sheaf and module sheaves along the given equivalence of sites. Lift coefficient rings and modules to a common universe if necessary. Universe lifting preserves countable products and preserves and reflects local surjectivity, hence epimorphisms of module sheaves. Apply exact countable products on the full pro-etale site to the lifted ring and maps, then reflect the resulting product epimorphism back to the small universe. Products are left exact in an abelian category, so preservation of epimorphisms implies the asserted exactness instance. The same argument includes empty sites and zero rings.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), exact countable products on the chosen small pro-etale model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a finite free sheaf of algebras is the finite power functor after restriction of scalars",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.freeFunctor, Algebra.TensorProduct.piScalarRight and presheaf change-of-rings constructions. No finite-basis sheaf tensor comparison with the displayed normalization.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; existing scalar and product APIs supply ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact countable products of sheaves of modules on a small site equivalent to a scheme pro etale site",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, Condensed.hasExactLimitsOfShape, and condensed module constructions. No arbitrary coefficient sheaf on a specified small pro-etale model.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the existing project pro-etale product theorem is the geometric ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "countableProducts_exact|tensorFunctor|scalarReassoc",
+   "results": "msearch Mathlib grep: 0 hits. Project rg finds scalarReassoc_normalized in ScalarInverseImageTowerDiagram and countableProducts_exact in ProEtaleCountableProductsExact.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the project tensor and geometric APIs; no Mathlib theorem states these interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldScalarStrictLimit",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(1), exact countable products on the chosen small pro-etale model",
+   "via": [
+    "lem-sp-field-scalar-strict-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmallProEtaleExactProducts",
+  "file": "lean/Sheaf/Paper/SmallProEtaleExactProducts.lean",
+  "declaration": "SheafOfModules.smallProEtaleExactProducts",
+  "statement": "theorem smallProEtaleExactProducts {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (T : AlgebraicGeometry.Scheme.{t})\n    (e : C ≌ T.ProEt)\n    (hJ : J = e.functor.inducedTopology (AlgebraicGeometry.Scheme.ProEt.topology T))\n    (R : Sheaf J CommRingCat.{u}) :\n    HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u} (ringSheaf R))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "independent cc review: delivered FieldScalarStrictLimit theorem statement vs clone (identical); FieldScalarStrictLimitData vs the clone's interface block (verbatim); the two sorry statements vs their nodes and the item's needs; node proof_deps vs Lean imports/uses; #print axioms on a scratch build"
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-strict-mixed-finite-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of coherent strict mixed laws",
+ "statement": "Let $\\ell$ be prime, $E,L/\\mathbf Q_\\ell$ finite extensions, $\\iota:E\\to L$ a coefficient embedding, $f:X\\to Y$ a scheme morphism and $I,J$ normalized strict integral direct-image models. Let $b:T_Y I_E\\cong I_L T_X$ be a scalar comparison. If CoherentLaws holds for these data [def-weil-strict-mixed-unit-data], then FiniteLaws holds for them: every finite evaluation satisfies the specified mixed-unit equality, and the finite mixed-unit lift map is bijective. This implication needs no properness or finite-type hypotheses beyond the already given coherent laws.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map (counit-transpose construction); agent-extracted coherent mixed-quotient normalization of the reconstruction-transported comparison in lem-sf-strict-direct-image-scalar-comparison, using the specified system units and counits."
+ },
+ "stmt_deps": [
+  "def-weil-strict-mixed-unit-data"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the coherent data. Apply the finite evaluation functor to the constructed system equality and expand preservation of composition. Substitute MixedEvaluation, ReductionEvaluation and RestrictionEvaluation, and move the natural evaluation isomorphisms across reduction of b and direct image. Cancel the invertible evaluation transports to get the displayed finite equality. Evaluate the coefficient reduction isomorphism s_Y and compose it with scalar-extension evaluation and the two reduction evaluations. Its inverse transports the finite scalar-adjunction unit to the finite mixed unit by transpose_evaluation and MixedEvaluation. The lift map is therefore the composite of precomposition by an isomorphism and the finite scalar-adjunction Hom equivalence; both are bijective. This proves FiniteLaws without deducing equality of system maps from their evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), Tag 0D6D (lemma-derived-pullback-composition); evaluation and coherent system assertions are those of the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of Steps 1--6 of lem-weil-strict-direct-image-mixed-unit, using the cited Stacks adjunction and projection-formula constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension pushforward counit mate with derived tensor adjunction units",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, ModuleCat.extendScalars_comp_id_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_unit. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|homEquiv.*naturality",
+   "results": "25 hits: Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Category/UniformSpace.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension adjunction mixed tensor unit and direct image comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, CategoryTheory.Adjunction.derivedη.congr_simp, ModuleCat.extendRestrictScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.derivedη. Read the returned signatures: categorical Hom equivalences provide the assembly, but do not construct the specified sequence-site comparisons or their normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "First paragraph: identification of the strict-tower direct image with ordinary direct image, including the coefficient-descent normalization hidden in this identification. Finite evaluation of coherent strict mixed laws",
+   "via": [
+    "lem-weil-proper-coefficient-descent",
+    "lem-weil-strict-direct-image-mixed-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictMixedFiniteEvaluation",
+  "file": "lean/Sheaf/Paper/StrictMixedFiniteEvaluation.lean",
+  "declaration": "WeilConjectures.StrictDirectImageMixedUnit.strictMixedFiniteEvaluation",
+  "statement": "theorem strictMixedFiniteEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (I : IntegralModel l E f) (J : IntegralModel l L f)\n    (b : I.image ⋙ sfConstructibleIntegralScalarExtension 0 l\n        (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y ≅\n      sfConstructibleIntegralScalarExtension 0 l\n        (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X ⋙ J.image)\n    (hc : CoherentLaws l E L ι f I J b) :\n    FiniteLaws l E L ι f I J b",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "worker": "H4",
+  "summary": "Formal proof-step obligation from the existing six-step strict mixed-unit calculation.",
+  "blueprint": "The original coefficient-descent subargument below prop-weil-proper-compact-coincidence; no chapter or unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Simultaneous unbounded operations and transposes on varying-ring sequence sites, without flatness or equality detection by evaluations. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Actual derived extension/restriction Hom bijection, units and their representative normalization for arbitrary ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Actual reduction/limit adjunction and triangle identities in derived system categories. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Derived tensor association and unit normalization natural in arbitrary composable ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "independent cc review: old StrictDirectImageMixedUnit defs vs StrictDirectImageMixedUnitData (verbatim); item theorem signature vs base; three split statements vs their nodes and the old CoherentLaws/FiniteLaws; item node proof/proof_deps vs Lean assembly"
+ }
+}

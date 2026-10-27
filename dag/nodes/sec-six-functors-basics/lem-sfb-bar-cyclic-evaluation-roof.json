@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-bar-cyclic-evaluation-roof",
+ "kind": "statement",
+ "title": "Evaluation map from the injective bar total to the cyclic total",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site in a universe containing all parameter sets [sk-def-sfb-condensed-ring, def-weil-size-convention]. Use internal $R$-modules $\\mathcal M_R$ [sk-def-sfb-module-objects] and action categories $\\mathcal A_P(R)$ for the condensed group $\\underline P(S)=C(S,P)$ [def-sfb-condensed-action-module]. Let $H$ be profinite, $u:\\mathbf Z_{\\mathrm{disc}}\\to H$ continuous, $\\tau=u(1)$, and take the regular module $R$ with trivial $H$-action. Fix any nonnegative equivariant injective resolution $a:R[0]\\to I^\\bullet$. Write $U$ for full action-forgetting, $V$ for restriction along $u$, $\\Gamma_H$ for the invariant submodule functor and $Q$ for ordinary derived localization. Let $T$ act on $VI$ by $1\\in\\mathbf Z$, equivalently by $\\tau$ on $I$. On the compatible bar model of [lem-sfb-internal-bar-roof-adjunction], put\n$$D^{p,q}=\\underline{\\operatorname{Hom}}_R(R[\\underline H^p],UI^q),\\qquad d_{\\mathrm{Tot}}=d_h+(-1)^p d_I\\quad(p,q\\geq0).$$\nHere $d_h$ is the action-dependent inhomogeneous differential. Let $b_H:\\Gamma_H I\\to\\operatorname{Tot}D$ be invariant inclusion, $V_R^p=\\underline{\\operatorname{Hom}}_R(R[\\underline H^p],R)$, and let $j:QV_R\\to Q\\operatorname{Tot}D$ be the map induced by $a$ in resolution degree zero. Identify $\\eta:R\\Gamma_H(R[0])\\xrightarrow{\\sim}Q\\operatorname{Tot}D$ with $Q(b_H)$ using the normalized resolution comparison.\n\nLet $K(VI)^n=UI^n\\oplus UI^{n-1}$ with differential $(dx,(T-1)x-dy)$. There is a cochain map $E:\\operatorname{Tot}D\\to K(VI)$ whose components are identity for $p=0$, evaluation at $\\tau$ for $p=1$, and zero for $p\\geq2$. Evaluation is precomposition with $R\\to R[\\underline H]$, $1\\mapsto[\\tau]$, on every profinite base change. It satisfies\n$$(d_hm)(\\tau)=\\tau m-m,\\qquad Eb_H=(\\mathrm{inclusion},0).$$\nFor $\\epsilon:V_R\\to[R\\xrightarrow0R]$ given by identity, evaluation at $\\tau$, and zero in higher degrees, and $k=K(Va):[R\\xrightarrow0R]\\to K(VI)$, one has the equality of cochain maps $Ej_{\\mathrm{rep}}=k\\epsilon$, and $k$ is a quasi-isomorphism. Using the mate $\\beta$ of [lem-sfb-relative-restriction-mate-forgetting] and $\\theta=\\lambda^{-1}$ with $\\theta\\alpha=Qb$ (where $\\alpha$ is the canonical right-derived computation unit and $b$ the cyclic invariant inclusion) of [lem-sfb-cyclic-row-derived-comparison], their composite $c=\\lambda^{-1}\\beta$ is represented on this resolution by\n$$c=Q(k)^{-1}Q(Eb_H),\\qquad c\\eta^{-1}j=Q(\\epsilon).$$\nThese equations use the canonical source resolution identification, hold without injectivity of $VI$, and do not assert invertibility of $\\beta$ or that the underived bar computes derived invariants.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary relative cyclic calculation. Agent-formulated extracted task from the returned proof of lem-sfb-relative-cyclic-restriction-model, steps 15,16,17. Exact combined reference WANTED; argument and ingredient references retained in report.md."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "lem-sfb-internal-bar-roof-adjunction",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-sfb-relative-restriction-mate-forgetting",
+  "lem-sfb-cyclic-row-derived-comparison",
+  "lem-sfb-cyclic-total-triangulated",
+  "def-pur-sheaf-hom",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-relative-bar-data",
+  "def-sfb-relative-trivial-cyclic-map",
+  "def-sfb-relative-cyclic-total"
+ ],
+ "proof": [
+  {
+   "text": "Use the compatible bar data of [def-sfb-condensed-equivariant-bar-data]. For a profinite base $S$, evaluation sends a natural internal function $f$ to its value on the constant map $S\\to H$ with value $\\tau$. Equivalently it precomposes internal Hom by the free-module map $R\\to R[\\underline H]$ sending $1$ to $[\\tau]$. Restrictions carry this generator to the same constant generator, so evaluation is an internal $R$-linear map and commutes with every coefficient map, in particular $d_I$. The first and last faces in bar degree zero give $(d_hm)(\\tau)=\\tau m-m$. These are the face and evaluation rules stated in the cited definition, not an assertion about global-section exactness.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary cyclic calculation, agent-written detail: internal evaluation and degree-zero bar differential"
+   }
+  },
+  {
+   "text": "For $z=(z_p)_{p+q=n}$ in the finite-diagonal total, define $E^n(z)=(z_0,\\operatorname{ev}_\\tau z_1)$, omitting negative-degree terms. The total differential of [def-sp-double-complex-total] gives\n$$E^{n+1}(d_{\\rm Tot}z)=(d_Iz_0,\\operatorname{ev}_\\tau(d_hz_0-d_Iz_1))=(d_Iz_0,(T-1)z_0-d_I\\operatorname{ev}_\\tau z_1)=d_KE^n(z).$$\nNo column $p\\geq2$ can contribute to output column zero or one. Thus this defines the claimed cochain map, including degree zero. Since $b_H$ has only its bar-zero component, its composite with $E$ is exactly $(\\mathrm{inclusion},0)$.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary cyclic calculation, agent-written detail: finite-diagonal calculation with the minus sign in column one"
+   }
+  },
+  {
+   "text": "Apply the same coordinate calculation to the trivial module $R[0]$: $(T-1)R=0$, so its cyclic total is $[R\\xrightarrow0R]$ and its evaluation map is $\\epsilon$. The row-zero augmentation $j_{\\rm rep}$ postcomposes every internal function by $a^0$. Therefore in degrees zero and one the two composites $Ej_{\\rm rep}$ and $k\\epsilon$ are respectively $a^0$ and $a^0\\operatorname{ev}_\\tau=\\operatorname{ev}_\\tau\\underline{\\operatorname{Hom}}(R[\\underline H],a^0)$; both are zero in higher degrees. This proves equality as cochain maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary cyclic calculation, agent-written detail: row-zero coefficient augmentation and evaluation square"
+   }
+  },
+  {
+   "text": "Restriction is exact by [lem-sfb-condensed-derived-restriction-calculus], hence $Va:R[0]\\to VI$ is a bounded-below quasi-isomorphism. The cyclic total preserves such quasi-isomorphisms by [lem-sfb-cyclic-total-triangulated], with residual group the trivial profinite group. Consequently $k=K(Va)$ is a quasi-isomorphism, and $Q(k)$ is invertible. No injectivity statement about $VI$ is used.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-cyclic-total-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary cyclic calculation, agent-written detail: valid denominator after restricting the resolution"
+   }
+  },
+  {
+   "text": "Put $A=R\\Gamma_H(Qa)$, $B=R\\Gamma_{\\mathbf Z}(QVa)$ and $C=Q(k)$. By the injective-resolution computation of [lem-sfb-condensed-derived-restriction-calculus], $\\sigma=A^{-1}\\alpha_{H,I}:Q\\Gamma_H I\\xrightarrow{\\sim}R\\Gamma_H(R[0])$ is the canonical source identification. Indeed $A$ is invertible because $Qa$ is invertible and $R\\Gamma_H$ is a functor; $\\alpha_{H,I}$ is invertible because $I$ is nonnegative termwise injective. Thus $\\sigma^{-1}=\\alpha_{H,I}^{-1}A$. The mate equation of [lem-sfb-relative-restriction-mate-forgetting] gives $\\beta_I\\alpha_{H,I}=\\alpha_{\\mathbf Z,VI}Q(\\iota_I)$, with residual group trivial. The comparison of [lem-sfb-cyclic-row-derived-comparison] gives $\\theta_{VI}\\alpha_{\\mathbf Z,VI}=Q(b_{VI})$, even though $VI$ need not be injective. Naturality along $a$ and $Va$ reads $\\beta_I A=B\\beta_R$ and $\\theta_{VI}B=C\\theta_R$. Thus, since $c=\\theta_R\\beta_R$ and $C$ is invertible by step 4,\n$$c\\sigma=C^{-1}\\theta_{VI}\\beta_I\\alpha_{H,I}=Q(k)^{-1}Q(b_{VI}\\iota_I)=Q(k)^{-1}Q(Eb_H).$$\nThe last equality is step 2: both cochain maps include $H$-invariants into the first coordinate and are zero in the second. This proves the roof formula under $\\sigma$ without inverting $\\beta$.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-relative-restriction-mate-forgetting",
+    "lem-sfb-cyclic-row-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary cyclic calculation, agent-written detail: derived mate equation and comparison normalization on the restricted complex"
+   }
+  },
+  {
+   "text": "The normalized bar model of [lem-sfb-internal-bar-roof-adjunction] says $\\eta=Q(b_H)\\sigma^{-1}$, with $Q(b_H)$ invertible. In particular $\\eta\\sigma=Q(b_H)$ and $\\eta^{-1}=\\sigma Q(b_H)^{-1}$; this fixes the domain of every factor in the cancellation below. Using the roof formula of step 5 and $j=Q(j_{\\rm rep})$, cancel this denominator and then use step 3:\n$$c\\eta^{-1}j=c\\sigma Q(b_H)^{-1}Q(j_{\\rm rep})=Q(k)^{-1}Q(E)Q(j_{\\rm rep})=Q(k)^{-1}Q(k\\epsilon)=Q(\\epsilon).$$\nOnly $Q(k)$ and $Q(b_H)$ have been inverted. The argument makes no assertion that $\\beta$ or $j$ is invertible.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), auxiliary cyclic calculation, agent-written detail: normalized bar denominator and cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-double-complex-total",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-cyclic-total-triangulated",
+  "lem-sfb-relative-restriction-mate-forgetting",
+  "lem-sfb-cyclic-row-derived-comparison",
+  "lem-sfb-internal-bar-roof-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted cyclic evaluation calculation; expanded using the existing normalized bar, mate and cyclic-row statements. Exact combined condensed reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of internal inhomogeneous bar cochains at a cyclic generator represents derived restriction to two term cyclic resolution using injective bar double complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.inhomogeneousCochainsIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) → groupCohomology.inhomogeneousCochains A ≅ (Rep.barComplex k G).linearYonedaObj k A\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, this establishes an isomorphism between the inhomogeneous cochain complex computing group cohomology and the linear Yoneda ob\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.homResolutionIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : CommGroup G] →\\n      [inst_2 : Fintype G] →\\n        (A : Rep k G) →\\n          (g : G) →\\n            (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) →\\n              (Rep.FiniteCyclicGroup.resolution k g hg).complex.linearYonedaObj k A ≅\\n                \", \"doc\": \"An isomorphism between the cochain complex obtained via the linear Yoneda embedding of a projective resolution for a finite cyclic group $ G $ over a commutative ring $ k $ and the standard cochain co\"}\n  {\"name\": \"inhomogeneousCochains.d_eq\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (n : ℕ),\\n  inhomogeneousCochains.d A n =\\n    CategoryTheory.CategoryStruct.comp (Rep.freeLiftLEquiv (Fin n → G) A).toModuleIso.inv\\n      (CategoryTheory.CategoryStruct.comp (((Rep.barComplex k G).linearYonedaObj k A).d n (n + 1))\\n\", \"doc\": \"The differential $ d^n_A $ for inhomogeneous cochains is equal to the composition of three maps: the inverse of the $ k $-linear equivalence between hom-sets and function spaces $ \\text{FreeLiftLEquiv}\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution.π_f\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (g : G) (i : ℕ),\\n  (Rep.FiniteCyclicGroup.resolution.π k g).f i =\\n    if hi : i = 0 then\\n      CategoryTheory.CategoryStruct.comp\\n        ((HomologicalComplex.alternatingConst (Rep.leftRegular k G) ⋯ ⋯ ⋯).XIs\", \"doc\": \"The morphism $\\\\pi$ maps the chain complex associated to the left regular representation of a finite cyclic group $G$ over a commutative ring $k$ to the single-term chain complex at degree 0 with the t\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution.π\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : CommGroup G] →\\n        [inst_2 : Fintype G] →\\n          (g : G) →\\n            (Rep.FiniteCyclicGroup.chainComplexFunctor k g).obj (Rep.leftRegular k G) ⟶\\n              (ChainComplex.single₀ (Rep k G)).obj (Rep.trivial k G k)\", \"doc\": \"The morphism $\\\\pi$ maps the chain complex associated to the left regular representation of a finite cyclic group $G$ over a commutative ring $k$ to the single-term chain complex at degree 0 with the t\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.homResolutionIso_hom_f_hom_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (A : Rep k G) (g : G)\\n  (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) (i : ℕ) (f : Rep.leftRegular k G ⟶ A),\\n  (ModuleCat.Hom.hom ((Rep.FiniteCyclicGroup.homResolutionIso A g hg).hom.f i)) f =\\n    (CategoryTheory.ConcreteCat\", \"doc\": \"For a finite cyclic group $G$ and commutative ring $k$, the homological resolution isomorphism $\\\\text{homResolutionIso}$ establishes that for any representation $A$ of $G$ over $k$, the $i$-th compone\"}\n  {\"name\": \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} →\\n        (P : CategoryTheory.ProjectiveResolution (Rep.trivial k G k)) →\\n          (A : Rep k ↥S) →\\n            ((Action.res (ModuleCat k) S.subtype).mapProjectiveResolution P).complex.linearYonedaObj k A ≅\\n   \", \"doc\": \"For a commutative ring $ k $, group $ G $, subgroup $ S $, and a projective resolution $ P $ of the trivial $ kG $-module, this establishes an isomorphism between the linear Yoneda complex of the rest\"}\n  {\"name\": \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] {A : Rep k H} {B : Rep k G} (f : G →* H)\\n  (φ : (Action.res (ModuleCat k) f).obj A ⟶ B)\\n  (x : CategoryTheory.ToType ((groupCohomology.inhomogeneousCochains A).X 1)),\\n  (CategoryTheory.ConcreteCategory.hom (groupCohomology.\", \"doc\": \"For commutative rings $k$, groups $G$ and $H$, representations $A$ of $H$ and $B$ of $G$, a group homomorphism $f: G \\\\to H$, and a morphism $\\\\phi: \\\\text{Res}_f(A) \\\\to B$ of representations, the compos\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso and resNatTrans use ordinary Rep coefficients, and finite-cyclic homResolutionIso uses a periodic resolution. None supplies evaluation from the internal injective bar total with the normalized cyclic derived roof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bar total to mapping fiber cochain map identity evaluation at generator zero in higher degrees derived restriction roof",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.Cochain.toSingleMk_v\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {X : C} {K : CochainComplex C ℤ} {p q : ℤ} (f : K.X p ⟶ X) {n : ℤ}\\n  (h : p + n = q),\\n  (CochainComplex.HomComplex.Cochain.toSingleMk f h).v p q h =\\n   \", \"doc\": \"For cochain complexes $K$ and $L$ in a preadditive category, given a morphism $f : K_p \\to X$ and integers $p, q, n$ satisfying $p + n = q$, the component of the cochain constructed by `toSingleMk` at \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.fromSingleMk_v\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {X : C} {K : CochainComplex C ℤ} {p q : ℤ} (f : X ⟶ K.X q) {n : ℤ}\\n  (h : p + n = q),\\n  (CochainComplex.HomComplex.Cochain.fromSingleMk f h).v p q h =\\n \", \"doc\": \"For integers $p, q$ with $p + n = q$, the component of the cochain constructed from a morphism $f: X \\to K^q$ at position $(p, q)$ is the composition of the canonical isomorphism from the object in the\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {X : C} {K : CochainComplex C ℤ} {p q : ℤ} (f : X ⟶ K.X q) {n : ℤ}\\n  (h : p + n = q),\\n  (CochainComplex.HomComplex.Cochain.fromSingleEquiv h) (CochainCo\", \"doc\": \"For integers $p, q, n$ satisfying $p + n = q$, and a morphism $f: X \\to K^q$ in a preadditive category, applying the additive equivalence $\\\\text{fromSingleEquiv}$ to the cochain $\\\\text{fromSingleMk}(f)\"}\n  {\"name\": \"groupCohomology.inhomogeneousCochainsIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) → groupCohomology.inhomogeneousCochains A ≅ (Rep.barComplex k G).linearYonedaObj k A\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, this establishes an isomorphism between the inhomogeneous cochain complex computing group cohomology and the linear Yoneda ob\"}\n  {\"name\": \"inhomogeneousCochains.d_eq\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (n : ℕ),\\n  inhomogeneousCochains.d A n =\\n    CategoryTheory.CategoryStruct.comp (Rep.freeLiftLEquiv (Fin n → G) A).toModuleIso.inv\\n      (CategoryTheory.CategoryStruct.comp (((Rep.barComplex k G).linearYonedaObj k A).d n (n + 1))\\n\", \"doc\": \"The differential $ d^n_A $ for inhomogeneous cochains is equal to the composition of three maps: the inverse of the $ k $-linear equivalence between hom-sets and function spaces $ \\text{FreeLiftLEquiv}\"}\n  {\"name\": \"CochainComplex.ConnectData.map_id\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Connect\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : ChainComplex C ℕ} {L : CochainComplex C ℕ} (h : CochainComplex.ConnectData K L),\\n  h.map h (CategoryTheory.CategoryStruct.id K) (CategoryTheory.CategoryStruct.id L) ⋯ =\\n    CategoryThe\", \"doc\": \"The morphism between connected cochain complexes constructed from the identity maps on the chain complex $ K $ and the cochain complex $ L $ is equal to the identity morphism on the connected cochain \"}\n  {\"name\": \"CochainComplex.mappingCone.id\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {F G : CochainComplex C ℤ} (φ : F ⟶ G) [inst_2 : HomologicalComplex.HasHomotopyCofiber φ],\\n  (↑(CochainComplex.mappingCone.fst φ)).comp (CochainComplex.mappingCone.inl φ) ⋯ +\\n      (CochainComplex.\", \"doc\": \"For a morphism $\\\\phi: F \\\\to G$ between cochain complexes in a preadditive category, the identity morphism on the mapping cone complex is equal to the sum of the composition of the first projection wit\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {X : C} {K : CochainComplex C ℤ} {p q : ℤ} (f : K.X p ⟶ X) {n : ℤ}\\n  (h : p + n = q),\\n  (CochainComplex.HomComplex.Cochain.toSingleEquiv h) (CochainComp\", \"doc\": \"For cochain complexes $ K $ and $ L $ in a preadditive category $ \\\\mathcal{C} $, and integers $ p, q, n $ satisfying $ p + n = q $, the composition of the additive equivalence $ \\\\text{toSingleEquiv} $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso and resNatTrans use ordinary Rep coefficients, and finite-cyclic homResolutionIso uses a periodic resolution. None supplies evaluation from the internal injective bar total with the normalized cyclic derived roof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"eval\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"groupCohomology.map_cochainsFunctor_eval_shortExact\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence\", \"type\": \" {k G : Type u} [CommRing k] [Group G] {X : CategoryTheory.ShortComplex (Rep.{u, u, u} k G)} (hX : X.ShortExact) (n : ℕ) : (X.map ((groupCohomology.cochainsFunctor k G).comp (HomologicalComplex.eval (ModuleCat k) (ComplexShape.up ℕ) n))).ShortExact\", \"doc\": \"`S.map (cochainsFunctor k G)` is short exact in each degree.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso and resNatTrans use ordinary Rep coefficients, and finite-cyclic homResolutionIso uses a periodic resolution. None supplies evaluation from the internal injective bar total with the normalized cyclic derived roof."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|Bar).*(cyclic|Cyclic|evaluation)|(cyclic|Cyclic).*(bar|Bar)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso and resNatTrans use ordinary Rep coefficients, and finite-cyclic homResolutionIso uses a periodic resolution. None supplies evaluation from the internal injective bar total with the normalized cyclic derived roof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived condensed group restriction bar cochains evaluation cyclic generator normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.barComplex\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → ChainComplex (Rep k G) ℕ\", \"doc\": \"For a commutative ring $ k $ and group $ G $, this constructs a chain complex in the category of $ k $-representations of $ G $. The complex is indexed by natural numbers, where each degree $ n $ corr\"}\n  {\"name\": \"inhomogeneousCochains.d_eq\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic\", \"type\": \":\\n  d A n =\\n    (freeLiftLEquiv (Fin n → G) A).toModuleIso.inv ≫\\n      ((barComplex k G).linearYonedaObj k A).d n (n + 1) ≫ (freeLiftLEquiv (Fin (n + 1) → G) A).toModuleIso.hom\", \"doc\": \"The differential $ d^n_A $ for inhomogeneous cochains is equal to the composition of three maps: the inverse of the $ k $-linear equivalence between hom-sets and function spaces $ \\text{FreeLiftLEquiv}\"}\n  {\"name\": \"groupCohomology.resNatTrans\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"(n : ℕ) : functor k H n ⟶ Action.res (ModuleCat k) f ⋙ functor k G n\", \"doc\": \"For a fixed natural number $n$, this defines a natural transformation between the $n$-th group cohomology functor for a group $H$ and the composition of the restriction functor (along a group homomorp\"}\n  {\"name\": \"groupCohomology.inhomogeneousCochainsIso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic\", \"type\": \": inhomogeneousCochains A ≅ (barComplex k G).linearYonedaObj k A\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, this establishes an isomorphism between the inhomogeneous cochain complex computing group cohomology and the linear Yoneda ob\"}\n  {\"name\": \"Rep.barComplex.d\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → (n : ℕ) → [inst_1 : Group G] → Rep.free k G (Fin (n + 1) → G) ⟶ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, a group $ G $, and natural number $ n $, this defines the differential $ d_n $ in the bar complex as a morphism from the free $ k $-representation on $ (n+1) $-tuples of \"}\n  {\"name\": \"Rep.barComplex.d_def\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \": (barComplex k G).d (n + 1) n = d k G n\", \"doc\": \"For a commutative ring $k$, a group $G$, and a natural number $n$, the differential $d_{n+1,n}$ in the bar complex of the group representation is defined as the morphism $d_k(G, n)$, which maps the fr\"}\n  {\"name\": \"groupCohomology.cocycles₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": Submodule k (G → A)\", \"doc\": \"The submodule of 1-cochains $ f : G → A $ satisfying the cocycle condition $ d_{12}(f) = 0 $, where $ d_{12} $ is the coboundary operator defined by $ d_{12}(f)(g,h) = \\\\rho_g(f(h)) - f(gh) + f(g) $. T\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\", \"module\": \"Mathlib.RepresentationTheory.Homological.FiniteCyclic\", \"type\": \": CochainComplex (ModuleCat k) ℕ\", \"doc\": \"A cochain complex in the category of modules over a commutative ring $ k $, indexed by natural numbers, constructed using alternating differentials between the action of a finite cyclic group element \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso and resNatTrans use ordinary Rep coefficients, and finite-cyclic homResolutionIso uses a periodic resolution. None supplies evaluation from the internal injective bar total with the normalized cyclic derived roof."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|Bar).*(cyclic|Cyclic|evaluation)|(cyclic|Cyclic).*(bar|Bar)",
+   "results": "{\"t\": \"2026-10-22T07:22:03Z\", \"tool\": \"grep\", \"query\": \"(bar|Bar).*(cyclic|Cyclic|evaluation)|(cyclic|Cyclic).*(bar|Bar)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar/restriction and general resolution-unit hits do not state the internal condensed cyclic evaluation roof; finite-cyclic resolution is periodic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"res\"",
+   "results": "{\"t\": \"2026-10-22T07:22:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"groupCohomology\\\", \\\"res\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"groupCohomology.H1InfRes\", \"groupCohomology.HInfRes\", \"groupCohomology.H1InfRes_exact\", \"groupCohomology.HInfRes_X₂\", \"groupCohomology.HInfRes_X₁\", \"groupCohomology.instPreservesZeroMorphismsRepModuleCatFunctor\", \"groupCohomology.instMonoModuleCatFH1InfRes\", \"groupCohomology.HInfRes_X₃\"], \"digest\": \"a50382830e6d380a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar/restriction and general resolution-unit hits do not state the internal condensed cyclic evaluation roof; finite-cyclic resolution is periodic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction from internal condensed group cohomology to an infinite cyclic group is evaluation at the generator on bar cochains",
+   "results": "{\"t\": \"2026-10-22T07:22:04Z\", \"tool\": \"leansearch\", \"query\": \"The restriction from internal condensed group cohomology to an infinite cyclic group is evaluation at the generator on bar cochains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"groupCohomology.resNatTrans\", \"groupCohomology.H1InfRes_g\", \"groupCohomology.resNatTrans_app\", \"groupCohomology\", \"groupCohomology.H1InfRes\", \"groupCohomology.cocycles₁\"], \"digest\": \"3b3526859cc2b6a7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar/restriction and general resolution-unit hits do not state the internal condensed cyclic evaluation roof; finite-cyclic resolution is periodic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of internal bar cochains at a cyclic generator gives a cochain map to the two column difference total and represents derived restriction",
+   "results": "{\"t\": \"2026-10-22T07:22:14Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of internal bar cochains at a cyclic generator gives a cochain map to the two column difference total and represents derived restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d_eq\", \"AlgebraicTopology.AlternatingCofaceMapComplex.map\", \"groupCohomology.inhomogeneousCochainsIso\", \"inhomogeneousCochains.d_hom_apply\", \"inhomogeneousCochains.d\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_v\", \"groupCohomology.cochainsMap\", \"groupCohomology.cochainsMap_f\"], \"digest\": \"f3598ddd91dc1d4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar/restriction and general resolution-unit hits do not state the internal condensed cyclic evaluation roof; finite-cyclic resolution is periodic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation from derived invariants to the mapping fiber of generator minus identity is normalized by the computation unit on arbitrary bounded below complexes",
+   "results": "{\"t\": \"2026-10-22T07:27:38Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation from derived invariants to the mapping fiber of generator minus identity is normalized by the computation unit on arbitrary bounded below complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"HomologicalComplex.singleMapHomologicalComplex_hom_app_self\", \"CategoryTheory.Functor.toRightDerivedZero\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'\", \"CategoryTheory.Functor.fromLeftDerivedZero\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\"], \"digest\": \"d9ae9b5d505b46a7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep bar/restriction and general resolution-unit hits do not state the internal condensed cyclic evaluation roof; finite-cyclic resolution is periodic."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-cyclic-restriction-model",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: relative cyclic restriction and residual-action forgetting below the tame-boundary analytic condensed calculation; explicit rank-one row augmentation and bar evaluation at the chosen generator. Returned relative-cyclic proof steps 15,16,17: Evaluation map from the injective bar total to the cyclic total.",
+   "via": [
+    "lem-sfb-relative-cyclic-restriction-model",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bar-cyclic-evaluation-roof",
+  "worker": "stage1",
+  "summary": "Q122 repair of the repeated promotion return at 8d8a8b993ba: refreshed the retained six-step split on the current unsplit shared-DAG node and reread all cited statements. All seven proof-cited statement fingerprints agree with the retained repair reading. Step 5 now proves invertibility of each factor of the source identification and states its inverse; step 6 types the bar inverse explicitly before cancellation. Current metadata, statement, route, citations and logged Mathlib searches retained; no new nodes.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), auxiliary open-direct-image cyclic restriction calculation: steps 1–3 give evaluation and augmentation, step 4 the quasi-isomorphism denominator, and steps 5–6 the mate/bar normalization and cancellation. Current inherited blueprint.from, including its null node and via chain, is preserved verbatim."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-c30fb39c1",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-c30fb39c1 (reviewer sub-agent of L); spot-checked: This is the third delivery in a promotion-refusal loop: 5e073a9f and 8d8a8b99 were both PASSed, then the landing refused them because the side completion was never promoted (returns/Q122.md 2026-10-22 15:17). In live and side-live the item is still unsplit with an empty proof, there is no repair note and no parallel split. The statement is byte-identical to live, and only split-owned fields differ. There are no new nodes and no tool_uses. Against 8d8a only proof steps 5 and 6 and split_report changed. Step 5 now explains why A=RGamma_H(Qa) is invertible (a functor applied to an isomorphism) and why alpha_{H,I} is invertible (restriction-calculus injective-resolution computation, I nonnegative termwise injective), then gives sigma^{-1}=alpha^{-1}A. Step 6 spells out eta sigma=Q(b_H) and eta^{-1}=sigma Q(b_H)^{-1}; Q(b_H) is invertible because epsilon_N in internal-bar-roof-adjunction is an isomorphism. Both additions are correct. I recomputed all six steps. (1) (d_h m)(tau)=tau m-m from the bar-data face and evaluation rules. (2) E d_Tot=d_K E, since the column-1 component d_h z0-d_I z1 maps to (T-1)z0-d ev z1, and E b_H=(incl,0). (3) E j_rep=k eps in degrees 0 and 1, both sides are zero above, and eps is a chain map for the trivial action. (4) k is a quasi-isomorphism because restriction is exact and K preserves bounded-below quasi-isomorphisms (G trivial). (5) Naturality gives beta_I A=B beta_R and theta_VI B=C theta_R, so c sigma=C^{-1}theta_VI beta_I alpha_{H,I}=Q(k)^{-1}Q(b_VI iota_I)=Q(k)^{-1}Q(E b_H); this uses neither injectivity of VI nor invertibility of beta. (6) c eta^{-1} j=Q(eps). Edge cases tau=1, zero ring, degree 0 and finite-order tau hold. All 7 proof-cited and all statement-dep statements are identical to live, with hashes matching the report. proof_deps equals the union of uses, there is no SGA, and the source is main-20261015 direct-images paragraph (3) with by=agent and a WANTED reference. Batch-5 flag: lem-pod-derived-exact-square-composition, reached via restriction-calculus, says exact-functor square coherence survives unbounded derived localization. It depends only on generic localization lemmas. That is general homological algebra, outside both Poincare duality and the trace formula, so the flag is accepted. No fixes. Maintainer note: promotion loop, the item is fit to land."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BarCyclicEvaluationRoof",
+  "declaration": "CategoryTheory.BarCyclicEvaluation.bar_cyclic_evaluation_roof",
+  "declarations": [
+   "CategoryTheory.BarCyclicEvaluation.input",
+   "CategoryTheory.BarCyclicEvaluation.inputAdditive",
+   "CategoryTheory.BarCyclicEvaluation.total",
+   "CategoryTheory.BarCyclicEvaluation.first",
+   "CategoryTheory.BarCyclicEvaluation.second",
+   "CategoryTheory.BarCyclicEvaluation.regularIso",
+   "CategoryTheory.BarCyclicEvaluation.resolutionMap",
+   "CategoryTheory.BarCyclicEvaluation.summand",
+   "CategoryTheory.BarCyclicEvaluation.firstNat",
+   "CategoryTheory.BarCyclicEvaluation.secondNat",
+   "CategoryTheory.BarCyclicEvaluation.value",
+   "CategoryTheory.BarCyclicEvaluation.Coordinates",
+   "CategoryTheory.BarCyclicEvaluation.Horizontal",
+   "CategoryTheory.BarCyclicEvaluation.invariantMap",
+   "CategoryTheory.BarCyclicEvaluation.sourceIso",
+   "CategoryTheory.BarCyclicEvaluation.resolutionMap_quasiIso",
+   "CategoryTheory.BarCyclicEvaluation.bar_cyclic_evaluation_roof"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BarCyclicEvaluationRoof.lean",
+  "statement": "theorem bar_cyclic_evaluation_roof (K : TotalModel A PUnit.{u + 1}) (C : HasComparison A PUnit.{u + 1} K) (v : Z.{u} →ₜ* H) (M : BarModel A H) (b : BarNormalization M) (I : InjectiveResolution (CondensedDerivedRestriction.regularTrivial A H)) : Horizontal M v I ∧ ∃ E : extend ((totalCochains (barDiagram M)).obj I.cocomplex) ⟶ total K v I.cochainComplex, Coordinates M K v I E ∧ (∀ n : ℕ, ((invariantMap M I) ≫ E).f n ≫ firstNat K v I n = ((((barInvariants M).functor.mapHomologicalComplex (.up ℕ)).obj I.cocomplex).extendXIso ComplexShape.embeddingUpNat (i := n) (i' := n) rfl).hom ≫ (barInvariants M).inclusion.app (I.cocomplex.X n)) ∧ (∀ n : ℤ, ((invariantMap M I) ≫ E).f n ≫ second K v I.cochainComplex n = 0) ∧ (HomologicalComplex.extendMap (barAugmentation (barFunctions M) (barDiagram M) (CondensedDerivedRestriction.regularTrivial A H) I) ComplexShape.embeddingUpNat ≫ E = HomologicalComplex.extendMap (RelativeCyclic.evaluation (barFunctions M) (barDiagram M) v) ComplexShape.embeddingUpNat ≫ resolutionMap K v I) ∧ ((sourceIso M b I).hom ≫ trivialCyclicMap C v = DerivedCategory.Q.map (invariantMap M I ≫ E) ≫ inv (DerivedCategory.Q.map (resolutionMap K v I))) ∧ (DerivedCategory.Q.map (HomologicalComplex.extendMap (barAugmentation (barFunctions M) (barDiagram M) (CondensedDerivedRestriction.regularTrivial A H) I) ComplexShape.embeddingUpNat) ≫ (barEta M b (CondensedDerivedRestriction.regularTrivial A H) I).inv ≫ trivialCyclicMap C v = DerivedCategory.Q.map (HomologicalComplex.extendMap (RelativeCyclic.evaluation (barFunctions M) (barDiagram M) v) ComplexShape.embeddingUpNat))",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing compatible bar model, normalized barEta, barAugmentation, evaluation, relative cyclic total and trivialCyclicMap. The three added dependencies own these already landed constructions. The helper declarations express scalar coordinates and K(Va) by the trivial residual total; the theorem states all cochain and derived roof clauses without restricted injectivity or inversion of beta.",
+  "fixed_by": "NT-stage2-cc-d8c9394f8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8c9394f8",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Mathematics correct. All clauses match the node: E with four sectionwise coordinate conditions; Horizontal (d_h m)(tau)=tau m-m; E b_H=(incl,0); j_rep≫E=eps≫k with k=K(Va) via trivialTotalIso, identity regularIso and I.ι'; separate k quasi-iso instance; sigma≫c=Q(b_H≫E)≫inv Q(k), where unfolding barEta gives eta=sigma^-1≫Q(b_H); c eta^-1 j=Q(eps), same as landed barEvaluation. trivialCyclicMap is the landed lambda^-1 beta. Added stmt_deps (relative-bar-data, relative-trivial-cyclic-map, relative-cyclic-total) are landed owners of the declarations used. Statement/proof unchanged vs side-live. No extra hypotheses, no VI injectivity, no beta/j inversion; edge cases tau=1, trivial H, zero ring, n=0, negative degrees covered; no hollow defs; docstrings OK. FIX: lean.declarations lacked resolutionMap_quasiIso (sorried theorem stating the k quasi-iso clause, used by inv in the main statement); record fix adds it. No Lean change, no compile."
+ }
+}

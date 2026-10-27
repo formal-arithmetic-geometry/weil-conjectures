@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-total-left-derived-object-ses-triangle",
+ "kind": "statement",
+ "title": "Total left derivation sends an object short exact sequence to a distinguished triangle",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. Suppose $\\mathcal A$ has enough projectives: every object is a quotient of an object $P$ such that maps from $P$ lift across epimorphisms. Let $V:\\mathcal A\\to\\mathcal B$ be additive and right exact, meaning that it preserves cokernels and finite direct sums. Write $K(\\mathcal A)$ and $K(\\mathcal B)$ for the homotopy categories of integer cochain complexes and $Q_{\\mathcal A},Q_{\\mathcal B}$ for their localizations at quasi-isomorphisms [def-weil-abstract-derived-category]. Assume the total left derived functor $LV:D(\\mathcal A)\\to D(\\mathcal B)$ of the termwise functor $Q_{\\mathcal B}K(V)$ is defined at every object in the essentially-constant denominator-diagram sense [def-pur-saturated-triangulated-localization], with canonical natural comparison $\\varepsilon_C:LV(Q_{\\mathcal A}C)\\to Q_{\\mathcal B}V(C)$. Write $M[0]$ for the complex concentrated in degree zero. For a short exact sequence $0\\to M'\\xrightarrow{i}M\\xrightarrow{p}M''\\to0$, let $\\delta:Q_{\\mathcal A}(M''[0])\\to Q_{\\mathcal A}(M'[0])[1]$ be its canonical connecting morphism in $D(\\mathcal A)$. Then $LV$ has its canonical exact triangulated structure, and the following triangle is distinguished in $D(\\mathcal B)$:\n$$LV(Q_{\\mathcal A}(M'[0]))\\xrightarrow{LV(Q_{\\mathcal A}(i[0]))}LV(Q_{\\mathcal A}(M[0]))\\xrightarrow{LV(Q_{\\mathcal A}(p[0]))}LV(Q_{\\mathcal A}(M''[0]))\\xrightarrow{\\sigma_{M'}\\circ LV(\\delta)}LV(Q_{\\mathcal A}(M'[0]))[1],$$\nwhere $\\sigma_{M'}:LV(Q_{\\mathcal A}(M'[0])[1])\\xrightarrow{\\sim}LV(Q_{\\mathcal A}(M'[0]))[1]$ is its shift comparison. No acyclicity of $M',M,M''$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized: distinguished triangle construction and exactness of total left derivation (old Steps 2--3); supporting lemma-additive-exact-homotopy-category, lemma-acyclic, lemma-derived-canonical-delta-functor and proposition-derived-functor."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Set $F=Q_{\\mathcal B}\\circ K(V)$. By [lem-trf-additive-homotopy-triangulated], additivity of $V$ makes $K(V)$ exact, including its canonical shift comparisons. By [lem-pur-quasi-isos-saturated-triangulated], applied to $\\mathcal B$, $Q_{\\mathcal B}$ is exact; the composite $F$ is therefore exact. The same node applied to $\\mathcal A$ gives the saturated triangulated multiplicative system $S$ of quasi-isomorphisms required for left derivation.",
+   "uses": [
+    "lem-trf-additive-homotopy-triangulated",
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014X (lemma-additive-exact-homotopy-category); Tag 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "The assumed total-derived pair $(LV,\\varepsilon)$ has the right Kan universal property along $Q_{\\mathcal A}$. Indeed, Step 1 makes $S$ a right multiplicative system with localization $Q_{\\mathcal A}$, so [lem-pur-left-derived-defined-pointwise-kan-bridge] applies at every complex $X$ to the essentially constant denominator diagram: $F$ has a pointwise right Kan extension at $Q_{\\mathcal A}X$ with value $LV(Q_{\\mathcal A}X)$, by a limit cone whose leg at $(X',Q_{\\mathcal A}(s)^{-1})$ is the essential-value leg $u_s=\\varepsilon_{X'}\\circ LV(Q_{\\mathcal A}s)^{-1}$ and whose leg at $(X,\\mathrm{id})$ is $\\varepsilon_X$. The cone induced by $(LV,\\varepsilon)$ at $Q_{\\mathcal A}X$, with leg $\\varepsilon_{X'}\\circ LV(\\varphi)$ at $(X',\\varphi)$, has the same legs at these inverse-denominator objects; since every structured arrow receives a map from such an object (the representing right fraction), naturality makes the two cones equal, so the cone of $(LV,\\varepsilon)$ is a limit. Every object of $D(\\mathcal A)$ is isomorphic to some $Q_{\\mathcal A}X$, and pointwise Kan extensions at all objects form a right Kan extension.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S9 (definition-right-derived-functor-defined) and Tag 05SA (lemma-derived-functor), left derived parts"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-left-derived-exact-chosen-localization] with source $\\mathcal A$, target $D(\\mathcal B)$, the exact functor $F$ of Step 1 and the pair $(LV,\\varepsilon)$ of Step 2. Its two existence hypotheses hold: the Kan property by Step 2, and essential constancy of the denominator diagrams at every complex by the item's hypothesis. It follows that $LV$ is exact with a shift structure for which $\\varepsilon$ commutes with shifts. Its compatible shift is the canonical one: [lem-pur-right-kan-extension-coherent-shift] constructs the coherent comparisons from this same universal pair. Any two comparisons $c,c':LV\\circ[n]\\cong[n]\\circ LV$ satisfying the counit square coincide. Write functors as acting right to left, so $GQ_{\\mathcal A}$ means $Q_{\\mathcal A}$ followed by $G$. For $G:D(\\mathcal A)\\to D(\\mathcal B)$, the shift $[n]$ of $D(\\mathcal B)$ being an equivalence with inverse $[-n]$, the universal property gives bijections $\\mathrm{Nat}(G,[n]LV)\\cong\\mathrm{Nat}([-n]G,LV)\\cong\\mathrm{Nat}([-n]GQ_{\\mathcal A},F)\\cong\\mathrm{Nat}(GQ_{\\mathcal A},[n]F)$, the composite being whiskering by $Q_{\\mathcal A}$ followed by composition with $[n]\\varepsilon$. Take $G=LV[n]$: the counit square says that $c$ and $c'$ have the same image, namely the composite of the shift comparisons of $Q_{\\mathcal A}$ and $F$ with $\\varepsilon[n]$, so $c=c'$. In degree one denote this comparison by $\\sigma_X:LV(X[1])\\xrightarrow{\\sim}LV(X)[1]$.",
+   "uses": [
+    "lem-pur-left-derived-exact-chosen-localization",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SE (proposition-derived-functor), left derived part; Tag 05SU (lemma-derived-shift)"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-derived-ses-triangle] to the given short exact sequence in $\\mathcal A$. This supplies the distinguished triangle with objects $Q_{\\mathcal A}(M'[0])$, $Q_{\\mathcal A}(M[0])$, $Q_{\\mathcal A}(M''[0])$, first two arrows $Q_{\\mathcal A}(i[0])$, $Q_{\\mathcal A}(p[0])$, and canonical last arrow $\\delta$. Here the canonical choice is the single-complex triangle, not an arbitrary completion of its first arrow.",
+   "uses": [
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor); Tag 015D (lemma-F-acyclic-ses), first sentence of proof"
+   }
+  },
+  {
+   "text": "Apply the exact functor $LV$ from Step 3 to the distinguished triangle of Step 4. By the definition of exactness in [def-weil-triangulated-category], its last arrow is $LV(\\delta)$ followed by $\\sigma_{Q_{\\mathcal A}(M'[0])}$. Its first two arrows are the images of $Q_{\\mathcal A}(i[0])$ and $Q_{\\mathcal A}(p[0])$. These are exactly the four arrows and three objects displayed in the statement. No comparison $\\varepsilon$ is required to be invertible on these objects, so no acyclicity assumption enters.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized; Tag 014V (definition-exact-functor-triangulated-categories)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-additive-homotopy-triangulated",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pur-left-derived-exact-chosen-localization",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015D (lemma-F-acyclic-ses), first two sentences of proof, dualized; Tags 014X, 05RT, 05SE, 05SU and 0152 supply the precise unbounded inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor between abelian categories whose total left derived functor is everywhere defined sends the derived triangle of a short exact sequence of objects to a distinguished triangle",
+   "results": "{\"t\": \"2026-10-22T06:48:31Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor between abelian categories whose total left derived functor is everywhere defined sends the derived triangle of a short exact sequence of objects to a distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.IsHomological.exact\", \"DerivedCategory.triangleOfSESIso\", \"DerivedCategory.instIsTriangulated\", \"DerivedCategory.triangleOfSES_distinguished\", \"CategoryTheory.Functor.IsHomological.mk'\"], \"digest\": \"7783002b61ca2f26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: singleTriangle_distinguished gives the source triangle only. map_distinguished assumes a triangulated functor, which must be constructed here from essential constancy. IsTriangulatedDerivedCategoryMapDerivedCategory concerns an exact underived functor. The online Derives.isTriangulated_of_isLeftDerivedFunctor hit is absent in the pinned Mathlib source and uses a derivability-structure interface, not the stated denominator hypothesis. These are components, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"IsTriangulated\"",
+   "results": "{\"t\": \"2026-10-22T06:48:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLeftDerivedFunctor\\\", \\\"IsTriangulated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.Derives.isTriangulated_of_isLeftDerivedFunctor\"], \"digest\": \"cc7c8e502dd48725\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: singleTriangle_distinguished gives the source triangle only. map_distinguished assumes a triangulated functor, which must be constructed here from essential constancy. IsTriangulatedDerivedCategoryMapDerivedCategory concerns an exact underived functor. The online Derives.isTriangulated_of_isLeftDerivedFunctor hit is absent in the pinned Mathlib source and uses a derivability-structure interface, not the stated denominator hypothesis. These are components, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|IsTriangulatedLeftDerived",
+   "results": "{\"t\": \"2026-10-22T06:48:19Z\", \"tool\": \"grep\", \"query\": \"IsLeftDerivedFunctor|IsTriangulatedLeftDerived\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"d92c2de8970a7fc7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: singleTriangle_distinguished gives the source triangle only. map_distinguished assumes a triangulated functor, which must be constructed here from essential constancy. IsTriangulatedDerivedCategoryMapDerivedCategory concerns an exact underived functor. The online Derives.isTriangulated_of_isLeftDerivedFunctor hit is absent in the pinned Mathlib source and uses a derivability-structure interface, not the stated denominator hypothesis. These are components, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total left derived functor sends a short exact sequence of objects to a distinguished triangle",
+   "results": "{\"t\": \"2026-10-22T06:48:20Z\", \"tool\": \"leansearch\", \"query\": \"Total left derived functor sends a short exact sequence of objects to a distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"DerivedCategory.triangleOfSES_distinguished\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.leftDerived\", \"DerivedCategory.triangleOfSES_mor₁\", \"DerivedCategory.triangleOfSES_obj₁\"], \"digest\": \"03443956203ce57a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: singleTriangle_distinguished gives the source triangle only. map_distinguished assumes a triangulated functor, which must be constructed here from essential constancy. IsTriangulatedDerivedCategoryMapDerivedCategory concerns an exact underived functor. The online Derives.isTriangulated_of_isLeftDerivedFunctor hit is absent in the pinned Mathlib source and uses a derivability-structure interface, not the stated denominator hypothesis. These are components, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functor preserves distinguished triangles obtained from short exact sequences without assuming that the original functor is exact",
+   "results": "{\"t\": \"2026-10-22T06:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"Left derived functor preserves distinguished triangles obtained from short exact sequences without assuming that the original functor is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.map_distinguished\"], \"digest\": \"e175da44e056d1f7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: singleTriangle_distinguished gives the source triangle only. map_distinguished assumes a triangulated functor, which must be constructed here from essential constancy. IsTriangulatedDerivedCategoryMapDerivedCategory concerns an exact underived functor. The online Derives.isTriangulated_of_isLeftDerivedFunctor hit is absent in the pinned Mathlib source and uses a derivability-structure interface, not the stated denominator hypothesis. These are components, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|isTriangulated_of_isLeftDerivedFunctor",
+   "results": "{\"t\": \"2026-10-23T14:35:28Z\", \"tool\": \"grep\", \"query\": \"IsLeftDerivedFunctor|isTriangulated_of_isLeftDerivedFunctor\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"bf5fe2f6f45be775\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source SES triangles and triangulated image lemmas are components. ExactFunctor requires the underived functor to be exact; V here is only right exact. The online Derives.isTriangulated_of_isLeftDerivedFunctor uses a different derivability-structure hypothesis and is absent in pinned Mathlib. Pinned Functor/Derived supplies the Kan universal pair but no triangulated exactness theorem from essential constancy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total left derived functor sends short exact sequences to distinguished triangles",
+   "results": "{\"t\": \"2026-10-23T14:35:28Z\", \"tool\": \"leansearch\", \"query\": \"Total left derived functor sends short exact sequences to distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSES_distinguished\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES\", \"CategoryTheory.Functor.totalLeftDerived\", \"DerivedCategory.triangleOfSES_mor₁\", \"CategoryTheory.Functor.leftDerived\", \"CategoryTheory.Functor.IsHomological.exact\"], \"digest\": \"7c6b5ed9e3a974c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source SES triangles and triangulated image lemmas are components. ExactFunctor requires the underived functor to be exact; V here is only right exact. The online Derives.isTriangulated_of_isLeftDerivedFunctor uses a different derivability-structure hypothesis and is absent in pinned Mathlib. Pinned Functor/Derived supplies the Kan universal pair but no triangulated exactness theorem from essential constancy."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"IsTriangulated\"",
+   "results": "{\"t\": \"2026-10-23T14:35:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLeftDerivedFunctor\\\", \\\"IsTriangulated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.Derives.isTriangulated_of_isLeftDerivedFunctor\"], \"digest\": \"cc7c8e502dd48725\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source SES triangles and triangulated image lemmas are components. ExactFunctor requires the underived functor to be exact; V here is only right exact. The online Derives.isTriangulated_of_isLeftDerivedFunctor uses a different derivability-structure hypothesis and is absent in pinned Mathlib. Pinned Functor/Derived supplies the Kan universal pair but no triangulated exactness theorem from essential constancy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An everywhere defined total left derived functor of an additive functor sends a short exact sequence of objects to a distinguished triangle",
+   "results": "{\"t\": \"2026-10-23T14:35:31Z\", \"tool\": \"leanfinder\", \"query\": \"An everywhere defined total left derived functor of an additive functor sends a short exact sequence of objects to a distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.triangleOfSES\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\"], \"digest\": \"a5c7143f6128fda7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source SES triangles and triangulated image lemmas are components. ExactFunctor requires the underived functor to be exact; V here is only right exact. The online Derives.isTriangulated_of_isLeftDerivedFunctor uses a different derivability-structure hypothesis and is absent in pinned Mathlib. Pinned Functor/Derived supplies the Kan universal pair but no triangulated exactness theorem from essential constancy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derivation of an additive functor is exact triangulated when its denominator diagrams are essentially constant",
+   "results": "{\"t\": \"2026-10-23T14:36:33Z\", \"tool\": \"leanfinder\", \"query\": \"Left derivation of an additive functor is exact triangulated when its denominator diagrams are essentially constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Functor.distTriang_iff\"], \"digest\": \"7cf11916466c0606\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source SES triangles and triangulated image lemmas are components. ExactFunctor requires the underived functor to be exact; V here is only right exact. The online Derives.isTriangulated_of_isLeftDerivedFunctor uses a different derivability-structure hypothesis and is absent in pinned Mathlib. Pinned Functor/Derived supplies the Kan universal pair but no triangulated exactness theorem from essential constancy."
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated|CommShift",
+   "results": "{\"t\": \"2026-10-23T14:37:24Z\", \"tool\": \"grep\", \"query\": \"isTriangulated|CommShift\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source SES triangles and triangulated image lemmas are components. ExactFunctor requires the underived functor to be exact; V here is only right exact. The online Derives.isTriangulated_of_isLeftDerivedFunctor uses a different derivability-structure hypothesis and is absent in pinned Mathlib. Pinned Functor/Derived supplies the Kan universal pair but no triangulated exactness theorem from essential constancy."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-left-acyclic-short-exact",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Supporting object-level input: closure of left-acyclic objects under extensions and kernels of epimorphisms, dual of Stacks 015D. Re-split component: distinguished triangle construction and exactness of total left derivation (old Steps 2--3); supporting lemma-additive-exact-homotopy-category, lemma-acyclic, lemma-derived-canonical-delta-functor and proposition-derived-functor.",
+   "via": [
+    "lem-trf-left-acyclic-short-exact",
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-total-left-derived-object-ses-triangle",
+  "worker": "stage1",
+  "summary": "Assembled the object short-exact triangle from existing DAG results only: additive homotopy exactness, quasi-isomorphism localization, chosen-localization total-derived exactness, and the single-complex distinguished triangle. Checked the essential-constancy hypotheses and the canonical shift comparison; no new node or statement correction.",
+  "blueprint": "Realizes the supporting homological input recorded in blueprint.from.place: the distinguished triangle and exactness arguments in old Steps 2--3 of lem-trf-left-acyclic-short-exact, below lem-trf-local-term-locality, proof (1)--(2).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Generic quasi-isomorphism localization theorem, used for both abelian categories; the trace-formula unit has no replacement for this homological tool."
+   },
+   {
+    "node": "lem-pur-left-derived-exact-chosen-localization",
+    "why": "Generic exactness of an everywhere-defined total left derived functor on the chosen derived category, under precisely the denominator hypothesis of the item."
+   },
+   {
+    "node": "lem-pur-right-kan-extension-coherent-shift",
+    "why": "Generic right Kan shift comparison identifies the canonical sigma and its compatibility with the specified counit."
+   },
+   {
+    "node": "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "why": "Generic bridge from Stacks 05S9 essential constancy to a pointwise right Kan extension; needed to supply the Kan hypothesis of the chosen-localization exactness node; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-left-derived-exact-chosen-localization",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-e391d59f2",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-e391d59f2 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged from the live unsplit node and was tested on the cases V=-⊗Z/n with 0→Z→Z→Z/n→0 (the cone of 0 on Z/n is Z/n⊕Z/n[1], matching LV(Z/n[0]); ε is not invertible there), on zero sequences and on split sequences. The item is still unsplit in live and side-live, so the delivery is not superseded. Sources checked in Stacks derived.tex: 014X, 05RT, 05S8/05S9/05SA, 05SE, 05SU, the cone construction before 0152 and 0152 itself, the first two sentences of the 015D proof, and 014V. Every cited statement was read, including the chosen-localization node's proof route. Two small faults are fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-total-left-derived-object-ses-triangle.json. (1) C1: step 2 asserted without citation that (LV,ε) has the right Kan universal property, but the item assumes only 05S9 essential constancy, and lem-pur-left-derived-exact-chosen-localization needs Kan as a separate hypothesis. I added a new step 2 that cites the existing lem-pur-left-derived-defined-pointwise-kan-bridge (its right-multiplicative-system and localization hypotheses come from lem-pur-quasi-isos) and writes out the cone comparison and the step from pointwise to global Kan. The bridge is added to split_report.tool_uses as a generic sk-def-sf-operations tool. In the same step I wrote out the uniqueness of the ε-compatible shift comparison, Nat(G,[n]LV)≅Nat(GQ,[n]F), which the delivery had taken from the coherent-shift node's proof rather than its statement. (2) B5: the last step's source cited 'Tag 05QL (definition-exact-functor)', but 05QL is derived-equation-rotate; it is now 014V definition-exact-functor-triangulated-categories. The proof now has 5 steps of at most 1444 characters each, and proof_deps equals the union of the uses. The statement, stmt_deps, blueprint and searches are unchanged. There are no new nodes and no duplicates (lem-pur-left-derived-kan-source-triangles and lem-trf-left-derived-ses-cohomology-normalization are components, not restatements). I accept the tool_uses lem-pur-quasi-isos-saturated-triangulated, lem-pur-left-derived-exact-chosen-localization, lem-pur-right-kan-extension-coherent-shift and lem-pur-left-derived-defined-pointwise-kan-bridge. The delivery uses no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftDerivedObjectSesTriangle",
+  "declaration": "CategoryTheory.Functor.leftDerived_object_ses_triangle",
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedObjectSesTriangle.lean",
+  "statement": "theorem leftDerived_object_ses_triangle {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [EnoughProjectives A] (V : A ⥤ B) [V.Additive] [PreservesFiniteColimits V] (LV : DerivedCategory A ⥤ DerivedCategory B) (ε : DerivedCategory.Qh ⋙ LV ⟶ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) (hLV : LV.IsRightKanExtension ε) (hdefined : ∀ X : HomotopyCategory A (ComplexShape.up ℤ), ∃ Y : DerivedCategory B, IsEssentiallyConstantProDiagram (MorphismProperty.Over.forget (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ⊤ X ⋙ Over.forget X ⋙ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) Y) (S : ShortComplex A) (hS : S.ShortExact) : ∃ (_ : LV.CommShift ℤ), NatTrans.CommShift ε ℤ ∧ LV.IsTriangulated ∧ Triangle.mk (LV.map ((DerivedCategory.singleFunctor A 0).map S.f)) (LV.map ((DerivedCategory.singleFunctor A 0).map S.g)) (LV.map hS.singleδ ≫ (LV.commShiftIso (1 : ℤ)).hom.app ((DerivedCategory.singleFunctor A 0).obj S.X₁)) ∈ distTriang (DerivedCategory B)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0b1826ac",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Every clause matches the node: abelian A,B with independent universes; EnoughProjectives; V additive + PreservesFiniteColimits; unbounded Qh. hdefined is verbatim the body of IsTriangulatedLeftDerivedDefinedAt (quasiIso). hLV = IsLeftDerivedFunctor written out along Qh; it pins LV as the derived functor and is not stronger (node step 2), same as the landed sibling LeftDerivedObjectCohomology. The existential CommShift with NatTrans.CommShift ε is the canonical shift (unique by step 3) and is the instance used in commShiftIso; the triangle uses LV.map singleδ ≫ σ in distTriang D(B); no acyclicity assumed. lean.statement verbatim in the file; node differs from side-live only in lean; no new nodes or defs; sorry only; docstrings carry source, blueprint and 5 steps; Worker report and Second reading sections present. Edge cases zero/split/−⊗Z/n covered. No file changed, so no compile. No findings."
+ }
+}

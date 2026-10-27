@@ -242,22 +242,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.CompletedDifferentialFiniteConormal",
-  "declaration": "KaehlerDifferential.completed_differential_finite_conormal",
+  "declaration": "KaehlerDifferential.completed_finite_conormal",
   "file": "lean/Sheaf/RingTheory/CompletedDifferentialFiniteConormal.lean",
-  "statement": "theorem completed_differential_finite_conormal (F : Type u) [Field F] (A : Type v) [CommRing A] [Algebra F A] [IsLocalRing A] [IsNoetherianRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [Module.Finite F (IsLocalRing.ResidueField A)] : Module.Finite A (AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A)) ∧ Submodule.span A (Set.range (fun a : A => AdicCompletion.of (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) (KaehlerDifferential.D F A a))) = ⊤ ∧ (∀ (N : Type w) [AddCommGroup N] [Module A N] [Module F N] [IsScalarTower F A N] [Module.Finite A N] [IsAdicComplete (IsLocalRing.maximalIdeal A) N], Function.Bijective (fun f : AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) →ₗ[A] N => (f.comp (AdicCompletion.of (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A))).compDer (KaehlerDifferential.D F A))) ∧ (∀ (I : Ideal A), I ≠ ⊤ → IsAdicComplete ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk I)) (A ⧸ I) ∧ ∃ (δ : I.Cotangent →ₗ[A ⧸ I] (A ⧸ I) ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A)) (q : (A ⧸ I) ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) →ₗ[A ⧸ I] AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk I)) (KaehlerDifferential F (A ⧸ I))), (∀ a : I, δ (I.toCotangent a) = (1 : A ⧸ I) ⊗ₜ[A] AdicCompletion.of (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) (KaehlerDifferential.D F A a)) ∧ (∀ (a : A) (c : A ⧸ I), q (c ⊗ₜ[A] AdicCompletion.of (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) (KaehlerDifferential.D F A a)) = c • AdicCompletion.of ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk I)) (KaehlerDifferential F (A ⧸ I)) (KaehlerDifferential.D F (A ⧸ I) (Ideal.Quotient.mk I a))) ∧ Function.Exact δ q ∧ Function.Surjective q) ∧ (IsReduced A → ∀ (p : Ideal A) [p.IsPrime], p ∈ minimalPrimes A → ∃ e : FractionRing (A ⧸ p) ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) ≃ₗ[ FractionRing (A ⧸ p)] FractionRing (A ⧸ p) ⊗[A ⧸ p] AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (KaehlerDifferential F (A ⧸ p)), ∀ (a : A) (l : FractionRing (A ⧸ p)), e (l ⊗ₜ[A] AdicCompletion.of (IsLocalRing.maximalIdeal A) (KaehlerDifferential F A) (KaehlerDifferential.D F A a)) = l ⊗ₜ[A ⧸ p] AdicCompletion.of ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (KaehlerDifferential F (A ⧸ p)) (KaehlerDifferential.D F (A ⧸ p) (Ideal.Quotient.mk p a)))",
-  "branch": "newtargets-dag",
-  "by": "Q02",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.CompletedDifferentialFiniteConormal deleted (dead: no target reaches it); this node is not reached either."
+  "statement": "theorem completed_finite_conormal (F : Type u) (A : Type v) [Field F] [CommRing A] [Algebra F A] [IsLocalRing A] [IsNoetherianRing A] [IsAdicComplete (maximalIdeal A) A] [Module.Finite F (ResidueField A)] : Module.Finite A (AdicCompletion (maximalIdeal A) (KaehlerDifferential F A)) ∧ Submodule.span A (Set.range (fun a : A ↦ AdicCompletion.of (maximalIdeal A) (KaehlerDifferential F A) (D F A a))) = ⊤ ∧ (∀ (N : Type (max v w)) [AddCommGroup N] [Module A N] [Module F N] [IsScalarTower F A N] [Module.Finite A N] [IsAdicComplete (maximalIdeal A) N], Function.Bijective (fun h : AdicCompletion (maximalIdeal A) (KaehlerDifferential F A) →ₗ[A] N ↦ h.compDer ((AdicCompletion.of (maximalIdeal A) (KaehlerDifferential F A)).compDer (D F A)))) ∧ (∀ (I : Ideal A), I ≠ ⊤ → IsAdicComplete ((maximalIdeal A).map (Ideal.Quotient.mk I)) (A ⧸ I) ∧ ∃ δ : I.Cotangent →ₗ[A ⧸ I] (A ⧸ I) ⊗[A] AdicCompletion (maximalIdeal A) (KaehlerDifferential F A), ∃ π : ((A ⧸ I) ⊗[A] AdicCompletion (maximalIdeal A) (KaehlerDifferential F A)) →ₗ[A ⧸ I] AdicCompletion ((maximalIdeal A).map (Ideal.Quotient.mk I)) (KaehlerDifferential F (A ⧸ I)), (∀ a : I, δ (I.toCotangent a) = (1 : A ⧸ I) ⊗ₜ[A] AdicCompletion.of (maximalIdeal A) (KaehlerDifferential F A) (D F A a)) ∧ (∀ (c : A ⧸ I) (a : A), π (c ⊗ₜ[A] AdicCompletion.of (maximalIdeal A) (KaehlerDifferential F A) (D F A a)) = c • AdicCompletion.of ((maximalIdeal A).map (Ideal.Quotient.mk I)) (KaehlerDifferential F (A ⧸ I)) (D F (A ⧸ I) (Ideal.Quotient.mk I a))) ∧ Function.Exact δ π ∧ Function.Surjective π) ∧ (IsReduced A → ∀ (q : Ideal A), q ∈ minimalPrimes A → ∀ (L : Type (max v w)) [Field L] [Algebra (A ⧸ q) L] [IsFractionRing (A ⧸ q) L] [Algebra A L] [IsScalarTower A (A ⧸ q) L], ∃ e : (L ⊗[A] AdicCompletion (maximalIdeal A) (KaehlerDifferential F A)) ≃ₗ[L] L ⊗[A ⧸ q] AdicCompletion ((maximalIdeal A).map (Ideal.Quotient.mk q)) (KaehlerDifferential F (A ⧸ q)), ∀ (l : L) (a : A), e (l ⊗ₜ[A] AdicCompletion.of (maximalIdeal A) (KaehlerDifferential F A) (D F A a)) = l ⊗ₜ[A ⧸ q] AdicCompletion.of ((maximalIdeal A).map (Ideal.Quotient.mk q)) (KaehlerDifferential F (A ⧸ q)) (D F (A ⧸ q) (Ideal.Quotient.mk q a)))",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-305a71c1e",
-  "group": "Q02",
+  "reviewer": "NT-stage2-cc-85a34281a",
+  "group": "Q08",
   "result": "pass",
-  "note": "Only the item's lean record changed; its statement is verbatim in the file. Hypotheses match the node: IsLocalRing + IsNoetherianRing + IsAdicComplete m A; field F via Algebra F A (injective); Module.Finite F (ResidueField A), confirmed by rfl probe to use the composite algebra; no separability added. Clauses match: completion of Ω finite and spanned by d_F a; bijection over all derivations into finite complete N : Type w; for I ≠ ⊤, A/I complete for m.map mk; δ and q fixed by values on generators (toCotangent surjective, c⊗d_F a span), exact and q surjective; reduced minimal prime iso e fixed on l⊗d_F a. Edge cases checked: m=0, I=0, I=m, N=0, char p inseparable, several minimal primes; universes u,v,w independent and bound. No duplicate definition: side KaehlerDifferential.Continuous is lim Ω of quotient rings and trf CompletedDifferentials is a tensor with the completion; parent node uses the same AdicCompletion form. Plain imports are exactly the proof-dependency modules. Docstrings carry source, blueprint id and 7 steps; lines at most 91 chars. nt_compile --json clean, 2.5 s. Advisory: the second reading is brief."
+  "note": "Re-delivery of KaehlerDifferential.completed_finite_conormal (single sorry theorem, no new defs); lean.statement verbatim in file. Hypotheses match node (Field F/Algebra F A injective via local nontriviality; IsLocalRing+IsNoetherianRing+IsAdicComplete m A; Module.Finite F (ResidueField A); no separability/EFT). M_F(A)=AdicCompletion m Ω[A/F], same form as live CompletedPolynomialLiftCalculus, no competing def. Clauses: finite; span of d_F a = ⊤; bijection h↦h.compDer d_F over all F-derivations into finite complete N (IsScalarTower forces restricted F-action; N : Type (max v w) no silent restriction); for I≠⊤ A/I complete at m.map mk, δ/π pinned on generators (toCotangent surjective, c⊗d_F a span), Exact δ π ∧ Surjective π; reduced minimal prime e pinned on l⊗d_F a for any IsFractionRing L. Edge cases m=0, inseparable residue, I=0/m, N=0, domain q=0 OK; universes u v w bound. Stmt_deps Mathlib-recorded; imports exist live; docstrings with EGA place + blueprint id; report has Worker report + Second reading (same worker, brief). Not recompiled per instructions (worker clean). Stale reviewed_lean/lean_removed fields are maintainer bookkeeping."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/CompletedDifferentialFiniteConormal.lean",
+  "module": "Sheaf.RingTheory.CompletedDifferentialFiniteConormal",
+  "declaration": "KaehlerDifferential.completed_differential_finite_conormal",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

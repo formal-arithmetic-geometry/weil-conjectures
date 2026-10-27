@@ -1,0 +1,189 @@
+{
+ "id": "lem-per-directed-pair-simultaneous-bounds",
+ "kind": "statement",
+ "title": "Simultaneous finite-stage realization of bounds and heart witnesses",
+ "statement": "Let $I$ be a small nonempty directed poset [def-weil-size-convention], and let $\\mathcal C_i$ be triangulated categories [def-weil-triangulated-category] with bounded t-structures [def-weil-t-structure]. Supply exact t-exact functors $T_{j/i}$ for $i\\le j$, literal identity functors $T_{i/i}=1$, and shift-compatible exact associators $a_{k,j,i}$ satisfying unit and pentagon. Form the additive pair category $P$ with objects $(i,K)$ and\n$$\\operatorname{Hom}_P((i,K),(j,L))=\\varinjlim_{m\\ge i,j}\\operatorname{Hom}_{\\mathcal C_m}(T_{m/i}K,T_{m/j}L)$$\n[def-weil-directed-colimit-abelian-groups], with transport $u\\mapsto a_{n,m,j}T_{n/m}(u)a_{n,m,i}^{-1}$ and composition at a common stage. Write $j_i:\\mathcal C_i\\to P$ for the inclusion and use its canonical identifications $j_mT_{m/i}\\cong j_i$. Assume that every finite diagram of morphisms and asserted equalities in $P$ is realized at one stage, with equalities holding after further enlargement.\n\nFix $Z=(i,K)$ and finitely many given isomorphisms $e_s:Z\\cong j_{i_s}A_s$ in $P$. For each $s$ prescribe a condition $A_s\\in\\mathcal C_{i_s}^{\\le b_s}$ or $A_s\\in\\mathcal C_{i_s}^{\\ge a_s}$, where $a_s,b_s\\in\\mathbf Z$. There is one $m\\ge i,i_s$ and actual isomorphisms $T_{m/i}K\\cong T_{m/i_s}A_s$ representing all the given $e_s$ and their inverses, such that $T_{m/i}K$ satisfies every prescribed bound simultaneously.\n\nIn particular, if $Z$ belongs to both isomorphism closures $P^{\\le0}$ and $P^{\\ge0}$ of the finite-stage halves, then some $m\\ge i$ satisfies $T_{m/i}K\\in\\mathcal C_m^{\\le0}\\cap\\mathcal C_m^{\\ge0}$. There are isomorphisms in $\\mathcal C_m$ and $P$, respectively,\n$$T_{m/i}K\\cong H_m^0(T_{m/i}K),\\qquad Z\\cong j_mH_m^0(T_{m/i}K),$$\nwhere $H_m^0=\\tau_m^{\\ge0}\\tau_m^{\\le0}$ [lem-weil-heart-short-exact-triangles]. Thus $P^{\\le0}\\cap P^{\\ge0}$ is exactly the isomorphism closure of finite-stage hearts. Neither faithfulness of $j_i$ nor reflection of bounds by the transition functors is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(1), finite-stage passage: agent extraction of the simultaneous heart-witness argument in old proof step 9; the abstract finite-bound version is not stated verbatim by Bhatt–Scholze"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "proof": [
+  {
+   "text": "For each $s$ put $f_s=e_s$ and $g_s=e_s^{-1}$. Apply the assumed finite-diagram realization to these arrows and to the finitely many equations $g_sf_s=1_Z$, $f_sg_s=1_{j_{i_s}A_s}$. It supplies a common stage, and after the allowed further enlargement a single $m\\ge i,i_s$ with arrows $u_s:T_{m/i}K\\to T_{m/i_s}A_s$ and $v_s$ in the reverse direction satisfying $v_su_s=1$ and $u_sv_s=1$. Thus $(u_s,v_s)$ is an actual isomorphism representing the specified $e_s$ and its specified inverse under the canonical identifications with $P$. For an empty witness family take $m=i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1), pp. 61–62: agent-written abstract finite-stage argument, using the finite-diagram realization hypothesis explicitly supplied in this item"
+   }
+  },
+  {
+   "text": "Write $X=T_{m/i}K$. By t-exactness, an upper bound $A_s\\in\\mathcal C_{i_s}^{\\le b_s}$ gives $T_{m/i_s}A_s\\in\\mathcal C_m^{\\le b_s}$; a lower bound gives $T_{m/i_s}A_s\\in\\mathcal C_m^{\\ge a_s}$. The halves are strictly full by [def-weil-t-structure], also after shifts, so the isomorphism $u_s$ puts $X$ in that same half. This holds for every $s$ at this one $m$, proving the simultaneous bounds.",
+   "uses": [
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1), pp. 61–62: agent-written abstract finite-stage argument, using the finite-diagram realization hypothesis explicitly supplied in this item"
+   }
+  },
+  {
+   "text": "If $Z\\in P^{\\le0}\\cap P^{\\ge0}$, the definitions of the two isomorphism closures give one upper witness $A_+$ and one lower witness $A_-$, each isomorphic to $Z$. Apply steps 1–2 to this two-element family with bounds zero. They give $X=T_{m/i}K\\in\\mathcal C_m^{\\le0}\\cap\\mathcal C_m^{\\ge0}$, the finite-stage heart by [def-weil-t-structure].",
+   "uses": [
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1), pp. 61–62: agent-written abstract finite-stage argument, using the finite-diagram realization hypothesis explicitly supplied in this item"
+   }
+  },
+  {
+   "text": "Use the truncation adjunctions in clause (1) of [lem-weil-heart-short-exact-triangles]. Since $X\\in\\mathcal C_m^{\\le0}$, the counit $c:\\tau_m^{\\le0}X\\to X$ is an isomorphism: the adjunction gives $h:X\\to\\tau_m^{\\le0}X$ with $ch=1_X$, and injectivity of $\\operatorname{Hom}(\\tau_m^{\\le0}X,\\tau_m^{\\le0}X)\\to\\operatorname{Hom}(\\tau_m^{\\le0}X,X)$ gives $hc=1$. Dually the unit $X\\to\\tau_m^{\\ge0}X$ is an isomorphism because $X\\in\\mathcal C_m^{\\ge0}$. Hence $X\\cong\\tau_m^{\\ge0}X\\cong\\tau_m^{\\ge0}\\tau_m^{\\le0}X=H_m^0(X)$. Apply $j_m$ and compose with $Z\\cong j_mX$ to obtain $Z\\cong j_mH_m^0(X)$. This cohomology object is in the heart by the same clause. Conversely any $j_mB$ with $B$ in the finite-stage heart is in both half closures; the same holds for every object isomorphic to it. This proves the asserted equality of closures.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i), pp. 29–30, restricted to an object in both halves; degree-zero cohomology as in 1.3.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-t-structure",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(1), pp. 61–62: agent-written abstract finite-stage argument, using the finite-diagram realization hypothesis explicitly supplied in this item"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(heart.*(colimit|stage|directed)|((colimit|stage|directed).*heart))",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a filtered union of t-structured categories a heart object lies in the finite-stage heart after one enlargement realizing both half witnesses",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.ge_one_le, CategoryTheory.Triangulated.TStructure.mk, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.IsFiltered.of_isTerminal, CategoryTheory.IsFiltered.of_hasTerminal, CategoryTheory.Triangulated.TStructure.le_of_isLE, CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat, DerivedCategory.TStructure.t; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"heart\"",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure.heart, CategoryTheory.Triangulated.TStructure.Heart, CategoryTheory.Triangulated.TStructure.instIsClosedUnderIsomorphismsHeart, CategoryTheory.Triangulated.TStructure.ιHeart, CategoryTheory.Triangulated.TStructure.Heart.ι, CategoryTheory.Triangulated.TStructure.instFaithfulιHeart, CategoryTheory.Triangulated.TStructure.instFullιHeart, CategoryTheory.Triangulated.TStructure.Heart.faithful_ι; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection of the isomorphism closures of two finite-stage t-structure halves is the isomorphism closure of finite-stage hearts, using one common enlargement for the two isomorphisms and their inverses",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.ge_isClosedUnderIsomorphisms, CategoryTheory.Triangulated.TStructure.le_isClosedUnderIsomorphisms, CategoryTheory.Triangulated.TStructure.ge_one_le, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.IsGE, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.le, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed pair category with t-exact transition functors, finitely many upper and lower cohomological bound witnesses can be realized simultaneously at one finite stage; every heart object has a heart representative there",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.Triangulated.TStructure.ge_of_isGE; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "grep",
+   "query": "(heart.*(colimit|stage|directed)|((colimit|stage|directed).*heart))",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual t-structures or filtered colimits of objects, not simultaneous realization of prescribed isomorphisms and bounds in this pair category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The heart of a filtered colimit of t-structured categories is the isomorphism closure of the finite stage hearts",
+   "results": "8 hits: CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc, CategoryTheory.Limits.colimitLimitIso.congr_simp, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf, CategoryTheory.Limits.ι_colimitLimitIso_limit_π, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf', CategoryTheory.ObjectProperty.colimitsClosure.of_isoClosure, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual t-structures or filtered colimits of objects, not simultaneous realization of prescribed isomorphisms and bounds in this pair category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TStructure\", \"heart\"",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure.heart, CategoryTheory.Triangulated.TStructure.Heart, CategoryTheory.Triangulated.TStructure.instIsClosedUnderIsomorphismsHeart, CategoryTheory.Triangulated.TStructure.ιHeart, CategoryTheory.Triangulated.TStructure.Heart.ι, CategoryTheory.Triangulated.TStructure.instFaithfulιHeart, CategoryTheory.Triangulated.TStructure.instFullιHeart, CategoryTheory.Triangulated.TStructure.Heart.faithful_ι",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual t-structures or filtered colimits of objects, not simultaneous realization of prescribed isomorphisms and bounds in this pair category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of categories with t-exact transition functors finitely many upper and lower bound witnesses become isomorphisms at a common stage",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity, CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.D₂_W",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual t-structures or filtered colimits of objects, not simultaneous realization of prescribed isomorphisms and bounds in this pair category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A heart object in a filtered union of t structured categories becomes isomorphic to its degree zero truncation at one finite stage realizing both half witnesses",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, HomologicalComplex.truncGE'.XIso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual t-structures or filtered colimits of objects, not simultaneous realization of prescribed isomorphisms and bounds in this pair category"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-common-stage-truncations",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: “$Lf^*$ is exact (the cohomology sheaves of $Lf^*K$ are the pullbacks of those of $K$)” and “the pullback of a constructible sheaf has support the preimage”; supplies the degree-zero and fibre inputs, without any smoothness or dimension estimate. Re-split allocation: returned proof steps 3–5 of lem-per-adic-heart-pullback-fibres. Re-split of common-stage-truncations old step 9; simultaneous finite diagram and intersection of the half closures.",
+   "via": [
+    "lem-per-adic-common-stage-truncations",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-directed-pair-simultaneous-bounds",
+  "worker": "stage1",
+  "summary": "Expanded the finite-diagram realization hypothesis with all inverse equations, transported every upper/lower bound at the common stage, and used existing truncation adjunctions to identify the simultaneous heart representative with H^0. No new nodes or statement changes.",
+  "blueprint": "Serves the degree-zero/common-stage input to the first proof paragraph of lem-per-smooth-pullback-t-exact through lem-per-smooth-pullback-support-dimension, lem-per-adic-heart-pullback-fibres and lem-per-adic-common-stage-truncations. Expands the latter old step 9: intersection of the two half closures and a simultaneous heart witness.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Only clause (1), the general truncation adjunctions and H^0 heart-valuedness, is used in a single finite-stage triangulated category. This is a generic t-structure tool, not a replacement of the perverse unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-0e437e7e3",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-0e437e7e3 (reviewer sub-agent of L); spot-checked: Read the item and every step in full. No new nodes. The statement and stmt_deps are unchanged from the unsplit base (statement sha1 bae9b06966, the same as earlier snapshots); proof_deps equal the union of the step uses. Step 1: the item's finite-diagram realization hypothesis, applied to e_s, e_s^{-1} and both inverse equations and followed by one more enlargement, gives actual inverse pairs (u_s, v_s) at a single stage m. Identities in P are represented by literal identities (T(1)=1, unchanged by associator conjugation). The empty family takes m=i. Step 2: an exact t-exact functor keeps shifted bounds, and the strictly full halves of def-weil-t-structure move each bound along u_s. Upper and lower bounds are treated separately, with no reflection of bounds and no faithfulness. Step 3: applying steps 1-2 to the two half witnesses lands in the stage heart. Step 4: the adjunctions of lem-weil-heart-short-exact-triangles clause (1) (also in its blueprint_update) make the counit tau^{<=0}X->X an isomorphism (checked: ch=1, and c(hc)=c with the adjunction bijection gives hc=1), and dually the unit X->tau^{>=0}X. So X is isomorphic to H^0_m(X) and Z to j_m H^0_m(X); the converse inclusion is immediate. Edge cases checked: empty family, the zero object, incompatible bounds, a one-point I. Source checked: Bhatt-Scholze Prop 6.8.14(1), pp. 61-62, only an equivalence of constructible categories, so proof_origin=agent is correct; BBD 1.3.3 comes through the cited node; no SGA. Duplicates: lem-pod-directed-pair-bounded-tstructure (Q90) assumes P triangulated and proves the half closures form a t-structure; it does not give simultaneous bounds or the heart-equals-closure-of-finite-hearts clause, so it is not a duplicate. The parent lem-per-adic-common-stage-truncations cites the item's statement for exactly this heart passage. Accepted tool_use: lem-weil-heart-short-exact-triangles (generic BBD truncation adjunctions, unit sk-rem-rest, already a stmt_dep). No fixes."
+ }
+}

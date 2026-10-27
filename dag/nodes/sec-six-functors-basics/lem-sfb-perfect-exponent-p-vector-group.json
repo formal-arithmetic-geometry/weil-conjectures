@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-perfect-exponent-p-vector-group",
+ "kind": "statement",
+ "title": "Smooth connected commutative exponent-p groups over a perfect field are vector groups",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $\\operatorname{char}k=p>0$ and every element of $k$ is a $p$-th power. Let $G$ be smooth, connected and commutative. Suppose $[p]_G=0$, meaning that the sum of $p$ copies of every $g\\in G(R)$ is zero for every commutative $k$-algebra $R$. Then for some integer $d\\geq0$ there is an isomorphism of $k$-group schemes $\\mathbf G_a^d\\xrightarrow{\\sim}G$. Here $\\mathbf G_a(R)=(R,+)$ for every commutative $k$-algebra $R$ [def-sc-gm-ga], and $\\mathbf G_a^0$ is the trivial group $1=\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.54, printed p.297 (also Proposition 14.49 and Corollary 14.53)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-p-torsion-additive-embedding] to $G$: the hypotheses are precisely smoothness, commutativity, finite type, affineness and $[p]_G=0$. Obtain a closed embedding $G\\hookrightarrow\\mathbf G_a^n$.",
+   "uses": [
+    "lem-sfb-smooth-p-torsion-additive-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.49, printed p.296; first sentence of Proposition 14.54, printed p.297."
+   }
+  },
+  {
+   "text": "The field hypothesis says exactly that $k$ is perfect in characteristic $p$. Apply [lem-sfb-additive-subgroup-perfect-decomposition] to the closed subgroup of step 1, obtaining an isomorphism $b:G\\simeq\\mathbf G_a^d\\times\\prod_{j=1}^s\\alpha_{p^{r_j}}\\times E$, with all $r_j\\geq1$ and $E$ finite etale.",
+   "uses": [
+    "lem-sfb-additive-subgroup-perfect-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.52 and Corollary 14.53, printed p.297."
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-geometrically-reduced], applied to $G\\to\\operatorname{Spec}k$, $G$ is reduced. If an $\\alpha_{p^{r_j}}$ factor occurred, its projection would have a section by setting all other coordinates equal to their identities. Thus $k[t]/(t^{p^{r_j}})\\to\\mathcal O(G)$ would have a left inverse and be injective. The nonzero nilpotent class of $t$ would remain nonzero and nilpotent, contradicting reducedness. Hence $s=0$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.53, printed p.297: exclusion of infinitesimal factors; geometric reducedness input Stacks Tag 056T, varieties.tex lemma-smooth-geometrically-normal."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-algebra-over-field-product] to $C=\\mathcal O(E)$: $C\\simeq\\prod_{i=1}^m L_i$ with finite separable fields $L_i/k$. The identity $C\\to k$ shows $m>0$. If $m>1$, a nontrivial coordinate idempotent stays nontrivial in $\\mathcal O(G)$: the projection $G\\simeq\\mathbf G_a^d\\times E\\to E$ has the zero-coordinate section, so its ring map is injective. Its two principal opens $D(e),D(1-e)$ are nonempty, disjoint, and cover $G$, contradicting [def-weil-connected-scheme]. Thus $C=L_1$. The identity map $L_1\\to k$ is injective and its image contains $k$, hence is a $k$-algebra isomorphism. Therefore $E=\\operatorname{Spec}k$ is the trivial group. Invert the resulting group isomorphism $b:G\\simeq\\mathbf G_a^d$ to get the requested arrow, including $d=0$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.53, printed p.297: exclusion of etale factors. Field-product input: Stacks Tag 00U3, algebra.tex lemma-etale-over-field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-p-torsion-additive-embedding",
+  "lem-sfb-additive-subgroup-perfect-decomposition",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.54 via Proposition 14.49 and the proof of Corollary 14.53 from Proposition 14.52, printed pp.295--297; nilpotent/idempotent exclusion written explicitly, using Stacks Tags 056T and 00U3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected commutative algebraic group of exponent p over a perfect field of characteristic p is isomorphic to a finite product of additive groups",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); PerfectField.toPerfectRing, IsAlgClosed.perfectRing, WittVector.isocrystal_classification, Algebra.FormallySmooth.of_perfectField, FiniteField.frobeniusAlgEquiv, PerfectRing.toPerfectField, FiniteField.frobeniusAlgEquiv_apply, PerfectRing.ofFiniteOfIsReduced",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "elementary.unipotent|exponent.*p|vector.group",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected commutative group scheme killed by p over a perfect field is a vector group",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); smoothSheafCommGroup, smoothPresheafCommGroup, AddCommGroup.primaryComponent, ContMDiffSection.instAddCommGroup, instCommGroupObjOppositeOpensCarrierOfPresheafSmoothSheaf, FDRep.instAddCommGroupCarrierVFGModuleCat, WittVector.Isocrystal.noConfusionType, WittVector.quotientPEquiv",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative p torsion algebraic groups over perfect fields are products of Ga when smooth and connected",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.FormallySmooth.of_perfectField, IsAlgClosed.perfectRing, WittVector.isocrystal_classification, PerfectField.toPerfectRing, FiniteField.frobeniusAlgEquiv, PerfectRing.ofFiniteOfIsReduced, PerfectClosure.R, Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "elementary.unipotent|vector.group|GroupScheme",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); ; directory Mathlib/AlgebraicGeometry",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); ",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected commutative algebraic groups killed by p over a perfect field are products of copies of Ga",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); smoothSheafCommGroup, LibraryNote.Design_choices_about_smooth_algebraic_structures, smoothPresheafCommGroup, Algebra.FormallySmooth.of_perfectField, Perfection.commRing, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallySmooth.pi_iff, Algebra.smoothLocus",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected commutative affine group schemes annihilated by the characteristic over a perfect field are isomorphic to an additive vector group",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.FormallySmooth.of_perfectField, WittVector.isocrystal_classification, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty, IsAlgClosed.perfectRing, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat",
+   "verdict": "no match: the returned declarations do not assert an embedding or classification of affine algebraic group schemes; perfect fields, smooth algebras, biproduct matrices and abstract additive groups are different statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-central-additive-subgroup",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. This split realizes Milne 14.54 by the 14.49 embedding, then 14.52 and the explicit factor elimination of 14.53.",
+   "via": [
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-exponent-p-vector-group",
+  "worker": "stage1",
+  "summary": "Read Milne 14.45, 14.49 and 14.52--14.54. Split the exponent-p vector-group theorem into the smooth p-torsion additive embedding and the more general perfect-field additive-subgroup product classification; the proof explicitly excludes infinitesimal and etale factors using reducedness and connectedness. Statement unchanged. No matching project declaration or Mathlib result found.",
+  "blueprint": "Current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper/open direct-image inputs: retain the inherited supporting chain through the alteration/group-theoretic prerequisites. The created.item chain currently has no blueprint-kind ancestor (blueprint_refs.py ancestor prints None); preserve that null and the complete via chain, with explicit source places. Steps 1--4 realize Milne 14.49 then 14.52--14.53 supporting 14.54.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-d2c640fe4",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-d2c640fe4 (reviewer sub-agent of L); spot-checked: PASS: I read Milne iAG2017 pp.295-297 (14.45, 14.48, 14.49, 14.51-14.54) and 11.40-11.41. The item statement is unchanged against live and matches 14.54 hypothesis by hypothesis; 'exponent p' means p·id = 0, as in the item. This is a first split: the item is still unsplit in live, there is no repair note, and no other group has split it. New node lem-sfb-smooth-p-torsion-additive-embedding is Milne 14.49 + 14.45 (smooth + p = 0 gives V = 0 by 11.41, then 14.48). It correctly drops perfection and connectedness; I tested it on constant Z/p, α_p and the imperfect form y^p = x + t x^p. New node lem-sfb-additive-subgroup-perfect-decomposition is 14.52. I checked independently that it is true despite the misstatement in 14.51: over a perfect k, M is free ⊕ torsion, Fitting splits the torsion into F-nilpotent and F-bijective parts, and the nilpotent part over the uniserial ring k[F]/(F^N) is a sum of A/AF^r. This gives G_a^d × ∏α_{p^r}(r ≥ 1) × E with E étale of p-power order. The report's 14.51 source-error note is correct. Neither new node restates the item. No duplicate turned up in my DAG search (rg -L for elementary unipotent, 14.4x/14.5x, Verschiebung, vector group, α_{p^r}, G_a^n; def-sc-gm-ga defines only α_p). Steps: 1 and 2 use the full conclusions of the new nodes with all their hypotheses in force. Step 3 rules out α factors: sbc-lem-smooth-geometrically-reduced (Lean-closed) gives reducedness of the fibre G, and the identity section makes the coordinate map injective. Step 4 rules out the étale factor: the field-product node (Mathlib leaf) applies, the counit excludes the zero ring, a split idempotent with nonempty D(e), D(1−e) contradicts connectedness, and a k-algebra map L → k is an isomorphism. Route: the outside uses are a Lean-closed node and a Mathlib leaf, so tool_uses [] is correct. No SGA citation, B1-B9 checked, three kinds of search recorded, from.node null matches the inherited chain. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectExponentPVectorGroup",
+  "declaration": "AlgebraicGeometry.perfect_exponent_p_vector_group",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectExponentPVectorGroup.lean",
+  "statement": "theorem perfect_exponent_p_vector_group {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hperfect : ∀ x : k, ∃ y : k, y ^ p = x) (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsCommMonObj G.X] (hpG : 𝟙 G.X ^ p = 1) : ∃ d : ℕ, Nonempty ((∏ᶜ (fun _ : Fin d ↦ Grp.mk (StandardGroupSchemes.additive k))) ≅ G)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-325b6ccff",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Item matches Milne 14.54/node clause by clause: Field k, CharP k p with 0<p, perfect hypothesis exact, G : Grp(Over Spec k) affine + LoFT+QC + Smooth + ConnectedSpace + IsCommMonObj, hpG 𝟙^p=1; conclusion ∃ d, Nonempty(∏ᶜ Ga ≅ G) in Grp (d=0 trivial). Probe compile confirmed ^/1 are the convolution Hom.group from Grp.grp G (𝟙^2=lift 𝟙 𝟙≫μ, 1=toUnit≫η), so hpG is [p]_G=0, not composition power. New dep module for lem-sfb-smooth-p-torsion-additive-embedding (live lean null, used by proof step 1) matches its node exactly (no connectedness/perfection, IsClosedSubgroupScheme = hom + R-point injective + closed immersion, n=0 allowed). No duplicate (only char-0 sibling), no hollow defs, sorry proofs, source/blueprint docstrings present, statement field = signature, report sections present. Minor note: dep docstring merges node steps 4-5."
+ }
+}

@@ -102,7 +102,18 @@
   "thm-weil-pbc-hypercover-cohomology"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -191,5 +202,37 @@
   "landing": "20261016T150655-L-4176217",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X=\\varprojlim_jX_j$ be a cofiltered system of quasi-compact\nquasi-separated schemes [def-weil-pbc-scheme-conventions] with affine\ntransition maps. Let $K_i\\in\\Dplus(X_{i,\\Et})$ be a bounded-below complex of\nabelian sheaves and let $K_j,K$ be its inverse images\n[def-weil-pbc-inverse-image]. Then the canonical restriction map is an\nisomorphism\n\n$$\n \\varinjlim_{j\\geq i}H^nR\\Gamma(X_{j,\\Et},K_j)\n \\xrightarrow{\\sim}H^nR\\Gamma(X_{\\Et},K)\n \\qquad(n\\in\\mathbb Z).\n$$",
+  "proof": [
+   {
+    "text": "Choose $a$ below the cohomological support of $K_i$, in\n[def-weil-pbc-derived-categories]. Exact inverse image in\n[prop-weil-pbc-inverse-image-exact] preserves this bound and commutes with\ntruncations and cohomology sheaves. To calculate degree $n$, one may replace\nall these complexes by their truncations in degrees $[a,n]$. Indeed the\ncomplementary truncation starts in degree $n+1$, and its injective resolution\nand derived sections have no cohomology in degrees at most $n$.",
+    "uses": [
+     "def-weil-pbc-derived-categories",
+     "prop-weil-pbc-inverse-image-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a single sheaf in one degree, the assertion is\n[lemma-weil-pbc-etale-cohomology-continuity]. Build a bounded truncation by its finite sequence of triangles\n\n$$\n \\tau_{\\leq b-1}K_i\\longrightarrow\\tau_{\\leq b}K_i\n \\longrightarrow\\mathcal H^b(K_i)[-b]\\longrightarrow .\n$$",
+    "uses": [
+     "lemma-weil-pbc-etale-cohomology-continuity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply derived sections at all stages and at the limit. Filtered colimits of\nabelian groups are exact, so their long exact cohomology sequences remain exact\nafter taking the colimit. The five lemma, inductively in $b-a$, proves the\ncomparison in all degrees for every finite truncation. The preceding\ntruncation argument then gives the assertion for $K_i$. All arrows used are\nthe restriction arrows, so this proves the named map, naturally in the\ncomplex and in the inverse system.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

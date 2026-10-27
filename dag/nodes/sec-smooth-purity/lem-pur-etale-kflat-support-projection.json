@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-etale-kflat-support-projection",
+ "kind": "statement",
+ "title": "Projection normalization of the support quotient map",
+ "statement": "Let A→B be a homomorphism of finite commutative rings, j:U→P an open immersion of schemes, and L an ordinary etale A-module derived object. Let T denote derived extension of scalars, Res exact restriction of scalars, and R_A,R_B derived direct image. Assume L, TL, R_A j*L, T R_A j*L and R_B j*TL are bounded below. Choose a termwise injective K-injective complex I and an isomorphism e:Qloc(I)≅L, a flat-term K-flat coefficient resolution π:Q→B_P, and any functorial termwise injective K-injective replacement a:Q⊗I→J. Suppose j*I,j*J are K-injective. Let v:Q⊗j_*j*I→j_*j*J be the canonical open quotient map OpenSupport.rightMap of the ordinary j*⊣j_* adjunction [lem-pur-flat-support-chain-diagram], i.e. the map with the total-summand adjunct characterization IsRightMap j Q I J a [def-pur-etale-kflat-support-data]. Then Qloc(v) followed by targetThirdModel (using replacementIso a (tensorModel π e)) equals sourceThirdModel (π,e) followed by restrictedProjection. Here sourceThirdModel, targetThirdModel and restrictedProjection are the specified exact-pullback coordinate maps of [def-pur-etale-kflat-support-data]; the last map is Res(coefficientProjection) followed by the canonical scalar-restriction/direct-image map and the inverse restriction/exact-pullback isomorphism. A complementary closed immersion i and its range equality may be supplied, but are unused in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPI, lemma-adjoints-push-pull-compatibility; coordinate transport of the K-flat open projection model required by lem-pur-etale-kflat-support-comparison."
+ },
+ "stmt_deps": [
+  "def-pur-etale-kflat-support-data",
+  "lem-pur-flat-support-chain-diagram"
+ ],
+ "proof": [
+  {
+   "text": "apply computes_coefficient_projection to the flat-term K-flat augmentation\nand the quasi-isomorphism to the chosen replacement. Transport its five lower bounds\nalong leftDerivedUpperStarIsoMapDerivedCategory. The ordinary adjunct is the rightMap\nof the strict support diagram by the cochain adjunction formula. In the target,\nnaturality of the exact/left-derived comparison cancels its inverse with the\nrestriction/pullback comparison. In the source use naturality of tensorModel in the\nrepresenting isomorphism. Naturality of scalarMate identifies the transported\ncoefficient projection, and naturality of scalarRestrictionDirectImageMap moves the\nremaining exact-pullback comparison past restriction/direct image. Cancelling the\nspecified model isomorphisms gives the displayed equality.",
+   "uses": [
+    "lem-pur-kflat-open-projection-model",
+    "lem-pur-flat-support-chain-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI, lemma-adjoints-push-pull-compatibility; normalized tensor/scalar specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-open-projection-model",
+  "lem-pur-flat-support-chain-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "X9 isolates the projection part of the assigned comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived coefficient projection and exact pullback with tensor representatives in derived sheaf categories",
+   "results": "8 hits: CategoryTheory.Over.tensorHom_left_fst; CategoryTheory.Over.tensorObj_left; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullback; CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_fst_assoc; SheafOfModules.sheafificationCompPullback; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp_assoc|Naturality.*Iso",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar projection and direct image under an isomorphism between exact and derived inverse image functors",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportComparison",
+  "date": "2026-10-25",
+  "group": "X9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof step 2",
+   "via": [
+    "lem-pur-etale-kflat-support-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleKFlatSupportProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.KFlatSupportComparison.support_comparison_projection",
+  "statement": "theorem support_comparison_projection [Finite A] [Finite B]\n    (φ : A →+* B) (i : Z ⟶ P) [IsClosedImmersion i]\n    (j : U ⟶ P) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (L : _root_.DerivedCategory.Plus (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (_hTL : ∃ n : ℤ, ((scalarExtension φ P).obj L.obj).IsGE n)\n    (_hRTL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} B) j)).obj\n      ((D(upperStar (ModuleCat.{u + 1} B) j)).obj\n        ((scalarExtension φ P).obj L.obj))).IsGE n)\n    (_hRL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj\n      ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj)).IsGE n)\n    (_hTRL : ∃ n : ℤ, ((scalarExtension φ P).obj\n      ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj\n        ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj))).IsGE n)\n    (I : Complex A P) [I.IsKInjective] [∀ n : ℤ, Injective (I.X n)]\n    (e : (localize A P).obj I ≅ L.obj)\n    (Q : Complex A P)\n    (π : Q ⟶ (CochainComplex.singleFunctor\n      (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj (scalarCoefficientSheaf φ P))\n    [QuasiIso π] (hQ : (HomologicalComplex.quasiIso\n      (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)).kFlat Q)\n    (_hQf : ∀ n : ℤ, ObjectProperty.flat (Q.X n))\n    (F : Complex A P ⥤ Complex A P) (η : 𝟭 _ ⟶ F)\n    [∀ K : Complex A P, (F.obj K).IsKInjective]\n    [∀ (K : Complex A P) (n : ℤ), Injective ((F.obj K).X n)]\n    [∀ K : Complex A P, QuasiIso (η.app K)]\n    (hI : CochainComplex.IsKInjective ((pullComplex A j).obj I))\n    (hJ : CochainComplex.IsKInjective ((pullComplex A j).obj (F.obj (Q ⊗ I))))\n    :\n    let N := Q ⊗ I\n    let J := F.obj N\n    let a := η.app N\n    let v := OpenSupport.rightMap\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j)\n      Q I J a\n    (localize A P).map v ≫\n          (targetThirdModel φ j J L.obj\n            (replacementIso a (tensorModel φ Q π hQ I L.obj e)) hJ).hom =\n        (sourceThirdModel φ j Q π hQ I L.obj e hI).hom ≫ restrictedProjection φ j L.obj",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "independent cc review: new etale_kflat_support_comparison vs old statement from the change record (old proved from new + support_rightMap_iff in a scratch compile); strict/projection sorries vs their nodes, the support-sequence and chain-diagram lemmas, and the old normalization clause"
+ }
+}

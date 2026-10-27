@@ -1,0 +1,236 @@
+{
+ "id": "lem-sp-tensor-counit-exchange-calculus",
+ "kind": "statement",
+ "title": "A tensor-counit transpose under an adjunction mate",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal C',\\mathcal D'$ be monoidal categories [def-nagata-category, def-sfb-monoidal-category, def-sfb-strong-monoidal-functor]. Let $F:\\mathcal C\\to\\mathcal D$ be left adjoint to $G$, and $F':\\mathcal C'\\to\\mathcal D'$ left adjoint to $G'$, with counits $\\varepsilon,\\varepsilon'$ and the usual triangle identities [def-weil-pbc-adjunction-mate]. Let $H:\\mathcal D\\to\\mathcal C$, $H':\\mathcal D'\\to\\mathcal C'$, $U:\\mathcal C\\to\\mathcal C'$, and $V:\\mathcal D\\to\\mathcal D'$ be strong monoidal functors, and fix a monoidal natural isomorphism $UH\\cong H'V$. All expressions below use these tensor, composition and unit comparisons. Let $\\beta:VF\\xrightarrow{\\sim}F'U$ be a natural isomorphism and define $e_K:UGK\\to G'VK$ as the adjoint transpose of $V\\varepsilon_K\\circ\\beta_{GK}^{-1}$.\n\nSuppose given projection transformations $P(K,M):K\\otimes FM\\to F(HK\\otimes M)$ and $P'(K',M'):K'\\otimes F'M'\\to F'(H'K'\\otimes M')$, natural in both arguments. Fix $K\\in\\mathcal D$. Assume these maps are invertible at $(K,G\\mathbf1)$, $(VK,UG\\mathbf1)$ and $(VK,G'\\mathbf1)$, and write $q(K,G\\mathbf1)$ and the corresponding $q'$ for their inverses. Assume at $M=G\\mathbf1$ the projection/exchange equation\n$$(1_{VK}\\otimes\\beta_M)Vq(K,M)\\beta_{HK\\otimes M}^{-1}=q'(VK,UM).$$\nPut $\\omega=G\\mathbf1_{\\mathcal D}$, $\\omega'=G'\\mathbf1_{\\mathcal D'}$, and let $e_1:U\\omega\\to\\omega'$ be the component of $e$ at the unit, using $V\\mathbf1\\cong\\mathbf1$. Let $t_K:HK\\otimes\\omega\\to GK$ and $t'_{VK}:H'VK\\otimes\\omega'\\to G'VK$ be the transposes of $(1_K\\otimes\\varepsilon_1)q(K,\\omega)$ and $(1_{VK}\\otimes\\varepsilon'_1)q'(VK,\\omega')$, with right unitors understood. Then\n$$e_K\\circ U(t_K)=t'_{VK}\\circ(1_{H'VK}\\otimes e_1),$$\nwhere the source on the left is identified with $H'VK\\otimes U\\omega$. In particular both transposes under $F'\\dashv G'$ are the map\n$$(1_{VK}\\otimes(V\\varepsilon_1\\circ\\beta_\\omega^{-1}))\\circ q'(VK,U\\omega):F'(H'VK\\otimes U\\omega)\\to VK.$$\nThe same implication holds for adjunctions restricted to full subcategories of these monoidal categories whenever every displayed object and map lies in the domains of the specified adjunction Hom bijections; it requires no invertibility of $e_1$ and no faithfulness of any evaluation functor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), transpose both tensor maps and expand the two counits; old split step 7; agent-extracted self-contained interface, not a theorem quoted verbatim from the blueprint. Retained expanded argument: report.md, Appendix: inherited argument, old step(s) 7."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=HK\\otimes\\omega$, $B=H' VK\\otimes U\\omega$ (so $B=UA$ by the specified comparisons), and $h=1_{H' VK}\\otimes e_1$. For an arrow $x:B\\to G\\prime VK$, its inverse adjunction transpose is $T\\prime(x)=\\varepsilon\\prime_{VK}\\circ F\\prime(x)$, by [lem-weil-pbc-adjunction-of-natural-bijection]. Put $a=(1_K\\otimes\\varepsilon_1)q(K,\\omega)$ and $a\\prime=(1_{VK}\\otimes\\varepsilon\\prime_1)q\\prime(VK,\\omega\\prime)$. The defining transpose equations give $\\varepsilon_K\\circ F(t_K)=a$ and $\\varepsilon\\prime_{VK}\\circ F\\prime(t\\prime_{VK})=a\\prime$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), tensor map: expand the two transposes"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-mate-unit-counit] with left square $\\beta^{-1}$ and mate $e$: $\\varepsilon\\prime_{VK}\\circ F\\prime(e_K)=V(\\varepsilon_K)\\circ\\beta_{GK}^{-1}$. Naturality of $\\beta^{-1}$ at $t_K:A\\to GK$ says $\\beta_{GK}^{-1}\\circ F\\prime U(t_K)=VF(t_K)\\circ\\beta_A^{-1}$. Substitute these two equations and the preceding transpose equation to obtain $$T\\prime(e_K\\circ U(t_K))=V(a)\\circ\\beta_A^{-1}.$$ All terms here have source $F\\prime(UA)$ and target $VK$.",
+   "uses": [
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), tensor map: expand the two transposes"
+   }
+  },
+  {
+   "text": "By tensorator naturality and unit compatibility in [def-sfb-strong-monoidal-functor], $V(a)=(1_{VK}\\otimes V\\varepsilon_1)Vq(K,\\omega)$ under the stipulated comparisons, with the right unitor included. The assumed projection/exchange equation at $M=\\omega$ gives $$Vq(K,\\omega)\\beta_A^{-1}=(1_{VK}\\otimes\\beta_\\omega^{-1})q\\prime(VK,U\\omega).$$ Compose and use functoriality of tensor [def-sfb-monoidal-category]. Thus the transpose in step 2 equals $$c=(1_{VK}\\otimes(V\\varepsilon_1\\circ\\beta_\\omega^{-1}))q\\prime(VK,U\\omega).$$",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), tensor map: expand the two transposes"
+   }
+  },
+  {
+   "text": "Use naturality of $P\\prime$ in its second argument at $e_1:U\\omega\\to\\omega\\prime$: $$P\\prime(VK,\\omega\\prime)(1_{VK}\\otimes F\\prime e_1)=F\\prime(h)P\\prime(VK,U\\omega).$$ Multiplying on the left by $q\\prime(VK,\\omega\\prime)$ and on the right by $q\\prime(VK,U\\omega)$ yields $$q\\prime(VK,\\omega\\prime)F\\prime(h)=(1_{VK}\\otimes F\\prime e_1)q\\prime(VK,U\\omega).$$ Therefore step 1 and tensor functoriality [def-sfb-monoidal-category] give $$T\\prime(t\\prime_{VK}\\circ h)=(1_{VK}\\otimes(\\varepsilon\\prime_1\\circ F\\prime e_1))q\\prime(VK,U\\omega).$$ The mate counit equation [lem-amb-mate-unit-counit] at $1_{\\mathcal D}$ identifies $\\varepsilon\\prime_1\\circ F\\prime e_1=V\\varepsilon_1\\circ\\beta_\\omega^{-1}$ under $V1\\cong1$. Explicitly, for $v:V1\\to1$, $e_1=G\\prime(v)e_{1_{\\mathcal D}}$, and counit naturality moves $F\\prime G\\prime(v)$ past $\\varepsilon\\prime_1$. Consequently this transpose is also $c$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-amb-mate-unit-counit",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), tensor map: expand the two transposes"
+   }
+  },
+  {
+   "text": "The inverse Hom bijection of [lem-weil-pbc-adjunction-of-natural-bijection] is injective. Steps 2--4 show that it sends both arrows to $c$, so the arrows are equal and their common transpose is the displayed map in the statement. The calculation uses only compositions, the two assumed projection inverses for $P\\prime$, the assumed exchange equation, and adjunction Hom bijections. In full subcategories all the same equalities hold whenever the displayed objects and maps belong to the specified Hom domains. No inverse of $e_1$ and no evaluation functor occurs.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), tensor map: expand the two transposes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-amb-mate-unit-counit",
+  "def-sfb-strong-monoidal-functor",
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), expanded categorical counit calculation; adjunction convention from Stacks Tag 0037 (definition-adjoint), and tensor conventions from Tag 0FFL and definition-monoidal-category as recorded by the cited definition nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact support base change isomorphism compatible with inverse projection maps implies the exceptional mate intertwines the tensor maps transposed from the unit counit",
+   "results": "8 hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.leftAdjointMate_comp_evaluation, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "(projection|tensor).*(baseChange|exchange).*(counit|mate)|(counit|mate).*(projection|tensor).*(baseChange|exchange)",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Hopf_.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of inverse projection followed by unit counit commutes with a base change mate",
+   "results": "8 hits: CategoryTheory.Adjunction.unit_comp_map_eq_iff, CategoryTheory.unit_mateEquiv, CategoryTheory.Bicategory.mateEquiv, CategoryTheory.Bicategory.mateEquiv_apply', CategoryTheory.Bicategory.mateEquiv_leftUnitor_hom_rightUnitor_inv, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_vcomp, CategoryTheory.Bicategory.toNatTrans_mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute both adjuncts to show naturality of the dualizing tensor comparison under a counit-defined exchange assuming projection base change coherence",
+   "results": "8 hits: CategoryTheory.coev_expComparison, CategoryTheory.expComparison, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.frobeniusMorphism_mate",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements do not assert this comparison on the stated categories and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(mate|counit)|mate.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full tensor/projection exchange statement: counit and mate identities are components only, reused through existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of tensor counit adjoint transpose under base change and inverse projection formula",
+   "results": "8 hits: CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.ihom.coev_naturality, LinearMap.rTensor_baseChange, CategoryTheory.ihom.coev_naturality_assoc, CategoryTheory.NatTrans.tensor_naturality, CategoryTheory.Adjunction.counitAsIsoOfIso",
+   "date": "2026-10-22",
+   "verdict": "no match for the full tensor/projection exchange statement: counit and mate identities are components only, reused through existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full tensor/projection exchange statement: counit and mate identities are components only, reused through existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of a tensor counit transpose with an adjunction base change mate assuming natural inverse projection transformations",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.rightAdjointMate_comp_evaluation_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the full tensor/projection exchange statement: counit and mate identities are components only, reused through existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between left adjoint squares and projection formula compatibility make the tensor to right adjoint maps commute with the right mate",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.rightAdjointMate_comp, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match for the full tensor/projection exchange statement: counit and mate identities are components only, reused through existing DAG leaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-purity-bc-factors",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (2), transpose both tensor maps and expand the two counits; old split step 7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-tensor-counit-exchange-calculus",
+  "worker": "stage1",
+  "group": "Q74",
+  "summary": "Kept the statement and all inherited search records. Expanded the two inverse Hom transposes using existing Mathlib leaves for the counit identity and Hom bijections. Proved the inverse-projection naturality equation by multiplying the given naturality square by the two specified inverses. Checked unit comparisons and restricted Hom domains. No new nodes.",
+  "blueprint": "det-sp-purity-bc-factors, Proof (2): transpose both tensor maps; compact-support base change, projection comparison, and pulled-back counit; equal transposes give equality."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-6fb9dc777",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-6fb9dc777 (reviewer sub-agent of L); spot-checked: Q74 delivers a split of lem-sp-tensor-counit-exchange-calculus with 0 new nodes. The statement is unchanged and byte-identical to the live node, which is still unsplit and has no repair note. The 5 steps carry Q115's old step 7 of det-sp-purity-bc-factors line by line. The route matches main-20261015 sk-prop-sp-purity-bc-factors proof (2): transpose under F'⊣G'; e is the transpose of Vε∘β^{-1}; base-change compatibility of the projection formula; e at the unit; equal transposes. I recomputed every step. Step 1: Ψ^{-1}(b)=ε∘F(b), as stated in lem-weil-pbc-adjunction-of-natural-bijection. Step 2: lem-amb-mate-unit-counit with α=β^{-1} plus β^{-1}-naturality at t_K gives V(a)β_A^{-1}. Step 3 is elementary: tensorator naturality and the unit axiom of def-sfb-strong-monoidal-functor, then the exchange hypothesis at M=ω. Step 4: P' naturality at e_1, using q'P'=id at (VK,ω') and P'q'=id at (VK,Uω), plus the mate counit at 1_D and ε'-naturality at v:V1→1. Step 5: injectivity of the Hom bijection. All types check, and every hypothesis is used: (K,G1) defines t_K, the two P' pairs are used in step 4, the exchange equation at ω in step 3. No inverse of e_1 is needed. Small case: Vect with all functors the identity and β=−id gives −t on both sides. All proof_deps are Mathlib leaves, so there is no route issue and no tool_uses. proof_deps equals the union of step uses. There is no SGA citation. A DAG search found no duplicate; the nearest hits (lem-sf-kv-smooth-transpose, lem-sf-proper-product-counit-transpose, lem-pur-dualizing-unit-composite, lem-sp-compact-projection-base-change) are concrete geometric statements. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Adjunction.TensorCounitExchangeCalculus",
+  "declaration": "CategoryTheory.tensorCounitExchangeCalculus",
+  "declarations": [
+   "CategoryTheory.tensorCounitSourceIso",
+   "CategoryTheory.tensorCounitTranspose",
+   "CategoryTheory.tensorCounitMateUnit",
+   "CategoryTheory.tensorCounitCommonTranspose",
+   "CategoryTheory.tensorCounitExchangeCalculus",
+   "CategoryTheory.tensorCounitRestrictedHomEquiv",
+   "CategoryTheory.tensorCounitExchangeCalculus_restricted"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/TensorCounitExchangeCalculus.lean",
+  "statement": "theorem tensorCounitExchangeCalculus (F : C ⥤ D) (G : D ⥤ C) (adj : F ⊣ G) (F' : C' ⥤ D') (G' : D' ⥤ C') (adj' : F' ⊣ G') (H : D ⥤ C) (H' : D' ⥤ C') (U : C ⥤ C') (V : D ⥤ D') [H.Monoidal] [H'.Monoidal] [U.Monoidal] [V.Monoidal] (θ : H ⋙ U ≅ V ⋙ H') [NatTrans.IsMonoidal θ.hom] (β : F ⋙ V ≅ U ⋙ F') (P : ∀ (K : D) (M : C), K ⊗ F.obj M ⟶ F.obj (H.obj K ⊗ M)) (P' : ∀ (K : D') (M : C'), K ⊗ F'.obj M ⟶ F'.obj (H'.obj K ⊗ M)) (hP : ∀ {K K' : D} {M M' : C} (f : K ⟶ K') (g : M ⟶ M'), (f ⊗ₘ F.map g) ≫ P K' M' = P K M ≫ F.map (H.map f ⊗ₘ g)) (hP' : ∀ {K K' : D'} {M M' : C'} (f : K ⟶ K') (g : M ⟶ M'), (f ⊗ₘ F'.map g) ≫ P' K' M' = P' K M ≫ F'.map (H'.map f ⊗ₘ g)) (K : D) [IsIso (P K (G.obj (𝟙_ D)))] [IsIso (P' (V.obj K) (U.obj (G.obj (𝟙_ D))))] [IsIso (P' (V.obj K) (G'.obj (𝟙_ D')))] (hEx : F'.map (tensorCounitSourceIso H H' U V θ K (G.obj (𝟙_ D))).hom ≫ β.inv.app (H.obj K ⊗ G.obj (𝟙_ D)) ≫ V.map (inv (P K (G.obj (𝟙_ D)))) ≫ (Functor.Monoidal.μIso V K (F.obj (G.obj (𝟙_ D)))).inv ≫ (V.obj K ◁ β.hom.app (G.obj (𝟙_ D))) = inv (P' (V.obj K) (U.obj (G.obj (𝟙_ D))))) : ((tensorCounitSourceIso H H' U V θ K (G.obj (𝟙_ D))).hom ≫ U.map (tensorCounitTranspose adj H K (P K (G.obj (𝟙_ D)))) ≫ (mateEquiv adj adj' β.inv).app K = (H'.obj (V.obj K) ◁ tensorCounitMateUnit adj adj' β) ≫ tensorCounitTranspose adj' H' (V.obj K) (P' (V.obj K) (G'.obj (𝟙_ D')))) ∧ ((adj'.homEquiv _ _).symm ((tensorCounitSourceIso H H' U V θ K (G.obj (𝟙_ D))).hom ≫ U.map (tensorCounitTranspose adj H K (P K (G.obj (𝟙_ D)))) ≫ (mateEquiv adj adj' β.inv).app K) = tensorCounitCommonTranspose adj F' H' β K (P' (V.obj K) (U.obj (G.obj (𝟙_ D))))) ∧ ((adj'.homEquiv _ _).symm ((H'.obj (V.obj K) ◁ tensorCounitMateUnit adj adj' β) ≫ tensorCounitTranspose adj' H' (V.obj K) (P' (V.obj K) (G'.obj (𝟙_ D')))) = tensorCounitCommonTranspose adj F' H' β K (P' (V.obj K) (U.obj (G.obj (𝟙_ D)))))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01f60d11e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node (byte-identical to live except lean): theta UH≅H'V monoidal, beta VF≅F'U, P/P' jointly natural, IsIso only at the 3 stated pairs, hEx directions correct (beta⁻¹, V(q), μ⁻¹, VK◁beta), e_K = mateEquiv adj adj' beta.inv (mateEquiv_counit gives ε'∘F'e = Vε∘beta⁻¹), e1 with G'(ε_V⁻¹), t_K via homEquiv with right unitor, common transpose explicit. Recomputed: conjunct 2 by beta-naturality plus μ naturality and V's unit axiom plus hEx; conjunct 3 by hP' at (𝟙,e1) plus the mate counit at 1 and ε' naturality at V1→1; conjunct 1 by injectivity. Restricted theorem: real lifted adjunctions, arrows pinned by equations, no tensor closure; hUA superfluous but within the node's proviso (advisory). The existing SecSmoothPurity.tensorCounitTranspose needs a global ProjectionFormula (stronger), so item-local helpers are OK. No hollow defs, sorry only, docstrings with source/blueprint and the 5-step proof, autoImplicit false, independent universes, the 4 stmt_deps are Mathlib leaves. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T143337-L-985257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.tensorCounitExchangeCalculus",
+   "CategoryTheory.tensorCounitExchangeCalculus_restricted"
+  ],
+  "sorry_after": []
+ }
+}

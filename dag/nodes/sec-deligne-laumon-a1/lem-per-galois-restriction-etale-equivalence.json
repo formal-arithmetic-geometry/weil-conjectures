@@ -1,0 +1,156 @@
+{
+ "id": "lem-per-galois-restriction-etale-equivalence",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Parent proof step 6: compare the actual inverse image with restriction along a topological Galois isomorphism; no derived/K-injective calculation is needed.",
+   "via": [
+    "lem-per-dense-henselian-field-etale-comparison",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Galois restriction isomorphisms give equivalences of abelian etale sheaves",
+ "statement": "Let $K\\hookrightarrow L$ be fields [def-pc-field-extension], with compatible separable closures $K^s\\hookrightarrow L^s$ [def-kun-separably-closed]. Let $e:\\operatorname{Gal}(L^s/L)\\xrightarrow{\\sim}\\operatorname{Gal}(K^s/K)$ be an isomorphism of topological groups for their Krull topologies, satisfying $e(\\sigma)(x)=\\sigma(x)$ after inclusion into $L^s$. Then the existing inverse-image functor $u^{-1}:\\operatorname{Ab}((\\operatorname{Spec}K)_{\\mathrm{et}})\\to\\operatorname{Ab}((\\operatorname{Spec}L)_{\\mathrm{et}})$ [def-weil-pbc-inverse-image, def-weil-pbc-etale-sheaves], where $u=\\operatorname{Spec}(K\\hookrightarrow L)$ [def-weil-affine-spectrum], is an equivalence. This assertion concerns all abelian sheaves and requires neither valuations nor torsion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QW (section-galois-action-stalks) and 04JQ (lemma-equivalence-abelian-sheaves-point); ILO XX 4.4, printed p.374, Galois restriction comparison."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-kun-separably-closed",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Replace both closures by isomorphic separable closures in the universe of the ground fields. Transport the inclusion through the isomorphisms. Conjugation identifies the Krull topologies, because inverse images of pointwise stabilizers of finite intermediate fields are precisely stabilizers of their transported finite intermediate fields. This transports e and its restriction formula. Choose an algebraic closure Omega of the small Ls and compose all field embeddings into it.",
+   "uses": [
+    "def-kun-separably-closed",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QW (section-galois-action-stalks) and 04JQ (lemma-equivalence-abelian-sheaves-point); ILO XX 4.4, printed p.374, Galois restriction comparison."
+   }
+  },
+  {
+   "text": "Apply the abelian Galois-stalk equivalence to each field with this common geometric overfield Omega, retaining the action-normalization clauses. The field-pullback/Galois-action theorem, with these clauses, supplies a natural isomorphism from the actual inverse-image functor followed by the L stalk equivalence to the K stalk equivalence followed by restriction along e.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-per-field-pullback-galois-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QW (section-galois-action-stalks) and 04JQ (lemma-equivalence-abelian-sheaves-point); ILO XX 4.4, printed p.374, Galois restriction comparison."
+   }
+  },
+  {
+   "text": "Restriction along e has inverse restriction along e inverse. On objects these functors keep the underlying integral module and change its action by composition; on morphisms they keep the underlying maps. Stabilizers pull back to open stabilizers under both continuous maps. The unit and counit are identities of underlying modules, with equivariance given by the inverse identities for e. Hence restriction is an equivalence. The two stalk functors are equivalences, so transport across the natural comparison and cancel the L stalk equivalence to conclude that the actual inverse image is an equivalence.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QW (section-galois-action-stalks) and 04JQ (lemma-equivalence-abelian-sheaves-point); ILO XX 4.4, printed p.374, Galois restriction comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-separably-closed",
+  "def-weil-algebraic-closure",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-per-field-pullback-galois-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Parent proof step 6: compare the actual inverse image with restriction along a topological Galois isomorphism; no derived/K-injective calculation is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of absolute Galois groups induced by a field extension makes pullback of abelian etale sheaves an equivalence",
+   "results": "CategoryTheory.PreGaloisCategory.fiberPullbackEquiv; Field.absoluteGaloisGroupAbelianization; InfiniteGalois.limitToAlgEquiv; InfiniteGalois.limitToAlgEquiv_apply; InfiniteGalois.mk_toAlgEquivAux; IsGaloisGroup.mulEquivCongr; InfiniteGalois.mulEquivToLimit; SheafOfModules.conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of abelian etale sheaves is an equivalence when restriction of absolute Galois groups is a topological isomorphism",
+   "results": "CategoryTheory.PreGaloisCategory.fiberPullbackEquiv; CategoryTheory.PreGaloisCategory.hasPullbacks; TopCat.Presheaf.pullbackObjObjOfImageOpen; SheafOfModules.pullbackComp; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; TopCat.Presheaf.presheafEquivOfIso_inverse_obj_map; CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_fst_apply; CategoryTheory.GrothendieckTopology.overMapPullback.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEquivalence\", \"resFunctor\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "fieldPullback_galoisAction|abelianSheaves_equiv_discreteGModules|mapFunctor_bijective",
+   "results": "0 Mathlib hits; the project separately provides the first two comparison theorems, whose signatures were read. Neither directly concludes that the existing upperStar is an equivalence.",
+   "date": "2026-10-26",
+   "verdict": "no match: the results do not state the arbitrary-rank henselian assertion or the identified inverse-image equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.DenseHenselianEtaleComparison",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisRestrictionEtaleEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisRestrictionEtaleEquivalence.lean",
+  "declaration": "AlgebraicGeometry.Etale.upperStar_isEquivalence_of_galoisRestriction",
+  "statement": "theorem upperStar_isEquivalence_of_galoisRestriction\n    (K L : Type u) [Field K] [Field L] [Algebra K L]\n    (Ks : Type s) (Ls : Type t) [Field Ks] [Field Ls]\n    [Algebra K Ks] [IsSepClosure K Ks]\n    [Algebra L Ls] [IsSepClosure L Ls]\n    [Algebra Ks Ls] [Algebra K Ls]\n    [IsScalarTower K Ks Ls] [IsScalarTower K L Ls]\n    (e : Gal(Ls/L) ≃ₜ* Gal(Ks/K))\n    (he : ∀ (σ : Gal(Ls/L)) (x : Ks),\n      algebraMap Ks Ls (e σ x) = σ (algebraMap Ks Ls x)) :\n    (upperStar AddCommGrpCat.{u + 1}\n      (Spec.map (CommRingCat.ofHom (algebraMap K L)))).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091025-L-3296852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091025-L-3296852",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

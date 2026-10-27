@@ -19,89 +19,91 @@
  ],
  "proof": [
   {
-   "text": "Because S is reduced and finite type over the field Q, the componentwise normalization theorem gives a finite normalization map and a dense open N of points whose local rings are integrally closed domains, over which the normalization is an isomorphism. On an affine chart A of S, reducedness says that the map A to the product of the fraction fields of its minimal components is injective (the kernel is the intersection of the minimal primes). The componentwise normalization is therefore finite and injective on structure sheaves, and has finitely many components by Noetherianity.",
+   "text": "Finite normalization and the dense normal open follow from reduced_algebraic_normalization_field_change over ULift Q. Local finite type over that field makes S locally Noetherian. Surjectivity implies dominance; reducedness of S makes the normalization schematically dominant, so every map on sections is injective. Coherence of the unit on S and on its finite normalization, finite pushforward coherence, and closure under cokernels give coherence of C_S.",
    "uses": [
     "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "lem-weil-pbc-noetherian-finite-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0BXR, 0C3N and 0CDV (componentwise normalization, finite map, dense normal locus, and affine product description); Morphisms Tag 01T6 for finite type over a Noetherian base."
-   }
-  },
-  {
-   "text": "The finite pushforward node makes nu_* O_{S^nu} coherent, and the coherent-kernel/cokernel node makes its cokernel C_S coherent. The scheme-theoretic-support node identifies the sectionwise annihilator with a quasi-coherent ideal and gives its affine localization formula. On an affine chart Spec A, C_S is a finite A-module and A is Noetherian, so Ann_A(C_S) is a finitely generated ideal; hence this quasi-coherent ideal is coherent. Thus D_S is a coherent ideal sheaf.",
-   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-finite-pushforward-coherent",
-    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-    "lem-weil-pbc-scheme-theoretic-support",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 01Y6; Modules Tag 01BY; Morphisms Tag 05JU; the Noetherian ideal finiteness argument on affine charts."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035S and 0H7D; coherence of finite pushforward and cokernels."
    }
   },
   {
-   "text": "For an affine chart, the support/annihilator formula gives V(D_S)=Supp(C_S). At a point x, the stalk of C_S vanishes exactly when the finite normalization map is an isomorphism after localizing. The componentwise affine description identifies the localized normalization algebra with the product of the integral closures of the reduced component domains; if it equals the local reduced ring, locality forces one factor and the local ring is an integrally closed domain, and the converse is the normal-locus isomorphism. Hence V(D_S) is exactly the nonnormal locus. The dense normal open from the normalization theorem misses every generic point, so this closed set is nowhere dense. Finally D_S=O_S iff C_S=0 iff every local ring is an integrally closed domain, i.e. S is normal.",
+   "text": "The scheme-theoretic-support ideal for the coherent C_S has affine ideals Ann(C_S(U)). Since ofIdeals recovers an existing compatible ideal family, it equals conductorIdeal S. Every ideal sheaf on a locally Noetherian scheme is coherent: its module is the kernel of the structure map to the pushforward of the structure sheaf of its closed subscheme; apply finite pushforward coherence and coherence of kernels.",
    "uses": [
-    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "lem-weil-pbc-finite-module-support-annihilator",
-    "lem-weil-pbc-scheme-theoretic-support"
+    "lem-weil-pbc-scheme-theoretic-support",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0BXR, 0C3N, 0CDV (local componentwise normalization and dense normal locus); Algebra Tag 00L2 (support equals V of the annihilator)."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 05JU; coherence over locally Noetherian schemes."
    }
   },
   {
-   "text": "Let h:T->S be smooth. Smoothness is locally of finite presentation, so after choosing affine U in S and an affine V in T above U, the induced smooth ring map A=Gamma(U,O_S)->B=Gamma(V,O_T) is of finite presentation; since A is a finite-type Q-algebra, V is finite type over Q. Apply the absolute comparison in the normalized-blowup calculus to U, V and the coherent ideal J=O_U (whose zero scheme is empty): its specialization B_J(U)=U^nu gives a canonical isomorphism V^nu ~= U^nu x_U V. These local isomorphisms glue by uniqueness of normalization, yielding T^nu ~= S^nu x_S T. On such affine charts, a finite morphism is represented by a finite algebra C over A and its pullback has algebra C tensor_A B, so h^*(nu_*O_{S^nu}) identifies with the pushforward of the pulled-back normalization. Smooth ring maps are flat, hence pulling back 0->O_S->nu_*O_{S^nu}->C_S->0 remains exact and its quotient is C_T.",
+   "text": "On an affine open U, the quasi-coherent cokernel has surjective quotient map on sections and kernel equal to the image of the normalization map. Its sections are zero iff that ring map is surjective, hence (using injectivity) iff the affine restriction of normalization is an isomorphism. Outside the conductor support, choose an affine neighbourhood with unit conductor, obtain this isomorphism and transport normality from the componentwise normalization stalk. Conversely at a normal point choose an affine open inside the normal open N; normalization is an isomorphism there, so its cokernel vanishes, the annihilator is the unit ideal, and the point is outside the support. Normalization stalks are normal domains by the coproduct open cover and the integral-closure stalk theorem over the function field. Thus the support is exactly the complement of N. Density of N gives nowhere density, and emptiness of support is equivalent both to unit conductor and to normality of all stalks.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035P, 0C3B and 0H7D; affine cokernel criterion and normal stalks."
+   }
+  },
+  {
+   "text": "Specialize normalizedBlowup_calculus to the unit ideal (whose support is empty and whose affine ideals are finitely generated). Its smooth clause gives reduced T and the cartesian square of absolute componentwise normalizations. The canonical affine structure-sheaf base-change map is an isomorphism. Its compatibility with the structure-sheaf inclusion follows by transposing through the pullback-pushforward adjunction and evaluating on sections: the two expressions are the equal ring maps around the square. Pullback preserves cokernels, so this compatible pair of isomorphisms induces h^* C_S isomorphic to C_T.",
    "uses": [
     "lem-trf-normalized-blowup-calculus",
-    "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-finite-pushforward-coherent",
-    "lem-weil-pbc-smooth-ring-map-flat"
+    "new-sbc-canonical-structure-base-change-isIso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VIII, Lemma 2.2.9 and 2.2.7-2.2.8, pp.89-91, via the normalized-blowup calculus node; Stacks Morphisms Tag 07TD, lemma-normalization-and-smooth, and the affine finite-algebra base-change calculation."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Smooth normalization comparison, with canonical affine structure-sheaf base change and right exactness of pullback."
    }
   },
   {
-   "text": "On each affine V as above, apply the finite-module annihilator flat-base-change lemma to the finite A-module C_S(U) and the flat map A->B. It gives Ann_B(C_S(U) tensor_A B)=Ann_A(C_S(U))B. The affine localization formula for annihilators makes these equalities compatible on overlaps, so they glue to D_T=D_S O_T. Extension of ideals is associative, giving the identity and composition compatibilities.",
+   "text": "Cover T by all affine V mapping into affine U in S. Coherence gives finite generation of C_S(U); pullback sections identify C_T(V) with B tensor_A C_S(U). Smoothness makes A to B flat. Apply finite flat annihilator base change, then the affine conductor formulas and ideal_comap_appLE. Extensionality for ideal sheaves on this affine cover gives the asserted equality. Identity and composition are the general comap_id and comap_comp identities. The pullback-sections calculation uses the already proved source-library exists_linearEquiv_pullback_sections for ordinary module pullback.",
    "uses": [
     "lem-trf-annihilator-finite-flat-base-change",
-    "lem-weil-pbc-annihilator-localization-finite"
+    "lem-weil-pbc-scheme-theoretic-support",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07T8, lemma-annihilator-flat-base-change, second assertion; localization compatibility and associativity of ideal extension."
+    "place": "Tag 07T8, lemma-annihilator-flat-base-change."
    }
   }
  ],
  "proof_deps": [
-  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-reduced-normalization",
   "lem-trf-annihilator-finite-flat-base-change",
   "lem-trf-normalized-blowup-calculus",
-  "lem-weil-pbc-annihilator-localization-finite",
   "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-  "lem-weil-pbc-finite-module-support-annihilator",
   "lem-weil-pbc-finite-pushforward-coherent",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
   "lem-weil-pbc-reduced-algebraic-normalization-field-change",
   "lem-weil-pbc-scheme-theoretic-support",
-  "lem-weil-pbc-smooth-ring-map-flat"
+  "new-sbc-canonical-structure-base-change-isIso",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 07TD, 035P, 035Q, 035S and 0H7D, with Tag 07T8; affine localization and gluing written out here."
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "G9 Lean proof: Tag 07T8 with affine cokernel calculations, normal-open normalization, the unit-ideal specialization of normalizedBlowup_calculus, canonical structure-sheaf base change, and preservation of cokernels. No new statements or changed definitions."
  },
  "mathlib_searches": [
   {
@@ -163,20 +165,25 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-conductor-smooth-base-change",
   "worker": "stage1",
-  "summary": "Repaired the returned split by replacing the relative-normalization argument with the absolute normalization-and-smooth comparison (Tag 07TD), realized locally on finite-type affine smooth charts through lem-trf-normalized-blowup-calculus and glued by uniqueness. Reused the reduced componentwise normalization and scheme-theoretic-support nodes for finiteness, the reduced-local normality criterion, and the annihilator ideal; made the Noetherian finite-generation argument explicit. Corrected the helper metadata, removed the irrelevant associated-primes dependency, and retained the standalone Tag 07T8 finite-module lemma.",
-  "blueprint": "Historical conductor refinement in lem-trf-local-term-locality: finite normalization quotient, annihilator, and smooth pullback compatibility; absolute normalization comparison follows the normalized-blowup refinement.",
-  "tool_uses": []
+  "summary": "Rebased the retained, previously approved two-node extraction against the current server DAG after the side-completion promotion refusal. The initial dry run passed at 976be6010ea. The returned item and current shared item agree in all fields; all current proof and statement interfaces were reopened and all eleven verbatim citation pairs verified. No hypothesis or route change is needed. Step 5 now explicitly identifies the affine annihilator equalities with restrictions of the two sheaf ideals and explains identity/composition using their generators. Both statement-only quotient lemmas and every retained argument, source and actual search result are preserved. The report signs this renewed review; live completion promotion is the maintainer action named in the return.",
+  "blueprint": "Inherited historical conductor refinement of lem-trf-local-term-locality via the original created-item chain. Returned steps 1--3 are carried by the finite quotient lemma and support/coherence assembly, step 4 by the smooth quotient comparison, and step 5 by the existing finite flat annihilator theorem. No change to the current ancestor contracting-correspondence proof or its unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic locally Noetherian coherence criterion used only to turn a quasi-coherent finite-type ideal into a coherent ideal; it does not replace the normalization or conductor route."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-N3-63f4d7cf0",
-  "group": "N3",
+  "reviewer": "NT-cc-NW-1d5c4bf0a",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-63f4d7cf0 (reviewer sub-agent of L); spot-checked: Mathematics and cited sources check out, including Tag 07T8, normalization/support/coherence arguments, smooth base-change morphism, edge cases, and route compliance. Repair required: item node created metadata incorrectly names item lem-trf-toric-normalized-desingularization and group Q45; corrected whole JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-conductor-smooth-base-change.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-1d5c4bf0a (reviewer sub-agent of L); spot-checked: This is the eighth push of the same 2-node re-split. The seven earlier heads (beba33db, 4c939123, 5dc7ab72, ac503d25, 6ead7813, a8e47d5a, ab0e1a2c) all got FIX, and every return was a side-completion promotion refusal. Compared with ab0e, both new nodes are byte-identical. The item changes only in split_report and in the wording of step 5; the uses of step 5 are unchanged. The new step-5 text still uses D_T(V)=Ann_B(C_T(V)), which is the affine formula of support lemma (1) applied on T, and the finiteness of C_S(U), which comes from node 1, without citing either. The annihilator localization lemma does not supply them: it only gives Ann_{A_f}(M_f)=Ann_A(M)A_f, which is agreement on refinements. Node 2 still says 'A to B is flat' with no def-weil-pbc-flat-ring-map. So both repairs were lost for the seventh time. I re-applied them on this head's records and kept the head's split_report. Fault 1 (C1, item step 5): the fix restores lem-weil-pbc-scheme-theoretic-support and lem-trf-finite-normalization-quotient-local-criterion as uses, and proof_deps equals the union of uses. Fault 2 (B3, node 2): the statement now cites [def-weil-pbc-flat-ring-map], which is added to stmt_deps. Supersession: clones/live and side-live still hold the 5-step 3144-character base proof and the new ids are absent, so no other group has taken this split. The statement and stmt_deps are unchanged, and no SGA source is cited. After the fix the assembly is 2139 characters (steps 395/317/394/351/682), with 2 comparable statement-only nodes. Where the old proof went: old steps 1-3 (minimal-prime injectivity, coherence, the 0C3B stalk criterion and the one-factor locality argument) are node 1. Old step 4 (07TD theta, the N tensor_A B algebra, the flat exact quotient, gluing and composition) is node 2. The rest is assembly from existing statements, each reread on this snapshot: finite-type-over-noetherian, reduced-algebraic-normalization, support (1)/(3), 01XZ, 07T8 (flat map, finitely generated module) and annihilator localization. Both new statements are true. Cases tested: empty scheme, normal scheme, the xy=0 crossing, the cusp, Q[eps] excluded by reducedness; h=id, empty T, an open immersion, A to A[x]. The only new normalization node in this snapshot is lem-trf-toric-blowup-chart-normalization, which covers toric charts and is not a duplicate. The earlier overlaps are unchanged and advisory only. Accepted tool_use: pqf-lem-coherent-ft-locnoeth. Maintainer note: merge fixes/ with this head before promoting the side completion.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.TraceFormula.ConductorSmoothBaseChange",
@@ -202,5 +209,29 @@
   "result": "fix",
   "note": "Read the node, the 8 stmt deps, the module, the report and the Mathlib/project declarations (ofIdeals, support, comap = extended ideal via pullback kernel, comap_id/comap_comp, unitToPushforwardObjUnit, IdealSheafData.toModules). Missing clause: the node's 'D_S is a coherent ideal' had no conjunct (only the coherence of the cokernel C_S was stated; IdealSheafData is only quasi-coherent). fixes/ConductorSmoothBaseChange.lean adds 'RingedSpace.IsCoherent S.toRingedSpace (conductorIdeal S).toModules' with the public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module; the fixed report.md documents it. All other clauses are faithful: reduced and finite type over ULift Q with all universes kept; finite and injective componentwise normalization; coherent cokernel; affine-annihilator conductor equal to the sectionwise annihilator under the hypotheses; support equal to the non-normal locus; nowhere dense; top iff all stalks are normal domains; smooth quasi-compact comap; identity and composition. No hollow definitions, sorry only, docstrings and blueprint tag present, statement verbatim, no duplicate notion (side Conductor* modules are a different notion), no citers. nt_compile --json: delivered and fixed files both compile clean (2.7 s and 2.1 s); a control run showed the full statement and that errors are reported."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261023T131545-L-2121582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

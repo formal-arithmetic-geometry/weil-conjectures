@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-unit-trace-target-normalization",
+ "kind": "statement",
+ "title": "Counit-normalized target comparison for reconstructed unit purity",
+ "statement": "Fix the finite-field datum D, coefficient datum C, finite intermediate coefficient field E, a smooth separated finite-type morphism f:X→Y of pure relative dimension d between separated finite-type schemes over D.k, and an actual coefficient-compatible exceptional RingSystem S. There exists a FiniteRightNormalization normal for S and, for every uniform finite-Tor integral object K on Y, an isomorphism e from the actual exceptional inverse-limit object purAdicTarget(K) to the underlying object of S.G(K). For every positive exponent n+1, reduction of e followed by targetReduction(normal,K,n) is the published exceptional tower reduction purAdicTargetReduction(K,n), as heterogeneous equality of the finite coefficient morphisms. This is only a target-coordinate comparison; it constructs neither a purity map nor a trace.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8"
+ },
+ "stmt_deps": [
+  "def-pur-unit-trace-reduction-data",
+  "def-pur-adic-exceptional-reduction",
+  "def-pur-adic-purity-objects",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the actual integral support/exceptional adjunction to the uniform finite-Tor categories. Transport its left adjoint along S.left. The counit-preserving right-adjoint comparison identifies the actual exceptional inverse-limit object with S.G(K).",
+   "uses": [
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-pur-adic-operation-domains-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each finite level compare the specified restricted adjunction with the intrinsic finite exceptional adjunction, using finiteImageIso and the same left realization. Right-adjoint uniqueness gives normal.iso and its counit equation gives normal.counit. Unlike bare S.finiteRight, this construction fixes the finite counit normalization.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "def-pur-unit-trace-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduce the integral comparison. Its composite with the counit-normalized finite right comparison and the exceptional towers published evaluation map are mates of the same compact-support reduction map. Insert the counit equations, use naturality of support reduction and the adjunction triangle, and apply injectivity of the finite exceptional Hom bijection. This gives the displayed target-reduction equation for each K and exponent.",
+   "uses": [
+    "lem-coef-integral-compact-support",
+    "prop-coef-integral-exceptional-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-pur-adic-operation-domains-source-comparison",
+  "lem-coef-finite-exceptional",
+  "def-pur-unit-trace-reduction-data",
+  "lem-coef-integral-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral smooth trace obtained from purity on the coefficient unit extended to coefficient fields gives natural purity by projection and exceptional adjunction",
+   "results": "8 hits on algebraic field traces only; no sheaf-theoretic trace or exceptional adjunction compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 ordinary adjunction interface hits; homEquiv, homEquiv_symm_apply and their naturality are useful categorical ingredients.",
+   "date": "2026-10-25",
+   "verdict": "no exact match for normalized coefficient reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A counit preserving isomorphism between right adjoints is compatible with derived coefficient reduction",
+   "results": "8 hits, including rightAdjointUniq_hom_app_counit; none supplies integral/finite coefficient realizations.",
+   "date": "2026-10-25",
+   "verdict": "ordinary uniqueness is an ingredient, not the required coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "purAdicTarget|finiteRight; unitTrace|HasTraceReductions|Construction; Mathlib CategoryTheory/Adjunction",
+   "results": "Project search finds the existing data and reconstruction declarations, but no theorem proving the required compatibility. Mathlib has ordinary adjunction uniqueness only. Blueprint search for unit trace finds two unrelated affine integration nodes. Direct Mathlib searches for trace/reduction and exceptional/coefficient in Adjunction and ModuleCat/Sheaf returned no matching interface.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicUnitTraceTransposeReductions",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8",
+   "via": [
+    "lem-pur-adic-unit-trace-transpose-reductions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicUnitTraceTargetNormalization",
+  "file": "lean/Sheaf/Paper/AdicUnitTraceTargetNormalization.lean",
+  "declaration": "WeilConjectures.PurUnitTrace.unit_trace_target_normalization",
+  "statement": "theorem unit_trace_target_normalization :\n    ∃ normal : FiniteRightNormalization D C E f S,\n      ∀ K : finiteTorConstructibleIntegralCategory C.l E Y,\n        ∃ e : purAdicTarget D C E f K.obj ≅ ((operation D C E f S).G.obj K).obj,\n          ∀ n : ℕ, HEq\n            ((scalarReductionDerivedExtension C.l E X n).map e.hom ≫\n              targetReduction D C E f S normal K n)\n            (purAdicTargetReduction D C E f d K.obj K.property n)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fb3b",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T094910-L-3270971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fb3b",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T094910-L-3270971",
+  "kind": "interface",
+  "note": "independent cc review: item proof (core, target normalization, reconstruction, finite-Tor transport, counit lemma, assembly) against node lem-pur-adic-unit-trace-transpose-reductions; three new sorry statements against RingSystem/Comparison/QNormalized/FiniteRightNormalization/Core/coefficientValuedSmoothTrace/Construction defs; unit sk-thm-sf-compatibility realized empty"
+ }
+}

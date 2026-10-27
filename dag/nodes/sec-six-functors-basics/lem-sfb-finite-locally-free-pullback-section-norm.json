@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-finite-locally-free-pullback-section-norm",
+ "kind": "statement",
+ "title": "Norm sections of powers of a pulled-back invertible module",
+ "statement": "Let $f:Y\\to X$ be a finite locally free morphism of schemes of constant degree $d\\geq1$ [def-pc-scheme, def-pc-finite-locally-free]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], let $n\\geq1$, and let $s\\in\\Gamma(Y,(f^*L)^{\\otimes n})$, where tensor pullback is [def-pc-module-pullback] and tensor powers and nonvanishing opens are [def-weil-pbc-ample-invertible-module]. There is a section $t\\in\\Gamma(X,L^{\\otimes(dn)})$ such that $$X_t=\\{x\\in X:\\ f^{-1}(\\{x\\})\\subseteq Y_s\\}=X\\setminus f(Y\\setminus Y_s).$$ No ampleness, properness, normality, Noetherianity, reducedness or separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BD2 (divisors-lemma-finite-locally-free-has-norm), 0BCY (divisors-lemma-norm-invertible, Norm_f(f^*L) is L^{tensor d}), and 0BCZ (divisors-lemma-norm-map-invertible), for a section of the nth tensor power."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the maps $\\nu_V$ supplied by [lem-sfb-finite-locally-free-function-norm]. Choose an open cover $(V_i)$ trivializing $L$, with generators $e_i$ and units $a_{ij}$ satisfying $e_i=a_{ij}e_j$. Put $M=f^*L$ and $E_i=f^*e_i$ on $f^{-1}V_i$. By [lem-weil-pbc-invertible-pullback-tensor] and the local trivialization clause of [lem-weil-pbc-invertible-pullback-invertible], $M$ is invertible and the $E_i$ are generators (pull back the trivializations and use $\\mathcal O_Y\\otimes_{f^{-1}\\mathcal O_X}f^{-1}\\mathcal O_X=\\mathcal O_Y$). The pullback definition gives $E_i=(f^\\sharp a_{ij})E_j$. Apply [lem-sfb-norm-frame-tensor-section-gluing] to this cover, $M,E_i,\\nu$. It gives an invertible module $N$ with generators $F_i$ and $F_i=\\nu(f^\\sharp a_{ij})F_j=a_{ij}^dF_j$, and for our given $s$ a section $t_N\\in\\Gamma(X,N^{\\otimes n})$ with $t_N|_{V_i}=\\nu_{V_i}(b_i)F_i^{\\otimes n}$, where $s|_{f^{-1}V_i}=b_iE_i^{\\otimes n}$.",
+   "uses": [
+    "lem-sfb-finite-locally-free-function-norm",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sfb-norm-frame-tensor-section-gluing",
+    "lem-weil-pbc-invertible-pullback-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD2 (lemma-finite-locally-free-has-norm), 0BCY (lemma-norm-invertible), and 0BCZ (lemma-norm-map-invertible), with explicit transition and nonvanishing calculations."
+   }
+  },
+  {
+   "text": "Identify $N^{\\otimes n}$ with $L^{\\otimes(dn)}$ explicitly. The source has local generators $F_i^{\\otimes n}$ with transition $(a_{ij}^d)^n=a_{ij}^{dn}$ by [lem-sfb-norm-frame-tensor-section-gluing]. The target has generators $e_i^{\\otimes(dn)}$ with the same transitions: restriction commutes with iterated tensor products by [lem-weil-pbc-module-restriction-tensor-comparison], so iterated tensor products of the trivialization $L|_{V_i}\\cong\\mathcal O_{V_i}$, the tensor unitor and associator in [lem-weil-pbc-module-tensor-symmetric-monoidal] give these generators, and bilinearity gives $e_i^{\\otimes(dn)}=a_{ij}^{dn}e_j^{\\otimes(dn)}$. Therefore the local linear maps $F_i^{\\otimes n}\\mapsto e_i^{\\otimes(dn)}$ agree on overlaps. Glue them and their local inverses using clause (1) of [lem-weil-pbc-glue-sheaves-of-modules]. Their composites are identities locally and hence globally by the same clause. Let $t$ be the image of $t_N$; its local formula is $t|_{V_i}=\\nu_{V_i}(b_i)e_i^{\\otimes(dn)}$.",
+   "uses": [
+    "lem-sfb-norm-frame-tensor-section-gluing",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD2 (lemma-finite-locally-free-has-norm), 0BCY (lemma-norm-invertible), and 0BCZ (lemma-norm-map-invertible), with explicit transition and nonvanishing calculations."
+   }
+  },
+  {
+   "text": "For $x\\in V_i$, the local formula for $t$ and the fact that $e_i^{\\otimes(dn)}$ is a generator give $x\\in X_t\\iff\\nu_{V_i}(b_i)(x)\\ne0$. Apply [lem-sfb-finite-function-norm-nonvanishing] with $p=f$, $V=V_i$ and $b=b_i$: finiteness is part of finite local freeness, and all its multiplicativity, restriction and vanishing hypotheses hold by step 1. Thus this is equivalent to every $y\\in f^{-1}(\\{x\\})$ satisfying $b_i(y)\\ne0$. Since $E_i^{\\otimes n}$ is a generator, the last condition is exactly $f^{-1}(\\{x\\})\\subseteq Y_s$, using the residue-field definition of the nonvanishing opens in [def-weil-pbc-ample-invertible-module]. The $V_i$ cover $X$, proving the asserted fibre description.",
+   "uses": [
+    "lem-sfb-finite-function-norm-nonvanishing",
+    "def-pc-finite-locally-free",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD2 (lemma-finite-locally-free-has-norm), 0BCY (lemma-norm-invertible), and 0BCZ (lemma-norm-map-invertible), with explicit transition and nonvanishing calculations."
+   }
+  },
+  {
+   "text": "For every $x\\in X$, $f^{-1}(\\{x\\})\\subseteq Y_s$ means that there is no $y\\in Y\\setminus Y_s$ with $f(y)=x$. This is precisely $x\\notin f(Y\\setminus Y_s)$. Taking sets gives the second displayed equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD2 (lemma-finite-locally-free-has-norm), 0BCY (lemma-norm-invertible), and 0BCZ (lemma-norm-map-invertible), with explicit transition and nonvanishing calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-locally-free-function-norm",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-norm-frame-tensor-section-gluing",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-sfb-finite-function-norm-nonvanishing",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BD2 (lemma-finite-locally-free-has-norm), 0BCY (lemma-norm-invertible), and 0BCZ (lemma-norm-map-invertible), with explicit transition and nonvanishing calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "norm.*(section|invertible|tensorPow)|normAt|Norm.*(Section|Invertible)",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ring norm, localization, determinant, structure-sheaf or unrelated pullback results; no norm of a section of a pulled-back invertible sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The norm of a section of a pullback invertible sheaf under a finite flat cover lies in the degree tensor power and its nonvanishing locus consists of fibres contained in the original nonvanishing locus",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.comapFunIsLocallyFraction, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, smoothSheaf.evalHom",
+   "date": "2026-10-24",
+   "verdict": "no match: ring norm, localization, determinant, structure-sheaf or unrelated pullback results; no norm of a section of a pulled-back invertible sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"pullback\"",
+   "results": "12 hits: CategoryTheory.normalOfIsPullbackFstOfNormal, CategoryTheory.normalOfIsPullbackSndOfNormal, CategoryTheory.NormalMonoCategory.pullback_of_mono, Seminorm.pullback, Seminorm.pullback_apply, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationPullback, AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: ring norm, localization, determinant, structure-sheaf or unrelated pullback results; no norm of a section of a pulled-back invertible sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free scheme morphism of degree d, the norm of a section of the nth tensor power of a pulled back line bundle is a section of the dn tensor power downstairs, nonzero exactly when it is nonzero at every fibre point",
+   "results": "8 hits: Algebra.norm_ne_zero_iff, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, Algebra.norm_localization, Algebra.norm_eq_one_of_not_module_finite, Algebra.norm_eq_iff, isPowMul_spectralNorm_of_finiteDimensional_normal, Algebra.intNorm_ne_zero, FiniteField.algebraMap_norm_eq_prod_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: ring norm, localization, determinant, structure-sheaf or unrelated pullback results; no norm of a section of a pulled-back invertible sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking the determinant norm of coefficients glues a section upstairs of a pulled back line bundle to a section of the degree tensor power downstairs, with zero at a base point exactly when the original section has a zero over it",
+   "results": "8 hits: sectionOfRetractionKerToTensorAux, sectionOfRetractionKerToTensor, FractionalIdeal.abs_det_basis_change, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, LinearMap.det_restrictScalars, IsBaseChange.det_endHom, LinearEquiv.det_baseChange, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential",
+   "date": "2026-10-24",
+   "verdict": "no match: ring norm, localization, determinant, structure-sheaf or unrelated pullback results; no norm of a section of a pulled-back invertible sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "norm|Norm",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring norm, localization, determinant, structure-sheaf or unrelated pullback results; no norm of a section of a pulled-back invertible sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "norm|Norm",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"pullback\"",
+   "results": "12 hits: CategoryTheory.normalOfIsPullbackFstOfNormal, CategoryTheory.normalOfIsPullbackSndOfNormal, CategoryTheory.NormalMonoCategory.pullback_of_mono, Seminorm.pullback, Seminorm.pullback_apply, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationPullback, AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norm of a section of a pulled back invertible sheaf under a finite locally free morphism and its nonvanishing locus",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.comapFunIsLocallyFraction, ModuleCat.Tilde.const, Seminorm.pullback_apply, smoothSheafCommRing.isUnit_stalk_iff, smoothSheaf.evalAt, ModularForm.norm_ne_zero, VectorBundle.pullback, Algebra.norm_eq_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(section|invertible)|normAt|Norm.*(Section|Invertible)",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant norm of local coefficients of a section of a pulled back line bundle glues in the degree tensor power",
+   "results": "8 hits: inCoordinates_apply_eq₂, hom_trivializationAt, hom_trivializationAt_baseSet, Trivialization.pullback_linear, hom_trivializationAt_apply, VectorBundleCore.inCoordinates_eq, ContinuousLinearMap.inCoordinates_eq, Trivialization.coe_coordChangeL'",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-locally-free-ample-reflection",
+  "date": "2026-10-24",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Ampleness argument after the cube calculation: reflect ampleness along a finite prime-to-characteristic multiplication map. Supporting norm input: Stacks 0BCY pullback identity and 0BCZ applied to a section of a power of the pulled-back supplied line, before the 0BD0 affine-neighbourhood argument.",
+   "via": [
+    "lem-sfb-finite-locally-free-ample-reflection",
+    "lem-sfb-semiabelian-algebraic-equivalence-norm",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-pullback-section-norm",
+  "worker": "stage1",
+  "summary": "Q91 reads Stacks 0BD2, 0BCY and 0BCZ. Reuses existing frame-tensor gluing and function nonvanishing nodes, adds only the missing function-norm existence input, and proves the degree tensor target by explicit compatible local frame maps. Statement unchanged. Searches of the whole DAG, imported blueprint and live Lean found no exact attachment or duplicate.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), the inherited alteration/ampleness support chain recorded in blueprint.from.place: finite locally free norm input before the affine-neighbourhood argument. Retains the inherited null ancestor returned by blueprint_refs.py ancestor; the current blueprint does not state this auxiliary norm lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Clause (1) glues compatible local frame isomorphisms and their inverses; this generic sheaf-module tool is not replaced by a norm-specific fact of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "why": "Tensor unitors and associators supply local tensor-power frames; this generic module tensor tool supports the unit rather than replacing its route."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-tensor-comparison",
+    "why": "Identifies restricted tensor powers with tensor powers of a local trivialization; needed for the explicit comparison maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-6ddf7a5eb",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-6ddf7a5eb (reviewer sub-agent of L); spot-checked: I read Stacks divisors.tex 0BCX (norm axioms (1),(2)), 0BCY, 0BCZ and 0BD2 with their proofs. The item is 0BCY+0BCZ applied to s : O → (f^*L)^{⊗n}, and its statement is unchanged. The one new unsplit node, lem-sfb-finite-locally-free-function-norm, is the function-norm part of 0BD2: multiplicative, unital, restriction-compatible ν_V with ν(f^♯a)=a^d, the vanishing axiom, and the local det characterization (the base-change clause is left out). It is true and statement-only, and I tested it on d=1/id, X⊔X, k[ε] (ν(ε)=0) and empty X. It is not a duplicate of lem-pd-finite-locally-free-norm-charts (one glued function, no axioms), lem-a1-principal-free-algebra-determinant-norm or lem-a1-finite-locally-free-norm-characteristic-polynomial (ring-level), or the frame-gluing/nonvanishing/finite-norm-invertible-sections nodes (which assume a norm). Step 1: trivializing cover; f^*e_i is a generator via lem-weil-pbc-invertible-pullback-invertible; u_ij=f^♯a_ij, so v_ij=a_ij^d by the power identity; lem-sfb-norm-frame-tensor-section-gluing gives N, F_i, t_N, and all its hypotheses hold. Step 2: I checked the transitions a_ij^{dn} on both sides and the overlap agreement φ_i(F_j^{⊗n})=e_j^{⊗dn}; gluing the maps and their inverses by clause (1) gives an isomorphism, which spells out the comparison 0BCY omits. Step 3: lem-sfb-finite-function-norm-nonvanishing applies (finite comes from finite locally free; its axioms come from the new node), and generators turn D(b_i) into Y_s∩f^{-1}V_i. Step 4 is an elementary set identity. There is no cycle (closure of 201 nodes), no SGA, and no re-split note. The null from.node is inherited from the null parent. I accept the tool_uses glue-sheaves-of-modules, tensor-symmetric-monoidal and restriction-tensor-comparison as generic tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreePullbackSectionNorm",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finiteLocallyFree_pullback_section_norm",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreePullbackSectionNorm.lean",
+  "statement": "theorem exists_finiteLocallyFree_pullback_section_norm {X Y : Scheme.{u}} (f : Y ⟶ X) (d : ℕ) (hd : 1 ≤ d) [f.IsFiniteLocallyFreeOfDegree d] (L : X.Modules) [L.IsInvertible] (n : ℕ) (hn : 1 ≤ n) (s : Γ(((tensorPullback f).obj L).tensorPow n, ⊤)) : ∃ t : Γ(L.tensorPow (d * n), ⊤), nonvanishingLocus (L.tensorPow (d * n)) t = {x : X | f ⁻¹' {x} ⊆ nonvanishingLocus (((tensorPullback f).obj L).tensorPow n) s} ∧ nonvanishingLocus (L.tensorPow (d * n)) t = (f '' (nonvanishingLocus (((tensorPullback f).obj L).tensorPow n) s)ᶜ)ᶜ",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27fcf7923",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BCY/0BCZ (with 0BD2 degree-d norm): f finite locally free of constant degree d≥1 via IsFiniteLocallyFreeOfDegree (FiberDegree.lean:907, finite+flat+lfp, fiberDegree=d), L IsInvertible, n≥1, s : Γ((tensorPullback f L)^⊗n,⊤) using recorded explicit O_Y⊗f^{-1}L pullback, ∃ t : Γ(L^⊗(d*n),⊤) with nonvanishingLocus t = {x | f⁻¹'{x} ⊆ Y_s} ∧ = (f''(Y_s)ᶜ)ᶜ, recorded germ∉m·stalk nonvanishingLocus; no extra hypotheses; single universe forced by f. Node JSON differs from live only by the new lean attachment; lean.statement verbatim in file. Not a duplicate of exists_invertible_norm_sections (abstract ν, unspecified N). Edge cases: empty X, d=1/id, zero section, k[ε] checked. Docstrings: source place, blueprint id and 4 proof steps; sorry only; no defs; report has Worker report and Second reading by NJ (self-pass). No recompile (no FIX)."
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-integral-good-model-comparison",
+ "kind": "statement",
+ "title": "Ordinary pullback comparison on good integral representatives",
+ "statement": "Let l be prime, E/Q_l finite and h:U to T arbitrary. The composite of good-complex localization, ordinary derived pullback and detailed coefficient transport is naturally isomorphic to good-complex inclusion, strict ordinary pullback on complexes, exact detailed coefficient transport on complexes, and Q. For every good representative P the forward component is detailed transport of integralDerivedPullbackComparison at P, followed by pbcIntegralDetailedTransportFactors at the strict pullback of P. All functors and the two published comparison isomorphisms are those of [def-weil-pbc-proper-integral-ordinary-data] and [lem-pur-integral-operations-well-defined].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Stacks 06YY. Ordinary good-model part of original strict-model matching descent step."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Whisker the ordinary good-complex derived pullback comparison by detailed coefficient transport. Then whisker the exact coefficient comparison factorization by the strict ordinary pullback functor. Compose these isomorphisms, using explicit functor associators to match their endpoints. All associator components are identities, so their component formula is precisely the composite of the two published comparison maps.",
+   "uses": [
+    "def-weil-pbc-proper-integral-ordinary-data",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Stacks 06YY. Ordinary good-model part of original strict-model matching descent step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralDerivedPullbackComparison|pbcIntegralDetailedTransportFactors",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Use the published project comparisons and Mathlib functor isomorphism APIs; no duplicate normalized assertion found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 hits: CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isoWhiskerLeft_refl, CategoryTheory.Functor.isoWhiskerLeft_symm, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.Functor.isoWhiskerLeft_inv, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-27",
+   "verdict": "Use the published project comparisons and Mathlib functor isomorphism APIs; no duplicate normalized assertion found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of natural isomorphisms comparing a localized functor with an exact functor on good complexes",
+   "results": "8 hits: CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-27",
+   "verdict": "Use the published project comparisons and Mathlib functor isomorphism APIs; no duplicate normalized assertion found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictModelMatchingExists",
+  "date": "2026-10-27",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: identification of ordinary integral pullback and the actual quotient-tower completion comparison; original ordinary-input proof steps 5–7. Parent comparison step(s) 2–3. Remark 6.8.15; Stacks 06YY. Ordinary good-model part of original strict-model matching descent step.",
+   "via": [
+    "lem-weil-pbc-integral-strict-model-matching",
+    "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralGoodModelComparison",
+  "file": "lean/Sheaf/Paper/IntegralGoodModelComparison.lean",
+  "declaration": "WeilConjectures.pbc_integral_good_model_comparison",
+  "statement": "theorem pbc_integral_good_model_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :\n    ∃ e₀ : integralOperationsGoodLocalization l E T ⋙ integralDerivedPullback l E h ⋙\n          integralDetailedTransport U l E ≅\n        (integralOperationsGoodComplex l E T).ι ⋙ integralOperationsPullbackComplexFunctor l E h ⋙\n          pbcIntegralTransportComplex U l E ⋙ DerivedCategory.Q,\n      ∀ P : (integralOperationsGoodComplex l E T).FullSubcategory,\n        e₀.hom.app P = (integralDetailedTransport U l E).map\n            ((integralDerivedPullbackComparison l E h).hom.app P) ≫\n          (pbcIntegralDetailedTransportFactors U l E).hom.app\n            ((integralOperationsPullbackComplexFunctor l E h).obj P.obj)",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,285 @@
+{
+ "id": "lem-sf-native-weil-clopen-sheaf-comparison",
+ "kind": "statement",
+ "title": "Exact native Weil open extension and its clopen direct-image comparison",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For each locally finite-type $k_0$-scheme $T$, let $\\mathcal W_T$ be the abelian category of all pro-etale Weil sheaves from [def-sf-native-weil-derived-framework]: modules over the sheaf $B_{\\bar T}$ of locally finite continuous $\\Omega$-valued functions on $\\bar T=T\\times_{k_0}k$, with an isomorphism $F_T^*M\\cong M$. Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] of locally finite-type $k_0$-schemes. Its native Frobenius-equivariant extension by zero $j_!:\\mathcal W_U\\to\\mathcal W_X$ is additive and exact. There is a natural transformation $\\alpha_j:j_!\\to j_*$, with $j_*$ the native ordinary direct image, whose underlying map after forgetting Frobenius is the canonical comparison $\\bar j_!\\to\\bar j_*$. If $j$ is also universally closed [def-weil-proper-morphism], then $\\alpha_j$ is a natural isomorphism. These assertions concern all sheaves in $\\mathcal W_U$, with no constructibility assumption.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/ProperCohomology/OpenImmersion.lean",
+  "place": "isClosed_range_geometricFiberMap, lines 43-51, and ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar, lines 54-66. Exactness and definition of the comparison: WeilSheaf/OpenImmersion.lean, lines 47-69 and additive/finite-limit/finite-colimit instances, lines 140-150."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_T=\\operatorname{Mod}(B_{\\bar T})$ and $P_T=F_T^*$. Use the module description in [def-sf-native-weil-derived-framework]. By [lem-weil-pbc-module-sheaves-colimits-forgetful], these are abelian categories with all small limits and colimits in the common module universe. Reindexing the site along the scheme automorphisms $F_T$ and $F_T^{-1}$ gives inverse additive equivalences: on functions the coefficient identifications are precomposition by mutually inverse homeomorphisms, which preserve local finite-dimensional span. Thus [lem-sf-fixed-pair-created-abelian-structure] applies to $P_T$. Forgetting Frobenius is additive, creates kernels and cokernels, reflects exactness, and reflects isomorphisms. In particular the underlying inverse of an invertible commuting morphism commutes with Frobenius.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "lines 140-150; fixed-pair forgetful reduction"
+   }
+  },
+  {
+   "text": "The base change $\\bar j$ is open by [lem-weil-pbc-open-immersion-base-change]. The localized-site and coefficient identifications in [def-sf-native-weil-derived-framework] identify its ordinary module extension with $L=P_{(-)}^\\#$. Apply [lem-pur-site-restriction-module-adjunction-exact] to $(\\bar X_{\\mathrm{proet}},B_{\\bar X})$ at $\\bar U$: $L$ is exact. It is additive since on each summand its map sends $u+v$ to $u(s)+v(s)$, and the induced sheaf map is determined by this presheaf map. The native lift has underlying functor $L$ and structure $L(\\phi)c_{!,M}$ by the framework. A short exact sequence in $\\mathcal W_U$ forgets to a short exact sequence; applying $L$ keeps it short exact; reflection of exactness from Step 1 proves exactness in $\\mathcal W_X$. The same underlying-map calculation, and faithful additive forgetting, prove additivity. No quasi-compactness or constructibility was used.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-sf-native-weil-derived-framework",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact; native lift: WeilSheaf/OpenImmersion.lean lines 50-55, 140-150"
+   }
+  },
+  {
+   "text": "Write $R=\\bar j_*$, so $(RM)(V)=M(V_U)$, $V_U=V\\times_{\\bar X}\\bar U$, by [def-weil-proetale-inverse-image] and the coefficient action in the framework. Define $P_M\\to RM$ as follows. For each factorization $a:V\\to\\bar U$, the corresponding summand $M(V,a)$ maps by the identification $V_U\\cong V$ to $M(V_U)$; if no factorization exists the source is zero. Restricting along $V'\\to V$ gives precisely the same section on $V'_U$, so this is a natural presheaf module map. Its action is $B(V)$-linear by restriction of the coefficient functions. By [def-weil-presheaf-modules-sheafification] it extends uniquely to $\\alpha_M:LM\\to RM$. For $u:M\\to N$, both composites with this presheaf map send $s$ to $u(s)$; uniqueness gives $R(u)\\alpha_M=\\alpha_N L(u)$. This is the canonical comparison, identity after restriction to the open, equivalently the map of the adjoint triple described in the source.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-sf-native-weil-derived-framework",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/OpenImmersion.lean",
+    "place": "adicOpenImmersionLowerShriekToLowerStar, lines 230-251; Stacks sites-modules.tex Tag 03DI, lemma-extension-by-zero"
+   }
+  },
+  {
+   "text": "Let $c_!:P_XL\\cong LP_U$ and $c_*:P_XR\\cong RP_U$ be the framework's Frobenius reindexings. The rule in Step 3 is unchanged by this reindexing: a factorization $V\\to\\bar U$ corresponds to its Frobenius translate, $V_U$ corresponds to the translated intersection, and its section maps to that same translated section. Thus on every presheaf summand the two maps agree, and the sheafification universal property gives $c_{*,M}P_X(\\alpha_M)=\\alpha_{P_UM}c_{!,M}$. For a fixed pair $(M,\\phi)$, naturality from Step 3 now gives\n$$\\alpha_M L(\\phi)c_{!,M}=R(\\phi)\\alpha_{P_UM}c_{!,M}=R(\\phi)c_{*,M}P_X(\\alpha_M).$$\nThis is exactly the fixed-pair morphism condition. Underlying naturality then gives the natural transformation $\\alpha_j:j_!\\to j_*$, forgetting to $\\alpha$.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/OpenImmersion.lean",
+    "place": "lines 374-390, adicOpenImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso; sectionwise reindexing expansion"
+   }
+  },
+  {
+   "text": "Suppose $j$ is universally closed. Its geometric base change is a closed map by the definition in [def-weil-proper-morphism], so $\\bar j(\\bar U)$ is closed; it is already open by Step 2. Let $Z$ be its open complement. Apply [lem-pur-clopen-ringed-module-gluing] to the two clopen pieces with $R=B_{\\bar X}$. Its exact equivalence identifies module restriction to $\\bar U$ with first projection and reconstructs a tuple $(M,N)$ by the stated product of sections on the two intersections. In particular $\\bar j_*M$ is the tuple $(M,0)$: the formula for its sections is $M(V_U)$ and a sheaf of modules has zero sections on the empty object. The same tuple represents $\\bar j_!M$. Indeed for every $(H_U,H_Z)$ its morphisms to that tuple are computed componentwise, giving\n$$\\operatorname{Hom}((M,0),(H_U,H_Z))=\\operatorname{Hom}(M,H_U).$$\nThis is the left-adjoint universal property of $L$ from Step 2. The identification is normalized by the identity on $M$, so Step 3's comparison is $(1_M,1_0)$: on objects over $\\bar U$ its section rule is the identity, and on objects over $Z$ it is the unique zero-module map. The gluing equivalence therefore makes $\\alpha_M$ invertible.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TQ, 04TR, 04TS (lemma-glue-maps, lemma-glue-sheaves, lemma-mapping-property-glue); native application: WeilSheaf/ProperCohomology/OpenImmersion.lean lines 43-66"
+   }
+  },
+  {
+   "text": "Step 4 made every $\\alpha_M$ a morphism of fixed pairs. Step 5 makes its underlying map invertible, and Step 1 supplies its inverse in the fixed-pair category. The inverses are natural: multiplying $j_*(u)\\alpha_M=\\alpha_Nj_!(u)$ by the two inverses gives $j_!(u)\\alpha_M^{-1}=\\alpha_N^{-1}j_*(u)$. Thus $\\alpha_j$ is a natural isomorphism for universally closed $j$. All arguments apply to arbitrary module sheaves; in particular the zero sheaf, the empty open, the identity open and an arbitrary clopen union are included.",
+   "uses": [
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/ProperCohomology/OpenImmersion.lean",
+    "place": "ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar, lines 54-66"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-proetale-inverse-image",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-proper-morphism",
+  "lem-pur-clopen-ringed-module-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3), proper coincidence; native all-sheaf expansion using Stacks 03DJ and 04TS and the explicit native constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero is exact and equals direct image for an open and closed immersion on pro-etale Weil sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.liftCoborder_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.liftCoborder f) U =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometr\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : X.Opens),\\n  (AlgebraicGeometry.Scheme.Hom.appIso f U).hom =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.app f ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U))\\n      (X.p\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $X$. The theorem provides the explicit formula for the forward map of the canonical ring isomorphism $\\\\Gamma(Y, f(U))\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f U)\\n      (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom =\\n    Y.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $\\\\text{Im}(f)$ be the image of $f$, which is an open subset of $Y$. The theorem states that the composition \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f U)\\n      (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom =\\n    Y.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes and an open subset $ U $ of $ Y $, the composition of the sheaf morphism component $ f_{\\\\#}(U) $ with the homomorphism part of the section isomorphism $ \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (U : Y.Opens) →\\n        X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map f.base).obj U)) ≅\\n          Y.presheaf.obj (Opposite.op (AlgebraicGeometry.Scheme.Hom.opensRange f ⊓ U))\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes and let $U$ be an open subset of $Y$. This definition provides a canonical isomorphism of rings between the ring of sections of $X$ over the preimage $\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y U : AlgebraicGeometry.Scheme} (f : U ⟶ Y) (g : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  (H :\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base) ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\\n  (V : U.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeomet\", \"doc\": \"Let $f: U \\\\to Y$ be an open immersion of schemes and $g: X \\\\to Y$ be a morphism of schemes whose image is contained in the image of $f$. Let $h: X \\\\to U$ be the unique morphism lifting $g$ along $f$, \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIsoTop\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      X.presheaf.obj (Opposite.op ⊤) ≅ Y.presheaf.obj (Opposite.op (AlgebraicGeometry.Scheme.Hom.opensRange f))\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, there is an isomorphism between the global sections of the structure sheaf on $ X $ and the global sections of the open subset $ f(X) $ in $ Y $. This i\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y U : AlgebraicGeometry.Scheme} (f : Y ⟶ U) (g : U ⟶ X) (fg : Y ⟶ X)\\n  (H : fg = CategoryTheory.CategoryStruct.comp f g) [h : AlgebraicGeometry.IsOpenImmersion g] (V : U.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app f V =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.appIso \", \"doc\": \"Given schemes $X, Y, U$ and morphisms $f: Y \\\\to U$, $g: U \\\\to X$ with composition $fg: Y \\\\to X$, if $g$ is an open immersion, then for any open subset $V \\\\subseteq U$, the morphism $f_\\\\#(V)$ equals th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|[Cc]lopen.*[Ss]heaf|[Ss]heaf.*[Cc]lopen",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact extension by zero on Frobenius equivariant sheaves is direct image for clopen immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_hom_c\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (toSheafedSpaceHom Y f).hom.c = f.c\", \"doc\": \"For an open immersion $ f : X \\to Y $ where $ Y $ is a sheafed space, the presheaf component of the induced morphism from the sheafed space structure on $ X $ equals the original presheaf component of \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"For any closed immersion $ f: X \\\\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(i : Z ⟶ Y) (f : X ⟶ Y) [IsClosedImmersion i] : (pullback.fst f i).ker = i.ker.comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": toSheafedSpace Y f ⟶ Y\", \"doc\": \"The morphism from the sheafed space obtained by applying the open immersion $ f $ to the presheafed space $ X $, constructed via the induced category's homomorphism constructor using $ f $ as the unde\"}\n  {\"name\": \"ContinuousLinearMap.extend_zero\", \"module\": \"Mathlib.Analysis.Normed.Operator.Extend\", \"type\": \"(h_dense : DenseRange e) (h_e : IsUniformInducing e) : extend (0 : E →SL[σ₁₂] F) e = 0\", \"doc\": \"The extension of the zero linear map from $ E $ to $ F $ along a dense embedding $ e : E \\to Eₗ $ that induces the uniform structure on $ E $ results in the zero linear map on $ Eₗ $.\"}\n  {\"name\": \"Finsupp.supportedEquivFinsupp_symm_apply_coe\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.Supported\", \"type\": \"(s : Set α) [DecidablePred (· ∈ s)] (f : s →₀ M) : (supportedEquivFinsupp (R := R) s).symm f = f.extendDomain\", \"doc\": \"The inverse of the canonical linear equivalence between the submodule of $\\\\alpha \\\\to_0 M$ supported on $s$ and $s \\\\to_0 M$ maps a function $f : s \\\\to_0 M$ to its extension by zero on $\\\\alpha$, i.e., $\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_c\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : AlgebraicGeometry.PresheafedSpace C}\\n  (Y : AlgebraicGeometry.SheafedSpace C) (f : X ⟶ Y.toPresheafedSpace)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f],\\n  (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHo\", \"doc\": \"For an open immersion $ f : X \\to Y $ where $ Y $ is a sheafed space, the presheaf component of the induced morphism from the sheafed space structure on $ X $ to $ Y $ coincides with the presheaf compo\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inclusion of an open and closed component gives identical exact extension and pushforward functors on sheaves of adic modules with automorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"IsAdicComplete.StrictMono.extend_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For each natural number $n$, the extension of the function $f$ evaluated at the sequence term $a_n$ is equal to $f(n)$, i.e., $\\\\text{extend}_{ha}(f)(a_n) = f(n)$.\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {S : CategoryTheory.Sheaf J RingCat}, (SheafOfModules.pushforward (CategoryTheory.CategoryStruct.id S)).IsRightAdjoint\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology and a sheaf of rings $S$ on $\\\\mathcal{C}$, the pushforward functor induced by the identity functor $\\\\text{id}_{\\\\mathcal{C}}$ and the identity \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary sheaf/module pushforward, scheme immersions, or abstract derived functors; they do not supply the native Frobenius-equivariant adic statement. Read the generic pushforward composition and rightDerivedNatIso signatures; neither is a one-line specialization to this native operation."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|[Cc]lopen.*[Ss]heaf|[Ss]heaf.*[Cc]lopen",
+   "results": "Search log digest 4f53cda18c2baa0c; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariant sheaf extension by zero exact clopen direct image comparison",
+   "results": "Search log digest 2472aa99281d417a; 8 hits: Finsupp.restrictSupportEquiv_symm_apply_coe, Finsupp.supportedEquivFinsupp_symm_apply_coe, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instFullPushforward, iterateFrobeniusEquiv_zero, PrimeSpectrum.mulZeroAddOneEquivClopens, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_hom_c, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "Search log digest 4f53cda18c2baa0c; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for modules with invertible Frobenius structure is exact and its canonical map to direct image is an isomorphism for a clopen immersion",
+   "results": "Search log digest 94de14fbfaf96122; 8 hits: Profinite.NobelingProof.succ_exact, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Profinite.NobelingProof.CC_exact, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor, AlgebraicGeometry.liftCoborder_app",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|openImmersionLowerShriek|extension_by_zero",
+   "results": "Search log digest d2389b24189be556; 1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "Search log digest fd8b35690a6ec63b; 3 hits: algEquivIsoAlgebraIso, algEquivIsoAlgebraIso_hom, algEquivIsoAlgebraIso_inv",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor lifting exact module sheaf extension by zero to fixed points of an autoequivalence preserves short exact sequences",
+   "results": "Search log digest aa31ef82a46bffd3; 8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.ShortComplex.ShortExact.map_of_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.ShortComplex.ShortExact.map, ModuleCat.localizedModule_functor_map_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme structure-sheaf restriction, finitely supported functions, or abstract exact-functor lemmas do not state the native Frobenius-equivariant B-module extension and clopen comparison; candidates read in their source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-proper-shriek-star",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar",
+   "file": "lean/WeilConjectures/WeilSheaf/ProperCohomology/OpenImmersion.lean",
+   "line": 54,
+   "how": "Native clopen comparison; source has a local proof, transitive closure not audited in this stage-1 delivery. Exactness is supplied by the three instances in OpenImmersion.lean:140-150."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package, clause (3), proper coincidence; native sheaf-level open factor: exactness, canonical Frobenius-compatible comparison, and clopen invertibility. The seeded ancestor chain has created.item=null and blueprint_refs.py ancestor returns None; preserve that chain.",
+   "via": [
+    "lem-sf-native-weil-proper-shriek-star",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-native-weil-clopen-sheaf-comparison",
+  "worker": "stage1",
+  "summary": "Q70: split without new nodes. Use exact localized ringed-site extension, created fixed-pair abelian structure, explicit presheaf comparison and Frobenius identity, and finite clopen module gluing. Preserve the all-sheaf statement and require no quasi-compactness. No Lean attachment is claimed.",
+  "blueprint": "Latest prop-functor-package proof, clause (3) proper coincidence; the native clopen open-factor calculation realizes this input without changing coefficient categories.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module-sheaf limits and colimits ensure the hypotheses of created fixed-pair abelian structure; independent of any coefficient comparison route."
+   },
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "Generic gluing for any commutative ring sheaf on a finite clopen partition, specialized to the actual native B ring; not a replacement coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pur-clopen-ringed-module-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-fc98578bb",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-fc98578bb (reviewer sub-agent of L); spot-checked: Ordinary split of the item: zero new nodes, six steps, statement byte-identical to live and side-live (still unsplit there, so no parallel supersession). The only citer, lem-sf-native-weil-proper-shriek-star, uses exactly the three delivered clauses. Step 1: Mod(B) has all small limits and colimits (lem-weil-pbc-module-sheaves-colimits-forgetful), and F^* is an additive autoequivalence, so lem-sf-fixed-pair-created-abelian-structure applies; its statement gives creation, conservativity, reflection of exactness and the commuting inverse. Step 2: the base change of j is open (01JY). Stacks 03DJ (sites-modules.tex line 2160) gives exactness of extension by zero for any commutative ring sheaf, so no quasi-compactness is needed; this generalizes, and does not duplicate, lem-sf-native-weil-open-exact-constructible, which is quasi-compact only. Step 3: the summand map uses V x_Xbar Ubar = V when a factorization exists (Ubar -> Xbar is a monomorphism), is linear over the coefficients, and extends uniquely through sheafification. Step 4: the morphism types check, and the displayed chain is exactly the fixed-pair morphism condition. Step 5: universal closedness gives a clopen image; gluing (04TS, lem-pur-clopen-ringed-module-gluing with R=B) gives j_* = (M,0) and, through Step 2's adjunction, j_! = (M,0); alpha is the identity on the open and 0 -> 0 on the complement, so it is an isomorphism. Step 6: the inverse commutes with Frobenius and is natural. The route matches the Lean in WeilSheaf/ProperCohomology/OpenImmersion.lean lines 40-66 and WeilSheaf/OpenImmersion.lean lines 45-69 and 138-150, where the instances omit QuasiCompact. Edge cases checked: U empty, j the identity, M = 0, a disjoint union of two components, a non-quasi-compact U, and a non-closed open where alpha is not an isomorphism. No SGA source; the two generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZero",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.lowerStar",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZeroToLowerStar",
+   "AlgebraicGeometry.WeilSheaf.instAdditiveProEtaleWeilSheafExtensionByZero",
+   "AlgebraicGeometry.WeilSheaf.instPreservesFiniteLimitsProEtaleWeilSheafExtensionByZero",
+   "AlgebraicGeometry.WeilSheaf.instPreservesFiniteColimitsProEtaleWeilSheafExtensionByZero"
+  ],
+  "statement": "instance ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar (i : U ⟶ X) [IsOpenImmersion i]\n    [UniversallyClosed i] [i.IsOver (Spec (CommRingCat.of k₀))] :\n    IsIso (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i)",
+  "branch": "slopmaster2",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing all-sheaf native interface: the primary instance is the clopen invertibility clause; OpenImmersion.lean supplies the native extension, canonical comparison and the three listed additivity/finite-limit/finite-colimit instances (no QuasiCompact binder). lowerStar is the ordinary native direct image in LowerStar.lean. The comparison is mapOfNatIsoHom of adicOpenImmersionLowerShriekToLowerStar along geometricFiberMap, so forgetting Frobenius gives exactly the canonical geometric comparison. All declarations are exposed by this entry module. The upstream interfaces apply even without the node's local finite-type and unequal-characteristic restrictions; restricting to its stated objects requires no extra hypothesis or statement correction. No constructibility hypothesis is present."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9455fdd28",
+  "group": "Q110",
+  "result": "pass",
+  "note": "existing:true record, lean field only (snapshot = side-live otherwise). ProEtaleWeilSheaf = all Weil sheaves (no constructibility); extensionByZero Additive/PreservesFiniteLimits/Colimits instances at WeilSheaf/OpenImmersion.lean:140-150 omit QuasiCompact (adic j_! PreservesFiniteLimits at Adic/OpenImmersion.lean:208); extensionByZeroToLowerStar = mapOfNatIsoHom of adjoint-triple adicOpenImmersionLowerShriekToLowerStar, underlying map by definition; UniversallyClosed instance gives IsIso of the natural transformation; statement verbatim to ProperCohomology/OpenImmersion.lean:54-56. Lean drops lft and ℓ≠char hypotheses (more general, fine). Advisory: self second reading (H11); two framework declarations re-listed. No compile (no file changed)."
+ }
+}

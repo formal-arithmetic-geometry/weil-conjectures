@@ -1,0 +1,242 @@
+{
+ "id": "lem-a1-balanced-finite-tower-generator-comparison",
+ "kind": "statement",
+ "title": "Balanced finite-tower association and quotient-generator normalization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:T'\\to T$ be a morphism of schemes with $\\ell$ invertible on both schemes [def-weil-scheme-morphism-properties]. On the small pro-etale sites put $R_W=\\varprojlim_{n\\geq1}S_{W,n}$, $S_{W,n}=(A/t^n)_W$, with specified projections $\\pi_{W,n}$ and quotient transitions $q_{n+1,n}$ [def-weil-completed-integral-coefficients]. All finite levels are restricted along these projections. Write $c_g:g^{-1}R_T\\to R_{T'}$ for the projection-induced ring map and $G(M)=g^{-1}M\\otimes_{g^{-1}R_T}R_{T'}$ for ordinary module pullback [def-weil-pbc-completed-pullback]. Use unbounded cochain complexes and their derived localizations $Q$ [def-weil-abstract-derived-category], sheafified tensor [def-pur-sheaf-tensor-product], and direct-sum total tensor [def-pc-tensor-complex-sheaves]. A good complex means K-flat with flat terms [def-a1-flat-term-kflat-complex]. Set $Q_{W,n}=[R_W\\xrightarrow{t^n}R_W]$ in degrees $-1,0$, with transition $(t,1)$ and augmentation $\\epsilon_{W,n}:Q_{W,n}\\to S_{W,n}[0]$ equal to $\\pi_{W,n}$ in degree zero and zero in degree minus one [def-a1-principal-completed-koszul-towers].\n\nFor any $R_T$-complex $P$ write $F(P)_n=P\\otimes S_{T,n}$ and $B_g^0(P)_n=\\operatorname{Res}_n g_n^*F(P)_n$, with the actual quotient transitions [def-a1-integral-finite-pullback-tower, def-pur-integral-finite-pullback]. Let $c_{g,n}:g^{-1}S_{T,n}\\xrightarrow{\\sim}S_{T',n}$ be the constant-coefficient structural map [prop-weil-pbc-proetale-constant-ring-map]; it satisfies $\\pi_{T',n}c_g=c_{g,n}g^{-1}\\pi_{T,n}$.\n\nThere are $R_{T'}$-linear natural isomorphisms of strict towers of cochain complexes\n$$\\lambda_P:(GP\\otimes S_{T',n})_n\\xrightarrow{\\sim}B_g^0(P),\\qquad C_P:(G(F(P)_n))_n\\xrightarrow{\\sim}B_g^0(P).$$\nHere $\\lambda_{P,n}$ identifies both sides with $g^{-1}P\\otimes_{g^{-1}R_T}S_{T',n}$. The first identification sends $(x\\otimes b)\\otimes a$ to $x\\otimes\\pi_{T',n}(b)a$, with inverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$; the identification from $g_n^*F(P)_n$ sends $(x\\otimes z)\\otimes a$ to $x\\otimes c_{g,n}(z)a$, with inverse inserting $1$ in the $g^{-1}S_{T,n}$ factor. The map $C_{P,n}$ sends a pulled quotient-unit generator $b\\otimes g^{-1}(x\\otimes1)$ to the finite-pullback generator $g^{-1}(x\\otimes1)\\otimes\\pi_{T',n}(b)$. These formulas define inverse balanced maps of sheaf tensor complexes, commute with restrictions and differentials, are natural for every chain map, and commute with every quotient transition.\n\nFor $H(P)_n=P\\otimes Q_{T,n}$, $a_P=(1_P\\otimes\\epsilon_{T,n})_n$, and the ordinary tensor/unitor comparison $\\theta_P:GH(P)\\xrightarrow{\\sim}(GP\\otimes Q_{T',n})_n$ (on the two Koszul generators $(x\\otimes e_i)\\otimes b\\mapsto(x\\otimes b)\\otimes e'_i$), there is equality of strict chain maps\n$$\\lambda_P\\circ a_{GP}\\circ\\theta_P=C_P\\circ G(a_P).$$\nOn the degree-zero Koszul generator both maps use the quotient projection, and on the degree-minus-one generator both are zero. For good $P$, this equality identifies the finite evaluations of the localized zigzag with the prescribed K-flat representative maps and pure-tensor generators of [def-a1-integral-completed-pullback-interfaces]. It retains the specified projections and adjunction-unit generators, rather than permitting an arbitrary automorphism of a finite evaluation. No invertibility assumption is made on $c_g$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; balanced coefficient-square and fixed-generator strict-tower refinement, old proof steps 6-7."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-flat-term-kflat-complex",
+  "def-a1-principal-completed-koszul-towers",
+  "def-a1-integral-finite-pullback-tower",
+  "def-pur-integral-finite-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-a1-integral-completed-pullback-interfaces",
+  "def-a1-finite-pullback-strict-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized natural balanced scalar comparison lambda from lem-a1-balanced-finite-tower-scalar-comparison.",
+   "uses": [
+    "lem-a1-balanced-finite-tower-scalar-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain C with its quotient-unit formula and its unique ordinary finite evaluations from lem-a1-balanced-finite-tower-quotient-comparison. These include the specified normalized source r and literal published universe-transport compatibility.",
+   "uses": [
+    "lem-a1-balanced-finite-tower-quotient-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-a1-balanced-finite-tower-koszul-augmentation to this lambda,C and their normalization proofs. It supplies a normalized theta and the strict augmentation square. Package lambda,C,theta and their clauses with the ordinary evaluations from the preceding step. No localization or quasi-isomorphism assertion is needed to derive the current Lean conclusion.",
+   "uses": [
+    "lem-a1-balanced-finite-tower-koszul-augmentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-balanced-finite-tower-scalar-comparison",
+  "lem-a1-balanced-finite-tower-quotient-comparison",
+  "lem-a1-balanced-finite-tower-koszul-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK/03EL and sites-cohomology.tex Tag 07A4; original steps 1-8 decomposed into the scalar, quotient/evaluation and Koszul-augmentation arguments. Q2 supplies the Lean combination."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Balanced tensor association for pullback and quotient coefficient extension commutes with inverse sequence transitions and preserves quotient unit generators",
+   "results": "; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Algebra.Presentation.algebraTensorAlgEquiv_symm_relation, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Module.Presentation.tensor_relation, Module.Relations.tensor_relation, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackIso",
+   "results": "; SheafOfModules.pullbackIso. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso|pullbackComp|tensor.*quotient.*transition",
+   "results": "; Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for module sheaf tensor products over a commutative square of coefficient rings is given by tensor associativity with multiplication and insertion of one",
+   "results": "; TensorProduct.isBaseChange, isBaseChange_tensorProduct_map, IsBaseChange.tensorEquiv, LinearMap.rTensor_baseChange, IsBaseChange, Algebra.IsPushout.cancelBaseChange_tmul, IsBaseChange.of_equiv, TensorProduct.AlgebraTensorModule.cancelBaseChange. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor association for a coefficient square of ringed topoi commutes with quotient transitions and sends a pulled quotient unit to its residue scalar",
+   "results": "; TensorProduct.tensorQuotientEquiv, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop, TensorProduct.quotientTensorEquiv, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso|tensorObjIsoSheafification|changeOfRings.*[Cc]omp",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Read Sheaf/PullbackContinuous.lean:106-112 and ModuleCat/ChangeOfRings.lean:984-1009; ordinary pullback or module scalar associators do not state this actual sheaf Koszul/quotient tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules commutes with extension of scalars with pure tensor unit formulas",
+   "results": "Hits: ModuleCat.extendScalarsId_inv_app_apply, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, SheafOfModules.unit, ModuleCat.ExtendRestrictScalarsAdj.unit_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, PresheafOfModules.pullback. Read Sheaf/PullbackContinuous.lean:106-112 and ModuleCat/ChangeOfRings.lean:984-1009; ordinary pullback or module scalar associators do not state this actual sheaf Koszul/quotient tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.tensorObj",
+   "results": "Search note: loogle: unknown identifier 'SheafOfModules.tensorObj'. Hits: . Read Sheaf/PullbackContinuous.lean:106-112 and ModuleCat/ChangeOfRings.lean:984-1009; ordinary pullback or module scalar associators do not state this actual sheaf Koszul/quotient tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of ring sheaves induces natural scalar extension comparison on unbounded complexes compatible with quotient transitions",
+   "results": "Hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.map, localCohomology.diagram, ModuleCat.extendScalars_assoc', CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.extendScalarsComp, ComplexShape.Embedding.liftExtend.comm, ModuleCat.extendScalars_assoc. Read Sheaf/PullbackContinuous.lean:106-112 and ModuleCat/ChangeOfRings.lean:984-1009; ordinary pullback or module scalar associators do not state this actual sheaf Koszul/quotient tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balanced sheaf tensor association for a ring coefficient square gives quotient pullback tower isomorphisms preserving augmentation generators",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquiv, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, KaehlerDifferential.tensorKaehlerEquivBase, tensorKaehlerQuotKerSqEquiv, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, tensorKaehlerQuotKerSqEquiv_symm_tmul_D, tensorKaehlerQuotKerSqEquiv_tmul_D. Read Sheaf/PullbackContinuous.lean:106-112 and ModuleCat/ChangeOfRings.lean:984-1009; ordinary pullback or module scalar associators do not state this actual sheaf Koszul/quotient tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "Hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. Read Sheaf/PullbackContinuous.lean:106-112 and ModuleCat/ChangeOfRings.lean:984-1009; ordinary pullback or module scalar associators do not state this actual sheaf Koszul/quotient tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-pullback-strict-tower-comparison",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof steps 6, 7 and 9, and the tower part of step 11: ordinary completed-ring pullback, balanced finite comparison, localization naturality and shifts. Extracted argument: Tag 03EL, lemma-tensor-product-pullback; balanced coefficient-square and fixed-generator strict-tower refinement, old proof steps 6-7.",
+   "via": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-balanced-finite-tower-generator-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the balanced comparisons from existing inverse-image tensor, strict coefficient-square, and ideal-quotient associator results. Explicitly justified actual completed principal quotients before constructing C, checked all quotient transitions and Koszul differential signs, and proved the augmentation square on the two Koszul generators before localization. No new nodes or statement changes.",
+  "blueprint": "Realizes the finite-level association and fixed-generator refinement of lem-a1-finite-map-purity, first geometric-stalk pullback paragraph, through ancestor old proof steps 6-7 and 9 of lem-a1-finite-pullback-strict-tower-comparison; preserves that route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-completed-coefficient-free-resolution",
+    "why": "Only the general completed-DVR two-term resolution is used to identify the actual projection cokernel. The unit has no coefficient-ring resolution statement."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of transported module inverse image preserves the projection cokernel; no weight or trace argument is imported."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic normalized underived pro-etale inverse-image tensor comparison identifies the actual finite tensor factors and units."
+   },
+   {
+    "node": "lem-pur-strict-coefficient-comparison-calculus",
+    "why": "Generic ordinary coefficient-square isomorphism gives lambda for the quotient square, with arbitrary complexes and actual transitions."
+   },
+   {
+    "node": "lem-pur-ideal-quotient-tower-scalar-associator",
+    "why": "Generic strict ideal-quotient associator proves that pulling back a restricted quotient is the reduction of pullback; the principal quotient hypotheses are checked explicitly."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic unbounded ordinary total tensor comparison and unitor construct the Koszul comparison; no purity route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-completed-coefficient-free-resolution",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pur-strict-coefficient-comparison-calculus",
+  "lem-pur-ideal-quotient-tower-scalar-associator",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-ba2895873",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-ba2895873 (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps, no new nodes, statement unchanged), the report, the statements of all 15 cited nodes, the parent re-split proof, and lean/Sheaf/Paper/CompletedPullbackReduction.lean lines 140-232, 636-660 and 754-783. Hand checks: both sides of λ are g⁻¹P⊗_D V_n because π'c = j g⁻¹π. C needs B/tⁿB ≅ V_n and c(g⁻¹t)=t'; step 1 gets both from the uniformizer definition, the constant-section-preserving iso, H⁰ of the free resolution, and exactness of inverse image. κ^{01} of the coefficient-square calculus with φ⁰=c, φ¹=j_n gives λ. β_a with I_n=(g⁻¹t)ⁿ, J_n=tⁿB gives C(b⊗g⁻¹(x⊗1)) = g⁻¹(x⊗1)⊗π'(b). The transitions follow from qπ'_m=π'_n. θ keeps the Koszul sign. The two composites agree on e₀ (x⊗π'(b) on both routes) and are both zero on e₋₁. Unit route: the only off-route citation is the ideal-quotient associator (sk-thm-sf-compatibility), which is a generic black box declared in tool_uses and accepted. Edge cases checked: P=0, T' empty, g=id, n=1, unbounded P, nonflat c. One fault, C3/C4: step 8 identified C_P with the fixed completedReductionOrdinaryComparison only by reading Lean, while the cited interface node only names the maps. FIX: step 8 now cites the in-route existing node lem-weil-pbc-ordinary-finite-evaluation-transition and uses its uniqueness clause (same source and target, same generator value [π(b),1,x]_n) to identify C_{P,n} with E_n applied termwise. proof_deps is updated; there is no cycle and nothing else changed. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BalancedFiniteTowerGeneratorComparison",
+  "declaration": "WeilConjectures.BalancedFiniteTower.balanced_finite_tower_generator_comparison",
+  "declarations": [
+   "WeilConjectures.BalancedFiniteTower.balanced_finite_tower_generator_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/BalancedFiniteTowerGeneratorComparison.lean",
+  "statement": "theorem balanced_finite_tower_generator_comparison (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ (lambda : G l E g ⋙ reductions l E X ≅ finite l E g) (c : reductions l E Y ⋙ diagramPull l E g ≅ finite l E g) (theta : koszuls l E Y ⋙ diagramPull l E g ≅ G l E g ⋙ koszuls l E X), (∀ P : CochainComplex (Modules l E Y) ℤ, BalancedNormalization l E g P (lambda.app P)) ∧ QuotientUnitNormalization l E g c ∧ (∀ P : CochainComplex (Modules l E Y) ℤ, KoszulNormalization l E g P (theta.app P)) ∧ (∀ P : CochainComplex (Modules l E Y) ℤ, (theta.hom.app P) ≫ augmentation l E X ((G l E g).obj P) ≫ lambda.hom.app P = (diagramPull l E g).map (augmentation l E Y P) ≫ c.hom.app P) ∧ (∀ n : ℕ, ∃! e : ordinaryReduction l E Y n ⋙ pull l E g ≅ ordinaryFinite l E g n, OrdinaryNormalization l E g n e ∧ PublishedCompatibility l E g n e ∧ ∀ (P : CochainComplex (Modules l E Y) ℤ), integralOperationsGoodComplex l E Y P → ∃ r : tensorReduction l E Y P ≅ ((reductionComplex l E Y).obj P).asFunctor, ReductionNormalization l E Y P r ∧ ∀ i : ℤ, (((c.hom.app P).app (op n)).f i) = (pull l E g).map (((r.hom.app (op n)).f i)) ≫ (e.hom.app (P.X i)))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab0b19f2c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of cd24 (G1, G2). G1 resolved: the def-a1-integral-completed-pullback-interfaces record equals live NY existing:true (JSON-identical) and the commit does not touch it; the IntegralCompletedPullbackInterfacesUniverses module is removed; ordinaryReduction/ordinaryFinite/OrdinaryNormalization moved to the new def node def-a1-completed-pullback-universe-transport-data (read from the commit with git show; the snapshot omits it). G2 resolved: no theorem/sorry/choose in the def modules; the item's final conjunct is ∃! e with OrdinaryNormalization ∧ PublishedCompatibility ∧ good-P C = pull(r)≫e; PublishedCompatibility literally conjugates the published completedReductionOrdinaryComparison by unique generator-pinned sectionwise universe transports, universally quantified over PublishedCoefficients/SectionTransport. Hand-checked: uniqueness by local generation plus sheaf separation, consistency with HasCompletedReductionOrdinaryComparisonNormalization via the projection field, true for twisted p, inhabited via Type-t copies of E. Advisory: integralCompleted/integralQuotient free, so completed/quotient_transport are cosmetic but harmless under ∀. The earlier advisory was done: reductions/koszuls/finite/QuotientUnitNormalization now in def-a1-finite-pullback-strict-tower-data. Item diff vs live: lean + one stmt_dep; statements verbatim; all declarations present; imports resolve; no namespace clash with the parent; docstrings with source, blueprint and 8 steps. λ/C/θ, strict square, hypotheses and edge cases (P=0, empty, g=id, n=0, unbounded, both Koszul degrees, nonflat c_g, u≠t) unchanged and correct. No compile (no file changed); the worker reports 3 clean compiles and an OK dry run. Maintainer note: re-point the parent and Q39 to FinitePullbackStrictTowerData."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

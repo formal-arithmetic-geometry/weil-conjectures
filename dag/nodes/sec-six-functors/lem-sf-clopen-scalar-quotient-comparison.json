@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-clopen-scalar-quotient-comparison",
+ "kind": "statement",
+ "title": "Normalized scalar extension and chain quotient comparison",
+ "statement": "Fix the prime l, finite coefficient extension E, scheme T, clopen open U and normalized coefficient-restriction datum d of [def-sf-clopen-restriction-data], with [def-weil-l-adic-coefficient-extension, def-pc-scheme, def-weil-open-immersion]. There exist natural derived reduction comparisons and actual finite and completed-coefficient chain quotient isomorphisms, for every positive exponent n+1 and every complex P [def-weil-integral-reduction-tower, lem-pur-derived-change-of-rings]. The finite and completed-coefficient chain isomorphisms send the sheafified pure tensor with coefficient d.finite(s) and section x to the local pure tensor s tensor x. The derived comparison commutes with the canonical universal counits on every complex, without a K-flat hypothesis. No assertion about a derived tower, completeness or Tor amplitude is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; lemma-pullback-K-flat; lemma-pullback-tensor-product; scalar and quotient comparison paragraphs of lem-sf-clopen-derived-compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-sf-clopen-restriction-data",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized ordinary natural scalar comparison at each exponent from lem-sf-clopen-scalar-module-comparison. Apply NatIso.mapHomologicalComplex to that very comparison to construct the finite chain quotient and read its tensor normalization degreewise.",
+   "uses": [
+    "lem-sf-clopen-scalar-module-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend each chosen ordinary comparison by lem-sf-clopen-scalar-comparison-descent. Its conclusion is exactly the required counit square for the finite chain quotient just constructed, including arbitrary complexes.",
+   "uses": [
+    "lem-sf-clopen-scalar-comparison-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use lem-sf-clopen-scalar-chain-comparison for the completed-coefficient termwise quotient and its pure-tensor formula. Assemble these witnesses and the three equations.",
+   "uses": [
+    "lem-sf-clopen-scalar-chain-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-scalar-module-comparison",
+  "lem-sf-clopen-scalar-comparison-descent",
+  "lem-sf-clopen-scalar-chain-comparison"
+ ],
+ "proof_origin": {
+  "by": "W8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY: degreewise ordinary scalar comparison, K-flat descent and naturality of universal counits; no finite-product derived tensor calculus is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact restriction functor to an open and closed component commutes with derived extension of scalars and preserves derived completeness and Tor amplitude",
+   "results": "Eight hits: scheme structure-sheaf restriction, its adjunction, abstract exactFunctor and restrictScalars. None states the arbitrary pro-etale coefficient comparison or augmented completeness or objectwise Tor result.",
+   "verdict": "No exact Mathlib result.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open and closed subscheme commutes with derived scalar extension, quotients and homotopy inverse limits",
+   "results": "Eight hits on Scheme.Modules.restrictFunctorComp, restrictFunctorIsoPullback and restriction of schemes. These concern structure-sheaf modules, not the coefficient sheaves and normalized towers here.",
+   "verdict": "No exact result.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.ofOpSequence",
+   "results": "The remote Loogle index does not contain that identifier. The checked-out Mathlib source defines it in CategoryTheory/Functor/OfSequence.lean.",
+   "verdict": "Use the source API to assemble the tower; this does not supply the geometric comparisons.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors.*naturality|IsDerivedLimitTriangle.*map|ofOpSequence",
+   "results": "Mathlib ExactFunctor.lean supplies mapDerivedCategoryFactors_hom_naturality; OfSequence.lean supplies NatTrans.ofOpSequence. Sheaf ChangeOfRings.lean supplies ordinary restrictScalars only. No normalized arbitrary-coefficient clopen comparison, augmented-completeness preservation, or local residue Tor statement found. Blueprint searches for clopen and completeness yielded no duplicate.",
+   "verdict": "The tower assembly is proved using these APIs; the three geometric steps need their own statements.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenDerivedCompatibility",
+  "date": "2026-10-27",
+  "group": "W9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3. Substep: Normalized scalar extension and chain quotient comparison.",
+   "via": [
+    "lem-sf-clopen-derived-compatibility",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenScalarQuotientComparison",
+  "file": "lean/Sheaf/Paper/SfClopenScalarQuotientComparison.lean",
+  "declaration": "WeilConjectures.sf_clopen_scalar_quotient_comparison",
+  "statement": "theorem sf_clopen_scalar_quotient_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)\n    (hU : IsClosed (U : Set T)) (d : SfClopenCoefficientRestriction l E T U) :\n    ∃ (reduction : ∀ n : ℕ,\n    scalarReductionDerivedExtension l E T n ⋙ sfClopenFiniteDerivedRestriction d n ≅\n      sfClopenDerivedRestriction d ⋙ scalarReductionDerivedExtension l E U.toScheme n)\n       (finite_quotient : ∀ (P : CochainComplex (scalarReductionSource l E T) ℤ) (n : ℕ),\n    (sfClopenFiniteComplexRestriction d n).obj (unrestrictedTowerFiniteComplex l E T n P) ≅\n      unrestrictedTowerFiniteComplex l E U.toScheme n ((sfClopenComplexRestriction d).obj P))\n       (quotient : ∀ (P : CochainComplex (scalarReductionSource l E T) ℤ) (n : ℕ),\n    (sfClopenComplexRestriction d).obj (unrestrictedTowerComplex l E T n P) ≅\n      unrestrictedTowerComplex l E U.toScheme n ((sfClopenComplexRestriction d).obj P)),\n    (∀ (P : CochainComplex (scalarReductionSource l E T) ℤ)\n      (n : ℕ) (q : ℤ) (V : U.toScheme.ProEt)\n      (s : (integralCoefficientCommRingSheaf l E U.toScheme n).obj.obj (op V))\n      (x : (P.X q).val.obj (op ((sfClopenSiteInclusion U).obj V))),\n    (((finite_quotient P n).hom.f q).val.app (op V))\n      (unrestrictedTowerTensorSection l E T n (P.X q)\n        (op ((sfClopenSiteInclusion U).obj V)) ((d.finite n).hom.hom.app (op V) s) x) =\n    unrestrictedTowerTensorSection l E U.toScheme n\n      (((sfClopenComplexRestriction d).obj P).X q) (op V) s x) ∧\n    (∀ (P : CochainComplex (scalarReductionSource l E T) ℤ) (n : ℕ),\n    (sfClopenFiniteDerivedRestriction d n).map (sfClopenReductionCounit T n P) ≫\n        (sfClopenFiniteLocalizationIso d n (unrestrictedTowerFiniteComplex l E T n P)).hom ≫\n        DerivedCategory.Q.map (finite_quotient P n).hom =\n      (reduction n).hom.app (DerivedCategory.Q.obj P) ≫\n        (scalarReductionDerivedExtension l E U.toScheme n).map\n          (sfClopenLocalizationIso d P).hom ≫\n        sfClopenReductionCounit U.toScheme n ((sfClopenComplexRestriction d).obj P)) ∧\n    (∀ (P : CochainComplex (scalarReductionSource l E T) ℤ)\n      (n : ℕ) (q : ℤ) (V : U.toScheme.ProEt)\n      (s : (integralCoefficientCommRingSheaf l E U.toScheme n).obj.obj (op V))\n      (x : (P.X q).val.obj (op ((sfClopenSiteInclusion U).obj V))),\n    (((quotient P n).hom.f q).val.app (op V))\n      (unrestrictedTowerTensorSection l E T n (P.X q)\n        (op ((sfClopenSiteInclusion U).obj V)) ((d.finite n).hom.hom.app (op V) s) x) =\n    unrestrictedTowerTensorSection l E U.toScheme n\n      (((sfClopenComplexRestriction d).obj P).X q) (op V) s x)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T013003-L-2356382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T112444-L-1585705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

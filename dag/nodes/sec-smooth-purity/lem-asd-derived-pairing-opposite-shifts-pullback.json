@@ -1,0 +1,103 @@
+{
+ "id": "lem-asd-derived-pairing-opposite-shifts-pullback",
+ "kind": "statement",
+ "title": "Pullback of derived pairings after opposite shifts",
+ "statement": "For arbitrary coefficient categories satisfying the hypotheses of the derived etale tensor construction, any scheme morphism f whose inverse image preserves flat objects, and any compatible unshifted pairing square with two factor maps and an output map, the pairing square remains compatible after shifting the first factor by -2 and the second by 2, using the canonical tensor-shift, shift-zero and inverse-image shift comparisons. The factor maps occur in second-factor-first order. No finite coefficients, invertibility, duality, or transport choices are assumed.",
+ "stmt_deps": [
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Opposite-shift and shift-zero step in the evaluation identification."
+ },
+ "proof": [
+  {
+   "text": "Use the source theorem leftDerivedUpperStarTensorComparison_derivedTensorShiftIso at shifts -2 and 2. Commutation with shift zero agrees with the canonical shift-zero isomorphism by the zero field of CommShift; its naturality cancels the total shift. Naturality of derivedTensorShiftIso moves the factor maps through this cancellation. Compose these two squares with the given unshifted pairing square. Naturality of the derived tensor bifunctor changes both the premise and conclusion to second-factor-first order. All calculations are formal for arbitrary objects and maps.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Source tensor-shift comparison, shift-zero coherence and elementary categorical composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor pairing compatible with pullback remains compatible after opposite shifts and shift zero coherence",
+   "date": "2026-10-26",
+   "results": "Eight hits on CommShiftTwo and rigid tensor-Hom adjunctions, without the specialized derived pairing square.",
+   "verdict": "Assemble the two proved source tensor-shift comparison lemmas with generic category coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedTensorShiftIso",
+   "date": "2026-10-26",
+   "results": "Zero hits; identifier not in Mathlib.",
+   "verdict": "The relevant comparison is in the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensorShiftIso",
+   "date": "2026-10-26",
+   "results": "Zero Mathlib hits; local search finds the source tensor-shift comparison and its naturality theorem.",
+   "verdict": "Use those proved source lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTwistDerivedEvaluationPullback",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-finite-twist-derived-evaluation-pullback",
+   "place": "Proof, shifts -2 and 2 and their cancellation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPairingOppositeShiftsPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPairingOppositeShiftsPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedPairingOppositeShifts_pullback",
+  "statement": "theorem derivedPairingOppositeShifts_pullback\n    (B : Type uB) [Category.{u + 1} B] [Abelian B]\n    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]\n    [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [(upperStar B f).PreservesFlat]\n    (K M U : DerivedCategory (Sheaf Y.smallEtaleTopology B))\n    (K' M' U' : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (k : (upperStar B f).leftDerivedFunctor.obj K ⟶ K')\n    (m : (upperStar B f).leftDerivedFunctor.obj M ⟶ M')\n    (u : (upperStar B f).leftDerivedFunctor.obj U ⟶ U')\n    (q : ((derivedTensor B Y).obj K).obj M ⟶ U)\n    (q' : ((derivedTensor B X).obj K').obj M' ⟶ U')\n    (hq : (upperStar B f).leftDerivedFunctor.map q ≫ u =\n      ((leftDerivedUpperStarTensorComparison B f).app K).app M ≫\n        ((derivedTensor B X).obj ((upperStar B f).leftDerivedFunctor.obj K)).map m ≫\n        ((derivedTensor B X).map k).app M' ≫ q') :\n    (upperStar B f).leftDerivedFunctor.map\n        ((derivedTensorShiftIso B K M (-2) 2).hom ≫\n          (shiftFunctorZero _ ℤ).hom.app _ ≫ q) ≫ u =\n      ((leftDerivedUpperStarTensorComparison B f).app (K⟦(-2 : ℤ)⟧)).app (M⟦(2 : ℤ)⟧) ≫\n        ((derivedTensor B X).obj ((upperStar B f).leftDerivedFunctor.obj\n          (K⟦(-2 : ℤ)⟧))).map\n          (((upperStar B f).leftDerivedFunctor.commShiftIso (2 : ℤ)).hom.app M ≫\n            m⟦(2 : ℤ)⟧') ≫\n        ((derivedTensor B X).map\n          (((upperStar B f).leftDerivedFunctor.commShiftIso (-2 : ℤ)).hom.app K ≫\n            k⟦(-2 : ℤ)⟧')).app (M'⟦(2 : ℤ)⟧) ≫\n        (derivedTensorShiftIso B K' M' (-2) 2).hom ≫\n        (shiftFunctorZero _ ℤ).hom.app _ ≫ q'",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T152111-L-1076381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T152111-L-1076381",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

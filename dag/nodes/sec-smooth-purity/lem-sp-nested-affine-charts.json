@@ -1,0 +1,248 @@
+{
+ "id": "lem-sp-nested-affine-charts",
+ "kind": "statement",
+ "title": "Nested admissible affine charts for a smooth pair",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes, and put $h=gf$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms].\n\nFor each $x\\in X$ there are affine open neighbourhoods $S\\subset Z$ of $gf(x)$, $V\\subset g^{-1}S$ of $f(x)$, and $U\\subset f^{-1}V$ of $x$, and etale maps [def-weil-etale-morphism]\n$$v:V\\to\\mathbf A^e_S,\\qquad u:U\\to\\mathbf A^d_V,$$\nsuch that $g|_V=p_{e,S}v$ and $f|_U=p_{d,V}u$ [def-sbc-affine-space]. With $b:\\mathbf A^d_V\\to\\mathbf A^d_{\\mathbf A^e_S}$ the base change of $v$, both $b$ and $bu$ are etale, and\n$$h|_U=p_{d+e,S}bu$$\nunder the ordered coordinate identification $\\mathbf A^d_{\\mathbf A^e_S}\\simeq\\mathbf A^{d+e}_S$ with the $f$ coordinates first. The schemes $S,V,U$ and all the indicated affine spaces are separated finite-type Noetherian $k$-schemes; all the displayed chart maps are separated and of finite presentation. These charts cover $X$, including the empty cover if $X$ is empty, and the assertion permits either or both of $d,e$ to be zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), first sentence: two successive coordinate charts; former Step 4"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local normal form Smooth.exists_etale_to_affineSpace (proved adopted-source theorem Smooth.exists_etale_to_affineSpace, which applies [lem-sc-standard-smooth-local-relative-dimension, lem-sc-standard-smooth-etale-polynomial-chart] and the affine-space spectrum description) to g at f(x). Restrict f to the inverse image of its affine source chart V; its relative dimension d persists by [lem-sbc-smooth-relative-dimension-permanence]. Apply the same local normal form to this restriction at x. Its source is an affine open of the open subscheme f-inverse(V); identify its image U as an affine open of X using the open-immersion isomorphism onto its image [def-weil-open-immersion]. Compose the second chart with AffineSpace.map of its affine target inclusion W into V, an open immersion by the affine-space Cartesian square [def-sbc-affine-space]. This gives an etale map to affine d-space over the original V. Cancel the monomorphism V into Y to verify its restricted projection equation. No characteristic or coefficient hypothesis is needed.",
+   "uses": [
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-sc-standard-smooth-etale-polynomial-chart",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-weil-open-immersion",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the ordered affine-space isomorphism directly with AffineSpace.homOfVector [def-sbc-affine-space]. Its forward coordinates concatenate the outer d coordinates and the pullbacks of the inner e coordinates using Fin.addCases; its inverse takes the first and last blocks. AffineSpace.hom_ext and homOfVector_appTop_coord show both composites are identities and give the displayed coordinate and projection equations. The same formulas permit either block to be empty.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "AffineSpace.isPullback_map identifies the base-change square [def-sbc-affine-space, def-pc-fibre-product]. Etaleness of the base-change map and its composite with u follow from [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-composition-cancellation]. Rewrite the ordered isomorphism projection equation, AffineSpace.map_over, and the two chart equations to obtain the composite factorization.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original schemes are locally Noetherian by finite type over the field [lem-weil-pbc-finite-type-over-noetherian]. Their affine opens inherit local Noetherianity [lem-weil-pbc-noetherian-open-subscheme-noetherian]. All indicated affine-space projections are locally of finite presentation and quasi-compact; their finite-type structure maps imply local Noetherianity, and affineness supplies compactness. This proves Noetherianity and the three structural morphism properties separately for each of the seven listed Over objects. Composition uses [lem-weil-pbc-proper-fp-permanence, lem-sfb-finite-type-composition-base-change]; separatedness of affine sources uses [lem-weil-pbc-affine-source-morphism-separated].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of the seventeen chart arrows, affineness of its source supplies separatedness, and compact affine source with quasi-separated target supplies quasi-compactness and quasi-separatedness [lem-weil-pbc-affine-source-morphism-separated, lem-weil-pbc-qcqs-morphism-permanence]. Etale maps, isomorphisms, affine-space projections, and open immersions are locally of finite presentation; the two resLE arrows are composites of the etale charts and projections by their established equations. Thus composition [lem-weil-pbc-proper-fp-permanence] proves every listed arrow admissible. The entire construction is pointwise, so empty X is vacuous.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-weil-open-immersion",
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), first sentence; two local smooth normal forms, open-image transport, explicit ordered coordinate concatenation, and Mathlib permanence instances"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two smooth morphisms admit nested affine etale coordinate charts whose composite is an etale chart of summed dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Cc]hart|[Cc]hart.*etale|[Ss]mooth.*[Ll]ocal.*[Ff]orm",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/MDifferentiable.lean\", \"line\": \"640\", \"text\": \"and `b₂` are globally smooth, but we want to apply this lemma with only local information.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/MDifferentiable.lean\", \"line\": \"673\", \"text\": \"and `b₂` are globally smooth, but we want to apply this lemma with only local information.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom.lean\", \"line\": \"207\", \"text\": \"globally smooth, but we want to apply this lemma with only local information. Therefore, we\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/Hom.lean\", \"line\": \"244\", \"text\": \"globally smooth, but we want to apply this lemma with only local information. Therefore, we\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"line\": \"54\", \"text\": \"lemma FormallySmooth.holdsForLocalizationAway : HoldsForLocalizationAway @FormallySmooth :=\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"line\": \"69\", \"text\": \"lemma FormallySmooth.localizationPreserves : LocalizationPreserves @FormallySmooth :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous affine coordinate charts for a pair of smooth morphisms compatible with the affine space product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContinuousAffineMap.coe_prod\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap\", \"type\": \"(f : P₁ →ᴬ[k] P₂) (g : P₁ →ᴬ[k] P₃) : prod f g = Pi.prod f g\", \"doc\": \"Given continuous affine maps $ f : P_1 → P_2 $ and $ g : P_1 → P_3 $ over a ring $ k $, there exists a continuous affine map $ P_1 → P_2 × P_3 $ whose function component is the pair $ (f(p), g(p)) $ f\"}\n  {\"name\": \"writtenInExtChart_prod\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.ExtChartAt\", \"type\": \"{f : M → N} {g : M' → N'} {x : M} {x' : M'} :\\n  (writtenInExtChartAt (I.prod I') (J.prod J') (x, x') (Prod.map f g)) =\\n    Prod.map (writtenInExtChartAt I J x f) (writtenInExtChartAt I' J' x' g)\", \"doc\": \"For manifolds with corners $M, M'$ and $N, N'$ with respective models $I, I'$ and $J, J'$, and functions $f:M\\\\to N$ and $g:M'\\\\to N'$, the extended chart representation of the product map $f\\\\times g$ a\"}\n  {\"name\": \"ContinuousAffineMap.prodMap_toAffineMap\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap\", \"type\": \"∀ {k : Type u_10} {P₁ : Type u_11} {P₂ : Type u_12} {P₃ : Type u_13} {P₄ : Type u_14} {V₁ : Type u_15} {V₂ : Type u_16}\\n  {V₃ : Type u_17} {V₄ : Type u_18} [inst : Ring k] [inst_1 : AddCommGroup V₁] [inst_2 : Module k V₁]\\n  [inst_3 : AddTorsor V₁ P₁] [inst_4 : TopologicalSpace P₁] [inst_5 : AddCommG\", \"doc\": \"For any continuous affine maps $ f: P_1 \\\\to P_2 $ and $ g: P_3 \\\\to P_4 $ over a ring $ k $, the underlying affine map of their product map $ f \\\\times g $ is equal to the product of the underlying affi\"}\n  {\"name\": \"OpenPartialHomeomorph.extend_prod\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.ExtChartAt\", \"type\": \"(f' : OpenPartialHomeomorph M' H') : (f.prod f').extend (I.prod I') = (f.extend I).prod (f'.extend I')\", \"doc\": \"For open partial homeomorphisms $ f : U \\to V $ and $ f' : U' \\to V' $, and models with corners $ I : H \\to E $ and $ I' : H' \\to E' $, the extended chart of the product homeomorphism $ f \\times f' $ with \"}\n  {\"name\": \"prodChartedSpace_chartAt\", \"module\": \"Mathlib.Geometry.Manifold.ChartedSpace\", \"type\": \": chartAt (ModelProd H H') x = (chartAt H x.fst).prod (chartAt H' x.snd)\", \"doc\": \"For any point $ (x, x') $ in the product charted space with model space $ H \\\\times H' $, the chart at $ (x, x') $ is the product of the chart at $ x $ in $ H $ and the chart at $ x' $ in $ H' $. Forma\"}\n  {\"name\": \"ContinuousAffineMap.prodMap_apply\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap\", \"type\": \"(f : P₁ →ᴬ[k] P₂) (g : P₃ →ᴬ[k] P₄) (x) : f.prodMap g x = (f x.1, g x.2)\", \"doc\": \"For continuous affine maps $f: P_1 \\\\to P_2$ and $g: P_3 \\\\to P_4$ over a ring $k$, and for any point $x = (x_1, x_3) \\\\in P_1 \\\\times P_3$, the product map $f \\\\times g$ satisfies $(f \\\\times g)(x) = (f(x_\"}\n  {\"name\": \"AffineMap.prodMap_apply\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \"(f : P1 →ᵃ[k] P2) (g : P3 →ᵃ[k] P4) (x) : f.prodMap g x = (f x.1, g x.2)\", \"doc\": \"For affine maps $ f: P_1 \\\\to P_2 $ and $ g: P_3 \\\\to P_4 $ over a ring $ k $, the product map $ f \\\\times g $ satisfies $ (f \\\\times g)(x_1, x_3) = (f(x_1), g(x_3)) $ for all $ (x_1, x_3) \\\\in P_1 \\\\times \"}\n  {\"name\": \"Manifold.LiftSourceTargetPropertyAt.prodMap\", \"module\": \"Mathlib.Geometry.Manifold.LocalSourceTargetProperty\", \"type\": \"[IsManifold I n M] [IsManifold I' n M'] [IsManifold J n N] [IsManifold J' n N']\\n  {Q : (M' → N') → OpenPartialHomeomorph M' H' → OpenPartialHomeomorph N' G' → Prop}\\n  {R : ((M × M') → (N × N')) → OpenPartialHomeomorph (M × M') (H × H') → OpenPartialHomeomorph (N × N') (G × G') → Prop}\\n  (hf : LiftSo\", \"doc\": \"Given manifolds $M, M', N, N'$ with corners modeled on $H, H', G, G'$ respectively, and functions $f:M\\\\to N$ and $g:M'\\\\to N'$ satisfying local source-target properties $P$ and $Q$ at points $x\\\\in M$ a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite of smooth morphisms has local affine coordinates obtained by an etale base change of coordinates on the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_to_affineSpace|nested.*[Aa]ffine|[Aa]ffine.*nested",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no nested compatible pair of affine charts; standard-smooth and composition hits cover ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nested affine etale coordinate charts for two composable smooth scheme morphisms with prescribed relative dimensions",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.isSmoothOfRelativeDimension_comp\nAlgebraicGeometry.IsSmoothOfRelativeDimension\nAlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\nAlgebraicGeometry.isSmooth_comp\nAlgebraicGeometry.IsSmooth\nAlgebraicGeometry.AffineSpace.map_comp\nchartAt_comp\nAlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: no nested compatible pair of affine charts; standard-smooth and composition hits cover ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.AffineSpace",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsSmoothOfRelativeDimension'\n",
+   "date": "2026-10-23",
+   "verdict": "query error: unknown identifier; repeated using AlgebraicGeometry.SmoothOfRelativeDimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two smooth morphisms of fixed relative dimensions admit nested affine etale charts compatible with composition",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.isSmoothOfRelativeDimension_comp\nAlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\nAlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\nAlgebraicGeometry.isSmoothOfRelativeDimension_iff\nAlgebraicGeometry.IsSmooth.exists_isStandardSmooth\nAlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\nAlgebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\nRingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: no nested compatible pair of affine charts; standard-smooth and composition hits cover ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive smooth morphisms locally factor through etale morphisms to affine spaces with compatible product coordinates",
+   "results": "[leansearch] OK 8 hit(s)\nRingHom.IsStandardSmooth.exists_etale_mvPolynomial\nAlgebraicGeometry.Scheme.Etale\nAlgebraicGeometry.IsSmooth.casesOn\nAlgebraicGeometry.IsSmooth\nAlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\nAlgebraicGeometry.IsSmooth.recOn\nAlgebraicGeometry.IsSmooth.mk\nAlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: no nested compatible pair of affine charts; standard-smooth and composition hits cover ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "[loogle] OK 12 hit(s)\nAlgebraicGeometry.smoothOfRelativeDimension_isStableUnderBaseChange\nAlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat\nAlgebraicGeometry.SmoothOfRelativeDimension\nAlgebraicGeometry.SmoothOfRelativeDimension.smooth\nAlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\nAlgebraicGeometry.instHasRingHomPropertySmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\nAlgebraicGeometry.smoothOfRelativeDimension_comp\nAlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: no nested compatible pair of affine charts; standard-smooth and composition hits cover ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-factors",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), first sentence: choose coordinates for g, then for f over the chosen chart",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sp-nested-affine-charts",
+  "worker": "stage1",
+  "summary": "No new nodes. Assemble two applications of the existing admissible coordinate-cover theorem, with the second composite map taken over its original base V; explicit affine-space base-change square, ordered polynomial coordinate isomorphism, projection equation, and admissibility checks. Exact item attachment absent in upstream; all recorded old searches retained and six actual searches appended. Statement unchanged.",
+  "blueprint": "det-sp-composition-factors, proof (1), first sentence: choose coordinates for g, coordinates for f over its chart, then the composite chart. Steps 1--3 choose nested opens, 4--5 prove the composite chart, 6--7 verify admissibility, 8 treats empty and zero-dimensional cases.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-smooth-admissible-coordinate-cover",
+    "why": "Generic one-morphism affine coordinate-cover and admissibility theorem; used twice to realize the unit instruction to choose successive coordinates, without changing its route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base-change permanence of the specified smooth relative dimension, applied only to restrict f over the chosen open V; the composition unit has no local-restriction theorem of its own."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-c36367b42",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-c36367b42 (reviewer sub-agent of L); spot-checked: Read the whole item: statement byte-identical to the live base (unsplit, no proof), 8 steps, no new nodes; there is no repair note and no other group has split it. Step 1 applies lem-sp-smooth-admissible-coordinate-cover to g with the given e: S=V_a, V=U_a, v=e^0, so g(V)⊂S, g|_V=p v and the Noetherian/separated finite-type properties come from its statement. Step 2 shows X_V is separated finite type over k (qcqs-over-affine, permanence (1), qc open immersion ⇒ finite type, cancellation (a), composition). Step 3 restricts f by base-change permanence (1) and uses the cover's composite U→A^d_V rather than the smaller-base map to A^d_W, which is correct per Stacks 054L (morphisms.tex l.8543). Step 4 shows A^d_V = V×_{A^e_S}A^d_{A^e_S} from the fibre-product universal property, then 02GO and composition give b and bu étale. Step 5 gives the ordered ring isomorphism (f coordinates first); I checked h|_U=p c b u by hand at d=e=1. Steps 6–7 prove finite type, separated, Noetherian and finite presentation for every space and map without inferring fp from étaleness alone. Step 8 covers X empty and d or e zero. The route matches main-20261015 sk-prop-sp-composition-factors.proof.md (1), first sentence. No SGA, no dependency cycle, every cited id exists; rg -L found no duplicate (sbc-thm-etale-local-normal-form has unspecified dimension; lem-pur-smooth-pair-local-coordinates is about a closed immersion). Both tool_uses are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NestedAdmissibleAffineCharts",
+  "declaration": "AlgebraicGeometry.SmoothOfRelativeDimension.exists_nested_admissible_affine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/NestedAdmissibleAffineCharts.lean",
+  "statement": "theorem SmoothOfRelativeDimension.exists_nested_admissible_affine_charts (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) (_hell : ell.Prime) (_hne : ell ≠ D.p) {X Y Z : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated f] [IsSeparated g] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] : ∀ x : X, ∃ (S : Z.Opens) (V : Y.Opens) (U : X.Opens) (hVS : V ≤ g ⁻¹ᵁ S) (hUV : U ≤ f ⁻¹ᵁ V) (v : V.toScheme ⟶ AffineSpace (ULift.{u} (Fin e)) S.toScheme) (u : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) V.toScheme) (c : AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin e)) S.toScheme) ≅ AffineSpace (ULift.{u} (Fin (d + e))) S.toScheme), x ∈ U ∧ f x ∈ V ∧ g (f x) ∈ S ∧ IsAffineOpen S ∧ IsAffineOpen V ∧ IsAffineOpen U ∧ Etale v ∧ Etale u ∧ v ≫ (AffineSpace (ULift.{u} (Fin e)) S.toScheme ↘ S.toScheme) = g.resLE S V hVS ∧ u ≫ (AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme) = f.resLE V U hUV ∧ Etale (AffineSpace.map (ULift.{u} (Fin d)) v) ∧ Etale (u ≫ AffineSpace.map (ULift.{u} (Fin d)) v) ∧ (∀ i : Fin d, c.hom.appTop (AffineSpace.coord S.toScheme (ULift.up (i.castAdd e))) = AffineSpace.coord (AffineSpace (ULift.{u} (Fin e)) S.toScheme) (ULift.up i)) ∧ (∀ j : Fin e, c.hom.appTop (AffineSpace.coord S.toScheme (ULift.up (j.natAdd d))) = (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin e)) S.toScheme) ↘ AffineSpace (ULift.{u} (Fin e)) S.toScheme).appTop (AffineSpace.coord S.toScheme (ULift.up j))) ∧ c.hom ≫ (AffineSpace (ULift.{u} (Fin (d + e))) S.toScheme ↘ S.toScheme) = (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin e)) S.toScheme) ↘ AffineSpace (ULift.{u} (Fin e)) S.toScheme) ≫ (AffineSpace (ULift.{u} (Fin e)) S.toScheme ↘ S.toScheme) ∧ U.ι ≫ f ≫ g = u ≫ AffineSpace.map (ULift.{u} (Fin d)) v ≫ c.hom ≫ (AffineSpace (ULift.{u} (Fin (d + e))) S.toScheme ↘ S.toScheme) ≫ S.ι ∧ (∀ W : Over (Spec (.of D.k)), W ∈ [ Over.mk (S.ι ≫ (Z ↘ Spec (.of D.k))), Over.mk (V.ι ≫ (Y ↘ Spec (.of D.k))), Over.mk (U.ι ≫ (X ↘ Spec (.of D.k))), Over.mk ((AffineSpace (ULift.{u} (Fin e)) S.toScheme ↘ S.toScheme) ≫ S.ι ≫ (Z ↘ Spec (.of D.k))), Over.mk ((AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme) ≫ V.ι ≫ (Y ↘ Spec (.of D.k))), Over.mk ((AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin e)) S.toScheme) ↘ AffineSpace (ULift.{u} (Fin e)) S.toScheme) ≫ (AffineSpace (ULift.{u} (Fin e)) S.toScheme ↘ S.toScheme) ≫ S.ι ≫ (Z ↘ Spec (.of D.k))), Over.mk ((AffineSpace (ULift.{u} (Fin (d + e))) S.toScheme ↘ S.toScheme) ≫ S.ι ≫ (Z ↘ Spec (.of D.k)))] → IsNoetherian W.left ∧ IsSeparated W.hom ∧ LocallyOfFiniteType W.hom ∧ QuasiCompact W.hom) ∧ (∀ a : Arrow Scheme.{u}, a ∈ [ Arrow.mk (v), Arrow.mk (u), Arrow.mk (AffineSpace.map (ULift.{u} (Fin d)) v), Arrow.mk (u ≫ AffineSpace.map (ULift.{u} (Fin d)) v), Arrow.mk (u ≫ AffineSpace.map (ULift.{u} (Fin d)) v ≫ c.hom), Arrow.mk (c.hom), Arrow.mk (c.inv), Arrow.mk (AffineSpace (ULift.{u} (Fin e)) S.toScheme ↘ S.toScheme), Arrow.mk (AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme), Arrow.mk (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin e)) S.toScheme) ↘ AffineSpace (ULift.{u} (Fin e)) S.toScheme), Arrow.mk (AffineSpace (ULift.{u} (Fin (d + e))) S.toScheme ↘ S.toScheme), Arrow.mk (g.resLE S V hVS), Arrow.mk (f.resLE V U hUV), Arrow.mk (u ≫ AffineSpace.map (ULift.{u} (Fin d)) v ≫ c.hom ≫ (AffineSpace (ULift.{u} (Fin (d + e))) S.toScheme ↘ S.toScheme)), Arrow.mk (U.ι), Arrow.mk (V.ι), Arrow.mk (S.ι)] → IsSeparated a.hom ∧ LocallyOfFinitePresentation a.hom ∧ QuasiCompact a.hom ∧ QuasiSeparated a.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7cd43fe0",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and source proof (1): FiniteFieldDatum + ell prime ≠ p; X,Y,Z sep/LOFT/QC over Spec k; f,g IsOver, separated, SmoothOfRelativeDimension d/e; affine S,V,U with memberships and V≤g⁻¹S, U≤f⁻¹V; Etale v,u with resLE factorizations; b = canonical AffineSpace.map (cartesian by isPullback_map), Etale b and bu; c characterized uniquely via AffineSpace.hom_ext (castAdd f-coords first, natAdd pulled-back g-coords, over S); h|U equation via S.ι; Over list Noetherian+sep+ft; Arrow list sep+LFP+qc+qs (extra inclusions/c.inv true and covered by proof step 7). Empty X vacuous; d,e=0 handled. Single universe u, no extra assumptions, sorry-only, docstrings with source/blueprint and 8 proof steps, lean.statement verbatim, only lean field changed vs live, proof-dep module exists. No duplicate found. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T202311-L-2704161",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

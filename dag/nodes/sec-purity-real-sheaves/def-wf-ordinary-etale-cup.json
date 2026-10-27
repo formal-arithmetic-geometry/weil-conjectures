@@ -17,9 +17,33 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0FPJ, section-cup-product; Remark 0B6C, remark-cup-product; Tag 03FD for integral coefficient comparison"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient forgetting functor for ULift Z is restriction along the ULift ring equivalence followed by the equivalence between integer modules and abelian groups. Its inverse, whiskered on sheaves, gives essential surjectivity. Fullness and faithfulness descend coefficientwise, so the sheaf functor is an equivalence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For integralClass_bijective specialize the proved arbitrary-base normalized comparison to the coefficient ring ULift Z, any scheme X, coefficient sheaf M and degree n. All other definition formulas are preserved; the inverse map is uniquely determined by this bijectivity. The existing proof obligation for integralForget_isEquivalence remains its sectionwise unique integral action argument.",
+   "uses": [
+    "lem-sp-ordinary-finite-class-arbitrary-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPJ, section-cup-product; Remark 0B6C, remark-cup-product; Tag 03FD for integral coefficient comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ordinary-finite-class-arbitrary-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPJ, section-cup-product; Remark 0B6C, remark-cup-product; Tag 03FD for integral coefficient comparison",
+  "notes": "F1: specialize the established arbitrary-base comparison for integral bijectivity."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -84,7 +108,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-p-real-rankone",
  "lean": {
@@ -112,7 +147,8 @@
   "branch": "newtargets-dag",
   "by": "N5",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "F1 preserves all existing attributes, public imports, formulas and signatures except the definitionally equal named-object return type of integralClassLift. Canonical category-proof caches are scoped around the lift and cup. Both original holes are closed: integralClass_bijective specializes the arbitrary-base comparison; integralForget_isEquivalence uses the integer-module equivalence and sheaf whiskering. The module compiled without sorry."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -129,5 +165,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Statement matches node clause by clause: f:Y⟶X in Scheme.{u}, six AddCommGrpCat.{u+1} etale sheaves, e/e' on ordinaryEtaleTensor, a/b/c from upperStar, he uses the canonical f⁻¹(F⊗G)→f⁻¹F⊗f⁻¹G comparison (oplax δ of upperStar ⊣ lowerStar conjugated by the canonical pullbackIso and counits) in the right direction, T_a = H.map a ∘ cohomologyMap, all p q : ℕ; no extra hypotheses; both lean.statement fields verbatim; item record changes only lean and stmt_deps. New def-wf-ordinary-etale-cup is real data: integralClassLift = surjInv of the true integralClass_bijective (exact equivalence plus isomorphic generator, so the preimage is unique); the cup is unit diagonal, x̃⊗ỹ, shift iso, lax μ plus moduleCup_singleTensorIso, ẽ[p+q], i.e. the Stacks 0B6C/0FPJ cup; derivedTensor = curriedTensor checked by rfl; the two postponed theorems are named, sorry-proved and stated in the node. Proof-dep modules imported non-publicly; docstrings and blueprint tags present; no pro-etale substitute. nt_compile, separately in dependency order: OrdinaryEtaleCup 49.7 s, Functoriality 4.1 s, no errors. Remarks: the tensor uses the upstream Sheaf(ModuleCat) monoidal structure rather than the SheafOfModules record of def-pur (same notion, as def-kun-derived-tensor requires); OrdinaryEtaleCup compiles close to the 60 s limit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules + 4 adapted modules against published clone, DAG nodes and 6 change records; delivered set built in sandbox and 7 direct importers + 4 exposed transitive users (SfP1IntegralTransport, SfP1ChartExchange, SfP1ChartMapComposition, TowerP1KernelScalarData) compiled against it, all OK; #print axioms"
  }
 }

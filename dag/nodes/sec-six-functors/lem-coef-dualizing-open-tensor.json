@@ -1,0 +1,303 @@
+{
+ "id": "lem-coef-dualizing-open-tensor",
+ "kind": "statement",
+ "title": "Open coefficient tensor respects evaluation and finite Tor bounds",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $1\\le m\\le n$. Set $A=\\mathcal O_E/(\\varpi^n)$, $B=\\mathcal O_E/(\\varpi^m)$ [def-weil-finite-field-fiber]. For a separated finite-type $k$-scheme $Y$ [def-weil-proper-morphism, def-weil-finite-type-morphism], write $a_Y:Y\\to s=\\operatorname{Spec}k$, $F_{Y,R}=Ra_{Y,R!}\\dashv G_{Y,R}=a_{Y,R}^{\\times}$, $\\omega_{Y,R}=G_{Y,R}R_s$, and $\\varepsilon_{Y,R}:F_{Y,R}\\omega_{Y,R}\\to R_s$, for $R=A,B$, on ordinary small etale module derived categories [def-weil-pbc-derived-categories, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Let $T_Y=-\\otimes_A^LB$ [def-kun-derived-tensor], and denote the canonical compact-support coefficient comparison by $c_{Y,K}:T_sF_{Y,A}K\\to F_{Y,B}T_YK$ [lem-fix-compact-support-coefficient-change]. Here bounded constructible finite-Tor means constructible cohomology, zero outside a finite interval, and integers $a\\le b$ such that tensoring with every degree-zero module sheaf has cohomology only in $[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Let $j:U\\hookrightarrow Y$ be a quasi-compact open immersion with $Y$ Noetherian, and let $W\\in D^b_{ctf}(Y_{\\mathrm{et}},A)$. Put $L=j^*W$, let $e_{R,V}:j_{!,R}j^*V\\to V$ be evaluation, and use the coefficient/pullback identification $j^*T_YW\\cong T_UL$ [def-weil-pbc-extension-by-zero, prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The canonical $B$-linear open tensor comparison is an isomorphism $d_L:T_Yj_{!,A}L\\cong j_{!,B}T_UL$ [lem-pur-etale-open-derived-tensor]. It satisfies\n$$e_{B,T_YW}\\circ d_L=T_Y(e_{A,W}).$$\nBoth $j_{!,A}L$ and $j_{!,B}T_UL$ are bounded constructible finite-Tor, and if $L$ has Tor amplitude $[a,b]$ then these two objects have Tor amplitude $[a,b]$ over $A$ and $B$, respectively. Their cohomology stratifications are obtained by extension of a finite locally closed constructibility stratification on $U$, adding the closed complement with zero cohomology. The evaluation identity holds for the canonical direct-sum total tensor comparison on K-flat tensor representatives before derived localization, so it is an equality of derived morphisms, rather than an inference from equality of arbitrary derived maps on stalks.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraphs 2-3: tensor identifications needed for locality; canonical open tensor evaluation and finite-Tor input domains; extraction of the expanded retained stage-1 proof, steps 22,23"
+ },
+ "stmt_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-proper-morphism",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-finite-tor-amplitude",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-sf-etale-open-scalar-data",
+  "def-sf-etale-sheaf-scalar-extension",
+  "def-sp-etale-kflat-realization",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual ordinary and derived adjunctions of def-sf-etale-open-scalar-data. The inverse of the unique-left-adjoint comparison is the iterated inverse mate. Apply mateEquiv_counit_symm and cancel the comparison isomorphism to obtain the derived evaluation equality. For ordinary evaluation, identify the scalar/restriction mate with openScalarRestrictionZero using the ordinary_reverse_eq and openRestrictScalarsIso_inv_eq calculations already proved in the imported modules. The same mate-counit calculation gives equality of ordinary natural transformations. Apply mapHomologicalComplex and evaluate at P; this proves the before-localization assertion for every complex, hence for the stated K-flat representatives.",
+   "uses": [
+    "def-sf-etale-open-scalar-data",
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate finite-value bounded constructibility to the source boundedConstructible predicate via lem-weil-pbc-constructible-etale-module-sheaf-comparison. Exact inverse image preserves bounded constructibility and gives L=j^*W. For either exact restriction or extension by zero, choose the bounded flat representative from exists_iso_Q_obj_flat_of_torAmplitudeIn. Apply the exact functor degreewise, using preservation of flat objects, then torAmplitudeIn_Q_obj_of_flat and mapDerivedCategoryFactors to transport the same Tor interval. This uses the existing source flat-model API, not a new resolution or choice of scalar comparison. Source boundedConstructible_mapDerivedCategory_openImmersionLowerShriek similarly supplies bounded constructibility after extension.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-kun-flat-bounded-tor-amplitude",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the Noetherian quasi-compact open U apply exists_etaleScalarFlatModel to L and any given interval [a,b]. Its last two clauses give constructible cohomology and the same B-Tor interval for scalarExtension(phi,U)(L). Tor amplitude implies homology concentration, hence boundedness. Extend both coefficient objects by zero using the preceding exact-flat-functor calculation. Applying this to an interval for W restricted to U gives finite_tor, and applying it to each supplied interval for L proves tor_bounds.",
+   "uses": [
+    "lem-sp-etale-scalar-flat-model",
+    "lem-kun-flat-bounded-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each coefficient complex use finite induction on the finite interval of potentially nonzero homology degrees to refine all constructibility stratifications. Outside that interval use the zero-sheaf finite-local-constancy lemma. Intersect the two resulting stratifications with Stratification.inter. Concatenate this common stratification S with the trivial one-stratum stratification of the reduced closed complement using Stratification.openClosed. Define e and z by the two summands of finSumFinEquiv; its injectivity and surjectivity give range(e)={z}^c, including empty opens and empty complements. Exact-functor homology comparison and the open adjunction unit identify the restriction to each open stratum with the original homology sheaf. The disjoint-range vanishing theorem makes restriction to the complement zero. Transport finite local constancy along these isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "prop-constructible-open-closed",
+    "lemma-openclosed-vanishing-lowershriek",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-etale-open-scalar-data",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-sp-etale-scalar-flat-model",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lemma-openclosed-vanishing-lowershriek",
+  "prop-constructible-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Open-locality coefficient tensor argument, expanded using Stacks 03DI, 03DJ, 03TT, 0GKB, 0E8I and the already proved source exact-functor and bounded flat-model APIs; evaluation by adjunction mates before and after localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension commutes with etale extension by zero preserving its evaluation counit and bounded constructible finite Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"RingHom.formallyEtale_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).FormallyEtale ↔ Algebra.FormallyEtale R S\", \"doc\": \"The canonical ring homomorphism from $ R $ to $ S $ is formally étale if and only if $ S $ is a formally étale algebra over $ R $. This equivalence establishes that the formal étaleness of the algebra\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallyEtale R Sₘ], Algebra.Formal\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern formally etale tensor products, ordinary algebra, or Tor vanishing for projectives; none is the B-linear derived extension-by-zero comparison with evaluation and constructible finite-Tor bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of rings extension by zero tensor projection evaluation counit finite Tor constructibility",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"LinearMap.baseChange_zero\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": baseChange A (0 : M →ₗ[R] N) = 0\", \"doc\": \"The base change of the zero linear map $ 0 : M \\\\to N $ induces the zero linear map $ 0 : A \\\\otimes_R M \\\\to A \\\\otimes_R N $, where $ A $ is an $ R $-algebra and $ M, N $ are $ R $-modules.\"}\n  {\"name\": \"LinearMap.rTensor_zero\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \": rTensor M (0 : N →ₗ[R] P) = 0\", \"doc\": \"The right tensor product of the zero linear map from $ N $ to $ P $ with the identity map on $ M $ results in the zero linear map from $ N \\\\otimes_R M $ to $ P \\\\otimes_R M $.\"}\n  {\"name\": \"NonUnitalAlgHom.toAlgHom_zero\", \"module\": \"Mathlib.Algebra.Algebra.Unitization\", \"type\": \": ⇑(0 : A →ₙₐ[R] R).toAlgHom = Unitization.fst\", \"doc\": \"The zero element in the additive monoid of non-unital $ R $-algebra homomorphisms from $ A $ to $ R $, when extended to an $ R $-algebra homomorphism via the unitization construction, equals the canon\"}\n  {\"name\": \"TensorAlgebra.algebraMapInv\", \"module\": \"Mathlib.LinearAlgebra.TensorAlgebra.Basic\", \"type\": \": TensorAlgebra R M →ₐ[R] R\", \"doc\": \"The algebra homomorphism from the tensor algebra $ \\\\mathrm{TensorAlgebra}(R, M) $ to $ R $, induced by the zero linear map on the module $ M $. This homomorphism sends every element of $ M $ to $ 0 \\\\i\"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Tor\", \"type\": \"(X Y : C) [Projective Y] (n : ℕ) : IsZero (((Tor C (n + 1)).obj X).obj Y)\", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}\n  {\"name\": \"TensorAlgebra.ιInv\", \"module\": \"Mathlib.LinearAlgebra.TensorAlgebra.Basic\", \"type\": \": TensorAlgebra R M →ₗ[R] M\", \"doc\": \"The linear map $ \\\\iota^{-1} $ from the tensor algebra $ \\\\mathrm{TensorAlgebra}(R, M) $ to the module $ M $, constructed by composing the algebra homomorphism to the trivial square-zero extension $ R \\\\\"}\n  {\"name\": \"Algebra.Extension.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{T} [CommRing T] [Algebra R T] (P : Extension R S) : Extension T (T ⊗[R] S)\", \"doc\": \"Let $R, S, T$ be commutative rings, such that $S$ and $T$ are $R$-algebras. Given an algebra extension $P$ of $S$ over $R$, which is represented by a surjective $R$-algebra homomorphism $\\\\pi : P_0 \\\\to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern formally etale tensor products, ordinary algebra, or Tor vanishing for projectives; none is the B-linear derived extension-by-zero comparison with evaluation and constructible finite-Tor bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern formally etale tensor products, ordinary algebra, or Tor vanishing for projectives; none is the B-linear derived extension-by-zero comparison with evaluation and constructible finite-Tor bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|torAmplitude",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern formally etale tensor products, ordinary algebra, or Tor vanishing for projectives; none is the B-linear derived extension-by-zero comparison with evaluation and constructible finite-Tor bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|torAmplitude|tensor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern formally etale tensor products, ordinary algebra, or Tor vanishing for projectives; none is the B-linear derived extension-by-zero comparison with evaluation and constructible finite-Tor bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings extension by zero tensor projection evaluation counit finite Tor constructibility in ordinary etale derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern formally etale tensor products, ordinary algebra, or Tor vanishing for projectives; none is the B-linear derived extension-by-zero comparison with evaluation and constructible finite-Tor bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension commutes with extension by zero and preserves its evaluation counit and constructible finite Tor amplitude",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"Ext\", \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.ProjectiveResolution.extMk_comp_mk₀\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"localCohomology.diagram\", \"CategoryTheory.ProjectiveResolution.mk₀_comp_extMk\", \"HomologicalComplex.extendSingleIso_hom_f_assoc\"], \"digest\": \"05a05b351651701e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, Ext, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, CategoryTheory.ProjectiveResolution.extMk_comp_mk₀, CategoryTheory.Functor.mapExtLinearMap_apply, localCohomology.diagram, CategoryTheory.ProjectiveResolution.mk₀_comp_extMk, HomologicalComplex.extendSingleIso_hom_f_assoc; none gives ordinary-etale open scalar tensor with evaluation and constructible finite-Tor bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, tensor",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'tensor'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query diagnostic: loogle: unknown identifier 'tensor'"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|torAmplitude",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; no declarations returned; none gives ordinary-etale open scalar tensor with evaluation and constructible finite-Tor bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale open immersion extension by zero derived tensor coefficient change counit finite Tor",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.IsEtale\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"RingHom.Etale\", \"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.baseChange\"], \"digest\": \"53c984b248a5dcfe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.IsEtale, Algebra.instIsStandardOpenImmersionTensorProduct, RingHom.Etale, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.baseChange; none gives ordinary-etale open scalar tensor with evaluation and constructible finite-Tor bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules restriction to an open subset extension by zero commutes with change of rings and tensor products",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_res\", \"ModuleCat.Tilde.res_apply\", \"ModuleCat.Tilde.res_const\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.restrictScalars\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.restrictScalars_map_val\"], \"digest\": \"d4dcdeba16943fb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, SheafOfModules.restrictScalars_obj_val, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.restrictScalars, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.restrictScalars_map_val; none gives ordinary-etale open scalar tensor with evaluation and constructible finite-Tor bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; no declarations returned; none gives ordinary-etale open scalar tensor with evaluation and constructible finite-Tor bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_counit_app_app|toOpen_res|toOpen_res_apply",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"47468dc498a7fa9a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean; none gives ordinary-etale open scalar tensor with evaluation and constructible finite-Tor bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-dualizing",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraphs 2-3: tensor identifications needed for locality; canonical open tensor evaluation and finite-Tor input domains",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-dualizing-open-tensor",
+  "worker": "stage1",
+  "summary": "Five-step split with no new nodes: ordinary-etale flat models, normalized B-linear open scalar comparison, sectionwise counit equality before localization, identical Tor intervals over the two rings, and explicit open/complement cohomology stratifications. Statement unchanged.",
+  "blueprint": "lem-coef-finite-dualizing main-20261015 proof paragraphs 2-3, locality on X and identification of the local map with the global counit-defined map; expands the retained open-tensor steps 22-23.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-etale-scalar-flat-model",
+    "why": "Ordinary-etale bounded flat constructible models and their finite scalar extensions supply the precise Tor interval; the unit has no model-construction lemma."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact restriction of constant-module complexes is a generic site tool for checking the open input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-topos pullback preserves K-flat flat-term resolutions and identifies restriction with coefficient tensor."
+   },
+   {
+    "node": "lem-kun-flat-bounded-tor-amplitude",
+    "why": "Generic bounded flat complexes give the Tor bound by definition; this does not replace a duality route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat representatives is needed to prove equality of actual chain maps."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic B-linear computation of derived scalar extension on K-flat representatives."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Ordinary-etale open projection comparison underlying the B-linear map."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The ordinary-etale sheaf counit has the section formula used in the explicit chain equality."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exact ordinary-etale extension carries the displayed representatives and their cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology identification gives H^q(j!K)=j!H^q(K)."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Open-extension base change identifies the restrictions to each locally closed stratum and to the closed complement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-etale-scalar-flat-model",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-a598d69ed",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-a598d69ed (reviewer sub-agent of L); spot-checked: I read the full maths of the five-step split of lem-coef-dualizing-open-tensor. The statement and stmt_deps are unchanged from side-live, which is still unsplit; there are no new nodes and no cycle, and every step is under 2000 characters. Step 1 applies lem-sp-etale-scalar-flat-model on the Noetherian Y with A→A (Stacks 03TT, read). The flat-term K-flat pullback (inverse-image-modules-exact (2), ringed-topoi pullback) and kun-flat-bounded-tor then show that L is ctf. Step 2 shows the chain map (j_!x)⊗b↦j_!(x⊗b) is the pur open-projection map (Stacks 0E8I, read). It is also the normalized q of lem-coef-etale-open-scalar-coherence (a uniqueness predicate on K-flat representatives), so d_L is B-linear and canonical. Step 3 is a genuine chain-level evaluation check using the explicit counit formula of extension-by-zero-adjunction (identity on V over U, 0 otherwise) and sheafification. Step 4 applies the flat model on U with A→B for the exact interval [a,b], j_! preserves flat sheaves, and the Tor bound follows over A and B with no flatness of B over A. Step 5 uses H^q(j_!K)=j_!H^q(K) and 03S6 base change to strata S⊂U (S×_YU=S) and to Z (empty), which gives the stratification clause. Edge cases U=∅, U=Y, m=n and non-flat Z/ℓ²→Z/ℓ all hold. There is no SGA or trf citation, and the 11 tool_uses are generic and accepted. Maintainer note: lem-sp-etale-open-counit-flat-models (Q05, created the same day) overlaps the item's flat-model and counit clauses in the étale case. It is normalized via β_j instead of d_L and lacks the stratification clause. Consider a merge or cross-citation. This is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientDualizingOpenTensor",
+  "declaration": "AlgebraicGeometry.Etale.coefficientDualizingOpenTensor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.openTensorEvaluationZero",
+   "AlgebraicGeometry.Etale.DualizingOpenTensorProperties",
+   "AlgebraicGeometry.Etale.coefficientDualizingOpenTensor"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientDualizingOpenTensor.lean",
+  "statement": "theorem coefficientDualizingOpenTensor (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hdifferent : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) {U Y : Scheme.{u}} [Y.Over (Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsLocallyNoetherian Y] [CompactSpace Y] (j : U ⟶ Y) [IsOpenImmersion j] [QuasiCompact j] (W : DerivedCategoryModule (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) Y) (_hW : WeilConjectures.finiteTorConstructibleEtale l E n (hm.trans hmn) Y W) : @DualizingOpenTensorProperties _ _ _ _ (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn))) (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E m hm)) (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal l E n) (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))) U Y j inferInstance W",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf356c1a7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 499e163e4002; both return points fixed. F1: new def-sf-etale-open-scalar-data (existing:true on unchanged EtaleOpenTensorDefs) owns derivedRestriction, derivedExtension, openRestrictScalarsIso, openScalarRestrictionZero/ExtensionZero, openDerivedRestrictScalarsIso, openScalarExtension, openScalarRestrictionMap; its statement matches the leftAdjointUniq/mateEquiv constructions; record statement verbatim. evaluation now uses openScalarRestrictionMap (defeq to the old asIso.hom), so the isIso theorem is not needed; lem-coef-etale-open-comparison-data dropped; etaleKFlat cited via def-sp-etale-kflat-realization. F2: T_Y=Etale.scalarExtension (abbrev of pbcFixedScalarExtension) cites def-weil-pbc-witness-compatibility; new def-sf-etale-sheaf-scalar-extension owns small-etale etaleSheafExtendScalars and its adjunction (Stacks 03EK, verbatim lines 79-81). No duplicates: def-sp-open-scalar-operations is pro-etale. Only Lean change is that one term; changed dep records equal side-live. Clauses, edge cases (U empty, U=Y, m=n, non-flat Z/l^2->Z/l, a=b), docstrings and the single sorry checked. Advisory: small-etale extension-by-zero adjunctions are owned only by theorem nodes (base-era gap, maintainer note). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T094803-L-3259148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

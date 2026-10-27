@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-finite-quotient-pullback-descent",
+ "kind": "statement",
+ "title": "Normalized K-flat descent of finite quotient pullback",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbb{Q}_{\\ell}$ [def-weil-l-adic-coefficient-extension], schemes $X,Y$, a morphism $f:X\\to Y$ and natural numbers $n\\leq m$. Use the finite intrinsic exact pullbacks [def-weil-derived-pullback-tensor-hom], the actual quotient extensions and their derived functors and universal K-flat models [lem-coef-derived-system-evaluation-calculus], and independent-coefficient K-flatness [def-pc-kflat-complex]. Given any natural isomorphism c between the cochain functors obtained by applying pullback at level m followed by quotient extension over X and quotient extension over Y followed by pullback at level n, and assuming pullback at level m preserves all K-flat complexes, there is a unique natural isomorphism between the corresponding two derived composites whose component square on every K-flat representative uses precisely the universal quotient-model homs, the exact-pullback factorization homs, and the termwise map of c. Write p,q for the two ordinary pullbacks, S,T for the derived quotient extensions over Y,X, respectively, phi_p,phi_q for exact-pullback localization factors and kappa_Y,kappa_X for the canonical quotient-model homs. For each K-flat P the required equation is e_(Q(P)) followed by Dq(kappa_Y(P)) followed by phi_q(s_Y(P)) equals T(phi_p(P)) followed by kappa_X(p(P)) followed by Q(c_P), where c_P is the component of the given cochain comparison. Finiteness of the coefficient quotients is supplied by [def-pur-finite-pullback-tensor-construction]. No boundedness, termwise flatness, constructibility or invertibility-of-l assumption is added.",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pc-kflat-complex",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, lemma-pullback-tensor-product; K-flat computation and localization of ordinary pullback/tensor comparison."
+ },
+ "proof": [
+  {
+   "text": "Transport each actual universal quotient counit from homotopy localization to cochain localization using derivedCochainCounit. The component identity for that transport and the identity quotient/localization factors identify its hom on any K-flat complex with coefficientFiniteQuotientModel.hom.",
+   "uses": [
+    "def-derived-cochain-counit",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use kflatWhiskering to obtain full faithfulness of restriction to K-flat representatives. More explicitly, resolve homotopy-category objects by K-flat complexes, apply resolvingRepresentativesFullyFaithfulWhiskering and restrict its fully faithful product restriction along the diagonal. Form two transformations on cochain localization: the exact source pullback factor followed by the target quotient counit and the given comparison c; and the source quotient counit followed by the exact target pullback factor. They are isomorphisms on K-flat representatives, the first by the given K-flat preservation hypothesis and the second directly by the quotient computation. Apply the existing normalizedComparisonDescent: full faithfulness lifts the ratio of the two invertible restrictions uniquely to an isomorphism of the derived composites.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the two counit components as the prescribed quotient-model homs and reverse the resulting equality. The existence square and the uniqueness equation of normalizedComparisonDescent become exactly the stated normalization square. This works unchanged for m=n, n=0, zero complexes and empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-derived-cochain-counit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; fully faithful K-flat descent, with both universal quotient counits and the given cochain comparison fixed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism on derived categories uniquely determined on K-flat representatives by a natural isomorphism on complexes",
+   "results": "Generic localization and exact-functor factorization results; no finite coefficient quotient comparison. Project search found the already proved derivedComparison and kflatWhiskering helpers.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing project helpers and quotient counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "Generic descent of natural isomorphisms through localization. This alone does not handle a nonexact quotient extension on arbitrary representatives.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing K-flat resolving-representative descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedComparisonDescent|derivedCochainCounit",
+   "results": "msearch grep found no Mathlib hit. Repository rg found the project helpers in IntegralComparisonSequenceSystems and ExactEquivalenceDerivedSquares.",
+   "date": "2026-10-27",
+   "verdict": "Use those proved helpers; no new unproved analytic or geometric assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The sentence that the coefficient-twist actions commute with finite reduction and scalar extension to Qlbar: the finite quotient/pullback counit square used through lem-pur-derived-pullback-tensor-iso and its completed comparison.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientPullbackDescent",
+  "file": "lean/Sheaf/Paper/FiniteQuotientPullbackDescent.lean",
+  "declaration": "WeilConjectures.finiteQuotientPullbackDescent",
+  "declarations": [
+   "WeilConjectures.finiteQuotientPullbackDescent"
+  ],
+  "statement": "theorem finiteQuotientPullbackDescent {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {m n : ℕ} (h : n ≤ m)\n    (c : (sfIntrinsicPullback\n        (finiteCoefficientRing l E (m + 1)) f).mapHomologicalComplex (.up ℤ) ⋙\n        (coefficientFiniteQuotientExtension l E X h).mapHomologicalComplex (.up ℤ) ≅\n      (coefficientFiniteQuotientExtension l E Y h).mapHomologicalComplex (.up ℤ) ⋙\n        (sfIntrinsicPullback\n          (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex (.up ℤ))\n    (hgood : ∀ (P : CochainComplex (normalizedDVRModules l E Y m) ℤ),\n      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (R := integralCoefficientCommRingSheaf l E Y m) P →\n      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (R := integralCoefficientCommRingSheaf l E X m)\n        (((sfIntrinsicPullback\n          (finiteCoefficientRing l E (m + 1)) f).mapHomologicalComplex (.up ℤ)).obj P)) :\n    ∃! e : finiteDerivedPullback l E m f ⋙ coefficientFiniteQuotientDerived l E X h ≅\n      coefficientFiniteQuotientDerived l E Y h ⋙ finiteDerivedPullback l E n f,\n      ∀ (P : CochainComplex (normalizedDVRModules l E Y m) ℤ)\n        (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (R := integralCoefficientCommRingSheaf l E Y m) P),\n        e.hom.app (DerivedCategory.Q.obj P) ≫\n          (finiteDerivedPullback l E n f).map\n            (coefficientFiniteQuotientModel l E Y h P hP).hom ≫\n          (sfIntrinsicPullback\n            (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ =\n        (coefficientFiniteQuotientDerived l E X h).map\n          ((sfIntrinsicPullback\n            (finiteCoefficientRing l E (m + 1)) f).mapDerivedCategoryFactors.hom.app P) ≫\n          (coefficientFiniteQuotientModel l E X h _ (hgood P hP)).hom ≫\n          DerivedCategory.Q.map (c.hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-929b0",
+  "group": "V4",
+  "result": "fix",
+  "landing": "20261026T235951-L-1474437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-929b0",
+  "group": "V4",
+  "result": "fix",
+  "landing": "20261026T235951-L-1474437",
+  "kind": "interface",
+  "note": "independent cc review: Removed 918-line block of published CompletedPullbackTensorComparison vs new CompletedPullbackTowerRealizations (verbatim, only blueprint tags/section wrapper differ); item node vs Lean statements; 21 direct importers compiled against sandbox build of the 3 delivered modules (all exit 0); #print axioms of finiteQuotientPullbackDescent (clean) and pullbackTensorQuotient_existsUnique (sorryAx only via pullbackTensorQuotientOrdinary)"
+ }
+}

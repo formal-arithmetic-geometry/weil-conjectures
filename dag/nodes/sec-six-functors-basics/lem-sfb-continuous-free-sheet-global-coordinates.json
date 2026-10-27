@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-continuous-free-sheet-global-coordinates",
+ "kind": "statement",
+ "title": "Global scalar-compatible free coordinates with independent integral ranks",
+ "statement": "Fix a prime $l$, a finite-dimensional totally disconnected normed $\\mathbf Q_l$-extension $E$, and $A=\\operatorname{continuousIntegers}(l,E)$ [def-weil-pbc-continuous-integral-coefficients]. Let $p:U\\to X$, $g:Y\\to X$, $t_j:Y\\to U$ for $j\\in\\operatorname{Fin}(d)$ satisfy $t_jp=g$. Let $P$ be an internal continuous $E$-module on $X$, $M$ an internal continuous $A$-module on $U$, and $e:\\operatorname{Ext}(M)\\cong p^*P$. Suppose $g^*P$ and all $t_j^*M$ are globally finite free. There exist a rational rank $r$, independent integral ranks $n_j$, continuous-function presentations [def-sfb-continuous-function-module-presentation] $c$ of $\\operatorname{Res}(g^*P)$ by $E^r$ and $b_j$ of $t_j^*M$ by $A^{n_j}$, and $C(B,E)$-linear equivalences $F_{j,B}:C(B,E^{n_j})\\cong C(B,E^r)$ natural in every pro-etale $B/Y$. For every section $x$, $c(f_j(x))=F_{j,B}(\\operatorname{incl}(b_j(x)))$, where $f_j$ is the actual normalized sheet map [def-sfb-finite-etale-lattice-sheet-maps]. No equality of ranks, matrices, invertibility of a pointwise matrix, or open-restriction assertion is included.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-sfb-continuous-function-module-presentation",
+  "def-sfb-finite-etale-lattice-sheet-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraphs 1--2: split the finite etale morphism and choose the rational and integral local frames, before making their matrix cosets constant"
+ },
+ "proof": [
+  {
+   "text": "Choose the finite free rational frame of rank r and each integral frame of its own rank n_j. Extend the integral frame by scalars. The regular-module scalar-extension isomorphism and its unit equation identify extension of the finite biproduct with the rational finite free object of rank n_j.",
+   "uses": [
+    "lem-sfb-regular-scalar-extension-multiplication"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use pullIso on t_j, then the pullback of e and upperStarComp, to identify this rationalized integral module with g*P. The inverse restriction/pullback comparison is the mate of the restriction/pushforward comparison; thus the adjoint of this rational isomorphism is exactly finiteEtaleLatticeSheetEmbedding, including its specified target normalization.",
+   "uses": [
+    "new-comap-upper-star-iso-mate",
+    "def-sfb-finite-etale-lattice-sheet-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Encode the rational and integral finite free frames by finite products of continuous coefficient functions, using continuousRingFreeIso and the scalar-restriction comparison. The rational frame comparisons give the natural E-linear equivalences F on every test object. The unit equation from the first step identifies the integral-coordinate inclusion with the scalar-extension unit, so the normalized map of the second step gives the stated global equation. No ranks are identified and no point or open restriction is used.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-regular-scalar-extension-multiplication",
+  "new-comap-upper-star-iso-mate",
+  "def-sfb-finite-etale-lattice-sheet-maps",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraphs 1--2: split the finite etale morphism and choose the rational and integral local frames, before making their matrix cosets constant",
+  "note": "Strict part of the original argument; rank comparison and extraction of continuous inverse matrices are proved in the parent item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free module sheaf scalar extension unit has coefficient inclusion as its coordinates",
+   "results": "ModuleCat.extendRestrictScalarsAdj_unit_app_apply and SheafOfModules.ιFree; no equation for the normalized internal sheet morphism or restriction of its presentations.",
+   "verdict": "The ordinary tensor unit formula is useful but does not supply the continuous internal frame or restriction normalization.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finite free sheaves of continuous functions is a matrix of continuous functions",
+   "results": "SheafOfModules.freeMap, freeHomEquiv, map_ιFree_mapFree_hom and Condensed.finFree; no global scalar-compatible charts for the actual normalized sheet map.",
+   "verdict": "No exact match; the matrix calculation is proved directly in the parent item.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarComp\"",
+   "results": "No hits. Local declarations provide composition and coefficient comparisons but not the required coordinate normalizations.",
+   "verdict": "No exact match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousRingFreeIso; continuousRing_comap_compatibility; sheet.*restrict; restrict.*sheet; continuous.*coordinate",
+   "results": "ContinuousCoefficientModuleEncoding gives finite free and scalar-restriction identifications. ContinuousModuleEncodingRestriction gives objectwise presheaf restriction isomorphisms. ComapUpperStarIsoMate and ComapUpperStarIsoComposition give the canonical mate and composition laws. No duplicate global coordinate theorem or coordinate restriction theorem was found in Mathlib, WeilConjectures or Sheaf. Blueprint searches for continuous coordinates restriction and free sheet frame gave zero matches.",
+   "verdict": "The new statements isolate the two categorical comparison arguments, excluding rank comparison and matrix extraction, which the parent proves.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFreeSheetFrames",
+  "date": "2026-10-27",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, paragraphs 1--2: split the finite etale morphism and choose the rational and integral local frames, before making their matrix cosets constant; global frame construction before rank comparison and matrix extraction",
+   "via": [
+    "lem-sfb-continuous-free-sheet-frames",
+    "lem-sfb-continuous-finite-etale-sheet-matrices",
+    "lem-sfb-continuous-finite-etale-lattice-sheet-charts",
+    "lem-sfb-continuous-finite-etale-trace-image-charts",
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFreeSheetGlobalCoordinates",
+  "file": "lean/Sheaf/Paper/ContinuousFreeSheetGlobalCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFreeSheet_globalCoordinates",
+  "statement": "theorem continuousFreeSheet_globalCoordinates\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [TotallyDisconnectedSpace E] {X U Y : Scheme.{u}}\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (p : U ⟶ X)\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) U))\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap l E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P)\n    (g : Y ⟶ X) (d : ℕ) (t : Fin d → (Y ⟶ U)) (w : ∀ j, t j ≫ p = g)\n    (hP : Mod.IsFree (condensedRingObj (Profinite.continuousMapRingObj E) Y)\n      ((upperStar (Profinite.continuousMapRingObj E) g).obj P))\n    (hM : ∀ j, Mod.IsFree (condensedRingObj (integralCoeff l E) Y)\n      ((upperStar (integralCoeff l E) (t j)).obj M)) :\n    ∃ (r : ℕ) (n : Fin d → ℕ) (c : ContinuousFunctionPresentation Y (continuousIntegers l E)\n        (Fin r → E) ((Mod.comap (coefficientMap (integralScalarMap l E) Y)).obj\n          ((upperStar (Profinite.continuousMapRingObj E) g).obj P)))\n      (b : ∀ j, ContinuousFunctionPresentation Y (continuousIntegers l E)\n        (Fin (n j) → continuousIntegers l E) ((upperStar (integralCoeff l E) (t j)).obj M))\n      (F : ∀ (j : Fin d) (B : Y.ProEt),\n        C(B.left, Fin (n j) → E) ≃ₗ[C(B.left, E)] C(B.left, Fin r → E)),\n      (∀ (j : Fin d) (B D : Y.ProEt) (a : D ⟶ B) (x : C(B.left, Fin (n j) → E)),\n        F j D (x.comp a.left.base.hom) = (F j B x).comp a.left.base.hom) ∧\n      ∀ (j : Fin d) (B : Y.ProEt)\n        (x : ((continuousRingModuleEquivalence Y (continuousIntegers l E)).functor.obj\n          ((upperStar (integralCoeff l E) (t j)).obj M)).val.obj (op B)),\n        c.sections B\n          (((continuousRingModuleEquivalence Y (continuousIntegers l E)).functor.map\n            (finiteEtaleLatticeSheetEmbedding (integralScalarMap l E) P p M e\n              g (t j) (w j))).val.app (op B) x) =\n          F j B (continuousIntegralVector (continuousIntegers l E) ((b j).sections B x))",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegralVector",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFreeSheet_globalCoordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T202202-L-3441789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T202202-L-3441789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

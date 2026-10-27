@@ -1,0 +1,206 @@
+{
+ "id": "lem-per-pulled-quotient-unit-normalization",
+ "kind": "statement",
+ "title": "Normalization of the pulled quotient-tower completion unit",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$ and $\\varpi$ a uniformizer [def-weil-l-adic-coefficient-extension]. Let $g:X'\\to X$ be a morphism between noetherian finite-dimensional schemes on which $\\ell$ is invertible. On their small pro-etale sites [def-weil-pbc-proetale-site] put $B_W=\\varprojlim_{n\\geq1}(A/\\varpi^n)_W$ for $W=X,X'$ [def-weil-pbc-adic-coefficient-datum]. Use module sheaves and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and sheaf tensors [def-pur-sheaf-tensor-product]. Let $c_g:g^{-1}B_X\\to B_{X'}$ be the projection-defined map of [def-weil-pbc-completed-pullback], and put $P_gK=B_{X'}\\otimes^L_{g^{-1}B_X}g^{-1}K$. For every intrinsically derived $\\varpi$-complete $K\\in D(B_X)$ [def-weil-pbc-intrinsic-completion], let $\\widehat P_gK$ and $\\gamma_{g,K}:P_gK\\to\\widehat P_gK$ be exactly the completed pullback and unit of [def-weil-pbc-completed-pullback]. For $W=X,X'$ write $\\Delta_W$ for the constant strict tower functor and\n$$\\mathcal T_W(M)=\\Delta_WM\\otimes^L_{\\Delta_WB_W}((A/\\varpi^n)_W)_n,$$\nwith strict quotient transitions and quotient augmentation $i_{W,M}:\\Delta_WM\\to\\mathcal T_W(M)$ [def-weil-pbc-adic-coefficient-datum]. Let $\\lambda_M:M\\to R\\lim\\Delta_WM$ be the specified constant-tower unit and set $u_M=R\\lim(i_{W,M})\\lambda_M$, with $R\\lim$ the derived inverse-limit functor [def-weil-pbc-completed-pullback, def-weil-pbc-derived-inverse-limit, prop-weil-pbc-rlim-functoriality]. The canonical $c_g$ is an isomorphism, compatible with every finite quotient and transition. There is a natural isomorphism of actual derived strict towers\n$$\\tau_K:Lg^*_{\\operatorname{Tow}}\\mathcal T_X(K)\\xrightarrow{\\sim}\\mathcal T_{X'}(P_gK)$$\nwhose value on flat-term K-flat representatives is the ordinary tensor/pullback comparison of [lem-weil-pbc-reduction-pullback-derived-tower]. It satisfies the augmentation equation $\\tau_K Lg^*_{\\operatorname{Tow}}(i_{X,K})=i_{X',P_gK}$ under the canonical constant-tower identification. For $j_K=R\\lim(\\tau_K)$, a natural isomorphism from $\\widehat P_gK$ to $R\\lim\\mathcal T_{X'}(P_gK)$, the equation of actual derived morphisms is\n$$j_K\\gamma_{g,K}=u_{P_gK}.$$\nNeither completeness of $P_gK$ nor invertibility of $\\gamma_{g,K}$ is a hypothesis or a conclusion here.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4)-(5), specified quotient-unit normalization through actual derived strict towers (agent elaboration)"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-profinite-coefficient-inverse-image] with $u=g$ and $Q_n=A/\\varpi^n$. These are finite commutative rings with unital quotient transitions by [def-weil-l-adic-coefficient-extension]. Its projection formula identifies its canonical $c_g$ with exactly the projection-defined map of [def-weil-pbc-completed-pullback]; uniqueness of a map to the limit gives equality, not a choice of coefficient identification. Its two displayed compatibility equations give all finite projections and transitions.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 098T (lemma-morphism-big-small) and 097N (lemma-ind-etale-implies); the finite-coefficient consequence is the cited existing lemma"
+   }
+  },
+  {
+   "text": "Use $c_g$ to identify coefficients. By [def-weil-pbc-proetale-operations], module pullback $F=g^*$ is exact and left adjoint to module direct image, and its induced ordinary derived functor is $P_g$. On strict towers exact termwise pullback computes the left derived pullback specified in [def-weil-pbc-completed-pullback]; it commutes with constant towers through the identity component maps. Apply [lem-weil-pbc-reduction-pullback-derived-tower] to $R_Y=B_X$, $R_X=B_{X\\prime}$ and $Q_{Y,n}=(A/\\varpi^n)_X$, identifying its pulled coefficient tower with $(A/\\varpi^n)_{X\\prime}$ by Step 1. That lemma applies to these small ringed sites and unital algebra transitions, with no completeness assumption. Its natural isomorphism is the required $\\tau_K$ of actual derived strict towers; its representative normalization is precisely the one requested, and its augmentation identity is $\\tau_K Lg^*_{\\operatorname{Tow}}(i_{X,K})=i_{X\\prime,P_gK}$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 07A4 (lemma-pullback-tensor-product); strict augmented normalization supplied by the cited existing tower lemma"
+   }
+  },
+  {
+   "text": "By the actual construction in [def-weil-pbc-completed-pullback], $\\widehat P_gK=R\\lim(Lg^*_{\\operatorname{Tow}}\\mathcal T_X(K))$ and $\\gamma_{g,K}=R\\lim(Lg^*_{\\operatorname{Tow}}i_{X,K})\\lambda_{P_gK}$, with exactly the constant-tower unit used to define $u$. Apply the functor of [prop-weil-pbc-rlim-functoriality] to Step 2. It preserves isomorphisms, so $j_K=R\\lim(\\tau_K)$ is a natural isomorphism, and preservation of composition gives $j_K\\gamma_{g,K}=R\\lim(\\tau_K Lg^*_{\\operatorname{Tow}}i_{X,K})\\lambda_{P_gK}=R\\lim(i_{X\\prime,P_gK})\\lambda_{P_gK}=u_{P_gK}$. This is equality of derived morphisms, obtained from the strict augmentation; it uses no invertibility of the completion unit.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/def-weil-pbc-completed-pullback.md",
+    "place": "Final sentence, comparison is the completion map; elementary functorial calculation for the specified strict quotient unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4)-(5), elaborated using the existing normalized strict-tower pullback lemma; Stacks Tag 099N, lemma-pushforward-Noetherian-case (5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The specified quotient tower completion unit of ordinary ringed topos pullback is identified with the intrinsic strict reduction unit by the normalized reduction tower isomorphism",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.monObjAsOverPullback_one, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality. Inspected candidates give ordinary sheaf pullback units or elementary adic completion, not the actual derived strict quotient-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. Inspected candidates give ordinary sheaf pullback units or elementary adic completion, not the actual derived strict quotient-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*tower|completion.*unit|unit.*completion",
+   "results": "0 hits: . Inspected candidates give ordinary sheaf pullback units or elementary adic completion, not the actual derived strict quotient-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any complex the derived inverse limit of normalized pullback reduction towers composed with the specified completion unit equals the strict quotient augmentation unit",
+   "results": "8 hits: AdicCompletion, Profinite.isoAsLimitConeLift, ProfiniteGrp.isIso_toLimit, Profinite.asLimitConeIso, Profinite.lim, Profinite.asLimit, AdicCompletion.sumInv_comp_sum, Profinite.isIso_asLimitCone_lift. Inspected candidates give ordinary sheaf pullback units or elementary adic completion, not the actual derived strict quotient-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the constant tower adjunction unit identifies completion after pullback with the pulled quotient augmentation",
+   "results": "8 hits: CategoryTheory.Over.postAdjunctionLeft_unit_app_left, CategoryTheory.PullbackShift.adjunction_unit, CategoryTheory.Over.mapPullbackAdj_unit_app, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom_app, CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom_assoc. Inspected candidates give ordinary sheaf pullback units or elementary adic completion, not the actual derived strict quotient-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived strict quotient tower pullback isomorphism preserving the augmentation and its derived inverse limit completion unit",
+   "results": "8 hits: IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', AdicCompletion.congr_symm_apply, AdicCompletion.congr_apply. Ordinary module completion, sheaf pullback, or ordinary limits; none states the derived strict quotient-tower comparison with its specified completion-unit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*tower|completion.*unit|unit.*completion",
+   "results": "15 hits: Mathlib/Topology/Algebra/Valued/ValuedField.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean. Ordinary module completion, sheaf pullback, or ordinary limits; none states the derived strict quotient-tower comparison with its specified completion-unit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of quotient tower augmentation defines the completion unit and commutes with an augmented tower isomorphism",
+   "results": "8 hits: AdicCompletion, ProfiniteGrp.isIso_toLimit, AdicCompletion.subring, AdicCompletion.instAddCommGroup, AdicCompletion.instCommRing, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.submodule, Profinite.isIso_asLimitCone_lift. Ordinary module completion, sheaf pullback, or ordinary limits; none states the derived strict quotient-tower comparison with its specified completion-unit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. Ordinary module completion, sheaf pullback, or ordinary limits; none states the derived strict quotient-tower comparison with its specified completion-unit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a constant diagram derived limit unit identifies augmented reduction tower completion under exact inverse image of module sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓNatIsoLim, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac_assoc, localCohomology.diagramComp, Condensed.isColimitLocallyConstantPresheaf_desc_apply, SheafOfModules.Presentation.map_π_eq. Ordinary module completion, sheaf pullback, or ordinary limits; none states the derived strict quotient-tower comparison with its specified completion-unit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-realization-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph of lem-per-smooth-pullback-t-exact: exactness of pullback via coefficient realization; normalization of the specified completion unit (retained old item step 3).",
+   "via": [
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-pulled-quotient-unit-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficient categories unchanged. Reused the existing profinite coefficient inverse-image and normalized strict reduction/pullback lemmas. Identified their hypotheses using the published exact pro-etale module operations and computed the actual unit equation by functoriality of Rlim. No new nodes.",
+  "blueprint": "Realizes the coefficient-realization detail below the first paragraph of lem-per-smooth-pullback-t-exact, through the existing rational-realization pullback comparison chain; normalized completed pullback is the completion-map assertion in def-weil-pbc-completed-pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic canonical inverse-image comparison for finite ring towers; the perverse unit supplies no coefficient-ring comparison."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-pullback-derived-tower",
+    "why": "Generic normalized pullback comparison of augmented derived strict algebra towers; this supplies the coefficient realization needed below the perverse pullback argument."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic actual derived inverse-limit functor used to apply the augmentation identity; no perverse-specific theorem gives this functor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-257c92125",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-257c92125 (reviewer sub-agent of L); spot-checked: I read the item and all its cited statements in full. Shape: first split of a statement-only node created by Q147 on 2026-10-22; no repair note, no new nodes, statement and stmt_deps kept, proof_deps equal to the union of the step uses, no SGA source. Step 1: lem-weil-pbc-profinite-coefficient-inverse-image applies with Q_n=O_E/ϖ^n, which def-weil-l-adic-coefficient-extension makes finite local rings with unital transitions. Its c_{u,n} is the constant-section adjoint of prop-weil-pbc-proetale-constant-ring-map, so the projection-defined c_g of def-weil-pbc-completed-pullback equals its isomorphism c_u by uniqueness into the limit; the projection and transition equations hold. Step 2: def-weil-pbc-proetale-operations with c=c_g makes g^* exact, so the K-flat-class derived tower pullback Lg^*_Tow is computed termwise. lem-weil-pbc-reduction-pullback-derived-tower has small sites, an identified ring and a unital algebra tower as hypotheses, all checked; both Step 1 equations identify FQ_{Y,n} with (A/ϖ^n)_{X'} as B_{X'}-algebras, and its augmentation identity is stated under the same identification F^TowΔ=ΔF that the def uses. Step 3 is elementary: γ=Rlim(Lg^*_Tow i)λ by the def, and functoriality of Rlim (prop-weil-pbc-rlim-functoriality) gives jγ=Rlim(τ∘Lg^*_Tow i)λ=u. The citer lem-per-rational-realization-pullback-comparison step 2 uses exactly this. Sources: Stacks 099N(5) and its proof (Lf^* commutes with ⊗^L, Lf^*Λ/I^n=Λ/I^n); BS Lemma 6.5.9(4)-(5), pp. 50-51, as context; blueprint_update of def-weil-pbc-completed-pullback (the comparison is the completion map). Edge cases g=id, K=0 and empty X' hold. The 3 tool uses of sk-thm-properbasechange generic nodes are accepted; the same nodes are already accepted tool uses elsewhere. Maintainer note: this item is a specialization of identity (1) of the already reviewed lem-weil-pbc-completed-target-augmentation-normalization (Q109; take (h,L)=(g,K), A=O_E, I=(ϖ)), proved by the same steps; it is a merge or cite candidate, not a delivery fault. No changes."
+ }
+}

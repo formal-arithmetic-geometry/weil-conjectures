@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-dg-countable-subalgebra",
+ "kind": "statement",
+ "title": "Countable DG subalgebra with the same cohomology",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Assume $H^i(A)$ is countable for every $i\\in\\mathbf Z$. There is a unital differential graded subalgebra $A_0\\subseteq A$ such that the set $\\coprod_{i\\in\\mathbf Z}A_0^i$ is countable and the inclusion induces isomorphisms $H^i(A_0)\\xrightarrow{\\sim}H^i(A)$ for all $i$. A differential graded subalgebra means graded additive subgroups containing the unit, closed under multiplication and differential.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, proof (2) to (1), paragraph constructing the countable DG subalgebra A-prime."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Work with the set of homogeneous elements $X=\\coprod_{i\\in\\mathbf Z}A^i$, retaining the degree as part of each element. For any subset $T\\subseteq X$, define $T_0=T\\cup\\{1\\}\\cup\\{0_i:i\\in\\mathbf Z\\}$. Recursively let $T_{r+1}$ contain $T_r$, all negatives and differentials of its elements, all sums of pairs of its elements of the same degree, and all products of pairs of its elements. Put $C(T)^i=\\{a\\in A^i:(i,a)\\in\\bigcup_{r\\geq0}T_r\\}$. If two elements occur at stages $r,s$, both occur at stage $\\max(r,s)$; their sum when defined and their product occur at the next stage. Negatives and differentials also occur at the next stage. Thus these sets are additive subgroups, contain the unit, and are closed under multiplication and differential. All DG identities restrict from $A$. This gives a unital DG subalgebra containing $T$. If $T\\subseteq T'$, induction on $r$ gives $C(T)\\subseteq C(T')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+   }
+  },
+  {
+   "text": "If $T$ is countable in the sense of [def-sfb-countable-set], every $T_r$ and hence $\\coprod_i C(T)^i$ is countable, as follows using [lem-trf-countable-unions]. Integers are enumerated by $0,1,-1,2,-2,\\ldots$, so the degree-tagged zeros form a countable union of singletons. A singleton injects into $\\mathbf N$. Consequently $T_0$ is countable by the binary-union clause. Given countability of $T_r$, the unary-operation values form unions of singletons indexed by $T_r$; the binary-operation values form a union indexed by $x\\in T_r$ of unions of singletons indexed by $y\\in T_r$ (use the empty set for a sum of unequal degrees). The restricted-union clause, applied once for unary and twice for binary values, makes each of these sets countable. Finitely many binary unions show $T_{r+1}$ is countable. Induction and the sequence-union clause now show $\\bigcup_r T_r$ is countable, proving the assertion. The empty set injects into $\\mathbf N$, so no operation's indexing subset need be nonempty.",
+   "uses": [
+    "def-sfb-countable-set",
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+   }
+  },
+  {
+   "text": "For every $i\\in\\mathbf Z$ and every class $h\\in H^i(A)=\\ker(d:A^i\\to A^{i+1})/\\operatorname{im}(d:A^{i-1}\\to A^i)$, choose a representing cycle $z_{i,h}$. Let $S$ be the set of these degree-tagged cycles. For each fixed $i$, its elements form a union of singletons indexed by the countable set $H^i(A)$; then take the union over the countable integer degrees. The restricted-union and sequence-union clauses of [lem-trf-countable-unions] make $S$ countable. Set $B_1=C(S)$. Steps 1–2 show that $B_1$ is a countable unital DG subalgebra. The chosen cycle representing every class lies in $B_1$, so $H^i(B_1)\\to H^i(A)$ is surjective for every $i$.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+   }
+  },
+  {
+   "text": "Inductively suppose the countable unital DG subalgebra $B_n\\subseteq A$ has been constructed. For every degree-tagged $a\\in B_n^i$ with $d(a)=0$ and $a=d(b)$ for some $b\\in A^{i-1}$, choose one such $b=b_a$. The indexing set is a subset of the countable set $\\coprod_iB_n^i$, so an injection of the latter into $\\mathbf N$ restricts to it. The set $P_n$ of chosen degree-tagged $b_a$ is countable by [lem-trf-countable-unions], being the union of its singleton values over that indexing set. Define $B_{n+1}=C((\\coprod_iB_n^i)\\cup P_n)$. The binary-union clause and Step 2 make this countable; Step 1 gives $B_n\\subseteq B_{n+1}\\subseteq A$. Every cycle of $B_n$ that is a boundary in $A$ is now a boundary in $B_{n+1}$, because its chosen $b_a$ belongs there. Conversely a boundary in $B_{n+1}$ is a boundary in $A$, since the inclusion commutes with $d$. Thus, in every degree, the kernels of $H^i(B_n)\\to H^i(B_{n+1})$ and $H^i(B_n)\\to H^i(A)$ coincide. This recursively defines the whole increasing sequence; only choices of actual primitives of boundaries were used.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+   }
+  },
+  {
+   "text": "Put $A_0^i=\\bigcup_{n\\geq1} B_n^i$. Given two homogeneous elements in this union, choose the maximum of stages containing them; the additive subgroup and product closure in that stage give closure under sums, negatives and products in $A_0$. The unit lies in $B_1$, and the differential of an element stays in its stage. Thus $A_0$ is a unital DG subalgebra of $A$. Its degree-tagged underlying set is $\\bigcup_{n\\geq1}(\\coprod_iB_n^i)$, countable by the sequence-union clause of [lem-trf-countable-unions].",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+   }
+  },
+  {
+   "text": "Fix $i$. Every class of $H^i(A)$ has its chosen representative in $B_1^i\\subseteq A_0^i$, still a cycle, giving surjectivity of $H^i(A_0)\\to H^i(A)$. If a class in $H^i(A_0)$ maps to zero, represent it by a cycle $a\\in A_0^i$ and choose $n$ with $a\\in B_n^i$. Since the differential on $B_n$ is the restriction of that on $A$, this is a cycle in $B_n$ and a boundary in $A$. Step 4 supplied $b_a\\in B_{n+1}^{i-1}\\subseteq A_0^{i-1}$ with $d(b_a)=a$. Hence the class was zero already in $H^i(A_0)$, giving injectivity. The inclusion is a cochain map, so its induced maps are group homomorphisms; the established bijections are the required cohomology isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-countable-set",
+  "lem-trf-countable-unions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable DG subalgebra construction, lines 7095–7116."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable.*[Ss]ubalgebra|[Ss]ubalgebra.*[Cc]ountable|[Cc]ountable.*[Qq]uasi[Ii]so",
+   "results": "Hits: Mathlib/MeasureTheory/Measure/FiniteMeasureExt.lean, Mathlib/MeasureTheory/Measure/FiniteMeasureExt.lean, Mathlib/MeasureTheory/Measure/FiniteMeasureExt.lean, Mathlib/MeasureTheory/Measure/LevyConvergence.lean, Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary algebraic countability, bounded representatives and K-projectivity do not construct a DG subalgebra inducing all cohomology isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Subalgebra\", \"quasiIso\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary algebraic countability, bounded representatives and K-projectivity do not construct a DG subalgebra inducing all cohomology isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable cohomology of a differential graded algebra gives a countable quasi isomorphic subalgebra",
+   "results": "Hits: CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CategoryTheory.CountableCategory, SetCoe.countable, FirstOrder.Language.Substructure.CG, instCountableFreeAbelianGroup, CategoryTheory.CountableCategory.instCountableObjAsType, FirstOrder.Language.Substructure.cg_def",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary algebraic countability, bounded representatives and K-projectivity do not construct a DG subalgebra inducing all cohomology isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded algebra with countable cohomology contains a countable quasi isomorphic differential graded subalgebra",
+   "results": "Hits: Algebraic.countable, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.IsKProjective, CochainComplex.IsKInjective, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary algebraic countability, bounded representatives and K-projectivity do not construct a DG subalgebra inducing all cohomology isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A DG ring whose graded cohomology groups are countable has a countable differential stable graded subring inducing isomorphisms on cohomology",
+   "results": "Hits: CochainComplex.IsKProjective, CochainComplex.IsKInjective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.isKProjective_of_projective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary algebraic countability, bounded representatives and K-projectivity do not construct a DG subalgebra inducing all cohomology isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable.*[Ss]ubalgebra|[Ss]ubalgebra.*[Cc]ountable|[Cc]ountable.*[Qq]uasi[Ii]so",
+   "results": "{\"t\": \"2026-10-23T23:53:51Z\", \"tool\": \"grep\", \"query\": \"[Cc]ountable.*[Ss]ubalgebra|[Ss]ubalgebra.*[Cc]ountable|[Cc]ountable.*[Qq]uasi[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/FiniteMeasureExt.lean\", \"Mathlib/MeasureTheory/Measure/FiniteMeasureExt.lean\", \"Mathlib/MeasureTheory/Measure/FiniteMeasureExt.lean\", \"Mathlib/MeasureTheory/Measure/LevyConvergence.lean\", \"Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean\"], \"digest\": \"0fa16dbb36705168\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern truncations, K-projectivity, algebraic elements or ordinary countability, not a countable DG subalgebra with all cohomology isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable cohomology of a differential graded algebra gives a countable quasi isomorphic subalgebra",
+   "results": "{\"t\": \"2026-10-23T23:53:51Z\", \"tool\": \"leansearch\", \"query\": \"Countable cohomology of a differential graded algebra gives a countable quasi isomorphic subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"CategoryTheory.CountableCategory\", \"SetCoe.countable\", \"FirstOrder.Language.Substructure.CG\", \"instCountableFreeAbelianGroup\", \"CategoryTheory.CountableCategory.instCountableObjAsType\", \"FirstOrder.Language.Substructure.cg_def\"], \"digest\": \"88396416de7899ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern truncations, K-projectivity, algebraic elements or ordinary countability, not a countable DG subalgebra with all cohomology isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Subalgebra\", \"quasiIso\"",
+   "results": "{\"t\": \"2026-10-23T23:53:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Subalgebra\\\", \\\"quasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern truncations, K-projectivity, algebraic elements or ordinary countability, not a countable DG subalgebra with all cohomology isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded algebra with countable cohomology contains a countable quasi isomorphic differential graded subalgebra",
+   "results": "{\"t\": \"2026-10-23T23:53:52Z\", \"tool\": \"leanfinder\", \"query\": \"A differential graded algebra with countable cohomology contains a countable quasi isomorphic differential graded subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebraic.countable\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"7295314327a8d121\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern truncations, K-projectivity, algebraic elements or ordinary countability, not a countable DG subalgebra with all cohomology isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A DG ring whose graded cohomology groups are countable has a countable differential stable graded subring inducing isomorphisms on cohomology",
+   "results": "{\"t\": \"2026-10-23T23:54:15Z\", \"tool\": \"leanfinder\", \"query\": \"A DG ring whose graded cohomology groups are countable has a countable differential stable graded subring inducing isomorphisms on cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_of_projective\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\"], \"digest\": \"c10459cbd21df992\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern truncations, K-projectivity, algebraic elements or ordinary countability, not a countable DG subalgebra with all cohomology isomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-compact-telescope",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRM, lemma-countable, proof (2) to (1), paragraph constructing the countable DG subalgebra A-prime.",
+   "via": [
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-countable-subalgebra",
+  "worker": "stage1",
+  "summary": "Expanded the full countable DG-subalgebra construction of Tag 0CRM into homogeneous finitary closure, explicit countability via the existing countable-unions Mathlib leaf, cycle representatives, recursive adjunction of primitives, and a direct proof of the cohomology isomorphisms. No new nodes, no change to the statement, and no project attachment.",
+  "blueprint": "Retains the inherited from.node=null and via chain (the ancestor command prints None). The recorded historical support place is proof (3) of det-thm-sf-ctf-stability-direct-images, through 0CX8/0CRW/0CRV to 0CRM. Steps 1–6 realize precisely the paragraph constructing A-prime in 0CRM; the latest blueprint direct-images proof was read, and no chapter or unit route is replaced. The whole-blueprint countable search gives no same statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-c3a450416",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-c3a450416 (reviewer sub-agent of L); spot-checked: I read the item in full. Statement, stmt_deps, source and blueprint fields are unchanged from the unsplit base (compared with the Q29 snapshots). The node is still unsplit in live and side-live, there is no re-split note, there are no new nodes and there is no SGA citation. The six steps follow Stacks dga.tex Tag 0CRM lines 7095-7116 exactly: homogeneous closure C(T); countability through the restricted, sequence and binary union clauses; B_1 from one cycle per class; B_{n+1} adjoins primitives of the cycles of B_n that bound in A, which gives equal kernels; A_0 = union of the B_n; the isomorphism on H^i (surjective by B_1, injective via b_a). Edge cases checked: A=0, acyclic A with 1 a boundary, uncountable A, unbounded grading, empty index sets. proof_deps equal the union of uses. Dup search (0CRM, countable DG subalgebra) finds only the parent telescope and sibling DG nodes; none states this claim. Batch-5 flag: lem-trf-countable-unions is a status-mathlib leaf for general countable unions (Set.Countable.biUnion, Set.countable_iUnion, Set.Countable.union) with an empty proof. It is genuinely outside the trace-formula and Poincare-duality assumptions; only its chapter label is sec-trace-formula. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCountableSubalgebra",
+  "declaration": "CategoryTheory.DgAlgebra.exists_countable_quasiIso_subalgebra",
+  "file": "lean/Sheaf/CategoryTheory/DgCountableSubalgebra.lean",
+  "statement": "theorem exists_countable_quasiIso_subalgebra (A : Algebra.{u}) (hcount : ∀ i : ℤ, Countable (A.X.homology i)) : ∃ (A₀ : Algebra.{u}) (ι : A₀ ⟶ A), (∀ i : ℤ, Function.Injective (ι.hom.f i)) ∧ Countable (Σ i : ℤ, A₀.X.X i) ∧ QuasiIso ι.hom",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "A DG subalgebra is represented by a degreewise injective unital DG algebra morphism. Its degreewise images are the stated additive subgroups, with the induced differential and multiplication. Reuses the landed Algebra interface from def-sfb-dg-derived-category; no triangulation hypothesis is needed for this algebra-level result."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b83c4fad",
+  "group": "NU",
+  "result": "pass",
+  "note": "Item lean record + landed stmt_dep def-sfb-dg-derived-category only (statement/source/proof unchanged vs side-live). Matches Stacks 0CRM (2)=>(1) A' paragraph: A : Algebra.{u} (Mon in ℤ-cochain complexes of ULift ℤ-modules, unital assoc, no commutativity); hcount ∀ i, Countable (homology i) exact; subalgebra = ∃ A₀, Mon.Hom ι degreewise injective (equivalent to the subgroups closed under unit/product/d, same universe); Countable (Σ i, A₀.X.X i) degree-tagged; QuasiIso ι.hom = induced maps iso. Edge cases zero/acyclic/unbounded fine; derived-form rule n/a. Docstrings: source, blueprint tag, 6 proof steps; sorry only; no new defs; lean.statement verbatim; report has Worker report + Second reading by NU. No duplicate found. No file changed, no compile."
+ }
+}

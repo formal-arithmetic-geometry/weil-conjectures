@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-completed-affine-pattern-cover",
+ "kind": "statement",
+ "title": "Closed pattern cover for finite completed coefficient cancellation",
+ "statement": "Let l be prime, X a scheme with pro-etale site [def-weil-pbc-proetale-site], U a pro-affine etale object [sk-def-pe-morphisms], W an object, M natural continuous-function coordinates [lem-sfb-completed-affine-coefficient-model], and q_i:W to U a finite indexed family with completed scalar coefficients a_i [def-pur-twist-coefficient-rings]. Suppose at each point x, the sum of evaluated coefficients in every equality class of the induced Spec(kappa(x))-maps is zero. Then a covering sieve of W exists such that every arrow f:V to W in it admits an equivalence relation r on the indices for which r-related maps restrict equally on V and each r-class sum of restricted coefficients is zero.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-morphisms",
+  "lem-sfb-completed-affine-coefficient-model",
+  "def-pur-twist-coefficient-rings"
+ ],
+ "source": {
+  "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "place": "docstring of completedAffineFree_localDual_detect: closed pattern cover for finite completed coefficient cancellation"
+ },
+ "proof": [
+  {
+   "text": "For a setoid r on the finite index set, let b(r,i) be the sum of a(j) over r-related j. Define E(r) by all the within-r-class residue-field arrow equalities and all equations M(b(r,i))=0. The residue equality theorem makes the first loci closed and component-saturated. The second loci are closed by continuity into the Hausdorff p-adic integers and component-saturated because these integers are totally disconnected. Thus each E(r) is closed and component-saturated. The actual kernel equivalence relation of the residue-field arrows at a point belongs to this finite family and its coefficient equations follow from ha, so the E(r) cover W. This directly defined family replaces the closures of exact-pattern strata.",
+   "uses": [
+    "lem-sfb-pro-affine-etale-residue-equalizer",
+    "lem-sfb-completed-affine-coefficient-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cover W by affine opens T. Pull each E(r) back to T. Under T=Spec A, take its image Z in ConnectedComponents(Spec A); saturation identifies its preimage with the original closed locus, so Z is closed by the quotient topology. Use the existing actual ring WContractification.Restriction Z. Its source-library indZariski instance gives a weakly etale spectrum map, and the spectrum-range theorem identifies its image with that locus. The spectrum and target are affine, so the map is quasi-compact. The finite family is jointly surjective and hence is a pro-etale covering. The sieve of all arrows whose underlying image lies in some E(r) is downward closed and covering by transitivity with the affine open cover.",
+   "uses": [
+    "lem-weil-pbc-restriction-spectrum-range"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On any arrow f in this sieve choose its r. For every r-related pair the residue equality theorem says that f equalizes the scheme morphisms: it factors through every open etale-stage equalizer, and the limit projections jointly detect equality. For coefficients apply the injective ring equivalence M on the domain of f. Naturality identifies the class sum with the pullback of b(r,i), whose evaluated continuous function vanishes throughout the image of f. Function extensionality proves zero. The same finite family construction includes empty schemes and an empty index type.",
+   "uses": [
+    "lem-sfb-pro-affine-etale-residue-equalizer",
+    "lem-sfb-completed-affine-coefficient-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pro-affine-etale-residue-equalizer",
+  "lem-sfb-completed-affine-coefficient-model",
+  "lem-weil-pbc-restriction-spectrum-range"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "document": "lean/Sheaf/Paper/CompletedAffinePatternCover.lean",
+  "place": "completedAffine_pattern_cover and the two private closed-component restriction and covering helpers",
+  "note": "Complete Lean proof. Direct closed cancellation loci replace closures of exact-pattern strata; the adopted source Restriction construction replaces the general canonical-localization theorem. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous p-adic functions as inverse limit of finite constant pro-etale coefficient sheaves; finite clopen interpolation and equality-pattern cover for pro-affine etale morphisms",
+   "results": "AffineTransitionLimit existence and finite-type factorization results, plus unrelated perfectoid coefficient definitions; no interpolation, pattern-cover, or completed coefficient sheaf theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toZModPow\"",
+   "results": "Found PadicInt.toZModPow, ext_of_toZModPow, zmod_cast_comp_toZModPow, and compatible finite reduction interfaces. These are used for coefficient coordinates; they do not supply geometric scalar interpolation or pattern covers.",
+   "date": "2026-10-27",
+   "verdict": "Arithmetic interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(equal|graph)|pattern.*cover|continuous.*(limit|padic)",
+   "results": "Continuous and profinite limit infrastructure, no finite pro-etale pattern cover or scalar interpolation theorem. Local Sheaf and WeilConjectures search found the existing discrete continuous coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact geometric match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAffineFreePresheafLocalDual",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-completed-affine-free-local-dual-local-presheaf",
+   "place": "closed pattern cover for finite completed coefficient cancellation",
+   "via": [
+    "lem-sfb-completed-affine-free-local-dual-local-presheaf"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAffinePatternCover",
+  "file": "lean/Sheaf/Paper/CompletedAffinePatternCover.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffine_pattern_cover",
+  "statement": "theorem completedAffine_pattern_cover (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (M : CompletedAffineCoefficientModel l X)\n    (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) (W : X.ProEt)\n    {ι : Type (u + 1)} [Fintype ι]\n    (q : ι → (uliftYoneda.{u + 1}.obj U.unop).obj (op W))\n    (a : ι → (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj.obj (op W))\n    (ha : ∀ (x : W.left) (i : ι),\n      (∑ j : ι, if W.left.fromSpecResidueField x ≫ (q j).down.left =\n          W.left.fromSpecResidueField x ≫ (q i).down.left\n        then M.equiv W (a j) x else 0) = 0) :\n    ∃ S : Sieve W, S ∈ Scheme.ProEt.topology X W ∧\n      ∀ (V : X.ProEt) (f : V ⟶ W), S f →\n        ∃ r : Setoid ι,\n          (∀ i j : ι, r.r i j →\n            (uliftYoneda.{u + 1}.obj U.unop).map f.op (q i) =\n              (uliftYoneda.{u + 1}.obj U.unop).map f.op (q j)) ∧\n          (∀ i : ι, (∑ j : ι, if r.r j i then\n            (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj.map f.op (a j)\n              else 0) = 0)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T064438-L-2178011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T084443-L-3682331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "def-weil-frobenius-cohomology-canonical-factors",
+ "kind": "definition",
+ "title": "Constructed canonical factors with the proved coefficient tensor law",
+ "statement": "For an arbitrary preordered family of fields K_i, transition homomorphisms\nι_ij and embeddings e_i into a field Ω, suppose ι_jk ι_ij=ι_ik and\ne_j ι_ij=e_i. Construct A_i, F_ij, c_ijk and p_ij by the canonical recipes of\n[def-weil-frobenius-cohomology-comparison-factors]. Their natural-isomorphism tensor\ncocycle holds by [lem-weil-frobenius-cohomology-coefficient-cocycle]. Bundle\nthese explicit fields with that proved law. The data are the given functors and\nisomorphisms, independent of the proof field. Specialize this construction to\nthe finite coefficient fields and their specified embeddings into Ω, using the\nrecorded composition laws. Extend this coefficient record by the specified\nrational cohomology functors H and rational scalar comparisons q. The result is\nthe canonical full factor record. Its scalar cocycle is the proof field of the\nconstructed scalar record; no rational cocycle is included or assumed in this\nconstruction. No data are chosen from an existence theorem.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.1)(d), canonical iterated coefficient extension, and (1.1.14), ordinary and compact cohomology; explicit factor of Steps 1--2 of the parent proof."
+ },
+ "stmt_deps": [
+  "def-weil-frobenius-cohomology-comparison-factors",
+  "def-weil-frobenius-cohomology-realization-data",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "For each chain i ≤ j ≤ k apply the proved arbitrary-field tensor equation to ι_ij, ι_jk and ι_ik and the three embeddings. The system composition laws supply its four equalities. Use the natural-isomorphism form of this proved equation. Pass this proof and the explicitly constructed maps to the generic bundled record constructor. Its data fields are exactly the supplied maps.",
+   "uses": [
+    "def-weil-frobenius-cohomology-comparison-factors",
+    "lem-weil-frobenius-cohomology-coefficient-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the bundled construction to the specified small coefficient fields, coefficient inclusions and stage embeddings. Their stated composition equalities satisfy the constructor hypotheses. The scalar cocycle is obtained by taking the proof field.",
+   "uses": [
+    "def-weil-frobenius-cohomology-comparison-factors",
+    "def-weil-frobenius-cohomology-realization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend the coefficient record by the specified rationalStage and rationalComparison constructions. This builds the full FactorData record without requiring or postponing any data. Its H and q fields are the prescribed functors and isomorphisms, and its inherited scalar fields are the explicit coefficient construction.",
+   "uses": [
+    "def-weil-frobenius-cohomology-comparison-factors",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-cohomology-comparison-factors",
+  "lem-weil-frobenius-cohomology-coefficient-cocycle",
+  "def-weil-frobenius-cohomology-realization-data",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "G1: construct the literal coefficient maps together with their proved tensor law, then add the specified rational cohomology maps. No existence choice is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural scalar extension comparison of cohomology respects a tower of coefficient field embeddings",
+   "results": "AlgHom.extendScalars and scalar-tower instances; no theorem for the normalized operation and point-fibre comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible scalar extension natural isomorphisms yield invariance of conjugated functor maps at larger coefficient stages",
+   "results": "ModuleCat.extendScalarsComp and extendScalars_assoc supply the ordinary module tensor comparison, not its specified scalar-and-size realization or operation mates.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointRational.*(tower|coher)|CohomologyRealiz.*(tower|coher); local search of stageBeta_coherence and PointScalarNormalization",
+   "results": "stageBeta_coherence concerns pulled-back source/target operations. PointScalarNormalization is a different point-only statement. No result for these factor comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FrobeniusCohomologyRealizationTransport",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Canonical coefficient realization of the ordinary and compact cohomology complexes, coefficient enlargement; parent proof Steps 1 and 2.",
+   "via": [
+    "lem-weil-frobenius-cohomology-realization-transport",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FrobeniusCohomologyCoefficientCocycle",
+  "file": "lean/Sheaf/SixFunctors/FrobeniusCohomologyCoefficientCocycle.lean",
+  "declaration": "WeilConjectures.CohomologyRealization.realizationParts",
+  "statement": "def realizationParts\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    [IsSeparated Y₀.hom]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (c₀ : Compactification Y₀.hom) (compact : Bool)\n    : FactorData\n      (B := fun E : Index l Ω ↦\n        @DerivedCategory (ModuleCat.{u} (AlgebraicallyClosedCoefficients.Coefficient l Ω E))\n          _ _ (HasDerivedCategory.ofIsGrothendieckAbelian.{u} _))\n      (bCategory := coefficientDerivedCategoryFamily.{u, v} l Ω)\n      (D := @DerivedCategory (ModuleCat.{max u v} Ω) _ _ (HasDerivedCategory.standard _))\n      (stageSystem l Ω (D.geometricFiber Y₀).left)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.CohomologyRealization.coefficientDataOfFields",
+   "WeilConjectures.CohomologyRealization.coefficientDataOfFields_cocycle",
+   "WeilConjectures.CohomologyRealization.coefficientParts",
+   "WeilConjectures.CohomologyRealization.coefficientParts_cocycle",
+   "WeilConjectures.CohomologyRealization.realizationParts"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065722-L-3205845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065722-L-3205845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

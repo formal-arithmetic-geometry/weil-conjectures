@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-finite-smooth-compact-quotient-cocycle",
+ "kind": "statement",
+ "title": "Ordinary compact-support quotient cocycle",
+ "statement": "Let $\\ell$ be prime and $f:X\\to Y$ compactifiable, separated, quasi-compact and locally of finite type between Noetherian schemes. The actual ordinary compact-support coefficient maps of [def-pur-finite-smooth-coefficient-arrows], on the chosen compactification, satisfy ExceptionalCoefficients.CompactSupportCocycle for every $r\\ge m\\ge n\\ge1$, with both canonical scalar associators. This is a conclusion, not an additional assumed cocycle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (2), compact-support coefficient cocycle used in the exceptional transpose calculation."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the derived restriction/pullback coefficient-chain identity and conjugateEquiv_paste to prove the inverse open coefficient cocycle. Invert the equality of the two composites of open isomorphisms to obtain the forward open cocycle. Reuse finiteCoefficientDirectImageMap_coefficientChain and its proved equality with scalarMate for the direct-image cocycle. Expand compactSupportMap, apply the proper cocycle, then the open cocycle, and use naturality of scalarMate to paste them. Specialize to the actual quotient maps by their explicitly proved composition equality.",
+   "uses": [
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "K1 proof via existing private scalarRestriction_chain, conjugateEquiv_paste, and the existing direct-image coefficient-chain theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition coherence of derived extension of scalars with pullback tensor products and adjunction mates",
+   "results": "Eight hits include CategoryTheory.mateEquiv_square, Bicategory.mateEquiv_square, Adjunction.isMonoidal_comp and pullback unit/counit composition. They provide generic mate pasting, not the root-normalized finite smooth or pro-etale-origin equations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse generic mate pasting and existing source-library coefficient chains; no exact statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of derived scalar extension composition with pullback and tensor product",
+   "results": "ModuleCat.extendScalarsComp and extendScalars_assoc normalize ordinary module tensors. They do not state the displayed derived small-site or transported cocycles.",
+   "date": "2026-10-27",
+   "verdict": "Reuse scalar normalization; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Adjoint-uniqueness composition and unit/counit lemmas exist; they supply categorical normalization, not the full finite smooth cocycle.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction pasting rather than arbitrary comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback_chain|CompactSupportCocycle|tensorIso.*comp",
+   "results": "Remote Mathlib grep returned Mathlib/CategoryTheory/Monoidal/Functor.lean, not this geometric cocycle. Additional local rg reads of FiniteSmoothCoefficientArrows, ExceptionalCoefficientComparison, FiniteCoefficientDirectImage, EtaleCompactScalarCoherence, FiniteReductionSystemCoherence, CompactSupportQuotientCocycle and OpenScalarCoefficientCoherence found no theorem directly supplying this step. The blueprint_refs search for reduction compatibilities found det-sp-reduction-compatibilities, whose proof supplies the argument.",
+   "date": "2026-10-27",
+   "verdict": "A missing proper subargument of the existing plan, with canonical definitions retained."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothQuotientCoherence",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Part (2), compact-support coefficient cocycle used in the exceptional transpose calculation.",
+   "via": [
+    "lem-pur-finite-smooth-quotient-coherence",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothCompactQuotientCocycle",
+  "file": "lean/Sheaf/Paper/FiniteSmoothCompactQuotientCocycle.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothCompactQuotientCocycle",
+  "statement": "theorem finiteSmoothCompactQuotientCocycle\n    (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType f] :\n    ExceptionalCoefficients.CompactSupportCocycle ell f",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T094430-L-225251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T094430-L-225251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

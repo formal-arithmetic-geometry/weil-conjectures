@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-etale-affine-pinching-descent",
+ "kind": "statement",
+ "title": "Etale descent of affine pinching squares",
+ "statement": "Let $X,C,N$ be schemes, let $\\nu:C\\to X$ be finite [def-weil-finite-integral-morphism], let $i:N\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and put $B=C\\times_XN$ with its projections [def-pc-fibre-product]. Assume there is a jointly surjective family of affine etale maps $U_a=\\operatorname{Spec}P_a\\to X$ [def-weil-etale-morphism, def-weil-affine-spectrum] such that the inverse images of $C,N,B$ are $\\operatorname{Spec}E_a,\\operatorname{Spec}T_a,\\operatorname{Spec}D_a$ and the canonical sequence of $P_a$-modules\n$$0\\longrightarrow P_a\\longrightarrow E_a\\oplus T_a\\xrightarrow{(e,t)\\mapsto\\alpha_a(e)-\\beta_a(t)}D_a\\longrightarrow0$$\nis exact, with $\\alpha_a:E_a\\twoheadrightarrow D_a$ surjective. Then the given square $B,C,N,X$ is a pushout in the category of all schemes [def-weil-pbc-category-colimit]: compatible maps from $C$ and $N$ to any scheme $Z$ extend uniquely to $X$. For every open subscheme $V\\subseteq X$ [def-weil-open-immersion], the inverse-image square is again a pushout. More generally this pushout property holds after any flat base change $X'\\to X$ [def-weil-flat-morphism]. For every flat $P_a$-algebra $H$, the canonical map\n$$H\\longrightarrow (H\\otimes_{P_a}E_a)\\times_{H\\otimes_{P_a}D_a}(H\\otimes_{P_a}T_a)$$\nis an isomorphism. Tensor products use [def-weil-pbc-module-tensor-product]. The assertions allow empty schemes, zero rings and covers of arbitrary cardinality.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ET0 (lemma-basic-example-pushout) and Tag 0BMP (lemma-pushout-fpqc-local); descent.tex Tag 023Q (lemma-fpqc-universal-effective-epimorphisms). Agent exact-sequence criterion and flat-base-change version."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix a chart and suppress its index. The canonical map $P\\to E\\times_D T$, $p\\mapsto(p|_E,p|_T)$, is a ring map into the ring of matching pairs with componentwise operations. Exactness at $P$ makes it injective, and exactness at $E\\oplus T$ says that every matching pair is its image. Thus it is a ring isomorphism. This is a kernel calculation, not an assumption that spectra preserve arbitrary ring limits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout; elementary conversion of the stated exact difference sequence into a ring fibre product"
+   }
+  },
+  {
+   "text": "Let $H$ be any flat $P$-algebra. Flat tensor exactness preserves the injection and the kernel in $0\\to P\\to E\\oplus T\\to D$; tensor right exactness also preserves surjectivity onto $D$. Under $H\\otimes_PP\\cong H$, $h\\otimes p\\mapsto hp$, and the tensor/product isomorphism, the resulting sequence is\n$$0\\to H\\to (H\\otimes_PE)\\oplus(H\\otimes_PT)\\xrightarrow{\\delta_H}H\\otimes_PD\\to0,$$\nwhere $\\delta_H(h\\otimes e,0)=h\\otimes\\alpha(e)$ and $\\delta_H(0,h\\otimes t)=-h\\otimes\\beta(t)$. Hence its kernel is exactly the matching-pair ring. The canonical ring map from $H$ into this ring is bijective, by this exact sequence, and is therefore the claimed ring isomorphism. Moreover $H\\otimes_PE\\to H\\otimes_PD$ is surjective: express any target as a finite sum $\\sum h_j\\otimes d_j$ and choose $e_j$ with $\\alpha(e_j)=d_j$. No flatness of $E,T,D$ over $P$ is required.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HD (lemma-flat) and 00DF (lemma-tensor-product-exact); tensor of the canonical difference sequence"
+   }
+  },
+  {
+   "text": "For $W=\\operatorname{Spec}H\\to U_a=\\operatorname{Spec}P_a$ with $H$ flat over $P_a$, the affine fibre-product theorem identifies $C\\times_XW$, $N\\times_XW$, $B\\times_XW$ with spectra of $H\\otimes_{P_a}E_a$, $H\\otimes_{P_a}T_a$, $H\\otimes_{P_a}D_a$, respectively, with the displayed tensor maps. Step 2 identifies $H$ with their matching-pair ring and proves surjectivity of its first map to the common quotient. The affine closed-pinching theorem therefore gives the pushout with vertex $W$ for maps into every scheme $Z$. This applies in particular to $H=P_a$ and to every affine open in any flat scheme over $U_a$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-affine-closed-pinching-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout; schemes.tex Tags 01I4 and 01JQ (affine fibre products)"
+   }
+  },
+  {
+   "text": "We spell out the flatness bookkeeping. Restricting a flat map to an open subscheme of its source is flat, since the source local rings at its points are unchanged. An open immersion is flat since it induces isomorphisms of local rings. Composites of flat scheme maps are flat: at a point the local homomorphism is the composite of two flat ring maps, so the flat-ring-map composition theorem and the definition of a flat scheme map apply. Flat base changes are flat by the cited base-change theorem. In particular, if $Y\\to U_a$ is flat, every affine open $W=\\operatorname{Spec}H\\subseteq Y$ has $H$ flat over $P_a$, by the affine criterion; the same holds for any affine open inside an intersection of two such opens. These statements impose no quasi-separatedness on $Y$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U3, 01U5 (lemma-flat-characterize), 01U7 (lemma-composition-flat), 01U9 (lemma-base-change-flat); stalkwise deductions from the cited ring statement"
+   }
+  },
+  {
+   "text": "Now let $Y\\to U_a$ be any flat scheme map. Given compatible maps $C_Y\\to Z$, $N_Y\\to Z$, choose an affine open cover $(W_r)$ of $Y$. Steps 3 and 4 give a unique extension $h_r:W_r\\to Z$. For each $r,s$, cover $W_r\\cap W_s$ by affine opens $W$. On such a $W$, both restrictions extend the same prescribed maps from $C_W$ and $N_W$; step 3 makes them equal. Scheme-morphism gluing first gives equality on the whole intersection and then an extension $Y\\to Z$. Its restrictions to $C_Y,N_Y$ are prescribed because the inverse images of $(W_r)$ are open covers. A second extension equals this one on every $W_r$ by step 3, hence globally by the same gluing theorem. Thus the inverse-image square over every flat $Y\\to U_a$ is a pushout, including non-affine $Y$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BMP, lemma-pushout-fpqc-local, open-cover version; schemes.tex Tag 01JA, sheaves.tex Tag 04TN (gluing morphisms)"
+   }
+  },
+  {
+   "text": "Let $X'\\to X$ be any flat morphism. The jointly surjective etale family $(U_a\\to X)$ is a covering of the identity object of the small etale site, hence an fpqc covering. By the fpqc covering base-change theorem, $Y_a=X'\\times_XU_a\\to X'$ is an fpqc covering. Since $X'\\to X$ is flat, $Y_a\\to U_a$ is flat. On the overlap $Y_{ab}=Y_a\\times_{X'}Y_b$, the map to $Y_a$ is the base change of $Y_b\\to X'$, which is flat as a member of an fpqc covering. Its composite to $U_a$ is flat by step 4. Consequently step 5 gives pushouts both on $Y_a$ and on every $Y_{ab}$. The identifications of $C_{Y_{ab}},N_{Y_{ab}},B_{Y_{ab}}$ computed in either order are the unique projection-compatible ones from the fibre-product universal property.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BMP, lemma-pushout-fpqc-local, hypotheses (1),(2); topologies.tex Tags 022C and 022D; morphisms.tex Tag 01U9"
+   }
+  },
+  {
+   "text": "Fix compatible maps $C_{X'}\\to Z$, $N_{X'}\\to Z$. Step 5 on each $Y_a$ gives an extension $h_a:Y_a\\to Z$. On $Y_{ab}$ the two restrictions agree, because its pushout from step 6 gives uniqueness for the same two prescribed maps. Representable fpqc descent glues the $h_a$ uniquely to $h:X'\\to Z$. To check its composites with $C_{X'}$ and $N_{X'}$, base change the fpqc cover $(Y_a)$ to each of these schemes. The two maps in question agree on every member of each resulting cover, so the uniqueness part of representable descent gives equality globally. Finally any other extension agrees with $h$ on each $Y_a$ by the chart pushout, and therefore equals $h$ by fpqc descent. This proves the pushout assertion after every flat base change.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; explicit mapping-property argument of more-morphisms.tex Tag 0BMP"
+   }
+  },
+  {
+   "text": "Take $X'=X$ and its identity map in step 7 to obtain the original pushout. For an arbitrary open subscheme $V\\subseteq X$, its inclusion is flat by step 4, so step 7 gives exactly its inverse-image pushout. Step 2 is the additional flat-$P_a$-algebra assertion with the required canonical map. All covers in steps 5--7 may have arbitrary set cardinality. Empty affine opens correspond to zero rings, for which the kernel and tensor calculations remain valid; an empty open cover glues the unique map from the empty scheme. If $X$ is empty, every given scheme over it and every base change is empty. Thus none of the assertions excludes zero rings, empty schemes or empty covers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0ET0 and 0BMP; specialization and empty-case check of steps 2--7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-algebra-tensor-product-distributes-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0ET0 (lemma-basic-example-pushout) and 0BMP (lemma-pushout-fpqc-local); explicit flat tensor and affine-overlap proof, with descent.tex Tag 023Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite square of schemes which is an affine ring fibre product etale locally is a pushout of schemes stable under open restriction",
+   "results": "{\"t\": \"2026-10-22T06:15:08Z\", \"tool\": \"leanfinder\", \"query\": \"A finite square of schemes which is an affine ring fibre product etale locally is a pushout of schemes stable under open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.HasAffineProperty.of_isPullback\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\"], \"digest\": \"50feed231f57ef92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Spec ring-pushout results produce scheme pullbacks, not the closed pinching scheme pushout and its descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of scheme pushouts from etale affine charts using flat base change of the fibre product exact sequence",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"leansearch\", \"query\": \"Descent of scheme pushouts from etale affine charts using flat base change of the fibre product exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"b60ce71c2d188af6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Spec ring-pushout results produce scheme pullbacks, not the closed pinching scheme pushout and its descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsPushout\"",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsPushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\"], \"digest\": \"7ad5ea5c8dd5f9f1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Spec ring-pushout results produce scheme pullbacks, not the closed pinching scheme pushout and its descent."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ushout|pinching|fiberProduct",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"grep\", \"query\": \"[Pp]ushout|pinching|fiberProduct\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\"], \"digest\": \"c156ea1d63d60c7d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Spec ring-pushout results produce scheme pullbacks, not the closed pinching scheme pushout and its descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local affine ring fiber product squares with one surjection are pushouts of schemes and remain pushouts after flat base change",
+   "results": "{\"t\": \"2026-10-23T09:27:40Z\", \"tool\": \"leanfinder\", \"query\": \"Etale local affine ring fiber product squares with one surjection are pushouts of schemes and remain pushouts after flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"6e18ce2d32c977a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: found scheme pullbacks from ring pushouts, flatness/base-change properties or open-immersion gluing, not this closed-pinching descent criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "pinching|[Pp]ushout",
+   "results": "{\"t\": \"2026-10-23T09:28:42Z\", \"tool\": \"grep\", \"query\": \"pinching|[Pp]ushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\"], \"digest\": \"77321e6122f16590\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: found scheme pullbacks from ring pushouts, flatness/base-change properties or open-immersion gluing, not this closed-pinching descent criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a scheme pushout from affine etale charts and preservation under flat base change",
+   "results": "{\"t\": \"2026-10-23T09:28:42Z\", \"tool\": \"leansearch\", \"query\": \"Descent of a scheme pushout from affine etale charts and preservation under flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"eb92f9a75fb08d26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: found scheme pullbacks from ring pushouts, flatness/base-change properties or open-immersion gluing, not this closed-pinching descent criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsPushout\"",
+   "results": "{\"t\": \"2026-10-23T09:28:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsPushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\"], \"digest\": \"7ad5ea5c8dd5f9f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: found scheme pullbacks from ring pushouts, flatness/base-change properties or open-immersion gluing, not this closed-pinching descent criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of a pullback of commutative rings along a surjection is a pushout in the category of schemes",
+   "results": "{\"t\": \"2026-10-23T09:30:42Z\", \"tool\": \"leanfinder\", \"query\": \"The spectrum of a pullback of commutative rings along a surjection is a pushout in the category of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\"], \"digest\": \"0e791fe74d9df754\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: found scheme pullbacks from ring pushouts, flatness/base-change properties or open-immersion gluing, not this closed-pinching descent criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-persistent-node-normalization",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. Separate xy=0 branches; retain normal xy=pi^n charts; descend finite normalization and reconstruct by the conductor fibre-product rings.; returned proof steps 7, 8: affine pinching after flat tensor, overlap uniqueness, representable descent and open restriction",
+   "via": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-affine-pinching-descent",
+  "worker": "stage1",
+  "summary": "Proved the etale affine criterion and its flat-base-change and open-restriction clauses by tensor exactness, affine pinching, explicit open-overlap gluing and representable fpqc descent. Reused all required lemmas already in the DAG; no new nodes or statement change.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/common-nodal-model normalization prerequisite identified by the item: returned normalization proof steps 7,8. Steps 1--3 implement the ring matching and flat tensor calculation; 4--5 establish all flat charts and their overlaps; 6--8 implement representable descent, flat base change and open restriction. blueprint_refs.py ancestor returns None, as recorded in the existing ancestry; no ancestry invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic comparison of etale and fpqc coverings used solely for representable morphism gluing; the node is already Lean-proved and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-77d7288a6",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-77d7288a6 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes, statement unchanged from base/live (live still unsplit; not superseded, not a re-split, no SGA). Opened all 18 cited statements. Steps 1-2: flat-tensor-exact + distributes-product make H iso to the matching ring (H⊗E)×_{H⊗D}(H⊗T) by a bijective ring map; surjectivity onto H⊗D by explicit lifts. Step 3: fibre-product-affine-spectra + affine-closed-pinching-pushout (surjective α, arbitrary β, zero rings allowed) give the affine flat chart pushout; the fibre-product pasting there is a minor uncited use of def-pc-fibre-product, which is in proof_deps. Steps 4-5: stalkwise flatness bookkeeping, then glue over affine covers of arbitrary flat Y with overlaps covered by affines (never assumed affine). Steps 6-7: etale cover -> fpqc via the Lean-closed tool fpqc-finer-than-etale (tool_use accepted), base change by covering-axioms (3), flatness of Y_ab->U_a; representable descent gives existence, the composites with C_{X'}/N_{X'} on base-changed covers, and uniqueness. This matches Stacks 0BMP (more-morphisms.tex:4183) via 023Q and 0ET0 (:4101). Step 8: identity and open-inclusion specializations; empty and zero edge cases hold. The citer persistent-node-normalization uses only clauses still stated. Duplicate search (pinch/0BMP/0ET0/pushout): ferrand-scheme-pushout, flat-trait-pinching-base-change, space-affine-thickening-pushout and the nodal pinching nodes differ. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffinePinchingDescent",
+  "declaration": "AlgebraicGeometry.isPushout_of_etale_affine_pinching_exact",
+  "declarations": [
+   "AlgebraicGeometry.pinchingTensorComparison",
+   "AlgebraicGeometry.isPushout_of_etale_affine_pinching_exact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffinePinchingDescent.lean",
+  "statement": "theorem isPushout_of_etale_affine_pinching_exact {X C N : Scheme.{u}} (ν : C ⟶ X) (i : N ⟶ X) [IsFinite ν] [IsClosedImmersion i] {A : Type v} (P E T D : A → Type u) [∀ a, CommRing (P a)] [∀ a, CommRing (E a)] [∀ a, CommRing (T a)] [∀ a, CommRing (D a)] [∀ a, Algebra (P a) (E a)] [∀ a, Algebra (P a) (T a)] [∀ a, Algebra (P a) (D a)] (α : ∀ a, E a →ₐ[P a] D a) (β : ∀ a, T a →ₐ[P a] D a) (q : ∀ a, Spec (CommRingCat.of (P a)) ⟶ X) [∀ a, Etale (q a)] (hcover : ∀ x : X, ∃ a, ∃ y : Spec (CommRingCat.of (P a)), q a y = x) (c : ∀ a, Spec (CommRingCat.of (E a)) ⟶ C) (n : ∀ a, Spec (CommRingCat.of (T a)) ⟶ N) (hC : ∀ a, IsPullback (c a) (Spec.map (CommRingCat.ofHom (algebraMap (P a) (E a)))) ν (q a)) (hN : ∀ a, IsPullback (n a) (Spec.map (CommRingCat.ofHom (algebraMap (P a) (T a)))) i (q a)) (hB : ∀ a, IsPullback (Spec.map (CommRingCat.ofHom (α a).toRingHom)) (Spec.map (CommRingCat.ofHom (β a).toRingHom)) (Spec.map (CommRingCat.ofHom (algebraMap (P a) (E a)))) (Spec.map (CommRingCat.ofHom (algebraMap (P a) (T a))))) (hinj : ∀ a, Function.Injective (fun p : P a ↦ (algebraMap (P a) (E a) p, algebraMap (P a) (T a) p))) (hexact : ∀ a, Function.Exact (fun p : P a ↦ (algebraMap (P a) (E a) p, algebraMap (P a) (T a) p)) (fun z : E a × T a ↦ α a z.1 - β a z.2)) (hsurj : ∀ a, Function.Surjective (fun z : E a × T a ↦ α a z.1 - β a z.2)) (hα : ∀ a, Function.Surjective (α a)) : IsPushout (pullback.fst ν i) (pullback.snd ν i) ν i ∧ (∀ V : X.Opens, IsPushout (pullback.fst (pullback.snd ν V.ι) (pullback.snd i V.ι)) (pullback.snd (pullback.snd ν V.ι) (pullback.snd i V.ι)) (pullback.snd ν V.ι) (pullback.snd i V.ι)) ∧ (∀ (X' : Scheme.{u}) (f : X' ⟶ X), Flat f → IsPushout (pullback.fst (pullback.snd ν f) (pullback.snd i f)) (pullback.snd (pullback.snd ν f) (pullback.snd i f)) (pullback.snd ν f) (pullback.snd i f)) ∧ (∀ (a : A) (H : Type (max u w)) [CommRing H] [Algebra (P a) H], Module.Flat (P a) H → Function.Bijective (pinchingTensorComparison (α a) (β a) H))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-411f9516e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: IsFinite ν, IsClosedImmersion i, Etale Spec P_a charts with pointwise joint cover (A : Type v unrestricted); hC/hN/hB pullback squares identify Spec E/T/D with inverse images of C/N/B via the given algebra maps and α,β; hinj/hexact/hsurj render 0→P→E⊕T→D→0 with (e,t)↦α e−β t; hα. Conclusions: IsPushout of B,C,N,X in Scheme.{u}; inverse-image square over every V : X.Opens; over every flat X'→X; bijectivity of canonical h↦(h⊗1,h⊗1) into CommRingCat.pullbackCone point for every flat H : Type (max u w). Helper has real data (codRestrict of includeLeft pair), not hollow. Statement verbatim; only lean field changed vs live; imports exist; docstrings carry Stacks 0ET0/0BMP/023Q, blueprint id and 8 proof steps; proof sorry. Edge cases (empty cover, zero rings, V=⊥, H=0) covered. No duplicate in Mathlib/Sheaf. No fixes, no compile needed."
+ }
+}

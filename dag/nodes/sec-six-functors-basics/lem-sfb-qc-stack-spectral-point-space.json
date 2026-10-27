@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-qc-stack-spectral-point-space",
+ "kind": "statement",
+ "title": "Spectral point space of a quasi-compact stack with quasi-compact diagonal",
+ "statement": "Let $S$ be an affine scheme, meaning a scheme isomorphic to the spectrum of a commutative ring [def-pc-scheme, def-weil-affine-spectrum] and let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack]. Suppose $\\mathcal X$ is quasi-compact and its diagonal $\\Delta_{\\mathcal X/S}:\\mathcal X\\to\\mathcal X\\times_S\\mathcal X$ is quasi-compact, with both predicates as in [def-sfb-stack-qcqs-morphism]. Give $|\\mathcal X|$ the field-valued point set and smooth-atlas topology of [lem-sfb-stack-point-topology]. Then $|\\mathcal X|$ is spectral [def-weil-spectral-space]: it is quasi-compact, the quasi-compact open subsets form a basis stable under finite intersections, and every nonempty irreducible closed subset has a unique generic point. No finite-type, Noetherian, separated-diagonal, or quasi-finite-diagonal hypothesis is imposed. The empty stack is allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DQN (lemma-spectral-qc-diagonal-qc), with affine base S: the proof uses an affine smooth atlas U and the affine product U times_S U. The affineness of S ensures this product is affine; no unrestricted-base variant is asserted."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-stack-point-topology",
+  "def-weil-spectral-space",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-algebraic-stack-quasicompact-surjection] choose an affine smooth surjective atlas $a:A\\to\\mathcal X$. Its point map is continuous and surjective by [lem-sfb-stack-point-topology]. Smoothness implies flatness and local finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus], so [lem-sfb-stack-point-topology-flat-lfp-open] makes $|a|$ open. The space $|A|$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], hence so is its continuous image $|\\mathcal X|$. This last inference is the open-cover argument: pull an open cover back to $A$, choose a finite subcover, and use surjectivity.",
+   "uses": [
+    "lem-sfb-algebraic-stack-quasicompact-surjection",
+    "lem-sfb-stack-point-topology",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN (lemma-spectral-qc-diagonal-qc), first paragraph, choice and openness of atlas"
+   }
+  },
+  {
+   "text": "Affine opens form a basis in $A$: cover any open subscheme by affine opens using [lem-pc-fppf-affine-open-cover]. For $x\\in W\\subseteq|\\mathcal X|$ with $W$ open, choose a lift $v\\in A$ of $x$ and an affine open $B\\subseteq a^{-1}(W)$ containing $v$. The image $a(B)$ is open, contains $x$, and is contained in $W$; it is quasi-compact because $B$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs] and $a$ is continuous. Thus these images give a basis of quasi-compact opens. If $W$ itself is quasi-compact, finitely many such images cover $W$. The restrictions of $a$ to these affine opens are smooth, and their images correspond to open substacks by [lem-sfb-smooth-atlas-open-image].",
+   "uses": [
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-smooth-atlas-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN, first paragraph, quasi-compact open basis and finite lifts; schemes.tex Tag 01IT (lemma-basis-affine-opens)"
+   }
+  },
+  {
+   "text": "Let $B,C\\subseteq A$ be affine opens. Since $S$ is affine, [lem-weil-pbc-fibre-product-affine-spectra] identifies $B\\times_SC$ with an affine spectrum; it is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Regard schemes as algebraic spaces by [def-trf-scheme-algebraic-space]. By [lem-sfb-stack-diagonal-space-source-representability], $R=B\\times_{\\mathcal X}C$ is an algebraic space. It is the base change of $\\Delta_{\\mathcal X/S}$ by $B\\times_SC\\to\\mathcal X\\times_S\\mathcal X$ (an object is a pair with an isomorphism between its images). The definition [def-sfb-stack-qcqs-morphism] therefore gives a quasi-compact atlas of $R$. The continuous surjective point map of this atlas makes $|R|$ quasi-compact. Its image in $|\\mathcal X|$ is exactly $a(B)\\cap a(C)$: one inclusion follows from the two projections; for the other, equality of two field-point classes gives a common field extension and an isomorphism, hence an object of the $2$-fibre product. Consequently the intersection is quasi-compact. Express two arbitrary quasi-compact opens as finite unions of the images in step 2; distributing intersection over these finite unions proves their intersection quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN, first paragraph, fibre-product argument; stacks-properties.tex Tag 04XH (lemma-points-cartesian)"
+   }
+  },
+  {
+   "text": "Let $T\\subseteq|\\mathcal X|$ be nonempty, closed and irreducible. Construct its reduced closed substack without a field-base hypothesis. On the atlas $A$, give $D=a^{-1}(T)$ its unique reduced closed subscheme structure using [lem-sfb-space-reduced-closed-support]. Put $H=A\\times_{\\mathcal X}A$, with smooth projections $s,t$ by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The closed subspaces $s^{-1}D,t^{-1}D$ have equal support, since $as$ and $at$ are isomorphic. Each is reduced by [lem-sfb-space-smooth-reduced-locality], applied to its smooth map to $D$. Uniqueness in [lem-sfb-space-reduced-closed-support] gives equality as closed subspaces. Hence [lem-sfb-invariant-closed-substack-descent] supplies a closed algebraic substack $i:\\mathcal Z\\hookrightarrow\\mathcal X$ with smooth surjective atlas $D$, so $\\mathcal Z$ is reduced. The point map of $D\\to\\mathcal Z$ is surjective; its image in $\\mathcal X$ is $T$ by the atlas closed-set criterion. By [lem-sfb-stack-closed-immersion-calculus], $|i|$ is a homeomorphism onto $T$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-invariant-closed-substack-descent",
+    "lem-sfb-stack-point-topology",
+    "lem-sfb-stack-closed-immersion-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN, second paragraph; stacks-properties.tex Tag 0509 (lemma-reduced-closed-substack)"
+   }
+  },
+  {
+   "text": "For a full substack $\\mathcal V\\subseteq\\mathcal X$ whose inclusion is a monomorphism, its diagonal is the base change of $\\Delta_{\\mathcal X/S}$ to $\\mathcal V\\times_S\\mathcal V$: over any test, its objects are precisely two objects of $\\mathcal V$ and an isomorphism between them in $\\mathcal X$, which by fullness is an isomorphism in $\\mathcal V$. Thus $\\Delta_{\\mathcal Z/S}$ is quasi-compact. Here stability of quasi-compactness under base change follows directly from [def-sfb-stack-qcqs-morphism]: a further quasi-compact test pulls back to the same fibre product with the original map. The inertia $I_{\\mathcal Z/S}\\to\\mathcal Z$ is a base change of this diagonal, by its explicit object-and-automorphism description, so it too is quasi-compact. Apply [lem-sfb-reduced-qc-inertia-dense-open-gerbe] to obtain an open dense substack $\\mathcal U\\subseteq\\mathcal Z$ and a gerbe $p:\\mathcal U\\to Q$ over an algebraic space. Since $T$ is nonempty, $|\\mathcal U|$ is nonempty. The same diagonal base-change argument gives a quasi-compact $\\Delta_{\\mathcal U/S}$. No quasi-compactness of the dense open is needed.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN, second and third paragraphs; Tag 06RC (proposition-open-stratum)"
+   }
+  },
+  {
+   "text": "By [lem-sfb-gerbe-smooth-universal-homeomorphism], $|p|:|\\mathcal U|\\to|Q|$ is a homeomorphism. By [lem-sfb-gerbe-qc-diagonal-descent], the relative diagonal of $Q/S$ is quasi-compact. The sobriety statement [lem-sfb-quasiseparated-space-sober] therefore applies to $Q$. Its point space is nonempty and irreducible: $|\\mathcal U|$ is a nonempty open subset of the irreducible space $T$. Hence $|Q|$, considered as its own nonempty irreducible closed subset, has a unique generic point, and the homeomorphism gives a unique generic point $\\eta$ of $|\\mathcal U|$. This uses only sobriety of the quotient space, so it does not assume the dense open gerbe is quasi-compact.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-gerbe-qc-diagonal-descent",
+    "lem-sfb-quasiseparated-space-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN, final paragraph; Tag 0DQL; spaces-properties.tex Tag 06NJ (lemma-quasi-separated-sober)"
+   }
+  },
+  {
+   "text": "Since $|\\mathcal U|$ is dense in $T$ and is the closure of $\\eta$ in its subspace topology, $\\overline{\\{\\eta\\}}^{\\,T}=T$. Any other generic point $\\xi$ of $T$ lies in the nonempty open $|\\mathcal U|$: otherwise its closed complement would contain $\\xi$ and hence its closure $T$. Its closure inside $|\\mathcal U|$ is then all of $|\\mathcal U|$, so uniqueness there forces $\\xi=\\eta$. Thus every nonempty irreducible closed subset $T$ has a unique generic point. Together with steps 1–3, these are exactly the four conditions of [def-weil-spectral-space]. If $\\mathcal X$ is empty, it is quasi-compact, the empty family is a compact-open basis, finite intersections are empty, and there are no nonempty irreducible closed subsets; the same conclusion holds.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DQN, conclusion; Topology Tag 08YG (definition-spectral-space)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-quasicompact-surjection",
+  "lem-sfb-stack-point-topology",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-sfb-smooth-atlas-open-image",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-sfb-invariant-closed-substack-descent",
+  "lem-sfb-stack-closed-immersion-calculus",
+  "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "lem-sfb-gerbe-qc-diagonal-descent",
+  "lem-sfb-quasiseparated-space-sober",
+  "def-weil-spectral-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DQN (lemma-spectral-qc-diagonal-qc); expanded reduced-support construction and topological generic-point argument. Sobriety alone (06NJ) suffices for the gerbe quotient, so it need not be quasi-compact."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"SpectralSpace\"",
+   "results": "{\"t\": \"2026-10-23T12:59:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"SpectralSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\"], \"digest\": \"4c715345d0b971e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|spectral.*stack|stack.*spectral",
+   "results": "{\"t\": \"2026-10-23T12:59:34Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|spectral.*stack|stack.*spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Spectral/Prespectral.lean\"], \"digest\": \"054e912a49042ccf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|spectral.*stack|stack.*spectral",
+   "results": "{\"t\": \"2026-10-23T13:09:20Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|spectral.*stack|stack.*spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Spectral/Prespectral.lean\"], \"digest\": \"054e912a49042ccf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact algebraic stack with quasi compact relative diagonal over an affine scheme is spectral",
+   "results": "{\"t\": \"2026-10-23T13:09:20Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact algebraic stack with quasi compact relative diagonal over an affine scheme is spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isSpectralMap\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_iff\", \"SpectralSpace.mk\"], \"digest\": \"5bf2b760b8a6e516\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"SpectralSpace\"",
+   "results": "{\"t\": \"2026-10-23T13:09:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"SpectralSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\"], \"digest\": \"4c715345d0b971e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic stack over an affine base with quasi compact relative diagonal has a spectral point space",
+   "results": "{\"t\": \"2026-10-23T13:09:21Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact algebraic stack over an affine base with quasi compact relative diagonal has a spectral point space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"df9d7d87fe5850e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underlying topological space is spectral for a quasi compact algebraic stack with quasi compact diagonal over a field",
+   "results": "{\"t\": \"2026-10-23T13:09:22Z\", \"tool\": \"leanfinder\", \"query\": \"Underlying topological space is spectral for a quasi compact algebraic stack with quasi compact diagonal over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Hom.isSpectralMap\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"5e3c06498a8b9b72\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned scheme spectral-map and prespectral-space declarations and abstract SpectralSpace; none applies to algebraic-stack point spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic stack with quasi compact diagonal over an affine scheme has a spectral underlying topological space",
+   "results": "{\"t\": \"2026-10-23T13:40:35Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact algebraic stack with quasi compact diagonal over an affine scheme has a spectral underlying topological space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\"], \"digest\": \"3a2a246f77479325\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"SpectralSpace\"",
+   "results": "{\"t\": \"2026-10-23T13:46:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"SpectralSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\"], \"digest\": \"4c715345d0b971e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|spectral.*stack|stack.*spectral",
+   "results": "{\"t\": \"2026-10-23T13:46:30Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|spectral.*stack|stack.*spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Spectral/Prespectral.lean\"], \"digest\": \"054e912a49042ccf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying topological space of a quasi compact algebraic stack with quasi compact diagonal is spectral",
+   "results": "{\"t\": \"2026-10-23T13:46:30Z\", \"tool\": \"leansearch\", \"query\": \"The underlying topological space of a quasi compact algebraic stack with quasi compact diagonal is spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isSpectralMap\", \"SpectralSpace.mk\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.Spec.sheafedSpaceObj_carrier\", \"SpectralSpace\", \"SpectralSpace.toQuasiSeparatedSpace\"], \"digest\": \"dda14a7f7c92e3e2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes or abstract spectral topology; no algebraic-stack or gerbe theorem. Read the scheme QuasiCompact and QuasiSeparated definitions and their diagonal instances; these do not specialize to stacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-stack-closed-specialization",
+  "date": "2026-10-23",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: existence of closed points in the source and target of the integral Zariski-main factor; Noetherianity is only used for the original finite-type stacks. General topological input: Tag 0DQN, used for sobriety before selecting minimal closed subsets.",
+   "via": [
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qc-stack-spectral-point-space",
+  "worker": "stage1",
+  "summary": "Proved the compact-open basis and intersection clauses from an affine smooth atlas and the quasi-compact relative diagonal, constructed arbitrary reduced closed supports by descent, and obtained unique generic points through a dense open gerbe and the existing sobriety theorem for quasi-separated algebraic spaces. Two genuinely smaller source lemmas are new statement-only nodes. No statement changes or new hypotheses. Every citation checked against its statement; no Lean attachment exists.",
+  "blueprint": "Supports the alteration/moduli prerequisite chain recorded in blueprint.from.place below latest det-thm-sf-ctf-stability-direct-images, proof paragraph (3). The imported creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor reports None); preserved this inherited provenance and recorded precise Stacks places for both new nodes. Whole-blueprint searches for spectral, gerbe, 06RC, 0DQL, algebraic space and reduced found no statement of the item or either new lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-open-cover",
+    "why": "Generic scheme/space foundation used for affine covers, quasi-compact affine sources, affine fibre products, or the definition of spectrality; the alteration unit has no separate substitute."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/space foundation used for affine covers, quasi-compact affine sources, affine fibre products, or the definition of spectrality; the alteration unit has no separate substitute."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme/space foundation used for affine covers, quasi-compact affine sources, affine fibre products, or the definition of spectrality; the alteration unit has no separate substitute."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Generic scheme/space foundation used for affine covers, quasi-compact affine sources, affine fibre products, or the definition of spectrality; the alteration unit has no separate substitute."
+   },
+   {
+    "node": "def-weil-spectral-space",
+    "why": "Generic scheme/space foundation used for affine covers, quasi-compact affine sources, affine fibre products, or the definition of spectrality; the alteration unit has no separate substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-open-cover",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-spectral-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-b8d5c62bb",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-b8d5c62bb (reviewer sub-agent of L); spot-checked: I read the delivery in full against Stacks 0DQN (stacks-morphisms l.6721), 06RC (l.6533), 0DQL (l.6438) and spaces-properties 06NJ (l.1863); every tag is checked in tags/tags. Shape: the item statement and stmt_deps are unchanged from live. The item is still unsplit in clones/live and side-live, so the delivery is not superseded. proof_deps equals the union of the step uses, and there is no cycle (closure computed). Steps: (1) an affine atlas that is open, continuous and surjective, with flat-lfp-open applied to the scheme-as-space; (2) affine images give a quasi-compact open basis; (3) B×_S C is affine because S is affine, R=B×_X C is the base change of Δ_{X/S} and is quasi-compact by the test definition, and the image equality (04XH argument) is written correctly inline; (4) the reduced closed substack is built from reduced-closed-support uniqueness on H, with s^{-1}D and t^{-1}D reduced by smooth locality, then invariant-closed-substack-descent (strictly full, D an atlas, so reduced) and a closed-immersion homeomorphism onto T; (5) the full-substack cartesian diagonal square and inertia as a base change of Δ meet the 06RC hypotheses; (6) the gerbe gives a homeomorphism |U|≅|Q|, 0DQL gives a quasi-compact Δ_{Q/S}, and sobriety gives the generic point without needing quasi-compactness of U; (7) the topological generic-point argument is correct, and the empty case is covered. New nodes are statement-only, self-contained and true. 06RC is over a scheme S, with reduced meaning a reduced smooth atlas and inertia defined explicitly; I tested empty X, reduced schemes, BG and the [Spec k[x_i]/G_m] example. 0DQL is relative to S with no quasi-compactness assumptions. Neither duplicates reduced-singleton-qc-diagonal-gerbe (a field singleton corollary), flat-inertia-quotient (06QJ), noetherian-singleton-gerbe (06QK) or qc-diagonal-stack-spectral (the field parent citing the item). Neither restates a clause of the item. Nit: the 0DQL node has an unneeded stmt_dep, lem-sfb-stack-point-topology, which is harmless. Route: all lem-sfb citations are in unit sk-thm-sf-ctf-stability; I accept the declared tool_uses (3 Mathlib leaves and 2 definitions). There is no SGA. Batch-5: every flagged citation reaches sec-trace-formula only through the general definitions def-trf-algebraic-space, def-trf-scheme-algebraic-space and def-trf-projective-bundle-morphism, via definition nodes or general stack-topology lemmas. None is a step of the trace formula or of Poincaré duality, so I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcStackSpectralPointSpace",
+  "declaration": "CategoryTheory.qcStack_spectral_pointSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcStackSpectralPointSpace.lean",
+  "statement": "theorem qcStack_spectral_pointSpace {S : Scheme.{u}} [IsAffine S] (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (hqc : IsQuasiCompactModuli F) (hdiag : IsQuasiCompactAlgebraicModuliMap.{u, v, w, v, max w u, v', w'} (moduliRelativeDiagonal (G := BasedCategory.ofFunctor (𝟭 (Over S))) ⟨F.p, rfl⟩)) : SpectralSpace (ModuliPoints F)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b67d5fff",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; statement verbatim; sorry-only theorem, no defs. Clauses match node/Stacks 0DQN (affine base): [IsAffine S]; IsAlgebraicModuliStack F with free (v,w); IsQuasiCompactModuli = ∃ smooth surjective atlas with compact source; hdiag applies IsQuasiCompactAlgebraicModuliMap to moduliRelativeDiagonal of ⟨F.p,rfl⟩ into ofFunctor (𝟭 (Over S)), whose 2-fibre product is exactly X×_S X with x↦(x,x,id), same convention as landed moduliDiagonalOverIntegers; universe order u,v1,w1,v2,w2,v3,w3 matches landed users, target v, max w u from the Comma hom in Over S, test universes v',w' free. Conclusion SpectralSpace (ModuliPoints F) uses the unique instance moduliPointTopologicalSpace (moduliSmoothPointTopology is a def, no clash); T0+QuasiSober give unique generic points. True: S affine ⇒ qc Δ_{X/S} gives qc absolute Δ. Edge cases empty stack, Spec 0, BG are fine; no Nonempty, finite-type or separation binders. No duplicate in side-live; field parent is a citer. Imports = stmt_dep and proof-dep modules; docstrings carry 0DQN, blueprint id and 7 steps; report has Worker report and Second reading by NC. No file changed, so no compile; worker's clean compile accepted. Nit: ⟨F.p,rfl⟩ = moduliBaseStructure F definitionally."
+ }
+}

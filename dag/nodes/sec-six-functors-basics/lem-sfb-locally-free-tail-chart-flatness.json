@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-locally-free-tail-chart-flatness",
+ "kind": "statement",
+ "title": "A finite locally free graded tail gives flat homogeneous chart rings",
+ "statement": "Let $U$ be a scheme [def-pc-scheme] and $\\mathcal A=\\bigoplus_{d\\geq0}\\mathcal A_d$ a quasi-coherent commutative graded $\\mathcal O_U$-algebra [def-weil-pbc-graded-sheaf-structures, def-weil-pbc-quasi-coherent-algebra]. Fix $m\\geq0$ and suppose that every $\\mathcal A_d$, $d\\geq m$, is finite locally free: every point has an open neighbourhood on which that sheaf is a finite direct sum of copies of $\\mathcal O_U$ [def-amb-finite-locally-free-module]. No common neighbourhood trivializing all degrees is assumed. For any affine open $V=\\operatorname{Spec}R\\subseteq U$, put $A_d=\\Gamma(V,\\mathcal A_d)$ and $A=\\bigoplus_{d\\geq0}A_d$, with the induced graded multiplication. Fix any $f\\in A_1$ and put $C=A_{(f),0}$ [def-nagata-homogeneous-localization-degree-zero]. Each $A_d$ for $d\\geq m$ is a finitely presented projective $R$-module [def-weil-pbc-projective-module] and is flat [def-weil-pbc-flat-ring-map]. On the small nonempty directed set $\\{d\\in\\mathbf N:d\\geq m\\}$ consider the $R$-modules $A_d$, with transition $A_d\\to A_e$, $a\\mapsto f^{e-d}a$ for $e\\geq d$. The maps $\\mu_d:A_d\\to C$, $a\\mapsto a/f^d$, exhibit $C$ as their colimit in $R$-modules [def-weil-pbc-category-colimit]. More explicitly, for every $R$-module $M$ and compatible family of linear maps $h_d:A_d\\to M$, there is a unique linear $h:C\\to M$ with $h\\mu_d=h_d$; for $a\\in A_e$, $e\\geq0$, and any $D\\geq\\max(e,m)$ it satisfies $h(a/f^e)=h_D(f^{D-e}a)$. Consequently $C$ is a flat $R$-module. These conclusions hold for $f=0$ and nilpotent $f$ and impose no equality $A_0=R$, regularity of $f$, polynomial presentation, or Noetherian hypothesis on $U$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-extracted interface for former proof steps 3--5 of lem-sfb-flat-graded-tail-proj: Algebra Section Tag 00JM (section-proj), equal-degree localization; Tag 05UT (lemma-colimit-flat); affine finite locally free sections as in lem-pc-finite-flat-affine-sections-projective and lean/WeilConjectures/AlgebraicGeometry/Modules/LocallyFreeAffine.lean, finitePresentation_projective_sections. The explicit tail-colimit universal property is the agent argument preserved in the report."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-amb-finite-locally-free-module",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-category-colimit",
+  "def-nagata-relative-proj"
+ ],
+ "proof": [
+  {
+   "text": "For each $d\\geq m$, apply lem-pc-finite-flat-affine-sections-projective to $\\mathcal A_d$ and the affine open $V$. It gives finite presentation and projectivity of $A_d$ over $R$. Apply lem-weil-pbc-projective-module-flat to obtain flatness. This is a separate application for each degree; no simultaneous trivialization is used.",
+   "uses": [
+    "lem-pc-finite-flat-affine-sections-projective",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051G (lemma-local-artinian-characterize-flat), first sentence of proof, for projective implies flat; affine sections supplied by the cited project theorem"
+   }
+  },
+  {
+   "text": "Put $I=\\{d\\in\\mathbf N:d\\geq m\\}$. It is small, contains $m$, and has upper bound $\\max(d,e)$ for each pair. Graded bilinearity makes $t_{de}(a)=f^{e-d}a$ linear; $t_{dd}=1$ and $t_{eh}t_{de}=t_{dh}$ follow by adding exponents. The fraction operations make $\\mu_d(a)=a/f^d$ linear, and $\\mu_et_{de}=\\mu_d$. Every $a/f^e\\in C$ equals $\\mu_D(f^{D-e}a)$ for any $D\\geq\\max(e,m)$.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JM (section-proj), equal-degree fractions; Tag 00CO (definition-localization), fraction operations"
+   }
+  },
+  {
+   "text": "Given compatible linear maps $h_d:A_d\\to M$, prescribe $h(a/f^e)=h_D(f^{D-e}a)$ for $D\\geq\\max(e,m)$. Enlarging $D$ does not change this value by compatibility, so any two choices agree at their maximum. If $a/f^e=b/f^t$, the localization relation gives $k\\geq0$ with $f^k(f^ta-f^eb)=0$. Choose $L\\geq\\max(m,D,E,e+t+k)$, where $D,E$ are the chosen levels. Multiplication by $f^{L-e-t-k}$ gives $f^{L-e}a=f^{L-t}b$ in $A_L$. Applying $h_L$ and compatibility proves equality of the prescribed values. Thus $h$ is well-defined without cancellation.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), equality relation, specialized to powers of f; explicit agent common-degree calculation"
+   }
+  },
+  {
+   "text": "For two fractions choose $D\\geq\\max(e,t,m)$ and set $u=f^{D-e}a$, $v=f^{D-t}b$. Then $a/f^e+b/f^t=(u+v)/f^D$, so linearity of $h_D$ gives additivity of $h$. For $r\\in R$, $r(a/f^e)=(ra)/f^e$ gives $h(r(a/f^e))=rh(a/f^e)$; also $h(0)=0$. Taking $D=d$ gives $h\\mu_d=h_d$. Any map with these identities has the same value on every $a/f^e=\\mu_D(f^{D-e}a)$, so it equals $h$. This proves exactly the colimit universal property and its stated formula.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization) and 002F (categories-definition-colimit); explicit linearity and uniqueness calculation"
+   }
+  },
+  {
+   "text": "The diagram of step 2 is indexed by a small nonempty directed set, all its modules are flat by step 1, and steps 3--4 prove that its cocone with vertex $C$ is a colimit. Apply lem-weil-pbc-filtered-colimit-flat-modules to this cocone to conclude that $C$ is flat over $R$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05UT (lemma-colimit-flat)"
+   }
+  },
+  {
+   "text": "If $f^N=0$, every localization fraction is zero. Every compatible family also satisfies $h_d(a)=h_{d+N}(f^Na)=0$, so the same universal property gives the zero module, which is flat by step 5. This includes $f=0$, the zero ring and empty affine opens. All calculations use only the structural action $R\\to A_0$ and the degree-one condition on $f$; they require no injectivity, regularity or Noetherian hypothesis.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), zero denominator powers; nilpotent edge case of the same calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-ring-localization-away",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit tail-colimit universal-property proof from Tag 00JM (section-proj) and Tag 00CO (definition-localization); flatness assembled using Tag 05UT (lemma-colimit-flat) and the existing affine-sections theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]lat|[Cc]olimit|[Dd]irect[Ll]imit",
+   "results": "{\"t\": \"2026-10-22T06:02:36Z\", \"tool\": \"grep\", \"query\": \"[Ff]lat|[Cc]olimit|[Dd]irect[Ll]imit\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomogeneousLocalization describes fractions but not this tail-colimit universal property; localization flatness over the entire graded ring does not give flatness over R from only the high homogeneous pieces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree zero homogeneous localization at a degree one element is flat over the base if the graded components are flat in all sufficiently large degrees",
+   "results": "{\"t\": \"2026-10-22T06:02:36Z\", \"tool\": \"leansearch\", \"query\": \"The degree zero homogeneous localization at a degree one element is flat over the base if the graded components are flat in all sufficiently large degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization\", \"Module.flat_iff_of_isLocalization\", \"Module.Flat.localizedModule\", \"RingHom.Flat.holdsForLocalizationAway\", \"Localization.flat\", \"Module.flat_of_localized_span\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.fromZeroRingHom\"], \"digest\": \"3a126b05933ea0a1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomogeneousLocalization describes fractions but not this tail-colimit universal property; localization flatness over the entire graded ring does not give flatness over R from only the high homogeneous pieces."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization, Module.Flat",
+   "results": "{\"t\": \"2026-10-22T06:02:37Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomogeneousLocalization describes fractions but not this tail-colimit universal property; localization flatness over the entire graded ring does not give flatness over R from only the high homogeneous pieces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous degree one localization is a filtered colimit of the high degree pieces of a graded algebra and is flat if those pieces are locally free on an affine base",
+   "results": "{\"t\": \"2026-10-22T06:02:46Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous degree one localization is a filtered colimit of the high degree pieces of a graded algebra and is flat if those pieces are locally free on an affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization\", \"AlgebraicGeometry.Proj\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.map\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.Proj.awayι\", \"HomogeneousLocalization.AtPrime\"], \"digest\": \"06c876ca5538369d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomogeneousLocalization describes fractions but not this tail-colimit universal property; localization flatness over the entire graded ring does not give flatness over R from only the high homogeneous pieces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fractions b over f to the d identify the degree zero part of localization with the direct limit of B d under multiplication by f",
+   "results": "{\"t\": \"2026-10-22T06:02:47Z\", \"tool\": \"leanfinder\", \"query\": \"The fractions b over f to the d identify the degree zero part of localization with the direct limit of B d under multiplication by f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.NumDenSameDeg.embedding\", \"HomogeneousLocalization.Away.isLocalization_mul\", \"HomogeneousLocalization.awayMapAux_mk\", \"HomogeneousLocalization.val\", \"HomogeneousLocalization\", \"HomogeneousLocalization.Away.val_mk\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.val_mk\"], \"digest\": \"7b1ab2ccd71556c0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomogeneousLocalization describes fractions but not this tail-colimit universal property; localization flatness over the entire graded ring does not give flatness over R from only the high homogeneous pieces."
+  },
+  {
+   "tool": "grep",
+   "query": "mk_surjective|val_injective|fromZeroRingHom|Away",
+   "results": "{\"t\": \"2026-10-22T06:04:35Z\", \"tool\": \"grep\", \"query\": \"mk_surjective|val_injective|fromZeroRingHom|Away\", \"sub\": \"RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"14\", \"295\", \"312\", \"318\", \"474\"], \"digest\": \"536c2891b1082c0a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomogeneousLocalization describes fractions but not this tail-colimit universal property; localization flatness over the entire graded ring does not give flatness over R from only the high homogeneous pieces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat|[Cc]olimit|[Dd]irect[Ll]imit",
+   "results": "{\"t\": \"2026-10-23T09:47:36Z\", \"tool\": \"grep\", \"query\": \"[Ff]lat|[Cc]olimit|[Dd]irect[Ll]imit\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct homogeneous fractions and their representatives, but do not state this tail-colimit universal property or the combined affine locally-free tail flatness theorem. Read HomogeneousLocalization.lean:281-318 and 601-626."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded algebra whose high degree components are finite locally free has flat degree zero homogeneous localizations",
+   "results": "{\"t\": \"2026-10-23T09:47:36Z\", \"tool\": \"leansearch\", \"query\": \"A graded algebra whose high degree components are finite locally free has flat degree zero homogeneous localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.Away.finiteType\", \"HomogeneousLocalization.deg\", \"HomogeneousLocalization.isLocalRing\", \"HomogeneousLocalization.AtPrime\", \"HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization\", \"HomogeneousLocalization.Away.mk\"], \"digest\": \"779cdf95e237a0fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct homogeneous fractions and their representatives, but do not state this tail-colimit universal property or the combined affine locally-free tail flatness theorem. Read HomogeneousLocalization.lean:281-318 and 601-626."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T09:47:37Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization.Away, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct homogeneous fractions and their representatives, but do not state this tail-colimit universal property or the combined affine locally-free tail flatness theorem. Read HomogeneousLocalization.lean:281-318 and 601-626."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero homogeneous localization of a graded algebra at a degree one element is the colimit of its sufficiently large graded pieces under multiplication by that element",
+   "results": "{\"t\": \"2026-10-23T09:47:39Z\", \"tool\": \"leanfinder\", \"query\": \"The degree zero homogeneous localization of a graded algebra at a degree one element is the colimit of its sufficiently large graded pieces under multiplication by that element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.mk\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousLocalization.Away.val_mk\", \"HomogeneousLocalization.awayMap\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization\", \"HomogeneousLocalization.awayMapₐ\", \"HomogeneousLocalization.Away.eventually_smul_mem\"], \"digest\": \"606cfef457c6ebbf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct homogeneous fractions and their representatives, but do not state this tail-colimit universal property or the combined affine locally-free tail flatness theorem. Read HomogeneousLocalization.lean:281-318 and 601-626."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fractions a over f to the n identify a homogeneous localization with a direct limit of modules indexed by degrees",
+   "results": "{\"t\": \"2026-10-23T09:47:40Z\", \"tool\": \"leanfinder\", \"query\": \"Fractions a over f to the n identify a homogeneous localization with a direct limit of modules indexed by degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousLocalization.Away.val_mk\", \"HomogeneousLocalization.Away.mk\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.awayMapAux_mk\", \"HomogeneousLocalization.mk\", \"HomogeneousLocalization.val\"], \"digest\": \"f39cb4d3fc2de7dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits construct homogeneous fractions and their representatives, but do not state this tail-colimit universal property or the combined affine locally-free tail flatness theorem. Read HomogeneousLocalization.lean:281-318 and 601-626."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-graded-tail-proj",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: A locally free graded tail gives a flat projective family with its Hilbert polynomial; Agent-extracted interface for former proof steps 3--5 of lem-sfb-flat-graded-tail-proj: Algebra Section Tag 00JM (section-proj), equal-degree localization; Tag 05UT (lemma-colimit-flat); affine finite locally free sections as in lem-pc-finite-flat-affine-sections-projective and lean/WeilConjectures/AlgebraicGeometry/Modules/LocallyFreeAffine.lean, finitePresentation_projective_sections. The explicit tail-colimit universal property is the agent argument preserved in the report.",
+   "via": [
+    "lem-sfb-flat-graded-tail-proj",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-free-tail-chart-flatness",
+  "worker": "stage1",
+  "summary": "Q134 preserves the statement and gives an explicit six-step proof: affine finite-projective sections, tail cocone, independence from levels and representatives, linear universal property, directed-colimit flatness, and nilpotent edge cases. All non-elementary ingredients already exist in the DAG; no new nodes. Item Mathlib searches rerun through the required logged command with two semantic phrasings.",
+  "blueprint": "The ancestor command returns null; retained the inherited exact from.place and via chain. This realizes the locally free graded-tail affine-chart prerequisite of lem-sfb-flat-graded-tail-proj, formerly its steps 3--5, in the Hilbert-scheme branch below det-thm-sf-ctf-stability-direct-images (3). Read the current latest blueprint direct-images proof and searched the whole blueprint for homogeneous localization, colimit flat, and projective flat; none states this item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic affine finite locally free sections theorem, applied separately in each degree; no new sheaf-theoretic route or simultaneous frame is needed."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "Generic module theorem from Stacks 05UT applied after the item explicitly proves its tail cocone is a colimit. No node of this unit replaces this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-filtered-colimit-flat-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-30f2dc0fb",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-30f2dc0fb (reviewer sub-agent of L); spot-checked: Read the item in full, all 8 stmt_deps and all 7 proof_deps, the parent lem-sfb-flat-graded-tail-proj (live, Q41-reviewed; its step 2 uses exactly this item's flatness clause), and the sources: Stacks 00JM l.13399-13408, 05UT l.8659-8669, 051G l.24332, and LocallyFreeAffine.lean finitePresentation_projective_sections (general IsFiniteLocallyFree). The statement is unchanged against live. The item is still unsplit live, so the delivery is not superseded. The item has no repair note of its own, so six self-contained steps with no new nodes is the right shape. Steps: (1) lem-pc gives finitely presented and projective in each degree separately; Module.Flat.of_projective gives flat. (2) I={d>=m} is nonempty and directed; t_de is R-linear by bilinearity; mu_e t_de = mu_d; coverage a/f^e = f^{D-e}a/f^D. (3) Representative independence uses f^k(f^t a - f^e b)=0 multiplied by f^{L-e-t-k}; exponents checked, no cancellation of f. (4) Linearity, h mu_d = h_d and uniqueness give exactly the colimit universal property. (5) Every hypothesis of the 05UT node holds. (6) Nilpotent f gives C=0. Cases tested: R[x] with f=x; R[x,y] with f=x; Z/4[x] with f=2x (both sides 0); f=0 and R=0; A_0 != R. No duplicate found after rg -L over the snapshot (closest candidates read: nagata scalar-extension, sfb relative-section-image-flat-fp, hilbert-grassmann-chart, hilbert-chart-gluing, sc veronese-fractions). No SGA. Accepted tool_uses: lem-pc-finite-flat-affine-sections-projective and lem-weil-pbc-filtered-colimit-flat-modules (generic). Advisory, inherited and unchanged: the statement spells out finite locally free with varying rank but cites def-amb (constant rank); lem-pc cites the same node and its Lean is the general notion, so step 1 matches what the item states. coord/dag-sync.md is absent from the snapshot. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFreeTailChartFlatness",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.locallyFree_tail_chart_flatness",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.tailChartSection",
+   "AlgebraicGeometry.RelativeProjAlgebra.tailChartRing",
+   "AlgebraicGeometry.RelativeProjAlgebra.tailChartFraction",
+   "AlgebraicGeometry.RelativeProjAlgebra.locallyFree_tail_chart_flatness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFreeTailChartFlatness.lean",
+  "statement": "theorem locallyFree_tail_chart_flatness {X : Scheme.{u}} (A : RelativeProjAlgebra X) (m : ℕ) (htail : ∀ d : ℕ, m ≤ d → (A.piece d).IsFiniteLocallyFree) (V : X.affineOpens) (f : A.grade V 1) : (∀ d : ℕ, m ≤ d → Module.FinitePresentation Γ(X, V.1) Γ(A.piece d, V.1) ∧ Module.Projective Γ(X, V.1) Γ(A.piece d, V.1) ∧ Module.Flat Γ(X, V.1) Γ(A.piece d, V.1)) ∧ (∃ (t : ∀ (d e : ℕ), d ≤ e → Γ(A.piece d, V.1) →ₗ[Γ(X, V.1)] Γ(A.piece e, V.1)) (μ : ∀ d : ℕ, Γ(A.piece d, V.1) →ₗ[Γ(X, V.1)] A.tailChartRing V f), (∀ (d e : ℕ) (hde : d ≤ e) (a : Γ(A.piece d, V.1)), (A.tailChartSection V e (t d e hde a)).val = f.val ^ (e - d) * (A.tailChartSection V d a).val) ∧ (∀ (d : ℕ) (a : Γ(A.piece d, V.1)), μ d a = A.tailChartFraction V f d a) ∧ (∀ (d : ℕ) (hd : m ≤ d), t d d le_rfl = LinearMap.id) ∧ (∀ (d e k : ℕ) (hd : m ≤ d) (hde : d ≤ e) (hek : e ≤ k), (t e k hek).comp (t d e hde) = t d k (hde.trans hek)) ∧ (∀ (d e : ℕ) (hd : m ≤ d) (hde : d ≤ e), (μ e).comp (t d e hde) = μ d) ∧ (∀ (M : Type (max u v)) [AddCommGroup M] [Module Γ(X, V.1) M] (h : ∀ d : {d : ℕ // m ≤ d}, Γ(A.piece d.val, V.1) →ₗ[Γ(X, V.1)] M), (∀ (d e : {d : ℕ // m ≤ d}) (hde : d.val ≤ e.val), (h e).comp (t d.val e.val hde) = h d) → ∃ H : A.tailChartRing V f →ₗ[Γ(X, V.1)] M, (∀ d : {d : ℕ // m ≤ d}, H.comp (μ d.val) = h d) ∧ (∀ H' : A.tailChartRing V f →ₗ[Γ(X, V.1)] M, (∀ d : {d : ℕ // m ≤ d}, H'.comp (μ d.val) = h d) → H' = H) ∧ (∀ (e : ℕ) (a : Γ(A.piece e, V.1)) (D : ℕ) (heD : e ≤ D) (hmD : m ≤ D), H (A.tailChartFraction V f e a) = h ⟨D, hmD⟩ (t e D heD a)))) ∧ Module.Flat Γ(X, V.1) (A.tailChartRing V f)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed RelativeProjAlgebra and affine section grading from def-nagata-relative-proj. The colimit clause is its explicit linear-family universal property, including the formula at every sufficiently large denominator. Helpers construct actual image inclusions and homogeneous fractions; no data are chosen from existence. The base R-algebra structure on the chart ring is the existing upstream HomogeneousLocalization.algebra (R -> A_0 -> A_(f),0) of WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization; the delivered duplicate instance tailChartAlgebra/tailChartBaseMap was removed by the maintainer review (one definition per notion, no instance diamond).",
+  "fixed_by": "NT-stage2-cc-8db70c3b6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8db70c3b6",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: RelativeProjAlgebra input (same as parent flat-graded-tail-proj), variable-rank IsFiniteLocallyFree tail (universe fixed by the site), fp+projective+flat sections, pinned transitions t and fractions μ, full explicit colimit UP with the formula for every e and D>=max(e,m), flatness of C; edge cases f=0, nilpotent f, A_0≠R, m=0, empty V covered; statement verbatim; added stmt_dep def-nagata-relative-proj has landed. Finding H4: tailChartBaseMap + instance tailChartAlgebra duplicated upstream HomogeneousLocalization.algebra (WeilConjectures/Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean:80, publicly imported via RelativeProj.Basic) with a non-defeq smul (instance diamond). FIX: removed both helpers, added the explicit public import, lean-record.json trims declarations (statement verbatim), report.md gains a maintainer-fix section. refit_record had no notes or refusals; nt_compile --json on the fixed file was clean (2.6 s)."
+ }
+}

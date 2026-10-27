@@ -1,0 +1,308 @@
+{
+ "id": "lem-trf-tensor-double-hom-exact-comparisons",
+ "kind": "statement",
+ "title": "Exact tensor and two-target double-Hom functors with specified signed comparisons",
+ "statement": "Let $R$ be a commutative ring and $L,M\\in D(R)$ [def-weil-abstract-derived-category]. Use $H(X,Y)=R\\operatorname{Hom}_R(X,Y)$ on the one-object ringed site [def-pur-derived-internal-hom], the direct-sum total tensor [def-pc-tensor-complex-sheaves], and K-flat replacements [def-pc-kflat-complex]. Put $F(K)=H(L,M)\\otimes_R^{\\mathbf L}K$ and $G(K)=H(H(K,L),M)$. Choose K-injective representatives $J,I$ of $L,M$ [def-pur-kinjective-complex], and write $A^\\bullet=\\operatorname{Hom}^\\bullet_R(J,I)$, using the Hom complex [def-pur-hom-complex]. For a complex $U$ and target complex $V$, denote by $s^V_{U,m}:\\operatorname{Hom}^\\bullet(U[m],V)\\xrightarrow{\\sim}\\operatorname{Hom}^\\bullet(U,V)[-m]$ the signed comparison that reindexes source components and multiplies a degree-$q$ map by $(-1)^{mq}$.\nBoth $F$ and $G$ are exact functors of triangulated categories [def-weil-triangulated-category] with coherent integer-shift comparisons $\\varphi_{K,m}:F(K[m])\\xrightarrow{\\sim}F(K)[m]$ and $\\psi_{K,m}:G(K[m])\\xrightarrow{\\sim}G(K)[m]$ having the following normalization on K-flat representatives $P$ of $K$:\n$$\\varphi_{P,m}(h\\otimes x)=(-1)^{ma}h\\otimes x\\quad(|h|=a),$$\n$$\\psi_{P,m}=Q\\!\\left((-1)^m s^I_{\\operatorname{Hom}^\\bullet(P,J),-m}\\circ\\operatorname{Hom}^\\bullet(s^J_{P,m},I)^{-1}\\right),$$\nunder the canonical derived representative identifications, where $Q$ is localization. For every chain map $u:P_1\\to P_2$ of K-flat complexes, with cone $C$, the tensor-cone isomorphism on representatives is\n$$\\operatorname{Tot}(A^\\bullet\\otimes_R C)\\xrightarrow{\\sim}\\operatorname{Cone}(\\operatorname{Tot}(A^\\bullet\\otimes_Ru)),\\qquad h\\otimes(y,x)\\longmapsto(h\\otimes y,(-1)^a h\\otimes x).$$\nIt respects the cone inclusion and the negative projection defining the connecting arrow, the latter after $\\varphi_{P_1,1}$. Exactness of $G$ uses the two contravariant triangle reversals, with precisely the comparison $\\psi$ displayed above, including its factor $(-1)^m$. No boundedness or equality $L=M$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064J (lemma-derived-tor-exact), tensor-cone inclusion and projection calculation; literature/stacks-project/sites-cohomology.tex Tag 08JC (lemma-RHom-triangulated), two first-variable reversals with the explicit signed composite comparison. Agent expansion of these signed comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-hom-complex",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Work on the one-object identity-covering site, whose module sheaves are precisely $R$-modules. Choose the stated $J,I$ by [prop-pur-kinjective-resolutions-exist]. By [def-pur-derived-internal-hom], $QA=H(L,M)$ and $Q\\mathcal G(U)=G(QU)$ for $\\mathcal G(U)=\\operatorname{Hom}^\\bullet(\\operatorname{Hom}^\\bullet(U,J),I)$, for every complex $U$. No K-injectivity of $\\operatorname{Hom}^\\bullet(U,J)$ is needed: the target of the outer Hom is $I$. Choose a flat-term K-flat resolution $B\\to A$ by [lem-pc-kflat-resolution]. The exact functor $QB\\otimes^{\\mathbf L}-$ of [lem-weil-pbc-kflat-fixed-tensor-triangulated] is $F$. For any K-flat $P$, the map $B\\otimes P\\to A\\otimes P$ is a quasi-isomorphism, because tensor with the fixed K-flat $P$ preserves arbitrary quasi-isomorphisms by [lem-weil-pbc-total-tensor-homotopy-cone-signs]. Thus $Q(A\\otimes P)$ is the required representative of $F(QP)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-RHom-well-defined), 08JC (lemma-RHom-triangulated); More on Algebra Tag 064J (lemma-derived-tor-exact) and K-flat derived tensor construction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-total-tensor-integer-shifts] with fixed first argument $A$: its second-variable comparison is $h\\otimes x\\mapsto(-1)^{m|h|}h\\otimes x$, and satisfies zero and addition of shifts. The tensor-cone isomorphism of [lem-weil-pbc-total-tensor-homotopy-cone-signs], also for an arbitrary fixed complex $A$, sends $h\\otimes(y,x)$ to $(h\\otimes y,(-1)^{|h|}h\\otimes x)$. Its inclusion equation and $p\\phi=s^2_1(A\\otimes p)$ imply $(-p)\\phi=s^2_1(A\\otimes(-p))$. Hence it respects exactly the negative connecting projection, with the displayed $\\varphi$. Naturality in the fixed argument applies to $B\\to A$; therefore these formulas agree with the exact derived shift structure in step 1. The same statements show that shifts and cones of K-flat complexes remain K-flat: shifts are covered explicitly; tensoring a cone with an acyclic complex is the cone of a map between acyclic tensor complexes, so is acyclic by [lem-pur-quasi-iso-cone-acyclic] (the map between acyclic complexes is a quasi-isomorphism since all cohomology objects vanish).",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064J (lemma-derived-tor-exact), tensor-cone calculation with negative connecting projection"
+   }
+  },
+  {
+   "text": "Write $\\epsilon(t)=(-1)^t$. The differential of [def-pur-hom-complex] gives $df=d_Vf-\\epsilon(q+m)fd_U$ for a degree-$q$ map from $U[m]$. Multiplication by $\\epsilon(mq)$ after reindexing is a chain map: both resulting differentials equal $\\epsilon(mq+m)d_Vf-\\epsilon(mq+q)fd_U$. Its inverse has the same sign, and it commutes with precomposition by chain maps. This proves the stated $s^V_{U,m}$ for every target $V$. Put $T_J(U)=\\operatorname{Hom}^\\bullet(U,J)$. For $g\\in\\mathcal G(U[m])^n$ and $f\\in T_J(U)^c$, the inverse precomposition comparison contributes $\\epsilon(m(c+m))$, the outer source comparison contributes $\\epsilon(mn)$, and the leading factor contributes $\\epsilon(m)$. Since $m^2+m$ is even, the displayed composite is therefore\n$$(\\chi_{U,m}g)(f)=\\epsilon(m(n+c))g(f),$$\nwhere $f$ on the right is reindexed to degree $c+m$. This proves that the prescribed $\\psi=Q\\chi$ is a natural chain isomorphism. Zero shift is identity. To compose shifts $m,l$, extraction of $l$ at $U[m]$ contributes $\\epsilon(l(n+c+m))$ and extraction of $m$, shifted by $l$, contributes $\\epsilon(m(n+l+c))$; their product is $\\epsilon((m+l)(n+c))$. Thus $\\chi$, and consequently $\\psi$, has the coherent integer-shift law.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), explicit differential and parity calculation expanding Tag 08JC (lemma-RHom-triangulated)"
+   }
+  },
+  {
+   "text": "To obtain the mixed-target cone comparison without assuming $J=I$, apply [lem-sf-double-hom-cone-comparison] to the single auxiliary target $V=J\\oplus I$. Its theorem permits every complex $V$. Finite biproducts give\n$$\\operatorname{Hom}^\\bullet(\\operatorname{Hom}^\\bullet(U,V),V)\n=\\bigoplus_{D,E\\in\\{J,I\\}}\\operatorname{Hom}^\\bullet(\\operatorname{Hom}^\\bullet(U,D),E).$$\nThis is an identity of complexes: restrict a map to each of the two inner summands and project to each outer summand; the inverse adds these four maps. The Hom differential preserves each block. Every formula for $s,\\chi,\\theta$ in the cited statement preserves these blocks as well: $s$ only reindexes and multiplies by a sign, and $\\theta$ only multiplies the cone-source component by $(-1)^{p+r}$. Restrict to the block $(D,E)=(J,I)$. With $X=\\operatorname{Hom}^\\bullet(P_2,J)$, $Y=\\operatorname{Hom}^\\bullet(P_1,J)$, and $C=\\operatorname{Cone}(u)$, it yields\n$$\\theta_u:\\mathcal G(C)\\xrightarrow{\\sim}\\operatorname{Cone}(\\mathcal G(u)),\\qquad(\\alpha,\\beta)\\longmapsto(\\alpha,\\gamma),\\quad\\gamma_r=(-1)^{p+r}\\beta_r.$$\nHere in degree $p$, $\\alpha_q:X^q\\to I^{q+p}$ and $\\beta_r:Y^r\\to I^{r+p+1}$. The restriction of the inverse of the four-block chain isomorphism is an inverse on this block, so this is a chain isomorphism, natural in $u$.",
+   "uses": [
+    "lem-sf-double-hom-cone-comparison",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), reduction to the explicit same-target cone comparison by a finite biproduct of targets"
+   }
+  },
+  {
+   "text": "The inclusion and negative-projection equations of [lem-sf-double-hom-cone-comparison] also restrict to this block. Indeed the double-Hom map induced by a source chain map acts on each block separately by two precompositions, and the cone inclusion and projection preserve the same four blocks. They give\n$$\\theta_u\\mathcal G(i)=i_{\\mathcal G(u)},\\qquad\n\\chi_{P_1,1}\\mathcal G(-\\pi)=-\\pi_{\\mathcal G(u)}\\theta_u.$$\nThe restricted comparison is exactly $-s^I_{T_J(P_1),-1}\\operatorname{Hom}^\\bullet(s^J_{P_1,1},I)^{-1}$, namely step 3 at $m=1$. Thus no boundary sign has been suppressed. Concretely, $\\operatorname{Hom}^\\bullet(C,J)^q=X^q\\oplus Y^{q-1}$ with differential $(x,y)\\mapsto(d_Xx,d_Yy+(-1)^{q+1}\\operatorname{Hom}(u,J)x)$, by substituting the cone matrix in [def-pur-hom-complex]. This is the first contravariant reversal; the second Hom and its $\\theta$ sign perform the second reversal. The resulting connecting comparison is $\\chi_{P_1,1}$, including its leading minus sign, as asserted.",
+   "uses": [
+    "lem-sf-double-hom-cone-comparison",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), two reversals and their connecting-map sign; Tag 0A8X (section-hom-complexes)"
+   }
+  },
+  {
+   "text": "For any quasi-isomorphism $t:U\\to U'$, [lem-pur-rhom-well-defined] first makes $\\operatorname{Hom}(t,J)$ a quasi-isomorphism, using the identity of the K-injective target $J$, and then makes its precomposition into the K-injective $I$ a quasi-isomorphism. Hence $Q\\mathcal G$ descends to the functor $G$ specified by [def-pur-derived-internal-hom]. The natural chain comparisons and their equalities descend as well: naturality for an inverted map follows by multiplying its naturality equation by inverses. By [def-weil-abstract-derived-category], every distinguished derived triangle is isomorphic to a localized cone triangle of some chain map. Steps 4--5, which hold for arbitrary source complexes, identify its $G$ image, including all three arrows with the comparison $Q\\chi_{-,1}$, with a localized cone triangle. Thus $G$ is exact in the sense of [def-weil-triangulated-category]. Step 3 supplies its coherent integer comparisons, while steps 1--2 supply those of $F$ and the stated tensor cone formula. All constructions use only arbitrary complexes, finite biproducts, and K-flat or K-injective resolutions with no boundedness hypothesis and with independently chosen $J,I$.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-RHom-well-defined) and 08JC (lemma-RHom-triangulated), localization of the explicit cone models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pur-hom-complex",
+  "lem-sf-double-hom-cone-comparison",
+  "lem-pur-rhom-well-defined",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC (lemma-RHom-triangulated), explicit mixed-target expansion; More on Algebra Tag 064J (lemma-derived-tor-exact)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a fixed complex and double contravariant derived Hom are exact functors with signed cone and shift comparison maps",
+   "results": "8 hits; top=[\"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_map_app\", 'CategoryTheory.Abelian.Ext.mapExactFunctor_hom', 'CategoryTheory.Tor', 'CategoryTheory.Tor_map', 'CategoryTheory.Abelian.Ext.mapExactFunctor', 'CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors', \"CategoryTheory.Tor'_obj_obj\"]; subdirectory=; note=; digest=f249efb9607268bc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors, Tor and ordinary-module tensor exactness do not give the normalized cone-boundary and two-target double-Hom comparisons asserted here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"tensor\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors, Tor and ordinary-module tensor exactness do not give the normalized cone-boundary and two-target double-Hom comparisons asserted here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor and double contravariant internal Hom preserve distinguished triangles with signed shift isomorphisms",
+   "results": "8 hits; top=['CategoryTheory.Functor.IsTriangulated.mk', 'HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory', 'CategoryTheory.Equivalence.IsTriangulated.symm', 'HomotopyCategory.Pretriangulated.rotate_distinguished_triangle', 'HomotopyCategory.Pretriangulated.shift_distinguished_triangle', 'CategoryTheory.Pretriangulated.Opposite.isomorphic_distinguished', \"CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'\", 'CochainComplex.mappingCone.mapTriangleIso']; subdirectory=; note=; digest=71b0c7638e99e1ce",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors, Tor and ordinary-module tensor exactness do not give the normalized cone-boundary and two-target double-Hom comparisons asserted here"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ss]hift|[Ii]sTriangulated.*tensor|doubleHom|tensor.*[Mm]appingCone",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors, Tor and ordinary-module tensor exactness do not give the normalized cone-boundary and two-target double-Hom comparisons asserted here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of tensoring and of the composite of two contravariant Hom functors, with explicit signed connecting morphisms",
+   "results": "8 hits; top=['LinearMap.rTensor_exact_iff_lTensor_exact', 'Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_shortComplex_exact', \"CategoryTheory.Tor'\", 'lTensor_exact', 'CategoryTheory.tensorLeftHomEquiv_tensor', 'rTensor_exact', 'CategoryTheory.Tor']; subdirectory=; note=; digest=d2acda5d7437f752",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact functors, Tor and ordinary-module tensor exactness do not give the normalized cone-boundary and two-target double-Hom comparisons asserted here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"op\"",
+   "results": "{\"t\": \"2026-10-22T07:05:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTriangulated\\\", \\\"op\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.ObjectProperty.IsTriangulated\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₁\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₂\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₃\", \"CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift\", \"CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\"], \"digest\": \"7f3e3eb78a6a651a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composition and shift/cone infrastructure do not identify the two-target Hom model with the displayed signed comparisons and tensor-cone normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "doubleHom|tensor.*[Mm]appingCone|[Ii]sTriangulated.*[Hh]om",
+   "results": "{\"t\": \"2026-10-22T07:05:22Z\", \"tool\": \"grep\", \"query\": \"doubleHom|tensor.*[Mm]appingCone|[Ii]sTriangulated.*[Hh]om\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean\"], \"digest\": \"beb2ba84e6f4bbd6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composition and shift/cone infrastructure do not identify the two-target Hom model with the displayed signed comparisons and tensor-cone normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite of two contravariant derived Hom functors is triangulated with signed shift comparison",
+   "results": "{\"t\": \"2026-10-22T07:05:23Z\", \"tool\": \"leansearch\", \"query\": \"Composite of two contravariant derived Hom functors is triangulated with signed shift comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated.instComp\", \"CategoryTheory.Adjunction.IsTriangulated.comp\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.isTriangulated_of_op\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Pretriangulated.Opposite.OpOpCommShift.iso\", \"CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'\", \"CategoryTheory.Pretriangulated.Opposite.OpOpCommShift.iso_hom_app_assoc\"], \"digest\": \"884c3bb8b9b0186c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composition and shift/cone infrastructure do not identify the two-target Hom model with the displayed signed comparisons and tensor-cone normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and two successive contravariant derived Hom functors preserve triangles with explicit signed integer shifts",
+   "results": "{\"t\": \"2026-10-22T07:05:30Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor and two successive contravariant derived Hom functors preserve triangles with explicit signed integer shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"DerivedCategory.instPretriangulated\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Tor'_map_app\"], \"digest\": \"aad1e881c5bf5562\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composition and shift/cone infrastructure do not identify the two-target Hom model with the displayed signed comparisons and tensor-cone normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed shift map on the double Hom complex and the tensor cone isomorphism including the negative cone projection",
+   "results": "{\"t\": \"2026-10-22T07:05:34Z\", \"tool\": \"leanfinder\", \"query\": \"The signed shift map on the double Hom complex and the tensor cone isomorphism including the negative cone projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv\", \"CochainComplex.mappingCone.shiftIso\", \"CochainComplex.mappingCone.inl_v_triangle_mor₃_f\", \"CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv\", \"CochainComplex.mappingCone.shiftTriangleIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"HomologicalComplex₂.ι_totalShift₁Iso_inv_f\"], \"digest\": \"68e3e017134e5bc8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composition and shift/cone infrastructure do not identify the two-target Hom model with the displayed signed comparisons and tensor-cone normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-canonical-map",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof step 4: tensor-cone exactness with its boundary sign, and two-target double contravariant Hom exactness with the signed composite shift.",
+   "via": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-tensor-double-hom-exact-comparisons",
+  "worker": "stage1",
+  "summary": "Reused the existing signed total-tensor and single-target double-Hom cone statements. Extracted the mixed-target block from the latter applied to J plus I, checked the coherent integer shift parity and negative boundary, and descended the models. No statement change and no new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof step 4: tensor-cone exactness with its boundary sign, and two-target double contravariant Hom exactness with the signed composite shift.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded K-injective resolutions on the one-object site; a generic resolution tool, not a replacement of the local-term route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat resolution of the fixed Hom complex; generic resolution input."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Exactness of the fixed derived tensor and representative-normalized shifts, used as a generic algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "Arbitrary fixed-complex tensor cone, boundary signs and K-flat quasi-isomorphism preservation."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-integer-shifts",
+    "why": "Signed coherent integer shifts for direct-sum total tensor."
+   },
+   {
+    "node": "lem-sf-double-hom-cone-comparison",
+    "why": "Its arbitrary target can be J plus I; restricting its explicit block-preserving formulas gives the mixed-target cone and boundary calculation without adding a duplicate lemma."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Quasi-isomorphism preservation into K-injective targets, used twice for descent."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion for showing closure of K-flat complexes under cones."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-sf-double-hom-cone-comparison",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-ba793580b",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-ba793580b (reviewer sub-agent of L); spot-checked: Shape: one commit, the item plus the report; statement and stmt_deps unchanged; no new nodes. The item is a 2026-10-22 O1 re-split child of lem-trf-derived-evaluation-canonical-map and carries no re-split order of its own. Sources: Stacks 08JC (the 'Details omitted' are now written out in the steps) and 064J, both read. No SGA. Step 1: I checked the statements of K-injective J,I (prop-pur-kinjective-resolutions-exist), the def-pur-derived-internal-hom representative clause, the flat-term K-flat B→A (lem-pc-kflat-resolution, which meets the hypothesis of kflat-fixed-tensor-triangulated) and B⊗P→A⊗P being a quasi-isomorphism (homotopy-cone-signs, last clause). Step 2: φ matches s² (-1)^{np} and φ_L's (-1)^p; the -p equation is the negation; the cone-closure of K-flat complexes via φ_L with acyclic Z plus quasi-iso-cone-acyclic is correct. Step 3: I recomputed with d f = d_V f - (-1)^n f d_U. s is a chain map (both sides ε(mq+m)d_Vf - ε(mq+q)fd_U); ψ has the right domain and codomain; the sign is ε(m(c+m)+mn+m) = ε(m(n+c)), which equals the (-1)^{p+r} of lem-sf-double-hom-cone-comparison at m=1; coherence gives ε((m+l)(n+c)) with the inner degree c+m. Step 4: the cited node allows any target, so V = J⊕I is legitimate. Hom into a finite biproduct splits into four blocks as complexes, and s, T(s), θ, i, π and T²u preserve the blocks because they act by degree-only signs, so the (J,I) restriction of θ is the displayed iso. Step 5: both triangle equations restrict, with the restricted χ = step 3 at m=1 and its leading minus kept. Step 6: rhom-well-defined is applied with identity targets twice; with every distinguished triangle iso to a Q-cone triangle with -p (def-weil-abstract-derived-category), G is exact. Edge cases J=0, I=0, m=0, ±1 and m+l=0 hold with no characteristic-2 issue. Duplicate search (08JC, double Hom): coef-signed-derived-internal-hom-exact, sf-hom-triangulated, coef-bidual-evaluation-shift-one and trf-double-hom-evaluation-shift (sibling, shares only the χ formula) do not state the item. All eight declared tool_uses are generic homological algebra and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TensorDoubleHomExactComparisons",
+  "declaration": "DerivedCategory.tensor_double_hom_exact_comparisons",
+  "file": "lean/Sheaf/Algebra/Homology/TensorDoubleHomExactComparisons.lean",
+  "statement": "theorem tensor_double_hom_exact_comparisons (R : Type u) [CommRing R] [HasDerivedCategory.{u} (RingSiteModules R)] : (∀ L M : DerivedCategory (RingSiteModules R), (tensorLeft ((SignedRingedHom.hom.{u} ⊥ (CochainComplex.onePointRingSheaf R) L).obj M)).IsTriangulated ∧ ∃ _s : (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj L).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj M).CommShift ℤ, (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj L).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj M).IsTriangulated ∧ ∀ (K : DerivedCategory (RingSiteModules R)) (m : ℤ), ((((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj L).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj M).commShiftIso m).hom.app K = (m.negOnePow • ( (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj M).mapIso (((SignedRingedHom.sourceShift.{u} ⊥ (CochainComplex.onePointRingSheaf R) K m).app L).op)).inv ≫ ((SignedRingedHom.sourceShift.{u} ⊥ (CochainComplex.onePointRingSheaf R) ((SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op K, L)) (-m)).app M).hom ≫ eqToHom (congrArg (fun n : ℤ ↦ ((SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op ((SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op K, L)), M))⟦n⟧) (neg_neg m))))) ∧ ∀ (J I : CochainComplex (RingSiteModules R) ℤ) [J.IsKInjective] [I.IsKInjective], ∃ _s : (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj J)).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).CommShift ℤ, ∃ s : ∀ (U V : CochainComplex (RingSiteModules R) ℤ) (m : ℤ), homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (U⟦m⟧) V ≅ (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) U V)⟦-m⟧, ∃ repJ : ∀ U : CochainComplex (RingSiteModules R) ℤ, Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) U J) ≅ (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op (Q.obj U), Q.obj J), ∃ repI : ∀ U : CochainComplex (RingSiteModules R) ℤ, Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) U I) ≅ (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op (Q.obj U), Q.obj I), ∃ tensorRep : ∀ (P : CochainComplex (RingSiteModules R) ℤ), CochainComplex.IsKFlatIndependentCoefficients P → (Q.obj (((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).obj P) ≅ (tensorLeft ((SignedRingedHom.hom.{u} ⊥ (CochainComplex.onePointRingSheaf R) (Q.obj J)).obj (Q.obj I))).obj (Q.obj P)), ∃ homRep : ∀ P : CochainComplex (RingSiteModules R) ℤ, Q.obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I) ≅ (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj J)).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).obj (Q.obj P), ∃ chi : ∀ (P : CochainComplex (RingSiteModules R) ℤ) (m : ℤ), homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (P⟦m⟧) J) I ≅ (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I)⟦m⟧, (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj J)).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).IsTriangulated ∧ (∀ (K : DerivedCategory (RingSiteModules R)) (m : ℤ), ((((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj J)).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).commShiftIso m).hom.app K = (m.negOnePow • ( (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).mapIso (((SignedRingedHom.sourceShift.{u} ⊥ (CochainComplex.onePointRingSheaf R) K m).app (Q.obj J)).op)).inv ≫ ((SignedRingedHom.sourceShift.{u} ⊥ (CochainComplex.onePointRingSheaf R) ((SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op K, (Q.obj J))) (-m)).app (Q.obj I)).hom ≫ eqToHom (congrArg (fun n : ℤ ↦ ((SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op ((SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).obj (op K, (Q.obj J))), (Q.obj I)))⟦n⟧) (neg_neg m))))) ∧ (∀ (U V : CochainComplex (RingSiteModules R) ℤ) (m q a : ℤ), (s U V m).hom.f q ≫ ((homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) U V).shiftFunctorObjXIso (-m) q (q - m) (by omega)).hom ≫ homComplexπ.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) U V (q - m) (a + m) (a + q) (by omega) = (m * q).negOnePow • (homComplexπ.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (U⟦m⟧) V q a (a + q) rfl ≫ SheafOfModules.homObjMap.{u, u, u, u} (U.shiftFunctorObjXIso m a (a + m) rfl).inv (𝟙 _))) ∧ (∀ U : CochainComplex (RingSiteModules R) ℤ, (repJ U).hom = Q.map (((homComplexFunctor.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R)).obj (op U)).map ((CochainComplex.toKInjectiveResolution.{u} (RingSiteModules R)).app J)) ≫ (WeilConjectures.coefficientHomResolutionIso.{u, u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) U J).inv ∧ (repI U).hom = Q.map (((homComplexFunctor.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R)).obj (op U)).map ((CochainComplex.toKInjectiveResolution.{u} (RingSiteModules R)).app I)) ≫ (WeilConjectures.coefficientHomResolutionIso.{u, u, u, u} ⊥ (CochainComplex.onePointRingSheaf R) U I).inv) ∧ (∀ (P : CochainComplex (RingSiteModules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P), Functor.LaxMonoidal.μ Q (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P ≫ (tensorRep P hP).hom = (repI J).hom ⊗ₘ 𝟙 (Q.obj P)) ∧ (∀ P : CochainComplex (RingSiteModules R) ℤ, (homRep P).hom = (repI (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J)).hom ≫ (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R)).map ((repJ P).inv.op, 𝟙 (Q.obj I))) ∧ (∀ (P : CochainComplex (RingSiteModules R) ℤ) (m : ℤ), (chi P m).hom = m.negOnePow • ((CategoryTheory.SignedDoubleHomCone.dual (R := CochainComplex.onePointRingSheaf R) I).map (s P J m).inv.op ≫ (s (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I (-m)).hom ≫ eqToHom (congrArg (fun n : ℤ ↦ (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I)⟦n⟧) (neg_neg m)))) ∧ (∀ (P : CochainComplex (RingSiteModules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (m : ℤ) (hmP : CochainComplex.IsKFlatIndependentCoefficients (P⟦m⟧)), Q.map (SheafOfModules.TotalTensorSigns.shiftLeft (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P m).hom ≫ (Q.commShiftIso m).hom.app (((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).obj P) ≫ (tensorRep P hP).hom⟦m⟧' = (tensorRep (P⟦m⟧) hmP).hom ≫ (tensorLeft ((SignedRingedHom.hom.{u} ⊥ (CochainComplex.onePointRingSheaf R) (Q.obj J)).obj (Q.obj I))).map ((Q.commShiftIso m).hom.app P) ≫ ((tensorLeft ((SignedRingedHom.hom.{u} ⊥ (CochainComplex.onePointRingSheaf R) (Q.obj J)).obj (Q.obj I))).commShiftIso m).hom.app (Q.obj P)) ∧ (∀ (P : CochainComplex (RingSiteModules R) ℤ) (m : ℤ), Q.map (chi P m).hom ≫ (Q.commShiftIso m).hom.app (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) P J) I) ≫ (homRep P).hom⟦m⟧' = (homRep (P⟦m⟧)).hom ≫ (((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj J)).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).map ((Q.commShiftIso m).hom.app P) ≫ ((((Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj J)).rightOp ⋙ (Functor.curry.obj (SignedRingedHom.homFunctor.{u} ⊥ (CochainComplex.onePointRingSheaf R))).flip.obj (Q.obj I)).commShiftIso m).hom.app (Q.obj P)) ∧ ∀ (P₁ P₂ : CochainComplex (RingSiteModules R) ℤ) (_hP₁ : CochainComplex.IsKFlatIndependentCoefficients P₁) (_hP₂ : CochainComplex.IsKFlatIndependentCoefficients P₂) (f : P₁ ⟶ P₂), (((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).map (CochainComplex.mappingCone.inr f) ≫ (SheafOfModules.TotalTensorSigns.coneLeft (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) f).hom = CochainComplex.mappingCone.inr (((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).map f)) ∧ (∀ (a b n : ℤ) (hab : a + b = n), ((homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I).X a ◁ (CochainComplex.mappingCone.inl f).v (b + 1) b (by omega) ≫ SheafOfModules.TotalTensorSigns.ι (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) (CochainComplex.mappingCone f) a b n hab ≫ (SheafOfModules.TotalTensorSigns.coneLeft (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) f).hom.f n = a.negOnePow • (SheafOfModules.TotalTensorSigns.ι (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P₁ a (b + 1) (n + 1) (by omega) ≫ (CochainComplex.mappingCone.inl (((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).map f)).v (n + 1) n (by omega)))) ∧ ((SheafOfModules.TotalTensorSigns.coneLeft (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) f).hom ≫ (CochainComplex.mappingCone.triangle (((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).map f)).mor₃ = ((SheafOfModules.TotalTensorSigns.total (CochainComplex.onePointRingSheaf R)).obj (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I)).map (CochainComplex.mappingCone.triangle f).mor₃ ≫ (SheafOfModules.TotalTensorSigns.shiftLeft (CochainComplex.onePointRingSheaf R) (homComplex.{u, u, u, u} (R := CochainComplex.onePointRingSheaf R) J I) P₁ 1).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56cc2dac9",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Only the item's lean record changed; it is verbatim the signature, and the 7 stmt_dep nodes are identical to live. Every clause is rendered and fixed to a canonical map. F = tensorLeft(SignedRingedHom.hom L M) with the K-flat derived tensor and its signed shift. G = H(-,L).rightOp ⋙ H(-,M), with an existential CommShift whose commShiftIso is pinned for all K and m to (-1)^m·H(sourceShift_L)^-1 ≫ sourceShift(H(K,L),-m) ≫ eqToHom; sourceShift is a canonical adjunction mate. s is pinned by its homComplexπ components with sign (-1)^(mq) and reindexing (chain-map sign rechecked). repJ/repI, tensorRep (via μ_Q), homRep and chi are each pinned by equations. The φ square uses mapBifunctorShift₂Iso (-1)^(am); the ψ square ties chi to the derived ψ. coneLeft = mapBifunctorMappingCone₂Iso, with the inr, inl (-1)^a and mor₃-after-shiftLeft-1 equations. J and I are independent, there is no boundedness, and only I is K-injective. Edge cases m=0,±1, zero ring and char 2 are fine. No definitions; the proof is sorry; docstrings carry the source and steps 1-6; lines ≤98; worker compile clean 13.6/7.5 s; I changed nothing, so no compile. Advisories: (1) decls whose owner nodes are not stmt_deps (SignedRingedHom.*, coefficientHomResolutionIso, RingSiteModules, TotalTensorSigns.*, SignedDoubleHomCone.dual, homComplexπ); the base stmt_deps are unchanged, so not addable at S2; (2) five imports are only for the future proof; (3) the hmP hypothesis is redundant but harmless."
+ }
+}

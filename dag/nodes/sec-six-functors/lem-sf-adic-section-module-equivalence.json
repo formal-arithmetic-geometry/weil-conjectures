@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-adic-section-module-equivalence",
+ "kind": "statement",
+ "title": "Native and sectionwise adic module categories",
+ "statement": "For a prime ℓ and scheme X, let R be its native sheaf of locally finite continuous Qbar_ℓ-valued functions. Internal R-modules in Qbar_ℓ-vector-space sheaves are equivalent to sheaves of sectionwise R-modules. The functor retains the additive sections, restriction maps and morphisms, and its scalar action is the native action on the canonical pure tensor. It carries the regular module to R and carries any coordinate sum of regular modules to the free sheaf, preserving all coordinate inclusions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV, 03EK, 0GMW, 03EO and 0E8H; explicit comparison with the native vector-space module construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Pass native modules through the lax monoidal inclusion into presheaves, and identify its coefficient monoid with the pointwise monoid using the coefficient unit and multiplication equations. The induced action on sections satisfies the module laws by evaluating the internal action laws on pure tensors.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely restrict the scalar action along constant functions to recover a vector-space sheaf. Its ordinary action is a natural bilinear map; it defines an internal presheaf module, which is reflected to a native module by monoidal sheafification.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The underlying sheafification unit is invertible because its source is already a sheaf. Its inverse respects the action, giving essential surjectivity. Sectionwise linear maps recover native maps by sheaf tensor extensionality, proving full faithfulness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The equivalence is the one induced by this functor. Multiplication identifies the regular modules. Preservation of coproducts and the regular-module identification give the free-module comparison, and the coproduct comparison identity proves its coordinate formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit native/sectionwise comparison using the cited universal properties and canonical localization maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of algebras in sheaves of vector spaces equivalent to sheaves of modules, preserving underlying sections tensor and internal Hom",
+   "results": "SheafOfModules.forgetToSheafModuleCat; SheafOfModules.over; SheafOfModules.instCategory; SheafOfModules.toSheaf_obj_val; SheafOfModules.toSheaf; SheafOfModules.unitHomEquiv; SheafOfModules.forgetToSheafModuleCat_obj_val; SheafOfModules.unit",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  },
+  {
+   "tool": "grep",
+   "query": "adicConstantSheafObjMonHom|module.*equivalence.*sheaf",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over an algebra sheaf in vector space sheaves agree with sectionwise modules preserving relative tensor and slice internal Hom",
+   "results": "SheafOfModules; AlgebraicGeometry.Scheme.Modules; SheafOfModules.noConfusionType; SheafOfModules.hom_ext; SheafOfModules.instCategory; SheafOfModules.mk; AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf; SheafOfModules.sections",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleSliceHomComparison",
+  "date": "2026-10-24",
+  "group": "E2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The native module/slice-Hom comparison needed for lisse biduality, steps 1–7 of lem-sf-adic-module-slice-hom-comparison.",
+   "via": [
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicSectionModuleEquivalence",
+  "file": "lean/Sheaf/SixFunctors/AdicSectionModuleEquivalence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicSectionModuleEquivalence",
+  "statement": "def adicSectionModuleEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) : AdicSheaf l X ≌ SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (comparisonRing l X))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9c0de",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T224912-L-1826302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9c0de",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T224912-L-1826302",
+  "kind": "interface",
+  "note": "independent cc review: item structure/theorem vs clone (byte-identical); moved AdicModuleSectionComparison data vs old item text (verbatim, change record); two split sorry statements vs original fields (base family fully pinned by section normalizations, so universal quantification is not stronger); node lean records vs Lean signatures; item proof_deps vs proof as written"
+ }
+}

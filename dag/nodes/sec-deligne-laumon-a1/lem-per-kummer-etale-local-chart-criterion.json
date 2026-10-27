@@ -1,0 +1,337 @@
+{
+ "id": "lem-per-kummer-etale-local-chart-criterion",
+ "kind": "statement",
+ "title": "Etale local Kummer monoid chart criterion",
+ "statement": "Let $f:(X,M_X)\\to(Y,M_Y)$ be a morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup]. Use the characteristic definition of Kummer in [def-per-kummer-log-morphism] and the chart definition of log etale in [def-per-fs-log-smooth-etale]. Then $f$ is Kummer etale if and only if it admits the following local chart data. There is a family of commutative squares $f_i:U_i\\to V_i$ over $f:X\\to Y$ with $U_i\\to X$ and $V_i\\to Y$ etale [def-weil-etale-morphism], the $U_i$ jointly covering $X$, and the log structures on $U_i,V_i$ pulled back from $X,Y$. The schemes $U_i,V_i$ may be chosen affine. There are fs monoids $P_i,Q_i$ with charts on $V_i,U_i$ and compatible homomorphisms $h_i:P_i\\to Q_i$ such that $h_i$ and $h_i^{\\rm gp}$ are injective, every $q\\in Q_i$ has a positive multiple in $h_i(P_i)$, and $C_i=Q_i^{\\rm gp}/h_i^{\\rm gp}(P_i^{\\rm gp})$ is finite and annihilated by an integer $n_i\\geq1$ invertible on $V_i$. The comparison map\n$$c_i:U_i\\longrightarrow V_i\\times_{\\operatorname{Spec}\\mathbf Z[P_i]}\\operatorname{Spec}\\mathbf Z[Q_i]$$\nis etale. The monoid rings and comparison maps are those of [def-per-fs-log-smooth-etale], and the displayed product is the ordinary scheme fibre product [def-pc-fibre-product]. Neither finiteness nor surjectivity of $f$, nor log regularity, sharpness of the chart monoids, or flatness of the underlying $f$ is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 2.1--2.2, printed pp.71--72: definition of Kummer etale, standard Kummer covers, and the assertion that every Kummer etale morphism is etale locally standard. The etale-comparison form is the local chart criterion (cf. X Proposition 1.2, printed pp.136--138). No Stacks tag states this logarithmic assertion."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-kummer-log-morphism",
+  "def-per-fs-log-smooth-etale",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First record precisely what strict etale localization preserves. For an etale map and a chosen geometric point, [lem-trf-ind-etale-strict-local-invariance] identifies its strict local ring with that downstairs. The germ formula of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] identifies the inverse-image log stalk with the original stalk, compatibly with multiplication. In the associated-log pushout defining the pulled-back log structure, the unit groups are therefore already identified; hence the log stalk and its characteristic are unchanged. Thus characteristic Kummer maps can be checked after these localizations. Every geometric point lifts through a jointly surjective etale family by [lem-weil-pbc-etale-cover-geometric-point-lift]. A target neighbourhood can be accompanied by its ordinary base change on the source, etale by [lem-weil-pbc-etale-scheme-base-change]. Affine shrinking and composition retain etaleness by [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] and [lem-weil-pbc-etale-composition-cancellation]. All these neighbourhoods remain locally Noetherian: etale implies locally of finite presentation, hence locally of finite type, so [pqf-lem-locnoeth-lft] applies. These facts will be used in both directions.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, p.69 (etale log structures); VI 2.1--2.2, pp.71--72 (etale localization); expansion using the cited stalk and scheme tools."
+   }
+  },
+  {
+   "text": "Suppose $f$ is Kummer etale in [def-per-kummer-log-morphism]. In particular it is log etale in [def-per-fs-log-smooth-etale]. It is log smooth by [lem-per-log-smooth-composition-strict-base-change]. By [lem-per-fs-log-infinitesimal-criterion] its underlying map is locally of finite presentation and every strict square-zero test square of fine log schemes has exactly one global log lift. These imply the hypotheses of [lem-per-infinitesimal-log-differential-calculus]: unique global lifting implies etale-local existence, and the criterion also applies after compatible etale localization (restrict the chart data using step 1). Its last sentence therefore gives $\\omega_f=0$. Here $\\omega_f$ denotes relative logarithmic differentials; its geometric stalk therefore has the empty basis. This uses the unique-lifting clause, not just formal smoothness.",
+   "uses": [
+    "def-per-kummer-log-morphism",
+    "def-per-fs-log-smooth-etale",
+    "lem-per-log-smooth-composition-strict-base-change",
+    "lem-per-fs-log-infinitesimal-criterion",
+    "lem-per-infinitesimal-log-differential-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.6.3 proof, p.252: specialize the differential-basis construction to log etale maps; VI 2.1, p.71. The vanishing is supplied by the cited infinitesimal lemmas."
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ with image $\\bar y$. Apply [lem-per-very-tame-equivariant-sharp-chart] on $Y$ with the trivial group: all its hypotheses hold since its order is $1$. This gives a chart $P\\to M_Y$ near $\\bar y$, with $P=\\overline M_{Y,\\bar y}$ sharp fs. Use step 1 to make its neighbourhood $V$ affine and replace the source by the compatible strict etale neighbourhood above it. The base-changed source map is a strict base change of $f$, hence still log smooth by [lem-per-log-smooth-composition-strict-base-change]; this is needed because the next lemmas fix a chart on the whole target. The same lemma on $X$ identifies $R=\\overline M_{X,\\bar x}$ as sharp fs. By [lem-trf-fs-face-sharpening], applied to the unit face of these sharp monoids, $P^{\\rm gp}$ and $R^{\\rm gp}$ are finite free. Set $A=\\mathcal O_{X,\\bar x}$, $B=M_{X,\\bar x}^{\\rm gp}$ and $D=A^\\times\\subset B$, so $B/D=R^{\\rm gp}$. Apply [lem-per-log-smooth-differential-generators] to this fixed $P$-chart. Its basis has length $r=0$ by step 2. It supplies $n\\geq1$ invertible in $A$, $n$-divisibility of $D$, and a finite cokernel killed by $n$ for $P^{\\rm gp}\\to B/D$. The strict local ring map from $\\bar y$ to $\\bar x$ is local, so an integer invertible at $\\bar x$ is invertible at $\\bar y$. Shrink $V$ to the open where $n$ is a unit and then affine-shrink again; restrict the source above it. The $P$-chart is unchanged, and now $n$ is invertible everywhere on $V$.",
+   "uses": [
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-trf-fs-face-sharpening",
+    "lem-per-log-smooth-differential-generators",
+    "lem-per-log-smooth-composition-strict-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), p.75, with trivial stabilizer; XVI 3.6.3 proof and footnote, p.252 (sharp base chart, differential generators and divisible units)."
+   }
+  },
+  {
+   "text": "Let $L=P^{\\rm gp}$ and let $\\varphi:L\\to B$ be pullback of the fixed chart germ. Apply [lem-per-divisible-unit-lattice-extension] to $(L,B,D,\\varphi,n)$; the finite-free, torsion-free quotient, finite-cokernel and divisible-unit hypotheses were all verified in step 3. Obtain $i:L\\hookrightarrow G$ and $h:G\\to B$ with $hi=\\varphi$, where $G$ is finite free, $G/i(L)$ is killed by $n^k$ for some $k\\geq0$, and $\\rho:G\\to B/D=R^{\\rm gp}$ is surjective. In fact $\\rho$ is injective. For $g\\in\\ker\\rho$, write $n^kg=i(p)$ with $p\\in P^{\\rm gp}$. Then $\\overline f^{\\rm gp}(p)=0$. The Kummer hypothesis says $\\overline f:P\\to R$ is injective; its group map is injective too, since equality of differences reduces to equality in the integral monoids. Hence $p=0$. The free group $G$ is torsion-free, so $g=0$. Thus $\\rho$ is an isomorphism. This is the point where characteristic Kummer injectivity removes possible extra chart units.",
+   "uses": [
+    "lem-per-divisible-unit-lattice-extension",
+    "def-per-kummer-log-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.6.3--3.6.4, pp.252--253: lattice extension. The kernel calculation is the explicit Kummer specialization of that construction."
+   }
+  },
+  {
+   "text": "Define $Q=h^{-1}(M_{X,\\bar x})\\subset G$, the prescribed inverse-image monoid to be used in step 6. A group element of $B$ lies in $M_{X,\\bar x}$ exactly when its image in $R^{\\rm gp}$ lies in $R$: choose a monoid element of that characteristic and multiply by the residual unit. Therefore $Q=\\rho^{-1}(R)$. The map $P\\to Q$ is $p\\mapsto i(p)$, since $hi(p)=f^\\flat(p)$. It is injective. Given $q\\in Q$, characteristic Kummerness supplies $a>0$ and $p\\in P$ with $a\\rho(q)=\\overline f(p)=\\rho i(p)$; injectivity of $\\rho$ gives $aq=i(p)$. Thus this monoid map is Kummer. Once $Q^{\\rm gp}=G$ is identified in the next step, its group cokernel is $G/i(P^{\\rm gp})$. It is finite: for a finite set of generators of $G$, coefficients modulo $n^k$ represent every quotient element. It is killed by $n^k$, an integer invertible on $V$. If $n=1$ or $k=0$ the quotient is trivial.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-per-kummer-log-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72; XVI 3.6.3 proof, p.252, inverse-image monoid. Elementary kernel and positive-multiple calculation following step 4."
+   }
+  },
+  {
+   "text": "Now apply [lem-per-kato-lattice-chart-realization] with its base monoid denoted here by $P$, $r=0$, the empty differential basis from step 2, and the $n,G,i,h$ of steps 3--4. The base group is torsion-free, $f$ is log smooth, $n$ is a unit at $\\bar x$, $hi=\\varphi$, the lattice quotient is killed by a power of $n$, and $\\rho$ is surjective, exactly as that statement requires. It concludes that this very $Q=h^{-1}(M_{X,\\bar x})$ is fs, that $Q^{\\rm gp}=G$, and that on a pointed etale neighbourhood $U$ it gives a compatible chart and an etale comparison $U\\to V\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$. Thus step 5 gives every required monoid and finite-cokernel condition for these charts. Affine-shrink $U$ using step 1; the comparison remains etale by composition. Perform this construction at every point of $X$. The resulting $U$ jointly cover $X$, and the maps $U\\to X$ and $V\\to Y$ are etale composites of the chosen neighbourhood maps. This proves the forward implication without asserting that $f$ itself is finite or surjective.",
+   "uses": [
+    "lem-per-kato-lattice-chart-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.6.3 proof, p.252: prescribed inverse-image chart and etale comparison; VI 2.2, p.72: the local standard Kummer form."
+   }
+  },
+  {
+   "text": "Conversely, assume the stated chart data. The kernel of each $h_i^{\\rm gp}$ is zero. The finite cokernel $C_i$ has invertible order on $U_i$: by [lem-sbc-finitely-generated-abelian-group-structure], each nontrivial prime-power cyclic factor of a finite group killed by $n_i$ has prime dividing $n_i$. Since $n_i$ is a unit on $V_i$, all such primes, hence the product of the factor orders, are units on $U_i$. The trivial kernel has order $1$. Together with the etale comparison and the covering chart family, these are precisely the log-etale conditions of [def-per-fs-log-smooth-etale]. It remains to verify characteristic Kummerness; it is not inferred merely from the injectivity of the unsharpened chart map.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72 (standard Kummer covers are log etale); chart definition recalled in X 1.2, pp.136--138."
+   }
+  },
+  {
+   "text": "Work in one chart at a geometric point $u$ of $U_i$ with image $v$ in $V_i$, and abbreviate $P_i,Q_i,h_i$ by $P,Q,h$. Let $F\\subset P$ and $E\\subset Q$ be the elements whose structural images are units at $v$ and $u$. They are faces because a product in a local ring is a unit exactly when both factors are units. The local ring map and chart compatibility give $h^{-1}(E)=F$. By [lem-trf-chart-face-localization-logification] the characteristics are $P_F/F^{\\rm gp}$ and $Q_E/E^{\\rm gp}$. By [lem-trf-fs-face-sharpening] these embed in the group quotients $P^{\\rm gp}/F^{\\rm gp}$ and $Q^{\\rm gp}/E^{\\rm gp}$, and the first quotient is torsion-free. For every $e\\in E$, monoid Kummerness supplies $a>0$ and $p\\in P$ with $ae=h(p)$. Its image is a unit at $u$, so $p\\in F$ by reflection of units. Consequently each element of $E^{\\rm gp}$ has a positive multiple in $h^{\\rm gp}(F^{\\rm gp})$ (write it as a difference of two elements of $E$ and take a common multiple).",
+   "uses": [
+    "lem-trf-chart-face-localization-logification",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and 2.1--2.2, pp.69 and 71--72; VIII 3.1.1--3.1.2, p.98: characteristic sharpening and face localization."
+   }
+  },
+  {
+   "text": "If $p\\in P^{\\rm gp}$ maps to zero in $Q^{\\rm gp}/E^{\\rm gp}$, step 8 gives $a>0$ and $b\\in F^{\\rm gp}$ with $h^{\\rm gp}(ap)=h^{\\rm gp}(b)$. Its injectivity implies $ap=b$. The torsion-free group $P^{\\rm gp}/F^{\\rm gp}$ then gives $p\\in F^{\\rm gp}$. Thus the induced characteristic group map, hence the characteristic monoid map, is injective. Every element of the source-side characteristic $Q_E/E^{\\rm gp}$ has a representative $q\\in Q$ (the denominator belongs to $E$ and disappears). Choose $a>0,p\\in P$ with $aq=h(p)$; this proves the positive-multiple condition on characteristics. Therefore each localized log morphism is Kummer. Step 1 lifts every geometric point of $X$ to some $U_i$ and identifies the pulled-back characteristic map with the original one, so $f$ is Kummer everywhere. Together with step 7, [def-per-kummer-log-morphism] says exactly that $f$ is Kummer etale. The empty-source case uses the empty family; trivial characteristic monoids and trivial cokernels are included in all the preceding calculations.",
+   "uses": [
+    "def-per-kummer-log-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72: characteristic Kummer condition; elementary localization calculation completing step 8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism",
+  "pqf-lem-locnoeth-lft",
+  "def-per-kummer-log-morphism",
+  "def-per-fs-log-smooth-etale",
+  "lem-per-log-smooth-composition-strict-base-change",
+  "lem-per-fs-log-infinitesimal-criterion",
+  "lem-per-infinitesimal-log-differential-calculus",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-trf-fs-face-sharpening",
+  "lem-per-log-smooth-differential-generators",
+  "lem-per-divisible-unit-lattice-extension",
+  "lem-per-kato-lattice-chart-realization",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-trf-chart-face-localization-logification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.1--2.2, pp.71--72 and XVI 3.6.3--3.6.4, pp.252--253; explicit assembly of existing infinitesimal, lattice and face-localization lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer etale morphisms of fine saturated logarithmic schemes have local charts by injective Kummer monoids with invertible finite cokernel and etale comparison",
+   "results": "{\"t\": \"2026-10-24T01:29:30Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer etale morphisms of fine saturated logarithmic schemes have local charts by injective Kummer monoids with invertible finite cokernel and etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"770657c7ecb74db4\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KummerEtale|LogEtale|LogScheme",
+   "results": "{\"t\": \"2026-10-24T01:30:01Z\", \"tool\": \"grep\", \"query\": \"KummerEtale|LogEtale|LogScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chart criterion for Kummer etale logarithmic morphisms using finite index monoids and monoid rings",
+   "results": "{\"t\": \"2026-10-24T01:30:02Z\", \"tool\": \"leansearch\", \"query\": \"Chart criterion for Kummer etale logarithmic morphisms using finite index monoids and monoid rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isLocalization\", \"NumberField.Units.isMaxRank_iff_closure_finiteIndex\", \"MonoidAlgebra.finiteType_of_fg\", \"ContMDiffMonoidMorphism.toMonoidHom\", \"Submonoid.log_mul\", \"ContMDiffMonoidMorphism\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"IsLocalization.iff_map_piEvalRingHom\"], \"digest\": \"9800c52d63df2ad8\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KummerEtale\"",
+   "results": "{\"t\": \"2026-10-24T01:30:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"KummerEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmic morphism is Kummer etale if and only if locally it has a Kummer monoid chart of invertible index and an ordinary etale map to the chart base change",
+   "results": "{\"t\": \"2026-10-24T01:30:49Z\", \"tool\": \"leanfinder\", \"query\": \"A logarithmic morphism is Kummer etale if and only if locally it has a Kummer monoid chart of invertible index and an ordinary etale map to the chart base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.mem_etaleLocus_iff\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"6554f220b6844611\"}; Read the returned types: only ordinary etale/smooth schemes and rings, monoid algebras, manifold charts and number-field logarithms; none defines fs log schemes or the logarithmic chart criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KummerEtale|LogEtale|LogScheme",
+   "results": "{\"t\": \"2026-10-24T01:59:19Z\", \"tool\": \"grep\", \"query\": \"KummerEtale|LogEtale|LogScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: ordinary etale rings and schemes, ordinary standard presentations, localizations, and number-field logarithmic embeddings do not state the logarithmic Kummer chart criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fine saturated log schemes Kummer etale local monoid chart criterion",
+   "results": "{\"t\": \"2026-10-24T01:59:19Z\", \"tool\": \"leansearch\", \"query\": \"Fine saturated log schemes Kummer etale local monoid chart criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyUnramified.localization_map\", \"Algebra.FormallyEtale.of_isLocalization\", \"Localization.fg\", \"AlgebraicGeometry.ValuativeCriterion.Existence\"], \"digest\": \"0926c90c6cc96b67\"}; Read the returned types: ordinary etale rings and schemes, ordinary standard presentations, localizations, and number-field logarithmic embeddings do not state the logarithmic Kummer chart criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogEtale\"",
+   "results": "{\"t\": \"2026-10-24T01:59:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: ordinary etale rings and schemes, ordinary standard presentations, localizations, and number-field logarithmic embeddings do not state the logarithmic Kummer chart criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer etale logarithmic morphisms admit injective monoid charts of invertible finite index with etale comparison maps",
+   "results": "{\"t\": \"2026-10-24T01:59:22Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer etale logarithmic morphisms admit injective monoid charts of invertible finite index with etale comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.hasMap\", \"NumberField.Units.logEmbeddingQuot_injective\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.lift_bijective\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"2fb0fea85c1d96c1\"}; Read the returned types: ordinary etale rings and schemes, ordinary standard presentations, localizations, and number-field logarithmic embeddings do not state the logarithmic Kummer chart criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmic morphism that is log etale and Kummer on characteristic monoids is locally modeled by a finite index inclusion of saturated monoids",
+   "results": "{\"t\": \"2026-10-24T02:01:08Z\", \"tool\": \"leanfinder\", \"query\": \"A logarithmic morphism that is log etale and Kummer on characteristic monoids is locally modeled by a finite index inclusion of saturated monoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"190ad99461ed38ab\"}; Read the returned types: ordinary etale rings and schemes, ordinary standard presentations, localizations, and number-field logarithmic embeddings do not state the logarithmic Kummer chart criterion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-etale-fs-base-change-stability",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair purity geometry: the abelian-inertia toric comparison; ILO X 1.8, diagram (1.a) and its fs base-change assertion, pp.146--147. General Kummer etaleness input, independent of group torsors and quotients. Local chart input for the Kummer etale projection, before forming its saturated base change.",
+   "via": [
+    "lem-per-kummer-etale-fs-base-change-stability",
+    "lem-per-kummer-g-cover-fs-base-change",
+    "lem-per-gabber-abelian-stage-toric-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-kummer-etale-local-chart-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved the forward implication by zero logarithmic differentials, a trivial-group sharp base chart, the existing divisible-unit lattice extension and prescribed-lattice chart realization with r=0. The characteristic Kummer hypothesis makes the resulting lattice map to the characteristic group injective, hence makes its inverse-image monoid chart Kummer. Proved the converse by an explicit unit-face and torsion-free quotient argument. Reused all requisite nodes; created none. Read ILO VI 2.1--2.2, VI 3.7(a), VIII 3.1.1--3.1.2 and XVI 3.6.3--3.6.4. No SGA source used.",
+  "blueprint": "Serves the same regular-pair purity geometry / abelian-inertia toric comparison in ancestor lem-per-artin-gabber-affine-curve, Step 3, as the original from.place; supplies only the local Kummer chart input below lem-per-kummer-etale-fs-base-change-stability and does not use that downstream assertion. The latest ancestor proof was read; it contains no independent logarithmic chart statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic strict local invariance for etale neighbourhoods. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Generic inverse-image stalk and germ formula for the log sheaf. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Generic lifting of geometric points through a covering family. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic etale source neighbourhood above a chosen target neighbourhood. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "why": "Generic affine shrinking of pointed neighbourhoods. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic etale composition after affine restriction. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic local Noetherianness of etale neighbourhoods. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic torsion-free characteristic group and localized fs monoid computation. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-sbc-finitely-generated-abelian-group-structure",
+    "why": "Generic finite-group order from an invertible annihilator. The unit has no substitute for this general tool, and it does not replace any unit step."
+   },
+   {
+    "node": "lem-trf-chart-face-localization-logification",
+    "why": "Generic exact log-stalk and characteristic formula for a chart. The unit has no substitute for this general tool, and it does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-fs-face-sharpening",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-trf-chart-face-localization-logification"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-f964263a9",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-f964263a9 (reviewer sub-agent of L); spot-checked: FIX: I read the item and all 9 steps in full against every cited statement. The split has 0 new nodes, and the statement and stmt_deps are byte-identical to live. There is no repair note, and the item does not duplicate any existing node: lem-per-kummer-strict-local-standard-model covers only the finite, strictly local case and is not used. Source: ILO VI 2.1–2.2, pp.71–72 (pdftotext), matches the Kummer/Kummer-étale definitions and the standard local model; no SGA is used. Forward direction: (1) log étale gives unique lifting, so ω_f=0 (step 2). (2) The trivial-group sharp chart and the generators node with r=0 give n, A^× n-divisible, and a finite cokernel (step 3). (3) The lattice extension follows, and characteristic Kummer makes ρ:G→R^gp injective, because an injective map of integral monoids stays injective on group completions (step 4). (4) Q=ρ⁻¹(R) is a Kummer monoid (step 5). (5) Kato realization with r=0 gives Q^gp=G and the étale comparison (step 6). Converse (steps 7–9): the finitely generated group structure makes the order of C_i invertible on U_i, and the unit-face plus torsion-free-quotient argument proves characteristic Kummer. All of it checks. FIX made: step 3 switches to X×_Y V→V because the generators and Kato nodes fix a chart on the whole target, but it never justified that this map is still log smooth. I added that sentence and cited lem-per-log-smooth-composition-strict-base-change (strict base change), which was already in proof_deps. Batch 5: the trf ind-etale-strict-local-invariance, fs-face-sharpening and chart-face-localization nodes, and def-trf-fs-log-blowup, are generic étale-local/monoid algebra. They are not steps of the trace formula or Poincaré duality, and they are already in the base target closure. Dropped-route finding: 7 cited lem-per log nodes are on the 10-19 list. The item is reached through the sfb Gabber chain (lem-sfb-field-log-smooth-gabber-modification). A BFS from lem-per-artin-gabber-affine-curve does not reach the item, and none of the forbidden tools appears. 5 of the 7 are already in the base closure. The delivery newly reaches only 3 already-split generic log-differential nodes (kato-lattice-chart-realization, log-smooth-differential-generators, log-smooth-differential-local-freeness). Accepted on the merits. Maintainer note: these drop-list entries are stale.; 1 file(s) fixed by the reviewer"
+ }
+}

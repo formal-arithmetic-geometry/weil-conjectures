@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-component-pushforward-exact-unit",
+ "kind": "statement",
+ "title": "Exact component direct image and its ordinary adjunction unit",
+ "statement": "Let $W$ be a w-contractible affine scheme [sk-def-pe-wlocal], let $S=\\pi_0(W)$ with its profinite quotient topology, and let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. Use the small pro-etale site and compatible coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Give $\\operatorname{Prof}/S$ finite jointly surjective coverings, let $q_S$ be its slice projection to the condensed topos, put $\\Lambda_S=q_S^*\\Lambda$, and let $\\pi_W$ be the component morphism with $p_W=q_S\\pi_W$ [lem-zl-component-relative-profinite-site]. Write $F_W=\\pi_W^*$ on module sheaves and on their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with coefficient identification $F_W\\Lambda_S=p_W^*\\Lambda$. Let $G_W=\\pi_{W,*}$ on module sheaves, with scalar action induced by the unit on coefficient rings, and use the module adjunction $F_W\\dashv G_W$ [lem-weil-pbc-ringed-topoi-module-adjunction]. For every extremally disconnected profinite $E\\to S$, the component test scheme $W_E=W\\times_S E$ of [lem-zl-affine-component-site-projection] is w-contractible affine, its component space is canonically $E$, its closed point locus is $W^c\\times_S E$, and the maps on local rings from $W$ are isomorphisms. There are natural evaluation identities\n$$(G_WN)(E)=N(W_E),\\qquad (G_WF_WM)(E)=M(E),$$\nfor every module sheaf $N$ over $W$ and $M$ over $\\operatorname{Prof}/S$; the ordinary adjunction unit $\\eta_M:M\\to G_WF_WM$ evaluates under the second identity to $\\operatorname{id}_{M(E)}$. The functor $G_W$ is exact on module sheaves and $\\eta_M$ is an isomorphism for every $M$. These assertions include $E=\\varnothing$ and $W=\\varnothing$; no finiteness or discreteness assumption on coefficients or module sheaves is made.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8."
+ },
+ "stmt_deps": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-zl-affine-component-site-projection",
+  "def-zl-generic-component-data",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Recover the section ring sheaf of the internal condensed coefficient, with the canonical monoid isomorphism given by ring reconstruction. Apply generic component coefficient comparison to W and the spectrum of an algebraic closure of the universe lift of Q. The field component morphism is an equivalence. This supplies L, its adjunction and the coefficient isomorphism required in the statement. All choices are determined up to the relevant adjunction-compatible isomorphism.",
+   "uses": [
+    "lem-zl-internal-ring-sheaf-presentation",
+    "lem-zl-generic-component-site-comparison",
+    "lem-zl-generic-component-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8."
+   }
+  },
+  {
+   "text": "Apply the affine component-site theorem to $W$: $W_E$ is affine ind-etale over $W$, its underlying ringed space is $|W|\\times_S E$ with the inverse-image structure sheaf, and $\\pi_0(W_E)=E$. In particular its local-ring maps from $W$ are isomorphisms. The w-local component theorem identifies $W^c$ homeomorphically with $S$ and gives the unique closed specialization $c(w)$ of each $w$. In the pullback space $(w,e)$ specializes to $(c(w),e)$: specialization is coordinatewise in a product and restricts to a subspace. The latter point is closed, since both its coordinates are closed. Conversely every closed point must equal this specialization. Thus $(W_E)^c=W^c\\times_S E$, a closed subset, and every point has exactly one closed specialization. The local ring at $(c,e)$ is that at $c$ in $W$, hence strictly henselian. Since $E$ is extremally disconnected, the definition now gives that $W_E$ is w-contractible.",
+   "uses": [
+    "lem-zl-affine-component-site-projection",
+    "det-pe-wlocal-components",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof: the paragraph beginning \"As X times over pi_0 X S\"; BS Lemmas 2.1.4, 2.2.8, 2.4.8"
+   }
+  },
+  {
+   "text": "For arbitrary ring sheaves A and B and a scalar map A → componentPush B, module pushforward is a right adjoint by the universe-compatible existence theorem, hence preserves finite limits; additivity is sectionwise. For any module epimorphism, its underlying abelian morphism is epi since module forgetful preserves finite colimits. Evaluation on W_E is surjective because W_E is affine w-contractible and hence weakly contractible. Stonean presentations give covering singletons in the coherent profinite slice. This makes the pushed-forward abelian morphism locally surjective, hence epi. The forgetful functor reflects epimorphisms, so pushforward preserves epis. An additive functor preserving kernels and epimorphisms preserves homology and therefore finite colimits.",
+   "uses": [
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8."
+   }
+  },
+  {
+   "text": "Apply the Stonean-test module unit theorem to the coefficient adjunction constructed in step 1. Cover any profinite slice object by its Stonean presentation. Sectionwise bijectivity on these covering objects implies local injectivity and local surjectivity of the underlying abelian sheaf unit, hence it is an isomorphism. The faithful module forgetful functor reflects this isomorphism. This proves the unit is invertible for every module.",
+   "uses": [
+    "lem-sfb-component-module-unit-stonean"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8."
+   }
+  },
+  {
+   "text": "Form the second evaluation natural isomorphism by whiskering the inverse of the unit natural isomorphism with evaluation, together with functor associators and the left unitor. Its composite with the evaluated unit is identity by the inverse law. Compatibility with restrictions in E is exactly naturality of the inverse module-sheaf morphism. The direct evaluation definition is already the identity with restriction of scalars. No nonempty hypothesis was used, so the same proof includes empty W and E.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-wlocal-components",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-sfb-component-module-unit-stonean",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-zl-affine-component-site-projection",
+  "lem-zl-generic-component-coefficient-comparison",
+  "lem-zl-generic-component-site-comparison",
+  "lem-zl-internal-ring-sheaf-presentation",
+  "sk-def-pe-wlocal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1): geometry and exactness proved directly, Stonean local unit isolated, then ordinary sheaf descent and inversion of the unit; coefficient existence via generic component coefficient comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(component|[Ww]Contractible).*(exact|adjunction|unit)|exact.*[Ww]Contractible",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean\", \"Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean\", \"Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean\", \"Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean\", \"Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact sheafification and discrete condensed adjunctions do not give exactness and the unit formula for the scheme component direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Exact\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.H.longSequence_exact\", \"CategoryTheory.Sheaf.H.longSequence_exact₁'\", \"CategoryTheory.Sheaf.H.longSequence_exact₃'\", \"CategoryTheory.Sheaf.H.longSequence_exact₂'\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact sheafification and discrete condensed adjunctions do not give exactness and the unit formula for the scheme component direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected component geometric morphism exact pushforward unit invertible on module sheaves",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image from a weakly contractible affine to its component profinite site is exact and the adjunction unit is an isomorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"LightCondSet.isDiscrete_tfae\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"LightCondSet.LocallyConstant.iso\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact sheafification and discrete condensed adjunctions do not give exactness and the unit formula for the scheme component direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact component direct image of condensed module sheaves evaluated on Stonean tests",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafStonean\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafCompHaus\", \"Condensed.ofSheafForgetStonean\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"Condensed.ofSheafStonean\", \"CondensedMod.IsSolid\", \"CondensedMod.LocallyConstant.functor\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact sheafification and discrete condensed adjunctions do not give exactness and the unit formula for the scheme component direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "component.*(pushforward|adjunction|unit)|[wW]Contractible",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/CodiscreteCategory.lean\", \"Mathlib/CategoryTheory/CodiscreteCategory.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete condensed adjunctions, ordinary scheme modules, generic sheaf exactness or component topology; none states the pro-etale component direct image and its normalized unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component morphism of a weakly contractible affine scheme has exact module direct image and fully faithful inverse image",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.appTop\", \"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"SheafOfModules.fullyFaithfulForget\", \"AlgebraicGeometry.AffineScheme.Spec_full\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete condensed adjunctions, ordinary scheme modules, generic sheaf exactness or component topology; none states the pro-etale component direct image and its normalized unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Exact\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.H.longSequence_exact\", \"CategoryTheory.Sheaf.H.longSequence_exact₁'\", \"CategoryTheory.Sheaf.H.longSequence_exact₃'\", \"CategoryTheory.Sheaf.H.longSequence_exact₂'\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete condensed adjunctions, ordinary scheme modules, generic sheaf exactness or component topology; none states the pro-etale component direct image and its normalized unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pushforward of module sheaves from a w-contractible affine scheme to its profinite connected component space and invertible adjunction unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.adjunction\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"Condensed.profiniteSolidCounit\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"LightCondMod.LocallyConstant.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete condensed adjunctions, ordinary scheme modules, generic sheaf exactness or component topology; none states the pro-etale component direct image and its normalized unit."
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents|WContractible|component.*[Pp]ullback",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\"]} Searched subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete condensed adjunctions, ordinary scheme modules, generic sheaf exactness or component topology; none states the pro-etale component direct image and its normalized unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on extremally disconnected profinite spaces detects exact sequences of sheaves and component pullback is fully faithful for w-contractible schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.hasExactLimitsOfShape\", \"Condensed.ofSheafForgetProfinite\", \"lightProfiniteToLightCondSetFullyFaithful\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"Condensed.ofSheafProfinite\", \"Condensed.lanSheafProfinite\", \"Condensed.isSheafProfinite\", \"LightCondensed.ofSheafForgetLightProfinite\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern discrete condensed adjunctions, ordinary scheme modules, generic sheaf exactness or component topology; none states the pro-etale component direct image and its normalized unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-wcontractible-component-derived-hom",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: unbounded derived internal functions comparison on the w-contractible affine basis; general component theorem used as a tool, not the parameter statement. HRS Proposition 4.3(1): Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8.",
+   "via": [
+    "lem-sfb-wcontractible-component-derived-hom",
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-component-pushforward-exact-unit",
+  "worker": "stage1",
+  "summary": "Q19: supplied the complete ordinary component pushforward argument using existing nodes only: geometry, finite split covers, normalized Kan unit, module scalar compatibility, exactness and covering descent, including empty schemes. Statement unchanged; no new nodes. Mathlib searches repeated through the prescribed logging command, with two semantic phrasings.",
+  "blueprint": "Paragraph (3), open direct image: unbounded derived internal functions comparison on the w-contractible affine basis; general component theorem used as a tool, not the parameter statement. HRS Proposition 4.3(1): Proposition 4.3(1), proof of the unit equivalence by extremally disconnected tests and w-contractibility of X times over pi_0(X) E; Bhatt–Scholze Lemmas 2.2.8, 2.4.8. The seven steps implement HRS Proposition 4.3(1) at the ordinary module level, the tool needed by the inherited paragraph (3) open-direct-image internal-functions comparison.",
+  "tool_uses": [
+   {
+    "node": "det-pe-stonean-cover",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "det-pe-wlocal-components",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-zl-affine-component-site-projection",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   },
+   {
+    "node": "new-lem-zl-stalk-isomorphism-lifting",
+    "why": "Generic component-geometry, contractible-evaluation, Stonean-cover, or ringed-site sheaf/module tool used with its stated hypotheses; the inherited unit has no separate statement of this tool. It implements the fixed HRS component-test route rather than replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wlocal-components",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-zl-affine-component-site-projection"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-f9688ff1b",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-f9688ff1b (reviewer sub-agent of L); spot-checked: I read the whole item. HRS Prop 4.3(1), its proof and the (4.1) construction were checked by pdftotext; all 20 cited nodes were read and exist unmerged. The statement is unchanged and true (small case: W strictly henselian local, with E=∅ and W=∅ also checked). There are no new nodes. It is not a duplicate: the sibling lem-sfb-component-pullback-unbounded-evaluation only evaluates F_W and does not state exactness of G_W or that the unit is an iso. Step 1: the closed points of W_E are exactly the pairs (w,e) with w closed, the unique closed specialization of (w,e) is (c(w),e), and the stalks are those of W, so W_E is w-contractible. Step 2: the clopen partition glues to a section of the finite qcqs cover, which is the hypothesis of the affine component-site evaluation. Step 3: Hom_W(W_E,W_D)=Hom_S(E,D) via the stalk-isomorphism lifting node, so (E,id) is initial and the unit is the identity coprojection followed by sheafification (00VE/00WX). Step 4: module unit m↦1⊗η(m), identified by a⊗m↦am. Step 5: exactness from det-pe-wc-sections-exact on W_E plus Stonean covers and the general-site epi criterion. Step 6: descent through E×_TE using injectivity proved on every profinite T. Step 7: empty cases are elementary. proof_deps equals the union of uses, steps are under 2000 characters, there is no SGA, and the 10 declared tool_uses are accepted as generic tools. Maintainer note: step 3 reads the 'canonical identification' of lem-zl-affine-component-site-projection as the sheafification comparison at split qcqs W. That node's proof proves exactly this, but its statement should later name the map explicitly."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ComponentPushforwardExactUnit",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.component_pushforward_exact_unit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.componentUnitSliceRing",
+   "AlgebraicGeometry.Scheme.ProEt.componentUnitSchemeRing",
+   "AlgebraicGeometry.Scheme.ProEt.componentUnitRingMap",
+   "AlgebraicGeometry.Scheme.ProEt.componentUnitDirectEvaluation",
+   "AlgebraicGeometry.Scheme.ProEt.component_pushforward_exact_unit"
+  ],
+  "file": "lean/Sheaf/Paper/ComponentPushforwardExactUnit.lean",
+  "statement": "theorem component_pushforward_exact_unit (W : Scheme.{u}) [IsAffine W] [IsWContractibleRing Γ(W, ⊤)] (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] : (∀ (E : Over (componentProfinite W)) [ExtremallyDisconnected E.left], IsAffine ((genericComponentFunctor W).obj E).left ∧ Nonempty (IsWContractibleRing Γ(((genericComponentFunctor W).obj E).left, ⊤)) ∧ (∀ x : ((genericComponentFunctor W).obj E).left, IsIso (((genericComponentFunctor W).obj E).hom.stalkMap x)) ∧ (∀ x : ((genericComponentFunctor W).obj E).left, IsClosed ({x} : Set ((genericComponentFunctor W).obj E).left) ↔ IsClosed ({((genericComponentFunctor W).obj E).hom x} : Set W)) ∧ ∃ e : ConnectedComponents ((genericComponentFunctor W).obj E).left ≃ₜ E.left, ∀ x : ((genericComponentFunctor W).obj E).left, e (ConnectedComponents.mk x) = genericComponentCoordinates W E x) ∧ ∃ (L : Sheaf ((coherentTopology Profinite.{u}).over (componentProfinite W)) RingCat.{u + 1} ⥤ Sheaf (topology W) RingCat.{u + 1}) (adj : L ⊣ genericComponentRingPush W) (c : L.obj (componentUnitSliceRing W Λ) ≅ componentUnitSchemeRing W Λ) (_ : (SheafOfModules.pushforward.{u + 1} (componentUnitRingMap W Λ L adj c)).IsRightAdjoint), (SheafOfModules.pushforward.{u + 1} (componentUnitRingMap W Λ L adj c)).Additive ∧ PreservesFiniteLimits (SheafOfModules.pushforward.{u + 1} (componentUnitRingMap W Λ L adj c)) ∧ PreservesFiniteColimits (SheafOfModules.pushforward.{u + 1} (componentUnitRingMap W Λ L adj c)) ∧ (∀ M : ringedSiteModules.{u + 1} (componentUnitSliceRing W Λ), IsIso ((SheafOfModules.pullbackPushforwardAdjunction (componentUnitRingMap W Λ L adj c)).unit.app M)) ∧ ∃ e : ∀ (E : Over (componentProfinite W)) [ExtremallyDisconnected E.left], SheafOfModules.pullback.{u + 1} (componentUnitRingMap W Λ L adj c) ⋙ SheafOfModules.pushforward (componentUnitRingMap W Λ L adj c) ⋙ SheafOfModules.evaluation (componentUnitSliceRing W Λ) (op E) ≅ SheafOfModules.evaluation (componentUnitSliceRing W Λ) (op E), (∀ (E : Over (componentProfinite W)) [ExtremallyDisconnected E.left] (M : ringedSiteModules.{u + 1} (componentUnitSliceRing W Λ)), (SheafOfModules.evaluation (componentUnitSliceRing W Λ) (op E)).map ((SheafOfModules.pullbackPushforwardAdjunction (componentUnitRingMap W Λ L adj c)).unit.app M) ≫ (e E).hom.app M = 𝟙 _) ∧ ∀ (E E' : Over (componentProfinite W)) [ExtremallyDisconnected E.left] [ExtremallyDisconnected E'.left] (f : E ⟶ E') (M : ringedSiteModules.{u + 1} (componentUnitSliceRing W Λ)) (x : ((SheafOfModules.pushforward (componentUnitRingMap W Λ L adj c)).obj ((SheafOfModules.pullback (componentUnitRingMap W Λ L adj c)).obj M)).val.obj (op E')), (e E).hom.app M (((SheafOfModules.pushforward (componentUnitRingMap W Λ L adj c)).obj ((SheafOfModules.pullback (componentUnitRingMap W Λ L adj c)).obj M)).val.map f.op x) = M.val.map f.op ((e E').hom.app M x)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the characterized component functor, the actual point coefficient, and Mathlib module pullback/pushforward. Direct evaluation is a defined identity natural isomorphism with its scalar restriction; the theorem supplies the unit-normalized second evaluation, exactness, geometry and invertibility. Added only existing landed definition dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf22c11db",
+  "group": "N6",
+  "result": "pass",
+  "note": "Every node clause rendered: w-contractible affine W, componentProfinite W, arbitrary commutative CondensedRing; W_E affine, w-contractible, stalk isos, closed points = W^c x_S E, pi0(W_E)=E pinned by coordinates; G_W = Mathlib pushforward along unit-then-c ring map; (G_W N)(E)=N(W_E) by Iso.refl; G_W additive, preserves finite limits and colimits; unit iso for all M; second evaluation natural in M and E with unit normalisation. Node diff only lean plus stmt_deps (3 existing landed def owners). No extra hypotheses; W=empty, E=empty, zero ring and universes checked. Helpers real; one sorry; docstrings with source and blueprint tags and the 7 steps. No duplicate found. Advisory: L/adj/c existential (c-invariant claims; same as landed GenericComponentCoefficientData); the exists-e unit normalisation is implied by the unit iso, matching the dependency's existential ComponentSiteEvaluation. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T095509-L-3427178",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

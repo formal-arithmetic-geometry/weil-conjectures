@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+ "kind": "statement",
+ "title": "Top cohomology of an m-pseudo-coherent site complex is finite type",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a site with a sheaf of commutative rings and use its unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Restrictions to an object mean restrictions to the slice site [def-pur-localized-ringed-site]. A strictly perfect complex is a bounded cochain complex whose terms are direct summands of finite free $\\mathcal O$-modules. For $a\\in\\mathbf Z$, call $K\\in D(\\mathcal O)$ $a$-pseudo-coherent if locally on each site object there is a strictly perfect $P$ and a morphism $P\\to K$ inducing cohomology isomorphisms in degrees $>a$ and a surjection in degree $a$. Let $m\\in\\mathbf Z$ and $K\\in D(\\mathcal O)$ be $m$-pseudo-coherent with $H^i(K)=0$ for every $i>m$. Then $H^m(K)$ is of finite type: on a covering of every site object it admits a surjection from a finite free structure module. No coherence condition on $\\mathcal O$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FX (lemma-finite-cohomology), part (1)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "def-sfb-ringed-site-pseudocoherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Fix an object $U$. By the stated definition of $m$-pseudo-coherence choose a covering $U_i\\to U$ and strictly perfect approximations $P_i\\to K|_{U_i}$. Restriction to a slice is exact [lem-sf-site-perfect-restriction-exact]: it preserves kernels, images and their quotients, hence $H^r(K|_{U_i})=H^r(K)|_{U_i}$ by the cohomology formula [def-weil-abstract-derived-category]. Consequently $H^r(P_i)=0$ for $r>m$, and $H^m(P_i)\\to H^m(K)|_{U_i}$ is an epimorphism. Restricting a finite-free splitting restricts both its maps and their identity equation; thus every further restriction of $P_i$ remains strictly perfect.",
+   "uses": [
+    "lem-sf-site-perfect-restriction-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FX, lemma-finite-cohomology, proof of (1)."
+   }
+  },
+  {
+   "text": "On the ringed slice $\\mathcal C/U_i$, regard $P_i$ as a derived object. It is site-perfect: its bounded finite-free-retract complex itself supplies all the local models, using identity quasi-isomorphisms, as in [def-weil-pbc-strict-perfect-coefficient-package]. Apply [lem-sf-site-perfect-upper-model] with this object and $b=m$. Its vanishing hypothesis was verified in step 1. On a further covering $V_{ij}\\to U_i$ it supplies a bounded strictly perfect complex $Q_{ij}$, zero in every degree $>m$, and an isomorphism in the derived category from $Q_{ij}$ to $P_i|_{V_{ij}}$. In particular their degree-$m$ cohomology sheaves are isomorphic. This application is to the perfect approximation, without requiring $K$ to be perfect.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sf-site-perfect-upper-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FX, lemma-finite-cohomology, proof of (1)."
+   }
+  },
+  {
+   "text": "Since $Q_{ij}^{m+1}=0$, the cohomology formula gives $H^m(Q_{ij})=\\operatorname{coker}(d^{m-1}:Q_{ij}^{m-1}\\to Q_{ij}^m)$ [def-weil-abstract-derived-category]. Choose the defining splitting $Q_{ij}^m\\xrightarrow{\\iota}\\mathcal O_{V_{ij}}^{\\oplus N}\\xrightarrow{p}Q_{ij}^m$, with $p\\iota=1$. Compose $p$, the cokernel projection, the cohomology isomorphism of step 2, and the restriction to $V_{ij}$ of the epimorphism of step 1. Restriction from $\\mathcal C/U_i$ to its slice at $V_{ij}$ is exact [lem-sf-site-perfect-restriction-exact], so it preserves epimorphisms and identifies $H^m(P_i|_{V_{ij}})$ with $H^m(P_i)|_{V_{ij}}$, as in step 1. This is an epimorphism $\\mathcal O_{V_{ij}}^{\\oplus N}\\to H^m(K)|_{V_{ij}}$: the first map is split epic, the second is a cokernel projection, and the remaining maps are isomorphic or epic. Cokernels here are sheaf cokernels [def-weil-sheaf-of-modules-category]. Covering transitivity composes $V_{ij}\\to U_i\\to U$, and successive restrictions identify with restriction to $V_{ij}$ [def-pur-localized-ringed-site]. This is the required finite-type cover for the arbitrary object $U$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site",
+    "lem-sf-site-perfect-restriction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FX, lemma-finite-cohomology, proof of (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-site-perfect-restriction-exact",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sf-site-perfect-upper-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FX, lemma-finite-cohomology, proof of (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The highest cohomology sheaf of an m pseudo coherent complex on a ringed site is of finite type",
+   "results": "OK: 8 hits; SheafOfModules.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: IsFiniteType and local generators describe the conclusion only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Highest nonzero cohomology of a pseudo coherent complex of sheaves is a finite type module",
+   "results": "OK: 8 hits; SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFiniteType, CochainComplex.isZero_of_isStrictlyGE, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite.isFiniteType_generators, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, CochainComplex.exists_iso_single, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: generators, finite presentation and complexes supported in a degree; no approximation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration with this name"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[Ii]sMPseudo",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence declarations in the searched Mathlib source directory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T13:42:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-sheaf finite-type definitions, homological projectivity, or unrelated cohomology results; none proves the ringed-site approximation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The highest nonzero cohomology sheaf of an m pseudo coherent complex on an arbitrary ringed site is locally finitely generated",
+   "results": "{\"t\": \"2026-10-23T13:42:25Z\", \"tool\": \"leanfinder\", \"query\": \"The highest nonzero cohomology sheaf of an m pseudo coherent complex on an arbitrary ringed site is locally finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType\"], \"digest\": \"4212d5631e9e2563\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-sheaf finite-type definitions, homological projectivity, or unrelated cohomology results; none proves the ringed-site approximation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[Ii]sMPseudo|finite.*homology|homology.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-23T13:43:39Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|[Ii]sMPseudo|finite.*homology|homology.*[Ff]inite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\"], \"digest\": \"aff0bda5f88209ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-sheaf finite-type definitions, homological projectivity, or unrelated cohomology results; none proves the ringed-site approximation assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top cohomology of a bounded above perfect approximation of sheaf complexes is a finite type sheaf",
+   "results": "{\"t\": \"2026-10-23T13:43:39Z\", \"tool\": \"leansearch\", \"query\": \"Top cohomology of a bounded above perfect approximation of sheaf complexes is a finite type sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.mk\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.mk\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite.mk\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\"], \"digest\": \"4e5fe640266e1e83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-sheaf finite-type definitions, homological projectivity, or unrelated cohomology results; none proves the ringed-site approximation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective sheaves which is acyclic above m has finitely generated mth cohomology locally on the site",
+   "results": "{\"t\": \"2026-10-23T13:43:40Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of finite projective sheaves which is acyclic above m has finitely generated mth cohomology locally on the site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\"], \"digest\": \"59fc95c42c7b95d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-sheaf finite-type definitions, homological projectivity, or unrelated cohomology results; none proves the ringed-site approximation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFiniteType|theorem isKProjective_of_projective|lemma isKProjective_of_projective|class IsKProjective",
+   "results": "{\"t\": \"2026-10-23T13:46:54Z\", \"tool\": \"grep\", \"query\": \"class IsFiniteType|theorem isKProjective_of_projective|lemma isKProjective_of_projective|class IsKProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"37e826915bd7e62e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned single-sheaf finite-type definitions, homological projectivity, or unrelated cohomology results; none proves the ringed-site approximation assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-pseudocoherence-descent",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative. Supporting input to 08HE: lemma-descend-pseudo-coherent, induction step: apply sites-cohomology lemma-finite-cohomology to the etale pullback.",
+   "via": [
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+  "worker": "stage1",
+  "summary": "Read Stacks 08FX(1) and 08FN. Reuse the existing exact-slice-restriction and strict-perfect upper-model nodes rather than duplicate their local splitting/cancellation induction. Apply shortening to the strictly perfect approximation, then compose its finite-free quotient with the cohomology epimorphism. No new nodes or statement changes.",
+  "blueprint": "Supporting input for det-thm-sf-ctf-stability-direct-images, proof (3), through the existing etale pseudocoherence descent chain: 08HE uses 08FX(1). The current latest blueprint proof (3) is read as the ambient direct-image route; the node is the previously introduced Stacks prerequisite, not a new claim of the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-site-perfect-upper-model",
+    "why": "Generic local shortening of a perfect derived object to its cohomological upper bound; applied only to the strictly perfect approximation. This is the 08FX(1) cancellation argument already recorded in the DAG; no narrower statement of this unit supplies it."
+   },
+   {
+    "node": "lem-sf-site-perfect-restriction-exact",
+    "why": "Generic exactness of restriction of module sheaves to a ringed slice, needed to restrict vanishing and epimorphisms. No narrower statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-site-perfect-upper-model",
+  "lem-sf-site-perfect-restriction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-a8d776bc4",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-a8d776bc4 (reviewer sub-agent of L); spot-checked: Read Stacks sites-cohomology 08FX (lemma-finite-cohomology) part (1) and its proof, with definition-strictly-perfect and definition-pseudo-coherent. The item agrees with the source hypothesis by hypothesis: commutative ringed site, m-pseudo-coherence defined locally, H^{>m}(K)=0, and the site-local finite-type conclusion. The statement and stmt_deps are unchanged and nothing is weakened. There are no new nodes. In clones/live and side-live the item is still unsplit, so it is not superseded. No SGA is cited. Step 1: restriction-exact gives H^r commuting with slice restriction, so H^{>m}(P_i)=0 and H^m(P_i) maps onto H^m(K)|U_i. This is correct. Step 2: lem-sf-site-perfect-upper-model is applied to the approximation P_i (perfect through identity local models), not to K. I checked the StrictPerfectCoefficientRepresentationOfUniverses structure (Sheaf/Paper/StrictPerfectCoefficientPackageOfUniverses.lean:80-97, read as source only). It carries a derived iso `represents` and degreewise finite-free splittings, so the step takes only what the statement gives, and the slice-site universes are consistent. Step 3: Q^{m+1}=0, so H^m is a cokernel; the split epi from O^N, the cokernel projection, the iso and the restricted epi compose to an epimorphism. Fault (C1/C4): step 3 needs the restriction of the step-1 epimorphism to V_ij to stay an epimorphism, and H^m(P_i|V_ij)=H^m(P_i)|V_ij. Both come from exactness, which step 3 did not cite; sheaf epimorphisms are not sectionwise surjective. FIX: step 3 now cites lem-sf-site-perfect-restriction-exact in its text and uses; proof_deps is still the union of the uses. No duplicate exists: the ring case 064S, scheme 08DN(2), the scheme top-cancellation node and the perfect-object upper/lower models all state different things, and the existing upper model is reused instead of a new cancellation lemma. No cycle: the closure has 125 nodes and excludes the item. The parent etale-pseudocoherence-descent uses the item exactly as stated. Edge cases (Q^m=0, zero ring, empty covering, negative m) are fine. I accept both tool_uses; they are generic and on the route via sk-thm-sf-hom-ctf.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSitePseudoCoherentTopFiniteType",
+  "declaration": "SheafOfModules.isFiniteType_top_homology_of_isMPseudoCoherentOnRingedSite",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSitePseudoCoherentTopFiniteType.lean",
+  "statement": "theorem isFiniteType_top_homology_of_isMPseudoCoherentOnRingedSite {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{max u v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v r}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}] (R : Sheaf J CommRingCat.{max u v r}) [HasDerivedCategory.{w} (SheafOfModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))] [∀ U : C, HasDerivedCategory.{w'} (SheafOfModules.{max u v r} (((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R).over U))] (m : ℤ) (K : DerivedCategory (SheafOfModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))) (hK : IsMPseudoCoherentOnRingedSite.{u, v, r, w, w'} R m K) (hvan : ∀ i : ℤ, m < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj K)) : IsFiniteType ((DerivedCategory.homologyFunctor _ m).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 67ba64582794: imports and reuses IsMPseudoCoherentOnRingedSite from Sheaf.Algebra.Homology.RingedSitePseudoCoherent, owned by def-sfb-ringed-site-pseudocoherent-complex. The duplicate definition module and proposed duplicate node are removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1a5977b3",
+  "group": "Q100",
+  "result": "fix",
+  "note": "Lean statement matches Stacks 08FX(1) and the node: commutative ringed site with independent universes u,v (coefficients max u v r); unbounded K; hK = the landed IsMPseudoCoherentOnRingedSite (owner def-sfb-ringed-site-pseudocoherent-complex, now a stmt_dep and byte-identical to live; this resolves the earlier H4 duplicate); hvan exact; the conclusion, Mathlib SheafOfModules.IsFiniteType (CoversTop local finite generators), is finite type on covers of every object, with no coherence or finite presentation. Edge cases (any m in Z, zero ring, rank 0, empty site or covers) are covered and nothing stronger is assumed. Item record unchanged apart from lean and the added stmt_dep; lean.statement equals the signature; docstrings carry the source place, blueprint id and the 3 proof steps; proof is sorry only. No compile run because no Lean file changed; the worker's compile was clean. Only fault is H11: the 'Second reading by Q100' section is an author note saying there was no independent reading. FIX: fixes/lem-sfb-ringed-site-pseudocoherent-top-finite-type.report.md keeps the worker report and repair section verbatim and adds a real clause-by-clause second reading."
+ }
+}

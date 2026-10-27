@@ -20,149 +20,76 @@
  ],
  "proof": [
   {
-   "text": "All schemes occurring in the assertion are Noetherian: apply [lem-weil-pbc-finite-type-over-noetherian] over $\\operatorname{Spec}k$ and [lem-weil-pbc-noetherian-open-subscheme-noetherian] to open subschemes. Here a field is Noetherian since its only ideals are zero and the whole field. In particular all targets are quasi-compact; intersections of affine opens are open Noetherian subschemes and hence quasi-compact, so the schemes are quasi-separated. Thus [thm-nagata-compactification] supplies the chosen compactifications for separated finite-type maps. For the chart, [lem-pod-separated-finite-type-base-change] applies to $f_V$ and [lem-weil-pbc-open-immersion-base-change] to $h$. The open maps are quasi-compact since their sources and all affine-open inverse images are Noetherian opens. They are separated and of finite type, and the same holds for the closed map $i$, the affine-space projection $\\pi$, and their displayed composites. Consequently the Noetherian and compactifiability hypotheses of the etale results used below hold, without requiring $X$ or $Y$ to be separated over $k$.",
+   "text": "Every scheme here and every open subscheme is Noetherian, hence quasi-compact and quasi-separated: [lem-weil-pbc-finite-type-over-noetherian] over $\\operatorname{Spec}k$ (a field is Noetherian) and [lem-weil-pbc-noetherian-open-subscheme-noetherian]; so open immersions are quasi-compact, hence of finite type. [lem-pod-separated-finite-type-base-change] makes $f_V$ separated of finite type and [lem-weil-pbc-open-immersion-base-change] makes $h$ open; the closed immersion $i$, the projection $\\pi$ and the composite $f_Vu'=\\pi i$ are separated of finite type. [thm-nagata-compactification] supplies compactifications $c=(j,p)$ of $v$ and of $f,f_V,i,\\pi$; $\\overline S$ is of finite type over $k$, so $\\dim\\overline S\\leq d$ for some $d$ by [lem-kun-dimension-finite-type]. Neither $X$ nor $Y$ need be separated over $k$.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "thm-nagata-compactification",
     "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-open-immersion-base-change"
+    "lem-weil-pbc-open-immersion-base-change",
+    "thm-nagata-compactification",
+    "lem-kun-dimension-finite-type"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Steps 1 and 3: geometric hypotheses for compact support and the chart"
+    "place": "Step 1 (witnessed adjunction and chart) and Step 3 (base-open passage)"
    }
   },
   {
-   "text": "Write $F_v=Rv_{!,e}$ and $H_v=v_e^\\times$ on the ordinary etale categories. The adjunction $F_v\\dashv H_v$ is [thm-amb-etale-exceptional-adjoint]. Its restriction has both functors taking values in $D^+$: compact support is the bounded-below functor in [lem-amb-etale-compact-comparisons], and [lem-etale-upper-shriek-quasicompact-bounded-below] applies to $H_v$ because the target $R$ is quasi-compact by step 1. The latter assertion is only bounded-below preservation, with a possible lower-bound shift; it asserts no constructibility preservation. Apply this also to $f_V,i,\\pi$ and the open chart maps. In particular $i_e^\\times\\pi_e^\\times N_e$ is bounded below whenever $N_e$ is.",
+   "text": "Let $M=(M,M_e,\\alpha)\\in\\mathcal C(S)$, $N=(N,N_e,\\beta)\\in\\mathcal C(R)$. $Rv_{!,e}M_e$ is bounded below [lem-amb-etale-compact-comparisons] and [lem-sf-class-compact-support-comparison] gives $Rv_!M\\cong\\nu_R^*Rv_{!,e}M_e$. $R$ is quasi-compact, so $v_e^\\times N_e$ is bounded below [lem-etale-upper-shriek-quasicompact-bounded-below]; applying $\\nu_S^*v_e^\\times$ to $N_e\\to R\\nu_{R,*}\\nu_R^*N_e\\to R\\nu_{R,*}N$ (unit iso of [thm-weil-pbc-site-comparison], then $R\\nu_{R,*}\\beta$) gives $\\nu_S^*v_e^\\times N_e\\cong G_vN$. These witnesses define the lifts; on arrows they are $Rv_!$ and $G_v$, as morphisms of $\\mathcal C$ are all underlying arrows [def-sf-etale-origin-subcategory]. $M$ has etale origin and $N\\in D^+$, so clause (2) of [thm-sf-ambient-adjoint-class] gives the natural bijection, and clause (3) its independence of $c$ with the bijections.",
    "uses": [
-    "thm-amb-etale-exceptional-adjoint",
     "lem-amb-etale-compact-comparisons",
-    "lem-etale-upper-shriek-quasicompact-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: verify the domains before composing adjoints"
-   }
-  },
-  {
-   "text": "Put $C_T=\\nu_T^*$. For $M=(M,M_e,\\alpha)$ the natural isomorphism of [lem-sf-class-compact-support-comparison] gives the witness $C_RF_vM_e\\cong Rv_!M$ (invert its displayed comparison). For $N=(N,N_e,\\beta)$, [thm-weil-pbc-site-comparison] gives the natural isomorphism $N_e\\cong R\\nu_{R,*}N$: compose the comparison unit at $N_e$ with $R\\nu_{R,*}\\beta$. Apply $C_SH_v$ to obtain $C_SH_vN_e\\cong G_vN$. Step 2 supplies bounded-below witnesses $F_vM_e$ and $H_vN_e$; [lem-sf-comparison-pullback-exact] ensures their comparison pullbacks are bounded below as well. These constructions define object lifts. On arrows use exactly $Rv_!$ and $G_v$ on the underlying pro-etale arrow; the definition of morphisms in [def-sf-etale-origin-subcategory] imposes no extra witness map. Identity and composition laws therefore remain the underlying functor laws.",
-   "uses": [
     "lem-sf-class-compact-support-comparison",
+    "lem-etale-upper-shriek-quasicompact-bounded-below",
     "thm-weil-pbc-site-comparison",
-    "lem-sf-comparison-pullback-exact",
-    "def-sf-etale-origin-subcategory"
+    "def-sf-etale-origin-subcategory",
+    "thm-sf-ambient-adjoint-class"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: retain actual etale witnesses for both functors"
+    "place": "Step 1 (witnessed adjunction and chart) and Step 3 (base-open passage)"
    }
   },
   {
-   "text": "Using the witnesses from step 3, full faithfulness in [thm-weil-pbc-site-comparison], and the ordinary adjunction [thm-amb-etale-exceptional-adjoint], the required bijection is the chain\n$$\\operatorname{Hom}_{\\mathcal C(R)}(Rv_!M,N)\\cong\\operatorname{Hom}_{D^+(R_e)}(F_vM_e,N_e)\\cong\\operatorname{Hom}_{D^+(S_e)}(M_e,H_vN_e)\\cong\\operatorname{Hom}_{\\mathcal C(S)}(M,G_vN).$$\nAll four Hom sets are well typed by steps 2 and 3. Every arrow between witnessed objects corresponds to a unique etale arrow by full faithfulness, so the naturality of the comparisons and the etale adjunction proves naturality for every underlying arrow, not just arrows initially presented with etale lifts. Thus this is an actual adjunction of the two lifted functors.",
+   "text": "Use [lem-pur-witnessed-open-chart-transport] for open restriction, retaining the ordinary etale restricted witness and its identity and composition compatibilities. Its chart assertion, with $X$ replaced by $X_V$, $j=u'$ and $f=f_V$, gives $L(u')^*G_{f_V}N\\cong G_iG_\\pi N$ naturally for every $N\\in\\mathcal C(V)$. Its bounded-below Hom normalization and comparison-unit identifications ensure this is an isomorphism in $\\mathcal C(U)$ without assuming constructible preservation.",
    "uses": [
-    "thm-weil-pbc-site-comparison",
-    "thm-amb-etale-exceptional-adjoint"
+    "lem-pur-witnessed-open-chart-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: adjunction on the witnessed categories"
+    "place": "Step 1 (witnessed adjunction and chart) and Step 3 (base-open passage)"
    }
   },
   {
-   "text": "On the stated domain, [prop-compactification-coherence-detailed] gives the canonical compact-support comparisons and their cocycle. The ordinary etale versions are those of [lem-amb-etale-compact-comparisons]. At two compactifications, their $D^+$ right adjoints from step 2 are compared by the counit-compatible uniqueness isomorphism of [det-sp-unique-right-adjoint], after identifying the left adjoints. Applying $C_S$ and the witness-unit identifications of step 3 gives comparisons of $G_v$. The Hom chain in step 4 commutes with these maps: the middle bijection does so by counit compatibility, and the outer bijections are natural comparison isomorphisms. Identity and composition of right comparisons follow because both composites are counit-compatible and uniqueness makes them equal. This proves the asserted independence, including the underlying bijections.",
-   "uses": [
-    "prop-compactification-coherence-detailed",
-    "lem-amb-etale-compact-comparisons",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: independence of compactification under the canonical comparisons"
-   }
-  },
-  {
-   "text": "For any of the open immersions $j:W\\hookrightarrow T$, constant-coefficient pullback is exact on both sites by [prop-weil-pbc-inverse-image-modules-exact] and [prop-weil-pbc-proetale-constant-exact]. Thus $Lj^*=j^*$ acts termwise and preserves a lower bound. Apply the natural inverse-image comparison of [lem-weil-pbc-comparison-pullback] termwise to the witness $C_TM_e\\cong M$: it gives $C_W(j_e^*M_e)\\cong j^*M$. This constructs the claimed restricted witness and the functor on $\\mathcal C$. The identity and composition compatibilities in that comparison identify restriction along $u=hu'$ with successive restriction along $h$ and $u'$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-comparison-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Steps 1 and 3: open inverse image in the witnessed categories"
-   }
-  },
-  {
-   "text": "For $N_e\\in D^+(V_e,A)$ set $B=i_e^\\times\\pi_e^\\times N_e$ and $Q=(u'_e)^*(f_V)_e^\\times N_e$. By steps 2 and 6 both are in $D^+(U_e,A)$. Apply [lem-sf-etale-chart-adjoint-comparison] with $f=f_V$, $s=u'$, $v=\\mathrm{id}_V$, $p=\\pi$ and $K=N_e$; step 1 checks every geometric hypothesis and $f_Vu'=\\pi i$ is the chosen equality. It supplies the natural bijection $\\Theta_H:\\operatorname{Hom}(H,Q)\\cong\\operatorname{Hom}(H,B)$, the inverse of the bijection displayed in that node. Explicitly its forward chain is\n$$\\operatorname{Hom}(H,Q)\\cong\\operatorname{Hom}(u'_!H,(f_V)_e^\\times N_e)\\cong\\operatorname{Hom}(R(f_V)_{!,e}u'_!H,N_e)\\cong\\operatorname{Hom}(R\\pi_{!,e}i_*H,N_e)\\cong\\operatorname{Hom}(H,B).$$\nHere the cited node supplies the normalized compact-support compositor as well as the adjunctions: we use its stated natural Hom bijection, not an unstated identification of unbounded representing objects.",
-   "uses": [
-    "lem-sf-etale-chart-adjoint-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: the chart comparison from compact-support composition and open adjunction"
-   }
-  },
-  {
-   "text": "Evaluate step 7 at the two representing objects, which is allowed because both are bounded below. Set $a=\\Theta_Q(1_Q):Q\\to B$ and $b=\\Theta_B^{-1}(1_B):B\\to Q$. Naturality in $H$ gives $\\Theta_H(t)=a\\circ t$ and $\\Theta_H^{-1}(z)=b\\circ z$. Hence $a\\circ b=1_B$ and $b\\circ a=1_Q$ by the inverse identities of the bijections. The naturality in $N_e$ gives $B(\\phi)\\circ a_{N_e}=a_{N'_e}\\circ Q(\\phi)$ for every $\\phi:N_e\\to N'_e$, so $a$ is a natural isomorphism. Its definition as successive transposes of the normalized compact-support comparison also fixes its canonical adjunction normalization.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: evaluate the natural Hom bijections to obtain the isomorphism"
-   }
-  },
-  {
-   "text": "Apply $\\nu_U^*$ to the isomorphism in step 8. For $N=(N,N_e,\\beta)$, step 3 and [thm-weil-pbc-site-comparison] identify $G_{f_V}N$ with $\\nu_{X_V}^*(f_V)_e^\\times N_e$ and $G_\\pi N$ with $\\nu_T^*\\pi_e^\\times N_e$. Apply the same unit once more at the bounded-below object $\\pi_e^\\times N_e$ to identify $G_iG_\\pi N$ with $\\nu_U^*i_e^\\times\\pi_e^\\times N_e$. The comparison [lem-weil-pbc-comparison-pullback] identifies $L(u')^*G_{f_V}N$ with $\\nu_U^*Q$. Therefore the image of $a:Q\\cong B$ is precisely $L(u')^*G_{f_V}N\\cong G_iG_\\pi N$. Both objects have the specified etale witnesses by steps 3 and 6, so this is an isomorphism in $\\mathcal C(U)$. Full faithfulness makes its naturality hold for every morphism in $\\mathcal C(V)$.",
-   "uses": [
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-comparison-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 1: transport the chart comparison without a constructible preservation assertion"
-   }
-  },
-  {
-   "text": "For the final assertion, [lem-sf-proetale-constructible-origin] puts the bounded constructible $L$ in $\\mathcal C(Y)$. Step 6 puts $Lg^*L$ in $\\mathcal C(V)$ without requiring a constructible output from any exceptional functor. Apply only the independent bounded-class clause of [cor-exc-base-change-open-immersion-general], with $g:V\\hookrightarrow Y$ and $h:X_V\\hookrightarrow X$. It states that the canonical map $Lh^*G_fL\\to G_{f_V}Lg^*L$ is invertible for this bounded constructible input, with no unrestricted ambient datum. Steps 3 and 6 show that its source and target carry etale-origin witnesses; their Hom sets are the underlying pro-etale Hom sets, so its inverse is also a morphism of the witnessed categories. Restrict it along $u'$ and compose with step 9 at $N=Lg^*L$. Using $u=hu'$ and the composition compatibility of step 6 gives $Lu^*G_fL\\cong G_iG_\\pi Lg^*L$, as required.",
+   "text": "For the final assertion, [lem-sf-proetale-constructible-origin] puts the bounded constructible $L$ in $\\mathcal C(Y)$. Step 3 puts $Lg^*L$ in $\\mathcal C(V)$. Apply only the independent bounded-class clause of [cor-exc-base-change-open-immersion-general], with $g:V\\hookrightarrow Y$ and $h:X_V\\hookrightarrow X$. It states that the canonical map $Lh^*G_fL\\to G_{f_V}Lg^*L$ is invertible for this bounded constructible input. Steps 2 and 3 show that its source and target carry etale-origin witnesses; their Hom sets are the underlying pro-etale Hom sets, so its inverse is also a morphism of the witnessed categories. Restrict it along $u'$ and compose with step 3 at $N=Lg^*L$. Using $u=hu'$ and the composition compatibility of step 3 gives $Lu^*G_fL\\cong G_iG_\\pi Lg^*L$, as required.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
-    "cor-exc-base-change-open-immersion-general"
+    "cor-exc-base-change-open-immersion-general",
+    "lem-pur-witnessed-open-chart-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 3 and Step 1: canonical base-open comparison followed by chart comparison"
+    "place": "Step 1 (witnessed adjunction and chart) and Step 3 (base-open passage)"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "thm-nagata-compactification",
   "lem-pod-separated-finite-type-base-change",
   "lem-weil-pbc-open-immersion-base-change",
-  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
   "lem-amb-etale-compact-comparisons",
-  "lem-etale-upper-shriek-quasicompact-bounded-below",
   "lem-sf-class-compact-support-comparison",
+  "lem-etale-upper-shriek-quasicompact-bounded-below",
   "thm-weil-pbc-site-comparison",
-  "lem-sf-comparison-pullback-exact",
   "def-sf-etale-origin-subcategory",
-  "prop-compactification-coherence-detailed",
-  "det-sp-unique-right-adjoint",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-sf-etale-chart-adjoint-comparison",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-witnessed-open-chart-transport",
   "lem-sf-proetale-constructible-origin",
   "cor-exc-base-change-open-immersion-general"
  ],
@@ -305,24 +232,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-affine-chart-exceptional-identification",
   "worker": "stage1",
-  "summary": "Kept the full statement and all hypotheses. Constructed both witnessed functor lifts and their adjunction, checked bounded-below domains before applying the existing normalized etale chart Hom theorem, evaluated its bijections to obtain the chart isomorphism, and used the independent bounded-class base-open comparison. No new nodes, definitions or Lean changes.",
-  "blueprint": "Ancestor thm-pur-general-admissibility, proof Step 1 (right adjoint of the chart) and Step 3 (passage from affine base opens); also supplies the witness-domain expansion explicitly required by this item. The unit opening/final locality paragraphs are followed.",
+  "summary": "Repair of the batch5 re-split: statement unchanged; two independent statement-only nodes redistribute returned Steps 1–5 and 6–9, retaining every argument verbatim in report.md. Parent is the short assembly and the previous Step 10. No Lean or build changes. Maintainer reader (cc, 2026-10-22): the delivered witnessed compact-support adjunction node restated clauses (2)-(3) of the existing thm-sf-ambient-adjoint-class plus the two-line witness lifts; it was dropped and old Steps 1-5 now rest on that theorem (whose proof carries the same Hom chain and compactification coherence) in Steps 1-2.",
+  "blueprint": "thm-pur-general-admissibility proof Step 1 (the right adjoint of the chart: witnessed adjunction, coherent choices, normalized chart isomorphism) and Step 3 (open restriction and bounded-class canonical base-open comparison).",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Noetherianity of finite-type field schemes needed to check the etale compact-support hypotheses. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Noetherianity and quasi-compactness of all open chart schemes and intersections. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "thm-nagata-compactification",
-    "why": "Existence of compactifications for separated finite-type chart morphisms to qcqs schemes. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
    {
     "node": "lem-pod-separated-finite-type-base-change",
     "why": "Separated finite-type hypotheses for f_V. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
@@ -332,60 +247,24 @@
     "why": "Open-immersion hypothesis for h. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
    },
    {
-    "node": "thm-amb-etale-exceptional-adjoint",
-    "why": "Ordinary etale right adjunction before any constructible preservation. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-amb-etale-compact-comparisons",
-    "why": "D+ compact support and coherent normalized compactification comparisons. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-etale-upper-shriek-quasicompact-bounded-below",
-    "why": "Ordinary right adjoints take D+ to D+ on the quasi-compact targets; necessary for witnessed outputs and evaluation of Hom tests. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "The compact-support output has the precise witness Rv_{!,e}M_e. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Full faithfulness on D+ and its invertible unit identify the right-adjoint witness and all Hom sets. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Comparison pullback preserves lower bounds. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "prop-compactification-coherence-detailed",
-    "why": "Canonical pro-etale compact-support comparisons on the etale-origin domain, with cocycle. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "det-sp-unique-right-adjoint",
-    "why": "Counit-compatible uniqueness constructs the coherent right comparisons. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Exact ordinary etale constant-ring restriction. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Exact pro-etale constant-ring restriction. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Natural restriction of the actual etale witnesses, with identity and composite compatibility. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
-    "node": "lem-sf-etale-chart-adjoint-comparison",
-    "why": "The existing normalized chart Hom bijection; its targets are not asserted bounded below by that node, so step 2 separately establishes this. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
-   },
-   {
     "node": "lem-sf-proetale-constructible-origin",
     "why": "The bounded constructible input has an actual etale-origin witness. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
    },
    {
     "node": "cor-exc-base-change-open-immersion-general",
     "why": "Only its independent bounded-class clause identifies the canonical base-open comparison. This is a generic prerequisite; the unit does not itself state this comparison/domain fact."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the compactifying scheme, the dimension-bound hypothesis of thm-sf-ambient-adjoint-class; generic fact, no node of the unit states it."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Bounded-below ordinary etale compact support for the left witness; generic tool, already recorded in the node tool_uses."
+   },
+   {
+    "node": "lem-etale-upper-shriek-quasicompact-bounded-below",
+    "why": "Bounded-below ordinary etale right adjoint for the right witness; generic tool, already recorded in the node tool_uses."
    }
   ]
  },
@@ -408,15 +287,16 @@
   "lem-weil-pbc-comparison-pullback",
   "lem-sf-etale-chart-adjoint-comparison",
   "lem-sf-proetale-constructible-origin",
-  "cor-exc-base-change-open-immersion-general"
+  "cor-exc-base-change-open-immersion-general",
+  "lem-kun-dimension-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NC-04168f916",
-  "group": "NC",
+  "reviewer": "NT-cc-Q24-d8c0a911b",
+  "group": "Q24",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-04168f916 (reviewer sub-agent of L); spot-checked: I read the whole item. Statement, stmt_deps and blueprint are unchanged from live; there are no new nodes. I also read all 20 cited statements (non-six-functors chapters from side-live, because the snapshot's chapter symlinks dangle), the blueprint main-20261015 proof of thm-pur-general-admissibility (Steps 1 and 3), unit sk-prop-sf-rf-shriek-preservation step 4, and the Q69 report that assigns old Steps 1-3 to this item. Steps 2-4: the item builds both functors on the witnessed categories itself, using the ordinary etale adjoint, the D+ preservation lemma (every target is quasi-compact), the compact-support witness from lem-sf-class-compact-support-comparison, and the unit iso of thm-weil-pbc-site-comparison. The Hom chain is natural on all C-arrows by full faithfulness. Step 5: compactification independence follows from the counit-unique right adjoint. Step 6: open restriction keeps the witness, by exactness on both sites and lem-weil-pbc-comparison-pullback. Steps 7-8: lem-sf-etale-chart-adjoint-comparison is instantiated with f=f_V, s=u', v=id, p=pi; all its hypotheses are checked. That node does not say B and Q are bounded below; steps 2 and 6 supply this, and the Yoneda argument is written out correctly (I checked a∘b=1 and b∘a=1). Step 9: the unit is applied at the bounded-below object pi^x N_e. Step 10: it uses the ambient-free bounded-constructible clause of cor-exc-base-change-open-immersion-general, whose Rf^! is the same functor as G_f. Edge cases checked: d=0, empty charts, identity maps, non-separated X and Y. Coefficients stay A_{E,n} throughout. Every off-route dependency is a declared, generic tool use; I accept them all. The dependency closure has no cycle. No SGA citation. Every argument of the old Steps 1-3 survives. Advisory only: step 1 states without a node that i, pi and their composite are separated of finite type, which is elementary. Parallel NH and Q28 deliveries of this item exist; live is still unsplit."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-d8c0a911b (reviewer sub-agent of L); spot-checked: Read in full: the 2026-10-22 re-split note (8030 chars, at least 2 nodes), the base 10-step proof from side-live (statement unchanged; live is still the NC 04168f916 version, so this delivery is not superseded), the report, the item, both new nodes, every cited statement, blueprint main-20261015 thm-pur-general-admissibility Steps 1-4, and the unit sk-prop-sf-rf-shriek-preservation with its route. No SGA is cited; coefficients stay A_{E,n} throughout. Each old step was mapped to a carrier. Finding 1 (C5/B9): the child lem-pur-witnessed-compact-support-adjunction (old Steps 1-5) restates clauses (2)-(3) of the existing reviewed on-route thm-sf-ambient-adjoint-class (same P_c and R_c=nu^* f_c^x Rnu_*; natural bijection for etale-origin K and any D+ L; witness independence; compactification comparisons with cocycle that the Hom bijections respect). Its proof steps 3-7 are the old Hom chain and coherence. The child adds only a two-line witness lift and a normalization nothing uses. The report's not-duplicates list omits it, although the item's stmt_dep def-weil-exceptional-inverse-image names it. There is no cycle. I dropped the child and rewrote the parent as 4 steps, 2951 chars. Step 1 is the old Step-1 geometry with all its citations, plus lem-kun-dimension-finite-type for the dim bound, declared as a tool use. Step 2 gives the witnesses via lem-amb-etale-compact-comparisons, lem-sf-class-compact-support-comparison, lem-etale-upper-shriek-quasicompact-bounded-below and the unit iso of thm-weil-pbc-site-comparison, and the adjunction and its independence via thm-sf-ambient-adjoint-class (2)(3). Steps 3-4 are the chart step and old Step 10, renumbered. Maintainer note: count waiver, because one new node remains and the old Steps 1-5 already have an existing reviewed carrier (precedent Q10/Q21/Q65). Finding 2 (B3): the kept child lem-pur-witnessed-open-chart-transport used etale j^*, j_!, i_* and D(et) without definition nodes. I added def-weil-pbc-derived-categories, -inverse-image, -extension-by-zero and -direct-image. That child is true and not a duplicate (I checked lem-sf-etale-chart-adjoint-comparison, lem-pur-etale-closed-chart-exceptional-preservation and lem-exc-relative-adjoint-open-origin). I re-derived its Hom chain with the compositor F_f j_! = F_pi i_*; Q and B are D+, so Yoneda applies; the witness units are applied only at D+ objects. Edge cases checked: d=0, empty U, j=id, non-separated X. Old Step 10 uses the ambient-free bounded clause of cor-exc-base-change-open-immersion-general, whose Rf^! is G_f, in the right direction. Accepted tool_uses: lem-pod-separated-finite-type-base-change, lem-amb-etale-compact-comparisons, lem-etale-upper-shriek-quasicompact-bounded-below, lem-kun-dimension-finite-type. Two repairable faults in total.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PurityAffineChartExceptionalIdentification",
@@ -460,5 +340,17 @@
   "group": "Q19",
   "result": "pass",
   "note": "Read the item, all 9 stmt_dep records, the module (23 decls; statement verbatim; only the lean field differs from live; no new nodes or dep records) and the side-live declarations. LiftedAdjunction: real lifts of fixed-scalar Rv_! and sfFiniteExceptionalAt at c; adj pinned by `normalized` (nu^* etale homEquiv composed with rightOrigin; all arrows covered by full faithfulness); witnesses are exact Plus objects; origin_iso true. compactification_independence: e pinned to the published EtaleOriginIso, r = rightAdjointUniq. exists_openLift covers every open immersion with the etale restriction witness. affine_chart: Nonempty natural iso on C(V), faithful because the node clause is existential and citer thm-pur-general-admissibility needs only existence; general f:X->V with V affine contains f_V. base_open_chart: b pinned to canonical baseOpenMap (mateEquiv of inverse etale base change, direction checked), t pinned to upperStarComp, z = composite; _hL is the recorded intrinsic constructibility; constructible_origin covers inputs. No extra hypotheses; d=0, empty schemes, non-separated X/Y, universes OK; no hollow defs; sorry-only; docstrings carry source and steps; lines <=100; no import cycle. Advisories: owners of originWitnessFixedAmbient, compactSupportSiteComparison and sfDerivedComparison* are not stmt_deps (stmt_deps unchanged from stage 1); stage-3 bridge from intrinsic exceptionalInverseImage to sfFiniteExceptionalAt at c. No compile run (no change)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

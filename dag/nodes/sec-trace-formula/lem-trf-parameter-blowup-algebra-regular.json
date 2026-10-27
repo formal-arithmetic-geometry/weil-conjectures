@@ -1,0 +1,275 @@
+{
+ "id": "lem-trf-parameter-blowup-algebra-regular",
+ "kind": "statement",
+ "title": "Regularity of the parameter blowup algebra",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative regular local ring [def-weil-regular-scheme] of dimension $d\\geq1$, and let $t_1,\\ldots,t_d$ be a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Let $\\varnothing\\ne J\\subseteq\\{1,\\ldots,d\\}$ and $j\\in J$. Write $L=J\\setminus\\{j\\}$ and set $$A=R[u_i\\mid i\\in L]/(t_i-t_j u_i\\mid i\\in L).$$ Coefficients and variables in quotient rings are denoted by the same symbols. Then $A$ is a Noetherian regular ring. There are canonical isomorphisms $$A/(t_j)\\cong (R/(t_i:i\\in J))[u_i\\mid i\\in L],\\qquad A[1/t_j]\\cong R[1/t_j],$$ where the latter sends $u_i$ to $t_i/t_j$. Multiplication by $t_j$ on $A$ is injective. In particular, for every prime ideal $P\\subset A$, the local ring $A_P$ is regular local, whether or not $t_j\\in P$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 4.2.9, printed p. 121: regularity of the standard parameter chart, its exceptional quotient and its complement"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-parameter-blowup-chart-ring"
+ ],
+ "proof": [
+  {
+   "text": "Order $J$ with $j$ first and extend it to an ordering of all $d$ parameters. By [lem-weil-pbc-regular-local-generators-regular-sequence], this reordered full list is regular, its prefix $(t_j,(t_i)_{i\\in L})$ is regular, and $C=R/(t_i:i\\in J)$ is regular local of dimension $d-|J|$. For the prefix, injectivity is part of the full-list condition, and its quotient is nonzero since it surjects onto the nonzero quotient by the full list. By [lem-weil-pbc-regular-local-localization], both $R$ and $C$ are regular rings.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM) and 0AFS (lemma-localization-of-regular-local-is-regular)."
+   }
+  },
+  {
+   "text": "Put $B=R[u_i\\mid i\\in L]$ and $H=(t_i-t_ju_i\\mid i\\in L)$, so $A=B/H$. By [lem-trf-polynomial-ring-regular-base], $B$ is regular, hence Noetherian. Apply [lem-weil-pbc-surjective-image-noetherian] to $B\\twoheadrightarrow A$ to see that $A$ is Noetherian. The same polynomial lemma applied to the regular ring $C$ of Step 1 shows that $C[u_i\\mid i\\in L]$ is regular.",
+   "uses": [
+    "lem-trf-polynomial-ring-regular-base",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OQ (polynomial regularity) and 00FN (lemma-Noetherian-permanence); polynomial regularity is the existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "The canonical map $B\\to C[u_i\\mid i\\in L]$ kills $H$ and $t_j$. Conversely $R\\to A/(t_j)$ kills every $t_i$ for $i\\in J$, since $t_i=t_ju_i$ in $A$. It induces $C\\to A/(t_j)$, which extends to a polynomial map sending each variable to its class. These maps are inverse: their composites fix coefficients and all variables, which generate the rings, by [def-weil-pbc-mv-polynomial-ring]. Thus $A/(t_j)\\cong C[u_i\\mid i\\in L]$. Also evaluation $u_i\\mapsto t_i/t_j$ kills $H$ and induces $\\alpha:A[1/t_j]\\to R[1/t_j]$. The coefficient map induces $\\beta:R[1/t_j]\\to A[1/t_j]$. The composites fix $R$ and $t_j^{-1}$, and $\\beta\\alpha(u_i)=t_i t_j^{-1}=u_i$ by the defining relation. These elements generate the respective localizations, so $\\alpha$ and $\\beta$ are inverse. Both isomorphisms have the asserted coefficient and variable images.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p. 121: explicit coordinate substitutions; expanded elementary quotient and localization computation."
+   }
+  },
+  {
+   "text": "Set $I=(t_i:i\\in J)$. Apply [lem-trf-blowup-chart-regular-sequence-presentation] to the regular prefix from Step 1, with $a=t_j$ and remaining entries $(t_i)_{i\\in L}$. Changing the signs of the defining relations changes no ideal, so it identifies $A$ with $R[I/t_j]$, sending $u_i$ to $t_i/t_j$. By [def-nagata-blowup-chart-ring] this is a subalgebra of $R[1/t_j]$. If $t_jx=0$ in $A$, its image in that localization is zero after cancellation of the unit $t_j$; the injectivity of the subalgebra inclusion then gives $x=0$. This proves the required injectivity.",
+   "uses": [
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ (lemma-blowup-regular-sequence), quotient presentation and torsion-free conclusion."
+   }
+  },
+  {
+   "text": "Fix a prime $P\\subset A$ with $t_j\\in P$. By [lem-weil-pbc-localization-noetherian], $A_P$ is Noetherian. Step 4 and [lem-weil-pbc-weakly-regular-sequence-localization-prime], with the one-element list $(t_j)$, show that $(t_j/1)$ is regular in $A_P$. In particular it lies in the maximal ideal. Let $\\bar P=P/(t_j)$. By [lem-weil-pbc-localization-at-prime-of-quotient], $A_P/(t_j/1)\\cong (A/(t_j))_{\\bar P}$. Steps 2 and 3 identify this with a localization at a prime of the regular ring $C[u_i]$, so it is regular local by [def-weil-regular-scheme]. All hypotheses of [lem-exc-regular-local-lift-regular-sequence-quotient] now hold for the Noetherian local ring $A_P$ and its one-element regular sequence; hence $A_P$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-regular-scheme",
+    "lem-exc-regular-local-lift-regular-sequence-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00CT (proposition-localize-quotient), 00NU (lemma-regular-mod-x); regular-sequence localization is the existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "Now suppose $t_j\\notin P$. The powers of $t_j$ belong to $A\\setminus P$. Apply part (2) of [lem-weil-pbc-localization-of-localization] with $M=\\{t_j^n:n\\ge0\\}$ and $N=A\\setminus P$. It says that the induced map $A[1/t_j]\\to A_P$ is a localization at the image of $N$. Step 3 identifies its source with $R[1/t_j]$. Since $R$ is regular by Step 1, [lem-weil-pbc-localization-of-regular-ring] first gives regularity of $R[1/t_j]$, then of $A_P$. This is a local ring; its localization at its maximal ideal is itself, since all elements outside that ideal are already units. Thus the definition [def-weil-regular-scheme] gives that $A_P$ is regular local. Steps 5 and 6 cover every prime; together with the Noetherianity in Step 2 they prove that $A$ is a regular ring. The two canonical isomorphisms are Step 3, and injectivity is Step 4.",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CP (proposition-universal-property-localization), 00OD (definition-regular), and 0381 (lemma-geometrically-regular), proof Step 3: localization of a regular ring."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-chart-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-regular-scheme",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 4.2.9, printed p. 121, omitted regularity details of the usual local computation; expanded using Stacks Tags 00NQ, 0AFS, 0BIQ, 00FN, 00CT, 00NU and the existing polynomial-regularity and localization nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, MvPolynomial",
+   "results": "MvPolynomial.isRegularRing_of_isRegularRing; read Polynomial.lean: this proves polynomial regularity, not regularity of the quotient chart.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular local ring with parameters t_i has regular algebra R[u_i]/(t_i-t_j*u_i) for a subset J of the parameters and j in J",
+   "results": "Algebra.IsStandardSmooth; RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.SubmersivePresentation.isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.IsStandardSmooth.out; Algebra.SubmersivePresentation.localizationAway",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|chartRing|ReesAlgebra",
+   "results": "Mathlib/RingTheory/ReesAlgebra.lean; Mathlib/RingTheory/ReesAlgebra.lean; Mathlib/RingTheory/ReesAlgebra.lean; Mathlib/RingTheory/ReesAlgebra.lean; Mathlib/RingTheory/ReesAlgebra.lean; Mathlib/RingTheory/Filtration.lean; Mathlib/RingTheory/Filtration.lean; Mathlib/RingTheory/Filtration.lean; source inspected: Rees algebra definition / cotangent dimension criterion only, no parameter-blowup theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine charts of a blowup of a regular local ring along a subset of a regular system of parameters are regular rings",
+   "results": "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.Scheme.AffineCover.X; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier; AlgebraicGeometry.Proj.affineOpenCover; Algebra.Smooth.of_isLocalization_Away; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of R[t_i/t_j] when the t_i form part of a regular system of parameters of a regular local ring",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem; RingTheory.Sequence.IsWeaklyRegular.of_isLocalization; RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem; IsLocalization.isRegular_mk'; IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal; MvPolynomial.isRegular_X; IsRegular.monomial; MvPolynomial.isRegular_X_pow",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebra R[u_i]/(t_i-t_j*u_i) is regular when R is a regular local ring and the t_i are regular parameters",
+   "results": "Hits: Algebra.SubmersivePresentation.isStandardSmooth, MvPolynomial.isRegular_X, Algebra.IsStandardSmooth, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, MvPolynomial.isRegular_prod_X, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension. No theorem states regularity of this parameter quotient. Polynomial regularity alone covers only the existing leaf lem-trf-polynomial-ring-regular-base.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|chartRing|ReesAlgebra",
+   "results": "Hits: Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean. No theorem states regularity of this parameter quotient. Polynomial regularity alone covers only the existing leaf lem-trf-polynomial-ring-regular-base.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine blowup charts of a regular local ring along regular parameters are regular rings",
+   "results": "Hits: AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, IsLocalization.isRegular_mk', RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, Algebra.FormallyEtale.of_isLocalization, AlgebraicGeometry.Scheme.AffineCover.X, AlgebraicGeometry.Scheme.affineBasisCoverOfAffine, AlgebraicGeometry.AffineScheme, Algebra.Smooth.of_isLocalization_Away. No theorem states regularity of this parameter quotient. Polynomial regularity alone covers only the existing leaf lem-trf-polynomial-ring-regular-base.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, MvPolynomial",
+   "results": "Hits: MvPolynomial.isRegularRing_of_isRegularRing. No theorem states regularity of this parameter quotient. Polynomial regularity alone covers only the existing leaf lem-trf-polynomial-ring-regular-base.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A blowup algebra chart along part of a regular system of parameters of a regular local ring is a regular Noetherian ring",
+   "results": "Hits: Algebra.IsStandardSmooth, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, RingHom.isStandardSmooth_holdsForLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves, Algebra.IsSmoothAt, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth. No theorem states regularity of this parameter quotient. Polynomial regularity alone covers only the existing leaf lem-trf-polynomial-ring-regular-base.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-coordinate-chart",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Lemma 4.2.9 coordinate-chart proof: choose regular parameters for Y, V and Z; compute the standard blowup charts and the total and strict transforms. Extracted argument: regularity of the standard parameter chart, its exceptional quotient and its complement",
+   "via": [
+    "lem-trf-permissible-coordinate-chart",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-blowup-algebra-regular",
+  "worker": "stage1",
+  "summary": "Q106: retained the statement and chart route, supplied six checked proof steps using existing nodes only, wrote both inverse isomorphisms explicitly, proved t_j injective via the existing chart embedding, and checked both kinds of primes. No new nodes, no Lean writing or compilation.",
+  "blueprint": "Lemma 4.2.9 coordinate-chart proof: choose regular parameters for Y, V and Z; compute the standard blowup charts and the total and strict transforms. Extracted argument: regularity of the standard parameter chart, its exceptional quotient and its complement; realizes the regularity part of this extracted coordinate-chart argument. Latest ancestor blueprint proof read; no change of its contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic commutative algebra: parameter regularity and regularity of parameter quotients, needed by the ILO chart computation. These are black-box algebra tools, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative algebra: a regular local ring is a regular ring, for polynomial regularity and localization. These are black-box algebra tools, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "why": "Generic commutative algebra: lift regularity of A_P/(t_j) across its regular element. No node of this unit replaces this local criterion. These are black-box algebra tools, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic commutative algebra: regularity under localization, used on the complement of the exceptional divisor. These are black-box algebra tools, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-weil-pbc-localization-of-regular-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-a48bc94f0",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-a48bc94f0 (reviewer sub-agent of L); spot-checked: I read the whole delivery and all six steps are correct; I made no changes. It is a one-level split of a node that was still unsplit (base and live both unsplit, no repair note, so not a re-split order and not superseded). There are no new nodes, and the statement and stmt_deps are byte-identical to base. Source: ILO VIII Lemma 4.2.9 (p.121) says only 'usual local computation with charts'; the item writes out the omitted chart-regularity step. I checked the Stacks tags 00NQ, 0AFS, 00FN, 00NU, 00CT and 0BIQ against tags/tags. Step 1: put J first; the permuted parameter list gives the regular prefix and makes C regular local, so R and C are regular rings. Step 2: polynomial rings over R and over C are regular, and A is a quotient of a Noetherian ring, so Noetherian. Step 3: I checked both explicit inverse pairs, A/(t_j)≅C[u] and A[1/t_j]≅R[1/t_j] (βα(u_i)=t_j u_i t_j^{-1}=u_i); marking it elementary is acceptable. Step 4: by 0BIQ with a=t_j, A≅R[I/t_j]⊂R_{t_j}, so t_j is injective on A. Step 5 (t_j∈P): t_j/1 is regular in A_P, the quotient A_P/(t_j) is regular local, so the lift lemma makes A_P regular local; all hypotheses hold. Step 6 (t_j∉P): A_P is a localization of R[1/t_j], hence regular. Edge cases J={j}, d=1 and J=all indices (C a field) all work. No duplicate in the DAG: the sibling coordinate-quotients node assumes A is regular, and chart-coordinate-nonzerodivisors states something different. No cycle. I accept the four declared tool_uses as generic commutative algebra. Batch-5 flags: lift lemma (through the Krull-dimension formula), 0BIQ chart presentation and the Mathlib polynomial-regularity leaf are all generic commutative algebra, not parts of the trace-formula or Poincaré-duality proofs; neither assumption leaf is in the closure, so I accept them. Advisory only: the Step 2 source names 00OQ (global dimension of polynomial rings), and Step 4 could cite lemma-nagata-chart-generator-regular. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterBlowupAlgebraRegular",
+  "declaration": "RingTheory.parameterBlowupAlgebra_regular",
+  "file": "lean/Sheaf/RingTheory/ParameterBlowupAlgebraRegular.lean",
+  "statement": "theorem parameterBlowupAlgebra_regular {R : Type u} [CommRing R] [IsRegularLocalRing R] (d : ℕ) (hd : 1 ≤ d) (hdim : ringKrullDim R = (d : WithBot ℕ∞)) (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (J : Finset (Fin d)) (hJ : J.Nonempty) (j : Fin d) (hj : j ∈ J) : IsNoetherianRing (traceChartRing t J j) ∧ IsRegularRing (traceChartRing t J j) ∧ (∃ e : (traceChartRing t J j ⧸ Ideal.span ({algebraMap R (traceChartRing t J j) (t j)} : Set (traceChartRing t J j))) ≃ₐ[R] MvPolynomial (J.erase j) (R ⧸ Ideal.span (t '' (J : Set (Fin d)))), ∀ i : J.erase j, e (Ideal.Quotient.mk _ (traceChartCoordinate t J j i.val i.property)) = MvPolynomial.X i) ∧ (∃ e : Localization.Away (algebraMap R (traceChartRing t J j) (t j)) ≃ₐ[R] Localization.Away (t j), ∀ i : J.erase j, e (algebraMap (traceChartRing t J j) _ (traceChartCoordinate t J j i.val i.property)) = algebraMap R (Localization.Away (t j)) (t i.val) * IsLocalization.Away.invSelf (t j)) ∧ Function.Injective (fun x : traceChartRing t J j ↦ algebraMap R (traceChartRing t J j) (t j) * x) ∧ (∀ (P : Ideal (traceChartRing t J j)) [P.IsPrime], IsRegularLocalRing (Localization.AtPrime P))",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-dad782dab"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dad782dab",
+  "group": "Q45",
+  "result": "fix",
+  "note": "Mathematics PASS: R regular local of dim d≥1 with RSOP List.ofFn t, nonempty J with j∈J, A = traceChartRing (MvPolynomial (J.erase j) R ⧸ span(C t_i − C t_j·X_i)), Noetherian ∧ IsRegularRing, A/(t_j) ≃ₐ[R] (R⧸span t''J)[u] with u_i↦X_i, A[1/t_j] ≃ₐ[R] R[1/t_j] with u_i↦t_i·t_j⁻¹, injective t_j·, every A_P regular local; edge cases d=1, J={j}, J=all OK; no extra assumptions; docstrings with source place, blueprint id and six proof steps; sorry only. H2 FIX: statement used traceChartParameterQuotient, owned by the uncited theorem node lem-trf-chart-coordinate-nonzerodivisors (not by def-trf-parameter-blowup-chart-ring); inlined its body traceChartRing t J j ⧸ Ideal.span {algebraMap R _ (t j)} (same type by definition). Fixes: fixes/ParameterBlowupAlgebraRegular.lean plus lem-trf-parameter-blowup-algebra-regular.lean-record.json (verbatim statement). nt_compile --json on the fixed file: clean, 2.1 s, exit 0."
+ }
+}

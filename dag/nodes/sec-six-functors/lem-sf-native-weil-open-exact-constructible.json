@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-native-weil-open-exact-constructible",
+ "kind": "statement",
+ "title": "Exact constructible extension by zero in the native Weil sheaf category",
+ "statement": "Fix a finite field $k_0$ and a prime $\\ell\\ne\\operatorname{char}(k_0)$. Use the locally finite continuous $\\Omega=\\overline{\\mathbf Q}_\\ell$ coefficient sheaves, the categories $\\mathcal A_T$ of their module sheaves, the categories $\\mathcal W_T$ of pro-etale sheaves with invertible Frobenius structure, and the constructibility condition of [def-sf-native-weil-derived-framework]. Let $j:U\\hookrightarrow T$ be a quasi-compact open immersion [def-weil-open-immersion] of $k_0$-schemes locally of finite type [def-weil-finite-type-morphism]. Equip extension by zero along $\\bar j$ with the Frobenius comparison specified in the framework. This functor $j_{0!}:\\mathcal W_U\\to\\mathcal W_T$ is additive and preserves finite limits and finite colimits. For every $F\\in\\mathcal W_U$ whose underlying sheaf is constructible, the underlying sheaf of $j_{0!}F$ is constructible.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+  "place": "ProEtaleWeilSheaf.extensionByZero, lines 44-55; WeilSheaf.isAdicConstructibleSheaf_extensionByZero, lines 92-105; additive, PreservesFiniteLimits and PreservesFiniteColimits instances, lines 138-150."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing native extension-by-zero instances in WeilConjectures.WeilSheaf.OpenImmersion: additivity, preservation of finite limits, and preservation of finite colimits are already proved for ProEtaleWeilSheaf.extensionByZero (without quasi-compactness). Apply those instances to j. This uses precisely the native framework functor, including its actual Frobenius comparison.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "WeilSheaf.ExtensionByZero section, native additive and finite-preservation instances"
+   }
+  },
+  {
+   "text": "For each native Weil sheaf F and its constructibility hypothesis hF, apply the existing theorem WeilSheaf.isAdicConstructibleSheaf_extensionByZero j F hF. Its source proof uses affine open neighbourhoods, the qcqs open intersection, finite lisse stratification, and the closed zero complement. The quasi-compactness and over-base hypotheses are exactly those of the present theorem. Package this with the three instances by conjunction introduction. No statement or definition is changed.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+    "place": "WeilSheaf.isAdicConstructibleSheaf_extensionByZero; underlying IsAdicConstructibleSheaf.openImmersionLowerShriek in SixFunctors/ProEtale/Adic/ExtensionByZero.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean",
+  "place": "W9: direct assembly of existing native additive/finite-preservation instances and isAdicConstructibleSheaf_extensionByZero; underlying affine open/closed stratification proof retained upstream"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero for constructible l adic sheaves with invertible Frobenius action is exact and preserves constructibility",
+   "results": "8 hits: AdicCompletion.map_exact, LightCondensed.instIsGrothendieckAbelianLightCondMod, Profinite.NobelingProof.succ_exact, Condensed.instAB4StarCondensedMod, Condensed.profiniteSolid, Condensed.lanSheafProfinite, Condensed.instAB5CondensedMod, CondensedMod.IsSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, PreservesFiniteLimits, PreservesFiniteColimits",
+   "results": "0 hits: ; loogle: unknown identifier 'PreservesFiniteLimits'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFiniteLimits\"",
+   "results": "12 hits: CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.Limits.instPreservesFiniteProductsOfPreservesFiniteLimits, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.Limits.PreservesLimitsOfSize.preservesFiniteLimits, CategoryTheory.Limits.PreservesLimitsOfSize0.preservesFiniteLimits, CategoryTheory.Limits.preservesFiniteLimits_of_preservesFiniteLimitsOfSize, CategoryTheory.Limits.preservesLimitsOfShapeOfPreservesFiniteLimits, CategoryTheory.Limits.PreservesFiniteLimits.preservesFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|IsAdicConstructible|openImmersionLowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi compact open immersion extension by zero preserves constructible pro etale adic sheaves",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.QuasiCompactCover.recOn, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-shriek-triangulated",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause 3, applying compact support to the localization triangle: the native derived realization of lem-zl-morphism-open-closed-reduction. The created.item chain ends at the maintainer seed, so blueprint_refs.py ancestor returns None. ProEtaleWeilSheaf.extensionByZero, lines 44-55; WeilSheaf.isAdicConstructibleSheaf_extensionByZero, lines 92-105; additive, PreservesFiniteLimits and PreservesFiniteColimits instances, lines 138-150.",
+   "via": [
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-open-exact-constructible",
+  "worker": "stage1",
+  "summary": "Q34 repair: unchanged statement; original step 1 retained verbatim, steps 2-3 allocated to a general exact conservative-square finite-preservation lemma, and steps 4-6 to an affine native-module open/zero-complement stratification certificate. Both new nodes are unsplit with no proof steps, independently quantified and searched in Mathlib. The report retains all seven old proof steps verbatim and gives the argument allocation. Final assembly has 2185 characters.",
+  "blueprint": "No imported ancestor exists (blueprint_refs.py ancestor returns None). Follows the existing native open-localization route to prop-functor-package clause 3: ringed-site extension; exact conservative forgetting and finite universal constructions; affine qcqs open strata and closed zero complement. The two new nodes divide the returned argument rather than change the route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic exact additive ringed-slice extension for the actual sheaf B; the unit has no arbitrary-ringed-site replacement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic small pro-etale localization identification; needed to apply ringed-site exactness."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-de6f67e1d",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-de6f67e1d (reviewer sub-agent of L); spot-checked: This delivery answers the released human re-split note (2026-10-21, applied 2026-10-22): the old proof was 7 steps and 5078 characters. The item is not superseded: live and side-live still hold the old 7-step proof, and neither new id exists there. Nothing involved is on the dropped list, and no SGA is used. The item statement is byte-identical to live and step 1 is verbatim; only proof, proof_deps and split_report differ. The assembly is 2185 characters. Old steps 2-3 (additivity through faithfulness, exactness through conservativity, finite limits and colimits) became lem-sf-exact-conservative-square-finite-preservation. Old steps 4-6 (D = U×_X V is qcqs, D and Z are constructible, the finite lisse strata D_r, the actual module-pullback comparisons, z^*v^*N ≅ 0, the assembly on V) became lem-sf-native-adic-affine-open-zero-stratification. Each step appears as an explicit claim: nothing was blurred. The two nodes are of comparable size, independent of each other, and strict generalizations rather than restatements of item clauses. I checked both statements and they are true. For the square: additivity comes from cancelling η and faithfulness of q; SES preservation from exactness and conservativity of q applied to homology; finite limits by the standard reduction. Tested with identity functors, the zero functor and zero categories; faithfulness is needed. For the affine node, I checked it against slopmaster2 Adic/ExtensionByZero.lean lines 84-105 and 204-242 and tested U empty, U = X, V empty and M = 0. Item step 2 hypotheses: p and q exact, q conservative (lem-sf-native-weil-constructible-abelian); q faithful (fixed-pair definition); A_T abelian (module-sheaf definition); J additive and exact (step 1); qH = Jp literally (framework lift). Item step 3: the open-restrictions node gives the unit isomorphism and disjoint vanishing with no qc hypothesis, and step 1 supplies qc of j̄. Both new nodes are unsplit, statement-only, have every stmt_dep defining its notion, record grep/loogle/leansearch/leanfinder searches, and are not duplicates: lem-weil-pbc-module-constructible-extension-zero and the open-extension constant-model node use other coefficient notions. One harmless leftover: the item's tool_uses still lists the stratification-assembly node, which only the affine node's future proof will use. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NativeWeilOpenExactConstructible",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.extensionByZero_exact_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/NativeWeilOpenExactConstructible.lean",
+  "statement": "theorem extensionByZero_exact_constructible (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (U T : Scheme.{u}) [U.Over (Spec (CommRingCat.of k₀))] [T.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] : (extensionByZero k₀ l j).Additive ∧ PreservesFiniteLimits (extensionByZero k₀ l j) ∧ PreservesFiniteColimits (extensionByZero k₀ l j) ∧ ∀ F : ProEtaleWeilSheaf k₀ l U, WeilSheaf.objectProperty k₀ l U F → WeilSheaf.objectProperty k₀ l T ((extensionByZero k₀ l j).obj F)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-467ebe89b",
+  "group": "NM",
+  "result": "pass",
+  "note": "The node file is unchanged except for its new lean record (compared with side-live), and the record's statement matches the file verbatim. The Lean renders every hypothesis: finite field k0, prime l with ringChar k0 != l, U and T locally of finite type over Spec k0, j a quasi-compact open immersion over k0. The functor is the framework's recorded ProEtaleWeilSheaf.extensionByZero. The conclusion has all four clauses: Additive, PreservesFiniteLimits, PreservesFiniteColimits, and for every F, WeilSheaf.objectProperty U F implies objectProperty T (j0! F); objectProperty is the inverse image of adicConstructibleSheaf under IsoAlgebra.forget, i.e. constructibility of the underlying sheaf. All four clauses exist upstream as separate declarations (OpenImmersion.lean 99-104 and 141-150), so the statement is true; with no single declaration to attach, one packaged sorry theorem is correct and defines no new notion. One shared universe u, no added assumptions; empty schemes, identity j, zero sheaves and empty diagrams are covered. Docstrings carry the source place, the blueprint tag and all 7 proof steps; no line over 100 characters; non-public imports are exactly the proof_dep modules and all exist in side-live. Nothing compiled because no file was changed; the worker reports a clean compile (9.5 s). Advisory H11: the second reading was in-thread, and its checks were re-verified."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261022T144448-L-1735897",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

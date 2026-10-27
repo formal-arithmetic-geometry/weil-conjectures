@@ -1,0 +1,244 @@
+{
+ "id": "lem-a1-affine-base-open-immersion-gluing",
+ "kind": "statement",
+ "title": "Gluing quasi-compact open immersions above an affine base cover",
+ "statement": "Let $h:Z\\to S$ and $\\pi:Y\\to S$ be morphisms of schemes [def-pc-scheme], with $\\pi$ affine [pqf-def-affine-morphism], and let $S=\\bigcup_{a\\in A}S_a$ be an affine open cover. Put $Z_a=h^{-1}(S_a)$ and $Y_a=\\pi^{-1}(S_a)$, and write $\\iota_a:Y_a\\hookrightarrow Y$ for the open inclusion. Suppose every $Z_a$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], and for every $a$ there is an open immersion $e_a:Z_a\\to Y_a$ [def-weil-open-immersion] over $S_a$, meaning $(\\pi|_{Y_a})\\circ e_a=h|_{Z_a}$ as morphisms to $S_a$. Suppose that for all $a,b$ the restrictions of $\\iota_a\\circ e_a$ and $\\iota_b\\circ e_b$ to $Z_a\\cap Z_b$ are equal as morphisms into $Y$. Then there is a unique morphism $c:Z\\to Y$ restricting to $\\iota_a\\circ e_a$ on each $Z_a$. It satisfies $\\pi\\circ c=h$ and is a quasi-compact open immersion [def-weil-finite-type-morphism, def-weil-open-immersion]. No injectivity of a pre-existing global map, finiteness of the cover, quasi-compactness or separation of $S$, or quasi-separatedness of $h$ is assumed; an empty cover is allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM, lemma-characterize-quasi-affine, proof of (2) implies (4), final gluing and quasi-compact-open-immersion assertion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The opens $Z_a=h^{-1}(S_a)$ cover $Z$. Apply [lem-weil-pbc-scheme-morphism-gluing] to the compatible morphisms $\\iota_a\\circ e_a:Z_a\\to Y$. This gives the unique morphism $c:Z\\to Y$ with the required restrictions. The compatibility hypothesis is exactly equality into $Y$ on each overlap; no assertion that an overlap is affine is needed.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final local-to-global assertion; expanded using Schemes Tags 01JB, 01K4 and 03GI"
+   }
+  },
+  {
+   "text": "On $Z_a$, the equality $\\pi\\circ c=h$ is the given equality over $S_a$, followed by $S_a\\hookrightarrow S$. The equality clause of [lem-weil-pbc-scheme-morphism-gluing] therefore gives $\\pi\\circ c=h$ globally. Consequently $c^{-1}(Y_a)=c^{-1}(\\pi^{-1}(S_a))=h^{-1}(S_a)=Z_a$ as open subschemes, and the restriction $Z_a\\to Y_a$ is $e_a$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final local-to-global assertion; expanded using Schemes Tags 01JB, 01K4 and 03GI"
+   }
+  },
+  {
+   "text": "If $c(z)=c(z\\prime)=y$, choose $a$ with $\\pi(y)\\in S_a$. The previous equality places both points in $Z_a$, where injectivity of $e_a$ gives $z=z\\prime$. Each composite $Z_a\\xrightarrow{e_a}Y_a\\xrightarrow{\\iota_a}Y$ is an open immersion: by [def-weil-open-immersion] it is the composite of isomorphisms onto open subschemes, whose image remains open in $Y$. Apply [lem-weil-pbc-open-immersion-injective-local-source] to $c$ and the covering inclusions $Z_a\\hookrightarrow Z$. Its injectivity and local open-immersion hypotheses have just been verified, so $c$ is an open immersion.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-injective-local-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final local-to-global assertion; expanded using Schemes Tags 01JB, 01K4 and 03GI"
+   }
+  },
+  {
+   "text": "By the definition [pqf-def-affine-morphism], $Y_a=\\pi^{-1}(S_a)$ is affine. Thus [lem-weil-pbc-affine-scheme-qcqs] makes $Y_a$ quasi-separated. The assumed quasi-compactness of $Z_a$ and clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], applied to $e_a:Z_a\\to Y_a$, show that $e_a$ is quasi-compact. This uses quasi-separatedness of the affine target chart, not of $h$ or $S$.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final local-to-global assertion; expanded using Schemes Tags 01JB, 01K4 and 03GI"
+   }
+  },
+  {
+   "text": "The opens $Y_a$ cover $Y$, and the restrictions $c^{-1}(Y_a)\\to Y_a$ are precisely the quasi-compact maps $e_a$. By [lem-pc-quasi-compact-local-on-target], $c$ is quasi-compact. Together with step 3 this proves the assertion. If $A$ is empty, its covering property forces $S$, hence $Z$ and $Y$, to be empty; the same gluing, injectivity and target-cover arguments apply vacuously.",
+   "uses": [
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final local-to-global assertion; expanded using Schemes Tags 01JB, 01K4 and 03GI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-injective-local-source",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-quasi-compact-local-on-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), final local-to-global assertion; expanded using Schemes Tags 01JB, 01K4 and 03GI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes into an affine S scheme is a quasi compact open immersion if its restrictions above an affine open cover of S are open immersions with quasi compact sources",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:18:46Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of schemes into an affine S scheme is a quasi compact open immersion if its restrictions above an affine open cover of S are open immersions with quasi compact sources\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\"], \"digest\": \"df8c15167a72d2d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"openCover\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:18:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"openCover\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF\", \"AlgebraicGeometry.IsOpenImmersion.of_openCover_source\", \"AlgebraicGeometry.Scheme.OpenCover.instIsOpenImmersionTrans\", \"AlgebraicGeometry.Scheme.OpenCover.instIsOpenImmersionMapI₀FunctorOfLocallyDirected\"], \"digest\": \"29344ca9e9d9f2cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "IsOpenImmersion.*(iSup|[Ll]ocal|[Cc]over)|QuasiCompact.*(iSup|[Cc]over)|of_isOpenImmersion",
+   "subdirectory": "AlgebraicGeometry/Morphisms",
+   "results": "{\"t\": \"2026-10-22T06:19:27Z\", \"tool\": \"grep\", \"query\": \"IsOpenImmersion.*(iSup|[Ll]ocal|[Cc]over)|QuasiCompact.*(iSup|[Cc]over)|of_isOpenImmersion\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean\"], \"digest\": \"dc76ea0260e22ffe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing open embeddings of schemes over a common base along the inverse images of an affine base cover, with compact domains, gives a quasi compact open immersion",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:19:38Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing open embeddings of schemes over a common base along the inverse images of an affine base cover, with compact domains, gives a quasi compact open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.Cover.isOpenEmbedding_fromGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.GlueData.f_open\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"73a93a43ea90d529\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let c Z to Y be a map over a scheme S with Y affine over S. If above an affine open cover of S each restriction of c is an open immersion and each source is quasi compact, then c is a quasi compact open immersion",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:19:39Z\", \"tool\": \"leanfinder\", \"query\": \"Let c Z to Y be a map over a scheme S with Y affine over S. If above an affine open cover of S each restriction of c is an open immersion and each source is quasi compact, then c is a quasi compact open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\"], \"digest\": \"a12483d492d2ac88\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible open immersions from quasi compact inverse images of affine base opens into an affine scheme over the base glue to a unique quasi compact open immersion over the base",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T06:21:31Z\", \"tool\": \"leansearch\", \"query\": \"Compatible open immersions from quasi compact inverse images of affine base opens into an affine scheme over the base glue to a unique quasi compact open immersion over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.GlueData.mk\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion\", \"AlgebraicGeometry.Scheme.GlueData.f_open\", \"AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ιIsOpenImmersion\"], \"digest\": \"bc239c7532f2192a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "glueMorphisms|of_openCover_source|isOpenImmersion_isZariskiLocalAtTarget|of_iSup_eq_top",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T06:22:10Z\", \"tool\": \"grep\", \"query\": \"glueMorphisms|of_openCover_source|isOpenImmersion_isZariskiLocalAtTarget|of_iSup_eq_top\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"afe0630f6c529c49\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary morphism gluing, open immersion locality with an existing global map and injectivity hypothesis, or quasi-compactness criteria; none gives the combined compatible-chart construction over an affine base morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible open immersions over an affine open cover of a base scheme glue to a unique quasi compact open immersion when each source chart is quasi compact",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:54:12Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible open immersions over an affine open cover of a base scheme glue to a unique quasi compact open immersion when each source chart is quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"AlgebraicGeometry.Scheme.GlueData.f_open\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\"], \"digest\": \"bb6b8b3b4ddb9746\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide scheme gluing, local open-immersion criteria or quasi-compactness criteria separately; none gives the compatible-chart construction and both conclusions in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:54:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"704d9ac90a7e2d3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide scheme gluing, local open-immersion criteria or quasi-compactness criteria separately; none gives the compatible-chart construction and both conclusions in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "glueMorphisms|of_openCover_source|quasiCompact_iff_forall_affine",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-22T07:54:12Z\", \"tool\": \"grep\", \"query\": \"glueMorphisms|of_openCover_source|quasiCompact_iff_forall_affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\"], \"digest\": \"bff753b1e779863b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide scheme gluing, local open-immersion criteria or quasi-compactness criteria separately; none gives the compatible-chart construction and both conclusions in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible open immersions from preimages of a base open cover into an affine scheme over the base glue to a quasi compact open immersion",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:56:07Z\", \"tool\": \"leansearch\", \"query\": \"Compatible open immersions from preimages of a base open cover into an affine scheme over the base glue to a quasi compact open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Cover.isOpenEmbedding_fromGlued\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ιIsOpenImmersion\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\"], \"digest\": \"8627ff66a0cb0a80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide scheme gluing, local open-immersion criteria or quasi-compactness criteria separately; none gives the compatible-chart construction and both conclusions in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism over S with affine target over S is a quasi compact open immersion if over each affine base chart the morphism is an open immersion with compact source",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:56:17Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism over S with affine target over S is a quasi compact open immersion if over each affine base chart the morphism is an open immersion with compact source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\"], \"digest\": \"7b68c4e5a41627ce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide scheme gluing, local open-immersion criteria or quasi-compactness criteria separately; none gives the compatible-chart construction and both conclusions in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-quasi-affine-target-locality",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The Tag 01SM affine-cover argument used by lem-a1-affine-hc0: glue compatible chart maps and prove the result a quasi-compact open immersion (returned parent proof gluing part of step 4 and step 5).",
+   "via": [
+    "lem-a1-quasi-affine-target-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-affine-base-open-immersion-gluing",
+  "worker": "stage1",
+  "summary": "Expanded the final gluing assertion of Tag 01SM into five steps using existing Mathlib leaves. Proved the base equality and exact chart inverse images, derived global injectivity, then applied source locality and target-local quasi-compactness. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "Supplies the Tag 01SM affine-cover gluing assertion in the existing lem-a1-affine-hc0 ancestry, via lem-a1-quasi-affine-target-locality (returned parent gluing part of step 4 and step 5).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-a40140787",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-a40140787 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node statement. All seven proof deps are Mathlib leaves: scheme-morphism-gluing (glueMorphisms), open-immersion-injective-local-source (IsOpenImmersion.of_forall_source_exists), affine-scheme-qcqs, qcqs-morphism-permanence(1), quasi-compact-local-on-target, and the definitions def-weil-open-immersion and pqf-def-affine-morphism. So there is no route or tool_uses issue. The statement, stmt_deps and blueprint fields are identical to the live unsplit node, there are no new nodes, and no other group has split this item live. Source: Stacks morphisms.tex 01SM lemma-characterize-quasi-affine, (2)=>(4), whose last sentence 'Thus can is a quasi-compact open immersion' is the omitted local-to-global step that the split supplies (D5). Step checks: 1, the morphisms are glued from overlap equality into Y, with no affine overlaps needed. 2, pi∘c = h holds chartwise and then globally by the equality clause, so c^{-1}(Y_a) = Z_a and the restriction is e_a because iota_a is a monomorphism. 3, c is injective: equal images force h(z) = h(z') in some S_a, and the source-local open-immersion criterion applies to the covering inclusions Z_a into Z. 4, Y_a is affine by the definition of affine, hence quasi-separated, and Z_a is quasi-compact, so e_a is quasi-compact by permanence (1). 5, quasi-compactness is local on the target cover Y_a. Edge cases checked: empty cover, empty Z_a, infinite cover, non-quasi-compact or non-separated S, and the non-Noetherian case. The quasi-compactness of Z_a is needed, since a punctured A^infinity is not quasi-compact. Duplicate check: lem-trf-canonical-affine-charts-qc-open-immersion (sk-i-curve-zero) assumes a given global map and canonical charts; it is not a duplicate and is off-route. The item cites no SGA source. The item's conclusions match what the parent lem-a1-quasi-affine-target-locality step 4 uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseOpenImmersionGluing",
+  "declaration": "AlgebraicGeometry.exists_unique_quasiCompact_isOpenImmersion_of_affine_base_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseOpenImmersionGluing.lean",
+  "statement": "theorem exists_unique_quasiCompact_isOpenImmersion_of_affine_base_cover {Z Y S : Scheme.{u}} (h : Z ⟶ S) (π : Y ⟶ S) [IsAffineHom π] {A : Type v} (U : A → S.Opens) (hU : iSup U = ⊤) (hUa : ∀ a : A, IsAffineOpen (U a)) (hZ : ∀ a : A, CompactSpace (h ⁻¹ᵁ U a).toScheme) (e : ∀ a : A, (h ⁻¹ᵁ U a).toScheme ⟶ (π ⁻¹ᵁ U a).toScheme) (he : ∀ a : A, IsOpenImmersion (e a)) (heS : ∀ a : A, e a ≫ (π ∣_ U a) = h ∣_ U a) (heq : ∀ a b : A, Z.homOfLE (inf_le_left : h ⁻¹ᵁ U a ⊓ h ⁻¹ᵁ U b ≤ h ⁻¹ᵁ U a) ≫ e a ≫ (π ⁻¹ᵁ U a).ι = Z.homOfLE (inf_le_right : h ⁻¹ᵁ U a ⊓ h ⁻¹ᵁ U b ≤ h ⁻¹ᵁ U b) ≫ e b ≫ (π ⁻¹ᵁ U b).ι) : ∃ c : Z ⟶ Y, (∀ a : A, (h ⁻¹ᵁ U a).ι ≫ c = e a ≫ (π ⁻¹ᵁ U a).ι) ∧ c ≫ π = h ∧ QuasiCompact c ∧ IsOpenImmersion c ∧ ∀ c' : Z ⟶ Y, (∀ a : A, (h ⁻¹ᵁ U a).ι ≫ c' = e a ≫ (π ⁻¹ᵁ U a).ι) → c' = c",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2a615b0e",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 01SM (2)=>(4) final sentence clause by clause: IsAffineHom π, affine cover U : A → S.Opens (A : Type v arbitrary, empty allowed), CompactSpace charts, IsOpenImmersion e a, heS over U a via morphismRestrict, overlap equality via homOfLE inf_le_left/right into Y; conclusion ∃ c with restrictions, c ≫ π = h, QuasiCompact, IsOpenImmersion, uniqueness among all c'. No extra hypotheses (no finiteness, nothing on S, no quasi-separatedness of h). Node differs from side-live only in lean; lean.statement verbatim in the file; 5 stmt_deps are existing Mathlib records used exactly; only the proof is sorry, no defs; docstrings carry source, blueprint tag and 5 proof steps; report has Worker report and Second reading. Not a duplicate of lem-trf-canonical-affine-charts-qc-open-immersion (given c, canonical charts). No recompile: no file changed. Advisory: second reading by the same worker session."
+ }
+}

@@ -572,26 +572,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-7bf9f5600 (reviewer sub-agent of L); spot-checked: I read the item in full: 14 steps, no new nodes. Statement, stmt_deps, source and blueprint are unchanged from the Q46-created copy; only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed. proof_deps is exactly the union of the steps' uses. Sources read: ILO II proof of 3.2.1 (p. 29–30: 'quitte à remplacer X par une modification … platifier (Raynaud–Gruson I 5.2.2) … normaliser') and Thm 3.2.3 (pp. 30–31). Stacks flat.tex 081R (l. 9123), 05BA (l. 160) and 0B48 (l. 3054) each match the hypotheses of their nodes. No SGA source is cited. Steps: S1 generic fibre = Spec L_i (B⊗K_i is a finite-dimensional domain inside L_i). S2 Noetherianity, and 02NW applies (qcqs, finite generic fibre). S3 generic flatness on the finite coproduct, which meets the qcqs and quasi-compact-U hypotheses of 081R; I = ∅ is handled. S4 blowup B is O-admissible and integral (charts A[I/a] ⊆ A_a with a ≠ 0, D(a) dense over O); quasi-excellence passes to B by 07QU. S5 the strict transform splits over the components and 05BA transfers flatness to E_{i,B}. S6 closed immersion followed by base change of f_i, so proper and lfp. S7 D_i ≅ V_i ∩ e_i^{-1}O is dense (étale maps are open), so 0B48 gives finiteness. S8 the normalization is finite via Nagata/N-2; normal domains, localization. S9 Ā_d = A_d with D(d) ⊆ b^{-1}O ≅ O, so p is an isomorphism over a dense open. S10 every normal component meets the irreducible open e_i^{-1}H, so E_i′ is integral. S11 base change gives finite flat lfp; the generic fibre is L_i because H ⊆ O. S12 rank is constant n_i > 0, so a_i is surjective and of degree n_i. S13 flat ⇒ torsion-free, so C ⊆ L_i and F_i′ is integral. S14 closed by base change; J = ker(R → L_i); the empty case gives the unit ideal. Duplicate search: lem-trf-finite-after-blowup and lem-trf-finite-eta-flatification are weaker (single base, no normal birational X′). Batch-5: I checked the closure of the five flagged citations (2034 nodes). All its sec-trace-formula nodes and the one sec-poincare-duality node are generic algebra or geometry (Raynaud–Gruson devissage, Fitting/Mittag-Leffler, G-ring covers 07QU, blowups, 05BA, 0B48, flat ⇒ torsion-free) with no trace-formula or duality content, so every citation is accepted. The split_report tool_uses (quasi-excellent ⇒ Nagata, étale-normal-components, separated ⇒ quasi-separated, etc.) are generic and accepted. No changes."
  },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.IntegralEtaleChartFlatification",
-  "declaration": "AlgebraicGeometry.exists_integral_etale_chart_flatification",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.Hom.chartGenericFibreι",
-   "AlgebraicGeometry.Scheme.Hom.chartGenericClosure",
-   "AlgebraicGeometry.Scheme.Hom.chartGenericClosureι",
-   "AlgebraicGeometry.Scheme.Hom.chartGenericClosureMap",
-   "AlgebraicGeometry.Scheme.Hom.chartGenericClosureToSource",
-   "AlgebraicGeometry.exists_integral_etale_chart_flatification"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/IntegralEtaleChartFlatification.lean",
-  "statement": "theorem exists_integral_etale_chart_flatification (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hX : ∀ U : X.affineOpens, IsQuasiExcellent Γ(X, U)) (I : Type v) [Finite I] (E F : I → Scheme.{u}) (e : ∀ i : I, E i ⟶ X) (f : ∀ i : I, F i ⟶ E i) [∀ i : I, IsIntegral (E i)] [∀ i : I, IsIntegral (F i)] [∀ i : I, IsSeparated (e i)] [∀ i : I, Etale (e i)] [∀ i : I, LocallyOfFiniteType (e i)] [∀ i : I, QuasiCompact (e i)] [∀ i : I, IsProper (f i)] [∀ i : I, IsDominant (f i)] (n : I → ℕ) (hn : ∀ i : I, 0 < n i) (hfinite : ∀ i : I, ((f i).stalkMap (genericPoint (F i))).hom.Finite) (hdegree : ∀ i : I, @Module.finrank ((E i).presheaf.stalk (f i (genericPoint (F i)))) (F i).functionField _ _ (@Algebra.toModule _ _ _ _ ((f i).stalkMap (genericPoint (F i))).hom.toAlgebra) = n i) : ∃ (X' : Scheme.{u}) (_ : IsIntegral X') (p : X' ⟶ X), IsNormalScheme X' ∧ IsNoetherian X' ∧ IsProper p ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (p ∣_ U)) ∧ LocallyOfFiniteType p ∧ QuasiCompact p ∧ ∀ i : I, ∃ (_ : IsIntegral (pullback (e i) p)), IsNormalScheme (pullback (e i) p) ∧ IsNoetherian (pullback (e i) p) ∧ LocallyOfFiniteType (pullback.snd (e i) p ≫ p) ∧ QuasiCompact (pullback.snd (e i) p ≫ p) ∧ (pullback.fst (e i) p : pullback (e i) p ⟶ E i) (genericPoint (pullback (e i) p : Scheme.{u})) = genericPoint (E i) ∧ Function.Bijective ((pullback.fst (e i) p).stalkMap (genericPoint (pullback (e i) p : Scheme.{u}))) ∧ ∃ (_ : IsIntegral (Scheme.Hom.chartGenericClosure (e i) (f i) p)), IsNoetherian (Scheme.Hom.chartGenericClosure (e i) (f i) p) ∧ (Scheme.Hom.chartGenericClosureMap (e i) (f i) p).IsFiniteLocallyFreeOfDegree (n i) ∧ Surjective (Scheme.Hom.chartGenericClosureMap (e i) (f i) p) ∧ LocallyOfFiniteType (Scheme.Hom.chartGenericClosureMap (e i) (f i) p ≫ pullback.snd (e i) p ≫ p) ∧ QuasiCompact (Scheme.Hom.chartGenericClosureMap (e i) (f i) p ≫ pullback.snd (e i) p ≫ p) ∧ Scheme.Hom.chartGenericClosureToSource (e i) (f i) p (genericPoint (Scheme.Hom.chartGenericClosure (e i) (f i) p)) = genericPoint (F i) ∧ Function.Bijective ((Scheme.Hom.chartGenericClosureToSource (e i) (f i) p).stalkMap (genericPoint (Scheme.Hom.chartGenericClosure (e i) (f i) p)))",
-  "branch": "newtargets-dag",
-  "by": "Q60",
-  "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-e159e490e",
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.IntegralEtaleChartFlatification deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -600,5 +581,23 @@
   "result": "fix",
   "note": "Statement matches the node clause by clause: quasi-excellent integral Noetherian X; finite, possibly empty, non-covering family of separated étale finite-type charts with integral sources; proper dominant f_i with finite stalk-map degree n_i>0; conclusions X' normal integral Noetherian, p proper and an isomorphism over a dense open, E_i' integral normal with bijective generic stalk map, F_i' = Hom.image closure of the generic fibre, integral Noetherian, IsFiniteLocallyFreeOfDegree n_i, surjective, finite type over X, E_i-map with function-field isomorphism. Edge cases, universes, docstrings (14 steps), node fields and verbatim lean.statement all checked. One minor H4 fixed: chartGenericFibreι rebuilt the generic fibre via fromSpecStalk although Mathlib has Scheme.Hom.fiber/fiberι; fixes/IntegralEtaleChartFlatification.lean uses fiberι and imports Mathlib.AlgebraicGeometry.Fiber; same closed subscheme, theorem text and record unchanged. nt_compile --json: delivered 2.4 s and fixed 2.6 s, exit 0, no errors or warnings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/IntegralEtaleChartFlatification.lean",
+  "module": "Sheaf.AlgebraicGeometry.IntegralEtaleChartFlatification",
+  "declaration": "AlgebraicGeometry.exists_integral_etale_chart_flatification",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

@@ -1,0 +1,246 @@
+{
+ "id": "lem-trf-monoid-degree-filtration-truncations",
+ "kind": "statement",
+ "title": "Degree filtration bounds and compatible monoid truncations",
+ "statement": "Let $r\\geq0$ be an integer, let $Q\\subseteq\\mathbf N^r$ be a finitely generated additive submonoid, and let $L$ be a commutative ring with ideal $\\mathfrak a$. Write $B=L[Q]$ for the ring of finite sums $\\sum_{q\\in Q}c_qz^q$, with $z^qz^{q'}=z^{q+q'}$, and let $A=L[[X_1,\\ldots,X_r]]$ [def-weil-pbc-multivariate-power-series]. Put $|e|=\\sum_i e_i$, $J=\\mathfrak aB+(z^q:q\\in Q\\setminus\\{0\\})$, $I=\\mathfrak aA+(X_1,\\ldots,X_r)A$, and define $j:B\\to A$ by $j(\\sum_qc_qz^q)=\\sum_qc_qX^q$. Choose any finite list of nonzero additive generators $q_1,\\ldots,q_s$ of $Q$ and put $D=\\max(\\{1\\}\\cup\\{|q_i|:1\\leq i\\leq s\\})$; for $Q=\\{0\\}$ the list may be empty and $D=1$. Then $j$ is an injective $L$-algebra homomorphism, and for every $n\\geq0$, with $E_n=j^{-1}(I^n)$, one has\n$$J^n\\subseteq E_n,\\qquad E_{Dn}\\subseteq J^n.$$\nFor every series $F=\\sum_{q\\in Q}c_qX^q$ whose coefficients outside $Q$ vanish, define the finite sum $b_n(F)=\\sum_{q\\in Q,\\ |q|<Dn}c_qz^q\\in B$. For all $m\\geq n\\geq0$,\n$$b_m(F)-b_n(F)\\in J^n,\\qquad F-j(b_n(F))\\in I^{Dn}.$$\nThus $(b_n(F)\\bmod J^n)_n$ is an element of $\\varprojlim_n B/J^n$ [def-weil-pbc-adic-completion]. For every $e\\in\\mathbf N^r$ and every $n$ with $Dn>|e|$, the $e$-coefficient of $j(b_n(F))$ equals the $e$-coefficient of $F$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70 gives completed monoid models only; auxiliary agent algebra, extracting old proof steps 1--2 and the supported-series truncation argument of step 6 of lem-trf-completed-monoid-support-projection. The coefficient criterion is the separate existing node lem-weil-pbc-power-series-combined-ideal-coefficients, not a theorem asserted by ILO."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient of $X^e$ in $j(b)$ is the $z^e$-coefficient of $b$ if $e\\in Q$, and zero otherwise. Thus $j$ is injective. The finite convolution formula of [def-weil-pbc-multivariate-power-series] gives $j(bb\\prime)=j(b)j(b\\prime)$; addition and constants are preserved coefficientwise. For $q\\ne0$, some $q_i>0$, so $X^q=X_iX^{q-\\epsilon_i}\\in I$. Also $j(\\mathfrak aB)\\subseteq I$. Hence $j(J)\\subseteq I$, and multiplying $n$ factors and adding gives $J^n\\subseteq E_n$ (including $n=0$).",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+   }
+  },
+  {
+   "text": "For $q\\in Q$, choose $q=\\sum_{i=1}^s k_iq_i$ and set $\\ell=\\sum_i k_i$. Then $z^q=\\prod_i(z^{q_i})^{k_i}\\in J^\\ell$ and $|q|=\\sum_i k_i|q_i|\\leq D\\ell$. Also $c\\in\\mathfrak a^t$ implies $cz^q\\in J^{t+\\ell}$: expand $c$ as a finite sum of products of $t$ elements of $\\mathfrak a$ and multiply by the displayed monomial. These statements include $q=0$ with all $k_i=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+   }
+  },
+  {
+   "text": "Let $b=\\sum_qc_qz^q\\in E_{Dn}$. For each of its finitely many terms use $\\ell$ from Step 2. If $\\ell\\geq n$, then $c_qz^q\\in J^n$. Otherwise $|q|\\leq D\\ell<Dn$, and [lem-weil-pbc-power-series-combined-ideal-coefficients], with coefficient ideal $\\mathfrak a$ and exponent $Dn$, gives $c_q\\in\\mathfrak a^{Dn-|q|}$. Since $Dn-|q|\\geq D(n-\\ell)\\geq n-\\ell$, Step 2 and decreasing ideal powers give $c_qz^q\\in J^n$ again. Adding proves $E_{Dn}\\subseteq J^n$. For $n=0$ every term is in the first case.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+   }
+  },
+  {
+   "text": "The set of $e\\in\\mathbf N^r$ with $|e|<Dn$ is finite: when $Dn>0$ each coordinate is less than $Dn$, and when $Dn=0$ it is empty. Thus $b_n(F)$ is a finite sum. For $m\\geq n$, $b_m(F)-b_n(F)$ is supported on $Dn\\leq|q|<Dm$. Step 2 gives $D\\ell\\geq|q|\\geq Dn$, hence $\\ell\\geq n$ since $D\\geq1$. Every term belongs to $J^n$, proving the asserted difference congruence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+   }
+  },
+  {
+   "text": "Every coefficient of $F-j(b_n(F))$ of degree less than $Dn$ is zero, including exponents outside $Q$ by the support hypothesis. Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with ideal $\\mathfrak a$ and exponent $Dn$; zero belongs to each required coefficient ideal, so $F-j(b_n(F))\\in I^{Dn}$. The same coefficient description gives the asserted exact equality at every $e$ with $|e|<Dn$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+   }
+  },
+  {
+   "text": "The transition $B/J^m\\to B/J^n$ for $m\\geq n$ sends the class of $b_m(F)$ to the class of $b_n(F)$ by Step 4. Thus these classes form a compatible sequence, which is precisely an element of the inverse limit in [def-weil-pbc-adic-completion]. At level zero the quotient is $B/J^0=0$, so this also includes $n=0$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70 (PDF p. 76), gives the motivating completed monoid models only. The following finite coefficient and generator-length argument is by Q41; the coefficient criterion is lem-weil-pbc-power-series-combined-ideal-coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, Ideal",
+   "results": "Actual returned candidates: AddMonoidAlgebra.mem_ideal_span_of'_image. The monomial-ideal membership and stable-filtration results do not assert the degree-scaled cofinality or compatible Q-supported truncations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated additive submonoid Q of N^r the monomial augmentation ideal plus a coefficient ideal gives a filtration cofinal with total degree and coefficient ideal order; degree truncations of supported series are compatible modulo its powers",
+   "results": "Actual returned candidates: Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge, Ideal.Filtration.submodule, Ideal.Filtration.mem_submodule, Ideal.Filtration.Stable.exists_pow_smul_eq, Ideal.Filtration.submodule_span_single, Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge, Ideal.Filtration.submodule_eq_span_le_iff_stable_ge, Ideal.Filtration.Stable.bounded_difference. The monomial-ideal membership and stable-filtration results do not assert the degree-scaled cofinality or compatible Q-supported truncations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AddMonoidAlgebra.*(adic|completion)|monoid.*filtration|cofinal.*(monoid|degree)|trunc.*[Jj].*pow",
+   "results": "No hits. The monomial-ideal membership and stable-filtration results do not assert the degree-scaled cofinality or compatible Q-supported truncations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinality of coefficient plus augmentation ideal filtration on a finitely generated monoid algebra embedded in multivariate power series and compatible degree truncations",
+   "results": "Actual returned candidates: Ideal.stableFiltration, Ideal.Filtration.mono, IsRingFiltration.toGradedMonoid, MvPolynomial.coeToMvPowerSeries.algHom, Ideal.Filtration.instSupSet, Ideal.Filtration.submodule, AddMonoidAlgebra.finiteType_of_fg, PowerSeries.fg_iff_of_isPrime. The monomial-ideal membership and stable-filtration results do not assert the degree-scaled cofinality or compatible Q-supported truncations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoid subalgebra of formal power series with the coefficient and total degree filtration has the same topology as powers of the coefficient plus nonzero monomial ideal, using a bound on degrees of finite monoid generators",
+   "results": "Actual returned candidates: MvPowerSeries.LinearTopology.basis, MvPowerSeries.LinearTopology.mem_basis_iff, MvPowerSeries.LinearTopology.instIsLinearTopologyOfMulOpposite, MvPowerSeries.LinearTopology.hasBasis_nhds_zero, MvPowerSeries.hasEvalIdeal, MvPowerSeries.coe_hasEvalIdeal, PowerSeries.coe_hasEvalIdeal, PowerSeries.hasEvalIdeal. The monomial-ideal membership and stable-filtration results do not assert the degree-scaled cofinality or compatible Q-supported truncations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mem_ideal_span_of.*image|bounded_difference|truncTotal_sub_truncTotal_mem_pow_idealOfVars",
+   "results": "Actual returned candidates: Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPolynomial/Ideal.lean. Read relevant source hits with their file and line; The monomial-ideal membership and stable-filtration results do not assert the degree-scaled cofinality or compatible Q-supported truncations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated additive submonoid Q of N^r the coefficient plus monomial ideal powers are cofinal with the induced adic filtration from formal power series, and supported degree truncations are compatible",
+   "results": "Actual returned candidates: MvPowerSeries.LinearTopology.basis, MvPowerSeries.hasSubstIdeal, PowerSeries.HasSubst.ideal, MvPowerSeries.LinearTopology.mem_basis_iff, PowerSeries.fg_iff_of_isPrime, Ideal.adic_basis, is_ideal_adic_pow, AdicCompletion.AdicCauchySequence.subalgebra. The results do not state the degree-scaled filtration comparison and compatible supported truncations for a finitely generated submonoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, MvPowerSeries",
+   "results": "No hits. The results do not state the degree-scaled filtration comparison and compatible supported truncations for a finitely generated submonoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monoid.*(filtration|truncation)|AddMonoidAlgebra.*MvPowerSeries|cofinal.*degree",
+   "results": "No hits. The results do not state the degree-scaled filtration comparison and compatible supported truncations for a finitely generated submonoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Embedding an additive submonoid algebra of natural exponent vectors in multivariate formal power series with cofinal degree and augmentation ideal filtrations",
+   "results": "Actual returned candidates: MvPolynomial.monomialOneHom, AddMonoidAlgebra.of', AddMonoidAlgebra.toDirectSum, MvPolynomial.coeToMvPowerSeries, Polynomial.ofFinsupp_inj, AddMonoidAlgebra.gradeBy.gradedMonoid, MvPowerSeries.monomial, Ideal.Filtration.submodule. The results do not state the degree-scaled filtration comparison and compatible supported truncations for a finitely generated submonoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoid algebra of a finitely generated submonoid of natural number vectors a monomial of total degree at least D times n belongs to the nth power of the augmentation ideal when each generator degree is at most D",
+   "results": "Actual returned candidates: reesAlgebra.monomial_mem, MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree, monomial_mem_adjoin_monomial, Ideal.mem_span_pow_iff_exists_isHomogeneous, MvPolynomial.le_coeffsIn_pow, Ideal.sum_pow_mem_span_pow, Polynomial.coeff_prod_mem_ideal_pow_tsub, mem_reesAlgebra_iff. The results do not state the degree-scaled filtration comparison and compatible supported truncations for a finitely generated submonoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mem_basis_iff|coeToMvPowerSeries.algHom|mem_ideal_span_of.*image|truncTotal_sub_truncTotal_mem_pow_idealOfVars",
+   "results": "Actual returned candidates: Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/Evaluation.lean, Mathlib/RingTheory/MvPowerSeries/Basic.lean, Mathlib/RingTheory/MvPowerSeries/Basic.lean. The results do not state the degree-scaled filtration comparison and compatible supported truncations for a finitely generated submonoid. Read AddMonoidAlgebra.mem_ideal_span_of'_image (Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60), MvPowerSeries.LinearTopology.mem_basis_iff (Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean:79), MvPolynomial.coeToMvPowerSeries.algHom (Mathlib/RingTheory/MvPowerSeries/Basic.lean:955), and MvPowerSeries.truncTotal_sub_truncTotal_mem_pow_idealOfVars (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:241). These cover monomial ideal membership, coefficient boxes, polynomial embedding and polynomial truncations, respectively, not the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-monoid-support-projection",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry through the log-regular divisorial and saturation-normality lemmas: the supported-series realization of the completed monoid model in Expose VI 1.6(i)--(ii), printed p. 70, and its module-linear coefficient retraction. Filtration cofinality and supported truncations: old steps 1--2 and 6 of the completion-comparison auxiliary lemma.",
+   "via": [
+    "lem-trf-completed-monoid-support-projection",
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-degree-filtration-truncations",
+  "worker": "stage1",
+  "summary": "Q41 proves the unchanged statement using the existing combined-ideal coefficient criterion and explicit finite generator-length estimates; proves both filtration bounds, supported truncation finiteness and congruences, inverse-limit compatibility and eventual exact coefficients. No new nodes or Lean changes.",
+  "blueprint": "The existing ancestry from lem-trf-local-term-locality, proof (1)--(2), through the nearby-duality log-regular completed monoid comparison is retained. These steps realize the filtration and supported truncation auxiliary algebra singled out in old steps 1--2 and 6 of lem-trf-completed-monoid-support-projection; ILO VI 1.6(i)--(ii) is motivation, not a citation for this auxiliary theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient criterion for powers of a base ideal plus variables in a finite-variable formal power series ring; applied in Steps 3 and 5. The trace-formula unit does not supply this commutative algebra criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-95032c8aa",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-95032c8aa (reviewer sub-agent of L); spot-checked: I read the item and its proof in full. 0 new nodes. The item's statement, stmt_deps, source and blueprint are byte-identical to the landed base (compared with the 2026-10-23 04:02 snapshots, md5 45996a92); the only changes are status, proof, proof_deps, proof_origin, split_report and the appended searches. Cited nodes read: the combined-ideal coefficient criterion (any ring, no Noetherian hypothesis; I checked it is true in both directions), and the power-series and adic-completion definitions. Steps: (1) j is injective and multiplicative, j(J)⊆I, J^n⊆E_n. (2) A generator expression with length ℓ gives z^q∈J^ℓ and |q|≤Dℓ. (3) E_{Dn}⊆J^n: the case ℓ≥n is direct; otherwise the criterion's forward direction gives c_q∈𝔞^{Dn−|q|}⊆𝔞^{n−ℓ}. (4) Truncation differences have ℓ≥n. (5) The criterion's converse direction gives F−j(b_n)∈I^{Dn}; zero coefficients off Q come from the support hypothesis. (6) The compatible family follows from the definition. All steps are correct and genuinely elementary. Small cases checked: Q={0}, r=0, Q=<2,3> with D=3, 𝔞=0 and 𝔞=L, the zero ring, n=0. ILO VI 1.6 (PDF p.76) checked: it is cited only as motivation, and the proof is marked agent-written. No duplicate: the sibling monoid-completion-coefficient-embedding takes these bounds as hypotheses, and the parent's steps 1 and 3 use exactly these clauses. I accept the coefficient criterion (unit sk-thm-p1) as a generic tool use. No SGA, no re-split note. Cosmetic only: Step 1 reuses the name q_i for a coordinate."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonoidDegreeFiltrationTruncations",
+  "declaration": "AddMonoidAlgebra.monoid_degree_filtration_truncations",
+  "file": "lean/Sheaf/RingTheory/MonoidDegreeFiltrationTruncations.lean",
+  "statement": "theorem monoid_degree_filtration_truncations (L : Type u) [CommRing L] (r : ℕ) (Q : AddSubmonoid (Fin r →₀ ℕ)) (a : Ideal L) (s : ℕ) (q : Fin s → Q) (h_nonzero : ∀ i : Fin s, q i ≠ 0) (h_generates : AddSubmonoid.closure (Set.range q) = ⊤) : ∃ j : AddMonoidAlgebra L Q →ₐ[L] MvPowerSeries (Fin r) L, (∀ f : AddMonoidAlgebra L Q, j f = f.coeff.sum (fun e c ↦ MvPowerSeries.monomial (e : Fin r →₀ ℕ) c)) ∧ Function.Injective j ∧ ∃ (J : Ideal (AddMonoidAlgebra L Q)) (I : Ideal (MvPowerSeries (Fin r) L)) (D : ℕ), J = Ideal.map (algebraMap L (AddMonoidAlgebra L Q)) a ⊔ Ideal.span {x | ∃ e : Q, e ≠ 0 ∧ x = AddMonoidAlgebra.single e (1 : L)} ∧ I = Ideal.map (algebraMap L (MvPowerSeries (Fin r) L)) a ⊔ Ideal.span (Set.range (MvPowerSeries.X : Fin r → MvPowerSeries (Fin r) L)) ∧ D = max 1 ((Finset.univ : Finset (Fin s)).sup (fun i ↦ (q i : Fin r →₀ ℕ).degree)) ∧ (∀ n : ℕ, J ^ n ≤ Ideal.comap j.toRingHom (I ^ n) ∧ Ideal.comap j.toRingHom (I ^ (D * n)) ≤ J ^ n) ∧ ∀ F : MvPowerSeries (Fin r) L, (∀ e : Fin r →₀ ℕ, e ∉ Q → MvPowerSeries.coeff e F = 0) → ∃ b : ℕ → AddMonoidAlgebra L Q, (∀ n : ℕ, b n = ∑ e ∈ (Finsupp.finite_of_degree_lt (σ := Fin r) (D * n)).toFinset, if h : e ∈ Q then AddMonoidAlgebra.single ⟨e, h⟩ (MvPowerSeries.coeff e F) else 0) ∧ (∀ m n : ℕ, n ≤ m → b m - b n ∈ J ^ n ∧ F - j (b n) ∈ I ^ (D * n)) ∧ (∃ x : AdicCompletion J (AddMonoidAlgebra L Q), ∀ n : ℕ, AdicCompletion.evalₐ J n x = Ideal.Quotient.mk (J ^ n) (b n)) ∧ ∀ (e : Fin r →₀ ℕ) (n : ℕ), e.degree < D * n → MvPowerSeries.coeff e (j (b n)) = MvPowerSeries.coeff e F",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc043bcb7",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Node changed only by lean; lean.statement is the file's text word for word; proof is sorry only; no definitions; source/blueprint docstrings and steps 1-6 present; report has Worker report + Second reading by Q55. Clause by clause: B=AddMonoidAlgebra L Q, A=MvPowerSeries (stmt_dep); j fixed by the finite monomial-sum equation and injective; J, I and D=max 1 (sup of generator degrees) given by exact equations (empty list gives D=1); J^n ≤ comap j (I^n) and comap j (I^(Dn)) ≤ J^n for every n; b n fixed as a finite sum over finite_of_degree_lt (D*n); both congruences for all n ≤ m; completion element via evalₐ; coefficient equality below degree D*n. No extra hypotheses; only universe is L : Type u. Edge cases n=0, m=n, Q={0}, r=0, a=0, a=⊤, zero ring are covered. Encoding matches parent CompletedMonoidSupportProjection; no duplicate notion. Hand-checked steps 3-4 of the mathematics. Not recompiled (no file changed); worker reports a clean compile and an OK dry run."
+ }
+}

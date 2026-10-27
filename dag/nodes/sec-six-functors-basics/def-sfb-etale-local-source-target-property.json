@@ -1,0 +1,133 @@
+{
+ "id": "def-sfb-etale-local-source-target-property",
+ "kind": "definition",
+ "title": "Etale locality on source-and-target for scheme morphism properties",
+ "statement": "Let $P$ be a property of morphisms of schemes [def-pc-scheme], where etale morphisms mean [def-weil-etale-morphism]. The property $P$ is etale local on source-and-target if all three conditions hold: (i) for schemes $X,Y,Z$ and maps $a:X\\to Y$, $f:Y\\to Z$, if $a$ is etale and $P(f)$ then $P(fa)$; (ii) for schemes $X,Y,V$ and maps $f:X\\to Y$, $b:V\\to Y$, if $P(f)$ and $b$ is etale then the base change $X\\times_Y V\\to V$ has $P$; (iii) for every scheme morphism $f:X\\to Y$, $P(f)$ holds if and only if for every point $x\\in X$ there are schemes $U,V$, etale maps $a:U\\to X$ and $b:V\\to Y$, a map $h:U\\to V$ and a point $u\\in U$ such that $a(u)=x$, $fa=bh$, and $P(h)$. No isomorphism-invariance, Noetherian, separation, quasi-compactness, or surjectivity assumption is part of this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 04QZ (definition-local-source-target), conditions (1), (2), (3)(a)-(b)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEtaleLocalOnSourceAndTarget|[Ll]ocalOnSourceAndTarget|etale_local in AlgebraicGeometry",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib definition; reuse the existing project declaration found by direct grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Property of scheme morphisms etale local on the source and target",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.targetAffineLocally, AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib definition; reuse the existing project declaration found by direct grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Property of scheme morphisms etale local on source and target precomposition base change pointed charts",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsLocalAtSource, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib definition; reuse the existing project declaration found by direct grep."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtaleLocalOnSourceAndTarget|EtaleLocalOnSourceAndTarget in lean/WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json and Mathlib/AlgebraicGeometry; 04QZ in dag/nodes; tools/blueprint_refs.py search étale local on the source-and-target",
+   "results": "Only lean/Sheaf/AlgebraicGeometry/SpaceEtalePresentationPropertyCriterion.lean defines IsEtaleLocalOnSourceAndTarget (line 37); no Mathlib or WeilConjectures match. DAG hits are theorem nodes, including lem-sfb-space-etale-presentation-property-criterion, not a definition node owning this notion. Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "Existing project definition without a DAG definition owner: record existing:true, do not duplicate it."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-etale-source-target-properties",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Chartwise calculus for smooth and etale representable morphisms. Supporting input: scheme-locality prerequisite for the chartwise calculus in the unramified-diagonal atlas argument; Stacks 04R3 and 04R1. Definition 04QZ of the locality predicate used in the supporting scheme-locality statement.",
+   "via": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtalePresentationPropertyCriterion",
+  "declaration": "AlgebraicGeometry.IsEtaleLocalOnSourceAndTarget",
+  "statement": "def IsEtaleLocalOnSourceAndTarget (P : MorphismProperty Scheme.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the unchanged plain definition already landed in the Q19 theorem module. Its three conjuncts are precisely Stacks 04QZ. No new Lean module or duplicate definition is introduced; Q19’s node record and source remain unchanged."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13acc801e",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13acc801e",
+  "group": "N5",
+  "result": "pass",
+  "note": "Matched Stacks 04QZ and 04R1 (a),(c),(d),(f) clause by clause. The five properties are Mathlib Smooth/Etale/Flat/LocallyOfFinitePresentation/LocallyOfFiniteType (the recorded dep declarations; lft is the local alternative). IsEtaleLocalOnSourceAndTarget (live def, SpaceEtalePresentationPropertyCriterion.lean:37) is exactly 04QZ (1),(2),(3). Square clause uses a≫f=h≫b with surjectivity on a only. Family clause allows arbitrary I : Type v with no Nonempty/Small; empty family and empty X are correct. New def node owns the landed plain def via existing:true with matching signature and acyclic deps, repairing L's mandatory point; Q19 record untouched; def-weil-surjective-morphism cited. Item diff vs live: only stmt_deps and lean; statement verbatim. Docstrings carry source place, blueprint tag and all 9 proof steps; proof is sorry only; 7 plain proof-dep imports exist in side-live. No fix, so no compile; relied on the worker's clean scompile runs."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T081446-L-1969605",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.etalePresentation_property_criterion",
+   "AlgebraicGeometry.AlgebraicSpace.etalePresentation_property_iff_scheme"
+  ],
+  "sorry_after": []
+ }
+}

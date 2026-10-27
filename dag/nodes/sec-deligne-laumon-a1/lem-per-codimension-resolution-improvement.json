@@ -1,0 +1,327 @@
+{
+ "id": "lem-per-codimension-resolution-improvement",
+ "kind": "statement",
+ "title": "Codimension induction for finite ordinary resolution approximations",
+ "statement": "Let $\\mathscr C$ be the category of reduced Noetherian quasi-excellent schemes over $\\mathbf Q$ [def-pc-reduced-scheme, pqf-def-locnoeth, def-exc-excellent-ring], including finite disjoint unions, with all regular morphisms. Here Noetherian means admitting a finite affine cover by spectra of Noetherian rings, quasi-excellence means quasi-excellence of affine coordinate rings, and regular means flat with geometrically regular fibres. Fix a rule $H$ on Cartier-divisor pairs having exactly the properties stated in [lem-per-small-singular-locus-resolution].\n\nFor $x\\in X\\in\\mathscr C$, put $c_X(x)=\\dim\\mathcal O_{X,x}$, the supremum of lengths of prime chains in the local ring, and $X^{\\le d}=\\{x:c_X(x)\\le d\\}$. An ordinary blowup tower has coherent ideal centers and retains their scheme structures [def-nagata-global-blowup, pqf-def-coherent]. Its unresolved set $T(R)$ is the union in $X$ of the image of the singular locus of its terminal scheme and the images of the singular loci of all its centers; singular means not regular [def-weil-regular-scheme]. Such a tower is resolved through codimension $d$ if $T(R)$ is closed and disjoint from $X^{\\le d}$. Call a center equicodimensional over $X$ if its image has pure codimension $e$ for one $e$ (every generic point of that image has $c_X=e$), and the inverse image of those generic points is schematically dense in the center, meaning that no proper closed subscheme of the center contains that inverse image.\n\nThere is a compatible construction, from $H$, of finite prefixes $R_0,\\ldots,R_d$ of rules for every $d\\ge0$, with the following properties. $R_0(X)$ is the tower of length zero. Each $R_d(X)$ is a finite tower on reduced Noetherian quasi-excellent schemes, all of whose centers are nonempty, reduced, nowhere dense and equicodimensional over $X$ with codimension at most $d$, and it is resolved through codimension $d$. For every regular $f:Y\\to X$, $R_d(Y)$ is the contracted scheme-theoretic pullback of $R_d(X)$: only empty centers are deleted and the other extended ideal sheaves are retained in order. Write $T_d(X)=T(R_d(X))$. For $e\\ge d$ the sets $T_e(X)$ are contained in $T_d(X)$, and over $X\\setminus T_d(X)$ the towers $R_e(X)$ and $R_d(X)$ agree after removal of empty centers, with their ordered center ideals. Any center of $R_e(X)$ of $X$-codimension greater than $d$ lies over $T_d(X)$.\n\nThe prefix of length zero exists as specified, and each prefix already constructed by this construction has a successor with the same properties, without changing any earlier rule. In particular the compatible prefixes determine one sequence $(R_d)_{d\\ge0}$. This assertion does not claim that this sequence stabilizes or that any $R_d(X)$ is globally resolved.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "§§4.1.1--4.1.5 and the construction in §4.3, printed pp.26--31: finite codimension approximations and their successor construction (before the stabilization argument of Lemma 4.1.3(ii)); Temkin, arXiv:0904.1592v2, read online 2026-10-24; archival copy WANTED. No Stacks tag states this desingularization result. ILO VIII 2.3.9--2.3.11 identifies this as the input for its Theorem 2.3.10."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-exc-excellent-ring",
+  "lem-per-small-singular-locus-resolution",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-weil-regular-scheme",
+  "def-per-codimension-resolution-prefix"
+ ],
+ "proof": [
+  {
+   "text": "We construct rules by induction on $d$, simultaneously retaining the stronger invariant that every center is supported over $X_{\\mathrm{sing}}$. Start with $R_0(X)$ empty. A height-zero local ring of a reduced Noetherian scheme is a field (its maximal ideal is its nilradical), so $T_0(X)=X_{\\mathrm{sing}}$ misses $X^{\\le0}$ and is closed by [lem-per-regular-pullback-unresolved-strata]. The empty tower is preserved under every pullback. At every later stage this same cited closedness assertion applies. The induction below only calls already defined rules $R_i$ with $i\\le d$ on further objects, so it does not change any earlier rule.",
+   "uses": [
+    "lem-per-regular-pullback-unresolved-strata"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, start of the proof; §§4.1.1--4.1.2; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "Suppose the rules through $d$ are constructed, and set $r=d+1$, $f=R_d(X)$ and $Z=T_d(X)$. By [lem-per-regular-pullback-unresolved-strata], the height-$r$ points of $Z$ form a finite set $S$ of generic points. If $S$ is empty set $R_r(X)=f$. Otherwise let $C=\\overline S_{\\mathrm{red}}$ and $U=X\\setminus C$. The set $C$ lies in $Z$, has pure codimension $r$, and its local scheme at each $s\\in S$ is $\\operatorname{Spec}\\kappa(s)$; hence $C$ is regular at these points. Insert $\\operatorname{Bl}_C(X)\\to X$ at the start of $f$ using [lem-per-blowup-sequence-insertion]. Each old center has image of pure codimension at most $d$, so its generic image points avoid $C$; its assumed schematic density over those points makes it the closure of its restriction over $U$. This verifies the insertion hypothesis. Every old replacement retains its reduced structure, pure image codimension and schematic density, by the same node.",
+   "uses": [
+    "lem-per-regular-pullback-unresolved-strata",
+    "lem-per-blowup-sequence-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, Extension 0; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "The pullback of the ideal of $C$ to the new first stage is an effective Cartier ideal by [thm-nagata-blowup-principalizes-center], and it stays so through every subsequent blowup by [lemma-nagata-cartier-total-transform-blowup]. All ambient schemes are reduced Noetherian by [lem-per-blowup-local-dimension-bound]; their local schemes and reduced centers are quasi-excellent by its last clause. Properness needed for taking images and globalizing follows at every blowup from [thm-nagata-global-blowup-proper]. Thus all local objects used below belong to $\\mathscr C$. Over $U$ the inserted stages are empty and the old tower, including its ideals, is unchanged. Over $X^{\\le d}$ the same holds, since $C$ has no such points.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lemma-nagata-cartier-total-transform-blowup",
+    "lem-per-blowup-local-dimension-bound",
+    "thm-nagata-global-blowup-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, Extension 0 and Lemma 4.3.1; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "Process the old centers in their original order, after the new first center. If $W\\subset P$ is the current old center, put $W_S=\\coprod_{s\\in S}(W\\times_X\\operatorname{Spec}\\mathcal O_{X,s})$. By [lem-per-blowup-local-dimension-bound], every summand has dimension at most $r-1=d$. Consequently the already constructed $R_d(W_S)$ is a complete strong resolution: its unresolved set is disjoint from every point. Moreover $W_S$ is regular away from its closed base fibres: at a proper generalization of $s$ the image has height less than $r$, where the old tower was already strongly resolved and all our insertions are empty. By the stronger inductive invariant, every center of $R_d(W_S)$ is therefore supported over those closed fibres. Apply [lem-per-local-blowup-tower-globalization] with $P=W$ to its synchronized centers, blowing them up in the ambient scheme containing $W$. Its conclusion identifies the local strict transforms with the terminal scheme of $R_d(W_S)$, so the new strict transform of $W$ is regular over every $s\\in S$. The inserted centers themselves are regular there. Each global new center is reduced, nowhere dense and equicodimensional over $X$ of codimension $r$.",
+   "uses": [
+    "lem-per-blowup-local-dimension-bound",
+    "lem-per-local-blowup-tower-globalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, Extensions 1,...,n; localization at the selected points before pushing centers forward; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "Insert the ambient correction just obtained before the blowup in $W$, using [lem-per-blowup-sequence-insertion]. Its first replaced center is precisely the strict transform of $W$ just resolved locally. Every still-later old center is schematically dense away from $C$, because its generic image codimension is at most $d<r$, so the remaining insertion hypotheses hold. The previous old centers and previous inserted centers occur before this correction and are unchanged. There are only finitely many original centers; processing each exactly once therefore ends with a finite tower all of whose centers are regular over $X^{\\le r}$. All correction centers lie over $C\\subset Z$; they lie over $X_{\\mathrm{sing}}$ as well, since by the stronger invariant $f$ is the identity over $X_{\\mathrm{reg}}$, whence $Z\\subset X_{\\mathrm{sing}}$. This preserves singular support. It also shows that these corrections are empty on $X\\setminus Z$.",
+   "uses": [
+    "lem-per-blowup-sequence-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, Extensions 1,...,n; termination by the finite list of old centers; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "Let $P$ be the terminal scheme after these corrections. For $s\\in S$ put $P_s=P\\times_X\\operatorname{Spec}\\mathcal O_{X,s}$ and let $D_s$ be the scheme-theoretic inverse image of the reduced point $s$. It is an effective Cartier divisor by the persistence of the ideal of $C$ proved above. Since $P\\to X$ is proper and of finite type, $D_s$ is of finite type over $\\kappa(s)$, a characteristic-zero field. The singular locus of $P_s$ is contained in $D_s$: outside the closed fibre the image has height at most $d$ and all modifications made there are the old, already resolved tower. Apply the given rule of [lem-per-small-singular-locus-resolution] once to the finite disjoint union $(\\coprod P_s,\\coprod D_s)$. This gives one finite ordered list of regular centers and a regular terminal scheme on each component, with synchronizing empty stages allowed. Each center is supported over the closed fibres, because that rule supports centers over the singular locus. All its hypotheses, including reducedness and quasi-excellence, were verified above.",
+   "uses": [
+    "lem-per-small-singular-locus-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, final Extension n+1: the simultaneous Cartier-divisor pairs; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "Append the globalization of this last tower to $P$, using [lem-per-local-blowup-tower-globalization]. Call the resulting tower $R_r(X)$. Its new centers have pure $X$-codimension $r$, are reduced and nowhere dense, and are schematically dense over their generic image points. The local centers and terminal scheme are regular over all $s\\in S$. Outside $C$ the new stages are empty. Thus the terminal scheme and every center are regular over all of $X^{\\le r}$: over a height-$r$ point not in $Z$ the old tower was already resolved; the only height-$r$ points of $C$ are $S$; lower heights are unaffected. Closedness from [lem-per-regular-pullback-unresolved-strata] now gives $T_r(X)\\cap X^{\\le r}=\\varnothing$. All new centers lie over $C\\subset Z$ and therefore the old tower is unchanged, with its ordered ideals, over $X\\setminus Z$.",
+   "uses": [
+    "lem-per-local-blowup-tower-globalization",
+    "lem-per-regular-pullback-unresolved-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, final Extension and the verification of resolution through codimension r; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "Let $h:Y\\to X$ be regular. By [lem-per-regular-pullback-unresolved-strata], the selected finite set for $Y$ consists of the generic points above $S$, and its reduced closure is exactly $C\\times_XY$; the local maps at these points are regular. This proves compatibility of the first blowup. At each old center, its local disjoint union on $Y$ maps regularly to the local disjoint union on $X$. Inductive functoriality of $R_d$ gives the same synchronized correction list after pullback and deletion of empty centers. Globalization and insertion commute with flat base change by [lem-per-local-blowup-tower-globalization] and [lem-per-blowup-sequence-insertion]. At the terminal correction the local maps are regular in the cited pair category: they are flat with geometrically regular fibres, so their fibres remain regular after each finite extension of a target residue field. The divisor is the schematic pullback of the same ideal of $C$. Thus these are morphisms of $\\mathscr P$, and functoriality of the given $H$ in [lem-per-small-singular-locus-resolution] applies. It yields the same conclusion for the final list. An old center that disappears has an empty local correction too; its whole block disappears. These observations preserve the original relative order of every surviving ideal. They also cover the case where the selected set on $Y$ is empty. Hence $R_r(Y)$ is exactly the contracted scheme-theoretic pullback of $R_r(X)$.",
+   "uses": [
+    "lem-per-regular-pullback-unresolved-strata",
+    "lem-per-local-blowup-tower-globalization",
+    "lem-per-blowup-sequence-insertion",
+    "lem-per-small-singular-locus-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.3, functoriality paragraph; simultaneous disjoint-union ordering; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  },
+  {
+   "text": "No stage of this construction changes $R_i$ for $i<r$. At the successor just built every inserted center has codimension $r$ and lies over $T_d(X)$, and all old centers are recovered off that set by their closure prescription. Since the tower remains strongly resolved on $X\\setminus T_d(X)$, its unresolved set satisfies $T_r(X)\\subseteq T_d(X)$. Iterate these inclusions. For $e\\ge d$, each later inserted center is supported over the corresponding unresolved set, hence over $T_d(X)$; the same is true of its later strict transforms. The repeated closure replacements of old centers agree off $T_d(X)$, so $R_e(X)$ restricts there to $R_d(X)$ with only empty centers removed and all surviving ideals in order. Every center of codimension greater than $d$ was inserted at one of those later stages, so has the required support. Induction on the natural numbers, starting at the specified empty rule and using only previously fixed rules and $H$, defines one compatible sequence. No stabilization or finite bound on $\\dim X$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "§4.1.5, the support condition before the stabilization argument; finite induction; agent-written local/schematic-closure formulation of the codimension induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-pullback-unresolved-strata",
+  "lem-per-blowup-sequence-insertion",
+  "thm-nagata-blowup-principalizes-center",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "lem-per-blowup-local-dimension-bound",
+  "thm-nagata-global-blowup-proper",
+  "lem-per-local-blowup-tower-globalization",
+  "lem-per-small-singular-locus-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Temkin arXiv:0904.1592v2 §§4.1--4.3, printed pp.26--31, read online. Archival copy WANTED. Localize the old-center corrections at the selected finite stratum before schematic closure, making the pure codimension bound explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "{\"t\": \"2026-10-24T02:14:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"desingularization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-codimension-resolution-improvement: Extend a compatible finite family of functorial blowup sequences resolving through codimension d to codimension d plus one, with new centers supported over the unresolved locus",
+   "results": "{\"t\": \"2026-10-24T02:15:38Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-codimension-resolution-improvement: Extend a compatible finite family of functorial blowup sequences resolving through codimension d to codimension d plus one, with new centers supported over the unresolved locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"0b053a97214b6f54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|codimension.*resol|resol.*codimension",
+   "results": "{\"t\": \"2026-10-24T02:15:38Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|codimension.*resol|resol.*codimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-codimension-resolution-improvement: Inductive construction of strong resolution of singularities in one more codimension for quasi excellent schemes",
+   "results": "{\"t\": \"2026-10-24T02:15:39Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-codimension-resolution-improvement: Inductive construction of strong resolution of singularities in one more codimension for quasi excellent schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"f7bca9d4d7d395e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-codimension-resolution-improvement: Refine an ordinary blowup sequence using a desingularization of Cartier divisor pairs to improve the codimension of its unresolved set",
+   "results": "{\"t\": \"2026-10-24T02:15:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-codimension-resolution-improvement: Refine an ordinary blowup sequence using a desingularization of Cartier divisor pairs to improve the codimension of its unresolved set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"978bbf0299065c95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "{\"t\": \"2026-10-24T02:17:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"desingularization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned normalization, smoothness, flatness and scheme-limit declarations do not assert this resolution theorem; the name/grep searches have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|codimension.*resol",
+   "results": "{\"t\": \"2026-10-24T02:51:47Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|codimension.*resol\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-codimension-resolution-improvement: Canonical desingularization by induction on codimension with regular pullback",
+   "results": "{\"t\": \"2026-10-24T02:51:48Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-codimension-resolution-improvement: Canonical desingularization by induction on codimension with regular pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"IsInducing.topologicalKrullDim_le\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\", \"RingTheory.Sequence.IsRegular.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"aa08e5151419573a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-codimension-resolution-improvement: Functorial finite blowup towers resolving reduced quasi excellent schemes over Q through codimension d",
+   "results": "{\"t\": \"2026-10-24T02:51:49Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-codimension-resolution-improvement: Functorial finite blowup towers resolving reduced quasi excellent schemes over Q through codimension d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"da6e4f756b0f2233\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-codimension-resolution-improvement: Canonical desingularization by induction on codimension with regular pullback",
+   "results": "{\"t\": \"2026-10-24T02:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-codimension-resolution-improvement: Canonical desingularization by induction on codimension with regular pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\"], \"digest\": \"c6b10842476aa67d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-ordinary-regular-resolution",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), through characteristic-zero resolution used for VIII 3.4.15; supporting input VIII 2.3.10: §§4.1.1--4.1.5 and the construction in §4.3, printed pp.26--31: finite codimension approximations and their successor construction (before the stabilization argument of Lemma 4.1.3(ii))",
+   "via": [
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-codimension-resolution-improvement",
+  "worker": "stage1",
+  "summary": "Read Temkin codimension induction, insertion and schematic-closure operations and ILO VIII 2.3.9--2.3.11. Retain the statement; prove the successor using localized old-center corrections and a synchronized application of H, with four smaller unsplit geometric inputs. Verify reducedness, local dimension, pure base codimension, exact ideal pullback and support compatibility. No project declaration or Mathlib match. Repair of returned head e6e88c8c140: re-read the revised small-singular-locus-resolution statement, check the Cartier-pair objects in step 6 and its finite-residue-extension regularity criterion in step 8, and refresh both exact quotations against the current DAG. Other cited statements still agree with the retained citation excerpts.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3, through lem-per-qe-ordinary-regular-resolution and its finite-approximation input; latest blueprint searched for resolution, insertion, strict transform and local geometry. No same statement.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Ordinary blowup makes its defining ideal effective Cartier; a generic blowup fact not provided in the perverse unit."
+   },
+   {
+    "node": "lemma-nagata-cartier-total-transform-blowup",
+    "why": "Cartier total transforms persist through every subsequent ordinary blowup."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Properness of each ordinary blowup, needed for closed images and finite-type local fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-blowup-principalizes-center",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-f990c2ea4",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-f990c2ea4 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, the parent lem-per-qe-ordinary-regular-resolution, H (lem-per-small-singular-locus-resolution, current statement), the cited Nagata blowup, Cartier-persistence and properness nodes, ILO VIII 2.3.9-2.3.11, and Stacks more-algebra lemma-reduced-goes-up and 07QU. Temkin is not archived, so WANTED stays and proof_origin stays agent. Live state: the item is unsplit with no repair note, its statement is identical to the snapshot, and no new-node id exists live, so there is no supersession. The item statement is unchanged. Steps 1-9 check against the cited statements: (1) R_0 empty, height-0 points are fields, and the stronger invariant (centers over X_sing) is set up. (2) Old centers have codimension at most d, so the insertion hypothesis holds over U=X minus C. (3) I_C stays Cartier, and that also keeps the replaced centers nowhere dense. (4) The dimension node gives dim W_S at most d, so R_d(W_S) fully resolves it, and globalization gives a strict transform of W that is regular over S. (5) The insertion is finite and Z lies in X_sing. (6) Every hypothesis of H holds: D_s = P x_X Spec k(s) is Cartier and of finite type in characteristic 0, and Sing(P_s) lies in D_s. (7) Closedness gives T_r disjoint from X^{<=r}. (8) Functoriality: I verified height-r points of h^{-1}Z = generic points of h^{-1}C by the flat dimension formula and going-down; the local maps are morphisms of the pair category. (9) T_r is contained in T_d and the towers agree off T_d. No stabilization is used. All four new nodes are true: dimension inequality over a Noetherian base; closure insertion = iterated strict transform; closure via the quasi-compact flat monomorphism Spec O_{X,s} -> X; regular ascent/descent plus J-2. They are statement-only and not duplicates (checked against quasi-excellent-finite-type-stability, regular-dimension-function-pullback, nagata strict-transform and extend nodes), and none restates the item. No SGA. I accept the declared tool uses: principalizes-center, cartier-total-transform, global-blowup-proper. One fault (B3), fixed: definition citations were missing for 'flat' in lem-per-local-blowup-tower-globalization, and for 'flat', 'fibre' and 'proper' in lem-per-regular-pullback-unresolved-strata. I added def-weil-flat-morphism, def-pc-scheme-fibre and def-weil-proper-morphism, and spelled out geometric regularity with the finite-extension criterion of H's category. Advisory: replaced old centers being nowhere dense rests on step 3's Cartier persistence and is not stated by the insertion node; I accept it.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CodimensionResolutionImprovement",
+  "declaration": "AlgebraicGeometry.exists_codimensionResolutionConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/CodimensionResolutionImprovement.lean",
+  "statement": "theorem exists_codimensionResolutionConstruction (H : SmallSingularLocusResolutionRule.{u}) : Nonempty CodimensionResolutionConstruction.{u}",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2808a4a6f",
+  "group": "NG",
+  "result": "fix",
+  "note": "Item statement and clause mapping correct (category C, regular pullback via OrdinaryResolutionComparison, T(R) without closure, ResolvedThrough, equicodimensional centers, R_0 length 0, decreasing T, AgreeOff, later_centers, successor/rule; edge cases d=0, empty input, reducible images, k=l; single universe; only sorry; docstrings and both report sections present). Fault, fixed: the new module re-declared AlgebraicGeometry.OrdinaryBlowupTower.unresolvedSet (same name and body as landed ResolutionStrata.lean, def-per-resolution-strata, Q100 05:01 UTC, on base), duplicated genericPointsIn/SchematicallyDenseOverGenericImage, and duplicated QERationalResolutionInput (def-per-qe-ordinary-resolution-rule, 04:04 UTC). fixes/CodimensionResolutionPrefix.lean imports ResolutionStrata and QEOrdinaryResolutionRule, drops QECodimensionResolutionInput/centerGenericPreimage/unresolvedSet, and expresses CenterEquicodimensional through genericPointsIn + SchematicallyDenseOverGenericImage (equivalent for reduced centers). fixes/def-per-codimension-resolution-prefix.json adds both def nodes to stmt_deps and the text and trims lean.declarations. Item node, record and module unchanged. nt_compile --json of the fixed prefix + item clean (9.2 s / 2.5 s; first try timed out on ResolutionStrata at load 271). Accepted with notes: H unused in the conclusion (no H-dependent property in the node); SmallSingularLocusResolutionRule reached via the theorem stmt_dep (H2 forbids adding the existing def node); the DAG already holds two unresolvedSet copies (Q100/Q143) for the maintainer to settle."
+ }
+}

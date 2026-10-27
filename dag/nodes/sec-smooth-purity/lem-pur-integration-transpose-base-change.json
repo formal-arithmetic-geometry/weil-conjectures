@@ -1,0 +1,295 @@
+{
+ "id": "lem-pur-integration-transpose-base-change",
+ "kind": "statement",
+ "title": "Base-change calculus and adjunction transport for integration transposes",
+ "statement": "Let $A$ be a finite commutative ring. Let $f:X\\to Y$ be a compactifiable [def-asd-compactifiable] separated finite-type map of Noetherian schemes, and let $g:Y'\\to Y$ have Noetherian source. Form its Cartesian pullback $f':X'\\to Y'$ with $g':X'\\to X$. Work in ordinary small-etale derived categories [def-weil-pbc-derived-categories], with derived tensor [def-kun-derived-tensor] and exact constant-coefficient inverse image [prop-weil-pbc-inverse-image-modules-exact]. Write $F=Rf_!$, $F'=Rf'_!$, and choose their actual right adjoints $R,R'$ with units $\\eta,\\eta'$ and counits $\\varepsilon,\\varepsilon'$ [def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Let $C:g^*F\\xrightarrow{\\sim}F'g'^*$ be the proper/open exchange [lem-amb-unbounded-compact-support-comparisons].\n\nLet $W\\in D(X_{\\mathrm{et}},A)$, $W'\\in D(X'_{\\mathrm{et}},A)$, $l:g'^*W\\xrightarrow{\\sim}W'$, and traces $t:FW\\to A_Y$, $t':F'W'\\to A_{Y'}$ satisfy $t'F'(l)C_W=g^*t$. Write $P_{f;K,M}:K\\otimes_A^LFM\\to F(f^*K\\otimes_A^LM)$ for the canonical compact-support projection map, built from the proper projection map and the open-extension tensor comparison on a compactification [lem-amb-proper-coproducts-projection, lem-pur-etale-open-derived-tensor], and similarly $P_{f'}$. Suppose the canonical projection maps for $W,W'$ are invertible on all inputs. For $K\\in D(Y_{\\mathrm{et}},A)$ set $G_0K=f^*K\\otimes W$ and $c_K=(1_K\\otimes t)P_{f;K,W}^{-1}:FG_0K\\to K$ (unitors understood). Define $G'_0,c'$ similarly, and let $\\gamma_K:G_0K\\to RK$ and $\\gamma'_L:G'_0L\\to R'L$ be their adjoint transposes [def-weil-pbc-adjunction-mate]. Let $a_K:g'^*G_0K\\xrightarrow{\\sim}G'_0g^*K$ be the tensor/pullback comparison [lem-kun-inverse-image-monoidal] followed by $l$.\n\nLet $e_K:g'^*RK\\to R'g^*K$ be the transpose of $g^*\\varepsilon_K\\circ C_{RK}^{-1}$. Then\n$$e_K\\circ g'^*\\gamma_K=\\gamma'_{g^*K}\\circ a_K.$$\nIf both gamma families are isomorphisms, $e_K$ is an isomorphism. Each gamma family is natural and uniquely determined by $\\varepsilon_KF(\\gamma_K)=c_K$. Whenever $\\gamma:G_0\\xrightarrow{\\sim}R$ is a natural isomorphism, the transported adjunction $F\\dashv G_0$ has exactly\n$$\\varepsilon_{0,K}=\\varepsilon_KF(\\gamma_K)=c_K,\\qquad \\eta_{0,M}=\\gamma_{FM}^{-1}\\eta_M,$$\nand these maps satisfy both triangle identities. These statements impose no boundedness, constructibility or finite-Tor restriction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "def-kun-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-asd-compactifiable",
+  "lem-kun-inverse-image-monoidal",
+  "def-pur-coefficient-first-compact-projection"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient-first compact projection is the composite of signed tensor symmetry, the existing natural transformation projectionMap, and direct image of signed tensor symmetry. Their naturality gives naturality in K and in W by composition of three squares. Invert the K-naturality square using hP, compose with tensoring t, and use right-unitor naturality. This proves naturality of integrationCounit. Apply Adjunction.homEquiv_naturality_left_square to obtain naturality of integrationTranspose. The identity homEquiv.symm b = F.map b followed by the counit and Equiv.symm_apply_eq give unique counit normalization.",
+   "uses": [
+    "def-pur-coefficient-first-compact-projection",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-sfb-adjunction-transpose-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+   }
+  },
+  {
+   "text": "Write $H=g^*$ and $J=g'^*$, and let $\\mu:H(K\\otimes FW)\\cong HK\\otimes HFW$ be the inverse-image tensor identification. The compact projection/exchange square, with its canonical pullback-square comparison, followed by naturality of $P_{f'}$ in $l:JW\\cong W'$, gives\n$$F'(a_K)C_{G_0K}H(P_{f;K,W})=P_{f';HK,W'}(1_{HK}\\otimes F'(l)C_W)\\mu.$$\nHere the exchange is exactly the proper/open exchange specified in the item, by its compactification normalization. All projection components in this equation are invertible by hypothesis. Compose with their inverses and with $1_{HK}\\otimes t'$; the assumed identity $t'F'(l)C_W=H(t)$ and bifunctoriality of the tensor comparison yield\n$$c'_{HK}F'(a_K)C_{G_0K}=H(c_K),\\qquad c'_{HK}F'(a_K)=H(c_K)C_{G_0K}^{-1}.$$\nThe coefficient-unit identifications and unitors are those understood in the statement.",
+   "uses": [
+    "lem-asd-compact-projection-exchange",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+   }
+  },
+  {
+   "text": "Unfold integrationExceptionalExchange and integrationTranspose, and apply injectivity of the inverse Hom equivalence of the primed adjunction. Naturality of the inverse exchange at integrationTranspose moves F′ J(gamma) across C inverse. Functoriality and unique counit normalization then identify the resulting composite with C inverse followed by H(c). Step 2 identifies this with F′(a) followed by c′, proving the asserted transpose equality.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+   }
+  },
+  {
+   "text": "If the two gamma families are isomorphisms, the equality just proved gives $e_K=\\gamma'_{HK}a_K(J\\gamma_K)^{-1}$. Every factor is invertible: $a_K$ is the prescribed tensor/pullback isomorphism followed by $l$, and a functor sends an inverse to an inverse. Thus $e_K$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+   }
+  },
+  {
+   "text": "Use Mathlib Adjunction.ofNatIsoRight on the actual adjunction and gamma.symm. Its counit component is F(gamma) followed by the original counit, and its unit component is the original unit followed by gamma inverse at F(M). The hypothesis identifying gamma.hom with integrationTransposeNatTrans and unique counit normalization identify the transported counit with integrationCounit.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+   }
+  },
+  {
+   "text": "Apply the left_triangle_components and right_triangle_components identities of the transported adjunction of Step 5. Rewrite its unit with Adjunction.ofNatIsoRight_unit and its counit with the normalization from Step 5. These give precisely both displayed triangles on the actual maps, for arbitrary unbounded objects.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coefficient-first-compact-projection",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-sfb-adjunction-transpose-square",
+  "lem-asd-compact-projection-exchange",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraphs 1–2, expanding transposition of trace equalities; Lean implementation by K5 uses the existing compact projection/exchange theorem, tensor comparison right unitality, and Mathlib homEquiv/ofNatIsoRight component identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integration normalized adjunction transported along an isomorphism preserves units counits and base change mates",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.Equivalence.adjointifyη; CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateEquiv_iso; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.Equivalence.adjointify_η_ε_assoc; CategoryTheory.conjugateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": " | loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Nn]atur|[Nn]atur.*mate|adjunction.*[Oo]f.*[Ii]so",
+   "results": "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula and a base change equality of traces imply equality of their right adjoint transposes",
+   "results": "LinearMap.trace_comp_comm; LinearMap.trace_comp_comm'; Algebra.trace_comp_trace_of_basis; LinearMap.trace_baseChange; LinearMap.trace_comp_cycle; Algebra.trace_comp_trace; LinearMap.trace_comp_cycle'; LinearMap.traceAux_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration trace projection formula base change adjunction transpose",
+   "results": "TopCat.Presheaf.pushforwardToOfIso; LinearMap.trace_baseChange; Algebra.intTrace; IsBaseChange.toDual_apply; Algebra.traceMatrix_of_matrix_vecMul; Algebra.algebraMap_intTrace; LinearMap.trace_transpose'; Algebra.intTraceAux",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*[Bb]aseChange|[Bb]aseChange.*projectionMap|ofNatIsoRight",
+   "results": "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean; Mathlib/CategoryTheory/Adjunction/Opposites.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction results are constituent tools only; no hit states the integration/projection/base-change assertion on ordinary etale derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula compatibility with compact support base change in unbounded derived categories of etale sheaves",
+   "results": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; TopCat.Presheaf.SheafConditionEqualizerProducts.res_π; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; SheafOfModules.sheafificationCompPullback; CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.mk'; CategoryTheory.Limits.piComparison_comp_π",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction results are constituent tools only; no hit states the integration/projection/base-change assertion on ordinary etale derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": "CategoryTheory.Adjunction.mkOfHomEquiv; CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.homEquiv'; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction results are constituent tools only; no hit states the integration/projection/base-change assertion on ordinary etale derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived pushforward projection map commutes with base change and traces transpose under adjunction",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.ExponentiableMorphism.pushforwardComp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction results are constituent tools only; no hit states the integration/projection/base-change assertion on ordinary etale derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change square of compact support projection formula maps transports an integration trace to its exceptional adjoint transpose",
+   "results": "IsBaseChange.of_comp; IsBaseChange.comp; CompactlySupportedContinuousMap.compLinearMap; IsBaseChange.comp_iff; CompactlySupportedContinuousMap.integralLinearMap_apply; IsBaseChange.transvection; IsBaseChange.toDual_comp_apply; LinearMap.trace_baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction results are constituent tools only; no hit states the integration/projection/base-change assertion on ordinary etale derived categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-vector-bundle-purity",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-integration-transpose-base-change",
+  "worker": "stage1",
+  "summary": "Reused the existing ordinary-etale compact projection/exchange square and Mathlib adjunction leaves. Expanded the trace square into a counit equality, computed both transposes, and gave the naturality, unique normalization, transported Hom bijections and both triangle calculations. No new nodes and no change to the statement.",
+  "blueprint": "cor-pur-vector-bundle-purity.proof.md paragraphs 1–2: actual counit normalization and final sentence “Transposing these equalities proves all the claimed compatibilities.”",
+  "tool_uses": [
+   {
+    "node": "lem-asd-compact-projection-exchange",
+    "why": "Generic compactification projection/exchange square on arbitrary ordinary-etale complexes; the unit does not provide another factor-level square."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Identifies the chosen exchange with the compactification-independent natural proper/open exchange."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic bifunctorial tensor comparison for exact ordinary-etale inverse image."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Specifies the canonical proper projection component used in the compactification map."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Naturality of the canonical open tensor factor used in that compactification map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-compact-projection-exchange",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-b76bc9cae",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-b76bc9cae (reviewer sub-agent of L); spot-checked: Read in full, against the parent cor-pur-vector-bundle-purity (statement and steps 1–2) and blueprint main-20261015 cor-pur-vector-bundle-purity.proof.md paragraphs 1–2 ('Transposing these equalities…'). 0 new nodes; statement unchanged by the worker. I checked every step algebraically. Step 1: P is natural in K, so u c_K = c_L F(G_0u); γ=Φ(c) with uniqueness from eq_unit_comp_map_iff and naturality from the transpose-square leaf. Step 2: lem-asd-compact-projection-exchange with Q=K, M=W, v=g; its b equals C of lem-amb-unbounded-compact-support-comparisons by the compactification normalization; postcomposing F'(1⊗l), inverting P' and applying 1⊗t' gives c'F'(a)C = H(c) after cancelling H(P). Step 3: the mateEquiv_counit leaf plus naturality of C give ε'F'(eJγ) = ε'F'(γ'a), and injectivity of the Hom bijection gives the equation. Step 4 inverts. Step 5: mkOfHomEquiv gives η_0 = γ^{-1}η and ε_0 = c. Step 6: both triangles recomputed. The parent's orientation g'^*γ≫e = a≫γ' matches; e invertibility is conditional on both γ families being isomorphisms. Edge cases: g=id, empty X, W=0. Route: sk-prop-sf-cbc and sk-def-sf-operations are on sk-prop-an's route. Accepted tool_use: lem-kun-inverse-image-monoidal (generic Stacks 07A4). review_split's 'no such node' errors are a symlink artifact; every cited node exists. Duplicate search: lem-pur-trace-transpose-base-change is pro-étale D^b_c with ω_f, so not the same statement; siblings -composition and -scalar-mate cover other clauses. FIX: the item statement now cites [def-asd-compactifiable] for 'compactifiable' and [lem-kun-inverse-image-monoidal] for the tensor/pullback comparison in a_K; both were added to stmt_deps and create no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegrationTransposeBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.integrationTranspose_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.integrationTwistedFunctor",
+   "AlgebraicGeometry.Etale.integrationCounit",
+   "AlgebraicGeometry.Etale.integrationTranspose",
+   "AlgebraicGeometry.Etale.integrationTranspose_naturality",
+   "AlgebraicGeometry.Etale.integrationTransposeNatTrans",
+   "AlgebraicGeometry.Etale.integrationTranspose_unique",
+   "AlgebraicGeometry.Etale.integrationTranspose_transport",
+   "AlgebraicGeometry.Etale.integrationExchangeIso",
+   "AlgebraicGeometry.Etale.integrationTensorBaseChangeIso",
+   "AlgebraicGeometry.Etale.integrationExceptionalExchange",
+   "AlgebraicGeometry.Etale.integrationTranspose_baseChange"
+  ],
+  "file": "lean/Sheaf/Paper/IntegrationTransposeBaseChange.lean",
+  "statement": "theorem integrationTranspose_baseChange {X X' Y Y' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X'] [IsNoetherian Y] [IsNoetherian Y'] {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) (R : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X) (R' : DerivedCategoryModule A Y' ⥤ DerivedCategoryModule A X') (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣ R) (adj' : rightDerivedLowerShriek (ModuleCat.{u + 1} A) f' ⊣ R') (W : DerivedCategoryModule A X) (W' : DerivedCategoryModule A X') (l : (upperStar (ModuleCat.{u + 1} A) g').leftDerivedFunctor.obj W ≅ W') (t : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj W ⟶ 𝟙_ _) (t' : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').obj W' ⟶ 𝟙_ _) (ht : (integrationExchangeIso A sq).hom.app W ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f').map l.hom ≫ t' = (upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.map t ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom) (hP : ∀ K : DerivedCategoryModule A Y, IsIso (compactProjectionMapCoeffFirst A f K W)) (hP' : ∀ L : DerivedCategoryModule A Y', IsIso (compactProjectionMapCoeffFirst A f' L W')) (K : DerivedCategoryModule A Y) : ((upperStar (ModuleCat.{u + 1} A) g').leftDerivedFunctor.map (integrationTranspose A f R adj W t hP K) ≫ integrationExceptionalExchange A sq R R' adj adj' K = (integrationTensorBaseChangeIso A sq W W' l K).hom ≫ integrationTranspose A f' R' adj' W' t' hP' ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K)) ∧ ((∀ M : DerivedCategoryModule A Y, IsIso (integrationTranspose A f R adj W t hP M)) → (∀ L : DerivedCategoryModule A Y', IsIso (integrationTranspose A f' R' adj' W' t' hP' L)) → IsIso (integrationExceptionalExchange A sq R R' adj adj' K))",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses are recorded by integrationTranspose_naturality, integrationTranspose_unique, integrationTranspose_transport, and integrationTranspose_baseChange. Helpers explicitly construct G0, c, gamma, the normalized exchange, tensor/pullback comparison and exceptional exchange. Derived inverse image is canonically the exact inverse image through leftDerivedUpperStarIsoMapDerivedCategory. The new existing:true definition node def-pur-coefficient-first-compact-projection records compactProjectionMapCoeffFirst, reused verbatim. The exchange theorem remains solely a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6077a140f",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at a10a832a. The item Lean file is byte-identical. The item node changes only stmt_deps: lem-asd-compact-projection-exchange is replaced by the new def node def-pur-coefficient-first-compact-projection, and the theorem stays in proof_deps. Against live, the only stmt_deps change is adding that node. The new node is existing:true on the unchanged module CompactProjectionExchange; the record signature matches compactProjectionMapCoeffFirst verbatim (noncomputable prefix gives only a note). Its body (σ ≫ projectionMap ≫ Rf_!σ, with projectionMapOfCompactification = proper projection, inverse open comparison, pullback-composition iso) matches the node TeX. H12 fields are all correct (status split, three search kinds, created/blueprint/lean_audit, indent=1 layout). Its stmt_deps all exist and are upstream, so there is no cycle, and no competing owner exists. The item statement was re-checked against the node: hypotheses, C, ht, hP/hP', G0/c/γ/a/e, main equation, conditional iso, naturality, uniqueness, transport with both triangles. No hollow defs, all proofs sorry, no pro-étale substitute; edge cases covered. Advisory only: base-era theorem-node owners of C and the monoidal comparison. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261024T190238-L-4003865",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-finite-source-chart-scalar-transition",
+ "kind": "statement",
+ "title": "Uniform scalar transition between primitive-root source charts",
+ "statement": "Fix the finite purity setting P [def-pur-conventions], with algebraically closed base field k, coefficient prime ell distinct from its characteristic, coefficient ring A=O_E/(varpi_E^n), n>=1, and N=ell^n. Let d be a nonnegative integer and let zeta and eta be primitive N-th roots in k. Use the specified source charts t_zeta(f,K): Lf^*K(d)[2d] ≅ (Lf^*K)[2d] of [def-pur-finite-reduction-root-charts], on the intrinsic small pro-etale derived categories. There is one natural number r, independent of schemes, morphisms and complexes, such that for every k-scheme X, every scheme Y, every morphism f:X→Y and every intrinsic complex K on Y, t_zeta(f,K)^{-1} followed by t_eta(f,K) is r times the identity of (Lf^*K)[2d]. Scalar multiplication here is repeated addition of a morphism. No finiteness or separatedness of X,Y,f and no boundedness of K are required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/def-pur-smooth-pullback-exchange.md",
+  "place": "Middle identification in the displayed composite, expanded using the root charts of def-pur-finite-reduction-root-charts; agent calculation of the change of root."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-reduction-root-charts"
+ ],
+ "proof": [
+  {
+   "text": "Put N = ell^n. The two primitive roots generate the same cyclic roots group. Write eta=zeta^a with a prime to N, and choose c with ac=1 modulo N. On constant scalar generators, the root-line trivialization at eta is a times the one at zeta, by the section formula of def-pur-finite-reduction-root-charts and the primitive-root basis lem-pur-primitive-root-etale-basis. Since N annihilates the coefficient ring, their inverses differ by c.",
+   "uses": [
+    "def-pur-finite-reduction-root-charts",
+    "lem-pur-primitive-root-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the actual ordered tensor recursion of def-pur-finite-reduction-chart-calculus to these inverse shifted degree-one charts. Its zero term is unchanged and its successor is bilinear, so induction gives scalar c^d. The reassociation and unit factors do not involve roots. Exact comparison pullback, shift, tensoring with the arbitrary pulled-back complex, and coefficient realization are additive and preserve this natural-number multiple. Thus every source chart at eta is c^d times its chart at zeta. Composing with the inverse zeta chart proves the assertion with r=c^d, simultaneously in the scheme, morphism and complex. At d=0 this is 1; empty schemes and zero objects obey the same identity.",
+   "uses": [
+    "def-pur-finite-reduction-chart-calculus",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-root-charts",
+  "lem-pur-primitive-root-etale-basis",
+  "def-pur-finite-reduction-chart-calculus"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "V6",
+  "date": "2026-10-25",
+  "source": "Explicit scalar calculation of the specified primitive-root charts for the middle identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Changing a primitive root rescales the trivialization of its Tate tensor power by the inverse scalar power uniformly in a sheaf complex",
+   "results": "Eight hits: cyclotomic character specifications and representation-theoretic tensor isomorphisms; none states the sheaf source-chart transition.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing the primitive root of unity rescales the Tate source trivialization by the same scalar on every complex",
+   "results": "Eight hits, including IsPrimitiveRoot.primitiveRootsPowEquivOfCoprime and cyclotomic character specifications; no source-chart transition.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_nsmul",
+   "results": "One hit: CategoryTheory.Functor.map_nsmul, which transports an already known scalar equation only.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "RootTrivialization|SourceTrivialization",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothPullbackExchange",
+  "date": "2026-10-25",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-smooth-pullback-exchange",
+   "place": "Middle identification in the displayed inverse-purity/source/purity composite, root-chart independence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSourceChartScalarTransition",
+  "file": "lean/Sheaf/Paper/FiniteSourceChartScalarTransition.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.exists_finiteReductionSourceChartScalar",
+  "statement": "theorem exists_finiteReductionSourceChartScalar (P : PurityFiniteSetting.{u})\n    (d : ℕ) (ζ η : P.field.k)\n    (hζ : IsPrimitiveRoot ζ P.diagonalExponent)\n    (hη : IsPrimitiveRoot η P.diagonalExponent) :\n    ∃ r : ℕ, ∀ {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))]\n      (f : X ⟶ Y) (K : Scheme.proEtaleDerivedCategory Y P.Ring),\n      (P.finiteReductionSourceTrivialization f d ζ hζ K).inv ≫\n        (P.finiteReductionSourceTrivialization f d η hη K).hom =\n          r • 𝟙 (((P.finiteReductionPullback f).obj K)⟦2 * (d : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T101650-L-3720342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T101650-L-3720342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

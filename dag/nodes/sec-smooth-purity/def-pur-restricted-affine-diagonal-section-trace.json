@@ -1,0 +1,136 @@
+{
+ "id": "def-pur-restricted-affine-diagonal-section-trace",
+ "kind": "definition",
+ "title": "Actual integration on the restricted affine diagonal section",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], a finite-type quasi-compact k-scheme Y, d in N, the smooth ordered affine projection p:A^d_Y to Y [def-amb-affine-trace-tower], an affine open V of Y, and affine diagonal geometry H [lem-pur-diagonal-orientation-refinement]. Put B=p inverse V, h=p restricted to V, g=pr1:B times_V B to B, and s=diagonal h. The pasted self-product and open-restriction squares and the affine-tower square present W=B times_V B and A^d_B as limits of the same cospan p, h followed by V inclusion. Define e:W isomorphic to A^d_B as their unique limit comparison; e followed by q equals g. Put r=s followed by e. For any normalized finite twist transport t and P1 family D [def-asd-ordinary-finite-p1-arrows, def-asd-ordinary-finite-p1-data], take the actual affine counit mate m_B for q over B [def-pur-diagonal-dualizing-data]. Convert its A[0] endpoint to the tensor-unit endpoint using unitChange inverse, pull to r, and precompose inverse canonical Tate pullback. Follow with inverse identity pullback and the canonical section base-change isomorphism for e over id_B. Apply nu_B and inverse sourceComparison. The resulting S:A_B(d)[2d] to C(g,s) is restrictedAffineDiagonalSectionTrace. No DNC, alpha, rho, or arbitrary existence witness occurs in this construction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: the self-product and the actual ordered integration on its trivial bundle"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-counit-comparison-data",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-amb-affine-trace-tower",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof": [
+  {
+   "text": "Paste the self-product pullback with the target-open square and compare it with the affine tower pullback. Mathlib IsPullback.isoIsPullback constructs e and isoIsPullback_hom_snd proves its projection equation.",
+   "uses": [
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual counit transpose over B, the canonical Tate and section base-change comparisons, and the inverse source-site comparison to form the displayed composite. All geometry witnesses are proofs from H or smoothness transported along e.",
+   "uses": [
+    "def-pur-diagonal-counit-comparison-data",
+    "def-pur-diagonal-dualizing-data",
+    "lem-pur-diagonal-orientation-refinement",
+    "def-amb-affine-trace-tower",
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-asd-ordinary-finite-p1-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-linear-trace-action",
+  "def-pur-diagonal-counit-comparison-data",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-amb-affine-trace-tower",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: the self-product and the actual ordered integration on its trivial bundle"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "section restriction of affine integration commutes with deformation to normal cone",
+   "results": "8 hits about scheme normalization and ideal-sheaf gluing; none concerns exceptional adjoints or DNC integration.",
+   "date": "2026-10-26",
+   "verdict": "No matching geometric integration identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoIsPullback",
+   "results": "9 hits: isoIsPullback and its two projection equations, their inverse versions, and reassociated forms.",
+   "date": "2026-10-26",
+   "verdict": "Used to construct the coordinates; no integration or DNC identity."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionInvariant|affineTraceCounit|Dnc",
+   "results": "msearch found 0 Mathlib hits. Project rg found the affine-diagonal calculations, but their import closure reaches this item through VectorIntegrationSiteComparison and PurityDiagonalDualizingObject.",
+   "date": "2026-10-26",
+   "verdict": "No independent duplicate of the two equations with the newly constructed local section trace."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncAffineModel",
+  "date": "2026-10-26",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: the self-product and the actual ordered integration on its trivial bundle",
+   "via": [
+    "lem-pur-diagonal-dnc-affine-model",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictedAffineDiagonalSectionTrace",
+  "file": "lean/Sheaf/Paper/RestrictedAffineDiagonalSectionTrace.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.OrientationCounit.restrictedAffineDiagonalSectionTrace",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.restrictedAffineDiagonalSectionTrace",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.restrictedAffineDiagonalCoordinates",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.restrictedAffineDiagonalCoordinates_over"
+  ],
+  "statement": "def restrictedAffineDiagonalSectionTrace (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (d : ℕ)\n    [SmoothOfRelativeDimension d (affineTraceProjection Y d)]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens)\n    (H : P.AffineDiagonalGeometry (affineTraceProjection Y d) aY d V)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t T hT) :\n    P.diagonalTwist (affineTraceProjection Y d ⁻¹ᵁ V.1).toScheme d ⟶\n      OrientationRefinement.source P (affineTraceProjection Y d) aY d V H",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261026T183327-L-3711903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261026T183327-L-3711903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

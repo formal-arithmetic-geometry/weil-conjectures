@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-integral-nodal-picard-normalization-action",
+ "kind": "statement",
+ "title": "Picard-trivial automorphisms fix the normalized branches of an integral nodal curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $Y/k$ be an integral projective curve having only nodes [def-pc-integral-scheme, def-kun-projective, def-trf-nodal-geometric-fibres], and let $\\nu:\\widetilde Y\\to Y$ be its normalization [def-sc-normalization]. Then $\\widetilde Y$ is a smooth projective connected curve. Define $\\operatorname{Pic}^0(Y)$ to consist of the invertible sheaf classes [def-sc-invertible-module] of degree zero after pullback to $\\widetilde Y$; on $\\widetilde Y$ use ordinary degree zero. Every $k$-automorphism $b$ of $Y$ has a unique lift $\\widetilde b$ to $\\widetilde Y$ with $\\nu\\widetilde b=b\\nu$. If $b^*$ is the identity on $\\operatorname{Pic}^0(Y)$, then $\\widetilde b^*$ is the identity on $\\operatorname{Pic}^0(\\widetilde Y)$ and $\\widetilde b$ fixes individually every point of $\\nu^{-1}(\\operatorname{Sing}Y)$. More precisely, $\\nu^*:\\operatorname{Pic}^0(Y)\\to\\operatorname{Pic}^0(\\widetilde Y)$ is surjective, and for each node $q$ with an ordering $(p_q^-,p_q^+)$ of its two inverse images, gluing the trivial sheaf with scalar $z\\in k^*$ at $q$, and scalar $1$ at all other nodes, defines an injective homomorphism $j_{q,(p_q^-,p_q^+)}:k^*\\to\\operatorname{Pic}^0(Y)$. All these homomorphisms, including the two opposite orderings at each node, are pairwise distinct, and pullback by $b$ permutes them according to its action on the ordered inverse-image pairs.",
+ "source": {
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "Proof of Lemma 1.15, printed p.85, ordered-branch gluing homomorphisms. Stacks curves.tex Tag 0C1M, lemma-glue-points, iterated over self-nodes. No genus bound is needed for this normalization assertion. Local PDF WANTED; primary PDF read online.",
+  "url": "https://www.numdam.org/item/PMIHES_1969__36__75_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-invertible-module",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-trf-nodal-geometric-fibres",
+  "def-sc-normalization",
+  "def-pc-degree-line-bundle",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-kun-projective-implies-proper], $Y$ is proper. Apply [lem-sfb-nodal-completed-normalization-model]: an integral curve is nonempty, reduced and pure one-dimensional, and its nodes have the completed rings stipulated there. Write $E=\\operatorname{Sing}Y$. We obtain finite $E$, finite normalization, two distinct $k$-points $p_e^-,p_e^+$ over each $e$, and an isomorphism away from $E$. The normalization of an integral scheme is integral: its affine rings are the integral closures inside its single function field, hence domains, with the same generic point, by [def-sc-normalization]. Thus it has one connected component. The cited completed-model statement makes this component a smooth projective connected curve.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-nodal-completed-normalization-model",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E68 (lemma-nodal-vector-fields), normalization setup; split branches also Tag 0CBW (lemma-split-node)."
+   }
+  },
+  {
+   "text": "Construct the lift directly from [def-sc-normalization]. On an affine $U=\\operatorname{Spec}A\\subset Y$, $b$ identifies $b^{-1}U$ with $U$ and their fraction fields. Applying the field isomorphism to a monic equation identifies their integral-closure rings; its inverse does the reverse. These maps commute with restrictions and so define an isomorphism $\\widetilde b$ with $\\nu\\widetilde b=b\\nu$. Any other lift has the same function-field map, since $\\nu$ is the identity there. The integral-closure rings inject into this field, so its affine maps coincide with these. This proves uniqueness among all lifts. In particular $\\widetilde b$ takes the pair over $e$ to the pair over $b(e)$.",
+   "uses": [
+    "def-sc-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), affine integral-closure construction, directly applied to isomorphisms."
+   }
+  },
+  {
+   "text": "Fix $e\\in E$ and put $A=\\mathcal O_{Y,e}$, $B=(\\nu_*\\mathcal O_{\\widetilde Y})_e$. By [lem-sfb-nodal-completed-normalization-model], $A$ is Noetherian and $B\\otimes_A\\widehat A=k[[u]]\\times k[[v]]$, with the two residues given by constant terms. The complex $0\\to A\\to B\\xrightarrow{d_e}k\\to0$, $d_e(h)=h(p_e^+)-h(p_e^-)$, becomes exact after completion: its kernel is the pairs with equal constant terms, precisely the image of $k[[u,v]]/(uv)$, and $(0,c)$ maps to $c$. Completion is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat]. Flat tensor exactness [lem-weil-pbc-flat-tensor-exact] identifies each homology defect after tensoring with that of the completed complex; [lem-sc-faithfully-flat-tensor-zero] makes each original defect zero. Also $\\mathfrak m_AB$ is the ideal of the two reduced points: after completion both it and the kernel of $B\\to k\\times k$ become $(u)\\times(v)$. Their quotient is zero by the same flatness and zero-reflection argument. Away from $E$, $\\nu$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sc-faithfully-flat-tensor-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1J (example-glue-points), additive difference sequence; Tag 0CBW (lemma-split-node); descent from the cited completed model."
+   }
+  },
+  {
+   "text": "Give $Z=\\coprod_{e\\in E}\\operatorname{Spec}k\\hookrightarrow Y$ its reduced structure. Step 3 identifies $Z'=\\widetilde Y\\times_YZ$ with the two reduced branch points per node and identifies $\\mathcal O_Y$ with normalized functions whose paired residues agree. This verifies the affine fibre-product hypotheses of [lem-sfb-finite-pinching-invertible-patching]. Explicitly, for affine $U\\subset Y$, put $R=\\Gamma(U,\\mathcal O_Y)$, $A'=\\Gamma(\\nu^{-1}U,\\mathcal O)$, $B'=\\prod_{e\\in E\\cap U}k$, $F=\\prod_{e\\in E\\cap U}(k\\times k)$. Then $R=A'\\times_FB'$ by the equality of sheaves in Step 3, with $B'\\to F$ diagonal in each pair. The map $A'\\to F$ is surjective: the branch maximal ideals are pairwise comaximal; for each branch $p$ multiply elements that are $1$ modulo its ideal and $0$ modulo each other branch ideal, then sum these products with the desired residues. The cited equivalence, eliminating the line on each node, now describes a line bundle on $Y$ by a line bundle $M$ on $\\widetilde Y$ and isomorphisms $\\lambda_e:M_{p_e^-}\\to M_{p_e^+}$. Morphisms are isomorphisms of $M$ commuting with every $\\lambda_e$; tensor multiplies identifications.",
+   "uses": [
+    "lem-sfb-finite-pinching-invertible-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2J (lemma-finitely-presented-module-over-fibre-product), applied by the cited pinching lemma; curves.tex Tag 0C1J (example-glue-points)."
+   }
+  },
+  {
+   "text": "For any line bundle $M$ on $\\widetilde Y$, choose a nonzero vector in each of its finitely many branch fibres. These are one-dimensional $k$-vector spaces, so the selected vectors give the $\\lambda_e$ of Step 4 and a line bundle $L$ on $Y$ with $\\nu^*L\\simeq M$. Thus pullback is surjective on Picard groups. If $M$ has degree zero then this same $L$ is in $\\operatorname{Pic}^0(Y)$ by its definition in the statement. This proves the asserted surjectivity on $\\operatorname{Pic}^0$, without passing from a sheaf epimorphism to rational points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), surjectivity, explicitly obtained from Step 4."
+   }
+  },
+  {
+   "text": "Take $M=\\mathcal O_{\\widetilde Y}$ and let $\\lambda_e$ be multiplication by $a_e\\in k^*$. Step 4 gives a homomorphism $J:(k^*)^E\\to\\operatorname{Pic}^0(Y)$: pullback is trivial and tensor multiplies parameters. By [lem-sc-global-functions], every automorphism of $\\mathcal O_{\\widetilde Y}$ is multiplication by a single $c\\in k^*$, since $\\widetilde Y$ is reduced, proper and connected. An isomorphism from the data $(a_e)$ to $(a'_e)$ must satisfy $ca_e=a'_ec$ for every $e$, forcing $a_e=a'_e$. Conversely equal tuples give equal data. Hence $J$ is injective, and its coordinate homomorphism at $e$ is exactly $j_{e,(p_e^-,p_e^+)}$ of the statement.",
+   "uses": [
+    "lem-sc-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), global-unit quotient and injectivity on the same proper connected component."
+   }
+  },
+  {
+   "text": "Reversing the ordering at $e$ replaces $\\lambda_e$ by its inverse, so the opposite-ordering map is $z\\mapsto J((1,\\ldots,z^{-1},\\ldots,1))$. Choose a root $z$ of $T^3-T-1$ using [def-weil-algebraic-closure]. Then $z(z^2-1)=1$, so $z\\in k^*$ and $z\\ne z^{-1}$ in every characteristic. Injectivity of $J$ distinguishes the two maps at one node by evaluation at $z$, and distinguishes maps at different nodes by their different nontrivial coordinates, regardless of ordering. All the homomorphisms in the statement are therefore pairwise distinct.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1M (lemma-glue-points), scalar gluing; direct coordinate calculation of distinct ordered-branch maps."
+   }
+  },
+  {
+   "text": "Pulling back the gluing data by $b$ places scalar $z$ at $(\\widetilde b^{-1}p_e^-,\\widetilde b^{-1}p_e^+)$ over $b^{-1}e$ and scalar $1$ elsewhere: pull back the two fibre maps, using that $b$ fixes $k$ and that the trivial normalized sheaf has its canonical section $1$. Thus\n$$b^*j_{e,(p_e^-,p_e^+)}=j_{b^{-1}e,(\\widetilde b^{-1}p_e^-,\\widetilde b^{-1}p_e^+)}.$$\nThe two bundles are identified by the fully faithful pullback equivalence of [lem-sfb-finite-pinching-invertible-patching], since their pulled-back triples agree. If $b^*$ is the identity on $\\operatorname{Pic}^0(Y)$, Step 7 forces this ordered pair to equal $(p_e^-,p_e^+)$. This fixes both points individually for every node.",
+   "uses": [
+    "lem-sfb-finite-pinching-invertible-patching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1J (example-glue-points), pullback of branch identifications; explicit contravariant permutation."
+   }
+  },
+  {
+   "text": "An isomorphism of proper curves preserves degree [def-pc-degree-line-bundle]: its pullback equivalence identifies each coherent cohomology vector space, hence their alternating dimensions. Thus $b^*$ and $\\widetilde b^*$ preserve the degree-zero groups in the statement. For $[M]\\in\\operatorname{Pic}^0(\\widetilde Y)$, choose $[L]\\in\\operatorname{Pic}^0(Y)$ mapping to it by Step 5. From $\\nu\\widetilde b=b\\nu$ and composition of module pullbacks,\n$$\\widetilde b^*[M]=\\widetilde b^*\\nu^*[L]=\\nu^*b^*[L]=\\nu^*[L]=[M].$$\nThis proves the remaining assertion. If $E$ is empty, all gluing data are empty, all branch claims are vacuous, and the same argument applies.",
+   "uses": [
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYR (definition-degree-invertible-sheaf), invariance under isomorphism and pullback composition; agent assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-nodal-completed-normalization-model",
+  "def-sc-normalization",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-sfb-finite-pinching-invertible-patching",
+  "lem-sc-global-functions",
+  "def-weil-algebraic-closure",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C1J (example-glue-points), 0C1M (lemma-glue-points), 0CBW (lemma-split-node); explicit multi-node patching and ordered-pair argument following Deligne--Mumford Lemma 1.15, printed p.85 (local PDF wanted)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an integral projective nodal curve an automorphism trivial on Picard zero lifts to normalization and fixes both branches over every node pointwise",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the normalization morphism of the composite morphism $ i_V \\\\circ f $, followed by the right inclusion into the coproduct and the hom-component of the normalization coproduct isomorp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the normalization morphism from $ X $, followed by the left inclusion into the binary coproduct of normalizations, and then the coproduct isomorphism, equals the original morphism c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the morphism $ i_U $, the normalization map $ f.\\\\text{toNormalization} $, and the inverse of the normalization coproduct isomorphism equals the composition of $ i_U \\\\circ f $'s norm\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the morphism $ i_V $ with the normalization map $ f.\\\\text{toNormalization} $ and the inverse of the normalization coproduct isomorphism equals the composition of $ i_V \\\\circ f $ wit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"For schemes $X, Y, T, Z$ and morphisms $f: X \\to Y$, $f₁: X \\to T$, $f₂: T \\to Y$ (with $f₂$ integral), the composition of the normalization morphism $X \\to \\text{Normalization}(f)$ with the normalization \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme normalization constructions and ring Picard exactness do not identify node gluing subgroups or recover ordered branches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme normalization constructions and ring Picard exactness do not identify node gluing subgroups or recover ordered branches."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*Picard|Picard.*normalization|nodal.*branch",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme normalization constructions and ring Picard exactness do not identify node gluing subgroups or recover ordered branches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The gluing one parameter subgroups for ordered branches of distinct nodes of an integral curve are distinct",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData.mk.noConfusion\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {P : Sort u_1} →\\n      {toGlueData : CategoryTheory.GlueData (AlgebraicGeometry.SheafedSpace C)} →\\n        {f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.SheafedSpace.IsOpenImmersion (toGlueData.f i j)} →\\n          {toGlueData' : \", \"doc\": \"A mechanism ensuring distinctness of different gluing data constructions by case analysis, leveraging the inductive structure of sheafed space gluing data to prevent equality between terms constructed\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData.noConfusion\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{P : Sort u_1} →\\n  {C : Type u} →\\n    {inst : CategoryTheory.Category.{v, u} C} →\\n      {t : AlgebraicGeometry.SheafedSpace.GlueData C} →\\n        {C' : Type u} →\\n          {inst' : CategoryTheory.Category.{v, u} C'} →\\n            {t' : AlgebraicGeometry.SheafedSpace.GlueData C'} →\\n              C = \", \"doc\": \"A mechanism ensuring distinctness of different gluing data constructions by case analysis, leveraging the inductive structure of sheafed space gluing data to prevent equality between terms constructed\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"{P : Sort u} →\\n  {toGlueData : CategoryTheory.GlueData AlgebraicGeometry.Scheme} →\\n    {f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.IsOpenImmersion (toGlueData.f i j)} →\\n      {toGlueData' : CategoryTheory.GlueData AlgebraicGeometry.Scheme} →\\n        {f_open' : ∀ (i j : toGlueData'.J), Algebr\", \"doc\": \"A principle ensuring that two instances of scheme gluing data constructed from distinct category-theoretic gluing data cannot be equal, formally encoding that distinct constructions produce distinct o\"}\n  {\"name\": \"isIntegralCurveOn_piecewise\", \"module\": \"Mathlib.Geometry.Manifold.IntegralCurve.UniformTime\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  {I : ModelWithCorners ℝ E H} {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : IsManifold I 1 M] [T2Space M] {γ γ' : ℝ → M} {v : (x : M) → Tange\", \"doc\": \"Let $ M $ be a boundaryless manifold modeled on a normed vector space $ E $, and let $ v $ be a $ C^1 $-differentiable vector field on $ M $. If $ \\\\gamma $ and $ \\\\gamma' $ are integral curves of $ v $\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData.noConfusionType\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"Sort u_1 →\\n  {C : Type u} →\\n    [inst : CategoryTheory.Category.{v, u} C] →\\n      AlgebraicGeometry.SheafedSpace.GlueData C →\\n        {C' : Type u} →\\n          [inst' : CategoryTheory.Category.{v, u} C'] → AlgebraicGeometry.SheafedSpace.GlueData C' → Sort u_1\", \"doc\": \"A mechanism ensuring distinctness of different gluing data constructions by case analysis, leveraging the inductive structure of sheafed space gluing data to prevent equality between terms constructed\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.RelativeGluing\", \"type\": \"Sort u_3 →\\n  {S : AlgebraicGeometry.Scheme} →\\n    {𝒰 : S.OpenCover} →\\n      [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n        [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n          AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 →\\n            {S' : AlgebraicGeometry.Sch\", \"doc\": \"Given two relative gluing data terms constructed over different schemes or open covers, or with distinct functors/natural transformations, this principle asserts that such data cannot be equal. It for\"}\n  {\"name\": \"isMIntegralCurveOn_piecewise\", \"module\": \"Mathlib.Geometry.Manifold.IntegralCurve.UniformTime\", \"type\": \"[BoundarylessManifold I M] (hv : ContMDiff I I.tangent 1 (fun x ↦ (⟨x, v x⟩ : TangentBundle I M))) {a b a' b' : ℝ}\\n  (hγ : IsMIntegralCurveOn γ v (Ioo a b)) (hγ' : IsMIntegralCurveOn γ' v (Ioo a' b')) {t₀ : ℝ}\\n  (ht₀ : t₀ ∈ Ioo a b ∩ Ioo a' b') (h : γ t₀ = γ' t₀) :\\n  IsMIntegralCurveOn (piecewise (I\", \"doc\": \"If $\\\\gamma$ and $\\\\gamma'$ are integral curves of a vector field $v$ on overlapping open intervals $(a,b)$ and $(a',b')$ respectively, and they agree at a common point $t_0 \\\\in (a,b) \\\\cap (a',b')$, the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"{P : Sort u} →\\n  {t t' : AlgebraicGeometry.Scheme.GlueData} → t = t' → AlgebraicGeometry.Scheme.GlueData.noConfusionType P t t'\", \"doc\": \"A type family that ensures two instances of scheme gluing data constructed from distinct underlying category-theoretic gluing data cannot be equal, formally encoding the principle that distinct constr\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme normalization constructions and ring Picard exactness do not identify node gluing subgroups or recover ordered branches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant normalization exact sequence of Picard groups of an irreducible nodal curve detects each ordered pair of branches",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Units.map ↑(Submodule.spanSingleton R)) ⇑(Submodule.unitsToPic R A)\", \"doc\": \"The composition of the monoid homomorphism from units of $ R $ to invertible submodules of $ A $ (via span of singleton elements) and the homomorphism from invertible submodules to the Picard group $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the normalization morphism of the composite morphism $ i_V \\\\circ f $, followed by the right inclusion into the coproduct and the hom-component of the normalization coproduct isomorp\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme normalization constructions and ring Picard exactness do not identify node gluing subgroups or recover ordered branches."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|pinching|normalization.*[Pp]icard",
+   "results": "{\"t\": \"2026-10-23T11:29:27Z\", \"tool\": \"grep\", \"query\": \"nodal|pinching|normalization.*[Pp]icard\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "gluing.*[Ll]ine|[Ll]ine.*gluing|[Pp]icard.*[Cc]urve",
+   "results": "{\"t\": \"2026-10-23T11:29:27Z\", \"tool\": \"grep\", \"query\": \"gluing.*[Ll]ine|[Ll]ine.*gluing|[Pp]icard.*[Cc]urve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of an integral nodal curve trivial on Picard zero fixes each branch over every node",
+   "results": "{\"t\": \"2026-10-23T11:29:27Z\", \"tool\": \"leansearch\", \"query\": \"An automorphism of an integral nodal curve trivial on Picard zero fixes each branch over every node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_id\", \"WeierstrassCurve.Affine.Point.map_zero\", \"WeierstrassCurve.Affine.Point.toClass_eq_zero\", \"WeierstrassCurve.IsCharTwoJNeZeroNF.a₄\", \"Ideal.ramificationIdx_bot\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"WeierstrassCurve.a₄_of_isCharThreeJNeZeroNF\", \"WeierstrassCurve.Projective.Point.instZeroOfNontrivial\"], \"digest\": \"a2539c16129c8e9f\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-23T11:29:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Picard\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on an integral nodal projective curve are line bundles on its normalization with fibre identifications at pairs of branches",
+   "results": "{\"t\": \"2026-10-23T11:29:32Z\", \"tool\": \"leanfinder\", \"query\": \"Line bundles on an integral nodal projective curve are line bundles on its normalization with fibre identifications at pairs of branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"30221b5ad2e98e71\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of pullback on Picard groups under normalization of an irreducible nodal curve is a product of multiplicative groups",
+   "results": "{\"t\": \"2026-10-23T11:29:33Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of pullback on Picard groups under normalization of an irreducible nodal curve is a product of multiplicative groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic\", \"Submodule.ker_unitsToPic\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"IsDedekindDomain.selmerGroup.valuation_ker_eq\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\"], \"digest\": \"be7ca16d6536fd30\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|pinching|nodal",
+   "results": "{\"t\": \"2026-10-23T11:33:31Z\", \"tool\": \"grep\", \"query\": \"conductor|pinching|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conductor.*[Nn]ormal|[Nn]ormal.*conductor|fibre.*product|fiber.*product",
+   "results": "{\"t\": \"2026-10-23T11:33:31Z\", \"tool\": \"grep\", \"query\": \"conductor.*[Nn]ormal|[Nn]ormal.*conductor|fibre.*product|fiber.*product\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coordinate ring of a nodal curve is the fibre product of its normalization ring and the residue fields of its nodes over the two branch residues",
+   "results": "{\"t\": \"2026-10-23T11:33:31Z\", \"tool\": \"leansearch\", \"query\": \"The coordinate ring of a nodal curve is the fibre product of its normalization ring and the residue fields of its nodes over the two branch residues\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"Ideal.Fiber\", \"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"WeierstrassCurve.Affine.CoordinateRing.coe_basis\", \"AlgebraicGeometry.Scheme.residueField\", \"WeierstrassCurve.Affine.CoordinateRing.basis\"], \"digest\": \"92015ae8ef863faa\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-23T11:33:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced nodal curve the normalization and the reduced singular locus form a conductor fibre product square with two reduced branches per node",
+   "results": "{\"t\": \"2026-10-23T11:33:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced nodal curve the normalization and the reduced singular locus form a conductor fibre product square with two reduced branches per node\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"666bf73089118f84\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functions on a curve with ordinary double points are functions on the normalization with equal values on each pair of branches",
+   "results": "{\"t\": \"2026-10-23T11:33:38Z\", \"tool\": \"leanfinder\", \"query\": \"Functions on a curve with ordinary double points are functions on the normalization with equal values on each pair of branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.Jacobian.NonsingularLift\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"WeierstrassCurve.Projective.Point.nonsingular\"], \"digest\": \"a17dcb0781325a51\"}; Read Normalization.lean:46--84 and PicardGroup.lean:618,742: relative normalization, ring Picard kernels and Weierstrass-point declarations do not describe projective nodal branch gluing. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-action-faithful",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Proof of Lemma 1.15, printed p.85, ordered-branch gluing homomorphisms. Stacks curves.tex Tag 0C1M, lemma-glue-points, iterated over self-nodes. No genus bound is needed for this normalization assertion. Local PDF WANTED; primary PDF read online.",
+   "via": [
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-nodal-picard-normalization-action",
+  "worker": "stage1",
+  "summary": "Checked project declarations, Deligne--Mumford Lemma 1.15 online and local Stacks gluing/patching sources. Reused the existing completed nodal normalization, flatness, pinching and global-functions nodes. Derived all scalar parameters jointly and wrote the contravariant ordered-branch permutation; checked characteristic two and empty node sets. No new node: the fibre-product comparison is a routine application of the existing completed model and faithful flatness. Added the degree definition to statement dependencies.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor); inherited via/place retained. Realizes the normalization and ordered-branch gluing input to stable Picard faithfulness, under det-thm-sf-ctf-stability-direct-images proof (3). Read latest direct-images proof; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective morphisms are proper for the nodal normalization/gluing calculation; this stability unit supplies no replacement curve/algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic the completion of a noetherian local ring is faithfully flat for the nodal normalization/gluing calculation; this stability unit supplies no replacement curve/algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic tensoring with a flat module preserves exact sequences for the nodal normalization/gluing calculation; this stability unit supplies no replacement curve/algebra statement."
+   },
+   {
+    "node": "lem-sc-faithfully-flat-tensor-zero",
+    "why": "Generic faithfully flat tensor reflects vanishing of modules for the nodal normalization/gluing calculation; this stability unit supplies no replacement curve/algebra statement."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic global functions on a proper curve for the nodal normalization/gluing calculation; this stability unit supplies no replacement curve/algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-sc-global-functions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-353f6de19",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-353f6de19 (reviewer sub-agent of L); spot-checked: PASS with no fixes and no new nodes. The item statement is byte-identical to the copy created by Q118; the only change is the added stmt_dep def-pc-degree-line-bundle, which 'ordinary degree zero' needs. proof_deps equals the union of the step uses. The parent lem-sfb-stable-picard-action-faithful uses exactly what the statement provides. Route: Stacks curves.tex Tag 0C1M (l.3106), the unit sequence with H^0(O^*)=k^* on a proper reduced connected curve, iterated over the self-nodes through lem-sfb-finite-pinching-invertible-patching. The Deligne-Mumford 1.15 PDF is not in the local literature and could not be checked; the Stacks route covers the mathematics. Steps: (1) the hypotheses of the nodal completed-normalization model hold, its reduced normalization agrees with def-sc-normalization for integral Y, and integral implies one component. (2) The lift comes from integral-closure functoriality; it is unique because any lift preserves the generic point and the affine rings inject into K. (3) 0->A->B->k->0 is exact via completion to k[[u]]xk[[v]], flatness and faithfully-flat zero reflection; m_A B is the ideal of the two branch points. (4) The patching hypotheses hold: R=A'x_F B' from the sheaf kernel, A'->F onto by CRT, and N is eliminated to lambda_e. (5) Pic^0 surjectivity comes from arbitrary lambda_e and does not go through the fppf sheaf sequence. (6) J:(k^*)^E->Pic^0 is injective because Aut(O)=k^* by lem-sc-global-functions. (7) A root z of T^3-T-1 gives z^2!=1 in every characteristic, so all ordered-node homomorphisms are distinct. (8) b^*j_{e,(p-,p+)} = j_{b^-1 e,(b~^-1 p-, b~^-1 p+)}, so Pic-trivial b fixes each ordered pair. (9) Degree is invariant under isomorphism, and b~^*nu^*=nu^*b^* with Step 5 gives b~^*=id. Edge cases checked: no nodes, one rational self-node (the branch swap acts by inversion), several nodes, characteristic 2. Not duplicates: nodal-normalization-picard-sequence (fppf sheaf sequence) and nodal-component-picard-gluing (intercomponent nodes). Batch-5 flags: lem-trf-curve-normalization-completion is generic commutative algebra (normalization and completion of a 1-dimensional local ring) and def-trf-schematically-dense-open is a general definition; neither belongs to the trace formula or Poincare duality, so both are accepted. The five declared generic tool_uses are accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralNodalPicardNormalizationAction",
+  "declaration": "AlgebraicGeometry.integral_nodal_picard_normalization_action",
+  "declarations": [
+   "AlgebraicGeometry.NodalOrderedBranch",
+   "AlgebraicGeometry.nodalFibreTrivialization",
+   "AlgebraicGeometry.nodalBranchScalar",
+   "AlgebraicGeometry.IsNodalScalarGluing",
+   "AlgebraicGeometry.integral_nodal_picard_normalization_action"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralNodalPicardNormalizationAction.lean",
+  "statement": "theorem integral_nodal_picard_normalization_action (k : Type u) [Field k] [IsAlgClosed k] (Y : Scheme.{u}) [IsIntegral Y] (f : Y ⟶ Spec (.of k)) [IsHProjective f] [LocallyOfFinitePresentation f] (hnodal : HasNodalGeometricFibres f) : Smooth (Y.fromNormalization ≫ f) ∧ IsHProjective (Y.fromNormalization ≫ f) ∧ ConnectedSpace Y.normalization ∧ topologicalKrullDim Y.normalization = 1 ∧ (∀ M : Y.normalization.Pic, M ∈ (Y.fromNormalization ≫ f).picZero → ∃ L : Y.Pic, Scheme.Pic.map Y.fromNormalization L ∈ (Y.fromNormalization ≫ f).picZero ∧ Scheme.Pic.map Y.fromNormalization L = M) ∧ (∀ (q : Spec (.of k) ⟶ Y), q ≫ f = 𝟙 _ → (∀ s : Spec (.of k), q s ∉ f.smoothLocus) → ∃ r : NodalOrderedBranch k f, r.node = q ∧ ∀ p : Spec (.of k) ⟶ Y.normalization, p ≫ Y.fromNormalization = q → p = r.minus ∨ p = r.plus) ∧ ∃ j : NodalOrderedBranch k f → (kˣ →* Y.Pic), (∀ (r : NodalOrderedBranch k f) (z : kˣ), IsNodalScalarGluing r z (j r z) ∧ Scheme.Pic.map Y.fromNormalization (j r z) ∈ (Y.fromNormalization ≫ f).picZero) ∧ (∀ r : NodalOrderedBranch k f, Function.Injective (j r)) ∧ Function.Injective j ∧ ∀ (b : Y ≅ Y), b.hom ≫ f = f → ∃ β : Y.normalization ≅ Y.normalization, β.hom ≫ Y.fromNormalization = Y.fromNormalization ≫ b.hom ∧ (∀ γ : Y.normalization ⟶ Y.normalization, γ ≫ Y.fromNormalization = Y.fromNormalization ≫ b.hom → γ = β.hom) ∧ (∀ r : NodalOrderedBranch k f, ∃ s : NodalOrderedBranch k f, s.node = r.node ≫ b.inv ∧ s.minus = r.minus ≫ β.inv ∧ s.plus = r.plus ≫ β.inv ∧ ∀ z : kˣ, Scheme.Pic.map b.hom (j r z) = j s z) ∧ (∀ L : Y.Pic, Scheme.Pic.map Y.fromNormalization (Scheme.Pic.map b.hom L) ∈ (Y.fromNormalization ≫ f).picZero ↔ Scheme.Pic.map Y.fromNormalization L ∈ (Y.fromNormalization ≫ f).picZero) ∧ (∀ M : Y.normalization.Pic, Scheme.Pic.map β.hom M ∈ (Y.fromNormalization ≫ f).picZero ↔ M ∈ (Y.fromNormalization ≫ f).picZero) ∧ ((∀ L : Y.Pic, Scheme.Pic.map Y.fromNormalization L ∈ (Y.fromNormalization ≫ f).picZero → Scheme.Pic.map b.hom L = L) → (∀ M : Y.normalization.Pic, M ∈ (Y.fromNormalization ≫ f).picZero → Scheme.Pic.map β.hom M = M) ∧ ∀ p : Y.normalization, Y.fromNormalization p ∉ f.smoothLocus → β.hom p = p)",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four helpers give the ordered scalar-gluing characterization belonging to this statement; they use the canonical Picard group, normalization and pullback comparisons. Pic^0 is the existing degree-zero subset Scheme.Hom.picZero (WeilConjectures.AlgebraicGeometry.Curve, degree chi(L)-chi(O) = Scheme.Modules.degree of a representative; blueprint def-sc-pic0) taken on the normalization with structure map Y.fromNormalization ≫ f; Pic^0(Y) is the set of classes whose normalization pullback lies in it, and gluing homomorphisms into it are Pic-valued homomorphisms with degree-zero image. No independent axiom or arbitrary kernel map is introduced. Reviewer FIX (2026-10-24): (1) the delivered helper nodalPicardDegreeZero had the same body as Scheme.Hom.picDegree = 0, i.e. membership in Scheme.Hom.picZero (H4), so it is replaced by picZero (definitionally equal) and dropped from declarations; def-sc-pic0 is not among the stmt_deps, the owner is the generic degree notion already cited via def-pc-degree-line-bundle. (2) lift uniqueness strengthened from automorphisms to all endomorphisms γ of the normalization with γ ≫ ν = ν ≫ b, as the node's 'unique lift' and proof step 2 ('uniqueness among all lifts') say.",
+  "fixed_by": "NT-stage2-cc-56b69ff2a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56b69ff2a",
+  "group": "Q77",
+  "result": "fix",
+  "note": "Statement matches node/Stacks 0C1M clause by clause (hypotheses not stronger; canonical normalization; Pic0 surjectivity; ordered branches with exactly two rational preimages; genuine simultaneous scalar gluing z/z^-1/1 via canonical fibre trivializations; injective, pairwise distinct j; contravariant permutation b^*j_r=j_s with b.inv/β.inv; Picard-trivial ⇒ β^*=id on Pic0 and fixes points over the nonsmooth locus); edge cases (no nodes, self-node, char 2, universes) ok; def-sc-picard-group addition is a landed node, allowed. FIX: (1) H4 — helper nodalPicardDegreeZero has the same body as Scheme.Hom.picDegree=0 / Scheme.Hom.picZero (Curve.lean, def-sc-pic0); substituted picZero (definitionally equal), public import Curve, helper dropped from declarations (def-sc-pic0 not in stmt_deps: maintainer advisory). (2) lift uniqueness strengthened from isos to all endomorphisms γ with γ≫ν=ν≫b (node 'unique lift', proof step 2). Fixed module compiles clean via nt_compile --json (2.2 s); lean-record.json verbatim statement checked with refit_record (no refusals)."
+ }
+}

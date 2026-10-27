@@ -79,7 +79,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -122,16 +133,21 @@
   "note": "directed Preorder I + D : Iᵒᵖ ⥤ Scheme, cone+IsLimit, IsAffineHom transitions, Y₀ qcqs, W compact open of baseChangeCone pt, finite affine cover U (IsAffineOpen, iSup = ⊤), basic-open presentation of W ⊓ U∞, stage lifts tied by appLE of the cone projection, λ_W = directedFiniteUpperBound of insert i₀ (image stage), output union of transported basicOpens; no sorry in data (chart_le lemmas are Prop, true by baseChangeDiagram_map_fst / baseChangeCone_π_app_fst)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Fix $\\lambda_0$, assume $Y_{\\lambda_0}$ is qcqs, and put\n$Y=S\\times_{S_{\\lambda_0}}Y_{\\lambda_0}$, and let $W\\subseteq Y$ be a\nquasi-compact open. Select finitely many affine opens of\n$Y_{\\lambda_0}$ meeting the image of $W$. On their inverse limits, write\n$W$ as a finite union of basic opens $D(f_{ak})$. Choose finite-stage\nlifts $f_{ak,\\lambda_{ak}}$ and define\n\n$$\n\\lambda_W=u(\\{\\lambda_0\\}\\cup\\{\\lambda_{ak}\\}_{a,k}),\n\\qquad\nW_{\\lambda_W}=\\bigcup_{a,k}D(f_{ak,\\lambda_W})\n\\subseteq Y_{\\lambda_W}.\n$$",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S_\\lambda)$ be a cofiltered inverse system of schemes with affine\ntransition morphisms and limit $S$. Fix $\\lambda_0$ and a morphism\n$Y_{\\lambda_0}\\to S_{\\lambda_0}$, form the base-changed system\n$Y_\\lambda=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$ with limit\n$Y=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, and let $W\\subseteq Y$ be a\nquasi-compact open. Define $\\lambda_W\\geq\\lambda_0$ and\n$W_{\\lambda_W}\\subseteq Y_{\\lambda_W}$ to be a selected stage and a\nselected quasi-compact open of $Y_{\\lambda_W}$ whose inverse image in $Y$\nis $W$.",
   "proof": [
    {
-    "text": "Quasi-compactness supplies a finite affine cover; on each chart the inverse\nlimit identifies the coordinate ring with the filtered colimit, so the open\nhas a finite basic-open presentation. Record those functions and lifts\nbefore taking the common upper bound.",
+    "text": "We show that such a stage and open exist. The base-changed system has\naffine transition morphisms and limit $Y$. By quasi-compactness, $W$ is\ncovered by finitely many affine opens of $Y$, each contained in the inverse\nimage of an affine open $V_a$ of $Y_{\\lambda_0}$. The inverse images of\n$V_a$ in the later stages are affine, and the ring of their inverse image\nin $Y$ is the filtered colimit of their rings, so $W$ is a finite union of\nbasic opens $D(f_{ak})$ with $f_{ak}$ coming from some stage\n$\\lambda_{ak}$. At a common stage $\\lambda_W$ above $\\lambda_0$ and all\n$\\lambda_{ak}$ (for instance\n$u(\\{\\lambda_0\\}\\cup\\{\\lambda_{ak}\\}_{a,k})$ for a directed index set), the\nfinite union $\\bigcup_{a,k}D(f_{ak,\\lambda_W})$ is a quasi-compact open of\n$Y_{\\lambda_W}$ whose inverse image in $Y$ is $W$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-18",

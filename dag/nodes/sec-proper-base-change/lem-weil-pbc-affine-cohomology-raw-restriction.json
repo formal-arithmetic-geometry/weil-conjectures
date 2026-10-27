@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-affine-cohomology-raw-restriction",
+ "kind": "statement",
+ "title": "Normalized coherent raw evaluation commutes with affine etale restrictions",
+ "statement": "Let f:X to S be quasi-compact and separated, G a quasi-coherent module on X, and q a natural number. For affine etale objects V,V' over S, h:V' to V, and any actual raw derived-Hom class z over V [def-weil-pbc-coherent-higher-image-classes], apply the raw presheaf restriction to z, evaluate it on V', and then apply the inverse uniquely normalized coherent comparison. The result equals the canonical module-cohomology restriction along h of the inverse normalized coherent comparison of the raw evaluation of z on V. The comparisons and tensor-composition restriction are precisely those of [def-weil-pbc-affine-cohomology-comparison-data]. This is only a compatibility square for fixed constructions, and asserts no descent, action, or realization isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2 and 03FD, coherent comparison and cohomology presentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-weil-pbc-affine-cohomology-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain theta, its universal section formula and the normalized comparison square from affineRealizationComparison_pullback. The proved typed raw-evaluation equation identifies evaluation of raw restriction with coherentEtalePullbackMap. Apply the affine comparison to this equation and compose with the normalized square at the raw evaluation of z. The bundled naturality theorem follows by the unchanged raw-coherent evaluation equations. Both public statements and every existing comparison and restriction definition remain unchanged.",
+   "uses": [
+    "lem-weil-pbc-affine-comparison-pullback",
+    "lem-weil-pbc-affine-raw-evaluation-typed-pullback",
+    "def-weil-pbc-affine-cohomology-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-comparison-pullback",
+  "lem-weil-pbc-affine-raw-evaluation-typed-pullback",
+  "def-weil-pbc-affine-cohomology-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8: compose raw normalization, the fixed derived/Ext chart comparison, and the already-stated normalized coherent pullback square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison between coherent etale cohomology and ordinary module cohomology is natural for restriction to affine etale charts and raw higher direct image classes",
+   "results": "8 hits: seven global-section naturality lemmas and groupCohomology.resNatTrans. None compares the fixed coherent Ext/derived evaluation with chart pullback.",
+   "date": "2026-10-21",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map, CategoryTheory.Functor.map_comp",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHDerivedEquiv|rawRestrictedCohomologyComparison|coherentEtaleRestrictionIso",
+   "results": "0 Mathlib hits. Local library declarations and raw normalization were read; no Ext-to-derived restriction compatibility is stated.",
+   "date": "2026-10-21",
+   "verdict": "No match for the needed combined square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw higher direct image cohomology evaluation commutes with restriction between affine etale objects under the normalized coherent cohomology comparison",
+   "results": "Eight hits including StructureSheaf.res_apply, Scheme.Modules.restrictFunctorComp and restrictFunctorAdjCounitIso, and affineOpensRestrict. None identifies the fixed raw derived-Hom evaluation with normalized coherent comparison.",
+   "date": "2026-10-22",
+   "verdict": "No matching compatibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization",
+  "date": "2026-10-21",
+  "group": "V1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "03Q8 affine-cohomology realization, restriction compatibility (item steps 2 and 4).",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCohomologyRawRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCohomologyRawRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationRawComparison_natural",
+  "statement": "theorem affineRealizationRawComparison_natural {X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] (G : X.Modules) [G.IsQuasicoherent]\n    (q : ℕ) (V V' : S.Etale) [IsAffine V.left] [IsAffine V'.left]\n    (h : V' ⟶ V)\n    (z : (Etale.abelianHigherDirectImageRawPresheaf f q\n      (liftedCoherentEtaleSheaf G)).obj (op V)) :\n    affineRealizationAffineComparison f G q V'\n        (affineRealizationRawEvaluation f G q V'\n          ((Etale.abelianHigherDirectImageRawPresheaf f q\n            (liftedCoherentEtaleSheaf G)).map h.op z)) =\n      affineRealizationRestriction f G q h\n        (affineRealizationAffineComparison f G q V\n          (affineRealizationRawEvaluation f G q V z))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawComparison_natural",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationRawCoherentEquiv_natural"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-674ca",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261022T044031-L-1213921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

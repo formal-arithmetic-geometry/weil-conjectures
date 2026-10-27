@@ -16,123 +16,101 @@
  ],
  "proof": [
   {
-   "text": "Put $\\Delta A=g^{-1}A$ on $\\mathcal T$. Factor $p=g\\circ r$, where $r:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal T),\\Delta A)$ is the identity on underlying topoi with ring map $\\Delta A\\to B$, and $g:(\\operatorname{Sh}(\\mathcal T),\\Delta A)\\to(\\operatorname{Sh}(\\mathcal C),A)$ is projection. The sequence-site equivalence identifies $r_*$ with termwise scalar restriction $U_0$. Kernels and cokernels are unchanged on underlying abelian sheaves and computed componentwise, so $U_0$ is exact and $Rr_*=U$. Also $g_*=\\lim$ on $A$-module towers, hence $Rg_*=R\\lim$ in the specified total-limit model. All sites are small: the sequence site is a product of the given small category with the countable index category.",
+   "text": "Take the normalized ordinary and derived sequence adjunction. The universal property of its compatible-family right adjoint identifies it naturally with lim after the actual restricted-tower functor U0, preserving every ordinary projection. Restriction is exact by the restricted-resolution lemma. The constant-coefficient total-limit theorem supplies the universal right derived pair (RL, etaLim). Derive each ordinary limit projection by the universal right-derived descent property.",
    "uses": [
-    "lem-pur-system-ringed-sequence-site",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940 (section-derived-limits), projection g and constant inverse image; Tag 0941 (lemma-derived-limit-is-ok)."
-   }
-  },
-  {
-   "text": "Apply the ringed-topos composition theorem to $r,g$ to define the specified natural isomorphism $c:Rp_*\\xrightarrow{\\sim}Rg_*Rr_*=\\mathcal L$. More explicitly choose a K-injective resolution $N\\to I$ over $B$ on $\\mathcal T$, then a K-injective resolution $j:UI\\to J$ over $\\Delta A$. These resolutions exist on the two small ringed sites. Now $Rp_*N$ is represented by $\\lim UI$, and $\\mathcal LN$ by $\\lim J$. The composition theorem says precisely that $\\lim j:\\lim UI\\to\\lim J$ is a quasi-isomorphism whose class is $c_N$, and that this prescription is natural in derived $N$. Thus this comparison is fixed by actual resolution maps.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-restricted-tower-resolution-acyclicity",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition), with its K-injective normalization; Section 07A5 (section-unbounded)."
+    "place": "Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
    }
   },
   {
-   "text": "Write $a_n:N_n\\to I_n$ for the evaluated resolution. It is a quasi-isomorphism because exactness in strict systems is componentwise. Likewise $j_n:UI_n\\to J_n$ is a quasi-isomorphism. In the model $\\mathcal LN=\\lim J$ the actual projection is $\\pi_n=[Ua_n]^{-1}[j_n]^{-1}[\\operatorname{pr}_n^J]$. The chain equality $\\operatorname{pr}_n^J\\circ\\lim j=j_n\\circ\\operatorname{pr}_n^{UI}$ gives\n$$\\pi_n c_N=[Ua_n]^{-1}[\\operatorname{pr}_n^{UI}].$$\nThe right side is exactly the projection of $p_*I$ to $UI_n$, followed by identification with $\\operatorname{Res}_nN_n$. This proves preservation of the actual total-limit projections by the specified comparison; it does not choose maps between unspecified cone objects.",
+   "text": "Construct delta: Q F -> Q U0^D RL by the ordinary limit isomorphism, etaLim and the exact restriction factorization. For K-injective I resolve U0 I by T. The restricted-resolution lemma makes lim(j) a quasi-isomorphism, so naturality and the computation of etaLim on T show delta_I invertible. Strict systems are Grothendieck abelian; the K-injective derivability criterion makes delta universal. Uniqueness of right derived functors yields c:R -> U0^D RL with eta c=delta. Naturality gives the required explicit resolution equation.",
    "uses": [
-    "lem-pur-system-ringed-sequence-site",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-restricted-tower-resolution-acyclicity",
+    "lem-pur-system-grothendieck",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), termwise inverse-limit model; Tag 0D6E (lemma-derived-pushforward-composition), normalized map lim j."
+    "place": "Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
    }
   },
   {
-   "text": "For later transposition at level $n$, let $T_n=-\\otimes_A^LB_n$. The ordinary module adjunction for the identity topos with ring map $A\\to B_n$ is extension/restriction, sending $f:Q\\otimes_A B_n\\to K$ to $x\\mapsto f(x\\otimes1)$. Restriction is exact since its underlying abelian sheaf is unchanged. K-flat resolutions exist, and change of rings preserves quasi-isomorphisms between K-flat complexes. Apply the resolving-class derived adjunction to this ordinary adjunction and the class of K-flat complexes. It gives $T_n\\dashv\\operatorname{Res}_n$ and its representative transpose formula: the derived adjunct of a chain map $f:Q\\otimes_A B_n\\to K$, after the canonical K-flat comparison, is the class of $x\\mapsto f(x\\otimes1)$. This formula applies to arbitrary target complexes $K$, without K-injectivity of $K$.",
+   "text": "Localize the exact comparison U0 followed by evaluation = system evaluation followed by restriction. The resulting xi is normalized by the exact-factor isomorphisms. Substitute eta c=delta and use naturality of the derived limit projection, cancellation of the restriction factor isomorphism, and the ordinary projection equation. This proves the asserted compatibility with the actual projections on every complex.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-resolving-class-derived-adjunction"
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
+   }
+  },
+  {
+   "text": "Transport the normalized scalar model adjunction along the given isomorphism from evaluation of G to sheafified scalar extension. Its pure-tensor formula is unchanged. Maps out of scalar extension are determined by local unit tensors, so the level transpose of the evaluated ordinary counit is exactly the ordinary limit projection.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-system-scalar-generators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03D7 (sites-modules-lemma-adjoint-pullback-pushforward-modules), 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), and derived.tex Tag 09T5 (lemma-derived-adjoint-functors)."
+    "place": "Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
    }
   },
   {
-   "text": "Let $\\eta,\\varepsilon$ be the unit and counit of $\\mathcal R=Lp^*\\dashv Rp_*$ supplied by the sequence-projection adjunction. If $\\Phi(f):P\\to Rp_*N$ denotes its Hom bijection, define $\\Psi(f)=c_N\\Phi(f)$. Composition with an isomorphism is a natural bijection, so it defines an adjunction $\\mathcal R\\dashv\\mathcal L$ in these derived categories. Its unit and counit are explicitly\n$$u_P=c_{\\mathcal RP}\\eta_P,\\qquad e_N=\\varepsilon_N\\mathcal R(c_N^{-1}).$$\nFor example naturality of $c$ gives $\\mathcal L(e_N)c_{\\mathcal R\\mathcal LN}=c_N Rp_*(e_N)$; naturality of $\\eta$ and the old right triangle identity then give $\\mathcal L(e_N)u_{\\mathcal LN}=1$. The other identity is $e_{\\mathcal RP}\\mathcal R(u_P)=\\varepsilon_{\\mathcal RP}\\mathcal R(\\eta_P)=1$, after cancelling $\\mathcal R(c_{\\mathcal RP}^{-1})\\mathcal R(c_{\\mathcal RP})$. Thus the identities hold as actual derived morphisms.",
+   "text": "Use flat-term K-flat resolutions to show the universal left derived sequence functor remains universal after exact evaluation or postcomposition by any functor: on the homotopy category the resolving diagrams are essentially constant, hence their defining right Kan extensions are absolute. Transfer this through the cochain-homotopy comparison. Derive the level adjunction to exact scalar restriction and normalize its Hom equivalence on every cochain map.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-cochain-homotopy-derived-comparison",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "new-derived-adjunction-compatibility",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
+   }
+  },
+  {
+   "text": "Transport the sequence adjunction through c. The natural transformation whose component is the level adjoint of the evaluated derived counit agrees with the total-limit projection: by the right-derived universal property it suffices to precompose with delta on all complexes, where the normalized Hom formulas and the ordinary counit projection prove the equality. The unit projection follows by transposing and applying the left triangle. The inverse adjunct formula is functoriality applied to L(h) followed by the counit. Both triangle identities hold for the transported adjunction.",
    "uses": [
     "lem-coef-sequence-projection-derived-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); explicit transport of its natural Hom bijection along c."
-   }
-  },
-  {
-   "text": "Choose a flat-term K-flat representative $Q\\to P$, so $\\mathcal RP$ is represented by the strict complex $(Q\\otimes_A B_n)_n$. Choose its system resolution $a:\\mathcal RP\\to I$. The fraction-extension formula in the sequence-projection adjunction computes $\\eta_P$ by the ordinary transpose of $a$: the chain map $Q\\to\\lim UI$ sends $x$ to $(a_n(x\\otimes1))_n$. By step 3, the projection of $u_P=c_{\\mathcal RP}\\eta_P$ to level $n$ is the class of $x\\mapsto a_n(x\\otimes1)$ followed by $[Ua_n]^{-1}$. It is therefore the class of $Q\\to\\operatorname{Res}_n(Q\\otimes_A B_n)$, $x\\mapsto x\\otimes1$. By step 4 this is exactly the scalar-extension unit, i.e. the required reduction unit.",
-   "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-pc-kflat-resolution",
-    "lem-pur-resolving-class-derived-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 06YS (lemma-K-flat-resolution); ordinary transpose and resolution projections."
-   }
-  },
-  {
-   "text": "Represent $N$ by its K-injective system $I$. Choose a flat-term K-flat resolution $q:Q\\to p_*I=\\lim UI$. The sequence-projection Hom formula computes $\\varepsilon_N$ by the system chain map with components\n$$Q\\otimes_A B_n\\longrightarrow I_n,\\qquad x\\otimes b\\longmapsto b\\operatorname{pr}_n^{UI}(q(x)).$$\nIndeed its ordinary transpose is $q$, the representative of the identity of $Rp_*N$. By step 4 its $n$th component has scalar-extension adjunct $[\\operatorname{pr}_n^{UI}]$, after the resolution identifications. Step 3 identifies this with $\\pi_nc_N$. Precomposing $\\varepsilon_N$ with $\\mathcal R(c_N^{-1})$ therefore makes the adjunct of its $n$th component $\\pi_nc_Nc_N^{-1}=\\pi_n$. This is the required description of $e_{N,n}$. It holds without assuming that $UI$ or $I_n$ is K-injective.",
-   "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-pc-kflat-resolution",
-    "lem-pur-resolving-class-derived-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); the representative counit calculation also appears in Tag 0FPI (lemma-adjoints-push-pull-compatibility)."
-   }
-  },
-  {
-   "text": "For $h:P\\to\\mathcal LN$, the inverse of the transported Hom bijection is $e_N\\circ\\mathcal R(h)$: its transpose is $\\mathcal L(e_N)\\mathcal L\\mathcal R(h)u_P=\\mathcal L(e_N)u_{\\mathcal LN}h=h$ by naturality of $u$ and the right triangle identity. The sequence-projection functor is derived scalar extension at level $n$, naturally on derived morphisms. Consequently this adjunct has component $e_{N,n}\\circ(h\\otimes_A^LB_n)$. The construction used one natural Hom bijection and the specified comparison throughout, so its unit, counit, and formulas are natural in $P,N$.",
-   "uses": [
-    "lem-coef-sequence-projection-derived-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), naturality of the Hom bijection and its triangle identities."
+    "place": "Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-coef-restricted-tower-resolution-acyclicity",
   "lem-coef-sequence-projection-derived-adjunction",
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-resolving-class-derived-adjunction",
-  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-cochain-homotopy-derived-comparison",
+  "lem-pur-system-grothendieck",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-system-scalar-generators",
+  "lem-pur-system-scalar-model",
+  "lem-sfb-resolving-derived-adjunction-normalization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "prop-pur-kinjective-resolutions-exist"
+  "new-derived-adjunction-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0940/0941 (sequence-site total inverse limit), 0D6E (derived composition), 07A6 and 0FPI (derived adjunction and representative compatibility); explicit projection and scalar-transpose calculations."
+  "place": "B7: actual restricted towers and universal derived uniqueness; absolute left resolving comparisons and normalized adjunction transposes. Tags 0D6E, 0941 and 07A6; derived.tex Tag 09T5."
  },
  "mathlib_searches": [
   {
@@ -234,14 +212,25 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-coef-sequence-pushforward-limit-projections",
   "worker": "stage1",
-  "group": "Q13",
-  "summary": "Split into eight steps using existing generic tools only. Factored p through the constant-A ringed sequence site, used the normalized composition comparison, proved the projection square on resolution maps, and computed transported unit/counit and arbitrary adjuncts explicitly. No statement change or new node.",
-  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction and the first/last mapping-limit comparisons; normalization of the units/counits and triangle identities in the following paragraph.",
+  "group": "Q77",
+  "summary": "Repaired the human re-split note: extracted the original steps 1-3 and 4/6/7 as two independent statement-only resolution lemmas. Kept the statement unchanged and assembled the comparison, transported adjunction, finite units/counits and component formula in five steps. Original arguments retained in the report for the next workers.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 first/last mapping-limit comparisons and following paragraph on compatible finite units/counits and triangles.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
@@ -256,24 +245,8 @@
     "why": "Flat-term K-flat representatives for module complexes on the given small ringed sites."
    },
    {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Ordinary scalar-extension/restriction adjunction for a sheaf-ring homomorphism on one site."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Change of rings on K-flat representatives, used only for the level scalar adjunction."
-   },
-   {
-    "node": "lem-pur-resolving-class-derived-adjunction",
-    "why": "Representative normalization of scalar transposition for arbitrary target complexes."
-   },
-   {
     "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Functorial K-injective resolutions on the two small ringed sequence sites."
-   },
-   {
-    "node": "lem-pur-system-ringed-sequence-site",
-    "why": "Existing equivalence of strict coefficient systems and modules on the ringed sequence site."
+    "why": "The given small site and its countable sequence site admit the K-injective replacements used in the two-resolution computations."
    }
   ]
  },
@@ -288,18 +261,18 @@
   "lem-pur-system-ringed-sequence-site"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q13-ccd297f4d",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q77-b57f25072",
+  "group": "Q77",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-ccd297f4d (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item only (8 steps, no new nodes; statement unchanged from NZ's statement-only creation; no repair note; no cycle in a 454-node closure check; no SGA). Each step checks against its cited statements. Step 1: p factors as g∘r, where g is the Stacks 0940 projection (g_* = lim, constant inverse image) and r is the scalar restriction, which is exact, so Rr_* = U. Step 2: c is the composition comparison κ_{g,r}, whose normalization makes the class of lim j equal c_N. Step 3: π_n c_N = [Ua_n]^{-1}[pr_n^{UI}] follows from the chain identity pr_n^J∘lim j = j_n∘pr_n^{UI}; orientation checked. Step 4: the hypotheses of the resolving-class adjunction hold (K-flat resolutions; change of rings preserves quasi-isomorphisms between K-flat complexes; restriction is exact), and its transpose formula for an arbitrary target K is what steps 6 and 7 need. Step 5: transported unit c∘η and counit ε∘R(c^{-1}); both triangle identities verified. Step 6: the transpose of a is x↦(a_n(x⊗1))_n, whose projection to level n is x↦x⊗1, the reduction unit. Step 7: the counit's level-n component has adjunct π_n c_N c_N^{-1} = π_n. Step 8: the adjunct of h has component e_{N,n}∘(h⊗^L B_n), using the natural level model of Lp^*. Small cases: B_n = A, B_n = 0, and the non-flat Z→Z/2^n tower (no step needs U to preserve K-injectives). Tool_uses accepted: composition, strict-tower R lim, K-flat resolutions, module adjunction, change of rings, resolving-class adjunction, K-injective existence, sequence-site equivalence. Stacks tags 0940, 0941, 0D6E, 07A6, 0FPI, 03D7, 06YS, 06YY and 09T5 checked against the tags file. Advisory only: step 4's source.document says sites-cohomology.tex, but its 03D7 label is in sites-modules and its 09T5 label is in derived.tex."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-b57f25072 (reviewer sub-agent of L); spot-checked: Re-split answer to the released repair note of 2026-10-22 (human decision of 2026-10-21). I compared the 8 base steps with the delivery one by one. Base steps 1-3 (p=g∘r, r_*=U_0 exact, g_*=lim, lim j a quasi-iso, projection equation) are now new node A, lem-coef-restricted-tower-resolution-acyclicity. Base steps 4, 6 and 7 (derived scalar adjunct x↦f(x⊗1) for any target complex, unit x↦(a_n(x⊗1))_n, counit x⊗b↦b·pr_n(q(x)) in the Stacks 0FPI form) are now new node B, lem-coef-sequence-adjunction-cochain-transposes. Base steps 5 and 8 were elementary transport of the adjunction and are still written in full as item steps 2 and 5, with both triangle identities checked. Node A is about 1.9k characters and node B about 2.3k, and neither restates the item: A has no adjunction, B has no R lim comparison. The assembly is 2142 characters. Both statements are true. For A, r_* keeps K-injective complexes K-injective, so j is a homotopy equivalence and so is lim j; this is also exactly the normalization clause of the composition node with f=r. The projection identity follows from naturality of the limit cone. For B, the unit and counit formulas follow from the fraction-extension normalization of lem-coef-sequence-projection-derived-adjunction and from Stacks 0FPI (read at sites-cohomology lemma-adjoints-push-pull-compatibility). I tested both on B_n=A, B_n=0 and the non-flat case A=Z, B_n=Z/2^n. The rg -L search found no duplicates: lem-pur-sequence-adjoint-resolution-shifts and lem-coef-derived-system-evaluation-calculus are the DVR pro-étale special cases. There is no SGA, the item is not dropped, both new nodes are statement-only and unsplit, and LeanSearch is correctly recorded as unavailable. FIX (E5/C3): item step 1 claimed π_n c_N=[U_0a_n]^{-1}[pr_n] but no longer said what π_n is in the model [lim J]. I restored the base definition π_n=[U_0a_n]^{-1}[j_n]^{-1}[pr_n^J] and the existence of the K-injective resolutions. The item's tool_uses are unchanged from base and accepted.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SequencePushforwardLimitProjections",
   "declaration": "SheafOfModules.SequenceProjection.pushforwardLimitProjections",
   "file": "lean/Sheaf/CategoryTheory/SequencePushforwardLimitProjections.lean",
-  "statement": "theorem pushforwardLimitProjections (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ Modules A)] [∀ n : ℕ, HasDerivedCategory.{d} (systemLevel B n)] : ∃ (G : Modules A ⥤ StrictRingSystem B) (F : StrictRingSystem B ⥤ Modules A) (_ : G.Additive) (_ : F.Additive) (e : ∀ (M : Modules A) (n : ℕ), (G.obj M).level n ≅ changeOfRings (α.app (op n)) M) (π : ∀ (N : StrictRingSystem B) (n : ℕ), F.obj N ⟶ (restriction A B α n).obj (N.level n)) (adj : G ⊣ F), (∀ {M M' : Modules A} (f : M ⟶ M') (n : ℕ), (G.map f).app n ≫ (e M' n).hom = (e M n).hom ≫ changeOfRingsHom (α.app (op n)) M f) ∧ (∀ (M : Modules A) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), ((G.obj M).transition h).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = (e M m).inv.val.app U (tensorSection (α.app (op m)) M U ((B.map (homOfLE h).op).hom.app U b) x)) ∧ (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), F.map f ≫ π N' n = π N n ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : (F.obj N).val.obj U), (π N m).val.app U x = (N.transition h).val.app U ((π N n).val.app U x)) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (f : ∀ n : ℕ, M ⟶ (restriction A B α n).obj (N.level n)), (∀ {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : M.val.obj U), (f m).val.app U x = (N.transition h).val.app U ((f n).val.app U x)) → ∃! h : M ⟶ F.obj N, ∀ n : ℕ, h ≫ π N n = f n) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (h : M ⟶ F.obj N) (n : ℕ) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), (((adj.homEquiv M N).symm h).app n).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = @SMul.smul ((B.obj (op n)).obj.obj U) ((N.level n).val.obj U) inferInstance b ((π N n).val.app U (h.val.app U x))) ∧ ∃ (L : DerivedCategory.{d} (Modules A) ⥤ DerivedCategory.{d} (StrictRingSystem B)) (R : DerivedCategory.{d} (StrictRingSystem B) ⥤ DerivedCategory.{d} (Modules A)) (ε : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R) (derivedAdj : L ⊣ R), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (Modules A) (.up ℤ)) ∧ R.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (StrictRingSystem B) (.up ℤ)) ∧ (∀ (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → IsIso (ε.app Q)) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ), I.IsKInjective → IsIso (η.app I)) ∧ (∀ (P Q : CochainComplex (Modules A) ℤ) (q : Q ⟶ P), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → QuasiIso q → ∃ c : L.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj Q), L.map (DerivedCategory.Q.map q) ≫ c.hom = ε.app Q) ∧ (∀ (Q : CochainComplex (Modules A) ℤ) (I : CochainComplex (StrictRingSystem B) ℤ) (f : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I), derivedAdj.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I) (ε.app Q ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫ η.app I) ∧ ∃ (U0 : StrictRingSystem B ⥤ (ℕᵒᵖ ⥤ Modules A)) (_ : U0.Additive) (_ : PreservesFiniteLimits U0) (_ : PreservesFiniteColimits U0) (uObj : ∀ (N : StrictRingSystem B) (n : ℕ), (U0.obj N).obj (op n) = (restriction A B α n).obj (N.level n)) (uEval : ∀ n : ℕ, U0 ⋙ (CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n) ≅ systemEvaluation B n ⋙ restriction A B α n) (πOrd : ∀ n : ℕ, F ⟶ systemEvaluation B n ⋙ restriction A B α n) (fLim : F ≅ U0 ⋙ (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A)) (RL : DerivedCategory.{d} (ℕᵒᵖ ⥤ Modules A) ⥤ DerivedCategory.{d} (Modules A)) (etaLim : (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RL) (piLim : ∀ n : ℕ, RL ⟶ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory) (xi : ∀ n : ℕ, U0.mapDerivedCategory ⋙ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory ≅ (systemEvaluation B n).mapDerivedCategory ⋙ (restriction A B α n).mapDerivedCategory) (c : R ≅ U0.mapDerivedCategory ⋙ RL) (levelAdj : ∀ n : ℕ, G ⋙ systemEvaluation B n ⊣ restriction A B α n) (derivedLevelAdj : ∀ n : ℕ, L ⋙ (systemEvaluation B n).mapDerivedCategory ⊣ (restriction A B α n).mapDerivedCategory), (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), (U0.map f).app (op n) ≫ eqToHom (uObj N' n) = eqToHom (uObj N n) ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (V : Cᵒᵖ) (x : (N.level n).val.obj V), ((U0.obj N).map (homOfLE h).op).val.app V ((eqToHom (uObj N n).symm).val.app V x) = (eqToHom (uObj N m).symm).val.app V ((N.transition h).val.app V x)) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), (uEval n).hom.app N = eqToHom (uObj N n)) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), (πOrd n).app N = π N n) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), fLim.hom.app N ≫ limit.π (U0.obj N) (op n) ≫ (uEval n).hom.app N = π N n) ∧ RL.IsRightDerivedFunctor etaLim (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules A) (.up ℤ)) ∧ (∀ (T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ), T.IsKInjective → IsIso (etaLim.app T)) ∧ (∀ (T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ) (n : ℕ), etaLim.app T ≫ (piLim n).app (DerivedCategory.Q.obj T) ≫ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategoryFactors.hom.app T = DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app T)) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ) (n : ℕ), (xi n).hom.app (DerivedCategory.Q.obj I) ≫ (restriction A B α n).mapDerivedCategory.map ((systemEvaluation B n).mapDerivedCategoryFactors.hom.app I) ≫ (restriction A B α n).mapDerivedCategoryFactors.hom.app (((systemEvaluation B n).mapHomologicalComplex (.up ℤ)).obj I) = ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory.map (U0.mapDerivedCategoryFactors.hom.app I) ≫ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategoryFactors.hom.app ((U0.mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (uEval n) (.up ℤ)).hom.app I)) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ), I.IsKInjective → ∀ (T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ), T.IsKInjective → ∀ (j : (U0.mapHomologicalComplex (.up ℤ)).obj I ⟶ T) [QuasiIso j], QuasiIso (((lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).mapHomologicalComplex (.up ℤ)).map j) ∧ η.app I ≫ c.hom.app (DerivedCategory.Q.obj I) ≫ RL.map (U0.mapDerivedCategoryFactors.hom.app I) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex fLim (.up ℤ)).hom.app I) ≫ DerivedCategory.Q.map (((lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).mapHomologicalComplex (.up ℤ)).map j) ≫ etaLim.app T ≫ RL.map (inv (DerivedCategory.Q.map j))) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ) (n : ℕ), η.app I ≫ c.hom.app (DerivedCategory.Q.obj I) ≫ (piLim n).app (U0.mapDerivedCategory.obj (DerivedCategory.Q.obj I)) ≫ (xi n).hom.app (DerivedCategory.Q.obj I) ≫ (restriction A B α n).mapDerivedCategory.map ((systemEvaluation B n).mapDerivedCategoryFactors.hom.app I) ≫ (restriction A B α n).mapDerivedCategoryFactors.hom.app (((systemEvaluation B n).mapHomologicalComplex (.up ℤ)).obj I) = DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (πOrd n) (.up ℤ)).app I)) ∧ (∀ (n : ℕ) (M : Modules A) (K : systemLevel B n) (h : M ⟶ (restriction A B α n).obj K) (V : Cᵒᵖ) (b : (B.obj (op n)).obj.obj V) (x : M.val.obj V), (((levelAdj n).homEquiv M K).symm h).val.app V ((e M n).inv.val.app V (tensorSection (α.app (op n)) M V b x)) = @SMul.smul ((B.obj (op n)).obj.obj V) (K.val.obj V) inferInstance b (h.val.app V x)) ∧ (∀ (n : ℕ) (Q : CochainComplex (Modules A) ℤ) (K : CochainComplex (systemLevel B n) ℤ) (f : ((G ⋙ systemEvaluation B n).mapHomologicalComplex (.up ℤ)).obj Q ⟶ K), (derivedLevelAdj n).homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj K) ((systemEvaluation B n).mapDerivedCategory.map (ε.app Q) ≫ (systemEvaluation B n).mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj Q) ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map (((levelAdj n).mapHomologicalComplex (.up ℤ)).homEquiv Q K f) ≫ (restriction A B α n).mapDerivedCategoryFactors.inv.app K) ∧ (∀ (P : DerivedCategory.{d} (Modules A)) (n : ℕ), (derivedAdj.ofNatIsoRight c).unit.app P ≫ (piLim n).app (U0.mapDerivedCategory.obj (L.obj P)) ≫ (xi n).hom.app (L.obj P) = (derivedLevelAdj n).unit.app P) ∧ (∀ (N : DerivedCategory.{d} (StrictRingSystem B)) (n : ℕ), (systemEvaluation B n).mapDerivedCategory.map ((derivedAdj.ofNatIsoRight c).counit.app N) = ((derivedLevelAdj n).homEquiv ((U0.mapDerivedCategory ⋙ RL).obj N) ((systemEvaluation B n).mapDerivedCategory.obj N)).symm ((piLim n).app (U0.mapDerivedCategory.obj N) ≫ (xi n).hom.app N)) ∧ (∀ (P : DerivedCategory.{d} (Modules A)) (N : DerivedCategory.{d} (StrictRingSystem B)) (h : P ⟶ (U0.mapDerivedCategory ⋙ RL).obj N) (n : ℕ), (systemEvaluation B n).mapDerivedCategory.map (((derivedAdj.ofNatIsoRight c).homEquiv P N).symm h) = (L ⋙ (systemEvaluation B n).mapDerivedCategory).map h ≫ (systemEvaluation B n).mapDerivedCategory.map ((derivedAdj.ofNatIsoRight c).counit.app N)) ∧ (∀ (P : DerivedCategory.{d} (Modules A)), L.map ((derivedAdj.ofNatIsoRight c).unit.app P) ≫ (derivedAdj.ofNatIsoRight c).counit.app (L.obj P) = 𝟙 (L.obj P)) ∧ (∀ (N : DerivedCategory.{d} (StrictRingSystem B)), (derivedAdj.ofNatIsoRight c).unit.app ((U0.mapDerivedCategory ⋙ RL).obj N) ≫ (U0.mapDerivedCategory ⋙ RL).map ((derivedAdj.ofNatIsoRight c).counit.app N) = 𝟙 ((U0.mapDerivedCategory ⋙ RL).obj N))",
+  "statement": "theorem pushforwardLimitProjections (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ Modules A)] [∀ n : ℕ, HasDerivedCategory.{d} (systemLevel B n)] : ∃ (G : Modules A ⥤ StrictRingSystem B) (F : StrictRingSystem B ⥤ Modules A) (_ : G.Additive) (_ : F.Additive) (e : ∀ (M : Modules A) (n : ℕ), (G.obj M).level n ≅ changeOfRings (α.app (op n)) M) (π : ∀ (N : StrictRingSystem B) (n : ℕ), F.obj N ⟶ (restriction A B α n).obj (N.level n)) (adj : G ⊣ F), (∀ {M M' : Modules A} (f : M ⟶ M') (n : ℕ), (G.map f).app n ≫ (e M' n).hom = (e M n).hom ≫ changeOfRingsHom (α.app (op n)) M f) ∧ (∀ (M : Modules A) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), ((G.obj M).transition h).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = (e M m).inv.val.app U (tensorSection (α.app (op m)) M U ((B.map (homOfLE h).op).hom.app U b) x)) ∧ (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), F.map f ≫ π N' n = π N n ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : (F.obj N).val.obj U), (π N m).val.app U x = (N.transition h).val.app U ((π N n).val.app U x)) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (f : ∀ n : ℕ, M ⟶ (restriction A B α n).obj (N.level n)), (∀ {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : M.val.obj U), (f m).val.app U x = (N.transition h).val.app U ((f n).val.app U x)) → ∃! h : M ⟶ F.obj N, ∀ n : ℕ, h ≫ π N n = f n) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (h : M ⟶ F.obj N) (n : ℕ) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), (((adj.homEquiv M N).symm h).app n).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = @SMul.smul ((B.obj (op n)).obj.obj U) ((N.level n).val.obj U) inferInstance b ((π N n).val.app U (h.val.app U x))) ∧ ∃ (L : DerivedCategory.{d} (Modules A) ⥤ DerivedCategory.{d} (StrictRingSystem B)) (R : DerivedCategory.{d} (StrictRingSystem B) ⥤ DerivedCategory.{d} (Modules A)) (ε : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R) (derivedAdj : L ⊣ R), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (Modules A) (.up ℤ)) ∧ R.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (StrictRingSystem B) (.up ℤ)) ∧ (∀ (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → IsIso (ε.app Q)) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ), I.IsKInjective → IsIso (η.app I)) ∧ (∀ (P Q : CochainComplex (Modules A) ℤ) (q : Q ⟶ P), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → QuasiIso q → ∃ c : L.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj Q), L.map (DerivedCategory.Q.map q) ≫ c.hom = ε.app Q) ∧ (∀ (Q : CochainComplex (Modules A) ℤ) (I : CochainComplex (StrictRingSystem B) ℤ) (f : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I), derivedAdj.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I) (ε.app Q ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫ η.app I) ∧ ∃ (U0 : StrictRingSystem B ⥤ (ℕᵒᵖ ⥤ Modules A)) (_ : U0.Additive) (_ : PreservesFiniteLimits U0) (_ : PreservesFiniteColimits U0) (uObj : ∀ (N : StrictRingSystem B) (n : ℕ), (U0.obj N).obj (op n) = (restriction A B α n).obj (N.level n)) (uEval : ∀ n : ℕ, U0 ⋙ (CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n) ≅ systemEvaluation B n ⋙ restriction A B α n) (πOrd : ∀ n : ℕ, F ⟶ systemEvaluation B n ⋙ restriction A B α n) (fLim : F ≅ U0 ⋙ (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A)) (RL : DerivedCategory.{d} (ℕᵒᵖ ⥤ Modules A) ⥤ DerivedCategory.{d} (Modules A)) (etaLim : (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RL) (piLim : ∀ n : ℕ, RL ⟶ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory) (xi : ∀ n : ℕ, U0.mapDerivedCategory ⋙ ((CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)).mapDerivedCategory ≅ (systemEvaluation B n).mapDerivedCategory ⋙ (restriction A B α n).mapDerivedCategory) (c : R ≅ U0.mapDerivedCategory ⋙ RL) (levelAdj : ∀ n : ℕ, G ⋙ systemEvaluation B n ⊣ restriction A B α n) (derivedLevelAdj : ∀ n : ℕ, L ⋙ (systemEvaluation B n).mapDerivedCategory ⊣ (restriction A B α n).mapDerivedCategory), (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), (U0.map f).app (op n) ≫ eqToHom (uObj N' n) = eqToHom (uObj N n) ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (V : Cᵒᵖ) (x : (N.level n).val.obj V), ((U0.obj N).map (homOfLE h).op).val.app V ((eqToHom (uObj N n).symm).val.app V x) = (eqToHom (uObj N m).symm).val.app V ((N.transition h).val.app V x)) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), (uEval n).hom.app N = eqToHom (uObj N n)) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), (πOrd n).app N = π N n) ∧ (∀ (N : StrictRingSystem B) (n : ℕ), fLim.hom.app N ≫ limit.π (U0.obj N) (op n) ≫ (uEval n).hom.app N = π N n) ∧ RL.IsRightDerivedFunctor etaLim (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Modules A) (.up ℤ)) ∧ (∀ (T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ), T.IsKInjective → IsIso (etaLim.app T)) ∧ derivedLimitProperties G F U0 (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A) (fun n ↦ (CategoryTheory.evaluation ℕᵒᵖ (Modules A)).obj (op n)) (systemEvaluation B) (restriction A B α) uEval πOrd fLim (fun n ↦ lim.π (op n)) L R ε η derivedAdj RL etaLim (fun levelAdj ↦ ∀ (n : ℕ) (M : Modules A) (K : systemLevel B n) (h : M ⟶ (restriction A B α n).obj K) (V : Cᵒᵖ) (b : (B.obj (op n)).obj.obj V) (x : M.val.obj V), (((levelAdj n).homEquiv M K).symm h).val.app V ((e M n).inv.val.app V (tensorSection (α.app (op n)) M V b x)) = @SMul.smul ((B.obj (op n)).obj.obj V) (K.val.obj V) (by set_option backward.isDefEq.respectTransparency.types false in exact inferInstance) b (h.val.app V x)) piLim xi c levelAdj derivedLevelAdj",
   "branch": "sheaf-dag",
   "by": "NL",
   "date": "2026-10-21",
@@ -312,5 +285,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Snapshot module compiles clean via nt_compile --json (34.9 s, limit 60 s, no warnings). lean.statement is verbatim in the file; the only node change is the lean field. The first block matches the landed derivedAdjunction statement exactly. U0 is pinned by uObj and its map/transition clauses; RL by IsRightDerivedFunctor of lim plus IsIso on K-injectives (the dep's characterization); piLim by the ordinary lim.π on all complexes; xi by the factor isomorphisms; c by the class of lim(j) over K-injective I, T, j (Stacks 0D6E); projection preservation for all I; levelAdj by the tensorSection formula; derivedLevelAdj by the chain-level homEquiv through ε. The transport is ofNatIsoRight c, as the node prescribes; the unit and counit clauses compare it with independently pinned level data, so they have content. No stronger hypotheses; universes u, v, w, d independent; edge cases B_n=0, constant B, non-flat A→B_n and the empty site checked; no duplicate declaration (H4). Docstrings have source, blueprint and the 8-step plan; one sorry; report has both sections. Advisory: six plain proof-only imports unused (H9); adjunct and triangle clauses are formal consequences, faithful to the node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a8fcc",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261024T184615-L-3077393",
+  "kind": "interface",
+  "note": "independent cc review: new pushforwardLimitProjections (via derivedLimitProperties) against original expanded statement from clone: proved by bare term in scratch module; 6/7 direct importers compile, EnrichedSequenceProjectionFormula times out also on published baseline"
  }
 }

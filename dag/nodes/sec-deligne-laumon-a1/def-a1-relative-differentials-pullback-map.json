@@ -11,9 +11,32 @@
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 01UV, lemma-functoriality-differentials, specialization to identity on the base S; unique characterization on local functions"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Compose the universal derivation of Omega_(X/S) with h-sharp on each open of Y. The Leibniz rule follows from multiplicativity of h-sharp; restriction compatibility follows from its naturality and that of the universal derivation. It vanishes on functions from S because h-sharp composed with g-sharp is (h composed with g)-sharp. Scheme.Hom.derivationMk therefore gives an S-relative derivation into h_* Omega_(X/S). Apply Scheme.Hom.relativeDifferentialsHomEquiv from [def-sc-relative-differential-sheaf] to obtain q : Omega_(Y/S) -> h_* Omega_(X/S), with q(da) = d(h-sharp(a)).",
+   "uses": [
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the section-normalized adjunction exists_tensorPullbackAdjunction of [lem-pc-module-pullback-adjunction]. Its hom equivalence e sends d to the map evaluating d on the sheafified tensor 1 tensor the abelian inverse-image unit, precisely the generator in this node. The inverse image e.symm(q) has the required generator formula by the inverse laws and relativeDifferentialsHomEquiv_symm_app_d. If another d has that formula, e(d) and q induce identical derivations on every function. Injectivity of relativeDifferentialsHomEquiv gives e(d)=q, and injectivity of e proves uniqueness.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UV, lemma-functoriality-differentials; the adjunction and its section formula are Tag 0096, lemma-adjoint-pullback-pushforward-modules, in sheaves.tex"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -56,7 +79,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-thm-dl-a1-upper",
  "lean": {
@@ -89,5 +123,15 @@
   "group": "Q26",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, helper construction, docstrings, edge cases, report sections, and reproducible per-file compilation all checked successfully."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261023T103115-L-3053117",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

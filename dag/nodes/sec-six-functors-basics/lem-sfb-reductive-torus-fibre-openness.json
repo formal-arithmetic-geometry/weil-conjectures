@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-reductive-torus-fibre-openness",
+ "kind": "statement",
+ "title": "Reductivity and maximality of a split torus persist near a fibre",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. An $S$-group scheme has multiplication, identity and inverse satisfying the diagrams of [def-sc-group-scheme], with $S$ in place of the field base. Write $\\mathbf G_{m,S}=\\operatorname{Spec}_S\\mathcal O_S[t,t^{-1}]$ with multiplication of units, and $\\mathbf G_{m,S}^0=1_S$. For $s\\in|S|$, write $G_{\\bar s}^0$ for the identity connected component of the fibre over an algebraic closure of $\\kappa(s)$, with its open-subscheme structure; connectedness is [def-weil-connected-scheme]. A group over an algebraically closed field is reductive if it is smooth, connected, affine of finite type and has no nontrivial smooth connected normal unipotent closed subgroup; unipotent means that geometric points are unipotent matrices in a faithful representation. A torus over that field is a group isomorphic to $\\mathbf G_m^d$ for some $d\\geq0$, and maximal means maximal among such closed subgroups. Suppose $G_{\\bar s}^0$ is reductive for a point $s\\in|S|$. Then there is an open neighborhood $U$ of $s$ such that $G_{\\bar u}^0$ is reductive for every geometric point $\\bar u\\to U$. Moreover, if $r\\geq0$ and $j:\\mathbf G_{m,S}^r\\hookrightarrow G$ is a closed subgroup immersion [def-weil-closed-immersion] whose geometric fibre $j_{\\bar s}$ is a maximal torus of $G_{\\bar s}^0$, there is an open neighborhood $V$ of $s$ such that $j_{\\bar v}$ is a maximal torus of $G_{\\bar v}^0$ for every geometric point $\\bar v\\to V$.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; Brian Conrad, Reductive group schemes (2014), Proposition 3.1.9(1),(2), printed pp.85-88 (split-torus instance of (2)); read online at https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-relative-split-torus",
+  "def-wf-algebraic-components"
+ ],
+ "proof": [
+  {
+   "text": "We may restrict the base to an affine neighborhood of $s$. Let $H$ be the open component locus of the identity section in $G$, given by [lem-sbc-smooth-section-component-open]. Its geometric fibres are $G_{\\bar u}^0$: connected smooth field groups remain connected under field extension by [lem-sfb-solvable-normal-subgroup-products], and their identity components are open-and-closed subgroup schemes by [lem-sfb-finite-type-group-identity-subgroup]. The group diagrams restrict to this open because they restrict on every geometric fibre, so $H$ is an open subgroup, smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]; we do not assert that $H$ is affine over $S$. Each $H_{\\bar u}$ is affine of finite type, being an open-and-closed component of the affine finite-type fibre. The same component-locus construction will be used for other smooth affine groups below.",
+   "uses": [
+    "lem-sbc-smooth-section-component-open",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof, printed pp.85-86; relative identity component as in Proposition 3.1.1"
+   }
+  },
+  {
+   "text": "First suppose a split torus $T=\\mathbf G_{m,S}^r\\hookrightarrow G$ is given and $T_{\\bar s}$ is maximal in the reductive $H_{\\bar s}$. Put $C=C_G(T)$, smooth affine and finitely presented by [lem-sfb-relative-torus-centralizer-normalizer]. On the special geometric fibre, $C_{\\bar s}^0=C_{H_{\\bar s}}(T_{\\bar s})=T_{\\bar s}$: connectedness of the torus centralizer in $H_{\\bar s}$ is [lem-sfb-torus-centralizer-smooth-connected], and its equality with $T_{\\bar s}$ is [lem-sfb-reductive-torus-self-centralizer]. Thus $\\dim C_{\\bar s}=r$. By [lem-sfb-smooth-group-fibre-dimension], shrink around $s$ so that $\\dim C_{\\bar u}=r$ for every geometric fibre. Any torus in $H_{\\bar u}$ properly containing $T_{\\bar u}$ lies in $C_{\\bar u}$, and has dimension greater than $r$ by the strict-dimension assertion of [lem-sfb-solvable-normal-subgroup-products], a contradiction. This proves the maximality assertion. Moreover $C_{H_{\\bar u}}(T_{\\bar u})$ is smooth connected by [lem-sfb-torus-centralizer-smooth-connected], contains $T_{\\bar u}$ and has dimension at most $r$, so the same strict-dimension assertion gives $C_{H_{\\bar u}}(T_{\\bar u})=T_{\\bar u}$. This argument has not assumed reductivity away from $s$.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-smooth-group-fibre-dimension",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (2), printed pp.85-86"
+   }
+  },
+  {
+   "text": "To prove the first assertion, choose a maximal torus $j_0:\\mathbf G_{m,\\Omega}^r\\hookrightarrow H_{\\bar s}$ by [lem-sfb-reductive-borel-pair-structure], where $\\Omega=\\overline{\\kappa(s)}$. Compose with $H_{\\bar s}\\hookrightarrow G_{\\bar s}$. Apply [lem-sfb-geometric-torus-fppf-lift] to obtain $p:S'\\to S$, $s'$ over $s$ and a split closed torus $T\\hookrightarrow G_{S'}$ extending $j_0$. Work on an affine neighborhood of $s'$ and apply the already proved step 2 there. For now rename this base $S$ and its point $s$; all geometric fibre centralizers $C_{H_{\\bar u}}(T_{\\bar u})$ equal $T_{\\bar u}$. At the end we take the image of the final open neighborhood under the original flat finitely presented map $p$; the exact descent argument is step 10.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-geometric-torus-fppf-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.86, first paragraph"
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{Spec}A$ and $M=\\mathbf Z^r=X^*(T)$. By [lem-sfb-relative-torus-centralizer-normalizer], $\\mathfrak g=\\operatorname{Lie}(G)$ is finite locally free and base-change compatible. Apply [lem-sfb-relative-torus-bundle-weights] to its conjugation coaction. At $\\bar s$, [lem-sfb-reductive-rank-one-reflections] gives weight zero of dimension $r$, a finite set $\\Phi$ of nonzero weights of dimension one each, and $\\mathbf Q\\alpha\\cap\\Phi=\\{\\alpha,-\\alpha\\}$ for every $\\alpha\\in\\Phi$. There are only finitely many summands on this affine base; shrink so that all their ranks are constant. Consequently on every geometric fibre the nonzero weights are exactly $\\Phi$, with dimension one, and the zero weight has dimension $r$. Empty $\\Phi$ is allowed.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed pp.86-87, weight-space paragraph"
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in\\Phi$, let $L_\\alpha=M\\cap\\mathbf Q\\alpha$ and put $K_\\alpha=\\operatorname{Spec}A[M/L_\\alpha]\\subseteq T$. Concretely divide the integer coordinates of $\\alpha$ by their greatest common divisor to get a primitive vector $\\beta$; elementary integer row operations put $\\beta$ first in a basis of $M$. The quotient $M/L_\\alpha$ is therefore free of rank $r-1$, and the displayed inclusion is, in these coordinates, the subtorus with first coordinate $1$. A character $m$ restricts trivially precisely when $m\\in L_\\alpha$. Thus [lem-sfb-relative-torus-bundle-weights] identifies the invariant tangent bundle with the sum of the zero, $\\alpha$ and $-\\alpha$ summands, of total rank $r+2$. This uses the reducedness condition from step 4 and remains valid when $\\alpha$ is not primitive or the residue characteristic divides its coordinates.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.87, construction of T_alpha and invariant-weight calculation"
+   }
+  },
+  {
+   "text": "Put $J_\\alpha=C_G(K_\\alpha)$, smooth affine finitely presented with base-change compatible Lie algebra by [lem-sfb-relative-torus-centralizer-normalizer]. On a geometric fibre let $H_{\\alpha,\\bar u}=C_{H_{\\bar u}}(K_{\\alpha,\\bar u})$. It is smooth connected by [lem-sfb-torus-centralizer-smooth-connected], and equals $(J_{\\alpha,\\bar u})^0$: its points belong to $H_{\\bar u}$, while the identity component of $J_{\\alpha,\\bar u}$ lies in the identity component of $G_{\\bar u}$. Its Lie dimension is $r+2$ by step 5 and the centralizer Lie formula, so its dimension is $r+2$ by [lem-sfb-group-tangent-dimension-smoothness]. It contains the central torus $K_{\\alpha,\\bar u}$ of dimension $r-1$, and $T_{\\bar u}$ is maximal in it by step 2. Its special fibre is reductive by [lem-sfb-reductive-torus-fixed-subgroup] applied in $H_{\\bar s}$.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-group-tangent-dimension-smoothness",
+    "lem-sfb-reductive-torus-fixed-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.87, reduction to corank-one centralizers"
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\Phi$. Apply [lem-sfb-reductive-rank-one-reflections] in the original special reductive group $H_{\\bar s}$. It gives a normalizer element $n_\\alpha\\in H_{\\alpha,\\bar s}(\\Omega)$ whose induced automorphism $\\sigma_\\alpha$ of $T_{\\bar s}$ sends $\\alpha$ to $-\\alpha$. Apply [lem-sfb-relative-torus-centralizer-normalizer] to $T\\subseteq J_\\alpha$. Inside its smooth normalizer take the open-and-closed locus with action matrix $\\sigma_\\alpha$, and intersect with the relative identity-component open of $J_\\alpha$ from [lem-sbc-smooth-section-component-open]. Call this open scheme $W_\\alpha$. It is smooth over the base, and its image contains $s$ because it contains $n_\\alpha$ on that geometric fibre. By [lem-weil-pbc-smooth-restrict-open-subschemes] it is smooth, hence flat and locally of finite presentation by [lem-pc-smooth-flat]; [lem-weil-pbc-flat-lfp-open] makes its image open. Replace the base by the intersection of these finitely many open images. For every geometric point of this base, $W_\\alpha$ has a point after some extension to an algebraically closed field. Such a point normalizes $T$, lies in the identity component of $J_\\alpha$, and does not centralize $T$, since $\\alpha\\ne-\\alpha$ in the free lattice $M$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sbc-smooth-section-component-open",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.88, lifting the nontrivial Weyl element; use the open image of its normalizer action locus"
+   }
+  },
+  {
+   "text": "Every $H_{\\alpha,\\bar u}$ is nonsolvable. Otherwise it remains smooth connected and solvable after the algebraically closed extension in step 7, by [lem-sfb-solvable-normal-subgroup-products]. Apply [lem-sfb-perfect-solvable-unipotent-torus] there to obtain a normal unipotent subgroup with torus quotient $q:H_\\alpha\\to D$. Since $T$ is maximal, [lem-sfb-solvable-torus-complements] says $q|_T$ is an isomorphism. For the normalizer element $n$ of step 7, commutativity of $D$ gives $q(ntn^{-1})=q(t)$ on every algebra. Injectivity of $q|_T$ then gives $ntn^{-1}=t$ on every algebra, contradicting its action matrix. This proves nonsolvability on the original geometric fibre without assuming that the chosen normalizer point was already rational over its field.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-solvable-torus-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.88, nonsolvability of the corank-one centralizers"
+   }
+  },
+  {
+   "text": "By [lem-sfb-nonsolvable-central-torus-corank-three], each $H_{\\alpha,\\bar u}$ is reductive: it is smooth connected affine, nonsolvable by step 8, contains the central torus $K_{\\alpha,\\bar u}$ and has $\\dim H_{\\alpha,\\bar u}=r+2=(r-1)+3$. For every geometric fibre $H_{\\bar u}$, the torus $T_{\\bar u}$ is maximal and self-centralizing by step 2, and its nonzero weights are exactly $\\Phi$ by step 4. Apply [lem-sfb-corank-one-centralizer-reductivity-test] to obtain reductivity of $H_{\\bar u}$. If $\\Phi$ is empty there were no $K_\\alpha$ or normalizer-image restrictions, and the same criterion applies with its empty family. Thus the argument includes tori, trivial neutral fibres and rank zero.",
+   "uses": [
+    "lem-sfb-nonsolvable-central-torus-corank-three",
+    "lem-sfb-corank-one-centralizer-reductivity-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed pp.87-88, Lemma 3.1.10 and final dimension argument"
+   }
+  },
+  {
+   "text": "Return to the base change $p:S'\\to S$ of step 3, and let $O\\subseteq S'$ be the final open neighborhood of $s'$ just obtained. Set $U=p(O)$; it is open and contains the original $s$ by [lem-weil-pbc-flat-lfp-open]. Given a geometric point $\\operatorname{Spec}\\Omega\\to U$, the base change $O_\\Omega$ is nonempty and quasi-finite of finite type over $\\Omega$. Choose an affine open in it and a maximal ideal of its nonzero coordinate ring. That point has a finite residue extension of $\\Omega$ by quasi-finiteness, so its residue field is $\\Omega$, since $\\Omega$ is algebraically closed. It gives a lift $\\operatorname{Spec}\\Omega\\to O$. The geometric fibre of $G_O$ at this lift is precisely $G_\\Omega$, with the same identity component. Step 9 proves its reductivity. Hence $U$ proves the first assertion. Step 2, applied directly to the torus specified in the question over the original base, gives the required $V$ for the second assertion.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9 proof (1), printed p.86, fppf-local reduction and descent to its open image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-section-component-open",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-smooth-group-fibre-dimension",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-geometric-torus-fppf-lift",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-group-tangent-dimension-smoothness",
+  "lem-sfb-reductive-torus-fixed-subgroup",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-pc-smooth-flat",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-nonsolvable-central-torus-corank-three",
+  "lem-sfb-corank-one-centralizer-reductivity-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Proposition 3.1.9(1),(2) and Lemma 3.1.10, printed pp.85-88, read online; local copy WANTED. Q49 writes the affine weight and normalizer-open-image assembly explicitly; no global affineness of G^0 or reductivity in nearby fibres is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reductive|[Mm]aximal[Tt]orus|[Rr]eductive[Ll]ocus",
+   "results": "{\"t\": \"2026-10-24T02:52:17Z\", \"tool\": \"grep\", \"query\": \"reductive|[Mm]aximal[Tt]orus|[Rr]eductive[Ll]ocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern openness of smooth/etale/unramified loci, affine neighborhoods or open immersions, not reductivity of group fibres or maximal tori"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductivity of geometric identity components and maximality of a torus are open conditions for smooth affine group schemes",
+   "results": "{\"t\": \"2026-10-24T02:52:17Z\", \"tool\": \"leansearch\", \"query\": \"Reductivity of geometric identity components and maximality of a torus are open conditions for smooth affine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.IsGeometricallyReduced.casesOn\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"AlgebraicGeometry.isAffineOpen_top\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsAffine.recOn\"], \"digest\": \"cd9d7e74bfa57db6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern openness of smooth/etale/unramified loci, affine neighborhoods or open immersions, not reductivity of group fibres or maximal tori"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-24T02:52:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion\"], \"digest\": \"2545de12e0538e86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern openness of smooth/etale/unramified loci, affine neighborhoods or open immersions, not reductivity of group fibres or maximal tori"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive fibres persist in an open neighborhood of the base point in a smooth affine group scheme, as does fibrewise maximality of a fixed torus",
+   "results": "{\"t\": \"2026-10-24T02:52:18Z\", \"tool\": \"leanfinder\", \"query\": \"Reductive fibres persist in an open neighborhood of the base point in a smooth affine group scheme, as does fibrewise maximality of a fixed torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.reduce_to_affine_nbhd\", \"Algebra.isOpen_smoothLocus\", \"ContMDiffFiberwiseLinear.locality_aux₁\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"ec435f20f70987e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern openness of smooth/etale/unramified loci, affine neighborhoods or open immersions, not reductivity of group fibres or maximal tori"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine group scheme the locus where geometric fibre identity components are reductive is open and a torus maximal in one fibre stays maximal nearby",
+   "results": "{\"t\": \"2026-10-24T02:52:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth affine group scheme the locus where geometric fibre identity components are reductive is open and a torus maximal in one fibre stays maximal nearby\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.reduce_to_affine_global\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\"], \"digest\": \"93fb64ab840436ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern openness of smooth/etale/unramified loci, affine neighborhoods or open immersions, not reductivity of group fibres or maximal tori"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductivity of geometric neutral fibres and maximality of a split torus persist on an open neighborhood of a base point of a smooth affine group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth/etale/unramified loci and affine-neighborhood lemmas do not concern reductive fibres or maximal tori"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reductive locus of a smooth affine group scheme is open, and a torus maximal in one reductive fibre remains maximal nearby",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(x : U) (hx : IsClosed {(x : X)}) : (hU.primeIdealOf x).asIdeal.IsMaximal\", \"doc\": \"If a point $ x $ in an affine open subset $ U $ of a scheme $ X $ satisfies the condition that the singleton set $ \\\\{x\\\\} $ is closed in $ X $, then the prime ideal $ \\\\mathfrak{p}_x $ associated with $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] {f : A} :\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(P : ∀ {X : Scheme} (_ : X.Opens), Prop) {X : Scheme} (U : X.Opens)\\n  (h₁ : ∀ (X : Scheme) (U : X.Opens), (∀ x : U, ∃ (V : _) (_ : x.1 ∈ V) (_ : V ⟶ U), P V) → P U)\\n  (h₂ : ∀ (X Y) (f : X ⟶ Y) [IsOpenImmersion f], ∃ (U : X.Opens) (V : Y.Opens), U = ⊤ ∧ V = f.opensRange ∧ (P U → P V))\\n  (h₃ : ∀ R : C\", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_top\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) [IsAffine X] : IsAffineOpen (⊤ : X.Opens)\", \"doc\": \"For any affine scheme $X$, the entire underlying topological space (represented by the top element $\\\\top$ in the lattice of open subsets of $X$) is an affine open subset of $X$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth/etale/unramified loci and affine-neighborhood lemmas do not concern reductive fibres or maximal tori"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth/etale/unramified loci and affine-neighborhood lemmas do not concern reductive fibres or maximal tori"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|[Mm]aximal[Tt]orus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth/etale/unramified loci and affine-neighborhood lemmas do not concern reductive fibres or maximal tori"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-model-reductive-neutral-lift",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.9(1),(2), printed pp.85-88 (split-torus instance of (2))",
+   "via": [
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-torus-fibre-openness",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved maximality first by dimensions of the smooth relative centralizer, then used an fppf local torus lift, constant adjoint character ranks, codimension-one centralizers and nontrivial normalizer action loci to prove reductivity. Created five statement-only supporting lemmas. Read Conrad online, checked existing field-level inputs and logged all new Mathlib searches; no Lean attachment.",
+  "blueprint": "The latest blueprint has no equivalent reductive-fibre or torus-openness node. Retains the inherited null ancestor and via chain for det-thm-sf-ctf-stability-direct-images proof (3). This split realizes the supporting Proposition 3.1.9 input to lem-sfb-smooth-model-reductive-neutral-lift under the integral Chevalley atlas route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-section-component-open",
+    "why": "Generic scheme-theoretic tool: The component locus of a smooth section is open. Used for the identity-component open, preservation of smoothness on an open, or openness of a smooth/flat map; this unit supplies no such general foundational result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-section-component-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-a2b348a56",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-a2b348a56 (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and every cited statement. Conrad's Reductive group schemes is absent locally (WANTED); I fetched the Stanford PDF and read Prop 3.1.9 with its proof (pp.85-88), Lemma 3.1.10, 3.1.6, 2.1.2, 2.2.4 and B.2.7. The ten steps follow Conrad's route: smooth centralizer with constant fibre dimension gives maximality; fppf lift of a split maximal torus; weight bundles shrunk to constant rank; T_alpha from the saturated lattice; Lemma 3.1.10; Weyl element; solvable implies N=Z, so nonsolvable; central-torus codimension-3 argument; descent by open image. The one variation is valid: the open image of the smooth stratum N_sigma ∩ J_alpha^0 replaces Conrad's etale section of W. Hypotheses checked at every step. The new nodes are all true and none is a duplicate: relative centralizer/normalizer (Conrad 2.1.2/2.2.4); geometric torus fppf lift (any residue field, so not the alg-closed split-torus-etale-subgroup-lift); comodule weights over any ring (the field-level weight nodes differ); corank-one test (Lemma 3.1.10, Z_H(T)=T present and needed); nonsolvable codimension-3 central torus (p.88). Small cases checked: r=0, Phi empty, non-primitive alpha, characteristic p. Statement is unchanged against live and the item is still unsplit live; no SGA citation (the URL's 'sga3' does not match the SGA 4 lock). Tool use lem-sbc-smooth-section-component-open accepted as a generic scheme lemma. Batch-5 check: all ten listed citations reach sec-trace-formula only through generic nodes of unit sk-i-curve-zero (fppf covering base change, component open, fibre smoothness criterion, k[L] smooth, algebraic-space definition, fpqc descent of smoothness), none of which is a step of the trace formula or of Poincare duality. FIX: lem-sfb-relative-torus-bundle-weights used kappa(u) without a definition; added def-weil-residue-field to its statement and stmt_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveTorusFibreOpenness",
+  "declaration": "AlgebraicGeometry.reductive_torus_fibre_openness",
+  "declarations": [
+   "AlgebraicGeometry.groupFibreNeutralComponent",
+   "AlgebraicGeometry.groupFibreNeutralComponentι",
+   "AlgebraicGeometry.reductive_torus_fibre_openness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveTorusFibreOpenness.lean",
+  "statement": "theorem reductive_torus_fibre_openness {S : Scheme.{u}} (G : Grp (Over S)) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] (k : Type u) [Field k] [IsAlgClosed k] (s : Spec (.of k) ⟶ S) (hred : ReductiveTorusCentralizer.IsReductive (groupFibreNeutralComponent G s)) : (∃ U : S.Opens, s (IsLocalRing.closedPoint k) ∈ U ∧ ∀ (K : Type u) [Field K] [IsAlgClosed K] (t : Spec (.of K) ⟶ S), t (IsLocalRing.closedPoint K) ∈ U → ReductiveTorusCentralizer.IsReductive (groupFibreNeutralComponent G t)) ∧ (∀ (r : ℕ) (j : relativeSplitTorus S r ⟶ G), IsClosedImmersion j.hom.hom.left → (∃ i : (Over.pullback s).mapGrp.obj (relativeSplitTorus S r) ⟶ groupFibreNeutralComponent G s, i ≫ groupFibreNeutralComponentι G s = (Over.pullback s).mapGrp.map j ∧ ReductiveTorusCentralizer.IsMaximalTorus i) → ∃ V : S.Opens, s (IsLocalRing.closedPoint k) ∈ V ∧ ∀ (K : Type u) [Field K] [IsAlgClosed K] (t : Spec (.of K) ⟶ S), t (IsLocalRing.closedPoint K) ∈ V → ∃ i : (Over.pullback t).mapGrp.obj (relativeSplitTorus S r) ⟶ groupFibreNeutralComponent G t, i ≫ groupFibreNeutralComponentι G t = (Over.pullback t).mapGrp.map j ∧ ReductiveTorusCentralizer.IsMaximalTorus i)",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two helpers bundle the existing canonical open identity component and its inclusion for the actual pullback fibre. Their local instances expose existing pullback finite-type and quasi-compactness instances; their data are entirely constructed. A geometric point represents its underlying ordinary point, and every ordinary point admits an algebraic residue-field-closure lift. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-744ebc603",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: Grp (Over S) with Smooth/IsAffineHom/LFP; a geometric point with k alg closed in Type u is equivalent to κ(s)-bar (reductivity is invariant under alg-closed extension); neutral fibre = recorded GrpObj.identityComponent of the actual pullback (real helpers, no duplicate); IsReductive/IsMaximalTorus/relativeSplitTorus owners read; maximality as ∃ i, i≫ι = pullback j (ι mono) ∧ IsMaximalTorus; U and V over all geometric points; hred kept; r=0, empty S and universes checked. Delivery diff vs live = lean record + 3 landed def stmt_deps; statement verbatim. FIX: (1) H8 docstring steps 3/10 said 'etale' but lem-sfb-geometric-torus-fppf-lift gives a flat, finitely presented, quasi-finite base change: reworded, signature unchanged, nt_compile --json clean (6.9 s, exit 0), lean-record.json pins the verbatim statement (refit_record OK); (2) H11 self-check second reading replaced by fixes/<item>.report.md (worker report verbatim + independent clause-by-clause reading)."
+ }
+}

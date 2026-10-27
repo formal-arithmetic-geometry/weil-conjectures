@@ -1,0 +1,166 @@
+{
+ "id": "def-pd-section-resolving-oplax-constraint-data",
+ "kind": "definition",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Fixed resolving constraint diagram data",
+ "statement": "For four monoidal categories A,B,C,D and functors F:A→B, L:C→D, q:A→C, r:B→D, choose binary localization maps s:qP⊗qQ→q(P⊗Q), t:rP⊗rQ→r(P⊗Q), a natural transformation ε:q⋙L→F⋙r, ordinary oplax arrows β and unit, and regular-unit isomorphisms. Define the left and right nested localization maps by tensoring s with an identity and then applying s. Define pairModel=L(s)≫ε and six vertex maps by their prescribed nested pairModel, ε and t composites. RepresentativeEquations is the binary representative equation and scalar-unit equation. EdgeIdentification consists of the six commutative edge squares; VertexInvertibility says these vertex maps are isomorphisms, and AssociativityPaths identifies both full paths and asserts their equality. Define regularLeft and regularRight using the inverse unit comparison and the unitor. UnitIdentification records all unit vertex isomorphisms, edge squares, both full-path formulas and both path equalities. UnitEdgeIdentification records just its vertex isomorphisms, three edge squares and opposite branch on each side. Specialize these formulas to the fixed section cochain/derived operations, modelTensor=qTensor.app, transported derived monoidal structure and specified localized regular comparison; obtain ResolvingClosure, SectionHypotheses, SectionVertices, SectionEdges, SectionAssociativity, SectionUnits and SectionUnitEdges. Specializing instead to the fixed internal/section derived equivalences and inverse γ and θ gives Conjugation, InternalEdges and InternalUnits. The underlying operations are those of the existing statement dependencies, including [sk-def-sfb-condensed-ring]; none is chosen anew.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); explicit resolving diagram computation, original lem-pd-section-resolving-oplax-constraint-diagrams; Existing fixed data of the parent, plus the edge-only unit predicate"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pd-section-derived-realization",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-pd-section-kflat-tensor-comparison",
+  "lem-pd-section-oplax-total-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Alias the shared transportedDerivedMonoidal of the tensor-data module. Its complete structure is proved equal to the original canonical Monoidal.transport, while its tensor morphism formula is definitionally the map of tensor. No object, map or coherence morphism changes.",
+   "uses": [
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-derived-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Alias the shared transportedDerivedMonoidal from def-pd-section-derived-tensor-data. Its generic TensorFunctorTransport API proves equality of the complete monoidal structure with Mathlib transport, while tensor itself is the native tensor functor for this same cached structure. This removes duplicated construction during comparison; no diagram, object, or mathematical map changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural resolution comparisons identify every edge in the associativity and unit diagrams of derived pullback tensor",
+   "results": "8 hits, including CategoryTheory.Limits.pullbackAssoc and pullbackAssocIsPullback; these concern categorical pullbacks and do not state the specified derived tensor representative identities. A second unit query returned CategoricalPullback rightUnitor formulas and Bimod.leftUnitorBimod, not this derived module statement.",
+   "date": "2026-10-26",
+   "verdict": "no match: project-specific prescribed representative comparisons are absent from Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate oplax monoidal functor tensor and unit maps by equivalences and natural isomorphisms preserving each diagram edge",
+   "results": "8 hits in Mathlib/CategoryTheory/Monoidal/Functor, including Equivalence.functor_map_μ_inverse_comp_counit_app_tensor and Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse; generic monoidal equivalence identities only. The initial transport query also found Functor.Monoidal.transport_δ_assoc and OplaxMonoidal.δ_natural.",
+   "date": "2026-10-26",
+   "verdict": "no match: these generic tools do not identify the specified modelTensor/epsilon vertices or resolving regular-unit edges"
+  },
+  {
+   "tool": "grep",
+   "query": "rg associator_naturality|leftUnitor_naturality|rightUnitor_naturality in Mathlib/CategoryTheory/Monoidal/Category.lean; rg μ_natural|associativity|left_unitality|right_unitality in Monoidal/Functor.lean; rg resolving_oplax|EdgeIdentification|AssociativityPaths|ResolvingClosure|modelTensor in lean/Sheaf and lean/WeilConjectures",
+   "results": "Monoidal/Category.lean:181,188,194 gives generic naturality, also used through the ordinary cochain comparison. All occurrences of these project diagram predicates were in the assigned module. Blueprint searches for resolving oplax, unit model and internal conjugation found no imported blueprint counterpart.",
+   "date": "2026-10-26",
+   "verdict": "no existing statement with these fixed comparisons; only the assigned combined theorem and generic monoidal tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxConstraintDiagrams",
+  "date": "2026-10-26",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Existing fixed data of the parent, plus the edge-only unit predicate; Seeded nt-target-poincare-isiso Step 2, through lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Steps 4–5: actual internal representative square, regular unit and cochain constraints. Old representative-square proof: Step 7: nested total eligibility and associator/unitor diagram paths.",
+   "via": [
+    "lem-pd-section-resolving-oplax-constraint-diagrams",
+    "lem-pd-section-derived-representative-square",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionResolvingOplaxConstraintData",
+  "file": "lean/Sheaf/Paper/SectionResolvingOplaxConstraintData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.modelTensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.leftModel",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.rightModel",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.pairModel",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.vertex0",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.vertex1",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.vertex2",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.vertex3",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.vertex4",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.vertex5",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.RepresentativeEquations",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.upperPath",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.lowerPath",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.VertexInvertibility",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.EdgeIdentification",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.AssociativityPaths",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.regularLeft",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.regularRight",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.leftVertex1",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.leftVertex2",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.leftUnitPath",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.rightVertex1",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.rightVertex2",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.rightUnitPath",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.UnitIdentification",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.UnitEdgeIdentification",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.modelTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.regular",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.derivedMonoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionTensorArrow",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.ResolvingClosure",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionHypotheses",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionVertices",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionEdges",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionAssociativity",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionUnits",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.SectionUnitEdges",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.internalModelTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.InternalTensorArrow",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.Conjugation",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.InternalEdges",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.InternalUnits"
+  ],
+  "statement": "def modelTensor (T : Scheme.{u}) (P Q : CochainComplex (modules Λ T) ℤ) : (tensor Λ T).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⟶ DerivedCategory.Q.obj (P ⊗ Q)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8bc46",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T023317-L-542001",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-83a6c",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T222800-L-695347",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature + 4 rewritten public predicates rfl-equal to verbatim originals; tensor rfl-equal to old body; derivedMonoidal = Monoidal.transport (monoidal_eq); delivered files vs current clone (G6 b4e6cc1 kept); node proof/proof_deps vs Lean imports; axioms (sorryAx only via section_resolving_oplax_constraint_diagrams)"
+ }
+}

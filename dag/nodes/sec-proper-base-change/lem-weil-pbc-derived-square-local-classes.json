@@ -21,58 +21,37 @@
  ],
  "proof": [
   {
-   "text": "Resolve F and G by I and J. Resolve v_*J by a bounded below complex L of injectives with quasi-isomorphism ell:v_*J -> L, and lift the coefficient map to beta:I -> L. The lift preserves the augmentation phi followed by v_* of the augmentation of J.",
+   "text": "Use the resolution-to-local-class comparison on f and k to express the source and target classical class maps through the explicit local-resolution comparisons, the normalized local class maps, and the total/classical isomorphisms.",
    "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "def-weil-pbc-module-cohomology-fmap"
+    "lem-weil-pbc-square-resolution-local-class"
    ],
    "elementary": false
   },
   {
-   "text": "The existing derivedDirectImage_square_mate theorem identifies the right-adjoint mate with the canonical derived direct-image square. The existing normalizedDirectImageSquare_unit theorem computes its action on the pasted right-derived units. Apply these equations to the chosen injective representatives and beta,ell. They identify A(phi) with the roof f_*I -> f_*L <- g_*k_*J, whose arrows are f_*beta and f_*ell and whose underived square is the sectionwise direct-image square comparison.",
+   "text": "Expand the evaluated comparison composite and cancel the source total/classical isomorphism with its inverse. Naturality of the normalized derived local class moves H^q(A(phi)) before the class map. Substitute the given local defining equation of e. By definition, topEdgeInverseLocalClass is squareInverseOpenComparison followed by the upstairs local class map.",
    "uses": [
-    "lem-sc-derived-direct-image-square-mate",
-    "lem-pc-normalized-direct-image-square-unit",
-    "lem-weil-pbc-derived-square-unit-map"
+    "lem-weil-pbc-square-local-class-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict to U and U-prime. Open restriction preserves injective resolutions and their augmentations. Sections of ell are a quasi-isomorphism; hence the cohomology of this roof is the cohomology map of the restricted coefficient map. The independence theorem allows exactly the specified restricted-resolution section comparisons.",
+   "text": "Apply the local-hypercohomology roof calculation. It replaces the composite before the target class map by moduleCohomologyFMap of the restricted coefficient map followed by the target local-resolution comparison. Reassociate and use the target resolution-to-local-class comparison backwards. No class map is cancelled or inverted.",
    "uses": [
-    "lem-weil-pbc-module-open-restriction-injectives",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-    "lem-weil-pbc-module-cohomology-fmap-functorial"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The local class maps send each cocycle to its class in the cohomology sheaf. Apply their naturality to beta and ell and cancel only the section cohomology isomorphism induced by ell. The local derived-sections comparison and the defining equation of e identify the intermediate classes with inverse-open classes. The canonical total/classical comparisons and the augmentation-preserving resolution comparisons give the displayed equation.",
-   "uses": [
-    "lem-pc-ringed-space-sheafification-cohomology",
-    "lem-trf-unbounded-direct-image-section-presheaf",
-    "lem-weil-pbc-higher-direct-image-presheaf"
+    "lem-weil-pbc-square-local-hypercohomology",
+    "lem-weil-pbc-square-resolution-local-class"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-bounded-below-injective-resolution",
-  "def-weil-pbc-module-cohomology-fmap",
-  "lem-sc-derived-direct-image-square-mate",
-  "lem-pc-normalized-direct-image-square-unit",
-  "lem-weil-pbc-derived-square-unit-map",
-  "lem-weil-pbc-module-open-restriction-injectives",
-  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
-  "lem-pc-ringed-space-sheafification-cohomology",
-  "lem-trf-unbounded-direct-image-section-presheaf",
-  "lem-weil-pbc-higher-direct-image-presheaf"
+  "lem-weil-pbc-square-resolution-local-class",
+  "lem-weil-pbc-square-local-class-naturality",
+  "lem-weil-pbc-square-local-hypercohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01E4, lemma-describe-higher-direct-images; Tag 01FB, remark-explain-arrow; Tags 0BKJ and 0D5X for the local sheafification and Leray comparisons; explicit normalization and comparison argument"
+  "place": "Tags 01E4, 01FB, 0BKJ and 0D5X; explicit composition of resolution/class and pre-sheafification roof calculations"
  },
  "mathlib_searches": [
   {
@@ -131,11 +110,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedSquareLocalClasses.lean",
   "declaration": "AlgebraicGeometry.derivedSquareUnit_localClasses",
   "declarations": [
-   "AlgebraicGeometry.restrictedDirectImageMap",
-   "AlgebraicGeometry.schemeSingleCohomologyComparison",
    "AlgebraicGeometry.derivedSquareUnit_localClasses"
   ],
-  "statement": "theorem derivedSquareUnit_localClasses {X S Z T : Scheme.{u}}\n    (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)\n    (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)\n    (e : (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).obj\n        ((schemeDerivedDirectImage g).obj ((schemeDerivedDirectImage k).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))) ⟶\n      (pushforward g).obj ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (q : ℤ)).obj\n          ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))))\n    (he : ∀ V : S.Opensᵒᵖ,\n      (RingedSpace.topEdgeLocalClass S.toRingedSpace (q : ℤ)\n        ((schemeDerivedDirectImage g).obj ((schemeDerivedDirectImage k).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G)))).app V ≫\n        ((SheafOfModules.toSheaf (moduleRings S.toRingedSpace)).map e).hom.app V =\n      (RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom (q : ℤ)\n        ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))).hom.app V ≫\n      (RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom (q : ℤ)\n        ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))).app V)\n    (V : S.Opens) (I : InjectiveResolution F) (J : InjectiveResolution G)\n    (R : RestrictedResolutionSections I (f ⁻¹ᵁ V))\n    (R' : RestrictedResolutionSections J (v ⁻¹ᵁ (f ⁻¹ᵁ V))) :\n    (resolutionSectionClass R.resolution\n        (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)\n        V R.sections q ≫ Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V) ≫\n      Hom.app (M := ((pushforward f).rightDerived q).obj F)\n        (N := (pushforward g).obj (((pushforward k).rightDerived q).obj G))\n        ((schemeSingleCohomologyComparison f F q).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).map\n            (derivedSquareUnitMap f k g v h F G φ) ≫ e ≫\n        (pushforward g).map (schemeSingleCohomologyComparison k G q).hom) V =\n      moduleCohomologyFMap (v.resLE (f ⁻¹ᵁ V) (v ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl)\n        (restrictedDirectImageMap v φ (f ⁻¹ᵁ V)) q ≫\n      resolutionSectionClass R'.resolution\n        (((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex)\n        (g ⁻¹ᵁ V) (R'.sections ≪≫ eqToIso (congrArg (fun U ↦\n          ((RingedSpace.openModuleSections Z.toRingedSpace U).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj J.cocomplex) (by\n              rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h]))) q ≫\n      Hom.app (J.isoRightDerivedObj (pushforward k) q).inv (g ⁻¹ᵁ V)",
+  "statement": "theorem derivedSquareUnit_localClasses {X S Z T : Scheme.{u}}\n    (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)\n    (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)\n    (e : (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).obj\n        ((schemeDerivedDirectImage g).obj ((schemeDerivedDirectImage k).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))) ⟶\n      (pushforward g).obj ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (q : ℤ)).obj\n          ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))))\n    (he : ∀ V : S.Opensᵒᵖ,\n      (RingedSpace.topEdgeLocalClass S.toRingedSpace (q : ℤ)\n        ((schemeDerivedDirectImage g).obj ((schemeDerivedDirectImage k).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G)))).app V ≫\n        ((SheafOfModules.toSheaf (moduleRings S.toRingedSpace)).map e).hom.app V =\n      (RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom (q : ℤ)\n        ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))).hom.app V ≫\n      (RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom (q : ℤ)\n        ((schemeDerivedDirectImage k).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G))).app V)\n    (V : S.Opens) (I : InjectiveResolution F) (J : InjectiveResolution G)\n    (R : RestrictedResolutionSections I (f ⁻¹ᵁ V))\n    (R' : RestrictedResolutionSections J (v ⁻¹ᵁ (f ⁻¹ᵁ V))) :\n    (resolutionSectionClass R.resolution\n        (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)\n        V R.sections q ≫ Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V) ≫\n      Hom.app (M := ((pushforward f).rightDerived q).obj F)\n        (N := (pushforward g).obj (((pushforward k).rightDerived q).obj G))\n        ((schemeSingleCohomologyComparison f F q).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).map\n            (derivedSquareUnitMap f k g v h F G φ) ≫ e ≫\n        (pushforward g).map (schemeSingleCohomologyComparison k G q).hom) V =\n      moduleCohomologyFMap (v.resLE (f ⁻¹ᵁ V) (v ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl)\n        (restrictedDirectImageMap v φ (f ⁻¹ᵁ V)) q ≫\n      resolutionSectionClass R'.resolution\n        (((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex)\n        (g ⁻¹ᵁ V) (R'.sections ≪≫ eqToIso (C := CochainComplex AddCommGrpCat.{u} ℕ)\n          (congrArg (β := CochainComplex AddCommGrpCat.{u} ℕ) (fun U : Z.Opens ↦\n          ((RingedSpace.openModuleSections Z.toRingedSpace U).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj J.cocomplex) ((Scheme.Hom.comp_preimage v f V).symm.trans\n            ((congrArg (fun t : Z ⟶ S ↦ t ⁻¹ᵁ V) h).trans\n              (Scheme.Hom.comp_preimage k g V))))) q ≫\n      Hom.app (J.isoRightDerivedObj (pushforward k) q).inv (g ⁻¹ᵁ V)",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-21"
@@ -151,13 +128,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "C-f3b98",
+  "group": "F9",
   "result": "pass",
-  "landing": "20261021T233708-L-851056",
+  "landing": "20261025T202016-L-2663496",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered item/new modules/nodes/change records vs published DerivedSquareLocalClasses + node lem-weil-pbc-derived-square-local-classes; old vs new statement type-equal (with_reducible rfl); sandbox compile of delivery + importers TopBaseChangePresheaf, TopDegreeBaseChange; #print axioms"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

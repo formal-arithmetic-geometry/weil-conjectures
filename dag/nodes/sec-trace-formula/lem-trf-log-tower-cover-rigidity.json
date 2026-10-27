@@ -1,0 +1,257 @@
+{
+ "id": "lem-trf-log-tower-cover-rigidity",
+ "kind": "statement",
+ "title": "Rigidity and common-cover comparison of log blowup towers",
+ "statement": "Let $(X,M)$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup] and $u:(U,N)\\to(X,M)$ a surjective strict etale morphism [lem-trf-log-fan-chart-blowup, def-weil-etale-morphism]. For two ideal subsheaves $I,J\\subset M$ [def-weil-pbc-etale-sheaf-of-sets], equality of their restrictions to $U$ implies $I=J$; explicitly $m\\in I(V)$ if and only if its restriction to $V\\times_XU$ belongs to $I|_U$ for every etale $V\\to X$ [def-pc-fibre-product].\n\nLet $B,C$ be two finite saturated log blowup towers over $X$, with nonempty coherent ordered centers [def-trf-strict-etale-log-blowup-procedure]. Any ordered isomorphism $u^*B\\simeq u^*C$ of their uncontracted pullbacks, identity on $U$ and preserving the actual centers, is the pullback of a unique such isomorphism $B\\simeq C$. There is at most one ordered center-preserving isomorphism $B\\simeq C$ over the identity of $X$. Consequently equalities and cocycle identities between such isomorphisms can be tested after a surjective strict etale cover.\n\nIn particular, let $U\\to X$ and $V\\to X$ be two surjective strict etale covers, let $S$ and $T$ be contracted finite towers over $U$ and $V$ with center-preserving uncontracted descent data, and let $B,C$ be towers descending these data. If the full pullbacks of $S,T$ to $U\\times_XV$ are isomorphic over the identity with centers and order preserved, then $B,C$ have the same length and are uniquely isomorphic over $X$ with centers preserved. For three such choices the resulting comparisons satisfy the cocycle identity. Descent using the identity cover of a charted input returns the original tower with its actual centers.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII proof of 3.3.15, pp.109--110: uniqueness in the descent reduction and comparison on a finite common cover, expanded using 3.3.8--3.3.10."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-fan-chart-blowup",
+  "def-weil-etale-morphism",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-trf-log-tower-full-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For an etale $V\\to X$, put $V_U=V\\times_XU$. The etale-cover base-change lemma, applied to the singleton cover $U\\to X$, makes $V_U\\to V$ a cover. Since $u$ is strict etale, restriction of its log structure and of a subideal to the small site of $U$ is ordinary sheaf restriction. If $m|_{V_U}\\in I(V_U)$, its two restrictions agree on $V_U\\times_VV_U$ as sections of $M$, hence as sections of the subsheaf $I$. The sheaf equalizer for $I$ glues them to $a\\in I(V)$; separatedness of $M$ gives $a=m$. The converse is restriction. Apply this membership criterion to both $I,J$ to obtain equality whenever their restrictions agree. The argument works for every ideal subsheaf, without coherence.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-fan-chart-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions."
+   }
+  },
+  {
+   "text": "First prove uniqueness without a cover. Two ordered center-preserving tower isomorphisms have the same initial log morphism, the identity. Suppose their level-$i$ maps agree. Their level-$(i+1)$ maps have target the universal saturated log blowup of the center on the target level $i$. They factor the same log morphism from the source level $i+1$, and that morphism pulls this center back to the invertible blown-up ideal, because the level-$i$ map preserves the actual center. The uniqueness clause of the blowup universal property makes the two maps equal, including their log-section maps. Induction proves uniqueness at every level. This uses finite ordered towers, with the length-zero case given by the identity.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions."
+   }
+  },
+  {
+   "text": "Let $\\alpha:u^*B\\simeq u^*C$ be the given isomorphism of uncontracted towers. Their lengths agree, since uncontracted pullback keeps the ordered stage set. At each level the synchronization lemma identifies the full pullback of $B$ with $U_i=U\\times_X B_i$, and $U_i\\to B_i$ is surjective strict etale. Set $\\phi_0=1_X$. Maintain the induction hypothesis that $\\phi_i:B_i\\simeq C_i$ has been constructed and its pullback is $\\alpha_i$. Transport the center of $C_i$ to an ideal on $B_i$ by $\\phi_i$. Its restriction to $U_i$ equals the center of $B_i$ restricted there, since $\\alpha_i$ preserves actual centers. Step 1 on $B_i$ therefore identifies these ideals on $B_i$. No contraction, and no inference from equality of the resulting blowup spaces alone, is used.",
+   "uses": [
+    "lem-trf-log-tower-cover-synchronization",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions."
+   }
+  },
+  {
+   "text": "Using the center equality just obtained, the log morphism $B_{i+1}\\to B_i\\xrightarrow{\\phi_i}C_i$ pulls the center of $C_i$ back to an invertible ideal. The universal property of $C_{i+1}$ gives its unique lift $\\phi_{i+1}:B_{i+1}\\to C_{i+1}$. Applying the same construction to $\\phi_i^{-1}$ gives a reverse lift. Their composites factor the original blowup arrows over the identities, so uniqueness identifies both composites with the identity. Thus $\\phi_{i+1}$ is a log isomorphism. Its pullback and $\\alpha_{i+1}$ factor the same log morphism through the pulled-back blowup of the same center, so uniqueness also identifies them. This advances the induction, including the prescribed local map, not just its underlying scheme map.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions."
+   }
+  },
+  {
+   "text": "Finite induction in steps 3--4 constructs the required ordered isomorphism $B\\simeq C$, and step 2 makes it unique. The next induction stage checks preservation of each center; all arrows commute by the factorization equations. In particular two candidate ordered center-preserving maps agree globally; any equality, including a cocycle equation between composites of such isomorphisms, holds if it holds on the cover (indeed both sides already agree by step 2). This proves both the lifting assertion and the stated equality test.",
+   "uses": [
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions."
+   }
+  },
+  {
+   "text": "For the last clause put $W=U\\times_XV$. The etale-cover base-change lemma makes $W\\to U$ a surjective etale cover. Give $W$ the log structure obtained by restricting $M$; strictness identifies it with the restriction from either $U$ or $V$, so this cover is strict. The specified full identifications $u^*B\\simeq S$, $v^*C\\simeq T$ and the common-cover isomorphism give an isomorphism between the full pullbacks of $u^*B$ and $u^*C$ to $W$; recursive pullbacks associate by the fibre-product universal property, and at each blowup by its unique factorization. Apply steps 3--5 first to $W\\to U$, then to $U\\to X$. The result is the unique isomorphism $B\\simeq C$, with equal lengths. Any compatibility with the specified descent data holds by step 2 on the overlaps: both sides are ordered center-preserving isomorphisms over the identity. The same uniqueness gives the cocycle for three choices. For the identity cover the original tower itself realizes the data, and the resulting comparison with any descended tower preserves its actual centers, giving the final assertion.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-trf-log-fan-chart-blowup",
+    "def-pc-fibre-product",
+    "def-trf-fs-log-blowup",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-fan-chart-blowup",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "lem-trf-log-tower-cover-synchronization",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, pp.109--110, descent and uniqueness reductions.",
+  "note": "Detailed sheaf-equalizer and universal-property expansion of the descent uniqueness suppressed in ILO VIII proof of 3.3.15; no SGA route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of ordered saturated log blowup towers preserving the ideal centers descends uniquely from a strict etale surjective cover and is rigid over the base.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePresentation.mk.inj\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  {P : StandardEtalePair R} {x : S} {hasMap : P.HasMap x} {lift_bijective : Function.Bijective ⇑(P.lift x hasMap)}\\n  {P_1 : StandardEtalePair R} {x_1 : S} {hasMap_1 : P_1.HasMap x_1}\\n  {lift_bijective_1 \", \"doc\": \"If two standard étale presentations constructed via the mk function are equal, then their underlying standard étale pairs and elements $x$ (satisfying $f(x)=0$ and $g(x)$ invertible) must be equal. Th\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n  {\"name\": \"StandardEtalePair.hom_ext_iff\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : StandardEtalePair R} {f g : P.Ring →ₐ[R] S}, f = g ↔ f P.X = g P.X\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P = (f, g) $ over $ R $, and an $ R $-algebra $ S $, two $ R $-algebra homomorphisms $ f, g : P.\\text{Ring} \\to S $ are equal if and only if their i\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePresentation.mapEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] → StandardEtalePresentation R S → (S ≃ₐ[R] T) → StandardEtalePresentation R\", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $ and an $ R $-algebra equivalence $ e : S ≃ₐ[R] T $, this function constructs the corresponding standard étale presentation of $ T $ \"}\n  {\"name\": \"StandardEtalePair.hom_ext\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : StandardEtalePair R} {f g : P.Ring →ₐ[R] S}, f P.X = g P.X → f = g\", \"doc\": \"For any commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and any $ R $-algebra $ S $, if two $ R $-algebra homomorphisms $ f $ and $ g $ from the standard étale ring extension $ R[\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of coherent log ideals can be tested on an etale cover and forces unique compatible isomorphisms of universal log blowup towers on common refinements.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ext_iff\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I J : X.IdealSheafData}, I = J ↔ I.ideal = J.ideal\", \"doc\": \"For any scheme $X$ and ideal sheaf data $I$ and $J$ on $X$, the equality $I = J$ holds if and only if the ideals $I.\\text{ideal}(U)$ and $J.\\text{ideal}(U)$ coincide for all affine open subsets $U$ of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"{I J : X.IdealSheafData} {ι : Type*} (U : ι → X.affineOpens) (hU : ⨆ i, (U i).1 = ⊤)\\n  (H : ∀ i, I.ideal (U i) = J.ideal (U i)) : I = J\", \"doc\": \"Let $X$ be a scheme, and let $I$ and $J$ be ideal sheaf data on $X$. Suppose $\\\\{U_i\\\\}_{i \\\\in \\\\iota}$ is a family of affine open subsets of $X$ such that the union of all $U_i$ equals the entire space \"}\n  {\"name\": \"StandardEtalePresentation.mk.injEq\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : S) (hasMap : P.HasMap x) (lift_bijective : Function.Bijective ⇑(P.lift x hasMap))\\n  (P_1 : StandardEtalePair R) (x_1 : S) (hasMap_1 : P_1.HasMap x_1)\\n  (lift_bijective_1 \", \"doc\": \"Two standard étale presentations are equal if and only if their underlying étale pairs and ring elements $ x $ coincide, given that the associated lift maps are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.injEq\", \"module\": \"Mathlib.AlgebraicGeometry.RelativeGluing\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : S.OpenCover} [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀]\\n  [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰]\\n  (functor : CategoryTheory.Functor 𝒰.I₀ AlgebraicGeometry.Scheme)\\n  (natTrans : functor ⟶ AlgebraicGeometry.Scheme.Cover.functorOfLocally\", \"doc\": \"Two relative gluing data structures for a locally directed open cover of a scheme are equal if and only if their underlying functors are equal, their natural transformations to the transition functor \"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.ideal_ext_iff\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{I J : Ideal Γ(X, U)} :\\n  I = J ↔ ∀ (x : X) (h : x ∈ U), I.map (X.presheaf.germ U x h).hom = J.map (X.presheaf.germ U x h).hom\", \"doc\": \"For any two ideals $I$ and $J$ in the ring of sections $\\\\Gamma(X, U)$ over an affine open subset $U$ of a scheme $X$, the equality $I = J$ holds if and only if for every point $x \\\\in U$, the images of\"}\n  {\"name\": \"CategoryTheory.coherentCoverage.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.CoherentSheaves\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C],\\n  CategoryTheory.coherentCoverage C = CategoryTheory.coherentCoverage C\", \"doc\": \"For any category $\\\\mathcal{C}$ with a coherent coverage, the coherent coverage of $\\\\mathcal{C}$ is equal to itself, i.e., $\\\\text{coherentCoverage}(\\\\mathcal{C}) = \\\\text{coherentCoverage}(\\\\mathcal{C})$.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \": Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Blowup\", \"isIso\"",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?blow.?up|LogBlowup|log.?ideal",
+   "results": "[grep] OK 0 hit(s)\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of logarithmic blowup towers preserving ordered centers under strict etale surjective base change",
+   "results": "OK: 8 hits.  Returned: AlgebraicGeometry.ValuativeCriterion.Uniqueness, AlgebraicGeometry.ValuativeCriterion.eq, AlgebraicGeometry.ValuativeCriterion.uniqueness, StandardEtalePresentation.mk.inj, AlgebraicGeometry.ValuativeCriterion.Existence.eq, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.ValuativeCommSq.mk.inj, AlgebraicGeometry.Scheme.Etale. Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?blow.?up|LogBlowup|logarithmic.*blow",
+   "results": "OK: 0 hits.  Returned: . Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmic blowup towers descend uniquely along surjective strict etale covers preserving ideal centers",
+   "results": "OK: 8 hits.  Returned: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.Etale, Algebra.IsEtaleAt.comp, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'. Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogBlowup\"",
+   "results": "OK: 0 hits.  Returned: . Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?scheme|saturated.*blow|blow.*saturated",
+   "results": "OK: 0 hits.  Returned: . Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "OK: 0 hits.  Returned: . Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of universal log blowups and detection of equality of monoid ideal subsheaves on an etale covering",
+   "results": "OK: 8 hits.  Returned: AlgebraicGeometry.Scheme.IdealSheafData.ext, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.mk.inj, AlgebraicGeometry.IsAffineOpen.ideal_ext_iff, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.Etale. Ordinary scheme/ring results do not state rigidity of fs log blowup towers with actual centers, so no exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-functorial-log-blowup-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, pp.109--110, initial descent reduction and final finite-disjoint-union argument; effective gluing input implicit there, using 3.3.8--3.3.10 for log blowups. Re-split of lem-trf-functorial-log-blowup-etale-descent, old proof steps 8,10: VIII proof of 3.3.15, pp.109--110: uniqueness in the descent reduction and comparison on a finite common cover, expanded using 3.3.8--3.3.10.",
+   "via": [
+    "lem-trf-functorial-log-blowup-etale-descent",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-tower-cover-rigidity",
+  "worker": "stage1",
+  "summary": "Q10 expands membership detection by the sheaf equalizer, proves rigidity by induction on the blowup universal property, lifts prescribed cover isomorphisms stage by stage using the existing synchronization lemma, and compares covers in two descent steps. Statement unchanged; no new nodes or Mathlib leaves. Checked actual log maps, actual ideals, zero-length/empty cases, and proper principal centers.",
+  "blueprint": "Historical branch from lem-trf-local-term-locality through monoidal resolution: realizes ILO VIII proof of 3.3.15, initial descent/uniqueness sentence and final finite-common-cover comparison. Latest blueprint now uses contracting correspondences; this delivery does not reinstate or alter that unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-a0e2de354",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-a0e2de354 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and every cited statement in full (def-trf-fs-log-blowup, def-trf-strict-etale-log-blowup-procedure, lem-trf-log-tower-cover-synchronization, lem-weil-pbc-etale-covering-base-change, def-weil-pbc-etale-sheaf-of-sets, lem-trf-log-fan-chart-blowup, def-pc-fibre-product, def-weil-etale-morphism), plus the ILO VIII source: 3.3.7-3.3.10 (pp.107-108) and the proof of 3.3.15 (pp.109-110). The source only says 'by descent ... unique', and the delivery expands that (D5). The statement is unchanged from all four Q107 runs. No new nodes. No SGA. The blueprint ancestor is preserved. No re-split note applies to this item. Synchronization is unsplit with no proof_deps, so there is no cycle. The mathematics checks out: step 1 is the membership criterion from the sheaf equalizer plus separatedness. Step 2 is uniqueness by induction, using uniqueness in the blowup universal property; centers are preserved, so the pulled-back ideal is invertible. Steps 3-4 build the lift with an explicit inductive hypothesis: synchronization makes each U_i->B_i surjective strict etale, and step 1 then matches the centers, so no center is inferred from the blowup spaces. Step 5 assembles the result. Step 6 does the two-cover comparison through W->U and then U->X. Edge cases tested: trivial log structure, (t) vs (t^2) on A^1 (where surjectivity is needed), length 0, empty X, whole centers. The sibling effective-center-descent and contraction-descent nodes overlap only partly and are not duplicates. One fault, repaired (C1/C4): step 4 relies on the next level of the recursive pullback being the blowup of the pulled-back center, but cited only def-trf-fs-log-blowup. I added def-trf-strict-etale-log-blowup-procedure to step 4 uses; it was already in proof_deps. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-log-tower-cover-rigidity.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogTowerCoverRigidity",
+  "declaration": "AlgebraicGeometry.log_tower_cover_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogTowerCoverRigidity.lean",
+  "statement": "theorem log_tower_cover_rigidity : (∀ (X U : FineSaturatedLogScheme.{u}) (f : EtaleLogHom U X), f.IsStrict → ∀ [Etale f.base], Function.Surjective f.base → (∀ (I J : X.logStructure.IdealFamily), X.logStructure.IsIdeal I → X.logStructure.IsIdeal J → f.pullbackIdeal I = f.pullbackIdeal J → I = J) ∧ (∀ (I : X.logStructure.IdealFamily), X.logStructure.IsIdeal I → ∀ (W : X.scheme.Etale) (s : X.logStructure.monoidSheaf.obj.obj (op W)), s ∈ I W ↔ X.logStructure.monoidSheaf.obj.map (prod.fst (X := W) (Y := Scheme.Etale.mk f.base)).op s ∈ I (W ⨯ Scheme.Etale.mk f.base))) ∧ (∀ (X U : FineSaturatedLogScheme.{u}) (f : EtaleLogHom U X), f.IsStrict → Etale f.base → Function.Surjective f.base → ∀ (B C : LogBlowupTowerOver X) (S T : LogBlowupTowerOver U) (p : LogBlowupFullPullback f B S) (q : LogBlowupFullPullback f C T) (a : LogBlowupTowerIso S T), ∃! e : LogBlowupTowerIso B C, e.IsPullbackIso p q a) ∧ (∀ (X : FineSaturatedLogScheme.{u}) (B C : LogBlowupTowerOver X), Subsingleton (LogBlowupTowerIso B C)) ∧ (∀ (X U : FineSaturatedLogScheme.{u}) (f : EtaleLogHom U X), f.IsStrict → Etale f.base → Function.Surjective f.base → ∀ (B C : LogBlowupTowerOver X) (S T : LogBlowupTowerOver U) (p : LogBlowupFullPullback f B S) (q : LogBlowupFullPullback f C T) (e e' : LogBlowupTowerIso B C) (a a' : LogBlowupTowerIso S T), e.IsPullbackIso p q a → e'.IsPullbackIso p q a' → (e = e' ↔ a = a')) ∧ (∀ (X U : FineSaturatedLogScheme.{u}) (f : EtaleLogHom U X), f.IsStrict → Etale f.base → Function.Surjective f.base → ∀ (B C D : LogBlowupTowerOver X) (S T R : LogBlowupTowerOver U) (p : LogBlowupFullPullback f B S) (q : LogBlowupFullPullback f C T) (r : LogBlowupFullPullback f D R) (a : LogBlowupTowerIso B C) (b : LogBlowupTowerIso C D) (c : LogBlowupTowerIso B D) (α : LogBlowupTowerIso S T) (β : LogBlowupTowerIso T R) (γ : LogBlowupTowerIso S R), a.IsPullbackIso p q α → b.IsPullbackIso q r β → c.IsPullbackIso p r γ → (a.IsComposite b c ↔ α.IsComposite β γ)) ∧ (∀ (X U V W : FineSaturatedLogScheme.{u}) (f : EtaleLogHom U X) (g : EtaleLogHom V X) (r : EtaleLogHom W U) (s : EtaleLogHom W V), f.IsStrict → Etale f.base → Function.Surjective f.base → g.IsStrict → Etale g.base → Function.Surjective g.base → r.IsFSPullback f s g → ∀ (B C : LogBlowupTowerOver X) (S : LogBlowupTowerOver U) (T : LogBlowupTowerOver V), S.IsContracted → T.IsContracted → LogBlowupFullPullback f B S → LogBlowupFullPullback g C T → ∀ (S' T' : LogBlowupTowerOver W), LogBlowupFullPullback r S S' → LogBlowupFullPullback s T T' → LogBlowupTowerIso S' T' → B.tower.length = C.tower.length ∧ Nonempty (LogBlowupTowerIso B C) ∧ Subsingleton (LogBlowupTowerIso B C)) ∧ (∀ (X : FineSaturatedLogScheme.{u}) (A B C : LogBlowupTowerOver X) (e : LogBlowupTowerIso A B) (f : LogBlowupTowerIso B C) (g : LogBlowupTowerIso A C), e.IsComposite f g) ∧ (∀ (X : FineSaturatedLogScheme.{u}), IsChartedLogBlowupInput X → ∀ (B C : LogBlowupTowerOver X) (f : EtaleLogHom X X), f.IsIdentity → LogBlowupFullPullback f B C → Nonempty (LogBlowupTowerIso B C))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.LogBlowupTowerIso.IsComposite",
+   "AlgebraicGeometry.log_tower_cover_rigidity"
+  ],
+  "note": "Repair of returned 7ce9312cb24d: reuse LogBlowupFullPullback, LogBlowupTowerOver.IsContracted and LogBlowupTowerIso.IsPullbackIso from the landed full-pullback definition node. Remove the previous dependency patch and all duplicated notions; the cocycle predicate is a helper of this statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73ba17140",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read item node (diff vs live: only lean + added stmt_dep def-trf-log-tower-full-pullback; statement/proof_deps unchanged), report (Worker report + Second reading by Q27 present), module, and all dependency declarations (FineSaturatedLogScheme, EtaleLogHom/CompEq/IsStrict/IsIdentity/Square/IsFSPullback/AreInverses, IdealFamily/IsIdeal/pullbackIdeal, IsSaturatedLogBlowup, LogBlowupTowerOver/TowerIso, LogBlowupFullPullback/IsContracted/IsPullbackIso) plus ILO VIII proof of 3.3.15 pp.109-110. All 8 conjuncts render the node: ideal detection + explicit V×_XU membership via prod in X.Etale; unique lift ∃! e IsPullbackIso p q a; Subsingleton rigidity (verified true: Fin order isos unique, IsIdentity pins base, universal property pins successors, AreInverses pins backward); cover equality/cocycle tests; common-cover clause (IsFSPullback order checked; dropped descent data only strengthens, still true) gives equal length + Nonempty + Subsingleton; cocycle; identity-cover normalization for charted inputs. New helper IsComposite is a real predicate (map directions checked), no duplicate in project. Edge cases: length 0, empty X, empty ideal, whole/proper principal centers, single universe u, no extra hypotheses. lean.statement verbatim; docstrings with source/blueprint; sorry only; no file changed so no compile. Advisory: mixed instance binder ∀ [Etale f.base] in clause 1."
+ }
+}

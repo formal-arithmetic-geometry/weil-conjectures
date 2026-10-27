@@ -1,0 +1,214 @@
+{
+ "id": "lem-trf-tensor-witness-eventual-factorization",
+ "kind": "statement",
+ "title": "A universal tensor-kernel witness gives eventual transition factorizations",
+ "statement": "Let $R$ be a commutative ring, $I$ a small nonempty directed partially ordered set, and $(M_s,f_{st})_{s\\in I}$ a directed system of finitely presented $R$-modules [def-sc-finitely-presented-module]. Let $u_s:M_s\\to M$ be compatible maps exhibiting an $R$-module $M$ as the colimit [def-weil-pbc-category-colimit]. Fix $i\\in I$, an $R$-module $T$, and $z\\in M_i\\otimes_RT$ with $(u_i\\otimes\\mathrm{id}_T)(z)=0$. Assume that for every finitely presented $R$-module $Q$ and every $x\\in\\ker(u_i\\otimes\\mathrm{id}_Q)$ there exists an $R$-linear map $q:T\\to Q$ such that $(\\mathrm{id}_{M_i}\\otimes q)(z)=x$. Tensor products and induced maps are [def-weil-pbc-module-tensor-product]. Then there is $j\\ge i$ such that for every $k\\ge j$ there exists an $R$-linear map $h_k:M_k\\to M_j$ with $f_{ij}=h_k\\circ f_{ik}$. No Mittag-Leffler or flatness hypothesis is imposed on $M$ or $T$, and $I$ need not be countable.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059M (proposition-ML-tensor), proof of (2) implies (1), death of the product-kernel element, implemented directly in the given colimit as in Tag 059L (lemma-kernel-tensored-fp); Tag 059E (proposition-ML-characterization), proof of (2) implies (3), using Tag 059D (lemma-domination) and Tag 059C (lemma-domination-fp)."
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-tensor-commutes-with-colimits], the modules $M_s\\otimes_RT$, with transition maps $f_{st}\\otimes\\mathrm{id}_T$ and legs $u_s\\otimes\\mathrm{id}_T$, have colimit $M\\otimes_RT$. The indexing category is small and filtered because $I$ is a small nonempty directed poset. Apply the zero criterion of [lem-weil-pbc-filtered-colimit-modules-elementwise] to the given $z$: there is $j\\ge i$ with $(f_{ij}\\otimes\\mathrm{id}_T)(z)=0$. Fix this $j$ for the rest of the proof.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 059L (lemma-kernel-tensored-fp), its proof applied directly in the prescribed system, and 059M (proposition-ML-tensor), death of the universal kernel element; tensor-colimit input Tag 00DD and zero criterion Tag 00D7."
+   }
+  },
+  {
+   "text": "For every finitely presented $Q$ and $x\\in\\ker(u_i\\otimes\\mathrm{id}_Q)$ choose the map $q:T\\to Q$ in the hypothesis. The bilinear universal property [def-weil-pbc-module-tensor-product] gives $(f_{ij}\\otimes\\mathrm{id}_Q)(\\mathrm{id}_{M_i}\\otimes q)=(\\mathrm{id}_{M_j}\\otimes q)(f_{ij}\\otimes\\mathrm{id}_T)$: both send $m\\otimes t$ to $f_{ij}(m)\\otimes q(t)$, and pure tensors generate. Consequently $(f_{ij}\\otimes\\mathrm{id}_Q)(x)=0$. If $k\\ge j$, compatibility $u_i=u_k f_{ik}$ implies $\\ker(f_{ik}\\otimes\\mathrm{id}_Q)\\subseteq\\ker(u_i\\otimes\\mathrm{id}_Q)\\subseteq\\ker(f_{ij}\\otimes\\mathrm{id}_Q)$. The first inclusion follows by composing the tensor maps; it needs no flatness.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), second tensor-product square in (2) implies (1); Tag 059E (proposition-ML-characterization), (2) implies (3), transitivity of the kernel inclusions."
+   }
+  },
+  {
+   "text": "Fix $k\\ge j$. By [def-sc-finitely-presented-module] choose a finite presentation $R^a\\xrightarrow{A}R^b\\xrightarrow{p}M_k\\to0$ and finite generators $v_1,\\ldots,v_c$ of $M_i$ from its finite presentation. Choose $w_r\\in R^b$ with $p(w_r)=f_{ik}(v_r)$. Then $C=M_k/f_{ik}(M_i)$ has presentation $R^{a+c}\\xrightarrow{(A,w_1,\\ldots,w_c)}R^b\\to C\\to0$. Indeed the last map is surjective, and a vector $y$ maps to zero precisely when $p(y)=\\sum_r\\lambda_r f_{ik}(v_r)$ for some $\\lambda_r\\in R$; this is equivalent to $y-\\sum_r\\lambda_rw_r\\in\\ker p=\\operatorname{im}A$. This identifies its kernel with the image of the displayed finite matrix, so $C$ is finitely presented.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), (2) implies (3), finite presentation of the transition cokernel; the finite-matrix argument spells out this elementary assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tensor-kernel-factorization] with $U=M_i$, $V=M_k$, $W=M_j$, $f=f_{ik}$ and $g=f_{ij}$. Step 3 supplies its finitely presented cokernel hypothesis, and step 2 supplies its kernel inclusion for every finitely presented test module $Q$. Obtain $h_k:M_k\\to M_j$ with $f_{ij}=h_k\\circ f_{ik}$. This works for every $k\\ge j$ with the same $j$ chosen in step 1, proving the conclusion.",
+   "uses": [
+    "lem-trf-tensor-kernel-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 059D (lemma-domination) and 059C (lemma-domination-fp), combined in the cited factorization node; Tag 059E (proposition-ML-characterization), proof of (2) implies (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-finitely-presented-module",
+  "lem-trf-tensor-kernel-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 059L and 059M, killing the universal tensor-kernel witness in the given directed colimit, then Tag 059E, proof of (2) implies (3), using Tags 059C and 059D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dominat|factor.*[tT]ensor|[tT]ensor.*factor",
+   "results": "{\"t\": \"2026-10-22T06:47:28Z\", \"tool\": \"grep\", \"query\": \"dominat|factor.*[tT]ensor|[tT]ensor.*factor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Ideal.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Pi.lean\", \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\"], \"digest\": \"4793334bbbaeb250\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit and eventual-zero declarations kill individual elements, but do not give the tensor-test-to-transition-factorization conclusion. Ring tensor factorization results concern algebra homomorphisms, not these module transition maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal tensor kernel witness in a filtered colimit of finitely presented modules gives one later transition map factoring through all subsequent stages",
+   "results": "{\"t\": \"2026-10-22T06:47:29Z\", \"tool\": \"leansearch\", \"query\": \"A universal tensor kernel witness in a filtered colimit of finitely presented modules gives one later transition map factoring through all subsequent stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.toDirectLimit\", \"TensorProduct.toDirectLimit_tmul_of\", \"Submodule.FG.rTensor.directLimit\", \"Submodule.FG.rTensor.directLimit_apply\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"ModuleCat.FilteredColimits.M\", \"Submodule.FG.lTensor.directLimit\"], \"digest\": \"26ac707aaebecdca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit and eventual-zero declarations kill individual elements, but do not give the tensor-test-to-transition-factorization conclusion. Ring tensor factorization results concern algebra homomorphisms, not these module transition maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, LinearMap.comp",
+   "results": "{\"t\": \"2026-10-22T06:47:29Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit, LinearMap.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Module.DirectLimit.lift_comp_of\", \"Module.DirectLimit.map_id\", \"Module.DirectLimit.map\", \"Module.DirectLimit.hom_ext\", \"Module.DirectLimit.hom_ext_iff\", \"Module.DirectLimit.congr\", \"Module.DirectLimit.map_apply_of\", \"Module.DirectLimit.map_comp\"], \"digest\": \"e128fb05426afa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit and eventual-zero declarations kill individual elements, but do not give the tensor-test-to-transition-factorization conclusion. Ring tensor factorization results concern algebra homomorphisms, not these module transition maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of finitely presented modules one tensor kernel element representing every finitely presented kernel test becomes zero at a stage giving factorizations of transition maps",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed colimit of finitely presented modules one tensor kernel element representing every finitely presented kernel test becomes zero at a stage giving factorizations of transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Concrete.colimit_rep_eq_zero\", \"CategoryTheory.Limits.Concrete.colimit_no_zero_smul_divisor\", \"ModuleCat.FilteredColimits.M.mk_surjective\", \"Module.DirectLimit.of.zero_exact\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply\", \"lTensor_mkQ\"], \"digest\": \"bc1ec602d140a7cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit and eventual-zero declarations kill individual elements, but do not give the tensor-test-to-transition-factorization conclusion. Ring tensor factorization results concern algebra homomorphisms, not these module transition maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of finite presentations has eventual retractions on a fixed source stage if a single tensor relation detects all kernels of the map to its colimit",
+   "results": "{\"t\": \"2026-10-22T06:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"A directed system of finite presentations has eventual retractions on a fixed source stage if a single tensor relation detects all kernels of the map to its colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"Module.DirectLimit.exists_of₂\", \"Module.DirectLimit.exists_of\", \"ModuleCat.FilteredColimits.M.mk_surjective\", \"localCohomology.hasColimitDiagram\", \"Module.DirectLimit.of.zero_exact\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_zero\"], \"digest\": \"a5a2d47eb5154795\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: direct-limit and eventual-zero declarations kill individual elements, but do not give the tensor-test-to-transition-factorization conclusion. Ring tensor factorization results concern algebra homomorphisms, not these module transition maps."
+  },
+  {
+   "tool": "grep",
+   "query": "dominat|tensor.*kernel.*factor|kernel.*tensor.*factor",
+   "results": "{\"t\": \"2026-10-23T15:04:50Z\", \"tool\": \"grep\", \"query\": \"dominat|tensor.*kernel.*factor|kernel.*tensor.*factor\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\"], \"digest\": \"28e419b3004ddc0f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor-colimit comparison, colimit equality detection, finite-presentable map descent, or flat-module factorization. None gives the universal-witness hypothesis and eventual backward factorization conclusion; the flat-module result assumes flatness absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal tensor kernel witness in a filtered colimit gives a transition map factoring through every later stage",
+   "results": "{\"t\": \"2026-10-23T15:04:51Z\", \"tool\": \"leansearch\", \"query\": \"A universal tensor kernel witness in a filtered colimit gives a transition map factoring through every later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toDirectLimit\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"TensorProduct.fromDirectLimit\", \"ModuleCat.FilteredColimits.colimitDesc\"], \"digest\": \"183837f10ec5fa8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor-colimit comparison, colimit equality detection, finite-presentable map descent, or flat-module factorization. None gives the universal-witness hypothesis and eventual backward factorization conclusion; the flat-module result assumes flatness absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, LinearMap.comp",
+   "results": "{\"t\": \"2026-10-23T15:04:51Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit, LinearMap.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Module.DirectLimit.lift_comp_of\", \"Module.DirectLimit.map_id\", \"Module.DirectLimit.map\", \"Module.DirectLimit.hom_ext\", \"Module.DirectLimit.hom_ext_iff\", \"Module.DirectLimit.congr\", \"Module.DirectLimit.map_apply_of\", \"Module.DirectLimit.map_comp\"], \"digest\": \"e128fb05426afa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor-colimit comparison, colimit equality detection, finite-presentable map descent, or flat-module factorization. None gives the universal-witness hypothesis and eventual backward factorization conclusion; the flat-module result assumes flatness absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If one tensor relation generates all finite presentation kernel tests then transition maps in a filtered colimit eventually factor backwards",
+   "results": "{\"t\": \"2026-10-23T15:04:58Z\", \"tool\": \"leanfinder\", \"query\": \"If one tensor relation generates all finite presentation kernel tests then transition maps in a filtered colimit eventually factor backwards\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"Module.Relations.Solution.isPresentationCoreTensor\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_zero\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\"], \"digest\": \"81109d1b63cb15ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor-colimit comparison, colimit equality detection, finite-presentable map descent, or flat-module factorization. None gives the universal-witness hypothesis and eventual backward factorization conclusion; the flat-module result assumes flatness absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universal tensor kernel element for a map from a finitely presented module to a directed colimit yields eventual factorizations of transition maps",
+   "results": "{\"t\": \"2026-10-23T15:04:59Z\", \"tool\": \"leanfinder\", \"query\": \"A universal tensor kernel element for a map from a finitely presented module to a directed colimit yields eventual factorizations of transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.fromDirectLimit\", \"TensorProduct.toDirectLimit\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.rTensor.directLimit_apply'\", \"TensorProduct.directLimitLeft\", \"Submodule.FG.rTensor.directLimit_apply\", \"TensorProduct.fromDirectLimit_of_tmul\"], \"digest\": \"12895910b493e25b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern tensor-colimit comparison, colimit equality detection, finite-presentable map descent, or flat-module factorization. None gives the universal-witness hypothesis and eventual backward factorization conclusion; the flat-module result assumes flatness absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-mittag-leffler-hom-systems",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Last sentence: 'countably generated, flat and Mittag-Leffler ... whence projective'. Supporting Tag 059X (lemma-countgen-projective), the sentence 'Since M is Mittag-Leffler, (Hom_R(M_i,N_1)) is a Mittag-Leffler inverse system'. Supporting Tags 059M and 059E (2) implies (3): kill one witness at a later stage, obtain every finite tensor-kernel inclusion, present each transition cokernel by an augmented finite matrix, and apply tensor-kernel factorization. Returned Hom-systems proof steps 3-5.",
+   "via": [
+    "lem-trf-mittag-leffler-hom-systems",
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-tensor-witness-eventual-factorization",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its three statement dependencies. Split the proof into death of the witness, explicit tensor naturality and finite-test kernel inclusions, an augmented finite-matrix presentation of each transition cokernel, and the existing tensor-kernel factorization lemma. All non-elementary inputs already exist, so no new nodes are introduced. Re-read the Stacks proofs, all five cited node statements, current project-source search results and recorded Mathlib hits. No flatness, Mittag-Leffler or countability assumption is used.",
+  "blueprint": "Supporting algebra under lem-trf-local-term-locality, proof (1)--(2), semistable-alteration input: the existing ancestry passes through 05FT/05FQ, 05DP and 059X. This split realizes the 059M witness-death and 059E (2) implies (3) parts named in blueprint.from.place and the parent lem-trf-mittag-leffler-hom-systems. The current latest blueprint local-term proof and unit sk-i-curve-zero were read; no chapter or unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-4b042b43c",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-4b042b43c (reviewer sub-agent of L); spot-checked: Read the item, its 4 steps and all 5 cited statements in full, and every source: Stacks algebra.tex 059C l.20916, 059D l.20973, 059E l.21000 (proof of (2)=>(3)), 059L l.21415, 059M l.21443 (proof of (2)=>(1)), tags verified. No new nodes. Compared with live (unsplit, empty proof), only status/proof/proof_deps/proof_origin/split_report/mathlib_searches change; statement, stmt_deps, source and blueprint are unchanged. No re-split note, and the item is not superseded in live or side-live. Step 1: the colimit-tensor leaf plus clause (2) of the filtered-colimit leaf give j>=i with (f_ij(x)id_T)(z)=0. Step 2: naturality on pure tensors gives f_ij(x)id_Q kills every x=(id(x)q)(z), and u_i=u_k f_ik gives ker(f_ik(x)Q) contained in ker(u_i(x)Q), contained in ker(f_ij(x)Q). The directions are checked. Step 3: the augmented matrix (A,w_1..w_c) presents coker f_ik; the iff was checked. Stacks 059E asserts this without proof. Step 4: lem-trf-tensor-kernel-factorization applied with (U,V,W,f,g)=(M_i,M_k,M_j,f_ik,f_ij), hypotheses matched, same unit, no cycle (16-node closure). proof_deps equals the union of the step uses; cross-unit dependencies are Mathlib leaves, so no tool_uses. Edge cases: singleton I, k=j, T=0 or z=0, zero ring, and a non-flat example over Z (Z then Z/2 constant, z=2). It also matches the parent lem-trf-mittag-leffler-hom-systems step 2. No duplicate among lem-trf-mittag-leffler-eventual-domination, -hom-product-stabilization-factorization or -universal-tensor-kernel-witness. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorWitnessEventualFactorization",
+  "declaration": "Module.exists_eventual_factorization_of_tensor_witness",
+  "file": "lean/Sheaf/RingTheory/TensorWitnessEventualFactorization.lean",
+  "statement": "theorem exists_eventual_factorization_of_tensor_witness (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{max u v w} R) [∀ s : I, Module.FinitePresentation R (F.obj s)] (c : Cocone F) (hc : IsColimit c) (i : I) (T : Type t) [AddCommGroup T] [Module R T] (z : F.obj i ⊗[R] T) (hz : (c.ι.app i).hom.rTensor T z = 0) (hwitness : ∀ (Q : Type (max u v w)) [AddCommGroup Q] [Module R Q] [Module.FinitePresentation R Q], ∀ x : F.obj i ⊗[R] Q, (c.ι.app i).hom.rTensor Q x = 0 → ∃ q : T →ₗ[R] Q, q.lTensor (F.obj i) z = x) : ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k), ∃ h : F.obj k →ₗ[R] F.obj j, (F.map (homOfLE hij)).hom = h.comp (F.map (homOfLE (hij.trans hjk))).hom",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d064245d",
+  "group": "Q57",
+  "result": "fix",
+  "note": "Lean Module.exists_eventual_factorization_of_tensor_witness matches node clause by clause (small nonempty directed poset, FP stages, arbitrary Cocone+IsColimit, rTensor u_i⊗id / lTensor id⊗q orientations, witness over all FP Q in Type(max u v w) equivalent to node, ∃j≥i ∀k≥j ∃h f_ij=h∘f_ik); statement verbatim, only lean field changed, stmt_dep records ok, no name clash, docstrings/source 059L/059M/059E ok, sorry only. Sole fault H11: 'Second reading by Q57' was a self-check → fixes/<item>.report.md with worker report verbatim + independent second reading."
+ }
+}

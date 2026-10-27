@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-space-tor-independent-base-change",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Tor-independent derived base change for qcqs algebraic-space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$, their small etale structure sheaves [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], and quasi-coherence [def-trf-space-quasi-coherent-module]; $D_{\\mathrm{QCoh}}$ is the full subcategory with quasi-coherent cohomology. Use the canonical module tensor pullback and direct image [def-trf-space-etale-module-functors], with their derived functors and composition comparisons [lem-sfb-space-derived-etale-chart-calculus], computed by flat-term K-flat and K-injective resolutions. Let $f:X\\to Y$ and $g:Y^\\prime\\to Y$ be morphisms of algebraic spaces, and put $X^\\prime=X\\times_Y Y^\\prime$, with projections $g^\\prime:X^\\prime\\to X$ and $f^\\prime:X^\\prime\\to Y^\\prime$ [lem-trf-space-fibre-products-etale-covers]. Assume $f$ is quasi-compact and quasi-separated: on etale scheme charts its inverse images of quasi-compact opens are quasi-compact and its relative diagonal is quasi-compact. Assume $X$ and $Y^\\prime$ are Tor independent over $Y$, meaning that for every pair of geometric points $\\bar x:\\operatorname{Spec}\\Omega\\to X$, $\\bar y^\\prime:\\operatorname{Spec}\\Omega\\to Y^\\prime$ with common composite $\\bar y$ and $\\Omega$ algebraically closed, $\\operatorname{Tor}^{\\mathcal O_{Y,\\bar y}}_n(\\mathcal O_{X,\\bar x},\\mathcal O_{Y^\\prime,\\bar y^\\prime})=0$ for all $n>0$ [def-weil-pbc-tor-modules]. For every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ the canonical derived base-change morphism is an isomorphism in $D(\\mathcal O_{Y^\\prime})$:\n$$\\beta_E:Lg^*Rf_*E\\xrightarrow{\\sim}Rf^\\prime_*L(g^\\prime)^*E.$$\nPrecisely, $\\beta_E$ is adjoint under $L(f^\\prime)^*\\dashv Rf^\\prime_*$ to $L(f^\\prime)^*Lg^*Rf_*E\\simeq L(g^\\prime)^*Lf^*Rf_*E\\to L(g^\\prime)^*E$, with the last arrow induced by the counit of $Lf^*\\dashv Rf_*$. No flatness of $f$ or $g$, boundedness of $E$, properness, finite presentation or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IR, lemma-compare-base-change, full statement and canonical comparison in the first sentence of its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Isomorphisms of derived module objects can be checked after jointly surjective etale restriction: restriction is exact by the chart-calculus statement, so commutes with each cohomology; local inverses of cohomology sheaf maps glue uniquely, and the derived cohomology criterion then detects an isomorphism. Choose affine etale charts $V\\to Y$ and affine etale charts $V'\\to Y'\\times_YV$. These cover $Y'$ by the atlas and fibre-product statements. The chart calculus identifies both restrictions of the exchange square with the square over $V'\\to V$; its comparisons preserve the adjunctions, and mate pasting identifies the restricted arrow with the counit-defined $\\beta$ for that square. The geometric-local-ring chart identifications preserve Tor independence: on any further etale scheme chart the three rings in its definition are unchanged. It therefore suffices to treat $Y=\\operatorname{Spec}R$ and $Y'=\\operatorname{Spec}C$. The base morphism $g$ is now affine and $h=g'$ is affine by affine permanence.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, proof, first reduction to affine schemes."
+   }
+  },
+  {
+   "text": "The reduced morphism $f$ and its base change $f'$ are qcqs. Quasi-compactness is stable under base change by the affine-test theorem; the diagonal of the changed morphism is the base change of the original diagonal, so that same quasi-compactness assertion preserves quasi-separatedness. Apply the derived-pushforward theorem to $f$ and $f'$: it requires only relative qcqs, not absolute qcqs of the spaces. Apply the derived-pullback/tensor theorem to $g$ and $h$. Consequently both the source and target of $\\beta_E$ have quasi-coherent cohomology. Affine derived conservativity for $g$ reduces the assertion to invertibility of $Rg_*\\beta_E$.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-sfb-space-affine-derived-pushforward-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, proof, use of 08II, 08F4, 08F5 and 08FA."
+   }
+  },
+  {
+   "text": "Put $\\mathcal A=g_*\\mathcal O_{Y'}$ and $\\mathcal B=h_*\\mathcal O_{X'}$. The normalized affine pull-push statement makes $\\mathcal A$ quasi-coherent, and ordinary affine module base change gives $f^*\\mathcal A\\cong\\mathcal B$. The affine associated-module equivalence identifies $\\mathcal A$ with $a_R(C)$: its sections on $\\operatorname{Spec}R$ are $C$ by the direct-image definition. We prove that the resulting augmentation $c:Lf^*\\mathcal A[0]\\to\\mathcal B[0]$ is invertible. Choose any affine etale chart $U=\\operatorname{Spec}A\\to X$. By chart calculus the restriction is the augmentation for $U\\to\\operatorname{Spec}R$, with coefficient the associated module of $C$. The canonical Zariski-etale equivalence and the affine derived-pullback computation identify this arrow with the associated sheaf of $A\\otimes_R^{\\mathbf L}C\\to(A\\otimes_RC)[0]$. These are the canonical comparisons: on a common K-flat representative the coefficient map is the resolution augmentation tensored with $A$, and the normalized word-comparison theorem descends that same map. The existing etale-chart criterion turns geometric Tor independence into the ordinary local-ring condition on scheme atlases. Restricting the atlas to $U$ gives that condition for $A,C$ over $R$; the ring local criterion then makes the displayed augmentation an isomorphism. Exact etale restrictions and the cohomology criterion, as in step 1, imply that $c$ is invertible on $X$.",
+   "uses": [
+    "lem-sfb-space-affine-pullpush-exchange",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sfb-space-tor-independence-etale-chart-criterion",
+    "lem-sfb-ring-tor-independence-local-criterion",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, final affine Tor calculation; Tag 08IQ and more-algebra.tex Tag 08HX; perfect.tex Tag 08DW(2); spaces-perfect.tex Tag 071Q."
+   }
+  },
+  {
+   "text": "Use the normalized affine exchange identity with this $f,g,E$. Its hypotheses hold by step 2, in particular $Rf_*E$ has quasi-coherent cohomology. In its notation the equation is\n$$Rg_*(\\beta_E)\\lambda_{g,Rf_*E}=Rf_*(\\lambda_{h,E})\\,Rf_*(1_E\\otimes^{\\mathbf L}c)\\,\\pi_{f,E,\\mathcal A}.$$\nThe projection formula applies to $f$, $E$ and $\\mathcal A[0]$: $f$ is qcqs, $E$ has quasi-coherent cohomology by hypothesis, and $\\mathcal A$ is quasi-coherent by step 3. Thus $\\pi_{f,E,\\mathcal A}$ is an isomorphism. Both $\\lambda$ maps are isomorphisms by the affine exchange input, while $c$ is an isomorphism by step 3. Tensor and direct-image functors take an inverse to an inverse, so every factor on the right is invertible; the displayed equation proves $Rg_*\\beta_E$ invertible. Affine conservativity from step 2 gives $\\beta_E$ invertible, and the restriction argument of step 1 gives the original assertion. The equation fixes the actual adjunction-mate map throughout, rather than merely an isomorphism of its two objects.",
+   "uses": [
+    "lem-sfb-space-affine-pullpush-exchange",
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sfb-space-affine-derived-pushforward-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, middle displayed tensor comparison and application of Tag 08IN, followed by affine conservativity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sfb-space-affine-derived-pushforward-conservative",
+  "lem-sfb-space-affine-pullpush-exchange",
+  "lem-sfb-space-affine-module-base-change",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-sfb-space-tor-independence-etale-chart-criterion",
+  "lem-sfb-ring-tor-independence-local-criterion",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-qcqs-derived-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IR, lemma-compare-base-change, complete proof; canonical affine exchange identity separately exposed as a statement-only input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent base change for quasi compact quasi separated morphisms of algebraic spaces unbounded quasi coherent derived category",
+   "results": "Read 8 returned hits: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change map is an isomorphism when the cartesian square is Tor independent",
+   "results": "Read 8 returned hits: KaehlerDifferential.tensorKaehlerEquiv, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.mapBaseChange, CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, Algebra.IsPushout.cancelBaseChangeAux, KaehlerDifferential.cotangentComplexBaseChange, Algebra.TensorProduct.cancelBaseChange. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"DerivedCategory\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*base.change|base.change.*derived|TorIndependent|torIndependent",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image commutes with derived direct image of quasi coherent complexes for a Tor independent cartesian square of algebraic spaces",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.pushforwardComp_inv_app_val_app. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent base change for unbounded quasi coherent complexes on quasi compact quasi separated algebraic spaces",
+   "results": "Read returned hits: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, CategoryTheory.Tor', CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback commutes with derived pushforward on a Tor independent cartesian square of algebraic spaces",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, AlgebraicGeometry.AffineSpace.isPullback_map, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.w, CategoryTheory.BicartesianSq.toIsPullback, CategoryTheory.CommSq.cocone, AlgebraicGeometry.isPullback_Spec_map_isPushout. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"DerivedCategory\"",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|torIndependent|derived.*base.change|base.change.*derived",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived exchange map is invertible for Tor independent morphisms without flatness or boundedness assumptions",
+   "results": "Read returned hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Tor'_map_app, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.right_fac, CategoryTheory.Tor_obj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-flat-closed-kernel-base-change",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Supporting input: Tag 08IR, lemma-compare-base-change: the general qcqs direct-image theorem, before specializing to the closed structure sheaf.",
+   "via": [
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-tor-independent-base-change",
+  "worker": "stage1",
+  "summary": "Followed 08IR through etale affine reduction, quasi-coherent affine conservativity, projection formula and the affine Tor augmentation. Reused the affine derived-pullback comparison and a newly landed 08IQ chart criterion; exposed only the 08HX algebra localization criterion and the normalized 08IJ/08IR affine exchange identity as two strictly smaller statement-only inputs. No statement or hypothesis changed.",
+  "blueprint": "Supporting geometric module-theory input beneath det-thm-sf-ctf-stability-direct-images, proof (3); preserves inherited ancestry (from.node null). Read latest unit and proof; this generic Stacks tool does not replace any coefficient-theory unit step.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic Algebraic spaces and their etale line modules used exactly as stated in the proof; this small-etale module or commutative-algebra tool does not replace the constructible-coefficient unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings used exactly as stated in the proof; this small-etale module or commutative-algebra tool does not replace the constructible-coefficient unit route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic Isomorphisms in the unbounded derived category detected by cohomology used exactly as stated in the proof; this small-etale module or commutative-algebra tool does not replace the constructible-coefficient unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used exactly as stated in the proof; this small-etale module or commutative-algebra tool does not replace the constructible-coefficient unit route."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic Affine computation of derived pullback and derived tensor product used exactly as stated in the proof; this small-etale module or commutative-algebra tool does not replace the constructible-coefficient unit route."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Generic Simultaneous K-flat word models and normalized comparison descent used exactly as stated in the proof; this small-etale module or commutative-algebra tool does not replace the constructible-coefficient unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-trf-ringed-kflat-word-comparison-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-f3b047490",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-f3b047490 (reviewer sub-agent of L); spot-checked: I read the full mathematics: the item, both new nodes, every cited statement, and the sources (spaces-perfect 08IR, 08IJ, 08IQ; more-algebra 08HX). The item statement is unchanged from live, matches 08IR exactly, and is not already split live. Step 1 is the étale-local reduction on Y' (chart calculus, mate pasting, strict-local-flatness for geometric Tor, affine permanence). Step 2 shows base changes stay qcqs, both sides of β are in D_QCoh, and affine conservativity applies. Step 3 proves the augmentation c is invertible: an affine étale U gives (A'⊗^L_R C)~ through the Zariski–étale equivalence, 08DW and K-flat normalization; then the 08IQ chart criterion on atlas U⊔U0 and 08HX. Step 4 combines the exchange identity, the 08IN qcqs projection formula and the two λ isomorphisms (both with QCoh inputs), then applies conservativity. Every hypothesis holds and proof_deps equal the union of the step uses. New ring node (08HX): faithful; tested on Z/2,Z/2 (both sides fail), Z/2,Z/3 (vacuous), zero and flat cases; no duplicate (trf strict-henselian detection and the pc 08IB models differ). New pull-push exchange node (08IJ plus the 08IR middle identity): tested on g=id and f=id; no space-level 08IJ node exists; it asserts no invertibility of β, so it does not restate the item. Batch 5: the trf space definitions and fibre products were already stmt_deps of the item; the K-flat word node is generic homological algebra; the flagged sfb nodes are generic QCoh tools for algebraic spaces. The full closure reaches only def-/lem- trf/pod foundations, with no trace-formula or Poincaré theorem and no sk-thm-trace-transport. I accept the 6 declared tool_uses as generic. No SGA. No fixes."
+ }
+}

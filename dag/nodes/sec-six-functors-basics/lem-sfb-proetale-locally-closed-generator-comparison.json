@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-proetale-locally-closed-generator-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sf-flat-model",
+   "place": "Complement, first sentence: 'the extension by zero $j_!$ and the pushforward $Rg_*=g_*$ along the closed immersion $g$ are exact on sheaves and preserve constructibility and flatness of stalks'; and paragraph 1: '$\\nu_X^*$ ... pulls it back' (comparison of the generators $a_!L$ with their pro-étale counterparts).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison of locally closed extension generators along the pro-étale comparison",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme] (quasi-compact and locally Noetherian [pqf-def-locnoeth]) and $\\Lambda$ a finite commutative ring. Use sheaves of modules [def-weil-sheaf-of-modules-category] over the constant ring sheaves with value $\\Lambda$ [def-weil-pbc-constant-sheaf] on the small étale sites [def-weil-pbc-etale-site] and on the small pro-étale sites [def-weil-pbc-proetale-site], their derived categories [def-weil-abstract-derived-category], and for a scheme $T$ the comparison morphism $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ with its inverse image $\\nu_T^*$ on module sheaves [def-weil-pbc-site-comparison-morphism]. Let $a:S\\hookrightarrow X$ be a locally closed immersion, $C$ its scheme-theoretic closure [def-nagata-scheme-theoretic-image], $j:S\\hookrightarrow C$ the resulting open immersion [lemma-nagata-immersion-open-in-scheme-image; def-weil-open-immersion] and $g:C\\hookrightarrow X$ the closed immersion [def-weil-closed-immersion], so $a=g\\circ j$. On the étale sites $j_!$ is the extension by zero of [def-weil-pbc-extension-by-zero] and $g_*$ the direct image of [def-weil-pbc-direct-image]; on the pro-étale sites $j_!$ is the extension by zero of [def-sfb-finite-extension-by-zero] and $g_*$ the direct image of [def-weil-proetale-inverse-image]. Then:\n\n1. On either site $g_*$ is an exact functor of sheaves of $\\Lambda$-modules; consequently, for every sheaf $M$ of $\\Lambda$-modules on $S$ (on the same site), the canonical map $(g_*j_!M)[0]\\to Rg_*(j_!M[0])$ to the right derived direct image is an isomorphism in $D(X,\\Lambda)$.\n2. Let $L$ be a sheaf of $\\Lambda$-modules on $S_{\\mathrm{et}}$ that is locally constant with finite projective $\\Lambda$-module stalks at all geometric points [def-weil-pbc-etale-sheaves; def-weil-pbc-geometric-stalks]. Then $\\nu_S^*L$ is locally constant on $S_{\\mathrm{proet}}$ [def-weil-proetale-locally-constant-sheaf], and its stalk at every geometric point of $S$ [def-weil-proetale-geometric-stalk] is a finite projective, in particular flat, $\\Lambda$-module.\n3. For every sheaf $M$ of $\\Lambda$-modules on $S_{\\mathrm{et}}$ there is an isomorphism $\\nu_X^*(g_*j_!M)\\cong g_*j_!(\\nu_S^*M)$ of sheaves of $\\Lambda$-modules on $X_{\\mathrm{proet}}$, natural in $M$, where the left side uses the étale functors and the right side the pro-étale functors.\n\nThe empty stratum and the zero ring are allowed; no separatedness of $X$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+  "place": "Complement, first paragraph ('$Rg_*=g_*$ along the closed immersion $g$ ... exact on sheaves') and paragraph 1 (pull-back of the étale data by $\\nu_X^*$); formulation extracted by the maintainer reviewer of NR's delivery from the item's former Step 7. Inputs for a later split: lem-cbc-open-closed-recollement, lem-weil-pbc-proetale-ringed-open-closed, lem-weil-pbc-exact-functor-derived-functor, lem-cbc-proetale-extension-zero-comparison, prop-weil-pbc-comparison-direct-image, lem-sf-proetale-locally-constant-origin, lem-cbc-proetale-comparison-stalk."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-sfb-finite-extension-by-zero",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover of $X$ by spectra of Noetherian rings: local Noetherianity supplies the cover and quasi-compactness supplies a finite subcover. Each member has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space], so [lem-kun-finite-union-noetherian] makes $|X|$ Noetherian. By [lem-sfb-noetherian-space-compact-subsets], every subset of $|X|$ is quasi-compact. In particular the complementary open $V=X\\setminus g(C)$ is quasi-compact, and $V\\cap W$ is quasi-compact for every open $W\\subseteq X$. This supplies the quasi-compact complementary open required by the pro-étale open–closed lemma, without assuming that $X$ is separated.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-kun-finite-union-noetherian",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 0053 (lemma-finite-union-Noetherian), 04ZA (lemma-Noetherian-quasi-compact); affine Noetherian topology: algebra.tex Tag 00FQ (lemma-Noetherian-topology)"
+   }
+  },
+  {
+   "text": "For the closed immersion $g:C\\hookrightarrow X$ and its complementary open $V$, [lem-cbc-open-closed-recollement] explicitly states that the étale module direct image $g_*$ is exact. For the pro-étale site apply [lem-weil-pbc-proetale-ringed-open-closed] with $A=\\underline\\Lambda_X$ and complementary open $V$. Its hypothesis on the open holds by Step 1, and it explicitly states exactness of $g_*$. The canonical ring isomorphism $g^{-1}\\underline\\Lambda_X\\cong\\underline\\Lambda_C$ of [lem-pe-constant-left-module-inverse-image] identifies its coefficients with the constant coefficients of this item. Under this identification the direct image action is the one induced by constant scalar sections, hence the $g_*$ specified in the statement. This proves exactness on both sites.",
+   "uses": [
+    "lem-cbc-open-closed-recollement",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BM (lemma-closed-immersion-complement-retrocompact-exact); module form as in lem-weil-pbc-proetale-ringed-open-closed; sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi); étale recollement as in lem-cbc-open-closed-recollement"
+   }
+  },
+  {
+   "text": "An exact functor has the termwise derived factorization of [lem-weil-pbc-exact-functor-derived-factorization], and [lem-weil-pbc-exact-functor-derived-functor] says that its canonical comparison to its right derived functor is invertible for every complex. On each site apply these statements to the exact functor $g_*$ of Step 2 and the complex $K=(j_!M)[0]$. Termwise application gives $C(g_*)K=(g_*j_!M)[0]$. Thus the particular canonical map $(g_*j_!M)[0]\\longrightarrow Rg_*(j_!M[0])$ is an isomorphism, proving clause 1. No acyclicity or constructibility hypothesis on $M$ is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), especially parts (3)–(4)"
+   }
+  },
+  {
+   "text": "Each stalk $L_{\\bar s}$ is finitely generated over the finite ring $\\Lambda$. A finite set of $r$ generators gives a surjection of sets $\\Lambda^r\\twoheadrightarrow L_{\\bar s}$, so that stalk is finite as a set. Thus $L$ is lisse in the precise sense of [lem-sf-proetale-locally-constant-origin]. Part (a) of that lemma implies that $\\nu_S^*L$ is locally constant on $S_{\\mathrm{proet}}$ (and has finite stalks). This uses only the forward implication of that lemma.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Y (lemma-compare-locally-constant), forward direction"
+   }
+  },
+  {
+   "text": "For every geometric point $\\bar s$ of $S$, [lem-cbc-proetale-comparison-stalk] gives a $\\Lambda$-linear isomorphism $(\\nu_S^*L)_{\\bar s}\\cong L_{\\bar s}$, not merely a bijection of the underlying sets. The right side is finite projective by hypothesis, so the left side is finite projective too: transport a finite generating set and a splitting of a finite free surjection across this isomorphism. By [lem-weil-pbc-projective-module-flat] it is flat. Together with Step 4 this proves clause 2. No assertion that geometric stalks detect arbitrary pro-étale sheaf isomorphisms is needed.",
+   "uses": [
+    "lem-cbc-proetale-comparison-stalk",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0GLZ (lemma-describe-pullback-from-etale), 0993 (lemma-classical-point); projective implies flat: algebra.tex proof of Tag 051G (lemma-local-artinian-characterize-flat)"
+   }
+  },
+  {
+   "text": "Identify the pro-étale extension-by-zero conventions. The item's pro-étale $j_!$, the sheafified left Kan extension, is taken with values in $\\mathcal A=\\operatorname{Mod}_\\Lambda$. By [lem-cbc-constant-ring-module-sheaves], applied to $S_{\\mathrm{proet}}$ and to $C_{\\mathrm{proet}}$, restriction of scalars along the constant-ring unit $\\iota$ is an equivalence from sheaves of $\\underline\\Lambda$-modules to sheaves valued in $\\Lambda$-modules, keeping the underlying abelian sheaves and their maps; so this $j_!$ is a functor between the module categories of the item, and restriction of sections commutes with these identifications. The left-Kan-extension definition has the adjunction $j_!\\dashv j^*$ of [def-sfb-finite-extension-by-zero-adjunction], whose $j^*$ is isomorphic to restriction, $(j^*G)(T\\to S)\\cong G(T\\to S\\to C)$. By [lem-weil-proetale-weakly-etale-localization], the open immersion $j:S\\hookrightarrow C$ identifies $S_{\\mathrm{proet}}$ with $C_{\\mathrm{proet}}/S$, including the topology, the restriction functor, and the restricted constant coefficient ring $\\Lambda_C|_S\\cong\\Lambda_S$ (identity on constant sections, so compatible with $\\iota$). In this presentation [lem-pur-site-restriction-module-adjunction-exact] says that the sheafified extension-by-zero presheaf, which is the definition used by the open comparison lemma, is left adjoint to the same restriction. Taking for $\\delta$ that isomorphism of the two right adjoints, [lem-weil-pbc-conjugate-iso-unit-equation] gives a natural isomorphism between these two left adjoints, compatible with their units. This identifies the pro-étale $j_!$ used below with the convention in the item, without any extra hypothesis on $j$.",
+   "uses": [
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero); proetale.tex Tag 09AE (definition-extension-zero); uniqueness of adjoints, categories.tex Tag 0B65; sites-modules.tex Tag 03CY (lemma-sheafification-presheaf-modules) for the constant-ring module identification"
+   }
+  },
+  {
+   "text": "The affine description in [def-weil-closed-immersion] says that $g$ is affine. By [lem-weil-pbc-affine-morphism-permanence], an affine morphism is quasi-compact and separated, in particular quasi-separated. Hence $g$ satisfies both morphism hypotheses of comparison of derived direct images. These are properties of $g$; separatedness of $X$ over a base is not required.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01SE (lemma-closed-immersion-affine), 01S7 (lemma-affine-separated)"
+   }
+  },
+  {
+   "text": "Put $N=j^{\\mathrm{et}}_!M$. Apply [prop-weil-pbc-comparison-direct-image] to $g$ and $N[0]\\in D^+(C_{\\mathrm{et}},\\Lambda)$, using Step 7. It gives, naturally in $N$, an isomorphism $\\nu_X^*Rg^{\\mathrm{et}}_*(N[0])\\cong Rg^{\\mathrm{proet}}_*\\nu_C^*(N[0])$. On both sides the exactness established in Step 2 identifies $Rg_*$ with termwise $g_*$ by [lem-weil-pbc-exact-functor-derived-functor]. Also [lem-sf-comparison-pullback-exact] says that comparison pullback is exact, is computed termwise, and commutes with cohomology. Both sides are therefore represented by single complexes, with degree-zero objects $\\nu_X^*(g^{\\mathrm{et}}_*N)$ and $g^{\\mathrm{proet}}_*(\\nu_C^*N)$. Apply $\\mathcal H^0$ to obtain a natural sheaf isomorphism $\\beta_N:\\nu_X^*g^{\\mathrm{et}}_*N\\xrightarrow{\\sim}g^{\\mathrm{proet}}_*\\nu_C^*N$. Here $\\mathcal H^0(H[0])=H$ follows directly from the single-complex differential being zero. This argument uses a derived comparison only on bounded-below complexes, exactly its stated domain.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Statement and Proof (natural derived comparison); degree-zero specialization using derived.tex Tag 015F and exact comparison inverse image"
+   }
+  },
+  {
+   "text": "By [lem-cbc-proetale-extension-zero-comparison] for the open immersion $j:S\\hookrightarrow C$, there is a natural sheaf isomorphism $\\alpha_M:\\nu_C^*j^{\\mathrm{et}}_!M\\xrightarrow{\\sim}j^{\\mathrm{proet}}_!\\nu_S^*M$. Step 6 identifies its pro-étale $j_!$ with the convention in the item. Compose $\\beta_{j^{\\mathrm{et}}_!M}$ of Step 8 with $g^{\\mathrm{proet}}_*(\\alpha_M)$ to obtain $\\nu_X^*(g^{\\mathrm{et}}_*j^{\\mathrm{et}}_!M)\\xrightarrow{\\sim}g^{\\mathrm{proet}}_*j^{\\mathrm{proet}}_!(\\nu_S^*M)$, which proves clause 3. Each factor is natural in $M$, so the composite is natural as well. Every argument also applies when $S$ is empty or $\\Lambda$ is the zero ring: the relevant module sheaves on the empty site, or over the zero ring, are zero, and all displayed maps are then the unique isomorphisms between zero objects.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF (lemma-jshriek-comparison), module form; blueprint complement and first paragraph of sk-lem-sf-flat-model.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-kun-finite-union-noetherian",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-weil-pbc-projective-module-flat",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-sf-comparison-pullback-exact",
+  "lem-cbc-proetale-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+  "place": "Complement, first sentence, and first paragraph; expanded using the existing open–closed, comparison, and exact-derived-functor nodes and their cited Stacks sources"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProEtale|proEtale|proetale' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (pro-étale precoverage/topology, ProEt category), AlgebraicGeometry/Sites/ElladicCohomology.lean (ellAdicSheaf, EllAdicCohomology); no module sheaves, no comparison inverse image, no extension by zero",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'extensionByZero|lowerShriek' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no extension by zero of étale or pro-étale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pro-etale comparison pullback commutes with extension by zero and closed pushforward",
+   "results": "service not reachable from the review sandbox (network blocked)",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\", \"pushforward\"",
+   "results": "service not reachable from the review sandbox (network blocked)",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback from the etale site to the proetale site commutes with closed immersion pushforward and open extension by zero",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the three-clause etale/proetale locally closed generator comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|proEtale|proetale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the three-clause etale/proetale locally closed generator comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image etale proetale locally constant finite projective sheaf stalk closed immersion direct image",
+   "results": "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.isClosedImmersion_iff, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.stalkClosedPointIso_inv, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso, Condensed.lanSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the three-clause etale/proetale locally closed generator comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt, CategoryTheory.Sheaf",
+   "results": "AlgebraicGeometry.Scheme.ellAdicSheaf, AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty, AlgebraicGeometry.Scheme.instIsGrothendieckAbelianSheafProEtTopologyAb",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the three-clause etale/proetale locally closed generator comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale to proetale inverse image preservation of locally constant module sheaves and geometric stalks",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forget, Algebra.FormallyEtale.localization_map, LightCondensed.isoLocallyConstantOfIsColimit_inv, Algebra.FormallyEtale.localization_base, AlgebraicGeometry.IsEtale.of_comp, Condensed.isoLocallyConstantOfIsColimit_inv, StandardEtalePair.homEquiv_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the three-clause etale/proetale locally closed generator comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison|pullback|[Ee]xtension|[Ee]xact|[Ss]talk",
+   "results": "147, 162, 196",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state the three-clause etale/proetale locally closed generator comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-sf-flat-model",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-flat-model",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proetale-locally-closed-generator-comparison",
+  "worker": "stage1",
+  "summary": "Proved all three clauses in nine steps using existing nodes only. Checked Noetherian complement, constant coefficient identifications, the two pro-etale extension-by-zero presentations, canonical exact-derived comparison, and naturality after degree-zero specialization. No statement change and no new nodes.",
+  "blueprint": "Steps 1–3 realize the complement’s exactness assertion Rg_*=g_*; Steps 4–5 realize pullback of lisse finite-projective stratum data; Steps 6–9 make precise paragraph 1’s pullback of generators a_!L.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Noetherian affine topology is a generic topological input for checking the quasi-compact complement required by the unit’s exact closed direct image."
+   },
+   {
+    "node": "lem-kun-finite-union-noetherian",
+    "why": "The finite affine cover argument assembles Noetherian topology, without changing the flat-model route."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Quasi-compactness of the complementary open checks the pro-etale exactness hypothesis."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Its statement explicitly gives exactness of etale closed-immersion module direct image, as required by the complement of the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Its module exactness and extension-by-zero adjunction supply the corresponding pro-etale open/closed tools."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "It identifies the inverse-image constant rings and scalar conventions in the module open/closed lemma."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "The abstract exact-functor lemma identifies the specified canonical map to Rg_*; the unit uses Rg_*=g_*."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Its forward implication supplies local constancy after comparison pullback, as the unit’s first paragraph requires."
+   },
+   {
+    "node": "lem-cbc-proetale-comparison-stalk",
+    "why": "The linear stalk comparison transports finite projectivity without assuming conservativity of geometric pro-etale stalks."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uniqueness of left adjoints identifies the two existing extension-by-zero presentations."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Its qcqs direct-image comparison is specialized to the closed immersion and degree-zero sheaves."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact comparison pullback makes the degree-zero specialization valid and natural."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "The open-extension comparison is composed with the closed direct-image comparison to transport the unit’s generators."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "It identifies open subscheme restriction and its constant coefficient rings with the localized ringed-site restriction, to compare the two existing j_! definitions."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Its statement identifies the actual sheafified extension-by-zero presheaf as a left adjoint to restriction, so uniqueness applies to the two j_! conventions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-kun-finite-union-noetherian",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-sf-comparison-pullback-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-fbda18bcd",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-fbda18bcd (reviewer sub-agent of L); spot-checked: I read the whole item and all 21 cited statements. I also read the main-20261015 sk-lem-sf-flat-model proof (paragraph 1 and the complement's first sentence) and checked Stacks 09BM, proetale.tex l.5020, for the retrocompact hypothesis. The delivery has no new nodes, the statement is unchanged, the item is not in the dropped list, it cites no SGA source, and its only citer (sk-lem-sf-flat-model) uses clauses 1–3 as stated.\n\nSteps 1–5 and 7–9 are correct. Step 1 gets quasi-compactness of every subset from the Noetherian hypothesis, and this is the 09BM hypothesis that pro-étale exactness actually needs. Step 2: étale exactness is from lem-cbc-open-closed-recollement; pro-étale exactness is from lem-weil-pbc-proetale-ringed-open-closed, and lem-pe-constant-left-module-inverse-image identifies g^{-1}Λ_X with Λ_C. Step 3 gets clause 1 from the exact-functor nodes for every complex. Step 4 rests on finite projective over a finite ring giving finite stalks, so 099Y(a) applies. Step 5 uses the Λ-linear stalk comparison together with the projective-module-flat leaf. Step 7: g is affine, hence qcqs. Step 8: the direct-image comparison at degree 0 is valid because exact g_* preserves quasi-isomorphisms and ν^* commutes with H^0. Step 9: the open comparison composed with g_*.\n\nFIX (E1/C1-type gap in Step 6): the item's pro-étale j_! is defined on Sh(−, 𝒜) with 𝒜 = Mod_Λ, and the comparison lemma's j_! is defined on Λ_S-module sheaves. The step went straight to uniqueness of adjoints without identifying these two categories. It also said 'identity comparison', but the adjunction node gives j^* only isomorphic to restriction. I added lem-cbc-constant-ring-module-sheaves (an equivalence Mod(Λ) ≃ Sh(Mod_Λ) by restriction of scalars along ι, keeping the underlying sheaves) and took δ to be the restriction isomorphism. I added it to the step's uses and to proof_deps; its dependency closure does not contain the item, so there is no cycle. I tested the empty stratum, the zero ring, j = id and non-separated X. I accept the generic tool uses from other units listed in split_report.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClosedGeneratorComparison",
+  "declaration": "AlgebraicGeometry.proEtale_locallyClosed_generator_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocallyClosedGeneratorComparison.lean",
+  "statement": "theorem proEtale_locallyClosed_generator_comparison (X : Scheme.{u}) [IsNoetherian X] (Λ : Type u) [CommRing Λ] [Finite Λ] {S : Scheme.{u}} (a : S ⟶ X) [IsImmersion a] (j : S ⟶ a.image) [IsOpenImmersion j] (_hj : j ≫ a.imageι = a) : PreservesFiniteLimits (Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι) ∧ PreservesFiniteColimits (Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι) ∧ PreservesFiniteLimits (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι) ∧ PreservesFiniteColimits (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι) ∧ (∀ M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsIso ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor _ 0).obj ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) j).obj M))))) ∧ (∀ M : Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsIso ((ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor _ 0).obj ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) j).obj M))))) ∧ (∀ L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), Scheme.IsLocallyConstantSheaf L → (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), Module.Finite (ULift.{u + 1, u} Λ) (pointedEtaleStalk (A := ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) L s) ∧ Module.Projective (ULift.{u + 1, u} Λ) (pointedEtaleStalk (A := ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) L s)) → Scheme.IsLocallyConstantProEtaleModuleSheafOfUniverses S Λ ((ProEtale.finiteCoefficientIntrinsicComparison S Λ).obj L) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), Module.Finite (ULift.{u + 1, u} Λ) ((Scheme.finiteCoefficientModuleStalkFunctor s Λ).obj ((ProEtale.finiteCoefficientIntrinsicComparison S Λ).obj L)) ∧ Module.Projective (ULift.{u + 1, u} Λ) ((Scheme.finiteCoefficientModuleStalkFunctor s Λ).obj ((ProEtale.finiteCoefficientIntrinsicComparison S Λ).obj L)) ∧ Module.Flat (ULift.{u + 1, u} Λ) ((Scheme.finiteCoefficientModuleStalkFunctor s Λ).obj ((ProEtale.finiteCoefficientIntrinsicComparison S Λ).obj L))) ∧ Nonempty (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) j ⋙ Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι ⋙ ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X ≅ ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) S ⋙ ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) j ⋙ ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) a.imageι)",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Three clauses together. The geometric factor is a.image, its canonical closed immersion is a.imageι, and j with j ≫ a.imageι = a is the resulting open factor. Fixed-module-valued site functors use the existing ULift coefficient convention. For clause 2, the canonical intrinsic associated-module-sheaf realization lets the statement use the recorded independent-universe local-constancy predicate and the recorded constant-coefficient module stalk. The right-derived comparison is the specified rightDerivedFunctorUnit at the quotient of the degree-zero complex, under the canonical termwise/single identifications. The final Nonempty is a natural isomorphism of functors, not unrelated objectwise isomorphisms. The sole added statement dependency is the already published coefficient-realization node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86aecf942",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read item, all 21 stmt_dep records, module, report and the exact declarations (rightDerivedFunctorUnit, Etale/ProEtale lowerStar = proEtaleSheafDirectImage, comparisonUpperStar, openImmersionLowerShriek, IsLocallyConstantSheaf, IsLocallyConstantProEtaleModuleSheafOfUniverses, finiteCoefficientModuleStalkFunctor, finiteCoefficientIntrinsicRealization (published canonical exact equivalence)). C = a.image, g = a.imageι, j forced = a.toImage by hj (non-vacuous: a qc over Noetherian X). Clause 1: exactness on both sites + canonical right-derived unit at (j_!M)[0] for all M. Clause 2: étale module local constancy (equivalent to set-wise given finite stalks) + finite projective stalks ⇒ recorded pro-étale local constancy and Finite∧Projective∧Flat module stalks. Clause 3: Nonempty natural iso of functors, faithful to the node's 'there is an isomorphism, natural in M'. ULift Λ with Λ:Type u, Finite: no loss of generality; no separatedness; site universes not equated. Node otherwise unchanged; added stmt_dep def-weil-pbc-proetale-modules is a landed node (allowed). lean.statement verbatim; sorry only; docstrings carry source place, blueprint tag and 9 proof steps. Edge cases checked: empty S/X, zero ring, j=id, non-reduced strata, non-separated X. Advisory: intrinsic realization decls not listed in def-weil-pbc-proetale-modules declarations; IsLocallyConstantSheaf owner not a stmt_dep. No file changed, no compile."
+ }
+}

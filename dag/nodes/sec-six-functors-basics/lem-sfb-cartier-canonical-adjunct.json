@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-cartier-canonical-adjunct",
+ "kind": "statement",
+ "title": "Full Cartier-adjunct uniqueness with canonical coefficient structures",
+ "statement": "Let R be a finite commutative ring, n a positive integer annihilating R, i:Z to W a closed Cartier immersion, and n invertible on W. Use the canonical pro-etale sheaf coefficient structures [def-sfb-diagonal-system-interface] and the existing cached small-Ext witnesses [def-sfb-geo-cartier-interface]. Define canonicalCartierClass to be the existing pro-etale class uniquely characterized by the full scalar-adjunct equation [def-sfb-cartier-reduction-data], whose unique solution exists by [lem-sp-cartier-reduction-existence]. Any R-linear Ext^2 class e from i_*R_Z to the Tate line whose scalar adjunct is the pro-etale pole boundary followed by the positive Kummer unit equals canonicalCartierClass.",
+ "stmt_deps": [
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-interface",
+  "lem-sp-cartier-reduction-existence",
+  "lem-sfb-canonical-sheaf-ext"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Cartier unit proof, full scalar-adjunct characterization, shared before diagonal specialization."
+ },
+ "proof": [
+  {
+   "text": "Write the existing uniquely characterized cartierReducedPro class with an explicit Ext type using the canonical module-sheaf structures. This makes no new arbitrary witness choice. The named smallness and forgetful-additivity witnesses supply the canonical interfaces.",
+   "uses": [
+    "def-sfb-cartier-reduction-data",
+    "def-sfb-diagonal-system-interface",
+    "def-sfb-geo-cartier-interface",
+    "lem-sfb-canonical-sheaf-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The assumed scalar-adjunct equation is CartierProReductionSpec after unfolding it and cartierScalarBoundaryEquation. Apply the pro-etale unique-witness component of cartierReduction_existsUnique to identify e with that class. The comparison is performed with arbitrary R,W,i before specialization.",
+   "uses": [
+    "lem-sp-cartier-reduction-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-interface",
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sp-cartier-reduction-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Cartier unit proof, full scalar-adjunct characterization, shared before diagonal specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unique Cartier extension class is determined by its full scalar adjunct on the supported integral constant sheaf",
+   "results": "8 hits about structure-sheaf sections and residue coordinates: StructureSheaf.const_ext; PresheafOfModules.Sheafify.instUniqueSMulCandidate; Proj.ext; Scheme.exists_of_res_eq_of_qcqs_of_top; StructureSheaf.const_congr; Proj.ext_iff; StructureSheaf.normalize_finite_fraction_representation; Spec.basicOpen_hom_ext. None supplies this Cartier Ext characterization.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the project full scalar-adjunct uniqueness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "ExistsUnique.unique",
+   "results": "1 hit: ExistsUnique.unique, Mathlib.Basic.ExistsUnique, equality of two witnesses of a unique existence proposition.",
+   "date": "2026-10-26",
+   "verdict": "Use the uniqueness component of the existing Cartier existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cartierReduction_existsUnique|CartierProReductionSpec",
+   "results": "0 msearch hits. Direct project rg finds both declarations in Sheaf.AlgebraicGeometry.CartierReductionData.",
+   "date": "2026-10-26",
+   "verdict": "The result is already proved with the adopted coefficient interfaces; specialize it with the named canonical structures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, the full Ext class is uniquely determined by its scalar adjunct; use this before exact restriction of scalars and combine the normalized source and Kummer target",
+   "results": "8 hits: SheafOfModules.restrictScalars, Ext.instModule, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.PullbackConstruction.adjunction, Ext.smul_eq_comp_mk₀. These give scalar adjunctions and Ext structure, not this project-specific Cartier uniqueness or Kummer assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual full Cartier characterization and exact-functor image already in the project; prove the formal sign and assembly implications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Cartier unit proof, full scalar-adjunct characterization, shared before diagonal specialization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CartierCanonicalAdjunct",
+  "file": "lean/Sheaf/Paper/CartierCanonicalAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.canonical_cartier_class_of_adjunct",
+  "statement": "theorem canonical_cartier_class_of_adjunct (R : Type (u + 1)) [CommRing R] [Finite R]\n    (n : ℕ) (hn : 0 < n) (hR : (n : R) = 0) {Z W : Scheme.{u}}\n    (i : Z ⟶ W) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (hW : IsUnit (n : Γ(W, ⊤)))\n    (e : Ext.{u + 1}\n      ((lowerStar (ModuleCat.{u + 1} R) i).obj (geoCartierConstant R Z))\n      (geoCartierLine R n hR W) 2)\n    (he : (Ext.mk₀ (cartierProIntegralGenerator R i)).comp\n      (e.mapExactFunctor (cartierForget R W)) (zero_add 2) =\n      (cartierProBoundary i (Etale.cartierPoleBoundary i hI)).comp\n        (cartierProKummerUnit R n hR W hn hW) rfl) :\n    e = canonicalCartierClass R n hn hR i hI hW",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.canonicalCartierClass",
+   "AlgebraicGeometry.ProEtale.canonical_cartier_class_of_adjunct"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-integral-ordinary-expression-normalization",
+ "kind": "lemma",
+ "title": "Transpose of ordinary reduction is expression completion",
+ "statement": "Fix a finite-field datum D, l,E,o,a and any comparison family satisfying RecursionLaws [def-sf-integral-realization-assembly-data]. Let e be a geometric finite expression and K an object of its domain [def-sf-integral-system-expression-domain]. The adjunction transpose of e.ordinaryReduction [def-sf-integral-ordinary-expression-reduction], followed by the component of the given comparison for e, equals the actual recursively constructed completion map from the ordinary ringed value to the completed value. No pair of expressions or structural generator appears in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps."
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data",
+  "def-sf-integral-ordinary-expression-reduction"
+ ],
+ "proof": [
+  {
+   "text": "induct on the expression. The variable case is inputNormalization. Naturality of each primitive coefficient map substitutes the transpose of the child coefficient map. The quotient augmentation equations identify the pull and tensor transposes. For proper image, the adjoint-conjugate comparison has exactly the transpose of its reduction mate. For open extension, transpose openNormalization and cancel the unit at the good open image; its fixed reduction mate is invertible. Apply the recursion law for the parent comparison, cancel its primitive isomorphism and use the child induction hypothesis. At tensor do this in both slots. Compact support is exactly open extension followed by proper image, with the recorded good open intermediate. No structural generator or pair of expressions is used.",
+   "uses": [
+    "lem-sf-primitive-quotient-augmentations",
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-tensor-adjunction-reduction-squares",
+    "lem-pur-normalized-reconstruction-adjunction-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-primitive-quotient-augmentations",
+  "lem-sf-open-reconstruction-effectivity",
+  "lem-sf-tensor-adjunction-reduction-squares",
+  "lem-pur-normalized-reconstruction-adjunction-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Explicit ordinary coefficient recursion and its primitive generator diagrams; refinement of lem-sf-integral-basic-generator-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient reduction functor intertwines associators, adjunction units counits, exchange projection maps and their composites; transpose recursive coefficient maps under an adjunction",
+   "results": "conjugateEquiv_associator_hom; mateEquiv_apply; mateEquiv_counit and its inverse; iterated_mateEquiv_conjugateEquiv. No project expression coefficient theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the general adjunction API and the project normalized primitive maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "mateEquiv, mateEquiv_counit, unit_mateEquiv, mateEquiv_vcomp/hcomp, conjugateEquiv_mateEquiv_vcomp, iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus, not the project-specific coefficient diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*(Square|Reduction)|transpose_substitution; homEquiv_naturality_right_square_iff|iso.*naturality",
+   "results": "Mathlib generic adjunction naturality and project private ordinaryR/tensorOrdinaryR/pushOrdinaryR in TensorAdjunctionReductionSquares. Those private word APIs require GeneratorReduction.Operations, including unitReduction/unitNormalization not supplied by AmbientModels. No independent coefficient recursion for Expression.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary coefficient maps on Expression and transpose with the actual adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralBasicGeneratorSquare",
+  "date": "2026-10-27",
+  "group": "J7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps.",
+   "via": [
+    "lem-sf-integral-basic-generator-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOrdinaryExpressionNormalization",
+  "file": "lean/Sheaf/SixFunctors/IntegralOrdinaryExpressionNormalization.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryExpressionNormalization",
+  "statement": "theorem ordinaryExpressionNormalization (D : FiniteFieldDatum.{u})\n    (o : Operations l E) (a : AmbientModels l E o)\n    (comparison : ExpressionRecursion.Comparisons l E D o)\n    (laws : RecursionLaws l E D o a comparison)\n    {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))}\n    {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric)\n    (K : (e.domain l E o).FullSubcategory) :\n    ((calculus l E W.left).adjunction.homEquiv _ _)\n      (e.ordinaryReduction l E o a K.obj) ≫ (comparison e g).hom.app K =\n      e.completionMap l E a.ringedModels K.obj",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T235911-L-1467113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T235911-L-1467113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-space-coherent-limit-preserving",
+ "kind": "statement",
+ "title": "Continuity of flat proper-support coherent families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $f:X\\to B$ be a finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For an $S$-scheme $T$, let $\\mathcal C(T)$ be the groupoid of pairs $(b:T\\to B,M)$, where $M$ is a finitely presented quasi-coherent $\\mathcal O_{X\\times_BT}$-module, flat over $T$, with support proper over $T$. Here finite presentation means etale locally a cokernel of a map between finite rank free modules; flatness is stalkwise flatness over base local rings on etale charts [def-pc-scheme-module-flat-over]; proper support means $M\\simeq i_*N$ for a closed immersion $i:Z\\hookrightarrow X\\times_BT$ with $Z\\to T$ proper and $N$ finite type quasi-coherent [def-sfb-space-proper-quot-functor]. Modules and tensor pullback use [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Arrows over $v:T\\to T_1$ are isomorphisms $v_X^*M_1\\simeq M$ with $b=b_1v$; composition uses canonical pullback composition isomorphisms. Assume $B\\to S$ is locally of finite presentation [def-sbc-locally-finite-presentation]. For every small nonempty directed inverse system $(T_i)$ of affine $S$-schemes with affine transition maps and limit $T$, the natural functor $2\\operatorname{colim}_i\\mathcal C(T_i)\\to\\mathcal C(T)$ is an equivalence. Explicitly, objects descend to a stage, isomorphisms between descended objects descend to a common later stage, and equality of stage isomorphisms after restriction to $T$ holds at some later stage. The groupoid 2-colimit uses these eventual arrows.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08KD (lemma-coherent-limits), Situation 08KB (situation-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "First the stated restriction functor exists. For any base map $v:T'\\to T$, apply [lem-sfb-space-module-base-change-flat-proper-support] to $X_T\\to T$ and $M$. This morphism is locally of finite type because it is finitely presented, by base-change preservation in [lem-sfb-space-flat-proper-fp-locality]. Thus $v_X^*M$ is again quasi-coherent, finitely presented, flat over $T'$, and carried by a proper closed subspace over $T'$. Pulling back an isomorphism and its inverse gives inverse maps. Use the canonical tensor composition comparisons of [def-sfb-space-module-tensor-composition] for all iterated pullbacks; their local formula sends $c\\otimes(d\\otimes m)$ to $c\\,v^\\sharp(d)\\otimes m$, so the two triple-composition maps agree by multiplication associativity. Identity comparisons have the same normalization. Hence restriction defines the comparison on the groupoid of eventual arrows.",
+   "uses": [
+    "lem-sfb-space-module-base-change-flat-proper-support",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "def-sfb-space-module-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  },
+  {
+   "text": "Every $T_i$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-sfb-lfp-space-scheme-limit-test] to $Z=B$. Its sole finiteness hypothesis on the target is precisely the assumed local finite presentation of $B\\to S$. Consequently every $b:T\\to B$ comes from some $b_{i_0}:T_{i_0}\\to B$. On the tail $i\\ge i_0$ set $b_i=b_{i_0}\\circ(T_i\\to T_{i_0})$. Moreover any two stage base maps with equal restriction to $T$ agree after passing to a common later index, by the equality clause of the same cited statement. Restricting to a tail loses no eventual object or arrow: directedness gives an upper bound for $i_0$ and any given finite collection of indices.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-lfp-space-scheme-limit-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  },
+  {
+   "text": "Fix such a tail and put $X_i=X\\times_B T_i$ and $X_T=X\\times_B T$. By [lem-sfb-space-flat-proper-fp-locality], each $f_i:X_i\\to T_i$ is finitely presented, hence quasi-compact and quasi-separated. Since $T_i$ is affine, quasi-compactness of $X_i$ is the identity affine test in the definition of quasi-compactness of $f_i$. Its quasi-separatedness follows from [lem-sfb-space-qcqs-source-products], applied to $f_i$ and the quasi-separated $T_i$; affines are quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Each transition $X_j\\to X_i$ is the base change of the affine $T_j\\to T_i$, hence affine by [lem-sfb-space-affine-locality]. Apply the base-change formula of [lem-sfb-space-affine-limits-schematic-stages] to the system $(T_i)$ and $W=X_{i_0}\\to T_{i_0}$: its result is $X_T\\simeq\\varprojlim_{i\\ge i_0}X_i$. The fibre-product identifications here follow from their universal property. For applications below to statements formulated over $\\operatorname{Spec}\\mathbf Z$, [lem-sfb-space-change-base-to-integers] lets us forget $S$, preserving these fibre products and the small etale ringed sites. The chart definitions of finite presentation, flatness, and proper carriers then give exactly the same conditions on these objects.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  },
+  {
+   "text": "Let $(b,M)$ be an object over $T$ and use steps 2 and 3 for its base map. Apply the object clause of [lem-sfb-space-fp-module-limit-category] to the small directed system $(X_i)_{i\\ge i_0}$, whose affine transitions and quasi-compact quasi-separated stages were checked in step 3. Obtain an index $i\\ge i_0$, a finitely presented module $M_i$ on $X_i$, and an isomorphism $M_i|_{X_T}\\simeq M$. This descended module is quasi-coherent: its finite local presentation is an instance of the local free presentation defining quasi-coherence in [def-trf-space-quasi-coherent-module]. Its later tensor pullbacks are still finitely presented by the preservation clause of the same module-continuity node, and are quasi-coherent for the same reason.",
+   "uses": [
+    "lem-sfb-space-fp-module-limit-category",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  },
+  {
+   "text": "The limit pullback of $M_i$ is flat over $T$ in the chart sense of the item. By [lem-sfb-space-module-flat-chart-test], (ii) implies (i), this is the same as flatness of every geometric stalk over the geometric local ring of $T$, which is the flatness convention of [lem-sfb-space-module-eventually-flat]. Apply [lem-sfb-space-module-eventually-flat] to $X_i\\to T_i$ and $M_i$: both are finitely presented and the base system consists of affines, exactly its hypotheses. Replace $i$ by the resulting later index, where all later pullbacks have flat geometric stalks over $T_k$; by the chart test again, (i) implies (ii) for any atlas, and any etale scheme chart together with an atlas is again an atlas, so they are flat over $T_k$ in the chart sense of the item. By [lem-sfb-space-module-proper-carrier-support], the proper carrier of $M$ makes its scheme-theoretic support proper over $T$; finite presentation implies finite type, and $X_T\\to T$ is locally of finite type. Now apply [lem-sfb-space-module-eventually-proper-support] on this tail to obtain a later $j$ with proper scheme-theoretic support for $M_j$. Apply the carrier equivalence again to $X_j\\to T_j$ and $M_j$ to obtain a proper closed carrier and a finite type quasi-coherent module on it. Thus $(b_j,M_j)$ is in $\\mathcal C(T_j)$ and its pullback is $(b,M)$. This proves essential surjectivity. No assertion that annihilator ideals commute with arbitrary base change is used.",
+   "uses": [
+    "lem-sfb-space-module-flat-chart-test",
+    "lem-sfb-space-module-eventually-flat",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-module-eventually-proper-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  },
+  {
+   "text": "Take two stage objects and an isomorphism between their restrictions to $T$. Move both to a common stage. Their base maps become equal at some later stage by [lem-sfb-lfp-space-scheme-limit-test], since the limit isomorphism includes equality of base maps. We now have two finitely presented modules $F_i,G_i$ on the same $X_i$, whose limit isomorphism is $\\alpha:F\\to G$. Apply the morphism clause of [lem-sfb-space-fp-module-limit-category] separately to $\\alpha$ and $\\alpha^{-1}$, and move their descents $a,b$ to a common later stage. Their composites $ba$ and $ab$ restrict to the respective identities. Apply the equality clause of that same node to these two pairs of maps, and choose a common upper bound of the resulting indices. There $ba=1$ and $ab=1$, so $a$ is a stage isomorphism descending $\\alpha$. Throughout these passages the two modules remain objects of $\\mathcal C$ by step 1. Thus every arrow between two limit restrictions comes from an eventual arrow.",
+   "uses": [
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-sfb-space-fp-module-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  },
+  {
+   "text": "Suppose two eventual isomorphisms have equal restriction to $T$. Choose representatives at a common stage, and then make their base maps equal by [lem-sfb-lfp-space-scheme-limit-test]. Their module maps have the same domain and codomain after the canonical pullback comparisons. The equality clause of [lem-sfb-space-fp-module-limit-category] makes these maps equal at some later stage. They therefore represent the same eventual arrow, proving faithfulness. Conversely equality at a stage stays equality after restriction because pullback is a functor. Together with step 6 this is full faithfulness, and step 5 gives essential surjectivity, so the stated comparison is an equivalence of groupoids.",
+   "uses": [
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-sfb-space-fp-module-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-base-change-flat-proper-support",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "def-sfb-space-module-tensor-composition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-lfp-space-scheme-limit-test",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-fp-module-limit-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-module-flat-chart-test",
+  "lem-sfb-space-module-eventually-flat",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-module-eventually-proper-support"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08KD (lemma-coherent-limits), proof in Situation 08KB (situation-coherent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat finitely presented quasi coherent sheaves with proper support on algebraic spaces commute with filtered inverse limits of affine base schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Objects and isomorphisms of coherent flat proper support families descend along affine scheme limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasLimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes has all limits, meaning that for every diagram in this category, the limit exists within it.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": CreatesLimits forgetToScheme.{u}\", \"doc\": \"The forgetful functor from the category of affine schemes to the category of schemes creates limits. Specifically, for any small category $\\\\mathcal{J}$ and diagram $K : \\\\mathcal{J} \\\\to \\\\text{AffineSch\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)] (U : c.pt.Opens)\\n  (hU : IsAffineOpen U) : ∃ (i : I) (V : (D.obj i).Opens), IsAffineOpen V ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasColimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes admits all colimits, meaning that for any small diagram in this category, there exists a colimit object within the category of affine schemes.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"IsFlat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*support.*limit|coherent.*limitPreserv|Cohstack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohstack|coherent.*limitPreserv|proper.*support.*descen",
+   "results": "{\"t\": \"2026-10-23T16:01:15Z\", \"tool\": \"grep\", \"query\": \"Cohstack|coherent.*limitPreserv|proper.*support.*descen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; these give scheme or ring flatness, ordinary categorical limits, or local finite-presentation definitions, not continuity of algebraic-space proper-support flat families"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of flat finitely presented sheaves with proper support along inverse limits of affine base schemes",
+   "results": "{\"t\": \"2026-10-23T16:01:16Z\", \"tool\": \"leansearch\", \"query\": \"Descent of flat finitely presented sheaves with proper support along inverse limits of affine base schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Flat.casesOn\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"07fed79f379e79fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; these give scheme or ring flatness, ordinary categorical limits, or local finite-presentation definitions, not continuity of algebraic-space proper-support flat families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The groupoid of finitely presented quasi coherent modules flat over the base with proper support is limit preserving on affine schemes",
+   "results": "{\"t\": \"2026-10-23T16:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"The groupoid of finitely presented quasi coherent modules flat over the base with proper support is limit preserving on affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\"], \"digest\": \"03153cc941123d48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; these give scheme or ring flatness, ordinary categorical limits, or local finite-presentation definitions, not continuity of algebraic-space proper-support flat families"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Limit\"",
+   "results": "{\"t\": \"2026-10-23T16:01:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.instHasColimits\", \"AlgebraicGeometry.PresheafedSpace.forget_preservesColimits\", \"AlgebraicGeometry.PresheafedSpace.colimit\", \"AlgebraicGeometry.PresheafedSpace.instHasColimitsOfShape\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"AlgebraicGeometry.PresheafedSpace.instPreservesColimitsOfShapeTopCatForget\", \"AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone_pt\"], \"digest\": \"cc30f47c1d797759\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; these give scheme or ring flatness, ordinary categorical limits, or local finite-presentation definitions, not continuity of algebraic-space proper-support flat families"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented flat coherent sheaves of proper support form a groupoid commuting with filtered colimits of base rings",
+   "results": "{\"t\": \"2026-10-23T16:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely presented flat coherent sheaves of proper support form a groupoid commuting with filtered colimits of base rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"653cb75dfa763544\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; these give scheme or ring flatness, ordinary categorical limits, or local finite-presentation definitions, not continuity of algebraic-space proper-support flat families"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08KD (lemma-coherent-limits), Situation 08KB (situation-coherent).",
+   "via": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-limit-preserving",
+  "worker": "stage1",
+  "summary": "Split Tag 08KD using the existing algebraic-space module-limit, eventual-flatness, eventual-proper-support and carrier-equivalence nodes. Wrote object, isomorphism and equality descent explicitly; no statement change and no new nodes.",
+  "blueprint": "The inherited blueprint.from.place is the compactification/direct-image preservation input in det-thm-sf-ctf-stability-direct-images, proof (3), through the alteration/stable-moduli and coherent-stack prerequisite chain. The latest blueprint proof was read; the seven steps realize the supporting Tag 08KD proof, not a replacement of the unit route. Whole-blueprint searches found no duplicate of this item. blueprint_refs.py ancestor returns null; the inherited null ancestor and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-43d8124b2",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-43d8124b2 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement unchanged. Live and side-live still show it unsplit with the same statement, and it has no repair note. I checked it against quot.tex Situation 08KB and Lemma 08KD (lines 880-1134) and found that the statement matches, with the support hypothesis written in carrier form, equivalent by 0CZI. The report says the source writes X_T = colim X_i at line 1119 where it should be lim; that is correct. Steps 1-4, 6 and 7 are fine: every cited statement says what the step takes from it, and the hypotheses check out. These were checked: finite presentation under base change; the T_i and X_i are qcqs, the latter by the qs-over-qs clause; transitions are affine; the limit formula from affine-limits-schematic-stages; change of base to Spec Z; the object, map and equality clauses of fp-module-limit-category; and the inverse of the descended isomorphism also descends. One fault (C1/E6) is in step 5. lem-sfb-space-module-eventually-flat defines flatness by geometric stalks over geometric local rings, but the item uses Zariski stalks on etale charts. The step passed from one sense to the other silently, in both directions. The existing node lem-sfb-space-module-flat-chart-test, in the same unit and on the base, proves exactly this equivalence for any atlas. My fix cites it before and after the eventual-flatness step and adds it to uses and proof_deps. Proper support goes from carrier form to scheme-theoretic support and back through proper-carrier-support, with the hypotheses (locally finite type, finite type module) checked. Edge cases checked: one-element system, empty X_T or zero module, non-Noetherian bases, B not quasi-separated. Batch-5 check: all 12 listed citations, and the added one, reach sec-trace-formula only through the general definition def-trf-algebraic-space. They are general facts about algebraic spaces, not steps in the proof of the trace formula or Poincare duality, so I accept them. No tool_uses: affine-scheme-qcqs is a Mathlib leaf. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoherentLimitPreserving",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.limit_preserving",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Fiber",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Lift",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.limit_preserving"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoherentLimitPreserving.lean",
+  "statement": "theorem limit_preserving (f : X ⟶ B) (_hf : ProperQuotFinitePresentation f) (_hB : ∀ U : B.EtaleSite, LocallyOfFinitePresentation U.obj.left.hom) {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Over S) (_haff : ∀ i : Iᵒᵖ, IsAffine (D.obj i).left) (_htrans : ∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a).left) (c : Cone D) (_hc : IsLimit c) : (∀ x : Fiber f c.pt, ∃ (i : I) (xi : Fiber f (D.obj (op i))), Nonempty (Lift (c.π.app (op i)) x xi)) ∧ (∀ (i : I) (xi yi : Fiber f (D.obj (op i))) (x y : Fiber f c.pt) (px : Lift (c.π.app (op i)) x xi) (py : Lift (c.π.app (op i)) y yi) (a : x ⟶ y), ∃ (j : I) (hij : i ≤ j) (xj yj : Fiber f (D.obj (op j))) (qx : Lift (D.map (homOfLE hij).op) xj xi) (qy : Lift (D.map (homOfLE hij).op) yj yi) (rx : Lift (c.π.app (op j)) x xj) (ry : Lift (c.π.app (op j)) y yj) (b : xj ⟶ yj), rx.val ≫ qx.val = px.val ∧ ry.val ≫ qy.val = py.val ∧ a.val ≫ ry.val = rx.val ≫ b.val) ∧ (∀ (i : I) (xi yi : Fiber f (D.obj (op i))) (a b : xi ⟶ yi) (x : Fiber f c.pt) (px : Lift (c.π.app (op i)) x xi), px.val ≫ a.val = px.val ≫ b.val → ∃ (j : I) (hij : i ≤ j) (xj : Fiber f (D.obj (op j))) (qx : Lift (D.map (homOfLE hij).op) xj xi), qx.val ≫ a.val = qx.val ≫ b.val)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three explicit descent clauses use the already recorded CoherentModuli category of SpaceCoherentStackGeneral, without any separatedness hypothesis. Fiber and Lift only specialize Mathlib Functor.Fiber and IsHomLift. Local finite presentation of B over S is tested on every etale scheme chart. Existing category definitions are reused without adding the downstream algebraicity theorem as a DAG prerequisite; its reverse proof import must be omitted to avoid an import cycle (stages/2-statements.md section 3 rule 7). No other node field changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-501a5103f",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Every hypothesis and clause matches the node and Stacks 08KD/08KB. f finitely presented via ProperQuotFinitePresentation (lfp+qc+qc diagonal), no separatedness or flatness added. B->S lfp tested on every B.EtaleSite chart, equivalent not stronger. Nonempty directed preorder I : Type u, affine stages and transitions, IsLimit cone in Over S. Existing CoherentModuli category reused, matching the item's conditions (chart-flat, proper carrier form, arrows are pullback isos over B-maps). Three clauses (object descent, fullness with rx≫qx=px, ry≫qy=py, a≫ry=rx≫b, eventual faithfulness) are typed correctly and non-vacuous. Edge cases (one-element I, empty T or X_T, zero module, non-Noetherian, B not quasi-separated) checked. Only the item's lean field changed; statement verbatim; dependency records equal live; docstrings carry source, blueprint id and all 7 steps; Fiber/Lift are thin Mathlib abbrevs with no name clash in the sibling deliveries. Maintainer note: CoherentModuli is owned only by theorem node lem-sfb-space-coherent-stack-general, whose proof_deps contain this item, so its stage-3 proof import would form a cycle. Same as the sibling PASSes Q20 0d7cdac3 and Q80 ce47ca67: move the category defs into a definition-only module owned by a def node. No file changed; no compile run."
+ }
+}

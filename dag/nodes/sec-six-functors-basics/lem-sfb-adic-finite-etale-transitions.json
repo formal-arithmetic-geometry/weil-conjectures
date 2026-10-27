@@ -1,0 +1,158 @@
+{
+ "id": "lem-sfb-adic-finite-etale-transitions",
+ "kind": "statement",
+ "title": "AdicFiniteEtaleTransitions",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring], $A$ a commutative Noetherian ring and $J$ an ideal. Use constant coefficient sheaves, module sheaves and their unbounded derived categories [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] on the small etale and pro-etale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. The normalized constructions are [lem-sfb-adic-finite-reduction-data]. For $N$ in the pro-etale derived category put $P_n=A/J^{n+1}$ and $N_n=N\\otimes_A^L P_n$, and let $\\nu^*$ be the recorded comparison inverse image [def-weil-pbc-site-comparison-morphism]. Let $a,b$ be integers. Suppose that for every $n$ a bounded constructible etale $P_n$-complex $C_n$ of Tor amplitude $[a,b]$ [def-pe-etale-constructible-module, def-weil-proetale-tor-amplitude] and an arbitrary isomorphism $\\alpha_n:\\nu^*C_n\\simeq N_n$ are given. Then there exist isomorphisms $\\beta_{m,n}:C_m\\otimes^L_{P_m}P_n\\simeq C_n$ for every $n\\le m$. They satisfy the quotient cocycle under the specified scalar reassociation and the equality $\\nu^*(\\beta_{m,n})\\alpha_n=\\theta_{m,n}^{-1}(\\alpha_m\\otimes^L P_n)\\rho_{m,n}$, where $\\theta$ is the normalized scalar/comparison isomorphism. Identity quotient maps are included. No completeness of $N$ or normalization of $\\alpha_0$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes; Tag 09AL, lemma-compare-constructible-derived; parent proof steps specified below."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-adic-finite-reduction-data",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pe-etale-constructible-module",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "For each scalar extension E_(m,n)(C_m), apply the proved arbitrary scalar-extension cohomology bound to the supplied Tor interval. This gives boundedness without proving constructibility of the extension.",
+   "uses": [
+    "lem-sfb-adic-scalar-extension-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify adicFinitePullback with canonical exact comparison through its localization factorization. The existing bounded classical comparison theorem gives bijectivity on Hom sets between any bounded objects. The supplied bounded constructibility of C_n is used only for its cohomological bound.",
+   "uses": [
+    "lem-sfb-adic-exact-comparison",
+    "lem-pe-coefficient-bounded-classical-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every n <= m form theta_(m,n)^(-1) followed by extension(alpha_m), rho_(m,n), and alpha_n^(-1). Lift this isomorphism and its inverse through those Hom-set bijections. Apply injectivity on endomorphisms to show the lifts compose to identities. Cancel alpha_n^(-1) alpha_n to obtain the required compatibility equation. The private Lean helper liftIsoOnProperty proves this categorical argument.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For r >= m >= n, the double scalar extension is bounded because extension(beta_(r,m)) identifies it with the bounded single extension of C_m. Apply injectivity of comparison to the two desired morphisms and cancel the isomorphism alpha_n. Substitute the compatibility equations, the normalized comparison-composition square and naturality of scalar reassociation at alpha_r. Substitute the canonical reduction cocycle. Naturality of theta_(m,n)^(-1) at beta_(r,m) and the compatibility equation for beta_(r,m) identify the remaining composites. This complete Lean calculation includes all repeated indices.",
+   "uses": [
+    "lem-sfb-adic-comparison-composition",
+    "lem-sfb-adic-reduction-cocycle",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-scalar-extension-bound",
+  "lem-sfb-adic-exact-comparison",
+  "lem-pe-coefficient-bounded-classical-descent",
+  "lem-sfb-adic-comparison-composition",
+  "lem-sfb-adic-reduction-cocycle",
+  "lem-sfb-adic-finite-reduction-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09C2. D3, 2026-10-26: use bounded classical full faithfulness, bypassing scalar-extension constructibility; explicit Lean lifting and cocycle cancellation, with separate exact-comparison and normalization substeps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded Tor amplitude survives nilpotent coefficient reduction and derived inverse limit",
+   "results": "Eight results: ordinary AdicCompletion and TensorProduct direct-limit results; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE gives bounded representatives only.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived complete constructible complex reductions modulo powers ideal bounded Tor amplitude",
+   "results": "Eight results: localCohomology and ordinary AdicCompletion results; none concerns derived sheaf reduction towers.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*finite.*reduction|nilpotent.*[Tt]or|[Tt]or.*nilpotent",
+   "results": "Nine unrelated Mathlib hits, in JordanChevalley, Lie weights, WittVector, divided powers, smooth rings, and factorial nat casts.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithful functor lifts isomorphisms and coherent scalar extension transition maps for a family of etale constructible complexes",
+   "results": "CategoryTheory.Functor.preimageIso, Functor.FullyFaithful.preimageIso, FullyFaithful.isoEquiv and ofIso (Mathlib.CategoryTheory.Functor.FullyFaithful). Read source at lines 110-118 and 202-221: these lift one isomorphism once full faithfulness is known. They do not give constructible scalar-extension preservation, the concrete comparison identification or the quotient cocycle.",
+   "verdict": "partial generic subroutine; no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "adicFinite|nilpotent.*constructible|constructible.*nilpotent|[Ff]ully[Ff]aithful.*[Ii]so",
+   "results": "25 generic fully faithful isomorphism uses in Mathlib, including Condensed.Discrete.LocallyConstant, CategoryTheory.ObjectProperty.Equivalence, CategoryTheory.Subobject.MonoOver, CategoryTheory.Shift.SingleFunctorsLift and Topology.Sheaves.Functors. No adic or nilpotent constructible reduction theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicConstructibleFiniteReductions",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof invoking Stacks 09C2 in the integral criterion; AdicFiniteEtaleTransitions",
+   "via": [
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteEtaleTransitions",
+  "file": "lean/Sheaf/Paper/AdicFiniteEtaleTransitions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteEtale_transitions",
+  "statement": "theorem adicFiniteEtale_transitions\n    (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A)\n    (a b : ℤ)\n    (Cn : ∀ n : ℕ, adicFiniteEtale.{u, v} X J n)\n    (hCn : ∀ n : ℕ, IsCoefficientBoundedConstructibleEtale.{u, v} X\n      (adicFiniteCoeff J n) (Cn n))\n    (hTor : ∀ n : ℕ, HasCoefficientModelTorAmplitude\n      (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J n)) (Cn n) a b)\n    (alpha : ∀ n : ℕ, (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).obj (Cn n) ≅\n      adicFiniteReduction.{u, v} X J N n) :\n    ∃ beta : ∀ {m n : ℕ} (h : n ≤ m),\n        (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X)\n          (adicFiniteFactor J h)).obj (Cn m) ≅ Cn n,\n    (∀ (r m n : ℕ) (hnm : n ≤ m) (hmr : m ≤ r),\n        (adicFiniteExtensionComp (smallModelComparisonEtaleTopology.{u, v} X)\n          (adicFiniteFactor J hmr) (adicFiniteFactor J hnm)\n          (adicFiniteFactor J (hnm.trans hmr)) (adicFiniteFactorComp J hnm hmr)).hom.app\n            (Cn r) ≫ (beta (hnm.trans hmr)).hom =\n        (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X)\n          (adicFiniteFactor J hnm)).map (beta hmr).hom ≫ (beta hnm).hom) ∧\n      (∀ (m n : ℕ) (h : n ≤ m),\n        (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).map (beta h).hom ≫ (alpha n).hom =\n        (adicFiniteComparison.{u, v} X (adicFiniteFactor J h)).inv.app (Cn m) ≫\n          (adicFiniteExtension (coefficientProEtaleModelTopology.{u, v} X)\n            (adicFiniteFactor J h)).map (alpha m).hom ≫ (adicFiniteRho.{u, v} X J N h).hom)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-52b50",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T100410-L-14247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T111817-L-1738165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

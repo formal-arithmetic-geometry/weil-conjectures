@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-projective-normalized-unit-counit-restriction",
+ "kind": "statement",
+ "title": "Conditional normalized projective-line unit and counit on full subcategories",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] with pulled-back coefficients [sk-def-sfb-pulled-back-coefficients]. Use ordinary unbounded internal-module derived categories $D(Z)$, with [sk-def-sfb-module-derived-pushpull], [sk-def-sfb-derived-tensor-hom]. Let $Y$ be a scheme, $P=\\mathbf P^1_Y$, $W=P\\times_Y P$, $q,p_1,p_2,\\Delta$ as in [def-nagata-projective-space-base-change]. Assume $\\Delta$ is closed, its complementary open $j$ is quasi-compact, and the coefficient inverse images along $\\Delta,j$ are exact. Fix modules $L_Z$, a diagonal coefficient diagram with class $\\delta$ and trace $\\tau$ [def-sfb-diagonal-coefficient-category], and an isomorphism $e:p_2^*(L_P[2])\\simeq L_W[2]$. Use the fixed canonical section, tensor, twist and projection maps of [def-sfb-projective-diagonal-composition], [def-sfb-internal-diagonal-tensor-comparison], [def-sfb-tate-twisted-projection-comparison] and the ambient component formulas of [def-sfb-projective-ambient-unit-counit-composites]. Put $T_Z(A)=(A\\otimes^{\\mathbf L}L_Z)[2]$. Let $\\mathcal C_P\\subseteq D(P)$ and $\\mathcal C_Y\\subseteq D(Y)$ be full replete triangulated subcategories. Assume $F=Rq_*$ and $G=T_Pq^*$ restrict to exact functors $\\mathcal C_P\\to\\mathcal C_Y$ and $\\mathcal C_Y\\to\\mathcal C_P$. Assume the fixed exchange and twisted projection are invertible for every $M\\in\\mathcal C_P$ [def-sfb-rational-p1-unit-inversion-condition], and the fixed left projection is invertible for every $K\\in\\mathcal C_Y$ [def-sfb-rational-p1-counit-inversion-condition]. Then the canonical diagonal tensor map is a natural isomorphism on all $D(P)$ and $Rp_{2*}R\\Delta_*\\simeq1$. There is a unique pair of natural transformations $\\eta:1\\to GF$, $\\varepsilon:FG\\to1$ on these full subcategories whose underlying components are respectively the fixed ambient diagonal-insertion and trace-contraction formulas. Uniqueness refers to these formulas (heterogeneous equality after the prescribed identifications), not to arbitrary candidate adjunction maps. Both are natural transformations between the specified exact functors; triangle identities are not asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (1)--(3): old steps 6--8, construction parts of 10--11, and full naturality/normalization argument of 12",
+  "note": "Construction material retained from the earlier split. The following proof-in-words was previously attached to this node. It is preserved here verbatim as source material for the worker who will prove the corresponding Lean declaration; this stage-1 node intentionally has no proof steps.\n\nFormer proof step 1:\nOpen and closed restrictions detect isomorphisms even on unbounded complexes. Apply [lem-weil-pbc-proetale-ringed-open-closed] with $X=W$, $i=\\Delta$ and ring sheaf $\\Lambda_W$. It supplies exact $\\Delta_*,j_!$, the identities $\\Delta^*\\Delta_*\\simeq1$, $j^*\\Delta_*=0$, and the module sequence $0\\to j_!j^*F\\to F\\to\\Delta_*\\Delta^*F\\to0$. The two inverse images are exact by hypothesis. Thus they act on cohomology sheaves. If $\\Delta^*C=j^*C=0$ for an arbitrary complex $C$, then the exact sequence applied to each $H^nC$ has zero outer terms, hence $H^nC=0$ for every integer $n$. Applying this observation to the cone of a morphism proves joint conservativity. Exact sheaf functors induce triangulated functors by [lem-sf-exact-functor-derived-triangulated]; [sk-def-sfb-derived-categories] also identifies the exact closed pushforward with $R\\Delta_*$. No assertion about geometric stalks detecting all pro-etale sheaves is needed.\n\nFormer uses: [\"lem-weil-pbc-proetale-ringed-open-closed\", \"lem-sf-exact-functor-derived-triangulated\", \"sk-def-sfb-derived-categories\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/stacks-project/proetale.tex', 'place': 'Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); degreewise module consequence'}\n\nFormer proof step 2:\nDiagonal tensor identification, with its actual map. Put $A_M=p_1^*M\\otimes^{\\mathbf L}\\Delta_*\\Lambda_P$. The tensor-pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the pullback composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], and the identities $p_1\\Delta=1$ and $\\Delta^*\\Delta_*\\Lambda_P=\\Lambda_P$, identify $\\Delta^*A_M$ with $M\\otimes^{\\mathbf L}\\Lambda_P=M$. The same tensor-pullback isomorphism gives $j^*A_M=0$ because $j^*\\Delta_*\\Lambda_P=0$. Use the derived pullback/direct-image adjunction of [sk-def-sfb-module-derived-pushpull] to form its unit $a_M:A_M\\to\\Delta_*\\Delta^*A_M=\\Delta_*M$. After $\\Delta^*$ it is an isomorphism: the triangle identity composes it with the invertible closed counit to give $1$. After $j^*$ it is the map $0\\to0$. The identities and closed counit here are supplied by [lem-weil-pbc-proetale-ringed-open-closed], termwise on complexes as in the preceding step. Joint conservativity from the preceding support argument makes $a_M$ an isomorphism. Define the isomorphism in clause (1) to be $a_M^{-1}$. It is natural in $M$, since $a$ is an adjunction unit followed by natural tensor and pullback identifications. This is the actual fixed diagonal tensor map: under the adjunction hom-equivalence, the left-factor projection followed by the section and unitor of [def-sfb-internal-diagonal-tensor-comparison] has transpose the same canonical identification $\\Delta^*A_M\\to M$. The unit followed by this identification has that transpose too, by the adjunction triangle identity. Injectivity of the hom-equivalence identifies the two maps; thus the inverse just proved is the prescribed inverse, not an arbitrary support isomorphism.\n\nFormer uses: [\"lem-weil-pbc-ringed-topoi-derived-tensor-pullback\", \"sk-def-sfb-module-derived-pushpull\", \"lem-weil-pbc-proetale-ringed-open-closed\", \"lem-weil-pbc-proetale-derived-pullback-composition\", \"def-sfb-internal-diagonal-tensor-comparison\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1): construction and invertibility of the diagonal tensor map'}\n\nFormer proof step 3:\nThe initial identification in the unit. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $P\\xrightarrow{\\Delta}W\\xrightarrow{p_2}P$, with the pulled-back coefficient rings. Since $p_2\\Delta=1_P$, it gives $Rp_{2*}R\\Delta_*\\simeq R(1_P)_*=1$. Here $R\\Delta_*=\\Delta_*$ by exactness from [lem-weil-pbc-proetale-ringed-open-closed] and the exact-functor clause of [sk-def-sfb-derived-categories]. This is a natural identification for every unbounded $M$. Use its inverse to write $M\\simeq Rp_{2*}\\Delta_*M$, followed by $Rp_{2*}(a_M^{-1})$.\n\nFormer uses: [\"lem-weil-pbc-ringed-topoi-derived-pushforward-composition\", \"lem-weil-pbc-proetale-ringed-open-closed\", \"sk-def-sfb-derived-categories\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1): $Rp_{2*}\\\\Delta_*=R(p_2\\\\Delta)_*=1$'}\n\nFormer proof step 4:\nUse the fixed diagram's class $\\delta$ [def-sfb-diagonal-coefficient-category]. Tensor with $1_{p_1^*M}$ and apply $Rp_{2*}$, following the section and inverse diagonal tensor maps just established. The resulting target is $Rp_{2*}T_W(p_1^*M)$. By the assumed fixed unit inversion condition, follow by $\\Pi^{-1}$ and $T_P(\\beta_M^{-1})$. This gives exactly the ambient $\\mathrm{unitComponent}(M)$ of [def-sfb-projective-ambient-unit-counit-composites]. It has source $M$ and target $GFM$; both objects lie in $\\mathcal C_P$ by the preservation assumptions, so fullness makes it a morphism in that subcategory.\n\nFormer uses: [\"def-sfb-diagonal-coefficient-category\", \"def-sfb-rational-p1-unit-inversion-condition\", \"def-sfb-projective-ambient-unit-counit-composites\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (2): old step 10, diagonal-class insertion and order of arrows'}\n\nFormer proof step 5:\nThe fixed left projection has source $K\\otimes^{\\mathbf L}Rq_*L_P[2]$ and target $Rq_*(q^*K\\otimes^{\\mathbf L}L_P[2])$. Apply $Rq_*$ to inverse tensor-shift, then its assumed inverse, then $1_K\\otimes\\tau$, the coefficient-unit identification and the right unitor. This is exactly $\\mathrm{counitComponent}(K)$ of [def-sfb-projective-ambient-unit-counit-composites]. Its source is $FGK$ and target is $K$, so it belongs to the full subcategory $\\mathcal C_Y$. No proof of a projection formula or preservation is hidden in this step: those are explicit hypotheses.\n\nFormer uses: [\"def-sfb-rational-p1-counit-inversion-condition\", \"def-sfb-projective-ambient-unit-counit-composites\", \"def-sfb-projective-diagonal-pullback\"]\nFormer elementary flag: True\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (3): old step 11, inverse projection and trace contraction'}\n\nFormer proof step 6:\nFor $u:M\\to M'$, bifunctoriality gives $(p_1^*u\\otimes1)\\circ(1\\otimes\\delta)=(1\\otimes\\delta)\\circ(p_1^*u\\otimes1)$ with the respective sources and targets. Compose this square with naturality of the section, diagonal tensor, exchange and twisted projection maps; invert the last two naturality squares by composing with their inverses. This proves $GF(u)\\eta_M=\\eta_{M'}u$. Tensor-shift naturality is exactly [lem-sfb-rational-p1-tensor-shift-naturality]. For $v:K\\to K'$, tensor bifunctoriality gives $(v\\otimes1)(1\\otimes\\tau)=(1\\otimes\\tau)(v\\otimes1)$. Compose with inverse tensor-shift, inverse left-projection naturality [lem-sfb-rational-p1-left-projection-naturality], and unitor naturality. This proves $v\\varepsilon_K=\\varepsilon_{K'}FG(v)$. The projection and tensor structures are exact and shift-compatible by [lem-weil-pbc-ringed-projection-mate-exact]. The assumed exactness of restricted $F,G$ and exactness of [2] therefore give precisely natural transformations between exact functors.\n\nFormer uses: [\"lem-sfb-rational-p1-tensor-shift-naturality\", \"lem-sfb-rational-p1-left-projection-naturality\", \"lem-weil-pbc-ringed-projection-mate-exact\", \"sk-def-sfb-derived-categories\", \"def-weil-pbc-ambient-ringed-exchange\", \"def-sfb-tate-twisted-projection-comparison\", \"def-sfb-internal-diagonal-tensor-comparison\", \"def-sfb-projective-diagonal-composition\"]\nFormer elementary flag: False\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (1)--(3): old step 12, component naturality and exactness'}\n\nFormer proof step 7:\nThe component formulas and the two proved naturality equations define both natural transformations on the full subcategories. Work first with abstract coefficient, diagram, predicates and the specified preservation and inversion witnesses; specialize only after constructing these transformations, so no choice of a different tensor or cached inversion predicate occurs. For any other normalized pair, heterogeneous equality to each same fixed ambient component gives heterogeneous equality of the two components by symmetry and transitivity. Their types now agree, hence the components are equal. Morphisms in a full subcategory are the ambient morphisms, so componentwise equality gives equality of each natural transformation and then of the pair. This proves existence and uniqueness without a kernel expansion of the concrete tensor data, and without assuming triangle identities.\n\nFormer uses: [\"def-sfb-projective-ambient-unit-counit-composites\", \"def-sfb-rational-p1-unit-inversion-condition\", \"def-sfb-rational-p1-counit-inversion-condition\"]\nFormer elementary flag: True\nFormer source: {'document': 'literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md', 'place': 'Well-definedness (3): old step 12, parametric construction, normalization and extensionality'}\n"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-nagata-projective-space-base-change",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-rational-p1-unit-inversion-condition",
+  "def-sfb-rational-p1-counit-inversion-condition"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical diagonal class and trace composites give a unique normalized natural unit counit pair on full triangulated subcategories assuming preservation and invertible exchange and projection maps",
+   "results": "{\"t\": \"2026-10-27T06:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical diagonal class and trace composites give a unique normalized natural unit counit pair on full triangulated subcategories assuming preservation and invertible exchange and projection maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated\", \"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Adjunction.IsTriangulated.id\", \"CategoryTheory.Functor.isTriangulated_iff_comp_right\", \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"CategoryTheory.Functor.isTriangulated_iff_of_iso\"], \"digest\": \"49fe887f66af7193\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic extensionality and triangulated-adjunction hits do not construct this normalized pair from the fixed diagonal and trace maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.ext\"], \"digest\": \"726f6148d1b54d14\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic extensionality and triangulated-adjunction hits do not construct this normalized pair from the fixed diagonal and trace maps"
+  },
+  {
+   "tool": "grep",
+   "query": "UnitCounitNormalized|unitCounit_existsUnique|unitComponent|counitComponent",
+   "results": "{\"t\": \"2026-10-27T06:10:17Z\", \"tool\": \"grep\", \"query\": \"UnitCounitNormalized|unitCounit_existsUnique|unitComponent|counitComponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic extensionality and triangulated-adjunction hits do not construct this normalized pair from the fixed diagonal and trace maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations from diagonal insertion and trace contraction restrict to full subcategories and are uniquely determined by their components",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations from diagonal insertion and trace contraction restrict to full subcategories and are uniquely determined by their components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayFunctor.Hom.mk.noConfusion\", \"CategoryTheory.SingleObj.natTrans\", \"CategoryTheory.Sigma.natTrans\", \"CategoryTheory.MonoidalCategory.DayFunctor.Hom.noConfusion\", \"CategoryTheory.MonoidalCategory.DayFunctor.Hom.noConfusionType\", \"CategoryTheory.SingleFunctors.Hom.noConfusion\", \"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"CategoryTheory.DinatTrans.noConfusion\"], \"digest\": \"5003bde8c2b705cf\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic extensionality and triangulated-adjunction hits do not construct this normalized pair from the fixed diagonal and trace maps"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*tensor|UnitCounitNormalized|unitCounit_existsUnique|trace.*contraction",
+   "results": "{\"t\": \"2026-10-27T07:24:57Z\", \"tool\": \"grep\", \"query\": \"diagonal.*tensor|UnitCounitNormalized|unitCounit_existsUnique|trace.*contraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/LinearAlgebra/Trace.lean\", \"Mathlib/LinearAlgebra/Trace.lean\"], \"digest\": \"eb85100dc47f42ed\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic exact-derived, full-subcategory adjunction, extensionality, representation tensor or structure-sheaf hits do not give the normalized internal-module projective-line construction without triangle identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "{\"t\": \"2026-10-27T07:24:57Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.ext\"], \"digest\": \"726f6148d1b54d14\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic exact-derived, full-subcategory adjunction, extensionality, representation tensor or structure-sheaf hits do not give the normalized internal-module projective-line construction without triangle identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit and counit defined by diagonal class and trace restrict naturally to full subcategories when exchange and projection are isomorphisms",
+   "results": "{\"t\": \"2026-10-27T07:24:57Z\", \"tool\": \"leansearch\", \"query\": \"A unit and counit defined by diagonal class and trace restrict naturally to full subcategories when exchange and projection are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.mk\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"CategoryTheory.Adjunction.CoreUnitCounit.mk\"], \"digest\": \"df1d10deec7417a3\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic exact-derived, full-subcategory adjunction, extensionality, representation tensor or structure-sheaf hits do not give the normalized internal-module projective-line construction without triangle identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical diagonal tensor map is invertible and diagonal insertion and trace contraction define unique natural transformations on full derived subcategories under invertible exchange and projection comparisons",
+   "results": "{\"t\": \"2026-10-27T07:25:03Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical diagonal tensor map is invertible and diagonal insertion and trace contraction define unique natural transformations on full derived subcategories under invertible exchange and projection comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"DerivedCategory.singleFunctorsPostcompQIso_hom_hom\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"DerivedCategory.singleFunctorsPostcompQIso_inv_hom\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app\", \"CategoryTheory.Tor'\"], \"digest\": \"180220fd219ac536\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic exact-derived, full-subcategory adjunction, extensionality, representation tensor or structure-sheaf hits do not give the normalized internal-module projective-line construction without triangle identities"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|closedImmersion.*tensor|tensor.*closedImmersion",
+   "results": "{\"t\": \"2026-10-27T07:25:37Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projection_formula|closedImmersion.*tensor|tensor.*closedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic exact-derived, full-subcategory adjunction, extensionality, representation tensor or structure-sheaf hits do not give the normalized internal-module projective-line construction without triangle identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion projection formula: the canonical morphism from a complex tensor the pushforward of the coefficient unit to pushforward of its restriction is an isomorphism; restrict natural transformations to full subcategories",
+   "results": "{\"t\": \"2026-10-27T07:25:39Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersion projection formula: the canonical morphism from a complex tensor the pushforward of the coefficient unit to pushforward of its restriction is an isomorphism; restrict natural transformations to full subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\"], \"digest\": \"81b5d3966ec7605e\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic exact-derived, full-subcategory adjunction, extensionality, representation tensor or structure-sheaf hits do not give the normalized internal-module projective-line construction without triangle identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-unit-counit",
+  "date": "2026-10-27",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "Well-definedness (1)--(3): old steps 6--8, construction parts of 10--11, and full naturality/normalization argument of 12",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "Use the already proved diagonalTensorIso and diagonalTensorIso_naturality of [def-sfb-internal-diagonal-tensor-comparison]. Invert this pointwise comparison and its naturality square, and package it with NatIso.ofComponents. Unfold only diagonalTensorIso to show its inverse is precisely diagonalTensorMap, retaining the fixed canonical map on every unbounded object. The support argument has already been proved in that dependency; it is not repeated here.",
+   "uses": [
+    "def-sfb-internal-diagonal-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1)--(3), fixed-composite naturality and full-subcategory restriction"
+   }
+  },
+  {
+   "text": "The inverse of pushSectionIso from [def-sfb-projective-diagonal-composition] is the asserted natural isomorphism from the composite diagonal and second-projection pushforwards to the identity.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1)--(3), fixed-composite naturality and full-subcategory restriction"
+   }
+  },
+  {
+   "text": "Prove naturality of the right-factor projection in its pushed variable by the naturality of the adjunction rightAdjointProjectionMap, using the normalized projection family from [def-sfb-tate-twisted-projection-comparison] and the derived tensor comparison from [def-sfb-proetale-rational-localizing-projection-helpers]. Compose it with tensor-shift naturality [lem-sfb-rational-p1-tensor-shift-naturality] and tensor bifunctoriality for the fixed line comparison to prove twisted-projection naturality. Compose diagonalTensorIso naturality, tensor bifunctoriality for the fixed supported diagonal class of [def-sfb-diagonal-coefficient-category], and tensor-shift naturality to prove diagonalClassMap naturality. Compose the section square, pushforward of this last square, and the inverted twisted-projection and exchange squares [def-weil-pbc-ambient-ringed-exchange]. The witnesses [def-sfb-rational-p1-unit-inversion-condition] permit precisely these inverses and yield naturality of the fixed unitComponent of [def-sfb-projective-ambient-unit-counit-composites].",
+   "uses": [
+    "def-sfb-tate-twisted-projection-comparison",
+    "def-sfb-proetale-rational-localizing-projection-helpers",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-rational-p1-tensor-shift-naturality",
+    "def-sfb-internal-diagonal-tensor-comparison",
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-projective-diagonal-composition",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-sfb-rational-p1-unit-inversion-condition",
+    "def-sfb-projective-ambient-unit-counit-composites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1)--(3), fixed-composite naturality and full-subcategory restriction"
+   }
+  },
+  {
+   "text": "For the counitComponent of [def-sfb-projective-ambient-unit-counit-composites], push forward the inverted tensor-shift square, invert the left-projection naturality square [lem-sfb-rational-p1-left-projection-naturality] using [def-sfb-rational-p1-counit-inversion-condition], and compose with tensor bifunctoriality for the trace and singleUnitIso [def-sfb-projective-diagonal-pullback], followed by right-unitor naturality. This proves the required counit naturality equation.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "lem-sfb-rational-p1-tensor-shift-naturality",
+    "lem-sfb-rational-p1-left-projection-naturality",
+    "def-sfb-rational-p1-counit-inversion-condition",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1)--(3), fixed-composite naturality and full-subcategory restriction"
+   }
+  },
+  {
+   "text": "Substitute the specified equalities for F and G. On their full subcategories define each component by ObjectProperty.homMk applied to the fixed ambient formula; ObjectProperty.hom_ext lifts the preceding naturality equations. The same inversion witnesses and HEq.rfl prove normalization. Any competing normalized component is heterogeneously equal to the same formula, since invertibility witnesses are proofs and hence irrelevant. HEq transitivity and eq_of_heq give equality of ambient components, ObjectProperty.hom_ext gives equality of restricted components, and NatTrans.ext and Prod.ext give uniqueness of the pair. No triangle identities or extra exactness assertions are used.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-rational-p1-unit-inversion-condition",
+    "def-sfb-rational-p1-counit-inversion-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1)--(3), fixed-composite naturality and full-subcategory restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-rational-p1-counit-inversion-condition",
+  "def-sfb-rational-p1-unit-inversion-condition",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-sfb-rational-p1-left-projection-naturality",
+  "lem-sfb-rational-p1-tensor-shift-naturality",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (1)--(3); K4 reuses the proved parametric naturality and restriction arguments from RationalP1UnitCounit locally, and the proved diagonal comparison from RationalP1DiagonalTensor"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-projective-normalized-unit-counit-restriction",
+  "worker": "stage1",
+  "summary": "Retained the live conditional statement and its preserved source material. Proved invertibility of the actual diagonal projection map by its counit transpose and internal-module open--closed conservativity. Assembled the two normalized component formulas, checked their naturality equations, and restricted by fullness; uniqueness is componentwise. Reused existing nodes only, with no new clauses or triangle identities.",
+  "blueprint": "det-prop-p1-adjunction-rational-unit-counit, Well-definedness (1)--(3): steps 1--4 realize (1), steps 5--6 realize (2), and steps 7--8 realize (3) and normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-noncommutative-ringed-open-closed",
+    "why": "Generic open--closed localization for the actual internal module categories, including the actual closed counit and coefficient transport; used as a support tool for blueprint Well-definedness (1), with no replacement of the projective-line unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-4fa559bc0",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-4fa559bc0 (reviewer sub-agent of L); spot-checked: I read the full 8-step split, the statements of all 16 cited nodes, and the blueprint's unit-counit proof, Well-definedness (1)-(3). The delivery has no new nodes, the statement is unchanged, proof_deps equals the union of uses, and there is no cycle. Step 1: the open-closed lemma (closed immersion plus quasi-compact open, coefficients matched through the ring-isomorphism clause) and a degree-by-degree argument give joint conservativity on unbounded complexes. I accept this tool use. Step 2: I checked the transpose of d by hand: psi = rho(s⊗eps_1)mu = eps_M∘Delta^*d_M, so Delta^*d is invertible. Step 3: j^*d is a map between zero objects. Naturality of d correctly uses the left-projection lemma, since d varies in the unpushed factor. Steps 4, 5, 7 and 8 match the fixed composites formulas, including source and target types and the order of the inverses. I checked the edge cases: Y empty, Lambda zero, M or K zero, and unbounded M. Two citation faults were repaired in fixes/. (a) Step 5/6: b_M is the ambient exchange of def-weil-pbc-ambient-ringed-exchange (the map the composites and inversion-condition nodes name), and that node is now cited. (b) Step 6 took naturality of Pi's projection factor from lem-sfb-rational-p1-left-projection-naturality 'by braiding'. That lemma is naturality only in the unpushed argument K, while Pi varies in the pushed argument A. The sentence now derives naturality from the mate composite Rf_*((eps_A⊗1)mu)eta, citing def-sfb-proetale-rational-localizing-projection-helpers. Batch-5 flags: projection-exchange-maps and projective-diagonal-pullback are generic definitions, and the two rational-p1 naturality lemmas are generic naturality facts. Their closures reach the sec-trace-formula and sec-poincare-duality chapters only through generic derived calculus and through def-sfb-diagonal-coefficient-category, which the item already had in stmt_deps. None is a step of either assumed proof. Accepted tool_uses: lem-sfb-noncommutative-ringed-open-closed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectiveNormalizedUnitCounitRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.projective_normalized_unit_counit_restriction",
+  "file": "lean/Sheaf/Paper/ProjectiveNormalizedUnitCounitRestriction.lean",
+  "statement": "theorem projective_normalized_unit_counit_restriction (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) [IsClosedImmersion (diagonalImmersion Y)] (U : Scheme.{u}) (j : U ⟶ diagonalSurface Y) [IsOpenImmersion j] [QuasiCompact j] (hj : Set.range j.base = (Set.range (diagonalImmersion Y).base)ᶜ) [PreservesFiniteLimits (CondensedRing.upperStar Λ (diagonalImmersion Y))] [PreservesFiniteColimits (CondensedRing.upperStar Λ (diagonalImmersion Y))] [PreservesFiniteLimits (CondensedRing.upperStar Λ j)] [PreservesFiniteColimits (CondensedRing.upperStar Λ j)] (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L) (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅ ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧) (P : ObjectProperty (DerivedCategory (Modules Λ (ProjectiveLine Y)))) (Q : ObjectProperty (DerivedCategory (Modules Λ Y))) [P.IsClosedUnderIsomorphisms] [Q.IsClosedUnderIsomorphisms] [P.IsTriangulated] [Q.IsTriangulated] (hF : ∀ M : P.FullSubcategory, Q ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M.obj)) (hG : ∀ K : Q.FullSubcategory, P ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙ twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).obj K.obj)) (F : P.FullSubcategory ⥤ Q.FullSubcategory) (G : Q.FullSubcategory ⥤ P.FullSubcategory) (hF_eq : F = Q.lift (P.ι ⋙ moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)) hF) (hG_eq : G = P.lift (Q.ι ⋙ moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙ twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))) hG) (hF_exact : RestrictionExact P Q F) (hG_exact : RestrictionExact Q P G) (hI : ∀ M : P.FullSubcategory, UnitInversionCondition Λ Y L e M.obj) (hJ : ∀ K : Q.FullSubcategory, CounitInversionCondition Λ Y L K.obj) : (∃ a : moduleObjectDerivedPullback Λ (firstProjection Y) ⋙ tensorRight ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj (unit Λ (ProjectiveLine Y))) ≅ moduleObjectDerivedPushforward Λ (diagonalImmersion Y), ∀ M : DerivedCategory (Modules Λ (ProjectiveLine Y)), a.hom.app M = diagonalTensorMap Λ Y M) ∧ Nonempty (moduleObjectDerivedPushforward Λ (diagonalImmersion Y) ⋙ moduleObjectDerivedPushforward Λ (secondProjection Y) ≅ 𝟭 (DerivedCategory (Modules Λ (ProjectiveLine Y)))) ∧ ∃! a : (𝟭 P.FullSubcategory ⟶ F ⋙ G) × (G ⋙ F ⟶ 𝟭 Q.FullSubcategory), (∀ M : P.FullSubcategory, UnitComponentNormalized Λ Y L d e M.obj (a.1.app M).hom) ∧ (∀ K : Q.FullSubcategory, CounitComponentNormalized Λ Y L d K.obj (a.2.app K).hom)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-27",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.RestrictionExact",
+   "AlgebraicGeometry.ProEtale.RationalP1.projective_normalized_unit_counit_restriction"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35a438b6d",
+  "group": "NK",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node with the Lean: Λ/u universes; P1/W/p1/p2/Δ; Δ closed with qc complementary open (range equality); upperStar exactness along Δ and j; L, d, e; full replete triangulated P, Q; F, G pinned to the lifts with RestrictionExact (∃ CommShift + IsTriangulated, as in the project's existing encoding); hI/hJ are the exact inversion predicates matching the hb/hp/hp of unitComponent/counitComponent. Conclusions: natural iso whose components equal diagonalTensorMap on all of D(P); Nonempty(RΔ⋙Rp2≅1); ∃! pair (1⟶F⋙G)×(G⋙F⟶1) with HEq normalization. The published private restrictedUnitCounit_existsUnique proves the identical ∃! (non-vacuous, HEq aligned). Records: only lean changed vs live (NC fixes preserved); statement verbatim; docstrings carry 8 steps with the corrected step 6; no line over 100 chars; imports exist. Advisory: firstProjection/secondProjection owner def-sfb-projective-diagonal-pullback is reached only transitively through stmt_deps (H2 forbids adding it); clauses 1-2 already proved publicly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T103443-L-1081567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

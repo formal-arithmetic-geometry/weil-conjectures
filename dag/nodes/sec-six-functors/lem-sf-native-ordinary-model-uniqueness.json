@@ -1,0 +1,256 @@
+{
+ "id": "lem-sf-native-ordinary-model-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of an ordinary tensor model for fixed adjunction and Hom representatives",
+ "statement": "Let $\\ell$ be prime, $Y$ any scheme and $\\mathcal A$ its category of native continuous-coefficient module sheaves. Use its unbounded derived category and localization $q:\\operatorname{Ch}(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category]. Fix a derived Hom bifunctor $H$ and one fixed system $\\mathcal R$ of native row-sign product-total Hom representatives into K-injectives, with maps $\\rho_{P,I}:H(qP,qI)\\xrightarrow{\\sim}q\\operatorname{Hom}_{\\mathrm{row}}(P,I)$, as in [def-sf-native-weil-closed-models]. Fix a CoefficientClosedStructure $S$ on this $H$ [def-coef-ringed-tensor-hom-model], that is, a monoidal structure whose right tensor by each $L$ is left adjoint to $H(L,-)$ with evaluation natural in $L$, including its entire tensor-Hom adjunction and transpose; neither $S$ nor $\\mathcal R$ may vary between the comparisons. Let $T_o(P,Q)=\\operatorname{ordinaryTensorTotal}(P,Q)$ be the reversed-curried total, with $(p,q)$ summand $Q^q\\otimes P^p$ and differential $d_P+(-1)^p d_Q$. A complex $P$ is NativeOrdinaryKFlat when $T_o(P,N)$ is acyclic for every acyclic $N$.\n\nSuppose $m$ and $m'$ are two families of isomorphisms $qQ\\otimes_S qP\\xrightarrow{\\sim}qT_o(P,Q)$, defined for every NativeOrdinaryKFlat $P$ and every complex $Q$. Assume that both families satisfy NativeAdjunctionNormalization for precisely the fixed $S,\\mathcal R$ and the usual underived tensor-Hom adjunction. Explicitly, for K-flat $P,Q$, K-injective $I$, and a chain map $\\phi:Q\\to\\operatorname{Hom}_{\\mathrm{row}}(P,I)$, each family admits a chain map $\\psi:T_o(P,Q)\\to I$ whose restriction to every $(p,q)$ summand is the unsigned underived uncurrying of $\\phi^q$ followed by its product projection at $P^p\\to I^{p+q}$, and satisfies\n$$m(P,Q);q(\\psi)=\\operatorname{uncurry}_S\\big(q(\\phi);\\rho_{P,I}^{-1}\\big),$$\nrespectively the same equation with $m'$ in place of $m$. Here $;$ denotes composition in diagrammatic order. Then $m(P,Q)=m'(P,Q)$ whenever both $P$ and $Q$ are NativeOrdinaryKFlat. In particular, for the same fixed $S,\\mathcal R$, any witness chosen from NativeOrdinaryTensorModels agrees on such pairs with any explicitly supplied normalized model. No equality is claimed when $Q$ is not K-flat, and no equality is claimed after changing the adjunction or the representative system.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A96, lemma-RHom-from-K-flat-into-K-injective and its proof via Hom complexes; fixed-adjunction representative rigidity consequence, with native row-sign currying as in NativeWeilClosedModels.lean:329-354"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Fix NativeOrdinaryKFlat $P,Q$ and put $T=T_o(P,Q)$. The native category is the category of module sheaves over its actual continuous coefficient sheaf on $Y_{\\mathrm{proet}}$; use a universe in which this site is small. Apply [prop-pur-kinjective-resolutions-exist] to this ringed site and $T$ to obtain a quasi-isomorphism $j:T\\to I$ with $I$ K-injective. This uses no boundedness or finite-type hypothesis.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; application to module sheaves as recorded by prop-pur-kinjective-resolutions-exist."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-native-ordinary-chain-currying] to $j$. It gives a chain map $\\phi:Q\\to\\operatorname{Hom}_{\\mathrm{row}}(P,I)$ with $\\operatorname{uncurry}(\\phi^q;\\pi_{q,p})=\\iota_{p,q};j^{p+q}$. In particular, this is the exact unsigned component equation in both assumed normalizations.",
+   "uses": [
+    "lem-sf-native-ordinary-chain-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose) and 0A96 (lemma-RHom-from-K-flat-into-K-injective); fixed-normalization rigidity argument, agent-formulated."
+   }
+  },
+  {
+   "text": "Apply the two NativeAdjunctionNormalization hypotheses to this same $P,Q,I,\\phi$, obtaining $\\psi,\\psi':T\\to I$. For every $p+q=n$, their restrictions along $\\iota_{p,q}$ equal the unsigned uncurrying just computed, hence equal $\\iota_{p,q};j^n$. The coproduct universal property gives $\\psi^n=j^n=\\psi'^n$ for every $n$, so $\\psi=j=\\psi'$. The two normalization equations therefore read\n$$m(P,Q);qj=\\operatorname{uncurry}_S(q\\phi;\\rho_{P,I}^{-1})=m'(P,Q);qj.$$\nThe middle arrow is identical because both $S$ (including its transpose) and $\\mathcal R$ are fixed.",
+   "uses": [
+    "def-sf-native-weil-closed-models",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose) and 0A96 (lemma-RHom-from-K-flat-into-K-injective); fixed-normalization rigidity argument, agent-formulated."
+   }
+  },
+  {
+   "text": "Since localization inverts the quasi-isomorphism $j$, postcompose the displayed equality with $(qj)^{-1}$ and use associativity and $qj;(qj)^{-1}=1$. This proves equality of the underlying morphisms of $m(P,Q)$ and $m'(P,Q)$, hence equality of isomorphisms (their inverses are determined by their forward maps). Apply this to any two normalized witnesses, including a chosen witness and an explicitly supplied one. Both flatness hypotheses are needed to invoke normalization; the argument compares only the fixed $S,\\mathcal R$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A90 (lemma-compose) and 0A96 (lemma-RHom-from-K-flat-into-K-injective); fixed-normalization rigidity argument, agent-formulated."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-native-ordinary-chain-currying",
+  "def-sf-native-weil-closed-models",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A90 (lemma-compose) and 0A96 (lemma-RHom-from-K-flat-into-K-injective); fixed-normalization rigidity argument, agent-formulated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.yoneda",
+   "results": "CategoryTheory.Adjunction.representableBy_homEquiv",
+   "date": "2026-10-27",
+   "verdict": "no match: total-complex extensionality, ordinary linear currying or generic adjunction facts only; none pins a native derived tensor model relative to a fixed adjunction and fixed Hom representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two natural tensor total representative isomorphisms for the same fixed derived tensor Hom adjunction and fixed product Hom representatives are equal if both satisfy the unsigned componentwise uncurrying equation on K-flat complexes into K-injective targets",
+   "results": "HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.ιTensorObj, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex.mapBifunctor.hom_ext_iff, HomologicalComplex.mapBifunctor₁₂.hom_ext_iff",
+   "date": "2026-10-27",
+   "verdict": "no match: total-complex extensionality, ordinary linear currying or generic adjunction facts only; none pins a native derived tensor model relative to a fixed adjunction and fixed Hom representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry|currying|tensor.*[Uu]nique|[Uu]nique.*tensor|homEquiv.*[Ii]njective",
+   "results": "Mathlib/Algebra/Homology/Embedding/TruncGE.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-27",
+   "verdict": "no match: total-complex extensionality, ordinary linear currying or generic adjunction facts only; none pins a native derived tensor model relative to a fixed adjunction and fixed Hom representatives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of the comparison from a derived tensor to a total tensor complex when the fixed tensor Hom adjunction has a prescribed componentwise currying formula on K-injective targets",
+   "results": "TensorProduct.AlgebraTensorModule.curry_injective, HomologicalComplex.mapBifunctor₁₂.hom_ext, HomologicalComplex₂.total.hom_ext, Rep.coinvariantsTensor_hom_ext, HomologicalComplex.Hom.mk.injEq, HomologicalComplex.mapBifunctor.hom_ext, HomologicalComplex.ιTensorObj, CategoryTheory.InjectiveResolution.noConfusion",
+   "date": "2026-10-27",
+   "verdict": "no match: total-complex extensionality, ordinary linear currying or generic adjunction facts only; none pins a native derived tensor model relative to a fixed adjunction and fixed Hom representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism from a derived tensor product to a total complex is uniquely determined by its uncurrying formula into a K-injective resolution of that total complex",
+   "results": "HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex.ιTensorObj, HomologicalComplex.rightUnitor'_inv, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasTensor, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.rightUnitor",
+   "date": "2026-10-27",
+   "verdict": "no match: total-complex extensionality, ordinary linear currying or generic adjunction facts only; none pins a native derived tensor model relative to a fixed adjunction and fixed Hom representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]njective|homEquiv.*[Ee]xt|[Ee]xt.*homEquiv|representableBy_homEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; directory Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-27",
+   "verdict": "no match: total-complex extensionality, ordinary linear currying or generic adjunction facts only; none pins a native derived tensor model relative to a fixed adjunction and fixed Hom representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two ordinary tensor total model isomorphisms normalized by the same fixed derived tensor Hom adjunction and fixed Hom representatives are equal",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Mathlib.Tactic.Monoidal.eval_tensorHom",
+     "CategoryTheory.GradedObject.Monoidal.tensorObj₃'_ext",
+     "CategoryTheory.GradedObject.Monoidal.tensorObj₃_ext",
+     "CategoryTheory.GradedObject.Monoidal.tensorObj₄_ext",
+     "CategoryTheory.GradedObject.Monoidal.left_tensor_tensorObj₃_ext",
+     "CategoryTheory.GradedObject.Monoidal.tensorIso_hom",
+     "ModuleCat.MonoidalCategory.tensor_ext₃'",
+     "ModuleCat.MonoidalCategory.tensor_ext₃"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic tensor extensionality, adjunction Hom equivalences or bounded-below derived-functor formulas do not state this native fixed-adjunction normalization rigidity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.mk'_homEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic tensor extensionality, adjunction Hom equivalences or bounded-below derived-functor formulas do not state this native fixed-adjunction normalization rigidity."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHomObj|mapBifunctor.*[Aa]djunction|tensorHom.*[Uu]nique",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic tensor extensionality, adjunction Hom equivalences or bounded-below derived-functor formulas do not state this native fixed-adjunction normalization rigidity.",
+   "sub": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary tensor comparison is uniquely determined by its componentwise uncurrying equation into a K injective resolution",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "TensorProduct.AlgebraTensorModule.curry_injective",
+     "TensorProduct.curry_injective",
+     "CategoryTheory.MonoidalClosed.uncurry_injective",
+     "CategoryTheory.FreeMonoidalCategory.tensor.noConfusion",
+     "CategoryTheory.FreeMonoidalCategory.Hom.tensor.inj",
+     "PiTensorProduct.ext",
+     "CategoryTheory.FreeMonoidalCategory.Hom.tensor.injEq",
+     "TensorProduct.ext_iff_inner_left"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic tensor extensionality, adjunction Hom equivalences or bounded-below derived-functor formulas do not state this native fixed-adjunction normalization rigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of a derived tensor comparison by currying a K injective resolution map and cancelling its localization",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: generic tensor extensionality, adjunction Hom equivalences or bounded-below derived-functor formulas do not state this native fixed-adjunction normalization rigidity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-native-section-closed-forgetful",
+  "date": "2026-10-27",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "via": [
+    "lem-route-native-section-closed-forgetful",
+    "lem-sf-weil-verdier-exchange"
+   ],
+   "place": "Current cor-coef-verdier-weil-equivariance.proof.md, evaluation and transposition paragraph: uniqueness of the ordinary representative map once its closed adjunction and product-Hom models are fixed; required for the section-transport representative square"
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-ordinary-model-uniqueness",
+  "worker": "stage1",
+  "summary": "Proved fixed-adjunction model rigidity by testing both normalization equations on a K-injective resolution of the ordinary total. Isolated strict row-sign chain currying, reused the existing module-sheaf resolution node, and wrote out coproduct extensionality and cancellation. Statement unchanged.",
+  "blueprint": "Realizes the evaluation/transposition paragraph of current cor-coef-verdier-weil-equivariance.proof.md through the native refinement already recorded in the item; ancestor returns None. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of a K-injective resolution in a module-sheaf category, applied to the actual native coefficient sheaf; no biduality-unit node supplies this resolution."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-f083f36ad",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-f083f36ad (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-sf-native-ordinary-chain-currying in full. The item statement is unchanged and matches NativeAdjunctionNormalization at NativeWeilClosedModels.lean:333-360. Sources checked: Stacks 0A90 lemma-compose and 0A96 lemma-RHom-from-K-flat-into-K-injective (sites-cohomology.tex l.8616 and l.8789, the currying argument), and the current blueprint cor-coef-verdier-weil-equivariance.proof.md l.20-24 (the evaluation/transposition paragraph). New node: I re-derived the chain condition by hand. The sign (-1)^p on d_Q in T_o, together with naturality of the adjunction in Q, I and P, gives exactly the row-sign Hom differential (BifunctorHomComplex.lean:146, (-1)^p(d_I a_p - a_{p+1} d_P)). Both differentials square to zero, and the component equation carries no sign. I tested zero complexes, complexes in single (also negative) degrees and two-term complexes. The private, sorry-free internalHomEquiv_f_π in NativeOrdinaryRepresentativeCurrying.lean:240-262 proves the same thing in Lean. The node is self-contained and does not restate any item clause: it has no S, R or m. Duplicate candidates checked: representative-currying goes in the reverse direction; coefficient-cochain-tensor-curry uses the standard total and Hom conventions and curries in the other variable; the lem-sc and lem-pc nodes are standard O_X versions; hom-kflat-chain-transpose is derived. None is the same. Searches use four kinds of tool. Step 1 gets the K-injective resolution j: T→I from prop-pur-kinjective-resolutions-exist; that node's unit sk-def-sf-operations is cited by the item's unit, so it is on route and the declared tool_use is harmless. Identifying the native category with Mod(R) follows the reviewed lem-sf-weil-native-closed-forgetful. Step 2 uses the new node's statement only. Step 3: by coproduct extensionality ψ=j=ψ', and the middle term is fixed because S and R are fixed. Step 4 cancels qj. The chosen-witness clause holds by the definition of NativeOrdinaryTensorModels. proof_deps equal the union of uses, and the blueprint via is correct. Advisory only: the new node lacks the lean_audit and merged_into keys (the item lacks lean_audit too); not repaired."
+ }
+}

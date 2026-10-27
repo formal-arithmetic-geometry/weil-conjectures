@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-adic-residue-vanishing-successor",
+ "kind": "statement",
+ "title": "Successor vanishing for localized finite coefficient reductions",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, J an ideal, U an object of its coefficient-sized pro-etale site, and Q any unbounded complex over the completed coefficient sheaf on that slice, with reductions R_n of [def-sfb-adic-residue-lift-comparisons], indexed by exponent n+1. For every natural n, if R_0(Q) and R_n(Q) are zero, then R_(n+1)(Q) is zero. No completeness, boundedness, constructibility, or perfectness hypothesis on Q or the coefficient quotients is imposed.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, lemma-derived-vanishing-mod-I, part (1); its proof via lemma-bounded-above-mod-I and the consecutive quotient sequence, realized as sheaves on the slice in the final argument of proetale.tex Tag 09C6."
+ },
+ "proof": [
+  {
+   "text": "Choose a termwise-flat K-flat resolution P of a complex representing Q directly over the completed coefficient sheaf on the slice. The standard localization identifies Q(P) with Q. The specified computation comparison of derived extension identifies the residue and nth reductions with the localizations of the ordinary scalar extensions of P. Thus both extended complexes are acyclic.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the consecutive coefficient short exact sequence on the slice, whose first term is the restriction of a residue-module sheaf and whose other terms are the restricted regular successor and nth quotient modules. Tensor its three terms with P. Flatness of every P degree preserves short exactness, so this is a short exact sequence of complexes.",
+   "uses": [
+    "lem-sfb-adic-residue-coefficient-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Natural balanced tensor cancellation identifies tensoring P with a restricted quotient module with the restriction of that module tensored with the quotient extension of P. Extension of scalars preserves K-flatness without a termwise-flatness hypothesis. The residue extension of P is acyclic and K-flat, so its tensor with the arbitrary residue kernel module is acyclic. Exact faithful restriction reflects acyclicity. The right complex is acyclic by the nth reduction hypothesis and tensor cancellation with the regular quotient module.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pur-acyclic-kflat-tensor-arbitrary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The middle homology of the short exact sequence vanishes because the two outer homologies vanish. Tensor cancellation with the successor regular quotient module and exact faithful scalar restriction identify this with acyclicity of the successor extension of P. The K-flat computation comparison and the chosen representative isomorphism give the asserted zero successor reduction.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-change-of-rings-tensor-cancellation-independent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-residue-coefficient-sequence",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, consecutive-power filtration argument; Stacks sites-modules tensor cancellation and sites-cohomology Tag 0G7E. N4 implements the proof directly over completed coefficients on the slice, avoiding restriction to constant A and the constant-to-completed flatness comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If a derived tensor product with the residue quotient vanishes then derived tensor products with all powers of the ideal vanish",
+   "results": "8 hits: ordinary tensor quotient equivalences, finite local-ring Nakayama and ordinary adic completion. None concerns unbounded derived module sheaves.",
+   "date": "2026-10-26",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyDerivedRingedIdealComplete\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching completeness or derived quotient result."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*vanishing|vanishing.*derived|IsZero.*(extend|tensor)",
+   "results": "Mathlib homological embedding/extension zero lemmas only. Local source library searches found DerivedNakayamaFirstReduction (DVR coefficients) and NilpotentDerivedUpperBound (ordinary modules on the point), neither at these ringed-slice endpoints. Exact-tag and conceptual DAG duplicate search found no arbitrary ideal successor statement.",
+   "date": "2026-10-26",
+   "verdict": "No matching successor theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompleteResidueConservative",
+  "date": "2026-10-26",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The finite coefficient induction in lem-sfb-adic-complete-residue-conservative, below the final complete-cone argument.",
+   "via": [
+    "lem-sfb-adic-complete-residue-conservative",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueVanishingSuccessor",
+  "file": "lean/Sheaf/Paper/AdicResidueVanishingSuccessor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_vanishing_successor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_vanishing_successor"
+  ],
+  "statement": "theorem adicResidue_vanishing_successor\n    (X : AlgebraicGeometry.Scheme.{u}) {A : Type (max v (u + 1))}\n    [CommRing A] [IsNoetherianRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X)\n    (Q : AdicResidueLocalDerived.{u, v} X J U) (n : ℕ)\n    (h₀ : IsZero ((adicResidueLocalReduction.{u, v} X J U 0).obj Q))\n    (hn : IsZero ((adicResidueLocalReduction.{u, v} X J U n).obj Q)) :\n    IsZero ((adicResidueLocalReduction.{u, v} X J U (n + 1)).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T203737-L-2850606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T002059-L-55290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

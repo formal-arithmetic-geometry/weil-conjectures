@@ -14,9 +14,8 @@
  ],
  "proof": [
   {
-   "text": "Give $F$ the restriction of the specified absolute value on $\\Omega$. It extends the $\\ell$-adic absolute value, and $F/\\mathbf Q_\\ell$ is finite-dimensional by hypothesis, so by the uniqueness in [lem-weil-l-adic-extension-absolute-value] it is the extending absolute value $|\\cdot|_F$ of $F$. Apply [lem-weil-l-adic-extension-proper] with $E=F$: every closed ball $\\{b\\in F:|b-a|\\leq r\\}$, $r\\geq0$, is compact. We regard $\\Omega$ as an $F$-vector space with norm $\\|x\\|=|x|$. Multiplicativity gives $\\|ax\\|=|a|\\|x\\|$, and its given nonarchimedean inequality gives $\\|x+y\\|\\leq\\max(\\|x\\|,\\|y\\|)$. The identity on the subspace $F\\subseteq\\Omega$ satisfies the bound $|a|\\leq\\|a\\|$.",
+   "text": "Use the inherited norm on the intermediate field F. It is the restriction of the ambient norm by construction, so the inclusion F → Ω is isometric without invoking uniqueness of an extending absolute value. F is a normed vector space of finite dimension over Q_l. By [lem-weil-l-adic-extension-proper], implemented by FiniteDimensional.proper, F is proper and its closed balls are compact. The ultrametric inequality on Ω restricts to F. Let i : F →ₗ[F] Ω be the algebra map and identify F with its range W by the injective linear equivalence e. The inverse f = e.symm is linear and satisfies |f(w)| = ||w|| because inclusion preserves norms.",
    "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
     "lem-weil-l-adic-extension-proper"
    ],
    "elementary": false,
@@ -26,56 +25,29 @@
    }
   },
   {
-   "text": "For any $F$-subspace $U\\subseteq\\Omega$ containing $F$, any $F$-linear $g:U\\to F$ restricting to the identity on $F$ with $|g(u)|\\leq\\|u\\|$, and any $x\\in\\Omega\\setminus U$, put $R_u=\\|x-u\\|$ and $B_u=\\{b\\in F:|b-g(u)|\\leq R_u\\}$ for $u\\in U$. Linearity and the bound imply\n$$|g(u)-g(v)|\\leq\\|u-v\\|\\leq\\max(R_u,R_v).$$\nIf $R_u\\leq R_v$ and $b\\in B_u$, then $|b-g(v)|\\leq\\max(|b-g(u)|,|g(u)-g(v)|)\\leq R_v$; hence $B_u\\subseteq B_v$. Each ball contains its center. It is closed: if $y\\notin B_u$, take $\\epsilon=(|y-g(u)|-R_u)/2>0$; $|z-y|<\\epsilon$ and $z\\in B_u$ would give $|y-g(u)|\\leq|y-z|+R_u<\\epsilon+R_u<|y-g(u)|$. The ordinary triangle inequality used here follows from $\\max(r,s)\\leq r+s$ for nonnegative $r,s$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the norm-one finite-field projection input"
-   }
-  },
-  {
-   "text": "The ball $B_0=\\{b\\in F:|b|\\leq\\|x\\|\\}$ is compact by step 1 and contains zero. For every finite subset $A\\subseteq U$, select $u_*$ of least radius among $A\\cup\\{0\\}$. The containment calculation of step 2 shows that $g(u_*)$ belongs to $B_0\\cap\\bigcap_{u\\in A}B_u$. This also proves nonemptiness when $A=\\varnothing$. Thus the closed subsets $B_0\\cap B_u$ of the compact topological space $B_0$ have the finite intersection property. Apply [lem-sfb-compact-closed-finite-intersection] with index set $U$ to obtain $b\\in F$ satisfying $|b-g(u)|\\leq\\|x-u\\|$ for every $u\\in U$. All compactness is in $F$; no compactness or completeness of $\\Omega$ or $U$ is used.",
+   "text": "Apply [lem-sfb-admissible-scalar-balls] with $K=F$ and $V=\\Omega$. The field absolute value and vector norm satisfy its axioms by step 1, and its compact-ball hypothesis holds there. Thus for every $F$-subspace $U\\subseteq\\Omega$, every contractive $F$-linear $g:U\\to F$, and every $x\\notin U$, there is $b\\in F$ with $|b-g(u)|\\leq\\|x-u\\|$ for all $u\\in U$. This is exactly the scalar-value condition, including all partial maps, required in the next step.",
    "uses": [
-    "lem-sfb-compact-closed-finite-intersection"
+    "lem-sfb-admissible-scalar-balls"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent projection expansion: compact finite intersection argument; Stacks Tag 005D, lemma-intersection-closed-in-quasi-compact"
+    "place": "Paragraph (3), scalar tame-kernel projection input; assembly after the Q91 re-split."
    }
   },
   {
-   "text": "Every element of $U+Fx$ has a unique expression $u+ax$ with $u\\in U$ and $a\\in F$: a difference of two expressions with distinct coefficients would imply $x\\in U$. Define $G(u+ax)=g(u)+ab$. Adding and scaling the unique expressions proves $F$-linearity; at $a=0$ the formula equals $g(u)$, so $G$ extends $g$ and fixes $F$. If $a\\ne0$, let $v=-a^{-1}u\\in U$. The inequality for $b$ yields\n$$|G(u+ax)|=|a|\\,|b-g(v)|\\leq |a|\\|x-v\\|=\\|u+ax\\|.$$\nFor $a=0$ use the original bound on $g$. Thus $G$ is a contractive extension to a strictly larger subspace. The sign identities used here follow from $|-1|=1$, since $|-1|^2=1$. Steps 2–4 establish this extension construction for every such $U,g,x$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the norm-one finite-field projection input"
-   }
-  },
-  {
-   "text": "Let $\\mathcal S$ be the set of graphs in $\\Omega\\times F$ of all $F$-linear maps $g:U\\to F$ with $F\\subseteq U\\subseteq\\Omega$, $g|_F=\\mathrm{id}_F$, and $|g(u)|\\leq\\|u\\|$. This is a set of subsets of $\\Omega\\times F$, and the identity graph on $F$ belongs to it. For a nonempty inclusion-chain of these graphs take the union. Comparability makes the union single-valued; its domain is the union of the subspaces. Any two domain vectors belong together to one chain member, which verifies closure under addition and the linear identity there; scalar multiplication is verified in the member containing the vector. Thus the union is again a linear graph. It contains $F$, fixes $F$, and satisfies the same pointwise bound, each value being a value in a chain member. Hence it is an upper bound in $\\mathcal S$. For the empty chain use the identity graph on $F$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the norm-one finite-field projection input"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-zorn-lemma] to $X=\\Omega\\times F$ and the set $\\mathcal S$, using the upper bounds of step 5, including the empty chain. Obtain a maximal graph, of a map $g:U\\to F$. If $U\\ne\\Omega$, choose $x\\in\\Omega\\setminus U$. Steps 2–4, with this $U,g,x$, construct a contractive linear map $G:U+Fx\\to F$ fixing $F$. Its graph belongs to $\\mathcal S$ and strictly contains the graph of $g$, since it also contains a pair with first coordinate $x$. This contradicts maximality. Therefore $U=\\Omega$, and set $p_F=g$.",
+   "text": "Apply [lem-sfb-contractive-extension-from-admissible-values] to K=F and V=Ω, using nnnorm for the scalar absolute value and vector norm. Normed-field laws supply nondegeneracy, the value at one, multiplication, and scalar homogeneity; step 1 supplies the ultrametric inequalities. The scalar-value hypothesis is step 2. Take W to be the range of i and f=e.symm as in step 1, with its isometric bound. The resulting linear map h : Ω →ₗ[F] F agrees with e.symm on W, hence h(i(a))=a for every a∈F, and satisfies ||h(x)||≤||x||.",
    "uses": [
-    "lem-weil-pbc-zorn-lemma"
+    "lem-sfb-contractive-extension-from-admissible-values"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the norm-one finite-field projection input"
+    "place": "Paragraph (3), scalar tame-kernel projection input; assembly after the Q91 re-split."
    }
   },
   {
-   "text": "The defining conditions of $\\mathcal S$ give $F$-linearity, $p_F(a)=a$ for every $a\\in F$, and $|p_F(x)|\\leq|x|$ for every $x\\in\\Omega$. For $x,y\\in\\Omega$,\n$$|p_F(x)-p_F(y)|=|p_F(x-y)|\\leq|x-y|.$$\nGiven $\\epsilon>0$, choose $\\delta=\\epsilon$ in this inequality to obtain continuity for the specified norm topologies. At $x=1$ equality holds in the bound, so the map indeed has norm one. The argument never completes $\\Omega$.",
+   "text": "Turn h into a continuous linear map by LinearMap.mkContinuous with constant 1, using ||h(x)||≤1*||x||. Its underlying function is unchanged, so evaluating the extension identity at e(a) proves it fixes every a∈F. The same bound gives the second asserted clause. This is the Lipschitz continuity argument, and it uses no completeness of Ω.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -85,15 +57,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-absolute-value",
   "lem-weil-l-adic-extension-proper",
-  "lem-sfb-compact-closed-finite-intersection",
-  "lem-weil-pbc-zorn-lemma"
+  "lem-sfb-admissible-scalar-balls",
+  "lem-sfb-contractive-extension-from-admissible-values"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), auxiliary projection input: direct compact-ball and Zorn argument, retaining bound 1 throughout; the blueprint contains no proof of this analytic input."
+  "place": "Paragraph (3), auxiliary projection input; V1 Lean assembly of compact admissible scalar balls and conditional contractive extension. The inherited norm makes the restriction-norm uniqueness step unnecessary. No chapter or unit route changed."
  },
  "mathlib_searches": [
   {
@@ -417,16 +388,16 @@
   "date": "2026-10-22",
   "item": "lem-sfb-norm-one-finite-subfield-projection",
   "worker": "stage1",
-  "summary": "Proved the norm-one projection directly by admissible scalar balls and maximal partial graphs. Reused the existing properness, compact finite intersection, and Zorn Mathlib leaves; created no nodes. The existing scalar-extension lemma states continuity only and cannot supply the requested sharp bound. Preserved the statement and prior searches; repaired the null blueprint ancestor using the explicit provenance chain.",
-  "blueprint": "Realizes the finite-field projection input in the scalar tame-kernel expansion below paragraph (3) of det-thm-sf-ctf-stability-direct-images, without changing the unit or chapter route."
+  "summary": "Repair of the human re-split return: retain the statement, all prior searches and metadata; extract old steps 2-3 as common admissible scalar values from compact ultrametric balls, and old steps 4-6 as a conditional contractive-extension theorem via one-dimensional extension and maximal partial graphs. Both new nodes are statement-only unsplit tasks with independent logged searches. All old arguments are preserved verbatim and generalized in report.md. The item now assembles the two tasks after restriction-norm/properness and ends with the original Lipschitz argument. Rebased the retained split onto the current DAG for the promotion return; rechecked all four cited statements and corrected the obsolete reference to the former partial-graph set in the final assembly step.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: same scalar tame-kernel expansion and same finite-field projection input; no chapter or unit route changes."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-O4-7ed225f3f",
-  "group": "O4",
+  "reviewer": "NT-cc-Q91-7b3f3a85c",
+  "group": "Q91",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-7ed225f3f (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes and keeps its statement unchanged. The source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3) (open direct image with Q̄_ℓ coefficients); the proof is an agent proof and Ingleton is WANTED. The 7 steps are a correct Ingleton-type proof, checked line by line. Step 2: the balls B_u nest by radius. Step 3: CompactSpace.iInter_nonempty applies inside the compact ball B_0 (B_0 = B_u at u = 0), and taking A = ∅ gives nonemptiness. Step 4: with v = −a⁻¹u we get a(x−v) = ax+u and g(u)+ab = a(b−g(v)); I checked the signs, and the bound |G| ≤ ‖u+ax‖ holds. Steps 5–6: Zorn applies to the set of graphs in Ω×F, the empty chain is bounded by the identity graph, and the union of a chain is a linear graph. Step 7: the map is 1-Lipschitz. The parent descent node uses exactly F-linearity, identity on F and the norm-one bound. One fault, C4 in step 1: lem-weil-l-adic-extension-proper is stated for E's own extending absolute value, but the step applies it to the restriction of Ω's absolute value. That needs the uniqueness in lem-weil-l-adic-extension-absolute-value, which was not cited. The FIX adds that citation and one clause to step 1 and to proof_deps. All dependencies are Mathlib leaves, so no tool_uses are needed and there is no cycle and no SGA citation. On duplicates: lem-sfb-proper-ultrametric-scalar-extension has no bound, and lem-sfb-finite-subfield-continuous-linear-retraction (NN) is strictly weaker (E-linear and continuous only). Maintainer note: that NN node could cite this item.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-7b3f3a85c (reviewer sub-agent of L); spot-checked: This head re-delivers the FIXed head 4c4dbb84 after its landing was refused ('completed in this project's DAG but not in the live DAG'). On the live and side-live clones the item is still the 7-step O4 version, no other group has split it, and neither new id exists. I diffed this head against both the 4c4dbb84 snapshot and its fix file. The two new nodes are identical. The item statement is byte-identical. The step-4 repair ('Step 3 gives', replacing the undefined set S) was incorporated. The step-1 repair was lost: the sentence stating |a|=0 iff a=0, |1|=1 and ||x||=0 iff x=0. Both new statements take these as hypotheses, and steps 2 and 3 say step 1 supplies them, so I re-applied the sentence as the only change. The fix file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-norm-one-finite-subfield-projection.json and touches only the step-1 text. Re-split rule: old step 1 stays in the item. Old steps 2-3 (nested closed balls, minimal-radius finite intersection property, Stacks Tag 005D) became lem-sfb-admissible-scalar-balls. Old steps 4-6 (G(u+ax)=g(u)+ab with v=-a^{-1}u, chains of graphs, Zorn) became lem-sfb-contractive-extension-from-admissible-values. Old step 7 is item step 4. Nothing was shortened, and the two nodes are of comparable size (about 1.4k and 2.1k characters). I re-read both new statements, and both are true. Node A: B_0 has radius ||x||>0, the empty family is covered, U=0 gives b=0, and a trivial absolute value on an infinite K makes it vacuous. Node B: its hypothesis is exactly node A's conclusion, and V=0, W=0 and W=V are fine. I re-read the cited statements: absolute-value uniqueness (nonarchimedean), properness, Tag 005D FIP and Zorn (including the empty chain). Duplicates checked: proper-ultrametric (continuity only), dense-subspace contractive extension, finite-subfield retraction and the orthogonal-extension nodes; none is a duplicate. No SGA is cited and Ingleton is WANTED. No tool_uses and no cycle.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.NumberTheory.Padics.NormOneFiniteSubfieldProjection",
@@ -445,5 +416,27 @@
   "group": "NK",
   "result": "pass",
   "note": "Clause-by-clause match of Padic.exists_normOne_finiteSubfield_projection to the node: prime l, Padic l, IsAlgClosure Omega in universe u, NormedField+NormedAlgebra give the extending norm, IsUltrametricDist matches 'nonarchimedean', IntermediateField F with FiniteDimensional and the restricted norm (equal to the recorded abs value by uniqueness), Omega ->L[F] F (node asserts continuity) fixing F with ||p x|| <= ||x||, no CompleteSpace. Statement verbatim in file; node unchanged vs live apart from the lean record; docstrings carry source place, blueprint id and all 7 proof steps; sorry only; no definitions. Not a duplicate: NN's exists_finiteSubfield_continuousLinearRetraction is weaker (no bound). Citer descent node needs only Q_l-linearity, identity on F and the bound. Advisory: IsUltrametricDist is derivable (NN omits it); CoefficientExtensionFinite import is redundant. No compile run: no file changed; worker reports clean compiles and dry run."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071330-L-3915560",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

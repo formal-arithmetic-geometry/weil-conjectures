@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-epp-normal-base-branch-conjugacy",
+ "kind": "statement",
+ "title": "Normal base branch conjugacy",
+ "statement": "Let $A\\to B$ be an injective local map of complete DVRs with fraction fields $K\\subseteq L$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-pc-field-extension]. Let $K_1/K$ be finite normal, not necessarily separable, where normal means splitting of irreducible polynomials having a root. Let $A_1$ be the integral closure of $A$ in $K_1$ and $B_1$ the integral closure of $B$ in $(L\\otimes_KK_1)_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. The group $\\operatorname{Aut}_K(K_1)$ acts on $A_1$ and $B_1$ and transitively on the maximal ideals of $B_1$. It preserves the unique maximal ideal of $A_1$. Consequently the ramification indices of $A_1\\to (B_1)_q$ are independent of $q$; if one equals $1$ then all equal $1$ [def-weil-pbc-localization-at-prime]. Here the ramification index $e$ is determined by $\\mathfrak m_{A_1}(B_1)_q=(q(B_1)_q)^e$, and reduction means quotient by nilpotents.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EU, lemma-galois-relative, and its transitive action on the normalized maximal ideals; completeness makes the lower normalization local."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dvr-algebraic-normalization-structure], case (a), with $P=K_1$: $R=(L\\otimes_KK_1)_{\\mathrm{red}}$ is a nonempty finite product $\\prod_{i\\in I}L_i$ of fields. Each $L_i/L$ is finite: a finite $K$-basis of $K_1$ spans the tensor, hence every factor, over $L$. Let $C_i$ be the integral closure of $B$ in $L_i$. Let $D\\in\\{A,B\\}$, $F$ the finite extension $K_1$ resp. $L_i$ of its fraction field, $N\\in\\{A_1,C_i\\}$ its integral closure in $F$. As $D$ is a principal ideal domain it is Noetherian [lem-weil-pbc-pid-noetherian-normal], so [lem-weil-pbc-complete-local-nagata] makes $D=D/(0)$ N-2 [def-weil-pbc-nagata-ring, def-weil-pbc-japanese-domain]: $N$ is a finite $D$-module. Being a domain, $N$ is local and complete, and its maximal ideal is the only prime of $N$ over $\\mathfrak m_D$, by [lem-weil-pbc-finite-over-complete-local-product]. $D$ has Krull dimension one [lem-sc-dvr-dimension-one], so [lem-sfb-finite-normalization-local-dvr] gives a prime $\\mathfrak q\\subset N$ over $\\mathfrak m_D$ with $N_{\\mathfrak q}$ a DVR of fraction field $F$ and $\\mathfrak m_{N_{\\mathfrak q}}\\cap D=\\mathfrak m_D$; $\\mathfrak q$ is the maximal ideal of local $N$, so $N=N_{\\mathfrak q}$. Hence $A_1$ and every $C_i$ are complete DVRs, local over $A$ and $B$. Moreover $B_1=\\prod_i C_i$: projection preserves a monic equation; conversely, if each coordinate satisfies a monic polynomial $f_i$ over $B$, the monic product $\\prod_i f_i$ annihilates the tuple. The maximal ideals of this finite product are precisely $q_i=C_1\\times\\cdots\\times\\mathfrak m_{C_i}\\times\\cdots$; their localizations are $C_i$. Indeed a prime contains all but one of the orthogonal coordinate idempotents, and then is the inverse image of a prime of that coordinate. This identifies maximal ideals with $I$. The same structure node says each $q_i$ contracts to a maximal ideal of $A_1$; since $A_1$ is local this is its unique maximal ideal, so all $A_1\\to C_i$ are local DVR maps.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-sc-dvr-dimension-one",
+    "lem-sfb-finite-normalization-local-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EM, remark-construction (1), (3), (4), (5); finite complete normalization also in Tag 09F8, lemma-special-case, first proof paragraph."
+   }
+  },
+  {
+   "text": "For $\\sigma\\in G=\\operatorname{Aut}_K(K_1)$ define $1\\otimes\\sigma$ on the tensor algebra. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives its inverse $1\\otimes\\sigma^{-1}$ and the group law. An automorphism preserves nilpotents, so this descends to $R$. Applying $\\sigma$ to a monic equation over $A$ preserves its coefficients, and applying $1\\otimes\\sigma$ to a monic equation over $B$ does likewise. Thus [def-weil-pbc-integral-closure] restricts these actions to $A_1$ and $B_1$. Their square commutes because it does on $K_1\\to R$, $a\\mapsto\\overline{1\\otimes a}$. The action on $A_1$ fixes its unique maximal ideal: an automorphism carries a maximal ideal to a maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU, lemma-galois-relative, first assertion: restriction of the tensor action to integral elements."
+   }
+  },
+  {
+   "text": "A ring automorphism of $R=\\prod_{i\\in I}L_i$ permutes the primitive coordinate idempotents: an idempotent has only $0$ or $1$ in each field coordinate, and the nonzero ones which cannot be expressed as a sum of two nonzero orthogonal idempotents are exactly the single-coordinate ones. Suppose this permutation action has more than one orbit. Choose one orbit $J\\subsetneq I$ and let $b\\in R$ have coordinate $1$ on $J$ and $0$ elsewhere. Then $b$ is fixed by every element of $G$, $b^2=b$, and $b\\ne0,1$. By [lem-sfb-normal-tensor-invariant-powers], $b^N=\\overline{l\\otimes1}$ for some $N\\geq1$ and $l\\in L$. Since $b^N=b$, the scalar $l$ is idempotent. The scalar map $L\\to R$ is injective: it is a unital map from a field to the nonzero ring $R$ of step 1. Thus $l^2=l$ implies $l=0$ or $1$, a contradiction. The action is therefore transitive on $I$. The product $B_1=\\prod_i C_i$ has the same coordinate idempotents as $R$; the actions agree by restriction, and each $C_i$ has exactly one maximal ideal. Hence the induced action is transitive on the maximal ideals $q_i$ of $B_1$.",
+   "uses": [
+    "lem-sfb-normal-tensor-invariant-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU, lemma-galois-relative, invariant-element contradiction; orbit idempotents replace the Chinese-remainder norm, with the inseparable fixed-field correction in the new input."
+   }
+  },
+  {
+   "text": "Given maximal ideals $q,q^{\\prime}$ of $B_1$, choose $\\sigma\\in G$ sending $q$ to $q^{\\prime}$. Its localization is the isomorphism $\\phi:(B_1)_q\\to(B_1)_{q^{\\prime}}$, $b/s\\mapsto\\sigma(b)/\\sigma(s)$; the denominator avoids $q^{\\prime}$ exactly when $s$ avoids $q$ [def-weil-pbc-localization-at-prime]. It restricts to the automorphism $\\sigma$ of $A_1$, and so sends $\\mathfrak m_{A_1}(B_1)_q$ onto $\\mathfrak m_{A_1}(B_1)_{q^{\\prime}}$, and $q(B_1)_q$ onto $q^{\\prime}(B_1)_{q^{\\prime}}$. To see that the indices exist, choose uniformizers $a$ in $A_1$ and $t$ in $(B_1)_q$. The image of $a$ is nonzero and is a nonunit because the map is injective and local (step 1). By [lem-weil-pbc-dvr-unit-times-uniformizer-power] it is $ut^e$ for a unit $u$ and an integer $e\\geq1$. This gives $\\mathfrak m_{A_1}(B_1)_q=(t)^e$. The exponent is unique: if $(t)^e=(t)^f$ with $e<f$, then $t^e=ct^f$ for some $c$, cancellation in the domain makes $t$ a unit, a contradiction. Transport the ideal equality along $\\phi$ to obtain the same exponent at $q^{\\prime}$. Thus every branch has the same ramification index, and an index of $1$ at one branch forces index $1$ everywhere.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F8, lemma-special-case, proof: all branch extensions are isomorphic; ramification is defined by powers of maximal ideals. Uniformizer factorization: Tag 00PD, algebra-lemma-characterize-dvr."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-dvr-dimension-one",
+  "lem-sfb-finite-normalization-local-dvr",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-integral-closure",
+  "lem-sfb-normal-tensor-invariant-powers",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09EM, 09EU, 09F8; orbit-idempotent proof repairing the inseparable fixed-field inference in 09EU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal finite base field extension automorphisms act transitively on maximal ideals in the integral closure of a DVR in the reduced tensor product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.exists_comap_galRestrict_eq\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ (R : Type u_1) (K : Type u_2) (L : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra R K] [inst_6 : IsFractionRing R K]\\n  [inst_7 : Algebra S L] [inst_8 : Algebra K L] [inst_9 : Algebra R L] [inst_10 \", \"doc\": \"There exists a group isomorphism between the Galois group $\\\\text{Gal}(L/K)$ and the group of $A$-algebra automorphisms of the integral closure $B$ of $A$ in $L$. This isomorphism is constructed by res\"}\n  {\"name\": \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (K : Type u_4) (L : Type u_5) [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K]\\n  [inst_6 : IsFractionRing A K] [inst_7 : Algebra B L] [inst_8 : Algebra K L] [inst_9 : Algebra \", \"doc\": \"For any $\\\\sigma \\\\in \\\\text{Gal}(L/K)$ and any prime ideal $P \\\\subseteq B$ lying over $p \\\\subseteq A$, the image of $\\\\sigma$ acting on the prime ideal $P$ (viewed as an element of the set of primes over\"}\n  {\"name\": \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (K : Type u_4) (L : Type u_5) [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K]\\n  [inst_6 : IsFractionRing A K] [inst_7 : Algebra B L] [inst_8 : Algebra K L] [inst_9 : Algebra \", \"doc\": \"For any Galois automorphism $\\\\sigma \\\\in \\\\text{Gal}(L/K)$ and any prime ideal $P$ in the integral closure $B$ of $A$ in $L$ lying over the prime ideal $p$ of $A$, the action of $\\\\sigma$ on $P$ (denoted\"}\n  {\"name\": \"Ideal.isPretransitive_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"The group $ G $ acts on the set of prime ideals in $ B $ lying over the ideal $ p $, where the action is defined by applying each group element to the prime ideal.\"}\n  {\"name\": \"Ideal.isPretransitive_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"Let $B$ be a Galois extension of a commutative ring $A$ with a finite Galois group $G$. For any ideal $p$ of $A$, the group $G$ acts transitively on the set of prime ideals of $B$ that lie over $p$.\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_ncard_primesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [IsDedekindDomain A] [inst_2 : CommRing B] [IsDedekindDomain B]\\n  [inst_4 : Algebra A B] [Module.IsTorsionFree A B] {p : Ideal A} (P : Ideal B) [p.IsMaximal] [P.IsMaximal]\\n  [P.LiesOver p] (G : Type u_3) [inst_9 : Group G] [Finite G] [inst_11 : Mul\", \"doc\": \"For a non-zero prime ideal $ p $ in $ A $, the number of prime ideals in $ C $ lying over $ p $ is equal to the product of the number of prime ideals in $ B $ lying over $ p $ and the number of prime \"}\n  {\"name\": \"Ideal.exists_smul_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with Galois group $ G $, if two ideals $ P $ and $ Q $ in $ B $ both lie over the same ideal $ J $ in $ A $, then there exists an element $ \\\\sigma \\\\in G $ such t\"}\n  {\"name\": \"Ideal.instMulActionAlgEquivElemPrimesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"{A : Type u_1} →\\n  {B : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          {p : Ideal A} →\\n            (K : Type u_4) →\\n              (L : Type u_5) →\\n                [inst_3 : Field K] →\\n                  [inst_4 : Field L] →\\n             \", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ acts on the set of prime ideals in the integral closure $B$ of $A$ in $L$ that lie over the prime ideal $p$ in $A$. This action is defined by restricting Galois auto\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isPretransitive_of_isGaloisGroup assumes a Galois/invariant ring action; the statement here needs construction on a reduced tensor algebra for a possibly inseparable normal base extension, which is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of the Galois action on normalized branches after possibly inseparable normal extension of the coefficient field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.to_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is a finite Galois group of $ B $ over $ A $, then $ G $ is also the Galois group of the fraction field $ L $ of $ B $ over the fraction field $ K $ of $ A $.\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois'\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : Algebra A\", \"doc\": \"If $ L/K $ is a finite Galois field extension and $ A \\\\to B $ is an $ A $-algebra structure on $ B $, then $ B $ is invariant under the action of its $ A $-algebra automorphism group $ \\\\text{Aut}_{A\\\\t\"}\n  {\"name\": \"IsGaloisGroup.of_isFractionRing\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [inst : Group G] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : MulSemiringAction G B] [inst_4 : Algebra A B] [inst_5 : Field K] [inst_6 : Field L]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A K] [inst_9 : Algebra \", \"doc\": \"If $ G $ is the Galois group of $ L $ over $ K $, $ A $ is integrally closed, and $ B $ is integral over $ A $, then $ G $ is also the Galois group of $ B $ over $ A $.\"}\n  {\"name\": \"Ideal.exists_map_eq_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension of commutative rings $ B $ over $ A $ with finite Galois group $ G $, if $ P $ and $ Q $ are prime ideals of $ B $ that both lie over the same prime ideal $ p $ of $ A $, then th\"}\n  {\"name\": \"Ideal.exists_smul_eq_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P Q : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] [hQp : Q.IsPrime] [Q.LiesOver p] (G : Type u_3)\\n  [inst_4 : Group G] [Finite G] [inst_6 : MulSemiringAction G B] [IsGaloisGroup G A B\", \"doc\": \"In a Galois extension $ B $ over $ A $ with Galois group $ G $, if two ideals $ P $ and $ Q $ in $ B $ both lie over the same ideal $ J $ in $ A $, then there exists an element $ \\\\sigma \\\\in G $ such t\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_4) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : IsFractionRing A K]\\n  [IsFractionRing B L] [inst_8 : Algebra A B] [inst_9 : Algebra K L] [inst_10 : \", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"Ideal.coe_smul_primesOver_mk_eq_map_galRestrict\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (K : Type u_4) (L : Type u_5) [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K]\\n  [inst_6 : IsFractionRing A K] [inst_7 : Algebra B L] [inst_8 : Algebra K L] [inst_9 : Algebra \", \"doc\": \"For any $\\\\sigma \\\\in \\\\text{Gal}(L/K)$ and any prime ideal $P \\\\subseteq B$ lying over $p \\\\subseteq A$, the image of $\\\\sigma$ acting on the prime ideal $P$ (viewed as an element of the set of primes over\"}\n  {\"name\": \"Ideal.exists_comap_galRestrict_eq\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ (R : Type u_1) (K : Type u_2) (L : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra R K] [inst_6 : IsFractionRing R K]\\n  [inst_7 : Algebra S L] [inst_8 : Algebra K L] [inst_9 : Algebra R L] [inst_10 \", \"doc\": \"There exists a group isomorphism between the Galois group $\\\\text{Gal}(L/K)$ and the group of $A$-algebra automorphisms of the integral closure $B$ of $A$ in $L$. This isomorphism is constructed by res\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isPretransitive_of_isGaloisGroup assumes a Galois/invariant ring action; the statement here needs construction on a reduced tensor algebra for a possibly inseparable normal base extension, which is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a normal finite base field extension automorphisms act transitively on maximal ideals in the integral closure of a DVR in the reduced tensor product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.isPretransitive_of_isGalois\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"Let $B$ be a Galois extension of a commutative ring $A$ with a finite Galois group $G$. For any ideal $p$ of $A$, the group $G$ acts transitively on the set of prime ideals of $B$ that lie over $p$.\"}\n  {\"name\": \"Ideal.coe_smul_primesOver_eq_map_galRestrict\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"(σ : Gal(L/K)) (P : primesOver p B) : (σ • P).1 = map (galRestrict A K L B σ) P\", \"doc\": \"For any Galois automorphism $\\\\sigma \\\\in \\\\text{Gal}(L/K)$ and any prime ideal $P$ in the integral closure $B$ of $A$ in $L$ lying over the prime ideal $p$ of $A$, the action of $\\\\sigma$ on $P$ (denoted\"}\n  {\"name\": \"Ideal.instMulActionAlgEquivElemPrimesOver\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \": MulAction Gal(L/K) (primesOver p B)\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ acts on the set of prime ideals in the integral closure $B$ of $A$ in $L$ that lie over the prime ideal $p$ in $A$. This action is defined by restricting Galois auto\"}\n  {\"name\": \"Ideal.isPretransitive_of_isGaloisGroup\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \": MulAction.IsPretransitive G (primesOver p B)\", \"doc\": \"The group $ G $ acts on the set of prime ideals in $ B $ lying over the ideal $ p $, where the action is defined by applying each group element to the prime ideal.\"}\n  {\"name\": \"Ideal.exists_comap_galRestrict_eq\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[IsDedekindDomain R] [IsGalois K L] {p : Ideal R} {P₁ P₂ : Ideal S} (hP₁ : P₁ ∈ primesOver p S)\\n  (hP₂ : P₂ ∈ primesOver p S) : ∃ σ, P₁.comap (galRestrict R K L S σ) = P₂\", \"doc\": \"There exists a group isomorphism between the Galois group $\\\\text{Gal}(L/K)$ and the group of $A$-algebra automorphisms of the integral closure $B$ of $A$ in $L$. This isomorphism is constructed by res\"}\n  {\"name\": \"IsIntegralClosure.MulSemiringAction\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Algebra.IsAlgebraic K L] : MulSemiringAction Gal(L/K) B\", \"doc\": \"Given that $ K $ is algebraic over $ L $, this defines a multiplicative semiring action of the Galois group $ \\\\text{Gal}(L/K) $ on the integral closure $ B $ of $ A $ in $ L $. The action is construct\"}\n  {\"name\": \"galRestrict\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \": Gal(L/K) ≃* (B ≃ₐ[A] B)\", \"doc\": \"A group isomorphism between the Galois group $ \\\\text{Gal}(L/K) $ and the group of $ A $-algebra automorphisms of $ B $, constructed by restricting automorphisms of $ L $ to the integral closure $ B $ \"}\n  {\"name\": \"instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \"[IsDomain A] [IsDomain B] [IsIntegrallyClosed B] [Module.Finite A B] [IsTorsionFree A B] : Fintype (B ≃ₐ[A] B)\", \"doc\": \"If $ A $ and $ B $ are integral domains with $ B $ integrally closed, finitely generated as an $ A $-module, and torsion-free over $ A $, then the group of $ A $-algebra automorphisms of $ B $ is fini\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isPretransitive_of_isGaloisGroup assumes a Galois/invariant ring action; the statement here needs construction on a reduced tensor algebra for a possibly inseparable normal base extension, which is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, Ideal.LiesOver",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"Ideal.relNorm_eq_pow_of_isPrime_isGalois\", \"module\": \"Mathlib.RingTheory.Ideal.Norm.RelNorm\", \"type\": \" {R : Type u_1} [CommRing R] [IsDomain R] {S : Type u_3} [CommRing S] [IsDomain S] [IsIntegrallyClosed R] [IsIntegrallyClosed S] [Algebra R S] [Module.Finite R S] [Module.IsTorsionFree R S] [IsDedekindDomain R] [IsDedekindDomain S] (P : Ideal S) (p : Ideal R) [hPp : P.LiesOver p] [p.IsMaximal] [P.Is\", \"doc\": \"See `Ideal.relNorm_eq_pow_of_isMaximal` for a statement that does not require the extension to\\nbe Galois.\"}\n  {\"name\": \"IsDecompositionField.rank_right\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [FiniteDimensional K L] [MulSemiringAction Gal(L/K) B] [IsGaloisGroup Gal(L/K) A B] [IsDedekindDomain A] [IsDedekindDomain\", \"doc\": \"The degree `[D : K]` of the decomposition field `D` over `K` equals the number of prime ideals\\nof `B` lying over `p`.\"}\n  {\"name\": \"IsInertiaField.rank_right\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [FiniteDimensional K L] [MulSemiringAction Gal(L/K) B] [IsGaloisGroup Gal(L/K) A B] [IsDedekindDomain A] [IsDedekindDomain\", \"doc\": \"The degree `[E : K]` of the inertia field `E` over `K` equals the product of the number of\\nprime ideals of `B` lying over `p` and the inertia degree of `p` in `B`.\"}\n  {\"name\": \"IsInertiaField.rank_decompositionField\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [FiniteDimensional K L] [MulSemiringAction Gal(L/K) B] [IsGaloisGroup Gal(L/K) A B] [IsDedekindDomain A] [IsDedekindDomain\", \"doc\": \"The degree `[E : D]` of the inertia field `E` over the decomposition field `D` equals the\\ninertia degree of `p` in `B`.\"}\n  {\"name\": \"IsDecompositionField.inertiaDeg_eq\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [Algebra A K] [IsFractionRing A K] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsFractionRing\", \"doc\": \"Let `D` be the decomposition field of `P` in `L/K`. Let `𝓟D` be a prime ideal of `D` below `P`,\\nthen the inertia degree of `𝓟D` over `K` is equal to `1`.\"}\n  {\"name\": \"IsDecompositionField.ramificationIdx_eq\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [Algebra A K] [IsFractionRing A K] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsFractionRing\", \"doc\": \"Let `D` be the decomposition field of `P` in `L/K`. Let `𝓟D` be a prime ideal of `D` below `P`,\\nthen `𝓟D` is unramified over `K`.\"}\n  {\"name\": \"IsDecompositionField.inertiaDegIn_eq\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [Algebra A K] [IsFractionRing A K] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsFractionRing\", \"doc\": \"Let `D` be the decomposition field of `P` in `L/K`. Let `𝓟D` be a prime ideal of `D` below `P`,\\nthen the inertia degree of `𝓟D` in `L` is equal to the inertia degree of `p` in `L`.\"}\n  {\"name\": \"IsDecompositionField.ramificationIdxIn_eq\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.HilbertTheory\", \"type\": \" (A : Type u_1) (K : Type u_2) (L : Type u_3) {B : Type u_4} [Field K] [Field L] [Algebra K L] [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) (P : Ideal B) [P.LiesOver p] [Algebra A K] [IsFractionRing A K] [Algebra A L] [IsScalarTower A K L] [Algebra B L] [IsScalarTower A B L] [IsFractionRing\", \"doc\": \"Let `D` be the decomposition field of `P` in `L/K`. Let `𝓟D` be a prime ideal of `D` below `P`,\\nthen the ramification index of `𝓟D` in `L` is equal to the ramification index of `p` in `L`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isPretransitive_of_isGaloisGroup assumes a Galois/invariant ring action; the statement here needs construction on a reduced tensor algebra for a possibly inseparable normal base extension, which is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "primesOver.*[Tt]rans|[Tt]rans.*primesOver|IsPretransitive|isPretransitive",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Morse.lean\", \"line\": \"85\", \"text\": \"    (hf : (f.map (algebraMap R S)).Splits) [MulAction.IsPretransitive G (f.rootSet S)]\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Morse.lean\", \"line\": \"90\", \"text\": \"  apply surjective_of_isSwap_of_isPretransitive'\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"45\", \"text\": \"  (PrimeSpectrum.primesOverOrderIsoFiber ..).trans <|\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"46\", \"text\": \"    (PrimeSpectrum.comapEquiv e.toRingEquiv).trans (PrimeSpectrum.primesOverOrderIsoFiber ..).symm\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isPretransitive_of_isGaloisGroup assumes a Galois/invariant ring action; the statement here needs construction on a reduced tensor algebra for a possibly inseparable normal base extension, which is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite normal extension of fields base changed to any field has reduced tensor algebra whose invariant elements under the normal extension automorphisms are purely inseparable over the base field",
+   "results": "OK; 8 hits; IsPurelyInseparable.normal, isPurelyInseparable_iff_fd_isPurelyInseparable, IsPurelyInseparable.exists_pow_mem_range_tensorProduct, perfectClosure.isPurelyInseparable, IsPurelyInseparable.of_injective_comp_algebraMap, IsPurelyInseparable.tower_bot, IsPurelyInseparable.tower_top, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, Algebra.TensorProduct",
+   "results": "OK; 0 hits; . loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*[Tt]ensor|[Tt]ensor.*normal|purelyInseparable.*[Ff]ixed|isPurelyInseparable.*[Ff]ixed",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a complete discrete valuation ring in a finite possibly inseparable field extension is a finite complete discrete valuation ring",
+   "results": "OK; 8 hits; NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal, integralClosure.isFractionRing_of_finite_extension, Ring.instFiniteNormalClosure_1, ValuationSubring.algebra, Ring.instFiniteNormalClosure, IsDedekindDomainDvr.isIntegrallyClosed, Valuation.Integers.isIntegrallyClosed, Valuation.Integers.integrallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphisms of a normal field extension act transitively on branches of the normalization after base change",
+   "results": "OK; 8 hits; IntermediateField.normal_iff_forall_map_eq, Normal.of_equiv_equiv, AlgEquiv.liftNormal.congr_simp, IsConjRoot.exists_algEquiv, IntermediateField.normal_iff_forall_fieldRange_eq, IntermediateField.normal_iff_forall_map_le, minpoly.exists_algEquiv_of_root, minpoly.exists_algEquiv_of_root'",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isPretransitive_of_isGalois|isPurelyInseparable.*fixed|fixed.*isPurelyInseparable",
+   "results": "OK; 1 hits; Mathlib/NumberTheory/RamificationInertia/Galois.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If E over K is a finite normal field extension and L over K any field extension then every automorphism invariant element of the reduced tensor product L tensor E has a positive power in L",
+   "results": "OK; 8 hits; IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, Algebra.prod_embeddings_eq_finrank_pow, IsPurelyInseparable.hasExponent_of_finiteDimensional, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, IsPurelyInseparable.pow_mem, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, TensorProduct",
+   "results": "OK; 4 hits; IsPurelyInseparable.exists_pow_mem_range_tensorProduct, IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed elements of reduced tensor products of normal field extensions are purely inseparable over the base changed field",
+   "results": "OK; 8 hits; isPurelyInseparable_iff, IsPurelyInseparable.inseparable', isPurelyInseparable_iff_natSepDegree_eq_one, separableClosure.isPurelyInseparable, IsPurelyInseparable.inseparable, IsPurelyInseparable, IsPurelyInseparable.isAlgebraic, IsPurelyInseparable.instOfHasExponent",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant|fixed|nilradical",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_mem_range_tensorProduct|exists_pow_pow_mem_range_tensorProduct_of_expChar|fixedField",
+   "results": "OK; 3 hits; Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: neither the possibly inseparable reduced-tensor branch action nor the complete normalization and ramification assembly is supplied by one declaration or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-finite-coefficient-triple",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09EU, lemma-galois-relative, and its transitive action on the normalized maximal ideals; completeness makes the lower normalization local.",
+   "via": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-normal-base-branch-conjugacy",
+  "worker": "stage1",
+  "summary": "Decomposed complete normalized branches using existing DVR inputs; constructed compatible automorphism actions; proved transitivity by an orbit idempotent and a strictly smaller reduced-tensor invariant-power lemma; transported maximal-ideal powers through the induced semilinear local isomorphisms. No statement correction: the error is in the cited source proof, not the item. Review FIX (NZ cc reader, 2026-10-24): step 1 cited the 2026-10-19 route-pivot-dropped complete-DVR normalization node; repointed to Algebra 032W + 0325 + lem-sfb-finite-normalization-local-dvr (with PID Noetherianity and DVR dimension one).",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09EU, lemma-galois-relative, and its transitive action on the normalized maximal ideals; completeness makes the lower normalization local.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic Algebra 032W: a complete Noetherian local ring is Nagata, so the integral closure of the complete DVRs A and B in a finite (possibly inseparable) extension is finite; no node of the unit states it. Replaces the 2026-10-19 dropped complete-DVR normalization node."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic Algebra 0325: a finite domain over a complete Noetherian local ring is local and complete with a unique prime over the maximal ideal; used for A_1 and each C_i. Replaces the 2026-10-19 dropped complete-DVR normalization node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-b5f9a18e1",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-b5f9a18e1 (reviewer sub-agent of L); spot-checked: The mechanical finding holds: step 1 cited lem-per-complete-dvr-finite-normalization, which is on the 2026-10-19 drop list (side coord/route-pivot-dropped.txt line 1453), and the delivery gives no justification for it. The item itself is not dropped, and neither is its citer lem-sfb-epp-finite-coefficient-triple. FIX (same repair as Q53 2af3 and Q67 dd2b): step 1 now proves that A_1 and each C_i are complete DVRs, local over A and B, as follows. The DVR is Noetherian because it is a PID (lem-weil-pbc-pid-noetherian-normal). It is Nagata by lem-weil-pbc-complete-local-nagata (Algebra 032W), so it is N-2 and N is finite over it. N is a finite domain, so it is local and complete with a unique prime over m by lem-weil-pbc-finite-over-complete-local-product (Algebra 0325). The base has dimension 1 (lem-sc-dvr-dimension-one), and lem-sfb-finite-normalization-local-dvr gives N_q a DVR; since N is local, N_q = N. I checked every hypothesis: the extensions K_1/K and L_i/L are finite, and no separability is needed. proof_deps is rebuilt as the union of the uses, and split_report.tool_uses is replaced by the two sk-thm-p1 Algebra tools. The fixed closure has 231 nodes, contains no dropped id and has no cycle. Steps 2-4 are unchanged and correct: the tensor universal property gives the actions; transitivity follows from a fixed orbit idempotent, the new node and injectivity of L into R; ramification indices are equal because the localization isomorphism carries one to the other, using the unit-times-uniformizer-power node. The new node lem-sfb-normal-tensor-invariant-powers is true: lift x, take a common p-power so the lift is invariant, invariants of the tensor are L tensor E^G, E^G/K is purely inseparable (Fields 030M), and in characteristic 0 one can take N=1. I tested it with E=K, with E/K purely inseparable, with C tensor_R C, and with L/K infinite. It is statement-only, strictly smaller than the item, and has no duplicate in the DAG. The source error is genuine: the 09EU proof uses K=(K_1)^G, which fails for an inseparable normal extension, for example F_p(t^{1/p})/F_p(t). The item statement is unchanged.  Wrote review.md and fixes/dag/nodes/sec-six-functors-basics/lem-sfb-epp-normal-base-branch-conjugacy.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppNormalBaseBranchConjugacy",
+  "declaration": "IsDiscreteValuationRing.epp_normal_base_branch_conjugacy",
+  "file": "lean/Sheaf/RingTheory/EppNormalBaseBranchConjugacy.lean",
+  "statement": "theorem epp_normal_base_branch_conjugacy (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (B : Type v) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hinj : Function.Injective (algebraMap A B)) (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type x) [Field L] [Algebra B L] [IsFractionRing B L] [Algebra A L] [Algebra K L] [IsScalarTower A B L] [IsScalarTower A K L] (E : Type y) [Field E] [Algebra K E] [FiniteDimensional K E] [Normal K E] [Algebra A E] [IsScalarTower A K E] : ∃ (lowerAction : (E ≃ₐ[K] E) →* (integralClosure A E ≃+* integralClosure A E)) (tensorAction : (E ≃ₐ[K] E) →* (((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)) ≃+* ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)))) (upperAction : (E ≃ₐ[K] E) →* (integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)) ≃+* integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)))) (f : integralClosure A E →+* integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E))), (∀ (σ : E ≃ₐ[K] E) (a : integralClosure A E), (lowerAction σ a : E) = σ (a : E)) ∧ (∀ (σ : E ≃ₐ[K] E) (l : L) (a : E), tensorAction σ (Ideal.Quotient.mk _ (l ⊗ₜ[K] a)) = Ideal.Quotient.mk _ (l ⊗ₜ[K] σ a)) ∧ (∀ (σ : E ≃ₐ[K] E) (b : integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E))), (upperAction σ b : (L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)) = tensorAction σ (b : (L ⊗[K] E) ⧸ nilradical (L ⊗[K] E))) ∧ (∀ a : integralClosure A E, (f a : (L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)) = Ideal.Quotient.mk _ ((1 : L) ⊗ₜ[K] (a : E))) ∧ (∀ (σ : E ≃ₐ[K] E) (a : integralClosure A E), upperAction σ (f a) = f (lowerAction σ a)) ∧ (∀ (q q' : Ideal (integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)))), q.IsMaximal → q'.IsMaximal → ∃ σ : E ≃ₐ[K] E, Ideal.map (upperAction σ).toRingHom q = q') ∧ ∃ m : Ideal (integralClosure A E), m.IsMaximal ∧ (∀ n : Ideal (integralClosure A E), n.IsMaximal → n = m) ∧ (∀ σ : E ≃ₐ[K] E, Ideal.map (lowerAction σ).toRingHom m = m) ∧ ∃ e : ℕ, 0 < e ∧ (∀ (q : Ideal (integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)))) [q.IsMaximal], ∀ n : ℕ, Ideal.map ((algebraMap _ (Localization.AtPrime q)).comp f) m = (Ideal.map (algebraMap _ (Localization.AtPrime q)) q) ^ n ↔ n = e) ∧ ((∃ (q : Ideal (integralClosure B ((L ⊗[K] E) ⧸ nilradical (L ⊗[K] E)))) (_ : q.IsMaximal), Ideal.map ((algebraMap _ (Localization.AtPrime q)).comp f) m = Ideal.map (algebraMap _ (Localization.AtPrime q)) q) → e = 1)",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7277cebf",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 09EU/09F8: complete DVRs (IsDiscreteValuationRing+IsAdicComplete maximalIdeal), injective local A→B, K/L fraction fields tied by towers, finite Normal E/K with no separability; A₁=integralClosure A E, B₁=integralClosure B ((L⊗[K]E)⧸nilradical) with left B-structure; lower/tensor/upper actions and f pinned by formulas, so canonical; transitivity on maximal ideals of B₁; unique fixed maximal ideal m of A₁; ∃ e>0 with ∀ maximal q ∀ n (m(B₁)_q=(q(B₁)_q)^n ↔ n=e), index-1 clause. Edge cases E=K, purely inseparable, char 0, n=0 checked. All 6 stmt_dep records are Mathlib leaves used exactly; no new defs, no hollow defs, sorry only, source/blueprint docstrings with 4 proof steps, statement verbatim in file, lean-only delivery on the NZ-landed record. No compile (no change). Maintainer note: NP delivered the same item in parallel (NormalBaseBranchConjugacy.lean, e1fcba319, S2 PASS WIN, not yet landed); land only one of the two modules."
+ }
+}

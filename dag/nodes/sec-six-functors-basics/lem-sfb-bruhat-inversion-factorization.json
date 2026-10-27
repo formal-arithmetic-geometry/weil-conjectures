@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-bruhat-inversion-factorization",
+ "kind": "statement",
+ "title": "Bruhat factors with explicit inversion-root support",
+ "statement": "Let $A$ be a nonzero commutative ring, $P=(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization over $A$ [def-sfb-pinned-split-root-realization], and $A\\to F$ a ring homomorphism to an algebraically closed field. Use the root subgroups $U_c$, closed-root-set subgroups $U_\\Psi$, positive and negative systems $\\pm\\Phi^+$, and constant Weyl group $W=N_G(T)/T$ of [lem-sfb-split-root-subgroup-weyl-calculus], and write $G_F$, $T_F$, $(U_\\Psi)_F$ for the base changes along $\\operatorname{Spec}F\\to\\operatorname{Spec}A$. For each $w\\in W$ choose any representative $n_w\\in N_G(T)(F)$ of $w$. Put $I_w=\\{c\\in\\Phi^+:w^{-1}c\\in-\\Phi^+\\}$, a closed root set, and $U^+=U_{\\Phi^+}$. Multiplication identifies\n$$(U_{I_w})_F\\times_F T_F\\times_F U^+_F\\longrightarrow G_F,\\qquad (v,t,u)\\longmapsto v n_w t u$$\nwith a locally closed subscheme $D_w$ of $G_F$, and the $D_w$ for $w\\in W$ form a disjoint partition of the underlying space of $G_F$. In particular every $g\\in G(F)$ has such a factorization for a unique $w$. The assertions hold for every such homomorphism $A\\to F$, in particular after every algebraically closed extension of $F$, and for every choice of representatives; the case $A=F$ is included. There is an element $w_0\\in W$ with $w_0\\Phi^+=-\\Phi^+$ and $w_0^{-1}=w_0$. Empty roots are permitted, giving $W=\\{1\\}$, $U^+=1$ and $G_F=T_F$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 21.76, Proposition 21.77 (136) and Lemma 21.78, pp.448--449; Theorem 21.80(a),(b) and Definition 21.81, p.450: $U^w=U\\cap n_wU^-n_w^{-1}$ is the product of the $U_\\alpha$ with $\\alpha\\in\\Phi^+$ and $w^{-1}\\alpha\\in-\\Phi^+$, multiplication $U^w\\times B\\to U^wn_wB$ is an isomorphism, and $G=\\bigsqcup_wU^wn_wB$. Also Conrad, Reductive Group Schemes, Theorem 1.4.12, printed p.38 (read online by the worker; archival copy WANTED). No Stacks tag states Bruhat decomposition."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Fix $A\\to F$. By [lem-sfb-pinned-split-root-base-change] the pullback is a pinned split realization of the same based datum, even when $A\\to F$ is not flat. In the rest of the proof write $G,T,U_\\Psi$ for their pullbacks to $F$. The root maps and closed-root-set product charts are the pulled-back ones by [lem-sfb-split-root-subgroup-weyl-calculus]. Choose a rational linear functional on $M\\otimes\\mathbf Q$ taking value $1$ on each simple root: extend the linearly independent set $\\Delta$ to a rational basis, assign zero to the other basis vectors, and clear denominators on a lattice basis of $M$. This gives $\\lambda\\in M^\\vee$ with $\\langle\\alpha,\\lambda\\rangle>0$ for every positive root. The same-sign simple-root expansions show that it is nonzero on every root. By [def-sfb-pinned-split-root-realization] this integer functional is a cocharacter of $T$.",
+   "uses": [
+    "lem-sfb-pinned-split-root-base-change",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.17, p.431 (base-change root datum); 21.29--21.32, pp.433--435 (choice of regular cocharacter)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-regular-cocharacter-borel-description], $B=P(\\lambda)$ is a Borel containing $T$ with positive roots exactly $\\Phi^+$. By [lem-sfb-reductive-borel-pair-structure], its radical $V$ gives $B=V\\rtimes T$ and the right torsor $\\pi:G\\to Q=G/B$. The root subgroups in the field-theoretic nodes coincide with our pulled-back root groups: both are smooth connected $T$-stable subgroups with tangent line $\\mathfrak g_\\alpha$, so the uniqueness statement of [lem-sfb-reductive-root-subgroup-parametrizations] applies. By [lem-sfb-borel-root-product-coordinates] and the product charts in [lem-sfb-split-root-subgroup-weyl-calculus], both $V$ and $U^+$ are the image of the same ordered product of positive root groups. Hence $V=U^+$ as subgroup schemes. Multiplication $T\\times U^+\\to B$ is an isomorphism: if the usual coordinates are $b=ut$, its inverse is $b\\mapsto(t,t^{-1}ut)$, using that $T$ normalizes $U^+$.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.68(a), pp.445--446; Summary 21.86, p.451; 21.19, p.431, for uniqueness of the root groups."
+   }
+  },
+  {
+   "text": "Identify the constant $W$ with $N_G(T)(F)/T(F)$. Indeed [lem-sfb-split-root-subgroup-weyl-calculus] says that the quotient sheaf is constant and is generated by the simple reflections, each lifted by its displayed $n_\\alpha\\in N_G(T)(F)$. Products lift every $w$, and the kernel on $F$-points is $T(F)$. Any representative differs from such a product by a torus point. The same node says that conjugation by each $n_\\alpha$ sends $U_c$ onto $U_{s_\\alpha c}$; its torus-equivariance formula says torus points preserve every root group. Thus every chosen $n_w$ conjugates $U_c$ onto $U_{wc}$. Put $B'_w=n_wBn_w^{-1}$. This is a Borel containing $T$ with positive roots $w\\Phi^+$: conjugation is a group-scheme isomorphism and its full character action, not a differentiated character, sends $c$ to $wc$.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.1 and 21.17--21.19, pp.426,431; paragraph preceding Proposition 21.70, p.446 (normalizer representatives and action)."
+   }
+  },
+  {
+   "text": "Put $J_w=\\Phi^+\\cap w\\Phi^+$, so $\\Phi^+=I_w\\sqcup J_w$. The set $I_w$ is closed in the required sense: a root which is a nonempty sum of its elements is positive, while its inverse image under $w$ is a nonempty sum of negative roots and hence negative, by the same-sign coordinates in the simple-root basis. In particular it contains no opposite pair. By [lem-sfb-unipotent-root-intersection-products], the subgroup scheme $H_w=U^+\\cap B'_w$ is the ordered product of the $U_c$ for $c\\in J_w$, in any order. By [lem-sfb-split-root-subgroup-weyl-calculus], the corresponding product for $I_w$ is $U_{I_w}$. Order all positive roots with $I_w$ first and $J_w$ second. The all-orders product isomorphism of [lem-sfb-borel-root-product-coordinates] then gives an isomorphism of schemes $U_{I_w}\\times H_w\\xrightarrow{\\sim}U^+$, $(v,h)\\mapsto vh$. Right multiplication by $H_w$ changes only the second coordinate, so the first-coordinate projection is its quotient map.",
+   "uses": [
+    "lem-sfb-unipotent-root-intersection-products",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 21.76, Proposition 21.77 (136), Lemma 21.78 and Definition 21.81, pp.448--450. Use ordered root coordinates rather than treating multiplication of these two subgroups as a homomorphism."
+   }
+  },
+  {
+   "text": "Let $e_w=n_wB\\in Q(F)$. The torsor identity in [lem-sfb-reductive-borel-pair-structure] gives, on every test algebra, $\\operatorname{Stab}_{U^+}(e_w)=U^+\\cap n_wBn_w^{-1}=H_w$. The orbit $O_w=U^+e_w$ with its reduced structure is a smooth locally closed subscheme of $Q$, by [lem-sfb-smooth-group-orbit-geometry]. Its hypotheses hold: $U^+$ is smooth connected affine of finite type by its root coordinates, and $Q$ is separated of finite type since it is proper over $F$. By [lem-sfb-homogeneous-orbit-quotient-geometry], $O_w=U^+/H_w$ as the fppf quotient. The preceding product chart identifies this quotient with $U_{I_w}$: a coset represented by the unique product $vh$ is sent to $v$. This is independent of $h$, and the projection is invariant on every test algebra, so descends to the quotient sheaf. Its inverse sends $v$ to the coset of $v$. Consequently $v\\mapsto vn_wB$ is an isomorphism $U_{I_w}\\xrightarrow{\\sim}O_w$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.79(a),(b), p.449; quotient and stabilizer argument made scheme-theoretic using the existing orbit and torsor nodes."
+   }
+  },
+  {
+   "text": "Define $D_w=G\\times_Q O_w$. It is a locally closed subscheme of $G$ by [lem-weil-pbc-immersion-base-change-lft](1). The isomorphism $U_{I_w}\\to O_w$ has the lift $v\\mapsto vn_w$ into $G$. The right torsor identity in [lem-sfb-reductive-borel-pair-structure] now gives an isomorphism $U_{I_w}\\times B\\to D_w$, $(v,b)\\mapsto vn_wb$. Explicitly, for a point $g$ over any test scheme, recover $v$ from $\\pi(g)\\in O_w$, then recover the unique $b\\in B$ by $b=(vn_w)^{-1}g$. These are morphisms by the inverse orbit chart and the torsor isomorphism, and their two composites are identities. Substitute the isomorphism $T\\times U^+\\to B$ of step 2. The resulting isomorphism is exactly $(v,t,u)\\mapsto vn_wtu$, including the order of its three variable factors.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.80(b), p.450; its inverse is written on all test schemes. Immersion base change: Stacks tag 01JY, schemes.tex, lemma-base-change-immersion."
+   }
+  },
+  {
+   "text": "The orbits $O_w$ are pairwise disjoint. To see that their labels are distinct, use the cocharacter $\\mu$ from [lem-sfb-flag-torus-fixed-geometry], positive on $\\Phi^+$, whose fixed points $e_w$ are indexed without repetition by $W$. In the equivariant product coordinates of [lem-sfb-borel-root-product-coordinates], conjugation by $\\mu(t)$ multiplies the coordinate of $U_c$ by $t^{\\langle c,\\mu\\rangle}$. All exponents are positive. Thus for any algebraically closed extension $K/F$ and $v\\in U^+(K)$ the orbit of $ve_w$ has limit $e_w$ at $0$. A point in both $O_w(K)$ and $O_z(K)$ would therefore give $e_w=e_z$: two extensions of the same orbit map to $\\mathbf A^1_K$ agree because $Q_K$ is separated. Thus $w=z$. For exhaustion use only the stated stratification in [lem-sfb-bruhat-longest-cell-charts]. Each of its strata has coordinates $(a,b)\\mapsto an_zb$ with $a$ in a subscheme of $U^+$; therefore every geometric point of $G$ maps under $\\pi$ into some $O_z$. This proves that the locally closed $D_w=\\pi^{-1}(O_w)$ cover the entire underlying space and are disjoint. In particular each $g\\in G(F)$ has the asserted factorization, with unique $w$ (and unique coordinates for that $w$).",
+   "uses": [
+    "lem-sfb-flag-torus-fixed-geometry",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 21.70--21.71 and Theorem 21.73(a), pp.446--447; Theorem 21.80(a), p.450. Reuse the existing exhaustion theorem, without assuming its unspecified subschemes $V^w$ identify the inversion-root factors."
+   }
+  },
+  {
+   "text": "The same Bruhat-chart node [lem-sfb-bruhat-longest-cell-charts] supplies $w_0\\Phi^+=-\\Phi^+$ and $w_0^2=1$, which is $w_0^{-1}=w_0$. All the preceding steps apply to every map $A\\to F$; their fibrewise hypotheses are supplied by the base-change statement in step 1. For an algebraically closed extension $K/F$, the displayed coordinate isomorphisms pull back to the same multiplication maps. The intersection node [lem-sfb-unipotent-root-intersection-products] preserves $H_w$ and its root description, and the Bruhat-chart node preserves exhaustion. The distinct-limit argument of step 7 works over $K$ verbatim, giving the asserted partition after extension. Finally if $n'_w=n_wa$ with $a\\in T(F)$, the substitution $(v,t,u)\\mapsto(v,a^{-1}t,u)$ gives the identical element using $n'_w$; this is an invertible scheme coordinate change. Empty roots cause no exception: [lem-sfb-regular-cocharacter-borel-description] gives $G=T$, the root products are trivial, and $W=\\{1\\}$ by the root-calculus node. The sole map is translation on $T$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-unipotent-root-intersection-products",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 21.72, p.447; Theorem 21.80 and Definition 21.81, p.450; 21.17--21.19, p.431 (scalar extension)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pinned-split-root-base-change",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-unipotent-root-intersection-products",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-sfb-flag-torus-fixed-geometry",
+  "lem-sfb-bruhat-longest-cell-charts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 21h, pp.446--451, especially 21.76--21.80; root charts from 21.68, pp.445--446. The existing DAG Bruhat exhaustion is reused; the inversion support and torsor inverse are explicitly assembled."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bruhat|bruhat",
+   "results": "{\"t\": \"2026-10-24T12:32:39Z\", \"tool\": \"grep\", \"query\": \"Bruhat|bruhat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Lattice.lean\"], \"digest\": \"f5278a47a6485886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bruhat\"",
+   "results": "{\"t\": \"2026-10-24T12:32:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bruhat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every element of a reductive algebraic group over an algebraically closed field has a Bruhat decomposition u n_w t v with u in the inversion root groups",
+   "results": "{\"t\": \"2026-10-24T12:32:40Z\", \"tool\": \"leansearch\", \"query\": \"Every element of a reductive algebraic group over an algebraically closed field has a Bruhat decomposition u n_w t v with u in the inversion root groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup.induction'\", \"RootPairing.weylGroup\", \"CoxeterSystem.exists_reduced_word'\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.InvariantForm.apply_weylGroup_smul\", \"RootPairing.weylGroup.induction\", \"RootPairing.reflection_mem_weylGroup\"], \"digest\": \"e2ced1472c39f74c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bruhat factorization of a split reductive algebraic group with unipotent factors indexed by positive roots carried negative by the inverse Weyl element",
+   "results": "{\"t\": \"2026-10-24T12:32:44Z\", \"tool\": \"leanfinder\", \"query\": \"Bruhat factorization of a split reductive algebraic group with unipotent factors indexed by positive roots carried negative by the inverse Weyl element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup.induction'\"], \"digest\": \"3572f2018f0b8b62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inversion set root coordinates parametrize Bruhat double cosets for a reductive group with a split maximal torus",
+   "results": "{\"t\": \"2026-10-24T12:32:47Z\", \"tool\": \"leanfinder\", \"query\": \"Inversion set root coordinates parametrize Bruhat double cosets for a reductive group with a split maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"RootPairing.GeckConstruction.u\", \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.EmbeddedG2.indexEquivAllRoots_symm_apply\", \"DoubleCoset.mk_out_eq_mul\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.pairingIn_pairingIn_mem_set_of_isCrystal_of_isRed'\"], \"digest\": \"5bac655ee4bcad32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split reductive group has a disjoint Bruhat decomposition with coordinates the positive roots sent negative by the inverse Weyl element",
+   "results": "{\"t\": \"2026-10-24T13:28:02Z\", \"tool\": \"leansearch\", \"query\": \"A split reductive group has a disjoint Bruhat decomposition with coordinates the positive roots sent negative by the inverse Weyl element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"CoxeterSystem.isLeftDescent_inv_iff\", \"CoxeterSystem.IsLeftDescent\", \"RootPairing.Base.IsPos.or_neg\", \"RootPairing.range_weylGroup_coweightHom\", \"RootPairing.weylGroupCorootRep\", \"RootPairing.disjoint_corootSpan_ker_corootForm\", \"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\"], \"digest\": \"f22db14e445fcc49\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing/Weyl or Lie-algebra declarations and topological-group results do not assert the scheme-theoretic Bruhat coordinate morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bruhat decomposition of a reductive algebraic group into inversion-root unipotent factors times a Weyl representative and a Borel subgroup",
+   "results": "{\"t\": \"2026-10-24T13:28:03Z\", \"tool\": \"leanfinder\", \"query\": \"Bruhat decomposition of a reductive algebraic group into inversion-root unipotent factors times a Weyl representative and a Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup.induction'\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.reflection_mem_weylGroup\", \"DoubleCoset.mk_out_eq_mul\", \"RootPairing.weylGroup\", \"RootPairing.range_weylGroupToPerm\", \"RootPairing.GeckConstruction.ω_mul_e\"], \"digest\": \"39bddccd9cfd8e3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing/Weyl or Lie-algebra declarations and topological-group results do not assert the scheme-theoretic Bruhat coordinate morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism from the inversion root subgroup times the maximal torus times the positive unipotent subgroup is an isomorphism onto a locally closed stratum of an algebraic group",
+   "results": "{\"t\": \"2026-10-24T13:30:21Z\", \"tool\": \"leanfinder\", \"query\": \"The morphism from the inversion root subgroup times the maximal torus times the positive unipotent subgroup is an isomorphism onto a locally closed stratum of an algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"Homeomorph.shearMulRight_coe\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_isHomeomorph\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\"], \"digest\": \"89bf72f942d171fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing/Weyl or Lie-algebra declarations and topological-group results do not assert the scheme-theoretic Bruhat coordinate morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weyl-cell-hom-gluing",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 6.2.4, printed pp.201--203, with identities (6.2.2)--(6.2.6) and the uniqueness paragraph immediately before them. This is the relation-level theorem, prior to Corollary 6.2.7. Supporting argument: Theorem 6.2.1 and its proof, printed pp.198–200, full-root/normalizer criterion; strengthened by requiring normalizer equivariance for every normalizer point rather than just simple representatives. Read Conrad online; local archival PDF WANTED. No Stacks tag states this reductive-group result. Supporting input for full-root extension: Theorem 6.2.1 proof, printed p.199, paragraph preceding Lemma 6.2.3: word-length induction across translates of the open cell, after the positive and negative unipotent maps are homomorphisms. Technical local formulation of the omitted induction; formulated by the agent. Supporting geometric input: Theorem 1.4.12, printed p.38, with the definition of the longest element immediately before it on p.37. The coordinate subgroup is explicitly the positive roots carried negative by the inverse Weyl element; no Stacks tag states Bruhat decomposition.",
+   "via": [
+    "lem-sfb-weyl-cell-hom-gluing",
+    "lem-sfb-full-root-hom-extension",
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bruhat-inversion-factorization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused the existing geometric Bruhat exhaustion and root-intersection/product nodes, but did not use the proof of the Bruhat-chart node as its statement. Identified the inversion-root subgroup through U/H_w, supplied the all-test-scheme torsor inverse, justified disjoint labels by contraction limits, and checked arbitrary representatives, arbitrary nonflat A-to-F maps, algebraically closed extensions and empty roots. No new nodes.",
+  "blueprint": "Latest main-20261024: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), the inherited alteration/moduli/reductive-group prerequisites. This item supplies the explicit inversion support needed by lem-sfb-weyl-cell-hom-gluing in the Conrad full-root-extension induction. The nearest imported ancestor remains null, as blueprint_refs.py ancestor reports; inherited via and precise from.place are retained. Whole-blueprint searches Bruhat, root subgroup and Weyl found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Generic base change of a locally closed immersion, used only to pull an orbit subscheme of G/B back to G; no group-theoretic route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-immersion-base-change-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-c646587f6",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-c646587f6 (reviewer sub-agent of L); spot-checked: I read the full item, all 13 cited statements and Milne iAG2017 pp.448-450 (21.76-21.81). The item's I_w is Milne's N(w)={α∈Φ+: w^{-1}α∈Φ^-}, and the proof follows Milne 21.79->21.80. There are no new nodes and the statement and stmt_deps are unchanged; the base proof was empty and there is no cycle. Step 1: the integral regular cocharacter is constructed explicitly and the arbitrary base change is cited. Step 2: P(λ)=B; the root-group uniqueness hypotheses hold; V=U+ because both are the image of the same product chart. Step 3: the elementary W-lift is fine, and the conjugation convention checks as (wc)(t)=c(n^{-1}tn). Step 4: I_w is closed, and ordering I_w then J_w gives the scheme isomorphism U_{I_w}×H_w≅U+. Step 5: the stabiliser H_w is read off the torsor isomorphism, and U+/H_w≅U_{I_w} descends correctly. Step 6: D_w=π^{-1}O_w is locally closed by 01JY (a Mathlib leaf; tool_use accepted), and the torsor inverse b=(vn_w)^{-1}g is correct. Step 7: the disjointness argument via positive-cocharacter limits and separatedness is correct; exhaustion uses only the statement of bruhat-longest-cell-charts, not its V^w. Step 8: w0, extension, change of representatives and empty roots are all fine. Small cases checked: SL2, A2 with w=s1s2 giving I_w={α1,α1+α2}, and rank 0. Batch-5 flags: every closure reaches only generic Stacks/Mathlib scheme facts filed under sec-trace-formula (02VL smooth fpqc descent, 021O fppf base change, 01VA smooth composition, split-torus smoothness); none is part of the trace formula or Poincaré duality or of their proofs, so none is a reason to return."
+ }
+}

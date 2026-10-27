@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-smooth-augmented-tangent-scalar-extension",
+ "kind": "statement",
+ "title": "Scalar extension of the tangent module of an augmented smooth algebra",
+ "statement": "Let $A$ be a commutative ring, $B$ a smooth commutative $A$-algebra [def-weil-pbc-smooth-ring-map], and $u:B\\to A$ an $A$-algebra homomorphism [def-weil-pbc-algebra-hom-quotient]. Give $A$ the $B$-module structure through $u$, and write $T(B,u)=\\operatorname{Der}_A(B,A)$, the $A$-module of additive maps $d:B\\to A$ satisfying $d(ab)=a\\,d(b)$ for $a\\in A$, $d(A)=0$ and $d(bb')=u(b)d(b')+u(b')d(b)$ [def-weil-pbc-kahler-differentials]. Then $T(B,u)$ is finite projective, meaning a direct summand of $A^n$ for some finite $n$. For every homomorphism $f:A\\to C$ of commutative rings put $B_C=C\\otimes_A B$, with its tensor-product algebra structure [lem-weil-pbc-algebra-tensor-pushout-universal-property], and $u_C(c\\otimes b)=c f(u(b))$. There is a canonical $C$-linear isomorphism\n$$\\theta_C:C\\otimes_A T(B,u)\\xrightarrow{\\sim}T(B_C,u_C),\\qquad \\theta_C(c\\otimes d)(c'\\otimes b)=cc'f(d(b)),$$\nwhere tensor products are [def-weil-pbc-module-tensor-product] and the target consists of $C$-derivations into $C$ through $u_C$. For $A\\to C\\xrightarrow h D$, the comparison for $A\\to D$ equals the composite comparison for $A\\to C$ and $C\\to D$ under $D\\otimes_C(C\\otimes_A T)\\simeq D\\otimes_A T$, $d_0\\otimes(c\\otimes v)\\mapsto d_0h(c)\\otimes v$; the identity comparison is the identity. The comparison is natural in augmented smooth algebras: if $v:B'\\to A$ is another such augmentation and $q:B\\to B'$ is an $A$-algebra homomorphism with $v q=u$, precomposition $T(B',v)\\to T(B,u)$ commutes with every $\\theta_C$. Neither $A$ nor $C$ is required to be Noetherian or nonzero, and $C$ is not required to be flat over $A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00T2 (definition-smooth), 00RO (lemma-universal-omega), 00RV (lemma-differentials-base-change). The augmented tangent comparison and its naturality are the finite-projective dual consequence of these statements; the assembly argument is recorded in report.md, not asserted verbatim in Stacks."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\Omega=\\Omega_{B/A}$ and $P=A\\otimes_{B,u}\\Omega$. Smoothness [def-weil-pbc-smooth-ring-map] says that there are $B$-linear maps $i:\\Omega\\to B^n$ and $p:B^n\\to\\Omega$ with $pi=1$. Applying $A\\otimes_{B,u}(-)$ preserves this equation by the functoriality in [def-weil-pbc-module-tensor-product]. The coordinate maps $a\\otimes(b_j)_j\\mapsto(a u(b_j))_j$ identify $A\\otimes_B B^n$ with $A^n$, with inverse $(a_j)_j\\mapsto\\sum_j a_j\\otimes e_j$. Thus $P$ is a direct summand of $A^n$. The algebra tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property], applied to $1_C$ and $f u$, gives the augmentation $u_C(c\\otimes b)=cf(u(b))$.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T2 (definition-smooth); tensor universal property and explicit split maps"
+   }
+  },
+  {
+   "text": "The universal property in [def-weil-pbc-kahler-differentials] identifies $T(B,u)$ with $\\operatorname{Hom}_B(\\Omega,A)$, with $B$ acting on $A$ through $u$. This is $P^*=\\operatorname{Hom}_A(P,A)$: the mutually inverse correspondences are $\\ell\\mapsto(a\\otimes\\omega\\mapsto a\\ell(\\omega))$ and $\\lambda\\mapsto(\\omega\\mapsto\\lambda(1\\otimes\\omega))$. The first is balanced since $\\ell(b\\omega)=u(b)\\ell(\\omega)$; the tensor universal property proves that these formulas are linear and inverse. In particular, $d\\in T(B,u)$ corresponds to $\\lambda_d$ with $\\lambda_d(1\\otimes\\mathrm db)=d(b)$. The identical argument for $C,B_C,u_C$ gives $T(B_C,u_C)=P_C^*$, where $P_C=C\\otimes_{B_C,u_C}\\Omega_{B_C/C}$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega); explicit tensor-Hom correspondence"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kahler-differentials-base-change] to $A\\to C$ and $A\\to B$. It gives the $B_C$-linear isomorphism $B_C\\otimes_B\\Omega\\simeq\\Omega_{B_C/C}$ sending $(c\\otimes b_0)\\otimes\\mathrm db$ to $(c\\otimes b_0)\\mathrm d(1\\otimes b)$. Tensor its inverse with $C$ through $u_C$. The remaining balanced tensor identifications give an isomorphism $\\alpha_C:C\\otimes_A P\\simeq P_C$, with $c\\otimes(a\\otimes\\omega)\\mapsto cf(a)\\otimes\\eta(\\omega)$, where $\\eta(\\mathrm db)=\\mathrm d(1\\otimes b)$. Explicitly, the inverse before the differential identification sends $c\\otimes((c_0\\otimes b_0)\\otimes\\omega)$ to $cc_0\\otimes(u(b_0)\\otimes\\omega)$. The balancing relations for $B,A,C$ verify both composites. Consequently $\\alpha_C(c\\otimes(1\\otimes\\mathrm db))=c\\otimes\\mathrm d(1\\otimes b)$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change); tensoring an isomorphism and balanced cancellation"
+   }
+  },
+  {
+   "text": "By [lem-sf-finite-projective-dual], $P^*$ is finite projective ($P$ is a summand of $A^n$ by step 1); through step 2 this proves the first assertion about $T(B,u)$. For an $A$-module $M$ put $M^*=\\operatorname{Hom}_A(M,A)$ and define $\\beta_M:C\\otimes_AM^*\\to\\operatorname{Hom}_C(C\\otimes_AM,C)$ by $\\beta_M(c\\otimes\\lambda)(c_1\\otimes x)=cc_1f(\\lambda(x))$. The inner formula is $A$-balanced since $f(\\lambda(ax))=f(a)f(\\lambda(x))$, and the outer one since $cf(a)\\otimes\\lambda$ and $c\\otimes a\\lambda$ give the same functional; so the tensor universal property [def-weil-pbc-module-tensor-product] makes $\\beta_M$ a well-defined $C$-linear map. For an $A$-linear $g:M\\to N$, with $g^*(\\mu)=\\mu g$, both $\\beta_M(1_C\\otimes g^*)$ and $(1_C\\otimes g)^*\\beta_N$ send $c\\otimes\\mu$ to $c_1\\otimes x\\mapsto cc_1f(\\mu(g(x)))$. For $M=A^n$ the elements $1\\otimes e_j^*$ form a $C$-basis of $C\\otimes_A(A^n)^*$, the elements $1\\otimes e_k$ a $C$-basis of $C\\otimes_AA^n$, and $\\beta_{A^n}(1\\otimes e_j^*)(1\\otimes e_k)=\\delta_{jk}$, so $\\beta_{A^n}$ is an isomorphism, also for $n=0$. With $i:P\\to A^n$, $p:A^n\\to P$, $pi=1$ from step 1, put $\\gamma=(1_C\\otimes i^*)\\beta_{A^n}^{-1}(1_C\\otimes p)^*$. Naturality for $i$ gives $\\beta_P\\gamma=(1\\otimes i)^*(1\\otimes p)^*=(1\\otimes pi)^*=1$; naturality for $p$, $(1\\otimes p)^*\\beta_P=\\beta_{A^n}(1\\otimes p^*)$, gives $\\gamma\\beta_P=1\\otimes(pi)^*=1$. So $\\beta_P:C\\otimes_AP^*\\simeq(C\\otimes_AP)^*$ is an isomorphism, with $(c\\otimes\\lambda)(c_1\\otimes x)=cc_1f(\\lambda(x))$; no flatness of $C$ is used. Compose this with precomposition by $\\alpha_C^{-1}$ and the two identifications of step 2. This defines the canonical $C$-linear isomorphism $\\theta_C$. On $1\\otimes\\mathrm d(1\\otimes b)=\\alpha_C(1\\otimes(1\\otimes\\mathrm db))$ the resulting functional has value $c f(d(b))$. Since a $C$-derivation vanishes on $C$, its value at $c_1\\otimes b=c_1(1\\otimes b)$ is therefore $cc_1f(d(b))$, exactly the asserted formula.",
+   "uses": [
+    "lem-sf-finite-projective-dual",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI (lemma-dual-perfect-complex), degree-zero finite-projective duality; scalar formula from the cited calculus node"
+   }
+  },
+  {
+   "text": "For $A\\xrightarrow f C\\xrightarrow h D$, identify $D\\otimes_C B_C$ with $D\\otimes_A B$ by $d_0\\otimes(c\\otimes b)\\mapsto d_0h(c)\\otimes b$; the inverse sends $d_0\\otimes b$ to $d_0\\otimes(1\\otimes b)$, and these maps preserve augmentation. Evaluate the successive comparisons on $d_0\\otimes(c\\otimes v)$ and on an algebra generator $d_1\\otimes b$. Their value is $d_0d_1h(c)h(f(v(b)))$. The direct comparison after the asserted tensor associator has the same value. Additivity and the tensor universal property give equality on all elements. For $C=A$ the formula is $\\theta_A(a\\otimes v)(a_1\\otimes b)=aa_1v(b)$, so multiplication identifies it with $av$ and makes the comparison the identity.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tensor universal property; explicit identity and composition calculation"
+   }
+  },
+  {
+   "text": "Let $q:B\\to B^{\\prime}$ satisfy $v q=u$. Precomposition sends $d^{\\prime}$ to $d^{\\prime}q$: its product rule uses $v(q(b))=u(b)$, so it is a derivation through $u$. The scalar extension is $q_C(c_1\\otimes b)=c_1\\otimes q(b)$ and satisfies $v_C q_C=u_C$. Both composites in the naturality square, on $c\\otimes d^{\\prime}$ evaluated at $c_1\\otimes b$, give $cc_1 f(d^{\\prime}(q(b)))$. Pure tensors generate both tensor modules, hence the square commutes. All constructions used split equations or tensor universal properties, never exactness of tensoring. They apply to the zero ring and to nonflat $A\\to C$ as well.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega); explicit augmentation and naturality calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-sf-finite-projective-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly from Tags 00T2 (definition-smooth), 00RO (lemma-universal-omega), 00RV (lemma-differentials-base-change), and the finite-projective dual; the scalar-dual comparison is proved in step 4 from the splitting of step 1. Naturality and tower calculations written by Q126."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine pointed scheme the tangent module at its section commutes with arbitrary nonflat scalar extension naturally",
+   "results": "Actual search returned 8 hits: Algebra.Smooth.flat, Algebra.Extension.CotangentSpace.map, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.tensorCotangent, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*baseChange|baseChange.*cotangent|tangent.*baseChange|baseChange.*tangent",
+   "results": "Actual search returned 25 hits: Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent module of a smooth affine scheme at a section is compatible with arbitrary base change",
+   "results": "Actual search returned 8 hits: KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquivBase, Algebra.Smooth.baseChange, KaehlerDifferential.cotangentComplexBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, TensorProduct",
+   "results": "Actual search returned 12 hits: instModuleTensorProductKaehlerDifferential, KaehlerDifferential.mapBaseChange, KaehlerDifferential.kerToTensor, KaehlerDifferential.kerCotangentToTensor, KaehlerDifferential.isScalarTower', instIsScalarTowerTensorProductKaehlerDifferential, KaehlerDifferential.range_mapBaseChange, KaehlerDifferential.tensorProductTo_surjective. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|tensor.*[Ee]quiv",
+   "results": "Actual search returned 0 hits: . Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation",
+   "results": "Actual search returned 12 hits: Derivation, Derivation.instAdd, Derivation.instAddCommMonoid, Derivation.instInhabited, Derivation.instZero, Derivation.Simps.apply, Derivation.instFunLike, Derivation.instAddCommGroup. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an augmented smooth algebra the derivations into the base ring form a finite projective tangent module and extension of scalars commutes with this module",
+   "results": "Actual search returned 8 hits: Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, KaehlerDifferential.endEquivDerivation', derivationQuotKerSq_mk, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.CotangentSpace, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.cotangentComplex. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, TensorProduct",
+   "results": "Actual search returned 12 hits: TensorProduct.dualDistrib, TensorProduct.AlgebraTensorModule.dualDistrib, TensorProduct.dualDistrib_apply, TensorProduct.AlgebraTensorModule.dualDistrib_apply, TensorProduct.dualDistrib_apply_comm, contractLeft, contractRight, dualTensorHom. Read the displayed hits and relevant Kaehler, Derivation and Dual/BaseChange sources.",
+   "date": "2026-10-24",
+   "verdict": "no match: differential scalar extension and finite-projective duality are constituent results; none states the augmented tangent comparison, its formula and naturality. Lie derivations concern a different object."
+  },
+  {
+   "tool": "grep",
+   "query": "augmented|augmentation|baseChange",
+   "sub": "RingTheory/Derivation",
+   "results": "{\"t\": \"2026-10-24T09:53:29Z\", \"tool\": \"grep\", \"query\": \"augmented|augmentation|baseChange\", \"sub\": \"RingTheory/Derivation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give universal differentials, differential base change or projectivity, not the full augmented tangent isomorphism and its compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derivations of a smooth algebra at an augmentation commute with arbitrary base change and form a finite projective module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T09:53:30Z\", \"tool\": \"leansearch\", \"query\": \"Derivations of a smooth algebra at an augmentation commute with arbitrary base change and form a finite projective module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Derivation\", \"LieRinehartAlgebra.instDerivation\", \"RingHom.Smooth.isStableUnderBaseChange\", \"algebraMap.coe_deriv\", \"LieRinehartAlgebra.instLieRinehartRingDerivation\", \"Algebra.Smooth.baseChange\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"Derivation.instModule.congr_simp\"], \"digest\": \"dd024ec4b66c8f09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give universal differentials, differential base change or projectivity, not the full augmented tangent isomorphism and its compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, TensorProduct",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T09:53:30Z\", \"tool\": \"loogle\", \"query\": \"Derivation, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Derivation.tensorProductTo\", \"Derivation.tensorProductTo_tmul\", \"KaehlerDifferential.kerToTensor_apply\", \"Derivation.tensorProductTo_mul\", \"KaehlerDifferential.kerCotangentToTensor_toCotangent\", \"KaehlerDifferential.D_apply\", \"Derivation.liftKaehlerDifferential_apply\", \"KaehlerDifferential.endEquivDerivation'\"], \"digest\": \"d7bf86ba6f9a92b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give universal differentials, differential base change or projectivity, not the full augmented tangent isomorphism and its compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth augmented algebra derivations into the base form a finite projective module commuting naturally with arbitrary scalar extension",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T09:53:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth augmented algebra derivations into the base form a finite projective module commuting naturally with arbitrary scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationTensorProduct\", \"Derivation.compAlgebraMap\", \"Derivation.compAlgebraMapL\", \"KaehlerDifferential.linearMapEquivDerivation\", \"derivationToSquareZeroEquivLift\", \"KaehlerDifferential.map_compDer\", \"derivationQuotKerSq_mk\", \"ModuleCat.Derivation.desc\"], \"digest\": \"76e913e8739e4896\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give universal differentials, differential base change or projectivity, not the full augmented tangent isomorphism and its compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base.change|tensor.*[Ee]quiv",
+   "sub": "RingTheory/Kaehler",
+   "results": "{\"t\": \"2026-10-24T09:54:28Z\", \"tool\": \"grep\", \"query\": \"baseChange|base.change|tensor.*[Ee]quiv\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"b1617bdccfb427e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give universal differentials, differential base change or projectivity, not the full augmented tangent isomorphism and its compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of the cotangent module pulled back along a section of a smooth algebra is finite projective and compatible with nonflat base change",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-24T09:54:29Z\", \"tool\": \"leanfinder\", \"query\": \"The dual of the cotangent module pulled back along a section of a smooth algebra is finite projective and compatible with nonflat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.cotangentComplexBaseChange\", \"Algebra.Extension.CotangentSpace.map\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.Extension.tensorH1Cotangent\", \"Algebra.Extension.tensorCotangent\", \"Algebra.Extension.tensorCotangentInvFun\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"e224a934e0d0e1d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give universal differentials, differential base change or projectivity, not the full augmented tangent isomorphism and its compatibilities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pinned-split-root-base-change",
+  "date": "2026-10-24",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Section 3.1 and Definition 5.1.1, printed pp.81-84 and 136; Section 4.1, root groups and coroots, pp.107-110; Definition 6.1.1, p.186; the base-change use immediately after Theorem 6.1.17, p.197; smooth tangent prerequisite: arbitrary scalar extension at an identity section, before taking the adjoint root summands.",
+   "via": [
+    "lem-sfb-pinned-split-root-base-change",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-augmented-tangent-scalar-extension",
+  "worker": "stage1",
+  "summary": "No statement changes and no new nodes. Reused smoothness and universal differentials definitions, the existing differential base-change Mathlib leaf, the finite-projective dual Mathlib leaf, and proved the scalar-dual comparison for the finite projective module in step 4 by the splitting of step 1 (maintainer review: replaced the citation of lem-pod-perfect-dual-scalar-calculus). Wrote the pulled-back cotangent comparison and all identity, tower and augmented-algebra naturality calculations explicitly. Checked zero rings, zero tangent modules and nonflat coefficient changes.",
+  "blueprint": "Supporting smooth tangent prerequisite in the existing from.place chain, before the adjoint root summands. The latest blueprint direct-images proof supplies the ambient unit route; the item is a created supporting algebra lemma, not a blueprint statement. Searched the full blueprint for augmented tangent, differentials base change, and projective dual scalar: no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-55f377443",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-55f377443 (reviewer sub-agent of L); spot-checked: Read the item, all 8 cited statements, Stacks 00T2/00RO/00RV (algebra.tex:34213) and Mathlib Dual/BaseChange.lean (toDualBaseChange needs Free+Finite, so it covers free modules only). The statement is correct and tested on A=0, C=0, B=A, A[x_1..x_n] with the zero section, and non-flat Z->Z/2. Steps 1-3 and 5-6 check against their cited nodes: the smoothness splitting, Hom_B(Omega,A)=P^*, the Omega base-change leaf over an arbitrary A->C, and the tower, identity and q-naturality formulas. Batch-5 flag: step 4 cited lem-pod-perfect-dual-scalar-calculus, whose closure reaches sec-poincare-duality lem-pod-projective-hom-evaluation-model (created for lem-pod-cohomology-of-dual-over-field). It was also an off-unit tool use, and a derived perfect-complex calculus for a degree-zero module fact. FIX: step 4 now proves C⊗_A P^* ≅ (C⊗_A P)^* directly: beta_M is well defined by tensor balancing, natural in M, and an isomorphism on A^n by bases; with the retract i,p from step 1, gamma=(1⊗i^*)beta^{-1}(1⊗p)^* is its inverse. The step now uses lem-sf-finite-projective-dual, def-weil-pbc-kahler-differentials and def-weil-pbc-module-tensor-product. The flagged citation is removed from proof_deps, tool_uses is withdrawn, and proof_origin.place and the summary are updated. Statement and stmt_deps are unchanged; no new nodes. The null blueprint.from.node is inherited from the creating item's chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothAugmentedTangentScalarExtension",
+  "declaration": "Algebra.smooth_augmentedTangent_scalarExtension",
+  "declarations": [
+   "Algebra.augmentedTangent",
+   "Algebra.augmentedTangentModule",
+   "Algebra.augmentedBaseChange",
+   "Algebra.smooth_augmentedTangent_scalarExtension",
+   "Algebra.augmentedTangentBaseChangeEquiv",
+   "Algebra.augmentedTangentBaseChangeEquiv_id",
+   "Algebra.augmentedTangentBaseChangeEquiv_comp",
+   "Algebra.augmentedTangentBaseChangeEquiv_natural"
+  ],
+  "file": "lean/Sheaf/RingTheory/SmoothAugmentedTangentScalarExtension.lean",
+  "statement": "theorem smooth_augmentedTangent_scalarExtension [Smooth A B] (ε : B →ₐ[A] A) : (∃ n : ℕ, ∃ i : augmentedTangent ε →ₗ[A] (Fin n → A), ∃ p : (Fin n → A) →ₗ[A] augmentedTangent ε, p.comp i = LinearMap.id) ∧ ∃! θ : (C ⊗[A] augmentedTangent ε) ≃ₗ[C] augmentedTangent (augmentedBaseChange (C := C) ε), ∀ (c c' : C) (d : augmentedTangent ε) (b : B), θ (c ⊗ₜ[A] d) (c' ⊗ₜ[A] b) = c * c' * algebraMap A C (d b)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17c9dc55d",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, module, report; Derivation/lift/cancelBaseChange signatures checked in Mathlib. augmentedTangent = Derivation A B A with B acting via ε (compHom), finite projective = retract of Fin n → A, u_C = Algebra.TensorProduct.lift (c⊗b ↦ c·f(εb)), θ_C unique C-linear equiv with formula c c' f(d b) (top-level ∃!, genuine), id/tower (cancelBaseChange A C D D on T and B)/naturality (p d b = d(q b), map id q) on all tensors. No Noetherian/nonzero/flat binders, universes u v w z independent; edge cases A=0, C=0, B=A, ℤ→ℤ/2 admitted. Node diff vs live: lean only (live lean null). statement verbatim, 8 decls present, docstrings with source/blueprint/proof steps, all sorry, no duplicate notion in Sheaf/WeilConjectures/Mathlib. No findings; not recompiled."
+ }
+}

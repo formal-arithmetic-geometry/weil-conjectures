@@ -1,0 +1,359 @@
+{
+ "id": "lem-kun-tensor-base-change-bounded-below",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1n",
+   "place": "the Lean proof of lem-kun-0f1n's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: Stacks 0F1N is deduced from the bounded below case 0F1J",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor base change for a bounded below complex of Tor amplitude ≥ n",
+ "statement": "Let $K$ be a field and $\\Lambda$ a finite ring whose exponent is invertible in $K$. Consider schemes and morphisms $X\\xleftarrow{p}X'\\xleftarrow{h}Y$, $X\\xrightarrow{a}\\operatorname{Spec}K\\xleftarrow{b}S'\\xleftarrow{g}T$, $f'\\colon X'\\to S'$, $e\\colon Y\\to T$ with both squares cartesian ($X'=X\\times_KS'$, $Y=X'\\times_{S'}T$) and $g$ quasi-compact and quasi-separated. Let $E\\in D(X_{\\mathrm{et}},\\Lambda)$ and $F\\in D(T_{\\mathrm{et}},\\Lambda)$ be bounded below [def-weil-pbc-derived-categories], and suppose $E$ has Tor amplitude in $[n,\\infty)$ [def-kun-tor-amplitude]: $H^q(E\\otimes^LM)=0$ for every sheaf of $\\Lambda$-modules $M$ and every $q<n$. Then the base change map $Lp^*E\\otimes^LLf'^*Rg_*F\\to Rh_*(Lh^*Lp^*E\\otimes^LLe^*F)$ [def-kun-derived-tensor] is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.md",
+  "place": "lem-kun-0f1n: Stacks 0F1N is deduced from the bounded below case 0F1J; Lean: upstream file lean/WeilConjectures/SixFunctors/Etale/Derived/Kunneth/Ordinary.lean, declaration AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE (module WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary, lines 416-430, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "For any coefficient ring $R$ write $A_R(E,F)=p^{-1}E\\otimes_R^{\\mathbf L}(f')^{-1}Rg_*F$ and $B_R(E,F)=Rh_*(h^{-1}p^{-1}E\\otimes_R^{\\mathbf L}e^{-1}F)$. Write $\\alpha_R:A_R\\to B_R$ for the adjoint of $1\\otimes e^{-1}\\varepsilon_g$, using the cartesian-square identity and the monoidal pullback identification [lem-kun-inverse-image-monoidal]. Exactness of inverse image [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-derived-functor] identify the displayed inverse images with the derived pullbacks in the statement. Both functors are triangulated in each variable by [lem-sf-exact-functor-derived-triangulated], [lem-kun-derived-tensor-triangulated], and [lem-pc-right-derived-functor-triangulated]. The counit formula is natural in both variables and respects the shifts and the short-exact-complex triangles; the same monoidal identifications and $1\\otimes\\varepsilon_g$ give the map on each vertex. We use the resulting morphisms of triangles throughout, with [lem-sf-triangle-two-out-of-three] and [lem-sf-derived-homology-long-exact]. Right direct image preserves every lower cohomological bound: forget coefficients using [lem-kun-unbounded-abelian-exchange-comparison] and apply [lem-kun-tensor-t-est]. All sites are taken small in the fixed module universe [def-weil-size-convention].",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-triangle-two-out-of-three",
+    "lem-sf-derived-homology-long-exact",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-kun-tensor-t-est",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0f1m] over $\\Lambda$ to obtain a flat-term K-flat representative $P$ of $E$, zero below $n$, whose pullbacks have the same properties. Choose $b$ with $F\\in D^{\\ge b}$. For $N\\ge n$ put $P_N=\\sigma_{\\le N}P$ and $T_N=\\sigma_{\\ge N+1}P$ [def-kun-truncations]. The sequence $0\\to T_N\\to P\\to P_N\\to0$ is degreewise split exact, also after any pullback. The bounded flat complex $P_N$ is K-flat [lem-kun-kflat-criteria](1). The tails and their pullbacks are K-flat as well: tensor this split sequence with an arbitrary acyclic complex. It stays degreewise split exact after direct-sum totalization; the middle and final terms are acyclic, hence the first is acyclic by [lem-weil-pbc-complex-ses-homology-long-exact]. The original split sequence gives a triangle by [lem-weil-pbc-complex-ses-triangle].",
+   "uses": [
+    "lem-kun-0f1m",
+    "def-kun-truncations",
+    "lem-kun-kflat-criteria",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, first reduction paragraph; Tag 0F1M, sites-cohomology lemma-bounded-below-tor-amplitude"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-dplus-injective-representative], represent $F$ and $Rg_*F$ by complexes zero below $b$; the latter bound was proved in Step 1. The K-flat tails compute the tensors in $A_\\Lambda(T_N,F)$ and inside $B_\\Lambda(T_N,F)$ by [def-kun-derived-tensor]. These tensor complexes are zero below $N+1+b$, and Step 1 gives the same bound after $Rh_*$. For $q<N+b$ both degree $q$ and degree $q+1$ of either tail image vanish. The long exact sequences of Step 1 therefore identify $H^q(\\alpha_\\Lambda(E,F))$ with $H^q(\\alpha_\\Lambda(P_N,F))$. Choose $N>q-b$ for each fixed $q$. Repeated stupid-truncation short exact sequences decompose the bounded complex $P_N$ into shifts of its single flat terms; their triangles [lem-weil-pbc-complex-ses-triangle] and Step 1 reduce its comparison to those terms. It suffices to treat a flat sheaf $\\mathcal E$ on $X$ in degree zero. This argument uses finite truncations and explicit bounds, not convergence of an infinite filtration.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade"
+   }
+  },
+  {
+   "text": "The sheaves $p^{-1}\\mathcal E$ and $h^{-1}p^{-1}\\mathcal E$ are flat by [lem-weil-pbc-ringed-topos-flat-module-pullback], with the constant-ring identifications of Step 1. Tensoring with either is exact [def-pc-flat-sheaf-modules] and commutes with cohomology by [lem-weil-pbc-exact-functor-complex-cohomology]; the one-term complexes are K-flat [lem-kun-kflat-criteria](1). Choose a representative $I$ of $F$ zero below $b$ [lem-weil-pbc-dplus-injective-representative]. Put $J_M=\\tau_{\\le M}I$ and $C_M=I/J_M$ [def-kun-truncations], with $M\\ge b$. The quotient is zero below $M$, including the possible term $I^M/\\ker d^M$ in degree $M$. The sequence $0\\to J_M\\to I\\to C_M\\to0$ gives a triangle [lem-weil-pbc-complex-ses-triangle]. Exact tensor and the lower direct-image bound put both comparison functors on $C_M$ in $D^{\\ge M}$. For $q<M-1$ the long exact sequences identify the comparison on $I$ with that on $J_M$. The bounded complex $J_M$ is a finite extension of shifts of its sheaf terms through stupid truncations. Step 1 reduces its comparison to those sheaves. It suffices to prove the assertion when $\\mathcal E$ is flat and $\\mathcal F$ is any $\\Lambda$-sheaf, both in degree zero.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-kun-kflat-criteria",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-kun-truncations",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade"
+   }
+  },
+  {
+   "text": "A finite commutative ring is Artinian, since a strict descending chain of ideals strictly decreases finite cardinalities. Apply [lem-weil-pbc-artinian-ideal-length-one-filtration] to its unit ideal to obtain $0=I_0\\subsetneq\\cdots\\subsetneq I_r=\\Lambda$ with simple quotients $L_i=I_i/I_{i-1}$. For each $i$ choose $0\\ne x_i\\in L_i$. Simplicity makes $\\Lambda x_i=L_i$; the kernel $\\mathfrak m_i$ of $a\\mapsto ax_i$ gives $L_i\\cong\\Lambda/\\mathfrak m_i$. This quotient is a field: a nonzero residue $c$ acts with nonzero image on the simple module, hence surjectively, so $cdx_i=x_i$ for some $d$, giving $cd=1$ modulo $\\mathfrak m_i$. Thus $k_i=\\Lambda/\\mathfrak m_i$ is a finite field and $\\mathfrak m_i I_i\\subseteq I_{i-1}$. Its characteristic $\\ell_i$ is prime and divides the additive exponent of $\\Lambda$ (the exponent kills $1$ in every quotient), hence $\\ell_i$ is invertible in $K$. When $\\Lambda$ is the zero ring, $r=0$ and every sheaf in the assertion is zero.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, reduction to prime torsion, generalized by finite-ring devissage; algebra.tex Tags 00JB (lemma-artinian-finite-length) and 00J2 (lemma-characterize-length-1), elementary cyclic-simple argument written out"
+   }
+  },
+  {
+   "text": "Let $I_i\\mathcal F$ be the subsheaf generated by products $a s$ with $a\\in I_i$ and local sections $s$ of $\\mathcal F$. This gives a finite filtration from $0$ to $\\mathcal F$. Its quotient $Q_i=I_i\\mathcal F/I_{i-1}\\mathcal F$ is killed by $\\mathfrak m_i$, because $c(as)=(ca)s$ with $ca\\in I_{i-1}$ for $c\\in\\mathfrak m_i$. Hence $Q_i$ is a $k_i$-module sheaf. The short exact sequences of this filtration give triangles [lem-weil-pbc-complex-ses-triangle], so Step 1 reduces the comparison for $\\mathcal F$ to those for $Q_i$. Apply [lem-kun-flat-coefficient-tensor-exchange-comparison] to $\\Lambda\\to k_i$, $M=p^{-1}\\mathcal E$, and $N=Q_i[0]$. It identifies this precise comparison with scalar restriction of the $k_i$-comparison whose first factor is $\\mathcal E_i=\\mathcal E\\otimes_\\Lambda k_i$. Pullback commutes with this scalar-extension tensor by the constant-ring identifications and monoidality of Step 1. Flatness of $\\mathcal E_i$ follows from [lem-weil-pbc-ringed-topos-flat-module-pullback] applied to the identity topos with coefficient map $\\Lambda_X\\to(k_i)_X$. Restriction of scalars reflects isomorphisms by the coefficient comparison node. We have reduced to two sheaves over an arbitrary finite field $k$ of characteristic $\\ell$ invertible in $K$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-kun-flat-coefficient-tensor-exchange-comparison",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade"
+   }
+  },
+  {
+   "text": "For the extension $\\mathbf F_\\ell\\hookrightarrow k$, [lem-pur-finite-field-derived-tensor-summand] supplies $z=\\sum_j a_j\\otimes b_j\\in k\\otimes_{\\mathbf F_\\ell}k$ with $\\sum_j a_jb_j=1$ and $(c\\otimes1)z=(1\\otimes c)z$. If $V$ is a $k$-sheaf, put $\\widetilde V=(U V)\\otimes_{\\mathbf F_\\ell}k$, with $k$ acting on the last factor. The local formulas $s(v)=\\sum_j a_jv\\otimes b_j$ and $t(v\\otimes c)=cv$ define natural $k$-linear sheaf maps $V\\xrightarrow{s}\\widetilde V\\xrightarrow{t}V$. The displayed relation for $z$ gives $s(cv)=c s(v)$ and its multiplication identity gives $ts=1$. Additivity and the balancing relations give the maps before sheafification, and the formulas commute with every restriction, so they extend to sheaf tensors. This explicitly constructs the required retract using only the cited element.",
+   "uses": [
+    "lem-pur-finite-field-derived-tensor-summand"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, vector-space case, extended to finite fields using algebra.tex Tag 0C2X (lemma-separable-algebraic-diagonal) and the existing finite-field tensor summand"
+   }
+  },
+  {
+   "text": "Let $V$ and $W$ be the two $k$-sheaves remaining in Step 6. Every $\\mathbf F_\\ell$-module sheaf is flat by [lem-exc-constant-field-module-flat], applied on a small skeleton of the small etale site in the module universe. Thus $(UV)[0]$ has Tor amplitude $[0,\\infty)$: its one-term complex is K-flat [lem-kun-kflat-criteria](1), and its tensor with a degree-zero sheaf is concentrated in degree zero [def-kun-derived-tensor]. Both $UV$ and $UW$ are bounded below. Apply [lem-kun-0f1j] with integer coefficient modulus $\\ell$; the two product squares, arbitrary $X$, and qcqs $g$ are exactly its hypotheses. It proves that $\\alpha_{\\mathbf F_\\ell}(UV,UW)$ is an isomorphism. Now [lem-kun-flat-coefficient-tensor-exchange-comparison] for $\\mathbf F_\\ell\\to k$ identifies this map with scalar restriction of $\\alpha_k(\\widetilde V,W)$. The scalar-extension first factor agrees with $\\widetilde V$ after pullback by Step 1. Conservativity of that restriction shows that $\\alpha_k(\\widetilde V,W)$ is an isomorphism.",
+   "uses": [
+    "lem-exc-constant-field-module-flat",
+    "lem-kun-kflat-criteria",
+    "def-kun-derived-tensor",
+    "lem-kun-0f1j",
+    "lem-kun-flat-coefficient-tensor-exchange-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, existing prime-field theorem and general coefficient tensor identity"
+   }
+  },
+  {
+   "text": "Use the retract $V\\xrightarrow{s}\\widetilde V\\xrightarrow{t}V$ from Step 7. Naturality of the counit-defined comparison of Step 1 gives $B_k(s)\\alpha_k(V,W)=\\alpha_k(\\widetilde V,W)A_k(s)$ and $B_k(t)\\alpha_k(\\widetilde V,W)=\\alpha_k(V,W)A_k(t)$. Consequently\n$$A_k(t)\\,\\alpha_k(\\widetilde V,W)^{-1}\\,B_k(s)$$\nis an inverse of $\\alpha_k(V,W)$: composing on either side and using these two identities gives respectively $A_k(ts)=1$ and $B_k(ts)=1$. This proves the finite-field case; no division by $[k:\\mathbf F_\\ell]$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade"
+   }
+  },
+  {
+   "text": "The finite filtration of Step 6 and the two-out-of-three argument of Step 1 now prove the comparison for every flat $\\Lambda$-sheaf $\\mathcal E$ and every $\\Lambda$-sheaf $\\mathcal F$. Step 4 proves it for arbitrary bounded-below $F$. Steps 2 and 3 then prove that the original comparison induces an isomorphism in every degree $q$. Its endpoints are bounded below: the original K-flat model is zero below $n$, the model for $F$ and $Rg_*F$ is zero below $b$, so both endpoints are in $D^{\\ge n+b}$ by Step 1. After forgetting coefficients their cohomology-stalk maps are isomorphisms, so [lem-weil-pbc-derived-stalk-conservative] makes the forgotten comparison invertible. The conservative forgetful functor of [lem-kun-unbounded-abelian-exchange-comparison] reflects this invertibility. All reductions used the specified counit map, so this is the map in the statement.",
+   "uses": [
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-inverse-image-monoidal",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sf-derived-homology-long-exact",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-kun-tensor-t-est",
+  "def-weil-size-convention",
+  "lem-kun-0f1m",
+  "def-kun-truncations",
+  "lem-kun-kflat-criteria",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "lem-kun-flat-coefficient-tensor-exchange-comparison",
+  "lem-pur-finite-field-derived-tensor-summand",
+  "lem-exc-constant-field-module-flat",
+  "lem-kun-0f1j",
+  "lem-weil-pbc-derived-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, bounded-below truncation route; generalized finite commutative coefficient ring by ideal-length devissage and the existing finite-field separability retract."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product base change map for etale cohomology is an isomorphism (Kunneth, smooth base change)",
+   "results": "LinearMap.baseChange_eq_ltensor, IsBaseChange.tensorEquiv, TensorProduct.AlgebraTensorModule.cancelBaseChange: module-level base change only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth formula tensor product base change morphism isomorphism for etale sheaves bounded below",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Etale.baseChange: algebra only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'tensorBaseChange|Kunneth|Künneth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorBaseChange\"",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-level etale/base-change or ordinary sheaf functors, not the derived etale tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBaseChange|Kunneth|Künneth",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-level etale/base-change or ordinary sheaf functors, not the derived etale tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived tensor base change bounded below finite ring",
+   "results": "[\"Algebra.Etale.baseChange\", \"RingHom.Etale\", \"Algebra.FormallyEtale.instTensorProduct\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.finiteType_isStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"RingHom.finite_isStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-level etale/base-change or ordinary sheaf functors, not the derived etale tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaves derived tensor base change bounded below finite coefficient ring Tor amplitude",
+   "results": "[\"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.exists_subalgebra_fg\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-level etale/base-change or ordinary sheaf functors, not the derived etale tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth tensor exchange for derived sheaves on the small etale site with finite coefficients",
+   "results": "[\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-level etale/base-change or ordinary sheaf functors, not the derived etale tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "[\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"]",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-level etale/base-change or ordinary sheaf functors, not the derived etale tensor comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary",
+     "lines": [
+      396,
+      430
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/Kunneth/Ordinary.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE"
+  ],
+  "statement": "theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]\n    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}\n    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))\n    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]\n    [QuasiSeparated g] (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)\n    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m n : ℤ)\n    (_hE : DerivedCategory.TStructure.t.IsGE E m)\n    (_hEt : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < n →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (((derivedTensor (ModuleCat.{u + 1} Λ)\n        X).obj E).obj ((DerivedCategory.singleFunctor _ 0).obj M))))\n    (_hF : DerivedCategory.TStructure.t.IsGE F m) :\n    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w\n      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; blueprint form lem-kun-0f1j (Z/n coefficients)"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-kun-tensor-base-change-bounded-below",
+  "worker": "stage1",
+  "group": "Q83",
+  "summary": "Retained the full bounded-below finite-ring statement and the upstream sorry. Followed 0F1J truncations with explicit tail bounds, reused the existing Artinian ideal filtration and finite-field tensor summand, and reduced finite-field comparisons to the existing Z/l theorem by a natural retract. One statement-only general coefficient-mate comparison is new; no elementary ring or splitting nodes were created.",
+  "blueprint": "The input needed in lem-kun-0f1n is proved along main-20261015 lem-kun-0f1j.proof.md: Reduction to a single flat module, Reduction of F, and Reduction to prime torsion. The finite-field case reuses the existing prime-field theorem. lem-kun-0f1j is not same_as this item: it has only Z/n coefficients. The ancestor command returns None for new nodes because this maintainer-created item has no created.item chain; its preserved blueprint.from still points to lem-kun-0f1n.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic derived-category or module-sheaf tool used as a black box on the constant coefficient small etale site; the Kunneth unit provides no independent statement of this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic derived-category or module-sheaf tool used as a black box on the constant coefficient small etale site; the Kunneth unit provides no independent statement of this prerequisite."
+   },
+   {
+    "node": "lem-pur-finite-field-derived-tensor-summand",
+    "why": "Generic finite-field algebra and sheaf tensor splitting tool used as a black box on the constant coefficient small etale site; the Kunneth unit provides no independent statement of this prerequisite."
+   },
+   {
+    "node": "lem-exc-constant-field-module-flat",
+    "why": "Generic derived-category or module-sheaf tool used as a black box on the constant coefficient small etale site; the Kunneth unit provides no independent statement of this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic derived-category or module-sheaf tool used as a black box on the constant coefficient small etale site; the Kunneth unit provides no independent statement of this prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-pur-finite-field-derived-tensor-summand",
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-derived-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-dbe91bc8b",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-dbe91bc8b (reviewer sub-agent of L); spot-checked: I read the item, the new node, every step and all 27 cited statements in full. The item's statement is unchanged and matches the Lean isIso_tensorBaseChangeMap_of_isGE hypothesis by hypothesis: CommRing, Finite Λ, HasInvertibleExponent, sq1 and sq2 cartesian, g qcqs, E and F bounded below, Tor-amplitude hypothesis, tensorBaseChangeMap applied to Lp^*E. Clearing same_as lem-kun-0f1j is right: 0F1J has Z/n coefficients and the item allows any finite Λ. There is no cycle and the item does not cite its citer 0f1n. Steps 2-4 follow Stacks 0F1J (lemma-punctual-base-change-upgrade) and main-20261015 lem-kun-0f1j.proof.md. The bounds are correct: tails zero below N+1+b, comparison identified for q<N+b; quotient C_M zero below M, comparison identified for q<M-1. Step 5: finite implies Artinian, the ideal filtration has simple quotients, m_i is maximal with m_i I_i ⊆ I_{i-1}, and ℓ_i divides the exponent so it is invertible in K. Step 6: the I_iF filtration has quotients killed by m_i. Steps 7 and 9: the separability retract built from the summand element e (μ(e)=1, balancing) gives s k-linear and ts=1, and a retract of an isomorphism is an isomorphism; I checked both by hand. Step 8: every F_ℓ-sheaf is flat, lem-kun-0f1j applies with n=ℓ, and the new node handles the non-surjective F_ℓ→k. New node lem-kun-flat-coefficient-tensor-exchange-comparison: true, because flat M gives the termwise identity M⊗_R UP ≅ U(M_B⊗_B P) and U commutes with Rg_*. It generalizes lem-kun-0f1j-prime-torsion-coefficient-reduction, which Step 8 cannot use since F_ℓ→k is not surjective. It is not a clause of the item (it asserts no invertibility) and is not stated by change-of-rings-tensor, sbc-restrict-scalars-derived-exchange or weil-pbc-flat-coefficient-reduction-adjunct. Tested on R=B, B=0, Z/n→F_ℓ and F_ℓ→F_{ℓ^r}; flatness of M is needed (R=Z/ℓ², M=F_ℓ). Its from.node is null with via=[item], which agrees with the ancestor tool (created.item is null); accepted. I accept all five declared tool_uses as generic tools; every other off-unit citation is Lean-closed or a Mathlib leaf. Batch-5 finding, citation lem-kun-0f1j → lem-pod-etale-stalk-tensor-scalar: that node says the stalk of a sheaf tensor or scalar extension is the tensor of the stalks. It is a general sheaf fact used only to show that F_ℓ-sheaves are flat, not a statement or proof step of Poincaré duality or the trace formula, so it is outside the assumed statements and accepted. No SGA is cited and no fixes were made."
+ }
+}

@@ -1,0 +1,175 @@
+{
+ "id": "lem-route-inverse-image-completed-coefficient-component-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "via": [
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "place": "the finite-stage coefficient components of the inverse-image completed coefficient map are compatible with the quotient transitions, so they define the limit lift used in the inverse-image pullback comparison."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The prescribed components commute with every coefficient reduction.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with its valuation ring and finite quotient rings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $X$ and $Y$ be schemes with small pro-etale sites [def-weil-pbc-proetale-site], and let $g:X\\to Y$ be an isomorphism. For $W=X,Y$, let\n$$\nC_W:\\mathbb N_{\\geq1}^{\\mathrm{op}}\\longrightarrow\\operatorname{Sh}(W_{\\mathrm{proet}},\\mathbf{Ring})\n$$\nbe the inverse system whose value at $n$ is the constant sheaf $(A_{E,n})_W$ and whose arrows are induced by the quotient homomorphisms $A_{E,m}\\to A_{E,n}$; write $\\widehat{\\mathcal O}_{E,W}=\\varprojlim C_W$ and $\\pi^W_n:\\widehat{\\mathcal O}_{E,W}\\to C_W(n)$ for its limit projections [def-weil-completed-integral-coefficients, def-pur-sheaf-inverse-limit]. Let\n$$c_n:g^{-1}C_Y(n)\\longrightarrow C_X(n)\n$$\nbe the canonical constant-section inverse-image map of [def-weil-proetale-inverse-image]. Define the prescribed component\n$$\n\\kappa_n:=g^{-1}(\\pi^Y_n)\\,;\\,c_n:g^{-1}\\widehat{\\mathcal O}_{E,Y}\\longrightarrow C_X(n),\n$$\nwhich is the map denoted `inverseImageCompletedCoefficientComponent l E g (n-1)` in the Lean source (the Lean indexes the system by $m\\in\\mathbf N$ with exponent $m+1$, and realizes $g^{-1}$ and $c_n$ by the sectionwise model of [lem-weil-proetale-isomorphism-inverse-image] for the isomorphism $g$). Then for every morphism $f:a\\to b$ in $\\mathbb N_{\\geq1}^{\\mathrm{op}}$ (so $a\\geq b$),\n$$\n\\kappa_a\\,;\\,C_X(f)=\\kappa_b.\n$$\nEquivalently, the family $(\\kappa_n)_n$ is a cone over the finite coefficient system.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "def-weil-frobenius-point-transport: the Lean of this node (its module Sheaf.SixFunctors.FrobeniusPointTransport imports Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison (1 step)) reaches AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/ProEtale/InverseImagePullbackComparison.lean, declaration AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality (module Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison, lines 85-95, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the site equivalence of [lem-weil-proetale-isomorphism-inverse-image] to obtain the sheafification compatibility isomorphism. Its normalization on constant sections and uniqueness identify its ring-sheaf map with isoSectionwiseConstantMap. Naturality of that isomorphism gives the commuting square for every coefficient-ring morphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-iso-sectionwise-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+   }
+  },
+  {
+   "text": "Apply the constant-coefficient naturality square to each consecutive quotient transition. NatTrans.ofOpSequence assembles the finite coefficient comparisons into a natural transformation of the two inverse sequences.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+   }
+  },
+  {
+   "text": "For an arbitrary arrow of the inverse sequence, combine naturality of this transformation with limit.w. Functor.map_comp identifies the composite of the inverse-image projection and the inverse-image transition with the next inverse-image projection.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-proetale-iso-sectionwise-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+  "place": "Tags 03CO, 00WX and 0H7J; the site-isomorphism specialization of Tag 09A5, with the sectionwise Lean realization written by R1 on 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of inverse-image completed coefficient components and inverse limit projections",
+   "results": "AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.transitionMap_comp_eval; IsAdicComplete.of_comp_lift; AdicCompletion.component_sumInv; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.eval_lift; AdicCompletion.sumInv_apply; AdicCompletion.pi_apply_coe. These are ordinary adic-completion statements and do not state the pro-etale RingCat inverse-image component.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.w, CategoryTheory.Functor.map_comp, isoSectionwiseConstantMap",
+   "results": "0 hits; loogle reports unknown identifier isoSectionwiseConstantMap, which is project-specific.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImageCompletedCoefficientComponent_naturality|limit\\.w|isoSectionwiseConstantMap",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of completed coefficient limit projection commutes with finite coefficient reduction",
+   "results": "AdicCompletion.map_val_apply; AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.pi_apply_coe; AdicCompletion.congr_symm_apply; AdicCompletion.sumEquivOfFintype_symm_apply; IsAdicComplete.of_comp_lift; IsAdicComplete.of_lift; AdicCompletion.sumInv_comp_sum. These concern ordinary module adic completions and do not provide the sheaf-theoretic statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-weil-frobenius-point-transport",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/InverseImagePullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality"
+  ],
+  "statement": "theorem inverseImageCompletedCoefficientComponent_naturality {a b : ℕᵒᵖ} (f : a ⟶ b) :\n    inverseImageCompletedCoefficientComponent l E g a.unop ≫\n        (integralCoefficientSheafSystem l E X).map f =\n      inverseImageCompletedCoefficientComponent l E g b.unop := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-inverse-image-completed-coefficient-component-naturality",
+  "worker": "stage1",
+  "summary": "Replaced the provisional machine-made statement by a self-contained finite-coefficient cone statement matching the Lean theorem. No new nodes were needed: the inverse-limit projection equation is supplied by def-pur-sheaf-inverse-limit, inverse-image and constant-section maps by def-weil-proetale-inverse-image, and coefficient-transition naturality by clause 3 of the existing on-route node lem-weil-proetale-isomorphism-inverse-image (reviewer fix: replaces lem-cbc-finite-constant-map-naturality, which concerns the Cont(pi_0)-coefficient sheaves, not the constant sheaves). The three proof steps derive the component equation by applying inverse image to the limit cone, invoking finite constant-map naturality, and reassociating.",
+  "blueprint": "The steps realize the finite-stage coefficient-component compatibility needed by def-weil-global-geometric-frobenius: limit projections commute with quotient transitions, and the constant-section comparisons are natural in the quotient ring maps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NE-ddb9bdde6",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-ddb9bdde6 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the Lean in InverseImagePullbackComparison.lean and CompletedIntegralCoefficients.lean, Stacks Tags 03CO and 0H7J, and the unit route; the corrected item is in fixes/dag/nodes/sec-six-functors/. The statement is true and is the cone condition the Lean limit.lift needs (g iso, IsIso g); nothing is weakened. (1) Step 2's square was ill-typed and reversed: g^{-1}(C_Y f);c_a does not compose, and the quotient was written A_{E,b}->A_{E,a} although a>=b. Step 3 silently used the right square c_a;C_X(f)=g^{-1}(C_Y f);c_b. (2) C4: lem-cbc-finite-constant-map-naturality is about the Cont(pi_0)-coefficient sheaves of def-weil-pbc-proetale-modules and the c of prop-weil-pbc-proetale-constant-ring-map. It is not about the constant sheaves (A_{E,n})_W or the c^g of def-weil-proetale-inverse-image, so 'says exactly' is false; its Lean is also different. Clause 3 of the on-route node lem-weil-proetale-isomorphism-inverse-image (unit sk-def-sf-admissible, used by the item's unit; reviewed pass) states exactly phi_X c^g_A = c^g_B g^{-1}(phi_Y) for an isomorphism g. FIX: Step 2 is rewritten and cites it, with source Stacks 0H7J; Step 3's uses follow. The lemma is removed from stmt_deps, the new node is added, proof_deps is recomputed and the declared tool_use is dropped (not accepted). (3) Form: the Lean system has value A_{E,m+1} at m in N, so the statement now indexes by N_{>=1}^op with a>=b, names the Lean component (n-1) and notes the Lean's sectionwise model of g^{-1}. The stale Deligne source field is replaced by Stacks 03CO/0H7J plus the Lean declaration. Checked: no cycle; no duplicate in the DAG (rg -L); small cases (identity, adjacent indices, Y empty); no SGA; no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T065147-L-2725865",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientComponent_naturality",
+   "AlgebraicGeometry.ProEtale.inverseImageCompletedCoefficientMap_isIso",
+   "AlgebraicGeometry.ProEtale.inverseImageFiniteComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.inverseImageFinitePullback_exact",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionProduct_lift_condition",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta_compatible",
+   "AlgebraicGeometry.ProEtale.inverseImageReductionTheta_existsUnique",
+   "AlgebraicGeometry.ProEtale.inverseImageResolution_isIso"
+  ],
+  "sorry_after": []
+ }
+}

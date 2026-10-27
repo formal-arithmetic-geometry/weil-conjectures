@@ -1,0 +1,351 @@
+{
+ "id": "lem-trf-valuation-specialization-stalk-model",
+ "kind": "statement",
+ "title": "Local stalk model at a valuation special-fibre component generic point",
+ "statement": "Let $A$ be a valuation domain (an integral domain such that each nonzero element of its fraction field or its inverse belongs to $A$), with fraction field $K$, maximal ideal $\\mathfrak m_A$, residue field $k=A/\\mathfrak m_A$, and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $f:X\\to S$ be locally of finite type [def-weil-finite-type-morphism] and let $\\mathcal F$ be a quasi-coherent finite type $\\mathcal O_X$-module [pqf-def-coherent]. Write $t,s\\in S$ for its generic and closed points. Let $y\\in X_t$, let $Y=\\overline{\\{y\\}}$ with reduced induced integral closed-subscheme structure [def-pc-integral-scheme; lem-weil-pbc-reduced-induced-closed-subscheme], and let $x$ be a generic point [def-sc-generic-point] of an irreducible component [def-weil-irreducible-components] of $Y_s$ [def-pc-scheme-fibre]. Regard $x,y$ as points of $X$, put $B=\\mathcal O_{X,x}$ and $N=\\mathcal F_x$ [def-weil-pbc-module-stalk], and let $\\mathfrak q\\subseteq B$ be the prime corresponding to the generalization $y$ of $x$. Then $A\\to B$ is a local homomorphism essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], $N$ is finite [def-weil-finitely-generated-module], $\\mathfrak q\\cap A=(0)$, and $\\sqrt{\\mathfrak q+\\mathfrak m_AB}=\\mathfrak m_B$. Here $\\sqrt I=\\{b\\mid b^n\\in I\\text{ for some }n\\geq1\\}$. Put $B_K=B\\otimes_AK$, $N_K=N\\otimes_AK$ [def-weil-pbc-module-tensor-product], $\\mathfrak q_K=\\mathfrak qB_K$, $R=B/\\mathfrak m_AB$, $L=N/\\mathfrak m_AN$, $T=(B_K)_{\\mathfrak q_K}$ and $P=(N_K)_{\\mathfrak q_K}$ [def-weil-pbc-module-localization]. Writing $\\mathcal F_r=i_r^*\\mathcal F$ on $X_r$ for $r=s,t$ [def-pc-module-pullback], there are canonical compatible ring and module identifications $R\\cong\\mathcal O_{X_s,x}$, $L\\cong(\\mathcal F_s)_x$, $T\\cong\\mathcal O_{X_t,y}$ and $P\\cong(\\mathcal F_t)_y$. The ring $R$ is Noetherian [def-weil-pbc-noetherian-ring] and $L$ is finite over $R$. Under these identifications, $x\\in\\operatorname{Ass}_{X/S}(\\mathcal F)$ if and only if $\\mathfrak m_R\\in\\operatorname{Ass}_R(L)$, and $y\\in\\operatorname{Ass}_{X/S}(\\mathcal F)$ if and only if $\\mathfrak m_T\\in\\operatorname{Ass}_T(P)$ [def-trf-relative-assassin; def-weil-pbc-annihilator-associated-primes].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), third proof paragraph: A to B, the closed-fibre stalk quotients, the prime q and its radical condition, and the two generic-fibre stalk localizations."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-pc-module-pullback",
+  "def-trf-relative-assassin",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}C$ of $x$ with $C$ a finite type $A$-algebra, using the affine cover in the definition of locally finite type. Write $\\mathfrak p\\subset C$ for $x$. The affine stalk comparison gives $B=C_{\\mathfrak p}$, so $A\\to B$ is essentially of finite type by its definition. Since $f(x)=s$, the stalk map is local; its source is $\\mathcal O_{S,s}=A_{\\mathfrak m_A}=A$ (elements outside $\\mathfrak m_A$ are already units). The finite-type module stalk lemma gives that $N=\\mathcal F_x$ is finite over $B$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-finite-type-module-stalk-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI (lemma-associated-point-specializes), third proof paragraph, local ring and module setup; schemes.tex Tag 01HV (lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Because $x\\in\\overline{\\{y\\}}$, every open containing $x$ contains $y$; in particular $y\\in U$. Let $\\mathfrak q_0\\subset C$ represent $y$. Then $\\mathfrak q_0\\subseteq\\mathfrak p$: if $c\\in\\mathfrak q_0\\setminus\\mathfrak p$, the open $D(c)$ would contain $x$ but not $y$. The localization-spectrum embedding gives the unique prime $\\mathfrak q=\\mathfrak q_0C_{\\mathfrak p}$ of $B$ corresponding to $y$. The canonical local-spectrum morphism identifies it with the generalization in the statement. Its contraction to $A$ is zero, because its contraction to $C$ is $\\mathfrak q_0$ and the image of $y$ in $\\operatorname{Spec}A$ is the prime $(0)$.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J7 (lemma-specialize-points), proof, and Tag 01J6 (lemma-morphism-from-spec-local-ring); algebra.tex Tag 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "Apply the fibre-stalk quotient lemma to $f$ at $x$, using $\\mathcal O_{S,s}=A$. It gives the canonical isomorphism $R=B/\\mathfrak m_AB\\cong\\mathcal O_{X_s,x}$ induced by the fibre projection $i_s$. The pullback-stalk lemma then gives $(i_s^*\\mathcal F)_x\\cong N\\otimes_B R$. The quotient-tensor isomorphism (with the symmetry of tensor products) identifies this with $L=N/\\mathfrak m_AN$, sending the class of a germ $n$ to $n\\otimes1$. Thus the ring and module comparisons are compatible with scalar multiplication and the pullback of germs. No flatness of $\\mathcal F$ is used.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI (lemma-associated-point-specializes), third proof paragraph, closed-fibre stalks; schemes.tex Tag 0HA1 (lemma-local-ring-fibre), sheaves.tex Tag 0098 (lemma-stalk-pullback-modules), algebra.tex Tag 00DF (lemma-tensor-product-exact)."
+   }
+  },
+  {
+   "text": "The local essentially finite type map of step 1 satisfies the hypotheses of the valuation closed-fibre Noetherian lemma, so $R$ is Noetherian. If $n_1,\\ldots,n_d$ generate $N$ over $B$, their classes generate $L$ over $R$: the equality $n=\\sum b_i n_i$ passes to $\\bar n=\\sum\\bar b_i\\bar n_i$. Hence $L$ is finite over $R$, including when $N=0$.",
+   "uses": [
+    "lem-trf-valuation-closed-fibre-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG (lemma-mod-injective-valuation-ring), second proof paragraph, Noetherianity of the closed-fibre ring and finiteness of the quotient module."
+   }
+  },
+  {
+   "text": "In $U$, the closure of $y$ is $V(\\mathfrak q_0)$: it is the smallest closed set containing $\\mathfrak q_0$, since $\\mathfrak q_0\\in V(J)$ means $J\\subseteq\\mathfrak q_0$. The reduced induced structure therefore identifies $Y\\cap U$ with $\\operatorname{Spec}(C/\\mathfrak q_0)$. The affine fibre-product and quotient-tensor formulas identify its special fibre with $\\operatorname{Spec}(C/I)$, where $I=\\mathfrak q_0+\\mathfrak m_AC$. The component of $Y_s$ with generic point $x$ remains a component after intersection with this open: an irreducible closed set in the open strictly containing that intersection would have irreducible closure in $Y_s$ strictly containing the original component. The spectrum-component/minimal-prime correspondence, applied to $C/I$, now says that $\\mathfrak p$ is minimal over $I$. The minimal-prime localization radical lemma gives $\\sqrt{IC_{\\mathfrak p}}=\\mathfrak pC_{\\mathfrak p}$. Since $IC_{\\mathfrak p}=\\mathfrak q+\\mathfrak m_AB$ and $\\mathfrak pC_{\\mathfrak p}=\\mathfrak m_B$, this is the required radical equality.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-minimal-prime-localization-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI (lemma-associated-point-specializes), third proof paragraph, radical assertion; schemes.tex Tags 01J3 (lemma-reduced-closed-subscheme), 01I4 (lemma-fibre-product-affine-schemes); algebra.tex Tag 00ES (lemma-irreducible), part (3)."
+   }
+  },
+  {
+   "text": "Put $M=\\mathcal F(U)$. The affine module germ-localization lemma identifies $N$ with $M_{\\mathfrak p}$ and $\\mathcal F_y$ with $M_{\\mathfrak q_0}$, compatibly with the ring germ localizations $C_{\\mathfrak p}=B$ and $C_{\\mathfrak q_0}=\\mathcal O_{X,y}$. Localizing again at $\\mathfrak q=\\mathfrak q_0B$ gives $B_{\\mathfrak q}\\cong C_{\\mathfrak q_0}$ and $N_{\\mathfrak q}\\cong M_{\\mathfrak q_0}$. Explicitly the ring comparison sends $(c/u)/(d/v)$ to $cv/(ud)$, and the module comparison sends $(m/u)/(d/v)$ to $vm/(ud)$, where $u,v\\notin\\mathfrak p$ and $d\\notin\\mathfrak q_0$. Inverses send $c/d$ and $m/d$ to $(c/1)/(d/1)$ and $(m/1)/(d/1)$. The fraction equivalence relation verifies that these maps are well-defined and inverse; both send germs to the corresponding fractions. Thus $\\mathcal O_{X,y}=B_{\\mathfrak q}$ and $\\mathcal F_y=N_{\\mathfrak q}$ with compatible scalars.",
+   "uses": [
+    "lem-sbc-affine-module-germ-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), parts (6),(7), and Tag 01IB (lemma-quasi-coherent-affine-equivalence); algebra.tex Tag 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "Set $S=A\\setminus\\{0\\}$. Since $K=S^{-1}A$, localization over the base identifies $B_K$ with $S^{-1}B$ and $N_K$ with $S^{-1}N$ (apply the cited tensor-localization lemma with intermediate algebra $A$, module $A$, and second module $B$ or $N$, then use tensor symmetry). By $\\mathfrak q\\cap A=0$, the images of $S$ avoid $\\mathfrak q$, so the spectrum-localization correspondence makes $\\mathfrak q_K=S^{-1}\\mathfrak q$ prime. Localizing at it inverts exactly the elements needed for $B_{\\mathfrak q}$. The canonical comparisons are $(b/a)/(c/d)\\mapsto db/(ac)$ and $(n/a)/(c/d)\\mapsto dn/(ac)$, with $a,d\\in S$, $c\\notin\\mathfrak q$; their inverses are $b/c\\mapsto(b/1)/(c/1)$ and $n/c\\mapsto(n/1)/(c/1)$. Hence $T=B_{\\mathfrak q}$ and $P=N_{\\mathfrak q}$. On the other hand $\\mathcal O_{S,t}=K$ with maximal ideal zero. Applying the fibre-stalk quotient lemma at $y$ gives $\\mathcal O_{X_t,y}=\\mathcal O_{X,y}$, and pullback on module stalks gives $(\\mathcal F_t)_y=\\mathcal F_y\\otimes_{\\mathcal O_{X,y}}\\mathcal O_{X,y}=\\mathcal F_y$. Combining with step 6 gives the required generic-fibre identifications; all maps agree on germs and scalar fractions.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI (lemma-associated-point-specializes), third proof paragraph, final generic-fibre localizations; schemes.tex Tag 0HA1 (lemma-local-ring-fibre); algebra.tex Tags 00DK (lemma-tensor-localization), 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "By the definition of relative assassin, membership of $x$ (respectively $y$) is association of its unique point in $X_s$ (respectively $X_t$), and association means that the maximal ideal of the fibre local ring is the annihilator of some stalk element. The compatible isomorphisms of steps 3 and 7 send maximal ideals to maximal ideals and element annihilators to element annihilators: $a v=0$ if and only if its image scalar kills the image of $v$. They therefore give exactly $\\mathfrak m_R\\in\\operatorname{Ass}_R(L)$ and $\\mathfrak m_T\\in\\operatorname{Ass}_T(P)$, respectively.",
+   "uses": [
+    "def-trf-relative-assassin",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02OJ (definition-associated), 05AT (definition-relative-assassin); specialization as used in more-morphisms.tex Tag 0GSI (lemma-associated-point-specializes)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-relative-assassin",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-trf-valuation-closed-fibre-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-module-stalk-finite",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-minimal-prime-localization-radical",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), third proof paragraph; the stalk and radical calculations are expanded using the Stacks results cited in the individual steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over a valuation ring localize at a special fibre component generic point of a point closure: closed fibre stalk quotient and radical prime plus base maximal ideal equals maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(R : CommRingCat) → [inst : IsLocalRing ↑R] → (AlgebraicGeometry.Spec R).presheaf.stalk (IsLocalRing.closedPoint ↑R) ≅ R\", \"doc\": \"The stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ is isomorphic to $ R $ itself. This isomorphism is constructed by composing the canonical isomorp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"Let $X$ be a scheme and $x$ a point in its underlying topological space. Let $\\\\mathcal{O}_{X,x}$ be the local ring at $x$, and let $k(x)$ be its residue field. The residue map is the canonical project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y).base) x =\\n    IsLocalRing.closedPoint ↑(Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to \\\\kappa(x)$ m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X},\\n  (CategoryTheory.ConcreteCategory.hom (X.fromSpecStalk x).base) (IsLocalRing.closedPoint ↑(X.presheaf.stalk x)) = x\", \"doc\": \"For any point $x$ in a scheme $X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ induced by the stalk at $x$ maps the unique closed point of the spectrum $\\\\operatorname{Spec}(\\\\mathcal{O}\"}\n  {\"name\": \"IsLocalRing.PrimeSpectrum.comap_residue\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (T : Type u) [inst : CommRing T] [inst_1 : IsLocalRing T] (x : PrimeSpectrum (IsLocalRing.ResidueField T)),\\n  PrimeSpectrum.comap (IsLocalRing.residue T) x = IsLocalRing.closedPoint T\", \"doc\": \"For any commutative local ring $ T $, the preimage of a prime ideal $ x $ in the prime spectrum of its residue field under the residue map is equal to the unique maximal ideal (closed point) of $ T $.\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ↑((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).snd = AlgebraicGeometry.Scheme.stalkClosedPointTo f\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the second component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi : \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).fst =\\n    (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the first component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi: \\\\mathca\"}\nAssessment: The closed-point stalk, residue-field and essentially-finite-type stalk lemmas cover individual parts only; no hit gives the two fibre module identifications together with the component-induced radical equality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsLocalization",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: The closed-point stalk, residue-field and essentially-finite-type stalk lemmas cover individual parts only; no hit gives the two fibre module identifications together with the component-induced radical equality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(fiber|fibre)|(?:fiber|fibre).*stalk|radical.*maximal",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"260\", \"text\": \"def stalkToFiberRingHom (x : ProjectiveSpectrum.top 𝒜) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"269\", \"text\": \"theorem germ_comp_stalkToFiberRingHom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"271\", \"text\": \"    (Proj.structureSheaf 𝒜).presheaf.germ U x hx ≫ stalkToFiberRingHom 𝒜 x =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"276\", \"text\": \"theorem stalkToFiberRingHom_germ (U : Opens (ProjectiveSpectrum.top 𝒜))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"278\", \"text\": \"    stalkToFiberRingHom 𝒜 x ((Proj.structureSheaf 𝒜).presheaf.germ _ x hx s) = s.1 ⟨x, hx⟩ :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"731\", \"text\": \"theorem toStalkₗ'_stalkToFiberRingHom (x : PrimeSpectrum.Top R) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"766\", \"text\": \"      elementwise_of% toStalkₗ'_stalkToFiberRingHom (M := M) x]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"776\", \"text\": \"theorem stalkToFiberRingHom_localizationToStalk (x : PrimeSpectrum.Top R) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"781\", \"text\": \"theorem localizationToStalk_stalkToFiberRingHom (x : PrimeSpectrum.Top R) :\"}\nAssessment: The closed-point stalk, residue-field and essentially-finite-type stalk lemmas cover individual parts only; no hit gives the two fibre module identifications together with the component-induced radical equality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local ring of fibre at point is quotient stalk by base maximal ideal and specialization closure component radical criterion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.residueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the residue field at $ x $ is the quotient of the local ring $ \\\\mathcal{O}_{X,x} $ (the stalk of the structure sheaf at $ x $) by its unique maximal ideal, \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : X.presheaf.obj (op ⊤) ⟶ X.residueField x\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x : X) : IsLocalRing (X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}\n  {\"name\": \"smoothSheafCommRing.instLocalRing_stalk\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.LocallyRingedSpace\", \"type\": \"(x : M) : IsLocalRing ((smoothSheafCommRing IM 𝓘(𝕜) M 𝕜).presheaf.stalk x)\", \"doc\": \"For any point $ x $ in the manifold $ M $, the stalk of the smooth sheaf commutative ring at $ x $ is a local ring. This means the stalk has a unique maximal ideal, corresponding to the germs of smoot\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ (self : AlgebraicGeometry.LocallyRingedSpace) (x : ↑↑self.toPresheafedSpace), IsLocalRing ↑(self.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$, the stalk of its structure sheaf $\\\\mathcal{O}_X$ at every point $x \\\\in X$ is a local ring, i.e., a commutative ring with a unique maximal ideal.\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\nAssessment: The closed-point stalk, residue-field and essentially-finite-type stalk lemmas cover individual parts only; no hit gives the two fibre module identifications together with the component-induced radical equality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially finite type local ring and finite sheaf stalk model at generic point of special fibre of an integral closure of a generic fibre point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n  {\"name\": \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] {x : ↥X}, IsDomain ↑(X.presheaf.stalk x)\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf of $X$ at $x$ is an integral domain. This follows from the fact that an integral scheme is both irreducible and r\"}\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}\n  {\"name\": \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] [Algebra.IsIntegral R S]\\n  [Algebra.FiniteType R T] (s : S) [IsLocalization.Away s T], Algebra.Q\", \"doc\": \"If $ S $ is an integral $ R $-algebra, $ T $ is a finitely generated $ R $-algebra, and $ T $ is the localization of $ S $ at the powers of some element $ s \\\\in S $, then $ T $ is a quasi-finite $ R $\"}\n  {\"name\": \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (x : ↥X) → Algebra ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and any point $x$ in $X$, the function field of $X$ is equipped with an algebra structure over the stalk of the structure sheaf at $x$. This algebra is defined via the sp\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\nAssessment: The closed-point stalk, residue-field and essentially-finite-type stalk lemmas cover individual parts only; no hit gives the two fibre module identifications together with the component-induced radical equality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local stalk model for a finite type scheme over a valuation ring: special fibre stalk is quotient by the maximal ideal and generic fibre stalk is localization at a generalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {R : CommRingCat} →\\n    [inst : IsLocalRing ↑R] →\\n      (f : AlgebraicGeometry.Spec R ⟶ X) →\\n        X.presheaf.stalk ((CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)) ⟶ R\", \"doc\": \"The morphism from the stalk of the structure sheaf at the closed point of $\\\\operatorname{Spec}(R)$ to $R$, constructed by composing the stalk map induced by a scheme morphism $f$ with the canonical is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  IsLocalHom (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.stalkClosedPointTo f))\", \"doc\": \"The morphism from the stalk of the structure sheaf at the closed point of $\\\\operatorname{Spec}(R)$ to $R$ is a local homomorphism, meaning it preserves the local ring structure by mapping the maximal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : Type u} [inst : CommRing R] [inst_1 : IsLocalRing R]\\n  (f : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ X),\\n  IsLocalHom (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.stalkClosedPointTo f))\", \"doc\": \"For a local ring $ R $ and a morphism $ f : \\\\operatorname{Spec}(R) \\\\to X $ to a scheme $ X $, the induced ring homomorphism from the stalk of the structure sheaf at the closed point of $ \\\\operatorname\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ↑((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).snd = AlgebraicGeometry.Scheme.stalkClosedPointTo f\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the second component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi : \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalk y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x))\\n      ((CategoryTheory.ConcreteCat\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in its prime spectrum $ \\\\operatorname{Spec}(R) $ such that $ x $ specializes to $ y $, the composition of the specialization-induced morphism from the \"}\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(R : CommRingCat) → [inst : IsLocalRing ↑R] → (AlgebraicGeometry.Spec R).presheaf.stalk (IsLocalRing.closedPoint ↑R) ≅ R\", \"doc\": \"The stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ is isomorphic to $ R $ itself. This isomorphism is constructed by composing the canonical isomorp\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType { carrier := Localization.AtPrime y.asIdeal, commRing := OreLocalization.instCommRing }),\\n  (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecialize\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in $\\\\operatorname{Spec}(R)$ where $ x $ specializes to $ y $, the composition of the specialization-induced morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → X.presheaf.stalk x ⟶ X.residueField x\", \"doc\": \"The canonical ring homomorphism from the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\\\mathcal{O}_{X,x}$ by its unique\"}\nAssessment: The hits give individual affine stalk, specialization, or restriction comparisons only. None states this valuation-specialization model with its component radical condition and both compatible module fibre identifications.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(fiber|fibre)|(?:fiber|fibre).*stalk|radical.*maximal",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"260\", \"text\": \"def stalkToFiberRingHom (x : ProjectiveSpectrum.top 𝒜) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"269\", \"text\": \"theorem germ_comp_stalkToFiberRingHom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"271\", \"text\": \"    (Proj.structureSheaf 𝒜).presheaf.germ U x hx ≫ stalkToFiberRingHom 𝒜 x =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"276\", \"text\": \"theorem stalkToFiberRingHom_germ (U : Opens (ProjectiveSpectrum.top 𝒜))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"line\": \"278\", \"text\": \"    stalkToFiberRingHom 𝒜 x ((Proj.structureSheaf 𝒜).presheaf.germ _ x hx s) = s.1 ⟨x, hx⟩ :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"731\", \"text\": \"theorem toStalkₗ'_stalkToFiberRingHom (x : PrimeSpectrum.Top R) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"766\", \"text\": \"      elementwise_of% toStalkₗ'_stalkToFiberRingHom (M := M) x]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"776\", \"text\": \"theorem stalkToFiberRingHom_localizationToStalk (x : PrimeSpectrum.Top R) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"781\", \"text\": \"theorem localizationToStalk_stalkToFiberRingHom (x : PrimeSpectrum.Top R) :\"}\nAssessment: The hits give individual affine stalk, specialization, or restriction comparisons only. None states this valuation-specialization model with its component radical condition and both compatible module fibre identifications.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsLocalization",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: The hits give individual affine stalk, specialization, or restriction comparisons only. None states this valuation-specialization model with its component radical condition and both compatible module fibre identifications.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalks of the generic and closed fibres of a quasi coherent finite type module over a valuation ring are localization and quotient modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R), \\\\mathfrak{p}} $ of the structure sheaf at $ \\\\mathfrak{p} $ is canonically i\"}\n  {\"name\": \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) (m : M) : (stalkToFiberLinearMap M x).hom (toStalk M x m) = LocalizedModule.mk m 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ (viewed as a point $ x \\\\in \\\\operatorname{Spec}(R) $), the canonical morphism from the stalk $ \\\\widetilde{M}_x $ \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum R) : IsIso (stalkToFiberRingHom R x)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the ring homomorphism from the stalk $ \\\\mathcal{O}_x $ of the structure sheaf at $ x $ to the localizat\"}\n  {\"name\": \"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) : IsLocalizedModule x.asIdeal.primeCompl (toStalk M x).hom\", \"doc\": \"For a prime ideal $ \\\\mathfrak{p} $ in the prime spectrum of a commutative ring $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at $ \\\\mathfrak{p} $ is the localization of the module $ M $ at the multip\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : (structureSheaf R).presheaf.stalk x ≅ CommRingCat.of (Localization.AtPrime x.asIdeal)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x} $ of the structure sheaf at $ x $ is isomorphic to t\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso_hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  (ModuleCat.Tilde.stalkIso M x).hom = ModuleCat.Tilde.stalkToFiberLinearMap M x\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\nAssessment: The hits give individual affine stalk, specialization, or restriction comparisons only. None states this valuation-specialization model with its component radical condition and both compatible module fibre identifications.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a point y specializing to x on a finite type scheme over a local domain, local rings of the fibres and quasi coherent module stalks are computed by quotient and successive localization; component genericity makes the extended prime primary to the maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalk y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x))\\n      ((CategoryTheory.ConcreteCat\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in its prime spectrum $ \\\\operatorname{Spec}(R) $ such that $ x $ specializes to $ y $, the composition of the specialization-induced morphism from the \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) {Z : CommRingCat}\\n  (h_1 : { carrier := Localization.AtPrime x.asIdeal, commRing := OreLocalization.instCommRing } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes \", \"doc\": \"For a commutative ring $ R $, points $ x, y $ in $ \\\\operatorname{Spec}(R) $ with $ x $ specializing to $ y $, and a ring homomorphism $ h_1 $ from the localization at $ x $ to a commutative ring $ Z $\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes h)\\n      (AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicG\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in its prime spectrum $ \\\\operatorname{Spec}(R) $ where $ x $ specializes to $ y $, the composition of the specialization-induced morphism between stalk\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType { carrier := Localization.AtPrime y.asIdeal, commRing := OreLocalization.instCommRing }),\\n  (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecialize\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in $\\\\operatorname{Spec}(R)$ where $ x $ specializes to $ y $, the composition of the specialization-induced morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.localizationToStalk R y)\\n      ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes h) =\\n    CategoryTheory.CategoryStruct.comp (CommRingCa\", \"doc\": \"Given a commutative ring $ R $, prime ideals $ \\\\mathfrak{p} $ and $ \\\\mathfrak{q} $ in $ \\\\operatorname{Spec}(R) $ with $ \\\\mathfrak{p} $ specializing to $ \\\\mathfrak{q} $, the composition of the canonica\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType { carrier := R, commRing := inst }),\\n  (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes h))\\n      ((CategoryTheory.ConcreteCategory.hom (Al\", \"doc\": \"For a commutative ring $ R $ and points $ x,y $ in $ \\\\operatorname{Spec}(R) $ with $ x $ specializing to $ y $, the composition of the specialization-induced morphism $ \\\\mathcal{O}_{\\\\operatorname{Spec\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toStalk R y)\\n      ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes h) =\\n    AlgebraicGeometry.StructureSheaf.toStalk R x\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in $ \\\\operatorname{Spec}(R) $ where $ x $ specializes to $ y $, the composition of the canonical ring homomorphism $ R \\\\to \\\\mathcal{O}_{\\\\operatorname{S\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) {Z : CommRingCat}\\n  (h_1 : (AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.localizationToStalk R y)\\n      (CategoryTheory.CategoryStruct.co\", \"doc\": \"For a commutative ring $R$, points $x, y$ in its prime spectrum $\\\\operatorname{Spec}(R)$ with $x$ specializing to $y$, and any morphism $h_1$ from the stalk $\\\\mathcal{O}_{\\\\operatorname{Spec}(R),x}$ to\"}\nAssessment: The hits give individual affine stalk, specialization, or restriction comparisons only. None states this valuation-specialization model with its component radical condition and both compatible module fibre identifications.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-relative-associated-specialization",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. Tag 0GSI (lemma-associated-point-specializes), third proof paragraph: A to B, the closed-fibre stalk quotients, the prime q and its radical condition, and the two generic-fibre stalk localizations.",
+   "via": [
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-valuation-specialization-stalk-model",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0GSI local calculation in eight steps using existing DAG tools only; checked all quoted statements, noetherian hypotheses and compatibility on germs. No new nodes or changes of statement. Recorded fresh item searches in all four services, including a second semantic phrasing.",
+  "blueprint": "lem-trf-local-term-locality, proof (1)--(2), semistable-alteration/nearby-cycle branch, via the existing valuation specialization chain: realizes the complete local-stalk-model input of Tag 0GSI, third proof paragraph. The unit sk-i-curve-zero and its route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Canonical local-spectrum comparison identifies the generalization prime; used as a generic scheme tool, with no replacement of this unit's geometric route."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "The general fibre local-ring quotient formula is used at x and y; the unit has no general fibre-stalk lemma without extra finite-presentation or flatness hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "General module pullback-stalk tensor formula supplies the fibre module comparison without flatness; the unit does not supply this general tool."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Affine quasi-coherent germs are localizations for arbitrary rings; used only for the generalization module comparison, not as a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "General affine construction of the reduced closure identifies Y on a chart; no new geometric argument replaces the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-stalk-finite",
+    "why": "General finite-type module stalk finiteness is applied once to F at x; it is a generic sheaf tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-finite-type-module-stalk-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-e4c0138eb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-e4c0138eb (reviewer sub-agent of L); spot-checked: I read Stacks 0GSI (more-morphisms.tex lines 5167-5252, third proof paragraph), the item and every cited statement. There are no new nodes. The statement matches the source's local identifications: A->B=O_{X,x} local and essentially of finite type, N finite, q∩A=0, √(q+m_AB)=m_B, R≅O_{X_s,x}, L≅(F_s)_x, T≅O_{X_t,y}, P≅(F_t)_y, plus the association equivalences. No flatness is assumed or needed. Step checks: (1) a finite-type affine chart plus affine-open-stalk-localization(c) gives B=C_p; O_{S,s}=A; the finite-type stalk lemma uses the same finite-type notion as pqf-def-coherent. (2) The D(c) argument gives q0⊆p; the localization embedding gives q=q0C_p; q∩A=0 because f(y) is the generic point. (3) The fibre-stalk quotient (any morphism), the pullback-stalk formula and tensor-over-quotient(1) give compatible ring and module comparisons. (4) closed-fibre-noetherian's hypotheses hold from step 1, and L is finite by images of generators. (5) Y∩U=Spec C/q0 (q0 radical), its special fibre is Spec C/(q0+m_AC), the component stays a component of the open, p is minimal over I, and the minimal-prime-localization radical has no Noetherian hypothesis. (6) and (7) Affine germ localization and tensor-localization-over-base with R=A, M=A give S^{-1}B≅K⊗B, and S^{-1}q is prime because q∩A=0. With m_t=0, O_{X_t,y}=O_{X,y}, and the explicit double-localization maps give T=B_q and P=N_q. (8) The relative-assassin and element-annihilator definitions transfer under compatible isomorphisms (elementary). Edge cases: A a field, A=Z_(p) with X=A[T] and y=(T), y=(pT-1) (empty Y_s), F=0, higher-rank A. proof_deps equals the union of uses; no cycle (130-node closure); 10 recorded searches cover all kinds. I accept all six declared tool_uses: spec-local-ring-canonical-morphism, scheme-fibre-stalk-quotient, module-stalk-pullback, affine-module-germ-localization, reduced-induced-closed-subscheme and finite-type-module-stalk-finite, all generic black boxes. Duplicate search: valuation-associated-local-algebra (assumes flat N), flat-association-stalk-dictionary (needs a Noetherian base and flatness), finite-presentation-stalk-fibre-data (needs finite presentation) and valuative-fibre-component-lift (the reduction step); none states the item. No repair note, no SGA, no changes. The citer lem-trf-flat-relative-associated-specialization step 3 gets everything it uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationSpecializationStalkModel",
+  "declaration": "AlgebraicGeometry.ValuationSpecialization.valuation_specialization_stalk_model",
+  "declarations": [
+   "AlgebraicGeometry.ValuationSpecialization.baseMap",
+   "AlgebraicGeometry.ValuationSpecialization.stalk",
+   "AlgebraicGeometry.ValuationSpecialization.closedIdeal",
+   "AlgebraicGeometry.ValuationSpecialization.closedRing",
+   "AlgebraicGeometry.ValuationSpecialization.closedModule",
+   "AlgebraicGeometry.ValuationSpecialization.genericRing",
+   "AlgebraicGeometry.ValuationSpecialization.genericInclusion",
+   "AlgebraicGeometry.ValuationSpecialization.genericModule",
+   "AlgebraicGeometry.ValuationSpecialization.genericLocalizedModule",
+   "AlgebraicGeometry.ValuationSpecialization.fibreGerm",
+   "AlgebraicGeometry.ValuationSpecialization.valuation_specialization_stalk_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationSpecializationStalkModel.lean",
+  "statement": "theorem valuation_specialization_stalk_model {A : Type u} [CommRing A] [IsDomain A] [ValuationRing A] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [LocallyOfFiniteType f] (F : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (y x : X) (hy : (f y).asIdeal = ⊥) (hx : f x = IsLocalRing.closedPoint A) (hcomponent : ∃ (C : Set (((Scheme.IdealSheafData.vanishingIdeal ⟨closure {y}, isClosed_closure⟩).subschemeι ≫ f).fiber (IsLocalRing.closedPoint A))) (z : ((Scheme.IdealSheafData.vanishingIdeal ⟨closure {y}, isClosed_closure⟩).subschemeι ≫ f).fiber (IsLocalRing.closedPoint A)), C ∈ irreducibleComponents (((Scheme.IdealSheafData.vanishingIdeal ⟨closure {y}, isClosed_closure⟩).subschemeι ≫ f).fiber (IsLocalRing.closedPoint A)) ∧ IsGenericPoint z C ∧ (Scheme.IdealSheafData.vanishingIdeal ⟨closure {y}, isClosed_closure⟩).subschemeι (((Scheme.IdealSheafData.vanishingIdeal ⟨closure {y}, isClosed_closure⟩).subschemeι ≫ f).fiberι (IsLocalRing.closedPoint A) z) = x) : IsLocalHom (baseMap f x) ∧ (baseMap f x).EssFiniteType ∧ Module.Finite (X.presheaf.stalk x) (stalk F x) ∧ ∃ q : PrimeSpectrum (X.presheaf.stalk x), (X.fromSpecStalk x) q = y ∧ q.asIdeal.comap (baseMap f x) = ⊥ ∧ (q.asIdeal ⊔ closedIdeal f x).radical = IsLocalRing.maximalIdeal (X.presheaf.stalk x) ∧ IsNoetherianRing (closedRing f x) ∧ Module.Finite (closedRing f x) (closedModule f F x) ∧ ∃ (eR : closedRing f x ≃+* (f.fiber (f x)).presheaf.stalk (f.asFiber x)) (eL : closedModule f F x ≃+ stalk ((Scheme.Modules.tensorPullback (f.fiberι (f x))).obj F) (f.asFiber x)), (∀ b, eR (Ideal.Quotient.mk (closedIdeal f x) b) = ((X.presheaf.stalkCongr (.of_eq (f.fiberι_asFiber x))).inv ≫ (f.fiberι (f x)).stalkMap (f.asFiber x)).hom b) ∧ (∀ r m, eL (r • m) = eR r • eL m) ∧ (∀ (U : X.Opens) (hxU : x ∈ U) (m : F.val.obj (op U)), eL (Submodule.Quotient.mk (TopCat.Presheaf.germ F.val.presheaf U x hxU m)) = fibreGerm f F x U hxU m) ∧ (x ∈ Scheme.Modules.relativeAssassin f F ↔ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map (Ideal.Quotient.mk (closedIdeal f x)) ∈ RingTheory.annihilatorAssociatedPrimes (closedRing f x) (closedModule f F x)) ∧ ∃ qK : PrimeSpectrum (genericRing f x), qK.asIdeal = q.asIdeal.map (genericInclusion f x) ∧ ∃ (eT : Localization.AtPrime qK.asIdeal ≃+* (f.fiber (f y)).presheaf.stalk (f.asFiber y)) (eP : genericLocalizedModule f F x qK ≃+ stalk ((Scheme.Modules.tensorPullback (f.fiberι (f y))).obj F) (f.asFiber y)), (∀ r m, eP (r • m) = eT r • eP m) ∧ (∀ (U : X.Opens) (hxU : x ∈ U) (hyU : y ∈ U) (b : Γ(X, U)), eT (algebraMap (genericRing f x) (Localization.AtPrime qK.asIdeal) (genericInclusion f x (X.presheaf.germ U x hxU b))) = ((X.presheaf.stalkCongr (.of_eq (f.fiberι_asFiber y))).inv ≫ (f.fiberι (f y)).stalkMap (f.asFiber y)).hom (X.presheaf.germ U y hyU b)) ∧ (∀ (U : X.Opens) (hxU : x ∈ U) (hyU : y ∈ U) (m : F.val.obj (op U)), eP (LocalizedModule.mk ((1 : genericRing f x) ⊗ₜ[X.presheaf.stalk x, genericInclusion f x] (TopCat.Presheaf.germ F.val.presheaf U x hxU m)) 1) = fibreGerm f F y U hyU m) ∧ (y ∈ Scheme.Modules.relativeAssassin f F ↔ IsLocalRing.maximalIdeal (Localization.AtPrime qK.asIdeal) ∈ RingTheory.annihilatorAssociatedPrimes (Localization.AtPrime qK.asIdeal) (genericLocalizedModule f F x qK))",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Maintainer FIX (review of bbba3154): the two fibre-projection normalizations (eR on quotient classes, eT on germs) inline the body of Scheme.Hom.fiberStalkMap (stalkCongr transport along fiberι_asFiber, then the stalk map of fiberι), since that declaration is owned by def-trf-fibre-stalk-map / lem-sbc-scheme-fibre-stalk-quotient, which are not statement dependencies; FibreStalkQuotient becomes a plain proof import and Mathlib.AlgebraicGeometry.Fiber is publicly imported. The meaning is unchanged. The generic module is encoded as (B ⊗[A] K) ⊗[B] N, canonically N ⊗[A] K; the tensor-pullback unit is the section-pinned Classical.choose of exists_tensorPullbackAdjunction (unique unit).",
+  "fixed_by": "NT-stage2-cc-bbba31546"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbba31546",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Statement checked against node and Stacks 0GSI third paragraph: valuation domain any rank, LocallyOfFiniteType, IsQuasiCoherentFiniteType; y generic-fibre via (f y)=⊥; Y = vanishingIdeal(closure{y}).subscheme; x = image of generic point of an irreducible component of Y_s (hx redundant, not stronger); IsLocalHom/EssFiniteType of canonical baseMap; N finite; unique q via fromSpecStalk, q∩A=⊥, radical(q⊔m_AB)=m_B; R Noetherian, L finite; eR/eL/eT/eP pinned on quotient classes/germs (determined, canonical); m_R = m_B.map mk; qK prime = q.map incl; N_K encoded as B_K⊗_B N (canonical); tensorPullback unit via section-pinned exists_tensorPullbackAdjunction; assassin iffs via relativeAssassin/annihilatorAssociatedPrimes. Edge cases A field, higher rank, F=0, Y_s empty, X empty OK; no extra hypotheses; recorded statement verbatim; one sorry; docstrings/blueprint/8 steps present. FIX: Scheme.Hom.fiberStalkMap (owned by def-trf-fibre-stalk-map / lem-sbc-scheme-fibre-stalk-quotient, not stmt_deps) inlined as stalkCongr(fiberι_asFiber).inv ≫ fiberι.stalkMap in eR and eT normalizations; FibreStalkQuotient made a plain import, Mathlib.AlgebraicGeometry.Fiber public; nt_compile --json clean 24.3 s; lean-record.json statement updated verbatim. Advisory: RingedSpace.moduleStalkFunctor under def-weil-pbc-module-stalk (rfl carrier)."
+ }
+}

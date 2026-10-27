@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-etale-quotient-affine-open-cover",
+ "kind": "statement",
+ "title": "Affine chart quotients form an open covering of an etale relation quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $V,R$ be schemes over $S$. Let $j=(s,t):R\\to V\\times_S V$ [def-pc-fibre-product] be a monomorphism such that for every $S$-scheme $T$, $j$ identifies $R(T)$ with an equivalence relation on $V(T)$. Suppose $s,t$ are etale [def-weil-etale-morphism]. Let $F$ be the sheafification [def-weil-pbc-sheafification] on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site] of the presheaf $T\\mapsto V(T)/R(T)$, with quotient map $q:h_V\\to F$, where $h_V(T)=\\operatorname{Mor}_S(T,V)$. Choose a set-indexed affine open covering $V=\\bigcup_{i\\in I}V_i$; affine means isomorphic to $\\operatorname{Spec}A_i$ for a commutative ring $A_i$ [def-weil-affine-spectrum]. Then $U=\\coprod_{i\\in I}V_i$ is a scheme, its summand inclusions are open and closed, and the canonical map $g:U\\to V$ is surjective etale. Put $R_U=U\\times_{g,V,s}R\\times_{t,V,g}U$, and restrict $R_U$ along $V_i\\to U$ to obtain $R_i\\to V_i\\times_S V_i$. These are etale equivalence relations. Write $Q=U/R_U$ and $F_i=V_i/R_i$ for the fppf sheafifications of the corresponding presheaf quotients. The canonical map $Q\\to F$ is an isomorphism. Each composite $F_i\\to Q\\to F$ is a representable open immersion [def-weil-open-immersion], meaning that its pullback by every $h_T\\to F$ is represented by an open subscheme of $T$. The family $(F_i\\to F)_{i\\in I}$ covers $F$ as a sheaf: for every $S$-scheme $T$ and $x\\in F(T)$ there is an fppf covering $\\{T_\\alpha\\to T\\}$ such that each restriction $x|_{T_\\alpha}$ is the image of a section of some $F_{i(\\alpha)}(T_\\alpha)$. No algebraic-space hypothesis on $F$ or the $F_i$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WW (theorem-presentation), affine-coproduct replacement and restricted quotient open-cover paragraphs; the restriction invariance and open-immersion inputs are Tags 02WT (lemma-pullback-etale-equivalence-relation), 02WU (lemma-finding-opens) and Groupoids Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use the coproduct comparison isomorphism for Over.forget S to identify the underlying scheme of the actual coproduct in Over S with the scheme coproduct of the chosen charts. Its summand inclusions are open immersions. Their ranges are clopen: sigmaMk identifies them with the clopen summands of the topological disjoint union, and the comparison isomorphism preserves clopen sets. The Sigma.desc equations identify each inclusion followed by g with the corresponding chart map. The covering property of the chosen charts therefore proves g surjective, including the empty-index case.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), disjoint gluing specialization; spaces Tag 02WW (theorem-presentation), affine-coproduct paragraph"
+   }
+  },
+  {
+   "text": "Each $V_i\\hookrightarrow V$ is an open immersion, hence etale. On the open cover of $U$ by its summands, the restriction of $g$ is precisely this morphism. The source-locality lemma therefore shows that $g$ is etale. In particular $g$ is flat and locally of finite presentation, and its surjectivity from step 1 says that $\\{g:U\\to V\\}$ is an fppf covering. This uses no quasi-compactness or finiteness of $I$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-local-on-source",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP (lemma-open-immersion-etale), 02GJ (lemma-etale-characterize); spaces Tag 02WW (theorem-presentation), replacement paragraph"
+   }
+  },
+  {
+   "text": "Before quotient sheaves are supplied, prove the geometry of restriction directly. For an etale g:W→V, maps to the iterated pullback are triples (a,r,b) whose endpoints satisfy r≫s=a≫g and r≫t=b≫g. Thus the restricted relation is the inverse image of the original equivalence relation and is an equivalence relation on every test object. Equality of endpoints determines r by the original relation monomorphism and then the pullback universal properties determine the whole triple, proving monicity. Over.forget preserves the two pullback squares; base change and composition make their restricted projections etale. Apply this first to g and then to each summand inclusion. Once Q and its sheafification unit are supplied, apply the restriction-quotient theorem to g. The surjectivity established above makes its canonical quotient map β:Q→F an isomorphism, with the required quotient-projection equation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-etale-relation-restriction-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WT (lemma-pullback-etale-equivalence-relation); Groupoids Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict); Tag 02WW (theorem-presentation), replacement paragraph"
+   }
+  },
+  {
+   "text": "Apply the direct restricted-relation geometry argument from step 3 to the summand inclusion into the coproduct. This gives all four assertions for each chart relation before any chart quotient is chosen. The resulting iterated pullback is exactly the chartSource/chartTarget construction in the statement; no new quotient sheaf is chosen from an existence theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 02WT (lemma-pullback-etale-equivalence-relation), 02WW (theorem-presentation), restricted-relations paragraph"
+   }
+  },
+  {
+   "text": "Reflexivity supplies an $S$-morphism $e:U\\to R_U$: apply the relation hypothesis on $U$-valued points to $(\\mathrm{id}_U,\\mathrm{id}_U)$. Its two composites with the projections $s_U,t_U$ are $\\mathrm{id}_U$. Hence $s_U,t_U$ are surjective on underlying points. Because $R_U$ is an etale equivalence relation, these projections are etale, so they are flat and locally of finite presentation by definition. The open immersion $\\iota_i$ is etale by step 4, hence also flat and locally of finite presentation. These verify all hypotheses of the finding-opens lemma; no representability of $Q$ or $F_i$ has been used.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), hypotheses (1)-(3), applied to the relation of Tag 02WT"
+   }
+  },
+  {
+   "text": "Apply finding-opens to the coproduct relation and every summand inclusion. This supplies a canonical map α_i:F_i→Q and its quotient-projection equation, together with representability by open immersions. For a map a:h_T→F, apply this assertion to a≫β⁻¹. Paste its pullback square with the pullback square defined by β and its inverse. This represents the pullback of α_i≫β by the same open immersion, proving the asserted representability.",
+   "uses": [
+    "lem-trf-etale-relation-finding-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 02WU (lemma-finding-opens), 02WW (theorem-presentation), quotient-open-cover paragraph"
+   }
+  },
+  {
+   "text": "Prove local chart lifting directly from the specified universal property, using the locally generated image construction of Sites 00WK in the same universe as the given sheaves. Put q=π≫η and let D be the subpresheaf of F whose sections are images of some chart quotient F_i. Its local closure E=D.sheafify is a subsheaf. Every q(v), for v:T→V, lies in E: pull the given open covering back along v; each member is an fppf cover arrow and has a map to its chart, whose quotient section maps to the restriction of q(v) by the compatibility equations. Hence q factors through E. The factor coequalizes s and t, since E→F is mono, and therefore descends to the presheaf coequalizer. The universal property hη gives l:F→E. Injectivity in the same universal property and epimorphy of π show l≫(E→F)=id_F. Thus every section of F lies in E, so its D-membership sieve is covering. The topology over S is generated by the comap of fppfPrecoverage along Over.forget S; the covering-sieve criterion extracts an actual fppf covering presieve inside this sieve. Its arrows have precisely the required chart quotient lifts. This handles empty and infinite chart index sets without a nonemptiness assumption.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WW (theorem-presentation), sentence that the chart quotient family is surjective; Sites Tag 00WK (lemma-sections-sheafification), with the covering axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-trf-etale-relation-restriction-quotient",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WW (theorem-presentation), affine-coproduct and chart quotient paragraphs, with 02WT and 02WU. The local covering sentence is realized through the locally generated image and the supplied sheafification universal property (Sites 00WK); geometry is proved directly from the actual pullbacks before quotient sheaves are supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(quotient|Quotient).*(openCover|open_cover|OpenImmersion)|(openCover|open_cover|OpenImmersion).*(quotient|Quotient)",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an etale equivalence relation to an affine open covering gives an open covering of its sheaf quotient",
+   "results": "8 hits; AlgebraicGeometry.Scheme.AffineOpenCover.openCover, AlgebraicGeometry.Scheme.openCover_affineOpenCover, AlgebraicGeometry.Scheme.OpenCover.restrict, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.AffineOpenCover.openCover_f, AlgebraicGeometry.affineOpensRestrict, AlgebraicGeometry.Scheme.OpenCover.restrict_X, AlgebraicGeometry.Scheme.OpenCover.restrict_f",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsOpenImmersion",
+   "results": "1 hits; AlgebraicGeometry.Etale.instOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine open charts of an etale equivalence relation induce representable open subfunctors covering its fppf sheaf quotient",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open subfunctors from restricting an etale groupoid to affine scheme charts cover the quotient sheaf without assuming the quotient is an algebraic space",
+   "results": "8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.AffineOpenCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.Scheme.affineOpenCover_X",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-relation-quotient",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: first form the quotient by the etale relation (Stacks 02WW). Affine-refinement and quotient-open-cover arguments of the etale-relation quotient input (old steps 1, 2 and 4).",
+   "via": [
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-etale-quotient-affine-open-cover",
+  "worker": "stage1",
+  "summary": "Retained the statement and split the Stacks 02WW affine-refinement argument into seven steps. Reused existing coproduct, etale-locality, restriction-invariance, finding-opens and local-sheafification nodes; explicitly verified surjectivity of the relation projections by reflexivity and constructed the fppf local chart lifts. No new nodes, no Lean edits, and no algebraic-space hypothesis.",
+  "blueprint": "The polarized scheme descent input to the descent sentence of lem-trf-local-term-locality, through lem-trf-etale-relation-quotient: its affine-refinement and quotient-open-cover input (old steps 1, 2 and 4), realized by the 02WW replacement and chart quotient paragraphs.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representative theorem for sheafification, used to expand the chart-cover surjectivity sentence; this unit supplies no local sheafification theorem."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic covering pullback and composition axioms for the fppf site, used only to refine the local lifts, not to replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-cba280f7b",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-cba280f7b (reviewer sub-agent of L); spot-checked: I read the 7-step split of Stacks 02WW (affine-coproduct replacement, restricted chart quotients, the 'clear' surjectivity sentence) in full against spaces.tex 02WW/02WT/02WU, groupoids 045Z and sites 00WK. The statement is unchanged from live, and there are no new nodes. Step 1: coproduct leaf, g surjective. Step 2: g is étale by open-immersion étale plus source locality, so it is an fppf cover with no quasi-compactness used. Step 3: restriction-quotient gives that R_U is an étale equivalence relation and Q≅F. Step 4: R_i is étale, and its T-point description shows F_i→F sends [a] to [g ι_i a]. Step 5: reflexivity gives a common section of s_U and t_U, so both are surjective; together with flat and lfp, every hypothesis of 02WU is checked. Step 6: finding-opens composed with β⁻¹ gives a representable open immersion into F. Step 7: 00WK local representatives, the pulled-back Zariski cover T_a×_V V_i and the site axioms give the sheaf-cover clause. I tested the diagonal relation, empty I, infinite I and overlapping chart images; nothing assumes intersections are affine. There is no cycle (the only citer is the parent lem-trf-etale-relation-quotient, which matches its step), and no duplicate among the 02WW-citing nodes (a1 atlas, sfb bootstrap, representable-quotient presentation). I accept the two tool_uses for sk-thm-p1 sheafification and site facts, which the sibling restriction-quotient node records identically. The worker wrote tool_uses itself, which C8 reserves for L; I treat that as advisory only. No SGA source is used. The proof is 4133 characters, but there is no re-split note on this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleQuotientAffineOpenCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_quotient_affine_open_cover",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.chart",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.coproduct",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.inclusion",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.map",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.source",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.target",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.chartSource",
+   "AlgebraicGeometry.AlgebraicSpace.AffineQuotientCover.chartTarget",
+   "AlgebraicGeometry.AlgebraicSpace.etale_quotient_affine_open_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleQuotientAffineOpenCover.lean",
+  "statement": "theorem etale_quotient_affine_open_cover {S : Scheme.{u}} {R V : Over S} (s t : R ⟶ V) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Etale s.left] [Etale t.left] (𝒰 : Scheme.OpenCover.{u} V.left) [∀ i : 𝒰.I₀, IsAffine (𝒰.X i)] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F.obj ⟶ G.obj ↦ η ≫ k)) : (∀ i : 𝒰.I₀, IsOpenImmersion (inclusion V 𝒰 i).left ∧ IsClopen (Set.range (inclusion V 𝒰 i).left)) ∧ Surjective (map V 𝒰).left ∧ Etale (map V 𝒰).left ∧ Mono (prod.lift (source s t 𝒰) (target s t 𝒰)) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ coproduct V 𝒰 ↦ ∃ r : T ⟶ Limits.pullback (pullback.snd (map V 𝒰) s ≫ t) (map V 𝒰), r ≫ source s t 𝒰 = a ∧ r ≫ target s t 𝒰 = b)) ∧ Etale (source s t 𝒰).left ∧ Etale (target s t 𝒰).left ∧ (∀ i : 𝒰.I₀, Mono (prod.lift (chartSource s t 𝒰 i) (chartTarget s t 𝒰 i)) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ chart V 𝒰 i ↦ ∃ r : T ⟶ Limits.pullback (pullback.snd (inclusion V 𝒰 i) (source s t 𝒰) ≫ target s t 𝒰) (inclusion V 𝒰 i), r ≫ chartSource s t 𝒰 i = a ∧ r ≫ chartTarget s t 𝒰 i = b)) ∧ Etale (chartSource s t 𝒰 i).left ∧ Etale (chartTarget s t 𝒰 i).left) ∧ ∀ (Q : Sheaf (Scheme.fppfTopology.over S) (Type u)) (ηQ : coequalizer (yoneda.map (source s t 𝒰)) (yoneda.map (target s t 𝒰)) ⟶ Q.obj) (_hηQ : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : Q.obj ⟶ G.obj ↦ ηQ ≫ k)) (Fi : 𝒰.I₀ → Sheaf (Scheme.fppfTopology.over S) (Type u)) (ηi : ∀ i : 𝒰.I₀, coequalizer (yoneda.map (chartSource s t 𝒰 i)) (yoneda.map (chartTarget s t 𝒰 i)) ⟶ (Fi i).obj) (_hηi : ∀ (i : 𝒰.I₀) (G : Sheaf (Scheme.fppfTopology.over S) (Type u)), Function.Bijective (fun k : (Fi i).obj ⟶ G.obj ↦ ηi i ≫ k)), ∃ (β : Q.obj ⟶ F.obj) (α : ∀ i : 𝒰.I₀, (Fi i).obj ⟶ Q.obj), IsIso β ∧ (coequalizer.π (yoneda.map (source s t 𝒰)) (yoneda.map (target s t 𝒰)) ≫ ηQ) ≫ β = yoneda.map (map V 𝒰) ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ∧ (∀ i : 𝒰.I₀, (coequalizer.π (yoneda.map (chartSource s t 𝒰 i)) (yoneda.map (chartTarget s t 𝒰 i)) ≫ ηi i) ≫ α i = yoneda.map (inclusion V 𝒰 i) ≫ (coequalizer.π (yoneda.map (source s t 𝒰)) (yoneda.map (target s t 𝒰)) ≫ ηQ) ∧ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (α i ≫ β)) ∧ ∀ (T : Over S) (x : F.obj.obj (op T)), ∃ C : Presieve T, C.map (Over.forget S) ∈ Scheme.fppfPrecoverage T.left ∧ ∀ (W : Over S) (f : W ⟶ T), C f → ∃ (i : 𝒰.I₀) (y : (Fi i).obj.obj (op W)), (α i ≫ β).app (op W) y = F.obj.map f.op x",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The actual coproduct in Over S and canonical maps are constructed in the owning module. Restrictions and their projections are inlined Mathlib pullbacks (def-pc-fibre-product), not definitions owned by a theorem node. The restriction-quotient theorem is a proof dependency only. Q and the chart quotients are specified by their sheafification units, without a global big-site sheafification assumption or an algebraic-space hypothesis. The base statement dependencies and every statement/proof field are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55ef57b03",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 8ce5851f2fc9. The statement now inlines the restriction pullbacks instead of citing the theorem's plain defs (restrictedEtaleRelation and its source/target). The inlining is term for term identical to the live defs, so the meaning is unchanged. The restriction-quotient module is now a plain proof import (no cycle). The node delta is the lean record only; the stmt_deps are the 7 base definition nodes. lean.statement is a verbatim substring of the file and the declarations list is exact. Independent clause check against the node and Stacks 02WW/02WT/02WU: actual coproduct, Sigma.desc map g, clopen summands, iterated R_U and R_i with mono, pointwise equivalence and étale projections. β and α i are uniquely pinned by their quotient-projection equations, IsRepresentableWith unfolds to an open-subscheme pullback, and the covering clause is an fppf presieve with local lifts. No algebraic-space or finiteness hypothesis. Edge cases checked: empty and infinite I, diagonal relation, universe u. One advisory finding: IsRepresentableWith is owned by def-trf-algebraic-space, which is not in stmt_deps; the landed sibling finding-opens has the same pattern and the node text glosses the notion. No compile run (no file changed); the worker reports scompile passes and a deliver2 --no-push OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261023T124412-L-1395119",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

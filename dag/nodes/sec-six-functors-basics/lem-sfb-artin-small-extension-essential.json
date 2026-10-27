@@ -1,0 +1,197 @@
+{
+ "id": "lem-sfb-artin-small-extension-essential",
+ "kind": "statement",
+ "title": "A nonsplit small extension is an essential surjection",
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring], [def-weil-field], [def-weil-finite-type-morphism]. Use the category $\\mathcal C_{R,k}$ of Artinian local $R$-algebras with specified residue field $k$ and local maps inducing the identity on $k$ [def-sfb-artin-deformation-test-category]. Let $p:B\\twoheadrightarrow A$ be a small extension. Either $p$ has a section in $\\mathcal C_{R,k}$, or it is essential: whenever $D\\in\\mathcal C_{R,k}$ and $g:D\\to B$ has $p\\circ g$ surjective, $g$ is surjective. In the latter case the same conclusion holds if $D$ is any complete Noetherian local $R$-algebra with residue field $k$ and $g$ is a local $R$-map inducing the identity on $k$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06H0 (lemma-essential-surjection), part (4); the complete-source version follows by factoring its map to the Artinian target through an Artinian quotient."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\ker(p)$. By [def-sfb-artin-deformation-test-category], $I$ is one-dimensional over $k$ and $\\mathfrak m_BI=0$. Suppose $g:D\\to B$ is a local $R$-map inducing the identity on $k$ and $pg$ is surjective; for now $D$ can be either of the sources allowed in the statement. Put $C=g(D)\\subseteq B$, a subring containing the image of $R$. For each $b\\in B$, surjectivity of $pg$ gives $c\\in C$ with $p(c)=p(b)$, hence $b=c+i$ for $i\\in I$. Moreover $C\\to k$ is surjective: lift a residue class to $D$ and apply $g$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H0 (lemma-essential-surjection), proof of (4); explicit image/kernel argument replacing the length comparison"
+   }
+  },
+  {
+   "text": "Assume that $g$ is not surjective, so $C\\ne B$. If $0\\ne x\\in C\\cap I$, then every $y\\in I$ has the form $\\lambda x$ for some $\\lambda\\in k$, since $I$ is one-dimensional. Choose $c_\\lambda\\in C$ with residue $\\lambda$. The scalar action on $I$ is multiplication by any lift in $B$, because $\\mathfrak m_BI=0$; thus $y=c_\\lambda x\\in C$. This gives $I\\subseteq C$, and the decomposition $b=c+i$ of step 1 would give $B=C$, a contradiction. Consequently $C\\cap I=0$, so $p|_C:C\\to A$ is injective as well as surjective.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H0 (lemma-essential-surjection), proof of (4); explicit image/kernel argument replacing the length comparison"
+   }
+  },
+  {
+   "text": "For each $a\\in A$ let $s(a)$ be the unique $c\\in C$ with $p(c)=a$. Uniqueness shows $s(a+a')=s(a)+s(a')$, $s(aa')=s(a)s(a')$ and $s(1)=1$, by applying $p$ to both sides. Likewise, for $r\\in R$, the image of $r$ in $B$ lies in $C$ and maps to its image in $A$, so $s$ is an $R$-map. Since $p$ induces the identity on $k$, the equality $ps=\\mathrm{id}_A$ gives $\\operatorname{res}_B(s(a))=\\operatorname{res}_A(a)$. Hence $s$ is local and induces the identity on $k$; it is a section in $\\mathcal C_{R,k}$, as defined in [def-sfb-artin-deformation-test-category].",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H0 (lemma-essential-surjection), proof of (4); explicit image/kernel argument replacing the length comparison"
+   }
+  },
+  {
+   "text": "If $p$ has no section, steps 1--3 rule out any nonsurjective $g$ with $pg$ surjective. Taking Artinian $D$ proves essentiality, and taking complete Noetherian local $D$ proves the last assertion. The argument used only the residue-field condition on $D$, so it does not require a separate factorization through an Artinian quotient. If a section $s$ exists, it cannot be surjective: otherwise $ps=\\mathrm{id}_A$ and surjectivity of $s$ give $sp=\\mathrm{id}_B$, contradicting the nonzero kernel of a small extension. Thus $g=s$ also shows that the section case is not essential.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H0 (lemma-essential-surjection), proof of (4); explicit image/kernel argument replacing the length comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06H0 (lemma-essential-surjection), proof of (4), with the one-dimensional-kernel argument written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Small extension of Artinian local algebras without section is essential surjection every map surjective modulo extension is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isArtinian_of_surjective_algebraMap\", \"module\": \"Mathlib/RingTheory/Artinian/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {S : Type u_5}\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra S R] [inst_5 : Module S M] [IsArtinian R M] [IsScalarTower S R M],\\n  Function.Surjective ⇑(algebraMap S R) → IsArtinian S M\", \"doc\": \"Let $ S $ and $ R $ be commutative semirings with an $ S $-algebra structure on $ R $, and let $ M $ be an $ R $-module equipped with an $ S $-module structure compatible with the scalar tower $ S \\to \"}\n  {\"name\": \"IsArtinianRing.localization_surjective\", \"module\": \"Mathlib/RingTheory/Artinian/Ring\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsArtinianRing R] (S : Submonoid R) (L : Type u_2) [inst_2 : CommSemiring L]\\n  [inst_3 : Algebra R L] [IsLocalization S L], Function.Surjective ⇑(algebraMap R L)\", \"doc\": \"For an Artinian commutative semiring $ R $, the canonical algebra homomorphism from $ R $ to its localization $ L $ is surjective, i.e., $ \\\\text{algebraMap}(R, L) $ is a surjective function.\"}\n  {\"name\": \"Algebra.Extension.ofSurjective\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {P : Type w} →\\n            [inst_3 : CommRing P] →\\n              [inst_4 : Algebra R P] → (f : P →ₐ[R] S) → Function.Surjective ⇑f → Algebra.Extension R S\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings such that $P$ and $S$ are $R$-algebras. Given a surjective $R$-algebra homomorphism $f : P \\\\to S$, this function constructs an algebra extension of $R$ and $\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally smooth $ R $-algebra $ A $, a ring $ B $ with an ideal $ I $ satisfying $ I^2 = 0 $, the composition of the quotient map $ B \\to B/I $ with the algebra homomorphism $ A \\to B $ is surje\"}\n  {\"name\": \"Algebra.Extension.algebraMap_surjective\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Surjective ⇑(algebraMap P.Ring S)\", \"doc\": \"The canonical ring homomorphism from the commutative ring $ R $ to the commutative ring $ S $, associated with the algebra extension, is surjective.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"Function.Surjective.isArtinianRing\", \"module\": \"Mathlib/RingTheory/Artinian/Module\", \"type\": \"∀ {R : Type u_1} [inst : Semiring R] {S : Type u_2} [inst_1 : Semiring S] {F : Type u_3} [inst_2 : FunLike F R S]\\n  [RingHomClass F R S] {f : F}, Function.Surjective ⇑f → ∀ [H : IsArtinianRing R], IsArtinianRing S\", \"doc\": \"Let $ R $ and $ S $ be semirings, and let $ f : R \\to S $ be a surjective semiring homomorphism. If $ R $ is an Artinian semiring (satisfying the descending chain condition on ideals), then $ S $ is al\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  (∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective (Ideal.Quotient.mkₐ R I).comp) →\\n    Algebra.FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: surjective images of Artinian rings and local maps do not state the essential-or-split dichotomy"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artinian local ring surjection one dimensional kernel either split or essential",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalHom.of_surjective\", \"module\": \"Mathlib.RingTheory.LocalRing.RingHom.Basic\", \"type\": \"[CommRing R] [CommRing S] [Nontrivial S] [IsLocalRing R] (f : R →+* S) (hf : Function.Surjective f) : IsLocalHom f\", \"doc\": \"If $R$ and $S$ are commutative rings with $S$ non-trivial and $R$ local, and $f : R \\\\to S$ is a surjective ring homomorphism, then $f$ satisfies the local homomorphism conditions.\"}\n  {\"name\": \"isArtinian_of_range_eq_ker\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"[IsArtinian R M] [IsArtinian R P] (f : M →ₗ[R] N) (g : N →ₗ[R] P) (h : LinearMap.range f = LinearMap.ker g) :\\n  IsArtinian R N\", \"doc\": \"If $ M $ and $ P $ are Artinian $ R $-modules, and there exist linear maps $ f : M \\to N $ and $ g : N \\to P $ such that the image of $ f $ equals the kernel of $ g $, then $ N $ is an Artinian $ R $-mo\"}\n  {\"name\": \"isArtinian_of_surjective\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"(f : M →ₗ[R] P) (hf : Function.Surjective f) [IsArtinian R M] : IsArtinian R P\", \"doc\": \"Let $ R $ be a semiring, and let $ M $ and $ P $ be $ R $-modules. If there exists a surjective linear map $ f : M \\to P $ and $ M $ is an Artinian $ R $-module (satisfying the descending chain conditi\"}\n  {\"name\": \"Function.Surjective.isArtinianRing\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"{R} [Semiring R] {S} [Semiring S] {F} [FunLike F R S] [RingHomClass F R S] {f : F} (hf : Function.Surjective f)\\n  [H : IsArtinianRing R] : IsArtinianRing S\", \"doc\": \"Let $ R $ and $ S $ be semirings, and let $ f : R \\to S $ be a surjective semiring homomorphism. If $ R $ is an Artinian semiring (satisfying the descending chain condition on ideals), then $ S $ is al\"}\n  {\"name\": \"Function.Surjective.isLocalHom\", \"module\": \"Mathlib.RingTheory.LocalRing.RingHom.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [Nontrivial S] [IsLocalRing R] (f : R →+* S),\\n  Function.Surjective ⇑f → IsLocalHom f\", \"doc\": \"A surjective ring homomorphism from a local ring $ R $ to a non-trivial commutative ring $ S $ is a local homomorphism.\"}\n  {\"name\": \"IsLocalRing.ker_eq_maximalIdeal\", \"module\": \"Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic\", \"type\": \"[DivisionRing K] (φ : R →+* K) (hφ : Function.Surjective φ) : RingHom.ker φ = maximalIdeal R\", \"doc\": \"Let $ R $ be a local ring and $ K $ a division ring. If $ \\\\phi : R \\\\to K $ is a surjective ring homomorphism, then the kernel of $ \\\\phi $ is equal to the maximal ideal of $ R $, which consists precise\"}\n  {\"name\": \"LinearMap.isCoatom_ker_of_surjective\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"[IsSimpleModule R N] {f : M →ₗ[R] N} (hf : Function.Surjective f) : IsCoatom (LinearMap.ker f)\", \"doc\": \"If $ N $ is a simple module over a ring $ R $ and $ f : M \\\\to N $ is a surjective linear map, then the kernel of $ f $ is a coatom in the lattice of submodules of $ M $. This means the kernel is a pro\"}\n  {\"name\": \"isArtinian_of_surjective_algebraMap\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"{S : Type*} [CommSemiring S] [Algebra S R] [Module S M] [IsArtinian R M] [IsScalarTower S R M]\\n  (H : Function.Surjective (algebraMap S R)) : IsArtinian S M\", \"doc\": \"Let $ S $ and $ R $ be commutative semirings with an $ S $-algebra structure on $ R $, and let $ M $ be an $ R $-module equipped with an $ S $-module structure compatible with the scalar tower $ S \\to \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: surjective images of Artinian rings and local maps do not state the essential-or-split dichotomy"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, Function.Surjective",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Function.Surjective.isArtinianRing\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \" {R : Type u_1} [Semiring R] {S : Type u_2} [Semiring S] {F : Type u_3} [FunLike F R S] [RingHomClass F R S] {f : F} (hf : Function.Surjective ⇑f) [H : IsArtinianRing R] : IsArtinianRing S\", \"doc\": \"\"}\n  {\"name\": \"IsArtinianRing.localization_surjective\", \"module\": \"Mathlib.RingTheory.Artinian.Ring\", \"type\": \" {R : Type u_1} [CommRing R] [IsArtinianRing R] (S : Submonoid R) (L : Type u_2) [CommSemiring L] [Algebra R L] [IsLocalization S L] : Function.Surjective ⇑(algebraMap R L)\", \"doc\": \"Localizing an Artinian ring can only reduce the amount of elements.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: surjective images of Artinian rings and local maps do not state the essential-or-split dichotomy"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ssential[Ss]urjection|[Ss]mall[Ee]xtension|[Ss]mall extension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: surjective images of Artinian rings and local maps do not state the essential-or-split dichotomy"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ssential[Ss]urjection|[Ss]mall[Ee]xtension|[Ss]mall extension",
+   "results": "{\"t\": \"2026-10-23T11:43:15Z\", \"tool\": \"grep\", \"query\": \"[Ee]ssential[Ss]urjection|[Ss]mall[Ee]xtension|[Ss]mall extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned image, quotient, local-map and surjectivity facts do not state the small-extension essential-or-section dichotomy"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjection with one dimensional kernel and a nonsurjective map onto its quotient admits a ring section",
+   "results": "{\"t\": \"2026-10-23T11:43:15Z\", \"tool\": \"leansearch\", \"query\": \"Surjection with one dimensional kernel and a nonsurjective map onto its quotient admits a ring section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.quotientKerEquivOfSurjective\", \"RingHom.quotientKerEquivRangeS\", \"RingHom.quotientKerEquivOfSurjective_apply_mk\", \"RingCon.quotientKerEquivRange\", \"ModuleCon.quotientKerEquivOfSurjective\", \"Ideal.quotientKerAlgEquivOfSurjective_apply\", \"RingCon.mkₐ_surjective\", \"LinearMap.quotKerEquivOfSurjective\"], \"digest\": \"4204b07291b559d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned image, quotient, local-map and surjectivity facts do not state the small-extension essential-or-section dichotomy"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.ker, Function.Surjective",
+   "results": "{\"t\": \"2026-10-23T11:43:16Z\", \"tool\": \"loogle\", \"query\": \"RingHom.ker, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RingHom.ker_isMaximal_of_surjective\", \"Ideal.map_isPrime_of_surjective\", \"Ideal.IsMaximal.map_of_surjective_of_ker_le\", \"Ideal.comap_map_of_surjective'\", \"Ideal.map_sInf\", \"RingHom.liftOfSurjective\", \"Ideal.map_radical_of_surjective\", \"Ideal.eq_map_of_comap_eq_ker_sup\"], \"digest\": \"e5b24813232dc353\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned image, quotient, local-map and surjectivity facts do not state the small-extension essential-or-section dichotomy"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of local rings with simple kernel has a section if some proper subring maps onto the quotient",
+   "results": "{\"t\": \"2026-10-23T11:43:16Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of local rings with simple kernel has a section if some proper subring maps onto the quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.surjective_localRingHom_iff\", \"IsLocalRing.exists_surjective_of_not_isLocalRing\", \"IsLocalRing.residue_surjective\", \"IsLocalRing.ker_eq_maximalIdeal\", \"IsLocalRing.of_surjective'\", \"IsLocalRing.of_surjective\", \"IsLocalization.surjective_quotientMap_of_maximal_of_localization\", \"IsLocalHom.of_surjective\"], \"digest\": \"8c621eeaced9c7b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned image, quotient, local-map and surjectivity facts do not state the small-extension essential-or-section dichotomy"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06H0 (lemma-essential-surjection), part (4); the complete-source version follows by factoring its map to the Artinian target through an Artinian quotient.",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-small-extension-essential",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 06H0(4) into four elementary image/kernel steps. The one-dimensional kernel and the surjectivity of the image onto the residue field replace the finite-length comparison. The same argument applies directly to complete local sources. Statement unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "Supporting input to the existing alteration/moduli/versal-object chain recorded in blueprint.from.place: Tag 06H0(4) in lem-sfb-artin-rs-versal-formal-object. The current latest direct-image blueprint proof retains the direct-image goal but no longer spells out this supporting chain. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-16351b7da",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-16351b7da (reviewer sub-agent of L); spot-checked: Read Stacks formal-defos.tex Tag 06H0(4) (lemma-essential-surjection, statement and proof) plus definition-small-extension 06GD and definition-essential-surjection. Read def-sfb-artin-deformation-test-category, whose small extension is a one-dimensional k-kernel killed by m_B, equivalent to 06GD. Delivery is one commit: item node + report, no new nodes or leaves. The statement and every field except status/proof/proof_deps/proof_origin/mathlib_searches/split_report match live, where the item is still unsplit with no proof (no supersession). Four elementary steps cite only the definition. Step 1: B=C+I with C=g(D), and C->k is surjective because g induces the identity on k. Step 2: x in C∩I nonzero gives I=kx; the scalar action is multiplication by any lift because m_B I=0, and the lift can be taken in C, so I⊆C, B=C, contradiction; hence p|_C is bijective. Step 3: the inverse s is a ring and R-map, and res_B s=res_A p s=res_A gives locality and the identity on k, so s is a section in C_{R,k}. Step 4: without a section, essentiality holds for Artinian and complete Noetherian D alike; with a section, s is not surjective because the kernel is nonzero, so p is not essential (the converse of 06H0(4)). The direct argument correctly replaces the source's length comparison and the Artinian-quotient reduction named in source.place. Tested k[ε]->k (split), Z/p^2->F_p and k[t]/t^3->k[t]/t^2 (nonsplit, essential), and confirmed the zero-kernel case is excluded by the definition. The parent lem-sfb-artin-rs-versal-formal-object uses the complete-source clause in its nonsplit case; that clause is unchanged. 06H0 appears only in this item and its parent. No SGA, no tool_uses, blueprint.from inherited null with a split_report blueprint entry. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSmallExtensionEssential",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.smallExtension_section_or_essential",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSmallExtensionEssential.lean",
+  "statement": "theorem smallExtension_section_or_essential (R k : Type u) [CommRing R] [IsNoetherianRing R] [Field k] [Algebra R k] [Algebra.FiniteType R k] {A B : TestCategory R k} (p : B ⟶ A) (hp : IsSmallExtension p) : (∃ s : A ⟶ B, s ≫ p = 𝟙 A) ∨ ((∀ (D : TestCategory R k) (g : D ⟶ B), Function.Surjective ((map p).comp (map g)) → Function.Surjective (map g)) ∧ ∀ (D : CompleteLocalAlgebra R k) (g : LocalMap D B), Function.Surjective ((map p).comp g.hom) → Function.Surjective g.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-865f44701",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Lean says what the node says. Hypotheses: Noetherian R, Algebra.FiniteType R k, TestCategory = C_{R,k} (augmentation with kernel = maximal ideal), IsSmallExtension equivalent to a one-dimensional k-kernel killed by m_B. Conclusion: section s ≫ p = 𝟙 A; essential for Artinian D; complete-Noetherian-source clause (CompleteLocalAlgebra/LocalMap, no extra hypotheses) inside the latter case. Universe u is the dependency's convention. lean.statement verbatim; only the lean record changed vs live; no duplicate found; single sorry theorem; docstrings carry Stacks 06H0(4), the blueprint id and the 4 proof steps; single needed import; report has Worker report and Second reading by Q56. Edge cases: k[ε]→k split, Z/p^2→F_p essential, zero kernel excluded. Advisory: the source's converse (section ⇒ not essential) is only in proof step 4, not in the node statement or the Lean; both citers (rs-versal-formal-object, schlessinger-groupoid-hull-criterion) use only the inclusive dichotomy. No files changed, no compile run."
+ }
+}

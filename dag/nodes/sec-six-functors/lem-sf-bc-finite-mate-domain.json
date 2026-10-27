@@ -1,0 +1,275 @@
+{
+ "id": "lem-sf-bc-finite-mate-domain",
+ "kind": "statement",
+ "title": "Finite ordinary exchange with the actual module and site comparisons",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$ for $n\\ge1$. Use [def-fix-six-functor-datum]. Let $f:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$, $f':X'\\to Y'$ be a Cartesian square [def-weil-pbc-cartesian-square] of separated finite-type $k$-schemes and separated finite-type $k$-morphisms. Write $\\operatorname{Ex}_*(K):Lg^*Rf_*K\\to Rf'_*Lg'^*K$ for the specified adjunction-mate exchange [def-exchange-projection]. Assume $f$ proper or $g$ smooth. For $K\\in D^+(X_{\\mathrm{et}},A_n)$ the constant-module mate is an isomorphism; under the canonical forget-coefficients comparisons it is the abelian torsion base-change exchange. If $K\\in D^+(X_{\\mathrm{proet}},A_n)$ has an etale-origin witness $\\alpha:\\nu_X^*L\\simeq K$ [def-weil-pbc-etale-origin-witness], the actual ambient ringed mate is an isomorphism when $f$ is proper; when $g$ is smooth require $L$ bounded constructible and $K\\simeq\\nu_X^*L$. More precisely, let $E_L$ be the etale module exchange and let $S_L,T_L$ be the canonical pullback/direct-image comparison isomorphisms with types\n$$S_L:\\nu_{Y'}^*g^{-1}Rf_*L\\xrightarrow{\\sim}Lg^*Rf_*\\nu_X^*L,\\qquad T_L:\\nu_{Y'}^*Rf'_*g'^{-1}L\\xrightarrow{\\sim}Rf'_*Lg'^*\\nu_X^*L.$$\nThen $T_L\\nu_{Y'}^*(E_L)=\\operatorname{Ex}_*(\\nu_X^*L)S_L$, and conjugating by $\\alpha$ identifies the map at $K$. In the smooth theorems' notation $(f_s,g_s,h_s,e_s)$ the role matching is $(g,f,f',g')$; the smooth arrow is our $g$, the qcqs arrow is our $f$, and the output corner is $Y'$. The smooth pro-etale conclusion is in the ambient derived category and asserts no constructible landing of the endpoints. It applies in particular to bounded constructible finite-Tor inputs.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), base-change sentence; argument separated from realization steps 4,5."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-pbc-cartesian-square",
+  "def-exchange-projection",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof": [
+  {
+   "text": "For the spectral absolute value, spectralNorm_extends and Padic.norm_p_lt_one give |ell|<1. The membership characterization from extension_integers_dvr places ell in the recorded maximal ideal. Its chosen uniformizer generates this ideal. Ideal.pow_mem_pow places ell^n in the nth power, the defining quotient ideal. Ideal.Quotient.eq_zero_iff_mem then proves (ell^n:A_n)=0, also after ULift. Since ell is prime, ell^n is nonzero. For every x in A_n, (ell^n)x=0, giving IsAddTorsion directly. No finiteness theorem for A_n is needed.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+    "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons."
+   }
+  },
+  {
+   "text": "The finite-field datum gives CharP k_0 p from its cardinality and CharP k p via the injective algebra map. CharP.isUnit_natCast_iff and the distinct primes ell,p make ell a unit in k. Map this unit along the structural map k to global sections of each SixFunctorSpace, then take its nth power. This verifies the exact invertible-order torsion hypothesis for every A_n-module sheaf.",
+   "uses": [
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+    "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons."
+   }
+  },
+  {
+   "text": "Form IsPullback from the chosen square isomorphism and its projection equations. Quasi-compactness of f and f-prime is explicitly assumed; their separatedness gives quasi-separatedness by the Mathlib instance. No base-change permanence or finite-presentation argument is necessary.",
+   "uses": [
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+    "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons."
+   }
+  },
+  {
+   "text": "For proper f, apply Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring, the module-valued form recorded by thm-weil-pbc-bounded-below, to the additive torsion coefficient ring. For smooth g, use the already proved source theorem Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder (WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived). Its proof applies sbc-thm-smooth-base-change to sheaves and extends by triangulated truncation devissage to D+. The helper of_natCast_eq_zero gives its cohomology hypothesis from ell^n and its invertibility. This is the same bounded-below smooth route in direct module coordinates, avoiding conversion through the abelian allowable-torsion wrapper.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "sbc-thm-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+    "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons."
+   }
+  },
+  {
+   "text": "Use baseChange_eq_derivedBaseChangeMapPlus and the exchange equation in exchange_forget_coefficients to prove the required coefficient-forgetting identity. Apply comparison_derivedBaseChangeMap to obtain the specified S,T identity. Cancel the source comparison to express the ambient mate at the comparison image as S inverse followed by the comparison image of the etale mate followed by T.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+    "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons."
+   }
+  },
+  {
+   "text": "Naturality of the actual ambient transformation at W.iso.hom and cancellation of W.iso.inv_hom_id give the five-factor conjugation formula. The etale mate is invertible by the proper/smooth step, and functors preserve all the isomorphisms in the formula. Thus the ambient mate at K is invertible. The proof works for all D+ antecedents under hgeom, and consequently for each bounded constructible antecedent required by the smooth clause. No endpoint constructibility claim is made.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+    "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-fix-six-functor-datum",
+  "lem-pc-separated-quasi-separated",
+  "thm-weil-pbc-bounded-below",
+  "sbc-thm-smooth-base-change",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "def-exchange-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+  "place": "Private arithmetic helpers and finiteMateDomain; module-valued bounded-below base change and specified canonical comparisons.",
+  "note": "K1: same proper/smooth bounded-below and site transport route, using existing direct module-valued theorems; arithmetic annihilation replaces quotient finiteness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale comparison conjugates the unit counit base change exchange morphism for proper and smooth maps",
+   "results": "{\"t\": \"2026-10-22T06:11:59Z\", \"tool\": \"leansearch\", \"query\": \"Etale proetale comparison conjugates the unit counit base change exchange morphism for proper and smooth maps\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsPullback",
+   "results": "{\"t\": \"2026-10-22T06:12:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.IsPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|smooth.*base.?change|etale.*exchange",
+   "results": "{\"t\": \"2026-10-22T06:12:00Z\", \"tool\": \"grep\", \"query\": \"proper.*base.?change|smooth.*base.?change|etale.*exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\"], \"digest\": \"a0dc7f99dc8fa29c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper or smooth base change for bounded below finite torsion etale complexes and actual proetale adjunction mates on witnessed etale origin complexes",
+   "results": "{\"t\": \"2026-10-22T06:12:27Z\", \"tool\": \"leanfinder\", \"query\": \"Proper or smooth base change for bounded below finite torsion etale complexes and actual proetale adjunction mates on witnessed etale origin complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.of_restrictScalars\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"689aae84cf079d15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale comparison conjugates the unit counit base change exchange morphism for proper and smooth maps",
+   "results": "{\"t\": \"2026-10-22T06:13:43Z\", \"tool\": \"leanfinder\", \"query\": \"Etale proetale comparison conjugates the unit counit base change exchange morphism for proper and smooth maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"StandardEtalePair.homEquiv\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"StandardEtalePair.homEquiv_symm_apply\"], \"digest\": \"ad6498919e4fc926\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|smooth.*base.?change|proetale",
+   "results": "{\"t\": \"2026-10-22T07:04:40Z\", \"tool\": \"grep\", \"query\": \"proper.*base.?change|smooth.*base.?change|proetale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"c594b700f56403bd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale morphism base-change stability, underived pushforward composition or site/coefficient definitions do not state the finite-coefficient geometric derived exchange and its normalized site comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constant module sheaves etale proetale comparison preserves proper or smooth derived base change exchange",
+   "results": "{\"t\": \"2026-10-22T07:04:40Z\", \"tool\": \"leansearch\", \"query\": \"Finite constant module sheaves etale proetale comparison preserves proper or smooth derived base change exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.IsFinitePresentation.mk\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"6ff7557ebc4b4f6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale morphism base-change stability, underived pushforward composition or site/coefficient definitions do not state the finite-coefficient geometric derived exchange and its normalized site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsPullback",
+   "results": "{\"t\": \"2026-10-22T07:04:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.IsPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale morphism base-change stability, underived pushforward composition or site/coefficient definitions do not state the finite-coefficient geometric derived exchange and its normalized site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper and smooth base change for finite torsion etale complexes with etale proetale comparison of the adjunction mate exchange",
+   "results": "{\"t\": \"2026-10-22T07:04:49Z\", \"tool\": \"leanfinder\", \"query\": \"Proper and smooth base change for finite torsion etale complexes with etale proetale comparison of the adjunction mate exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"Algebra.Etale.comp\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\"], \"digest\": \"81658f05006d9599\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale morphism base-change stability, underived pushforward composition or site/coefficient definitions do not state the finite-coefficient geometric derived exchange and its normalized site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image finite torsion sheaves commutes with smooth inverse image and proper base change via units and counits",
+   "results": "{\"t\": \"2026-10-22T07:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image finite torsion sheaves commutes with smooth inverse image and proper base change via units and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardNatIso_hom\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\"], \"digest\": \"5ad20746a067d5c0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale morphism base-change stability, underived pushforward composition or site/coefficient definitions do not state the finite-coefficient geometric derived exchange and its normalized site comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-base-change-domain-realization",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (4), base-change sentence; returned realization steps 4,5: Finite ordinary exchange with the actual module and site comparisons.",
+   "via": [
+    "lem-sf-package-base-change-domain-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-bc-finite-mate-domain",
+  "worker": "stage1",
+  "summary": "Q91: kept the statement; proved coefficient annihilation and checked qcqs and smooth-arrow roles, applied abelian proper/smooth exchange with exact coefficient-forgetting compatibility, then the existing specified-map site comparison and an explicit witness conjugation. No new nodes.",
+  "blueprint": "prop-functor-package.proof.md clause (4), base-change sentence: finite torsion proper and smooth bounded-below theorems and their etale-origin site transport. Same route as sk-thm-sf-package unit proof clause (2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Coefficient arithmetic tool: extending nonarchimedean norm, needed to verify finite-torsion hypotheses; no base-change argument is replaced."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient arithmetic tool: DVR and finite residue field, and uniformizer factorization of ell; no node of this unit supplies that arithmetic."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Canonical coefficient-forgetting tool identifies the specified module mate with the abelian map and reflects invertibility; the geometric route remains proper/smooth base change."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Canonical site-comparison tool gives the exact S,T conjugation equation for the ambient ringed mate; this implements the unit’s requested site transport, without replacing proper/smooth base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-transport-identifies-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-5a37dbb62",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-5a37dbb62 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 5 steps, every cited statement, blueprint main-20261015 prop-functor-package clause (4) and its proof, and Stacks 0DDE/0F09. No new nodes, no SGA. Route = thm-weil-pbc-bounded-below + sbc-thm-bounded-below-derived-smooth-base-change, as in the blueprint. Step 1: |ℓ|_E<1, ℓ=uϖ^e with e≥1, ℓ^r=0 in A_n, ℓ invertible on k-schemes of char p; A_n finite. Step 2: the qcqs chain is right. Role tuple (f_s,g_s,h_s,e_s)=(g,f,f',g') checked against the sbc square, orientation correct. Step 4: the S_L/T_L types and the equation are literal; def-exchange-projection defines Ex_* as def-weil-pbc-ambient-ringed-exchange with the same θ. Step 5: naturality and cancellation formula correct. One C4/E5 fault, repaired: in step 3's smooth case the theorem's map is BC_{g,f} of sbc-def-base-change-map, but forget-coefficients(3) identifies E_L with Ex_□ of def-weil-pbc-derived-exchange, and the step did not cite the identification. sbc-def-base-change-map states it (Λ=Z, D^+, exchanged square, same θ). FIX adds that sentence and cites sbc-def-base-change-map and def-weil-pbc-derived-exchange in uses and proof_deps; the statement is unchanged. Advisory: the item's proper pro-étale clause overlaps the existing thm-weil-pbc-finite-level-proetale, and transport-identifies-exchange overlaps lem-weil-pbc-discrete-exchange-site-comparison; both predate this delivery. Accepted tool_uses: the l-adic absolute-value and integers-DVR arithmetic nodes, exchange-forget-coefficients, transport-identifies-exchange.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteMateDomain",
+  "declaration": "WeilConjectures.FiniteMateDomain.finiteMateDomain",
+  "declarations": [
+   "WeilConjectures.FiniteMateDomain.Coefficient",
+   "WeilConjectures.FiniteMateDomain.etaleMate",
+   "WeilConjectures.FiniteMateDomain.ambientMate",
+   "WeilConjectures.FiniteMateDomain.comparison",
+   "WeilConjectures.FiniteMateDomain.sourceIso",
+   "WeilConjectures.FiniteMateDomain.targetIso",
+   "WeilConjectures.FiniteMateDomain.finiteMateDomain"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteMateDomain.lean",
+  "statement": "theorem finiteMateDomain (hn : 1 ≤ n) {X X' Y Y' : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated X'.obj.hom] [IsSeparated Y.obj.hom] [IsSeparated Y'.obj.hom] (f : X ⟶ Y) (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y') [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] [IsSeparated g'.hom.left] [LocallyOfFiniteType g'.hom.left] [QuasiCompact g'.hom.left] [IsSeparated f'.hom.left] [LocallyOfFiniteType f'.hom.left] [QuasiCompact f'.hom.left] (sq : ChosenCartesianSquare g'.hom.left f'.hom.left f.hom.left g.hom.left) (hgeom : IsProper f.hom.left ∨ Smooth g.hom.left) : (∀ L : DerivedCategory.Plus (Sheaf X.obj.left.smallEtaleTopology (ModuleCat.{u + 1} (Coefficient C E n))), IsIso ((etaleMate C E n sq).app L) ∧ (D+(Etale.moduleAbelianForget (Coefficient C E n) Y'.obj.left).map ((etaleMate C E n sq).app L) ≫ (Etale.moduleAbelianDerivedExchangeTargetIso (Coefficient C E n) g'.hom.left f'.hom.left L).hom = (Etale.moduleAbelianDerivedExchangeSourceIso (Coefficient C E n) f.hom.left g.hom.left L).hom ≫ (Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (D+(Etale.moduleAbelianForget (Coefficient C E n) X.obj.left).obj L)) ∧ ((comparison C E n Y'.obj.left).map (DerivedCategory.Plus.ι.map ((etaleMate C E n sq).app L)) ≫ (targetIso C E n g'.hom.left f'.hom.left).hom.app L = (sourceIso C E n f.hom.left g.hom.left).hom.app L ≫ (ambientMate C E n sq).app ((comparison C E n X.obj.left).obj L.obj))) ∧ (∀ K : DerivedCategory.Plus (Sheaf (ProEt.topology X.obj.left) (ModuleCat.{u + 1} (Coefficient C E n))), ∀ W : FixedEtaleOriginWitness X.obj.left (Coefficient C E n) K, (IsProper f.hom.left ∨ (Smooth g.hom.left ∧ Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Coefficient C E n)) X.obj.left W.complex.obj)) → IsIso ((ambientMate C E n sq).app K.obj) ∧ (ambientMate C E n sq).app K.obj = (R(ProEtale.lowerStar (ModuleCat.{u + 1} (Coefficient C E n)) f.hom.left) ⋙ L(ProEtale.upperStar (ModuleCat.{u + 1} (Coefficient C E n)) g.hom.left)).map W.iso.inv ≫ (sourceIso C E n f.hom.left g.hom.left).inv.app W.complex ≫ (comparison C E n Y'.obj.left).map (DerivedCategory.Plus.ι.map ((etaleMate C E n sq).app W.complex)) ≫ (targetIso C E n g'.hom.left f'.hom.left).hom.app W.complex ≫ (L(ProEtale.upperStar (ModuleCat.{u + 1} (Coefficient C E n)) g'.hom.left) ⋙ R(ProEtale.lowerStar (ModuleCat.{u + 1} (Coefficient C E n)) f'.hom.left)).map W.iso.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bde917a73",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Clause-by-clause match. Ring = ULift(O_E/ϖ^n) as in the datum's finiteExchangeProjection. Ex_* = ProEtale.derivedBaseChangeMap, the datum's finite exchange. ChosenCartesianSquare and FixedEtaleOriginWitness are the recorded decls. Etale D+ IsIso, forget-coefficients equation with canonical isos, and the S_L/T_L site identity are stated on the item's own maps (Etale.baseChange = derivedBaseChangeMapPlus). Pro-étale: proper, or smooth with bounded constructible retained antecedent, gives IsIso plus the five-factor witness conjugation, types checked. Statement verbatim; only the lean field differs from live; one sorry; docstrings carry 5 steps. Advisories: def-exchange-projection's ExchangeProjectionStage unreferenced (accepted ModuleCat encoding); comparison isos owned by non-stmt_dep nodes. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261022T143839-L-1417740",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

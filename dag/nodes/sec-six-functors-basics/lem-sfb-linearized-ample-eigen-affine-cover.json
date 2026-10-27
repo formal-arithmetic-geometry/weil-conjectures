@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-linearized-ample-eigen-affine-cover",
+ "kind": "statement",
+ "title": "Affine eigensection charts for a supplied linearized ample line",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $T=\\mathbf G_{m,S}$ [def-sfb-relative-split-torus]. Let $X\\to S$ be a separated finite-type scheme [def-pc-scheme, def-weil-finite-type-morphism] whose local rings are integrally closed domains [def-weil-pbc-normal-ring]. Suppose $a:T\\times_SX\\to X$ is an action satisfying the unit and associativity identities as scheme maps [def-pc-fibre-product]. Let $L$ be an ample invertible $\\mathcal O_X$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], with a supplied $T$-linearization: an isomorphism $\\theta:p_2^*L\\simeq a^*L$ [def-pc-module-pullback] restricting to the identity at $1\\in T$ and satisfying $\\theta_{gh,x}=\\theta_{g,hx}\\theta_{h,x}$ on $T\\times_ST\\times_SX$. For every point $x\\in X$ there are integers $n\\geq1$, $w\\in\\mathbf Z$ and a section $s\\in\\Gamma(X,L^{\\otimes n})$ such that $x\\in X_s$, the nonvanishing open $X_s$ is affine and $T$-invariant, and $s$ is an eigensection of weight $w$ for the induced tensor-power linearization. Explicitly, for every $A$-algebra $B$ and $t\\in B^\\times$, the action on sections $(t\\cdot s_B)(y)=\\theta^{\\otimes n}_{t,t^{-1}y}(s_B(t^{-1}y))$ equals $t^w s_B$ as a section on $X_B$, including for nonreduced and nonflat $B$. No assertion that invariant affine opens form a basis for arbitrary opens, or that global sections commute with nonflat base change, is made.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01Q3, proposition-characterize-ample, ideal-section argument, combined with the existing relative split-torus invariant-affine theorem and the normalized Laurent section coaction. This polarized eigensection refinement is an agent-formulated auxiliary, not the verbatim statement of 01Q3. Weight decomposition and flat Laurent base change were also read in groupoids.tex and coherent.tex."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sfb-relative-split-torus",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "If $X$ is empty there is no point to consider. Fix $x\\in X$. The single affine open $S=\\operatorname{Spec}A$ is a Noetherian affine cover, so $S$ is locally Noetherian by [pqf-def-locnoeth]. It is quasi-compact, hence is a Noetherian scheme. Apply [lem-sfb-relative-split-torus-invariant-affines] with rank one, the given normal separated finite-type $X/S$, and the ample line $L$. Obtain an invariant affine open $U$ containing $x$. Invariance also holds for inverse group elements: for every field extension and group element, a point belongs to $U$ if and only if its translate does, by applying invariance once to that element and once to its inverse.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sfb-relative-split-torus-invariant-affines"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly using the existing relative invariant-affine theorem; Tag 01Q3, proposition-characterize-ample, ideal-section argument starts with an affine neighbourhood."
+   }
+  },
+  {
+   "text": "Put $Z=|X|\\setminus|U|$. By [lem-weil-pbc-reduced-induced-closed-subscheme], its vanishing ideal $\\mathcal I_Z$ is quasi-coherent, has zero set $Z$, and consists on each open of regular functions vanishing in the residue fields of all its points in $Z$. The ample definition [def-weil-pbc-ample-invertible-module] gives quasi-compactness of $X$. Since $x\\notin Z$, [lem-sc-ample-ideal-section] supplies $n>0$ and $u\\in\\Gamma(X,\\mathcal I_Z\\otimes L^{\\otimes n})$ whose image in $\\Gamma(X,L^{\\otimes n})$ is nonzero at $x$. Denote that image by $u$ too. In a local frame its coefficient lies in $\\mathcal I_Z$, so its value at every $z\\in Z$ is zero.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-ideal-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01Q3, proposition-characterize-ample, (1) implies (6) and the proof of (6) implies (1); schemes.tex Tag 01J3, lemma-reduced-closed-subscheme."
+   }
+  },
+  {
+   "text": "Tensoring the supplied linearization $n$ times gives a linearization on $M=L^{\\otimes n}$: the unit and cocycle identities tensor to the same identities. The local rank-one tensor frames show that $M$ is invertible [def-sc-invertible-module, def-pc-module-pullback]. Apply [lem-sfb-relative-linearized-line-sections-coaction] to $M$ with $C=A[t,t^{-1}]$. Write its finite Laurent expansion as $c(u)=\\sum_w u_w\\otimes t^w$, with $u_w\\in\\Gamma(X,M)$ and zero coefficients outside a finite set. The counit identity gives $u=\\sum_wu_w$. Coassociativity gives\n$$\\sum_w c(u_w)\\otimes t^w=\\sum_wu_w\\otimes t^w\\otimes t^w.$$\nTaking the coefficient of $t^w$ in the last Laurent factor yields $c(u_w)=u_w\\otimes t^w$. Coefficient extraction is valid for any $A$-module because $A[t,t^{-1}]=\\bigoplus_{w\\in\\mathbf Z}At^w$; it uses neither a field nor finite generation of the section module.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sfb-relative-linearized-line-sections-coaction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, as packaged in the cited normalized section coaction; elementary comparison of Laurent coefficients in its coassociativity and counit identities."
+   }
+  },
+  {
+   "text": "Every $u_w$ still vanishes at every point of $Z$. To check this without a base-change isomorphism for $Z$, fix $z\\in Z$, put $K=\\kappa(z)$ and $B=K(v)$, the rational function field in an indeterminate $v$. Regard $v$ as a point of $T(B)=B^\\times$, and let $z_B:\\operatorname{Spec}B\\to X_B$ be the constant lift of $z$. By Step 1, the point $v^{-1}z_B$ is outside $U_B$, so its image in $X$ lies in $Z$. Hence the section $u_B$ evaluates to zero there, by the residue-field vanishing description in [lem-weil-pbc-reduced-induced-closed-subscheme]. The normalized all-algebras formula in [lem-sfb-relative-linearized-line-sections-coaction], evaluated at $z_B$, now gives\n$$0=(v\\cdot u_B)(z_B)=\\sum_w v^w u_w(z)\\quad\\text{in }M(z)\\otimes_K K(v),$$\nwhere $M(z)=M_z\\otimes_{\\mathcal O_{X,z}}K$ is a one-dimensional $K$-space. Choose a basis of this line. The displayed equality is a finite Laurent polynomial over $K$ which is zero in $K(v)$. Multiplication by a sufficiently high power of $v$ makes it a polynomial, whose coefficients must all be zero because $v$ is indeterminate. Thus $u_w(z)=0$ for all $w$. This tests the boundary over a field only; it asserts no commutation of global sections with any nonflat base change.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-relative-linearized-line-sections-coaction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent Laurent-coefficient argument preserving the boundary vanishing used in Tag 01Q3, proposition-characterize-ample; normalized coaction from coherent.tex Tag 02KH."
+   }
+  },
+  {
+   "text": "Since $u(x)=\\sum_wu_w(x)\\ne0$, some coefficient $s=u_w$ has $s(x)\\ne0$. Step 4 implies $X_s\\subseteq U$. Apply [lem-sc-affine-cap-section-open] to the global section $s$ of $L^{\\otimes n}$ and the affine open $U$: it states that $U\\cap X_s$ is affine, and this intersection is exactly $X_s$. Thus $x\\in X_s$ and $X_s$ is affine. The value and nonvanishing criteria here are those of [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "lem-sc-affine-cap-section-open",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PV, lemma-affine-cap-s-open; final affine-neighbourhood argument in Tag 01Q3, proposition-characterize-ample."
+   }
+  },
+  {
+   "text": "Step 3 gives $c(s)=s\\otimes t^w$. The final clause of [lem-sfb-relative-linearized-line-sections-coaction] therefore gives $t\\cdot s_B=t^ws_B$ as an equality of sections for every $A$-algebra $B$ and every $t\\in B^\\times$, with exactly the action formula in the statement. This also proves scheme-theoretic invariance of $X_s$. Apply the formula with the universal group element on $T\\times_S X_s$: the relation says $\\theta^{\\otimes n}_{t,y}(s(y))=t^w s(ty)$. The left side is a generator of the pulled-back line, and $t^w$ is a unit, so $s(ty)$ is a generator. The action consequently lands in the open subscheme $X_s$ and restricts there; the identity and associativity laws restrict from $X$. This generator criterion works over arbitrary rings, including nonreduced and nonflat $B$.",
+   "uses": [
+    "lem-sfb-relative-linearized-line-sections-coaction",
+    "def-weil-pbc-ample-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH through the cited coaction normalization; unit-generator criterion for the nonvanishing locus, Properties Definition 01PS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sfb-relative-split-torus-invariant-affines",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-ideal-section",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sfb-relative-linearized-line-sections-coaction",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01Q3, proposition-characterize-ample, ideal-section argument, with Tag 01PV, lemma-affine-cap-s-open. Agent assembly of existing relative invariant-affine charts and the normalized section coaction; boundary preservation proved by a Laurent indeterminate over each residue field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ll]ineariz|[Ee]igensection|[Ss]emi.?invariant|[Aa]mple",
+   "results": "{\"t\": \"2026-10-24T06:43:31Z\", \"tool\": \"grep\", \"query\": \"[Ll]ineariz|[Ee]igensection|[Ss]emi.?invariant|[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"4ca89379df20bd9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample equivariant invertible sheaf for a split torus action gives a basis of invariant affine opens by homogeneous sections of positive powers",
+   "results": "{\"t\": \"2026-10-24T06:43:31Z\", \"tool\": \"leansearch\", \"query\": \"An ample equivariant invertible sheaf for a split torus action gives a basis of invariant affine opens by homogeneous sections of positive powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.isBasis_affine_open\", \"AlgebraicGeometry.isBasis_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen\", \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\"], \"digest\": \"eebce1284fe183f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"lineariz\"",
+   "results": "{\"t\": \"2026-10-24T06:43:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"lineariz\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal separated finite type scheme over a noetherian affine ring with a split multiplicative group action and a linearized ample line bundle has affine nonvanishing opens from eigenvector sections of powers of that same line bundle",
+   "results": "{\"t\": \"2026-10-24T06:43:33Z\", \"tool\": \"leanfinder\", \"query\": \"A normal separated finite type scheme over a noetherian affine ring with a split multiplicative group action and a linearized ample line bundle has affine nonvanishing opens from eigenvector sections of powers of that same line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\"], \"digest\": \"909deb3be0dc4eed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ample line with torus linearization every point lies in an affine principal open cut out by a semi invariant section of a positive tensor power",
+   "results": "{\"t\": \"2026-10-24T06:43:34Z\", \"tool\": \"leanfinder\", \"query\": \"For an ample line with torus linearization every point lies in an affine principal open cut out by a semi invariant section of a positive tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\"], \"digest\": \"0cd98e7ce1e42791\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]igensection|[Ss]emi.?invariant|[Ll]ineariz",
+   "results": "{\"t\": \"2026-10-24T07:19:27Z\", \"tool\": \"grep\", \"query\": \"[Ee]igensection|[Ss]emi.?invariant|[Ll]ineariz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; affine/Proj covers and ordinary basic-open localization do not supply eigensections of a given linearized ample line over a ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample linearized line bundle for a split torus has an invariant affine open covering by semi invariant power sections",
+   "results": "{\"t\": \"2026-10-24T07:19:27Z\", \"tool\": \"leansearch\", \"query\": \"An ample linearized line bundle for a split torus has an invariant affine open covering by semi invariant power sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.Scheme.basicOpen_pow\"], \"digest\": \"0bc73d5039fd3e01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; affine/Proj covers and ordinary basic-open localization do not supply eigensections of a given linearized ample line over a ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"lineariz\"",
+   "results": "{\"t\": \"2026-10-24T07:19:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"lineariz\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; affine/Proj covers and ordinary basic-open localization do not supply eigensections of a given linearized ample line over a ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf with a multiplicative group linearization on a normal scheme over a noetherian affine base has affine charts cut out by eigenvector sections of its powers",
+   "results": "{\"t\": \"2026-10-24T07:19:28Z\", \"tool\": \"leanfinder\", \"query\": \"An ample invertible sheaf with a multiplicative group linearization on a normal scheme over a noetherian affine base has affine charts cut out by eigenvector sections of its powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\"], \"digest\": \"abe7a4024f93193d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; affine/Proj covers and ordinary basic-open localization do not supply eigensections of a given linearized ample line over a ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an invariant affine neighborhood and an ample equivariant line bundle choose a homogeneous section vanishing on its boundary and nonzero at the point",
+   "results": "{\"t\": \"2026-10-24T07:19:30Z\", \"tool\": \"leanfinder\", \"query\": \"Given an invariant affine neighborhood and an ample equivariant line bundle choose a homogeneous section vanishing on its boundary and nonzero at the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le\"], \"digest\": \"cd3369764f6efdc4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; affine/Proj covers and ordinary basic-open localization do not supply eigensections of a given linearized ample line over a ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-gm-extension-ample-reflection",
+  "date": "2026-10-24",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Polarized invariant-affine chart input for the corrected symmetric group-quotient ampleness comparison; supporting auxiliary under the existing direct-image proof (3) / stable Picard ampleness route. The statement concerns a fixed supplied linearized ample line, not an unspecified projective embedding.",
+   "via": [
+    "lem-sfb-semiabelian-gm-extension-ample-reflection",
+    "lem-sfb-cubical-ample-norm-reflection",
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-linearized-ample-eigen-affine-cover",
+  "worker": "stage1",
+  "summary": "Statement unchanged mathematically; replaced the field-only multiplicative-group definition citation by the existing relative split-torus definition. Reused invariant affine neighbourhoods, ample ideal sections, reduced boundary ideals, the normalized Laurent section coaction and affine intersections. Wrote out weight extraction, boundary preservation over kappa(z)(v), and the all-algebras invariant-open argument. No new nodes.",
+  "blueprint": "The inherited polarized chart auxiliary serves the stable Picard ampleness route under direct-image clause (3) of det-thm-sf-ctf-stability-direct-images. Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md clause (3) was read. The ancestry tool reports from.node=None; inherited place and via retained. Whole-blueprint searches linearized, eigensection and invariant affine give no statement of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction of the quasi-coherent vanishing ideal of the closed boundary; no in-unit substitute states it."
+   },
+   {
+    "node": "lem-sc-ample-ideal-section",
+    "why": "Generic ample ideal-generation theorem supplies a positive power section vanishing along the boundary; no in-unit substitute states it."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic affineness of the intersection of an affine open with a line-section locus, after boundary avoidance; it does not assert equivariant eigencharts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-ample-ideal-section",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-981841252",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-981841252 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It has no new nodes, and the statement is verbatim from base (clones/live) except one citation: def-sc-gm-ga (a definition over a field only) becomes def-sfb-relative-split-torus (Stacks 022U, over any base). That fixes a citation and changes no mathematics. Step 1: lem-sfb-relative-split-torus-invariant-affines is applied with r=1, and every hypothesis matches the item's. Step 2: the boundary ideal I_Z comes from 01J3 and its vanishing set is Z; the section u comes from lem-sc-ample-ideal-section (01Q3 (1)⇒(6), read at properties.tex:4557). Step 3: since A[t,t^-1] is free over A, comparing Laurent coefficients in the coassociativity and counit identities gives c(u_w)=u_w⊗t^w and u=Σu_w. Step 4: the argument over κ(z)(v) is correct. By invariance, v^{-1}z_B lies outside U, so u vanishes there. The coaction normalization, with the same sign convention as the cited node, gives Σ v^w u_w(z)=0, so every coefficient vanishes. Step 5: X_s⊆U, so X_s=U∩X_s, which is affine by 01PV (read at properties.tex:4288). Step 6: on T×X_s the generator criterion shows the action maps T×X_s into X_s scheme-theoretically. Cases checked: X empty, trivial action with a character, A with nilpotents, nonflat B. No cycle: none of the nine proof_deps reaches the item. Batch-5 finding: the path reaches lem-trf-projective-bundle-quotient-geometry, which is the general universal property of P(Sym E) (Stacks 01OB/01O4/01O9). That is neither a statement nor a proof step of the trace formula or Poincaré duality, so it is accepted as outside the assumptions. Tool uses accepted: lem-weil-pbc-reduced-induced-closed-subscheme, lem-sc-ample-ideal-section and lem-sc-affine-cap-section-open (generic 01J3/01Q3/01PV). Note for the maintainer: blueprint from.node=null is inherited from base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearizedAmpleEigenAffineCover",
+  "declaration": "AlgebraicGeometry.exists_linearized_ample_eigen_affine_neighbourhood",
+  "declarations": [
+   "AlgebraicGeometry.relativeLineAction",
+   "AlgebraicGeometry.relativeLineLift",
+   "AlgebraicGeometry.relativeLinePowerComparison",
+   "AlgebraicGeometry.relativeLinePullbackSection",
+   "AlgebraicGeometry.relativeLinePowerLift",
+   "AlgebraicGeometry.relativeTorusWeight",
+   "AlgebraicGeometry.exists_linearized_ample_eigen_affine_neighbourhood"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearizedAmpleEigenAffineCover.lean",
+  "statement": "theorem exists_linearized_ample_eigen_affine_neighbourhood (A : Type u) [CommRing A] [IsNoetherianRing A] (X : CategoryTheory.Mod (Over (Spec (.of A))) (relativeSplitTorus (Spec (.of A)) 1).X) [IsSeparated X.X.hom] [LocallyOfFiniteType X.X.hom] [QuasiCompact X.X.hom] (hnormal : ∀ p : X.X.left, IsDomain (X.X.left.presheaf.stalk p) ∧ IsIntegrallyClosed (X.X.left.presheaf.stalk p)) (L : X.X.left.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple X.X.left L) (theta : (Scheme.Modules.tensorPullback (snd (relativeSplitTorus (Spec (.of A)) 1).X X.X).left).obj L ≅ (Scheme.Modules.tensorPullback (ModObj.smul (M := (relativeSplitTorus (Spec (.of A)) 1).X) (X := X.X)).left).obj L) (hunit : ∀ (Q : Over (Spec (.of A))) (x : Q ⟶ X.X), HEq (relativeLineLift X L theta Q 1 x) (Iso.refl ((Scheme.Modules.tensorPullback x.left).obj L))) (hmul : ∀ (Q : Over (Spec (.of A))) (g h : Q ⟶ (relativeSplitTorus (Spec (.of A)) 1).X) (x : Q ⟶ X.X), HEq (relativeLineLift X L theta Q (g * h) x) (relativeLineLift X L theta Q h x ≪≫ relativeLineLift X L theta Q g (relativeLineAction X Q h x))) (x : X.X.left) : ∃ (n : ℕ) (_ : 0 < n) (w : ℤ) (s : Γ(L.tensorPow n, ⊤)) (U : X.X.left.Opens), x ∈ U ∧ IsAffineOpen U ∧ (U : Set X.X.left) = Scheme.Modules.nonvanishingLocus (L.tensorPow n) s ∧ (ModObj.smul (M := (relativeSplitTorus (Spec (.of A)) 1).X) (X := X.X)).left ⁻¹ᵁ U = (snd (relativeSplitTorus (Spec (.of A)) 1).X X.X).left ⁻¹ᵁ U ∧ ∀ (Q : Over (Spec (.of A))) (g : Q ⟶ (relativeSplitTorus (Spec (.of A)) 1).X) (y : Q ⟶ X.X), (relativeLinePowerLift X L theta Q g y n).hom.app ⊤ (relativeLinePullbackSection y.left (L.tensorPow n) s) = relativeTorusWeight (Spec (.of A)) Q g w • relativeLinePullbackSection (relativeLineAction X Q g y).left (L.tensorPow n) s",
+  "branch": "sheaf-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-268bd3206",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim; read the module (190 lines), the report (Worker report plus Second reading) and all 10 stmt_dep records. Every clause matches the node: Noetherian A, relativeSplitTorus (Spec A) 1, separated and finite type, normal stalks, Mod (Over S) action, IsInvertible + IsAmple, theta via the recorded tensorPullback, hunit/hmul on all test schemes through relativeLineLift (HEq endpoint types equal by one_smul/mul_smul, so satisfiable), n>0, w:ℤ, s global, U affine with U = nonvanishingLocus, a⁻¹U = p₂⁻¹U, and the eigen equation theta^n_{g,y}(y*s) = g^w (gy)*s on every Q/S, which with y := g⁻¹y is the node's formula with the same orientation. Helper data canonical: section pullback by the unit pinned to 1⊗m; power comparison = asIso eps_g, the module_pullback_tensor witness (unique, its unit pinned through exists_tensorPullbackAdjunction) and PGLLinearization.powerIso; weight = pullback of e_w. No hollow def, only sorry, docstrings and source fine, imports exist and none quarantined. H4: GroupSchemeLinearization and TrivialTorusCoherentData are field-only, def-sfb-modobj-linearization is another notion. Advisory only: owners of powerIso and tensorPullbackObjUnitToUnit (landed def nodes) and of module_pullback_tensor/_isIso (theorems, canonical use) are not in stmt_deps; the second reading is by the author, as stated. No recompile, per instructions; worker reports a clean scompile."
+ }
+}

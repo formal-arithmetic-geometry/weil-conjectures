@@ -1,0 +1,259 @@
+{
+ "id": "lem-trf-double-hom-evaluation-shift",
+ "kind": "statement",
+ "title": "Signed integer-shift identity for double-Hom cochain evaluation",
+ "statement": "Let $R$ be a commutative ring and let $P,J,I$ be arbitrary integer-indexed cochain complexes of $R$-modules, that is, of module sheaves on the one-object site with trivial topology and constant ring $R$ [def-pc-cochain-complex-modules]. Use shifts $U[m]^n=U^{n+m}$ with differential $(-1)^m d_U$ [def-weil-abstract-derived-category], product Hom $\\operatorname{Hom}^\\bullet$ with $d(f)=d_{\\rm target}f-(-1)^{|f|}fd_{\\rm source}$ [def-pur-hom-complex], and direct-sum total tensor [def-pc-tensor-complex-sheaves]. Put $A=\\operatorname{Hom}^\\bullet(J,I)$ and $\\mathcal G(P)=\\operatorname{Hom}^\\bullet(\\operatorname{Hom}^\\bullet(P,J),I)$. Denote by $E_P:A\\otimes_RP\\to\\mathcal G(P)$ the chain evaluation $E_P(h\\otimes x)(f)=(-1)^{|x||f|}h(f(x))$.\nFor any complexes $U,V$ and integer $m$, let $s^V_{U,m}:\\operatorname{Hom}^\\bullet(U[m],V)\\xrightarrow{\\sim}\\operatorname{Hom}^\\bullet(U,V)[-m]$ be the chain isomorphism given on degree-$q$ maps by source reindexing and the factor $(-1)^{mq}$. Then the natural chain isomorphisms\n$$\\chi_{P,m}=(-1)^m s^I_{\\operatorname{Hom}^\\bullet(P,J),-m}\\circ\\operatorname{Hom}^\\bullet(s^J_{P,m},I)^{-1}:\\mathcal G(P[m])\\xrightarrow{\\sim}\\mathcal G(P)[m],$$\n$$\\tau_{P,m}:A\\otimes_RP[m]\\xrightarrow{\\sim}(A\\otimes_RP)[m],\\qquad h\\otimes x\\longmapsto(-1)^{m|h|}h\\otimes x$$\nsatisfy, for every integer $m$, the equality of chain maps\n$$\\chi_{P,m}\\circ E_{P[m]}=E_P[m]\\circ\\tau_{P,m}.$$\nMore explicitly, for $g\\in\\mathcal G(P[m])^n$ and $f\\in\\operatorname{Hom}^\\bullet(P,J)^c$, one has $(\\chi_{P,m}g)(f)=(-1)^{m(n+c)}g(f)$, where on the right $f$ is reindexed to degree $c+m$ in $\\operatorname{Hom}^\\bullet(P[m],J)$. No K-flatness, K-injectivity or boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A60 (lemma-evaluate-and-more) and 0A61 (remark-sign-explanation), with section-sign-rules: agent expansion of the signed first-variable Hom shifts and the equality (b-m)(c+m)+m(a+b-m+c) = bc+ma modulo 2."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-ring-hom-extension-shared-definitions",
+  "lem-sc-hom-complex-projections",
+  "def-sc-hom-tensor-degreewise-equation"
+ ],
+ "proof": [
+  {
+   "text": "Work on the one-object site, so the complexes and maps of [def-pc-cochain-complex-modules] are ordinary complexes and linear maps of $R$-modules. By [def-pur-hom-complex] and [def-pc-tensor-complex-sheaves], the formula for $E_P$ defines a degree-zero linear map: for $|h|=a$, $|x|=b$, $|f|=c$, its value lies in $I^{a+b+c}$. It is balanced in $h,x$, linear in the entire homogeneous family $f$, and extends over the direct sum because each input is a finite sum of homogeneous tensors. Thus no infinite sum is used, even when all complexes are unbounded.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+   }
+  },
+  {
+   "text": "Check the chain condition using the two differential definitions [def-pur-hom-complex, def-pc-tensor-complex-sheaves]. For homogeneous $h,x,f$ of degrees $a,b,c$, expanding $(dE_P(h\\otimes x))(f)$ gives\n$$(-1)^{bc}d_Ih(f(x))-(-1)^{a+bc}h(d_Jf(x))+(-1)^{a+bc+c}h(f(d_Px)).$$\nExpanding $E_P(d_Ah\\otimes x+(-1)^a h\\otimes d_Px)(f)$ gives these same three terms, since $d_Ah=d_Ih-(-1)^ahd_J$ and $(b+1)c=bc+c$. Equality on all homogeneous $f$ is equality of product-Hom elements, and equality on homogeneous tensors extends by linearity. The same calculation applies with $P[m]$ in place of $P$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+   }
+  },
+  {
+   "text": "Verify the first-variable shift without importing any choice of shift normalization. For a degree-$q$ family $f:U[m]\\to V$, reindex it as a degree-$(q-m)$ family $U\\to V$. With the shift differential of [def-weil-abstract-derived-category] iterated to integer $m$, both $s_{U,m}^V(df)$ and $d(s_{U,m}^Vf)$, after reindexing, are\n$$(-1)^{mq+m}d_Vf-(-1)^{mq+q}fd_U.$$\nThis follows by substituting $d_{U[m]}=(-1)^md_U$ in the Hom differential [def-pur-hom-complex]. The inverse reindexes back and multiplies a degree-$q$ element on the shifted Hom side by the same $(-1)^{mq}$; its square sign is $1$. Degree-zero pre- and postcomposition commute with these signs, proving naturality in $U,V$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+   }
+  },
+  {
+   "text": "For $h\\in A^a$ and $x\\in P^b$, regard $x$ as degree $b-m$ in $P[m]$. The map $\\tau$ is degree zero and has inverse given by the same sign $(-1)^{ma}$. Using [def-pc-tensor-complex-sheaves] and the shift convention [def-weil-abstract-derived-category], both $\\tau d(h\\otimes x)$ and $d\\tau(h\\otimes x)$ are\n$$(-1)^{ma+m}d_Ah\\otimes x+(-1)^{ma+a+m}h\\otimes d_Px.$$\nIt is therefore a chain isomorphism. Its formula commutes with degree-zero maps of $A,P$, so it is natural.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+   }
+  },
+  {
+   "text": "Put $B=\\operatorname{Hom}^\\bullet(P,J)$ and $B_m=\\operatorname{Hom}^\\bullet(P[m],J)$. By step 3, $s=s^J_{P,m}:B_m\\to B[-m]$ is a natural chain isomorphism. Contravariant composition in [def-pur-hom-complex] sends its inverse to the inverse of $\\operatorname{Hom}^\\bullet(s,I)$, so the displayed composite defining $\\chi$ is a natural chain isomorphism. Explicitly, for $g\\in\\mathcal G(P[m])^n$ and $f\\in B^c$, applying $s^{-1}$ to $f$ in $B[-m]^{c+m}$ contributes $(-1)^{m(c+m)}$. The outer $s^I_{B,-m}$ contributes $(-1)^{-mn}$, and the prefactor contributes $(-1)^m$. Their product is $(-1)^{m(n+c)}$, since $m^2+m$ is even. This proves exactly the asserted component formula, for positive, zero and negative $m$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+   }
+  },
+  {
+   "text": "Finally take $|h|=a$, $|x|=b$ in the original $P$, and $|f|=c$ in $B$. In the shifted source $|x|=b-m$, $f$ is read in $B_m^{c+m}$, and $E_{P[m]}(h\\otimes x)$ has degree $n=a+b-m$. By step 5, the left side of the claimed square evaluates on $f$ to $h(f(x))$ times the sign with exponent\n$$(b-m)(c+m)+m(a+b-m+c).$$\nThe right side has exponent $ma+bc$, by $\\tau$ and the formula for $E_P$. Their difference is $2m(b-m)$, which is even for every integer $m$. Hence the two values agree. Product-Hom equality is componentwise [def-pur-hom-complex], and homogeneous tensors generate the direct-sum total tensor [def-pc-tensor-complex-sheaves], so this proves equality of the chain maps. Every construction and check used only linear maps and signs, with no flatness, injectivity or boundedness assumption.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A60 (lemma-evaluate-and-more), 0A61 (remark-sign-explanation), and section-sign-rules; explicit agent calculation in the stated normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cochain double Hom evaluation E(h tensor x)(f) = (-1)^(degree x degree f) h(f(x)) commutes with signed integer shifts",
+   "results": "8 hits; top=['CochainComplex.HomComplex.Cochain.leftUnshift_v', 'CochainComplex.HomComplex.Cochain.leftShift_v', 'CochainComplex.HomComplex.Cochain.shift_v', 'CochainComplex.HomComplex.Cochain.leftUnshift', 'CochainComplex.HomComplex.Cochain.rightUnshift_v', 'CochainComplex.HomComplex.Cochain.leftShift', 'CochainComplex.HomComplex.Cochain.leftShift_comp', 'CochainComplex.HomComplex.Cochain.shiftLinearMap_apply']; subdirectory=; note=; digest=bb17d90cd8378f9a",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom cochain shift operations and shifted-Hom opposite equivalences do not state the signed double-evaluation square with both arbitrary target complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"shift\"",
+   "results": "12 hits; top=['CochainComplex.HomComplex.Cochain.leftUnshift_leftShift', 'CochainComplex.HomComplex.Cochain.rightUnshift_rightShift', 'CochainComplex.HomComplex.Cochain.leftShift', 'CochainComplex.HomComplex.Cochain.leftUnshift', 'CochainComplex.HomComplex.Cochain.rightShift', 'CochainComplex.HomComplex.Cochain.rightUnshift', 'CochainComplex.HomComplex.Cocycle.leftShift', 'CochainComplex.HomComplex.Cocycle.leftUnshift']; subdirectory=; note=; digest=46fdfd2fc69db88e",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom cochain shift operations and shifted-Hom opposite equivalences do not state the signed double-evaluation square with both arbitrary target complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the double Hom evaluation cochain map with signed shift isomorphisms for every integer",
+   "results": "8 hits; top=['CochainComplex.shiftEval_hom_app', 'CochainComplex.shiftEval', 'CochainComplex.HomComplex.Cochain.leftUnshift', 'CochainComplex.HomComplex.Cochain.rightUnshift', 'CochainComplex.HomComplex.Cochain.shift', 'CochainComplex.shiftFunctor', 'CochainComplex.ShiftSequence.shiftIso', 'CochainComplex.ShiftSequence.shiftIso_inv_app']; subdirectory=; note=; digest=9c37c0cfc7b1fa2e",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom cochain shift operations and shifted-Hom opposite equivalences do not state the signed double-evaluation square with both arbitrary target complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|doubleHom|leftShift_comp",
+   "results": "3 hits; top=['395', '411', '414']; subdirectory=Algebra/Homology/HomotopyCategory/HomComplexShift.lean; note=; digest=277e2e05bcba2352",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom cochain shift operations and shifted-Hom opposite equivalences do not state the signed double-evaluation square with both arbitrary target complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double internal Hom shift comparison with the extra sign from reversing triangles makes the evaluation transformation commute with shifts",
+   "results": "8 hits; top=[\"CategoryTheory.ShiftedHom.opEquiv'_symm_comp\", \"CategoryTheory.ShiftedHom.opEquiv'_apply\", 'CategoryTheory.ShiftedHom.opEquiv_symm_apply_comp', \"CategoryTheory.ShiftedHom.opEquiv'_symm_op_opShiftFunctorEquivalence_counitIso_inv_app_op_shift\", \"CategoryTheory.ShiftedHom.opEquiv'\", 'CategoryTheory.ShiftedHom.opEquiv_symm_comp', 'CategoryTheory.MonoidalClosed.compTranspose_eq', 'CategoryTheory.TwistShiftData.shift_z_app']; subdirectory=; note=; digest=40399675eae17353",
+   "date": "2026-10-22",
+   "verdict": "no match: Hom cochain shift operations and shifted-Hom opposite equivalences do not state the signed double-evaluation square with both arbitrary target complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|doubleHom|leftShift_comp",
+   "results": "3 hits; top=['395', '411', '414']; subdirectory=Algebra/Homology/HomotopyCategory/HomComplexShift.lean; note=; digest=277e2e05bcba2352",
+   "date": "2026-10-22",
+   "verdict": "no match: component Hom shifts (with Conrad normalization in HomComplexShift), tensor formation and ordinary module evaluation do not state the arbitrary-complex signed double-Hom evaluation square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double internal Hom evaluation cochain map compatible with shift signs",
+   "results": "8 hits; top=['CochainComplex.shiftEval_hom_app', 'CochainComplex.shiftEval', 'CochainComplex.HomComplex.Cochain.leftUnshift_v', 'CochainComplex.ι_mapBifunctorShift₂Iso_hom_f', 'CochainComplex.shiftFunctor', 'CochainComplex.HomComplex.Cochain.leftUnshift', 'CochainComplex.shiftEval.congr_simp', 'CochainComplex.HomComplex.Cochain.shift']; subdirectory=; note=; digest=bf812e52e364747d",
+   "date": "2026-10-22",
+   "verdict": "no match: component Hom shifts (with Conrad normalization in HomComplexShift), tensor formation and ordinary module evaluation do not state the arbitrary-complex signed double-Hom evaluation square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"leftShift\"",
+   "results": "12 hits; top=['CochainComplex.HomComplex.Cochain.leftUnshift_leftShift', 'CochainComplex.HomComplex.Cochain.leftShift', 'CochainComplex.HomComplex.Cocycle.leftShift', 'CochainComplex.HomComplex.Cochain.leftShift_leftUnshift', 'CochainComplex.HomComplex.Cochain.leftShift_comp_zero_cochain', 'CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv', 'CochainComplex.HomComplex.Cochain.leftShift_smul', 'CochainComplex.HomComplex.Cochain.leftShiftAddEquiv']; subdirectory=; note=; digest=0cc552485b97450b",
+   "date": "2026-10-22",
+   "verdict": "no match: component Hom shifts (with Conrad normalization in HomComplexShift), tensor formation and ordinary module evaluation do not state the arbitrary-complex signed double-Hom evaluation square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary cochain complexes the signed double Hom evaluation commutes with integer shifts of the source complex",
+   "results": "8 hits; top=['CochainComplex.HomComplex.Cochain.leftShift_v', 'CochainComplex.HomComplex.Cochain.leftUnshift_v', 'CochainComplex.HomComplex.Cochain.δ_rightUnshift', 'CochainComplex.HomComplex.Cochain.leftShift_rightShift_eq_negOnePow_rightShift_leftShift', 'CochainComplex.HomComplex.Cochain.leftShift_rightShift', \"CochainComplex.HomComplex.Cochain.shift_v'\", 'CochainComplex.HomComplex.Cochain.δ_leftUnshift', 'CochainComplex.HomComplex.Cochain.leftUnshift']; subdirectory=; note=; digest=4125bfaa4e5316bb",
+   "date": "2026-10-22",
+   "verdict": "no match: component Hom shifts (with Conrad normalization in HomComplexShift), tensor formation and ordinary module evaluation do not state the arbitrary-complex signed double-Hom evaluation square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul signed evaluation from Hom(J,I) tensor P to Hom(Hom(P,J),I), compatibility with shift of P and double dual signs",
+   "results": "8 hits; top=['HomologicalComplex.ιTensorObj', 'HomologicalComplex.tensorHom', 'HomologicalComplex.tensorObj', 'HomologicalComplex.unit_tensor_d₁', 'CategoryTheory.CommShift₂Setup.int_ε', 'HomologicalComplex.instHasTensorTensorUnit_1', 'HomologicalComplex.instHasTensorTensorUnit', 'ModuleCat.ihom_ev_app']; subdirectory=; note=; digest=6f14d79c51b2bc9f",
+   "date": "2026-10-22",
+   "verdict": "no match: component Hom shifts (with Conrad normalization in HomComplexShift), tensor formation and ordinary module evaluation do not state the arbitrary-complex signed double-Hom evaluation square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-evaluation-canonical-map",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting construction: the canonical evaluation map of Tag 0A67 and its compatibility with triangles. Re-split of lem-trf-derived-evaluation-canonical-map: Old proof step 5: differential check of the first-variable shift, the reversal sign, double-Hom component formula, and parity identity for every integer shift.",
+   "via": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-double-hom-evaluation-shift",
+  "worker": "stage1",
+  "summary": "Retained the full statement and all previous search records. Gave six direct component calculations: well-defined evaluation, its differential, first-variable shift and inverse, tensor shift, the double-Hom component sign, and the final even-exponent identity. Every step is elementary from cited definitions; no new nodes or off-unit statement tools. Searched the project source, whole DAG and blueprint, and Mathlib with two semantic phrasings.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality is retained: this proves the auxiliary all-integer signed-shift calculation in old step 5 of lem-trf-derived-evaluation-canonical-map, precisely the place already specified in blueprint.from.place. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-07c261a98",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-07c261a98 (reviewer sub-agent of L); spot-checked: Shape: one commit (item and report), no new nodes. The statement and stmt_deps are byte-identical to the base, checked by sha1 against 532 earlier snapshots, all unsplit. No repair note, no supersession, and the item is not on the dropped list (created by O1 on 2026-10-22). proof_deps equals the union of uses, which is the four stmt_dep definitions (def-pc-cochain-complex-modules, def-pur-hom-complex, def-pc-tensor-complex-sheaves, def-weil-abstract-derived-category); I read the statement of each. No tool_uses, no SGA, Mathlib searches complete. Source: Stacks more-algebra.tex 0A60 (l.18164) and 0A61 (l.18294). Stacks' sign (-1)^{r+qr}, with |f|=-q-r, is the item's (-1)^{|x||f|}; the shift identity itself is correctly marked proof_origin agent. I recomputed every step by hand. Step 2: the three terms bc, a+bc+1 and a+bc+c match on both sides. Step 3: d(sf) and s(df) both equal (-1)^{mq+m}d_V g-(-1)^{mq+q}g d_U. Step 4: tau d and d tau agree, using d_{P[m]}=(-1)^m d_P. Step 5: the types of s, Hom(s,I)^{-1} and s^I_{B,-m} compose to G(P[m]) -> G(P)[m], and the sign m+mn+m(c+m) reduces to m(n+c) mod 2. Step 6: the exponents differ by 2m(b-m), which is even. Each step is a short displayed calculation from the cited definitions, so elementary=true is justified. Edge cases m=0, m=1 (a=1, b=c=0, both sides -1), m=-1, characteristic 2, zero ring and unbounded complexes all hold, with J≠I kept throughout. Duplicates: lem-pur-hom-complex-shift-left has no sign normalization. lem-sf-double-hom-cone-comparison is single-target, m=1 only and about cones, with no evaluation square. The sibling lem-trf-tensor-double-hom-exact-comparisons uses exactly the same phi/psi normalizations, so the parent's step 3 is consistent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DoubleHomEvaluationShift",
+  "declaration": "CategoryTheory.DoubleHomEvaluationShift.signed_evaluation_shift",
+  "declarations": [
+   "CategoryTheory.DoubleHomEvaluationShift.Complex",
+   "CategoryTheory.DoubleHomEvaluationShift.hom",
+   "CategoryTheory.DoubleHomEvaluationShift.homMap",
+   "CategoryTheory.DoubleHomEvaluationShift.doubleMap",
+   "CategoryTheory.DoubleHomEvaluationShift.tensor",
+   "CategoryTheory.DoubleHomEvaluationShift.tensorMap",
+   "CategoryTheory.DoubleHomEvaluationShift.tensorShift",
+   "CategoryTheory.DoubleHomEvaluationShift.pure",
+   "CategoryTheory.DoubleHomEvaluationShift.value",
+   "CategoryTheory.DoubleHomEvaluationShift.reindex",
+   "CategoryTheory.DoubleHomEvaluationShift.signed_evaluation_shift"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DoubleHomEvaluationShift.lean",
+  "statement": "theorem signed_evaluation_shift : ∃ (s : ∀ (U V : Complex R) (m : ℤ), hom (U⟦m⟧) V ≅ (hom U V)⟦-m⟧) (E : ∀ P J I : Complex R, tensor (hom J I) P ⟶ hom (hom P J) I) (χ : ∀ (P J I : Complex R) (m : ℤ), hom (hom (P⟦m⟧) J) I ≅ (hom (hom P J) I)⟦m⟧), (∀ (U V : Complex R) (m q a : ℤ), (s U V m).hom.f q ≫ ((hom U V).shiftFunctorObjXIso (-m) q (q - m) (by omega)).hom ≫ homComplexπ U V (q - m) (a + m) (a + q) (by omega) = (m * q).negOnePow • (homComplexπ (U⟦m⟧) V q a (a + q) rfl ≫ SheafOfModules.homObjMap (R := CochainComplex.onePointRingSheaf R) (U.shiftFunctorObjXIso m a (a + m) rfl).inv (𝟙 _))) ∧ (∀ (U U' V V' : Complex R) (f : U' ⟶ U) (g : V ⟶ V') (m : ℤ), homMap (f⟦m⟧') g ≫ (s U' V' m).hom = (s U V m).hom ≫ (homMap f g)⟦-m⟧') ∧ (∀ (P J I : Complex R) (a b c : ℤ) (W : (Discrete PUnit.{u + 1})ᵒᵖ) (h : ((hom J I).X a).val.obj W) (x : (P.X b).val.obj W) (f : ((hom P J).X c).val.obj W), value (hom P J) I (a + b) c (a + b + c) (by omega) W ((E P J I).f (a + b) |>.val.app W (pure (hom J I) P a b (a + b) rfl W h x)) f = (b * c).negOnePow • value J I a (b + c) (a + b + c) (by omega) W h (value P J c b (b + c) rfl W f x)) ∧ (∀ (P J I : Complex R) (m : ℤ), (χ P J I m).hom = m.negOnePow • (homMap (s P J m).inv (𝟙 I) ≫ (s (hom P J) I (-m)).hom ≫ eqToHom (congrArg (fun t : ℤ ↦ (hom (hom P J) I)⟦t⟧) (neg_neg m)))) ∧ (∀ (P J I : Complex R) (m n c : ℤ), (χ P J I m).hom.f n ≫ ((hom (hom P J) I).shiftFunctorObjXIso m n (n + m) rfl).hom ≫ homComplexπ (hom P J) I (n + m) c (c + (n + m)) rfl = (m * (n + c)).negOnePow • (homComplexπ (hom (P⟦m⟧) J) I n (c + m) (c + (n + m)) (by omega) ≫ SheafOfModules.homObjMap (R := CochainComplex.onePointRingSheaf R) (reindex P J m c) (𝟙 _))) ∧ (∀ (P J I : Complex R) (m a b : ℤ) (W : (Discrete PUnit.{u + 1})ᵒᵖ) (h : ((hom J I).X a).val.obj W) (x : ((P⟦m⟧).X b).val.obj W), (((tensor (hom J I) P).shiftFunctorObjXIso m (a + b) (a + b + m) rfl).hom.val.app W) ((tensorShift (hom J I) P m).hom.f (a + b) |>.val.app W (pure (hom J I) (P⟦m⟧) a b (a + b) rfl W h x)) = (m * a).negOnePow • pure (hom J I) P a (b + m) (a + b + m) (by omega) W h ((P.shiftFunctorObjXIso m b (b + m) rfl).hom.val.app W x)) ∧ (∀ (P P' J J' I I' : Complex R) (p : P ⟶ P') (j : J' ⟶ J) (i : I ⟶ I') (m : ℤ), doubleMap (p⟦m⟧') j i ≫ (χ P' J' I' m).hom = (χ P J I m).hom ≫ (doubleMap p j i)⟦m⟧') ∧ (∀ (P P' J J' I I' : Complex R) (p : P ⟶ P') (j : J' ⟶ J) (i : I ⟶ I') (m : ℤ), tensorMap (homMap j i) (p⟦m⟧') ≫ (tensorShift (hom J' I') P' m).hom = (tensorShift (hom J I) P m).hom ≫ (tensorMap (homMap j i) p)⟦m⟧') ∧ (∀ (P J I : Complex R) (m : ℤ), E (P⟦m⟧) J I ≫ (χ P J I m).hom = (tensorShift (hom J I) P m).hom ≫ (E P J I)⟦m⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q123",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d237ea3bf",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause; signs recomputed by hand under the project/Mathlib conventions: E chain map, s ((-1)^{mq}) chain iso, χ definition and component formula consistent (m(n+c)), tensor-shift sign (-1)^{ma} = Mathlib ι_mapBifunctorShift₂Iso_hom_f, square exponents differ by 2m(b-m). Existential s/E/χ fully determined by their clauses (pure tensors generate, single slice object). Edge cases (m≤0, char 2, zero ring, unbounded, J≠I, universe u free) covered. Mechanical finding: homComplexπ/homComplexIsLimit are Classical.choose/choose_spec of homComplex_projections_exists, objects the theorem constructs (ringHomComplexProjection of the def node is the same .choose and has no IsLimit), PASS on that point as for lem-sfb-ringed-site-bounded-dual-components. Only lean+stmt_deps changed (3 landed deps added), dependency records equal live, statement verbatim, 11 declarations present, docstrings with source/blueprint and 6-step proof, no hollow defs, no other proofs (only sorry). Advisory: value duplicates ringHomEvaluate with an index equation. No file changed, so no recompile."
+ }
+}

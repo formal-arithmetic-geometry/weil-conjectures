@@ -1,0 +1,345 @@
+{
+ "id": "lem-sfb-space-single-complex-tensor-inheritance",
+ "kind": "statement",
+ "title": "Tensor inheritance of the geometric-stalk base-change condition",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use the unbounded module derived categories [def-weil-abstract-derived-category], the canonical tensor pullback and direct image [def-trf-space-etale-module-functors], their total derived functors computed by K-flat resolutions with flat terms and K-injective resolutions, and K-flat derived tensor product. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms, and set $X'=X\\times_Y Y'$ with projections $g':X'\\to X$ and $f':X'\\to Y'$. For a geometric point $\\bar x':\\operatorname{Spec}\\Omega\\to X'$ with $\\Omega$ algebraically closed, write $\\bar x=g'\\bar x'$, $\\bar y'=f'\\bar x'$, $\\bar y=f\\bar x$, and put $R=\\mathcal O_{Y,\\bar y}$, $A=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{Y',\\bar y'}$, $C=\\mathcal O_{X',\\bar x'}$, $D=A\\otimes_R B$. The stalks are colimits over pointed etale scheme neighbourhoods, and $D\\to C$ is induced by the projection stalk maps. For $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, $K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$ and $\\phi:L(g')^*K\\to K'$, define the stalk comparison $\\beta^i_{\\phi,\\bar x'}$ to be\n$$H^i(K_{\\bar x}\\otimes_R^{\\mathbf L}B)\\otimes_D C\\longrightarrow H^i(K'_{\\bar x'}).$$\nHere the arrow is induced by $K_{\\bar x}\\otimes_R^{\\mathbf L}B\\to K_{\\bar x}\\otimes_A^{\\mathbf L}C\\simeq(L(g')^*K)_{\\bar x'}\\xrightarrow{\\phi_{\\bar x'}}K'_{\\bar x'}$, extended $C$-linearly on cohomology. Assume $\\beta^i_{\\phi,\\bar x'}$ is an isomorphism for every geometric $\\bar x'$ and every $i\\in\\mathbf Z$. For every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, the coefficient map\n$$\\psi:L(g')^*(E\\otimes^{\\mathbf L}K)\\simeq L(g')^*E\\otimes^{\\mathbf L}L(g')^*K\\xrightarrow{1\\otimes\\phi}L(g')^*E\\otimes^{\\mathbf L}K'$$\nhas isomorphisms $\\beta^i_{\\psi,\\bar x'}$ for every geometric $\\bar x'$ and every integer $i$, using the same definition with $E\\otimes^{\\mathbf L}K$ and $L(g')^*E\\otimes^{\\mathbf L}K'$ in place of $K,K'$. No boundedness of $E$ and no flatness of the square is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKI (lemma-single-complex-base-change-condition-inherited), clause (1); Tag 0DKG (lemma-single-complex-base-change-condition), condition (1) and equation-bc immediately before it."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback-models",
+  "def-sfb-space-geometric-stalk-models",
+  "def-sfb-space-single-complex-stalk-condition",
+  "def-sfb-space-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "First the proposed coefficient map has the required domain: derived pullback and derived tensor preserve quasi-coherent cohomology by [lem-sfb-space-derived-qcoh-pullback-tensor]. Thus both $E\\otimes^{\\mathbf L}K$ and $L(g')^*E\\otimes^{\\mathbf L}K'$ lie in the indicated $D_{\\mathrm{QCoh}}$. The canonical derived tensor pullback isomorphism is that of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the ringed small etale topoi. In particular it is computed by the ordinary balanced tensor comparison on K-flat resolutions with flat terms.",
+   "uses": [
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI, proof, first paragraph; sites-cohomology.tex Tag 07A4"
+   }
+  },
+  {
+   "text": "Choose K-flat flat-term resolutions $P^\\bullet,Q^\\bullet$ representing $E,K$, using [lem-pc-kflat-resolution]. Choose a K-injective representative $I^\\bullet$ of $K'$ by [prop-pur-kinjective-resolutions-exist]. Since $(g')^*Q^\\bullet$ represents $L(g')^*K$, the morphism $\\phi$ is represented by a chain map $a:(g')^*Q^\\bullet\\to I^\\bullet$, by [lem-weil-pbc-kinjective-hom-derived]. No quasi-isomorphism is asserted for $a$. The sites are small relative to the module universe, as required by these resolution results.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI, clause (1), K-flat computation; sites-cohomology.tex Tags 06YS, 07A5; derived.tex Tag 070I"
+   }
+  },
+  {
+   "text": "Fix a geometric $\\bar x'$ and use the rings $R,A,B,C,D$ in the statement. Put $U=P_{\\bar x}$, $Q=Q^\\bullet_{\\bar x}$, $N=I_{\\bar x'}$, and $F(M)=C\\otimes_A M$ termwise. Exactness of normalized module stalks identifies these with representatives of the derived stalks. The K-flat stalk criterion makes $U,Q$ K-flat over $A$. By [lem-sfb-space-geometric-stalk-tensor-calculus], $C$ is flat over $D=A\\otimes_R B$, and the stalk of $a$ is a chain map $t:F(Q)\\to N$ representing $\\phi_{\\bar x'}$ under the specified derived pullback comparison. These assertions require neither $A$ nor $B$ to be flat over $R$.",
+   "uses": [
+    "lem-sfb-ringed-site-point-exact",
+    "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "lem-sfb-space-geometric-stalk-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG, geometric stalk setup and proof; sites-cohomology.tex Tag 0DEN"
+   }
+  },
+  {
+   "text": "By [lem-pur-kflat-total-tensor-model], $\\operatorname{Tot}(P^\\bullet\\otimes Q^\\bullet)$ is K-flat with flat terms and represents $E\\otimes^{\\mathbf L}K$; hence $(g')^*\\operatorname{Tot}(P^\\bullet\\otimes Q^\\bullet)$ represents $L(g')^*(E\\otimes^{\\mathbf L}K)$, and $\\psi$ is represented by the ordinary module pullback tensor comparison of [def-weil-pbc-canonical-ringed-tensor-comparison] followed by $1\\otimes a$. The signed total tensor stalk comparison identifies $(E\\otimes^{\\mathbf L}K)_{\\bar x}$ with $U\\otimes_A Q$. The complexes $(g')^*P^\\bullet,(g')^*Q^\\bullet$ remain K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so their stalks $F(U),F(Q)$ are K-flat over $C$ by the stalk criterion. Hence the stalk of the target of $\\psi$ is represented by $F(U)\\otimes_C N$. In these coordinates $\\psi_{\\bar x'}$ is represented by\n$$F(U\\otimes_A Q)\\xrightarrow{\\tau}F(U)\\otimes_C F(Q)\\xrightarrow{1\\otimes t}F(U)\\otimes_C N.$$\nHere $\\tau(c\\otimes(u\\otimes q))=(c\\otimes u)\\otimes(1\\otimes q)$. The normalized inverse-image tensor comparison preserves pure tensors, and the pure-tensor equation of [def-weil-pbc-canonical-ringed-tensor-comparison] (the scalar-extension insertion $q$ sends $m$ to $1\\otimes m$) shows that the ordinary pullback comparison, whose derived class is the canonical derived pullback comparison, has stalk $\\tau$. Thus this is precisely the inverse scalar-extension tensorator in the ring inheritance lemma. On a homogeneous $(p,q)$ summand, both routes preserve the order $u,q$, and the differential is $d_U\\otimes1+(-1)^p1\\otimes d_Q$; no symmetry or extra sign is introduced.",
+   "uses": [
+    "lem-sfb-ringed-site-point-tensor",
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "lem-sfb-space-geometric-stalk-tensor-calculus",
+    "lem-pur-kflat-total-tensor-model",
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI, clause (1), tensor computation; sites-cohomology.tex Tags 07A4, 0DEN"
+   }
+  },
+  {
+   "text": "For each of the $A$-complexes $M=Q$ and $M=U\\otimes_A Q$, take the universal derived extension and its $D$-linear cohomology action supplied by [lem-pc-base-derived-tensor-cohomology-action]. The ordinary identification sends $b\\otimes m$ to $(1\\otimes b)\\otimes m$. Extend its counit on cohomology $D$-linearly to $C$, as in [def-pc-base-derived-tensor-cohomology-model], to obtain models $m_Q,m_{UQ}$. Concretely the localized comparison is characterized by\n$$h\\otimes c\\longmapsto c\\,H^i(M\\otimes_R^{\\mathbf L}B\\longrightarrow C\\otimes_A M)(h).$$\nFor $M=Q$, following this by $H^i(t)$ gives $\\beta^i_{\\phi,\\bar x'}$: the arrow before $H^i(t)$ is exactly the derived-to-ordinary scalar-extension comparison used in the geometric stalk formula, and $t$ represents $\\phi_{\\bar x'}$. This is an equality of the canonical comparison maps, with the canonical $D$-action, not just an identification of their source and target groups.",
+   "uses": [
+    "lem-pc-base-derived-tensor-cohomology-action",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-sfb-space-geometric-stalk-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKG, equation-bc; more-algebra.tex Tags 06Y6, 08IB"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-localized-tensor-comparison-inheritance] to these rings, $U,Q,N,t,m_Q,m_{UQ}$. Its flatness hypothesis is the flatness of $C$ over $D$ from step 3, its two K-flatness hypotheses are also from step 3, and its hypothesis in every degree is exactly the assumed invertibility of $\\beta^j_{\\phi,\\bar x'}$ by step 5. It gives invertibility, for every $i$, of the localized comparison for $U\\otimes_A Q$ followed by the cohomology of $(1\\otimes t)\\tau$. The theorem permits arbitrary unbounded complexes.",
+   "uses": [
+    "lem-pc-localized-tensor-comparison-inheritance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI, clause (1), transitivity of tensor; perfect.tex Tag 0DJA(1), ring-level computation using more-algebra.tex Tag 0BYJ"
+   }
+  },
+  {
+   "text": "Apply the formula of step 5 with $M=U\\otimes_A Q$. By the explicit representative of step 4, its composite with $H^i((1\\otimes t)\\tau)$ is $\\beta^i_{\\psi,\\bar x'}$. It is an isomorphism by step 6. Since $\\bar x'$ and $i$ were arbitrary, all required comparisons are isomorphisms. The proof introduced no degree bounds and used only $D\\to C$ flatness, so it imposes no flatness on the original square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKI, clause (1), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "lem-sfb-space-geometric-stalk-tensor-calculus",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-pur-kflat-total-tensor-model",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-pc-base-derived-tensor-cohomology-action",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-localized-tensor-comparison-inheritance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKI, lemma-single-complex-base-change-condition-inherited, part (1), expanded using the existing ring-level tensor inheritance and normalized K-flat stalk computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalkwise single complex base change condition for a cartesian square of algebraic spaces is inherited by derived tensor with any quasi coherent complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q],\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) → P.IsStableUnderBaseCha\", \"doc\": \"If a ring homomorphism property $ Q $ is stable under base change, then the corresponding scheme morphism property $ P $, defined via ring homomorphisms between commutative rings, is also stable under\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a coefficient comparison satisfies derived base change at geometric stalks then tensoring with an unbounded quasi coherent complex preserves that condition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q],\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) → P.IsStableUnderBaseCha\", \"doc\": \"If a ring homomorphism property $ Q $ is stable under base change, then the corresponding scheme morphism property $ P $, defined via ring homomorphisms between commutative rings, is also stable under\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.baseChange\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R T).SurjectiveOnStalks → (algebraMap S (TensorProduct R S T)).SurjectiveOnStalks\", \"doc\": \"Given commutative semirings $ R $, $ S $, and $ T $ with $ S $ and $ T $ as $ R $-algebras, if the canonical algebra homomorphism $ R \\\\to T $ is surjective on stalks, then the induced algebra homomorp\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.baseChange'\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R S).SurjectiveOnStalks → Algebra.TensorProduct.includeRight.SurjectiveOnStalks\", \"doc\": \"Given a commutative semiring $ R $ and $ R $-algebras $ S $ and $ T $, if the canonical algebra map $ R \\\\to S $ is surjective on stalks, then the induced inclusion map $ S \\\\to S \\\\otimes_R T $ is also \"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/OpenImmersion\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardOpenImmersion\", \"doc\": \"If a ring homomorphism is a standard open immersion (i.e., its target is isomorphic to the localization of its source at a single element), then after any base change, the induced ring homomorphism re\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Single complex base change condition inherited under derived tensor product for quasi coherent complexes on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.of_comp\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {h : N →ₗ[S] O} (hc : IsBaseChange T ((h : N →ₗ[R] O) ∘ₗ f)) : IsBaseChange T h\", \"doc\": \"Given linear maps $ f : M → N $ and $ h : N → O $, if $ f $ is an $ S $-base change and the composition $ h ∘ f $ is a $ T $-base change, then $ h $ itself is a $ T $-base change. This follows from th\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"IsBaseChange.iff_lift_unique\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \":\\n  IsBaseChange S f ↔\\n    ∀ (Q : Type max v₁ v₂ v₃) [AddCommMonoid Q],\\n      ∀ [Module R Q] [Module S Q],\\n        ∀ [IsScalarTower R S Q], ∀ g : M →ₗ[R] Q, ∃! g' : N →ₗ[S] Q, (g'.restrictScalars R).comp f = g\", \"doc\": \"Given a scalar tower $ R \\\\to S $, the base change construction satisfies the universal property of the tensor product if and only if for every additive commutative monoid $ Q $ equipped with compatibl\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"LinearEquiv.baseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(e : M ≃ₗ[R] N) : A ⊗[R] M ≃ₗ[A] A ⊗[R] N\", \"doc\": \"Given an $ R $-linear equivalence $ e : M \\\\simeq_R N $, this constructs an $ A $-linear equivalence between $ A \\\\otimes_R M $ and $ A \\\\otimes_R N $, where $ A $ is an $ R $-algebra. The equivalence is\"}\n  {\"name\": \"CliffordAlgebra.ofBaseChange_tmul_one\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.BaseChange\", \"type\": \"(Q : QuadraticForm R V) (z : A) : ofBaseChange A Q (z ⊗ₜ 1) = algebraMap _ _ z\", \"doc\": \"For a quadratic form $ Q $ on an $ R $-module $ V $ and an element $ z $ in an $ R $-algebra $ A $, the base change homomorphism from $ A $ to the Clifford algebra $ \\\\mathrm{Cl}(R, V, Q) $ satisfies $\"}\n  {\"name\": \"IsBaseChange\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": Prop\", \"doc\": \"The proposition that the base change construction satisfies the universal property of the tensor product bijectively, establishing a one-to-one correspondence between bilinear maps and linear maps fro\"}\n  {\"name\": \"Algebra.Extension.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{T} [CommRing T] [Algebra R T] (P : Extension R S) : Extension T (T ⊗[R] S)\", \"doc\": \"Let $R, S, T$ be commutative rings, such that $S$ and $T$ are $R$-algebras. Given an algebra extension $P$ of $S$ over $R$, which is represented by a surjective $R$-algebra homomorphism $\\\\pi : P_0 \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"tensor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) {N : Type uN} [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommMonoid N] [Module R N] : TensorProduct.AlgebraTensorModule.cancelBaseChange R A A A N = TensorProduct.lid A (TensorProduct R A N)\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) (N : Type uN) (Q : Type uQ) [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommMonoid N] [Module R N] [AddCommMonoid Q] [Module R Q] : TensorProduct R A (TensorProduct R N Q) ≃ₗ[A] TensorProduct A (TensorProduct R A N) (TensorProduct R A Q)\", \"doc\": \"Base change distributes over tensor product.\"}\n  {\"name\": \"LinearMap.baseChange_eq_lTensor\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" {R : Type u_1} {A : Type u_2} {M : Type u_4} {N : Type u_5} [CommSemiring R] [Semiring A] [Algebra R A] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] (f : M →ₗ[R] N) : ⇑(LinearMap.baseChange A f) = ⇑(LinearMap.lTensor A f)\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.baseChange_eq_ltensor\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" {R : Type u_1} {A : Type u_2} {M : Type u_4} {N : Type u_5} [CommSemiring R] [Semiring A] [Algebra R A] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] (f : M →ₗ[R] N) : ⇑(LinearMap.baseChange A f) = ⇑(LinearMap.lTensor A f)\", \"doc\": \"**Alias** of `LinearMap.baseChange_eq_lTensor`.\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) (B : Type uB) (M : Type uM) (N : Type uN) [CommSemiring R] [CommSemiring A] [Semiring B] [Algebra R A] [Algebra R B] [AddCommMonoid M] [Module R M] [Module A M] [Module B M] [IsScalarTower R A M] [IsScalarTower R B M] [SMulCommClass A B M] [AddCommMonoid N] [Module R N] \", \"doc\": \"`B`-linear equivalence between `M ⊗[A] (A ⊗[R] N)` and `M ⊗[R] N`.\\nIn particular useful with `B = A`.\"}\n  {\"name\": \"LinearMap.rTensor_baseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" {R : Type u_1} {A : Type u_2} {B : Type u_3} {M : Type u_4} {N : Type u_5} [CommSemiring R] [Semiring A] [Algebra R A] [Semiring B] [Algebra R B] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] (φ : A →ₐ[R] B) (t : TensorProduct R A M) (f : M →ₗ[R] N) : (LinearMap.rTensor N φ.toLinear\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) (B : Type uB) {M : Type uM} {N : Type uN} [CommSemiring R] [CommSemiring A] [Semiring B] [Algebra R A] [Algebra R B] [AddCommMonoid M] [Module R M] [Module A M] [Module B M] [IsScalarTower R A M] [IsScalarTower R B M] [SMulCommClass A B M] [AddCommMonoid N] [Module R N] \", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) (B : Type uB) {M : Type uM} {N : Type uN} [CommSemiring R] [CommSemiring A] [Semiring B] [Algebra R A] [Algebra R B] [AddCommMonoid M] [Module R M] [Module A M] [Module B M] [IsScalarTower R A M] [IsScalarTower R B M] [SMulCommClass A B M] [AddCommMonoid N] [Module R N] \", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" {R : Type u_1} {A : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module A N] (f : TensorProduct R A M →ₗ[A] N) : (LinearMap.baseChange A f ∘ₗ ↑(TensorProduct.AlgebraTensorModule.cancelBaseChange R A A A M).sy\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" {R : Type u_1} {A : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module A N] (f : TensorProduct R A M →ₗ[A] N) : LinearMap.baseChange A f ∘ₗ ↑(TensorProduct.AlgebraTensorModule.cancelBaseChange R A A A M).sym\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) {N : Type uN} {Q : Type uQ} [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommMonoid N] [Module R N] [AddCommMonoid Q] [Module R Q] (n : N) (q : Q) (a : A) : (TensorProduct.AlgebraTensorModule.distribBaseChange R A N Q) (a ⊗ₜ[R] (n ⊗ₜ[R] q)) = a ⊗ₜ[R] n ⊗ₜ[A] (1 ⊗ₜ\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \" (R : Type uR) (A : Type uA) {N : Type uN} {Q : Type uQ} [CommSemiring R] [CommSemiring A] [Algebra R A] [AddCommMonoid N] [Module R N] [AddCommMonoid Q] [Module R Q] (n : N) (q : Q) (a b : A) : (TensorProduct.AlgebraTensorModule.distribBaseChange R A N Q).symm (a ⊗ₜ[R] n ⊗ₜ[A] (b ⊗ₜ[R] q)) = (a * b\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplexBaseChange|baseChangeCondition|tensor.*base.change.*condition",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern schemes, ordinary tensors or general localization, not this algebraic-space derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplexBaseChange|baseChangeCondition|tensor.*base.change.*condition",
+   "results": "{\"t\": \"2026-10-23T12:25:30Z\", \"tool\": \"grep\", \"query\": \"singleComplexBaseChange|baseChangeCondition|tensor.*base.change.*condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, flatness, rank or base-change APIs do not state geometric-stalk tensor inheritance for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor inheritance of single complex base change criterion on algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T12:25:30Z\", \"tool\": \"leansearch\", \"query\": \"Tensor inheritance of single complex base change criterion on algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.tensorEquiv\", \"CliffordAlgebra.ofBaseChange_tmul_one\", \"TensorProduct.isBaseChange\", \"IsLocalization.algebraTensorEquiv\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"Algebra.Unramified.baseChange\", \"LinearEquiv.baseChange\", \"TensorProduct.AlgebraTensorModule.distribBaseChange\"], \"digest\": \"931754fffb4ec958\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, flatness, rank or base-change APIs do not state geometric-stalk tensor inheritance for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T12:25:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensor\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid\", \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"LinearMap.baseChange_eq_lTensor\", \"LinearMap.baseChange_eq_ltensor\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"LinearMap.rTensor_baseChange\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\"], \"digest\": \"2c07e5708afac250\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, flatness, rank or base-change APIs do not state geometric-stalk tensor inheritance for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product preserves geometric stalk base change condition for unbounded quasi coherent complexes on algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T12:25:31Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor product preserves geometric stalk base change condition for unbounded quasi coherent complexes on algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"RingHom.SurjectiveOnStalks.baseChange'\", \"Module.rankAtStalk_baseChange\", \"RingHom.SurjectiveOnStalks.baseChange\", \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"Module.rankAtStalk_tensorProduct\"], \"digest\": \"13d425e096a449b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, flatness, rank or base-change APIs do not state geometric-stalk tensor inheritance for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a morphism of unbounded derived modules preserves a flat localized cohomology base change isomorphism at geometric stalks",
+   "results": "{\"t\": \"2026-10-23T12:57:16Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a morphism of unbounded derived modules preserves a flat localized cohomology base change isomorphism at geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_baseChange\", \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"Module.rankAtStalk_tensorProduct\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_exact\"], \"digest\": \"77fdce4a82a15bdc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor, flatness, rank or base-change APIs do not state geometric-stalk tensor inheritance for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-complex-base-change",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKI (lemma-single-complex-base-change-condition-inherited), clause (1); Tag 0DKG (lemma-single-complex-base-change-condition), condition (1) and equation-bc immediately before it.",
+   "via": [
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-single-complex-tensor-inheritance",
+  "worker": "stage1",
+  "summary": "Checked the algebraic-space statement against Stacks 0DKI(1) and 0DKG. Reused the existing flat geometric-stalk calculus and general ring-complex inheritance, with explicit canonical map and tensorator identifications. No new nodes, no statement change, and no Lean attachment: the project theorem found is only for schemes.",
+  "blueprint": "The inherited from.place records the supporting input to det-thm-sf-ctf-stability-direct-images proof (3), through 0A1K and the stable-curve cohomology prerequisites. This split supplies precisely 0DKI(1) on that inherited route; latest blueprint searched for single-complex and 0DKI, no equal blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-exact",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-tensor",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-pc-base-derived-tensor-cohomology-action",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "def-pc-base-derived-tensor-cohomology-model",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-pc-localized-tensor-comparison-inheritance",
+    "why": "Generic ringed-site resolution, normalized stalk/tensor calculus, or ring-module derived comparison used as a black box in the explicit stalk computation; no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic K-flat total tensor model on a small ringed site: Tot of two flat-term K-flat complexes is flat-term K-flat and represents the derived tensor, so derived pullback of E tensor K is computed termwise; no node of this unit supplies this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-pc-base-derived-tensor-cohomology-action",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-localized-tensor-comparison-inheritance",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-24f869a87",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-24f869a87 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 0DKG (equation-bc) and 0DKI(1) in spaces-perfect.tex, perfect.tex 0DJA, and the item's 7 steps against the statements of all 13 cited nodes. No new nodes. Statement and stmt_deps are unchanged from side-live and match 0DKI(1) hypothesis by hypothesis. Live and side-live still have the item unsplit and there is no repair note. Steps 1-3 and 5-7 check out: QCoh closure; K-flat/K-injective representatives and the Hom bijection; stalk exactness; the K-flat stalk criterion; D->C flatness and the ordinary/derived stalk identifications from geometric-stalk-calculus. Step 5's model c_i followed by H^i(t) is the equation-bc map. The ring inheritance lemma's hypotheses (C flat over A⊗_R B, U and Q K-flat over A, N arbitrary) are all verified. Fault C1, step 4: it used without citation that Tot(P⊗Q) is K-flat with flat terms and represents E⊗^L K (needed for g'^*Tot(P⊗Q) to represent L(g')^*(E⊗K)), and the pure-tensor formula of the full module-pullback tensor comparison including scalar extension (lem-pur-independent-inverse-image-tensor-comparison covers only u^{-1}). Repaired: step 4 now cites lem-pur-kflat-total-tensor-model and def-weil-pbc-canonical-ringed-tensor-comparison, proof_deps is recomputed and one tool_use is added. Both nodes are already in the closure of the cited ringed-topoi node, so the batch-5 closure is unchanged. Edge cases g=id, X' empty, K=K'=0 and unbounded E all hold. The scheme-level lem-pc-rf-single-complex-inherited-tensor-condition is not a duplicate (Zariski stalks of schemes, not geometric stalks of algebraic spaces). Batch-5: each of the five listed citations reaches sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-geometric-morphism, not through steps of the trace formula or Poincaré duality, so this is acceptable. The 11 declared off-unit uses are generic ringed-site and ring-level tools and are accepted. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSingleComplexTensorInheritance",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SingleComplex.singleComplexTensorInheritance",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SingleComplex.singleComplexTensorInheritance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSingleComplexTensorInheritance.lean",
+  "statement": "theorem singleComplexTensorInheritance {S : Scheme.{u}} [∀ Z : AlgebraicSpace S, HasDerivedCategory.{w} Z.SmallModules] {X X' Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : X.DerivedQCoh) (K' : X'.DerivedQCoh) (φ : (derivedPullback g').obj K.obj ⟶ K'.obj) (h_stalk : StalkCondition f f' g g' sq K.obj K'.obj φ) : ∀ E : X.DerivedQCoh, StalkCondition f f' g g' sq ((tensor X).obj (E.obj, K.obj)) ((tensor X').obj ((derivedPullback g').obj E.obj, K'.obj)) ((derivedTensorComparison g').hom.app (E.obj, K.obj) ≫ (tensor X').map (Prod.mkHom (𝟙 ((derivedPullback g').obj E.obj)) φ))",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Tag 0DKI(1), using actual algebraic spaces and geometric etale stalks rather than the scheme/Zariski counterpart. All proof steps are retained in the theorem docstring; no boundedness or flatness hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-932b78eb1",
+  "group": "Q33",
+  "result": "fix",
+  "note": "Item matches Stacks 0DKI(1) and equation-bc clause by clause: arbitrary IsPullback square, no flatness, unbounded E/K/K' in D_QCoh, phi not assumed invertible, all geometric points and all i; psi = canonical comparison then 1⊗phi. The all-coordinates quantifier is not stronger (counit equation fixes the map, coordinates exist). Choices are unique or universal, not hollow; sorry-only; docstrings OK; statements verbatim. Fault H4/H12: new node def-sfb-space-derived-pullback-models re-declared O3's landed def-sfb-space-derived-tensor-pullback (SingleComplex.pullback = smallModuleTensorPullback body; second total left derived pullback; duplicate instances). O3 is on the base (landed 14:54 UTC, base blueprint index 16:15 UTC). FIX: abbrevs to smallModuleTensorPullback and derivedTensorPullback.{u,w,w}, counit = O3 counit, duplicate instances dropped; PullbackTensorComparison counit applications adjusted; node json gains the O3 stmt_dep and updated statement and declarations. Item module and record unchanged. All 5 modules compile clean once via nt_compile --json (rc 0)."
+ }
+}

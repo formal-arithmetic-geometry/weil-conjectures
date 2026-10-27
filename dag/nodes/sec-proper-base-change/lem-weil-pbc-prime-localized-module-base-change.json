@@ -1,0 +1,228 @@
+{
+ "id": "lem-weil-pbc-prime-localized-module-base-change",
+ "kind": "statement",
+ "title": "Prime localization and residue fibres of a scalar-extended module",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings, $M$ an $A$-module and $N=M\\otimes_AB$, with $B$ acting on the second factor [def-weil-pbc-module-tensor-product]. Let $\\mathfrak q\\subset B$ be prime and $\\mathfrak p=f^{-1}(\\mathfrak q)$. Use prime localizations $A_{\\mathfrak p},B_{\\mathfrak q}$ and residue fields $\\kappa(\\mathfrak p)=\\operatorname{Frac}(A/\\mathfrak p)$, $\\kappa(\\mathfrak q)=\\operatorname{Frac}(B/\\mathfrak q)$ [def-weil-pbc-localization-at-prime], and module localizations [def-weil-pbc-module-localization]. The induced map $f_{\\mathfrak q}:A_{\\mathfrak p}\\to B_{\\mathfrak q}$ is local (the inverse image of the maximal ideal is the maximal ideal) and induces a field homomorphism $\\bar f:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$. There are canonical isomorphisms\n$$\\Phi:N_{\\mathfrak q}\\xrightarrow{\\sim}M_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}B_{\\mathfrak q},\\qquad (m\\otimes b)/t\\longmapsto(m/1)\\otimes(b/t),$$\n$$\\Psi:(M_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)\\xrightarrow{\\sim}N_{\\mathfrak q}\\otimes_{B_{\\mathfrak q}}\\kappa(\\mathfrak q).$$\nHere $\\Phi$ is $B_{\\mathfrak q}$-linear, $\\Psi$ is $\\kappa(\\mathfrak q)$-linear, and\n$$\\Psi(((m/s)\\otimes u)\\otimes v)=((m\\otimes1)/1)\\otimes\\bigl(\\bar f(u)v/\\overline{f(s)}\\bigr)\\quad(s\\notin\\mathfrak p).$$\nThe map $\\Psi$ agrees with the map obtained by tensoring $\\Phi^{-1}$ with $\\kappa(\\mathfrak q)$ and using tensor associativity. No flatness or finite generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SI, lemma-lci-field-change-local, proof: displayed tensor and residue-field comparison, in its general module form; Tag 00SJ, lemma-lci-field-change, conormal fibre comparison in its converse proof. Returned step 3(b),(c), before the dimension calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=A\\setminus\\mathfrak p$, $T=B\\setminus\\mathfrak q$, $A'=A_{\\mathfrak p}$ and $B'=B_{\\mathfrak q}$. Since $f(S)\\subseteq T$, the ring localization universal property gives $f_{\\mathfrak q}(a/s)=f(a)/f(s)$. A fraction $a/s$ belongs to $\\mathfrak pA'$ exactly when $a\\in\\mathfrak p$: one implication is immediate, and clearing an equality with a fraction whose numerator is in $\\mathfrak p$ gives $ua\\in\\mathfrak p$ for $u\\notin\\mathfrak p$, hence $a\\in\\mathfrak p$. The same argument applies in $B'$. Thus $f_{\\mathfrak q}^{-1}(\\mathfrak qB')=\\mathfrak pA'$. Quotienting gives $k=\\kappa(\\mathfrak p)\\to l=\\kappa(\\mathfrak q)$, denoted $\\bar f$. Explicitly the residue of $a/s$ goes to the residue of $f(a)/f(s)$. The identification $A'/\\mathfrak pA'=\\operatorname{Frac}(A/\\mathfrak p)$ sends the residue of $a/s$ to $\\bar a/\\bar s$: both sides have these fractions, and equality on either side is the condition $as'-a's\\in\\mathfrak p$. The analogous identification holds for $B'$. These formulas therefore give the stated field map.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CP (proposition-universal-property-localization), 07BH (section-local), and 00SI (lemma-lci-field-change-local), residue-field comparison"
+   }
+  },
+  {
+   "text": "Apply localization-tensor compatibility with base ring $C$, algebra $C$, multiplicative subset $C\\setminus\\mathfrak r$, first module $C$ and second module $P$. It gives $(C\\otimes_CP)_{\\mathfrak r}\\cong C_{\\mathfrak r}\\otimes_CP$. The tensor unit $C\\otimes_CP\\cong P$, $c\\otimes x\\mapsto cx$, and tensor symmetry give $e_{P,\\mathfrak r}:P_{\\mathfrak r}\\cong P\\otimes_CC_{\\mathfrak r}$, with $x/s\\mapsto x\\otimes(1/s)$. The units and symmetry used here have inverse formulas $x\\mapsto1\\otimes x$ and $x\\otimes y\\mapsto y\\otimes x$; they respect the tensor relations and are inverse on the generating pure tensors. Localizing the unit and its inverse gives inverse maps by the fraction formula for localization. Use this construction for $(C,P,\\mathfrak r)=(A,M,\\mathfrak p)$ and $(B,N,\\mathfrak q)$. The displayed map is $C_{\\mathfrak r}$-linear: multiplying $x/s$ by $a/t$ sends both sides to $ax\\otimes1/(ts)$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), formula and proof; symmetry and units from Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "Write $L=M\\otimes_AB'$. Base change in stages gives $c_B:N\\otimes_BB'\\cong L$ and $c_A:(M\\otimes_AA')\\otimes_{A'}B'\\cong L$, both sending $(m\\otimes a)\\otimes b$ to $m\\otimes ab$ through the appropriate structure map. The two towers $A\\to B\\to B'$ and $A\\to A'\\to B'$ give the same ring map $A\\to B'$, since $f_{\\mathfrak q}(a/1)=f(a)/1$ by the formula of step 1, so both targets are the same $B'$-module $L$. Let $h=c_B e_{N,\\mathfrak q}$ and $j=c_A(e_{M,\\mathfrak p}\\otimes1_{B'})$. The latter tensor map is invertible, since tensoring its explicit inverse gives an inverse on pure tensors. Thus $\\Phi=j^{-1}h$ is a $B'$-linear isomorphism. On generators $h((m\\otimes b)/t)=m\\otimes(b/t)$ and $j((m/1)\\otimes(b/t))=m\\otimes(b/t)$, proving the displayed formula for $\\Phi$.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-transitive",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D2 (lemma-tensor-with-bimodule) and 00DK (lemma-tensor-localization), applied to the comparison in Tag 00SI"
+   }
+  },
+  {
+   "text": "Base change in stages for $A'\\to k\\to l$ gives $\\alpha:(M_{\\mathfrak p}\\otimes_{A'}k)\\otimes_kl\\cong M_{\\mathfrak p}\\otimes_{A'}l$, with $\\alpha((x\\otimes u)\\otimes v)=x\\otimes\\bar f(u)v$. The two towers $A'\\to k\\to l$ and $A'\\to B'\\to l$ give the same ring map $A'\\to l$: by step 1 both send $a/s$ to the residue of $f(a)/f(s)$, so $M_{\\mathfrak p}\\otimes_{A'}l$ is the same module in both. For $A'\\to B'\\to l$ it gives $\\beta:(M_{\\mathfrak p}\\otimes_{A'}B')\\otimes_{B'}l\\cong M_{\\mathfrak p}\\otimes_{A'}l$. Define $\\Psi=(\\Phi^{-1}\\otimes1_l)\\beta^{-1}\\alpha$. All three maps are $l$-linear isomorphisms, so this gives the required isomorphism and, by its definition, precisely the asserted compatibility with tensoring $\\Phi^{-1}$ and tensor associativity.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-transitive",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D2 (lemma-tensor-with-bimodule) and 00SI (lemma-lci-field-change-local), displayed chain of fibre tensors"
+   }
+  },
+  {
+   "text": "Let $w=\\bar f(u)v$ and $s\\notin\\mathfrak p$. In $M_{\\mathfrak p}\\otimes_{A'}l$, balancing gives $(m/s)\\otimes w=(m/1)\\otimes(w/\\overline{f(s)})$, since $s/1$ maps to the nonzero element $\\overline{f(s)}$ of $l$. The inverse of $\\beta$ sends the latter to $((m/1)\\otimes1_{B'})\\otimes(w/\\overline{f(s)})$. The formula for $\\Phi$ in step 3 says that $\\Phi^{-1}((m/1)\\otimes1)=((m\\otimes1)/1)$. Substitution proves the stated formula for $\\Psi$ on every displayed pure tensor. No step used flatness, finite generation, or injectivity of $f$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D2 (lemma-tensor-with-bimodule), pure-tensor formula, and 00SI (lemma-lci-field-change-local), displayed comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-module-base-change-transitive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of the displayed fibre-tensor comparison in Tag 00SI (lemma-lci-field-change-local), using Tags 00CP, 00DK, 00D2; locality and the explicit fraction formulas written out by Q29."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a tensor product module at a prime of the target ring is base change of localization at the contracted prime and its residue fibre is extension of the source residue fibre",
+   "results": "Actual search returned 8 hits. First recorded hits: Ideal.ResidueField.exists_smul_eq_tmul_one, Ideal.comap_fiberIsoOfBijectiveResidueField_apply, Ideal.Fiber.exists_smul_eq_one_tmul, PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, IsLocalization.Away.tensorEquiv, Module.rankAtStalk_baseChange, Ideal.comap_fiberIsoOfBijectiveResidueField_symm, PrimeSpectrum.coe_preimageOrderIsoFiber_apply_asIdeal.  LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here.",
+   "date": "2026-10-22",
+   "verdict": "no exact match: LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocalized.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Ll]ocalized|tensor.*[Rr]esidue[Ff]ield",
+   "results": "Actual search returned 25 hits. First recorded hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean.  LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here.",
+   "date": "2026-10-22",
+   "verdict": "no exact match: LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre of a base changed module at a prime is extension of scalars of the original fibre at the contracted prime",
+   "results": "Actual search returned 8 hits. First recorded hits: Module.rankAtStalk_baseChange, Algebra.Extension.baseChange, IsLocalizedModule.isBaseChange, IsBaseChange, IsBaseChange.tensorEquiv, Submodule.baseChange, Algebra.QuasiFinite.baseChange, PrimeSpectrum.primesOverOrderIsoFiber.  LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here.",
+   "date": "2026-10-22",
+   "verdict": "no exact match: LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, TensorProduct",
+   "results": "Actual search returned 4 hits. First recorded hits: LocalizedModule.equivTensorProduct, LocalizedModule.equivTensorProduct_apply_mk, LocalizedModule.equivTensorProduct_symm_apply_tmul_one, LocalizedModule.equivTensorProduct_symm_apply_tmul.  LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here.",
+   "date": "2026-10-22",
+   "verdict": "no exact match: LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under an arbitrary commutative ring homomorphism A to B and a prime q over p, localization of M tensor B at q identifies with M localized at p tensor B localized at q and the residue fibre comparison has its canonical pure tensor formula",
+   "results": "Actual search returned 8 hits. First recorded hits: Ideal.comap_fiberIsoOfBijectiveResidueField_apply, PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal, Ideal.comap_fiberIsoOfBijectiveResidueField_symm, PrimeSpectrum.coe_preimageOrderIsoFiber_apply_asIdeal, Ideal.ResidueField.exists_smul_eq_tmul_one, Ideal.Fiber.exists_smul_eq_one_tmul, PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal, PrimeSpectrum.preimageOrderIsoTensorResidueField.  LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here.",
+   "date": "2026-10-22",
+   "verdict": "no exact match: LocalizedModule.equivTensorProduct (Localization/BaseChange.lean:68) gives one localization-as-tensor identification; IsBaseChange.tensorEquiv cancels one base change. The full pair of compatible comparisons at two different primes and their residue fields, including the fraction normalization, is not a direct specialization. Module.rankAtStalk_baseChange (Spectrum/Prime/FreeLocus.lean:322) requires Flat R M, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "equivTensorProduct|isLocalHom|residueFieldMap",
+   "results": "Actual returned hits: Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localized-module tensor equivalences, cancellation and local ring maps supply constituent comparisons; no single hit states both prime comparisons, their formulas and compatibility. Reused existing DAG Mathlib leaves for the constituents."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a tensor product at primes and compatibility of residue field scalar extension",
+   "results": "Actual returned hits: IsLocalization.tensorProduct_tensorProduct, IsLocalizedModule.map_lTensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.mk'_tmul, IsLocalizedModule.rTensor, Localization.AtPrime.instIsScalarTower, IsLocalization.tensor, IsLocalization.tensorProduct_isLocalizedModule. ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localized-module tensor equivalences, cancellation and local ring maps supply constituent comparisons; no single hit states both prime comparisons, their formulas and compatibility. Reused existing DAG Mathlib leaves for the constituents."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, TensorProduct",
+   "results": "Actual returned hits: LocalizedModule.equivTensorProduct, LocalizedModule.equivTensorProduct_apply_mk, LocalizedModule.equivTensorProduct_symm_apply_tmul_one, LocalizedModule.equivTensorProduct_symm_apply_tmul. ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localized-module tensor equivalences, cancellation and local ring maps supply constituent comparisons; no single hit states both prime comparisons, their formulas and compatibility. Reused existing DAG Mathlib leaves for the constituents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a scalar extended module at a prime and then tensoring with its residue field is canonically extension of the fibre at the contracted prime",
+   "results": "Actual returned hits: IsLocalizedModule.AtPrime, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, IsLocalizedModule.map_linearMap_of_isLocalization, LocalizedModule.AtPrime, Ideal.Fiber.exists_smul_eq_one_tmul, Module.rankAtStalk_eq_finrank_tensorProduct, ModuleCat.Tilde.stalkToFiberLinearMap, Module.rankAtStalk_eq. ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localized-module tensor equivalences, cancellation and local ring maps supply constituent comparisons; no single hit states both prime comparisons, their formulas and compatibility. Reused existing DAG Mathlib leaves for the constituents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ring maps A to B to C the extension of scalars of an A module is transitive with pure tensor formula and localization is extension of scalars",
+   "results": "Actual returned hits: ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalarsComp, IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ, LinearEquiv.extendScalarsOfIsLocalization, IsLocalizedModule.isBaseChange, LinearEquiv.extendScalarsOfIsLocalizationEquiv, IsLocalization.algebraTensorEquiv, IsLocalizedModule.rTensor. ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: localized-module tensor equivalences, cancellation and local ring maps supply constituent comparisons; no single hit states both prime comparisons, their formulas and compatibility. Reused existing DAG Mathlib leaves for the constituents."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lci-field-change",
+  "date": "2026-10-22",
+  "group": "Q103"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); subsidiary argument in lem-weil-pbc-lci-field-change: Tag 00SI, lemma-lci-field-change-local, proof: displayed tensor and residue-field comparison, in its general module form; Tag 00SJ, lemma-lci-field-change, conormal fibre comparison in its converse proof. Returned step 3(b),(c), before the dimension calculation.",
+   "via": [
+    "lem-weil-pbc-lci-field-change",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-weil-pbc-prime-localized-module-base-change",
+  "worker": "stage1",
+  "summary": "Reused localization-tensor compatibility and module base-change transitivity. Constructed the local ring and residue-field maps explicitly, assembled Phi and Psi from canonical isomorphisms, and checked the denominator formula and the required compatibility. No statement changes and no new nodes.",
+  "blueprint": "thm-weil-pbc-finite-etale-lifting, essential-surjectivity/lifting input, via the existing lci-field-change chain; expands the comparison of localized conormal fibres in Tag 00SI cited by the item. Latest blueprint proof read in sk-lem-pbc-p1-injective-fibre; no claim that it contains this subsidiary algebra calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-687c360e4",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-687c360e4 (reviewer sub-agent of L); spot-checked: Read the item, its five steps and all six cited nodes in full; all six are Mathlib leaves of the item's own unit sk-thm-p1, so no route question and no tool_uses. Source checked: Stacks algebra.tex 00SI (lemma-lci-field-change-local) displayed fibre-tensor chain, plus 00DK, 00CP, 07BH, 00SJ, 00CX, 00D2. No SGA. The statement is true and unchanged. Step checks: step 1, a/s in pA' iff a in p, so f_q is local and A'/pA' = Frac(A/p). Step 2, e_P is built from the localization-tensor leaf with R=A=C, plus tensor unit and symmetry, and is C_r-linear. Step 3, Phi((m⊗b)/t)=(m/1)⊗(b/t) checked on elements. Step 4, Psi=(Phi^-1⊗1)β^-1α, so the compatibility clause holds by construction. Step 5, balancing by 1/s, using that f(s) is not in q, gives the stated denominator. Edge cases checked: M=0, f=id, Z→F_p, M=Z/p (not flat), B=0, field extension. No duplicate found; nearest are lem-trf-lci-conormal-fibre-field-change (conormal only) and lem-trf-lci-fibre-tensor-transition (flat/fp algebras). FIX in fixes/dag/nodes/sec-proper-base-change/<item>.json adds one sentence to step 3 (A→A'→B' equals A→B→B', since f_q(a/1)=f(a)/1) and one to step 4 (the two A'-algebra structures on κ(q) agree, both sending a/s to the class of f(a)/f(s)). The cited transitivity node needs both and the steps did not state them (E5). Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrimeLocalizedModuleBaseChange",
+  "declaration": "LocalizedModule.prime_localized_module_base_change",
+  "declarations": [
+   "LocalizedModule.primeLocalizedModuleBaseChange",
+   "LocalizedModule.prime_localized_module_base_change"
+  ],
+  "file": "lean/Sheaf/RingTheory/PrimeLocalizedModuleBaseChange.lean",
+  "statement": "theorem prime_localized_module_base_change {A : Type u} {B : Type v} [CommRing A] [CommRing B] (f : A →+* B) (M : Type w) [AddCommGroup M] [Module A M] (q : Ideal B) [q.IsPrime] : primeLocalizedModuleBaseChange f M q",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Complete assertion in a transparent proposition installs only the canonical scalar actions. Tensor factors are commuted to Mathlib scalar-left base-change notation. Includes locality, the canonical residue-field map, both equivalences and pure-tensor formulas, and the equality with the scalar extension of the inverse localization comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be6a9b3cc",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Node unchanged except for the added lean record; statement verbatim. Hypotheses: arbitrary f : A →+* B, A-module M, prime q, p := q.comap f; no flat/finite/injective assumption; universes u v w independent. Conjuncts: locality as a comap of maximal ideals; algebraMap κ(p)→κ(q) = Ideal.ResidueField.map p q f rfl; Φ : Nq ≃ₗ[Bq] Bq⊗[Ap]Mp with mk(b⊗m) t ↦ mk b t ⊗ mk m 1; Ψ κ(q)-linear with formula (f̄a·b/res f(s)) ⊗ mk(1⊗m) 1, checked true by hand; Ψ = cancelBaseChange ≪≫ cancelBaseChange.symm ≪≫ Φ.symm.baseChange, which is node step 4. Ap→Bq algebra is Mathlib's algebraOfLiesOver construction; residue-field instances and tower read in ResidueField/Basic.lean. Edge cases M=0, f=id, Z→F_p with M=Z/p, B=0 ok. Docstrings carry source place, blueprint id and 5 proof steps; only sorry; no hollow def. Advisory: Prop def would conventionally be UpperCamelCase; Φ overlaps lem-trf-contracted-prime-tensor-comparison (other unit, no Ψ), a DAG-level overlap only. No file changed, no compile."
+ }
+}

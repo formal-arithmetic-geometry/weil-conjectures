@@ -9,9 +9,6 @@ public import Sheaf.Paper.SixFunctorOperationDatum
 public import Sheaf.Paper.ExceptionalAdjointAdmissibility
 public import Sheaf.Paper.VerdierExchange
 public import Sheaf.Paper.DirectImagesConstructible
-import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
-import Sheaf.Paper.BasicOperationsCoefficientReduction
-import Sheaf.Paper.CanonicalOriginCompactSupportComposition
 
 /-! # Verdier exchange under exceptional-adjoint admissibility
 
@@ -110,8 +107,8 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
-  (Sf : System l Ω D hl (f := f)) (Sg : System l Ω D hl (f := g))
-  (Sfg : System l Ω D hl (f := f ≫ g))
+  (Sf : System.{u} l Ω D hl (f := f)) (Sg : System.{u} l Ω D hl (f := g))
+  (Sfg : System.{u} l Ω D hl (f := f ≫ g))
   (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))
 
 /-- The existing normalized exchange construction, with its isomorphism and shift
@@ -120,7 +117,7 @@ composition and coefficient interfaces are the published ones. Coefficient squar
 are required on the two admissible endpoints, including identity scalar extensions.
 Source: statement and proof steps 1--5 (blueprint: fix-cor-verdier-exchange). -/
 structure Package (P : Stage.{u} l → Prop) where
-  unit (s : Stage.{u} l) : C l Ω Z s
+  unit (s : Stage.{u} l) : C.{u} l Ω Z s
   stage (s : Stage.{u} l) : StageData l Ω s
     (Sf.ring.operation cf s) (Sg.ring.operation cg s) (Sfg.ring.operation cfg s) (unit s)
   ring (s : RingStage.{u} l) : RingRealization l Ω f s (stage (s.stage l))
@@ -130,13 +127,13 @@ structure Package (P : Stage.{u} l → Prop) where
   ringShifts (s : RingStage.{u} l) (hs : P (s.stage l)) :
     RingShiftRealization l Ω (ring s) (conclusion (s.stage l) hs)
   exchangeNaturality {s t : Stage.{u} l}
-      {TX : C l Ω X s ⥤ C l Ω X t} {TY : C l Ω Y s ⥤ C l Ω Y t}
-      {TZ : C l Ω Z s ⥤ C l Ω Z t}
-      (b : StageScalar l Ω (stage s) (stage t) TX TY TZ)
+      {TX : C.{u} l Ω X s ⥤ C.{u} l Ω X t} {TY : C.{u} l Ω Y s ⥤ C.{u} l Ω Y t}
+      {TZ : C.{u} l Ω Z s ⥤ C.{u} l Ω Z t}
+      (b : StageScalar.{u} l Ω (stage s) (stage t) TX TY TZ)
       (_hc : TX.map (stage s).dualizing.hom ≫ (b.kappaX l Ω).hom =
         (b.exceptional.b l Ω).hom.app ((Sg.ring.operation cg s).G.obj (unit s)) ≫
           (Sf.ring.operation cf t).G.map (b.kappaY l Ω).hom ≫ (stage t).dualizing.hom)
-      (M : C l Ω X s) :
+      (M : C.{u} l Ω X s) :
     TY.map ((stage s).epsilon l Ω M) ≫
         b.star l Ω (((stage s).dualX l Ω).obj (op M)) ≫
         (stage t).star.map (b.dualX l Ω M) =
@@ -159,45 +156,45 @@ structure Package (P : Stage.{u} l → Prop) where
   ringScalar {s t : RingStage.{u} l}
       (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)) (ha : Allowed l a)
       (hs : P (s.stage l)) (ht : P (t.stage l)) :
-    ∃ (SX : Scalar l Ω a X) (SY : Scalar l Ω a Y) (SZ : Scalar l Ω a Z),
-      ∃ b : StageScalar l Ω (stage (s.stage l)) (stage (t.stage l))
+    ∃ (SX : Scalar.{u} l Ω a X) (SY : Scalar.{u} l Ω a Y) (SZ : Scalar.{u} l Ω a Z),
+      ∃ b : StageScalar.{u} l Ω (stage (s.stage l)) (stage (t.stage l))
           SX.functor SY.functor SZ.functor,
         ScalarConclusion l Ω b ∧
         Nonempty (ScalarShifts l Ω (conclusion (s.stage l) hs)
           (conclusion (t.stage l) ht) b) ∧
-        (∀ K : C l Ω X (s.stage l),
-          (t.inclusion l Ω Y).map ((b.exceptional.q l Ω).hom.app K) ≫
+        (∀ K : C.{u} l Ω X (s.stage l),
+          (t.inclusion.{u} l Ω Y).map ((b.exceptional.q l Ω).hom.app K) ≫
               (Sf.ring.left cf t).hom.app (SX.functor.obj K) ≫
               (PurCompactSupport.image (t.coefficients l) cf).map
                 (SX.realization.hom.app K) =
             SY.realization.hom.app ((Sf.ring.operation cf (s.stage l)).F.obj K) ≫
               (pbcDerivedExtend (a.map Y)).map ((Sf.ring.left cf s).hom.app K) ≫
-              (PurCompactSupport.comparison a cf).app ((s.inclusion l Ω X).obj K)) ∧
-        (∀ K : C l Ω Y (s.stage l),
-          (t.inclusion l Ω Z).map ((b.structureY.q l Ω).hom.app K) ≫
+              (PurCompactSupport.comparison a cf).app ((s.inclusion.{u} l Ω X).obj K)) ∧
+        (∀ K : C.{u} l Ω Y (s.stage l),
+          (t.inclusion.{u} l Ω Z).map ((b.structureY.q l Ω).hom.app K) ≫
               (Sg.ring.left cg t).hom.app (SY.functor.obj K) ≫
               (PurCompactSupport.image (t.coefficients l) cg).map
                 (SY.realization.hom.app K) =
             SZ.realization.hom.app ((Sg.ring.operation cg (s.stage l)).F.obj K) ≫
               (pbcDerivedExtend (a.map Z)).map ((Sg.ring.left cg s).hom.app K) ≫
-              (PurCompactSupport.comparison a cg).app ((s.inclusion l Ω Y).obj K)) ∧
-        (∀ K : C l Ω X (s.stage l),
-          (t.inclusion l Ω Z).map ((b.structureX.q l Ω).hom.app K) ≫
+              (PurCompactSupport.comparison a cg).app ((s.inclusion.{u} l Ω Y).obj K)) ∧
+        (∀ K : C.{u} l Ω X (s.stage l),
+          (t.inclusion.{u} l Ω Z).map ((b.structureX.q l Ω).hom.app K) ≫
               (Sfg.ring.left cfg t).hom.app (SX.functor.obj K) ≫
               (PurCompactSupport.image (t.coefficients l) cfg).map
                 (SX.realization.hom.app K) =
             SZ.realization.hom.app ((Sfg.ring.operation cfg (s.stage l)).F.obj K) ≫
               (pbcDerivedExtend (a.map Z)).map ((Sfg.ring.left cfg s).hom.app K) ≫
-              (PurCompactSupport.comparison a cfg).app ((s.inclusion l Ω X).obj K)) ∧
-        (t.inclusion l Ω Z).map b.unit.hom ≫ (ring t).unitIso.hom =
+              (PurCompactSupport.comparison a cfg).app ((s.inclusion.{u} l Ω X).obj K)) ∧
+        (t.inclusion.{u} l Ω Z).map b.unit.hom ≫ (ring t).unitIso.hom =
           SZ.realization.hom.app (unit (s.stage l)) ≫
             (pbcDerivedExtend (a.map Z)).map (ring s).unitIso.hom ≫ ringUnitScalar l a Z
   rationalization (E : FieldStage.{u} l)
       (hs : P (.integral E)) (ht : P (.rational E)) :
-    ∃ b : StageScalar l Ω (stage (.integral E)) (stage (.rational E))
-        (ConstructibleExceptionalCoefficients.rationalization l Ω E X)
-        (ConstructibleExceptionalCoefficients.rationalization l Ω E Y)
-        (ConstructibleExceptionalCoefficients.rationalization l Ω E Z),
+    ∃ b : StageScalar.{u} l Ω (stage (.integral E)) (stage (.rational E))
+        (ConstructibleExceptionalCoefficients.rationalization.{u} l Ω E X)
+        (ConstructibleExceptionalCoefficients.rationalization.{u} l Ω E Y)
+        (ConstructibleExceptionalCoefficients.rationalization.{u} l Ω E Z),
       ScalarConclusion l Ω b ∧
       Nonempty (ScalarShifts l Ω (conclusion (.integral E) hs)
         (conclusion (.rational E) ht) b) ∧
@@ -206,10 +203,10 @@ structure Package (P : Stage.{u} l → Prop) where
       b.structureX = Sfg.fields.rationalizationComparison cfg E
   rationalScalar (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier)
       (hs : P (.rational E)) (ht : P (.rational L)) :
-    ∃ b : StageScalar l Ω (stage (.rational E)) (stage (.rational L))
-        (ConstructibleExceptionalCoefficients.rationalScalar l Ω E L i X)
-        (ConstructibleExceptionalCoefficients.rationalScalar l Ω E L i Y)
-        (ConstructibleExceptionalCoefficients.rationalScalar l Ω E L i Z),
+    ∃ b : StageScalar.{u} l Ω (stage (.rational E)) (stage (.rational L))
+        (ConstructibleExceptionalCoefficients.rationalScalar.{u} l Ω E L i X)
+        (ConstructibleExceptionalCoefficients.rationalScalar.{u} l Ω E L i Y)
+        (ConstructibleExceptionalCoefficients.rationalScalar.{u} l Ω E L i Z),
       ScalarConclusion l Ω b ∧
       Nonempty (ScalarShifts l Ω (conclusion (.rational E) hs)
         (conclusion (.rational L) ht) b) ∧
@@ -217,11 +214,11 @@ structure Package (P : Stage.{u} l → Prop) where
       b.structureY = Sg.fields.rationalComparison cg E L i ∧
       b.structureX = Sfg.fields.rationalComparison cfg E L i
   common (i : AlgebraicallyClosedCoefficients.Index l Ω)
-      (hs : P (.rational (commonField l Ω i))) (ht : P .closed) :
-    ∃ b : StageScalar l Ω (stage (.rational (commonField l Ω i))) (stage .closed)
-        (commonInclusion l Ω X i) (commonInclusion l Ω Y i) (commonInclusion l Ω Z i),
+      (hs : P (.rational (commonField.{u} l Ω i))) (ht : P .closed) :
+    ∃ b : StageScalar.{u} l Ω (stage (.rational (commonField.{u} l Ω i))) (stage .closed)
+        (commonInclusion.{u} l Ω X i) (commonInclusion.{u} l Ω Y i) (commonInclusion.{u} l Ω Z i),
       ScalarConclusion l Ω b ∧
-      Nonempty (ScalarShifts l Ω (conclusion (.rational (commonField l Ω i)) hs)
+      Nonempty (ScalarShifts l Ω (conclusion (.rational (commonField.{u} l Ω i)) hs)
         (conclusion .closed ht) b) ∧
       b.exceptional = Sf.common.commonComparison cf i ∧
       b.structureY = Sg.common.commonComparison cg i ∧
@@ -241,9 +238,9 @@ def Assertion (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Prop :=
   letI : (Spec (.of D.k)).Over (Spec (.of D.k)) := ⟨𝟙 _⟩
-  ∀ (Sf : System l Ω D hl (f := f))
-    (SY : System l Ω D hl (f := Y ↘ Spec (.of D.k)))
-    (SX : System l Ω D hl (f := f ≫ (Y ↘ Spec (.of D.k))))
+  ∀ (Sf : System.{u} l Ω D hl (f := f))
+    (SY : System.{u} l Ω D hl (f := Y ↘ Spec (.of D.k)))
+    (SX : System.{u} l Ω D hl (f := f ≫ (Y ↘ Spec (.of D.k))))
     (cf : Compactification f) (cY : Compactification (Y ↘ Spec (.of D.k)))
     (cX : Compactification (f ≫ (Y ↘ Spec (.of D.k)))),
     Nonempty (Package l Ω D hl f (Y ↘ Spec (.of D.k)) Sf SY SX cf cY cX
@@ -296,7 +293,26 @@ theorem verdier_exchange
     (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
     Assertion C.l C.Qbar D C.different f := by
-  sorry
+  let : (Spec (.of D.k)).Over (Spec (.of D.k)) := ⟨𝟙 _⟩
+  intro Sf SY SX cf cY cX
+  -- Restrict the existing normalized all-stage package to the admissible stages.
+  obtain ⟨P⟩ := VerdierExchange.verdier_exchange C.l C.Qbar D C.different f
+    Sf SY SX cf cY cX
+  exact ⟨{
+    unit := P.unit
+    stage := P.stage
+    ring := P.ring
+    projection := P.projection
+    conclusion := fun s _ ↦ P.conclusion s
+    ringShifts := fun s _ ↦ P.ringShifts s
+    exchangeNaturality := P.exchangeNaturality
+    integralAlpha := P.integralAlpha
+    integralAlpha_normalized := P.integralAlpha_normalized
+    integralDualizing := P.integralDualizing
+    ringScalar := fun a ha _ _ ↦ P.ringScalar a ha
+    rationalization := fun E _ _ ↦ P.rationalization E
+    rationalScalar := fun E L i _ _ ↦ P.rationalScalar E L i
+    common := fun i _ _ ↦ P.common i }⟩
 
 end AdmissibleVerdierExchange
 end WeilConjectures

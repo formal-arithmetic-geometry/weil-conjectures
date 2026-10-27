@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-open-subgroupoid-etale-quotient",
+ "kind": "statement",
+ "title": "Open wide subgroupoids induce representable etale quotient-stack maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Properties of representable maps are tested after scheme base change on etale scheme charts. For a groupoid in schemes, use the laws of [def-a1-groupoid-scheme]; for algebraic spaces use the same laws on all test-scheme points. Write $[V/R]$ for the fppf stackification of the groupoid of $V(T)$-objects and $R(T)$-arrows [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Let $(V,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $S$ with $s,t$ flat and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $P\\subseteq R$ be an open subspace containing the unit and stable under inverse and composition, with all the same objects $V$; an open subspace means a subfunctor whose scheme base changes are open subschemes [def-weil-open-immersion]. Then $[V/P]$ and $[V/R]$ are algebraic stacks, and inclusion induces a morphism $j:[V/P]\\to[V/R]$ which is representable by algebraic spaces, surjective and etale [def-weil-etale-morphism]. Algebraic stack means a stack with representable diagonal and a smooth surjective scheme atlas [def-sfb-algebraic-moduli-stack]. Surjectivity means field-extension-local lifting of field-valued objects. If $[V/R]$ is Deligne--Mumford, then $[V/P]$ is Deligne--Mumford as well.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU2 (lemma-quasi-splitting-etale), complete statement. The final DM consequence follows by pulling back an etale scheme atlas and taking etale scheme charts of its algebraic-space pullbacks; equivalently Tag 06N3 (theorem-DM)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal Y=[V/P]$ and $\\mathcal X=[V/R]$. On scheme charts an open immersion is etale by [lem-weil-pbc-open-immersion-etale]; the chartwise calculus [lem-sfb-stack-chartwise-smooth-etale-calculus] makes it flat and locally of finite presentation and preserves these properties under composition. Thus $s|_P,t|_P$ are flat and locally of finite presentation. Apply [lem-sfb-flat-groupoid-algebraic-quotient] to $(V,R)$ and $(V,P)$. Both quotients are algebraic stacks; their object maps are representable, surjective, flat and locally of finite presentation. The inclusion of test-point groupoids extends to $j:\\mathcal Y\\to\\mathcal X$ by the universal extension property of [lem-sfb-groupoid-stackification-local-description].",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU2 (lemma-quasi-splitting-etale), first paragraph; 06FI and 06FH."
+   }
+  },
+  {
+   "text": "For $a,b\\in\\mathcal Y(T)$ choose a common fppf covering on which both come from $V$-objects; this is permitted by [lem-sfb-groupoid-stackification-local-description]. Between such objects their Isom sheaves are the corresponding fibres of $P$ and $R$: these are already sheaves, since algebraic spaces are fppf sheaves [def-trf-algebraic-space]. The map is injective since $P$ is an open subfunctor of $R$. Hence two arrows $a\\to b$ with the same image under $j$ agree on the cover and agree globally, since Isom presheaves of a stack are sheaves. Thus $j$ is faithful on every fibre. Now [lem-sfb-faithful-stack-map-representable] implies that $j$ is representable by algebraic spaces.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-trf-algebraic-space",
+    "lem-sfb-faithful-stack-map-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU2, first paragraph: monicity and fibrewise faithfulness; algebraic.tex Tag 04Y5."
+   }
+  },
+  {
+   "text": "Given a field-valued object $x$ of $\\mathcal X$, surjectivity of $V\\to\\mathcal X$ in [lem-sfb-flat-groupoid-algebraic-quotient] gives a field extension and $v\\in V$ representing $x$ after that extension. The same $v$ defines an object of $\\mathcal Y$, whose image under $j$ is the chosen representative of $x$. This proves the asserted field-extension-local surjectivity.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU2, first paragraph: field-valued objects and surjectivity."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-quotient-map-cartesian-action-groupoid] to $(V,P)\\to(V,R)$. It identifies $V\\times_{\\mathcal X}\\mathcal Y$ with $[R/B]$, where $B=P\\times_{s,V,t}R$, source is $(p,r)\\mapsto r$, target is $(p,r)\\mapsto c(p,r)$, and the map to $V$ is induced by $s:R\\to V$. This is a groupoid over $V$ since $s(c(p,r))=s(r)$. Its relation map to $R\\times_{s,V,s}R$ is an open immersion: the mutually inverse formulas\n$$(p,r)\\longmapsto(c(p,r),r),\\qquad(r_1,r_2)\\longmapsto(c(r_1,i(r_2)),r_2)$$\nidentify $B$ with the inverse image of the open subspace $P\\subset R$ under $(r_1,r_2)\\mapsto c(r_1,i(r_2))$. The groupoid laws [def-a1-groupoid-scheme], interpreted on test schemes as in the statement, verify the formulas: $c(c(p,r),i(r))=p$ and $c(c(r_1,i(r_2)),r_2)=r_1$. Pullback of an open subfunctor is open, since on a scheme it is inverse image of an open subscheme. Because $s:R\\to V$ is flat and locally of finite presentation, [lem-sfb-open-relation-etale-quotient] applies over $Y=V$. Hence $V\\times_{\\mathcal X}\\mathcal Y\\to V$ is etale.",
+   "uses": [
+    "lem-sfb-quotient-map-cartesian-action-groupoid",
+    "def-a1-groupoid-scheme",
+    "lem-sfb-open-relation-etale-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU2, second paragraph: 04Y4 action presentation and application of 0DU1."
+   }
+  },
+  {
+   "text": "The cover $V\\to\\mathcal X$ is representable, surjective, flat and locally of finite presentation by [lem-sfb-flat-groupoid-algebraic-quotient]. Step 2 proved representability of $j$, so the target-local etaleness assertion of [lem-sfb-representable-fppf-etale-open-descent] applies to this cover. Step 4 proves its base-change test. Thus $j$ is etale.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU2, second paragraph; stacks-properties.tex Tag 04XD."
+   }
+  },
+  {
+   "text": "Assume $\\mathcal X$ is Deligne--Mumford. Choose its surjective etale scheme atlas $A\\to\\mathcal X$, using [def-sfb-stable-pointed-moduli-groupoids]. Representability of $j$ gives the algebraic space $B=A\\times_{\\mathcal X}\\mathcal Y$. Choose a surjective etale scheme chart $C\\to B$, available by [def-trf-algebraic-space]. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $B\\to\\mathcal Y$ is surjective etale (base change of $A\\to\\mathcal X$), and its composition with $C\\to B$ is surjective etale and representable. Thus $C\\to\\mathcal Y$ is an etale scheme atlas. The diagonal of $\\mathcal Y$ is already representable by step 1, so this is precisely the Deligne--Mumford definition.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3 (theorem-DM), atlas criterion, and the definition of a Deligne--Mumford stack."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-trf-algebraic-space",
+  "lem-sfb-faithful-stack-map-representable",
+  "lem-sfb-quotient-map-cartesian-action-groupoid",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-open-relation-etale-quotient",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU2 (lemma-quasi-splitting-etale), both paragraphs; final DM clause by the atlas definition (Tag 06N3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented groupoid in algebraic spaces an open wide subgroupoid induces a representable surjective etale morphism of quotient stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient stack map U modulo P to U modulo R is representable and etale for an open subgroupoid P of R",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "subgroupoid|quotientStack|quotient_stack",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"15\", \"text\": \"# Subgroupoid\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"17\", \"text\": \"This file defines subgroupoids as `structure`s containing the subsets of arrows and their\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"21\", \"text\": \"* containment of subgroupoids is a complete lattice;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"22\", \"text\": \"* images and preimages of subgroupoids under a functor;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"23\", \"text\": \"* the notion of normality of subgroupoids and its stability under intersection and preimage;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Basic.lean\", \"line\": \"38\", \"text\": \"/-- A subgroupoid is totally disconnected if it only has loops. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subgroupoid induces an etale representable map of algebraic quotient stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"OpenSubgroup\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"(G : Type u_1) → [Group G] → [TopologicalSpace G] → Type u_1\", \"doc\": \"An open subgroup of a topological group $G$ is a subgroup $H \\\\subseteq G$ that is also an open set in the topology of $G$.\"}\n  {\"name\": \"QuotientGroup.isOpenQuotientMap_mk\", \"module\": \"Mathlib.Topology.Algebra.Group.Quotient\", \"type\": \": IsOpenQuotientMap (mk : G → G ⧸ N)\", \"doc\": \"For any topological group $ G $ and its subgroup $ N $, the canonical projection $ G \\to G/N $ is an open quotient map. This means that the image of any open set in $ G $ under the projection is open i\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"Topology.IsOpenEmbedding.singleton_hasGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{f : α → H} (h : IsOpenEmbedding f) (G : StructureGroupoid H) [ClosedUnderRestriction G] :\\n  @HasGroupoid _ _ _ _ h.singletonChartedSpace G\", \"doc\": \"Given a topological space $\\\\alpha$ and a model space $H$, if $f : \\\\alpha \\\\to H$ is an open embedding and $G$ is a structure groupoid on $H$ closed under restriction, then the charted space structure o\"}\n  {\"name\": \"OpenSubgroup.toSubgroup_injective\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \": Injective ((↑) : OpenSubgroup G → Subgroup G)\", \"doc\": \"The canonical map from open subgroups of a topological group $ G $ to subgroups of $ G $ is injective, meaning that distinct open subgroups have distinct underlying subgroup structures.\"}\n  {\"name\": \"OpenSubgroup.mk\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] → (toSubgroup : Subgroup G) → IsOpen toSubgroup.carrier → OpenSubgroup G\", \"doc\": \"Given a subgroup $ H $ of a topological group $ G $ and a proof that the underlying set of $ H $ is open in $ G $, this constructs the open subgroup $ H $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib.CategoryTheory.Galois.EssSurj\", \"type\": \"(V : OpenSubgroup (Aut F)) : ∃ (X : C), Nonempty ((functorToAction F).obj X ≅ Aut F ⧸ₐ V.toSubgroup)\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"OpenSubgroup.toSubgroup\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"{G : Type u_1} → [inst : Group G] → [inst_1 : TopologicalSpace G] → OpenSubgroup G → Subgroup G\", \"doc\": \"The function that maps an open subgroup of a topological group $G$ to its underlying subgroup structure, forgetting the topological properties and retaining only the group-theoretic data.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Pointed finite-groupoid etale neighbourhoods of finite-inertia DM stacks. Substep: Tag 0DU4 passage from a finite open subgroupoid P to the representable etale map [V/P] to [V/R].",
+   "via": [
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-subgroupoid-etale-quotient",
+  "worker": "stage1",
+  "summary": "Followed Tag 0DU2 with existing flat-groupoid algebraicity and fppf descent nodes. Added the general faithful-map criterion, general quotient-map action presentation and open-relation etale quotient theorem; proved the open relation identification explicitly and supplied the DM atlas argument. Statement unchanged; no Lean attachment.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited stable pointed-curve/finite-inertia support chain: Tag 0DU4 invokes 0DU2 for an open subgroupoid. Steps 1-5 realize both paragraphs of 0DU2; step 6 supplies the DM consequence needed by that parent. Preserved the null ancestor and inherited via chain; no unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Scheme-chart open immersion implies etale, used to restrict the two flat lfp groupoid projections; generic morphism tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-d59ba2ef8",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-d59ba2ef8 (reviewer sub-agent of L); spot-checked: I read Stacks 0DU2 and 0DU1 (stacks-morphisms.tex), 04Y4 with the construction before it (spaces-groupoids.tex) and 04Y5 (algebraic.tex). The item's statement is byte-identical to the base, and on live/side-live the item is still unsplit with no proof, so nothing supersedes it and there is no re-split note. The three new nodes match their sources hypothesis by hypothesis and are statement-only. 04Y4: I checked every s''/t''/inverse/composition formula against the def-a1 convention. 0DU1: I tested the full relation and the diagonal relation on A^1_k. 04Y5: I tested BH->BG and BG->pt. A search of the DAG with rg -L on the tags and labels finds no duplicates; self-relation-embedding and residual-substack use 04Y5 only for narrower statements. Steps: (1) open immersion => etale => flat lfp, then the flat-groupoid quotient node and the stackification extension. (2) Isom sheaves are the fibres of P and R, already sheaves, so j is faithful; 04Y5 gives representability. (3) The field-lift clause gives surjectivity; it is correctly elementary. (4) I recomputed the division-map identification B = d^{-1}(P) and the identities c(c(p,r),i r)=p and c(c(r1,i r2),r2)=r1; with Y=V via s, 0DU1 applies. (5) The target-local etale descent along V->[V/R] applies. (6) The DM atlas is pulled back via representability, then an etale chart and the chartwise base-change/composition give an etale atlas. Batch-5 flags: every one goes through def-trf-algebraic-space, def-trf-projective-bundle-morphism or the Mathlib leaf lem-trf-sieve-set-sheafification-exists. These are general definitions or sheafification existence and are not steps of the trace-formula or Poincare-duality proofs, so all are accepted. Nothing cites SGA. proof_deps equals the union of the step uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenSubgroupoidEtaleQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.open_subgroupoid_etale_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSubgroupoidEtaleQuotient.lean",
+  "statement": "theorem open_subgroupoid_etale_quotient {S : Scheme.{u}} {V R P : AlgebraicSpace S} (s t : R ⟶ V) (e : V.obj.obj ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s.hom.hom t.hom.hom ⟶ R.obj.obj) (q : P.obj.obj ⟶ R.obj.obj) (hq : IsRepresentableWith (fun _ _ f ↦ IsOpenImmersion f.left) q) (eP : V.obj.obj ⟶ P.obj.obj) (iP : P.obj.obj ⟶ P.obj.obj) (cP : Limits.pullback (q ≫ s.hom.hom) (q ≫ t.hom.hom) ⟶ P.obj.obj) (he : eP ≫ q = e) (hi : iP ≫ q = q ≫ i) (hc : cP ≫ q = pullback.map (q ≫ s.hom.hom) (q ≫ t.hom.hom) s.hom.hom t.hom.hom q q (𝟙 V.obj.obj) (by simp) (by simp) ≫ c) (hs : MapIsFlat s) (ht : MapIsFlat t) (hsfp : MapIsLocallyOfFinitePresentation s) (htfp : MapIsLocallyOfFinitePresentation t) (X : BasedCategory.{max u v₁, max (u + 1) w₁} (Over S)) (Y : BasedCategory.{max u v₂, max (u + 1) w₂} (Over S)) (aR : BasedFunctor (discreteModuli V.obj.obj) X) (aP : BasedFunctor (discreteModuli V.obj.obj) Y) (hR : SpaceGroupoidQuotientPresentation s.hom.hom t.hom.hom e i c X aR) (hP : SpaceGroupoidQuotientPresentation (q ≫ s.hom.hom) (q ≫ t.hom.hom) eP iP cP Y aP) : IsAlgebraicModuliStack Y ∧ IsAlgebraicModuliStack X ∧ ∃ (j : BasedFunctor Y X) (β : ModuliTwoIso (aP.comp j) aR), (∀ z : (discreteModuli P.obj.obj).obj, j.map (hP.arrows.val.hom.app z) ≫ β.val.hom.app ((discreteModuliMap (q ≫ t.hom.hom)).obj z) = β.val.hom.app ((discreteModuliMap (q ≫ s.hom.hom)).obj z) ≫ hR.arrows.val.hom.app ((discreteModuliMap q).obj z)) ∧ IsRepresentableByAlgebraicSpaces j ∧ IsSurjectiveModuliMap j ∧ ModuliSpaceTest (@Etale) j ∧ (IsDeligneMumfordModuliStack X → IsDeligneMumfordModuliStack Y)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Quotients are parametrized by the existing SpaceGroupoidQuotientPresentation, which characterizes their fppf stackification. The induced map is supplied together with its comparison on objects and the commuting square on every subgroupoid arrow. Uses the five added landed nodes for the space groupoid laws, quotient presentation, chartwise morphism properties and field-local surjectivity; the natural-language statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-003772766",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery of returned head 89522ae954e6, whose only finding was H2. Lean module byte-identical; the node diff vs the returned head is only the stmt_dep lem-sfb-stack-chartwise-smooth-etale-calculus -> def-sfb-surjective-moduli-map (existing:true CategoryTheory.IsSurjectiveModuliMap, Q87 landed 2026-10-24, present in snapshot); the theorem stays in proof_deps; report updated. Re-read independently on side-live: SpaceGroupoidQuotientPresentation (groupoid laws, fppf stack, unique arrow lift, local surjectivity, composition), IsRepresentableWith IsOpenImmersion for P in R, eP/iP/cP exact restrictions, j pinned by beta plus the arrow square (types checked), IsRepresentableByAlgebraicSpaces, IsSurjectiveModuliMap (field-extension lifting), ModuliSpaceTest @Etale, DM implication. Independent quotient universes lose nothing. Edge cases P=R, unit subgroupoid, empty V, BH->BG ok. Docstrings and source places present; sorry only; statement verbatim. Item not landed on side-live. No compile (no file changed); worker compile clean."
+ }
+}

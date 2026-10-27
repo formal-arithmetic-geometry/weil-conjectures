@@ -1,0 +1,138 @@
+{
+ "id": "def-trf-point-system-functors",
+ "kind": "definition",
+ "title": "Canonical strict point-system inverse image and whole-tower sections",
+ "status": "split",
+ "statement": "Let $D$ be the finite-field datum, with algebraically closed geometric field $k$ and geometric Frobenius $h:\\operatorname{Spec}k\\to\\operatorname{Spec}k$, and let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ finite with valuation ring $R$ and fixed uniformizer $\\varpi$ [def-trf-coefficient-conventions], [def-trf-scheme-frobenius]. Put $s=\\operatorname{Spec}k$. The site universe $t$ and coefficient universe $u$ are independent; scalar rings and modules use the common lift to $\\max(u,t+1)$. For $n\\in\\mathbf N$ put $B_n=(R/\\varpi^{n+1})_s$. Use the ringed sequence site $\\mathbf N\\times s_{\\mathrm{proet}}$, its vertical-cover topology, sequence coefficient sheaf $B_\\bullet$, category $\\mathcal S$ of strict $B_\\bullet$-module systems, and completed scalar restriction $U:\\mathcal S\\to\\operatorname{Tow}(\\operatorname{Mod}(\\widehat R_s))$ retaining every original quotient-linear transition [def-coef-ringed-sequence-site]. For every $r\\in\\mathbf N$, define $h^0=\\mathrm{id}$ and $h^{r+1}=h\\circ h^r$. Define the site reindexing $\\rho_r(n,(V\\xrightarrow v s))=(n,(V\\xrightarrow{h^rv}s))$, identity on coefficient indices and underlying site arrows. Let $\\mathrm{sequenceRing}$ be $B_\\bullet$ with commutativity forgotten. Let $c_{r,n}:(h^r)^{-1}B_n\\to B_n$ be the canonical coefficient isomorphism [def-weil-inverse-image-pullback-comparison]. Define $\\mathrm{coefficient}_r:B_\\bullet\\to\\rho_{r,*}B_\\bullet$ by the uniquely specified components $c_{r,n}^{-1}$ on every site object. Define $G_r:\\mathcal S\\to\\mathcal S$ as sectionwise reindexing along $\\rho_r$ with scalar action restricted through $\\mathrm{coefficient}_r$; explicitly $(G_rM)_n(V,v)=M_n(V,h^rv)$ and horizontal transitions are the original reindexed transitions. Let $T=\\Gamma_{\\mathrm{none}}:\\operatorname{Mod}(\\widehat R_s)\\to\\operatorname{Mod}(R)$ be point sections with constant integral scalar action [def-trf-point-restriction-coordinates]. Define $\\Gamma_\\bullet=\\operatorname{Tow}(T)\\circ U:\\mathcal S\\to\\operatorname{Tow}(\\operatorname{Mod}(R))$, including all original transitions, and $\\mathrm{complexSections}$ by applying $\\Gamma_\\bullet$ termwise to unbounded cochain complexes. Equip whole $R$-module towers with their standard unbounded derived localization [def-weil-abstract-derived-category], denoted $\\mathrm{towerDerived}$, and let $\\mathrm{derivedSections}:D(\\mathcal S)\\to D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$ be the termwise sections functor descended through quasi-isomorphisms. These definitions contain no choice of a transport transformation, no derived inverse limit, and no boundedness, constructibility, normalization or completeness condition on a system; they also include $r=0$ and do not require $\\ell\\ne\\operatorname{char}k$.",
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-coef-ringed-sequence-site",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-point-restriction-coordinates",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Proof (3), point-factor prerequisite for the integral derived-limit comparisons. Existing coordinate and functor definitions in Sheaf.Paper.PointSystemTransportDescent, lines 63-234; definition-ownership repair requested by L/H2 at immutable head 56bc8cb67643."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of strict coefficient sequences along Frobenius and termwise sections as a tower of modules",
+   "results": "[leansearch] OK 8 hit(s)\n[\"Submodule.comap\", \"WittVector.frobeniusFun\", \"PreTilt.coeff_iterate_frobeniusEquiv_symm\", \"Perfection.coeff_frobenius\", \"Submodule.comap_coe\", \"RingHom.map_frobeniusEquiv_symm\", \"WittVector.IsocrystalHom.mk.sizeOf_spec\", \"Perfection.coeff_iterate_frobeniusEquiv_symm\"]",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the published PointSystemTransportDescent definitions; this node supplies their missing definition ownership."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Functor.mapDerivedCategory",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.mapDerivedCategory'\n[]",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the published PointSystemTransportDescent definitions; this node supplies their missing definition ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "PointSystemTransport|coefficientSequenceModules|pointPower",
+   "results": "[grep] OK 0 hit(s)\n[]",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the published PointSystemTransportDescent definitions; this node supplies their missing definition ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'PointSystemTransport\\.(pointPower|reindex|sequenceRing|coefficient|pull|sections|complexSections|towerDerived|derivedSections)' dag/nodes; rg -n 'PointSystemTransport|pointPower|sequenceRing' lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search 'point system'",
+   "results": "DAG hits: lem-trf-point-restriction-whole-roos-square and lem-trf-point-system-transport-descent (theorems only). Exact definitions in lean/Sheaf/Paper/PointSystemTransportDescent.lean at lines 65, 72, 92, 120, 126, 162, 191, 226, 233. Other project hits are consumers or finite-level transport constructions. No upstream WeilConjectures match. 0 blueprint nodes match 'point system'.",
+   "date": "2026-10-22",
+   "verdict": "No existing definition node owns this package. Reuse the exact existing declarations, as requested by L/H2 at 56bc8cb67643; no Lean declaration is duplicated."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-normalized-comparison-data",
+  "date": "2026-10-22",
+  "group": "Q103"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: base-change isomorphisms at stage E are rationalizations of the integral ones; prerequisite prop-trf-rational-frobenius-integral-model proof (3), integral maps are derived limits of levelwise composites; extracted old item steps 5-6. Returned whole-Roos steps 1-4: ambient scalar compatibility, exact products, signed coordinates, and normalized comparison construction. Canonical point-system reindexing, coefficient action, sections and ordinary derived sections used to state the normalized comparisons.",
+   "via": [
+    "lem-trf-point-system-normalized-comparison-data",
+    "lem-trf-point-system-roos-transport",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence",
+    "lem-trf-rational-global-frobenius-powers"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.PointSystemTransportDescent",
+  "declaration": "WeilConjectures.PointSystemTransport.pull",
+  "declarations": [
+   "WeilConjectures.PointSystemTransport.pointPower",
+   "WeilConjectures.PointSystemTransport.reindex",
+   "WeilConjectures.PointSystemTransport.sequenceRing",
+   "WeilConjectures.PointSystemTransport.coefficient",
+   "WeilConjectures.PointSystemTransport.pull",
+   "WeilConjectures.PointSystemTransport.sections",
+   "WeilConjectures.PointSystemTransport.complexSections",
+   "WeilConjectures.PointSystemTransport.towerDerived",
+   "WeilConjectures.PointSystemTransport.derivedSections"
+  ],
+  "statement": "def pull (r : ℕ) : coefficientSequenceModules l E (Spec (.of D.k)) ⥤\n    coefficientSequenceModules l E (Spec (.of D.k))",
+  "branch": "sheaf-dag",
+  "by": "Q103",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership only, requested by L/H2 at 56bc8cb67643. Reuses the unchanged published PointSystemTransportDescent declarations. coefficient is chosen from its unique fully prescribed sectionwise specification, not from point_system_transport_descent. pull/sections and their termwise and ordinary derived functors are defined before that theorem. The existing helper proofs supply continuity, coefficient compatibility and exactness; no new proof or data choice is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e0f237e8",
+  "group": "Q103",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e0f237e8",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Re-delivery after the 56bc8cb67643 H2 RETURN. The item Lean is identical except for set_option linter.checkUnivs false, so the substance accepted at 56bc carries over. stmt_deps replace the theorem lem-trf-point-system-transport-descent with the new def-trf-point-system-functors and add the landed def-weil-strict-roos-model, which the STMT_DEPS MAY GAIN LANDED NODES rule allows. The new node is existing:true over 9 unchanged PointSystemTransportDescent decls (pointPower, reindex, sequenceRing, coefficient, pull, sections, complexSections, towerDerived, derivedSections), exactly those the item uses. lean.statement is verbatim from lines 120-121. The TeX matches the Lean: orientation of c_{r,n}^{-1}, (G_rM)_n(V,v)=M_n(V,h^r v), Γ•=U⋙Tow(T), independent universes, r=0 included. coefficient is a .choose of an ∃! pinned to actual inverses, so not hollow. All 6 stmt_deps exist live and their closure does not reach the item. Advisories: coefficientSequence*/pointRestriction* owners are reachable only through the new node; exactness instances come from the theorem module; no worker second reading. No compile run, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T222615-L-673735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.PointSystemTransport.finite_evaluation",
+   "WeilConjectures.PointSystemTransport.tensorTransition_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.PointSystemTransport.finite_evaluation"
+  ]
+ }
+}

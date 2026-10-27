@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-discrete-internal-matrix-local-lifting",
+ "kind": "statement",
+ "title": "Local descent of internal free matrices to discrete point matrices",
+ "statement": "Let A be a commutative ring in universe u and Λ=discreteObj A [def-sfb-integral-models-stacks-data]. Let Y be a scheme in universe u and U an object of its coefficient-sized pro-etale site [def-sfb-affine-locally-constructible-proetale-modules]. For natural numbers m,n and any internal morphism a:Λ_{U.left}^m→Λ_{U.left}^n between finite biproducts of the regular module, there is a covering sieve S on U such that for every g:V→U in S there is a morphism d:pointModelFree Λ m→pointModelFree Λ n [def-sfb-point-model-free-module] and an isomorphism in the arrow category between the pullback of a along the underlying scheme map V.left→U.left and the image of d under pointModelPullbackFunctor Λ V.left [def-sfb-point-model-pullback-functor]. An arrow isomorphism is a pair of isomorphisms of the sources and targets making the matrix square commute. No arbitrary module, cokernel, coefficient relabelling, Noetherianity or nonempty assumption occurs.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-sfb-point-model-free-module",
+  "def-sfb-point-model-pullback-functor"
+ ],
+ "proof": [
+  {
+   "text": "Take the unit section of each regular-module matrix entry. The coefficient-section coordinate comparison gives a section s_ij of the ordinary constant commutative ring sheaf on the coefficient-sized site of Y, with its explicit restriction formula.",
+   "uses": [
+    "lem-sfb-discrete-section-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite_local_section_lifts to the actual sheafification unit of the constant ULift A presheaf and the tuple indexed by Fin m times Fin n. This gives the covering sieve S and simultaneous scalar lifts directly on the required site; no subsequent covering transport is needed.",
+   "uses": [
+    "lem-sfb-finite-local-section-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every member form the explicit point matrix of regularLift applied to discretePointScalarSection of each lifted scalar. Precomposition with the unit proves the regular-module square: first compare maps into coefficient restriction, then apply regularExtensionIso_naturality. The private regular pullback comparison is constructed from an explicit identity-underlying mapMod comparison and the regular extension isomorphism; no scalar-matrix theorem is imported. Point pullback preserves finite colimits by its adjunction; additivity gives its finite biproduct comparison. Compute every entry of the two conjugated matrices using the biproduct injections and projections. The scalar squares identify these entries. Two applications of biproduct hom extensionality give equality of the matrices, and Arrow.isoMk gives the stated arrow isomorphism. These same universal properties include zero ranks.",
+   "uses": [
+    "lem-sfb-discrete-section-coordinates",
+    "lem-weil-pbc-regular-extension-comparison",
+    "def-sfb-point-model-free-module",
+    "def-sfb-point-model-pullback-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi. Reverse finite-matrix part of lem-sfb-discrete-coefficient-local-models, steps 1--2."
+ },
+ "proof_deps": [
+  "lem-sfb-discrete-section-coordinates",
+  "lem-sfb-finite-local-section-lifts",
+  "lem-weil-pbc-regular-extension-comparison",
+  "def-sfb-point-model-free-module",
+  "def-sfb-point-model-pullback-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi. B4 formalizes common section lifts and all regular-module and matrix assembly; the only new remaining obligation is a single coefficient-section coordinate comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between finite free modules over a sheafified constant ring locally comes from a matrix of constant scalars",
+   "date": "2026-10-26",
+   "results": "8 hits including SheafOfModules.freeHomEquiv, map_ιFree_mapFree_hom and Presentation.mapGenerators.",
+   "verdict": "These give matrix coordinates for ordinary module sheaves but do not compare the internal discrete condensed point and scheme matrices."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective",
+   "date": "2026-10-26",
+   "results": "12 hits including isLocallySurjective_toSheafify and imageSieve_mem.",
+   "verdict": "Use for entrywise local lifts; the project finite_local_section_lifts already gives the common covering sieve."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*local.*section|local.*lift.*matrix|matrix.*local.*lift",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits. Project rg searches found FiniteLocalSectionLifts and SiteConstantModuleHomSurjective. Blueprint search for discrete matrix returned 0 matches.",
+   "verdict": "The section-lifting lemma is available; the internal regular-module and pullback matrix comparison still needs to be established."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteConstantPresentationLifting",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Lifting one constant finite matrix to discrete point matrices; Local descent of internal free matrices to discrete point matrices",
+   "via": [
+    "lem-sfb-discrete-constant-presentation-lifting",
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiscreteInternalMatrixLocalLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscreteInternalMatrixLocalLifting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_internal_matrix_local_lifting",
+  "statement": "theorem discrete_internal_matrix_local_lifting\n    (A : Type u) [CommRing A] {Y : Scheme.{u}}\n    (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y) (m n : ℕ)\n    (a : Mod.finiteFree (condensedRingObj (discreteObj A) (AsSmall.down.obj U).left) m ⟶\n      Mod.finiteFree (condensedRingObj (discreteObj A) (AsSmall.down.obj U).left) n) :\n    ∃ S : Sieve U, S ∈ Scheme.coefficientProEtaleModelTopology.{u, u} Y U ∧\n      ∀ (V : Scheme.coefficientProEtaleSiteModel.{u, u} Y) (g : V ⟶ U), S g →\n        ∃ d : pointModelFree (discreteObj A) m ⟶ pointModelFree (discreteObj A) n,\n          Nonempty\n            (Arrow.mk ((CondensedRing.upperStar (discreteObj A)\n                (AsSmall.down.map g).left).map a) ≅\n              Arrow.mk ((pointModelPullbackFunctor (discreteObj A)\n                (AsSmall.down.obj V).left).map d))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T100244-L-4163590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T111756-L-1727266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

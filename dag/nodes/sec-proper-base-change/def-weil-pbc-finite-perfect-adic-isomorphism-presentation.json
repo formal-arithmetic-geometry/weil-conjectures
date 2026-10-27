@@ -1,0 +1,119 @@
+{
+ "id": "def-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+ "kind": "definition",
+ "title": "Normalized etale presheaf presentation with conditional scalar transport",
+ "statement": "For a scheme X, an adic coefficient datum d on A, M in the completed-coefficient derived category, an etale X-chart V and a supplied algebraic tower T [def-weil-pbc-finite-perfect-adic-tower-data], define B_n=ULift(A/d.ideal^(n+1)), its consecutive quotient q_n, and the category of derived B_n-module sheaves on V_et. A presentation comprises derived objects C_n,K_n in these categories, each bounded with finite locally constant cohomology [def-constructible-finite-locally-constant]; inhabited geometric stalks of their canonical Isom sheafifications [def-weil-pbc-derived-local-isomorphism-sheaf]; specified coefficient normalization arrows dC_n,dK_n; maps p_n of their actual etale Isom presheaves satisfying the generator normalization equation [def-weil-pbc-etale-isomorphism-normalization-arrow]; and, for every U over V and W mapping to U, scalar-forgetting realization functors from the fixed-coefficient categories on U_proet to completed-ring modules on the W slice. Supply the coefficient-restriction interchange and level comparisons from the realized C_n,K_n to the model and actual strict tower respectively. Require the two normalization identities identifying the realized normalization arrows with the specified model and actual transitions. Define transport by applying the realization functor to a raw isomorphism and conjugating by these comparisons; prove square preservation from coefficient-interchange naturality and those two identities. This datum has no evaluation on pro-etale sheafification sections and assumes no unconditional evaluated reduction square.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, actual finite quotient diagram and constant algebraic levels; Tags 09BV and 06YY, local Isom presheaves and scalar normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-etale-isomorphism-normalization-arrow"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of sections of a sheafified presheaf of derived isomorphisms preserves a coefficient normalization square",
+   "results": "8 results, including isoSheafify, sheafificationIso, presheafToSheafCompSheafFiber and sheafSectionsNatIsoEvaluation; generic sheafification only. A second query for normalized finite quotient tower descent returned condensed locally constant diagrams and scheme flat descent, not this statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; use the project derived comparison and normalization constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaf of derived isomorphisms between perfect complexes and evaluation compatible with scalar reduction",
+   "results": "8 results about condensed locally constant module functors; no derived Isom normalization result.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"StructuredArrow.IsUniversal\"",
+   "results": "0 hits. The additional query \"Sheaf\", \"IsIso\" returned 12 generic Kan-extension and sheafification results.",
+   "date": "2026-10-27",
+   "verdict": "No normalized derived Isom evaluation or finite quotient presentation result."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ii]so|[Ii]so.*normalization; normalized.*presheaf.*evaluat|presheaf.*normaliz.*evaluat|isomorphism.*presentation",
+   "results": "Mathlib search returned algebraic normalization and unrelated field-theory results. Project searches found the existing source/slice Isom evaluation and the archived normalized reduction APIs. No fixed-presheaf-map preservation theorem or completed-adic etale presentation datum exists. blueprint_refs search for isomorphism normalization returned 0 blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse existing source evaluation and finite-ring local constancy; the two missing interfaces are narrower than the assigned theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicIsomorphismSections",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, actual finite quotient diagram and constant algebraic levels; Tags 09BV and 06YY, local Isom presheaves and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicIsomorphismPresentation",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicIsomorphismPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FinitePerfectAdicIsomorphismPresentation",
+  "statement": "structure FinitePerfectAdicIsomorphismPresentation\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (T : FinitePerfectAdicAlgebraTower d)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicIsomorphismRing",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicIsomorphismQuotient",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicIsomorphismComplex",
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicIsomorphismPresentation",
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicIsomorphismPresentation.transport",
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicIsomorphismPresentation.transport_square"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T084357-L-3673757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdic_isomorphism_presentation"
+  ],
+  "sorry_after": []
+ }
+}

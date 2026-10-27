@@ -55,7 +55,18 @@
   "existing": true,
   "note": "Exact published stage-2 statement, originally written by Q32 and confirmed using scompile.py --source. Retains both independent ring universes, the maximal ideal, strict henselianity, the prime above it, and bijectivity of the canonical localization homomorphism. No new Lean module is supplied. The upstream IndWeaklyEtale theorem is a more general prime-contraction version; the published Sheaf declaration matches the node explicitly."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
@@ -65,5 +76,24 @@
   "note": "Existing-only delivery: node lean field changed to Q32's published Sheaf.RingTheory.StrictHenselianMaximalLocalRingIso declaration bijective_localRingHom_of_isMaximal_of_isStrictlyHenselianLocalRing; no other node field changed; record complete, statement verbatim. Clause-by-clause exact against node and blueprint source (independent universes, WeaklyEtale, maximal m, strictly henselian R_m, prime n with m = comap n, bijective canonical localRingHom); docstrings with source and blueprint id, proof steps, sorry only, nothing hollow. Replaced slopmaster2 attachment is single-universe (A B : Type u), so not exact; item still in stage-2 queue. nt_compile of module + probe clean, signature confirmed. Minor: lean.note calls the upstream theorem 'more general' though it is less general in universes."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-wc-rings"
+ "unit": "sk-prop-pe-wc-rings",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $R\\to B$ be weakly étale (for instance ind-étale), and let $\\mathfrak n\\subset B$ be a\nprime such that, for $\\mathfrak m=\\mathfrak n\\cap R$, the local ring $R_{\\mathfrak m}$ is\nstrictly henselian. Then $R_{\\mathfrak m}\\to B_{\\mathfrak n}$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "An ind-étale map is weakly étale by [lem-weil-pbc-ind-etale-stability]. The base change\n$R_{\\mathfrak m}\\to B\\otimes_RR_{\\mathfrak m}$ is weakly étale. The localization\n$B\\otimes_RR_{\\mathfrak m}\\to B_{\\mathfrak n}$ is a filtered colimit of principal\nlocalizations, hence ind-Zariski and in particular weakly étale. By stability under\ncomposition ([lem-weil-pbc-ind-etale-stability]) the map $R_{\\mathfrak m}\\to\nB_{\\mathfrak n}$ is weakly étale, and it is a local homomorphism because $\\mathfrak n$ lies\nover $\\mathfrak m$. Olivier's theorem [thm-weil-pbc-weak-etale-strict-local] says that a\nweakly étale local homomorphism out of a strictly henselian local ring is an isomorphism.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-stability",
+     "thm-weil-pbc-weak-etale-strict-local"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

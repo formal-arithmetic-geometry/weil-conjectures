@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-tower-p1-projection-trace-identification",
+ "kind": "statement",
+ "title": "The exchange-defined projection traces are the normalized splitting traces",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, an arbitrary scheme $S$ with $\\ell$ invertible, and a projective-line presentation $p$ [def-sp-tower-p1-adjunction-data]. Let $d$ be its canonical map data and $h$ the etale-origin comparisons including the shifted Tate line [lem-sp-tower-p1-etale-origin-comparisons]. For any normalized splitting data $k$ with kernel scalar normalization [def-sp-tower-p1-kernel-scalar-data], the two traces $\\operatorname{projectionTrace}$ defined from inverse proper exchange and the pullback of $p$'s trace [def-sp-tower-p1-triangle-words] are equal to the corresponding splitting traces of $k$: $\\operatorname{projectionTrace}(h,a)=\\operatorname{trace}(k,a)$ for $a=\\mathrm{false},\\mathrm{true}$. This is an equality in the actual ordinary derived tower category, not just at finite evaluations.",
+ "stmt_deps": [
+  "def-sp-tower-p1-adjunction-data",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "def-sp-tower-p1-kernel-scalar-data",
+  "def-sp-tower-p1-triangle-words"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+ },
+ "proof": [
+  {
+   "text": "Transpose the two ordinary coefficient comparisons and evaluate their scalar-unit normalizations. The maps agree on sections. For the line comparisons apply the same argument to the finite tensor generators a tensor z; equality of compatible families is equality of tower maps. Localize and commute the fixed shifts to identify k's shifted-line comparisons with p.line2Iso and p.line1Iso.",
+   "uses": [
+    "def-sp-tower-class-diagonal",
+    "def-sp-tower-class-pullback",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  },
+  {
+   "text": "Substitute these equalities in the trace_base_change equations supplied by kernel scalar normalization. Precompose by the inverse shifted-line map and the inverse exchange mate on the shifted Tate object. Cancel inverse pairs. The two Boolean cases are exactly projectionTrace1 and projectionTrace2.",
+   "uses": [
+    "lem-sp-tower-p1-kernel-scalar-normalization",
+    "lem-sp-tower-p1-etale-origin-comparisons",
+    "lem-sp-tower-p1-triangle-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-pullback",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sp-tower-p1-kernel-scalar-normalization",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "lem-sp-tower-p1-triangle-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities; Levels; standing-setting restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport an adjunction through a fully faithful functor with compatible unit and counit",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful and map_restrictFullyFaithful_unit_app; no theorem for the recorded tower/finite comparison words.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction restriction is available, but the project-specific comparison equations and domains still need proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical trace from a projective line splitting is preserved by base change and inverse exchange",
+   "results": "LinearMap.trace_baseChange; Algebra.normalizedTrace_trans and related field trace results.",
+   "date": "2026-10-25",
+   "verdict": "No match for sheaf-derived projective-line splitting traces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit, mkOfUnitCounit_unit, mkOfUnitCounit_counit.",
+   "date": "2026-10-25",
+   "verdict": "Generic assembly only, not the geometric identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*base.*change|RespectsIso|restrict.*adjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; ObjectProperty/InheritedFromHom.lean; ring and linear algebra trace results. Project search found the five already stated P1 dependencies, none of the exact interface bridges.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate bridge found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerP1Adjunction",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities; Levels; standing-setting restriction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1ProjectionTraceIdentification",
+  "file": "lean/Sheaf/Paper/TowerP1ProjectionTraceIdentification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1_projectionTrace_eq",
+  "statement": "theorem towerP1_projectionTrace_eq (p : Presentation l E S hS) (d : Maps l E p)\n    (h : EtaleOriginComparisonsWithLine l E p d) (k : KernelSplittingData l E p)\n    (hk : KernelScalarNormalization l E p k) :\n    ∀ a : Bool, projectionTrace l E h a = k.trace l E a",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a6ed",
+  "group": "F9",
+  "result": "fix",
+  "landing": "20261025T202024-L-2664705",
+  "kind": "interface",
+  "note": "independent cc review: SmoothPurityTowerP1Data vs the old item body (verbatim apart from explicit pullback arguments in Presentation.exchange); item proof vs ComparisonsWithLine, KernelScalarNormalization, TriangleFactorization and the new nodes; 43-module sandbox build (all 7 direct importers OK); #print axioms"
+ }
+}

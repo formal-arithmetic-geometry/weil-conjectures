@@ -1,0 +1,98 @@
+{
+ "id": "def-sf-finite-partial-pullback-tensor",
+ "kind": "definition",
+ "title": "Pullback comparison for the finite partial tensor",
+ "statement": "For a finite six-functor operation datum S of [def-fix-six-functor-datum], a map f:X→Y, bounded constructible M on Y and finite-Tor bounded constructible L on Y, construct the isomorphism U_f(T_Y(M,L)) ≅ T_X(U_f M,U_f^tor L). Here T is the actual partial tensor and U^tor the restricted pullback of [def-sf-constructible-projection-mates]. Use its fixed-scalar realization: the specified pullback realization at T(M,L), the inverse K-flat/exact pullback comparison, cancellation of the coefficient-equivalence unit inside inverse image, the published fixed-scalar derived tensor/pullback comparison, and tensor of the inverses of fixedPullRealization at M and at the bounded constructible image of L. Lift this explicit ambient isomorphism through the full bounded constructible inclusion. There is no projection map, identity unit, or choice of an existence witness in the construction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor paragraph: the direct-image projection is the transpose of counit tensor identity, read through the specified pullback monoidality comparison; finite constructible realization of this calculation"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor paragraph: the direct-image projection is the transpose of counit tensor identity, read through the specified pullback monoidality comparison; finite constructible realization of this calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection map of a right adjoint has transpose equal to a tensor pullback comparison followed by counit tensor identity",
+   "results": "Eight results on ordinary pullback comparisons and adjunctions. No fixed-scalar constructible partial tensor comparison or its realization normalization. A second query about normalized identity monoidality found monoidal natural transformations and ordinary presheaf pullback identity comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for these specified constructible operation coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula map for an identity adjunction equals identity under normalized pullback tensor comparison",
+   "results": "Eight results on ordinary presheaf/over-category pullback identities; no derived coefficient-stage tensor normalization. Loogle Adjunction.rightAdjointUniq returned no identifier.",
+   "date": "2026-10-27",
+   "verdict": "The specialized normalization statements are not supplied by Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|rightAdjointUniq; repository identity and tensor comparisons",
+   "results": "Source Adjunction/ProjectionMap provides the generic counit transpose. Mathlib Adjunction/Unique provides rightAdjointUniq_hom_app_counit. ConstructibleProjectionMates supplies explicit realization and partial tensor constructions, but neither the finite proper transpose in these coordinates nor the normalized tensor-unit equation. FiniteProjectionIdentityNormalization is on fixed-scalar ambient compact-support functors and does not supply these constructible equalities.",
+   "date": "2026-10-27",
+   "verdict": "Reuse those constructions and generic identities; isolate only the realization normalization and tensor-unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionIdentityProperCounit",
+  "date": "2026-10-27",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Proper-factor paragraph: the direct-image projection is the transpose of counit tensor identity, read through the specified pullback monoidality comparison; finite constructible realization of this calculation",
+   "via": [
+    "lem-sf-projection-identity-proper-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePartialPullbackTensor",
+  "file": "lean/Sheaf/Paper/FinitePartialPullbackTensor.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.pullbackTensorComparison",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.pullbackTensorComparison"
+  ],
+  "statement": "def pullbackTensorComparison (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    (M : sixFunctorFiniteCategory D C E n hn Y)\n    (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) :\n    (S.finite.pull f).obj (((partialTensor S Y).obj M).obj L) ≅\n      ((partialTensor S X).obj ((S.finite.pull f).obj M)).obj ((torPull S f).obj L)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T034813-L-3688246",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T034813-L-3688246",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

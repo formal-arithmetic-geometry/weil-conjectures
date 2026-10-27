@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-sl2-open-cell-sheaf-extension",
+ "kind": "statement",
+ "title": "Extension of a partially multiplicative SL2 open-cell map to a group sheaf",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme is a group object in schemes over $S$, with multiplication, inverse and identity obeying the group identities; it is separated when its diagonal is a closed immersion [def-weil-closed-immersion]. On $S$-schemes use the fppf topology, whose covering families are jointly surjective flat morphisms locally of finite presentation. Write $\\mathbf G_a(T)=\\Gamma(T,\\mathcal O_T)$ with addition and $\\mathbf G_m(T)=\\Gamma(T,\\mathcal O_T)^\\times$ with multiplication, for every $S$-scheme $T$. A group sheaf means a group-valued functor with unique gluing of compatible sections for these coverings. A central exact sequence means that its first map identifies its source with the kernel of its second map, the second map is locally surjective for this topology, and the kernel commutes with every local section of the middle sheaf. Write $G=\\operatorname{SL}_{2,S}$ for the group sheaf of determinant-one $2\\times2$ matrices of global functions, and put $x(u)=I_2+uE_{12}$, $y(v)=I_2+vE_{21}$, where $I_2$ is the identity matrix and $E_{ij}$ has entry $1$ at $(i,j)$ and zero elsewhere, and $h(t)=\\operatorname{diag}(t,t^{-1})$. Let $\\Omega\\subseteq G$ be the subfunctor where the bottom-right matrix entry is invertible; it is represented by the open subscheme of $G$ with that condition. Its coordinates are $x(u)h(t)y(v)$, with $u,v\\in\\mathbf G_a$ and $t\\in\\mathbf G_m$. Let $H$ be any group sheaf, with no representability or separatedness hypothesis, and let $\\sigma:\\Omega\\to H$ be a natural transformation such that $\\sigma(1)=1$ and $\\sigma(a)\\sigma(b)=\\sigma(ab)$ for every $S$-scheme $T$ and every $a,b\\in\\Omega(T)$ with $ab\\in\\Omega(T)$. There exists a unique homomorphism of group sheaves $\\widetilde\\sigma:G\\to H$ whose restriction to $\\Omega$ is $\\sigma$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 4.3.1, final paragraphs, printed pp.130--131: extension from the open cell by finite-word comparison and an fppf-local common translate. Read online on 2026-10-24; local archival copy WANTED. No Stacks tag states this lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For finitely many $g_i=(g_{i,jk})_{1\\leq j,k\\leq2},\\quad (a_i,b_i,c_i,d_i)=(g_{i,11},g_{i,12},g_{i,21},g_{i,22})\\in G(T)$, cover $T$ by affine opens $\\operatorname{Spec}R$. The determinant equation gives $(-c_i)b_i+a_i d_i=1$. Apply [lem-sfb-unimodular-linear-forms-fppf-cover] to obtain an fppf covering and $z$ with all $b_i z+d_i$ invertible. Set $\\omega=y(z)$. Both $\\omega$ and $\\omega^{-1}=y(-z)$ lie in $\\Omega$, and the bottom-right entry of $\\omega g_i$ is $b_i z+d_i$. Hence $\\omega g_i\\in\\Omega$ for every $i$. In particular, with just $g$ we get the local word $g=\\omega^{-1}(\\omega g)$ of two elements of $\\Omega$.",
+   "uses": [
+    "lem-sfb-unimodular-linear-forms-fppf-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, printed pp.130--131, finite-word comparison (4.3.2); read online 2026-10-24, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Compare any two finite words $a_1\\cdots a_n=b_1\\cdots b_m=g$ with all letters in $\\Omega(T)$, allowing an empty word. Apply step 1 simultaneously to their finitely many nonempty prefix products and obtain $\\omega\\in\\Omega$ such that every translated prefix lies in $\\Omega$. For prefixes $A_i=a_1\\cdots a_i$ put $A_0=1$. Induction from $i=0$ using the hypothesis on $\\sigma$ for $(\\omega A_{i-1},a_i)$ gives $\\sigma(\\omega A_i)=\\sigma(\\omega)\\sigma(a_1)\\cdots\\sigma(a_i)$. The same induction for the $b$-word gives $\\sigma(\\omega g)=\\sigma(\\omega)\\sigma(b_1)\\cdots\\sigma(b_m)$. Cancel $\\sigma(\\omega)$ on the left in $H$. Equality holds before the covering because $H$ has unique gluing. Thus every pair of equal $\\Omega$-words has equal products of its $\\sigma$-values.",
+   "uses": [
+    "lem-sfb-unimodular-linear-forms-fppf-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, printed pp.130--131, finite-word comparison (4.3.2); read online 2026-10-24, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $g\\in G(T)$ choose the local two-letter words supplied by step 1 and take the product of their $\\sigma$-values. On a pairwise overlap the words have the same product in $G$, so step 2 makes their values equal in $H$. The sheaf axiom for $H$ glues them uniquely to $\\widetilde\\sigma_T(g)\\in H(T)$. Any other choice agrees on the common covering by pairwise fibre products, again by step 2, and hence gives the same section. For $T'\\to T$, pull back the chosen covering and its words; naturality of $\\sigma$ identifies their values with the restrictions of the old values. Uniqueness of gluing proves naturality of $\\widetilde\\sigma$. If $g\\in\\Omega(T)$ compare with the one-letter word $(g)$ in step 2 to obtain $\\widetilde\\sigma_T(g)=\\sigma_T(g)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, printed pp.130--131, finite-word comparison (4.3.2); read online 2026-10-24, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $g,h\\in G(T)$ take a common refinement of coverings with $\\Omega$-words for $g$ and $h$. Their concatenation is an $\\Omega$-word for $gh$. Step 2 compares it with a chosen local word for $gh$, so $\\widetilde\\sigma(gh)=\\widetilde\\sigma(g)\\widetilde\\sigma(h)$ locally and then in $H(T)$ by unique gluing. The empty word and $\\sigma(1)=1$ give $\\widetilde\\sigma(1)=1$; applying the product identity to $g,g^{-1}$ gives preservation of inverses. Finally, any homomorphism extending $\\sigma$ takes each local $\\Omega$-word to this same product. Unique gluing therefore makes it equal to $\\widetilde\\sigma$ on every $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, printed pp.130--131, finite-word comparison (4.3.2); read online 2026-10-24, local archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unimodular-linear-forms-fppf-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Proposition 4.3.1, printed pp.130--131, finite-word comparison (4.3.2); read online 2026-10-24, local archival copy WANTED.",
+  "note": "Conrad word-comparison route with an explicit one-variable fppf common-translate construction; the target H need only be a group sheaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A partially multiplicative map from the big open cell of the SL2 group scheme to an arbitrary fppf group sheaf extends uniquely to a group homomorphism",
+   "results": "{\"t\": \"2026-10-24T07:53:13Z\", \"tool\": \"leanfinder\", \"query\": \"A partially multiplicative map from the big open cell of the SL2 group scheme to an arbitrary fppf group sheaf extends uniquely to a group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.exists_mem_SL2\", \"ModularGroup.coeHom\", \"OnePoint.map_smul\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"CongruenceSubgroup.Gamma0Map\", \"Algebra.GrothendieckGroup.lift_apply\", \"Algebra.GrothendieckGroup.lift\", \"IsDedekindDomain.selmerGroup.fromUnit\"], \"digest\": \"89cc4d1766c54ddd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSheafFor.extend requires a map on an entire covering sieve; the open cell inclusion is not a cover. Its word-comparison and translating argument is additional, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group sheaf map on a fibrewise dense open cell respecting products extends to a homomorphism by translating words into the open cell",
+   "results": "{\"t\": \"2026-10-24T07:53:12Z\", \"tool\": \"leansearch\", \"query\": \"A group sheaf map on a fibrewise dense open cell respecting products extends to a homomorphism by translating words into the open cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.map\", \"CategoryTheory.Functor.IsCoverDense.Types.appHom\", \"CategoryTheory.Functor.IsCoverDense.Types.presheafHom\", \"CategoryTheory.Functor.IsCoverDense.sheafHom\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.res\", \"AlgebraicGeometry.Scheme.Hom.app\", \"FreeGroup.prod\"], \"digest\": \"488eaa918709e444\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSheafFor.extend requires a map on an entire covering sieve; the open cell inclusion is not a cover. Its word-comparison and translating argument is additional, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extend\"",
+   "results": "{\"t\": \"2026-10-24T07:53:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"extend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.IsSheafFor.extend\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend\", \"CategoryTheory.Presieve.IsSheafFor.unique_extend\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend_assoc\", \"TopCat.Sheaf.extend_hom_app\"], \"digest\": \"8fc543a3b611023d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSheafFor.extend requires a map on an entire covering sieve; the open cell inclusion is not a cover. Its word-comparison and translating argument is additional, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|open.?cell|big.?cell",
+   "results": "{\"t\": \"2026-10-24T07:53:12Z\", \"tool\": \"grep\", \"query\": \"birational|open.?cell|big.?cell\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"00a1b96eea72b7d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSheafFor.extend requires a map on an entire covering sieve; the open cell inclusion is not a cover. Its word-comparison and translating argument is additional, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "open.?cell|birational|partial.*mul",
+   "results": "{\"t\": \"2026-10-24T08:29:42Z\", \"tool\": \"grep\", \"query\": \"open.?cell|birational|partial.*mul\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"0366cd6e74671eb3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern covering-sieve gluing, ordinary SL2 homomorphisms or rational maps. None states extension from a non-covering big cell with its partial multiplication law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from an open neighbourhood of the identity in a group scheme which preserves products extends uniquely to a group sheaf homomorphism",
+   "results": "{\"t\": \"2026-10-24T08:29:43Z\", \"tool\": \"leansearch\", \"query\": \"A map from an open neighbourhood of the identity in a group scheme which preserves products extends uniquely to a group sheaf homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"AlgebraicGeometry.Scheme.Modules.mapPresheaf_app\", \"smoothSheafCommGroup.compLeft\", \"smoothSheafCommGroup\", \"smoothSheafGroup\", \"Filter.Germ.valueMulHom\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.Scheme.Modules.Hom.app\"], \"digest\": \"913ba56a6301574f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern covering-sieve gluing, ordinary SL2 homomorphisms or rational maps. None states extension from a non-covering big cell with its partial multiplication law."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extend\"",
+   "results": "{\"t\": \"2026-10-24T08:29:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"extend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.IsSheafFor.extend\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend\", \"CategoryTheory.Presieve.IsSheafFor.unique_extend\", \"CategoryTheory.Presieve.IsSheafFor.functorInclusion_comp_extend_assoc\", \"TopCat.Sheaf.extend_hom_app\"], \"digest\": \"8fc543a3b611023d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern covering-sieve gluing, ordinary SL2 homomorphisms or rational maps. None states extension from a non-covering big cell with its partial multiplication law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a partially multiplicative natural map from the open cell of SL2 to a homomorphism of fppf group sheaves",
+   "results": "{\"t\": \"2026-10-24T08:29:47Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a partially multiplicative natural map from the open cell of SL2 to a homomorphism of fppf group sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.coeHom\", \"CongruenceSubgroup.Gamma0Map\", \"IsDedekindDomain.selmerGroup.fromUnit\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"SheafOfModules.Presentation.map_π_eq\", \"CategoryTheory.PresheafOfGroups.OneCocycle\", \"CategoryTheory.PresheafOfGroups.OneCochain\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\"], \"digest\": \"4da3e95f5cc43837\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern covering-sieve gluing, ordinary SL2 homomorphisms or rational maps. None states extension from a non-covering big cell with its partial multiplication law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any map out of the big cell of SL2 preserving products whenever all three factors lie in the big cell extends uniquely to a group sheaf homomorphism",
+   "results": "{\"t\": \"2026-10-24T08:32:29Z\", \"tool\": \"leanfinder\", \"query\": \"Any map out of the big cell of SL2 preserving products whenever all three factors lie in the big cell extends uniquely to a group sheaf homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.exists_mem_SL2\", \"CoxeterSystem.lift\", \"GrpCat.SurjectiveOfEpiAuxs.τ_apply_infinity\", \"IsFreeGroup.unique_lift\", \"GrpCat.SurjectiveOfEpiAuxs.h_apply_fromCoset\", \"GrpCat.SurjectiveOfEpiAuxs.τ_apply_fromCoset\", \"HNNExtension.lift\", \"HNNExtension.lift_of\"], \"digest\": \"c69dc958349221d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern covering-sieve gluing, ordinary SL2 homomorphisms or rational maps. None states extension from a non-covering big cell with its partial multiplication law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-sl2-central-extension-splitting",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Proposition 4.3.1, final paragraphs, printed pp.130--131: extension from the open cell by finite-word comparison and an fppf-local common translate.",
+   "via": [
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-open-cell-sheaf-extension",
+  "worker": "stage1",
+  "summary": "Proved the common-translate condition using one new commutative-algebra fppf-cover lemma, then compared finite words, glued their values and proved multiplicativity and uniqueness. No statement changes. All non-elementary input is explicit; the new node is statement-only.",
+  "blueprint": "blueprint_refs.py ancestor returns None for the inherited created-node chain. The latest blueprint direct-image proof (3) uses the coefficient preservation input; this split retains the inherited subordinate rank-one/Conrad route. It realizes exactly Proposition 4.3.1 final paragraphs, (4.3.2), already specified in from.place, without changing a unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-44b1131d1",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-44b1131d1 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and the one new node, lem-sfb-unimodular-linear-forms-fppf-cover, in full; the review is in review.md. The item statement and stmt_deps are identical to the Q32 base, so the target is not weakened. The parent splitting proof uses only this statement. Step 1: det=1 gives (-c)b+ad=1, the new node's unit-ideal hypothesis. y(z)g has bottom-right entry zb+d, and y(±z) lie in Ω. Step 2: the prefix induction only uses triples (ωA_{i-1}, a_i, ωA_i) that all lie in Ω. Left cancellation and the uniqueness half of gluing finish it, and the empty word is fine. Steps 3 and 4 are elementary gluing and group-identity arguments: independence of choices, naturality, products, uniqueness. The new node is true: R[Z][1/P] is flat, of finite presentation and surjective because P is nonzero in κ(p)[Z], and every factor is a unit. I checked Stacks 00HQ, 00HT and 00HC at their labels. Small cases checked: n=0, R=0, b_i=0, and F_2 with Z and Z+1, which shows a real fppf cover is needed. The new node is statement-only, self-contained, and all six definition citations are correct. My DAG search found no duplicate and no generalization, and the node does not restate a clause of the item. The Conrad Luminy notes, Prop. 4.3.1, are not available locally and are recorded as WANTED, so I verified the argument on its own. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SL2OpenCellSheafExtension",
+  "declaration": "AlgebraicGeometry.existsUnique_sl2_openCell_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SL2OpenCellSheafExtension.lean",
+  "statement": "theorem existsUnique_sl2_openCell_extension (S : Scheme.{u}) (H : Sheaf (Scheme.fppfTopology.over S) GrpCat.{v}) (σ : ∀ (T : Over S) (g : Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)), IsUnit (g 1 1) → H.obj.obj (op T)) (hσ_natural : ∀ (T U : Over S) (f : U ⟶ T) (g : Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)) (hg : IsUnit (g 1 1)), H.obj.map f.op (σ T g hg) = σ U (Matrix.SpecialLinearGroup.map f.left.appTop.hom g) (hg.map f.left.appTop.hom)) (hσ_one : ∀ T : Over S, σ T 1 isUnit_one = 1) (hσ_mul : ∀ (T : Over S) (a b : Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)) (ha : IsUnit (a 1 1)) (hb : IsUnit (b 1 1)) (hab : IsUnit ((a * b) 1 1)), σ T a ha * σ T b hb = σ T (a * b) hab) : ∃! τ : ∀ T : Over S, Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤) →* H.obj.obj (op T), (∀ (T U : Over S) (f : U ⟶ T) (g : Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)), H.obj.map f.op (τ T g) = τ U (Matrix.SpecialLinearGroup.map f.left.appTop.hom g)) ∧ (∀ (T : Over S) (g : Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)) (hg : IsUnit (g 1 1)), τ T g = σ T g hg)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The open cell is expressed by IsUnit (g 1 1) on the existing Matrix.SpecialLinearGroup of global sections. Natural maps and natural group homomorphisms are written componentwise; no second SL2 or open-cell definition and no representability hypothesis on H are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b02180c8",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every clause of the Lean matches the node: arbitrary scheme S; the big fppf site on Over S; H an arbitrary GrpCat.{v} sheaf with v independent of u and no extra hypotheses; SL2 sections are Matrix.SpecialLinearGroup (Fin 2) over Γ(T.left,⊤), restricted along appTop in the right direction; the open cell is IsUnit (g 1 1), the bottom-right entry, matching the x(u)h(t)y(v) coordinates; σ has naturality over all S-maps, σ(1)=1, and multiplicativity exactly when a, b and ab are in the cell; the conclusion is ∃! natural family of →* homomorphisms restricting to σ. Edge cases checked: empty base, zero ring, non-reduced test schemes. lean.statement appears verbatim in the file; no definitions, new nodes or statement change; proof is only sorry; docstrings give the Conrad Prop 4.3.1 source place and the blueprint tag; both report sections present; no pro-etale content. No other SL2 group-sheaf or open-cell definition exists in the project. Not recompiled per instruction. No findings."
+ }
+}

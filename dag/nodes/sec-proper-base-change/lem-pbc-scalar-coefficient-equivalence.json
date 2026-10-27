@@ -1,0 +1,117 @@
+{
+ "id": "lem-pbc-scalar-coefficient-equivalence",
+ "kind": "statement",
+ "title": "Scalar adjunctions and exact restrictions under coefficient equivalences",
+ "statement": "Let $L:C\\to D\\dashv R$ and $L_0:C_0\\to D_0\\dashv R_0$ be adjunctions between arbitrary categories. Let $U:C\\to C_0$ and $V:D\\to D_0$ be equivalences and $k:UR\\cong R_0V$ a specified natural isomorphism. There is a natural isomorphism $s:VL\\cong L_0U$ such that $R_0(s_M)\\,k_{LM}\\,U(\\eta_M)=\\eta^0_{UM}$ for every $M$. In the pro-etale module categories of [def-weil-pbc-bounded-constructible-tower], restriction along an isomorphism of coefficient ring sheaves is an equivalence on the unbounded derived categories. The restriction comparison for a commutative ring square is the composite of the two canonical scalar-restriction composition comparisons.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-adjoint (07A6), scalar change specialization; Mathlib Adjunction/Mates iterated_mateEquiv_conjugateEquiv and unit_mateEquiv_symm"
+ },
+ "proof": [
+  {
+   "text": "The inverse ring map gives an inverse to scalar restriction. Compose the existing restriction composition comparisons with the identity-on-sections restriction identity. Exact localization transports the two inverse natural isomorphisms to the derived categories.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse mate gamma of k. Mate gamma twice, the second time along U and V as equivalences. The second mate is invertible because its units, counits and k are invertible. The iterated-mates identity makes this the conjugate of gamma, hence gamma is invertible. Set s to its inverse and apply the unit equation for mates.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-adjoint (07A6), scalar change specialization; Mathlib Adjunction/Mates iterated_mateEquiv_conjugateEquiv and unit_mateEquiv_symm; expanded coefficient and mate argument by F6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a scalar adjunction square is invertible when the vertical coefficient functors are equivalences",
+   "results": "8 hits; ['CategoryTheory.unit_mateEquiv', 'CategoryTheory.Bicategory.mateEquiv_symm_apply', 'CategoryTheory.Bicategory.mateEquiv', 'CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_apply', 'CategoryTheory.mateEquiv_square', 'CategoryTheory.mateEquiv_symm_apply', 'CategoryTheory.mateEquiv_counit_symm']",
+   "date": "2026-10-27",
+   "verdict": "No complete coefficient compatibility statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "results": "1 hits; ['CategoryTheory.iterated_mateEquiv_conjugateEquiv']",
+   "date": "2026-10-27",
+   "verdict": "No complete statement; use mate calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv|leftAdjointCompIso",
+   "results": "25 hits; ['Mathlib/CategoryTheory/Adjunction/CompositionIso.lean', 'Mathlib/CategoryTheory/Adjunction/CompositionIso.lean', 'Mathlib/CategoryTheory/Adjunction/CompositionIso.lean', 'Mathlib/CategoryTheory/Adjunction/CompositionIso.lean', 'Mathlib/CategoryTheory/Adjunction/CompositionIso.lean', 'Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean']",
+   "date": "2026-10-27",
+   "verdict": "No complete statement; use mate calculus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedScalarMateCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Finite-level coefficient reduction in the proof: Scalar adjunctions and exact restrictions under coefficient equivalences",
+   "via": [
+    "lem-pbc-completed-scalar-projection-tensor-comparison",
+    "lem-pbc-completed-scalar-mate-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarCoefficientEquivalence",
+  "file": "lean/Sheaf/Paper/ScalarCoefficientEquivalence.lean",
+  "declaration": "CategoryTheory.scalarAdjunctionCoefficientEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.coefficientRestrictIdentity",
+   "AlgebraicGeometry.Scheme.coefficientDerivedRestrictIdentity",
+   "AlgebraicGeometry.Scheme.derivedRestrictIso_isEquivalence",
+   "AlgebraicGeometry.Scheme.derivedRestrictionSquare",
+   "CategoryTheory.scalarAdjunctionCoefficientEquivalence"
+  ],
+  "statement": "theorem scalarAdjunctionCoefficientEquivalence\n    {C D C₀ D₀ : Type*} [Category C] [Category D] [Category C₀] [Category D₀]\n    {L : C ⥤ D} {R : D ⥤ C} {L₀ : C₀ ⥤ D₀} {R₀ : D₀ ⥤ C₀}\n    (a : L ⊣ R) (a₀ : L₀ ⊣ R₀) (U : C ⥤ C₀) (V : D ⥤ D₀)\n    [U.IsEquivalence] [V.IsEquivalence] (k : R ⋙ U ≅ V ⋙ R₀) :\n    ∃ s : L ⋙ V ≅ U ⋙ L₀,\n      ∀ M : C, U.map (a.unit.app M) ≫ k.hom.app (L.obj M) ≫\n        R₀.map (s.hom.app M) = a₀.unit.app (U.obj M)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T034639-L-3669835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T034639-L-3669835",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

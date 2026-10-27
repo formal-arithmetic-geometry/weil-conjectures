@@ -1,0 +1,352 @@
+{
+ "id": "lem-sf-finite-free-image-comparison",
+ "kind": "statement",
+ "title": "Unbounded finite-free image comparisons with their finite-sum normalization",
+ "statement": "Let $A\\to B$ be a map of finite commutative rings, with $B$ free of finite rank $r$ over $A$. For a scheme $W$ use the ordinary small etale module derived categories, $T_W=-\\otimes_A^LB$, and exact restriction $U_W$ [def-weil-pbc-derived-categories, lem-pur-derived-change-of-rings, def-pc-sheaf-restrict-scalars]. Let $f:V\\to W$ be a scheme morphism [def-weil-scheme-morphism-properties]. For every unbounded $B$-complex $N$, the canonical restriction comparison is an isomorphism\n$$U_WRf_{*,B}N\\cong Rf_{*,A}U_VN.$$\nFor every unbounded $K\\in D(V_{\\mathrm{et}},A)$ the projection comparison\n$$c_{f,K}:T_WRf_{*,A}K\\longrightarrow Rf_{*,B}T_VK$$\nis a natural isomorphism [def-kun-projection-formula-map]. Its transpose under $f_B^*\\dashv Rf_{*,B}$ is the extended $A$-counit, using the canonical pullback/tensor identification. Under any basis $b_1,\\ldots,b_r$ of $B/A$ and the displayed restriction identification, $U_Wc_{f,K}$ is precisely the finite-sum map $(Rf_{*,A}K)^{\\oplus r}\\to Rf_{*,A}(K^{\\oplus r})$ whose $j$-th component is $Rf_{*,A}$ of $k\\mapsto k\\otimes b_j$. Its inverse is given by $Rf_{*,A}$ of the corresponding projections. These assertions impose no cohomological-dimension or boundedness hypothesis.\n\nIf $f$ has a chosen compactification $V\\xrightarrow j\\overline V\\xrightarrow p W$ with $j$ open and $p$ proper and the schemes Noetherian, put $F_R=Rp_{*,R}j_{!,R}$ for $R=A,B$ [def-amb-etale-compact-support]. The canonical maps $T_{\\overline V}j_{!,A}\\cong j_{!,B}T_V$ and $U_{\\overline V}j_{!,B}\\cong j_{!,A}U_V$ agree with $m\\otimes b\\mapsto m\\otimes b$ on the open and with the unique zero maps off it. Consequently $U_WF_B\\cong F_AU_V$ and\n$$c^!_f:T_WF_A\\xrightarrow{\\sim}F_BT_V.$$\nAfter restriction, $c^!_f$ is again exactly the finite-sum map, with components $F_A$ of the basis inclusions. This includes a structure morphism to a field and a closed immersion as $f$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 1: ordinary direct-image projection comparison by additivity and the compact-support counit; returned proof steps 4-5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-scheme-morphism-properties",
+  "def-kun-projection-formula-map",
+  "def-amb-etale-compact-support",
+  "def-pur-etale-scalar-mate",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-kun-scalar-restriction-comparison-maps",
+  "def-sf-etale-open-scalar-data",
+  "lem-coef-etale-open-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix a basis and its coefficient maps $b_j:A\\to B$, $\\lambda_j:B\\to A$. For a module sheaf $M$ set $i_j(m)=m\\otimes b_j$ and $p_j(m\\otimes b)=\\lambda_j(b)m$. The tensor/sheafification universal properties give $p_ji_k=\\delta_{jk}$ and $\\sum_ji_jp_j=1$, hence $U(M\\otimes_A B)\\cong M^{\\oplus r}$ naturally in $M$. In particular scalar extension $E=-\\otimes_A B$ is exact: after the conservative, exact $U$ it is a finite direct sum of identity functors. The sectionwise tensor adjunction, whose inverse is $h\\mapsto(m\\otimes b\\mapsto bh(m))$, respects restrictions and sheafifies, so $E\\dashv U$. Exact-functor derivation identifies $T$ with termwise $E$ on every complex. The same coordinate equations hold there. Also $U$ on derived categories reflects isomorphisms: the cone of a map has zero cohomology if its underlying scalar-restricted complex does, because $U$ is exact and conservative.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-scalar-extension-hom",
+    "lem-weil-pbc-restriction-derived-products",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; tensor coordinates, with Tag 05DQ (algebra.tex, lemma-adjoint-tensor-restrict)"
+   }
+  },
+  {
+   "text": "For $N$ choose a $B$-K-injective resolution $N\\to I$. Since $E\\dashv U$ and $E$ is exact by step 1, restriction $UI$ is $A$-K-injective. The ordinary direct-image formula on each etale test object is the same section module with its action restricted; consequently $U_Wf_{*,B}I=f_{*,A}U_VI$. Both sides compute the unbounded derived functors, giving the canonical natural isomorphism $d_N:U_WRf_{*,B}N\\xrightarrow\\sim Rf_{*,A}U_VN$. The comparison also respects the geometric adjunctions: termwise the two Hom bijections are the same underlying sheaf-adjunction bijection, since inverse image restricts the coefficient action and its unit and counit are the underlying abelian-sheaf ones. Direct images of $I$ and $UI$ are also K-injective, by the same right-adjoint lemma applied to the exact inverse images. On these K-injective targets, the homotopy-to-derived Hom bijections transport exactly this identity. Thus restricting the $B$-adjunct of $t:f_B^*M\\to N$ and then applying $d_N$ gives the $A$-adjunct of $U(t)$, with $f_A^*UM\\cong Uf_B^*M$. These statements hold for arbitrary unbounded $M,N$.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies); ordinary etale adjunction as in the cited node"
+   }
+  },
+  {
+   "text": "The functor $Rf_{*,A}$ is additive. Indeed a morphism into a K-injective representative is its unique homotopy class; direct image is additive on these classes, and localization is additive. For a finite direct sum of K-injectives, maps from an acyclic complex are the finite direct sum of zero Hom groups, so the sum is K-injective and computes the direct image of the sum. Alternatively, applying additivity directly to $\\pi_ji_k=\\delta_{jk}$ and $\\sum i_j\\pi_j=1$ proves that the canonical finite-sum comparison is invertible, with inverse the family $Rf_{*,A}(\\pi_j)$. This also proves the assertion for the empty sum.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-sfb-derived-localization-additive",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, finite-free reduction; finite biproduct equations written explicitly"
+   }
+  },
+  {
+   "text": "The canonical pullback/tensor isomorphism $f_B^*T_W\\cong T_Vf_A^*$ is induced on sheaves by $f^{-1}(m\\otimes b)\\mapsto f^{-1}m\\otimes b$; its inverse is the inverse-image tensor comparison. Since all four functors here are exact, the same isomorphism on complexes gives the displayed derived identification. Define $c_{f,K}$ to be the $B$-adjunct of $T_V(\\varepsilon_{f,A,K})$ after this identification. This is the coefficient projection comparison: it has the prescribed extended-counit transpose, just as the fixed-coefficient projection morphism is the adjunct of counit tensored with identity. Naturality follows by applying the natural adjunction bijection to the natural extended counit.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: the ordinary direct-image projection comparison; explicit extended-counit normalization"
+   }
+  },
+  {
+   "text": "Put $L=Rf_{*,A}K$. Let $i_j:L\\to U_WT_WL$ and $i'_j:K\\to U_VT_VK$ be the basis inclusions of step 1. By the compatibility of adjunctions in step 2, the transpose of $d_{T_VK}\\,U_W(c_{f,K})\\,i_j$ is $i'_j\\varepsilon_{f,A,K}$: the pullback/tensor map of step 4 sends its $j$-th basis vector to the same $b_j$. Naturality of the $A$-counit says that the transpose of $Rf_{*,A}(i'_j)$ is also $i'_j\\varepsilon_{f,A,K}$. Injectivity of the adjunction bijection therefore identifies the two columns. The maps $\\lambda_j$ give projections $p'_j:U_VT_VK\\to K$. Step 3 and the equations $p'_ji'_k=\\delta_{jk}$, $\\sum i'_jp'_j=1$ show that the row $\\bigl(Rf_{*,A}(p'_j)\\bigr)_j$ is the inverse of this comparison. Since $d$ is invertible and $U_W$ reflects isomorphisms by step 1, $c_{f,K}$ is an isomorphism. This proves precisely the claimed normalization for every chosen basis, without asserting that basis inclusions themselves are $B$-linear.",
+   "uses": [
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: additivity for a finite free coefficient module; columns and inverse computed from the extended counit"
+   }
+  },
+  {
+   "text": "For the open immersion $j$, the presheaves defining $U_{\\overline V}j_{!,B}N$ and $j_{!,A}U_VN$ have exactly the same abelian groups and maps: they are $N(S\\to V)$ when $S$ factors through the open and zero otherwise. Module sheafification has the same underlying abelian sheaf in both coefficient categories, so these give a natural isomorphism $e:U_{\\overline V}j_{!,B}\\cong j_{!,A}U_V$. Exactness of both open extensions and of restriction makes it the same comparison on arbitrary complexes. For tensor extension use the isomorphism $q:T_{\\overline V}j_{!,A}\\cong j_{!,B}T_V$ of the cited open-tensor lemma. Its ordinary map is the balanced map $m\\otimes b\\mapsto m\\otimes b$ on the open and zero off it, and it has that same normalization in the derived categories. In particular $e\\,U(q)$ carries the $j$-th inclusion $j_{!,A}K\\to U T_{\\overline V}j_{!,A}K$ to $j_{!,A}(i'_j)$: this is the equality of those presheaf maps on the open and on the zero terms, followed by sheafification and localization.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 03CY (lemma-sheafification-presheaf-modules); scalar tensor normalization as in lem-coef-etale-open-tensor"
+   }
+  },
+  {
+   "text": "For the chosen compactification apply step 2 to $p$ and then step 6 to $j$. This gives $U_WF_B\\cong Rp_{*,A}U_{\\overline V}j_{!,B}\\cong F_AU_V$. Define $c_f^!$ by the composite\n$$T_WRp_{*,A}j_{!,A}\\xrightarrow{c_p}Rp_{*,B}T_{\\overline V}j_{!,A}\\xrightarrow{Rp_{*,B}(q)}Rp_{*,B}j_{!,B}T_V.$$\nEach arrow is an isomorphism by steps 5 and 6. Under the displayed restriction comparison, its $j$-th column is $Rp_{*,A}(e\\,U(q))\\,Rp_{*,A}(i_j)=Rp_{*,A}(j_{!,A}(i'_j))=F_A(i'_j)$, by naturality of step 2 and the column equality in step 6. The inverse is the row $F_A(p'_j)$, since $F_A$ is additive as a composite of additive functors and the coordinate equations are unchanged. This is exactly the requested finite-sum normalization. No use was made of boundedness or finite cohomological dimension. Structure morphisms to fields and closed immersions with the stated compactifications are included by specialization; no assertion of existence of a compactification for an arbitrary scheme morphism is needed.",
+   "uses": [
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+    "place": "Proof paragraph 1: finite-free direct image; chosen-compactification assembly with the open tensor comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-scalar-extension-hom",
+  "lem-weil-pbc-restriction-derived-products",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-derived-localization-additive",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-coef-etale-open-tensor",
+  "def-amb-etale-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraph 1, finite-free additivity and chosen compactification, expanded using Stacks Tags 03CY, 03DI, 03DJ, 05DQ, 070I, 070K, 08BJ, 0944"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension commutes with unbounded derived direct image and compact support by canonical counit projection comparison",
+   "results": "8 hits. Condensed.profiniteSolidCounit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; Condensed.profiniteSolidification; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; PresheafOfModules.pushforward₀CompToPresheaf; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBiproduct\"",
+   "results": "5 hits. CategoryTheory.Functor.mapBiproduct; CategoryTheory.Functor.mapBiproduct_hom; CategoryTheory.Functor.mapBiproduct_inv; CategoryTheory.Limits.biproduct.mapBiproduct_hom_desc; CategoryTheory.Limits.biproduct.mapBiproduct_inv_map_desc",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Pp]ush|[Dd]irectImage.*[Ss]calar|preservesFiniteBiproductsOfAdditive",
+   "results": "1 hits. Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension commutes with unbounded derived direct image and compact support by canonical counit projection comparison",
+   "results": "8 hits. ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit_app; Condensed.profiniteSolidCounit; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.extendScalars_id_comp; ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For constant finite free coefficients restriction of scalars identifies derived pushforward projection map with finite biproduct distributivity",
+   "results": "8 hits. ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.restrictScalarsId'App_inv_naturality; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Pp]ush|[Dd]irectImage.*[Ss]calar|preservesFiniteBiproductsOfAdditive",
+   "results": "1 hits: Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these supply tensor, ordinary sheaf pushforward or finite-biproduct infrastructure, not the full small-etale unbounded finite-ring comparison with both normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBiproduct\"",
+   "results": "5 hits: CategoryTheory.Functor.mapBiproduct, CategoryTheory.Functor.mapBiproduct_hom, CategoryTheory.Functor.mapBiproduct_inv, CategoryTheory.Limits.biproduct.mapBiproduct_hom_desc, CategoryTheory.Limits.biproduct.mapBiproduct_inv_map_desc",
+   "date": "2026-10-22",
+   "verdict": "no match: these supply tensor, ordinary sheaf pushforward or finite-biproduct infrastructure, not the full small-etale unbounded finite-ring comparison with both normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension commutes with unbounded derived direct image and compact support with the counit-defined finite sum comparison",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.profiniteSolidification, Condensed.profiniteSolid, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: these supply tensor, ordinary sheaf pushforward or finite-biproduct infrastructure, not the full small-etale unbounded finite-ring comparison with both normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension commutes with unbounded derived direct image and compact support with the counit-defined finite sum comparison",
+   "results": "8 hits: ModuleCat.extendScalars_id_comp, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, IsBaseChange.directSumPow, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, Algebra.FormallyUnramified.finite_of_free_aux, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, Condensed.profiniteSolidCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: these supply tensor, ordinary sheaf pushforward or finite-biproduct infrastructure, not the full small-etale unbounded finite-ring comparison with both normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficients for sheaves commutes with derived pushforward and tensor by a constant finite free module is finite direct sum",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-22",
+   "verdict": "no match: these supply tensor, ordinary sheaf pushforward or finite-biproduct infrastructure, not the full small-etale unbounded finite-ring comparison with both normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-extension",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Proof paragraph 1: ordinary direct-image projection comparison by additivity and the compact-support counit; returned proof steps 4-5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-free-image-comparison",
+  "worker": "stage1",
+  "summary": "Retained the statement. Expanded the finite-free additivity argument into exact scalar functors, K-injective restriction/direct-image comparison respecting geometric adjunctions, explicit counit-transpose columns and inverse projections, and open-extension/compactification assembly. All required infrastructure already has DAG nodes; no new nodes. No Lean declaration found with the stated coefficient categories and all clauses.",
+  "blueprint": "Realizes lem-coef-finite-free-extension proof paragraph 1: ordinary direct image by finite-free additivity, together with the chosen compact-support comparison required by returned steps 4-5.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-extension-hom",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-restriction-derived-products",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-sfb-derived-localization-additive",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Generic module-sheaf, exact-localization or K-injective infrastructure used in the explicit finite-free proof; it does not replace any step of the coefficient compatibility route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-scalar-extension-hom",
+  "lem-weil-pbc-restriction-derived-products",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-derived-localization-additive",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-coef-etale-open-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-69bbc8c9e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-69bbc8c9e (reviewer sub-agent of L); spot-checked: Shape: one commit; item JSON plus report; no new nodes. Statement and stmt_deps are identical to base and to every other run snapshot, where the item is unsplit with 0 steps, so no parallel group split it. No repair note. No cycle: the transitive closure of all deps (1647 nodes) contains neither the item nor its parent lem-coef-finite-free-extension. No SGA citation. Source: blueprint main-20261015 lem-coef-finite-free-extension.proof.md paragraph 1 ('by additivity'); the item makes this precise and adds the compact-support counit that parent step 3 uses. Step checks: (1) B_V≅A_V^r gives U E≅id^r. restriction-derived-products gives conservative exact U; 05DQ sheafified gives E⊣U; T≅termwise E because both are left derived functors of the same termwise change of rings (exact-functor-derived-functor, derived-change-of-rings(2)). (2) right-adjoint-preserves-kinjective with u=U, v=E exact; also with f^{-1} exact (inverse-image-modules-exact (3)). The direct-image sections agree, giving d_N. Its unit/counit are the abelian ones, so U(adjunct_B t)=adjunct_A U(t) via termwise-adjunction-homotopy and kinjective-hom-derived. (3) Additivity by localization-additive and biproduct equations; the empty sum is included. (4) c is the B-adjunct of T_V(eps_A) after the pure-tensor-normalized pullback/tensor isomorphism. def-kun is used only for the adjunct convention. (5) I recomputed the transposes: both columns are i'_j∘eps. Inverse row is Rf_*(p'_j); c is invertible by conservativity of U. (6) The j_{p!} presheaves are equal, giving e. q from lem-coef-etale-open-tensor is the identity on U; maps out of j_! are determined on U, which gives the column equality. (7) F=Rp_*Dj_! as in def-amb-etale-compact-support, whose Noetherian hypotheses the item carries; composite c_p then Rp_*(q); columns F_A(i'_j). Small cases r=0 (B=0), r=1, A→A×A, empty open and f=id all check out. Accepted tool_uses: generic weil-pbc/pc/sfb infrastructure; open-tensor and def-kun are on the unit route. Not duplicates: lem-coef-finite-direct-image (B finite, not free; K bounded ctf), lem-sf-projection-bounded-finite-free-constant (A-linear only), lem-sf-finite-free-exceptional-mate (consumes this item). Advisory: step 1 re-derives lem-sfb-derived-finite-free-scalar-coordinates inline. Sibling lem-sf-finite-free-derived-scalar-calculus needs Noetherian W, so it could not be cited for arbitrary schemes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteFreeImageComparison",
+  "declaration": "AlgebraicGeometry.Etale.finiteFreeImageComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteFreeImageBasisInclusion",
+   "AlgebraicGeometry.Etale.finiteFreeCompactImageMap",
+   "AlgebraicGeometry.Etale.finiteFreeCompactRestrictionMap",
+   "AlgebraicGeometry.Etale.FiniteFreeImageCoordinates",
+   "AlgebraicGeometry.Etale.finiteFreeImageComparisons"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteFreeImageComparison.lean",
+  "statement": "theorem finiteFreeImageComparisons {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] [Algebra A B] (r : ℕ) (basis : Module.Basis (Fin r) A B) : ∃ e : ∀ (T : Scheme.{u}) (K : DerivedCategoryModule A T), (⨁ (fun _ : Fin r ↦ K)) ≅ (Sheaf.derivedRestrictScalars T.smallEtaleTopology (algebraMap A B)).obj ((scalarExtension (algebraMap A B) T).obj K), (∀ (T : Scheme.{u}) (K : DerivedCategoryModule A T) (j : Fin r), biproduct.ι (fun _ : Fin r ↦ K) j ≫ (e T K).hom = finiteFreeImageBasisInclusion T (basis j) K) ∧ (∀ {V W : Scheme.{u}} (f : V ⟶ W), IsIso (scalarRestrictionDirectImageMap (algebraMap A B) f) ∧ IsIso (scalarMate (algebraMap A B) f) ∧ (∀ K : DerivedCategoryModule A V, L(upperStar (ModuleCat.{u + 1} B) f).map ((scalarMate (algebraMap A B) f).app K) ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).counit.app ((scalarExtension (algebraMap A B) V).obj K) = (scalarPullbackIso (algebraMap A B) f).hom.app ((R(lowerStar (ModuleCat.{u + 1} A) f)).obj K) ≫ (scalarExtension (algebraMap A B) V).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit.app K)) ∧ FiniteFreeImageCoordinates basis (R(lowerStar (ModuleCat.{u + 1} A) f)) (R(lowerStar (ModuleCat.{u + 1} B) f)) (e V) (e W) (scalarMate (algebraMap A B) f) (scalarRestrictionDirectImageMap (algebraMap A B) f)) ∧ ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsNoetherian V] [IsNoetherian W] (c : Compactification f) [IsNoetherian c.Z], IsIso (finiteFreeCompactRestrictionMap (algebraMap A B) c) ∧ IsIso (finiteFreeCompactImageMap (algebraMap A B) c) ∧ OpenScalarExtensionNormalization (algebraMap A B) c.i (openScalarExtension (algebraMap A B) c.i) ∧ (∀ P : DerivedCategoryModule A V, (derivedRestriction (A := B) c.i).map ((openScalarExtension (algebraMap A B) c.i).hom.app P) ≫ (asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) c.i).unit.app _)).inv = (openScalarRestriction (algebraMap A B) c.i).inv.app ((derivedExtension (A := A) c.i).obj P) ≫ (scalarExtension (algebraMap A B) V).map (asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i).unit.app P)).inv) ∧ (∀ M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A), (upperStar (ModuleCat.{u + 1} B) c.i).map ((openScalarExtensionZero (algebraMap A B) c.i).hom.app M) ≫ (asIso ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) c.i).unit.app _)).inv = (openScalarRestrictionZero (algebraMap A B) c.i).inv.app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M) ≫ (ProEtale.etaleSheafExtendScalars (algebraMap A B) V).map (asIso ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i).unit.app M)).inv) ∧ (∀ N : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} B), (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i).unit.app ((Sheaf.restrictScalars V.smallEtaleTopology (algebraMap A B)).obj N) ≫ (upperStar (ModuleCat.{u + 1} A) c.i).map ((openImmersionLowerShriekRestrictScalarsIso (algebraMap A B) c.i).hom.app N) ≫ (upperStarRestrictScalarsIsoSheaf (algebraMap A B) c.i).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} B) c.i).obj N) = (Sheaf.restrictScalars V.smallEtaleTopology (algebraMap A B)).map ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) c.i).unit.app N)) ∧ (∀ (Z : Scheme.{u}) (t : Z ⟶ c.Z), Disjoint (Set.range c.i.base) (Set.range t.base) → (∀ M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A), (upperStar (ModuleCat.{u + 1} B) t).map ((openScalarExtensionZero (algebraMap A B) c.i).hom.app M) = 0) ∧ (∀ N : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} B), (upperStar (ModuleCat.{u + 1} A) t).map ((openImmersionLowerShriekRestrictScalarsIso (algebraMap A B) c.i).hom.app N) = 0)) ∧ FiniteFreeImageCoordinates basis (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c) (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c) (e V) (e W) (finiteFreeCompactImageMap (algebraMap A B) c) (finiteFreeCompactRestrictionMap (algebraMap A B) c)",
+  "branch": "sheaf-dag",
+  "by": "Q100",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Returned delivery repaired: statement dependencies name the four owning definition nodes for scalarMate, scalarPullbackIso, scalarRestrictionDirectImageMap and the plain open scalar data. The genuine theorem dependency lem-coef-etale-open-comparison-data is required by openScalarRestriction (asIso of openScalarRestrictionMap) and owns OpenScalarExtensionNormalization. The Lean signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0942b9795",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Re-delivery of the 6347ced9 RETURN. The only changes are stmt_deps, the lean note/date and module import lines; the statement, proof, lean.statement and declarations are identical. H2 fixed: the three theorem stmt_deps (lem-pur-etale-scalar-mate-projection, lem-sbc-canonical-restrict-scalars-functor-comparisons, lem-coef-etale-open-tensor) are replaced by the owning def nodes def-pur-etale-scalar-mate, def-pur-etale-scalar-pullback-iso, def-kun-scalar-restriction-comparison-maps and def-sf-etale-open-scalar-data; live records verified; all 7 base stmt_deps kept. Mechanical finding on lem-coef-etale-open-comparison-data: genuine theorem dep, PASS on this point. openScalarRestriction = asIso(openScalarRestrictionMap), which needs the proved instance openScalarRestrictionMap_isIso (EtaleOpenTensorDefs:316); the node also owns the plain OpenScalarExtensionNormalization (option (a) of the prior return). H11 fixed: clause-by-clause second-reading table, accurate. Mathematics unchanged and faithful: canonical T/U; e pinned by k⊗b_j columns; IsIso of the restriction map and scalarMate; counit-transpose clause; FA(i_j) columns and two-sided FA(p_j) inverse for Rf_* and for Rp_*Dj_! with a chosen Noetherian compactification; on-open identity and off-open zero clauses; r=0 included; no boundedness. Étale (not pro-étale) open adjunction; one sorry; docstrings complete. No compile (no file changed)."
+ }
+}

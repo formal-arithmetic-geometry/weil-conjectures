@@ -103,7 +103,45 @@
  "blueprint_lean": [
   "AlgebraicGeometry.WeilSheaf.traceFunction"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.traceFunction"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.traceFunction",
+     "module": "WeilConjectures.WeilSheaf.Stalk",
+     "lines": [
+      297,
+      310
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.traceFunction",
+     "module": "WeilConjectures.WeilSheaf.Stalk",
+     "lines": [
+      513,
+      526
+     ],
+     "kind": "def",
+     "sorry": false,
+     "partial": "`def-fd-trace-function`; sketch blueprint: `sk-def-trace`"
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.traceFunction"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-def-trace",
  "reviewed_lean": {
@@ -128,5 +166,15 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-715d1463d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every flagged node and every node my checks rely on. Source: main-20261015 def-fd-trace-function.md (order 3033), identical in body to master (order 2689) and main-20261017. Unit sk-def-trace has no proof steps, and neither it nor the chapter route changes. The item keeps the source's domain (separated finite-type X0, n>=1, every Qbar-Weil complex) and formula, adds no hypothesis, and transports the whole Weil pair (object, theta and the Frobenius comparison) from the framework category to def-weil-pbc-qbar-category; it never treats the two categories as equal. Finite models come from the statement of prop-weil-pbc-common-stage-calculus; X is noetherian and finite-dimensional and ell is invertible on it. lem-fd-rational-coefficient-category-comparison is true: the integral characterization says the two integral categories are the same full subcategory; both rational categories are the raw Hom tensor E with no Karoubi completion; the scalar-extension comparison is the rationalized chi^{-1}; and both pullbacks are Rlim of the same finite-reduction tower, with g_X an automorphism. lem-fd-local-weil-model-trace-independence: I checked the types of b; the intertwining identity follows from point-transport naturality and its scalar compatibility (lem-weil-frobenius-point-transport-natural (2)), the coherence equation of the pullback realization lemma, and iterating the Weil-intertwining equation; then cohomology commutes with scalar extension and ordinary traces are conjugation- and scalar-invariant. Tests: rank one with eigenvalues alpha and alpha', where the hypothesis forces alpha=alpha'; an arbitrary u is excluded; zero and shifted complexes; E=L. Neither new node duplicates an existing one (nodes citing both coefficient systems and the local-conjugacy nodes were checked), and neither restates a clause of the item. The previously rejected lem-trf-local-frobenius-transport-normalization and prop-trf-karoubi-independence are no longer cited. Batch-5 check: with the delivery's nodes removed, all four flagged nodes are still reached from nt-target-weil-conjectures or nt-target-zeta-rational, along routes that avoid the trace formula. def-weil-local-frobenius-trace is a general definition already in the base item. lem-weil-frobenius-point-transport-natural is a general naturality statement; its closure reaches lem-weil-isomorphism-derived-pullback-comparison-normalization only as a proof dependency, and that is general infrastructure for pullback along an isomorphism. lem-trf-integral-pullback-comparison-realization fixes the pullback-composition and scalar comparisons for arbitrary scheme maps and has no trace, fixed-point or compact-support content. Neither assumption leaf gives any of these, none is a specific step of the trace-formula or Poincare-duality proof, and all were accepted. prop-trf-trace-formal-laws(4) is exactly what the scope note of nt-assume-trace-formula excludes. No SGA source is used. No fixes or tool_uses were needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For a Weil complex $(K,\\phi_K)$ on a separated finite-type $k_0$-scheme\n$X_0$, that is $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)\\subset D(X_{\\mathrm{proét}},\\overline{\\mathbf Q}_\\ell)$\n([det-def-sfb-bounded-constructible]) with a Weil structure $\\phi_K$\n([sk-def-sf-weil-complexes], [def-weil-weil-sheaf-complex]), and an $\\mathbf F_{q^n}$-point $x\\in X_0(\\mathbf F_{q^n})$, the\n*trace function* of $K$ at $x$ is\n\n$$\nt_K(x)=\\operatorname{Tr}\\bigl(F_x^{(n)}\\mid K_{\\bar x}\\bigr)\n=\\sum_{j\\in\\mathbf Z}(-1)^j\\operatorname{Tr}\\bigl(F_x^{(n)}\\mid\\mathcal H^j(K)_{\\bar x}\\bigr),\n$$\n\ncomputed with the local Frobenius operators of\n[def-weil-local-frobenius-trace] induced by $\\phi_K$ on the stalks, whose cohomology groups are\nfinite-dimensional $\\overline{\\mathbf Q}_\\ell$-vector spaces.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

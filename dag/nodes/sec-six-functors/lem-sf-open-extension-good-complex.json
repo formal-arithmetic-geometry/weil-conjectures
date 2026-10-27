@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-open-extension-good-complex",
+ "kind": "statement",
+ "title": "Completed-ring open extension preserves flat-term K-flat representatives",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbb Q_\\ell$. For every open immersion $j:X\\to Y$ of schemes, use the actual completed-coefficient ordinary extension $J_j$ and inverse image $R_j$ [def-sf-integral-system-canonical-bridge]. If $P$ is an unbounded K-flat complex of completed-coefficient module sheaves on $X$ with flat terms [def-a1-flat-term-kflat-complex], then $J_jP$ is a K-flat complex with flat terms on $Y$, and $R_jJ_jP$ is a K-flat complex with flat terms on $X$. Both functors act degreewise. There is no quasi-compactness or boundedness hypothesis.",
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-a1-flat-term-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 03DJ and 0E8I (lemma-j-shriek-and-tensor); Tag 0G7E (lemma-pullback-K-flat). First step of lem-sf-open-reduction-mate-localization."
+ },
+ "proof": [
+  {
+   "text": "Use proEtaleOpen_slicePresentation to express actual completed-coefficient open extension as ringed slice extension after the site and coefficient equivalences. Their sectionwise tensor identifications preserve flatness and the acyclic total-tensor tests for K-flatness. Apply both preservation clauses of ringedOpen_preserves_flat_resolution on the literal slice. Transport back along the termwise natural isomorphism with actual extension. Flatness is invariant under module isomorphism, and total tensor sends chain isomorphisms to chain isomorphisms. This gives goodness of J_j P, including the empty and identity opens.",
+   "uses": [
+    "lem-sp-proetale-open-slice-presentation",
+    "lem-cbc-ringed-open-flat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isKFlat_ringedToposPullback to the completed-ring geometric inverse image and the good complex J_j P. Its K-flat and flat-term conclusions are exactly goodness of R_j J_j P. The geometric inverse image followed by coefficient extension is the actual integralOrdinaryPull. No finite coefficient evaluation is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-open-slice-presentation",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G5",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Ringed-slice transport of the flat-resolution theorem and the pullback theorem; geometric part of lem-sf-open-reduction-mate-localization, step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves K flat complexes and flat module sheaves on a ringed site",
+   "results": "8 hits, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat and Module.Flat.lTensor_shortComplex_exact; no sheaf open-extension or K-flat preservation theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of module sheaves preserves flat terms and K flat unbounded complexes",
+   "results": "8 generic module flatness hits, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat and Module.Flat.iff_lTensor_preserves_shortComplex_exact; none is a sheaf open-extension or K-flat preservation theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|extensionByZero.*[Ff]lat",
+   "results": "The Mathlib grep returned zero hits. Local rg searches found ringedOpen_preserves_flat_resolution for the literal slice and proEtaleOpen_slicePresentation; neither states good-complex preservation for the actual completed-coefficient extension.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenReductionMateLocalization",
+  "date": "2026-10-27",
+  "group": "G5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence: coefficient comparisons preserve adjunction units and counits; open-factor representative normalization.",
+   "via": [
+    "lem-sf-open-reduction-mate-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenExtensionGoodComplex",
+  "file": "lean/Sheaf/SixFunctors/OpenExtensionGoodComplex.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.openExtension_goodComplex",
+  "statement": "theorem openExtension_goodComplex {X Y : Scheme.{u}}\n    (j : X ⟶ Y) [IsOpenImmersion j]\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory) :\n    integralOperationsGoodComplex l E Y\n        (((PurCompactSupport.openExtension\n          (PurCompactSupport.completed l E) j).mapHomologicalComplex\n           (.up ℤ)).obj P.obj) ∧\n      integralOperationsGoodComplex l E X\n        (((integralOrdinaryPull l E j).mapHomologicalComplex (.up ℤ)).obj\n          (((PurCompactSupport.openExtension\n          (PurCompactSupport.completed l E) j).mapHomologicalComplex\n             (.up ℤ)).obj P.obj))",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T222701-L-681799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261027T012918-L-2346562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.IntegralSystemRealization.openExtension_goodComplex"
+  ],
+  "sorry_after": []
+ }
+}

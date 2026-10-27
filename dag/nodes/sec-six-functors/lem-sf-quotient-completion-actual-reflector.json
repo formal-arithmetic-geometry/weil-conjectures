@@ -1,0 +1,281 @@
+{
+ "id": "lem-sf-quotient-completion-actual-reflector",
+ "kind": "statement",
+ "title": "Actual quotient-augmentation reflector over completed coefficient sheaves",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$ and a uniformizer $t$, and put $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Assume $(R,(t))$ satisfies [def-weil-pbc-adic-coefficient-datum]. On the small pro-etale site of a scheme $T$ put $B_T=\\varprojlim_n(A_n)_T$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients], and use the ordinary unbounded derived category $D(B_T)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For $H\\in D(B_T)$ write $Q_T(H)_n=\\operatorname{Res}_n(H\\otimes^L_{B_T}(A_n)_T)$ for the strict quotient tower on a single flat-term K-flat representative, with transitions induced by $A_{n+1}\\to A_n$ and augmentation $x\\mapsto x\\otimes1$ [def-weil-integral-reduction-tower, def-pc-kflat-complex, def-pc-flat-sheaf-modules, lem-pc-kflat-resolution]. Put $C_T(H)=R\\lim Q_T(H)$, using total right derived inverse limit on strict towers, and let $\\eta_{T,H}:H\\to C_T(H)$ be the map induced by this augmentation [lem-cbc-exact-product-functor-strict-limit].\nLet $\\Lambda_T(H)$ be the intrinsic Koszul completion of [def-weil-pbc-intrinsic-completion], with its specified unit $\\kappa_H$; that definition is formed over its own presentation $\\varprojlim_n(R^\\uparrow/(t)^n)_T$ of the coefficient sheaf, and $H$, $\\Lambda_T(H)$ and $\\kappa_H$ are transported between it and $B_T$ by restriction along the canonical ring-sheaf isomorphism $e_T$ of [lem-weil-pbc-integral-coefficient-presentation-comparison]. There is a natural isomorphism $a_H:\\Lambda_T(H)\\xrightarrow{\\sim}C_T(H)$ identifying the actual units, $a_H\\kappa_H=\\eta_{T,H}$, under the normalized strict Roos comparison. The object $C_T(H)$ is locally derived $tB_T$-complete, meaning that on every slice $U$ and every $b\\in tB_T(U)$ its derived internal Hom from $B_{T,U}[1/b]$ vanishes [def-pur-derived-internal-hom]. For every such locally complete $L$, precomposition with the actual $\\eta_{T,H}$ is a bijection\n$$\\operatorname{Hom}(C_T(H),L)\\longrightarrow\\operatorname{Hom}(H,L),\\quad f\\longmapsto f\\eta_{T,H}.$$\nUnder $a_H$, this map agrees with the Koszul reflector Hom bijection $g\\mapsto g\\kappa_H$. Local derived completeness, intrinsic completeness (invertibility of the specified $\\kappa_H$), the Roos-triangle predicate [def-weil-derived-complete], and invertibility of this actual $\\eta_{T,H}$ are equivalent. These are assertions about all unbounded $H$, not just objects already complete.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B, lemma-derived-completion, and 0A0E, lemma-derived-completion-koszul; completed-coefficient and actual-unit refinement of old Step 4, not a direct application of the constant-coefficient theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-reduction-tower",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-complete",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-pur-integral-derived-operations",
+  "def-pur-principal-quotient-completion-model",
+  "def-sf-koszul-total-derived-limit",
+  "def-sf-integral-local-completion-test",
+  "def-sf-normalized-strict-tower-augmentation",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sp-completed-coefficient-regular-quotients] with $O=R$, $\\pi=t$ and the given scheme $T$. Its coefficient ring $\\mathcal O_{E,T}$ is identified with $B_T=\\lim_n(R/t^n)_T$ by the canonical isomorphism of [sk-def-sp-coefficient-towers], which commutes with the projections to the constant quotients $(A_j)_T$ and with the constant scalar $t$; all assertions below are transported along this ring-sheaf isomorphism. Thus multiplication by $t$ is injective on $B_T$, and the actual projections identify $B_T/t^nB_T$ with $(A_n)_T$, compatibly with every quotient transition. These are statements about sheaf quotients, so no surjectivity on arbitrary section rings is being assumed. Countable products of $B_T$-module sheaves are exact by [lem-weil-proetale-countable-products-exact]. These hypotheses hold for every scheme $T$.",
+   "uses": [
+    "lem-sp-completed-coefficient-regular-quotients",
+    "lem-weil-proetale-countable-products-exact",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, principal regular coefficient specialization; the coefficient exactness and quotient identifications are the cited coefficient lemmas."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-coefficient-presentation-comparison] the ring-sheaf isomorphism $e_T$ from the coefficient sheaf of [def-weil-pbc-intrinsic-completion] to $B_T$ commutes with all projections to the finite quotients, hence sends the residue-defined action of $t$ to $t$; restriction along $e_T$ is an isomorphism of module categories, so it carries Koszul complexes, termwise tensor products, countable products and the signed fiber to the same constructions over $B_T$. Use the same flat-term K-flat representative $P$ of $H$ to read [def-weil-pbc-intrinsic-completion] through $e_T$. For the one-element generating list $(t)$ its finite complexes are $K_n=[B_T\\xrightarrow{t^n}B_T]$ with transition $(t,1)$. Its specified completion is the signed product fiber of $V_\\bullet=(P\\otimes K_n)_n$, and its unit has coordinates $((p\\otimes1)_n,0)$. By exactness from Step 1, [lem-weil-strict-roos-comparison] identifies this fiber with $D_T(H)=R\\lim V_\\bullet$; its normalization sends that zero-second-coordinate map to the map $k_H:H\\to D_T(H)$ induced by the strict degree-zero augmentation. Write $b_H:\\Lambda_T(H)\\xrightarrow{\\sim}D_T(H)$ for this comparison. Thus $b_H\\kappa_H=k_H$.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; normalized strict limit presentation from sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-regular-roos-koszul-unit] over $\\mathcal O=B_T$ with regular global section $t$ (Step 1), passing to a site small in the module universe as in its hypotheses. The identifications $B_T/t^nB_T\\cong(A_n)_T$ identify its strict quotient tower with $Q_T(H)$, including the augmentations. It gives $c_H:D_T(H)\\xrightarrow{\\sim}C_T(H)$ with $c_Hk_H=\\eta_{T,H}$. Explicitly its strict tower map is $1_P\\otimes\\epsilon_n$, where $\\epsilon_n:K_n\\to(A_n)_T[0]$ is the residue projection in degree zero and zero in degree $-1$. It commutes with transitions since quotient after multiplication by $t$ in degree $-1$ is zero and the degree-zero transition is the quotient map. It sends $p\\otimes1$ to $p\\otimes\\overline1$. Set $a_H=c_Hb_H$; the two unit equations give $a_H\\kappa_H=\\eta_{T,H}$. Both the strict quotient comparison and normalized Roos comparison are natural, so $a_H$ is natural.",
+   "uses": [
+    "lem-sf-regular-roos-koszul-unit",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B, lemma-derived-completion, and 0A0E, lemma-derived-completion-koszul; regular-generator actual-unit comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-koszul-completion-reflector] to $(B_T,(t))$. Its tower is exactly $V_\\bullet$ and its specified unit is $k_H$. It asserts that $D_T(H)$ is locally derived $tB_T$-complete on every slice, for every local section of that ideal, and that $g\\mapsto gk_H$ is bijective into any locally complete $L$. The isomorphism $c_H$ makes $C_T(H)$ locally complete as well: after slice restriction and derived internal Hom an isomorphism still has zero target precisely when its source is zero. Since $b_H\\kappa_H=k_H$ (Step 2), $g\\mapsto g\\kappa_H$ on $\\operatorname{Hom}(\\Lambda_T(H),L)$ is the composite of the bijection $g\\mapsto gb_H^{-1}$ with $g'\\mapsto g'k_H$, hence bijective. For such $L$, the isomorphism $a_H$ gives a bijection $f\\mapsto fa_H$ from $\\operatorname{Hom}(C_T(H),L)$ to $\\operatorname{Hom}(\\Lambda_T(H),L)$. For every $f$ its image under the Koszul Hom map is $(fa_H)\\kappa_H=f\\eta_{T,H}$. The bijection is therefore exactly precomposition with the actual quotient augmentation, and the asserted agreement of Hom maps follows.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099B, lemma-derived-completion, reflector and local completeness clauses; Tag 0A0E for its Koszul realization."
+   }
+  },
+  {
+   "text": "The equivalences (i)--(iv) in [lem-sf-regular-roos-koszul-unit], specialized as in Step 3, identify local derived $tB_T$-completeness, invertibility of $k_H$, the existence of a quotient Roos triangle with the actual reduction components, and invertibility of $\\eta_{T,H}$. Since $b_H$ is invertible and $b_H\\kappa_H=k_H$, invertibility of $k_H$ is equivalent to intrinsic completeness. By [def-weil-derived-complete] its predicate is precisely existence of that quotient Roos triangle; the transition-normalized quotient identifications of Step 1 preserve both the $1-s$ arrow and the actual reduction components. This uses the regular-generator theorem to deduce invertibility of the actual unit from the existential triangle; it does not identify an arbitrary triangle isomorphism with that unit. None of these applications assumes that $H$ is complete or bounded.",
+   "uses": [
+    "lem-sf-regular-roos-koszul-unit",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B and 0A0E; regular-generator Roos predicate and canonical-unit criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completed-coefficient-regular-quotients",
+  "lem-weil-proetale-countable-products-exact",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-sf-regular-roos-koszul-unit",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E, principal regular case, assembled with existing completed-coefficient and normalized strict Roos lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|koszulCompletion|quotientCompletion",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"524\", \"text\": \"section SeparationQuotientCompletion\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Completion.lean\", \"line\": \"552\", \"text\": \"end SeparationQuotientCompletion\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Actual quotient completion of unbounded pro-etale modules is a left adjoint to the full subcategory where the Koszul unit is invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.free R ⊣ Condensed.forget R\", \"doc\": \"For any ring $ R $, the free condensed $ R $-module functor from condensed sets to condensed $ R $-modules is left adjoint to the forgetful functor that forgets the $ R $-module structure. This adjunc\"}\n  {\"name\": \"LightCondensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondensed.free R ⊣ LightCondensed.forget R\", \"doc\": \"The adjunction between the free light condensed $ R $-module functor (constructed by applying the free module functor and sheafifying with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"TopModuleCat.instIsLeftAdjointModuleCatForget₂\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic\", \"type\": \"∀ (R : Type u) [inst : Ring R] [inst_1 : TopologicalSpace R],\\n  (CategoryTheory.forget₂ (TopModuleCat R) (ModuleCat R)).IsLeftAdjoint\", \"doc\": \"For any topological ring $ R $, the forgetful functor from the category of topological $ R $-modules to the category of $ R $-modules is a left adjoint. This means there exists a corresponding right a\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"TopModuleCat.withModuleTopologyAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    [inst_1 : TopologicalSpace R] →\\n      TopModuleCat.withModuleTopology R ⊣ CategoryTheory.forget₂ (TopModuleCat R) (ModuleCat R)\", \"doc\": \"The functor `withModuleTopology R` that equips an $ R $-module with the canonical topology making module operations continuous is left adjoint to the forgetful functor from the category of topological\"}\n  {\"name\": \"TopModuleCat.instIsRightAdjointModuleCatForget₂\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic\", \"type\": \"∀ (R : Type u) [inst : Ring R] [inst_1 : TopologicalSpace R],\\n  (CategoryTheory.forget₂ (TopModuleCat R) (ModuleCat R)).IsRightAdjoint\", \"doc\": \"For any topological ring $ R $, the forgetful functor from the category of topological $ R $-modules to the category of $ R $-modules is a right adjoint. This means there exists a left adjoint functor\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves over the completed adic coefficient ring, transport the Koszul completion reflector to the strict quotient tower with its actual augmentation and Hom universal property",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"Hausdorffification\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"For a commutative ring `R`, an ideal `I` of `R`, and an `R`-module `M`, the `Hausdorffification` of `M` with respect to `I` is the quotient module $M / (\\\\bigcap_{n \\\\in \\\\mathbb{N}} I^n M)$.\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"AdicCompletion.of_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (x : M) (n : ℕ), ↑((AdicCompletion.of I M) x) n = (I ^ n • ⊤).mkQ x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived quotient augmentation is a reflection onto derived complete module sheaves via the unit compatible Koszul quotient comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c)\", \"doc\": \"The canonical functor from the homotopy category of chain complexes to the derived category is a localization at quasi-isomorphisms. This means that quasi-isomorphisms become isomorphisms in the deriv\"}\n  {\"name\": \"ModuleCat.epi_as_hom''_mkQ\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.EpiMono\", \"type\": \"(U : Submodule R X) : Epi (ModuleCat.ofHom U.mkQ)\", \"doc\": \"For any submodule $ U $ of an $ R $-module $ X $, the canonical linear map from $ X $ to the quotient module $ X/U $ is an epimorphism in the category of $ R $-modules. This means that if two $ R $-li\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q : _ ⥤ DerivedCategory C).EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"DerivedCategory.quotientCompQhIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh ≅ Q\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category followed by the functor to the derived category is naturally isomorphic to the direct localization\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.quotientCompQhIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomotopyCategory.quotient C c ⋙ Qh ≅ Q\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category followed by the functor to the derived category is naturally isomorphic to the direct localization\"}\n  {\"name\": \"Ideal.toCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": I →ₗ[R] I.Cotangent\", \"doc\": \"The canonical $ R $-linear map sending each element of an ideal $ I $ in a commutative ring $ R $ to its equivalence class in the cotangent module $ I/I^2 $, where $ I^2 $ denotes the submodule genera\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.Reflective",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|koszulCompletion|quotientCompletion",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/UniformSpace/Completion.lean\", \"Mathlib/Topology/UniformSpace/Completion.lean\"], \"digest\": \"f6b40193c61a81a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern ordinary adic completion, sheafification, or other adjunctions; none states derived quotient completion or the unit-compatible Koszul reflection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived inverse limit of the quotient tensor tower over a regular principal ideal is the derived completion reflector and its augmentation is the reflection unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"Submodule.FG.lTensor.directLimit\", \"AdicCompletion.subring\", \"TensorProduct.directLimitLeft_symm_of_tmul\", \"TensorProduct.toDirectLimit\", \"AdicCompletion.instCommRing\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"AdicCompletion.instOne\"], \"digest\": \"66d08d0840633123\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern ordinary adic completion, sheafification, or other adjunctions; none states derived quotient completion or the unit-compatible Koszul reflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of sheaves of modules over a ringed site is reflection onto locally derived complete objects via the Koszul tower unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.instReflectsIsomorphismsSheafOfModulesFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"PresheafOfModules.sheafificationCompToSheaf\", \"SheafOfModules.forgetToSheafModuleCat\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.toSheafCompSheafToPresheafIso\", \"SheafOfModules.instAbelian\"], \"digest\": \"fc595051cdf43fcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern ordinary adic completion, sheafification, or other adjunctions; none states derived quotient completion or the unit-compatible Koszul reflection."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Reflective, AdicCompletion",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern ordinary adic completion, sheafification, or other adjunctions; none states derived quotient completion or the unit-compatible Koszul reflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul powers derived inverse limit is left adjoint to complete complexes of sheaves and the quotient augmentation preserves the unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.plusPlusAdjunction_counit_app_val\", \"CondensedMod.LocallyConstant.adjunction\", \"CategoryTheory.constantSheafAdj_counit_w\", \"LightCondMod.LocallyConstant.adjunction\", \"Condensed.freeForgetAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"localCohomology.diagram\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\"], \"digest\": \"aa5ac39f60337fcb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern ordinary adic completion, sheafification, or other adjunctions; none states derived quotient completion or the unit-compatible Koszul reflection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-roos-unit-adjunction",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor: maps determined by restriction on the essential image of the open extension; actual completed-ring reflector (old Step 4).",
+   "via": [
+    "lem-sf-open-roos-unit-adjunction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-quotient-completion-actual-reflector",
+  "worker": "stage1",
+  "summary": "Assembled the existing coefficient regularity, normalized strict Roos, regular-generator unit criterion and ringed-site reflector statements. All comparisons preserve the actual augmentations, and the Hom map is computed explicitly. No new nodes or changed mathematical statements.",
+  "blueprint": "prop-sf-pf-coherence, base-change paragraph: the open factor, where maps on the completed essential image are determined by restriction; supplies the actual quotient-completion reflector used in the old Step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-completed-coefficient-regular-quotients",
+    "why": "Generic coefficient calculation giving regularity and the actual quotient-sheaf projections; this unit has no coefficient exactness theorem."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exactness needed for the normalized product-fiber model; used as a generic module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized strict-limit comparison, including zero-second-coordinate augmentation; no projection-formula argument is replaced."
+   },
+   {
+    "node": "lem-sf-regular-roos-koszul-unit",
+    "why": "Generic regular-generator comparison and equivalence of existential Roos completeness with invertibility of the actual unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic ringed-site reflection theorem, including all local sections of the ideal and its Hom bijection."
+   },
+   {
+    "node": "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "why": "Generic identification of the Cont(pi_0)-presented completed coefficient sheaf of def-weil-pbc-intrinsic-completion with the constant-sheaf limit B_T; needed only to read the intrinsic completion on D(B_T), no projection-formula step is replaced (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-completed-coefficient-regular-quotients",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-sf-regular-roos-koszul-unit",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-aed3fcd05",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-aed3fcd05 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, the statement of every cited node, Stacks 099B and 0A0E in algebraization.tex, and the unit sk-prop-sf-pf-coherence. There are no new nodes, no re-split note, no SGA citation and no cycle. Three faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-sf-quotient-completion-actual-reflector.json. (1) Coefficient categories were silently identified in the statement and Step 2: def-weil-pbc-intrinsic-completion is formed over the Cont(pi_0)-presented ring A_T = lim (R^up/t^n)_T, but the item works over the constant-sheaf limit B_T. The fix cites the existing reviewed node lem-weil-pbc-integral-coefficient-presentation-comparison for the ring-sheaf isomorphism e_T and explains the transport. One clarifying clause in the statement says Lambda_T(H) is transported along e_T, and that node is added to stmt_deps; nothing is weakened. (2) Step 1 said the ring O_{E,T} of lem-sp-completed-coefficient-regular-quotients is 'precisely B_T'; it is only canonically isomorphic. Step 1 now cites sk-def-sp-coefficient-towers for that projection-compatible isomorphism. (3) Step 4 did not show that g -> g kappa_H is bijective; it now derives this from b_H kappa_H = k_H. The other identifications check out: the Roos fiber model and units of Step 2, the counit-defined units of the regular-generator node against the normalized-Roos units (via lem-cbc-exact-product-functor-strict-limit), and the local-completeness condition (the ideal-sheaf sections equal t*B_T(U) because t is injective). Edge cases 0, B_T[1/t] and (A_1)_T come out as expected. proof_deps now equals the union of uses, and a tool_uses entry is added for the comparison node. Batch-5: the flagged node lem-pod-completed-integral-scalar-regular, reached through lem-sp-completed-coefficient-regular-quotients, is a generic regularity fact about the coefficient ring that neither assumption gives (accepted on the same grounds in the Q63 review). The comparison node I added reaches two generic category-theory nodes, lem-pod-derived-exact-square-composition and lem-trf-localization-essentially-surjective (a Mathlib leaf); both lie outside both assumptions. Maintainer note: the item is close to a corollary of lem-sf-regular-roos-koszul-unit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.QuotientCompletionActualReflector",
+  "declaration": "WeilConjectures.IntegralQuotientCompletion.actual_reflector",
+  "declarations": [
+   "WeilConjectures.IntegralQuotientCompletion.strictTower",
+   "WeilConjectures.IntegralQuotientCompletion.representativeTower",
+   "WeilConjectures.IntegralQuotientCompletion.actual_reflector"
+  ],
+  "file": "lean/Sheaf/SixFunctors/QuotientCompletionActualReflector.lean",
+  "statement": "theorem actual_reflector : ∃ (q : ∀ n : ℕ, PbcIntegralRing l E ⧸ (pbcIntegralDatum l E).ideal ^ (n + 1) ≃+* ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) (e : pbcAdicCompletion T (pbcIntegralDatum l E) ≅ completedIntegralCommRingSheafUnrestricted l E T), (∀ (n : ℕ) (x : PbcIntegralRing l E), q n (Ideal.Quotient.mk _ x) = ULift.up (Ideal.Quotient.mk _ x.down)) ∧ (∀ n : ℕ, e.hom ≫ completedIntegralCommRingProjectionUnrestricted l E T n = pbcAdicProjection T (pbcIntegralDatum l E) n ≫ (IntegralCoefficientPresentation.level l E T q n).hom) ∧ ∃ (Q : IntegralOnSlice.D.{u, u} l E T none ⥤ DerivedCategory (ℕᵒᵖ ⥤ IntegralOnSlice.Mod.{u, u} l E T none)) (lam : IntegralOnSlice.qGood.{u, u} l E T none ⋙ Q ≅ representativeTower l E T) (η : 𝟭 (IntegralOnSlice.D.{u, u} l E T none) ⟶ Q ⋙ koszulRlim.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T)) (Λ : IntegralOnSlice.D.{u, u} l E T none ⥤ IntegralOnSlice.D.{u, u} l E T none) (κ : 𝟭 (IntegralOnSlice.D.{u, u} l E T none) ⟶ Λ) (a : Λ ≅ Q ⋙ koszulRlim.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T)), (∀ P : (IntegralOnSlice.Good.{u, u} l E T none).FullSubcategory, η.app ((IntegralOnSlice.qGood.{u, u} l E T none).obj P) ≫ (koszulRlim.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T)).map (lam.hom.app P) = RegularRoosKoszul.augmentedUnit.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T) P.obj ((IntegralOnSlice.tower.{u, u} l E T none).obj P.obj) ((IntegralOnSlice.augmentation.{u, u} l E T none).app P.obj)) ∧ (∀ C : CochainComplex (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ, ∃ b : Λ.obj ((pbcDerivedRestrict e.inv).obj (DerivedCategory.Q.obj C)) ≅ (pbcDerivedRestrict e.inv).obj (DerivedCategory.Q.obj (intrinsicCompletionComplex T (pbcIntegralDatum l E) 1 (fun _ : Fin 1 ↦ pbcUniformizer l E) C)), κ.app ((pbcDerivedRestrict e.inv).obj (DerivedCategory.Q.obj C)) ≫ b.hom = (pbcDerivedRestrict e.inv).map (DerivedCategory.Q.map (intrinsicCompletionComplexUnit T (pbcIntegralDatum l E) 1 (fun _ : Fin 1 ↦ pbcUniformizer l E) C))) ∧ (∀ H : IntegralOnSlice.D.{u, u} l E T none, κ.app H ≫ a.hom.app H = η.app H) ∧ (∀ (H : IntegralOnSlice.D.{u, u} l E T none) (U : T.ProEt) (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections), (∃ S : Sieve U, S ∈ ProEt.topology T U ∧ ∀ (V : T.ProEt) (f : V ⟶ U), S f → ∃ c : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj (op V), s.val (op (Over.mk f)) = integralCompletionScalarValue l E T (op V) * c) → IsZero (integralCompletionLocalTest l E T ((Q ⋙ koszulRlim.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T)).obj H) U s)) ∧ (∀ (H L : IntegralOnSlice.D.{u, u} l E T none), (∀ (U : T.ProEt) (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections), (∃ S : Sieve U, S ∈ ProEt.topology T U ∧ ∀ (V : T.ProEt) (f : V ⟶ U), S f → ∃ c : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj (op V), s.val (op (Over.mk f)) = integralCompletionScalarValue l E T (op V) * c) → IsZero (integralCompletionLocalTest l E T L U s)) → Function.Bijective (fun f : (Q ⋙ koszulRlim.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T)).obj H ⟶ L ↦ η.app H ≫ f) ∧ Function.Bijective (fun g : Λ.obj H ⟶ L ↦ κ.app H ≫ g) ∧ ∀ f : (Q ⋙ koszulRlim.{u + 1, u, u + 1, u + 2} (completedIntegralCommRingSheafUnrestricted l E T)).obj H ⟶ L, κ.app H ≫ (a.hom.app H ≫ f) = η.app H ≫ f) ∧ (∀ H : IntegralOnSlice.D.{u, u} l E T none, List.TFAE [ (∀ (U : T.ProEt) (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections), (∃ S : Sieve U, S ∈ ProEt.topology T U ∧ ∀ (V : T.ProEt) (f : V ⟶ U), S f → ∃ c : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj (op V), s.val (op (Over.mk f)) = integralCompletionScalarValue l E T (op V) * c) → IsZero (integralCompletionLocalTest l E T H U s)), IsIso (κ.app H), IntegralOnSlice.IsComplete.{u, u} l E T none H, IsIso (η.app H)])",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 0160dc5f78b1. H2: removed the two added theorem-only stmt_deps; use def-sf-integral-local-completion-test and inline its slice-wise vanishing condition, with integralCompletionLocalTest (body-identical to IntegralPrincipalCone.localTest). Added existing:true definition owner def-sf-normalized-strict-tower-augmentation for limitComparison/constantUnit/augmentedUnit. Advisory: cite def-weil-pbc-bounded-constructible-tower for the pbc coefficient and restriction interface, and make the four priority-5000 instances local. The mathematical statement and original proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baebaf3b8",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Re-delivery of returned 0160dc5f78b1. F1 fixed: theorem stmt_deps lem-pur-integral-principal-cone-local-criterion / lem-pur-roos-intrinsic-completeness-equivalence removed; def-sf-integral-local-completion-test cited; local completeness written inline in all 3 places, identical to locallyComplete's body and to clause (ii) of roosIntrinsicCompletenessEquivalence; integralCompletionLocalTest body = localTest. F2 fixed: new def node def-sf-normalized-strict-tower-augmentation existing:true on RegularRoosKoszulUnit (limitComparison = 2nd choose of the same pair as koszulRlim, constantUnit = Q(constLim unit) ≫ γ, augmentedUnit = constantUnit ≫ L(Q(Xα))); statement matches the Lean, no extra hypotheses, 6 def stmt_deps exist live, lean.statement verbatim, no prior owner. Advisories A1 (def-weil-pbc-bounded-constructible-tower cited/imported) and A3 (local instances) done. Lean diff vs returned head limited to imports, local attribute and the inline predicate; item statement verbatim; all added stmt_deps are definition nodes; live item has no lean record (not superseded). Clause table and edge cases of the earlier review re-confirmed. No file changed, no recompile."
+ }
+}

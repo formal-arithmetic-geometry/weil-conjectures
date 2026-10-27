@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "First paragraph: passage to rational coefficients; coefficient-descent argument Step 5."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "Expansion of the first paragraph, using the existing coefficient-descent proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms of integral linear functors extend to rational scalar localization and compatible common stage systems",
+   "results": "8 hits: CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.Lifting.ofIsos, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.Localization.isoUniqFunctor, localCohomology.diagramComp, CategoryTheory.Localization.Lifting.iso'. General localization tools do not state the specified integral identity-open scalar square or its recorded normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapIso\"",
+   "results": "12 hits: CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso. General localization tools do not state the specified integral identity-open scalar square or its recorded normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rationaliz|scalar.localiz|StageSystem",
+   "results": "1 hits: Mathlib/Analysis/Real/Pi/Bounds.lean. General localization tools do not state the specified integral identity-open scalar square or its recorded normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of integral linear functors descends to tensor Hom rationalized categories and compatible common stage systems",
+   "results": "8 hits: CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso, Rep.coinvariantsTensorIndNatIso, Rep.coinvariantsTensorIndNatIso_hom_app, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost_iso, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, Rep.linearization_δ_hom, CategoryTheory.MonoidalClosedFunctor.comparison_iso. General localization tools do not state the specified integral identity-open scalar square or its recorded normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between linear functors extends to raw scalar localization categories",
+   "results": "8 hits: LinearMap.extendScalarsOfIsLocalizationEquiv, CategoryTheory.Free.ext, LinearMap.extendScalarsOfIsLocalizationEquiv_apply, CategoryTheory.Localization.isoUniqFunctor, CategoryTheory.Functor.linear_of_iso, LinearMap.extendScalarsOfIsLocalization_apply', LinearEquiv.extendScalarsOfIsLocalization, CategoryTheory.Localization.liftNatIso. General localization tools do not state the specified integral identity-open scalar square or its recorded normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperCoefficientDescent",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "First paragraph: rational coefficient descent of the identity-compactification comparison (Step 5).",
+   "via": [
+    "lem-weil-proper-coefficient-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "id": "lem-weil-proper-rational-scalar-square",
+ "title": "Localization of the proper integral scalar square",
+ "statement": "Fix the finite-field datum, prime, algebraic closure and separated finite-type proper morphism of [def-weil-finite-field-fiber, def-weil-derived-direct-image]. Let D be the normalized integral direct images, R their raw rational comparisons satisfying HasComparisonLaws [lem-sf-strict-direct-image-scalar-comparison], S the normalized compact coefficient action [def-weil-compact-support-coefficient-action], and theta integral identity-compactification isomorphisms. Assume the integral scalar square of [lem-weil-proper-integral-scalar-square]. Let r_E be rational isomorphisms whose forward components are the localizations of theta_E. Let beta be natural isomorphisms R.rational_E followed by the target stage transition to the source stage transition followed by R.rational_L, whose components are the inverses of R.theta, using the actual stage systems [def-weil-algebraically-closed-coefficients]. Then at every E <= L and K the transition of r_E followed by beta equals S.beta followed by r_L at the transitioned K. Equality is heterogeneous only to transport the equal endpoint functors. Prerequisites: [def-weil-finite-field-fiber], [def-weil-derived-direct-image], [lem-sf-strict-direct-image-scalar-comparison], [def-weil-compact-support-coefficient-action], [def-weil-algebraically-closed-coefficients], [lem-weil-proper-integral-scalar-square], [def-weil-rationalization-karoubi], [def-weil-proper-coefficient-descent-data].",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-direct-image",
+  "lem-sf-strict-direct-image-scalar-comparison",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-proper-integral-scalar-square",
+  "def-weil-rationalization-karoubi",
+  "def-weil-proper-coefficient-descent-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the transitions of the chosen stage system with the raw rational scalar transitions. Their object and pure-tensor formulas identify the transition of the localization of an integral arrow with the localization of its integral transition: the coefficient map sends one to one.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the component formulas of r, the compact rationalBeta and the ordinary HasComparisonLaws to identify all four arrows in the square with integral localizations. The inverse ordinary comparison is identified by uniqueness of inverse after the endpoint equalities. Apply the target localization functor to the integral square and use preservation of composition. Compose the resulting heterogeneous equalities.",
+   "uses": [
+    "lem-weil-proper-integral-scalar-square",
+    "def-weil-compact-support-coefficient-action",
+    "lem-sf-strict-direct-image-scalar-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-proper-integral-scalar-square",
+  "def-weil-compact-support-coefficient-action",
+  "lem-sf-strict-direct-image-scalar-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperRationalScalarSquare",
+  "file": "lean/Sheaf/Paper/ProperRationalScalarSquare.lean",
+  "declaration": "WeilConjectures.ProperCoefficientDescent.rationalScalarSquare",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26",
+  "statement": "theorem rationalScalarSquare (D : SfStrictDirectImageScalar.IntegralComparisons l Ω f) (R : SfStrictDirectImageScalar.Comparisons l Ω f D) (hR : SfStrictDirectImageScalar.HasComparisonLaws l Ω f D R) (S : SfCompactSupportCoefficientAction l B.k (PurCompactSupport.coefficientPrimeUnit l B hl) Ω (Compactification.ofIsProper f)) (θ : ∀ E : Index l Ω, compactIntegral l Ω B hl f E ≅ (D.integral E).image) (hI : ∀ (E L : Index l Ω) (h : E ≤ L) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) X), (integralTransition l Ω Y E L h).map ((θ E).hom.app K) ≫ (D.integralComparison E L h).inv.app K = (S.integralBeta h).hom.app K ≫ (θ L).hom.app ((integralTransition l Ω X E L h).obj K)) (r : ∀ E : Index l Ω, S.system.Φ E ≅ R.rational E) (hr : ∀ (E : Index l Ω) (K : Stage l Ω X E), HEq ((r E).hom.app K) ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) Y).map ((θ E).hom.app K.obj))) (β : ∀ {E L : Index l Ω} (h : E ≤ L), R.rational E ⋙ stageTransition l Ω Y E L h ≅ stageTransition l Ω X E L h ⋙ R.rational L) (hβ : ∀ (E L : Index l Ω) (h : E ≤ L) (K : Stage l Ω X E), HEq ((β h).hom.app K) ((R.theta E L h).inv.app K)) : ∀ (E L : Index l Ω) (h : E ≤ L) (K : Stage l Ω X E), HEq ((stageTransition l Ω Y E L h).map ((r E).hom.app K) ≫ (β h).hom.app K) ((S.system.β h).hom.app K ≫ (r L).hom.app ((stageTransition l Ω X E L h).obj K))"
+ },
+ "split_report": {
+  "blueprint": "First paragraph of prop-weil-proper-compact-coincidence: identity compactification, scalar compatibility and passage to rational coefficients. The common data and the two scalar-square parts preserve this route.",
+  "search": "Read the existing proper integral tower comparison, strict scalar normalization, compact coefficient action and localization/StageSystem APIs. Blueprint search for proper coefficient scalar returned no separate matching blueprint node.",
+  "edge_cases": "Identity coefficient inclusion, zero object, arbitrary ramification, positive quotient exponents n+1, and torsion integral Hom modules."
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-aafa5",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261025T203314-L-2802271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-aafa5",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261025T203314-L-2802271",
+  "kind": "interface",
+  "note": "independent cc review: integralScalarSquare (sorry) vs the published item's first conjunct and node lem-weil-proper-integral-scalar-square; moved data defs vs clone (identical); item proof_deps vs Lean (naturalIso_of_integral, two squares, StageSystem descent); #print axioms on a combined scratch copy"
+ }
+}

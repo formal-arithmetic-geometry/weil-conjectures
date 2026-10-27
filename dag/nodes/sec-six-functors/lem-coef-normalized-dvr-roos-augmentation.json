@@ -1,0 +1,175 @@
+{
+ "id": "lem-coef-normalized-dvr-roos-augmentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-effectivity",
+   "place": "Proof paragraphs 3--4: bounded two-term tensor and its augmented projection",
+   "via": [
+    "lem-coef-normalized-dvr-bounded-free-cone",
+    "lem-coef-normalized-dvr-adic-cone-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRBoundedFreeCone",
+  "date": "2026-10-25",
+  "group": "V8"
+ },
+ "mathlib_match": null,
+ "kind": "statement",
+ "title": "Augmentation comparison for the normalized DVR Roos object",
+ "statement": "For a normalized DVR tower T, index n, chosen scalar-reduction adjunction, strict normalized adic tower U with level isomorphisms eU respecting successor maps, and countable products in the completed derived category, together with a finite-coefficient complex N, a chain isomorphism iN from U_(n+1) to its completed restriction and a finite-derived isomorphism eN:Q(N) to T.M n such that (eU n) followed by evaluationIso equals Q(iN), the restriction factor and Res(eN), there is a natural isomorphism from derived scalar extension followed by restriction to the localized scalar cone by the (n+1)-st uniformizer power. For the canonical homotopy-limit cone of U, its component at n+1, followed by the comparison and normalized cokernel descent, equals the restricted adjoint of the canonical Roos projection, after the supplied level isomorphism and evaluation isomorphism. The scalar-cone functor and augmentation are [def-coef-linear-scalar-cone]; T is [def-coef-normalized-dvr-tower], strict normalization is [lem-coef-strict-normalized-adic-cone-limit], the adjunction is [lem-weil-derived-scalar-extension-restriction-adjunction].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "the regular quotient and canonical augmented projection calculation in the bounded-free proof"
+ },
+ "proof": [
+  {
+   "text": "Use the strict finite-coefficient adjoint formula, including its natural comparison for the specified adjunction, on the normalized reduction from the zeroth tail term followed by iN.",
+   "uses": [
+    "lem-coef-normalized-dvr-strict-coefficient-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized cokernel descent gives the reduction on the unshifted summand and zero on the shifted summand. The finite coefficient compatibility identifies the target via eN; right adjunction naturality proves the formula on the zeroth tail term. Left adjunction naturality and naturality of the comparison transport it along the canonical homotopy-limit projection. Cone naturality identifies this projection followed by the normalized reduction with the level n+1 projection.",
+   "uses": [
+    "def-coef-linear-scalar-cone",
+    "lem-coef-strict-normalized-adic-cone-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-normalized-dvr-strict-coefficient-adjoint",
+  "def-coef-linear-scalar-cone",
+  "lem-coef-strict-normalized-adic-cone-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "W3: strict finite coefficient adjoint formula and naturality; finiteModel supplies repaired compatibility"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRRoosAugmentation",
+  "file": "lean/Sheaf/Paper/NormalizedDVRRoosAugmentation.lean",
+  "declaration": "WeilConjectures.normalizedDVR_roos_augmentation",
+  "statement": "theorem normalizedDVR_roos_augmentation\n    (T : NormalizedDVRTower l E X D hl) (n : ℕ)\n    (adj : scalarReductionDerivedExtension l E X n ⊣\n      scalarReductionDerivedRestriction l E X n)\n    [HasLimitsOfShape (Discrete ℕ) (completedIntegralDerivedCategory l E X D hl)]\n    (U : ℕᵒᵖ ⥤ CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)\n    (hU : CochainComplex.IsNormalizedAdicTower (normalizedDVRUniformizer l E X) U)\n    (eU : ∀ j : ℕ, DerivedCategory.Q.obj (U.obj (op (j + 1))) ≅\n      (normalizedDVRTowerEvaluation l E X D hl j).obj T.tower)\n    (_heU : ∀ j : ℕ,\n      DerivedCategory.Q.map (U.map (homOfLE (Nat.succ_le_succ j.le_succ)).op) ≫\n          (eU j).hom = (eU (j + 1)).hom ≫\n        (normalizedDVRTowerTransition l E X D hl j.le_succ).app T.tower)\n    (N : CochainComplex (normalizedDVRModules l E X n) ℤ)\n    (iN : U.obj (op (n + 1)) ≅\n      ((completedIntegralRestrictScalars l E X D hl n).mapHomologicalComplex\n        (.up ℤ)).obj N)\n    (eN : (@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).obj N ≅ T.M n)\n    (hN : (eU n).hom ≫ (T.evaluationIso n).hom =\n      DerivedCategory.Q.map iN.hom ≫\n        (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app N ≫\n        (normalizedDVRResCompleted l E X D hl n).map eN.hom) :\n    ∃ A : scalarReductionDerivedExtension l E X n ⋙\n          scalarReductionDerivedRestriction l E X n ≅\n        CochainComplex.LinearScalarCone.derived\n          (A := completedIntegralModuleSheaves l E X D hl)\n          (normalizedDVRUniformizer l E X ^ (n + 1)),\n      let c := CategoryTheory.Pretriangulated.homotopyLimitCone (U ⋙ DerivedCategory.Q)\n      let k := (CategoryTheory.Pretriangulated.addOpFunctor (n + 1)).obj (op 0)\n      (scalarReductionDerivedRestriction l E X n).map\n          ((adj.homEquiv c.pt (T.M n)).symm\n            (c.π.app (op (n + 1)) ≫ (eU n).hom ≫ (T.evaluationIso n).hom)) =\n        A.hom.app c.pt ≫\n          (CochainComplex.LinearScalarCone.derived\n            (normalizedDVRUniformizer l E X ^ (n + 1))).map (c.π.app k) ≫\n          CochainComplex.LinearScalarCone.derivedAugmentation hU (n + 1) (op 0) ≫\n          (eU n).hom ≫\n          (T.evaluationIso n).hom",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "regular.*quotient.*cone|cone.*scalar.*restriction|Koszul.*adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching scalar-cone localization theorem; source-library alternatives require additional monoidal hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalar reduction is naturally the cone of multiplication by a regular element, compatibly with the tensor adjunction counit",
+   "results": "8 hits: RestrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, LinearMap.restrictScalarsₗ, NonUnitalAlgHom.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, element_smul_restrictScalars, Derivation.restrictScalars",
+   "date": "2026-10-25",
+   "verdict": "No matching scalar-cone localization theorem; source-library alternatives require additional monoidal hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"mappingCone\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching scalar-cone localization theorem; source-library alternatives require additional monoidal hypotheses."
+  }
+ ],
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-strict-normalized-adic-cone-limit",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-coef-linear-scalar-cone"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261025T164621-L-1042801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b4d4",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T003059-L-144950",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-normalized-dvr-roos-augmentation (STATEMENT-DISPUTED repair, Bockstein counterexample verified) and new nodes lem-cbc-regular-quotient-cone-adjoint / lem-coef-normalized-dvr-strict-coefficient-adjoint against delivered Lean; adapted unclaimed BoundedFreeCone/AdicConeModel against clone (adic statement byte-identical); sandbox --all build of 5 delivered modules + importer RoosFiniteReduction compiled; item axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "W3 stage 3",
+  "old_statement": "For a normalized DVR tower T, index n, chosen scalar-reduction adjunction, strict normalized adic tower U with level isomorphisms eU respecting successor maps, and countable products in the completed derived category, there is a natural isomorphism from derived scalar extension followed by restriction to the localized scalar cone by the (n+1)-st uniformizer power. For the canonical homotopy-limit cone of U, its component at n+1, followed by the comparison and normalized cokernel descent, equals the restricted adjoint of the canonical Roos projection, after the supplied level isomorphism and evaluation isomorphism. The scalar-cone functor and augmentation are [def-coef-linear-scalar-cone]; T is [def-coef-normalized-dvr-tower], strict normalization is [lem-coef-strict-normalized-adic-cone-limit], the adjunction is [lem-weil-derived-scalar-extension-restriction-adjunction].",
+  "what": "Completed-derived successor compatibility alone does not preserve the finite coefficient action. For R a DVR, twist eU_0 on B_1 direct-sum B_1[1] by the nonzero Bockstein B_1 -> B_1[1] and leave higher level comparisons canonical. Precomposition with B_2 -> B_1 kills this Bockstein, so successor compatibility remains. The limit is R direct-sum R[1] and its projection kills the twist, while the cone augmentation sees it. Naturality with summand idempotents prevents a natural comparison from absorbing this off-diagonal twist. Require the selected level comparison to arise from a strict finite-coefficient complex and a finite-derived isomorphism instead. The canonical finiteModel supplies this.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+   "place": "regular-quotient tensor calculation on strict finite-coefficient models, paragraphs 3--4"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-normalized-dvr-bounded-free-cone",
+    "holds": true,
+    "note": "Adapted in the same delivery to pass through N, iN, eN and hN."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Regularity and projection divisibility give the two-term free resolution and its normalized cone augmentation, naturally identifying scalar reduction with the localized scalar cone.",
+    "uses": [
+     "lem-pod-completed-integral-scalar-regular",
+     "lem-sp-completed-integral-projection-divisibility",
+     "lem-a1-principal-koszul-strict-replacement",
+     "lem-cbc-regular-quotient-cone-augmentation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Applying the augmentation to the canonical Roos cone and using successor compatibility gives the displayed projection equation, with adjunction naturality transporting it to the chosen adjunction.",
+    "uses": [
+     "lem-coef-strict-normalized-adic-cone-limit",
+     "lem-weil-derived-scalar-extension-restriction-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pod-completed-integral-scalar-regular",
+   "lem-sp-completed-integral-projection-divisibility",
+   "lem-a1-principal-koszul-strict-replacement",
+   "lem-cbc-regular-quotient-cone-augmentation",
+   "lem-coef-strict-normalized-adic-cone-limit",
+   "lem-weil-derived-scalar-extension-restriction-adjunction"
+  ]
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-diagonal-coefficient-uniformizer-reduction",
+ "kind": "statement",
+ "title": "Compare an arbitrary positive uniformizer reduction with the finite Cartier class",
+ "statement": "Assume the completed diagonal reduction, completion, cycle-system and limit-arrow specifications on Y, and a Family with a Reference to that completed arrow [def-sfb-diagonal-coefficient-reference]. Fix a finite field E, a uniformizer pi and n≥0. Supply finiteness of the lifted residue ring, the explicit annihilation by ell^(n+1), invertibility of this exponent on Y,W, and kernel-normalized FiniteRoots on P,W. Then there exist a quotient Diagram d, its ScalarCompatibility with family.integral E, and QuotientCompatibility of [def-sfb-diagonal-coefficient-quotients]: finite realizations, root-projection-normalized line identifications and the canonical Cartier class and unit/Chern trace. No construction of a non-torsion Family and no geometric base-change square is asserted.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-quotients",
+  "lem-diagonal-uniformizer-annihilator",
+  "lem-diagonal-finite-root-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), every positive uniformizer quotient and its finite trace"
+ },
+ "proof": [
+  {
+   "text": "Apply diagonalUniformizer_scalarFrame to family.integral E. This supplies adjoint-normalized scalar endpoints, unit-normalized restriction squares with invertible shifted-line mates, and the two normalized supported-source squares, independently of the class and traces.",
+   "uses": [
+    "lem-diagonal-uniformizer-scalar-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the quotient diagonal as supported.iso.inv followed by derived scalar extension of the integral diagonal and lineW.shift. Define each quotient trace as the inverse scalar/direct-image comparison followed by scalar extension of the integral trace and the unit comparison. Cancel the endpoint inverses to prove the diagonal and trace squares. Apply integration_transport separately to both original integration identities and the frame source squares. Package the constructed arrows and proved identities as a Diagram and the proved squares as ScalarCompatibility.",
+   "uses": [
+    "lem-diagonal-coefficient-integration-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply diagonalUniformizer_finiteNormalization to the constructed diagram and scalar compatibility. It supplies the three finite realizations, projection-normalized quotient lines, and finite Cartier/trace comparison at exponent l^(n+1). Insert these into QuotientCompatibility with r=n and the given finiteness, annihilation, and invertibility witnesses.",
+   "uses": [
+    "lem-diagonal-uniformizer-finite-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-uniformizer-scalar-frame",
+  "lem-diagonal-coefficient-integration-transport",
+  "lem-diagonal-uniformizer-finite-normalization"
+ ],
+ "proof_origin": {
+  "by": "K2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), explicit scalar transport of arrows and integration identities, followed by finite normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), every positive uniformizer quotient and its finite trace",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCoefficientUniformizerReduction",
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientUniformizerReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficient_uniformizerFiniteComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficient_uniformizerFiniteComparison"
+  ],
+  "statement": "theorem diagonalCoefficient_uniformizerFiniteComparison\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)\n    (hsystem : DiagonalCycleSystemSpec l Y hY D)\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ)\n    (family : Family l Y) (reference : Reference l Y δ family)\n    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    (hfinite : Finite (ULift.{u + 1} (completedResidue l E π n)))\n    (hA : ((l ^ (n + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0)\n    (hYpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(Y, ⊤)))\n    (hWpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(diagonalSurface Y, ⊤)))\n    (rootsP : FiniteRoots (ProjectiveLine Y) (l ^ (n + 1)))\n    (rootsW : FiniteRoots (diagonalSurface Y) (l ^ (n + 1))) :\n    ∃ d : Diagram (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n        Y (quotientLine l E π n),\n      Nonempty (ScalarCompatibility (quotientMap l E π n) Y\n        (fun X ↦ spIntegralTwist X l E) (quotientLine l E π n)\n        (quotientLineMap l E π n) (family.integral E) d) ∧\n      QuotientCompatibility l Y E π n d",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T183206-L-3660312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

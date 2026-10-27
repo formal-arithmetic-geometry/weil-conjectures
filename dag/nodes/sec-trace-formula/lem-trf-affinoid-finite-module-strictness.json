@@ -1,0 +1,397 @@
+{
+ "id": "lem-trf-affinoid-finite-module-strictness",
+ "kind": "statement",
+ "title": "Closed images and norm bounds for finite affinoid modules",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value. Let $A\\ne0$ be a quotient of a restricted-series ring [def-trf-restricted-series-presentation], with a Tate quotient Banach norm $\\|\\cdot\\|_A$. Let $M,N$ be finitely generated $A$-modules, each equipped with a complete nonarchimedean $K$-vector-space norm. Suppose their scalar actions are bounded: for some positive constants $c_M,c_N$, $\\|am\\|_M\\le c_M\\|a\\|_A\\|m\\|_M$ and $\\|an\\|_N\\le c_N\\|a\\|_A\\|n\\|_N$. Every $A$-linear map $u:M\\to N$ is continuous and has closed image. If $u$ is injective, there exists a real $H>0$ such that $\\|m\\|_M\\le H\\|u(m)\\|_N$ for every $m\\in M$. Zero modules are permitted.",
+ "source": {
+  "document": "https://kskedlaya.org/18.727/p-adic2.pdf",
+  "place": "A little p-adic functional analysis (part 2 of 2), Lemma 1, PDF p.1, read online 2026-10-24; together with affinoid Noetherianity in Bosch, Lectures on Formal and Rigid Geometry (2008), section 1.4 Proposition 2(i), and the Banach open mapping theorem. Archival copies WANTED; statement includes the standard finite-generator/open-mapping corollary."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $D=K\\langle T_1,\\ldots,T_r\\rangle$ and choose the given quotient map $D\\twoheadrightarrow A$. Apply [lem-trf-affinoid-polynomial-closed-point-comparison] with $F=K$ and the polynomial ideal $J=0$: its assertion that $C$ is Noetherian gives precisely that $D$ is Noetherian. For any ideal $I\\subseteq A$, its inverse image in $D$ has finitely many generators; their images generate $I$. Hence $A$ is Noetherian [def-weil-pbc-noetherian-ring]. The given Banach norm on $A$ makes every finite power $A^s$, with maximum norm, complete: each coordinate of a Cauchy sequence converges, and the finitely many coordinate limits give convergence in the maximum norm. If $M=0$ or $N=0$, the map is zero, is continuous, and has closed image $\\{0\\}$; injectivity then forces $M=0$ and $H=1$ works. Below assume $M,N\\ne0$.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), section 1.4 Proposition 2(i), printed p.22 (PDF p.23), read online 2026-10-24. Tate Noetherianity supplied by the existing polynomial/affinoid comparison node at J=0. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Choose a nonempty finite generating family $e_1,\\ldots,e_s$ of $M$ [def-weil-finitely-generated-module]. The surjection $p:A^s\\to M$, $p(a)=\\sum_i a_i e_i$, is $K$-linear and satisfies $\\|p(a)-p(b)\\|_M\\le c_M\\max_i\\|e_i\\|_M\\max_i\\|a_i-b_i\\|_A$, so is continuous. Apply [lem-trf-banach-surjective-bounded-lifts] to the Banach $K$-spaces $A^s,M$. It supplies $L>0$ such that every $m$ has a representation $m=\\sum_i a_i e_i$ with $\\max_i\\|a_i\\|_A\\le L\\|m\\|_M$. By $A$-linearity and the bound on the action on $N$, $\\|u(m)\\|_N\\le c_N L\\max_i\\|u(e_i)\\|_N\\|m\\|_M$. Applying the same inequality to $m-m'$ proves continuity of $u$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-trf-banach-surjective-bounded-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/p-adic2.pdf",
+    "place": "Lemma 1, PDF p.1, read online 2026-10-24; agent expansion for bounded scalar actions, automatic continuity and the injective norm bound. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Put $S=u(M)$ and $B=\\overline S\\subseteq N$. Addition, negation and multiplication by each fixed $a\\in A$ preserve limits, the last by the scalar-action bound. Thus $B$ is an $A$-submodule. It is complete: a Cauchy sequence in $B$ converges in $N$, and its limit lies in the closure $B$. If $B=0$ then $S=B$. Otherwise [lem-weil-pbc-noetherian-submodule-finite], applied to $B\\subseteq N$ over the Noetherian ring from step 1, supplies generators $b_1,\\ldots,b_t$, $t>0$. The surjection $A^t\\to B$ defined by these generators is continuous by the same finite-sum estimate as in step 2. Apply [lem-trf-banach-surjective-bounded-lifts] to obtain $L_B>0$ such that every $x\\in B$ is $\\sum_i a_i b_i$ with $\\max_i\\|a_i\\|_A\\le L_B\\|x\\|_N$. Fix $0<\\theta<1$ and, by density, $f_i\\in S$ with $\\|b_i-f_i\\|_N<\\theta/(c_N L_B)$. For $x_0=x\\in B$, recursively choose such coefficients $a_{ji}$ for $x_j$ and put $x_{j+1}=x_j-\\sum_i a_{ji}f_i=\\sum_i a_{ji}(b_i-f_i)$. The action bound gives $\\|x_{j+1}\\|_N\\le\\theta\\|x_j\\|_N$, hence $\\|a_{ji}\\|_A\\le L_B\\theta^j\\|x\\|_N$. For fixed $i$, the norm of any tail $\\sum_{j=p}^q a_{ji}$ is at most $L_B\\theta^p\\|x\\|_N$, so the partial sums converge in the complete ring $A$, to $a_i$. Telescoping gives $x-x_{q+1}=\\sum_i(\\sum_{j=0}^q a_{ji})f_i$. Pass to the limit using the scalar-action bound and the finite sum: $x=\\sum_i a_i f_i\\in S$. Therefore $B=S$ and the image is closed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-trf-banach-surjective-bounded-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/p-adic2.pdf",
+    "place": "Lemma 1, PDF p.1, read online 2026-10-24; agent expansion for bounded scalar actions, automatic continuity and the injective norm bound. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Suppose $u$ is injective. Its image $S$ with the norm inherited from $N$ is a Banach $K$-space by step 3: every Cauchy sequence converges in $N$ and closedness puts the limit in $S$. The corestriction $u:M\\to S$ is continuous by step 2 and is surjective by the definition of $S$. Apply [lem-trf-banach-surjective-bounded-lifts] to obtain $H>0$ such that every $s\\in S$ has a preimage $m'$ with $\\|m'\\|_M\\le H\\|s\\|_N$. For $s=u(m)$, injectivity makes $m'=m$, giving $\\|m\\|_M\\le H\\|u(m)\\|_N$ as required.",
+   "uses": [
+    "lem-trf-banach-surjective-bounded-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kskedlaya.org/18.727/p-adic2.pdf",
+    "place": "Lemma 1, PDF p.1, read online 2026-10-24; agent expansion for bounded scalar actions, automatic continuity and the injective norm bound. Archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "lem-trf-banach-surjective-bounded-lifts",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kskedlaya.org/18.727/p-adic2.pdf",
+  "place": "Lemma 1, PDF p.1, read online 2026-10-24, with the finite-generator and bounded-lift argument; archival document absent locally, WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective homomorphism of finite Banach modules over an affinoid algebra has closed image and a bounded inverse onto its image",
+   "results": {
+    "t": "2026-10-24T08:47:23Z",
+    "tool": "leanfinder",
+    "query": "An injective homomorphism of finite Banach modules over an affinoid algebra has closed image and a bounded inverse onto its image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.isClosedEmbedding_of_injective",
+     "ContinuousLinearMap.coe_equivRange",
+     "ContinuousLinearMap.isClosed_range_iff_antilipschitz_of_injective",
+     "isClosedEmbedding_cfcₙHom_of_cfcHom",
+     "ContinuousLinearMap.coe_linearMap_equivRange",
+     "ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range",
+     "isClosedEmbedding_cfcₙAux",
+     "NumberField.InfinitePlace.Completion.isClosed_image_extensionEmbedding"
+    ],
+    "digest": "d6753c81b2e71c9b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional closed-embedding results require a field and finite dimension over that field; ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range assumes closedness instead of proving it for finite modules over affinoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Submodules of a finitely generated Banach module over a quotient of a Tate algebra are closed and module homomorphisms are strict",
+   "results": {
+    "t": "2026-10-24T08:48:40Z",
+    "tool": "leanfinder",
+    "query": "Submodules of a finitely generated Banach module over a quotient of a Tate algebra are closed and module homomorphisms are strict",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AdicCompletion.submodule",
+     "IsPrecomplete",
+     "AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
+     "Hausdorffification",
+     "SeparationQuotient.instModuleFinite",
+     "AdicCompletion.exists_smodEq_pow_add_one_smul",
+     "IsAdicComplete",
+     "Hausdorffification.instIsHausdorff"
+    ],
+    "digest": "2579e9b2399a652c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional closed-embedding results require a field and finite dimension over that field; ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range assumes closedness instead of proving it for finite modules over affinoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every linear map of finite Banach modules over a Tate affinoid algebra is continuous strict and has closed image",
+   "results": {
+    "t": "2026-10-24T08:48:33Z",
+    "tool": "leansearch",
+    "query": "Every linear map of finite Banach modules over a Tate affinoid algebra is continuous strict and has closed image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsModuleTopology.continuous_of_linearMap",
+     "LinearMap.continuousLinearMapClassOfFiniteDimensional",
+     "IsBoundedLinearMap.continuous",
+     "LinearPMap.IsClosable",
+     "linearMapOfTendsto",
+     "LinearMap.continuous_of_locally_bounded",
+     "LinearMap.continuous_iff_isClosed_ker",
+     "LinearPMap.closure"
+    ],
+    "digest": "a3673ac6653ce037"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional closed-embedding results require a field and finite dimension over that field; ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range assumes closedness instead of proving it for finite modules over affinoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosed\", \"Submodule\"",
+   "results": {
+    "t": "2026-10-24T08:48:34Z",
+    "tool": "loogle",
+    "query": "\"IsClosed\", \"Submodule\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Submodule.t3_quotient_of_isClosed",
+     "Submodule.isClosed_topologicalClosure",
+     "instCompleteSpaceSubtypeMemSubmoduleOfIsClosedCoe",
+     "IsClosed.submodule_topologicalClosure_eq",
+     "Submodule.isClosed_or_dense_of_isCoatom",
+     "Submodule.isClosedEmbedding_subtype",
+     "Submodule.isClosedEmbedding_subtypeL",
+     "ClosedSubmodule.isClosed"
+    ],
+    "digest": "c216057eddb88958"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional closed-embedding results require a field and finite dimension over that field; ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range assumes closedness instead of proving it for finite modules over affinoids."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|finite.*[Bb]anach|[Bb]anach.*module",
+   "results": {
+    "t": "2026-10-24T08:48:33Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|finite.*[Bb]anach|[Bb]anach.*module",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Calculus/BumpFunction/SmoothApprox.lean",
+     "Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean",
+     "Mathlib/Analysis/Normed/Module/Complemented.lean"
+    ],
+    "digest": "a96b34fac010e6e4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional closed-embedding results require a field and finite dimension over that field; ContinuousLinearMap.antilipschitz_of_injective_of_isClosed_range assumes closedness instead of proving it for finite modules over affinoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every linear map between finite Banach modules over a noetherian Banach algebra is continuous with closed image",
+   "results": {
+    "t": "2026-10-24T09:26:36Z",
+    "tool": "leanfinder",
+    "query": "Every linear map between finite Banach modules over a noetherian Banach algebra is continuous with closed image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.instModuleFinite",
+     "LinearMap.range_toContinuousLinearMap",
+     "LinearMap.continuous_of_finiteDimensional",
+     "LinearMap.isClosed_range_coe",
+     "LinearMap.continuousLinearMapClassOfFiniteDimensional",
+     "LinearPMap.IsClosed",
+     "ContinuousLinearMap.isClosed_image_coe_closedBall",
+     "ContinuousLinearMap.ker_closedComplemented_of_finiteDimensional_range"
+    ],
+    "digest": "13318b52a666f672"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional results require finite dimension over the field K, not module finiteness over A; closure and closed-submodule declarations do not prove closedness of S itself."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsModuleTopology.continuous_of_linearMap",
+   "results": {
+    "t": "2026-10-24T09:27:15Z",
+    "tool": "loogle",
+    "query": "IsModuleTopology.continuous_of_linearMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IsModuleTopology.continuous_of_linearMap"
+    ],
+    "digest": "9042ccf33867034f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsModuleTopology.continuous_of_linearMap assumes IsModuleTopology on the source; the Banach-to-module-topology comparison is not part of this declaration and it gives no closed-image conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every submodule of a finitely generated Banach module over a noetherian Banach algebra is closed",
+   "results": {
+    "t": "2026-10-24T09:27:16Z",
+    "tool": "leansearch",
+    "query": "Every submodule of a finitely generated Banach module over a noetherian Banach algebra is closed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.FG.of_le",
+     "isNoetherian_submodule'",
+     "isNoetherian_of_isNoetherianRing_of_finite",
+     "ClosedSubmodule.ctorIdx",
+     "ClosedSubmodule.noConfusionType",
+     "ClosedSubmodule.mk.noConfusion",
+     "IsNoetherian.noetherian",
+     "Submodule.ClosedComplemented.of_finiteDimensional"
+    ],
+    "digest": "72ce38903535818d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for analytic closedness; Submodule.FG.of_le matches algebraic finite generation only and is reused through existing lem-weil-pbc-noetherian-submodule-finite."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|isClosed.*[Ss]ubmodule|continuous_of_linearMap",
+   "results": {
+    "t": "2026-10-24T09:27:16Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|isClosed.*[Ss]ubmodule|continuous_of_linearMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean",
+     "Mathlib/Analysis/Normed/Module/FiniteDimension.lean",
+     "Mathlib/Analysis/Normed/Module/Complemented.lean",
+     "Mathlib/Analysis/Normed/Module/Complemented.lean",
+     "Mathlib/Analysis/Normed/Module/ContinuousInverse.lean",
+     "Mathlib/Analysis/Normed/Group/NullSubmodule.lean",
+     "Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean"
+    ],
+    "digest": "c751e16bd90490d0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: module-topology continuity and closed-submodule infrastructure do not establish closedness of submodules finite over a Tate quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Submodules of finite modules over a noetherian nonarchimedean Banach algebra are closed in every compatible Banach norm",
+   "results": {
+    "t": "2026-10-24T09:27:18Z",
+    "tool": "leanfinder",
+    "query": "Submodules of finite modules over a noetherian nonarchimedean Banach algebra are closed in every compatible Banach norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.closed_of_finiteDimensional",
+     "ClosedSubmodule.isClosed",
+     "ClosedSubmodule.instCanLiftSubmoduleToSubmoduleIsClosedCoe",
+     "ClosedSubmodule",
+     "ClosedSubmodule.isClosed'",
+     "Submodule.closure",
+     "Submodule.topologicalClosure_eq_self",
+     "Submodule.isClosed_topologicalClosure"
+    ],
+    "digest": "ce64f7e73fe2683b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finite-dimensional results require finite dimension over the field K, not module finiteness over A; closure and closed-submodule declarations do not prove closedness of S itself."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-spectral-banach-norm",
+  "date": "2026-10-24",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: The spectral norm gives the Banach topology of a reduced affinoid. Supporting input: Closed images and norm bounds for finite affinoid modules.",
+   "via": [
+    "lem-trf-affinoid-spectral-banach-norm",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-finite-module-strictness",
+  "worker": "stage1",
+  "summary": "Proved automatic continuity by finite generators and Banach bounded lifts; proved closedness by the explicit Kedlaya perturbation/geometric-tail argument with the stated bounded scalar actions; applied bounded lifts to the injective corestriction. Reused all algebraic and analytic tools: no new nodes. Statement unchanged.",
+  "blueprint": "Historical analytic support for the normalization chain under lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2 and the spectral/Banach norm comparison. Steps 1-4 supply precisely finite-module strictness without replacing any step of the current contracting-correspondence unit. Whole-blueprint searches affinoid, open mapping, finite Banach and closed submodule returned no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-fec767834",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-fec767834 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery is one commit with the item and its report, no new nodes, an unchanged statement, and def-weil-finitely-generated-module added to stmt_deps (correct). Step 1: the full statement of lem-trf-affinoid-polynomial-closed-point-comparison allows J=0, any n and F=K, and says C=K<T> is Noetherian; the step then proves quotients Noetherian and A^s complete explicitly. I traversed the 39 transitive dependencies of the three cited lemmas and the item is not among them, so there is no cycle. Step 2: the hypotheses of the bounded-lifts leaf (open mapping) are met: A^s is Banach because the quotient norm is a K-norm, M is Banach, and p is continuous by the c_M finite-sum bound. The estimate for u is correct. Step 3: B, the closure of S, is a complete A-submodule and is finite by the noetherian-submodule leaf (Stacks 00IK). I recomputed the perturbation: x_{j+1}=Σa_ji(b_i−f_i) with ‖x_{j+1}‖≤θ‖x_j‖ and ‖a_ji‖≤L_Bθ^j‖x‖. The nonarchimedean tails converge in A, and the limit gives x∈S. B=0 is handled. Step 4: S is Banach, the corestriction M→S is continuous and surjective, and injectivity gives H. Small cases: A=K finite-dimensional, multiplication by T on K<T> with H=1, and zero modules all hold. Route: everything stays in unit sk-i-curve-zero or uses leaves and definitions, so no tool_uses are needed. Duplicates: rg -L for Banach, open mapping, restricted series/Tate and Noetherian found none; I read quotient-norm-topology, tate-ideal-best-approximation, tate-banach-substitution, finite-dimensional-linear-homeomorphism and restricted-quotient-complete, and none states this. Sources: Kedlaya Lemma 1 and Bosch §1.4 Prop. 2(i) are not in literature/, so I could not check them at the cited places. They are listed as WANTED and proof_origin is agent; the proof is self-contained and I judged it on the mathematics. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.Module.AffinoidFiniteModuleStrictness",
+  "declaration": "RestrictedSeries.affinoid_finite_module_strictness",
+  "file": "lean/Sheaf/Analysis/Normed/Module/AffinoidFiniteModuleStrictness.lean",
+  "statement": "theorem affinoid_finite_module_strictness (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (A : Type v) [NormedCommRing A] [Nontrivial A] [Algebra K A] (hA : IsAffinoidQuotient K A (algebraMap K A)) (M : Type w) [NormedAddCommGroup M] [NormedSpace K M] [IsUltrametricDist M] [CompleteSpace M] [Module A M] [IsScalarTower K A M] [Module.Finite A M] (N : Type x) [NormedAddCommGroup N] [NormedSpace K N] [IsUltrametricDist N] [CompleteSpace N] [Module A N] [IsScalarTower K A N] [Module.Finite A N] (hM : ∃ c : ℝ, 0 < c ∧ ∀ (a : A) (m : M), ‖a • m‖ ≤ c * ‖a‖ * ‖m‖) (hN : ∃ c : ℝ, 0 < c ∧ ∀ (a : A) (n : N), ‖a • n‖ ≤ c * ‖a‖ * ‖n‖) (u : M →ₗ[A] N) : Continuous u ∧ IsClosed (Set.range u) ∧ (Function.Injective u → ∃ H : ℝ, 0 < H ∧ ∀ m : M, ‖m‖ ≤ H * ‖u m‖)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cb9163b3",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Only change to the item node is the added lean record; the statement field is verbatim the file signature. Clause-by-clause match: NontriviallyNormedField+IsUltrametricDist+CompleteSpace K; Nontrivial A; IsAffinoidQuotient K A (algebraMap K A), read in RestrictedSeriesPresentation (complete, surjective scalar-compatible map from the restricted series ring, quotient Gauss norm); Module.Finite A M/N; complete ultrametric NormedSpace K M/N with IsScalarTower K A; bounded actions with c>0; arbitrary u : M →ₗ[A] N; conclusions Continuous ∧ IsClosed range ∧ (Injective → ∃ H>0, ‖m‖≤H‖u m‖). No added assumptions; NormedCommRing holds automatically for the Tate quotient norm; universes u v w x free. Edge cases: M=0, N=0, zero and non-injective u, A=K (n=0). The proof plan is sound: affinoid_polynomial_closed_point_comparison at J=⊥ gives Noetherianity, Mathlib exists_preimage_norm_le gives bounded lifts, the Kedlaya perturbation is checked. H5/H6/H8/H9 are satisfied and the report has both required sections. No duplicate in Mathlib or the project's Lean. Kedlaya/Bosch are WANTED and not in literature, so they were judged on the mathematics. No file changed, so no compile."
+ }
+}

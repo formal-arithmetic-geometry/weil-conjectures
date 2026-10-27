@@ -1,0 +1,398 @@
+{
+ "id": "lem-sfb-space-chow-acyclic-full-support-witness",
+ "kind": "statement",
+ "title": "An acyclic faithful coherent Chow twist on an integral proper algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces over $S$ [def-trf-algebraic-space]. Modules and quasi-coherence are on the small etale ringed sites [def-trf-space-quasi-coherent-module], with module direct image and tensor pullback [def-trf-space-etale-module-functors]. Locally Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth]; Noetherian means additionally quasi-compact and quasi-separated (quasi-compact diagonal). Coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and let $g:Z\\to\\operatorname{Spec}A$ be proper, with $Z$ nonempty, reduced and irreducible. Proper has the chartwise and topological meaning [def-sfb-space-morphism-properties]; reduced means that etale scheme charts are reduced, and irreducible refers to the atlas point topology [def-a1-space-point-topology]. There exist integers $n,d\\geq0$, a scheme $T$, a proper surjective morphism $\\pi:T\\to Z$ and a closed immersion $j:T\\hookrightarrow\\mathbf P^n_A$ over $\\operatorname{Spec}A$ such that all of the following hold for these data, where $L=j^*\\mathcal O_{\\mathbf P^n_A}(1)$ is the pulled-back twisting sheaf [def-pc-projective-space-twist] and $G=\\pi_*(L^{\\otimes d})$, with tensor product [def-pur-sheaf-tensor-product]: (a) $(j,\\pi):T\\to\\mathbf P^n_A\\times_{\\operatorname{Spec}A}Z$ is a closed immersion; (b) $G$ is coherent, its support (the locus of nonzero geometric stalks) is all of $|Z|$, and $\\operatorname{Ann}_{\\mathcal O_Z}(G)=0$; (c) $g_*G$ is coherent and $R^qg_*G=0$ for every $q>0$. Projective space is [def-nagata-projective-space-base-change], closed immersion is [def-weil-closed-immersion], and surjectivity is on point spaces. The integer $d$ is part of the asserted data: the conclusions are not claimed for every $d$ or every such $(T,\\pi,j)$. Here the annihilator is the ideal of local functions killing the module, and higher direct images are the right derived functors in module sheaves computed by injective resolutions [def-sp-injective-resolutions].",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AR (lemma-proper-pushforward-coherent), construction for condition (3), from weak Chow to the full-support calculation; projective inputs Tags 089J (lemma-weak-chow) and 08AQ (lemma-kill-by-twisting); coherent.tex Tag 02O4 (lemma-locally-projective-pushforward). This is an existential projective-twist witness, not the universal proper direct-image theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-nagata-projective-space-base-change",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-injective-resolutions",
+  "def-trf-scheme-algebraic-space",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-module-support",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}A$. Every etale scheme chart $U\\to Z$ is locally of finite type over $B$, by the chartwise finite-type hypothesis on $g$. Applying pqf-lem-locnoeth-lft to $U\\to B$ shows that $Z$ is locally Noetherian. Properness makes $Z$ quasi-compact, and separatedness makes its diagonal over $B$ a closed immersion. Together with the quasi-compact absolute diagonal of $B$, the diagonal factorization makes $Z$ quasi-separated. Explicitly, after affine scheme tests the relevant diagonal factors are closed immersions and hence affine; their composite is quasi-compact. Thus $Z$ is Noetherian. Apply lem-sfb-space-weak-chow to obtain $n,T,\\pi$ and an immersion $j:T\\to\\mathbf P^n_A$ with $g\\pi=qj$, with $\\pi$ proper and universally surjective.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-weak-chow"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, condition (3), weak Chow paragraph; Tag 04ZK chart argument written out using the scheme locally-Noetherian theorem."
+   }
+  },
+  {
+   "text": "Write $h=g\\pi$, which is proper by composition. The projective-space projection $q:\\mathbf P^n_A\\to B$ is proper, hence separated. Proper cancellation applied to $qj=h$ makes $j$ proper; as $T$ and $\\mathbf P^n_A$ are schemes and $j$ is an immersion, lem-weil-pbc-proper-immersion-closed makes $j$ a closed immersion. The weak-Chow and composition nodes use topological quasi-compactness; we check the chart form of the statement, of lem-sfb-space-proper-base-change and of lem-sfb-space-proper-cancellation. Let $W$ be an affine scheme. For $W\\to B$, a finite affine cover $T=\\bigcup T_i$ of the quasi-compact scheme $T$ gives the finite affine cover $T_i\\times_BW$ of the scheme $T\\times_BW$, which is thus quasi-compact. For $w:W\\to Z$, the space $T\\times_ZW$ is the base change of the separated diagonal $\\Delta_g:Z\\to Z\\times_BZ$ along the scheme map $(\\pi,w):T\\times_BW\\to Z\\times_BZ$, so it is a closed subscheme of $T\\times_BW$ and quasi-compact. The separatedness, finite-type and universal-closedness clauses of the conventions agree. Hence $h$ and $\\pi$ are proper in the chart sense, and $\\pi$ is proper in the sense of the statement.",
+   "uses": [
+    "lem-sfb-space-proper-composition",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-sfb-space-proper-cancellation",
+    "lem-weil-pbc-proper-immersion-closed",
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, paragraph after weak Chow: the immersion is closed."
+   }
+  },
+  {
+   "text": "The graph $\\gamma:T\\to T\\times_B Z$ of $\\pi$ is the pullback of the closed diagonal $\\Delta_g:Z\\to Z\\times_B Z$. Hence it is a closed immersion: on every scheme test this is base change of a closed immersion. The map $T\\times_B Z\\to\\mathbf P^n_A\\times_B Z$ induced by $j$ is also a closed immersion, since its scheme tests are base changes of $j$. Composition, checked on these same scheme tests, gives the closed immersion $k=(j,\\pi):T\\to\\mathbf P^n_Z$ in (a). On each standard projective chart both $j^*\\mathcal O(1)$ and $k^*\\mathcal O(1)$ have bases whose transition ratio is $x_i/x_l$ pulled back to $T$. Identifying these bases gives $L=j^*\\mathcal O(1)\\cong k^*\\mathcal O(1)$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, graph and twist paragraph (correcting its displayed target); Tag 03KO graph square written out."
+   }
+  },
+  {
+   "text": "On a standard trivializing open of $L$ every nonnegative tensor power is free of rank one; hence $L^{\\otimes e}$ is quasi-coherent and coherent for all $e\\geq0$. Here $T$ is locally Noetherian because $h:T\\to B$ is a finite-type scheme morphism. Apply lem-sfb-space-projective-serre-vanishing to $k$ over the Noetherian space $Z$ and to $j$ over $B$, taking $F=\\mathcal O_T$, which is coherent by lem-sfb-space-noetherian-coherent-support. If the resulting thresholds are $a,b$, set $d=\\max(0,a,b)$. Then $M=L^{\\otimes d}$ satisfies $R^q\\pi_*M=0=R^qh_*M$ for every $q>0$. Put $G=\\pi_*M$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-projective-serre-vanishing",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, simultaneous applications of Tag 08AQ to the two embeddings."
+   }
+  },
+  {
+   "text": "We prove coherence using projective finiteness, independently of the general proper direct-image theorem. For an affine etale chart $U\\to Z$, put $T_U=T\\times_ZU$. It is a scheme because $U\\to Z$ is representable etale; the base change $k_U$ is a closed immersion $T_U\\hookrightarrow\\mathbf P^n_U$. The chart $U$ is locally Noetherian. The map $T_U\\to U$ is proper as a base change of $\\pi$, hence quasi-compact and separated. The restriction $M_U$ is locally free of rank one and therefore quasi-coherent of finite presentation (locally $M_U=\\mathcal O$ with the presentation $\\mathcal O^{\\oplus0}\\to\\mathcal O\\xrightarrow{1}M_U\\to0$). Module direct image commutes with this etale restriction. The scheme Zariski/etale equivalence identifies that direct image with the associated Zariski projective pushforward. Lem-pc-m1-projective-pushforward-finite-type-independent gives finite type for the latter. Quasi-coherence follows from the same equivalence's direct-image clause. On the locally Noetherian scheme $U$, pqf-lem-coherent-ft-locnoeth gives coherence. Thus $G$ is quasi-coherent with coherent restrictions to every such chart, which is precisely coherence on $Z$. The same argument with $j$ over the scheme $B$ proves that $h_*M$ is coherent.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-m1-projective-pushforward-finite-type-independent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, projective coherence input; coherent.tex Tag 02O4, lemma-locally-projective-pushforward, degree zero, on etale scheme charts."
+   }
+  },
+  {
+   "text": "Apply the relative Leray spectral sequence to $T\\xrightarrow{\\pi}Z\\xrightarrow{g}B$ and $M$. Its $E_2^{p,q}=R^pg_*R^q\\pi_*M$ is zero for $q>0$. For $q=0$ every outgoing differential on page $r\\geq2$ lands in row $1-r<0$, and every incoming differential starts in row $r-1>0$, so all are zero. Thus $E_\\infty^{p,0}=R^pg_*G$. In total degree $m$ the finite abutment filtration has just this potentially nonzero graded piece, so $R^mg_*G\\cong R^mh_*M$. The latter is zero when $m>0$ by our choice of $d$. For $m=0$ this gives $g_*G\\cong h_*M$, coherent by the preceding projective calculation. This proves (c).",
+   "uses": [
+    "lem-sfb-ringed-topos-relative-leray"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, relative Leray paragraph, with the one-row degeneration expanded."
+   }
+  },
+  {
+   "text": "The coordinate sections $s_i=j^*x_i$ of $L$ have nonvanishing opens covering $T$, by lem-weil-pbc-projective-ample-invertible. If $d>0$, their tensor powers generate $M$: where $s_i$ is a basis, so is $s_i^{\\otimes d}$. For $d=0$, use the section $1$ of $M=\\mathcal O_T$. Fix $z\\in|Z|$ and a point $t\\in T$ above it by surjectivity; choose a geometric point $\\bar t$ above $t$ and put $\\bar z=\\pi\\bar t$. Pick a generating global section $s$ of $M$ nonzero at $t$. Regard it as a global section of $G=\\pi_*M$. The counit $\\epsilon:\\pi^*\\pi_*M\\to M$ sends $\\pi^*s$ to $s$: this is the adjunction triangle identity for the section $\\mathcal O_T\\to M$. By lem-sfb-ringed-topos-pullback-stalk, $(\\pi^*G)_{\\bar t}=G_{\\bar z}\\otimes_{\\mathcal O_{Z,\\bar z}}\\mathcal O_{T,\\bar t}$. If $G_{\\bar z}$ were zero, the image of $\\pi^*s$ under the stalk of $\\epsilon$ would be zero, whereas $s$ is a basis at $t$. Hence $G_{\\bar z}\\ne0$. Stalk vanishing for a quasi-coherent module depends only on the underlying point, by lem-sfb-space-etale-chart-support. Thus $\\operatorname{Supp}(G)=|Z|$.",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-sfb-space-etale-chart-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, final global-generation paragraph, applied at each point instead of only the generic point; definitions of geometric stalk and vanishing of a germ."
+   }
+  },
+  {
+   "text": "Finally let $U=\\operatorname{Spec}R\\to Z$ be an affine etale chart. It is reduced by hypothesis. The coherent pullback $G_U$ has full ordinary support on $U$ by lem-sfb-space-etale-chart-support. Write $N=\\Gamma(U,G_U)$, a finite $R$-module. The support-annihilator formula gives $V(\\operatorname{Ann}_R N)=\\operatorname{Spec}R=V(0)$, so the radical-equality lemma gives $\\sqrt{\\operatorname{Ann}_R N}=\\sqrt0=0$, since $R$ is reduced. Therefore $\\operatorname{Ann}_R N=0$. On every principal open of $U$ the same argument applies, so the sheaf annihilator is zero on $U$. These etale charts cover $Z$, whence $\\operatorname{Ann}_{\\mathcal O_Z}G=0$. All required data are the same $n,d,T,\\pi,j$ chosen above; no universal assertion about arbitrary twists was used.",
+   "uses": [
+    "lem-sfb-space-etale-chart-support",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AR, last sentence about scheme-theoretic support, expanded on reduced etale affine charts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-weak-chow",
+  "lem-sfb-space-proper-composition",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sfb-space-proper-cancellation",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-products",
+  "def-pc-projective-space-twist",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-sfb-space-projective-serre-vanishing",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-m1-projective-pushforward-finite-type-independent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-ringed-topos-relative-leray",
+  "lem-weil-pbc-projective-ample-invertible",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "lem-sfb-space-etale-chart-support",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AR, verification of condition (3), weak Chow construction through final support calculation; graph and adjunction typos corrected, projective coherence on etale charts made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral algebraic space over a Noetherian affine scheme has a faithful coherent module with vanishing positive higher direct images obtained by a Chow projective cover and a positive twist",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective-spectrum properness, affine covers, integral scheme properties and localization results do not construct a Chow cover or a faithful acyclic coherent module on an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective-spectrum properness, affine covers, integral scheme properties and localization results do not construct a Chow cover or a faithful acyclic coherent module on an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "chow|Chow|Serre.*vanishing|serre.*vanishing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective-spectrum properness, affine covers, integral scheme properties and localization results do not construct a Chow cover or a faithful acyclic coherent module on an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective Chow cover and Serre vanishing construct an acyclic full support coherent sheaf on a proper algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X.OpenCover\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (elements with zero zeroth homogeneous component) is contained in the ideal generated by a set of hom\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{ι : Type*} (f : ι → A) {m : ι → ℕ} (f_deg : ∀ i, f i ∈ 𝒜 (m i)) (hm : ∀ i, 0 < m i)\\n  (hf : (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span (Set.range f)) : (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.cover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.AffineCover P) : X.Cover (precoverage P)\", \"doc\": \"Given a scheme $X$ and an affine cover $\\\\mathcal{U}$ satisfying a morphism property $P$, this constructs the covering sieve of $X$ in the precoverage defined by the intersection of jointly surjective \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective-spectrum properness, affine covers, integral scheme properties and localization results do not construct a Chow cover or a faithful acyclic coherent module on an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a coherent sheaf with zero annihilator and finite direct image and no positive coherent cohomology on an integral proper algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any integral scheme $X$, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain. This follows from the property that an integral scheme is both irreducible and reduced, ensur\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective-spectrum properness, affine covers, integral scheme properties and localization results do not construct a Chow cover or a faithful acyclic coherent module on an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsCoherent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern scheme affine covers or localization and do not provide the asserted Chow-twist witness for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective Chow cover and Serre vanishing construct an acyclic full support coherent sheaf on a proper algebraic space",
+   "results": "Hits: AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, SheafOfModules.QuasicoherentData.mk, AlgebraicGeometry.Scheme.AffineCover.cover, SheafOfModules.IsQuasicoherent.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern scheme affine covers or localization and do not provide the asserted Chow-twist witness for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral algebraic space over a Noetherian affine scheme admits a Chow cover whose twisted structure sheaf has coherent faithful acyclic pushforward",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern scheme affine covers or localization and do not provide the asserted Chow-twist witness for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a coherent sheaf with zero annihilator and vanishing positive higher direct images on a proper integral algebraic space",
+   "results": "Hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern scheme affine covers or localization and do not provide the asserted Chow-twist witness for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bChow\\b|\\bSerre\\b|serreVanishing|serre_vanishing",
+   "results": "Mathlib/AlgebraicGeometry: No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern scheme affine covers or localization and do not provide the asserted Chow-twist witness for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-coherent-higher-images",
+  "date": "2026-10-23",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 08AR (lemma-proper-pushforward-coherent), construction for condition (3), from weak Chow to the full-support calculation; projective inputs Tags 089J (lemma-weak-chow) and 08AQ (lemma-kill-by-twisting); coherent.tex Tag 02O4 (lemma-locally-projective-pushforward). This is an existential projective-twist witness, not the universal proper direct-image theorem.",
+   "via": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-chow-acyclic-full-support-witness",
+  "worker": "stage1",
+  "summary": "Reused weak Chow and all available generic geometry, site, projective finiteness and Leray inputs; added only the general algebraic-space projective Serre-vanishing statement. Chose one common nonnegative twist, proved projective coherence independently of proper coherence, and expanded full support and zero annihilator. Item statement unchanged. Normalized the inherited doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 08AR (lemma-proper-pushforward-coherent), construction for condition (3), from weak Chow to the full-support calculation; projective inputs Tags 089J (lemma-weak-chow) and 08AQ (lemma-kill-by-twisting); coherent.tex Tag 02O4 (lemma-locally-projective-pushforward). This is an existential projective-twist witness, not the universal proper direct-image theorem. Latest blueprint det-thm-sf-ctf-stability-direct-images paragraph (3) is the route context; the existing created-item chain has no recognized imported ancestor (ancestor command returns None), retained faithfully. The present split realizes its supporting Stacks 08AR condition-(3) Chow construction.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-pc-m1-projective-pushforward-finite-type-independent",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Generic geometry, projective finiteness, commutative algebra or ringed-site input for the Stacks 08AR construction; the unit has no replacement for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-m1-projective-pushforward-finite-type-independent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-5de31a989",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-5de31a989 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and Stacks spaces-cohomology 08AQ/08AR (condition (3), lines 3690-3790). This is a fresh split: there is no re-split note, and live still has the item unsplit. The statement is unchanged apart from removing the doubled TeX escapes; stmt_deps are identical. Steps 1-8 follow the source and are correct. The source's i' and g'/pi typos are fixed correctly with k=(j,pi). Leray has no flatness hypothesis, and its rows and filtration check out. 02O4 is applied on affine etale charts through the pushforward-restriction and Zariski/etale equivalence nodes, with 01XZ for coherence. Support is shown at every point by the counit triangle identity plus the pullback-stalk node. The annihilator vanishes via V(Ann)=Spec R and reducedness. One fault, now fixed (E1): weak Chow and proper-composition use topological quasi-compactness, while the item's 'proper pi', lem-sfb-space-proper-cancellation (applied to h) and lem-sfb-space-proper-base-change (step 5, applied to pi) need chart quasi-compactness. I added the bridge to step 2: T x_B W is quasi-compact because it has a finite affine cover, and T x_Z W is closed in it as the base change of the closed diagonal Delta_g. The added uses are already in proof_deps. The new node lem-sfb-space-projective-serre-vanishing is Stacks 08AQ and is true (etale-local reduction to 02O1). It is statement-only, its brackets equal its stmt_deps, and it is not a duplicate: lem-pc-relative-kill-by-twisting, m1-projective-graph-twist-vanishing and the pc Serre nodes cover schemes only and cannot apply over the space Z. Batch-5 flags: the closures of the flagged trf/sfb space nodes and def-trf-* contain only foundational space, descent and projective-bundle nodes plus generic pod algebra. Nothing in them is a step of the trace formula or of Poincare duality, so I accept every flag. I also accept the split_report tool_uses, which are generic. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceChowAcyclicFullSupportWitness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_chow_acyclic_fullSupport_witness",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceChowAcyclicFullSupportWitness.lean",
+  "statement": "theorem exists_chow_acyclic_fullSupport_witness {S : Scheme.{u}} (A : CommRingCat.{u}) [IsNoetherianRing A] (a : Spec A ⟶ S) (Z : AlgebraicSpace S) (g : Z ⟶ schemeSpace (Over.mk a)) (hg : MapIsProper g) (hne : Nonempty (Point Z.obj.obj)) (hred : ∀ U : Z.EtaleSite, IsReduced (Z.etaleForget.obj U)) (hirr : IrreducibleSpace (Point Z.obj.obj)) [HasDerivedCategory.{w} Z.SmallModules] [HasDerivedCategory.{w} (schemeSpace (Over.mk a)).SmallModules] : ∃ (n d : ℕ) (T : Over S) (j : T ⟶ Over.mk ((ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec A) ↘ Spec A) ≫ a)) (π : schemeSpace T ⟶ Z), MapIsProper π ∧ Function.Surjective (mapPoint π.hom.hom) ∧ IsClosedImmersion j.left ∧ ∃ (p : Over.mk ((ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec A) ↘ Spec A) ≫ a) ⟶ Over.mk a) (k : yoneda.obj T ⟶ Limits.pullback (yoneda.map p) g.hom.hom), p.left = (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec A) ↘ Spec A) ∧ k ≫ Limits.pullback.fst (yoneda.map p) g.hom.hom = yoneda.map j ∧ k ≫ Limits.pullback.snd (yoneda.map p) g.hom.hom = π.hom.hom ∧ IsRepresentableWith (fun _ _ f ↦ IsClosedImmersion f.left) k ∧ ∃ M : (schemeSpace T).Modules, M.IsQuasicoherent ∧ (∀ U : (schemeSpace T).EtaleSite, Nonempty (((schemeSpace T).schemeRestriction U).obj M ≅ (Scheme.Modules.tensorPullback (chartToScheme T (𝟙 _) U)).obj (((Scheme.Modules.tensorPullback j.left).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec A) 1)).tensorPow d))) ∧ ∃ G : Z.Modules, Nonempty (G ≅ (moduleDirectImage π).obj M) ∧ G.IsQuasicoherent ∧ (∀ U : Z.EtaleSite, RingedSpace.IsCoherent (Z.etaleForget.obj U).toRingedSpace ((Z.schemeRestriction U).obj G)) ∧ moduleSupport G = Set.univ ∧ (∀ (U : Z.EtaleSite) (r : Z.structureSheaf.obj.obj (op U)), (∀ (V : Z.EtaleSite) (f : V ⟶ U) (s : G.val.obj (op V)), Z.structureSheaf.obj.map f.op r • s = 0) → r = 0) ∧ ((moduleDirectImage g).obj G).IsQuasicoherent ∧ (∀ U : (schemeSpace (Over.mk a)).EtaleSite, RingedSpace.IsCoherent ((schemeSpace (Over.mk a)).etaleForget.obj U).toRingedSpace (((schemeSpace (Over.mk a)).schemeRestriction U).obj ((moduleDirectImage g).obj G))) ∧ ∀ q : ℕ, 0 < q → IsZero (((schemeSpace (Over.mk a)).smallModuleEquivalence.inverse).obj ((DerivedCategory.homologyFunctor (schemeSpace (Over.mk a)).SmallModules (q : ℤ)).obj ((derivedDirectImage g).obj ((DerivedCategory.singleFunctor Z.SmallModules 0).obj (Z.smallModuleRestriction.obj G)))))",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da542398e",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Read the item, the Stacks 08AR cond. (3) source, the delivered module and the dependency declarations (MapIsProper, IsRepresentableWith, schemeSpace, schemeRestriction, moduleSupport, derivedDirectImage/chartToScheme/smallModuleEquivalence, RingedSpace.IsCoherent, Scheme.Modules.tensorPow, ProjectiveSpace.twist). Hypotheses match the node exactly, with nothing stronger; the HasDerivedCategory.{w} instances are the derived direct image's interface and force no universe equality. Witness: n and d existential; T : Over S; pi proper and surjective on points; j a closed immersion into P^n (ULift Fin (n+1)); k pinned by both pullback projections, which forces j over Spec A; clause (a) is IsRepresentableWith closed-immersion k. L^d = tensorPow d of the pullback of O(1); M pinned by its restrictions to every chart including the identity chart; G iso to pi_*M. (b): quasi-coherent, chart-coherent with finite-type kernels, moduleSupport = univ (geometric germs), sheaf annihilator zero on all refinements. (c): g_*G quasi-coherent and chart-coherent; H^q of Rg_*(G[0]) zero for q>0. The scheme tensor is the same construction as cochainModulesMonoidal (H4 fine). The four added stmt_deps are landed nodes with lean records (brief-stage2 l.177); no dependency record changed. lean.statement is verbatim the file signature; one sorry; source and blueprint docstrings present; 8-step proof docstring; both report sections present. Item unsplit in live, no parallel delivery. No compile run (no file changed). Notes: hne is implied by hirr; the second reading was done in-thread by the same group."
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-finite-module-models",
+ "kind": "statement",
+ "title": "Bounded finite-module models of a successor quotient",
+ "statement": "Let X be a locally Noetherian quasi-compact scheme, (A,I) an adic coefficient datum, and M an arbitrary derived object over its actual completed coefficient sheaf [def-weil-pbc-adic-coefficient-datum]. Suppose isomorphisms phi identify the constant finite quotient rings with the actual ones and commute with their consecutive maps and completed scalar projections. Let V be an etale chart and a<=b. If the residue reduction and the nth reduction have etale-local constant finite-projective complex models in [a,b], in the precise predicate [def-weil-pbc-finite-perfect-quotient-model-data], then there is an etale covering sieve T of V such that on every W->V in T the (n+1)st reduction has a constant complex P of finite A/I^(n+2)-modules, with terms zero outside [a,b], and the specified actual derived restriction isomorphism. The terms of P need not be projective. The choice can satisfy Nonempty W or P=0, using P=0 on empty charts. No completeness or compatible trivializations are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094I (lemma-bounded, coefficient ideal filtration) and 094G (lemma-locally-constant); proetale.tex Tag 09C2 (lemma-describe-constructible-complexes)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient-filtration cohomology theorem gives vanishing of the actual successor cohomology outside [a,b] and finite etale-local models of each individual cohomology sheaf.",
+   "uses": [
+    "lem-weil-pbc-finite-quotient-finite-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient ring is finite by the adic datum. Apply finiteCoefficient_etale_bounded_models to that actual coefficient ring sheaf, its specified comparison phi_(n+1), and the actual successor reduction. This gives bounded finite-module complex models on nonempty charts of a covering sieve.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-etale-bounded-models",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an empty chart every object of its localized proetale site is empty, so the empty-cover sheaf axiom makes every module sheaf zero. The canonical cochain representative shows every derived object there is zero. Choose the zero algebraic complex; its terms are finite, it satisfies both strict bounds, and the unique zero-object isomorphism gives the specified restriction model. This establishes the empty-chart alternative.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-finite-coefficient-etale-bounded-models",
+  "lem-weil-pbc-finite-quotient-finite-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094I and 094G, via separate cohomology and etale-origin steps; empty-chart case proved from the empty-cover sheaf axiom by K4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded derived complex with finite locally constant cohomology is locally a bounded complex of finite modules, and Tor amplitude over a nilpotent quotient is detected after reduction",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, standard localization and bounded-complex lemmas. No finite constant-model or nilpotent Tor detection theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf or finite-coefficient statement in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect residue model implies finite projective constant complexes for finite adic quotient reductions",
+   "results": "BDeRhamPlus, AdicCompletion approximation and functoriality, IsAdicComplete.henselianRing, IsLocalRing.finite_quotient_iff.",
+   "date": "2026-10-27",
+   "verdict": "Only ring-theoretic completion and quotient results, no derived sheaf lifting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the project has the algebraic Tor-amplitude API."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*perfect|perfect.*nilpotent|residue.*torAmplitude",
+   "results": "Only perfect-field/nilpotence statements in Mathlib.LinearAlgebra.JordanChevalley and Mathlib.GroupTheory.IsPerfect. Project search found BoundedFiniteTorPerfect, SiteBoundedConstantModel and the abstract TorAmplitudeResidueIdeal API.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing algebraic bounded-finite-Tor perfectness theorem; neither coefficient-filtration sheaf statement is duplicated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectQuotientModels",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-residue-perfect-finite-quotient-models",
+   "place": "Bounded finite-module models of a successor quotient"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientFiniteModuleModels",
+  "file": "lean/Sheaf/Paper/FiniteQuotientFiniteModuleModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_finiteModule_models_succ",
+  "statement": "theorem finiteQuotient_finiteModule_models_succ\n    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (a b : ℤ) (hab : a ≤ b)\n    (hresidue : FinitePerfectModelsOn X d φ M 0 V a b) (n : ℕ)\n    (hprevious : FinitePerfectModelsOn X d φ M n V a b) :\n    ∃ T : Sieve V, T ∈ X.smallEtaleTopology V ∧\n      ∀ (W : X.Etale) (g : W ⟶ V), T g →\n        ∃ P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1 + 1))) ℤ,\n          P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧\n          (∀ i : ℤ, Module.Finite (A ⧸ d.ideal ^ (n + 1 + 1)) (P.X i)) ∧\n          Nonempty\n          (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d (n + 1))\n              ((toProEt X).obj W) ((completedAdicQuotientReduction X d (n + 1)).obj M) ≅\n            ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d (n + 1))\n              ((toProEt X).obj W) ((completedAdicDerivedChange X (φ (n + 1))).obj\n                (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P)))) ∧\n          (Nonempty W.left ∨ IsZero P)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ccff",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T052607-L-456495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T064455-L-2185477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

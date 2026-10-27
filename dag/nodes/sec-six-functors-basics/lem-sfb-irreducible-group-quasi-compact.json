@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-irreducible-group-quasi-compact",
+ "kind": "statement",
+ "title": "An irreducible group scheme over a field is quasi-compact",
+ "statement": "Let $k$ be a field [def-weil-field] and let $H$ be a group scheme over $k$ [def-sc-group-scheme]. If the underlying space $|H|$ is irreducible [def-weil-irreducible-components], then $H$ is quasi-compact: every open covering of $|H|$ has a finite subcover [def-weil-finite-type-morphism]. No finite-type, smoothness or reducedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7P (lemma-irreducible-group-scheme-over-field-qc)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose $K/k$ for $X=H$ by [lem-sfb-scheme-large-algclosed-jacobson], and put $G=H_K$. Base change the multiplication, unit and inverse; the group diagrams remain equalities by the fibre-product universal property [def-sc-group-scheme, def-pc-fibre-product]. We check irreducibility, without assuming geometric irreducibility of an arbitrary irreducible scheme. By [lem-sfb-group-local-minimal-prime], the reduced identity component $Z$ is geometrically irreducible. Here $H$ is irreducible, so its only irreducible component is the whole space and $Z=H_{\\mathrm{red}}$. By [lem-weil-pbc-reduction-universal-homeomorphism], $Z_K\\to H_K$ is a homeomorphism; $Z_K$ is irreducible by [def-pc-geometrically-irreducible], so $G$ is irreducible. Thus $G$ is an irreducible group scheme over $K$, is Jacobson, and all its closed points have residue field $K$.",
+   "uses": [
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "lem-sfb-group-local-minimal-prime",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7P, first paragraph; Tag 047M, lemma-group-scheme-field-geometrically-irreducible; Tag 0479 in varieties.tex."
+   }
+  },
+  {
+   "text": "The multiplication $m:G\\times_KG\\to G$ is open. Indeed the group diagrams [def-sc-group-scheme] make $s(x,y)=(xy,y)$ an isomorphism with inverse $s^{-1}(z,y)=(zy^{-1},y)$, since $(xy)y^{-1}=x$ and $(zy^{-1})y=z$ on every test scheme. Moreover $m=\\mathrm{pr}_1\\circ s$. The first projection is open by [lem-sc-scheme-over-field-universally-open], applied with the factors interchanged. An isomorphism induces a homeomorphism, so the displayed factorization proves openness of $m$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sc-scheme-over-field-universally-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047K, lemma-group-scheme-over-field-open-multiplication, the shear isomorphism; Morphisms Tag 0383, lemma-scheme-over-field-universally-open."
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $U\\subseteq G$: the unit supplies a point and the defining affine neighbourhoods of a scheme supply such a $U$ [def-pc-scheme]. The inverse $i$ is an isomorphism, since $i^2=\\mathrm{id}$ by [def-sc-group-scheme]. By [lem-weil-pbc-open-fibre-product], $U\\times_KU$ is an open subscheme of $G\\times_KG$. The automorphism $\\mathrm{id}\\times i$ therefore carries it to an open subset. Step 2 now says that the image $W$ of $d:U\\times_KU\\to G$, $(u,v)\\mapsto uv^{-1}$, is open.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7P, second paragraph; Tag 047K for the openness calculation."
+   }
+  },
+  {
+   "text": "Fix $g\\in G(K)$. Left translation $t_g(x)=gx$ has inverse $t_{g^{-1}}$ by the group diagrams [def-sc-group-scheme]. Thus $gU$ and $U$ are nonempty open subsets. Their intersection is nonempty by [def-weil-irreducible-components]: otherwise their closed complements would express the irreducible space as a union of two proper closed subsets. Since the closed points are dense and rational by step 1, choose a closed point $a$ in this intersection. Its residue-field isomorphism makes it a $K$-point; it factors through both open subschemes. Set $b=t_{g^{-1}}(a)\\in U(K)$. Then $a=gb$ and $d(a,b)=ab^{-1}=g$. Hence $W$ contains every $K$-point and therefore every closed point of $G$. If $G\\setminus W$ were nonempty, the Jacobson property of [lem-sfb-scheme-large-algclosed-jacobson] applied to this closed subset would put a closed point in it. Thus $d$ is surjective.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-irreducible-components",
+    "lem-sfb-scheme-large-algclosed-jacobson"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7P, second paragraph: intersect gU with U, then use rational closed points and the Jacobson property."
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spec}A$. By [lem-weil-pbc-fibre-product-affine-spectra], $U\\times_KU\\cong\\operatorname{Spec}(A\\otimes_KA)$ is affine. The projection $G=H_K\\to H$ is surjective by [lem-weil-pbc-surjective-base-change]: $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is surjective, since both spectra have one point [def-weil-affine-spectrum]. Composing this projection with the surjective map $d$ of step 4 gives a surjective morphism $\\operatorname{Spec}(A\\otimes_KA)\\to H$. Apply [lem-weil-pbc-quasicompact-affine-surjection] to obtain quasi-compactness of $H$, exactly the asserted finite-subcover property.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-quasicompact-affine-surjection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7P, first and last sentences of the proof; affine fibre product and surjective affine-source criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-sfb-group-local-minimal-prime",
+  "lem-sfb-scheme-large-algclosed-jacobson",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-quasicompact-affine-surjection",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7P, lemma-irreducible-group-scheme-over-field-qc, with the shear computation of Tag 047K written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible group scheme over a field is quasi compact",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  CompactSpace ↥X ↔ AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"The category of schemes in algebraic geometry has a terminal object, meaning there exists a scheme $ T $ such that for every scheme $ X $, there is a unique morphism $ X \\\\to T $.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], CompactSpace ↥X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme with irreducible underlying space is compact even without a finite type assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], CompactSpace ↥X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], CompactSpace ↥X\", \"doc\": \"Every quasi-affine scheme has an underlying topological space that satisfies the compactness property (every open cover has a finite subcover).\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsArtinianScheme X], CompactSpace ↥X\", \"doc\": \"Every Artinian scheme is a compact space, meaning its underlying topological space satisfies the finite subcover property for open covers.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], CompactSpace ↥X\", \"doc\": \"Every Noetherian scheme is a compact space, meaning its underlying topological space satisfies the finite subcover property for open covers.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  CompactSpace ↥X ↔ AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"The category of schemes in algebraic geometry has a terminal object, meaning there exists a scheme $ T $ such that for every scheme $ X $, there is a unique morphism $ X \\\\to T $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible group schemes over fields are quasi compact",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Set ↥Y), IsOpen U → IsCompact U → IsCompact (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' U)) →\\n    AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every open subset $ U \\\\subseteq Y $ that is quasi-compact, the preimage $ f^{-1}(U) $ is quasi-compact in $ X $, then $ f $ is a quasi-compact morphi\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": QuasiCompact f ↔ IsSpectralMap f\", \"doc\": \"A morphism of schemes is quasi-compact if and only if its underlying continuous map is a spectral map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], CompactSpace ↥X\", \"doc\": \"Every quasi-affine scheme has an underlying topological space that satisfies the compactness property (every open cover has a finite subcover).\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} [NoetherianSpace X] (f : X ⟶ Y) : QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] [CompactSpace Y] : QuasiCompact f ↔ CompactSpace X\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If the target scheme $Y$ is both quasi-separated and compact as a topological space, then the morphism $f$ is quasi-compact if and only if the source scheme \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [CompactSpace Y] : CompactSpace X\", \"doc\": \"If $ f: X \\\\to Y $ is a quasi-compact morphism of schemes and $ Y $ is a compact space (i.e., every open cover of $ Y $ has a finite subcover), then the domain scheme $ X $ is also a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffineHom f] : QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"CompactSpace\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]rreducible|[Qq]uasi[Cc]ompact|CompactSpace",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"110\", \"text\": \"      refine subsingleton_image_closure_of_finite_of_isPreirreducible\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"116\", \"text\": \"          ((IrreducibleSpace.isIrreducible_univ _).image α.left\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"117\", \"text\": \"              α.left.continuous.continuousOn).isPreirreducible\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"68\", \"text\": \"    (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) (g := g)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible group scheme over any field is quasi compact without finite type",
+   "results": "{\"t\": \"2026-10-23T13:20:59Z\", \"tool\": \"leanfinder\", \"query\": \"An irreducible group scheme over any field is quasi compact without finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.compactSpace_iff_quasiCompact\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"16af54cf67e91025\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine/quasi-compact scheme facts and ordinary topological-group facts do not give quasi-compactness of an arbitrary irreducible group scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible|quasiCompact|CompactSpace",
+   "results": "{\"t\": \"2026-10-23T13:30:01Z\", \"tool\": \"grep\", \"query\": \"irreducible|quasiCompact|CompactSpace\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"f1c5064b11ec6e61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine/quasi-compact scheme facts and ordinary topological-group facts do not give quasi-compactness of an arbitrary irreducible group scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible group schemes over fields are quasi compact",
+   "results": "{\"t\": \"2026-10-23T13:30:02Z\", \"tool\": \"leansearch\", \"query\": \"Irreducible group schemes over fields are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"2bb83090efd64edb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine/quasi-compact scheme facts and ordinary topological-group facts do not give quasi-compactness of an arbitrary irreducible group scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"CompactSpace\"",
+   "results": "{\"t\": \"2026-10-23T13:30:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"CompactSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine/quasi-compact scheme facts and ordinary topological-group facts do not give quasi-compactness of an arbitrary irreducible group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme with an irreducible underlying space has a compact underlying space",
+   "results": "{\"t\": \"2026-10-23T13:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme with an irreducible underlying space has a compact underlying space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsArtinianScheme.toCompactSpace\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.compactSpace_iff_exists\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.IsAffineOpen.isCompact\"], \"digest\": \"41058fdcb10d1258\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine/quasi-compact scheme facts and ordinary topological-group facts do not give quasi-compactness of an arbitrary irreducible group scheme"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-algebraic-group-identity-component",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: The identity component and smooth reduction of a locally algebraic group. Input in the identity-component proof: quasi-compactness applied after the irreducible open component has been made a group scheme",
+   "via": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-irreducible-group-quasi-compact",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0B7P with arbitrary field extension and no finite-type assumption. Reused the neutral geometrically irreducible component and universal reduction homeomorphism, proved the open multiplication shear calculation explicitly, covered the group by the affine difference map using rational closed points, and descended via a surjective affine source. Reused the concurrently landed large-field Jacobson input specializing 0479; no new nodes. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: The identity component and smooth reduction of a locally algebraic group. Input in the identity-component proof: quasi-compactness applied after the irreducible open component has been made a group scheme",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic universal topology of the reduction, used only to transfer irreducibility of the neutral reduced component after scalar extension; the unit has no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-f2dbb6410",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-f2dbb6410 (reviewer sub-agent of L); spot-checked: Read Stacks 0B7P in full, together with its inputs 047M (and its proof, which does not use 0B7P, so no cycle), 047K, 0383 and 0479. All tags match tags/tags. The statement is unchanged from the base and agrees with 0B7P: no finite-type hypothesis, no weakening. There are no new nodes and no repair note, so this is not a re-split. Step 1: lem-sfb-scheme-large-algclosed-jacobson (landed by Q57, same unit) applied to X=H gives K algebraically closed with closed points dense in every closed subset and rational. G=H_K is irreducible because the component through e is all of |H|, so it equals H_red, which is geometrically irreducible by lem-sfb-group-local-minimal-prime; the reduction universal homeomorphism then transfers this to H_K. The tool use of that generic reduction node (unit sk-thm-p1) is declared and I accept it. Step 2: the shear s(x,y)=(xy,y) is an isomorphism and m=pr1∘s, with pr1 open by lem-sc-scheme-over-field-universally-open; correct. Step 3: U×U is open by lem-weil-pbc-open-fibre-product, id×i is an automorphism, so the image W of d is open. Step 4: gU∩U≠∅ by irreducibility; a rational closed point a in it and b=g⁻¹a give ab⁻¹=g; then density of closed points applied to the closed set G∖W gives W=G. Step 5: Spec(A⊗A)→G→H is surjective (base change of Spec K→Spec k), so H is quasi-compact by the affine-surjection criterion. proof_deps equals the union of uses. A DAG search for 0B7P, 047K, 0479 and irreducible group schemes found no duplicate. Edge cases checked: trivial group, μ_p and α_p, infinite-type groups, μ_3 over ℚ (reducible). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IrreducibleGroupQuasiCompact",
+  "declaration": "AlgebraicGeometry.compactSpace_of_irreducible_groupScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/IrreducibleGroupQuasiCompact.lean",
+  "statement": "theorem compactSpace_of_irreducible_groupScheme {k : Type u} [Field k] (H : Over (Spec (CommRingCat.of k))) [GrpObj H] [IrreducibleSpace H.left] : CompactSpace H.left",
+  "branch": "sheaf-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b5a79e85",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Single theorem compactSpace_of_irreducible_groupScheme {k} [Field k] (H : Over (Spec (.of k))) [GrpObj H] [IrreducibleSpace H.left] : CompactSpace H.left, proof sorry. It matches node and Stacks 0B7P clause by clause: GrpObj on Over Spec k is the reviewed def-sc-group-scheme representation, and the fibre-product instance from Pullbacks.lean is reachable through public imports; CompactSpace is the node's finite-subcover conclusion. No extra hypotheses or universe restriction; edge cases (empty excluded, non-reduced, infinite type, any characteristic) covered. Docstrings carry source place, blueprint tag and five proof steps; lean.statement verbatim; node changed only by the lean record; other snapshot nodes identical to side-live; report has Worker report and Second reading sections. No duplicate declaration found. No findings; not compiled since nothing was changed."
+ }
+}

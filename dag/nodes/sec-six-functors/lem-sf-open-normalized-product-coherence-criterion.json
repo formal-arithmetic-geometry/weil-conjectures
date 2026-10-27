@@ -1,0 +1,330 @@
+{
+ "id": "lem-sf-open-normalized-product-coherence-criterion",
+ "kind": "statement",
+ "title": "Triple pasting of normalized open product comparisons",
+ "statement": "Let $A$ be a finite commutative ring and $B$ a scheme; all schemes and morphisms over $B$ may be arbitrary. Work on small pro-etale sites with the ordinary unbounded constant-$A$ module derived categories $D_A(V)$ and the actual pullbacks, derived tensor, pullback composition, tensor/pullback comparisons, section-normalized open units $\\eta^v$ and unique-left-adjoint open composition comparisons of [def-sf-finite-open-tensor-operations]. For open immersions $j:X\\hookrightarrow\\bar X$, $k:Y\\hookrightarrow\\bar Y$ over $B$ and $K\\in D_A(X)$, $L\\in D_A(Y)$ put $Z=\\bar X\\times_B\\bar Y$, $T=X\\times_BY$, $u=j\\times_Bk:T\\hookrightarrow Z$, and\n$$H_{j,k}(K,L)=L\\bar p^*j_!K\\otimes_A^LL\\bar q^*k_!L,\\qquad D_{j,k}(K,L)=Lp^*K\\otimes_A^LLq^*L,$$\nwhere $\\bar p,\\bar q$ are the projections of $Z$ and $p,q$ those of $T$; write $F\\boxtimes G$ for the derived tensor of the two projection pullbacks. Call an isomorphism $e:H_{j,k}(K,L)\\xrightarrow{\\sim}u_!D_{j,k}(K,L)$ normalized if $u^*e=\\eta^u_{D_{j,k}(K,L)}\\circ r$, where $r:u^*H_{j,k}(K,L)\\xrightarrow{\\sim}D_{j,k}(K,L)$ is the canonical pullback/tensor comparison followed by the restricted inverse open units of $j$ and $k$.\n\nLet $l:W\\hookrightarrow\\bar W$ be a third open immersion over $B$, $M\\in D_A(W)$, $v=j\\times_Bk\\times_Bl$, $H_3=j_!K\\boxtimes k_!L\\boxtimes l_!M$ and $D_3=K\\boxtimes L\\boxtimes M$. Suppose four normalized isomorphisms are given: $e_{j,k}$ at $(K,L)$, $e_{k,l}$ at $(L,M)$, $e_{j\\times k,l}$ at $(K\\boxtimes L,M)$ and $e_{j,k\\times l}$ at $(K,L\\boxtimes M)$. No formula for them is assumed. Define $F$ by first $e_{j,k}\\boxtimes1$ and then $e_{j\\times k,l}$, and $G$ by first $1\\boxtimes e_{k,l}$ and then $e_{j,k\\times l}$. The expressions include the canonical projection-pullback tensor comparisons and are regarded as maps $H_3\\to v_!D_3$ by the derived tensor associators, the canonical identification of the iterated fibre products and the normalized open composition comparisons. Then $F$ and $G$ are isomorphisms, $v^*F=v^*G=1_{D_3}$ after these specified identifications, restriction along $v$ is injective on morphisms $H_3\\to v_!D'$ for every $D'\\in D_A(X\\times_BY\\times_BW)$, and $F=G$. Here the derived associator is the one represented on flat-term K-flat tensor models by $((x\\otimes y)\\otimes z)\\mapsto x\\otimes(y\\otimes z)$, and the tensor comparison under restriction sends these tensor sections to the same sections. No faithfulness of restriction on arbitrary ambient sources is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii) (triple product) and the symmetry paragraph: open external tensor identification of the iterated products; returned item step 8 (triple restriction and pasting) with the faithfulness argument of returned step 6 for the triple source; agent refinement with Stacks sites-cohomology.tex Tag 0GL1 (lemma-j-shriek-and-tensor) as the open tensor input"
+ },
+ "stmt_deps": [
+  "def-sf-finite-open-tensor-operations",
+  "def-sf-open-external-product-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Put $a=j\\times_Bk$, $b=k\\times_Bl$ and $T_3=X\\times_BY\\times_BW$. Use the left bracketing for $D_3$ and let $r_3:v^*H_3\\xrightarrow{\\sim}D_3$ be restriction/tensor comparison followed by the three inverse open units. All these units are invertible by [lem-sf-open-tensor-normalization], applicable to arbitrary schemes and constant ring sheaves $A$. The open composition comparisons in [def-sf-finite-open-tensor-operations] preserve these identifications: for composable opens $i,j$, write $\\delta:(ji)^*\\xrightarrow{\\sim}i^*j^*$ and $c:j_!i_!\\xrightarrow{\\sim}(ji)_!$. The composite unit is $i^*(\\eta^j_{i_!N})\\circ\\eta^i_N$ by [def-weil-pbc-composite-adjunction], and [lem-weil-pbc-conjugate-iso-unit-equation] gives\n$$i^*j^*(c_N)\\circ i^*(\\eta^j_{i_!N})\\circ\\eta^i_N=\\delta_{(ji)_!N}\\circ\\eta^{ji}_N.$$\nThus replacing iterated extension by composite extension introduces exactly the displayed unit, rather than an unspecified automorphism.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "lem-sf-open-tensor-normalization",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), triple products; agent expansion for the specified normalized open comparisons"
+   }
+  },
+  {
+   "text": "The two bracketings give the same $r_3$ after the prescribed associator. Indeed the associator and restriction/tensor comparison in the statement send $((x\\otimes y)\\otimes z)$ in either order to $x|_{T_3}\\otimes(y|_{T_3}\\otimes z|_{T_3})$; applying the inverse units replaces the three restricted factors by their original sections. These are precisely the native associator formulas of [lem-sf-ringed-tensor-complex-constraints]. Multilinearity, sheafification, and the direct-sum total tensor extend the equality from these generators to complex maps. The flat-term K-flat model computation and preservation under pullback in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] apply to each projection and open restriction. The equivalence of resolving representatives with the derived category in [lem-weil-pbc-site-derived-tensor-descent] carries this equality to the specified derived comparisons; essential surjectivity in each variable suffices to test the resulting natural maps on these models. Pullback-composition comparisons merely identify the same section pulled back along the same composite projection, by their definition in [def-sf-finite-open-tensor-operations]. Consequently no sign or additional comparison remains in rebracketing $r_3$; no factors are permuted.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), triple products; agent expansion for the specified normalized open comparisons"
+   }
+  },
+  {
+   "text": "Every factor in $F$ and $G$ is an isomorphism: the four $e$'s are so by hypothesis, pullback and tensor functors preserve isomorphisms, and the remaining comparisons are specified isomorphisms. To compute $v^*F$, first restrict the normalization $a^*e_{j,k}=\\eta^a_{K\\boxtimes L}\\circ r_{j,k}$ along $T_3\\to X\\times_BY$, and tensor it with the restricted third factor. For the next arrow the normalization of $e_{a,l}$ applies $\\eta^v_{D_3}$ after $r_{a,l}$. By definition $r_{a,l}$ contains the pullback of $(\\eta^a_{K\\boxtimes L})^{-1}$ and the inverse unit of $l$. Naturality of the tensor/pullback comparison moves the preceding restricted $e_{j,k}$ inside this tensor. The adjacent $\\eta^a$ and $(\\eta^a)^{-1}$ cancel. The remaining map is exactly $\\eta^v_{D_3}\\circ r_3$. Similarly, for $G$ use $b^*e_{k,l}=\\eta^b_{L\\boxtimes M}\\circ r_{k,l}$; the next $r_{j,b}$ contains $(\\eta^b_{L\\boxtimes M})^{-1}$, which cancels that unit. The remaining map is again $\\eta^v_{D_3}\\circ r_3$ by step 2. Any open composition comparisons satisfy the unit equation of step 1. Hence\n$$v^*F=v^*G=\\eta^v_{D_3}\\circ r_3,$$\nwhich is $1_{D_3}$ after the specified source and target identifications. This uses only the four normalization equations, with no formula or naturality assumption on the supplied $e$'s.",
+   "uses": [
+    "def-sf-finite-open-tensor-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), triple products; agent expansion for the specified normalized open comparisons"
+   }
+  },
+  {
+   "text": "Let $D'\\in D_A(T_3)$ and $h,h':H_3\\to v_!D'$ with $v^*h=v^*h'$. Since $F$ is invertible, precomposition with $F^{-1}$ identifies these maps with maps $v_!D_3\\to v_!D'$. Full faithfulness of $v_!$, from [lem-sf-open-tensor-normalization], gives unique $t,t':D_3\\to D'$ such that $h\\circ F^{-1}=v_!t$ and $h'\\circ F^{-1}=v_!t'$. Applying $v^*$ and using equality of the restrictions gives $v^*v_!t=v^*v_!t'$. Naturality of the invertible open unit gives\n$$t=(\\eta^v_{D'})^{-1}\\circ v^*v_!t\\circ\\eta^v_{D_3}=(\\eta^v_{D'})^{-1}\\circ v^*v_!t'\\circ\\eta^v_{D_3}=t'.$$\nIt follows that $h=h'$. Thus restriction is injective on exactly the asserted hom set. The argument uses the isomorphism $H_3\\cong v_!D_3$ just established, not faithfulness on arbitrary ambient sources.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), triple products; agent expansion for the specified normalized open comparisons"
+   }
+  },
+  {
+   "text": "Apply step 4 with $D'=D_3$, $h=F$ and $h'=G$. Their restrictions agree by step 3, so $F=G$. Together with their invertibility and the explicit restriction identity from step 3, this proves every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (ii), triple products; agent expansion for the specified normalized open comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-open-tensor-operations",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (ii), triple products: explicit normalization, unit cancellation, and essential-image faithfulness argument; ringed tensor inputs from Stacks Tags 03DI and 0GL1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|open.*tensor.*coheren|tensor.*open.*coheren",
+   "results": "No hits.  The hits concern abstract diagram external products, Day convolution, graded module tensors or open structure-sheaf maps; none states uniqueness and triple coherence for a supplied family of normalized derived open-product comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FullyFaithful\", \"Monoidal\"",
+   "results": "CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithfulι  The hits concern abstract diagram external products, Day convolution, graded module tensors or open structure-sheaf maps; none states uniqueness and triple coherence for a supplied family of normalized derived open-product comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized external tensor comparison families for open immersions are symmetric and associative by faithful restriction",
+   "results": "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict_assoc; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.app_inv_app'_assoc; AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp_assoc; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_assoc; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'  The hits concern abstract diagram external products, Day convolution, graded module tensors or open structure-sheaf maps; none states uniqueness and triple coherence for a supplied family of normalized derived open-product comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of open extension by zero detects equality of the two bracketings of external tensor product comparisons",
+   "results": "CategoryTheory.MonoidalCategory.externalProductCompDiagIso; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app; ModuleCat.extendScalarsComp_hom_app_one_tmul; CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.MonoidalCategory.prodCompExternalProduct_hom_app; CategoryTheory.tensorLeftHomEquiv_tensor  The hits concern abstract diagram external products, Day convolution, graded module tensors or open structure-sheaf maps; none states uniqueness and triple coherence for a supplied family of normalized derived open-product comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of external tensor isomorphisms to extension by zero restricting to identity is unique and satisfies signed symmetry and triple associativity",
+   "results": "PiTensorProduct.Eqv; PiTensorProduct.ofDirectSumEquiv_tprod_lof; GradedTensorProduct.auxEquiv; TensorProduct.gradedComm; finsuppTensorFinsuppLid_self; TensorProduct.directSum; PiTensorProduct.ofDirectSumEquiv_symm_lof_tprod; PiTensorProduct.ofDirectSumEquiv_tprod_apply  The hits concern abstract diagram external products, Day convolution, graded module tensors or open structure-sheaf maps; none states uniqueness and triple coherence for a supplied family of normalized derived open-product comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized external tensor isomorphisms for open immersions satisfy associativity because restriction is faithful on extension by zero objects",
+   "results": {
+    "t": "2026-10-22T08:32:42Z",
+    "tool": "leanfinder",
+    "query": "Normalized external tensor isomorphisms for open immersions satisfy associativity because restriction is faithful on extension by zero objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'_assoc",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc",
+     "AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc",
+     "AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp_assoc",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp"
+    ],
+    "digest": "ff89ee4edb2520e5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|open.*tensor.*coheren|tensor.*open.*coheren",
+   "results": {
+    "t": "2026-10-22T08:33:17Z",
+    "tool": "grep",
+    "query": "extensionByZero|extension_by_zero|open.*tensor.*coheren|tensor.*open.*coheren",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of normalized derived external tensor comparisons for open extension by zero detected by restriction",
+   "results": {
+    "t": "2026-10-22T08:33:17Z",
+    "tool": "leansearch",
+    "query": "Associativity of normalized derived external tensor comparisons for open extension by zero detected by restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.enorm_assoc",
+     "Algebra.TensorProduct.assoc",
+     "normalize_associated",
+     "normalize_associated_iff",
+     "CategoryTheory.Abelian.Ext.comp_assoc_of_second_deg_zero",
+     "TensorProduct.norm_assoc",
+     "CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero",
+     "normalize_eq_normalize_iff_associated"
+    ],
+    "digest": "c6515011abd29859"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FullyFaithful\", \"Monoidal\"",
+   "results": {
+    "t": "2026-10-22T08:33:17Z",
+    "tool": "loogle",
+    "query": "\"FullyFaithful\", \"Monoidal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithfulι"
+    ],
+    "digest": "335ba1e37bb08941"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two bracketings of an external product of extension by zero comparisons agree after applying a fully faithful adjunction unit",
+   "results": {
+    "t": "2026-10-22T08:33:50Z",
+    "tool": "leanfinder",
+    "query": "Two bracketings of an external product of extension by zero comparisons agree after applying a fully faithful adjunction unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalCategory.ExternalProduct.extensionUnitRight",
+     "CategoryTheory.MonoidalCategory.ExternalProduct.extensionUnitLeft",
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app",
+     "CategoryTheory.expComparison",
+     "CategoryTheory.MonoidalCategory.prodCompExternalProduct_hom_app",
+     "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+     "CategoryTheory.expComparison_whiskerLeft"
+    ],
+    "digest": "5d0c30dd2b3a42d0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-external-tensor-normalization",
+  "date": "2026-10-22",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Clause (ii) and the symmetry paragraph: open external tensor identification of the iterated triple products; returned item step 8 (triple restriction and pasting)",
+   "via": [
+    "lem-sf-open-external-tensor-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-open-normalized-product-coherence-criterion",
+  "worker": "stage1",
+  "group": "Q156",
+  "summary": "Proved the conditional triple coherence directly using the four supplied normalization equations. Wrote out the associator generator calculation, the open-composition unit equation and cancellation, and the hom-set faithfulness argument using the constructed isomorphism of the source with an open extension. No statement change or new node.",
+  "blueprint": "Realizes clause (ii) of lem-sf-kunneth-coherence for the open external tensor part of the compactification route, through lem-sf-open-external-tensor-normalization; does not use that parent as an input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Unit equation for the unique-left-adjoint open compositor; a generic adjunction tool. No node in this unit states this general input."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Native tensor associator on generators; a generic ringed-site tensor computation. No node in this unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Flat-term K-flat computation and preservation by arbitrary ringed pullback. No node in this unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Equivalence of resolving representatives with the derived category for descent of the explicit comparison equality. No node in this unit states this general input."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The arbitrary-ringed-site statement gives invertible open units and full faithfulness of derived extension, for arbitrary schemes. Used as a generic open-adjunction tool, without invoking the external-product theorem under construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-ce0126c42",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-ce0126c42 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. This is an ordinary one-level split of a node Q142 created today (no re-split note): 0 new nodes, statement and stmt_deps unchanged. Statement check: the normalized condition u^*e = η^u∘r is well typed, and the four hypotheses are exactly the four maps the parent's step 4 supplies. The injectivity clause holds only for sources isomorphic to v_!D_3, and the statement says so explicitly. Small cases checked: empty opens, A=0, identity opens, unbounded objects. Step 1: the composite-adjunction unit together with conjugate-iso-unit-equation (L1=j_!i_!, R1=i^*j^*, δ=pullComp) gives the displayed equation, in the same direction as comp in def-sf-finite-open-tensor-operations. Step 2: the associator formula from lem-sf-ringed-tensor-complex-constraints, preservation of K-flat models from ringed-topoi-derived-tensor-pullback and descent via site-derived-tensor-descent. It is compressed but sound; the trifunctor case follows one variable at a time from the equivalence clause. Step 3: the η^a and η^b cancellations hold, using only the four normalization equations. Step 4: full faithfulness and unit naturality give t=(η^v)^{-1}∘v^*v_!t∘η^v; not circular, since F is invertible on its own. Step 5 is direct. No cycle: the parent is outside the closure of the cited nodes. No duplicate: the triple-compactification-normal-form node and the binary open-product-swap and product-compactification nodes differ. Source is blueprint lem-sf-kunneth-coherence clause (ii), agent-marked; 0GL1 appears only as context; no SGA. Mathlib searches cover all three kinds. Tool_uses accepted for open-tensor-normalization, ringed-tensor-constraints, derived-tensor-pullback and tensor-descent as generic tools. Advisory: the citations.json mentioned in the report is not part of the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenNormalizedProductCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenExternalTensor.NormalizedProduct.coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.NormalizedProduct.IsNormalized",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.NormalizedProduct.leftPaste",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.NormalizedProduct.rightPaste",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.NormalizedProduct.coherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenNormalizedProductCoherence.lean",
+  "statement": "theorem coherence (B : Scheme.{u}) (a : Xb ⟶ B) (b : Yb ⟶ B) (c : Wb ⟶ B) (d₁₂ : Diagram j k T₁₂ Tb₁₂) (d₂₃ : Diagram k l T₂₃ Tb₂₃) (dL : Diagram d₁₂.u l T Tb) (dR : Diagram j d₂₃.u T Tb) (t : Triple d₁₂ d₂₃ dL dR) (_bar₁₂ : IsPullback d₁₂.pb d₁₂.qb a b) (_inner₁₂ : IsPullback d₁₂.p d₁₂.q (j ≫ a) (k ≫ b)) (_bar₂₃ : IsPullback d₂₃.pb d₂₃.qb b c) (_inner₂₃ : IsPullback d₂₃.p d₂₃.q (k ≫ b) (l ≫ c)) (_barL : IsPullback dL.pb dL.qb (d₁₂.pb ≫ a) c) (_innerL : IsPullback dL.p dL.q (d₁₂.p ≫ j ≫ a) (l ≫ c)) (_barR : IsPullback dR.pb dR.qb a (d₂₃.pb ≫ b)) (_innerR : IsPullback dR.p dR.q (j ≫ a) (d₂₃.p ≫ k ≫ b)) (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) (e₁₂ : ambient A d₁₂ K L ≅ (finiteShriek A d₁₂.u).obj (inside A d₁₂ K L)) (e₂₃ : ambient A d₂₃ L M ≅ (finiteShriek A d₂₃.u).obj (inside A d₂₃ L M)) (eL : ambient A dL (inside A d₁₂ K L) M ≅ (finiteShriek A dL.u).obj (inside A dL (inside A d₁₂ K L) M)) (eR : ambient A dR K (inside A d₂₃ L M) ≅ (finiteShriek A dR.u).obj (inside A dR K (inside A d₂₃ L M))) (_h₁₂ : IsNormalized A d₁₂ K L e₁₂) (_h₂₃ : IsNormalized A d₂₃ L M e₂₃) (_hL : IsNormalized A dL (inside A d₁₂ K L) M eL) (_hR : IsNormalized A dR K (inside A d₂₃ L M) eR) : IsIso (leftPaste A d₁₂ dL K L M e₁₂ eL) ∧ IsIso (rightPaste A t K L M e₂₃ eR) ∧ (tripleRestriction A d₁₂ dL K L M ≫ (FiniteOpenProduct.pull A dL.u).map (leftPaste A d₁₂ dL K L M e₁₂ eL) = (FiniteOpenProduct.adj A dL.u).unit.app (tripleInside A d₁₂ dL K L M)) ∧ (tripleRestriction A d₁₂ dL K L M ≫ (FiniteOpenProduct.pull A dL.u).map (rightPaste A t K L M e₂₃ eR) = (FiniteOpenProduct.adj A dL.u).unit.app (tripleInside A d₁₂ dL K L M)) ∧ (∀ D' : FiniteD A T, Function.Injective (fun h : tripleAmbient A d₁₂ dL K L M ⟶ (finiteShriek A dL.u).obj D' => (FiniteOpenProduct.pull A dL.u).map h)) ∧ leftPaste A d₁₂ dL K L M e₁₂ eL = rightPaste A t K L M e₂₃ eR",
+  "branch": "sheaf-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86567ffcd",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Read item, both stmt_deps (unchanged vs live), the live OpenExternalTensorNormalization defs and the theorem sibling node. Clause by clause: arbitrary schemes over B, finite A with FiniteD (published convention), 8 IsPullback cones + Triple for the canonical iterated-product identification; IsNormalized = restriction(=r^{-1}) >> u^*e = eta, equivalent to u^*e = eta∘r since the units are invertible; four independent e's at the right objects; leftPaste/rightPaste = tripleLeft/tripleRight with the supplied e's (plain alpha, no permutation or sign); conclusions IsIso x2, v^*F = v^*G = eta∘r3 via the shared tripleRestriction, injectivity only for source H3 and all D', F = G. Edge cases OK. Statement verbatim, single sorry, docstrings/H8 OK, imports = proof_dep owners, lines <= 100, landed def node added to stmt_deps allowed. Advisory: ambient/inside/restriction/triple*/associators/shriekCongr owned only by theorem lem-sf-open-external-tensor-normalization (uncited) - suggest an existing:true def-node superset record. No compile (no file changed); worker reports a clean scompile."
+ }
+}

@@ -1,0 +1,246 @@
+{
+ "id": "lem-a1-texact-pair-descent",
+ "kind": "statement",
+ "title": "Exact t-exact functor descent on common-stage pair categories",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Let $I$ be its directed set of finite subextensions [def-weil-finite-subextension-directed-set]. For each $E\\in I$ let $\\mathcal C_E,\\mathcal D_E$ be triangulated categories [def-weil-triangulated-category] with bounded t-structures [def-weil-t-structure]. Supply exact t-exact transitions $U_{L/E},V_{L/E}$ with identity and associative tower comparisons. Form their additive pair categories $P_C,P_D$: objects are $(E,X)$ and Hom groups are the directed colimits of common-stage Hom groups [def-weil-directed-colimit-abelian-groups], with transport and composition using the given associators. Explicitly a representative $u:U_{L/E}X\\to U_{L/F}Y$ represents an arrow $(E,X)\\to(F,Y)$; representatives agree if their transports agree at some larger field. Assume $P_C,P_D$ are triangulated, shifts are induced at a stage, and their distinguished triangles are exactly the isomorphism closures of finite-stage distinguished triangles. Assume they have bounded t-structures whose halves are the isomorphism closures of the finite-stage halves. Write $J_E^C:X\\mapsto(E,X)$ and $J_E^D$ for the stage inclusions, with the identity-field identifications.\n\nLet $F_E:\\mathcal C_E\\to\\mathcal D_E$ be exact t-exact functors with specified shift comparisons $c_{E,X}:F_E(X[1])\\simeq(F_EX)[1]$. Supply natural isomorphisms $b_{L/E}:V_{L/E}F_E\\simeq F_LU_{L/E}$ compatible with shifts, identities and towers: writing $a^C,a^D$ for the transition associators,\n$$b_{M/E}(a^D_{M,L,E}F_E)=(F_Ma^C_{M,L,E})(b_{M/L}U_{L/E})V_{M/L}(b_{L/E}).$$\nThen\n$$F(E,X)=(E,F_EX),\\quad F[L,u]=[L,b_{L/F,Y}^{-1}F_L(u)b_{L/E,X}]$$\ndefines an additive functor $P_C\\to P_D$ independent of representatives and common field, without faithfulness of the transitions. It has the natural shift comparison represented at $(E,X)$ by $c_{E,X}$. With this shift comparison $F$ is exact and t-exact. Every $J_E^C,J_E^D$ is also exact and t-exact. The identifications $FJ_E^C=J_E^DF_E$ respect shifts, and after extension to $L$ the identifications are given by $b_{L/E}$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014V, derived-definition-exact-functor-triangulated-categories, and algebra.tex Tag 00D6 (algebra-lemma-directed-colimit); agent extraction of original Steps 3-5. Bhatt-Scholze Proposition 6.8.14 and Remark 6.8.15 supply coefficient context only, not this abstract assertion."
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-a1-common-stage-pair-functor-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the given identity-field identifications throughout (so the identity transitions and their unit comparisons are identities). Apply [lem-sbc-coherent-pair-functor-descent] with $\\mathcal A_E=\\mathcal C_E$, $\\mathcal B_E=\\mathcal D_E$, $\\Phi_E=F_E$, and the specified $b$. Its associator direction and tower equation are exactly those in the statement; exact functors are additive in the convention of [def-weil-triangulated-category]. The index is the same small directed set of finite intermediate fields. The pair Hom transport and composition are precisely the ones in that lemma. Its conclusion gives the asserted additive functor, with exactly $F[L,u]=[L,b_{L/F,Y}^{-1}F_L(u)b_{L/E,X}]$, independent of representatives and field. The lemma has no faithfulness hypothesis, so none is used here.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/42_qbarl_triangulated_colimit.tex",
+    "place": "Proposition prop:pseudocone-functor; use the existing generic additive diagram-to-diagram descent lemma."
+   }
+  },
+  {
+   "text": "Write $s^C_{L/E,X}:U_{L/E}(X[1])\\simeq(U_{L/E}X)[1]$ and $s^D$ for the transition shift comparisons; with identity transitions they are identities. Shifts induced at a stage means $(E,X)[1]=(E,X[1])$ and $[M,u][1]=[M,(s^C_{M/F,Y})^{-1}u[1]s^C_{M/E,X}]$, and likewise in $P_D$. Put\n$$d^A_X=F_L(s^C_{L/E,X})\\,b_{L/E,X[1]}:V_{L/E}F_E(X[1])\\to F_L((U_{L/E}X)[1]),\\qquad d^B_X=(b_{L/E,X})[1]\\,s^D_{L/E,F_EX}:V_{L/E}((F_EX)[1])\\to(F_LU_{L/E}X)[1].$$\nThe assumed shift compatibility of $b$ is $c_{L,U_{L/E}X}d^A_X=d^B_XV_{L/E}(c_{E,X})$. Define $\\gamma_{(E,X)}=[E,c_{E,X}]:F((E,X)[1])\\to(F(E,X))[1]$, with inverse $[E,c_{E,X}^{-1}]$ by common-stage composition [def-weil-directed-colimit-abelian-groups]. For an arrow $[M,u]:(E,X)\\to(F,Y)$ compute both sides of the naturality square at the stage $M$, where the components are transported to $V_{M/E}(c_{E,X})$, $V_{M/F}(c_{F,Y})$ (the associators with a repeated field are identities). By the representative formula, $F([M,u][1])$ is represented by $(d^A_Y)^{-1}F_M(u[1])d^A_X$ and $(F[M,u])[1]$ by $(d^B_Y)^{-1}F_M(u)[1]d^B_X$. Then\n$$V(c_{F,Y})(d^A_Y)^{-1}F_M(u[1])d^A_X=(d^B_Y)^{-1}c_{M,U Y}F_M(u[1])d^A_X=(d^B_Y)^{-1}F_M(u)[1]c_{M,UX}d^A_X=(d^B_Y)^{-1}F_M(u)[1]d^B_XV(c_{E,X}),$$\nusing shift compatibility for $Y$, naturality of $c_M$, and shift compatibility for $X$. So $\\gamma$ is a natural isomorphism $F\\circ[1]\\simeq[1]\\circ F$. Only the stated equations at one common stage are used; no tower coherence of shift-composite families and no faithfulness.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, definition-exact-functor-triangulated-categories, including shift-compatible transformations; sketch42 Proposition prop:pseudocone-exact."
+   }
+  },
+  {
+   "text": "For either system, $J_E$ sends a morphism $u$ to $[E,u]$. Thus $J_E(1)=1$, $J_E(vu)=J_E(v)J_E(u)$ and $J_E(u+v)=J_E(u)+J_E(v)$ directly from common-stage composition and addition [def-weil-directed-colimit-abelian-groups]. Its shift comparison is the identity-field identification $J_E(X[1])\\simeq(J_EX)[1]$, natural because shifting $[E,u]$ gives $[E,u[1]]$. A distinguished stage triangle maps to its defining finite-stage triangle, hence is distinguished in the pair category by hypothesis. Consequently every $J_E^C,J_E^D$ is exact by [def-weil-triangulated-category].",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, definition-exact-functor-triangulated-categories; algebra.tex Tag 00D6, lemma-directed-colimit, common-stage addition."
+   }
+  },
+  {
+   "text": "For $u:X\\to Y$ in $\\mathcal C_E$, $b_{E/E}=1$ makes the functor formula $F[E,u]=[E,F_Eu]$. On objects it gives $(E,F_EX)$, so $FJ_E^C=J_E^DF_E$. On $X[1]$ the shift comparison of each composite is exactly $[E,c_{E,X}]$, proving compatibility with shifts. In particular, for a distinguished triangle $T=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ at $E$, its image under $FJ_E^C$ is $J_E^D(F_EX\\xrightarrow{F_Eu}F_EY\\xrightarrow{F_Ev}F_EZ\\xrightarrow{c_{E,X}F_Ew}(F_EX)[1])$. This is distinguished because $F_E$ is exact and Step 3 makes $J_E^D$ exact. Every distinguished triangle of $P_C$ is isomorphic to such a stage image by assumption. Applying $F$ to its triangle isomorphism gives a triangle isomorphism, including its last square by the naturality of Step 2. Isomorphism invariance of distinguished triangles [def-weil-triangulated-category] therefore proves exactness of $F$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, definition-exact-functor-triangulated-categories; exactness checked on the assumed finite-stage generators of distinguished triangles."
+   }
+  },
+  {
+   "text": "Here t-exact means preservation of both halves at zero, equivalently of all their integer translates. If $K\\in P_C^{\\le0}$, the half hypothesis gives $K\\simeq J_E^CX$ for some $X\\in\\mathcal C_E^{\\le0}$. Then $FK\\simeq J_E^DF_EX$ lies in $P_D^{\\le0}$, because $F_E$ preserves that half and its stage image belongs to the corresponding target half. The identical argument with $\\ge0$ proves preservation of the other half. Each $J_E$ preserves both halves directly by their prescribed isomorphism-closure description. The halves are strictly full and satisfy $\\mathcal T^{\\le n}=\\mathcal T^{\\le0}[-n]$ and $\\mathcal T^{\\ge n}=\\mathcal T^{\\ge0}[-n]$ [def-weil-t-structure]; iterating the shift comparisons, with inverses for negative shifts, gives preservation at every cutoff. This proves all the claimed t-exactness assertions; no reflection of halves is needed.",
+   "uses": [
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/def-weil-t-structure.md",
+    "place": "Definition def-weil-t-structure, halves and their translates; apply the assumed finite-stage half descriptions."
+   }
+  },
+  {
+   "text": "For $E\\subseteq L$, let $r^C_{L/E,X}:J_E^CX\\simeq J_L^CU_{L/E}X$ be the common-stage isomorphism represented by the identity of $U_{L/E}X$, with inverse represented by that same identity in the reverse direction; the composites are identities by the pair composition rule. Define $r^D$ likewise. The representative formula, with target stage $L$, gives\n$$F(r^C_{L/E,X})=J_L^D(b_{L/E,X})\\,r^D_{L/E,F_EX}.$$\nIndeed its representative is $b_{L/L,U_{L/E}X}^{-1}F_L(1)b_{L/E,X}=b_{L/E,X}$. Naturality of $r$ follows by representing both sides at $L$; naturality of the comparison is the given naturality of $b$. Its shift square is exactly the assumed shift square for $b$, and its successive-extension square is exactly the displayed tower equation after the associator identifications. Thus the stage identifications in Step 4 extend via precisely the prescribed $b_{L/E}$, respecting shifts and further extension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V, shift-compatible transformations; sketch42 Definition def:pair-composition and Proposition prop:pseudocone-functor, evaluated on identity representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-triangulated-category",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014V with algebra.tex Tag 00D6; abstract assembly using lem-sbc-coherent-pair-functor-descent and the hypotheses on stage triangles and halves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of t exact triangulated functors descends to a directed common stage pair category preserving distinguished triangles and the t structure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between pretriangulated categories commuting with integer shifts, if $ T_1, T_2 $ are triangles in $ \\\\mathcal{D} $ belonging to the essential image \"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"For any morphism $ f: X \\to Y $ in the category $ \\\\mathcal{D} $, there exist an object $ Z $, a morphism $ g: Y \\to Z $, and a morphism $ h: Z \\to X[1] $ such that the triangle $ f \\to g \\to h \\to X[1] $ li\"}\n  {\"name\": \"CategoryTheory.Functor.distTriang_iff\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"For any triangle $ T $ in the category $ \\\\mathcal{D} $, $ T $ is a distinguished triangle in $ \\\\mathcal{D} $ if and only if $ T $ is in the essential image of the functor $ L $ applied to the distingu\"}\n  {\"name\": \"CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasShift C ℤ]\\n  [inst_3 : CategoryTheory.HasShift D ℤ] [inst_4 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_5 : CategoryTheory.Limits.HasZeroOb\", \"doc\": \"If $\\\\mathcal{C}$ is a triangulated category and $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with integer shifts such that the induced functor on 2-composable arrows is essent\"}\n  {\"name\": \"CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasShift C ℤ]\\n  [inst_3 : CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [inst_4 : F.CommShift ℤ]\\n  [inst_5 : CategoryTheory.Limits.\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be pretriangulated categories, and let $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a triangulated functor that is essentially surjective on arrows. For any distinguished t\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"The localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor, meaning it commutes with the integer-parameterized shift operation, preserves the preadditive structure, and res\"}\n  {\"name\": \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an abelian category $\\\\mathcal{A}$, a triangulated functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that commutes with integer-indexed shifts,\"}\n  {\"name\": \"CategoryTheory.Functor.essImageDistTriang\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          [inst_2 : CategoryTheory.HasShift C ℤ] →\\n            [inst_3 : CategoryTheory.Preadditive C] →\\n        \", \"doc\": \"The set of triangles in category $\\\\mathcal{D}$ that are isomorphic to the image of a distinguished triangle in category $\\\\mathcal{C}$ under the functor $L$, where $L: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Triangulated/Functor.lean:186-199,285-308 and Localization/Triangulated.lean:194-213. The functor class and categorical-localization criteria do not supply coherent common-stage Hom-quotient descent or the descended shift and half-preservation assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsTriangulated\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instId\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] : (CategoryTheory.Functor.id C).IsTriangulated\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"A functor which commutes with the shift by `ℤ` is triangulated if\\nit sends distinguished triangles to distinguished triangles.\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Prea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isTriangulated_of_iso\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Prea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isTriangulated_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [CategoryTheory.Preadditive C] [CategoryTheory.Prea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.map_distinguished\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_2, u_2} D} {inst✝² : CategoryTheory.HasShift C ℤ} {inst✝³ : CategoryTheory.HasShift D ℤ} {F : CategoryTheory.Functor C D} {inst✝⁴ : F.CommShift ℤ} {inst✝⁵ : CategoryTheory.Limits.HasZer\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] {F : CategoryTheory.Functor C D} [F.CommShift ℤ] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.Limits.HasZeroObject D] [C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.instComp\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} {E : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} E] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.HasShift E ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isTriangulated_of_precomp\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \" {C : Type u_1} {D : Type u_2} {E : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} E] [CategoryTheory.HasShift C ℤ] [CategoryTheory.HasShift D ℤ] [CategoryTheory.HasShift E ℤ] (F : CategoryTheory.Functor C D) [F.CommShift ℤ\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Triangulated/Functor.lean:186-199,285-308 and Localization/Triangulated.lean:194-213. The functor class and categorical-localization criteria do not supply coherent common-stage Hom-quotient descent or the descended shift and half-preservation assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "pair.*[Tt][Ee]xact|[Tt][Ee]xact.*pair|common.stage|pseudocolimit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Triangulated/Functor.lean:186-199,285-308 and Localization/Triangulated.lean:194-213. The functor class and categorical-localization criteria do not supply coherent common-stage Hom-quotient descent or the descended shift and half-preservation assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit of triangulated categories a coherent family of functors preserves finite stage distinguished triangles and t structure halves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasShift C ℤ]\\n  [inst_3 : CategoryTheory.HasShift D ℤ] {F : CategoryTheory.Functor C D} [inst_4 : F.CommShift ℤ]\\n  [inst_5 : CategoryTheory.Limits.\", \"doc\": \"If a functor $ F : C \\to D $ between pretriangulated categories maps every distinguished triangle in $ C $ to a distinguished triangle in $ D $, then $ F $ is a triangulated functor.\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Filtered\", \"type\": \"(F : C ⥤ D) : Prop\", \"doc\": \"A predicate stating that a functor from category $ C $ to category $ D $ preserves filtered colimits.\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Filtered\", \"type\": \"(F : C ⥤ D) [PreservesColimitsOfSize.{w, w'} F] : PreservesFilteredColimitsOfSize.{w, w'} F\", \"doc\": \"Any functor that preserves colimits of a given size also preserves filtered colimits of that size.\"}\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Filtered\", \"type\": \"(t : Cocone F) (hsurj : ∀ x : t.pt, ∃ i xi, x = t.ι.app i xi)\\n  (hinj : ∀ i j xi xj, t.ι.app i xi = t.ι.app j xj → ∃ (k : _) (f : i ⟶ k) (g : j ⟶ k), F.map f xi = F.map g xj) :\\n  IsColimit t\", \"doc\": \"A cocone $ t $ for a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathrm{Type}\\\\, u $, where $ \\\\mathcal{J} $ is a filtered category, is a colimit if: (1) every element of the apex $ N $ is the image of some element \"}\n  {\"name\": \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Filtered\", \"type\": \"(t : Cocone F) (hsurj : ∀ x : t.pt, ∃ i xi, x = t.ι.app i xi)\\n  (hinj : ∀ i x y, t.ι.app i x = t.ι.app i y → ∃ (k : _) (f : i ⟶ k), F.map f x = F.map f y) : IsColimit t\", \"doc\": \"A cocone $ t $ for a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathrm{Type}\\\\, u $, where $ \\\\mathcal{J} $ is a filtered category, is a colimit if: (1) every element of the apex $ N $ is the image of some element \"}\n  {\"name\": \"CategoryTheory.Limits.PreservesFilteredColimitsOfSize.preserves_filtered_colimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Filtered\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {F : CategoryTheory.Functor C D}\\n  [self : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{w', w, v₁, v₂, u₁, u₂} F] (J : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', \", \"doc\": \"If a functor $ F $ preserves filtered colimits of a given size, then for every filtered category $ J $ of that size, $ F $ preserves colimits of shape $ J $.\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.TStructure.Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a category $\\\\mathcal{C}$ with preadditive structure, zero object, and integer-indexed shift functors, constructs a triangulated category structure by specifying: \\n1. Two families of object prope\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Triangulated/Functor.lean:186-199,285-308 and Localization/Triangulated.lean:194-213. The functor class and categorical-localization criteria do not supply coherent common-stage Hom-quotient descent or the descended shift and half-preservation assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an exact t exact functor between filtered two colimits of triangulated categories using natural coherent comparison isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.map_distinguished_exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : C \\\\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, and for any distingu\"}\n  {\"name\": \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an abelian category $\\\\mathcal{A}$, a triangulated functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that commutes with integer-indexed shifts,\"}\n  {\"name\": \"CategoryTheory.Functor.distTriang_iff\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"For any triangle $ T $ in the category $ \\\\mathcal{D} $, $ T $ is a distinguished triangle in $ \\\\mathcal{D} $ if and only if $ T $ is in the essential image of the functor $ L $ applied to the distingu\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.HasShift C ℤ}\\n  {inst_2 : CategoryTheory.Category.{v_3, u_3} A} {F : CategoryTheory.Functor C A}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject C} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5\", \"doc\": \"For a homological functor $ F : C \\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, the image under $ F $\"}\n  {\"name\": \"CategoryTheory.Functor.isTriangulated_iff_comp_right\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {E : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Category.{v_3, u_3} E]\\n  [inst_3 : CategoryTheory.HasShift C ℤ] [inst_4 : CategoryTheory.HasShift D ℤ] [inst_5 : CategoryTheory.HasS\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, and $ H : \\\\mathcal{C} \\\\to \\\\mathcal{E} $ between pretriangulated categories, with $ G $ being triangulated, full\"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"Given an additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories is triangulated. This means it commu\"}\n  {\"name\": \"CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasShift C ℤ]\\n  [inst_3 : CategoryTheory.HasShift D ℤ] [inst_4 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_5 : CategoryTheory.Limits.HasZeroOb\", \"doc\": \"If $\\\\mathcal{C}$ is a triangulated category and $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with integer shifts such that the induced functor on 2-composable arrows is essent\"}\n  {\"name\": \"CategoryTheory.Functor.IsTriangulated.map_distinguished\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.HasShift C ℤ}\\n  {inst_3 : CategoryTheory.HasShift D ℤ} {F : CategoryTheory.Functor C D} {inst_4 : F.CommShift ℤ}\\n  {inst_5 : CategoryTheory.Limits.\", \"doc\": \"For any triangulated functor $ F : C \\to D $ between pretriangulated categories $ C $ and $ D $, and for every distinguished triangle $ T $ in $ C $, the image $ F(T) $ is a distinguished triangle in $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Triangulated/Functor.lean:186-199,285-308 and Localization/Triangulated.lean:194-213. The functor class and categorical-localization criteria do not supply coherent common-stage Hom-quotient descent or the descended shift and half-preservation assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "pair.*[Tt][Ee]xact|[Tt][Ee]xact.*pair|pseudocolimit|common.stage",
+   "results": "0 hits; ; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: No matching text in CategoryTheory; the matching StageSystem constructions are in the project, not Mathlib, and do not supply every clause of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation of directed diagrams of additive triangulated categories induces a t exact functor on their filtered colimit",
+   "results": "8 hits; CategoryTheory.Limits.colimMap, CategoryTheory.Ind.lim, DirectLimit.map, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.exactFunctor, instAdditiveFunctorColim, CategoryTheory.ExactFunctor.of, CategoryTheory.ExactFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: DirectLimit.map (Order/DirectedInverseSystem.lean:192-199) induces a map of set colimits only; colimMap and Ind.lim concern other colimit constructions. None gives the functor with shifts and t-exactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsTriangulated\"",
+   "results": "12 hits; CategoryTheory.Functor.IsTriangulated.instId, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Functor.isTriangulated_iff_of_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: IsTriangulated (Triangulated/Functor.lean:186-192) defines preservation for an existing functor; it does not construct common-stage descent or t-exactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of exact functors descends to the category of pairs with morphisms represented over a common directed stage",
+   "results": "8 hits; CategoryTheory.Functor.IsLocallyDirected, CategoryTheory.instGuitartExactOverObjOverPostOfHasBinaryProductOfPreservesLimitDiscreteWalkingPairPair, CategoryTheory.Functor.IsLocallyDirected.cond, CategoryTheory.Functor.exists_map_eq_of_isLocallyDirected, CategoryTheory.SmallObject.SuccStruct.Iteration.mkOfLimit.functor, CategoryTheory.final_eval, CategoryTheory.Functor.ranges_directed, CategoryTheory.Functor.final_diag_of_isFiltered",
+   "date": "2026-10-22",
+   "verdict": "no match: LocallyDirected and filtered finality results do not assert descent of functors between common-stage pair categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-texact-coefficient-stage-descent",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Proposition 6.8.14(1)-(2) and Remark 6.8.15 motivate the coefficient categories; agent abstract transport lemma extracted from returned proof Steps 7-10. The proof uses raw localization, isomorphism closures of halves, finite-stage triangles, and uniqueness of truncation comparisons; this abstract assertion is not quoted as a theorem of Bhatt-Scholze. Finer split: original Steps 3-5 (common-stage descent, functor laws, shifts, triangles and halves).",
+   "via": [
+    "lem-a1-texact-coefficient-stage-descent",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-texact-pair-descent",
+  "worker": "stage1",
+  "summary": "Reused generic coherent additive pair-functor and transformation descent; checked naturality of the descended shift isomorphism directly at a common stage (reviewer fix). Verified stage inclusions, exactness on finite-stage triangles, preservation of halves and the precise extension comparison. No new nodes or statement change.",
+  "blueprint": "lem-a1-finite-map-purity proof first paragraph, finite-stalk coefficient context; this abstract auxiliary realizes the common-stage descent, shifts, triangles and halves subargument extracted as original Steps 3-5 in lem-a1-texact-coefficient-stage-descent.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic additive common-stage functor and compatible-transformation descent for arbitrary diagrams; no scheme or smooth-base-change theorem is used, and the A1 unit has no generic substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NY-432a4e0f1",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-432a4e0f1 (reviewer sub-agent of L); spot-checked: Read the item, its citer lem-a1-texact-coefficient-stage-descent and the cited statements (lem-sbc-coherent-pair-functor-descent, def-weil-triangulated-category, def-weil-t-structure, def-weil-directed-colimit-abelian-groups). Sources read: Stacks 014V, including the 2-morphism paragraph, and 00D6. This is a first split (the item had no proof on the base), with no new nodes and no SGA. The statement is true; I tested the constant system, the zero category and transitions that kill an arrow. The only abstract candidates in the DAG are scheme-specific pbc nodes, so there is no duplicate. Steps 1, 3, 4, 5 and 6 are correct. In Step 1 the SBC lemma's hypotheses (unit, pentagon, tower equation verbatim, b_{E/E}=1, additivity of exact functors) match the item, and its use as a generic tool is accepted. Step 2 had two faults. E4: d^A was written with F_L((s^C)^{-1}), which does not compose with b_{L/E,X[1]}; the correct form is d^A=F_L(s^C)b_{X[1]}. E1: the tower coherence of the shift-composite families, needed for the transformation clause, relies on associator–shift compatibility s_{M/E}a^C=a^C[1]s_{M/L}U(s_{L/E}), which the item never states. FIX: Step 2 is replaced by a direct computation at one common stage. Naturality of [E,c_{E,X}] against [M,u] follows from shift compatibility of b for Y, naturality of c_M, and shift compatibility for X, and the inverse is [E,c^{-1}]. It uses def-weil-directed-colimit-abelian-groups and is elementary. proof_deps, statement and stmt_deps are unchanged; the split_report summary was adjusted. Fixed file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-texact-pair-descent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.TExactPairDescent",
+  "declaration": "CategoryTheory.CommonStage.tExactPairDescent",
+  "declarations": [
+   "CategoryTheory.CommonStage.triangleImageOne",
+   "CategoryTheory.CommonStage.ExactPairDiagram",
+   "CategoryTheory.CommonStage.ExactPairPresentation",
+   "CategoryTheory.CommonStage.tExactPairDescent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/TExactPairDescent.lean",
+  "statement": "theorem tExactPairDescent (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (A B : ExactPairDiagram.{w, u, v} (Padic.FiniteCoefficientFields l Ω)) (RA : PairStructure A.toDiagram) (RB : PairStructure B.toDiagram) [HasShift RA.Obj ℤ] [HasZeroObject RA.Obj] [∀ n : ℤ, (shiftFunctor RA.Obj n).Additive] [Pretriangulated RA.Obj] [IsTriangulated RA.Obj] [HasShift RB.Obj ℤ] [HasZeroObject RB.Obj] [∀ n : ℤ, (shiftFunctor RB.Obj n).Additive] [Pretriangulated RB.Obj] [IsTriangulated RB.Obj] (P : ExactPairPresentation A RA) (Q : ExactPairPresentation B RB) (Φ : Family A.toDiagram B.toDiagram) (hb : Φ.Coherent) (c : ∀ i, shiftFunctor (A.C i) (1 : ℤ) ⋙ Φ.φ i ≅ Φ.φ i ⋙ shiftFunctor (B.C i) (1 : ℤ)) (hExact : ∀ i (T : Triangle (A.C i)), T ∈ distTriang (A.C i) → triangleImageOne (Φ.φ i) (c i) T ∈ distTriang (B.C i)) (hLE : ∀ i (X : A.C i), (A.t i).le 0 X → (B.t i).le 0 ((Φ.φ i).obj X)) (hGE : ∀ i (X : A.C i), (A.t i).ge 0 X → (B.t i).ge 0 ((Φ.φ i).obj X)) (hShift : ∀ {i j} (h : i ≤ j) (X : A.C i), (B.U h).map ((c i).hom.app X) ≫ (B.s h).hom.app ((Φ.φ i).obj X) ≫ ((Φ.b h).hom.app X)⟦(1 : ℤ)⟧' = (Φ.b h).hom.app (X⟦(1 : ℤ)⟧) ≫ (Φ.φ j).map ((A.s h).hom.app X) ≫ (c j).hom.app ((A.U h).obj X)) : ∃ F : RA.Obj ⥤ RB.Obj, IsDescent RA RB Φ F ∧ ∃ γ : shiftFunctor RA.Obj (1 : ℤ) ⋙ F ≅ F ⋙ shiftFunctor RB.Obj (1 : ℤ), (∀ X : RA.Obj, HEq (γ.hom.app X) ((Q.J X.1).map ((c X.1).hom.app X.2))) ∧ (∀ T : Triangle RA.Obj, T ∈ distTriang RA.Obj → triangleImageOne F γ T ∈ distTriang RB.Obj) ∧ (∀ (n : ℤ) (X : RA.Obj), (P.t.le n X → Q.t.le n (F.obj X)) ∧ (P.t.ge n X → Q.t.ge n (F.obj X))) ∧ (∀ i, (P.J i).Additive ∧ (Q.J i).Additive ∧ (∀ T : Triangle (A.C i), T ∈ distTriang (A.C i) → triangleImageOne (P.J i) (P.j i) T ∈ distTriang RA.Obj) ∧ (∀ T : Triangle (B.C i), T ∈ distTriang (B.C i) → triangleImageOne (Q.J i) (Q.j i) T ∈ distTriang RB.Obj) ∧ (∀ (n : ℤ) (X : A.C i), ((A.t i).le n X → P.t.le n ((P.J i).obj X)) ∧ ((A.t i).ge n X → P.t.ge n ((P.J i).obj X))) ∧ (∀ (n : ℤ) (X : B.C i), ((B.t i).le n X → Q.t.le n ((Q.J i).obj X)) ∧ ((B.t i).ge n X → Q.t.ge n ((Q.J i).obj X)))) ∧ (∀ i, P.J i ⋙ F = Φ.φ i ⋙ Q.J i) ∧ (∀ i, ∃ κ : P.J i ⋙ F ≅ Φ.φ i ⋙ Q.J i, (∀ X : A.C i, HEq (κ.hom.app X) (𝟙 ((Q.J i).obj ((Φ.φ i).obj X)))) ∧ (∀ X : A.C i, F.map ((P.j i).hom.app X) ≫ γ.hom.app ((P.J i).obj X) ≫ (κ.hom.app X)⟦(1 : ℤ)⟧' = κ.hom.app (X⟦(1 : ℤ)⟧) ≫ (Q.J i).map ((c i).hom.app X) ≫ (Q.j i).hom.app ((Φ.φ i).obj X))) ∧ (∀ {i j} (h : i ≤ j) (X : A.C i), HEq (F.map (RA.repr (X := ⟨i, X⟩) (Y := ⟨j, (A.U h).obj X⟩) ⟨j, h, le_refl _, (eqToIso (congrArg (fun G : A.C j ⥤ A.C j ↦ G.obj ((A.U h).obj X)) (A.unit j))).inv⟩)) (RB.repr (X := Φ.obj ⟨i, X⟩) (Y := Φ.obj ⟨j, (A.U h).obj X⟩) ⟨j, h, le_refl _, (Φ.b h).hom.app X ≫ (eqToIso (congrArg (fun G : B.C j ⥤ B.C j ↦ G.obj ((Φ.φ j).obj ((A.U h).obj X))) (B.unit j))).inv⟩))",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71c2c0bcc",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery of 0ea0 (RETURN H2: theorem node lem-sbc-coherent-pair-functor-descent in stmt_deps for plain CommonStage defs). The Lean file is byte-identical. The item changes only stmt_deps: lem-sbc replaced by the new def-a1-common-stage-pair-functor-data (lem-sbc kept in proof_deps/Step 1). New node: existing:true on the unchanged CoherentPairFunctorDescent with 18 declarations (Diagram…IsDescent), all read in side-live; stage2_delivery.check_existing clean for each name, signature verbatim. No other node owns CommonStage.* and the PBC pair-category nodes are scheme-specific, so no duplicate. Fields consistent with def-a1-common-stage-coefficient-unit. Own clause-by-clause reading: stage-induced shift, J, j pinned; triangles and halves as iff with isomorphism closures; hShift = Step-2 square; conclusion has exactness and t-exactness for all n for F and every J, γ and κ pinned by HEq, literal J⋙F equality, extension clause via b. No faithfulness or associator-shift assumption; record statement verbatim. Advisories: def TeX says directed but Lean needs only a PartialOrder; source and target share universes via Family. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261023T102803-L-2973306",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CommonStage.tExactPairDescent"
+  ],
+  "sorry_after": []
+ }
+}

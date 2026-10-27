@@ -1,0 +1,114 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-generic-direct-image",
+   "place": "Relative compact-dual construction and the comparison of pairings, packaged as data with named projections.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "def-asd-smooth-compact-dual-model",
+ "kind": "definition",
+ "title": "Compact dual model data and its exchange identity",
+ "statement": "Let $\\Lambda$ be a finite commutative ring, $S,X$ schemes, $f:X\\to S$ a morphism, and $L$ a sheaf of $\\Lambda$-modules on the small etale site of $X$. Write $L_0=L[0]$ and $D_Y(K)=R\\mathcal Hom_\\Lambda(K,\\Lambda_Y)$ [def-pur-derived-internal-hom]. A compact dual model is the following data: $C\\in D(S_{et},\\Lambda)$ [def-weil-pbc-derived-categories] with bounded constructible cohomology [def-weil-pbc-constructible-complexes]; for every open $U\\subset S$ and pullback presentation $p:X_U\\to X$, $f_U:X_U\\to U$, an isomorphism $e_U:Rf_{U,*}p^*L_0\\simeq D_U(U^*C)$; for every further pullback $v_X:X_T\\to X_U$, $f_T:X_T\\to T$ over Noetherian $v:T\\to U$, an isomorphism $e_T:Rf_{T,*}v_X^*p^*L_0\\simeq D_T(v^*U^*C)$. The data include the equality $v^*e_U\\,a_v=\\mathrm{BC}_v\\,e_T$ in left-to-right composition order, where $a_v$ is the coefficient-dual pullback comparison [lem-fin-lisse-field-dual] and $\\mathrm{BC}_v$ is the specified ordinary derived base-change map [sbc-def-base-change-map]. This is a type of data, with no assertion that it is inhabited and no choice of an inhabitant.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-pur-derived-internal-hom",
+  "lem-fin-lisse-field-dual",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "B7",
+  "item": "Sheaf.AlgebraicGeometry.SmoothGenericDirectImage",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A record consisting of a bounded constructible complex and duality isomorphisms for smooth direct images compatible with canonical base change",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforward, Scheme.Modules.pushforward, SheafOfModules.pullbackPushforwardAdjunction, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.pushforwardComp, Functor.sheafPullbackConstruction.sheafPullback.",
+   "date": "2026-10-24",
+   "verdict": "no match: these are underived pullback and pushforward interfaces, not compact-dual model data"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, AlgebraicGeometry.Smooth",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure.*CompactDual|structure.*DualModel|structure.*BaseChange",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact dual model for smooth direct images with bounded constructible compact support and canonical exchange compatibility",
+   "results": "8 hits: HasCompactSupport.toSchwartzMap, HasCompactSupport.toSchwartzMap_toFun, DomAddAct.instCompactSpace, WeakDual.isCompact_of_bounded_of_closed, SmoothBumpFunction.hasCompactSupport, ContDiffMapSupportedInClass.mk, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange.",
+   "date": "2026-10-24",
+   "verdict": "no match: compactly supported smooth functions and quasi-compact scheme spaces, not derived etale compact duality"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCompactDualModel.lean",
+  "declaration": "AlgebraicGeometry.Etale.SmoothCompactDualModel",
+  "statement": "structure SmoothCompactDualModel (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {S X : Scheme.{u}} (f : X ⟶ S)\n    (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) where\n  complex : DerivedCategoryModule Λ S\n  boundedConstructible : DerivedCategory.isBoundedConstructible Λ S complex\n  openIso : ∀ (U : S.Opens) (XU : Scheme.{u}) (p : XU ⟶ X) (fU : XU ⟶ U.toScheme),\n    IsPullback p fU f U.ι →\n    ((R(lowerStar (ModuleCat.{u + 1} Λ) fU)).obj\n        ((smoothCompactPullback (ModuleCat.{u + 1} Λ) p).obj\n          (smoothCompactSingle (ModuleCat Λ) X L)) ≅\n      ((derivedHom (ModuleCat.{u + 1} Λ) U.toScheme).obj\n        (op ((smoothCompactPullback (ModuleCat.{u + 1} Λ) U.ι).obj complex))).obj\n          (constantComplex Λ U.toScheme))\n  testIso : ∀ (U : S.Opens) (XU : Scheme.{u}) (p : XU ⟶ X) (fU : XU ⟶ U.toScheme),\n    IsPullback p fU f U.ι →\n    ∀ (T : Scheme.{u}) [IsNoetherian T] (v : T ⟶ U.toScheme)\n      (XT : Scheme.{u}) (vX : XT ⟶ XU) (fT : XT ⟶ T),\n    IsPullback vX fT fU v →\n    ((R(lowerStar (ModuleCat.{u + 1} Λ) fT)).obj\n        ((smoothCompactPullback (ModuleCat.{u + 1} Λ) vX).obj\n          ((smoothCompactPullback (ModuleCat.{u + 1} Λ) p).obj\n            (smoothCompactSingle (ModuleCat Λ) X L))) ≅\n      ((derivedHom (ModuleCat.{u + 1} Λ) T).obj\n        (op ((smoothCompactPullback (ModuleCat.{u + 1} Λ) v).obj\n          ((smoothCompactPullback (ModuleCat.{u + 1} Λ) U.ι).obj complex)))).obj\n            (constantComplex Λ T))\n  exchange : ∀ (U : S.Opens) (XU : Scheme.{u}) (p : XU ⟶ X) (fU : XU ⟶ U.toScheme)\n    (sqU : IsPullback p fU f U.ι)\n    (T : Scheme.{u}) [IsNoetherian T] (v : T ⟶ U.toScheme)\n    (XT : Scheme.{u}) (vX : XT ⟶ XU) (fT : XT ⟶ T)\n    (sq : IsPullback vX fT fU v),\n    (smoothCompactPullback (ModuleCat.{u + 1} Λ) v).map (openIso U XU p fU sqU).hom ≫\n        finiteLisseDualPullbackComparison v\n          ((smoothCompactPullback (ModuleCat.{u + 1} Λ) U.ι).obj complex) =\n      (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app\n          ((smoothCompactPullback (ModuleCat.{u + 1} Λ) p).obj\n            (smoothCompactSingle (ModuleCat Λ) X L)) ≫\n        (testIso U XU p fU sqU T v XT vX fT sq).hom",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smoothCompactPullback",
+   "AlgebraicGeometry.Etale.smoothCompactPullback_eq",
+   "AlgebraicGeometry.Etale.smoothCompactSingle",
+   "AlgebraicGeometry.Etale.SmoothCompactDualModel"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261023T165904-L-2041893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "independent cc review: item SmoothCompactDualModel + 4 modules and 8 nodes against the packet, the clone (signatures, SmoothBaseChange import cycle, canonical-map definitions) and a sandbox compile of all delivered modules with the unchanged importer SmoothGenericDirectImage (exit 0) and #print axioms"
+ }
+}

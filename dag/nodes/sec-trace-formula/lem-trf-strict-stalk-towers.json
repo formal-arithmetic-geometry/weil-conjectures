@@ -1,0 +1,130 @@
+{
+ "id": "lem-trf-strict-stalk-towers",
+ "kind": "statement",
+ "title": "Strict finite germ comparisons on whole coefficient systems",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and a finite-field datum D. There exists strict data T of [def-trf-stalk-compositor-tower-data] satisfying TrfStrictStalkTowerCoherent: finitePullback preserves inverse-image unit generators; c is the published finite pullback-stalk germ map in each degree and exponent; gamma inserts the identity pointed neighbourhood; e is gamma followed by c at the identity point; the finite section, composition, identity and automorphism-reparametrization equations hold on the entire actual coefficient towers.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): the combined-colimit identification behind the finite composition germ formula; agent extension to the entire-tower counit realization, original Steps 3, 6, 7; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-stalk-compositor-tower-data",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof": [
+  {
+   "text": "Take the mate of the sectionwise direct-image evaluation square, then identify the finite inverse image with the constant-ring inverse image by uniqueness of left adjoints preserving units. This constructs finitePullback and proves finiteUnit.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical finite germ comparison degreewise. The completed scalar acts through the same quotient on both sides. A differential or quotient transition merely replaces the section in the germ, so the maps and their inverses assemble to natural maps of whole towers.",
+   "uses": [
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identity-point sections compute the stalk using the initial identity neighbourhood. Define e as gamma after pullback followed by c. Specialize finite composition to (v,id) for finiteSections, and use general composition and identity for the remaining equations.",
+   "uses": [
+    "lem-trf-proetale-pullback-stalk-coherence",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex lifts by Spec(alpha), leaving neighbourhood and section unchanged. Reindexing by its inverse gives the inverse. Both routes in the strict square produce the lift pr_V theta u Spec(alpha); transitions and differentials preserve this computation.",
+   "uses": [
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stacks Tags 0F4F, 05V1 and 0941; strict-diagram and localization argument for Local powers (b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent strict pro etale stalk comparisons on quotient towers descend through Roos realization to derived natural isomorphisms",
+   "results": "8 hits, including SheafedSpace.IsOpenImmersion.stalk_iso and TopCat.Presheaf.stalkCongr; none is a strict quotient-system or Roos comparison",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.mapHomologicalComplex\"",
+   "results": "3 hits: NatIso.mapHomologicalComplex and its hom_app_f and inv_app_f equations",
+   "date": "2026-10-25",
+   "verdict": "generic degreewise construction only; does not supply transition-compatible stalk maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtalePullbackStalkComparison|proEtaleStalkReparam",
+   "results": "0 Mathlib hits; repository search locates the finite comparisons in Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence",
+   "date": "2026-10-25",
+   "verdict": "use the existing finite comparison as a dependency"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TraceStalkCompositorTowerRealization",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers, input (b): canonical stalk identifications, natural in M and compatible with composition",
+   "via": [
+    "lem-trf-stalk-compositor-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TraceStrictStalkTowers",
+  "file": "lean/Sheaf/Paper/TraceStrictStalkTowers.lean",
+  "declaration": "WeilConjectures.trfStrictStalkTowers",
+  "statement": "theorem trfStrictStalkTowers (D : FiniteFieldDatum.{u}) :\n    ∃ T : TrfStrictStalkTowerData l E D, TrfStrictStalkTowerCoherent l E D T",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "independent cc review: item proof and two new sorry statements (trfStrictStalkTowers, trfStalkTowerDescent) checked against lem-trf-stalk-compositor-tower-realization and the published IntegralComparisonPullbackModel normalization; moved data module diffed against the clone (only docstring tags differ); reader gate: SourceSectionStalkConeComparison compiled against the delivered modules"
+ }
+}

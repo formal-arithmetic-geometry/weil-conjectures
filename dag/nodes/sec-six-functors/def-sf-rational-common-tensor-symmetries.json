@@ -1,0 +1,148 @@
+{
+ "id": "def-sf-rational-common-tensor-symmetries",
+ "kind": "definition",
+ "title": "Rational and common-stage signed tensor symmetries",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a scheme $W$ on which $\\ell$ is invertible. Use the rational constructible category $D^b_c(W,E)$ of [def-weil-rationalization-karoubi], the common-finite-stage category $D^b_c(W,\\Omega)$ of [def-weil-algebraically-closed-coefficients], and their derived tensor functors and specified scalar-extension/tensor comparisons of [def-weil-derived-pullback-tensor-hom]. Write $\\sigma^{\\mathcal O_E}_{M,N}$ for the coherent-reduction-normalized integral Koszul symmetry of [def-pod-integral-tensor-constraints], whose underlying cochain exchange in degrees $(i,j)$ is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$.\n\nFor $M,N\\in D^b_c(W,E)$, define $\\sigma^E_{M,N}:M\\otimes_E^L N\\xrightarrow{\\sim}N\\otimes_E^L M$ as the unique isomorphism whose hom is the image of $\\sigma^{\\mathcal O_E}_{M,N}$ under the integral-to-rational localization functor, using the specified tensor-object identifications. Here the integral representatives are the unchanged objects of the rational category.\n\nFor $M,N\\in D^b_c(W,\\Omega)$, define $\\sigma^\\Omega_{M,N}:M\\otimes_\\Omega^L N\\xrightarrow{\\sim}N\\otimes_\\Omega^L M$ as the unique isomorphism with the following pinning at every finite coefficient field $L\\subset\\Omega$ containing the stages of both common-stage tensor objects: its hom is the class over $L$ of the rational symmetry $\\sigma^L_{M_L,N_L}$ conjugated by the specified source and target scalar-extension/tensor comparisons. Thus its representative is $c_{M,N,L}$ followed by $\\sigma^L_{M_L,N_L}$ followed by $c_{N,M,L}^{-1}$. Include the uniqueness statements for these two prescribed isomorphisms; no arbitrary tensor symmetry or choice of a single coefficient stage is introduced.",
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+  "place": "Final graded-commutative and coefficient-change clauses; signed derived tensor construction: Stacks 06YS, 07A4, 0941."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul symmetry derived completed integral tensor rationalization common finite coefficient field",
+   "results": "[leansearch] OK 8 hit(s): Rat.numberField; TensorAlgebra.SymRel.mul_comm; Field.qsmul; Field.toRatCast; tensorKaehlerQuotKerSqEquiv_symm_tmul_D; coevaluation; Field.ratCast_def; coevaluation.congr_simp.",
+   "date": "2026-10-24",
+   "verdict": "No completed, rationalized or common-stage derived symmetry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical signed tensor symmetry derived complete integral coefficients rationalized and common finite stage",
+   "results": "[leanfinder] OK 8 hit(s): ComplexShape.TensorSigns; SymmetricPower.Rel; TensorProduct.gradedCommAux; TensorProduct.termSym[_]__; ComplexShape.TensorSigns.ε'; TensorProduct.termSym[_]^__; ComplexShape.σ_def; SymmetricPower.term⨂ₛ[_]_,_.",
+   "date": "2026-10-24",
+   "verdict": "Generic signed tensor symmetry only, not these coefficient-stage constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep pullbackTensorIntegralBraiding|pullbackTensorRationalBraiding|pullbackTensorCommonBraiding|adic.*[Bb]raid CategoryTheory",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib coefficient-stage construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n pullbackTensor(Integral|Rational|Common)Braiding lean/WeilConjectures lean/Sheaf",
+   "results": "No WeilConjectures matches. Sheaf/Paper/DerivedPullbackTensorIso.lean defines integral braiding at 417, rational braiding at 444, common braiding at 550, with existsUnique pinning theorems at 398, 428, 527. Other Sheaf matches are consumers.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the published declarations with existing:true; no duplicate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG lean.declaration/declarations ownership of pullbackTensorRationalBraiding and pullbackTensorCommonBraiding; blueprint_refs.py search tensor symmetr",
+   "results": "No definition node owns either rational or common-stage braiding. Existing def-pod-integral-tensor-constraints owns the integral braiding. blueprint_refs search: 9 blueprint nodes, none owns the rational/common-stage symmetries.",
+   "date": "2026-10-24",
+   "verdict": "Cite the existing integral owner and add only the missing rational/common-stage definition owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-pod-mixed-support-cup-product",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pod-mixed-support-cup-product",
+   "place": "Graded-commutative clause: signed support-order convention at rational and common finite coefficient stages.",
+   "via": [
+    "def-pod-mixed-support-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedPullbackTensorIso",
+  "declaration": "WeilConjectures.pullbackTensorRationalBraiding",
+  "declarations": [
+   "WeilConjectures.pullbackTensorRationalBraiding_existsUnique",
+   "WeilConjectures.pullbackTensorRationalBraiding",
+   "WeilConjectures.pullbackTensorCommonBraiding_existsUnique",
+   "WeilConjectures.pullbackTensorCommonBraiding"
+  ],
+  "statement": "def pullbackTensorRationalBraiding (W : Scheme.{u})\n    [hW : ∀ w : W, Invertible (l : W.residueField w)]\n    (M N : sfRationalConstructibleCategory l E W)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: owns the existing plain rational/common signed symmetries and their unique-map pinning theorems, not derivedPullbackTensorIso. The integral symmetry and its coherent-reduction characterization retain their existing def-pod-integral-tensor-constraints owner. No new Lean module or duplicate definition is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-926385f37",
+  "group": "Q58",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-926385f37",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (15c0): item node differs from side-live base only in lean and three added stmt_deps (def-pur-finite-pullback-tensor-comparison, def-pod-integral-tensor-constraints, new def-sf-rational-common-tensor-symmetries); theorem lem-pur-derived-pullback-tensor-iso removed; statement verbatim. Lean module unchanged apart from docstring, so prior maths check stands: left cups = sk-def-pairing-data PF(K,Ra_*L)+counit+inverse tensor iso; right-support = braiding ≫ μ ≫ Fib(support σ), target RΓ_c(L⊗K); PoincareDualitySetting geometry, m+1, no properness/orientation. New existing:true node owns pullbackTensor{Rational,Common}Braiding(_existsUnique) (DerivedPullbackTensorIso.lean:428/444/527/550): localization/all-L pinning matches statement; .choose of ∃!; same as the landed Q51 integral owner; no other def owner; stmt_deps exist; no cycle. No sorry or hollow defs, docstrings ok, both report sections present. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a52d7",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T131456-L-2941093",
+  "kind": "interface",
+  "note": "independent cc review: item diff vs clone (one private import dropped) and companion FiniteCoefficientDerivedOriginPresentation helpers vs upstream Perfect.lean:386/416; node proof fields vs the Lean; sandbox compiles of both delivered modules with the import-all importers (SingleDegreeUniformReconstruction, IntegralOpenPullTensorReduction) and NormalizedConstructibleTowerLocalEffectivity, all OK; FalseTail and Perfect gone from the item's import closure",
+  "sorry_before": [
+   "WeilConjectures.canonicalCommonStagePullbackTensor_associative_spec",
+   "WeilConjectures.derivedPullbackTensorIso",
+   "WeilConjectures.pullbackTensorCommonAssociator_existsUnique",
+   "WeilConjectures.pullbackTensorCommonBraiding_existsUnique",
+   "WeilConjectures.pullbackTensorCommonComposition_existsUnique",
+   "WeilConjectures.pullbackTensorCommonLeftUnitor_existsUnique",
+   "WeilConjectures.pullbackTensorCommonRightUnitor_existsUnique",
+   "WeilConjectures.pullbackTensorRationalScalarUnit_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.canonicalCommonStagePullbackTensor_associative_spec",
+   "WeilConjectures.derivedPullbackTensorIso",
+   "WeilConjectures.pullbackTensorCommonAssociator_existsUnique",
+   "WeilConjectures.pullbackTensorCommonBraiding_existsUnique",
+   "WeilConjectures.pullbackTensorCommonComposition_existsUnique",
+   "WeilConjectures.pullbackTensorCommonLeftUnitor_existsUnique",
+   "WeilConjectures.pullbackTensorCommonRightUnitor_existsUnique",
+   "WeilConjectures.pullbackTensorRationalScalarUnit_existsUnique"
+  ]
+ }
+}

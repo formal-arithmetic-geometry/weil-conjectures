@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-space-flat-etale-ringed-comparison",
+ "kind": "statement",
+ "title": "Geometric flatness of algebraic spaces equals flatness of the ringed etale morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Z,W$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $h:Z\\to W$ be any $S$-morphism. Let $(h^{-1},h_*,h^\\sharp)$ be its canonical morphism of ringed small etale topoi [lem-trf-space-enlarged-etale-ringed-site-model], with $h^\\sharp:h^{-1}\\mathcal O_W\\to\\mathcal O_Z$. Then $h$ is flat on etale scheme charts if and only if $\\mathcal O_Z$, regarded by $h^\\sharp$ as an $h^{-1}\\mathcal O_W$-module sheaf, is flat [def-pc-flat-sheaf-modules]. Here flatness on charts means: for each etale scheme chart $V\\to W$ and each etale scheme chart $T\\to Z\\times_W V$, the induced scheme morphism $T\\to V$ is flat [def-weil-flat-morphism].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 073C (lemma-flat-morphism-sites), statement and proof; flatness on charts as in definition-P and lemma-flat-local."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-flat-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-flat-etale-ringed-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=h^{-1}\\mathcal O_W$ and let $M=\\mathcal O_Z$ with its $R$-action through $h^\\sharp$. The ringed morphism is precisely the canonical one of [lem-trf-space-enlarged-etale-ringed-site-model]. For every geometric point $\\bar z$ of $Z$, put $\\bar w=h\\bar z$. By [lem-sfb-space-geometric-points-conservative], $(h^{-1}\\mathcal O_W)_{\\bar z}\\cong\\mathcal O_{W,\\bar w}$, compatibly with algebraic operations and the map on stalk rings. Consequently $M_{\\bar z}=\\mathcal O_{Z,\\bar z}$ has, under this identification, the scalar action given by the induced map $\\mathcal O_{W,\\bar w}\\to\\mathcal O_{Z,\\bar z}$ of [lem-sfb-space-strict-local-flatness]. Thus the stalk module uses the same ring homomorphism as the geometric flatness criterion.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 04K2(4) (lemma-stalk-pullback) and 03G8 (lemma-morphism-ringed-topoi); spaces-morphisms.tex Tag 04NG (lemma-flat-at-point-etale-local-rings)."
+   }
+  },
+  {
+   "text": "The geometric points supplied by [lem-sfb-space-geometric-points-conservative] are points of the small etale topos and jointly detect isomorphisms. In the fixed small-site universes take representatives as in [def-weil-size-convention]. Apply [lem-sfb-ringed-site-conservative-flatness] on $Z_{\\mathrm{et}}$ to this conservative family, to the ring sheaf $R$, and to the module $M$. By step 1 and [def-weil-pbc-flat-ring-map], $M$ is flat over $R$ if and only if every induced ring homomorphism $\\mathcal O_{W,h\\bar z}\\to\\mathcal O_{Z,\\bar z}$ is flat. This application uses an arbitrary ring sheaf; it makes no assertion that $R$ is constant.",
+   "uses": [
+    "lem-sfb-space-geometric-points-conservative",
+    "def-weil-size-convention",
+    "lem-sfb-ringed-site-conservative-flatness",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VC (lemma-check-flat-stalks), applied as in spaces-morphisms.tex Tag 073C (lemma-flat-morphism-sites)."
+   }
+  },
+  {
+   "text": "Assume flatness on the charts specified in the statement. Choose a surjective etale scheme atlas $V\\to W$, and a surjective etale scheme atlas $T\\to Z\\times_WV$, which exist by [def-trf-algebraic-space]. By [lem-trf-space-fibre-products-etale-covers] and [lem-sfb-stack-chartwise-smooth-etale-calculus], $T\\to Z$ is etale and surjective. For a geometric point $\\bar z$ with image $z$, choose $t\\in T$ over $z$. The scheme map $T\\to V$ is flat by the chart hypothesis, hence flat at $t$ by [def-weil-flat-morphism]. The compatible diagram $T\\to V$ over $Z\\to W$ therefore witnesses flatness of $h$ at $z$ in the precise sense of [lem-sfb-space-strict-local-flatness]. That lemma implies that $\\mathcal O_{W,h\\bar z}\\to\\mathcal O_{Z,\\bar z}$ is flat. Step 2 now proves flatness of $M$ over $R$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-weil-flat-morphism",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NG (lemma-flat-at-point-etale-local-rings); Tag 073C (lemma-flat-morphism-sites)."
+   }
+  },
+  {
+   "text": "Conversely assume $M$ flat over $R$. Take any etale scheme chart $V\\to W$ and any etale scheme chart $T\\to Z\\times_WV$. These charts need not be surjective. The fibre-product and composition assertions of [lem-trf-space-fibre-products-etale-covers] and [lem-sfb-stack-chartwise-smooth-etale-calculus] make $T\\to Z$ etale, so $T\\to V$ is a compatible etale chart diagram. For each $t\\in T$, choose a geometric point $\\bar t$ over $t$ and put $\\bar z$ equal to its composite with $T\\to Z$. Step 2 gives flatness of $\\mathcal O_{W,h\\bar z}\\to\\mathcal O_{Z,\\bar z}$. By [lem-sfb-space-strict-local-flatness], $h$ is flat at $z$, the image of $t$. Its explicit independence of the choices of compatible charts says that this may be tested in the present diagram at the present point $t$; hence $T\\to V$ is flat at $t$. Since $t$ was arbitrary, [def-weil-flat-morphism] makes $T\\to V$ flat. This proves the required universal chart condition. Empty charts have no points to test, so the argument includes the empty source.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-strict-local-flatness",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NG (lemma-flat-at-point-etale-local-rings), chart-independence in its statement and proof; Tag 073C (lemma-flat-morphism-sites)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-sfb-space-strict-local-flatness",
+  "def-weil-size-convention",
+  "lem-sfb-ringed-site-conservative-flatness",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 073C (lemma-flat-morphism-sites), proof via 05VC, 04K5 and 04NG; universal chart quantifier expanded using the chart-independence statement in 04NG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism of algebraic spaces induces a flat morphism of ringed small etale topoi and exact module pullback",
+   "results": "8 hits; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, ring etaleness and representably flat site functors do not assert the algebraic-space structure-sheaf comparison on small etale topoi"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat morphisms of algebraic spaces are equivalent to flatness of the structure sheaf over the inverse image ring on the small etale site",
+   "results": "8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, ring etaleness and representably flat site functors do not assert the algebraic-space structure-sheaf comparison on small etale topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RingedTopos\", \"Flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, ring etaleness and representably flat site functors do not assert the algebraic-space structure-sheaf comparison on small etale topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Etale\"",
+   "results": "12 hits; Algebra.Etale.of_formallyUnramified_of_flat, Algebra.IsEtaleAt.of_isUnramifiedAt_of_flat, RingHom.Etale.iff_flat_and_formallyUnramified, AlgebraicGeometry.Etale.of_formallyUnramified_of_flat, AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified, RingHom.Etale.codescendsAlong_faithfullyFlat, Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat, AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, ring etaleness and representably flat site functors do not assert the algebraic-space structure-sheaf comparison on small etale topoi"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*morphism.*sites|flat.*[Rr]inged|[Rr]inged.*flat|AlgebraicSpace",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, ring etaleness and representably flat site functors do not assert the algebraic-space structure-sheaf comparison on small etale topoi"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat|[Ff]latOver",
+   "results": "17 hits; Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness, ring etaleness and representably flat site functors do not assert the algebraic-space structure-sheaf comparison on small etale topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is flat if and only if its structure sheaf is flat over the inverse image structure sheaf on the small etale topos",
+   "results": "8 hits; AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and ring flatness do not compare geometric flatness of algebraic spaces with flatness over the inverse image structure sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*ringed|ringed.*flat|AlgebraicSpace",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and ring flatness do not compare geometric flatness of algebraic spaces with flatness over the inverse image structure sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a structure sheaf over the inverse image structure sheaf is equivalent to flatness of an algebraic space morphism",
+   "results": "8 hits; AlgebraicGeometry.Flat, RingHom.Flat, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, Module.flat_iff_of_isLocalization",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and ring flatness do not compare geometric flatness of algebraic spaces with flatness over the inverse image structure sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"stalk\"",
+   "results": "6 hits; Module.rankAtStalk_eq_of_le_of_finite_of_flat, Module.rankAtStalk_eq_of_le_of_finite_of_flat', AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and ring flatness do not compare geometric flatness of algebraic spaces with flatness over the inverse image structure sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf on a ringed site is flat if and only if its stalks at a conservative family of topos points are flat modules over the stalk rings",
+   "results": "8 hits; AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, RingHom.Flat.propertyIsLocal, Module.flat_of_isLocalized_maximal, Module.FaithfullyFlat.toFlat, Module.flat_iff_of_isLocalization, Module.isLocallyConstant_rankAtStalk",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and ring flatness do not compare geometric flatness of algebraic spaces with flatness over the inverse image structure sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hypercover-augmentation-face-property",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Augmentations and faces of a hypercover retain its covering property. General geometric input: flatness on the ringed small etale site, Stacks 073C.",
+   "via": [
+    "lem-sfb-hypercover-augmentation-face-property",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-flat-etale-ringed-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed Stacks 073C using the existing inverse-image geometric stalk identification and 04NG strict-local flatness criterion. Added only the genuinely general 05VC conservative-point flatness criterion for a varying ring sheaf; neither the constant-coefficient scheme theorem nor a topological ringed-space theorem suffices. Wrote both directions for the precise universal chart quantifier, including nonsurjective charts. Checked every cited statement and recorded verbatim excerpts.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Augmentations and faces of a hypercover retain its covering property. General geometric input: flatness on the ringed small etale site, Stacks 073C. Current latest blueprint: det-thm-sf-ctf-stability-direct-images proof (3); this is a supporting ringed-flatness input to its inherited alteration/duality/hyperdescent branch. The ancestry tool returns node = None, retained with the full inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Uses the canonical ringed small etale morphism for arbitrary algebraic spaces; this is a generic site presentation, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Uses existence of space fibre products and preservation of etale surjections after base change to form compatible scheme charts; a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-1f2356b28",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-1f2356b28 (reviewer sub-agent of L); spot-checked: I read Stacks 073C, 04NG and 05VC (with the preceding lemma-stalk-flat) in full; every tag maps to the label cited. The item statement is unchanged from the base and matches 073C with the universal chart quantifier, so no target is weakened. There was no base proof and no re-split note. Step 1: the conservative-points node gives (h^{-1}F)_{z̄} ≅ F_{h z̄}, compatible with stalk ring maps and algebraic operations, so R_{z̄} ≅ O_{W,w̄} and M_{z̄} gets its scalar action through the strict-local stalk map. Step 2: the new 05VC node applied to the non-constant ring sheaf h^{-1}O_W, with def-weil-pbc-flat-ring-map, gives: M flat iff every stalk map O_{W,h z̄}→O_{Z,z̄} is flat. Step 3 is the 04NG argument: surjective atlases, fibre-product base change and composition of surjective étale maps make T→Z surjective étale, so T→V flat at t witnesses flatness at z. Step 4: base change of a non-surjective chart is étale by the stack-calculus base-change clause; I read the strict-local node's 'does not depend on the choices' as one diagram iff all, as in the 04NG proof, which gives T→V flat at every t. The empty source is vacuous on both sides. New node lem-sfb-ringed-site-conservative-flatness is self-contained, statement-only and matches 05VC; it holds for topos points because the forward direction holds for any ringed-topos morphism (lemma-pullback-flat). I tested it on a one-object site, M=0, a degenerate topos with an empty family and a non-constant R. It is not a duplicate of etale-flat-geometric-fibers (fixed constant ring), ringed-site-point-flat or pc-flat-sheaf-stalk-flat (forward direction only), and it is strictly smaller than the item. Batch-5 flags: def-trf-geometric-morphism is a general definition; lem-trf-space-fibre-products-etale-covers is generic fibre-product geometry; strict-local-flatness and stack-chartwise-calculus reach def-trf-algebraic-space only through the definition. None is part of the trace formula or Poincaré duality statements or proofs. I accept the worker-written tool_uses (the enlarged ringed-site model and space fibre products) as generic. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatEtaleRingedComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsFlat_iff_isFlatEtaleRingedMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatEtaleRingedComparison.lean",
+  "statement": "theorem mapIsFlat_iff_isFlatEtaleRingedMap {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) : MapIsFlat f ↔ IsFlatEtaleRingedMap f",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing chartwise MapIsFlat and canonical IsFlatEtaleRingedMap predicates. The latter is exact scalar extension along the adjoint of the unique chart-normalized structural map, equivalently O_X flat over f-inverse O_Y. Its enlarged model is canonically equivalent to the small etale ringed topos. The two owning definition nodes are added to stmt_deps; no definitions or statements are changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6531601d1",
+  "group": "NS",
+  "result": "pass",
+  "note": "Statement MapIsFlat f ↔ IsFlatEtaleRingedMap f matches node and Stacks 073C. MapIsFlat (MapIsLocally Flat) tests all compatible étale chart pairs, equivalent to the node's V-chart/T-chart-of-fibre-product test, non-surjective charts included. IsFlatEtaleRingedMap = exact scalar extension along the adjoint of the canonical enlargedStructuralMap (adjoints unique, so no arbitrary choice), i.e. O_X flat over f^-1 O_Y, per def-sfb-flat-etale-ringed-map. No extra hypotheses or universe restrictions; edge cases (empty source/charts, identity) fine. Node diff vs live: only lean added and stmt_deps extended by the two landed owning definition nodes; lean.statement verbatim; one sorry, no defs; source/blueprint docstrings and 4-step proof present; proof-dep imports exist in live; report sections present. No compile (no file changed)."
+ }
+}

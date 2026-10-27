@@ -1,0 +1,484 @@
+{
+ "id": "lem-sfb-gaga-derived-coherent-sections",
+ "kind": "statement",
+ "title": "Derived GAGA comparison for finite locally free coefficients",
+ "statement": "Let $X$ be a smooth projective scheme over $\\mathbf C$ [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism], with analytification $M$ and ringed-space morphism $\\pi$ as in [lem-sfb-smooth-analytification-cotangent]. Let $F$ be any finite locally free $\\mathcal O_X$-module [def-sc-finite-locally-free-sheaf], with no constant-rank assumption. Put $F^{\\mathrm{an}}=\\mathcal O_M\\otimes_{\\pi^{-1}\\mathcal O_X}\\pi^{-1}F$ and let $a_F:F\\to\\pi_*F^{\\mathrm{an}}$ send $s$ to $1\\otimes s$. All derived functors in the following formula are taken on sheaves of $\\mathbf C$-vector spaces, and $F[0]$ denotes the complex with $F$ in degree zero [def-weil-abstract-derived-category]. The canonical morphism induced by $F[0]\\to R\\pi_*(F^{\\mathrm{an}}[0])$ and composition of derived global sections is an isomorphism in $D^+(\\operatorname{Vect}_{\\mathbf C})$:\n$$g_F:R\\Gamma(X,F[0])\\xrightarrow{\\ \\sim\\ }R\\Gamma(M,F^{\\mathrm{an}}[0]).$$\nHere $D^+$ consists of derived objects with cohomology zero in all sufficiently negative degrees. The arrow is the canonical one induced by $a_F$, rather than an unspecified isomorphism. The assertion includes the empty scheme and finitely many components of different dimensions.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §11 (canonical comparison), §12 Theorem 1, printed pp.18--22, https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Derived reformulation of Theorem 1 restricted to finite locally free coefficients, using the canonical map of §11; no naturality for non-O-linear operators is assumed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "lem-sfb-smooth-analytification-cotangent",
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-abstract-derived-category",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a closed immersion $i:X\\hookrightarrow P=\\mathbf P^n_{\\mathbf C}$ from the definition of projectivity. The projective-field coordinate theorem, for $i$ and for $\\mathrm{id}_P$, makes $X,P$ Noetherian and proper with coherent structure sheaves. Properness includes separatedness and finite type. A finite locally free $F$ is locally a finite free module, hence quasi-coherent of finite type, so the locally Noetherian coherence criterion applies. Thus $G=i_*F$ is coherent by the closed-immersion theorem. On each standard chart of $P$, degree-zero localization is $\\mathbf C[z_l/z_j:l\\ne j]$: degree-zero monomials are products of these ratios, with no polynomial relations. These charts are affine $n$-spaces. Affine-space smoothness and locality on the source prove that $P$ is smooth. The analytification theorem now applies to both $X$ and $P$, including their closed embedding.",
+   "uses": [
+    "def-pc-projective-morphism",
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "def-weil-proper-morphism",
+    "def-sc-finite-locally-free-sheaf",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "def-pc-proj",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-sfb-smooth-analytification-cotangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "For any separated smooth finite-type complex scheme $T$ used below and any module $E$, define $\\epsilon^q_{T,E}=H^q(g_E)$, using the same canonical arrow as in the statement. All sites of opens are sets in a common enlarged universe. Module sheaves over either the structure ring or the constant ring $\\mathbf C$ have enough injectives. Derived evaluation on the terminal open identifies their cohomology with underlying abelian-sheaf cohomology, naturally and identically in degree zero; scalar multiplication gives the same $\\mathbf C$-action. The single-object derived-functor identification computes $H^q(R\\Gamma(E[0]))$ by an injective resolution for $q\\ge0$. Choose injective $\\mathbf C$-sheaf resolutions $E\\to I$ and $E^{\\mathrm{an}}\\to J$. Exact inverse image makes $\\pi^{-1}E[0]\\to\\pi^{-1}I$ a degreewise monic quasi-isomorphism. The injective lifting lemma extends $\\pi^{-1}E\\to E^{\\mathrm{an}}\\to J$ to $\\pi^{-1}I\\to J$, adjoint to $u:I\\to\\pi_*J$. The acyclic-resolution normalization identifies $\\Gamma(u)$ with the canonical derived-sections arrow, after forgetting to abelian sheaves. Indeed injective module terms are abelian-global-acyclic by derived evaluation. Consequently $\\epsilon^0$ sends $s$ to $1\\otimes s$ and $\\epsilon^q$ is the underlying inverse-image cohomology map followed by the coefficient map.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-sfb-ringed-acyclic-resolution-derived-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "The inverse-image cohomology maps commute with connecting homomorphisms by the topos pullback delta theorem. For $0\\to E'\\to E\\to E''\\to0$, analytic pullback exactness makes the analytified row short exact, and the natural coefficient maps give a morphism from the inverse-image row to this row. The morphism-of-sequences clause of the same delta theorem then proves that the maps $\\epsilon^q$ commute with its connecting homomorphisms. Long exact sequences exist by the derived-functor theorem: sections preserve kernels and finite sums because both are computed sectionwise; this verifies left exactness and additivity on either topological space. Thus every algebraic short exact sequence gives a commutative comparison of long exact cohomology sequences, with the actual maps $H^q(g_E)$ of Step 2.",
+   "uses": [
+    "lem-sfb-topos-cohomology-pullback-delta",
+    "lem-sfb-analytic-pullback-exact",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "Closed direct image does not change cohomology on either underlying topological space, by the closed-embedding cohomology theorem; use derived evaluation to identify module, $\\mathbf C$-sheaf and abelian cohomology as in Step 2. The analytic closed-direct-image isomorphism gives $(i_*F)^{\\mathrm{an}}=i^{\\mathrm{an}}_*F^{\\mathrm{an}}$ and identifies its coefficient map with $i_*a_F$. Therefore the comparison for $i_*F$ identifies with the comparison for $F$. This is a commutative square for the canonical maps: on resolutions it is the direct-image identification of sections, and the augmentation sends each section to $1\\otimes s$ on both routes. The same observation applies to any closed embedding of smooth schemes encountered below, in particular a coordinate hyperplane.",
+   "uses": [
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-sfb-analytic-closed-direct-image",
+    "lem-sfb-ringed-acyclic-resolution-derived-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "Record the elementary exact-sequence argument used repeatedly below. In a commutative diagram of five-term exact sequences of vector spaces, if the four outside vertical maps are isomorphisms then the middle map is an isomorphism. For injectivity, a middle element mapping to zero comes from the preceding term; its lower preimage comes from the first term, so lift from the first term and subtract to obtain zero in the preceding term. For surjectivity, map a lower middle element to the next term and lift there; its next image is zero by injectivity at the last term, so exactness supplies an upper middle preimage. Their difference comes from the lower preceding term; lift there and adjust. Apply this to the appropriate five consecutive terms of Step 3, inserting zero groups in negative degrees. Hence if comparisons for any two members of a short exact sequence are isomorphisms in every degree, so are those for the third.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "For every $n\\ge0$, the comparison for $\\mathcal O_{\\mathbf P^n}$ is an isomorphism in every degree. The algebraic twist-cohomology calculation gives constants $\\mathbf C$ in degree zero and zero in higher degree, including $n=0$. The analytic structure-sheaf theorem gives unique constant global functions and vanishing in positive degree, in the category of $\\mathbf C$-sheaves. Under $(\\mathcal O_P)^{\\mathrm{an}}=\\mathcal O_{P^{\\mathrm{an}}}$, the canonical degree-zero comparison is the identity on constants. The higher-degree comparisons are maps between zero groups. For $n=0$, every twist has its single standard-chart frame and is $\\mathcal O_P$; its analytic frame identifies the coefficient map with the same constants map. This proves the all-twists induction base.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-smooth-analytification-cotangent",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "Induct on $n$ to prove the comparison for every twist $\\mathcal O_{\\mathbf P^n}(d)$, $d\\in\\mathbf Z$. For $n\\ge1$ use the fixed coordinate hyperplane $j:H=V(z_n)\\hookrightarrow P$, so $H=\\mathbf P^{n-1}$ and $j^*\\mathcal O_P(d)=\\mathcal O_H(d)$ by the displayed standard-chart transition functions. Its structure sheaf is coherent by the projective-field coordinate theorem. On a chart $z_j\\ne0$, multiplication by the section $z_n$ is multiplication by $z_n/z_j$ (or $1$ if $j=n$). It is injective on the polynomial coordinate ring and its localizations, since a nonzero polynomial has nonzero product with $z_n/z_j$. Local frames give injectivity on every twist. Apply the fixed-hyperplane sequence with $E=\\mathcal O_P$:\n$$0\\to\\mathcal O_P(d-1)\\to\\mathcal O_P(d)\\to j_*\\mathcal O_H(d)\\to0.$$\nThe induction hypothesis on $H$ and Step 4 make the third comparison an isomorphism for every $d$. Steps 3 and 5 show that comparison for $d$ is an isomorphism in all degrees if and only if comparison for $d-1$ is. Step 6 supplies $d=0$; induction in both directions on the integers proves every $d$.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-projective-space-twist",
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "lem-sfb-fixed-hyperplane-restriction-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "The comparison also holds for a finite direct sum of twists. If $E=\\bigoplus_r\\mathcal O_P(d_r)$, its finite biproduct injections and projections satisfy $p_r i_s=\\delta_{rs}$ and $\\sum_r i_r p_r=1$. Tensor pullback and cohomology preserve these identities, since they are additive. Naturality of the coefficient maps identifies $\\epsilon^q_E$ with the block diagonal map whose blocks are the twist comparisons of Step 7; the block diagonal sum of their inverses is its inverse. Empty sums give the zero sheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "Apply the finite twist-resolution theorem over $k=\\mathbf C$ to the coherent $G=i_*F$ on $P$. Write its finite exact resolution as $0\\to E_\\ell\\to\\cdots\\to E_0\\to G\\to0$, with each $E_j$ a finite sum of twists. If $\\ell=0$ the augmentation is already an isomorphism. Otherwise put $K_0=G$ and $K_{j+1}=\\ker(E_j\\to K_j)$ for $0\\le j<\\ell$; exactness identifies $K_\\ell$ with $E_\\ell$ and gives $0\\to K_{j+1}\\to E_j\\to K_j\\to0$. Analytic exactness applies to these module sheaves, without any extra coherence hypothesis on the kernels. Step 8 proves comparison for $K_\\ell$ and each $E_j$. Descending induction on $j$, using Steps 3 and 5 for each displayed short exact sequence, proves comparison for $K_0=G$ in every nonnegative degree. Step 4 transfers this to $F$ on $X$.",
+   "uses": [
+    "lem-sfb-projective-coherent-finite-twist-resolution",
+    "lem-sfb-analytic-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  },
+  {
+   "text": "We have proved that $H^q(g_F)$ is an isomorphism for every $q\\ge0$ for the specified canonical arrow. Both derived section objects have zero negative cohomology, since they are computed by nonnegative injective resolutions of sheaves placed in degree zero. Thus $H^q(g_F)$ is an isomorphism for every integer $q$. The bounded-below derived-category cohomology criterion proves that $g_F$ itself is an isomorphism in $D^+(\\operatorname{Vect}_{\\mathbf C})$. No rank, connectedness or equidimensionality was used: a projective embedding and coherent finite resolution work for all components at once. If $X$ is empty or $F=0$, both derived section complexes are zero and the same canonical map is their unique isomorphism.",
+   "uses": [
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, GAGA, §§11--13, printed pp.18--22; agent-written derived reformulation and finite-resolution variant."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-morphism",
+  "lem-sfb-projective-field-coordinate-euler-polynomial",
+  "def-weil-proper-morphism",
+  "def-sc-finite-locally-free-sheaf",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "def-pc-proj",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-sfb-smooth-analytification-cotangent",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-sfb-ringed-acyclic-resolution-derived-maps",
+  "lem-sfb-topos-cohomology-pullback-delta",
+  "lem-sfb-analytic-pullback-exact",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sfb-analytic-closed-direct-image",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sfb-analytic-projective-structure-cohomology",
+  "def-pc-projective-space-twist",
+  "lem-sfb-fixed-hyperplane-restriction-cohomology",
+  "lem-sfb-projective-coherent-finite-twist-resolution",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/serre-gaga.pdf",
+  "place": "Serre §§11--13, online read at https://www.numdam.org/article/AIF_1956__6__1_0.pdf; absent locally. Canonical-map proof rewritten by Q41 using a finite twist resolution instead of downward cohomological-dimension induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GAGA|coherent.*analytic|analytic.*coherent",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum restriction maps and abstract sheaf cohomology do not compare analytic and algebraic sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GAGA\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum restriction maps and abstract sheaf cohomology do not compare analytic and algebraic sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre GAGA coherent algebraic and analytic cohomology comparison isomorphism",
+   "results": "OK 8 hits: AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso_hom, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.Scheme.instCoeFunHomForallCarrierCarrierCommRingCat, AlgebraicGeometry.IsAffine.casesOn. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum restriction maps and abstract sheaf cohomology do not compare analytic and algebraic sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "GAGA gives a canonical isomorphism between derived global sections of a coherent sheaf on a projective complex scheme and its analytic sheaf",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum restriction maps and abstract sheaf cohomology do not compare analytic and algebraic sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a coherent algebraic sheaf on complex projective space agrees with its analytic cohomology",
+   "results": "OK 8 hits: Rep.standardComplex.x_projective, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, groupCohomologyIso, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, groupCohomologyIsoExt, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum restriction maps and abstract sheaf cohomology do not compare analytic and algebraic sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "GAGA|analytification|Dolbeault",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytic and algebraic derived coherent global sections agree on a complex projective variety",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.StructureSheaf.to_global_factors, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "GAGA canonical derived global sections comparison for finite locally free sheaves on smooth complex projective schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.identityToΓSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic and analytic sheaf cohomology of a vector bundle on a complex projective variety coincide",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.ext_iff, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.Scheme.Modules.isSheaf.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "GAGA|analytification|Dolbeault",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytic and algebraic derived coherent global sections agree on a complex projective variety",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.StructureSheaf.to_global_factors, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "GAGA canonical derived global sections comparison for finite locally free sheaves on smooth complex projective schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.identityToΓSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic and analytic sheaf cohomology of a vector bundle on a complex projective variety coincide",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.ext_iff, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.Scheme.Modules.isSheaf.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "GAGA|analytification|Dolbeault",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytic and algebraic derived coherent global sections agree on a complex projective variety",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.StructureSheaf.to_global_factors, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "GAGA canonical derived global sections comparison for finite locally free sheaves on smooth complex projective schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.identityToΓSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic and analytic sheaf cohomology of a vector bundle on a complex projective variety coincide",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.ext_iff, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.Scheme.Modules.isSheaf.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "GAGA|analytification|Dolbeault",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytic and algebraic derived coherent global sections agree on a complex projective variety",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.StructureSheaf.to_global_factors, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "GAGA canonical derived global sections comparison for finite locally free sheaves on smooth complex projective schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.identityToΓSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic and analytic sheaf cohomology of a vector bundle on a complex projective variety coincide",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.ext_iff, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.Scheme.Modules.isSheaf.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic projective-spectrum and abstract cohomology declarations do not compare the analytic and algebraic coefficient sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-dolbeault-derivative-comparison",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Derived GAGA comparison for finite locally free coefficients.",
+   "via": [
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-gaga-derived-coherent-sections",
+  "worker": "stage1",
+  "summary": "Canonical derived GAGA assembled from analytic exactness, closed direct image, analytic structure-sheaf cohomology, hyperplane ladders and a finite coherent twist resolution. No change of statement. All hypotheses and coefficient maps checked; four new supporting statements, none a GAGA restatement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Derived GAGA comparison for finite locally free coefficients.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Coherence on locally Noetherian schemes, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic Coherent modules under a closed immersion, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic Affine space is smooth, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic Smoothness is local on an open cover of the source, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on a ringed space have enough injectives, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic Derived module evaluation is abelian cohomology on the slice, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Generic The derived functor on an object placed in degree 0 computes the classical right derived functors, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "Generic Extending a morphism into a bounded below complex of injectives along a degreewise injective quasi-isomorphism, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic Long exact sequence of the right derived functors of a left exact functor, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-sc-cohomology-closed-immersion-pushforward",
+    "why": "Generic Cohomology is unchanged by pushforward along a closed immersion, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "Generic Monomial cohomology of twists on projective space, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "why": "Generic A morphism of the bounded below derived category is an isomorphism iff it is so on cohomology, used exactly as stated for the GAGA hyperplane/resolution argument; the current unit has no replacement for this cohomological or projective-space tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-c0654e7cb",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-c0654e7cb (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, every cited statement and the 4 new nodes in full. The statement and stmt_deps are unchanged from live, where the item is unsplit and no other group has split it. The canonical arrow is the one treated: Step 2's acyclic-resolution node gives res_f(a_F), which is exactly g_F, and the forgetful functor from C-vector spaces to abelian groups is exact and faithful. Step 3 uses pullback-delta with its clause on morphisms of short exact sequences, plus analytic exactness. Step 4 handles closed direct image through i_* of acyclic resolutions and the coefficient identification a_{i_*F}=i_*a_F. Steps 6-7: the base case H^*(P^n,O) matches on both sides and the hyperplane ladder covers d to d-1 in both directions; I checked every hypothesis of fixed-hyperplane-restriction (s=z_n, O_H coherent, injectivity on charts). Step 9 resolves G by finite sums of twists (Stacks 00OQ/01YS/03GM read at their labels), and analytic exactness needs no coherence of the kernels. Step 10 applies the D^+ isomorphism criterion. All 4 new nodes are true (Serre GAGA Prop.10, Prop.11, §13 Lemma 4; graded syzygy with length at most n+1), statement-only, self-contained and not duplicates (the P^1 resolution node covers only P^1). Edge cases checked: X empty, F=0, n=0, mixed component dimensions, negative twists, length 0. Batch 5: the euler-polynomial closure reaches only a generic forward-difference polynomial lemma, and the other two closures reach general definitions (geometric morphism, tensor-pullback comparison); none is part of the trace formula or Poincare duality. The 12 declared tool_uses are generic and accepted. No SGA citation. Serre GAGA is not on disk, is listed as WANTED, and the proof is correctly marked by agent."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GagaDerivedCoherentSections",
+  "declaration": "AlgebraicGeometry.SmoothAnalytic.gaga_derived_coherent_sections",
+  "declarations": [
+   "AlgebraicGeometry.SmoothAnalytic.analyticVectorSheaf",
+   "AlgebraicGeometry.SmoothAnalytic.gagaSections",
+   "AlgebraicGeometry.SmoothAnalytic.gagaResolutionSections",
+   "AlgebraicGeometry.SmoothAnalytic.gagaResolutionSectionsMap",
+   "AlgebraicGeometry.SmoothAnalytic.IsGagaResolutionLift",
+   "AlgebraicGeometry.SmoothAnalytic.gaga_derived_coherent_sections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GagaDerivedCoherentSections.lean",
+  "statement": "theorem gaga_derived_coherent_sections {X : Scheme.{u}} (f : X ⟶ Spec (.of (ULift.{u} ℂ))) [Smooth f] [IsProjective f] (D : Data f) (F : X.Modules) [F.IsFiniteLocallyFree] [HasDerivedCategory.{u + 1} (ModuleCat.{u} (ULift.{u} ℂ))] : ∃ a : Scheme.Modules.scalarSheaf (k := ULift.{u} ℂ) f F ⟶ (TopCat.Sheaf.pushforward (ModuleCat.{u} (ULift.{u} ℂ)) D.pi.hom.base).obj (analyticVectorSheaf D F), (∀ (U : X.Opens) (s : F.val.obj (op U)), a.hom.app (op U) s = tensorSection D F U 1 s) ∧ ∀ (I : InjectiveResolution (Scheme.Modules.scalarSheaf (k := ULift.{u} ℂ) f F)) (J : InjectiveResolution (analyticVectorSheaf D F)), (∃ u : I.cochainComplex ⟶ ((TopCat.Sheaf.pushforward (ModuleCat.{u} (ULift.{u} ℂ)) D.pi.hom.base).mapHomologicalComplex (.up ℤ)).obj J.cochainComplex, IsGagaResolutionLift f D F a I J u) ∧ ∀ u : I.cochainComplex ⟶ ((TopCat.Sheaf.pushforward (ModuleCat.{u} (ULift.{u} ℂ)) D.pi.hom.base).mapHomologicalComplex (.up ℤ)).obj J.cochainComplex, IsGagaResolutionLift f D F a I J u → IsIso (DerivedCategory.Plus.Q.map (gagaResolutionSectionsMap f D F I J u))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical comparison represented in D+ of complex vector spaces by sections of arbitrary injective resolutions in complex-vector-space sheaves. The coefficient map is fixed on all local sections as 1 tensor s. Compatible resolution lifts exist and every such lift localizes to an isomorphism. Helpers assemble the recorded analytification and scalar restriction with Mathlib evaluation and injective resolutions; no arbitrary derived morphism is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a23d6eee0",
+  "group": "Q16",
+  "result": "pass",
+  "note": "All clauses match the node. Smooth+IsProjective f over Spec ULift ℂ; any D : Data f; IsFiniteLocallyFree (variable rank); a is fixed on every section as tensorSection 1 s; both sides are ℂ-vector sheaves via scalarSheaf / analyticVectorSheaf with compatible actions. RΓ is computed from arbitrary injective resolutions; pi_*J is injective, so Γ(M,J) models RΓ∘Rπ_*. The conclusion is that an augmentation-compatible lift exists and every such lift gives IsIso in D+ (DerivedCategory.Plus.Q): a canonical derived arrow, not per-degree. Edge cases (empty X, F=0, mixed ranks and dimensions, n=0, any universe u) are covered. lean.statement is verbatim the file signature. The added stmt_dep def-sc-field-linear-module-cohomology-operations is justified (owns scalarSheaf/scalarMap, on base). Helpers have real data and only the theorem is sorry. Docstrings carry source and blueprint id and the 10-step proof plan. All 17 private imports exist. No duplicate GAGA statement or analytic vector sheaf. No pro-etale substitute. Report has Worker report and Second reading sections. No file changed, so no compile run; delivery reports a clean per-file compile and dry run."
+ }
+}

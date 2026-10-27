@@ -1,0 +1,341 @@
+{
+ "id": "lem-trf-generic-completed-differential-rank",
+ "kind": "statement",
+ "title": "Generic ranks of completed differentials over reduced equidimensional algebras",
+ "statement": "Let $k$ be a perfect field and $S$ a reduced finite-type $k$-algebra [def-weil-pbc-finite-type-algebra], pure of dimension $d\\geq0$ [def-weil-pure-dimension]. Let $\\mathfrak m$ be a maximal ideal with residue field $k$, let $A=S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime], let $R=\\widehat A$ be its maximal-ideal completion [def-weil-pbc-adic-completion], and suppose $R$ is reduced. Put $N=\\Omega^1_{A/k}$ [def-weil-pbc-kahler-differentials] and $M_R=N\\otimes_A R$ [def-weil-module-base-change]. Then $S$ is geometrically reduced over $k$ (its tensor product with every field extension of $k$ is reduced), and every generic point of $\\operatorname{Spec}S$ belongs to its smooth locus [def-sbc-smooth-morphisms], with local topological dimension $d$. For every minimal prime $\\mathfrak a$ of $A$, $A_{\\mathfrak a}$ is a field and $\\dim_{A_{\\mathfrak a}}(N\\otimes_A A_{\\mathfrak a})=d$. For every minimal prime $\\mathfrak p$ of $R$, its contraction $\\mathfrak a=\\mathfrak p\\cap A$ is minimal in $A$, $R_{\\mathfrak p}$ is a field, and $A_{\\mathfrak a}\\to R_{\\mathfrak p}$ is a field extension. In particular\n$$\\dim_{R_{\\mathfrak p}}(M_R\\otimes_R R_{\\mathfrak p})=d.$$\nMore generally, for any field $L$ and $k$-algebra map $\\theta:R\\to L$ whose restriction to $A$ factors through a generic point in its smooth $d$-dimensional locus, $\\dim_L(N\\otimes_A L)=d$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent-formulated generic-rank consequence of Tag 056V (lemma-geometrically-reduced-dense-smooth-open) and Tag 0A21 (lemma-dimension-locally-algebraic), with algebra.tex Tags 00HS (lemma-flat-going-down), 00EU (lemma-minimal-prime-reduced-ring) and morphisms.tex Tag 02G1 (lemma-smooth-omega-finite-locally-free). Returned parent proof Steps 3--4 and the rank assertion in Step 9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-trf-formal-local-presentation",
+  "def-trf-completed-jacobian-presentation",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}S$. The finite-type hypothesis gives that $S$ is Noetherian and $X$ has finitely many irreducible components, by [lem-wf-affine-noetherian-components]. A field is Noetherian since its only ideals are $(0)$ and $(1)$; hence [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $S$ finitely presented over $k$. For every field extension $k'/k$, both $S$ and $k'$ are reduced, so [lem-weil-pbc-perfect-reduced-tensor] says $S\\otimes_k k'$ is reduced. This is precisely the asserted geometric reducedness. By [lem-weil-pbc-affine-scheme-reduced-iff], this also says that $X$ and each $\\operatorname{Spec}(S\\otimes_k k')$ are reduced schemes, as required for Step 2.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-perfect-reduced-tensor",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00FP (lemma-Noetherian-finite-type-is-finite-presentation), 00I4 (lemma-perfect-reduced)"
+   }
+  },
+  {
+   "text": "By [lem-pur-geometrically-reduced-dense-smooth-open], the smooth open $U\\subset X$ is dense. Write the finitely many components as $C_i$ with generic points $\\eta_i$. The open $X\\setminus\\bigcup_{j\\ne i}C_j$ contains $\\eta_i$ and is contained in $C_i$; density gives a point of $U$ in it. Thus $U\\cap C_i$ is nonempty open in $C_i$, and contains $\\eta_i$ by the defining generic-point property. Apply [lem-sbc-equidimensional-open-local-dimension] with $Y=O=X$ and $n=d$: pure dimension is exactly its component-dimension hypothesis. Consequently every $\\eta_i$ is smooth and has local topological dimension $d$. This dimension is the infimum of dimensions of open neighbourhoods, not the Krull dimension of the generic local ring.",
+   "uses": [
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056V (lemma-geometrically-reduced-dense-smooth-open) and 0A21 (lemma-dimension-locally-algebraic), (3), (5)"
+   }
+  },
+  {
+   "text": "Fix a minimal prime $\\mathfrak a\\subset A$. By [lem-weil-pbc-primes-of-localization], its contraction $\\mathfrak q\\subseteq\\mathfrak m$ in $S$ is minimal: a smaller prime is also contained in $\\mathfrak m$ and would extend to a smaller prime in $A$. The ring $A$ is reduced by [lem-weil-pbc-localization-preserves-reduced], so $F=A_{\\mathfrak a}$ is a field by [lem-weil-pbc-minimal-prime-reduced-localization-field]. Successive fractions identify $F=S_{\\mathfrak q}$: elements outside $\\mathfrak m$ are already outside $\\mathfrak q$, and localizing $A$ further at $\\mathfrak a$ inverts exactly the remaining elements outside $\\mathfrak q$. By Step 2, $\\eta=\\mathfrak q$ lies in the smooth open $U$; apply [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] to the smooth $U\\to\\operatorname{Spec}k$ at $\\eta$. As $\\kappa$ of the point of $\\operatorname{Spec}k$ is $k$, the fibre is $U$ itself, and $\\dim_\\eta U=\\dim_\\eta X=d$ (Step 2), opens of $U$ being opens of $X$. This gives an affine open $W=\\operatorname{Spec}B\\subseteq U$ containing $\\eta$ with $\\Omega_{B/k}\\cong B^{\\oplus d}$. By [lem-weil-pbc-affine-open-stalk-localization], localizing $B$ at the prime of $\\eta$ gives the same ring $S_{\\mathfrak q}=F$. Apply [lem-weil-pbc-kahler-differentials-localization] to $S\\to A$, $A\\to F$, and $B\\to F$. These canonical maps identify $N\\otimes_A F$ with $\\Omega_{F/k}$ and then with $\\Omega_{B/k}\\otimes_B F\\cong F^{\\oplus d}$; all send a differential to the differential of its image. Hence its $F$-dimension is $d$. For each localization used here, the module comparison $Q\\otimes_C T^{-1}C\\cong T^{-1}Q$ sends $q\\otimes c/t$ to $cq/t$ and has inverse $q/t\\mapsto q\\otimes1/t$; the fraction and balancing relations make these inverse maps well-defined.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-localization-preserves-reduced",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization), 00EU (lemma-minimal-prime-reduced-ring), 00RT (lemma-differentials-localize); Morphisms Tag 02G1 (lemma-smooth-omega-finite-locally-free); Schemes Tag 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "The ring $A=S_{\\mathfrak m}$ is Noetherian by Step 1 and [lem-weil-pbc-localization-noetherian]. Therefore [lem-weil-pbc-noetherian-completion-flat] makes $A\\to R$ flat. Let $\\mathfrak p$ be minimal in $R$ and put $\\mathfrak a=\\mathfrak p\\cap A$. For any prime $\\mathfrak b\\subseteq\\mathfrak a$, [lem-sc-flat-going-down] lifts the inclusion to a prime $\\mathfrak p'\\subseteq\\mathfrak p$ contracting to $\\mathfrak b$. Minimality forces $\\mathfrak p'=\\mathfrak p$, hence $\\mathfrak b=\\mathfrak a$. Thus $\\mathfrak a$ is minimal in $A$. The reducedness hypothesis on $R$ and [lem-weil-pbc-minimal-prime-reduced-localization-field] make $E=R_{\\mathfrak p}$ a field. For $s\\notin\\mathfrak a$, its image lies outside $\\mathfrak p$ and is invertible in $E$, so fractions define $A_{\\mathfrak a}\\to E$. This is a unital map of nonzero fields and is injective, because its kernel is a proper ideal of a field.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00MB (lemma-completion-flat), 00HS (lemma-flat-going-down), 00EU (lemma-minimal-prime-reduced-ring)"
+   }
+  },
+  {
+   "text": "For $F=A_{\\mathfrak a}$ and $E=R_{\\mathfrak p}$ from Step 4, the tensor maps give\n$$(N\\otimes_A R)\\otimes_R E\\cong N\\otimes_A E\\cong (N\\otimes_A F)\\otimes_F E.$$\nThe first sends $(n\\otimes r)\\otimes e$ to $n\\otimes re$ with inverse $n\\otimes e\\mapsto(n\\otimes1)\\otimes e$; the second sends $(n\\otimes f)\\otimes e$ to $n\\otimes fe$, with inverse $n\\otimes e\\mapsto(n\\otimes1)\\otimes e$. These formulas respect the balancing relations. Step 3 identifies $N\\otimes_A F$ with $F^{\\oplus d}$. Tensor this isomorphism and its inverse with $E$; the coordinate maps $F^{\\oplus d}\\otimes_F E\\rightleftarrows E^{\\oplus d}$ send $e_i\\otimes e$ to the vector with entry $e$ at $i$, and a vector $(c_i)$ to $\\sum_i e_i\\otimes c_i$. They are inverse, including for $d=0$. This proves the completed rank formula.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CV (section-tensor-product), tensor balancing relations; elementary scalar-extension calculation"
+   }
+  },
+  {
+   "text": "Finally suppose $\\theta:R\\to L$ has the stated factorization on $A$. Thus the $A$-action on $L$ factors through the generic local field $F=A_{\\mathfrak a}$ at the specified smooth point of dimension $d$. The calculation in Step 3 gives $N\\otimes_A F\\cong F^{\\oplus d}$. Apply the same tensor formulas as Step 5 with $E=L$ to obtain $N\\otimes_A L\\cong L^{\\oplus d}$ and dimension $d$. Only this factorization of the $A$-action is used; neither injectivity of $\\theta$ nor any assertion that $\\Omega_{R/k}$ is a completed differential module is required.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CV (section-tensor-product), same elementary finite-basis calculation as Step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-preserves-reduced",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly of Tags 056V and 0A21 with algebra.tex Tags 00I4, 00FN, 00FP, 00EU, 00E3, 00RT, 00MB, 00HS; morphisms.tex Tag 02G1 and schemes.tex Tag 01HV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced pure dimensional finite type algebra over a perfect field, differentials at each generic point and at minimal primes of its reduced local completion have dimension d",
+   "results": "{\"t\": \"2026-10-22T06:45:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced pure dimensional finite type algebra over a perfect field, differentials at each generic point and at minimal primes of its reduced local completion have dimension d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"2c3635c779b43d70\"} Full signatures in lem-trf-generic-completed-differential-rank.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.finrank",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Full signatures in lem-trf-generic-completed-differential-rank.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*[Kk]aehler|[Kk]aehler.*finrank|rank.*[Kk]aehler",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"grep\", \"query\": \"finrank.*[Kk]aehler|[Kk]aehler.*finrank|rank.*[Kk]aehler\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\"], \"digest\": \"98be3cc145c0d311\"} Full signatures in lem-trf-generic-completed-differential-rank.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic rank of Kahler differentials for geometrically reduced equidimensional algebra, and contraction of minimal primes under flat completion",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"leansearch\", \"query\": \"Generic rank of Kahler differentials for geometrically reduced equidimensional algebra, and contraction of minimal primes under flat completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"KaehlerDifferential.quotKerTotalEquiv_apply\", \"KaehlerDifferential.ideal_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"KaehlerDifferential.finite\"], \"digest\": \"4bbebb3091258647\"} Full signatures in lem-trf-generic-completed-differential-rank.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of the completed differential module at any minimal prime of a reduced local completion is a vector space of the dimension of the original variety",
+   "results": "{\"t\": \"2026-10-22T06:45:43Z\", \"tool\": \"leanfinder\", \"query\": \"The localization of the completed differential module at any minimal prime of a reduced local completion is a vector space of the dimension of the original variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.localizationAway_dimension_zero\", \"Module.rankAtStalk_self\", \"Module.rankAtStalk\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Ring.KrullDimLE.of_isLocalization\", \"Algebra.IsSmoothAt\", \"IsLocalRing.finrank_CotangentSpace_eq_one\"], \"digest\": \"da6740ea73ec33c5\"} Full signatures in lem-trf-generic-completed-differential-rank.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic rank of Kahler differentials of a reduced equidimensional finite type algebra over a perfect field after localization and completion",
+   "results": "{\"t\": \"2026-10-23T12:15:59Z\", \"tool\": \"leanfinder\", \"query\": \"Generic rank of Kahler differentials of a reduced equidimensional finite type algebra over a perfect field after localization and completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Module.rankAtStalk_self\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"d0d6bbb9c9f578b7\"}; Read the hits: standard-smooth rank and localization APIs do not give the combined generic and completed rank statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.finrank",
+   "results": "{\"t\": \"2026-10-23T12:16:00Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: standard-smooth rank and localization APIs do not give the combined generic and completed rank statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*[Kk]aehler|[Kk]aehler.*finrank|rank.*[Kk]aehler",
+   "results": "{\"t\": \"2026-10-23T12:16:00Z\", \"tool\": \"grep\", \"query\": \"finrank.*[Kk]aehler|[Kk]aehler.*finrank|rank.*[Kk]aehler\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\"], \"digest\": \"98be3cc145c0d311\"}; Read the hits: standard-smooth rank and localization APIs do not give the combined generic and completed rank statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differential dimension at generic points of a reduced finite type algebra over perfect field",
+   "results": "{\"t\": \"2026-10-23T12:16:27Z\", \"tool\": \"leansearch\", \"query\": \"Kahler differential dimension at generic points of a reduced finite type algebra over perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential\", \"KaehlerDifferential.D_apply\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"instInhabitedKaehlerDifferential\", \"KaehlerDifferential.finite\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\"], \"digest\": \"80d5636988962467\"}; Read the hits: standard-smooth rank and localization APIs do not give the combined generic and completed rank statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differentials of an equidimensional reduced variety at generic points have rank equal to the dimension and this is preserved under extension of scalars",
+   "results": "{\"t\": \"2026-10-23T12:16:29Z\", \"tool\": \"leanfinder\", \"query\": \"Differentials of an equidimensional reduced variety at generic points have rank equal to the dimension and this is preserved under extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmooth\"], \"digest\": \"ee947841f5a96d9c\"}; Read the hits: standard-smooth rank and localization APIs do not give the combined generic and completed rank statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-conormal-determinant-comparison",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue. Re-split component: Generic differential ranks and contraction of completion minimal primes (old Steps 3--4, 9).",
+   "via": [
+    "lem-trf-completed-conormal-determinant-comparison",
+    "lem-trf-formal-plane-adjunction-lattice",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-generic-completed-differential-rank",
+  "worker": "stage1",
+  "summary": "NI checked the generic-rank assertion against the Stacks sources and existing DAG statements. Six proof steps derive the rank after localization and reduced completion, reusing existing tool nodes; no new nodes. Explicit tensor and basis maps prove scalar-extension invariance. The statement is unchanged.",
+  "blueprint": "Auxiliary input inherited through completed-conormal-determinant-comparison: generic ranks in the old parent Steps 3--4 and 9; supports the local adjunction calculation in the semistable nearby-cycle branch of lem-trf-local-term-locality (1)--(2). Current latest blueprint and unit were read; no unit step or route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Supplies Noetherianity and finitely many components of the finite-type affine scheme. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Supplies finite presentation over the field, needed for the smooth-locus theorem. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "Supplies reducedness of every field scalar extension of S. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-reduced-iff",
+    "why": "Converts ring reducedness to reducedness of the affine scheme, including the field extensions. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Supplies density of the smooth open for a geometrically reduced finite-type scheme. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Converts the pure component dimension into local topological dimension at each generic point. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-primes-of-localization",
+    "why": "Identifies minimal primes of A with the minimal primes of S contained in m. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-preserves-reduced",
+    "why": "Supplies reducedness of A from reducedness of S. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "why": "Supplies field structures at the minimal primes of A and of the assumed reduced R. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Supplies a free differential module of rank d on an affine smooth neighbourhood. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies the generic local ring computed from the smooth chart with that computed from Spec S. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "Identifies the differential modules after all three localizations by their canonical differential maps. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Supplies Noetherianity of the local ring A needed for completion flatness. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "Supplies flatness of A to R. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Lifts a prime strictly below a contraction to contradict minimality in R. This is a generic local algebra or scheme tool; the trace-formula unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-localization-preserves-reduced",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-sc-flat-going-down"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-d5f93f2e7",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-d5f93f2e7 (reviewer sub-agent of L); spot-checked: I read the item in full: 6 steps, no new nodes, statement and stmt_deps unchanged from base. I read every cited statement and the Stacks sources at the cited places: 056V at varieties.tex l.4694, 00HS at algebra.tex l.9265, and 0A21. Mathematics: Step 1 gives geometric reducedness from perfect-reduced-tensor, using that k is perfect and S and k' are reduced, plus the affine reducedness iff. Step 2 is correct: the component-avoiding open meets the dense smooth open U, so the generic points are smooth, and equidimensional-open-local-dimension with Y=O=X gives dim_η X=d. Step 3 identifies the minimal primes of A with the minimal primes of S inside m, makes A_a=S_q a field, and identifies the stalks and localized Kähler differentials over k correctly. Step 4 is correct: A is Noetherian, completion is flat, going-down plus minimality of p makes the contraction minimal, R reduced makes R_p a field, and A_a→R_p is a field extension. Steps 5–6 are explicit, elementary tensor and basis computations, valid also for d=0. Small cases checked: k[t] at (t); k[x,y]/(xy) at (x,y), where R has minimal primes (x),(y) and rank 1 on each; d=0. No duplicate in the DAG: the near candidates lem-per-coefficient-field-generic-differential-basis, lem-per-completed-differential-finite-conormal and lem-trf-smooth-open-schematic-generic-density state different things. There is no cycle. The 15 off-unit generic algebra and scheme tool uses declared in split_report.tool_uses are accepted. No SGA. FIX (an E1-type precision fault): lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension assumes a globally smooth morphism, but Step 3 applied it to Spec S→Spec k, which is smooth only on the open U. The corrected Step 3 applies it to U→Spec k, notes that the fibre over the unique point is U, and that dim_η U=dim_η X=d. Uses and deps are unchanged, and Step 3 is now 1769 characters. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-generic-completed-differential-rank.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GenericCompletedDifferentialRank",
+  "declaration": "Algebra.generic_completed_differential_rank",
+  "file": "lean/Sheaf/RingTheory/GenericCompletedDifferentialRank.lean",
+  "statement": "theorem generic_completed_differential_rank {k S : Type u} [Field k] [PerfectField k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] [IsReduced S] (d : ℕ) (hpure : (Spec (CommRingCat.of S)).IsPureDimension d) (m : Ideal S) [m.IsMaximal] (hresidue : Nonempty (m.ResidueField ≃ₐ[k] k)) [IsReduced (LocalCompletion (Localization.AtPrime m))] : (∀ (K : Type (max u w)) [Field K] [Algebra k K], IsReduced (K ⊗[k] S)) ∧ (∀ q : PrimeSpectrum S, q.asIdeal ∈ minimalPrimes S → (∃ U : (Spec (CommRingCat.of S)).Opens, q ∈ U ∧ AlgebraicGeometry.Smooth (U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k S)))) ∧ topologicalKrullDimAt q = (d : WithBot ℕ∞)) ∧ (∀ a : PrimeSpectrum (Localization.AtPrime m), a.asIdeal ∈ minimalPrimes (Localization.AtPrime m) → IsField (Localization.AtPrime a.asIdeal) ∧ Module.rank (Localization.AtPrime a.asIdeal) ((Localization.AtPrime a.asIdeal) ⊗[Localization.AtPrime m] KaehlerDifferential k (Localization.AtPrime m)) = (d : Cardinal)) ∧ (∀ p : PrimeSpectrum (LocalCompletion (Localization.AtPrime m)), p.asIdeal ∈ minimalPrimes (LocalCompletion (Localization.AtPrime m)) → p.asIdeal.comap (algebraMap (Localization.AtPrime m) (LocalCompletion (Localization.AtPrime m))) ∈ minimalPrimes (Localization.AtPrime m) ∧ IsField (Localization.AtPrime p.asIdeal) ∧ Function.Injective (Localization.localRingHom (p.asIdeal.comap (algebraMap (Localization.AtPrime m) (LocalCompletion (Localization.AtPrime m)))) p.asIdeal (algebraMap (Localization.AtPrime m) (LocalCompletion (Localization.AtPrime m))) rfl) ∧ Module.rank (Localization.AtPrime p.asIdeal) ((Localization.AtPrime p.asIdeal) ⊗[LocalCompletion (Localization.AtPrime m)] CompletedDifferentials k (Localization.AtPrime m)) = (d : Cardinal)) ∧ (∀ (L : Type (max u w)) [Field L] [Algebra k L] [Algebra (Localization.AtPrime m) L] [IsScalarTower k (Localization.AtPrime m) L] (_θ : LocalCompletion (Localization.AtPrime m) →ₐ[Localization.AtPrime m] L), (∃ a : PrimeSpectrum (Localization.AtPrime m), a.asIdeal ∈ minimalPrimes (Localization.AtPrime m) ∧ (∃ U : (Spec (CommRingCat.of S)).Opens, PrimeSpectrum.comap (algebraMap S (Localization.AtPrime m)) a ∈ U ∧ AlgebraicGeometry.Smooth (U.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap k S)))) ∧ topologicalKrullDimAt (PrimeSpectrum.comap (algebraMap S (Localization.AtPrime m)) a) = (d : WithBot ℕ∞) ∧ Nonempty (Localization.AtPrime a.asIdeal →ₐ[Localization.AtPrime m] L)) → Module.rank L (L ⊗[Localization.AtPrime m] KaehlerDifferential k (Localization.AtPrime m)) = (d : Cardinal))",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c5110f27",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Read node, 10 stmt_deps (incl. LocalCompletion=AdicCompletion(maxIdeal), CompletedDifferentials=R⊗[A]Ω, topologicalKrullDimAt=⨅ open nbhds), module, report (Worker report + Second reading by Q75). Item diff vs side-live: only lean + 3 landed def-node stmt_deps (permitted). Hypotheses exact (perfect k, reduced FT S, IsPureDimension d, maximal m with residue k as k-alg iso, IsReduced R), no extra assumptions. Five conclusion clauses match: geometric reducedness inline as node writes it; minimal primes of S in smooth locus via Smooth on an open nbhd + local top. dim d; IsField A_a and rank d; contraction of minimal primes of R minimal, R_p field, canonical localRingHom injective, rank_{R_p}(R_p⊗M_R)=d; θ:R→ₐ[A]L with IsScalarTower k A L ≡ arbitrary k-alg map, factorization Nonempty(A_a→ₐ[A]L), no injectivity. Edge cases k[t], k[x,y]/(xy), d=0, S=0 ok. lean.statement verbatim; sorry only; docstrings with Stacks places and blueprint id; no hollow defs or duplicate notions. Note: K,L in Type (max u w) and k,S share u (forced by Spec.map), ULift-invariant, declared in report. No recompile (no file changed)."
+ }
+}

@@ -1,0 +1,360 @@
+{
+ "id": "lem-per-rational-stratum-finite-free-model",
+ "kind": "statement",
+ "title": "Rational finite free models of integral continuous sheaves on strata",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite with valuation ring $A=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a noetherian scheme. On its small pro-etale site [def-weil-pbc-proetale-site] write $B_X=\\varprojlim_{n\\geq1}(A/\\varpi^n)_X$ [def-weil-pbc-adic-coefficient-datum] and $E_X=B_X[1/\\varpi]$ [def-weil-pbc-ringed-section-localization]. Use module sheaves and sheaf tensor products [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product]. Identify these rings with the continuous coefficient sheaves $C(-,A)$ and $C(-,E)$, respectively, using the quotient-projection and scalar-localization maps; for every locally closed immersion $h:S\\to X$ identify $h^{-1}B_X$ with $B_S$ and $h^{-1}E_X$ with $E_S$ using continuous pullback [lem-weil-pbc-continuous-coefficients-immersion-restriction]. If $M$ is a $B_X$-module sheaf and $U$ a covering object of $S_{\\mathrm{proet}}$, there is a natural comparison\n$$h^{-1}(E_X\\otimes_{B_X}M)|_U\\cong(E_S\\otimes_{B_S}h^{-1}M)|_U.$$\nIt is induced by the localization maps, is compatible with their units, and applies to any chosen pro-etale local model of $h^{-1}M$.\n\nFor an ordinary module $N$ over $A$, let $N_S$ denote its constant module sheaf over the constant ring sheaf $A^c_S$; for an $E$-module $V$ use $V_S$ over $E^c_S$ [def-weil-pbc-constant-sheaf, def-sf-site-constant-module-functor]. In particular $B_S\\otimes_A N$ denotes $B_S\\otimes_{A^c_S}N_S$ [def-weil-pbc-continuous-constructible-module]. Suppose $N$ is finitely presented, meaning that it has an exact presentation $A^m\\xrightarrow{D}A^n\\to N\\to0$ with $m,n$ finite [def-sc-finitely-presented-module]. Put $V=E\\otimes_A N$. There are natural isomorphisms of $E_S$-module sheaves\n$$E_S\\otimes_{B_S}(B_S\\otimes_A N)\\cong E_S\\otimes_{A^c_S}N_S\\cong E_S\\otimes_{E^c_S}V_S,$$\nwhose maps on local pure tensors are $e\\otimes(b\\otimes n)\\mapsto eb\\otimes n$ and $e\\otimes n\\mapsto e\\otimes(1\\otimes n)$, respectively. No flatness or torsion-freeness of $N$ is assumed. These identifications commute with restriction to any covering object $U$.\n\nMore precisely, for every specified finite presentation as above, $V\\cong\\operatorname{coker}(D_E)$ and $E_S\\otimes_{A^c_S}N_S\\cong\\operatorname{coker}(D_{E_S})$, where both matrices are obtained by the constant-section coefficient maps. If $P\\in GL_n(E)$ and $Q\\in GL_m(E)$ satisfy $PD_EQ=\\operatorname{diag}(I_\\rho,0)$, their constant-section matrices are inverse-preserving changes of basis over $E_S$ and identify these cokernels with $E^{n-\\rho}$ and $E_S^{n-\\rho}$, respectively, including $m=0$, $n=0$ and $n=\\rho$.\n\nConsequently, if on each stratum of a finite locally closed stratification of $X$ [def-constructible-stratification] the sheaf $M$ is pro-etale locally of the form $B_S\\otimes_A N$ with $N$ finitely presented, then $E_X\\otimes_{B_X}M$ is pro-etale locally finite free on those same strata, hence constructible in the rational sense of [def-weil-pbc-continuous-constructible-module]. Neither a global trivialization on a stratum nor a common rank on different covering objects is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; paragraph before Definition 6.8.6; Definition 6.8.10 and Proposition 6.8.11(3); finite-presentation model calculation in the construction of Proposition 6.8.14(2)."
+ },
+ "stmt_deps": [
+  "def-constructible-stratification",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-finitely-presented-module",
+  "def-sf-site-constant-module-functor",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical continuous coefficient pullbacks. Their naturality for A→E gives the square of coefficient maps. The inverse-image/scalar comparison, followed by scalar-tower reassociation on both sides of that square, gives the natural immersion comparison. On original pure tensors its four components give precisely the prescribed formula. Applying overFunctor gives the comparison on each specified slice.",
+   "uses": [
+    "lem-pur-inverse-image-scalar-comparison",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-sp-scalar-extension-dual-tower-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first scalar comparison is scalarExtensionTowerIso. Construct the second comparison by the universal property of scalar extension from constant modules: a tensor n maps to a tensor (1 tensor n). Its inverse uses the ordinary extension/restriction adjunction and multiplication by constant rational scalars. Generator extensionality proves both inverse identities and naturality. Apply overFunctor for slice statements. The generic comparison proof is extracted into ConstantScalarTowerComparison to meet the compile limit.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-tower-core",
+    "lem-sfb-scalar-dual-evaluation-descent",
+    "lem-pur-site-constant-module-hom",
+    "lem-per-constant-scalar-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalarPresentationCokernel to the specified ordinary presentation. Its normalization holds on every original vector, and its projection equation identifies the rationalized module with the specified matrix cokernel.",
+   "uses": [
+    "lem-per-scalar-presentation-cokernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constantMatrixCokernelModels over the rational field to the preceding normalized ordinary quotient. Compose its rational-model cokernel identification with scalarModels. The scalar comparison normalization and the coefficient constant-unit equation give the required original integral-vector lifts. No flatness or injectivity is used.",
+   "uses": [
+    "lem-per-constant-matrix-cokernel-models",
+    "lem-sfb-scalar-dual-evaluation-descent",
+    "lem-sfb-constant-finite-free-presentation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the supplied PDQ rank equation, rankNormalCokernel constructs the ordinary tail cokernel including all empty cases. Apply the coordinate-quotient transport in constantMatrixCokernelModels. It supplies row and column automorphisms, their specified inverse coordinates, and the sheaf tail formula. Compose the direct-model cokernel isomorphism with this tail isomorphism and apply overFunctor for each specified slice.",
+   "uses": [
+    "lem-per-rank-normal-cokernel",
+    "lem-per-constant-matrix-cokernel-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The rationalized ordinary finitely presented module is finite dimensional over E. Choose its finite basis using Module.finBasis, transport the resulting finite-free isomorphism through the rational realization functor, and compose with the scalar comparisons and the given local integral model. The scalarOverIso comparison retains exactly the specified covering object. This directly proves local finite freeness without invoking continuous matrix elimination.",
+   "uses": [
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-sfb-locally-free-derived-scalars",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the rational continuous module to the lattice coefficient presentation by the explicit pointwise ULift ring isomorphism. The ring-restriction/pullback comparison identifies its restrictions with the above rational restrictions; the coefficient comparison under immersion is an isomorphism. Compare the two constant module sheafifications through their normalized ring units and transport scalar extension. Consequently a rational finite-power local model is the continuous coefficient model of the finite free ordinary E-module of the same rank.",
+   "uses": [
+    "lem-weil-pbc-lattice-coefficient-pullback-isIso",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-pbc-integral-lattice-coefficient-transport",
+    "lem-pur-site-constant-module-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the original finite locally closed stratification and original covers, with the finite-free ranks just obtained. Locally closed strata of a noetherian scheme are constructible. The finite free ordinary modules are finitely presented, so these witnesses prove the recorded rational constructibility predicate.",
+   "uses": [
+    "def-weil-pbc-continuous-constructible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-per-constant-matrix-cokernel-models",
+  "lem-per-constant-scalar-tower-comparison",
+  "lem-per-rank-normal-cokernel",
+  "lem-per-scalar-presentation-cokernel",
+  "lem-pur-inverse-image-scalar-comparison",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pur-site-constant-module-hom",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-sfb-scalar-dual-evaluation-descent",
+  "lem-sp-scalar-extension-dual-tower-core",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-integral-lattice-coefficient-transport",
+  "lem-weil-pbc-lattice-coefficient-pullback-isIso",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Definitions 6.8.6 and 6.8.10, Proposition 6.8.14(2); explicit balanced scalar comparison, categorical cokernel transport, elementary rank-normal cokernel calculation, and a finite basis for the chosen local rational module. F8 completes the specified-presentation clause using ordinary scalar cokernels, exact rank-tail calculation and normalized constant-matrix cokernel transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalars.*(comp|tensor|finite)|tensor.*(assoc|FinitePresentation)|pullback.*(comp|exact)",
+   "results": "25 hits: Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/Tactic/Attr/Register.lean, Mathlib/Tactic/Attr/Register.lean, Mathlib/Tactic/Attr/Register.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean.  No hit gives the normalized continuous stratum model and its finite presentation cokernel comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of rings A to B to E on a site, scalar extension of a constant finitely presented A module to an E algebra is the constant finite dimensional rational module extended to that algebra",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', AlgHom.extendScalars, RestrictScalars, instFinitePresentationTensorProduct, ModuleCat.extendScalars, ModuleCat.extendRestrictScalarsAdj, SheafOfModules.restrictScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv.  No hit gives the normalized continuous stratum model and its finite presentation cokernel comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso.  No hit gives the normalized continuous stratum model and its finite presentation cokernel comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation matrix over a discrete valuation ring has finite free cokernel over a sheaf of algebras over its fraction field, compatible with restriction to a locally closed stratum",
+   "results": "8 hits: Module.FinitePresentation.exists_free_localizedModule_powers, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite.isFiniteType_generators, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s.  No hit gives the normalized continuous stratum model and its finite presentation cokernel comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite l adic field E with valuation ring A, a sheaf locally modeled on continuous A coefficients tensor a finitely presented A module becomes locally finite free after tensor with continuous E coefficients",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_surjective_of_finite.  No hit gives the normalized continuous stratum model and its finite presentation cokernel comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackPushforwardAdjunction|IsFinitePresentation|constantSheaf",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean.  No hit gives the normalized continuous stratum model and its finite presentation cokernel comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|changeOfRings.*(Comp|comp)|tensor.*cokernel",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean.  Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of a constant finitely presented module to continuous fraction field coefficient sheaves is finite free compatible with locally closed restriction",
+   "results": "8 hits: instFinitePresentationTensorProduct, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.extendRestrictScalarsAdj, Module.Presentation.restrictScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, ContinuousLinearMap.restrictScalars, ModuleCat.Tilde.toOpen.  Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.changeOfRings",
+   "results": "0 hits: . loogle: unknown identifier 'SheafOfModules.changeOfRings' Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented integral continuous coefficient module sheaf becomes locally finite free over continuous l adic field coefficients after rationalization",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType.  Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(tensor|cokernel)|tensor.*constant|preservesColimits",
+   "results": "11 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean.  Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv.  Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a site, rationalizing a constant finitely presented module extended to a sheaf of complete valuation rings yields a finite free module over the continuous fraction field sheaf",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.Presentation.IsFinite, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation.  Read the returned hits and the relevant PullbackContinuous/Quasicoherent source: generic pullback or local-presentation infrastructure, not the complete continuous-coefficient stratum assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-module-realization-functor",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Construction and cohomology of raw rational module realization. Retained item proof steps 1, 2, 3. Retained proof steps 4, 5 and 6: localized stratum restriction, balanced scalar extension and finite-presentation matrix cokernels.",
+   "via": [
+    "lem-per-rational-module-realization-functor",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-rational-stratum-finite-free-model",
+  "worker": "stage1",
+  "summary": "Checked Bhatt--Scholze section 6.8 and the generic Stacks inputs; supplied nine explicit steps proving normalized restriction, both scalar isomorphisms, matrix cokernels and local finite freeness without any flatness assumption on N. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the first proof paragraph of lem-per-smooth-pullback-t-exact, via the raw rational module realization: the retained stratum-restriction, balanced scalar-extension and finite-presentation arguments singled out by this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "The integral and rational continuous coefficient identifications under locally closed restriction; a generic coefficient tool, with no perverse-category argument."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "The normalized underived inverse-image tensor comparison; a general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "The underived tensor comparison for slice-topos restriction, a general ringed-topos tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "The bilinear universal property used to check explicit inverse tensor maps; a general site tool."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Tensor commutes with module sheafification, applied to constant presheaves; a general site tool."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Exactness of constant sheafification and finite-power/matrix coordinates only, a general site tool."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Preservation of the finite cokernel diagram by sheaf tensor; a general ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-field-matrix-elimination",
+    "why": "The one-point specialization giving ordinary finite-matrix elimination over E; a general linear algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-sfb-constant-finite-free-presentation-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-d95780a41",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-d95780a41 (reviewer sub-agent of L); spot-checked: PASS. Read the item, all ten cited statements and the source: Bhatt–Scholze §6.8, Lemma 6.8.2(1) and Definitions 6.8.3, 6.8.6 and 6.8.10. No new nodes. The item statement is byte-identical to its creation in Q136, and the graph is acyclic.\n\nStep checks:\n- Step 1: lem-weil-pbc-continuous-coefficients-immersion-restriction gives A_X ≅ lim(A/ϖ^n)_X, A_X[1/ϖ] ≅ E_X and h^{-1}A_X ≅ A_S, h^{-1}E_X ≅ E_S for locally closed h. Its noetherian hypothesis is present.\n- Step 2: lem-pur-proetale-inverse-image-tensor-comparison(1) with O=B_X, F=E_X, G=M; the pure-tensor formula gives the unit compatibility. Slice restriction uses lem-weil-pbc-ringed-topoi-module-pullback-tensor.\n- Steps 3–4: the balanced reassociations are checked through lem-pc-sites-sheaf-tensor-bilinear-universal. Step 4 applies lem-pc-sites-module-sheafification-tensor to constant presheaves; the constant sheaf and constant module definitions are sheafifications, so it applies.\n- Step 5: right exactness, plus the flatness-independent clauses of lem-sfb-constant-finite-free-presentation-extension (exactness, β_s, E_B(D)=D_B), plus finite-cokernel preservation. The flat clause is not used.\n- Step 6: verified by hand. PD=JQ^{-1} kills relation tails, and v − P^{-1}(0,tail Pv) ∈ P^{-1} im J = im D. The cases m=0, n=0 and n=ρ are covered.\n- Step 7: matrix elimination on the one-point space over the normed field E. Rank 0 and empty index sets are covered by its statement.\n- Steps 8–9: def-weil-pbc-continuous-constructible-module with topological ring E; the witness is E_S ⊗ V with V ≅ E^{n-ρ}.\n\nEdge cases: N=A/ϖ^a gives 0 rationally; N=0 and N=A^r behave as expected.\n\nAll eight off-unit citations are generic tool lemmas. They are listed in split_report.tool_uses, and I accept them.\n\nAdvisory only:\n- Step 9 leaves implicit that j^* ≅ j^{-1}, via the Step 1 isomorphism j^{-1}E_X ≅ E_S.\n- Step 3 could cite lem-weil-pbc-scalar-tensor-comparison-universes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalStratumFiniteFreeModel",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalStratum.rationalStratumFiniteFreeModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalStratum.A",
+   "AlgebraicGeometry.ProEtale.RationalStratum.K",
+   "AlgebraicGeometry.ProEtale.RationalStratum.inclusion",
+   "AlgebraicGeometry.ProEtale.RationalStratum.integralConstants",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalConstants",
+   "AlgebraicGeometry.ProEtale.RationalStratum.vectorSpace",
+   "AlgebraicGeometry.ProEtale.RationalStratum.integralModel",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalize",
+   "AlgebraicGeometry.ProEtale.RationalStratum.directModel",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalModel",
+   "AlgebraicGeometry.ProEtale.RationalStratum.reassociation",
+   "AlgebraicGeometry.ProEtale.RationalStratum.integralPullback",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalPullback",
+   "AlgebraicGeometry.ProEtale.RationalStratum.restrictIntegral",
+   "AlgebraicGeometry.ProEtale.RationalStratum.restrictRational",
+   "AlgebraicGeometry.ProEtale.RationalStratum.constantSection",
+   "AlgebraicGeometry.ProEtale.RationalStratum.vectorUnit",
+   "AlgebraicGeometry.ProEtale.RationalStratum.freeModel",
+   "AlgebraicGeometry.ProEtale.RationalStratum.coord",
+   "AlgebraicGeometry.ProEtale.RationalStratum.matrixOverField",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rankMatrix",
+   "AlgebraicGeometry.ProEtale.RationalStratum.tailIndex",
+   "AlgebraicGeometry.ProEtale.RationalStratum.directMap",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalMap",
+   "AlgebraicGeometry.ProEtale.RationalStratum.scalarModels",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalSection",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalizeMap",
+   "AlgebraicGeometry.ProEtale.RationalStratum.restrictIntegralMap",
+   "AlgebraicGeometry.ProEtale.RationalStratum.restrictRationalMap",
+   "AlgebraicGeometry.ProEtale.RationalStratum.immersionComparison",
+   "AlgebraicGeometry.ProEtale.RationalStratum.presentationModels",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalLatticeRing",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalLatticeRingIso",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalConstructible",
+   "AlgebraicGeometry.ProEtale.RationalStratum.chosenLocalModel",
+   "AlgebraicGeometry.ProEtale.RationalStratum.rationalStratumFiniteFreeModel"
+  ],
+  "file": "lean/Sheaf/Paper/RationalStratumFiniteFreeModel.lean",
+  "statement": "theorem rationalStratumFiniteFreeModel (X : Scheme.{u}) [IsNoetherian X] (M : Modules (integralCoefficientSheaf l X E)) (s : Scheme.FiniteLocallyClosedStratification X) (I : ∀ k : Fin s.n, Type (u + 1)) (U : ∀ k : Fin s.n, I k → (s.domain k).ProEt) (_cover : ∀ k : Fin s.n, (ProEt.topology (s.domain k)).CoversTop (U k)) (_models : ∀ (k : Fin s.n) (i : I k), ∃ N : ModuleCat.{u + 1} (A l E), Module.FinitePresentation (A l E) N ∧ Nonempty ((restrictIntegral l E (s.immersion k) M).over (U k i) ≅ (integralModel l E (s.domain k) N).over (U k i))) : (∀ (k : Fin s.n) (i : I k), ∃ r : ℕ, Nonempty ((restrictRational l E (s.immersion k) (rationalize l E X M)).over (U k i) ≅ (freeModel l E (s.domain k) r).over (U k i))) ∧ rationalConstructible l E X (rationalize l E X M)",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All five original clauses are proved. F8 fills presentationModels using proved generic scalar-presentation, rank-tail, constant-cokernel and matrix-transport helpers. Public signatures and concrete definitions remain unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2445cfaac",
+  "group": "Q12",
+  "result": "pass",
+  "note": "First S2 delivery; only the item lean record changed, statement field verbatim (script), 36 recorded decls = file, 5 sorry (theorems only). Read node, 12 stmt_deps, report, module and the exact live decls. Clause by clause: continuous B/E per the node's own identification; canonical continuousCoefficientPullback; immersionComparison pinned on 1⊗h^{-1}(a⊗x) (local generators, unit at a=1, naturality); scalarModels = existing scalarExtensionTowerIso plus generator-pinned e; presentationModels: arbitrary exact right presentation, no injectivity; v, w pinned by pE/pS≫iso=π; dS entrywise; P, Q and inverses pinned; tail formula; ρ≤n,m only types diag(I_ρ,0). Final theorem keeps the given strata and covers, ∀k i ∃r, rationalConstructible = recorded IsContinuousConstructible via explicit pointwise ULift iso. Edge cases N=0, torsion, m=0, n=0, ρ=n, empty strata covered. Gates: no hollow defs, docstrings with source/blueprint/proof steps, no universe restriction, Mathlib ProEt, report sections present. Advisory only: owners outside stmt_deps (scalarExtensionTowerIso, ConstantFiniteFreePresentationExtension, continuousCoefficientPullback, inverseSection, constantModuleHom*); WithAbs vs normed-field encoding of rational constructibility in ContinuousRationalDerivedRealization; slice Nonempty clauses follow from the global isos. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

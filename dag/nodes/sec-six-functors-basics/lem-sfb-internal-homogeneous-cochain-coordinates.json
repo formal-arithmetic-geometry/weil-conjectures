@@ -1,0 +1,409 @@
+{
+ "id": "lem-sfb-internal-homogeneous-cochain-coordinates",
+ "kind": "statement",
+ "title": "Internal homogeneous and inhomogeneous cochain coordinates",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $J$ be a profinite group, and let $M$ be an internal $A$-module with $A$-linear condensed $J$-action [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $A[P]$ and internal function evaluation as in [def-sfb-condensed-equivariant-bar-data]. For $n\\geq0$ let $B_J^n(M)$ be the submodule sheaf of $\\underline{\\operatorname{Hom}}_A(A[\\underline J^{n+1}],UM)$ consisting of families $F$ satisfying\n$$F(ax_0,\\ldots,ax_n)=aF(x_0,\\ldots,x_n)$$\nafter every profinite base change $T\\to S$, for every $a,x_i\\in C(T,J)$. Give $B_J^\\bullet(M)$ the alternating-deletion differential $\\delta$. Let $C_J^n(M)=\\underline{\\operatorname{Hom}}_A(A[\\underline J^n],UM)$ have the inhomogeneous action-dependent bar differential $d$ of [def-sfb-condensed-equivariant-bar-data]. Both complexes are zero in negative degrees. There is an isomorphism in $D(\\operatorname{Mod}_A)$ [def-weil-abstract-derived-category]\n$$Q(B_J^\\bullet(M))\\simeq Q(C_J^\\bullet(M))$$\nrepresented by mutually inverse internal $A$-linear cochain maps $\\Phi_J:B_J^\\bullet(M)\\to C_J^\\bullet(M)$ and $\\Psi_J:C_J^\\bullet(M)\\to B_J^\\bullet(M)$ with generalized evaluation formulas\n$$(\\Phi_{J,n}F)(g_1,\\ldots,g_n)=F(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_n),$$\n$$(\\Psi_{J,n}c)(x_0,\\ldots,x_n)=x_0 c(x_0^{-1}x_1,x_1^{-1}x_2,\\ldots,x_{n-1}^{-1}x_n).$$\nThese formulas hold over every profinite test set and all its base changes. In particular $\\Phi\\Psi=1$, $\\Psi\\Phi=1$, $\\Phi\\delta=d\\Phi$, and $\\delta\\Psi=\\Psi d$. The maps commute with all equivariant internal coefficient maps and profinite base change. For any continuous homomorphism $u:K\\to J$ of profinite groups, homogeneous restriction $R_u$ and inhomogeneous restriction $r_u$ satisfy $R_u\\Psi_J=\\Psi_Kr_u$ and $r_u\\Phi_J=\\Phi_KR_u$, using the restricted action on $M$. In degree zero $\\Phi_0F=F(1)$ and $\\Psi_0m(x)=xm$. No injectivity, trivial-action, rationality or representability hypothesis on $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology: displayed bar differential; agent internal sheaf homogeneous-coordinate adaptation, not asserted verbatim there."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Take the successive-quotient inclusion on each given bar complex from [lem-sfb-bar-homogeneous-inclusion]. Its injectivity, image, coefficient naturality and deletion differential make that very bar complex a valid homogeneous presentation. Thus choose the coordinate isomorphism to be the identity. The specifications being used are unchanged [def-sfb-internal-cochain-coordinate-data].",
+   "uses": [
+    "def-sfb-internal-cochain-coordinate-data",
+    "lem-sfb-bar-homogeneous-inclusion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For prefix products p_i, consecutive quotients p_i^{-1}p_{i+1} equal g_i by the list-product recursion, and p_0=1. The inclusion evaluation formula therefore proves Phi by the unit action; it gives Psi directly. This proves both coordinate formulas for the identity cochain isomorphism without constructing a separate homogeneous complex.",
+   "uses": [
+    "lem-sfb-bar-homogeneous-inclusion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use [lem-sfb-internal-bar-zero-evaluation] for the specified zero isomorphism. Apply its evaluation formula at the identity together with the inclusion formula to obtain Phi_0. Apply the formula to z^{-1}m and cancel z z^{-1} to obtain Psi_0.",
+   "uses": [
+    "lem-sfb-internal-bar-zero-evaluation",
+    "lem-sfb-bar-homogeneous-inclusion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the inhomogeneous restriction of [lem-sfb-internal-bar-restriction-evaluation] as both restriction maps, since the two complexes are the same presentation. Its given evaluation proves the inhomogeneous formula. For the homogeneous formula apply the inclusion evaluations to both sides: v commutes with successive quotients and the inflated action is the action by v(g_0). Both coordinate squares reduce to composition with identity maps.",
+   "uses": [
+    "lem-sfb-internal-bar-restriction-evaluation",
+    "lem-sfb-bar-homogeneous-inclusion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coordinate maps are identities on the same complex. Extend by zero and apply the ordinary localization functor [def-weil-abstract-derived-category]. Extension and localization preserve identity maps, so the identity derived isomorphism has exactly the required representatives.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-cochain-coordinate-data",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-bar-homogeneous-inclusion",
+  "lem-sfb-internal-bar-restriction-evaluation",
+  "lem-sfb-internal-bar-zero-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, internal adaptation: use the given inhomogeneous bar complex itself as the homogeneous presentation through the successive-quotient inclusion. Combine prefix cancellation, empty-tuple evaluation, group restriction and functorial preservation of identities; proved in Lean by T3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural cochain isomorphism between internal condensed module homogeneous equivariant group cochains and inhomogeneous bar cochains",
+   "results": {
+    "t": "2026-10-23T11:43:59Z",
+    "tool": "leanfinder",
+    "query": "Natural cochain isomorphism between internal condensed module homogeneous equivariant group cochains and inhomogeneous bar cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.inhomogeneousCochainsIso",
+     "groupCohomology.cochainsIso₁",
+     "groupCohomology.cochainsIso₂",
+     "inhomogeneousCochains.d_eq",
+     "groupCohomology.cochainsIso₃",
+     "groupCohomology.isoShortComplexH1_hom",
+     "groupCohomology.isoShortComplexH2_hom",
+     "groupCohomology.dArrowIso₀₁_hom_right"
+    ],
+    "digest": "14fdd306d9bce4b8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso is for discrete Rep over an ordinary ring; TopRep.homogeneousCochains is topological, not an internal condensed-module coordinate isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homogeneous\", \"cochains\"",
+   "results": {
+    "t": "2026-10-23T11:44:00Z",
+    "tool": "loogle",
+    "query": "\"homogeneous\", \"cochains\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TopRep.homogeneousCochains",
+     "TopRep.homogeneousCochains.d_eq",
+     "TopRep.homogeneousCochains.d_apply",
+     "groupCohomology.inhomogeneousCochains",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "groupCohomology.inhomogeneousCochains.ext",
+     "groupCohomology.inhomogeneousCochains.ext_iff",
+     "groupCohomology.inhomogeneousCochains.d_def"
+    ],
+    "digest": "882b1453851290bc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso is for discrete Rep over an ordinary ring; TopRep.homogeneousCochains is topological, not an internal condensed-module coordinate isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|inhomogeneous",
+   "results": {
+    "t": "2026-10-23T11:44:00Z",
+    "tool": "grep",
+    "query": "homogeneous|inhomogeneous",
+    "sub": "RepresentationTheory/Homological/ContCohomology",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean"
+    ],
+    "digest": "6c5f34d3802f5870"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso is for discrete Rep over an ordinary ring; TopRep.homogeneousCochains is topological, not an internal condensed-module coordinate isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal sheaf module homogeneous equivariant cochains are isomorphic as complexes to inhomogeneous cochains",
+   "results": {
+    "t": "2026-10-23T11:44:01Z",
+    "tool": "leansearch",
+    "query": "Internal sheaf module homogeneous equivariant cochains are isomorphic as complexes to inhomogeneous cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.inhomogeneousCochains",
+     "groupCohomology.cochainsFunctor",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.cochainsIso₁",
+     "groupCohomology.dArrowIso₀₁",
+     "groupCohomology.cochainsFunctor_obj",
+     "groupCohomology.inhomogeneousCochains.ext_iff"
+    ],
+    "digest": "da6560962d4d386c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso is for discrete Rep over an ordinary ring; TopRep.homogeneousCochains is topological, not an internal condensed-module coordinate isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensed module internal Hom bar cochains cumulative product homogeneous change of coordinates natural cochain isomorphism",
+   "results": {
+    "t": "2026-10-23T11:44:03Z",
+    "tool": "leanfinder",
+    "query": "Condensed module internal Hom bar cochains cumulative product homogeneous change of coordinates natural cochain isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "inhomogeneousCochains.d_eq",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.cochainsIso₁",
+     "CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_hom",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk"
+    ],
+    "digest": "4ff3d4b99048c759"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: groupCohomology.inhomogeneousCochainsIso is for discrete Rep over an ordinary ring; TopRep.homogeneousCochains is topological, not an internal condensed-module coordinate isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|inhomogeneous",
+   "results": {
+    "t": "2026-10-23T12:51:53Z",
+    "tool": "grep",
+    "query": "homogeneous|inhomogeneous",
+    "sub": "RepresentationTheory/Homological/ContCohomology",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean"
+    ],
+    "digest": "6c5f34d3802f5870"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates groupCohomology.inhomogeneousCochainsIso and Rep.barComplex.isoStandardComplex concern ordinary representations over an ordinary commutative ring; TopRep and ContinuousCohomology concern topological modules, not arbitrary internal modules over a condensed ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal sheaf module homogeneous equivariant cochains are isomorphic as complexes to inhomogeneous cochains",
+   "results": {
+    "t": "2026-10-23T12:51:53Z",
+    "tool": "leansearch",
+    "query": "Internal sheaf module homogeneous equivariant cochains are isomorphic as complexes to inhomogeneous cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.inhomogeneousCochains",
+     "groupCohomology.cochainsFunctor",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.cochainsIso₁",
+     "groupCohomology.dArrowIso₀₁",
+     "groupCohomology.cochainsFunctor_obj",
+     "groupCohomology.inhomogeneousCochains.ext_iff"
+    ],
+    "digest": "da6560962d4d386c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates groupCohomology.inhomogeneousCochainsIso and Rep.barComplex.isoStandardComplex concern ordinary representations over an ordinary commutative ring; TopRep and ContinuousCohomology concern topological modules, not arbitrary internal modules over a condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homogeneous\", \"cochains\"",
+   "results": {
+    "t": "2026-10-23T12:51:54Z",
+    "tool": "loogle",
+    "query": "\"homogeneous\", \"cochains\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TopRep.homogeneousCochains",
+     "TopRep.homogeneousCochains.d_eq",
+     "TopRep.homogeneousCochains.d_apply",
+     "groupCohomology.inhomogeneousCochains",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "groupCohomology.inhomogeneousCochains.ext",
+     "groupCohomology.inhomogeneousCochains.ext_iff",
+     "groupCohomology.inhomogeneousCochains.d_def"
+    ],
+    "digest": "882b1453851290bc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates groupCohomology.inhomogeneousCochainsIso and Rep.barComplex.isoStandardComplex concern ordinary representations over an ordinary commutative ring; TopRep and ContinuousCohomology concern topological modules, not arbitrary internal modules over a condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal condensed module homogeneous equivariant cochains and inhomogeneous bar cochains are naturally isomorphic complexes",
+   "results": {
+    "t": "2026-10-23T12:51:54Z",
+    "tool": "leanfinder",
+    "query": "Internal condensed module homogeneous equivariant cochains and inhomogeneous bar cochains are naturally isomorphic complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.inhomogeneousCochainsIso",
+     "Rep.barComplex.isoStandardComplex",
+     "inhomogeneousCochains.d_eq",
+     "groupCohomology.cochainsIso₁",
+     "groupHomology.inhomogeneousChainsIso",
+     "groupCohomology.cochainsIso₂",
+     "groupCohomology.isoShortComplexH1_hom",
+     "groupCohomology.isoShortComplexH1"
+    ],
+    "digest": "f28a0b13f7a2fb17"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates groupCohomology.inhomogeneousCochainsIso and Rep.barComplex.isoStandardComplex concern ordinary representations over an ordinary commutative ring; TopRep and ContinuousCohomology concern topological modules, not arbitrary internal modules over a condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensed module internal Hom bar cochains cumulative product homogeneous change of coordinates natural cochain isomorphism",
+   "results": {
+    "t": "2026-10-23T12:54:10Z",
+    "tool": "leanfinder",
+    "query": "Condensed module internal Hom bar cochains cumulative product homogeneous change of coordinates natural cochain isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "inhomogeneousCochains.d_eq",
+     "groupCohomology.inhomogeneousCochainsIso",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.cochainsIso₁",
+     "CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_hom",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+     "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk"
+    ],
+    "digest": "4ff3d4b99048c759"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates groupCohomology.inhomogeneousCochainsIso and Rep.barComplex.isoStandardComplex concern ordinary representations over an ordinary commutative ring; TopRep and ContinuousCohomology concern topological modules, not arbitrary internal modules over a condensed ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-bar-row-finite-index-transfer",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input.",
+   "via": [
+    "lem-sfb-internal-bar-row-finite-index-transfer",
+    "lem-sfb-prime-to-ell-scalar-bar-model",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-homogeneous-cochain-coordinates",
+  "worker": "stage1",
+  "summary": "Q101 checked the current blueprint, Stacks 0DVG and all three cited node statements. Kept the statement and statement dependencies; supplied eight explicit elementary steps on entire profinite slices for internal maps, inverse identities, deletion cancellation, the signed differential calculation, both naturalities, and localization. No new node or Mathlib leaf: none of these short algebraic calculations hides a separate non-elementary lemma. No complete project Lean declaration found.",
+  "blueprint": "Realizes the internal homogeneous-coordinate auxiliary calculation below paragraph (3), open direct image, of literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md via the inherited finite-index-transfer/scalar-tame-kernel chain. Blueprint search homogeneous cochain has no match; inhomogeneous returns only unrelated discrete/finite units. Repaired inherited null from.node to det-thm-sf-ctf-stability-direct-images: the final inherited via entry lem-sfb-admissible-direct-image explicitly names that blueprint ancestor. Retained the precise from.place and complete via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-a271a3d2e",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-a271a3d2e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. Statement and stmt_deps are byte-identical to the live node (live is unsplit, no proof); there is no repair note, so the re-split rule does not apply. proof_deps equal the union of the step uses, and all three are definitions (bar-data, action-module, abstract derived category), so there is no route issue and no tool_uses are needed. I checked the eight elementary steps against the cited statements. Step 1: Psi is homogeneous since (a x_{i-1})^{-1}(a x_i) = x_{i-1}^{-1} x_i, and the action is A(T)-linear. Step 2: Phi Psi = 1 via prefix products, and Psi Phi F(x) = x_0 F(1, x_0^{-1} x_i) = F(x) by homogeneity. Step 3: deleting i then j-1 cancels deleting j then i, so delta^2 = 0. Step 4: deleting p_0 gives the action face g_1 Phi F(g_2, ...), and the interior and last faces match the bar-data faces and Stacks 0DVG (etale-cohomology.tex lines 9008-9030, including degree 0). Steps 5 and 8: d = Phi delta Psi gives cochain maps, and Q makes them inverse isomorphisms in D. Steps 6 and 7: coefficient, base-change and u-restriction naturality are verified, which covers the parent's R Psi_G = Psi_H r_H. Edge cases tested: trivial J (both differentials are 0 or id by parity of n), n = 0 and n = 1, noncommutative J, characteristic 2, zero M. The blueprint from.node repair (null to det-thm-sf-ctf-stability-direct-images) is correct: it follows the via chain to lem-sfb-admissible-direct-image. No duplicate exists: the topological, joint-continuous and sk-thm-br homogeneous-cochain nodes concern other coefficient kinds. Searches cover all three kinds and no SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalHomogeneousCochainCoordinates",
+  "declaration": "CategoryTheory.CondensedBar.exists_internalHomogeneousCochainCoordinates",
+  "declarations": [
+   "CategoryTheory.CondensedBar.exists_internalHomogeneousCochainCoordinates"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalHomogeneousCochainCoordinates.lean",
+  "statement": "theorem exists_internalHomogeneousCochainCoordinates (A : Ring.{u}) (F : InternalFunctions A) (bar : ∀ J : ProfiniteGrp.{u}, BarDiagram (G := J) F) : Nonempty (InternalCochainCoordinates A F bar)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Definitions have been relocated verbatim to the publicly reexported InternalHomogeneousCochainCoordinateData module; its definition node carries their attachments. The theorem statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-7a8435822"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a8435822",
+  "group": "Q11",
+  "result": "fix",
+  "note": "H3: theorem asserted ∃ F bar, Nonempty (InternalCochainCoordinates A F bar) — coordinates only for some chosen model; the node (and consumer internal_bar_finite_index_transfer, sibling nonempty_injectiveRows) needs every given InternalFunctions F and BarDiagram family bar. FIX: binders (F : InternalFunctions A) (bar : ∀ J, BarDiagram (G := J) F) : Nonempty (...), docstring sentence, lean-record statement updated; declaration name kept; nt_compile --json clean 19.9 s. All other clauses checked: homogeneous subcomplex pinned (injective inclusion, image = IsHomogeneousSection over all base changes, alternating deletion), phi/psi prefix/quotient formulas with order kept, degree-zero phi_zero/psi_zero, restriction squares in correct ≫ order with inflate, derived iso = Q(extendMap) of the maps with standard localization; no extra hypotheses, single universe u, docstrings/source/blueprint present, imports needed, no duplicate (homogeneousHom/InjectiveRows are theorem-node notions; Mathlib groupCohomology/TopRep differ), edge cases n=0/1, trivial J, zero M/ring, empty tests, char 2."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b9074",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T083030-L-2253958",
+  "kind": "interface",
+  "note": "independent cc review: item proof (identity presentation via BarHomogeneousInclusion, zero/restriction lemmas) against the unchanged InternalCochainCoordinates spec, verbatim relocation diff against the clone, the 2 new sorried statements against BarDiagram.face/mergeTuple/inflate, node fields against Lean"
+ }
+}

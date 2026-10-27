@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-symbol-product-derivative-bound",
+ "kind": "statement",
+ "title": "Mixed Leibniz formula for a scalar frequency multiplier",
+ "statement": "Use $\\mathbf R$ [def-weil-field], smooth Euclidean functions [def-sfb-smooth-real-manifold], and the coordinate partial-derivative convention in [def-sfb-symbol-pseudodifferential-operators]. Let $u,v,p,q\\geq0$ be integers, let $h:\\mathbf R^v\\to\\mathbf R$ be smooth, and let $a:\\mathbf R^u\\times\\mathbf R^v\\to\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q)$ be smooth. Then $b(x,\\xi)=h(\\xi)a(x,\\xi)$ is smooth and for every pair of multi-indices $\\alpha\\in\\mathbf N^u$, $\\beta\\in\\mathbf N^v$ one has\n$$\\partial_x^\\alpha\\partial_\\xi^\\beta b(x,\\xi)=\\sum_{\\gamma\\leq\\beta}\\binom\\beta\\gamma(\\partial^\\gamma h)(\\xi)(\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a)(x,\\xi).$$\nHere $\\gamma\\leq\\beta$ means coordinatewise inequality, $|\\gamma|=\\sum_i\\gamma_i$, and $\\binom\\beta\\gamma=\\prod_i\\binom{\\beta_i}{\\gamma_i}$. The matrix norm consequently satisfies\n$$\\|\\partial_x^\\alpha\\partial_\\xi^\\beta b(x,\\xi)\\|\\leq\\sum_{\\gamma\\leq\\beta}\\binom\\beta\\gamma|\\partial^\\gamma h(\\xi)|\\,\\|\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a(x,\\xi)\\|.$$",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.6–3.7, printed p.7: coordinate Leibniz formulas, including the scalar cutoff product in the proof of asymptotic expansions. Agent statement of the general matrix-valued mixed formula."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=\\mathbf R^u\\times\\mathbf R^v$ and $H(x,\\xi)=h(\\xi)$. The projection $E\\to\\mathbf R^v$ and the inclusion $\\mathbf R\\to\\mathbf C$ are continuous real-linear maps. The smooth composition and linear-map rules give a smooth complex-valued $H$, whose real differential on $(s,t)$ is $Dh(\\xi)[t]$. Choose the standard matrix entries $a_{ij}$ of $a$. These are smooth complex-valued functions: each entry is a continuous real-linear coordinate projection. The scalar product rule gives smooth entries $Ha_{ij}$ and\n$$\\partial_e(Ha_{ij})=(\\partial_e H)a_{ij}+H\\partial_e a_{ij}$$\nfor every coordinate direction $e$, where $\\partial_e f(z)=Df(z)[e]$. Smoothness in real coordinates is entrywise smoothness, so these are the entries of the smooth matrix-valued function $b$. This argument concerns all entries simultaneously and does not choose a nonzero entry; if $p=0$ or $q=0$, the matrix space is zero and smoothness and all later equalities are immediate.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), supporting cutoff calculus in the existing prerequisite chain; agent-written detail: smoothness and first-order scalar product rule"
+   }
+  },
+  {
+   "text": "Every iterated coordinate derivative of each entry of $a$ and of $H$ is smooth. Indeed the differential of a smooth map is smooth, and evaluation $L\\mapsto L(e)$ is a continuous real-linear map, so compose these two maps and repeat. The chain rule also identifies\n$$\\partial_e\\partial_f g(z)=D(Dg)(z)[e][f].$$\nApply symmetry of the second differential to any already differentiated smooth $g$, with $F=\\mathbf C$ viewed as a two-dimensional real space and open domain $E$. It gives $\\partial_e\\partial_f g=\\partial_f\\partial_e g$. Thus adjacent coordinate partials can be exchanged; finitely many adjacent exchanges put any finite word of partials in the chosen coordinate order. The same reasoning applies to real-valued $h$. All hypotheses here are smoothness on the whole Euclidean domain, hence in particular twice continuous differentiability; no boundary or restricted-domain derivative is used.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-real-second-derivative-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), supporting cutoff calculus in the existing prerequisite chain; agent-written detail: smooth partial derivatives and adjacent exchanges"
+   }
+  },
+  {
+   "text": "For a finite ordered list $w$ of coordinate directions, let $P_w$ mean applying the listed partials successively, and let $w|S$ be its sublist at positions $S$. For each scalar entry $A=a_{ij}$ prove, by induction on the length $N$ of $w$,\n$$P_w(HA)=\\sum_{S\\subseteq\\{1,\\ldots,N\\}}(P_{w|S}H)(P_{w|S^c}A).$$\nFor $N=0$ the single term is $HA$, since $P_{\\varnothing}$ is the identity. Suppose the equality holds as an identity of smooth functions. Apply one further coordinate partial $\\partial_e$. Differentiation passes through the finite sum by repeated use of the sum rule. Applying the scalar product rule to each summand gives two terms: one differentiates its $H$ factor, one its $A$ factor. The former is indexed by $S\\cup\\{N+1\\}$ and the latter by $S$, now as subsets of $\\{1,\\ldots,N+1\\}$. Every subset occurs exactly once, according as it contains the new position or does not. The inherited orders of both sublists are exactly their orders in $(w,e)$, so this is the asserted identity at $N+1$. All factors being differentiated are smooth by step 2. This induction proves the word identity, rather than assuming a higher Leibniz formula.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), supporting cutoff calculus in the existing prerequisite chain; agent-written detail: induction for the finite-word product expansion"
+   }
+  },
+  {
+   "text": "Choose $w$ with $\\alpha_i$ occurrences of each $x_i$ direction and $\\beta_j$ occurrences of each $\\xi_j$ direction. By step 2 its derivative is the displayed mixed derivative, regardless of the order in this list. The first-order projection formula in step 1 gives $\\partial_{x_i}H=0$. If $S$ contains an $x$ position, commute that partial to act first on $H$; its factor then vanishes, and further derivatives of zero are zero by the constant-map rule. A surviving subset has only frequency positions. Let $\\gamma_j$ count its positions in direction $\\xi_j$. Then $\\gamma\\leq\\beta$, its $H$ factor is $(\\partial^\\gamma h)(\\xi)$, and its $A$ factor is $\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a_{ij}(x,\\xi)$. There are exactly $\\prod_j\\binom{\\beta_j}{\\gamma_j}$ such subsets: independently choose $\\gamma_j$ of the $\\beta_j$ labelled occurrences for every $j$. This uses the elementary counting definition of the binomial coefficient. Group the finite sum of step 3 by these counts. The resulting scalar identity holds for every entry, hence is precisely the claimed matrix identity. Empty lists and empty products give coefficient $1$, covering $u=0$, $v=0$, and $\\alpha=\\beta=0$.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-real-second-derivative-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), supporting cutoff calculus in the existing prerequisite chain; agent-written detail: grouping the word expansion and eliminating spatial derivatives on the multiplier"
+   }
+  },
+  {
+   "text": "Take norms in the matrix identity. For finitely many vectors $T_\\gamma$, induction on the number of terms using $\\|S+T\\|\\leq\\|S\\|+\\|T\\|$ gives $\\|\\sum_\\gamma T_\\gamma\\|\\leq\\sum_\\gamma\\|T_\\gamma\\|$. Norm homogeneity gives\n$$\\bigl\\|\\tbinom\\beta\\gamma(\\partial^\\gamma h)(\\xi)\\,\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a(x,\\xi)\\bigr\\|=\\tbinom\\beta\\gamma|\\partial^\\gamma h(\\xi)|\\,\\|\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a(x,\\xi)\\|,$$\nsince the binomial coefficient is a nonnegative integer. Substitution gives the stated inequality. Only the triangle inequality and absolute homogeneity defining the matrix norm are used; no estimate of full Frechet derivative norms or extra symbol bound is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), supporting cutoff calculus in the existing prerequisite chain; agent-written detail: norm bound from the defining norm axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-real-smooth-differentiation",
+  "lem-sfb-real-second-derivative-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Proof (3), existing analytic prerequisite chain: complete elementary multi-index expansion from the two cited Mathlib calculus leaves. Demailly §3.6–3.7 is WANTED locally, not claimed as a document read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multivariate Leibniz formula and norm bound for mixed partial derivatives of a scalar function times a vector valued function",
+   "results": "norm_iteratedFDeriv_smul_le; norm_iteratedFDerivWithin_smul_le; norm_iteratedFDeriv_mul_le; norm_iteratedFDeriv_prod_le in Mathlib/Analysis/Calculus/ContDiff/Bounds.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match for the mixed coordinate formula: norm_iteratedFDeriv_smul_le bounds full derivative norms, not the allocation of x and frequency partials with separate symbol weights; iteratedDeriv_mul and iteratedDerivWithin_smul are one-variable statements. None specializes in one line to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher mixed derivative product rule with multinomial coefficients",
+   "results": "iteratedDeriv_mul; iteratedDerivWithin_smul; norm_iteratedFDeriv_prod_le; norm_iteratedFDeriv_smul_le.",
+   "date": "2026-10-24",
+   "verdict": "no match for the mixed coordinate formula: norm_iteratedFDeriv_smul_le bounds full derivative norms, not the allocation of x and frequency partials with separate symbol weights; iteratedDeriv_mul and iteratedDerivWithin_smul are one-variable statements. None specializes in one line to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "iteratedDeriv_mul, iteratedDeriv_smul",
+   "results": "0 hits; Loogle reports unknown identifier 'iteratedDeriv_smul'.",
+   "date": "2026-10-24",
+   "verdict": "no match for the mixed coordinate formula: norm_iteratedFDeriv_smul_le bounds full derivative norms, not the allocation of x and frequency partials with separate symbol weights; iteratedDeriv_mul and iteratedDerivWithin_smul are one-variable statements. None specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "iteratedDeriv_mul|iteratedDeriv_smul|norm_iteratedFDeriv_smul_le|norm_iteratedFDeriv_le_of_bilinear",
+   "results": "Mathlib/Analysis/Calculus/ContDiff/Bounds.lean lines 203, 227, 251, 255; IteratedDeriv/Lemmas.lean lines 364, 420.",
+   "date": "2026-10-24",
+   "verdict": "no match for the mixed coordinate formula: norm_iteratedFDeriv_smul_le bounds full derivative norms, not the allocation of x and frequency partials with separate symbol weights; iteratedDeriv_mul and iteratedDerivWithin_smul are one-variable statements. None specializes in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*(fderiv_smul|contDiff_smul|iteratedFDeriv_smul|fderiv_sum)|ContDiff.fderiv|ContDiff.smul",
+   "results": "{\"t\": \"2026-10-24T07:50:26Z\", \"tool\": \"grep\", \"query\": \"theorem.*(fderiv_smul|contDiff_smul|iteratedFDeriv_smul|fderiv_sum)|ContDiff.fderiv|ContDiff.smul\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\"], \"digest\": \"f7a2f680abe00b69\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed partial derivative Leibniz rule for smooth scalar times vector valued function",
+   "results": "{\"t\": \"2026-10-24T07:50:26Z\", \"tool\": \"leansearch\", \"query\": \"Mixed partial derivative Leibniz rule for smooth scalar times vector valued function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iteratedDerivWithin_smul\", \"LeftInvariantDerivation.leibniz\", \"fderiv_smul\", \"iteratedDeriv_mul\", \"iteratedDeriv_fun_mul\", \"iteratedDerivWithin_mul\", \"VectorField.lieBracket_smul_right\", \"deriv_fun_smul\"], \"digest\": \"39c1cacaecbf9b96\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "iteratedFDeriv, HSMul.hSMul",
+   "results": "{\"t\": \"2026-10-24T07:50:27Z\", \"tool\": \"loogle\", \"query\": \"iteratedFDeriv, HSMul.hSMul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HasFPowerSeriesOnBall.factorial_smul\", \"HasFPowerSeriesOnBall.hasSum_iteratedFDeriv\", \"iteratedFDeriv_const_smul_apply'\", \"iteratedFDeriv_const_smul_apply\", \"iteratedFDeriv_smul_const_apply\", \"iteratedFDeriv_comp_const_smul\", \"iteratedFDeriv_apply_eq_iteratedDeriv_mul_prod\", \"norm_iteratedFDeriv_smul_le\"], \"digest\": \"3df87b3534eef072\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed coordinate partial derivative Leibniz formula for smooth scalar function times vector valued function multi indices",
+   "results": "{\"t\": \"2026-10-24T07:50:28Z\", \"tool\": \"leanfinder\", \"query\": \"Mixed coordinate partial derivative Leibniz formula for smooth scalar function times vector valued function multi indices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mfderiv_prod_eq_add\", \"mfderiv_prod_eq_add_apply\", \"mfderiv_prod_eq_add_comp\", \"iteratedFDerivWithin_prodMk\", \"iteratedDerivWithin_smul\", \"iteratedFDeriv_prodMk\", \"fderiv_fun_smul\", \"fderiv_smul\"], \"digest\": \"f2a964a7eb078cfa\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth functions have smooth Frechet derivatives and scalar multiplication is smooth",
+   "results": "{\"t\": \"2026-10-24T07:51:48Z\", \"tool\": \"leansearch\", \"query\": \"Smooth functions have smooth Frechet derivatives and scalar multiplication is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fderivWithin_smul_const\", \"HasFDerivAt.fun_const_smul\", \"fderiv_comp_smul\", \"HasFDerivAt.mul_const\", \"fderiv_fun_const_smul\", \"HasFDerivAtFilter.fun_const_smul\", \"HasFDerivWithinAt.smul_const\", \"HasFDerivWithinAt.mul_const\"], \"digest\": \"f4e6086d32e8cd98\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "fderiv_smul",
+   "results": "{\"t\": \"2026-10-24T07:51:48Z\", \"tool\": \"loogle\", \"query\": \"fderiv_smul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"fderiv_smul\"], \"digest\": \"1f22d1459a3c1592\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First Frechet derivative scalar multiplication product rule and smoothness ContDiff smul",
+   "results": "{\"t\": \"2026-10-24T07:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"First Frechet derivative scalar multiplication product rule and smoothness ContDiff smul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFDerivAt.smul\", \"iteratedFDeriv_const_smul_apply'\", \"fderiv_fun_smul\", \"fderiv_smul\", \"HasFDerivAt.fun_smul\", \"iteratedFDeriv_const_smul_apply\", \"HasFDerivAt.smul_const\", \"iteratedFDerivWithin_const_smul_apply\"], \"digest\": \"567cb89bb51e7d5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Frechet derivative of a C infinity function is C infinity",
+   "results": "{\"t\": \"2026-10-24T07:52:27Z\", \"tool\": \"leansearch\", \"query\": \"The Frechet derivative of a C infinity function is C infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contDiffOn_infty_iff_fderivWithin\", \"contDiffOn_fderivWithin_apply\", \"ContDiff.fderiv_apply\", \"contDiffOn_infty_iff_fderiv_of_isOpen\", \"contDiff_infty_iff_fderiv\", \"ContMDiffWithinAt.mfderivWithin_apply\", \"ContDiff.contDiff_fderiv_apply\", \"ContDiff.continuous_fderiv_apply\"], \"digest\": \"8474a9b8adb8e2d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiff.fderiv_right",
+   "results": "{\"t\": \"2026-10-24T07:52:27Z\", \"tool\": \"loogle\", \"query\": \"ContDiff.fderiv_right\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ContDiff.fderiv_right\"], \"digest\": \"5ac0d001c2217667\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derivative of a smooth function is smooth and evaluating derivative on fixed vector is smooth",
+   "results": "{\"t\": \"2026-10-24T07:52:29Z\", \"tool\": \"leanfinder\", \"query\": \"The derivative of a smooth function is smooth and evaluating derivative on fixed vector is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiff.contDiff_fderiv_apply\", \"contDiffOn_fderivWithin_apply\", \"ContDiff.fderiv_right\", \"ContDiff.fderiv_apply\", \"ContDiff.continuous_fderiv_apply\", \"ContDiff.fderiv\", \"ContDiff.fderiv_succ\", \"ContDiffAt.fderiv\"], \"digest\": \"0e1efe37bbfe35e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem fderiv_sum|theorem fderiv_const_smul|theorem ContDiff.smul|theorem contDiff_infty_iff_fderiv|theorem ContDiff.contDiff_fderiv_apply",
+   "results": "{\"t\": \"2026-10-24T07:53:13Z\", \"tool\": \"grep\", \"query\": \"theorem fderiv_sum|theorem fderiv_const_smul|theorem ContDiff.smul|theorem contDiff_infty_iff_fderiv|theorem ContDiff.contDiff_fderiv_apply\", \"sub\": \"Analysis/Calculus\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Comp.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Defs.lean\", \"Mathlib/Analysis/Calculus/FDeriv/Add.lean\"], \"digest\": \"65fe5a80ee2e89bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derivative finite linear combination sum constant scalar times functions",
+   "results": "{\"t\": \"2026-10-24T07:53:13Z\", \"tool\": \"leansearch\", \"query\": \"Derivative finite linear combination sum constant scalar times functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"deriv_fun_sum\", \"fderiv_sum\", \"deriv_sum\", \"derivWithin_sum\", \"HasDerivAt.mul_const\", \"deriv_fun_const_smul\", \"HasDerivAt.fun_sum\", \"derivWithin_fun_sum\"], \"digest\": \"959e3bc076c0ddf1\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "fderiv_sum",
+   "results": "{\"t\": \"2026-10-24T07:53:13Z\", \"tool\": \"loogle\", \"query\": \"fderiv_sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"fderiv_sum\"], \"digest\": \"41b47a2f0dc3942d\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frechet derivative of a finite linear combination of differentiable functions equals linear combination of derivatives",
+   "results": "{\"t\": \"2026-10-24T07:53:16Z\", \"tool\": \"leanfinder\", \"query\": \"Frechet derivative of a finite linear combination of differentiable functions equals linear combination of derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fderiv_fun_sum\", \"fderiv_sum\", \"HasFDerivAt.fun_sum\", \"HasFDerivAt.sum\", \"deriv_fun_sum\", \"deriv_sum\", \"HasFDerivWithinAt.fun_sum\", \"HasFDerivAtFilter.fun_sum\"], \"digest\": \"398b36d51e0dd78c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiff.smul",
+   "results": "{\"t\": \"2026-10-24T07:54:01Z\", \"tool\": \"loogle\", \"query\": \"ContDiff.smul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ContDiff.smul\"], \"digest\": \"a79527359bb21651\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "grep",
+   "query": "mixed.*[Ll]eibniz|multi.*[Ll]eibniz|iterated.*[Pp]artial.*smul|multi.*[Dd]eriv.*smul",
+   "results": "{\"t\": \"2026-10-24T07:55:45Z\", \"tool\": \"grep\", \"query\": \"mixed.*[Ll]eibniz|multi.*[Ll]eibniz|iterated.*[Pp]artial.*smul|multi.*[Dd]eriv.*smul\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Calculus/TaylorIntegral.lean\", \"Mathlib/Analysis/Normed/Module/Multilinear/Basic.lean\"], \"digest\": \"e0f44fdf158ad52c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For multi indices alpha beta mixed coordinate derivatives of h of xi times a of x xi equal sum gamma less beta binomial beta gamma derivative gamma h times mixed derivative alpha beta minus gamma a",
+   "results": "{\"t\": \"2026-10-24T07:55:46Z\", \"tool\": \"leanfinder\", \"query\": \"For multi indices alpha beta mixed coordinate derivatives of h of xi times a of x xi equal sum gamma less beta binomial beta gamma derivative gamma h times mixed derivative alpha beta minus gamma a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iteratedFDerivWithin_prodMk\", \"iteratedDeriv_fun_mul\", \"iteratedDeriv_mul\", \"norm_iteratedFDeriv_prod_le\", \"iteratedDerivWithin_mul\", \"norm_iteratedFDerivWithin_mul_le\", \"norm_iteratedFDeriv_mul_le\", \"iteratedDerivWithin_smul\"], \"digest\": \"1151d0489a61e1cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: hits were read. First-order scalar product/sum rules, smooth derivatives and symmetry are already supplied by the two cited existing Mathlib leaves; one-variable iterated rules and full derivative norm bounds do not directly state the mixed-coordinate multi-index formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symbol-dilated-cutoff-estimates",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting cutoff argument in the proof of det-thm-sf-ctf-stability-direct-images (3), Demailly §3.7 p.7: scaled cutoff derivative estimates used in the Leibniz bound.",
+   "via": [
+    "lem-sfb-symbol-dilated-cutoff-estimates",
+    "lem-sfb-symbol-borel-cutoff",
+    "lem-sfb-pseudodifferential-asymptotic-sum",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbol-product-derivative-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three notion dependencies. Reused the existing smooth real differentiation and second-differential symmetry Mathlib leaves. Proved the coordinate Leibniz formula by a finite-word subset induction and counted its frequency allocations; derived the norm inequality from norm axioms. No new nodes or Lean changes. Read the cited statements clause by clause, checked zero dimensions and zero matrix ranks, and retained the inherited literature request.",
+  "blueprint": "Latest direct-images proof (3), through the existing analytic prerequisite chain ending in the scalar cutoff product used for asymptotic symbol sums; the current blueprint does not itself print this calculus formula. The detailed word induction supplies that supporting calculation without changing the unit route. Nearest imported ancestor is null as reported by blueprint_refs.py; the inherited via chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-0f0bbee83",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-0f0bbee83 (reviewer sub-agent of L); spot-checked: I read the full item and its 5 steps, plus the full statements and Mathlib records of both cited leaves (lem-sfb-real-smooth-differentiation, lem-sfb-real-second-derivative-symmetry). The delivery adds no new nodes. The inherited statement is unchanged and correct; I checked it on β=2e_1 (coefficients 1,2,1), on α=β=1 with mixed x/ξ derivatives, on β=e_1+e_2, and on u=0, v=0 and p,q=0. Step 1 applies the scalar product rule to each complex matrix entry and rebuilds b from sums and linear maps, so it does not treat the scalar rule as a matrix rule (no C4 fault). Step 2 shows that iterated partials stay smooth (ev_e∘Dg) and that ∂_e∂_f g = D(Dg)[e][f]. Smooth implies C², and on the open whole space with F=C as a real space the symmetry leaf applies, so adjacent swaps reorder any finite word of partials. Step 3 proves the word Leibniz identity by an induction that is set up properly: the claim, the base N=0, and the successor step pairing subsets by whether they contain N+1, using the sum and product rules. Step 4 shows ∂_{x_i}H=0, so subsets with an x position drop out, and counts the surviving subsets as ∏binom(β_j,γ_j). Step 5 is elementary: the finite triangle inequality and homogeneity of any norm. No step uses an uncited non-elementary fact or the proof of a cited node. Duplicate search (rg -L over the snapshot DAG) found no node stating a multivariate smooth Leibniz formula; lem-sfb-symbol-cutoff-scaled-derivatives and lem-sfb-weighted-composition-derivative-bound are related but different. The sole consumer, lem-sfb-symbol-dilated-cutoff-estimates step 1, uses the statement exactly as written. On sources, proof_origin is agent, and blueprint latest (main-20261024) direct-images proof (3) is a six-functor assembly that does not print this calculation. Demailly is absent from literature/ and not in LIST.md; it is correctly reported as WANTED and not claimed as read. No SGA is used and the unit route is unchanged. I made no fixes, dropped no nodes and accepted no tool_uses."
+ }
+}

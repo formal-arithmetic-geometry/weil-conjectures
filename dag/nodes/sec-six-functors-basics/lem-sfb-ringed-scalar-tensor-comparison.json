@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-ringed-scalar-tensor-comparison",
+ "kind": "statement",
+ "title": "Ordinary total tensor with a scalar ring is restricted scalar extension",
+ "statement": "Let (C,T) be a small site and f:R→S a map of commutative ring sheaves. Use the module sheaves and cochain complexes of [def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules], the ordinary signed total tensor of [def-weil-pbc-ringed-koszul-system], and the scalar extension and restriction of [lem-weil-pbc-constant-completion-equivalence]. Write B_f for the rank-one S-module restricted along f. For every unbounded R-complex P construct the specific chain isomorphism P tensor_R B_f[0] ≅ res_f(change_f(P)). It is the degree-zero contraction followed by the termwise composite of symmetry, inverse normalized tensor cancellation with the rank-one S-module, and the restricted left unitor. The module comparison is natural in module maps. No flatness, K-flatness, or boundedness is assumed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor-product (03EK), the sheafified tensor formulas; lemma-adjointness-tensor-restrict (03CZ), scalar adjunction. For derived comparisons: sites-cohomology.tex, lemma-derived-base-change (06YY). For quotient transitions: proetale.tex, lemma-naive-completion (099M)."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved normalized tensor cancellation to the rank-one S-module and an R-module, invert it, precede it by symmetry, and follow it by the restricted left unitor. Naturality follows by cancellation naturality, braiding naturality, and unitor naturality.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CochainComplex.mapBifunctorSingle₂Iso to contract the degree-zero tensor factor. Lift the natural module comparison termwise with NatIso.mapHomologicalComplex. This is an isomorphism of complexes, not just of graded objects. These are applications of the existing totalization and termwise functor APIs.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; the ordinary balancing and localization calculation used before the limit in Tag 099M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a cochain complex with the scalar ring in degree zero is isomorphic to restriction of its extension of scalars",
+   "results": "8 hits, including HomologicalComplex.tensorUnitIso and rightUnitor; no ringed scalar-extension comparison.",
+   "verdict": "Use the ordinary unitor and the existing single-factor totalization API; no complete matching normalized comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"single\"",
+   "results": "10 hits for GradedObject single-object tensor computations and unitors.",
+   "verdict": "These are building blocks; they do not state the scalar insertion or derived quotient successor equation.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*single|single.*tensor",
+   "results": "25 hits, primarily representation-theoretic module tensor calculations.",
+   "verdict": "No matching ringed-site scalar comparison or normalized quotient successor. Local source search additionally found the proved generic pure-section calculations in QuotientTensorScalarTowerComparison and RingedTensorComplexConstraints.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, tensor with a coefficient ring in degree zero computes scalar extension, preserving its insertion of one and quotient transitions",
+   "results": "8 hits: ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', scalar sheaf restriction, and sheafification scalar-action lemmas.",
+   "verdict": "No normalized sheaf-complex unit or derived successor identity.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueQuotientTensorModel",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof: the reductions of K and of Res K modulo pi_E coincide; the scalar tensor comparison and its quotient transitions.",
+   "via": [
+    "lem-sfb-adic-residue-quotient-tensor-model",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedScalarTensorComparison",
+  "file": "lean/Sheaf/CategoryTheory/RingedScalarTensorComparison.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.scalarTensorComplexIso",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.scalarTensorModule",
+   "CategoryTheory.ConstantCompletion.scalarTensorModuleIso",
+   "CategoryTheory.ConstantCompletion.scalarTensorModuleIso_naturality",
+   "CategoryTheory.ConstantCompletion.scalarTensorComplexIso"
+  ],
+  "statement": "def scalarTensorComplexIso (f : R ⟶ S) (P : Cx R) :\n    ((ringedKoszulTensor R).obj P).obj\n        ((HomologicalComplex.single _ (.up ℤ) 0).obj (scalarTensorModule f)) ≅\n      ((res f).mapHomologicalComplex (.up ℤ)).obj\n        (((change f).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T114151-L-2270233",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T114151-L-2270233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

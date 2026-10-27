@@ -1,0 +1,253 @@
+{
+ "id": "lem-pur-coordinate-tower-normalization-induction",
+ "kind": "statement",
+ "title": "Normalization induction for the ordered affine coordinate tower",
+ "statement": "Fix the finite datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. All bases below are separated finite-type $k$-schemes [def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the specified pro-etale Tate twists [def-coefficient-twists-detailed], constructible exceptional inverse image [def-weil-exceptional-inverse-image], and adjunction-preserving composition comparisons [def-weil-pbc-composite-adjunction, def-weil-pbc-adjunction-conjugate].\n\nLet $B$ be such a base and fix $c\\geq0$. For $0\\leq r\\leq c$ put $X_r=\\mathbf A^r_B$, $p_r:X_r\\to B$, $z_r:B\\hookrightarrow X_r$, and $W_r=A_{X_r}(r)[2r]$ [def-sbc-affine-space]. For $r<c$ let $q_r:X_{r+1}\\to X_r$ and $s_r:X_r\\hookrightarrow X_{r+1}$ forget and set to zero the last coordinate, respectively. Use the actual ordered comparisons $\\gamma_r=\\gamma_{p_r,A_B}:W_r\\to Rp_r^!A_B$ of [def-pur-affine-space-comparison]. Suppose each affine-line comparison $\\gamma_{q_r,-}$ of [def-pur-affine-line-purity-comparison] is natural and invertible on bounded constructible finite-Tor inputs. Suppose given morphisms $u_r:W_r\\to Rs_r^!W_{r+1}$ such that\n$$\\bigl(Rs_r^!Rq_r^!W_r\\xrightarrow{\\sim}W_r\\bigr)\\circ Rs_r^!\\gamma_{q_r,W_r}\\circ u_r=1_{W_r}.$$\nDefine $\\theta_0=1$ and $\\theta_{r+1}=d_r^{-1}\\circ Rz_r^!(u_r)\\circ\\theta_r$, where $d_r:Rz_{r+1}^!\\cong Rz_r^!Rs_r^!$ is the adjunction-preserving closed composition comparison. Put\n$$b_r=\\bigl(Rz_r^!Rp_r^!A_B\\xrightarrow{\\sim}A_B\\bigr)\\circ Rz_r^!\\gamma_r.$$\nThen every $\\gamma_r$ is invertible, its target has the bounded constructible finite-Tor witness $W_r$, and the identities of actual morphisms are\n$$b_0\\theta_0=1,\\qquad b_{r+1}\\theta_{r+1}=b_r\\theta_r\\quad(0\\leq r<c).$$\nAll comparisons in these identities are the conjugates of the same coherent compact-support compositors; in particular $b_c\\theta_c=1$. The iterated comparisons use no purity assertion for arbitrary smooth maps.\n\nLet $C_c:z_{c*}A_B\\to W_c$ be the adjunct of $\\theta_c$, using properness of the closed immersion, and let $a_c:Rp_{c!}W_c\\to A_B$ be the adjunct of $\\gamma_c$. Under the identity-normalized comparison $Rp_{c!}z_{c*}A_B\\cong A_B$, the transpose identity is\n$$a_c\\circ Rp_{c!}(C_c)=1_{A_B}.$$\nIf every $u_r$ is invertible, then every $\\theta_r$ is invertible and $b_r=\\theta_r^{-1}$. In dimension zero all these formulas are identity formulas.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: \"Finally, gamma ... is the transpose of the composite affine-line adjunction ...\" and the identification is exactly exceptional pullback of gamma followed by composition; \"their residues multiply to 1\". Old proof Steps 6 and 8."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-sbc-affine-space",
+  "def-pur-affine-space-comparison",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-affine-space-thom-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved target_properties calculation from [def-pur-coordinate-tower-normalization-data] for every ordered Tate target. Induct on r through comparisonStep: sourceReassociation is an isomorphism, line invertibility is the stated LineLaw, and [lem-pur-coordinate-tower-exceptional-compositors] gives the fixed exceptional compositor. Compose targetSourceIso with asIso(gamma_r) to give the exact finite-Tor witness.",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "lem-pur-coordinate-tower-exceptional-compositors",
+    "def-pur-affine-space-comparison",
+    "lem-asd-finite-etale-twist-line",
+    "def-weil-finite-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-comparison-tor-amplitude",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  },
+  {
+   "text": "At zero unfold thetaZero and normalizationRaw: their equality-transport isomorphisms and identityUnit cancel. At a successor apply [lem-pur-coordinate-tower-normalization-fusion], substitute the actual thetaStep formula, combine the two mapped factors by functoriality, and use the supplied u_r evaluation. Induction on r with r<=c yields theta_r followed by b_r equal to the identity, including the terminal r=c.",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "lem-pur-coordinate-tower-normalization-fusion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-coordinate-tower-compact-transpose] to the actual theta_c, unfold classMap, and substitute the terminal normalization identity. The final factor is the identity, so the compact composite equals the canonical sourceIdentification.",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "lem-pur-coordinate-tower-compact-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  },
+  {
+   "text": "If every u_r is invertible, induct along theta. The zero identity unit is invertible, the mapped u_r is invertible, and the closed compositor is invertible by [lem-pur-coordinate-tower-exceptional-compositors]. Cancel theta_r on the left in its normalization equation to obtain normalization_r=inv(theta_r).",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "lem-pur-coordinate-tower-exceptional-compositors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "lem-pur-coordinate-tower-exceptional-compositors",
+  "def-pur-affine-space-comparison",
+  "lem-asd-finite-etale-twist-line",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-comparison-tor-amplitude",
+  "sk-prop-sf-comparison",
+  "lem-pur-coordinate-tower-normalization-fusion",
+  "lem-pur-coordinate-tower-compact-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordered affine space purity comparisons cancel recursive zero section orientations by induction using the twisted affine line counit identity",
+   "results": "[leanfinder] OK 8 hit(s); sign_eq_of_affineCombination_mem_affineSpan_single_lineMap; sign_eq_of_affineCombination_mem_affineSpan_pair; Affine.Simplex.sSameSide_affineSpan_faceOpposite_of_sign_eq; Sbtw.lift; Affine.Simplex.sOppSide_affineSpan_faceOpposite_of_pos_of_neg; Affine.Simplex.wSameSide_affineSpan_faceOpposite_iff; Wbtw.lift; Affine.Simplex.wOppSide_affineSpan_faceOpposite_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated compact support integration sends the ordered product of coordinate divisor classes to one by composition of adjunctions",
+   "results": "[leanfinder] OK 8 hit(s); MeasureTheory.Measure.integral_isMulLeftInvariant_isMulRightInvariant_combo; MeasureTheory.Measure.addHaarScalarFactor_eq_integral_div; MeasureTheory.Measure.haarScalarFactor_eq_integral_div; MeasureTheory.Measure.integral_isAddLeftInvariant_eq_smul_of_hasCompactSupport; MeasureTheory.integral_integral_swap_of_hasCompactSupport; MeasureTheory.Measure.integral_isMulLeftInvariant_eq_smul_of_hasCompactSupport; CompactlySupportedContinuousMap.integralLinearMap_apply; MeasureTheory.Measure.integral_isAddLeftInvariant_isAddRightInvariant_combo",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.Adjunction.comp_homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*purity|zeroSection.*trace|integration.*class",
+   "results": "[grep] OK 0 hit(s); No declarations returned. Directory Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction normalization of affine space comparison by compact support integration of zero section Thom class",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization; ContDiffMapSupportedIn.zero_on_compl'; HasCompactSupport.zero; ContinuousMapZero.induction_on_of_compact; ContMDiffSection.coe_zero; NormedSpace.normalize_eq_zero_iff; Bundle.contMDiffOn_zeroSection; Bundle.contMDiffWithinAt_zeroSection",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*purity|zeroSection.*trace|coordinate.*normalization",
+   "results": "0 hit(s): ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction composition formulas or unrelated coordinate/section statements do not state this finite-coefficient ordered normalization induction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated exceptional inverse image comparison cancels the zero section orientation to the identity",
+   "results": "8 hit(s): CategoryTheory.SingleFunctors.shiftIso_zero_inv_app, CategoryTheory.PreZeroHypercover.hom_inv_h₀, ContMDiffSection.coe_zero, CategoryTheory.Limits.walkingParallelPairOpEquiv_counitIso_inv_app_op_zero, CategoryTheory.PreZeroHypercover.inv_hom_h₀_comp_f, CategoryTheory.PreZeroHypercover.inv_hom_h₀, FormalMultilinearSeries.rightInv_removeZero, CategoryTheory.PreZeroHypercover.pullbackIso_inv_s₀",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction composition formulas or unrelated coordinate/section statements do not state this finite-coefficient ordered normalization induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.homEquiv",
+   "results": "1 hit(s): CategoryTheory.Adjunction.comp_homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction composition formulas or unrelated coordinate/section statements do not state this finite-coefficient ordered normalization induction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine space purity normalization by induction along coordinate projections using natural affine line adjunction comparisons",
+   "results": "8 hit(s): AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace.reindex, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction composition formulas or unrelated coordinate/section statements do not state this finite-coefficient ordered normalization induction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite adjunction counits pair recursively defined section classes with an ordered composite natural isomorphism to the identity",
+   "results": "8 hit(s): CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app, CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.Triple.rightToLeft_eq_counits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction composition formulas or unrelated coordinate/section statements do not state this finite-coefficient ordered normalization induction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-affine-space-zero-section-purity",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "Final paragraph: \"Finally, gamma ... is the transpose of the composite affine-line adjunction ...\" and the identification is exactly exceptional pullback of gamma followed by composition; \"their residues multiply to 1\". Old proof Steps 6 and 8.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-coordinate-tower-normalization-induction",
+  "worker": "stage1",
+  "group": "NC",
+  "summary": "Expanded the ordered-comparison induction, established the finite-Tor inputs before each affine-line application, wrote the actual naturality/coherence cancellation equation, and computed the transpose with the two counits. No new nodes and no statement change.",
+  "blueprint": "Final paragraph of cor-pur-affine-space-zero-section-purity.proof.md: the composite affine-line comparison and the identification Rz^!gamma followed by composition; the residues multiply to 1. This expands old sk-prop-an Step 6 normalization.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic coherence and identity normalization of the actual compact-support compositors; used to compare two contractions of p_r q_r s_r z_r, not to replace the affine-line induction."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Finite Tate line is locally constant and free of rank one; this is a coefficient tool giving the elementary finite-Tor witness, not a purity argument."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic finite-coefficient site-origin theorem supplies the witnesses required by the class-restricted adjunctions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-comp-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NC-445252400",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-445252400 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 8 steps, every cited statement and the main-20261015 cor-pur-affine-space-zero-section-purity proof (final paragraph on the composite affine-line transpose). No SGA source is used. The delivery has no new nodes and leaves the statement unchanged. It is a normal split of the unsplit node that Q107 created; the re-split note belongs to the parent. The item is unsplit in live and side-live and is not dropped. Step 2: the recursion matches def-pur-affine-space-comparison (I_r absorbed), naturality of gamma_q at gamma_r has its inputs in D^b_ctf, and the induction holds. Step 3: the coherence identity has source Z_rS_rQ_rP_rA_B and target A_B. Its two sides are the conjugates of the bracketings (pq)(sz) and p((qs)z), which agree by associativity and identity normalization in thm-sf-comp-composition with conjugation and mate pasting (2),(4). Step 5: I checked every line (naturality of d_r^{-1} and e_q, then hypothesis (b)). Step 6 holds; b_r theta_r = 1 even forces theta_r invertible. Steps 7-8: I recomputed the transpose; under the identity-normalized sigma of lem-pur-closed-section-compact-origin, epsilon_comp∘L(x) = (e_c x)∘sigma gives a_c∘Rp_!(C_c) = 1. The quasi-compact complement holds by the finite D(t_i) cover. Edge cases c=0,1,2 and empty B work. No duplicate: prop-pur-affine-space-composition-law, lem-sp-finite-tower-scalar-mates and lem-trf-section-coordinate-counit-normalization differ. I accept the tool_uses thm-sf-comp-composition, lem-pur-twist-sheaf-locally-free and lem-sf-proetale-constructible-origin (coherence and coefficients only). FIX (C4/C1): Step 4 asserted b_0 = 1 but did not justify e_0 = 1. I added that e_0 is the conjugate of alpha_{id,id}, which is the identity by the identity clause of [thm-sf-comp-composition], and that the conjugate of an identity is the identity by [def-weil-pbc-adjunction-conjugate]. Both are added to Step 4 uses and were already in proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoordinateTowerNormalizationInduction",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateTowerNormalization.coordinateTower_normalization_induction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoordinateTowerNormalization.coordinateTower_normalization_induction"
+  ],
+  "file": "lean/Sheaf/Paper/CoordinateTowerNormalizationInduction.lean",
+  "statement": "theorem coordinateTower_normalization_induction (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (c : ℕ) (hline : LineLaw P n B aB c) (u : Orientations P n B c) (hu : ∀ r : Fin c, u r ≫ (rightDerivedUpperShriek (ModuleCat.{u + 1} (setting P n).Coefficient) (lastSection B r.val)).map (targetLineGamma P n B aB r.val) ≫ lineCollapse P n B aB r.val = 𝟙 (tatePower P n (iteratedAffineLine B r.val) r.val)) : (∀ (r : ℕ) (_hr : r ≤ c), IsIso (gamma P n B aB r) ∧ ∃ e : tatePower P n (iteratedAffineLine B r) r ≅ (exceptional (setting P n) B r).obj (coefficientUnit P n B), e.hom = (targetSourceIso P n B r).hom ≫ gamma P n B aB r ∧ DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (setting P n).Coefficient) (iteratedAffineLine B r) (tatePower P n (iteratedAffineLine B r) r)) ∧ theta P n B aB c u 0 (Nat.zero_le c) ≫ normalization P n B aB 0 = 𝟙 (coefficientUnit P n B) ∧ (∀ r : Fin c, theta P n B aB c u (r.val + 1) (Nat.succ_le_of_lt r.isLt) ≫ normalization P n B aB (r.val + 1) = theta P n B aB c u r.val (Nat.le_of_lt r.isLt) ≫ normalization P n B aB r.val) ∧ theta P n B aB c u c le_rfl ≫ normalization P n B aB c = 𝟙 (coefficientUnit P n B) ∧ (rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient) (iteratedAffineLineProj B c)).map (classMap P n B aB c u c le_rfl) ≫ augmentation P n B aB c = (sourceIdentification P n B aB c).hom ∧ ((∀ r : Fin c, IsIso (u r)) → ∀ (r : ℕ) (hr : r ≤ c), ∃ ht : IsIso (theta P n B aB c u r hr), normalization P n B aB r = @inv _ _ _ _ (theta P n B aB c u r hr) ht)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The actual ordered gamma and normalization constructions are reused. The supplied finite u-family is propagated by the literal closed-composition recurrence; the conclusion includes every stepwise cancellation, its finite-Tor witness, the terminal compact-support transpose with the canonical proper direct-image comparison, and the conditional inverse equation. The typed unit and Tate-power helpers reference the existing objects in the canonical ambient category without reconstructing them. K6: existing data and proved helpers move with unchanged public bodies to CoordinateTowerNormalizationData, publicly re-exported here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4cfc0448",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read the item, all 12 stmt_deps, the source place and the module (524 lines), plus the side-live AffineSpacePurityComparison, AffineLinePurityComparison, SpecifiedExceptionalClassHom and parent AffineSpaceZeroSectionPurity sources. Every hypothesis matches the node: LineLaw = natural and invertible on D^b_ctf for r<c; u is an arbitrary Fin c family; hu = u ≫ Rs^!(stepSource≫γ_q) ≫ (compositionInverse(s,q)≫congr≫identityUnit⁻¹) = 𝟙. theta is built by orderedRec from thetaZero and previous ≫ Rz^!(u) ≫ d_r^{-1} (actual compositor). Conclusions: γ_r iso + W_r finite-Tor witness, b0θ0=1, step identity, bcθc=1, transpose Rp_!(classMap) ≫ augmentation = sourceIdentification (actual compositor + id normalization), and the invertible-u clause. Traced Step 5 against comparisonStep/sourceReassociation. γ_0 via identityUnit is consistent (exceptional 0 = 𝟭). The sorry helpers are true. Edge cases c=0/1/2, empty B and all n≥1 checked. Only the item changed; stmt_deps gained two landed def nodes; record verbatim, 28 decls. No compile (no change; worker clean 33.7/22.2 s). Advisories: A1 stage-3 import cycle: the item publicly imports the parent theorem module AffineSpaceZeroSectionPurity for plain defs gamma/normalization/targetSourceIso/identityUnit with no owning def node (Q85/Q111/Q128 pattern); maintainer to extract a data module. A2 the new stmt_dep modules are reached only via that import. A3 LineLaw's naturality across witnesses holds for the actual comparison. A4 standard Second-reading text. A5 cache-only wrappers."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/node files vs reviewed head 728195 (byte-identical) and clone 509a6c5b (item untouched since af5def4); Data module vs published item (verbatim move); item theorem signature (identical); importer CoordinateSectionArrows compiled against published and against the delivery (same 4 pre-existing errors)"
+ }
+}

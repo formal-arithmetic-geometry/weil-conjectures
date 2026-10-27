@@ -1,0 +1,233 @@
+{
+ "id": "def-trf-prelog-unit-pushout-presentation",
+ "kind": "definition",
+ "title": "Prelog unit-pushout presheaf and normalized presentations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme. Use its small etale site [def-weil-pbc-etale-site], in a universe containing the site, its arrows, the chosen geometric points and all coefficient sets, with the small-site convention [def-weil-size-convention]. A presheaf of commutative unital monoids means a contravariant functor with identity-preserving monoid-homomorphism restrictions. Let $M$ be such a presheaf and $\\gamma:M\\to(\\mathcal O_X,\\cdot)$ a natural monoid homomorphism, where $\\mathcal O_X(W)=\\Gamma(W,\\mathcal O_W)$. Put $B_W=\\Gamma(W,\\mathcal O_W)$ and $E_W=\\{e\\in M(W):\\gamma_W(e)\\in B_W^\\times\\}$. Here $B_W^\\times$ is the group of units, regarded as a commutative monoid. Define $P_\\gamma(W)$ as the quotient of the product monoid $M(W)\\times B_W^\\times$ by the least equivalence relation stable under multiplication containing\n$$(me,a)\\sim(m,\\gamma_W(e)a)\\qquad(m\\in M(W),\\ e\\in E_W,\\ a\\in B_W^\\times).$$\nWrite $[m,a]$ for the quotient class; multiplication is $[m,a][n,b]=[mn,ab]$ and the identity is $[1,1]$. This is the objectwise unit pushout in the log-structure convention [def-trf-fs-log-blowup]. For $f:V\\to W$ the restriction is\n$$P_\\gamma(f)([m,a])=[M(f)(m),f^\\sharp(a)],$$\nwhere $f^\\sharp$ on units applies the homomorphism on regular functions to a unit and its inverse. These formulas define the quotient presheaf, with identities and composition inherited from $M$ and regular functions. Its structural map is $a_\\gamma:P_\\gamma\\to(\\mathcal O_X,\\cdot)$, $a_{\\gamma,W}([m,a])=\\gamma_W(m)a$.\n\nLet $L$ be a monoid sheaf, $\\alpha:L\\to(\\mathcal O_X,\\cdot)$ a natural monoid homomorphism, and $\\eta:P_\\gamma\\to L$ a natural monoid homomorphism. Its sheafification predicate is the assertion that for every monoid sheaf $H$ the map\n$$\\operatorname{Hom}_{\\mathrm{Sh}}(L,H)\\longrightarrow\\operatorname{Hom}_{\\mathrm{PSh}}(P_\\gamma,H),\\qquad h\\longmapsto h\\eta$$\nis bijective [lem-trf-commutative-monoid-sheafification]. Structural compatibility means $\\alpha\\eta=a_\\gamma$. Define $i_W(m)=\\eta_W([m,1])$ and $j_W(a)=\\eta_W([1,a])$.\n\nUse the existing bundled $\\mathrm{PrelogPushoutPresentation}$ as the following encoding, on the same $M,\\gamma,L,\\alpha$. Its pair maps are monoid homomorphisms $q_W:P_\\gamma(W)\\to L(W)$ satisfying\n$$L(f)(q_W([m,a]))=q_V([M(f)(m),f^\\sharp(a)]),\\qquad \\alpha_W(q_W([m,a]))=\\gamma_W(m)a.$$\nIts inclusion $i:M\\to L$ satisfies $i_W(m)=q_W([m,1])$. Its universal field says that for every monoid sheaf $H$ and every family of monoid homomorphisms $r_W:P_\\gamma(W)\\to H(W)$ satisfying the same naturality equation, there exists a unique monoid-sheaf map $h:L\\to H$ such that $h_Wq_W=r_W$ for every $W$. For fixed $L,\\alpha,\\eta$ satisfying the structural formula, the sheafification predicate is equivalent to a bundled presentation with pair maps exactly $q_W=\\eta_W$ and inclusion exactly $i_W(m)=\\eta_W([m,1])$. Conversely its pair maps give the natural transformation $\\eta$. The underlying quotient, pair classes and maps are identical in the two encodings. The existing bundled restriction predicate means: for every slice $X_{\\mathrm{Et}}/U$, a presentation on the restricted data whose pair maps and inclusion are exactly the restrictions of $q$ and $i$. It is a predicate, not an assertion that such slice presentations exist.\n\nA log structure $K$ means the monoid-sheaf and structural-map definition of [def-trf-fs-log-blowup]: $\\alpha_K^{-1}(\\mathcal O_X^\\times)\\to\\mathcal O_X^\\times$ is an isomorphism. Only this definition is used here, on an arbitrary scheme, with no finiteness hypothesis. Define its section unit map $j_{K,W}:B_W^\\times\\to K(W)$ by taking the inverse of the isomorphism induced by $\\alpha_K$ from monoid units $K(W)^\\times$ to $B_W^\\times$, followed by inclusion of monoid units into $K(W)$.\n\nFor a geometric point $t:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point], let $\\mathcal N_t$ be the category of pointed etale neighbourhoods [def-weil-pbc-pointed-etale-neighbourhoods]. Define\n$$M_t=\\varinjlim_{(W,w)\\in\\mathcal N_t^{\\mathrm{op}}}M(W)$$\nin commutative monoids, without assuming $M$ is a sheaf. This uses the same indexing convention as [def-weil-pbc-geometric-stalks]. Concretely, take objects $W$ in the chosen small site skeleton and all lifts $w:t\\to W$; take the opposite of this pointed category. It is the small filtered final model used for the displayed colimit: cofilteredness is [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], and filtered monoid colimits are those of [lem-trf-commutative-monoid-filtered-colimit-underlying]. For a natural monoid map $v:M\\to N$, define $v_t$ by sending the germ represented by $(W,w,m)$ to the germ represented by $(W,w,v_W(m))$. For a monoid sheaf $N$ this is the canonical map to its geometric stalk $N_t$.\n\nFinally, for a log structure $L$ and a natural monoid map $i:M\\to L$ with $\\alpha_Li=\\gamma$, define $\\mathrm{HasPrelogUniversalMapping}(\\gamma,L,i)$ to mean that for every log structure $N$ precomposition induces a bijection\n$$\\{h:L\\to N\\text{ monoid-sheaf map}:\\alpha_Nh=\\alpha_L\\}\\longrightarrow\\{v:M\\to N\\text{ natural monoid map}:\\alpha_Nv=\\gamma\\},\\qquad h\\longmapsto hi.$$\nEquivalently this map is injective and has exactly the displayed range. When $M$ is a prelog sheaf and $i$ is the inclusion of a bundled pushout presentation, this is exactly its existing etale universal-mapping predicate, whose formula is unique structurally compatible extension of every $v$. These are constructions and predicates only; no log axiom for the sheafification or restriction comparison theorem is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-trf-fs-log-blowup",
+  "lem-trf-commutative-monoid-sheafification",
+  "def-weil-geometric-point",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-trf-commutative-monoid-filtered-colimit-underlying"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69, etale log conventions; Stacks sites.tex Tag 00YR (section-sheaves-algebraic-structures). Agent-explicit unit-pushout presentation and canonical comparison of the two encodings, as requested in the return of 4c52f0f50abf."
+ },
+ "proof": [
+  {
+   "text": "A restriction sends the generating relation (m,1) ~ (1,a) to (M(f)m,1) ~ (1,f-sharp(a)). Naturality of gamma gives gamma(M(f)m)=f-sharp(gamma(m))=f-sharp(a), so this is a target generator. The generated-congruence universal property gives the kernel inclusion needed for the quotient lift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the identity and composition equations on quotient representatives. Their monoid components are the identity and composition laws of M; their unit components follow by extensionality from the same laws for pullback of regular functions. This defines the stated presheaf. Naturality of eta on [m,1] gives naturality of its prelog inclusion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A family of homomorphisms from the quotient objects satisfies PrelogPairNatural exactly when it is a natural transformation from the quotient presheaf: evaluate naturality on [m,a] in one direction, and use quotient induction in the other. Apply this equivalence to the bundled pair maps to construct the bundled unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given a unit eta with the sheafification hom-set bijection, use its components as pairMap, eta[-,1] as iota, the structural hypothesis as structural, and the previous family/natural-transformation identification to turn the bijection into the bundled unique-lift field. Conversely the bundled unique-lift field, under the same identification and the equality of units, is existence and uniqueness of every preimage, hence bijectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the bundled structural formula at [m,1] to show that iota is structurally compatible. Thus composition with iota always lands in the set of compatible maps. Injectivity and equality of the range give unique lifts for those maps. Conversely unique lifts give injectivity and the stated range equality. This proves equivalence with EtaleUniversal without any extra log-structure theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1 conventions and the explicit quotient/bundled formulas in this node; elementary verification in Lean by F7."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A prelog monoid presheaf with a map to a ring presheaf has a unit pushout presentation whose sheafification has a universal property",
+   "results": "{\"t\": \"2026-10-24T13:07:57Z\", \"tool\": \"leansearch\", \"query\": \"A prelog monoid presheaf with a map to a ring presheaf has a unit pushout presentation whose sheafification has a universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.unit\", \"SheafOfModules.Presentation.isColimit\", \"CategoryTheory.toSheafification_app\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"CategoryTheory.toSheafification\", \"CategoryTheory.toSheafify\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\"], \"digest\": \"5f874c0674b50ed2\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; Q28 project interface found by direct source search and reused, with normalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative monoid prelog unit pushout quotient presheaf and sheafification presentation",
+   "results": "{\"t\": \"2026-10-24T13:07:59Z\", \"tool\": \"leanfinder\", \"query\": \"Commutative monoid prelog unit pushout quotient presheaf and sheafification presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation\", \"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.Presentation.map_relations_I\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.Presentation.mapRelations_mapGenerators\"], \"digest\": \"5646250f46eacb1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; Q28 project interface found by direct source search and reused, with normalized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "PrelogPushoutPresentation|prelogPresentation|prelogPairClass|prelog|LogStructure",
+   "results": "{\"t\": \"2026-10-24T13:07:59Z\", \"tool\": \"grep\", \"query\": \"PrelogPushoutPresentation|prelogPresentation|prelogPairClass|prelog|LogStructure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; Q28 project interface found by direct source search and reused, with normalized comparison"
+  },
+  {
+   "tool": "grep project and DAG",
+   "query": "PrelogPushoutPresentation|prelogPairClass|prelogPresentation in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search prelog",
+   "results": "No upstream WeilConjectures match. Q28 ZariskiPrelogLogificationComparison defines prelogPairClass, PrelogPairNatural, PrelogPushoutPresentation, Restricts, EtaleUniversal. They are reused, not copied. No explicit quotient presheaf with map and composition data. Blueprint search: 0 matching nodes. The return explicitly requests this shared definition node.",
+   "date": "2026-10-24",
+   "verdict": "adopt the existing bundled interface; add its explicit quotient-functor realization and comparison, no second bundled notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of commutative monoids mapped to a ring presheaf has a unit pushout quotient presheaf and a normalized sheafification presentation.",
+   "results": "{\"t\": \"2026-10-24T15:27:53Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf of commutative monoids mapped to a ring presheaf has a unit pushout quotient presheaf and a normalized sheafification presentation.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Presentation.map_relations_I\"], \"digest\": \"447c8696ea7209fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module presentations, total quotient ring presheaves and sheafification do not define this prelog quotient presheaf with normalized bundled maps"
+  },
+  {
+   "tool": "grep",
+   "query": "PrelogPushoutPresentation|prelogPairClass|logification|LogStructure|prelog",
+   "results": "{\"t\": \"2026-10-24T15:28:41Z\", \"tool\": \"grep\", \"query\": \"PrelogPushoutPresentation|prelogPairClass|logification|LogStructure|prelog\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module presentations, total quotient ring presheaves and sheafification do not define this prelog quotient presheaf with normalized bundled maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated log structure is the sheafification of the quotient of a prelog monoid presheaf times the units of its ring presheaf.",
+   "results": "{\"t\": \"2026-10-24T15:28:42Z\", \"tool\": \"leansearch\", \"query\": \"The associated log structure is the sheafification of the quotient of a prelog monoid presheaf times the units of its ring presheaf.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toSheafify\", \"PresheafOfModules.sheafify\", \"CategoryTheory.plusPlusAdjunction\", \"PresheafOfModules.sheafification\", \"TopCat.Presheaf.totalQuotientPresheaf\", \"PresheafOfModules.sheafifyMap\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_presheaf'\"], \"digest\": \"a8207c70d9370383\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module presentations, total quotient ring presheaves and sheafification do not define this prelog quotient presheaf with normalized bundled maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"prelog\"",
+   "results": "{\"t\": \"2026-10-24T15:28:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"prelog\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module presentations, total quotient ring presheaves and sheafification do not define this prelog quotient presheaf with normalized bundled maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logification of a presheaf is a commutative monoid quotient identifying preimages of ring units with units, with universal maps to monoid sheaves.",
+   "results": "{\"t\": \"2026-10-24T15:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"Logification of a presheaf is a commutative monoid quotient identifying preimages of ring units with units, with universal maps to monoid sheaves.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.toTotalQuotientPresheaf\", \"TopCat.Presheaf.SubmonoidPresheaf\", \"TopCat.Presheaf.totalQuotientPresheaf\", \"TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf\", \"TopCat.Presheaf.instInhabitedSubmonoidPresheaf\", \"TopCat.Presheaf.SubmonoidPresheaf.obj\", \"TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf\", \"TopCat.Presheaf.submonoidPresheafOfStalk\"], \"digest\": \"8a33162acaccf38d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module presentations, total quotient ring presheaves and sheafification do not define this prelog quotient presheaf with normalized bundled maps"
+  },
+  {
+   "tool": "grep",
+   "query": "prelog|logification|PrelogPushoutPresentation|HasPrelogUniversalMapping",
+   "results": "{\"t\": \"2026-10-24T15:32:12Z\", \"tool\": \"grep\", \"query\": \"prelog|logification|PrelogPushoutPresentation|HasPrelogUniversalMapping\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic module presentations, total quotient ring presheaves and sheafification do not define this prelog quotient presheaf with normalized bundled maps"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-log-presentation-comparison",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The associated-log construction in VI 1.1 underlying the etale restriction and stalk recognition (former associated-log proof steps 9--10): shared presentation definitions used to state the two comparison clauses.",
+   "via": [
+    "lem-trf-etale-log-presentation-comparison",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-trf-prelog-unit-pushout-presentation",
+  "worker": "stage1",
+  "summary": "NM audited this definition against ILO VI 1.1, Stacks 00YR/03PO/03PQ/040R and the existing bundled Lean interface. Made all quotient, structural, naturality, universal and slice fields explicit; added the size convention, pointed-neighbourhood indexing and filtered-monoid-colimit dependencies. No new nodes: restriction descent and the encoding equivalence are elementary verifications of the displayed formulas, recorded in the report; all non-elementary notions already have nodes. No logification or slice-comparison theorem is asserted.",
+  "blueprint": "Definition serving the associated-log construction in the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2), through the fine-log chart-spreading input (ILO VI 3.7(a)); retains the inherited from/via ancestry. Checked latest blueprint main ef6f9619fdbffa59e88528fb56483d76c70258c8: no direct prelog presentation blueprint node; same_as remains empty."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-91a78dc90",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-91a78dc90 (reviewer sub-agent of L); spot-checked: Pass: this is a definition-only split with no new nodes and nothing to fix. I read the item in full against its base version and all nine statement dependencies; each one is used and says what the item takes from it. (1) The quotient P_γ is generated by (me,a)~(m,γ(e)a) for e in E_W. Restrictions descend because γ_V(M(f)e)=f^♯γ_W(e) is a unit. The structural map a_γ is constant on generators. This congruence equals the existing Lean one (LogRegularPair.lean:159, ZariskiPrelogLogificationComparison.lean:49): multiply the Lean generator by (m,a) to get the item's, and take m=1, a=1 to get back. (2) The sheafification predicate is exactly the bundled PrelogPushoutPresentation of Lean lines 71-92 (naturality, structural, iota and universal ∃!), with pair maps q=η and iota=η[-,1]. (3) Restricts (Lean 295-309) is stated as a predicate only. EtaleUniversal (Lean 167-177) is the item's bijection once α_L i=γ, and the Lean version is for prelog sheaves only, which the item says. (4) The section unit map is well defined: the injectivity argument of α^{-1}(O^×)≅O^× gives α^{-1}(O^×)(W)=K(W)^×. The log axiom is written inline on an arbitrary scheme. In ILO VI 1.1 (printed p.69) local Noetherianity is a standing default, not part of the notion; I checked the PDF. (5) The stalk M_t is a colimit over the pointed small-skeleton model: the size convention and the cofiltered lemma (no hypotheses on the scheme) give a final small index, and the filtered-monoid-colimit Mathlib leaf gives existence and the underlying set colimit. v_t is well defined by naturality. (6) The one typing repair adds α_L i=γ to HasPrelogUniversalMapping. It is justified: on Spec k, with M free on g, γ(g)=1, L=O^× and i(g)=c≠1, the identity of L precomposes to a map that is not γ-compatible. It narrows no use, since the Lean structural field forces α∘iota=β. Edge cases checked: empty scheme; empty étale W, where P_γ(W) is trivial; unit-valued γ or trivial M, where P_γ(W)≅B_W^×; a non-cancellative M. No cycle: the only citer is lem-trf-prelog-pushout-log-axiom, whose quotient is consistent with the item's. No duplicate: def-per-associated-log-presentation is the special case of a constant monoid and already existed on the base. Sources checked: Stacks 00YR, 03PO, 03PQ, 040R and ILO VI 1.1. The Mathlib searches (LeanSearch, LeanFinder, grep) are recorded. Blueprint from/via is inherited and same_as is []. No tool_uses are needed. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrelogUnitPushoutPresentation",
+  "declaration": "AlgebraicGeometry.prelogPresentation",
+  "declarations": [
+   "AlgebraicGeometry.prelogPresentationCon",
+   "AlgebraicGeometry.prelogPairRestriction",
+   "AlgebraicGeometry.prelogPairRestriction_wellDefined",
+   "AlgebraicGeometry.prelogPresentationMap",
+   "AlgebraicGeometry.prelogPresentationMap_id",
+   "AlgebraicGeometry.prelogPresentationMap_comp",
+   "AlgebraicGeometry.prelogPresentationPair",
+   "AlgebraicGeometry.IsPrelogPresentationSheafification",
+   "AlgebraicGeometry.prelogPresentationIota_naturality",
+   "AlgebraicGeometry.prelogPresentationIota",
+   "AlgebraicGeometry.prelogPresentationUnits",
+   "AlgebraicGeometry.prelogStalkDiagram",
+   "AlgebraicGeometry.prelogStalkColimits",
+   "AlgebraicGeometry.prelogStalk",
+   "AlgebraicGeometry.prelogStalkMap",
+   "AlgebraicGeometry.prelogSectionUnit",
+   "AlgebraicGeometry.HasPrelogUniversalMapping",
+   "AlgebraicGeometry.prelogBundledUnit_naturality",
+   "AlgebraicGeometry.prelogBundledUnit",
+   "AlgebraicGeometry.prelogPresentation_bundled_comparison",
+   "AlgebraicGeometry.prelogUniversalMapping_bundled_iff"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PrelogUnitPushoutPresentation.lean",
+  "statement": "def prelogPresentation {X : Scheme.{u}} {M : X.Etaleᵒᵖ ⥤ CommMonCat.{u}} (γ : M ⟶ X.etaleStructurePresheaf ⋙ forget₂ CommRingCat CommMonCat) : X.Etaleᵒᵖ ⥤ CommMonCat.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Single DAG owner of the explicit quotient-presheaf realization and its normalized comparison with Q28’s already landed PrelogPushoutPresentation. The existing bundled structure, its pair classes, Restricts and EtaleUniversal are publicly imported and reused from ZariskiPrelogLogificationComparison; none is redefined. The comparison fixes the actual unit and iota, not merely abstract isomorphism classes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d938d0e2",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery of b07b RETURN (H7/H2). Fixes verified: item proof_deps equal base 17 (node_fields.check_statement_change = []); no log-axiom module/record (diff 1bcb..7d93 = report, def-node lean record, item stmt_deps +def-trf-prelog-unit-pushout-presentation +lem-weil-pbc-etale-site-localization-open + lean, 2 .lean files). Lean byte-identical to b07b (sha a1cead6c/19121649); lean.statement verbatim for both nodes; no name clash with live PrelogPushoutLogAxiom. Maths re-checked: congruence = node relation; clause (1) functor equality, cover correspondence via overEquiv, ∃! e normalized; clause (2) prelogSectionUnit = true inverse under log axiom, IsStalkChart on canonical colim maps = Q→L/K iso, e.hom=f with inverse α-compat, universal mapping injective+range form; edge cases and single universe u OK; only Prop sorries, docstrings with source and blueprint. Mechanical finding: localization-open stmt_dep supplies overEquiv/etaleToOver, the constructed equivalence that is its recorded declaration → PASS on that point. Advisory: def module uses Q28 PrelogPushoutPresentation (theorem-node owned) uncited; report wrongly says log-axiom node cites the def node. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T091532-L-3350997",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

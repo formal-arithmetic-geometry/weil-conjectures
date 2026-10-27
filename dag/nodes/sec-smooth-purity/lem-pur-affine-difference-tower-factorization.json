@@ -1,0 +1,341 @@
+{
+ "id": "lem-pur-affine-difference-tower-factorization",
+ "kind": "statement",
+ "title": "Factorization of affine difference charts through a Cartesian tower",
+ "statement": "Let $k$ be a field. Use schemes, finite-type and separated morphisms [def-weil-scheme-morphism-properties], smooth morphisms [def-sbc-smooth-morphisms], etale morphisms [def-weil-etale-morphism], affine spaces and their coordinate functions [def-sbc-affine-space], and scheme fibre products [def-pc-fibre-product]. Let $f:U\\to V$ and $g:V\\to T$ be smooth separated finite-type maps of affine finite-type $k$-schemes of pure dimensions $d,e\\geq0$, with specified etale charts $U\\to\\mathbf A^d_V$ and $V\\to\\mathbf A^e_T$, having coordinate functions $x=(x_1,\\ldots,x_d)$ and $y=(y_1,\\ldots,y_e)$. Put $B=U$, $Q=U\\times_TV$, $W=U\\times_TU$, $a(u,u')=(u,fu')$, $b(u,v)=u$, $s(u)=(u,fu)$ and $t(u)=(u,u)$. Write $P_r:\\mathbf A_B^r\\to B$, $z_r:B\\to\\mathbf A_B^r$, and $q:\\mathbf A_B^{d+e}\\to\\mathbf A_B^e$ for the projection keeping the last $e$ coordinates [def-sbc-affine-space, def-pc-fibre-product]. Define\n$$G:Q\\to\\mathbf A_B^e,\\quad(u,v)\\mapsto(u,y(v)-y(fu)),$$\n$$R=Q\\times_{\\mathbf A_B^e}\\mathbf A_B^{d+e}=\\mathbf A_Q^d,\\quad q_Q:R\\to Q,\\quad J:R\\to\\mathbf A_B^{d+e},$$\n$$H:W\\to R,\\quad(u,u')\\mapsto((u,fu'),x(u')-x(u)),\\qquad F=JH.$$\n\nThen $a=q_QH$, $b=P_eG$, $qJ=Gq_Q$, $Gs=z_e$ and $Ft=z_{d+e}$. The map $F$ has the ordered coordinates $(x(u')-x(u),y(fu')-y(fu))$ over $B$. The maps $G,H,J,F$ are etale, separated and finite type; all displayed schemes are affine. More precisely, $G$ is the base change of the chart of $g$ followed by translation by $-y(fu)$, $H$ is the base change of the chart of $f$ followed by translation by $-x(u)$, and $J$ is the base change of $G$.\nThe square defining $R$ is Cartesian. Independently, $q$ is the base change of $P_d:\\mathbf A_B^d\\to B$ along $P_e$, via the projection $\\mathbf A_B^{d+e}\\to\\mathbf A_B^d$. Thus $q,P_e,P_eq,q_Q$ are smooth of relative dimensions $d,e,d+e,d$. If $W_f=U\\times_VU$ and $H_f:W_f\\to\\mathbf A_B^d$ sends $(u,u')$ to $(u,x(u')-x(u))$, the square with horizontal maps $H_f,H$ and vertical maps $W_f\\to W$ and $\\mathbf A_B^d\\to R$ induced by $s:B\\to Q$ is Cartesian. The analogous square of $G_g:V\\times_TV\\to\\mathbf A_V^e$, $(v,v')\\mapsto(v,y(v')-y(v))$, and $G$ is Cartesian over $f:B\\to V$. In particular $H_f,G_g$ are etale and carry the respective diagonals to zero sections. These assertions hold for empty affine schemes and for $d=0$ or $e=0$, with empty coordinate blocks. For any smooth separated finite-type pair $f_0:X\\to Y$, $g_0:Y\\to Z$ of pure dimensions $d,e$ between finite-type $k$-schemes and any $x\\in X$, there are affine open neighbourhoods $U$ of $x$, $V$ of $f_0(x)$, $T$ of $g_0f_0(x)$ with $f_0(U)\\subseteq V$, $g_0(V)\\subseteq T$ and compatible etale charts of the above form for the restricted pair.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, standard etale coordinates and canonical Cartesian product identifications: affine-space zero tower and translated difference factorization (old item steps 8-9); agent-written refinement of the blueprint argument"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use AffineSpace.hom_ext to prove directly the universal property of the ordered first and last coordinate blocks. The lift of maps into the two blocks concatenates their global coordinate sections using Fin.addCases. Equality of the two base morphisms gives its structure morphism. Coordinate extensionality proves both projection equations and uniqueness. Translation by a tuple v has inverse translation by -v, by AffineSpace.translation_add and translation_zero. These are the constructions of [def-sbc-affine-space, def-pc-fibre-product].",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: standard coordinates; polynomial translations and ordered affine product"
+   }
+  },
+  {
+   "text": "Use [def-sbc-affine-space, def-pc-fibre-product] to identify R with affine d-space over Q by its stated explicit construction. The first projection of J is the affine-space base-change map along Q to U; its last projection is G composed with the structure morphism of R. Pasting with the ordered affine-product square from Step 1 proves that the square (J,q_Q,q,G) is Cartesian. Affineness of Q, W, the self-products and the affine spaces follows from the standard Mathlib affine-pullback and affine-space instances, expressing [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: canonical Cartesian product identifications; explicit description of R"
+   }
+  },
+  {
+   "text": "Write $c_g:V\\to\\mathbf A_T^e$ for the given chart. Base change along $gf:B\\to T$ gives $Q\\to\\mathbf A_B^e$, $(u,v)\\mapsto(u,y(v))$. Compose it with the automorphism from Step 1 having translation tuple $-y(fu)$; the result is exactly $G$. By clause (1) of [lem-weil-pbc-etale-base-change-finite-limits] the base-changed chart is etale; its use only requires that $c_g$ is etale. An automorphism is an open immersion by [def-weil-open-immersion], hence etale by clause (1) of [lem-weil-pbc-etale-composition-cancellation]. Clause (2) of that node makes $G$ etale.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GN (lemma-composition-etale); polynomial translation as in blueprint Step 1"
+   }
+  },
+  {
+   "text": "The square (a,second projection of W,second projection of Q,f) is Cartesian by cancelling the Cartesian square defining Q from the square defining W, using IsPullback.of_right. For any Cartesian square and chart c with c followed by projection equal to the original morphism, AffineSpace.hom_ext identifies its base-changed chart with homOfVector of the top projection and the pulled-back coordinates; cancelling AffineSpace.isPullback_map proves that this chart square is Cartesian. Apply this to obtain Hraw. The coordinate calculation identifies H with Hraw followed by translation by the negative first coordinates. Base change and composition in [lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-etale-composition-cancellation] prove H etale. The square of J from Step 2 proves J etale as a base change of G, and F=H followed by J is etale. The base squares use [def-pc-fibre-product].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: translated f-chart, base-changed G-chart, and composite difference chart"
+   }
+  },
+  {
+   "text": "Substitute the formula for $H$ into that for $J$ from Step 2. This gives $F(u,u')=(u,x(u')-x(u),y(fu')-y(fu))$, with the first block before the last block. Projection now gives $q_QH=a$, $P_eG=b$ and $qJ=Gq_Q$. On the graph $s(u)=(u,fu)$ the last differences vanish, giving $Gs=z_e$. On $t(u)=(u,u)$ both blocks vanish, giving $Ft=z_{d+e}$. These are equalities of scheme maps: on every affine coordinate ring they fix the base ring and have the displayed identical images of each polynomial generator, not merely identical values on ordinary points.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: ordered coordinate and section identities"
+   }
+  },
+  {
+   "text": "Every displayed scheme is affine by Step 2. Mathlib gives IsSeparated for any morphism with affine source ([lem-weil-pbc-affine-source-morphism-separated]) and IsAffineHom for any map between affine schemes; the latter gives QuasiCompact, as also expressed by the affine source and quasi-separated target criterion [lem-weil-pbc-qcqs-morphism-permanence]. An etale map is locally of finite presentation [def-sbc-locally-finite-presentation], hence locally of finite type [def-weil-finite-type-morphism]. Apply these instances to G,H,J,F; no claim that arbitrary etale maps are quasi-compact is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU, separated permanence; morphisms.tex Tags 01T2 (lemma-locally-finite-type-characterize), 01TS (finite presentation), applied only to maps between affine schemes"
+   }
+  },
+  {
+   "text": "By [sbc-lem-affine-space-smooth], $P_d,P_e,P_{d+e}$ are smooth of relative dimensions $d,e,d+e$. Step 1 identifies $q$ as the base change of $P_d$ along $P_e$; [lem-sbc-smooth-relative-dimension-permanence] (1) therefore gives dimension $d$ for $q$. Step 2 identifies $q_Q$ with the projection $\\mathbf A_Q^d\\to Q$, so the affine-space lemma gives dimension $d$ for it. Finally $P_eq=P_{d+e}$ by the base coordinate projection. This proves all the asserted smoothness and dimension statements.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 00T7, 02G1 for the affine-space model; 02NK (lemma-base-change-relative-dimension-d)"
+   }
+  },
+  {
+   "text": "Prove first the Cartesian square (i,first projection,a,s) of [def-pc-fibre-product] directly: a test pair in W and U has first component the given U point and second component with the same f-image; its lift to the self-product over V is forced by these two components. Coordinate extensionality proves that H composed with i equals differenceFirst composed with includeR. Cancel the affine-space base-change square along s from the pasted square to obtain the asserted restriction square. Independently base-change the chart cf along f and translate by its negative coordinates; this proves differenceFirst etale by [lem-weil-pbc-etale-base-change-finite-limits]. The diagonal coordinates are differences of equal sections and hence zero.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: Cartesian restriction of the f difference chart along the graph s"
+   }
+  },
+  {
+   "text": "Cancel the square defining the self-product of g from the square defining Q to obtain the Cartesian square (j,first projection,first projection,f) of [def-pc-fibre-product]. The two composites of its difference charts into affine e-space over V agree by coordinate extensionality using [def-sbc-affine-space]. Cancel the affine-space base-change square over f to obtain the required restriction square. The general base-changed-chart and translation proof from Step 8, applied to cg, proves differenceFirst of g etale using [def-weil-open-immersion, lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-etale-composition-cancellation]. Its diagonal coordinates vanish.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sbc-affine-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: Cartesian restriction of the g difference chart over f"
+   }
+  },
+  {
+   "text": "Apply the source-library theorem Smooth.exists_etale_to_affineSpace to g at f(x), with its given relative dimension e; this is the prescribed-dimension version of [sbc-thm-etale-local-normal-form]. For f take a standard smooth affine presentation of its given relative dimension d. Use Mathlib exists_basicOpen_le_appLE_of_appLE_of_isAffine to refine this presentation to a basic affine neighbourhood V inside the chosen domain of the g chart, and to a basic affine neighbourhood U of x. Apply the source-library exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDimension to this refined presentation for cf. Restrict cg by the open immersion V into its original domain; it stays etale by [lem-weil-pbc-etale-composition-cancellation]. The structure-map identity follows from map_resLE. The restrictions of f and g keep their given relative dimensions by the source-open and target-open permanence of [lem-sbc-smooth-relative-dimension-permanence]. Local finite type of the restrictions and of their maps to Spec k follows from the restriction and composition instances for [def-weil-finite-type-morphism]. All sources are affine: [lem-weil-pbc-affine-source-morphism-separated] gives separatedness; maps to affine targets are affine and hence quasi-compact, as in [lem-weil-pbc-qcqs-morphism-permanence]. Thus all required finite-type assertions hold, without any extra affineness or separatedness hypothesis on X,Y,Z.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L (lemma-smooth-etale-over-affine-space), applied successively; Tags 02NL, 01T2"
+   }
+  },
+  {
+   "text": "If $d=0$ or $e=0$, omit the corresponding polynomial generators; translation is the identity on that empty block, and $\\mathbf A_B^0=B$ by [def-sbc-affine-space]. Every construction and inverse in Steps 1-9 still applies. If an affine scheme is empty its coordinate ring is the zero ring; the polynomial substitutions and tensor-product identifications still hold, and the universal properties still quantify over supplied maps, so no nonempty point is required. The final local-existence assertion is quantified over $x\\in X$ and is vacuous when $X$ is empty. Thus these edge cases require no additional hypotheses.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: empty coordinate blocks and empty charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; E3 directly formalizes ordered affine-coordinate universal properties and pullback cancellation, with the prescribed-dimension source-library normal form for local charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale coordinate differences factor smooth diagonal tower through Cartesian affine space square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "subtract etale coordinates from diagonal of composite smooth morphisms affine space tower",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AffineMap.coe_sub\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \"(f g : P1 →ᵃ[k] V2) : ⇑(f - g) = f - g\", \"doc\": \"For any ring $ k $, $ k $-modules $ V_1 $, $ V_2 $, and affine space $ P_1 $ over $ V_1 $, the subtraction of two affine maps $ f, g : P_1 \\\\to V_2 $ satisfies $ (f - g)(x) = f(x) - g(x) $ for all $ x \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AffineMap.sub_linear\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \"(f g : P1 →ᵃ[k] V2) : (f - g).linear = f.linear - g.linear\", \"doc\": \"For any affine maps $ f $ and $ g $ from an affine space $ P_1 $ over a $ k $-module $ V_1 $ to a $ k $-module $ V_2 $, the linear part of the affine map $ f - g $ is equal to the difference of the li\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsEtale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) : 𝔸(n; S) ⟶ 𝔸(n; T)\", \"doc\": \"Given a morphism $ f: S \\to T $ of schemes, this function constructs the induced morphism $ \\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T $ between affine spaces by composing the canonical projection $ \\\\mathbb{A}^n\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Scheme",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Etale.etale_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Etale\", \"doc\": \"Etale is stable under base change.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Etale\", \"doc\": \"Being étale is multiplicative.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is étale if for each affine `U ⊆ Y` and\\n`V ⊆ f ⁻¹' U`, The induced map `Γ(Y, U) ⟶ Γ(X, V)` is étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : Y ⟶ X) [AlgebraicGeometry.Etale f] : X.Etale\", \"doc\": \"Constructor for objects in the étale site of a scheme `X`: it takes\\nan étale morphism `f : Y ⟶ X` as an input.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] : AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.Etale f\", \"doc\": \"Open immersions are étale.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] : AlgebraicGeometry.Smooth f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : @AlgebraicGeometry.Etale = @AlgebraicGeometry.SmoothOfRelativeDimension 0\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] : AlgebraicGeometry.SmoothOfRelativeDimension 0 f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Etale f ↔ AlgebraicGeometry.SmoothOfRelativeDimension 0 f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.FormallyUnramified f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.Etale f\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(coordinate|difference)|difference.*(etale|étale)|etale.*translation",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/HalesJewett.lean\", \"line\": \"237\", \"text\": \"/-- The diagonal line. It is the identity at every coordinate. -/\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Prod.lean\", \"line\": \"134\", \"text\": \"/-- A point in the mulAntidiagonal is determined by its first coordinate.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Prod.lean\", \"line\": \"138\", \"text\": \"/-- A point in the antidiagonal is determined by its first coordinate.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Prod.lean\", \"line\": \"160\", \"text\": \"/-- A point in the mulAntidiagonal is determined by its second coordinate.\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Prod.lean\", \"line\": \"163\", \"text\": \"@[to_additive /-- A point in the antidiagonal is determined by its second coordinate.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two smooth etale charts translated by their graph sections define an etale factorization of a tower",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → StandardEtalePresentation R S → Algebra.SubmersivePresentation R S (Fin 2) (Fin 2)\", \"doc\": \"Constructs a submersive presentation of an algebra $ S $ over a commutative ring $ R $ using the standard étale presentation with two generators and two relations. This presentation employs the identi\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation\", \"doc\": \"For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-diagonal-section-pasting",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, standard etale coordinates and canonical Cartesian product identifications: affine-space zero tower and translated difference factorization (old item steps 8-9)",
+   "via": [
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-affine-difference-tower-factorization",
+  "worker": "stage1",
+  "summary": "Expanded polynomial translations, both chart base changes, ordered coordinate identities, both Cartesian restriction squares, geometric properties and compatible affine localization. Reused existing nodes throughout; no new nodes. Checked all citations and empty/zero-dimensional cases.",
+  "blueprint": "Realizes thm-pur-composition-coherence Step 1: standard etale coordinates and canonical Cartesian product identifications, refining the affine difference tower from lem-pur-diagonal-section-pasting.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic scheme geometry used only for chart existence or morphism properties in the explicit coordinate tower; the purity unit supplies no replacement for this geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-c32327aa7",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-c32327aa7 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 11 steps, every cited statement, and Step 1 of the blueprint main-20261015 proof of thm-pur-composition-coherence. Step 1 calls for the Cartesian product identifications of the diagonals and the standard coordinates from the etale local normal form (054L), and the item does exactly that, so the route holds. Statement checks, recomputed: G is the base change of c_g along gf followed by translation. W is isomorphic to Q x_V U, and H is the base change of c_f followed by translation by -x(u). F=JH=(u, x(u')-x(u), y(fu')-y(fu)). The identities a=q_Q H, b=P_e G, qJ=G q_Q, Gs=z_e and Ft=z_{d+e} all hold. The H_f square is Cartesian because W x_R A^d_B = W x_Q B = U x_V U. The G_g square is Cartesian because pulling V x_T V back along f gives Q. q is P_d x_B P_e. Edge cases checked: d=0, e=0, empty schemes, and U=V=T=Spec k. In Step 10, r=e and s=d follow from the fibre dimension at the given points. There are no new nodes. I searched the DAG for coordinate-difference statements and found no duplicate; the sibling lem-pur-difference-coordinate-section-identifications is a statement about sheaf maps, not this geometry. No SGA source is used, the statement is unchanged and nothing is weakened. Fault C1/C2 in Steps 6 and 10: the step said 'of finite type' follows from 'finitely generated ring map on one affine pair', but def-weil-finite-type-morphism quantifies over every affine open and needs quasi-compactness, and no node was cited for that. Repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-affine-difference-tower-factorization.json. An affine target is quasi-separated (lem-weil-pbc-quasicompact-affine-surjection plus clause (2) of lem-weil-pbc-quasi-separated-affine-cover-criterion). Then clause (1) of lem-weil-pbc-qcqs-morphism-permanence (affine source, etale) gives finite presentation, and lem-weil-pbc-lft-pointwise-criterion gives local finite type. All four nodes are Mathlib leaves. lem-weil-pbc-etale-ring-map-quasi-finite is no longer used, so it was removed from proof_deps and tool_uses. Tool uses accepted: the pbc leaves, sbc-lem-affine-space-smooth, lem-sbc-smooth-relative-dimension-permanence and sbc-thm-etale-local-normal-form, all generic scheme geometry.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDifferenceTowerFactorization",
+  "declaration": "AlgebraicGeometry.AffineDifferenceTower.factorization",
+  "declarations": [
+   "AlgebraicGeometry.AffineDifferenceTower.Coords",
+   "AlgebraicGeometry.AffineDifferenceTower.Q",
+   "AlgebraicGeometry.AffineDifferenceTower.W",
+   "AlgebraicGeometry.AffineDifferenceTower.Graw",
+   "AlgebraicGeometry.AffineDifferenceTower.R",
+   "AlgebraicGeometry.AffineDifferenceTower.Hraw",
+   "AlgebraicGeometry.AffineDifferenceTower.H",
+   "AlgebraicGeometry.AffineDifferenceTower.J",
+   "AlgebraicGeometry.AffineDifferenceTower.includeR",
+   "AlgebraicGeometry.AffineDifferenceTower.factorization",
+   "AlgebraicGeometry.AffineDifferenceTower.exists_compatible_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDifferenceTowerFactorization.lean",
+  "statement": "theorem factorization {k : Type u} [Field k] [U.Over (Spec (.of k))] [V.Over (Spec (.of k))] [T.Over (Spec (.of k))] [IsAffine U] [IsAffine V] [IsAffine T] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (f : U ⟶ V) (g : V ⟶ T) [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] [IsSeparated f] [IsSeparated g] [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] (cf : U ⟶ AffineSpace (Coords d) V) (cg : V ⟶ AffineSpace (Coords e) T) [Etale cf] [Etale cg] (hcf : cf ≫ (AffineSpace (Coords d) V ↘ V) = f) (hcg : cg ≫ (AffineSpace (Coords e) T ↘ T) = g) : H f g cf ≫ J d f g cg = differenceTotal d e f g cf cg ∧ H f g cf ≫ (R d f g ↘ Q f g) = a f g ∧ differenceSecond e f g cg ≫ (AffineSpace (Coords e) U ↘ U) = pullback.fst (f ≫ g) g ∧ J d f g cg ≫ q d e U = (R d f g ↘ Q f g) ≫ differenceSecond e f g cg ∧ s f g ≫ differenceSecond e f g cg = AffineSpace.zeroSection (Coords e) U ∧ pullback.diagonal (f ≫ g) ≫ differenceTotal d e f g cf cg = zero (d + e) U ∧ (∀ i : Coords d, (differenceTotal d e f g cf cg).appTop (AffineSpace.coord U (ULift.up (Fin.castAdd e i.down))) = (pullback.snd (f ≫ g) (f ≫ g) ≫ cf).appTop (AffineSpace.coord V i) - (pullback.fst (f ≫ g) (f ≫ g) ≫ cf).appTop (AffineSpace.coord V i)) ∧ (∀ i : Coords e, (differenceTotal d e f g cf cg).appTop (AffineSpace.coord U (ULift.up (Fin.natAdd d i.down))) = (pullback.snd (f ≫ g) (f ≫ g) ≫ f ≫ cg).appTop (AffineSpace.coord T i) - (pullback.fst (f ≫ g) (f ≫ g) ≫ f ≫ cg).appTop (AffineSpace.coord T i)) ∧ differenceTotal d e f g cf cg ≫ (A (d + e) U ↘ U) = pullback.fst (f ≫ g) (f ≫ g) ∧ Etale (differenceSecond e f g cg) ∧ IsSeparated (differenceSecond e f g cg) ∧ LocallyOfFiniteType (differenceSecond e f g cg) ∧ QuasiCompact (differenceSecond e f g cg) ∧ Etale (H f g cf) ∧ IsSeparated (H f g cf) ∧ LocallyOfFiniteType (H f g cf) ∧ QuasiCompact (H f g cf) ∧ Etale (J d f g cg) ∧ IsSeparated (J d f g cg) ∧ LocallyOfFiniteType (J d f g cg) ∧ QuasiCompact (J d f g cg) ∧ Etale (differenceTotal d e f g cf cg) ∧ IsSeparated (differenceTotal d e f g cf cg) ∧ LocallyOfFiniteType (differenceTotal d e f g cf cg) ∧ QuasiCompact (differenceTotal d e f g cf cg) ∧ IsAffine (Q f g) ∧ IsAffine (W f g) ∧ IsAffine (R d f g) ∧ IsAffine (pullback f f) ∧ IsAffine (pullback g g) ∧ IsAffine (AffineSpace (Coords d) U) ∧ IsAffine (AffineSpace (Coords e) U) ∧ IsAffine (A (d + e) U) ∧ IsAffine (AffineSpace (Coords d) V) ∧ IsAffine (AffineSpace (Coords e) T) ∧ IsAffine (AffineSpace (Coords e) V) ∧ IsPullback (Graw f g cg) (pullback.snd (f ≫ g) g) (AffineSpace.map (Coords e) (f ≫ g)) cg ∧ differenceSecond e f g cg = Graw f g cg ≫ AffineSpace.translation (fun i ↦ -((f ≫ cg).appTop (AffineSpace.coord T i))) ∧ IsPullback (Hraw f g cf) (pullback.snd (f ≫ g) (f ≫ g)) (AffineSpace.map (Coords d) (pullback.snd (f ≫ g) g)) cf ∧ H f g cf = Hraw f g cf ≫ AffineSpace.translation (fun i ↦ -((pullback.fst (f ≫ g) g ≫ cf).appTop (AffineSpace.coord V i))) ∧ IsPullback (J d f g cg) (R d f g ↘ Q f g) (q d e U) (differenceSecond e f g cg) ∧ IsPullback (first d e U) (q d e U) (AffineSpace (Coords d) U ↘ U) (AffineSpace (Coords e) U ↘ U) ∧ SmoothOfRelativeDimension d (q d e U) ∧ SmoothOfRelativeDimension e (AffineSpace (Coords e) U ↘ U) ∧ SmoothOfRelativeDimension (d + e) (q d e U ≫ (AffineSpace (Coords e) U ↘ U)) ∧ SmoothOfRelativeDimension d (R d f g ↘ Q f g) ∧ IsPullback (differenceFirst d f cf) (i f g) (includeR d f g) (H f g cf) ∧ IsPullback (differenceSecond e f g cg) (j f g) (AffineSpace.map (Coords e) f) (differenceFirst e g cg) ∧ Etale (differenceFirst d f cf) ∧ Etale (differenceFirst e g cg) ∧ pullback.diagonal f ≫ differenceFirst d f cf = AffineSpace.zeroSection (Coords d) U ∧ pullback.diagonal g ≫ differenceFirst e g cg = AffineSpace.zeroSection (Coords e) V",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two theorems jointly state the node: factorization gives all tower assertions and exists_compatible_charts the final local-existence clause. The existing graph, block-projection and difference maps are reused from Sheaf.Paper.PurityDiagonalSectionPasting. R uses the explicitly identified affine-space model, with IsPullback asserting its defining universal property. See the report on the reverse proof-import cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe7afa28b",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Read the node (statement, 11 steps), main-20261015 thm-pur-composition-coherence Step 1, the module, the report, and the reused DiagonalPasting declarations and AffineSpace.translation/zeroSection. All clauses recomputed and correct: H≫J=F, the five identities a=q_QH, b=P_eG, qJ=Gq_Q, Gs=z_e, Ft=z_{d+e}; F's ordered coordinates (castAdd/natAdd); G,H,J,F etale/separated/LFT/QC; all displayed schemes affine; chart base-change squares for g and f plus translations by -y(fu) and -x(u) (translation is x↦x+a, so the signs are right); IsPullback squares for J and for first/q; smooth dimensions d,e,d+e,d; H_f and G_g restriction squares and diagonal-zero clauses; local existence over arbitrary finite-type X,Y,Z with resLE charts. No stronger hypotheses; d=0, e=0, empty schemes and empty X covered. The statement field is verbatim, all 11 declarations exist, the only two sorrys are theorem proofs, no hollow defs, docstrings OK, stmt_deps unchanged, report sections present. Advisory: plain DiagonalPasting defs are owned by the parent theorem lem-pur-diagonal-section-pasting (which has this item in proof_deps), as in Q85; stage-3 import cycle flagged for the maintainer. Not recompiled per the 2026-10-21 instruction; no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T162242-L-389716",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

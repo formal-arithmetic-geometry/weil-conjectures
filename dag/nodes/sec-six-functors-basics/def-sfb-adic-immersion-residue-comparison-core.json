@@ -1,0 +1,98 @@
+{
+ "id": "def-sfb-adic-immersion-residue-comparison-core",
+ "kind": "definition",
+ "title": "Fixed residue pullback comparison data",
+ "statement": "Define the exact fixed-scalar residue pullback functor and its finite-limit, finite-colimit and additive structures used by the immersion residue comparisons.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-adic-stratum-completion-unit",
+  "def-coef-constant-scalar-restriction",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.5.8; Stacks Tags 03A0 and 03CY"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact fixed scalar pullback functor for pro-etale sheaves",
+   "results": "No exact theorem; AsSmall and scalar equivalence APIs found.",
+   "date": "2026-10-26",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits scalar restriction equivalence",
+   "results": "Generic equivalence preservation results only.",
+   "date": "2026-10-26",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "sfbFixedResiduePull",
+   "results": "No prior declaration before this extraction.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionResidueComparison",
+  "date": "2026-10-26",
+  "group": "X9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-immersion-residue-comparison",
+   "place": "fixed residue pullback data extracted to break an import cycle"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionResidueComparisonCore",
+  "file": "lean/Sheaf/Paper/AdicImmersionResidueComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.SfbResidueComparisonCore.sfbFixedResiduePull",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SfbResidueComparisonCore.sfbFixedResiduePull",
+   "AlgebraicGeometry.Scheme.SfbResidueComparisonCore.sfbFixedResiduePull_limits",
+   "AlgebraicGeometry.Scheme.SfbResidueComparisonCore.sfbFixedResiduePull_colimits",
+   "AlgebraicGeometry.Scheme.SfbResidueComparisonCore.sfbFixedResiduePull_additive"
+  ],
+  "statement": "def sfbFixedResiduePull {X S : Scheme.{u}} (i : S ⟶ X) (k : Type (u + 1)) [CommRing k] : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) ⥤ ConstantCompletion.Mod (ConstantCompletion.constant (proEtaleModelTopology S) k)",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-18f57",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261026T071516-L-3943000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-18f57",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261026T071516-L-3943000",
+  "kind": "interface",
+  "note": "independent cc review: item conjunction vs two verbatim conjunct sorries (fixed/etale) + verbatim core extraction behind abbrev; node records vs Lean and base plan; importer AdicImmersionCompletedTransport compiled against delivery"
+ }
+}

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedTensorUnitInsertionData
 import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionCore
 import all Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 import Sheaf.SixFunctors.RingedDerivedTensorLift
 import all Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal

@@ -119,5 +119,43 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a nonempty directed preorder and $i\\mapsto A_i$ a functor from $\\Lambda$ to commutative rings with colimit $A=\\varinjlim_iA_i$ and coprojections $\\iota_i:A_i\\to A$. Let $J_i\\subseteq A_i$ be ideals with $A_i\\to A_j$ mapping $J_i$ into $J_j$ for $i\\le j$, and let $I\\subseteq A$ be an ideal whose elements are exactly the elements $\\iota_i(a)$ with $i\\in\\Lambda$ and $a\\in J_i$. Let $f\\in A[X]$ be monic and $g_0,h_0\\in(A/I)[X]$ coprime monic polynomials with $f\\bmod I=g_0h_0$. Then there are a stage $i$ and monic polynomials $f_i,g_i,h_i\\in A_i[X]$ such that $\\iota_i(f_i)=f$, the reductions of $g_i$ and $h_i$ modulo $J_i$ are coprime and their product is $f_i\\bmod J_i$, and the images of $\\iota_i(g_i)$ and $\\iota_i(h_i)$ modulo $I$ are $g_0$ and $h_0$. No pair $(A_i,J_i)$ is assumed henselian.",
+  "proof": [
+   {
+    "text": "*Lifting finitely many polynomials.* Every element of the filtered colimit $A$ is $\\iota_i(a)$ for some $i$ and $a\\in A_i$, and since $\\Lambda$ is directed, finitely many elements can be represented at one common stage. Applying this to the finitely many coefficients of a finite family of polynomials over $A$ gives a stage $i$ and polynomials over $A_i$ mapping to them. A monic polynomial of degree $d$ can be lifted to a monic polynomial of degree $d$, by lifting its coefficients in degrees $<d$ and taking leading coefficient $1$. This also covers the case $A=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Vanishing modulo the ideals at a later stage.* Let $a\\in A_i$ with $\\iota_i(a)\\in I$. By hypothesis $\\iota_i(a)=\\iota_k(c)$ for some $k$ and $c\\in J_k$. Two representatives with the same image in $A$ become equal at a common later stage $l\\ge i,k$, and there the image of $c$ lies in $J_l$ by compatibility of the ideals, so the image of $a$ in $A_l$ lies in $J_l$. For a finite family of polynomials over $A_i$ whose images in $A[X]$ vanish modulo $I$, apply this to their finitely many nonzero coefficients and take one common upper bound $l\\ge i$ of the resulting stages; using compatibility once more, at that stage every coefficient lies in $J_l$, i.e. the polynomials vanish modulo $J_l$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Conclusion.* Lift $g_0$ and $h_0$ to monic polynomials $g,h\\in A[X]$, using surjectivity of $A\\to A/I$ and the monic lifting above, and lift Bezout witnesses $a_0,b_0\\in(A/I)[X]$ with $a_0g_0+b_0h_0=1$ to polynomials $a,b\\in A[X]$. Apply the first step to the five polynomials $f,g,h,a,b$: there are a stage $i$, monic $f_i,g_i,h_i\\in A_i[X]$ and $a_i,b_i\\in A_i[X]$ mapping to $f,g,h,a,b$. The polynomials $f_i-g_ih_i$ and $a_ig_i+b_ih_i-1$ map to $f-gh$ and $ag+bh-1$, which vanish modulo $I$ because $f\\bmod I=g_0h_0$ and $a_0g_0+b_0h_0=1$. Apply the second step to these two polynomials and pass to the resulting later stage. There their reductions modulo $J$ vanish, which gives the factorization $f_i\\equiv g_ih_i$ and the Bezout identity $a_ig_i+b_ih_i\\equiv1$, so the reductions of $g_i$ and $h_i$ are coprime with product $f_i\\bmod J_i$. Transition maps preserve monicity, and compatibility of the coprojections gives $\\iota_i(f_i)=f$ and that $\\iota_i(g_i)$, $\\iota_i(h_i)$ reduce to $g_0$, $h_0$ modulo $I$. The argument also handles a zero colimit or zero quotient ring without assuming nontriviality.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

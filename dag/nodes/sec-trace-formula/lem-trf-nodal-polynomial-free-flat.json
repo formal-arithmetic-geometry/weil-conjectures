@@ -1,0 +1,242 @@
+{
+ "id": "lem-trf-nodal-polynomial-free-flat",
+ "kind": "statement",
+ "title": "Flatness and finite presentation of the nodal polynomial model",
+ "statement": "Let $A$ be a commutative ring, let $a\\in A$, and let $B=A[u,v]/(uv-a)$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-algebra-hom-quotient]. The morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum] is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. More generally, for any scheme $V$ [def-pc-scheme] and $h\\in\\Gamma(V,\\mathcal O_V)$, the scheme $W$ obtained by gluing $\\operatorname{Spec}(A[u,v]/(uv-h|_{\\operatorname{Spec}A}))$ over affine opens $\\operatorname{Spec}A\\subset V$ has flat locally finitely presented projection $W\\to V$. No Noetherian, reducedness, or nonzerodivisor assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, universal model preceding the lemma; algebraic flatness calculation for that model. Flatness and finite presentation interpreted by morphisms.tex Tags 01U5 (lemma-flat-characterize) and 01TP (definition-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-trf-strict-semistable-curve",
+  "def-trf-universal-nodal-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-binomial-laurent-normal-form] with $R=A$, $x=u$, $y=v$. Its first assertion applies before the additional domain and nonzero-parameter hypotheses: $1,u^i,v^j$ ($i,j>0$) form an $A$-module basis of $B$. Thus $B$ is a free $A$-module, with no finiteness restriction on the basis. By the last sentence of [lem-weil-pbc-projective-module-flat], $B$ is flat over $A$. Consequently the structural ring map $A\\to B$ is flat by [def-weil-pbc-flat-ring-map]. No cancellation by $a$ and no domain hypothesis have been used.",
+   "uses": [
+    "lem-sfb-binomial-laurent-normal-form",
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051G (lemma-local-artinian-characterize-flat), proof, first sentence, for projective/free implies flat; the arbitrary-ring basis is the separately cited normal-form statement."
+   }
+  },
+  {
+   "text": "The projection $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is induced by the structural map $A\\to B$. Apply [lem-weil-pbc-flat-ring-map-iff-flat-affine] to this map, which is flat by step 1. This proves flatness of the affine model.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize), equivalence of (1) and (4) for single affine charts."
+   }
+  },
+  {
+   "text": "The displayed algebra $B$ has the finite presentation with two generators $u,v$ and one relation $uv-a$. For every point of $\\operatorname{Spec}B$, choose the entire affine source $\\operatorname{Spec}B$ and target $\\operatorname{Spec}A$ as its neighbourhoods. These are exactly the witnesses required by [def-sbc-locally-finite-presentation], with $n=2$ and $m=1$. Therefore the affine projection is locally of finite presentation.",
+   "uses": [
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TP (definition-finite-presentation), parts (1)--(2)."
+   }
+  },
+  {
+   "text": "Let $\\pi:W\\to V$ be the glued projection. For any $w\\in W$, choose an affine open $V_i=\\operatorname{Spec}A_i$ of $V$ containing $\\pi(w)$. In the gluing specified in the statement, $W_i=\\pi^{-1}(V_i)$ is the open chart $\\operatorname{Spec}(A_i[u,v]/(uv-h|_{V_i}))$. Steps 1--3 apply to $A_i$ and $h|_{V_i}$. In particular the local ring map at $w$ is flat: it is the same map $\\mathcal O_{V,\\pi(w)}\\to\\mathcal O_{W,w}$, since restriction to an open neighbourhood leaves germs and their ring operations unchanged. By [def-weil-flat-morphism] this proves flatness of $\\pi$ at every $w$. The same pair of affine opens $W_i,V_i$ and its two-generator one-relation presentation supplies the witnesses at $w$ in [def-sbc-locally-finite-presentation]. Thus $\\pi$ is also locally of finite presentation. This is a pointwise argument; it does not require intersections of arbitrary affine opens to be affine.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U3 (definition-flat) and 01TP (definition-finite-presentation): pointwise definitions; elementary passage through the given open charts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-binomial-laurent-normal-form",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), universal model preceding the lemma; assembly from the existing arbitrary-ring normal form, Tag 051G free/projective flatness, and morphisms.tex Tags 01U5, 01U3, 01TP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat|Flat",
+   "results": "{\"t\": \"2026-10-23T09:45:58Z\", \"tool\": \"grep\", \"query\": \"flat|Flat\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read flat-search-0.txt through flat-search-5.txt. Hits give general smooth-implies-flat, single-variable monic quotients, and generic basis constructions. The relation uv-a is not monic as a polynomial in v over A[u]; Polynomial.Monic.free_quotient does not specialize in one line. None gives the two-variable normal-form basis or flat nodal-model projection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(nodal|xy.?[-=].?a|uv.?[-=].?h|quotient.*monomial|basis.*[Qq]uotient)",
+   "results": "{\"t\": \"2026-10-23T09:45:58Z\", \"tool\": \"grep\", \"query\": \"(nodal|xy.?[-=].?a|uv.?[-=].?h|quotient.*monomial|basis.*[Qq]uotient)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"Mathlib/Topology/Bases.lean\", \"Mathlib/Topology/Bases.lean\", \"Mathlib/Topology/Bases.lean\", \"Mathlib/Topology/Bases.lean\", \"Mathlib/Topology/Bases.lean\"], \"digest\": \"50469dc2bfcbf1fb\"}; Read flat-search-0.txt through flat-search-5.txt. Hits give general smooth-implies-flat, single-variable monic quotients, and generic basis constructions. The relation uv-a is not monic as a polynomial in v over A[u]; Polynomial.Monic.free_quotient does not specialize in one line. None gives the two-variable normal-form basis or flat nodal-model projection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The family xy=a over an arbitrary commutative ring is flat and finitely presented",
+   "results": "{\"t\": \"2026-10-23T09:45:58Z\", \"tool\": \"leansearch\", \"query\": \"The family xy=a over an arbitrary commutative ring is flat and finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FinitePresentation\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.projective_of_finitePresentation\", \"RingHom.Flat\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.of_projective\", \"RingHom.FaithfullyFlat\"], \"digest\": \"df92a74e2e7b6198\"}; Read flat-search-0.txt through flat-search-5.txt. Hits give general smooth-implies-flat, single-variable monic quotients, and generic basis constructions. The relation uv-a is not monic as a polynomial in v over A[u]; Polynomial.Monic.free_quotient does not specialize in one line. None gives the two-variable normal-form basis or flat nodal-model projection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T09:45:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read flat-search-0.txt through flat-search-5.txt. Hits give general smooth-implies-flat, single-variable monic quotients, and generic basis constructions. The relation uv-a is not monic as a polynomial in v over A[u]; Polynomial.Monic.free_quotient does not specialize in one line. None gives the two-variable normal-form basis or flat nodal-model projection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monic monomial relation xy minus a gives a free module basis consisting of monomials not divisible by xy",
+   "results": "{\"t\": \"2026-10-23T09:46:06Z\", \"tool\": \"leanfinder\", \"query\": \"Monic monomial relation xy minus a gives a free module basis consisting of monomials not divisible by xy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.free_quotient\", \"Algebra.PreSubmersivePresentation.basis\", \"IsAdjoinRootMonic.basis\", \"Algebra.SubmersivePresentation.basisDeriv\", \"FreeAlgebra.basisFreeMonoid\", \"Polynomial.Monic.free_adjoinRoot\", \"Polynomial.Sequence.basis\", \"KaehlerDifferential.mvPolynomialBasis\"], \"digest\": \"b3c1c8b74cd58f9a\"}; Read flat-search-0.txt through flat-search-5.txt. Hits give general smooth-implies-flat, single-variable monic quotients, and generic basis constructions. The relation uv-a is not monic as a polynomial in v over A[u]; Polynomial.Monic.free_quotient does not specialize in one line. None gives the two-variable normal-form basis or flat nodal-model projection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any commutative ring A and a in A the algebra A[x,y]/(xy-a) is a free A module with basis 1 and the positive powers of x and y, hence the associated scheme morphism is flat of finite presentation",
+   "results": "{\"t\": \"2026-10-23T09:46:07Z\", \"tool\": \"leanfinder\", \"query\": \"For any commutative ring A and a in A the algebra A[x,y]/(xy-a) is a free A module with basis 1 and the positive powers of x and y, hence the associated scheme morphism is flat of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.IsStandardSmooth\", \"RingHom.IsStandardSmooth.toAlgebra\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.finitePresentation\"], \"digest\": \"df8d4639a9c797ab\"}; Read flat-search-0.txt through flat-search-5.txt. Hits give general smooth-implies-flat, single-variable monic quotients, and generic basis constructions. The relation uv-a is not monic as a polynomial in v over A[u]; Polynomial.Monic.free_quotient does not specialize in one line. None gives the two-variable normal-form basis or flat nodal-model projection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism Spec(A[x,y]/(xy-a)) to Spec A is flat and locally of finite presentation over any commutative ring",
+   "results": "{\"t\": \"2026-10-23T10:52:54Z\", \"tool\": \"leanfinder\", \"query\": \"The morphism Spec(A[x,y]/(xy-a)) to Spec A is flat and locally of finite presentation over any commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"Algebra.Smooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.IsStandardSmooth\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\"], \"digest\": \"a98f2b7a7e00b8a6\"}; Read the returned hits: general smooth/flat APIs, free-module flatness and the affine Spec criterion are available, but no theorem gives flatness and local finite presentation of this binomial model or its glued form. Smooth-implies-flat cannot apply to the singular fibre a=0.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(iff|Spec)|Spec.*flat|Free.*Flat",
+   "results": "{\"t\": \"2026-10-23T10:52:54Z\", \"tool\": \"grep\", \"query\": \"flat.*(iff|Spec)|Spec.*flat|Free.*Flat\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"804004c98233dd3f\"}; Read the returned hits: general smooth/flat APIs, free-module flatness and the affine Spec criterion are available, but no theorem gives flatness and local finite presentation of this binomial model or its glued form. Smooth-implies-flat cannot apply to the singular fibre a=0.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any commutative ring A and any a the nodal algebra A[u,v]/(u*v-a) is flat over A",
+   "results": "{\"t\": \"2026-10-23T10:56:10Z\", \"tool\": \"leansearch\", \"query\": \"For any commutative ring A and any a the nodal algebra A[u,v]/(u*v-a) is flat over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"RingHom.Flat\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.flat_algebraMap_iff\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat\"], \"digest\": \"d19480568cfb09fd\"}; Read the returned hits: general smooth/flat APIs, free-module flatness and the affine Spec criterion are available, but no theorem gives flatness and local finite presentation of this binomial model or its glued form. Smooth-implies-flat cannot apply to the singular fibre a=0.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Free\"",
+   "results": "{\"t\": \"2026-10-23T10:56:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"FreeAddMonoid.ofList_flatten\", \"FreeMonoid.ofList_flatten\", \"Module.Flat.of_free\", \"Module.FaithfullyFlat.instOfNontrivialOfFree\", \"Module.Flat.isTorsionFree\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\"], \"digest\": \"e8656781ee20d4b2\"}; Read the returned hits: general smooth/flat APIs, free-module flatness and the affine Spec criterion are available, but no theorem gives flatness and local finite presentation of this binomial model or its glued form. Smooth-implies-flat cannot apply to the singular fibre a=0.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|uv.?-.?a|xy.?-.?a|binomial.*flat",
+   "results": "{\"t\": \"2026-10-23T11:01:53Z\", \"tool\": \"grep\", \"query\": \"nodal|uv.?-.?a|xy.?-.?a|binomial.*flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: general smooth/flat APIs, free-module flatness and the affine Spec criterion are available, but no theorem gives flatness and local finite presentation of this binomial model or its glued form. Smooth-implies-flat cannot apply to the singular fibre a=0.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T11:01:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: general smooth/flat APIs, free-module flatness and the affine Spec criterion are available, but no theorem gives flatness and local finite presentation of this binomial model or its glued form. Smooth-implies-flat cannot apply to the singular fibre a=0.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-chart-boundary-shrinking",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input of (1)--(2), ILO VI Proposition 1.9 equation (1.a): flatness of the uv-h model needed to identify its nonsmooth locus in the boundary-shrinking argument.",
+   "via": [
+    "lem-trf-nodal-chart-boundary-shrinking",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-polynomial-free-flat",
+  "worker": "stage1",
+  "summary": "Reused the already reviewed arbitrary-ring basis in lem-sfb-binomial-laurent-normal-form, followed by existing Mathlib leaves for free-module flatness and affine scheme flatness. Finite presentation and the glued case are checked directly from the definitions. Added the missing quotient-algebra definition dependency; no mathematical statement change and no new nodes. Read current blueprint and preserved inherited provenance.",
+  "blueprint": "Inherited historical nodal-chart input below lem-trf-local-term-locality (1)--(2), through lem-trf-nodal-chart-boundary-shrinking. The latest blueprint now presents (1)--(2) by contracting correspondences; this split retains the assigned historical auxiliary model and does not replace a unit step. Steps 1--3 establish the affine model, step 4 its stated gluing.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-binomial-laurent-normal-form",
+    "why": "Only its arbitrary-commutative-ring basis clause is used as a generic commutative-algebra tool; no node of sk-i-curve-zero states this basis. The parent review explicitly directed reuse of this existing node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-binomial-laurent-normal-form"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-72a823a79",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-72a823a79 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The statement is unchanged from live/base except for a new citation and stmt_dep [def-weil-pbc-algebra-hom-quotient] for the quotient algebra, which is correct. It matches the parent's FIX record, which dropped the basis clause as a duplicate of lem-sfb-binomial-laurent-normal-form. Live and side-live still hold the item as unsplit, so it is not superseded; there is no repair note and 0 new nodes. Step 1: the first clause of lem-sfb-binomial-laurent-normal-form gives an R-basis 1,u^i,v^j of R[x,y]/(xy-a) for any commutative R and any a; its reviewed step 1 does not cancel a. The last sentence of lem-weil-pbc-projective-module-flat (Module.Flat.of_free) gives flatness, and def-weil-pbc-flat-ring-map turns it into a flat ring map. Step 2: the Mathlib leaf SpecMap_iff is applied in the correct direction. Step 3: Spec B and Spec A with n=2, m=1 are the witnesses that def-sbc-locally-finite-presentation asks for. Step 4: a pointwise argument over the chart π^{-1}(V_i)=Spec B_i given by the stated gluing; stalks of an open subscheme are unchanged, and the argument never assumes affine intersections, so elementary is justified. proof_deps equals the union of the uses. Tested A=0, a=0 over a field (singular), Z/4 with a=2, and a a unit; the free basis holds in each case. Sources read: curves.tex 5058-5077 (gives the model, no proof, so the agent origin is correct), algebra.tex 051G proof sentence 1 (l.24330), morphisms.tex 01U5 (l.4694). No duplicate among the DAG nodes that mention uv-a with flat/free. The tool_use of lem-sfb-binomial-laurent-normal-form (unit sk-thm-sf-ctf-stability, used only as a generic basis) is accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalPolynomialFreeFlat",
+  "declaration": "AlgebraicGeometry.nodalPolynomial_flat_locallyOfFinitePresentation",
+  "declarations": [
+   "AlgebraicGeometry.nodalPolynomial_flat_locallyOfFinitePresentation",
+   "AlgebraicGeometry.nodalModelProjection_flat_locallyOfFinitePresentation"
+  ],
+  "file": "lean/Sheaf/TraceFormula/NodalPolynomialFreeFlat.lean",
+  "statement": "theorem nodalPolynomial_flat_locallyOfFinitePresentation (A : CommRingCat.{u}) (a : A) : Flat (StrictSemistableModel.baseMap (StrictSemistableModel.nodal a)) ∧ LocallyOfFinitePresentation (StrictSemistableModel.baseMap (StrictSemistableModel.nodal a))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-026517db6",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Affine clause: A : CommRingCat.{u}, a : A unrestricted; strictNodalRing A a = MvPolynomial (Fin 2) A / (X0*X1 - C a); StrictSemistableModel.baseMap (.nodal a) is Spec.map of the coefficient map; conclusion Flat ∧ LocallyOfFinitePresentation (Mathlib leans of the def nodes). Glued clause: V : Scheme.{u}, h : Γ(V,⊤); W = pullback nodalModelBaseMap (nodalBaseMap h), canonical base change of the universal Z_u[a][u,v]/(uv-a) model, restricting over affine Spec A to Spec A[u,v]/(uv-h|); projection pullback.snd. Added stmt_deps def-trf-strict-semistable-curve and def-trf-universal-nodal-model are the landed definition owners; no theorem stmt_dep. Node otherwise identical to side-live; lean.statement verbatim. Edge cases A=0, a=0, zero-divisor a, unit a, empty/nonseparated V all covered. No duplicate, no hollow def, sorry proofs, source/blueprint docstrings with steps 1-4, no import cycle with BinomialLaurentNormalForm, no pro-etale. Worker report and Q17 second reading present (second reading short but substantive). No file changed, so no compile; worker reports clean scompile."
+ }
+}

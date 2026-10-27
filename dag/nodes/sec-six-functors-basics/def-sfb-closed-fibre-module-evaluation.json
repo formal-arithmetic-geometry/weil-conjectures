@@ -1,0 +1,140 @@
+{
+ "id": "def-sfb-closed-fibre-module-evaluation",
+ "kind": "definition",
+ "title": "Evaluation and canonical derived restriction for internal pro-etale modules",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For every scheme $X$, use its small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], the coefficient ring $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and the category $\\mathcal M_X=\\operatorname{Mod}_{\\Lambda_X}(\\operatorname{Sh}(X_{\\mathrm{proet}},\\mathbf{Ab}))$ of internal module objects [sk-def-sfb-module-objects], with the size convention [def-weil-size-convention]. For $U\\in X_{\\mathrm{proet}}$, define $E_{X,U}:\\mathcal M_X\\to\\mathbf{Ab}$ by forgetting the module action and evaluating the underlying abelian sheaf at $U$; on morphisms it evaluates the underlying sheaf map at $U$. For any morphism $a:Z\\to X$, any such $U$, and any $\\varphi:Z\\to U$ with $u\\circ\\varphi=a$, where $u:U\\to X$ is the structure morphism, define $\\sigma_{a,U,\\varphi}:E_{X,U}\\to E_{Z,Z}\\circ a^*$ by applying $E_{X,U}$ to the unit $M\\to a_*a^*M$ of the internal-module adjunction [sk-def-sfb-module-derived-pushpull] and then restricting sections along $(\\varphi,\\operatorname{id}_Z):Z\\to U\\times_X Z$ [def-pc-fibre-product]. Here $E_{Z,Z}$ evaluates at the terminal object $\\operatorname{id}_Z$. Define the ordinary unbounded derived restriction $RE_{X,U}\\to RE_{Z,Z}\\circ a^*$ to be the canonical right-derived pullback of $\\sigma_{a,U,\\varphi}$ [def-sfb-right-derived-functor], with exact $a^*$ acting termwise on complexes. Explicitly, after precomposition with the derived-evaluation unit and transport by the canonical exact-pullback factorization, its value on a complex is the termwise section restriction followed by the target derived-evaluation unit. These are constructions of evaluation and restriction; no invertibility assertion, properness assumption, or weak-contractibility hypothesis is imposed.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-right-derived-functor",
+  "def-pc-fibre-product",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6F, lemma-unbounded-cohomology-of-open (evaluation and localized sections); Tag 0D6G, lemma-restrict-direct-image-open (restriction on ringed sites); the canonical unit-section restriction used in the closed-test model coherence node."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedFibreModule|rightDerivedPullback",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "Generic module evaluation/restriction only in Mathlib; reuse the exact existing three internal-module constructions in Sheaf.Paper.ProperWContractibleClosedFibreRigidity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of internal modules on a small pro etale site and canonical derived restriction of sections along a morphism of schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.evaluation\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"PresheafOfModules.sections.eval\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.StructureSheaf.res_apply\", \"AlgebraicGeometry.Scheme.evaluation\", \"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.Scheme.evaluation_naturality_apply\"]}",
+   "date": "2026-10-23",
+   "verdict": "Generic module evaluation/restriction only in Mathlib; reuse the exact existing three internal-module constructions in Sheaf.Paper.ProperWContractibleClosedFibreRigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of internal modules on a small pro etale site and canonical derived restriction of sections along a morphism of schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restriction\", \"SheafOfModules.evaluation\", \"ModuleCat.tilde\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.tildeInModuleCat\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\"]}",
+   "date": "2026-10-23",
+   "verdict": "Generic module evaluation/restriction only in Mathlib; reuse the exact existing three internal-module constructions in Sheaf.Paper.ProperWContractibleClosedFibreRigidity."
+  },
+  {
+   "tool": "rg",
+   "query": "closedFibreModule|closed.fibre.module.evaluation in dag/nodes, lean/WeilConjectures, lean/Sheaf",
+   "results": "Only lem-sfb-proper-wcontractible-closed-fibre-rigidity lists these three declarations. No definition node owns them. The exact abbreviation and two plain definitions are in Sheaf/Paper/ProperWContractibleClosedFibreRigidity.lean, lines 64–99. No copy or move is needed.",
+   "date": "2026-10-23",
+   "verdict": "Existing declaration match; introduce only its definition-node ownership as required by the return."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "closed fibre module evaluation; ancestor lem-sfb-closed-test-localized-model-coherence",
+   "results": "0 blueprint nodes match 'closed fibre module evaluation'; ancestor reports blueprint.from.node = None, inherited from the item.",
+   "date": "2026-10-23",
+   "verdict": "No existing blueprint definition node; retain the inherited ancestor and prepend the item to its via chain."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-test-localized-model-coherence",
+  "date": "2026-10-23",
+  "group": "Q45"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 8, 9: Resolution and geometric coherence of closed-test section models; evaluation and the unit-defined section restriction used in the localized model.",
+   "via": [
+    "lem-sfb-closed-test-localized-model-coherence",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.ClosedFibreModuleEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedFibreModuleDerivedRestriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedFibreModuleEvaluation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedFibreModuleSectionsRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedFibreModuleDerivedRestriction"
+  ],
+  "statement": "def closedFibreModuleDerivedRestriction {X Z : Scheme.{u}} (a : Z ⟶ X)\n    (U : X.ProEt) (φ : Z ⟶ U.left) (hφ : φ ≫ U.hom = a) :\n    (closedFibreModuleEvaluation Λ X U).rightDerivedFunctor ⟶\n      (upperStar Λ a).mapDerivedCategory ⋙\n        (closedFibreModuleEvaluation Λ Z (Scheme.ProEt.mk (𝟙 Z))).rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "D9 extracts the same three evaluation constructions verbatim to Sheaf.Paper.ClosedFibreModuleEvaluation, publicly reexported by the original module. Names, signatures, bodies, universes and visibility remain unchanged. This avoids a dependency cycle for the independent localization comparison; see coord/changes/closed-fibre-evaluation-module.md.",
+  "file": "lean/Sheaf/Paper/ClosedFibreModuleEvaluation.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f2dfdc1",
+  "group": "Q45",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86f2dfdc1",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (dc481024392d). The Lean module is byte-identical to the returned head; the item node changes only stmt_deps (lem-sfb-proper-wcontractible-closed-fibre-rigidity -> def-sfb-closed-fibre-module-evaluation). New def node: existing:true on landed Sheaf.Paper.ProperWContractibleClosedFibreRigidity owning closedFibreModuleEvaluation, closedFibreModuleSectionsRestriction and closedFibreModuleDerivedRestriction (plain defs, no .choose). Statement verbatim in side-live and live; field set matches the landed existing:true precedent. TeX (forget+evaluate, unit then restriction along (phi,id_Z), rightDerivedPullback) matches the Lean; all cited ids in stmt_deps and present in live; no other owner. Full item re-read: clauses, normalizations pinned, edge cases (a=0, a=A, K=0, identities) and H5/H6/H8/H9 gates OK; item not superseded. No file changed, so no compile. Advisories: reused docstrings name the rigidity blueprint; inherited null blueprint.from.node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-1e11a",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261024T204548-L-3795262",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; 3 moved defs verbatim vs change record and live module; new sorry statements vs their nodes and Stacks 0A0C/098K; sandbox compile of 4 delivered modules + direct importer ClosedTestLocalizedModelData (all ok); axioms of item = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

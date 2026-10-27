@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-finite-hilbert-stack-descent",
+ "kind": "statement",
+ "title": "Effective fppf descent for relative finite Hilbert groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $F:\\mathcal X\\to\\mathcal Y$ be a morphism of stacks in groupoids on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-sfb-stable-pointed-moduli-groupoids]. Here isomorphism presheaves are fppf sheaves and object descent for fppf coverings is effective. For each integer $d\\geq1$, form the category fibred in groupoids $\\mathcal H_d(F)$ [def-sfb-relative-finite-hilbert-groupoids]: its objects over $T$ are $(Z\\to T,y,x,\\alpha)$ with $Z\\to T$ finite locally free of degree $d$, $y\\in\\mathcal Y(T)$, $x\\in\\mathcal X(Z)$ and $\\alpha:y|_Z\\simeq F(x)$, and its arrows are the compatible cartesian maps and isomorphisms of that definition. Then $\\mathcal H_d(F)$ is a stack in groupoids for the fppf topology: all its isomorphism presheaves are sheaves and every fppf descent datum for its objects is effective. No representability, flatness or finite-presentation hypothesis on $F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tags 05WB (lemma-hilbert-d-stack) and 05WC (definition-hilbert-d-stack), examples-stacks.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "def-sfb-fppf-stackification"
+ ],
+ "proof": [
+  {
+   "text": "Pullbacks and groupoid fibres. Use the pullback construction of [def-sfb-relative-finite-hilbert-groupoids]. For $u:T'\\to T$, the cover becomes $Z'=Z\\times_TT'\\to T'$, still finite locally free of degree $d$ by [lem-sfb-finite-locally-free-fppf-descent]. Pull back $y$, $x$ and $\\alpha$ along $u$ and $Z'\\to Z$; the pullback comparison of the morphism of stacks $F$ gives the required isomorphism over $Z'$. The cartesian universal properties in the two given fibred groupoids and of the scheme fibre product give the cartesian lift of the quadruple. Its uniqueness follows component by component from those same universal properties. In a fibre, the scheme map is an isomorphism and both object maps are isomorphisms; their inverses satisfy the compatibility equation by inverting it. Thus this is a category fibred in groupoids.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-finite-locally-free-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+   }
+  },
+  {
+   "text": "Descent of the scheme and target components of an arrow. Fix $\\xi=(Z/T,y,x,\\alpha)$ and $\\xi'=(Z'/T,y',x',\\alpha')$. On any fppf cover $\\{T_i\\to T\\}$, compatible local isomorphisms $\\xi|_{T_i}\\to\\xi'|_{T_i}$ have components $(g_i,b_i,a_i)$. By the isomorphism-descent clause of [lem-sfb-finite-locally-free-fppf-descent], the $g_i$ glue to a unique $T$-isomorphism $g:Z\\to Z'$. The $b_i$ glue to a unique $b:y\\xrightarrow{\\sim}y'$ because $\\operatorname{Isom}_{\\mathcal Y}(y,y')$ is a sheaf by the hypothesis on $\\mathcal Y$. This argument works after every base change $V\\to T$, so it checks the isomorphism presheaf on its entire slice site.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-finite-locally-free-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+   }
+  },
+  {
+   "text": "Finish descent of arrows. Put $Z_i=Z\\times_TT_i$; these form an fppf cover of $Z$ by the base-change covering axiom in [def-weil-pbc-sites-and-cohomology]. With $g$ fixed in the previous step, the $a_i$ are compatible sections of $\\operatorname{Isom}_{\\mathcal X}(x,g^*x')$ on this cover. The stack hypothesis on $\\mathcal X$ gives a unique glued isomorphism $a:x\\xrightarrow{\\sim}g^*x'$. The two sides of the arrow condition $F(a)\\circ\\alpha=(g^*\\alpha')\\circ(b|_Z)$ are sections of the same isomorphism sheaf in $\\mathcal Y$ over $Z$. They agree on every $Z_i$ by the local arrow condition, hence agree on $Z$. Thus $(g,b,a)$ is an arrow, unique because all three components are unique. Consequently every isomorphism presheaf of $\\mathcal H_d(F)$ is an fppf sheaf.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+   }
+  },
+  {
+   "text": "Descend the underlying finite cover of an object datum. Let $\\xi_i=(Z_i/T_i,y_i,x_i,\\alpha_i)$ and $\\varphi_{ij}:\\xi_i|_{T_{ij}}\\xrightarrow{\\sim}\\xi_j|_{T_{ij}}$ be descent data, where $T_{ij}=T_i\\times_TT_j$ and $\\varphi_{jk}\\varphi_{ij}=\\varphi_{ik}$ on triple overlaps. Forgetting the other components gives scheme isomorphisms $\\theta_{ij}$ with the same cocycle identity. Apply [lem-sfb-finite-locally-free-fppf-descent] to obtain $Z\\to T$ finite locally free of degree $d$ and isomorphisms $\\rho_i:Z\\times_TT_i\\xrightarrow{\\sim}Z_i$ inducing exactly $\\theta_{ij}$. Use these isomorphisms to regard all $x_i$ and $\\alpha_i$ on the fixed pullbacks of $Z$. In particular all the overlap and triple-overlap schemes are now $Z\\times_TT_{ij}$ and $Z\\times_TT_{ijk}$; the scheme part of the cocycle supplies these identifications, rather than an identification of $Z_i\\times_TZ_j$ with them.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-finite-locally-free-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+   }
+  },
+  {
+   "text": "Descend the two objects. Write $b_{ij}$ for the $\\mathcal Y$-component of $\\varphi_{ij}$ and $a_{ij}$ for its $\\mathcal X$-component after the identifications of step 4. Projecting the cocycle equation gives $b_{jk}b_{ij}=b_{ik}$ on $T_{ijk}$. Effectiveness for the given fppf stack $\\mathcal Y$ gives $y\\in\\mathcal Y(T)$ and $b_i:y|_{T_i}\\xrightarrow{\\sim}y_i$ with $b_j=b_{ij}b_i$. The family $\\{Z\\times_TT_i\\to Z\\}$ is an fppf covering by [def-weil-pbc-sites-and-cohomology]. Its double and triple overlaps are $Z\\times_TT_{ij}$ and $Z\\times_TT_{ijk}$. The remaining component of the original cocycle is therefore precisely descent data $a_{jk}a_{ij}=a_{ik}$ for the $x_i$ on this cover. Effectiveness for $\\mathcal X$ gives $x\\in\\mathcal X(Z)$ and $a_i:x|_{Z_i}\\xrightarrow{\\sim}x_i$ with $a_j=a_{ij}a_i$, where $Z_i$ now denotes the identified pullback.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+   }
+  },
+  {
+   "text": "Glue the comparison and verify effectiveness. All formulas below use the canonical pullback comparisons of $F$. On $Z_i$ define $\\widetilde\\alpha_i=F(a_i)^{-1}\\circ\\alpha_i\\circ(b_i|_{Z_i})$, an isomorphism from $(y|_Z)|_{Z_i}$ to $F(x)|_{Z_i}$. On $Z\\times_TT_{ij}$ the arrow condition for $\\varphi_{ij}$ is $F(a_{ij})\\alpha_i=\\alpha_j(b_{ij}|_Z)$. Using the equations of step 5 gives\n$\\widetilde\\alpha_j=F(a_i)^{-1}F(a_{ij})^{-1}\\alpha_j(b_{ij}|_Z)(b_i|_Z)=F(a_i)^{-1}\\alpha_i(b_i|_Z)=\\widetilde\\alpha_i$.\nSince $\\mathcal Y$ is a stack, its isomorphism presheaf glues these sections to $\\alpha:y|_Z\\xrightarrow{\\sim}F(x)$. The quadruple $(Z/T,y,x,\\alpha)$ is an object of [def-sfb-relative-finite-hilbert-groupoids]. The equation $F(a_i)\\alpha=\\alpha_i(b_i|_{Z_i})$ makes $(\\rho_i,b_i,a_i)$ local Hilbert isomorphisms, and the identities for $\\rho_i,b_i,a_i$ show they induce the original $\\varphi_{ij}$. Thus every object descent datum is effective. Together with the arrow sheaf condition and groupoid fibres, this proves the assertion. Only the stack hypotheses on $\\mathcal X,\\mathcal Y$ and cartesian functoriality of $F$ have been used.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "lem-sfb-finite-locally-free-fppf-descent",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 05WB (lemma-hilbert-d-stack), proof; construction preceding Tag 05WC (definition-hilbert-d-stack)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite Hilbert stacks have effective fppf descent and the forgetful map to the absolute Hilbert stack is faithful",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.AffineScheme.forgetToScheme_faithful; AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.instFaithfulLocallyRingedSpaceForgetToLocallyRingedSpace; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.Scheme.Modules.instFaithfulPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.LocallyRingedSpace.instFaithfulSheafedSpaceCommRingCatForgetToSheafedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf stack of finite flat covers with compatible objects in fibred groupoids has faithful absolute forgetful functor",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.AffineScheme.forgetToScheme_faithful; CategoryTheory.Grothendieck.faithful_ι; AlgebraicGeometry.Scheme.instFaithfulLocallyRingedSpaceForgetToLocallyRingedSpace; CategoryTheory.MorphismProperty.instFaithfulOverTopOverForget; AlgebraicGeometry.LocallyRingedSpace.instFaithfulSheafedSpaceCommRingCatForgetToSheafedSpace; CategoryTheory.Over.forget_faithful; AlgebraicGeometry.Scheme.Modules.instFaithfulPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent for finite locally free covers with maps into stacks and faithful forgetful Hilbert functor",
+   "results": "8 hits: SheafOfModules.instFaithfulPresheafOfModulesValRingCatForget; PresheafOfModules.instFaithfulFunctorOppositeAbToPresheaf; AlgebraicGeometry.LocallyRingedSpace.instFaithfulSheafedSpaceCommRingCatForgetToSheafedSpace; AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace_faithful; AlgebraicGeometry.Scheme.Modules.instFaithfulPresheafAbCarrierCommRingCatToPresheaf; TopCat.Sheaf.forgetFaithful; CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData; CategoryTheory.Pseudofunctor.isEquivalence_toDescentData",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"stack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.*stack|stack.*hilbert|faithful.*hilbert",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|hilbert_stack|finite.?Hilbert|AlgebraicStack",
+   "results": "1 hits: Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic pseudofunctor descent and faithful forgetful functors do not construct descent for finite covers carrying objects and comparison isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|hilbert.?stack|finite.?Hilbert",
+   "results": "{\"t\": \"2026-10-23T18:58:16Z\", \"tool\": \"grep\", \"query\": \"HilbertStack|hilbert.?stack|finite.?Hilbert\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/l2Space.lean\"], \"digest\": \"2261d324ea2e2d17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLocallyFree.*[Dd]escent|[Dd]escent.*finiteLocallyFree",
+   "results": "{\"t\": \"2026-10-23T18:58:16Z\", \"tool\": \"grep\", \"query\": \"finiteLocallyFree.*[Dd]escent|[Dd]escent.*finiteLocallyFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent for objects of a relative finite Hilbert stack over the fppf topology",
+   "results": "{\"t\": \"2026-10-23T18:58:16Z\", \"tool\": \"leansearch\", \"query\": \"Effective descent for objects of a relative finite Hilbert stack over the fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStack.recOn\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\"], \"digest\": \"8749c9cebf81dc38\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"stack\"",
+   "results": "{\"t\": \"2026-10-23T18:58:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"stack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pseudofunctor\", \"IsStack\"",
+   "results": "{\"t\": \"2026-10-23T18:58:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pseudofunctor\\\", \\\"IsStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.essSurj\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\"], \"digest\": \"b8afc658ce1201e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of finite locally free degree d covers with compatible objects in two fppf stacks is a stack",
+   "results": "{\"t\": \"2026-10-23T18:58:17Z\", \"tool\": \"leanfinder\", \"query\": \"The category of finite locally free degree d covers with compatible objects in two fppf stacks is a stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instOverXBind\", \"AlgebraicGeometry.Scheme.instOverBind\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"AlgebraicGeometry.Scheme.Cover.instCategoryI₀Pullback₁\", \"CategoryTheory.Pseudofunctor.isStackFor\"], \"digest\": \"d23e29617d3d0687\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing finite flat covers carrying an object of a stack and an isomorphism to a target object",
+   "results": "{\"t\": \"2026-10-23T18:58:18Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing finite flat covers carrying an object of a stack and an isomorphism to a target object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_X\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover\"], \"digest\": \"d13bfa1e522cc551\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic stack constructors assume the stack property or a descent equivalence; scheme gluing is for open covers; none constructs the relative finite Hilbert stack or proves its fppf descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-algebraic",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof of clause (3) of det-thm-sf-ctf-stability-direct-images, literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md: 'For a quasi-compact open immersion $j$, $Rj_*$ preserves $\\Dctf$ by sk-cor-sf-direct-image-ctf for finite $A$'. The finite-coefficient direct-image input is reached through the alteration/moduli prerequisite chain listed in via: relative finite Hilbert algebraicity requires the fppf stack condition, supplied by Stacks Tag 05WB.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-algebraic",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-hilbert-stack-descent",
+  "worker": "stage1",
+  "summary": "Expanded Tag 05WB into six steps, including arrow descent and the omitted comparison-isomorphism calculation. Reused the existing finite-locally-free fppf descent node instead of creating any nodes. Statement and its dependencies retained. Searched upstream Lean and Mathlib with no attachment or exact Mathlib match. Repaired the inherited null blueprint ancestor against the explicit chain and latest clause (3).",
+  "blueprint": "The item is a below-unit prerequisite of the proof of clause (3) of det-thm-sf-ctf-stability-direct-images (the sentence on $Rj_*$ for finite $A$ via sk-cor-sf-direct-image-ctf), through the unchanged via chain. Steps 1-3 give the CFG and arrow sheaf clauses implicit in Tag 05WB; steps 4-6 realize its finite-cover, object, and comparison-isomorphism descent paragraphs. No altered unit/chapter route is asserted."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-a59b89865",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-a59b89865 (reviewer sub-agent of L); spot-checked: Read Stacks examples-stacks.tex section-hilbert-d-stack: the H_d construction, lemma-hilbert-d-stack 05WB with its proof, and 05WC. The statement matches 05WB hypothesis by hypothesis and is unchanged. Arrow directions b: y→g^*y', a: x→h^*x' and F(a)α=(h^*α')(b|_Z) agree with def-sfb-relative-finite-hilbert-groupoids and the source. Steps 1-6 checked against the full statements of the cited nodes. Step 1: the pullback-preserves-C_d clause of lem-sfb-finite-locally-free-fppf-descent. Step 2: that node's isomorphism-descent clause, plus the Isom_Y sheaf hypothesis. Steps 3 and 5: {Z×_T T_i→Z} is an fppf covering by axiom (iii) of def-weil-pbc-sites-and-cohomology, with overlaps Z×_T T_ij. Step 4: θ_ij: Z_i×_T T_j→T_i×_T Z_j with cocycle is exactly the node's hypothesis; it packages Descent 0245+02VO as the source uses them. Step 6, the source's 'details omitted', recomputed: α̃_j=F(a_i)^{-1}F(a_ij)^{-1}α_j b_ij b_i=α̃_i, using α_j b_ij=F(a_ij)α_i; the local triples (ρ_i,b_i,a_i) induce φ_ij. Edge cases checked: T=∅, d=1, nontrivial automorphisms, nonfaithful F. No duplicate in the DAG. lem-sfb-relative-finite-hilbert-lci-open states the stack clause only for flat lfp representable F, and the item is needed in general for H_X. Route: the one statement dep is in the same unit and the rest are definitions, so no tool_uses. No SGA. Mathlib searches cover all three kinds. FIX: the delivery's restored from.node det-thm-sf-ctf-stability-direct-images is accepted. But from.place and split_report.blueprint wrongly said the latest blueprint has no proof paragraph; sk-thm-sf-ctf-stability-direct-images.proof.md has clause (3), with the Rj_* finite-A sentence via sk-cor-sf-direct-image-ctf. Both fields rewritten to name that sentence in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-hilbert-stack-descent.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteHilbertStackDescent",
+  "declaration": "AlgebraicGeometry.RelativeFiniteHilbert.isFppfModuliStack_groupoid",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteHilbertStackDescent.lean",
+  "statement": "theorem isFppfModuliStack_groupoid {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (F : BasedFunctor X Y) (d : ℕ+) (hX : IsFppfModuliStack X) (hY : IsFppfModuliStack Y) : IsFppfModuliStack (groupoid F d hX hY)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded relative finite Hilbert construction, with independent stack object and morphism universes and positive degree. The only added statement dependency is the already-landed fppf stack predicate def-sfb-fppf-stackification. No statement correction or additional hypotheses on F."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-636f6fd0c",
+  "group": "Q32",
+  "result": "pass",
+  "note": "The statement matches the node and Stacks 05WB clause by clause: S : Scheme.{u}; separate universes for X and Y; F : BasedFunctor X Y with hX hY : IsFppfModuliStack; d : ℕ+; recorded RelativeFiniteHilbert.groupoid (inverse-α comparison, cartesian Hom with comm); conclusion IsFppfModuliStack (groupoid F d hX hY), the predicate the hypotheses use, owned by landed def-sfb-fppf-stackification. Only diffs from the live node: the lean record and that added stmt_dep, which is needed because the statement uses its predicate. All stmt_deps are definition nodes. lean.statement matches the file verbatim. No new definitions, sorry-only proof, docstrings carry source/blueprint and steps 1-6, no pro-etale substitute, no duplicate in side-live lean/. Edge cases checked: d=0 excluded, d=1 included, empty scheme with empty sieve consistent, automorphisms kept. Advisory: the second-reading section only cites the direct-delivery policy (not a return reason). Nothing compiled because no file was changed."
+ }
+}

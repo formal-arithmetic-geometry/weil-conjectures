@@ -1,0 +1,122 @@
+{
+ "id": "lem-fd-normalized-pullback-geometry",
+ "kind": "statement",
+ "title": "Unit composition and shift coherence of selected augmentation-normalized comparisons",
+ "statement": "An allowed scheme $W$ is noetherian, satisfies $\\dim(W)\\leq n$ for some $n\\in\\mathbf N$, and has $\\ell$ a unit in every structure-sheaf stalk, as in [lem-weil-pbc-integral-stratified-perfect-characterization]. Fix l prime, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, coefficient comparison data C_T for every allowed scheme, one IntegralComparisonSystem R, and a family P_h of FdPullbackSystem for all allowed scheme isomorphisms. Assume every finite component satisfies FdPullbackRoosMatching for R. Then: (1) the source identity comparison restricts integralComparisonUnit for R, the target comparison restricts the actual PBC identity, and P_1.finite intertwines them; (2) the corresponding composition equation holds with the source integralComparisonComposition for R and the actual inverse PBC compositor, exactly in the inverse-b orientation; (3) for every h,E there are cochain and derived CommShift structures satisfying ShiftCoordinates and ShiftDescent, and the ambient component of P_h.finite commutes with these shifts and the canonical exact-functor shifts of PBC and coefficient transport. All assertions quantify over every integral constructible object. The full explicit Lean formulas below specify each component and HEq transport. Definitions are those of [def-fd-coefficient-comparison-datum], [def-fd-pullback-comparison-datum], [def-fd-finite-pullback-comparison-datum], [lem-fd-pullback-augmentation-counit-matching], [lem-trf-integral-pullback-comparison-realization] and [def-fd-integral-pullback-shift-coordinates].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Whole-tower argument, steps 6--7 and 11: identify the fixed finite comparisons with the compositor-normalized and signed-shift presentations. Auxiliary proof extracted from lem-fd-whole-tower-integral-pullback-comparison."
+ },
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-fd-pullback-comparison-datum",
+  "def-fd-finite-pullback-comparison-datum",
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-fd-integral-pullback-shift-coordinates",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof": [
+  {
+   "text": "compare each finite component to the ambient comparison in\nfdCompletedCompositorNormalization. Both composites with the inverse-image\naugmentation are the actual completed-pullback unit, by FdPullbackRoosMatching\nand the quotient/zero-coordinate normalization of FdPullbackComparison.\nThe augmentation is invertible on complete constructible objects, so these\nambient components agree. Fullness and the lift field give the same equality\nfor the integral components. Restrict integralComparisonUnit and\nintegralComparisonComposition to the full constructible categories and restrict\nthe actual PBC identity and inverse compositor. Their inverse maps and naturality\nrestrict as well. Substitution in the two normalized equations gives precisely\nthe unit and composition formulas below, in the inverse-b orientation.\nFor shifts, fdPullbackSignedShiftWordTransport supplies the signed cone shift\nand its descent. Its primitive ambient comparison has the same normalized\naugmentation, so the preceding uniqueness identifies it with the selected\ncomponent. Transfer its shift square and invert the comparison. Constructibility\nis preserved under shifts, giving hKr. The sign acts only on the shifted cone\ncoordinate and fixes the augmentation (0,z), also for negative integers and r=0.\nAll cancellations take place on complete inputs, never on arbitrary ambient\ncompletion units. Identity scheme maps and zero objects use these same equations.",
+   "uses": [
+    "lem-fd-pullback-augmentation-counit-matching",
+    "lem-fd-pbc-completed-compositor-normalization",
+    "lem-fd-pullback-signed-shift-word-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-pullback-augmentation-counit-matching",
+  "lem-fd-pbc-completed-compositor-normalization",
+  "lem-fd-pullback-signed-shift-word-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Whole-tower argument, steps 6--7 and 11: identify the fixed finite comparisons with the compositor-normalized and signed-shift presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison completed pullback strict quotient tower Roos derived limit unit composition scalar coherence",
+   "results": "8 results, including Adjunction.derivedε_fac_app, derivedη_fac_app and ChosenPullbacksAlong.unit_pullbackComp_hom; these are generic derived-adjunction identities, not normalized completed-sheaf comparison statements.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized comparison of completed derived inverse image functors preserves scalar extension and signed shifts and descends to the common coefficient stage",
+   "results": "8 results, including PresheafOfModules.pullback, pullbackPushforwardAdjunction, Equivalence.commShiftInverse and the exact-functor complex shift instance. No strict-tower or selected-component compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents and its component equations are constructors; they require the naturality/coherence at issue and do not supply it.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "FdPullbackSystem|FdPullbackRoosMatching|fdCompletedCompositorNormalization",
+   "results": "msearch Mathlib grep: 0 hits. Shared-library rg finds the existing normalization and scalar statements; they choose models rather than directly identify the fixed finite components. blueprint_refs.py search normalized pullback: 0 matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; this states a missing transfer to selected normalized finite data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WholeTowerIntegralPullbackComparison",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Whole-tower argument, steps 6--7 and 11: identify the fixed finite comparisons with the compositor-normalized and signed-shift presentations.",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdNormalizedPullbackGeometry",
+  "file": "lean/Sheaf/Paper/FdNormalizedPullbackGeometry.lean",
+  "declaration": "WeilConjectures.fdNormalizedPullbackGeometry",
+  "statement": "theorem fdNormalizedPullbackGeometry (R : IntegralComparisonSystem.{u} l)\n    (C : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))],\n      FdCoefficientComparison l Ω T)\n    (P : ∀ {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]\n      [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]\n      [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]\n      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n      (h : U ≅ T), FdPullbackSystem l Ω (C U) (C T) h)\n    (_matching : ∀ {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]\n      [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]\n      [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]\n      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n      (h : U ≅ T) (E : Padic.FiniteCoefficientFields l Ω),\n      FdPullbackRoosMatching l Ω (C U) (C T) h E R ((P h).finite E)) :\n    (∀ (T : Scheme.{u}) [IsNoetherian T]\n    [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (E : Padic.FiniteCoefficientFields l Ω),\n    ∃ su : constructibleIntegralPullback l (pbcFiniteField.{u} l Ω E) (𝟙 T) ≅ 𝟭 _,\n    ∃ pu : fdPbcIntegralPull l Ω (𝟙 T) E ≅ 𝟭 _,\n      (∀ K, (su.hom.app K).hom =\n        (integralComparisonUnit l (pbcFiniteField.{u} l Ω E) R T K).hom) ∧\n      (∀ K, HEq (pu.hom.app K).hom\n        ((pbcActualCompletedPullIdIso (pbcStageDatum.{u} l Ω E) T).hom.app\n          ⟨K.obj, K.property.1⟩)) ∧\n      (∀ K, ((P (Iso.refl T)).finite E).integral.hom.app K ≫\n          ((C T).stage E).integral.functor.map (su.hom.app K) =\n        pu.hom.app (((C T).stage E).integral.functor.obj K))) ∧\n    (∀ (U V T : Scheme.{u})\n    [IsNoetherian U] [IsNoetherian V] [IsNoetherian T]\n    [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]\n    [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]\n    [Fact (∃ n : ℕ, topologicalKrullDim V ≤ n)]\n    [Fact (∀ t : V, IsUnit (l : V.presheaf.stalk t))]\n    [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (h : U ≅ V) (k : V ≅ T) (E : Padic.FiniteCoefficientFields l Ω),\n    ∃ sc : constructibleIntegralPullback l (pbcFiniteField.{u} l Ω E) (h.hom ≫ k.hom) ≅\n        constructibleIntegralPullback l (pbcFiniteField.{u} l Ω E) k.hom ⋙\n          constructibleIntegralPullback l (pbcFiniteField.{u} l Ω E) h.hom,\n    ∃ pc : fdPbcIntegralPull l Ω (h.hom ≫ k.hom) E ≅\n        fdPbcIntegralPull l Ω k.hom E ⋙ fdPbcIntegralPull l Ω h.hom E,\n      (∀ K, (sc.hom.app K).hom =\n        (integralComparisonComposition l (pbcFiniteField.{u} l Ω E) R\n          h.hom k.hom K).hom) ∧\n      (∀ K, HEq (pc.hom.app K).hom\n        ((pbcActualCompletedPullCompIso h.hom k.hom\n          (pbcStageDatum.{u} l Ω E)).inv.app ⟨K.obj, K.property.1⟩)) ∧\n      (∀ K, ((P (h ≪≫ k)).finite E).integral.hom.app K ≫\n          ((C U).stage E).integral.functor.map (sc.hom.app K) =\n        pc.hom.app (((C T).stage E).integral.functor.obj K) ≫\n          (fdPbcIntegralPull l Ω h.hom E).map\n            (((P k).finite E).integral.hom.app K) ≫\n          ((P h).finite E).integral.hom.app\n            ((constructibleIntegralPullback l (pbcFiniteField.{u} l Ω E) k.hom).obj K))) ∧\n    (∀ {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]\n    [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]\n    [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]\n    [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (h : U ≅ T) (E : Padic.FiniteCoefficientFields l Ω),\n    letI : (integralDetailedTransport U l (pbcFiniteField.{u} l Ω E)).CommShift ℤ :=\n      inferInstanceAs\n        ((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) U).mapDerivedCategory.CommShift ℤ)\n    letI : (integralDetailedTransport T l (pbcFiniteField.{u} l Ω E)).CommShift ℤ :=\n      inferInstanceAs\n        ((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) T).mapDerivedCategory.CommShift ℤ)\n    ∃ c : (integralOperationsPullbackComplexFunctor l\n      (pbcFiniteField.{u} l Ω E) h.hom).CommShift ℤ,\n    ∃ d : (integralDerivedPullback l (pbcFiniteField.{u} l Ω E) h.hom).CommShift ℤ,\n      IntegralCompletedComparison.ShiftCoordinates l (pbcFiniteField.{u} l Ω E) h.hom c ∧\n      IntegralCompletedComparison.ShiftDescent l (pbcFiniteField.{u} l Ω E) h.hom c d ∧\n      (fun [_sd : (integralDerivedPullback l\n          (pbcFiniteField.{u} l Ω E) h.hom).CommShift ℤ] ↦\n        ∀ (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T) (r : ℤ),\n        ∃ hKr : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T (K.obj⟦r⟧),\n        HEq\n          (((P h).finite E).ambient.hom.app ⟨K.obj⟦r⟧, hKr⟩ ≫\n            ((integralDerivedPullback l (pbcFiniteField.{u} l Ω E) h.hom ⋙\n              integralDetailedTransport U l (pbcFiniteField.{u} l Ω E)).commShiftIso\n                r).hom.app K.obj)\n          (((integralDetailedTransport T l (pbcFiniteField.{u} l Ω E) ⋙\n              pbcActualCompletedPull h.hom (pbcStageDatum.{u} l Ω E)).commShiftIso\n                r).hom.app K.obj ≫\n            (((P h).finite E).ambient.hom.app K)⟦r⟧')) (_sd := d))",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T094451-L-230892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T094451-L-230892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

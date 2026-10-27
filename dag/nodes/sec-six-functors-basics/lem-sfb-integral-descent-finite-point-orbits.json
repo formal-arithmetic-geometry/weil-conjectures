@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-integral-descent-finite-point-orbits",
+ "kind": "statement",
+ "title": "Finite point orbits for integral fpqc descent with finite base fibres",
+ "statement": "Let $q:T\\to S$ be an integral, surjective, flat and quasi-compact morphism of schemes [def-pc-scheme, def-weil-finite-integral-morphism, def-weil-pbc-fpqc-covering] such that $|q|^{-1}(s)$ is finite for every point $s\\in S$. Let $V\\to T$ be locally of finite presentation [def-sbc-locally-finite-presentation], with $V$ locally Noetherian [pqf-def-locnoeth], and let $D$ be a descent datum on $V$ relative to $T/S$ [def-pd-descent-datum]. Set $T_2=T\\times_ST$ [def-pc-fibre-product], with projections $a_0,a_1$, and $R=V\\times_{T,a_0}T_2$. Its first map $r_0:R\\to V$ is the projection; its second map $r_1:R\\to V$ is obtained by the isomorphism $D:a_0^*V\\simeq a_1^*V$ and the projection $a_1^*V\\to V$. For every point $v\\in V$, the orbit $O_v=|r_1|(|r_0|^{-1}(v))$ is finite. This is finiteness of the image in $V$, not finiteness of the points of the scheme-theoretic fibre of $r_0$.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Agent-formulated finite-orbit prerequisite for the orbit criterion in Theorem 4.1(ii), pp.16-21, specialized to an integral fpqc cover with finite underlying fibres. Reduce a base fibre to its finitely many algebraic residue fields, then use finite-presentation approximation of the field descent datum to obtain open point stabilizers. This finite-orbit assertion is separate from the effectivity theorem. Primary text read at https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf; archival copy WANTED. No single Stacks tag states the assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pd-descent-datum",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:V\\to T$, $t_0=p(v)$ and $s=q(t_0)$. Both $a_i:T_2\\to T$ are base changes of $q$, hence integral. The first relation map $r_0$ is a base change of $a_0$, and the second $r_1$ is, through $D$, the projection from $a_1^*V$, a base change of $a_1$. Thus both maps are integral; composing with the displayed isomorphism does not change the affine ring-map definition of integrality. They induce algebraic residue-field extensions: on an affine target chart use the integral ring map defining either morphism and the cited residue-extension theorem. Likewise $\\kappa(s)\\to\\kappa(t)$ is algebraic for each $t\\in q^{-1}(s)$.",
+   "uses": [
+    "lem-sbc-integral-morphism-base-change",
+    "def-weil-finite-integral-morphism",
+    "def-pd-descent-datum",
+    "lem-a1-integral-residue-extension-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent proof of the finite-orbit prerequisite for Raynaud Theorem 4.1(ii); integrality under base change Tag 01WL (lemma-base-change-finite); specialization drop Tag 06RU (lemma-dimension-fibre-specialization)."
+   }
+  },
+  {
+   "text": "For each $t\\in q^{-1}(s)$ put $V_t=V\\times_T\\operatorname{Spec}\\kappa(t)$ and $W_t=\\operatorname{Spec}(\\kappa(v)\\otimes_{\\kappa(s)}\\kappa(t))$. These are fibre products with the actual residue-field maps. Indeed the fibre $W$ of $r_0$ over $v$ is canonically $\\operatorname{Spec}\\kappa(v)\\times_S T$: cancel $V$ against its $v$-point in $V\\times_{T,a_0}(T\\times_ST)$. Its map to the second $T$ coordinate equals $p r_1$. Taking the fibre over $t$ gives $W_t$ by the affine tensor-product formula. The maps $W\\to V$ induced by $r_1$ and $W_t\\to\\operatorname{Spec}\\kappa(t)$ therefore induce $h_t:W_t\\to V_t$. The underlying image of $h_t$, viewed in $V$, is exactly $O_v\\cap p^{-1}(t)$: the two successive fibre projections identify point sets with the indicated inverse images. Their residue fields, and those of $V_t\\to V$, are the original residue fields with the indicated structure maps.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "lem-zl-fibre-residue-arrow"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent proof of the finite-orbit prerequisite for Raynaud Theorem 4.1(ii); integrality under base change Tag 01WL (lemma-base-change-finite); specialization drop Tag 06RU (lemma-dimension-fibre-specialization)."
+   }
+  },
+  {
+   "text": "For $z\\in W_t$ let $w\\in R$ and $x=r_1(w)\\in V$ be its images. Step 2 identifies $\\kappa(z)=\\kappa(w)$ and $r_0(w)=v$. By step 1 both $\\kappa(v)\\to\\kappa(w)$ and $\\kappa(x)\\to\\kappa(w)$ are algebraic. An algebraic field extension has transcendence degree zero directly from the definition: an algebraically independent nonempty family would contain an element satisfying no nonzero polynomial. Apply additivity in the towers with base $k=\\kappa(s)$ to obtain $\\operatorname{trdeg}_k\\kappa(v)=\\operatorname{trdeg}_k\\kappa(w)=\\operatorname{trdeg}_k\\kappa(x)$. Since $\\kappa(t)/k$ is algebraic, another application gives $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(x)=\\operatorname{trdeg}_k\\kappa(v)$. Thus every point in the image of $h_t$ has the same residual transcendence degree over $\\kappa(t)$. All field maps used here are the composites of the structural maps, so the scalar-tower hypotheses hold.",
+   "uses": [
+    "lem-a1-integral-residue-extension-algebraic",
+    "lem-sbc-transcendence-degree-tower",
+    "def-kun-transcendence-degree",
+    "lem-zl-fibre-residue-arrow"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent proof of the finite-orbit prerequisite for Raynaud Theorem 4.1(ii); integrality under base change Tag 01WL (lemma-base-change-finite); specialization drop Tag 06RU (lemma-dimension-fibre-specialization)."
+   }
+  },
+  {
+   "text": "Local finite presentation is preserved on $V_t\\to\\operatorname{Spec}\\kappa(t)$. Its defining finite polynomial presentation in particular gives local finite type. A field is Noetherian (its only ideals are zero and the unit ideal), so the cited local-Noetherianity theorem makes $V_t$ locally Noetherian. In a scheme locally of finite type over a field, a nontrivial specialization strictly lowers residual transcendence degree. The equality in step 3 therefore shows that two distinct points of $h_t(W_t)$ cannot specialize to one another. The scheme $W_t$ is affine by step 2 and hence quasi-compact. Apply the finite-image antichain lemma to $h_t:W_t\\to V_t$ to conclude that $O_v\\cap p^{-1}(t)$ is finite.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-field-specialization-trdeg-drop",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-quasicompact-antichain-image-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent proof of the finite-orbit prerequisite for Raynaud Theorem 4.1(ii); integrality under base change Tag 01WL (lemma-base-change-finite); specialization drop Tag 06RU (lemma-dimension-fibre-specialization)."
+   }
+  },
+  {
+   "text": "For every $w\\in r_0^{-1}(v)$ the defining fibre-product square and the fact that $D$ is over $T_2$ give $q(p(r_1(w)))=q(p(r_0(w)))=s$. Consequently $O_v=\\bigcup_{t\\in q^{-1}(s)}(O_v\\cap p^{-1}(t))$. The index set is finite by the hypothesis on $q$, and each member is finite by step 4, so the union is finite. This proves exactly the image-finiteness assertion; it places no finiteness restriction on the point set of $W$.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent proof of the finite-orbit prerequisite for Raynaud Theorem 4.1(ii); integrality under base change Tag 01WL (lemma-base-change-finite); specialization drop Tag 06RU (lemma-dimension-fibre-specialization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-integral-morphism-base-change",
+  "def-weil-finite-integral-morphism",
+  "def-pd-descent-datum",
+  "lem-a1-integral-residue-extension-algebraic",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-zl-fibre-residue-arrow",
+  "lem-sbc-transcendence-degree-tower",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-field-specialization-trdeg-drop",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-quasicompact-antichain-image-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Finite-orbit assertion below Raynaud Theorem 4.1(ii), proved here by algebraic residue-field extensions, the tower formula (fields.tex Tag 030H), specialization drop (Tag 06RU), and the antichain-image criterion derived from Tag 01RL. This avoids using scheme descent effectivity to prove its own prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite descent orbits in a locally Noetherian scheme locally of finite presentation over an integral surjective cover with finite underlying fibres",
+   "results": "{\"t\": \"2026-10-24T12:50:02Z\", \"tool\": \"leanfinder\", \"query\": \"Finite descent orbits in a locally Noetherian scheme locally of finite presentation over an integral surjective cover with finite underlying fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"c27220408666e46f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite morphism fibre theorems assume the morphism is finite; integrality and finite underlying fibres of the base cover do not give that hypothesis after base change. No returned declaration concerns the orbit image of a descent datum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The orbit of a point under canonical scheme descent over an algebraic extension of fields is finite for locally finitely presented forms",
+   "results": "{\"t\": \"2026-10-24T12:50:01Z\", \"tool\": \"leansearch\", \"query\": \"The orbit of a point under canonical scheme descent over an algebraic extension of fields is finite for locally finitely presented forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"da50016e7ef85971\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite morphism fibre theorems assume the morphism is finite; integrality and finite underlying fibres of the base cover do not give that hypothesis after base change. No returned declaration concerns the orbit image of a descent datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-24T12:50:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\"], \"digest\": \"afce40ed5a6ebec8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite morphism fibre theorems assume the morphism is finite; integrality and finite underlying fibres of the base cover do not give that hypothesis after base change. No returned declaration concerns the orbit image of a descent datum."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*orbit|orbit.*descent|finite.*orbit",
+   "results": "{\"t\": \"2026-10-24T12:50:01Z\", \"tool\": \"grep\", \"query\": \"descent.*orbit|orbit.*descent|finite.*orbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite morphism fibre theorems assume the morphism is finite; integrality and finite underlying fibres of the base cover do not give that hypothesis after base change. No returned declaration concerns the orbit image of a descent datum."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*orbit|orbit.*descent|finite.*orbit",
+   "results": "{\"t\": \"2026-10-24T13:41:16Z\", \"tool\": \"grep\", \"query\": \"descent.*orbit|orbit.*descent|finite.*orbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits about finite morphisms do not apply to a merely integral cover; no declaration states finite descent orbit images. Group-action finiteness assumes a finite acting monoid, which is absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite point orbit image of an integral fpqc descent datum with finite underlying base fibres",
+   "results": "{\"t\": \"2026-10-24T13:41:17Z\", \"tool\": \"leansearch\", \"query\": \"Finite point orbit image of an integral fpqc descent datum with finite underlying base fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"Finite.finite_mulAction_orbit\"], \"digest\": \"73563e295727b271\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits about finite morphisms do not apply to a merely integral cover; no declaration states finite descent orbit images. Group-action finiteness assumes a finite acting monoid, which is absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.QuasiCompact",
+   "results": "{\"t\": \"2026-10-24T13:41:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.QuasiCompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\"], \"digest\": \"1340ef42f5c2f5ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits about finite morphisms do not apply to a merely integral cover; no declaration states finite descent orbit images. Group-action finiteness assumes a finite acting monoid, which is absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite point orbit image of the two integral projections of a scheme descent relation over a base cover with finite point fibres",
+   "results": "{\"t\": \"2026-10-24T13:41:19Z\", \"tool\": \"leanfinder\", \"query\": \"Finite point orbit image of the two integral projections of a scheme descent relation over a base cover with finite point fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.IsFinite.instSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f\"], \"digest\": \"332d89e1dd6d627b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits about finite morphisms do not apply to a merely integral cover; no declaration states finite descent orbit images. Group-action finiteness assumes a finite acting monoid, which is absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat. Supporting argument: finite point orbits before applying property (FA)",
+   "via": [
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-descent-finite-point-orbits",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five-step proof via the two integral relation maps, tensor-product point fibres, equality of residual transcendence degrees, and a new general finite-image criterion. Avoids assuming that finite underlying fibres survive base change and avoids using descent effectivity. One new statement-only node; no Mathlib leaves.",
+  "blueprint": "Realizes the inherited finite-orbit prerequisite below current latest det-thm-sf-ctf-stability-direct-images proof (3). blueprint_refs.py ancestor returns None; the inherited null node and via list are retained. Whole-blueprint searches orbit, finite image, antichain, quasi-compact image, constant transcendence, 01RL and transcendence find no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-fibre-residue-arrow",
+    "why": "Identifies the actual residue-field arrows in scheme fibres, a generic scheme-fibre fact, not a Deligne-Laumon argument."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Uses only clause (3), base-change stability of local finite presentation, as a generic permanence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-fibre-residue-arrow",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-c40d1db29",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-c40d1db29 (reviewer sub-agent of L); spot-checked: Fresh split; the item statement is unchanged and every step is correct. Step 1: q integral, so a_i, r_0 and r_1 = pr∘D are integral (base-change node plus a T_2-isomorphism), and lem-a1-integral-residue-extension-algebraic gives algebraic residue extensions; kappa(s)->kappa(t) is algebraic too. Step 2: the r_0-fibre over v is Spec kappa(v) x_S T with second coordinate p r_1. Its fibre over t is Spec(kappa(v) (x)_{kappa(s)} kappa(t)): the affine tensor formula applies after restricting to an affine open of S containing s, which is implicit and elementary. Point sets come from def-pc-scheme-fibre. Step 3: residue fields agree in fibres, and the cardinal tower formula with algebraic trdeg 0 gives trdeg_{kappa(t)} kappa(x) = trdeg_k kappa(v) for every orbit point over t; nothing is subtracted. Step 4: V_t is lfp, hence lft, over kappa(t), so it is locally Noetherian; the trdeg-drop node makes the image an antichain; W_t is affine, hence qc; the new node applies. Step 5: the finite union over q^{-1}(s). New node lem-sfb-quasicompact-antichain-image-finite is true. Proof: finitely many Noetherian affine charts; Spec A -> Spec B/ker is qc and dominant, so the generic points of its finitely many components (0BA8, properties.tex:523) are in the image by 01RL (morphisms.tex:1272); the antichain condition then makes the image equal to those generic points. Edge cases checked: empty source, closed points of A^1, infinite disjoint union. It is self-contained and statement-only, does not restate the item, and has no duplicate in the snapshot (rg for antichain, finite image, orbit, specialization+image, 01RL). Tool uses accepted: lem-zl-fibre-residue-arrow (generic fibre residue fields) and qcqs-permanence clause (3). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralDescentFinitePointOrbits",
+  "declaration": "AlgebraicGeometry.integral_descent_finite_point_orbit",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralDescentFinitePointOrbits.lean",
+  "statement": "theorem integral_descent_finite_point_orbit {T S : Scheme.{u}} (q : T ⟶ S) [IsIntegralHom q] [Surjective q] [Flat q] [QuasiCompact q] (hq : ∀ s : S, (q ⁻¹' {s}).Finite) (V : Over T) [LocallyOfFinitePresentation V.hom] [IsLocallyNoetherian V.left] (D : Over.DescentDatum q V) (v : V.left) : (((pullbackRightPullbackFstIso q q V.hom).hom ≫ D.toHom) '' ((pullback.fst V.hom (pullback.fst q q)) ⁻¹' {v})).Finite",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91b536317",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsIntegralHom/Surjective/Flat/QuasiCompact q, hq finite point fibres, LocallyOfFinitePresentation V.hom, IsLocallyNoetherian V.left, D : Over.DescentDatum q V. r0 = pullback.fst V.hom (pullback.fst q q) on the literal R; r1 = pullbackRightPullbackFstIso.hom ≫ D.toHom (toHom transports from over pr0 to over pr1; read in side-live DescentDatum.lean l.127). Conclusion is finiteness of the image in V, not of the fibre. No stronger assumptions (no IsFinite, no nonemptiness, no universe restriction). lean.statement byte-identical to the file; sorry only; source and blueprint docstrings with all 5 proof steps; no name collision; imports exist; report has Worker report and Second reading sections. Proof-only antichain node checked true via constructible-topology compactness. No file changed, so no compile."
+ }
+}

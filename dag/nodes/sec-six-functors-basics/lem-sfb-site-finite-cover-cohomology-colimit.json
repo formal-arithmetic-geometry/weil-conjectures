@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-site-finite-cover-cohomology-colimit",
+ "kind": "statement",
+ "title": "Filtered cohomology colimits on a site with finite cofinal coverings",
+ "statement": "Let $\\mathcal C$ be a small site and $\\operatorname{Ab}(\\mathcal C)$ its category of abelian sheaves [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal B\\subseteq\\operatorname{Ob}(\\mathcal C)$ and let $\\mathrm{Cov}_0$ be a set of covering families. Assume that every family $\\{U_a\\to U\\}_{a\\in A}$ in $\\mathrm{Cov}_0$ has finite index set $A$, has $U,U_a\\in\\mathcal B$, and has every nonempty iterated fibre product $U_{a_0}\\times_U\\cdots\\times_U U_{a_r}$, for $r\\geq0$, in $\\mathcal B$. Assume also that every covering of every $U\\in\\mathcal B$ is refined by a family in $\\mathrm{Cov}_0$ with target $U$: each arrow of the refining family factors through some arrow of the original covering. Let $D$ be a small filtered category, meaning nonempty with a cocone on every finite diagram, and let $F:D\\to\\operatorname{Ab}(\\mathcal C)$ be a diagram. Write $\\varinjlim_DF$ for its colimit in abelian sheaves [def-weil-pbc-category-colimit] and $H^q(U,-)=R^q\\Gamma(U,-)$ for right-derived evaluation [def-weil-pbc-sites-and-cohomology]. For every $U\\in\\mathcal B$ and $q\\geq0$, the map induced by the colimit coprojections is an isomorphism $$\\varinjlim_{d\\in D}H^q(U,F_d)\\longrightarrow H^q(U,\\varinjlim_DF).$$ Here a nonempty iterated fibre product means a product of one or more factors, with repetitions permitted, not a requirement that its underlying space be nonempty.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, lemma-colim-works-over-collection, hypotheses (1)-(2) and conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each $V\\in\\mathcal B$, refine an arbitrary covering by a family in $\\mathrm{Cov}_0$. Its finite index set supplies a refinement with finite image in the original index set, so $V$ is quasi-compact in the explicit sense of [lem-sfb-site-quasi-compact-section-colimit]. For a family in $\\mathrm{Cov}_0$ every pairwise overlap belongs to $\\mathcal B$ and hence is quasi-compact by the same argument. The isomorphism clause of that lemma therefore gives $\\varinjlim_d G_d(V)\\cong(\\varinjlim_dG_d)(V)$ for every diagram $G$ and every $V\\in\\mathcal B$. Since $H^0(V,G)=G(V)$ by [def-weil-pbc-sites-and-cohomology], these are exactly the required canonical comparisons in degree zero.",
+   "uses": [
+    "lem-sfb-site-quasi-compact-section-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0739, lemma-colim-works-over-collection, first proof paragraph; Sites Tag 0738(4)."
+   }
+  },
+  {
+   "text": "Let $I:D\\to\\operatorname{Ab}(\\mathcal C)$ be any diagram of injective sheaves and put $J=\\varinjlim_dI_d$. Fix $\\mathcal U=\\{V_a\\to V\\}_{a\\in A}\\in\\mathrm{Cov}_0$. In degree $r\\ge0$ its Cech complex [def-weil-pbc-site-cech-complex] is the product over the finite set $A^{r+1}$ of sections on the iterated overlaps. Step 1 applies to each overlap. Combining those canonical section comparisons with [lem-weil-pbc-filtered-colimits-commute-finite-limits] gives the canonical isomorphism $\\varinjlim_d\\check{\\mathcal C}^r(\\mathcal U,I_d)\\cong\\check{\\mathcal C}^r(\\mathcal U,J)$. These maps commute with the differentials: on a component indexed by $(a_0,\\ldots,a_{r+1})$, both composites are the sum over $j$ of $(-1)^j$ times restriction along the projection omitting $a_j$, followed by the sheaf colimit coprojection. This equality is naturality of each coprojection, term by term. Each stage complex is exact in positive degrees by [lem-weil-pbc-site-injective-cech-acyclic]. For each $r>0$ apply [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to the exact triple of stage groups in degrees $r-1,r,r+1$. The colimit triple is exact at its middle group, hence the displayed degreewise comparisons give $\\check H^r(\\mathcal U,J)=0$. If $A$ is empty all these terms are zero, so the same conclusion holds.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0739, final proof paragraph: finite Cech complexes, Tag 03AW and exact filtered colimits."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] to $J$, $\\mathcal B$ and $\\mathrm{Cov}_0$. Its first hypothesis is precisely the assumed membership of all positive-length iterated overlaps in $\\mathcal B$; its second is the given cofinality; its third was proved in step 2 for every selected covering and every positive degree. Consequently $H^r(V,J)=0$ for every $V\\in\\mathcal B$ and $r>0$, for every filtered diagram $I$ of injectives. No assertion that the colimit sheaf itself is injective is needed.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0739, final paragraph, application of Tag 03F9, lemma-cech-vanish-collection."
+   }
+  },
+  {
+   "text": "Fix $U\\in\\mathcal B$. The category of abelian sheaves is Grothendieck abelian by [lem-cbc-sieve-module-sheaves-grothendieck] at $\\Lambda=\\mathbf Z$: abelian groups are $\\mathbf Z$-modules with the unique action and additive maps are linear, so abelian and $\\mathbf Z$-module presheaves agree; both sheaf conditions concern underlying presheaves of sets. Let $T$ be the Grothendieck topology generated by $\\operatorname{Cov}(\\mathcal C)$. By [lem-trf-generated-precoverage-sheaf-criterion], a presheaf of sets $P$ is a $T$-sheaf iff it has unique amalgamations on every sieve $f^*\\langle R\\rangle$ with $R=\\{U_i\\to X\\}_{i\\in I}$ a covering and $f:Y\\to X$. Since fibre products exist, $f^*\\langle R\\rangle=\\langle f^*R\\rangle$ for the covering $f^*R=\\{U_i\\times_XY\\to Y\\}$: an arrow $g$ lies in either sieve iff $fg$ factors through some $U_i$. A matching family on the generated sieve of a family is the same as a family of sections on its members agreeing on pairwise fibre products, so unique amalgamation there is the equalizer condition for $f^*R$. Hence $T$-sheaves are exactly the abelian sheaves of [def-weil-pbc-sites-and-cohomology], with the same morphisms. Evaluation $v=\\Gamma(U,-)$ is additive and left exact by [def-weil-pbc-sites-and-cohomology]. Small filtered colimits exist and are exact in the source by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], and are exact in abelian groups by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Induct on $q$, with the degree-zero case supplied by step 1. In the successor step apply [lem-weil-pbc-right-derived-filtered-colimit-successor] to $v$, $D$ and $n=q$: the inductive assumption is preservation for every $D$-diagram, and step 3 supplies $R^{q+1}v(\\varinjlim I)=0$ for every injective-valued diagram. Its conclusion is preservation in degree $q+1$. Its comparison is the map induced by the colimit coprojections, as asserted.",
+   "uses": [
+    "lem-cbc-sieve-module-sheaves-grothendieck",
+    "lem-trf-generated-precoverage-sheaf-criterion",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-right-derived-filtered-colimit-successor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0739, induction and natural comparison ladder; functorial injective embeddings are included in the cited successor lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-site-quasi-compact-section-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-cbc-sieve-module-sheaves-grothendieck",
+  "lem-trf-generated-precoverage-sheaf-criterion",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-right-derived-filtered-colimit-successor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, lemma-colim-works-over-collection, complete proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a site with a cofinal system of finite coverings closed under iterated covering fibre products, cohomology over basis objects commutes with filtered colimits of abelian sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ab5ofSize\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.Limits.HasFiniteLimits A]\\n  [inst_3 : CategoryTheory.HasSheafify J A]\\n  [inst_4 : CategoryTheory.Limits.HasFilteredColimi\", \"doc\": \"Given a category $\\\\mathcal{A}$ with finite limits, a sheafification functor, filtered colimits of size $(v₂, u₂)$, and satisfying the AB5 axiom, the category of sheaves on a site $(\\\\mathcal{C}, J)$ wi\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasSheafify J A]\\n  [CategoryTheory.Limits.HasFilteredColimitsOfSize.{v₂, u₂, v₁, u₁} A],\\n  CategoryTheory.Limits.HasFilte\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, a concrete category $\\\\mathcal{A}$, and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{C} $ satisfying the locally bijective condition for $ J\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfShapeOppositeElementsFiberForget\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_2 : (X Y : A) → FunLike (FC X Y) (CC X) (CC Y)] [inst_3 : CategoryTheory\", \"doc\": \"The forgetful functor from category $\\\\mathcal{A}$ to the category of types preserves colimits of diagrams whose shape is the opposite category of the elements of the fiber functor associated with a po\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective₂\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"For any two elements $p_1, p_2$ in the colimit $\\\\Phi.\\text{presheafFiber}(P)$ associated to a Grothendieck topology point $\\\\Phi$ and a presheaf $P : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, there exis\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, if $\\\\mathcal{C}$ has sheafification, satisfies the locally bijective condition, the forgetful functor refl\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.LocallySmall.{w, v, u} C]\\n  [Category\", \"doc\": \"Given a point $\\\\Phi$ of a Grothendieck topology on a locally small category $\\\\mathcal{C}$, and a category $\\\\mathcal{A}$ with finite limits satisfying the AB5 axiom, the sheaf fiber functor associated \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.LocallySmall.{w, v, u} C]\\n  [Category\", \"doc\": \"If $\\\\mathcal{C}$ is a locally small category, $\\\\mathcal{A}$ satisfies the AB5 axiom (filtered colimits are exact), and $\\\\mathcal{A}$ has finite limits, then $\\\\mathcal{A}$ has exact colimits of diagram\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf AB5, existence of colimits and stalk functors do not assert preservation of filtered colimits by higher evaluation cohomology; inspected SheafCohomology/Basic.lean and GrothendieckAxioms/Sheaf.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived sections on coherent sites preserve filtered colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasSheafify J A]\\n  [CategoryTheory.Limits.HasFilteredColimitsOfSize.{v₂, u₂, v₁, u₁} A],\\n  CategoryTheory.Limits.HasFilte\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"Condensed.hasExactColimitsOfShape\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (A : Type u_1) (J : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Preadditive A]\\n  [∀ (X : CompHausᵒᵖ),\\n      CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.StructuredArrow X Stonean.toCompHaus.op) A]\\n  [inst_4 : C\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and has exact colimits of shape $J$, and $\\\\mathcal{A}$ has finite limits, then the category of condensed objects $\\\\text{Condensed } \\\\mathcal{A}\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, if $\\\\mathcal{C}$ has sheafification, satisfies the locally bijective condition, the forgetful functor refl\"}\n  {\"name\": \"CategoryTheory.Sheaf.ab5ofSize\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.Limits.HasFiniteLimits A]\\n  [inst_3 : CategoryTheory.HasSheafify J A]\\n  [inst_4 : CategoryTheory.Limits.HasFilteredColimi\", \"doc\": \"Given a category $\\\\mathcal{A}$ with finite limits, a sheafification functor, filtered colimits of size $(v₂, u₂)$, and satisfying the AB5 axiom, the category of sheaves on a site $(\\\\mathcal{C}, J)$ wi\"}\n  {\"name\": \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ {A : Type u_1} {J : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Limits.HasColimitsOfShape J A]\\n  [CategoryTheory.HasWeakSheafify (CategoryTheory.coherentTopology CompHaus) A],\\n  CategoryTheory.Limits.HasColimitsOfShape J\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and the category of condensed objects in $\\\\mathcal{A}$ has weak sheafification with respect to the coherent Grothendieck topology on compact Ha\"}\n  {\"name\": \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Limits.HasFiniteColimits A]\\n  [CategoryTheory.HasWeakSheafify (CategoryTheory.coherentTopology CompHaus) A],\\n  CategoryTheory.Limits.HasFiniteColimits (Condensed A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits and the category of compact Hausdorff spaces equipped with the coherent Grothendieck topology admits weak sheafification into $\\\\mathcal{A}$, then the ca\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} {K : Type u₂} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 : CategoryTheory.Category.{v₁, u₁} A] [inst_2 : CategoryTheory.Category.{v₂, u₂} K]\\n  (J : CategoryTheory.GrothendieckTopology C) [inst_3 : CategoryTheory.HasWeakSheafify J A]\\n  [CategoryTheory.Limits.HasF\", \"doc\": \"If a category $\\\\mathcal{D}$ admits colimits of shape $K$, then the category of sheaves on a site $J$ with values in $\\\\mathcal{D}$ also admits colimits of shape $K$. This means that for any diagram $F:\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u} {A : Type u₁} {K : Type u₂} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 : CategoryTheory.Category.{v₁, u₁} A] [inst_2 : CategoryTheory.Category.{v₂, u₂} K]\\n  (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.Limits.HasFiniteLimits A]\\n  [inst_4 : CategoryTheory.HasShe\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, a sheafification functor for a Grothendieck topology $J$, colimits of shape $K$, and exact colimits of shape $K$, then the category of sheaves on $J$ wit\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf AB5, existence of colimits and stalk functors do not assert preservation of filtered colimits by higher evaluation cohomology; inspected SheafCohomology/Basic.lean and GrothendieckAxioms/Sheaf.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"PreservesFilteredColimits\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf AB5, existence of colimits and stalk functors do not assert preservation of filtered colimits by higher evaluation cohomology; inspected SheafCohomology/Basic.lean and GrothendieckAxioms/Sheaf.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*colimit|colimit.*cohomology|coherent.*cohomology",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"71\", \"text\": \"/-- The diagram we will take the colimit of to define local cohomology, corresponding to the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"line\": \"36\", \"text\": \"* take the colimit of `OneCohomology G U` over all covering families `U` (for\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf AB5, existence of colimits and stalk functors do not assert preservation of filtered colimits by higher evaluation cohomology; inspected SheafCohomology/Basic.lean and GrothendieckAxioms/Sheaf.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology on a site with a finite covering basis commutes with filtered colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] : HasFilteredColimitsOfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Basic\", \"type\": \"[HasSheafify J A] [J.WEqualsLocallyBijective A] [(forget A).ReflectsIsomorphisms]\\n  [PreservesFilteredColimitsOfSize.{w, w} (forget A)] [LocallySmall.{w} C] :\\n  PreservesColimitsOfSize.{w, w} (Φ.sheafFiber (A := A))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, if $\\\\mathcal{C}$ has sheafification, satisfies the locally bijective condition, the forgetful functor refl\"}\n  {\"name\": \"CategoryTheory.isSheaf_pointwiseColimit\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits\", \"type\": \"[PreservesFiniteProducts (colim (J := J) (C := A))] (G : J ⥤ Sheaf (extensiveTopology C) A) :\\n  Presheaf.IsSheaf (extensiveTopology C) (pointwiseCocone (G ⋙ sheafToPresheaf _ A)).pt\", \"doc\": \"If the colimit functor for diagrams of shape $\\\\mathcal{J}$ in category $\\\\mathcal{A}$ preserves finite products, then the pointwise colimit of a diagram of sheaves on $\\\\mathcal{C}$ (with respect to the\"}\n  {\"name\": \"CategoryTheory.Sheaf.ab5ofSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteLimits A] [HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] [AB5OfSize.{v₂, u₂} A] :\\n  AB5OfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{A}$ with finite limits, a sheafification functor, filtered colimits of size $(v₂, u₂)$, and satisfying the AB5 axiom, the category of sheaves on a site $(\\\\mathcal{C}, J)$ wi\"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \"[PreservesLimits (forget D)] [∀ X : C, Small.{t, max u v} (J.Cover X)ᵒᵖ] [HasFiniteLimits D] :\\n  PreservesFiniteLimits (plusPlusSheaf J D)\", \"doc\": \"The sheafification functor from presheaves to sheaves with respect to a Grothendieck topology preserves finite limits, provided the target category has finite limits and the cover categories are small\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteLimits A] [HasSheafify J A] [HasColimitsOfShape K A] [HasExactColimitsOfShape K A] :\\n  HasExactColimitsOfShape K (Sheaf J A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, a sheafification functor for a Grothendieck topology $J$, colimits of shape $K$, and exact colimits of shape $K$, then the category of sheaves on $J$ wit\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteColimits A] [HasLimitsOfShape K A] [HasExactLimitsOfShape K A]\\n  [PreservesFiniteColimits (sheafToPresheaf J A)] : HasExactLimitsOfShape K (Sheaf J A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits, all limits of shape $K$, exact limits of shape $K$, and the inclusion functor from sheaves to presheaves preserves finite colimits, then the category o\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \"(K : Type t) [SmallCategory K] [FinCategory K] [HasLimitsOfShape K D] [PreservesLimitsOfShape K (forget D)]\\n  [ReflectsLimitsOfShape K (forget D)] : PreservesLimitsOfShape K (J.sheafification D)\", \"doc\": \"Given a small finite category $ K $, if a category $ \\\\mathcal{D} $ has all limits of shape $ K $ and the forgetful functor $ \\\\mathcal{D} \\\\to \\\\mathrm{Type} $ both preserves and reflects these limits, t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf AB5, existence of colimits and stalk functors do not assert preservation of filtered colimits by higher evaluation cohomology; inspected SheafCohomology/Basic.lean and GrothendieckAxioms/Sheaf.lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-cohomology-filtered-colimit",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Filtered colimits of etale cohomology on algebraic spaces. Tag 073E proof, first sentence: application of Tag 0739 to the qcqs objects of the enlarged etale site.",
+   "via": [
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-site-finite-cover-cohomology-colimit",
+  "worker": "stage1",
+  "summary": "Follow Tag 0739: prove degree zero using the general objectwise sections criterion, identify finite Cech complexes, deduce acyclicity of filtered injective colimits by the existing Cech criterion, and induct using the already recorded general successor lemma. One new statement-only sections node; all other inputs reused. Statement unchanged.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), the direct-image finiteness branch, supporting Tag 073E and its Tag 0739 input. All four proof paragraphs of Tag 0739 are realized by steps 1-4. The inherited created.item chain has no resolvable imported ancestor (blueprint_refs.py ancestor prints None), so preserve that computed null and document the precise latest proof place instead of inventing ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-injective-cech-acyclic",
+    "why": "General-site injective Cech vanishing, Tag 03AW, is the explicit input in Tag 0739; the present unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "General-site Cech criterion, Tag 03F9, is the explicit input of Tag 0739 for acyclicity; used without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-cec40eae8",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-cec40eae8 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0739 (sites-cohomology.tex lemma-colim-works-over-collection, statement and full proof), Tag 0738 parts (1)-(4) with their proof, and definition-quasi-compact in sites.tex. The item statement is unchanged and matches 0739, including the coefficient category Ab(C). Step 1 is the source's argument that (1) and (2) give the hypothesis of 0738(4): each V in B is quasi-compact because its finite refinements give finite image, and the pairwise overlaps lie in B. Step 2 is correct: the finite Cech product commutes with the filtered colimit, the differentials are compatible by naturality, the stage complexes vanish by the 03AW node, and exactness passes to the colimit; the empty cover was checked. Step 3 checks the three hypotheses of the 03F9 node. Step 4 cites the Lean-closed successor node instead of redoing the source's injective-ladder and snake-lemma argument; all of its hypotheses were checked, with step 1 as the base case. New node lem-sfb-site-quasi-compact-section-colimit equals 0738(2),(4) for abelian sheaves and is true. Edge cases tested: empty cover, one-object D, non-injective transitions. It does not restate the item (it is degree 0 only). It is statement-only with three kinds of search and no duplicate: aux-site-filtered-colimit-sections-inverse and lem-weil-pbc-site-filtered-colimit-sections-finite-coverings need globally finite covers; fixed-site-degree-zero-representatives gives representatives only; the others are for topological spaces or local representatives. FIX (C1): step 4 identified covering-family sheaves on the site with sieve sheaves for the generated topology in one uncited clause, which it needs to use lem-cbc-sieve-module-sheaves-grothendieck. It now cites the Mathlib leaf lem-trf-generated-precoverage-sheaf-criterion (Precoverage.isSheaf_toGrothendieck_iff, PrecoverageToGrothendieck.lean:98) and writes out why the generated-sieve condition is the equalizer condition on the pulled-back covering. That node was added to uses and proof_deps; the step is now 1911 characters. Accepted tool_uses: lem-weil-pbc-site-injective-cech-acyclic and lem-weil-pbc-site-cech-vanishing-criterion, the generic 03AW and 03F9 inputs of the 0739 proof. blueprint.from.node is null because the created.item chain has no blueprint ancestor; this is inherited, a maintainer note only. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteFiniteCoverCohomologyColimit",
+  "declaration": "CategoryTheory.Sheaf.isIso_cohomology_colimit_of_finite_covers",
+  "file": "lean/Sheaf/CategoryTheory/SiteFiniteCoverCohomologyColimit.lean",
+  "statement": "theorem isIso_cohomology_colimit_of_finite_covers {C : Type u} [SmallCategory C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) [HasSheafify J.toGrothendieck AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] (B : Set C) (Cov : ∀ (V : C) (T : Type u) (W : T → C), (∀ t, W t ⟶ V) → Prop) (S : ∀ (V : C) (T : Type u) (W : T → C) (f : ∀ t, W t ⟶ V), Cov V T W f → SiteCechComplex W f) (hcover : ∀ (V : C) (T : Type u) (W : T → C) (f : ∀ t, W t ⟶ V), Cov V T W f → Presieve.ofArrows W f ∈ J V) (hfinite : ∀ (V : C) (T : Type u) (W : T → C) (f : ∀ t, W t ⟶ V), Cov V T W f → Finite T) (hB : ∀ (V : C) (T : Type u) (W : T → C) (f : ∀ t, W t ⟶ V) (h : Cov V T W f), V ∈ B ∧ (∀ t, W t ∈ B) ∧ ∀ (p : ℕ) (a : Fin (p + 1) → T), (S V T W f h).W p a ∈ B) (hcofinal : ∀ (V : C), V ∈ B → ∀ (T : Type u) (W : T → C) (f : ∀ t, W t ⟶ V), Presieve.ofArrows W f ∈ J V → ∃ (K : Type u) (Z : K → C) (g : ∀ k, Z k ⟶ V), Cov V K Z g ∧ ∀ k, ∃ (t : T) (a : Z k ⟶ W t), a ≫ f t = g k) (D : Type u) [SmallCategory D] [IsFiltered D] (F : D ⥤ Sheaf J.toGrothendieck AddCommGrpCat.{u}) (U : C) (hU : U ∈ B) (q : ℕ) : IsIso (colimit.post F (cohomologyPresheafFunctor J.toGrothendieck q ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)))",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the recorded site axioms and Mathlib cohomologyPresheafFunctor, evaluated at U. The existing SiteCechComplex declaration supplies the chosen iterated fibre products and their universal properties, so its already-landed definition node is added to stmt_deps. No terminal object or products outside covering overlaps are assumed. HasSheafify and HasExt are the standard small-site infrastructure, not extra geometric hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9a132a23",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read node, Stacks 0739 source, module, and stmt_dep declarations (IsSiteForCoverings, SiteCechComplex structure with universal property, Mathlib cohomologyPresheafFunctor/colimit.post). Every clause matches: finite possibly-empty Cov families that cover, with target, members and chosen iterated overlaps (p>=0, repeats allowed) in B; cofinal refinement by factorization; small filtered D in Type u; H^q = H' via Ext; conclusion IsIso of colimit.post, which is the coprojection-induced map, for all U in B and q>=0. HasSheafify and HasExt.{u} are Prop infrastructure; universes follow the size convention. stmt_deps adds landed def-weil-pbc-site-cech-complex (allowed). Statement verbatim, docstrings with source and blueprint, sorry only, no defs, report sections present. Only specialized duplicates exist (etale, profinite, degree-zero, terminal-object). No compile run (no change). Maintainer note: landed proof inputs still use HasPullbacks/IsStableUnderComposition classes, so stage 3 needs a bridge from IsSiteForCoverings."
+ }
+}

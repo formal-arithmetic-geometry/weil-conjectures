@@ -1,0 +1,266 @@
+{
+ "id": "lem-sf-regular-roos-koszul-unit",
+ "kind": "statement",
+ "title": "Regular quotient Roos completeness detects the canonical Koszul unit",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of commutative rings, and $t$ a global section of $\\mathcal O$ such that multiplication by $t$ is injective. Use module sheaves and unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For $P\\in D(\\mathcal O)$ choose a K-flat representative $Q$ [def-pc-kflat-complex, lem-pc-kflat-resolution]. Put $B_n=\\mathcal O/t^n\\mathcal O$ and $K_n=[\\mathcal O\\xrightarrow{t^n}\\mathcal O]$ in degrees $[-1,0]$, with transition $(t,1)$, and let $U_\\bullet=(Q\\otimes_{\\mathcal O} B_n)_n$ and $V_\\bullet=(Q\\otimes_{\\mathcal O}K_n)_n$ be strict towers with their quotient and degree-zero Koszul augmentations [def-pc-tensor-complex-sheaves]. Write $R\\lim$ for total right derived inverse limit on strict towers, computed by K-injectives, and $\\prod^D$ for the product in $D(\\mathcal O)$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Let $\\operatorname{comp}_P:P\\to R\\lim U_\\bullet$ and $\\kappa_P:P\\to C_t(P)=R\\lim V_\\bullet$ be the canonical maps obtained from these strict augmentations using the derived constant-tower/limit unit [lem-coef-derived-tower-counit-projections].\n\nThe quotient chain maps $K_n\\to B_n[0]$ give a natural isomorphism $c_P:C_t(P)\\xrightarrow{\\sim}R\\lim U_\\bullet$ satisfying $c_P\\kappa_P=\\operatorname{comp}_P$. The following conditions on $P$ are equivalent:\n(i) there exists a distinguished triangle $P\\xrightarrow{(q_n)}\\prod_n^D U_n\\xrightarrow{1-s}\\prod_n^D U_n\\to P[1]$, with first components the actual quotient reductions and $s$ the transition shift [def-weil-derived-limit];\n(ii) $P$ is locally derived $(t)$-complete: for every slice object $W$ and $f\\in(t)\\mathcal O(W)$, $R\\mathcal Hom_{\\mathcal O_W}(\\mathcal O_W[1/f],P|_W)=0$, where localization is sheafified sectionwise [def-pur-derived-internal-hom];\n(iii) the specified $\\kappa_P$ is invertible;\n(iv) the specified $\\operatorname{comp}_P$ is invertible.\nThese assertions are independent of the K-flat representative. They impose no exactness of countable products of module sheaves, no Noetherian or finite-quotient condition, and no boundedness condition. Condition (i) asserts existence of a triangle; it does not choose its isomorphism to the total limit or identify such a choice with either canonical unit.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099B (lemma-derived-completion) and Tag 0A0E (lemma-derived-completion-koszul); agent regular-generator existential-Roos/canonical-unit criterion, extracted from old Steps 6-7 of lem-sf-open-quotient-koszul-completeness."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-tower-counit-projections",
+  "def-weil-derived-limit",
+  "def-pur-derived-internal-hom",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-sf-koszul-total-derived-limit",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-derived-complete-koszul-reconstruction] with its $K=P$ and K-flat representative $Q$. Its site, regularity, tensor complexes and strict transitions are exactly ours. It gives the strict levelwise quasi-isomorphism $a:V_\\bullet\\to U_\\bullet$ and the isomorphism $c_P=R\\lim(a)$. Write $\\alpha_V:\\Delta P\\to V_\\bullet$, $\\alpha_U:\\Delta P\\to U_\\bullet$ for the augmentations in the derived tower category. In degree zero, quotient after $\\mathcal O\\to K_n$ is $\\mathcal O\\to B_n$, and in degree $-1$ both composites are zero; hence $a\\alpha_V=\\alpha_U$. For the derived adjunction of [def-sf-normalized-strict-tower-augmentation], let $v_P:P\\to R\\lim\\Delta P$ be its unit. By definition $\\kappa_P=R\\lim(\\alpha_V)v_P$ and $\\operatorname{comp}_P=R\\lim(\\alpha_U)v_P$, so functoriality gives $c_P\\kappa_P=\\operatorname{comp}_P$. Tensor and quotient maps commute with chain maps of representatives, so this comparison is natural.",
+   "uses": [
+    "lem-pur-derived-complete-koszul-reconstruction",
+    "def-sf-normalized-strict-tower-augmentation",
+    "def-sf-regular-roos-koszul-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul), principal regular-generator case."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-principal-strict-limit-reflector] to the actual negative singleton Koszul tower and normalized unit. For a complete object P, the Hom bijection supplies a retraction and injectivity makes it a two-sided inverse; conversely transport output completeness across an invertible unit. Thus (ii) iff (iii); composing with the comparison isomorphism gives (iii) iff (iv).",
+   "uses": [
+    "lem-sf-principal-strict-limit-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul), principal regular-generator case."
+   }
+  },
+  {
+   "text": "Assume (i). The second assertion of [lem-pur-derived-complete-koszul-reconstruction] applies to this very Roos triangle and gives an isomorphism $\\phi:P\\xrightarrow{\\sim}C_t(P)$. By [lem-sf-principal-strict-limit-reflector] the latter is locally derived complete. On every slice, applying the functor $R\\mathcal Hom(\\mathcal O_W[1/f],-)$ [def-pur-derived-internal-hom] to the restriction of $\\phi$ gives an isomorphism to zero, proving (ii). This uses only existence of $\\phi$, not an equality $\\phi=\\kappa_P$.",
+   "uses": [
+    "lem-pur-derived-complete-koszul-reconstruction",
+    "lem-sf-principal-strict-limit-reflector",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul), principal regular-generator case."
+   }
+  },
+  {
+   "text": "Use the proved generic strict-tower construction underlying [lem-weil-pbc-ringed-strict-tower-homotopy-limit] (CoreWork.roos_Q). Compare its pNat with the ordinary termwise limit inclusion: expand aIso and bIso, use comparison naturality along the K-injective resolution, then use naturality of the product comparison. Transport via evaluationData, cancelling the inverse evaluation isomorphism and applying piComparison_comp_π. This proves η_X p π_n = Q(limπ_n). For a strict augmentation α, naturality moves η across X(α); the ordinary constant-limit adjunction unit followed by lim(Xα) and limπ_n is α_n degree by degree. Under (iv), transport this normalized Roos triangle along the actual quotient unit. The quotient-augmentation equation identifies its first components with the prescribed actual quotient maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-sf-normalized-strict-tower-augmentation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos triangle; derived.tex Tags 09T5 (lemma-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general), adjunction normalization."
+   }
+  },
+  {
+   "text": "For another K-flat representative, [lem-sf-principal-strict-limit-reflector] gives another reflection $(C'_t(P),\\kappa'_P)$ of the same $P$ into the same locally complete objects. Its Hom bijection uniquely gives $h:C_t(P)\\to C'_t(P)$ with $h\\kappa_P=\\kappa'_P$, and the reverse bijection gives $k$; uniqueness yields $kh=1$ and $hk=1$. Step 1 then identifies the quotient limits by $c'_Phc_P^{-1}$, carrying $\\operatorname{comp}_P$ to $\\operatorname{comp}'_P$. Uniqueness also makes these identifications natural and transitive. Conditions (ii)-(iv), and therefore (i), are independent of the representative. All products used above are products in the derived category, as in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; no exactness of products, finiteness or boundedness was used.",
+   "uses": [
+    "lem-sf-principal-strict-limit-reflector",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul), principal regular-generator case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-complete-koszul-reconstruction",
+  "def-sf-normalized-strict-tower-augmentation",
+  "def-sf-regular-roos-koszul-data",
+  "lem-sf-principal-strict-limit-reflector",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Q4 assembly of Tags 099B, 0A0E and 0941. Actual strict-tower projection normalization proved from CoreWork; general universe/presentation reflector bridge isolated in lem-sf-principal-strict-limit-reflector."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Koszul.*complet|complet.*Koszul|Roos|derived.*complet",
+   "results": "{\"t\": \"2026-10-22T06:19:38Z\", \"tool\": \"grep\", \"query\": \"Koszul.*complet|complet.*Koszul|Roos|derived.*complet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; ordinary adic ring/module completion and derived t-structure representatives do not state the ringed-site Roos/Koszul canonical-unit criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular element quotient tower completeness Roos distinguished triangle equivalent to canonical Koszul completion unit isomorphism on a small ringed site",
+   "results": "{\"t\": \"2026-10-22T06:19:39Z\", \"tool\": \"leansearch\", \"query\": \"Regular element quotient tower completeness Roos distinguished triangle equivalent to canonical Koszul completion unit isomorphism on a small ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.instCommRing\", \"IsAdic.isPrecomplete_iff\", \"AdicCompletion.liftRingHom.congr_simp\", \"AdicCompletion.instOne\", \"isQuasiregular_iff'\", \"IsPrecomplete.top\", \"IsAdicComplete.of_subsingleton\", \"isQuasiregular_iff_isUnit\"], \"digest\": \"0aa1a9217f766892\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; ordinary adic ring/module completion and derived t-structure representatives do not state the ringed-site Roos/Koszul canonical-unit criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"complete\"",
+   "results": "{\"t\": \"2026-10-22T06:19:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"complete\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; ordinary adic ring/module completion and derived t-structure representatives do not state the ringed-site Roos/Koszul canonical-unit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular global element of a sheaf of rings on any small site existence of a quotient Roos completeness triangle is equivalent to invertibility of the canonical Koszul completion unit without exact products",
+   "results": "{\"t\": \"2026-10-22T06:19:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a regular global element of a sheaf of rings on any small site existence of a quotient Roos completeness triangle is equivalent to invertibility of the canonical Koszul completion unit without exact products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafCompHaus\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.IsSolid\", \"LightCondAb.ofSheafLightProfinite\", \"LightCondMod.isDiscrete_tfae\"], \"digest\": \"050a7e93bbdc73e4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; ordinary adic ring/module completion and derived t-structure representatives do not state the ringed-site Roos/Koszul canonical-unit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived principal ideal completion reflector detects an existential distinguished Roos triangle of quotient modules on a ringed site",
+   "results": "{\"t\": \"2026-10-22T06:19:50Z\", \"tool\": \"leanfinder\", \"query\": \"Derived principal ideal completion reflector detects an existential distinguished Roos triangle of quotient modules on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"localCohomology.diagram\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"14c15a2a99003748\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned types; ordinary adic ring/module completion and derived t-structure representatives do not state the ringed-site Roos/Koszul canonical-unit criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*complet|complet.*Koszul|Roos|derived.*complet",
+   "results": "{\"t\": \"2026-10-22T07:21:19Z\", \"tool\": \"grep\", \"query\": \"Koszul.*complet|complet.*Koszul|Roos|derived.*complet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived completion of a module sheaf is the derived inverse limit of its Koszul tower and the completion unit is invertible exactly for locally derived complete objects",
+   "results": "{\"t\": \"2026-10-22T07:21:19Z\", \"tool\": \"leansearch\", \"query\": \"The derived completion of a module sheaf is the derived inverse limit of its Koszul tower and the completion unit is invertible exactly for locally derived complete objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.ofLinearEquiv\", \"IsAdicComplete\", \"AdicCompletion.of\", \"IsAdicComplete.mk\", \"AdicCompletion.instModuleOfIsScalarTower\", \"IsAdicComplete.StrictMono.of_comp_lift\"], \"digest\": \"fb7674ab3470a0a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; ordinary adic module completion, sheaf generators/relations, or projective-resolution Tor do not assert this unbounded ringed-site criterion and its canonical strict-tower units"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"complete\"",
+   "results": "{\"t\": \"2026-10-22T07:21:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"complete\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a ringed site, regular principal quotient Roos completeness is equivalent to invertibility of the canonical Koszul completion unit",
+   "results": "{\"t\": \"2026-10-22T07:21:30Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of modules on a ringed site, regular principal quotient Roos completeness is equivalent to invertibility of the canonical Koszul completion unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.presentationOfIsCokernelFree_relations\"], \"digest\": \"6a3d885f9f2a1692\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; ordinary adic module completion, sheaf generators/relations, or projective-resolution Tor do not assert this unbounded ringed-site criterion and its canonical strict-tower units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reflector onto derived complete objects is computed by a homotopy limit of tensor products with two term complexes for powers of an element",
+   "results": "{\"t\": \"2026-10-22T07:22:04Z\", \"tool\": \"leanfinder\", \"query\": \"The reflector onto derived complete objects is computed by a homotopy limit of tensor products with two term complexes for powers of an element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Functor.leftDerived\"], \"digest\": \"309e299d3728a033\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned types; ordinary adic module completion, sheaf generators/relations, or projective-resolution Tor do not assert this unbounded ringed-site criterion and its canonical strict-tower units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-quotient-koszul-completeness",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, existential quotient Roos triangle versus the canonical Koszul unit (returned item Steps 6-7).",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-regular-roos-koszul-unit",
+  "worker": "stage1",
+  "summary": "Reused the existing regular Koszul reconstruction, ringed-site reflector, strict-tower Roos theorem and derived counit normalization. Proved the unit equation at the strict augmentation level, obtained local completeness from the existential triangle without identifying its nonunique comparison with the unit, and proved the converse using the canonical unit and its exact projection equation. Representative independence follows from the reflector Hom bijection. No new nodes and no statement change.",
+  "blueprint": "Realizes fix-prop-coherence proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”, integral open factor and old Steps 6-7 of lem-sf-open-quotient-koszul-completeness, via the existing blueprint.from chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-complete-koszul-reconstruction",
+    "why": "Generic regular-element comparison and existence of a compatible Roos-triangle isomorphism on any small ringed site; this compatibility unit has no independent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic ringed-site Koszul reflector and its specified universal unit; used as a tool to detect local completeness, not to change the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total derived strict-tower Roos triangle with derived products; supplies existence without assuming exact products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-complete-koszul-reconstruction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-94bcec76c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-94bcec76c (reviewer sub-agent of L); spot-checked: Read the item in full, all 5 steps, every cited statement, and Stacks Tags 099B/0A0E (algebraization.tex l.1024/1091). No new nodes; statement, stmt_deps and source are unchanged, and no repair note exists for the item. Steps 1-3 and 5 are correct. Step 1: reconstruction gives a strict quasi-isomorphism a with a∘α_V=α_U, and with the adjunction unit v_P this gives c∘κ=comp. Step 2: the r=1 reflector criterion is exactly (ii), giving (ii)⇔(iii)⇔(iv). Step 3: the existential φ from the second paragraph of the reconstruction node, with iso-invariance of RHom, gives (ii); it does not use φ=κ. Step 5: unit-preserving uniqueness from the Hom bijection gives representative independence. Fault in Step 4: the triangle of lem-weil-pbc-ringed-strict-tower-homotopy-limit does not specify its first arrow, so the components π_{n,U} were unjustified. FIX: Step 4 now cites lem-pur-injective-tower-roos-shifts (same unit and setting; its first arrow is the actual product of limit projections), and the node is added to proof_deps. No cycle (closure checked). The counit/triangle-identity computation π_n∘comp=q_n is then correct. Edge cases checked: t invertible, t=0, and O=Z with t=p and P=Q. lem-pur-regular-quotient-completion-unit is the special case with exact products of this pre-existing item; maintainer note only. The declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RegularRoosKoszulUnit",
+  "declaration": "CategoryTheory.RegularRoosKoszul.regular_roos_koszul_unit",
+  "declarations": [
+   "CategoryTheory.RegularRoosKoszul.regular_roos_koszul_unit"
+  ],
+  "file": "lean/Sheaf/SixFunctors/RegularRoosKoszulUnit.lean",
+  "statement": "theorem regular_roos_koszul_unit\n    (t : (SheafOfModules.unit (ring.{c, v, r} R)).sections)\n    (_hreg : Mono (globalSectionMultiplication.{c, v, max c v r} R t)) :\n    ∃ _hproducts : HasCountableProducts (DerivedCategory.{w} (Modules.{c, v, r} R)),\n      ∀ (P : DerivedCategory.{w} (Modules.{c, v, r} R))\n        (Q : CochainComplex (Modules.{c, v, r} R) ℤ)\n        (e : DerivedCategory.Q.{w}.obj Q ≅ P)\n        (_hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q),\n      ∃ cP : koszulCompletion R Q t ≅ quotientLimit.{c, v, r, w} R Q t,\n        cP.hom = comparison.{c, v, r, w} R Q t ∧\n        koszulUnit.{c, v, r, w} R P Q e t ≫ cP.hom =\n          quotientUnit.{c, v, r, w} R P Q e t ∧\n        List.TFAE [\n          (∃ (p : P ⟶ ∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj\n                ((reductionTensorTower.{c, v, max c v r} R Q t).obj (op n))))\n              (δ : (∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj\n                ((reductionTensorTower.{c, v, max c v r} R Q t).obj (op n)))) ⟶ P⟦(1 : ℤ)⟧),\n            IsDerivedLimitTriangle\n              (fun n : ℕ ↦ DerivedCategory.Q.{w}.map\n                ((reductionTensorTower.{c, v, max c v r} R Q t).map\n                  (homOfLE (Nat.le_succ n)).op)) P p δ ∧\n            ∀ n : ℕ, p ≫ Pi.π _ n =\n              e.inv ≫ DerivedCategory.Q.{w}.map\n                (koszulRepresentativeQuotient.{c, v, max c v r} R Q t n)),\n          (∀ (W : C) (f : ((R.over W).obj ⋙ forget CommRingCat).sections),\n            (∃ y : R.obj.obj (op W),\n              (globalSectionMultiplication.{c, v, max c v r} R t).val.app (op W) y =\n                f.val (op (Over.mk (𝟙 W)))) →\n            IsZero ((derivedInternalHomOfUniverses.{max c v, v, r, w}\n                (J.over W) (R.over W)).obj\n              (op ((DerivedCategory.singleFunctor _ 0).obj\n                (ringedSectionLocalizationOfUniverses.{max c v r, max c v, v} (R.over W) f)),\n                (restriction.{c, v, r, w} R W).obj P))),\n          IsIso (koszulUnit.{c, v, r, w} R P Q e t),\n          IsIso (quotientUnit.{c, v, r, w} R P Q e t)] ∧\n        (∀ (Q' : CochainComplex (Modules.{c, v, r} R) ℤ)\n            (e' : DerivedCategory.Q.{w}.obj Q' ≅ P)\n            (_hQ' : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q'),\n          ∃ (hV : koszulCompletion R Q t ≅ koszulCompletion R Q' t)\n            (hU : quotientLimit.{c, v, r, w} R Q t ≅ quotientLimit.{c, v, r, w} R Q' t),\n            koszulUnit.{c, v, r, w} R P Q e t ≫ hV.hom =\n              koszulUnit.{c, v, r, w} R P Q' e' t ∧\n            quotientUnit.{c, v, r, w} R P Q e t ≫ hU.hom =\n              quotientUnit.{c, v, r, w} R P Q' e' t ∧\n            cP.hom ≫ hU.hom = hV.hom ≫ comparison.{c, v, r, w} R Q' t) ∧\n        (∀ (Q' : CochainComplex (Modules.{c, v, r} R) ℤ) (f : Q ⟶ Q'),\n          koszulMap.{c, v, r, w} R f t ≫ comparison.{c, v, r, w} R Q' t =\n            cP.hom ≫ quotientMap.{c, v, r, w} R f t ∧\n          koszulUnit.{c, v, r, w} R P Q e t ≫ koszulMap.{c, v, r, w} R f t =\n            e.inv ≫ DerivedCategory.Q.{w}.map f ≫\n              koszulUnit.{c, v, r, w} R (DerivedCategory.Q.{w}.obj Q') Q' (Iso.refl _) t ∧\n          quotientUnit.{c, v, r, w} R P Q e t ≫ quotientMap.{c, v, r, w} R f t =\n            e.inv ≫ DerivedCategory.Q.{w}.map f ≫\n              quotientUnit.{c, v, r, w} R (DerivedCategory.Q.{w}.obj Q') Q' (Iso.refl _) t)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the reviewed Q40 split unchanged. The actual normalized constant/limit unit is written by its canonical representative formula (ordinary adjunction unit followed by the total right-derived comparison), then the actual strict augmentation. The isomorphism is in the derived category; List.TFAE contains exactly conditions (i)-(iv), including the prescribed quotient components. Site object and morphism universes remain independent; the coefficient/module universe contains both. Additional existing statement dependencies name the canonical strict towers, their specified total limit, slice restriction and sheafified section localization used explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd70d75e1",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN at 0f6fb78e. Lean module byte-identical (sha256 0d0e8017…), so the earlier clause-by-clause acceptance stands. Item node vs live differs only in stmt_deps (theorem lem-pur-derived-complete-koszul-reconstruction replaced by new def-sf-koszul-total-derived-limit; theorem kept in proof_deps) and lean. New def node: existing:true on unchanged Sheaf.Paper.DerivedCompleteKoszulReconstruction (koszulRlim l.115 = choose of the strict-tower theorem, koszulCompletion l.122). Statement matches the Lean and sources Stacks 0941/0A0E; all body owners cited (strict-tower theorem, principal Koszul towers, ringedSiteModules, derived category, inverse system); no competing def owner; no cycle; check_new_node passes. F1 (mechanical): lean.statement carried `noncomputable`; fixes/def-sf-koszul-total-derived-limit.json is the full node with it trimmed, after which check_existing gives no failures or notes. No compile (records only, Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b73f0",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T005406-L-3477167",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (only forced universe annotations), relocated/normalized defs vs change record (augmentedUnit_previous_formula proves the old formula), new reflector statement vs Stacks 099B/0A0E and existing reflectors, nodes vs Lean; sandbox compile of Data, Reflector, item and importer QuotientCompletionActualReflector exit 0"
+ }
+}

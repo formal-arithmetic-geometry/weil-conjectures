@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-automorphism-twist-curve-lift",
+ "kind": "statement",
+ "title": "Automorphism twists of curves and compatible homeomorphic endomorphism lifts",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], and let $a:C\\to S=\\operatorname{Spec}k$ [def-weil-affine-spectrum] be a smooth proper integral curve of dimension one [def-kun-dimension], [def-weil-proper-morphism], [def-sc-curves], [def-pc-integral-scheme], [def-sbc-smooth-morphisms]. Let $\\sigma:k\\xrightarrow{\\sim}k$ be a field automorphism (a bijective unital field homomorphism), put $s=\\operatorname{Spec}(\\sigma)$, and form $T=C\\times_{S,s}S$ with projections $\\pi:T\\to C$ and $b:T\\to S$ [def-pc-base-change], [def-pc-fibre-product]. Then $a$ and $b$ are smooth of relative dimension one, $T$ is a smooth proper integral $k$-curve of dimension one, and $\\pi$ is an isomorphism of schemes with inverse $(\\operatorname{id}_C,s^{-1}a)$.\nFor any scheme endomorphism $u:C\\to C$ satisfying $au=sa$ and inducing a homeomorphism on underlying topological spaces, there is a unique $k$-morphism $v:C\\to T$ with $\\pi v=u$ and $bv=a$. It is a homeomorphism on underlying spaces, sends generic point to generic point [def-sc-generic-point], and does not factor through a $k$-rational point of $T$. On function fields [def-sc-function-field], its pullback (the generic stalk homomorphism) is injective and, writing $\\beta=\\pi^*:k(C)\\xrightarrow{\\sim}k(T)$, one has $v^*\\beta=u^*$. No $k$-linearity is asserted for $\\pi$, $\\beta$ or $u^*$. If $\\sigma=\\operatorname{id}_k$ and $u=\\operatorname{id}_C$, then $\\pi v=\\operatorname{id}_C$ identifies $v$ with the identity under the canonical identity-base-change identification.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCY (curves-lemma-inseparable-deg-p-smooth), proof, first paragraph; the automorphism-base-change and compatible-lift refinement of the diagram in varieties.tex Tag 0CCG (varieties-remark-n-fold-relative-frobenius)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum",
+  "def-kun-dimension",
+  "def-weil-proper-morphism",
+  "def-sc-generic-point"
+ ],
+ "proof": [
+  {
+   "text": "By functoriality of Spec, $s^{-1}=\\operatorname{Spec}(\\sigma^{-1})$. The relation $a\\pi=sb$ gives $s^{-1}a\\pi=b$. The fibre-product universal property therefore gives $j=(\\operatorname{id}_C,s^{-1}a):C\\to T$. Its first projection is $\\pi j=\\operatorname{id}_C$. The two projections of $j\\pi$ are $\\pi$ and $s^{-1}a\\pi=b$, so uniqueness gives $j\\pi=\\operatorname{id}_T$. Thus $\\pi$ is an isomorphism with precisely the asserted inverse.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), Cartesian diagram, with the automorphism refinement proved here"
+   }
+  },
+  {
+   "text": "The given $C$ is an integral separated finite-type curve of dimension one over $k$, so [lem-sc-curve-base-change-relative-dimension-one] applies. For the identity base map, the projection $q:C\\times_S S\\to C$ has inverse $(\\operatorname{id}_C,a)$ by the two projection equations, and its structure map is $aq$. Thus the lemma gives relative dimension one for $a$: the identified fibres have identical open sets and hence the same local dimensions. For the base map $s$, the lemma directly gives that $b$ is smooth of relative dimension one. Properness of $a$ and [lem-pc-proper-base-change](1) give properness of $b$, which includes separatedness and finite type. The isomorphism $\\pi$ identifies affine opens and their section rings; hence the domain condition defining integrality of $C$ holds for every nonempty affine open of $T$, and $T$ is nonempty. Its underlying homeomorphism identifies chains of irreducible closed subsets, so $\\dim T=\\dim C=1$. This proves all the claimed curve properties.",
+   "uses": [
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-pc-proper-base-change",
+    "def-pc-integral-scheme",
+    "def-kun-dimension",
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCY (lemma-inseparable-deg-p-smooth), first proof paragraph; geometric inputs Tags 01W4, 01VB, 02NK and 0A21(3)"
+   }
+  },
+  {
+   "text": "The equality $au=sa$ is exactly the compatibility required to form $v=(u,a):C\\to T$. The universal property gives $\\pi v=u$ and $bv=a$, and says that these equations determine $v$ uniquely. The second equation is the definition of being a morphism over $k$. Composing the first equation with $j$ gives $v=ju$. Thus on underlying spaces $|v|=|j|\\circ|u|$, a composite of homeomorphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), Cartesian diagram, with the automorphism refinement proved here"
+   }
+  },
+  {
+   "text": "An integral scheme is irreducible, and [lem-sc-scheme-sober] gives its unique generic point. A homeomorphism takes the closure of a singleton onto the closure of its image singleton. Applying this to $u$, $\\pi$, and $v$ shows that each sends the unique generic point to the unique generic point. If $v$ factored as $C\\to\\operatorname{Spec}k\\xrightarrow{t}T$ for a $k$-rational point $t$, its image would be a singleton, since $\\operatorname{Spec}k$ has one point. Surjectivity of $|v|$ would make $|T|$ a singleton; every nonempty irreducible closed-subset chain would then have length zero, contradicting $\\dim T=1$. Hence the asserted nonconstancy holds.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point",
+    "def-weil-affine-spectrum",
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober), and the definitions of generic point and topological dimension"
+   }
+  },
+  {
+   "text": "Use $k(C)=\\mathcal O_{C,\\eta_C}$ and $k(T)=\\mathcal O_{T,\\eta_T}$, which are fields by [def-sc-function-field]. Since the maps preserve generic points, pullback of a section on a neighbourhood followed by passage to its germ defines unital homomorphisms $u^*$, $v^*$ and $\\beta=\\pi^*$ between these fields. Pullbacks commute with restrictions, so these germ maps are well defined. On a germ represented by a section $f$, successive pullback gives $v^*(\\pi^*(f))=(\\pi v)^*(f)=u^*(f)$, hence $v^*\\beta=u^*$. Likewise $\\pi j=\\operatorname{id}$ and $j\\pi=\\operatorname{id}$ give $j^*\\beta=\\operatorname{id}$ and $\\beta j^*=\\operatorname{id}$ on germs; thus $\\beta$ is an isomorphism. Finally, if a nonzero $x\\in k(T)$ were killed by $v^*$, applying $v^*$ to $x x^{-1}=1$ would give $0=1$ in $k(C)$, impossible. Therefore $v^*$ is injective. These are homomorphisms of fields; the argument requires no $k$-linearity for $\\pi$, $\\beta$ or $u^*$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-function-field",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RW (definition-function-field); pullback of germs from the definition of a scheme morphism; compare Mathlib AlgebraicGeometry/Scheme.lean, stalkMap_id and stalkMap_comp, lines 915 and 919"
+   }
+  },
+  {
+   "text": "If $\\sigma=\\operatorname{id}_k$ and $u=\\operatorname{id}_C$, the constructions give $j=(\\operatorname{id}_C,a)$ and $v=(\\operatorname{id}_C,a)$. Thus $v=j$ and $\\pi v=\\operatorname{id}_C$; the canonical identity-base-change identification is $\\pi$, so under it $v$ is exactly the identity.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), Cartesian diagram, with the automorphism refinement proved here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-pc-proper-base-change",
+  "def-pc-integral-scheme",
+  "def-kun-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "def-pc-scheme",
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0CCG Cartesian diagram; general automorphism and homeomorphic-endomorphism refinement of Tag 0CCY first proof paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "functionFieldMap|functionField.*[Cc]omp|[Tt]wist.*[Aa]utomorphism",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/FunctionField.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence hits give only geometric properties; no declaration gives this semilinear lift and generic-stalk comparison for arbitrary curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth proper integral scheme twisted along a field automorphism is isomorphic as a scheme and compatible endomorphisms lift to the twist",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.autMap, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence hits give only geometric properties; no declaration gives this semilinear lift and generic-stalk comparison for arbitrary curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.functionFieldMap",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.Scheme.functionFieldMap'",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence hits give only geometric properties; no declaration gives this semilinear lift and generic-stalk comparison for arbitrary curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisting a smooth proper integral scheme by a field automorphism preserves smoothness properness and dimension, and a compatible self map lifts to the twist with functorial pullback on function fields",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence hits give only geometric properties; no declaration gives this semilinear lift and generic-stalk comparison for arbitrary curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic curve, scalar change by an automorphism of an algebraically closed field preserves the curve, and a semilinear homeomorphism induces a nonconstant map to the scalar twist",
+   "results": "8 hits; WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.instSMulVariableChange, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.VariableChange.map_id, WeierstrassCurve.VariableChange, WeierstrassCurve.instMulActionVariableChange, WeierstrassCurve.Projective.comp_equiv_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence hits give only geometric properties; no declaration gives this semilinear lift and generic-stalk comparison for arbitrary curves"
+  },
+  {
+   "tool": "grep",
+   "query": "functionFieldMap|[Tt]wist.*[Aa]utomorphism|[Aa]utomorphism.*[Cc]urve",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism scalar twist of a smooth proper curve admits a unique lift of each compatible semilinear endomorphism, preserving its topological and generic stalk behavior",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.autMap, IsLocalizedModule.lift_unique, CategoryTheory.PreGaloisCategory.autMap_unique, CategoryTheory.PreGaloisCategory.exists_autMap, CategoryTheory.PreGaloisCategory.autMap.congr_simp, CategoryTheory.PreGaloisCategory.autMapHom_apply, CategoryTheory.PreGaloisCategory.autMap_apply_mul, LinearMap.restrictScalarsRange",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.lift, AlgebraicGeometry.Scheme.Hom.functionFieldMap",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.Scheme.Hom.functionFieldMap'",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a smooth proper integral curve by a field automorphism and lift of a compatible scheme endomorphism with functorial function field pullback",
+   "results": "8 hits; WeierstrassCurve.baseChange_integralModel_eq, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.VariableChange.map_baseChange, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.map_baseChange, WeierstrassCurve.baseChange, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.IsIntegral.integral",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap_comp|stalkMap_id|isSmoothOfRelativeDimension_isStableUnderBaseChange|isProper_isStableUnderBaseChange",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of scalars along an isomorphism of fields gives an isomorphic scheme and semilinear maps factor uniquely through the scalar extension",
+   "results": "8 hits; IsBaseChange.linearMap, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Affine.Point.map_baseChange, IsBaseChange.ofEquiv, IsBaseChange.of_comp, IsBaseChange.comp_iff, IsBaseChange.iff_lift_unique, WeierstrassCurve.map_baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.lift",
+   "results": "12 hits; CategoryTheory.Limits.pullback.lift, CategoryTheory.Limits.pullback.lift_fst_snd, CategoryTheory.Limits.pullback.lift_fst, CategoryTheory.Limits.pullback.lift_snd, CategoryTheory.Limits.pullback.lift_fst_assoc, CategoryTheory.Limits.pullback.lift_snd_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.map_lift_pullbackComparison_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: pullback.lift covers the lift only, stalkMap_comp covers germ functoriality only, and the remaining hits concern narrower Weierstrass curves or module scalar extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-relative-frobenius-degree",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. The relative-Frobenius degree input of Stacks 0CCY, first paragraph, iterated using 0CCG. Extracts original steps 1-3: relative dimension, automorphism twist geometry, explicit projection inverse, compatible lift and generic-stalk functoriality.",
+   "via": [
+    "lem-sfb-smooth-curve-relative-frobenius-degree",
+    "lem-sfb-purely-inseparable-curve-frobenius",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-automorphism-twist-curve-lift",
+  "worker": "stage1",
+  "summary": "Proved the projection inverse and compatible lift directly by the fibre-product universal property; reused existing curve relative-dimension and proper-base-change results; proved generic-point, nonconstancy and function-field identities explicitly on topology and germs. No new nodes are required. Statement only gains explicit notion citations and clarifies that pullback means the generic stalk map. Repair of the 2026-10-23 return: rebased against the current unsplit live item, re-read every cited statement and verified all 18 retained full-statement quotations unchanged; made the identity-base-change projection equations and fibre-dimension identification explicit. Retained the existing argument, searches, sources and blueprint route.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. The relative-Frobenius degree input of Stacks 0CCY, first paragraph, iterated using 0CCG. Extracts original steps 1-3: relative dimension, automorphism twist geometry, explicit projection inverse, compatible lift and generic-stalk functoriality.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-curve-base-change-relative-dimension-one",
+    "why": "Generic geometric tool for relative dimension one of a smooth integral curve and its arbitrary base changes; the current unit is about constructible finite-Tor operations and supplies no curve-dimension theorem."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic geometric base-change permanence of properness; no step of the constructible finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic uniqueness of generic points of integral schemes, used only in the curve-geometric auxiliary argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-pc-proper-base-change",
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-e3f684528",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-e3f684528 (reviewer sub-agent of L); spot-checked: This re-delivery answers the L return of 2026-10-23 05:32Z for a7a3c3932fb, which was a promotion refusal (side completion never promoted), not a mathematical fault. The item is still unsplit on live and side-live, and no repair note names it. Compared with the earlier approved head, only step 2 changed: it now spells out that (id_C,a) is the inverse of the identity-base-change projection q, with structure map aq, so the fibre dimensions of a match. That is correct. def-pc-fibre-product was added to the step's uses. There are no new nodes, and the statement is live plus notion citations and the 'generic stalk homomorphism' gloss. I re-read the cited statements, all of which are unchanged. lem-sc-curve-base-change-relative-dimension-one allows an arbitrary T→Spec k, so it applies with both id and s; lem-pc-proper-base-change(1) gives properness; lem-sc-scheme-sober gives the unique generic point; def-sc-function-field gives that the integral generic stalk is a field. Steps 1-6 check out: j=(id,s⁻¹a) is a two-sided inverse of π by fibre-product uniqueness; v=(u,a)=ju is a homeomorphism; generic points are preserved; a factorisation through a rational point would make |T| one point, contradicting dim 1; germ functoriality gives v*β=u*; a map out of a field is injective; in the identity case v=j. Edge cases tested: σ=id/u=id, a nontrivial σ twist of P^1 (π not k-linear and not claimed to be), and the Frobenius-type u used by the parent relative-frobenius-degree. Source check: Stacks 0CCY proof, first paragraph (curves.tex l.2584) and 0CCG; the proof is marked agent-written and no SGA is cited. No duplicate found by rg -L. tool_uses accepted: the generic curve base-change lemma, proper base change, and scheme-sober (Mathlib leaf). Maintainer note: this item is in the side-completion promotion loop, and L has to promote it; re-pushing will not fix it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.AutomorphismTwistCurveLift",
+  "declaration": "AlgebraicGeometry.automorphism_twist_curve_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AutomorphismTwistCurveLift.lean",
+  "statement": "theorem automorphism_twist_curve_lift (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (a : C ⟶ Spec (.of k)) [IsCurve a] [Smooth a] [IsProper a] [IsIntegral C] (hCdim : topologicalKrullDim C = 1) (σ : k ≃+* k) : SmoothOfRelativeDimension 1 a ∧ SmoothOfRelativeDimension 1 (pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom))) ∧ IsProper (pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom))) ∧ IsCurve (pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom))) ∧ topologicalKrullDim ((pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom))) : Scheme.{u}) = 1 ∧ ∃ (_ : IsIntegral (pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)))), ∃ e : (pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom))) ≅ C, e.hom = (pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom))) ∧ e.inv ≫ (pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom))) = 𝟙 C ∧ e.inv ≫ (pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom))) = a ≫ Spec.map (CommRingCat.ofHom σ.symm.toRingHom) ∧ ∃ hπ : (pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom))) (genericPoint (pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)) : Scheme.{u})) = genericPoint C, ∃ β : C.functionField ≃+* (pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)) : Scheme.{u}).functionField, β.toRingHom = ((pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom))).functionFieldMap hπ).hom ∧ ∀ (u : C ⟶ C), u ≫ a = a ≫ Spec.map (CommRingCat.ofHom σ.toRingHom) → IsHomeomorph u → ∃ v : C ⟶ pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)), v ≫ pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom)) = u ∧ v ≫ pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom)) = a ∧ (∀ w : C ⟶ pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)), w ≫ pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom)) = u → w ≫ pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom)) = a → w = v) ∧ IsHomeomorph v ∧ (¬ ∃ t : Spec (.of k) ⟶ pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)), t ≫ pullback.snd a (Spec.map (CommRingCat.ofHom σ.toRingHom)) = 𝟙 (Spec (.of k)) ∧ a ≫ t = v) ∧ ∃ hv : v (genericPoint C) = genericPoint (pullback a (Spec.map (CommRingCat.ofHom σ.toRingHom)) : Scheme.{u}), ∃ hu : u (genericPoint C) = genericPoint C, Function.Injective (v.functionFieldMap hv).hom ∧ (v.functionFieldMap hv).hom.comp β.toRingHom = (u.functionFieldMap hu).hom ∧ (σ = RingEquiv.refl k → u = 𝟙 C → v ≫ pullback.fst a (Spec.map (CommRingCat.ofHom σ.toRingHom)) = 𝟙 C)",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-801fdc40f",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except lean record; 12 stmt_dep records identical to live; lean.statement verbatim in file. Clause-by-clause match: hypotheses = node's (IsCurve = separated+LFT+QC+dim≤1, implied by node hyps; Smooth, IsProper, IsIntegral C, dim C = 1); actual pullback a (Spec.map σ) with fst/snd; SmoothOfRelativeDimension 1 for a and b; IsProper/IsCurve/dim 1/IsIntegral of the twist as conclusions; e.hom = π with inverse pinned to (id, s⁻¹a); β pinned to π.functionFieldMap; ∀ u with u≫a = a≫s and IsHomeomorph u: v with both projection equations, uniqueness over all w with those equations, IsHomeomorph v, no k-point factorization (a ≫ t = v is equivalent since b∘v = a), generic points preserved, v* injective, v*∘β = u* (directions checked), identity case. All clauses mathematically true per the six proof steps. Edge cases: σ = id/u = id, nontrivial twist, Frobenius-type u, empty/0-dim excluded; universe u shared. functionFieldMap is the real canonical stalkSpecializes ≫ stalkMap helper (DivisorPullback), same convention as the parent. Docstrings carry source, blueprint id and six steps; sorry only; no defs. Worker report and Second reading by Q116 present. No recompile (no file changed). Advisories: unused private proof-plan imports; identity clause trivially implied but verbatim to node."
+ }
+}

@@ -125,7 +125,18 @@
   "item": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -169,5 +180,37 @@
   "landing": "20261012T053919-L-2629562",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring, $I$ a small filtered category and $i\\mapsto A_i$ a functor from $I$ to the category of commutative $R$-algebras, with transition maps $A(u):A_i\\to A_j$ for $u:i\\to j$, colimit $A=\\varinjlim_IA_i$ in that category and coprojections $\\iota_i:A_i\\to A$. Regard every $A_i$ and $A$ as $R$-modules and the $R$-algebra homomorphisms $A(u)$, $\\iota_i$ as $R$-linear maps. Then $(A,(\\iota_i)_{i\\in I})$ is a colimit of the diagram $i\\mapsto A_i$ in the category of $R$-modules: for every $R$-module $P$ and $R$-linear maps $f_i:A_i\\to P$ with $f_j\\circ A(u)=f_i$ for all $u:i\\to j$ there is exactly one $R$-linear map $f:A\\to P$ with $f\\circ\\iota_i=f_i$ for all $i$.",
+  "proof": [
+   {
+    "text": "Step 1 (the underlying set). The forgetful functor from commutative $R$-algebras to commutative rings preserves colimits over connected, in particular filtered, index categories, and the forgetful functor from commutative rings to sets preserves filtered colimits. Hence the underlying set of $A$, with the maps $\\iota_i$, is the colimit of the sets $A_i$: every element of $A$ has the form $\\iota_i(a)$ with $a\\in A_i$, and $\\iota_i(a)=\\iota_{i'}(a')$ exactly when $a$ and $a'$ become equal at some common later stage.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Step 2 (descent of the compatible maps). Regard the $R$-linear maps $f_i$ as functions; the hypothesis $f_j\\circ A(u)=f_i$ says they are compatible. By the universal property of the colimit of sets from step 1 there is a unique function $f:A\\to P$ with $f(\\iota_i(a))=f_i(a)$ for all $i$ and $a\\in A_i$. Well-definedness on representatives is part of this universal property.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Step 3 (linearity). Since $I$ is filtered, any two elements of $A$ can be written as $\\iota_i(a)$ and $\\iota_i(a')$ at a single stage $i$. Then $f(\\iota_i(a)+\\iota_i(a'))=f(\\iota_i(a+a'))=f_i(a+a')=f_i(a)+f_i(a')$, using additivity of $\\iota_i$ and of $f_i$. Similarly, for $r\\in R$, $f(r\\iota_i(a))=f(\\iota_i(ra))=f_i(ra)=rf_i(a)$. So $f$ is $R$-linear.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Step 4 (factorization and uniqueness). By step 2, $f\\circ\\iota_i=f_i$ for every $i$. Any other $R$-linear map $f'$ with $f'\\circ\\iota_i=f_i$ agrees with $f$ on every element $\\iota_i(a)$, and every element of $A$ is of this form by step 1. Hence $f$ is unique.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

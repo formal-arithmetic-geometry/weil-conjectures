@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-reductive-torus-self-centralizer",
+ "kind": "statement",
+ "title": "A geometrically maximal torus in a reductive group is its own scheme-theoretic centralizer",
+ "statement": "Let $k$ be a field [def-weil-field] with algebraic closure $\\bar k$. All group schemes are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to $\\bar k$. A torus is a group scheme $T$ such that $T_{\\bar k}\\simeq(\\mathbf G_m)^r$ for some integer $r\\geq0$, where $\\mathbf G_m$ is as in [def-sc-gm-ga]. A maximal torus in a group scheme is a torus subgroup not strictly contained in another torus subgroup. A smooth affine group is unipotent if in a faithful finite-dimensional matrix representation every geometric point $u$ satisfies $(u-I)^N=0$ for some $N\\geq1$. A smooth geometrically connected group $G$ is reductive if $G_{\\bar k}$ has no nontrivial smooth connected normal unipotent subgroup scheme. Let $G$ be reductive and let $T\\subseteq G$ be a torus such that $T_{\\bar k}$ is maximal in $G_{\\bar k}$. For a commutative $k$-algebra $A$, define $C_G(T)(A)$ to consist of the elements $g\\in G(A)$ whose image commutes with every element of $T(A')$ in $G(A')$ for every commutative $A$-algebra $A'$. Then the subgroup functor $C_G(T)$ equals $T$; in particular it is represented by the closed subgroup scheme $T\\subseteq G$. The equality is scheme-theoretic, including on nonreduced test algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}R$ and $T=\\operatorname{Spec}D$. The affine morphism correspondence [lem-weil-pbc-morphism-into-affine-scheme] and tensor-product universal property [def-pc-fibre-product] give $G\\times G=\\operatorname{Spec}(R\\otimes_kR)$. Its diagonal is closed because multiplication $R\\otimes_kR\\to R$ is surjective [def-weil-closed-immersion]. The same diagonal calculation for $R$ and $D$ checks separatedness of $G$ and $T$; finite sets of algebra generators check finite type for the product [def-weil-finite-type-morphism, def-weil-proper-morphism]. Apply [lem-sfb-constant-source-closed-factorization-locus] with $Y=T$, $S=G$, $X=G\\times G$, $W=\\Delta_G$, and $f(t,g)=(t,gtg^{-1})$ [def-sc-group-scheme]. It gives a closed subscheme $C\\subseteq G$. For $g:\\operatorname{Spec}A\\to G$, factorization through $C$ says conjugation by $g$ fixes $T_A$. This is exactly the all-$A\\prime$ condition: the reverse implication is tested on the universal point over $A\\otimes_kD$ [def-weil-affine-spectrum]. Products and inverses of elements centralizing all $T(A\\prime)$ again centralize them, so $C$ is a subgroup scheme [def-sc-group-scheme-subgroup]. The base-change clause, applied to $G_K\\to G$, identifies $C_K=C_{G_K}(T_K)$ for every field extension $K/k$: $T\\times_kS\\prime=T_K\\times_KS\\prime$ for any $K$-scheme $S\\prime$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92 and following paragraph, printed pp.33--34; explicit application of the existing factorization-locus theorem."
+   }
+  },
+  {
+   "text": "Put $K=\\bar k$, $H=G_K$, $S=T_K$ and $C_K=C_H(S)$ by step 1. The base-change assertion (2) of [lem-pc-proper-base-change] makes $H$ smooth. The hypotheses give that $H$ is connected with no nontrivial smooth connected normal unipotent subgroup, and that $S$ is maximal. By [lem-sfb-torus-centralizer-smooth-connected], $C_K$ is smooth and connected; by [sbc-lem-smooth-geometrically-reduced] it is reduced. For every Borel $B$ containing $S$, [lem-sfb-maximal-torus-centralizer-borel] gives $C_K\\subseteq B$, hence $C_K\\subseteq I=\\bigcap_{B\\supseteq S}B$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-maximal-torus-centralizer-borel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.61(a), printed p.372, first sentence and containment; Corollary 13.10 and Theorem 17.38."
+   }
+  },
+  {
+   "text": "The image of the connected scheme $C_K$ in $I$ is connected and contains the identity, so lies in its identity component [def-weil-connected-scheme]. Its map factors through the reduced closed subscheme supported there: any element of the defining radical ideal pulls back into every prime ideal of the reduced coordinate ring $K[C_K]$, hence is zero [def-weil-pbc-scheme-reduction]. Thus $C_K\\subseteq(I_{\\mathrm{red}})^\\circ$. By [lem-sfb-chevalley-borel-intersection] the latter is $R_u(H)\\cdot S$. Since $R_u(H)$ is smooth connected normal unipotent and $H$ is reductive, $R_u(H)=1$ by the hypothesis, and its product with $S$ is $S$. We obtain $C_K\\subseteq S$. Conversely $S$ is a split product of copies of $\\mathbf G_m$, so its points commute over every algebra [def-sc-gm-ga], giving $S\\subseteq C_K$. Consequently $C_K=S$ as closed subgroup schemes, not only on field points.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-pbc-scheme-reduction",
+    "lem-sfb-chevalley-borel-intersection",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.61(a), printed p.372, displayed chain using Theorem 17.56; reduction/component factorization written explicitly."
+   }
+  },
+  {
+   "text": "Let $J_C,J_T\\subseteq R$ be the defining ideals of $C,T\\subseteq G$ [def-weil-closed-immersion]. Step 1 and $C_K=T_K$ give $J_C(R\\otimes_kK)=J_T(R\\otimes_kK)$. For every $k$-vector space $V$, the map $V\\to V\\otimes_kK$, $v\\mapsto v\\otimes1$, is injective: for $v\\ne0$ extend $v$ to a basis and take the coefficient functional sending $v$ to $1$. Applied to $V=R/J_T$ and then $R/J_C$, this implies $J_C\\subseteq J_T$ and $J_T\\subseteq J_C$. Thus $C=T$ over $k$. The representing closed subschemes are equal, so their functors agree on every commutative $k$-algebra, including nonreduced ones.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.61(a), printed p.372, reduction to the algebraic closure; affine equality descent underlying 1.54(a)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme-subgroup",
+  "lem-pc-proper-base-change",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-maximal-torus-centralizer-borel",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-chevalley-borel-intersection",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.61(a), printed p.372; Proposition 1.92, Corollary 13.10, Theorem 17.38, Corollary 17.39(b), Theorem 17.56. Affine descent and component/reduction factorization supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic centralizer of a geometrically maximal torus in a reductive group equals the torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L} {H : LieSubalgebra R L}\\n  [self : H.IsCartanSubalgebra], H.normalizer = H\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is $ \\\\mathfrak{h} $ itself. This\"}\n  {\"name\": \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra], H.toLieSubmodule.normalizer = H.toLieSubmodule\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is equal to $ \\\\mathfrak{h} $ its\"}\n  {\"name\": \"Subgroup.centralizer_univ\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Subgroup.centralizer Set.univ = Subgroup.center G\", \"doc\": \"The centralizer of the universal set (i.e., the entire group $ G $) in a group $ G $ is equal to the center of $ G $, which consists of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib/GroupTheory/GroupAction/ConjAct\", \"type\": \"∀ {G : Type u_3} [inst : Group G], MulAction.fixedPoints (ConjAct G) G = ↑(Subgroup.center G)\", \"doc\": \"The set of fixed points of the conjugation action of a group $ G $ on itself is equal to the center of $ G $, i.e., the subgroup consisting of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"Subgroup.le_centralizer\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [h : IsMulCommutative ↥H], H ≤ Subgroup.centralizer ↑H\", \"doc\": \"If $ H $ is an abelian subgroup of a group $ G $, then $ H $ is contained in its centralizer in $ G $, i.e., $ H \\\\leq C_G(H) $.\"}\n  {\"name\": \"Subgroup.centralizer_eq_comap_stabilizer\", \"module\": \"Mathlib/GroupTheory/GroupAction/ConjAct\", \"type\": \"∀ {G : Type u_3} [inst : Group G] (g : G),\\n  Subgroup.centralizer {g} = Subgroup.comap ConjAct.toConjAct.toMonoidHom (MulAction.stabilizer (ConjAct G) g)\", \"doc\": \"For any element $g$ in a group $G$, the centralizer of the singleton set $\\\\{g\\\\}$ in $G$ is equal to the preimage under the conjugation action homomorphism of the stabilizer subgroup of $g$ in the conj\"}\n  {\"name\": \"ConjAct.stabilizer_eq_centralizer\", \"module\": \"Mathlib/GroupTheory/GroupAction/ConjAct\", \"type\": \"∀ {G : Type u_3} [inst : Group G] (g : G),\\n  MulAction.stabilizer (ConjAct G) g = Subgroup.centralizer {ConjAct.toConjAct g}\", \"doc\": \"For any element $ g $ in a group $ G $, the stabilizer of $ g $ under the conjugation action of $ G $ on itself is equal to the centralizer of the subset $ \\\\{g\\\\} $ in $ G $.\"}\n  {\"name\": \"Subgroup.centralizer_eq_top_iff_subset\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {s : Set G}, Subgroup.centralizer s = ⊤ ↔ s ⊆ ↑(Subgroup.center G)\", \"doc\": \"For any subset $ S $ of a group $ G $, the centralizer of $ S $ is equal to the entire group $ G $ if and only if $ S $ is a subset of the center of $ G $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or manifold Lie groups, not tori and centralizers of algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal tori of reductive algebraic groups are their own centralizers as group schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L} {H : LieSubalgebra R L}\\n  [self : H.IsCartanSubalgebra], H.normalizer = H\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is $ \\\\mathfrak{h} $ itself. This\"}\n  {\"name\": \"Subgroup.centralizer_univ\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Subgroup.centralizer Set.univ = Subgroup.center G\", \"doc\": \"The centralizer of the universal set (i.e., the entire group $ G $) in a group $ G $ is equal to the center of $ G $, which consists of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra], H.toLieSubmodule.normalizer = H.toLieSubmodule\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is equal to $ \\\\mathfrak{h} $ its\"}\n  {\"name\": \"Subgroup.centralizer_eq_top_iff_subset\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {s : Set G}, Subgroup.centralizer s = ⊤ ↔ s ⊆ ↑(Subgroup.center G)\", \"doc\": \"For any subset $ S $ of a group $ G $, the centralizer of $ S $ is equal to the entire group $ G $ if and only if $ S $ is a subset of the center of $ G $.\"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib/GroupTheory/GroupAction/ConjAct\", \"type\": \"∀ {G : Type u_3} [inst : Group G], MulAction.fixedPoints (ConjAct G) G = ↑(Subgroup.center G)\", \"doc\": \"The set of fixed points of the conjugation action of a group $ G $ on itself is equal to the center of $ G $, i.e., the subgroup consisting of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"LieSubalgebra.ucs_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra] (k : ℕ), LieSubmodule.ucs k H.toLieSubmodule = H.toLieSubmodule\", \"doc\": \"If $\\\\mathfrak{h}$ is a Cartan subalgebra of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, then for every natural number $k$, the $k$-th term of the upper central series of $\\\\mathfrak{h}$ (\"}\n  {\"name\": \"Subgroup.center_eq_infi'\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {s : Set G},\\n  Subgroup.closure s = ⊤ → Subgroup.center G = ⨅ g, Subgroup.centralizer {↑g}\", \"doc\": \"If a subset $ S $ of a group $ G $ generates $ G $, then the center of $ G $ is equal to the intersection of the centralizers of each element in $ S $. This means that every element commuting with all\"}\n  {\"name\": \"Subgroup.center_eq_iInf\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {s : Set G},\\n  Subgroup.closure s = ⊤ → Subgroup.center G = ⨅ g ∈ s, Subgroup.centralizer {g}\", \"doc\": \"If the subgroup generated by a subset $ S $ of a group $ G $ is the entire group $ G $, then the center of $ G $ is equal to the intersection of the centralizers of all individual elements in $ S $. I\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or manifold Lie groups, not tori and centralizers of algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"torus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or manifold Lie groups, not tori and centralizers of algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer.*torus|torus.*centralizer|reductive",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"14\", \"text\": \"This file is a home for lemmas about semisimple and reductive Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"18\", \"text\": \"  algebra with an irreducible faithful finite-dimensional representation is reductive.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"71\", \"text\": \"are called *reductive*, if the coefficients are a field of characteristic zero.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"74\", \"text\": \"the label 'reductive' should mean when the coefficients are not a field of characteristic zero. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or manifold Lie groups, not tori and centralizers of algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The centralizer of a maximal torus in a reductive group scheme equals the torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.centralizer\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"(s : Set G) : Subgroup G\", \"doc\": \"The centralizer of a subset $ S $ in a group $ G $ is the subgroup consisting of all elements of $ G $ that commute with every element of $ S $. This set is closed under multiplication and taking inve\"}\n  {\"name\": \"Subgroup.centralizer_closure\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"(s : Set G) : centralizer (closure s) = centralizer s\", \"doc\": \"For any subset $ S $ of a group $ G $, the centralizer of the subgroup generated by $ S $ is equal to the centralizer of $ S $ itself, i.e., $ C_G(\\\\langle S \\\\rangle) = C_G(S) $.\"}\n  {\"name\": \"AddSubgroup.centralizer\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → Set G → AddSubgroup G\", \"doc\": \"For an additive group $ G $ and a subset $ S \\\\subseteq G $, the centralizer of $ S $ is the additive subgroup of $ G $ consisting of all elements $ x \\\\in G $ such that $ x + y = y + x $ for every $ y \"}\n  {\"name\": \"AddSubgroup.centralizer_univ\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G], AddSubgroup.centralizer Set.univ = AddSubgroup.center G\", \"doc\": \"For any additive group $G$, the centralizer of the universal set (containing all elements of $G$) is equal to the center of $G$. The center of $G$ is the additive subgroup consisting of all elements t\"}\n  {\"name\": \"Subgroup.normalizerMonoidHom_ker\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \": H.normalizerMonoidHom.ker = (Subgroup.centralizer H).subgroupOf H.normalizer\", \"doc\": \"The kernel of the group homomorphism from the normalizer of a subgroup $ H $ to the automorphism group $ \\\\mathrm{Aut}(H) $, defined by conjugation action, is equal to the centralizer of $ H $ consider\"}\n  {\"name\": \"Subgroup.centralizer_univ\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \": centralizer Set.univ = center G\", \"doc\": \"The centralizer of the universal set (i.e., the entire group $ G $) in a group $ G $ is equal to the center of $ G $, which consists of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"Subgroup.centralizer_eq_top_iff_subset\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"{s : Set G} : centralizer s = ⊤ ↔ s ⊆ center G\", \"doc\": \"For any subset $ S $ of a group $ G $, the centralizer of $ S $ is equal to the entire group $ G $ if and only if $ S $ is a subset of the center of $ G $.\"}\n  {\"name\": \"ConjAct.stabilizer_eq_centralizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.ConjAct\", \"type\": \"(g : G) : stabilizer (ConjAct G) g = centralizer {toConjAct g}\", \"doc\": \"For any element $ g $ in a group $ G $, the stabilizer of $ g $ under the conjugation action of $ G $ on itself is equal to the centralizer of the subset $ \\\\{g\\\\} $ in $ G $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or manifold Lie groups, not tori and centralizers of algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic centralizer of a geometrically maximal torus in a reductive group equals the torus",
+   "results": "Search completed; 8 hits. Returned names/files: LieSubalgebra.IsCartanSubalgebra.self_normalizing, LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra, Subgroup.centralizer_univ, ConjAct.fixedPoints_eq_center, Subgroup.le_centralizer, Subgroup.centralizer_eq_comap_stabilizer, ConjAct.stabilizer_eq_centralizer, Subgroup.centralizer_eq_top_iff_subset. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"torus\"",
+   "results": "Search completed; 0 hits. Returned names/files: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer.*torus|torus.*centralizer|reductive",
+   "results": "Search completed; 4 hits. Returned names/files: Mathlib/Algebra/Lie/Semisimple/Lemmas.lean, Mathlib/Algebra/Lie/Semisimple/Lemmas.lean, Mathlib/Algebra/Lie/Semisimple/Defs.lean, Mathlib/Algebra/Lie/Semisimple/Defs.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori in reductive algebraic group schemes are self centralizing",
+   "results": "Search completed; 8 hits. Returned names/files: LieSubalgebra.IsCartanSubalgebra.self_normalizing, ConjAct.fixedPoints_eq_center, LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra, LieSubmodule.ucs_eq_self_of_normalizer_eq_self, Subgroup.centralizer, Set.subset_centralizer_centralizer, Submonoid.centralizer_centralizer_centralizer, LieSubalgebra.IsCartanSubalgebra.casesOn. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-centre-multiplicative-type",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b).",
+   "via": [
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reductive-torus-self-centralizer",
+  "worker": "stage1",
+  "summary": "Followed Milne Proposition 17.61(a), retaining all hypotheses and the scheme-theoretic conclusion. Reused the existing general closed factorization locus for centralizer representability/base change. Extracted exactly three geometric inputs for general smooth connected groups; checked that no exact project proof, DAG duplicate or Mathlib specialization exists. Wrote reduction to the reduced identity component and equality descent on ideals explicitly.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), proper/open direct-image route. This is the inherited alteration/moduli/PGL/reductive-centre prerequisite chain recorded in blueprint.from.place; Milne Proposition 17.61(a) supplies its self-centralizer input. The current blueprint does not itself state the extracted algebraic-group lemmas."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-c8563a8f7",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-c8563a8f7 (reviewer sub-agent of L); spot-checked: Read the item against Milne iAG2017 Prop 17.61(a), p.372 (PDF page = printed + 12): same hypotheses (G reductive via G_kbar, T_kbar maximal), scheme-theoretic conclusion C_G(T)=T, not weakened. Also read Prop 1.92, Cor 13.10, Thm 17.38, Cor 17.39(b) with 17.29, Thm 17.56 and section 17h. Step 1: lem-sfb-constant-source-closed-factorization-locus (same unit) with Y=T, S=G, X=GxG, W=diagonal, f(t,g)=(t,gtg^-1); the universal point over A tensor D gives the all-A' condition; its base-change clause gives C_K=C_{G_K}(T_K). Step 2: lem-pc-proper-base-change (2) and sbc-lem-smooth-geometrically-reduced are both Lean-closed tools; new node 1 gives smooth and connected, new node 2 gives containment in each Borel, hence in the sum-of-ideals intersection. Step 3: the reduced connected C_K factors through (I_red)^0; Chevalley (node 3) plus R_u(H)=1 gives C_K inside S; S is commutative, so equality. Step 4: equality of ideals descends because V -> V tensor K is injective; no perfectness needed. New nodes: torus-centralizer-smooth-connected (13.10+17.38 over kbar), maximal-torus-centralizer-borel (17.39(b), k algebraically closed), chevalley-borel-intersection (first equality of 17.56). All are true and are general inputs, not restatements of the item (D1 OK). Tested on r=0, G unipotent, G solvable (G=U x| T), GL_2 with the diagonal torus, G_a x G_m. Searched the whole DAG with rg -L (centralizer, Borel subgroup, unipotent radical, maximal torus, C_G, Milne numbers): no duplicate; reductive-borel-pair-structure and affine-group-centre-base-change differ. No SGA citations. proof_deps equals the union of uses. No tool_uses to accept. Snapshot review_split 'no such node' is the known false positive; I checked every cited id by hand. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReductiveTorusSelfCentralizer",
+  "declaration": "AlgebraicGeometry.ReductiveTorusCentralizer.reductive_torus_self_centralizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReductiveTorusSelfCentralizer.lean",
+  "statement": "theorem reductive_torus_self_centralizer {k : Type u} [Field k] {T G : Grp (Over (Spec (.of k)))} (i : T ⟶ G) (hG : IsReductive G) (hT : SolvableGroupStructure.IsAlgebraic T) (hi : IsClosedSubgroupScheme i.hom.hom) (ht : MultiplicativeType.IsTorus T) (hmax : IsMaximalTorus ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).map i)) : ∀ (A : Type u) [CommRing A] [Algebra k A], centralizerPoints i A = Set.range (fun t : StandardGroupSchemes.affine k A ⟶ T.X ↦ t ≫ i.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ab491273",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Item Lean matches node clause by clause: IsReductive (affine finite type, smooth, kbar-connected, no nontrivial closed normal connected smooth-unipotent U over kbar up to iso with Grp.trivial), closed torus T, hmax IsMaximalTorus of baseChange.map i (no strictly larger closed torus, distinct from landed IsLargestSubtorus), centralizerPoints tests every k-algebra map f:A→B and every t in T(B), no reducedness; conclusion ∀ A:Type u, centralizerPoints i A = range(t ↦ t ≫ i) is subfunctor equality represented via hi. New def node's 3 Lean bodies are real and match its statement; reuses landed torus/baseChange/IsAlgebraic/IsUnipotent; no duplicate found in side-live Sheaf/WeilConjectures, slopmaster2 or DAG lean records. Item diff vs side-live: lean + 3 def stmt_deps only; statements verbatim; imports per rule; docstrings with source/blueprint and 4 proof steps; sorry-only. Edge cases rank 0, nonmaximal, G_a×G_m, nonreduced/zero A checked. No compile needed (no change). Advisory: direct public imports of Tori/Solvable modules."
+ }
+}

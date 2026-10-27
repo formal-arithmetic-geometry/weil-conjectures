@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-special-linear-reductive",
+ "kind": "statement",
+ "title": "Special linear groups are reductive in every characteristic",
+ "statement": "Let $k$ be a field [def-weil-field], let $r\\geq1$, and let $E$ be an $r$-dimensional $k$-vector space. The special linear group scheme $G=\\operatorname{SL}(E)$ [def-sc-general-linear-group], representing $R\\mapsto\\{g\\in\\operatorname{Aut}_R(E\\otimes_kR):\\det(g)=1\\}$ on commutative $k$-algebras, is smooth, affine, of finite type, and geometrically connected (connectedness as in [def-weil-connected-scheme]). It is reductive: after extension to an algebraic closure it has no nontrivial smooth connected normal unipotent closed subgroup scheme [def-sc-group-scheme-subgroup]. Here unipotent means that, in a faithful finite-dimensional matrix representation, all geometric points are matrices $u$ with $(u-I)^N=0$ for some $N>0$. Smooth and finite type have the meanings in [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; group schemes have the meaning in [def-sc-group-scheme]. No characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 2.42, printed p.53 (smooth connected SL), Corollary 19.18 and Example 19.19, printed p.401 (standard faithful absolutely simple representation implies reductive); r=1 is the trivial group."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-general-linear-group",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of $E$. For every $k$-algebra $R$ it identifies $E\\otimes_kR$ with $R^r$, with automorphisms and determinant given by their matrices. Thus [def-sc-general-linear-group] identifies $G$ with $\\operatorname{Spec}C$, where $P=k[x_{ij}]$, $D=\\det(x_{ij})$ and $C=P/(D-1)$, and supplies its group structure and inclusion $j:G\\hookrightarrow H=\\operatorname{GL}_{r,k}$. The $r^2$ residue classes generate $C$, so this single affine chart makes $G$ of finite type by [def-weil-finite-type-morphism]. The same presentation has finitely many variables and one relation, so $G$ is locally of finite presentation by [def-sbc-locally-finite-presentation]. For $r=1$ it is $\\operatorname{Spec}k[x]/(x-1)=\\operatorname{Spec}k$.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2.42, printed p.53; determinant-one coordinate presentation in section 2.a; finite presentation written explicitly."
+   }
+  },
+  {
+   "text": "Write $B=P[1/D]$, the coordinate algebra of $H$. Define a ring map $q^*:C\\to B$ by $\\bar x_{i1}\\mapsto D^{-1}x_{i1}$ and $\\bar x_{ij}\\mapsto x_{ij}$ for $j>1$. Each monomial in the determinant contains exactly one entry of the first column, so its value on these images is $D^{-1}D=1$; hence the relation $D-1$ maps to zero. Polynomial evaluation [def-weil-pbc-mv-polynomial-ring] and the quotient construction [def-weil-pbc-algebra-hom-quotient] give this map. By [def-weil-affine-spectrum] it defines $q:H\\to G$, with $q(g)=g\\operatorname{diag}(\\det(g)^{-1},1,\\ldots,1)$. The map $j^*:B\\to C$ sends $D^{-1}$ to $1$, so $j^*q^*$ fixes every generator of $C$. Thus $qj=\\mathrm{id}_G$. This is a scheme retraction; it need not be a group homomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2.42, printed p.53: inverse to (A,t) ↦ A diag(t,1,...,1), followed by projection to SL."
+   }
+  },
+  {
+   "text": "The group $H$ is smooth by [lem-sfb-general-linear-reductive]. Let $T\\subset T'$ be any first order thickening of affine $k$-schemes and $a:T\\to G$ any $k$-morphism. By smoothness of $H$, in the lifting definition of [def-sbc-smooth-morphisms], $ja:T\\to H$ extends to a $k$-morphism $b:T'\\to H$. Then $qb:T'\\to G$ restricts to $qja=a$. Hence $G$ is formally smooth; together with its finite presentation from step 1, the same definition proves smoothness. This explicitly supplies every required lift, rather than invoking a new descent or retract theorem.",
+   "uses": [
+    "lem-sfb-general-linear-reductive",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2.42, printed p.53: scheme retraction; formal-smoothness lifting argument expanded using Stacks Tag 02H0 (more-morphisms, definition-formally-smooth)."
+   }
+  },
+  {
+   "text": "Let $K=\\bar k$. Base change preserves the equality $qj=\\mathrm{id}_G$, so $q_K:H_K\\to G_K$ is surjective on the underlying spaces. The geometric connectedness clause of [lem-sfb-general-linear-reductive] says that $H_K$ is connected. If $G_K=A\\amalg A'$ were a partition into two nonempty open-and-closed subsets, their inverse images under the continuous map $q_K$ would also be disjoint open-and-closed subsets covering $H_K$, and both would be nonempty by surjectivity. This contradicts [def-weil-connected-scheme]. The identity section gives a point of $G_K$, so it is nonempty. Thus $G_K$ is connected, which is the asserted geometric connectedness.",
+   "uses": [
+    "lem-sfb-general-linear-reductive",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2.42, printed p.53: connectedness from the GL ≅ SL × G_m decomposition; the continuous-image argument is written out."
+   }
+  },
+  {
+   "text": "For the remaining argument identify $G_K$ with $\\operatorname{SL}_{r,K}$ at the level of schemes. By [lem-weil-pbc-fibre-product-affine-spectra] its coordinate ring is $C\\otimes_kK$. Set $C_K=K[x_{ij}]/(D-1)$. Send $(\\bar f)\\otimes a$ to $a\\bar f$ in $C_K$, using [lem-weil-pbc-algebra-tensor-pushout-universal-property]. In the other direction send $a\\in K$ to $1\\otimes a$ and $x_{ij}$ to $\\bar x_{ij}\\otimes1$. Polynomial evaluation and the quotient relation give this map, since the determinant of the latter matrix is $1\\otimes1$. Both composites fix the coefficients and every variable and hence are the identity. These maps also preserve multiplication of matrices, identity and inverse: the coordinate formulas in [def-sc-general-linear-group] are finite sums, products and signed minors with integer coefficients. Thus this is an identification of group schemes as well as coordinate rings.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2.42 and Corollary 19.18: extension to an algebraic closure; explicit coordinate-algebra base change."
+   }
+  },
+  {
+   "text": "Let $U\\hookrightarrow G_K$ be any smooth connected normal unipotent closed subgroup scheme. By the affine closed-immersion criterion of [def-weil-closed-immersion], $U=\\operatorname{Spec}A$ with $C_K\\twoheadrightarrow A$; hence $A$ is a finitely generated $K$-algebra. The inclusion into $G_K\\subset\\operatorname{GL}_{r,K}$ is a rational representation on $K^r$. The unipotence hypothesis provides some faithful matrix representation of $U$ whose geometric points are unipotent; it is not necessary to assume this for the inclusion representation. Apply [lem-sfb-unipotent-rational-representation-fixed-vector]: $K$ is algebraically closed, $U$ is smooth, affine and of finite type, its given representation is faithful on all algebra-points, and $r\\geq1$. Therefore the subspace $W=\\{v\\in K^r:uv=v\\text{ for all }u\\in U(K)\\}$ contains a nonzero vector.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-unipotent-rational-representation-fixed-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 19.16, Corollary 19.18 and Example 19.19, printed p.401; Proposition 14.3, p.280, and Corollary 14.12, p.283 (fixed vectors from the matrix criterion)."
+   }
+  },
+  {
+   "text": "Normality [def-sc-group-scheme-subgroup] implies $g^{-1}ug\\in U(K)$ for $g\\in\\operatorname{SL}_r(K)$, $u\\in U(K)$. Consequently $u(gw)=g(g^{-1}ug)w=gw$ for $w\\in W$, so $W$ is stable under $\\operatorname{SL}_r(K)$. Choose $w\\in W$ with $w_j\\ne0$. If $r=1$, then $W=K^1$. If $r>1$, choose $i\\ne j$. The transvection $T_{ij}=I+E_{ij}$ has determinant $1$ (adding one row of the identity to a different row leaves its determinant unchanged) and inverse $I-E_{ij}$. Thus $T_{ij}w-w=w_je_i\\in W$ and $e_i\\in W$. For every $a\\ne i$, the determinant-one transvection $T_{ai}$ gives $T_{ai}e_i-e_i=e_a\\in W$. All basis vectors belong to $W$, so $W=K^r$. Hence every $u\\in U(K)$ has identity matrix. This calculation also works in characteristic $2$; no division by $r$, a characteristic, or a difference of field elements is used.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 19.16 and Example 19.19, printed p.401: normality preserves invariants and the standard SL representation is simple; explicit transvection proof."
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-geometrically-reduced], applied to $U\\to\\operatorname{Spec}K$, its coordinate algebra $A$ is reduced. It is finitely generated by step 6. Each image $a_{ij}$ of $x_{ij}-\\delta_{ij}$ in $A$ vanishes at every $K$-point by step 7. Clause 2 of [lem-wf-affine-nullstellensatz-vanishing] gives $a_{ij}=0$. The surjection $C_K\\twoheadrightarrow A$ thus sends every variable to its identity-matrix scalar, and therefore $K\\to A$ is surjective. The identity section of $U$ supplies a retraction $A\\to K$, so $K\\to A$ is also injective. Thus $A\\cong K$ and $U$ is the trivial subgroup scheme, not merely a subgroup with trivial $K$-points. This proves reductivity. Together with steps 1, 3 and 4 it gives all the asserted properties of $\\operatorname{SL}(E)$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 19.16 and Corollary 19.18, printed p.401; scheme-theoretic triviality expanded by Stacks Tag 056T (varieties, lemma-smooth-geometrically-normal) and affine Nullstellensatz."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-general-linear-group",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "lem-sfb-general-linear-reductive",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-closed-immersion",
+  "lem-sfb-unipotent-rational-representation-fixed-vector",
+  "def-sc-group-scheme-subgroup",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 2.42, printed p.53 (SL as a scheme retract of GL), Lemma 19.16, Corollary 19.18 and Example 19.19, printed p.401; the formal-smoothness lift, transvection simplicity calculation and scheme-level triviality are explicit expansions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The special linear algebraic group SL n over a field is smooth connected and reductive in every characteristic",
+   "results": "{\"t\": \"2026-10-23T13:41:07Z\", \"tool\": \"leanfinder\", \"query\": \"The special linear algebraic group SL n over a field is smooth connected and reductive in every characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup\", \"MatrixGroups.termSL(_,_)\", \"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.instInhabited\", \"SpecialLinearGroup.instInhabited\", \"Matrix.ProjectiveSpecialLinearGroup\", \"SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instGroup\"], \"digest\": \"1e804940ebbce99c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define abstract matrix groups SL and their group structure, not reductivity, smoothness or geometric connectedness of the group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "{\"t\": \"2026-10-23T13:41:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"Matrix.SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.hasInv\", \"Matrix.SpecialLinearGroup.hasMul\", \"Matrix.SpecialLinearGroup.hasOne\", \"Matrix.SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instInhabited\", \"Matrix.SpecialLinearGroup.monoid\"], \"digest\": \"723505ce3191821f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define abstract matrix groups SL and their group structure, not reductivity, smoothness or geometric connectedness of the group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "SpecialLinearGroup.*[Rr]educt|[Rr]educt.*SpecialLinearGroup|special linear.*reductive",
+   "results": "{\"t\": \"2026-10-23T13:41:03Z\", \"tool\": \"grep\", \"query\": \"SpecialLinearGroup.*[Rr]educt|[Rr]educt.*SpecialLinearGroup|special linear.*reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define abstract matrix groups SL and their group structure, not reductivity, smoothness or geometric connectedness of the group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The special linear group scheme is reductive",
+   "results": "{\"t\": \"2026-10-23T13:41:03Z\", \"tool\": \"leansearch\", \"query\": \"The special linear group scheme is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup\", \"MatrixGroups.term𝒮ℒ\", \"SpecialLinearGroup.instCoeFunForall\", \"Matrix.SpecialLinearGroup.topologicalGroup\", \"Matrix.SpecialLinearGroup.congr_simp\", \"SpecialLinearGroup.ext_iff\", \"Matrix.SpecialLinearGroup.instCoeFun\"], \"digest\": \"aa332d7e2dea17f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define abstract matrix groups SL and their group structure, not reductivity, smoothness or geometric connectedness of the group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SL determinant one matrices have trivial geometric unipotent radical",
+   "results": "{\"t\": \"2026-10-23T13:41:08Z\", \"tool\": \"leanfinder\", \"query\": \"SL determinant one matrices have trivial geometric unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.hasOne\", \"Matrix.SpecialLinearGroup.instInhabited\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Matrix.SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero\", \"Matrix.SpecialLinearGroup.scalar_eq_coe_self_center\", \"Subgroup.instHasDetOneRangeSpecialLinearGroupGeneralLinearGroupMapGL\", \"Subgroup.instHasDetOneMapSpecialLinearGroupGeneralLinearGroupToGL\"], \"digest\": \"091b8d173abce6d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define abstract matrix groups SL and their group structure, not reductivity, smoothness or geometric connectedness of the group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "SpecialLinearGroup.*(smooth|reductive|connected)|(smooth|reductive|connected).*SpecialLinearGroup",
+   "results": "{\"t\": \"2026-10-23T16:03:17Z\", \"tool\": \"grep\", \"query\": \"SpecialLinearGroup.*(smooth|reductive|connected)|(smooth|reductive|connected).*SpecialLinearGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, determinant-one identities or notation; none states smoothness, geometric connectedness or reductivity of an algebraic group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "SL determinant one group scheme has trivial smooth connected normal unipotent radical",
+   "results": "{\"t\": \"2026-10-23T16:03:17Z\", \"tool\": \"leansearch\", \"query\": \"SL determinant one group scheme has trivial smooth connected normal unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.det_eq_one\", \"SpecialLinearGroup\", \"SpecialLinearGroup.congr_linearEquiv_apply_apply\", \"Matrix.SpecialLinearGroup.det_coe\", \"SpecialLinearGroup.det_coe\", \"Matrix.SpecialLinearGroup.det_mapGL\", \"Matrix.SpecialLinearGroup.det_ne_zero\", \"Matrix.SpecialLinearGroup\"], \"digest\": \"f0a3e5e5657c00e2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, determinant-one identities or notation; none states smoothness, geometric connectedness or reductivity of an algebraic group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The special linear group scheme over a field is smooth geometrically connected affine and reductive",
+   "results": "{\"t\": \"2026-10-23T16:03:18Z\", \"tool\": \"leanfinder\", \"query\": \"The special linear group scheme over a field is smooth geometrically connected affine and reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup\", \"SpecialLinearGroup.instInhabited\", \"Matrix.SpecialLinearGroup.instInhabited\", \"Matrix.SpecialLinearGroup\", \"SpecialLinearGroup.instGroup\", \"Matrix.ProjectiveSpecialLinearGroup\", \"MatrixGroups.termSL(_,_)\", \"MatrixGroups.termPSL(_,_)\"], \"digest\": \"d8aa1fe636bde771\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, determinant-one identities or notation; none states smoothness, geometric connectedness or reductivity of an algebraic group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "{\"t\": \"2026-10-23T16:03:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"Matrix.SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.hasInv\", \"Matrix.SpecialLinearGroup.hasMul\", \"Matrix.SpecialLinearGroup.hasOne\", \"Matrix.SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instInhabited\", \"Matrix.SpecialLinearGroup.monoid\"], \"digest\": \"723505ce3191821f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, determinant-one identities or notation; none states smoothness, geometric connectedness or reductivity of an algebraic group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-projective-stability-affine-orbit-proper",
+  "by": "worker",
+  "date": "2026-10-23",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Projective stability and properness of the affine vector orbit map. Supporting input: Special linear groups are reductive in every characteristic.",
+   "via": [
+    "lem-sfb-projective-stability-affine-orbit-proper",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-special-linear-reductive",
+  "worker": "stage1",
+  "summary": "Eight-step proof from Milne: finite presentation, explicit GL-to-SL scheme retraction, smooth lifting, geometric connectedness, coordinate base change, unipotent fixed vector, elementary transvection simplicity and reduced affine vanishing. Reuses all supporting nodes; creates no new nodes. Adds only missing definition citations to the statement. Existing Mathlib searches retained and fresh searches read.",
+  "blueprint": "This is a supporting algebraic-group input to det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/moduli/GIT chain recorded in blueprint.from.place and via; specifically the SL reductivity prerequisite of lem-sfb-projective-stability-affine-orbit-proper. The latest sk-thm-sf-ctf-stability has no separate SL statement. Full-blueprint searches found only the definition of SL, not these properties; same_as is empty. The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor confirms this), so its existing provenance chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-a-field reducedness input for the coordinate algebra of U; no same-unit node supplies it."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic reduced affine vanishing principle to conclude scheme-theoretic triviality from matrix coordinate functions; no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-388cbe30a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-388cbe30a (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item and its 8 steps, every cited statement, and Milne iAG2017 §2.42 (printed p.53) and Lemma 19.16, Cor 19.18 and Ex 19.19 (printed p.401). There are no new nodes. The statement is unchanged apart from the definition citations def-weil-connected-scheme and def-sc-group-scheme-subgroup, both added to stmt_deps. The item is still unsplit in live and side-live, and there is no re-split note. Step 2's retraction q* (x̄_{i1}↦D^{-1}x_{i1}) kills D-1 and gives qj=id. Step 3 lifts via GL smoothness under the node's current lifting definition; the def-sbc-smooth-morphisms blueprint_update is not touched. Step 4: clopen preimages under the surjective q_K contradict connectedness of GL_{k̄}. Step 5: C⊗K≅K[x]/(D-1). Step 6 applies the fixed-vector node with all hypotheses present: K algebraically closed, U smooth affine finite type, faithful unipotent representation, ρ = the inclusion, d=r≥1. Step 7: normality makes W SL_r(K)-stable, and the transvections T_ij, T_ai (det 1, also in char 2) give W=K^r. Step 8: smooth gives reduced, then affine vanishing gives a_ij=0, so A=K and U is trivial as a scheme. Small cases r=1, r=2, char 2 and μ_p check out. There is no duplicate in a DAG search for SL, reductive or retract, no cycle (DFS over 187 nodes) and no SGA citation. I accept the tool_uses sbc-lem-smooth-geometrically-reduced and lem-wf-affine-nullstellensatz-vanishing as generic inputs with no same-unit node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecialLinearReductive",
+  "declaration": "AlgebraicGeometry.LinearGroupSchemes.specialLinear_reductive",
+  "declarations": [
+   "AlgebraicGeometry.LinearGroupSchemes.specialLinearBasis",
+   "AlgebraicGeometry.LinearGroupSchemes.specialLinearPointsOn",
+   "AlgebraicGeometry.LinearGroupSchemes.specialLinear_reductive"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecialLinearReductive.lean",
+  "statement": "theorem specialLinear_reductive (k : Type u) [Field k] (E : Type v) [AddCommGroup E] [Module k E] [FiniteDimensional k E] (hr : 1 ≤ Module.finrank k E) : ReductiveTorusCentralizer.IsReductive (Grp.mk (specialLinear k (Module.finrank k E))) ∧ ∀ (R S : Type u) [CommRing R] [CommRing S] [Algebra k R] [Algebra k S] (φ : R →ₐ[k] S) (x : StandardGroupSchemes.affine k R ⟶ specialLinear k (Module.finrank k E)) (v : E), TensorProduct.map φ.toLinearMap (LinearMap.id : E →ₗ[k] E) (specialLinearPointsOn k E R x (1 ⊗ₜ[k] v)) = specialLinearPointsOn k E S (StandardGroupSchemes.map k φ ≫ x) (1 ⊗ₜ[k] v)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Retains arbitrary finite-dimensional E in independent universe v. The existing dimension-finrank coordinate scheme represents SL(E) via specialPoints followed by the base-changed chosen basis; the theorem includes its naturality. Existing IsReductive contains exactly the stated geometric properties and scheme-theoretic triviality of smooth connected normal closed unipotent subgroups. Helpers are real constructions belonging to this point identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-654a2e9a9",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. SL(E) is the recorded specialLinear k (finrank k E); r>=1 is hr. Smooth, affine, finite type, kbar-connected and scheme-level triviality of smooth connected normal closed unipotent subgroups come from the landed IsReductive (via IsAlgebraic and IsUnipotent). specialLinearPointsOn is a real MulEquiv (pinned specialPoints then toLin_equiv of the base-changed basis); its naturality conjunct was checked true by hand. Node diff vs side-live is only lean plus the landed stmt_dep def-sfb-reductive-torus-centralizer-terminology. lean.statement verbatim; imports per rule; sorry-only; 8-step docstring with source and blueprint tag; no line over 100 chars. Edge cases r=1, char 2, p|r, mu_p, zero/nonreduced algebras and universes OK. No fixes, so no compile."
+ }
+}

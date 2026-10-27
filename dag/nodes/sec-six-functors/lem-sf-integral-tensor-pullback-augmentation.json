@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-integral-tensor-pullback-augmentation",
+ "kind": "statement",
+ "title": "Forward quotient augmentation commutes with tensor and pullback",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and let $f:X\\to Y$ be a scheme morphism with $\\ell$ invertible in every residue field. Use the completed coefficient sheaves of [def-pur-integral-compact-support-coefficient-data]. For $W=X,Y$, let $S_W$ be the ordinary signed tensor of [lem-fix-constructible-tensor-completion-presentation], with its representative comparison restricted to flat-term K-flat complexes, and let $T_W$ be the completed tensor. Let $\\tau_W:S_W\\to T_W$ be natural transformations whose full good-representative square is the one with the specified quotient/zero chain augmentation of [lem-fix-constructible-tensor-completion-chain]. Let $F$ be ordinary ringed pullback, $\\widehat F$ completed pullback, and $\\rho:F\\to\\widehat F$ the actual map of [lem-sf-integral-ordinary-pullback-comparison]. Let $v:F S_Y\\to S_X(F\\times F)$ be the canonical ordinary comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and let $c:\\widehat F T_Y\\to T_X(\\widehat F\\times\\widehat F)$ be the completed comparison of [def-pur-completed-pullback-tensor-comparison]. For all integral constructible $M,N$ on $Y$, the following equality holds: $F(\\tau_Y(M,N))\\,;\\,\\rho(T_Y(M,N))\\,;\\,c(M,N)=v(M,N)\\,;\\,\\tau_X(FM,FN)\\,;\\,T_X(\\rho(M),\\rho(N))$, where semicolons denote composition in the written order. No inverses of $\\tau$ or $\\rho$, properness, Noetherianness, finite dimension or higher operation data are assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection"
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-fix-constructible-tensor-completion-chain",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous flat-term K-flat representatives. Replace the tensor augmentations by their normalized chain equations and the pull comparison by its quotient augmentation after the adjunction-normalized ordinary pullback identification. In every quotient the two routes send x tensor y to the tensor of the pullbacks of 1 tensor x and 1 tensor y. Balancing and the canonical ordinary comparison identify these maps and their strict quotient transitions.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-fix-constructible-tensor-completion-chain",
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maps to the strict Roos cones have the same quotient components and zero shifted component. Mapping-cocone and product extensionality give equality before localization. Substitute the coherent-system definition of c, move reduction models through tensor and pullback by naturality, and cancel the effective reduction/limit counits. Faithful whiskering by the product good-complex localization descends the resulting square.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-ambient-operation-models",
+  "lem-fix-constructible-tensor-completion-chain",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor completion comparison commutes with ordinary derived pullback on constructible sheaves",
+   "results": "8 hits, including SheafOfModules.pullbackComp, pullbackIso and pullbackObjFreeIso. No completed tensor augmentation square.",
+   "date": "2026-10-27",
+   "verdict": "Use the project completion and representative normalization declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits including NatIso.ofComponents and its hom/inv component equations. These construct restrictions of the comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "Useful categorical assembly API, not the coefficient augmentation calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible|ordinaryIntegralCompletionComparison",
+   "results": "Indexed Mathlib search: 0 hits. Local source search finds ordinaryCompletedIntegralPullback, tensorCompletionComparison, tensorComplete_onConstructible and proEtaleCanonicalTensorComparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing invertibility results; the forward augmentation compatibility needs its own argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrdinaryTensorPullbackNormalization",
+  "date": "2026-10-27",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction; tensor and pullback normalization before forming the proper counit projection",
+   "via": [
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorPullbackAugmentation",
+  "file": "lean/Sheaf/Paper/IntegralTensorPullbackAugmentation.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.tensorPullback_augmentation",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.tensorModel",
+   "WeilConjectures.IntegralOrdinary.TensorAugmentationNormalized",
+   "WeilConjectures.IntegralOrdinary.tensorPullback_augmentation"
+  ],
+  "statement": "theorem tensorPullback_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (τX : (tensorModel l E X).tensor ⟶ integralCompletedTensor l E X)\n    (τY : (tensorModel l E Y).tensor ⟶ integralCompletedTensor l E Y)\n    (hX : TensorAugmentationNormalized l E X τX)\n    (hY : TensorAugmentationNormalized l E Y τY)\n    (M N : sfIntegralConstructibleCategory l E Y) :\n    (PurCompactSupport.pull (PurCompactSupport.completed l E) f).map\n        (τY.app (M.obj, N.obj)) ≫\n      (pullComparison l E f).app ((integralCompletedTensor l E Y).obj (M.obj, N.obj)) ≫\n      ((canonicalIntegralPullbackTensor l E f M N).hom).hom =\n    (proEtaleCanonicalTensorComparison f\n        ((PurCompactSupport.completed l E).ring Y)\n        ((PurCompactSupport.completed l E).ring X)\n        ((PurCompactSupport.completed l E).pull f)\n        (tensorModel l E Y) (tensorModel l E X)).hom.app (M.obj, N.obj) ≫\n      τX.app\n        ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj M.obj,\n          (PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj N.obj) ≫\n      (integralCompletedTensor l E X).map\n        (Prod.mkHom ((pullComparison l E f).app M.obj)\n          ((pullComparison l E f).app N.obj))",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T034806-L-3687251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T034806-L-3687251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

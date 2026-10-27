@@ -64,7 +64,18 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-weil-sheaf-complex"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-global-geometric-frobenius",
@@ -103,5 +114,15 @@
   "group": "Q127",
   "result": "pass",
   "note": "Re-delivery after the H13/H9 RETURN of 50cb9bd6. The item .lean is byte-identical apart from imports: the 6 unused imports were dropped and the item now imports GlobalGeometricFrobenius. The 3 Qbar defs are appended verbatim in section Qbar to NZ's live GlobalGeometricFrobenius.lean; the live text is unchanged. The def-weil-global-geometric-frobenius record keeps its module, declaration and statement, with declarations a superset (2+3) and a lean.note; lean.by NZ->Q127 is advisory. Substance re-checked: zlCommonStageShriek is the lower shriek along the identity compactification, G is its right adjoint, e is pinned by the counit identity, omega's carrier and HEq structure are pinned, and FiniteDimensional holds for both supports and all i; no extra hypotheses, u and v independent. The statement field is verbatim and the stmt_deps are used. nt_compile --json clean: dependency 8.8 s, item 5.7 s, TwFrobeniusAction 9.7 s, RealSheavesCohomologyEulerSeries 5.7 s."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a\nprime $\\ell\\neq p$. Write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure\n$\\Qlb$ of $\\Ql$, and choose a finite extension $E/\\Ql$ contained in $\\Qlb$.\nLet $Y_0$ be a separated finite-type\n[def-weil-scheme-morphism-properties] $k_0$-scheme, put\n$Y=Y_0\\times_{k_0}k$, set $\\gamma=\\operatorname{Frob}_q$, the geometric\nFrobenius [def-weil-frobenius-detailed], and\n$g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\gamma):Y\\to Y$, and\nlet $\\Lambda\\in\\{E,\\Qlb\\}$, regarded as a condensed ring, and choose a Weil\ncomplex $K\\in D^b_{c,\\mathrm W}(Y,\\Lambda)$ of [def-weil-weil-sheaf-complex],\nwith underlying object $\\operatorname{For}(K)$ in the condensed category\n$\\Dbc(Y,\\Lambda)$; for a pair $(K,\\theta)$ with $K\\in\\Dbc(Y,\\Lambda)$, read\n$\\operatorname{For}(K)=K$ and $\\theta_K=\\theta$ below. The Weil structure\n$\\theta_K$ of [def-weil-weil-sheaf-complex] is the isomorphism formed with the\nderived pullback [def-weil-derived-pullback-tensor-hom]\n$Lg_Y^*\\operatorname{For}(K)\\xrightarrow{\\sim}\\operatorname{For}(K)$, and the\nordinary cohomology [def-weil-ordinary-compact-cohomology] endomorphism is\ninduced by\n\n$$\n \\RGamma(Y,\\operatorname{For}K)\\xrightarrow{\\sim}\n \\RGamma(Y,Lg_Y^*\\operatorname{For}K)\n \\xrightarrow{\\RGamma(\\theta_K)}\\RGamma(Y,\\operatorname{For}K).\n$$\n\nThe compactly supported endomorphism is the explicitly defined composite\n\n$$\n\\RGammac(Y,\\operatorname{For}K)\\xrightarrow{\\sim}\n\\RGammac(Y,Lg_Y^*\\operatorname{For}K)\n \\xrightarrow{\\RGammac(\\theta_K)}\\RGammac(Y,\\operatorname{For}K),\n$$\n\nwhere $s=\\operatorname{Spec} k$ and\n$\\RGammac(Y,-)=\\operatorname{Fib}_s(Ra_{Y!}(-))$. Both operators, and their\nactions on cohomology [def-weil-ordinary-compact-cohomology], are denoted\n$F$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

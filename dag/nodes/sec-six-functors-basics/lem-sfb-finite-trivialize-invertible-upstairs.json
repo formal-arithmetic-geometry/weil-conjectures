@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open neighbourhood $U\\subseteq Z$ of $z$, and put $X=p^{-1}(U)$ and $L=M|_X$. By the definition of a finite morphism, $X$ is affine. The restricted map $q:X\\to U$ is finite: each affine open of $U$ is also an affine open of $Z$ and has the same inverse image and finite map of section rings. Restriction of the local rank-one trivializations of $M$ makes $L$ invertible. It suffices to find the required neighbourhood inside $U$, since $U$ is open in $Z$.",
+   "text": "Choose an affine open neighbourhood U of z in Z and let X = p⁻¹(U), i : X → Y its open immersion, and L = M.restrict i. Since p is finite, X is affine. Invertibility of L follows from invertibility of pullback and the restriction-pullback comparison isomorphism. We work directly with the original finite map p when shrinking the target.",
    "uses": [
     "def-pc-scheme",
     "def-weil-finite-integral-morphism",
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Apply the finite-fibre clause of [lem-weil-pbc-finite-closed-map-finite-fibres] to $q$ and $z$. Thus $E=q^{-1}(\\{z\\})$ is finite. Apply [lem-sfb-affine-invertible-finite-set-section] to the affine scheme $X$, the invertible module $L$, and this $E$, obtaining $s\\in\\Gamma(X,L)$ whose image in $L_x/\\mathfrak m_xL_x$ is nonzero for every $x\\in E$. No closedness of these points is needed.",
+   "text": "The set p⁻¹({z}) is finite by lem-weil-pbc-finite-closed-map-finite-fibres. Its inverse image E under the injective open immersion i is finite. Apply lem-sfb-affine-invertible-finite-set-section to X, L and E to obtain a global section s nonvanishing at every point of E.",
    "uses": [
     "lem-weil-pbc-finite-closed-map-finite-fibres",
     "lem-sfb-affine-invertible-finite-set-section"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-nonvanishing-section-trivializes], the locus $W=X_s=\\{x\\in X:s_x\\notin\\mathfrak m_xL_x\\}$ is open and multiplication by $s$ gives an isomorphism $\\mathcal O_W\\xrightarrow{\\sim}L|_W$. Step 2 gives $E\\subseteq W$. Set $C=X\\setminus W$, a closed subset of $X$.",
+   "text": "Apply lem-weil-pbc-nonvanishing-section-trivializes to s. Obtain an open W of X equal to the nonvanishing locus. Its unique-coefficient clause says that s restricted to W is a free generator on every subopen, so the free-generator isomorphism and the equivalence with modules on the open subscheme give L.restrict W.ι ≅ O_W. Put O = i(W), an open of Y. Every y in p⁻¹({z}) lies in p⁻¹(U); viewed as a point of E, it lies in W. Thus p⁻¹({z}) is contained in O.",
    "uses": [
     "lem-weil-pbc-nonvanishing-section-trivializes"
    ],
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "The closed-map clause of [lem-weil-pbc-finite-closed-map-finite-fibres] says that $q(C)$ is closed in $U$. Put $V=U\\setminus q(C)$. If $z$ belonged to $q(C)$, there would be $x\\in C$ with $q(x)=z$, contradicting $q^{-1}(\\{z\\})\\subseteq W$. Hence $z\\in V$. Moreover, if $x\\in q^{-1}(V)$ belonged to $C$, then $q(x)\\in q(C)$, contradicting $q(x)\\in V$. Thus $q^{-1}(V)\\subseteq W$.",
+   "text": "By the closed-map clause of lem-weil-pbc-finite-closed-map-finite-fibres, p(Y minus O) is closed. Define V = Z minus p(Y minus O). If z were in this image, its preimage point would both belong and not belong to O. Thus z is in V. If y belongs to p⁻¹(V) but not to O, its image would belong to p(Y minus O), a contradiction. Therefore p⁻¹(V) is contained in O.",
    "uses": [
     "lem-weil-pbc-finite-closed-map-finite-fibres"
    ],
@@ -61,7 +61,7 @@
    }
   },
   {
-   "text": "Restrict the isomorphism $\\mathcal O_W\\xrightarrow{\\sim}L|_W$ and its inverse to the open $q^{-1}(V)$. Their compositions remain identities under restriction, so they give the required trivialization. Since $V\\subseteq U$ and $U$ is open in $Z$, the set $V$ is an open neighbourhood of $z$ in $Z$, $q^{-1}(V)=p^{-1}(V)$, and $L|_{q^{-1}(V)}=M|_{p^{-1}(V)}$. This also handles an empty fibre: step 2 permits $E=\\varnothing$, and the same complement-of-image argument applies.",
+   "text": "Let j : W → Y be the composite open immersion W.ι followed by i. The range inclusion p⁻¹(V) ⊆ O gives the lift k : p⁻¹(V) → W with k followed by j equal to the inclusion in Y. Restriction-pullback comparison and composition transport L.restrict W.ι ≅ O_W to j* M ≅ O_W. Pull this isomorphism back along k; pullback composition, the factorization identity and pullback of the unit identify it with M.restrict (p⁻¹(V)).ι ≅ O_{p⁻¹(V)}. All constructions also apply when the fibre is empty.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -79,9 +79,11 @@
   "lem-weil-pbc-nonvanishing-section-trivializes"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0BUT, divisors-lemma-finite-trivialize-invertible-upstairs, proof (lines 3625–3652)."
+  "place": "Tag 0BUT, lemma-finite-trivialize-invertible-upstairs, proof; same affine-section/closed-image route, shrinking directly under p and using restriction-pullback comparison for the final isomorphism.",
+  "group": "V8",
+  "date": "2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -197,5 +199,27 @@
   "group": "NE",
   "result": "pass",
   "note": "Matches Stacks 0BUT and the node. Uses the recorded IsFinite and IsInvertible declarations; the conclusion is ∃ V : Z.Opens, z ∈ V ∧ Nonempty (M.restrict (p⁻¹ᵁV).ι ≅ unit), with restrictUnitIso identifying the right side as restricted O_Y. No extra hypotheses; the empty-fibre, empty-scheme and identity cases are covered. The only node change is the new lean record (the live node had none), and lean.statement is verbatim. Imports are the statement deps plus the proof-dep modules (Mathlib-leaf Proper/QuasiFinite, NonvanishingSectionTrivializes). Docstrings carry the source place, the five proof steps and the blueprint tag; the proof is sorry; report sections are present. No findings, no recompile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261023T132035-L-2188516",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

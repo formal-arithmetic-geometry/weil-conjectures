@@ -1,0 +1,328 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JU (lemma-fibre-product-immersion), 01JR (lemma-open-fibre-product), 01JQ (lemma-fibre-product-affines), 01I9 (lemma-widetilde-pullback); coherent.tex Tag 02KG (lemma-affine-base-change), with the explicit canonical-map normalization assembled by the agent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For every test scheme $W$, a map $W\\to Z\\times_X X\\mathord\\prime$ is a pair $z:W\\to Z$, $x\\mathord\\prime:W\\to X\\mathord\\prime$ with $i z=h x\\mathord\\prime$. The second map is itself a pair $(x,t\\mathord\\prime)$ with $f x=g t\\mathord\\prime$; substituting $x=i z$ leaves exactly the data $(z,t\\mathord\\prime)$ of a map $W\\to Z\\times_TT\\mathord\\prime$. The two constructions are inverse and preserve all projections, by the uniqueness clause of [def-pc-fibre-product]. This gives the specified identification with $Z\\mathord\\prime$. Apply [lem-pc-closed-subscheme-base-change-ideal-image] to $i$ and $h$. Its map is precisely $a$, since its $\\epsilon_h$ is adjoint to $h^\\sharp$; therefore $i\\mathord\\prime$ is closed and $\\ker b=\\operatorname{im}a$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-closed-subscheme-base-change-ideal-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JU (lemma-fibre-product-immersion), (1); fibre-product universal property"
+   }
+  },
+  {
+   "text": "The ideal $\\mathcal I$ is quasi-coherent by [def-sbc-closed-immersion-ideal-sheaf], hence so is $h^*\\mathcal I$ by [lem-weil-pbc-module-pullback-quasi-coherent]. Every structure module is locally $\\widetilde A$ on $\\operatorname{Spec}A$, so is quasi-coherent by [pqf-def-coherent]; in particular this applies to $\\mathcal O_Z$ and $\\mathcal O_{X\\mathord\\prime}$. The closed-immersion definition [def-weil-closed-immersion] makes $i\\mathord\\prime$ affine. Apply the quasi-coherent pushforward assertion of [lem-weil-pbc-affine-pushforward-base-change] to $i\\mathord\\prime$ and $\\mathcal O_{Z\\mathord\\prime}$ to obtain quasi-coherence of the third term.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "pqf-def-coherent",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/coherent.tex",
+    "place": "Tag 01JU (1); Tag 01I9 (lemma-widetilde-pullback); Tag 02KG (lemma-affine-base-change)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-pushforward-base-change], clause (2), to the cartesian square of step 1 with vertical map $i$ (affine by [def-weil-closed-immersion]). It gives the canonical $\\mathcal O_{X\\mathord\\prime}$-algebra isomorphism $\\beta:h^*i_*\\mathcal O_Z\\xrightarrow{\\sim}i\\mathord\\prime_*\\mathcal O_{Z\\mathord\\prime}$. Identify $h^*\\mathcal O_X$ with $\\mathcal O_{X\\mathord\\prime}$ using [lem-weil-pbc-module-pullback-structure-sheaf]. The pulled-back quotient composed with $\\beta$ is an $\\mathcal O_{X\\mathord\\prime}$-linear map from $\\mathcal O_{X\\mathord\\prime}$ that sends $1$ to $1$, since the maps are unital algebra maps. Restriction $b$ has the same property. On every open, linearity gives $s\\mapsto s\\cdot1$ for both maps, so they agree.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KG (lemma-affine-base-change), canonical affine computation; schemes Tag 01I9"
+   }
+  },
+  {
+   "text": "Fix $V,U,V\\mathord\\prime$ as in the statement. By [def-weil-affine-spectrum] the morphisms $U\\to V$ and $V\\mathord\\prime\\to V$ are $\\operatorname{Spec}$ of unique ring maps $R\\to A$, $R\\to R\\mathord\\prime$, which make $A,R\\mathord\\prime$ into $R$-algebras. By [def-weil-closed-immersion], $i^{-1}U=\\operatorname{Spec}(A/J)$ over $U$, and by [def-sbc-closed-immersion-ideal-sheaf] its ideal is $J=\\mathcal I(U)$. Apply [lem-weil-pbc-open-fibre-product] to identify $Q$ with $U\\times_V V\\mathord\\prime$, compatibly with projections; [lem-weil-pbc-fibre-product-affine-spectra] gives $Q=\\operatorname{Spec}(A\\otimes_RR\\mathord\\prime)$. Let $p_Z:Z\\mathord\\prime\\to Z$ and $q_Z:Z\\mathord\\prime\\to T\\mathord\\prime$ be the projections. Since $h\\circ i\\mathord\\prime=i\\circ p_Z$ and $(X\\mathord\\prime\\to T\\mathord\\prime)\\circ i\\mathord\\prime=q_Z$, we get $i\\mathord\\prime^{-1}Q=p_Z^{-1}(i^{-1}U)\\cap q_Z^{-1}(V\\mathord\\prime)$. Applying the same two statements to $Z\\times_TT\\mathord\\prime$ gives $i\\mathord\\prime^{-1}Q=(i^{-1}U)\\times_VV\\mathord\\prime=\\operatorname{Spec}(B\\otimes_RR\\mathord\\prime)$, where $B=A/J$. The morphism $i\\mathord\\prime^{-1}Q\\to Q$ is $\\operatorname{Spec}$ of a unique ring map [def-weil-affine-spectrum]; composing with the projections and using the fibre-product universal property [def-pc-fibre-product], it is the tensor of $A\\to B$ and the identity of $R\\mathord\\prime$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01JQ (lemma-fibre-product-affines), 01JU (1)"
+   }
+  },
+  {
+   "text": "These charts cover: for a point $q\\in X\\mathord\\prime$, choose an affine neighbourhood $V$ of its image in $T$. Choose affine neighbourhoods $U$ of $h(q)$ inside $f^{-1}V$ and $V\\mathord\\prime$ of its other projection inside $g^{-1}V$. Such choices exist since schemes have affine open neighbourhood bases [def-pc-scheme]. Then $q\\in h^{-1}U\\cap (X\\mathord\\prime\\to T\\mathord\\prime)^{-1}V\\mathord\\prime=Q$. This uses no affineness of arbitrary intersections.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "After Tag 01JR (lemma-open-fibre-product), affine-open covering paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-pullback-affine-sections] with morphism $h$, affine opens $U,Q$ and quasi-coherent module $\\mathcal I$ (quasi-coherent by [def-sbc-closed-immersion-ideal-sheaf]). The hypothesis $Q\\subset h^{-1}U$ holds by construction. It gives exactly the isomorphism $c:J\\otimes_A A\\mathord\\prime\\to(h^*\\mathcal I)(Q)$ with $c(j\\otimes d)=d\\,\\eta(j)|_Q$. In particular the map is the one normalized by the actual pullback unit, not an arbitrary isomorphism of these modules.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9 (lemma-widetilde-pullback), (1), with pullback-unit normalization"
+   }
+  },
+  {
+   "text": "The formula $j\\otimes(x\\otimes r\\mathord\\prime)\\mapsto xj\\otimes r\\mathord\\prime$ respects additivity, $R$-balancing in the inner tensor, and $A$-balancing in the outer tensor, since $(aj)x=j(ax)$. Its proposed inverse $j\\otimes r\\mathord\\prime\\mapsto j\\otimes(1\\otimes r\\mathord\\prime)$ respects $R$-balancing because $(rj)\\otimes(1\\otimes r\\mathord\\prime)=j\\otimes(1\\otimes rr\\mathord\\prime)$. The first composite fixes $j\\otimes r\\mathord\\prime$; the other fixes $j\\otimes(x\\otimes r\\mathord\\prime)$ because $xj\\otimes(1\\otimes r\\mathord\\prime)=j\\otimes(x\\otimes r\\mathord\\prime)$. Additivity proves both identities on all tensors. These formulas respect the $A\\mathord\\prime$-actions, so this is the asserted balanced module isomorphism. Composing its inverse with $c$ gives the requested identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KG (lemma-affine-base-change), final balanced tensor identity, written out"
+   }
+  },
+  {
+   "text": "Let $u:\\mathcal I\\hookrightarrow\\mathcal O_X$. Naturality in [lem-weil-pbc-module-pullback-affine-sections] gives $(h^*u)_Q(c(j\\otimes d))=d\\,\\eta(u(j))|_Q$. The unit equation in [lem-weil-pbc-module-pullback-structure-sheaf] then gives $a_Q(c(j\\otimes d))=d\\,h^\\sharp(j)|_Q=d(j\\otimes1)$. Substituting $d=1\\otimes r\\mathord\\prime$ from the inverse balanced isomorphism gives $j\\otimes r\\mathord\\prime\\mapsto j\\otimes r\\mathord\\prime$. By the projection-compatible affine identifications of step 4, $b_Q$ is induced by $A\\to B$, hence $b_Q(x\\otimes r\\mathord\\prime)=\\bar x\\otimes r\\mathord\\prime$. This proves both arrow formulas and all the stated identifications without flatness or finiteness.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9 (lemma-widetilde-pullback), functoriality; Tags 01JR/01JQ, projection coordinates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-scheme",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/coherent.tex",
+  "place": "Tags 01JU (1), 01JR, 01JQ, 01I9 and 02KG; explicit universal-property and pure-tensor calculations assembled by NR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical affine chart description of pullback of a closed immersion ideal under a base change over a scheme: J tensor A tensor R Rprime identifies with J tensor R Rprime, with inclusion and quotient maps and affine pushforward base change",
+   "results": "{\"t\": \"2026-10-22T07:21:45Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical affine chart description of pullback of a closed immersion ideal under a base change over a scheme: J tensor A tensor R Rprime identifies with J tensor R Rprime, with inclusion and quotient maps and affine pushforward base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Pullback.SpecOfPoint\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc\"], \"digest\": \"e9325b7b5d7a33d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of ideal sheaf has sections J tensor over A with A tensor over R Rprime; the map to the structure sheaf sends j tensor a tensor r to aj tensor r; closed immersion pushforward base change agrees with quotient ring map",
+   "results": "{\"t\": \"2026-10-22T07:26:29Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of ideal sheaf has sections J tensor over A with A tensor over R Rprime; the map to the structure sheaf sends j tensor a tensor r to aj tensor r; closed immersion pushforward base change agrees with quotient ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.SpecOfPoint\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\"], \"digest\": \"42c57573c370835e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+   "results": "{\"t\": \"2026-10-22T07:23:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules.tensorPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tensorPullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+   "results": "{\"t\": \"2026-10-22T07:23:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules.tensorPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tensorPullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, ShortExact",
+   "results": "{\"t\": \"2026-10-22T07:23:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules, ShortExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ShortExact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules",
+   "results": "{\"t\": \"2026-10-22T07:26:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian\", \"AlgebraicGeometry.Scheme.Modules.presheaf\"], \"digest\": \"11c50676169239f9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|tensorPullback|pullback.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T07:23:13Z\", \"tool\": \"grep\", \"query\": \"baseChange|tensorPullback|pullback.*[Ss]ection\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "comap|ker_fst|ideal_comap",
+   "results": "{\"t\": \"2026-10-22T07:29:03Z\", \"tool\": \"grep\", \"query\": \"comap|ker_fst|ideal_comap\", \"sub\": \"AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"39\", \"43\", \"44\", \"48\"], \"digest\": \"3dcc0b2dfd996eba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical affine chart comparison for pullback of a closed subscheme ideal and quotient under arbitrary base change, without flatness, including naturality of maps",
+   "results": "{\"t\": \"2026-10-22T07:27:21Z\", \"tool\": \"leansearch\", \"query\": \"Canonical affine chart comparison for pullback of a closed subscheme ideal and quotient under arbitrary base change, without flatness, including naturality of maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom\"], \"digest\": \"fb47de9b2ad4340e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component results only; no canonical affine diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|pullback.*[Ii]deal|tensor.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-23T11:11:46Z\", \"tool\": \"grep\", \"query\": \"baseChange|pullback.*[Ii]deal|tensor.*[Pp]ullback\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits supply closed-subscheme comap or affine spectrum projections, not the full unit-normalized module diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion ideal sheaf pullback canonical affine tensor section sequence under arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T11:11:46Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersion ideal sheaf pullback canonical affine tensor section sequence under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\"], \"digest\": \"bdc28e823f92baf8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits supply closed-subscheme comap or affine spectrum projections, not the full unit-normalized module diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.comap",
+   "results": "{\"t\": \"2026-10-23T11:11:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_id\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_mono\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_gc\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.comap_comp\"], \"digest\": \"364c82eaca1bc965\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits supply closed-subscheme comap or affine spectrum projections, not the full unit-normalized module diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical affine diagram for base change of a closed immersion ideal sequence including pullback unit tensor coordinates and quotient map without flatness",
+   "results": "{\"t\": \"2026-10-23T11:11:47Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical affine diagram for base change of a closed immersion ideal sequence including pullback unit tensor coordinates and quotient map without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.Scheme.Pullback.SpecOfPoint\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\"], \"digest\": \"a7d70957ed44fb91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits supply closed-subscheme comap or affine spectrum projections, not the full unit-normalized module diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "comap|ker_fst_of_isClosedImmersion",
+   "results": "{\"t\": \"2026-10-23T11:15:20Z\", \"tool\": \"grep\", \"query\": \"comap|ker_fst_of_isClosedImmersion\", \"sub\": \"AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"39\", \"43\", \"44\", \"48\"], \"digest\": \"3dcc0b2dfd996eba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits supply closed-subscheme comap or affine spectrum projections, not the full unit-normalized module diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of ordinary pullback of a quasicoherent ideal are extension of scalars and inclusion is j tensor c maps to image j times c with affine pushforward base change quotient compatibility",
+   "results": "{\"t\": \"2026-10-23T11:15:23Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of ordinary pullback of a quasicoherent ideal are extension of scalars and inclusion is j tensor c maps to image j times c with affine pushforward base change quotient compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.map\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_ideal'\"], \"digest\": \"4f60ed44e4c9eb61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits supply closed-subscheme comap or affine spectrum projections, not the full unit-normalized module diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-closed-family-ideal-base-change",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "lem-sfb-closed-ideal-base-change-affine-diagram",
+ "title": "Canonical affine diagram for base change of a closed ideal sequence",
+ "statement": "Let $f:X\\to T$, $i:Z\\to X$ and $g:T'\\to T$ be morphisms of schemes [def-pc-scheme], with $i$ a closed immersion [def-weil-closed-immersion]. Set $X'=X\\times_TT'$, $Z'=Z\\times_TT'$, $h:X'\\to X$, and let $i':Z'\\to X'$ be induced by $i$ [def-pc-fibre-product]. Let $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf]. Use ordinary module pullback [def-pc-module-pullback], its unit $\\eta$, and the canonical structure-sheaf map $\\epsilon_h:h^*\\mathcal O_X\\to\\mathcal O_{X'}$ adjoint to $h^\\sharp$. Define $a=\\epsilon_h\\circ h^*(\\mathcal I\\hookrightarrow\\mathcal O_X)$ and let $b:\\mathcal O_{X'}\\to i'_*\\mathcal O_{Z'}$ be restriction. Then $Z'\\cong Z\\times_XX'$ compatibly with all projections, $i'$ is a closed immersion, and $\\ker b=\\operatorname{im}a$. The three terms $h^*\\mathcal I,\\mathcal O_{X'},i'_*\\mathcal O_{Z'}$ are quasi-coherent [pqf-def-coherent]. Canonical affine pushforward base change identifies $h^*i_*\\mathcal O_Z$ with $i'_*\\mathcal O_{Z'}$, and carries the pulled-back quotient to $b$.\n\nFor affine opens $V=\\operatorname{Spec}R\\subseteq T$, $U=\\operatorname{Spec}A\\subseteq X$ with $f(U)\\subseteq V$, and $V'=\\operatorname{Spec}R'\\subseteq T'$ with $g(V')\\subseteq V$, write $i^{-1}U=\\operatorname{Spec}B$, $B=A/J$. The open $Q=h^{-1}U\\cap(X'\\to T')^{-1}V'$ is $U\\times_VV'=\\operatorname{Spec}A'$ with $A'=A\\otimes_RR'$, and $i'^{-1}Q=(i^{-1}U)\\times_VV'=\\operatorname{Spec}(B\\otimes_RR')$. All such $Q$ cover $X'$. On $Q$, the section sequence of $a,b$ identifies with\n$$J\\otimes_RR'\\xrightarrow{\\ j\\otimes r'\\mapsto j\\otimes r'\\ }A\\otimes_RR'\\xrightarrow{\\ x\\otimes r'\\mapsto\\bar x\\otimes r'\\ }B\\otimes_RR'.$$\nThe identification from $J\\otimes_RR'$ to $(h^*\\mathcal I)(Q)$ is the inverse of the balanced isomorphism displayed below, followed by the canonical pullback-unit map $J\\otimes_AA'\\to(h^*\\mathcal I)(Q)$, $j\\otimes c\\mapsto c\\,\\eta(j)|_Q$, where the balanced isomorphism is\n$$J\\otimes_A(A\\otimes_RR')\\xrightarrow{\\sim}J\\otimes_RR',\\qquad j\\otimes(x\\otimes r')\\mapsto xj\\otimes r',$$\nwhose inverse is $j\\otimes r'\\mapsto j\\otimes(1\\otimes r')$. In the $J\\otimes_AA'$ coordinates $a_Q(j\\otimes c)=(j\\otimes1)c$, and $b_Q(x\\otimes r')=\\bar x\\otimes r'$. No flatness or finiteness hypothesis is imposed.",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, identifying pulled-back ideal sheaves before any fibrewise cohomology argument; returned proof Steps 4, 5 (open-chart construction), 7 and Step 8 (quasi-coherence)",
+   "via": [
+    "lem-sfb-flat-closed-family-ideal-base-change",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-ideal-base-change-affine-diagram",
+  "worker": "stage1",
+  "summary": "Eight steps assemble existing DAG tools; no new nodes. The proof checks the projection-compatible chart cover, canonical affine pushforward comparison, balanced isomorphism and unit-normalized formulas for both arrows. No statement change, flatness or finiteness assumption.",
+  "blueprint": "Nearest imported ancestor is null as reported by blueprint_refs.py ancestor. Retain the inherited from.place/via: direct-images proof (3), Hilbert construction prerequisite, returned parent proof steps 4, 5, 7, 8. Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Generic closed-subscheme base-change image theorem supplies the ideal equality with exactly the adjoint structure-sheaf map, for the Hilbert-family prerequisite; this unit has no other such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-subscheme-base-change-ideal-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-59d812ca1",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-59d812ca1 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged from live, where it is still unsplit; 8 steps; 0 new nodes. Sources checked: Stacks 01JU(1) (the ideal is the image of g*I, not an injective pullback), 01JR, 01JQ, 01I9 and coherent 02KG (the identity (R'⊗A)⊗_A M = R'⊗M). Steps 1-8 are correct, each against the cited statements. Step 1: the test-scheme iso Z×_T T' ≅ Z×_X X' plus the ideal-image node with S=X, g=h; its ε_g is exactly a. Step 2: I is quasi-coherent by its definition node, then the pullback node, and clause (1) of the affine-pushforward node for i' (closed immersions are affine). Step 3: in clause (2), h*(i^♯)∘ε_h^{-1} is the unit of h*𝒜, so the algebra iso carries it to b. Step 5: the chart cover needs no separatedness. Step 6: c(j⊗d)=dη(j)|_Q. Step 7: balanced iso checked by hand, including A-balance and both composites. Step 8: naturality plus the unit equation give a_Q(j⊗r')=j⊗r'. Small cases: R=A=ℤ, J=(2), R'=𝔽₂ gives a=0 and b=id, consistent with an image-only statement; J=0, J=A and empty schemes also behave correctly. Duplicate search (rg -L for J⊗_R R', closed-immersion base-change and ideal-image phrases): lem-sc-ideal-tensor-image-comparison and lem-weil-pbc-closed-immersion-products are not duplicates. Accepted tool use: lem-pc-closed-subscheme-base-change-ideal-image, generic and declared. FIX (one C1-type gap): step 4 used, without citing it, that U→V, V'→V and i'^{-1}Q→Q are Spec of ring maps, and left i'^{-1}Q = p_Z^{-1}(i^{-1}U)∩q_Z^{-1}V' implicit. I added [def-weil-affine-spectrum] to step 4's text, uses and proof_deps, and wrote out the inverse-image line. Statement, stmt_deps and the other steps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedIdealBaseChangeAffineDiagram",
+  "declaration": "AlgebraicGeometry.closedIdealBaseChange_affineDiagram",
+  "declarations": [
+   "AlgebraicGeometry.closedIdealBaseChangeMap",
+   "AlgebraicGeometry.closedIdealBaseChangeArrow",
+   "AlgebraicGeometry.closedIdealBaseChangeAffineChart",
+   "AlgebraicGeometry.closedIdealBaseChange_affineDiagram"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedIdealBaseChangeAffineDiagram.lean",
+  "statement": "theorem closedIdealBaseChange_affineDiagram {X Z T T' : Scheme.{u}} (f : X ⟶ T) (i : Z ⟶ X) [IsClosedImmersion i] (g : T' ⟶ T) : IsPullback (pullback.fst (i ≫ f) g) (closedIdealBaseChangeMap f i g) i (pullback.fst f g) ∧ IsClosedImmersion (closedIdealBaseChangeMap f i g) ∧ Subobject.mk (kernel.ι (SheafOfModules.unitToPushforwardObjUnit (closedIdealBaseChangeMap f i g).toRingCatSheafHom)) = imageSubobject (closedIdealBaseChangeArrow i (pullback.fst f g)) ∧ ((tensorPullback (pullback.fst f g)).obj i.ker.toModules).IsQuasicoherent ∧ (SheafOfModules.unit (pullback f g).ringCatSheaf).IsQuasicoherent ∧ ((pushforward (closedIdealBaseChangeMap f i g)).obj (SheafOfModules.unit (pullback (i ≫ f) g).ringCatSheaf)).IsQuasicoherent ∧ ∃ w : pullback.fst (i ≫ f) g ≫ i = closedIdealBaseChangeMap f i g ≫ pullback.fst f g, IsIso (moduleBaseChangeMap i (closedIdealBaseChangeMap f i g) (pullback.fst f g) (pullback.fst (i ≫ f) g) w (SheafOfModules.unit Z.ringCatSheaf) ≫ (pushforward (closedIdealBaseChangeMap f i g)).map (tensorPullbackObjUnitToUnit (pullback.fst (i ≫ f) g))) ∧ (tensorPullback (pullback.fst f g)).map (SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom) ≫ (moduleBaseChangeMap i (closedIdealBaseChangeMap f i g) (pullback.fst f g) (pullback.fst (i ≫ f) g) w (SheafOfModules.unit Z.ringCatSheaf) ≫ (pushforward (closedIdealBaseChangeMap f i g)).map (tensorPullbackObjUnitToUnit (pullback.fst (i ≫ f) g))) = tensorPullbackObjUnitToUnit (pullback.fst f g) ≫ SheafOfModules.unitToPushforwardObjUnit (closedIdealBaseChangeMap f i g).toRingCatSheafHom ∧ (∀ (V : T.affineOpens) (U : X.affineOpens) (V' : T'.affineOpens) (hf : U.1 ≤ f ⁻¹ᵁ V.1) (hg : V'.1 ≤ g ⁻¹ᵁ V.1), closedIdealBaseChangeAffineChart f i g V U V' hf hg) ∧ (∀ q : (pullback f g : Scheme.{u}), ∃ (V : T.affineOpens) (U : X.affineOpens) (V' : T'.affineOpens), U.1 ≤ f ⁻¹ᵁ V.1 ∧ V'.1 ≤ g ⁻¹ᵁ V.1 ∧ q ∈ (pullback.fst f g ⁻¹ᵁ U.1 ⊓ pullback.snd f g ⁻¹ᵁ V'.1))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a38c022d",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Only the lean record changes; statement verbatim in file. Matches node clause by clause: IsClosedImmersion i only, universe u, no flat/finite hyps; IsPullback gives Z'≅Z×_X X' with projections; i' closed; ker b = im a (image-only, correct for ℤ→𝔽₂, J=(2)); 3 IsQuasicoherent conjuncts; canonical moduleBaseChangeMap≫i'_*ε IsIso + quotient square, same shape as landed affinePushforward_baseChange_algebra; choose(exists_tensorPullbackAdjunction) = tensorPullbackSectionAdjunction by ∃!. Chart clause fully pinned (eI by inclusion, eB by quotient, eA by pure tensors via both appLE, eB' by b-formula + surjectivity, c by generator formula + A'-linearity, balanced iso = Mathlib cancelBaseChange with both formulas, a/b/J⊗R' formulas); cover clause present. Edge cases J=0, J=A, empty schemes OK. No hollow defs, docstrings + 8-step proof, sorry only, no pro-étale content. Advisories: tensorPullbackObjUnitToUnit/moduleBaseChangeMap theorem-owned, not stmt_deps (S1 stmt_deps unchanged); parent flat-closed-family has identical flatClosedFamily* defs (item in parent proof_deps → stage-3 reuse); i'⁻¹Q fibre product via eB'+affineness; second reading is a self-check. No compile (no file changed)."
+ }
+}

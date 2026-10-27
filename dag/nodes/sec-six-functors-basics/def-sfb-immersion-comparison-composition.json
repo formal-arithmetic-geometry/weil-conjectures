@@ -1,0 +1,89 @@
+{
+ "id": "def-sfb-immersion-comparison-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(2), compatibility with composition; the precise q-composition hypothesis in the extracted normalized-immersion-comparison-coherence node",
+   "via": [
+    "lem-sfb-normalized-immersion-comparison-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Composition coherence of inverse-image comparisons",
+ "statement": "Given arbitrary categories Xr, Sr, Tr, Xs, Ss, Ts; restriction functors Lar:Xr→Sr, Lbr:Sr→Tr, Labr:Xr→Tr, Las:Xs→Ss, Lbs:Ss→Ts, Labs:Xs→Ts; isomorphisms cr:Labr≅Lar⋙Lbr and cs:Labs≅Las⋙Lbs; coefficient functors FX:Xr→Xs, FS:Sr→Ss, FT:Tr→Ts; and comparisons qa:FX⋙Las≅Lar⋙FS, qb:FS⋙Lbs≅Lbr⋙FT, qab:FX⋙Labs≅Labr⋙FT, define immersionComparisonComposition to mean that for every M in Xr, qab.hom.app M ≫ FT.map(cr.hom.app M) = cs.hom.app(FX.obj M) ≫ Lbs.map(qa.hom.app M) ≫ qb.hom.app(Lar.obj M). This specifies only q-composition coherence and supplies no comparison data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2), compatibility with composition; the precise q-composition hypothesis in the extracted normalized-immersion-comparison-coherence node"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalized.*comparison|comparison.*normalized|UnitNormalized",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide ordinary restriction/composition isomorphisms or other normalization constructions, rather than these specified comparison-normalization and q-composition equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define restriction normalization of a comparison natural isomorphism under counit isomorphisms and composition coherence of inverse image comparisons",
+   "results": "8 hits: CategoryTheory.OverPresheafAux.counit, ContAction.resComp, CategoryTheory.Monoidal.CommMonFunctorCategoryEquivalence.counitIso, Mathlib.Tactic.Monoidal.normalizeIsoComp, CategoryTheory.Limits.prodComparisonNatIso, CategoryTheory.StructuredArrow.commaMapEquivalenceCounitIso, CategoryTheory.FreeBicategory.normalizeIso, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide ordinary restriction/composition isomorphisms or other normalization constructions, rather than these specified comparison-normalization and q-composition equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction normalized comparison natural isomorphisms and their compatibility with composition of inverse image functors",
+   "results": "8 hits: AlgebraicGeometry.morphismRestrictRestrict, ContAction.resComp, CategoryTheory.Pi.comapComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, ModuleCat.restrictScalarsComp'App_inv_naturality, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide ordinary restriction/composition isomorphisms or other normalization constructions, rather than these specified comparison-normalization and q-composition equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedImmersionComparisonCoherence",
+  "date": "2026-10-24",
+  "group": "Z9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ImmersionComparisonComposition",
+  "file": "lean/Sheaf/CategoryTheory/ImmersionComparisonComposition.lean",
+  "declaration": "CategoryTheory.immersionComparisonComposition",
+  "statement": "def immersionComparisonComposition\n    {Xr Sr Tr Xs Ss Ts : Type*}\n    [Category Xr] [Category Sr] [Category Tr] [Category Xs] [Category Ss] [Category Ts]\n    (Lar : Xr ⥤ Sr) (Lbr : Sr ⥤ Tr) (Labr : Xr ⥤ Tr)\n    (Las : Xs ⥤ Ss) (Lbs : Ss ⥤ Ts) (Labs : Xs ⥤ Ts)\n    (cr : Labr ≅ Lar ⋙ Lbr) (cs : Labs ≅ Las ⋙ Lbs)\n    (FX : Xr ⥤ Xs) (FS : Sr ⥤ Ss) (FT : Tr ⥤ Ts)\n    (qa : FX ⋙ Las ≅ Lar ⋙ FS) (qb : FS ⋙ Lbs ≅ Lbr ⋙ FT)\n    (qab : FX ⋙ Labs ≅ Labr ⋙ FT) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261024T191853-L-528293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261024T191853-L-528293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

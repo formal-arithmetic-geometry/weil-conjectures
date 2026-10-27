@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-space-module-surjectivity-open",
+ "kind": "statement",
+ "title": "Universal openness of module surjectivity with proper target support",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and use algebraic spaces [def-trf-algebraic-space] and their sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Use quasi-coherent modules on small etale ringed sites and tensor pullback [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it is the cokernel of a map between finite rank free modules. Relative flatness means flatness of stalks on etale scheme charts over the local rings of the base [def-pc-scheme-module-flat-over]. A finite type module is etale locally finitely generated; support proper over the base means there are a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $N$ on $Z$ with $i_*N\\simeq M$, as in [def-sfb-space-proper-quot-functor]. Let $f:X\\to B$ be locally of finite presentation [def-sfb-space-morphism-properties], and let $u:F\\to G$ be a homomorphism of quasi-coherent $\\mathcal O_X$-modules. Assume $G$ is of finite type and has support proper over $B$. For each scheme $T\\to B$ put $X_T=X\\times_BT$ and let $u_T:F_T\\to G_T$ be tensor pullback of $u$ along $X_T\\to X$. Define the subfunctor $V_u$ of $B$ by $V_u(T)=\\{b:T\\to B\\mid u_T:F_T\\to G_T\\text{ is surjective}\\}$. There is an open subspace $V\\hookrightarrow B$ [def-a1-space-open-subspace] with natural identifications $\\operatorname{Hom}_S(T,V)=V_u(T)$ for every $S$-scheme $T$. In particular factorization through $V$ characterizes surjectivity after arbitrary, including nonflat, base change. No finite type assumption on $F$ or flatness assumption on $G$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 09TP, lemma-F-surj-open, with situation-iso."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=\\operatorname{Coker}(u)$. By [lem-sfb-space-qcoh-kernels-colimits] it is quasi-coherent. The images of any finite local generating family of $G$ generate its quotient $C$, so $C$ is of finite type. Tensor pullback is left adjoint to the specified direct image [def-trf-space-etale-module-functors]; hence [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the finite cokernel diagram, gives $\\operatorname{Coker}(u_T)\\simeq C_T$ for every $T\\to B$. In particular $u_T$ is surjective exactly when $C_T=0$. No left exactness of tensor pullback is used.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 09TP (lemma-F-surj-open), first two sentences."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-finite-type-support-pullback], $D=\\operatorname{Supp}_X(C)$ is closed. Since $C$ is a quotient of $G$, a zero stalk of $G$ gives a zero stalk of $C$, so $D\\subseteq\\operatorname{Supp}_X(G)$. Choose the proper closed carrier $i:Z\\hookrightarrow X$, $i_*N\\simeq G$ from the hypothesis. Outside $|i|(|Z|)$ the direct-image chart diagram has only empty-source sections and its limit is zero [def-trf-space-etale-module-functors]; therefore $D\\subseteq|i|(|Z|)$. The point map $|i|$ is continuous [lem-a1-space-point-open-calculus], so $|i|^{-1}(D)$ is closed. Properness means universal closedness in [def-sfb-space-morphism-properties]. Thus $E=|f|(D)=|fi|(|i|^{-1}(D))$ is closed in $|B|$.",
+   "uses": [
+    "lem-sfb-space-finite-type-support-pullback",
+    "def-trf-space-etale-module-functors",
+    "lem-a1-space-point-open-calculus",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 09TP, final sentence, using the proper-carrier meaning of support proper over the base."
+   }
+  },
+  {
+   "text": "Let $O=|B|\\setminus E$. The invariant-open quotient construction [lem-a1-space-invariant-open-quotient], applied to any etale scheme atlas of $B$, gives an open subspace $j:V\\hookrightarrow B$ with point image $O$.",
+   "uses": [
+    "lem-a1-space-invariant-open-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 09TP, displayed open subset and reference to Tag 03BZ."
+   }
+  },
+  {
+   "text": "Fix any $b:T\\to B$ and write $p:X_T\\to X$, $f_T:X_T\\to T$. By [lem-sfb-space-finite-type-support-pullback], $\\operatorname{Supp}(C_T)=|p|^{-1}(D)$. The stalk-conservativity theorem [lem-sfb-space-geometric-points-conservative], applied to $C_T\\to0$, says $C_T=0$ exactly when this set is empty. Realize $D$ as the point image of a reduced closed subspace $H\\hookrightarrow X$ using [lem-sfb-space-reduced-closed-support]. Its base change $H_T\\hookrightarrow X_T$ has point image $|p|^{-1}(D)$. Associativity of the sheaf fibre products identifies $H_T$ with $H\\times_BT$. The arbitrary Cartesian point-image identity of [lem-a1-space-point-open-calculus] gives $|f_T|(\\operatorname{Supp}(C_T))=|b|^{-1}(|f|(D))=|b|^{-1}(E)$. A set is empty if and only if its image under a function is empty. Consequently $C_T=0$ if and only if $\\operatorname{im}|b|\\subseteq O$. This applies equally to nonflat base change.",
+   "uses": [
+    "lem-sfb-space-finite-type-support-pullback",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-geometric-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 09TP, support pullback and representability inference; Tag 03H4 point lifting made explicit."
+   }
+  },
+  {
+   "text": "By [lem-a1-space-open-factor-scheme-tests], $\\operatorname{im}|b|\\subseteq O$ is equivalent to unique factorization of $b$ through $j:V\\hookrightarrow B$. Together with steps 1 and 4 this gives the required bijection $\\operatorname{Hom}_S(T,V)\\simeq V_u(T)$. For $T\\prime\\to T$, composition of the unique factorization gives the unique factorization over $T\\prime$; tensor-pullback composition sends $u_T$ to $u_{T\\prime}$. Hence the bijections are natural. The zero target yields $V=B$, and empty bases and empty fibres are included by the same empty-support criterion.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 09TP, conclusion, with naturality of the representing bijection written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-space-finite-type-support-pullback",
+  "lem-a1-space-point-open-calculus",
+  "def-sfb-space-morphism-properties",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-a1-space-open-factor-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 09TP (lemma-F-surj-open), entire proof, with the Cartesian point-lifting argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of a homomorphism of quasi coherent sheaves with finite type target and proper support is represented by an open subspace of the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being surjective for morphisms of schemes is Zariski local at the target. That is, if a morphism $ f: X \\\\to Y $ is surjective, then for any Zariski covering sieve on $ Y $, there exist\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U))\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the canonical morphism $\\\\iota: Z \\\\to X$ from the closed subscheme $Z$ defined by an ideal sheaf $\\\\mathcal{I}$ induces a surjective map $\\\\iota_U: \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [AlgebraicGeometry.IsClosedImmersion f],\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app f U))\", \"doc\": \"Let $f: X \\\\to Y$ be a closed immersion of schemes, and let $U$ be an affine open subset of $Y$. Then the canonical ring homomorphism from the ring of sections of the structure sheaf of $Y$ over $U$ to\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Surjective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $ R_f $ of a commutative ring $ R $ at an element $ f $ to the ring of sections $ \\\\mathcal{O}(D(f)) $ in the structure sheaf over the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) (e : X ⟶ Y) [AlgebraicGeometry.Surjective e],\\n  CategoryTheory.CategoryStruct.comp e g = f →\\n    ∀ (s : ↥S),\\n      s ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ↔\\n        s ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.\", \"doc\": \"For schemes $X, Y, S$ and morphisms $f: X \\\\to S$, $g: Y \\\\to S$, and $e: X \\\\to Y$ with $e$ surjective, the condition $e \\\\circ g = f$ implies that a point $s \\\\in S$ lies in the image of $f$ if and only \"}\n  {\"name\": \"AlgebraicGeometry.surjective_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Surjective f ↔ Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map between their topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f],\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map on topological spaces is surjective.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal locus where a map of sheaves becomes surjective is open when the target has proper support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being surjective for morphisms of schemes is Zariski local at the target. That is, if a morphism $ f: X \\\\to Y $ is surjective, then for any Zariski covering sieve on $ Y $, there exist\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsLocallySurjectiveHomObjForgetTypeToImage\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {F G : CategoryTheory.Sheaf J (Type w)} (f : F ⟶ G),\\n  CategoryTheory.Sheaf.IsLocallySurjective (CategoryTheory.Sheaf.toImage f)\", \"doc\": \"For any sheaves $ F $ and $ G $ on a category $ \\\\mathcal{C} $ with values in $ \\\\mathbf{Type} $ and a morphism $ f : F \\\\to G $, the canonical natural transformation from $ F $ to the image sheaf of $ f\"}\n  {\"name\": \"CategoryTheory.Sheaf.locallySurjective\", \"module\": \"Mathlib/CategoryTheory/Sites/EpiMono\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u') →\\n        [inst_1 : CategoryTheory.Category.{v', u'} A] →\\n          {FA : A → A → Type u_1} →\\n            {CA : A → Type w} →\\n              [inst_2 : (X Y : A) → FunLike\", \"doc\": \"A property of morphisms between sheaves stating that a morphism $\\\\phi: F \\\\to G$ is locally surjective if, for every object $c \\\\in \\\\mathcal{C}$, there exists a covering sieve $S$ on $c$ such that for e\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsLocallySurjective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {A : Type u'} →\\n        [inst_1 : CategoryTheory.Category.{v', u'} A] →\\n          {FA : A → A → Type u_1} →\\n            {CA : A → Type w'} →\\n              [inst_2 : (X Y : A) → FunLik\", \"doc\": \"A morphism $\\\\phi: F \\\\to G$ between sheaves $F$ and $G$ on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is locally surjective if, for every object $c \\\\in \\\\mathcal{C}$, there exi\"}\n  {\"name\": \"TopCat.Presheaf.isLocallySurjective_iff\", \"module\": \"Mathlib/Topology/Sheaves/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC] {X : TopCat}\\n  {ℱ 𝒢 : TopCat.Presheaf C X} (T : ℱ ⟶ 𝒢),\\n  TopCat.Presheaf.IsLocallySurjective T ↔\", \"doc\": \"A natural transformation $ T: \\\\mathscr{F} \\\\Rightarrow \\\\mathscr{G} $ between presheaves on a topological space $ X $ is locally surjective if and only if for every open set $ U \\\\subseteq X $, every sec\"}\n  {\"name\": \"TopCat.Presheaf.IsLocallySurjective\", \"module\": \"Mathlib/Topology/Sheaves/LocallySurjective\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {FC : C → C → Type u_1} →\\n      {CC : C → Type v} →\\n        [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] →\\n          [CategoryTheory.ConcreteCategory C FC] → {X : TopCat} → {ℱ 𝒢 : TopCat.Presheaf C X} → (ℱ ⟶ 𝒢) → Prop\", \"doc\": \"A natural transformation $ T: \\\\mathscr{F} \\\\Rightarrow \\\\mathscr{G} $ between presheaves $ \\\\mathscr{F}, \\\\mathscr{G} $ on a topological space $ X $ is locally surjective if, for every open set $ U \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of being surjective on stalks for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ has surjective induced maps on stalks, then for any Zari\"}\n  {\"name\": \"CategoryTheory.Presheaf.instIsLocallySurjectiveHomObjForgetTypeToRangeSheafify\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {F₁ F₂ : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F₁ ⟶ F₂),\\n  CategoryTheory.Presheaf.IsLocallySurjective J (CategoryTheory.Subfunctor.toRangeSheafify J f)\", \"doc\": \"For any natural transformation $ f $ between presheaves $ F₁ $ and $ F₂ $, the natural transformation from $ F₁ $ to the sheafification of the image subfunctor of $ f $ is locally surjective with resp\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"surjective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.epi_of_surjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f : M₁ ⟶ M₂} (hf : ∀ ⦃X : Cᵒᵖ⦄, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (f.app X))) : CategoryTheory.Epi f\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.surjective_of_epi\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (f : M₁ ⟶ M₂) [CategoryTheory.Epi f] (X : Cᵒᵖ) : Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (f.app X))\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.epi_iff_surjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (f : M₁ ⟶ M₂) : CategoryTheory.Epi f ↔ ∀ ⦃X : Cᵒᵖ⦄, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (f.app X))\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.mono_iff_surjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (f : M₁ ⟶ M₂) : CategoryTheory.Mono f ↔ ∀ ⦃X : Cᵒᵖ⦄, Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (f.app X))\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.ιR_jointly_surjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) (r : ↑cR.pt) : ∃ U a,\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.ιM_jointly_surjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} {hcR : CategoryTheory.Limits.IsColimit cR} {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.jointly_surjective₂\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} {hcR : CategoryTheory.Limits.IsColimit cR} {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.jointly_surjective₃\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} {hcR : CategoryTheory.Limits.IsColimit cR} {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.ιM_jointly_surjective₂\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} {hcR : CategoryTheory.Limits.IsColimit cR} {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.jointly_surjective₃'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} {hcR : CategoryTheory.Limits.IsColimit cR} {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.ιM_jointly_surjective₃\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} {hcR : CategoryTheory.Limits.IsColimit cR} {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.IsLocallySurjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (f : M₁ ⟶ M₂) : Prop\", \"doc\": \"A morphism of presheaves of modules is locally surjective\\nif the underlying morphism of presheaves of abelian groups is.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "surject.*open|open.*surject|F_surj|AlgebraicSpace",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"232\", \"text\": \"    ← image_singleton, ← map_span, Ideal.comap_map_of_surjective' _ Ideal.Quotient.mk_surjective,\"}\n  {\"file\": \"Mathlib/Logic/Relation.lean\", \"line\": \"307\", \"text\": \"lemma map_onFun_eq_of_surjective {r : β → β → Prop} {f : α → β} (hsurj : f.Surjective) :\"}\n  {\"file\": \"Mathlib/Topology/ClopenBox.lean\", \"line\": \"72\", \"text\": \"    Surjective fun I : Finset (Clopens X × Clopens Y) ↦ I.sup fun i ↦ i.1 ×ˢ i.2 := fun W ↦\"}\n  {\"file\": \"Mathlib/Topology/ClopenBox.lean\", \"line\": \"83\", \"text\": \"  exact .of_surjective _ surjective_finset_sup_prod\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"line\": \"627\", \"text\": \"theorem epi_iff_surjective {n m : SimplexCategory} {f : n ⟶ m} :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"line\": \"632\", \"text\": \"    NonemptyFinLinOrd.epi_iff_surjective, NonemptyFinLinOrd.coe_of, ConcreteCategory.hom_ofHom]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"line\": \"644\", \"text\": \"  simpa using Fintype.card_le_of_surjective f.toOrderHom.toFun\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"line\": \"645\", \"text\": \"    (by dsimp; rwa [← epi_iff_surjective])\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"line\": \"656\", \"text\": \"  simpa only [epi_iff_surjective] using! Fin.predAbove_surjective i\"}\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"264\", \"text\": \"theorem Injective.bijective₂_of_surjective {g : γ → α} (hf : Injective f) (hg : Injective g)\"}\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"309\", \"text\": \"theorem injective_comp_right_iff_surjective {γ : Type*} [Nontrivial γ] :\"}\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"324\", \"text\": \"  injective_comp_right_iff_surjective.mp h\"}\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"363\", \"text\": \"theorem exists_fixed_point_of_surjective {α β : Type*} (f : α → α → β)\"}\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"470\", \"text\": \"theorem LeftInverse.rightInverse_of_surjective {f : α → β} {g : β → α} (h : LeftInverse f g)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"line\": \"261\", \"text\": \"    valueGroup₀_equiv_withZeroMulInt_restrict_apply_of_surjective\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"line\": \"506\", \"text\": \"  .of_surjective Φ (by\"}\n  {\"file\": \"Mathlib/Logic/Denumerable.lean\", \"line\": \"76\", \"text\": \"  Infinite.of_surjective _ (eqv α).surjective\"}\n  {\"file\": \"Mathlib/Logic/Denumerable.lean\", \"line\": \"305\", \"text\": \"      left_inv := leftInverse_of_surjective_of_rightInverse ofNat_surjective right_inverse_aux\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/MorphismProperty.lean\", \"line\": \"68\", \"text\": \"    rw [← epi_iff_surjective] at h₁\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"192\", \"text\": \"    refine iUnion_congr_of_surjective _ (add_left_surjective (-1)) fun m ↦ ?_\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"534\", \"text\": \"    ((Fintype.bijective_iff_surjective_and_card _).mpr ⟨?_, ?_⟩)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/SeparationQuotient/FiniteDimensional.lean\", \"line\": \"24\", \"text\": \"  Module.Finite.of_surjective (mkCLM R M).toLinearMap Quotient.mk_surjective\"}\n  {\"file\": \"Mathlib/Logic/Pairwise.lean\", \"line\": \"56\", \"text\": \"lemma Pairwise.of_comp_of_surjective {f : β → α} (hr : Pairwise (r on f)) (hf : Surjective f) :\"}\n  {\"file\": \"Mathlib/Logic/Pairwise.lean\", \"line\": \"61\", \"text\": \"  ⟨fun hr ↦ hr.of_comp_of_surjective hf.surjective, fun hr ↦ hr.comp_of_injective hf.injective⟩\"}\n  {\"file\": \"Mathlib/Topology/Algebra/SeparationQuotient/Section.lean\", \"line\": \"37\", \"text\": \"  rcases (mkCLM K E).toLinearMap.exists_rightInverse_of_surjective\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of the surjectivity locus for module homomorphisms with proper support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ContinuousLinearMap.isOpenMap\", \"module\": \"Mathlib.Analysis.Normed.Operator.Banach\", \"type\": \"(surj : Surjective f) : IsOpenMap f\", \"doc\": \"If $ f $ is a surjective continuous linear map between modules over semirings, then $ f $ is an open map, meaning the image of every open set under $ f $ is open in the codomain.\"}\n  {\"name\": \"IsModuleTopology.isOpenMap_of_surjective\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \"[TopologicalSpace B] [IsModuleTopology R B] [ContinuousAdd A] [ContinuousSMul R A] {φ : A →ₗ[R] B}\\n  (hφ : Function.Surjective φ) : IsOpenMap φ\", \"doc\": \"Let $ R $ be a topological ring, and let $ A $ and $ B $ be topological $ R $-modules with continuous addition and scalar multiplication. If $ \\\\varphi : A \\\\to B $ is a surjective $ R $-linear map and \"}\n  {\"name\": \"IsModuleTopology.isOpenQuotientMap_of_surjective\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \"[TopologicalSpace B] [IsModuleTopology R B] {φ : A →ₗ[R] B} (hφ : Function.Surjective φ) : IsOpenQuotientMap φ\", \"doc\": \"Let $ R $ be a topological ring, and let $ B $ be an $ R $-module equipped with a module topology. If $ \\\\varphi: A \\\\to B $ is a surjective $ R $-linear map between $ R $-modules, then $ \\\\varphi $ is a\"}\n  {\"name\": \"IsModuleTopology.isOpenQuotientMap_of_surjectiveₛₗ\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \"[TopologicalSpace B'] [IsModuleTopology S B'] {σ : R →+* S} (hσ : IsOpenQuotientMap σ) (φ : A →ₛₗ[σ] B')\\n  (hφ : Function.Surjective φ) : IsOpenQuotientMap φ\", \"doc\": \"Let $ B' $ be a topological $ S $-module equipped with a module topology. If $ \\\\sigma: R \\\\to S $ is a ring homomorphism that is an open quotient map, and $ \\\\phi: A \\\\to B' $ is a surjective $ S $-linea\"}\n  {\"name\": \"IsModuleTopology.isOpenMap_of_surjectiveₛₗ\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \"[TopologicalSpace B'] [IsModuleTopology S B'] [ContinuousAdd A] [ContinuousSMul R A] {σ : R →+* S}\\n  (hσ : IsOpenQuotientMap σ) (φ : A →ₛₗ[σ] B') (hφ : Function.Surjective φ) : IsOpenMap φ\", \"doc\": \"Let $ R $ and $ S $ be rings with a ring homomorphism $ \\\\sigma: R \\\\to S $ that is an open quotient map. Suppose $ A $ and $ B' $ are modules equipped with module topologies where addition and scalar m\"}\n  {\"name\": \"Module.support_subset_of_surjective\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \"(hf : Function.Surjective f) : Module.support R N ⊆ Module.support R M\", \"doc\": \"For a commutative semiring $ R $ and modules $ M $, $ N $ over $ R $, if there exists a surjective $ R $-module homomorphism $ f : M \\to N $, then the support of $ N $ is a subset of the support of $ M\"}\n  {\"name\": \"IsModuleTopology.isQuotientMap_of_surjective\", \"module\": \"Mathlib.Topology.Algebra.Module.ModuleTopology\", \"type\": \"[τB : TopologicalSpace B] [IsModuleTopology R B] {φ : A →ₗ[R] B} (hφ : Function.Surjective φ) : IsQuotientMap φ\", \"doc\": \"If $\\\\varphi: A \\\\to B$ is a surjective linear map between $R$-modules and $B$ is equipped with a module topology (where scalar multiplication is continuous), then $\\\\varphi$ is a quotient map. This mean\"}\n  {\"name\": \"IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": Function.Surjective (IsLocalizedModule.map S g₁ g₂ l) ↔ Function.Surjective (LocalizedModule.map S l)\", \"doc\": \"Given a commutative semiring $ R $, a submonoid $ S $, and $ R $-modules $ M $, $ N $ with localizations $ M' $, $ N' $ at $ S $, the surjectivity of the localized module map $ f: M' \\to N' $ induced b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space module homomorphism with finite type target and proper support is surjective on an open subspace of the base universally",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.Surjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource, AlgebraicGeometry.Scheme.Hom.app_surjective, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.specTargetImageRingHom_surjective. Candidates read: scheme ideal-sheaf support is the closed locus of the ideal, not arbitrary module support; Module.isClosed_support and the residue-field tensor criterion concern modules over rings, not sheaves on algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-module results and scheme ideal-sheaf results do not state the algebraic-space theorem or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "surject.*locus|locus.*surject|AlgebraicSpace",
+   "results": "Actual search returned 0 hits: . Subdirectory: AlgebraicGeometry. Candidates read: scheme ideal-sheaf support is the closed locus of the ideal, not arbitrary module support; Module.isClosed_support and the residue-field tensor criterion concern modules over rings, not sheaves on algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-module results and scheme ideal-sheaf results do not state the algebraic-space theorem or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of the universal surjectivity locus for a morphism of quasi-coherent modules with finite type proper target support",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.SurjectiveOnStalks.mk, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.eq. Candidates read: scheme ideal-sheaf support is the closed locus of the ideal, not arbitrary module support; Module.isClosed_support and the residue-field tensor criterion concern modules over rings, not sheaves on algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-module results and scheme ideal-sheaf results do not state the algebraic-space theorem or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"surjective\"",
+   "results": "Actual search returned 12 hits: PresheafOfModules.epi_of_surjective, PresheafOfModules.surjective_of_epi, PresheafOfModules.epi_iff_surjective, PresheafOfModules.mono_iff_surjective, PresheafOfModules.ModuleColimit.ιR_jointly_surjective, PresheafOfModules.ModuleColimit.ιM_jointly_surjective, PresheafOfModules.ModuleColimit.jointly_surjective₂, PresheafOfModules.ModuleColimit.jointly_surjective₃. Candidates read: scheme ideal-sheaf support is the closed locus of the ideal, not arbitrary module support; Module.isClosed_support and the residue-field tensor criterion concern modules over rings, not sheaves on algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-module results and scheme ideal-sheaf results do not state the algebraic-space theorem or specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quot-representability",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 09TP, lemma-F-surj-open, with situation-iso.",
+   "via": [
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-module-surjectivity-open",
+  "worker": "stage1",
+  "summary": "Q28 retained every hypothesis and clause of Tag 09TP. Expanded cokernel pullback, closedness using a proper carrier, arbitrary Cartesian point lifting, and naturality. Added only the general finite-type support theorem 07TZ, not a restatement of the surjectivity locus. Searched the whole DAG, blueprint, project Lean and Mathlib; no complete project attachment or Mathlib match.",
+  "blueprint": "Nearest blueprint ancestor is null as blueprint_refs.py ancestor reports. Retains the inherited direct-image alteration/moduli prerequisite chain and realizes its final Tag 09TP input. Current latest blueprint direct-images proof (3) read; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General point/open-subspace calculus needed to realize the open complement in Tag 09TP; this unit supplies no replacement for this generic algebraic-space tool."
+   },
+   {
+    "node": "lem-a1-space-invariant-open-quotient",
+    "why": "General point/open-subspace calculus needed to realize the open complement in Tag 09TP; this unit supplies no replacement for this generic algebraic-space tool."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "General point/open-subspace calculus needed to realize the open complement in Tag 09TP; this unit supplies no replacement for this generic algebraic-space tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 4 takes from its statement only that sheaf fibre products of algebraic spaces are fibre products in algebraic spaces, to identify $H\\times_XX_T$ with $H\\times_BT$; a generic algebraic-space tool that no node of this unit replaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-f552d342c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-f552d342c (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the Stacks sources: 09TP lemma-F-surj-open with situation-iso, and 07TY/07TZ in spaces-morphisms. The item's statement is unchanged and faithful to 09TP. Steps 1-5 carry the source proof in full: the cokernel commutes with pullback through the left adjoint, D is closed by 07TZ(1), and Supp(G) lies in the proper carrier, so E is closed. The open subspace comes from invariant-open-quotient. Step 4 gets the pointwise criterion from 07TZ(3), stalk conservativity and the Cartesian image identity on the reduced closed subspace H. Step 5 gives the factorisation and naturality. The new node lem-sfb-space-finite-type-support-pullback is exactly 07TZ(1),(3), statement only and self-contained. The full rg search over the DAG found no duplicate: 07TY etale-chart-support, scheme 056J, the Noetherian coherent-support node, the stalk-tensor node and trf fp-support all state something else. The new node does not restate a clause of the item. I tested the item on Spec k with F=0, G=k; on multiplication by p over Spec Z with nonflat T=Spec F_p; and with G=0. Batch-5 check: every listed citation is a generic algebraic-space definition or tool. They reach sec-trace-formula only through the definition def-trf-algebraic-space and none of them is a step of the trace formula or Poincare duality, so all are accepted. I accept the three lem-a1 tool_uses. FIX: added the undeclared off-route tool use lem-trf-space-fibre-products-etale-covers (used in step 4, as declared by over 200 nodes of this unit) to split_report.tool_uses, and added a missing full stop in step 4. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-module-surjectivity-open.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceModuleSurjectivityOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.module_surjectivity_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceModuleSurjectivityOpen.lean",
+  "statement": "theorem module_surjectivity_open {S : Scheme.{u}} {X B : AlgebraicSpace S} (f : X ⟶ B) (hf : MapIsLocallyOfFinitePresentation f) (F G : X.QCoh) (u : F.obj ⟶ G.obj) (hG : G.obj.IsFiniteType) (hproper : ∃ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ f) ∧ ∃ N : Z.Modules, N.IsQuasicoherent ∧ N.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj N ≅ G.obj)) : ∃ V : OpenSubspace B, ∀ (T : Over S) (b : yoneda.obj T ⟶ B.obj.obj), Epi ((moduleTensorPullback (properQuotFst f (CostructuredArrow.mk b))).map u) ↔ ∃! v : yoneda.obj T ⟶ V.val.toFunctor, v ≫ V.val.ι = b",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d7dbbaf2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Checked against Stacks 09TP and situation-iso: lfp f, finite-type G, proper-support carrier written as ProperQuotient.properSupport, u_T is moduleTensorPullback along properQuotFst of the actual fibre product, Epi of module sheaves, OpenSubspace B with a unique-factor criterion, so the bijection is composition with the inclusion and natural. No extra hypotheses on F or G; all base changes b allowed. lean.statement verbatim equals the file; record only adds lean; imports exist; docstrings give source, blueprint id and 5 proof steps; proof is sorry; no hollow definitions; no duplicate declaration in the project lean trees. Edge cases G=0, F=0, empty T/B/X, nonflat b covered. No findings."
+ }
+}

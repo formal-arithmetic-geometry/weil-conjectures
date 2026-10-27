@@ -1,0 +1,107 @@
+{
+ "id": "lem-zl-finite-constant-extension-exists",
+ "kind": "statement",
+ "title": "Finite constant extensions inside an algebraically closed overfield",
+ "statement": "Let $k_0$ be a finite field, let $k$ be an algebraically closed extension field of $k_0$ [def-pc-field-extension, def-weil-algebraic-closure], and let $m$ be a nonzero natural number. Then there exists an intermediate field $K$ with $k_0\\subseteq K\\subseteq k$ such that $K$ is finite and $\\#K=(\\#k_0)^m$. This is only the existence assertion; no root-set or uniqueness assertion is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 1, finite constant extension; proved source implementation WeilConjectures.TraceFormula.ModelExtension, lines 48--59."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Take the finite field Extension k0 (ringChar k0) m from Mathlib. Embed it as a k0-algebra into the algebraically closed overfield k. Its field range is an intermediate field K, and the induced algebra equivalence proves that K is finite. Transport Nat.card across this equivalence and apply FiniteField.natCard_extension to obtain the required cardinality. This is the complete existing Lean proof of ProEtale.CondensedRing.exists_intermediateField_natCard_eq_pow; no new theorem is being assumed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Finite constant extension in paragraph 1, using the already proved source implementation in WeilConjectures.TraceFormula.ModelExtension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An algebraically closed extension of a finite field contains a finite intermediate field of cardinality card k to the power m for each positive m",
+   "results": "8 hits, including FiniteField.Extension and its Field/Finite instances. These construct the finite field but do not alone state its existence as an intermediate field. The exact already proved project theorem was found and is attached below.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.natCard_extension",
+   "results": "1 hit: FiniteField.natCard_extension, Mathlib.FieldTheory.Finite.Extension, Nat.card (FiniteField.Extension k p n) = Nat.card k ^ n. It is used by the existing source proof, together with an embedding and its field range.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_intermediateField_natCard_eq_pow|nonempty_algHom_extension|natCard_extension",
+   "results": "5 hits, all in Mathlib/FieldTheory/Finite/Extension.lean, lines 62,68,77,83,88. No exact intermediate-field existence declaration in Mathlib; the project source supplies it.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SemisimpleFrobeniusOrbitDescent",
+  "date": "2026-10-26",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 1: choose the finite constant extension. Only the existence part is required, without the stronger root-set or uniqueness conclusions of lem-weil-unique-subfield-of-closure.",
+   "via": [
+    "lem-zl-semisimple-frobenius-orbit-descent",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.TraceFormula.ModelExtension",
+  "file": "lean/WeilConjectures/TraceFormula/ModelExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_intermediateField_natCard_eq_pow",
+  "statement": "theorem exists_intermediateField_natCard_eq_pow {m : ℕ} (hm : m ≠ 0) :\n    ∃ K : IntermediateField k₀ k, Finite K ∧ Nat.card K = Nat.card k₀ ^ m",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26",
+  "sorry_free": true,
+  "note": "Existing complete source proof at lines 50--59. No Lean code is added, restated, or changed; this attachment records the narrower existence helper actually used by the main proof."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T023434-L-566540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T023434-L-566540",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

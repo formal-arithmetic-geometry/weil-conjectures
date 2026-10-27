@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion: regular ordinary quotients compared with derived principal quotients through the two-term free coefficient resolution."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion: regular ordinary quotients compared with derived principal quotients through the two-term free coefficient resolution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary quotient of a complex by degreewise injective scalar multiplication agrees naturally with its principal derived tensor quotient tower",
+   "results": "8 hits: TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ, QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib cone-to-quotient quasi-isomorphisms and the proved source-library reductionConeIso and its transition and augmentation equations; no complete tower comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.quasiIso_descShortComplex",
+   "results": "1 hits: CochainComplex.mappingCone.quasiIso_descShortComplex",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib cone-to-quotient quasi-isomorphisms and the proved source-library reductionConeIso and its transition and augmentation equations; no complete tower comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionConeIso|map_descShortComplex",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib cone-to-quotient quasi-isomorphisms and the proved source-library reductionConeIso and its transition and augmentation equations; no complete tower comparison found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralRegularQuotientTower",
+  "date": "2026-10-27",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "id": "lem-sfb-regular-quotient-presentation-tower",
+ "title": "Exact transport of regular quotient presentations",
+ "statement": "Let ell be a natural number, J a Grothendieck topology and Λ a commutative ring in which the image of ell is a non-zero-divisor. Let A be an abelian category with derived category [def-weil-abstract-derived-category], O a simultaneous ordinary ell^(n+1)-cokernel presentation of its identity [def-sfb-diagonal-system-interface], e an additive equivalence from A to sheaves of Λ-modules, and P an arbitrary unbounded complex on which all positive ell-powers are monic degreewise. Put X=O(P) and K=e(QP). There is one natural isomorphism from n ↦ e(QX_n) to the positive principal derived reduction tower of K, and the image of each specified quotient projection followed by its component equals the canonical derived reduction map.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The specified zero equation gives short complexes P --ell^(n+1)--> P --> X_n. Degreewise the last arrow is a cokernel by the universal property in the presentation, and the first arrow is monic by hypothesis. Hence the short complexes are short exact.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive equivalence and its functor on complexes are exact. Mapping the short exact sequences preserves short exactness. Preservation of natural-number multiples identifies the first arrows with multiplication by the coefficient scalar ell^(n+1). The mapped projections respect tower transitions by the specified presentation equation.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the regular principal quotient tower comparison with the mapped complex, the mapped ordinary quotient tower, and the canonical mapDerivedCategoryFactors identification K ≅ Q(eP). It gives the coefficient comparison and its augmentation identity.",
+   "uses": [
+    "lem-sfb-regular-principal-quotient-tower",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker mapDerivedCategoryFactors with the ordinary tower and compose it with the inverse coefficient comparison. Its naturality, the augmentation identity and cancellation of the comparison components prove exactly the stated projection equation.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-regular-principal-quotient-tower"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-regular-quotient-tower",
+   "place": "Proof steps 1–4, exact transport of the ordinary quotient presentation and the coefficient comparison. Fully proved extraction for per-file checking cost.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RegularQuotientPresentationTower",
+  "file": "lean/Sheaf/Paper/RegularQuotientPresentationTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.regular_quotient_presentation_tower",
+  "statement": "theorem regular_quotient_presentation_tower\n    {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{u + 1} A]\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]\n    (hr : (ℓ : Λ) ∈ nonZeroDivisors Λ) (J : GrothendieckTopology C)\n    (O : DiagonalReductionPresentation ℓ (𝟭 A))\n    (e : A ≌ Sheaf J (ModuleCat.{u + 1} Λ))\n    [e.functor.Additive] [e.inverse.Additive]\n    (P : CochainComplex A ℤ)\n    (hP : ∀ (n : ℕ) (i : ℤ), Mono (ℓ ^ (n + 1) • 𝟙 (P.X i))) :\n    let K := e.functor.mapDerivedCategory.obj (DerivedCategory.Q.obj P)\n    let X := (O.E.mapHomologicalComplex (.up ℤ)).obj P\n    let G := DerivedCategory.derivedCompletionDiagram J\n      (Ideal.span {(ℓ : Λ)}) K\n    ∃ α : X.asFunctor ⋙ DerivedCategory.Q ⋙ e.functor.mapDerivedCategory ≅\n        addOpFunctor 1 ⋙ G,\n      ∀ n : ℕ,\n        e.functor.mapDerivedCategory.map\n            (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (O.π n) (.up ℤ)).app P)) ≫\n          α.hom.app (op n) =\n        (DerivedCategory.derivedCompletionCone J\n          (Ideal.span {(ℓ : Λ)}) K).π.app (op (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261027T103416-L-1068899",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261027T103416-L-1068899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

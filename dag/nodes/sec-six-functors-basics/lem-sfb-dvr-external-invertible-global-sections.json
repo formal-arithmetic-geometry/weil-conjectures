@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-dvr-external-invertible-global-sections",
+ "kind": "statement",
+ "title": "External invertible global sections over a DVR",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring]. Let $X,Y$ be quasi-compact separated schemes over $\\operatorname{Spec}A$ [def-pc-scheme, def-pc-morphism-conventions] whose structure morphisms are flat [def-weil-flat-morphism]. Let $F$ and $G$ be invertible module sheaves on $X$ and $Y$, respectively [def-sc-invertible-module], and put $P=X\\times_A Y$ with projections $p_X,p_Y$. The canonical $A$-linear external-section map\n$$K_{F,G}:\\Gamma(X,F)\\otimes_A\\Gamma(Y,G)\\longrightarrow\\Gamma(P,p_X^*F\\otimes_{\\mathcal O_P}p_Y^*G),\\qquad s\\otimes t\\longmapsto p_X^*s\\otimes p_Y^*t,$$\nis an isomorphism. Tensor products of sheaves and modules have the meanings of [def-pur-sheaf-tensor-product, def-weil-pbc-module-tensor-product]. This map is natural for pullback of sections and for isomorphisms of the schemes and invertible sheaves. If a flat affine $A$-group scheme acts on both schemes and linearizes $F,G$, then $K_{F,G}$ commutes with the rational coactions whenever these coactions on the section modules are defined; tensor products on its source carry the diagonal coaction. The assertions allow empty schemes and hold without assuming vanishing of positive coherent cohomology or a base-change theorem for either section module. Here a group scheme over $A$ means a group object in schemes over $\\operatorname{Spec}A$: its multiplication, identity and inverse satisfy the group diagrams over that base. If $H$ is the acting affine group, put $C=A[H]$ [def-sfb-affine-coordinate-hopf-algebra]. A rational coaction on an $A$-module $M$ is an $A$-linear map $\\rho_M:M\\to M\\otimes_A C$ satisfying $(\\rho_M\\otimes1)\\rho_M=(1\\otimes\\Delta)\\rho_M$ and $(1\\otimes\\varepsilon)\\rho_M=1_M$. A linearization is an isomorphism $\\theta:\\operatorname{pr}_X^*F\\to a_X^*F$ over $H\\times_AX$ satisfying the identity and action cocycle equations, and similarly for $G$; the coactions in the assertion are those induced by these linearizations. Pullback and fibre products use [def-pc-module-pullback, def-pc-fibre-product], and affine spectra use [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech. Agent-formulated DVR degree-zero extension of the two finite-affine-cover equalizer argument, using flatness of torsion-free modules over a DVR; the cited tag itself is over a field, not the integral assertion. The external map and naturality are specified on pure tensors."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-weil-flat-morphism",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-sfb-relative-external-sections"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine open covers $(U_i)_{i\\in I}$ of $X$ and $(V_j)_{j\\in J}$ of $Y$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. Their pairwise intersections $U_{ii'}$ and $V_{jj'}$ are affine by [lem-weil-pbc-separated-affine-open-intersection], applied to the separated structure morphisms with affine target $\\operatorname{Spec}A$. Fibre products $W_{ij}=U_i\\times_AV_j$ are affine by [lem-weil-pbc-fibre-product-affine-spectra]. They cover $P$: a point of $P$ has its two projections in some $U_i,V_j$. Their intersections are $U_{ii'}\\times_AV_{jj'}$, by the fibre-product universal property. Invertibility includes quasi-coherence by [def-sc-invertible-module]. Write $E=p_X^*F\\otimes p_Y^*G$, $M_i=\\Gamma(U_i,F)$, $M_{ii'}=\\Gamma(U_{ii'},F)$, $N_j=\\Gamma(V_j,G)$, and $N_{jj'}=\\Gamma(V_{jj'},G)$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01KP (lemma-characterize-separated), 01I4 (lemma-fibre-product-affine-schemes); finite covers as in Tag 0BED"
+   }
+  },
+  {
+   "text": "For any affine opens $U\\subseteq X,V\\subseteq Y$, put $B=\\mathcal O_X(U)$, $D=\\mathcal O_Y(V)$, $M=F(U)$, $N=G(V)$, and $T=B\\otimes_AD$. The affine product formula and [lem-weil-pbc-module-pullback-affine-sections] identify the two pullback section modules on $U\\times_AV$ with $T\\otimes_BM$ and $T\\otimes_DN$. The pullbacks are quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]; thus [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] identifies $E(U\\times_AV)$ with $(T\\otimes_BM)\\otimes_T(T\\otimes_DN)$. There is an explicit isomorphism from this module to $M\\otimes_AN$ given by\n$$((b\\otimes d)\\otimes m)\\otimes((b'\\otimes d')\\otimes n)\\longmapsto bb'm\\otimes dd'n.$$\nIts inverse sends $m\\otimes n$ to $(1\\otimes m)\\otimes(1\\otimes n)$. The balancing relations make both formulas well-defined, and their composites are identities on tensor generators [def-weil-pbc-module-tensor-product]. Hence the inverse is exactly the local external-section map. These identifications commute with restrictions: restricting $p_X^*m\\otimes p_Y^*n$ gives $p_X^*(m|_{U'})\\otimes p_Y^*(n|_{V'})$, and tensor generators span. This applies also to affine intersections.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, 01I8 (lemma-widetilde-constructions (1)), 01I9 (lemma-widetilde-pullback (1)); explicit elementary balanced-tensor calculation"
+   }
+  },
+  {
+   "text": "The restriction of a flat morphism to an open subscheme is flat directly from [def-weil-flat-morphism]: at its points the local rings and stalk maps are unchanged. The restricted invertible sheaf is still locally free of rank one. Therefore [lem-sc-flat-invertible-sections-torsion-free] applies to $X$, $Y$, and all the opens just chosen. It makes $\\Gamma(X,F)$, $\\Gamma(Y,G)$, $M_i,M_{ii'},N_j,N_{jj'}$ torsion-free $A$-modules. By [def-sc-discrete-valuation-ring], $A$ is a valuation ring. Apply [lem-trf-valuation-torsionfree-flat] to each of these modules: they are flat, with no finite generation assertion. In particular, the first equalizer argument below may tensor with $N_j$ or $N_{jj'}$, and the second may tensor with $\\Gamma(X,F)$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sc-invertible-module",
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "def-sc-discrete-valuation-ring",
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0539 (lemma-valuation-ring-torsion-free-flat); torsion-free section argument in more-morphisms.tex Tag 0EX8 (lemma-triviality-generic-fibre-valuation-ring), general-case proof"
+   }
+  },
+  {
+   "text": "The sheaf condition [def-weil-sheaf-of-modules-category] says that\n$$0\\to\\Gamma(X,F)\\to\\prod_iM_i\\xrightarrow{d_X}\\prod_{i,i'}M_{ii'}$$\nis exact, where $(d_Xm)_{ii'}=m_i|_{U_{ii'}}-m_{i'}|_{U_{ii'}}$: a tuple lies in its kernel precisely when its sections glue uniquely. Fix $V=V_j$ or $V_{jj'}$ and set $N=G(V)$. Tensor this row with the flat module $N$. By [lem-weil-pbc-flat-tensor-exact] it remains exact, and [lem-weil-pbc-tensor-finite-product] identifies its two finite product terms with $\\prod_i(M_i\\otimes_AN)$ and $\\prod_{i,i'}(M_{ii'}\\otimes_AN)$. Step 2 identifies the arrow between them with the difference of restrictions for the cover $(U_i\\times_AV)_i$ of $X\\times_AV$. The sheaf condition for $E$ therefore identifies its kernel with $\\Gamma(X\\times_AV,E)$. The resulting isomorphism\n$$\\kappa_V:\\Gamma(X,F)\\otimes_AG(V)\\xrightarrow{\\sim}\\Gamma(X\\times_AV,E)$$\nsends $s\\otimes t$ to $p_X^*s\\otimes p_Y^*t$, since that holds after restricting to every cover member. It commutes with each restriction $V_{jj'}\\subseteq V_j$: on $U_i\\times_AV_{jj'}$ both composites restrict to the same pure-tensor section, and uniqueness of gluing and generation by pure tensors give equality.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BED (lemma-kunneth), equation-kunneth-on-cech: degree-zero equalizer argument over A with flat N replacing exactness over a field"
+   }
+  },
+  {
+   "text": "Apply the same sheaf-condition row to $G$ and its finite cover $(V_j)$:\n$$0\\to\\Gamma(Y,G)\\to\\prod_jN_j\\xrightarrow{d_Y}\\prod_{j,j'}N_{jj'}.$$\nTensor on the left with the flat module $L=\\Gamma(X,F)$. Exactness [lem-weil-pbc-flat-tensor-exact] and finite-product compatibility [lem-weil-pbc-tensor-finite-product] give kernel $L\\otimes_A\\Gamma(Y,G)$. By Step 4, the other two terms and their restriction differences identify with the two section products for the cover $(X\\times_AV_j)_j$ of $P$. Its sheaf equalizer has kernel $\\Gamma(P,E)$ [def-weil-sheaf-of-modules-category]. Thus the induced map of kernels is an isomorphism. On $s\\otimes t$ its restriction to $X\\times_AV_j$ is $\\kappa_{V_j}(s\\otimes t|_{V_j})$, hence is the restriction of $p_X^*s\\otimes p_Y^*t$. Consequently the isomorphism is precisely $K_{F,G}$. This uses only equalizers, finite products and flat tensoring, and imposes no positive-cohomology or section-base-change hypothesis.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BED (lemma-kunneth), equation-kunneth-on-cech: second degree-zero equalizer, with flat Gamma(X,F)"
+   }
+  },
+  {
+   "text": "For maps $u:X'\\to X,v:Y'\\to Y$ over $A$, and the corresponding pulled-back invertible sheaves, pullback of the section $p_X^*s\\otimes p_Y^*t$ is $p_{X'}^*(u^*s)\\otimes p_{Y'}^*(v^*t)$. Indeed $(u\\times v)$ composed with each projection is the corresponding $u$ or $v$ composed with the new projection [def-pc-fibre-product]; the normalized composition and tensor-pullback isomorphisms of [lem-weil-pbc-invertible-pullback-tensor], clause (2), send iterated pullbacks and tensor sections to the asserted sections. Thus the naturality square commutes on every $s\\otimes t$, and hence on the whole tensor product [def-weil-pbc-module-tensor-product]. The identical calculation with sheaf isomorphisms uses their linearity, replacing $s,t$ by their images. This proves both stated naturality assertions, in particular for isomorphisms of the schemes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9 (lemma-widetilde-pullback), functoriality; modules.tex Tag 01CD (lemma-tensor-product-pullback); pure-tensor verification"
+   }
+  },
+  {
+   "text": "For the coaction assertion write $H=\\operatorname{Spec}C$ and $M=\\Gamma(X,F)$, $N=\\Gamma(Y,G)$, $Q=\\Gamma(P,E)$. Flatness of $H/A$ gives flatness of $C/A$ by [lem-weil-pbc-flat-morphism-affine-criterion]. The canonical comparison $c:Q\\otimes_AC\\to\\Gamma(H\\times_AP,\\operatorname{pr}_P^*E)$ is injective: the sheaf restriction $Q\\hookrightarrow\\prod_{i,j}E(W_{ij})$ is injective; flat tensoring with $C$ preserves this injection [lem-weil-pbc-flat-tensor-exact]; and finite-product compatibility and the affine pullback-section formula identify the resulting target with $\\prod_{i,j}\\Gamma(H\\times_AW_{ij},\\operatorname{pr}_P^*E)$. The composites with $c$ have exactly those restriction coordinates, so $c$ is injective. This requires no base-change isomorphism for $M$ or $N$.\nWrite the given coactions as $\\rho_M(s)=\\sum_a s_a\\otimes c_a$, $\\rho_N(t)=\\sum_b t_b\\otimes d_b$. By the meaning of a coaction induced by a linearization, these sums represent the linearized action-pullback sections over $H\\times_AX$ and $H\\times_AY$. The external linearization is their tensor, pulled back along the two projections and along the same group variable; the normalized composition and tensor-pullback isomorphisms of [lem-weil-pbc-invertible-pullback-tensor], clause (2), identify the pullback along $1_H\\times p_X$ of a section over $H\\times_AX$ (and along $1_H\\times p_Y$ over $H\\times_AY$) with the corresponding section over $H\\times_AP$, and the tensor of pulled-back sections with the pullback of their tensor. Therefore both $c(\\rho_Q(K(s\\otimes t)))$ and\n$$c\\left(\\sum_{a,b}K(s_a\\otimes t_b)\\otimes c_ad_b\\right)$$\nare the tensor of those two linearized sections on $H\\times_AP$. Injectivity of $c$ proves equality before applying $c$. The sum is the diagonal coaction on $s\\otimes t$, so tensor generators give $\\rho_QK=(K\\otimes1)\\rho_{M\\otimes N}$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-finite-product",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I9, 01I8 and 01U5 (flat affine criterion); agent pure-tensor computation of linearized external sections"
+   }
+  },
+  {
+   "text": "If $X$ or $Y$ is empty, the corresponding global section module is zero, $P$ is empty and $\\Gamma(P,E)=0$, by the unique empty-family gluing axiom [def-weil-sheaf-of-modules-category]. Tensoring a zero module gives zero: all generators $0\\otimes t$ or $s\\otimes0$ vanish by bilinearity [def-weil-pbc-module-tensor-product]. Thus $K$ is the unique isomorphism $0\\to0$, and the naturality and coaction equations are equalities of zero maps. Empty intersections similarly contribute zero terms to all the finite equalizers above. This also checks the empty-cover case directly.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Degree-zero equalizer argument, empty-cover case (agent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-flat-morphism",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "def-sc-discrete-valuation-ring",
+  "lem-trf-valuation-torsionfree-flat",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-finite-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-sfb-affine-coordinate-hopf-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech; integral degree-zero two-equalizer argument, justified using Tag 0539 and exactness of flat tensor; explicit naturality and coaction verification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"globalSections\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme global-section definitions, pullback residue-ring tensors and affine flatness criteria do not state the external global-section comparison over a DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|external.*[sS]ection|[sS]ection.*[tT]ensor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme global-section definitions, pullback residue-ring tensors and affine flatness criteria do not state the external global-section comparison over a DVR"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a discrete valuation ring global sections of the external product of line bundles on flat separated quasi compact schemes are their tensor product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Schemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition of the opposi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ = Scheme.forgetToLocallyRingedSpace.op ⋙ LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ(Spec R, ⊤) ≅ R\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \":\\n  toOpen R ⊤ =\\n    CommRingCat.ofHom (algebraMap R (Localization.Away (1 : R))) ≫\\n      CommRingCat.ofHom (toBasicOpen R (1 : R)) ≫ (structureSheaf R).1.map (eqToHom PrimeSpectrum.basicOpen_one.symm).op\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to the ring of global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphism. \"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.basicOpen_mul\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (f g : X.presheaf.obj (op U)) : X.basicOpen (f * g) = X.basicOpen f ⊓ X.basicOpen g\", \"doc\": \"For a ringed space $ X $, an open subset $ U $, and sections $ f, g $ over $ U $, the basic open set defined by the product $ f \\\\cdot g $ is equal to the intersection of the basic open sets defined by\"}\n  {\"name\": \"AlgebraicGeometry.commRingStructureSheafInTypeObj\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : (Opens (PrimeSpectrum.Top R))ᵒᵖ) : CommRing ((structureSheafInType R).1.obj U)\", \"doc\": \"For any open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, the ring of sections $ \\\\mathcal{O}(U) $ in the structure sheaf forms a commutative ring. This struc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (U : (X ⨿ Y).Opens) →\\n    (X ⨿ Y).presheaf.obj (Opposite.op U) ≅\\n      X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits.coprod.inl.base).obj U)) ⨯\\n        Y.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map CategoryTheory.Limits\", \"doc\": \"For any two schemes $X$ and $Y$, and for any open subset $U$ of their coproduct (disjoint union) $X \\\\amalg Y$, the ring of sections of the structure sheaf of $X \\\\amalg Y$ over $U$ is isomorphic to the\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {f g s : Γ(X, ⊤)}\\n  (hfg : f |_ X.basicOpen s = g |_ X.basicOpen s) : ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme global-section definitions, pullback residue-ring tensors and affine flatness criteria do not state the external global-section comparison over a DVR"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero Kunneth formula for flat sheaves on flat schemes over a principal ideal domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme global-section definitions, pullback residue-ring tensors and affine flatness criteria do not state the external global-section comparison over a DVR"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an external tensor product of invertible sheaves on flat schemes over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T08:54:51Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of an external tensor product of invertible sheaves on flat schemes over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"CommRing.Pic.mk_tensor\", \"AlgebraicGeometry.StructureSheaf.const_mul\", \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"CommRing.Pic.mul_eq_tensor\", \"ModuleCat.Tilde.const\"], \"digest\": \"312129e218b27ea2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue-field pullback tensors, module Picard groups, or abstract flatness; none states the DVR external-section theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"globalSections\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T08:54:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"globalSections\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue-field pullback tensors, module Picard groups, or abstract flatness; none states the DVR external-section theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|external.*[sS]ection|[sS]ection.*[tT]ensor",
+   "results": "{\"t\": \"2026-10-24T08:54:51Z\", \"tool\": \"grep\", \"query\": \"kunneth|external.*[sS]ection|[sS]ection.*[tT]ensor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue-field pullback tensors, module Picard groups, or abstract flatness; none states the DVR external-section theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero Kunneth formula for flat quasi coherent sheaves on flat separated schemes over a principal ideal domain",
+   "results": "{\"t\": \"2026-10-24T08:56:18Z\", \"tool\": \"leansearch\", \"query\": \"Degree zero Kunneth formula for flat quasi coherent sheaves on flat separated schemes over a principal ideal domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.ext₀\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"CochainComplex.HomComplex.Cochain.ofHom_zero\", \"CochainComplex.HomComplex.Cochain.ofHom\", \"Module.FaithfullyFlat.zero_iff_lTensor_zero\", \"Module.FaithfullyFlat.zero_iff_rTensor_zero\", \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\"], \"digest\": \"08000f8f69ab315b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue-field pullback tensors, module Picard groups, or abstract flatness; none states the DVR external-section theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-rho-tensor-square-eventual-detection",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.2(2), printed pp.526--527; Seshadri Property I(b), p.247. The necessary condition v not in the maximal ideal times V is explicit here: v=0 or v in mV cannot have nonzero reduction under any A-linear map. Integral double-flag proof of eventual detection: External invertible global sections over a DVR.",
+   "via": [
+    "lem-sfb-dvr-rho-tensor-square-eventual-detection",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-external-invertible-global-sections",
+  "worker": "stage1",
+  "summary": "Proved the DVR statement by two finite-affine-cover sheaf equalizers, using torsion-free invertible sections and valuation-ring flatness, with explicit normalized affine tensor coordinates, naturality and diagonal coaction. Reused existing DAG inputs; no new nodes. Clarified the arbitrary-base group and coaction meanings and completed statement dependencies.",
+  "blueprint": "Preserves the inherited from.node=null provenance and via chain. Realizes the external-section prerequisite in the integral double-flag proof of eventual detection, beneath det-thm-sf-ctf-stability-direct-images proof (3); current blueprint searched throughout, no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Gives the normalized affine pullback-section isomorphism and its formula. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Ensures affine tensor-section formulas apply to the two pullbacks. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Gives the affine sheaf tensor-section isomorphism, normalized on pure tensors. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Gives torsion-freeness for the section modules, over any flat scheme over a domain. No node of this unit supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Clause (2) gives normalized pullback composition and tensor comparisons on sections; no node of this unit supplies this generic line-bundle calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-da401aca2",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-da401aca2 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full against the cited node statements. There are no new nodes. The proof is a degree-zero two-equalizer argument modelled on Stacks Tag 0BED (lemma-kunneth, field case, read). Torsion-freeness comes from lem-sc-flat-invertible-sections-torsion-free (any domain, any flat X), and flatness from valuation ring plus torsion-free (Tag 0539, read at more-algebra.tex l.4925). Flat tensor keeps the sheaf rows exact, with finite products. I checked the T/B/D balancing and both composites of the explicit isomorphism in step 2 by hand. I also tested small cases: X=Y=Spec A, X=Spec Frac A, the empty scheme, and affine X, Y. Each hypothesis is used where needed: separatedness for affine intersections in step 1; flatness of N_j and N_jj' in step 4 and of Gamma(X,F) in step 5; flatness of C, from lem-weil-pbc-flat-morphism-affine-criterion, for the injectivity of c in step 7. The statement change only adds definitions and is not a weakening. It replaces the field-only def-sc-group-scheme with an inline group object over Spec A, and the only citer (rho-tensor-square-eventual-detection) uses it unchanged. Batch-5 flag: lem-trf-valuation-torsionfree-flat is a Mathlib leaf (Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Stacks 0539). It is generic commutative algebra with no proof closure, not part of the trace formula or Poincare duality, so it is accepted. I accept all five declared tool_uses, which are generic quasi-coherent and line-bundle calculus. No duplicate turned up in an rg -L search for external sections, Kunneth and 0BED. FIX (C1/C4): step 7 uses the composition and tensor-pullback comparisons of sections along 1_H x p_X and 1_H x p_Y but did not cite the node that gives them. I added lem-weil-pbc-invertible-pullback-tensor, clause (2), to step 7 uses and text; it was already in proof_deps and tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrExternalInvertibleGlobalSections",
+  "declaration": "AlgebraicGeometry.RelativeExternalSections.dvr_external_invertible_global_sections",
+  "declarations": [
+   "AlgebraicGeometry.RelativeExternalSections.dvr_external_invertible_global_sections",
+   "AlgebraicGeometry.RelativeExternalSections.dvr_external_sections_naturality",
+   "AlgebraicGeometry.RelativeExternalSections.dvr_external_sections_coaction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrExternalInvertibleGlobalSections.lean",
+  "statement": "theorem dvr_external_invertible_global_sections (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] (X Y : Over (Spec R)) [CompactSpace X.left] [CompactSpace Y.left] [IsSeparated X.hom] [IsSeparated Y.hom] [Flat X.hom] [Flat Y.hom] (F : X.left.Modules) (G : Y.left.Modules) [F.IsInvertible] [G.IsInvertible] : ∃ K : (sections R X F ⊗[R] sections R Y G) ≃ₗ[R] sections R (X ⊗ Y) (coefficients F G), ∀ (s : sections R X F) (t : sections R Y G), K (s ⊗ₜ[R] t) = pure F G s t",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a2de37596"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2de37596",
+  "group": "Q154",
+  "result": "fix",
+  "note": "H3/H5 in new node def-sfb-relative-external-sections: IsInduced combined right-coaction coassociativity (IsCoordinateCoaction) with beta(a^*s)=sum pr_H^*(c_i) pr_X^*(s_i) for the LEFT ModObj action; with Mathlib's Delta(c)(g,h)=c(gh) this forces H commutative (F=O, X=H=GL2 counterexample), so dvr_external_sections_coaction was vacuous for nonabelian groups. FIX: new helper coordinateAntipode (antipode of canonical coordinateHopfInstance) used in IsInduced, (h.s)(x)=s(h^-1 x); node statement sentence and lean.declarations updated in fixes/def-sfb-relative-external-sections.json; item module docstring only (signatures unchanged, diagonal c_i d_j still right since S multiplicative). Checked everything else: DVR/qc/separated/flat/invertible hypotheses exact, no Nonempty, pure-tensor-pinned K, naturality via normalized pullTensor (module_pullback_tensor pins on local pure tensors) and square comparisons, ActionGroupoidModel comp pinned, OverClass.fromOver gives the canonical Algebra R Gamma(H), single universe u, lean.statement verbatim, only sorry, docstrings with source/blueprint. nt_compile --json of both fixed modules rc=0; one later docstring line re-wrap not recompiled."
+ }
+}

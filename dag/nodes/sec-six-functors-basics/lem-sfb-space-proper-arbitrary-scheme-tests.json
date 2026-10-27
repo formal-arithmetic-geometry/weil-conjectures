@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-proper-arbitrary-scheme-tests",
+ "kind": "statement",
+ "title": "Properness of arbitrary algebraic-space maps tested on schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes [def-weil-size-convention], and let $q:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Proper means separated, of finite type and universally closed with the intrinsic algebraic-space conventions of [def-sfb-space-morphism-properties]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Then $q$ is proper if and only if for every $S$-scheme $T$ and morphism $T\\to Y$, the algebraic-space projection $X\\times_YT\\to T$ is proper. The source $X\\times_YT$ is not required to be a scheme. No representability by schemes, Noetherian hypothesis, finite presentation, flatness or quasi-compactness is assumed in advance.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 083R (lemma-proper-local), equivalence (1) and (2), without the representability-by-schemes specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If $q$ is proper, apply [lem-sfb-space-proper-base-change] to every $T\\to Y$. It gives properness of $X\\times_YT\\to T$ for arbitrary algebraic-space sources, exactly as required. That node phrases quasi-compactness of a morphism by quasi-compact scheme atlases of the pullbacks to affine schemes; by [lem-a1-space-etale-open-image] such an atlas exists exactly when the point space of the pullback is quasi-compact, which is the quasi-compactness of [def-sfb-space-morphism-properties]. Its separatedness, chartwise local finite type and universal closedness after every algebraic-space base change are literally those of [def-sfb-space-morphism-properties].",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-a1-space-etale-open-image",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 083R (lemma-proper-local), (1) implies (2); Tag 04WP (lemma-base-change-proper)."
+   }
+  },
+  {
+   "text": "Conversely assume the scheme tests. Choose a surjective etale scheme atlas $V\\to Y$ from [def-trf-algebraic-space]; its point map is surjective by [lem-a1-space-point-open-calculus], so the singleton $\\{V\\to Y\\}$ is a jointly surjective etale family. The hypothesis makes $q_V:X_V=X\\times_YV\\to V$ proper, hence quasi-compact and separated by [def-sfb-space-morphism-properties]. For every affine $Z\\to V$ the point space of $X_V\\times_VZ$ is quasi-compact, so by [lem-a1-space-etale-open-image] this space has a surjective etale atlas from a quasi-compact scheme: $q_V$ is quasi-compact in the sense of [lem-trf-space-qc-separated-etale-local]. Apply that criterion to the singleton family: $q$ is quasi-compact and separated in its sense. Converting back by [lem-a1-space-etale-open-image] for each affine $Z\\to Y$, $q$ is quasi-compact and separated in the sense of [def-sfb-space-morphism-properties].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-morphism-properties",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 083R, reverse implication: Tags 03KG (lemma-quasi-compact-local) and 03KM (lemma-separated-local)."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $U\\to X_V$. Properness of $q_V$ includes local finite type. Apply [lem-sfb-space-local-properties-chart-test] first to $q_V$ using the identity chart of $V$ and the chart $U$: $U\\to V$ is locally of finite type. Apply the same criterion to $q$ with the charts $V$ and $U$. Thus $q$ is locally of finite type, and together with its quasi-compactness it is of finite type.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 083R: Tag 040Y (lemma-finite-type-local), the chart criterion; finite type includes quasi-compactness."
+   }
+  },
+  {
+   "text": "For universal closedness fix any algebraic space $Z\\to Y$, put $E=X\\times_YZ$, and choose a surjective etale scheme atlas $p:W\\to Z$. The fibre-product property of [lem-trf-space-fibre-products-etale-covers] identifies $E\\times_ZW$ with $X\\times_YW$. Write $r:E\\times_ZW\\to E$, $h:E\\to Z$, $k:E\\times_ZW\\to W$. By the scheme-test hypothesis $k$ is proper, hence closed on point spaces by [def-sfb-space-morphism-properties]. For a closed subset $C\\subseteq|E|$, continuity from [lem-a1-space-point-open-calculus] makes $|r|^{-1}(C)$ closed. Its image $D$ under $|k|$ is closed. That same node gives surjectivity $|E\\times_ZW|\\to|E|\\times_{|Z|}|W|$, so $D=|p|^{-1}(|h|(C))$: each point pair with equal image lifts, and the reverse inclusion follows from commutativity.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IT (lemma-universally-closed-local), (3) implies (4), the surjective-open atlas argument used in Tag 083R."
+   }
+  },
+  {
+   "text": "The atlas map $|p|$ is open by [lem-a1-space-point-open-calculus] and surjective, since the atlas is surjective [def-trf-algebraic-space] and the same node turns this into surjectivity of the point map. Consequently $|Z|\\setminus|h|(C)=|p|(|W|\\setminus D)$ is open. Thus $|h|(C)$ is closed. Since $Z$ and $C$ were arbitrary, $q$ is universally closed. Combine this with separatedness and finite type from steps 2 and 3 and the definition [def-sfb-space-morphism-properties] to conclude properness.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-trf-algebraic-space",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IT, elementary final topological inference; Tag 083R and definition-proper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-proper-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 083R (lemma-proper-local), (1) iff (2), combining Tags 03KG, 03KM, 040Y, and the open-atlas argument of Tag 03IT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is proper if and only if all of its pullbacks to schemes over the target are proper; also testing on one surjective etale scheme chart suffices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of an algebraic space over another algebraic space can be checked after every scheme base change without assuming representability by schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper morphisms of algebraic spaces can be tested after scheme base change on the target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": IsZariskiLocalAtTarget @IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Proper\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|proper.*space|space.*proper",
+   "results": "[grep] OK 24 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"62\", \"text\": \"instance : ObjectProperty.IsClosedUnderIsomorphisms (C := Scheme) (IrreducibleSpace ·) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"65\", \"text\": \"instance : ObjectProperty.IsClosedUnderIsomorphisms (C := Scheme) (ConnectedSpace ·) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"27\", \"text\": \"open CategoryTheory Limits MorphismProperty TopologicalSpace.Opens AlgebraicGeometry\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"870\", \"text\": \"      have inst : CompactSpace X := HasAffineProperty.iff_of_isAffine.mp ‹QuasiCompact f›\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"28\", \"text\": \"open CategoryTheory TopologicalSpace Opposite MorphismProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"117\", \"text\": \"instance : HasAffineProperty @QuasiCompact (fun X _ _ _ ↦ CompactSpace X) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"25\", \"text\": \"- `MorphismProperty.topologically`: Given a property `P` of maps of topological spaces,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"265\", \"text\": \"/-- If a property of maps of topological spaces is stable under composition, the induced\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"275\", \"text\": \"/-- If a property of maps of topological spaces is satisfied by all homeomorphisms,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"283\", \"text\": \"/-- If a property of maps of topological spaces is satisfied by homeomorphisms and is stable\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"295\", \"text\": \"we may check the corresponding properties on topological spaces. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"50\", \"text\": \"namespace IsProper\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"82\", \"text\": \"theorem quasiCompact_affineProperty_iff_quasiSeparatedSpace [IsAffine Y] (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"83\", \"text\": \"    AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"107\", \"text\": \"instance : HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"110\", \"text\": \"    (by ext; exact quasiCompact_affineProperty_iff_quasiSeparatedSpace _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"186\", \"text\": \"  rw [← quasiCompact_affineProperty_iff_quasiSeparatedSpace X.toSpecΓ]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"148\", \"text\": \"  · have inst : CompactSpace X := HasAffineProperty.iff_of_isAffine.mp ‹QuasiCompact f›\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"153\", \"text\": \"      HasAffineProperty.iff_of_isAffine.mpr (inferInstanceAs (CompactSpace (Spec _)))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"31\", \"text\": \"open CategoryTheory TopologicalSpace Opposite MorphismProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"31\", \"text\": \"open CategoryTheory TopologicalSpace Opposite MorphismProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"345\", \"text\": \"namespace AffineTargetMorphismProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"488\", \"text\": \"namespace HasAffineProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"264\", \"text\": \"namespace HasRingHomProperty\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|proper.*base.change",
+   "date": "2026-10-23",
+   "results": "[grep] OK 6 hit(s)\nReturned names/files: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "verdict": "no match: returned morphism properties concern schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness for arbitrary algebraic space morphisms can be tested after every scheme base change",
+   "date": "2026-10-23",
+   "results": "[leansearch] OK 8 hit(s)\nReturned names/files: AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.IsProper, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+   "verdict": "no match: returned morphism properties concern schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Proper\"",
+   "date": "2026-10-23",
+   "results": "[loogle] OK 0 hit(s)\nReturned names/files: ",
+   "verdict": "no match: returned morphism properties concern schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is proper if and only if every base change to a scheme over its target is proper, without representability by schemes",
+   "date": "2026-10-23",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned names/files: AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated",
+   "verdict": "no match: returned morphism properties concern schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated finite type universally closed morphisms of algebraic spaces are detected on surjective etale scheme atlases of the target",
+   "date": "2026-10-23",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned names/files: AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.UniversallyClosed",
+   "verdict": "no match: returned morphism properties concern schemes, not arbitrary algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-separation-compactness-permanence",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Descent of each overlap of the chosen affine groupoid charts, with cartesian squares and their uniform categorical properties. Supporting input to Tag 0DUS: Tags 050F (lemma-base-change-separated), 050K (lemma-composition-separated), 04YS (lemma-representable-separated-diagonal-closed). Supporting input: Properness of arbitrary algebraic-space maps tested on schemes.",
+   "via": [
+    "lem-sfb-stack-separation-compactness-permanence",
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-proper-arbitrary-scheme-tests",
+  "worker": "stage1",
+  "summary": "Kept the intrinsic algebraic-space statement unchanged. Proved the forward implication by existing arbitrary base-change properness; recovered quasi-compactness, separatedness and local finite type from existing atlas criteria; wrote out universal closedness using point-pair lifting and an open surjective atlas. No new nodes or Mathlib leaves.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), proper direct-image preservation. This supporting geometric lemma follows the inherited alteration/moduli prerequisite chain recorded in blueprint.from.place; steps 1-5 realize its final arbitrary-algebraic-space properness test. Searches for proper, universally closed, scheme tests and 03IT found no blueprint node stating the same assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "The generic algebraic-space atlas criterion recovers quasi-compactness and separatedness; no same-unit node states this joint criterion for arbitrary space targets."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The existing sheaf fibre-product universal property identifies the two iterated base changes; it is the fibre-product notion already used in the item."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "The point-pair lifting, continuity and openness of representable etale maps justify descent of closed images; no same-unit statement gives these point-space facts."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Reviewer FIX: the quasi-compactness of def-sfb-space-morphism-properties (quasi-compact point space of affine pullbacks) and that of lem-trf-space-qc-separated-etale-local / lem-sfb-space-proper-base-change (quasi-compact scheme atlas) agree by this generic point-space criterion; no same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-77a162fac",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-77a162fac (reviewer sub-agent of L); spot-checked: I read Stacks 083R (l.7892; (1)<=>(2) is the item with arbitrary X, Y and no representability) and 03IT (l.1373-1418, the open-surjective atlas argument). Zero new nodes; statement and stmt_deps unchanged; no SGA. Step 3 (chart test for locally of finite type, applied with the identity chart of V and then with V, U) is correct. Step 4 (pasting E x_Z W = X x_Y W; |k| closed; D = |p|^{-1}(|h|(C)) from the point-pair surjectivity of lem-a1-space-point-open-calculus, checked in both directions) and step 5 (|p| open and surjective, so |h|(C) is closed) are also correct. Faults C1/C4: steps 1 and 2 mix two quasi-compactness conventions without citing the bridge. def-sfb-space-morphism-properties (via def-sfb-proper-curve-moduli) asks for compact point spaces of affine pullbacks. lem-sfb-space-proper-base-change and lem-trf-space-qc-separated-etale-local ask for a quasi-compact scheme atlas. Step 2 also needs the atlas to be point-surjective (a jointly surjective family), which is the lem-a1-space-point-open-calculus clause. FIX: steps 1 and 2 now cite lem-a1-space-etale-open-image ('|Z| quasi-compact iff Z has a surjective etale map from a quasi-compact scheme'; no cycle) and step 2 also cites lem-a1-space-point-open-calculus. Step 5's surjectivity is now attributed to the lem-a1 clause. proof_deps and split_report.tool_uses include the new citation. Batch-5: lem-a1-space-point-open-calculus, lem-sfb-space-local-properties-chart-test, lem-sfb-space-proper-base-change, lem-trf-space-qc-separated-etale-local and the added lem-a1-space-etale-open-image reach sec-trace-formula only through def-trf-algebraic-space and generic algebraic-space/fppf foundations (units sk-i-curve-zero, plus generic lemmas of sk-i-additivity/sk-lem-finite). Their closures contain no trace-formula or Poincare theorem node and no nt-assume leaf, so the assumptions supply none of these results and none is a step of their proofs. The DAG grep for 083R/lemma-proper-local found no duplicate; representable-proper-tests is only the scheme-representable specialization. The generic lem-trf-* and lem-a1-* tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperArbitrarySchemeTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_iff_scheme_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperArbitrarySchemeTests.lean",
+  "statement": "theorem proper_iff_scheme_tests {S : Scheme.{u}} {X Y : AlgebraicSpace S} (q : X ⟶ Y) : MapIsProper q ↔ ∀ (T : Over S) (g : schemeSpace T ⟶ Y), MapIsProper (ObjectProperty.homMk (Limits.pullback.snd q.hom g.hom) : enlargedFibreProduct q g ⟶ schemeSpace T)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d1186afc",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 7a6de6e31c0c. The Lean file is byte-identical to that head. The only item-node change is the stmt_deps swap: theorem lem-trf-space-enlarged-etale-ringed-site-model replaced by def-trf-scheme-algebraic-space (owner of schemeSpace) and def-sfb-space-sheaf-fibre-product (owner of enlargedFibreProduct), both existing:true on EnlargedEtaleRingedSite and present in the snapshot and side-live. Against side-live the node only adds these stmt_deps and the lean record. Clause check against Stacks 083R (1)<=>(2): MapIsProper q iff, for all T : Over S and g : schemeSpace T -> Y, MapIsProper of the pullback.snd projection from enlargedFibreProduct q g. One universe u, no extra hypotheses, arbitrary-space source allowed, empty cases covered. Proof is sorry only, docstrings carry source, blueprint tag and 5 steps, lean.statement verbatim. No files changed, so no compile."
+ }
+}

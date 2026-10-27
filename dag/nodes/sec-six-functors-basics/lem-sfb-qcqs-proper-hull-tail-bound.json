@@ -20,12 +20,12 @@
  ],
  "proof": [
   {
-   "text": "For $T=X,Y$, apply the sheaf tensor theorem to $\\mathcal A=\\Ab$ on the chosen small pro-étale site. It gives a closed symmetric monoidal Grothendieck abelian sheaf category, with additive tensor. The module-object theorem therefore makes $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ Grothendieck abelian. In particular its filtered colimits are exact. Coproducts are filtered colimits of finite direct sums, so are exact. The termwise-coproduct theorem identifies coproducts in $D(\\mathcal A_T)$ with termwise sums of representing complexes. Exactness then gives $H^i(\\bigoplus_t K_t)\\simeq\\bigoplus_tH^i(K_t)$: apply the sum to the kernel, image and cokernel sequences defining cohomology.",
+   "text": "For $T=X,Y$, apply the sheaf tensor theorem to $\\mathcal A=\\Ab$ on the chosen small pro-étale site. It gives a closed symmetric monoidal Grothendieck abelian sheaf category, with additive tensor. The module-object theorem therefore makes $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ Grothendieck abelian. In particular its filtered colimits are exact. Coproducts are filtered colimits of finite direct sums, so are exact. The termwise-coproduct theorem identifies coproducts in $D(\\mathcal A_T)$ with termwise sums of representing complexes. Exactness then gives $H^i(\\bigoplus_t K_t)\\simeq\\bigoplus_tH^i(K_t)$: apply the sum to the kernel, image and cokernel sequences defining cohomology. For coproducts indexed in the larger object universe which happen to exist, discard zero summands: a nonzero summand gives a distinct orthogonal idempotent of the vertex, injecting its support into the small endomorphism type. Shrink this support to the morphism universe and apply homology coproduct preservation there.",
    "uses": [
     "lem-weil-pbc-sheaf-tensor-closed",
     "lem-sfb-modobj-grothendieck",
     "def-sp-grothendieck-abelian",
-    "lem-kun-grothendieck-derived-coproducts"
+    "src-weil-derived-homology-preserves-coproducts"
    ],
    "elementary": false,
    "source": {
@@ -49,6 +49,15 @@
    }
   },
   {
+   "text": "The current admissibility predicate also includes finite-subextension-valued algebraic-closure coefficients. Restrict to the least finite coefficient subfield through the specified coefficient isomorphism. The constructible scalar restriction lemma places every restricted constructible generator in the finite-field weak Serre coproduct heart; exactness and coproduct preservation extend this to its whole weak Serre coproduct closure. Apply the existing finite-field heart bound. Flatness of extension makes coefficient restriction preserve injective resolutions and gives the canonical derived direct-image comparison; faithful exact restriction reflects homology vanishing. The other six coefficient cases use the existing heart estimate directly.",
+   "uses": [
+    "lem-sfb-padic-alg-cl-constructible-scalar-restriction",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qlbar-flat"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Choose $d\\geq0$ from the heart estimate. Thus $Rf_*(M[0])$ has no cohomology above $d$ for every $M\\in\\mathcal P_X$. The underived module-object pushforward is additive and left exact. Grothendieck abelianness from Step 1 gives K-injective resolutions, and the triangulated derived-functor theorem applies to its actual total right derived functor. Fix $a\\in\\mathbf Z$, $K\\in\\mathcal L_X$ and set $L=\\tau_{<a}K$. For every $n\\geq0$, the complex $L_n=\\tau_{\\geq-n}L$ is bounded, has cohomology in $\\mathcal P_X$ by Step 2, and has no cohomology above $a-1$. Bounded heart-amplitude dévissage, with upper endpoint $a-1$, gives $H^r(Rf_*L_n)=0$ for every $r>a-1+d$, uniformly in $n$. If $-n>a-1$, $L_n=0$ and the same bound holds.",
    "uses": [
     "lem-sfb-qcqs-proper-serre-heart-bound",
@@ -65,7 +74,7 @@
    }
   },
   {
-   "text": "Apply the module-object Postnikov–Roos theorem to the morphism $f$ and the ordinary ambient object $L$. With $B_n=Rf_*L_n$ it gives a distinguished triangle\n$$Rf_*L\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow(Rf_*L)[1],\\qquad P=\\prod_{n\\geq0}B_n,$$\nand $H^j(P)\\simeq\\prod_{n\\geq0}H^j(B_n)$ for every $j$. Step 3 therefore gives $H^j(P)=0$ for $j>a-1+d$. If $r>a+d$, both $r-1$ and $r$ satisfy this inequality. The exact segment $H^{r-1}(P)\\to H^r(Rf_*L)\\to H^r(P)$ has zero end terms, so $H^r(Rf_*L)=0$. This is an application to all unbounded module-object complexes: it does not require $L$ to be in the hull or to be derived complete.",
+   "text": "Apply the module-object Postnikov–Roos theorem to the morphism $f$ and the ordinary ambient object $L$. With $B_n=Rf_*L_n$ it gives a distinguished triangle\n$$Rf_*L\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow(Rf_*L)[1],\\qquad P=\\prod_{n\\geq0}B_n,$$\nand $H^j(P)\\simeq\\prod_{n\\geq0}H^j(B_n)$ for every $j$. Step 4 therefore gives $H^j(P)=0$ for $j>a-1+d$. If $r>a+d$, both $r-1$ and $r$ satisfy this inequality. The exact segment $H^{r-1}(P)\\to H^r(Rf_*L)\\to H^r(P)$ has zero end terms, so $H^r(Rf_*L)=0$. This is an application to all unbounded module-object complexes: it does not require $L$ to be in the hull or to be derived complete.",
    "uses": [
     "lem-module-object-postnikov-roos",
     "lem-sf-derived-homology-long-exact"
@@ -77,7 +86,7 @@
    }
   },
   {
-   "text": "Take $c=d+1\\in\\mathbf N$. If $r\\geq a+c$, then $r>a+d$, and Step 4 gives the required vanishing. The chosen $d$ and hence $c$ depend only on the fixed morphisms and coefficients, not on $a$ or $K$. Zero objects, empty schemes and empty fibres cause no exception: the same closure and truncation arguments give zero complexes. The argument takes every sum, truncation and derived image in the ordinary ambient category, exactly as required.",
+   "text": "Take $c=d+1\\in\\mathbf N$. If $r\\geq a+c$, then $r>a+d$, and Step 5 gives the required vanishing. The chosen $d$ and hence $c$ depend only on the fixed morphisms and coefficients, not on $a$ or $K$. Zero objects, empty schemes and empty fibres cause no exception: the same closure and truncation arguments give zero complexes. The argument takes every sum, truncation and derived image in the ordinary ambient category, exactly as required.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -90,12 +99,14 @@
   "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-modobj-grothendieck",
   "def-sp-grothendieck-abelian",
-  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
   "lem-sfb-qcqs-proper-serre-heart-bound",
   "lem-sf-derived-homology-long-exact",
   "sk-def-sfb-constructible",
   "sk-def-localizing-closure",
   "def-kun-truncations",
+  "lem-sfb-padic-alg-cl-constructible-scalar-restriction",
+  "lem-sfb-qlbar-flat",
   "sk-def-sfb-module-pushforward-pullback",
   "lem-sfb-grothendieck-k-injective",
   "lem-pc-right-derived-functor-triangulated",
@@ -104,8 +115,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
-  "place": "Refinement proof (2), first paragraph, direct-sum preservation on the ordinary ambient localizing hull: heart upper bound used before the Postnikov passage to unbounded lower tails. Formal heart-to-tail reduction using the ordinary module Postnikov–Roos triangle; the qcqs geometric heart estimate is left as a new statement-only node."
+  "document": "lean/Sheaf/Paper/QcqsProperHullTailBound.lean",
+  "place": "Q4: direct homology-property closure, shrinking nonzero coproduct support; coefficient restriction covers the additional finite-subextension algebraic-closure case, followed by the original bounded-devissage and Postnikov–Roos route."
  },
  "mathlib_searches": [
   {
@@ -245,7 +256,6 @@
  "tool_uses": [
   "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-modobj-grothendieck",
-  "lem-kun-grothendieck-derived-coproducts",
   "lem-sf-derived-homology-long-exact",
   "lem-sfb-grothendieck-k-injective",
   "lem-pc-right-derived-functor-triangulated",
@@ -277,5 +287,27 @@
   "group": "Q64",
   "result": "pass",
   "note": "All clauses match the node: ℓ, the recorded coefficient predicate, qcqs S, proper q and f, K in the hull (finite-Tor constructible generators, ordinary ambient sums), c chosen before a and K, good truncation τ≤(a−1), full total right derived pushforward, H^r = 0 for r ≥ a+c. Edge cases (empty schemes, K = 0, any integers, c = 0) are covered and no assumption is added. lean.statement is verbatim, only the lean field changed, the proof is sorry only, docstrings carry the source, blueprint id and all 5 steps, the report has both sections, and imports match the statement and proof dependency modules. No duplicate: ellAdic_proper_lowerTail_bound is a different, Noetherian node. Advisory: the item's hull is closed under sums indexed by the object universe, while the parent uses localizingClosureOfSize.{u+1}; the parent's class is contained in the item's, so the parent can use it, and the two coincide mathematically. No recompile and no fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261024T015804-L-2451823",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

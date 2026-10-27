@@ -1,0 +1,196 @@
+{
+ "id": "lem-pur-quotient-exchange-diagram-normalization",
+ "kind": "statement",
+ "title": "Normalized quotient-diagram adjunction and exchange identities",
+ "statement": "For two small sites, a geometric morphism with its canonical constant coefficient lift, a commutative Noetherian ring A and ideal I [def-pur-adic-site-strict-quotient-interface], there exist the actual quotient-diagram presentation p [def-pur-perfect-quotient-exchange-presentation] and common-composite isomorphism d from restricted quotient direct image to direct image of strict restriction. PresentationNormalized holds, d is its prescribed restrictionMate, restriction of exchange followed by d equals strictExchange on the entire strict tower, finiteExchange is the fixed finiteProjection, and the displayed evaluation/restriction square of the parent theorem commutes at each positive level. This assertion has no perfectness hypothesis and asserts no projection invertibility or completion-unit identity.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equation 0B56 (equation-projection-formula-map), Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition) and 0940; ordinary module and full-cochain normalization of the actual quotient diagram."
+ },
+ "stmt_deps": [
+  "def-pur-perfect-quotient-exchange-presentation",
+  "def-pur-adic-site-strict-quotient-interface"
+ ],
+ "proof": [
+  {
+   "text": "Construct the two strict diagonal presentations and their normalized reductions. Lift the actual component inverse images to semilinear quotient systems, assemble their component adjunctions, and transport through the sequence-site equivalences. Evaluation of extension sends each pure tensor to itself; scalar restriction keeps sections unchanged. Descend on entire flat-term K-flat representatives, retaining all quotient transitions.",
+   "uses": [
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-pur-system-evaluation-topos",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03CZ, 06YY and 0940, quotient-diagram construction."
+   }
+  },
+  {
+   "text": "Constant inverse image identifies the quotient algebra diagrams, including transitions. Use the canonical $d$ from the diagram restriction lemma and $b$ from the pullback-extension coherence lemma. The restriction-counit identity gives $(d_NU(t))^\\flat=U(t^\\flat)b_M$: compose it with $GU(t)$ and use naturality of $b$.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-ringed-coefficient-restriction-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product); coefficient-restriction counit calculation"
+   }
+  },
+  {
+   "text": "Set $M=\\mathcal R_Y(PF)$, $N=\\mathcal R_XF$, $t=h_F$. The representative-normalized reduction comparison and the new coherence square identify its restricted transpose with $(\\Delta\\varepsilon_F\\otimes1)\\theta_{\\Delta PF}$. Since $\\varepsilon^JG(\\chi_F)=\\Delta\\varepsilon_F$, the augmented projection lemma gives exactly this transpose for $h_F^A$. Injectivity of adjunction therefore gives $dU(h_F)=h_F^A$.",
+   "uses": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Equation 0B56 (equation-projection-formula-map), Tags 07A4 and 07A6; compare the two counit transposes on the diagram site"
+   }
+  },
+  {
+   "text": "The new evaluation-adjunction lemma sends $h_F$ to the quotient-linear mate $h_{F,n}$ with the stated source and target: use quotient projection evaluation with $H=F,K=\\underline A$; the two tensor-unit projections are identities. Its evaluation/restriction square identifies $U(h_{F,n})$ with $\\operatorname{ev}_n(h_F^A)$ by Step 2. The augmented projection lemma identifies the latter with the ordinary counit-tensor projection. All these identifications retain the actual coefficient restrictions.",
+   "uses": [
+    "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Equation 0B56 and Tag 07A6; quotient-diagram evaluation and coefficient-restriction normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+  "lem-pur-algebra-diagram-pullback-extension-coherence",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-quotient-diagram-projection-evaluation",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-pur-strict-quotient-diagonal-normalization",
+  "lem-pur-system-evaluation-topos",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit specialization and assembly of the cited Stacks arguments; extracted from the parent auxiliary without changing its hypotheses or conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with direct image for perfect constant coefficients, compatibly with completion units",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Derivation.compAlgebraMapL; Algebra.Extension.CotangentSpace.map; Derivation.compAlgebraMap; AdicCompletion.ofTensorProduct_naturality; ModuleCat.extendScalarsComp; AdicCompletion.instIsScalarTower; AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(app|comp)",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*projection|projection.*quotient|augmentation.*mate",
+   "results": "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; Mathlib/Topology/FiberBundle/Basic.lean; Mathlib/Topology/Inseparable.lean; Mathlib/Topology/DiscreteQuotient.lean; Mathlib/Topology/Order/ProjIcc.lean; Mathlib/RepresentationTheory/Rep/Basic.lean; Mathlib/Analysis/Normed/Group/Quotient.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction mate of reduction by perfect quotient coefficients on a small ringed site is an isomorphism after evaluating a strict tower",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.mateEquiv; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; PresheafOfModules.sheafificationAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_mateEquiv\"",
+   "results": "CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex_map_f|mapHomologicalComplex_obj_X",
+   "results": "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectQuotientExchangeNormalization",
+  "date": "2026-10-24",
+  "group": "B7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; coefficient-compatibility clause (7) of sk-thm-sf-compatibility, through lem-pur-perfect-quotient-exchange-normalization: Normalized quotient-diagram adjunction and exchange identities.",
+   "via": [
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientExchangeDiagramNormalization",
+  "file": "lean/Sheaf/Paper/QuotientExchangeDiagramNormalization.lean",
+  "declaration": "CategoryTheory.AdicSites.PerfectQuotientExchange.quotientExchangeDiagramNormalization",
+  "statement": "theorem quotientExchangeDiagramNormalization [IsNoetherianRing A] :\n    ∃ (p : Presentation f A I)\n      (d : p.push.rightDerivedFunctor ⋙ p.atY.restrictionD ≅\n        p.atX.restrictionD ⋙ f.towerPush A),\n      PresentationNormalized f A I p ∧\n      d.hom = restrictionMate p ∧\n      (∀ F : X.derived A,\n        p.atY.restrictionD.map ((exchange p).app F) ≫\n            d.hom.app (p.atX.reductionD.obj F) = (strictExchange p).app F) ∧\n      (∀ (F : X.derived A) (n : ℕ),\n        (finiteExchange p n).app F = f.finiteProjection A I n F) ∧\n      (∀ (F : X.derived A) (n : ℕ),\n        (Y.evaluate A n).map ((strictExchange p).app F) ≫\n            (Y.evaluate A n).map\n              ((f.towerPush A).map (p.reductionX.tower.hom.app F)) ≫\n            (f.evaluatePushIso A n).hom.app ((X.reduction A I).obj F) ≫\n            (f.push A).map ((X.finiteEvaluationIso A I n).hom.app F) ≫\n            (f.finiteRestrictionPushIso A I n).hom.app ((X.finiteReduction A I n).obj F) =\n          (Y.evaluate A n).map (p.reductionY.tower.hom.app ((f.push A).obj F)) ≫\n            (Y.finiteEvaluationIso A I n).hom.app ((f.push A).obj F) ≫\n            (Y.finiteRestriction A I n).map ((finiteExchange p n).app F))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7bed",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122541-L-1784662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7bed",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122541-L-1784662",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (byte-identical); relocated interface block vs clone (verbatim but for blueprint tags); 3 new sorried statements vs item clauses/nodes (strictly smaller, true); node proof fields vs Lean proof"
+ }
+}

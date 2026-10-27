@@ -1,0 +1,233 @@
+{
+ "id": "lem-trf-strict-local-closed-chart-map",
+ "kind": "statement",
+ "title": "Canonical strict-local map in closed affine quotient charts",
+ "statement": "Let $i:Z\\to W$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], let $\\bar a:\\operatorname{Spec}\\Omega\\to Z$ be a geometric point [def-weil-geometric-point], with underlying point $a\\in Z$, and choose an affine open $U=\\operatorname{Spec}A\\subset W$ containing $i(a)$ [def-weil-affine-spectrum, def-weil-open-immersion]. Write $i^{-1}(U)=\\operatorname{Spec}(A/I)$, let $\\mathfrak p\\supset I$ be the prime of $i(a)$, put $R=A_{\\mathfrak p}$ and $S=(A/I)_{\\mathfrak p/I}=R/IR$ [def-weil-pbc-localization-at-prime], and let $K\\subset\\Omega$ be the separable algebraic closure of the common residue field $\\kappa(\\mathfrak p)$ [def-weil-residue-field, def-weil-pbc-relative-separable-closure]. Put $C=\\mathcal O^{\\mathrm{sh}}_{W,i\\bar a}$ and $D=\\mathcal O^{\\mathrm{sh}}_{Z,\\bar a}$, the coordinate rings of the strict localizations of [def-weil-pbc-strict-henselization-limit], with structural maps $j_W,j_Z$. Let $u:C\\to D$ be the canonical local ring homomorphism of [lem-weil-pbc-strict-henselization-functoriality](3), so that $j_W\\circ\\operatorname{Spec}u=i\\circ j_Z$. Then $j_W$ and $j_Z$ factor through $U$ and $i^{-1}(U)$, respectively; their chart maps give local structure maps $R\\to C$ and $S\\to D$ for which $C$ and $D$ are algebraic strict henselizations relative to $K$ [def-sc-ring-strict-henselization]. Both rings are strictly henselian local [def-weil-pbc-henselian-terminology], and their geometric evaluations identify their residue fields with $K$, with structure maps induced by $\\kappa(\\mathfrak p)\\subset K$. The map $u$ is an $R$-algebra homomorphism, with $D$ viewed as an $R$-algebra through $R\\to S$, and induces $\\mathrm{id}_K$ on residue fields. In particular $u(IC)=0$. For $Q=C/IC$ and its quotient map $q:C\\to Q$, equip $Q$ with the induced $S=R/IR$-algebra structure. There is a unique $S$-algebra map $\\bar u:Q\\to D$ with $u=\\bar u\\circ q$; it is local, and $\\bar u^{-1}(\\mathfrak m_D)=q(\\mathfrak m_C)=\\mathfrak m_Q$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX (lemma-describe-etale-local-ring), affine-neighbourhood and residue-triples comparison; compatibility of the induced map with algebra.tex Tag 04GU (lemma-strictly-henselian-functorial)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-geometric-point",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-strict-local-closed-chart-models] to obtain the two individual chart models, their pointed presentations and specified residue identifications.",
+   "uses": [
+    "lem-trf-strict-local-closed-chart-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structural square of the uniquely pointed canonical strict-local map, the two chart factorization equations and the pullback square imply equality after composing with j. Cancel the open immersion j and apply faithfulness of Spec to obtain u alpha = beta quotient. Localization extensionality then gives u composed with R to C = R to S to D. The pointed equation characterizing the canonical map gives epsilonD u = epsilonC by Spec faithfulness. Substitute the chart-model evaluation equations and cancel the embedding K into Omega to obtain presentationD.residueMap u = presentationC.residueMap. If u(c) is a unit, its residue in K is nonzero, so c has nonzero residue and is a unit. Thus u is local.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-strict-henselization-point-evaluation",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a in I the chart equation gives u(alpha(a))=beta(0)=0. The map/comap adjunction for ideals gives IC contained in ker(u). Set Q=C/IC and q the quotient map; define v:Q to D by the quotient lift of u. The composite R to C to Q kills IR because it sends a in I to q(alpha(a))=0. Its quotient lift defines the actual S-algebra structure on Q. The R-algebra equation for u and surjectivity of R to S prove that v respects this S-action. Surjectivity of q proves uniqueness of the resulting S-algebra homomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ring map v:Q to D makes Q nontrivial. A nontrivial quotient of the local ring C is local. If v(q(c)) is a unit then u(c) is a unit; locality of u makes c a unit, hence q(c) is a unit. This proves locality of v. The image of the maximal ideal under the surjective quotient map q is the maximal ideal of Q. Locality of v identifies its maximal-ideal inverse image with that ideal, giving both required equalities.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-strict-local-closed-chart-models",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX and paragraph after Tag 03PS, with algebra.tex Tag 04GU. Individual chart-model existence is isolated as lem-trf-strict-local-closed-chart-models; map compatibility and the quotient calculation are implemented in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes the canonical homomorphism on geometric strict local rings is compatible with affine quotient charts and induces identity on the common separable residue closure",
+   "results": "AlgebraicGeometry.IsClosedImmersion.Spec_map_residue; AlgebraicGeometry.IsClosedImmersion.SpecMap_residue; AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField; AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue; AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField; AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField; AlgebraicGeometry.Scheme.SpecMap_residue_apply; AlgebraicGeometry.Scheme.Spec_map_residue_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this comparison of strict-local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, IsLocalRing",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this comparison of strict-local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|strict_henselization|StrictHensel",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this comparison of strict-local rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric strict localization at a point on a closed subscheme has an algebraic strict henselization chart with compatible local quotient map",
+   "results": "AlgebraicGeometry.Scheme.residue; AlgebraicGeometry.StructureSheaf.localizationToStalk_of; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk; AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'; AlgebraicGeometry.SpecToEquivOfLocalRing; AlgebraicGeometry.openToLocalization; AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway; AlgebraicGeometry.stalkClosedPointIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this comparison of strict-local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the comparison between geometric etale local rings and algebraic strict henselizations for a quotient ring",
+   "results": "Algebra.IsEtaleAt.comp; StandardEtalePair.homEquiv; StandardEtalePair.homEquiv_apply_coe; StandardEtalePair.homEquiv_symm_apply; StandardEtalePair.lift; StandardEtalePair.HasMap.map; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this comparison of strict-local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion the canonical map on strict henselizations is local and factors through the quotient ideal, compatibly with affine charts",
+   "results": "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk; AlgebraicGeometry.IsClosedImmersion.SpecMap_residue; AlgebraicGeometry.IsClosedImmersion.Spec_map_residue; AlgebraicGeometry.IsClosedImmersion.lift; AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι; AlgebraicGeometry.IsClosedImmersion.lift_fac; AlgebraicGeometry.IsClosedImmersion.Spec_iff; AlgebraicGeometry.instIsClosedImmersionLiftCoborder",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations compares the geometric strict-local rings with the specified algebraic strict henselizations and their canonical chart map"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|strict_henselization|StrictHensel",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations compares the geometric strict-local rings with the specified algebraic strict henselizations and their canonical chart map"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, IsLocalRing",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations compares the geometric strict-local rings with the specified algebraic strict henselizations and their canonical chart map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic strict henselization of a local ring agrees with the geometric pointed etale neighborhood colimit in an affine chart",
+   "results": "HenselianLocalRing.TFAE; HenselianLocalRing.toIsLocalRing; HenselianLocalRing.casesOn; instHenselianRingMaximalIdeal; HenselianLocalRing; AlgebraicGeometry.Scheme.mk.noConfusion; RingHom.Etale.ofLocalizationSpanTarget; Algebra.Etale.of_isLocalizationAway",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations compares the geometric strict-local rings with the specified algebraic strict henselizations and their canonical chart map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the comparison of geometric strict local rings with algebraic strict henselizations under a quotient of local rings",
+   "results": "PreTilt.mk_comp_untilt_eq_coeff_zero; IsAdicComplete.StrictMono.mk_comp_liftRingHom; IsAdicComplete.StrictMono.mk_liftRingHom; Localization.localRingHom_comp; AlgebraicGeometry.Scheme.Hom.liftQuotient_comp; IsLocalRing.ResidueField.map_comp_residue; MaximalSpectrum.mapPiLocalization_naturality; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations compares the geometric strict-local rings with the specified algebraic strict henselizations and their canonical chart map"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-closed-immersion-strict-localization-cartesian",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the Orgogozo closed-image reduction, Lemma 3.2.2 proof, the identification 'F \\times_S S(a) = F(a)' of the strict-local tubes through the closed image. Returned proof Steps 1-2: simultaneous affine models, structure-map compatibility, prescribed residue identity, and local quotient factorization.",
+   "via": [
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-trf-nearby-closed-image",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-strict-local-closed-chart-map",
+  "worker": "stage1",
+  "summary": "Reused the existing pointed affine strict-local/algebraic comparison and strict-henselization functoriality. Proved compatibility of the actual chart maps by affine faithfulness and localization uniqueness, then wrote the annihilation, quotient factorization and locality calculations explicitly. Statement retained; no new nodes.",
+  "blueprint": "Normal-cone specialization underlying (1)--(2) of lem-trf-local-term-locality: the closed-image strict-local comparison isolated by the chain through lem-trf-closed-immersion-strict-localization-cartesian. The current latest blueprint proof uses the Varshavsky normal-cone route; this is a ring/chart tool below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Existence of the algebraic strict henselizations for the specified K; a general local-ring tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Pointed affine comparison including the structural-map and evaluation equations, which are needed for the simultaneous chart models; the trace-formula unit has no separate such generic chart theorem."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "The specified canonical local ring map, structural square and prescribed residue map; generic scheme strict-local functoriality below the normal-cone route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-8dc81f860",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8dc81f860 (reviewer sub-agent of L); spot-checked: Read the item's four steps, every cited statement, Stacks 04HX (etale-cohomology.tex l.4257 ff) and 04GU (algebra.tex l.43369), and the parent's use of the item. This is the first delivery for this item, with no repair note, so the re-split rules do not apply. There are no new nodes. The statement is kept verbatim, and u is the specified map of functoriality(3), not a free map. The item is a strictly smaller preparatory lemma for the parent; the parent gets the isomorphism of ū from lem-trf-ind-etale-quotient-two-base-inverse, so there is no restatement and no cycle. Small cases checked: I=0, nilpotent I, non-closed p, Ω larger than K, non-Noetherian A. Steps 3 and 4 (annihilation of IC, the induced S-algebra map ū, locality of Q with m_Q=q(m_C)) are correct. FIX for two short gaps. (1) In Step 1, the triples lemma gives a colimit over triples, but the comparison node needs an algebraic strict henselization indexed by pairs. I added the triple-to-pair correspondence χ ↦ (S', ker χ, κ(ker χ)→K) with matching morphisms. I also added the extension A→C to R→C and the R-linearity of θ, citing lem-weil-pbc-ring-localization-universal-property, and cited def-weil-pbc-relative-separable-closure for K being separably closed. (2) In Step 2, 'id_K with the geometric identifications just fixed' did not show that the clause-(1) identification of functoriality agrees with the evaluation identification. I added the argument: ev∘ℓ_V = v̄^# = incl∘ι∘res∘ℓ_V, and uniqueness out of a colimit gives ev = incl∘ι∘res, citing def-weil-pbc-strict-henselization-point-evaluation and def-weil-pbc-category-colimit. proof_deps is updated to the union of the uses. The three declared tool_uses (strict-henselization triples, the affine strict-local ring comparison, strict-henselization functoriality) are generic and accepted. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-strict-local-closed-chart-map.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalClosedChartMap",
+  "declaration": "AlgebraicGeometry.Scheme.strictLocalClosedChartMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.StrictLocalClosedChartRingData",
+   "AlgebraicGeometry.Scheme.strictLocalClosedChartMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalClosedChartMap.lean",
+  "statement": "theorem strictLocalClosedChartMap {Z W : Scheme.{u}} (i : Z ⟶ W) [IsClosedImmersion i] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{u}) (I : Ideal A) (j : Spec A ⟶ W) [IsOpenImmersion j] (k : Spec (.of (A ⧸ I)) ⟶ Z) [IsOpenImmersion k] (hsquare : IsPullback k (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) i j) (x : Spec (.of Ω) ⟶ Spec (.of (A ⧸ I))) (p : Spec A) [Algebra p.asIdeal.ResidueField Ω] (hx : x ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) = Spec.map ((Spec.residueFieldIso A p).hom ≫ CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField Ω)) ≫ (Spec A).fromSpecResidueField p) : ∃ (α : A →+* strictHenselizationRing ((x ≫ k) ≫ i)) (β : (A ⧸ I) →+* strictHenselizationRing (x ≫ k)), Spec.map (CommRingCat.ofHom α) ≫ j = strictHenselizationStructuralMap ((x ≫ k) ≫ i) ∧ Spec.map (CommRingCat.ofHom β) ≫ k = strictHenselizationStructuralMap (x ≫ k) ∧ Nonempty (StrictLocalClosedChartRingData A I p.asIdeal (Localization.AtPrime p.asIdeal) (Localization.AtPrime p.asIdeal ⧸ I.map (algebraMap A (Localization.AtPrime p.asIdeal))) (strictHenselizationRing ((x ≫ k) ≫ i)) (strictHenselizationRing (x ≫ k)) (separableClosure p.asIdeal.ResidueField Ω) Ω (Ideal.Quotient.mk (I.map (algebraMap A (Localization.AtPrime p.asIdeal)))) α β (separableClosure p.asIdeal.ResidueField Ω).subtype (strictHenselizationPointEvaluation ((x ≫ k) ≫ i)) (strictHenselizationPointEvaluation (x ≫ k)) (Spec.preimage (strictHenselizationMap i (x ≫ k))).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-beef460de",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Read the node, all 12 stmt_deps, the module and report, and the exact side declarations (StrictHenselizationPresentationIn/residueMap, strictHenselizationMap via the existsUnique characterization, strictHenselizationPointEvaluation, strictHenselizationFunctoriality). Every node clause is rendered. Hypotheses: hsquare is the inverse-image chart; hx fixes p and the residue embedding without loss of generality. R, S=R/IR, K=separableClosure and C, D are the recorded objects; u is the Spec preimage of the canonical map. Conclusions: α/β factorisations, local base maps, presentations, strict henselianity, residue identifications pinned by evaluation (ι injective), R-linearity, id_K, IC killed, unique S-algebra desc, Q local, comap equality. All record fields are forced by equations. Edge cases: I=0, nilpotent I, non-closed p, non-Noetherian A, Ω>K, every characteristic, empty Z. Single universe u, as the dependency requires. lean.statement is verbatim and only the lean field changed. Advisory: strictHenselizationPointEvaluation's owner node is in proof_deps only, not stmt_deps; this follows precedent (Q61/Q63 PASS). No compile since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T091334-L-3334751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

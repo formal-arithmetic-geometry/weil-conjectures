@@ -1,0 +1,243 @@
+{
+ "id": "lem-pd-generalized-tensor-normalization-unit-equation",
+ "kind": "statement",
+ "title": "Generalized tensor normalization implies the geometric-unit equation",
+ "statement": "Let $C,D$ be sites small in a common module universe [def-weil-pbc-sites-and-cohomology], and let $v:C\\to D$ induce a geometric adjunction $F\\dashv u_*$ on sheaves of sets, with $u_*$ given by precomposition with $v$, $F$ preserving finite limits, and unit $\\eta^{\\mathrm g}$. Let $R,A,S$ be commutative ring sheaves, with $R$ on $C$ and $A,S$ on $D$. Let $I$ be an algebraic inverse-image presentation of $F$ from $R$-modules to $A$-modules [def-weil-pbc-algebraic-inverse-image], with underlying identifications $j_X:F|X|\\cong|IX|$, and let $\\alpha:A\\to S$. For every $R$-module sheaf $X$ put $LX=S\\otimes_A IX$, using sheafified scalar extension [def-pur-sheaf-tensor-product], and write $q_X:|IX|\\to|LX|$ for $x\\mapsto1\\otimes x$. Let $P$ be module direct image with scalar restriction along the ring map $c:R\\to u_*S$ geometrically adjoint to $F|R|\\cong|A|\\xrightarrow{\\alpha}|S|$, using the ring identification of the presentation. Assume the underlying maps $u_*(q_Xj_X)\\eta^{\\mathrm g}_{|X|}$ are $R$-linear, and denote them by $\\eta_X:X\\to PLX$. Let $M,N$ be $R$-module sheaves [def-weil-sheaf-of-modules-category]. Let $p_{LM,LN}:PLM\\otimes_R PLN\\to P(LM\\otimes_S LN)$ be the $R$-linear sheaf map induced by the sectionwise pure-tensor pairing at $v(U)$.\n\nSuppose an $S$-linear sheaf map $\\mu:L(M\\otimes_RN)\\to LM\\otimes_SLN$ has the following generalized normalization: for every sheaf of sets $Z$ on $C$ and maps $x:Z\\to|M|$, $y:Z\\to|N|$, $z:Z\\to|M\\otimes_RN|$ with $z(t)=x(t)\\otimes y(t)$ on all sections, one has on all sections of $FZ$\n$$\\mu\\,q_{M\\otimes_RN}j_{M\\otimes_RN}F(z)\n=\\operatorname{pure}_S\\bigl(q_Mj_MF(x),q_Nj_NF(y)\\bigr),$$\nwhere $\\operatorname{pure}$ is the section pairing into the sheaf tensor [def-pur-sheaf-tensor-product]. Then, as $R$-linear sheaf maps,\n$$P(\\mu)\\circ\\eta_{M\\otimes_RN}\n=p_{LM,LN}\\circ(\\eta_M\\otimes\\eta_N).$$\nNo module adjunction, lax coherence, invertibility or naturality of $\\mu$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, third Hom/bilinear equality; agent expansion of geometric-unit naturality in original item Step 3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-canonical-ringed-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take Z to be the cartesian product of the ULift-valued underlying sheaves of M and N. The two projections give x and y. Define z sectionwise as ULift.up of ringedComparisonPure. Naturality of the module sheafification unit and tensorObjIsoSheafification.inv, together with sectionwise tensor restriction, proves that z is a sheaf morphism. Its pure-tensor equation is definitional. This directly constructs the needed pairing without the equal-site-universe restriction of tensor_bilinear_universal.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, Hom/Bilin display following Tag 0GMW; agent choice of the product test sheaf for Tag 03EL."
+   }
+  },
+  {
+   "text": "Fix $U\\in C$, $m\\in M(U)$, $n\\in N(U)$, and put $\\xi=\\eta^{\\mathrm g}_{Z,U}(m,n)\\in(FZ)(vU)$. Naturality of the geometric unit means $u_*F(f)\\circ\\eta^{\\mathrm g}_Z=\\eta^{\\mathrm g}_Y\\circ f$ for every map $f:Z\\to Y$ of sheaves of sets. Evaluate this defining naturality identity for $f=x,y,z$. Since $u_*$ is precomposition, it gives $(Fx)_{vU}(\\xi)=\\eta^{\\mathrm g}_{|M|,U}(m)$, $(Fy)_{vU}(\\xi)=\\eta^{\\mathrm g}_{|N|,U}(n)$, and $(Fz)_{vU}(\\xi)=\\eta^{\\mathrm g}_{|T|,U}(m\\otimes_Rn)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality; agent expansion using the defining naturality of the assumed geometric unit."
+   }
+  },
+  {
+   "text": "Apply generalized normalization to $(Z,x,y,z)$ and evaluate its equation over $vU$ at $\\xi$. Substitute the three identities of Step 2. By the stipulated definition $\\eta_X=u_*(a_X)\\eta^{\\mathrm g}_{|X|}$ and the action of $P$ on maps, the left side becomes $(P\\mu)_U(\\eta_{T,U}(m\\otimes_Rn))$. The right side becomes $\\operatorname{pure}_{S,vU}(\\eta_{M,U}(m),\\eta_{N,U}(n))$. Thus these expressions agree for every $U,m,n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality; agent evaluation of the assumed normalization at the geometric-unit section."
+   }
+  },
+  {
+   "text": "Naturality of the counit of module sheafification and of its monoidal tensorator proves naturality of tensorObjIsoSheafification in both modules. Combine this with naturality of the sheafification unit: tensorHom sends ringedComparisonPure(m,n) to ringedComparisonPure(eta_M(m),eta_N(n)). The assumption hpairing then identifies the right composite on pure sections with the expression in Step 3. To extend equality to sheaf maps, precompose with tensorObjIsoSheafification.inv, apply injectivity of the module sheafification adjunction Hom equivalence, and apply sectionwise ModuleCat tensor extensionality. No assertion that all sheaf tensor sections are pure is used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, Hom/Bilin display following Tag 0GMW; conclusion of the Tag 03EL third-equality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pur-presheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, third Hom/Bilin equality, expanded using geometric-unit naturality and the sheafification universal property of Section 03EK; proved directly with independent site universes by K6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized morphism from ringed module pullback of a tensor to the tensor of pullbacks has adjunct equal to the pushforward pure tensor pairing composed with the two adjunction units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id\\n        (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id X)))\\n      (AlgebraicGeometry.Scheme.Modules.pullbackId X).hom =\\n    (AlgebraicGeometry.Scheme.Mod\", \"doc\": \"For the identity morphism on a scheme $X$, the conjugate equivalence associated with the pullback-pushforward adjunction relates the natural transformation from the pullback identity functor to the in\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give module adjunctions or ordinary ring formulas, not this generalized normalization equation for arbitrary sheaf maps and the geometric unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id (SheafOfModules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id S))) (SheafOfModules.pull\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give module adjunctions or ordinary ring formulas, not this generalized normalization equation for arbitrary sheaf maps and the geometric unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module pullback generalized pure tensor normalization determines its adjoint by tensoring the adjunction units",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).unit.app M).val.app U x = M.val.map (adj.counit.app U.unop).op x\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Sheaf.pullback\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : Y.Sheaf A ⥤ X.Sheaf A\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ maps sheaves on $ Y $ to sheaves on $ X $ and is defined as the right adjoint to the sheaf pushforward\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{I J : Type u} (f : I → J) :\\n  (pullback φ).map (freeMap f) ≫ (pullbackObjFreeIso φ J).hom = (pullbackObjFreeIso φ I).hom ≫ freeMap f\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give module adjunctions or ordinary ring formulas, not this generalized normalization equation for arbitrary sheaf maps and the geometric unit."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*tensor|tensor.*homEquiv|leftAdjointOplaxMonoidal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give module adjunctions or ordinary ring formulas, not this generalized normalization equation for arbitrary sheaf maps and the geometric unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric inverse image preserving products, applying a generalized bilinear pairing to inverse image sections and the geometric unit gives the tensor of module adjunction unit sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Invertible.rTensorEquiv\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} →\\n  {M : Type v} →\\n    {N : Type u_1} →\\n      (P : Type u_2) →\\n        (Q : Type u_3) →\\n          [inst : CommSemiring R] →\\n            [inst_1 : AddCommMonoid M] →\\n              [inst_2 : AddCommMonoid N] →\\n                [inst_3 : AddCommMonoid P] →\\n                  [inst_4 : AddCom\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q, M$ be $R$-modules. If $M$ is an invertible module, then tensoring on the right with $M$ induces a linear equivalence of $R$-modules from the module of\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).unit.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"For a commutative ring homomorphism $ f : R \\\\to S $, the unit of the adjunction between the extension of scalars functor and the restriction of scalars functor, when applied to an element $ m $ of an \"}\n  {\"name\": \"Algebra.FormallyUnramified.comp_sec\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [inst_6 : IsScalarTower R S M]\\n  [inst_7 : Algebra.FormallyUnramified R S] [inst_8 : Algebra.EssFiniteType R S],\\n  T\", \"doc\": \"For a formally unramified algebra $ S $ over $ R $ and an $ S $-module $ M $, the composition of the linear map induced by left scalar multiplication (lifted via the tensor product universal property)\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"Module.Invertible.rTensorInv_leftInverse\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} {M : Type v} {N : Type u_1} (P : Type u_2) (Q : Type u_3) [inst : CommSemiring R]\\n  [inst_1 : AddCommMonoid M] [inst_2 : AddCommMonoid N] [inst_3 : AddCommMonoid P] [inst_4 : AddCommMonoid Q]\\n  [inst_5 : Module R M] [inst_6 : Module R N] [inst_7 : Module R P] [inst_8 : Module R Q]\\n  (\", \"doc\": \"The right tensor inverse map is a left inverse of the right tensor product homomorphism, meaning their composition yields the identity map on the space of linear maps between modules.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"TensorPower.pairingDual_tprod_tprod\", \"module\": \"Mathlib/LinearAlgebra/TensorPower/Pairing\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {n : ℕ}\\n  (f : Fin n → Module.Dual R M) (v : Fin n → M),\\n  ((TensorPower.pairingDual R M n) ((PiTensorProduct.tprod R) f)) ((PiTensorProduct.tprod R) v) = ∏ i, (f i) (v i)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $, and a natural number $ n $, the pairing of the tensor products $ \\\\bigotimes_{i=1}^n \\\\mathrm{Dual}(M) $ and $ \\\\bigotimes_{i=1}^n M $ evaluated a\"}\n  {\"name\": \"FGModuleCat.FGModuleCatCoevaluation_apply_one\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"∀ (K : Type u) [inst : Field K] (V : FGModuleCat K),\\n  (CategoryTheory.ConcreteCategory.hom (FGModuleCat.FGModuleCatCoevaluation K V).hom) 1 =\\n    ∑ i, (Module.Basis.ofVectorSpace K ↑V) i ⊗ₜ[K] (Module.Basis.ofVectorSpace K ↑V).coord i\", \"doc\": \"The coevaluation morphism applied to the multiplicative identity element $1$ in the base field $K$ yields the sum over the basis elements $e_i$ of the vector space $V$, each tensored with their corres\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give module adjunctions or ordinary ring formulas, not this generalized normalization equation for arbitrary sheaf maps and the geometric unit."
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange|tensor.*changeOfRings|changeOfRings.*tensor|homEquiv.*tensor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give module adjunctions or ordinary ring formulas, not this generalized normalization equation for arbitrary sheaf maps and the geometric unit."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_naturality|tensor.*unit|unit.*tensor",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Discrete.lean\", \"Mathlib/CategoryTheory/Monoidal/Discrete.lean\", \"Mathlib/CategoryTheory/Monoidal/Discrete.lean\"], \"digest\": \"0b58d50cb5ee29d0\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. Hits concern ordinary tensor restrictions, module adjunctions, or the tensor-unit object, not arbitrary generalized normalization and the geometric-unit equation.",
+   "directory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit_naturality\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\", \"CategoryTheory.LiftRightAdjoint.unitEqualizes\"], \"digest\": \"dc5b6bd2b0a9e6ff\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. The hit unit_naturality is the defining naturality equation used in elementary Step 2, not the tensor assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules a tensor comparison preserving generalized pure tensors is compatible with the inverse image adjunction unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\"], \"digest\": \"8445489776276e20\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. Hits concern ordinary tensor restrictions, module adjunctions, or the tensor-unit object, not arbitrary generalized normalization and the geometric-unit equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generalized pure tensor normalization for inverse image of sheaves implies compatibility with the geometric adjunction unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"877aceae7a2d67e4\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. Hits concern ordinary tensor restrictions, module adjunctions, or the tensor-unit object, not arbitrary generalized normalization and the geometric-unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|unit",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"24\", \"58\", \"60\", \"68\"], \"digest\": \"5009c6f58a84e2c6\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. Hits concern ordinary tensor restrictions, module adjunctions, or the tensor-unit object, not arbitrary generalized normalization and the geometric-unit equation.",
+   "directory": "Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"89e277e5458598cf\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. Hits concern ordinary tensor restrictions, module adjunctions, or the tensor-unit object, not arbitrary generalized normalization and the geometric-unit equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two linear morphisms from a sheaf tensor product agree on pure tensors then they are equal; compatibility of tensor normalization with the geometric inverse image unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"PresheafOfModules.Monoidal.tensorHom\", \"PresheafOfModules.Monoidal.tensorObj\", \"SheafOfModules.unitHomEquiv_comp_apply\"], \"digest\": \"44905eaa4317bce2\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item. Hits concern ordinary tensor restrictions, module adjunctions, or the tensor-unit object, not arbitrary generalized normalization and the geometric-unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-ringed-tensor-adjunction-mate",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Parent def-pd-proetale-section-module-functors original Steps 3 and 7 / retained completion Steps 4–5 (Verdier exchange Step 2); Original item Step 3: generalized normalization tested on the product of underlying sheaves, followed by geometric-unit naturality and sheaf tensor universality.",
+   "via": [
+    "lem-pd-ringed-tensor-adjunction-mate",
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pd-generalized-tensor-normalization-unit-equation",
+  "worker": "stage1",
+  "summary": "Q75 supplied the four-step proof using the product of the underlying sheaves, defining naturality of the geometric unit, evaluation of generalized normalization, and the existing sheaf tensor Hom/Bilin bijection. Statement and statement dependencies unchanged; no new nodes. The module adjunction and monoidal coherence are not used. Mathlib searches were run and logged, and no declaration states this entire item.",
+  "blueprint": "This created item has no imported ancestor (blueprint.from.node is null). It expands original Step 3 of lem-pd-ringed-tensor-adjunction-mate, serving def-pd-proetale-section-module-functors original Steps 3 and 7 / completion Steps 4–5, below Verdier exchange Step 2; no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property of the sheaf tensor supplies the canonical pure-tensor morphism and detects equality of maps out of M tensor_R N. The unit does not provide a separate statement of this module-sheaf tool; it does not replace any Verdier exchange step."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-341f5930e",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-341f5930e (reviewer sub-agent of L); spot-checked: PASS: I read the delivery in full and made no fixes; the review is in review.md. It is one commit containing the item node and the report. The statement and stmt_deps are unchanged, there are no new nodes and no SGA citation, and proof_deps equals the union of the step uses. No re-split note concerns this item: Q102 created it on 2026-10-22 from old step 3 of lem-pd-ringed-tensor-adjunction-mate, and this is its first split. All three arguments of that old step (the product test sheaf Z=|M|x|N|, naturality of the geometric unit for x,y,z, and the Hom/Bilin universal property) are present, each in its own step, with nothing dropped. Sources: Stacks sites-modules.tex 03EK, the Hom/Bilin display after 0GMW, and 03EL lemma-tensor-product-pullback (line 3649), whose 'interesting third equality' is the one the item makes explicit; all three tags are confirmed in tags/tags. Step 1: Z is a sheaf because families glue componentwise, and z is the pure-tensor morphism from the statement of lem-pc-sites-sheaf-tensor-bilinear-universal, so the normalization's test hypothesis holds. Step 2: because u_* is precomposition, (u_*Ff)_U=(Ff)_{vU}, so naturality gives the three identities with correct indices. Step 3: (Pmu)_U=mu_{vU}, and with eta_X=u_*(q_X j_X)eta^g evaluation at xi gives (Pmu)(eta_T(m(x)n)) on the left and pure(eta_M m, eta_N n) on the right. Step 4: the tensor of maps, p's defining formula, R-linearity of both composites, and injectivity of Hom_R(M(x)N,PH) into Bilin give equality without assuming sections are pure tensors. The statement is true. Edge cases checked: point site, zero modules and zero ring, empty site, alpha=id, and A=Z with S=Z/2 (no flatness needed). Finite-limit preservation is assumed but not needed, and no target is weakened. Duplicate search by rg -L for 'generalized normalization' and eta_M(x)eta_N found only the existence/uniqueness comparison nodes, theta-compatibility, adic transport and the parent; none states this equation. I accept the tool_use of lem-pc-sites-sheaf-tensor-bilinear-universal: it is a Lean-closed generic module-sheaf tool and does not replace any Verdier-exchange step."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralizedTensorNormalizationUnitEquation",
+  "declaration": "SheafOfModules.generalizedTensorNormalization_unit_equation",
+  "file": "lean/Sheaf/Paper/GeneralizedTensorNormalizationUnitEquation.lean",
+  "statement": "theorem generalizedTensorNormalization_unit_equation {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] (JC : GrothendieckTopology C) (JD : GrothendieckTopology D) (v : C ⥤ D) [v.IsContinuous JC JD] (R : Sheaf JC CommRingCat.{w}) (A S : Sheaf JD CommRingCat.{w}) (F : Sheaf JC (Type w) ⥤ Sheaf JD (Type w)) (adj : F ⊣ v.sheafPushforwardContinuous (Type w) JC JD) [PreservesFiniteLimits F] (I : AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} F R A) (α : A ⟶ S) (c : ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⟶ (v.sheafPushforwardContinuous RingCat.{w} JC JD).obj ((sheafCompose JD (forget₂ CommRingCat.{w} RingCat.{w})).obj S)) (hc : ∀ (U : Cᵒᵖ) (r : R.obj.obj U), ULift.up (c.hom.app U r) = (adj.homEquiv _ _ (I.ringUnderlying.hom ≫ (sheafCompose JD (CategoryTheory.forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).map α)).hom.app U (ULift.up r)) (η : ∀ X : SheafOfModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R), X ⟶ (pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj X))) (heta : ∀ (X : SheafOfModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (U : Cᵒᵖ) (x : X.val.obj U), (η X).val.app U x = ringedComparisonScalarSection.{w, uD, vD} α (I.modules.obj X) (v.op.obj U) 1 (((I.moduleUnderlying.inv.app X).hom.app (v.op.obj U) ((adj.unit.app ((toSheaf ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⋙ sheafCompose JC (CategoryTheory.forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w})).obj X)).hom.app U (ULift.up x))).down)) (M N : SheafOfModules.{w} ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (p : (monoidalCategory.{vC, uC, w} R).tensorObj ((pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj M))) ((pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj N))) ⟶ (pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj ((monoidalCategory.{vD, uD, w} S).tensorObj (changeOfRings.{vD, uD, w} α (I.modules.obj M)) (changeOfRings.{vD, uD, w} α (I.modules.obj N)))) (hpairing : ∀ (U : Cᵒᵖ) (m : ((pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj M))).val.obj U) (n : ((pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj N))).val.obj U), p.val.app U (ringedComparisonPure.{w, uC, vC} R ((pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj M))) ((pushforward.{w, vC, vD, uC, uD, w} (F := v) c).obj (changeOfRings.{vD, uD, w} α (I.modules.obj N))) U m n) = ringedComparisonPure.{w, uD, vD} S (changeOfRings.{vD, uD, w} α (I.modules.obj M)) (changeOfRings.{vD, uD, w} α (I.modules.obj N)) (v.op.obj U) m n) (μ : changeOfRings.{vD, uD, w} α (I.modules.obj ((monoidalCategory.{vC, uC, w} R).tensorObj M N)) ⟶ (monoidalCategory.{vD, uD, w} S).tensorObj (changeOfRings.{vD, uD, w} α (I.modules.obj M)) (changeOfRings.{vD, uD, w} α (I.modules.obj N))) (hnormalize : ∀ (Z : Sheaf JC (Type w)) (x : Z ⟶ (toSheaf ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⋙ sheafCompose JC (CategoryTheory.forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w})).obj M) (y : Z ⟶ (toSheaf ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⋙ sheafCompose JC (CategoryTheory.forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w})).obj N) (z : Z ⟶ (toSheaf ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⋙ sheafCompose JC (CategoryTheory.forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w})).obj ((monoidalCategory.{vC, uC, w} R).tensorObj M N)), (∀ (U : Cᵒᵖ) (t : Z.obj.obj U), (z.hom.app U t).down = ringedComparisonPure.{w, uC, vC} R M N U (x.hom.app U t).down (y.hom.app U t).down) → ∀ (V : Dᵒᵖ) (t : (F.obj Z).obj.obj V), μ.val.app V (ringedComparisonScalarSection.{w, uD, vD} α (I.modules.obj ((monoidalCategory.{vC, uC, w} R).tensorObj M N)) V 1 (((I.moduleUnderlying.inv.app ((monoidalCategory.{vC, uC, w} R).tensorObj M N)).hom.app V ((F.map z).hom.app V t)).down)) = ringedComparisonPure.{w, uD, vD} S (changeOfRings.{vD, uD, w} α (I.modules.obj M)) (changeOfRings.{vD, uD, w} α (I.modules.obj N)) V (ringedComparisonScalarSection.{w, uD, vD} α (I.modules.obj M) V 1 (((I.moduleUnderlying.inv.app M).hom.app V ((F.map x).hom.app V t)).down)) (ringedComparisonScalarSection.{w, uD, vD} α (I.modules.obj N) V 1 (((I.moduleUnderlying.inv.app N).hom.app V ((F.map y).hom.app V t)).down))) : η ((monoidalCategory.{vC, uC, w} R).tensorObj M N) ≫ (pushforward.{w, vC, vD, uC, uD, w} (F := v) c).map μ = (monoidalCategory.{vC, uC, w} R).tensorHom (η M) (η N) ≫ p",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded AlgebraicInverseImageOfUniverses with coefficients and modules in the common universe w. ULift.up/down only implements its recorded underlying-sheaf convention. The existing ringedComparisonPure and ringedComparisonScalarSection give the canonical tensors, with eta and p specified by their complete section formulas. No module adjunction, naturality or invertibility of mu is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb57b853f",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Clause-by-clause match. Sites: EssentiallySmall.{w} with independent universes. Adjunction: F ⊣ sheafPushforwardContinuous, PreservesFiniteLimits. Presentation: AlgebraicInverseImageOfUniverses, moduleUnderlying.inv = j, ringUnderlying.hom in the node's direction. L = changeOfRings α, q = ringedComparisonScalarSection with scalar 1. c fixed by hc (ULift.up injective) as the geometric adjunct of ringUnderlying.hom ≫ α, P = pushforward c. η fixed by its section formula heta, p by hpairing; c, η and p all exist, so the statement is not vacuous. hnormalize covers every test sheaf Z and every section t of FZ, as in the node. Conclusion is the node's equation in diagrammatic order. monoidalCategory is the same tensor as the def-pur cochainModulesMonoidal record (CochainTensorUniverses.lean:93-96). lean.statement matches the file verbatim. Added stmt_dep def-weil-pbc-canonical-ringed-tensor-comparison is landed and acyclic (allowed by brief §5). No duplicate declaration found; no definitions, sorry only; docstrings carry Stacks 03EL/03EK, the blueprint id and the proof steps. Edge cases (zero ring/modules, empty site, identity maps, non-flat α) need no extra assumptions. Advisory H9: proof-only import TensorBilinearUniversal is unused while the proof is sorry. The second reading was done by the same worker thread, as its report says. No recompile, since no fix was made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-ae075",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261023T231715-L-3635554",
+  "kind": "interface",
+  "note": "independent cc review: delivered theorem type vs published old type (Expr == true, same levels) in scratch import; proof steps/proof_deps vs Lean; dropped tensor_bilinear_universal checked as equal-universe only; axioms clean; 0 importers"
+ }
+}

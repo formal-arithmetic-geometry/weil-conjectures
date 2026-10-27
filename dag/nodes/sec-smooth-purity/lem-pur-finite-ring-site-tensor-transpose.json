@@ -35,163 +35,50 @@
  ],
  "proof": [
   {
-   "text": "The geometric finiteness hypotheses needed below hold for the chosen compactification. A field is Noetherian, since its only ideals are $(0)$ and $(1)$; hence $\\operatorname{Spec}k$ is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to the finite-type structural morphisms of $X,Y,Z$. In particular the proper map $p$ is a proper finite-type map between Noetherian schemes. The coefficient ring $A$ is finite, commutative, and killed by a power of the prime invertible in $k$; none of these hypotheses says that $A$ is flat over a cyclic ring.",
+   "text": "Use the existing finite-Tor etale generation theorem. Its intersection definition implies every object lies in finiteComparisonEtaleClosure; transport coproduct size via Discrete.equivalence and identify the two Tor-amplitude predicates via the flat-model theorem.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "det-ctf-finite-comparison-whole",
+    "lem-sf-etale-flat-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
+   "elementary": false
   },
   {
-   "text": "For any $T=X,Y,Z$, [lem-pur-etale-finite-ring-compact-generators] gives a set $(E_s)$ of compact bounded constructible finite-Tor objects detecting isomorphisms in $D(T_{\\mathrm{et}},A)$. This family generates in the sense of [def-pc-generators]: if every $\\operatorname{Hom}(E_s[n],C)$ vanishes, apply the detection assertion to $0\\to C$ to get $C=0$; and $\\operatorname{Hom}(\\bigoplus_sE_s,C[n])=\\prod_s\\operatorname{Hom}(E_s,C[n])$. Apply [lem-pc-compact-generators-build-objects]. Every object is a sequential homotopy colimit built from sums, shifts and cones of the $E_s$. Any localizing subcategory containing the $E_s$ contains every stage and the cone of $1-\\mathrm{shift}$ on their countable sum, hence every object. Thus $D(T_{\\mathrm{et}},A)=\\operatorname{Loc}(\\Dctf(T_{\\mathrm{et}},A))$.",
+   "text": "FiniteComparisonOrdinary full faithfulness and finiteComparisonLocalizing give full faithful comparison with image precisely the pro-etale closure, for X and Y. The comparison is replete, so actual ambient essential images agree. The same localizing comparison gives invertibility of the fixed compact-support map. Naturality of the proper mate (def-sfb-unbounded-direct-image-mate) and the open comparison assembles it into the pinned natural iso b.",
    "uses": [
-    "lem-pur-etale-finite-ring-compact-generators",
-    "def-pc-generators",
-    "lem-pc-compact-generators-build-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09SN, lemma-write-as-colimit; applied to the finite-ring etale generators"
-   }
-  },
-  {
-   "text": "By [lem-sfb-unbounded-site-comparison], write $E_T=\\nu_T^*$ for the exact fully faithful sum-preserving functor on the unbounded categories. Step 2 and [det-ctf-finite-comparison-localizing] identify its essential image with exactly $\\operatorname{Loc}(\\Dctf(T,A))$ (including the finite-discrete coefficient identification in that statement). We may therefore regard $E_T$ as an equivalence onto this full subcategory. For the chosen compactification the same comparison node supplies the isomorphism $\\beta_f:E_YRf^{\\mathrm{et}}_!\\simeq Rf_!E_X$. Its proper factor is the specific unbounded counit mate of [lem-sfb-unbounded-direct-image-comparison], not an arbitrarily chosen isomorphism between direct-image objects. Its open factor is [lem-cbc-proetale-extension-zero-comparison]. The latter sheaf isomorphism applies degreewise to unbounded complexes: both extension functors preserve quasi-isomorphisms by [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact], and $E$ is exact.",
-   "uses": [
-    "lem-sfb-unbounded-site-comparison",
+    "lem-ctf-finite-comparison-ordinary-fully-faithful",
     "det-ctf-finite-comparison-localizing",
-    "lem-sfb-unbounded-direct-image-comparison",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact"
+    "def-sfb-unbounded-direct-image-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
+   "elementary": false
   },
   {
-   "text": "Transport the adjunction of [thm-amb-etale-exceptional-adjoint] across the equivalences in Step 3. Explicitly, for etale $N,L$ its Hom bijection is\n$$\\operatorname{Hom}(Rf_!E_XN,E_YL)\\xrightarrow{\\beta_f(N)^*}\\operatorname{Hom}(E_YRf^{\\mathrm{et}}_!N,E_YL)\\cong\\operatorname{Hom}(Rf^{\\mathrm{et}}_!N,L)\\cong\\operatorname{Hom}(N,f^\\times L)\\cong\\operatorname{Hom}(E_XN,E_Xf^\\times L).$$\nEvery object of either closure is isomorphic to such an image, so this gives a right adjoint on the entire closures. At $E_YL$ its counit is $E_Y(\\varepsilon^{\\mathrm{et}}_L)\\,\\beta_f(f^\\times L)^{-1}$. The adjoint in [sk-prop-sf-existence] has the same domain and codomain. Apply [det-sp-unique-right-adjoint] to the two right adjoints: their unique counit-preserving isomorphism at $E_YL$ is $\\rho_L$. Its defining counit equation is precisely assertion 1; uniqueness also gives naturality in $L$.",
+   "text": "The finite-coefficient unbounded proper projection formula makes the etale compact-support projection invertible after its two canonical open/pullback isomorphisms. Apply the canonical projection square and the canonical unit/braiding identities, then the categorical assembly theorem to conclude the entire unchanged transport statement.",
    "uses": [
-    "thm-amb-etale-exceptional-adjoint",
-    "sk-prop-sf-existence",
-    "det-sp-unique-right-adjoint"
+    "lem-etale-proper-projection-formula-finite",
+    "lem-pur-finite-ring-projection-square",
+    "lem-pur-finite-ring-tensor-coherence",
+    "lem-pur-finite-ring-tensor-transpose-assembly",
+    "def-pur-finite-ring-site-tensor-transport-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
-  },
-  {
-   "text": "Use the canonical tensor comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for $E_T,p^*,j^*$. They respect the pullback composition identification $E_Xf^*\\cong f^*E_Y$: on K-flat representatives with flat terms, every comparison is induced by the ordinary pullback/tensor map, and both routes send a pulled-back pure tensor $x\\otimes y$ to the same $x\\otimes y$. These elements locally generate the tensor sheaf, so the maps agree. The degree $(a,b)$ summands of the total complexes then agree, with the same differential $d(x\\otimes y)=dx\\otimes y+(-1)^ax\\otimes dy$. The same computation respects the unit $a\\otimes x\\mapsto ax$ and the symmetry $x\\otimes y\\mapsto(-1)^{ab}y\\otimes x$. Localizing the equal chain maps proves these compatibilities for the unbounded derived tensors. In subsequent formulas these specified tensor and pullback identifications are suppressed.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product, K-flat total-complex construction"
-   }
-  },
-  {
-   "text": "First compare the proper projection maps. Let $P\\in D(Z_{\\mathrm{et}},A)$ and $K\\in D(Y_{\\mathrm{et}},A)$, put $H=P\\otimes p^*K$, and denote the proper comparison by $b_Q:E_YRp^{\\mathrm{et}}_*Q\\to Rp_*E_ZQ$. By [lem-sfb-unbounded-direct-image-comparison], its normalization, for every unbounded $Q$, is $\\varepsilon^p_{E_ZQ}\\,p^*(b_Q)=E_Z(\\varepsilon^e_Q)$ under Step 5. Form\n$$t=b_H\\,E_Y(\\mathrm{PF}^{\\mathrm{et}}_{p,P,K})\\,(b_P^{-1}\\otimes1).$$\nCompute its transpose using [def-weil-pbc-adjunction-mate]. Naturality of the pullback identification and the normalization for $H$ give\n$$\\varepsilon^p_{E_ZH}\\,p^*t=E_Z(\\varepsilon^e_H\\,p^*\\mathrm{PF}^{\\mathrm{et}}_{p,P,K})\\,p^*(b_P^{-1}\\otimes1).$$\nThe projection-map definition [def-kun-projection-formula-map] changes the middle factor to $E_Z(\\varepsilon^e_P\\otimes1)$. Step 5 and the normalization for $P$ cancel $p^*b_P$ with $p^*b_P^{-1}$, leaving $\\varepsilon^p_{E_ZP}\\otimes1_{p^*E_YK}$. This is the defining transpose of $\\mathrm{PF}_{p,E_ZP,E_YK}$, so the adjunction bijection gives $t=\\mathrm{PF}_{p,E_ZP,E_YK}$. This proves equality of the named maps without any truncation of $P$ or $H$.",
-   "uses": [
-    "lem-sfb-unbounded-direct-image-comparison",
-    "def-weil-pbc-adjunction-mate",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
-  },
-  {
-   "text": "The etale proper projection map is invertible for every $P,K$ by [lem-amb-proper-coproducts-projection], whose Noetherian and proper finite-type hypotheses were checked in Step 1. That lemma writes the map with the opposite tensor order but identifies it explicitly as $Rp_*(\\sigma)\\,\\mathrm{PF}^{\\mathrm{et}}_p\\,\\sigma$. The two symmetries are isomorphisms, so the stipulated $\\mathrm{PF}^{\\mathrm{et}}_p$ is invertible. Step 6 expresses the pro-etale projection map on $(E_ZP,E_YK)$ as this isomorphism transported by $E_Y$ and the isomorphisms $b_P,b_H$; it too is invertible.",
-   "uses": [
-    "lem-amb-proper-coproducts-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
-  },
-  {
-   "text": "For the open factor write $e_j:E_Zj^{\\mathrm{et}}_!\\simeq j_!E_X$ for [lem-cbc-proetale-extension-zero-comparison]. The open tensor identifications are those of [lem-pur-etale-open-derived-tensor] and [lem-trf-open-tensor] on the etale and pro-etale sites, respectively. They commute with $e_j$ and the tensor comparisons of Step 5. Here is the check of this named-map assertion: on module sheaves identify the source of the square, using the open tensor isomorphism, with $j_!(E_XP\\otimes j^*E_ZQ)$. Under the adjunction [lem-weil-extension-by-zero-adjunction], both routes restrict on $U=X$ to the canonical map $E_X(P\\otimes j^*Q)\\to E_XP\\otimes j^*E_ZQ$, or its inverse according to the orientation of the square; on local pure tensors each is $x\\otimes y\\mapsto x\\otimes y$. The canonical open comparison is adjoint to the restriction identification, so these are the same adjunct and the sheaf square commutes. For K-flat representatives the same equality holds in each total-complex summand. The derived open tensor maps are induced by these sheaf maps, as specified in the etale tensor lemma and the ringed-site construction; Step 5 and exactness from Step 3 let the equality descend to unbounded derived objects. No geometric-stalk detection on the pro-etale site is being used.",
-   "uses": [
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-pur-etale-open-derived-tensor",
-    "lem-trf-open-tensor",
-    "lem-weil-extension-by-zero-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I, lemma-j-shriek-and-tensor; derived map Tag 0GL1 in sites-cohomology.tex"
-   }
-  },
-  {
-   "text": "By definition the compact-support projection map for $f=pj$ is\n$$Rp_*j_!M\\otimes K\\xrightarrow{\\mathrm{PF}_p}Rp_*(j_!M\\otimes p^*K)\\xrightarrow{Rp_*(\\theta_j)}Rp_*j_!(M\\otimes j^*p^*K).$$\nPaste the proper comparison square of Step 6 (with $P=j^{\\mathrm{et}}_!M$) and the open tensor square of Step 8 (with $Q=p^*K$). Naturality of $b$ moves $Rp_*(e_j)$ through the second arrow; its composite with $b_{j_!M}$ is exactly $\\beta_f(M)$ from Step 3. The pasted outside square is therefore the equality of routes (a) and (b) in assertion 2. The two arrows defining the etale compact-support projection map are isomorphisms by Step 7 and the etale open tensor lemma. Since $E_Y$, the $\\beta_f$ components and the tensor identifications preserve isomorphisms, this square also proves invertibility of the pro-etale compact-support projection map on the specified objects. This establishes assertion 2 for all unbounded $M,K$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
-  },
-  {
-   "text": "Put $Q=M\\otimes f^*K$ and let $v:Rf^{\\mathrm{et}}_!Q\\to K$ be the composite defining $u^{\\mathrm{et}}$ in assertion 3. By the definition of transpose, $\\varepsilon^{\\mathrm{et}}_K\\,Rf^{\\mathrm{et}}_!(u^{\\mathrm{et}})=v$. Naturality of $\\beta_f$ and the counit equation for $\\rho_K$ in Step 4 yield\n$$\\varepsilon_{E_YK}\\,Rf_!(\\rho_K E_X(u^{\\mathrm{et}}))=E_Y(v)\\,\\beta_f(Q)^{-1}.$$\nInvert the projection-map square proved in Step 9 and use naturality of the tensor comparison on $e:Rf^{\\mathrm{et}}_!M\\to A_Y$. The right side becomes exactly\n$$\\bigl((E_Y(e)\\,\\beta_f(M)^{-1})\\otimes1_{E_YK}\\bigr)\\,\\mathrm{PF}_{f,E_XM,E_YK}^{-1},$$\nfollowed by $A_Y\\otimes E_YK\\cong E_YK$; Step 5 identifies this unit constraint with the pullback of the etale one. Thus $\\rho_K E_X(u^{\\mathrm{et}})$ and $u^{\\mathrm{pro}}$ have the same adjunct. Injectivity of the Hom bijection for the adjunction in [sk-prop-sf-existence] proves their equality.",
-   "uses": [
-    "sk-prop-sf-existence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
-  },
-  {
-   "text": "For the opposite tensor order, conjugate all the tensor maps in Steps 9 and 10 by the canonical symmetry. Step 5 gives equality of the two ways of applying $E$ to that symmetry, including its sign in every bidegree. Naturality moves the symmetry through $e\\otimes1$; the same counit calculation therefore gives the opposite-order transpose equality. If $X=\\emptyset$, all source objects and their compact-support images are zero and the same Hom bijections and equalities apply. For the zero coefficient ring all module categories have only zero objects, so every asserted isomorphism and equality is the unique one. These arguments used no division by $|A|$, no flatness of $A$ over a cyclic ring and no boundedness or finite-Tor hypothesis on the variables $M,K,L$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-    "place": "Proof (3): finite-ring tensor formula, site transport made explicit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-pur-etale-finite-ring-compact-generators",
-  "def-pc-generators",
-  "lem-pc-compact-generators-build-objects",
-  "lem-sfb-unbounded-site-comparison",
+  "det-ctf-finite-comparison-whole",
+  "lem-sf-etale-flat-model",
+  "lem-ctf-finite-comparison-ordinary-fully-faithful",
   "det-ctf-finite-comparison-localizing",
-  "lem-sfb-unbounded-direct-image-comparison",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
-  "thm-amb-etale-exceptional-adjoint",
-  "sk-prop-sf-existence",
-  "det-sp-unique-right-adjoint",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-adjunction-mate",
-  "def-kun-projection-formula-map",
-  "lem-amb-proper-coproducts-projection",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-trf-open-tensor",
-  "lem-weil-extension-by-zero-adjunction"
+  "def-sfb-unbounded-direct-image-mate",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-pur-finite-ring-projection-square",
+  "lem-pur-finite-ring-tensor-coherence",
+  "lem-pur-finite-ring-tensor-transpose-assembly",
+  "def-pur-finite-ring-site-tensor-transport-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-  "place": "Proof (3), tensor formula with A-coefficients: explicit unbounded site-comparison and counit-mate argument"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3); reuse proved etale generation and finite comparison, then factor Steps 5--11 into canonical-map identities and proved categorical transport."
  },
  "mathlib_searches": [
   {
@@ -262,7 +149,18 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "lem-pur-finite-ring-site-tensor-transpose",
@@ -341,7 +239,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-pur-etale-finite-ring-compact-generators",
   "lem-pc-compact-generators-build-objects",
   "lem-sfb-unbounded-site-comparison",
@@ -350,9 +247,6 @@
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-extension-by-zero-exact",
-  "thm-amb-etale-exceptional-adjoint",
-  "sk-prop-sf-existence",
-  "det-sp-unique-right-adjoint",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-amb-proper-coproducts-projection",
   "lem-pur-etale-open-derived-tensor",
@@ -371,22 +265,6 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTranspose",
   "declaration": "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTranspose",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteRingSitePull",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteTensor",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteUnit",
-   "AlgebraicGeometry.ProEtale.finiteRingSitePullback",
-   "AlgebraicGeometry.ProEtale.finiteRingEtaleShriek",
-   "AlgebraicGeometry.ProEtale.finiteRingProShriek",
-   "AlgebraicGeometry.ProEtale.finiteRingEtalePF",
-   "AlgebraicGeometry.ProEtale.finiteRingProPF",
-   "AlgebraicGeometry.ProEtale.finiteRingRestriction",
-   "AlgebraicGeometry.ProEtale.finiteRingImageLift",
-   "AlgebraicGeometry.ProEtale.finiteRingTensorPullbackComparison",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeStatement",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeSiteFunctors",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeCanonicalTensor",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeCanonicalSymmetry",
-   "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTransposeWithCoefficients",
    "AlgebraicGeometry.ProEtale.finiteRingSiteTensorTranspose"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingSiteTensorTranspose.lean",
@@ -404,5 +282,15 @@
   "group": "Q21",
   "result": "pass",
   "note": "Re-delivery after the landing refused 40ee as duplicate declarations: the renamed FiniteComparisonLocalizingRepair module is removed and the owning Sheaf/Paper/FiniteComparisonLocalizing.lean is repaired in place. Its only change vs live is a one-line import swap to ProEtale.FiniteCoefficient.Derived.LowerShriekComparison. It is byte-identical to the previously reviewed repair, and all 14 declarations and signatures are unchanged. The item module is identical to 40ee except for that import; node records are unchanged apart from lean. Statement re-read clause by clause: ess image = finiteComparisonProEtaleClosure, unique ρ with the counit equation, β pinned to finiteComparisonCompactSupportMap, PF pinned to projectionMapOfCompactification, route equality, transposes in both tensor orders with DerivedCategory braidings. No extra hypotheses; X=∅ and the zero ring are covered. Statement verbatim and the 17 declarations checked; docstrings carry source, blueprint and 11 steps; sorry only; nothing hollow. nt_compile --json clean: dependency module 7.2 s, item 10.4 s. Maintainer note: overwrites NY's landed import-only det-ctf record. There are no live or pending importers, and the new import matches the family of det-ctf's recorded lem-cbc dependency."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved defs, Data module vs clone item module, verbatim; theorem signature byte-identical; FiniteGeneralRing importer compiled against the delivered modules (37 s ok); #print axioms: main theorem sorryAx only via the two split-off statements, helpers clean; projection square = the item's own Statement conjunct"
  }
 }

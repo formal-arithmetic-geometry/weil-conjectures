@@ -43,14 +43,61 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.AffineBlowup.homogeneousAwayToChart",
+    "AlgebraicGeometry.AffineBlowup.coe_homogeneousAwayToChart_mk"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.AffineBlowup.homogeneousAwayToChart",
+     "module": "WeilConjectures.Blowup.Affine.ChartAlgebra",
+     "lines": [
+      193,
+      200
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.AffineBlowup.coe_homogeneousAwayToChart_mk",
+     "module": "WeilConjectures.Blowup.Affine.ChartAlgebra",
+     "lines": [
+      202,
+      210
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-def-nagata-sketch-data",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For $a\\in I$, define $\\theta_a$ on a degree-zero homogeneous fraction by\n\n$$\n\\theta_a\\!\\left(\\frac{xt^n}{(at)^n}\\right)=\\frac{x}{a^n},\n\\qquad x\\in I^n.\n$$",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For $a\\in I$, let\n\n$$\n\\theta_a\\colon\\mathcal R_A(I)_{(at),0}\\longrightarrow A[I/a]\n$$\n\nbe the ring homomorphism given on degree-zero homogeneous fractions by\n\n$$\n\\theta_a\\!\\left(\\frac{xt^n}{(at)^n}\\right)=\\frac{x}{a^n},\n\\qquad x\\in I^n.\n$$\n\nThe value is independent of the chosen homogeneous representative, and\n$\\theta_a$ is a well-defined ring homomorphism.",
+  "proof": [
+   {
+    "text": "Every element of $\\mathcal R_A(I)_{(at),0}$ is a fraction $xt^n/(at)^n$\nwith $x\\in I^n$, and $x/a^n$ lies in $A[I/a]$ because $x$ is a sum of\nproducts of $n$ elements of $I$. If $xt^n/(at)^n=yt^m/(at)^m$, then\n$(at)^k\\bigl((at)^mxt^n-(at)^nyt^m\\bigr)=0$ in $\\mathcal R_A(I)$ for some\n$k$, that is $a^k(a^mx-a^ny)=0$ in $A$, so $x/a^n=y/a^m$ in $A_a$; this is\nthe equality relation of the localization away from $a$, with no\ncancellation of $a$, which may be a zero divisor. Hence $\\theta_a$ is well\ndefined. Addition and multiplication of fractions with a common\ndenominator power are compatible with the displayed formula, and\n$\\theta_a(1)=1$, so $\\theta_a$ is a ring homomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "lean": {
   "module": "WeilConjectures.Blowup.Affine.ChartAlgebra",

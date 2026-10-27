@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-affine-diagonal-presented-base-change",
+ "kind": "statement",
+ "title": "Self-product base change of the presented affine integration transpose",
+ "statement": "In the finite setting [def-pur-conventions] let Y be separated finite type over k, d,r natural numbers, and ell^(r+1) annihilate the coefficient ring. Use the constructions [def-pur-affine-diagonal-integration-constructions]. Put X=A^d_Y, p:X→Y, W=X×_Y X with p₁,p₂. The presented transpose J for p₁ in the ordered product coordinates equals the inverse normalized Tate pullback along p₂, followed by Lp₂* of the presented transpose for p, followed by the specified dualizing base-change mate for the flipped self-product square. This is an ordinary etale morphism equality, without assertions of invertibility, normal-cone data, or diagonal restriction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-conventions",
+  "def-amb-affine-linear-trace-action",
+  "def-amb-vector-integration",
+  "lem-pur-diagonal-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Identify the coordinate-tower Cartesian square for base change p:X→Y with W using affineDiagonalProductCoordinates: its first projection is p₁ and its ordered tower coordinates are pulled back from p₂. Noetherianity follows from finite type over k.",
+   "uses": [
+    "def-pur-affine-diagonal-integration-constructions",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+   }
+  },
+  {
+   "text": "Apply the ordered affine-space counit base-change equation. Transport through affineLinearCompactComparison, whose proper/open comparisons and bounded-below restriction compatibilities identify the tower exchange with the canonical compact-support exchange.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+   }
+  },
+  {
+   "text": "Transport the coefficient maps through affineLinearCoefficientDescent and the normalized Tate pullbacks. Root inclusion and pure-tensor normalization, derived tensor naturality and pullback composition give exactly affineDiagonalTateRestriction. Transpose the trace equation: exchange naturality and the counit identity give pullback of the original transpose followed by B. Naturality of the coordinate isomorphism and pasting of its exceptional mate yields the displayed presented-transpose equation.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-trace-transpose-base-change",
+    "def-pur-affine-diagonal-integration-constructions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-trace-transpose-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical pullback of ordered Tate tensor powers along a retraction and a section agrees with the composition isomorphism of derived pullbacks",
+   "results": "Generic scheme module pullbackComp and categorical Over.pullbackComp; no normalized finite Tate derived coefficient section law.",
+   "date": "2026-10-26",
+   "verdict": "no matching specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction counit transpose under a Cartesian base change of affine space and a coordinate isomorphism",
+   "results": "AffineSpace.homOverEquiv, homOfVector, map_over, map_Spec_map; no derived trace equation. A separate right-adjoint-uniqueness query found the generic Mathlib adjunction lemmas.",
+   "date": "2026-10-26",
+   "verdict": "no matching concrete comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "affineDiagonalPresentedTranspose|vectorIntegrationBaseCoefficientPullback|leftDerivedUpperStarCompSectionIso in Mathlib, WeilConjectures, Sheaf; blueprint_refs search ordered Tate section pullback and presented transpose self product",
+   "results": "SectionCoordinateCounitNormalization.affineCoordinateCounit_baseChange supplies the tower counit transpose. No presented self-product equation or ordered Tate section equation found. Both blueprint searches returned zero matches.",
+   "date": "2026-10-26",
+   "verdict": "two strictly simpler transport steps remain"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalTraceRestriction",
+  "date": "2026-10-26",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Self-product base change of the presented affine integration transpose",
+   "via": [
+    "lem-pur-affine-diagonal-trace-restriction",
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalPresentedBaseChange",
+  "file": "lean/Sheaf/Paper/AffineDiagonalPresentedBaseChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalPresentedTranspose_selfBaseChange",
+  "statement": "theorem affineDiagonalPresentedTranspose_selfBaseChange (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (d r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0) :\n  let p := affineDiagonalProjection Y d\n  let X := affineDiagonalSpace Y d\n  let p₁ := pullback.fst p p\n  let p₂ := pullback.snd p p\n  let aX := p ≫ aY\n  letI := affineDiagonalProjection_smooth Y d\n  letI := SmoothOfRelativeDimension.smooth d p\n  letI := Dnc.compactifiable P p aY\n  letI := Dnc.compactifiable P p₁ aX\n  letI := (P.comparedDiagonalBaseChange d p aX aY rfl).2.2.2.1\n  let F := fun {U B : Scheme.{u}} (f : U ⟶ B) ↦\n    (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor\n  letI := (affineDiagonalProductCoordinates_spec Y d).1\n  let B := Etale.dualizingComplexBaseChangeMap P.Coefficient\n    (IsPullback.of_hasPullback p p).flip\n  (P.affineDiagonalPresentedTranspose d p₁ aX r hA\n        (asIso (affineDiagonalProductCoordinates Y d))\n        (affineDiagonalProductCoordinates_spec Y d).2) =\n      (P.affineDiagonalTateRestriction r hA p₂ aX d).inv ≫\n        (F p₂).map\n          (P.affineDiagonalPresentedTranspose d p aY r hA (Iso.refl X)\n            (Category.id_comp p)) ≫ B",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T203656-L-2839534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T203656-L-2839534",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

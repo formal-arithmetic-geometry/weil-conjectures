@@ -1,0 +1,173 @@
+{
+ "id": "lem-trf-symmetric-proj-ordered-relative-comparison",
+ "kind": "statement",
+ "title": "Ordered relative symmetric-Proj comparison with affine polynomial twists",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], $E$ a quasi-coherent $\\mathcal O_S$-module [pqf-def-coherent], $r\\geq0$, and $b:\\mathcal O_S^{r+1}\\cong E$ an ordered isomorphism, with the free sheaf of [def-nagata-relative-projective-space]. Write $A(E)$ for the canonical symmetric graded algebra [def-trf-canonical-symmetric-graded-algebra] and $P=\\operatorname{Proj}_S A(E)$ [def-nagata-relative-proj]. There exists an isomorphism $e:P\\cong\\mathbf P^r_S$ to relative projective space, over $S$, such that AffineFreeComparison r b e V [def-per-projective-bundle-quotient-data] holds for every affine open $V$. Explicitly, for $R=\\Gamma(V,\\mathcal O_S)$ there is a bijective graded map $\\beta:R[T_0,\\ldots,T_r]\\to\\operatorname{Sym}_R(E(V))$ fixing coefficients and sending $T_i$ to $\\iota(b(e_i))$. Its Proj map is the isomorphism $e_C$ from this symmetric Proj to polynomial Proj. Pulling back the polynomial degree-one twist along $e_C$ gives the symmetric degree-one twist [def-weil-pbc-proj-twisting-sheaf], with every homogeneous linear polynomial section sent to its beta image using the canonical unit comparison of pullbacks [def-pc-module-pullback]. The defining polynomial chart gamma of relative projective space induces an isomorphism $e_R$, and the equation $\\iota_V e=e_C e_R^{-1}(\\mathrm{restrictionIso}_V)^{-1}\\iota_{\\pi^{-1}V}$ holds. These statements include $r=0$, zero coefficient rings and empty affine charts.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OE (lemma-projective-space-bundle), 01OB (definition-projective-bundle), 01MS (lemma-when-invertible), and 01NR (lemma-glue-relative-proj-twists)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-nagata-relative-projective-space"
+ ],
+ "proof": [
+  {
+   "text": "On every affine V, the standard basis transported by b gives the polynomial symmetric-algebra isomorphism beta of [lem-weil-pbc-symmetric-algebra-free-module-polynomial]. The inverse is the symmetric extension of the coordinate linear polynomial. Products of n basis generators span the nth piece by [lem-weil-pbc-symmetric-algebra-graded]; both maps preserve degrees. Restriction commutes with these maps on scalars and vectors, hence on the entire symmetric algebra. Compose with the inverse of the defining affine polynomial equivalence gamma of [def-nagata-relative-projective-space]. Relative Proj functoriality glues the resulting inverse graded maps to eRel over S. The chart formula follows from relProjι_relProjMap and composition of Proj maps. Surjectivity supplies the irrelevant-ideal witnesses for beta and gamma.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-nagata-relative-projective-space",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OE (lemma-projective-space-bundle), 01OB (definition-projective-bundle), 01MS (lemma-when-invertible), and 01NR (lemma-glue-relative-proj-twists)."
+   }
+  },
+  {
+   "text": "On D_+(T_i), send the free frame T_i of the degree-one polynomial twist to beta(T_i) of the symmetric twist. Dividing by the same coordinate gives the inverse. On overlaps the respective transition units are T_i/T_j and beta(T_i)/beta(T_j), so [lem-weil-pbc-glue-sheaves-of-modules] glues these maps and their inverses to an isomorphism. For homogeneous s of degree one, its local representative is (s/T_i)T_i, which maps to beta(s). Thus the full unitToTwist equality of AffineFreeComparison holds, including its unit pullback comparisons. The polynomial standard opens cover; no cancellation in the original coefficient ring is used. This proves the remaining affine twist clause and covers r=0 and zero rings.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-module-pullback",
+    "def-per-projective-bundle-quotient-data",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OE (lemma-projective-space-bundle), 01OB (definition-projective-bundle), 01MS (lemma-when-invertible), and 01NR (lemma-glue-relative-proj-twists)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-projective-space",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OE (lemma-projective-space-bundle), 01OB (definition-projective-bundle), 01MS (lemma-when-invertible), and 01NR (lemma-glue-relative-proj-twists)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric algebra of a finite free sheaf has relative Proj projective space preserving its tautological quotient and twist",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.Proj, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec. No declaration states this scheme-theoretic ordered comparison. The symmetric algebra polynomial equivalence supplies only the ring-level input.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra.equivMvPolynomial",
+   "results": "4 hits: SymmetricAlgebra.equivMvPolynomial, SymmetricAlgebra.equivMvPolynomial_ι_apply, SymmetricAlgebra.equivMvPolynomial_symm_X, Module.Basis.symmetricAlgebra_repr_apply. No declaration states this scheme-theoretic ordered comparison. The symmetric algebra polynomial equivalence supplies only the ring-level input.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "free_compatibility|AffineFreeComparison|relative.*[Pp]rojective.*[Tt]wist",
+   "results": "0 hits: . No declaration states this scheme-theoretic ordered comparison. The symmetric algebra polynomial equivalence supplies only the ring-level input.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Proj of a symmetric algebra of a free sheaf has the polynomial affine charts and its normalized tautological quotient corresponds to O(1)",
+   "results": "8 hits: AlgebraicGeometry.Proj, SymmetricAlgebra.instModuleFree, AlgebraicGeometry.Proj.mul_apply, AlgebraicGeometry.termProj|_, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE. No declaration states this scheme-theoretic ordered comparison. The symmetric algebra polynomial equivalence supplies only the ring-level input.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded isomorphism from a polynomial algebra to the symmetric algebra of a free sheaf induces an isomorphism of relative Proj preserving O(1)",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.fromOfGlobalSections.congr_simp, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst. Absolute Proj chart maps only; no ordered relative-Proj twist comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms of invertible sheaves on standard projective charts preserving coordinate sections glue to a global tautological twist comparison",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι. Absolute Proj chart maps only; no ordered relative-Proj twist comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SymmetricProjFreeComparison",
+  "date": "2026-10-27",
+  "group": "S1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 1--3, open-base part of step 9, and step 11. This child isolates original steps 10: Ordered free comparison for every normalized symmetric Proj quotient. This child isolates Ordered relative symmetric-Proj comparison with affine polynomial twists.",
+   "via": [
+    "lem-trf-symmetric-proj-free-comparison",
+    "lem-trf-symmetric-proj-tautological-chart-gluing",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SymmetricProjOrderedRelativeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricProjOrderedRelativeComparison.lean",
+  "declaration": "AlgebraicGeometry.SymmetricProjTautologicalCharts.exists_ordered_relative_comparison",
+  "statement": "theorem exists_ordered_relative_comparison (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E) :\n    ∃ eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅\n        RelativeProjectiveSpace.scheme S r,\n      eRel.hom ≫ RelativeProjectiveSpace.π S r =\n        (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ∧\n      ∀ V : S.affineOpens, ProjectiveBundleQuotientGeometry.AffineFreeComparison r b eRel V",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261027T112425-L-1582438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261027T112425-L-1582438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

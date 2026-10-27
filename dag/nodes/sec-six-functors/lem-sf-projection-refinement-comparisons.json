@@ -1,0 +1,107 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionRefinementDescent",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement and compactification independence; lem-sf-projection-refinement-descent",
+   "via": [
+    "lem-sf-projection-refinement-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fully faithful functor lift natural isomorphism to the essential image and cofiltered comparison cocycle",
+   "results": "8 hits: CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Functor.essImage.liftFunctor_map, CategoryTheory.Functor.essImage.liftFunctor_obj, CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.Functor.preimageIso, CategoryTheory.Functor.FullyFaithful.homNatIso'",
+   "date": "2026-10-26",
+   "verdict": "Used Functor.essImage.liftFunctor and its composition isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage.liftFunctorCompIso",
+   "results": "3 hits: CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app, CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app",
+   "date": "2026-10-26",
+   "verdict": "Used Functor.essImage.liftFunctor and its composition isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.liftFunctor|cofiltered.*compar|mapIso.*symm",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  }
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "U1 proof using existing declarations and the explicitly described normalization step.",
+  "by": "agent"
+ },
+ "id": "lem-sf-projection-refinement-comparisons",
+ "kind": "statement",
+ "title": "Common-refinement comparison on all bounded constructible inputs",
+ "statement": "Let D be a finite-field datum, C its coefficient datum, E/Q_C.l a finite extension, and n>=0. Let X,Y be finite-type quasi-compact schemes over D.k, and f:X->Y a separated finite-type quasi-compact morphism over D.k. Suppose every boundedConstructible object on X has a retained origin presentation. There is a natural isomorphism rho(c,d):inclusion⋙image(c)≅inclusion⋙image(d) for any compactifications c,d. For every common refinement b→c,b→d and every object K with any presentation (O,e), its component is theta(b→c,K,O,e).symm followed by theta(b→d,K,O,e). These natural isomorphisms satisfy rho(c,d)≫rho(d,b)=rho(c,b). This assertion concerns comparisons only and involves no projection map.",
+ "stmt_deps": [
+  "def-sf-projection-refinement-domains"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Definitions and proof steps 8"
+ },
+ "proof": [
+  {
+   "text": "Apply compactification_coherence on the witnessed category. Lift the inclusion of bounded constructible objects through its fully faithful fixed-object forgetful functor using the supplied origin presentations. Conjugate the comparison family by the resulting natural isomorphism. Fullness and naturality make this independent of every origin presentation, and the original cocycle gives the conjugated cocycle.",
+   "uses": [
+    "prop-compactification-coherence-detailed",
+    "def-sf-refinement-comparison-isomorphism",
+    "def-sf-etale-origin-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-compactification-coherence-detailed",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-sf-etale-origin-subcategory"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectionRefinementComparisons",
+  "file": "lean/Sheaf/SixFunctors/ProjectionRefinementComparisons.lean",
+  "declaration": "WeilConjectures.ProjectionRefinementDescent.comparison_cocycle",
+  "statement": "theorem comparison_cocycle\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E]\n    (n : ℕ) {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (origins : ∀ K : (boundedConstructible C.l E n X).FullSubcategory,\n      ∃ O : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X,\n        Nonempty (refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X O ≅\n          K.obj)) :\n    ∃ rho : ∀ c d : Compactification f,\n        (boundedConstructible C.l E n X).ι ⋙ image C.l E n c ≅\n          (boundedConstructible C.l E n X).ι ⋙ image C.l E n d,\n      (∀ (c d b : Compactification f) (r : b.Refinement c) (s : b.Refinement d)\n        (K : (boundedConstructible C.l E n X).FullSubcategory)\n        (O : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X)\n        (e : refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X O ≅ K.obj),\n        (rho c d).app K = (theta C.l E n r K.obj O e).symm ≪≫\n          theta C.l E n s K.obj O e) ∧\n      (∀ c d b : Compactification f, rho c d ≪≫ rho d b = rho c b)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "independent cc review: finite_descent proof, the moved ProjectionRefinementData declarations (spellings that unfold to the old ones) and the new hole normalized_refinement_inverse, against node lem-sf-projection-refinement-descent, the change record, the 5 new nodes and the published clone; importers FiniteProjectionFromDescent and FiniteProjectionCompactificationSquare compiled OK against the delivered modules"
+ }
+}

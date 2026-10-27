@@ -91,14 +91,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi",
-  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageColimitComparisonEpi.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HigherDirectImageColimitComparisonEpi.lean",
   "declaration": "AlgebraicGeometry.Etale.epi_higher_image_colimit_comparison",
-  "statement": "theorem epi_higher_image_colimit_comparison\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W)\n    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)]\n    [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]\n    (K : Iᵒᵖ ⥤ Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (eK : ∀ i : I, K.obj (op i) ≅\n      higherDirectImage Λ ((D.obj i).hom ≫ k) q\n        ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))\n    (hK : ∀ {i j : I} (f : j ⟶ i), K.map f.op =\n      (eK i).hom ≫ higherDirectImageOverMap Λ k G q (D.map f) ≫ (eK j).inv)\n    (B : Cocone K)\n    (eB : B.pt ≅ higherDirectImage Λ (c.pt.hom ≫ k) q\n      (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))\n    (hB : ∀ i : I, B.ι.app (op i) = (eK i).hom ≫\n      higherDirectImageOverMap Λ k G q (c.π.app i) ≫ eB.inv)\n :\n    Epi (colimit.desc K B)",
+  "statement": "theorem epi_higher_image_colimit_comparison\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W)\n    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)]\n    [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]\n    (K : Iᵒᵖ ⥤ Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (eK : ∀ i : I, K.obj (op i) ≅\n      higherDirectImage Λ ((D.obj i).hom ≫ k) q\n        ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))\n    (B : Cocone K)\n    (eB : B.pt ≅ higherDirectImage Λ (c.pt.hom ≫ k) q\n      (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))\n    (hB : ∀ i : I, B.ι.app (op i) = (eK i).hom ≫\n      higherDirectImageOverMap Λ k G q (c.π.app i) ≫ eB.inv) :\n    Epi (colimit.desc K B)",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "G4, 2026-10-25: retire the Sheaf duplicate listed in coord/retire-items.tsv. The official theorem proves the same conclusion without the redundant hK hypothesis; it therefore proves the node as stated. Its canonical morphisms, remaining hypotheses, and affine raw-class/separatedness argument are unchanged. The sole mathematical parent already imports the official module."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -111,14 +112,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "C-32131",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261012T112852-L-772694",
+  "landing": "20261025T163632-L-739298",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn Sheaf stub + node lean record (existing:true) with the official WeilConjectures epi_higher_image_colimit_comparison: signature byte-identical to the clone, hK dropped (fewer hypotheses), no sorry, axioms clean; sole caller AffineClassDescent already uses the official version; no importers of the Sheaf path"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-steinberg-induced-module-irreducible",
+ "kind": "statement",
+ "title": "Irreducibility of induced modules at Steinberg weights",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] of characteristic $p>0$. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme], where semisimple and simply connected have the meanings given in [lem-sfb-rho-section-modules]. Fix any split maximal torus $T\\subseteq S$ and Borel subgroup $B\\supseteq T$, the positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, their half-sum character $\\rho\\in X^*(T)$, and its extension $\\widetilde\\rho:B\\to\\mathbf G_m$ trivial on the unipotent radical, as in [lem-sfb-rho-section-modules]. For every integer $r\\ge1$, the rational $S$-module $$E_B(-(p^r-1)\\widetilde\\rho)=\\{f\\in F[S]: f(gb)=\\widetilde\\rho(b)^{p^r-1}f(g)\\text{ after every commutative }F\\text{-algebra extension}\\},$$ with left-translation action $(s f)(g)=f(s^{-1}g)$, is simple: it is nonzero and its only linear subspaces stable under the rational coaction are zero and the whole module. Rational coaction has the meaning in [lem-sfb-rho-section-modules].",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Part II, 3.18--3.19: the r-th Steinberg module, induced module of highest weight (p^r-1)rho, is simple. WANTED: this book is not local. Online corroboration read: Alexandre, Positivity, plethysm and hyperbolicity of Siegel varieties in positive characteristic, Definition 2.8 and Proposition 2.9, https://doi.org/10.1112/S0010437X24007607. Convention: with positive roots in Lie(B), E_B(-lambda) has highest weight -w_0 lambda, so the displayed module has highest weight (p^r-1)rho. Published corroboration read in the Cambridge PDF, printed pp.263--264: Definitions 2.4 and 2.8 and Proposition 2.9; the characteristic-two condition rho in X*(T) holds by the cited rho-section-modules statement."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "def-sfb-rational-highest-weight-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure] the roots form a reduced root datum with positive system $\\Phi^+$ and simple-root base $\\Delta$. By [lem-sfb-rho-regular-weyl-orbit], $\\langle\\rho,\\alpha^\\vee\\rangle=1$ for every $\\alpha\\in\\Delta$; this is an identity in $X\\otimes\\mathbf Q$, valid in every characteristic, and $\\rho\\in X$ by [lem-sfb-rho-section-modules]. Consequently $\\langle m\\rho,\\alpha^\\vee\\rangle=m\\ge0$, so every $m\\rho$ with $m\\ge0$ is dominant, and $\\langle(p-1)\\rho,\\alpha^\\vee\\rangle=p-1<p$, so $(p-1)\\rho$ is $p$-restricted. There is no division by $2$ in $F$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-rho-section-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.17--22.22, printed pp.467--469; elementary assembly with the numerical inputs recorded below."
+   }
+  },
+  {
+   "text": "For each $k\\ge1$ put $m_k=p^k-1$, $\\eta_k=m_k\\rho$ and $E_k=E_B(-m_k\\widetilde\\rho)$. Since $p\\ge2$, $m_k\\ge1$. By [lem-sfb-rho-section-modules], $E_k$ is precisely $W_{m_k}$ and is nonzero finite-dimensional rational, with the specified coaction. By [lem-sfb-induced-module-primitive-line], $E_k^U$ is a line of weight $w_0(-m_k\\rho)$. Here $w_0$ carries $\\Phi^+$ onto $-\\Phi^+$, so it is the unique such element of [lem-sfb-rho-regular-weyl-orbit], which gives $w_0\\rho=-\\rho$; hence $w_0(-m_k\\rho)=m_k\\rho$. Hence the weight of $E_k^U$ is $\\eta_k$.",
+   "uses": [
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-induced-module-primitive-line",
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.17--22.22, printed pp.467--469; elementary assembly with the numerical inputs recorded below."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-induced-weyl-dimension-formula] with the dominant character $\\eta_k$ from step 1. Its actual regular-function space and left action are exactly $E_k$, since the extension of $m_k\\rho$ is $m_k\\widetilde\\rho$. For each positive root, $\\eta_k+\\rho=p^k\\rho$ makes the fraction in that formula equal to $p^k$ in $\\mathbf Q$. With $N=|\\Phi^+|$, this gives $\\dim_F E_k=(p^k)^N=p^{kN}$. These are ordinary integer dimensions; no denominator is inverted in $F$.",
+   "uses": [
+    "lem-sfb-induced-weyl-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "II.5.10--5.12, local text WANTED; explicit specialization of the Weyl dimension formula."
+   }
+  },
+  {
+   "text": "For each $k\\ge1$, choose a rational submodule $0\\ne L_k\\subseteq E_k$ with least positive vector-space dimension; such a dimension exists since $E_k$ itself is eligible. A proper nonzero submodule of $L_k$ would have smaller dimension, so $L_k$ is simple. By [lem-sfb-simple-module-dual-highest-weight], $L_k^U$ is a one-dimensional highest-weight line. The inclusion maps it injectively into $E_k^U$, so it equals that line and has weight $\\eta_k$ by step 2. Inclusions of subcomodules preserve restricted fixed vectors because tensoring an injective map of vector spaces is injective (extend a basis). Thus the assertion is about rational coactions throughout, not just invariance under $U(F)$.",
+   "uses": [
+    "lem-sfb-simple-module-dual-highest-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.17--22.22, printed pp.467--469; elementary assembly with the numerical inputs recorded below."
+   }
+  },
+  {
+   "text": "By [lem-sfb-restricted-rho-simple-dimension], $\\dim_F L_1=p^N$. Induct on $k\\ge1$ to show $\\dim_F L_k=p^{kN}$. For the induction step apply [lem-sfb-restricted-highest-weight-dimension-product] to the three simple modules $L_1,L_k,L_{k+1}$: their weights are $(p-1)\\rho$, $(p^k-1)\\rho$, and $(p^{k+1}-1)\\rho$, and $\\eta_{k+1}=\\eta_1+p\\eta_k$. Dominance and the restriction on $\\eta_1$ were proved in step 1. The resulting equality gives $\\dim_F L_{k+1}=p^N p^{kN}=p^{(k+1)N}$, completing the induction.",
+   "uses": [
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-restricted-highest-weight-dimension-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "II.3.16--3.18, local text WANTED; explicit dimension induction, corroborated online by Williamson section 1.4 and Heidersdorf--Wenzl section 7.5.1."
+   }
+  },
+  {
+   "text": "In particular $L_r\\subseteq E_r$ has the same finite dimension as $E_r$ by steps 3 and 5. Extend a basis of $L_r$ to a basis of $E_r$; equal dimensions leave no additional basis vectors, so $L_r=E_r$. Since $L_r$ is simple and $E_r\\ne0$, the module in the statement is nonzero and every rationally stable subspace is zero or all of $E_r$. If the root system is empty, both dimension products are $1$ and the same argument applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.17--22.22, printed pp.467--469; elementary assembly with the numerical inputs recorded below."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-induced-module-primitive-line",
+  "lem-sfb-induced-weyl-dimension-formula",
+  "lem-sfb-simple-module-dual-highest-weight",
+  "lem-sfb-restricted-rho-simple-dimension",
+  "lem-sfb-restricted-highest-weight-dimension-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.18--22.22 for the highest-weight line; Q86 dimension-comparison assembly using Jantzen II.3.16--3.18 and II.5.10--5.12 (book WANTED). Online numerical corroboration in Williamson arXiv:1610.06261, sections 1.3--1.4, and Heidersdorf--Wenzl, section 7.5.1, https://doi.org/10.1007/s00029-021-00749-9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Steinberg|steinberg|Borel.Weil|induced.*(irreducible|simple)",
+   "results": "Search returned 8 hits: Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean, Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Op.lean, Mathlib/Combinatorics/SimpleGraph/Maps.lean, Mathlib/Combinatorics/SimpleGraph/Maps.lean, Mathlib/Combinatorics/SimpleGraph/Copy.lean, Mathlib/Combinatorics/SimpleGraph/Subgraph.lean, Mathlib/Combinatorics/SimpleGraph/Subgraph.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Steinberg\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Steinberg induced module of weight p to the r minus one times rho is irreducible",
+   "results": "Search returned 8 hits: Representation.IndV, RootPairing.isSimpleModule_weylGroupRootRep_iff, LieModule.IsIrreducible.mk, LieModule.IsIrreducible, LieModule.nontrivial_of_isIrreducible, Rep.ind, RootPairing.GeckConstruction.instIsIrreducible, RootPairing.isSimpleModule_weylGroupRootRep. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Steinberg representation is irreducible and is the full space of sections of its induced line bundle",
+   "results": "Search returned 8 hits: RootPairing.isSimpleModule_weylGroupRootRep, Representation.IsIrreducible, RootPairing.GeckConstruction.instIsIrreducible, Rep.instProjective, Rep.instInjective, FDRep.simple_iff_end_is_rank_one, RootPairing.isSimpleModule_weylGroupRootRep_iff, FDRep.instProjectiveOfNeZeroCastCard. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The induced representation of highest weight (p power r minus one) rho of a simply connected semisimple algebraic group is simple",
+   "results": "Search returned 8 hits: RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.GeckConstruction.instIsIrreducible, FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, RootPairing.isSimpleModule_weylGroupRootRep_iff, FDRep.simple_iff_char_is_norm_one, Representation.irreducible_iff_isSimpleModule_asModule, LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Steinberg induced module of a semisimple simply connected algebraic group at highest weight (p^r-1)rho is simple",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.GeckConstruction.instIsIrreducible, RootPairing.isSimpleModule_weylGroupRootRep_iff, FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, LieModule.IsIrreducible, LieAlgebra.IsSimple.instIsIrreducible, RootPairing.isIrreducible_iff_invtRootSubmodule. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Steinberg\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|steinberg|Weyl.*dim|weyl.*dim|Frobenius.*[Tt]wist|frobenius.*[Tt]wist",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Steinberg induced module of a simply connected semisimple algebraic group is simple",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep_iff, RootPairing.isSimpleModule_weylGroupRootRep, isSimpleModule_of_simple, simple_of_isSimpleModule, Rep.coindToInd.congr_simp, IsSimpleModule, Representation.IndV, instIsSimpleModuleSubtypeMemSubmoduleValSetSetOfNonemptyLinearEquivId. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "isSimpleModule_weylGroupRootRep|simple_iff_end_is_rank_one|def IndV|def IsIrreducible",
+   "results": "9 hits: Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/Topology/Sober.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Weyl.*dimension|dimension.*Weyl|Steinberg|steinberg|pRestricted|p_restricted",
+   "results": "3 hits: Mathlib/Geometry/Convex/Cone/DualFinite.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"highestWeight\", \"finrank\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a simple rational representation with highest weight lambda plus p times mu is the product of the dimensions at lambda and mu if lambda is p restricted",
+   "results": "8 hits: LieAlgebra.IsKilling.chainLength, LieModule.chainTopCoeff, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add, LieModule.rank, LieModule.zero_lt_finrank_genWeightSpace, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, FDRep.finrank_hom_simple_simple, LieAlgebra.IsKilling.chainLength_of_eq_zsmul_add. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem rank|def rank|zero_lt_finrank_genWeightSpace|LieModule.rank",
+   "results": "6 hits: Mathlib/Algebra/Lie/Rank.lean, Mathlib/Algebra/Lie/Rank.lean, Mathlib/Algebra/Lie/Weights/Linear.lean, Mathlib/Algebra/Lie/Weights/Linear.lean, Mathlib/Algebra/Lie/Weights/Linear.lean, Mathlib/Algebra/Lie/Weights/Linear.lean. Search subdirectory: Mathlib/Algebra/Lie. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-self-duality",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality.",
+   "via": [
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-steinberg-induced-module-irreducible",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four statement dependencies. No project attachment. Split by a minimal simple submodule and equality of dimensions, isolating the general Weyl dimension formula, the first restricted rho simple-module dimension, and the general restricted-weight dimension multiplication law. The assembly explicitly checks Borel signs, dominance, the restricted weight, and the dimension induction; no simplicity or self-duality of an induced module is assumed. All previous search logs were read and reused, with candidate source reads and additional recorded searches.",
+  "blueprint": "Supports the inherited alteration/moduli prerequisite under det-thm-sf-ctf-stability-direct-images proof (3), as described in blueprint.from.place; the current latest blueprint's direct-image proof (3) does not itself state the representation-theoretic input. The nearest blueprint ancestor command returns null; retained that inherited value and exact via chain. Steps 1--6 supply the Steinberg simplicity input to rho-section self-duality without changing the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-4d0fac6bd",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-4d0fac6bd (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement, plus Milne iAG §22.48-22.55 (local). Jantzen is not local; the delivery marks it WANTED with proof_origin=agent. The item statement is unchanged and true. On SL2 with an upper-triangular B, E_1=span{x,z}, the U-fixed vector is z and its weight is +rho, so the module is H^0((p^r-1)rho)=St_r. Step 1 (<rho,alpha^vee>=1, dominance, (p-1)rho restricted) is correct. Step 2: the E_B convention of primitive-line matches with lambda=-m_k rho~, giving weight eta_k. Step 3: the Weyl formula gives p^{kN} as an integer computation in Q. Step 4: a nonzero submodule of least dimension is simple, its U-fixed line equals that of E_k, so it has weight eta_k. Step 5: induction with eta_{k+1}=eta_1+p eta_k, base from the rho-simple-dimension node. Step 6: equal dimensions. The three new nodes are true: the Weyl dimension formula (Kempf vanishing + Euler characteristic, Milne 22.50-22.51), dim of the simple module of highest weight (p-1)rho = p^N, and dimensions multiplying under the Steinberg tensor product (Milne 22.54-22.55). Tests: SL2, lambda=0, mu=0, p=2, rank 0, two rank-one factors. All three are statement-only and self-contained (B1-B3). Not D1: the rho-dimension node concerns an arbitrary simple module, not the induced module; the split follows Jantzen II.3.18-3.19 (dim L + L inside H^0 + Weyl dimension) with the reduction to r=1 via the tensor product theorem, and the work is spread over comparable nodes. No duplicates found by rg -L over dag/nodes. Batch 5: every flagged path ends in lem-trf-smooth-fpqc-base-descent (smoothness descends along fpqc covers, a Mathlib leaf) or lem-trf-split-lattice-torus-projection (split tori are smooth). Both are generic scheme tools, not steps of the trace-formula or Poincare-duality proofs, so all nine flagged citations are accepted. FIX (C5): steps 1-2 re-derived <rho,alpha^vee>=1 and w0 rho=-rho, which the existing lem-sfb-rho-regular-weyl-orbit (unsplit, same unit, on base, no cycle) states. Steps 1-2 and proof_deps now cite it; step 1 also cites rho-section-modules for rho in X. No statement change, no dropped nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SteinbergInducedModuleIrreducible",
+  "declaration": "AlgebraicGeometry.steinberg_induced_module_irreducible",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SteinbergInducedModuleIrreducible.lean",
+  "statement": "theorem steinberg_induced_module_irreducible {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [CharP F p] (hp : 0 < p) (S T B : Grp (Over (Spec (.of F)))) [IsAffine S.X.left] (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (i : T ⟶ S) (j : B ⟶ S) (k : T ⟶ B) (hpair : IsRhoBorelPair i j k) (a : ModObj T.X B.X) (hconj : ∀ (Z : Over (Spec (.of F))) (t : Z ⟶ T.X) (b : Z ⟶ B.X), lift t b ≫ a.smul = (t ≫ k.hom.hom) * b * (t ≫ k.hom.hom)⁻¹) (Φ : List (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hΦ : Φ.Nodup) (hroots : ∀ α, α ∈ Φ ↔ α.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B a α ≠ ⊥) (ρ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hρ : ρ.hom.hom ^ 2 = (Φ.map (fun α ↦ α.hom.hom)).prod) (ρB : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hρB : k ≫ ρB = ρ) (htrivial : ∀ (U : Grp (Over (Spec (.of F)))) (l : U ⟶ B), IsClosedSubgroupScheme l.hom.hom → IsNormalSubgroupScheme l.hom.hom → Smooth U.X.hom → ConnectedSpace U.X.left → SolvableGroupStructure.IsUnipotent U → l.hom.hom ≫ ρB.hom.hom = 1) (r : ℕ) (hr : 0 < r) : ∃ c : RhoSection.sectionModule S B j ρB (p ^ r - 1) →ₗ[F] RhoSection.sectionModule S B j ρB (p ^ r - 1) ⊗[F] RationalHighestWeight.coordinateAlgebra S, HopfAction.Coassociative F (RationalHighestWeight.coordinateAlgebra S) (RhoSection.sectionModule S B j ρB (p ^ r - 1)) c ∧ HopfAction.Counital F (RationalHighestWeight.coordinateAlgebra S) (RhoSection.sectionModule S B j ρB (p ^ r - 1)) c ∧ (∀ (f : RhoSection.sectionModule S B j ρB (p ^ r - 1)) (n : ℕ) (v : Fin n → RhoSection.sectionModule S B j ρB (p ^ r - 1)) (z : Fin n → RationalHighestWeight.coordinateAlgebra S), c f = ∑ q, v q ⊗ₜ[F] z q → ∀ (A : Type u) [CommRing A] [Algebra F A] (s g : StandardGroupSchemes.affine F A ⟶ S.X), ∑ q, RhoSection.evaluate g (v q).val * RhoSection.evaluate s (z q) = RhoSection.evaluate (s⁻¹ * g) f.val) ∧ RationalHighestWeight.IsSimple c",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing actual RhoSection.sectionModule and RationalHighestWeight.IsSimple. The existential coaction is uniquely fixed by its evaluation on every finite tensor presentation at all algebra-valued points, giving f(s⁻¹g). The affine instance is already implied by hS; natural r with 0 < r covers exactly integers r ≥ 1. The added statement dependency is an already landed definition node, reused without duplication."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6787490a",
+  "group": "Q134",
+  "result": "pass",
+  "note": "The item record changes only by its new lean record and the added stmt_dep def-sfb-rational-highest-weight-data (landed def, used; same as the Q125/N0/NL PASS precedents). Dep records equal side-live; lean.statement is verbatim in the file. Clauses match the node: alg. closed F with CharP p, p>0; IsSemisimpleGroupScheme (IsAffine implied); hsc copied from exists_rho_section_modules; arbitrary IsRhoBorelPair; roots pinned by hconj/hroots/Nodup; rho^2 = product of roots (torsion-free, char 2 fine); rhoB extends rho and htrivial is limited to smooth unipotent subgroups, no stronger than the node. Module is the actual sectionModule at p^r-1, sign checked on SL2 (St_1). The coaction is fixed uniquely by Σ v_q(g) z_q(s) = f(s⁻¹g), consistent with HopfAction.Coassociative and HasRationalLeftTranslation. IsSimple = nontrivial and only ⊥/⊤ stable. Edge cases rank 0, r=1, n=0 and universe u covered. No new defs, proof is sorry, docstrings carry source, blueprint and steps; no duplicate found; no recompile since no file changed."
+ }
+}

@@ -238,7 +238,33 @@
   "lemma-nagata-scheme-image-ideal-qc"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "module": "Mathlib.AlgebraicGeometry.Morphisms.Immersion",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-closure",
  "lean": {
@@ -267,5 +293,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-803f32eea (reviewer sub-agent of L); spot-checked: Q89 lemma-nagata-immersion-open-in-scheme-image, head 803f32eea638. This is a Mathlib leaf with no new nodes, no proof steps and no tool_uses. It repairs the landing refusal that named the changed definition def-nagata-scheme-image-factor. Compared field by field with the previously reviewed head abb9e2e2966c, the only changes are the revalidation paragraph added to mathlib_match.how and a longer split_report summary. The statement, source, stmt_deps and Lean metadata are identical. All six stmt_deps have the same statement in the snapshot, clones/live and clones/side-live. The image-factor definition now defines SIm by the largest quasi-coherent kernel subideal and sets g^im := Scheme.Hom.toImage g. I read the Mathlib source myself. Openness: Immersion.lean:259 (IsImmersion + QuasiCompact). Quasi-compactness of the factor: Subscheme.lean:727. Topological density (IsDominant): :720. Stalk injectivity of toImage.c at every point of the image, boundary points included: :760. Stalks.lean:546 turns that into injectivity on every open, which is def-nagata-scheme-theoretically-dense-open. Basic.lean:692/702 shows that kernel = 0 agrees with this because the factor is quasi-compact. Basic.lean:104/125 and Subscheme.lean:662/665/710/715 match the revised definition wording. Stacks morphisms.tex lemma-quasi-compact-immersion (01RG) takes the quasi-compact branch with the same hypotheses, so the target is not weakened. Edge cases checked: empty T, the identity, Spec k → Spec k[ε]/(ε²) (image Spec k), G_m → A^1, and the embedded point Y=Spec k[x,y]/(x²,xy) with T=D(y). The item is still unsplit in live, has no repair note, is not dropped and has no SGA citation. No fixes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $g\\colon T\\to Y$ be a quasi-compact immersion. The constructed map\n$g^{\\mathrm{im}}\\colon T\\to\\operatorname{SIm}(g)$ is a quasi-compact open\nimmersion, and its image is topologically and scheme-theoretically dense.",
+  "proof": [
+   {
+    "text": "Since $g$ is a quasi-compact immersion, it factors as an open immersion\nfollowed by a closed immersion, and the closed part may be taken to be\n$\\operatorname{SIm}(g)\\hookrightarrow Y$; locally on $Y$ the factor map\n$g^{\\mathrm{im}}$ is a base change of an open immersion, hence an open\nimmersion. It is quasi-compact because $g=g_{\\mathrm{im}}\\circ g^{\\mathrm{im}}$\nis quasi-compact and $g_{\\mathrm{im}}$ is separated. By\n[lemma-nagata-scheme-image-ideal-qc] the support of $\\ker(g)$ is the closure\nof $g(T)$, so the range of $g^{\\mathrm{im}}$ is topologically dense, and the\nmap $\\mathcal O_{\\operatorname{SIm}(g)}\\to (g^{\\mathrm{im}})_*\\mathcal O_T$ is\ninjective on sections over the affine opens of $\\operatorname{SIm}(g)$ pulled\nback from affine opens of $Y$. These form a basis, so this map of sheaves is\ninjective, i.e. $\\ker(g^{\\mathrm{im}})=0$ and $g^{\\mathrm{im}}$ is\nscheme-theoretically dense.",
+    "uses": [
+     "lemma-nagata-scheme-image-ideal-qc"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

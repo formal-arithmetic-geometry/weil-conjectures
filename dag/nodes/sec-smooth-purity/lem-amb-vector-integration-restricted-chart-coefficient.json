@@ -1,0 +1,117 @@
+{
+ "id": "lem-amb-vector-integration-restricted-chart-coefficient",
+ "kind": "statement",
+ "title": "Pure coefficient coherence for a restricted inverse chart",
+ "statement": "Let N>0, A be a commutative ring with NA=0, t be normalized finite Tate transport, S a Noetherian scheme with N invertible, and F a locally free module of rank d≥0. For U≤V and a frame e of F on V, write a=affineTraceMap(U→V,d), q=vectorIntegrationChart(e), K=vectorIntegrationCoefficient(F), c=vectorIntegrationChartCoefficient(e), and b for affineTraceRightBaseChange(U→V,d,1_V) followed by R_U of the constant-unit pullback. The inverse-image compositor (a≫q)*K→a*q*K, followed by a*(c.hom) and b.hom, equals vectorIntegrationCartesianCoefficient for the pasted inverse-frame square over U→S, with base coefficient affineLinearBaseCoefficient(S,d) and comparison vectorIntegrationBaseCoefficientPullback(U→S,d). This is an equality on the affine tower over U and involves no compact-support functor, exchange map or counit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: coefficient comparison, using composition of inverse image and normalized Tate transport."
+ },
+ "stmt_deps": [
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-vector-integration-cartesian-prefix-action"
+ ],
+ "proof": [
+  {
+   "text": "Apply the affine tower unit coefficient comparison to rewrite the right base-change followed by constant-unit pullback as ordered Tate coefficient descent.",
+   "uses": [
+    "lem-amb-vector-integration-restricted-chart-coefficient-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse-frame and pasted-square coefficient composition after that rewrite. Its expansion is exactly the Cartesian coefficient for the restricted chart.",
+   "uses": [
+    "lem-amb-vector-integration-restricted-chart-coefficient-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-vector-integration-restricted-chart-coefficient-core",
+  "lem-amb-vector-integration-restricted-chart-coefficient-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: coefficient comparison, using composition of inverse image and normalized Tate transport.; explicit comparison calculation extracted from the parent proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedSquareUpperStarIso|affineTraceCompactSupportComparison|affineLinearCoefficientDescent|leftDerivedUpperStarComp",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No match: the results concern geometric affine-space base change, underived module pullback, or topological bundles, not the specified ordinary-etale derived coefficient and compact-support comparison morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of an iterated tensor product of shifted Tate lines commutes with restriction of a vector bundle trivialization and composition of inverse image",
+   "results": "8 hits: Bundle.Pullback, Trivialization.pullback, Trivialization.pullback_target, Trivialization.pullback_linear, FiberBundle.pullback_trivializationAt', CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, Trivialization.pullback_apply, CategoryTheory.Functor.IsFibered.pullbackPullbackIso",
+   "date": "2026-10-26",
+   "verdict": "No match: the results concern geometric affine-space base change, underived module pullback, or topological bundles, not the specified ordinary-etale derived coefficient and compact-support comparison morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence for derived inverse image of tensor products of shifted Tate coefficient lines, constant unit, and restriction of a scheme vector bundle chart",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.AffineSpace.comp_homOfVector",
+   "date": "2026-10-26",
+   "verdict": "No match: the results concern geometric affine-space base change, underived module pullback, or topological bundles, not the specified ordinary-etale derived coefficient and compact-support comparison morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartTransport",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Overlap calculation: coefficient comparison, using composition of inverse image and normalized Tate transport.",
+   "via": [
+    "lem-amb-vector-integration-restricted-chart-transport",
+    "lem-amb-vector-integration-overlap-chart-prefix",
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationRestrictedChartCoefficient.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_restricted_chart_coefficient",
+  "statement": "theorem vectorIntegration_restricted_chart_coefficient\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (U V : S.Opens) (hUV : U ≤ V)\n    (e : VectorBundleZeroSection.Trivialization S d F V) :\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (affineTraceMap (S.homOfLE hUV) d) (vectorIntegrationChart S d F V e)).hom.app\n        (vectorIntegrationCoefficient A N hA S d F) ≫\n      (ordinaryFinitePullback A (affineTraceMap (S.homOfLE hUV) d)).map\n        (vectorIntegrationChartCoefficient A N hA t S hS d F V e).hom ≫\n      (affineTraceRightBaseChange A N hA t (S.homOfLE hUV)\n        (affineTracePullbackInvertible N V.ι hS) d (ordinaryFiniteUnit A V.toScheme)).hom ≫\n      (affineTraceRight A N hA U.toScheme d).map\n        (ordinaryFiniteUnitPullback A (S.homOfLE hUV)).hom =\n    (vectorIntegrationCartesianCoefficient A N hA t (VectorBundleZeroSection.π S d F)\n      U.ι (affineTracePullbackInvertible N U.ι hS) d\n      (vectorIntegrationRestrictedChart S d F U V hUV e)\n      (vectorIntegrationRestrictedChart_isPullback S d F U V hUV e)\n      (affineLinearBaseCoefficient A N hA S d)\n      (vectorIntegrationBaseCoefficientPullback A N hA t U.ι hS d)).hom",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T130441-L-3461706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T181355-L-3455103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

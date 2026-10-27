@@ -1,0 +1,564 @@
+{
+ "id": "lem-per-qe-minimal-formal-defect",
+ "kind": "statement",
+ "title": "Least generic formal singular height controls low-height excellence",
+ "statement": "Let $R$ be a commutative Noetherian normal Nagata domain over $\\mathbf Q$ [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-weil-pbc-nagata-ring]. Let $0\\ne x\\in R$ be a nonunit, and suppose $R$ is $(x)$-adically complete [def-weil-pbc-adically-complete-ring], universally catenary, not quasi-excellent, with every quotient $R/K$ for a nonzero ideal $K$ quasi-excellent [def-exc-excellent-ring]. For each finite extension $L/\\operatorname{Frac}R$, let $B_L$ be the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure]. Assume that $B_L$ is finite as an $R$-module, normal, Nagata, universally catenary and $(x)$-adically complete, that $B_L/xB_L$ is quasi-excellent, and that the maximal-ideal completion $\\widehat{(B_L)_{\\mathfrak n}}$ is a normal local domain for every maximal ideal $\\mathfrak n$ of $B_L$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion].\n\nFor each such $L,\\mathfrak n$, put $C_{L,\\mathfrak n}=\\varprojlim_j (B_L)_{\\mathfrak n}/x^j(B_L)_{\\mathfrak n}$. For a Noetherian ring $T$, write $\\operatorname{Sing}(T)=\\{\\mathfrak p\\in\\operatorname{Spec}T:T_{\\mathfrak p}\\text{ is not regular local}\\}$ [def-weil-affine-spectrum, def-weil-regular-scheme]. A minimal singular prime is a member of this set containing no strictly smaller member. Define\n$$\\mathcal S=\\{(L,\\mathfrak n,\\mathfrak s):\\mathfrak s\\text{ is a minimal singular prime of }C_{L,\\mathfrak n},\\ \\mathfrak s\\cap B_L=(0)\\}.$$\nHeight means $\\operatorname{ht}\\mathfrak p=\\dim T_{\\mathfrak p}$, with Krull dimension as in [def-weil-pbc-krull-dimension-ring]. Then every $C_{L,\\mathfrak n}$ is a Noetherian normal local G-ring [def-weil-pbc-g-ring], and its singular locus is closed. The set $\\mathcal S$ is nonempty. Its heights have a least value $h\\in\\mathbf N$ with $h\\geq2$, attained by some triple in $\\mathcal S$. Every $R_{\\mathfrak p}$ with $\\operatorname{ht}\\mathfrak p\\leq h$, and every $(B_L)_{\\mathfrak q}$ with $\\operatorname{ht}\\mathfrak q\\leq h$, is excellent.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 2, (5.1)–(5.6) and Claim 5.2, printed pp.9–11; final finite-extension consequence printed p.13; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix $L,\\mathfrak n$, and abbreviate $B=B_L$, $A=B_{\\mathfrak n}$, $\\mathfrak m=\\mathfrak nA$, $C=C_{L,\\mathfrak n}$. A finite module algebra is finite type (its module generators also generate it as an algebra). Hence $B$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], $A$ is Noetherian by [lem-weil-pbc-localization-noetherian], and $C$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. By [lem-weil-pbc-adic-complete-jacobson-radical], $x$ belongs to every maximal ideal of $B$, so $x\\in\\mathfrak m$. By [lem-weil-pbc-adic-completion-mod-ideal], $C$ is $xC$-adically complete and $C/xC=A/xA$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, (5.1) and preparation for (5.3), printed p.9"
+   }
+  },
+  {
+   "text": "The quotient $C/xC=A/xA$ is local and $xC$ is in the Jacobson radical by [lem-weil-pbc-adic-complete-jacobson-radical]. Thus $C$ is local, with maximal ideal $\\mathfrak mC$, and $A\\to C$ is local. For each $j\\geq1$, exact completion of $0\\to\\mathfrak m^j\\to A\\to A/\\mathfrak m^j\\to0$, together with its finite-module tensor description, gives $C/\\mathfrak m^jC\\cong(A/\\mathfrak m^j)^{\\wedge(x)}=A/\\mathfrak m^j$: the last completion stabilizes because $x^j\\in\\mathfrak m^j$. These isomorphisms are induced by $A\\to C$, hence commute with all quotient transitions. Taking inverse limits identifies $\\widehat C=\\widehat A$, compatibly with the maps from $A$ and $C$. This is a short quotient calculation, not an extra completion theorem.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, sentence preceding (5.3), printed p.9; expanded using Stacks Tags 00MA (lemma-completion-tensor) and 00MB (lemma-completion-flat)"
+   }
+  },
+  {
+   "text": "By [lem-per-quasi-excellent-localization], $A/xA$ is quasi-excellent, since it is a localization of the assumed quasi-excellent ring $B/xB$. In particular it is a G-ring. Apply [lem-per-local-g-ring-adic-lifting] to the local complete pair $(C,xC)$ from steps 1–2: $C$ is a G-ring. Apply [lem-per-semilocal-g-ring-j2] to this local ring: it is quasi-excellent and therefore has closed singular locus. The map $C\\to\\widehat C=\\widehat A$ is regular by [lem-weil-pbc-g-ring-completion-regular] and faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat]. The target is a normal local domain by the assumption on the maximal-adic completion of $(B_L)_{\\mathfrak n}$. Hence [lem-sfb-faithfully-flat-normal-ring-descent] makes $C$ normal; as a local normal ring it is a domain. This proves every assertion about each individual $C_{L,\\mathfrak n}$.",
+   "uses": [
+    "lem-per-quasi-excellent-localization",
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-semilocal-g-ring-j2",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-sfb-faithfully-flat-normal-ring-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, (5.1)–(5.3), printed p.9"
+   }
+  },
+  {
+   "text": "We record why only generic formal fibres can fail. For primes $0\\ne\\mathfrak t\\subseteq\\mathfrak p$ of $R$, $R/\\mathfrak t$ is quasi-excellent by hypothesis; its localization at $\\mathfrak p/\\mathfrak t$ is quasi-excellent by [lem-per-quasi-excellent-localization]. Its completion map is regular by [lem-weil-pbc-g-ring-completion-regular]. The generic fibre of that map is geometrically regular, and [lem-weil-pbc-formal-fibre-quotient-iso] identifies it with the fibre over $\\mathfrak t$ of $R_{\\mathfrak p}\\to\\widehat{R_{\\mathfrak p}}$. Thus all nonzero-prime fibres of every such completion map are geometrically regular.",
+   "uses": [
+    "lem-per-quasi-excellent-localization",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-formal-fibre-quotient-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, opening paragraph and Claim 5.2, printed pp.9–10"
+   }
+  },
+  {
+   "text": "The quotient $R/xR$ is quasi-excellent since $xR\\ne0$, and $xR$ is in the Jacobson radical by [lem-weil-pbc-adic-complete-jacobson-radical]. If $R$ were a G-ring, [lem-per-g-ring-quasi-excellent-closed-fibre] would make it quasi-excellent, contrary to hypothesis. By [lem-weil-pbc-g-ring-maximal-ideal-criterion], choose a maximal ideal $\\mathfrak n$ whose local completion map is not regular. It is flat by [lem-weil-pbc-local-completion-faithfully-flat], so step 4 shows its generic fibre is not geometrically regular. Put $K=\\operatorname{Frac}R$. Since $K$ has characteristic zero, a finite purely inseparable extension has degree one (an element with a $p$-power in the base can occur nontrivially only in characteristic $p>0$). Thus geometric regularity over $K$ is ordinary regularity by [def-weil-pbc-g-ring]. Consequently $K\\otimes_R\\widehat{R_{\\mathfrak n}}$ is not regular.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-per-g-ring-quasi-excellent-closed-fibre",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, opening paragraph and generic-fibre square, printed p.9; characteristic-zero specialization"
+   }
+  },
+  {
+   "text": "Use $L=K$, so normality of $R$ gives $B_K=R$, and put $C=C_{K,\\mathfrak n}$. If $K\\otimes_R C$ were regular, every local ring of $\\widehat{R_{\\mathfrak n}}$ at a prime over $(0)$ would be regular: the corresponding local ring of $C$ is regular, the local map is flat with regular closed fibre because $C\\to\\widehat C$ is regular (step 3), and [lem-weil-pbc-flat-over-regular-with-regular-fibre] applies. This contradicts step 5. Choose a singular prime of $C$ contracting to zero. Since $\\operatorname{Sing}C$ is closed, write it as $V(J)$; [lem-weil-pbc-prime-contains-minimal-prime] supplies a prime minimal over $J$ below the chosen prime. Its contraction to $R$ is still zero, so it gives a member of $\\mathcal S$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, definition of $S_L$ and (5.2), printed p.9"
+   }
+  },
+  {
+   "text": "Every prime in each Noetherian $C$ has finite natural height by [lem-trf-noetherian-prime-finite-height]. The nonempty set of these natural heights therefore has a least element $h$, realized by a triple. Each $C$ is normal by step 3, hence satisfies $(R_1)$ by [lem-weil-pbc-serre-criterion-normal]. By the definition of $(R_1)$ in [def-weil-pbc-serre-conditions-rk-sk], a singular prime cannot have height zero or one. Hence $h\\geq2$.",
+   "uses": [
+    "lem-trf-noetherian-prime-finite-height",
+    "lem-weil-pbc-serre-criterion-normal",
+    "def-weil-pbc-serre-conditions-rk-sk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, (5.2)–(5.4), printed p.9"
+   }
+  },
+  {
+   "text": "Let $0\\ne\\mathfrak p\\subset R$ have height at most $h$, choose a maximal $\\mathfrak n\\supseteq\\mathfrak p$, and put $C=C_{K,\\mathfrak n}$, $A=R_{\\mathfrak p}$. The map $R_{\\mathfrak n}\\to C$ is flat by [lem-weil-pbc-noetherian-completion-flat] and local by step 2, hence faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. Thus $\\mathfrak pC$ is proper: by [lem-weil-pbc-faithfully-flat-surjective-spectrum] some prime of $C$ contracts to $\\mathfrak pR_{\\mathfrak n}$, and it contains $\\mathfrak pC$. Choose $Q$ minimal over $\\mathfrak pC$ using [lem-weil-pbc-minimal-prime-over-proper-ideal]. Its contraction to $R$ is exactly $\\mathfrak p$: otherwise [lem-sc-flat-going-down] would produce a strictly smaller prime over $\\mathfrak p$ containing $\\mathfrak pC$. The induced map $\\alpha:A\\to C_Q$ is flat and local, and its closed fibre has dimension zero because $Q$ is minimal over $\\mathfrak pC$. Thus [lem-weil-pbc-flat-height-formula] gives $\\operatorname{ht}Q=\\operatorname{ht}\\mathfrak p\\leq h$. No finite-type assumption on this completion map is used.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, Claim 5.2, (5.5)–(5.6), printed p.10; specialized to $L=K$"
+   }
+  },
+  {
+   "text": "Put $T=\\widehat{C_Q}$. By [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-adic-completion-noetherian], these local rings are Noetherian. The map $\\widehat\\alpha:\\widehat A\\to T$ is flat by [lem-weil-pbc-flat-completion], and it is local since the compatible completion map carries the extended maximal ideal of $A$ into that of $C_Q$; the description of these maximal ideals is [lem-weil-pbc-local-completion-local-ring]. It is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. Since $C$ is a G-ring, the map $C_Q\\to T$ is regular by [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-flat-completion",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, Claim 5.2, diagram with alpha, completed alpha and beta, printed p.10"
+   }
+  },
+  {
+   "text": "Write $\\operatorname{Sing}C=V(J)$, and let $s_1,\\ldots,s_r$ be the primes minimal over $J$ which are contained in $Q$; there are finitely many by [lem-sc-finite-minimal-primes-over-ideal]. For each $s_i\\subsetneq Q$, strict inclusion and finite heights give $\\operatorname{ht}s_i<\\operatorname{ht}Q\\leq h$. Its contraction to $R$ must be nonzero: otherwise $(K,\\mathfrak n,s_i)\\in\\mathcal S$ contradicts minimality of $h$. If $s_i=Q$, its contraction is the nonzero ideal $\\mathfrak p$. Choose $0\\ne b_i\\in s_i\\cap R$ and put $b=\\prod_i b_i$, with $b=1$ if $r=0$. This is nonzero since $R$ is a domain. This product is the explicit common element in all the surviving singular components.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, Claim 5.2, three cases for the singular ideal, printed pp.10–11"
+   }
+  },
+  {
+   "text": "We claim $T[1/b]$ is regular. For a prime $P\\subset T$ not containing $b$, contract it to a prime $s\\subseteq Q$ of $C$. If $C_s$ were singular, [lem-weil-pbc-prime-contains-minimal-prime] would give a minimal singular prime $s_i\\subseteq s$; it appears in step 10, forcing $b\\in P$, a contradiction. Thus $C_s$ is regular. The map $C_s\\to T_P$ is flat local with regular closed fibre: it is obtained by localization from the regular map $C_Q\\to T$ of step 9. Apply [lem-weil-pbc-flat-over-regular-with-regular-fibre] to obtain that $T_P$ is regular. Since localization preserves Noetherianity by [lem-weil-pbc-localization-noetherian], this proves the claim. This pointwise argument supplies explicitly the source's assertion that the singular ideal extends to a defining ideal of $\\operatorname{Sing}T$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, Claim 5.2, regularity of $T[1/b]$, printed p.11"
+   }
+  },
+  {
+   "text": "Faithful flatness of $\\widehat\\alpha$ gives, by [lem-weil-pbc-faithfully-flat-surjective-spectrum], for every prime $P$ of $\\widehat A$ avoiding $b$ a prime of $T$ over it, also avoiding $b$. The local map of the corresponding prime localizations is flat, and its target is regular by step 11. By [lem-weil-pbc-flat-under-regular], $\\widehat A_P$ is regular. Localizing once more preserves regular local rings by [lem-weil-pbc-regular-local-localization]. Every prime of $K\\otimes_R\\widehat A$ avoids the nonzero $b$, so this generic fibre is regular. As in step 5, characteristic zero makes it geometrically regular. Together with step 4 and flatness of the completion map [lem-weil-pbc-local-completion-faithfully-flat], every fibre of $A\\to\\widehat A$ is geometrically regular; this map is regular.",
+   "uses": [
+    "lem-weil-pbc-flat-under-regular",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, end of Claim 5.2, printed p.11"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-g-ring-maximal-ideal-criterion], the local ring $A=R_{\\mathfrak p}$ is a G-ring, since its only maximal-local completion map is the regular map of step 12. Then [lem-per-semilocal-g-ring-j2] makes $A$ quasi-excellent. It is universally catenary by the definition in [def-exc-excellent-ring]: a finite type $R_{\\mathfrak p}$-algebra is the localization, at $R\\setminus\\mathfrak p$, of a finite type $R$-algebra (choose finitely many algebra generators and clear denominators in finitely many defining equations, possible since $R$ is Noetherian). Between two primes surviving a localization every intermediate prime also survives, so the saturated chains and their lengths agree. Universal catenarity of $R$ therefore supplies it for $A$. Thus $A$ is excellent. At $\\mathfrak p=0$, the local ring is the field $K$, excellent by [lem-exc-fields-excellent].",
+   "uses": [
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-per-semilocal-g-ring-j2",
+    "def-exc-excellent-ring",
+    "lem-exc-fields-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, Claim 5.2, printed pp.10–11"
+   }
+  },
+  {
+   "text": "Finally fix $L$ and $\\mathfrak q\\subset B_L$ of height at most $h$, and put $\\mathfrak p=\\mathfrak q\\cap R$. Apply [lem-exc-dimension-formula-universally-catenary-finite-type-domain] to the finite extension of domains $R\\subset B_L$: its fraction field extension and its residue field extension at $\\mathfrak q$ are algebraic, so both transcendence degrees are zero and $\\operatorname{ht}\\mathfrak p=\\operatorname{ht}\\mathfrak q\\leq h$. Hence $R_{\\mathfrak p}$ is excellent by step 13. The algebra $B_L\\otimes_R R_{\\mathfrak p}$ is finite, hence finite type over this ring, and $(B_L)_{\\mathfrak q}$ is its localization. Apply [lem-exc-finite-type-localization-excellent] to obtain excellence of $(B_L)_{\\mathfrak q}$. This includes height zero, where the localizations are fields.",
+   "uses": [
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Theorem 5.1, Step 2, finite-extension consequence following Claim 5.4, printed p.13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-per-g-ring-quasi-excellent-closed-fibre",
+  "lem-per-local-g-ring-adic-lifting",
+  "lem-per-quasi-excellent-localization",
+  "lem-per-semilocal-g-ring-j2",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "lem-trf-noetherian-prime-finite-height",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-formal-fibre-quotient-iso",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-serre-criterion-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Expanded characteristic-zero specialization of Theorem 5.1 Step 2, printed pp.9–11, and the finite-extension consequence printed p.13; paper read online but absent from literature/ on this read clone, bibliographic integration requested in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-minimal-formal-defect: A minimal height generic singular prime in principal completions of finite normal extensions bounds excellence of low height localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] (I : Ideal R)\\n  [Submodule.IsPrincipal I], IsLocalRing.maximalIdeal R ∈ I.minimalPrimes → (IsLocalRing.maximalIdeal R).height ≤ 1\", \"doc\": \"In a local ring $ R $, if $ I $ is a principal ideal and the unique maximal ideal of $ R $ is a minimal prime ideal containing $ I $, then the height of this maximal ideal is at most 1.\"}\n  {\"name\": \"AlgHom.IsArithFrobAt.isArithFrobAt_localize\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {φ : S →ₐ[R] S}\\n  {Q : Ideal S} (H : φ.IsArithFrobAt Q) [inst_3 : Q.IsPrime],\\n  H.localize.IsArithFrobAt (IsLocalRing.maximalIdeal (Localization.AtPrime Q))\", \"doc\": \"If an $ R $-algebra homomorphism $ \\\\varphi: S \\\\to S $ satisfies the arithmetic Frobenius condition at a prime ideal $ Q \\\\subseteq S $, then the induced homomorphism on the localization of $ S $ at the\"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [p.IsPrime] (q : Ideal S) [inst_4 : q.IsPrime] [q.LiesOver p] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R q],\\n  ∃ s ∉ q, ∀ (q' : Ideal S), q'.IsPrime → q' ≠ q → q'.LiesOver p → s\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra of essential finite type. For a prime ideal $ \\\\mathfrak{p} \\\\subseteq R $ and a prime ideal $ \\\\mathfrak{q} \\\\subseteq S $ lying over \"}\n  {\"name\": \"Algebra.IsUnramifiedAt\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"Given a prime ideal $ q $ in a commutative ring $ A $, this proposition asserts that the localization of $ A $ at the complement of $ q $ is formally unramified over the base commutative ring $ R $. I\"}\n  {\"name\": \"IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (Rₚ : Type u_3) [inst_4 : CommRing Rₚ] [inst_5 : Algebra R Rₚ] [IsLocalization.AtPrime Rₚ p]\\n  [inst_7 : IsLocalRing Rₚ] (Sₚ : Type u_4) [inst_8 : CommRing Sₚ] [inst_\", \"doc\": \"For maximal ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$, if the image of $\\\\mathfrak{P}$ under the algebra map $S \\\\to S_{\\\\mathfrak{p}}$ lies over the maximal ideal of $R_{\\\\mathfrak\"}\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_2)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Krull height bounds, localizations or smooth loci, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Krull height bounds, localizations or smooth loci, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|Nishimura|IsGRing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Krull height bounds, localizations or smooth loci, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-minimal-formal-defect: A minimal height generic singular prime in principal completions of finite normal extensions bounds excellence of low height localizations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"(I : Ideal R) [I.IsPrincipal] (p : Ideal R) (hp : p ∈ I.minimalPrimes) : p.height ≤ 1\", \"doc\": \"In a commutative ring $ R $, if $ I $ is a principal ideal and $ p $ is a minimal prime ideal containing $ I $, then the height of $ p $ satisfies $ \\\\operatorname{ht}(p) \\\\leq 1 $. This follows from Kr\"}\n  {\"name\": \"IsLocalization.minimalPrimes_map\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \"[IsLocalization S A] (J : Ideal R) :\\n  (J.map (algebraMap R A)).minimalPrimes = Ideal.comap (algebraMap R A) ⁻¹' J.minimalPrimes\", \"doc\": \"Let $ R $ be a commutative semiring, $ S \\\\subseteq R $ a submonoid, and $ A $ the localization of $ R $ at $ S $. For any ideal $ J \\\\subseteq R $, the minimal prime ideals of the extended ideal $ J^e \"}\n  {\"name\": \"Ideal.height_le_card_of_mem_minimalPrimes_span\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"{p : Ideal R} {s : Set R} (hs : s.Finite) (hI : p ∈ (Ideal.span s).minimalPrimes) : p.height ≤ s.ncard\", \"doc\": \"If $ p $ is a minimal prime ideal containing the ideal generated by a finite set $ s $ in a commutative ring, then the height of $ p $ is less than or equal to the cardinality of $ s $. Formally, for \"}\n  {\"name\": \"Ideal.height_le_iff_covBy\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"{p : Ideal R} {n : ℕ} [p.IsPrime] [IsNoetherianRing R] :\\n  p.height ≤ n ↔ ∀ q : Ideal R, q.IsPrime → q < p → (∀ q' : Ideal R, q'.IsPrime → q < q' → ¬q' < p) → q.height < n\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a Noetherian ring $R$, the height of $\\\\mathfrak{p}$ is at most $n$ if and only if every minimal prime ideal $\\\\mathfrak{q} \\\\subsetneq \\\\mathfrak{p}$ has height strict\"}\n  {\"name\": \"Ideal.primeHeight_eq_zero_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"{I : Ideal R} [I.IsPrime] : primeHeight I = 0 ↔ I ∈ minimalPrimes R\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $R$, the height of $\\\\mathfrak{p}$ is zero if and only if $\\\\mathfrak{p}$ is a minimal prime ideal of $R$.\"}\n  {\"name\": \"Ideal.primeHeight\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"[hI : I.IsPrime] : ℕ∞\", \"doc\": \"The height of a prime ideal $ \\\\mathfrak{p} $ in a commutative ring $ R $ is defined as the supremum of the lengths of all finite chains of prime ideals strictly contained in $ \\\\mathfrak{p} $. The leng\"}\n  {\"name\": \"mem_minimalPrimes_of_primeHeight_eq_height\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"{I J : Ideal R} [J.IsPrime] (e : I ≤ J) (e' : J.primeHeight = I.height) [J.FiniteHeight] : J ∈ I.minimalPrimes\", \"doc\": \"For ideals $I$ and $J$ in a commutative ring $R$, if $J$ is a prime ideal containing $I$, the prime height of $J$ equals the height of $I$, and $J$ has finite height, then $J$ is a minimal prime ideal\"}\n  {\"name\": \"Ideal.mem_minimalPrimes_of_height_eq\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"{I J : Ideal R} (e : I ≤ J) [J.IsPrime] [FiniteHeight J] (e' : J.height ≤ I.height) : J ∈ I.minimalPrimes\", \"doc\": \"For ideals $I$ and $J$ in a commutative ring $R$, if $I \\\\subseteq J$, $J$ is a prime ideal of finite height, and the height of $J$ is less than or equal to the height of $I$, then $J$ is a minimal pri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Krull height bounds, localizations or smooth loci, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-minimal-formal-defect: Minimal singular formal fibre height and regularity of localizations in a normal complete Nagata domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_2)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"isReduced_ofLocalizationMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Reduced\", \"type\": \"OfLocalizationMaximal fun R x => IsReduced R\", \"doc\": \"If every localization of a commutative ring $ R $ at its maximal ideals is a reduced ring (i.e., contains no nonzero nilpotent elements), then $ R $ itself is reduced.\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension 0\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ makes $ S $ a standard smooth algebra over $ R $ of relative dimension 0, then this property is preserved under localization at any element of $ R $. Specificall\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ),\\n  RingHom.LocalizationPreserves fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, and for any submonoid $ M \\\\subseteq R $, the induced homomorphism between the localizations $ R_M \\\\to S_{\"}\n  {\"name\": \"Ring.DimensionLEOne.localization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ {R : Type u_2} (Rₘ : Type u_3) [inst : CommRing R] [IsDomain R] [inst_2 : CommRing Rₘ] [inst_3 : Algebra R Rₘ]\\n  {M : Submonoid R} [IsLocalization M Rₘ], M ≤ nonZeroDivisors R → ∀ [h : Ring.DimensionLEOne R], Ring.DimensionLEOne Rₘ\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain with Krull dimension at most one. If $ R_\\\\mathfrak{m} $ denotes the localization of $ R $ at a submonoid $ M $ consisting of non-zero divisor\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Krull height bounds, localizations or smooth loci, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Rotthaus|Hilfssatz|quasi.?excellent|Nishimura|IsGRing|alteration",
+   "results": "{\"t\": \"2026-10-24T03:50:52Z\", \"tool\": \"grep\", \"query\": \"Rotthaus|Hilfssatz|quasi.?excellent|Nishimura|IsGRing|alteration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: whole-Mathlib grep returned no occurrences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-minimal-formal-defect: Least generic singular height of principal completions bounds excellence of low height localizations of a normal Nagata rational domain",
+   "results": "{\"t\": \"2026-10-24T04:30:58Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-qe-minimal-formal-defect: Least generic singular height of principal completions bounds excellence of low height localizations of a normal Nagata rational domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes\", \"Ideal.height\", \"Ideal.primeHeight\", \"Ideal.primeHeight_eq_zero_iff\", \"Ideal.height_le_iff_covBy\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"IsLocalization.primeHeight_comap\"], \"digest\": \"86bfab79e883e0d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-minimal-formal-defect: Least generic singular height of principal completions bounds excellence of low height localizations of a normal Nagata rational domain",
+   "results": "{\"t\": \"2026-10-24T04:31:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-minimal-formal-defect: Least generic singular height of principal completions bounds excellence of low height localizations of a normal Nagata rational domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.KrullDimLE.of_isLocalization\", \"Ring.DimensionLEOne.localization\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"IsLocalization.height_map_of_disjoint\"], \"digest\": \"9082b6913b3ca624\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-minimal-formal-defect: Minimal formal singularity and low codimension excellent local rings in an adically complete normal domain",
+   "results": "{\"t\": \"2026-10-24T04:31:04Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-minimal-formal-defect: Minimal formal singularity and low codimension excellent local rings in an adically complete normal domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"IsAdicComplete.henselianRing\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"Algebra.IsSmoothAt\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\"], \"digest\": \"73882dfd164ada2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "{\"t\": \"2026-10-24T04:27:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiExcellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|Rotthaus|IsGRing|G-ring",
+   "results": "{\"t\": \"2026-10-24T04:30:57Z\", \"tool\": \"grep\", \"query\": \"quasi.?excellent|Rotthaus|IsGRing|G-ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned hits; they concern adic completeness, local rings, smooth loci or ordinary Jacobson radicals, not the stated G-ring/quasi-excellence theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-complete-pair-lifting",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 2, (5.1)–(5.6) and Claim 5.2, printed pp.9–11; final finite-extension consequence printed p.13.",
+   "via": [
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-minimal-formal-defect",
+  "worker": "stage1",
+  "summary": "Retained the statement. Expanded the Kurano–Shimomoto least-singular-height argument into fourteen steps; characteristic zero allows L=Frac(R) in the generic-fibre test. Added only three independent general G-ring inputs, reusing existing completion, dimension, regularity and excellence nodes. Proved the partial/maximal completion comparison and the common-element construction explicitly. Checked all cited statements, source hypotheses, edge cases and Mathlib hits.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 2, (5.1)–(5.6) and Claim 5.2, printed pp.9–11; final finite-extension consequence printed p.13. The current split refines the Kurano–Shimomoto Step 2 subargument already placed under this ancestor, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-sc-finite-minimal-primes-over-ideal",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-trf-noetherian-prime-finite-height",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-exact-finite-modules",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-completion",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-formal-fibre-quotient-iso",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-serre-criterion-normal",
+    "why": "General commutative-algebra input used with the exact hypotheses checked in the proof and report; the perverse/Fourier unit has no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-sfb-faithfully-flat-normal-ring-descent",
+    "why": "Stacks 033G descent of normality along the faithfully flat map C to its maximal completion (step 3); generic commutative algebra, no node of the perverse unit states it. Replaces the unsplit copy lem-per-faithfully-flat-normal-ring-descent created on the dropped 2026-10-19 artin-gabber route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-trf-noetherian-prime-finite-height",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-formal-fibre-quotient-iso",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-serre-criterion-normal",
+  "lem-sfb-faithfully-flat-normal-ring-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-daa7bf1cc",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-daa7bf1cc (reviewer sub-agent of L); spot-checked: Read the item's 14 steps, the 3 new nodes (local G-ring adic lifting, semilocal G-ring J-2, G-ring + quasi-excellent Jacobson quotient ⇒ quasi-excellent) and every cited statement. Kurano–Shimomoto is not in literature/ and I could not open it, so each step was checked independently against the cited nodes. Steps: Ĉ=Â via 00MA/00MB (step 2); C local G-ring by Rotthaus + Matsumura 76 (step 3); formal fibres over nonzero primes good via 07PN (step 4); R not a G-ring by the closed-fibre criterion, char 0 so geometric regularity = regularity (step 5); 𝒮 nonempty via 031E (step 6); h≥2 by R1/Serre (step 7); going-down + 00ON give ht Q = ht p (step 8); b and T[1/b] regular (steps 10–11); 00OF descends regularity (step 12); localization keeps universal catenarity (step 13); 02IJ heights (step 14). Steps 13/14 cover p=0 and q=0; b=1 covers no surviving singular primes. The 3 new nodes are true literature theorems, have no duplicate in the DAG (Rotthaus/G-ring/J-2/semilocal search) and do not restate the item. Batch-5 flags (lem-exc-fields-excellent, lem-exc-finite-type-localization-excellent, lem-per-quasi-excellent-localization, lem-trf-noetherian-prime-finite-height): all generic commutative algebra, outside both assumptions → accepted. Artin-gabber route flag: the item is reached from nt-target-weil-conjectures via the sfb Gabber chain, not via lem-per-artin-gabber-affine-curve. Still, the dropped-route unsplit copy lem-per-faithfully-flat-normal-ring-descent is replaced (FIX 1) by the identical split, reviewed lem-sfb-faithfully-flat-normal-ring-descent (Stacks 033G) at step 3, declared as a tool use. FIX 2: steps 8 and 12 now cite lem-weil-pbc-faithfully-flat-surjective-spectrum for Spec-surjectivity (C1). proof_deps recomputed; checked no cycle. Stale blueprint.from.via chains through lem-per-qbar-middle-tstructure are only metadata from created.item; maintainer may refresh them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QeMinimalFormalDefect",
+  "declaration": "exists_qe_minimal_formal_defect",
+  "declarations": [
+   "qeFormalCompletion",
+   "qeGenericMinimalSingularPrimes",
+   "exists_qe_minimal_formal_defect"
+  ],
+  "file": "lean/Sheaf/RingTheory/QeMinimalFormalDefect.lean",
+  "statement": "theorem exists_qe_minimal_formal_defect (R : Type u) [CommRing R] [IsDomain R] [Algebra ℚ R] [IsNoetherianRing R] [IsIntegrallyClosed R] (hNagata : IsNagataRing R) (x : R) (hx : x ≠ 0) (hxunit : ¬ IsUnit x) (hcomplete : IsAdicComplete (Ideal.span {x}) R) (hcatenary : IsUniversallyCatenary R) (hnotqe : ¬ IsQuasiExcellent R) (hquot : ∀ K : Ideal R, K ≠ ⊥ → IsQuasiExcellent (R ⧸ K)) (hB : ∀ (L : Type u) [Field L] [Algebra R L] [Algebra (FractionRing R) L] [IsScalarTower R (FractionRing R) L] [Module.Finite (FractionRing R) L], Module.Finite R (integralClosure R L) ∧ (∀ (p : Ideal (integralClosure R L)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧ IsNagataRing (integralClosure R L) ∧ IsUniversallyCatenary (integralClosure R L) ∧ IsAdicComplete (Ideal.span {algebraMap R (integralClosure R L) x}) (integralClosure R L) ∧ IsQuasiExcellent ((integralClosure R L) ⧸ Ideal.span {algebraMap R (integralClosure R L) x}) ∧ ∀ (n : Ideal (integralClosure R L)) [n.IsMaximal], IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime n)) (Localization.AtPrime n)) ∧ IsDomain (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime n)) (Localization.AtPrime n)) ∧ IsIntegrallyClosed (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime n)) (Localization.AtPrime n))) : (∀ (L : Type u) [Field L] [Algebra R L] [Algebra (FractionRing R) L] [IsScalarTower R (FractionRing R) L] [Module.Finite (FractionRing R) L] (n : Ideal (integralClosure R L)) [n.IsMaximal], IsNoetherianRing (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n) ∧ IsLocalRing (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n) ∧ (∀ (p : Ideal (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧ IsGRing (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n) ∧ IsClosed {s : PrimeSpectrum (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n) | ¬ IsRegularLocalRing (Localization.AtPrime s.asIdeal)}) ∧ ∃ h : ℕ, 2 ≤ h ∧ (∃ (L : Type u) (_ : Field L) (_ : Algebra R L) (_ : Algebra (FractionRing R) L) (_ : IsScalarTower R (FractionRing R) L) (_ : Module.Finite (FractionRing R) L) (n : Ideal (integralClosure R L)) (_ : n.IsMaximal) (s : PrimeSpectrum (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n)), s ∈ qeGenericMinimalSingularPrimes (integralClosure R L) (algebraMap R (integralClosure R L) x) n ∧ ringKrullDim (Localization.AtPrime s.asIdeal) = (h : WithBot ℕ∞)) ∧ (∀ (L : Type u) [Field L] [Algebra R L] [Algebra (FractionRing R) L] [IsScalarTower R (FractionRing R) L] [Module.Finite (FractionRing R) L] (n : Ideal (integralClosure R L)) [n.IsMaximal] (s : PrimeSpectrum (qeFormalCompletion (integralClosure R L) (algebraMap R (integralClosure R L) x) n)), s ∈ qeGenericMinimalSingularPrimes (integralClosure R L) (algebraMap R (integralClosure R L) x) n → (h : WithBot ℕ∞) ≤ ringKrullDim (Localization.AtPrime s.asIdeal)) ∧ (∀ p : PrimeSpectrum R, ringKrullDim (Localization.AtPrime p.asIdeal) ≤ (h : WithBot ℕ∞) → IsExcellent (Localization.AtPrime p.asIdeal)) ∧ (∀ (L : Type u) [Field L] [Algebra R L] [Algebra (FractionRing R) L] [IsScalarTower R (FractionRing R) L] [Module.Finite (FractionRing R) L] (q : PrimeSpectrum (integralClosure R L)), ringKrullDim (Localization.AtPrime q.asIdeal) ≤ (h : WithBot ℕ∞) → IsExcellent (Localization.AtPrime q.asIdeal))",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d21f7875",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Node unchanged except lean record; lean.statement verbatim in the file. Every hypothesis matches the node with none stronger: normal Nagata Noetherian domain over Q, x nonzero nonunit, x-adically complete, universally catenary, not quasi-excellent, R/K quasi-excellent for K≠⊥ (K=⊤ gives the zero ring, which is quasi-excellent, so not vacuous), all finite L in Type u with scalar tower, every B_L assumption including the normal local domain maximal-adic completion. Conclusions match the node: C (x-adic completion of B_n) is Noetherian, local, normal (inline form), a G-ring with closed singular set; h≥2 attained by a triple in S (Minimal singular prime with zero contraction to B_L) and a lower bound for all of S; excellence of R_p and (B_L)_q for height ≤h, heights as ringKrullDim of localizations. Read IsQuasiExcellent/IsExcellent/IsUniversallyCatenary/IsGRing/IsNagataRing/IsRegularLocalRing. Helpers are real data; proof is sorry; docstrings carry source, blueprint and the 14 steps; imports resolve. No compile run (no file changed). Minor: the IsLocalRing conjunct on the maximal-adic completion is redundant (Mathlib instance) but harmless."
+ }
+}

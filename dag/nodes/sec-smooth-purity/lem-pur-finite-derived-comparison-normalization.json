@@ -1,0 +1,304 @@
+{
+ "id": "lem-pur-finite-derived-comparison-normalization",
+ "kind": "statement",
+ "title": "K-flat normalization and coefficient coherence of the finite derived comparison",
+ "statement": "Let $u:(\\operatorname{Sh}(\\mathcal D),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$ be a morphism of ringed topoi presented by small sites, with commutative coefficient rings [def-weil-pbc-ringed-topos-morphism]. Use unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], and signed direct-sum total tensor [def-pc-tensor-complex-sheaves]. Write $F=Lu^*$ and $T_R,T_S$ for the K-flat derived pullback and tensor functors [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\n\nThe canonical natural comparison $\\nu:F T_R\\xrightarrow{\\sim}T_S(F,F)$ has the following simultaneous representative normalization. For every flat-term K-flat pair $P,Q$, the total tensor $\\operatorname{Tot}(P\\otimes_R Q)$ and its pullback are flat-term K-flat, and the representative of $\\nu$ under the canonical derived-functor comparison maps is the localized chain isomorphism\n$$c_{u;P,Q}:u^*\\operatorname{Tot}(P\\otimes_RQ)\\longrightarrow\\operatorname{Tot}(u^*P\\otimes_Su^*Q),\\quad s\\otimes(x\\otimes y)\\longmapsto(s\\otimes x)\\otimes(1\\otimes y).$$\nIts inverse has formula $(s\\otimes x)\\otimes(t\\otimes y)\\mapsto st\\otimes(x\\otimes y)$. This normalization is natural for arbitrary derived morphisms and independent of the chosen resolutions, and identifies this localized map with the canonical ringed-topos tensor comparison.\n\nThe comparisons satisfy the associativity, action-unit, and Koszul symmetry equations, with sign $(-1)^{pq}$ on degrees $(p,q)$. For every composable ringed-topos morphism $v$ the canonical pullback compositor $a:F_{u\\circ v}\\cong F_vF_u$ satisfies\n$$(a_M\\otimes a_N)\\nu_{u\\circ v;M,N}=\\nu_{v;F_uM,F_uN}\\,F_v(\\nu_{u;M,N})\\,a_{T_R(M,N)}.$$\nFor coefficient maps $R\\to R'$, $S\\to S'$ and $u^{-1}R'\\to S'$ making the structural ring square commute, put $E_R=-\\otimes_R^LR'$, $E_S=-\\otimes_S^LS'$, and $F'=Lu'^*$. Let $\\varepsilon_R:E_RT_R\\cong T_{R'}(E_R,E_R)$ and $\\varepsilon_S$ be the canonical derived scalar tensor comparisons, and $\\kappa:F'E_R\\cong E_SF$ the scalar-association comparison. Then the following equality holds for every $M,N\\in D(R)$:\n$$(\\kappa_M\\otimes\\kappa_N)\\nu'_{E_RM,E_RN}\\,F'(\\varepsilon_{R;M,N})=\\varepsilon_{S;FM,FN}\\,E_S(\\nu_{M,N})\\,\\kappa_{T_R(M,N)}.$$\nAll maps in this square are normalized by their ordinary balanced chain maps on flat-term K-flat representatives. The equations hold for identity changes and successive changes of coefficients and in particular for quotient changes; neither a boundedness assumption nor flatness of the coefficient maps is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product, with Tag 0G7E, label lemma-pullback-K-flat; simultaneous derived coefficient square from the balanced total-complex comparisons (agent elaboration)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sfb-ringed-derived-comparison-data",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-derived-tensor-pullback-normalization",
+  "lem-trf-ringed-kflat-word-comparison-descent"
+ ],
+ "proof": [
+  {
+   "text": "Put $V=\\operatorname{Tot}(P\\otimes_RQ)$. By [lem-pur-kflat-total-tensor-model], $V$ is K-flat with flat terms, even for complexes unbounded in both directions. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] to $P,Q,V$: their termwise pullbacks are K-flat with flat terms. Thus $V$ computes the source derived tensor and $u^*V$ computes its derived pullback, while the target total tensor computes the tensor of the two derived pullbacks. All sites and ring sheaves meet the small-site and commutativity hypotheses of these two lemmas.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); balanced cochain normalization and coefficient coherence elaborated by the worker."
+   }
+  },
+  {
+   "text": "On flat-term K-flat representatives, use the universal pullback computation [lem-weil-pbc-pullback-resolving-computation]. Flat-term K-flat resolutions [lem-pc-kflat-resolution], transported from the native tensor-flat predicate by [lem-weil-pbc-independent-sheaf-tensor-colimits], and fully faithful restriction [lem-pur-derived-resolving-pair-restriction] give fully faithful restriction of bifunctor categories. Restrict the supplied site tensor models and uncurry the natural cochain comparison of [lem-weil-pbc-cochain-pullback-tensor-shift]. The tensor-comparison representative descent theorem [lem-weil-pbc-tensor-comparison-descent-representatives] then gives a unique natural isomorphism with exactly the displayed normalized square. Proof irrelevance identifies the existential resolving witnesses in the uniqueness implication. The cochain comparison is the inverse of scalar contraction, so the chosen map retains the prescribed insertion-of-one formula. The uncurried comparison, its component equation and the total-tensor map equation are the extracted, fully proved native API in lem-pur-finite-tensor-comparison-proof-support.",
+   "uses": [
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-derived-resolving-pair-restriction",
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-pur-finite-tensor-comparison-proof-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); balanced cochain normalization and coefficient coherence elaborated by the worker."
+   }
+  },
+  {
+   "text": "Combine tensorComparison_coherence_associator and tensorComparison_coherence_unit_symmetry, now proved by identifying the representative-normalized comparison with the existing canonical derived tensor comparison and applying its coherence diagrams. Their conjunction gives the invertible unit, associativity, both action-unit equations and signed symmetry for the same tensorComparison.",
+   "uses": [
+    "lem-pur-finite-derived-comparison-normalization-associator",
+    "lem-pur-finite-derived-comparison-normalization-unit-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); balanced cochain normalization and coefficient coherence elaborated by the worker."
+   }
+  },
+  {
+   "text": "Use tensorComparison_composition_descent for the unique representative-normalized compositor, then tensorComparison_composition_tensor for its tensor square. The latter pastes the two representative tensor squares, cancels computation isomorphisms, and applies the ordinary cochain composition equation. The uniqueness implication forgets the additional tensor equation and uses unary uniqueness.",
+   "uses": [
+    "lem-pur-finite-derived-comparison-normalization-composition-descent",
+    "lem-pur-finite-derived-comparison-normalization-composition-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-pur-normalized-coefficient-tensor-square to the four given derived pullback functors, their actual universal cochain counits, and their universality proofs. It constructs all four tensor normalizations and the scalar-association comparison with its representative equation and uniqueness, and proves its tensor equation on every derived pair. This is the original coefficient-square clause with no change of tensor or counit.",
+   "uses": [
+    "lem-pur-normalized-coefficient-tensor-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); parent coefficient normalization proof steps 5-6."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ringed-kflat-word-comparison-descent] to the identity expression and to the vertical composite of two cell expressions. Its evaluation equation identifies each evaluated expression with the cell of its ordinary natural transformation. Symmetry of these two equalities gives precisely the identity and successive-comparison laws in coefficientComparison_identity_successive. The monoidal coefficient-square compatibility remains the separate statement of step 5.",
+   "uses": [
+    "lem-trf-ringed-kflat-word-comparison-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); balanced cochain normalization and coefficient coherence elaborated by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-resolving-pair-restriction",
+  "lem-pur-finite-derived-comparison-normalization-associator",
+  "lem-pur-finite-derived-comparison-normalization-composition-descent",
+  "lem-pur-finite-derived-comparison-normalization-composition-tensor",
+  "lem-pur-finite-derived-comparison-normalization-unit-symmetry",
+  "lem-pur-finite-tensor-comparison-proof-support",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-normalized-coefficient-tensor-square",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing normalization, composition and coefficient proofs retained. The associator and unit/symmetry components are proved by the normalized cochain tensor diagram theorem and the existing computation and representative square, Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived categories of module sheaves, the K flat normalized tensor comparison for inverse image is compatible with change of coefficient rings and composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if the tensor product functor with $ M $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M],\\n  CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftDerived\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|KFlat",
+   "results": "[grep] OK 0 hit(s) ; scope Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback tensor comparison commutes with derived extension of scalars",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [HasPullback f g] [HasPullback (G.map f) (G.map g)] :\\n  G.obj (pullback f g) ⟶ pullback (G.map f) (G.map g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with a pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ that preserves the pullback of $G(f)$ and $G\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[Algebra.FormallyEtale S T] : T ⊗[S] Ω[S⁄R] ≃ₗ[T] Ω[T⁄R]\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks\", \"type\": \": IsIso (pullbackComparison G f g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ preserving the pullback of $G(f)$ and $G(g)$, \"}\n  {\"name\": \"CategoryTheory.TwoSquare.lanBaseChange\", \"module\": \"Mathlib.CategoryTheory.GuitartExact.KanExtension\", \"type\": \": (whiskeringLeft C₁ C₂ D).obj T ⋙ L.lan ⟶ R.lan ⋙ (whiskeringLeft C₃ C₄ D).obj B\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_3, \\\\mathcal{C}_4, \\\\mathcal{D}$, functors $T: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $L: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_3$, $R: \\\\mathcal{C}_2 \\\\to \\\\\"}\n  {\"name\": \"Algebra.IsPushout.cancelBaseChangeAux\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": B ⊗[A] M ≃ₗ[R] S ⊗[R] M\", \"doc\": \"Let $R, A, S, B$ be commutative semirings. Let $A$ and $S$ be $R$-algebras, and let $B$ be an algebra over both $A$ and $S$ that is the pushout of $A$ and $S$ over $R$. For any $A$-module $M$, there i\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"module\": \"Mathlib.CategoryTheory.Monoidal.ExternalProduct.KanExtension\", \"type\": \"(d : D') (P : (Functor.LeftExtension.mk H' α).IsPointwiseLeftKanExtensionAt d) (e : E)\\n  [Limits.PreservesColimitsOfShape (CostructuredArrow L d) (tensorLeft <| K.obj e)] :\\n  (Functor.LeftExtension.mk (K ⊠ H') (extensionUnitRight H' α K)).IsPointwiseLeftKanExtensionAt (e, d)\", \"doc\": \"In a monoidal category $\\\\mathcal{V}$, given functors $H : \\\\mathcal{D} \\\\to \\\\mathcal{V}$, $L : \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, $H' : \\\\mathcal{D}' \\\\to \\\\mathcal{V}$, and $K : \\\\mathcal{E} \\\\to \\\\mathcal{V}$ w\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal left derived inverse image on ringed topoi with coefficient change square and normalization on flat resolutions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules/completions, Tor, linear structures, or graded functors; none states this representative-normalized derived comparison or bilinear common-field descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded sheaf module complexes on small ringed topoi the derived inverse image tensor comparison is computed by balanced maps on flat K-flat complexes and commutes with coefficient extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the composition of $ F $'s action on the inclus\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf pullback insertion and ordinary pullback composition do not state the unbounded derived tensor normalization or coefficient square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftDerived\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|KFlat",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"85\", \"text\": \"lemma isPullback_SpecMap_tensor (T : Triplet f g) : CategoryTheory.IsPullback\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"141\", \"text\": \"def SpecTensorTo : Spec T.tensor ⟶ pullback f g :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"142\", \"text\": \"  pullback.lift (Spec.map T.tensorInl ≫ X.fromSpecResidueField T.x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"149\", \"text\": \"    pullback.fst f g (T.SpecTensorTo p) = T.x := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"157\", \"text\": \"    pullback.snd f g (T.SpecTensorTo p) = T.y := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"line\": \"114\", \"text\": \"lemma tensorObj_left (Y Z : Over X) : (Y ⊗ Z).left = pullbackObj Y.hom Z.hom := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"326\", \"text\": \"  haveI : IsPullback ((isTerminalTensorUnit.ofIso (powZero i).symm).from _) (𝟙 _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"330\", \"text\": \"    (pullback.hom_ext ((isTerminalTensorUnit.ofIso (powZero i).symm).hom_ext ..) (by simp)))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\", \"line\": \"59\", \"text\": \"lemma tensorObj_left (R S : Over X) : (R ⊗ S).left = Limits.pullback R.hom S.hom := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\", \"line\": \"62\", \"text\": \"lemma tensorObj_hom (R S : Over X) : (R ⊗ S).hom = pullback.fst R.hom S.hom ≫ R.hom := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Dialectica/Monoidal.lean\", \"line\": \"50\", \"text\": \"    simp only [tensorObjImpl, Subobject.inf_pullback]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme fibre products, Cartesian monoidal over-categories and dialectica, not derived module pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of sheaves of modules is symmetric monoidal and its tensor comparison commutes with arbitrary change of coefficient rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"PresheafOfModules.monoidalCategoryStruct\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \": MonoidalCategoryStruct (PresheafOfModules.{u} (R ⋙ forget₂ _ _))\", \"doc\": \"For any category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the category of presheaves of modules over $R$ is equipped with a monoidal structure. The tensor produc\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.monoidalCategory\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \": MonoidalCategory (PresheafOfModules.{u} (R ⋙ forget₂ _ _))\", \"doc\": \"For any category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the category of presheaves of modules over $R$ is equipped with a monoidal structure. The tensor produc\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"ModuleCat.MonoidalCategory.symmetricCategory\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric\", \"type\": \": SymmetricCategory (ModuleCat.{u} R)\", \"doc\": \"For any commutative ring $ R $, the category of left $ R $-modules is a symmetric monoidal category. The tensor product of two modules is their tensor product over $ R $, the unit object is $ R $ itse\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{I J : Type u} (f : I → J) :\\n  (pullback φ).map (freeMap f) ≫ (pullbackObjFreeIso φ J).hom = (pullbackObjFreeIso φ I).hom ≫ freeMap f\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback and its adjunction, presheaf monoidal structures, and ordinary ModuleCat symmetry do not state the derived coefficient square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal left derived functors of inverse image of ringed topoi with natural scalar association on unbounded K flat resolutions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tor for objects of an abelian category and linearity of exact derived functors do not state normalized unbounded ringed-topos tensor and coefficient comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-derived-pullback-tensor-iso",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: the comparison mu_{g;K,Lambda(m)} used before theta_K tensor theta_m; returned comparison proof steps 1-3, finite K-flat normalization and coefficient coherence.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-derived-comparison-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Proved the representative normalization, monoidal and composition equations, and coefficient square using existing general ringed-site resolving and cochain-calculus nodes. One common flat-term K-flat pair computes the entire coefficient diagram, including nonflat quotient changes. No new nodes or Lean files.",
+  "blueprint": "Realizes def-weil-frobenius-coefficient-twists clause 5, the tensor comparison before theta_K tensor theta_m, through the finite-coefficient normalization in lem-pur-derived-pullback-tensor-iso steps 1-3. Whole-blueprint searches for pullback tensor, tensor comparison, and K-flat found no node stating this simultaneous general normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "General ringed-topos preservation of flat-term K-flat complexes, including coefficient extensions; a generic homological tool for the finite comparison."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Canonical representative formula and uniqueness for unbounded ringed pullback, identifying the normalization used in this unit."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General monoidal and compositor laws for canonical ringed-topos derived operations; no special purity theorem is substituted."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Normalized localization of finite words of ringed pullbacks supplies scalar-association maps, common representatives, and preservation of identities/pastings."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Fully faithful two-variable descent from flat-term K-flat representatives extends the explicitly checked coefficient square to all unbounded derived morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-75834e362",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-75834e362 (reviewer sub-agent of L); spot-checked: I read all six steps against the statements of the nodes they cite and against Stacks 07A4 and 0G7E in sites-cohomology.tex (lines 3684 and 3508); 0G7E needs no flatness of the structural map, so it covers scalar extension on the identity topos. The delivery adds no new nodes and keeps the statement. Step 2: the representative formula and uniqueness of lem-weil-pbc-pullback-tensor-canonical-shift-unit use the same c_{u;P,Q} as lem-pur-cochain-pullback-tensor-coherence, whose inverse formula matches the item's. Step 3: lem-sfb-ringed-derived-monoidal-comparisons with g=u and f=v gives exactly the item's compositor equation; its t_h is the same comparison because def-weil-pbc-ringed-tensor-square-presentation pins it to the representative-normalized one. Steps 4-6: word-comparison-descent explicitly allows scalar edges and gives a common resolving P. I recomputed the coefficient square on s'⊗((x⊗y)⊗r) and both routes give ((1⊗x)⊗s'φ'(r))⊗((1⊗y)⊗1), the first chain equation of the cochain-coherence node; the bifunctor uniqueness in lem-weil-pbc-site-derived-tensor-descent extends it to all inputs. Edge cases checked: zero ring, identity topos, non-flat Z→Z/2 and Z/4→Z/2, unbounded complexes; signs appear only in the symmetry. No cycle (the dependency closure of 591 nodes excludes the item); no duplicate (rg -L for scalar-association, candidates read). Live is still unsplit with no repair note, and no SGA is cited. I accept the five declared tool_uses: kflat-pullback, canonical-shift-unit, sfb monoidal-comparisons, trf word-descent and site-derived-tensor-descent are generic ringed-site tools."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "declaration": "CategoryTheory.FiniteDerivedComparison.finiteDerivedComparisonNormalization",
+  "declarations": [
+   "CategoryTheory.FiniteDerivedComparison.Pullback",
+   "CategoryTheory.FiniteDerivedComparison.wordSite",
+   "CategoryTheory.FiniteDerivedComparison.Resolving",
+   "CategoryTheory.FiniteDerivedComparison.Normalized",
+   "CategoryTheory.FiniteDerivedComparison.finiteDerivedComparisonNormalization",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison",
+   "CategoryTheory.FiniteDerivedComparison.unitMap",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_coherence",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_composition",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_coefficients",
+   "CategoryTheory.FiniteDerivedComparison.coefficientComparison_identity_successive",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_coherence_associator",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_coherence_unit_symmetry",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_composition_descent",
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_composition_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDerivedComparisonNormalization.lean",
+  "statement": "theorem finiteDerivedComparisonNormalization {X Y : Site.{u, w}} (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : CochainPullback.Comparison.{u, u, u, u, u} f) (d : Pullback.{u, w} f) : (∀ (P Q : CochainPullback.Complex.{u, u, u} Y.A), Resolving Y P → Resolving Y Q → Resolving Y (P ⊗ Q) ∧ Resolving X ((CochainPullback.pull.{u, u, u, u, u} f).obj (P ⊗ Q))) ∧ ∃! nu : Y.closed.tensor ⋙ d.F ≅ (d.F.prod d.F) ⋙ X.closed.tensor, Normalized f k d nu",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The declarations jointly render the simultaneous normalization, coherence, compositor, coefficient square and identity/successive-change clauses. Existing site tensor and ordinary scalar-extension presentations are used; no monoidal comparison is assumed as pullback input."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94125c36e",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Re-delivery after C1/H2 RETURN of f22979a4. Lean sha256 a20c58d6 is byte-identical to the returned head; the node diff is only stmt_dep lem-weil-pbc-pullback-tensor-canonical-shift-unit -> def-pur-derived-tensor-pullback-normalization (existing:true def node on PullbackTensorCanonicalShiftUnit owning Phi/Psi/IsNormalized/canonicalDerivedTensor/canonicalRepresentativeIso, all plain defs, record identical to live, reviewed pass). Theorem stmt_dep lem-trf-ringed-kflat-word-comparison-descent: Word.cell = Classical.choose (descent_existsUnique ...), so the statement genuinely depends on an object the theorem constructs -> PASS on the mechanical finding. Substance re-confirmed: Tot closure, unique representative-normalized nu with insertion-of-one comparison, associativity/unit/(-1)^{pq} symmetry, compositor equation, coefficient square with kappa pinned and unique, no flatness or boundedness binders, ℤ-indexed unbounded complexes, independent w; statement verbatim; sorry only; docstrings OK. Live item still S2-open. Advisories: identity/successive theorem is the generic Word.cell law; the coefficient clause uses canonicalDerivedTensor presentation; the RingedTopoiCanonicalTensorPullbackOfUniverses import appears unused (H9). No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

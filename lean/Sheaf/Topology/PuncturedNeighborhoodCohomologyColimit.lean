@@ -11,8 +11,10 @@ public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
-import Sheaf.Topology.SpectralDirectedLimit
-import Sheaf.Topology.SpectralLimitCohomology
+import Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift
+import Sheaf.Topology.PuncturedNeighborhoodCohomologyEventualZero
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # Cohomology of punctured generalization neighborhoods
 
@@ -29,6 +31,21 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace TopCat
+
+private theorem neighborhoodIndex_filtered
+    {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) :
+    IsFiltered (compactOpenNeighborhoods Z)ᵒᵖ where
+  nonempty := ⟨op ⟨⊤, Set.subset_univ _, isCompact_univ⟩⟩
+  cocone_objs N M := by
+    let K : compactOpenNeighborhoods Z :=
+      ⟨(unop N).val ⊓ (unop M).val,
+        (fun _ hz ↦ ⟨(unop N).property.1 hz, (unop M).property.1 hz⟩),
+        (unop N).property.2.inter_of_isOpen (unop M).property.2
+          (unop N).val.isOpen (unop M).val.isOpen⟩
+    exact ⟨op K, (homOfLE (show K ≤ unop N from fun _ hx ↦ hx.1)).op,
+      (homOfLE (show K ≤ unop M from fun _ hx ↦ hx.2)).op, True.intro⟩
+  cocone_maps {X Y} f g := ⟨_, 𝟙 _, Subsingleton.elim _ _⟩
+
 
 /-- Canonical restriction identifies cohomology of the punctured generalization subspace
 with the filtered colimit over quasi-compact open neighborhoods of the closed subset.
@@ -65,6 +82,29 @@ theorem puncturedNeighborhoodCohomology_colimit
     IsFiltered (compactOpenNeighborhoods Z)ᵒᵖ ∧
       IsIso (colimit.desc (puncturedNeighborhoodCohomologyDiagram Z hZ A p)
         (puncturedNeighborhoodCohomologyCocone Z hZ A p)) := by
-  sorry
+  classical
+  have := neighborhoodIndex_filtered Z
+  refine ⟨inferInstance, ?_⟩
+  let D := puncturedNeighborhoodCohomologyDiagram Z hZ A p
+  let C := puncturedNeighborhoodCohomologyCocone Z hZ A p
+  apply (ConcreteCategory.isIso_iff_bijective (colimit.desc D C)).2
+  constructor
+  · apply (injective_iff_map_eq_zero (colimit.desc D C).hom).2
+    intro z hz
+    obtain ⟨N, x, rfl⟩ := Concrete.colimit_exists_rep D z
+    have hx : (C.ι.app N).hom x = 0 := by
+      change (colimit.ι D N ≫ colimit.desc D C).hom x = 0 at hz
+      rwa [colimit.ι_desc] at hz
+    obtain ⟨M, f, hf⟩ := puncturedNeighborhood_cohomology_eventual_zero Z hZ hU A p N x hx
+    calc
+      (colimit.ι D N).hom x = (colimit.ι D M).hom ((D.map f).hom x) :=
+        (colimit.w_apply D f x).symm
+      _ = 0 := by rw [hf, map_zero]
+  · intro y
+    obtain ⟨N, x, hx⟩ := puncturedNeighborhood_cohomology_class_lift Z hZ hU A p y
+    refine ⟨(colimit.ι D N).hom x, ?_⟩
+    change (colimit.ι D N ≫ colimit.desc D C).hom x = y
+    rw [colimit.ι_desc]
+    exact hx
 
 end TopCat

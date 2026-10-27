@@ -16,144 +16,67 @@
  ],
  "proof": [
   {
-   "text": "Every map $U\\to F$ from a scheme to an algebraic space is representable. Indeed, for a scheme $T\\to F$, the sheaf $U\\times_F T$ is the pullback of the representable diagonal $F\\to F\\times F$ along the scheme $U\\times_S T\\to F\\times F$. It is therefore a scheme by [def-trf-algebraic-space] and [def-pc-fibre-product]. The identification follows on each test scheme: both sides consist of a pair of maps to $U,T$ with equal images in $F$. In all later steps, this also proves that a fibre product of two schemes over an algebraic space is a scheme.",
+   "text": "For a scheme-source $f$, test chartwise etaleness on its identity; the converse follows by representable composition, using [lem-trf-space-representable-etale-scheme-tests]. Identity maps preserve each chart, and the chartwise quantifiers applied successively prove composition. Isomorphisms are representable etale by the same node, hence are chartwise etale by composition with each chart.",
    "uses": [
-    "def-trf-algebraic-space",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 025W (lemma-representable-diagonal), the formal diagonal test; algebraic-space definition Tag 025Y"
-   }
-  },
-  {
-   "text": "We first record the scheme-test calculations for representable maps; these do not assume chartwise permanence. For representable etale maps $A\\to B\\to C$ and a scheme $T\\to C$, the pullback of their composite factors as the two etale scheme maps $T\\times_C A\\to T\\times_C B\\to T$. It is etale by [lem-weil-pbc-etale-composition-cancellation](2). For a base change along $C'\\to C$, its pullback to a scheme $T\\to C'$ is just $T\\times_C A\\to T$, so representable etaleness is preserved by definition [def-trf-algebraic-space]. Isomorphisms are representable etale: their scheme tests are isomorphisms, hence open immersions by [def-weil-open-immersion], hence etale by clause (1) of the same scheme lemma. For representable surjective etale maps these arguments also preserve surjectivity: in the composite both scheme projections are surjective and [lem-trf-surjective-morphism-composition] applies; for a base change the scheme test is the original test. When a surjective etale scheme map is pulled back along another scheme map, the two properties follow from [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-etale-scheme-base-change]. In particular an etale scheme morphism is representable etale, since all its scheme tests are etale by the same base-change lemma. All fibre-product identifications here send a compatible tuple of sections to the same tuple and are inverse by their projections.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-open-immersion",
-    "lem-trf-surjective-morphism-composition",
-    "lem-weil-pbc-surjective-base-change",
-    "lem-weil-pbc-etale-scheme-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Representable-property scheme tests used in spaces-properties.tex Tag 03EC(1); scheme Tags 02GN, 02GP, 02GO, 01RZ, 01S1"
-   }
-  },
-  {
-   "text": "If $f:U\\to Y$ has scheme source and is chartwise etale, test it on $\\operatorname{id}_U$, which is representable etale by step 2. This says exactly that $f$ is representable etale. Conversely, if $f$ is representable etale, its composite with every representable etale scheme chart of $U$ is representable etale by step 2; thus it is chartwise etale. This uses the scheme-test meaning of representability and etaleness in [def-trf-algebraic-space], rather than asserting that all chartwise etale maps with arbitrary source are representable.",
-   "uses": [
-    "def-trf-algebraic-space"
+    "lem-trf-space-representable-etale-scheme-tests"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FR, paragraph immediately following the definition; scheme-source specialization"
+    "place": "Tag 03FR and its following paragraph; Tag 03FT."
    }
   },
   {
-   "text": "Here is the source descent calculation needed below. Let $q:U\\to F$ have scheme source, and let $p:V\\to U$ be a surjective etale scheme map such that $qp$ is representable etale. For any scheme $T\\to F$, step 1 makes $U_T=U\\times_F T$ and $V_T=V\\times_F T$ schemes. The projection $V_T\\to U_T$ is the scheme base change of $p$, hence surjective etale by [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-etale-scheme-base-change]. The composite $V_T\\to T$ is etale by the hypothesis on $qp$. Apply [lem-trf-etale-descent-through-source-cover] with its $(T,X,Y)=(T,U_T,V_T)$ to obtain that $U_T\\to T$ is etale. Since $T$ was arbitrary, $q$ is representable etale by [def-trf-algebraic-space].",
+   "text": "For chartwise etale f:X→Z and g:Y→Z, set P=Y×_Z X and choose a representable surjective etale scheme atlas a:U→X using [lem-trf-space-etale-source-atlas-detection]. Form R=P×_X U using [lem-trf-space-fibre-products-etale-covers]. The cover p:R→P is representable surjective etale: for any scheme test, lift the representing square for a into this pullback and use pullback cancellation. Pasting R→U over P→X with P→X over Y→Z identifies R→Y as the base change of a followed by f. This composite is representable etale by the chartwise hypothesis; the same scheme-test pullback argument therefore makes R→Y representable etale. Apply part (2) of [lem-trf-space-etale-source-atlas-detection] to p and P→Y.",
    "uses": [
     "def-trf-algebraic-space",
-    "lem-weil-pbc-surjective-base-change",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-trf-etale-descent-through-source-cover"
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-source-atlas-detection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03EC(3), scheme-test proof; descent.tex Tag 036W (lemma-etale-etale-local-source)"
+    "place": "Tag 03FU: the atlas argument, with source-cover detection supplying the omitted verification."
    }
   },
   {
-   "text": "For the identity of an algebraic space, composition with a representable etale scheme chart is that same chart; hence the identity is chartwise etale. If $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ are chartwise etale and $U\\to X$ is a representable etale scheme chart, first $U\\to Y$ is representable etale by the definition of $f$, and then $U\\to Z$ is representable etale by the definition of $g$. This proves composition. An isomorphism is representable etale by step 2, so its composite with a scheme chart is representable etale by the same step. It is therefore chartwise etale too. The maps and the charts here have exactly the meanings in [def-trf-algebraic-space].",
-   "uses": [
-    "def-trf-algebraic-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tags 03FR and 03FT (lemma-composition-etale); identity and isomorphism cases of the definition"
-   }
-  },
-  {
-   "text": "Let $f:X\\to Y$ be chartwise etale, let $X'\\to Y$ be arbitrary, and put $P=X\\times_Y X'$, an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Choose a representable surjective etale atlas $U\\to X$ from [def-trf-algebraic-space]. Since $f$ is chartwise etale, $U\\to Y$ is representable etale. Consequently $R=U\\times_Y X'\\to X'$ is representable etale by step 2. Given any representable etale scheme chart $W\\to P$, form $Q=W\\times_P R=W\\times_X U$. The second expression makes $Q$ a scheme and $Q\\to W$ a surjective etale scheme map, by the atlas's scheme tests. The first makes $Q\\to R$ representable etale, as the base change of $W\\to P$. Step 2 then makes $Q\\to X'$ representable etale. Apply step 4 to $Q\\to W\\to X'$ to conclude that $W\\to X'$ is representable etale. Since $W$ was arbitrary, $P\\to X'$ is chartwise etale. The equality between the two expressions for $Q$ is the explicit reassociation of the compatible tuples $(w,u)$ with their common image in $X$.",
+   "text": "Let $hf=g$ with $g:X\\to Z$ and $h:Y\\to Z$ chartwise etale. Given a scheme chart $a:U\\to X$, choose an atlas $b:V\\to Y$ from [def-trf-algebraic-space]. By [lem-trf-space-representable-etale-scheme-tests], $W=U\\times_YV$ is a scheme, $p:W\\to U$ is surjective etale, and $gap$ and $hb$ are representable etale. Its comparison clause applied to $(hb)r=gap$, for $r:W\\to V$, makes $r$ etale. Therefore $br=fap$ is representable etale by that node. Part (1) of [lem-trf-space-etale-source-atlas-detection] makes $fa$ representable etale. This holds for every chart $a$, proving cancellation.",
    "uses": [
     "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-source-atlas-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FV, compatible presentations; Tag 03EC(2),(3)."
+   }
+  },
+  {
+   "text": "The isomorphism and composition clauses of [lem-trf-presheaf-field-lift-family-calculus] give joint surjectivity for singleton isomorphisms and composite families. For base change, lift the image of a field-valued section of X′ through the original family after a field extension. Naturality identifies the image of the restricted section of X′ with the image of this lift. The forgetful functor from sheaves preserves the pullback, and evaluation gives a pullback of types, so the compatible pair supplies a field-valued section of the actual sheaf fibre product. Its first projection is the required restriction of the original section. The chartwise base-change result gives etaleness of every member. Empty families satisfy the same argument: a target field-valued section would contradict the lifting hypothesis. The fibre products are algebraic spaces by [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-trf-presheaf-field-lift-family-calculus",
     "lem-trf-space-fibre-products-etale-covers"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FU (lemma-base-change-etale): atlas proof with its omitted verification supplied by scheme tests and source descent"
-   }
-  },
-  {
-   "text": "For later cancellation, suppose $A,B$ are schemes, $F$ is an algebraic space, $a:A\\to F$ and $b:B\\to F$ are representable etale, and $r:A\\to B$ satisfies $br=a$. By step 1 the fibre product $E=A\\times_F B$ is a scheme, and both projections $\\pi_A,\\pi_B$ are etale by the scheme-test definition [def-trf-algebraic-space]. The graph $s=(\\operatorname{id}_A,r):A\\to E$ satisfies $\\pi_A s=\\operatorname{id}_A$. The identity is etale by step 2, so [lem-weil-pbc-etale-composition-cancellation](3), applied to the scheme maps $s,\\pi_A$, makes $s$ etale. Clause (2) then makes $r=\\pi_Bs$ etale. This is a two-application consequence of scheme cancellation and composition, not a separate algebraic-space permanence assumption.",
-   "uses": [
-    "def-trf-algebraic-space",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03EC(2); elementary graph-section argument using morphisms.tex Tags 02GW and 02GN"
-   }
-  },
-  {
-   "text": "Suppose $g:X\\to Z$, $h:Y\\to Z$ are chartwise etale and $hf=g$. Given a representable etale scheme chart $a:U\\to X$, choose a representable surjective etale atlas $b:V\\to Y$ by [def-trf-algebraic-space]. The fibre product $W=U\\times_Y V$ is a scheme by step 1, and $p:W\\to U$ is surjective etale by the scheme tests for $b$. Let $r:W\\to V$ be the other projection. Both $ga:U\\to Z$ and $hb:V\\to Z$ are representable etale by the two chartwise hypotheses. Therefore $gap:W\\to Z$ is representable etale by step 2. Since $(hb)r=gap$, step 7 makes $r$ an etale scheme map. Step 2 makes $br=fap$ representable etale; step 4 then makes $fa:U\\to Y$ representable etale. This proves that $f$ is chartwise etale, for every $U$ as required.",
-   "uses": [
-    "def-trf-algebraic-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FV (lemma-etale-permanence); choose the source presentation by U times_Y V and use Tag 03EC(2),(3)"
-   }
-  },
-  {
-   "text": "Use the definition of covering in the statement. An isomorphism is chartwise etale by step 5, and its inverse lifts every field-valued section over the same field, so it is a singleton covering. For composable covering families $X_i\\to X$ and $X_{ij}\\to X_i$, the composites are chartwise etale by step 5. Given a section $x$ of $X$ over a field $K$, [def-trf-algebraic-space-jointly-surjective-family] gives $i$, an extension $K\\hookrightarrow L$, and $y\\in X_i(L)$ mapping to $x|_L$. Applying the same definition to $y$ gives $j$, an extension $L\\hookrightarrow M$, and $z\\in X_{ij}(M)$ mapping to $y|_M$. The composite field embedding $K\\hookrightarrow M$ and $z$ lift $x|_M$, because restrictions and the given natural transformations compose. Thus the composite family is jointly surjective and is a covering. This also handles empty index sets: whenever a target field-valued section exists, the covering hypothesis supplies the required index.",
-   "uses": [
-    "def-trf-algebraic-space-jointly-surjective-family"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/spaces-topologies.tex",
-    "place": "Tag 041F (lemma-etale), clauses (1),(2); omitted point-lifting argument expanded using spaces-properties.tex Tag 03BU"
-   }
-  },
-  {
-   "text": "Finally let $\\{X_i\\to X\\}$ be a covering and $a:X'\\to X$ any map. By [lem-trf-space-fibre-products-etale-covers] each sheaf $P_i=X'\\times_X X_i$ is an algebraic space; step 6 makes $P_i\\to X'$ chartwise etale. For $x'\\in X'(\\operatorname{Spec}K)$, apply [def-trf-algebraic-space-jointly-surjective-family] to $a(x')$. Obtain $i$, a field extension $K\\hookrightarrow L$, and $y\\in X_i(\\operatorname{Spec}L)$ with $f_i(y)=a(x')|_L$. The pair $(x'|_L,y)$ is exactly a section of the sheaf fibre product $P_i$ and lifts $x'|_L$. Thus the new family is jointly surjective and is a covering. No representability of $X_i\\to X$ is used: from the existing fibre-product node we use only closure under fibre products, not its covering clause, which assumes representable etaleness. If the given index set is empty, any field-valued section of $X'$ would give one of $X$, contradicting the covering hypothesis; hence the same conclusion holds.",
-   "uses": [
-    "lem-trf-space-fibre-products-etale-covers",
-    "def-trf-algebraic-space-jointly-surjective-family"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-topologies.tex",
-    "place": "Tag 041F (lemma-etale), clause (3); field-extension lifting supplies its omitted proof"
+    "place": "Tag 041F (lemma-etale), clauses (1)-(3); point-lifting clauses separated from chartwise etaleness."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-trf-algebraic-space",
-  "def-trf-algebraic-space-jointly-surjective-family",
-  "def-weil-open-immersion",
-  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-presheaf-field-lift-family-calculus",
+  "lem-trf-space-etale-source-atlas-detection",
   "lem-trf-space-fibre-products-etale-covers",
-  "lem-trf-surjective-morphism-composition",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-surjective-base-change"
+  "lem-trf-space-representable-etale-scheme-tests"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tags 03EC, 03FR, 03FT, 03FU, 03FV; spaces-topologies.tex Tag 041F(1)-(3). The omitted verifications are supplied by explicit scheme tests and field-extension lifts; the graph-section calculation gives the elementary scheme-source cancellation variant."
+  "place": "Tags 03FR, 03FT, 03FU, 03FV; spaces-topologies.tex Tag 041F(1)-(3). H4 realizes the scheme-test/source-atlas plan in Lean: explicit pullback pasting and cancellation transport representable properties; the pullback covering clause lifts field-valued compatible pairs directly."
  },
  "mathlib_searches": [
   {
@@ -262,20 +185,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-space-chartwise-etale-permanence",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged and gave ten proof steps from existing nodes only. Proved representability of scheme-source maps by the diagonal, reduced chartwise base change to the existing scheme source-descent theorem, proved cancellation via an elementary graph-section calculation, and proved covering composition/base change by field-extension lifts. Used the existing fibre-product statement only for closure, respecting its representable-only covering convention. Read the actual Mathlib search results in two semantic phrasings; no algebraic-space match. No new nodes.",
-  "blueprint": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Basic chartwise etale permanence and covering base change needed to construct the enlarged etale site.",
+  "summary": "Repair of the human re-split return. Statement unchanged. Three comparable statement-only tasks extract scheme-test calculus (returned steps 1,2,7), source-cover/atlas detection (steps 4,6,8), and underlying presheaf field-lift calculus (steps 9,10). The parent assembles the results, keeping scheme-source equivalence, identity and composition (steps 3,5) and the explicit base-change/cancellation constructions. Full returned argument preserved in report.md, with handoff proofs, sources, search logs and exact citation quotes.",
+  "blueprint": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Basic chartwise etale permanence and covering base change needed to construct the enlarged etale site. Re-split the supporting chartwise permanence argument into scheme tests, source-atlas detection and field-valued lifting; historical ancestry retained.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q58-cd4e54193",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q118-0a7939997",
+  "group": "Q118",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-cd4e54193 (reviewer sub-agent of L); spot-checked: I read the item and its ten steps in full, with the statements of all ten cited nodes; the delivery creates no new nodes. Compared with the base side node, only the proof fields, status, split_report and searches changed; the statement, stmt_deps, source, created and blueprint ancestry are unchanged. Sources read: spaces-properties 03FR and the paragraph after it, 03FT, 03FU (its omitted verification is supplied in step 6), 03FV and 03EC(1)-(3); spaces-topologies 041F(1)-(3) and the covering definition just before it; spaces 025W (the step-1 tag is correct). The statement matches these clause by clause. Step checks: step 1 identifies U x_F T with the pullback of the diagonal along U x_S T. Steps 4 and 6 check that W x_P R = W x_X U, and every hypothesis of the descent node holds. In step 7 the graph s satisfies pi_A s = id, so clause (3) makes s etale and clause (2) makes r = pi_B s etale. In step 8, (hb)r = gap, then steps 7 and 4 apply. Steps 9 and 10 lift after field extensions; empty families are handled. The proof uses only the closure clause of the fibre-product node, never its representable-only covering clause. Route: the only non-leaf statements used are in unit sk-i-curve-zero; everything else is a definition or a Mathlib leaf, so no tool_uses are needed. There is no cycle: the item is not in the closure of its 294 dependencies. A grep for chartwise, 03FT, 03FU, 03FV and 041F found no duplicate. No SGA source is cited. This is not a target node, so the base-change and coefficient-category check does not apply. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-0a7939997 (reviewer sub-agent of L); spot-checked: I read the item and the three new nodes in full, with the statements of every cited node. Sources read: Stacks 03FR/03FS/03FT/03FU/03FV/03EC(1)-(3)/03BU (spaces-properties), 041F(1)-(3) (spaces-topologies), 025W (spaces) and 036W (descent). The delivery answers the human re-split note of 2026-10-21. The live and side-live item still has the 10-step 2026-10-18 proof, so no other group has superseded it. The report's 'Full returned argument' section diffs empty against the live step texts, so nothing was dropped. The parent keeps its statement, and its proof is now a 4-step assembly of 2027 chars. Ownership: old steps 1, 2 and 7 went to lem-trf-space-representable-etale-scheme-tests; old steps 4, 6 and 8 went to lem-trf-space-etale-source-atlas-detection, with the R and W constructions kept in the parent; old steps 9 and 10 went to lem-trf-presheaf-field-lift-family-calculus; old steps 3 and 5 are now elementary parent step 1. The three nodes are comparable in size (1437, 1262 and 1393 chars), and none restates the item or one of its clauses. Checks of the parent: step 2 uses U×_X P = U×_Y X', so R→P is the base change of the atlas and R→X' the base change of f∘u, and part (2) of the source-atlas node applies. Step 3 uses (hb)r = h·f·a·p = gap, so the comparison clause makes r étale; then br = fap, and part (1) with (U, W, fa, p) applies. Step 4 identifies the compatible-pair presheaf with the sheaf fibre product, and empty families are handled. Small cases of the new nodes: h_r is representable étale exactly when r is étale (test on id_V); part (2) is true for a source R that is an algebraic space, via Q = W×_X R; field lifts compose along a tower K→L→M; for an empty index set, a field-valued section of F' would give one of F, so none exists. I searched for duplicates with rg -L (representable étale, 03EC/03FS/025W/041F/03FU/03FV); the sfb stack calculus, the DM atlas calculus, a1 0262 and the scheme-only 036W node do not state these nodes. Batch-5 flags for the three new nodes are accepted: they are general foundations on algebraic spaces and presheaves, are not steps of the proof of the trace formula or of Poincaré duality, and their stmt_deps are definitions plus the fibre-products node the item already cited. No cycle, no route change, no tool_uses. Two fixes: (1) parent step 4 had source.document = spaces-properties.tex for Tag 041F, which is in spaces-topologies.tex; changed the document and place. (2) The source-atlas statement left Y untyped in part (1), which needs the representable diagonal of an algebraic space; it now says 'Let Y be an algebraic space', and the chartwise-étale definition now says 'morphism of algebraic spaces'.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -296,5 +219,26 @@
   "existing": false,
   "note": "Eight conjuncts render all permanence and covering clauses. Reuses IsChartwiseEtale, schemeSpace and the actual sheaf fibre product from EnlargedEtaleRingedSite; no second definition. That module is a downstream DAG consumer, but currently has no import of this new module: its eventual proof-only import must be omitted to avoid the resulting import cycle."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261023T102904-L-2999138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,345 @@
+{
+ "id": "lem-sf-framework-common-stage-descent",
+ "kind": "statement",
+ "title": "Descent of framework coefficient-compatible exact functors and transformations",
+ "statement": "Fix the global datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-finite-field-fiber]. Let $S,T$ be schemes [def-weil-scheme-morphism-properties]. For each finite coefficient field $E\\subset\\Omega$ [def-weil-l-adic-coefficient-extension], use the framework raw rationalized categories $\\mathcal C_E(W)=D^b_c(W,E)$ for $W=S,T$, with transition functors $T^W_{L/E}$ defined by completed integral scalar extension followed by rationalization [def-weil-rationalization-karoubi], [def-weil-integral-scalar-extension]. Use their canonical unit maps $u^W_E:T^W_{E/E}\\xrightarrow{\\sim}\\operatorname{id}$, scalar associators $a^W_{M,L,E}:T^W_{M/L}T^W_{L/E}\\xrightarrow{\\sim}T^W_{M/E}$ [lem-weil-scalar-extension-composition], exact shift comparisons, and the framework common-stage categories $\\mathcal C_\\Omega(W)$ of [def-weil-algebraically-closed-coefficients]. Exact means an additive functor with its specified shift comparison carrying distinguished triangles to distinguished triangles [def-weil-triangulated-category].\n\nSuppose for every $E$ an exact $E$-linear functor $\\Phi_E:\\mathcal C_E(T)\\to\\mathcal C_E(S)$ is given, and for every $E\\subset L$ a natural isomorphism\n$$\\beta_{L/E}:T^S_{L/E}\\Phi_E\\xrightarrow{\\sim}\\Phi_LT^T_{L/E}.$$\nAssume it commutes with the composite shift comparisons, satisfies $\\Phi_E(u^T_E)\\circ\\beta_{E/E}=u^S_E\\Phi_E$, and, for every $E\\subset L\\subset M$ and $K\\in\\mathcal C_E(T)$, satisfies\n$$\\beta_{M/E,K}\\circ a^S_{M,L,E,\\Phi_EK}\n=\\Phi_M(a^T_{M,L,E,K})\\circ\\beta_{M/L,T^T_{L/E}K}\\circ T^S_{M/L}(\\beta_{L/E,K}).$$\nThen there is an exact $\\Omega$-linear functor $\\Phi_\\Omega:\\mathcal C_\\Omega(T)\\to\\mathcal C_\\Omega(S)$ with object map $(E,K)\\mapsto(E,\\Phi_EK)$. For an arrow represented over $L\\supset E,E'$ by $v:T^T_{L/E}K\\to T^T_{L/E'}K'$, its image is represented over $L$ by\n$$\\beta_{L/E',K'}^{-1}\\circ\\Phi_L(v)\\circ\\beta_{L/E,K}.$$\nThis formula is independent of the common field and representative. Its shift comparison at $(E,K)$ is represented by that of $\\Phi_E$, using the unit maps for source and target.\n\nIf a second family $\\Psi_E$ with comparisons $\\gamma_{L/E}$ satisfies these hypotheses and natural transformations $\\tau_E:\\Phi_E\\to\\Psi_E$ satisfy\n$$\\gamma_{L/E,K}\\circ T^S_{L/E}(\\tau_{E,K})\n=\\tau_{L,T^T_{L/E}K}\\circ\\beta_{L/E,K},$$\nthen they descend to a natural transformation $\\tau_\\Omega:\\Phi_\\Omega\\to\\Psi_\\Omega$, whose component at $(E,K)$ is the class of $\\tau_{E,K}$ under the unit identifications at stage $E$. Shift compatibility, invertibility, identities, vertical composition and equations between such transformations are preserved. The construction also respects composition of families: for any third scheme $V$ and family $\\Xi_E:\\mathcal C_E(S)\\to\\mathcal C_E(V)$ satisfying the analogous hypotheses, the scalar comparison of $\\Xi_E\\Phi_E$ is the composite of the two whiskered comparisons, and the resulting descended functor and comparisons identify with $\\Xi_\\Omega\\Phi_\\Omega$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Algebraically closed coefficient paragraph and Weil-structures paragraph: descent of the framework pullbacks and their commuting immersion comparisons to a common finite coefficient field. Agent-extracted comparison/descent interface; the blueprint does not state this auxiliary lemma separately."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-qbar-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=(E,K)$ and $B=(F,H)$. For a common field $L$ write $A_L^T=T^T_{L/E}K$ and $A_L^S=T^S_{L/E}\\Phi_EK$, with $a_A^T=a^T_{M,L,E,K}$ and $a_A^S=a^S_{M,L,E,\\Phi_EK}$ when $L\\subset M$; use the corresponding notation for $B$. The framework definition makes transport of $v:A_L^T\\to B_L^T$ the map $v_M=a_B^T T^T_{M/L}(v)(a_A^T)^{-1}$. Equality of classes means equality after such transport, and sums and composites are calculated at a common field. Composita supply every common field needed below. The stage inclusion $j_E^W$ sends $f:K\\to H$ to the class represented at $E$ by $(u^W_{E,H})^{-1}f u^W_{E,K}$. In particular units are isomorphisms throughout, not literal equalities of functors.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "For $v:A_L^T\\to B_L^T$ put $Q_L(v)=\\beta_{L/F,H}^{-1}\\Phi_L(v)\\beta_{L/E,K}$. We check transport explicitly. Abbreviate $b_A=\\beta_{L/E,K}$, $b'_A=\\beta_{M/E,K}$ and $d_A=\\beta_{M/L,A_L^T}$, and likewise for $B$. The assumed tower equation gives $b'_A a_A^S=\\Phi_M(a_A^T)d_A T^S_{M/L}(b_A)$. Thus, using the inverse of its $B$ version and then naturality of $\\beta_{M/L}$,\n$$\\begin{aligned}\nQ_M(v_M)&=a_B^S T^S_{M/L}(b_B)^{-1}d_B^{-1}\\Phi_M(T^T_{M/L}v)d_A T^S_{M/L}(b_A)(a_A^S)^{-1}\\\\\n&=a_B^S T^S_{M/L}(b_B^{-1}\\Phi_L(v)b_A)(a_A^S)^{-1}.\n\\end{aligned}$$\nThis is precisely the transport of $Q_L(v)$. Only the given tower equation, naturality and cancellation of inverse isomorphisms enter this calculation.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "If two representatives become equal over $M$, their images become equal over $M$ by step 2. Hence $[L,v]\\mapsto[L,Q_L(v)]$ is a well-defined map on each Hom set, with the prescribed object function. At any common field, $Q_L(1)=1$ and $Q_L(wv)=Q_L(w)Q_L(v)$: expand the two right-hand factors and cancel the adjacent $\\beta\\beta^{-1}$. Also $Q_L(v+w)=Q_L(v)+Q_L(w)$ and $Q_L(0)=0$, by additivity of $\\Phi_L$ and bilinearity of composition. Since identity, addition and composition in the framework category have these representatives, this defines the required additive functor $\\Phi_\\Omega$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "Here is also the scalar action and its compatibility. For $\\lambda\\in\\Omega$ and $[L,v]$, choose a finite $M\\supset L$ containing $\\lambda$, possible since $\\Omega$ is the union of its finite subextensions, and set $\\lambda[L,v]=[M,\\lambda v_M]$. Enlarging $M$ does not change this class: scalar extension is linear over the smaller coefficient field, by its rationalized morphism formula, and the associators commute with scalar multiplication since they are morphisms in the coefficient-linear category. The same argument handles another representative. The module laws and bilinearity follow by calculating the finitely many scalars and maps at one field. Since $\\Phi_M$ is $M$-linear, $Q_M(\\lambda v_M)=\\lambda Q_M(v_M)$. Thus $\\Phi_\\Omega$ is $\\Omega$-linear.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "For an $E$-stage map $f:K\\to H$, the unit condition gives\n$$\\beta_{E/E,H}^{-1}\\Phi_E((u^T_{E,H})^{-1}f u^T_{E,K})\\beta_{E/E,K}\n=(u^S_{E,\\Phi_EH})^{-1}\\Phi_E(f)u^S_{E,\\Phi_EK}.$$\nConsequently $\\Phi_\\Omega j_E^T=j_E^S\\Phi_E$ on objects and arrows with the specified units. Write $\\phi_{E,K}:\\Phi_E(K[1])\\to\\Phi_E(K)[1]$ for its shift comparison. Define $c_{(E,K)}=j_E^S(\\phi_{E,K})$. It is invertible, with inverse $j_E^S(\\phi_{E,K}^{-1})$, and is exactly the component specified in the item.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "We verify naturality of $c$ on a general representative, not only on $E$-stage arrows. Let $\\sigma_A^T:T^T_{L/E}(K[1])\\to(T^T_{L/E}K)[1]$ be the transition shift comparison and set $h_A=\\sigma^S_{L/E,\\Phi_EK}T^S_{L/E}(\\phi_{E,K})$; use analogous notation for $B$. Shift compatibility of $\\beta$ is the equality\n$$\\beta_{L/E,K}[1]h_A=\\phi_{L,A_L^T}\\Phi_L(\\sigma_A^T)\\beta_{L/E,K[1]}.$$\nA representative for $[L,v][1]$ is $v^+=(\\sigma_B^T)^{-1}v[1]\\sigma_A^T$. Substituting this and the displayed equality for $A,B$ into $h_BQ_L(v^+)$, naturality $\\phi_{L,B_L^T}\\Phi_L(v[1])=\\Phi_L(v)[1]\\phi_{L,A_L^T}$ cancels the middle factors and gives\n$$h_BQ_L(v^+)=Q_L(v)[1]h_A.$$\nAfter multiplying by $(\\sigma^S_{L/F,\\Phi_FH})^{-1}$ this is precisely $c_B\\Phi_\\Omega([L,v][1])=\\Phi_\\Omega([L,v])[1]c_A$, with the pair-category shift comparisons inserted. Therefore $c$ is a natural shift isomorphism.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "A distinguished framework triangle is isomorphic to the image under $j_L^T$ of a distinguished triangle at one finite field $L$. By steps 5 and 6 its image under $(\\Phi_\\Omega,c)$ is isomorphic, as a triangle including the third arrow to the shifted first vertex, to $j_L^S$ of the triangle obtained by applying $(\\Phi_L,\\phi_L)$. The latter finite triangle is distinguished by the assumed exactness of $\\Phi_L$; its image under $j_L^S$ is distinguished by the definition of the common-stage distinguished triangles. Distinguished triangles are closed under isomorphism. With the additivity already checked, this proves exactness with the specified shift comparison.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "Define $(\\tau_\\Omega)_{(E,K)}=j_E^S(\\tau_{E,K})$, so its $E$-representative is $(u^S_{E,\\Psi_EK})^{-1}\\tau_{E,K}u^S_{E,\\Phi_EK}$. At a larger field $L$ this component is represented, using the identity-extension compatibility of the associators and naturality of the units, by $t_A=T^S_{L/E}(\\tau_{E,K})$. The assumed scalar square says explicitly\n$$t_A=\\gamma_{L/E,K}^{-1}\\tau_{L,T^T_{L/E}K}\\beta_{L/E,K}.$$\nFor $v:A_L^T\\to B_L^T$, substitute this expression for $t_A,t_B$; naturality of $\\tau_L$ gives\n$$\\begin{aligned}\nt_BQ_L^\\Phi(v)&=\\gamma_B^{-1}\\tau_{L,B_L^T}\\Phi_L(v)\\beta_A\\\\\n&=\\gamma_B^{-1}\\Psi_L(v)\\tau_{L,A_L^T}\\beta_A\n=Q_L^\\Psi(v)t_A.\n\\end{aligned}$$\nTaking classes proves naturality on every arrow.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "Identities and vertical composites of compatible transformations remain compatible: in the scalar square for a composite, substitute the first scalar square and then the second, giving $(\\upsilon_L\\tau_L)\\beta=\\delta\\,T^S(\\upsilon_E\\tau_E)$. Their descended components are $j_E(1)=1$ and $j_E(\\upsilon_E\\tau_E)=j_E(\\upsilon_E)j_E(\\tau_E)$. Any equation between compatible transformations therefore holds at each pair object after descent. If $\\tau_E$ is invertible, rearranging $\\gamma T^S(\\tau_E)=\\tau_L\\beta$ gives $\\beta T^S(\\tau_E^{-1})=\\tau_L^{-1}\\gamma$; its inverse family is compatible and descends to the inverse by the composite calculation. If the $\\tau_E$ commute with shifts, apply $j_E$ to $\\psi_{E,K}\\tau_{E,K[1]}=\\tau_{E,K}[1]\\phi_{E,K}$ and use step 5: this is exactly the descended shift square at $(E,K)$. Here $j_E(f)[1]=j_E(f[1])$ for every $E$-stage map $f:K\\to H$: the shift of $j_E(f)$ is represented at $E$ by $\\sigma_{E/E,H}^{-1}\\bigl((u_{E,H})^{-1}fu_{E,K}\\bigr)[1]\\sigma_{E/E,K}$, and $\\mu_K=u_{E,K}[1]\\,\\sigma_{E/E,K}\\,(u_{E,K[1]})^{-1}$ is a composite of natural isomorphisms, hence a natural automorphism of $[1]$, so this representative is $(u_{E,H[1]})^{-1}\\mu_H^{-1}f[1]\\mu_Ku_{E,K[1]}=(u_{E,H[1]})^{-1}f[1]u_{E,K[1]}$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "For the third family write $\\xi_{L/E}:T^V_{L/E}\\Xi_E\\to\\Xi_LT^S_{L/E}$ and set\n$$\\delta_{L/E,K}=\\Xi_L(\\beta_{L/E,K})\\xi_{L/E,\\Phi_EK}.$$\nThe unit equation follows by substituting first that of $\\xi$ and then that of $\\beta$. For the shift square put $h^{\\Xi\\Phi}_A=\\sigma^V_{L/E,\\Xi_E\\Phi_EK}T^V_{L/E}(\\chi_{E,\\Phi_EK}\\Xi_E(\\phi_{E,K}))$, $\\chi$ the shift comparison of $\\Xi$. Apply the shift square of $\\xi$ at $\\Phi_EK$, naturality of $\\xi_{L/E}$ on $\\phi_{E,K}$, naturality of $\\chi_L$ on $\\beta_{L/E,K}$, and the shift square of $\\beta$ (step 6):\n$$\\delta_{L/E,K}[1]h^{\\Xi\\Phi}_A=\\chi_{L,\\Phi_LA_L^T}\\Xi_L(\\beta_{L/E,K}[1]h_A)\\xi_{L/E,\\Phi_E(K[1])}=\\chi_{L,\\Phi_LA_L^T}\\Xi_L(\\phi_{L,A_L^T})\\,\\Xi_L\\Phi_L(\\sigma^T_A)\\,\\delta_{L/E,K[1]},$$\nthe shift square of $\\delta$ for the composite shift comparisons $\\chi\\,\\Xi(\\phi)$. To check the tower equation, the needed interchange is exactly naturality of $\\xi_{M/L}$ on the arrow $\\beta_{L/E,K}$:\n$$\\Xi_M(T^S_{M/L}\\beta_{L/E,K})\\xi_{M/L,T^S_{L/E}\\Phi_EK}\n=\\xi_{M/L,\\Phi_LT^T_{L/E}K}T^V_{M/L}(\\Xi_L\\beta_{L/E,K}).$$\nExpand $\\delta_{M/E}a^V$; replace $\\beta_{M/E}a^S$ and $\\xi_{M/E}a^V$ by their tower equations, and use this displayed interchange. The resulting expression is\n$$\\Xi_M\\Phi_M(a^T_{M,L,E,K})\\delta_{M/L,T^T_{L/E}K}T^V_{M/L}(\\delta_{L/E,K}),$$\nwhich is the required tower equation. Thus the composite family satisfies all descent hypotheses; it is exact and linear because each composite stage functor is so.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  },
+  {
+   "text": "The composite descended functor has the same object function as the descent of $\\Xi_E\\Phi_E$. Write $\\xi_A=\\xi_{L/E,\\Phi_EK}$ and $\\xi_B=\\xi_{L/F,\\Phi_FH}$. Its representative map is, by functoriality of $\\Xi_L$,\n$$\\begin{aligned}\n\\xi_B^{-1}\\Xi_L\\bigl(\\beta_B^{-1}\\Phi_L(v)\\beta_A\\bigr)\\xi_A\n&=(\\Xi_L(\\beta_B)\\xi_B)^{-1}\\Xi_L\\Phi_L(v)(\\Xi_L(\\beta_A)\\xi_A)\\\\\n&=\\delta_B^{-1}\\Xi_L\\Phi_L(v)\\delta_A.\n\\end{aligned}$$\nThis is the formula for descent of the composite family. The shift comparison of the composite at $(E,K)$ is represented by $\\chi_{E,\\Phi_EK}\\Xi_E(\\phi_{E,K})$, with $\\chi$ the shift comparison of $\\Xi_E$, exactly the composite stage shift comparison. The scalar comparisons used in this identification are $\\delta$ by their definition in step 10. Components of any compatible comparison transformation identify under this equality since both are their finite-stage classes, as in steps 8 and 9. This proves the composition assertion together with all its specified comparisons.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Algebraically closed coefficient paragraph: explicit common-stage descent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Algebraically closed coefficient and Weil-structures paragraphs; explicit conjugation proof from the framework category definition, retaining non-strict unit isomorphisms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of coefficient categories exact functors with coherent transition isomorphisms and natural transformations",
+   "results": "OK 8 hit(s); CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits; ModuleCat.FilteredColimits.M; ModuleCat.FilteredColimits.colimitCocone; ModuleCat.FilteredColimits.colimit; Condensed.hasExactColimitsOfShape; ModuleCat.FilteredColimits.M.mk_map; ModuleCat.FilteredColimits.M.mk; ModuleCat.FilteredColimits.coconeMorphism",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent finite field descent of triangulated functors between raw rationalized constructible categories",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.distTriang_iff; CategoryTheory.Functor.isTriangulated_of_precomp; CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two; CategoryTheory.Functor.isTriangulated_of_precomp_iso; CategoryTheory.Functor.isTriangulated_iff_comp_right; CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated; CategoryTheory.Functor.essImageDistTriang",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "OK 12 hit(s); CategoryTheory.Pseudofunctor; CategoryTheory.Pseudofunctor.id; CategoryTheory.Pseudofunctor.instInhabited; CategoryTheory.Pseudofunctor.toLax; CategoryTheory.Pseudofunctor.toOplax; CategoryTheory.Pseudofunctor.toPrelaxFunctor; CategoryTheory.Pseudofunctor.hasCoeToLax; CategoryTheory.Pseudofunctor.hasCoeToOplax",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|colimit.*filtered|Pseudofunctor",
+   "results": "OK 25 hit(s); Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent exact functors natural transformations common finite coefficient field stages",
+   "results": "OK 8 hit(s); Rep.coinvariantsMk; CategoryTheory.ExactFunctor.of; CategoryTheory.LeftExactFunctor.ofExact_map_hom; CategoryTheory.exactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.rightDerivedNatTrans; CategoryTheory.leftExactFunctor; CategoryTheory.LeftExactFunctor.ofExact_map",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of coefficient compatible exact functors and natural transformations on filtered common stage categories",
+   "results": "OK 8 hit(s); CategoryTheory.IndParallelPairPresentation.hI; CategoryTheory.Limits.ColimitPresentation.bind_diag_map; CategoryTheory.RightExactFunctor.ofExact_map; CategoryTheory.NonemptyParallelPairPresentationAux.hf; CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom; CategoryTheory.NonemptyParallelPairPresentationAux.hg; CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic colimit, exact-functor and triangle declarations do not construct the specified framework common-stage functor with all shift, coefficient and transformation comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functor induced by compatible functors on directed systems of triangulated categories with natural isomorphisms",
+   "results": "OK 8 hit(s); CategoryTheory.ExactFunctor.of; DirectLimit.map; CategoryTheory.exactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Pretriangulated.Triangle.functorIsoMk; CategoryTheory.Functor.isTriangulated_of_iso; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Pretriangulated.Triangle.functorIsoMk'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic colimit, exact-functor and triangle declarations do not construct the specified framework common-stage functor with all shift, coefficient and transformation comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudonatural|[Dd]escend.*[Ff]unctor|[Ff]iltered.*[Cc]olimit",
+   "results": "OK 25 hit(s); Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/CategoryTheory/Functor/Flat.lean; Mathlib/CategoryTheory/Functor/Flat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic colimit, exact-functor and triangle declarations do not construct the specified framework common-stage functor with all shift, coefficient and transformation comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.NatTrans",
+   "results": "OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic colimit, exact-functor and triangle declarations do not construct the specified framework common-stage functor with all shift, coefficient and transformation comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "def.*desc|theorem.*desc|Pseudonat|TwoColimit|2.colimit",
+   "results": "OK 7 hit(s); Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean; Mathlib/CategoryTheory/Bicategory/Kan/HasKan.lean; Mathlib/CategoryTheory/Bicategory/Kan/HasKan.lean; Mathlib/CategoryTheory/Bicategory/Kan/HasKan.lean; Mathlib/CategoryTheory/Bicategory/Kan/HasKan.lean; Mathlib/CategoryTheory/Bicategory/Kan/HasKan.lean; Mathlib/CategoryTheory/Bicategory/Functor/Cat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic colimit, exact-functor and triangle declarations do not construct the specified framework common-stage functor with all shift, coefficient and transformation comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent family of additive triangulated functors induces a functor on the category of finite stage pairs and compatible transformations descend",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.mapTriangulatedSpectralObject; CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor; CategoryTheory.Pretriangulated.Triangle.functorMk_obj; CategoryTheory.Pretriangulated.Triangle.functorHomMk; CategoryTheory.Pretriangulated.Triangle.functorMk; CategoryTheory.Pretriangulated.Triangle.functorHomMk'; CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two; CategoryTheory.Functor.map_distinguished",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic colimit, exact-functor and triangle declarations do not construct the specified framework common-stage functor with all shift, coefficient and transformation comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-automorphism-constructible-stage-equivalence",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Algebraically closed coefficient paragraph and Weil-structures paragraph: descent of the framework pullbacks and their commuting immersion comparisons to a common finite coefficient field.",
+   "via": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-framework-common-stage-descent",
+  "worker": "stage1",
+  "summary": "Gave the explicit framework common-stage proof: associator-conjugated transport, quotient functor laws, Omega-linearity, units, the full shift square, triangle exactness, compatible transformations, and composition of families. No new nodes: every remaining calculation is elementary from the cited definitions and the assumed scalar equations. Did not replace framework transitions with PBC transitions or with strictly normalized identity transitions.",
+  "blueprint": "Realizes the algebraically closed coefficient paragraph (operations and two maps descend) and the Weil-structures paragraph (commuting pullback comparisons and their equations descend) of prop-sf-open-closed-triangle-all-stages.proof.md; steps 1-7 are functor/exact descent, 8-9 transformation descent, 10-11 composition. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-df66ce504",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-df66ce504 (reviewer sub-agent of L); spot-checked: I read the whole delivery and recomputed every step. Item lem-sf-framework-common-stage-descent, 11 steps, no new nodes; statement and stmt_deps unchanged; no SGA. Source checked: main-20261015 prop-sf-open-closed-triangle-all-stages.proof.md lines 64-86 (algebraically closed stage, Weil structures). Cited statements read: def-weil-algebraically-closed-coefficients (Hom colimit, transport via associators, shift, distinguished triangles, finite field of definition), lem-weil-scalar-extension-composition (natural, identity-compatible), def-weil-rationalization-karoubi (E-linear morphism formula), def-weil-finite-subextension-directed-set, def-weil-triangulated-category. Steps 2, 6, 8 and the tower equation in step 10 were re-derived with every factor type-checked; they are correct. Duplicate candidates ruled out: lem-sbc-coherent-pair-functor-descent needs literal U_{E/E}=1 and identity repeated-field associators; prop-weil-pbc-descent-functors uses PBC categories; lem-fd-common-stage-comparison-descent is for equivalences between two models. The citer lem-sf-automorphism-constructible-stage-equivalence step 9 uses exactly the clauses the proof provides. Two E5 elisions repaired in the item's proof text (fixes/dag/nodes/sec-smooth-purity/lem-sf-framework-common-stage-descent.json): step 9 used j_E(tau)[1]=j_E(tau[1]) without justification, now shown via the natural automorphism mu=u[1] sigma_{E/E} u^{-1} of [1]; step 10's 'same substitution' for the delta shift square omitted the naturality of xi on phi and of chi_L on beta, now calculated explicitly. No other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfFrameworkCommonStageDescent",
+  "declaration": "WeilConjectures.sfFrameworkCommonStageDescent",
+  "declarations": [
+   "WeilConjectures.sfFrameworkUnitCompatible",
+   "WeilConjectures.SfFrameworkFamily",
+   "WeilConjectures.sfFrameworkCommonStageShift_existsUnique",
+   "WeilConjectures.sfFrameworkCommonStageCommShift",
+   "WeilConjectures.sfFrameworkCommonStageDescent",
+   "WeilConjectures.sfFrameworkCommonStageTransformations",
+   "WeilConjectures.sfFrameworkComposite_compatible",
+   "WeilConjectures.SfFrameworkFamily.comp",
+   "WeilConjectures.sfFrameworkCommonStageComposition",
+   "WeilConjectures.sfFrameworkCompositeFiniteShift",
+   "WeilConjectures.sfFrameworkCompositePairShift"
+  ],
+  "file": "lean/Sheaf/Paper/SfFrameworkCommonStageDescent.lean",
+  "statement": "theorem sfFrameworkCommonStageDescent (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p) (F : SfFrameworkFamily l Ω T S) : F.system.functor.Additive ∧ F.system.functor.Linear Ω ∧ F.system.functor.IsTriangulated ∧ (∀ A : generalAlgebraicallyClosedConstructibleCategory l Ω T, F.system.functor.obj A = ⟨A.stage, (F.system.Φ A.stage).obj A.obj⟩) ∧ (∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω T) (L : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : A.toStage hA ⟶ B.toStage hB), F.system.functor.map (StageSystem.PairCategory.mkHom L hA hB f) = StageSystem.PairCategory.mkHom (X := F.system.functor.obj A) (Y := F.system.functor.obj B) L hA hB ((F.system.β hA).hom.app A.obj ≫ (F.system.Φ L).map f ≫ (F.system.β hB).inv.app B.obj)) ∧ (∀ (A B : generalAlgebraicallyClosedConstructibleCategory l Ω T) (L M : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L) (h : L ≤ M) (f : A.toStage hA ⟶ B.toStage hB), (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω S).tr h (F.system.mapAt f) = F.system.mapAt ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T).tr h f))",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "States the full framework descent interface on the recorded raw rationalized stages and intrinsic common-stage quotient. Uses actual multiplication units, tensor associators and normalized shifts; retains independent scheme and coefficient-closure universes. Helpers bundle precisely the hypotheses and composite family, and the shift choice has a unique componentwise specification. The already landed intrinsic scalar-action interface is cited through def-weil-pbc-qbar-category; no PBC category or geometric restrictions replace the framework categories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbe6df55c",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read item, 9 stmt_deps, report and module SfFrameworkCommonStageDescent.lean against StageSystem.Functor (Morphism β direction Φ_E⋙T^S ≅ T^T⋙Φ_L, coh = node tower equation in diagrammatic order, Hom.comm = node scalar square, Morphism.comp β = ξ then Ξ_L(β)), GeneralAlgebraicallyClosedCoefficients (actual unitor/associators, canonical stageTransitionCommShift, shiftPair with identity inclusion comparisons) and IntrinsicQbarCategory (canonical Ω/E-linear structures). Unit square u^S ≫ Φ(u^T⁻¹) correct; HEq only across propositionally equal types; descended shift is the choose of a component-pinned ∃!; conclusions give additive, Ω-linear, triangulated, object/representative formulas, transformation descent (component, iso, shift, id, comp, equations) and composition (whiskered δ, functorCompIso id components + CommShift, HEq maps). Statement unchanged and lean.statement verbatim; only lean + stmt_deps changed; added stmt_dep def-weil-pbc-qbar-category is a landed node owning the cited linear instances (allowed). No hollow defs, no stronger hypotheses, independent universes, no PBC/pro-etale substitute; PbcDescentFunctors/PairFunctorShiftCoherence/sbc coherent descent need normalized units, not duplicates. Advisories only: transport clause = tr_mapAt, equation clause follows from Hom.ext, IntegralScalarExtensionUniverses import possibly unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T033945-L-183573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.sfFrameworkCommonStageComposition",
+   "WeilConjectures.sfFrameworkCommonStageDescent",
+   "WeilConjectures.sfFrameworkCommonStageShift_existsUnique",
+   "WeilConjectures.sfFrameworkCommonStageTransformations",
+   "WeilConjectures.sfFrameworkComposite_compatible"
+  ],
+  "sorry_after": []
+ }
+}

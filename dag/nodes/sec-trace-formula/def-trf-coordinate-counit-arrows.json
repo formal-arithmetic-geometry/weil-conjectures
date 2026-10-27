@@ -82,10 +82,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-trace-formula",
@@ -126,5 +130,20 @@
   "group": "Q70",
   "result": "pass",
   "note": "Re-delivery fixes all three findings of the 8129faf75aff RETURN. (1) lem-pur-noetherian-etale-section-specialization is no longer cited; family/sectionMap/atOne come from SectionComparisonArrows (owner def-pur-noetherian-section-specialization-arrows, now in stmt_deps). (2) FiniteRingSectionDeformation is no longer imported; my recursive import walk (9138 modules) reaches neither it nor NoetherianEtaleSectionSpecialization; the two proof-only sibling imports form no cycle. The missing counit transpose has its own definition node def-trf-coordinate-counit-arrows (§1(A)) with real data: towerAdjoint = homEquiv(compact comparison inv ≫ tower counit ≫ unit iso), and standardAdjoint transports it by fixed coordinate-iso, Tate-pullback and Cartesian base-change maps (standardSquare and tateFlat are true). (3) S stays general with affine open c.b; the conclusion is restrictionAtOne(rawComparison oC oF).hom = restrictedTheta … c.b, i.e. θ|_T of the original family, plus discrepancy = refl. IsNormalized pins affineDualizingIso, through which every chart map depends on adj, so the existential adjunction is not a free orientation. t and D are unique and satisfy base change (OrdinaryFiniteP1DatumUniqueness), so no hidden hD hypothesis is needed. Hypotheses match the node (Noetherian S, N a unit, smooth separated quasi-compact compactifiable g, closed section, compactifiable Rees projection); edge cases d=0, empty schemes, A=0 and non-flat v are covered. Ordinary unbounded étale categories, no pro-étale substitute. lean.statement verbatim in both nodes; all 12 declarations exist; only sorry proofs; docstrings carry source and blueprint tags; only the four delivery files differ from live. No compile by me (no file changed); the worker's dry run reports both modules compiling. Advisories: the base-change clause is on the tower model rather than standard A^d; the landed Chart requires U affine; four proof-only imports (H9); pre-existing Rees-family stmt_dep gap."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261023T132051-L-2198392",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.CoordinateCounitArrows.standardSquare",
+   "AlgebraicGeometry.Etale.CoordinateCounitArrows.tateFlat"
+  ],
+  "sorry_after": []
  }
 }

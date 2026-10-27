@@ -1,0 +1,106 @@
+{
+ "id": "def-pur-integral-tensor-shift-properties",
+ "kind": "definition",
+ "title": "Representative normalization predicates for tensor shifts",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme W. On strict-system complexes define systemTotalTensor and systemKFlat, and the first-slot unsigned and second-slot (-1)^(ri) total-tensor generator formulas. For a natural shift comparison, systemTensorLeftProperty and systemTensorRightProperty assert that on every K-flat pair its component agrees, through the recorded tensor-model isomorphisms, with a cochain comparison satisfying the respective generator formula. On integral complexes, integralTensorLeftFormula is the unsigned first-slot formula at every finite quotient level. integralTensorLeftProperty requires this finite tower comparison on every good pair, its prescribed product/cone comparison with diagonal (1,(-1)^r), and agreement after the fixed [-1] Roos shift with the recorded completed tensor model. These are the unchanged predicates formerly declared in def-pur-integral-operation-shift-data; tensorShiftFirst shifts precisely the first argument of a bifunctor.",
+ "stmt_deps": [
+  "def-sf-integral-system-expression-domain",
+  "lem-sf-completed-tensor-shift-right"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: integral transport; representative tensor-shift detail of def-pur-integral-operation-shift-data; Stacks Tags 011G, 012Z, 014E, 06YU, 0941."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of natural isomorphisms for left and right shifts of derived tensor with K-flat and completed Roos normalization",
+   "results": "8 hits: Functor.leftDerivedUnique, rightDerivedUnique, leftDerivedNatIso and generic shift/adjunction isomorphisms. These do not state the coefficient-site generator or Roos normalizations.",
+   "date": "2026-10-25",
+   "verdict": "Generic tools only; no exact normalized slot theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural isomorphism commuting shifts of derived tensor products determined by K-flat representatives",
+   "results": "8 hits: induced mapDerivedCategory CommShift instances and factors, quotientCompQhIso CommShift, mapDerivedCategorySingleFunctor, Tor and Tor'. No normalized coefficient tensor uniqueness statement.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for these representative-normalized slot comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*Shift|Tensor.*Shift",
+   "results": "6 hits, including CochainComplex.mapBifunctorHomologicalComplexShift₁Iso and the BifunctorShift module documentation; read mapBifunctorShift₁Iso and mapBifunctorShift₂Iso generator formulas. They supply the cochain reindexings, not descent with the specified coefficient models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The cochain formulas are available in Mathlib.Algebra.Homology.BifunctorShift."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Adic Step 2: representative-normalized tensor shifts used in independent-slot shift coherence.",
+   "via": [
+    "def-pur-integral-operation-shift-data",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralTensorShiftProperties",
+  "file": "lean/Sheaf/SixFunctors/IntegralTensorShiftProperties.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.tensorShiftFirst",
+  "statement": "abbrev tensorShiftFirst (A : Type v) [Category.{w} A] [HasShift A ℤ] (r : ℤ) : A × A ⥤ A × A",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.tensorShiftFirst",
+   "WeilConjectures.IntegralSystemRealization.systemTotalTensor",
+   "WeilConjectures.IntegralSystemRealization.systemKFlat",
+   "WeilConjectures.IntegralSystemRealization.systemTensorLeftFormula",
+   "WeilConjectures.IntegralSystemRealization.systemTensorLeftProperty",
+   "WeilConjectures.IntegralSystemRealization.systemTensorRightFormula",
+   "WeilConjectures.IntegralSystemRealization.systemTensorRightProperty",
+   "WeilConjectures.IntegralSystemRealization.integralTensorLeftFormula",
+   "WeilConjectures.IntegralSystemRealization.integralTensorLeftModelProperty",
+   "WeilConjectures.IntegralSystemRealization.integralTensorLeftProperty"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-29cbf",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161932-L-154737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aa8e0",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261026T022806-L-446879",
+  "kind": "interface",
+  "note": "independent cc review: item proof and the def/abbrev refactor of integralTensorLeftProperty/tensorShiftFirst against the clone's IntegralTensorShiftProperties, the change records and both nodes; all direct importers compiled with the delivered modules"
+ }
+}

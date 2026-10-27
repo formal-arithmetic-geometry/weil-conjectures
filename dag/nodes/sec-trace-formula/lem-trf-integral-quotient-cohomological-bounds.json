@@ -1,0 +1,138 @@
+{
+ "id": "lem-trf-integral-quotient-cohomological-bounds",
+ "kind": "statement",
+ "title": "Uniform reduction bounds on any flat-term K-flat quotient representative",
+ "statement": "For a prime l, finite coefficient extension E, a scheme T with l invertible, an integral constructible derived object M [def-weil-derived-complete-integral-detailed], any flat-term K-flat complex P [lem-pc-kflat-resolution] and isomorphism Q(P)≅M, there exist p≤r such that every actual quotient complex Res(P⊗A_(n+1)) [def-pur-integral-derived-operations] is cohomologically ≥p and ≤r. This is a bound on cohomology, with no bound on the terms of P or on Tor amplitude.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YL and 06YV, flat resolutions and derived pullback; blueprint order 1459, uniform reduction interval. Parent proof Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Choose p≤r from the defining uniform-support clause of sfIntegralConstructible. It bounds all positive derived reductions of M, including n=0 corresponding to exponent one.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YL and 06YV, flat resolutions and derived pullback; blueprint order 1459, uniform reduction interval. Parent proof Step 1."
+   }
+  },
+  {
+   "text": "Use unrestrictedTowerResolutionIso for the identity resolution of P, then compose with scalarReductionDerivedExtension.mapIso q.symm. This identifies the actual finite quotient of P with the derived reduction of M through the published localization counit.",
+   "uses": [
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YL and 06YV, flat resolutions and derived pullback; blueprint order 1459, uniform reduction interval. Parent proof Step 1."
+   }
+  },
+  {
+   "text": "The homology factorization through Q transports the support vanishing to the finite quotient complex. Exact scalar restriction maps the resulting exact short complexes to exact short complexes over the completed ring. Mathlib isGE_iff and isLE_iff identify these exactness conditions with the asserted bounds.",
+   "uses": [
+    "lem-weil-restriction-of-scalars-exact",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YL and 06YV, flat resolutions and derived pullback; blueprint order 1459, uniform reduction interval. Parent proof Step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-weil-restriction-of-scalars-exact",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YL and 06YV, flat resolutions and derived pullback; blueprint order 1459, uniform reduction interval. Parent proof Step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniform cohomological support bounds transfer from derived scalar reduction to the quotient complex of a K-flat representative",
+   "results": "HomologicalComplex.isSupported_iff_of_quasiIso and bounded derived representatives; no adic quotient comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient complexes of a K-flat representative of a constructible adic complex have uniform cohomological bounds",
+   "results": "DerivedCategory.isGE_Q_obj_iff, isLE_Q_obj_iff and CochainComplex.isLE_iff; only general support tools.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLEFunctor|truncGEFunctor|cohomologicalSupport|geometricStalk",
+   "results": "Mathlib supplies generic truncation and homology APIs; the project-specific uniform adic bounds are absent.",
+   "date": "2026-10-26",
+   "verdict": "no match: constituent APIs only; the stated comparison is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TraceBoundedQuotientStalkRealization",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers (b); Tags 06YL and 06YV, flat resolutions and derived pullback; blueprint order 1459, uniform reduction interval. Parent proof Step 1.",
+   "via": [
+    "lem-trf-bounded-quotient-stalk-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralQuotientCohomologicalBounds",
+  "file": "lean/Sheaf/Paper/IntegralQuotientCohomologicalBounds.lean",
+  "declaration": "WeilConjectures.integralQuotientCohomologicalBounds",
+  "statement": "theorem integralQuotientCohomologicalBounds (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueField x)]\n    (M : DerivedCategory (integralTowerModules l E T))\n    (hM : sfIntegralConstructible l E T M)\n    (P : (integralOperationsGoodComplex l E T).FullSubcategory)\n    (q : DerivedCategory.Q.obj P.obj ≅ M) :\n    ∃ p r : ℤ, p ≤ r ∧ ∀ n : ℕ,\n      CochainComplex.IsGE ((unrestrictedIntegralComplexFunctor l E T n).obj P.obj) p ∧\n        CochainComplex.IsLE ((unrestrictedIntegralComplexFunctor l E T n).obj P.obj) r",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T071346-L-3919417",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T071346-L-3919417",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

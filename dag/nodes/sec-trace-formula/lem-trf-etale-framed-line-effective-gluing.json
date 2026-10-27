@@ -1,0 +1,402 @@
+{
+ "id": "lem-trf-etale-framed-line-effective-gluing",
+ "kind": "statement",
+ "title": "Effective descent and sectionwise gluing of a prescribed etale framed line module",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $X_{\\mathrm{et}}$ be its small etale site [def-weil-pbc-etale-site]. Put $\\mathcal O_{X,\\mathrm{et}}(u:U\\to X)=\\Gamma(U,\\mathcal O_U)$. Modules on a site and their morphisms mean sheaves of modules and all module morphisms [def-weil-sheaf-of-modules-category]. Let $G$ be an $\\mathcal O_{X,\\mathrm{et}}$-module and let $(u_a:U_a\\to X)_{a\\in I}$ be an arbitrary set-indexed jointly surjective etale family. Suppose given frames $t_a:\\mathcal O_{U_a,\\mathrm{et}}\\simeq G|_{(U_a)_{\\mathrm{et}}}$ and units $g_{ab}\\in\\Gamma(R_{ab},\\mathcal O_{R_{ab}})^\\times$, where $R_{ab}=U_a\\times_XU_b$. Assume $t_b=t_a m_{g_{ab}}$ on $(R_{ab})_{\\mathrm{et}}$, where $m_g$ is multiplication by the pullbacks of $g$; assume also $p_{ab}^*g_{ab}\\,p_{bc}^*g_{bc}=p_{ac}^*g_{ac}$ on triple products and $\\Delta_a^*g_{aa}=1$. There exist an ordinary invertible $\\mathcal O_X$-module $L$ [def-sc-invertible-module] and isomorphisms $\\lambda_a:u_a^*L\\simeq\\mathcal O_{U_a}$ [def-pc-module-pullback] with $\\lambda_a=m_{g_{ab}}\\lambda_b$ on $R_{ab}$, after canonical pullback identifications. For $A_X(L)(u)=\\Gamma(U,u^*L)$ [def-sc-etale-qcoherent-module], the local isomorphisms $e_a=t_a A_{U_a}(\\lambda_a):A_X(L)|_{(U_a)_{\\mathrm{et}}}\\simeq G|_{(U_a)_{\\mathrm{et}}}$, with their domains identified by tensor composition, agree on overlaps and determine a unique global module-sheaf isomorphism $e:A_X(L)\\simeq G$. Explicitly, for each object $W\\to X$ and $s\\in A_X(L)(W)$, $e_W(s)$ is the unique section of $G(W)$ restricting to $e_a(s|_{W_a})$ on $W_a=W\\times_XU_a$. Its inverse is characterized by the analogous rule for the $e_a^{-1}$. These formulas commute with every restriction, addition and scalar multiplication. The assertion holds without quasi-compactness or separatedness assumptions on $X$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX, proposition-equivalence-quasi-coherent (2), proof: effective fpqc descent and final gluing of the local isomorphisms; Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05VG, lemma-equivalence-quasi-coherent-properties, rank-one finite local freeness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-sc-invertible-module",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-scheme-zariski-etale-module-constructions",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $M_a=\\mathcal O_{U_a}$. Identify its two pullbacks to $R_{ab}$ with $\\mathcal O_{R_{ab}}$ by the tensor-unit identifications, and define $\\varphi_{ab}:p_a^*M_a\\to p_b^*M_b$ to be multiplication by $g_{ab}^{-1}$. This is an isomorphism with inverse multiplication by $g_{ab}$. On triple products, $\\varphi_{bc}\\varphi_{ab}=m_{g_{bc}^{-1}g_{ab}^{-1}}=m_{g_{ac}^{-1}}=\\varphi_{ac}$ by the given cocycle. Its pullback along $\\Delta_a$ is the identity by the given normalization. Thus the trivial invertible modules, which are Zariski free of rank one, form a descent datum with the arrow direction used in [lem-pc-fpqc-descent].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof: descent datum, effectivity and final gluing; small etale case. Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank one."
+   }
+  },
+  {
+   "text": "The given family covers the final object $X\\to X$ in $X_{\\mathrm{et}}$. By [lem-weil-pbc-fpqc-finer-than-etale] it is an fpqc covering, for the same arbitrary set of indices. Apply clause (3) of [lem-pc-fpqc-descent] to the datum of Step 1. It gives an ordinary invertible $L$ and isomorphisms $\\lambda_a:u_a^*L\\simeq M_a$ identifying the canonical descent datum of $L$ with $\\varphi_{ab}$. Explicitly, on $R_{ab}$ this compatibility is $\\lambda_b=\\varphi_{ab}\\lambda_a=m_{g_{ab}^{-1}}\\lambda_a$, or equivalently $\\lambda_a=m_{g_{ab}}\\lambda_b$, as required. Both cited results hold for general schemes, with no quasi-compactness or separatedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof: descent datum, effectivity and final gluing; small etale case. Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank one."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-line-sections-normalized-comparisons] to $L$, to each $u_a$, and to the overlap projections. Its functor, unit and composition comparisons make $e_a=t_a\\epsilon_{U_a}A_{U_a}(\\lambda_a)\\beta_{u_a,L}$ a local module-sheaf isomorphism, where $\\epsilon$ identifies the associated structure module with the structure sheaf. These are the implicit identifications in the statement. For any etale object $V\\to R_{ab}$ and any section $z$ of the restricted $A_X(L)$, the component formula in that node sends multiplication by $g_{ab}$ to multiplication by its pullback to $V$: pullback is linear and the tensor-unit formula is $a\\otimes b\\mapsto a\\,v^\\sharp(b)$. Thus, after its coherent domain identifications, $e_a(z)=t_a(m_{g_{ab}}A(\\lambda_b)(z))=t_b(A(\\lambda_b)(z))=e_b(z)$. This proves equality of the local maps on the whole overlap site, rather than just on its final object.",
+   "uses": [
+    "lem-trf-etale-line-sections-normalized-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof: descent datum, effectivity and final gluing; small etale case. Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank one."
+   }
+  },
+  {
+   "text": "Fix $W\\to X$ and put $W_a=W\\times_XU_a$. This is a covering family of $W$ in the small etale site [def-weil-pbc-etale-site]. For $s\\in A_X(L)(W)$, Step 3 says that $e_a(s|_{W_a})$ and $e_b(s|_{W_b})$ have equal restrictions to $W_a\\times_WW_b$. Since the underlying abelian sheaf of $G$ satisfies the equalizer condition [def-weil-pbc-abelian-etale-sheaves], these sections have a unique amalgamation; define it to be $e_W(s)$. For an arrow $h:W'\\to W$, both $e_W(s)|_{W'}$ and $e_{W'}(s|_{W'})$ restrict on $W'_a$ to $e_a(s|_{W'_a})$, by naturality of $e_a$, so they are equal. For $s,s'$ the restrictions of $e_W(s+s')$ and $e_W(s)+e_W(s')$ agree by additivity of each $e_a$, so they are equal. For $r\\in\\mathcal O_{X,\\mathrm{et}}(W)$ the same calculation gives $e_W(rs)=r e_W(s)$, using the semilinear restrictions in [def-weil-sheaf-of-modules-category]. Hence $e$ is a module-sheaf morphism. On an object $W\\to U_a$, its restrictions over the cover $W\\times_XU_b\\to W$ agree with those of $e_a$, by Step 3; uniqueness of amalgamation therefore shows that its restriction to $(U_a)_{\\mathrm{et}}$ is exactly $e_a$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof: descent datum, effectivity and final gluing; small etale case. Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank one."
+   }
+  },
+  {
+   "text": "The equality $e_a=e_b$ on overlaps gives $e_a^{-1}=e_b^{-1}$ there. The source $A_X(L)$ is a module sheaf by [lem-trf-etale-line-sections-normalized-comparisons]. For $y\\in G(W)$ glue the compatible family $e_a^{-1}(y|_{W_a})$ in this sheaf, using the same equalizer condition [def-weil-pbc-abelian-etale-sheaves], to define $d_W(y)$. As in Step 4, uniqueness proves that $d$ commutes with restrictions, addition and scalars. The composites $d_We_W$ and $e_Wd_W$ restrict on each $W_a$ to identities, so the injective part of the equalizer condition makes them identities on $W$. Thus $d=e^{-1}$. Any morphism with the prescribed local maps has, at every $s$, the same local values as $e_W(s)$, so uniqueness of amalgamation makes it equal to $e$. This proves both explicit formulas and all their asserted compatibilities.",
+   "uses": [
+    "lem-trf-etale-line-sections-normalized-comparisons",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof: descent datum, effectivity and final gluing; small etale case. Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank one."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "lem-trf-etale-line-sections-normalized-comparisons",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof: descent datum, effectivity and final gluing; small etale case. Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05VG (lemma-equivalence-quasi-coherent-properties), rank one. The final sheaf-Hom argument is expanded directly via the sheaf equalizer axiom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Dd]escent.*[Ii]nvertible|[Ii]nvertible.*[Dd]escent|[Ss]heafOfModules.*[Gg]lu",
+   "results": {
+    "t": "2026-10-22T07:21:14Z",
+    "tool": "grep",
+    "query": "[Dd]escent.*[Ii]nvertible|[Ii]nvertible.*[Dd]escent|[Ss]heafOfModules.*[Gg]lu",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the results are definitions of quasi-coherent presentations, free modules, ordinary scheme modules and unitHomEquiv, not effective descent of ordinary invertible modules from an etale covering together with the specified framed global isomorphism. No one-line specialization supplies both parts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"glue\"",
+   "results": {
+    "t": "2026-10-22T07:21:14Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"glue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the results are definitions of quasi-coherent presentations, free modules, ordinary scheme modules and unitHomEquiv, not effective descent of ordinary invertible modules from an etale covering together with the specified framed global isomorphism. No one-line specialization supplies both parts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small etale line module with chosen frames and unit transition functions is realized by an ordinary invertible sheaf with a unique isomorphism respecting those frames",
+   "results": {
+    "t": "2026-10-22T07:21:15Z",
+    "tool": "leansearch",
+    "query": "A small etale line module with chosen frames and unit transition functions is realized by an ordinary invertible sheaf with a unique isomorphism respecting those frames",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.tildeInModuleCat",
+     "AlgebraicGeometry.Scheme.Modules",
+     "SheafOfModules.ιFree",
+     "SheafOfModules.unit",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+     "CommRing.Pic.mk.linearEquiv",
+     "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections",
+     "SheafOfModules.unitHomEquiv_apply_coe"
+    ],
+    "digest": "f36db8c266358576"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the results are definitions of quasi-coherent presentations, free modules, ordinary scheme modules and unitHomEquiv, not effective descent of ordinary invertible modules from an etale covering together with the specified framed global isomorphism. No one-line specialization supplies both parts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fpqc descent of trivial invertible modules with transition units produces an invertible sheaf and compatible etale local isomorphisms glue to an isomorphism of module sheaves",
+   "results": {
+    "t": "2026-10-22T07:21:26Z",
+    "tool": "leanfinder",
+    "query": "Effective fpqc descent of trivial invertible modules with transition units produces an invertible sheaf and compatible etale local isomorphisms glue to an isomorphism of module sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.presentation",
+     "SheafOfModules.IsQuasicoherent",
+     "SheafOfModules.Presentation",
+     "SheafOfModules.isQuasicoherent",
+     "SheafOfModules.LocalGeneratorsData",
+     "SheafOfModules.IsFinitePresentation",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.generatorsOfIsCokernelFree_I"
+    ],
+    "digest": "ae5d5bc5fa2be393"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the results are definitions of quasi-coherent presentations, free modules, ordinary scheme modules and unitHomEquiv, not effective descent of ordinary invertible modules from an etale covering together with the specified framed global isomorphism. No one-line specialization supplies both parts."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(invertible|locallyFree)|invertible.*descent|SheafOfModules.*glue",
+   "results": {
+    "t": "2026-10-23T09:36:44Z",
+    "tool": "grep",
+    "query": "descent.*(invertible|locallyFree)|invertible.*descent|SheafOfModules.*glue",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned SheafOfModules presentation and local-generator declarations, unitHomEquiv, and the Tilde.lean gluing hit. These construct presentations or maps from the structure module, or glue sections on affine basic opens. None gives ordinary invertible-module descent from etale cocycles and the prescribed framed sheaf isomorphism; no one-line specialization proves the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale unit cocycle descends trivial invertible sheaves to a line bundle whose associated etale sheaf has the prescribed local frames",
+   "results": {
+    "t": "2026-10-23T09:36:44Z",
+    "tool": "leansearch",
+    "query": "An etale unit cocycle descends trivial invertible sheaves to a line bundle whose associated etale sheaf has the prescribed local frames",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "Trivialization.localFrame.congr_simp",
+     "SheafOfModules.unitHomEquiv_apply_coe",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "CompHausLike.LocallyConstant.unitIso"
+    ],
+    "digest": "e9e31c252bdd7998"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned SheafOfModules presentation and local-generator declarations, unitHomEquiv, and the Tilde.lean gluing hit. These construct presentations or maps from the structure module, or glue sections on affine basic opens. None gives ordinary invertible-module descent from etale cocycles and the prescribed framed sheaf isomorphism; no one-line specialization proves the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"descent\"",
+   "results": {
+    "t": "2026-10-23T09:36:44Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"descent\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned SheafOfModules presentation and local-generator declarations, unitHomEquiv, and the Tilde.lean gluing hit. These construct presentations or maps from the structure module, or glue sections on affine basic opens. None gives ordinary invertible-module descent from etale cocycles and the prescribed framed sheaf isomorphism; no one-line specialization proves the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of trivial line bundles with unit transition cocycles along an etale covering, and gluing compatible isomorphisms of module sheaves",
+   "results": {
+    "t": "2026-10-23T09:36:53Z",
+    "tool": "leanfinder",
+    "query": "Effective descent of trivial line bundles with unit transition cocycles along an etale covering, and gluing compatible isomorphisms of module sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.QuasicoherentData.presentation",
+     "SheafOfModules.QuasicoherentData.I",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.Presentation",
+     "SheafOfModules.Presentation.map",
+     "SheafOfModules.presentationOfIsCokernelFree",
+     "SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+     "SheafOfModules.generatorsOfIsCokernelFree"
+    ],
+    "digest": "b17a115de7c1e679"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned SheafOfModules presentation and local-generator declarations, unitHomEquiv, and the Tilde.lean gluing hit. These construct presentations or maps from the structure module, or glue sections on affine basic opens. None gives ordinary invertible-module descent from etale cocycles and the prescribed framed sheaf isomorphism; no one-line specialization proves the item."
+  },
+  {
+   "tool": "grep",
+   "query": "descen|glue",
+   "results": {
+    "t": "2026-10-23T09:39:00Z",
+    "tool": "grep",
+    "query": "descen|glue",
+    "sub": "AlgebraicGeometry/Modules",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean"
+    ],
+    "digest": "c16dfe8f4d0743d0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned SheafOfModules presentation and local-generator declarations, unitHomEquiv, and the Tilde.lean gluing hit. These construct presentations or maps from the structure module, or glue sections on affine basic opens. None gives ordinary invertible-module descent from etale cocycles and the prescribed framed sheaf isomorphism; no one-line specialization proves the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of locally free rank one sheaves with cocycle data on a covering family",
+   "results": {
+    "t": "2026-10-23T09:39:05Z",
+    "tool": "leanfinder",
+    "query": "Faithfully flat descent of locally free rank one sheaves with cocycle data on a covering family",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.LocalGeneratorsData",
+     "SheafOfModules.relationsOfIsCokernelFree",
+     "SheafOfModules.presentationOfIsCokernelFree",
+     "SheafOfModules.Presentation.map",
+     "SheafOfModules.generatorsOfIsCokernelFree",
+     "SheafOfModules.Presentation",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.QuasicoherentData.presentation"
+    ],
+    "digest": "d91786c703b780e2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned SheafOfModules presentation and local-generator declarations, unitHomEquiv, and the Tilde.lean gluing hit. These construct presentations or maps from the structure module, or glue sections on affine basic opens. None gives ordinary invertible-module descent from etale cocycles and the prescribed framed sheaf isomorphism; no one-line specialization proves the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-etale-invertible-comparison",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: interpret the polarization on each scheme atlas and its overlaps as a line module on the small etale site, compatibly with pullback (Stacks 03DX, 05VG, 03LC). Returned comparison proof steps 6–7 (ordinary effective descent and sectionwise gluing).",
+   "via": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-framed-line-effective-gluing",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused the existing fpqc covering and invertible-module descent nodes and the normalized tensor-section comparison node; explicitly constructed the inverse-unit descent datum and checked its direction, cocycle and diagonal. Expanded overlap equality and sectionwise sheaf gluing, including inverse, naturality and linearity. No new nodes.",
+  "blueprint": "Realizes the inherited polarization descent input to lem-trf-local-term-locality named in blueprint.from.place: ordinary effective descent and sectionwise gluing (returned comparison steps 6–7). The current ancestor proof has no separate polarization assertion; this is a generic supporting descent tool, and no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic topology comparison to apply fpqc module descent to the given arbitrary etale family; this unit has no covering comparison result."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic effective descent of invertible modules with prescribed cocycle, explicitly called for by the inherited Stacks 023T route; no module descent result lies in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-bab721bdf",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-bab721bdf (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, each cited node's statement (including the blueprint_update of lem-pc-fpqc-descent and of lem-weil-pbc-fpqc-finer-than-etale), and Stacks 03DX(2) with 023T/05VG. The route follows 03DX: descent datum, then effectivity by 023T, then gluing of the local isomorphisms. Step 1: I checked the arrow direction myself against pr1^*M_i→pr2^*M_i' in lem-pc-fpqc-descent (1). phi_ab=m_{g^{-1}}, the Stacks-order cocycle reduces to the given g_ab g_bc=g_ac, and the diagonal is the identity. Step 2: the fpqc-finer node allows any etale covering with arbitrary index sets. Clause (3) gives L and lambda_b=phi lambda_a, hence lambda_a=g lambda_b as stated. No quasi-compactness or separatedness is used. Step 3: the normalized-comparisons node (same unit) gives epsilon, beta, the composition equation and the tensor-unit formula, so A(m_g)=m_{pullback g} and e_a=t_a m_g A(lambda_b)=t_b A(lambda_b)=e_b on all of (R_ab)_et. Steps 4-5: the equalizer axiom with uniqueness gives e_W and d_W, their naturality, additivity and linearity, the restriction e|U_a=e_a, the inverse and the uniqueness. Small cases: empty family, singleton identity cover, Zariski cocycle; the cocycle and normalization hypotheses are redundant given the frames, which is harmless. No new nodes, statement unchanged, no SGA, no cycle (77-node closure), uses contained in proof_deps. Not a duplicate: the only citer is the parent, which uses the item for essential surjectivity only. tool_uses lem-weil-pbc-fpqc-finer-than-etale and lem-pc-fpqc-descent accepted as generic black boxes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFramedLineEffectiveGluing",
+  "declaration": "AlgebraicGeometry.Scheme.etale_framed_line_effective_gluing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.trfOverlapValue",
+   "AlgebraicGeometry.Scheme.trfPulledFrame",
+   "AlgebraicGeometry.Scheme.etale_framed_line_effective_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFramedLineEffectiveGluing.lean",
+  "statement": "theorem etale_framed_line_effective_gluing (X : Scheme.{u}) (G : ringedSiteModules.{u} (Modules.smallEtaleModuleRing X)) {I : Type v} (U : I → X.Etale) (hcover : ∀ x : X, ∃ (a : I) (y : (U a).left), (U a).hom y = x) (t : ∀ a : I, SheafOfModules.unit ((Modules.smallEtaleModuleRing X).over (U a)) ≅ G.over (U a)) (g : ∀ a b : I, Γ((Limits.prod (U a) (U b)).left, ⊤)ˣ) (hframes : ∀ (a b : I) (W : X.Etale) (f : W ⟶ U a) (h : W ⟶ U b) (r : Γ(W.left, ⊤)), (t b).hom.val.app (op (Over.mk h)) r = (t a).hom.val.app (op (Over.mk f)) (trfOverlapValue f h (g a b) * r)) (hcocycle : ∀ (a b c : I) (W : X.Etale) (f : W ⟶ U a) (h : W ⟶ U b) (k : W ⟶ U c), trfOverlapValue f h (g a b) * trfOverlapValue h k (g b c) = trfOverlapValue f k (g a c)) (hdiag : ∀ a : I, trfOverlapValue (𝟙 (U a)) (𝟙 (U a)) (g a a) = 1) : ∃ (L : X.Modules) (hL : L.IsInvertible) (lam : ∀ a : I, (Modules.tensorPullback (U a).hom).obj L ≅ SheafOfModules.unit (U a).left.ringCatSheaf), (∀ (a b : I) (W : X.Etale) (f : W ⟶ U a) (h : W ⟶ U b) (s : Γ((Modules.tensorPullback W.hom).obj L, ⊤)), (trfPulledFrame L (lam a) f).hom.app ⊤ s = trfOverlapValue f h (g a b) * (@id (Γ(W.left, ⊤)) ((trfPulledFrame L (lam b) h).hom.app ⊤ s))) ∧ ∃! e : (@Modules.etaleTensorSectionsSheaf _ L (@Modules.IsInvertible.isQuasicoherent _ L hL)) ≅ (SheafOfModules.toSheaf (Modules.smallEtaleModuleRing X)).obj G, (∀ (W : X.Etale) (r : Γ(W.left, ⊤)) (s : Γ((Modules.tensorPullback W.hom).obj L, ⊤)), e.hom.hom.app (op W) ((((Modules.tensorPullback W.hom).obj L).smul r).hom s) = r • (@id (G.val.obj (op W)) (e.hom.hom.app (op W) s))) ∧ (∀ (a : I) (W : X.Etale) (f : W ⟶ U a) (s : Γ((Modules.tensorPullback W.hom).obj L, ⊤)), e.hom.hom.app (op W) s = (t a).hom.val.app (op (Over.mk f)) ((trfPulledFrame L (lam a) f).hom.app ⊤ s)) ∧ (∀ (a b : I) (W : X.Etale) (f : W ⟶ U a) (h : W ⟶ U b) (s : Γ((Modules.tensorPullback W.hom).obj L, ⊤)), (t a).hom.val.app (op (Over.mk f)) ((trfPulledFrame L (lam a) f).hom.app ⊤ s) = (t b).hom.val.app (op (Over.mk h)) ((trfPulledFrame L (lam b) h).hom.app ⊤ s)) ∧ (∀ (W : X.Etale) (s : Γ((Modules.tensorPullback W.hom).obj L, ⊤)) (y : G.val.obj (op W)), (∀ a : I, G.val.map (Limits.prod.fst (X := W) (Y := U a)).op y = (t a).hom.val.app (op (Over.mk (Limits.prod.snd (X := W) (Y := U a)))) ((trfPulledFrame L (lam a) (Limits.prod.snd (X := W) (Y := U a))).hom.app ⊤ (Modules.etaleTensorSectionsRestriction L (Limits.prod.fst (X := W) (Y := U a)) s))) ↔ y = e.hom.hom.app (op W) s) ∧ (∀ (W : X.Etale) (y : G.val.obj (op W)) (s : Γ((Modules.tensorPullback W.hom).obj L, ⊤)), (∀ a : I, Modules.etaleTensorSectionsRestriction L (Limits.prod.fst (X := W) (Y := U a)) s = (trfPulledFrame L (lam a) (Limits.prod.snd (X := W) (Y := U a))).inv.app ⊤ ((t a).inv.val.app (op (Over.mk (Limits.prod.snd (X := W) (Y := U a)))) (G.val.map (Limits.prod.fst (X := W) (Y := U a)).op y))) ↔ s = e.inv.hom.app (op W) y)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Frames are on the equivalent localized small-etale sites. Products in X.Etale represent fibre products over X. The global isomorphism is stated as an additive-sheaf isomorphism with explicit scalar linearity, exactly a module-sheaf isomorphism; its local and both unique-amalgamation formulas are explicit. Canonical comparisons use the recorded tensor pullback, its normalized composition, and the adjoint tensor-unit map. No equivalence theorem is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8719de48",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Stacks 03DX(2): arbitrary I : Type v, joint surjectivity, Over(U a) frames, hframes/hcocycle/hdiag tested on all W (equivalent to overlap/triple/diagonal forms, sign consistent), ordinary invertible L with tensorPullback λ_a, λ_a = m_g λ_b via canonical trfPulledFrame, ∃! additive iso with explicit smul linearity = module-sheaf iso, local/overlap/amalgamation/inverse clauses present; restriction and frame comparisons come from the same unique section-normalized adjunction, so consistent. Theorem stmt_dep lem-weil-pbc-module-pullback-structure-sheaf: statement uses its conclusion (IsIso ε → asIso, inverse used in the e^{-1} clause) → PASS on that point. Advisories: etaleTensorSectionsRestriction owner def-weil-pbc-etale-tensor-sections-restriction not in stmt_deps; IsInvertible.isQuasicoherent instance has no node. Only item node + module changed; statement verbatim; docstrings OK; no compile (no changes)."
+ }
+}

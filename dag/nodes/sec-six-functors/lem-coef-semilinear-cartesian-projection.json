@@ -1,0 +1,144 @@
+{
+ "id": "lem-coef-semilinear-cartesian-projection",
+ "kind": "statement",
+ "title": "Cartesian projection formula for extension from a coefficient vertex",
+ "statement": "Let J, B and τ be the site and ring-sheaf tower of [def-coef-semilinear-system-models], with independent site universes c,v and coefficient universe max(c,v,r). Fix the scalar data, closed tensor structures, K-flat tensor models, tensorEvaluation comparisons and their ordinaryEvaluationTensor normalization of [def-coef-semilinear-derived-calculus]. For a cartesian derived system M and a vertex n, let L be any left adjoint of the actual derived evaluation e_n, with adjunction adj. For every P in D(B_n), the inverse adjunction transpose of (η_P tensor 1) followed by tensorEvaluation_n inverse is an isomorphism L(P tensor M_n) → L(P) tensor M. This is a tensor projection formula only: it neither supplies a left adjoint nor asserts an internal-Hom comparison.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21; Proposition 4.17(a) and its proof, printed pp.25-26. The unit-defined projection argument is step 2 of lem-coef-semilinear-cartesian-hom-evaluation; the extension from constant quotient rings to arbitrary sheaves of commutative rings is the same local tensor computation."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Prove joint detection for the actual sequence-site evaluations. Transport to strict systems by strictSystemSequenceEquivalence and its derived equivalence. The evaluation comparison is pushforwardCongr for the identity structural ring maps, derived by mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. Apply systemDerivedEvaluation_isIso_iff and reflection by the equivalence.",
+   "uses": [
+    "lem-pur-system-derived-evaluation",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-evaluation-topos",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q at most n, apply semilinearProjectionBelowFactorization to the actual specified adjunction and scalar(h). Normalized M makes reduction(h) invertible. The product of this reduction with the identity is an isomorphism, so its tensor image is invertible. The factorization makes e_q(f) followed by tensorEvaluation_q invertible; cancel that comparison.",
+   "uses": [
+    "lem-coef-semilinear-projection-below-factorization",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q greater than n, compare the given L and its adjunction to derived singleton extension composed with the derived strict-system/sequence-site equivalence. Adjunction.leftAdjointUniq and the evaluation comparison transport systemSingleDerivedAbove to e_q L for every input. This gives zero for the source of e_q(f) and for e_q(LP). The closed tensorRight is a left adjoint and hence preserves zero. TensorEvaluation_q transports this zero to the target of e_q(f). Every map between zero objects is invertible. Apply joint evaluation detection to f.",
+   "uses": [
+    "lem-pur-system-single-derived-extension",
+    "lem-pur-system-single-derived-evaluation",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-evaluation-topos",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "lem-coef-semilinear-projection-below-factorization",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-single-derived-evaluation",
+  "lem-pur-system-single-derived-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21; Proposition 4.17(a), printed pp.25-26. Lean proof by below-level factorization, proved upper-level vanishing, and proved transport of joint evaluation detection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension from one vertex of a semilinear coefficient system satisfies the projection formula for a cartesian complex",
+   "results": "Search returned semilinear-set projections and projective-resolution maps, no coefficient-system projection theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for a left adjoint implies its right adjoint commutes with internal Hom in a cartesian first variable",
+   "results": "MonoidalClosed.internalHomAdjunction₂, expComparison, ihom.adjunction; no derived semilinear projection formula. Loogle CategoryTheory.mateEquiv found mateEquiv and iterated_mateEquiv_conjugateEquiv, used for the fully proved formal part in the parent.",
+   "date": "2026-10-26",
+   "verdict": "Generic mate calculus reused; no geometric projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "system.*projection|system.*Projection|systemSingle|leftExtension|evaluation.*IsRightAdjoint in lean/Sheaf, lean/WeilConjectures and Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "Found proved SystemSingleDerivedExtension, SystemSingleDerivedEvaluation, SystemRingedSequenceSite, SystemEvaluationTopos. Their adjunction supplies the parent left adjoint. UnitAdjunctTensorAction proves coherence, without invertibility. ClosedScalarHomComparison treats a tensor-preserving left adjoint, and does not supply the cartesian projection map for a right evaluation functor. No duplicate of this projection statement found.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing singleton extension, split only its cartesian projection formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCartesianHomEvaluation",
+  "date": "2026-10-26",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Step 2 of lem-coef-semilinear-cartesian-hom-evaluation: projection for extension from a vertex, before applying the tensor-Hom adjunctions.",
+   "via": [
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-semilinear-cartesian-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearCartesianProjection",
+  "file": "lean/Sheaf/Paper/SemilinearCartesianProjection.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearCartesianProjection",
+  "statement": "theorem semilinearCartesianProjection\n    (scalar : ∀ {m n : ℕ} (h : n ≤ m),\n      ScalarData.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h))\n    (closed : Closed.{c, v, r} (coefficientSequenceTopology J)\n      (systemRing.{c, v, max c v r} J B τ))\n    (models : Models.{c, v, r} (coefficientSequenceTopology J)\n      (systemRing.{c, v, max c v r} J B τ) closed)\n    (level : ∀ n : ℕ, Closed.{c, v, r} J (B n))\n    (levelModels : ∀ n : ℕ, Models.{c, v, r} J (B n) (level n))\n    (tensorEvaluation : ∀ n : ℕ,\n      closed.tensor ⋙ e.{c, v, max c v r} J B τ n ≅\n        ((e.{c, v, max c v r} J B τ n).prod\n          (e.{c, v, max c v r} J B τ n)) ⋙ (level n).tensor)\n    (tensorModel : ∀ n : ℕ,\n      TensorComparisonModel.{c, v, r} (coefficientSequenceTopology J) J\n        (systemRing.{c, v, max c v r} J B τ) (B n)\n        (evaluation.{c, v, max c v r} J B τ n) closed (level n) models\n        (levelModels n) (tensorEvaluation n))\n    (ordinary : ∀ (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ),\n      (tensorModel n).ordinary M N = ordinaryEvaluationTensor.{c, v, r} J B τ n M N)\n    (M : DS.{c, v, max c v r} J B τ)\n    (hM : Normalized.{c, v, max c v r} J B τ scalar M) (n : ℕ) :\n    ∀ (L : D.{c, v, max c v r} J (B n) ⥤ DS.{c, v, max c v r} J B τ)\n      (adj : L ⊣ e.{c, v, max c v r} J B τ n)\n      (P : D.{c, v, max c v r} J (B n)),\n      IsIso ((adj.homEquiv _ _).symm\n        ((level n).tensor.map\n            (Prod.mkHom (adj.unit.app P)\n              (𝟙 ((e.{c, v, max c v r} J B τ n).obj M))) ≫\n          (tensorEvaluation n).inv.app (L.obj P, M)))",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T082524-L-2185168",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T100230-L-4155293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

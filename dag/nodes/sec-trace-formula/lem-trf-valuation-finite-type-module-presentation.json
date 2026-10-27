@@ -29,20 +29,10 @@
    }
   },
   {
-   "text": "For $d\\geq0$ let $F_dM$ be the $A$-span of $b_1^{\\alpha_1}\\cdots b_n^{\\alpha_n}m_j$ with $\\sum_i\\alpha_i\\leq d$. Then $F_dM\\subseteq F_{d+1}M$, $b_iF_dM\\subseteq F_{d+1}M$, and $\\bigcup_dF_dM=M$, by the chosen generators. Put $N=\\bigoplus_{d\\geq0}F_dM\\,t^d$, viewed as the $A$-module of finite formal polynomials with degree-$d$ coefficient in $F_dM$. For the polynomial ring $P=A[X_0,X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], let $X_0$ act by $t$ and $X_i$ by $b_it$. These commuting $A$-linear actions define a $P$-module, graded by polynomial degree. It is generated over $P$ by the $m_jt^0$: the spanning term $b^\\alpha m_jt^d$ equals $X_0^{d-|\\alpha|}X_1^{\\alpha_1}\\cdots X_n^{\\alpha_n}(m_jt^0)$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
-   }
-  },
-  {
-   "text": "The flat $A$-module $M$ is torsion-free by [lem-trf-flat-module-torsionfree-domain], since $A$ is a domain. If $0\\ne a\\in A$ and $a\\sum_dx_dt^d=0$ in $N$, each $ax_d=0$ in $M$, hence every $x_d=0$. Thus $N$ is torsion-free as an $A$-module. Apply [lem-trf-valuation-torsionfree-flat] to deduce that $N$ is flat over $A$.",
+   "text": "By [lem-trf-flat-module-torsionfree-domain], $M$ is torsion-free over the domain $A$. Apply [lem-trf-generator-filtration-graded-module] to the chosen $b_i,m_j$. It constructs $F_dM$, the finite graded $P=A[X_0,\\ldots,X_n]$-module $N=\\bigoplus_dF_dM\\,t^d$, and its torsion-freeness over $A$. By [lem-trf-valuation-torsionfree-flat], $N$ is flat over $A$.",
    "uses": [
     "lem-trf-flat-module-torsionfree-domain",
+    "lem-trf-generator-filtration-graded-module",
     "lem-trf-valuation-torsionfree-flat"
    ],
    "elementary": false,
@@ -52,7 +42,7 @@
    }
   },
   {
-   "text": "Apply [lem-trf-local-graded-flat-module-finite-presentation] with coefficient ring $R=A$, polynomial ring $P$ with all $n+1$ variables of weight $1$, and graded module $L=N$ (zero in negative degrees). Step 1 gives locality of $A$, Step 2 gives the internal grading and finite generation, and Step 3 gives flatness over $A$. Hence $N$ is finitely presented over $P$.",
+   "text": "Apply [lem-trf-local-graded-flat-module-finite-presentation] to $R=A$, $L=N$ and the polynomial ring $P$ with all $n+1$ weights equal to $1$. The valuation domain $A$ is nonzero and Step 1 supplies locality; Step 2 supplies the internal grading, finite generation and $A$-flatness. Thus $N$ is finitely presented over $P$.",
    "uses": [
     "lem-trf-local-graded-flat-module-finite-presentation"
    ],
@@ -63,29 +53,21 @@
    }
   },
   {
-   "text": "Evaluation $\\epsilon:N\\to M$, $\\sum_dx_dt^d\\mapsto\\sum_dx_d$, is $P$-linear for the action $X_0\\mapsto1$, $X_i\\mapsto b_i$ on $M$, and is surjective because $\\bigcup_dF_dM=M$. Its kernel is $(X_0-1)N$: if $\\sum_{d=0}^Dx_d=0$, put $y_d=-\\sum_{i=0}^dx_i\\in F_dM$ for $0\\leq d<D$. Direct multiplication gives $(t-1)\\sum_{d=0}^{D-1}y_dt^d=\\sum_{d=0}^Dx_dt^d$. For $D=0$ the kernel element is zero. Conversely evaluation kills $(t-1)N$. Therefore $N/(X_0-1)N\\cong M$, with the stated action of every variable.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
-   }
-  },
-  {
-   "text": "Write the finite presentation from Step 4 as $N=P^v/\\langle h_1,\\ldots,h_u\\rangle_P$, using [def-sc-finitely-presented-module]. Put $Q=A[X_1,\\ldots,X_n]$. Evaluation $X_0=1$ identifies $P/(X_0-1)$ with $Q$ by the polynomial universal property [def-weil-pbc-mv-polynomial-ring]. Quotienting $N$ by $(X_0-1)N$ gives $P^v/(\\langle h_1,\\ldots,h_u\\rangle_P+(X_0-1)P^v)$, which is $Q^v/\\langle h_1(1,X),\\ldots,h_u(1,X)\\rangle_Q$: the coordinate quotient map has kernel $(X_0-1)P^v$, and sends the relation span onto exactly that evaluated span. Step 5 identifies this quotient with $M$. Thus $M$ is finitely presented over $Q$.",
+   "text": "Apply [lem-trf-filtered-module-evaluation-presentation] to $T_i(x)=b_ix$ and the filtration from Step 2. These maps are $A$-linear by the scalar tower and commute since $b_i(b_jx)=(b_ib_j)x=(b_jb_i)x=b_j(b_ix)$. Its increasingness, exhaustiveness and $b_iF_dM\\subseteq F_{d+1}M$ are supplied there. It identifies evaluation at $t=1$ with $N/(X_0-1)N\\cong M$ and evaluates a finite presentation from Step 3, proving $M$ finitely presented over $Q=A[X_1,\\ldots,X_n]$. The $Q$-action is $X_ix=b_ix$.",
    "uses": [
-    "def-sc-finitely-presented-module",
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-trf-filtered-module-evaluation-presentation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
    }
   },
   {
-   "text": "The map $Q\\to B$, $X_i\\mapsto b_i$, is surjective by the algebra generators of Step 1. In particular $B$ is of finite type as a $Q$-algebra (no further generators). The $Q$-action on $M$ in Step 6 is restriction of its given $B$-action, as checked on each $X_i$ in Step 5. Apply [lem-trf-finitely-presented-over-subring] to $Q\\to B$ and $M$: finite presentation over $Q$ from Step 6 implies finite presentation over $B$.",
+   "text": "The map $Q\\to B$, $X_i\\mapsto b_i$, is surjective by the chosen algebra generators and the polynomial universal property [def-weil-pbc-mv-polynomial-ring]. Hence $B$ is a finite type $Q$-algebra, needing no extra generators [def-weil-pbc-finite-type-algebra]. Step 4 identifies the $Q$-action on $M$ with restriction of its given $B$-action. Apply [lem-trf-finitely-presented-over-subring] to $Q\\to B$ and Step 4 to conclude that $M$ is finitely presented over $B$.",
    "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finite-type-algebra",
     "lem-trf-finitely-presented-over-subring"
    ],
    "elementary": false,
@@ -99,11 +81,12 @@
   "def-trf-valuation-ring",
   "def-weil-pbc-finite-type-algebra",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-mv-polynomial-ring",
   "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-generator-filtration-graded-module",
   "lem-trf-valuation-torsionfree-flat",
   "lem-trf-local-graded-flat-module-finite-presentation",
-  "def-sc-finitely-presented-module",
+  "lem-trf-filtered-module-evaluation-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
   "lem-trf-finitely-presented-over-subring"
  ],
  "proof_origin": {
@@ -202,21 +185,32 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-valuation-finite-type-module-presentation",
   "worker": "stage1",
-  "summary": "Proved Tag 053E(2) by an explicit degree-filtration polynomial module N inside M[t], so N is finite graded and torsion-free over A. Applied the smaller generic graded local-ring theorem 053C, recovered M by the explicit evaluation kernel (X_0-1)N, and evaluated a finite presentation before transferring it along Q to B using the existing 0561 node. Added only one statement-only node, searched with all four authorized modes; no hypothesis change. Added the missing valuation-ring definition citation.",
-  "blueprint": "Realizes the ancestor lem-trf-local-term-locality proof (1)--(2), normal-cone semistable-alteration branch, via the flat-family dimension/valuation-ring finite-presentation input. In Tag 053E(2) this is the last sentence applying the graded polynomial-module theorem; Steps 2 and 5 give the homogenization/dehomogenization argument explicitly."
+  "summary": "Q124 repair of the released re-split order: unchanged statement and route; separates the explicit finite graded torsion-free homogenization and evaluation-kernel/presentation arguments into two comparably sized statement-only unsplit nodes. Parent assembles these with existing 053C, 0539 and 0561 inputs. All seven old arguments retained in the report for their future workers; honest searches, full source/hypothesis/edge-case and citation review. Return L (head 2c514f2bf76): rebased by the delivery tool onto current origin/sheaf-dag, re-read all cited statements and verified all eleven citation quotes against the current DAG; the retained seven-step baseline matches the current parent proof. The reviewed side completion remains reopened by the released stage-1 repair order; the two-node repair is submitted for L to promote. Current landing-return repair (2026-10-23): initial dry run passed at 2dd42def14d on the current server base. Recompared the saved seven-step returned baseline with the live parent, re-read all current dependency statements and verified every citation quote. Made the nonzero coefficient-ring and commuting A-linear endomorphism hypotheses explicit in assembly Steps 3 and 4; all statements and recorded searches are retained.",
+  "blueprint": "Same normal-cone specialization branch of lem-trf-local-term-locality proof (1)--(2); new nodes realize the generator-filtration construction and dehomogenization within its existing valuation finite-presentation input."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q96-6c74c1d8a",
-  "group": "Q96",
+  "reviewer": "NT-cc-Q124-82790347b",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-6c74c1d8a (reviewer sub-agent of L); spot-checked: Read the item, new Tag 053C node, unit/chapter route, all cited statements, and Stacks Tags 053C, 053E, and 0561. Verified every hypothesis, seven proof steps, filtration and evaluation-kernel calculations, Q→B finite-presentation transfer, edge cases, searches, duplicate checks, and route restrictions. No mathematical or procedural fault found."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-82790347b (reviewer sub-agent of L); spot-checked: I read Stacks 053E(2) (more-algebra 5966-6001), 053C, 0539, 052N (algebra 13730-13769) and 0561, every cited statement and the unit sk-i-curve-zero. Re-split: old Step 1 is kept verbatim. Old Steps 2-3 (construction and coefficientwise torsion-freeness) are now lem-trf-generator-filtration-graded-module. Old Steps 5-6 (evaluation kernel and evaluated presentation) are now lem-trf-filtered-module-evaluation-presentation. Old Steps 3, 4 and 7 cite existing nodes (0539 both ways, 053C, 0561). No argument was dropped. The two new nodes are of comparable size, independent, and neither restates the item. The assembly is 2295 characters. Hypotheses: A is nonzero and local (Step 1, including the field case); all weights are 1; N is Z-graded with negative pieces 0, finite over P and A-flat; T_i=b_i are A-linear and commute because B is commutative; the filtration is increasing and exhaustive with b_iF_d in F_{d+1}; Q->B is surjective, and the Q-action is the restriction of the B-action. New nodes checked: well-definedness and commutation of the shifts, the grading, generation via X_0^{d-|a|}X^a m_j, coefficientwise torsion-freeness, the kernel via y_d=-sum_{i<=d} x_i (D=0, D=1, general D), and the evaluated presentation by right exactness of tensoring with P/(X_0-1)=Q. Edge cases: n=0, r=0, B=0, A a field. Worked example: Z[1/2] over Z gives N=Z[X0,X1]/(2X1-X0), which evaluates to Z[X1]/(2X1-1). Duplicate search with rg -L (dehomogeniz, homogeniz, Rees, X_0-1, 053E, 052N, 0561, filtrations): I opened the per/pbc/popescu dehomogenization nodes and the trf finite-presentation nodes; none is a duplicate. No cycle, no SGA citation, no tool_uses. Delta against the earlier passed heads 2c514f2 and d9d02e9: only two correct hypothesis-check sentences in item Steps 3 and 4. Maintainer note: this delivery needs promotion, not more stage-1 work."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation",

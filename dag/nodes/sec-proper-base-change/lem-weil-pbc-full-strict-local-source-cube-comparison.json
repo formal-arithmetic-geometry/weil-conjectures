@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-full-strict-local-source-cube-comparison",
+ "kind": "statement",
+ "title": "Adopted full strict-localization source cube stalk comparison",
+ "statement": "Let S,T,X,X' be schemes [def-pc-scheme], f:X→S quasi-compact (the inverse image of every affine open is quasi-compact) and quasi-separated [def-weil-quasi-separated-morphism], and (g':X'→X,f':X'→T,f,g:T→S) a cartesian square [def-weil-pbc-cartesian-square]. Let k,k' be separably closed fields, Ω an algebraically closed field, σ:Spec k→S, τ:Spec k'→T, ι:Spec k'→Spec k, ν:Spec Ω→Spec k', with ι≫σ=τ≫g [def-weil-geometric-point]. Let A,B be strictly henselian local rings [def-weil-pbc-henselian-terminology], eA:Spec A≅strictLocalization(νισ), eB:Spec B≅strictLocalization(ντ), where strictLocalization is Spec of the full pointed affine étale neighbourhood coordinate-ring colimit, and put jA=eA.hom≫strictLocalizationToBase(νισ), jB=eB.hom≫strictLocalizationToBase(ντ). These are the adopted full models of [def-weil-pbc-strict-henselization-limit] and the canonical structural maps of [def-weil-pbc-strict-henselization-structural-map], canonically isomorphic to the small representative-colimit models. Let φ:A→B be local and ρA:Spec k→Spec κA, ρB:Spec k'→Spec κB satisfy Spec φ≫jA=jB≫g, ρA≫rA≫jA=σ, ρB≫rB≫jB=τ, and ρB≫Spec(κφ)=ι≫ρA, where rA,rB are the residue closed-point maps and κφ is the induced residue-field map. Choose X₀ with maps p₀:X₀→X and f₀:X₀→Spec A making a cartesian square over f,jA; choose X₁ with maps p₁:X₁→X₀ and f₁:X₁→Spec B making a cartesian square over f₀,g₀=Spec φ. For an abelian etale sheaf G on X [def-weil-pbc-abelian-etale-sheaves] and q∈ℕ put G₀=p₀^*G, K=G[0], K₀=G₀[0], with exact derived inverse image [def-weil-pbc-derived-inverse-image] and derived direct image [def-weil-pbc-direct-image]. Let C₁=H^q(g^*Rf_*K), C₂=H^q(Rf'_*g'^*K), L₁=H^q(g₀^*Rf₀_*K₀), L₂=H^q(Rf₁_*p₁^*K₀). Let e:C₁→C₂ and e₀:L₁→L₂ be homology of the two derived exchange maps [def-weil-pbc-derived-exchange], and t₀:Spec κB→Spec B the closed point. Additionally choose b:X1->X' such that b g'=p1 p0 and (b,f1,f',jB) is cartesian. Use the explicit derived comparison maps u1,u2 of [lem-weil-pbc-abelian-exchange-cube-comparisons], and put t=rB rhoB:Spec k'->Spec B. The point equation identifies t jB with tau. The induced homology stalk map r1:(H^q M1)_tau -> (H^q N1)_t is an isomorphism. This asserts only invertibility of the fixed source restriction map, with no assertion about exchange or its compatibility.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationExchangeCubeStalkIsosSource.lean; literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale.isIso_strictHenselization_exchangeCube_stalkComparisons_source; Stacks Project Tags 03Q9 and 03QO"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-geometric-point",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-abelian-exchange-cube-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "This node attaches the existing fully proved adopted source declaration, without changing or repeating its Lean proof. Its proof applies closed-stalk strict-local base change to f and the affine presentation eA at the residue-field point induced by φ. Naturality of residue maps identifies its point with t followed by Spec φ. The stalk-of-inverse-image and exact-inverse-image/homology natural isomorphisms transport invertibility through Spec φ. On unfolding the fixed source cube comparison, its other factors are composition, equality and inverse-image/single-complex isomorphisms. Homology and the stalk functor preserve them. The remaining factors of derivedStalkComparison are isomorphisms as well. Thus the named canonical map is invertible. No target component or exchange compatibility is assumed. The complete proof is already in the adopted module and its standard axioms are checked by the consumer probe.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "adopted source-library proof, read and attached by Q4",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationExchangeCubeStalkIsosSource.lean",
+  "place": "Two proved private helpers and the public source-comparison theorem; no source-library change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The source comparison for a strict localization base change cube is an isomorphism on geometric stalks",
+   "results": "8 hits: AlgebraicGeometry.isIso_SpecMap_stakMap_localization, AlgebraicGeometry.PresheafedSpace.stalkMap.isIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, AlgebraicGeometry.StructureSheaf.stalkIso, AlgebraicGeometry.localRingHom_comp_stalkIso",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The complete public theorem was found by rg in the adopted source library.",
+   "digest": "80b89651dc8e5951"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change source comparison is invertible on a geometric stalk after strict localization",
+   "results": "8 hits: AlgebraicGeometry.isIso_SpecMap_stakMap_localization, AlgebraicGeometry.HasRingHomProperty.stalkMap_of_respectsIso, AlgebraicGeometry.HasRingHomProperty.stalkMap, AlgebraicGeometry.stalkwise_isLocalAtSource_of_respectsIso, AlgebraicGeometry.Spec_map_localization_isIso, AlgebraicGeometry.stalkwise_isZariskiLocalAtSource_of_respectsIso, AlgebraicGeometry.HasRingHomProperty.stalkwise, AlgebraicGeometry.stalkwise_respectsIso",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The complete public theorem was found by rg in the adopted source library.",
+   "digest": "2b62b0c0f155c665"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.isIso_map_iff\"",
+   "results": "1 hits: CategoryTheory.NatIso.isIso_map_iff",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The complete public theorem was found by rg in the adopted source library.",
+   "digest": "a76db0a45afe4b0d"
+  },
+  {
+   "tool": "grep",
+   "query": "smallStrictHenselizationColimitIso_toBase|isIso_strictHenselization_exchangeCube_stalkComparisons_source",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The complete public theorem was found by rg in the adopted source library.",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource",
+  "date": "2026-10-24",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Source strict-henselization stalk comparison ΦS in the first vertical arrow of the proof diagram of lemma-weil-pbc-p1-exchange-geometric-stalk. Record the existing full-model theorem before transporting it to the small-model source obligation.",
+   "via": [
+    "lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos-source"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationExchangeCubeStalkIsosSource.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_strictHenselization_exchangeCube_stalkComparisons_source",
+  "statement": "theorem Etale.isIso_strictHenselization_exchangeCube_stalkComparisons_source\n    {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}\n    [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}\n    (sq : IsPullback g' f' f g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictLocalization (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictLocalization (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictLocalizationToBase (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictLocalizationToBase (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictLocalizationToBase (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    {X₀ X₁ : Scheme.{u}} (p₀ : X₀ ⟶ X) (f₀ : X₀ ⟶ Spec (.of A))\n    (sq₀ : IsPullback p₀ f₀ f\n      (eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ)))\n    (p₁ : X₁ ⟶ X₀) (f₁ : X₁ ⟶ Spec (.of B))\n    (sq₁ : IsPullback p₁ f₁ f₀ (Spec.map (CommRingCat.ofHom φ)))\n    (b : X₁ ⟶ X')\n    (sqB : IsPullback b f₁ f'\n      (eB.hom ≫ strictLocalizationToBase (ν ≫ τ)))\n    (hb : b ≫ g' = p₁ ≫ p₀)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let jA := eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ)\n    let jB := eB.hom ≫ strictLocalizationToBase (ν ≫ τ)\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let t := ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))\n    let ht : t ≫ jB = τ := by simpa only [t, jB, Category.assoc] using hρB\n    let h : jB ≫ g = g₀ ≫ jA := by simpa only [jB, g₀, jA, Category.assoc] using hφ.symm\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let K₀ := (DerivedCategory.Plus.singleFunctor _ 0).obj\n      (((p₀)^*[AddCommGrpCat.{u + 1}]).obj G)\n    let M₁ := (R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙\n      D+((g)^*[AddCommGrpCat.{u + 1}])).obj K\n    let M₂ := (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n      R+((f')_*[AddCommGrpCat.{u + 1}])).obj K\n    let N₁ := (R+((f₀)_*[AddCommGrpCat.{u + 1}]) ⋙\n      D+((g₀)^*[AddCommGrpCat.{u + 1}])).obj K₀\n    let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙\n      R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀\n    IsIso (derivedStalkComparison jB t τ ht M₁ N₁\n      (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-24",
+  "note": "Existing complete full strictLocalization theorem. It has a different presentation signature from the smallModel_ theorem; no new Lean declaration or hole is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261024T190647-L-4187019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261024T190647-L-4187019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

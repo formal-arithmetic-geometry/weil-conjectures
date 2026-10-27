@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-completed-unit-multiplication-components",
+ "kind": "statement",
+ "title": "Finite evaluation of canonical whole-system regular multiplication",
+ "statement": "For a prime l, a finite extension E of Q_l, a scheme morphism f:X to Y, reductions rX and rY of [def-pur-completed-unit-pullback-data], and n a natural number, evaluation of systemMultiplication followed by rX.finite equals inverseEvaluation.hom followed by pullback of rY.finite and finiteMultiplication. All arrows are those fixed by the actual coefficient ring maps and adjunctions in [lem-pur-completed-primitive-counit-comparison].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 3.5 and 6.5, Lemmas 6.5.9 and 6.8.2; regular-module calculation in lem-pur-completed-unit-pullback-tower"
+ },
+ "stmt_deps": [
+  "def-pur-completed-unit-pullback-data",
+  "lem-pur-completed-primitive-counit-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Cancel inverseEvaluation on the source and transpose under the finite adjunction. A generic adjunction-mate calculation uses its normalized unit equation and naturality of the direct-evaluation isomorphism. Finite Hom-equivalence naturality reduces to the ring arrows. On each section, the equality-transport map is the identity up to HEq; rX.finite_sections and rY.finite_sections remove the two finite identifications. Equality induction for the two ring-section transports identifies ringComponent with the finite constant-section ring map. The transposes agree, and injectivity of the Hom equivalence gives the original equation.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-primitive-counit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit normalized regular-module argument, refined from the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient system of scalar extension of a regular ring module is isomorphic to the regular quotient ring system",
+   "results": "8 hits concerning ordinary quotient modules and regular sequences",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "12 hits including unit, unitHomEquiv, unit_val and freeCofan; useful ordinary interface only",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*unit|unit.*reduction|system.*regular",
+   "results": "6 unrelated hits; direct project search finds the supplied calculus and strict regular tensor calculations",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The regular module sheaf has canonical finite quotient reductions and its derived inverse limit is the completed coefficient sheaf",
+   "results": "8 hits: AdicCompletion, AdicCompletion.of_apply, AdicCompletion.of, ModuleCat.tildeInModuleCat, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, SheafOfModules.hasLimit, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-25",
+   "verdict": "no exact match: ordinary units and limits do not supply normalized derived whole-system comparison or completed scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "results": "Read lines 60-111: explicit ring-section map, its adjoint, and invertibility under finality. Used for the ordinary multiplication; no completed quotient-system or scalar-natural comparison.",
+   "date": "2026-10-25",
+   "verdict": "useful ordinary ingredient only; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedUnitPullbackTower",
+  "date": "2026-10-24",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-unit-pullback-tower",
+   "place": "Regular coefficient calculation and coefficient transport in proof steps 1–6"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedUnitMultiplicationComponents",
+  "file": "lean/Sheaf/Paper/CompletedUnitMultiplicationComponents.lean",
+  "declaration": "WeilConjectures.CompletedUnitPullback.completedUnitMultiplicationComponents",
+  "statement": "theorem completedUnitMultiplicationComponents {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (rX : Reduction l E X (calculus l E X))\n    (rY : Reduction l E Y (calculus l E Y)) (n : ℕ) :\n    (coefficientSequenceEvaluation l E X n).map (systemMultiplication l E f) ≫\n        (rX.finite n).hom =\n      (PrimitiveCounit.inverseEvaluation l E f n).hom.app (systemUnit l E Y) ≫\n        (integralOperationsLevelPullback l E f n).map (rY.finite n).hom ≫\n          finiteMultiplication l E f n",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item modules vs clone item (moved block identical, target signature identical); 5 new nodes' lean.statement vs files; sorry lemmas vs CoefficientReductionModels/PullModel pinning; importer AdicUnitTraceReductionData compiled against delivered set"
+ }
+}

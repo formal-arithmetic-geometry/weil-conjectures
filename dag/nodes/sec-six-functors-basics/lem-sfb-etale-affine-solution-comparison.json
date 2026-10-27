@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-etale-affine-solution-comparison",
+ "kind": "statement",
+ "title": "Affine etale solution sheaves under a local ringed-topos morphism",
+ "statement": "Work in [def-weil-size-convention]. Let $A,B$ be commutative rings, $X=\\operatorname{Spec}A$ and $Y=\\operatorname{Spec}B$ [def-pc-scheme, def-weil-affine-spectrum], with small etale sites [def-weil-pbc-etale-site] and structure sheaves $\\mathcal O_X(T)=\\Gamma(T,\\mathcal O_T)$ and $\\mathcal O_Y(T)=\\Gamma(T,\\mathcal O_T)$. Let $g:(\\operatorname{Sh}(X_{\\mathrm{et}}),\\mathcal O_X)\\to(\\operatorname{Sh}(Y_{\\mathrm{et}}),\\mathcal O_Y)$ be a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism]. Assume its square on the unit subsheaves $g^{-1}(\\mathcal O_Y^\\times)\\to\\mathcal O_X^\\times$ and $g^{-1}\\mathcal O_Y\\to\\mathcal O_X$ is cartesian; the unit subsheaf consists of locally invertible sections. Let $\\varphi:B\\to A$ be the map on global sections induced by $g^\\sharp$ (using $g^{-1}1=1$), and put $f=\\operatorname{Spec}\\varphi:X\\to Y$. For an affine etale $Y$-scheme $V=\\operatorname{Spec}C$, write $h_V(T)=\\operatorname{Hom}_Y(T,V)$ [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. There are isomorphisms of sheaves\n$$\\alpha_V:g^{-1}h_V\\xrightarrow{\\sim}h_{X\\times_YV},$$\nnatural for every $Y$-morphism between affine etale $Y$-schemes. The fibre product is [def-pc-fibre-product]. For every $c\\in C$, let $\\operatorname{ev}_c:h_V\\to\\mathcal O_Y$ send $u:T\\to V$ to $u^*c$, and let $\\operatorname{ev}'_c:h_{X\\times_YV}\\to\\mathcal O_X$ send $u:T\\to X\\times_YV$ to $(\\operatorname{pr}_Vu)^*c$. Then\n$$\\operatorname{ev}'_c\\alpha_V=g^\\sharp\\circ g^{-1}(\\operatorname{ev}_c).$$\nNo isomorphism of inverse-image functors on all sheaves is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04I6 (lemma-morphism-ringed-etale-topoi-affines), proof from the construction of the global ring map through the polynomial equalizer, strictly henselian stalk comparison and functoriality diagrams, and final coordinate-compatibility diagram; the affine generator comparison only."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-etale-ring-map-iff-etale-affine] to $V\\to Y$: $B\\to C$ is an etale ring map, in particular finitely presented. By [lem-exc-etale-jacobian-presentation] choose a square presentation $C=B[x_1,\\ldots,x_n]/(P_1,\\ldots,P_n)$ with Jacobian determinant a unit in $C$, in the precise sense of [def-exc-jacobian-presentation]. This is a global presentation of the given algebra, not a cover of $V$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-exc-etale-jacobian-presentation",
+    "def-exc-jacobian-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, first paragraph after the global ring map; algebra.tex Tag 00U9 (lemma-etale-standard-smooth)"
+   }
+  },
+  {
+   "text": "For any $Y$-scheme $T$, [lem-a1-locally-ringed-space-affine-adjunction] identifies $\\operatorname{Hom}_Y(T,V)$ with $B$-algebra maps $C\\to\\Gamma(T,\\mathcal O_T)$: the condition of being over $Y$ is equality of the maps on $B$, by naturality and injectivity of that same adjunction. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] and the quotient relations identify these maps with tuples satisfying $P_i=0$. Thus $h_V$ is the equalizer of polynomial evaluation and zero on $\\mathcal O_Y^n$. By the fibre-product universal property [def-pc-fibre-product], the same argument on $X$ identifies $h_{X\\times_YV}$ with the solution equalizer for $P_i^\\varphi$ on $\\mathcal O_X^n$. These are sheaves by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. Inverse image preserves finite limits, and $g^\\sharp$ preserves ring operations [def-weil-pbc-ringed-topos-morphism]. For each polynomial, expand its finite sum of coefficient-monomial terms: applying $g^\\sharp$ gives precisely evaluation of its coefficient image under $\\varphi$, since $g^\\sharp$ sends the pulled-back global section $b$ to $\\varphi(b)$. Therefore the coordinate map $(g^\\sharp)^n$ carries the pulled-back first equalizer to the second, giving a unique map $\\alpha_V$ commuting with the coordinate inclusions.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, polynomial equalizer and dotted-arrow construction"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of $X$, with associated topos point $p$ [lem-fix-geometric-stalk-topos-point]. Put $q=g\\circ p$. By [lem-trf-etale-topos-points-geometric] choose a geometric point $\\bar y$ representing $q$, in an enlarged common universe if necessary. The composition comparison [lem-sfb-ringed-topos-pullback-stalk] identifies $(g^{-1}\\mathcal O_Y)_p$ with $(\\mathcal O_Y)_q$. Put $R=(\\mathcal O_Y)_q$ and $S=(\\mathcal O_X)_p$. Both are strict henselizations of ordinary local rings by the ring-isomorphism clause of [lem-sfb-etale-zariski-module-geometric-stalk], and hence strictly henselian by clause 3 of [lem-weil-pbc-strict-henselization-triples], applied at the maximal ideal of each local ring. The stalk of $g^\\sharp$ is a ring map $\\theta:R\\to S$.",
+   "uses": [
+    "lem-fix-geometric-stalk-topos-point",
+    "lem-trf-etale-topos-points-geometric",
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-sfb-etale-zariski-module-geometric-stalk",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, stalk comparison paragraph; Tag 04HU; Tag 04HX; algebra.tex Tags 04GW and 04GP"
+   }
+  },
+  {
+   "text": "The point inverse image preserves finite limits [lem-fix-geometric-stalk-topos-point]. For a commutative ring sheaf $H$, its unit subsheaf is isomorphic, by first projection, to the finite-limit object $\\{(a,b)\\in H^2:ab=1\\}$: an inverse is unique and locally existing inverses glue. Applying $p^{-1}$ therefore identifies the stalk of the unit subsheaf with the units of the stalk ring; the same holds after applying $g^{-1}$. Apply $p^{-1}$ to the assumed cartesian unit square. It says exactly $\\theta^{-1}(S^\\times)=R^\\times$. Thus $\\theta$ is a local homomorphism as required by the solution-invariance lemma.",
+   "uses": [
+    "lem-fix-geometric-stalk-topos-point",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, sentence asserting that the stalk map is local; finite-limit unpacking of the locality hypothesis"
+   }
+  },
+  {
+   "text": "The polynomial system over $R$ is obtained from $P_i$ via the global-section germ map $B\\to R$. Its quotient has a square Jacobian presentation: if $D\\Delta-1=\\sum H_iP_i$ in $B[x]$ expresses an inverse of the determinant modulo the relations, applying $B\\to R$ gives the same identity over $R$. Thus the determinant is a unit in the quotient over $R$, and [lem-exc-etale-jacobian-presentation] and [lem-weil-pbc-etale-ring-map-iff-etale-affine] show its affine spectrum is etale over $\\operatorname{Spec}R$. The coefficients in $S$ agree whether mapped through $B\\to R\\xrightarrow{\\theta}S$ or $B\\xrightarrow{\\varphi}A\\to S$, by the global-section compatibility in step 2. Since the point inverse image preserves the finite equalizers and products [lem-fix-geometric-stalk-topos-point], the stalk of $\\alpha_V$ is precisely the coordinatewise $\\theta$ map on these solution sets. Apply [lem-sfb-strict-henselian-etale-solutions] using steps 3 and 4 to obtain a bijection. This holds at every geometric point of $X$, so [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] makes $\\alpha_V$ an isomorphism. For empty $X$ the same conservative statement is vacuous and still gives the isomorphism.",
+   "uses": [
+    "lem-exc-etale-jacobian-presentation",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-fix-geometric-stalk-topos-point",
+    "lem-sfb-strict-henselian-etale-solutions",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, isomorphism on stalks; algebra.tex Tag 04GX (lemma-strictly-henselian-solutions); Tag 03PU"
+   }
+  },
+  {
+   "text": "For a $Y$-map $V_1\\to V_2$, write its algebra map $C_2\\to C_1$ on the chosen generators as $x_{2,j}\\mapsto Q_j(x_{1,1},\\ldots,x_{1,n_1})$, with $Q_j\\in B[x_{1,1},\\ldots,x_{1,n_1}]$. Such lifts exist because the presentation of $C_1$ is a quotient of that polynomial ring. On solution equalizers the map of representables is exactly substitution by the $Q_j$. The ring-operation preservation of [def-weil-pbc-ringed-topos-morphism] gives $g^\\sharp Q_j(z)=Q_j^\\varphi(g^\\sharp z)$, by the finite-sum expansion already written in step 2. Hence the two composites in the naturality square have equal coordinates in $\\mathcal O_X^{n_2}$. The solution equalizer inclusion is injective, so the composites are equal. Taking the identity of $V$ with any two presentations in this argument also proves presentation independence. The substitutions and their coefficient maps are those of the polynomial universal property [def-weil-pbc-mv-polynomial-ring]; the geometric interpretation is the affine-target adjunction [lem-a1-locally-ringed-space-affine-adjunction].",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, functoriality diagrams, with the polynomial substitution argument made explicit"
+   }
+  },
+  {
+   "text": "For $c\\in C$ choose a polynomial representative $Q\\in B[x_1,\\ldots,x_n]$. In the solution descriptions, $\\operatorname{ev}_c=Q(\\operatorname{ev}_{x_1},\\ldots,\\operatorname{ev}_{x_n})$, and $\\operatorname{ev}'_c$ is the corresponding $Q^\\varphi$ evaluation. The defining coordinate square for $\\alpha_V$ and preservation of $0,1,+,\\cdot$ by $g^\\sharp$ [def-weil-pbc-ringed-topos-morphism] imply\n$$\\operatorname{ev}'_c\\alpha_V=Q^\\varphi\\bigl(g^\\sharp g^{-1}\\operatorname{ev}_{x_1},\\ldots,g^\\sharp g^{-1}\\operatorname{ev}_{x_n}\\bigr)=g^\\sharp g^{-1}(\\operatorname{ev}_c).$$\nChanging $Q$ by a sum of multiples of the $P_i$ changes neither side, since both tuples satisfy the relations. This proves the asserted equality for every $c$, including constants from $B$.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04I6, final coordinate-compatibility diagram, extended to all elements by polynomial evaluation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-exc-etale-jacobian-presentation",
+  "def-exc-jacobian-presentation",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-trf-etale-topos-points-geometric",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "lem-sfb-etale-zariski-module-geometric-stalk",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sfb-strict-henselian-etale-solutions",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04I6 (lemma-morphism-ringed-etale-topoi-affines), polynomial equalizer, stalk comparison, functoriality and final coordinate diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictly.henselian.*solution|ringed.*topo|inverseImage.*[Rr]epresentable",
+   "results": "[grep] OK 2 hit(s). Mathlib/Geometry/RingedSpace/Basic.lean; Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme base-change squares, henselian root lifting or existence of pullbacks in etale categories. None compares an arbitrary local ringed-topos inverse image with base change on affine representables."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally ringed etale topoi affine scheme inverse image representable polynomial solutions strictly henselian",
+   "results": "[leansearch] OK 8 hit(s). HenselianLocalRing.TFAE; HenselianLocalRing; AlgebraicGeometry.Scheme.mk.noConfusion; HenselianLocalRing.mk; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme; RingHom.Etale.propertyIsLocal; AlgebraicGeometry.localRingHom_comp_stalkIso; RingHom.Etale",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme base-change squares, henselian root lifting or existence of pullbacks in etale categories. None compares an arbitrary local ringed-topos inverse image with base change on affine representables."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"pullback\"",
+   "results": "[loogle] OK 2 hit(s). AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.instHasPullbacksAffineEtale",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme base-change squares, henselian root lifting or existence of pullbacks in etale categories. None compares an arbitrary local ringed-topos inverse image with base change on affine representables."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local morphism of ringed etale topoi of affine schemes the inverse image of an affine etale representable is its base change along the global section ring homomorphism",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ; AlgebraicGeometry.HasRingHomProperty.appLE; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.of_targetAffineLocally_of_isPullback; AlgebraicGeometry.HasRingHomProperty.appTop; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme base-change squares, henselian root lifting or existence of pullbacks in etale categories. None compares an arbitrary local ringed-topos inverse image with base change on affine representables."
+  },
+  {
+   "tool": "grep",
+   "query": "strictly.henselian.*solution|ringed.*topo|inverseImage.*[Rr]epresentable",
+   "results": "2 hits: Mathlib/Geometry/RingedSpace/Basic.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern locally ringed spaces, local properties of etale maps, or pullbacks of scheme morphisms. They do not compare inverse images for an arbitrary local ringed-topos morphism. The unknown GeometricMorphism query was retried with the valid Etale/pullback query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local morphism of ringed topoi on affine small etale sites preserves affine etale solution sheaves",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, AlgebraicGeometry.LocallyRingedSpace.Hom, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.Spec.locallyRingedSpaceMap, AlgebraicGeometry.LocallyRingedSpace.Hom.mk, Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern locally ringed spaces, local properties of etale maps, or pullbacks of scheme morphisms. They do not compare inverse images for an arbitrary local ringed-topos morphism. The unknown GeometricMorphism query was retried with the valid Etale/pullback query."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale, CategoryTheory.GeometricMorphism",
+   "results": "0 hits: none; loogle: unknown identifier 'CategoryTheory.GeometricMorphism'",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern locally ringed spaces, local properties of etale maps, or pullbacks of scheme morphisms. They do not compare inverse images for an arbitrary local ringed-topos morphism. The unknown GeometricMorphism query was retried with the valid Etale/pullback query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local morphism of ringed etale topoi of affine schemes the inverse image of an affine etale representable is its base change along the global section ring homomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.HasRingHomProperty.appLE, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.HasRingHomProperty.appTop, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern locally ringed spaces, local properties of etale maps, or pullbacks of scheme morphisms. They do not compare inverse images for an arbitrary local ringed-topos morphism. The unknown GeometricMorphism query was retried with the valid Etale/pullback query."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"pullback\"",
+   "results": "2 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.instHasPullbacksAffineEtale",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern locally ringed spaces, local properties of etale maps, or pullbacks of scheme morphisms. They do not compare inverse images for an arbitrary local ringed-topos morphism. The unknown GeometricMorphism query was retried with the valid Etale/pullback query."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-ringed-etale-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, reconstruct the scheme morphism attached to each (U,V,s); Tags 04M6 and 04KK, scheme uniqueness and rigidity input. Affine prerequisite: the representable solution comparison inside scheme Tag 04I6, before extending to all sheaves.",
+   "via": [
+    "lem-sfb-scheme-ringed-etale-reconstruction",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-affine-solution-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and existing provenance. Gave seven steps following 04I6 from the square presentation through equalizers, strictly henselian stalks, locality from the cartesian units square, the explicit polynomial naturality square, and all-element evaluation compatibility. Reused existing generic nodes and added only the strictly henselian polynomial solution lemma 04GX. Recorded actual Q29 searches and verbatim citations.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, reconstruct the scheme morphism attached to each (U,V,s); Tags 04M6 and 04KK, scheme uniqueness and rigidity input. Affine prerequisite: the representable solution comparison inside scheme Tag 04I6, before extending to all sheaves. The affine-generator comparison is the supporting prerequisite of the recorded direct-image route. The current blueprint direct-images proof (3) is unchanged; this item only splits its inherited scheme reconstruction input. The created.item chain ends at the historical module key Sheaf.SixFunctors.CtfStabilityDirectImages; blueprint_refs.py ancestor returns None, so the inherited null from.node and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Translates the given affine etale scheme morphism to the ring-map hypothesis, and back for the stalk quotient; this is a generic algebra/scheme bridge."
+   },
+   {
+    "node": "lem-exc-etale-jacobian-presentation",
+    "why": "Provides the global square presentation and its converse over the stalk ring, exactly the algebra input of Tag 04I6."
+   },
+   {
+    "node": "lem-a1-locally-ringed-space-affine-adjunction",
+    "why": "Identifies maps from arbitrary etale test schemes into an affine target with maps on global sections; the current unit supplies no generic affine adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Ensures the solution representables are sheaves even for arbitrary scheme targets."
+   },
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Makes geometric stalks finite-limit-preserving point inverse images, as needed for equalizers and units."
+   },
+   {
+    "node": "lem-trf-etale-topos-points-geometric",
+    "why": "Identifies the composite point g p with a geometric point of Y; it does not assert it is the scheme image f(x)."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Supplies strict henselianity of the identified strict henselization stalk rings."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Detects isomorphisms after the explicit stalk bijection; the generic conservative-point test is not another proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-exc-etale-jacobian-presentation",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-trf-etale-topos-points-geometric",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-7ee9b3611",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-7ee9b3611 (reviewer sub-agent of L); spot-checked: Read Stacks 04I6 (lemma-morphism-ringed-etale-topoi-affines) in full and 04GX (lemma-strictly-henselian-solutions) with its proof. The delivery is a first split, with no repair note. Live and side-live still have the item unsplit, and the new id is not in either. The statement is kept verbatim. Its cartesian units-square hypothesis is the 'local morphism' of the parent lem-sfb-scheme-ringed-etale-reconstruction, whose step 4 uses exactly the natural isomorphisms and the evaluation identity. Step 1: global square Jacobian presentation from etale-ring-map-iff-etale-affine and exc-etale-jacobian-presentation. Step 2: h_V as the equalizer on O_Y^n, using the LRS affine adjunction for every T in the etale site, the polynomial universal property and the fibre-product universal property (this avoids the unstated A⊗C presentation). The square commutes because g^♯ preserves ring operations and g^♯(g^{-1}b)=φ(b). Step 3: the geometric-stalk point; q=g∘p is a geometric point by trf-etale-topos-points-geometric; the pullback-stalk comparison identifies the rings; the ring-iso clause of etale-zariski-module-geometric-stalk with strict-henselization-triples clause 3 gives strict henselianity (the pairs and triples index categories are equivalent, a one-line step). Step 4, correctly marked elementary: units are the finite limit ab=1, so the stalk of the cartesian square gives θ^{-1}(S^×)=R^×. Step 5: the Jacobian identity base-changes to R, the coefficients agree, 04GX gives the stalk bijection, and the sets-on-geometric-stalks criterion finishes (empty X is vacuous). Steps 6 and 7: substitution naturality and the evaluation identity for every c, both elementary and correct. The new node lem-sfb-strict-henselian-etale-solutions is exactly 04GX, statement only and self-contained. I tested it at n=0, D=0, θ=id, x(x−1), x^2−u with 2u a unit, and Artin–Schreier. It is not a duplicate (rg -L over 04GX and the henselian/etale nodes; henselian-local-target-etale-maps is a different statement) and does not restate a clause of the item. Batch-5 flags: trf-etale-topos-points-geometric is the generic classification of points of the etale topos; the def-trf-geometric-morphism closure is only a definition; trf-zariski-etale-tensor-sections is a generic module comparison of which only the ring-iso clause is used. None is a step of the trace-formula or Poincaré-duality proofs, so all are accepted. The 8 declared tool_uses are generic and accepted. No SGA source is cited. The blueprint from.node is null, a provenance defect inherited from the item's existing chain and reported by the worker. No changes."
+ }
+}

@@ -1,0 +1,452 @@
+{
+ "id": "lem-sfb-invariant-partition-quotient-system",
+ "kind": "statement",
+ "title": "Continuous finite quotient system of invariant partitions",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Use the small representatives of [def-weil-size-convention]. Let $G$ be any topological group and let $P$ be a compact topological space with a continuous left action $G\\times P\\to P$. A finite clopen partition means a finite set of pairwise disjoint nonempty open and closed subsets with union $P$, allowing the empty partition when $P$ is empty. Let $J$ be the set of all such partitions that are permuted by $G$, equivalently the invariant discrete quotients of [def-sfb-invariant-discrete-quotients]. Order $J$ by $i\\le j$ if $j$ refines $i$. Then $J$ is small, nonempty and directed, and the category $J^{\\mathrm{op}}$ is cofiltered. For each $i\\in J$ let $P_i$ be its finite set of blocks with discrete topology, and let $q_i:P\\to P_i$ send a point to its block. For $i\\le j$ let $r_{ji}:P_j\\to P_i$ send a block to the unique block containing it. These are continuous surjections satisfying $r_{ii}=\\mathrm{id}$, $r_{ki}=r_{ji}\\circ r_{kj}$ for $i\\le j\\le k$, and $r_{ji}\\circ q_j=q_i$. The formulas $g\\cdot B=gB$ give continuous left actions on every $P_i$; all $q_i$ and $r_{ji}$ are $G$-equivariant. For any nonempty block $B\\in P_i$, any $x_B\\in B$, and $C\\in P_i$, one has $gB=C$ if and only if $gx_B\\in C$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent expansion of Bhatt–Scholze Example 4.1.10, p. 28, returned parent proof steps 3–4 (directed invariant partitions and continuous block actions); underlying partition diagram in Stacks topology.tex Tag 08ZY, label lemma-profinite."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-invariant-discrete-quotients"
+ ],
+ "proof": [
+  {
+   "text": "Use the universe bound of [def-weil-size-convention]. Each partition is a subset of the power set of the small underlying set $P$, so $J$ is a subset of $\\mathcal P(\\mathcal P(P))$ and is small. The relation $x\\sim_i y$ meaning that $x,y$ lie in the same block has precisely those blocks as its classes. The preimage of any subset of the block set is a union of open blocks, so this relation has discrete quotient topology. Conversely, classes of any discrete quotient are clopen: both a singleton and its complement in the quotient are open. The classes cover $P$; compactness gives a finite subcover, and disjointness and nonemptiness force every class to occur in it. Thus these are exactly finite clopen partitions. If $G$ permutes blocks the relation is invariant. Conversely, invariance as in [def-sfb-invariant-discrete-quotients] gives $gB\\subseteq C$ for the block $C$ containing $gx$ with $x\\in B$; applying invariance to $g^{-1}$ gives $g^{-1}C\\subseteq B$, so $gB=C$. This verifies the equivalence of the two descriptions of the index.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-sfb-invariant-discrete-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion of invariant quotient partitions; Stacks topology.tex Tag 08ZY, lemma-profinite, finite-decomposition index."
+   }
+  },
+  {
+   "text": "For $P\\ne\\varnothing$, the one-block partition $\\{P\\}$ is invariant; for $P=\\varnothing$, the empty partition is invariant. Given $i,j\\in J$, form $k=\\{B\\cap C:B\\in i,\\ C\\in j,\\ B\\cap C\\ne\\varnothing\\}$. These are finitely many nonempty clopen sets. Each point belongs to exactly one of them because it belongs to exactly one block of each partition. Thus $k$ is a partition refining both. Moreover $g(B\\cap C)=gB\\cap gC$, since $g$ is a bijection, so $G$ permutes its blocks. Hence $k\\in J$ and $J$ is nonempty and directed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion; Stacks topology.tex Tag 08ZY, lemma-profinite, common refinement of finite decompositions."
+   }
+  },
+  {
+   "text": "Refinement is reflexive and transitive. If $i\\le j\\le i$, take $B\\in i$ and $x\\in B$. The $j$-block $C$ containing $x$ is contained in an $i$-block; that block contains $x$ and hence equals $B$. Conversely $B$ is contained in a $j$-block, which must be $C$. Thus $B=C$. Reversing the roles of $i,j$ shows that the partitions agree. In $J^{\\mathrm{op}}$, a common refinement gives an object with arrows to any two objects. Parallel arrows are equal because this is a poset category and are equalized by an identity. Together with nonemptiness these are the defining cofilteredness conditions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion; Stacks topology.tex Tag 08ZY, lemma-profinite, directed index and cofiltered diagram."
+   }
+  },
+  {
+   "text": "Each $P_i$ is finite by the definition of partition. For any subset $A\\subseteq P_i$, one has $q_i^{-1}(A)=\\bigcup_{B\\in A}B$, an open set; thus $q_i$ is continuous into the discrete topology. For each block $B$, choose $x\\in B$; then $q_i(x)=B$, proving surjectivity. The same proof covers the empty space: both source and target are empty, so surjectivity is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion; Stacks topology.tex Tag 08ZY, lemma-profinite, maps from the space to its finite block sets."
+   }
+  },
+  {
+   "text": "For $i\\le j$, a nonempty $j$-block $D$ is contained in an $i$-block by refinement, and in at most one by disjointness. This defines $r_{ji}$. For $B\\in P_i$, a point $x\\in B$ has a $j$-block $D$ with $r_{ji}(D)=B$, proving surjectivity. Every map between discrete spaces is continuous: the preimage of an open set is a subset of a discrete space. Uniqueness of the containing block gives $r_{ii}(B)=B$, $r_{ji}(r_{kj}(D))=r_{ki}(D)$, and $r_{ji}(q_j(x))=q_i(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion; Stacks topology.tex Tag 08ZY, lemma-profinite, canonical refinement maps and the inverse system."
+   }
+  },
+  {
+   "text": "Invariance makes $gB$ a block of the same partition. The identities $1B=B$ and $(gh)B=g(hB)$ follow by taking images under the given action, and define a left action on $P_i$. If $x_B\\in B$ and $gB=C$, then $gx_B\\in C$. Conversely, $gx_B\\in C\\cap gB$ forces $C=gB$ by disjointness of blocks. This proves the stated criterion for every choice of $x_B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion of the finite discrete G-sets: induced block action and point criterion."
+   }
+  },
+  {
+   "text": "The point $gx$ belongs to the block $gq_i(x)$, hence $q_i(gx)=gq_i(x)$. If $D\\subseteq B=r_{ji}(D)$, then $gD\\subseteq gB$, where $gD$ is a $j$-block and $gB$ is an $i$-block. The unique-containing-block definition therefore gives $r_{ji}(gD)=gB=g\\,r_{ji}(D)$. These are exactly the two equivariance assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion of continuous equivariant maps between finite discrete G-sets."
+   }
+  },
+  {
+   "text": "Fix $i$ and a target block $C$. For each $B\\in P_i$ choose $x_B\\in B$ and put $U_{BC}=\\{g\\in G:gx_B\\in C\\}$. The map $g\\mapsto(g,x_B)$ is continuous (its coordinates are the identity and a constant), so the given joint continuity of the original action and openness of $C$ show that $U_{BC}$ is open. By the criterion in step 6, the preimage of $\\{C\\}$ under $(g,B)\\mapsto gB$ is $\\bigcup_{B\\in P_i}(U_{BC}\\times\\{B\\})$, which is open in $G\\times P_i$. Every subset of the discrete target is a union of singletons; its preimage is consequently open. This proves joint continuity, including the empty target, when the action map has empty domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, agent expansion of continuity of the finite discrete G-actions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-sfb-invariant-discrete-quotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10, p. 28, expanded using the finite-clopen-partition construction in Stacks topology.tex, Tag 08ZY (lemma-profinite); the action arguments are written explicitly here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite invariant clopen partitions of a continuous group action form a directed system of finite discrete continuous group sets with surjective equivariant maps",
+   "results": {
+    "t": "2026-10-22T06:09:42Z",
+    "tool": "leanfinder",
+    "query": "Finite invariant clopen partitions of a continuous group action form a directed system of finite discrete continuous group sets with surjective equivariant maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "DirectLimit.instMulActionOfMulActionHomClass",
+     "FirstOrder.Language.DirectLimit.exists_quotient_mk'_sigma_mk'_eq",
+     "DirectLimit",
+     "DirectLimit.instMulDistribMulActionOfMulActionHomClass",
+     "DirectLimit.instAddActionOfAddActionHomClass",
+     "FirstOrder.Language.DirectLimit.instDirectedSystemSubtypeMemSubstructureDomCoeOrderHomPartialEquivEmbeddingInclusion",
+     "FirstOrder.Language.DirectLimit.instDirectedSystemSubtypeMemSubstructureCodCoeOrderHomPartialEquivEmbeddingInclusion"
+    ],
+    "digest": "ea48985b9ec3fc58"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE supplies the underlying refinement map, but not induced jointly continuous block actions or their equivariance; has_decomp_quotients decomposes an already finite action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The action on blocks of an invariant finite clopen partition is continuous and refinement quotient maps are equivariant surjections",
+   "results": {
+    "t": "2026-10-22T06:10:52Z",
+    "tool": "leanfinder",
+    "query": "The action on blocks of an invariant finite clopen partition is continuous and refinement quotient maps are equivariant surjections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsQuotientCoveringMap.toContinuousConstSMul",
+     "MulAction.IsBlockSystem",
+     "IsAddQuotientCoveringMap.toContinuousConstVAdd",
+     "SeparationQuotient.instIsPretransitiveSMul",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "Topology.IsQuotientMap.trivializationOfSMulDisjoint",
+     "DiscreteQuotient.comp_finsetClopens",
+     "IsQuotientCoveringMap.isCancelSMul"
+    ],
+    "digest": "784e5d1f70a3dd83"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE supplies the underlying refinement map, but not induced jointly continuous block actions or their equivariance; has_decomp_quotients decomposes an already finite action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"ofLE\"",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "loogle",
+    "query": "\"DiscreteQuotient\", \"ofLE\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "DiscreteQuotient.ofLE",
+     "DiscreteQuotient.ofLE_refl_apply",
+     "DiscreteQuotient.ofLE_refl",
+     "DiscreteQuotient.ofLE_proj",
+     "DiscreteQuotient.ofLE_continuous",
+     "DiscreteQuotient.ofLE_comp_proj",
+     "DiscreteQuotient.ofLE_ofLE",
+     "DiscreteQuotient.map_ofLE"
+    ],
+    "digest": "64999d794a4ae283"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE supplies the underlying refinement map, but not induced jointly continuous block actions or their equivariance; has_decomp_quotients decomposes an already finite action."
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteQuotient.*(action|smul)|ContinuousSMul.*DiscreteQuotient",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "grep",
+    "query": "DiscreteQuotient.*(action|smul)|ContinuousSMul.*DiscreteQuotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE supplies the underlying refinement map, but not induced jointly continuous block actions or their equivariance; has_decomp_quotients decomposes an already finite action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant discrete quotients of a compact continuous group action form a cofiltered system of finite continuous actions",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "leansearch",
+    "query": "Invariant discrete quotients of a compact continuous group action form a cofiltered system of finite continuous actions",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteQuotient.*(action|smul)|ContinuousSMul.*DiscreteQuotient",
+   "results": {
+    "t": "2026-10-22T10:22:40Z",
+    "tool": "grep",
+    "query": "DiscreteQuotient.*(action|smul)|ContinuousSMul.*DiscreteQuotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous group action descends to the finite set of blocks of an invariant clopen partition",
+   "results": {
+    "t": "2026-10-22T10:22:41Z",
+    "tool": "leansearch",
+    "query": "Continuous group action descends to the finite set of blocks of an invariant clopen partition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MulAction.IsBlockSystem",
+     "MulAction.IsBlock",
+     "AddAction.IsBlock",
+     "QuotientGroup.instContinuousSMul",
+     "AddAction.IsBlockSystem",
+     "MulAction.IsPartition.of_orbits",
+     "SeparationQuotient.instMulAction",
+     "MulAction.IsFixedBlock"
+    ],
+    "digest": "ca73fc4c847ea6ad"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteQuotient, MulAction",
+   "results": {
+    "t": "2026-10-22T10:22:41Z",
+    "tool": "loogle",
+    "query": "DiscreteQuotient, MulAction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite invariant clopen partitions of a continuous group action form a directed inverse system of finite discrete continuous actions",
+   "results": {
+    "t": "2026-10-22T10:22:42Z",
+    "tool": "leanfinder",
+    "query": "Finite invariant clopen partitions of a continuous group action form a directed inverse system of finite discrete continuous actions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "LightProfinite.transitionMap",
+     "LightProfinite.transitionMapLE",
+     "Profinite.indexFunctor",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+     "exists_clopen_partition_of_clopen_cover",
+     "DiscreteQuotient.finsetClopens",
+     "DiscreteQuotient.comp_finsetClopens"
+    ],
+    "digest": "96ec9b0c301d0bf5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  },
+  {
+   "tool": "grep",
+   "query": "def ofLE|theorem ofLE_|surjective|instFintype|inf|proj_continuous",
+   "results": {
+    "t": "2026-10-22T10:23:07Z",
+    "tool": "grep",
+    "query": "def ofLE|theorem ofLE_|surjective|instFintype|inf|proj_continuous",
+    "sub": "Topology/DiscreteQuotient.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "33",
+     "107",
+     "115",
+     "116",
+     "121"
+    ],
+    "digest": "61d4b75978adf29e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"ofLE\"",
+   "results": {
+    "t": "2026-10-22T10:23:08Z",
+    "tool": "loogle",
+    "query": "\"DiscreteQuotient\", \"ofLE\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "DiscreteQuotient.ofLE",
+     "DiscreteQuotient.ofLE_refl_apply",
+     "DiscreteQuotient.ofLE_refl",
+     "DiscreteQuotient.ofLE_proj",
+     "DiscreteQuotient.ofLE_continuous",
+     "DiscreteQuotient.ofLE_comp_proj",
+     "DiscreteQuotient.ofLE_ofLE",
+     "DiscreteQuotient.map_ofLE"
+    ],
+    "digest": "64999d794a4ae283"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The induced action on blocks of an invariant finite clopen partition is jointly continuous and refinement maps are equivariant surjections",
+   "results": {
+    "t": "2026-10-22T10:23:11Z",
+    "tool": "leanfinder",
+    "query": "The induced action on blocks of an invariant finite clopen partition is jointly continuous and refinement maps are equivariant surjections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MulAction.IsBlockSystem",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+     "MulAction.IsBlock",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "MulAction.IsBlock.isBlockSystem",
+     "AddAction.IsBlockSystem",
+     "Equidecomp.witness",
+     "Equidecomp"
+    ],
+    "digest": "533a37aa3d2c3b47"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: DiscreteQuotient.ofLE and its identities cover ordinary refinement maps; the item also requires invariant indexing and jointly continuous equivariant block actions. IsBlockSystem is an algebraic definition, quotient-group and separation-quotient actions concern different quotients, and the Galois-category results assume already-given finite continuous actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-finite-quotients",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Field-site presentation in Paragraph (3), Bhatt-Scholze Example 4.1.10: passage from finite discrete Galois sets to continuous profinite Galois sets; generic equivariant finite-quotient input. Agent expansion of Bhatt–Scholze Example 4.1.10, p. 28, returned parent proof steps 3–4 (directed invariant partitions and continuous block actions); underlying partition diagram in Stacks topology.tex Tag 08ZY, label lemma-profinite.",
+   "via": [
+    "lem-sfb-profinite-action-finite-quotients",
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-invariant-partition-quotient-system",
+  "worker": "stage1",
+  "summary": "Q65 checked the full statement against Bhatt–Scholze Example 4.1.10 and the partition construction of Stacks Tag 08ZY, searched the project Lean sources, the whole DAG, the blueprint, and Mathlib, and supplied eight direct elementary steps. No new nodes are needed: common refinement, the quotient diagram, block action, equivariance and continuity all have explicit set-level arguments. The two cited definition statements were opened and their verbatim quotations are recorded in citations.json. The statement and its hypotheses are unchanged. Repair of returned head 30752fe7534: compared the retained split to the current unsplit live node, re-read both cited definitions, and expanded step 1 to prove the finite-clopen/discrete-quotient correspondence directly from compactness; step 3 now spells out both containing-block inclusions. Retained all prior searches, provenance, and the unchanged statement.",
+  "blueprint": "There is no imported blueprint ancestor (blueprint_refs.py ancestor returns None); retain the inherited provenance via lem-sfb-profinite-action-finite-quotients to the field-site presentation, Paragraph (3), Bhatt–Scholze Example 4.1.10. Steps 1–5 realize the invariant partition index and quotient diagram; steps 6–8 realize continuous finite G-actions and equivariant quotient maps."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-444358a07",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-444358a07 (reviewer sub-agent of L); spot-checked: This head re-delivers 30752fe75342, which I PASSed in run 30752fe75342; that head was returned only because its side completion was never promoted to the live DAG. The item is still unsplit in clones/live and clones/side-live, so no other group has split it. There is no repair note for this item, so the re-split rule does not apply. I compared the whole JSON with the PASSed head. Only proof steps 1 and 3 and split_report changed; the statement, stmt_deps, sources and steps 2 and 4-8 are identical. Step 1 now proves that finite clopen partitions and discrete quotients of compact P are the same thing. Preimages of sets of blocks are unions of open blocks, so the quotient is discrete. The classes of a discrete quotient are clopen, and compactness gives a finite subcover, which must contain every class because the classes are disjoint and nonempty. This is correct and uses only compactness of P. Step 3 rewrites antisymmetry: the j-block containing x lies in the i-block B, and B lies in that j-block, so the partitions are equal. Correct. I re-read all 8 steps and both cited definitions. The order reversal is handled through J^op, consistent with the parent. The g and g^-1 argument shows blocks are permuted. The common refinement B∩C is invariant. q_i and r_ji are continuous surjections that satisfy the diagram identities. The criterion gx_B∈C ⇔ gB=C holds, and the action is jointly continuous via the open sets U_BC×{B}. Edge cases checked: P empty, a point, trivial G, the Z/2 swap on two points, connected P. Sources are BS Example 4.1.10 (p. 28) and Stacks Tag 08ZY; no SGA is cited. No new nodes, no duplicates, no fixes. Note for the maintainer: this head needs promotion to the live DAG, not another review."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.InvariantPartitionQuotientSystem",
+  "declaration": "invariantPartition_quotient_system",
+  "file": "lean/Sheaf/Topology/InvariantPartitionQuotientSystem.lean",
+  "statement": "theorem invariantPartition_quotient_system (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (P : Type v) [TopologicalSpace P] [CompactSpace P] [MulAction G P] [ContinuousSMul G P] : Small.{v} (OrderDual (InvariantDiscreteQuotient G P)) ∧ Nonempty (OrderDual (InvariantDiscreteQuotient G P)) ∧ IsDirected (OrderDual (InvariantDiscreteQuotient G P)) (· ≤ ·) ∧ IsCofiltered (OrderDual (InvariantDiscreteQuotient G P))ᵒᵖ ∧ (∀ i : OrderDual (InvariantDiscreteQuotient G P), Finite i.val ∧ DiscreteTopology i.val ∧ Continuous i.val.proj ∧ Function.Surjective i.val.proj) ∧ (∀ (i j : OrderDual (InvariantDiscreteQuotient G P)) (h : i ≤ j), Continuous (DiscreteQuotient.ofLE h) ∧ Function.Surjective (DiscreteQuotient.ofLE h)) ∧ (∀ i : OrderDual (InvariantDiscreteQuotient G P), DiscreteQuotient.ofLE (le_refl i.val) = id) ∧ (∀ (i j k : OrderDual (InvariantDiscreteQuotient G P)) (hij : i ≤ j) (hjk : j ≤ k), DiscreteQuotient.ofLE (le_trans hjk hij) = DiscreteQuotient.ofLE hij ∘ DiscreteQuotient.ofLE hjk) ∧ (∀ (i j : OrderDual (InvariantDiscreteQuotient G P)) (h : i ≤ j), DiscreteQuotient.ofLE h ∘ j.val.proj = i.val.proj) ∧ ∃ a : ∀ i : OrderDual (InvariantDiscreteQuotient G P), MulAction G i.val, (∀ i : OrderDual (InvariantDiscreteQuotient G P), @ContinuousSMul G i.val (a i).toSMul _ _) ∧ (∀ (i : OrderDual (InvariantDiscreteQuotient G P)) (g : G) (B : i.val), i.val.proj ⁻¹' {@SMul.smul G i.val (a i).toSMul g B} = (fun x : P ↦ g • x) '' (i.val.proj ⁻¹' {B})) ∧ (∀ (i : OrderDual (InvariantDiscreteQuotient G P)) (g : G) (x : P), i.val.proj (g • x) = @SMul.smul G i.val (a i).toSMul g (i.val.proj x)) ∧ (∀ (i j : OrderDual (InvariantDiscreteQuotient G P)) (h : i ≤ j) (g : G) (B : j.val), DiscreteQuotient.ofLE h (@SMul.smul G j.val (a j).toSMul g B) = @SMul.smul G i.val (a i).toSMul g (DiscreteQuotient.ofLE h B)) ∧ (∀ (i : OrderDual (InvariantDiscreteQuotient G P)) (g : G) (B C : i.val) (x : P), i.val.proj x = B → (@SMul.smul G i.val (a i).toSMul g B = C ↔ i.val.proj (g • x) = C))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c5df729d",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim in file. J=OrderDual(InvariantDiscreteQuotient G P) reuses dep type, order direction correct (i≤j ⇔ j.val≤i.val, ofLE h : P_j→P_i). All clauses match: Small/Nonempty/IsDirected/IsCofiltered Jᵒᵖ, finite discrete stages, continuous surjective proj and ofLE, r_ii=id, r_ki=r_ji∘r_kj, r_ji∘q_j=q_i, ∃ actions pinned by fibre-image formula with explicit (a i) ContinuousSMul, both equivariances, gB=C ⇔ proj(gx)=C criterion. Hypotheses exactly topological group G, compact P, ContinuousSMul; independent universes u,v. Edge cases empty P / connected P / noncompact G ok. No duplicate (parent theorem uses same existential pattern; no Mathlib DiscreteQuotient action). No defs, sorry only, docstrings with source+blueprint+8-step plan, report sections present. No compile needed (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261025T041150-L-1038350",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "invariantPartition_quotient_system"
+  ],
+  "sorry_after": []
+ }
+}

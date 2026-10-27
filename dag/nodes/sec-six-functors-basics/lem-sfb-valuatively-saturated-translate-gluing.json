@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-valuatively-saturated-translate-gluing",
+ "kind": "statement",
+ "title": "Separation of a gluing by valuatively saturated generic translates",
+ "statement": "Let $D$ be a discrete valuation ring, $F=\\operatorname{Frac}D$, and $S=\\operatorname{Spec}D$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $B/S$ be a smooth separated commutative group scheme of finite type [def-pc-scheme, def-sbc-smooth-morphisms], and write $G=B_F$ [def-pc-base-change]. A commutative group scheme has multiplication, identity and inverse morphisms satisfying the commutative group diagrams. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Locally of finite type and finite type have the meanings of [def-weil-finite-type-morphism]. Suppose that, for every local injective map $D\\to V$ to a valuation ring with fraction field $L$, one has\n$$\\{a\\in G(F):a_L\\in B(V)\\}=B(D).$$\nHere a valuation ring is an integral domain $V$ such that for each nonzero $x\\in L$ either $x$ or $x^{-1}$ lies in $V$. Put $\\Gamma=G(F)/B(D)$ and choose representatives $a_\\gamma\\in G(F)$. For each $\\gamma$ take a copy $B_\\gamma$ of $B$. Glue distinct copies along their full generic fibres with transition $b\\mapsto a_\\eta^{-1}a_\\gamma b$ from the generic fibre of $B_\\gamma$ to that of $B_\\eta$ [lem-weil-pbc-glue-schemes]. The resulting $S$-scheme $Z$ is smooth, separated and locally of finite type. Each chart is an open immersion [def-weil-open-immersion], the generic-fibre identifications $b\\mapsto a_\\gamma b$ identify $Z_F$ with $G$, and two distinct charts have exactly $G$ as their intersection. This assertion does not assume that $B$ is a Néron model or an extension by a torus.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Example 5 and Proposition 7 proofs, printed pp.291–293 (PDF pp.297–299), separation of generic-translation gluings, abstracted to the precise saturation hypothesis Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf. Local PDF WANTED; agent-extracted formulation of the indicated argument."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-glue-schemes"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$. The generic point of $S$ is open: a nonzero prime of the local principal ideal domain $D$ has a prime generator, which is irreducible; any proper principal ideal containing it has an associate generator, so that prime is maximal. Thus $(0)$ and $(\\pi)$ are the only primes. The open complement of $(\\pi)$, with its induced scheme structure, is $\\operatorname{Spec}F$. Consequently $B_F$ is an open subscheme of $B$. Put $U_{\\gamma\\gamma}=B_\\gamma$ and $U_{\\gamma\\eta}=(B_\\gamma)_F$ for $\\gamma\\ne\\eta$. Translation by $a_\\eta^{-1}a_\\gamma$ is an isomorphism with inverse translation by $a_\\gamma^{-1}a_\\eta$, by the group identities. The cocycle identity is $(a_\\theta^{-1}a_\\eta)(a_\\eta^{-1}a_\\gamma)b=a_\\theta^{-1}a_\\gamma b$. The overlap conditions also hold when indices coincide. Apply [lem-weil-pbc-glue-schemes] to obtain $Z$ and covering open immersions $j_\\gamma:B_\\gamma\\to Z$. The structure maps to $S$ glue to $Z\\to S$: the continuous maps agree on overlaps, and for each open of $S$ the maps on sections glue by the sheaf axiom; on stalks the resulting map is one of the local chart maps, hence local. This also proves uniqueness of the glued morphism.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-affine-spectrum",
+    "def-pc-base-change",
+    "lem-weil-pbc-glue-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KZ (lemma-separated-implies-valuative), 01L0 (lemma-valuative-criterion-separatedness); agent argument for saturated generic translates inspired by BLR 10.1 Example 5 and Proposition 7"
+   }
+  },
+  {
+   "text": "On each generic chart define $q_\\gamma(b)=a_\\gamma b$. On its overlap with chart $\\eta$, one has $q_\\eta(a_\\eta^{-1}a_\\gamma b)=q_\\gamma(b)$. The same sheaf gluing of morphisms as in step 1 gives $q:Z_F\\to G$. Its inverse is the composite $G\\xrightarrow{b\\mapsto a_\\gamma^{-1}b}(B_\\gamma)_F\\to Z_F$ for any fixed $\\gamma$; the cocycle identity makes it independent of that choice. The group quotient $\\Gamma$ contains the identity class, so a chart exists. Both inverse identities can be checked on the covering charts. The intersection statement of [lem-weil-pbc-glue-schemes] identifies distinct charts scheme-theoretically with this full generic fibre. The affine finite-type covers of the charts together cover $Z$, so $Z\\to S$ is locally of finite type by [def-weil-finite-type-morphism]. Since each chart map to $S$ is smooth, [lem-weil-pbc-smooth-local-on-source] proves smoothness of $Z\\to S$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KZ (lemma-separated-implies-valuative), 01L0 (lemma-valuative-criterion-separatedness); agent argument for saturated generic translates inspired by BLR 10.1 Example 5 and Proposition 7"
+   }
+  },
+  {
+   "text": "Every ideal of $D$ is principal, hence finitely generated, so $D$ is Noetherian by [def-weil-pbc-noetherian-ring], and its single affine chart makes $S$ locally Noetherian by [pqf-def-locnoeth]. By [pqf-lem-locnoeth-lft], both $B$ and $Z$ are locally Noetherian: $B\\to S$ is finite type by hypothesis and $Z\\to S$ is locally of finite type by step 2. Thus [lem-sfb-locnoeth-valuative-separatedness] applies to both maps. In particular, because $B\\to S$ is separated, any two $V$-points of $B$ over the same $S$-map which agree over $L=\\operatorname{Frac}V$ are equal. Applying this with $V=D$ also justifies viewing $B(D)$ as a subgroup of $G(F)$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-locnoeth-valuative-separatedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), with Schemes Tags 01KZ and 01L0 for valuative uniqueness"
+   }
+  },
+  {
+   "text": "Let $V$ be any valuation ring, $L=\\operatorname{Frac}V$, and let $u,v:\\operatorname{Spec}V\\to Z$ be over the same map $\\operatorname{Spec}V\\to S$ and agree over $L$. A valuation ring is local: if $x,y$ are nonunits, divisibility compares them, so $x+y$ is a multiple of a nonunit and is a nonunit; the nonunits form the unique maximal ideal. An open subset of its spectrum containing this closed point is the whole spectrum, since every prime lies in that maximal ideal. Choose charts containing the images of the closed point under $u$ and $v$; both maps therefore factor through entire charts, giving $x,y\\in B(V)$ and indices $\\gamma,\\eta$. If $\\gamma=\\eta$, the injectivity of the chart map on morphisms and the uniqueness for $B$ from step 3 give $u=v$. If $\\gamma\\ne\\eta$, equality on $\\operatorname{Spec}L$ puts their common restriction in the intersection of the two charts, namely $G$. Therefore $D\\to L$ is injective. Since $V\\subset L$, the map $D\\to V$ is injective too. This rules out every noninjective structural map without applying the saturation hypothesis.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KZ (lemma-separated-implies-valuative), 01L0 (lemma-valuative-criterion-separatedness); agent argument for saturated generic translates inspired by BLR 10.1 Example 5 and Proposition 7"
+   }
+  },
+  {
+   "text": "Continue with distinct chart indices and injective $D\\to V$. If $\\pi$ is a unit in $V$, the map factors through $F$: its prime kernels cannot be $(\\pi)$, and every nonzero element of $D$ is invertible in $V$. Thus $x,y$ factor through the generic fibres of their charts. Put $c=a_\\gamma^{-1}a_\\eta\\in G(F)$. It gives a $V$-point of $B_F\\subset B$. The equality of generic restrictions in the coordinates of step 2 is $a_\\gamma x_L=a_\\eta y_L$, hence $x_L=c_Ly_L$. The two $V$-points $x$ and $cy$ of $B$ agree over $L$, so step 3 gives $x=cy$. This is precisely the gluing transition from chart $\\eta$ to chart $\\gamma$; hence their images $u,v$ in $Z$ are equal.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KZ (lemma-separated-implies-valuative), 01L0 (lemma-valuative-criterion-separatedness); agent argument for saturated generic translates inspired by BLR 10.1 Example 5 and Proposition 7"
+   }
+  },
+  {
+   "text": "In the remaining case $\\pi$ is not a unit in $V$. The contraction of the maximal ideal of $V$ is then $(\\pi)$, so $D\\to V$ is a local injective map and the stated saturation hypothesis applies. As before, $a_\\gamma x_L=a_\\eta y_L$, so the rational point $a_\\eta^{-1}a_\\gamma$ becomes $y_Lx_L^{-1}$, which is the restriction of the $V$-point $yx^{-1}\\in B(V)$. Saturation gives $a_\\eta^{-1}a_\\gamma\\in B(D)$. Their classes in $G(F)/B(D)$ are equal, contradicting $\\gamma\\ne\\eta$. Thus this last case of distinct charts is impossible. Together steps 4–6 establish valuative uniqueness for every map $\\operatorname{Spec}V\\to S$, including the maps through the special point, the maps through the generic point, and field valuation rings. Applying [lem-sfb-locnoeth-valuative-separatedness] to the locally Noetherian $Z$ of step 3 proves that $Z\\to S$ is separated. All the other asserted properties were established in steps 1–2.",
+   "uses": [
+    "lem-sfb-locnoeth-valuative-separatedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KZ (lemma-separated-implies-valuative), 01L0 (lemma-valuative-criterion-separatedness); agent argument for saturated generic translates inspired by BLR 10.1 Example 5 and Proposition 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "lem-weil-pbc-glue-schemes",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-locnoeth-valuative-separatedness",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JB, 01JC, 01KZ, 01L0 and Morphisms Tag 01T6; saturation argument supplied by Q71, inspired by BLR 10.1 Example 5 and Proposition 7 (primary scan read online)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gluing copies of a smooth separated integral group by generic translations with valuatively saturated integral points gives a separated group scheme",
+   "results": "{\"t\": \"2026-10-24T07:07:30Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing copies of a smooth separated integral group by generic translations with valuatively saturated integral points gives a separated group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\"], \"digest\": \"b44919827cc5ed37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData gives gluing without separatedness (already represented by lem-weil-pbc-glue-schemes); IsSeparated.of_valuativeCriterion requires the uniqueness argument. Neither proves the saturated-translate separation assertion in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData|glueData",
+   "results": "{\"t\": \"2026-10-24T07:08:05Z\", \"tool\": \"grep\", \"query\": \"GlueData|glueData\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"82884b1a4e9ab6e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData gives gluing without separatedness (already represented by lem-weil-pbc-glue-schemes); IsSeparated.of_valuativeCriterion requires the uniqueness argument. Neither proves the saturated-translate separation assertion in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth group scheme glued along its generic fibre from cosets of integral sections is separated when integral sections are valuatively saturated",
+   "results": "{\"t\": \"2026-10-24T07:08:05Z\", \"tool\": \"leansearch\", \"query\": \"A smooth group scheme glued along its generic fibre from cosets of integral sections is separated when integral sections are valuatively saturated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"AlgebraicGeometry.Scheme.IsSeparated.mk\"], \"digest\": \"c4550073d30b1f12\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData gives gluing without separatedness (already represented by lem-weil-pbc-glue-schemes); IsSeparated.of_valuativeCriterion requires the uniqueness argument. Neither proves the saturated-translate separation assertion in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\"",
+   "results": "{\"t\": \"2026-10-24T07:08:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme.GlueData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"AlgebraicGeometry.Scheme.GlueData.openCover\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.GlueData.ι\"], \"digest\": \"542384187f9b3e71\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData gives gluing without separatedness (already represented by lem-weil-pbc-glue-schemes); IsSeparated.of_valuativeCriterion requires the uniqueness argument. Neither proves the saturated-translate separation assertion in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Valuative separatedness of a group scheme formed by gluing generic translates of an integral model",
+   "results": "{\"t\": \"2026-10-24T07:08:06Z\", \"tool\": \"leanfinder\", \"query\": \"Valuative separatedness of a group scheme formed by gluing generic translates of an integral model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq.R\"], \"digest\": \"73f7e584fe1ac43d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData gives gluing without separatedness (already represented by lem-weil-pbc-glue-schemes); IsSeparated.of_valuativeCriterion requires the uniqueness argument. Neither proves the saturated-translate separation assertion in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*translat|translat.*saturat|valuative.*glue|glue.*valuative",
+   "results": "{\"t\": \"2026-10-24T08:02:04Z\", \"tool\": \"grep\", \"query\": \"saturat.*translat|translat.*saturat|valuative.*glue|glue.*valuative\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GlueData supplies existence and overlap maps only, and the valuative criterion supplies the generic tool leaf. Neither states the saturation argument or proves all clauses of this item by specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic translation charts of a smooth group scheme over a valuation ring glue to a separated scheme using saturation of integral points",
+   "results": "{\"t\": \"2026-10-24T08:02:04Z\", \"tool\": \"leansearch\", \"query\": \"Generic translation charts of a smooth group scheme over a valuation ring glue to a separated scheme using saturation of integral points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.IsSeparated\"], \"digest\": \"dca6428d5728943a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GlueData supplies existence and overlap maps only, and the valuative criterion supplies the generic tool leaf. Neither states the saturation argument or proves all clauses of this item by specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\"",
+   "results": "{\"t\": \"2026-10-24T08:02:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme.GlueData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"AlgebraicGeometry.Scheme.GlueData.openCover\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.GlueData.ι\"], \"digest\": \"542384187f9b3e71\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GlueData supplies existence and overlap maps only, and the valuative criterion supplies the generic tool leaf. Neither states the saturation argument or proves all clauses of this item by specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing copies of a separated smooth group over a discrete valuation ring by distinct cosets of integral points has separated diagonal when those integral points are valuatively saturated",
+   "results": "{\"t\": \"2026-10-24T08:02:05Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing copies of a separated smooth group over a discrete valuation ring by distinct cosets of integral points has separated diagonal when those integral points are valuatively saturated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuedRing.separated\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.isSeparated_iff\"], \"digest\": \"1ee9069cecdcfd25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GlueData supplies existence and overlap maps only, and the valuative criterion supplies the generic tool leaf. Neither states the saturation argument or proves all clauses of this item by specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-translate-hull",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), existing alteration-route trait-extension prerequisite; BLR 10.1 Example 5 and Proposition 7 proofs, printed pp.291–293 (PDF pp.297–299), separation of generic-translation gluings, abstracted to the precise saturation hypothesis",
+   "via": [
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-valuatively-saturated-translate-gluing",
+  "worker": "stage1",
+  "summary": "Constructed the gluing explicitly and proved separatedness by a complete valuation-ring case split. Reused source-local smoothness and finite-type/Noetherian tools already in the DAG; added one Mathlib leaf for valuative separatedness with locally Noetherian source, checking the quasi-separatedness instances. No statement change.",
+  "blueprint": "Serves the existing alteration-route trait-extension prerequisite at det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited Neron-model chain. The current blueprint direct-image proof has no explicit translate-gluing node; same_as searches are empty.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic source-open-cover locality of smoothness, used after the specified translate gluing; does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-d7219c6e3",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-d7219c6e3 (reviewer sub-agent of L); spot-checked: I read the item, the new leaf and every cited statement in full. Ordinary first split: no repair note exists, the statement is unchanged, and proof_deps equals the union of the step uses. Step 1: Spec D has only the primes (0) and (π), D[1/π]=F, and B_F is open in B; the glue data built from translations by a_η^{-1}a_γ (with U_γγ=B_γ) satisfies the overlap and cocycle conditions, also for repeated indices; lem-weil-pbc-glue-schemes is used only for what it states, and gluing the structure maps is written out. Step 2: the map q:Z_F→G is well defined and its inverse does not depend on the chart, by the cocycle; locally of finite type follows from the definition, and smoothness from the Mathlib leaf on locality on the source. Step 3: by 01T6, B and Z are locally Noetherian; with V=D this also gives B(D)⊂G(F) and B(V)⊂G(L), which the saturation hypothesis needs. Step 4: a valuation ring is local, so u and v factor through charts; if γ≠η the common L-point lies in Z_F, so D→V is injective. Step 5 (π a unit in V): with c=a_γ^{-1}a_η, x_L=c_L y_L gives x=cy=φ_ηγ(y), so u=v; I checked the orientation. Step 6 (π not a unit): D→V is local and injective, y_L x_L^{-1}=a_η^{-1}a_γ, and saturation puts this in B(D), contradicting γ≠η. New leaf lem-sfb-locnoeth-valuative-separatedness: true by Stacks 01KZ and 01L0, using 01OY for quasi-separatedness. Mathlib IsSeparated.eq_valuativeCriterion (ValuativeCriterion.lean:319-323) with the inferred instances at Noetherian.lean:221 and QuasiSeparated.lean:233 makes it a B8 leaf. Universe note for stage 2: Mathlib's ValuativeCommSq takes R in the schemes' universe. No duplicate: lem-sfb-space-valuative-separatedness covers algebraic spaces, gives only the converse direction, needs a quasi-compact diagonal and is split; blueprint search found 0 hits. Edge cases checked: Γ trivial, G_m and G_a over D (infinite Γ, Z only locally of finite type), fields, maps through the special point. The declared tool use of the smooth-local-on-source leaf is accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuativelySaturatedTranslateGluing",
+  "declaration": "AlgebraicGeometry.ValuativelySaturatedTranslateGluing.exists_gluing",
+  "declarations": [
+   "AlgebraicGeometry.ValuativelySaturatedTranslateGluing.integralPointSubgroup",
+   "AlgebraicGeometry.ValuativelySaturatedTranslateGluing.translatedGenericInclusion",
+   "AlgebraicGeometry.ValuativelySaturatedTranslateGluing.exists_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuativelySaturatedTranslateGluing.lean",
+  "statement": "theorem exists_gluing [IsDiscreteValuationRing D] (B : Over (Spec (.of D))) [CommGrpObj B] [Smooth B.hom] [IsSeparated B.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] (hsat : ∀ (V : Type u) [CommRing V] [IsDomain V] [ValuationRing V] (φ : D →+* V) (_hlocal : IsLocalHom φ) (hinj : Function.Injective φ) (a : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap D F))) ⟶ B), (∃ x : Spec (.of V) ⟶ B.left, x ≫ B.hom = Spec.map (CommRingCat.ofHom φ) ∧ Spec.map (CommRingCat.ofHom (algebraMap V (FractionRing V))) ≫ x = Spec.map (CommRingCat.ofHom (IsFractionRing.map (K := F) (L := FractionRing V) hinj)) ≫ a.left) ↔ a ∈ integralPointSubgroup (F := F) B) (a : (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap D F))) ⟶ B) ⧸ integralPointSubgroup (F := F) B → (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap D F))) ⟶ B)) (ha : ∀ γ, QuotientGroup.mk (a γ) = γ) : ∃ (Z : Over (Spec (.of D))) (j : (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap D F))) ⟶ B) ⧸ integralPointSubgroup (F := F) B → (B ⟶ Z)), Smooth Z.hom ∧ IsSeparated Z.hom ∧ LocallyOfFiniteType Z.hom ∧ (∀ γ, IsOpenImmersion (j γ).left) ∧ (∀ z : Z.left, ∃ γ, ∃ b : B.left, (j γ).left b = z) ∧ (∀ γ δ, γ ≠ δ → IsPullback (pullback.fst B.hom (Spec.map (CommRingCat.ofHom (algebraMap D F)))) (translatedGenericInclusion B ((a δ)⁻¹ * a γ)).left (j γ).left (j δ).left) ∧ ∃ q : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D F)))).obj Z ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D F)))).obj B, ∀ γ, ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D F)))).map (j γ)).left ≫ q.hom.left ≫ pullback.fst B.hom (Spec.map (CommRingCat.ofHom (algebraMap D F))) = (translatedGenericInclusion B (a γ)).left",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a7da21e1",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: DVR D with fraction field F, B a CommGrpObj over Spec D, smooth, separated, LFT+QC. hsat iff over local injective D→V into valuation rings, using the canonical IsFractionRing.map into FractionRing V, equals the subset equality; V restricted to Type u only weakens the hypothesis (fits Mathlib's valuative criterion). Gamma = quotient by integralPointSubgroup (real Yoneda range); representatives a with mk(a γ)=γ. Z over S smooth, separated, LFT; open-immersion charts jointly cover; for γ≠δ, IsPullback of fst and translatedGenericInclusion(a_δ⁻¹a_γ) gives the node's transition (orientation checked) and the intersection exactly G; q: Z_F≅G pinned to b↦a_γ b. lean.statement verbatim, one sorry, both helpers real data. stmt_dep records read; no theorem-owned definitions used. translatedGenericInclusion is a mixed-base helper not expressible by the field-only GrpObj.mulLeft owner, accepted. Edge cases: trivial and infinite Gamma, Gamma never empty. No compile by instruction; no file changed."
+ }
+}

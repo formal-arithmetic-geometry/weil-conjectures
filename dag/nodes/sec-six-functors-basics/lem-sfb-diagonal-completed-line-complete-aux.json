@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-diagonal-completed-line-complete-aux",
+ "kind": "statement",
+ "title": "Local descent for a completed coefficient line",
+ "statement": "Let l be prime, S Noetherian, and L a completed coefficient module. If every pro-etale object admits a covering sieve on whose members L is isomorphic to the regular completed coefficient module, then the underlying constant-coefficient degree-zero object receives at most one map from every complex on which l acts invertibly.",
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "det-prop-diagonal-tower-limit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), local trivialization and descent of derived completeness"
+ },
+ "proof": [
+  {
+   "text": "For an additive category with countable products let P(M)=product_n M and Delta_l(M)=1-l*shift. This is natural in M and additive product-preserving functors carry it to the same operator via the canonical product comparison. If l^e annihilates M, then (l*shift)^e=0, so the finite geometric sum inverts Delta_l(M). Apply this to the additive constant sheaves Z/l^(n+1); forgetting commutative-ring structure commutes with constant sheafification.",
+   "uses": [
+    "def-pur-twist-coefficient-rings",
+    "def-weil-category-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The completed coefficient sheaf is the specified ordinary limit of those finite ring sheaves. Forgetting to additive sheaves preserves this limit. The countable-power functor preserves limits (it is the constant-diagram functor followed by a product). Naturality of Delta makes its finite-level inverses compatible; the limit universal property therefore makes Delta invertible on the completed coefficient sheaf. No surjectivity or derived-limit computation is needed here.",
+   "uses": [
+    "def-pur-twist-coefficient-rings",
+    "def-weil-category-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write M for the constant-scalar restriction of L. On a member V of a displayed covering sieve, evaluating the given isomorphism L.over V with the regular module at id_V identifies the additive group M(V) with the completed coefficient ring at V. Evaluation preserves products, so the preceding Delta isomorphism transfers to the evaluation of Delta_l(M) at V. A morphism of sheaves invertible on all members of a covering sieve is invertible globally, by the covering-sieve sheaf limit property. Hence Delta_l(M) is an isomorphism in the ordinary module-sheaf category.",
+   "uses": [
+    "def-sfb-diagonal-trace-models",
+    "def-weil-category-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Countable products of constant-coefficient pro-etale module sheaves are exact, using the published source countableAB4Star instance (the constant-ring specialization of exact pro-etale products). K-injective resolutions show that localization Q preserves these products, so the degree-zero single functor also preserves them. For any l-invertible V and f:V->M[0], form g_n=inv(l id_V)^n followed by f. They satisfy l*g_(n+1)=g_n. The product lift g therefore has g;Delta_l(M[0])=0, while Delta_l(M[0]) is invertible. Thus g=0, and its zeroth projection gives f=0. Finally the exact-functor single comparison identifies the requested underlying completed degree-zero object with M[0].",
+   "uses": [
+    "det-pe-products-exact",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-coefficient-rings",
+  "def-weil-category-product",
+  "def-sfb-diagonal-trace-models",
+  "det-pe-products-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 091P, lemma-hom-from-Af, difference-operator criterion; the completed coefficient limit and local trivializations of blueprint trace paragraph (1). The elementary product-lift argument is formalized directly by G8.",
+  "by": "G8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally trivial completed coefficient line derived complete orthogonal",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "Use the local descent interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Subsingleton maps from l-invertible derived objects to completed line",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "Use the local descent interface."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalCompletedLine_complete",
+   "results": "Only the parent declaration and earlier split were found.",
+   "date": "2026-10-27",
+   "verdict": "New local descent statement is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCompletedLineComplete",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-completed-line-complete",
+   "place": "paragraph (1), local trivialization and descent",
+   "via": [
+    "lem-sfb-diagonal-completed-line-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedLineCompleteAux",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedLineCompleteAux.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalCompletedLine_complete_of_cover",
+  "statement": "theorem diagonalCompletedLine_complete_of_cover (l : ℕ) [Fact l.Prime] (S : Scheme.{u}) [IsNoetherian S] [DiagonalTraceLocalizations l S] (L : DiagonalCompleted l S) (hcover : ∀ U : S.ProEt, ∃ s : Sieve U, s ∈ (Scheme.ProEt.topology S) U ∧ ∀ (V : S.ProEt) (f : V ⟶ U), s f → Nonempty (L.over V ≅ (SheafOfModules.unit (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l))).over V)) : ∀ V : DerivedCategory (DiagonalMod l S), IsIso (l • 𝟙 V) → Subsingleton (V ⟶ (diagonalCompletedUnderlying l S).obj ((DerivedCategory.singleFunctor (DiagonalCompleted l S) 0).obj L))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T235937-L-1472435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T012840-L-2339047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

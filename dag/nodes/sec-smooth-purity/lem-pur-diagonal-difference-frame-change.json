@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-diagonal-difference-frame-change",
+ "kind": "statement",
+ "title": "Matrix change of the pinned normal frame",
+ "statement": "Given any two NormalFrames N,N′ of the same rank d and separated h, for ordered functions x,x′ [def-pur-diagonal-difference-frame-data], there are inverse matrices M,H over Γ(U,O_U) with dx′_j=Σ_i M_ji dx_i and N′*(v_j)=Σ_i projection*(M_ji) N*(v_i). No affine, smoothness, positive-rank or nonempty-source assumption is added.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-difference-frame-data"
+ ],
+ "proof": [
+  {
+   "text": "The free sheaf frames induce bases of global differential sections. Set M and H to the transposes of the two basis-transition matrices; the basis matrix identities give both inverse equations. Expand dx′ in the old basis. Positive difference normalization makes the inverse conormal maps agree on every da. Apply the degree-one inclusion and cone counit to that expansion; linearity and compatibility with the structure map give the same matrix on normal coordinates.",
+   "uses": [
+    "def-pur-diagonal-difference-frame-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-diagonal-difference-frame-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivMvPolynomial|toMatrix_mul_toMatrix|tensorKaehlerEquivOfFormallyEtale",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/Matrix/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean. No complete theorem of this form; the differential and matrix APIs are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.FormallyEtale",
+   "results": "7 hits: Algebra.FormallyEtale.subsingleton_kaehlerDifferential, Algebra.FormallyEtale.mk, Algebra.formallyEtale_iff, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap. No complete theorem of this form; the differential and matrix APIs are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale coordinate chart gives an ordered basis of relative differentials, a polynomial normal cone, compatible deformation restrictions, and a matrix change of frame",
+   "results": "8 hits: StandardEtalePresentation, StandardEtalePresentation.P, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.x, StandardEtalePresentation.hasMap, StandardEtalePresentation.toSubmersivePresentation, Algebra.IsStandardEtale.nonempty_standardEtalePresentation. No complete theorem of this form; the differential and matrix APIs are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale coordinates give a free basis of relative differentials, compatible normal cone and deformation charts, and an invertible change of normal frame",
+   "results": "8 hits: RingHom.Etale, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.formallyEtale_iff, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.iff_unramified_and_smooth, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat. Differential base-change results are used; no full chart/frame theorem.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalDifferenceReesFrame",
+  "date": "2026-10-25",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–3 and change of frame; detailed proof of lem-pur-diagonal-difference-rees-frame",
+   "via": [
+    "lem-pur-diagonal-difference-rees-frame",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalDifferenceFrameChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalDifferenceFrameChange.lean",
+  "declaration": "AlgebraicGeometry.DiagonalDifferenceReesFrame.frame_change",
+  "statement": "theorem frame_change {U V : Scheme.{u}} {d : ℕ} {h : U ⟶ V} [IsSeparated h]\n    {x x' : ULift.{u} (Fin d) → Γ(U, ⊤)}\n    (N : NormalFrame d h x) (N' : NormalFrame d h x') :\n    ∃ M H : Matrix (Fin d) (Fin d) Γ(U, ⊤),\n      M * H = 1 ∧ H * M = 1 ∧\n      (∀ j : Fin d, h.relativeDifferentialsDerivation.d (X := op ⊤) (x' (.up j)) =\n        ∑ i : Fin d, M j i •\n          h.relativeDifferentialsDerivation.d (X := op ⊤) (x (.up i))) ∧\n      (∀ j : Fin d, N'.normal.hom.appTop (AffineSpace.coord U (.up j)) =\n        ∑ i : Fin d,\n          (PurityNormalBundle.projection (pullback.diagonal h)).appTop (M j i) *\n            N.normal.hom.appTop (AffineSpace.coord U (.up i)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0b30f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164427-L-1012932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0b30f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164427-L-1012932",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live clone (identical); moved NormalFrame/CentredChart/CentredChart.map vs live text (byte-identical, public imports kept in FrameData); new nodes' proof_deps vs module imports; 0 importers in live"
+ }
+}

@@ -1,0 +1,179 @@
+{
+ "id": "lem-trf-tensor-sections-coordinate-coherence",
+ "kind": "statement",
+ "title": "Identity, composition and structure-unit equations for tensor-section coordinates",
+ "statement": "For schemes [def-pc-scheme] let $P_a=a^*$ be tensor pullback [def-pc-module-pullback], $c_{a,b}:P_aP_b\\simeq P_{ba}$ its unit-normalized composition comparison, $i_X:P_{\\mathrm{id}_X}\\simeq\\mathrm{id}$ the normalized identity comparison, and $e_a:P_a\\mathcal O\\simeq\\mathcal O$ the adjoint structure-module comparison. Write $\\rho_F$ for the normalized tensor-section restriction [lem-sc-etale-qcoherent-presheaf-functorial]. They satisfy three equations. (1) For every $\\mathcal O_X$-module $F$ [def-weil-sheaf-of-modules-category] and $t:W\\to X$ in the small etale site [def-weil-pbc-etale-site], $\\Gamma(P_t i_X)\\Gamma(c_{t,\\mathrm{id}_X,F}^{-1})=\\rho_F(k_{\\mathrm{id}})$, where $k_{\\mathrm{id}}:t\\to\\mathrm{id}_X\\circ t$ is the canonical site arrow with underlying scheme map $\\mathrm{id}_W$. (2) For etale $v:Y\\to X$, $w:Z\\to Y$, $t:W\\to Z$ and arbitrary $F$ on $X$, $\\Gamma(P_t c_{w,v,F})\\Gamma(c_{t,w,P_vF}^{-1})\\Gamma(c_{wt,v,F}^{-1})=\\Gamma(c_{t,vw,F}^{-1})\\rho_F(k_{\\mathrm{assoc}})$, where $k_{\\mathrm{assoc}}:(vw)t\\to v(wt)$ is the canonical site arrow, again with underlying scheme map $\\mathrm{id}_W$. (3) For etale $v:Y\\to X$ and $t:W\\to Y$, $\\Gamma(e_t)\\Gamma(P_t e_v)\\Gamma(c_{t,v,\\mathcal O_X}^{-1})=\\Gamma(e_{vt})$. The isomorphisms here are exactly the library's $\\texttt{tensorSectionsComp}$, $\\texttt{trfTensorId}$ and $\\texttt{trfTensorUnit}$. Neither quasi-coherence nor invertibility of $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX, proposition-equivalence-quasi-coherent (2), construction of the associated functor; Tag 03LC, proposition-equivalence-quasi-coherent-functorial (1), and remark-change-topologies-ringed-sites; Tag 05VG, lemma-equivalence-quasi-coherent-properties, finite local freeness specialized to rank one."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate lem-trf-section-adjunction-coordinate-coherence with the recorded tensor-pullback adjunctions. Its identity-section equation evaluates restriction along the canonical identity site arrow; its right-unit cancellation equation gives the desired inverse comparison formula. These are the actual normalized tensor comparisons by their definitions.",
+   "uses": [
+    "lem-trf-section-adjunction-coordinate-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse-associativity equation of lem-trf-section-adjunction-coordinate-coherence on W -> Z -> Y -> X and take global sections. Its identity-section equation evaluates the canonical associativity site arrow, whose underlying scheme map is the identity. The result is exactly the required equation, with its specified parenthesizations.",
+   "uses": [
+    "lem-trf-section-adjunction-coordinate-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hom of trfTensorUnit agrees with the adjoint structure-sheaf map by the unit equation for leftAdjointUniq. Apply the composite adjunction Hom equivalence to c followed by the composite structure-sheaf map and to the composite of the pulled-back structure-sheaf maps. The unit equation for c and naturality move both to the composite structure-ring map. Injectivity identifies them. Cancel c and take sections, proving (3).",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-section-adjunction-coordinate-coherence",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03DR, 03DX (2), 03LC (1), 05VG; explicit normalized adjunction computations expanding the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module on a scheme defines a sheaf of modules on the small etale site, compatible with pullback",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.IsQuasicoherent",
+     "AlgebraicGeometry.Scheme.Modules"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "The results concern local presentation data or the category of modules on a scheme. They do not construct the small-etale tensor-section module functor with its specified comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.mk",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "PresheafOfModules.mk"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "The constructor builds a module presheaf from module objects and semilinear restrictions. It supplies no tensor-section naturality, descent, or normalized comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSectionsComp|CoversTop",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "CategoryTheory.GrothendieckTopology.coversTop_iff_of_isTerminal",
+     "CategoryTheory.GrothendieckTopology.CoversTop.over"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "Covering-family lemmas are available, but no normalized module-valued tensor-section construction. Also inspected the existing EtaleTensorSections and EtaleTensorSectionsMapNaturality modules and the parent comparison theorem; the parent depends on this item and cannot be used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition isomorphism of two left adjoints satisfies associativity and the unit constraints",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "The generic associativity and unitality tools are used for tensor-coordinate coherence. None constructs a module-valued tensor-section functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TraceFormula.EtaleLineSectionsNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: interpret the polarization on each scheme atlas and its overlaps as a line module on the small etale site, compatibly with pullback (Stacks 03DX, 05VG, 03LC). Returned comparison proof steps 1–3 (normalized functor and restrictions). Normalized coherence steps 5–7.",
+   "via": [
+    "lem-trf-etale-line-sections-normalized-comparisons",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TraceFormula.TensorSectionsCoordinateCoherence",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/TensorSectionsCoordinateCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.trf_tensor_sections_coordinate_coherence",
+  "statement": "theorem trf_tensor_sections_coordinate_coherence :\n    (∀ (X : Scheme.{u}) (F : X.Modules) (W : X.Etale)\n      (s : Γ((Modules.tensorPullback (W.hom ≫ 𝟙 X)).obj F, ⊤)),\n      ((Modules.tensorPullback W.hom).map ((trfTensorId X).hom.app F)).app ⊤\n        (((Modules.tensorSectionsComp W.hom (𝟙 X)).inv.app F).app ⊤ s) =\n      Modules.etaleTensorSectionsRestriction F (trfEtaleIdArrow W) s) ∧\n    (∀ (X Y Z : Scheme.{u}) (v : Y ⟶ X) (w : Z ⟶ Y) [Etale v] [Etale w]\n      (F : X.Modules) (W : Z.Etale)\n      (s : Γ((Modules.tensorPullback ((W.hom ≫ w) ≫ v)).obj F, ⊤)),\n      ((Modules.tensorPullback W.hom).map\n        ((Modules.tensorSectionsComp w v).hom.app F)).app ⊤\n          (((Modules.tensorSectionsComp W.hom w).inv.app\n            ((Modules.tensorPullback v).obj F)).app ⊤\n              (((Modules.tensorSectionsComp (W.hom ≫ w) v).inv.app F).app ⊤ s)) =\n      ((Modules.tensorSectionsComp W.hom (w ≫ v)).inv.app F).app ⊤\n        (Modules.etaleTensorSectionsRestriction F (trfEtaleCompArrow v w W) s)) ∧\n    (∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (W : Y.Etale)\n      (s : Γ((Modules.tensorPullback (W.hom ≫ v)).obj\n        (SheafOfModules.unit X.ringCatSheaf), ⊤)),\n      (trfTensorUnit W.hom).hom.app ⊤\n        (((Modules.tensorPullback W.hom).map (trfTensorUnit v).hom).app ⊤\n          (((Modules.tensorSectionsComp W.hom v).inv.app\n            (SheafOfModules.unit X.ringCatSheaf)).app ⊤ s)) =\n      (trfTensorUnit (W.hom ≫ v)).hom.app ⊤ s)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T100359-L-8423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T100359-L-8423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

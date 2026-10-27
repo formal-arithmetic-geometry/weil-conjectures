@@ -1,0 +1,160 @@
+{
+ "id": "def-sfb-relative-dynamic-attraction-data",
+ "kind": "definition",
+ "title": "Relative dynamic orbit, coaction-weight and base-change interfaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Work in schemes over $S$ [def-pc-scheme], with group objects and group homomorphisms as in [def-sc-group-scheme], using $S$ in place of the field base. Write $T(B)=\\operatorname{Spec}B\\to S$ for a commutative $A$-algebra $B$, $L=\\operatorname{Spec}A[t]$, and $M=\\operatorname{Spec}A[t,t^{-1}]$ with its Laurent Hopf group law [def-sfb-split-torus-over-ring]. Let $j:M\\to L$ be the unit-locus inclusion and $0,1:S\\to L$ be evaluation sections. A group $H$ has an action by automorphisms if an internal $M$-action satisfies $s\\cdot(xy)=(s\\cdot x)(s\\cdot y)$ on every test $S$-scheme. For $h:T\\to H$, a contracting orbit extension is $e:L\\times_ST\\to H$ whose restriction along $j\\times\\mathrm{id}_T$ is $(s,t)\\mapsto s\\cdot h(t)$ and whose restriction at zero is the identity point. Define $\\operatorname{Attracts}_H(h)$ by the existence of this extension. A homomorphism $i:U\\to H$ represents this subfunctor if, for every $T$ and $h$, $\\operatorname{Attracts}_H(h)$ is equivalent to the existence of a unique $x:T\\to U$ with $i\\circ x=h$. Use the existing dual-number tangent module $\\operatorname{Lie}(H)$ and its tangent points [sk-d-tangent], valid over $A$. The image of the tangent inclusion consists of the vectors whose dual-number points factor through $i$. The tangent map of a group homomorphism is obtained by composing infinitesimal points and using the canonical Lie-to-infinitesimal-point equivalence. Define homogeneous functions of degree $j$ by $f(a(t,h))=t^j f(h)$ as an equality of regular functions on $M\\times_S H$. Define the tangent coefficient of $f$ at a tangent vector by the epsilon coefficient of its pullback to $A[\\epsilon]$. The coaction weight submodule $\\mathfrak h_j$ is the span of tangent vectors annihilating all homogeneous functions of degrees other than $j$. Put $\\mathfrak h_{>0}=\\sum_{j>0}\\mathfrak h_j$. A group $U$ has unipotent geometric fibres when, for every algebraically closed $A$-field $F$, its base change [def-pc-base-change] to $F$ admits a faithful closed group representation [def-weil-closed-immersion] in some $\\mathrm{GL}_{n,F}$ [def-sc-general-linear-group] whose every $F$-point $x$ satisfies $(r(x)-1)^N=0$ for some $N$. Allow $n=0$. For a ring map $A\\to B$, use the canonical pullback functor on group objects and its map on homomorphisms. A point of $H_B$ viewed over $A$ is the image under the canonical pullback adjunction. Define representing the attracting functor after this base change by the same unique-factorization condition for these points and the pulled-back inclusion. Finally, for an $A$-algebra $B$, a tangent comparison is a $B$-linear equivalence $e_H:B\\otimes_A\\operatorname{Lie}(H)\\to\\operatorname{Lie}(H_B)$ whose value on $1\\otimes v$, projected to $H$, is the tangent point of $v$ precomposed with $\\operatorname{Spec}(A[\\epsilon]\\to B[\\epsilon])$. Thus its values on all pure tensors are fixed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "sk-d-tangent",
+  "def-pc-base-change",
+  "def-sc-general-linear-group",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Definition 4.1.6, Theorem 4.1.7(4), pp.111–114, and paragraph before Proposition 4.1.10, p.114; dual-number and functor-of-points descriptions"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "multiplicative group action attracting subgroup orbit extends affine line relative group scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddSubgroup.pointwiseMulAction\", \"module\": \"Mathlib.Algebra.GroupWithZero.Subgroup\", \"type\": \": MulAction M (AddSubgroup A)\", \"doc\": \"Let $M$ be a monoid and $A$ be an additive group, and suppose $M$ acts on $A$ via a distributive multiplicative action. This definition provides a multiplicative action of $M$ on the type of additive \"}\n  {\"name\": \"MulAction.smul_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"(g : G) (a : α) : g • orbit G a = orbit G a\", \"doc\": \"For any group element $g$ and any element $a$ in a set $\\\\alpha$ under a group action, the scalar multiplication of the orbit of $a$ by $g$ is equal to the original orbit of $a$. In symbols, $g \\\\cdot \\\\\"}\n  {\"name\": \"Subgroup.smul_mem_pointwise_smul\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"(m : G) (a : α) (S : Subgroup G) : m ∈ S → a • m ∈ a • S\", \"doc\": \"For a monoid $\\\\alpha$ acting on a group $G$ via a multiplicative distributive action, $\\\\alpha$ acts on the set of subgroups of $G$ by mapping each $a \\\\in \\\\alpha$ to the endomorphism $\\\\varphi_a$ induce\"}\n  {\"name\": \"Subgroup.pointwiseMulAction\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \": MulAction α (Subgroup G)\", \"doc\": \"For a monoid $\\\\alpha$ acting on a group $G$ via a multiplicative distributive action, this defines an action of $\\\\alpha$ on the set of subgroups of $G$. The action is given by mapping each element $a \"}\n  {\"name\": \"Subgroup.mem_smul_pointwise_iff_exists\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"(m : G) (a : α) (S : Subgroup G) : m ∈ a • S ↔ ∃ s : G, s ∈ S ∧ a • s = m\", \"doc\": \"For a monoid $\\\\alpha$ acting on a group $G$ via a multiplicative distributive action, there is an induced action of $\\\\alpha$ on the set of subgroups of $G$. This action maps each $a \\\\in \\\\alpha$ to the\"}\n  {\"name\": \"Subgroup.coe_pointwise_smul\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"(a : α) (S : Subgroup G) : ↑(a • S) = a • (S : Set G)\", \"doc\": \"For a monoid $\\\\alpha$ acting on a group $G$ via a multiplicative distributive action, this defines an action of $\\\\alpha$ on the set of subgroups of $G$ by applying the action pointwise to elements of \"}\n  {\"name\": \"orbit_subgroup_eq_self_of_mem\", \"module\": \"Mathlib.GroupTheory.Coset.Basic\", \"type\": \"{a : α} (ha : a ∈ s) : MulAction.orbit s a = s\", \"doc\": \"If $ a $ is an element of the subgroup $ s $, then the orbit of $ a $ under the action of $ s $ is equal to $ s $ itself, i.e., $ \\\\text{Orbit}_s(a) = s $.\"}\n  {\"name\": \"AffineBasis.instMulAction\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \": MulAction G (AffineBasis ι k V)\", \"doc\": \"For any group $ G $ acting on an affine space $ P $, there is a canonical group action of $ G $ on the set of affine bases of $ P $. This action maps each affine basis $ b $ to a new affine basis obta\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; existing elementary action and tangent APIs are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative multiplicative group action weights dual number tangent contracting orbit functor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (r : R) → [inst_3 : IsLocalization.Away r S] → (Algebra.Generators.localizationAway S r).toExtension.Cotangent\", \"doc\": \"The element in the cotangent module of the algebra extension obtained by localizing at $ r $, represented by the polynomial $ C(r)X - 1 $ where $ C(r) $ is the constant polynomial embedding of $ r $ a\"}\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Algebra.Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"Finset.weightedVSubOfPoint_smul\", \"module\": \"Mathlib/LinearAlgebra/AffineSpace/Combination\", \"type\": \"∀ {k : Type u_1} {V : Type u_2} [inst : Ring k] [inst_1 : AddCommGroup V] [inst_2 : Module k V] {ι : Type u_4}\\n  {G : Type u_6} [inst_3 : Group G] [inst_4 : DistribMulAction G V] [SMulCommClass G k V] (s : Finset ι) (w : ι → k)\\n  (p : ι → V) (b : V) (a : G), (s.weightedVSubOfPoint (a • p) b) w = a •\", \"doc\": \"Let $ G $ be a group acting on a vector space $ V $ over a field $ k $, with compatible scalar multiplication. For any finite set $ s $ of indices $ \\\\iota $, weight function $ w : \\\\iota \\\\to k $, point\"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_mul\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  (Q : Algebra.Generators S T ι) (x y : Q.Ring),\\n  (Algebra.Generators.H1Cot\", \"doc\": \"For the auxiliary linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the first cotangent module of the Jacobi-Zariski sequence, the map satisfies the Leibniz rule: $\\\\delta\"}\n  {\"name\": \"Algebra.Extension.Cotangent.val_smul\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  (r : S) (x : P.Cotangent), (r • x).val = P.σ r • x.val\", \"doc\": \"Let $S$ be a commutative $R$-algebra, with structure map $\\\\phi: R \\\\to S$. Let $I = \\\\ker(\\\\phi)$ be the kernel ideal in $R$. The cotangent module $I/I^2$ has an $S$-module structure. This theorem descri\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; existing elementary action and tangent APIs are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "attracting|dynamic|cocharacter",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no exact match; existing elementary action and tangent APIs are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n dynamic|attracting|Attracting|cocharacter|Contracting|contracting lean/Sheaf lean/WeilConjectures; rg -n lem-sfb-relative-dynamic-attracting-subgroup lean/WeilConjectures",
+   "results": "No declaration for this relative functor or theorem. Hits concern unrelated contracting homotopies/correspondences and polynomial-prime contractions. TorusCharacterTangentWeights is over fields and tests rational points; StandardGroupSchemes defines Gm only over fields. Existing Lie.Ring defines Lie modules and actual tangent points over arbitrary rings, and is reused.",
+   "date": "2026-10-24",
+   "verdict": "no duplicate of the new relative orbit and universal-weight definitions"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dynamic-attracting-subgroup",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Theorem 4.1.4, printed p.110, and its proof, pp.116-118; Remark 4.2.4. Closed canonical exponential of the root line, uniqueness and arbitrary base change.  Supporting prerequisite: Conrad, Reductive group schemes, Theorem 4.1.7(1),(2),(4), printed pp.112-114, and Proposition 4.1.10(2), printed p.115 (equivariant functoriality); arbitrary base change noted before that proposition. Definitions of the relative orbit functor, positive tangent weights and canonical base-change comparisons used in the statement of lem-sfb-relative-dynamic-attracting-subgroup.",
+   "via": [
+    "lem-sfb-relative-dynamic-attracting-subgroup",
+    "lem-sfb-relative-canonical-root-exponential",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDynamicAttractionData",
+  "declaration": "AlgebraicGeometry.RelativeDynamic.Attracts",
+  "declarations": [
+   "AlgebraicGeometry.RelativeDynamic.affineLine",
+   "AlgebraicGeometry.RelativeDynamic.puncturedLine",
+   "AlgebraicGeometry.RelativeDynamic.zeroSection",
+   "AlgebraicGeometry.RelativeDynamic.characters",
+   "AlgebraicGeometry.RelativeDynamic.IsOrbitExtension",
+   "AlgebraicGeometry.RelativeDynamic.homogeneous",
+   "AlgebraicGeometry.RelativeDynamic.tangentCoefficient",
+   "AlgebraicGeometry.RelativeDynamic.weightSpace",
+   "AlgebraicGeometry.RelativeDynamic.dualBaseMap",
+   "AlgebraicGeometry.RelativeDynamic.IsTangentComparison",
+   "AlgebraicGeometry.RelativeDynamic.affine",
+   "AlgebraicGeometry.RelativeDynamic.map",
+   "AlgebraicGeometry.RelativeDynamic.linePoint",
+   "AlgebraicGeometry.RelativeDynamic.ActsByAutomorphisms",
+   "AlgebraicGeometry.RelativeDynamic.IsContractingOrbitExtension",
+   "AlgebraicGeometry.RelativeDynamic.Attracts",
+   "AlgebraicGeometry.RelativeDynamic.Represents",
+   "AlgebraicGeometry.RelativeDynamic.positiveWeights",
+   "AlgebraicGeometry.RelativeDynamic.HasUnipotentGeometricFibres",
+   "AlgebraicGeometry.RelativeDynamic.baseChange",
+   "AlgebraicGeometry.RelativeDynamic.forgetPoint",
+   "AlgebraicGeometry.RelativeDynamic.TangentImage",
+   "AlgebraicGeometry.RelativeDynamic.tangentMap",
+   "AlgebraicGeometry.RelativeDynamic.RepresentsAfterBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDynamicAttractionData.lean",
+  "statement": "def Attracts {A : Type u} [CommRing A]\n    (H : Grp (Over (Spec (.of A)))) [ModObj ((RingGroupSchemes.multiplicative A).X) H.X]\n    {T : Over (Spec (.of A))} (h : T ⟶ H.X) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "F1 repair: owns the shared line, orbit-restriction, homogeneous-function, tangent-weight, coefficient-map and tangent-comparison definitions, moved from the Q27 theorem module with their original names and data. It imports no theorem module. Contracting extensions add the zeroSection value condition to IsOrbitExtension."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "group": "M-Q23-maint",
+  "result": "pass",
+  "note": "Mechanical F1 ownership extraction requested in the independent Q23 return on 97753ddfde39, whose mathematics was accepted. The ten shared definition bodies are verbatim Q27 definitions; the other definitions retain the returned Q23 packet. Q27 authorship and every original dependency are preserved. Single-file compilation recorded in the maintenance note; the item itself remains subject to normal independent review."
+ }
+}

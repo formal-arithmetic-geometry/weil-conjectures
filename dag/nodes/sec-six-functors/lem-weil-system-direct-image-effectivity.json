@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-system-direct-image-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of direct image of a coherent reduction system",
+ "statement": "Let ell be prime, E/Q_ell finite, and X,Y finite-type schemes over a field K₀ in which ell is invertible, with f:X→Y a K₀-morphism. Use the actual sectionwise strict quotient-system direct image and normalized reduction and reconstruction calculus. For every normalized IntegralComparisonCoefficientData D and every K in the intrinsic bounded constructible derived-complete integral category on X, the whole-system counit of D.system Y is an isomorphism at the total derived system direct image of (D.system X).reduction(K). This assertion is made before a horizontal pullback or the alpha comparison. Additivity of the actual ordinary system direct image and K-injective resolutions of the source system category are the usual categorical assumptions for its total right derived functor; the parent module proves these instances.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; whole-system reconstruction step in the source proof of directAlpha_isIso; Stacks Project, Tag 0941."
+ },
+ "proof": [
+  {
+   "text": "Compute derived direct image of the coherent reduction system on one simultaneous resolution. The normalized varying-ring evaluation theorem identifies all finite direct images and their quotient transitions.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; whole-system reconstruction step in the source proof of directAlpha_isIso; Stacks Project, Tag 0941."
+   }
+  },
+  {
+   "text": "Use complete-direct-image finite reduction comparisons and finite-type integral direct-image constructibility to identify this cartesian strict system with the reduction system of its bounded constructible Roos realization.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; whole-system reconstruction step in the source proof of directAlpha_isIso; Stacks Project, Tag 0941."
+   }
+  },
+  {
+   "text": "The normalized reduction calculus computes reconstruction by the actual whole-system counit. On the cartesian coherent system this counit is an isomorphism, with the prescribed projections, rather than a map chosen from finite isomorphism classes.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; whole-system reconstruction step in the source proof of directAlpha_isIso; Stacks Project, Tag 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-trf-integral-pullback-comparison-realization"
+ ],
+ "proof_origin": {
+  "by": "Y6",
+  "document": "lean/Sheaf/Paper/SystemOperationExchangeRealization.lean",
+  "place": "Geometric reconstruction step of the existing directAlpha_isIso source proof; remaining as a separate strictly earlier obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The reconstruction counit is an isomorphism on the derived direct image of a coherent constructible quotient coefficient system",
+   "results": "leanfinder returned eight unrelated coherent/condensed adjunction results. Local rg found varying-ring evaluation and complete-direct-image finite reduction.",
+   "date": "2026-10-27",
+   "verdict": "No theorem directly supplies whole-system counit effectivity for this operation."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso _",
+   "results": "0 hits; unknown identifier IsIso in the service.",
+   "date": "2026-10-27",
+   "verdict": "Local Mathlib functorial preservation of isomorphisms supplies the alpha combination."
+  },
+  {
+   "tool": "grep",
+   "query": "systemDirectImage_effective|directImage.*counit|counit.*directImage",
+   "results": "0 service hits; rg found the finite reduction and system evaluation declarations.",
+   "date": "2026-10-27",
+   "verdict": "State the geometric reconstruction step explicitly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemOperationExchangeRealization",
+  "date": "2026-10-27",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-system-operation-exchange-realization",
+   "place": "The first three sentences of the directAlpha_isIso proof: direct-image quotient coherence, finite reductions and whole-system reconstruction counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemDirectImageEffectivity",
+  "file": "lean/Sheaf/Paper/SystemDirectImageEffectivity.lean",
+  "declaration": "WeilConjectures.systemDirectImage_effective",
+  "statement": "theorem systemDirectImage_effective\n    (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))]\n    [(integralComparisonSequenceDirectImage l E f).Additive]\n    [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : IntegralComparisonCoefficientData l E) (K : sfIntegralConstructibleCategory l E X) :\n    IsIso ((D.system Y).adjunction.counit.app\n      ((integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj\n        ((D.system X).reduction.obj K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261027T103527-L-1102474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261027T103527-L-1102474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

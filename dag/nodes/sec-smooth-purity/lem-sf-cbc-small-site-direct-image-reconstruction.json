@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-cbc-small-site-direct-image-reconstruction",
+ "kind": "statement",
+ "title": "Small-site strict direct-image projection and unit normalization",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let U,V be small sites and f:Sh(U)→Sh(V) a geometric morphism with its constant-module inverse-image lift [lem-sp-completion-mate-comparison]. Let A be a commutative ring with CompleteCoefficientDatum d [def-weil-pbc-complete-coefficient-datum], put B=ULift(A) in the site universe and J the image of d.ideal under the canonical ring equivalence. For every derived J-complete K on U with B coefficients, the specified strict counit-tensor projection h_f: R_V(Rf_*K)→R^tower f_* R_U(K) is invertible, and eta_(Rf_*K) followed by Rlim(h_f) equals Rf_*(eta_K) followed by the specified adjunction-conjugate directLimitIso at R_U(K). The equality holds in the derived strict-diagram formulation; no equality is inferred from faithfulness of derived evaluations.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+ },
+ "stmt_deps": [
+  "lem-sp-completion-mate-comparison",
+  "def-weil-pbc-complete-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Transport quotients, their transition maps, and finite perfect resolutions through ULift.ringEquiv. The canonical quotient isomorphism identifies each B/J^(n+1) with ULift(A/I^(n+1)). Evaluation of the strict counit-tensor mate is the finite perfect-coefficient projection map, hence invertible. Derived strict-tower cohomology is levelwise, so the whole mate is invertible.",
+   "uses": [
+    "lem-sf-cbc-direct-image-reduction-unit",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+   }
+  },
+  {
+   "text": "Use the identity-component constant-tower/pullback comparison. Its conjugate through the prescribed constant/limit and pullback/pushforward adjunctions is directLimitIso. Uniqueness of the right-derived comparison identifies this with the normalized direct-image/derived-limit map, including its constant-tower normalization.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-sf-cbc-constant-tower-direct-image-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+   }
+  },
+  {
+   "text": "The ordinary quotient augmentation commutes with constant pullback and tensor balancing. Pass to the universal derived quotient presentation and transpose: h i = towerPush(i) chi. Apply the derived limit, the constant-tower normalization, and naturality of directLimitIso to obtain eta_(Rf_*K) Rlim(h)=Rf_*(eta_K) b. This is normalized augmentation transport on the small sites; it uses no uniform bounds.",
+   "uses": [
+    "lem-sf-cbc-normalized-augmentation-transport",
+    "lem-sf-cbc-direct-image-reduction-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cbc-direct-image-reduction-unit",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "lem-sf-cbc-normalized-augmentation-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N(3),(4); sites-cohomology.tex Tags 0B56, 0941 and 0A07; strict-diagram refinement of fix-lem-exchanges Step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent reconstruction of finite composites from natural comparison maps between reduction functors",
+   "results": "8 hits about composable arrows, Dold-Kan comparisons, filtered functors and sequence composition. No derived sheaf completion result.",
+   "date": "2026-10-25",
+   "verdict": "No match; use the project normalized completion and derived strict tower interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerRight",
+   "results": "Whiskering, identities and isomorphism preservation; no completion or direct-image normalization theorem.",
+   "date": "2026-10-25",
+   "verdict": "These supply the formal composition operations only."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|derivedProjectionFormulaMate",
+   "results": "msearch Mathlib grep: 0 hits. Project rg found CompletionFiniteReduction, CompletedPullbackUnitTower, SfCbcDirectImageReductionUnit and ConstantTowerDirectImageNormalization; their signatures were inspected.",
+   "date": "2026-10-25",
+   "verdict": "Existing project results use other coefficient/site presentations or an unnecessary CompleteCoefficientDatum for finite reduction. The new statements isolate the required generalization and transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of the completion unit is an isomorphism and direct image commutes with the derived limit of quotient towers",
+   "results": "8 hits about ordinary AdicCompletion and profinite limits; no matching derived sheaf theorem.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfCbcCompactSupportCompositionLimit",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 5, strict-diagram reconstruction: Small-site strict direct-image projection and unit normalization",
+   "via": [
+    "lem-sf-cbc-compact-support-composition-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmallSiteDirectImageReconstruction",
+  "file": "lean/Sheaf/Paper/SmallSiteDirectImageReconstruction.lean",
+  "declaration": "CategoryTheory.AdicSites.smallSiteDirectImageReconstruction",
+  "statement": "theorem smallSiteDirectImageReconstruction\n    {V U : Site.{t + 1}} (f : Morphism V U)\n    {A : Type t} [CommRing A] (d : AlgebraicGeometry.Scheme.CompleteCoefficientDatum A)\n    (K : U.derived (ULift.{t + 1, t} A))\n    (hK : U.IsComplete _ (d.ideal.map ULift.ringEquiv.symm.toRingHom) K) :\n    let I := d.ideal.map ULift.ringEquiv.symm.toRingHom\n    IsIso (f.towerProjection (ULift.{t + 1, t} A) I K) ∧\n      (V.unit _ I).app ((f.push _).obj K) ≫\n          (V.rlim _).map (f.towerProjection _ I K) =\n        (f.push _).map ((U.unit _ I).app K) ≫\n          (f.directLimitIso _).hom.app ((U.reduction _ I).obj K)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1c28",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T123324-L-1858071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1c28",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T123324-L-1858071",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new modules/nodes against the clone (statement byte-identical, plain-import swap only), new sorry hole smallSiteDirectImageReconstruction against completionMateComparison/Stacks 0B54-0B56 projection formula (true, not a duplicate), unit realized lists (empty for sk-prop-sf-cbc; ringed-tower node kept via the split node's proof_deps); sandbox compile with #print axioms (sorryAx only from upstream sorried statements) and all 7 direct importers compile"
+ }
+}

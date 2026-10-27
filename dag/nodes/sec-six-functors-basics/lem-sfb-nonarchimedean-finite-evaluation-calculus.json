@@ -1,0 +1,597 @@
+{
+ "id": "lem-sfb-nonarchimedean-finite-evaluation-calculus",
+ "kind": "statement",
+ "title": "Nonarchimedean finite-evaluation bounds and parameter calculus",
+ "statement": "Fix a prime $\\ell$ and use $\\mathbf Q_\\ell$ and its absolute value from [def-weil-l-adic-numbers]. Let $X,Y$ be nonempty compact topological spaces, $I$ a finite set, $b_j:Y\\to X$ continuous for $j\\in I$, and $\\lambda_j\\in\\mathbf Q_\\ell$. Fix a real number $B\\geq0$ such that $|\\lambda_j|_\\ell\\leq B$ for all $j$. For every normed $\\mathbf Q_\\ell$-vector space $V$ satisfying $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$ and $\\|av\\|=|a|_\\ell\\|v\\|$, with its norm topology and with no completeness assumption, the formula\n$$L_V:C(X,V)\\to C(Y,V),\\qquad (L_Vf)(y)=\\sum_{j\\in I}\\lambda_j f(b_j(y))$$\ndefines a linear map, has finite supremum norms, and satisfies $\\|L_Vf\\|_\\infty\\leq B\\|f\\|_\\infty$. Every linear coefficient subspace $W\\subseteq V$, whether or not closed, is preserved: $f(X)\\subseteq W$ implies $(L_Vf)(Y)\\subseteq W$. For any topological parameter space $S$ and continuous $f:S\\times X\\to V$, the formula\n$$(L_{V,S}f)(s,y)=\\sum_{j\\in I}\\lambda_j f(s,b_j(y))$$\nis continuous on $S\\times Y$, and its restriction to each $s$ is $L_V(f(s,-))$. Any pointwise linear identities between such evaluation operators therefore hold on parameter families when they hold on every slice. Empty finite lists give zero operators, and an empty parameter space gives the unique family.\nThe class of fixed finite evaluation formulas is closed under composition with each other and under precomposition by fixed continuous maps, independently of $V$: if $Z$ is nonempty compact, $c_k:Z\\to Y$ is continuous and $(Mf)(z)=\\sum_k\\mu_k f(c_k(z))$, then\n$$(M L_Vf)(z)=\\sum_{k,j}\\mu_k\\lambda_j f(b_j(c_k(z))).$$\nIn particular, for a positive integer $m$ prime to $\\ell$, every coefficient $k/m$ with $k\\in\\mathbf Z$ has $|k/m|_\\ell\\leq1$. Thus a formula whose coefficients are integers divided by $m$, including after precomposition by continuous coordinate changes, has norm bound one, preserves all linear coefficient subspaces, and gives continuous parameter families. These conclusions include $V=0$ and cochain domains consisting of a single point.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Fixed scalar multiplication is Lipschitz: $\\|a v-a w\\|=|a|_\\ell\\|v-w\\|$. Addition is continuous since $\\|(v+w)-(v_0+w_0)\\|\\leq\\max(\\|v-v_0\\|,\\|w-w_0\\|)$. Thus each $y\\mapsto\\lambda_j f(b_j(y))$ is continuous, and induction on the finite list gives continuity of $L_Vf$, starting with the constant zero map. Distributivity in $V$ gives $L_V(f+g)=L_Vf+L_Vg$ and $L_V(af)=aL_Vf$ pointwise, hence the asserted linear map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Use Mathlib's ContinuousMap.norm_coe_le_norm to bound each pointwise norm by the continuous-map norm, giving BddAbove for both ranges. ContinuousMap.norm_eq_iSup_norm identifies both norms with their real indexed suprema. These lemmas apply on compact spaces without separation or completeness assumptions, so a separate extreme-value proof is unnecessary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "The assumed ultrametric inequality gives IsUltrametricDist V by isUltrametricDist_of_forall_norm_add_le_max_norm. For each summand, norm_smul and mul_le_mul bound its norm by B times the continuous-map norm of f. IsUltrametricDist.norm_sum_le_of_forall_le_of_nonneg bounds the finite sum, including an empty index type. ContinuousMap.norm_le turns these pointwise bounds into the asserted norm estimate. A submodule contains each scalar multiple and their finite sum, so it is preserved without closedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "For a parameter space $S$, the map $(s,y)\\mapsto(s,b_j(y))$ is continuous: the inverse image of a basic product open $U\\times O$ is $U\\times b_j^{-1}(O)$. Composing with the given continuous $f$ and using the continuous fixed scalar multiplication and finite addition of step 1 proves continuity of $L_{V,S}f$. Substitution of a fixed $s$ gives exactly $L_V(f(s,-))$. An asserted pointwise identity holds at $(s,y)$ by its slice identity at $s$; equality of functions is pointwise equality. Empty $S$ has the unique function to $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Expand the composite at $z$: $\\sum_k\\mu_k\\sum_j\\lambda_j f(b_j(c_k(z)))=\\sum_k\\sum_j(\\mu_k\\lambda_j)f((b_j\\circ c_k)(z))$, by finite distributivity. The index set of pairs is finite and each $b_j\\circ c_k$ is continuous, giving the claimed finite formula. Precomposition by a fixed continuous map $u$ simply replaces $b_j$ by $b_j\\circ u$. These formulas and their coefficients involve only the original maps and scalars, independently of $V$. With either list empty the same expansion is the zero sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+   }
+  },
+  {
+   "text": "Padic.norm_natCast_eq_one_iff gives norm one for m from coprimality, and Padic.norm_int_le_one bounds every integer. By norm_div, every integer divided by m has norm at most one. Apply the already proved finite-evaluation bound with B = 1 both to the original coordinate maps and to their precompositions. The argument includes zero coefficients, empty finite index types, zero vector spaces and singleton compact domains.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "R2 Lean proof of the finite-evaluation auxiliary below paragraph (3): direct Mathlib continuous-map norm API, ultrametric finite-sum bound, pointwise algebra and p-adic integer norm lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite sums of continuous evaluations with l-adic integral coefficients are norm nonincreasing preserve all coefficient subspaces and commute with continuous parameter families",
+   "results": {
+    "t": "2026-10-22T06:04:02Z",
+    "tool": "leanfinder",
+    "query": "Finite sums of continuous evaluations with l-adic integral coefficients are norm nonincreasing preserve all coefficient subspaces and commute with continuous parameter families",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.hasSum_mahler",
+     "PadicInt.mahlerSeries",
+     "PadicInt.mahlerTerm",
+     "PadicInt.mahlerSeries_apply",
+     "PadicInt.mahlerEquiv",
+     "PadicInt.mahlerSeries_apply_nat",
+     "PadicInt.mahlerTerm_apply",
+     "PadicInt.hasSum_mahlerSeries"
+    ],
+    "digest": "b691e4a8767e220a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mahler infinite series require completeness and a different domain; operator norm bounds assume an existing bounded map. ContinuousMap normed-space instances do not assert the combined finite-evaluation, subspace and parameter calculus. ContinuousMap/Compact inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous linear operator defined by a fixed finite sum of evaluations over a nonarchimedean field has norm at most the maximum coefficient norm and preserves subspaces and parameters",
+   "results": {
+    "t": "2026-10-22T06:04:36Z",
+    "tool": "leansearch",
+    "query": "A continuous linear operator defined by a fixed finite sum of evaluations over a nonarchimedean field has norm at most the maximum coefficient norm and preserves subspaces and parameters",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.opNNNorm_le_bound",
+     "LinearMap.mkContinuous_norm_le'",
+     "ContinuousLinearMap.opNorm",
+     "Module.Basis.opNNNorm_le",
+     "ContinuousLinearMap.le_opNorm",
+     "ContinuousLinearMap.le_opNorm_of_le",
+     "ContinuousLinearMap.opNorm_le_bound'",
+     "ContinuousLinearMap.norm_def"
+    ],
+    "digest": "319f20bcdd76e551"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mahler infinite series require completeness and a different domain; operator norm bounds assume an existing bounded map. ContinuousMap normed-space instances do not assert the combined finite-evaluation, subspace and parameter calculus. ContinuousMap/Compact inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"norm_sum_le\"",
+   "results": {
+    "t": "2026-10-22T06:04:14Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"norm_sum_le\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: Loogle is currently under load, please try again later.",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: loogle: Loogle is currently under load, please try again later."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUltrametricDist\"",
+   "results": {
+    "t": "2026-10-22T06:04:57Z",
+    "tool": "loogle",
+    "query": "\"IsUltrametricDist\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "IsUltrametricDist",
+     "IsUltrametricDist.isClopen_ball",
+     "IsUltrametricDist.isClosed_ball",
+     "IsUltrametricDist.subtype",
+     "IsUltrametricDist.dist_triangle_max",
+     "IsUltrametricDist.frontier_ball_eq_empty",
+     "IsUltrametricDist.mk",
+     "IsUltrametricDist.isClopen_closedBall"
+    ],
+    "digest": "9caf34a3a77069f2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mahler infinite series require completeness and a different domain; operator norm bounds assume an existing bounded map. ContinuousMap normed-space instances do not assert the combined finite-evaluation, subspace and parameter calculus. ContinuousMap/Compact inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_sum_le|norm_smul_le|continuous_sum",
+   "results": {
+    "t": "2026-10-22T06:04:14Z",
+    "tool": "grep",
+    "query": "norm_sum_le|norm_smul_le|continuous_sum",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean",
+     "Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean"
+    ],
+    "digest": "315800f5973b91b6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mahler infinite series require completeness and a different domain; operator norm bounds assume an existing bounded map. ContinuousMap normed-space instances do not assert the combined finite-evaluation, subspace and parameter calculus. ContinuousMap/Compact inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_coe_le_norm|norm_le|norm_apply|norm_def",
+   "results": {
+    "t": "2026-10-23T04:14:39Z",
+    "tool": "grep",
+    "query": "norm_coe_le_norm|norm_le|norm_apply|norm_def",
+    "sub": "Topology/ContinuousMap/Compact.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "199",
+     "200",
+     "207",
+     "208",
+     "210"
+    ],
+    "digest": "f993e780e0702820"
+   },
+   "date": "2026-10-23",
+   "verdict": "candidate: source-file search wrapper returned malformed file/line columns; repeated as a directory search and read Compact.lean directly. Not used as a match receipt."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_coe_le_norm|theorem norm_le",
+   "results": {
+    "t": "2026-10-23T04:15:20Z",
+    "tool": "grep",
+    "query": "norm_coe_le_norm|theorem norm_le",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean",
+     "Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Star.lean"
+    ],
+    "digest": "e1fe6f987397c148"
+   },
+   "date": "2026-10-23",
+   "verdict": "candidate building block: ContinuousMap.norm_le and norm_coe_le_norm, Compact.lean:199,207; not the full evaluation calculus. Existing minimum node already gives finite suprema, so no new node."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousAdd|continuousSMul|isBounded_range|instNormed",
+   "results": {
+    "t": "2026-10-23T04:15:20Z",
+    "tool": "grep",
+    "query": "continuousAdd|continuousSMul|isBounded_range|instNormed",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Algebra/Exponential.lean",
+     "Mathlib/Analysis/Normed/Algebra/TrivSqZeroExt.lean",
+     "Mathlib/Analysis/Normed/Algebra/TrivSqZeroExt.lean",
+     "Mathlib/Analysis/Normed/Algebra/TrivSqZeroExt.lean",
+     "Mathlib/Analysis/Normed/Algebra/TrivSqZeroExt.lean",
+     "Mathlib/Analysis/Normed/Algebra/Unitization.lean",
+     "Mathlib/Analysis/Normed/Algebra/Unitization.lean",
+     "Mathlib/Analysis/Normed/Algebra/Unitization.lean"
+    ],
+    "digest": "efe030d48720b2b5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern continuous operations, specialized analytic series, generic linear-map continuity or precomposition. Finite continuity and composition here are proved directly; no exact combined finite-evaluation declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions on a compact space into a normed group have finite supremum norm and pointwise upper bounds give a norm bound",
+   "results": {
+    "t": "2026-10-23T04:15:20Z",
+    "tool": "leansearch",
+    "query": "Continuous functions on a compact space into a normed group have finite supremum norm and pointwise upper bounds give a norm bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.norm_coe_le_norm",
+     "ContinuousMap.norm_le",
+     "ContinuousMap.nnnorm_lt_iff",
+     "ContinuousMap.norm_lt_iff_of_nonempty",
+     "ContinuousMap.norm_lt_iff",
+     "ContinuousMap.norm_le_of_nonempty",
+     "ContinuousMap.instNorm",
+     "ContinuousMap.nnnorm_lt_iff_of_nonempty"
+    ],
+    "digest": "cca0c62b6e40c4e3"
+   },
+   "date": "2026-10-23",
+   "verdict": "candidate building block: ContinuousMap.norm_le and norm_coe_le_norm, Compact.lean:199,207; not the full evaluation calculus. Existing minimum node already gives finite suprema, so no new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.norm_le",
+   "results": {
+    "t": "2026-10-23T04:15:20Z",
+    "tool": "loogle",
+    "query": "ContinuousMap.norm_le",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "ContinuousMap.norm_le"
+    ],
+    "digest": "0a2a6c5c7d041c3b"
+   },
+   "date": "2026-10-23",
+   "verdict": "candidate building block: ContinuousMap.norm_le and norm_coe_le_norm, Compact.lean:199,207; not the full evaluation calculus. Existing minimum node already gives finite suprema, so no new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous.sum",
+   "results": {
+    "t": "2026-10-23T04:15:20Z",
+    "tool": "loogle",
+    "query": "Continuous.sum",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Continuous.sum'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Loogle rejected the unknown identifier Continuous.sum; not evidence of absence. Finite continuity is proved directly in the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of addition and scalar multiplication in a normed space",
+   "results": {
+    "t": "2026-10-23T04:15:20Z",
+    "tool": "leansearch",
+    "query": "Continuity of addition and scalar multiplication in a normed space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "continuous_add",
+     "ContinuousSMul",
+     "ContinuousAdd.continuous_add",
+     "IsModuleTopology.toContinuousAdd",
+     "instContMDiffAddOfNatWithTopENatOfContinuousAdd",
+     "ModuleTopology.continuousAdd",
+     "ContinuousAdd.mk",
+     "continuousAdd_of_contMDiffAdd"
+    ],
+    "digest": "919b78572067dbf4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern continuous operations, specialized analytic series, generic linear-map continuity or precomposition. Finite continuity and composition here are proved directly; no exact combined finite-evaluation declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For continuous maps from a compact topological space to a normed additive group the supremum norm is finite evaluation is bounded by the norm and pointwise bounds imply supremum bounds",
+   "results": {
+    "t": "2026-10-23T04:15:23Z",
+    "tool": "leanfinder",
+    "query": "For continuous maps from a compact topological space to a normed additive group the supremum norm is finite evaluation is bounded by the norm and pointwise bounds imply supremum bounds",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.norm_le",
+     "ContinuousMap.norm_le_of_nonempty",
+     "ContinuousMap.norm_coe_le_norm",
+     "ContinuousMap.norm_lt_iff_of_nonempty",
+     "ContinuousMap.norm_lt_iff",
+     "ContinuousMap.nnnorm_lt_iff_of_nonempty",
+     "ContinuousMap.nnnorm_lt_iff",
+     "ContinuousMap.apply_le_norm"
+    ],
+    "digest": "bf555fff2eaf3894"
+   },
+   "date": "2026-10-23",
+   "verdict": "candidate building block: ContinuousMap.norm_le and norm_coe_le_norm, Compact.lean:199,207; not the full evaluation calculus. Existing minimum node already gives finite suprema, so no new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sums of compositions of continuous maps with scalar multiplication are continuous in a normed vector space including arbitrary product parameters",
+   "results": {
+    "t": "2026-10-23T04:15:24Z",
+    "tool": "leanfinder",
+    "query": "Finite sums of compositions of continuous maps with scalar multiplication are continuous in a normed vector space including arbitrary product parameters",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FormalMultilinearSeries.partialSum_continuous",
+     "FormalMultilinearSeries.continuousOn_of_finite",
+     "PartitionOfUnity.continuous_finsum_smul",
+     "ContinuousMultilinearMap.hasSum_eval",
+     "ContinuousAlternatingMap.hasSum_eval",
+     "LinearMap.continuous_on_pi",
+     "Continuous.fourierPowSMulRight",
+     "ContinuousMultilinearMap.tsum_eval"
+    ],
+    "digest": "49b457494ca49bf3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern continuous operations, specialized analytic series, generic linear-map continuity or precomposition. Finite continuity and composition here are proved directly; no exact combined finite-evaluation declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "sum.*comp|comp.*sum|norm_sum|norm_comp",
+   "results": {
+    "t": "2026-10-23T04:16:16Z",
+    "tool": "grep",
+    "query": "sum.*comp|comp.*sum|norm_sum|norm_comp",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Periodic.lean",
+     "Mathlib/Topology/ContinuousMap/Periodic.lean",
+     "Mathlib/Topology/ContinuousMap/Periodic.lean",
+     "Mathlib/Topology/ContinuousMap/Periodic.lean",
+     "Mathlib/Topology/ContinuousMap/Periodic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean"
+    ],
+    "digest": "df54efa0c0621070"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern continuous operations, specialized analytic series, generic linear-map continuity or precomposition. Finite continuity and composition here are proved directly; no exact combined finite-evaluation declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite linear combination of continuous pullbacks on compact domains is bounded by the largest coefficient in an ultrametric vector space",
+   "results": {
+    "t": "2026-10-23T04:16:16Z",
+    "tool": "leansearch",
+    "query": "A finite linear combination of continuous pullbacks on compact domains is bounded by the largest coefficient in an ultrametric vector space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsUltrametricDist.nnnorm_sum_le_of_forall_le",
+     "IsUltrametricDist.norm_sum_le_of_forall_le_of_nonempty",
+     "IsUltrametricDist.norm_sum_le_of_forall_le_of_nonneg",
+     "IsUltrametricDist.exists_norm_finset_sum_le_of_nonempty",
+     "Finset.nnnorm_sum_le_sup_nnnorm",
+     "IsUltrametricDist.exists_norm_finset_sum_le",
+     "IsUltrametricDist.norm_tsum_le_of_forall_le_of_nonneg",
+     "IsUltrametricDist.norm_sum_eq_sup'_of_pairwise_ne"
+    ],
+    "digest": "434aebebb5c86090"
+   },
+   "date": "2026-10-23",
+   "verdict": "candidate building block: IsUltrametricDist.norm_sum_le_of_forall_le_of_nonneg. Item step 3 proves this finite induction explicitly from the assumed ultrametric inequality; no new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, NormedSpace",
+   "results": {
+    "t": "2026-10-23T04:16:16Z",
+    "tool": "loogle",
+    "query": "ContinuousMap, NormedSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "BoundedContinuousFunction.compContinuousCLM",
+     "BoundedContinuousFunction.norm_compContinuousCLM_le_one",
+     "BoundedContinuousFunction.compContinuousCLM_apply",
+     "ContinuousMap.normedSpace",
+     "ContinuousMap.integral_apply",
+     "intervalIntegral.hasSum_intervalIntegral_of_summable_norm",
+     "intervalIntegral.tsum_intervalIntegral_eq_of_summable_norm",
+     "cfc_integral"
+    ],
+    "digest": "257c52dc7c8e7e69"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: normed function-space instance and continuous precomposition maps do not by a one-line specialization supply the combined finite evaluation, subspace, composition and arbitrary-parameter statement. Read Compact.lean:301 and Bounded/Normed.lean:302–321."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean finite evaluation operators on continuous vector valued functions preserve subspaces compose by finite double sums and are continuous on arbitrary parameter families",
+   "results": {
+    "t": "2026-10-23T04:16:26Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean finite evaluation operators on continuous vector valued functions preserve subspaces compose by finite double sums and are continuous on arbitrary parameter families",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FunOnFinite.continuous_linearMap",
+     "LinearMap.continuous_on_pi",
+     "Pi.compRightL",
+     "ContinuousLinearMap.sum_comp_single",
+     "IsModuleTopology.continuous_bilinear_of_pi_fintype",
+     "ContinuousAlternatingMap.hasSum_eval",
+     "Profinite.NobelingProof.Linear_CC'₀",
+     "Profinite.NobelingProof.Linear_CC'₁"
+    ],
+    "digest": "36529431a1d5a162"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern continuous operations, specialized analytic series, generic linear-map continuity or precomposition. Finite continuity and composition here are proved directly; no exact combined finite-evaluation declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel auxiliary expansion: composition of evaluation formulas, ultrametric supremum bounds, subspace preservation and continuous parameter families; retained item proof steps 12–14. Agent-formulated, not asserted in the blueprint.",
+   "via": [
+    "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nonarchimedean-finite-evaluation-calculus",
+  "worker": "stage1",
+  "group": "Q80",
+  "summary": "Statement unchanged. Reused the existing compact real minimum Mathlib leaf for finite suprema; all remaining continuity, finite ultrametric induction, subspace, parameter, composition and valuation arguments are written out. No new nodes: a new compact supremum lemma would be an elementary specialization of the existing minimum node. Searches checked the full claim and candidate building blocks; no exact project attachment or single Mathlib specialization covers the complete statement.",
+  "blueprint": "Realizes the finite-evaluation auxiliary content of retained Q76 original steps 12–14 beneath paragraph (3) of det-thm-sf-ctf-stability-direct-images. That paragraph itself only states the direct-image coefficient route; the present analytic expansion is explicitly agent-written. The inherited null blueprint ancestor agrees with tools/blueprint_refs.py ancestor; no blueprint node states the evaluation calculus."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-fd1053619",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-fd1053619 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, together with the statements of both cited nodes and the source paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md lines 19-25. That paragraph does not state this calculus, so proof_origin=agent is correct; the item is Q76's auxiliary for its original steps 12-14. The delivery is one commit with zero new nodes. The statement and stmt_deps are identical to the live and side-live clones, where the item is still unsplit and unreviewed, and there is no repair note, so it is not superseded. proof_deps equal the union of the step uses. Both cited nodes are Mathlib leaves (IsCompact.exists_isMinOn for compact-real-function-minimum, Padic for def-weil-l-adic-numbers), so no route issue or tool_use arises. Step 1: continuity follows from |a|-Lipschitz scalar multiplication and the ultrametric sum estimate, by finite induction; linearity is distributivity. Step 2: the minimum node allows an arbitrary T and nonempty compact C=T, so the attained maximum of the norm gives a finite sup with no Hausdorff or completeness hypothesis; the step rightly avoids compact-function-space-complete, which needs a Hausdorff domain and complete V. Step 3: the ultrametric induction from the empty sum gives the B-bound; non-closed subspaces are preserved because only finite sums occur; B=0 is covered. Step 4: product continuity from the preimage of U×O is U×b⁻¹(O); slices and empty S are handled; no compactness of S is used. Step 5: the double-sum expansion is correct, and precomposition replaces b_j by b_j∘u. Step 6: v_ℓ(k)≥0 and v_ℓ(m)=0 give |k/m|≤1, using the extended valuation from the def node; V=0 and a one-point domain are direct. I tested λ=(1/2,1/2) at ℓ=3 and ℓ=2, the empty list, V=0, and the 2×2 composition products kk'/m². I read the near DAG candidates (finite-quotient-contractive-average, compact-parameter-functional, pointwise-finite-ultrametric-cochain-series, scalar-cochain-averaging-primitives, procyclic-scalar-cochain-evaluation, ultrametric-criterion-natural-norms); none is a duplicate or a missed citation. The null blueprint.from.node is inherited from the base. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.FiniteEvaluationCalculus",
+  "declaration": "ContinuousMap.nonarchimedean_finiteEvaluation_calculus",
+  "declarations": [
+   "ContinuousMap.finiteEvaluationLinearMap",
+   "ContinuousMap.finiteEvaluationParameterMap",
+   "ContinuousMap.nonarchimedean_finiteEvaluation_calculus"
+  ],
+  "file": "lean/Sheaf/Analysis/Normed/FiniteEvaluationCalculus.lean",
+  "statement": "theorem nonarchimedean_finiteEvaluation_calculus (l : ℕ) [Fact l.Prime] (X : Type u) (Y : Type v) [TopologicalSpace X] [TopologicalSpace Y] [CompactSpace X] [CompactSpace Y] [Nonempty X] [Nonempty Y] (I : Type t) [Fintype I] (b : I → C(Y, X)) (c : I → ℚ_[l]) (B : ℝ) (hB : 0 ≤ B) (hc : ∀ i, ‖c i‖ ≤ B) (V : Type w) [NormedAddCommGroup V] [NormedSpace ℚ_[l] V] (hV : ∀ v w : V, ‖v + w‖ ≤ max ‖v‖ ‖w‖) : (∀ (f : C(X, V)) (y : Y), finiteEvaluationLinearMap l V b c f y = ∑ i : I, c i • f (b i y)) ∧ (∀ f : C(X, V), BddAbove (Set.range (fun x : X ↦ ‖f x‖)) ∧ BddAbove (Set.range (fun y : Y ↦ ‖finiteEvaluationLinearMap l V b c f y‖)) ∧ ‖f‖ = ⨆ x : X, ‖f x‖ ∧ ‖finiteEvaluationLinearMap l V b c f‖ = ⨆ y : Y, ‖finiteEvaluationLinearMap l V b c f y‖ ∧ ‖finiteEvaluationLinearMap l V b c f‖ ≤ B * ‖f‖) ∧ (∀ (W : Submodule ℚ_[l] V) (f : C(X, V)), (∀ x, f x ∈ W) → ∀ y, finiteEvaluationLinearMap l V b c f y ∈ W) ∧ (∀ (S : Type s) [TopologicalSpace S], (∀ f : C(S × X, V), Continuous (fun p : S × Y ↦ ∑ i : I, c i • f (p.1, b i p.2)) ∧ (∀ p : S × Y, finiteEvaluationParameterMap l V b c S f p = ∑ i : I, c i • f (p.1, b i p.2)) ∧ (∀ (q : S) (y : Y), finiteEvaluationParameterMap l V b c S f (q, y) = finiteEvaluationLinearMap l V b c (f.comp ((ContinuousMap.const X q).prodMk (ContinuousMap.id X))) y)) ∧ (∀ (A : Type a) [Fintype A] (J : A → Type r) [∀ q, Fintype (J q)] (d : ∀ q, J q → C(Y, X)) (e : ∀ q, J q → ℚ_[l]) (α : A → ℚ_[l]) (f : A → C(S × X, V)), (∀ (q : S) (y : Y), ∑ k : A, α k • finiteEvaluationLinearMap l V (d k) (e k) ((f k).comp ((ContinuousMap.const X q).prodMk (ContinuousMap.id X))) y = 0) → ∀ p : S × Y, ∑ k : A, α k • finiteEvaluationParameterMap l V (d k) (e k) S (f k) p = 0) ∧ (IsEmpty S → ∀ f g : C(S × Y, V), f = g)) ∧ (IsEmpty I → finiteEvaluationLinearMap l V b c = 0 ∧ ∀ (S : Type s) [TopologicalSpace S], finiteEvaluationParameterMap l V b c S = 0) ∧ (∀ (Z : Type z) [TopologicalSpace Z] [CompactSpace Z] [Nonempty Z] (J : Type j) [Fintype J] (d : J → C(Z, Y)) (e : J → ℚ_[l]), (finiteEvaluationLinearMap l V d e).comp (finiteEvaluationLinearMap l V b c) = finiteEvaluationLinearMap l V (fun q : J × I ↦ (b q.2).comp (d q.1)) (fun q ↦ e q.1 * c q.2)) ∧ (∀ (Z : Type z) [TopologicalSpace Z] [CompactSpace Z] [Nonempty Z] (u : C(Z, Y)) (f : C(X, V)), (finiteEvaluationLinearMap l V b c f).comp u = finiteEvaluationLinearMap l V (fun i ↦ (b i).comp u) c f) ∧ (∀ (m : ℕ), 0 < m → Nat.Coprime m l → (∀ k : ℤ, ‖(k : ℚ_[l]) / (m : ℚ_[l])‖ ≤ 1) ∧ (∀ (k : I → ℤ) (f : C(X, V)), ‖finiteEvaluationLinearMap l V b (fun i ↦ (k i : ℚ_[l]) / (m : ℚ_[l])) f‖ ≤ ‖f‖) ∧ (∀ (Z : Type z) [TopologicalSpace Z] [CompactSpace Z] [Nonempty Z] (u : C(Z, Y)) (k : I → ℤ) (f : C(X, V)), ‖finiteEvaluationLinearMap l V (fun i ↦ (b i).comp u) (fun i ↦ (k i : ℚ_[l]) / (m : ℚ_[l])) f‖ ≤ ‖f‖))",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two helper definitions are actual finite sums of Mathlib precomposition maps, including on products with an arbitrary parameter space. The single theorem states every clause of the node, without completeness or separation assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81163e4ee",
+  "group": "Q141",
+  "result": "pass",
+  "note": "First delivery; node changes only by the new lean field; statement verbatim with := by sorry; 3 declarations with source/blueprint docstrings and all 6 proof steps. finiteEvaluationLinearMap and finiteEvaluationParameterMap are real finite sums of Mathlib compCLM (not hollow). Every clause matches the node, none stronger: linear map and formula; BddAbove and sup = ContinuousMap norm; bound <= B*norm; every Submodule with no IsClosed; arbitrary topological S with continuity, slice equation (const q prodMk id) and slice-identity transfer; empty I gives zero operators; empty S uniqueness; composition over J x I with b_j∘c_k and mu_k*lambda_j (order checked); precomposition (L f)∘u; m>0 coprime to l gives |k/m|<=1 and norm bound 1 including after precomposition. No CompleteSpace, Hausdorff or extra instances; universes bound; edge cases (empty I/J/A/S, B=0, V=0, singletons, m=1, k=0) true. No duplicate found in Mathlib or project lean; stmt_dep def-weil-l-adic-numbers = Padic leaf. The citer rectangle-replacement's use is covered. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T070729-L-3648620",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

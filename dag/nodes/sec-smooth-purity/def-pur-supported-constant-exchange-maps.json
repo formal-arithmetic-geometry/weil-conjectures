@@ -1,0 +1,150 @@
+{
+ "id": "def-pur-supported-constant-exchange-maps",
+ "kind": "definition",
+ "title": "Canonical supported constant site-exchange map",
+ "status": "split",
+ "statement": "Let $Z,X$ be schemes [def-pc-scheme] in object universe $u$ and let $A$ be a commutative ring in universe $u+1$ [def-weil-size-convention]. For $s=\\mathrm{et},\\mathrm{proet}$ use the existing small sites and their topologies [def-weil-pbc-etale-site] [def-weil-pbc-proetale-site], with ordinary fixed-$A$ module sheaves $\\operatorname{Mod}_s(T,A)$ [def-weil-sheaf-of-modules-category] and constant coefficient module $A_{T,s}$ [def-weil-pbc-constant-sheaf]. For a scheme morphism $i:Z\\to X$, write $i_s^*\\dashv i_{s,*}$ for the existing inverse/direct-image adjunctions [def-weil-pbc-inverse-image] [def-weil-proetale-inverse-image] [def-weil-pbc-direct-image] [def-weil-proetale-module-direct-image]. Put $P_{s,i}=i_{s,*}A_{Z,s}$ and define the constant restriction $\\rho_{s,i}:A_{X,s}\\to P_{s,i}$ as the adjunction transpose of the canonical scalar-preserving constant identification $i_s^*A_{X,s}\\cong A_{Z,s}$.\n\nWrite $C_T=\\nu_T^*$ for the etale-to-pro-etale comparison inverse image [def-weil-pbc-site-comparison-morphism], $q_T:C_T A_{T,\\mathrm{et}}\\xrightarrow{\\sim} A_{T,\\mathrm{proet}}$ for its canonical constant-unit identification, and $k_i:C_Z i_{\\mathrm{et}}^*\\xrightarrow{\\sim}i_{\\mathrm{proet}}^*C_X$ for the coherent inverse-image comparison of that morphism of sites [def-per-site-comparison-pullback-data]. Define $\\gamma_{A,i}:C_X P_{\\mathrm{et},i}\\to P_{\\mathrm{proet},i}$ to be the adjunction transpose under $i_{\\mathrm{proet}}^*\\dashv i_{\\mathrm{proet},*}$ of\n$$i_{\\mathrm{proet}}^* C_X P_{\\mathrm{et},i}\\xrightarrow{k_i^{-1}} C_Z i_{\\mathrm{et}}^*i_{\\mathrm{et},*}A_{Z,\\mathrm{et}}\\xrightarrow{C_Z(\\mathrm{counit})}C_Z A_{Z,\\mathrm{et}}\\xrightarrow{q_Z}A_{Z,\\mathrm{proet}}.$$\nThis defines the actual canonical site-exchange map and its plain components for arbitrary $i$; the closed-immersion case is its specialization. No invertibility or normalization theorem is asserted by this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 095L, adjunction-mate exchange and constant restriction; site-comparison specialization in the rank-one Thom proof Step 1, already constructed in SupportedConstantExchangeNormalization.gamma."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale to proetale comparison of supported constant sheaves as the adjunction mate of inverse image coherence",
+   "results": "{\"t\": \"2026-10-22T11:10:24Z\", \"tool\": \"leansearch\", \"query\": \"Canonical etale to proetale comparison of supported constant sheaves as the adjunction mate of inverse image coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\"], \"digest\": \"b976d3c4a95c4646\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib map: hits concern constant sheaves or general adjunctions. Reuse gamma and its explicit components in the existing Sheaf module, adding only their missing definition-node ownership."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale to proetale comparison of supported constant sheaves as the adjunction mate of inverse image coherence",
+   "results": "{\"t\": \"2026-10-22T11:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale to proetale comparison of supported constant sheaves as the adjunction mate of inverse image coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.constantSheafAdj_counit_w\", \"CondensedMod.LocallyConstant.adjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"CompHausLike.LocallyConstant.adjunction\", \"LightCondSet.LocallyConstant.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\"], \"digest\": \"707b1806c9b98c1b\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib map: hits concern constant sheaves or general adjunctions. Reuse gamma and its explicit components in the existing Sheaf module, adding only their missing definition-node ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedConstantNormalization|comparePullback|compareUnit",
+   "results": "{\"t\": \"2026-10-22T11:10:23Z\", \"tool\": \"grep\", \"query\": \"SupportedConstantNormalization|comparePullback|compareUnit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib map: hits concern constant sheaves or general adjunctions. Reuse gamma and its explicit components in the existing Sheaf module, adding only their missing definition-node ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n SupportedConstantNormalization|functorialCupExactHom lean/WeilConjectures; rg -l SupportedConstantNormalization|functorialCupExactHom dag/nodes; python3 tools/blueprint_refs.py search \"supported constant\"; read lean/Sheaf/AlgebraicGeometry/SupportedConstantExchangeNormalization.lean",
+   "results": "No upstream source match. DAG matches only the two theorem nodes lem-pur-supported-constant-exchange-normalization and lem-pur-supported-cup-functoriality. Blueprint search: 0 nodes match supported constant. The existing Sheaf module defines gamma at line 292 by the displayed adjunction mate, with its plain components at lines 53--286; no definition node owns them.",
+   "date": "2026-10-22",
+   "verdict": "Existing Sheaf constructions reused without a new module; this new node provides missing definition ownership."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-cartier-relative-kummer-realization",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 1: canonical supported source and exact derived-arrow comparisons in the finite-root Cartier realization.",
+   "via": [
+    "lem-pur-cartier-relative-kummer-realization",
+    "lem-pur-line-zero-class-etale-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedConstantExchangeNormalization",
+  "declaration": "AlgebraicGeometry.SupportedConstantNormalization.gamma",
+  "declarations": [
+   "AlgebraicGeometry.SupportedConstantNormalization.Site",
+   "AlgebraicGeometry.SupportedConstantNormalization.siteCategory",
+   "AlgebraicGeometry.SupportedConstantNormalization.topology",
+   "AlgebraicGeometry.SupportedConstantNormalization.Modules",
+   "AlgebraicGeometry.SupportedConstantNormalization.sheafify",
+   "AlgebraicGeometry.SupportedConstantNormalization.constant",
+   "AlgebraicGeometry.SupportedConstantNormalization.pull",
+   "AlgebraicGeometry.SupportedConstantNormalization.push",
+   "AlgebraicGeometry.SupportedConstantNormalization.adj",
+   "AlgebraicGeometry.SupportedConstantNormalization.unitIso",
+   "AlgebraicGeometry.SupportedConstantNormalization.supported",
+   "AlgebraicGeometry.SupportedConstantNormalization.restriction",
+   "AlgebraicGeometry.SupportedConstantNormalization.compare",
+   "AlgebraicGeometry.SupportedConstantNormalization.compareUnit",
+   "AlgebraicGeometry.SupportedConstantNormalization.comparePullback",
+   "AlgebraicGeometry.SupportedConstantNormalization.gamma"
+  ],
+  "statement": "def gamma {Z X : Scheme.{u}} (i : Z ⟶ X) :\n    (compare A X).obj (supported A false i) ⟶ supported A true i",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership of the existing adjunction-mate gamma and its ordinary fixed-scalar site, constant, inverse/direct-image, adjunction, restriction and comparison components. These are plain constructions, not choices from comparison_square or the normalization theorem. Invertibility and normalization remain separate theorem assertions. No Lean source is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1d6a4ae",
+  "group": "Q80",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1d6a4ae",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Re-delivery of the dbeda4e3 H2 RETURN. stmt_deps now cite def-pur-supported-constant-exchange-maps (gamma), def-pur-exact-derived-hom-map (functorialCupExactHom) and def-pur-supported-class-operations (functorialCupPullback) instead of the two theorems; lem-pur-supported-constant-exchange-normalization stays in proof_deps. Both new nodes are existing:true with lean.statement verbatim from side-live (gamma l.292, functorialCupExactHom l.1645), TeX matches the bodies, and check_new_node is clean. F1 fixed: gamma's comparePullback = supportSiteComparisonCoefficientPullbackIso is owned by def-per-site-comparison-pullback-data, which the new node did not cite; fixes/def-pur-supported-constant-exchange-maps.json adds the stmt_dep and the citation (no cycle). Lean compile repair: relativeCartierProLine is now a direct match; the new named sorry theorem relativeCartierProExt_type (Ext type equality, true by unfolding Coefficient = ULift coefficientExtensionRing level = finiteTateCoefficient (level-1) after cases; dbeda type-checked the same transport by cases+simpa) is used by .mp to transport the same cartier_kummer_map .choose class. This is the prescribed named-sorry-helper form and is not hollow. All theorem signatures are unchanged and the mathematics is as accepted in dbeda (all clauses, edge cases n=1, ramified, empty, d=0). No recompile (record-only fix); worker reports 42.3/42.9 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6a107",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261024T191216-L-272422",
+  "kind": "interface",
+  "note": "independent cc review: delivered SupportedConstantExchangeNormalization (6 sorries closed, siteCategory @[reducible]/topology abbrev, openBackward via openTranspose) vs live module, change records, node lem-pur-supported-constant-exchange-normalization, 4 direct importers compiled against the delivered olean, #print axioms",
+  "sorry_before": [
+   "AlgebraicGeometry.SupportedConstantNormalization.compareSectionMap_existsUnique",
+   "AlgebraicGeometry.SupportedConstantNormalization.comparison_square",
+   "AlgebraicGeometry.SupportedConstantNormalization.presentation",
+   "AlgebraicGeometry.SupportedConstantNormalization.scheme_normalization",
+   "AlgebraicGeometry.SupportedConstantNormalization.sectionMap_existsUnique",
+   "AlgebraicGeometry.SupportedConstantNormalization.site_normalization"
+  ],
+  "sorry_after": []
+ }
+}

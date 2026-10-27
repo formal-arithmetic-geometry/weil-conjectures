@@ -1,0 +1,111 @@
+{
+ "id": "def-cbc-completed-ordinary-counit-transport",
+ "kind": "definition",
+ "title": "Canonical counit-normalized transport of ordinary completed-coefficient pullback",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], with $A$ in universe $t+1$, and let $h:S\\to T$ be a morphism of schemes in universe $t$. Use the ordinary total left derived module pullback along the canonical completed coefficient map of [def-weil-pbc-completed-pullback] and the exact derived module pullback $d.\\mathrm{pull}(h)$ of [def-weil-pbc-exact-pullback-interface]. The completed coefficient maps, ordinary module pullback functors, and their functors on cochain complexes agree by their specified section formulas. Define $u_h:\\mathrm{completedOrdinaryPullback}(h,d)\\simeq d.\\mathrm{pull}(h)$ as the unique natural isomorphism satisfying the universal resolving-counit normalization of [def-cbc-completed-pullback-counit-transport]: for every cochain complex $P$, its component at $Q(P)$ followed by the exact-derived factorization of the module pullback equals the resolving counit of the ordinary total derived pullback, after the specified equality of module-pullback complexes. This is the unique normalized ordinary comparison, before completion of its values. Existence and uniqueness determine its data; no completeness, open immersion, boundedness, or isomorphism assumption on $h$ is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-exact-pullback-interface",
+  "def-cbc-completed-pullback-counit-transport"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Bijections and Purity, canonical pullback/reduction identification; ordinary-counit normalization used in integral geometric comparison proof Steps 4 and 8. Published construction: Sheaf/Paper/CompletedOpenExchangeTransport.lean, cbcDatumOrdinaryTransport_exists and cbcDatumOrdinaryTransport; Stacks 099N, 06YS."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between two left derived functors is uniquely characterized by compatibility with the resolving counit.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Functor.leftDerivedUnique.congr_simp\", \"CategoryTheory.Functor.leftDerived_ext\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.leftDerivedLift\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"CategoryTheory.Adjunction.derivedε\"]}",
+   "date": "2026-10-26",
+   "verdict": "Generic Mathlib interfaces only; use the exact already published project construction, recorded with existing: true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical natural isomorphism between derived inverse images uniquely normalized by the counit on complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.leftDerivedNatIso_inv\", \"DerivedCategory.singleFunctorIsoCompQ\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\"]}",
+   "date": "2026-10-26",
+   "verdict": "Generic Mathlib interfaces only; use the exact already published project construction, recorded with existing: true."
+  },
+  {
+   "tool": "grep",
+   "query": "exactDerivedCounitTransport|cbcDatumOrdinaryTransport|ExactDerivedCounitNormalization",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-26",
+   "verdict": "Generic Mathlib interfaces only; use the exact already published project construction, recorded with existing: true."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcDatumOrdinaryTransport|cbcCompleteProperty; definition ownership in dag/nodes; rg in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search cbcDatumOrdinaryTransport and cbcCompleteProperty",
+   "results": "No exact declaration in WeilConjectures; the published Sheaf declarations were found and read. No definition node owns the ordinary transport or cbcCompleteProperty; the containing theorem is their only ownership record. blueprint_refs.py search gives zero matches for both declaration names.",
+   "date": "2026-10-26",
+   "verdict": "Add definition-node ownership of the existing construction, as requested by return H2; do not define a second copy."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-geometric-comparison-realization",
+  "date": "2026-10-26",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Bijections and Purity, canonical pullback/reduction identification; ordinary-counit normalization used in integral geometric comparison proof Steps 4 and 8. Published construction: Sheaf/Paper/CompletedOpenExchangeTransport.lean, cbcDatumOrdinaryTransport_exists and cbcDatumOrdinaryTransport; Stacks 099N, 06YS.",
+   "via": [
+    "lem-pur-integral-geometric-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOpenExchangeTransport",
+  "declaration": "AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcDatumModulePull_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumModulePullComplex_eq",
+   "AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport_exists",
+   "AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport"
+  ],
+  "statement": "def cbcDatumOrdinaryTransport : completedOrdinaryPullback h d ≅ d.pull h",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Existing:true ownership added in repair of immutable returned head dd3cc2a4f21b, H2. The published declaration is reused verbatim; no use of the containing module's completedOpenExchangeComparison theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c456b699",
+  "group": "ND",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c456b699",
+  "group": "ND",
+  "result": "fix",
+  "note": "Re-delivery after H2 RETURN of dd3c. The Lean is identical apart from one public import of CompletedExtensionZeroComparison. The item's stmt_deps swap the theorem lem-cbc-completed-extension-zero-comparison for two existing:true owner nodes, def-cbc-completed-ordinary-counit-transport (cbcDatumModulePull_eq, cbcDatumModulePullComplex_eq, cbcDatumOrdinaryTransport_exists and the ∃!.choose cbcDatumOrdinaryTransport) and def-cbc-intrinsic-complete-property (cbcCompleteProperty); both statements are verbatim with side-live, the prose is accurate, there is no copy and no cycle, and dual listing with the theorem node is the normal re-export pattern. Mathematics re-read against every node clause: the pullback/limit unit squares, K-injective clauses, counit-preserving G, gamma, eta, epsilon, B = completedCompactSupportExchange for all generating tuples, b pinned to towerTateWord, and e as the transpose of P(eps)B^-1 all hold. Edge cases hold: d=0, empty schemes, general E, r=0, universes u/u+1. F1 FIX: the cbcCompleteProperty node's type uses pbcModules/pbcAdicCompletion, but their owner def-weil-pbc-bounded-constructible-tower was not in its stmt_dep closure; fixes/def-cbc-intrinsic-complete-property.json adds and cites it. No Lean change, so no compile."
+ }
+}

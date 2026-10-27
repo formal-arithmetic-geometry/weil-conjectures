@@ -1,0 +1,369 @@
+{
+ "id": "lem-sfb-fpqc-open-subgroup-coset-space",
+ "kind": "statement",
+ "title": "Etale coset space for an fpqc form with an open subgroup",
+ "statement": "Let $R$ be a discrete valuation ring, $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum], and let $F$ be an fpqc sheaf of groups on $S$-schemes [def-weil-pbc-fpqc-covering]. Suppose $p:T\\to S$ is fpqc and $F_T$ is represented by a separated flat group scheme $P$ locally of finite presentation [def-pc-representable-functor, def-weil-flat-morphism, def-sbc-locally-finite-presentation]; separated means the diagonal is a closed immersion [def-weil-closed-immersion]. Let $H\\subset F$ be an open subgroup subfunctor [def-pc-subfunctor, def-weil-open-immersion] such that $H_T$ is of finite presentation over $T$. Form the fppf sheafification $Q=H\\backslash F$ of $V\\mapsto H(V)\\backslash F(V)$, where the equivalence relation is $y=hx$ [def-pc-fppf-site, def-weil-pbc-sheafification]. Then $Q$ is an etale algebraic space over $S$ [def-trf-algebraic-space, def-weil-etale-morphism], and it admits a set-indexed covering by quasi-compact open subspaces $Q_a$ of finite presentation over $S$. A quasi-compact space admits a surjective etale atlas from a quasi-compact scheme; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. Each $Q_a$ admits a surjective etale map $\\coprod_{i=1}^{r_a}W_{ai}\\to Q_a$ with $W_{ai}$ affine and separated etale of finite presentation over $S$ [def-weil-affine-spectrum]. Write $q:F\\to Q$ for the quotient map. The morphism $q_T:P\\to Q_T$ is representable by schemes, flat, separated and of finite presentation, with fppf local sections on every scheme test. The natural map $H\\times_SF\\to F\\times_QF$, $(h,x)\\mapsto(hx,x)$, is an isomorphism of fppf sheaves, and $q$ has fppf local sections on every scheme test. Formation of this quotient and this isomorphism commutes with arbitrary base change on $S$. Normality of $H$ is not required; $Q$ is a coset space, not asserted to be a group.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU1 (lemma-quotient-etale), applied on the fpqc representing cover to the open relation y x^{-1} in H; bootstrap.tex Tag 06PH (lemma-quotient-free-action), for the torsor and quotient map. Agent fpqc-form formulation and finite-presentation chart consequences; etale descent is used before representing F, not inferred from the trait schematicity theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-subfunctor",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "First $H$ is an fpqc sheaf. Indeed a compatible family in $H$ glues in $F$; membership of the resulting section in $H$ is tested by the open subscheme of the test scheme obtained by pulling back $H\\subset F$. This open contains the images of the covering, hence is the whole test scheme. Apply affine refinement to $T\\to S$ and write the refining cover as $\\operatorname{Spec}B\\to S$. The scheme representing $H_B$ is of finite presentation by base change. The DVR $R$ meets the hypotheses of the finite-stage lemma: ideals are principal, hence it is Noetherian; its dimension is one; and it is integrally closed, since an element of negative valuation cannot satisfy a monic polynomial (the leading power has strictly smaller valuation than all other terms). The finite-stage lemma applied to the fpqc sheaf $H$ gives an fppf affine cover $U\\to S$ such that $H_U$ is a scheme of finite presentation.",
+   "uses": [
+    "lem-galois-fpqc-singleton-affine-refinement",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "lem-sfb-dedekind-fpqc-model-finite-type-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM with more-algebra.tex Tag 0AUW; Anantharaman Lemma 4.2.1, first paragraph, pp.55-56; affine refinement Tag 022E."
+   }
+  },
+  {
+   "text": "The scheme $H_U\\to U$ is flat. After the fpqc cover $U\\times_S\\operatorname{Spec}B\\to U$ it is the base change of the open subgroup $H_B\\subset P_B$. Restricting a flat morphism to an open subscheme preserves flatness because the local-ring maps are unchanged. Base-change flatness and fpqc descent of flatness therefore apply. The singleton chart $H_U\\to H_U$ meets the site-size condition of fppf-local algebraic-space representability, so that lemma represents the fppf sheaf $H$ by an algebraic space. Its multiplication, inverse and unit are already natural transformations and hence morphisms. Fppf locality now makes $H\\to S$ flat and of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-sfb-fppf-local-algebraic-space",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04SK for H; descent of flatness and finite presentation on the fppf cover; scheme flat fpqc descent."
+   }
+  },
+  {
+   "text": "For any scheme $B\\to S$, sheafification of the left-coset presheaf has local lifts from $F_B$: first lift a section locally to a coset, then choose its representative. Two sections $x,y\\in F_B(V)$ have equal images precisely when fppf locally $y=hx$ with $h\\in H_B$. Such an $h$ is unique, namely $yx^{-1}$, and the local sections glue in $H_B$. Thus $(h,x)\\mapsto(hx,x)$ gives $H_B\\times_BF_B\\simeq F_B\\times_{Q_B}F_B$, with inverse $(y,x)\\mapsto(yx^{-1},x)$, and $F_B\\to Q_B$ has fppf local sections. Here restriction to $B$ commutes with sheafification: on a test $V\\to B$ both constructions use exactly its fppf covers and their refinements. Their local lifts and local equality tests therefore give mutually inverse maps between the two sheafifications. This also identifies the displayed torsor isomorphisms under every further base change.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WB and 00WK; explicit left-coset calculation on slice sites."
+   }
+  },
+  {
+   "text": "Over $T$, put $A=H_T$. The left action of $A$ on $P$ is free: $hx=x$ implies $h=1$. Its relation is $A\\times_TP$ with $(t,s)(h,x)=(hx,x)$. The map $(y,x)\\mapsto yx^{-1}$ identifies this relation with the inverse image of the open subgroup $A\\subset P$, so it is an open immersion into $P\\times_TP$; the groupoid identities are the group identities. The open-relation quotient theorem applies because $P/T$ is flat locally of finite presentation and gives an etale algebraic space $E'=Q_T$. The free-action theorem applies because $A/T$ is flat locally of finite presentation and gives that $P\\to E'$ is flat, locally of finite presentation, surjective and has fppf local sections.",
+   "uses": [
+    "lem-sfb-open-relation-etale-quotient",
+    "lem-sfb-free-flat-group-space-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1, with bootstrap.tex Tag 06PH; apply to left multiplication."
+   }
+  },
+  {
+   "text": "Every scheme test $V\\to E'$ has $X=P\\times_{E'}V$ a scheme by representability of scheme maps to spaces. Fppf locally on $V$ a section trivializes $X$ as $A\\times_TV$, by step 3. Finite presentation of $A/T$ and fppf locality of finite presentation give $X/V$ of finite presentation; thus $q_T$ is of finite presentation on every test. Its diagonal is the pullback of the closed diagonal $P\\to P\\times_TP$ along $P\\times_{E'}P\\to P\\times_TP$, so $q_T$ is separated. To check that $E'/T$ is quasi-separated, pull its diagonal back along $P\\times_TP\\to E'\\times_TE'$. The resulting map is $j:A\\times_TP\\to P\\times_TP$. It is quasi-compact: its projection to the second $P$ is the finite-presentation base change of $A/T$, and its map to the product factors through its closed graph, since $P/T$ is separated. For an affine test $Z\\to E'\\times_TE'$, the pullback of $P\\times_TP\\to E'\\times_TE'$ is a flat surjective finite-presentation scheme cover of $Z$, hence fpqc. Base change preserves quasi-compactness of $j$, and fpqc descent of quasi-compactness on this test proves that the diagonal of $E'/T$ is quasi-compact.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-fpqc-qc-separated-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH and torsor trivializations; qc descent and closed-graph diagonal argument."
+   }
+  },
+  {
+   "text": "The sheaf $Q$ is fpqc separated. To test equality of two sections after an fpqc covering, choose fppf local lifts $x,y$ from step 3. On the pulled-back fpqc covering, equality is equivalent to $yx^{-1}\\in H$. That membership descends because $H$ is an fpqc subsheaf of $F$, so the lifts have equal cosets already. Equality then glues on the fppf cover. Now let $(q_i\\in Q(V_i))$ be a matching family on an fpqc cover of $V$. On $V$ define $X(W)$ to be the set of $x\\in F(W)$ such that $q(x)$ restricts to $q_i$ on every $W\\times_VV_i$. The fpqc sheaf condition for $F$ and the fpqc separatedness just proved make $X$ an fpqc sheaf. Over $V_i$ it is exactly the fibre above $q_i$, because the matching condition and separatedness test equality on the pulled-back cover. Step 3 makes these fibres fppf locally trivial left $H_{V_i}$-torsors. Thus $X$ is an fpqc torsor under the flat locally finitely presented group algebraic space $H_V$. The torsor-comparison lemma makes it fppf locally trivial on $V$. Local sections of $X\\subset F$ now give sections of $Q$ which glue on this fppf cover to a section restricting to every $q_i$. Separatedness gives uniqueness. This proves the fpqc sheaf condition for $Q$.",
+   "uses": [
+    "lem-sfb-flat-lfp-fpqc-torsor-fppf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cesnavicius-problems-torsors-regular-rings.pdf",
+    "place": "Section 1.2.3 for fpqc-to-fppf torsor comparison; explicit subsheaf of local lifts supplies sheaf gluing."
+   }
+  },
+  {
+   "text": "The etale space $E'=Q_T$ has its canonical cocycle datum, since it is the restriction of the sheaf $Q$. Step 5 checked its relative quasi-separatedness. Apply trait etale-space effectivity to this datum to obtain an etale algebraic space $E/S$ whose pullback is $E'$. Both $E$ and $Q$ are fpqc sheaves, the former by the algebraic-space sheaf theorem and the latter by step 6. Their compatible local isomorphism on $T$ therefore gives a unique global isomorphism by the covering equalizer condition, checked on every $V\\to S$. Consequently $Q$ is this etale algebraic space. This use of descent assumes no quasi-compactness of the full coset space.",
+   "uses": [
+    "lem-sfb-trait-etale-space-fpqc-effectivity",
+    "lem-a1-algebraic-space-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Trait-specific effectivity prerequisite, with fpqc equalizer identification; not a direct use of the quasi-compact-object theorem (5.17)."
+   }
+  },
+  {
+   "text": "Choose a scheme etale atlas of $Q$ and all its affine open charts $W_a$. Their images are open and quasi-compact, by openness and continuity on point spaces; these images define open subspaces $Q_a$ and cover $Q$. To check quasi-separatedness, any two affine etale charts $W,W'\\to Q$ have etale composites to $S$. Their product over $S$ is affine and locally Noetherian, hence Noetherian, since etale maps are locally of finite type and $R$ is Noetherian. The scheme $W\\times_QW'$ is open in $W\\times_SW'$: it is the pullback of the open diagonal of the unramified map $Q\\to S$. Every open of a Noetherian space is quasi-compact. The affine-pair criterion therefore makes $Q$ absolutely quasi-separated, and the same argument applies to each open $Q_a$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-etale-morphism",
+    "lem-sfb-unramified-space-open-diagonal",
+    "pqf-def-locnoeth",
+    "lem-sfb-noetherian-space-topology",
+    "lem-sfb-etale-affine-pairs-test-quasiseparated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GE and 01T6; spaces point topology, etale diagonal and affine-pair quasi-separatedness criterion."
+   }
+  },
+  {
+   "text": "Each $Q_a\\to S$ is locally of finite presentation since it is etale. It is quasi-compact and quasi-separated by the qcqs permanence lemma applied to its quasi-compact, absolutely quasi-separated source and the affine target $S$. Thus it is of finite presentation. The affine-atlas lemma gives a surjective etale map $W_{a1}\\to Q_a$ with $W_{a1}$ affine. Its composite with $Q_a\\to S$ is etale. Since source and target are affine this composite is separated (on rings its diagonal is the spectrum of the surjection $A\\otimes_R A\\to A$), and qcqs permanence gives finite presentation. This is the required finite affine atlas with $r_a=1$. Steps 3 and 5 already prove all the quotient-map and torsor clauses. Step 3 also proves arbitrary base-change compatibility, with no normality assumption: the calculation uses $yx^{-1}\\in H$ and left multiplication alone.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Etale finite-presentation charts using qcqs permanence; affine diagonal multiplication map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one",
+  "lem-sfb-dedekind-fpqc-model-finite-type-stage",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-sfb-fppf-local-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sfb-open-relation-etale-quotient",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-fpqc-qc-separated-descent",
+  "lem-sfb-flat-lfp-fpqc-torsor-fppf",
+  "lem-sfb-trait-etale-space-fpqc-effectivity",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-etale-morphism",
+  "lem-sfb-unramified-space-open-diagonal",
+  "pqf-def-locnoeth",
+  "lem-sfb-noetherian-space-topology",
+  "lem-sfb-etale-affine-pairs-test-quasiseparated",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-qc-space-affine-etale-atlas"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0DU1 and 06PH for the representing-cover quotient; explicit fpqc topology comparison and trait descent assembly as recorded in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coset|openSubgroup|quotient.*etale",
+   "results": "{\"t\": \"2026-10-24T12:53:41Z\", \"tool\": \"grep\", \"query\": \"coset|openSubgroup|quotient.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: topological coset quotients and Galois-category realizations concern different objects; scheme etale instances do not construct a sheaf coset space or descend it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-24T12:53:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: topological coset quotients and Galois-category realizations concern different objects; scheme etale instances do not construct a sheaf coset space or descend it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subgroup quotient of a flat group scheme is etale and the quotient map is flat of finite presentation when the subgroup is finitely presented",
+   "results": "{\"t\": \"2026-10-24T12:53:41Z\", \"tool\": \"leansearch\", \"query\": \"An open subgroup quotient of a flat group scheme is etale and the quotient map is flat of finite presentation when the subgroup is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"QuotientGroup.isOpenQuotientMap_mk\", \"QuotientGroup.discreteTopology\", \"QuotientAddGroup.isOpenQuotientMap_mk\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"Subgroup.quotient_finite_of_isOpen\", \"QuotientAddGroup.isOpenMap_coe\", \"QuotientGroup.isQuotientMap_mk\"], \"digest\": \"b4d12df7b712b937\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: topological coset quotients and Galois-category realizations concern different objects; scheme etale instances do not construct a sheaf coset space or descend it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of left cosets by a finite presentation open subgroup of an fpqc locally representable flat group sheaf is an etale algebraic space and its quotient map is a torsor",
+   "results": "{\"t\": \"2026-10-24T12:53:42Z\", \"tool\": \"leanfinder\", \"query\": \"The sheaf of left cosets by a finite presentation open subgroup of an fpqc locally representable flat group sheaf is an etale algebraic space and its quotient map is a torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"4064f72ca3f706a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: topological coset quotients and Galois-category realizations concern different objects; scheme etale instances do not construct a sheaf coset space or descend it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every open subgroup quotient of an fpqc form of a flat locally finitely presented group scheme is an etale algebraic space, with finite presentation quotient map after the given fpqc base change",
+   "results": "{\"t\": \"2026-10-24T12:56:28Z\", \"tool\": \"leanfinder\", \"query\": \"Every open subgroup quotient of an fpqc form of a flat locally finitely presented group scheme is an etale algebraic space, with finite presentation quotient map after the given fpqc base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"ef2547f2e3654e7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: topological coset quotients and Galois-category realizations concern different objects; scheme etale instances do not construct a sheaf coset space or descend it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of left cosets by an open subgroup of an fpqc form of a flat locally finitely presented group scheme is an etale algebraic space",
+   "results": "{\"t\": \"2026-10-24T15:57:37Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf of left cosets by an open subgroup of an fpqc form of a flat locally finitely presented group scheme is an etale algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"fc7395d0ccdc7754\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed hits concern topological cosets, finite-presentation properties or the scheme etale site, not the sheaf coset quotient and fpqc algebraic-space effectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-24T16:09:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: query error, loogle: unknown identifier 'AlgebraicGeometry.IsEtale'"
+  },
+  {
+   "tool": "grep",
+   "query": "coset|GroupScheme|quotient.*[eE]tale",
+   "results": "{\"t\": \"2026-10-24T16:09:20Z\", \"tool\": \"grep\", \"query\": \"coset|GroupScheme|quotient.*[eE]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed hits concern topological cosets, finite-presentation properties or the scheme etale site, not the sheaf coset quotient and fpqc algebraic-space effectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open subgroup coset quotient of a flat group scheme as an etale algebraic space",
+   "results": "{\"t\": \"2026-10-24T16:09:20Z\", \"tool\": \"leansearch\", \"query\": \"Open subgroup coset quotient of a flat group scheme as an etale algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DoubleCoset.left_bot_eq_left_quot\", \"AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace\", \"Subgroup.quotient_finite_of_isOpen'\", \"DoubleCoset.Quotient\", \"AddSubgroup.quotient_finite_of_isOpen\", \"AddSubgroup.quotient_finite_of_isOpen'\", \"QuotientGroup.instTopologicalSpace\", \"QuotientGroup.instT2Space\"], \"digest\": \"eb8db803629df2f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: reviewed hits concern topological cosets, finite-presentation properties or the scheme etale site, not the sheaf coset quotient and fpqc algebraic-space effectivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-trait-group-finite-component-opens",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited trait descent: 4.2 Step 5 action argument, made precise using the etale space of H-orbits; used to construct invariant opens including generic-only pieces",
+   "via": [
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-fpqc-open-subgroup-coset-space",
+  "worker": "stage1",
+  "group": "Q66",
+  "summary": "Kept the full statement and all its base-change clauses. Constructed the open left-action relation on the representing cover, proved the quotient map finite presentation and separated and the quotient relatively quasi-separated, represented H independently via the existing finite-type-stage lemma, compared the fppf and fpqc quotient using torsors, and descended the possibly infinite etale coset space by a trait-specific prerequisite. Two general statement-only prerequisites; no Mathlib match, Lean writes or compiles.",
+  "blueprint": "The inherited from.place identifies det-thm-sf-ctf-stability-direct-images proof (3), Anantharaman 4.2 Step 5 H-orbits. Steps 1-7 supply its fpqc etale orbit-space argument without using the downstream trait group effectivity or assuming finitely many cosets; steps 8-9 supply the finite-presentation open charts. Whole latest-blueprint searches found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-singleton-affine-refinement",
+    "why": "Generic A singleton fpqc covering of an affine scheme has a finite affine-open refinement used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Generic A discrete valuation ring has dimension one used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic Base change of a flat morphism of schemes is flat used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Generic Being flat descends along fpqc coverings (Stacks 02L2) used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic Sections and local equality after sheafification on a site used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic Scheme tests and comparison maps for representable etale morphisms used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic Morphisms to an algebraic space satisfy fpqc descent used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic Point images, continuity, and open embeddings for algebraic spaces used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic Chartwise etale permanence for algebraic spaces used exactly as stated for the sheaf/descent or chart argument; this unit does not supply a replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-0d34493ff",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-0d34493ff (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged and the 9 steps are new, since the base node was statement-only. I also read both new nodes and the statement of every cited node, and checked Stacks 0DU1 (lemma-quotient-etale) and 06PH (lemma-quotient-free-action) against steps 4 and 5; the hypotheses match. Steps: (1) H is an fpqc sheaf; with 022E and the DVR being Noetherian, normal and of dimension 1, the existing Dedekind finite-type-stage lemma applies. (2) H is a flat fp group algebraic space, by flat descent, fppf-local algebraicity and fppf locality. (3) The coset torsor iso, via h=yx^-1, local lifts and the base-change clause. (4) yx^-1 gives an open relation, so 0DU1 and 06PH apply over T. (5) q_T is representable, fp and separated (the diagonal is a base change of the closed diagonal of P along a mono); j is qc by graph cancellation, so the diagonal of E'/T is qc by fpqc descent. (6) Q is fpqc separated, and the subsheaf of lifts is an fpqc H-torsor, made fppf-trivial by the new torsor node. (7) The new trait node descends E', and E≅Q because both are fpqc sheaves. (8)-(9) Noetherian affine pairs plus the open diagonal give quasi-separatedness; the qc opens Q_a are fp and have an affine separated étale fp atlas. Edge cases tested: H=F; infinitely many cosets (why the trait node must not assume qc); non-normal H in S_3; the non-separated Z/2 example (Q is never claimed separated). No duplicates found by rg -L over the DAG. No cycle. The parent's steps 2, 3 and 6 use only statement clauses. FIX: lem-sfb-trait-etale-space-fpqc-effectivity cited the lemma lem-trf-space-chartwise-etale-permanence for the notion 'chartwise etale'; I repointed it to the definition node def-sfb-space-chartwise-etale-morphism in the statement and in stmt_deps (B3; this also removes one trf citation). Trait node: I checked the report's construction of datum-stable qc opens (closure of the generic complement, Rydh 5.17 and 5.3); I find it sound and accept the node as true. Torsor node (fpqc torsor sheaf under a flat lfp group space is fppf-trivial): sourced to Česnavičius 1.2.3, which I could not open (network is blocked). Stacks has no such representability result, and examples-stacks Remark principal-stack-in-groupoids leaves related gluing conjectural. I accept it as statement-only with a caution recorded in review.md, which also notes a fallback through the Dedekind finite-stage lemma on étale charts. Batch-5: every flagged citation reaches the trace chapter only through def-trf-algebraic-space or generic algebraic-space foundations (representable étale scheme tests, chartwise étale permanence, fibre products, plus the sfb space lemmas). None is a step of the trace formula or Poincaré duality, so all flags are accepted. All declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

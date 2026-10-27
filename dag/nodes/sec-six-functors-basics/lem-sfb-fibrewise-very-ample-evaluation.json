@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-fibrewise-very-ample-evaluation",
+ "kind": "statement",
+ "title": "Fibrewise very ample line with vanishing H1 gives an evaluation embedding",
+ "statement": "Let $f:Y\\to T$ be a flat proper finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation] with geometric fibres of dimension at most one. Let $L$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. Assume that for every geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$ the complete linear system of $L_{\\bar t}$ gives a closed immersion $Y_{\\bar t}\\to\\mathbf P_\\Omega(H^0(Y_{\\bar t},L_{\\bar t}))$, and that $H^1(Y_{\\bar t},L_{\\bar t})=0$ [def-sc-sheaf-cohomology-functor]. Then $E=f_*L$ is a finite locally free [def-amb-finite-locally-free-module] $\\mathcal O_T$-module (locally of some finite rank), and for every $h:T'\\to T$, the canonical map $h^*E\\to(f_{T'})_*L_{T'}$ is an isomorphism. The evaluation map $f^*E\\to L$ is surjective and defines a closed immersion $Y\\hookrightarrow\\mathbf P_T(E)$ with pullback of $\\mathcal O(1)$ equal to $L$. The projective bundle is that of one-dimensional quotients [def-trf-projective-bundle-morphism], and the evaluation embedding commutes with arbitrary base change. Neither reducedness nor Noetherianness nor quasi-compactness of $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTM (lemma-flat-proper-perfect-direct-image-general), scheme specialization, together with more-algebra.tex Tag 0BCD (lemma-lift-perfect-from-residue-field); evaluation and closed embedding use spaces-more-morphisms.tex Tag 05XA (lemma-where-closed-immersion) and the projective-bundle quotient construction. This combined formulation is an agent statement of the standard cohomology/base-change evaluation consequence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-sc-sheaf-cohomology-functor",
+  "def-trf-projective-bundle-morphism",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "def-sfb-module-base-change-map",
+  "def-per-projective-bundle-quotient-data",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=Rf_*(L[0])$. Since $L$ is locally $\\mathcal O_Y$, it is finitely presented and flat over $T$: at $y$ its stalk is a free rank-one module over the flat $\\mathcal O_{T,f(y)}$-algebra $\\mathcal O_{Y,y}$. Apply [lem-pc-rf-perfect-base-change]. Thus $K$ is perfect and for every $h:T^\\prime\\to T$ its canonical module base-change map $Lh^*K\\to Rf_{T^\\prime,*}(L_{T^\\prime}[0])$ is an isomorphism. Under [lem-pc-canonical-direct-image-h0-unit], $H^0(K)$ is canonically $E=f_*L$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-flat-morphism",
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-canonical-direct-image-h0-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B91(2), lemma-flat-proper-perfect-direct-image-general; degree-zero augmentation as in cohomology.tex Tags 079V and 0A1G"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$ and an algebraic closure $\\Omega$ of $\\kappa(t)$. By step 1, $Li_t^*K$ computes $R\\Gamma(Y_t,L_t)$ and its extension to $\\Omega$ computes $R\\Gamma(Y_{\\bar t},L_{\\bar t})$. Extension of scalars between fields is exact and faithful (choose a vector-space basis: each summand $\\kappa(t)$ becomes a nonzero summand $\\Omega$). It therefore commutes with kernels, images and cohomology. The geometric hypothesis and the absence of negative cohomology in a right-derived functor of a module give $H^i(Li_t^*K)=0$ for $i<0$ and for $i=1$. Apply [lem-sc-perfect-finite-free-residue-model] at $t$: on an affine neighbourhood $U$, $K$ has a bounded finite-free representative $P^\\bullet$ with $P^i=0$ for $i<0$ and $P^1=0$. Consequently this representative is the direct sum of $P^0[0]$ and its subcomplex in degrees at least two. No vanishing assertion in degrees at least two is needed.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCD, lemma-lift-perfect-from-residue-field, applied after Tag 0B91 base change to ordinary and geometric residue fields"
+   }
+  },
+  {
+   "text": "On each neighbourhood $U$ of step 2, $E|_U=H^0(K|_U)\\cong P^0$, a finite free module. For every $h:V\\to U$, [lem-pc-flat-complex-derived-pullback] represents $Lh^*K$ by $h^*P^\\bullet$ and $Lh^*(E[0])$ by $(h^*E)[0]$. Both complexes have zero negative terms, and the first has zero degree-one term. Thus the pulled-back augmentation induces an isomorphism $h^*E\\to H^0(Lh^*K)$, identified with the identity of $h^*P^0$. The comparison $Lh^*(E[0])\\to(h^*E)[0]$ likewise induces the canonical isomorphism in degree zero, because $E|_U$ is finite free. Consequently the equality in [lem-pc-canonical-degree-zero-mate-square], combined with the module base-change isomorphism of [lem-pc-rf-perfect-base-change] from step 1, shows that the ordinary canonical mate $h^*E\\to(f_V)_*L_V$ is this composite of isomorphisms. These canonical maps agree on overlaps; the neighbourhoods $U$ cover $T$, and their inverse images cover every $T^\\prime$. This proves finite local freeness with locally varying finite rank and arbitrary canonical base change.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-canonical-degree-zero-mate-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08HY, remark-base-change (the counit mate), together with Tag 0BCD in more-algebra.tex and Tag 06YD for termwise flat models"
+   }
+  },
+  {
+   "text": "Let $\\epsilon:f^*E\\to L$ be the ordinary adjunction counit. In a cartesian square write $p:Y_{T^\\prime}\\to Y$ and $f^\\prime:Y_{T^\\prime}\\to T^\\prime$. By definition of the ordinary mate under [lem-pc-module-pullback-adjunction], with $\\beta_h:h^*E\\to f^\\prime_*L_{T^\\prime}$, one has $p^*\\epsilon=\\epsilon^\\prime\\circ f^{\\prime *}\\beta_h$ after the canonical pullback-composition identification. Equivalently, a local section $s$ of $f_*L$ is first restricted to the base-changed family and then evaluated; both composites evaluate that same restricted section. Since step 3 makes $\\beta_h$ invertible, the pullback of $\\epsilon$ is the evaluation map for the base-changed family. In particular, over a geometric point it is the complete-linear-system evaluation, which is surjective by hypothesis.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08HY, remark-base-change: the ordinary version of the defining counit-mate identity"
+   }
+  },
+  {
+   "text": "The evaluation is surjective already on $Y$. Indeed, at any $y\\in Y$ choose a geometric point over $y$ of a geometric fibre over $f(y)$. Trivialize $L_y\\cong\\mathcal O_{Y,y}$. The image of $\\epsilon_y$ is an ideal $I$; step 4 says its image in the geometric residue field generates that field. If $I$ were contained in the maximal ideal of $\\mathcal O_{Y,y}$, this image would be zero. Thus $I$ contains a unit, so $I=\\mathcal O_{Y,y}$. This proves stalkwise surjectivity, including over a nonreduced base; it uses no finite-generation assertion about the kernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01OA, quotient-functor discussion after definition-projective-bundle: applied to the evaluation quotient; stalkwise unit argument"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-projective-bundle-quotient-geometry] to the quasi-coherent module $E$ and the invertible quotient $f^*E\\twoheadrightarrow L$. It gives a $T$-morphism $j:Y\\to\\mathbf P_T(E)$ and a quotient-compatible identification $j^*\\mathcal O(1)\\cong L$. The same cited statement says that the target is separated over $T$ and the quotient construction is natural under pullback. In particular $j_{\\bar t}$ is the morphism of the complete linear system in the hypothesis, using the canonical identification $E_{\\bar t}=H^0(Y_{\\bar t},L_{\\bar t})$ of step 3.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OB (definition-projective-bundle), Section 01OA quotient-functor discussion, and 01OD (lemma-projective-bundle-separated)"
+   }
+  },
+  {
+   "text": "Apply the universal characterization of [lem-sfb-universal-closed-immersion-open] with $A=Y$, $B=T$, $C=\\mathbf P_T(E)$ and morphism $j$. Its hypotheses hold: $f$ is locally of finite type because it is finitely presented, is universally closed because it is proper, and $C\\to T$ is separated by [lem-trf-projective-bundle-quotient-geometry]. Obtain an open $W\\subseteq T$ characterized by the closed-immersion property after every test-scheme base change. Each geometric point $\\bar t\\to T$ factors through $W$, because step 6 identifies $j_{\\bar t}$ with the closed immersion in the hypothesis. Every point of $T$ lies under such a geometric point, so this open subscheme is all of $T$. Now use the universal characterization with the test morphism $\\mathrm{id}_T$: it gives that $j$ itself is a closed immersion. This uses the cited universal open-locus theorem, including its quantification over nonreduced test schemes; it does not infer a closed immersion directly from its geometric fibres.",
+   "uses": [
+    "lem-sfb-universal-closed-immersion-open",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XA, lemma-where-closed-immersion, scheme specialization"
+   }
+  },
+  {
+   "text": "Finally fix any $h:T^\\prime\\to T$. The quotient classification in [lem-trf-projective-bundle-quotient-geometry] identifies $\\mathbf P_T(E)\\times_TT^\\prime$ with $\\mathbf P_{T^\\prime}(h^*E)$: for a test scheme over $T^\\prime$, both classify the same invertible quotients of the pullback of $E$, and the two classifying maps obtained from their universal quotients are inverse because both composites preserve those quotients. Under step 3, $h^*E=(f_{T^\\prime})_*L_{T^\\prime}$. Step 4 identifies the pulled-back quotient with the evaluation quotient of this family. The uniqueness clause of the quotient classification therefore identifies the base change of $j$, with its twisting-module identification, with the evaluation embedding over $T^\\prime$. All arguments used neighbourhoods of individual base points; none requires a finite cover of $T$, a reduced base or a Noetherian base.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01OA after Tag 01OB: natural classification of invertible quotients, applied twice to the universal quotients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-flat-morphism",
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-canonical-direct-image-h0-unit",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-canonical-degree-zero-mate-square",
+  "lem-pc-module-pullback-adjunction",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-sfb-universal-closed-immersion-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Combined evaluation consequence of Tags 0B91(2), 0BCD, 08HY, 01OB/01OD and 05XA; explicit degree-zero splitting and stalkwise unit arguments supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented family of curves a line bundle with very ample fibres and vanishing first cohomology has finite locally free pushforward commuting with base change and its evaluation defines a closed immersion into the associated projective bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsImmersion\", \"doc\": \"The property of being an immersion of schemes is stable under base change, meaning that if a morphism of schemes is an immersion, then any base change (pullback) of this morphism is also an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, given morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is a closed immersion, then the first projection morphism $ \\text{pullback}(f, g) \\to X $ from the pullback diagra\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj charts and closed-immersion permanence do not prove the cohomology-and-base-change evaluation embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology and base change for a fibrewise very ample invertible sheaf gives a relative projective bundle embedding",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the associativity of the composition involving the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees $m, m' > 0$, the pullback of the inclusion morphisms $\\\\operatorname{Spec}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj charts and closed-immersion permanence do not prove the cohomology-and-base-change evaluation embedding"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Being a closed immersion is local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Being a closed immersion is stable under base change.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Composition with an isomorphism preserves closed immersions.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) : AlgebraicGeometry.IsClosedImmersion I.subschemeι\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `X ⟶ Y` is a closed immersion if the underlying\\ntopological map is a closed embedding and the induced stalk maps are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Closed immersions are locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"Isomorphisms are closed immersions.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsEmptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [IsEmpty ↥X] (f : X ⟶ Y) : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj charts and closed-immersion permanence do not prove the cohomology-and-base-change evaluation embedding"
+  },
+  {
+   "tool": "grep",
+   "query": "veryAmple|VeryAmple|cohomology.*baseChange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj charts and closed-immersion permanence do not prove the cohomology-and-base-change evaluation embedding"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat finitely presented family of curves a line bundle with very ample fibres and vanishing first cohomology has finite locally free pushforward commuting with base change and its evaluation defines a closed immersion into the associated projective bundle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsAffineHom f\", \"doc\": \"Every closed immersion of schemes is an affine morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective stru\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[IsClosedImmersion f] : UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj charts and closed-immersion permanence do not prove the cohomology-and-base-change evaluation embedding"
+  },
+  {
+   "tool": "grep",
+   "query": "veryAmple|VeryAmple|cohomology.*baseChange",
+   "results": "[grep] OK 0 hit(s)\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj charts and closed-immersion permanence do not prove the cohomology-and-base-change evaluation embedding"
+  },
+  {
+   "tool": "grep",
+   "query": "veryAmple|VeryAmple|cohomology.*baseChange",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flatness, Proj charts, or generators; none states coherent cohomology/base change with the relative evaluation embedding"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat cohomology and base change for an invertible sheaf with zero first cohomology on all fibres",
+   "results": "OK 8 hits: IsSMulRegular.of_flat_of_isBaseChange, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallySmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flatness, Proj charts, or generators; none states coherent cohomology/base change with the relative evaluation embedding"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsVeryAmple\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flatness, Proj charts, or generators; none states coherent cohomology/base change with the relative evaluation embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing first cohomology and global generation on every fibre gives a relative very ample complete linear system",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flatness, Proj charts, or generators; none states coherent cohomology/base change with the relative evaluation embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat family and invertible sheaf with vanishing fibre H1 has locally free direct image and evaluation embedding when fibrewise very ample",
+   "results": "OK 8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flatness, Proj charts, or generators; none states coherent cohomology/base change with the relative evaluation embedding"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-and-smooth-family-open-loci",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: The projective-bundle comparison added to the item: uniform third canonical power and its finite locally free direct image, rather than an unspecified relatively ample power depending on an affine base.",
+   "via": [
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fibrewise-very-ample-evaluation",
+  "worker": "stage1",
+  "summary": "Repair of the landing refusal, verified again on 2026-10-23: compared returned head 52664a74e625 with current sheaf-dag 5fbd63d11b90. All sixteen dependency statements are unchanged; re-read the changed closed-immersion-locus dependency, its three-step assembly and review, and Stacks 05XA. Retained the substantive repair to steps 3 and 7, all eight proof steps, searches and fourteen exact statement quotations. The ordinary canonical base-change map is identified through both degree-zero comparison isomorphisms; the closed immersion follows from the universal characterization applied to the identity test scheme. No statement change, new nodes or Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: The projective-bundle comparison added to the item: uniform third canonical power and its finite locally free direct image, rather than an unspecified relatively ample power depending on an affine base. The eight steps supply the evaluation-embedding supporting input for the stable-family projectivity comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "General proper finitely presented relatively-flat module theorem gives the perfect derived image and canonical arbitrary base change; the unit supplies no coherent-cohomology replacement."
+   },
+   {
+    "node": "lem-pc-canonical-direct-image-h0-unit",
+    "why": "Identifies the derived augmentation on H0 with the ordinary direct image, without imposing higher vanishing."
+   },
+   {
+    "node": "lem-sc-perfect-finite-free-residue-model",
+    "why": "The general perfect-complex minimal rank model isolates degrees zero and one; it is not a six-functor stability route."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Computes arbitrary derived pullback of the bounded finite-free local model termwise."
+   },
+   {
+    "node": "lem-pc-canonical-degree-zero-mate-square",
+    "why": "Identifies the calculated isomorphism with the specified ordinary canonical base-change map for arbitrary modules."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Defines ordinary tensor pullback/direct image and the counit mate used to compare evaluation quotients."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic quotient classification and separatedness of the projective bundle; no node of the unit supplies this scheme construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-canonical-direct-image-h0-unit",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-canonical-degree-zero-mate-square",
+  "lem-pc-module-pullback-adjunction",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-de238942f",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-de238942f (reviewer sub-agent of L); spot-checked: Fourth push of this split. Earlier heads 52664a74, 573b2292 and 2988a12a all PASSed and were refused at landing for promotion reasons. Compared with 2988a12a, only split_report.date and split_report.summary changed; the statement, stmt_deps, all 8 steps and proof_deps are byte-identical. There are no new nodes, no fixes and no SGA citation. I re-read the item and every cited node's statement in full. The statement is true as written: the dim ≤ 1 hypothesis is kept though unused, and empty T, rank-0 E, a dual-number base and non-quasi-compact T all work. Sources read: Stacks 0B91(2) (perfect.tex, label lemma-flat-proper-perfect-direct-image-general), 0BCD (more-algebra.tex:19594), 05XA (spaces-more-morphisms.tex:11642) and 01OB/01OD (constructions.tex:4672/4911). Step 1: L is finitely presented and flat over T, so 0B91 applies, and the h0-unit node gives H^0(K)=f_*L. Step 2: fibre H^1=0 by exact faithful field extension and negative cohomology vanishes, so the 0BCD model has P^{<0}=P^1=0 and splits as P^0[0]⊕P^{≥2}. Step 3: K lies in D^{≥0} and H^0(u_f) is an iso, so u_f is the inclusion of the P^0 summand; that summand survives pullback, so Lh^*u_f is an iso on H^0. p_h(E) is an iso because E is free, β with Rf'_*p is the step-1 iso, and the degree-zero mate-square identity then makes the ordinary mate an iso. Steps 4-5 are an elementary counit identity and a stalk unit argument, valid over a nonreduced base. Step 6: projective-bundle quotient geometry gives j, j^*O(1)≅L and separatedness. Advisory: step 6 relies on the base change of P(E) that step 8 spells out. Step 7: the 05XA hypotheses hold, geometric points give W=T, and the identity test morphism makes j a closed immersion. Step 8: Yoneda base change. No duplicate found by rg; the only citer, lem-sfb-stable-and-smooth-family-open-loci, is unaffected. The 7 tool_uses are accepted as generic tools. Batch-5 flags, each checked: lem-pc-rf-perfect-base-change reaches only def-trf-schematically-dense-open plus generic limit/base-change lemmas; lem-sc-perfect-finite-free-residue-model reaches only def-pod-ring-scalar-extension, a definition; lem-trf-projective-bundle-quotient-geometry is Stacks 01OB/01OD projective-bundle geometry, and its trf closure is only Proj charts and descent; lem-sfb-universal-closed-immersion-open reaches only the trf unramified-locus and residue criteria. None of these is given by, or is a step of, the LTF or Poincaré-duality statements, and no closure reaches a trace-formula or Poincaré-duality theorem node or a batch-4 target. All four are accepted. Maintainer note: the repeated refusals are on the promotion side, not faults of this split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibrewiseVeryAmpleEvaluation",
+  "declaration": "AlgebraicGeometry.fibrewise_very_ample_evaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibrewiseVeryAmpleEvaluation.lean",
+  "statement": "theorem fibrewise_very_ample_evaluation {Y T : Scheme.{u}} (f : Y ⟶ T) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (L : Y.Modules) [L.IsInvertible] (hdim : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ T), topologicalKrullDim (pullback f a : Scheme.{u}) ≤ (1 : WithBot ℕ∞)) (hH1 : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ T), IsZero ((RingedSpace.moduleCohomology (pullback f a).toRingedSpace 1).obj ((tensorPullback (pullback.fst f a)).obj L))) (hvery : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ T), Epi ((tensorPullbackSectionAdjunction (pullback.snd f a)).counit.app ((tensorPullback (pullback.fst f a)).obj L)) ∧ ∃ hE : ((pushforward (pullback.snd f a)).obj ((tensorPullback (pullback.fst f a)).obj L)).IsQuasicoherent, ∃ D : @TautologicalQuotient (Spec (.of Ω)) ((pushforward (pullback.snd f a)).obj ((tensorPullback (pullback.fst f a)).obj L)) hE, ∃ j : pullback f a ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData (Spec (.of Ω)) ((pushforward (pullback.snd f a)).obj ((tensorPullback (pullback.fst f a)).obj L)) hE).relProj, IsClosedImmersion j ∧ Classifies D (pullback.snd f a) ((tensorPullback (pullback.fst f a)).obj L) ((tensorPullbackSectionAdjunction (pullback.snd f a)).counit.app ((tensorPullback (pullback.fst f a)).obj L)) j) : ((pushforward f).obj L).IsFiniteLocallyFree ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T), IsIso (moduleBaseChangeMap f (pullback.snd f h) h (pullback.fst f h) pullback.condition L)) ∧ Epi ((tensorPullbackSectionAdjunction f).counit.app L) ∧ ∃ hE : ((pushforward f).obj L).IsQuasicoherent, ∃ D : @TautologicalQuotient T ((pushforward f).obj L) hE, ∃ j : Y ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData T ((pushforward f).obj L) hE).relProj, IsClosedImmersion j ∧ Classifies D f L ((tensorPullbackSectionAdjunction f).counit.app L) j ∧ ∀ (T' : Scheme.{u}) (h : T' ⟶ T), Epi ((tensorPullbackSectionAdjunction (pullback.snd f h)).counit.app ((tensorPullback (pullback.fst f h)).obj L)) ∧ ∃ hE' : ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)).IsQuasicoherent, ∃ D' : @TautologicalQuotient T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE', ∃ j' : pullback f h ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE').relProj, IsClosedImmersion j' ∧ Classifies D' (pullback.snd f h) ((tensorPullback (pullback.fst f h)).obj L) ((tensorPullbackSectionAdjunction (pullback.snd f h)).counit.app ((tensorPullback (pullback.fst f h)).obj L)) j' ∧ ∃ r : (@SymmetricAlgebraSheaf.gradedAlgebraData T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE').relProj ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData T ((pushforward f).obj L) hE).relProj, IsPullback r (@SymmetricAlgebraSheaf.gradedAlgebraData T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE').relProjHom (@SymmetricAlgebraSheaf.gradedAlgebraData T ((pushforward f).obj L) hE).relProjHom h ∧ pullback.fst f h ≫ j = j' ≫ r ∧ Classifies D ((@SymmetricAlgebraSheaf.gradedAlgebraData T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE').relProjHom ≫ h) D'.line ((tensorPullbackSectionComp (@SymmetricAlgebraSheaf.gradedAlgebraData T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE').relProjHom h).hom.app ((pushforward f).obj L) ≫ (tensorPullback (@SymmetricAlgebraSheaf.gradedAlgebraData T' ((pushforward (pullback.snd f h)).obj ((tensorPullback (pullback.fst f h)).obj L)) hE').relProjHom).map (moduleBaseChangeMap f (pullback.snd f h) h (pullback.fst f h) pullback.condition L) ≫ D'.quotient) r",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-130bf4c9b",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Lean byte-identical to returned head 63fa7f68; only stmt_deps changed, exactly the prescribed H2 swaps (theorem deps -> def-sfb-module-base-change-map and def-per-projective-bundle-quotient-data; the theorem stays in proof_deps as a plain import). Dep node files equal live; lean.statement verbatim. Clause-by-clause check passed: hdim/hH1/hvery (Classifies of the counit on geometric fibres, Ω : Type u), IsFiniteLocallyFree variable rank, IsIso moduleBaseChangeMap with pullback.condition (argument order checked against signature), Epi counit, closed immersion j with Classifies, base-change clause with IsPullback r, square and Classifies pinning r. No extra assumptions; edge cases (empty T, rank 0, nonreduced, non-qc) covered; docstrings, sorry-only, line length OK. Advisory: gradedAlgebraData/relProj owners cited only via def-per-projective-bundle-quotient-data and def-trf-projective-bundle-morphism. No compile (no file changed)."
+ }
+}

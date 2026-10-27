@@ -24,83 +24,59 @@
  ],
  "proof": [
   {
-   "text": "For any finite projective scalar module $V$, finite generators give a surjection $p:R^N\\to V$, and the projective lifting property lifts $1_V$ to $i:V\\to R^N$, with $pi=1_V$. Put $v_j=p(e_j)$ and $\\lambda_j=e_j^*i\\in V^*=\\operatorname{Hom}_R(V,R)$. Then $v=\\sum_j\\lambda_j(v)v_j$ and, by applying $\\phi\\in V^*$, $\\phi=\\sum_j\\phi(v_j)\\lambda_j$. For the terms of $F^\\bullet$ use the supplied splittings. These identities also cover $V=0$ with $N=0$.",
+   "text": "The constant-module and tensor universal properties make $C_B$ additive: maps act by $b\\otimes v\\mapsto b\\otimes f(v)$, so identity, composition and addition hold on local generators and hence after sheafification. The finite-free scalar-identification lemma gives $C_B(R^N)\\cong B^N$, including rank zero, without flatness. Applying this functor to each supplied $p_ri_r=1$ gives the required finite-free retracts for $E^r$. Since $C_B(0)=0$, $E$ retains the bounds of $F$.",
    "uses": [
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-projective-module",
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-constant-finite-free-presentation-extension",
     "def-weil-pbc-strict-perfect-coefficient-package"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05CE/05CF, definition-projective and lemma-characterize-projective, lifting the identity through a finite free surjection"
-   }
-  },
-  {
-   "text": "Constant module sheafification and ordinary change of rings are additive functors: the sheafification adjunction gives additivity and identities/composition are checked before sheafification on pure tensors. Identify the constant scalar unit with the constant ring sheaf using the locally bijective coefficient unit. Tensor multiplication identifies its scalar extension with B. Additive functors preserve finite products, so the resulting unit comparison gives C_B(R^N) ≅ B^N, including N=0. Applying C_B to the supplied scalar maps i_r,p_r preserves their splitting relation and gives the required finite-free retract terms. The finite product is identified with the lifted-index finite free coproduct by the biproduct comparison and reindexing. No tensor-exactness assertion is used.",
-   "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand reduction; explicit scalar coordinate calculation"
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, scalar finite-free reduction and supplied splittings"
    }
   },
   {
-   "text": "Apply the finite-retract internal-dual lemma with coefficient sheaf $B$, $T=E^q$, and the splitting just constructed. Its exactness clause states that $\\mathcal Hom_B(E^q,-)$ carries every short exact sequence of module sheaves to a short exact sequence. This is exactness of internal sheaf Hom, not exactness of global Hom or of sections.",
+   "text": "For every $r$, apply the finite-retract internal-dual exactness lemma to the splitting of $E^r$ from step 1. It gives exactness of $\\mathcal Hom_B(E^r,-)$ on module sheaves, without claiming exactness of global sections.",
    "uses": [
     "lem-sfb-ringed-site-finite-retract-dual-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand calculation"
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, internal-Hom finite-retract exactness"
    }
   },
   {
-   "text": "For a scalar $V$, the evaluation formula $\\beta_V(b\\otimes\\phi)(b'\\otimes v)=bb'\\phi(v)$ is additive and balanced in both tensor expressions, is $B$-linear, and commutes with restriction. Finite-product preservation of sheafification extends the bilinear evaluation, so the tensor universal property gives a map into the sheaf Hom. Explicitly, first define evaluation on constant local sections and extend along the two sheafifications; the formula is unchanged after restriction. For $f:V\\to W$, the two composites from $C_B(W^*)$ to $\\mathcal Hom_B(C_B(V),B)$ both send $b\\otimes\\psi$ and $b'\\otimes v$ to $bb'\\psi(f(v))$. The uniqueness part of sheafification extends this equality to all sections. Thus $\\beta$ is contravariantly natural in $V$.",
+   "text": "The scalar-evaluation descent lemma gives $\\beta_V$ with exactly the displayed formula and contravariant naturality for every scalar module. For finite projective $V$, apply the normalized-inverse lemma to this $\\beta_V$. Its dual-generator formula supplies a restriction-compatible two-sided inverse, independent of the splitting.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-sheafification-sets-exact"
+    "lem-sfb-scalar-dual-evaluation-descent",
+    "lem-sfb-scalar-dual-evaluation-inverse"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, final evaluation map; explicit scalar/sheafification formula"
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, scalar evaluation and inverse"
    }
   },
   {
-   "text": "Use the dual generators from step 1. On every localized site, for $h:C_B(V)|_U\\to B|_U$, set $\\gamma_V(h)=\\sum_j h(1\\otimes v_j)\\otimes\\lambda_j\\in C_B(V^*)(U)$. The finite sum commutes with restriction, hence defines a sheaf morphism. On tensor generators,\n$$\\beta_V\\gamma_V(h)(b'\\otimes v)=b'\\sum_jh(1\\otimes v_j)\\lambda_j(v)=h(b'\\otimes v),$$\nwhile\n$$\\gamma_V\\beta_V(b\\otimes\\phi)=\\sum_jb\\phi(v_j)\\otimes\\lambda_j=b\\otimes\\phi.$$\nThe dual-generator identities and sheafification uniqueness make these identities hold on all sections. Therefore $\\gamma_V$ is the inverse of $\\beta_V$. The comparison is independent of the chosen splitting because its defining evaluation formula is; its inverse is then uniquely determined.",
+   "text": "Apply signed cochain assembly with $T=C_B$ and $\\eta_V=\\beta_V$. Step 1 supplies additivity, step 3 supplies naturality and invertibility on every $F^r$. It gives the natural signed isomorphism to $D(E,B)$ and both reversed bounds. The existing Hom-to-single isomorphism identifies $D(E,B)$ with $\\mathcal Hom_B^\\bullet(E,B[0])$; its differential is the same $-(-1)^q$ precomposition formula. Projection to the unique nonzero factor commutes with precomposition, since that factor sends a cochain map $f$ to precomposition by $f^{-q}$; thus this presentation change is natural.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-sfb-scalar-dual-signed-assembly",
+    "lem-sc-hom-complex-to-single",
+    "def-sc-signed-sheaf-dual-complex",
+    "def-pur-hom-complex"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, finite-free/direct-summand calculation; explicit inverse to scalar evaluation"
+    "place": "Tags 0A8X, section-hom-complexes, and 08JJ, lemma-dual-perfect-complex, signed dual"
    }
   },
   {
-   "text": "In degree $q$, the only possibly nonzero factor of $\\mathcal Hom_B^\\bullet(E^\\bullet,B[0])$ is $\\mathcal Hom_B(E^{-q},B)$, and the Hom-complex differential is $h\\mapsto-(-1)^q h\\,d_E^{-q-1}$. Use $\\beta_{F^{-q}}$ for its degree-$q$ comparison. Naturality from step 4 applied to $d_F^{-q-1}:F^{-q-1}\\to F^{-q}$ gives, on generators,\n$$d_{\\mathcal Hom}\\beta(b\\otimes\\phi)(b'\\otimes v)=-(-1)^qbb'\\phi(d_F^{-q-1}v)=\\beta C_B(d_{F^\\vee})(b\\otimes\\phi)(b'\\otimes v).$$\nHence the degreewise isomorphisms form the claimed cochain isomorphism. They are natural in cochain maps by the same precomposition identity. If $F^r=0$ outside $[a,b]$, $F^{-q}=0$ outside $[-b,-a]$; $C_B(0)=0$ and the displayed unique-factor formula give the stated vanishing for both dual complexes, including the zero complex. In Lean, the scalar coordinate map is constructed from the (-q,0) cochain component, with inverse given by a single cochain; Mathlib's cochain differential formula verifies the sign. The evaluation naturality clause assembles the uniquely normalized signed comparison. The ordinary comparison uses the existing Hom-to-single isomorphism. Vanishing of Hom from a zero term follows from the zero identity and precomposition additivity.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section section-hom-complexes (Tag 0A8X), signed differential; Tag 08JH, lemma-Rhom-strictly-perfect, finite Hom terms"
-   }
-  },
-  {
-   "text": "The complex $E^\\bullet$ is bounded since its zero terms remain zero, and each term has exact internal Hom by step 3. Apply the bounded-exact-term Hom lemma to $P=E^\\bullet$ and the quasi-isomorphism $B[0]\\to I^\\bullet$ of any K-injective resolution. Its hypotheses allow arbitrary unbounded source and target complexes of this map, so it gives precisely the asserted quasi-isomorphism of Hom complexes for every such resolution. By the definition of derived internal Hom the target represents $R\\mathcal Hom_B(E^\\bullet,B)$, with the canonical identification for any K-injective resolution. Composing its inverse in $D(B)$ with the cochain isomorphism of step 6 gives the required derived isomorphism. Taking the fixed functorial resolution makes the comparison natural; the definition's canonical independence of resolution identifies the other choices with it. All constructions used only finite splittings and internal-Hom exactness, so no flatness of $B$ over $\\underline R$ was used.",
+   "text": "By steps 1--2, $E$ is bounded and its termwise internal Hom functors are exact. Apply the bounded-exact-term Hom lemma to any K-injective resolution $B[0]\\to I$: its statement allows arbitrary unbounded target complexes, so it gives the asserted quasi-isomorphism for every such resolution. By the definition of derived internal Hom its target represents $R\\mathcal Hom_B(E,B)$. Localize the cochain isomorphism from step 4 and compose with this comparison in $D(B)$. The fixed functorial resolution gives naturality in $F$; canonical independence of resolution identifies all other choices with it. No tensor-exactness or flatness assumption was used.",
    "uses": [
     "lem-pc-bounded-exact-term-hom-quasi-iso",
     "def-pur-derived-internal-hom"
@@ -108,19 +84,22 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; section-internal-hom, K-injective definition; bounded exact-term argument spelled out by the cited node"
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect, and section-internal-hom, K-injective model"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finitely-generated-module",
-  "def-weil-pbc-projective-module",
-  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sf-site-constant-module-functor",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "def-weil-pbc-strict-perfect-coefficient-package",
   "lem-sfb-ringed-site-finite-retract-dual-exact",
-  "def-pur-sheaf-hom",
-  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-sfb-scalar-dual-evaluation-descent",
+  "lem-sfb-scalar-dual-evaluation-inverse",
+  "lem-sfb-scalar-dual-signed-assembly",
+  "lem-sc-hom-complex-to-single",
+  "def-sc-signed-sheaf-dual-complex",
   "def-pur-hom-complex",
   "lem-pc-bounded-exact-term-hom-quasi-iso",
   "def-pur-derived-internal-hom"
@@ -128,7 +107,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08JH and 08JJ, with explicit scalar realization, inverse and sign calculation expanding current blueprint paragraph 2 final sentence; uses the existing bounded-exact-term Hom lemma. Lean proof refinement by X7 (2026-10-21): additive finite-product/unit construction and explicit signed coordinate and comparison calculations. The two evaluation theorem proofs and derived comparison remain open."
+  "place": "Tags 08JH/08JJ and 0A8X: assembly after extracting scalar evaluation descent, finite-projective inverse and general signed dual-comparison assembly into three statement-only nodes; finite-free scalar identifications, internal-Hom exactness and every-resolution quasi-isomorphism criterion reused from existing nodes."
  },
  "mathlib_searches": [
   {
@@ -369,28 +348,38 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-scalar-perfect-dual-realization",
   "worker": "stage1",
-  "summary": "Reused existing finite-retract internal-Hom exactness and bounded-exact-term quasi-isomorphism lemmas; wrote scalar free realization, dual-generator inverse, naturality, signed cochain comparison and bounds explicitly. Statement preserved; no new nodes or Mathlib leaves.",
-  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-internal-hom, paragraph 2 final sentence: coefficient dual of locally constant perfect complexes; realizes its scalar finite-projective calculation.",
+  "summary": "Repair of batch5 re-split: statement unchanged; three independent statement-only nodes isolate evaluation descent, the normalized finite-projective inverse, and signed additive-functor cochain assembly. Existing finite-free scalar identifications replace repeated construction; parent assembles them with finite-retract exactness and the arbitrary-resolution Hom criterion. All old arguments retained in report with an explicit allocation.",
+  "blueprint": "main-20261015 det-thm-sf-ctf-stability-internal-hom paragraph 2 final sentence, locally constant perfect coefficient dual: scalar evaluation, signed ordinary dual and derived realization.",
   "tool_uses": [
    {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Only the arbitrary-site, no-flatness finite-free scalar identifications are used; the source unit has no different scalar-coordinate construction."
+   },
+   {
+    "node": "lem-sc-hom-complex-to-single",
+    "why": "Generic product-Hom versus signed-dual cochain presentation, independent of coefficients or constructibility; no replacement of the unit route."
+   },
+   {
     "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "why": "General bounded-complex exact-internal-Hom criterion on any small ringed site; used only to pass from ordinary Hom to the K-injective model, without replacing the unit route."
+    "why": "Generic bounded-source exact-internal-Hom criterion, allowing arbitrary unbounded resolution targets; the previously accepted tool use is retained."
    }
   ]
  },
  "tool_uses": [
-  "lem-pc-bounded-exact-term-hom-quasi-iso"
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sc-hom-complex-to-single"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q28-84952a657",
-  "group": "Q28",
+  "reviewer": "NT-cc-NU-79f8ba07b",
+  "group": "NU",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-84952a657 (reviewer sub-agent of L); spot-checked: Statement is byte-identical to the live base. The only stmt_dep added is def-pur-sheaf-hom, which the statement uses as Hom_B. 0 new nodes, no repair note, item not dropped. The only citer (lem-sfb-internal-hom-dual-constructible-models) uses the unchanged statement. Step 1: the projective lifting clause gives a section i of p:R^N→V, and the dual-generator identities v=Σλ_j(v)v_j and φ=Σφ(v_j)λ_j check. Step 2: C_B(R^N)=B^N holds already at presheaf level, so C_B(V) is a retract of B^N with no flatness used. Step 3: lem-sfb-ringed-site-finite-retract-dual-exact (same unit) gives exact internal Hom on every short exact sequence. Steps 4–5: β is extended via product-preserving sheafification, and I recomputed βγ(h)=h and γβ(b⊗φ)=b⊗φ. Step 6: with B[0], d(f)^{-q-1}=-(-1)^q f^{-q}d^{-q-1} matches the stated signed differential, and the [-b,-a] bounds hold. Step 7: lem-pc-bounded-exact-term-hom-quasi-iso allows arbitrary targets, so it covers every K-injective resolution. This tool use is accepted: it is a generic black box, already recorded in tool_uses of lem-sfb-ringed-site-strict-perfect-hom in this unit, and that node gives only the fixed augmentation. The route matches Stacks 08JH/08JJ and main-20261015 det-thm-sf-ctf-stability-internal-hom paragraph 2; no SGA. Candidates checked and not duplicates: strict-perfect-hom, lem-pc-finite-projective-internal-hom-evaluation (B⊗E^∨ over one ring sheaf, not the change of rings), lem-pod-coefficient-dual-perfect, lem-sf-etale-finite-projective-pullback-hom. Edge cases checked: V=0, R=0, Z→2→Z sign, non-flat B=Z/2, non-free projective V, unbounded I. review_split's 'no such node' lines are a symlink-loader artefact: all cited nodes resolve with find -L."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-79f8ba07b (reviewer sub-agent of L); spot-checked: Re-split accepted: the batch5 repair note (side-live, released 2026-10-22) asked for at least 2 new statement-only nodes and a parent proof of at most 3000 characters. Live still has the old 7-step proof, so this delivery is not superseded. The item statement and stmt_deps are byte-identical to live. The parent is 5 assembly steps, 2254 characters, and proof_deps is exactly the union of the uses. Where each old step went: old 1 and 5 → new lem-sfb-scalar-dual-evaluation-inverse, which has the splitting, both dual-generator identities, γ and both composites (I recomputed βγ(h)(b'⊗v)=h(b'⊗v) and γβ(b⊗φ)=b⊗φ). Old 4 → new lem-sfb-scalar-dual-evaluation-descent, which has the construction through sheafification, uniqueness on constant generators and naturality bb'ψ(fv); I checked it is true for every V via Hom_{B|U}(C_B(V)|U,B|U)=Hom_R(V,B(U)). Old 6 → new lem-sfb-scalar-dual-signed-assembly: the degree-q factor Hom(F^{-q},R) and the sign -(-1)^q agree with def-sc-module-total-hom-complex and def-sc-signed-sheaf-dual-complex. Applying naturality to d^{-q-1}, with T additive, gives the displayed identity; tested on Z--2-->Z, where the dual differential is +2. Old 2 → the existing lem-sfb-constant-finite-free-presentation-extension, whose finite-power and matrix clauses need no flatness, plus an elementary functoriality step. Old 3 and old 7 → the existing finite-retract-dual-exact and bounded-exact-term-hom-quasi-iso nodes, the latter for any unbounded K-injective target I. No argument was dropped. The three new nodes are separate pieces of comparable size and none restates the item. Duplicates checked: lem-sp-scalar-extension-dual-evaluation starts from an internal dual of a module sheaf, not the constant sheaf of an ordinary dual (advisory overlap only). lem-pc-finite-projective-internal-hom-evaluation works over one ring sheaf. Also checked lem-sc-affine-finite-free-dual-complex-comparison, the new-g3 coefficient maps and lem-pod-module-hom-signed-evaluation; none is a duplicate. Sources: Stacks 08JJ lemma-dual-perfect-complex (strictly perfect reduction, termwise duals), 0A8X, and the main-20261015 sk-thm-sf-ctf-stability-internal-hom proof (dual of a locally constant perfect complex); no SGA. Accepted tool uses: finite-free-presentation-extension, lem-sc-hom-complex-to-single, bounded-exact-term-hom-quasi-iso. Edge cases checked: V=0, N=0, a>b, non-flat Z→Z/2, V=Z/2 for descent only. FIX, B3: the descent node used 'every localized site' without citing a definition. Added [def-pur-localized-ringed-site] to its statement and stmt_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scalar-dual-evaluation-descent.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ScalarPerfectDualRealization",
@@ -446,5 +435,17 @@
   "landing": "20261021T151208-L-1177310",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

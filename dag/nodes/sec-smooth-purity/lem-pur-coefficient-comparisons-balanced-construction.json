@@ -1,0 +1,248 @@
+{
+ "id": "lem-pur-coefficient-comparisons-balanced-construction",
+ "kind": "statement",
+ "title": "Balanced construction and uniqueness of ordinary coefficient comparisons",
+ "statement": "Let $u:\\operatorname{Sh}(\\mathcal X)\\to\\operatorname{Sh}(\\mathcal Y)$ be a geometric morphism of small sites, with $u^{-1}\\dashv u_*$ and $u^{-1}$ left exact. For $W=X,Y$, let $R_W^0,R_W^1$ be commutative ring sheaves and $i_W:R_W^0\\to R_W^1$ ring maps. Let $\\phi^a:u^{-1}R_Y^a\\to R_X^a$ satisfy $i_X\\phi^0=\\phi^1u^{-1}i_Y$. Use module sheaves [def-weil-sheaf-of-modules-category] and actual sheafified tensors [def-pur-sheaf-tensor-product]. Put $F_aM=R_X^a\\otimes_{u^{-1}R_Y^a}u^{-1}M$ and $S_WM=R_W^1\\otimes_{R_W^0}M$.\n\nOn generalized local tensor generators, suppressing inverse-image notation, prescribe\n$$k:b\\otimes(a\\otimes x)\\longmapsto b\\,i_X(a)\\otimes(1\\otimes x),\\qquad\nk^{-1}:b\\otimes(d\\otimes x)\\longmapsto b\\,\\phi^1(d)\\otimes(1\\otimes x),$$\n$$s_W:b\\otimes(x\\otimes y)\\longmapsto(b\\otimes x)\\otimes(1\\otimes y),\\qquad\ns_W^{-1}:(b\\otimes x)\\otimes(d\\otimes y)\\longmapsto bd\\otimes(x\\otimes y).$$\nHere $a\\in R_X^0$, the $d$ in $k^{-1}$ lies in $u^{-1}R_Y^1$, and the $b,d$ in $s_W^{-1}$ lie in $R_W^1$.\nThese prescriptions descend through all tensor balancing relations and sheafifications and define unique natural mutually inverse isomorphisms\n$$k:S_XF_0\\xrightarrow{\\sim}F_1S_Y,\\qquad\ns_W:S_W(M\\otimes_{R_W^0}N)\\xrightarrow{\\sim}S_WM\\otimes_{R_W^1}S_WN.$$\nThe $k$ map equals the comparison obtained by identifying the two iterated pullbacks with the single pullback having coefficient map $u^{-1}R_Y^0\\to R_X^1$; $s_W$ equals the normalized tensor comparison for the identity geometric morphism with coefficient map $i_W$. Naturality is with respect to arbitrary module morphisms. The generator prescriptions use the algebraic inverse image, and do not require arbitrary sections of $u^{-1}M$ to come from sections of $M$ on $Y$. No flatness or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; Section Tensor product, section-tensor-product. Agent extraction of returned lem-pur-strict-coefficient-comparison-calculus proof steps 1--3 (module construction, balancing, inverses, naturality and uniqueness)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-tensor-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply normalizedScalarComposition_exists to the ringed inverse image with coefficient phi0 followed by scalar extension along iX. The common coefficient map is phi0 followed by iX. Its normalization, evaluated after I0.moduleUnderlying.hom on the identity generalized section, gives l(1 tensor x) = 1 tensor (1 tensor x). B1-linearity gives the formula for arbitrary b.",
+   "uses": [
+    "lem-pur-independent-normalized-scalar-composition",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same normalized composition theorem to scalar extension along iY followed by the ringed inverse image with coefficient phi1. The graph equation and commutative coefficient square identify its composite coefficient with phi0 followed by iX. Evaluate on the identity generalized section after the underlying isomorphism; the normalized insertion is exactly transportedInsertion. B1-linearity gives the displayed formula for h on b tensor x.",
+   "uses": [
+    "lem-pur-independent-normalized-scalar-composition",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define k = l.symm followed by h. For its forward formula move a out of the inner extension using scalar linearity, then across the outer balanced tensor. The l and h formulas give k. For the inverse formula move the A1 scalar across extension along phi1 and use h followed by k.inv = l. Any other normalized comparison factors through l-prime and h-prime; the sheafification adjunction and sectionwise scalar-extension extensionality show l-prime = l and h-prime = h on unit insertions. Thus k is unique.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply canonicalRingedTensorComparison_existsUnique to the identity geometric morphism and extensionFunctor i. Its mu is the required scalar tensor family. Test its generalized pure normalization on the product of the two underlying module sheaves; the product-preserving evaluation functor supplies an element mapping to any given pair of local sections. The q_one normalization gives the coefficient-one forward formula on arbitrary sections. Scalar linearity and bilinearity give the arbitrary-b forward formula and the inverse formula with product b*c.",
+   "uses": [
+    "def-pur-cochain-tensor-coherence-data",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the fixed canonical comparison to CanonicalRingedTensorComparisonOnSmallSites without changing its fields. Convert each such comparison back to the independent-universe canonical record and use its existing subsingleton theorem to identify the mu fields. Applying any second scalar candidate's canonical-normalization clause to the fixed comparison proves its equality with mu. Naturality is a field of the existing canonical comparison. Apply this construction to iX and iY.",
+   "uses": [
+    "def-pur-cochain-tensor-coherence-data",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-independent-normalized-scalar-composition",
+  "def-pur-cochain-coefficient-arrows",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-canonical-ringed-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 0D6D (normalized composition), 03EK and 0GMW (scalar and sheaf tensor generation).",
+  "note": "G8 reuses the proved normalized composition and canonical ringed tensor comparison; evaluates generalized normalization on products, and proves the arbitrary-coefficient formulas and uniqueness in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible square of commutative ring sheaves: construct unique natural scalar extension pullback and tensor comparison isomorphisms by balanced local tensor formulas",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pullback; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback composition and ordinary module base-change are constituents; no declaration gives both normalized sheaf comparisons with their generator prescriptions and uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of modules over a commutative square of ring sheaves gives natural scalar association isomorphism; extension of scalars is strong monoidal",
+   "results": "[leansearch] OK 8 hit(s); ModuleCat.ExtendScalars.obj'; ModuleCat.extendScalars; TensorProduct.AlgebraTensorModule.distribBaseChange; LinearMap.BilinForm.baseChange; PresheafOfModules.monoidalCategoryStruct; Algebra.IsPushout.cancelBaseChangeAux; PresheafOfModules.monoidalCategory; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback composition and ordinary module base-change are constituents; no declaration gives both normalized sheaf comparisons with their generator prescriptions and uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "[loogle] OK 5 hit(s); SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback composition and ordinary module base-change are constituents; no declaration gives both normalized sheaf comparisons with their generator prescriptions and uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|changeOfRings.*[Tt]ensor|tensor.*[Cc]hangeOfRings",
+   "results": "[grep] OK 5 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:177; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:180; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:194; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:195; directory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback composition and ordinary module base-change are constituents; no declaration gives both normalized sheaf comparisons with their generator prescriptions and uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified balanced tensor generators determine mutually inverse natural module maps for commuting coefficient change and geometric inverse image",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.map_ιFree_mapFree_hom; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; PresheafOfModules.sheafifyHomEquiv'; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.ιFree_mapFree_inv_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback composition and ordinary module base-change are constituents; no declaration gives both normalized sheaf comparisons with their generator prescriptions and uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible square of commutative ring sheaves: balanced scalar extension pullback comparison and strong monoidal extension of scalars with explicit inverse formulas",
+   "results": "OK 8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167) gives adjunction composition, but not both generator-normalized coefficient comparisons, inverses and sheafification descent; other hits concern free modules or constituents only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "OK 5 hits: SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167) gives adjunction composition, but not both generator-normalized coefficient comparisons, inverses and sheafification descent; other hits concern free modules or constituents only."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|tensorObjIsoSheafification|changeOfRings",
+   "results": "OK 6 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167) gives adjunction composition, but not both generator-normalized coefficient comparisons, inverses and sheafification descent; other hits concern free modules or constituents only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficients commuting square of sheaves of rings gives scalar extension pullback comparison natural isomorphism",
+   "results": "OK 8 hits: SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; ModuleCat.extendScalars_id_comp; PresheafOfModules.pullback; ModuleCat.extendScalars_assoc; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167) gives adjunction composition, but not both generator-normalized coefficient comparisons, inverses and sheafification descent; other hits concern free modules or constituents only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified tensor universal property and scalar extension composition for module sheaves on a ringed topos",
+   "results": "OK 8 hits: PresheafOfModules.Sheafify.mul_smul; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: pullbackComp (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167) gives adjunction composition, but not both generator-normalized coefficient comparisons, inverses and sheafification descent; other hits concern free modules or constituents only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-strict-coefficient-comparison-calculus",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Coefficient-compatible Frobenius transport, former proof step 6: strict finite quotient scalar/pullback and tensor comparisons; their signs, coefficient square, quotient transitions, identity and successive extensions. Returned strict-comparison proof steps 1--3: degreewise balanced construction.",
+   "via": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-coefficient-comparisons-balanced-construction",
+  "worker": "stage1",
+  "summary": "Q15 split without new nodes: reduce inverse-image tensor using the existing algebraic comparison, construct and invert both scalar-association maps through their common tensor, construct the tensorator and its inverse, and verify descent, uniqueness, naturality and canonical normalization. The statement and all four formulas are retained. Maintainer review (Q15 FIX): Steps 5-6 re-proved the existing generic node lem-pd-sheaf-scalar-tensor-inverse-formulas; Step 5 now cites it (tool use declared) and Step 6 keeps the uniqueness argument with its full citations.",
+  "blueprint": "def-weil-frobenius-coefficient-twists, final sentence: finite reduction and scalar extension commute with Frobenius. This item supplies the ordinary coefficient/pullback and coefficient/tensor constructions underneath the ancestor split's former step 6; Steps 1–3 construct k, Steps 4–6 construct s and uniqueness, Steps 7–8 prove naturality and identify the normalized comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property of the actual sheaf tensor, used to descend balanced pairings and prove equality on generators. The purity unit defines this tensor but has no replacement statement for this universal property."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic unique extension of a bilinear presheaf pairing through module sheafification, required for inner sheafified tensor factors; the purity unit has no substitute statement."
+   },
+   {
+    "node": "lem-pd-sheaf-scalar-tensor-inverse-formulas",
+    "why": "Generic statement (site, unital A->S) that an S-linear map T(H tensor K)->T(H) tensor T(K) with the 1 tensor (h tensor k) normalization is an isomorphism with the bs/st inverse formula; Step 5 applies it to s_W instead of repeating its proof. No node of the purity unit states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-6e92fa3aa",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-6e92fa3aa (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, every cited node statement and Stacks 03EK/0GMW/03EL/03D8; checked clones/live and clones/side-live (item still unsplit there, so not superseded) and coord/repair-notes (no note for this item). No new nodes. Hand checks: k and k^-1 well-defined (A-balancing uses i_X phi^0 = phi^1 u^-1 i_Y) and mutually inverse by B- and D-balancing; s_W and its inverse checked the same way. Edge cases all hold: zero rings, identity coefficients, u = id, nonflat Z -> Z/2. Step 1 applies lem-pur-independent-inverse-image-tensor-comparison under its hypotheses (finite-limit-preserving left adjoint, small sites), and the D-linearity argument is correct. In Step 8 the composition lemma is applied twice (i_X phi^0 = phi^1 u^-1 i_Y) to give l and h, so hL = k; the canonical-ringed-tensor normalization implies the sectionwise one, so mu = s_W. FIX: Steps 5-6 re-proved the existing split generic node lem-pd-sheaf-scalar-tensor-inverse-formulas (Q102): any S-linear map with the 1(x)(h(x)k) normalization is an isomorphism with the bs/st inverse formula, proved by the same pairing, extension and descent. The report's claim that no duplicate exists is wrong for this half. Step 5 now cites that node and declares it as a tool_use; no cycle (its 124-node dependency closure does not contain the item). Step 6 keeps the uniqueness argument and adds the citations it was missing: def-weil-presheaf-modules-sheafification and def-weil-pbc-module-tensor-product. proof_deps recomputed; statement and stmt_deps unchanged. Advisory: lem-pd-sheaf-scalar-extension-constraint-coherence (unsplit, Q98) restates the whole s_W clause and adds oplax equations; its future split could cite this item. Tool_uses accepted: lem-pc-sites-sheaf-tensor-bilinear-universal, lem-pc-sites-module-sheafification-bilinear-extension, lem-pd-sheaf-scalar-tensor-inverse-formulas. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.CoefficientComparisonsBalancedConstruction",
+  "declaration": "CategoryTheory.CoefficientComparisonsBalanced.coefficientComparisons_balanced_construction",
+  "declarations": [
+   "CategoryTheory.CoefficientComparisonsBalanced.Square",
+   "CategoryTheory.CoefficientComparisonsBalanced.pull0",
+   "CategoryTheory.CoefficientComparisonsBalanced.pull1",
+   "CategoryTheory.CoefficientComparisonsBalanced.left",
+   "CategoryTheory.CoefficientComparisonsBalanced.right",
+   "CategoryTheory.CoefficientComparisonsBalanced.common",
+   "CategoryTheory.CoefficientComparisonsBalanced.transportedInsertion",
+   "CategoryTheory.CoefficientComparisonsBalanced.PullbackFormulas",
+   "CategoryTheory.CoefficientComparisonsBalanced.ViaCommonPullback",
+   "CategoryTheory.CoefficientComparisonsBalanced.ScalarTensorFormulas",
+   "CategoryTheory.CoefficientComparisonsBalanced.ScalarTensorConstruction",
+   "CategoryTheory.CoefficientComparisonsBalanced.coefficientComparisons_balanced_construction"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/CoefficientComparisonsBalancedConstruction.lean",
+  "statement": "theorem coefficientComparisons_balanced_construction (G : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (adj : F ⊣ G) [PreservesFiniteLimits F] : (∃! k : left d ≅ right d, PullbackFormulas d k ∧ ViaCommonPullback d k) ∧ ScalarTensorConstruction d.iX ∧ ScalarTensorConstruction d.iY",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The primary theorem simultaneously asserts the unique normalized coefficient/pullback comparison and both scalar/tensor comparisons. The owning-module helpers only package the coefficient square, actual functor composites, transported insertion, four formulas and common-pullback normalization. All site object and morphism universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c3ffff05",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read item node, all 6 stmt_dep records and their landed Lean sources (AlgebraicInverseImage, RingedTopoiTensorComparisonData, CochainCoefficientArrows, CochainTensorCoherenceData), Stacks 03EK/03EL and the module. Clause match: geometric morphism = F ⊣ G + PreservesFiniteLimits, EssentiallySmall.{w} with independent uC/vC/uD/vD; coefficient square with j pinned by graph and commutes = i_X φ0 = φ1 u⁻¹i_Y; left/right = S_X F_0 / F_1 S_Y via actual changeOfRings; PullbackFormulas give both k and k⁻¹ generator formulas on arbitrary inverse-image sections (transportedInsertion is a whole-sheaf morphism, no lifting); ∃! k; ViaCommonPullback pins l,h on all generators, k = l.symm ≪≫ h; ScalarTensorConstruction for both iX and iY with both s/s⁻¹ formulas on the sheaf tensor, naturality, uniqueness, and c.mu = s for every canonical comparison with id inverse image (non-vacuous by q_one/pure). No extra hypotheses; edge cases (zero rings, u = id, non-flat) covered. statement verbatim; declarations = file; stmt_deps gain only landed def nodes actually used (brief §5); plain imports = proof-dep modules; sorry only; docstrings with source + blueprint + Steps 1-8; not superseded in live/side-live. Advisory: CochainPullback.scalarAssociation is k⁻¹ given extra RingedPullback data; not a duplicate of this statement node. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261024T185848-L-3739506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

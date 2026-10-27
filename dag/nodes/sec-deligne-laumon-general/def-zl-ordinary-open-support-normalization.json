@@ -1,0 +1,126 @@
+{
+ "id": "def-zl-ordinary-open-support-normalization",
+ "kind": "definition",
+ "title": "Ordinary integral open extension and normalized identity-image comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension [def-weil-l-adic-coefficient-extension]. For every scheme $X$, let $B_X=\\widehat{\\mathcal O}_{E,X}$ and its inverse-image coefficient identifications be the specified completed coefficient system [def-pur-integral-compact-support-coefficient-data]. Use the ordinary unbounded categories $D(\\operatorname{Mod}(B_X))$ and ordinary ringed pro-etale module direct image and its total right derived functor [def-weil-pbc-proetale-operations]. For an open immersion $j:U\\hookrightarrow X$ [def-weil-open-immersion], define $j_!^{\\mathrm{ord}}$ to be termwise exact descent of the completed-coefficient open extension of [def-sp-open-coefficient-adjunction-data].\n\nDefine $e_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}_{\\operatorname{Mod}(B_X)}$ to be the unique natural isomorphism whose inverse, for every module sheaf $M$, pro-etale object $V\\to X$, and section $x\\in M(V)$, sends $x$ to its restriction along the canonical map $V\\times_X X\\to V$. Here the direct image uses the actual completed coefficient identification for $\\mathrm{id}_X$. The section maps are linear and natural because that coefficient identification is the identity-base-change map, and the inverse base-change map supplies their inverses; sections determine module-sheaf morphisms, so this characterization determines $e_X$ uniquely. Let $d_X:R(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}_{D(\\operatorname{Mod}(B_X))}$ be the composite obtained by right deriving $e_X$, comparing the derived identity with the exact termwise identity, and using the canonical identity-descent isomorphism. For the compactification $(j,\\mathrm{id}_X)$ [def-weil-compactifications-refinements], define the canonical comparison from the separately derived compact-support image $P_{B,(j,\\mathrm{id})}=R(\\mathrm{id}_X)_*\\circ j_!^{\\mathrm{ord}}$ [def-pur-integral-compact-support-coefficient-data] to $j_!^{\\mathrm{ord}}$ by whiskering $d_X$ with $j_!^{\\mathrm{ord}}$ and then applying the right unitor. These are the existing constructions ordinaryOpen, identityModuleImage_existsUnique, identityModuleImage, identityImage and openIdentity; the normalization is part of the definition, with no assertion about preservation of constructibility or completeness.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-open-immersion",
+  "def-sp-open-coefficient-adjunction-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D8 (lemma-push-pull-composition-modules), 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); derived identity descent as in the existing module; latest blueprint lem-zl-morphism-open-closed-reduction.proof.md Part 2, compactification (j,id)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image of the identity is the identity, normalized on sections, and removes the identity factor in open extension by zero",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.Hom.id_app; AlgebraicGeometry.Scheme.Modules.Hom.id_app; TopCat.Presheaf.Pushforward.id_eq; TopCat.Presheaf.Pushforward.id; AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app; SheafOfModules.pushforwardId; AlgebraicGeometry.Scheme.Modules.pushforwardId; PresheafOfModules.pushforwardId.",
+   "date": "2026-10-24",
+   "verdict": "Exact project declarations reused; missing definition-node ownership, not missing Lean construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorIsoMapDerivedCategory\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "Exact project declarations reused; missing definition-node ownership, not missing Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "identityModuleImage|openIdentity|rightDerivedFunctorIsoMapDerivedCategory (CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "Exact project declarations reused; missing definition-node ownership, not missing Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ordinaryOpen|identityModuleImage|openIdentity dag/nodes; rg -n identityModuleImage|openIdentity|rightDerivedFunctorIsoMapDerivedCategory lean/WeilConjectures lean/.lake/packages/mathlib/Mathlib/CategoryTheory; rg -n ordinaryOpen|identityModuleImage|openIdentity lean/Sheaf/Paper; tools/blueprint_refs.py search \"ordinary open identity direct image normalization\"",
+   "results": "DAG: lem-sf-integral-support-functor-normalization owns the five helpers only as declarations in its theorem module; no definition node owns this collection. Sheaf: exact matches IntegralSupportNormalization.ordinaryOpen (66), identityModuleImage_existsUnique (75), identityModuleImage (90), identityImage (95), openIdentity (109) in Sheaf.Paper.IntegralSupportFunctorNormalization. WeilConjectures: generic rightDerivedFunctorIsoMapDerivedCategory uses, no identityModuleImage or openIdentity construction. Mathlib CategoryTheory: no matching specialized construction. blueprint_refs.py: 0 blueprint nodes match. Existing declarations reused.",
+   "date": "2026-10-24",
+   "verdict": "Exact project declarations reused; missing definition-node ownership, not missing Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-open-weil-unit-and-empty-fibre",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 2, extension by zero: remove the proper identity factor from compactification (j,id) using the section-normalized derived identity comparison.",
+   "via": [
+    "lem-zl-open-weil-unit-and-empty-fibre",
+    "lem-zl-immersion-weil-local-behavior"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralSupportNormalizationData",
+  "declaration": "WeilConjectures.IntegralSupportNormalization.openIdentity",
+  "declarations": [
+   "WeilConjectures.IntegralSupportNormalization.ordinaryOpen",
+   "WeilConjectures.IntegralSupportNormalization.identityModuleImage_existsUnique",
+   "WeilConjectures.IntegralSupportNormalization.identityModuleImage",
+   "WeilConjectures.IntegralSupportNormalization.identityImage",
+   "WeilConjectures.IntegralSupportNormalization.openIdentity"
+  ],
+  "statement": "def openIdentity {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    PurCompactSupport.image (PurCompactSupport.completed l E)\n        (Compactification.ofIsOpenImmersion j) ≅ ordinaryOpen l E j",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair requested for 056e8c681433. Definition-node ownership/re-export of exactly five existing constructions in the published theorem module; its integralSupportFunctorNormalization conclusion is not used. The helper existence theorem characterizes a unique sectionwise identity isomorphism; the chosen data is determined uniquely. Existing source/blueprint docstrings remain unchanged. No duplicate Lean source or new arbitrary data choice. D6: unchanged declarations moved to the shared data module and publicly re-exported by the old module, avoiding a circular import in the separate open/closed proofs.",
+  "file": "lean/Sheaf/Paper/IntegralSupportNormalizationData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-993d6bd73",
+  "group": "Q53",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-993d6bd73",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Re-delivery of 056e (RETURN H2), compared snapshot to snapshot. Only changes: stmt_deps swap the theorem node lem-sf-integral-support-functor-normalization for the new def node def-zl-ordinary-open-support-normalization and add def-pur-integral-compact-support-coefficient-data and def-sp-open-coefficient-adjunction-data (with a public import); integralAlpha now uses zlIntegralPullComp, the same term as the old .choose. The new node is an existing:true re-export of ordinaryOpen, identityModuleImage_existsUnique, identityModuleImage, identityImage and openIdentity; all five exist, the statement is verbatim openIdentity, the NL statement matches the bodies, it is not hollow (choice from a unique-existence statement), all six stmt_deps exist as def nodes, and no cycle was found over the full live DAG; neither node has landed yet, so there is no race. Clause by clause the statement is correct: units and beta pinned at the integral, rational and common stages; the action is pinned by its fields; WeilUnit carriers are exactly eta and eta^-1; the scalar squares use the recorded comparisons; the empty fibre covers every disjoint point in all degrees. Edge cases U empty, U=X, K=0 and E=L are fine. Item statement verbatim; report sections present; sorry only in proofs; no compile run because no file was changed. Advisory: the re-exported declarations keep their old blueprint docstrings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a5f73",
+  "group": "D6",
+  "result": "fix",
+  "landing": "20261025T122724-L-1799577",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs live IntegralSupportFunctorNormalization.lean (incl. H4 a74c29ee): verbatim move; OpenSupport/ClosedSupport vs Normalization fields; 4 direct importers compiled against delivered modules"
+ }
+}

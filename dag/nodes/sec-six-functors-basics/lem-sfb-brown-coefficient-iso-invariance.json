@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-brown-coefficient-iso-invariance",
+ "kind": "statement",
+ "title": "Brown hypotheses are invariant under condensed coefficient isomorphisms",
+ "statement": "Let X be any scheme and let Λ and Λ' be commutative condensed ring objects. If e:Λ≅Λ' is an isomorphism of ring objects, then BrownHypothesesFor Λ X if and only if BrownHypothesesFor Λ' X, with the bundle of [lem-sfb-brown-hypotheses-criterion] and the fixed-universe localizing closures of [sk-def-localizing-closure]. No coefficient admissibility, Noetherian, field, or finite-type condition is assumed. In particular, a Brown bundle for a canonical coefficient can be transferred to any ring-object-isomorphic coefficient without separately proving thickness or size for that coefficient.",
+ "stmt_deps": [
+  "lem-sfb-brown-hypotheses-criterion",
+  "sk-def-localizing-closure",
+  "lem-sfb-condensed-coefficient-iso-constructible"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: thickness, essential smallness and compactness; coefficient identifications in sk-lem-brown-hypotheses-generation.proof.md"
+ },
+ "proof": [
+  {
+   "text": "Pull back the coefficient ring isomorphism to q on X. Construct the scalar equivalence H directly, with functor Mod.comap q.inv and inverse Mod.comap q.hom; comapId, comapComp and the two inverse identities of q supply its unit and counit. Its exact derived equivalence d therefore has the restrictions along these two specified inverse maps as its functors. Apply lem-sfb-condensed-coefficient-iso-constructible to e for forward preservation of S and to e.symm for preservation by d.inverse. The unit K≅d.inverse(d.functor(K)) and isomorphism closure of bounded constructible finite-Tor objects give reflection. Thus S is exactly the inverse image of S' under d.functor, without choosing an inverse from IsIso or separately proving boundedness or Tor reflection.",
+   "uses": [
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack the objectwise Brown criterion at the second coefficient. Pull triangulation and isomorphism closure back along the derived exact functor. Pull a retract back using its image retract. The equivalence congrFullSubcategory identifies the two constructible finite-Tor full subcategories. Compose it with a small equivalent category obtained from exists_equivalence_iff to transport essential smallness in the same fixed universe.",
+   "uses": [
+    "lem-sfb-brown-hypotheses-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract objectwise compactness from the second Brown bundle. The already proved compactness_of_brown_coefficientIso helper expresses it as ambient canonical direct-sum Hom-map bijectivity, transports this bijectivity through the derived scalar equivalence using compactness_coefficientIso, and reflects it through the full localizing inclusion. Use the objectwise Brown criterion to assemble the first bundle. This proves one implication for arbitrary coefficients; apply the same implication to the inverse ring isomorphism for the converse.",
+   "uses": [
+    "lem-sfb-brown-hypotheses-criterion",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "h1-brown-hypotheses-structural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-sfb-brown-hypotheses-criterion",
+  "h1-brown-hypotheses-structural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: thickness, essential smallness and compactness; coefficient identifications in sk-lem-brown-hypotheses-generation.proof.md",
+  "note": "A2: complete Lean proof using constructible finite-Tor preservation for e and its inverse, the derived equivalence unit, full-subcategory equivalence and canonical compactness comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of coefficient rings induces an equivalence of categories of constructible finite Tor amplitude complexes and preserves Brown compactness",
+   "results": "8 hits, including ModuleCat.restrictScalarsEquivalenceOfRingEquiv, ModuleCat.restrictScalars_isEquivalence_of_ringEquiv and Equivalence.mapHomologicalComplex; no Brown-bundle invariance theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactness of objects in a triangulated category is invariant under an equivalence preserving coproducts",
+   "results": "8 hits including Equivalence.IsTriangulated.mk' and mk'', and t-structure isomorphism transport; no condensed coefficient or Brown-bundle statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "EssentiallySmall.*[Ee]quiv|[Ii]sCompactObject.*[Ee]quiv|[Ii]sCompactObj.*[Ee]quiv",
+   "results": "8 hits for essentiallySmall_congr and EssentiallySmall.mk' in ObjectProperty.Small, Subobject.Types and EssentiallySmall. Direct project searches found the existing private compactness_of_brown_coefficientIso helper, reused here; no existing Brown coefficient invariance theorem.",
+   "date": "2026-10-26",
+   "verdict": "existing generic ingredients reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "paragraphs 1--2: thickness, essential smallness and compactness; coefficient identifications in sk-lem-brown-hypotheses-generation.proof.md",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.brownHypothesesFor_coefficientIso_iff",
+  "statement": "theorem brownHypothesesFor_coefficientIso_iff\n    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']\n    (e : Mon.mk Λ ≅ Mon.mk Λ') (X : Scheme.{u}) :\n    BrownHypothesesFor Λ X ↔ BrownHypothesesFor Λ' X",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T000845-L-4131453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

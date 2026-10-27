@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-supported-section-h1-affine-lift",
+ "kind": "statement",
+ "title": "First cohomology lifts a supported quotient section to an affine nonvanishing locus",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an affine open, $x\\in U$, and $\\mathcal M$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module] with free generator $a$ on $U$. Let $\\mathcal I$ be the reduced vanishing ideal of the closed subset $X\\setminus U$, namely $\\mathcal I(V)=\\{b\\in\\mathcal O_X(V):b(z)=0\\text{ in }\\kappa(z)\\text{ for all }z\\in V\\setminus U\\}$ [lem-weil-pbc-reduced-induced-closed-subscheme, def-weil-residue-field]. Let $\\mathcal J\\subseteq\\mathcal I$ be a quasi-coherent ideal sheaf [pqf-def-coherent] with $\\mathcal J_x=\\mathfrak m_x\\subseteq\\mathcal I_x=\\mathcal O_{X,x}$ [def-weil-pbc-module-stalk]. In the category of module sheaves [def-weil-sheaf-of-modules-category], put $\\mathcal Q=\\mathcal I/\\mathcal J$. Suppose the canonical tensor sequence [def-pur-sheaf-tensor-product]\n$$0\\longrightarrow\\mathcal J\\otimes\\mathcal M\\longrightarrow\\mathcal I\\otimes\\mathcal M\\xrightarrow{\\pi}\\mathcal Q\\otimes\\mathcal M\\longrightarrow0$$\nis short exact and the canonical multiplication map $\\iota:\\mathcal I\\otimes\\mathcal M\\to\\mathcal M$, induced by $\\mathcal I\\hookrightarrow\\mathcal O_X$ and locally given by $b\\otimes m\\mapsto bm$, is injective. Let $q\\in\\Gamma(X,\\mathcal Q\\otimes\\mathcal M)$ have nonzero germ under the canonical quotient identification $(\\mathcal Q\\otimes\\mathcal M)_x\\cong\\mathcal M_x/\\mathfrak m_x\\mathcal M_x$ induced by $\\iota$. If $H^1(X,\\mathcal J\\otimes\\mathcal M)=0$ [pqf-def-cohomology], there exists $t\\in\\Gamma(X,\\mathcal I\\otimes\\mathcal M)$ with $\\pi(t)=q$. For $s=\\iota(t)\\in\\Gamma(X,\\mathcal M)$, the residue of $s$ at $x$ is nonzero and the residue of $s$ at every $z\\in X\\setminus U$ is zero. Writing $s|_U=f a$ for $f\\in\\mathcal O_X(U)$, its nonvanishing locus $X_s=\\{y:s_y\\notin\\mathfrak m_y\\mathcal M_y\\}$ [def-weil-pbc-ample-invertible-module] satisfies $x\\in X_s=U_f\\subseteq U$, where $U_f=\\{y\\in U:f_y\\text{ is a unit in }\\mathcal O_{X,y}\\}$. In particular $X_s$ is affine.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-residue-field",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-cohomology",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "The module-sheaf category is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives], and $\\Gamma(X,-)$ is additive and left exact by [lem-sc-global-sections-left-exact]. Apply [lem-weil-pbc-right-derived-universal-delta-functor] to the assumed short exact tensor sequence. With the natural identification $R^0\\Gamma=\\Gamma$ and cohomology as in [pqf-def-cohomology], its exact segment is $\\Gamma(X,\\mathcal I\\otimes\\mathcal M)\\xrightarrow{\\Gamma(\\pi)}\\Gamma(X,\\mathcal Q\\otimes\\mathcal M)\\xrightarrow{\\delta}H^1(X,\\mathcal J\\otimes\\mathcal M)$. Naturality of $R^0\\Gamma\\cong\\Gamma$ identifies its first arrow with the actual section map of $\\pi$.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B, lemma-higher-derived-functors, parts (2) and (4), applied to the tensor sequence in Tag 0B5P."
+   }
+  },
+  {
+   "text": "The last group in Step 1 is zero by hypothesis, so $\\delta(q)=0$. Exactness gives $t$ with $\\pi(t)=q$. Put $s=\\iota(t)$. Taking the germ of this equality at $x$ and applying the quotient identification assumed in the statement sends $q_x$ to the class of $s_x$ in $\\mathcal M_x/\\mathfrak m_x\\mathcal M_x$. This class is nonzero by the hypothesis on $q$. Thus $x\\in X_s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph: lifting the quotient section and identifying its affine nonvanishing open."
+   }
+  },
+  {
+   "text": "For $z\\in X\\setminus U$, every $b\\in\\mathcal I_z$ is represented on some neighbourhood $V$ of $z$ by a section of $\\mathcal I(V)$, by [def-weil-pbc-module-stalk]. The defining vanishing condition for $\\mathcal I(V)$ says that its image in $\\kappa(z)=\\mathcal O_{X,z}/\\mathfrak m_z$ is zero [def-weil-residue-field]. Hence $\\mathcal I_z\\subseteq\\mathfrak m_z$.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph: lifting the quotient section and identifying its affine nonvanishing open."
+   }
+  },
+  {
+   "text": "Use the canonical tensor-stalk isomorphism [lem-pc-ringed-space-module-stalk-tensor] at $z\\notin U$. Write the image of $t_z$ as a finite sum $\\sum_i b_i\\otimes m_i$, with $b_i\\in\\mathcal I_z$ and $m_i\\in\\mathcal M_z$. The stalk of the canonical multiplication map sends this to $s_z=\\sum_i b_i m_i$. Step 3 puts every $b_i$ in $\\mathfrak m_z$, so $s_z\\in\\mathfrak m_z\\mathcal M_z$. Its residue is zero. This proves $X_s\\subseteq U$.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CB, lemma-stalk-tensor-product, applied to the multiplication map in Tag 0B5P."
+   }
+  },
+  {
+   "text": "Because $a$ is a free generator on $U$, there is a unique $f\\in\\mathcal O_X(U)$ with $s|_U=fa$. For $y\\in U$ the basis $a_y$ identifies $\\mathcal M_y/\\mathfrak m_y\\mathcal M_y$ with $\\mathcal O_{X,y}/\\mathfrak m_y$ and sends the class of $s_y$ to that of $f_y$. This class is nonzero exactly when $f_y\\notin\\mathfrak m_y$, equivalently when $f_y$ is a unit in the local ring. Consequently $X_s\\cap U=U_f$; together with Steps 2 and 4 this gives $x\\in X_s=U_f\\subseteq U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph: lifting the quotient section and identifying its affine nonvanishing open."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-open-section-vanishing-prime] to the given affine open $U$ and $f\\in\\mathcal O_X(U)$. Its affine open $D(f)$ is the residue-nonzero locus of $f$, which is exactly $U_f$ by Step 5. Therefore $X_s=U_f=D(f)$ is affine.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph: lifting the quotient section and identifying its affine nonvanishing open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "pqf-def-cohomology",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph: lifting the quotient section and identifying its affine nonvanishing open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"section\"",
+   "results": "0 hits. Read the returned statements: no exact match or one-line specialization. Zero hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of module sheaves with H1 of its kernel zero lifts a quotient section into a boundary ideal times an invertible sheaf; nonzero residue at a point gives an affine principal nonvanishing open inside a trivializing affine open",
+   "results": "8 hits. Read the returned statements: no exact match or one-line specialization. Hits concern AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.zero_of_zero_cover, ModuleCat.Tilde.isUnit_toStalk, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, ModuleCat.Tilde.isLocallyFraction_pred, ModuleCat.Tilde.const.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|nonvanishingLocus",
+   "results": "6 hits. Read the returned statements: no exact match or one-line specialization. Only ell-adic cohomology comments and imports; no supported line-bundle section lifting theorem. Search restricted to AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1 vanishing lifts a quotient section to a section of an invertible sheaf with affine nonvanishing locus",
+   "results": "8 hits. Read the returned statements: no exact match or one-line specialization. Hits concern AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen, AlgebraicGeometry.StructureSheaf.toBasicOpen, ModuleCat.Tilde.const, AlgebraicGeometry.isLocalization_away_of_isAffine.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle M trivial on affine U and an ideal I vanishing on the complement of U, lifting a quotient section with nonzero residue using H1 kernel zero yields x in X_s equals D(f) affine",
+   "results": "8 hits. Read the returned statements: no exact match or one-line specialization. Hits concern AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, ModuleCat.Tilde.exists_const, AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen, AlgebraicGeometry.IsAffineOpen.mem_ideal_iff.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology|nonvanishingLocus|rightDerived",
+   "results": "{\"t\": \"2026-10-23T09:51:00Z\", \"tool\": \"grep\", \"query\": \"cohomology|nonvanishingLocus|rightDerived\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"a3d6cdcb0651fc1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide affine localization, function evaluation or scheme quotient maps, not the combined module-sheaf H1 lift and boundary-supported invertible-section conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing H1 of the kernel lifts a quotient sheaf section to a line bundle section whose nonvanishing set is affine",
+   "results": "{\"t\": \"2026-10-23T09:51:00Z\", \"tool\": \"leansearch\", \"query\": \"Vanishing H1 of the kernel lifts a quotient sheaf section to a line bundle section whose nonvanishing set is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.ker_of_isAffine\", \"Submodule.ker_liftQ_eq_bot'\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"Con.kerLift_mk\"], \"digest\": \"f13201aa2123029e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide affine localization, function evaluation or scheme quotient maps, not the combined module-sheaf H1 lift and boundary-supported invertible-section conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"exact\"",
+   "results": "{\"t\": \"2026-10-23T09:51:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide affine localization, function evaluation or scheme quotient maps, not the combined module-sheaf H1 lift and boundary-supported invertible-section conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of sheaves of modules with vanishing first cohomology of the kernel lifts every quotient global section; a section of a line bundle supported in a trivializing affine open has affine principal nonvanishing locus",
+   "results": "{\"t\": \"2026-10-23T09:51:01Z\", \"tool\": \"leanfinder\", \"query\": \"A short exact sequence of sheaves of modules with vanishing first cohomology of the kernel lifts every quotient global section; a section of a line bundle supported in a trivializing affine open has affine principal nonvanishing locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\"], \"digest\": \"4949c4ac64411e77\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide affine localization, function evaluation or scheme quotient maps, not the combined module-sheaf H1 lift and boundary-supported invertible-section conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle section in the image of an ideal vanishing outside an affine trivializing open has nonvanishing set equal to a principal affine open, and H1 kernel zero gives the lift",
+   "results": "{\"t\": \"2026-10-23T09:53:25Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle section in the image of an ideal vanishing outside an affine trivializing open has nonvanishing set equal to a principal affine open, and H1 kernel zero gives the lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen\"], \"digest\": \"ddd2fadd5660cdaf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations provide affine localization, function evaluation or scheme quotient maps, not the combined module-sheaf H1 lift and boundary-supported invertible-section conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ideal-twist-vanishing-implies-ample",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited fibrewise ampleness input below lem-trf-local-term-locality: 0B5P, returned item steps 5-6, cohomological lift followed by boundary vanishing and the affine principal-open calculation.",
+   "via": [
+    "lem-trf-ideal-twist-vanishing-implies-ample",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-supported-section-h1-affine-lift",
+  "worker": "stage1",
+  "summary": "Six-step proof using existing derived-functor, module-stalk tensor and affine basic-open nodes; no new nodes. Clarified that iota is canonical multiplication: arbitrary injections do not force boundary vanishing. The sole citer already uses the canonical maps. All existing searches retained and five actual current searches appended.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), inherited semistable-alteration/fibrewise-ampleness branch; this item realizes the quotient-section lifting and the sentence x in X_s subset U, X_s=D(f) affine in Stacks 0B5P, proof first paragraph, as used in step 3 of lem-trf-ideal-twist-vanishing-implies-ample.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic global-sections left exactness needed to apply the derived-functor theorem; the trace-formula unit does not replace this basic ringed-space input."
+   },
+   {
+    "node": "pqf-def-cohomology",
+    "why": "Identifies the cohomology notation with right derived global sections on scheme modules; used only as a definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-global-sections-left-exact",
+  "pqf-def-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-cba58af47",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-cba58af47 (reviewer sub-agent of L); spot-checked: I read the item in full; it adds no new nodes and is still unsplit on live, so it is not superseded, and no re-split note applies. It follows Stacks 0B5P (coherent.tex 426-479), proof paragraph 1: H1 lift, boundary vanishing, X_s=D(f) affine. Statement change accepted: iota is now the canonical multiplication map b⊗m->bm. I checked the counterexample to the old literal reading: on P^1 with U=A^1, x=1, M=O(∞), iota=multiplication by T, the lifted s=T has nonzero residue at ∞. The citer chain (lem-trf-closed-point-twisted-ideal-quotient 'canonical map ι_n', parent ideal-twist step 3 'same canonical maps') already uses the canonical map. Step 1: enough injectives, Gamma left exact, the universal δ-functor statement with R^0≅v, and pqf-def-cohomology give the exact segment with first arrow Γ(π). Step 2 lifts q, and the assumed identification gives a nonzero residue at x. Step 3 shows I_z⊆m_z from the definition of I and germ representatives. Step 4 uses the natural stalk-tensor isomorphism to get s_z∈m_zM_z, so X_s⊆U. Step 5 uses the free generator to get X_s∩U=U_f. Step 6 cites the Mathlib leaf affine-open-section-vanishing-prime (b) for D(f) affine. proof_deps equals the union of the uses, and the elementary flags are correct. Edge cases checked: Z empty, x not closed, X nonreduced, f constant. Duplicate search found only the 01XF pqf analogues (no line bundle), so no duplicates. The off-unit inputs are generic tools: three have landed Lean proofs and one is a Mathlib leaf. Accepted tool_uses: lem-sc-global-sections-left-exact and pqf-def-cohomology. No SGA citation. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedSectionH1AffineLift",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_supported_section_h1_affine_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedSectionH1AffineLift.lean",
+  "statement": "theorem exists_supported_section_h1_affine_lift (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U) (x : X) (hx : x ∈ U) (M : X.Modules) [M.IsInvertible] (a : Γ(M, U)) (ha : Function.Bijective (fun f : Γ(X, U) ↦ f • a)) (I J : X.IdealSheafData) (hI : I = Scheme.IdealSheafData.vanishingIdeal ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩) (j : J.toModules ⟶ I.toModules) (hj : j ≫ I.toModulesι = J.toModulesι) (hJx : (J.ideal ⟨U, hU⟩).map (X.presheaf.germ U x hx).hom = IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (hIx : (I.ideal ⟨U, hU⟩).map (X.presheaf.germ U x hx).hom = ⊤) (hseq : ∃ hz : (j ▷ M) ≫ (cokernel.π j ▷ M) = 0, (ShortComplex.mk (j ▷ M) (cokernel.π j ▷ M) hz).ShortExact) (π : I.toModules ⊗ M ⟶ cokernel j ⊗ M) (hπ : π = cokernel.π j ▷ M) (ι : I.toModules ⊗ M ⟶ M) (hι : ι = (I.toModulesι ▷ M) ≫ (λ_ M).hom) [Mono ι] (q : Γ(cokernel j ⊗ M, ⊤)) (hq : TopCat.Presheaf.germ (cokernel j ⊗ M).val.presheaf ⊤ x trivial q ≠ 0) (hH1 : Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj (J.toModules ⊗ M))) : ∃ (t : Γ(I.toModules ⊗ M, ⊤)) (s : Γ(M, ⊤)) (f : Γ(X, U)) (V : X.Opens), π.app ⊤ t = q ∧ s = ι.app ⊤ t ∧ x ∈ nonvanishingLocus M s ∧ (∀ z : X, z ∉ U → z ∉ nonvanishingLocus M s) ∧ M.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op s = f • a ∧ (V : Set X) = nonvanishingLocus M s ∧ V = X.basicOpen f ∧ (V : Set X) = {y | ∃ hy : y ∈ U, IsUnit (X.presheaf.germ U y hy f)} ∧ x ∈ V ∧ V ≤ U ∧ IsAffineOpen V",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97db2a3c6",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Node unchanged vs live apart from the new lean record; matches Stacks 0B5P. Every hypothesis is matched and none is stronger: J ⊆ I fixed by the inclusion square; pi = cokernel.π j ▷ M and iota = (I.toModulesι ▷ M) ≫ λ_ pinned, with Mono iota; generator a as bijective f ↦ f•a on Γ(X,U), equivalent since M is quasi-coherent and U affine; I = vanishingIdeal of the complement of U; J_x, I_x as Ideal.map of the affine ideals; nonzero germ of q equivalent under the canonical iso; H1 via moduleCohomology. Conclusion has all clauses: π(t)=q, s=ι(t), x in X_s, z∉U not in X_s, s|_U = f•a, V = X_s = basicOpen f = U_f, x ∈ V ⊆ U, V affine. Uses the recorded nonvanishingLocus, toModules and monoidal instance. lean.statement verbatim; no definitions; only the theorem is sorry; source and blueprint docstrings and 6 proof steps present; report has both sections. Edge cases U = X, x not closed, X non-reduced covered. No file changed, so no compile."
+ }
+}

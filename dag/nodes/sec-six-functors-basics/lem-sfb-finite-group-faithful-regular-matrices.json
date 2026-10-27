@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-finite-group-faithful-regular-matrices",
+ "kind": "statement",
+ "title": "A finite group scheme has a faithful regular matrix representation",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a finite $k$-group scheme [def-sc-group-scheme], and put $A=\\Gamma(G,\\mathcal O_G)$ and $d=\\dim_kA$ [def-weil-vector-space-dimension]. The action of $G$ on $A$ by right translation gives a homomorphism of group schemes $\\rho:G\\to\\operatorname{GL}(A)$ which is a closed immersion [def-weil-closed-immersion]. Here $\\operatorname{GL}(A)$ is the basis-independent form of [def-sc-general-linear-group], and $\\operatorname{GL}(A)(R)=\\operatorname{Aut}_R(A\\otimes_kR)$ for every commutative $k$-algebra $R$; the tensor product uses [def-weil-pbc-module-tensor-product]. After choosing a $k$-basis of $A$, this says that the induced coordinate homomorphism\n$$k[T_{ij}\\ (1\\leq i,j\\leq d),\\det(T)^{-1}]\\longrightarrow A,\\qquad T_{ij}\\longmapsto u_{ij},$$\nis surjective. It preserves evaluation at the identity: $\\epsilon(u_{ij})=\\delta_{ij}$, where $\\epsilon:A\\to k$ is evaluation at the identity and $\\delta_{ij}$ is $1$ for $i=j$ and $0$ otherwise. For every $k$-algebra $R$, the matrix $U=(u_{ij})$ specializes along $x:A\\to R$ to $\\rho_R(x)$, and $\\rho_R(xy)=\\rho_R(x)\\rho_R(y)$. No commutativity or reducedness of $G$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.9 and proof, printed p.87; applied with the entire finite-dimensional coordinate algebra as regular subrepresentation, as in the proof of Proposition 11.32, printed p.221."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-vector-space-dimension",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-group-scheme], $G=\\operatorname{Spec}A$ with $A$ finite-dimensional over $k$. Apply [lem-sfb-affine-group-coordinate-hopf] to get the coordinate maps $\\Delta,\\epsilon,S$ and their coassociativity, two counit identities and two antipode identities. The map $\\epsilon$ is unital, so $1_A\\ne0$ and $d\\geq1$. Choose a basis $e_1,\\ldots,e_d$ as in [def-weil-vector-space-dimension]. Define $u_{ij}\\in A$ by $\\Delta(e_j)=\\sum_i e_i\\otimes u_{ij}$. These expansions are unique: if $e_i^*:A\\to k$ are the coordinate functionals, the maps $e_i^*\\otimes1$ recover each coefficient. More generally $A\\otimes_kR\\simeq R^d$ for every $k$-algebra $R$, by $\\sum_i e_i\\otimes r_i\\leftrightarrow(r_i)$; the inverse identities follow by expanding $a=\\sum_i e_i^*(a)e_i$ on pure tensors and using their spanning property [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-vector-space-dimension",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9, printed p.87, taking V=A; Remark 4.1, printed p.84, choice of basis and coefficient convention."
+   }
+  },
+  {
+   "text": "Expand coassociativity on $e_j$:\n$$\\sum_{i,r} e_r\\otimes u_{ri}\\otimes u_{ij}=\\sum_i e_i\\otimes\\Delta(u_{ij}).$$\nApplying $e_r^*$ to the first factor gives $\\Delta(u_{rj})=\\sum_i u_{ri}\\otimes u_{ij}$. Applying $1\\otimes\\epsilon$ to $\\Delta(e_j)$ instead gives $\\sum_i e_i\\epsilon(u_{ij})=e_j$, hence $\\epsilon(u_{ij})=\\delta_{ij}$. Both identities are direct consequences of the coassociativity and counit identities of [lem-sfb-affine-group-coordinate-hopf]; coefficient extraction is the explicit inverse from Step 1.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, equations (24) and (25), specialized to the regular coaction Delta."
+   }
+  },
+  {
+   "text": "For a $k$-algebra $R$ and a point $x:A\\to R$, define the $R$-linear map $t_x$ on pure tensors by\n$$t_x(a\\otimes r)=\\sum a_{(1)}\\otimes x(a_{(2)})r,\\qquad \\Delta(a)=\\sum a_{(1)}\\otimes a_{(2)}.$$\nThe tensor universal property [def-weil-pbc-module-tensor-product] makes this well-defined, independently of the tensor presentation; its matrix in the basis from Step 1 is $U(x)=(x(u_{ij}))$. By [lem-sfb-affine-group-coordinate-hopf], the point $xy$ is $\\mu_R(x\\otimes y)\\Delta$, the identity is the counit and the inverse of $x$ is $xS$. Thus Step 2 gives, entry by entry,\n$$U(xy)_{ij}=\\sum_r x(u_{ir})y(u_{rj})=(U(x)U(y))_{ij},\\qquad U(1)_{ij}=\\delta_{ij}.$$\nPutting $y=xS$ or $x=yS$ proves that $U(xS)$ is a two-sided inverse of $U(x)$. Consequently $t_x\\in\\operatorname{Aut}_R(A\\otimes_kR)$ and $t_{xy}=t_x t_y$. These formulas commute with every homomorphism $R\\to R'$ since they use only finite sums and products.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, verification following (25); regular right-translation convention preceding Theorem 4.9, printed p.87."
+   }
+  },
+  {
+   "text": "Take $R=A$ and $x=1_A$ in Step 3, so $U=(u_{ij})$ has inverse $(S(u_{ij}))$. The square case of [lem-weil-pbc-cauchy-binet] gives $\\det(U)\\det(S(U))=\\det(I)=1$; here $\\det(I)=1$ follows at once from the permutation formula [def-weil-pbc-matrix-determinant], as every nonidentity permutation has a zero factor. Evaluation of the polynomial generators [def-weil-pbc-mv-polynomial-ring], followed by [lem-weil-pbc-ring-localization-universal-property], therefore defines\n$$\\phi:k[T_{ij},\\det(T)^{-1}]\\longrightarrow A,\\quad T_{ij}\\longmapsto u_{ij},\\quad \\det(T)^{-1}\\longmapsto\\det(U)^{-1}.$$\nBy [def-sc-general-linear-group] and [def-weil-affine-spectrum], $\\operatorname{Spec}\\phi$ is a morphism $\\rho:G\\to\\operatorname{GL}_{d,k}$ whose points are exactly $U(x)$. Step 2 and the coordinate multiplication and identity maps of [def-sc-general-linear-group] show that $\\phi$ respects them: equality on every $T_{ij}$ extends to the localization by uniqueness. The affine product identifications of [lem-weil-pbc-fibre-product-affine-spectra] identify these coordinate equalities with the scheme multiplication and identity diagrams. Thus $\\rho$ is a group-scheme homomorphism, not just a homomorphism on $k$-points. The chosen basis identifies $\\operatorname{GL}_{d,k}(R)$ with $\\operatorname{Aut}_R(A\\otimes_kR)$ by conjugating matrices with the isomorphism of Step 1; hence it gives the required morphism to $\\operatorname{GL}(A)$.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-sc-general-linear-group",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1 and Example 4.2, printed p.84; Theorem 4.9, printed p.87, coordinate map O(GL_V) -> A. Determinant-localization detail expanded."
+   }
+  },
+  {
+   "text": "Apply the other counit identity $(\\epsilon\\otimes1)\\Delta=1_A$ from [lem-sfb-affine-group-coordinate-hopf] to each $e_j$. It gives\n$$e_j=\\sum_i\\epsilon(e_i)u_{ij}.$$\nEvery term on the right is in the image of $\\phi$, since $\\phi$ is a $k$-algebra map and $u_{ij}=\\phi(T_{ij})$. Hence every basis vector is in its image. Explicitly, if $a=\\sum_j c_j e_j$, then the polynomial $\\sum_{i,j}c_j\\epsilon(e_i)T_{ij}$ maps to $a$. This proves surjectivity without assuming that $G$ is commutative or reduced.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9 and proof, printed p.87, displayed counit identity and surjectivity argument, with V=A."
+   }
+  },
+  {
+   "text": "Both $G=\\operatorname{Spec}A$ and $\\operatorname{GL}_{d,k}=\\operatorname{Spec}k[T_{ij},\\det(T)^{-1}]$ are affine. Apply clause (2) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] to the covering consisting of the entire target: its inverse image is $G$ and its section map is the surjective $\\phi$ of Step 5. Thus $\\rho$ is a closed immersion. To identify the action, let $R\\to R'$ be any algebra map and let $z:A\\to R'$ be an $R'$-point of $G$. Evaluating the pure-tensor formula of Step 3 gives $(t_xa)(z)=\\sum z(a_{(1)})x(a_{(2)})=a(zx)$, where $x$ is first extended to $R'$. This is right translation, including on arbitrary algebra-valued points. Step 2 proves the stated identity evaluation, and Step 3 proves the specialization and product clauses for every $R$. Changing the chosen basis conjugates these same operators, so the morphism into $\\operatorname{GL}(A)$ is the intrinsic right-translation action asserted in the item.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9, printed p.87, final sentence and preceding right-translation convention; Proposition 11.32, printed p.221, regular representation of a finite group scheme. Closed immersion criterion: Stacks Tag 01QO (lemma-closed-immersion), (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-cauchy-binet",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-sc-general-linear-group",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.9 and proof, printed p.87, with V=A as in Proposition 11.32, printed p.221; coefficient calculations from Remark 4.1, printed p.84."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every finite group scheme embeds into a general linear group by its regular representation",
+   "results": "8 hits; ; declarations: TannakaDuality.FiniteGroup.leftRegular, LinearMap.GeneralLinearGroup, TannakaDuality.FiniteGroup.rightRegular, TannakaDuality.FiniteGroup.leftRegular_apply, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, Matrix.SpecialLinearGroup.hasCoeToGeneralLinearGroup, Matrix.SpecialLinearGroup.isEmbedding_toGL, TannakaDuality.FiniteGroup.rightFDRep",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.rightRegular and Representation.leftRegular are representations of abstract groups, not closed immersions for possibly nonreduced group schemes; inspected Tannaka.lean lines 76-99 and Basic.lean lines 396-407"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group scheme has a faithful regular representation as a closed subgroup of GL of its coordinate algebra",
+   "results": "8 hits; ; declarations: TannakaDuality.FiniteGroup.rightFDRep, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, Rep.instInjective, TannakaDuality.FiniteGroup.leftRegular, TannakaDuality.FiniteGroup.rightRegular, FDRep.instInjectiveOfNeZeroCastCard, FDRep.instFaithfulRepForget₂, TannakaDuality.FiniteGroup.leftRegularFDRepHom",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.rightRegular and Representation.leftRegular are representations of abstract groups, not closed immersions for possibly nonreduced group schemes; inspected Tannaka.lean lines 76-99 and Basic.lean lines 396-407"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite infinitesimal group scheme of rank n embeds as a closed subgroup scheme of GL n",
+   "results": "8 hits; ; declarations: Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isEmbedding_toGL, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, Matrix.SpecialLinearGroup.isEmbedding_mapGL, CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed, Matrix.SpecialLinearGroup.instFinite, instIsFiniteRelIndexGeneralLinearGroupAdjoinNegOne, Matrix.SpecialLinearGroup.isInducing_toGL",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.rightRegular and Representation.leftRegular are representations of abstract groups, not closed immersions for possibly nonreduced group schemes; inspected Tannaka.lean lines 76-99 and Basic.lean lines 396-407"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GeneralLinearGroup\"",
+   "results": "0 hits; ; declarations: ",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.rightRegular and Representation.leftRegular are representations of abstract groups, not closed immersions for possibly nonreduced group schemes; inspected Tannaka.lean lines 76-99 and Basic.lean lines 396-407"
+  },
+  {
+   "tool": "grep",
+   "query": "regular[Rr]epresentation|regular_representation|closedImmersion.*[Rr]epresentation",
+   "results": "0 hits; ; declarations: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.rightRegular and Representation.leftRegular are representations of abstract groups, not closed immersions for possibly nonreduced group schemes; inspected Tannaka.lean lines 76-99 and Basic.lean lines 396-407"
+  },
+  {
+   "tool": "grep",
+   "query": "leftRegular|rightRegular",
+   "results": "25 hits; ; declarations: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Basic.lean, Mathlib/RepresentationTheory/Basic.lean, Mathlib/RepresentationTheory/Basic.lean, Mathlib/RepresentationTheory/Basic.lean; Mathlib/RepresentationTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.rightRegular and Representation.leftRegular are representations of abstract groups, not closed immersions for possibly nonreduced group schemes; inspected Tannaka.lean lines 76-99 and Basic.lean lines 396-407"
+  },
+  {
+   "tool": "grep",
+   "query": "regularRepresentation|regular_representation|closedImmersion.*[Rr]epresentation",
+   "results": "{\"t\": \"2026-10-23T13:35:45Z\", \"tool\": \"grep\", \"query\": \"regularRepresentation|regular_representation|closedImmersion.*[Rr]epresentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: abstract finite-group regular representations and topological SL embeddings do not state a group-scheme closed immersion; Hopf antipode identities are already covered by lem-sfb-affine-group-coordinate-hopf. Read Tannaka.lean:76-106 and the existing Hopf node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The regular representation of a finite group scheme is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T13:35:46Z\", \"tool\": \"leansearch\", \"query\": \"The regular representation of a finite group scheme is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.leftRegular\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"TannakaDuality.FiniteGroup.rightRegular\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"76f1cf7e23f6517b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: abstract finite-group regular representations and topological SL embeddings do not state a group-scheme closed immersion; Hopf antipode identities are already covered by lem-sfb-affine-group-coordinate-hopf. Read Tannaka.lean:76-106 and the existing Hopf node."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Matrix.GeneralLinearGroup",
+   "results": "{\"t\": \"2026-10-23T13:35:46Z\", \"tool\": \"loogle\", \"query\": \"HopfAlgebra, Matrix.GeneralLinearGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: abstract finite-group regular representations and topological SL embeddings do not state a group-scheme closed immersion; Hopf antipode identities are already covered by lem-sfb-affine-group-coordinate-hopf. Read Tannaka.lean:76-106 and the existing Hopf node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group scheme embeds as a closed subgroup of the general linear group of its coordinate algebra by right translation",
+   "results": "{\"t\": \"2026-10-23T13:35:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group scheme embeds as a closed subgroup of the general linear group of its coordinate algebra by right translation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.rightFDRep\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"CategoryTheory.PreGaloisCategory.autEmbedding_isClosedEmbedding\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"Matrix.SpecialLinearGroup.isEmbedding_toGL\"], \"digest\": \"62c9ab70d7f4da4f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: abstract finite-group regular representations and topological SL embeddings do not state a group-scheme closed immersion; Hopf antipode identities are already covered by lem-sfb-affine-group-coordinate-hopf. Read Tannaka.lean:76-106 and the existing Hopf node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The matrix coefficients of the comultiplication of a finite dimensional commutative Hopf algebra generate the algebra",
+   "results": "{\"t\": \"2026-10-23T13:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"The matrix coefficients of the comultiplication of a finite dimensional commutative Hopf algebra generate the algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"HopfAlgCat.of_comul\", \"HopfAlgebra.mul_antipode_lTensor_comul_apply\", \"HopfAlgebra.mul_antipode_rTensor_comul_apply\", \"HopfAlgebra.ofAlgHom\"], \"digest\": \"8681f482f4e5c494\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: abstract finite-group regular representations and topological SL embeddings do not state a group-scheme closed immersion; Hopf antipode identities are already covered by lem-sfb-affine-group-coordinate-hopf. Read Tannaka.lean:76-106 and the existing Hopf node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-group-scheme-order-annihilator",
+  "date": "2026-10-23",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The order annihilates a finite commutative group scheme. Supporting input: A finite group scheme has a faithful regular matrix representation.",
+   "via": [
+    "lem-sfb-finite-group-scheme-order-annihilator",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-group-faithful-regular-matrices",
+  "worker": "stage1",
+  "summary": "Expanded Milne 4.9 with V=A, deriving the coproduct matrix identities, all-algebra right translations, two-sided inverse, localized coordinate map, counit spanning formula and affine closed immersion. Reused existing Hopf, general-linear and affine-criterion nodes; no new nodes. Added missing definition citations without changing any hypothesis or clause. No exact project attachment or full Mathlib match.",
+  "blueprint": "Supporting regular-matrix input for the order-annihilator argument, in the inherited alteration/level-rigidity dependency chain for det-thm-sf-ctf-stability-direct-images (3). Read current latest sk-thm-sf-ctf-stability/_section.md and its direct-images proof; no change to that route. Whole-blueprint searches regular representation, faithful, matrix coefficients, Hopf and general linear found no full equivalent. Retained inherited from.node=null because blueprint_refs.py ancestor reports the broken inherited ancestry; from.place already records the supporting chain.",
+  "tool_uses": [
+   {
+    "node": "def-sc-group-scheme",
+    "why": "Generic group-scheme and finite coordinate-algebra terminology used for G; this unit has no separate definition."
+   },
+   {
+    "node": "def-sc-general-linear-group",
+    "why": "Generic determinant-localization representation and coordinate group laws of GL_d; no node of this unit supplies them, and they are tools for the prescribed regular representation argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-group-scheme",
+  "def-sc-general-linear-group"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-c8045e3ef",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-c8045e3ef (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full, and Milne iAG2017 at Remark 4.1 and (25) (p.84), the p.87 regular representation and Theorem 4.9 proof, and Prop 11.32 (p.221). The delivery creates no new nodes. The statement only gains citations to dimension, closed immersion and GL. Hypotheses and clauses are unchanged, and the live item is still unsplit, so nothing supersedes this delivery. Step 1: d>=1 because epsilon is unital, and A⊗R≅R^d. Step 2: coassociativity gives Delta(u_rj)=sum_i u_ri⊗u_ij, and (1⊗eps) gives eps(u_ij)=delta_ij; I checked the indices. Step 3: the matrix of t_x is (x(u_ij)), U(xy)=U(x)U(y), and U(xS) is a two-sided inverse by the antipode identities. Step 4: Cauchy-Binet (Lean-closed) in the square case makes det U a unit, so phi is defined by the polynomial and localization universal properties. Multiplication compatibility holds on the T_ij and extends to the localization, so rho is a homomorphism of group schemes. Step 5: (eps⊗1) gives e_j=sum_i eps(e_i)u_ij, which is Milne's surjectivity argument. Step 6: 01QO(2) with the single open GL_d gives the closed immersion, and the action is right translation a(zx). Small cases: trivial G, alpha_2, mu_p, nonabelian constant G, R=0. The duplicate search found only char-0 Lie-theoretic nodes. The declared tool_uses are definition nodes and are accepted. from.node null is inherited unchanged from the base parent. No SGA is cited. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupFaithfulRegularMatrices",
+  "declaration": "AlgebraicGeometry.finite_group_faithful_regular_matrices",
+  "declarations": [
+   "AlgebraicGeometry.FiniteGroupRegularMatrices",
+   "AlgebraicGeometry.finite_group_faithful_regular_matrices"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupFaithfulRegularMatrices.lean",
+  "statement": "theorem finite_group_faithful_regular_matrices (k : CommRingCat.{u}) (hk : IsField k) (G : Scheme.{u}) [G.Over (Spec k)] [GrpObj (G.asOver (Spec k))] [IsFinite (G ↘ Spec k)] : FiniteGroupRegularMatrices k G (isAffine_of_isAffineHom (G ↘ Spec k))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The transparent predicate spells out the full conclusion using the canonical global-section Hopf algebra, existing coordinate GL, and right-scalar tensor modules. Its affineness proof is supplied by isAffine_of_isAffineHom from the finite structure morphism. IsField on the bundled commutative ring retains its given ring structure without a second Field instance. No extra mathematical hypothesis or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63776f741",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read the item, all 6 stmt_dep records, the report (Worker report + Second reading by Q16 present) and the module. Clause match: field via IsField on CommRingCat; finite group = GrpObj on G.asOver plus IsFinite (matches the def-sc-group-scheme record); A = Γ(G,⊤) with Mathlib's canonical Hopf instances (Group/Affine.lean 312-343); U fixed by comul(b j)=Σ b i⊗U i j; φ from the existing GL CoordinateRing, surjective, φ(coord)=U, ρ.left = isoSpec ≫ Spec.map φ; IsMonHom ρ; IsClosedImmersion ρ.left; counit(U)=δ; every R : Type u: homMulEquiv(x≫ρ) entries = x*(U), right-factor tensor action t pinned on the basis, product clause. Checked by hand that point product, homMulEquiv (entry ψ(x_ij), Δx_ij=Σx_il⊗x_lj) and LinearEquiv mul order agree, so the statement is true. Existential basis accepted: all data pinned by b and bases give conjugate data; the citer uses any basis. Edge cases: trivial G, α_p/μ_p, R=0, nonabelian constant G. No GL duplicate, helper predicate not hollow, statement verbatim, only the item lean field changed, sorry only, docstrings complete. No file changed, so no compile."
+ }
+}

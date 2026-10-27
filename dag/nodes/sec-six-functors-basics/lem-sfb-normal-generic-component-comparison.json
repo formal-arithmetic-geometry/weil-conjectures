@@ -1,0 +1,193 @@
+{
+ "id": "lem-sfb-normal-generic-component-comparison",
+ "kind": "statement",
+ "title": "Gluing basis clopens and comparing the affine generic component quotient",
+ "statement": "Let $X$ be a nonempty integral scheme [def-pc-integral-scheme], let $\\eta$ be its generic point, let $k=\\mathcal O_{X,\\eta}$ be its function field, and let $j:\\operatorname{Spec}k\\to X$ be the generic inclusion. Let $u:U\\to X$ be any morphism with $U$ affine [def-pc-scheme, def-weil-affine-spectrum]. Put $U_\\eta=U\\times_X\\operatorname{Spec}k$ and let $i:U_\\eta\\to U$ be the projection [def-pc-fibre-product]. Let $\\mathcal B$ be a family of affine open subschemes of $U$ forming an open basis: for every $x\\in O$ with $O\\subseteq|U|$ open there is $W\\in\\mathcal B$ with $x\\in|W|\\subseteq O$. Write $W_\\eta=W\\times_X\\operatorname{Spec}k=i^{-1}(W)$ for $W\\in\\mathcal B$, and suppose that $i_W^{-1}:\\operatorname{Clop}(W)\\to\\operatorname{Clop}(W_\\eta)$ is bijective for every $W\\in\\mathcal B$. Here clopen means both open and closed. Then $j$ and $i$ are affine morphisms (the inverse image of every affine open is affine), $U_\\eta$ is affine, and both $|U|$ and $|U_\\eta|$ are spectral spaces [def-weil-spectral-space]. Inverse image $i^{-1}:\\operatorname{Clop}(U)\\to\\operatorname{Clop}(U_\\eta)$ is bijective. For a space $T$ write $q_T:|T|\\to\\pi_0(T)$ for the quotient by belonging to the same connected component, a maximal connected subset, endowed with the quotient topology. The induced map $h=\\pi_0(i):\\pi_0(U_\\eta)\\to\\pi_0(U)$ is a homeomorphism satisfying $h\\circ q_{U_\\eta}=q_U\\circ i$. No affineness of intersections of basis opens or quasi-separatedness of $X$ is assumed. Empty $U$ and the empty basis for it are allowed.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0906, lemma-spectral-pi0; agent local-to-global clopen gluing and affine generic-fibre argument in returned parent proof steps 3-4; the final clopen criterion is lem-sfb-spectral-clopen-component-homeomorphism, not Tag 0906 alone."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-spectral-space",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open $V\\subseteq X$, its inverse image under $j$ is either empty or all of $\\operatorname{Spec}k$: the spectrum of a field has one point, mapping to $\\eta$. Both are affine (the empty scheme is $\\operatorname{Spec}(0)$). Thus $j$ is affine by the definition [pqf-def-affine-morphism]. This tests every affine open separately and imposes no condition on intersections or on $X$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S6, definition-affine; elementary one-point-source argument"
+   }
+  },
+  {
+   "text": "The projection $i$ is the base change of $j$ along $u$. Apply [lem-weil-pbc-affine-morphism-permanence](1) to get that $i$ is affine and (2), since $U$ is affine, to get that $U_\\eta$ is affine. By [lem-weil-pbc-affine-scheme-qcqs] both $U$ and $U_\\eta$ are quasi-compact and quasi-separated. Apply [lem-weil-pbc-qcqs-scheme-spectral] to each: their underlying spaces are spectral.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SD, lemma-base-change-affine; Tag 01S6, definition-affine; algebra.tex Tag 00E8, lemma-quasi-compact; schemes.tex Tag 01KN, lemma-affine-separated; properties.tex Tag 094L, lemma-quasi-compact-quasi-separated-spectral"
+   }
+  },
+  {
+   "text": "Fix a clopen $D\\subseteq U_\\eta$. For each $W\\in\\mathcal B$, the hypothesis gives a unique clopen $C_W\\subseteq W$ with $i_W^{-1}C_W=D\\cap W_\\eta$. If $B\\in\\mathcal B$ lies in $W\\cap V$ for $W,V\\in\\mathcal B$, then $C_W\\cap B$ and $C_V\\cap B$ are clopen in $B$, and both pull back to $D\\cap B_\\eta$. Injectivity for $B$ makes them equal. For every point of $W\\cap V$ there is such a $B$ containing it, by the basis property. Hence $C_W\\cap V=C_V\\cap W$. No affineness of $W\\cap V$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), normal generic restriction auxiliary argument of lem-sfb-normal-generic-continuous-sections, component-comparison clause; agent expansion; agreement on overlaps by refinement inside the given basis"
+   }
+  },
+  {
+   "text": "Put $C=\\bigcup_{W\\in\\mathcal B}C_W$. Agreement on overlaps gives $C\\cap W=C_W$ for every $W$: a point in $C\\cap W$ belongs to some $C_V$, hence to $C_W$. Each $C_W$ is open in $U$, and $U\\setminus C=\\bigcup_{W\\in\\mathcal B}(W\\setminus C_W)$ is open as well. Thus $C$ is clopen. Finally $i^{-1}C=\\bigcup_W(D\\cap W_\\eta)=D$, since the basis covers $U$ and its inverse images cover $U_\\eta$. This proves surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), normal generic restriction auxiliary argument of lem-sfb-normal-generic-continuous-sections, component-comparison clause; agent expansion; explicit union and complementary union construction"
+   }
+  },
+  {
+   "text": "If clopens $C,C^\\prime\\subseteq U$ have equal inverse images, then $C\\cap W$ and $C^\\prime\\cap W$ have equal inverse images in $W_\\eta$ for every $W\\in\\mathcal B$. Local injectivity gives equality of these restrictions. Taking their unions over the basis gives $C=C^\\prime$. Inverse image preserves clopens because $i$ is continuous, so it is the asserted bijection. The union arguments also cover empty $U$ and an empty basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), normal generic restriction auxiliary argument of lem-sfb-normal-generic-continuous-sections, component-comparison clause; agent expansion; uniqueness checked on the basis, including the empty space"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-spectral-clopen-component-homeomorphism] with $T=|U_\\eta|$, $S=|U|$, and the continuous underlying map of $i$. Step 2 supplies spectrality and steps 3–5 supply the clopen inverse-image bijection. It gives precisely the induced homeomorphism $h=\\pi_0(i)$ and the equality $h\\circ q_{U_\\eta}=q_U\\circ i$, including empty spaces.",
+   "uses": [
+    "lem-sfb-spectral-clopen-component-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent clopen-preimage criterion lem-sfb-spectral-clopen-component-homeomorphism, based on Tag 0906, lemma-spectral-pi0; applied only after the basis gluing argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-sfb-spectral-clopen-component-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), normal generic restriction auxiliary argument of lem-sfb-normal-generic-continuous-sections, component-comparison clause; agent expansion; affine permanence from Stacks Tag 01SD and spectral comparison from the existing DAG lemma, not from Tag 0906 alone"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local bijections on clopen subsets over an open basis glue and induce a homeomorphism on connected component spaces of an affine generic fibre",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.Hom.fiberHomeo; AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply; AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm; TopCat.GlueData.ofOpenSubsets_toGlueData_V; TopCat.GlueData.openCoverGlueHomeo; AlgebraicGeometry.Scheme.GlueData.openCover_X; TopCat.GlueData.MkCore.t_inv; TopCat.GlueData.ofOpenSubsets_toGlueData_t",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the basis clopen descent plus affine generic-fibre and component-quotient conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedComponents\", \"IsClopen\"",
+   "results": "OK 6 hit(s): ConnectedComponents.equivOfIsClopenOfIsConnected; ConnectedComponents.equivOfIsClopen; ConnectedComponents.exists_fun_isClopen_of_infinite; ConnectedComponents.equivOfIsClopenOfIsConnected_mk; ConnectedComponents.equivOfIsClopen_mk; ConnectedComponents.equivOfIsClopen_symm_mk",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the basis clopen descent plus affine generic-fibre and component-quotient conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|functionField).*(ConnectedComponents|IsClopen)|(ConnectedComponents|IsClopen).*(generic|functionField)",
+   "results": "OK 0 hit(s): none",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the basis clopen descent plus affine generic-fibre and component-quotient conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme over an integral base has affine generic fibre and a connected component homeomorphism if clopen subsets extend uniquely on an open basis",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsIntegralHom.hasAffineProperty; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.IsAffine; AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral; AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain; AlgebraicGeometry.affine_isIntegral_iff; AlgebraicGeometry.irreducibleSpace_of_isIntegral",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the basis clopen descent plus affine generic-fibre and component-quotient conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen inverse image bijections on an open basis imply bijection globally and homeomorphism of connected component quotients for affine schemes",
+   "results": "OK 8 hit(s): AlgebraicGeometry.affineOpensRestrict_symm_apply_coe; Topology.IsQuotientMap.isClopen_preimage; Equiv.toHomeomorphOfContinuousOpen; Equiv.toHomeomorph; PrimeSpectrum.mulZeroAddOneEquivClopens; AlgebraicGeometry.IsOpenImmersion.opensEquiv_symm_apply; DiscreteQuotient.ofIsClopen; IsLocalHomeomorph.toHomeomorph_of_bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the basis clopen descent plus affine generic-fibre and component-quotient conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-generic-continuous-sections",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; returned proof steps 3-4: gluing unique clopen extensions over a chart basis, affine generic inclusion and spectral component comparison",
+   "via": [
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-generic-component-comparison",
+  "worker": "stage1",
+  "summary": "Q12: retained the statement, proved generic inclusion affineness by its one-point source, reused affine base change and qcqs spectral leaves, wrote the local-to-global clopen overlap, union and uniqueness arguments explicitly, and applied the existing spectral clopen criterion. No new nodes or Lean files.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). Its inherited place is the auxiliary normal-generic continuous-section argument serving det-thm-sf-ctf-stability-direct-images paragraph (3). Steps 1–2 realize affine generic-fibre preparation; steps 3–5 realize gluing of basis clopens; step 6 realizes the component quotient comparison. The main-20261015 paragraph itself does not state this auxiliary lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-378ae5ce1",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-378ae5ce1 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes. The statement is byte-identical to the unsplit node created by the Q51 re-split. The six steps carry the parent's old steps 3-4 (from the Q05 snapshot) completely, with nothing dropped or shortened. Step 1: Spec k has one point, mapping to η (def-weil-affine-spectrum), so the inverse image of an affine open is ∅ or Spec k, both affine; this is the definition in pqf-def-affine-morphism (Mathlib leaf IsAffineHom). Step 2: affine-morphism-permanence (1) gives i affine as the base change of j along u, and (2) gives U_η affine; affine-scheme-qcqs and qcqs-scheme-spectral then give spectral spaces. All three are Mathlib leaves with no extra hypotheses; tags 01S6, 01SD, 00E8, 01KN and 094L checked in tags/tags. Steps 3-5: I checked by hand the overlap agreement C_W∩V=C_V∩W (by refinement inside the basis, with no affine intersections), C∩W=C_W, openness of U∖C=∪(W∖C_W), i^{-1}C=D, and injectivity. Step 6: the statement of lem-sfb-spectral-clopen-component-homeomorphism (same unit) fits exactly. 0906 (topology.tex:4561) gives only profiniteness, and the source text correctly does not claim more. Edge cases: empty U with empty basis; nonempty W with empty W_η makes the hypothesis impossible; X=Spec k; non-quasi-separated X. No SGA source is cited; tool_uses are not needed. Advisory: 'generic inclusion' Spec O_{X,η}→X has no definition node; the phrase comes from the base statement. The report mentions a citations.json that is not in the commit. from.node=null is inherited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGenericComponentComparison",
+  "declaration": "AlgebraicGeometry.normal_generic_component_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGenericComponentComparison.lean",
+  "statement": "theorem normal_generic_component_comparison {X U : Scheme.{u}} [IsIntegral X] [IsAffine U] (u : U ⟶ X) (B : Set U.Opens) (hBaffine : ∀ W ∈ B, IsAffineOpen W) (hBbasis : ∀ (O : U.Opens) (x : U), x ∈ O → ∃ W ∈ B, x ∈ W ∧ W ≤ O) (hBclopen : ∀ W ∈ B, Function.Bijective (fun C : Clopens W ↦ (⟨(W : Set U).restrictPreimage (pullback.fst u (X.fromSpecStalk (genericPoint X))) ⁻¹' (C : Set W), C.isClopen.preimage (pullback.fst u (X.fromSpecStalk (genericPoint X))).continuous.restrictPreimage⟩ : Clopens (pullback.fst u (X.fromSpecStalk (genericPoint X)) ⁻¹ᵁ W)))) : IsAffineHom (X.fromSpecStalk (genericPoint X)) ∧ IsAffineHom (pullback.fst u (X.fromSpecStalk (genericPoint X))) ∧ IsAffine (pullback u (X.fromSpecStalk (genericPoint X))) ∧ SpectralSpace U ∧ SpectralSpace (pullback u (X.fromSpecStalk (genericPoint X)) : Scheme.{u}) ∧ Function.Bijective (fun C : Clopens U ↦ (⟨(pullback.fst u (X.fromSpecStalk (genericPoint X))) ⁻¹' (C : Set U), C.isClopen.preimage (pullback.fst u (X.fromSpecStalk (genericPoint X))).continuous⟩ : Clopens (pullback u (X.fromSpecStalk (genericPoint X)) : Scheme.{u}))) ∧ IsHomeomorph (pullback.fst u (X.fromSpecStalk (genericPoint X))).continuous.connectedComponentsMap ∧ (pullback.fst u (X.fromSpecStalk (genericPoint X))).continuous.connectedComponentsMap ∘ (ConnectedComponents.mk : (pullback u (X.fromSpecStalk (genericPoint X)) : Scheme.{u}) → ConnectedComponents (pullback u (X.fromSpecStalk (genericPoint X)) : Scheme.{u})) = (ConnectedComponents.mk : U → ConnectedComponents U) ∘ (pullback.fst u (X.fromSpecStalk (genericPoint X)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14e157230",
+  "group": "NH",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: IsIntegral X (includes nonempty); j = X.fromSpecStalk (genericPoint X), the canonical map from Spec of the function field; U affine with arbitrary u; U_eta = pullback u j and i = pullback.fst; set-of-opens basis condition exact; local Clopens bijection via restrictPreimage onto i⁻¹ᵁW; all 8 conclusions present and exact (IsAffineHom j and i, IsAffine U_eta, SpectralSpace U and U_eta, global clopen bijection, IsHomeomorph of connectedComponentsMap, commuting square with ConnectedComponents.mk). No extra assumptions (no quasi-separated X, no affine intersections, no normality). Edge cases: empty U with empty basis allowed, W with empty generic fibre falsifies the hypothesis, X = Spec k covered, single bound universe. Only the lean field changed versus live; lean.statement verbatim; dependency records used through their recorded declarations (function-field module points to Scheme.functionField). Proof import ClopenComponentHomeomorphism exists in live and matches the last two conclusions. No duplicate or name clash in live Sheaf/WeilConjectures. Docstrings give source and blueprint plus 6 proof steps; body is sorry only; no definitions; report has both sections. No compile run: no file changed."
+ }
+}

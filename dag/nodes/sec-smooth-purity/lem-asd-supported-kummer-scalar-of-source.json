@@ -1,0 +1,141 @@
+{
+ "id": "lem-asd-supported-kummer-scalar-of-source",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "The normalized root coefficient unit and its supported boundary square in the final scalar-extension paragraph",
+   "via": [
+    "lem-asd-supported-kummer-boundary-scalar",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Supported Kummer scalar square from the normalized supported source unit",
+ "statement": "Let R,A be finite commutative coefficient rings, φ:R→A a ring homomorphism, N>0 annihilating both rings, T an N-invertible scheme, and i:D→T a closed immersion with invertible ideal. Let κ_R and κ_A satisfy the normalized relative supported Kummer boundary specification [def-asd-ordinary-supported-kummer-boundary]. Suppose η:R_D→Resφ(A_D) sends every constant generator r to φ(r), and its closed pushforward is an unbounded derived scalar unit [def-asd-ordinary-supported-kummer-scalar]. Then SupportedKummerScalar φ N holds for κ_R,κ_A, including the normalized target map, both derived unit properties and the Ext square. No flatness of A over R is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-asd-ordinary-supported-kummer-scalar"
+ ],
+ "proof": [
+  {
+   "text": "Take the proved normalized root-line derived coefficient unit and combine its generator formula with the given source normalization. The integral source generator is preserved by η, by the constant/global-sections adjunction and integer-cast preservation. The coefficient root map is preserved by θ, by evaluation at one.",
+   "uses": [
+    "lem-asd-supported-kummer-root-scalar-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+   }
+  },
+  {
+   "text": "The integral equations of both normalized boundaries express their forgotten scalar adjuncts as the same pole and Kummer splice followed by their coefficient root map. The integral supported derived unit and the scalar-unit Ext bijection detect equality of module Ext classes. Apply this injection to the desired square, use exact-functor composition coherence for restriction followed by forgetting, and reassociate Yoneda products. Both sides are the same common splice followed by the A root map. Combine the square and both unit properties.",
+   "uses": [
+    "lem-asd-supported-kummer-integral-equation",
+    "lem-sp-etale-supported-integral-derived-unit",
+    "lem-sp-scalar-unit-ext-bijective",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison",
+    "lem-amb-kummer-any-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-supported-kummer-root-scalar-unit",
+  "lem-asd-supported-kummer-integral-equation",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "lem-sp-scalar-unit-ext-bijective",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison",
+  "lem-amb-kummer-any-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized coefficient map on a sheaf of roots of unity tensor a coefficient ring is a derived extension of scalars unit, and preserves the supported Kummer boundary",
+   "results": "Only normalization-monoid, polynomial and roots-of-unity ring lemmas, ModuleCat.RestrictionCoextensionAdj.unit and SheafOfModules.unitToPushforwardObjUnit; none states a Tate-line derived unit or supported boundary square.",
+   "date": "2026-10-27",
+   "verdict": "no matching specialized theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"scalarUniversal\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedDerivedScalarUnit|SupportedKummerScalar|scalarUniversal in Mathlib; normalized root scalar and supported boundary square in Sheaf, WeilConjectures, DAG and latest blueprint",
+   "results": "No Mathlib hits. The source provides the private line Hom equivalence, proved tensor inverse and flat scalar-unit theorem; it also provides the integral derived-unit Ext injection and exact-functor composition comparison. Existing pro-etale normalized scalar-unit and comparison theorems have different sites and interfaces. The two new public statements isolate the fully proved root unit and its ordinary supported assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the stated component APIs; no existing node or public declaration states these isolated ordinary-site results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKummerBoundaryScalar",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerScalarOfSource",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerScalarOfSource.lean",
+  "declaration": "AlgebraicGeometry.Etale.supported_kummer_scalar_of_source",
+  "statement": "theorem supported_kummer_scalar_of_source\n    {R A : Type (u + 1)} [CommRing R] [Finite R] [CommRing A] [Finite A]\n    (φ : R →+* A) (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)\n    (hR : (N : R) = 0) (hA : (N : A) = 0) (hT : IsUnit (N : Γ(T, ⊤)))\n    {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))\n      (finiteEtaleTateLine T N A hA) 2)\n    (κ₀ : Ext ((lowerStar (ModuleCat.{u + 1} R) i).obj (ordinaryFiniteConstant R D))\n      (finiteEtaleTateLine T N R hR) 2)\n    (hκ : SupportedKummerBoundary A N hA i hI hT κ)\n    (hκ₀ : SupportedKummerBoundary R N hR i hI hT κ₀)\n    (η : ordinaryFiniteConstant R D ⟶\n      (Sheaf.restrictScalars D.smallEtaleTopology φ).obj (ordinaryFiniteConstant A D))\n    (hη : ∀ (W : D.Etaleᵒᵖ) (r : R),\n      η.hom.app W ((toSheafify D.smallEtaleTopology ((Functor.const D.Etaleᵒᵖ).obj\n        (ModuleCat.of R R))).app W r) =\n      (toSheafify D.smallEtaleTopology ((Functor.const D.Etaleᵒᵖ).obj\n        (ModuleCat.of A A))).app W (φ r))\n    (huI : SupportedDerivedScalarUnit φ T\n      ((lowerStar (ModuleCat.{u + 1} R) i).obj (ordinaryFiniteConstant R D))\n      ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D))\n      ((lowerStar (ModuleCat.{u + 1} R) i).map η)) :\n    SupportedKummerScalar φ N hR hA i κ₀ κ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T103505-L-1089636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T103505-L-1089636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

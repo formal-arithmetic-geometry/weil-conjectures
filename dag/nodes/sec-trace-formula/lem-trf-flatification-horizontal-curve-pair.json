@@ -30,131 +30,60 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-projective-proper], $C\\to S$ is proper. The closed immersion $H\\hookrightarrow C$ is proper and proper maps compose by [lem-weil-pbc-proper-fp-permanence], so $H\\to S$ is proper too. Thus $C\\amalg H\\to S$ is of finite type and separated, hence quasi-separated. Apply [lem-sbc-generic-flat-finite-presentation] to this finite disjoint union over the integral base $S$. It gives a nonempty open $U\\subset S$ over which both $C$ and $H$ are flat and locally finitely presented. Since $S$ is Noetherian, $U$ is quasi-compact. The empty marking causes no change to this argument.",
+   "text": "By [lem-pc-projective-proper], $C\\to S$ is proper; its closed marking $H\\to S$ is proper by [lem-weil-pbc-proper-fp-permanence]. Apply [lem-trf-simultaneous-proper-generic-flattening] to these two proper families. It gives a common nonempty open $U$, one admissible blowup $v:S_1\\to S$, and strict transforms $\\widetilde C,\\widetilde H$ flat and finitely presented over $S_1$, agreeing with the original families away from the centre. Empty $H$ is allowed.",
    "uses": [
     "lem-pc-projective-proper",
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-sbc-generic-flat-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01W9 and 052A; choose a common generic-flat open before ILO X Theorem 3.4 Step 2."
-   }
-  },
-  {
-   "text": "Apply the flattening theorem [lem-trf-flattening-by-admissible-blowup] to $W=C\\amalg H$ and $T=S$, with $U$ from Step 1: $S$ is Noetherian, hence quasi-compact and quasi-separated, $U$ is quasi-compact, and $W\\to S$ is of finite type and quasi-separated by Step 1. By [def-nagata-admissible-blowup] we obtain a finite-type quasi-coherent ideal $I$, with $I|_U=\\mathcal O_U$, and $v:S_1=\\operatorname{Bl}_I S\\to S$. Denote the two strict transforms by $\\widetilde C$ and $\\widetilde H$. Schematic closure is computed by a kernel of restriction, and on a disjoint union that kernel is computed componentwise. Thus the transformed disjoint union is $\\widetilde C\\amalg\\widetilde H$, so each component is flat and finitely presented over $S_1$. By [lemma-nagata-strict-transform-closure-characterization], these are the schematic closures of the restrictions over the complement of the centre.",
-   "uses": [
-    "lem-trf-flattening-by-admissible-blowup",
-    "def-nagata-admissible-blowup",
-    "lemma-nagata-strict-transform-closure-characterization"
+    "lem-trf-simultaneous-proper-generic-flattening"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R, lemma-flat-after-blowing-up, applied once to C disjoint union H; strict-transform closure: Divisors Tag 080D, definition-strict-transform."
+    "place": "Tag 081R, lemma-flat-after-blowing-up, applied to a finite disjoint union after Morphisms Tag 052A, proposition-generic-flatness; Divisors Tag 080D, definition-strict-transform. ILO Expose X, Theorem 3.4 proof Step 2, printed p.160."
    }
   },
   {
-   "text": "Locally on $S$, write $S=\\operatorname{Spec}A$ and $I=(a_1,\\ldots,a_r)$. The degree-one standard charts of $\\operatorname{Proj}(\\bigoplus I^n)$ have rings $A[I/a_i]$; this is the degree-zero part after inverting $a_i$ in degree one. Charts with $a_i=0$ are empty, and for $a_i\\ne0$ their rings are subrings of $\\operatorname{Frac}A$. They are domains. Over the complement of $V(I)$ the ideal is the unit ideal, and $\\operatorname{Proj}\\mathcal O[t]=S$ there. Each nonempty chart contains this same generic point; hence $S_1$ is integral and $v$ is an isomorphism over a dense open containing $U$, so is birational. The finite-type ideal gives properness of $v$ by [lemma-nagata-blowup-proper], hence finite type. Therefore [lem-weil-pbc-finite-type-over-noetherian] makes $S_1$ Noetherian, and [lem-exc-finite-type-localization-excellent], applied on affine base charts and localizations, makes it excellent.",
+   "text": "Apply [lem-trf-excellent-blowup-projective-transforms] to this blowup: its ideal is finite type and unit on the nonempty $U$. Thus $S_1$ is excellent, integral and Noetherian, and $v$ is proper, birational and projective in the projective-bundle sense. Since $C\\to S$ has a finite-projective-space embedding and $\\widetilde C$ is closed in its base change, the same lemma gives finite-projective-space projectivity of $\\widetilde C\\to S_1$.",
    "uses": [
-    "def-nagata-relative-proj",
-    "lemma-nagata-blowup-proper",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-exc-finite-type-localization-excellent"
+    "lem-trf-excellent-blowup-projective-transforms"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0804, lemma-blowing-up-affine (standard-chart computation); finite-type ideals and properness; More on Algebra Tag 07QU."
+    "place": "Tag 0804, lemma-blowing-up-affine; Tag 02NS, lemma-blowing-up-projective (Sym-to-Rees closed immersion); More on Algebra Tag 07QU, lemma-finite-type-over-excellent. Retained proof Steps 3--4 of the parent, including the two distinct projectivity conventions."
    }
   },
   {
-   "text": "The multiplication map $\\operatorname{Sym} I\\twoheadrightarrow\\bigoplus_{n\\geq0}I^n$ is surjective in each degree: the degree-$n$ part is generated by products of $n$ local sections of $I$. The surjective-graded-map clause of [prop-nagata-relative-proj-functoriality] gives $S_1\\hookrightarrow\\mathbf P_S(I)$. Since $I$ is quasi-coherent of finite type, this is exactly projective-bundle projectivity by [def-trf-projective-bundle-morphism]. For the curve, [lem-pc-projective-base-change] embeds $C\\times_S S_1$ in $\\mathbf P^N_{S_1}$. Composing its embedding with the closed embedding of $\\widetilde C$ exhibits $\\widetilde C\\to S_1$ as H-projective: the composite of closed embeddings is closed by [lem-weil-pbc-proper-fp-permanence](e).",
+   "text": "The generic curve is nonempty, so the integral $C$ dominates $S$. The transforms from Step 1 are the closures over the centre complement, a nonempty open where $v$ is an isomorphism. Apply [lem-trf-flat-strict-transform-generic-closures] with that open: flatness of both transforms is from Step 1; properness of $v$, its isomorphism over the centre complement, and integrality and Noetherianity of $S_1$ are from Step 2. This identifies $\\widetilde C=C_1$ and $\\widetilde H=H_1$ with the stated generic closures, proves $C_1$ integral and $H_1\\subset C_1$ closed, retains both generic fibres and proves $C_1\\to C$ proper birational.",
    "uses": [
-    "prop-nagata-relative-proj-functoriality",
-    "def-trf-projective-bundle-morphism",
-    "lem-pc-projective-base-change",
-    "lem-weil-pbc-proper-fp-permanence"
+    "lem-trf-flat-strict-transform-generic-closures"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02NS, lemma-blowing-up-projective, first assertion and its displayed Sym-to-Rees surjection; projective base change Tag 01WF."
+    "place": "Tag 080D, definition-strict-transform, schematic-closure description; ILO Expose X Theorem 3.4, paragraph before the proof and Step 2, printed p.160. Flat generic-density and integrality argument supplied in retained parent proof Steps 5--6."
    }
   },
   {
-   "text": "The strict transforms agree with $C$ and $H$ over $U$; their generic fibres are therefore the specified $C_\\eta$ and $H_\\eta$. Here $\\kappa(\\eta_1)=\\kappa(\\eta)$ because $v$ is an isomorphism near the generic point. To identify the transforms with closures of these generic fibres, at a point of either transform put $A=\\mathcal O_{S_1,s}$ and $B=\\mathcal O_{\\widetilde X,x}$. By [def-weil-flat-morphism] $B$ is flat over the domain $A$. The defining injectivity criterion [def-weil-pbc-flat-ring-map], applied to $A\\hookrightarrow\\operatorname{Frac}A$, injects $B$ into $B\\otimes_A\\operatorname{Frac}A$. Thus no nonzero local function vanishes after restriction to the generic fibre. That fibre is schematically dense in the transform, and is topologically dense as well: this nonzero localization has a prime giving a generalization over the generic point. Since each transform is closed in the ambient base change, it is precisely the schematic closure of its generic fibre. Consequently $\\widetilde C=C_1$ and $\\widetilde H=H_1$ as defined in the statement.",
+   "text": "Finite-projective-space projectivity makes $C_1\\to S_1$ proper by [lem-pc-projective-proper]. Apply [lem-trf-flat-proper-curve-marking-fibres] to $C_1,H_1$: Step 1 supplies flat finite presentation, Step 3 generic density and the generic identifications, and the hypotheses give the irreducible dimension-one generic curve and finite etale generic marking. The curve has nonempty pure dimension-one geometric fibres and the marking is finite flat finitely presented with pure dimension-zero nonempty geometric fibres. Steps 1--3 provide all remaining assertions.",
    "uses": [
-    "def-weil-flat-morphism",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 081R and strict-transform closure; the generic-density identification is the displayed flat localization injection."
-   }
-  },
-  {
-   "text": "For $X=C_1$, the localized rings in Step 5 are localizations of affine rings of the integral generic curve $C_\\eta$, hence domains. Their subrings $B$ are domains too, so $C_1$ is reduced. The dense irreducible generic fibre makes $C_1$ irreducible, hence integral. The generic closed inclusion $H_\\eta\\subset C_\\eta$ implies that its schematic closure $H_1$ is contained as a closed subscheme in the schematic closure $C_1$: the restriction kernel for $C_\\eta$ is contained in that for $H_\\eta$. The map $C\\times_S S_1\\to C$ is proper by base change of proper $v$, and $C_1$ is closed in it. By [lem-weil-pbc-proper-fp-permanence](a)--(c), $C_1\\to C$ is proper. It is an isomorphism over the dense open $C_U$ of the integral $C$, so is birational.",
-   "uses": [
-    "lem-weil-pbc-proper-fp-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Strict transforms and proper base change, with the schematic-closure kernel construction; ILO X Theorem 3.4 Step 2."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-flat-dense-generic-fibre-pure-dimension] to $C_1\\to S_1$ with $d=1$. Flatness and finite presentation come from Step 2, generic density from Step 5, and its generic fibre is the original irreducible dimension-one curve. Thus every nonempty geometric fibre is pure of dimension $1$. These fibres are all nonempty: [lem-pc-projective-proper] makes $C_1\\to S_1$ proper, so its image is closed and contains the generic point, and is therefore all of $S_1$. Apply the same dimension lemma to $H_1\\to S_1$ with $d=0$. Its generic fibre is finite etale; [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] gives dimension zero at every point, so each generic irreducible component has dimension zero. Step 5 again gives density. Every nonempty geometric fibre of $H_1$ is therefore pure of dimension $0$. If $H_\\eta$ is empty its schematic closure $H_1$ is empty, and the dimension assertions are vacuous.",
-   "uses": [
-    "lem-trf-flat-dense-generic-fibre-pure-dimension",
     "lem-pc-projective-proper",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+    "lem-trf-flat-proper-curve-marking-fibres"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 0GSJ--0GSK with F=O; Morphisms Tag 02NK for geometric fibres; dimensions d=1 and d=0."
-   }
-  },
-  {
-   "text": "Because $H_1$ is closed in the proper $S_1$-scheme $C_1$, [lem-weil-pbc-proper-fp-permanence](a),(c) makes $H_1\\to S_1$ proper. Its fibres have dimension zero by Step 7. On any affine pair, [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] therefore makes the ring map quasi-finite at every fibre prime. This is local quasi-finiteness in [pqf-def-quasifinite]. Now [pqf-lem-proper-lqf-finite] gives finiteness. Flatness and finite presentation already hold by Step 2. Together with Steps 3--7, this gives every requested property of the single blowup and both strict transforms.",
-   "uses": [
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-    "pqf-def-quasifinite",
-    "pqf-lem-proper-lqf-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 02LS, lemma-characterize-finite; zero-dimensional-fibre criterion Morphisms Tag 0397, lemma-locally-quasi-finite-rel-dimension-0."
+    "place": "Tags 0GSJ and 0GSK, lemma-flat-associated-equidimensional and remark-flat-equidimensional (second list, with F=O); Tag 02LS, lemma-characterize-finite. Morphisms Tags 02NK and 0397, lemma-base-change-relative-dimension-d and lemma-locally-quasi-finite-rel-dimension-0. Retained parent proof Steps 7--8."
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-admissible-blowup",
-  "def-nagata-relative-proj",
-  "def-trf-projective-bundle-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-pbc-flat-ring-map",
-  "lem-exc-finite-type-localization-excellent",
-  "lem-pc-projective-base-change",
   "lem-pc-projective-proper",
-  "lem-sbc-generic-flat-finite-presentation",
-  "lem-trf-flat-dense-generic-fibre-pure-dimension",
-  "lem-trf-flattening-by-admissible-blowup",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-  "lemma-nagata-blowup-proper",
-  "lemma-nagata-strict-transform-closure-characterization",
-  "pqf-def-quasifinite",
-  "pqf-lem-proper-lqf-finite",
-  "prop-nagata-relative-proj-functoriality"
+  "lem-trf-excellent-blowup-projective-transforms",
+  "lem-trf-flat-proper-curve-marking-fibres",
+  "lem-trf-flat-strict-transform-generic-closures",
+  "lem-trf-simultaneous-proper-generic-flattening",
+  "lem-weil-pbc-proper-fp-permanence"
  ],
  "proof_origin": {
   "by": "document",
@@ -246,79 +175,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-flatification-horizontal-curve-pair",
   "worker": "stage1",
-  "summary": "Expanded simultaneous flattening via a new statement-only node for Stacks 081R (added by the maintainer reader, since the 081R sentence in sk-lem-nagata-sketch-elimination is commentary its proof and attached Lean do not establish); proved blowup geometry, projective conventions and identification with closures of the generic fibres; extracted only the general pure-fibre-dimension theorem. The statement is unchanged.",
+  "summary": "Repair of batch5 re-split return: the unchanged statement is assembled in four short steps from four independently stated unsplit arguments corresponding to old Steps 1--2, 3--4, 5--6 and 7--8. Complete retained arguments and old citations are preserved in the report as future-worker proof plans; every new node is statement-only with real searches.",
   "blueprint": "Realizes the semistable-alteration preparation of lem-trf-local-term-locality Proof (1)--(2), via lem-trf-dejong-relative-marked-semistable Step 5: ILO X Theorem 3.4 Step 2 simultaneously flatifies C and the horizontal marking before stable modification.",
   "tool_uses": [
-   {
-    "node": "def-nagata-admissible-blowup",
-    "why": "Generic scheme-theoretic tool used with its stated hypotheses in the flatification argument; the local-term unit has no replacement for this tool."
-   },
-   {
-    "node": "def-nagata-relative-proj",
-    "why": "Generic scheme-theoretic tool used with its stated hypotheses in the flatification argument; the local-term unit has no replacement for this tool."
-   },
-   {
-    "node": "def-weil-flat-morphism",
-    "why": "Generic scheme-theoretic tool used with its stated hypotheses in the flatification argument; the local-term unit has no replacement for this tool."
-   },
-   {
-    "node": "def-weil-pbc-flat-ring-map",
-    "why": "Generic scheme-theoretic tool used with its stated hypotheses in the flatification argument; the local-term unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-exc-finite-type-localization-excellent",
-    "why": "Preserves excellence on finite-type blowup charts and their localizations."
-   },
-   {
-    "node": "lem-pc-projective-base-change",
-    "why": "Retains the original finite-projective-space embedding of C after changing the base to S1."
-   },
    {
     "node": "lem-pc-projective-proper",
     "why": "Converts the supplied H-projective curve and its transform to proper morphisms; this is a generic projectivity tool, not a replacement for the local-term argument."
    },
    {
-    "node": "lem-sbc-generic-flat-finite-presentation",
-    "why": "Provides one common dense open for the finite disjoint union C and H before applying the flattening theorem."
-   },
-   {
-    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "why": "Verifies dimension zero for the finite etale generic marking, before applying the pure-dimension theorem."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Gives Noetherianity of the blowup base from finite type."
-   },
-   {
     "node": "lem-weil-pbc-proper-fp-permanence",
     "why": "Supplies composition and base change of proper maps and composition of closed immersions for H, the transforms and the projection to C."
-   },
-   {
-    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-    "why": "Converts the zero-dimensional fibres of H1 into local quasi-finiteness on affine pairs."
-   },
-   {
-    "node": "lemma-nagata-blowup-proper",
-    "why": "Gives properness of the single finite-type-ideal blowup, needed for its finite type and for the proper projection C1 to C."
-   },
-   {
-    "node": "lemma-nagata-strict-transform-closure-characterization",
-    "why": "Identifies the strict transform as schematic closure in the base change; no elimination argument is substituted for flatification."
-   },
-   {
-    "node": "pqf-def-quasifinite",
-    "why": "Generic scheme-theoretic tool used with its stated hypotheses in the flatification argument; the local-term unit has no replacement for this tool."
-   },
-   {
-    "node": "pqf-lem-proper-lqf-finite",
-    "why": "Concludes finiteness of H1 from properness and local quasi-finiteness."
-   },
-   {
-    "node": "prop-nagata-relative-proj-functoriality",
-    "why": "The surjective graded-map clause turns Sym(I) onto the Rees algebra into the required projective-bundle embedding."
    }
   ]
  },
@@ -342,12 +211,12 @@
   "prop-nagata-relative-proj-functoriality"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q12-a61940537",
-  "group": "Q12",
+  "reviewer": "NT-cc-N5-3917b081e",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-a61940537 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node, every cited statement, ILO X Thm 3.4 Step 2 (printed p.160) and Stacks 081R, 0GSJ/0GSK, 02NJ/02NK and 080D. The item statement is unchanged and true. The new node lem-trf-flat-dense-generic-fibre-pure-dimension is a true real lemma (0GSK second list with F=O_X, geometric fibres by 02NK), not a duplicate, and not a clause of the item. I checked its proof via 0GSJ and tested it on empty X, d=0, nonflat and nondense counterexamples, and DVR families. Steps 1 and 3-8 check out with all hypotheses verified: blowup charts in Frac A, S1 integral/Noetherian/excellent, Sym I onto Rees giving the projective-bundle embedding, flatness over a domain giving that each transform is the schematic closure of its generic fibre, C1 integral, C1->C proper and birational, pure dims 1/0 from the new node, and H1 finite via 0397/02LS. One fault (C3/C4): Step 2 took Stacks 081R from a commentary sentence in sk-lem-nagata-sketch-elimination. That node's proof says flattening 'is not needed here', and its closed Lean (exists_admissibleBlowup_isOpenImmersion_strictTransformMap) does not state flattening, so the item's main input was unproved in the DAG. Repaired: added the statement-only node lem-trf-flattening-by-admissible-blowup (exact 081R hypotheses, source flat.tex lemma-flat-after-blowing-up). Mathlib was searched by grep only; LeanSearch/Loogle are recorded as unavailable because they can't be reached from this machine. Step 2 now cites the new node with the qcqs check, proof_deps are recomputed, and the tool_use for the elimination node is removed. The other 17 tool_uses are accepted. Maintenance: that sentence in the elimination node's statement should be removed or marked as commentary.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-3917b081e (reviewer sub-agent of L); spot-checked: I read the re-split delivery in full; it meets the 2026-10-21 human note. The item statement is byte-identical to the base. The old 8-step proof (6424 characters) is verbatim the live node. Each pair of old steps (1-2, 3-4, 5-6, 7-8) became one self-contained, statement-only unsplit node of comparable size. The parent is a 4-step assembly of about 2090 characters. No new node restates the item, and none of them, nor the item or its via chain, is in route-pivot-dropped. Sources checked: ILO X Thm 3.4 (printed p.159-160; proper transform = schematic closure of X_eta x_S S', Step 2 Raynaud-Gruson); Stacks 081R lemma-flat-after-blowing-up; 0GSK remark-flat-equidimensional, second list. No SGA is used. Node checks: (1) simultaneous-proper-generic-flattening is generic flatness plus 081R on X1 u X2, with componentwise closure kernels, and is true. (2) excellent-blowup-projective-transforms: blowup charts A[I/a_j] lie in Frac A and charts with a_j = 0 are empty, so T is integral; Noetherian and excellent via 07QU; Sym I onto Rees gives an embedding in P(I); closed transforms of an H-projective X are H-projective; both projectivity conventions are kept apart. It overlaps lem-sfb-integral-blowup-projective-geometry only partly. (3) flat-strict-transform-generic-closures: flatness gives B into B tensor Frac A, hence density and schematic closure; X' is integral and X' to X proper birational; tested on empty H and v = id. (4) flat-proper-curve-marking-fibres: 0GSK with d = 1 and d = 0, surjective by properness, finite via 0397 and 02LS, empty if Z_eta is empty; density and properness are both needed. Every item step matches the hypotheses of the node it cites (U taken as the centre complement in node 3; T = S_1 integral in node 4), and every item clause is covered. Batch-5 flags: all four cited nodes are generic algebraic geometry (Raynaud-Gruson flattening, blowup geometry, flat closures, fibre dimension) with definition-only stmt_deps and no proof deps. They are not trace-formula or Poincare-duality steps, so I accepted them. The tool_uses (projective-proper, proper-permanence) are accepted. FIX: B4 fault, 7 instances of TeX \\to stored as a JSON \\t escape (a TAB followed by 'o') in all 4 item proof steps, all repaired. I also made step 3 list node 3's hypotheses explicitly. Only the proof field changed, in fixes/dag/nodes/sec-trace-formula/lem-trf-flatification-horizontal-curve-pair.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FlatificationHorizontalCurvePair",
@@ -368,5 +237,16 @@
   "result": "pass",
   "note": "Read node, all 19 stmt deps and exact declarations (IsAdmissible, strictTransformι, IsProjectiveBundle, IsHProjective, fiber API, IsExcellent, Hom.ker). Every hypothesis and conclusion clause matches the node with no stronger assumptions; the extra nonemptiness of the curve's geometric fibres is implied by 'pure of dimension 1' and proved in node Step 7. Edge cases checked: empty marking, identity blowup, dimension-0 base, universes (all u). lean.statement is verbatim equal to the file; one sorry; source/blueprint docstrings and the 8-step proof docstring are present; only module, node (lean plus two landed, acyclic stmt_deps) and report changed. nt_compile --json rc=0 with no messages (7.5 s/8.6 s). Minor: the statement cites lemma-nagata-strict-transform-closure-characterization rather than def-nagata-strict-transform (same declaration); the second-reading section is the standard post-10-17 placeholder."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

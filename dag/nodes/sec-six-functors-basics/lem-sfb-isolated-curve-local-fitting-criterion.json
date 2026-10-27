@@ -1,0 +1,188 @@
+{
+ "id": "lem-sfb-isolated-curve-local-fitting-criterion",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. New supporting lemma: Tag 0E7Y, first and final paragraphs, using Algebra Tags 00OU, 00RT, 00RV, Morphisms Tags 02NM, 045U and More on Algebra Tag 07ZA",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Local differential bounds give global finite-jet Fitting bounds",
+ "statement": "Let $k,R,X,p_i,B_i$ be as follows: $k$ is a field [def-weil-field], $R=k[[t]]$ [def-weil-pbc-multivariate-power-series], $X/k$ is proper [def-weil-proper-morphism], has dimension at most one [def-kun-topological-krull-dimension], and is lci [def-weil-pbc-complete-intersection-over-field]. The $p_i$, indexed by $\\operatorname{Fin}r$, are distinct closed points and $X/k$ is smooth off their range [def-sbc-smooth-morphisms]. Each $B_i$ is a local flat essentially finite type $R$-algebra [def-weil-pbc-flat-ring-map, def-weil-pbc-essentially-finite-type-algebra] with its induced $k$-algebra structure. Suppose a finite free surjection $\\pi_i:B_i^{m_i}\\twoheadrightarrow\\Omega_{B_i/R}$ and an exponent $e_i$ satisfy $t^{e_i}\\in\\operatorname{Fit}_{a_i}(\\Omega_{B_i/R})$, where $a_i=\\dim\\mathcal O_{X,p_i}+\\operatorname{trdeg}_k\\kappa(p_i)$, using the kernel-minor convention [lem-trf-fitting-ideal-independence-base-change]. Let $g:Y\\to\\operatorname{Spec}R$ be flat, locally finitely presented and H-projective [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-kun-projective], with $e:Y_k\\simeq X$ over $k$. For every $n\\geq0$ suppose given $j_n:X\\to Y_{n+1}$ over the special-fibre inclusion and local isomorphisms $\\mathcal O_{Y_{n+1},j_n(p_i)}\\simeq B_i/(t^{n+1})$ preserving base scalars, where $Y_{n+1}=Y\\times_R\\operatorname{Spec}(R/(t^{n+1}))$ [def-pc-fibre-product]. Then there are opens $U_0,U_1$ covering $Y$, with proper restricted morphisms $g_d$, whose special fibres have pure dimension $d$ [def-weil-pure-dimension] and have depth equal to stalk Krull dimension at all points. For each $d=0,1$ there is $n\\geq1$ such that $t^{n-1}$ belongs globally to $\\operatorname{Fit}_d(\\Omega_{(U_d)_n/(R/(t^n))})$ [def-trf-fitting-ideal-sheaf]. The global section means the pullback of the scalar $t^{n-1}\\bmod t^n$, with membership in the ideal on the whole source open. This is a calculation on an already given family, not an existence or generic-smoothness assertion. Empty marked lists and empty pieces are included.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7Y, first and final paragraphs, using Algebra Tags 00OU, 00RT, 00RV, Morphisms Tags 02NM, 045U and More on Algebra Tag 07ZA"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-pc-fibre-product",
+  "def-weil-pure-dimension",
+  "def-trf-fitting-ideal-sheaf",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-sfb-isolated-curve-formal-lifting",
+  "lem-sfb-proper-formal-curve-algebraization"
+ ],
+ "proof": [
+  {
+   "text": "Apply lci Cohen--Macaulayness to all stalks of X and transport depth and dimension to the special fibre using the given special-fibre isomorphism. Transport its topological dimension bound by the induced homeomorphism. Reuse the proved special-fibre and depth-transport helpers from the finite-jet criterion module; its generic-smoothness theorem is not invoked here.",
+   "uses": [
+    "lem-sfb-lci-cohen-macaulay-stalks",
+    "lem-sfb-finite-jet-smooth-generic-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre CM locus is open and contains the special fibre. Properness over the local power-series base forces it to be all of Y. Apply the relative fibre-dimension open partition. Pairwise disjoint open pieces covering Y are clopen. Local dimension of the special fibre is at most one, so the union of the zero and one pieces contains the special fibre and hence equals Y by properness. Their inclusions are closed immersions, so each restricted morphism is proper.",
+   "uses": [
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-cohen-macaulay-fibre-dimension-decomposition",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The special fibres of the restricted pieces map by open immersions into the full special fibre; their stalks have the same depth and dimension. The special-fibre-to-point-fibre isomorphisms and open immersions preserve local topological dimension, which the partition fixes to i.val. Constant local dimension on these locally Noetherian special fibres gives pure dimension.",
+   "uses": [
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take E to be the sum of the finite list of local exponents. Each exponent is at most E; multiply the given member by t^{E-ex_i} and use the ideal property to obtain uniform bounds t^E. Apply isolated_curve_local_fitting_bounds to the proper pure pieces just constructed, retaining the original scalar-compatible local jet comparisons and prescribed finite presentation bounds. Combine the resulting finite-jet membership with the cover, properness, CM and purity proved above. The lower lemma gives the jet at the explicit exponent E+1; provide this witness, prove positivity, and simplify (E+1)-1=E.",
+   "uses": [
+    "lem-sfb-isolated-curve-local-fitting-bounds"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lci-cohen-macaulay-stalks",
+  "lem-sfb-finite-jet-smooth-generic-fibre",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-sbc-cohen-macaulay-fibre-dimension-decomposition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sfb-isolated-curve-local-fitting-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0E7Y, first paragraph and final paragraph; explicit Lean proof of the proper CM dimension partition and reduction to the separate finite-jet Fitting calculation by F9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A power of the parameter in the local differential Fitting ideals at finitely many singular points gives a global section of the Fitting ideal of the finite jet of a proper curve",
+   "date": "2026-10-23",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Proj.pow_apply, PowerSeries.IsWeierstrassDivisorAt, localCohomology.idealPowersDiagram, PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem, Ideal.iInf_pow_eq_bot_of_isLocalRing, WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq, Ideal.fg_of_localizationSpan, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals. ",
+   "verdict": "no match: the returned results do not state the prescribed-local-deformation algebraization or the finite-jet Fitting gluing assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local Fitting bounds imply a global parameter power lies in a differential Fitting ideal on the finite jets of a proper flat curve",
+   "date": "2026-10-23",
+   "results": "Search returned 8 hits: PowerSeries.IsWeierstrassDivisorAt, PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem, PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem, Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt', PowerSeries.IsWeierstrassDivisionAt, PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem, PowerSeries.IsWeierstrassDivisorAt.seq, PowerSeries.IsWeierstrassDivisorAt.divCoeff. ",
+   "verdict": "no match: the returned results do not state the prescribed-local-deformation algebraization or the finite-jet Fitting gluing assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "fittingIdealSheaf|proper_formal_curve|formal_lifting",
+   "date": "2026-10-23",
+   "results": "Search returned 0 hits: . ",
+   "verdict": "no match: the returned results do not state the prescribed-local-deformation algebraization or the finite-jet Fitting gluing assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IsolatedLCICurveSmoothing",
+  "date": "2026-10-23",
+  "group": "F9"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IsolatedCurveLocalFittingCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedCurveLocalFittingCriterion.lean",
+  "declaration": "AlgebraicGeometry.isolated_curve_local_fitting_criterion",
+  "statement": "theorem isolated_curve_local_fitting_criterion\n    (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsProper f]\n    (hdim : topologicalKrullDim X ≤ (1 : WithBot ℕ∞))\n    (hlci : ∃ (I : Type u) (A : I → CommRingCat.{u})\n      (aA : ∀ i, Algebra k (A i)) (ft : ∀ i, Algebra.FiniteType k (A i))\n      (φ : ∀ i, Spec (A i) ⟶ X),\n      (∀ i, IsOpenImmersion (φ i)) ∧\n        (∀ i, φ i ≫ f =\n          Spec.map (CommRingCat.ofHom (@algebraMap k (A i) _ _ (aA i)))) ∧\n        (∀ x : X, ∃ i, ∃ y : Spec (A i), φ i y = x) ∧\n        (∀ i, @Algebra.IsLocalCompleteIntersection k (A i) _ _ (aA i) (ft i)))\n    (r : ℕ) (p : Fin r → X) (hp : Function.Injective p)\n    (hclosed : ∀ i, IsClosed ({p i} : Set X))\n    (hsmooth : ∀ x ∉ Set.range p, ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f))\n    (B : Fin r → Type u) [∀ i, CommRing (B i)] [∀ i, IsLocalRing (B i)]\n    [∀ i, Algebra (PowerSeries k) (B i)] [∀ i, Algebra k (B i)]\n    [∀ i, IsScalarTower k (PowerSeries k) (B i)]\n    [∀ i, Module.Flat (PowerSeries k) (B i)]\n    [∀ i, Algebra.EssFiniteType (PowerSeries k) (B i)]\n    (ex : Fin r → ℕ) (m : Fin r → ℕ)\n    (π : ∀ i, (Fin (m i) → B i) →ₗ[B i] KaehlerDifferential (PowerSeries k) (B i))\n    (hπ : ∀ i, Function.Surjective (π i))\n    (hbound : ∀ i,\n      let : Algebra k (X.presheaf.stalk (p i)) :=\n        (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appLE ⊤ ⊤ le_top ≫\n          X.presheaf.germ ⊤ (p i) trivial).hom.toAlgebra)\n      (algebraMap (PowerSeries k) (B i) PowerSeries.X) ^ ex i ∈\n        (π i).presentationFittingIdeal\n          ((WithBot.unbotD 0 (ringKrullDim (X.presheaf.stalk (p i)))).toNat +\n            (Algebra.trdeg k (IsLocalRing.ResidueField (X.presheaf.stalk (p i)))).toNat))\n    (Y : Scheme.{u}) (g : Y ⟶ Spec (.of (PowerSeries k)))\n    [Flat g] [LocallyOfFinitePresentation g] [IsHProjective g]\n    (e : pullback g (Spec.map (CommRingCat.ofHom\n      (PowerSeries.constantCoeff (R := k)))) ≅ X)\n    (he : e.hom ≫ f = pullback.snd g (Spec.map (CommRingCat.ofHom\n      (PowerSeries.constantCoeff (R := k)))))\n    (j : ∀ n, X ⟶ pullback g (formalCurveBaseι k n))\n    (hj : ∀ n, j n ≫ pullback.fst g (formalCurveBaseι k n) =\n      e.inv ≫ pullback.fst g (Spec.map (CommRingCat.ofHom\n        (PowerSeries.constantCoeff (R := k)))))\n    (h : ∀ i n,\n      (pullback g (formalCurveBaseι k n)).presheaf.stalk (j n (p i))\n        ≃+* (B i ⧸ Ideal.span\n          {(algebraMap (PowerSeries k) (B i) PowerSeries.X) ^ (n + 1)}))\n    (hscalar : ∀ i n a, h i n (isolatedCurveScalarToStalk\n      (pullback.snd g (formalCurveBaseι k n)) (j n (p i))\n      (Ideal.Quotient.mk _ a)) = Ideal.Quotient.mk _ (algebraMap _ _ a)) :\n    ∃ U : Fin 2 → Y.Opens, (⨆ i, U i) = ⊤ ∧\n      (∀ i, IsProper ((U i).ι ≫ g)) ∧\n      (∀ i, ∀ x : ↥(pullback ((U i).ι ≫ g) (Spec.map (CommRingCat.ofHom\n          (PowerSeries.constantCoeff (R := k))))),\n        (IsLocalRing.depth\n          (R := (pullback ((U i).ι ≫ g) (Spec.map (CommRingCat.ofHom\n            (PowerSeries.constantCoeff (R := k))))).presheaf.stalk x)\n          ((pullback ((U i).ι ≫ g) (Spec.map (CommRingCat.ofHom\n            (PowerSeries.constantCoeff (R := k))))).presheaf.stalk x) : WithBot ℕ∞) =\n        ringKrullDim ((pullback ((U i).ι ≫ g) (Spec.map (CommRingCat.ofHom\n          (PowerSeries.constantCoeff (R := k))))).presheaf.stalk x)) ∧\n      (∀ i, (pullback ((U i).ι ≫ g) (Spec.map (CommRingCat.ofHom\n        (PowerSeries.constantCoeff (R := k))))).IsPureDimension i.val) ∧\n      (∀ i, ∃ n : ℕ, 1 ≤ n ∧\n        (pullback.snd ((U i).ι ≫ g) (Scheme.powerSeriesJetBaseMap k n)).appTop\n          ((Scheme.ΓSpecIso (.of ((PowerSeries k) ⧸\n            Ideal.span {(PowerSeries.X : PowerSeries k) ^ n}))).inv\n            (Ideal.Quotient.mk _ ((PowerSeries.X : PowerSeries k) ^ (n - 1)))) ∈\n        (Scheme.Modules.fittingIdealSheaf\n          (pullback.snd ((U i).ι ≫ g) (Scheme.powerSeriesJetBaseMap k n)).relativeDifferentials\n            i.val).idealOfOpens ⊤)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-23"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isolated-curve-local-fitting-criterion",
+  "worker": "stage3",
+  "summary": "Proved CM partition and reduction to the separate finite-jet Fitting calculation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. New supporting lemma: Tag 0E7Y, first and final paragraphs, using Algebra Tags 00OU, 00RT, 00RV, Morphisms Tags 02NM, 045U and More on Algebra Tag 07ZA",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "Generic Openness of the unrestricted fibre Cohen-Macaulay locus input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   },
+   {
+    "node": "lem-sbc-cohen-macaulay-fibre-dimension-decomposition",
+    "why": "Generic Open dimension partition of a fibre Cohen-Macaulay open input for the local algebraization or finite-jet calculation in Tag 0E7Y; it preserves the parent unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261023T231145-L-3553832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261023T231145-L-3553832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

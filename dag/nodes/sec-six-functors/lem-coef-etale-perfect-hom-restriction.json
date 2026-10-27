@@ -1,0 +1,127 @@
+{
+ "id": "lem-coef-etale-perfect-hom-restriction",
+ "kind": "statement",
+ "title": "Perfect-input coefficient Hom comparison commutes with etale restriction",
+ "statement": "Fix a prime l, a finite extension E/Q_l, indices m≤n and the lifted positive-level quotient φ:A→B [def-weil-l-adic-coefficient-extension, def-sf-etale-finite-coefficient-hom-arrow]. Let f:U→T be etale and let K,N lie in the ordinary unbounded derived category of A-module sheaves on T_et [def-weil-pbc-derived-categories]. Assume K is dualizable for its native derived tensor. Then the canonical Hom restriction maps for (K,N) and their scalar extensions are invertible, and the canonical coefficient-Hom comparisons over T and U satisfy exactly LisseHomRestrictionCompatibilityRing [def-sf-finite-free-hom-local-calculation], formed with the specified scalarPullbackIso [def-pur-etale-scalar-pullback-iso]. Both existential arrows are required to equal the published canonical comparisons. There is no boundedness, finite-type or quasi-compactness hypothesis on T,U or N.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-weil-pbc-derived-categories",
+  "def-sf-finite-free-hom-local-calculation",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+ },
+ "proof": [
+  {
+   "text": "Derived etale inverse image is strong monoidal [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The internal-Hom comparison of a strong monoidal functor is invertible on a dualizable first input: identify Hom(K,N) with the dual of K tensor N and transport the exact pairing. Scalar extension is strong monoidal as well, so the reduced first input is dualizable. This proves the two invertibility assertions.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+   }
+  },
+  {
+   "text": "Transpose the two sides of the restriction square through the target tensor-Hom adjunction. Evaluation compatibility of the canonical comparison [def-sf-etale-finite-coefficient-hom-arrow], naturality of evaluation in both inputs, and the tensor/unit compatibility of the normalized scalarPullbackIso [def-pur-etale-scalar-pullback-iso] identify both maps with the same restricted reduced evaluation. The normalization is checked on flat-term K-flat representatives, where scalar extension and restriction are the ordinary operations and their balancing maps commute. K-flat resolutions extend it to all derived inputs. Injectivity of transposition proves the exact square.",
+   "uses": [
+    "def-sf-etale-finite-coefficient-hom-arrow",
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom comparison for composition of monoidal functors compatible with monoidal natural isomorphism",
+   "results": "8 hits on Cartesian exponential comparison, none for the specified derived coefficient diagram.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison_comp_app|ihomComparison_app_comp_map_app",
+   "results": "0 Mathlib hits. Local source search found these generic proved APIs in WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic, but no normalization of scalarPullbackIso for this square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-25",
+  "group": "E8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtalePerfectHomRestriction",
+  "file": "lean/Sheaf/Paper/EtalePerfectHomRestriction.lean",
+  "declaration": "WeilConjectures.etalePerfectHomRestriction",
+  "statement": "theorem etalePerfectHomRestriction (T U : Scheme.{u}) (f : U ⟶ T) [Etale f]\n    {n m : ℕ} (h : m ≤ n) (K N : finiteHomEtale l E T n)\n    (hK : IsDualizable K) :\n    ∃ (vT : LisseHomComparisonType\n        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))\n        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))\n        (finiteHomQuotient l E h) T K N)\n      (vU : LisseHomComparisonType\n        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))\n        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))\n        (finiteHomQuotient l E h) U\n        (L(Etale.upperStar (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) f).obj K)\n        (L(Etale.upperStar (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) f).obj N)),\n      HEq vT (etaleFiniteHomCanonical l E T h K N) ∧\n      HEq vU (etaleFiniteHomCanonical l E U h\n        (L(Etale.upperStar (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) f).obj K)\n        (L(Etale.upperStar (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) f).obj N)) ∧\n      LisseHomRestrictionCompatibilityRing _ _ (finiteHomQuotient l E h) T U f\n        K N vT vU",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

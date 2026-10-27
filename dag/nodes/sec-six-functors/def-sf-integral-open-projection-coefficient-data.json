@@ -1,0 +1,132 @@
+{
+ "id": "def-sf-integral-open-projection-coefficient-data",
+ "kind": "definition",
+ "title": "Constructed natural open coefficient comparison",
+ "statement": "Fix finite-field and coefficient data D,C,E, n>=1, and the normalized operation datum S [def-fix-six-functor-datum]. Assume the coefficient prime is invertible on the base. Let o,z be the specified system operations and realizations [def-sf-integral-system-realization-data]. Write reduce for whole-system reduction on the full constructible category [def-sf-integral-proper-projection-coordinates]. For a quasi-compact open immersion j:X -> Y, construct a natural isomorphism extensionComparison: S.higher.integral.openExtension(j) followed by reduce_Y -> reduce_X followed by system j_!. Its component is reduction of integralNormalization.openRealization followed by the inverse of z.realizationModel.openReduction at the input. Invertibility of that scalar mate follows from open reconstruction effectivity and residue Tor. Include the component formula and its naturality; no tensor or projection square is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-integral-proper-projection-coordinates",
+  "def-sf-integral-system-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Residue Tor puts a constructible input in the finite-Tor complete domain. Apply openReconstructionEffectivity to the supplied operations and realization, obtaining invertibility of its actual scalar mate. Whisker that mate with the constructible inclusion, take its componentwise inverse, and compose with reduction of openRealization. Naturality and the component formula follow from composition of natural isomorphisms.",
+   "uses": [
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-coef-integral-residue-tor",
+    "def-sf-integral-proper-projection-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-reconstruction-effectivity",
+  "lem-coef-integral-residue-tor",
+  "def-sf-integral-proper-projection-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction. Explicit constructed natural open coefficient comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "reduction commutes with the unit and counit of an open extension adjunction and with pullback composition",
+   "results": "Eight generic adjunction and chosen-pullback equations, including Adjunction.comp_unit_app and unit_comp_map_eq_iff; no integral coefficient normalizations.",
+   "date": "2026-10-27",
+   "verdict": "Use the adjunction API for assembly; it does not identify the specified coefficient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve mate-equivalence declarations, including unit and counit identities and composition/pasting.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus only; no geometric quotient normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch found zero Mathlib matches. Local searches found ProperCoordinates and the canonical completed tensor reduction square in DerivedPullbackTensorIso; no existing datum open unit or datum compositor whole-system square.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing coefficient-coordinate definitions and canonical tensor theorem; isolate only the missing normalization steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionOpenTensorCoordinates",
+  "date": "2026-10-27",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction.",
+   "via": [
+    "lem-sf-integral-projection-open-tensor-coordinates",
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOpenProjectionCoefficientData",
+  "file": "lean/Sheaf/Paper/IntegralOpenProjectionCoefficientData.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.OpenCoordinates.extensionComparison",
+  "statement": "def extensionComparison {X Y : SixFunctorSpace D} (j : X ⟶ Y)\n    (hj : IsOpenImmersion j.hom.left) [QuasiCompact j.hom.left] :\n    S.higher.integral.openExtension j hj ⋙ reduce Y ≅\n      reduce X ⋙ Operations.shriek C.l E o j.hom.left",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.IntegralProjectionReduction.OpenCoordinates.reduction_isIso",
+   "WeilConjectures.IntegralProjectionReduction.OpenCoordinates.extensionComparison",
+   "WeilConjectures.IntegralProjectionReduction.OpenCoordinates.extensionComparison_hom_app"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261027T050654-L-252705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261027T050654-L-252705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

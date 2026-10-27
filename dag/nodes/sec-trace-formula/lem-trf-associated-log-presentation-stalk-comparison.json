@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-associated-log-presentation-stalk-comparison",
+ "kind": "statement",
+ "title": "Normalized stalks and canonical chart of an associated-log presentation",
+ "statement": "Let X be a locally Noetherian scheme [pqf-def-locnoeth], R any commutative monoid and beta:R→Gamma(X,O_X). Let L be an etale log structure [def-trf-fs-log-blowup] with eta:Q_beta→L an associated-log presentation [def-per-associated-log-presentation]. For each geometric point t:Spec Omega→X [def-weil-geometric-point], let A_t be the actual strict-local ring [def-weil-pbc-geometric-stalks] and beta_t the germ of beta. Then there is a monoid isomorphism R ⊕_{beta_t^{-1}(A_t^×)} A_t^× → L_t carrying every [r,germ_W(a)] to germ_W(eta_W([r,a])), for every pointed etale neighbourhood (W,w), r∈R and a∈Gamma(W,O_W)^×. Moreover the canonical global map iota(r)=eta_X([r,1]) is a chart of L. Independent coefficient and site universes are handled by the canonical ULift down map, exactly as in the definition of Q_beta. No finite generation, integrality or injectivity of beta is assumed.",
+ "stmt_deps": [
+  "def-per-associated-log-presentation",
+  "def-trf-log-regular-pair",
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; original associated-log proof steps 6--8 and the stalk-chart part of 10. Detailed agent argument is in the Lean docstring."
+ },
+ "proof": [
+  {
+   "text": "Compute the ring and monoid stalks on a small filtered final model of pointed etale neighbourhoods. Apply the fixed-monoid filtered-ring unit-pushout comparison; its normalized forward map sends a represented pair to its class in the stalk pushout, and its inverse is independent of the chosen unit representative.",
+   "uses": [
+    "lem-trf-filtered-ring-log-pushout",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the underlying-set sheafification comparison and invariance of geometric stalks under set sheafification. Transport across the unique isomorphism comparing the given presentation with this sheafification. The prescribed normalization on all pairs survives this transport.",
+   "uses": [
+    "lem-trf-commutative-monoid-sheafification",
+    "lem-weil-pbc-sets-sheafification-geometric-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison sends [r,1] to the germ of iota(r), and [1,a] to the unique log unit above a, by its structural formula. Thus the stalk chart pair map is the quotient map followed by this isomorphism, and is surjective with the required kernel. Naturality at the terminal neighbourhood proves the global chart condition.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-filtered-ring-log-pushout",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-geometric-stalks",
+  "lem-trf-commutative-monoid-sheafification",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; original associated-log proof steps 6--8 and the stalk-chart part of 10. Detailed agent argument is in the Lean docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of log structures identifying the same monoid chart is an isomorphism; stalk of sheafified unit pushout",
+   "results": "TopCat.Presheaf.sheafifyStalkIso and isIso_of_stalkFunctor_map_iso apply to topological sheaves, not the stated etale monoid-pushout normalization. No exact theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "log monoid sheaves with the same global chart have isomorphic geometric stalk pushouts",
+   "results": "TopCat.Presheaf.isIso_of_stalkFunctor_map_iso and ordinary ringed-space stalk extensionality; no log chart theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "prelogStalk.*IsStalkChart|IsStalkChart.*prelogStalk|prelogPresentation.*stalk|associatedLog_universal",
+   "results": "Project has generic etaleLogPresentation_comparison, with prelogStalkMap hypotheses rather than global chart hypotheses; filteredRing_logPushout is the small filtered ring comparison. No normalized constant-chart geometric-stalk theorem. Mathlib has no LogStructure declaration.",
+   "date": "2026-10-26",
+   "verdict": "new normalization step needed"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks",
+  "date": "2026-10-26",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart. Associated-log proof: normalized geometric-stalk pushout comparison and canonical chart.",
+   "via": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AssociatedLogStalkComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedLogStalkComparison.lean",
+  "declaration": "AlgebraicGeometry.associatedLog_presentation_stalk_comparison",
+  "statement": "theorem associatedLog_presentation_stalk_comparison {X : Scheme.{max u v}}\n    [IsLocallyNoetherian X] {R : Type v} [CommMonoid R] (β : R →* Γ(X, ⊤))\n    (L : EtaleLogStructure.{max u v} X) (η : associatedLogPresheaf β ⟶ L.monoidSheaf.obj)\n    (hη : IsAssociatedLogPresentation β L η) :\n    (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω]\n        (t : Spec (.of Ω) ⟶ X),\n        ∃ e : divisorialChartPushout (P := ULift.{u, v} R)\n          (associatedLogStalkBeta β t).mrangeRestrict ≅\n            L.toEtalePrelogStructure.stalk t,\n          ∀ (W : X.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W)\n            (r : R) (a : Γ(W.left, ⊤)ˣ),\n            e.hom ((divisorialChartCongruence (P := ULift.{u, v} R)\n              (associatedLogStalkBeta β t).mrangeRestrict).mk'\n                (ULift.up r, Units.map (strictLocalGerm X t W w).hom.toMonoidHom a)) =\n              L.toEtalePrelogStructure.germ t W w\n                (η.app (op W) ((divisorialChartCongruence (P := ULift.{u, v} R)\n                  (associatedLogBetaLift β W).mrangeRestrict).mk' (ULift.up r, a)))) ∧\n    L.IsChart (Scheme.Etale.mk (𝟙 X)) (associatedLogIota β L η)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3248e",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261026T100337-L-4189534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3248e",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261026T100337-L-4189534",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 3248 vs prior 31c1b (Lean+nodes byte-identical, change record only); moved associatedLog* block and main statement vs current published clone (identical); 20 direct importers compiled against the delivered modules (all OK)"
+ }
+}

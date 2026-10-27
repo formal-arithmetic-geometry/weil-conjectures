@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-geometric-neutral-reductivity-field-invariance",
+ "kind": "statement",
+ "title": "Geometric neutral-fibre reductivity is invariant under field extension",
+ "statement": "Let $k$ be a field and $L/k$ any field extension [def-weil-field, def-pc-field-extension]. Let $G$ be a smooth affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-weil-finite-type-morphism], with no connectedness hypothesis. For an algebraically closed extension $\\Omega/k$ [def-weil-algebraic-closure], put $G_\\Omega=G\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ [def-pc-fibre-product], and let $G_\\Omega^0$ be the connected component containing the identity, with its induced open-subscheme structure [def-weil-connected-scheme]. A smooth connected affine group over an algebraically closed field is called reductive if it has no nontrivial smooth connected normal unipotent closed subgroup; unipotent means that in a faithful finite-dimensional matrix representation its geometric points $u$ satisfy $(u-I)^n=0$ for some $n\\geq1$. If $\\bar k$ and $\\bar L$ are any algebraic closures of $k$ and $L$, respectively, then\n$$G_{\\bar k}^0\\text{ is reductive}\\quad\\Longleftrightarrow\\quad G_{\\bar L}^0\\text{ is reductive}.$$\nThe same equivalence holds with any algebraically closed extensions of $k$ and $L$ in place of their algebraic closures. Thus, for a smooth affine group scheme of finite presentation $H\\to S$ over a scheme [def-pc-scheme, def-sbc-locally-finite-presentation], the subset $U(H/S)$ of points whose geometric fibre has reductive identity component satisfies $U(H\\times_ST/T)=g^{-1}(U(H/S))$ for every morphism $g:T\\to S$.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf; literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Conrad, Reductive group schemes, Exercise 3.4.1(i)-(iii), printed p.104 (ascent of reductivity under extensions of algebraically closed fields), and the pullback assertion in the proof of Corollary 3.1.11, printed p.89; Milne, Algebraic Groups (2017), Proposition 1.34, printed pp.16-17 (identity components commute with field extension). Conrad PDF WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf. No Stacks tag states the reductivity assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-weil-connected-scheme",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "First let $F\\subseteq E$ be algebraically closed fields and $J/F$ smooth connected affine of finite type. If $J$ is not reductive, choose a nontrivial smooth connected closed normal unipotent subgroup $N\\subseteq J$. Its scalar extension $N_E$ is smooth by lem-pc-proper-base-change(2), and closed in $J_E$ by lem-weil-pbc-closed-immersion-base-change. It is connected by lem-sfb-locally-algebraic-group-identity-component: since $N=N^0$, its scalar extension is the identity component of $N_E$. Normality is the original normality assertion tested on $E$-algebras, which are also $F$-algebras. Base change of a faithful matrix embedding remains closed and its geometric matrices remain unipotent, since every algebraically closed extension of $E$ is one of $F$. Finally $N_E\\ne1$: the nonzero augmentation ideal of $F[N]$ stays nonzero under tensoring with $E$, because a basis of an $F$-vector space stays linearly independent after extension of scalars. Thus $J_E$ is not reductive.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.13, easy direction; Proposition 1.34 for connectedness; geometric matrix definition of unipotence"
+   }
+  },
+  {
+   "text": "Conversely suppose $J_E$ is not reductive, and choose a nontrivial smooth connected closed normal unipotent subgroup $N\\subseteq J_E$. Apply lem-sfb-normal-unipotent-subgroup-spreading to $F\\subseteq E$, $J$ and this specified $N$. It supplies a finitely generated $F$-subalgebra $A\\subseteq E$ and a closed normal model $\\mathcal N\\subseteq J_A$ whose every geometric fibre is nontrivial smooth connected unipotent. The ring $A$ is nonzero because it is a subring of a field. Choose a maximal ideal of $A$. By lem-wf-affine-nullstellensatz-vanishing(1), its residue field is $F$, so there is an $F$-algebra homomorphism $a:A\\to F$. The fibre $\\mathcal N_a\\subseteq J$ furnished by the spreading statement is a nontrivial smooth connected normal unipotent closed subgroup. Therefore $J$ is not reductive. Together with step 1 this proves $J$ reductive if and only if $J_E$ is reductive.",
+   "uses": [
+    "lem-sfb-normal-unipotent-subgroup-spreading",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Exercise 3.4.1(i)-(iii), printed p.104; specialization at a rational closed point"
+   }
+  },
+  {
+   "text": "Now let $k$ be arbitrary and fix an algebraic closure $\\bar k$. For any algebraically closed extension $\\Omega/k$, extend $k\\to\\Omega$ to $\\bar k\\to\\Omega$ using lem-weil-pbc-algebraic-extension-embeds-algebraically-closed. By lem-sfb-locally-algebraic-group-identity-component, $C=G_{\\bar k}^0$ is an open and closed finite-type subgroup and $C_\\Omega=(G_\\Omega)^0$. It is connected by its definition; it is affine as a closed subscheme of the affine scheme $G_{\\bar k}$. It is smooth as an open subscheme of the smooth scheme $G_{\\bar k}$: a smooth local chart for the latter restricts to a smooth chart for the open. Smoothness of $G_{\\bar k}$ follows from lem-pc-proper-base-change(2). Apply steps 1 and 2 to $C/\\bar k$ and $\\Omega/\\bar k$. This proves that $G_\\Omega^0$ is reductive precisely when $G_{\\bar k}^0$ is reductive, independently of the chosen embedding of $\\bar k$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.34 and 19.13; algebraic-closure embedding: Stacks fields.tex Tag 09GU, lemma-map-into-algebraic-closure"
+   }
+  },
+  {
+   "text": "An algebraically closed extension of $L$ is also an algebraically closed extension of $k$ through $k\\to L$. Apply step 3 to each of the two algebraically closed fields being compared. Both reductivity assertions are equivalent to reductivity of $G_{\\bar k}^0$. Taking the second field to be $\\bar L$ gives the first displayed equivalence; allowing arbitrary algebraically closed extensions gives the second. This uses no connectedness assumption on $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.13 applied after Proposition 1.34; logical assembly"
+   }
+  },
+  {
+   "text": "Finally let $t\\in T$, $s=g(t)$. The local homomorphism on stalks induces a field embedding $\\kappa(s)\\to\\kappa(t)$. The fibre of $H_T$ at $t$ is canonically $H_s\\times_{\\kappa(s)}\\kappa(t)$: both sides represent pairs of points of $H$ and $\\operatorname{Spec}\\kappa(t)$ with equal images in $S$. Smoothness of $H_s$ follows from lem-pc-proper-base-change(2). Affineness is preserved on affine charts by the tensor-product description of fibre products, and finite presentation is preserved by tensoring its finite lists of generators and relations. Thus $H_s$ is a smooth affine finite-type group over the field $\\kappa(s)$. Step 4 says that its geometric identity component is reductive exactly when the geometric identity component of its scalar extension to $\\kappa(t)$ is. Hence $t\\in U(H_T/T)$ if and only if $s\\in U(H/S)$. Equality of these memberships for every $t$ is the required pullback equality.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 3.1.11, pullback identity in its proof, printed p.89; pointwise fibre-product argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-normal-unipotent-subgroup-spreading",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf; literature/conrad-reductive-group-schemes.pdf",
+  "place": "Milne Propositions 1.34 and 19.13; Conrad Exercise 3.4.1 and Corollary 3.1.11 read online (local Conrad copy WANTED); explicit assembly by Q107"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reductivity of the geometric identity component of a smooth affine group scheme is invariant under arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.affineAnd_isStableUnderBaseChange; Algebra.IsGeometricallyReduced; Algebra.isGeometricallyReduced_iff; Algebra.isReduced_of_isGeometricallyReduced; Algebra.IsGeometricallyReduced.of_injective; AlgebraicGeometry.HasAffineProperty.affineAnd_containsIdentities; Algebra.IsGeometricallyReduced.of_forall_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reduced algebras, general scheme base change, finite-group representations or Lie algebras, not reductivity of geometric neutral components of group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductiv|[Gg]roupScheme",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reduced algebras, general scheme base change, finite-group representations or Lie algebras, not reductivity of geometric neutral components of group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus of reductive geometric identity components pulls back under every change of base of a smooth affine group scheme",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.GrpObjAsOverPullback; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine; AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange; AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reduced algebras, general scheme base change, finite-group representations or Lie algebras, not reductivity of geometric neutral components of group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reduced algebras, general scheme base change, finite-group representations or Lie algebras, not reductivity of geometric neutral components of group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an extension of algebraically closed fields a smooth connected linear algebraic group is reductive if and only if its scalar extension is reductive",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.isGeometricallyReduced_iff; Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct; Algebra.IsGeometricallyReduced; FDRep.simple_iff_end_is_rank_one; LieModule.instIsTriangularizableOfIsAlgClosed; IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed; Algebra.IsGeometricallyReduced.of_injective; FDRep.finrank_hom_simple_simple",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reduced algebras, general scheme base change, finite-group representations or Lie algebras, not reductivity of geometric neutral components of group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "reductiv|unipotentRadical|unipotent_radical",
+   "results": "{\"t\": \"2026-10-24T12:01:23Z\", \"tool\": \"grep\", \"query\": \"reductiv|unipotentRadical|unipotent_radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\"], \"digest\": \"d761836b500ad783\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only geometrically reduced algebras and reductive Lie algebras occur, not reductivity of group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth affine group remains reductive under extension of algebraically closed fields",
+   "results": "{\"t\": \"2026-10-24T12:01:23Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth affine group remains reductive under extension of algebraically closed fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"IsAlgClosed.perfectField\", \"Algebra.IsGeometricallyReduced\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.IsGeometricallyReduced.rec\"], \"digest\": \"01f6cf40f838dd8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only geometrically reduced algebras and reductive Lie algebras occur, not reductivity of group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reductive\"",
+   "results": "{\"t\": \"2026-10-24T12:01:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only geometrically reduced algebras and reductive Lie algebras occur, not reductivity of group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reductivity of the identity component of a smooth affine algebraic group is independent of the algebraically closed field extension",
+   "results": "{\"t\": \"2026-10-24T12:01:24Z\", \"tool\": \"leanfinder\", \"query\": \"The reductivity of the identity component of a smooth affine algebraic group is independent of the algebraically closed field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\"], \"digest\": \"628f4400298ef08a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only geometrically reduced algebras and reductive Lie algebras occur, not reductivity of group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductivity-eventual-ring-colimit",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Rational split realization of a finite reduced root datum; Spreading the given split complex triple in Conrad Proposition 6.2.12, first proof paragraph, printed p.211; include a chosen base and generators before specializing. Supporting limit-property input: Conrad Corollary 3.1.11, reductivity of a fixed smooth affine model descends to a stage; used before recovering the split torus and pinning. Supporting field-theoretic input to the reductive-locus pullback identity in Conrad Corollary 3.1.11: Milne Proposition 1.34 and Conrad Exercise 3.4.1, before the closed-complement limit argument.",
+   "via": [
+    "lem-sfb-reductivity-eventual-ring-colimit",
+    "lem-sfb-split-reductive-finite-type-spreading",
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-neutral-reductivity-field-invariance",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused neutral-component base change, algebraic-closure embeddings and rational specialization; isolated the specified normal-unipotent subgroup spreading input. Wrote both field directions, arbitrary algebraically closed comparisons and the residue-field proof of the locus pullback. One new unsplit statement, no Mathlib leaves or Lean attachment.",
+  "blueprint": "Inherited from.node=null and the via chain are preserved. This supplies the field-invariance prerequisite before the closed-complement argument in lem-sfb-reductivity-eventual-ring-colimit, under det-thm-sf-ctf-stability-direct-images proof (3). Latest blueprint main-20261024 searched globally: no equivalent group-scheme reductivity statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under base change, a generic tool needed on fibres and field extensions."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic stability of a closed subgroup embedding after scalar extension; the unit has no replacement."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Clause (1) gives a rational specialization of the finite-type algebra over an algebraically closed field."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "why": "Generic field embedding tool for comparing arbitrary geometric fields to a fixed algebraic closure."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "The generic definition and iterated fibre-product identifications used to compare the two residue-field fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "def-pc-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-ce64176bc",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-ce64176bc (reviewer sub-agent of L); spot-checked: I read the delivery in full and found no errors, so nothing needed fixing. Item (statement unchanged from base): step 1 transfers a nontrivial smooth connected normal unipotent N from J to J_E using smooth base change (lem-pc-proper-base-change clause 2), closed-immersion base change, the base-field clause of the identity-component lemma with N=N^0, functorial normality and the augmentation ideal. Step 2 applies the new spreading node, then uses Nullstellensatz clause (1) to get an F-point a:A->F of a nonzero finitely generated A inside E; J_A along a is J, so the fibre at a is a witness in J. Step 3 extends k->Omega to kbar->Omega and takes C=G_kbar^0, which is clopen, affine, smooth and has C_Omega=(G_Omega)^0. Step 4 is elementary assembly. Step 5 identifies the fibre of H_T at t with H_s x_kappa(s) kappa(t) and applies step 4. These steps realize Milne Prop. 19.13 (printed p.400, read locally); Conrad Ex. 3.4.1 is WANTED, and proof_origin is agent. New node lem-sfb-normal-unipotent-subgroup-spreading is true by the standard limit argument: shrink A by inverting elements for smoothness, normality (conjugation factorization), embedding in a conjugate of U_n, constructible geometric connectedness and relative dimension at least 1. It is statement-only and strictly smaller than the item. It duplicates neither smooth-connected-subgroup-noetherian-model, algclosed-group-embedding-existence-descent, unipotent-radical-existence, nor anything found by a DAG search. Searches cover four kinds. blueprint.from.node is null, inherited from the base chain. Accepted tool_uses: proper-base-change(2), closed-immersion base change, Nullstellensatz(1), algebraic-extension embedding, def-pc-base-change. Notes: inline reductive/unipotent definitions agree with def-sfb-solvable-group-structure; connectedness of J_E in step 1 is implicit but follows from the same identity-component clause."
+ }
+}

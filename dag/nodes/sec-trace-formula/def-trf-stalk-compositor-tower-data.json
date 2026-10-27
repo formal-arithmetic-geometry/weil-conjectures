@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-stalk-compositor-tower-data",
+ "kind": "definition",
+ "title": "Whole-system stalk compositor data and strict finite subdata",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a finite-field datum $D$ with algebraically closed field $k$ as in [def-trf-coefficient-conventions]. For any scheme $X$, restrict coefficient-system modules [def-coef-ringed-sequence-site] to the strict tower of completed-coefficient modules, apply the integral geometric stalk [def-weil-completed-integral-coefficients] at $v:\\operatorname{Spec}k\\to X$ degreewise, and denote the resulting complex tower by $T_v$. Its Roos realization is $QH(T_v)$. Package finite pullback evaluation, strict germ, section and reparametrization maps; their derived realizations; and the normalized integral point-fibre comparison in TrfStalkCompositorTowerData. TrfStalkCompositorTowerCoherent records their finite unit and germ formulas, strict composition and reparametrization equations, localization-factor equations and the integral counit equations. TrfStalkCompositorQuotientCompatible is the identity of that integral comparison with the normalized quotient-stalk realization arrow for every simultaneous K-flat quotient presentation. These are exactly the interfaces formerly declared in the compositor realization module; no construction or condition is changed. The finite fields alone form TrfStrictStalkTowerData; their finite unit, germ, section, composition, identity and reparametrization equations form TrfStrictStalkTowerCoherent. The projection toStrict forgets the integral and derived fields.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): the combined-colimit identification behind the finite composition germ formula; agent extension to the entire-tower counit realization, original Steps 3, 6, 7; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-coefficient-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-geometric-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-trf-bounded-quotient-stalk-realization",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stacks Tags 0F4F, 05V1 and 0941; strict-diagram and localization argument for Local powers (b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent strict pro etale stalk comparisons on quotient towers descend through Roos realization to derived natural isomorphisms",
+   "results": "8 hits, including SheafedSpace.IsOpenImmersion.stalk_iso and TopCat.Presheaf.stalkCongr; none is a strict quotient-system or Roos comparison",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.mapHomologicalComplex\"",
+   "results": "3 hits: NatIso.mapHomologicalComplex and its hom_app_f and inv_app_f equations",
+   "date": "2026-10-25",
+   "verdict": "generic degreewise construction only; does not supply transition-compatible stalk maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtalePullbackStalkComparison|proEtaleStalkReparam",
+   "results": "0 Mathlib hits; repository search locates the finite comparisons in Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence",
+   "date": "2026-10-25",
+   "verdict": "use the existing finite comparison as a dependency"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TraceStalkCompositorTowerRealization",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers, input (b): canonical stalk identifications, natural in M and compatible with composition",
+   "via": [
+    "lem-trf-stalk-compositor-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TraceStalkCompositorTowerData",
+  "file": "lean/Sheaf/Paper/TraceStalkCompositorTowerData.lean",
+  "declaration": "WeilConjectures.trfSystemTower",
+  "statement": "def trfSystemTower (X : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.trfSystemTower",
+   "WeilConjectures.trfSystemStalkTower",
+   "WeilConjectures.trfSystemPointSections",
+   "WeilConjectures.trfSystemPullbackStalkTower",
+   "WeilConjectures.trfSystemSectionTower",
+   "WeilConjectures.trfSystemStalkRoos",
+   "WeilConjectures.trfSystemSectionsRoosArrow",
+   "WeilConjectures.trfStalkDerived",
+   "WeilConjectures.TrfStalkCompositorTowerData",
+   "WeilConjectures.trfNestedStalkRealization",
+   "WeilConjectures.TrfStalkCompositorTowerCoherent",
+   "WeilConjectures.TrfStalkCompositorQuotientCompatible",
+   "WeilConjectures.TrfStrictStalkTowerData",
+   "WeilConjectures.TrfStrictStalkTowerCoherent",
+   "WeilConjectures.TrfStalkCompositorTowerData.toStrict"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "independent cc review: item proof and two new sorry statements (trfStrictStalkTowers, trfStalkTowerDescent) checked against lem-trf-stalk-compositor-tower-realization and the published IntegralComparisonPullbackModel normalization; moved data module diffed against the clone (only docstring tags differ); reader gate: SourceSectionStalkConeComparison compiled against the delivered modules"
+ }
+}

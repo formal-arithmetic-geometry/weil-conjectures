@@ -124,7 +124,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -208,5 +219,41 @@
   "landing": "20261016T003159-L-3926928",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be a\nseparated finite-type\nscheme of dimension at most one over an algebraically closed\nfield. Put $e=1$ if $X$ is affine, and $e=2$ otherwise.\nThen $\\operatorname{cd}_{\\rm tor}(X)\\leq e$, in the sense of\n[def-sc-etale-torsion-cd]. That is, for every torsion abelian sheaf $F$ on\n$X_{\\Et}$, with no condition relating the torsion of $F$ to the\ncharacteristic, $H^q(X_{\\Et},F)=0$ for $q\\geq3$, and for $q\\geq2$ if $X$ is\naffine.",
+  "proof": [
+   {
+    "text": "Reduction is a universal homeomorphism, so\n[thm-weil-pbc-universal-homeomorphism-invariance] allows us\nto assume $X$ reduced. Normalize each of its finitely many\nirreducible components in its own function field and take their\ndisjoint union $h:X'\\to X$. This map is finite by\n[lem-fin-normalization-extension-finite]. It is an\nisomorphism off a finite set $S$: on each component, finite\ngenerators of the normalization have a common nonzero\ndenominator; remove its zero locus and the intersections with\nthe other components. These closed subsets have dimension zero.",
+    "uses": [
+     "thm-weil-pbc-universal-homeomorphism-invariance",
+     "lem-fin-normalization-extension-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Every one-dimensional component of $X'$ is regular by\n[lem-sc-normal-dim1-dvr], including its generic field\nlocal ring. Regular finite-type schemes over the perfect\nground field are smooth, by the local algebra criterion\n[Tag 00TV](https://stacks.math.columbia.edu/tag/00TV).\nThe zero-dimensional components are spectra of the ground field.\nIf $X$ is affine then $X'$ is affine, since $h$ is finite.",
+    "uses": [
+     "lem-sc-normal-dim1-dvr"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For any torsion $F$, the kernel and cokernel of\n$F\\to h_*h^*F$ are supported on $S$.\nSuch sheaves equal their direct images from $S$, by checking\nstalks, and are acyclic by\n[lemma-weil-pbc-finite-direct-image-exact], [lem-weil-pbc-zero-dimensional-cohomology].\nThe two long exact sequences give\n$H^q(X,F)\\simeq H^q(X,h_*h^*F)$ for $q\\geq2$.\nFinite direct image gives\n$H^q(X,h_*h^*F)=H^q(X',h^*F)$.\nApply [lem-sc-cohomological-dimension], [lem-sc-affine-cohomological-dimension]\nto its smooth curve components and\n[lem-weil-pbc-zero-dimensional-cohomology] to its points.",
+    "uses": [
+     "lemma-weil-pbc-finite-direct-image-exact",
+     "lem-weil-pbc-zero-dimensional-cohomology",
+     "lem-sc-cohomological-dimension",
+     "lem-sc-affine-cohomological-dimension"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

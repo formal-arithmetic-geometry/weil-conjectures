@@ -1,0 +1,102 @@
+{
+ "id": "lem-pur-section-rees-map-composition",
+ "kind": "statement",
+ "title": "Composition of coefficientwise Rees maps for commuting closed centres",
+ "statement": "Let s:S -> V, s prime:S prime -> V prime, and s double prime:S double prime -> V double prime be closed immersions [def-weil-closed-immersion]. Given commuting maps of centres (h,b) and (h prime,b prime), the actual coefficientwise extended-Rees map pairMap [lem-trf-section-rees-base-change-etale] of the composite square equals pairMap(h prime,b prime) followed by pairMap(h,b). No Cartesian or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3; composition-coherence Step 1; sk-thm-dnc Local construction and Gluing"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "lem-trf-section-rees-base-change-etale"
+ ],
+ "proof": [
+  {
+   "text": "choose affine opens U in V, U' in V', and U'' in V'' with\nU' contained in h inverse U and U'' contained in h' inverse U'. These triples\ncover V''. On their Rees charts, pairMap is Spec of extendedReesAlgebraMap.\nThe identity appLE_comp_appLE identifies the two coefficient maps, and\nextendedReesAlgebraMap_comp identifies their Rees extensions. Thus the two scheme\nmaps agree after every chart map. The relative gluing cover is jointly epimorphic,\nso the equality holds globally. The proof uses commuting centres, not flatness,\nand therefore includes arbitrary base changes and identity maps.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-section-rees-base-change-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction and Gluing, with explicit fixed-map comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized etale restriction of a smooth section invariant commutes with composition and deformation to the normal cone",
+   "results": "{\"t\": \"2026-10-25T07:22:29Z\", \"tool\": \"leanfinder\", \"query\": \"Counit normalized etale restriction of a smooth section invariant commutes with composition and deformation to the normal cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"StandardEtalePair.HasMap.map\", \"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_fromNormalization\", \"StandardEtalePair.lift\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"a26f07c6f0b48e86\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact section-coherence statement in Mathlib; use the existing finite coefficient and relative-Rees interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRestrictionIso",
+   "results": "{\"t\": \"2026-10-25T07:22:31Z\", \"tool\": \"grep\", \"query\": \"sectionRestrictionIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact section-coherence statement in Mathlib; use the existing finite coefficient and relative-Rees interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback along etale maps is coherent with composition",
+   "results": "{\"t\": \"2026-10-25T07:23:38Z\", \"tool\": \"leansearch\", \"query\": \"Canonical derived pullback along etale maps is coherent with composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ChosenPullbacksAlong.pullbackMap_comp\", \"CategoryTheory.Limits.pullback.map_comp\", \"CategoryTheory.Over.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_\\u03c4l\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom\"], \"digest\": \"437749927b989913\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact section-coherence statement in Mathlib; use the existing finite coefficient and relative-Rees interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySectionEtaleRestriction",
+  "date": "2026-10-25",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-section-etale-restriction-coherence",
+   "place": "Proof steps 2--8",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PuritySectionReesMapComposition",
+  "file": "lean/Sheaf/Paper/PuritySectionReesMapComposition.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionRestriction.rees_pairMap_comp",
+  "statement": "theorem rees_pairMap_comp {V V' V'' S S' S'' : Scheme.{u}} (s : S ⟶ V) (s' : S' ⟶ V') (s'' : S'' ⟶ V'') [IsClosedImmersion s] [IsClosedImmersion s'] [IsClosedImmersion s''] (h : V' ⟶ V) (h' : V'' ⟶ V') (b : S' ⟶ S) (b' : S'' ⟶ S') (w : s' ≫ h = b ≫ s) (w' : s'' ≫ h' = b' ≫ s') : SectionReesBaseChange.pairMap s s'' (h' ≫ h) (b' ≫ b) (by rw [← Category.assoc, w', Category.assoc, w, ← Category.assoc]) = SectionReesBaseChange.pairMap s' s'' h' b' w' ≫ SectionReesBaseChange.pairMap s s' h b w",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ddfa7",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T124427-L-2011778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ddfa7",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261025T124427-L-2011778",
+  "kind": "interface",
+  "note": "independent cc review: ddfa79a66945 Lean+node files byte-identical to C-31f1d-passed 31f1d1e1064f on an unchanged base; data module vs live item module (signatures/bodies preserved, four C9 geometry proofs re-landed); 4 sorried step statements vs item predicates; direct importers GeneralChartComparisons + SectionDncIntegrationSquare compiled"
+ }
+}

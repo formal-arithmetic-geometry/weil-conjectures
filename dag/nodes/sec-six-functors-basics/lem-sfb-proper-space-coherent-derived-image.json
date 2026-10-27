@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-proper-space-coherent-derived-image",
+ "kind": "statement",
+ "title": "Proper algebraic-space direct image preserves bounded-below coherent cohomology",
+ "statement": "Let $Y$ be a Noetherian scheme [def-pc-scheme], meaning that $Y$ is quasi-compact and has an affine open cover with Noetherian coordinate rings [def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth, def-weil-pbc-noetherian-ring]. Let $X$ be an algebraic space over $Y$ [def-trf-algebraic-space] and $f:X\\to Y$ its proper structure morphism. Proper means that its diagonal is a closed immersion, that it is quasi-compact and locally of finite type on etale scheme charts [def-weil-closed-immersion, def-weil-finite-type-morphism], and that every algebraic-space base change is closed on underlying topological spaces. Work with module sheaves on the small etale sites of $X$ and $Y$ [def-weil-sheaf-of-modules-category] and their ordinary unbounded derived categories [def-weil-abstract-derived-category]. Locally Noetherian for an algebraic space means that an etale scheme atlas is locally Noetherian. Coherent means that on each Noetherian affine etale chart $\\operatorname{Spec}R$ a module sheaf is associated to a finitely generated $R$-module $N$ [def-weil-finitely-generated-module], with value $B\\otimes_RN$ on affine etale charts $\\operatorname{Spec}B\\to\\operatorname{Spec}R$. Let $G\\in D(\\mathcal O_X)$ have coherent cohomology vanishing in all sufficiently negative degrees. Write $Rf_*$ for the total right derived functor [def-sfb-right-derived-functor] of module direct image under the induced morphism of ringed small-etale topoi [def-weil-pbc-ringed-topos-morphism]; it is computed by K-injective resolutions [def-pur-kinjective-complex]. Then $Rf_*G\\in D(\\mathcal O_Y)$ has coherent cohomology vanishing in all sufficiently negative degrees.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), specialized with the base scheme S=Y and a proper morphism f; coherence convention: spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose $a\\in\\mathbf Z$ with $H^q(G)=0$ for $q<a$. The standard derived-category description gives a representative complex $K^\\bullet$ with $K^q=0$ for $q<a$. Module sheaves on both small etale ringed sites are Grothendieck abelian. The module adjunction makes $f_*$ a right adjoint, hence it preserves finite limits and is left exact; it is additive since its action on module maps preserves their sums. Thus the bounded-below hypercohomology theorem applies to $v=f_*$ and $K^\\bullet$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), first proof sentence: same proof as Tag 08GK (lemma-direct-image-coherent); derived.tex Tag 015J (lemma-two-ss-complex-functor)."
+   }
+  },
+  {
+   "text": "Apply the truncation spectral sequence to obtain $E_2^{p,q}=R^pf_*H^q(G)\\Rightarrow H^{p+q}(Rf_*G)$. It vanishes unless $p\\geq0$ and $q\\geq a$, stabilizes at each bidegree, and gives a finite filtration of every $H^n(Rf_*G)$ with graded pieces $E_\\infty^{p,n-p}$. Its derived functor is the one in the statement: both compute module direct image on K-injective resolutions, so the canonical comparison of total right derived functors identifies their values.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), first proof sentence: same proof as Tag 08GK (lemma-direct-image-coherent); derived.tex Tag 015J (lemma-two-ss-complex-functor)."
+   }
+  },
+  {
+   "text": "For every $p\\geq0$ and $q$, apply coherent higher direct image to the coherent module $H^q(G)$. Here $Y$ is regarded as an algebraic space over $S=Y$ through its representable sheaf $h_Y$, whose small etale site consists of the etale $Y$-schemes and whose identity is an etale scheme atlas [def-trf-scheme-algebraic-space]; $f:X\\to h_Y$ is the structure map. The morphism is proper by hypothesis and $Y$ is Noetherian, hence locally Noetherian, and so are its etale scheme charts [pqf-def-locnoeth]. It follows that every $E_2^{p,q}$ is coherent. The terms with $p<0$ are zero.",
+   "uses": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "def-trf-scheme-algebraic-space",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), first proof sentence: same proof as Tag 08GK (lemma-direct-image-coherent); derived.tex Tag 015J (lemma-two-ss-complex-functor)."
+   }
+  },
+  {
+   "text": "On the locally Noetherian scheme $Y$, regarded as the algebraic space $h_Y$ over $S=Y$ on its small etale site [def-trf-scheme-algebraic-space], zero modules, kernels and cokernels of maps between coherent modules, and extensions of coherent modules are coherent. Inductively every $E_r^{p,q}$ is coherent: its next-page term is the cokernel of the induced map from the image of the incoming differential to the kernel of the outgoing differential, and each image is the kernel of the corresponding cokernel. Pointwise stabilization makes $E_\\infty^{p,q}$ coherent. For any $n\\geq a$, start with the zero end of the finite filtration of $H^n(Rf_*G)$ and use its short exact sequences with these coherent graded pieces. Induction on its finite length proves $H^n(Rf_*G)$ coherent.",
+   "uses": [
+    "lem-sfb-space-coherent-kernel-cokernel-extension",
+    "thm-sp-truncation-e2",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), first proof sentence: same proof as Tag 08GK (lemma-direct-image-coherent); derived.tex Tag 015J (lemma-two-ss-complex-functor)."
+   }
+  },
+  {
+   "text": "If $n<a$, there is no pair $p\\geq0$, $q\\geq a$ with $p+q=n$. All graded pieces in the finite exhaustive separated filtration of $H^n(Rf_*G)$ are therefore zero, so $H^n(Rf_*G)=0$. Zero modules are coherent as well. Together with the preceding step this gives coherent cohomology and the same lower bound $a$ for $Rf_*G$.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-sfb-space-coherent-kernel-cokernel-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), first proof sentence: same proof as Tag 08GK (lemma-direct-image-coherent); derived.tex Tag 015J (lemma-two-ss-complex-functor)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "thm-sp-truncation-e2",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-coherent-kernel-cokernel-extension",
+  "def-trf-scheme-algebraic-space",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), first proof sentence: same proof as Tag 08GK (lemma-direct-image-coherent); derived.tex Tag 015J (lemma-two-ss-complex-functor)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(coherent.*(pushforward|direct.image))|((pushforward|direct.image).*coherent)",
+   "results": "{\"t\": \"2026-10-22T06:28:09Z\", \"tool\": \"grep\", \"query\": \"(coherent.*(pushforward|direct.image))|((pushforward|direct.image).*coherent)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"869d6964639ef564\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pushforward, its composition and right adjoint, scheme Noetherianity, and t-structure bounds do not give coherent derived pushforward for proper algebraic spaces. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587: the two grep hits concern underived quasi-coherence on schemes, not proper coherent higher direct images."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsCoherent\"",
+   "results": "{\"t\": \"2026-10-22T06:28:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"IsCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pushforward, its composition and right adjoint, scheme Noetherianity, and t-structure bounds do not give coherent derived pushforward for proper algebraic spaces. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587: the two grep hits concern underived quasi-coherence on schemes, not proper coherent higher direct images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper derived pushforward of a bounded below coherent complex of structure sheaf modules on an algebraic space has coherent cohomology",
+   "results": "{\"t\": \"2026-10-22T06:28:10Z\", \"tool\": \"leansearch\", \"query\": \"Proper derived pushforward of a bounded below coherent complex of structure sheaf modules on an algebraic space has coherent cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforwardSections\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.pushforwardComp\"], \"digest\": \"88c68968005aeaaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pushforward, its composition and right adjoint, scheme Noetherianity, and t-structure bounds do not give coherent derived pushforward for proper algebraic spaces. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587: the two grep hits concern underived quasi-coherence on schemes, not proper coherent higher direct images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism from an algebraic space to a Noetherian scheme preserves bounded below complexes with coherent cohomology under derived direct image",
+   "results": "{\"t\": \"2026-10-22T06:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"A proper morphism from an algebraic space to a Noetherian scheme preserves bounded below complexes with coherent cohomology under derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"DerivedCategory.isLE_Q_obj_iff\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"2f6d0d000080109c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pushforward, its composition and right adjoint, scheme Noetherianity, and t-structure bounds do not give coherent derived pushforward for proper algebraic spaces. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587: the two grep hits concern underived quasi-coherence on schemes, not proper coherent higher direct images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of coherent cohomology under a proper algebraic space morphism to a Noetherian scheme is coherent",
+   "results": "{\"t\": \"2026-10-22T06:28:39Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct image of coherent cohomology under a proper algebraic space morphism to a Noetherian scheme is coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"Condensed.isSheafProfinite\"], \"digest\": \"203448f1dc19162d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived module pushforward, its composition and right adjoint, scheme Noetherianity, and t-structure bounds do not give coherent derived pushforward for proper algebraic spaces. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587: the two grep hits concern underived quasi-coherence on schemes, not proper coherent higher direct images."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*(pushforward|direct.image)|(pushforward|direct.image).*coherent",
+   "results": "{\"t\": \"2026-10-23T09:32:44Z\", \"tool\": \"grep\", \"query\": \"coherent.*(pushforward|direct.image)|(pushforward|direct.image).*coherent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"869d6964639ef564\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived scheme pushforward, properness and scheme Noetherianity, or sheaves for coherent topologies; none gives coherent higher direct images for algebraic spaces. Tilde.lean:566-587 concerns quasi-coherence, not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of coherent modules under proper morphisms of algebraic spaces are coherent",
+   "results": "{\"t\": \"2026-10-23T09:32:44Z\", \"tool\": \"leansearch\", \"query\": \"Higher direct images of coherent modules under proper morphisms of algebraic spaces are coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.isProper_eq\", \"SheafOfModules.IsQuasicoherent.recOn\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\"], \"digest\": \"31bb274f19919040\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived scheme pushforward, properness and scheme Noetherianity, or sheaves for coherent topologies; none gives coherent higher direct images for algebraic spaces. Tilde.lean:566-587 concerns quasi-coherence, not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsCoherent\"",
+   "results": "{\"t\": \"2026-10-23T09:32:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"IsCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived scheme pushforward, properness and scheme Noetherianity, or sheaves for coherent topologies; none gives coherent higher direct images for algebraic spaces. Tilde.lean:566-587 concerns quasi-coherence, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper morphisms of algebraic spaces over a locally Noetherian base send coherent modules to coherent higher direct image sheaves",
+   "results": "{\"t\": \"2026-10-23T09:32:52Z\", \"tool\": \"leanfinder\", \"query\": \"Proper morphisms of algebraic spaces over a locally Noetherian base send coherent modules to coherent higher direct image sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsProper.comp_iff\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\"], \"digest\": \"519fb8e7fe5d4a06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived scheme pushforward, properness and scheme Noetherianity, or sheaves for coherent topologies; none gives coherent higher direct images for algebraic spaces. Tilde.lean:566-587 concerns quasi-coherence, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a coherent sheaf on a proper algebraic space over a Noetherian scheme all higher direct images are finite type quasi coherent modules",
+   "results": "{\"t\": \"2026-10-23T09:34:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a coherent sheaf on a proper algebraic space over a Noetherian scheme all higher direct images are finite type quasi coherent modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\"], \"digest\": \"6404c106bc10e15e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived scheme pushforward, properness and scheme Noetherianity, or sheaves for coherent topologies; none gives coherent higher direct images for algebraic spaces. Tilde.lean:566-587 concerns quasi-coherence, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image preserves coherent cohomology for bounded below complexes on algebraic spaces via the hypercohomology spectral sequence",
+   "results": "{\"t\": \"2026-10-23T09:34:42Z\", \"tool\": \"leanfinder\", \"query\": \"Proper direct image preserves coherent cohomology for bounded below complexes on algebraic spaces via the hypercohomology spectral sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.Functor.op_comp_isSheaf_of_preservesOneHypercovers\", \"CategoryTheory.Functor.op_comp_isSheaf\", \"CategoryTheory.Functor.IsContinuous.op_comp_isSheaf_of_types\"], \"digest\": \"970c501b4d10346b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived scheme pushforward, properness and scheme Noetherianity, or sheaves for coherent topologies; none gives coherent higher direct images for algebraic spaces. Tilde.lean:566-587 concerns quasi-coherence, not this theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-coherent-ext-finite",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image.",
+   "via": [
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-space-coherent-derived-image",
+  "worker": "stage1",
+  "summary": "Expanded the first proof of Stacks 0D0R, via the same hypercohomology argument as 08GK. Reused the general truncation spectral sequence and module-category infrastructure. Added only the proper algebraic-space coherent higher-image theorem and etale coherent kernel/cokernel/extension closure, with actual logged Mathlib searches. The original statement is unchanged.",
+  "blueprint": "Supporting coherent Ext-finiteness input of the alteration/moduli branch of det-thm-sf-ctf-stability-direct-images, as recorded in the inherited blueprint.from chain: Tag 0D0T uses 0D0R. Steps realize 0D0R via the 08GK spectral sequence, rather than its optional truncation-triangle proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic module categories on small ringed sites, needed for the spectral-sequence hypotheses; no geometric route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module adjunction makes the stated direct image left exact; no scheme-only pushforward is substituted."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "General left-exact-functor hypercohomology spectral sequence with finite filtration and quadrant bounds, used as in Stacks 015J."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-9b63ac6f8",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9b63ac6f8 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, both new nodes, every cited node's statement and the Stacks sources. The route is the source's own: 0D0R says it has the same proof as 08GK, which runs the spectral sequence 015J. Stacks spaces-perfect 1194-1237. Step 1: def-sbc-standard-tstructure gives the representative with K^q=0 for q<a; lem-weil-pbc-ring-sheaves-grothendieck, the module adjunction and right-adjoint-preserves-limits make f_* left exact and additive. Step 2: thm-sp-truncation-e2 clauses 2-6 give E_2, the quadrant, stabilisation, the finite filtration with F^p=0 for p>=n-a+1, and gr isomorphic to E_inf; def-sfb-right-derived-functor identifies the unbounded Rf_* with the K-injective Rv. Step 3: the new node lem-sfb-space-proper-coherent-higher-images matches 08AR (spaces-cohomology 3618-3623) hypothesis by hypothesis, and its R^i via injective resolutions agrees with R^pv in the spectral-sequence theorem. Step 4: the new node lem-sfb-space-coherent-kernel-cokernel-extension matches 07UC (lines 1909-1927); the induction E_{r+1}=ker d_r/im d_r is explicit, and extension closure over the finite filtration gives coherence. Step 5: for n<a, F^0=F^{n-a+1}=0, so H^n=0. Small cases checked: f=id with G=F[-q]; G=0; P^1 over a field; an unbounded-above G, where no upper bound is claimed or needed. Duplicate search over 08AR/07UC/07UB/02O5 and all statements on algebraic spaces with coherence finds only the Zariski-scheme results (lem-pc-coherent-hi, lem-weil-pbc-coherent-kernel-cokernel-locnoeth) and space nodes on support or internal Hom, so neither new node is a duplicate or a restated clause. Both new nodes are unsplit with statements only, have correct created/blueprint records and logged searches. The item is still unsplit on live and side-live, so no other group has split it, and there is no re-split note. No SGA. Batch-5: def-trf-algebraic-space, newly cited by both new nodes and already in the item's base stmt_deps, is the general definition of an algebraic space, not part of the trace formula or Poincare duality, so it is accepted. The three tool_uses (Grothendieck module categories, module adjunction, truncation spectral sequence) are generic and accepted. FIX (C1/C4): steps 3 and 4 apply nodes about algebraic spaces to the scheme Y without citing how Y is one. I added def-trf-scheme-algebraic-space (Y as h_Y over S=Y, identity atlas, small etale site of etale Y-schemes; a general definition, also batch-5 OK) and pqf-def-locnoeth (etale charts are locally Noetherian) to steps 3 and 4 and to proof_deps. The statement, stmt_deps and the new nodes are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

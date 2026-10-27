@@ -1,0 +1,282 @@
+{
+ "id": "lem-wf-common-stage-weil-iterate",
+ "kind": "statement",
+ "title": "Common-stage finite realization and natural iterated Weil structures",
+ "statement": "Fix distinct primes $p,\\ell$, an integer $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, its fixed algebraic closure $k$, and an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $Y_0$ be separated of finite type over $k_0$, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$. Write $g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$ and $g_s=\\operatorname{Spec}(\\operatorname{Frob}_q)$ for geometric Frobenius. For each finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, use the rationalized constructible categories and derived pullbacks in [def-weil-local-frobenius-trace]. Let $\\mathcal C_Y=D^b_c(Y,\\Omega)$ be the literal category of pairs $(E,K)$ and common-stage morphism classes of [def-weil-algebraically-closed-coefficients]. All composition and scalar comparisons are the specified rationalizations of [lem-trf-integral-pullback-comparison-realization], including equality of scheme morphisms, units and finite iterations. \nPut $T_E=Lg_{Y,E}^*$ and let $T$ be its common-stage pullback. Use Weil pairs $(K,\\theta:T K\\xrightarrow{\\sim}K)$ and their morphisms from [def-weil-weil-sheaf-complex]. Every finite collection of these pairs and Weil morphisms, together with finitely many equations between composites, has simultaneous finite-stage representatives over some $E$: the structure maps, their inverses, the specified arrows and all the equations are represented over $E$ and hold there. Prescribed finite starting coefficient fields may all be contained in $E$.\n\nFor $r\\geq1$ define the iterated isomorphisms by $\\theta_E^{[1]}=\\theta_E$ and\n$$\\theta_E^{[r+1]}=\\theta_E^{[r]}T_E^r(\\theta_E):T_E^{r+1}K\\xrightarrow{\\sim}K,$$\nusing the specified pullback-composition comparisons to identify $T_E^r$ with $L(g_Y^r)_E^*$. For $E\\subset M$, write $K_M=K\\otimes_E M$ and $d_{r,K}:(T_E^rK)\\otimes_E M\\xrightarrow{\\sim}T_M^rK_M$ for the iterated scalar comparison; give $K_M$ the structure $\\theta_M=(\\theta_E\\otimes_E M)d_{1,K}^{-1}$. Then\n$$\\theta_M^{[r]}d_{r,K}=\\theta_E^{[r]}\\otimes_E M.$$\nThese isomorphisms respect the identity and tower scalar identifications and define the iterated structure $\\theta^{[r]}:T^rK\\xrightarrow{\\sim}K$ in $\\mathcal C_Y$, independently of the representatives of $\\theta$, its inverse, and their equations. For every Weil morphism $u:(K,\\theta_K)\\to(L,\\theta_L)$, including noninvertible $u$,\n$$u\\theta_K^{[r]}=\\theta_L^{[r]}T^r(u)\\quad(r\\geq1).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+  "place": "Opening punctual-bounds argument; expansion of the local Frobenius definition and the equation for a Weil morphism; agent-extracted common-stage lemma from the returned rational-stalk proof, steps 2 and 4 (Weil factor)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-local-frobenius-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write every specified underlying object as $(E_i,K_i)$. In the literal pair category of [def-weil-algebraically-closed-coefficients], choose representatives of the finitely many structure maps $\\theta_i$, inverse maps $\\psi_i=\\theta_i^{-1}$, and specified arrows. Take a common finite overfield $B$ containing all their fields and all prescribed starting fields, using the compositum upper bounds in that definition. By the description of morphisms and composition in [def-weil-algebraically-closed-coefficients] (each class is represented over a common finite extension, composites are formed over a common finite extension, and the directed colimit's transition maps are scalar extension composed with the scalar identifications), induction on the finitely many arrows and composites of this finite diagram transports all of it to $B$. The vertices become $K_{i,B}=K_i\\otimes_{E_i}B$, and the representatives of $T K_i$ become $(T_{E_i}K_i)\\otimes_{E_i}B$. Repeated occurrences use the same vertex. At this point the representatives of the structure maps need not yet be invertible over $B$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "Use the natural comparison $d_{1,K_i}:(T_{E_i}K_i)\\otimes_{E_i}B\\cong T_BK_{i,B}$ of [lem-trf-integral-pullback-comparison-realization]. If $t_i$ and $v_i$ represent $\\theta_i$ and $\\psi_i$, put $\\theta_{i,B}=t_i d_{1,K_i}^{-1}$ and $\\psi_{i,B}=d_{1,K_i}v_i$. For each specified arrow use its representative $u_B$. The finite list of equations now consists of $\\theta_{i,B}\\psi_{i,B}=1$, $\\psi_{i,B}\\theta_{i,B}=1$, every $u_B\\theta_{i,B}=\\theta_{j,B}T_B(u_B)$, and the prescribed equations between composites. Their classes are true by [def-weil-weil-sheaf-complex] and the hypotheses: the action of $T$ on a representative is precisely stage pullback conjugated by the scalar comparisons. Since two representatives in the directed colimit of [def-weil-algebraically-closed-coefficients] define the same class exactly when they agree after extension to a further common finite extension, every one has a finite equality witness. Enlarge $B$ to one finite field $E$ containing all these witnesses. Functorial scalar transport preserves equalities and compositions; the scalar tower equations identify the transported comparisons with the direct ones. Thus the displayed representatives over $E$ satisfy all equations, and $\\psi_{i,E}$ is an actual two-sided inverse. This proves simultaneous realization without assuming transition maps on Hom sets are injective.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "The same transport preserves Weil morphisms. Write $S=(-)\\otimes_E M$ and abbreviate the one-step scalar comparison by $d_K$. For $u\\theta_K=\\theta_LT_E(u)$, naturality gives $T_M(Su)d_K=d_LS(T_Eu)$. Consequently\n$$Su\\,(S\\theta_K)d_K^{-1}=(S\\theta_L)S(T_Eu)d_K^{-1}=(S\\theta_L)d_L^{-1}T_M(Su).$$\nThus the transported structure is the stated $\\theta_M$, its inverse is $d_KS(\\theta_K^{-1})$, and every transported specified arrow is a Weil morphism. Only functoriality, the defining Weil equation and naturality of the cited comparison enter this calculation.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "At a fixed finite stage define $\\theta_E^{[1]}=\\theta_E$ and $\\theta_E^{[r+1]}=\\theta_E^{[r]}T_E^r(\\theta_E)$. A functor sends an inverse to an inverse, since applying it to the two inverse identities gives the two inverse identities for the images. Hence induction makes every $\\theta_E^{[r]}$ an isomorphism, with inverse $T_E^r(\\theta_E^{-1})(\\theta_E^{[r]})^{-1}$ at the successor step. The associative and unital composition comparisons of [lem-trf-integral-pullback-comparison-realization] identify each iterated pullback with $L(g_Y^r)_E^*$, and identify the recursion with the one in [def-weil-local-frobenius-trace].",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "Prove the scalar equation by induction on $r\\geq1$. The case $r=1$ is $\\theta_Md_{1,K}=S\\theta_E$. The coherent iterated comparisons of [lem-trf-integral-pullback-comparison-realization] obey\n$$d_{r+1,K}=T_M^r(d_{1,K})d_{r,T_EK},\\qquad\nT_M^r(S\\theta_E)d_{r,T_EK}=d_{r,K}S(T_E^r\\theta_E),$$\nthe second equation being naturality at $\\theta_E:T_EK\\to K$. Therefore the induction hypothesis gives\n$$\\begin{aligned}\n\\theta_M^{[r+1]}d_{r+1,K}\n&=\\theta_M^{[r]}T_M^r(\\theta_Md_{1,K})d_{r,T_EK}\\\\\n&=\\theta_M^{[r]}d_{r,K}S(T_E^r\\theta_E)\\\\\n&=S(\\theta_E^{[r]})S(T_E^r\\theta_E)=S(\\theta_E^{[r+1]}).\n\\end{aligned}$$\nAll equations are in the rationalized constructible categories supplied by the cited comparison theorem; no new choice of integral representatives or reductions is made.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "For the identity extension the scalar comparison is the identity, so $\\theta_E$ and every iterate are unchanged. For $E\\subset M\\subset N$, the tower compatibility in [lem-trf-integral-pullback-comparison-realization] says that the direct comparison $d_{r,K}$ equals the composite through $M$ under the scalar associator. Substitute the scalar equation just proved, first for $E\\subset M$ and then for $M\\subset N$: the two adjacent comparisons cancel, leaving $\\theta_N^{[r]}$ times that direct comparison equal to $\\theta_E^{[r]}\\otimes_E N$. This is also the direct-extension formula, so cancellation of the invertible direct comparison proves the tower equation for the iterates. For $r=1$ this proves that the Weil structures themselves agree under the associator.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "If two finite representatives give the same structure arrow, their underlying maps become equal over a common further field by [def-weil-algebraically-closed-coefficients]; impose their inverse identities there as in steps 1--2. Inverses then agree: $v=v\\theta w=w$ for any two inverses $v,w$ of $\\theta$. Equal structure maps have equal iterates by the recursion. Step 5 shows that computing an iterate before enlarging the field gives the same class as computing it afterwards; step 6 compares direct and successive enlargement. Hence the classes $\\theta^{[r]}:T^rK\\to K$ are independent of representatives, chosen inverse representatives and the further fields used to witness equations. They are exactly the iterates formed by applying the common-stage functor $T$ to $\\theta$ and composing, since that functor acts by the scalar-conjugated finite-stage maps in [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  },
+  {
+   "text": "Finally work in the category $\\mathcal C_Y$ with its functor $T$. For a Weil morphism $u:K\\to L$ the case $r=1$ is its defining equation $u\\theta_K=\\theta_LT(u)$ in [def-weil-weil-sheaf-complex]. If $u\\theta_K^{[r]}=\\theta_L^{[r]}T^r(u)$, associativity and functoriality give\n$$\\begin{aligned}\nu\\theta_K^{[r+1]}\n&=\\theta_L^{[r]}T^r(u)T^r(\\theta_K)\n=\\theta_L^{[r]}T^r(u\\theta_K)\\\\\n&=\\theta_L^{[r]}T^r(\\theta_LT(u))\n=\\theta_L^{[r+1]}T^{r+1}(u).\n\\end{aligned}$$\nThis proves the assertion for all positive $r$. No inverse of $u$ occurs. In particular, if finite models of the same Weil datum are related by an isomorphism, this equation also identifies their iterates through that isomorphism.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+    "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-weil-sheaf-complex",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
+  "place": "Opening punctual-bounds sentence: expansion of the finite-stage Weil structure and its positive iterates; agent-written categorical argument using the cited common-stage and normalized comparison statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilComplex|localWeilIterate|commonStageDerivedPullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient models of common-stage Weil complexes morphisms inverse structure maps and natural iterated Frobenius pullback isomorphisms",
+   "results": "8 hits: PreTilt.coeff_iterate_frobeniusEquiv_symm, Perfection.coeff_iterate_frobeniusEquiv_symm, iterateFrobeniusEquiv_symm, PreTilt.coeff_iterate_frobenius, PreTilt.coeff_iterate_frobenius', iterateFrobeniusEquiv_symm_add_apply, iterateFrobeniusEquiv_symm_add, PreTilt.coeff_frobeniusEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.Hom.h",
+   "results": "1 hits: CategoryTheory.Endofunctor.Algebra.Hom.h",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated Weil structure maps in a common finite coefficient stage category descend independently of representatives and intertwine arbitrary Weil morphisms",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj, CategoryTheory.SmallObject.SuccStruct.Iteration.congr_map, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab, CategoryTheory.SmallObject.SuccStruct.Iteration.congr_arrowMap, CategoryTheory.SmallObject.SuccStruct.Iteration.arrow_mk_mapObj, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "grep",
+   "query": "Algebra.Hom.h|naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/MarkovCategory/Basic.lean, Mathlib/CategoryTheory/Linear/LinearFunctor.lean, Mathlib/CategoryTheory/Linear/LinearFunctor.lean, Mathlib/CategoryTheory/Linear/FunctorCategory.lean, Mathlib/CategoryTheory/Linear/FunctorCategory.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil complex over a filtered coefficient category admits finite coefficient representatives for any finite diagram and its iterated structure isomorphisms are natural and compatible with scalar extension",
+   "results": "8 hits: LightProfinite.fintypeDiagram, localCohomology.ofDiagram, localCohomology.diagram, LightDiagram.diagram, Condensed.finFree, localCohomology.hasColimitDiagram, LightProfinite.diagram, Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical naturality, filtered colimits, ring Frobenius and adic completion do not give the specified common-stage adic comparison and descent"
+  },
+  {
+   "tool": "grep",
+   "query": "localWeilIterate|commonStageDerivedPullback|WeilComplex",
+   "results": "No Mathlib hits for the project-specific names.",
+   "date": "2026-10-22",
+   "verdict": "no match: the item combines literal common-stage finite coefficient realization with the specified rationalized pullback comparisons; the hits supply only other objects or one-step generic identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iteration of an isomorphism from an endofunctor applied to an object to the object is natural for equivariant morphisms and compatible with natural scalar extension comparisons",
+   "results": "LeanSearch returned LinearEquiv.coe_pow, LinearEquiv.pow_apply, CategoryTheory.SmallObject.instIsIsoRightAppArrowιIteration, CategoryTheory.Over.iteratedSliceForwardNaturalityIso, CategoryTheory.Endofunctor.Algebra.functorOfNatTransId, NatIso component isomorphism lemmas and ModuleCat.ExtendRestrictScalarsAdj.homEquiv; none states finite-stage Weil realization and the normalized comparison equations.",
+   "date": "2026-10-22",
+   "verdict": "no match: the item combines literal common-stage finite coefficient realization with the specified rationalized pullback comparisons; the hits supply only other objects or one-step generic identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.Hom.h",
+   "results": "Loogle returned CategoryTheory.Endofunctor.Algebra.Hom.h, Mathlib/CategoryTheory/Endofunctor/Algebra.lean:69 (structure starts at line 65); read lines 35--95. It states only the one-step equivariance condition.",
+   "date": "2026-10-22",
+   "verdict": "no match: the item combines literal common-stage finite coefficient realization with the specified rationalized pullback comparisons; the hits supply only other objects or one-step generic identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of Weil complexes with inverse structure maps descend to a common finite coefficient field, and iterated Frobenius structure maps commute with scalar extension",
+   "results": "Lean Finder returned WittVector.isocrystal_classification, WittVector.exists_frobenius_solution_fractionRing_aux, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj and isocrystal Frobenius declarations; none concerns rationalized constructible pair categories.",
+   "date": "2026-10-22",
+   "verdict": "no match: the item combines literal common-stage finite coefficient realization with the specified rationalized pullback comparisons; the hits supply only other objects or one-step generic identities"
+  },
+  {
+   "tool": "grep",
+   "query": "iterate|Hom.h|naturality",
+   "results": "Grep returned Mathlib/CategoryTheory/Endofunctor/Algebra.lean lines 71, 211, 265, 358 and 409; inspected the one-step Hom.h condition at lines 65--71. No finite coefficient descent or iterated Weil comparison theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: the item combines literal common-stage finite coefficient realization with the specified rationalized pullback comparisons; the hits supply only other objects or one-step generic identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category of pairs consisting of an object and an isomorphism from its image under an endofunctor, every equivariant morphism intertwines the recursively iterated structure maps",
+   "results": "Lean Finder returned PreGaloisCategory.IsNaturalSMul.naturality, PreGaloisCategory.mulAction_naturality, Functor.mapAction_obj_ρ_apply, IterateMulAct.instMulAction, Action.Hom.comm, IsNaturalSMul and mapAction declarations. These concern group actions or induced actions, not the endofunctor/scalar-compatible common-stage assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match: the item combines literal common-stage finite coefficient realization with the specified rationalized pullback comparisons; the hits supply only other objects or one-step generic identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-rational-stalk-exact",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-l2-upper",
+   "place": "Opening punctual-bounds sentence: finite-stage realization and iterated Weil structures underlying the Frobenius-stable stalk filtration",
+   "via": [
+    "lem-wf-rational-stalk-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-wf-common-stage-weil-iterate",
+  "worker": "stage1",
+  "summary": "Used the directed-colimit description of the common-stage category and normalized integral pullback comparison theorem, rather than duplicating either. Gave simultaneous representatives with two-sided inverse and Weil equations, and explicit inductions for scalar compatibility and arbitrary-morphism naturality. No statement change and no new nodes.",
+  "blueprint": "Realizes the opening punctual-bounds sentence of lem-wf-l2-upper.proof.md: the iterated Weil maps underlying local Frobenius and their finite coefficient realization, extracted via lem-wf-rational-stalk-exact. It does not alter the energy unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Uses the specified normalized rationalized pullback naturality, composition and scalar unit/tower coherence required by the item; this is a generic coefficient comparison tool, not an alternative weight argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-pullback-comparison-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-478304487",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-478304487 (reviewer sub-agent of L); spot-checked: I read all 8 steps and the full statement of every cited node, recomputing each step. The statement is unchanged and there are no new nodes. One fault, repaired: steps 1 and 2 cited prop-weil-pbc-common-stage-calculus for finite-diagram realization and the finite equality witnesses. That proposition is stated for P_T, whose stages are def-weil-pbc-rational-category with the prop-weil-pbc-scalar-extension data, not the sf stages of C_Y (def-weil-rationalization-karoubi); def-weil-algebraically-closed-coefficients only says C_Y uses the same construction on other stages. The clauses actually used (a class is represented over a common finite field, two representatives are equal iff they agree after a further extension, composition is formed at a common stage) are stated in def-weil-algebraically-closed-coefficients itself. The fix re-cites that definition in steps 1 and 2 and removes the proposition from the step uses, proof_deps and split_report.tool_uses. Comparison maps check out: lem-trf-integral-pullback-comparison-realization's a_{f,K} specifies exactly the θ^{f*} comparisons that def-weil-derived-pullback-tensor-hom uses for the common-stage pullback, and its c^E specifies the lem-pod composition comparisons used in def-weil-local-frobenius-trace. Its tower associator (the χ-conjugate of the ordinary associator) agrees with the ones in lem-weil-scalar-extension-composition and lem-pur-integral-operations-scalar-extension. I type-checked step 2 (T(u)=d_j^{-1}T_B(u)d_i) and redid the step-5 induction, d_{r+1}=T^r(d_1)d_{r,T_EK} with naturality at θ_E. I also redid step 8 for non-invertible u and checked the edge cases: empty family, r=1, r=2, E=M, and the parent's use at e=[κ(x):k_0]. No duplicate found: the trf iterated-Weil nodes are for strict finite coefficients, and lem-zl-weil-constant-extension-frobenius assumes θ^{[e]}. lem-trf is on the unit route (sk-thm-trace-transport) and was accepted as generic before. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageWeilIterate",
+  "declaration": "WeilConjectures.commonStageWeilIterate",
+  "declarations": [
+   "WeilConjectures.wfScalarComparison",
+   "WeilConjectures.wfScalarWeil",
+   "WeilConjectures.wfIteratedScalarComparison",
+   "WeilConjectures.wfStageIteratedComparison",
+   "WeilConjectures.wfPowerPullbackComparison",
+   "WeilConjectures.commonStageWeilFiniteRealization",
+   "WeilConjectures.commonStageWeilIterate"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageWeilIterate.lean",
+  "statement": "theorem commonStageWeilIterate [IsSeparated Y₀.hom] : (∀ (E : Index l Ω) (K : sfWeilComplex D l hl Y₀ (Coefficient.{u} l Ω E)) (n : ℕ), wfPowerPullbackComparison D l hl Ω Y₀ E K.carrier n ≪≫ localWeilIterate l (Coefficient.{u} l Ω E) D hl Y₀ K n = K.strIterate (n + 1)) ∧ (∀ (E M : Index l Ω) (h : E ≤ M) (K : sfWeilComplex D l hl Y₀ (Coefficient.{u} l Ω E)) (n : ℕ), wfIteratedScalarComparison D l hl Ω Y₀ E M h K.carrier (n + 1) ≪≫ ((wfScalarWeil D l hl Ω Y₀ E M h).obj K).strIterate (n + 1) = (transition l Ω (D.geometricFiber Y₀).left E M h).mapIso (K.strIterate (n + 1))) ∧ (∀ (E : Index l Ω) (K : Stage l Ω (D.geometricFiber Y₀).left E) (n : ℕ), wfIteratedScalarComparison D l hl Ω Y₀ E E le_rfl K (n + 1) ≪≫ ((sfWeilFrobeniusPullback D l hl Y₀ (Coefficient.{u} l Ω E)).iterate (n + 1)).mapIso ((unitor l Ω (D.geometricFiber Y₀).left E).app K) = (unitor l Ω (D.geometricFiber Y₀).left E).app (((sfWeilFrobeniusPullback D l hl Y₀ (Coefficient.{u} l Ω E)).iterate (n + 1)).obj K)) ∧ (∀ (E M N : Index l Ω) (h : E ≤ M) (k : M ≤ N) (K : Stage l Ω (D.geometricFiber Y₀).left E) (n : ℕ), (transition l Ω (D.geometricFiber Y₀).left M N k).mapIso (wfIteratedScalarComparison D l hl Ω Y₀ E M h K (n + 1)) ≪≫ wfIteratedScalarComparison D l hl Ω Y₀ M N k ((transition l Ω (D.geometricFiber Y₀).left E M h).obj K) (n + 1) ≪≫ ((sfWeilFrobeniusPullback D l hl Y₀ (Coefficient.{u} l Ω N)).iterate (n + 1)).mapIso ((associator l Ω (D.geometricFiber Y₀).left E M N h k).app K) = (associator l Ω (D.geometricFiber Y₀).left E M N h k).app (((sfWeilFrobeniusPullback D l hl Y₀ (Coefficient.{u} l Ω E)).iterate (n + 1)).obj K) ≪≫ wfIteratedScalarComparison D l hl Ω Y₀ E N (h.trans k) K (n + 1)) ∧ (∀ (E : Index l Ω) (K : sfWeilComplex D l hl Y₀ (Coefficient.{u} l Ω E)) (n : ℕ), (sfWeilStageObject D l hl Y₀ Ω E K).strIterate (n + 1) = wfStageIteratedComparison D l hl Ω Y₀ E K.carrier (n + 1) ≪≫ (inclusion E).mapIso (K.strIterate (n + 1))) ∧ (∀ (K L : sfCommonStageWeilComplex D l hl Y₀ Ω) (uKL : K ⟶ L) (n : ℕ), (K.strIterate (n + 1)).hom ≫ uKL.hom.f = ((sfCommonStageWeilFrobeniusPullback D l hl Y₀ Ω).iterate (n + 1)).map uKL.hom.f ≫ (L.strIterate (n + 1)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two theorem declarations give respectively simultaneous realization of finite quiver diagrams with finitely many path equations, and positive iterates with scalar unit/tower coherence, comparison to localWeilIterate, finite-stage descent and naturality for every Weil morphism. Five helper definitions assemble only the published canonical comparisons; IsoAlgebra.strIterate is reused, not redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-274ea67af",
+  "group": "Q70",
+  "result": "fix",
+  "note": "Lean statement correct clause by clause: finite realization with σ tied to the canonical isoToStage, carriers literally K⊗E, arrow and path equations hold at E; strIterate reused; conjunct 1 (vs localWeilIterate) and conjunct 2 (scalar equation, comparison maps fixed by the published uniqueness statement) re-derived by induction; unit/tower coherence of d_r plus conjunct 2 give the node's iterate clause; descent checked against sfWeilStageObject; naturality covers noninvertible u. Edge cases and independent universes OK. No hollow defs, no duplicate definitions. Only fault: H11, the delivered second reading was a self-check. FIX = fixes/lem-wf-common-stage-weil-iterate.report.md (worker report unchanged + clause-by-clause reading). Advisories: owner def-weil-derived-pullback-tensor-hom is not in the item's stmt_deps but is a stmt_dep of two cited nodes; the lem-trf import is unused by the statement. No compile: the Lean is unchanged."
+ }
+}

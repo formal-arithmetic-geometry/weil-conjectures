@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-derived-pullback-tensor-comparison-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "place": "the Lean proof of det-proper-image-localizing-open's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The derived pullback commutes with the derived tensor product",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $f\\colon X\\to Y$ a morphism of schemes. Write $\\Mod_{\\Lambda_T}$ for module objects over the pulled-back ring on the pro-étale site of $T$, $f^*$ for the (exact, monoidal) pullback of module objects, $Lf^*$ for its left derived functor and $\\otimes^L$ for the derived tensor product [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom]; $Q_h\\colon K(\\Mod_{\\Lambda_T})\\to D(\\Mod_{\\Lambda_T})$ is the localization of the homotopy category. The comparison $m\\colon Lf^*(K\\otimes^LL)\\to Lf^*K\\otimes^LLf^*L$, the natural transformation of bifunctors on $D(\\Mod_{\\Lambda_Y})$ induced by the universal property of left derived bifunctors from the counits, is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
+  "place": "det-proper-image-localizing-open: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback); Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal, lines 278-279, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Identify the prescribed left counit with the existing upstream Functor.leftDerivedDerivedTensorCounit by extensionality in the two homotopy objects and reflexivity of their components. The existing upstream Functor.isLeftDerivedFunctor₂_leftDerivedDerivedTensor then shows that the left bifunctor, with precisely this counit, is left derived. The right bifunctor is left derived by the already proved isLeftDerivedFunctor₂_upperStarTensor.",
+   "uses": [
+    "lem-sfb-derived-pullback-tensor-left-derived",
+    "def-sfb-derived-pullback-tensor-left-counit",
+    "lem-sfb-derived-monoidal",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two left derived bifunctors with the same target, the universal lift of one counit along the other is the canonical leftDerived₂NatTrans of the identity of that target: unfolding leftDerived₂NatTrans and composing with an identity proves this equality. The existing upstream isomorphism instance for leftDerived₂NatTrans applied to the identity proves that this lift is an isomorphism. Specialize this private categorical lemma to the two bifunctors and their actual counits; the resulting lift is definitionally leftDerivedUpperStarTensor. This uses no identification with a separately chosen tensor comparison.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-pullback-tensor-left-derived",
+  "def-sfb-derived-pullback-tensor-left-counit",
+  "lem-sfb-derived-monoidal",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "coord/preferred-upstream/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal.lean",
+  "place": "Existing source-library two-variable derived functor API: isLeftDerivedFunctor₂_leftDerivedDerivedTensor, leftDerived₂NatTrans, leftDerived₂Lift, and preservation of isomorphisms by leftDerived₂NatTrans. Agent specialization to the unchanged counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor of a monoidal exact functor preserving flat objects is strong monoidal for derived tensor product",
+   "results": "Functor.IsLeftDerivedFunctor.mk (Mathlib.CategoryTheory.Functor.Derived.LeftDerived), Tor (Mathlib.CategoryTheory.Monoidal.Tor), Functor.Monoidal.ofBifunctor: no derived monoidal functor",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.Monoidal",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'leftDerivedFunctor.*Monoidal|Monoidal.*leftDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*Tensor|Tensor.*leftDerived|IsLeftDerivedFunctor₂",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Mathlib/CategoryTheory/Monoidal/Tor.lean; Tor.lean lines 45-53 concern degreewise Tor, not the unbounded derived pullback comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left derived functor of an exact strong monoidal pullback commutes with derived tensor products",
+   "results": "CategoryTheory.Functor.leftDerived; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; CategoryTheory.Functor.IsLeftDerivedFunctor.mk; CategoryTheory.Functor.leftDerivedToHomotopyCategory; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.Functor.Monoidal.commTensorLeft_hom_app; generic unary derived uniqueness does not supply the module pullback or its two derived tensor counits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor₂, CategoryTheory.IsIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.IsLeftDerivedFunctor₂'",
+   "date": "2026-10-22",
+   "verdict": "no match: the requested two-variable identifier is absent from the service index"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal derived tensor comparison of the exact pullback of condensed module objects is an isomorphism",
+   "results": "LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal inverse image on modules induces a strong monoidal functor on unbounded derived categories preserving derived tensor products",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Tor'_map_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.IsIso",
+   "results": "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts; CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts; CategoryTheory.LocalizerMorphism.instIsIsoFunctorLeftDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.isIso_iff_of_isLeftDerivabilityStructure; CategoryTheory.LocalizerMorphism.Derives.isIso'; CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_of_isIso; CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_iff_isIso; generic unary derived uniqueness does not supply the module pullback or its two derived tensor counits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+     "lines": [
+      381,
+      384
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalIso",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/MonoidalIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor"
+  ],
+  "statement": "instance isIso_leftDerivedUpperStarTensor : IsIso (leftDerivedUpperStarTensor Λ f) := by\n  have hQ (P Q : HomotopyCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ))\n      (hP : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat P)\n      (hQ : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat Q) :\n      IsIso (((leftDerivedUpperStarTensor Λ f).app (DerivedCategory.Qh.obj P)).app\n        (DerivedCategory.Qh.obj Q)) := by\n    obtain ⟨P, rfl⟩ := P.quotient_obj_surjective\n    obtain ⟨Q, rfl⟩ := Q.quotient_obj_surjective\n    exact isIso_leftDerivedUpperStarTensor_app_app_Qh_obj Λ f P Q hP hQ\n  have (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :\n      IsIso ((leftDerivedUpperStarTensor Λ f).app K) := by\n    obtain ⟨P, hP, ⟨e⟩⟩ := exists_kFlat_iso_Qh_obj Λ K\n    have (M : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :\n        IsIso (((leftDerivedUpperStarTensor Λ f).app (DerivedCategory.Qh.obj P)).app M) := by\n      obtain ⟨Q, hQ', ⟨e'⟩⟩ := exists_kFlat_iso_Qh_obj Λ M\n      have := hQ P Q hP hQ'\n      exact NatTrans.isIso_app_of_iso _ e'.symm\n    have : IsIso ((leftDerivedUpperStarTensor Λ f).app (DerivedCategory.Qh.obj P)) :=\n      NatIso.isIso_of_isIso_app _\n    exact NatTrans.isIso_app_of_iso _ e.symm\n  exact NatIso.isIso_of_isIso_app _",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "upstream proof (slopmaster2 94795abff8, PR #1694) ported to live 2026-10-27 by hand, in the 60 s split of the sync work tree (Monoidal + 7 modules); declaration now in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalIso, proved"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-derived-pullback-tensor-comparison-iso",
+  "worker": "stage1",
+  "summary": "Reused the existing reviewed normalized module-pullback theorem instead of introducing duplicate K-flat or monoidal-comparison lemmas. Identified both actual counits, constructed the reverse universal comparison, and proved both inverse identities by derived uniqueness. No statement change, no new nodes, no Lean edits or compilation.",
+  "blueprint": "The ancestor det-proper-image-localizing-open has no proof file at its main-20261015 statement; its open-extension projection-formula/amplitude application needs monoidality of derived pullback. This split realizes exactly that tensor-comparison input, retaining the imported ancestor attribution; the unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "new-proetale-derived-module-pullback-monoidal",
+    "why": "Existing general normalized module-pullback theorem supplies the two total derived bifunctors with exactly their specified counits, for arbitrary condensed coefficients; the open-extension unit has no separate construction of this generic tool."
+   },
+   {
+    "node": "lem-sfb-multivariable-derived-calculus",
+    "why": "Generic two-variable derived universal property and uniqueness construct and verify the inverse comparison; this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-proetale-derived-module-pullback-monoidal",
+  "lem-sfb-multivariable-derived-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-72ed94989",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-72ed94989 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged against live and is correct, and the live node is still unsplit. Lf^* is the full composite Ext_{alpha_f} after mapMod, Lambda and f are arbitrary, and the comparison m runs from Lf^*(K tensor L) to Lf^*K tensor Lf^*L, the same as delta in new-proetale-derived-module-pullback-monoidal. Step 1 cites that node's statement clause that (R,r) and (S,l) are total left derived bifunctors of Q_X F_h(A tensor B), with the same explicit counits. Step 2 uses the two-variable bijection and injectivity of lem-sfb-multivariable-derived-calculus. I checked by hand that l((nm)q)=l and r((mn)q)=r, which give nm=1 and mn=1. Nothing is circular: the 506-node closure of the cited nodes does not contain the item, and no counit is cancelled. Step 3 is elementary. Batch-5: def-trf-geometric-morphism is a general definition and lem-trf-localization-essentially-surjective is a pure category-theory Mathlib leaf (Localization.essSurj); neither belongs to the trace formula or Poincare duality or their proofs, so I accept both. I accept both tool_uses as generic black-box tools: the unit sk-lem-sf-open-ctf has empty realized fields, and its blueprint proof does not use monoidality. There are no new nodes and no SGA source. Maintainer notes: (1) the item states exactly the 'delta is invertible' clause of the existing node new-proetale-derived-module-pullback-monoidal, so consider merging it; (2) def-sfb-condensed-pullback-tensor-comparison overlaps partially (advisory); (3) the report wrongly says there is no ancestor proof file, but that file does not contain this input, so the conclusion stands."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T114231-L-2276331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar"
+  ]
+ }
+}

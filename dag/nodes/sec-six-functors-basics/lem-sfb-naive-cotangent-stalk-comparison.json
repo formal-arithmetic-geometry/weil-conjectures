@@ -1,0 +1,387 @@
+{
+ "id": "lem-sfb-naive-cotangent-stalk-comparison",
+ "kind": "statement",
+ "title": "Stalk comparison for the naive cotangent complex of sheaves of rings",
+ "statement": "Let $T$ be a topological space and $\\mathcal A\\to\\mathcal B$ a homomorphism of sheaves of commutative rings on its small site of opens, with sizes in the chosen universe [def-weil-size-convention]. Let $K=\\mathrm{NL}_{\\mathcal B/\\mathcal A}$ be the standard two-term sheaf complex $K_{\\mathcal B}$ of [lem-sfb-sheaf-polynomial-cotangent-comparison], and let $t\\in T$. Stalks and germs are those of [def-weil-pbc-module-stalk]. For a map $A\\to B$ of commutative rings, write $C_{B/A}=[I/I^2\\to B\\otimes_{A[B]}\\Omega_{A[B]/A}]$ in degrees $-1,0$, where $A[B]=A[x_b\\mid b\\in B]$, $I=\\ker(A[B]\\to B)$, and $[h]\\mapsto1\\otimes\\mathrm dh$; this is the naive complex of [def-weil-pbc-smooth-ring-map] written cohomologically, using [def-weil-pbc-kahler-differentials, def-weil-pbc-module-tensor-product]. There is a canonical isomorphism\n$$K_t\\simeq C_{\\mathcal B_t/\\mathcal A_t}\\quad\\text{in }D(\\mathcal B_t)$$\n[def-weil-abstract-derived-category]. It is induced by the canonical comparison from the stalk of the standard sheaf complex to the standard complex of stalk rings. More precisely, for every open $W\\ni t$, compose the sectionwise map $C_{\\mathcal B(W)/\\mathcal A(W)}\\to K(W)$ with the germ map to $K_t$. After the displayed comparison its image in $D(\\mathcal B_t)$ is the map induced by the two germ ring maps $\\mathcal A(W)\\to\\mathcal A_t$, $\\mathcal B(W)\\to\\mathcal B_t$: coefficients go to their germs, $x_b\\mapsto x_{b_t}$, kernel classes $[h]\\mapsto[h_t]$, and $b\\otimes\\mathrm dh\\mapsto b_t\\otimes\\mathrm d(h_t)$. Here maps to $\\mathcal B_t$-complexes are extended from the source coefficient ring when necessary. The comparison is natural for homomorphisms of ring sheaves. No finiteness or separation condition on $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0D09 (lemma-stalk-NL), via lemma-pullback-NL; section-netherlander, equation-commutative-square-sheaves and the explicit standard construction, for compatibility with sectionwise germ maps."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-trf-naive-cotangent-comparison-data",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Let i:{t}→T be the continuous inclusion of the one-point space, with its site of opens. The inverse-image adjunction and preservation of finite limits in [lem-weil-pbc-sets-inverse-image-colimits-finite-products] make this a geometric morphism. By [lem-weil-pbc-topological-inverse-image-stalk], i^{-1}F on its unique nonempty open is canonically F_t, for ring sheaves and abelian sheaves, and the unit sends a section to its germ. A sheaf on a point is determined by its value on that open (its value on the empty open is terminal), so this identifies ring and abelian sheaves there with rings and abelian groups. For modules the same identification is linear: the multiplication of inverse-image local representatives in [def-pc-topological-inverse-image-module] gives (rs)_t=r_t s_t, exactly the action in [def-weil-pbc-module-stalk]. Thus i^{-1}K is the termwise stalk complex K_t with its B_t-module structure.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-pc-topological-inverse-image-module",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0D09 (lemma-stalk-NL), proof via lemma-pullback-NL; section-netherlander, standard construction and equation-commutative-square-sheaves."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-topos-naive-cotangent-pullback] to this geometric morphism and A→B. Its sites are small in the chosen universe, and its conclusion concerns termwise inverse image of the standard complex, so no derived tensor product or flatness hypothesis is needed. On the point its target standard complex is C_{B_t/A_t}: evaluating the sheaf polynomial, kernel, conormal quotient and differential module on the unique nonempty open gives precisely the ring construction. Its canonical identifications therefore give K_t≃C_{B_t/A_t} in D(B_t). In particular this is the comparison induced by those identifications, not a choice of an unrelated isomorphism.",
+   "uses": [
+    "lem-sfb-topos-naive-cotangent-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0D09 (lemma-stalk-NL), proof via lemma-pullback-NL; section-netherlander, standard construction and equation-commutative-square-sheaves."
+   }
+  },
+  {
+   "text": "We identify the map just obtained. For W containing t, the unit description in [lem-weil-pbc-topological-inverse-image-stalk] sends every coefficient a to a_t and every generator b to b_t. Hence the canonical polynomial identification in [lem-sfb-topos-naive-cotangent-pullback] sends x_b to x_{b_t}, by the polynomial universal property [def-weil-pbc-mv-polynomial-ring]. It commutes with evaluation, so h in the sectionwise evaluation kernel maps to h_t in the stalk evaluation kernel, and its conormal class maps to [h_t]. The differential identification sends dh to d(h_t), by the universal derivation of [def-weil-pbc-kahler-differentials]. Its tensor identification consequently sends b⊗dh to b_t⊗d(h_t). These formulas give the asserted composite from the sectionwise complex, since the map to the standard sheaf complex of [lem-sfb-sheaf-polynomial-cotangent-comparison] is induced by the same polynomial, quotient and differential maps. They commute with the differential: the image of 1⊗dh is 1⊗d(h_t), the differential of [h_t].",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-sfb-topos-naive-cotangent-pullback",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials",
+    "lem-sfb-sheaf-polynomial-cotangent-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0D09 (lemma-stalk-NL), proof via lemma-pullback-NL; section-netherlander, standard construction and equation-commutative-square-sheaves."
+   }
+  },
+  {
+   "text": "For a commutative square A→B, A'→B' of ring sheaves, both composites in the naturality square send a coefficient a to the germ of its image, x_b to x_{image(b)_t}, [h] to [image(h)_t], and b⊗dh to image(b)_t⊗d(image(h)_t). Naturality of germs [def-weil-pbc-module-stalk] and the polynomial universal property [def-weil-pbc-mv-polynomial-ring] give equality on polynomials; quotient classes and the generating differentials and tensors give equality in both degrees. Thus the comparison is a natural chain map. Its image under localization [def-weil-abstract-derived-category] has the claimed naturality and sectionwise compatibility in D(B_t), with scalar extension understood as in the statement. Only the singleton inclusion and open neighbourhoods were used, so there is no separation or finiteness assumption on T.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0D09 (lemma-stalk-NL), proof via lemma-pullback-NL; section-netherlander, standard construction and equation-commutative-square-sheaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-pc-topological-inverse-image-module",
+  "def-weil-pbc-module-stalk",
+  "lem-sfb-topos-naive-cotangent-pullback",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0D09 (lemma-stalk-NL), using the existing general topos pullback result Tag 08TZ; standard functoriality in section-netherlander."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Taking stalks of the sheaf naive cotangent complex gives the naive cotangent complex of the stalk rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Extension.CotangentSpace.map_cotangentComplex",
+     "Algebra.Extension.cotangentComplex_mk",
+     "Algebra.H1Cotangent.isLocalizedModule",
+     "Algebra.Generators.cMulXSubOneCotangent",
+     "Algebra.Extension.cotangentComplex",
+     "Algebra.Extension.Cotangent",
+     "instR"
+    ],
+    "digest": "8bc8c630da408215",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ring localization and presheaf Kähler differentials, not the derived comparison for the naive sheaf complex and its sectionwise germ map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk commutes with polynomial algebra conormal module and Kaehler differentials for sheaves of rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "KaehlerDifferential.isLocalizedModule_map",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj",
+     "KaehlerDifferential.isLocalizedModule",
+     "KaehlerDifferential.isLocalizedModule_of_isLocalizedModule",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+     "PresheafOfModules.DifferentialsConstruction.derivation'",
+     "CommRingCat.KaehlerDifferential"
+    ],
+    "digest": "e0619e96ad24bb91",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ring localization and presheaf Kähler differentials, not the derived comparison for the naive sheaf complex and its sectionwise germ map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"stalk\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ring localization and presheaf Kähler differentials, not the derived comparison for the naive sheaf complex and its sectionwise germ map"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "Algebra/Category/ModuleCat"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ring localization and presheaf Kähler differentials, not the derived comparison for the naive sheaf complex and its sectionwise germ map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the naive cotangent complex of a homomorphism of ring sheaves is canonically the naive cotangent complex of the homomorphism of stalk rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.localRingHom_comp_stalkIso_apply",
+     "AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply",
+     "AlgebraicGeometry.localRingHom_comp_stalkIso",
+     "AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap",
+     "AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom",
+     "AlgebraicGeometry.Scheme.arrowStalkMapSpecIso",
+     "AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk",
+     "AlgebraicGeometry.Scheme.Hom.stalkMap"
+    ],
+    "digest": "5b7e85ad6c56cb6c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ring localization and presheaf Kähler differentials, not the derived comparison for the naive sheaf complex and its sectionwise germ map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking stalks of the naive cotangent complex of ring sheaves gives the naive cotangent complex of stalk rings, naturally on germs",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "smoothSheafCommRing.ι_forgetStalk_hom",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+     "smoothSheafCommRing.ι_forgetStalk_hom_apply",
+     "AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_germ",
+     "ModuleCat.Tilde.stalkIso_hom",
+     "ModuleCat.Tilde.toStalk",
+     "ModuleCat.Tilde.toOpen_germ",
+     "ModuleCat.Tilde.localizationToStalk_mk"
+    ],
+    "digest": "b9a380ca312fef0f",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stalk/localization formulas, module pullback and presheaf differential functoriality do not give the two-term sheaf naive-cotangent complex comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "Algebra/Category/ModuleCat"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stalk/localization formulas, module pullback and presheaf differential functoriality do not give the two-term sheaf naive-cotangent complex comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a sheaf naive cotangent complex is the naive cotangent complex of inverse image ring sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.StructureSheaf.comap_id'",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullback",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "AlgebraicGeometry.Scheme.inv_app",
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pushforwardNatIso_inv"
+    ],
+    "digest": "99e1e2cdaaadf355",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stalk/localization formulas, module pullback and presheaf differential functoriality do not give the two-term sheaf naive-cotangent complex comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"stalk\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stalk/localization formulas, module pullback and presheaf differential functoriality do not give the two-term sheaf naive-cotangent complex comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The standard two term conormal and differential sheaf complex commutes with inverse image to a point",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.Presentation.map_π_eq",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd"
+    ],
+    "digest": "e0659a45f3a7d4cd",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: stalk/localization formulas, module pullback and presheaf differential functoriality do not give the two-term sheaf naive-cotangent complex comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zariski-naive-cotangent-affine-comparison",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Finite two-term etale local models of the naive cotangent complex. Supporting input: affine polynomial-presentation comparison, Tags 0D0X and 0D0I, with arbitrary presentations by Tag 00S1; no finite-model conclusion. Affine prerequisite: Tag 0D0I, standard ring presentation on the Zariski site; arbitrary polynomial presentations are handled separately by the existing Tag 00S1 node. Supporting input: Tag 0D09 (lemma-stalk-NL), via lemma-pullback-NL; section-netherlander, equation-commutative-square-sheaves and the explicit standard construction, for compatibility with sectionwise germ maps.",
+   "via": [
+    "lem-sfb-zariski-naive-cotangent-affine-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-naive-cotangent-stalk-comparison",
+  "worker": "stage1",
+  "summary": "Q107: retained the statement and all inherited searches; split by pullback to the one-point space, reusing the existing general topos naive-cotangent pullback theorem and the inverse-image germ comparisons. Wrote explicit polynomial, conormal and differential germ formulas and naturality. No new nodes and no Lean attachment.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite chain recorded in blueprint.from.place: the Zariski affine naive-cotangent comparison uses this stalk identification. No change of route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Generic inverse-image stalk isomorphism with its unit/germ formula, used for inclusion of one point; the unit does not supply a replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-topological-inverse-image-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-d066810b1",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-d066810b1 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full; the delivery has no new nodes. Source: Stacks modules.tex lemma-stalk-NL (Tag 0D09) is proved as a special case of lemma-pullback-NL for the inclusion {x}→X (topos form: sites-modules 08TZ). The split does exactly this. Step 1 makes i:{t}→T a geometric morphism from the existing sets lemma (adjunction and finite limits). It identifies i^{-1} with stalks through lem-weil-pbc-topological-inverse-image-stalk (c(s_y)=η(s)_x) and gets linearity from the semilinear unit of def-pc-topological-inverse-image-module. Step 2 applies the existing unsplit node lem-sfb-topos-naive-cotangent-pullback: a genuine specialization, not a restatement. On a point, sheafification is the identity, since the empty-open value of A_t[B_t] is 0. Mod(i^{-1}B)≃Mod(B_t), so the target is C_{B_t/A_t}. Step 3 gets the germ formulas x_b↦x_{b_t}, [h]↦[h_t], b⊗dh↦b_t⊗d(h_t) from the canonical polynomial identification and the universal properties; I checked the differential square. Step 4 proves naturality on generators. The sectionwise images exhaust C_{B_t/A_t} by lifting the finitely many coefficients and variables and shrinking W, which takes a few lines, so the step is elementary. The statement is unchanged against live and side-live, and the item is still unsplit on live. No re-split note applies. No SGA. There is no cycle: the topos node has proof_deps [] and the item's dependency closure does not reach it. No duplicate after searching for 0D09, 08TZ and stalk-NL. Accepted tool_use: lem-weil-pbc-topological-inverse-image-stalk (sk-thm-reduction, Lean-attached generic tool). Small cases checked: T a point, A=B (I≠0), B=0, a non-closed point, T empty. Advisory: blueprint.from.node is null, inherited from the base node; step 2 does not cite def-weil-pbc-sheafification but needs it only elementarily; the report names citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.NaiveCotangentStalkComparison",
+  "declaration": "TopCat.NaiveCotangent.naive_cotangent_stalk_comparison",
+  "declarations": [
+   "TopCat.NaiveCotangent.presentation",
+   "TopCat.NaiveCotangent.presentationMap",
+   "TopCat.NaiveCotangent.sectionArrow",
+   "TopCat.NaiveCotangent.stalkArrow",
+   "TopCat.NaiveCotangent.germs",
+   "TopCat.NaiveCotangent.polynomialSection",
+   "TopCat.NaiveCotangent.ringedSpace",
+   "TopCat.NaiveCotangent.stalkComplex",
+   "TopCat.NaiveCotangent.germ",
+   "TopCat.NaiveCotangent.sectionComplex",
+   "TopCat.NaiveCotangent.additiveComplex",
+   "TopCat.NaiveCotangent.Comparison",
+   "TopCat.NaiveCotangent.naive_cotangent_stalk_comparison"
+  ],
+  "file": "lean/Sheaf/Topology/NaiveCotangentStalkComparison.lean",
+  "statement": "theorem naive_cotangent_stalk_comparison (T : TopCat.{u}) [∀ R : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} R)] : Nonempty (Comparison T)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Comparison retains the actual termwise module stalk, canonical polynomial presentation, sectionwise chain maps normalized on kernel classes and differential tensors, and the derived isomorphism property of the canonical stalk map. It also states the naturality square on every germ in every degree. Added two already landed definition dependencies for the actual ring two-term complex and the commutative-ring module stalk functor. No statement correction and no new nodes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a90806f73",
+  "group": "Q90",
+  "result": "pass",
+  "note": "I read the node, all 9 stmt_deps, the report (Worker report plus a Second reading by Q90, written by the same worker and saying so), the delivered module, and the live SheafPolynomialCotangentComparison, NaiveCotangentComparison, ModuleStalkFunctor and CotangentResolutionCoherence modules. Clauses: T : TopCat.{u} with no separation or finiteness assumption; f : A ⟶ B quantified; K is any Model (canonical f), which is canonically NL (degreeZero iso, locally surjective quotient with exactly the kernel-square kernel, pinned differential). Stalks come from moduleStalkFunctor applied termwise; C_{B_t/A_t} = Naive.complex of the canonical MvPolynomial presentation. derived_iso is IsIso of Q.map of the specified chain map stalks. sections is pinned by sections_neg_one/sectionKernel_formula and sections_zero (tensorD through the degreeZero iso). germ_formula holds at chain level via the unique NaiveMap of presentationMap (x_b↦x_{b_t}, [h]↦[h_t], b⊗dh↦b_t⊗d(h_t)), so stalks is determined. Naturality: sheafMaps is semilinear and pinned on sections, with a square on every germ in every degree. One universe; the HasDerivedCategory parameter matches the recorded dependency. Edge cases: empty T, A=B, zero ring, degrees outside {-1,0}. Gates: one sorry, docstrings present, lean.statement verbatim, lines <=100. Node diff: only 2 added stmt_deps, both landed definition nodes. Advisories: presentation/presentationMap repeat standardTerm/standardBase/standardAugmentation/standardSquareMap at degree 0 of def-trf-cotangent-resolution-data (repackaged without coherence data); Model is owned only by a theorem node, a stage-1 stmt_dep (not added here), so H2 does not apply; unused proof imports. No compile: no file changed."
+ }
+}

@@ -34,9 +34,43 @@
   "def-weil-finite-subextension-directed-set",
   "lem-pur-integral-operations-well-defined"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the normalized natural morphism from the normalized-lift theorem.",
+   "uses": [
+    "lem-qcqs-compact-support-normalized-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-comparison theorem gives completeness of the source and invertibility of every prescribed finite mate. Cancel the recorded finite reduction isomorphism to get invertibility of every reduction of each component. Transport the constructible finite reductions and the common support interval of the recorded target through those isomorphisms, proving integral constructibility of the source.",
+   "uses": [
+    "lem-qcqs-compact-support-finite-comparison",
+    "def-weil-compact-support-finite-action",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A complete object with zero reductions is zero: restriction sends each reduction to zero, its product is zero by product Hom extensionality, and its defining Roos triangle has zero second and third vertices. Apply this to a constructible cone of each component. Reduction is triangulated, so all reductions of the cone are zero. The cone is zero, hence the component is invertible. Component inverses give a natural isomorphism. Uniqueness of its hom follows from the normalized-lift theorem and determines the isomorphism.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-normalized-lift",
+  "lem-qcqs-compact-support-finite-comparison",
+  "def-weil-compact-support-finite-action",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "proof_origin": "K2: construct a normalized natural morphism, then prove invertibility by finite comparison and a direct Roos/cone conservativity argument. No levelwise faithfulness assertion is used.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,7 +108,18 @@
   "def-weil-rationalization-karoubi",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-integral-rational-qbar-compact-support",
@@ -111,5 +156,15 @@
   "group": "Q49",
   "result": "pass",
   "note": "Read node, Stacks 0F7J, BS 6.7.6/6.7.7/6.1.13 as cited, all 12 stmt_deps and the side dependency declarations (CompactSupportFiniteAction, CompactSupportCoefficientAction, PurCompactSupport incl. recordedIdentification, FiniteFieldDatum, Pair/inclusion). Hypotheses exact: D.k = alg. closure of the finite field, l prime with l != p, Omega in independent universe v, X/Y/Z finite type with no separatedness over k (qs automatic), f/g separated finite type, cf/cg/cfg universally quantified. Conclusions: integral ∃! with the 0F7J proper/open tower (V, b, c, p_Y, a=bc, Gamma = open adjunct of inverse Lambda) and normalized refinement independence; a qualifying tower with refinements always exists and the IsIso witnesses always hold; rational ∃! = localization of the integral component; Qbar ∃! on Pair with component inclusion E0 of the rational compositor (HEq types agree via obj/finite_eq/value_eq). §1(B) module for def-weil-integral-rational-qbar-compact-support justified: the old identification needs separated bases and finite Tor; the new module re-exports the values and copies the IsRecordedIdentification normalization. Node diffs: item only lean + stmt_deps (+4 landed nodes); dep only lean with note; statements verbatim. No hollow defs, all theorems sorry, docstrings with source/blueprint/proof steps, lines <=100, proper imports, real pro-etale completed coefficients. nt_compile --json on both modules: rc=0 twice, 3.2 s and 8.2 s, no warnings. Non-blocking: general-K0 uniqueness of sfQcqsCompactSupportRealization_existsUnique relies on reductions (fine over F̄_q; restrict to FiniteFieldDatum at stage 3 if it fails); dep record's main declaration is now the realization iso, values re-exported."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261024T224931-L-1831923",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

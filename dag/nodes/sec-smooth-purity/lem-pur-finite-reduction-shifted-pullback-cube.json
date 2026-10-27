@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-finite-reduction-shifted-pullback-cube",
+ "kind": "statement",
+ "title": "Finite scalar extension and the shifted ordinary pullback square",
+ "statement": "Fix a purity finite setting P [def-pur-conventions], an integer m with 1 <= m <= P.level, its actual derived quotient extension R_T and pullback coefficient comparison p_h [def-pur-finite-reduction-comparisons]. For arbitrary schemes X,X prime,Y,Y prime in the same universe, let u:X prime -> X, f prime:X prime -> Y prime, f:X -> Y, v:Y prime -> Y form a Cartesian square. Use the ordinary realization pullbacks F_h=P.finiteReductionPullback h and their square c=F_u F_f -> F_fprime F_v from [def-pur-smooth-pullback-exchange]; let G_h and c_B be the same constructions at level m. For every integer r and every ordinary intrinsic derived object K on Y, the following maps from R_Xprime(F_u((F_f K)[r])) to (G_fprime(G_v(R_Y K)))[r] agree: R of the shift comparison of F_u, then R(c_K[r]), then the shift comparison of R_Xprime, then p_fprime(F_v K)[r], then G_fprime(p_v(K))[r]; and p_u((F_f K)[r]), then G_u of the shift comparison of R_X followed by p_f(K)[r], then the shift comparison of G_u, then c_B(R_Y K)[r]. Shift comparisons are the published exact inverse-image shifts and the scalar-adjoint shifts of def-pur-finite-reduction-comparisons. There are no twists, roots, exceptional inverse images, or restrictions of smoothness, boundedness, constructibility or Tor amplitude.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2 and 4, ordinary pullback coefficient compatibility, including the exact shift comparison"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-pullback-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-sp-constant-scalar-pullback-cube for the actual coefficient quotient. Its scalar extension and scalar/pullback maps are the ring-sheaf ones in the definition of finiteReductionPullbackComparison. Identify the canonical geometric compositor with exact localization using lem-weil-pbc-ringed-square-localization. The unit-preserving raw pullback models of def-pur-finite-reduction-comparisons identify it with the realization compositor: their right mates both restrict sections along the same fibre-product association, so adjunction transposition and the triangle identities give equality. Conjugate the constant-ring cube by these four models. Naturality cancels the models on the internal edges, giving the unshifted ordinary realization cube.",
+   "uses": [
+    "lem-sp-constant-scalar-pullback-cube",
+    "lem-weil-pbc-ringed-square-localization",
+    "def-pur-finite-reduction-comparisons",
+    "def-pur-smooth-pullback-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact ordinary restriction and pullback functors act termwise on cochain complexes. Their comparison and compositor commute with every integer shift, since the same map is applied in degree i+r and both differentials receive the same sign. Their exact-derived localizations preserve this equality. Scalar extension carries precisely the shift that is adjoint to exact restriction; transposing the shift equation for the restriction/pullback comparison makes its inverse scalar mate commute with the composite shifts. Conjugation by the exact-derived raw pullback models retains this equation. Shift the unshifted cube, expand the composite shifts, and use the coefficient/pullback shift equation on u. Naturality of the scalar shift along the geometric square gives exactly the stated five-factor identity. Shift zero, equal coefficient levels, empty schemes and zero objects obey the same equations. No flatness of the quotient map is used.",
+   "uses": [
+    "def-pur-finite-reduction-comparisons",
+    "def-pur-smooth-pullback-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-constant-scalar-pullback-cube",
+  "lem-weil-pbc-ringed-square-localization",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-pullback-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2 and 4, ordinary pullback coefficient compatibility, including the exact shift comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient scalar extension respects pullback composition and commutes with shifts",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, PresheafOfModules.pullbackComp, CategoryTheory.NatTrans.commShiftPullback, CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp, CategoryTheory.NatTrans.PullbackShift.natIsoComp. Inspected the CommShift/Adjunction and sheaf pullback APIs; none states the intrinsic finite quotient square in the published realization coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore. Inspected the CommShift/Adjunction and sheaf pullback APIs; none states the intrinsic finite quotient square in the published realization coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*[Pp]ullback.*[Ss]quare|[Pp]ullback.*[Cc]ommShift",
+   "results": "5 hits: Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/CategoryTheory/Shift/Pullback.lean. Inspected the CommShift/Adjunction and sheaf pullback APIs; none states the intrinsic finite quotient square in the published realization coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with the shifted pullback composition square and its adjunction shift comparison",
+   "results": "8 hits: PolynomialLaw.comp_toFun', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.pullbackComp, CategoryTheory.NatTrans.commShiftPullback, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalars_assoc. Inspected the CommShift/Adjunction and sheaf pullback APIs; none states the intrinsic finite quotient square in the published realization coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionBaseChangeSource",
+  "date": "2026-10-25",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Steps 2 and 4, coefficient compatibility of ordinary pullback composition and exact shifts",
+   "via": [
+    "lem-pur-finite-reduction-base-change-source"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionShiftedPullbackCube",
+  "file": "lean/Sheaf/Paper/FiniteReductionShiftedPullbackCube.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReduction_shiftedPullbackCube",
+  "statement": "theorem finiteReduction_shiftedPullbackCube (P : PurityFiniteSetting.{u})\n    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level)\n    {X X' Y Y' : Scheme.{u}}\n    (u : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (v : Y' ⟶ Y)\n    (sq : IsPullback u f' f v) (r : ℤ) (K : Scheme.proEtaleDerivedCategory Y P.Ring) :\n    (P.finiteReduction m hm hmn X').map\n        (((P.finiteReductionPullback u).commShiftIso r).hom.app\n          ((P.finiteReductionPullback f).obj K)) ≫\n      (P.finiteReduction m hm hmn X').map\n        ((P.finiteReductionPullbackSquare u f' f v sq K).hom⟦r⟧') ≫\n      ((P.finiteReduction m hm hmn X').commShiftIso r).hom.app\n        ((P.finiteReductionPullback f').obj ((P.finiteReductionPullback v).obj K)) ≫\n      (P.finiteReductionPullbackComparison m hm hmn f'\n        ((P.finiteReductionPullback v).obj K)).hom⟦r⟧' ≫\n      (((P.finiteReductionSetting m hm).finiteReductionPullback f').map\n        (P.finiteReductionPullbackComparison m hm hmn v K).hom)⟦r⟧' =\n    (P.finiteReductionPullbackComparison m hm hmn u\n        (((P.finiteReductionPullback f).obj K)⟦r⟧)).hom ≫\n      ((P.finiteReductionSetting m hm).finiteReductionPullback u).map\n        (((P.finiteReduction m hm hmn X).commShiftIso r).hom.app\n          ((P.finiteReductionPullback f).obj K) ≫\n        (P.finiteReductionPullbackComparison m hm hmn f K).hom⟦r⟧') ≫\n      (((P.finiteReductionSetting m hm).finiteReductionPullback u).commShiftIso r).hom.app\n        (((P.finiteReductionSetting m hm).finiteReductionPullback f).obj\n          ((P.finiteReduction m hm hmn Y).obj K)) ≫\n      ((P.finiteReductionSetting m hm).finiteReductionPullbackSquare u f' f v sq\n        ((P.finiteReduction m hm hmn Y).obj K)).hom⟦r⟧'",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T164145-L-962378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T164145-L-962378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

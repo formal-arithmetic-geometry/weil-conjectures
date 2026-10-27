@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-semiabelian-supplied-norm-ampleness",
+ "kind": "statement",
+ "title": "Relative ampleness of the inversion norm of a supplied line",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $p:G\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e$. The addition, inverse and identity are $S$-morphisms satisfying the commutative group identities; separated means that the diagonal is a closed immersion. Assume every geometric fibre is semiabelian: after an algebraically closed residue-field extension $k$, it fits into an exact sequence of fppf sheaves $1\\to\\mathbf G_{m,k}^r\\to G_k\\to A_k\\to1$, where $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$, and $A_k$ is a proper smooth geometrically connected $k$-group scheme. Write $\\eta$ for the generic point of $S$ and $\\iota=[-1]:G\\to G$ for inversion. Let $M$ be an invertible module on all of $G$ [def-sc-invertible-module]. Suppose $M_\\eta$ is ample [def-weil-pbc-ample-invertible-module]. Then $M\\otimes\\iota^*M$ is relatively ample over $S$: for every affine open $W\\subseteq S$, its restriction to $G_W$ is ample. Pullback is tensor inverse image [def-pc-module-pullback] and tensor is the sheaf tensor product [def-pur-sheaf-tensor-product]. No properness of $G_\\eta$ and no symmetry, rigidification or cubical structure on $M$ is assumed. The line $M$ is supplied on all of $G$; this statement makes no assertion about extending a generic line.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "XI Theorem 1.13 and the generic ampleness criterion XI 1.16; compare Moret-Bailly VI 3.1, supplied-line positivity. Original local WANTED. Agent-formulated inversion-norm version with connected semiabelian fibres and no generic properness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=M\\otimes\\iota^*M$. By [lem-weil-pbc-invertible-pullback-tensor](1),(2), $N$ is invertible and $N_\\eta\\simeq M_\\eta\\otimes\\iota_\\eta^*M_\\eta$. Pullback by $\\iota_\\eta$ preserves ampleness directly: it bijects points and sections, and takes every affine nonvanishing section locus to its inverse-image affine open, since $\\iota_\\eta^2=1$. Thus $\\iota_\\eta^*M_\\eta$ is ample by [def-weil-pbc-ample-invertible-module], and [lem-sc-ample-tensor] gives ampleness of $N_\\eta$. Moreover $\\iota^*N\\simeq\\iota^*M\\otimes M\\simeq N$, using composition and tensor symmetry in the first cited node. These formulas do not require $G_\\eta$ proper.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+   }
+  },
+  {
+   "text": "The geometric fibres are connected: in an extension $1\\to Q\\to E\\to A\\to1$ with $Q=\\mathbf G_m^r$, a map from $E$ to the discrete two-point scheme is constant on each geometric coset of the connected torus $Q$. It is therefore $Q$-invariant and descends, by the fppf sheaf quotient property in the given exact sequence, to such a map on $A$. Since $A$ is connected, that map is constant. This rules out a nontrivial clopen decomposition of $E$; nonemptiness follows from its identity. Now choose an affine open cover $\\{W_a\\}$ of $S$ refining the trivializing cover of the invertible module $e^*N$. Invertibility follows from [lem-weil-pbc-invertible-pullback-tensor](1); the trivializing cover is the local rank-one freeness in [def-sc-invertible-module]. Each nonempty $W_a$ is normal integral Noetherian and contains $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+   }
+  },
+  {
+   "text": "Fix one such $W=W_a$ and a trivialization $r:e_W^*N\\simeq\\mathcal O_W$. Apply case (b) of [lem-sfb-semiabelian-cubical-rigidification] to $G_W/W$ and $(N|_{G_W},r)$. The preceding connectedness check supplies its geometrically connected fibre hypothesis, and normality and semiabelian fibres are inherited. It supplies a compatible cube $\\tau$. Consequently $(N|_{G_W},r,\\tau)$ is a cubical rigidified line. Its generic restriction is symmetric and ample by step 1. We will prove ampleness of every residue-field fibre of this supplied cubical line.",
+   "uses": [
+    "lem-sfb-semiabelian-cubical-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+   }
+  },
+  {
+   "text": "Let $s\\in W$ with $s\\ne\\eta$, and put $A=\\mathcal O_{W,s}$. This is a Noetherian local domain, is not a field, and has fraction field $K=\\kappa(\\eta)$: on an integral affine chart it is the localization at the nonzero prime of $s$, so the fraction field does not change. Apply [lem-sfb-local-domain-fg-field-dvr] with $R=A$ and $L=K$. The identity extension $K/K$ is finitely generated (by the empty list). We obtain a DVR $R\\subset K$ with fraction field $K$ dominating $A$. The composite $T=\\operatorname{Spec}R\\to\\operatorname{Spec}A\\to W$ maps its generic point to $\\eta$ and its closed point to $s$. It induces a field extension $\\kappa(s)\\hookrightarrow k_R=R/\\mathfrak m_R$, since $\\mathfrak m_R\\cap A=\\mathfrak m_A$.",
+   "uses": [
+    "lem-sfb-local-domain-fg-field-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PH, lemma-exists-dvr, specialized to L=K."
+   }
+  },
+  {
+   "text": "Form $H=G_W\\times_WT$ and pull back $(N,r,\\tau)$. Smoothness is preserved by [lem-pc-proper-base-change](2), separatedness by [lem-weil-pbc-separated-base-change], and finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). The group operations and their identities pull back by the fibre-product universal property. Every geometric fibre of $H/T$ is a geometric fibre of $G/S$ after a field extension, so it remains semiabelian. Pull back $r$ and $\\tau$ term by term. The tensor and composition comparisons in [lem-weil-pbc-invertible-pullback-tensor](2) identify the resulting cube line with the base change of the old cube line; the permutation and cocycle equalities pull back to equalities. Since $\\operatorname{Frac}(R)=K$ over $W$, the generic pair $(H_K,N_K)$ is exactly $(G_\\eta,N_\\eta)$, not a different generic model. Hence its line is symmetric and ample.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-trait-symmetric-cubical-specialization] to this DVR $R$, group $H/T$, and pulled-back cubical rigidified line. All its hypotheses were verified in step 5, including the symmetric ample generic line. Its conclusion is ampleness of $N|_{H_{k_R}}$. By the fibre-product universal property, $H_{k_R}=G_s\\times_{\\kappa(s)}k_R$, and the line is the scalar extension of $N_s$, using the composition comparison for tensor pullback. This is a special-fibre conclusion only; no unproved relative ampleness on the trait is used.",
+   "uses": [
+    "lem-sfb-trait-symmetric-cubical-specialization",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}k_R\\to\\operatorname{Spec}\\kappa(s)$ is an fpqc cover by [lem-pc-field-extension-fpqc-cover]. Apply [lem-sfb-space-relative-ampleness-fpqc-descent] to the scheme $G_s$ and its specified line $N_s$. Over the field $k_R$, absolute ampleness from step 6 implies relative ampleness: the only affine opens of the field spectrum are itself and the empty open, and the restriction to the empty scheme is ample by its definition. The cited descent theorem therefore gives ampleness of $N_s$ over $\\kappa(s)$. The same affine-open observation converts its relative conclusion back to absolute ampleness. Since $s$ was arbitrary and the generic fibre is ample by step 1, every residue-field fibre over $W$ is ample.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cubical-fibrewise-ample-criterion] over the normal Noetherian affine $W$ to the cube from step 3 and the fibrewise ampleness just established. It gives ampleness of $N|_{G_W}$. Do this for every $W_a$ of step 2. The morphism $p$ is quasi-compact because it is of finite presentation. Therefore [lem-trf-scheme-relative-ample-affine-cover] gives ampleness of $N|_{G_V}$ for EVERY affine open $V\\subseteq S$, not merely the chosen cover. Since $N=M\\otimes\\iota^*M$, this is the required relative ampleness.",
+   "uses": [
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, lemma-characterize-relatively-ample; cubical fibre criterion is the separate cited input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-tensor",
+  "def-sc-invertible-module",
+  "lem-sfb-semiabelian-cubical-rigidification",
+  "lem-sfb-local-domain-fg-field-dvr",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-trait-symmetric-cubical-specialization",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "lem-sfb-cubical-fibrewise-ample-criterion",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "XI 1.13 / 1.16; agent reduction to trait specialization and a fibrewise cubical ampleness criterion. Raynaud original WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an invertible sheaf M on a semiabelian scheme over a normal integral base with ample generic fibre, M tensor inverse pullback M is relatively ample",
+   "results": "{\"t\": \"2026-10-23T19:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"For an invertible sheaf M on a semiabelian scheme over a normal integral base with ample generic fibre, M tensor inverse pullback M is relatively ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"CommRing.Pic.mk_tensor\"], \"digest\": \"379bee77d69ea37a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types and the local PicardGroup source. Ring Picard groups, structure-sheaf localization, affine-space pullbacks, elliptic point negation and convex ample sets do not state this scheme-theoretic semiabelian result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness of the inversion norm of a supplied generically ample line bundle on a semiabelian group scheme over a normal base",
+   "results": "{\"t\": \"2026-10-23T19:53:31Z\", \"tool\": \"leansearch\", \"query\": \"Relative ampleness of the inversion norm of a supplied generically ample line bundle on a semiabelian group scheme over a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupSeminormClass.map_inv_eq_map\", \"CommRing.relPic\", \"Ideal.relNorm_smul\", \"Ideal.relNorm_map_algEquiv\", \"normGroupSeminorm\", \"enorm_inv'\", \"Bornology.IsBounded.inv\", \"norm_inv'\"], \"digest\": \"a8e2af1df58edf5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types and the local PicardGroup source. Ring Picard groups, structure-sheaf localization, affine-space pullbacks, elliptic point negation and convex ample sets do not state this scheme-theoretic semiabelian result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T19:53:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types and the local PicardGroup source. Ring Picard groups, structure-sheaf localization, affine-space pullbacks, elliptic point negation and convex ample sets do not state this scheme-theoretic semiabelian result."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|symmetri.*ample|ample.*generic",
+   "results": "{\"t\": \"2026-10-23T19:53:32Z\", \"tool\": \"grep\", \"query\": \"IsAmple|symmetri.*ample|ample.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types and the local PicardGroup source. Ring Picard groups, structure-sheaf localization, affine-space pullbacks, elliptic point negation and convex ample sets do not state this scheme-theoretic semiabelian result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a smooth connected group over a normal integral scheme is relatively ample if its generic restriction is ample and symmetric",
+   "results": "{\"t\": \"2026-10-23T19:53:36Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible sheaf on a smooth connected group over a normal integral scheme is relatively ample if its generic restriction is ample and symmetric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\"], \"digest\": \"026c4858a8c8cf72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types and the local PicardGroup source. Ring Picard groups, structure-sheaf localization, affine-space pullbacks, elliptic point negation and convex ample sets do not state this scheme-theoretic semiabelian result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-raynaud-generic-ample-symmetrization",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line.",
+   "via": [
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-supplied-norm-ampleness",
+  "worker": "stage1",
+  "summary": "Separated trait special-fibre positivity from the fibrewise-to-relative cubical criterion. Explicitly formed and symmetrized the supplied norm, rigidified locally, chose dominating DVRs with the unchanged fraction field, checked all base-change hypotheses and descended ampleness of the specified fibre line. No extension existence theorem or circular positivity input is used. Two new statement-only nodes, no Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. The current latest direct-image blueprint proof (3) is the ancestor route; this is the supplied-norm positivity prerequisite below the marked-curve/Picard branch. blueprint_refs ancestor returns None, retained as inherited. Whole-blueprint searches for ample, cubical, specialization and semiabelian found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "lem-sc-ample-tensor",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "def-sc-invertible-module",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic line-bundle, base-change, fpqc-descent or affine-cover tool used exactly as stated in the proof; the unit supplies no replacement for this general scheme-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-tensor",
+  "def-sc-invertible-module",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-2668b7f19",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-2668b7f19 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, both new nodes and every cited statement in full. The item statement is unchanged and there is no re-split repair note. Steps: 1. lem-weil-pbc-invertible-pullback-tensor (1),(2), the 01PS ampleness definition with ι_η²=1, and the field clause of lem-sc-ample-tensor give an ample, symmetric N_η. 2. A fppf-quotient argument shows the semiabelian geometric fibres are connected; then take an affine cover trivializing e^*N. 3. Case (b) of lem-sfb-semiabelian-cubical-rigidification gives a unique cube; its hypotheses (normal W, geometrically connected fibres) are checked. 4. The 00PH node with L=K gives a DVR R with Frac R=K dominating O_{W,s}, and s≠η makes O_{W,s} not a field. 5. Smoothness, separatedness and finite presentation are preserved by pc-proper-base-change(2), 01KU and qcqs-permanence(3); semiabelian geometric fibres survive by the def-sfb quantifier; the generic pair equals (G_η,N_η). 6. The new trait node gives ampleness on the special fibre. 7. The 03L7 and 0D3C nodes descend ampleness of the given line N_s to κ(s), and over a field relative ampleness equals absolute ampleness. 8. The new fibrewise criterion and 01VJ give relative ampleness over every affine open. New nodes: lem-sfb-trait-symmetric-cubical-specialization is strictly smaller than the item (DVR base, supplied symmetric cubical line, special-fibre conclusion only) and is not a restated clause. lem-sfb-cubical-fibrewise-ample-criterion is the nonproper group criterion and is distinct from the proper ample-neighbourhood lemmas and from fibrewise-line-locality. lem-sfb-normal-cubical-generic-ampleness and lem-sfb-regular-group-generic-ampleness both have the item in their closure, so citing them would be circular; I verified this on the snapshot, and the delivery has no cycle. Both new nodes are self-contained, record searches (LeanSearch, LeanFinder or Loogle, grep), and are agent-formulated with Raynaud LNM 119 and Moret-Bailly WANTED, since neither book is in the literature tree. Small cases checked: field base, torus-only fibres, G_m×E, toric degeneration, transcendental residue extension. Batch-5 flags: the closures of the rigidification, DVR and fpqc-descent nodes and of 01VJ reach only generic algebraic-space, descent and commutative-algebra helper nodes with trf or pod prefixes. They reach no imported trace-formula or Poincaré-duality statement and no nt-assume or target node, so they are outside the assumptions and accepted. The declared tool_uses are generic and accepted. There is no SGA citation. No fixes."
+ }
+}

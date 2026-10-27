@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-space-lft-smooth-fpqc-locality",
+ "kind": "statement",
+ "title": "Smooth locality and flat descent of local finite type for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces [def-trf-algebraic-space], their fibre products [def-pc-fibre-product] and their field-valued point classes [def-weil-field]. Locally of finite type for an algebraic-space map is tested on compatible etale scheme charts using [def-weil-finite-type-morphism]; smoothness is tested on etale scheme charts using [def-sbc-smooth-morphisms]. The property $\\mathcal P=$ locally of finite type is smooth local on source-and-target: (i) precomposing a locally finite type map with a smooth map preserves local finite type; (ii) smooth base change preserves local finite type; (iii) a map $r:X\\to Y$ is locally of finite type if and only if, for each $x\\in|X|$, there are algebraic spaces $U,V$, smooth maps $a:U\\to X$, $b:V\\to Y$, a point $u\\in|U|$ with $a(u)=x$, and a locally finite type map $h:U\\to V$ with $r a=b h$. Moreover local finite type is fpqc local, and hence fppf local, on the target: if $\\{Y_i\\to Y\\}$ is such a covering, then $r$ is locally of finite type if and only if every $X\\times_Y Y_i\\to Y_i$ is locally of finite type. Coverings of algebraic spaces mean families whose scheme pullbacks are coverings in the corresponding topology; the scheme notions are [def-weil-pbc-fpqc-covering, def-pc-fppf-site].",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06FC (remark-list-local-source-target), item (3), with Tag 06F8 (definition-local-source-target); Tag 041S (lemma-descending-property-locally-finite-type)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First verify fppf source locality for schemes. Let $q_i:T_i\\to T$ be an fppf covering and $f:T\\to Z$ a scheme map. If $f$ is locally of finite type, so is every $fq_i$: local finite presentation implies local finite type, and the latter is closed under composition. Conversely, suppose all $fq_i$ are locally of finite type. Form the scheme $Q=\\coprod_iT_i$. Its component inclusions are open immersions and cover $Q$. Open-source locality of flatness and local finite presentation shows that $q:Q\\to T$ has both properties. The covering condition makes $q$ surjective. Open-source locality of local finite type applied to the component maps shows $fq$ locally of finite type. Apply the scheme flat-lfp source-descent theorem to $q$ and $f$ to obtain local finite type of $f$. This includes $T=\\varnothing$ and the empty covering: $Q=\\varnothing$, and all the local conditions are vacuous.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-a1-lft-flat-lfp-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036O (lemma-locally-finite-type-fppf-local-source), with Tag 02KL (lemma-flat-finitely-presented-permanence)."
+   }
+  },
+  {
+   "text": "The scheme property locally of finite type is etale local on source-and-target by the scheme locality node. Its algebraic-space extension is exactly the etale presentation property, and agrees with the convention in this item. Step 1 verifies the scheme fppf source-locality hypothesis of the transfer lemma. Apply that lemma with $P=$ locally of finite type. Thus for every fppf covering $\\{A_j\\to A\\}$ of algebraic spaces and every $g:A\\to B$, $g$ is locally of finite type if and only if every $A_j\\to B$ is locally of finite type.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-space-fppf-source-locality-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06EW (lemma-locally-finite-type-fppf-local-source), using Tag 06ER (lemma-transfer-from-schemes)."
+   }
+  },
+  {
+   "text": "All maps of algebraic spaces are representable by algebraic spaces: each scheme pullback is an algebraic space by the fibre-product theorem. Hence the representable chartwise calculus applies to them. Smooth maps are locally of finite presentation and therefore locally of finite type. Composition now gives (i), and arbitrary base-change stability of local finite type gives (ii), in particular for a smooth base change. For (iii), the forward implication uses $U=X,V=Y,a=\\mathrm{id}_X,b=\\mathrm{id}_Y,h=r$ and $u=x$. Conversely choose the data in (iii) for every $x$. Each $b_xh_x=ra_x$ is locally of finite type by smoothness of $b_x$ and composition. The smooth family $\\{a_x:U_x\\to X\\}_{x\\in|X|}$ is flat, locally of finite presentation and jointly surjective since $u_x$ maps to $x$; it is an fppf covering. Step 2 gives local finite type of $r$. The empty source uses its empty covering, so no nonemptiness is assumed.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06FC (remark-list-local-source-target), item (3); Tag 06F8 (definition-local-source-target), all three conditions."
+   }
+  },
+  {
+   "text": "For fpqc descent, verify the three hypotheses of the affine-test criterion with $P=$ locally of finite type. First it is closed under finite disjoint unions. The space coproduct theorem gives the finite source and target coproducts, choosing scheme atlases within the fixed universe. The sheaf-coproduct partition theorem says that every scheme test of a component inclusion is an open-and-closed subscheme; hence that inclusion is an open subspace and is etale by the open-chart test. On each source component the union map is its given locally finite type map followed by this etale target inclusion. The chartwise calculus gives local finite type of that composite and, by open-source locality, of the union map. The nullary case is $\\varnothing\\to\\varnothing$: its compatible scheme charts have empty source, and the affine-cover definition of local finite type is vacuous. Thus finite-union closure includes the empty union.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-a1-space-open-chart-tests",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041S (lemma-descending-property-locally-finite-type), hypothesis (1) of Tag 041J; empty-union case explicit."
+   }
+  },
+  {
+   "text": "For affine detection, arbitrary base-change stability gives the forward implication. Conversely suppose every affine scheme base change of $f:X\\to Y$ is locally of finite type. Choose an etale scheme atlas $V\\to Y$ and a scheme atlas $U\\to X\\times_YV$. Cover $V$ by affine opens $V_j$. Each $U_j=U\\times_VV_j$ is an open subscheme of $U$, and is an etale surjective atlas of $X\\times_YV_j$ by etale base change. The chart test and the assumed property over $V_j$ give local finite type of $U_j\\to V_j$. Compose with the open immersion $V_j\\to V$; composition and open-source locality give local finite type of $U\\to V$. The chart test then gives local finite type of $f$. This uses no affine-intersection or quasi-compactness assumption.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-pc-scheme",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041S, hypothesis (2) of Tag 041J, using spaces-morphisms.tex Tag 040Y (lemma-finite-type-local)."
+   }
+  },
+  {
+   "text": "For the remaining hypothesis let $Z'\\to Z$ be flat surjective between affine schemes, and suppose $X\\times_ZZ'\\to Z'$ locally of finite type. Choose a surjective etale scheme atlas $U\\to X$. Its pullback $U'=U\\times_ZZ'\\to X\\times_ZZ'$ is a surjective etale scheme atlas. The chart test over $Z'$ gives local finite type of the scheme map $U'\\to Z'$. The singleton $\\{Z'\\to Z\\}$ is an fpqc covering: the map $g:Z'\\to Z$ is flat, and an affine open $V\\subset Z$ is quasi-compact, so $V=\\bigcup_{k=1}^nD(t_k)$ for finitely many standard opens of the affine scheme $Z$; the standard opens $D(g^*t_k)=g^{-1}(D(t_k))$ of $Z'$ are affine and, $g$ being surjective, their images cover $V$. Scheme fpqc descent therefore gives local finite type of $U\\to Z$. The chart test over $Z$ gives local finite type of $X\\to Z$. With Steps 4 and 5, all hypotheses of the affine-test criterion hold. Applying it proves the asserted equivalence for every fpqc covering in the sense of the criterion; Step 7 shows that the coverings of the item are of this kind.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "lem-sfb-space-fpqc-property-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041S (lemma-descending-property-locally-finite-type), affine faithfully flat reduction and application of Tag 041J."
+   }
+  },
+  {
+   "text": "Finally the coverings of the item are fpqc coverings in the sense of the criterion. For an fpqc covering $\\{Y_i\\to Y\\}$ of the item and a scheme $T\\to Y$, choose surjective etale scheme atlases $E_i\\to Y_i\\times_YT$; the scheme pullback family $\\{E_i\\to T\\}$ is a scheme fpqc covering. Its maps are flat, which is flatness of $Y_i\\to Y$ on etale scheme charts, and for $T$ affine the definition of scheme fpqc coverings applied to the affine open $T$ gives finitely many affine opens of the $E_i$, flat over $T$, whose images cover $T$ and which map to the $Y_i$ over $Y$. Next an fppf covering is fpqc in the same sense. For an affine scheme $T\\to Y$, choose etale surjective scheme atlases $E_i\\to Y_i\\times_YT$. By base change and composition, the maps $E_i\\to T$ are flat and locally of finite presentation; they jointly cover $T$. Thus they form a scheme fppf covering. The finite affine refinement lemma supplies finitely many affine opens in the $E_i$ mapping jointly surjectively to $T$. These maps are flat and factor through the $Y_i$, which is precisely the required standard fpqc refinement. Flatness of $Y_i\\to Y$ is already part of the fppf hypothesis. Consequently Step 6 applies to fppf coverings too. Empty affine tests allow the empty refinement.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-pc-fppf-affine-refinement",
+    "def-pc-fppf-site",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), refinement proof using scheme Tag 022C."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-a1-space-open-chart-tests",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-fppf-source-locality-transfer",
+  "lem-sfb-space-fpqc-property-affine-criterion",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 06FC(3), 06EW, 06ER, 06F8 and 041S; reduction criterion 041J with empty union explicit; spaces-topologies.tex 0DFQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally finite type morphisms of algebraic spaces are smooth local on source and target and descend for faithfully flat covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"DescendsAlong\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFiniteType) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFiniteType.*[Dd]escend|[Dd]escend.*LocallyOfFiniteType|AlgebraicSpace",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"35\", \"text\": \"instance : DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth locality and fppf descent for locally of finite type maps of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [LocallyOfFiniteType (f ≫ g)] : LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": HasRingHomProperty (@LocallyOfFiniteType) RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect finite generation of morphisms of algebraic spaces after smooth surjective source and target charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite type for algebraic space morphisms is smooth local on source and target and fpqc local on target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of being a morphism locally of finite type is multiplicative: if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are morphisms of schemes that are locally of finite type, then their composition $ g \\\\\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Only scheme local finite type, smoothness, and scheme base descent appear. LocalFlatDescent.lean:35-36 gives scheme base descent, not the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of algebraic spaces locally of finite type descend under smooth source coverings and faithfully flat target coverings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Only scheme local finite type, smoothness, and scheme base descent appear. LocalFlatDescent.lean:35-36 gives scheme base descent, not the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"DescendsAlong\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFiniteType) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Only scheme local finite type, smoothness, and scheme base descent appear. LocalFlatDescent.lean:35-36 gives scheme base descent, not the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|LocallyOfFiniteType.*[Dd]escend|[Dd]escend.*LocallyOfFiniteType",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"35\", \"text\": \"instance : DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Only scheme local finite type, smoothness, and scheme base descent appear. LocalFlatDescent.lean:35-36 gives scheme base descent, not the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth commutative charts detect locally finite type maps between algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Only scheme local finite type, smoothness, and scheme base descent appear. LocalFlatDescent.lean:35-36 gives scheme base descent, not the algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-finite-type-calculus",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Finite-type calculus and representable compatibility for stacks. Input to the present split: The local-finite-type property satisfies the hypotheses of smooth chart comparison; this is algebraic-space descent, not stack finite-type composition.",
+   "via": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-lft-smooth-fpqc-locality",
+  "worker": "stage1",
+  "summary": "Proved smooth source-and-target locality by scheme source descent and the general transfer lemma; proved fpqc target locality by checking the general affine criterion, including its necessary empty-union hypothesis, and reduced fppf coverings by affine refinement. Reused existing scheme descent, chart calculus, presentation and atlas nodes. Two generic statement-only nodes, no new clause restatements.",
+  "blueprint": "Current latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), through the inherited alteration/moduli dependency chain ending in stack-finite-type-calculus. This split provides the algebraic-space locality input to smooth chart comparison; no unit route is changed. The ancestor command returns None, so the inherited null ancestor and explicit provenance chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Generic scheme source descent supplies Step 1; no local-unit node states this descent theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Generic scheme fpqc target descent in Step 6, exactly the scheme input in Stacks 041S."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement for a scheme fppf covering in Step 7; the unit has no replacement."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic existence of finite disjoint unions of algebraic spaces in Step 4."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "Generic scheme-test description of coprojections used to identify the component open subspaces in Step 4."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Generic representable-open implies etale test for component inclusions in Step 4."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Fibre products and atlas base change throughout; generic algebraic-space infrastructure."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale composition/base change ensures chart transitions in Steps 5 and 6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-pc-fppf-affine-refinement",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-b63c8770f",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-b63c8770f (reviewer sub-agent of L); spot-checked: Read the whole item, both new nodes, every cited statement, and Stacks 06F8/06FC(3)/06EP/06ER/06EW/041J/041S (spaces-descent.tex), 03MQ/0DFQ (spaces-topologies.tex) and 036O (descent.tex). The statement and stmt_deps are unchanged from side-live, where the item is still unsplit; no repair note, no SGA. New nodes: (1) lem-sfb-space-fppf-source-locality-transfer is 06ER with tau=fppf; its hypotheses and covering notion match, it is true by the 06ER proof, and the empty cover is consistent. (2) lem-sfb-space-fpqc-property-affine-criterion is 041J with hypothesis (1) widened to finite unions including the empty one. The worker's STATEMENT-DISPUTED is confirmed: P=False with id_empty and the empty 03MQ covering is a counterexample to 041J as printed, and the proof's n-fold coproduct needs n=0. Both nodes are general, statement-only, and neither restates the item. Searched dag/nodes for duplicates: lem-trf-lfp-fppf-source-locality, lem-weil-pbc-fpqc-local-on-base-criterion (schemes only) and lem-sfb-space-quasicompact-fppf-local are not duplicates. Steps 1-5 checked; their hypotheses hold, including the empty cases and open-source locality. Two faults, both fixed in the item: (a) Step 6 called {Z'->Z} fpqc only because its image covers Z; added the check that every affine open V of Z is covered by the affine opens g^-1 D(t_k). (b) The item defines coverings of spaces as 'scheme pullbacks are coverings', but Step 6 used the criterion's 03MQ notion without linking the two; added the bridge at the start of Step 7 through def-weil-pbc-fpqc-covering and atlases E_i of Y_i x_Y T, and added that node to Step 7's uses (proof_deps unchanged and equal to the union of uses). Tool uses accepted: scheme lft source descent, scheme fpqc descent of lft, fppf affine refinement, and the generic trf algebraic-space infrastructure. Batch-5: every cited trf/a1/sfb-chartwise node is a definition or a basic algebraic-space foundation (fibre products, coproducts, the coproduct partition, etale permanence), not part of the trace-formula or Poincare-duality proofs, so all are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLftSmoothFpqcLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.locallyOfFiniteType_smooth_local_source_target",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.locallyOfFiniteType_smooth_local_source_target",
+   "AlgebraicGeometry.AlgebraicSpace.locallyOfFiniteType_iff_of_schemeTestCover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLftSmoothFpqcLocality.lean",
+  "statement": "theorem locallyOfFiniteType_smooth_local_source_target {S : Scheme.{u}} : (∀ (X Y Z : AlgebraicSpace S) (a : X ⟶ Y) (f : Y ⟶ Z), MapIsLocally (@Smooth) a → MapIsLocally (@LocallyOfFiniteType) f → MapIsLocally (@LocallyOfFiniteType) (a ≫ f)) ∧ (∀ (X Y V : AlgebraicSpace S) (f : X ⟶ Y) (b : V ⟶ Y), MapIsLocally (@LocallyOfFiniteType) f → MapIsLocally (@Smooth) b → MapIsLocally (@LocallyOfFiniteType) (enlargedFibreProductFst b f)) ∧ (∀ (X Y : AlgebraicSpace S) (r : X ⟶ Y), MapIsLocally (@LocallyOfFiniteType) r ↔ ∀ x : Point X.obj.obj, ∃ (U V : AlgebraicSpace S) (a : U ⟶ X) (b : V ⟶ Y) (h : U ⟶ V) (p : Point U.obj.obj), MapIsLocally (@Smooth) a ∧ MapIsLocally (@Smooth) b ∧ mapPoint a.hom.hom p = x ∧ a ≫ r = h ≫ b ∧ MapIsLocally (@LocallyOfFiniteType) h)",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two theorems together state all three smooth-locality clauses and target locality for both fpqc and fppf covers. Scheme-pullback covers are expanded inline using arbitrary surjective etale scheme atlases; no representability restriction is imposed on the covering maps. Reuses MapIsLocally, Point, mapPoint and the actual sheaf fibre-product projection."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0a091003",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery of returned 29a1e66baf23: snapshot diff shows the Lean module byte-identical and the only item-node change is stmt_dep lem-trf-space-enlarged-etale-ringed-site-model -> def-sfb-space-sheaf-fibre-product. That node is an existing:true definition, landed by NK 2026-10-23 before the base, and owns enlargedFibreProduct/enlargedFibreProductFst (actual sheaf Limits.pullback / pullback.fst, checked in EnlargedEtaleRingedSite.lean:228-238), so H2 is repaired as asked. Re-checked the mathematics: MapIsLocally chart convention for lft and smooth; clauses (i), (ii) with V x_Y X -> V, and (iii) as an iff with Point/mapPoint and a≫r=h≫b, no added surjectivity; hJ restricts to exactly fpqc or fppf; hcover is the atlas-independent scheme-pullback covering convention. Edge cases: empty I forces Y empty, empty X vacuous, index universe w free. lean.statement verbatim, both proofs sorry, docstrings carry source and node steps, no definitions, no pro-etale substitute. Item lean is null in side-live and no other group has landed it. No compile (no file changed). Advisory only: unused private proof-plan imports."
+ }
+}

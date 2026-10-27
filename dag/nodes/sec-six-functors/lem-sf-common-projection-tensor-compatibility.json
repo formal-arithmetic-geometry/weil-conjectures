@@ -1,0 +1,149 @@
+{
+ "id": "lem-sf-common-projection-tensor-compatibility",
+ "kind": "statement",
+ "title": "One shared inclusion tensor comparison preserves the individual compact-support projection mates",
+ "statement": "Fix a finite-field datum $D$, coefficient datum $C$, and $H:\\mathrm{SixFunctorCommonStages}(D,C)$ [def-sf-operation-stages]. Fix a finite coefficient field $E$. Write $B_E(X)$ for its rational stage, $B_\\infty(X)$ for the common-stage category, and $i_X:B_E(X)\\to B_\\infty(X)$ for inclusion [def-weil-algebraically-closed-coefficients]. Write $S_E,T_E,A_E$ and $S_\\infty,T_\\infty,A_\\infty$ for the specified push stages, tensors and exchange data. There exists a single family of natural isomorphisms $t_X:(T_E(X)\\text{ uncurried});i_X\\cong(i_X\\times i_X);(T_\\infty(X)\\text{ uncurried})$ with this property. For every $f:X\\to Y$, every compactification $c$ of $f$, and $K\\in B_E(X)$, $L\\in B_E(Y)$, inclusion of the specified compact-support projection [def-sf-constructible-projection-mates] commutes with these tensor comparisons and the prescribed operation comparisons $H.\\mathrm{commonStageComparison}(E)$. Explicitly, with the source and target endpoint isomorphisms of [lem-sf-rational-projection-tensor-compatibility], $i_Y(\\pi^E_{f,c}(K,L));\\mathrm{target}_{f,c,K,L}=\\mathrm{source}_{f,c,K,L};\\pi^\\infty_{f,c}(i_XK,i_YL)$. Semicolon means composition in displayed order. This concerns only one projection arrow at a time; it assumes no finite-stage coherence law, and asserts no compactification, composition, pentagon or proper-coincidence equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-constructible-projection-mates",
+  "lem-sf-rational-projection-tensor-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical natural tensor comparison independently of f and c, by the finite-stage tensor representative formula and the repeated-stage scalar unit.",
+   "uses": [
+    "def-sf-common-projection-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the specified projection through the proper-image tensor object. Apply the inclusion preservation square for the proper counit factor and the initial support identification.",
+   "uses": [
+    "def-sf-projection-mate-factors",
+    "lem-sf-common-projection-proper-factor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inclusion preservation square for proper image of the open projection and the final support identification. It uses exactly the same canonical tensorator and middle comparison.",
+   "uses": [
+    "lem-sf-common-projection-open-factor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply functoriality to the factorization. Reassociate, replace the open square, reassociate, replace the proper square, and recombine the common factors. This gives exactly the required source/target square.",
+   "uses": [
+    "def-sf-projection-mate-factors"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-projection-tensor-comparison",
+  "def-sf-projection-mate-factors",
+  "lem-sf-common-projection-proper-factor",
+  "lem-sf-common-projection-open-factor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility, with the two proper/open factors made explicit and composed in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of a finite coefficient field into an algebraically closed common-stage category preserves the canonical compact support projection mate with one natural tensor comparison",
+   "results": "Eight unrelated field-embedding, subfield and CompHausLike inclusion hits; no coefficient projection mate theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a projection formula compactification comparison equation along a functor with tensor natural isomorphism",
+   "results": "Eight hits on product comparisons, closed monoidal comparison and Dold-Kan compatibility, but no statement for the prescribed common-stage coefficient inclusion.",
+   "date": "2026-10-26",
+   "verdict": "Generic naturality is available, but does not identify this specified mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.naturality",
+   "results": "msearch returned zero hits (unknown unqualified identifier). Local Mathlib provides the fully qualified naturality used in the completed transport proof.",
+   "date": "2026-10-26",
+   "verdict": "Generic naturality only."
+  },
+  {
+   "tool": "grep",
+   "query": "SixFunctorExchangeComparison|commonProjectionCompactification; common.*[Pp]rojection.*[Cc]ompatib; inclusion.*[Pp]rojection",
+   "results": "msearch grep returned zero hits. Local search found per-square SixFunctorExchangeComparison, ConcreteProjectionFieldDescent (also per-square), the rational analogue RationalProjectionTensorCompatibility, and the component tensorator CommonStageInclusionTensorComparison. None gives a shared tensor natural isomorphism preserving the common-stage mates. Blueprint search for inclusion projection tensor found zero matching nodes.",
+   "date": "2026-10-26",
+   "verdict": "New common-stage local compatibility lemma needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionCompactificationOnStage",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Field-stage transport of the specified projection mate, Compatibility paragraph of thm-sf-pf-field; the local calculation underlying compactification coherence.",
+   "via": [
+    "lem-sf-common-projection-compactification-on-stage",
+    "lem-sf-common-projection-comparison-equations",
+    "lem-sf-projection-field-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionTensorCompatibility",
+  "file": "lean/Sheaf/Paper/CommonProjectionTensorCompatibility.lean",
+  "declaration": "WeilConjectures.commonProjectionTensorCompatibility",
+  "statement": "theorem commonProjectionTensorCompatibility\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C)\n    (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar) :\n    ∃ t : ∀ X : SixFunctorSpace D,\n      Functor.uncurry.obj ((H.coefficientStages E₀).rationalTensor X) ⋙\n          GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀ ≅\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).prod\n          (GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀) ⋙\n          Functor.uncurry.obj (H.commonStageTensor X),\n      ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        (c : Compactification f.hom.left)\n        (K : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar X.obj.left E₀)\n        (L : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar Y.obj.left E₀),\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).map\n            (compactSupportProjectionComponent (H.coefficientStages E₀).rationalExchange\n              f c K L) ≫\n          (target (H.commonStageComparison E₀) t f c K L).hom =\n        (source (H.commonStageComparison E₀) t f c K L).hom ≫\n          compactSupportProjectionComponent H.commonStageExchange f c\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).obj K)\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).obj L)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T182514-L-3564006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T012850-L-2341893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

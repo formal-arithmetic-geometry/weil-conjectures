@@ -185,7 +185,40 @@
   "lemma-weil-pbc-property-iff-acyclicity"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.HasTorsionBaseChange.comp",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation",
+     "lines": [
+      175,
+      187
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.HasInjectiveAcyclicity.comp",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation",
+     "lines": [
+      189,
+      198
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -220,5 +253,32 @@
   "group": "P1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring which is torsion as an abelian group, and\nuse the notions of torsion base change and injective acyclicity over $\\Lambda$\nof [lemma-weil-pbc-cancellation]. Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be\nmorphisms of schemes.\n\n1. If $f$ and $h$ have torsion base change over $\\Lambda$, then so does $hf$.\n2. If $f$ and $h$ are proper and have injective acyclicity over $\\Lambda$, then\n   so does $hf$.",
+  "proof": [
+   {
+    "text": "(1) Since $\\Lambda$ is torsion, every complex of sheaves of $\\Lambda$-modules has\ntorsion cohomology sheaves, so torsion base change over $\\Lambda$ says that the\nderived exchange morphism [def-weil-pbc-derived-exchange] is an isomorphism on\nall of $\\Dplus$. Given a cartesian square for $hf$ along $c:Z'\\to Z$, form the\nbase changes $Y'=Y\\times_ZZ'$ and $X'=X\\times_YY'$; the square for $hf$ is the\nvertical pasting of the square for $f$ along $b:Y'\\to Y$ and the square for $h$\nalong $c$. The exchange morphism of the pasted square is the composite of\n$c^{-1}$-whiskered and $Rh'_*$-whiskered exchange morphisms of the two squares,\nup to the composition isomorphisms of inverse images and of derived direct\nimages (the latter exist because direct images preserve injectives,\n[lem-weil-pbc-direct-image-preserves-injectives]); both are isomorphisms, hence\nso is their composite.",
+    "uses": [
+     "def-weil-pbc-derived-exchange",
+     "lem-weil-pbc-direct-image-preserves-injectives"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) For proper morphisms, injective acyclicity over $\\Lambda$ is equivalent to\ntorsion base change over $\\Lambda$\n([lemma-weil-pbc-property-iff-acyclicity]); $hf$ is proper, so (2) follows from\n(1). This is Stacks Project, Tag 0A4D.",
+    "uses": [
+     "lemma-weil-pbc-property-iff-acyclicity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

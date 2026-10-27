@@ -1,0 +1,288 @@
+{
+ "id": "lem-trf-reduced-inseparable-finite-model",
+ "kind": "statement",
+ "title": "Finite normal models over reduced purely inseparable base changes",
+ "statement": "Let $k$ be a field [def-weil-field], $K/k$ a finite purely inseparable extension [def-pc-field-extension, def-weil-pbc-finite-purely-inseparable-extension], and $W$ a finite-type $k$-scheme [def-pc-scheme, def-weil-finite-type-morphism]. Put $X=W_{\\mathrm{red}}$ [def-weil-pbc-scheme-reduction] and assume $X$ is integral [def-pc-integral-scheme]. Let $f:N\\to X$ be a finite surjective morphism with $N$ integral [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. Let $U\\subseteq X$ be a dense open subscheme such that $f^{-1}(U)\\to U$ is an isomorphism. Put $Y=N\\times_k K$ and $Z=(W\\times_k K)_{\\mathrm{red}}$ [def-pc-base-change, def-weil-pbc-scheme-reduction]. Assume every local ring of $Y$ is an integrally closed domain [def-weil-pbc-normal-ring]. Then $Y$ and $Z$ are integral, $Y$ is normal, and the morphism $Y\\to W\\times_k K$ induced by $f$ has a unique factorization $p:Y\\to Z$ through the reduction immersion, with $p$ finite and surjective. The projection to $W$ induces $q:Z\\to X$; its underlying map is a homeomorphism. The open $V=q^{-1}(U)$ is dense, $p^{-1}(V)$ is dense in $Y$, and $p^{-1}(V)\\to V$ is an isomorphism. In addition the canonical closed immersion $X\\times_k K\\to W\\times_k K$ identifies $(X\\times_k K)_{\\mathrm{red}}$ with $Z$, and the open $U\\times_k K$ of $X\\times_k K$ is reduced and canonically isomorphic to $V$ over $W\\times_k K$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3N (varieties-lemma-normalization-and-change-of-fields), finite-model part of the affine reduced field-change comparison; specialization with a supplied finite model whose field base change is normal."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-integral-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-base-change",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "proof": [
+  {
+   "text": "Write $W_K=W\\times_kK$ and $X_K=X\\times_kK$. By [lem-pc-homeo-pure-insep], the projections $Y\\to N$ and $W_K\\to W$ are homeomorphisms. The reduction immersions $X\\to W$ and $Z\\to W_K$ are homeomorphisms and $Z$ is reduced by [lem-weil-pbc-reduction-universal-homeomorphism]. Thus $Y$ has the nonempty irreducible underlying space of $N$, and $Z$ has that of $X$. Every local ring of $Y$ is a domain by hypothesis, hence has no nonzero nilpotent; $Y$ is reduced by [def-pc-reduced-scheme]. The reduced irreducible characterization in [def-pc-integral-scheme] now makes both $Y$ and $Z$ integral. The asserted normality of $Y$ is precisely its assumed local-ring condition.",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J0 (schemes-definition-reduced), 01J4 (schemes-definition-reduced-induced-scheme); Properties Tag 01ON; purely inseparable homeomorphism as in Morphisms 04DF"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to the reduced source $Y$ and its map to $W_K$, giving $p:Y\\to Z$. Apply it also to the reduced source $Z$ and the projection $Z\\to W$, giving $q:Z\\to X$. These factorizations are unique: a closed immersion is a homeomorphism onto its image with a surjective map of structure sheaves [def-weil-closed-immersion], so both the underlying map and the sheaf map of a factorization are determined by their composite. On spaces the defining equation $i_Xq=\\operatorname{pr}_W i_Z$ expresses $q$ as the composite of the homeomorphisms in step 1 and the inverse of $i_X$. Hence $q$ is a homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (schemes-lemma-map-into-reduction); uniqueness from the definition of closed immersion"
+   }
+  },
+  {
+   "text": "Let $a:X_K\\to W_K$ be the base change of $i_X$. It is a closed immersion by [lem-weil-pbc-closed-immersion-base-change] and is a homeomorphism by the universal-homeomorphism assertion of [lem-weil-pbc-reduction-universal-homeomorphism] applied to $W_K\\to W$. Put $T=(X_K)_{\\mathrm{red}}$ with immersion $j:T\\to X_K$. Both $T$ and $Z$ are reduced. The factorization lemma [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives $b:Z\\to X_K$ with $ab=i_Z$ (the image of $a$ is all of $W_K$), then $c:Z\\to T$ with $jc=b$, and $d:T\\to Z$ with $i_Zd=aj$. Now $i_Zdc=ajc=ab=i_Z$, so $dc=1$. Also $ajcd=i_Zd=aj$, so first cancel $a$ and then $j$ to get $cd=1$; cancellation is the uniqueness argument of step 2. Thus $d$ is the required canonical identification of $T$ with $Z$ over $W_K$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (schemes-lemma-map-into-reduction), applied successively; Morphisms Tags 01QR and 054M"
+   }
+  },
+  {
+   "text": "Let $h=f_K:Y\\to X_K$. By [def-pc-base-change] this is the pullback of $f$ along $X_K\\to X$. Consequently $h$ is finite by [lem-trf-finite-radicial-basechange] and surjective by [lem-weil-pbc-surjective-base-change]. With $c,d$ from step 3, put $\\widetilde p=cp:Y\\to T$. The equations $aj\\widetilde p=abp=i_Zp=ah$ give $j\\widetilde p=h$ by cancellation of the closed immersion $a$. Moreover $d\\widetilde p=dcp=p$ since $dc=1_Z$. These are equations of scheme morphisms, identifying the lift and its composite with $p$.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (morphisms-lemma-base-change-finite) and 01S1 (morphisms-lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "The square with sides $\\widetilde p:Y\\to T$, $h:Y\\to X_K$, $j:T\\to X_K$, and $1_Y$ is cartesian. To verify the universal property, let $S$ be any scheme with maps $u:S\\to Y$ and $v:S\\to T$ satisfying $hu=jv$. Then $j\\widetilde p u=hu=jv$, hence $\\widetilde p u=v$ by cancellation of the closed immersion $j$ as proved in step 2. Thus $u$ itself is the unique map to the upper-left $Y$ with the required composites. It follows that $\\widetilde p$ is the base change of the finite morphism $h$ along $j$, and is finite by [lem-trf-finite-radicial-basechange]. It is surjective because $h=j\\widetilde p$ is surjective and $j$ is bijective on points. The isomorphism $d:T\\simeq Z$ then gives the same properties for $p=d\\widetilde p$.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL (morphisms-lemma-base-change-finite); elementary fibre-product universal property using cancellation of the reduction closed immersion"
+   }
+  },
+  {
+   "text": "The given isomorphism $f^{-1}(U)\\simeq U$ base changes to an isomorphism $h^{-1}(U_K)\\simeq U_K$, where $U_K=U\\times_kK\\subseteq X_K$ [def-pc-base-change]. To see this directly, base change its inverse as well; their composites remain identities. The left side is an open of the reduced $Y$, so its stalks, and hence the stalks of $U_K$, are reduced [def-pc-reduced-scheme]. In the identification $T\\simeq Z$, the inverse image of $U_K$ is $V=q^{-1}(U)$: composing either map to $X$ with $i_X$ gives the projection to $W$, so they agree by uniqueness in step 2. On each affine open $\\operatorname{Spec}A$ of $U_K$, the restriction of $j$ is $\\operatorname{Spec}(A/\\sqrt{0})\\to\\operatorname{Spec}A$ [def-weil-pbc-scheme-reduction]; since $U_K$ is reduced, $\\sqrt{0}=0$. It follows that $V\\simeq U_K$ canonically over $W_K$. Moreover $p^{-1}(V)=h^{-1}(U_K)$, and $p$ on this open is the preceding isomorphism followed by the inverse of $V\\simeq U_K$.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-reduced-scheme",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J0 and 01J4 (schemes-definition-reduced, schemes-definition-reduced-induced-scheme); base change of a specified isomorphism and restriction of the nilradical quotient"
+   }
+  },
+  {
+   "text": "The homeomorphism $q$ carries $V$ to the dense open $U$, so $V$ is dense. Also $U$ is nonempty because $X$ is nonempty and $U$ is dense. Surjectivity of $f$ makes $f^{-1}(U)$ nonempty. It is open in the irreducible space $N$, hence dense (any two nonempty opens in an irreducible space meet). The homeomorphism $Y\\to N$ of step 1 carries $p^{-1}(V)=h^{-1}(U_K)$ to $f^{-1}(U)$, so $p^{-1}(V)$ is dense in $Y$. This proves both density assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (varieties-lemma-normalization-and-change-of-fields), affine reduced comparison; elementary topology after the homeomorphisms already established"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-pc-base-change",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3N (varieties-lemma-normalization-and-change-of-fields), affine reduced comparison; supplied finite-model variant proved using Schemes 0356, Morphisms 01WL/01S1/01QR/054M, and the purely inseparable homeomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let X be an integral finite type scheme over a field k, f N to X finite surjective and an isomorphism over a dense open U. For a finite purely inseparable K over k, if N_K is normal then N_K is integral and maps finitely surjectively to the reduction of X_K, isomorphically over the open corresponding to U.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite normal reduced model or dense-open comparison after purely inseparable field base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsIntegral",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite normal reduced model or dense-open comparison after purely inseparable field base change"
+  },
+  {
+   "tool": "grep",
+   "query": "nilradical.*(finite|pullback)|normal.*purely|purely.*normal|reduc.*base.?change",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite normal reduced model or dense-open comparison after purely inseparable field base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal base change of a finite birational model along a purely inseparable extension is finite birational over the reduction of the base change",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism from a geometrically normal integral scheme after purely inseparable scalar extension factors through the reduced target and remains an isomorphism on the original dense open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no finite normal reduced model or dense-open comparison after purely inseparable field base change"
+  },
+  {
+   "tool": "grep",
+   "query": "purely.*normal|normal.*purely|finite.*reduction|reduction.*finite",
+   "results": "{\"t\": \"2026-10-22T11:05:48Z\", \"tool\": \"grep\", \"query\": \"purely.*normal|normal.*purely|finite.*reduction|reduction.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field normality, normalization functoriality, or general permanence properties; none gives the finite-model, reduction, and dense-open comparison in this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normal models and reductions of schemes under purely inseparable field extensions",
+   "results": "{\"t\": \"2026-10-22T11:05:48Z\", \"tool\": \"leansearch\", \"query\": \"Finite normal models and reductions of schemes under purely inseparable field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.normal\", \"Polynomial.Separable.map_irreducible_of_isPurelyInseparable\", \"isPurelyInseparable_iff\", \"IsPurelyInseparable.inseparable\", \"IsPurelyInseparable\", \"instSubsingletonAlgHomOfIsPurelyInseparable\", \"IsPurelyInseparable.elemReduct\", \"isPurelyInseparable_of_finSepDegree_eq_one\"], \"digest\": \"142e0e4a6760b502\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field normality, normalization functoriality, or general permanence properties; none gives the finite-model, reduction, and dense-open comparison in this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsReduced",
+   "results": "{\"t\": \"2026-10-22T11:05:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\"], \"digest\": \"807c02cc0f65bb91\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field normality, normalization functoriality, or general permanence properties; none gives the finite-model, reduction, and dense-open comparison in this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism isomorphic on a dense open after purely inseparable field base change factors finitely through the reduction when its source becomes normal",
+   "results": "{\"t\": \"2026-10-22T11:05:59Z\", \"tool\": \"leanfinder\", \"query\": \"A finite surjective morphism isomorphic on a dense open after purely inseparable field base change factors finitely through the reduction when its source becomes normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"IsPurelyInseparable.surjective_algebraMap_of_isSeparable\"], \"digest\": \"36e55e514f4f4996\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field normality, normalization functoriality, or general permanence properties; none gives the finite-model, reduction, and dense-open comparison in this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite morphism of integral schemes isomorphic over a dense open, scalar extension to a purely inseparable field with normal source gives a finite surjective morphism to the reduced target, with the same dense open isomorphism",
+   "results": "{\"t\": \"2026-10-22T11:06:26Z\", \"tool\": \"leanfinder\", \"query\": \"Given a finite morphism of integral schemes isomorphic over a dense open, scalar extension to a purely inseparable field with normal source gives a finite surjective morphism to the reduced target, with the same dense open isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"e2063cb743fe1724\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field normality, normalization functoriality, or general permanence properties; none gives the finite-model, reduction, and dense-open comparison in this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationDesc|isFinite_iff_locallyOfFiniteType_of_jacobsonSpace|IsStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-22T11:06:41Z\", \"tool\": \"grep\", \"query\": \"normalizationDesc|isFinite_iff_locallyOfFiniteType_of_jacobsonSpace|IsStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\"], \"digest\": \"b7b1c0536bfceda3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field normality, normalization functoriality, or general permanence properties; none gives the finite-model, reduction, and dense-open comparison in this statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalization-inseparable-base-change",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose X, proof of Theorem 3.5, Step 5: after choosing K, identify the normalized generic fibre after the further purely inseparable extension with the base change of the first normalized model. Extracted finite model and dense-open construction.",
+   "via": [
+    "lem-trf-normalization-inseparable-base-change",
+    "lem-trf-generic-smooth-boundary-preparation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-reduced-inseparable-finite-model",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery 7ef49f0f2cf: re-read every current cited statement and rebase the retained split through deliver.py onto current origin/sheaf-dag. Seven-step proof using existing nodes only. Step 4 now explicitly defines the lift as c p and proves its equations; step 5 proves its cartesian square directly by closed-immersion cancellation, replacing the affine tensor calculation. Statement, ancestry and all logged searches retained; no new nodes or Mathlib leaves. All sixteen remaining step citations match current statements verbatim.",
+  "blueprint": "The inherited ancestor is lem-trf-local-term-locality, Expose X proof of Theorem 3.5 Step 5 as recorded in blueprint.from.place, via generic-smooth-boundary-preparation and normalization-inseparable-base-change. Steps 1-7 supply its finite-model/reduced-field-change subargument. The current main-20261015 ancestor states locality and has no proof text; the precise preparation argument is recorded in the created-node ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic scheme-theoretic tool for reductions and base change; no statement of sk-i-curve-zero replaces this input, and the trace-formula preparation route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic tool for reductions and base change; no statement of sk-i-curve-zero replaces this input, and the trace-formula preparation route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme-theoretic tool for reductions and base change; no statement of sk-i-curve-zero replaces this input, and the trace-formula preparation route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme-theoretic tool for reductions and base change; no statement of sk-i-curve-zero replaces this input, and the trace-formula preparation route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-f4330b1a7",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-f4330b1a7 (reviewer sub-agent of L); spot-checked: I read the whole item. This re-delivers 7ef49f0f2cf, which was PASSed but not landed. I diffed it field by field against that head. Statement, stmt_deps, source, blueprint, searches and steps 1-3, 6 and 7 are identical. Only steps 4 and 5 changed, plus proof_deps (def-weil-finite-integral-morphism dropped) and the split_report, so this is a real repair, not a re-push (A6). There are no new nodes and no re-split note. I checked the new step 4 directly: p~=cp and a j p~ = a b p = i_Z p = a h, because the map Y->W_K is (i_X f)_K = a f_K. Cancelling the closed immersion a gives j p~ = h, and d p~ = p because dc=1. The new step 5 is the universal property: from hu=jv, cancelling j gives p~u=v, and the lift is u. So p~ is the base change of h along j, finite by the first clause of lem-trf-finite-radicial-basechange, and surjective because j is bijective; p = d p~. This is elementary and correct. I re-read every cited statement in this snapshot: the purely inseparable homeomorphism (Lean-closed), the reduction universal homeomorphism (Lean-closed), the reduced-source factorization (Stacks 0356), the closed-immersion definition, the base-change Mathlib leaves, and the reduced, integral, base-change and reduction definitions. I re-checked the other steps: dc=1 and cd=1 in step 3, qd=pr_X j so p^{-1}(V)=h^{-1}(U_K) in step 6, and density through the irreducible N in step 7. Edge cases: K=k, a nonreduced W, X=Spec k, an empty test scheme, and F_p(t) with K=k(t^{1/p}), which shows the normality hypothesis is needed. Source: Stacks 0C3N does not state this variant, so the agent origin is correct, and there is no SGA. Searching the DAG found only the parent as a related node, and it uses exactly these conclusions. Accepted tool_uses: the generic sk-thm-p1 reduction and factorization nodes; the closed-immersion and surjective base-change entries are Mathlib leaves. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedInseparableFiniteModel",
+  "declaration": "AlgebraicGeometry.reduced_inseparable_finite_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedInseparableFiniteModel.lean",
+  "statement": "theorem reduced_inseparable_finite_model (k K : Type u) [Field k] [Field K] [Algebra k K] [Module.Finite k K] [IsPurelyInseparable k K] (W N : Scheme.{u}) (σ : W ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType σ] [QuasiCompact σ] [IsIntegral W.nilradical.subscheme] [IsIntegral N] (f : N ⟶ W.nilradical.subscheme) [IsFinite f] [Surjective f] (U : W.nilradical.subscheme.Opens) (hU : Dense (U : Set W.nilradical.subscheme)) (hfU : IsIso (f ∣_ U)) (hnormal : ∀ y : ↥(pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))), IsDomain ((pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk y) ∧ IsIntegrallyClosed ((pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk y)) : IsNormalScheme (pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ IsIntegral (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme ∧ ∃ p : (pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⟶ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme, p ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = pullback.fst ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫ f ≫ W.nilradical.subschemeι ∧ p ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.snd σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = pullback.snd ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧ (∀ p' : (pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⟶ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme, p' ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = pullback.fst ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫ f ≫ W.nilradical.subschemeι → p' ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.snd σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = pullback.snd ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) → p' = p) ∧ IsFinite p ∧ Surjective p ∧ ∃ q : (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme ⟶ W.nilradical.subscheme, q ≫ W.nilradical.subschemeι = (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧ IsHomeomorph q.base ∧ Dense ((q ⁻¹ᵁ U) : Set (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme) ∧ Dense ((p ⁻¹ᵁ (q ⁻¹ᵁ U)) : Set ↥(pullback ((f ≫ W.nilradical.subschemeι) ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))))) ∧ IsIso (p ∣_ (q ⁻¹ᵁ U)) ∧ ∃ e : (pullback (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme ≅ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme, e.hom ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = (pullback (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫ W.nilradical.subschemeι ∧ e.hom ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.snd σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = (pullback (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.snd (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧ IsReduced (pullback.fst (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⁻¹ᵁ U).toScheme ∧ ∃ eU : (pullback.fst (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⁻¹ᵁ U).toScheme ≅ (q ⁻¹ᵁ U).toScheme, eU.hom ≫ (q ⁻¹ᵁ U).ι ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = (pullback.fst (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⁻¹ᵁ U).ι ≫ pullback.fst (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫ W.nilradical.subschemeι ∧ eU.hom ≫ (q ⁻¹ᵁ U).ι ≫ (pullback σ (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.snd σ (Spec.map (CommRingCat.ofHom (algebraMap k K))) = (pullback.fst (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⁻¹ᵁ U).ι ≫ pullback.snd (W.nilradical.subschemeι ≫ σ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "IsNormalScheme bundles the asserted integrality of Y with its local-ring normality. Equalities after both pullback projections encode equality over W_K; the uniqueness clause for p is among all factorizations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2897cac72",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read item node, all 12 stmt_dep records, module (identical to packet; lean.statement verbatim in file), IsNormalScheme def (IsIntegral ∧ stalks integrally closed domains), side-live node diff (only lean + added landed stmt_dep def-sbc-normal-dominant-galois, allowed by brief l.177). Every hypothesis/conclusion matches: finite purely inseparable via Module.Finite+IsPurelyInseparable, finite type LOFT+QC, X=W.nilradical.subscheme, Y/Z via Limits.pullback, inline normal-ring stalk hypothesis, unique p (unconditional uniqueness over all factorizations) finite surjective, q pinned by q≫iX equation and IsHomeomorph, V and p⁻¹V dense, IsIso p∣_V, e and eU with equations over W_K, U_K reduced. No extra hypotheses; universe u forced by Spec K. Edge cases K=k, nonreduced W, U=X, empty excluded by integrality. No defs, only sorry, docstrings with source/blueprint and 7 steps, no duplicate declaration. No compile run (no files changed)."
+ }
+}

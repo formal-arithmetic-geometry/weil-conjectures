@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-etale-line-power-comparison",
+ "kind": "statement",
+ "title": "Etale tensor-power comparison preserves canonical products and the first-power unitor",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $h:X'\\to X$ an etale morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and $L$ a module sheaf on $X$ [def-weil-sheaf-of-modules-category]. Let $A$ be a commutative unital homogeneous algebra on the actual powers $P_d=L^{\\otimes d}$ [def-trf-etale-module-evaluation-tensor-powers, def-trf-etale-graded-module-algebra], with the canonical products and unit of [def-trf-etale-power-product-normalization]. Let $D$ be a homogeneous algebra on $(h^*P_d)_d$ whose products and unit on each chart scheme are exactly the restrictions of those of $A$. There exist a homogeneous algebra $A'$ on the actual powers of $h^*L$, isomorphisms $\\theta_d:h^*P_d\\simeq(h^*L)^{\\otimes d}$, and a homogeneous algebra homomorphism $D\\to A'$ with degree maps $\\theta_d$, such that $A'$ has all canonical chart, product and unit normalizations. In degree one $\\theta_1$ followed by the canonical first-power unitor equals the restriction of the original first-power unitor. There is no direct-image, coproduct or evaluation assertion in this lemma.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL, lemma-tensor-product-pullback and its preceding tensor universal property; spaces-descent.tex Tag 0D3C, lemma-descending-property-ample, the power algebra and the maps psi_d."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-etale-module-evaluation-tensor-powers",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-etale-power-product-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Localize the sheaf tensor comparison on scheme charts. It keeps pure tensor factors and commutes with the sheafification units. Equality on pure tensors gives equality on overlaps by the bilinear universal property, so the comparisons glue and pass through the small-site equivalences. Degree zero is the identity on regular functions, and degree one uses the unitors and the equivalence unit. Iterate the binary comparison to obtain every theta_d. The inverse comparisons supply the inverses.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-sfb-space-small-ringed-model",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport D along theta to construct A′ and its products and unit. This preserves the algebra laws and makes theta an algebra homomorphism. To check canonical products, compute both maps on local tensors: both concatenate the same factors and multiply the same regular-function coefficients. In degree zero this is multiplication by a regular function. The assumed sectionwise restriction identities for D and canonical formulas for A identify these products with canonical products on the actual restricted powers. Extend equality by the sheaf tensor universal property and uniqueness through sheafification. The degree-one construction is the required unitor equation.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-presheaf-modules-sheafification",
+    "def-trf-etale-power-product-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-sfb-space-small-ringed-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-weil-presheaf-modules-sheafification",
+  "def-trf-etale-power-product-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL and preceding tensor universal property; expanded rank-one and normalized tensor-power argument in Step 6 of lem-trf-graded-pushforward-etale-restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ordinary commutative graded algebra on sheaf tensor powers of locally free rank one modules and etale restriction tensor power comparison",
+   "results": "OK 8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.Etale.baseChange; Algebra.Etale.exists_subalgebra_fg; KaehlerDifferential.tensorKaehlerEquivBase; Algebra.FormallyEtale.instTensorProduct; KaehlerDifferential.isBaseChange_of_formallyEtale.",
+   "date": "2026-10-26",
+   "verdict": "No match: these are algebraic etaleness or differential-module base changes, not canonical power algebras or normalized module-sheaf tensor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPowNat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-26",
+   "verdict": "No match; tensorPowNat is a source-library construction."
+  },
+  {
+   "tool": "grep",
+   "query": "(tensorPowNat|canonical.*[Pp]ower|[Pp]ower.*canonical)",
+   "results": "OK 15 hits: divided power algebras, formal power series, power bases, ZMod unit powers, TensorAlgebra.ToTensorPower, TensorPower.Symmetric, and ExteriorPower. No module-sheaf canonical power algebra or normalized etale comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; tensor-algebra embeddings are not an ordinary commutative algebra of powers of a line sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GradedPushforwardEtaleRestriction",
+  "date": "2026-10-26",
+  "group": "W4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical polarized-descent branch, via lem-trf-algebraic-space-ample-local Step 3: tensor powers in the graded section algebra of Stacks 0D3C; Step 6 of lem-trf-graded-pushforward-etale-restriction. Etale tensor-power comparison preserves canonical products and the first-power unitor",
+   "via": [
+    "lem-trf-graded-pushforward-etale-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.EtaleLinePowerComparison",
+  "file": "lean/Sheaf/TraceFormula/EtaleLinePowerComparison.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_line_power_comparison",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etale_line_power_comparison"
+  ],
+  "statement": "theorem etale_line_power_comparison {X X' : AlgebraicSpace S}\n    (h : X' ⟶ X) (hh : IsEtale h.hom.hom) (L : X.Modules)\n    (A : EtaleGradedModuleAlgebra (evaluationLinePower X L))\n    (hA : HasCanonicalEtalePowerProducts X L A)\n    (D : EtaleGradedModuleAlgebra\n      (fun d ↦ (pullback h hh).obj (evaluationLinePower X L d)))\n    (hmul : ∀ (m n : ℕ) (V : X'.EtaleSite)\n      (s : ((pullback h hh).obj (evaluationLinePower X L m)).val.obj (op V))\n      (t : ((pullback h hh).obj (evaluationLinePower X L n)).val.obj (op V)),\n      D.mul m n V s t = A.mul m n ((etaleMap h hh).obj V) s t)\n    (hunit : ∀ (V : X'.EtaleSite) (a : X'.structureSheaf.obj.obj (op V)),\n      D.unit.val.app (op V) a = A.unit.val.app (op ((etaleMap h hh).obj V)) a) :\n    ∃ (A' : EtaleGradedModuleAlgebra (evaluationLinePower X' ((pullback h hh).obj L)))\n      (theta : ∀ d : ℕ, (pullback h hh).obj (evaluationLinePower X L d) ≅\n        evaluationLinePower X' ((pullback h hh).obj L) d)\n      (thetaHom : D.Hom A'),\n      HasCanonicalEtalePowerProducts X' ((pullback h hh).obj L) A' ∧\n      (∀ d, thetaHom.degree d = (theta d).hom) ∧\n      ((theta 1).hom ≫ (gradedPowerOneIso X' ((pullback h hh).obj L)).hom =\n        (pullback h hh).map (gradedPowerOneIso X L).hom)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-724b9",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261026T083436-L-2354896",
+  "kind": "interface",
+  "note": "independent cc review: Relocated defs in EtalePowerProductNormalization vs the clone's item module (byte-identical); item node vs the clone (only proof/proof_deps/proof_origin/lean changed); new lemma statements vs their nodes and the EtaleGradedModuleAlgebra/IsLineModule definitions"
+ }
+}

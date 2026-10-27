@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-dolbeault-sheaf-data",
+ "kind": "definition",
+ "title": "Coordinate-normalized Dolbeault sheaf data on a varying-dimensional analytic atlas",
+ "statement": "Let $M$ be a topological space with a finite-dimensional complex analytic atlas $A$, with dimension allowed to vary, as in [def-sfb-smooth-analytic-data]. For an open $U$, a coordinate tensor family assigns a complex-valued continuous real alternating $k$-tensor at each point of $U$ in each chart, for every $k\\geq0$. A smooth family has real $C^\\infty$ coefficients in charts and satisfies the cotangent pullback law under the complex Jacobian of each transition map. It has integer type $(p,q)$ if it is zero outside exterior degree $p+q$ and outside $0\\leq p,q\\leq n$ in an $n$-dimensional chart, and the sum of insertion of $Jv=iv$ in its arguments is multiplication by $i(p-q)$. A holomorphic $p$-form is a smooth type-$(p,0)$ family whose coordinate tensor coefficients are complex analytic. Dolbeault sheaf data consist of sheaves $\\mathcal A^{p,q}$ and $\\Omega^p$ of complex vector spaces [def-weil-sheaf-of-modules-category], with injective evaluations whose ranges are exactly these respective families and which preserve linear combinations and restrictions; the inclusion $\\Omega^p\\to\\mathcal A^{p,0}$ is the identity on these tensors. The sheaf morphisms $\\bar\\partial:\\mathcal A^{p,q}\\to\\mathcal A^{p,q+1}$ and $\\partial:\\mathcal A^{p,q}\\to\\mathcal A^{p+1,q}$ are normalized by requiring their sum to be the ordinary real coordinate exterior derivative. The holomorphic derivative $d_{\\mathrm{hol}}:\\Omega^0\\to\\Omega^1$ is normalized by the complex derivative of the coordinate scalar function. These are presentations by all sections and maps; square-zero identities, resolution exactness, and cohomological vanishing are not assumed. Global sections is evaluation on $M$, in this complex coefficient category, and its higher cohomology means the right derived functors of this evaluation [def-weil-pbc-sites-and-cohomology]. A universe lift of the complex coefficient field is understood via its canonical ring equivalence with $\\mathbf C$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.C, formulas (3.14)--(3.17), printed p.24; I §3.E, Lemma (3.29), printed pp.28--29; IV §6, Example (6.13), printed p.216; same text read from the online agbook.pdf in the worker sandbox."
+ },
+ "stmt_deps": [
+  "def-sfb-smooth-analytic-data",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of smooth alternating tensors and Dolbeault operators characterized by their coordinate exterior derivative",
+   "results": "OK 8 hits: extDeriv_apply, extDeriv, extDeriv_extDeriv_apply, extDeriv_apply_vectorField, extDeriv_add, extDeriv_extDeriv, extDerivWithin_extDerivWithin_apply, extDerivWithin_congr.",
+   "date": "2026-10-24",
+   "verdict": "no match: these give coordinate exterior differentiation, not a varying-dimensional sheaf presentation, its type spaces and normalized operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousAlternatingMap, extDeriv",
+   "results": "OK 12 hits, including extDeriv, extDerivWithin_univ, Filter.EventuallyEq.extDeriv_eq, Filter.EventuallyEq.extDeriv, extDeriv_extDeriv_apply, extDeriv_constOfIsEmpty, extDeriv_apply, extDeriv_fun_smul, extDeriv_smul, extDeriv_fun_add.",
+   "date": "2026-10-24",
+   "verdict": "no match: coordinate differential calculus only, reused directly"
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|CoordinateForms|IsHolomorphicForm",
+   "results": "OK 0 hits in Mathlib. Direct rg over lean/Sheaf and lean/WeilConjectures finds no CoordinateForms, IsSmoothType, IsHolomorphicForm or DolbeaultSheafData. Existing SmoothAnalytic.Atlas and fixed-dimension ComplexManifold.smoothForms/typeForms read; neither supplies these sheaves and their restriction maps. Blueprint search smooth forms: 0 matches; Dolbeault: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "no matching sheaf presentation; reuse the existing Atlas rather than define a second atlas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dolbeault-acyclic-resolution",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Coordinate sections, type decomposition, restriction, and augmentation.",
+   "via": [
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Complex.DolbeaultSheafData",
+  "declaration": "AlgebraicGeometry.SmoothAnalytic.DolbeaultSheafData",
+  "file": "lean/Sheaf/Geometry/Complex/DolbeaultSheafData.lean",
+  "statement": "structure DolbeaultSheafData {M : Type u} [TopologicalSpace M] (A : Atlas M)",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.SmoothAnalytic.CoordinateForms",
+   "AlgebraicGeometry.SmoothAnalytic.tensorCoordinates",
+   "AlgebraicGeometry.SmoothAnalytic.IsSmoothType",
+   "AlgebraicGeometry.SmoothAnalytic.IsHolomorphicForm",
+   "AlgebraicGeometry.SmoothAnalytic.ComplexSheaves",
+   "AlgebraicGeometry.SmoothAnalytic.DolbeaultSheafData",
+   "AlgebraicGeometry.SmoothAnalytic.complexGlobalSections",
+   "AlgebraicGeometry.SmoothAnalytic.complexGlobalSections_additive"
+  ],
+  "note": "A sectionwise, Jacobian-normalized presentation on the existing varying-dimension Atlas. Smooth and holomorphic tensors have exact range conditions and restriction laws. The lifted complex coefficient field is canonically the usual complex field; the lift aligns the site and module universes. No sheaf, map or differential is chosen from an existence theorem, and no exactness or vanishing is included in the definition."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e53f1453",
+  "group": "Q143",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e53f1453",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-dolbeault-sheaf-data, both modules, Atlas (SmoothAnalyticData), sites/modules dep records, Q72 HermitianDolbeaultData. Hypotheses T2/second-countable/varying-dim Atlas match node, no extras; empty, n=0, excessive/negative degrees and disjoint unions covered. DolbeaultSheafData fully pinned: exact ranges (type eigenvalue i(p-q) checked), linearity, restriction, dbar+del = extDeriv (unique by type), inclusion and d_hol by coordinate formulas; exists D equivalent to forall D since unique up to compatible iso. Conclusions: dbar^2, del^2, anticommutation, QuasiIso from single complex with degree-0 = inclusion (sheaf exactness), rightDerived of global sections zero for r>0 in complex sheaves, negative degrees zero, del = d_hol on functions. Item changed only lean+stmt_deps (new def node added); both statements verbatim; new-node fields per H12; no hollow defs; theorem is the only sorry; docstrings and proof plan present. Notes: coexists with Q72 fixed-dim typeForms (different setting); second reading written by the worker themself, stated openly. No compile (no change)."
+ }
+}

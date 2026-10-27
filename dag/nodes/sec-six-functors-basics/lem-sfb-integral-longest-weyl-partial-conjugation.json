@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-integral-longest-weyl-partial-conjugation",
+ "kind": "statement",
+ "title": "Integral partial conjugation for an actual longest Weyl representative",
+ "statement": "Let $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee)$ be a finite reduced root datum with $\\mathbf Q\\Phi=M\\otimes\\mathbf Q$ and $\\mathbf Z\\Phi^\\vee=M^\\vee$, and $(G,T_{\\mathbf Q}=D_{\\mathbf Q}(M))$ a split rational realization [def-sfb-pinned-split-root-realization]. Fix a base $\\Delta$, rational root parameters $p_\\alpha$, orderings and integral one-sign groups $E_\\pm$ satisfying [lem-sfb-rational-chevalley-one-sign-integrality]. Thus $E_\\pm$ are affine spaces over $\\mathbf Z$ with polynomial group laws, their generic fibres are the ordered root-product unipotent radicals, and $T_{\\mathbf Z}=D_{\\mathbf Z}(M)$ acts by the root characters [def-sfb-ring-diagonalizable-group]. Set $C=E_-\\times_{\\mathbf Z}T_{\\mathbf Z}\\times_{\\mathbf Z}E_+$ [def-pc-fibre-product], with coordinate inclusions of $E_-$, $T_{\\mathbf Z}$ and $E_+$. Suppose the ordered product $c:C_{\\mathbf Q}\\to G$ is an open immersion [def-weil-open-immersion].\n\nThere is an element $n\\in N_G(T_{\\mathbf Q})(\\mathbf Q)$ representing the longest Weyl element $w_0$, characterized by $w_0(\\Phi^+)=-\\Phi^+$, with these properties. There are opens $W,W'\\subset C$, each containing the whole of $E_-$, $T_{\\mathbf Z}$ and $E_+$, and morphisms $f:W\\to C$, $g:W'\\to C$ extending $c^{-1}\\operatorname{Ad}(n)c$ and $c^{-1}\\operatorname{Ad}(n^{-1})c$ on the generic fibres. Their restrictions give group isomorphisms $E_+\\simeq E_-$ and $E_-\\simeq E_+$ and inverse torus automorphisms; the restrictions of $g$ are inverse to those of $f$. In particular the torus maps are the monomial maps for $w_0$ and $w_0^{-1}$. On $f^{-1}(W')\\subset W$ one has $g\\circ f=\\operatorname{id}$, and on $g^{-1}(W)\\subset W'$ one has $f\\circ g=\\operatorname{id}$. The coordinate inclusions just mentioned all send their identities to $e=(0,1,0)$, and $f(e)=g(e)=e$. For empty roots take $n=1$, $W=W'=C$ and $f=g=\\operatorname{id}$. No multiplication between arbitrary opposite-sign elements of $C$, or group scheme containing $C$, is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Lemmas 6.3.8--6.3.9, printed pp.220--222: simple-reflection Gauss calculation and induction on a Weyl word. Agent-corrected formulation: use a reduced expression for the actual longest element, not the erroneous product of each simple reflection once in the paragraph preceding Lemma 6.3.9. The inverse map is conjugation by n^{-1}; the displayed inverse compatibility requires that inverse, even where the source repeats n. Read online; WANTED local copy. No Stacks tag states this root-coordinate input."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-rational-chevalley-one-sign-integrality",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose a word for an element carrying $\\Phi^+$ onto $-\\Phi^+$. Here is the finite argument, avoiding the incorrect source word. The simple-reflection subgroup is finite by [lem-sfb-finite-root-datum-weyl-group]. Choose $w$ in it maximizing $|w\\Phi^+\\cap(-\\Phi^+)|$. A simple reflection $s_a$ permutes $\\Phi^+\\setminus\\{a\\}$: its formula changes only the $a$ coefficient in the base, so a positive root other than $a$ still has a positive coefficient elsewhere; reducedness treats roots supported only on $a$. If $w^{-1}a$ is positive, left multiplication by $s_a$ therefore increases the count by one, impossible. Thus every $w^{-1}a$ is negative. Since positive roots are nonnegative combinations of simple roots, $w^{-1}\\Phi^+\\subset-\\Phi^+$, hence equality by cardinality, and $w\\Phi^+=-\\Phi^+$. Call this element $w_0$ and choose a finite simple-reflection word for it. Minimality of the word is unnecessary.",
+   "uses": [
+    "lem-sfb-finite-root-datum-weyl-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.9, corrected longest-element choice; elementary finite maximization argument in place of the source misprint."
+   }
+  },
+  {
+   "text": "For each letter use [lem-sfb-integral-simple-reflection-gauss-chart], writing $h_i=F_{a_i}$ on $V_{a_i}$; order the letters so $w_i=s_{a_i}\\cdots s_{a_1}$ and $w_r=w_0$. Set $D_0=C$, $H_0=\\operatorname{id}$ and recursively $D_i=D_{i-1}\\cap H_{i-1}^{-1}(V_{a_i})$, $H_i=h_iH_{i-1}$ on $D_i$. These are open domains and morphisms by composition and inverse images. Inductively $D_i$ contains $T_{\\mathbf Z}$ and both $E_\\pm$, and $H_i$ maps these last two isomorphically onto $C_{w_i(\\pm\\Phi^+)}$: at $i=0$ these are exactly $E_\\pm$; at the next step the chart's support clause contains the whole intermediate coordinate subscheme in $V_{a_i}$ and identifies its image with the next one. This verifies domain containment as schemes, including every special fibre. The torus remains in every domain because each $h_i$ is the monomial reflection. Set $W=D_r$, $f=H_r$ and $n=n_{a_r}\\cdots n_{a_1}$. The chart identifies each $n_a$ with its simple reflection, so $n$ represents $w_0$, and the generic composite is $c^{-1}\\operatorname{Ad}(n)c$.",
+   "uses": [
+    "lem-sfb-integral-simple-reflection-gauss-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.9, printed p.222: explicit domain and coordinate-support induction, using Lemma 6.3.8."
+   }
+  },
+  {
+   "text": "Construct the inverse without identifying $n$ and $n^{-1}$. A map for $n_a^{-1}$ is $h_a^3$ on $V_a\\cap h_a^{-1}(V_a)\\cap(h_a^2)^{-1}(V_a)$, with the powers understood only on their recursive domains. The rank-one chart states $n_a^2=a^\\vee(-1)$; because $a^\\vee$ is a group homomorphism, $n_a^4=a^\\vee(1)=1$. Thus $h_a^3$ is generically conjugation by $n_a^{-1}$. Its three support isomorphisms send $C_P$ successively onto $C_{s_aP},C_P,C_{s_aP}$, so its full domain contains $C_P$ for every such $P$, and also the torus. Apply the recursion of Step 2 to these inverse-letter maps in reverse order. It gives $W'$ containing $E_\\pm,T_{\\mathbf Z}$ and $g:W'\\to C$ generically equal to $c^{-1}\\operatorname{Ad}(n^{-1})c$.",
+   "uses": [
+    "lem-sfb-integral-simple-reflection-gauss-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.9, p.222: reverse inverse word using the fourth-power consequence of the rank-one chart."
+   }
+  },
+  {
+   "text": "Since $w_0\\Phi^+=-\\Phi^+$, the final support schemes in Step 2 are exactly $E_\\mp$. Thus $f$ and $g$ restrict to isomorphisms of the two one-sign schemes, and to monomial torus automorphisms for $w_0,w_0^{-1}$. These restrictions preserve multiplication: both sides of each homomorphism diagram agree over $\\mathbf Q$ by conjugation, and [lemma-nagata-ext-scheme-theoretically-dominant-separated] gives equality over $\\mathbf Z$. Its hypotheses hold: $C$ is affine, with Laurent-polynomial coordinate ring, so separated; all relevant domains are opens of products of affine spaces and split tori over $\\mathbf Z$, whose coordinate rings inject into their rationalizations. Their generic fibres are therefore scheme-theoretically dense. The same cited uniqueness applies on $f^{-1}(W')\\subset W$ to $gf$ and the inclusion into $C$, and on $g^{-1}(W)\\subset W'$ to $fg$ and the inclusion, proving both stated inverse identities. Since the subgroup images lie wholly in $W,W'$, these identities make the subgroup restrictions inverse group isomorphisms.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.9, p.222: flat generic-fibre equality, expanded using the separated-target uniqueness lemma (Stacks Tag 01RH)."
+   }
+  },
+  {
+   "text": "Each coordinate inclusion sends its identity to $(0,1,0)$ by the one-sign identity in [lem-sfb-rational-chevalley-one-sign-integrality]. Every simple chart fixes this section by [lem-sfb-integral-simple-reflection-gauss-chart], and hence $f(e)=g(e)=e$. If $\\Phi$ is empty, the spanning condition forces $M=0$; take $n=1$, $W=W'=C$ and $f=g=\\operatorname{id}$. All equations then are identities on $\\operatorname{Spec}\\mathbf Z$. Every construction above uses only the given one-sign laws, torus actions and the rank-one charts; it requires no opposite-sign law on $C$.",
+   "uses": [
+    "lem-sfb-rational-chevalley-one-sign-integrality",
+    "lem-sfb-integral-simple-reflection-gauss-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.9, identity section and empty-root boundary case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-root-datum-weyl-group",
+  "lem-sfb-integral-simple-reflection-gauss-chart",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-sfb-rational-chevalley-one-sign-integrality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Lemmas 6.3.8--6.3.9, pp.220--222, with explicit coordinate-support word induction, corrected longest word and inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by a representative of the longest Weyl element extends to a partial integral morphism on the big cell containing both unipotent radicals",
+   "results": "8 hits; inspected returned signatures/descriptions: RootPairing.GeckConstruction.ωConj, RootPairing.GeckConstruction.ωConj_mem_of_mem, RootPairing.GeckConstruction.ωConj_toFun, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff, RootPairing.weylGroup, RootPairing.weylGroupCorootRep, RootPairing.range_weylGroup_coweightHom",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct integral root subgroup laws or partial conjugation on a reductive group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a rational big cell Weyl conjugation map over the integers by rank one Gauss formulas",
+   "results": "8 hits; inspected returned signatures/descriptions: RootPairing.GeckConstruction.ωConj, RootPairing.GeckConstruction.f, RootPairing.GeckConstruction.e, RootPairing.GeckConstruction.ω, ModularGroup.lcRow0Extend_apply, RootPairing.GeckConstruction.ω_mul_f, RootPairing.weylGroup.ofIdx, ModularGroup.lcRow0Extend_symm_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct integral root subgroup laws or partial conjugation on a reductive group scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral partial conjugation by the longest Weyl element on a rational split reductive group big cell",
+   "results": "8 hits; inspected returned signatures/descriptions: RootPairing.GeckConstruction.ωConj_toFun, CoxeterSystem.IsReflection.conj, CoxeterSystem.isReflection_conj_iff, RootPairing.GeckConstruction.ωConj, RootPairing.GeckConstruction.ωConj_mem_of_mem, LinearMap.conjugate_apply, ConjAct.ofConjAct_inv, ConjAct.instDivInvMonoid",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct integral root subgroup laws or partial conjugation on a reductive group scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "longest.{0,30}weyl|weyl.{0,30}(conjugation|birational)",
+   "results": "0 hits; inspected returned signatures/descriptions: ",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct integral root subgroup laws or partial conjugation on a reductive group scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Group\"",
+   "results": "1 hits; inspected returned signatures/descriptions: AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct integral root subgroup laws or partial conjugation on a reductive group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by a longest Weyl representative extends over the integers to open neighborhoods of the positive and negative unipotent groups in the big cell",
+   "results": "8 hits: RootPairing.GeckConstruction.ωConj_mem_of_mem, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff, eventually_forall_conj_nhds_one, comap_conj_nhds_one, RootPairing.range_weylGroup_coweightHom, RootPairing.range_weylGroup_weightHom, Subgroup.isRegularAtInfty_of_neg_one_mem. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "longest.{0,30}[Ww]eyl|[Ww]eyl.{0,30}(conjugation|birational)",
+   "results": "0 hits: . Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"weylGroup\"",
+   "results": "12 hits: RootPairing.weylGroup, RootPairing.reflection_mem_weylGroup, RootPairing.weylGroup.ofIdx, RootPairing.weylGroup_toSubmonoid, RootPairing.range_weylGroupToPerm, RootPairing.weylGroupRootRep, RootPairing.weylGroupToPerm, RootPairing.weylGroupCorootRep. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral partial conjugation on the open cell of a split reductive group by Weyl group representatives",
+   "results": "8 hits: LinearMap.sumOfConjugates, RootPairing.weylGroup, ConjAct.instMulDistribMulAction, LinearMap.sumOfConjugates_apply, LinearMap.conjugate_apply, CoxeterSystem.isReflection_conj_iff, CoxeterSystem.IsReflection.conj, RootPairing.GeckConstruction.ωConj. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one Gauss decomposition extends Weyl conjugation as a rational map over the integers on a reductive root cell",
+   "results": "8 hits: RootPairing.GeckConstruction.ωConj, RootPairing.GeckConstruction.ωConj_mem_of_mem, RootPairing.GeckConstruction.ωConj_toFun, RootPairing.GeckConstruction.f, RootPairing.GeckConstruction.ωConj_invFun, RootPairing.GeckConstruction.e, RootPairing.GeckConstruction.ω, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff. Read returned signatures; root-pairing reflections and matrix Lie-algebra conjugation do not give integral scheme charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-integral-birational-law",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Section 6.3, Proposition 6.3.4, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13 and the following paragraph, equation (6.3.5), printed pp.214--227; root-cell construction and smooth birational envelope before fibral semisimplicity; Section 6.3, Proposition 6.3.4 and the opposite-root normalization after Remark 6.3.5, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13, printed pp.215--226; rational rank-one identities in Theorem 4.2.6(1), equation (4.2.1), and Corollary 5.1.9(3). The partial root-cell law, before adjoining translates or forming its group envelope. Supporting input: Longest-Weyl partial conjugation before the partial multiplication construction.",
+   "via": [
+    "lem-sfb-chevalley-integral-birational-law",
+    "lem-sfb-chevalley-birational-integral-envelope",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-longest-weyl-partial-conjugation",
+  "worker": "stage1",
+  "summary": "Retained the corrected statement; extracted the simple-reflection Gauss chart and support compatibility as one strictly smaller input. Wrote the finite longest-element choice, recursive domains through whole one-sign groups, inverse word and generic-fibre uniqueness explicitly. All new searches are logged.",
+  "blueprint": "Nearest imported ancestor is null in the existing ancestry record. The existing from.place traces det-thm-sf-ctf-stability-direct-images (3); this split realizes its recorded longest-Weyl partial-conjugation prerequisite through simple-reflection Gauss charts.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Separated-target equality on scheme-theoretically dense generic fibres; a generic scheme tool, not a replacement for the root-coordinate construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-627b4d245",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-627b4d245 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-integral-simple-reflection-gauss-chart and every cited statement. No local copy of Conrad's Reductive group schemes exists, so I fetched the PDF read-only and read printed pp.219-222 (Lemmas 6.3.6, 6.3.8 with (6.3.4), and 6.3.9). Both source corrections are right. First, the product of the simple reflections is not w_0 (in type A2, s_a s_b has order 3). Second, f' must be conjugation by n^{-1}, not n. Step 1 is a correct counting argument: a maximizing w with some w^{-1}a positive gives a contradiction, then cardinality finishes it, using the finite Weyl group node. Step 2 sets up the induction explicitly, and the support clause keeps the whole of E_± in each domain. Step 3: n_a^4=1 makes h_a^3 conjugation by n_a^{-1}, applied in reverse order. Step 4 applies the Nagata uniqueness lemma's dominant-morphism form to Z-flat domains with separated affine target C. Step 5 is elementary. I checked the new node by hand in SL2 with the one-sign node's signs: n_a=[[0,1],[-1,0]], n_a^2=a^∨(-1), and the chart locus is d=1+vuχ_a(t), as in Conrad. I proved the support clause independently by a weight/closed-subset argument, and tested it on A1, the mixed-sign A2 system P=s_aΦ^+, and characteristics 2 and 3. The new node is statement-only and self-contained, with B1-B9 satisfied and no duplicate. rank-one-normalized-gauss-chart and split-root-subgroup-weyl-calculus both need a reductive group over the base, so neither duplicates it, and it is strictly smaller than the item. Batch-5 flag: both flagged citations (finite-root-datum-weyl-group, pinned-split-root-realization) reach the trace-formula chapter only through lem-trf-smooth-fpqc-base-descent. That is a Mathlib leaf (Stacks 02VL, smoothness descends along fpqc covers) and part of neither assumption, so both citations are outside the assumptions. I accept the Nagata lemma as a tool_use. No SGA source is used. No changes."
+ }
+}

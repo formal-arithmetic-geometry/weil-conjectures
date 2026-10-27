@@ -1,0 +1,436 @@
+{
+ "id": "lem-sfb-space-global-sections-amplitude",
+ "kind": "statement",
+ "title": "Finite amplitude of unbounded quasi-coherent global sections",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category], and its full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ of objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Assume $X$ is quasi-compact and quasi-separated: every open cover of $|X|$ admits a finite subcover and the absolute diagonal is quasi-compact. Let $R\\Gamma(X,-):D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ be derived module global sections computed using K-injective resolutions [def-pur-ringed-site-zeroth-hypercohomology]. There exists an integer $N\\geq0$, depending only on $X$, such that for every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and every integer $t$ the following hold: if $\\mathcal H^i(E)=0$ for $i>t$, then $H^mR\\Gamma(X,E)=0$ for $m>t+N$; if $\\mathcal H^i(E)=0$ for $i<t$, then $H^mR\\Gamma(X,E)=0$ for $m<t$. The first implication allows $E$ to be unbounded below, and the second allows $E$ to be unbounded above. No bound on the Krull dimension of $X$ and no Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08F7, lemma-application-nice-K-injective, part (3), applied to module global sections; the existence of a finite cohomological bound on quasi-coherent sheaves is spaces-cohomology.tex Tag 072C, lemma-vanishing-quasi-separated. Lower bound also follows from derived.tex Tag 05TC, lemma-negative-vanishing. This is the global-sections amplitude used in the proof of Tag 09MB."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\Gamma(X,-)=\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal O_X,-)$ as in [def-pur-ringed-site-zeroth-hypercohomology]. This is additive. Kernels of module sheaves are sectionwise by [def-weil-sheaf-of-modules-category], so a section family of a kernel is precisely a section family sent to zero. Thus $F$ preserves kernels and is left exact [def-sp-left-exact-additive]. The product universal property gives $F(\\prod_nM_n)=\\prod_nF(M_n)$: a map from $\\mathcal O_X$ to a product is exactly a family of maps to its factors. This argument does not require $X$ to be an object of its small etale site.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, lemma-application-nice-K-injective, hypotheses (1)-(2); elementary verification for global sections"
+   }
+  },
+  {
+   "text": "Choose $C\\geq1$ from [lem-sfb-space-qcoh-cohomology-finite-bound]. The module category is Grothendieck by [prop-pur-kinjective-resolutions-exist]; $\\operatorname{Ab}$ is the category of $\\mathbf Z$-modules and is Grothendieck by [lem-weil-pbc-ring-modules-grothendieck-abelian]. For a quasi-coherent $M$ and $p\\geq C$, [lem-sfb-ringed-site-global-module-abelian-cohomology] gives $H^p(R\\Gamma(X,M[0]))\\cong H^p(X_{\\mathrm{et}},M_{ab})=0$. By [lem-sp-kinjective-computes](2), the left side is $R^pF(M)$ computed by injective module resolutions. Thus the finite-bound hypothesis of 08F7 holds for this $F$ and this one $C$, uniformly in $M$.",
+   "uses": [
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-sfb-ringed-site-global-module-abelian-cohomology",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072C, lemma-vanishing-quasi-separated; module/abelian global comparison is sites-cohomology.tex Tag 03FD; bounded-below injectives are K-injective by derived.tex Tag 070J"
+   }
+  },
+  {
+   "text": "Set $N=C-1\\geq0$. If $\\mathcal H^i(E)=0$ for $i>t$, apply [lem-sfb-space-product-preserving-derived-functor-upper-bound] with its $N$ equal to $C$, its $b=t$, and $F=\\Gamma(X,-)$. Steps 1-2 verify left exactness, countable-product preservation and $R^pF(M)=0$ for $p\\geq C$ on all quasi-coherent modules. Its derived functor is our $R\\Gamma$, since both are computed on K-injective resolutions. It yields $H^mR\\Gamma(X,E)=0$ for $m\\geq t+C$, equivalently for $m>t+N$. Its statement imposes no lower bound on $E$.",
+   "uses": [
+    "lem-sfb-space-product-preserving-derived-functor-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F7, lemma-application-nice-K-injective, part (3) with a=-infinity"
+   }
+  },
+  {
+   "text": "If $\\mathcal H^i(E)=0$ for $i<t$, [def-sbc-standard-tstructure-derived-category] represents $E$ by a bounded-below complex $L$. Choose its bounded-below injective K-injective resolution by [lem-sc-bounded-below-injective-resolution]. The bounded-below derived functor and our unbounded $R\\Gamma$ are both represented by $F(I)$ for that same resolution. Apply [lem-weil-pbc-derived-functor-negative-vanishing] with $v=F$, $b=t$ and the Grothendieck categories established in step 2. It gives $H^mR\\Gamma(X,E)=0$ for $m<t$. No upper bound is used, and this implication is independent of $C$, so the same $N$ serves both clauses.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC, lemma-negative-vanishing, part (1); bounded-below injective resolutions and Tag 070J identify this with the K-injective computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-left-exact-additive",
+  "lem-sfb-space-qcoh-cohomology-finite-bound",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sfb-ringed-site-global-module-abelian-cohomology",
+  "lem-sp-kinjective-computes",
+  "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08F7, lemma-application-nice-K-injective, part (3); finite bound from spaces-cohomology.tex Tag 072C and lower bound from derived.tex Tag 05TC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomolog.*dimension|derived.*global.*bound|AlgebraicSpace",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any qcqs algebraic space there is N such that derived global sections sends D QCoh at most b to at most b plus N and sends at least a to at least a",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.Γ_obj",
+     "SheafOfModules.IsQuasicoherent.casesOn",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.preservesLimit_rightOp_Γ",
+     "AlgebraicGeometry.preservesColimit_Γ",
+     "AlgebraicGeometry.AffineScheme.Γ_preservesLimits",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"QuasiCompact\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections on a quasi compact quasi separated algebraic space have finite cohomological amplitude on all unbounded complexes with quasi coherent cohomology",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.isGE_Q_obj_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent unbounded hypercohomology has a uniform upper shift bound on a quasi compact quasi separated algebraic space",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_iff",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isZero_of_isGE",
+     "DerivedCategory.isZero_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic cohomology bounds, ordinary scheme sections, or unrelated notions; none states this algebraic-space assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space has a uniform finite bound on cohomology of all quasi coherent modules",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.?coherent.*(vanish|bound)|cohomolog.*dimension",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"QuasiCompact\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on a quasi compact quasi separated algebraic space have uniformly bounded higher cohomology",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.isQuasicoherent",
+     "SheafOfModules.IsQuasicoherent.casesOn",
+     "SheafOfModules.QuasicoherentData.I",
+     "SheafOfModules.IsQuasicoherent",
+     "SheafOfModules.QuasicoherentData.mk",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.QuasicoherentData.ctorIdx"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived global sections of quasi coherent complexes on a quasi compact quasi separated algebraic space have finite upper amplitude and preserve lower cohomological bounds",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.instIsLEObjSingleFunctor",
+     "DerivedCategory.IsGE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ii]sLE|[Ii]sLE.*rightDerived|AlgebraicSpace|[Cc]ohomological[Dd]imension",
+   "results": {
+    "hits": 9,
+    "top": [
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections sends unbounded quasi coherent complexes with cohomology at most t to cohomology at most t plus N on a qcqs algebraic space",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj",
+     "AlgebraicGeometry.AffineScheme.Γ_preservesLimits",
+     "SheafOfModules.IsQuasicoherent.recOn",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher etale cohomology of quasi coherent structure modules on one quasi compact quasi separated algebraic space vanishes above one integer independent of the module",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.Modules.instAbelian",
+     "Algebra.etaleLocus_eq_compl_support",
+     "DerivedCategory.isZero_of_isGE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-ext-window",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections.",
+   "via": [
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-global-sections-amplitude",
+  "worker": "stage1",
+  "summary": "Kept the statement and all inherited metadata. Verified global sections directly preserves kernels and products; added only the ordinary quasi-coherent sheaf bound of 072C. Converted it to module-derived vanishing through the existing global 03FD comparison and K-injective computation, applied the existing 08F7 upper-bound theorem with C=N+1, and proved the lower clause using 05TC on the same bounded-below K-injective resolution. No circular use of the affine-chart bound or space pushforward bound.",
+  "blueprint": "Realizes the inherited support for det-thm-sf-ctf-stability-direct-images proof (3), via 09MB and 08F7. The latest blueprint direct-images proof was read. The ancestor tool returns null (existing created.item chain reaches a declaration name rather than a DAG id); inherited null ancestry and via list are preserved. New input serves the finite quasi-coherent cohomological-bound sentence recorded in the item blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small-ringed-site module categories are Grothendieck, needed for the generic bounded-below derived computation."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Abelian groups are integer modules, so this supplies the target Grothendieck hypothesis."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Identifies classical right derived functors on a module with the K-injective unbounded computation on that module in degree zero."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "The standard derived t-structure supplies a bounded-below representative from cohomological lower boundedness."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Supplies a single bounded-below K-injective resolution computing both bounded-below and unbounded derivation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic right-derived lower-bound preservation, with no upper boundedness assumption; no algebraic-space argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sp-kinjective-computes",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-18e86447a",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-18e86447a (reviewer sub-agent of L); spot-checked: I read the item's four steps, the new node, every cited statement and the sources: Stacks 072C (spaces-cohomology l.1168), 08F7(3) (spaces-perfect l.480) and 05TC(1) (derived l.5497). The item is 08F7(3) for F=Γ=Hom(O_X,−) with N=C−1, plus 05TC. Step 1 is genuinely elementary: Γ is left exact and preserves countable products by universal properties. Step 2 gets C≥1 from the new node. It then uses 03FD (lem-sfb-ringed-site-global-module-abelian-cohomology) and lem-sp-kinjective-computes(2) to give R^pΓ(M)=0 for p≥C on quasi-coherent M. Step 3 applies the split, proved lem-sfb-space-product-preserving-derived-functor-upper-bound, which carries the 08F7 R lim work; every hypothesis checks and it gives vanishing for m≥t+C. Step 4 uses a bounded-below K-injective resolution and lem-weil-pbc-derived-functor-negative-vanishing. No proof_dep closure reaches the item. The new node is a correct 072C restatement with C=max(1,·). Small cases: X empty gives C=1; X affine gives C=1, N=0; M[r] gives the right sign. It is not a restated clause of the item. It is not a duplicate: the 072C grep finds only the affine-chart node, which depends on the item; 0A4R needs finite dimension; 0720 is quasi-coherence only. Batch-5 flags: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, and the upper-bound node reaches sec-trace-formula only through algebraic-space foundations. None of this is a step of the trace formula or Poincaré duality, so all three are accepted. from.node=null is inherited from the base node. Tool uses (generic homological algebra from pur/sp/pbc/sbc/sc) are accepted. No SGA. Live still has the item unsplit and there is no repair note."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceGlobalSectionsAmplitude",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.globalSections_finiteAmplitude",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceGlobalSectionsAmplitude.lean",
+  "statement": "theorem globalSections_finiteAmplitude {S : Scheme.{u}} (X : AlgebraicSpace S) [CompactSpace (Point X.obj.obj)] (hqs : X.IsAbsolutelyQuasiSeparated) [HasDerivedCategory.{w} X.SmallModules] : ∃ N : ℤ, 0 ≤ N ∧ ∀ (E : X.DerivedQCoh) (t : ℤ), ((∀ i : ℤ, t < i → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj E.obj)) → ∀ m : ℤ, t + N < m → IsZero ((ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, w} X.smallEtaleModelTopology X.smallStructureSheaf).obj (E.obj⟦m⟧))) ∧ ((∀ i : ℤ, i < t → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj E.obj)) → ∀ m : ℤ, m < t → IsZero ((ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, w} X.smallEtaleModelTopology X.smallStructureSheaf).obj (E.obj⟦m⟧)))",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed equivalent small ringed model and D_QCoh; degree m hypercohomology is the recorded H0 RΓ applied to E[m]. The added statement dependencies are already landed definitions, not a change to the accepted mathematical statement or split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-025aee2b5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Item lem-sfb-space-global-sections-amplitude matches node and Stacks 08F7(3)/072C/05TC clause by clause: S:Scheme.{u}, X:AlgebraicSpace S, D(O_X)=X.DerivedModules on the landed small ringed model (equivalence in universe u), E:X.DerivedQCoh (D_QCoh of modules), qc = CompactSpace (Point X.obj.obj), absolute qs = IsAbsolutelyQuasiSeparated (0AHR, no qs on S), RΓ = recorded ringedSiteZerothHypercohomologyOfUniverses.{u,u,u,w} (H0∘R Hom(O,-)) on the small model with the same HasDerivedCategory.{w} binder; H^m RΓ(E)=H0RΓ(E⟦m⟧); ∃N:ℤ,0≤N before ∀E t; both implications with strict inequalities and no opposite bound; no Noetherian/dimension hypothesis. Edge cases (empty/affine X, zero E, negative t/m, non-qs base) covered. Item diff vs side-live = lean + 3 added stmt_deps that already landed with Lean records (allowed by brief-stage2 §5); all other node files identical; lean.statement verbatim; name new; no line >100, autoImplicit false, imports exist (proof-dep imports allowed); docstrings carry source, blueprint id and 4 proof steps; sorry only, no defs; searches recorded; both report sections present; no pro-etale substitute. No compile reproduced (no file changed). Advisory only: small-ringed-model and point-classes owners are cited only through other nodes, not listed directly in stmt_deps."
+ }
+}

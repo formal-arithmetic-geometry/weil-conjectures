@@ -1,0 +1,159 @@
+{
+ "id": "def-pur-canonical-tate-scalar-comparisons",
+ "kind": "definition",
+ "title": "Normalized finite realization and scalar Tate comparisons",
+ "status": "split",
+ "statement": "Fix the unshifted Tate complexes [def-pur-canonical-tate-complex-comparisons] and their completed comparisons [def-pur-canonical-tate-completed-comparisons]. The finite ordinary pullback has a unique comparison with intrinsic realization normalized on the actual adjunction unit. Completed integral scalar extension of a Tate line along a finite coefficient extension is uniquely normalized by its completion map and ordinary scalar/root line map. Finite quotient scalar extension is uniquely normalized on pure root tensors. Integral-to-finite reduction on the flat single line has invertible derived counit and the specified signed root-line reduction comparison. Define the rational pullback/product and the finite, integral and rational square conjugations from these maps, without changing their representative choices.",
+ "stmt_deps": [
+  "def-pur-canonical-tate-complex-comparisons",
+  "def-pur-canonical-tate-completed-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Canonical roots-of-unity Tate factors and their tensor, coefficient and pullback comparisons in the source-of-purity composite."
+ },
+ "proof": [
+  {
+   "text": "For finiteRealization_existsUnique, specialize openSquarePullbackModel_existsUnique to the coefficient quotient at exponent n+1. Its ordinary pullback and actual adjunction unit are definitionally the finiteModulePull and finiteModuleSection in this module; it supplies the displayed section normalization and uniqueness.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "def-weil-frobenius-coefficient-twists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For integralScalarLine_existsUnique, invert the canonical scalarCompletionIso on the complete integral twisting object, then compose the ordinary exact-functor single comparison with single(twistLineScalarIso). Cancellation of the invertible completion map proves both the required equation and uniqueness.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-integral-twist-base-change",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For integralReductionCounit_isIso, specialize the K-flat counit clause of scalarReductionDerivedExistence to the existing integralGood single-complex theorem.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing completed and ordinary line comparisons to define the finite and rational pullback/product maps and their square conjugations. The finiteScalarSheaf_existsUnique statement remains its original named hole, with its source and full scalar/root proof description retained. All scalar and realization declarations are relocated verbatim.",
+   "uses": [
+    "def-pur-canonical-tate-complex-comparisons",
+    "def-pur-canonical-tate-completed-comparisons",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-signed-twist-reduction-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-open-square-exchange",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-integral-twist-base-change",
+  "def-coefficient-twists-detailed",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-canonical-tate-complex-comparisons",
+  "def-pur-canonical-tate-completed-comparisons",
+  "lem-weil-signed-twist-reduction-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "E9: original comparison declarations grouped into a separate module after local definition-opacity and shared-completeness optimizations still left the original file over 60 seconds. No statement, data construction, or mathematical hole added."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product and pullback of single cochain complexes of Tate coefficient sheaves",
+   "results": "HomologicalComplex.tensorObj, HomologicalComplex.tensorHom, SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObj. No normalized Tate comparison package.",
+   "date": "2026-10-27",
+   "verdict": "The existing project declarations are retained; Mathlib supplies categorical infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of complexes concentrated in degree zero is the complex of the tensor product",
+   "results": "No exact normalized root-generator comparison; the proved private orientation helpers implement the single-complex tensor construction.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project comparison route, with unchanged statements."
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Tt]ensor|[Tt]ensor.*[Ss]ingle; rg on lean/WeilConjectures and lean/Sheaf",
+   "results": "The msearch grep of Mathlib found no exact normalized Tate comparison. Project rg finds proved singleTensorLift, singleTensorExtract_lift, singleTensorExtract_injective and rootTensorExtract_pure in OrientationIntegralCoefficientTwists; PositiveRootTensorProduct and IntegralPullbackAugmentationAmbient supply the specialized normalization statements.",
+   "date": "2026-10-27",
+   "verdict": "No new mathematics is introduced by relocating the existing declarations into compilation units."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalTateComparisons",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-tate-datum",
+   "place": "Normalized finite realization and scalar Tate comparisons in the canonical comparison construction.",
+   "via": [
+    "def-pur-canonical-tate-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalTateScalarComparisons",
+  "file": "lean/Sheaf/Paper/CanonicalTateScalarComparisons.lean",
+  "declaration": "WeilConjectures.CanonicalTate.integralScalarLine_existsUnique",
+  "declarations": [
+   "WeilConjectures.CanonicalTate.finiteRealization_existsUnique",
+   "WeilConjectures.CanonicalTate.finiteRealization",
+   "WeilConjectures.CanonicalTate.finitePull",
+   "WeilConjectures.CanonicalTate.rationalPull",
+   "WeilConjectures.CanonicalTate.rationalProduct",
+   "WeilConjectures.CanonicalTate.finiteTau",
+   "WeilConjectures.CanonicalTate.integralTau",
+   "WeilConjectures.CanonicalTate.finiteSquare",
+   "WeilConjectures.CanonicalTate.integralSquare",
+   "WeilConjectures.CanonicalTate.rationalSquare",
+   "WeilConjectures.CanonicalTate.integralScalarLine_existsUnique",
+   "WeilConjectures.CanonicalTate.integralScalarLine",
+   "WeilConjectures.CanonicalTate.rationalScalarLine",
+   "WeilConjectures.CanonicalTate.finiteScalarSheaf_existsUnique",
+   "WeilConjectures.CanonicalTate.finiteScalarLine",
+   "WeilConjectures.CanonicalTate.integralReductionCounit_isIso",
+   "WeilConjectures.CanonicalTate.integralReductionLine"
+  ],
+  "statement": "theorem integralScalarLine_existsUnique\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)] (r : ℕ) :\n    ∃! e : (integralScalarExtension l E L ι X).obj\n        (sfIntegralTwistingObject l E X (r : ℤ)) ≅\n      sfIntegralTwistingObject l L X (r : ℤ),\n      (scalarCompletion l E L ι X).app (sfIntegralTwistingObject l E X (r : ℤ)) ≫\n        e.hom =\n      ((integralOrdinaryScalar l E L ι X).mapDerivedCategorySingleFunctor 0).hom.app\n        (integralTwistLine l E X (r : ℤ)) ≫\n      (DerivedCategory.singleFunctor _ 0).map (twistLineScalarIso l E X L ι (r : ℤ)).hom",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-04037",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T021317-L-2756189",
+  "kind": "interface",
+  "note": "independent cc review: old CanonicalTateComparisons/CanonicalTateArrowNaturality/RationalPurityTraceCoherence (clone == delivery base) block-by-block against the 12 delivered modules; node lean records and stmt_deps against declaration usage; #print axioms of the new proofs and their cited helpers"
+ }
+}

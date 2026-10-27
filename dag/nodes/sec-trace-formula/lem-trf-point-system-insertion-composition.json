@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-point-system-insertion-composition",
+ "kind": "statement",
+ "title": "Coefficient-normalized point insertion compositors on entire strict systems",
+ "statement": "Let $k$ be an algebraically closed field, $\\ell$ a prime invertible in $k$, $E/\\mathbf Q_\\ell$ a finite extension, $R$ its valuation ring, $\\varpi$ a uniformizer, and $A_n=R/\\varpi^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, choose small representatives of $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $h:s\\xrightarrow{\\sim}s$ be any scheme automorphism. Set $B_n=(A_n)_s$ and $\\widehat R_s=\\lim_nB_n$, with projections $\\pi_n$ [def-weil-completed-integral-coefficients]. Let $\\mathscr S_s$ be the abelian category of sequences of $B_n$-module sheaves with $B_{n+1}$-linear transitions $v_n:M_{n+1}\\to\\operatorname{Res}_{B_{n+1}\\to B_n}M_n$; its morphisms commute with these transitions [lem-coef-semilinear-derived-sections]. Write $U:\\mathscr S_s\\to\\operatorname{Tow}(\\operatorname{Mod}(\\widehat R_s))$ for levelwise scalar restriction [lem-coef-derived-system-evaluation-calculus]. Let $F_r=(h^r)^{-1}$ on completed modules, with scalars transported by the canonical coefficient maps $c_{r,\\widehat R}:F_r\\widehat R_s\\xrightarrow{\\sim}\\widehat R_s$, and let $G_r$ be levelwise inverse image on $\\mathscr S_s$ [lem-weil-proetale-isomorphism-inverse-image, def-weil-inverse-image-pullback-comparison]. The same notation denotes their termwise actions on complexes and their exact induced functors on ordinary unbounded derived categories [def-weil-abstract-derived-category]. Write $F_r^{\\mathrm{Tow}}$ for levelwise $F_r$ on completed-module towers. At finite level use the specified isomorphisms $j_{r,M}:F_rM\\xrightarrow{\\sim}(h^r)^*M$, $x\\mapsto x\\otimes1$, of part (a) of the inverse-image comparison.\n\nFor $m\\geq1$, the canonical site compositor induces natural module and whole-system compositors $d_m:F_1F_m\\xrightarrow{\\sim}F_{m+1}$ and $t_m:G_1G_m\\xrightarrow{\\sim}G_{m+1}$. In site-reindexing coordinates they are the identity on every section. For $D=B_n$ and $D=\\widehat R_s$, their coefficient normalization is\n$$c_{m+1,D}\\circ d_{m,D}=c_{1,D}\\circ F_1(c_{m,D}),\\qquad \\pi_n c_{r,\\widehat R}=c_{r,B_n}F_r(\\pi_n).$$\nThere are sectionwise identity natural isomorphisms $b_r:F_r^{\\mathrm{Tow}}U\\xrightarrow{\\sim}UG_r$, compatible with all original transitions, and\n$$b_{m+1,M}\\circ d^{\\mathrm{Tow}}_{m,UM}=U(t_{m,M})\\circ b_{1,G_mM}\\circ F_1^{\\mathrm{Tow}}(b_{m,M}).$$\nThrough $j_r$, the finite compositor is the inverse of the specified module-pullback compositor [lem-weil-pbc-proetale-derived-pullback-composition]; on tensor-unit insertions it sends $(x\\otimes1)\\otimes1$ to $x\\otimes1$.\n\nLet $\\Gamma_\\bullet$ be levelwise final-object sections and scalar restriction to $R$, retaining all transitions [def-trf-coefficient-tower-operations, lem-weil-point-proetale-sections-exact]. For every unbounded strict system complex $M$ and $r\\geq1$, let $u_{r,M}:\\Gamma_\\bullet M\\to\\Gamma_\\bullet G_rM$ be the degreewise restriction along $h^r$, inverse-image colimit insertion, sheafification, and, in the finite pullback presentation, insertion $x\\mapsto x\\otimes1$ [def-weil-frobenius-point-transport, lem-trf-point-sheaf-insertion-calculus]. Then these are natural $R$-linear chain maps of whole towers, and\n$$u_{m+1,M}=\\Gamma_\\bullet(t_{m,M})\\circ u_{1,G_mM}\\circ u_{m,M}.$$\nIn particular, both paths on a transition have value $v_n(x)\\otimes\\rho_n(1)=v_n(x)\\otimes1$, where $\\rho_n:B_{n+1}\\to B_n$ is coefficient reduction, and both commute with differentials. Their localizations $I_r$ satisfy\n$$I_{m+1,C}=\\Gamma_\\bullet(t_{m,C})\\circ I_{1,G_mC}\\circ I_{m,C},\\qquad C\\in D(\\mathscr S_s),$$\nnaturally for every derived system morphism. No cartesianness, normalization, boundedness, constructibility or Tor-amplitude hypothesis on $M$ or $C$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB (lemma-composition-morphisms-sites) and 0H7J (example-constant-sheaf); agent refinement for arbitrary point automorphisms, finite and completed coefficients, whole quotient-linear systems and localization. Blueprint trace-transport Step 1, Global powers; returned item Steps 1-3."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-coefficient-tower-operations",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-frobenius-point-transport",
+  "lem-trf-point-sheaf-insertion-calculus",
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-pur-integral-finite-pullback",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For finite coefficients use uniqueness of the constant-normalized sectionwise comparison. Precompose the candidate composite with the inverse ring compositor; naturality of the constant sheafification unit and normalization of the two coefficient maps show that it fixes constants. For completed coefficients, the defining limit lift proves the projection formula. Project the composition identity to each finite ring, use naturality of the ring compositor and the finite identity, and use limit.hom_ext. This proves CoefficientLaws without an additional hypothesis. Use [lem-weil-proetale-isomorphism-inverse-image], [def-weil-inverse-image-pullback-comparison] and [def-pur-sheaf-inverse-limit].",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-point-system-normalized-comparisons] to CoefficientLaws to obtain the normalized d,t,b,j and their section, restriction, tensor and transition laws. Apply [lem-trf-point-system-strict-insertions] to the section laws to obtain u and its tower composition identity. Degreewise extensionality of the actual complexInsertion construction proves the chain identity from the tower identity. Update only the u field of Maps.",
+   "uses": [
+    "lem-trf-point-system-normalized-comparisons",
+    "lem-trf-point-system-strict-insertions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  },
+  {
+   "text": "The fixed data and exactness theorems are [def-trf-point-system-insertion-data]. Lift each chain insertion through the fully faithful universal property on natural transformations [lem-weil-pbc-localization-universal-property], using the exact derived functors already specified. The liftNatTrans component formula proves its required factorization. To prove composition, compare the natural transformations after precomposing with Q and cancel their invertible factorization maps. The specified derived compositor formula, naturality of insertion and of sections factorization, and the chain composition identity give equality. Localization.natTrans_ext then gives equality on all derived objects and morphisms. Update only I; the other laws do not use that field.",
+   "uses": [
+    "def-trf-point-system-insertion-data",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-sheaf-inverse-limit",
+  "lem-trf-point-system-normalized-comparisons",
+  "lem-trf-point-system-strict-insertions",
+  "def-trf-point-system-insertion-data",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Direct constant-normalization and limit proof; normalized sheaf comparisons and strict insertions split from original steps 1–6; original step 7 made into Lean using liftNatTrans and natTrans_ext."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "point.*insertion|insertion.*compos|quotient.*linear.*compos|pullbackComp",
+   "results": "25 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean. Read the returned types: ordinary pullback composition, adic quotient maps, exact-functor localization and scalar restriction do not state the simultaneous normalized coefficient, strict-transition and insertion composition assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image compositors respect coefficient reduction and point insertion on strict quotient module systems",
+   "results": "8 hits: Submodule.mapQ, Submodule.comap_map_mkQ, Submodule.comapSubtypeEquivOfLe_apply_coe, Submodule.factor_comp_mk, lTensor.inverse_comp_lTensor, Submodule.comap_liftQ, Submodule.liftQ_mkQ, Submodule.isCompl_comap_subtype_of_isCompl_of_le. Read the returned types: ordinary pullback composition, adic quotient maps, exact-functor localization and scalar restriction do not state the simultaneous normalized coefficient, strict-transition and insertion composition assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Read the returned types: ordinary pullback composition, adic quotient maps, exact-functor localization and scalar restriction do not state the simultaneous normalized coefficient, strict-transition and insertion composition assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of point insertion along powers of a scheme automorphism is linear for completed coefficients and compatible with quotient-linear transitions in strict systems",
+   "results": "8 hits: IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.transitionMap_comp_eval, WittVector.factorPowSucc_comp_fontaineThetaModPPow, AlgebraicGeometry.AffineSpace.reindex_over. Read the returned types: ordinary pullback composition, adic quotient maps, exact-functor localization and scalar restriction do not state the simultaneous normalized coefficient, strict-transition and insertion composition assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two successive restrictions and tensor unit insertions give a compositor identity on complexes of varying coefficient module systems and descend to their unbounded derived category",
+   "results": "8 hits: HomologicalComplex.rightUnitor'_inv_comm, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, HomologicalComplex.leftUnitor'_inv_comm_assoc, DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, HomologicalComplex.rightUnitor'_inv, DerivedCategory.singleFunctorIsoCompQ, HomologicalComplex.leftUnitor'_inv_comm. Read the returned types: ordinary pullback composition, adic quotient maps, exact-functor localization and scalar restriction do not state the simultaneous normalized coefficient, strict-transition and insertion composition assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary automorphism of the spectrum of an algebraically closed field, normalized finite and completed coefficient compositors give coherent scalar restriction and point insertion on strict module towers",
+   "results": "8 hits: IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply, galRestrict'_comp, galLift_comp, galRestrict'_galLift, algebraMap_galRestrict'_apply, AlgEquiv.restrictNormal_trans, galRestrict, IsScalarTower.AlgEquiv.restrictNormalHom_comp. Read the returned types: ordinary pullback composition, adic quotient maps, exact-functor localization and scalar restriction do not state the simultaneous normalized coefficient, strict-transition and insertion composition assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Read the returned types; ordinary module pullback composition, scalar restriction and adic module transitions do not state the normalized point-insertion assertion for whole quotient-linear sheaf systems. SheafOfModules.pullbackComp source read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-181.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse image along powers of a point automorphism preserves coefficient reductions and tensor unit insertions on strict systems",
+   "results": "8 hits: PreTilt.coeff_iterate_frobeniusEquiv_symm, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, FormalMultilinearSeries.compChangeOfVariables, WittVector.factorPowSucc_comp_fontaineThetaModPPow, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', PerfectionMap.comp_symm_equiv', AdicCompletion.transitionMap_comp_reduceModIdeal, FormalMultilinearSeries.compChangeOfVariables_blocksFun. Read the returned types; ordinary module pullback composition, scalar restriction and adic module transitions do not state the normalized point-insertion assertion for whole quotient-linear sheaf systems. SheafOfModules.pullbackComp source read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-181.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "point.*insertion|insertion.*compos|pullbackComp",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean. Read the returned types; ordinary module pullback composition, scalar restriction and adic module transitions do not state the normalized point-insertion assertion for whole quotient-linear sheaf systems. SheafOfModules.pullbackComp source read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-181.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural inverse image insertion on strict varying coefficient module towers commutes with composition and descends to unbounded derived categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullbackComp, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, CategoryTheory.MorphismProperty.IsMultiplicative.instInverseImage, CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc. Read the returned types; ordinary module pullback composition, scalar restriction and adic module transitions do not state the normalized point-insertion assertion for whole quotient-linear sheaf systems. SheafOfModules.pullbackComp source read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-181.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient normalized inverse image compositors on completed ring sheaves are compatible with semilinear reduction transitions of entire strict module systems",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.transitionMap_comp_eval, IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.map_val_apply, IsAdicComplete.StrictMono.of_lift. Read the returned types; ordinary module pullback composition, scalar restriction and adic module transitions do not state the normalized point-insertion assertion for whole quotient-linear sheaf systems. SheafOfModules.pullbackComp source read at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167-181.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-power-roos-coherence",
+  "date": "2026-10-22",
+  "group": "Q129"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers, composition sentence: coefficient-normalized strict-system point insertion and its localization (returned coherence Steps 1-3).",
+   "via": [
+    "lem-trf-point-system-power-roos-coherence",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-point-system-insertion-composition",
+  "worker": "stage1",
+  "summary": "Q109 proved the coefficient-normalized system compositor by normalized site reindexing, finite coefficient composition and the completed limit projections; checked original semilinear transitions explicitly, identified the specified tensor compositor, and localized the natural equality of entire towers. Reused existing nodes throughout; no new nodes and no statement changes.",
+  "blueprint": "thm-trf-l-function-euler-product, Step 1 Global powers, composition sentence; supplies the point-insertion part of the returned whole-system power coherence Steps 1-3.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic initial-comma-index normalization of inverse image; fixes the actual graph coprojection under reindexing. No statement of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-trf-site-inverse-image-composition-generators",
+    "why": "Generic canonical site-compositor generator formula; needed to identify the specified compositor, not merely an isomorphism. No statement of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "Generic tensor-generator formula and adjunction normalization for the specified module compositor. No statement of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic scalar-extension isomorphism along a ring-sheaf isomorphism, providing the inverse of the finite unit insertion. No statement of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization fully faithful on natural transformations; carries the actual chain-level identity to every derived system morphism. No statement of the trace-transport unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic normalization of the specified derived compositor by its termwise module comparison. No statement of the trace-transport unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-2b0e0795a",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-2b0e0795a (reviewer sub-agent of L); spot-checked: I read all seven steps and the full statements of all 15 cited nodes; the delivery creates no new nodes and leaves the statement and stmt_deps unchanged, and it is not a re-split order (no repair note, item not in a dropped list). Sources checked: Stacks sites.tex Tag 03CB (lines 2764-2783, the left-adjoint compositor), Tag 0H7J in the tags file, and the blueprint main-20261015 thm-trf-l-function-euler-product, Global powers paragraph. No SGA is cited. Step 1: lem-sfb (1) with W=(s,h^r) gives the reindexing model G(U,h^r u), and its hypothesis holds because an isomorphism is weakly etale; the generator node's composite index (graph with graph gives the graph of h^{m+1}) makes the compositor the identity in these coordinates. Step 2: I recomputed the finite identity c_{m+1}d_m=c_1F_1(c_m) from lem-trf-constant-coefficient-composition with (h,h^m) and d_m equal to the inverse of alpha, and the completed identity by projecting with pi_n, using the definitional clause pi_m c=c_{A_m}g^{-1}(pi_m) and sectionwise limits. Step 3 is elementary and the two scalar actions agree by inverting step 2. Step 4: the hypothesis on the composite coefficient map of the tensor-composition node holds by step 2, its formula sends (x⊗1)⊗1 to d_m(x)⊗1, and the derived composition node specifies the termwise comparison. Step 5 handles the semilinear transitions through underlying abelian maps and balanced tensors, not through A_s-linear naturality. Step 6 is elementary. Step 7 uses exactness plus parts (1)-(3) of the localization universal property, with no claim that evaluations detect equality. Small cases checked: h=id, zero transitions, n=1, repeated powers. Not duplicates: lem-trf-point-transport-composition is only the finite, bounded, Frobenius analogue, and the parent cites the item only in its step 1. The declared tool uses are generic tools and accepted. Minor: the report mentions a citations.json that is not in the commit. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSystemInsertionComposition",
+  "declaration": "WeilConjectures.PointSystemInsertion.pointSystemInsertionComposition",
+  "declarations": [
+   "WeilConjectures.PointSystemInsertion.pointSystemInsertionComposition"
+  ],
+  "file": "lean/Sheaf/Paper/PointSystemInsertionComposition.lean",
+  "statement": "theorem pointSystemInsertionComposition [IsAlgClosed k] (_hl : IsUnit (l : k)) : CoefficientLaws k h l E ∧ ∃ P : Maps k h l E, SectionLaws k h l E P ∧ RestrictionCompositionLaws k h l E P ∧ TensorLaws k h l E P ∧ TransitionLaws k h l E P ∧ StrictInsertionLaws k h l E P ∧ DerivedInsertionLaws k h l E P",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All existing types and definitions are preserved. The fixed constructions and their already-proved support theorems are moved verbatim to Sheaf.Paper.PointSystemInsertionData and publicly re-exported here. Coefficient composition and the derived localization/composition argument are proved directly; the two independent sheaf-level steps have separate nodes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43c48b7a7",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery of H2-returned ec031c41: Lean file byte-identical (sha256 36e34e48); only stmt_deps changed: theorem lem-weil-point-automorphism-restriction-natural replaced by def-trf-point-restriction-coordinates (existing:true owner of pointRestriction* defs, the only decls used; theorem unused), plus advisory def-pur-integral-finite-pullback and def-sf-scalar-reduction-categories-restriction; all three records identical to live, dated 2026-10-21 (on base). Mechanical finding: lem-pur-proetale-module-pullback-composition is genuine, since tensorCompositor uses coefficientModulePullbackComposition = .choose of the node's own pinned ∃! (orientation successive->direct verified via pow_succ), so PASS on that point. Substance as fully reviewed at ec031c41: all clauses pinned, theorems sorry, no hollow data, statement verbatim, report sections present, live item not landed elsewhere. No compile (no file changed); worker reports clean 9.0/10.0 s. Maintainer note: pointSheafReindexCompositor is a plain def inside base theorem stmt_dep lem-trf-point-sheaf-insertion-calculus."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "independent cc review: published PointSystemInsertionComposition.lean vs delivered PointSystemInsertionData.lean (verbatim extraction, only 9 private imports dropped); item proof vs node proof_deps; the two new sorry statements vs the item's existing Section/RestrictionComposition/Tensor/Transition/StrictInsertion conjuncts; sandbox compile of the 4 modules + importer LocalNormalizationStrictRealization + #print axioms"
+ }
+}

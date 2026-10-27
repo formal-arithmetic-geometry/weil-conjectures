@@ -73,16 +73,20 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
  "lean": {
-  "module": "Sheaf.Paper.IntegralStratifiedPerfectCharacterization",
+  "module": "Sheaf.Paper.IntegralCompletedCoefficientTransport",
   "declaration": "AlgebraicGeometry.Scheme.integralDetailedTransport",
   "declarations": [
    "AlgebraicGeometry.Scheme.integralCoefficientULift_exists",
@@ -94,11 +98,12 @@
    "AlgebraicGeometry.Scheme.integralDetailedTransport"
   ],
   "statement": "def integralDetailedTransport\n    (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) ⥤\n      DerivedCategory (pbcModules T\n        (pbcAdicCompletion T (pbcIntegralDatum l E)))",
-  "branch": "newtargets-dag",
-  "by": "NW",
-  "date": "2026-10-21",
-  "existing": true,
-  "note": "Existing projection-normalized quotient, finite-level and completed comparisons, their named construction obligations, and the exact derived restriction. All listed names are declared in this module. This definition node owns them independently of integralStratifiedPerfectCharacterization; no use of that theorem or its geometric hypotheses is made. def-pur-completed-coefficient-presentation-transport reuses these constructors to define the inverse CommRing lift and does not own these original constructors."
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Existing projection-normalized quotient, finite-level and completed comparisons, their named construction obligations, and the exact derived restriction. All listed names are declared in this module. This definition node owns them independently of integralStratifiedPerfectCharacterization; no use of that theorem or its geometric hypotheses is made. def-pur-completed-coefficient-presentation-transport reuses these constructors to define the inverse CommRing lift and does not own these original constructors. Q3 factors the identical declarations into an independent module, publicly reexported by the original item; no construction or signature changes.",
+  "file": "lean/Sheaf/Paper/IntegralCompletedCoefficientTransport.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -115,5 +120,15 @@
   "group": "NW",
   "result": "fix",
   "note": "Re-delivery of the c1fa1440 H2 RETURN. The two theorem stmt_deps are replaced by existing:true definition nodes def-sfb-integral-section-action-transport (IntegralCriterionReductions, 10 decls) and def-sfb-integral-completed-coefficient-transport (IntegralStratifiedPerfectCharacterization, 7 decls). All decls exist in live. check_existing and check_new_node are clean. Composite directions and ∃!-normalized constructions match the source, with no hollow data and no extra hypotheses. The item's statement, proof and signature are unchanged against the returned head and side-live; the only Lean delta is the reuse of integralDetailedTransport, which is the same functor. Substance re-confirmed: hypotheses, the 3 clauses, derived-form iso, uniform Tor interval; edge cases empty X, zero inputs, torsion, char 2. Finding fixed in records only: the new nodes lacked body owners def-sf-scalar-reduction-categories-restriction (scalarReductionSource, needed by both) and def-weil-pbc-adic-lisse-module (adicLisseForget and adicLisseRingSystem, needed by the completed one). fixes/ holds both complete node JSONs with stmt_deps and statement citations added; check_new_node is clean and there is no cycle. No Lean changed, so nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fd479",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261024T015708-L-2438656",
+  "kind": "interface",
+  "note": "independent cc review: integralStratifiedPerfectDetailed proof and the two new proved lemmas against the item node step 5 and the new nodes; moved blocks diffed against live (verbatim except one internal proof step); all 6 delivered modules incl. importer CCPT compiled with lcompile --all; axioms checked (sorryAx only via pre-existing Roos-transport hole)"
  }
 }

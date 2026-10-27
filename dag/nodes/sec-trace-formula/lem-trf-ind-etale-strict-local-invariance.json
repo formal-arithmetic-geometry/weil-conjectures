@@ -18,62 +18,38 @@
  ],
  "proof": [
   {
-   "text": "Choose the affine charts $V=\\operatorname{Spec}B\\subset T$ and $U=\\operatorname{Spec}A\\subset S$ in the hypothesis around the images of $t,s$. Put $H_S=\\mathcal O^{\\mathrm{sh}}_{S,s}$ and $H_T=\\mathcal O^{\\mathrm{sh}}_{T,t}$, using the small pointed-neighbourhood colimits in the strict-localization definition. That definition identifies their spectra with the stated inverse limits. Functoriality says both rings are strictly henselian local, their structural maps $j_S,j_T$ send closed points to the images of $s,t$, and the canonical map is $\\operatorname{Spec}h$ for a local homomorphism $h:H_S\\to H_T$ with $j_S\\operatorname{Spec}h=uj_T$. Both structural maps factor through the chosen affine charts: their inverse images of these opens contain the closed point of the respective local spectrum, and an open containing the maximal ideal of a local ring is the whole spectrum. Indeed a basic neighbourhood $D(f)$ of that point has $f$ outside the maximal ideal, hence $f$ is a unit and $D(f)$ is the whole spectrum. Let $a:A\\to H_S$ and $b:B\\to H_T$ be the resulting ring maps. The displayed structural equality gives $ha=b\\circ(A\\to B)$: both corresponding spectrum maps factor through the open $U$, whose inclusion is a monomorphism; uniqueness of the ring map inducing an affine scheme morphism then gives the equality. Thus $h$ is an $A$-algebra map for precisely these structural algebra structures.",
+   "text": "Choose the local affine opens V and U at the image of the geometric point. Present them by spectra of their global sections using isoSpec, and use proAffineEtale_iff_appTop to make the ring map ind-etale. Composition with the canonical ULift ring equivalences gives its IndEtaleAcrossUniverses formulation. Take h to be Spec.preimage of the canonical strictHenselizationMap; Spec.map_preimage fixes its spectrum exactly. Apply [lem-trf-strict-local-comparison-ind-etale], choose the two chart factorizations, and use its universal clause to obtain ind-etaleness of h, strict henselianity of both rings, and locality of h. The ind-etale-implies-weakly-etale clause of [lem-weil-pbc-ind-etale-stability] is already proved separately upstream as RingHom.IndEtale.weaklyEtale; apply it to the ULift transport and descend weak etaleness using Algebra.WeaklyEtale.ulift_iff. Olivier [thm-weil-pbc-weak-etale-strict-local] makes h bijective, so its ring equivalence gives an isomorphism on spectra [def-weil-affine-spectrum]. Its spectrum is the chosen canonical map, with the structural and evaluation equations of [lem-weil-pbc-strict-henselization-functoriality], on the unchanged small strict-localization model [def-weil-pbc-strict-henselization-limit].",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HX, lemma-describe-etale-local-ring; Tag 03PS, definition-etale-local-rings and following functorial square; algebra.tex Tag 04GU, lemma-strictly-henselian-functorial"
-   }
-  },
-  {
-   "text": "Apply the affine-chart ind-etaleness lemma to $(S,s,U,H_S,a)$ and $(T,t,V,H_T,b)$, with the identity spectrum identifications. Its chart contains the respective geometric point and its required structural-map equality is exactly the factorization in step 1. It gives $A\\to H_S$ and $B\\to H_T$ ind-etale. Since $A\\to B$ is ind-etale by hypothesis, stability under composition makes $A\\to H_T$ ind-etale. Now $H_S,H_T$ are both ind-etale $A$-algebras, and $h$ is the $A$-algebra map checked in step 1. The relative-map clause of ind-etale stability therefore makes $h$ ind-etale, hence weakly etale. This uses no finite-presentation hypothesis on $B$ itself.",
-   "uses": [
-    "lem-weil-pbc-small-strict-henselization-ind-etale",
-    "lem-weil-pbc-ind-etale-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 097K (lemma-composition-ind-etale), 097M (lemma-ind-etale-permanence), 097N (lemma-ind-etale-implies); chart presentation: etale-cohomology.tex Tag 04HX"
-   }
-  },
-  {
-   "text": "The map $h$ is local between local rings, its source $H_S$ is strictly henselian by functoriality, and step 2 proves it weakly etale. The weakly-etale strict-local theorem (Olivier) applies with $A=H_S$, $B=H_T$ and says $h$ itself is an isomorphism. Its inverse induces an inverse of $\\operatorname{Spec}h$, by contravariant functoriality of spectrum. This is the prescribed canonical morphism, rather than an unspecified isomorphism, since $h$ was the functorial map from step 1. It is over $S$ by $j_S\\operatorname{Spec}h=uj_T$; composing this equality with the inverse also verifies that the inverse is over $S$.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-trf-strict-local-comparison-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
     "thm-weil-pbc-weak-etale-strict-local",
-    "def-weil-affine-spectrum"
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-strict-henselization-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 092Z, theorem-olivier"
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 097N, lemma-ind-etale-implies; Tag 092Z, theorem-olivier; returned proof steps 1--3."
    }
   },
   {
-   "text": "For arbitrary $g:S'\\to S$ put $T'=T\\times_SS'$ and take any geometric point $t'$ of $T'$, with projection $s'$ to $S'$. Choose $V=\\operatorname{Spec}B$ and $U=\\operatorname{Spec}A$ as in the original hypothesis around its projection to $T$. Choose an affine open $W=\\operatorname{Spec}C$ about the image of $s'$ inside $g^{-1}(U)$. In $T'$ the intersection of the inverse images of $V\\subset T$ and $W\\subset S'$ is open and contains $t'$. The fibre-product universal property identifies this open with $V\\times_UW$: a map into it is precisely a pair of maps to $V,W$ whose composites to $U$ agree, since $U\\to S$ is a monomorphism. The affine fibre-product lemma identifies it with $\\operatorname{Spec}(B\\otimes_A C)$ and its map to $W$ with the spectrum of $C\\to B\\otimes_A C$. Ind-etale stability under base change makes this ring map ind-etale. Thus $T'\\to S'$ satisfies exactly the original local affine hypothesis at every $t'$, without any finiteness or separation requirement on $g$. Apply the argument of steps 1--3 to this morphism and the geometric point $t'$ (using its same geometric field for $s'$). It gives the required canonical isomorphism of strict localizations after arbitrary base change.",
+   "text": "For an arbitrary g:S′→S, apply the final clause of [lem-trf-locally-ind-etale-base-change-charts] to the spectrum presentations obtained in step 1. This supplies the same local spectrum chart hypothesis for the second projection T×_S S′→S′. Apply the already proved chart-to-isomorphism argument at any geometric point of the pullback. Package its canonical map with its structural and evaluation equations as the required isomorphism. No extra condition is imposed on g or on the geometric field.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-ind-etale-stability"
+    "lem-trf-locally-ind-etale-base-change-charts"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097J, lemma-base-change-ind-etale; schemes.tex Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines)"
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/proetale.tex",
+    "place": "Tag 01JR, lemma-open-fibre-product; Tag 01I4, lemma-fibre-product-affine-schemes; Tag 01JQ, lemma-fibre-product-affines; Tag 097J, lemma-base-change-ind-etale. Synthesis of the returned parent proof, step 4."
    }
   },
   {
-   "text": "Finally let $L=S_{(s)}=\\operatorname{Spec}H_S$ with its canonical structural map $j:L\\to S$. For an affine open $U=\\operatorname{Spec}A$ containing the image of $s$, the local-spectrum argument of step 1 shows that the entire map $j$ factors through $U$. Applying the affine-chart ind-etaleness lemma with the identity $\\operatorname{Spec}H_S=L$ gives $A\\to H_S$ ind-etale. Thus $j$ satisfies the local affine hypothesis at every point of $L$, using the whole affine source $L$ and this one target chart. Functoriality, clause (1), gives the closed geometric lift $\\widetilde s:\\operatorname{Spec}\\Omega\\to L$ of $s$: it is induced by the residue map $H_S\\to\\kappa(s)^{\\mathrm{sep}}\\subset\\Omega$, where the separable closure is taken inside the given geometric field. Apply steps 1--3 to $j$ and $\\widetilde s$. Since $j\\widetilde s=s$, the result is the canonical isomorphism $L_{(\\widetilde s)}\\to S_{(s)}=L$. This proves the localization-again clause for its specified closed geometric point. The inverse-limit construction used throughout is unchanged, being the definition in step 1.",
+   "text": "Write s for the original image geometric point. Choose a spectrum open chart iU:Spec A→S containing its image, and apply [lem-trf-strict-local-comparison-ind-etale] to id_S, s, this same chart on both sides, and id_A, which is ind-etale. The factorization clause and the universal clause give a:A→H_S ind-etale with Spec(a)≫iU=j_S, where j_S is [def-weil-pbc-strict-henselization-structural-map]. Put t=Spec(strictHenselizationPointEvaluation s). Its composite with j_S is s by strictHenselizationClosedLift_over, the geometric-point factorization in [lem-weil-pbc-strict-henselization-functoriality]. Thus iU and the identity chart Spec H_S→Spec H_S satisfy the chart hypothesis for j_S at t. Apply the same chart-to-isomorphism argument once more. This proves IsIso of precisely the canonical strictHenselizationMap j_S t, without replacing it by an arbitrary isomorphism.",
    "uses": [
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-small-strict-henselization-ind-etale",
-    "lem-weil-pbc-strict-henselization-functoriality"
+    "lem-trf-strict-local-comparison-ind-etale",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-structural-map"
    ],
    "elementary": false,
    "source": {
@@ -83,20 +59,20 @@
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-weil-affine-spectrum",
+  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-locally-ind-etale-base-change-charts",
+  "lem-trf-strict-local-comparison-ind-etale",
   "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality",
   "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04HX affine-chart presentation combined with proetale.tex Tags 097J, 097K, 097M, 097N and more-algebra.tex Tag 092Z. This writes the argument using existing DAG tools instead of rebuilding the filtered-colimit proof in algebra.tex Tag 0GIP. G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/proetale.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 04HX affine charts and pointed functoriality, Tags 097J and 097N base change and weak etaleness, and Tag 092Z Olivier. B6, 2026-10-26: Lean assembly of the declared comparison and base-change-chart lemmas, using the existing upstream weak-etaleness API and ULift transport; the identity comparison supplies the structural-map chart."
  },
  "mathlib_searches": [
   {
@@ -200,43 +176,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-trf-ind-etale-strict-local-invariance",
   "worker": "stage1",
-  "summary": "Q51: proved strict-local invariance by identifying the canonical local ring map as a map between ind-etale A-algebras and applying Olivier. Wrote out affine-chart compatibility, arbitrary base-change charts and the closed-geometric-point iteration. Reused all needed existing nodes; no new nodes. Mathematical statement unchanged; added explicit definition references for base change and the structural map. Checked source declarations, Stacks hypotheses, node statements and edge cases; recorded fresh Mathlib searches without discarding inherited ones.",
-  "blueprint": "The normal-cone specialization/strict-local testing input descending from lem-trf-local-term-locality, through lem-trf-trace-specialization, lem-trf-specialization-external-product, lem-trf-good-oriented-nearby-kunneth and lem-trf-oriented-nearby-strict-local-description. Steps 1--3 prove the strict-local geometric comparison, step 4 its arbitrary-base-change use, step 5 the structural-map iteration. This is a generic geometric tool below the unit, not a replacement for its contracting-correspondence argument.",
+  "summary": "NG repair of the 2026-10-21 re-split return: extracted the canonical affine strict-local ind-etale ring comparison (old steps 1--2) and arbitrary-base-change ind-etale charts (old step 4) as two independent statement-only unsplit nodes. Kept the statement verbatim. The parent now assembles these with Olivier and the fully explicit structural-map iteration. All extracted arguments survive verbatim in report.md for the next workers; all new nodes were searched by four tools and a second semantic phrasing. Maintainer reader FIX (2026-10-22): step 3 now obtains the factorization of $j$ through $U$ and ind-etaleness of $a$ from the new ring-comparison node applied to the identity of $S$, so the localization-again step is assembly only.",
+  "blueprint": "Preserves the strict-local testing input below lem-trf-local-term-locality through the unchanged ancestry. New ring-comparison node carries old steps 1--2, parent step 1 carries old step 3; new base-change-chart node carries old step 4, parent step 2 applies it; parent step 3 carries old step 5. No chapter or unit route changes.",
   "tool_uses": [
    {
-    "node": "def-pc-fibre-product",
-    "why": "Supplies the universal property needed to identify the open base-change chart."
-   },
-   {
-    "node": "def-weil-affine-spectrum",
-    "why": "Supplies the contravariant spectrum construction and uniqueness of the ring map of an affine morphism."
-   },
-   {
-    "node": "def-weil-pbc-strict-henselization-limit",
-    "why": "Fixes the small colimit and inverse-limit strict localization used by the item; no trace-unit node defines it."
-   },
-   {
-    "node": "def-weil-pbc-strict-henselization-structural-map",
-    "why": "Fixes the canonical structural morphism for the iteration clause."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-product-affine-spectra",
-    "why": "Supplies the affine tensor-product chart and its projection map."
-   },
-   {
     "node": "lem-weil-pbc-ind-etale-stability",
-    "why": "Supplies composition, relative-map permanence, weak etaleness and arbitrary tensor base change; it is a generic ring tool, not a trace-formula route change."
+    "why": "Only its ind-etale-implies-weakly-etale clause is used for the canonical map, a ring tool absent from the trace unit."
    },
    {
-    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-    "why": "Supplies ind-etaleness of strict-localization rings over the chosen affine charts; no trace-unit statement gives this presentation."
+    "node": "thm-weil-pbc-weak-etale-strict-local",
+    "why": "Olivier converts the local weakly-etale map from a strictly henselian ring into an isomorphism; no trace-unit node supplies it."
    },
    {
     "node": "lem-weil-pbc-strict-henselization-functoriality",
-    "why": "Supplies strict local ring structure, closed geometric lift, and the canonical local ring map with its structural equality; these are generic geometric inputs absent from the trace unit."
+    "why": "Supplies the closed-point image and canonical closed geometric lift for localization again."
    }
   ]
  },
@@ -245,18 +201,17 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-  "lem-weil-pbc-strict-henselization-functoriality"
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "thm-weil-pbc-weak-etale-strict-local"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q51-4d7d75401",
-  "group": "Q51",
+  "reviewer": "NT-cc-NG-50f43e94e",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-4d7d75401 (reviewer sub-agent of L); spot-checked: Read all five steps, cited statements and source passages. Canonical-map compatibility, Olivier’s hypotheses, arbitrary base-change projection and closed-point iteration check out. No new nodes, duplicates, cycles or route changes found. Accepted generic tool uses and concrete checks are recorded in review.md; no fixes needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-50f43e94e (reviewer sub-agent of L); spot-checked: Re-split (human note of 2026-10-21, released 2026-10-22): I checked the base proof (5 steps of 1409/656/616/1210/1089 characters, read from side-live; it matches the report) step by step against the delivery. Old steps 1-2 are now the statement of node A, lem-trf-strict-local-comparison-ind-etale: j_S and j_T factor through U and V (a local spectrum is the only open containing its closed point), h∘a=b∘f because U→S is a mono, a and b are ind-etale (small affine-chart lemma), b∘f is ind-etale (097K), and h is ind-etale (097M); h is a local map of strictly henselian rings by functoriality (1) and (3). Old step 4 is now node B, lem-trf-locally-ind-etale-base-change-charts: x' lies in V', V'≅V×_U W (01JR), ≅Spec(B⊗_A C) (01I4), and C→B⊗_A C is ind-etale (097J). Both statements are true and self-contained. Edge cases tested: u = identity, étale and open immersions, Ω larger than the separable closure, empty T', g⁻¹(U) not affine, non-separated S'. Neither node restates the item, and they are of comparable size (about 2065 and 1210 characters of argument). No duplicates: affine-chart-base-change-iso needs t⁻¹(W) affine, and the small-ind-etale, functoriality and exc strict-local comparison nodes state other facts. Parent step 1 is Olivier (092Z, read from the node's statement; all hypotheses come from node A's statement) plus 097N. Step 2 applies node B. There is no cycle, no SGA, the item is not on the dropped list and live has not changed. One fault, fixed: delivered step 3 re-ran old step 5 almost verbatim (the local-spectrum factorization plus the affine-chart lemma) instead of assembling. That content is node A in the case u=id_S. The fixed step 3 applies node A to id_S, s, V=U, f=id_A (ind-etale by definition), then the closed lift from functoriality (1), then step 1. proof_deps are recomputed: the small-strict-henselization-ind-etale node and its tool_uses entry are dropped, and def-weil-pbc-ind-etale-algebra is added. The parent is now 2570 characters. Tool uses accepted: ind-etale-stability, weak-etale-strict-local (Olivier), strict-henselization functoriality. Maintainer note: lem-weil-pbc-small-strict-henselization-ind-etale and lem-weil-pbc-strict-henselization-affine-chart-ind-etale already have identical statements (not this delivery's fault).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance",
@@ -277,15 +232,26 @@
   "result": "pass",
   "note": "Statement, dependencies, canonical-map clauses, docstrings, edge cases, and compiler evidence checked; no substantive or mechanical findings."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-13fea",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261021T061122-L-1709106",
-  "kind": "interface",
-  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+  "landing": "20261026T091152-L-3317298",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

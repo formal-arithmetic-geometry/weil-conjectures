@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-split-unipotent-torus-absorption",
+ "kind": "statement",
+ "title": "Absorbing a split torus into a split-solvable torus complement",
+ "statement": "Let $k$ be any field [def-weil-field]. Let $U$ be a smooth geometrically connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and assume $U$ is split unipotent: in a faithful finite-dimensional matrix representation all its geometric points are unipotent matrices, and it has a finite descending series $U=U_0\\supset U_1\\supset\\cdots\\supset U_m=1$ of smooth geometrically connected closed $k$-subgroups, each normal in its predecessor, whose fppf quotient sheaves $U_i/U_{i+1}$ are represented by $\\mathbf G_{a,k}$ [def-sc-group-scheme-subgroup, def-sc-gm-ga]. An fppf quotient sheaf means the sheafification of the right-coset functor for faithfully flat finitely presented coverings of commutative $k$-algebras. Let $D\\simeq\\mathbf G_{m,k}^r$ be a split torus, $r\\geq0$, acting on $U$ by $k$-group automorphisms: a morphism $D\\times_kU\\to U$ satisfying the unit and action identities and preserving the group law of $U$. Form the semidirect product $H=U\\rtimes D$, whose underlying scheme is $U\\times_kD$ and whose multiplication on every algebra is $(u,d)(v,e)=(u(d\\cdot v),de)$. For every closed split torus $T\\subseteq H$ there is an element $u\\in U(k)$ such that $uTu^{-1}\\subseteq \\{1\\}\\times_kD$ as closed subgroup schemes of $H$. A split torus here means a $k$-group isomorphic to $\\mathbf G_{m,k}^s$ for some $s\\geq0$, where $\\mathbf G_m(A)=A^\\times$ and $\\mathbf G_a(A)=(A,+)$. The asserted inclusion holds on points over every commutative $k$-algebra after scalar extension of $u$. No perfectness, infinitude or characteristic assumption is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-split-unipotent-series",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose a split-torus coordinate isomorphism $T\\simeq\\mathbf G_m^s$ and write its inclusion in $H=U\\rtimes D$ as $t\\mapsto(c(t),a(t))$. Projection to $D$ is a homomorphism, so $a:T\\to D$ is a homomorphism. Multiplication in $H$ gives, on every algebra,\n$$c(tt')=c(t)\\bigl(a(t)\\cdot c(t')\\bigr).$$\nThus $c:T\\to U$ is a scheme morphism satisfying this crossed-homomorphism identity for the $T$-action $t\\cdot v=a(t)\\cdot v$. This action is by group automorphisms, by the action identities for $D$ and the homomorphism identity for $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 15.1, printed pp.302–303, and the opening observation of Theorem 16.27, p.333; coordinate form of the given inclusion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-unipotent-torus-stable-series] to this $T$-action on $U$. Its hypotheses are precisely the given smooth, geometrically connected, affine, finite-type split-unipotent $U$, and the split torus $T$ just identified with $\\mathbf G_m^s$. Obtain $U=V_0\\supseteq\\cdots\\supseteq V_m=1$, quotient homomorphisms $q_i:V_i\\to\\mathbf G_a$ with kernel $V_{i+1}$, and monomial characters $\\chi_i(t)=t^{n_i}$ describing the $T$-action. The tail beginning at $V_{i+1}$ is a split additive series for $V_{i+1}$. No assertion that an arbitrary subgroup of a split unipotent group is split is being used.",
+   "uses": [
+    "lem-sfb-split-unipotent-torus-stable-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Summary 16.29(d), printed p.334, and Proposition 16.54, p.344; the equivariant structural input is stated separately, with its arbitrary-field scope."
+   }
+  },
+  {
+   "text": "For later use, if a morphism $f:\\mathbf G_m^s\\to\\mathbf G_a$ satisfies $f(tt')=f(t)+t^n f(t')$, write its Laurent polynomial as $f(X)=\\sum_{a\\in\\mathbf Z^s}\\lambda_aX^a$ with finite support. The identity in $k[X_1^{\\pm1},\\ldots,X_s^{\\pm1},Y_1^{\\pm1},\\ldots,Y_s^{\\pm1}]$ is\n$$\\sum_a\\lambda_aX^aY^a=\\sum_a\\lambda_aX^a+X^n\\sum_a\\lambda_aY^a.$$\nFor $a\\ne0$, comparing coefficients of $Y^a$ gives $\\lambda_aX^a=\\lambda_aX^n$, hence $\\lambda_a=0$ unless $a=n$. Also $f(1)=0$. If $n\\ne0$, it follows that $f(X)=b(1-X^n)$ for $b=\\lambda_0\\in k$; if $n=0$, only the constant term can occur and it is zero, so take $b=0$. This includes $s=0$. These are coordinate-ring identities and therefore hold on all test algebras, including nonreduced ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.3, printed pp.305–306, scalar crossed-homomorphism calculation; the Laurent-coefficient argument here is supplied by the worker and works over any field."
+   }
+  },
+  {
+   "text": "For each $b\\in k$, the fibre $P=q_i^{-1}(b)$ is a represented right $V_{i+1}$-torsor over $\\operatorname{Spec}k$. Indeed [lem-sfb-affine-normal-quotient-geometry] applied to the normal inclusion $V_{i+1}\\subseteq V_i$ identifies its quotient with $\\mathbf G_a$ by the isomorphism $b_i$ furnished in step 2, gives a faithfully flat finitely presented quotient map, and gives the torsor isomorphism $(v,w)\\mapsto(v,vw)$. Restricting this isomorphism to the fibre gives $P\\times_kV_{i+1}\\simeq P\\times_kP$; [lem-trf-fppf-covering-base-change] applied to the singleton quotient cover gives flatness, local finite presentation and surjectivity of $P\\to\\operatorname{Spec}k$, and [lem-weil-pbc-qcqs-morphism-permanence](3) gives finite presentation by base change from $q_i$. All groups in this normal inclusion are affine and finite type. The kernel $V_{i+1}$ is smooth and connected and has the split additive tail series from step 2. Apply [lem-sfb-split-unipotent-affine-torsor-section] with the affine finite-type base $\\operatorname{Spec}k$ to obtain $v\\in P(k)$. Consequently every $b\\in k$ has a lift $v\\in V_i(k)$ with $q_i(v)=b$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-split-unipotent-affine-torsor-section",
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.55(b), printed p.344; quotient torsor of Corollary 5.27, p.105, pulled back to a rational point. The fibre restriction is the explicit base change of the quotient torsor. Stacks Tag 021O (topologies.tex, lemma-fppf (3)) for the base-changed fppf cover; finite-presentation base change as in the cited permanence node."
+   }
+  },
+  {
+   "text": "Induct on $i=0,\\ldots,m$ with the claim that some $w_i\\in U(k)$ makes $\\operatorname{Int}(w_i^{-1})$ carry the given inclusion to $t\\mapsto(c_i(t),a(t))$ with $c_i:T\\to V_i$. Take $w_0=1$, $c_0=c$. Assume this holds at $i<m$. Since the conjugated map is a homomorphism, $c_i$ has the crossed identity from step 1. Equivariance and additivity of $q_i$ imply that $f_i=q_i c_i$ satisfies $f_i(tt')=f_i(t)+\\chi_i(t)f_i(t')$. Step 3 gives $b\\in k$ with $f_i(t)=b-\\chi_i(t)b$, and step 4 lifts $b$ to $v\\in V_i(k)$. Put $w_{i+1}=w_iv$. Direct multiplication gives\n$$c_{i+1}(t)=v^{-1}c_i(t)(a(t)\\cdot v),\\qquad q_i(c_{i+1}(t))=-b+f_i(t)+\\chi_i(t)b=0.$$\nAll three factors belong to $V_i$ because it is $T$-stable. The scheme-theoretic kernel identity $\\ker q_i=V_{i+1}$ factors this morphism through $V_{i+1}$. This proves the induction, with the displayed identities on every algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.27(a), printed p.333, successive removal of principal crossed homomorphisms, in the split-kernel case of Summary 16.29(d), p.334; explicit induction and conjugation sign."
+   }
+  },
+  {
+   "text": "At $i=m$, $V_m=1$, so $c_m(t)=1$ on every algebra. Thus $w_m^{-1}Tw_m$ factors through the closed subgroup $\\{1\\}\\times_kD$. Taking $u=w_m^{-1}\\in U(k)$ gives the claimed subgroup-scheme inclusion: for every $k$-algebra $A$ and $t\\in T(A)$ the conjugate equals $(1,a_A(t))$. When $U=1$ the induction has no steps and $u=1$; when $T=1$ it gives the same conclusion. The argument uses no injection or surjectivity assertion about $a:T\\to D$, no rational density, and no assumption on the field beyond the stated hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.54, printed p.344, absorption conclusion; final assembly from the crossed-homomorphism induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-unipotent-torus-stable-series",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-split-unipotent-affine-torsor-section",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.54 and Summary 16.29(d), printed pp.344,334, following the crossed-homomorphism induction of Theorem 16.27(a), p.333. Agent supplies the Laurent-coefficient calculation over arbitrary fields and isolates the arbitrary-field equivariant filtration as a structural node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]arabolic|[Cc]ocharacter|[Ll]evi",
+   "results": "{\"t\": \"2026-10-24T07:04:02Z\", \"tool\": \"grep\", \"query\": \"[Pp]arabolic|[Cc]ocharacter|[Ll]evi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/Topology/Sheaves/LocallySurjective.lean\"], \"digest\": \"7b7083fcd61cb6ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any split torus in a split solvable algebraic group is conjugate into a fixed torus complement by a rational point of the unipotent radical",
+   "results": "{\"t\": \"2026-10-24T07:04:03Z\", \"tool\": \"leansearch\", \"query\": \"Any split torus in a split solvable algebraic group is conjugate into a fixed torus complement by a rational point of the unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupExtension.IsConj.refl\", \"GroupExtension.IsConj.refl\", \"GroupExtension.IsConj\", \"GroupExtension.IsConj.setoid\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"GroupExtension.Splitting.conjAct\", \"AddGroupExtension.IsConj\", \"LieAlgebra.instIsSolvableSubtypeMemLieSubalgebraTop\"], \"digest\": \"0f499c09a578ebec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]plit[Tt]orus|[Uu]nipotent.*[Cc]onjug|[Cc]ocharacter|[Pp]arabolic[Ss]ubgroup",
+   "results": "{\"t\": \"2026-10-24T07:08:11Z\", \"tool\": \"grep\", \"query\": \"[Ss]plit[Tt]orus|[Uu]nipotent.*[Cc]onjug|[Cc]ocharacter|[Pp]arabolic[Ss]ubgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"IsConj\"",
+   "results": "{\"t\": \"2026-10-24T07:08:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"IsConj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a semidirect product of a split unipotent algebraic group and a split torus every split torus subgroup is conjugate into the torus by a rational unipotent point",
+   "results": "{\"t\": \"2026-10-24T07:08:14Z\", \"tool\": \"leanfinder\", \"query\": \"In a semidirect product of a split unipotent algebraic group and a split torus every split torus subgroup is conjugate into the torus by a rational unipotent point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.IsConj\", \"SemidirectProduct.inr_splitting\", \"GroupExtension.IsConj.refl\", \"GroupExtension.Splitting.conjAct\", \"GroupExtension.IsConj.trans\", \"GroupExtension.Splitting.semidirectProductMulEquiv\", \"SemidirectProduct.inl_aut\", \"GroupExtension.Splitting.semidirectProductToGroupExtensionEquiv\"], \"digest\": \"9b0c077f2a9ef61a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal split tori of a split solvable algebraic group are conjugate by a k rational element of its split unipotent kernel",
+   "results": "{\"t\": \"2026-10-24T07:08:15Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal split tori of a split solvable algebraic group are conjugate by a k rational element of its split unipotent kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"GroupExtension.IsConj\", \"GroupExtension.IsConj.refl\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"GroupExtension.IsConj.trans\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"GroupExtension.IsConj.setoid\", \"ConjClasses.mk_bijOn\"], \"digest\": \"4b74cd6f9b8562d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "def IsConj|def Splitting|isParabolic_iff_of_upperTriangular",
+   "results": "{\"t\": \"2026-10-24T07:10:31Z\", \"tool\": \"grep\", \"query\": \"def IsConj|def Splitting|isParabolic_iff_of_upperTriangular\", \"sub\": \"GroupTheory/GroupExtension\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/GroupExtension/Defs.lean\"], \"digest\": \"ecd9f72965004525\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SemidirectProduct\", \"IsConj\"",
+   "results": "{\"t\": \"2026-10-24T07:43:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SemidirectProduct\\\", \\\"IsConj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group semidirect products and the definition/equivalence properties of GroupExtension.IsConj do not assert rational conjugacy of algebraic split torus subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every split torus subgroup of a semidirect product of a split unipotent algebraic group and a split torus is conjugate into the second factor by a rational unipotent point",
+   "results": "{\"t\": \"2026-10-24T07:47:46Z\", \"tool\": \"leansearch\", \"query\": \"Every split torus subgroup of a semidirect product of a split unipotent algebraic group and a split torus is conjugate into the second factor by a rational unipotent point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SemidirectProduct.noConfusion\", \"GroupExtension.IsConj\", \"GroupExtension.Splitting.semidirectProductToGroupExtensionEquiv\", \"GroupExtension.IsConj.refl\", \"AddGroupExtension.IsConj.refl\", \"SemidirectProduct.inl_left_mul_inr_right\", \"GroupExtension.Splitting.semidirectProductMulEquiv\", \"GroupExtension.IsConj.setoid\"], \"digest\": \"baa55697956ba02a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group semidirect products and the definition/equivalence properties of GroupExtension.IsConj do not assert rational conjugacy of algebraic split torus subgroup schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-minimal-parabolic-split-centralizers",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy.",
+   "via": [
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-unipotent-torus-absorption",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-field statement. Wrote the crossed-homomorphism induction directly for the inclusion T into U semidirect D, avoiding maximal-torus and projection-image reductions. One new structural node supplies a torus-stable additive series over the arbitrary field; Laurent coefficients prove each scalar cocycle principal; existing split-unipotent affine torsor triviality supplies rational lifts. Checked all conjugations on every algebra.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability unit and direct-images proof (3). This is the inherited Milne 16.54 supporting branch of det-thm-sf-ctf-stability-direct-images. The ancestor tool reports blueprint.from.node=None, retained from live; from.place describes precisely the split-solvable torus-absorption input. Whole-blueprint searches for split solvable, unipotent torus, unipotent, crossed homomorphism, central series, vector group and torus stable found no duplicate of this item or the new equivariant series. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-morphism finite-presentation base-change tool, used only for the fibre torsor; no base-change theorem for sheaf cohomology is used."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic Mathlib leaf for base change of an fppf covering, used only for the singleton quotient-map cover, not a trace-formula proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-47c201741",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-47c201741 (reviewer sub-agent of L); spot-checked: Read Milne 14.59-14.68 (p.298-299), 16.27 proof (p.333), 16.29(d) (p.334) and 16.54/16.55 (p.344). The item statement is unchanged and matches 16.54 over any field. Step 1: the crossed identity from the semidirect product law is correct. Step 2: the new node's hypotheses hold with E=T acting through a, and the tail of its series makes V_{i+1} split. Step 3: I redid the Laurent comparison; it gives f=b(1-X^n), and f=0 when n=0. Step 4: affine-normal-quotient-geometry gives the torsor isomorphism, which restricts to the fibre; fppf-covering-base-change and qcqs-permanence(3) give flat, lfp, surjective and fp; split-unipotent-affine-torsor-section over Spec k gives the rational lift. Steps 5-6: the induction has a stated claim, base and step; I checked q_i(c_{i+1})=-b+f_i+chi_i b=0 and that u=w_m^{-1} is the right sign. Small case checked: G_a with G_m acting by weight 1 and T a conjugate of D. New node lem-sfb-split-unipotent-torus-stable-series: statement only, self-contained, with 8 logged searches. It is the torus-equivariant form of the normal G_a series in the split solvable group U⋊E; the weights are monomials by Milne 14.60. Tested on a non-linear G_m action on G_a^2 over an imperfect field. It is not a restatement of the item, and searching dag/nodes found no duplicate. Batch-5: def-trf-scheme-cover-descent-datum (general descent-datum definition), lem-trf-fppf-covering-is-fpqc and lem-trf-fppf-covering-base-change (Mathlib site leaves) are generic tools, not steps of the trace formula or Poincare duality; accepted. Tool_uses for the two Mathlib leaves from other units accepted. Maintainer: add Conrad LAG I App. D.3 to WANTED; the inherited blueprint.from.node=null comes from the base node. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitUnipotentTorusAbsorption",
+  "declaration": "AlgebraicGeometry.split_unipotent_torus_absorption",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitUnipotentTorusAbsorption.lean",
+  "statement": "theorem split_unipotent_torus_absorption {k : Type u} [Field k] (U D H T : Grp (Over (Spec (.of k)))) (_hU : SolvableGroupStructure.IsAlgebraic U) (_hunip : SolvableGroupStructure.IsUnipotent U) (_hgeo : GeometricallyConnected U.X.hom) (_hsplit : ∃ m : ℕ, SplitUnipotentLength U m) (_hD : ∃ r : ℕ, Nonempty (D ≅ MultiplicativeType.splitTorus k r)) (act : D.X ⊗ U.X ⟶ U.X) (_hunit : ∀ (X : Over (Spec (.of k))) (x : X ⟶ U.X), lift 1 x ≫ act = x) (_haction : ∀ (X : Over (Spec (.of k))) (d e : X ⟶ D.X) (x : X ⟶ U.X), lift (d * e) x ≫ act = lift d (lift e x ≫ act) ≫ act) (_haut : ∀ (X : Over (Spec (.of k))) (d : X ⟶ D.X) (x y : X ⟶ U.X), lift d (x * y) ≫ act = (lift d x ≫ act) * (lift d y ≫ act)) (e : H.X ≅ U.X ⊗ D.X) (_hmul : ∀ (X : Over (Spec (.of k))) (x y : X ⟶ H.X), (x * y) ≫ e.hom = lift ((x ≫ e.hom ≫ fst U.X D.X) * (lift (x ≫ e.hom ≫ snd U.X D.X) (y ≫ e.hom ≫ fst U.X D.X) ≫ act)) ((x ≫ e.hom ≫ snd U.X D.X) * (y ≫ e.hom ≫ snd U.X D.X))) (i : T ⟶ H) [IsClosedSubgroupScheme i.hom.hom] (_hT : ∃ s : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k s)) : ∃ (u : 𝟙_ (Over (Spec (.of k))) ⟶ U.X) (v : T ⟶ D), (toUnit T.X ≫ lift u 1 ≫ e.inv) * i.hom.hom * (toUnit T.X ≫ lift u 1 ≫ e.inv)⁻¹ = lift 1 v.hom.hom ≫ e.inv",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e4537405",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Statement matches node and Milne 16.54 clause by clause. Hypotheses: IsAlgebraic (affine, finite type), IsUnipotent (smooth, faithful GL_n closed immersion, unipotent geometric points), GeometricallyConnected, ∃m SplitUnipotentLength (connected = geometrically connected for k-groups), D and T Grp-iso to splitTorus with T closed via IsClosedSubgroupScheme. Action unit/composition/automorphism laws on all test objects; e : H.X ≅ U.X⊗D.X plus _hmul gives exactly the semidirect law (u,d)(v,e)=(u(d·v),de); no group-scheme semidirect or action def node exists to reuse. Conclusion ∃ k-point u and v : T⟶D with (u,1)i(u,1)⁻¹=(1,v) is the inclusion over every algebra and v adds no strength. Node diff vs live: only stmt_deps (+3 landed, used defs) and lean; statement and proof unchanged; lean.statement verbatim. Edge cases m=0, r=0, s=0, any characteristic, imperfect fields covered; single universe u. Only sorry, no defs, docstrings carry source and 6-step proof. Advisory: the second-reading section was written by the worker. No files changed; compile not re-run."
+ }
+}

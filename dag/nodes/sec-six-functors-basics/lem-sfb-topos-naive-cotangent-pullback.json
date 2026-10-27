@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-topos-naive-cotangent-pullback",
+ "kind": "statement",
+ "title": "Geometric inverse image of the sheaf naive cotangent complex",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a common universe of sheaves [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], and let $u:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ be a geometric morphism [def-trf-geometric-morphism]. Let $A\\to B$ be a homomorphism of sheaves of commutative rings on $\\mathcal D$. In module sheaves [def-weil-sheaf-of-modules-category], let $\\mathrm{NL}_{B/A}=K_B$ be the standard two-term complex of [lem-sfb-sheaf-polynomial-cotangent-comparison]: put $P=A[B]$, let $J=\\ker(P\\twoheadrightarrow B)$ for evaluation $[b]\\mapsto b$, and put $K_B=[J/J^2\\xrightarrow{[h]\\mapsto\\mathrm dh\\otimes1}\\Omega_{P/A}\\otimes_P B]$ in degrees $-1,0$. Apply the same construction to $u^{-1}A\\to u^{-1}B$ on $\\mathcal C$. There is a canonical isomorphism\n$$u^{-1}\\mathrm{NL}_{B/A}\\simeq\\mathrm{NL}_{u^{-1}B/u^{-1}A}\\quad\\text{in }D(\\operatorname{Mod}(u^{-1}B))$$\n[def-weil-abstract-derived-category], where the left side is obtained by applying inverse image termwise to the displayed standard complex. The comparison is induced by the canonical identifications of the pulled-back polynomial algebra, evaluation kernel, conormal quotient and relative differential module.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TZ, lemma-pullback-NL (entire statement)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-trf-geometric-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=u^{-1}$, $A'=FA$, $B'=FB$, $P'=A'[B']$ and $J'=\\ker(P'\\to B')$. Apply the polynomial-algebra clause of lem-trf-geometric-standard-differential-comparison with $R=A,E=B$: it gives $FP\\cong P'$ and identifies $F(P\\to B)$ with evaluation $P'\\to B'$, since the coefficient and variable maps and the evaluation counit are preserved. Exactness of transported module inverse image identifies $FJ$ with the kernel $J'$, compatibly with its inclusion in $P'$ and with multiplication by $FP=P'$. These comparisons are of sheaf rings and modules; no surjectivity on the sections over an individual site object is assumed.",
+   "uses": [
+    "lem-trf-geometric-standard-differential-comparison",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TZ, lemma-pullback-NL, omitted polynomial-presentation comparison; cotangent.tex Tag 08SV, free/forgetful square, supplies the polynomial comparison."
+   }
+  },
+  {
+   "text": "Realize $J^2\\subset P$ as the image of multiplication $\\mu:J\\otimes_P J\\to P$. The bilinear universal property constructs $\\mu$ from $(x,y)\\mapsto xy$. Indeed the tensor is the sheafification of sectionwise tensors; its sections locally are finite sums of pure tensors, by the local representation property of sheafification. The sheaf image of $\\mu$ therefore consists exactly of sections locally finite sums of products of sections of $J$, which is the definition of $J^2$ in the standard presentation. The same calculation applies to $J'$. Under $FJ=J'$ and the canonical tensor comparison, $F\\mu$ becomes $J'\\otimes_{P'}J'\\to P'$: the tensor comparison preserves pure tensors, and transported ring operations preserve multiplication. An exact functor preserves images, since in an abelian category $\\operatorname{im}(v)=\\ker(\\operatorname{coker}(v))$. Hence $F(J^2)=(J')^2$ as submodules of $P'$, compatibly with the inclusions in $FJ=J'$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TZ, lemma-pullback-NL, omitted conormal comparison; Tags 03EK (tensor definition), 03EL (lemma-tensor-product-pullback), 04JC (lemma-flat-pullback-exact); Sites Tag 00WK (lemma-sections-sheafification)."
+   }
+  },
+  {
+   "text": "Apply exactness to the cokernel of $J^2\\hookrightarrow J$. Step 2 identifies the resulting inclusion with $(J')^2\\hookrightarrow J'$, so it gives the canonical isomorphism $c^{-1}:F(J/J^2)\\xrightarrow{\\sim}J'/(J')^2$. It is $B'$-linear: the $P$-action on $J/J^2$ factors through $P/J=B$ because every product of two elements of $J$ vanishes in that quotient; the transported action factors through the identified evaluation $P'\\to B'$ and is the usual action on $J'/(J')^2$. This uses a cokernel of sheaves, and does not replace it by a possibly non-surjective map on sections.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sfb-sheaf-polynomial-cotangent-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TZ, lemma-pullback-NL, conormal quotient in the standard two-term presentation of Tag 08TY (lemma-NL-up-to-qis)."
+   }
+  },
+  {
+   "text": "Apply lem-trf-topos-inverse-image-differentials to the ring-sheaf map $A\\to P$. Its isomorphism $F\\Omega_{P/A}\\cong\\Omega_{P'/A'}$ carries the inverse image of $\\mathrm d$ to $\\mathrm d'$. Apply the tensor comparison with coefficient ring $P$, modules $\\Omega_{P/A}$ and $B$, and transported coefficient ring $FP=P'$. Together they give $c^0:F(\\Omega_{P/A}\\otimes_P B)\\xrightarrow{\\sim}\\Omega_{P'/A'}\\otimes_{P'}B'$. This is $B'$-linear, since the $B$-action on the second tensor factor transports to the $B'$-action on that same factor. Its normalization is $F(\\omega\\otimes b)\\mapsto F\\omega\\otimes Fb$ in the sense of generalized sections, with the differential identification on the first factor.",
+   "uses": [
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TZ, lemma-pullback-NL, hint to use Tag 08TQ (lemma-pullback-differentials); Tag 03EL (lemma-tensor-product-pullback)."
+   }
+  },
+  {
+   "text": "Let $q:J\\to J/J^2$ and $q':J'\\to J'/(J')^2$ be the quotient maps, and let $i:J\\to P$, $i':J'\\to P'$ be the inclusions. By the definition of the displayed standard differential, $d_Kq$ is $J\\xrightarrow{i}P\\xrightarrow{\\mathrm d}\\Omega_{P/A}\\xrightarrow{\\omega\\mapsto\\omega\\otimes1}\\Omega_{P/A}\\otimes_P B$. Steps 1 and 4 identify its inverse image with the analogous composite for $J'$, because they preserve $i$, the universal derivation, pure tensors and the ring unit. Step 3 gives $c^{-1}Fq=q'$ under $FJ=J'$. Consequently $c^0F(d_K)Fq=d_{K'}c^{-1}Fq$. The map $Fq$ is an epimorphism by exactness, so cancellation gives $c^0F(d_K)=d_{K'}c^{-1}$. Thus $c^{-1},c^0$ are the two components of a canonical chain isomorphism $FK_B\\cong K_{B'}$; the inverse components commute with the differentials by the same equality. Apply the localization functor defining the derived category to this actual complex isomorphism. Since $\\mathrm{NL}_{B'/A'}=K_{B'}$, its image is exactly the required isomorphism. All its maps were the specified polynomial, kernel, quotient, differential and tensor comparisons.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TZ, lemma-pullback-NL, omitted differential square and derived conclusion, expanding the hint to Tag 08TQ; Tag 08TY standard differential."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-geometric-standard-differential-comparison",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TZ (lemma-pullback-NL), whose proof is omitted with a hint to Tag 08TQ. Q158 expands the hint using the standard polynomial presentation, exactness (04JC), tensor comparison (03EL), and the existing 08SV polynomial comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image by a geometric morphism of topoi commutes with the two term naive cotangent complex of sheaves of commutative rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For an algebra extension homomorphism $ f : P \\to P' $, the composition of the cotangent space map $ \\text{CotangentSpace.map}(f) $ with the cotangent complex $ P.\\text{cotangentComplex} $ equals the com\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R) {X Y : Dᵒᵖ} (f : X ⟶ Y),\\n  (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').map f = CommRingCat.KaehlerDifferential.map ⋯\", \"doc\": \"For a presheaf of modules constructed from relative Kähler differentials, the action on morphisms $ f : X \\to Y $ in the opposite category $ \\\\mathcal{D}^{\\\\text{op}} $ is given by the $ R(Y) $-linear ma\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For algebra extensions $ P $ and $ Q $, the composition of the base-changed cotangent complex map with the lifted base change of the cotangent space homomorphism induced by $ Q \\\\circ P $ equals the co\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation modules, presheaf differentials and general sheaf functors do not state the derived naive-cotangent comparison for sheaves of rings under a geometric inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of conormal ideal modulo its square and Kahler differentials in a sheaf polynomial presentation identifies naive cotangent complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.differentials.comm₂₃\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ),\\n  pres.toExtension.toKaehler ∘ₗ ↑pres.cotangentSpaceBasis.repr.symm = pres.differentialsSolution.π\", \"doc\": \"For an $R$-algebra presentation $\\\\text{pres}$, the composition of the Kähler differential map $\\\\text{pres.toExtension.toKaehler}$ with the inverse of the cotangent space basis representation $\\\\text{pr\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_mk\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (x : ↥P.ker), P.cotangentComplex (Algebra.Extension.Cotangent.mk x) = 1 ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) ↑x\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ inherits the structure of an additive commutative group from its module structure over $S$. This group operation is induced by \"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (P : Type u_2) →\\n          (A : Type u_3) →\\n            [inst_2 : CommRing P] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : Algebra P S] →\\n                  [inst_5 : Algebra P A] →\\n  \", \"doc\": \"Let $R, P, S, A$ be commutative rings forming a tower of algebras $R \\\\to P \\\\to S \\\\to A$. This defines an $A$-linear map from $A \\\\otimes_P \\\\ker(P \\\\to S)$ to $A \\\\otimes_P \\\\Omega_{P/R}$, where $\\\\ker(P \\\\t\"}\n  {\"name\": \"KaehlerDifferential.D_tensorProductTo\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (x : ↥(KaehlerDifferential.ideal R S)),\\n  (KaehlerDifferential.D R S).tensorProductTo ↑x = (KaehlerDifferential.ideal R S).toCotangent x\", \"doc\": \"For any element $x$ in the ideal of the module of Kähler differentials $\\\\Omega_{S/R}$, the canonical $S$-linear map induced by the tensor product construction coincides with the quotient map sending $\"}\n  {\"name\": \"KaehlerDifferential.quotientCotangentIdealRingEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (TensorProduct R S S ⧸ KaehlerDifferential.ideal R S ^ 2) ⧸ (KaehlerDifferential.ideal R S).cotangentIdeal ≃+*\\n            S\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $\\\\mu: S \\\\otimes_R S \\\\to S$. The module of Kähler differentials $\\\\Omega^1_{S/R}$ is de\"}\n  {\"name\": \"KaehlerDifferential.quotientCotangentIdeal\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          ((TensorProduct R S S ⧸ KaehlerDifferential.ideal R S ^ 2) ⧸\\n              (KaehlerDifferential.ideal R S).cotangentIdeal) ≃ₐ[S]\\n            S\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be an $R$-algebra. Let $I$ be the kernel of the multiplication map $\\\\mu: S \\\\otimes_R S \\\\to S$ given by $\\\\mu(s \\\\otimes t) = st$. The statement establis\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation modules, presheaf differentials and general sheaf functors do not state the derived naive-cotangent comparison for sheaves of rings under a geometric inverse image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation modules, presheaf differentials and general sheaf functors do not state the derived naive-cotangent comparison for sheaves of rings under a geometric inverse image."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation modules, presheaf differentials and general sheaf functors do not state the derived naive-cotangent comparison for sheaves of rings under a geometric inverse image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves under a geometric morphism commutes with the naive cotangent complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {G : CategoryTheory.Functor D E} {FG : CategoryTheory.Functor C E} (eFG : F.comp G \", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the inverse of the natural isomorphism $ G\"}\n  {\"name\": \"CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂)\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] {X Y : CategoryTheory.Sheaf J A}\\n  (f : (CategoryTheory.sheafToPresheaf J A).obj X ⟶ (CategoryTheory.sheafToPresheaf J A).obj Y),\\n  ((\", \"doc\": \"For any morphism $f$ between the underlying presheaves of two sheaves $X$ and $Y$, the preimage of $f$ under the fully faithful inclusion functor from sheaves to presheaves corresponds to a sheaf morp\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, and a category $\\\\mathcal{A}$, the inverse equivalence bet\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Equivalence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Precoherent C] (A : Type u_3)\\n  [inst_3 : CategoryTheory.Category.{v_3, u_3} A] (e : C ≌ D)\\n  {X Y : CategoryTheory.Sheaf (CategoryTheory.coherentT\", \"doc\": \"Given an equivalence $ e : C ≌ D $ between precoherent categories and a morphism $ f : X \\to Y $ between sheaves on $ D $ with respect to the coherent topology, for any object $ X_1 $ in $ C^\\\\text{op} \"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (F : CategoryTheory.Functor C D)\\n  (G : CategoryTheory.Functor D E) (A : Type u) [inst_3 : CategoryTheory.Category.{t,\", \"doc\": \"For continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$ between sites with Grothendieck topologies $J, K, L$, the inverse component of the natural isomorphism $\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, the inverse functor of the induced sheaf category equ\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"{X Y : C} (f : X ⟶ Y) : Sheaf (J.over Y) A ⥤ Sheaf (J.over X) A\", \"doc\": \"Given a morphism $ f : X \\to Y $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, this defines the pullback functor between the categories of sheaves on the over categories $ \"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃)\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} A] [inst_3 : Catego\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, the inverse functor of the induced sheaf category equ\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation modules, presheaf differentials and general sheaf functors do not state the derived naive-cotangent comparison for sheaves of rings under a geometric inverse image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of rings preserves the naive cotangent complex",
+   "results": "8 hits; top=['SheafOfModules.pullback', \"AlgebraicGeometry.StructureSheaf.comap_id'\", 'SheafOfModules.instIsLeftAdjointPullback', 'SheafOfModules.fullyFaithfulForget_preimage_val', 'AlgebraicGeometry.Scheme.inv_app', 'SheafOfModules.sheafificationCompPullback', 'AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply', 'CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app']; subdirectory=whole Mathlib; digest=23415bffac1fd72d. Read returned names and the relevant source: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, RingTheory/Extension/ExtendScalars.lean, Algebra/Category/ModuleCat/Differentials/Presheaf.lean, and ModuleCat/Sheaf/PullbackContinuous.lean. Ring presentation maps, first cotangent homology, presheaf differentials or continuous-functor module pullback do not state the canonical sheaf two-term comparison under an arbitrary geometric morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a geometric morphism commutes with naive cotangent complexes of sheaves of commutative rings",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", 'Algebra.H1Cotangent.map', 'Algebra.Extension.CotangentSpace.map_comp_apply', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\"]; subdirectory=whole Mathlib; digest=a16ddead3d3f3ce6. Read returned names and the relevant source: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, RingTheory/Extension/ExtendScalars.lean, Algebra/Category/ModuleCat/Differentials/Presheaf.lean, and ModuleCat/Sheaf/PullbackContinuous.lean. Ring presentation maps, first cotangent homology, presheaf differentials or continuous-functor module pullback do not state the canonical sheaf two-term comparison under an arbitrary geometric morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|H1Cotangent|NaiveCotangent",
+   "results": "25 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/Cotangent/Free.lean', 'Mathlib/RingTheory/Extension/Cotangent/Free.lean', 'Mathlib/RingTheory/Extension/Cotangent/Free.lean']; subdirectory=RingTheory; digest=85b27dd3273701cb. Read returned names and the relevant source: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, RingTheory/Extension/ExtendScalars.lean, Algebra/Category/ModuleCat/Differentials/Presheaf.lean, and ModuleCat/Sheaf/PullbackContinuous.lean. Ring presentation maps, first cotangent homology, presheaf differentials or continuous-functor module pullback do not state the canonical sheaf two-term comparison under an arbitrary geometric morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a polynomial sheaf presentation identifies its conormal module and differential with the naive cotangent complex on the inverse image topos",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.H1Cotangent.map', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.H1Cotangent.map', 'Algebra.Extension.CotangentSpace.map', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv', 'Algebra.Extension.CotangentSpace.map_cotangentComplex']; subdirectory=whole Mathlib; digest=1bc351391d1dd8a1. Read returned names and the relevant source: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, RingTheory/Extension/ExtendScalars.lean, Algebra/Category/ModuleCat/Differentials/Presheaf.lean, and ModuleCat/Sheaf/PullbackContinuous.lean. Ring presentation maps, first cotangent homology, presheaf differentials or continuous-functor module pullback do not state the canonical sheaf two-term comparison under an arbitrary geometric morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-naive-cotangent-etale-localization",
+  "date": "2026-10-23",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Finite two-term etale local models of the naive cotangent complex. Supporting input: Tag 0D0W, simultaneous etale localization before the affine computation. General topos input in the proof of Tag 0D0W: formation of the naive cotangent complex commutes with inverse image (Tag 08TZ).",
+   "via": [
+    "lem-sfb-space-naive-cotangent-etale-localization",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-topos-naive-cotangent-pullback",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 08TZ, whose proof is omitted, into the standard polynomial comparison, exact kernel, image-of-multiplication ideal square, conormal cokernel, differential/tensor comparison and explicit differential square. Reused all needed existing nodes, with no new nodes and no statement change. All cited statements were read and quotes recorded in citations.json; Mathlib has ring-level cotangent maps but no geometric-inverse-image comparison of this sheaf complex.",
+  "blueprint": "Preserves the inherited prerequisite place: det-thm-sf-ctf-stability-direct-images proof (3), via the listed alteration/moduli, nodal-curve and coherent-cotangent nodes, then Tag 0D0W etale localization. Steps 1-5 supply exactly its Tag 08TZ general topos input. The latest blueprint direct-images proof and unit were read; no chapter or unit route is changed. Whole-blueprint searches for cotangent, naive cotangent, conormal and polynomial algebra found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-standard-differential-comparison",
+    "why": "Its polynomial-algebra clause and evaluation compatibility identify the pulled-back standard presentation. This is a generic topos algebra input; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Its exactness on transported module sheaves preserves the evaluation kernel, images and conormal cokernel. This is a generic topos tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-topos-inverse-image-differentials",
+    "why": "Its universal-derivation preserving comparison is the explicit hint of Stacks 08TZ. The unit supplies no competing sheaf-differentials input."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Its ordinary algebraic inverse-image tensor comparison preserves pure tensors, used for the ideal square and degree-zero term. It applies with transported rings only and no purity argument."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Its bilinear universal property constructs multiplication from the tensor of the evaluation ideal with itself. This is a generic module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Its local-representation clause identifies the image of tensor multiplication with the locally generated ideal square. This is a generic associated-sheaf fact, not a projective-line argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-standard-differential-comparison",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-b2a78d884",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-b2a78d884 (reviewer sub-agent of L); spot-checked: Read Stacks sites-modules 08TZ (whose proof is omitted, with a hint to 08TQ), 08TQ and 08TY. The item statement is unchanged and matches 08TZ in orientation, rings and complex (the standard K_B of lem-sfb-sheaf-polynomial-cotangent-comparison), so nothing is weakened; the proof gives an actual chain isomorphism. There are no new nodes. Step 1 uses the polynomial clause of lem-trf-geometric-standard-differential-comparison (F(A[B])≅FA[FB] compatible with evaluation) and kernel preservation from lem-trf-geometric-inverse-image-exact. Step 2 identifies J² as the image of μ on J⊗J, using the bilinear universal property, the sheafified tensor and 00WK local sections; lem-pur-independent-inverse-image-tensor-comparison gives the pure-tensor-preserving comparison, and images are preserved via ker∘coker. Step 3 is the conormal cokernel with B'-linearity, correctly marked elementary. Step 4 combines 08TQ (lem-trf-topos-inverse-image-differentials) with the tensor comparison over P≅P'. Step 5 proves the differential square, cancels the epi Fq and localizes. proof_deps equals the union of uses, every cited node is split or mathlib and unmerged, and there is no cycle (the item is in none of the cited closures). No flatness, points or surjectivity on sections is assumed. Tested on the identity morphism, A=B, a stalk point and the empty topos. The rg search for 08TZ/pullback-NL finds only nodes that cite the item, so there are no duplicates. The six declared tool_uses are generic module-sheaf, topos and sheafification tools and are accepted. Batch 5: the full closures of lem-trf-geometric-inverse-image-exact, lem-trf-geometric-standard-differential-comparison and lem-trf-topos-inverse-image-differentials contain only generic sk-i-curve-zero topos and simplicial algebra; no trace-formula, local-term or Poincaré node, no nt-assume leaf and no batch-4 target appears in them. They are general results outside both assumptions and are accepted. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InverseImageNaiveCotangent",
+  "declaration": "CategoryTheory.SheafPolynomialCotangent.inverseImage_naiveCotangent",
+  "declarations": [
+   "CategoryTheory.SheafPolynomialCotangent.liftedVariables",
+   "CategoryTheory.SheafPolynomialCotangent.InverseComparison",
+   "CategoryTheory.SheafPolynomialCotangent.inverseImage_naiveCotangent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/InverseImageNaiveCotangent.lean",
+  "statement": "theorem inverseImage_naiveCotangent (g : GeometricMorphism (Sheaf L (Type u)) (Sheaf J (Type u))) {A B : Sheaf J CommRingCat.{u}} {AI BI : Sheaf L CommRingCat.{u}} (f : A ⟶ B) (fi : AI ⟶ BI) (IA : SheafOfModules.AlgebraicInverseImageOfUniverses.{u, u, u, u, u, u} g.inverse A AI) (IB : SheafOfModules.AlgebraicInverseImageOfUniverses.{u, u, u, u, u, u} g.inverse B BI) (_hf : g.inverse.map ((sheafCompose J (forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map f) ≫ IB.ringUnderlying.hom = IA.ringUnderlying.hom ≫ (sheafCompose L (forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map fi) (K : Model (canonical f)) (KI : Model (canonical fi)) : Nonempty (InverseComparison g f fi IA IB K KI)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the dependency Model of the canonical polynomial presentation. InverseComparison retains the coefficient-, variable- and evaluation-normalized polynomial transport, generalized-section formulas on conormal classes and differential tensors, and the derived isomorphism as localization of the actual chain isomorphism of the termwise inverse image. The algebraic inverse-image dependency is added to name the existing transported ring/module interface, not to assume exactness. Reviewer FIX: the transported-ring compatibility and the underlying set/module sheaves are written inline through the def-weil-pbc-algebraic-inverse-image interface (sheafCompose of forget ⋙ uliftFunctor), instead of SheafDifferentials.setsMap/RingMapCompatibility (owned by the theorem node lem-trf-topos-inverse-image-differentials, not a stmt_dep) and SheafDifferentials.sets/moduleSets (def-sfb-sheaf-differentials, not a stmt_dep); InverseImageDifferentials is now a plain proof import.",
+  "fixed_by": "NT-stage2-cc-66d08cb8e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66d08cb8e",
+  "group": "Q30",
+  "result": "fix",
+  "note": "Statement matches Stacks 08TZ. Small-site universes match the polynomial-cotangent dependency; the geometric morphism direction is correct; _hf says fi is the transport of f. The derived iso is the localization of the canonical chain iso, pinned by the polynomial coefficient/variable/evaluation conditions, the conormal-class formula and the b⊗dp formula. Helpers are real data; theorem is sorry; no Mathlib match or parallel delivery; added stmt_dep def-weil-pbc-algebraic-inverse-image is a landed def node (allowed). H2 fixed: SheafDifferentials.setsMap/RingMapCompatibility (owned only by theorem node lem-trf-topos-inverse-image-differentials, not a stmt_dep) and sets/moduleSets (def-sfb-sheaf-differentials, not a stmt_dep) are inlined in the AlgebraicInverseImageOfUniverses sheafCompose (forget ⋙ ulift) spelling; _hf is the inline compatibility equation; the import is demoted to a plain proof import. fixes/InverseImageNaiveCotangent.lean compiled clean in 13.6 s; lean-record.json gives the verbatim statement and the note, checked with refit_record (no refusals)."
+ }
+}

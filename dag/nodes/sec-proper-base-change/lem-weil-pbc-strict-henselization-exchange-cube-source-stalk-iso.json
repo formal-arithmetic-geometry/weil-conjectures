@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Apply AlgebraicGeometry.Etale.isIso_strictHenselization_exchangeCube_stalkComparisons_source from the existing source-component module, passing the same square, geometric points, strict henselization models, residue compatibility equations, local square, sheaf and degree. Its hypotheses and canonical comparison map are identical to this declaration. That existing theorem already proves the formal transport from the strict-local base-change closed-stalk theorem through derived inverse image, homology, and stalks. This reuses the same strict-local step within sk-thm-p1; no unit statement or step is bypassed.",
+   "text": "Use the existing theorem AlgebraicGeometry.Etale.smallModel_isIso_strictHenselization_exchangeCube_stalkComparisons_source in Sheaf.AlgebraicGeometry.StrictLocalSmallModel.ExchangeCubeStalkIsosSource. Its hypotheses, let-bindings and canonical comparison map are verbatim those of this node's original small-model Lean statement, with only the declaration name changed. Attach this node directly to that proved theorem instead of introducing an identical alias. The existing theorem transports the adopted full-model source comparison through the canonical small-to-full structural-map isomorphisms. The parent keeps this node id and the same small-model statement, so the sk-thm-p1 unit route is preserved.",
    "uses": [
     "lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos-source"
    ],
@@ -35,9 +35,9 @@
   "lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos-source"
  ],
  "proof_origin": {
-  "by": "worker P3",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03Q9 and 03QO; reuse the existing, identically stated source-component theorem proved by P2. Checked its Lean signature and proof; no new mathematical argument or postponed statement."
+  "by": "worker W2, attachment to the existing proved small-model source component",
+  "document": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/ExchangeCubeStalkIsosSource.lean",
+  "place": "Etale.smallModel_isIso_strictHenselization_exchangeCube_stalkComparisons_source; original-signature consumer checked by Lean, and #print axioms gives only propext, Classical.choice and Quot.sound. No new mathematical assertion or postponed theorem."
  },
  "mathlib_searches": [
   {
@@ -93,14 +93,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeSourceStalkIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationExchangeCubeSourceStalkIso.lean",
-  "declaration": "AlgebraicGeometry.Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison",
-  "statement": "theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison\n    {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}\n    [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}\n    (sq : IsPullback g' f' f g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    {X₀ X₁ : Scheme.{u}} (p₀ : X₀ ⟶ X) (f₀ : X₀ ⟶ Spec (.of A))\n    (sq₀ : IsPullback p₀ f₀ f\n      (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))\n    (p₁ : X₁ ⟶ X₀) (f₁ : X₁ ⟶ Spec (.of B))\n    (sq₁ : IsPullback p₁ f₁ f₀ (Spec.map (CommRingCat.ofHom φ)))\n    (b : X₁ ⟶ X')\n    (sqB : IsPullback b f₁ f'\n      (eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ)))\n    (hb : b ≫ g' = p₁ ≫ p₀)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let jA := eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)\n    let jB := eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ)\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let t := ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))\n    let ht : t ≫ jB = τ := by simpa only [t, jB, Category.assoc] using hρB\n    let h : jB ≫ g = g₀ ≫ jA := by simpa only [jB, g₀, jA, Category.assoc] using hφ.symm\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let K₀ := (DerivedCategory.Plus.singleFunctor _ 0).obj\n      (((p₀)^*[AddCommGrpCat.{u + 1}]).obj G)\n    let M₁ := (R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙\n      D+((g)^*[AddCommGrpCat.{u + 1}])).obj K\n    let M₂ := (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n      R+((f')_*[AddCommGrpCat.{u + 1}])).obj K\n    let N₁ := (R+((f₀)_*[AddCommGrpCat.{u + 1}]) ⋙\n      D+((g₀)^*[AddCommGrpCat.{u + 1}])).obj K₀\n    let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙\n      R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀\n    IsIso (derivedStalkComparison jB t τ ht M₁ N₁\n      (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ))",
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSmallModel.ExchangeCubeStalkIsosSource",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSmallModel/ExchangeCubeStalkIsosSource.lean",
+  "declaration": "AlgebraicGeometry.Etale.smallModel_isIso_strictHenselization_exchangeCube_stalkComparisons_source",
+  "statement": "theorem Etale.smallModel_isIso_strictHenselization_exchangeCube_stalkComparisons_source\n    {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}\n    [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}\n    (sq : IsPullback g' f' f g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    {X₀ X₁ : Scheme.{u}} (p₀ : X₀ ⟶ X) (f₀ : X₀ ⟶ Spec (.of A))\n    (sq₀ : IsPullback p₀ f₀ f\n      (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))\n    (p₁ : X₁ ⟶ X₀) (f₁ : X₁ ⟶ Spec (.of B))\n    (sq₁ : IsPullback p₁ f₁ f₀ (Spec.map (CommRingCat.ofHom φ)))\n    (b : X₁ ⟶ X')\n    (sqB : IsPullback b f₁ f'\n      (eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ)))\n    (hb : b ≫ g' = p₁ ≫ p₀)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let jA := eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)\n    let jB := eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ)\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let t := ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))\n    let ht : t ≫ jB = τ := by simpa only [t, jB, Category.assoc] using hρB\n    let h : jB ≫ g = g₀ ≫ jA := by simpa only [jB, g₀, jA, Category.assoc] using hφ.symm\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let K₀ := (DerivedCategory.Plus.singleFunctor _ 0).obj\n      (((p₀)^*[AddCommGrpCat.{u + 1}]).obj G)\n    let M₁ := (R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙\n      D+((g)^*[AddCommGrpCat.{u + 1}])).obj K\n    let M₂ := (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n      R+((f')_*[AddCommGrpCat.{u + 1}])).obj K\n    let N₁ := (R+((f₀)_*[AddCommGrpCat.{u + 1}]) ⋙\n      D+((g₀)^*[AddCommGrpCat.{u + 1}])).obj K₀\n    let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙\n      R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀\n    IsIso (derivedStalkComparison jB t τ ht M₁ N₁\n      (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ))",
   "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-12"
+  "by": "W2",
+  "date": "2026-10-25",
+  "note": "Reattach the original small-model statement directly to the existing proved smallModel_ source-component theorem. Its signature is identical to the previous attachment after the declaration name; an original-signature consumer compiles. The assigned module is already an empty withdrawn stub. No duplicate alias or full-model substitution is needed."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -113,14 +114,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T151911-L-2289768",
+  "landing": "20261024T204719-L-3823737",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

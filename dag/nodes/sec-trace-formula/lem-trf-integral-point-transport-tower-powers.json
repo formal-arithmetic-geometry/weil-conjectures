@@ -30,6 +30,57 @@
  ],
  "proof": [
   {
+   "text": "For integralSigma_existsUnique, take the uniquely section-normalized natural transformation of lem-trf-point-integral-restriction-natural and apply its components in each complex degree. Its naturality for each differential is exactly the chain-map equation. Its section formula gives the prescribed sigma, and degreewise section extensionality gives uniqueness, including r=0.",
+   "uses": [
+    "lem-trf-point-integral-restriction-natural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the ordinary finite evaluation comparison, take the inverse of the adjunction mate constructed in [lem-trf-ordinary-quotient-pullback-tower-comparison]. Its inverseEvaluation_inv_unit identity is exactly the stated formula on sequence pullback generators. If another natural isomorphism has this formula, precompose with the mate and apply the finite pullback adjunction hom-set bijection. The two adjuncts agree on every section, so injectivity and cancellation prove uniqueness.",
+   "uses": [
+    "lem-trf-ordinary-quotient-pullback-tower-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/OrdinaryQuotientPullbackTowerComparison.lean",
+    "place": "OrdinaryTowerProof.inverseEvaluation, inverseEvaluation_unit and inverseEvaluation_inv_unit; finite-evaluation part of the inherited prerequisite, original steps 1-2."
+   }
+  },
+  {
+   "text": "For inverseLimitComparison_existsUnique, use the completed-module inverse-image equivalence obtained by site reindexing [lem-weil-proetale-isomorphism-inverse-image] and transport through the specified coefficient isomorphism; reuse the proved private sectionwiseModules_equivalence declaration from [lem-weil-isomorphism-scalar-quotient-chain-squares] and its componentwise equivalence on strict towers. Localize both equivalences. Take the adjunction mate of constantInverseComparison under the specified constant-tower/total-limit adjunction. This mate is invertible: on hom sets from an inverse-image object, the induced map is the composite of the two fully faithful functor hom-set bijections, the adjunction bijections and precomposition with the constant-tower comparison. Essential surjectivity extends this to every source object, and Yoneda proves invertibility. Whisker this mate by coefficientSequenceDerivedRestriction, then compose with derivedRestrictionComparison followed by total limit. Counit naturality and the mate counit equation give the displayed normalization. The adjunction hom-set bijection proves uniqueness of every component, hence of the natural isomorphism. No individual derived evaluations are used.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-quotient-chain-squares",
+    "def-trf-integral-comparison-realization-models",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/IntegralPointTransportTowerPowers.lean",
+    "place": "inverseLimitComparison_existsUnique; the entire-counit normalization specified in original proof step 5; categorical mate argument by E3."
+   }
+  },
+  {
+   "text": "For ordinaryTransport_existsUnique, take the natural linear restriction map on completed modules from lem-trf-point-integral-restriction-natural and keep it abstract via its section formula. Whisker it termwise on towers and then compose with restrictionComparison followed by tower sections. Naturality on tower arrows is the ordinary naturality of module restriction. The recorded coefficientSequenceRestriction identity and cast_map show that section restriction commutes with the restriction-of-scalars casts. The defining generator equation for restrictionComparison therefore gives sectionTransport. Every section is the cast of an original system section, so that equation also proves uniqueness. This works at r=0 and uses no constructibility.",
+   "uses": [
+    "lem-trf-point-integral-restriction-natural",
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-integral-point-restriction-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For sectionsLimitComparison_existsUnique, take the mate of constantSectionsComparison under the two specified constant-tower/total-limit adjunctions. The exact product-preserving sections functor makes this actual mate invertible by lem-trf-exact-product-tower-limit-mate. Whisker by coefficientSequenceDerivedRestriction. The mate counit equation is precisely the required normalization, and injectivity of the adjunction hom-set bijection proves uniqueness componentwise. The separate general mate lemma is proved by normalized Roos comparison on injective-term resolutions.",
+   "uses": [
+    "lem-trf-exact-product-tower-limit-mate",
+    "lem-weil-point-proetale-sections-exact",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Apply [lem-trf-point-system-transport-descent]. It constructs the specified $I_{r,C}$ before localization with the actual semilinear transitions, identifies its finite evaluations, and gives naturality for every derived system morphism.",
    "uses": [
     "lem-trf-point-system-transport-descent"
@@ -102,6 +153,15 @@
   }
  ],
  "proof_deps": [
+  "lem-trf-point-integral-restriction-natural",
+  "lem-trf-ordinary-quotient-pullback-tower-comparison",
+  "lem-weil-isomorphism-scalar-quotient-chain-squares",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-trf-integral-point-restriction-comparison",
+  "lem-trf-exact-product-tower-limit-mate",
+  "lem-weil-point-proetale-sections-exact",
   "lem-trf-point-system-transport-descent",
   "lem-trf-point-system-power-roos-coherence",
   "lem-trf-point-system-roos-transport",
@@ -117,7 +177,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Prerequisite to clause (3); short assembly of the three extracted point-system lemmas and the existing specified completion/composition comparisons."
+  "place": "Prerequisite to clause (3); short assembly of the three extracted point-system lemmas and the existing specified completion/composition comparisons. D9 supplies the integral-sigma and ordinary-evaluation subproofs explicitly from normalized restriction and the finite pullback adjunction; the remaining assembly statements are unchanged. E3 proves the inverse-limit comparison existence and uniqueness directly by the mate of the constant-tower comparison; the remaining proof plan and holes are retained. D3 constructs ordinaryTransport from the existing restriction comparison and reduces the exact-sections comparison to invertibility of the canonical total-limit mate; the remaining restriction-comparison and Laws proofs are unchanged. The self-contained comparison declarations, including the unchanged original restrictionComparison_existsUnique hole, are reexported from IntegralPointTransportComparisons to satisfy per-file compilation. No new unproved declaration is introduced by this file split."
  },
  "mathlib_searches": [
   {
@@ -281,7 +341,6 @@
    "WeilConjectures.IntegralPointTransportTower.inverseTowerLimits",
    "WeilConjectures.IntegralPointTransportTower.inverseTowerColimits",
    "WeilConjectures.IntegralPointTransportTower.inverseTower",
-   "WeilConjectures.IntegralPointTransportTower.restrictionComparison_existsUnique",
    "WeilConjectures.IntegralPointTransportTower.restrictionComparison",
    "WeilConjectures.IntegralPointTransportTower.derivedRestrictionComparison",
    "WeilConjectures.IntegralPointTransportTower.constantInverseComparison",
@@ -333,5 +392,26 @@
   "result": "pass",
   "note": "Re-delivery of f693d3a20f5e after its H2 RETURN. The Lean module is byte-identical to f693, whose substance was accepted. Item changes are only stmt_deps and lean.note; all other fields match the live node. lem-coef-tower-coaugmentation is replaced by the new def node def-trf-coefficient-tower-operations, and the landed def-trf-integral-comparison-realization-models is now cited. No theorem node was added and none of the live stmt_deps was removed. The new node is existing:true on the unchanged CoefTowerCoaugmentation module, its statement (def adjunction) is verbatim at l.102-103, and all 14 listed declarations exist. The CoefTower decls the item uses (adjunction, coefficient, constant, derivedTowerSections, evaluate, finiteSectionsRestriction, totalLimit, towerSections, plus instances) are all in that list. The item's realization-model helpers (ConstantTower, RestrictedSection, TowerCounit) are owned by the newly cited node. finiteSectionsRestriction is the .choose of a theorem that pins identity on every section, so nothing is hollow. All 8 stmt_deps of the new node exist live, and neither added node's dependencies reach the item. The 11 Laws clauses match the node: naturality, power identity for m>=1, finite evaluation, kappa iso, normalization under hC, nu naturality, P_r preserves D^b_c, nu-compositor with c^E, r=1 HEq pins, reduction specialization. All 13 sorries are theorem proofs. lean.statement is verbatim. No line exceeds 100 characters, the ten proof steps are in the docstring, and the report sections are present. nt_compile --json: 17.9 s, rc 0, no errors or warnings. No findings, no fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2a140",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T021306-L-2753286",
+  "kind": "interface",
+  "note": "independent cc review: moved comparison block vs clone item file (verbatim apart from the two proofs and the order), 4 delivered modules + 3 direct importers compiled in sandbox (all OK), axioms of the proved declarations, item/new node JSON vs Lean"
+ }
 }

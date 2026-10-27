@@ -1,0 +1,106 @@
+{
+ "id": "def-sf-projection-comparison-equations",
+ "kind": "definition",
+ "title": "Compact-support projection comparison equations",
+ "statement": "Fix a finite-field datum D, a family of categories B(X) on finite-type D.k-schemes, a push stage S, tensor bifunctors T, specified exchange data A and second-input predicates P, as in [def-sf-operation-stages] and [def-sf-constructible-projection-mates]. Define CompactSupportProjectionCoherence S T A P to be the conjunction of the compactification-change, composition, associativity-pentagon and proper-counit equations of CompactSupportProjectionLaws S T A P, with exactly their original maps, hypotheses and domains. This predicate includes neither invertibility nor naturality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Final coherence sentence"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization transports compact support projection formula coherence and associativity pentagon",
+   "results": "CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc; Localization.Monoidal.pentagon and its auxiliary lemmas; general localization composition laws.",
+   "date": "2026-10-26",
+   "verdict": "Monoidal associator coherence is available, but not these compact-support compositor and proper-counit equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula isomorphism rational localization field coefficients compact support naturality coherence",
+   "results": "Proj.awayMap_awayToSection; PrimeSpectrum.mapPiLocalization_naturality; other unrelated scheme localization maps.",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_isIso",
+   "results": "No hits; unknown identifier 'Functor.map_isIso'. Local Mathlib Iso.lean provides IsIso.of_isIso_comp_left/right and isIso_comp_left/right_iff.",
+   "date": "2026-10-26",
+   "verdict": "Generic isomorphism transport is available and proved directly in the item; it does not prove comparison coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "CompactSupportProjectionCoherence|compactSupportProjectionCoherence|projection.*[Cc]oherence; rg CompactSupportProjectionLaws in Mathlib, WeilConjectures, Sheaf",
+   "results": "msearch grep: zero hits. Local search found CompactSupportProjectionLaws only in ConstructibleProjectionMates, the three stage-law modules, their assembly and consumers. ProjectionFormulaCoherence assumes SixFunctorDatum and imports CompactSupportProjectionFormula; it would be circular here.",
+   "date": "2026-10-26",
+   "verdict": "No existing predicate separating the four equations and no usable theorem transporting them for an operation datum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFieldStages",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compact-support projection comparison equations in the field transport and coherence argument",
+   "via": [
+    "lem-sf-projection-field-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionCoherence",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionCoherence.lean",
+  "declaration": "WeilConjectures.CompactSupportProjectionCoherence",
+  "statement": "structure CompactSupportProjectionCoherence {D : FiniteFieldDatum.{u}}\n    {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]\n    (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)\n    (A : ∀ Q : SixFunctorCompactifiedSquare D, SixFunctorExchangeData S T Q)\n    (P : ∀ X, ObjectProperty (B X)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T002539-L-97221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T002539-L-97221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

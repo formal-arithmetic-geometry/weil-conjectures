@@ -1,0 +1,316 @@
+{
+ "id": "lem-trf-smooth-branch-completed-differential-pullback",
+ "kind": "statement",
+ "title": "Completed differential pullback to a smooth branch and its rational extension",
+ "statement": "Let $k$ be an algebraically closed field, $S$ a finite-type $k$-algebra [def-weil-pbc-finite-type-algebra], $\\mathfrak m$ a maximal ideal with residue field $k$, and $A=S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime]. Let $D$ be a discrete valuation ring [def-sc-discrete-valuation-ring] which is the local $k$-algebra at a $k$-rational point of a smooth one-dimensional curve over $k$ [def-sc-curves]. Let $\\alpha:A\\to D$ be a local $k$-algebra map. Put $R=\\widehat A$ and $T=\\widehat D$, using maximal-ideal-adic completion [def-weil-pbc-adic-completion], and fix a complete local $k$-algebra isomorphism $T\\cong k[[t]]$ [def-weil-pbc-multivariate-power-series]. Write $\\widehat\\alpha:R\\to T$ for the induced map. Let $F=\\operatorname{Frac}D$ and $L=k((t))$, with the embeddings $D\\to T\\to L$ and $F\\to L$. Write $\\Omega$ for Kähler differentials [def-weil-pbc-kahler-differentials], and use scalar extension [def-weil-module-base-change]. For $h(t)=\\sum h_nt^n$ put $h'(t)=\\sum n h_nt^{n-1}$; on $L$ use the quotient rule. The notation $T\\,\\mathrm dt$ or $L\\,\\mathrm dt$ denotes a free module on the displayed symbol.\n\nThere is a $T$-linear isomorphism $E:\\Omega^1_{D/k}\\otimes_D T\\xrightarrow{\\sim}T\\,\\mathrm dt$ with $E(\\mathrm dd\\otimes1)=(\\iota_D(d)(t))'\\,\\mathrm dt$ for every $d\\in D$, where $\\iota_D(d)(t)$ denotes the image of $d$ in $T$. The continuous extension of the universal derivation of $D$, composed with $E$, is termwise differentiation on all of $T$. The rational map $\\delta_F:\\Omega^1_{F/k}\\to L\\,\\mathrm dt$, $\\mathrm dz\\mapsto(z(t))'\\,\\mathrm dt$, is injective and induces an $L$-linear isomorphism $\\Omega^1_{F/k}\\otimes_F L\\xrightarrow{\\sim}L\\,\\mathrm dt$.\n\nLet $\\widehat{\\mathrm d}_A:R\\to\\Omega^1_{A/k}\\otimes_A R$ denote the continuous extension of the universal derivation, with continuity and extension understood as in [def-trf-completed-differential-extension]. The map on algebraic differentials for $\\alpha$, extended to $T$ and followed by $E$, gives $\\beta:\\Omega^1_{A/k}\\otimes_A T\\to T\\,\\mathrm dt$. Its compatibility with completion is\n$$\\beta(\\widehat{\\mathrm d}_A(h)\\otimes1)=(\\widehat\\alpha(h))'\\,\\mathrm dt\\qquad(h\\in R),$$\nwhere tensor associativity identifies the source with $(\\Omega^1_{A/k}\\otimes_A R)\\otimes_R T$.\n\nFor every continuous local presentation $R\\cong k[[z_1,\\ldots,z_n]]/(g_1,\\ldots,g_s)$ with $g_j\\in(z_1,\\ldots,z_n)$, let $e_i=\\widehat{\\mathrm d}_A(z_i)$ and $z_i(t)=\\widehat\\alpha(z_i)$. Then $\\beta(e_i\\otimes1)=z_i'(t)\\,\\mathrm dt$, and, with the coefficientwise partial derivatives of [def-trf-formal-power-series-partial-derivative], the Jacobian relations give\n$$\\sum_i (\\partial g_j/\\partial z_i)(z(t))\\,z_i'(t)=0\\qquad(1\\le j\\le s).$$\nAfter extending scalars to $L$, this map agrees with the composite of the natural map $\\Omega^1_{A/k}\\to\\Omega^1_{F/k}$ and $\\delta_F$.\n\nFor every complete local $k$-algebra isomorphism $\\sigma:k[[t]]\\xrightarrow{\\sim}k[[s]]$, put $v(s)=\\sigma(t)$. It extends uniquely to a field isomorphism $\\tau:k((t))\\xrightarrow{\\sim}k((s))$ and $v'(s)$ is a unit in $k[[s]]$. For every $h\\in k((t))$ the formal chain rule is\n$$\\tau(h'(t))v'(s)=(\\tau(h))'(s).$$\nThe map $\\nu:h(t)\\,\\mathrm dt\\mapsto\\tau(h(t))v'(s)\\,\\mathrm ds$ is an invertible $\\tau$-semilinear map of the rational differential modules and carries $k[[t]]\\,\\mathrm dt$ onto $k[[s]]\\,\\mathrm ds$. Under scalar transport $\\omega\\otimes c\\mapsto\\omega\\otimes\\sigma(c)$, with $\\tau$ on rational scalars, the maps $E$, $\\beta$ and $\\delta_F$ just described commute with $\\nu$ and their counterparts for the parameter $s$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), algebraically closed Jacobian-presentation proof paragraph and completion passage; Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate changes. Agent-formulated naturality and smooth-branch refinement; these tags do not assert the mixed completion/naturality theorem verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-curves",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-trf-completed-differential-extension",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Write $D=B_{\\mathfrak q}$ using an affine neighbourhood of its given smooth rational point; $B$ is finite type over $k$ and $B/\\mathfrak q=k$. Apply [lem-trf-completion-kahler-differential-comparison] with coefficient field $k$ and its structure section. It identifies $\\Omega_{D/k}\\otimes_D T$ with $\\widehat\\Omega_{T/k}$ and carries the extended derivation to the quotientwise universal derivation. The fixed isomorphism $T\\cong k[[t]]$ induces isomorphisms on all maximal-ideal-power quotients, hence on their differential inverse limits (apply the inverse ring isomorphism to obtain the inverse maps). For one variable, [lem-trf-formal-power-series-continuous-free] identifies this limit with $T\\,\\mathrm dt$ and sends $\\widehat{\\mathrm d}(h)$ to $h'\\,\\mathrm dt$. Their composite is $E$ and proves both its formula on $D$ and the claimed formula for the continuous extension on all of $T$.",
+   "uses": [
+    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-formal-power-series-continuous-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), completed Jacobian passage; explicit comparison and one-variable continuous-differential inputs"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] (with $S=\\operatorname{Spec}k$, so the fibre is the curve itself), shrink the smooth curve to an affine neighbourhood $\\operatorname{Spec}B'$ of the point on which $\\Omega_{B'/k}$ is free of some finite rank $d$. Localizing by [lem-weil-pbc-kahler-differentials-localization] makes $\\Omega_{D/k}$ free of rank $d$, so $\\Omega_{D/k}\\otimes_DT$ is free of rank $d$ over $T$; by Step 1 it is isomorphic to $T\\,\\mathrm dt$, and rank of free modules over the nonzero commutative ring $T$ is invariant, so $d=1$. Let $b$ be the resulting basis of $\\Omega_{D/k}$. The same localization theorem gives $\\Omega_{F/k}=F b$. Write $E(b\\otimes1)=u\\,\\mathrm dt$. Since $E$ is an isomorphism, multiplication by $u$ on $T$ is bijective, so $u$ is a unit. The map $F b\\to L\\,\\mathrm dt$, $c b\\mapsto\\iota_F(c)u\\,\\mathrm dt$, is injective since $F\\to L$ is a field embedding and $u\\ne0$; after scalar extension it is multiplication by $u$ on $L$, hence an isomorphism. For $z=a/c$ with $a,c\\in D$, $c\\ne0$, Leibniz gives $\\mathrm dz=c^{-1}\\mathrm da-ac^{-2}\\mathrm dc$. Its image is $(a(t)'c(t)-a(t)c(t)')/c(t)^2\\,\\mathrm dt=z(t)'\\,\\mathrm dt$. Thus this map is exactly $\\delta_F$, including its asserted injectivity.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 (morphisms.tex, lemma-smooth-omega-finite-locally-free); Tag 00RT (algebra.tex, lemma-differentials-localize); Tag 07PE (more-algebra.tex, lemma-derivation-extends), localization quotient rule"
+   }
+  },
+  {
+   "text": "The universal property [def-weil-pbc-kahler-differentials] applied to $a\\mapsto\\mathrm d(\\alpha(a))$ gives the algebraic differential map. Extend scalars and compose with $E$ to obtain $\\beta$. Its composite with $\\widehat{\\mathrm d}_A$ is continuous: the extension exists and is continuous by [lem-trf-completion-kahler-differential-comparison] for $A$, and any $R$-linear map from its target to $T\\,\\mathrm dt$ sends $\\mathfrak m^N$ times that target into $(t)^N T\\,\\mathrm dt$, since $\\widehat\\alpha$ is local. The other map $h\\mapsto(\\widehat\\alpha(h))'\\,\\mathrm dt$ is continuous: locality sends $\\mathfrak m^N R$ into $(t)^N$, and coefficientwise differentiation lowers order by at most one. On $A$ both maps take $a$ to $\\alpha(a)(t)'\\,\\mathrm dt$ by Step 1. Given $h\\in R$, choose representatives $a_N\\in A$ of its compatible completion coordinates; they tend to $h$ by the inverse-limit definition [def-weil-pbc-adic-completion]. Applying the two continuous maps and using that a series in every $(t)^N$ has every coefficient zero proves their equality on $h$. Tensor associativity here sends $(\\omega\\otimes r)\\otimes c$ to $\\omega\\otimes\\widehat\\alpha(r)c$, with inverse $\\omega\\otimes c\\mapsto(\\omega\\otimes1)\\otimes c$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-completion-kahler-differential-comparison",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, completion passage; continuity justified by comparison and inverse-limit representatives"
+   }
+  },
+  {
+   "text": "Apply Step 3 to $h=z_i$ to obtain $\\beta(e_i\\otimes1)=z_i'(t)\\,\\mathrm dt$. Let $P=k[[Z_1,\\ldots,Z_n]]$ and let $\\psi:P\\to T$ be its presentation map followed by $\\widehat\\alpha$, so $\\psi(Z_i)=z_i(t)\\in(t)$. The map $H\\mapsto(\\psi(H))'$ is a $\\psi$-derivation by the coefficientwise Leibniz rule. Apply [lem-trf-formal-relative-derivation-expansion] with $m=n$, target variable count $1$, and this derivation. It gives $(\\psi(H))'=\\sum_i\\psi(\\partial_iH)z_i'(t)$. Since $\\psi(g_j)=0$, taking $H=g_j$ proves the displayed Jacobian relations. This uses arbitrary formal series, rather than treating the $g_j$ as polynomials.",
+   "uses": [
+    "lem-trf-formal-relative-derivation-expansion",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), formal chain-rule calculation"
+   }
+  },
+  {
+   "text": "After scalar extension to $L$, evaluate the two maps in the rational-compatibility assertion on $\\mathrm da\\otimes c$, $a\\in A$, $c\\in L$. The map through $\\beta$ gives $c\\,\\alpha(a)(t)'\\,\\mathrm dt$ by Steps 1 and 3. The map through $\\Omega_{F/k}$ gives $c\\,\\delta_F(\\mathrm d\\alpha(a))$, which is the same expression by Step 2. These differential symbols generate by the construction in [def-weil-pbc-kahler-differentials], so the maps agree on the entire scalar extension.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D completion passage; generator calculation of rational naturality"
+   }
+  },
+  {
+   "text": "An isomorphism $\\sigma:k[[t]]\\to k[[s]]$ sends the maximal ideal $(t)$ onto $(s)$; hence $v=\\sigma(t)=s w(s)$ with $w(0)\\ne0$. Consequently $v'(0)=w(0)\\ne0$, and $v'$ is a unit: its inverse is obtained recursively from the coefficients, dividing by $w(0)$. Extending $\\sigma$ to fractions gives the unique field isomorphism $\\tau$, with $\\tau(f/g)=\\sigma(f)/\\sigma(g)$; equality of fractions and the inverse follow by cross multiplication and the inverse of $\\sigma$. Every Laurent series is $t^{-N}f(t)$ for a power series $f$, so these are precisely the stated fields. Apply [lem-trf-formal-relative-derivation-expansion] to the $\\sigma$-derivation $f\\mapsto(\\sigma f)'$ to get $(\\sigma f)'=\\sigma(f')v'$ for every power series $f$. For $h=f/g$, quotient differentiation gives\n$$(\\tau h)'=\\frac{(\\sigma f)'\\sigma g-\\sigma f(\\sigma g)'}{(\\sigma g)^2}=\\tau\\!\\left(\\frac{f'g-fg'}{g^2}\\right)v'=\\tau(h')v'.$$\nThis proves the chain rule for all Laurent series, with no characteristic restriction.",
+   "uses": [
+    "lem-trf-formal-relative-derivation-expansion",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B, coordinate changes; Tag 07PE (lemma-derivation-extends), fraction rule"
+   }
+  },
+  {
+   "text": "Define $\\nu(c\\,\\mathrm dt)=\\tau(c)v'\\,\\mathrm ds$. Its inverse is $d\\,\\mathrm ds\\mapsto\\tau^{-1}(d/v')\\,\\mathrm dt$, proving invertible semilinearity. Since $\\sigma$ carries the power-series ring onto the power-series ring and $v'$ is a unit there, $\\nu$ carries the stated lattices onto each other. For $d\\in D$, Step 6 gives\n$$\\nu\\bigl(E_t(\\mathrm dd\\otimes c)\\bigr)=\\sigma(c)\\sigma(d(t)')v'\\,\\mathrm ds=\\sigma(c)(\\sigma(d(t)))'\\,\\mathrm ds=E_s(\\mathrm dd\\otimes\\sigma(c)).$$\nFor rational scalars replace $\\sigma$ by $\\tau$. The identical calculation with $d=\\alpha(a)$ proves the square for $\\beta$ on $\\mathrm da\\otimes c$, and with $d=z\\in F$ proves it for $\\delta_F$ on $\\mathrm dz$. All differential modules are generated by these symbols by [def-weil-pbc-kahler-differentials], so these calculations prove every claimed square. Step 3 then also gives compatibility on completed elements; no additional choice of extension is involved.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B coordinate changes; explicit generator computations for all three naturality squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-completion-kahler-differential-comparison",
+  "lem-trf-formal-power-series-continuous-free",
+  "lem-trf-formal-relative-derivation-expansion",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4D and 0C4B; assembly from existing continuous-differential and formal-derivation nodes, with localization calculation from Tag 00RT and smooth rank from Tag 02G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential.*(PowerSeries|LaurentSeries|AdicCompletion)|(PowerSeries|LaurentSeries|AdicCompletion).*KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"grep\", \"query\": \"KaehlerDifferential.*(PowerSeries|LaurentSeries|AdicCompletion)|(PowerSeries|LaurentSeries|AdicCompletion).*KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of Kahler differentials at a rational smooth curve point is free on dt and pullback of completed coordinates is the power series derivative",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"leansearch\", \"query\": \"Completion of Kahler differentials at a rational smooth curve point is free on dt and pullback of completed coordinates is the power series derivative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.KaehlerDifferential\", \"instFreeMvPolynomialKaehlerDifferential\", \"KaehlerDifferential\", \"KaehlerDifferential.polynomialEquiv_D\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"KaehlerDifferential.D\", \"KaehlerDifferential.polynomialEquiv_comp_D\", \"KaehlerDifferential.D_apply\"], \"digest\": \"8c02e37c005e4fdd\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local map from an algebraic local ring to a smooth curve DVR completed differentials pull back by formal differentiation and rational differentials embed into Laurent series differentials",
+   "results": "{\"t\": \"2026-10-22T06:14:53Z\", \"tool\": \"leanfinder\", \"query\": \"For a local map from an algebraic local ring to a smooth curve DVR completed differentials pull back by formal differentiation and rational differentials embed into Laurent series differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"LaurentSeries.coe_X_compare\", \"algebraMap.coe_logDeriv\", \"BDeRham\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.powerSeriesAlgEquiv\"], \"digest\": \"daff9a1bfb3f6728\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of continuous Kahler differential completion along a curve parametrization and injectivity of rational differentials into k Laurent series dt",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of continuous Kahler differential completion along a curve parametrization and injectivity of rational differentials into k Laurent series dt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.differentials.comm₂₃\", \"CommRingCat.KaehlerDifferential.map_d\", \"Algebra.Generators.toKaehler_tmul_D\", \"KaehlerDifferential.map_D\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"Algebra.Extension.toKaehler\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"derivationQuotKerSq_mk\"], \"digest\": \"798124bc651ffdf0\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_D|polynomialEquiv_D|tensorKaehlerEquivOfFormallyEtale",
+   "results": "{\"t\": \"2026-10-22T06:16:18Z\", \"tool\": \"grep\", \"query\": \"map_D|polynomialEquiv_D|tensorKaehlerEquivOfFormallyEtale\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\"], \"digest\": \"512fc8b09678c240\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivative.*subst|subst.*derivative|derivative.*comp|Kaehler",
+   "results": "{\"t\": \"2026-10-22T06:23:01Z\", \"tool\": \"grep\", \"query\": \"derivative.*subst|subst.*derivative|derivative.*comp|Kaehler\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\"], \"digest\": \"61e289b509e88307\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed smooth curve differentials and rational differential embeddings are natural under a formal change of uniformizer with the derivative as Jacobian factor",
+   "results": "{\"t\": \"2026-10-22T06:23:01Z\", \"tool\": \"leansearch\", \"query\": \"Completed smooth curve differentials and rational differential embeddings are natural under a formal change of uniformizer with the derivative as Jacobian factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange\", \"WeierstrassCurve.variableChange_def\", \"WeierstrassCurve.VariableChange.u\", \"WeierstrassCurve.Projective.map_polynomialX\", \"WeierstrassCurve.Projective.baseChange_polynomialX\", \"WeierstrassCurve.VariableChange.casesOn\", \"WeierstrassCurve.VariableChange.s\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"a1ce731405b50515\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries.derivative\", \"subst\"",
+   "results": "{\"t\": \"2026-10-22T06:23:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries.derivative\\\", \\\"subst\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PowerSeries.derivative_subst\"], \"digest\": \"2867bf602aea547e\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of completion of Kahler differentials along a local map to a smooth DVR including formal uniformizer changes and the Laurent series derivative chain rule",
+   "results": "{\"t\": \"2026-10-22T06:23:02Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of completion of Kahler differentials along a local map to a smooth DVR including formal uniformizer changes and the Laurent series derivative chain rule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.KaehlerDifferential.map_d\", \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"KaehlerDifferential.map_compDer\", \"KaehlerDifferential.map_D\", \"Algebra.Generators.map_comp_cotangentCompAwaySec\", \"Algebra.Generators.cotangentCompAwaySec_apply\", \"KaehlerDifferential.isLocalizedModule_map\", \"BDeRham\"], \"digest\": \"8563f23a3d16232d\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem derivative_subst|^lemma derivative_subst",
+   "results": "{\"t\": \"2026-10-22T06:23:21Z\", \"tool\": \"grep\", \"query\": \"^theorem derivative_subst|^lemma derivative_subst\", \"sub\": \"RingTheory/PowerSeries/Derivative.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"140\"], \"digest\": \"e8a81056c5f05a2b\"}; Read Mathlib/RingTheory/Kaehler/Polynomial.lean:132 and Basic.lean:668: polynomial differentiation and algebraic functoriality only; no continuous completion comparison for a smooth branch or its rational differential embedding. Additional coordinate-change searches found PowerSeries.derivative_subst, read at Mathlib/RingTheory/PowerSeries/Derivative.lean:140: it proves the chain-rule component, not the mixed completion/naturality theorem. The direct-file grep returned line 140 with the filename misparsed by msearch.py; the signature was read in that named file. The LaurentSeries completion equivalences compare rings, not differential modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-23T09:58:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read: algebraic localization/polynomial and standard-smooth results, or Laurent-series ring completions, do not assert the mixed completed differential pullback and parameter naturality theorem. Read Kaehler/Basic.lean:658-670, Polynomial.lean:127-134 and PowerSeries/Derivative.lean:140-153.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential.*(PowerSeries|AdicCompletion)|(PowerSeries|AdicCompletion).*KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-23T09:58:38Z\", \"tool\": \"grep\", \"query\": \"KaehlerDifferential.*(PowerSeries|AdicCompletion)|(PowerSeries|AdicCompletion).*KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read: algebraic localization/polynomial and standard-smooth results, or Laurent-series ring completions, do not assert the mixed completed differential pullback and parameter naturality theorem. Read Kaehler/Basic.lean:658-670, Polynomial.lean:127-134 and PowerSeries/Derivative.lean:140-153.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of Kahler differentials of a smooth curve local ring identified with power series differentials and natural pullback",
+   "results": "{\"t\": \"2026-10-23T09:58:38Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of Kahler differentials of a smooth curve local ring identified with power series differentials and natural pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"KaehlerDifferential.polynomialEquiv\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.Generators.cMulXSubOneCotangent\"], \"digest\": \"ee23ce77de9b83bd\"}; Hits read: algebraic localization/polynomial and standard-smooth results, or Laurent-series ring completions, do not assert the mixed completed differential pullback and parameter naturality theorem. Read Kaehler/Basic.lean:658-670, Polynomial.lean:127-134 and PowerSeries/Derivative.lean:140-153.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth curve completed differentials and rational differential embedding into Laurent series commute with change of parameter",
+   "results": "{\"t\": \"2026-10-23T09:58:39Z\", \"tool\": \"leansearch\", \"query\": \"Smooth curve completed differentials and rational differential embedding into Laurent series commute with change of parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.LaurentSeries_coe\", \"LaurentSeries.LaurentSeriesPkg\", \"RatFunc.coeToLaurentSeries\", \"WeierstrassCurve.variableChange_def\", \"RatFunc.laurent_algebraMap\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"LaurentSeries.extensionAsRingHom\", \"WeierstrassCurve.VariableChange.map_s\"], \"digest\": \"add466acc91b5d64\"}; Hits read: algebraic localization/polynomial and standard-smooth results, or Laurent-series ring completions, do not assert the mixed completed differential pullback and parameter naturality theorem. Read Kaehler/Basic.lean:658-670, Polynomial.lean:127-134 and PowerSeries/Derivative.lean:140-153.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous differential comparison under completion for local maps and the formal power series chain rule",
+   "results": "{\"t\": \"2026-10-23T09:58:44Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous differential comparison under completion for local maps and the formal power series chain rule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffAt.exists_eventually_eq_hasDerivAt\", \"contDiffOn_succ_iff_fderiv_apply\", \"contDiff_succ_iff_fderiv_apply\", \"contDiffOn_succ_of_fderiv_apply\", \"contDiffWithinAt_succ_iff_hasFDerivWithinAt'\", \"contDiffWithinAt_succ_iff_hasFDerivWithinAt\", \"ContDiffWithinAt.hasFDerivWithinAt_nhds\", \"contDiffOn_succ_iff_hasFDerivWithinAt\"], \"digest\": \"85d45b88cdbe0fd0\"}; Hits read: algebraic localization/polynomial and standard-smooth results, or Laurent-series ring completions, do not assert the mixed completed differential pullback and parameter naturality theorem. Read Kaehler/Basic.lean:658-670, Polynomial.lean:127-134 and PowerSeries/Derivative.lean:140-153.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "free_kaehlerDifferential|polynomialEquiv_D|isLocalizedModule_map|map_D",
+   "results": "{\"t\": \"2026-10-23T10:02:28Z\", \"tool\": \"grep\", \"query\": \"free_kaehlerDifferential|polynomialEquiv_D|isLocalizedModule_map|map_D\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"6ecc39dd30d910f8\"}; Hits read: algebraic localization/polynomial and standard-smooth results, or Laurent-series ring completions, do not assert the mixed completed differential pullback and parameter naturality theorem. Read Kaehler/Basic.lean:658-670, Polynomial.lean:127-134 and PowerSeries/Derivative.lean:140-153.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-plane-adjunction-lattice",
+  "date": "2026-10-22",
+  "group": "Q150"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Extraction from the returned formal-plane proof: old step 3 and the differential-naturality part of step 4: smooth branch differential completion, rational localization, continuity on the dense algebraic local ring and formal coordinate pullback.",
+   "via": [
+    "lem-trf-formal-plane-adjunction-lattice",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-branch-completed-differential-pullback",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Constructed E using existing completion and continuous-free comparisons; proved rational injectivity using the existing smooth rank and localization inputs, extended the pullback by continuity, and computed the formal Jacobian and all parameter-change squares explicitly.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Extraction from the returned formal-plane proof: old step 3 and the differential-naturality part of step 4: smooth branch differential completion, rational localization, continuity on the dense algebraic local ring and formal coordinate pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic smooth-morphism differential rank tool: at the given rational point of a one-dimensional smooth curve it supplies a rank-one affine differential basis, then localized. No node in the local-term unit supplies this algebraic rank fact; its route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-69ec15c50",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-69ec15c50 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full; this is a first split with no new nodes, and the statement and stmt_deps are unchanged from live. Steps 1, 3, 4, 5, 6 and 7 check out: E comes from the completion comparison with coefficient field k plus the free lemma with n=1; β's continuity uses comparison (i), the identification of Â/m^N with A/m^N, and the locality of α̂; the Jacobian relations follow from the relative-derivation expansion with r=1 and ψ(g_j)=0; the parameter-change chain rule from the same lemma with m=r=1, and v=s·unit gives v' a unit in any characteristic; the naturality squares are checked on generators. Fixed two faults in step 2. (1) The step said 'free of rank one', but the cited 02G1 lemma only gives rank d=dim_x; the step now derives d=1 from Step 1 (Ω_D⊗T is free of rank d and isomorphic to T dt, and ranks of free modules over a nonzero commutative ring are well defined). (2) The step's source named algebra.tex, but 02G1 is morphisms.tex and 07PE is more-algebra.tex; the source now names each file. I accept the declared tool use of lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension as a generic tool. No cycle; proof_deps equals the union of the step uses; no duplicate node in the DAG; no SGA citation. Edge cases tested: constant α, 𝔸¹, u↦t^p in characteristic p (β=0 is consistent, δ_F stays injective), and s↦as+s^2.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothBranchCompletedDifferentialPullback",
+  "declaration": "Algebra.smooth_branch_completed_differential_pullback",
+  "file": "lean/Sheaf/RingTheory/SmoothBranchCompletedDifferentialPullback.lean",
+  "statement": "theorem smooth_branch_completed_differential_pullback (k S A B D F : Type u) [Field k] [IsAlgClosed k] [CommRing S] [Algebra k S] (hS : (algebraMap k S).FiniteType) (m : Ideal S) [m.IsMaximal] (residueS : m.ResidueField ≃ₐ[k] k) [CommRing A] [Algebra S A] [IsLocalization.AtPrime A m] [Algebra k A] [IsScalarTower k S A] [IsLocalRing A] [CommRing B] [Algebra k B] (hcurve : IsCurve (Spec.map (CommRingCat.ofHom (algebraMap k B)))) (hsmooth : AlgebraicGeometry.Smooth (Spec.map (CommRingCat.ofHom (algebraMap k B)))) (hdim : topologicalKrullDim (Spec (CommRingCat.of B)) = 1) (q : Ideal B) [q.IsMaximal] (residueB : q.ResidueField ≃ₐ[k] k) [CommRing D] [IsDomain D] [IsDiscreteValuationRing D] [Algebra B D] [IsLocalization.AtPrime D q] [Algebra k D] [IsScalarTower k B D] [Algebra A D] [IsScalarTower k A D] [IsLocalHom (algebraMap A D)] [Field F] [Algebra D F] [IsFractionRing D F] [Algebra k F] [IsScalarTower k D F] (eT : LocalCompletion D ≃ₐ[k] PowerSeries k) [Algebra F (LaurentSeries k)] (hF : ∀ d : D, algebraMap F (LaurentSeries k) (algebraMap D F d) = algebraMap (PowerSeries k) (LaurentSeries k) (eT (algebraMap D (LocalCompletion D) d))) : ∃ ahat : LocalCompletion A →ₐ[k] LocalCompletion D, (∀ a : A, ahat (algebraMap A (LocalCompletion A) a) = algebraMap D (LocalCompletion D) (algebraMap A D a)) ∧ (∀ r : ℕ, ∃ N : ℕ, (((IsLocalRing.maximalIdeal A).map (algebraMap A (LocalCompletion A))) ^ N).map ahat.toRingHom ≤ ((IsLocalRing.maximalIdeal D).map (algebraMap D (LocalCompletion D))) ^ r) ∧ ∃ (E : CompletedDifferentials k D ≃ₗ[LocalCompletion D] LocalCompletion D) (dD : Derivation k (LocalCompletion D) (CompletedDifferentials k D)) (dA : Derivation k (LocalCompletion A) (CompletedDifferentials k A)), IsCompletedDifferentialExtension k D dD ∧ IsCompletedDifferentialExtension k A dA ∧ (∀ d : D, eT (E (1 ⊗ₜ[D] KaehlerDifferential.D k D d)) = PowerSeries.derivative k (eT (algebraMap D (LocalCompletion D) d))) ∧ (∀ h : LocalCompletion D, eT (E (dD h)) = PowerSeries.derivative k (eT h)) ∧ ∃ (delta : KaehlerDifferential k F →ₗ[F] LaurentSeries k) (EL : LaurentSeries k ⊗[F] KaehlerDifferential k F ≃ₗ[LaurentSeries k] LaurentSeries k), (∀ z : F, delta (KaehlerDifferential.D k F z) = LaurentSeries.derivative k (algebraMap F (LaurentSeries k) z)) ∧ Function.Injective delta ∧ (∀ (c : LaurentSeries k) (w : KaehlerDifferential k F), EL (c ⊗ₜ[F] w) = c * delta w) ∧ ∃ (beta : LocalCompletion D ⊗[A] KaehlerDifferential k A →ₗ[LocalCompletion D] LocalCompletion D) (betaR : CompletedDifferentials k A →ₛₗ[ahat.toRingHom] LocalCompletion D), (∀ (c : LocalCompletion D) (w : KaehlerDifferential k A), beta (c ⊗ₜ[A] w) = E (c ⊗ₜ[D] KaehlerDifferential.map k k A D w)) ∧ (∀ (r : LocalCompletion A) (w : KaehlerDifferential k A), betaR (r ⊗ₜ[A] w) = ahat r * beta (1 ⊗ₜ[A] w)) ∧ (∀ h : LocalCompletion A, eT (betaR (dA h)) = PowerSeries.derivative k (eT (ahat h))) ∧ (∀ (n s : ℕ) (p : MvPowerSeries (Fin n) k →ₐ[k] LocalCompletion A) (g : Fin s → MvPowerSeries (Fin n) k), Function.Surjective p → RingHom.ker p.toRingHom = Ideal.span (Set.range g) → (∀ j : Fin s, MvPowerSeries.constantCoeff (g j) = 0) → (∀ r : ℕ, ∃ N : ℕ, ((Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) k))) ^ N).map p.toRingHom ≤ ((IsLocalRing.maximalIdeal A).map (algebraMap A (LocalCompletion A))) ^ r) → (∀ i : Fin n, eT (betaR (dA (p (MvPowerSeries.X i)))) = PowerSeries.derivative k (eT (ahat (p (MvPowerSeries.X i))))) ∧ ∀ j : Fin s, ∑ i : Fin n, eT (ahat (p (MvPowerSeries.pderiv k i (g j)))) * PowerSeries.derivative k (eT (ahat (p (MvPowerSeries.X i)))) = 0) ∧ (∀ (w : KaehlerDifferential k A) (c : LaurentSeries k), c * algebraMap (PowerSeries k) (LaurentSeries k) (eT (beta (1 ⊗ₜ[A] w))) = c * delta (KaehlerDifferential.map k k D F (KaehlerDifferential.map k k A D w))) ∧ ∀ sigma : PowerSeries k ≃ₐ[k] PowerSeries k, ∃ tau : LaurentSeries k ≃ₐ[k] LaurentSeries k, (∀ f : PowerSeries k, tau (algebraMap (PowerSeries k) (LaurentSeries k) f) = algebraMap (PowerSeries k) (LaurentSeries k) (sigma f)) ∧ (∀ tau' : LaurentSeries k ≃ₐ[k] LaurentSeries k, (∀ f : PowerSeries k, tau' (algebraMap (PowerSeries k) (LaurentSeries k) f) = algebraMap (PowerSeries k) (LaurentSeries k) (sigma f)) → tau' = tau) ∧ IsUnit (PowerSeries.derivative k (sigma PowerSeries.X)) ∧ (∀ h : LaurentSeries k, tau (LaurentSeries.derivative k h) * algebraMap (PowerSeries k) (LaurentSeries k) (PowerSeries.derivative k (sigma PowerSeries.X)) = LaurentSeries.derivative k (tau h)) ∧ ∃ nu : @LinearEquiv _ _ _ _ tau.toRingHom tau.symm.toRingHom (RingHomInvPair.of_ringEquiv tau.toRingEquiv) (RingHomInvPair.of_ringEquiv_symm tau.toRingEquiv) (LaurentSeries k) (LaurentSeries k) _ _ _ _, (∀ h : LaurentSeries k, nu h = tau h * algebraMap (PowerSeries k) (LaurentSeries k) (PowerSeries.derivative k (sigma PowerSeries.X))) ∧ nu '' Set.range (algebraMap (PowerSeries k) (LaurentSeries k)) = Set.range (algebraMap (PowerSeries k) (LaurentSeries k)) ∧ ∃ (Es : @LinearEquiv _ _ _ _ (eT.trans sigma).toRingHom (eT.trans sigma).symm.toRingHom (RingHomInvPair.of_ringEquiv (eT.trans sigma).toRingEquiv) (RingHomInvPair.of_ringEquiv_symm (eT.trans sigma).toRingEquiv) (CompletedDifferentials k D) (PowerSeries k) _ _ _ _) (betas : LocalCompletion D ⊗[A] KaehlerDifferential k A →ₛₗ[(eT.trans sigma).toRingHom] PowerSeries k) (deltas : KaehlerDifferential k F →ₗ[k] LaurentSeries k), (∀ d : D, Es (1 ⊗ₜ[D] KaehlerDifferential.D k D d) = PowerSeries.derivative k (sigma (eT (algebraMap D (LocalCompletion D) d)))) ∧ (∀ a : A, betas (1 ⊗ₜ[A] KaehlerDifferential.D k A a) = PowerSeries.derivative k (sigma (eT (algebraMap D (LocalCompletion D) (algebraMap A D a))))) ∧ (∀ (f : F) (w : KaehlerDifferential k F), deltas (f • w) = tau (algebraMap F (LaurentSeries k) f) * deltas w) ∧ (∀ z : F, deltas (KaehlerDifferential.D k F z) = LaurentSeries.derivative k (tau (algebraMap F (LaurentSeries k) z))) ∧ (∀ w : CompletedDifferentials k D, nu (algebraMap (PowerSeries k) (LaurentSeries k) (eT (E w))) = algebraMap (PowerSeries k) (LaurentSeries k) (Es w)) ∧ (∀ w : LocalCompletion D ⊗[A] KaehlerDifferential k A, nu (algebraMap (PowerSeries k) (LaurentSeries k) (eT (beta w))) = algebraMap (PowerSeries k) (LaurentSeries k) (betas w)) ∧ ∀ w : KaehlerDifferential k F, nu (delta w) = deltas w",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e69f08d7",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement verbatim = file signature, single sorry, no defs; node changes only in lean; report has Worker report + Second reading by Q27. Hypotheses match node: D=B_q with affine IsCurve+Smooth+dim 1 Spec B is equivalent to the node's local ring at a rational point of a smooth curve (DVR forces dim 1); IsLocalRing A derivable; F->L pinned by hF. Conclusions complete: ahat by extension+continuity; E T-linear iso with formula on D and on all T via IsCompletedDifferentialExtension dD (unique); delta F-linear injective + EL scalar extension; beta/betaR tensor associativity and completed compatibility for all h; all presentations (n,s>=0, const coeff 0, continuous p) with e_i formula and pderiv Jacobian sum; rational compatibility on all (w,c); sigma over all k-alg autos, tau unique, v' unit, Laurent chain rule, nu semilinear equiv with lattice equality; Es/betas/deltas uniquely fixed by generators, three squares on whole modules (witnesses sigma(eT E)v', sigma(eT beta)v', nu∘delta checked). Truth: E(du) is a unit in any char so E iso and delta injective. Edge cases char p u->t^p (beta=0), constant alpha, A=k/n=0, s=0, affine line, sigma=as+s^2 consistent. Advisories: common universe u; LocalCompletion/CompletedDifferentials abbrevs reached transitively via def-trf-completed-differential-extension (definition-node owners). No file changed, no compile."
+ }
+}

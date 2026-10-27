@@ -1,0 +1,351 @@
+{
+ "id": "lem-trf-devissage-flattening-transfer",
+ "kind": "statement",
+ "title": "Elementary devissage preserves admissible module-flattening data",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme, $f:X\\to S$ a quasi-compact morphism locally of finite presentation [def-sbc-locally-finite-presentation], and $\\mathcal F$ a finite-type quasi-coherent $\\mathcal O_X$-module. Let $U\\subset S$ be a quasi-compact open on which $\\mathcal F$ is finitely presented and flat over $U$. For every $x\\in\\operatorname{Supp}(\\mathcal F_s)$, $s=f(x)$, put $n=\\dim_x\\operatorname{Supp}(\\mathcal F_s)$ [def-kun-dimension], where support is the locus of nonzero stalks and $\\mathcal F_s$ is the pullback to $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$. There are affine pointed etale neighbourhoods $g:(X_1,x_1)\\to(X,x)$ and $e:(T,t)\\to(S,s)$, with $e$ quasi-compact, and $f_1:X_1\\to T$ satisfying $fg=ef_1$. There are affine $T$-schemes $Z,Y$, a finitely presented closed immersion $i:Z\\to X_1$, a finite $T$-morphism $\\pi:Z\\to Y$, and a finite-type quasi-coherent module $\\mathcal G$ with $i_*\\mathcal G\\cong g^*\\mathcal F$. The morphism $h:Y\\to T$ is smooth of relative dimension $n$ with geometrically integral fibres (integral after every residue-field extension). Put $\\mathcal N=\\pi_*\\mathcal G$ and $U_T=e^{-1}(U)$. Then $\\mathcal N$ is quasi-coherent of finite type and $\\mathcal N|_{Y_{U_T}}$ is finitely presented and flat over $U_T$. For every $U_T$-admissible blowup $b:T^b\\to T$, the strict transform $\\mathcal N^b$ is flat over $T^b$ if and only if $(g^*\\mathcal F)^b$ is flat over $T^b$. These strict transforms are modules on $Y\\times_TT^b$ and $X_1\\times_TT^b$, respectively. Etale, smooth, finite morphisms, closed immersions and module pullback/pushforward are as in [def-weil-etale-morphism, def-sbc-smooth-morphisms, def-weil-finite-integral-morphism, def-weil-closed-immersion, def-pc-module-pullback]. Schemes and quasi-compactness conventions are as in [def-weil-pbc-scheme-conventions, def-weil-quasi-separated-morphism], quasi-coherence and finite type as in [pqf-def-coherent], finite presentation of module sheaves as in [def-weil-pbc-module-finite-type-presentation], and relative flatness as in [def-pc-scheme-module-flat-over]. Admissible blowups retain their finite-type centre ideals [def-nagata-admissible-blowup], and all module strict transforms use those specified ideals [def-trf-module-strict-transform].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, proof paragraph 2: the finite-presentation and relative-flatness checks and transfer through elementary devissage; Tag 057S, lemma-elementary-devissage."
+ },
+ "stmt_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-kun-dimension",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform"
+ ],
+ "proof": [
+  {
+   "text": "Local finite presentation implies local finite type [def-weil-finite-type-morphism]: for every affine open V of S and every affine open of f^{-1}V the ring map is finitely presented (Stacks 01TQ), hence finitely generated after forgetting the finitely many relations. Apply elementary module devissage at the specified x. Write its affine schemes as X_1,Z,Y,T and retain its module G, maps g,e,i,pi,h and all distinguished points. This gives the asserted diagram, i_*G = g^*F and the smooth relative-dimension-n geometrically integral fibres. Because T is affine and S is quasi-separated, e:T -> S is quasi-compact by qcqs morphism permanence. Hence U_T is quasi-compact: it is the inverse image of the quasi-compact open U under e.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-trf-elementary-module-devissage",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 057S, lemma-elementary-devissage; 0815, theorem-flatten-module, second paragraph; Schemes Tags 03GI and 01K4"
+   }
+  },
+  {
+   "text": "Apply the finite-presentation devissage lemma to these same data, including its retained singleton fibre and purely transcendental residue extension: f is locally of finite presentation, so pi is of finite presentation. Only this morphism assertion is used here; the lemma's neighbourhood assertions at the distinguished point are not assertions on the whole inverse image of U. Both i and pi are affine: i by the affine description of closed immersions, pi by the definition of a finite morphism.",
+   "uses": [
+    "lem-trf-elementary-devissage-finite-presentation",
+    "def-weil-closed-immersion",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, lemma-devissage-finite-presentation, first assertion"
+   }
+  },
+  {
+   "text": "Put H=g^*F=i_*G and N=pi_*G. Affine pushforward makes N quasi-coherent. To check finite type, write Y=Spec B, Z=Spec C and M=G(Z). The affine finite-type criterion makes M finite over C. Since pi is finite, C has finitely many B-generators c_j. If m_k generate M over C, the elements c_j m_k generate M over B: expand each coefficient of a C-linear combination in the c_j. N(Y) is this same M with restricted scalars, so the affine criterion makes N finite type. This also includes the zero module.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B3, lemma-finite-over-finite-module, affine argument; Properties Tag 01PB"
+   }
+  },
+  {
+   "text": "On X_{1,U_T}, H is finitely presented: it is the tensor pullback of F|_{X_U}, using fg=ef_1 and composition of module pullbacks. It is quasi-coherent by pullback. For an affine open V=Spec B in X_{1,U_T}, the closed inverse image i^{-1}V=Spec C has C=B/J and G(i^{-1}V)=H(V)=M with scalar restriction. The affine criterion makes M finitely presented over B; the finitely-presented-over-subring lemma, applied to the finite-type quotient algebra B -> C, makes it finitely presented over C. These opens cover Z_{U_T}, so G|_{Z_{U_T}} is finitely presented.",
+   "uses": [
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-finitely-presented-over-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, second paragraph; Modules Tag 01BQ; Properties Tag 01PC; Algebra Tag 0561, lemma-finitely-presented-over-subring"
+   }
+  },
+  {
+   "text": "Now work on any affine open V=Spec B of Y_{U_T}. Its inverse image under pi is affine, say Spec C. The finite-presentation morphism pi is locally of finite presentation [def-weil-pbc-scheme-conventions], so the ring map B -> C is finitely presented by the affine-opens characterization of local finite presentation (Stacks 01TQ), and it is finite by the definition of a finite morphism; and G(pi^{-1}V) is finitely presented over C by the previous step and the affine criterion. Apply finite-extension module finite presentation to B -> C: this same module is finitely presented over B. Since N(V)=G(pi^{-1}V), the affine criterion proves N|_{Y_{U_T}} finitely presented. Thus finite presentation is checked everywhere over U_T, without assuming singleton fibres at other points.",
+   "uses": [
+    "lem-trf-finite-extension-module-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B4, lemma-finite-finitely-presented-module, affine proof using Algebra Tag 0564 and Properties Tag 01PC"
+   }
+  },
+  {
+   "text": "At every a in X_{1,U_T}, g is flat because it is etale. The source-flat pullback criterion applied to g over U shows that H_a is flat over O_{U,fg(a)}. Apply the etale local-ring flatness equivalence to e at f_1(a), with the module H_a: it is flat over O_{U_T,f_1(a)}. Hence H is flat over U_T. At z in Z_{U_T}, the closed-pushforward stalk isomorphism H_{i(z)}=G_z respects the base action, so G is flat over U_T as well.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-relative-flatness-source-cover",
+    "lem-trf-etale-local-ring-flatness",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05BA, lemma-etale-flat-up-down-local-ring; Morphisms Tag 02JZ; Sheaves Tag 00AE"
+   }
+  },
+  {
+   "text": "For any affine open W=Spec R in U_T, the schemes Z_W and Y_W are affine. Indeed all of Z,Y,T are affine, hence their structure maps are affine, and inverse images of affine opens under an affine morphism are affine. The affine-chart relative-flatness criterion for G on Z_W says G(Z_W) is R-flat. The pushforward N on Y_W has exactly the same R-module of sections, N(Y_W)=G(Z_W); the two R-actions coincide because pi is a T-map. Apply the criterion on Y_W to obtain N flat over W. These W cover U_T, proving the remaining flatness assertion.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "pqf-def-affine-morphism",
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01SH, lemma-morphism-affines-affine, and 01U4, lemma-flat-module-characterize"
+   }
+  },
+  {
+   "text": "Fix any specified U_T-admissible blowup b:T^b -> T, retaining its finite-type centre ideal I. Write i_b and pi_b for the base changes and G^b for the strict transform of G with this same I. Strict-transform affine pushforward gives (i_*G)^b = i_{b,*}G^b and N^b = pi_{b,*}G^b. The first is H^b since i_*G=H: pullback takes this isomorphism to an isomorphism identifying the subsheaves of sections vanishing off the same exceptional closed subset, hence also their quotients. The strict-transform sheaf-kernel lemma makes G^b quasi-coherent, and affine pushforward makes both displayed pushforwards quasi-coherent. No centre is replaced by the complement of U_T.",
+   "uses": [
+    "def-nagata-admissible-blowup",
+    "def-trf-module-strict-transform",
+    "lem-trf-strict-transform-affine-pushforward",
+    "lem-trf-strict-transform-sheaf-kernel",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 080G, lemma-strict-transform-affine, and 080D, definition-strict-transform and preceding paragraph"
+   }
+  },
+  {
+   "text": "For any affine open W=Spec R in T^b, put Z_W=Z times_T W, Y_W=Y times_T W, and X_W=X_1 times_T W. The three structure maps to T are affine by the affine-schemes lemma; their base changes to T^b remain affine. Consequently Z_W,Y_W,X_W are affine. On these schemes the three section modules G^b(Z_W), (pi_{b,*}G^b)(Y_W), and (i_{b,*}G^b)(X_W) are the same R-module, by the definition of pushforward and commutativity over T^b. The affine-chart flatness criterion therefore gives equivalence of their relative flatness over W. Using the two isomorphisms in step 8, this is N^b flat over W if and only if H^b flat over W. As W ranges over an affine cover of T^b, these pointwise conditions give precisely the claimed global equivalence. No singleton-fibre assertion after blowup, or flatness of b, is used.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-affine-morphism",
+    "def-pc-module-pullback",
+    "lem-pc-affine-chart-relative-flat-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01SH and 01SD (affineness and base change); Tag 01U4, lemma-flat-module-characterize, applied on each affine base chart"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-admissible-blowup",
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-module-strict-transform",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-trf-elementary-devissage-finite-presentation",
+  "lem-trf-elementary-module-devissage",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-finite-extension-module-finite-presentation",
+  "lem-trf-finitely-presented-over-subring",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-trf-strict-transform-affine-pushforward",
+  "lem-trf-strict-transform-sheaf-kernel",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, second proof paragraph; details via Tags 057S, 057T, 05BA, 05B3, 05B4, 01U4 and 080G"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "devissage|finite.*pushforward|pushforward.*finite|relative.*flat",
+   "results": "0 hits. . General flatness/etale and presentation tools do not give the devissage comparison and preservation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Module.FinitePresentation",
+   "results": "0 hits. . General flatness/etale and presentation tools do not give the devissage comparison and preservation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An elementary devissage of a finite type quasi coherent module through a finitely presented closed immersion and a finite morphism preserves finite presentation and base flatness over an open and reflects flattening after blowup",
+   "results": "8 hits.  Candidates: Module.Flat.exists_factorization_of_isFinitelyPresented, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, Algebra.Smooth.flat_of_isNoetherianRing, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono. General flatness/etale and presentation tools do not give the devissage comparison and preservation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a module relative to the base and finite presentation under finite pushforward and etale change of base",
+   "results": "8 hits.  Candidates: Algebra.Smooth.flat, Algebra.FormallyUnramified.flat_of_restrictScalars, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.baseChange, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, RingHom.Flat.isStableUnderBaseChange, RingHom.finitePresentation_isStableUnderBaseChange. General flatness/etale and presentation tools do not give the devissage comparison and preservation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elementary devissage of a finite type quasi coherent module through a finitely presented closed immersion and a finite morphism preserves finite presentation and base flatness over an open and reflects flattening after blowup",
+   "results": "8 hits.  Candidates: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.Flat.instMorphismRestrict, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation. General flatness/etale and presentation tools do not give the devissage comparison and preservation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\"",
+   "results": "12 hits.  Candidates: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf. General flatness/etale and presentation tools do not give the devissage comparison and preservation assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elementary devissage of a quasi coherent module into a finite morphism to a smooth scheme preserves flatness after blowup",
+   "results": "8 hits: Algebra.Smooth.flat, AlgebraicGeometry.Flat, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.flat_iff. Candidates concern general flatness, presentation or pushforward only; none states elementary module devissage with strict-transform transfer.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|strictTransform.*[Mm]odule|strict_transform.*[Mm]odule",
+   "results": "0 hits: . Candidates concern general flatness, presentation or pushforward only; none states elementary module devissage with strict-transform transfer.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, Module.FinitePresentation",
+   "results": "0 hits: . Candidates concern general flatness, presentation or pushforward only; none states elementary module devissage with strict-transform transfer.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite pushforward of a quasi coherent module preserves relative flatness and finite presentation through elementary devissage",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, Module.Flat.of_flat_tensorProduct, PresheafOfModules.pushforward₀_obj_obj_isModule, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, Module.Flat.of_isLocalizedModule, SheafOfModules.IsFinitePresentation.mk, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, Module.Flat.of_shrink. Candidates concern general flatness, presentation or pushforward only; none states elementary module devissage with strict-transform transfer.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type quasi coherent sheaf on a finitely presented scheme, an etale local elementary devissage preserves finite presentation over an open subset and commutes with module strict transform",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, SheafOfModules.IsFinitePresentation. Candidates concern general flatness, presentation or pushforward only; none states elementary module devissage with strict-transform transfer.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flattening-module-by-admissible-blowup",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Expansion of Stacks 0815: Tag 0815, theorem-flatten-module, proof paragraph 2: the finite-presentation and relative-flatness checks and transfer through elementary devissage; Tag 057S, lemma-elementary-devissage.",
+   "via": [
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-devissage-flattening-transfer",
+  "worker": "stage1",
+  "summary": "Reuse the existing elementary devissage, finite-presentation, affine module and strict-transform nodes. Prove open finite presentation globally by affine section modules and restriction of scalars, and prove blowup flatness equivalence on every affine base chart. No new nodes or statement changes.",
+  "blueprint": "Expansion of the semistable-alteration/flattening branch under lem-trf-local-term-locality, inherited via lem-trf-flattening-module-by-admissible-blowup: Stacks 0815 second paragraph. The current blueprint locality proof uses the contracting-correspondence route; this delivery preserves the assigned imported flattening branch and changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-chart-relative-flat-criterion",
+    "why": "Steps 7 and 9 detect relative flatness by affine section modules. The existing devissage flatness node concerns only neighbourhoods of marked singleton fibres, so this global chart tool is needed."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Step 4 pulls back a finite presentation to X_{1,U_T}; generic sheaf pullback tool, not a replacement of devissage."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-pc-tensor-pullback-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-476581fe3",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-476581fe3 (reviewer sub-agent of L); spot-checked: I read Stacks 0815 (proof, paragraph 2), 057S, 057T and the statements of all cited nodes (0561, 0564, 05BA, 02JZ, 01U4, 01PB/01PC, 080D/080G, 02KG, 01SH/01SD), checking each against the nine steps. The statement is unchanged and its hypotheses fit the parent's steps 2 and 4. There are no new nodes. No existing devissage or flattening node states the item (candidates checked: elementary-devissage-flatness, localized-devissage-neighborhood-transfer, flattening-closed-immersion-transfer, etale-flattening-descent). The item cites no SGA source. One fault, C1/C4 (missing citation): step 5 applies 0564 to B -> C. That needs B -> C to be a finitely presented algebra for an arbitrary affine V, but the delivery cited only the pointwise lfp definition, which gives this only through 01TQ. The same gap is in step 1, where lfp => lft is needed in the sense of def-weil-finite-type-morphism (for every affine V). Fix: steps 1 and 5 now cite the Mathlib leaf lem-weil-pbc-lfp-affine-opens-finite-presentation (01TQ), plus def-weil-finite-type-morphism and def-weil-pbc-scheme-conventions, the text says so, and proof_deps is recomputed. Steps 2-4 and 6-9 are correct: only the 'pi is fp' clause of 057T is used; flatness goes from source to base through 02JZ and 05BA; i and pi are T-maps, so 080G applies with the same centre; the flatness equivalence is checked on affine charts of T^b with the same section module. Accepted tool_uses: lem-pc-affine-chart-relative-flat-criterion and lem-pc-tensor-pullback-finite-presentation (generic module calculus).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.DevissageFlatteningTransfer",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_devissage_flattening_transfer",
+  "file": "lean/Sheaf/TraceFormula/DevissageFlatteningTransfer.lean",
+  "statement": "theorem exists_devissage_flattening_transfer {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) [QuasiCompact f] [LocallyOfFinitePresentation f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (U : S.Opens) (_hU : IsCompact (U : Set S)) (_hfp : ((restrictFunctor (f ⁻¹ᵁ U).ι).obj F).IsFinitePresentation) (_hflat : ((restrictFunctor (f ⁻¹ᵁ U).ι).obj F).IsFlatOver (f ∣_ U)) (x : X) (hx : ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk (f.asFiber x))) : ∃ n : ℕ, topologicalKrullDimAt (⟨f.asFiber x, hx⟩ : {q : f.fiber (f x) | ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk q)}) = (n : WithBot ℕ∞) ∧ ∃ (X₁ T Z Y : Scheme.{u}) (g : X₁ ⟶ X) (e : T ⟶ S) (f₁ : X₁ ⟶ T) (i : Z ⟶ X₁) (π : Z ⟶ Y) (h : Y ⟶ T) (x₁ : X₁) (G : Z.Modules), IsAffine X₁ ∧ IsAffine T ∧ IsAffine Z ∧ IsAffine Y ∧ Etale g ∧ Etale e ∧ QuasiCompact e ∧ g x₁ = x ∧ e (f₁ x₁) = f x ∧ g ≫ f = f₁ ≫ e ∧ i ≫ f₁ = π ≫ h ∧ IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧ QuasiCompact i ∧ QuasiSeparated i ∧ IsFinite π ∧ G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((pushforward i).obj G ≅ (tensorPullback g).obj F) ∧ SmoothOfRelativeDimension n h ∧ GeometricallyIntegral h ∧ ∃ hN : ((pushforward π).obj G).IsQuasicoherent, ((pushforward π).obj G).IsFiniteType ∧ ((restrictFunctor (h ⁻¹ᵁ (e ⁻¹ᵁ U)).ι).obj ((pushforward π).obj G)).IsFinitePresentation ∧ ((restrictFunctor (h ⁻¹ᵁ (e ⁻¹ᵁ U)).ι).obj ((pushforward π).obj G)).IsFlatOver (h ∣_ (e ⁻¹ᵁ U)) ∧ ∀ B : IsAdmissible T (e ⁻¹ᵁ U), ((@moduleStrictTransform Y T h B.I (B.I.isFiniteType_toModules_sheaf B.finiteType) ((pushforward π).obj G) hN).IsFlatOver (pullback.snd h B.I.blowupMap) ↔ (@moduleStrictTransform X₁ T f₁ B.I (B.I.isFiniteType_toModules_sheaf B.finiteType) ((tensorPullback g).obj F) (isQuasicoherent_tensorPullback g F)).IsFlatOver (pullback.snd f₁ B.I.blowupMap))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb92c7cab",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 057S/0815 clause by clause. Hypotheses exact: S qcqs, f qc+lfp, F QC+FT, U compact open with F finitely presented and IsFlatOver on X_U, x in fibre support. Dimension n and pointed étale data follow the landed exists_elementary_module_devissage; base point f₁ x₁, no residue-field iso required. N=π_*G: QC via existential hN, finite type, finitely presented and flat on h⁻¹(e⁻¹U) over e⁻¹U. For all B : IsAdmissible T (e⁻¹U), strict transforms use the same retained centre B.I and the same blowup base (pullback.snd). Existential reading correct (step 2 needs π fp from 057T). Edge cases covered (empty X/zero F, n=0, U empty or all of S, identity/empty blowups). No extra hypotheses; single universe u. Node changed only in lean; lean.statement verbatim; source and blueprint docstrings with all 9 steps; no defs; only proof is sorry. No duplicate found. Not compiled (no file changed); worker reports a clean scompile. Advisory: the 'Second reading by Q70' section is the author's own final audit."
+ }
+}

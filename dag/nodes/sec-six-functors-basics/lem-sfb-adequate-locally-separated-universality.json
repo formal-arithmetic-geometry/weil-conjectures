@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-adequate-locally-separated-universality",
+ "kind": "statement",
+ "title": "Adequate moduli spaces are universal for separated targets",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X$ be an algebraic stack over $k$, and let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space]. Assume, as in Alper’s Section 2 conventions, that the diagonals of $\\mathcal X$ and $Y$ over $k$ are quasi-compact and separated: each scheme test of the absolute diagonal of $\\mathcal X$ is an algebraic space with quasi-compact separated projection to the test scheme, and the diagonal of $Y$ is quasi-compact (its separatedness is automatic because it is a representable monomorphism). Scheme tests and relative diagonals use [def-sfb-stable-pointed-moduli-groupoids, def-sfb-dm-stack-morphism-properties], the structural morphism to the base is [def-sfb-relative-moduli-inertia], and quasi-compactness and separatedness of the resulting space-to-scheme maps are [def-sfb-proper-curve-moduli]. For every $k$-scheme $T$, and for every algebraic space $T/k$ whose diagonal is a closed immersion, composition with $\\phi$ gives a bijection $\\operatorname{Mor}_k(Y,T)\\simeq\\operatorname{Mor}_k(\\mathcal X,T)$. Algebraic spaces use [def-trf-algebraic-space]; maps out of a stack are taken up to 2-isomorphism, and their targets have only identity automorphisms. There is no assertion here for arbitrary nonseparated algebraic spaces.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Theorem 7.2.1, printed pp.36--37: locally separated targets or targets Zariski-locally with affine diagonal. The stated cases are schemes and separated algebraic spaces. Read arXiv:1005.2398v3 online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit quasi-compact separated absolute diagonal assumptions, which are the standing convention of Alper Section 2. First treat any algebraic space $T/k$ whose diagonal is an immersion. By [lem-sfb-adequate-geometric-fibres-submersion], $\\phi$ is universally submersive and two $\\Omega$-objects over the same point of $Y(\\Omega)$ have intersecting closures in $|\\mathcal X_\\Omega|$, for every algebraically closed $\\Omega/k$. By [def-sfb-adequate-moduli-space], $\\phi$ is quasi-compact and quasi-separated and $\\mathcal O_Y\\simeq\\phi_*\\mathcal O_{\\mathcal X}$. These are exactly the hypotheses on $p$ in [lem-sfb-stein-submersive-reduced-descent]; no noetherian or finite-type hypothesis is being introduced.",
+   "uses": [
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "def-sfb-adequate-moduli-space",
+    "lem-sfb-stein-submersive-reduced-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 7.2.1 locally separated case; Proposition 7.1.1 conditions (a)--(c)."
+   }
+  },
+  {
+   "text": "Fix $h:\\mathcal X\\to T$ and put $R=(\\mathcal X\\times_Y\\mathcal X)_{\\mathrm{red}}$ with projections $p_1,p_2$. An algebraically closed point $r$ of $R$ gives two objects $x_1,x_2$ with $\\phi(x_1)=\\phi(x_2)$. Their closures intersect by [lem-sfb-adequate-geometric-fibres-submersion], and [lem-sfb-locally-separated-closure-equivalent-images] gives $h(x_1)=h(x_2)$ as points of $T(\\Omega)$, not just equality of their underlying topological images. This holds over every algebraically closed extension.",
+   "uses": [
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-locally-separated-closure-equivalent-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 7.1.1 proof: condition (a) implies surjectivity of W."
+   }
+  },
+  {
+   "text": "Form the actual fibre product $W=R\\times_{(hp_1,hp_2),\\,T\\times_kT,\\,\\Delta_T}T$. In a local closed/open factorization of $\\Delta_T$, pullback restricts the open subspace and pulls back the defining ideal; hence $W\\to R$ is an immersion. Step 2 makes it surjective on geometric points. On each reduced smooth scheme chart of $R$, choose open neighbourhoods where the immersion is closed. On each neighbourhood its ideal has full vanishing locus, so every element lies in every prime, is nilpotent, and is zero by reducedness. Thus the immersion is an isomorphism on the chart and therefore on $R$. The defining universal property of $W$ now gives $hp_1=hp_2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 7.1.1 proof, final cartesian diagram: a surjective immersion into the reduced relation is an isomorphism."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stein-submersive-reduced-descent] with $p=\\phi$, using the hypotheses checked in step 1 and $hp_1=hp_2$ from step 3. It supplies a morphism $g:Y\\to T$ with $g\\phi=h$, and injectivity makes it unique. Consequently precomposition is bijective for every target with immersive diagonal.",
+   "uses": [
+    "lem-sfb-stein-submersive-reduced-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 7.1.1 proof, exact Hom diagram; Theorem 7.2.1 locally separated case."
+   }
+  },
+  {
+   "text": "For a $k$-scheme $T$, [lem-weil-pbc-diagonal-immersion] applied to $T\\to\\operatorname{Spec}k$ gives an immersive diagonal, so step 4 applies even when $T$ is nonseparated. For an algebraic space whose diagonal is a closed immersion, that diagonal is an immersion by its defining local factorization, using the whole target as the open subspace; step 4 applies again. The morphisms throughout were over $k$, so these are the two required bijections of $k$-morphisms.",
+   "uses": [
+    "lem-weil-pbc-diagonal-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 7.2.1 stated cases; Stacks Tag 01KJ (schemes, lemma-diagonal-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adequate-geometric-fibres-submersion",
+  "def-sfb-adequate-moduli-space",
+  "lem-sfb-stein-submersive-reduced-descent",
+  "lem-sfb-locally-separated-closure-equivalent-images",
+  "lem-weil-pbc-diagonal-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Theorem 7.2.1 through Proposition 7.1.1, read online. Local PDF WANTED; expanded reduced-diagonal argument by Q70."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli space universal for morphisms to locally separated algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.ValuativeCriterion.Uniqueness f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is separated, then for any valuative commutative square involving $ f $, the lifting data is uniquely determined, i.e., any two compatible lifts in such diagram\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness morphisms out of adequate moduli space to separated schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.ValuativeCriterion.Uniqueness f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is separated, then for any valuative commutative square involving $ f $, the lifting data is uniquely determined, i.e., any two compatible lifts in such diagram\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} (s : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated s],\\n  CategoryTheory.CategoryStruct.comp f s = CategoryTheory.CategoryStruct.comp g s →\\n    ∀ (ι : W ⟶ X) [AlgebraicGeometry.IsDominant ι],\\n      CategoryTheory.CategoryS\", \"doc\": \"Let $ X $ be a reduced scheme, and let $ f, g : X \\\\to Y $ be morphisms of schemes. Suppose $ s : Y \\\\to Z $ is a separated morphism with $ f \\\\circ s = g \\\\circ s $. If there exists a dominant morphism $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X)\\n  [AlgebraicGeometry.IsDominant ι],\\n  CategoryTheory.CategoryStruct.comp ι f = CategoryTheory.CategoryStruct.comp ι g → f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f g : X ⟶ Y},\\n  AlgebraicGeometry.Scheme.Hom.appTop f = AlgebraicGeometry.Scheme.Hom.appTop g → f = g\", \"doc\": \"For any schemes $X$ and $Y$ where $Y$ is affine, if two morphisms $f, g : X \\to Y$ induce the same map on global sections of the structure sheaf (i.e., $f^\\\\#(\\\\top) = g^\\\\#(\\\\top)$), then $f = g$. This es\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSeparated\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" (X : AlgebraicGeometry.Scheme) : Prop\", \"doc\": \"A scheme `X` is separated if it is separated over `⊤_ Scheme`.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsClosedImmersion @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] : X.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is separated if the diagonal map is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated.isSeparated_terminal_from\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X : AlgebraicGeometry.Scheme} [self : X.IsSeparated] : AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X : AlgebraicGeometry.Scheme} (isSeparated_terminal_from : AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)) : X.IsSeparated\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|moduli.*universal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli space categorical quotient locally separated targets",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [hY : QuasiSeparatedSpace Y] [QuasiSeparated f] : QuasiSeparatedSpace X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": IsZariskiLocalAtTarget @IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli spaces are categorical quotients for maps to schemes and separated algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"CategoryTheory.Category.{u_1, u_1 + 1} AlgebraicGeometry.Scheme\", \"doc\": \"The collection of schemes forms a category, where morphisms are morphisms of locally ringed spaces between schemes, with identity morphisms and composition defined by the corresponding operations on t\"}\n  {\"name\": \"AlgebraicGeometry.instCategoryAffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"CategoryTheory.Category.{u_1, u_1 + 1} AlgebraicGeometry.AffineScheme\", \"doc\": \"The category whose objects are affine schemes (schemes isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$) and whose morphisms are morphisms of schemes between them. T\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism from an algebraic stack with adequate moduli space to a locally separated space descends uniquely",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[IsSeparated f] : ValuativeCriterion.Uniqueness f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is separated, then for any valuative commutative square involving $ f $, the lifting data is uniquely determined, i.e., any two compatible lifts in such diagram\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[QuasiSeparated f] (hf : ValuativeCriterion.Uniqueness f) : IsSeparated f\", \"doc\": \"Let $ f: X \\\\to Y $ be a quasi-separated morphism of schemes. If $ f $ satisfies the uniqueness part of the valuative criterion (i.e., any valuative lifting diagram has at most one lift), then $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated.isSeparated_terminal_from\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsSeparated],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"For any separated scheme $X$, the unique morphism from $X$ to the terminal object in the category of schemes is itself a separated morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|moduli.*universal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme separatedness, normalization, topological closure and abstract categorical descent hits do not state this stack/algebraic-space lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets.",
+   "via": [
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-locally-separated-universality",
+  "worker": "stage1",
+  "summary": "Q70 checked Alper Theorem 7.2.1 and Proposition 7.1.1. Three statement-only inputs isolate geometric-fibre topology, Stein/submersive reduced-relation descent, and closure-equivalent point images. The item proves equality on the reduced relation using the diagonal pullback and then specializes to schemes and separated spaces. The L repair rebuilds the item from the current unsplit shared record, preserves its statement and imported fields, rechecks every cited statement, and spells out the local pullback and nilradical argument. Retained search evidence and citations remain valid.",
+  "blueprint": "The recorded alteration/plurinodal route through det-thm-sf-ctf-stability-direct-images proof (3), projective PGL quotient supporting input. Steps realize Alper Proposition 7.1.1 and the locally separated branch of Theorem 7.2.1. The created.item ancestry is broken upstream at lem-sfb-admissible-direct-image (created.item is a module name), so blueprint_refs ancestor returns None; preserve that value and the recorded via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagonal-immersion",
+    "why": "Generic scheme-diagonal fact (Mathlib leaf), used only to specialize the locally separated target proof to every scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagonal-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-df4267678",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-df4267678 (reviewer sub-agent of L); spot-checked: PASS. The only change from the previous head d3a920e9 is a rewording of item step 3 (it now writes out the base change of the local closed/open factorization) plus the split_report summary and date. The statement, deps, uses, sources and all three new nodes are unchanged. Alper arXiv:1005.2398v3 is not in literature/, so I read it from arXiv: Thm 5.3.1(1)-(5) on p.29-30, Prop 7.1.1 with its proof and Rem 7.1.3 on p.35-36, Thm 7.2.1 on p.36-37. The item's two cases (k-schemes, separated spaces) are locally separated, so the item is a specialization of 7.2.1 and not stronger. geometric-fibres-submersion is 5.3.1(3),(5), which has no finite-type hypothesis; closure in X×_kΩ equals closure in X×_ZΩ because Spec Ω→Spec(k⊗Ω) is a closed immersion. stein-submersive-reduced-descent is the Hom-exactness input of the 7.1.1 proof (Rydh 7.4). It is true with O_V≅p_*O_U and an immersive-diagonal target; I checked injectivity via the equalizer immersion. It is not the item: no adequacy, and the item still proves hp1=hp2. closure-equivalent-images is true because Ω-rational points of a locally separated space are closed. Steps 1-5 match the cited statements; step 3 is Alper's diagonal pullback with the nilradical argument written out, so it is elementary; step 5 cites lem-weil-pbc-diagonal-immersion, a Mathlib leaf (Stacks 01KJ) accepted as a tool use. proof_deps equals the union of the step uses and there is no cycle. A grep of the DAG for adequate-moduli and submersive nodes found no duplicates. Batch-5 finding: all three new nodes cite def-trf-algebraic-space, which is the general definition of an algebraic space (Stacks 025Y) and already a stmt_dep of the item on base. It is not part of the trace formula or Poincare duality, so it is accepted. No SGA source is used. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateLocallySeparatedUniversality",
+  "declaration": "CategoryTheory.adequateModuliSpace_universal_schemes_separatedSpaces",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateLocallySeparatedUniversality.lean",
+  "statement": "theorem adequateModuliSpace_universal_schemes_separatedSpaces {k : Type u} [Field k] (F : BasedCategory.{v, w} (Over (Spec (CommRingCat.of k)))) (hF : IsAlgebraicModuliStack F) (Y : AlgebraicSpace (Spec (CommRingCat.of k))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace F hF Y φ) (hFdiag : ∀ (T : Over (Spec (CommRingCat.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure F) (moduliBaseStructure F))), ∃ (Z : AlgebraicSpace (Spec (CommRingCat.of k))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure F)) T t Z p ∧ MapIsQuasiCompact p ∧ MapToSchemeIsSeparated Z T p) (hYdiag : MapIsQuasiCompact (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj))) : (∀ (T : Over (Spec (CommRingCat.of k))) (h : BasedFunctor F (discreteModuli (yoneda.obj T))), ∃! g : Y.obj.obj ⟶ yoneda.obj T, Nonempty (ModuliTwoIso (φ.comp (discreteModuliMap g)) h)) ∧ (∀ (T : AlgebraicSpace (Spec (CommRingCat.of k))), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 T.obj.obj) (𝟙 T.obj.obj)) → ∀ (h : BasedFunctor F (discreteModuli T.obj.obj)), ∃! g : Y.obj.obj ⟶ T.obj.obj, Nonempty (ModuliTwoIso (φ.comp (discreteModuliMap g)) h))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Unique factorization with Nonempty ModuliTwoIso is the bijection on 2-isomorphism classes; the targets are discrete fibred groupoids. The two conjuncts keep arbitrary scheme targets and closed-diagonal algebraic spaces separate. Source Section 2 diagonal convention is explicit in statement_change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-657232719",
+  "group": "NL",
+  "result": "pass",
+  "note": "Item lem-sfb-adequate-locally-separated-universality: all clauses checked against the dependency declarations in live Sheaf (IsAdequateModuliSpace, moduliBaseStructure, moduliTwoFiberProduct, moduliRelativeDiagonal, HasSpaceBaseChange, MapIsQuasiCompact, MapToSchemeIsSeparated, IsRepresentableWith). hFdiag is the actual X×_k X diagonal: algebraic-space presentation with qc separated projection, and ∃ is equivalent to ∀ since the presentation is unique up to iso. hYdiag is qc of the actual Y diagonal; separatedness is automatic. Single ∃! with Nonempty ModuliTwoIso gives the bijection on 2-iso classes; scheme targets are unrestricted; the space case asks a closed-immersion diagonal. §1(C) correction adds only Alper §2's qc+separated diagonal convention, which the geometric-fibres input already states; old fields preserved. Only citer (lem-sfb-affine-pgl-finite-stabilizer-quotient step 4): holds, since [U/PGL] has affine diagonal, Y is affine and Q is separated. The 4 added stmt_deps are live and their records list exactly the declarations used. lean.statement is verbatim in the file, the proof is sorry, the source/blueprint/proof docstrings are present, no universe restriction, both report sections present. Advisory: IsAlgebraicModuliStack (def-sfb-algebraic-moduli-stack) is not a stmt_dep, but it enters only as the required argument of IsAdequateModuliSpace, as in the base statement. No files changed, no compile run.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "NL stage 2",
+  "old_statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X$ be an algebraic stack over $k$, and let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space]. For every $k$-scheme $T$, and for every algebraic space $T/k$ whose diagonal is a closed immersion, composition with $\\phi$ gives a bijection $\\operatorname{Mor}_k(Y,T)\\simeq\\operatorname{Mor}_k(\\mathcal X,T)$. Algebraic spaces use [def-trf-algebraic-space]; maps out of a stack are taken up to 2-isomorphism, and their targets have only identity automorphisms. There is no assertion here for arbitrary nonseparated algebraic spaces.",
+  "what": "Alper Section 2 assumes quasi-compact separated diagonals for all algebraic stacks and algebraic spaces, whereas the project definitions and the original statement do not. The geometric-fibres input now explicitly requires that convention. Make it explicit on X and Y; separatedness of the representable monomorphic diagonal of Y is automatic. No finite-type or noetherian hypothesis is added, and the two target cases, including arbitrary nonseparated schemes, are preserved.",
+  "source": {
+   "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+   "place": "arXiv:1005.2398v3, Section 2, printed p.7 (quasi-compact separated diagonals), Proposition 7.1.1 and Theorem 7.2.1, printed pp.35--37; https://arxiv.org/pdf/1005.2398v3"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "holds": true,
+    "note": "The quotient stack has affine diagonal and invariant spectrum Y is affine; the comparison coarse space Q has finite diagonal. Thus both adequate maps used in step 5 satisfy the explicit convention."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-sfb-adequate-moduli-space",
+   "def-trf-algebraic-space"
+  ],
+  "old_proof": [
+   {
+    "text": "First treat any algebraic space $T/k$ whose diagonal is an immersion. By [lem-sfb-adequate-geometric-fibres-submersion], $\\phi$ is universally submersive and two $\\Omega$-objects over the same point of $Y(\\Omega)$ have intersecting closures in $|\\mathcal X_\\Omega|$, for every algebraically closed $\\Omega/k$. By [def-sfb-adequate-moduli-space], $\\phi$ is quasi-compact and quasi-separated and $\\mathcal O_Y\\simeq\\phi_*\\mathcal O_{\\mathcal X}$. These are exactly the hypotheses on $p$ in [lem-sfb-stein-submersive-reduced-descent]; no noetherian or finite-type hypothesis is being introduced.",
+    "uses": [
+     "lem-sfb-adequate-geometric-fibres-submersion",
+     "def-sfb-adequate-moduli-space",
+     "lem-sfb-stein-submersive-reduced-descent"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+     "place": "Theorem 7.2.1 locally separated case; Proposition 7.1.1 conditions (a)--(c)."
+    }
+   },
+   {
+    "text": "Fix $h:\\mathcal X\\to T$ and put $R=(\\mathcal X\\times_Y\\mathcal X)_{\\mathrm{red}}$ with projections $p_1,p_2$. An algebraically closed point $r$ of $R$ gives two objects $x_1,x_2$ with $\\phi(x_1)=\\phi(x_2)$. Their closures intersect by [lem-sfb-adequate-geometric-fibres-submersion], and [lem-sfb-locally-separated-closure-equivalent-images] gives $h(x_1)=h(x_2)$ as points of $T(\\Omega)$, not just equality of their underlying topological images. This holds over every algebraically closed extension.",
+    "uses": [
+     "lem-sfb-adequate-geometric-fibres-submersion",
+     "lem-sfb-locally-separated-closure-equivalent-images"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+     "place": "Proposition 7.1.1 proof: condition (a) implies surjectivity of W."
+    }
+   },
+   {
+    "text": "Form the actual fibre product $W=R\\times_{(hp_1,hp_2),\\,T\\times_kT,\\,\\Delta_T}T$. In a local closed/open factorization of $\\Delta_T$, pullback restricts the open subspace and pulls back the defining ideal; hence $W\\to R$ is an immersion. Step 2 makes it surjective on geometric points. On each reduced smooth scheme chart of $R$, choose open neighbourhoods where the immersion is closed. On each neighbourhood its ideal has full vanishing locus, so every element lies in every prime, is nilpotent, and is zero by reducedness. Thus the immersion is an isomorphism on the chart and therefore on $R$. The defining universal property of $W$ now gives $hp_1=hp_2$.",
+    "uses": [],
+    "elementary": true,
+    "source": {
+     "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+     "place": "Proposition 7.1.1 proof, final cartesian diagram: a surjective immersion into the reduced relation is an isomorphism."
+    }
+   },
+   {
+    "text": "Apply [lem-sfb-stein-submersive-reduced-descent] with $p=\\phi$, using the hypotheses checked in step 1 and $hp_1=hp_2$ from step 3. It supplies a morphism $g:Y\\to T$ with $g\\phi=h$, and injectivity makes it unique. Consequently precomposition is bijective for every target with immersive diagonal.",
+    "uses": [
+     "lem-sfb-stein-submersive-reduced-descent"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+     "place": "Proposition 7.1.1 proof, exact Hom diagram; Theorem 7.2.1 locally separated case."
+    }
+   },
+   {
+    "text": "For a $k$-scheme $T$, [lem-weil-pbc-diagonal-immersion] applied to $T\\to\\operatorname{Spec}k$ gives an immersive diagonal, so step 4 applies even when $T$ is nonseparated. For an algebraic space whose diagonal is a closed immersion, that diagonal is an immersion by its defining local factorization, using the whole target as the open subspace; step 4 applies again. The morphisms throughout were over $k$, so these are the two required bijections of $k$-morphisms.",
+    "uses": [
+     "lem-weil-pbc-diagonal-immersion"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+     "place": "Theorem 7.2.1 stated cases; Stacks Tag 01KJ (schemes, lemma-diagonal-immersion)."
+    }
+   }
+  ]
+ }
+}

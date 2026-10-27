@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-representatives",
+ "kind": "statement",
+ "title": "Scalar tensor-pullback equation on flat K-flat pairs for constructed tensor data",
+ "statement": "Let R be a finite commutative ring, p:X→Y a scheme morphism, aX,aY intrinsic tensor models, and P,Q flat-term K-flat fixed-scalar cochain complexes on Y. For the specific uniquely normalized tensor isomorphisms finiteScalarTensorRealization [lem-sf-finite-scalar-tensor-realization], the tensor-pullback square with finiteScalarPullbackComparison and finiteScalarCurriedTensorPullback [def-sf-finite-scalar-pullback-comparison] commutes at the localized pair (Q(P),Q(Q)). This statement has no existential tensor data and asserts the square only on resolving complexes. It uses no projection map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; representative tensor square in step 3 of lem-sf-finite-scalar-tensor-pullback-comparison"
+ },
+ "stmt_deps": [
+  "def-sf-finite-scalar-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Compare the two ordinary direct images through the scalar unit and the coefficient Hom bijection. The constant-section normalization makes the ordinary inverse mate the associated-module realization of inverse image.",
+   "uses": [
+    "def-sf-finite-scalar-pullback-comparison",
+    "lem-sfb-constant-module-derived-projection-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary tensor comparison in the constructed realization is normalized on pure tensors. Both composites of the ordinary tensor-pullback square send a balanced pure tensor to the tensor of its two inverse-image unit sections. Tensor and sheafification universal properties prove the square. Apply it in each bidegree and use the signed-total coproduct injection equations.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the given flat-term K-flat pair, localize this chain square. Substitute the constructed tensor-realization normalization and the canonical intrinsic and fixed tensor-pullback representative equations. The derived adjunction Hom bijections identify the inverse mate with the specified finiteScalarPullbackComparison. Cancel the representative and exact-functor factor isomorphisms. No extension to arbitrary derived inputs is made here.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-realization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sf-finite-scalar-tensor-pullback-representative-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-pullback-comparison",
+  "lem-sfb-constant-module-derived-projection-identification",
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-finite-scalar-tensor-pullback-representative-equation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; representative tensor square in step 3 of lem-sf-finite-scalar-tensor-pullback-comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-comparison",
+   "place": "Scalar tensor-pullback equation on flat K-flat pairs for constructed tensor data",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackRepresentatives.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_onRepresentatives",
+  "statement": "theorem finiteScalarTensorPullback_onRepresentatives\n    (R : Type u) [CommRing R] [Finite R]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (aX : ProEtaleTensorModel X (proEtaleConstantRing X R))\n    (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R))\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (_hp : finiteScalarFlatRepresentatives Y R P)\n    (_hq : finiteScalarFlatRepresentatives Y R Q) :\n    let F := (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctor\n    let EX := (sfIntrinsicDerivedEquivalence X R).functor\n    let EY := (sfIntrinsicDerivedEquivalence Y R).functor\n    let M := DerivedCategory.Q.obj P\n    let N := DerivedCategory.Q.obj Q\n    EX.map (((ProEtale.leftDerivedUpperStarTensorComparison\n        (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).app M).app N) ≫\n        ((finiteScalarTensorRealization X R aX).hom.app (F.obj M)).app (F.obj N) =\n      (finiteScalarPullbackComparison R p).inv.app\n          (((ProEtale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} R)) Y).obj M).obj N) ≫\n        (proEtaleConstantRingDerivedPullback R p).map\n          (((finiteScalarTensorRealization Y R aY).hom.app M).app N) ≫\n        ((finiteScalarCurriedTensorPullback R p aX aY).app (EY.obj M)).app (EY.obj N) ≫\n        ((curry.obj aX.tensor).map ((finiteScalarPullbackComparison R p).hom.app M)).app _ ≫\n        ((curry.obj aX.tensor).obj _).map\n          ((finiteScalarPullbackComparison R p).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261027T123453-L-2303046",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

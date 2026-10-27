@@ -1,0 +1,154 @@
+{
+ "id": "lem-zl-component-ordinary-abelian-square",
+ "kind": "statement",
+ "title": "Coefficient-normalized abelian component square",
+ "statement": "For any commutative condensed ring Λ, affine scheme map f:Y→X, and actual normalized component corners sX,sY and profinite-slice edge sh [def-zl-component-derived-square-data], there is a NormalizedAbelianSquare: the coordinate-preserving test isomorphism, its monoidal abelian adjunction mate, its section-wise mate normalization, and its coefficient equation. It contains no module isomorphism and no identity/composition coherence.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+ },
+ "stmt_deps": [
+  "def-zl-component-derived-square-data"
+ ],
+ "proof": [
+  {
+   "text": "lift the relative-test base-change isomorphism through the fully faithful\npro-étale forgetful functor; this fixes tests and tests_eq. Restriction of sheaves\nalong tests gives the right-adjoint isomorphism whose sections are G applied to\ntests.hom.op. Take its adjunction mate for abelian. The canonical tensor and unit\nequations on the given edges identify their monoidal adjunction structures, so\nmonoidality of pointwise restriction implies monoidality of abelian by monoidality\nof conjugate comparisons. On absolute tests P × S and Q × S the base-change map\npreserves both coordinates. Thus its pasting with the two absolute-test\nidentifications and the slice product identification is the structural scheme\npullback comparison. Equality follows on both projections by the universal\nproperty of the relative component lift. Restricting and taking mates preserves\nthis equality. Evaluation at Λ, followed by Corner.coefficient_eq and\nSlice.coefficient_eq, is exactly the coefficient equation displayed above.\nThis is only one square of abelian sheaves and asserts neither module transport\nnor identity/composition coherence of the resulting squares.",
+   "uses": [
+    "lem-zl-component-lift-base-change",
+    "lem-zl-component-relative-profinite-site",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-lift-base-change",
+  "lem-zl-component-relative-profinite-site",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The base change isomorphism of test functors gives a monoidal square of sheaf inverse images compatible with the pulled back coefficient monoid",
+   "results": "8 hits: CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso, CategoryTheory.TwoSquare.lanBaseChange, CategoryTheory.Monoidal.instMonoidalTransportedFunctorEquivalenceTransported, CategoryTheory.Equivalence.monoidalOfPrecompInverse, CategoryTheory.Equivalence.monoidalOfPrecompFunctor, CategoryTheory.Functor.Monoidal.coreMonoidalTransport",
+   "date": "2026-10-25",
+   "verdict": "Generic site, monoidal and adjunction APIs only; no normalized component-specific statement. Their source declarations were read before using this reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between composite continuous functors induces a monoidal natural isomorphism between their inverse image functors by adjunction mates",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ",
+   "date": "2026-10-25",
+   "verdict": "Generic site, monoidal and adjunction APIs only; no normalized component-specific statement. Their source declarations were read before using this reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousComp'|IsMonoidal.*conjugate|conjugate.*IsMonoidal",
+   "results": "2 hits: Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic site, monoidal and adjunction APIs only; no normalized component-specific statement. Their source declarations were read before using this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ComponentOrdinaryPullbackSquare",
+  "date": "2026-10-25",
+  "group": "Z6"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Corollary 4.4(1)-(2). Re-split: old Step 5, coefficient-compatible isomorphism of actual inverse images, with the ordinary derived monoidal comparison used in old Steps 4 and 6. Stage-3 decomposition: Ordinary coefficient-normalized component pullback square; ordinary argument Step 2: Coefficient-normalized abelian component square",
+   "via": [
+    "lem-zl-component-ordinary-pullback-square",
+    "lem-zl-component-derived-pullback-square",
+    "lem-zl-condensed-henselian-lisse-rigidity",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComponentOrdinaryAbelianSquare",
+  "file": "lean/Sheaf/Paper/ComponentOrdinaryAbelianSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.component_ordinary_abelian_square",
+  "statement": "theorem component_ordinary_abelian_square\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]\n    {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X)\n    (sX : Corner Λ X) (sY : Corner Λ Y) (sh : Slice Λ (affineComponentMap f)) :\n    Nonempty (NormalizedAbelianSquare Λ f sX sY sh)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.NormalizedAbelianSquare",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.component_ordinary_abelian_square"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-zl-component-ordinary-abelian-square",
+  "worker": "stage3",
+  "summary": "Separate one genuine part of the normalized ordinary component argument; module transport is proved in the parent.",
+  "blueprint": "Construction (4.1) route retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic site or adjunction normalization used as a tool; the component-specific unit route and all its realizations are retained."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic site or adjunction normalization used as a tool; the component-specific unit route and all its realizations are retained."
+   },
+   {
+    "node": "sk-def-sfb-pulled-back-coefficients",
+    "why": "Generic site or adjunction normalization used as a tool; the component-specific unit route and all its realizations are retained."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-106e7",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T164948-L-1144847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-106e7",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T164948-L-1144847",
+  "kind": "interface",
+  "note": "independent cc review: item proof (module lift of the normalized abelian square) vs OrdinarySystem; 3 new sorry statements vs the pinned Square/Slice data and component_lift_base_change coherence; changes to the unclaimed ComponentDerivedSquareData (irreducible/explicit types/generic predicates) vs the old equations; 4 unclaimed adapted modules + 6 unchanged dependent modules compiled against the delivery"
+ }
+}

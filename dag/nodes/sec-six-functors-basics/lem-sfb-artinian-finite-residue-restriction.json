@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-artinian-finite-residue-restriction",
+ "kind": "statement",
+ "title": "Artinian local rings after restriction of a finite residue field extension",
+ "statement": "Let $k\\hookrightarrow l$ be an extension of fields with $[l:k]<\\infty$ [def-weil-field]. Let $B$ be a commutative Artinian local ring with specified residue map $\\rho:B\\twoheadrightarrow l$. Here local means having a unique maximal ideal, and Artinian means satisfying the descending chain condition on ideals. Set $C=B\\times_l k=\\{(b,t)\\in B\\times k:\\rho(b)=t\\text{ in }l\\}$ with coordinatewise ring operations. Then $C$ is Artinian local, $C\\to k$ is surjective and identifies its residue field with $k$, and the projection $C\\to B$ is injective. If $q:B^\\prime\\twoheadrightarrow B$ is a surjective homomorphism of Artinian local rings with identified residue field $l$, inducing the identity on $l$, then the induced map $B^\\prime\\times_l k\\to B\\times_l k$ is surjective and induces the identity on residue field $k$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 07W8 (situation-change-of-fields), comparison functor B -> B times_l k and the following verification of Artinianness and preservation of surjections."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\iota:k\\hookrightarrow l$ for the field embedding and $\\mathfrak m_B=\\ker\\rho$. The displayed set $C$ is closed under coordinatewise ring operations. Its first projection $j:C\\to B$ is injective: if two pairs have the same first coordinate, their second coordinates have the same image under $\\iota$, hence are equal. The map $\\pi:C\\to k$ is surjective since any $\\iota(t)\\in l$ lifts under $\\rho$. Its kernel is $\\mathfrak n=\\{(b,0):b\\in\\mathfrak m_B\\}$, and $C/\\mathfrak n\\cong k$. If $t\\ne0$ then $\\rho(b)=\\iota(t)\\ne0$, so $b\\notin\\mathfrak m_B$ and $b$ is a unit (a nonunit generates a proper ideal, contained in a maximal ideal, necessarily $\\mathfrak m_B$). The pair $(b^{-1},t^{-1})$ lies in $C$ and is the inverse of $(b,t)$. Thus every element outside $\\mathfrak n$ is a unit, and $\\mathfrak n$ is the unique maximal ideal of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07W8 (situation-change-of-fields), equation-comparison and verification immediately following it."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-artinian-ring-self-finite-length], $B$ has finite length as a $B$-module. Apply [lem-exc-semilocal-restriction-length] with its local source ring $A=C$, its semilocal target ring $B$, and its module $M=B$. There is exactly one maximal ideal of $B$, namely $\\mathfrak m_B$; its contraction under $j$ is $\\mathfrak n$ by the pair description in step 1. The residue map induced by $j$ is exactly $\\iota:k\\to l$, because $\\rho(j(b,t))=\\iota(t)$. Its degree is finite by hypothesis. All hypotheses of the cited restriction theorem therefore hold, and its finite-length conclusion gives $\\mathrm{length}_C(B)<\\infty$.",
+   "uses": [
+    "lem-weil-pbc-artinian-ring-self-finite-length",
+    "lem-exc-semilocal-restriction-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00JB (lemma-artinian-finite-length) and 02M0 (lemma-pushdown-module), applied to C -> B."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-module-length], choose an integer $N$ bounding the numbers of strict inclusions in chains of $C$-submodules of $B$. An ideal $I$ of $C$ has image $j(I)$ a $C$-submodule of $B$, since $j(c)j(x)=j(cx)$. Injectivity of $j$ makes this assignment preserve and reflect inclusions and strict inclusions. Thus a descending chain of ideals of $C$ can have at most $N$ strict drops; otherwise its first $N+1$ drops, read in reverse order, give too long a strict chain of $C$-submodules of $B$. Every descending chain stabilizes, so $C$ is Artinian.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02LY (definition-length), strict-chain definition; Tag 00JB (lemma-artinian-finite-length), descending-chain consequence."
+   }
+  },
+  {
+   "text": "Let $\\rho^\\prime:B^\\prime\\twoheadrightarrow l$ be the specified residue map. The condition on $q$ says $\\rho q=\\rho^\\prime$. Consequently $(b^\\prime,t)\\mapsto(q(b^\\prime),t)$ defines a ring homomorphism $C^\\prime=B^\\prime\\times_l k\\to C$. Given $(b,t)\\in C$, choose $b^\\prime$ with $q(b^\\prime)=b$. Then $\\rho^\\prime(b^\\prime)=\\rho(b)=\\iota(t)$, so $(b^\\prime,t)\\in C^\\prime$ maps to $(b,t)$: the map is surjective. Steps 1-3 apply also to $B^\\prime$, making $C^\\prime$ Artinian local with residue field $k$. The equality $\\pi(q(b^\\prime),t)=t=\\pi^\\prime(b^\\prime,t)$ shows explicitly that the induced residue-field map is the identity of $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07W8 (situation-change-of-fields), equation-comparison and verification immediately following it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-ring-self-finite-length",
+  "lem-exc-semilocal-restriction-length",
+  "def-weil-pbc-module-length"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 07W8 (situation-change-of-fields), comparison ring and preservation of surjections; its length argument is expressed without an auxiliary base ring by Algebra Tags 00JB and 02M0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an Artinian local ring B with residue field l and a finite subfield extension l over k the fibre product B times l k is Artinian local with residue k",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime], IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Finite (IsLocalRing.ResidueField R) → Finite (IsLocalRing.ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"Algebra.QuasiFinite.instFiniteResidueField\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime] (Q : Ideal S) [inst_5 : Q.IsPrime]\\n  [inst_6 : Q.LiesOver P], Module.Finite P.ResidueField Q.ResidueField\", \"doc\": \"For a quasi-finite algebra $ S $ over a commutative ring $ R $, if $ Q $ is a prime ideal in $ S $ lying over a prime ideal $ P $ in $ R $, then the residue field of $ Q $ is a finite extension of the\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_module_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [inst_5 : IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Module.Finite (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.QuasiFinite.instResidueField\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Ideal S)\\n  [inst_3 : P.IsPrime] [Algebra.QuasiFinite R S], Algebra.QuasiFinite R P.ResidueField\", \"doc\": \"For any commutative ring $ R $, a quasi-finite $ R $-algebra $ S $, and a prime ideal $ P $ of $ S $, the residue field of $ P $ is a quasi-finite $ R $-algebra.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe residue fields, Artinian fibres, or nilpotence assuming Noetherianness; none proves Artinianness of the inverse-image ring under a finite residue extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict residue field of an Artinian local ring by taking inverse image of a subfield finite index",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Finite (IsLocalRing.ResidueField R) → Finite (IsLocalRing.ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_module_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [inst_5 : IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Module.Finite (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"IsLocalRing.instFiniteResidueField\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsLocalRing R] {R₀ : Type u_4} [inst_2 : CommRing R₀]\\n  [inst_3 : Algebra R₀ R] [Module.Finite R₀ R], Module.Finite R₀ (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative local ring $ R $ equipped with an $ R_0 $-algebra structure over a commutative ring $ R_0 $, the residue field of $ R $ (obtained by quotienting $ R $ by its unique maximal ideal o\"}\n  {\"name\": \"ArchimedeanClass.FiniteResidueField.instField\", \"module\": \"Mathlib/Algebra/Order/Ring/StandardPart\", \"type\": \"{K : Type u_1} →\\n  [inst : LinearOrder K] →\\n    [inst_1 : Field K] → [inst_2 : IsOrderedRing K] → Field (ArchimedeanClass.FiniteResidueField K)\", \"doc\": \"The residue field obtained by quotienting the local ring of finite elements in the Archimedean class of a linearly ordered field $ K $ by its unique maximal ideal is a field. This follows because the \"}\n  {\"name\": \"ArchimedeanClass.FiniteResidueField\", \"module\": \"Mathlib/Algebra/Order/Ring/StandardPart\", \"type\": \"(K : Type u_1) → [inst : LinearOrder K] → [inst_1 : Field K] → [IsOrderedRing K] → Type u_1\", \"doc\": \"The residue field constructed from the local ring of finite elements in the Archimedean class of a linearly ordered field $ K $. This is obtained by quotienting the local ring of finite elements (thos\"}\n  {\"name\": \"IsArtinianRing.fieldOfSubtypeIsMaximal\", \"module\": \"Mathlib/RingTheory/Artinian/Module\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → (I : MaximalSpectrum R) → Field (R ⧸ I.asIdeal)\", \"doc\": \"For any commutative ring $ R $ and a maximal ideal $ I $ in its maximal spectrum, the quotient ring $ R/I $ forms a field. This follows from the maximality of $ I $, which ensures every nonzero elemen\"}\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime], IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"IsLocalRing.ResidueField.instAlgebra\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : IsLocalRing R] →\\n        [inst_2 : CommRing S] →\\n          [inst_3 : IsLocalRing S] →\\n            [inst_4 : Algebra R S] →\\n              [IsLocalHom (algebraMap R S)] → Algebra (IsLocalRing.ResidueField R) (IsLocalRing.Res\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe residue fields, Artinian fibres, or nilpotence assuming Noetherianness; none proves Artinianness of the inverse-image ring under a finite residue extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artinian local pullback ring along finite residue field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"[Module.Finite R S] (hfin : Finite (ResidueField R)) : Finite (ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(p : Ideal R) [p.IsPrime] (P : Ideal S) [P.IsPrime] [P.LiesOver p] [QuasiFiniteAt R P] :\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"IsLocalRing.instCommRingResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → CommRing (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative ring $ R $ that is a local ring, the residue field of $ R $, defined as the quotient of $ R $ by its unique maximal ideal of non-units, inherits a commutative ring structure from $\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_module_finite\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"[Module.Finite R S] : Module.Finite (ResidueField R) (ResidueField S)\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.QuasiFinite.iff_of_isArtinianRing\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[IsArtinianRing R] : QuasiFinite R S ↔ Module.Finite R S\", \"doc\": \"If $ R $ is an Artinian ring, then a commutative $ R $-algebra $ S $ is quasi-finite over $ R $ if and only if $ S $ is finitely generated as an $ R $-module.\"}\n  {\"name\": \"instIsNoetherianRingOfIsArtinianRing\", \"module\": \"Mathlib.RingTheory.HopkinsLevitzki\", \"type\": \"[IsArtinianRing R] : IsNoetherianRing R\", \"doc\": \"Every Artinian ring is a Noetherian ring. This is a consequence of the Akizuki–Hopkins–Levitzki theorem, which states that for a ring, the descending chain condition on ideals implies the ascending ch\"}\n  {\"name\": \"Module.Finite.of_quasiFinite\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[IsArtinianRing R] [QuasiFinite R S] : Module.Finite R S\", \"doc\": \"If $ R $ is an Artinian ring and $ S $ is a quasi-finite $ R $-algebra (i.e., a commutative ring equipped with an $ R $-algebra structure that is finitely generated as an $ R $-module), then $ S $ is \"}\n  {\"name\": \"IsLocalRing.finite_residueField_of_compactSpace\", \"module\": \"Mathlib.Topology.Algebra.Ring.Compact\", \"type\": \": Finite (ResidueField R)\", \"doc\": \"If $ R $ is a compact local ring, then its residue field (the quotient of $ R $ by its unique maximal ideal) is a finite field.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe residue fields, Artinian fibres, or nilpotence assuming Noetherianness; none proves Artinianness of the inverse-image ring under a finite residue extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, IsLocalRing",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"IsArtinianRing.isField_of_isReduced_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Artinian.Ring\", \"type\": \" (R : Type u_1) [CommRing R] [IsArtinianRing R] [IsReduced R] [IsLocalRing R] : IsField R\", \"doc\": \"Commutative Artinian reduced local ring is a field.\"}\n  {\"name\": \"isArtinianRing_iff_isNilpotent_maximalIdeal\", \"module\": \"Mathlib.RingTheory.HopkinsLevitzki\", \"type\": \" (R : Type u_3) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsArtinianRing R ↔ IsNilpotent (IsLocalRing.maximalIdeal R)\", \"doc\": \"\"}\n  {\"name\": \"IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient\", \"module\": \"Mathlib.RingTheory.LocalRing.Quotient\", \"type\": \" {R : Type u_1} [CommRing R] [IsLocalRing R] (I : Ideal R) [IsArtinianRing (R ⧸ I)] : ∃ n, IsLocalRing.maximalIdeal R ^ n ≤ I\", \"doc\": \"\"}\n  {\"name\": \"instIsAdicCompleteMaximalIdealOfIsArtinianRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Noetherian\", \"type\": \" {A : Type u_3} [CommRing A] [IsArtinianRing A] [IsLocalRing A] : IsAdicComplete (IsLocalRing.maximalIdeal A) A\", \"doc\": \"\"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe residue fields, Artinian fibres, or nilpotence assuming Noetherianness; none proves Artinianness of the inverse-image ring under a finite residue extension."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]rtinian.*[Pp]ullback|[Aa]rtinian.*[Ff]iber[Pp]roduct|[Aa]rtinian.*[Ff]ibre[Pp]roduct|[Rr]esidue.*[Ss]ubfield",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe residue fields, Artinian fibres, or nilpotence assuming Noetherianness; none proves Artinianness of the inverse-image ring under a finite residue extension."
+  },
+  {
+   "tool": "grep",
+   "query": "artinian.*(pullback|fiberProduct|fibreProduct|subring)|isArtinian.*restrict|finiteLength.*restrict",
+   "results": "7 hits; top results: Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Jacobson/Artinian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; the named length and Artinian-module lemmas are supporting results, not the pullback-ring statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An Artinian local ring inverse image of a subfield finite residue extension",
+   "results": "8 hits; top results: Subfield.comap, IsLocalRing.finite_residueField_of_compactSpace, IsLocalRing.ResidueField.finite_of_finite, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, IsLocalRing.instCommRingResidueField, isArtinianRing_rangeS, IsLocalRing.instIsLocalHomResidueFieldRingHomResidue, IsArtinianRing.of_finite",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; the named length and Artinian-module lemmas are supporting results, not the pullback-ring statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, IsLocalRing",
+   "results": "5 hits; top results: IsArtinianRing.isField_of_isReduced_of_isLocalRing, isArtinianRing_iff_isNilpotent_maximalIdeal, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient, instIsAdicCompleteMaximalIdealOfIsArtinianRing, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; the named length and Artinian-module lemmas are supporting results, not the pullback-ring statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Artinian local ring restricted to the inverse image of a subfield of finite residue field index is Artinian",
+   "results": "8 hits; top results: Algebra.QuasiFinite.instIsArtinianRingFiber, IsArtinianRing.localization_artinian, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, IsLocalRing.instFiniteResidueField, IsLocalRing.ResidueField.finite_of_finite, IsArtinianRing.fieldOfSubtypeIsMaximal, IsArtinianRing.isField_of_isReduced_of_isLocalRing, IsLocalRing.finite_residueField_of_compactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; the named length and Artinian-module lemmas are supporting results, not the pullback-ring statement"
+  },
+  {
+   "tool": "grep",
+   "query": "length_restrictScalars|isArtinianRing_iff_isFiniteLength|isArtinian_of_injective",
+   "results": "12 hits; top results: Mathlib/RingTheory/Length.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/HopkinsLevitzki.lean, Mathlib/RingTheory/LocalRing/Length.lean, Mathlib/RingTheory/LocalRing/Length.lean, Mathlib/RingTheory/LocalRing/Length.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; the named length and Artinian-module lemmas are supporting results, not the pullback-ring statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of an Artinian local ring and a subfield over its residue field is Artinian when the residue extension is finite",
+   "results": "8 hits; top results: Algebra.QuasiFinite.instIsArtinianRingFiber, RingHom.EssFiniteType.residueFieldMap, IsLocalRing.ResidueField.finite_of_finite, Algebra.QuasiFinite.instFiniteResidueField, IsLocalRing.instFiniteResidueField, IsLocalRing.ResidueField.finite_of_module_finite, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, IsArtinianRing.of_finite",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; the named length and Artinian-module lemmas are supporting results, not the pullback-ring statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-field-lifting",
+  "date": "2026-10-23",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-versal-smooth after shrinking to the versal locus; residue-field restriction argument of Stacks 07XT via 07XG",
+   "via": [
+    "lem-sfb-artin-versal-field-lifting",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artinian-finite-residue-restriction",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against Stacks 07W8. Proved locality, the residue identification, injectivity and preservation of surjections directly on pairs. Reused Artinian self-module finite length and the existing semilocal restriction-length theorem to prove Artinianness without imposing the source situation's auxiliary base ring. No new nodes; no exact completed project declaration or Mathlib match for the whole item.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited Artin-versal residue-field restriction input (Stacks 07XT via 07XG). Read the current latest blueprint direct-images proof; no unit route changed. The ancestor tool returns None, agreeing with the inherited blueprint.from.node; retained that provenance and its exact place/via chain. Whole-blueprint searches for Artinian, residue field and restriction of scalars found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-semilocal-restriction-length",
+    "why": "Generic commutative-algebra restriction-of-scalars length theorem (Stacks 02M0), applied to the local inclusion C -> B. The constructibility-stability unit has no length theorem; this supplies the finite-length argument of the existing Stacks 07W8 residue-restriction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-semilocal-restriction-length"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-6e08b0017",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6e08b0017 (reviewer sub-agent of L); spot-checked: Read the item's 4-step proof in full. There are no new nodes. The statement is identical to the live and side-live base, where the item is still unsplit, so no other group has superseded it. Checked against Stacks formal-defos situation-change-of-fields (07W8) and the paragraph after it: the item drops only the auxiliary Noetherian base Λ, which is not one of its hypotheses, so the target is not weakened. Step 1 (elementary): C is local with maximal ideal {(b,0): b in m_B}; elements with t≠0 are units via (b⁻¹,t⁻¹); j is injective. Correct. Step 2: cites lem-weil-pbc-artinian-ring-self-finite-length (00JB, Mathlib leaf) and lem-exc-semilocal-restriction-length (02M0), whose statement asserts finite A-length. Each hypothesis holds: C is local, j⁻¹(m_B)=n, and the residue map is ι with [l:k] finite. Step 3: from the strict-chain form of def-weil-pbc-module-length, ideals of C map injectively to C-submodules of B, so C has DCC. Step 4: rho'=rho∘q, lifts give surjectivity, and the residue map is the identity on the second coordinate. The off-unit tool use of the 02M0 node (unit sk-prop-a1-kummer, generic restriction-of-scalars length) is declared in split_report.tool_uses, and I accept it. No cycle. proof_deps equals the union of the uses. No SGA. Edge cases checked: k=l; B=l; F_2⊂F_4 with B=F_4[ε]/ε², where length_C B=4; Z/p²; and [l:k] infinite, where C fails to be Artinian, so that hypothesis is needed. No duplicate found in a DAG search for 07W8/07XT/07XG. The only citer, lem-sfb-artin-versal-field-lifting, uses exactly the provided conclusions."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ArtinianFiniteResidueRestriction",
+  "declaration": "RingHom.artinian_finite_residue_restriction",
+  "declarations": [
+   "RingHom.finiteResidueRestrictionMap"
+  ],
+  "file": "lean/Sheaf/RingTheory/ArtinianFiniteResidueRestriction.lean",
+  "statement": "theorem artinian_finite_residue_restriction (k : Type u) (l : Type v) [Field k] [Field l] [Algebra k l] [FiniteDimensional k l] (B : Type w) [CommRing B] [IsArtinianRing B] [IsLocalRing B] (ρ : B →+* l) (hρ : Function.Surjective ρ) : IsArtinianRing (ρ.pullback (algebraMap k l)) ∧ ∃ hC : IsLocalRing (ρ.pullback (algebraMap k l)), Function.Surjective (ρ.pullbackSnd (algebraMap k l)) ∧ RingHom.ker (ρ.pullbackSnd (algebraMap k l)) = @IsLocalRing.maximalIdeal (ρ.pullback (algebraMap k l)) _ hC ∧ Function.Injective (ρ.pullbackFst (algebraMap k l)) ∧ ∀ (B' : Type w') [CommRing B'] [IsArtinianRing B'] [IsLocalRing B'] (ρ' : B' →+* l) (hρ' : Function.Surjective ρ') (q : B' →+* B) (hρq : ρ' = ρ.comp q), Function.Surjective q → Function.Surjective (finiteResidueRestrictionMap ρ ρ' (algebraMap k l) q hρq) ∧ (ρ.pullbackSnd (algebraMap k l)).comp (finiteResidueRestrictionMap ρ ρ' (algebraMap k l) q hρq) = ρ'.pullbackSnd (algebraMap k l)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a266c8057",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node and Stacks 07W8 (formal-defos.tex 7277-7316): Field k,l + Algebra + FiniteDimensional; CommRing/IsArtinianRing/IsLocalRing B with surjective ρ; C = Mathlib RingHom.pullback ρ (algebraMap k l); Artinian, ∃ IsLocalRing, surjective pullbackSnd with ker = maximalIdeal, injective pullbackFst; for surjective q : B'→B with ρ' = ρ∘q (ρ' surjective, implied), finiteResidueRestrictionMap surjective and pullbackSnd∘map = pullbackSnd'. The map is real canonical data ((q.prodMap id).restrict), listed in declarations, with docstrings. lean.statement equals the file signature (whitespace-normalized). Universes u,v,w,w' are independent. Imports follow stages/2 rule 7 (proof plan as plain imports; SemilocalRestrictionLength is live). The docstring has 4 proof steps, the only proof is sorry, no line is over 100 chars. The live node differs only in lean; citers are proof-only; no duplicate name. Report has Worker report + Second reading by Q65. Edge cases: k=l, B=l, infinite [l:k] excluded and the hypothesis is needed, q=id. Not recompiled; no file changed."
+ }
+}

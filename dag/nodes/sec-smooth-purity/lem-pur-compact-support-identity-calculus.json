@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-compact-support-identity-calculus",
+ "kind": "lemma",
+ "title": "Unique normalized identity lift",
+ "status": "split",
+ "statement": "Let L:C→D be left adjoint to U:D→C and let e:Y≅L(X). Suppose β:U(Y)→U(L(X)) equals U(e.hom). If there is exactly one t:L(X)→Y whose adjunction transpose followed by β is the adjunction unit at X, then every such normalized t equals e.inv.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Existing proved normalized_identity_lift helper of CondensedCompactSupportProjection, extracted to keep the geometric file within its compile-time limit; blueprint Step 15 identity normalization."
+ },
+ "proof": [
+  {
+   "text": "The inverse of e satisfies the normalization equation: expand the adjunction Hom-equivalence as the unit followed by U(e.inv), substitute β=U(e.hom), and use functoriality and inverse cancellation. Uniqueness of the assumed normalization identifies any given normalized lift with e.inv. Mathlib adjunction Hom-equivalence formula, functoriality, inverse cancellation, and ExistsUnique.unique.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-27",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Relocation of the existing complete generic proof of normalized_identity_lift; the four-line proof is unchanged."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|unit_leftAdjointUniq_hom_app",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"top\": [\"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing project helper already has the required complete proof; keep it and reuse Mathlib homEquiv_unit and inverse cancellation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction unique morphism normalized by an isomorphism equals its inverse",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app\", \"CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing project helper already has the required complete proof; keep it and reuse Mathlib homEquiv_unit and inverse cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv_unit",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'Adjunction.homEquiv_unit'\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing project helper already has the required complete proof; keep it and reuse Mathlib homEquiv_unit and inverse cancellation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unique morphism whose adjunction transpose followed by the image of an isomorphism equals the unit is the inverse isomorphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit\", \"CategoryTheory.Adjunction.inv_map_unit\", \"CategoryTheory.Adjunction.leftAdjointIdIso_inv_app\", \"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"CategoryTheory.Adjunction.inv_counit_map\", \"CategoryTheory.Adjunction.isIso_unit_of_iso\", \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"CategoryTheory.unitCompPartialBijectiveAux_symm_apply\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing project helper already has the required complete proof; keep it and reuse Mathlib homEquiv_unit and inverse cancellation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedCompactSupportProjection",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 15: identity of the unique open-unit-normalized refinement lift; generic identity and shift proof code is extracted unchanged for compile time.",
+   "via": [
+    "def-pur-condensed-compact-support-projection",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactSupportIdentityCalculus",
+  "file": "lean/Sheaf/CategoryTheory/CompactSupportIdentityCalculus.lean",
+  "declaration": "CategoryTheory.normalizedIdentityLift",
+  "statement": "theorem CategoryTheory.normalizedIdentityLift\n    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {U : D ⥤ C}\n    (ad : L ⊣ U) {X : C} {Y : D} (e : Y ≅ L.obj X)\n    (β : U.obj Y ⟶ U.obj (L.obj X)) (hβ : β = U.map e.hom)\n    (hu : ∃! t : L.obj X ⟶ Y, ad.homEquiv _ _ t ≫ β = ad.unit.app X)\n    (t : L.obj X ⟶ Y) (ht : ad.homEquiv _ _ t ≫ β = ad.unit.app X) :\n    t = e.inv",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1bad5",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T012851-L-2342239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1bad5",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T012851-L-2342239",
+  "kind": "interface",
+  "note": "independent cc review: old CondensedCompactSupportProjection vs Core+item+IdentityCalculus (verbatim moves, footer and identityScalar_flat instance kept); item node vs Lean; 4 direct importers compiled OK against delivered modules"
+ }
+}

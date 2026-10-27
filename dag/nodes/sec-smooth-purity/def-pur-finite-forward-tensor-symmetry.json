@@ -1,0 +1,140 @@
+{
+ "id": "def-pur-finite-forward-tensor-symmetry",
+ "kind": "definition",
+ "title": "Signed tensor symmetry by K-flat descent on the small pro-etale site",
+ "status": "split",
+ "statement": "Let $T$ be a scheme and use its small pro-etale site [def-weil-pbc-proetale-site]. Let $V$ be a Grothendieck abelian symmetric monoidal closed category, with monoidal preadditive tensor, functorial flat resolutions. Use the ordinary unbounded derived tensor $\\mathcal T_T$ of [def-weil-derived-tensor], with its canonical left-derived comparison $\\mu_T$ from the homotopy tensor. Define $s_T:\\mathcal T_T^{\\mathrm{flip}}\\to\\mathcal T_T$ by the two-variable left-derived universal lift of the signed homotopy-complex braiding through $\\mu_T$: its defining representative arrow is the flipped $\\mu_T$ followed by the localization of the flipped Koszul braiding. Thus its component with indices $(L,K)$ has source $K\\otimes^L L$ and target $L\\otimes^L K$. Define $\\sigma_{K,L}=(s_T(L))(K)$. In particular, for $V=\\operatorname{Mod}(A)$ this is the signed derived tensor swap for constant coefficient modules, with the cochain sign $(-1)^{ij}$ on degrees $i,j$. These are definitions on arbitrary unbounded objects, with no compact-support or exceptional-adjoint datum.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clauses (i)--(ii), signed symmetry and ordinary two-counit product after proper reduction; the explicit ordinary composite is the formula in lem-pur-ordinary-triple-product-transpose."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteProductOrdinary|finiteForwardTensorSymmetry|derived.*[Ss]ymmetry",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; generic graded, sheaf, external-product and monoidal-localization APIs do not supply the specified pro-etale derived maps. Reuse the published Sheaf declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedTensor\", \"braiding\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; generic graded, sheaf, external-product and monoidal-localization APIs do not supply the specified pro-etale derived maps. Reuse the published Sheaf declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary external product of derived direct images defined by two signed tensor swaps projection base change and the inverse direct image compositor",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.externalProduct, TensorProduct.gradedCommAux, TensorProduct.gradedComm, CategoryTheory.MonoidalCategory.externalProductSwap, CategoryTheory.MonoidalCategory.prodCompExternalProduct, CategoryTheory.MonoidalCategory.prodCompExternalProduct_hom_app, CategoryTheory.MonoidalCategory.externalProductSwap_inv_app_app, CategoryTheory.MonoidalCategory.externalProductSwap_hom_app_app",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; generic graded, sheaf, external-product and monoidal-localization APIs do not supply the specified pro-etale derived maps. Reuse the published Sheaf declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed tensor symmetry on unbounded derived sheaves descends the Koszul braiding through K flat tensor localization",
+   "results": "8 hits: CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, LightCondensed.instSymmetricCategoryLightCondMod, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Localization.Monoidal.braidingNatIso, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.β_hom_app",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; generic graded, sheaf, external-product and monoidal-localization APIs do not supply the specified pro-etale derived maps. Reuse the published Sheaf declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The signed symmetry of derived tensor on sheaves is the lift of the Koszul braiding on the homotopy category",
+   "results": "8 hits: TensorProduct.gradedComm, TensorProduct.gradedComm_symm, SemimoduleCat.braiding, Homotopy.symm, CategoryTheory.Sheaf.symmetricCategory, Homotopy.symm_hom, CategoryTheory.Localization.Monoidal.braidingNatIso, CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; generic graded, sheaf, external-product and monoidal-localization APIs do not supply the specified pro-etale derived maps. Reuse the published Sheaf declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"finiteProductOrdinary|finiteForwardTensorSymmetry\" dag/nodes; rg -n \"finiteProductOrdinary|finiteForwardTensorSymmetry\" lean/WeilConjectures lean/Sheaf",
+   "results": "Only lem-pur-finite-product-compactification and lem-pur-finite-forward-product-symmetry mention the declarations in the DAG. No definition node owns them. No upstream WeilConjectures match. Sheaf.Paper.FiniteProductCompactification defines finiteProductOrdinaryProjection (line 200) and finiteProductOrdinary (line 468); Sheaf.Paper.FiniteForwardProductSymmetry defines finiteForwardTensorSymmetryNat (line 72) and finiteForwardTensorSymmetry (line 91).",
+   "date": "2026-10-24",
+   "verdict": "Exact existing project definitions: register them with existing:true, without duplicate Lean code."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search finiteProductOrdinary; search finiteForwardTensorSymmetry; search \"ordinary product\"; search \"signed tensor symmetry\"",
+   "results": "0, 0, 0, and 2 blueprint matches respectively. The last two are def-sf-kv-maps and def-trf-supported-pairing, which use six-functor or dualizing data and do not define this unbounded ordinary construction.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node for either concrete construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ordinary-triple-product-transpose",
+  "date": "2026-10-24",
+  "group": "Q137"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "The two signed swaps in the ordinary Omega formula, before the triple transpose calculation.",
+   "via": [
+    "lem-pur-ordinary-triple-product-transpose",
+    "lem-pur-even-line-product-integration-symmetry"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteForwardProductDefinitions",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteForwardTensorSymmetryNat",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteForwardTensorSymmetryNat",
+   "AlgebraicGeometry.ProEtale.finiteForwardTensorSymmetry"
+  ],
+  "statement": "def finiteForwardTensorSymmetryNat (T : Scheme.{u}) :\n    (derivedTensor V T).flip ⟶ derivedTensor V T",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership registration requested by the independent review of returned head 1821b320d237. These are existing real definitions, not witnesses chosen from a theorem. No published Lean declaration is changed or duplicated.",
+  "file": "lean/Sheaf/Paper/FiniteForwardProductDefinitions.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9e4d2b99",
+  "group": "Q137",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9e4d2b99",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Re-delivery repairing the 1821b320 RETURN (§2 #2/#3 ownership). The item .lean differs only by an added import of Sheaf.Paper.FiniteForwardProductSymmetry. Item JSON: only stmt_deps changed; the theorem node lem-pur-finite-product-compactification is replaced by new existing:true def nodes def-pur-finite-forward-tensor-symmetry (finiteForwardTensorSymmetryNat/finiteForwardTensorSymmetry) and def-pur-finite-ordinary-product (finiteProductOrdinary/finiteProductOrdinaryProjection). Read both bodies in side-live. sigma is the leftDerived2Lift of the flipped signed homotopy braiding through mu, and component (L,K) has source K⊗L. Omega is sigma_{F,G}, pi_b, Rb_*(sigma ∘ Ex⊗1), Rb_*(pi_t), c^{-1}, factor for factor the node formula with no inverted exchange/projection. Lean statements are verbatim in their modules and the item statement is verbatim in its file. No other node owns these declarations; the item is not superseded on live/side-live; one sorry; report sections present. Earlier review's full item checks (hypotheses, Theta_L/Theta_R, three-counit transpose, four-cone diagram, universes, edge cases) still hold. No compile (no fix). Advisory: A1 sigma duplicates def-pur-localized-derived-tensor-braiding (derivedTensorKoszulSymmetry, same lift pattern), already landed by Q28, so an identification lemma is welcome. A2 the sigma node's generic-V list omits UpperStarPreservesFlat (holds for Mod(A)). A3 Omega uses upstream derivedBaseChangeMap/rightDerivedLowerStarProjectionMap rather than the SuppliedExchangeProjection records."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b107f",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261026T001256-L-4181127",
+  "kind": "interface",
+  "note": "independent cc review: b107 vs da58 head (diff -r: only the warn.sorry line removed + a report paragraph); delivered nodes vs da58 fix JSONs; reader gate: 5 delivered modules + 8 current direct importers compiled"
+ }
+}

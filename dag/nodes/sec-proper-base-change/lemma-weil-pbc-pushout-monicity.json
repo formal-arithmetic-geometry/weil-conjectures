@@ -37,19 +37,35 @@
  "blueprint_order": 1122,
  "blueprint_uses": [],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Given a monomorphism $A\\hookrightarrow B$ and an arbitrary morphism $A\\to C$ of\nabelian sheaves, the canonical map $C\\to B\\amalg_A C$ is monic.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In an abelian category (for instance abelian sheaves, or sheaves of\n$\\Lambda$-modules, on a site), given a monomorphism $i_B:A\\hookrightarrow B$\nand an arbitrary morphism $i_C:A\\to C$, the canonical map\n$C\\to B\\amalg_A C$ is a monomorphism.",
   "proof": [
    {
-    "text": "Let $P=B\\amalg_A C$ be the pushout in sheaves. It is the cokernel sheaf of\n$A\\to B\\oplus C$, $a\\mapsto(i_Ba,-i_Ca)$. If $c\\in C(V)$ maps to zero in\n$P(V)$, then by the definition of a sheaf cokernel there is an etale cover\n$\\{V_\\alpha\\to V\\}$ and $a_\\alpha\\in A(V_\\alpha)$ with\n$i_C(a_\\alpha)=c|_{V_\\alpha}$ and $i_B(a_\\alpha)=0$. Since $i_B$ is monic,\n$a_\\alpha=0$, hence $c|_{V_\\alpha}=0$. The sheaf axiom gives $c=0$.\nThis proves monicity on arbitrary etale objects, and the same local\nequalizer calculation proves naturality of the pushout map.",
+    "text": "The pushout $P=B\\amalg_AC$ is the cokernel of\n$(i_B,-i_C):A\\to B\\oplus C$, and the map $C\\to P$ is the composite of the\ninclusion $C\\to B\\oplus C$ with the cokernel map. Its kernel is therefore the\npullback of the image of $(i_B,-i_C)$ along $C\\to B\\oplus C$. If\n$x:K\\to C$ factors through this pullback, then, after replacing $K$ by an\nepimorphic cover, $(0,x)=(i_B,-i_C)\\circ a$ for some $a:K\\to A$; so\n$i_B\\circ a=0$, hence $a=0$ since $i_B$ is monic, and $x=-i_C\\circ a=0$.\nThus the kernel is zero and $C\\to P$ is a monomorphism. (For sheaves this is\nthe familiar local computation: a section of $C$ dying in $P$ is locally the\nimage of a section of $A$ killed by $i_B$, hence locally zero, hence zero.)",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-proper-geometric-fibre-clopen-partition",
+ "kind": "statement",
+ "title": "Etale clopen partition adapted to a proper geometric fibre",
+ "statement": "Let $f:X\\to S$ be a proper morphism of schemes [def-pc-scheme] [def-weil-proper-morphism], and let $s\\in S$. There exist an etale morphism $g:U\\to S$ [def-weil-etale-morphism], a point $u\\in U$ with $g(u)=s$, and a finite family $V_i$ of pairwise disjoint open-and-closed subsets covering $X\\times_SU$ [def-pc-fibre-product]. For each $i$, the inverse image of $V_i$ in the geometric fibre at $u$, taken over the algebraic closure of $\\kappa(u)$ [def-weil-geometric-fibre] [def-weil-algebraic-closure], is connected and nonempty [def-weil-connected-scheme]. The finite family may be empty. No flatness hypothesis or assertion about other fibres is made.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof: Stein factorization and etale splitting paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-geometric-fibre",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Spec neighbourhood j:Spec A→S of the marked point, with preimage s₀. Pull f back to f₀:X₀→Spec A. Apply affine Stein factorization to X₀.toSpecΓ and π=f₀.steinFactorizationBase, obtaining integrality of π and geometric connectedness of the first map. The Stein finite-fibre theorem gives the finite point fibre and finite residue extensions at s₀.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-stein-finite-fibres-residue-fields"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral-fibre etale splitting to π at s₀, obtaining g₀:U→Spec A, a marked u, and a finite clopen partition V_i of the base-changed Stein scheme. Set g=g₀≫j. The iterated-pullback isomorphism identifies pullback f g with pullback f₀ g₀. A pullback lift constructs q:pullback f g→pullback π g₀, compatible with the projections. Pullback pasting proves this is a base change of X₀.toSpecΓ, hence q is geometrically connected.",
+   "uses": [
+    "lem-weil-pbc-integral-fibre-etale-splitting",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the partition q⁻¹(V_i). Closedness follows from continuity; Scheme.Hom.preimage_inf proves disjointness and preimage_iSup proves the covering equality. Etaleness of g follows by composition with the initial open immersion, and g(u)=s by the two marked-point equalities. This works for m=0 as well.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply isConnected_geometricFibre_preimage to q, the Stein-scheme projection r, the total projection p, their pullback-lift equality q≫r=p, and each V_i. The splitting theorem supplies its unique-point and purely-inseparable hypotheses. Its conclusion is definitionally the connectedness of the geometric inverse image of q⁻¹(V_i) required here.",
+   "uses": [
+    "lem-weil-pbc-geometric-fibre-connected-preimage"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-geometric-fibre-connected-preimage",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-stein-finite-fibres-residue-fields"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, Stein splitting paragraph; F4 formalizes Stein factorization, splitting, pullback pasting and the finite clopen partition, leaving the single-piece radiciality/connectedness step as a separate theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper morphism has an etale neighborhood with a finite clopen partition whose pieces have connected geometric fibres at the marked point",
+   "results": "8 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsProper.recOn, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*[Ff]ibre.*[Pp]artition|[Ee]tale.*[Cc]lopen|[Cc]lopen.*[Pp]artition",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism of schemes admits an etale neighborhood at any point with a finite clopen partition whose pieces meet the geometric fibre in connected nonempty subsets",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous",
+  "date": "2026-10-25",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous; Tag 0BUI Stein partition construction",
+   "via": [
+    "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+    "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperGeometricFibreClopenPartition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGeometricFibreClopenPartition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_geometricFibre_clopen_partition",
+  "statement": "theorem Scheme.Hom.exists_etale_geometricFibre_clopen_partition\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S) :\n    ∃ (U : Scheme.{u}) (g : U ⟶ S) (u : U), Etale g ∧ g u = s ∧\n      ∃ (m : ℕ) (V : Fin m → (pullback f g).Opens),\n        (∀ i, IsClosed (V i : Set ↥(pullback f g))) ∧\n        Pairwise (fun i j ↦ Disjoint (V i) (V j)) ∧ (⨆ i, V i) = ⊤ ∧\n        ∀ i, _root_.IsConnected\n          ((pullback.fst (pullback.snd f g)\n            (Spec.map (CommRingCat.ofHom\n              (algebraMap (U.residueField u) (AlgebraicClosure (U.residueField u)))) ≫\n                U.fromSpecResidueField u)) ⁻¹' (V i : Set ↥(pullback f g)))",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261025T144038-L-1161962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T163619-L-726238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

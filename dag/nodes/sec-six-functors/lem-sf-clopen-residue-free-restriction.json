@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-clopen-residue-free-restriction",
+ "kind": "statement",
+ "title": "A constant slice residue model restricts to the actual finite free sheaf",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with residue field $k$ [def-weil-l-adic-coefficient-extension], a scheme $S$, an open $U$, and a normalized coefficient restriction datum $d$ [def-sf-clopen-restriction-data]. Let $F$ be a sheaf of modules over the constant residue ring on the small pro-etale site of $S$ [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. If its localized sheaf on the slice over $U$ is isomorphic to the constant module with model $k^r$ [def-weil-proetale-locally-constant-sheaf], then the exact ordinary finite-coefficient restriction specified by $d$ is isomorphic to the actual free residue sheaf topCellResidueFree of rank $r$ [lem-sf-complete-top-residue-cell-cone]. The assertion allows rank zero and an empty open.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, constant residue models on the disjoint opens; sites.tex Tag 00XZ, localization of sheafification. Transport step 2 of lem-sf-residue-lisse-clopen-bases."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-clopen-restriction-data",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-sf-complete-top-residue-cell-cone"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete sliceFrom functor to precompose localized module sheaves to the pro-etale site of U, with scalars transported by d.finite 0. It preserves finite limits sectionwise and is additive, hence preserves finite biproducts. The coefficient ring isomorphism makes its canonical map from the local unit to the restricted unit invertible.",
+   "uses": [
+    "def-sf-clopen-restriction-data",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The model sheafification functor is additive. Identify k^r with the finite biproduct of r copies of k; its sheafification is the biproduct of the coefficient units by the constant-unit comparison. Apply restriction to the supplied model isomorphism and this biproduct description. Reindex the coproduct by the equivalence from ULift (Fin r) to Fin r to obtain precisely topCellResidueFree. This proof also handles r=0.",
+   "uses": [
+    "lem-sfb-finite-field-lisse-internal-hom",
+    "lem-weil-finite-line-tensor-conditions",
+    "lem-sf-complete-top-residue-cell-cone"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-clopen-restriction-data",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-finite-field-lisse-internal-hom",
+  "lem-weil-finite-line-tensor-conditions",
+  "lem-sf-complete-top-residue-cell-cone"
+ ],
+ "proof_origin": {
+  "by": "M8",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, constant residue models on the disjoint opens; sites.tex Tag 00XZ, localization of sheafification. Transport step 2 of lem-sf-residue-lisse-clopen-bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a constant finite free module sheaf to a localized site preserves its rank",
+   "results": "Eight hits about algebraic module localization and rankAtStalk; no module-sheaf restriction comparison.",
+   "verdict": "Use finite biproducts of units and the existing slice functor.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "Twelve hits including Functor.mapDerivedCategory, mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory. Local source inspection additionally found Functor.mapDerivedCategoryNatIso and mapDerivedCategoryHomologyFunctorIso.",
+   "verdict": "Use exact derived functor comparisons rather than a new cohomology compatibility assumption.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapFreeIso|unitToPushforwardObjUnit",
+   "results": "Sixteen hits in Mathlib module-sheaf Free, Generators, Quasicoherent and PullbackFree. Read Free and PullbackFree and the project slice and normalized coefficient APIs.",
+   "verdict": "Use the actual coefficient-unit map and finite biproducts for free sheaves; the completed pullback comparison uses the existing completion-restriction theorem.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseClopenBases",
+  "date": "2026-10-27",
+  "group": "M8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted residue-local-model preparation: simultaneous clopen residue bases and completeness under the precise completed pullback, prior to interval induction. Comparison step: A constant slice residue model restricts to the actual finite free sheaf.",
+   "via": [
+    "lem-sf-residue-lisse-clopen-bases",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenResidueFreeRestriction",
+  "file": "lean/Sheaf/Paper/ClopenResidueFreeRestriction.lean",
+  "declaration": "WeilConjectures.sf_clopen_residue_free_restriction",
+  "statement": "theorem sf_clopen_residue_free_restriction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (S : Scheme.{u}) (U : S.Opens)\n    (d : SfClopenCoefficientRestriction.{u, u} l E S U)\n    (F : scalarReductionTarget.{u, u} l E S 0) (r : ℕ)\n    (hF : Nonempty (F.over (ProEt.mk U.ι) ≅\n      proEtaleConstantModuleSheafOverOfUniverses S\n        (Padic.coefficientExtensionRing l E 1) (ProEt.mk U.ι)\n        (ModuleCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))\n          (Fin r → ULift.{u + 1} (Padic.coefficientExtensionRing l E 1))))) :\n    Nonempty (topCellResidueFree.{u} l E U.toScheme r ≅\n      (sfClopenModuleRestriction U _ _ (d.finite 0)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T050624-L-246211",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T050624-L-246211",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

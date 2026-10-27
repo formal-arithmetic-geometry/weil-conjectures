@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-infinitesimal-isogeny-lie-reduction",
+ "kind": "statement",
+ "title": "Infinitesimal isogeny reducing to the nilpotent or noncentral semisimple Lie case",
+ "statement": "Let $k$ be a field [def-weil-field], and fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All groups below are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group which becomes $\\mathbf G_m^r$ over $\\bar k$, for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Unipotent means admitting, for some $n\\geq1$, a closed immersion [def-weil-closed-immersion] into the upper unitriangular group $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]: its $A$-points are upper triangular matrices with all diagonal entries $1$, for every commutative $k$-algebra $A$. For a smooth group $J$, $\\mathfrak j=\\operatorname{Lie}(J)=T_{J/k,e}$ is the tangent space at the identity [def-sc-scheme-tangent-space], with the Lie bracket induced by group commutators [def-wf-lie-algebra]. The adjoint action $\\operatorname{Ad}(g)$ is the differential at the identity of conjugation by $g$. A tangent element is semisimple if its image under the differential of a faithful closed linear representation of $J$ is diagonalizable over $\\bar k$. It is noncentral if $[X,Y]\\ne0$ for some $Y\\in\\mathfrak j$. Let $G$ be smooth and connected. There exist a smooth connected affine $k$-group $G'$ of finite type, with $\\dim G'=\\dim G$, and a finite faithfully flat radicial homomorphism $f:G\\to G'$, such that (a) either $G'$ is nilpotent or $\\operatorname{Lie}(G'_{\\bar k})$ contains a noncentral semisimple element, and (b) every torus $T'\\subseteq G'$ is the scheme-theoretic image under $f$ of a torus $T\\subseteq G$ defined over $k$. Here nilpotent means having a finite descending central series of closed normal subgroup schemes, with commutators lowering the series; dimension means Krull dimension [def-kun-topological-krull-dimension]. Finite means finite on coordinate rings, faithfully flat means flat and surjective, and radicial means injective on geometric points after every field extension. The identity homomorphism is allowed. In particular no perfectness hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Corollary 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Call a smooth connected group $J$ good if it is nilpotent or its geometric Lie algebra has a noncentral semisimple vector. If $G$ is good, take $G\\xrightarrow{\\operatorname{id}}G$. Its coordinate algebra is free of rank one over itself, it is universally injective, and every torus maps onto itself. This also includes the trivial group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80 proof, p.378, first sentence."
+   }
+  },
+  {
+   "text": "Otherwise [lem-sfb-central-semisimple-restricted-subalgebra] gives $\\operatorname{char}k=p>0$ and the full semisimple restricted subalgebra $\\mathfrak s(G)$, geometrically the full semisimple subspace and fixed by $\\operatorname{Ad}(G)$. Starting with $G_0=G$, whenever $G_i$ is not good, apply that same statement to $G_i$, then [lem-sfb-height-one-restricted-quotient] to $\\mathfrak s(G_i)$. Obtain $q_i:G_i\\to G_{i+1}$ finite faithfully flat radicial, with central height-at-most-one multiplicative-type kernel and differential kernel exactly $\\mathfrak s(G_i)$. Each new group is again smooth connected affine of finite type, of the same dimension. Thus all hypotheses needed to repeat the construction are maintained over the original field.",
+   "uses": [
+    "lem-sfb-central-semisimple-restricted-subalgebra",
+    "lem-sfb-height-one-restricted-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80 proof, p.378, sentences invoking Corollary 11.38; Corollary 11.38, p.223."
+   }
+  },
+  {
+   "text": "If this construction never stopped, its sequence would satisfy every hypothesis of [lem-sfb-semisimple-kernel-chain-termination]: at each stage failure of goodness says nonnilpotent and all geometric semisimple vectors central; step 2 supplies exactly the stipulated kernels and their scalar-extension equality. This contradicts that node. Consequently there is a finite first index $r$ for which $G_r$ is good. Set $G'=G_r$ and $f=q_{r-1}\\circ\\cdots\\circ q_0$. The dimension equalities of step 2 give $\\dim G'=\\dim G$.",
+   "uses": [
+    "lem-sfb-semisimple-kernel-chain-termination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80 proof, p.378, iteration and termination sentence."
+   }
+  },
+  {
+   "text": "Finite and radicial morphisms compose by [lem-trf-finite-radicial-basechange]. On affine coordinate rings flatness composes by [lem-weil-pbc-flat-ring-map-comp]; the composite is surjective since every factor is surjective. Thus $f$ is finite faithfully flat radicial. Its source and target are the smooth connected affine finite-type groups constructed in step 2, and goodness of $G_r$ gives clause (a).",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80 proof, p.378, composite isogeny; affine composition bookkeeping."
+   }
+  },
+  {
+   "text": "To lift tori across one step, let $S\\subseteq G_{i+1}$ be a $k$-torus and form $P=G_i\\times_{G_{i+1}}S$ [def-pc-fibre-product]. This is a closed subgroup of $G_i$; its projection $P\\to S$ is the base change of $q_i$, so it is finite faithfully flat and its kernel is the same central infinitesimal multiplicative-type group as that of $q_i$. For faithful flatness one can use the identity $M\\otimes_B(B\\otimes_A C)=M\\otimes_A C$: exactness and detection of nonzero modules are inherited under base change. Apply [lem-sfb-central-infinitesimal-torus-extension] to obtain that $P$ is of multiplicative type and the exact character sequence $0\\to L\\to M\\to X^*(\\ker q_i)\\to0$, where $L=X^*(S)$ is free and $M=X^*(P)$ is finitely generated with $M/L$ finite.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-central-infinitesimal-torus-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80(b), p.378; Corollary 12.22 and Theorem 12.23, pp.239--240."
+   }
+  },
+  {
+   "text": "Let $M_{\\rm tors}$ be the torsion subgroup and $\\overline M=M/M_{\\rm tors}$. By [lem-sfb-multiplicative-character-antiduality], its Galois-stable quotient defines a closed $k$-subgroup $R=D_k(\\overline M)\\subseteq P$. Since $\\overline M$ is a finitely generated torsion-free abelian group, over a splitting field its group algebra is a Laurent polynomial algebra, so $R$ is a torus. The composite $L\\to M\\to\\overline M$ is injective: an element of $L$ whose image is torsion has a nonzero integer multiple zero in $M$, hence in $L$, and $L$ is torsion-free. Its cokernel is finite because $M/L$ is finite. Over a common finite splitting field $K$, pullback for $R\\to S$ is therefore the injective monomial map $K[L]\\to K[\\overline M]$; distinct basis monomials remain distinct. Field extension is faithful on vector spaces, so $k[S]\\to k[R]$ is injective as well. Hence the scheme-theoretic image of $R\\to S$ is all of $S$. This constructs the required lifting torus over $k$, including $S=1$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.23, p.240, and Notation 12.29, p.241; explicit character-lattice and coordinate-ring argument."
+   }
+  },
+  {
+   "text": "Given any $k$-torus $T_r\\subseteq G_r$, apply steps 5--6 backwards for $i=r-1,\\ldots,0$, obtaining tori $T_i\\subseteq G_i$ with scheme-theoretic image $q_i(T_i)=T_{i+1}$. The pullbacks $k[T_{i+1}]\\to k[T_i]$ are injective, so their composite is injective; the composite homomorphism therefore has scheme-theoretic image $T_r$. Take $T=T_0$. When $r=0$ use $T_0=T_r$. This proves clause (b) with the original ground field throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.80(b), p.378, finite iteration; affine image verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-central-semisimple-restricted-subalgebra",
+  "lem-sfb-height-one-restricted-quotient",
+  "lem-sfb-semisimple-kernel-chain-termination",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "def-pc-fibre-product",
+  "lem-sfb-central-infinitesimal-torus-extension",
+  "lem-sfb-multiplicative-character-antiduality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80 proof, p.378; Corollary 11.38, p.223; character argument from Theorem 12.23, p.240. Explicit assembly by Q77; the omitted termination argument is exposed as an unsplit node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected affine algebraic group over a field has a finite radicial isogeny to a group that is nilpotent or has a noncentral semisimple element in its geometric Lie algebra, and every torus in the quotient lifts to a torus",
+   "results": "{\"t\": \"2026-10-24T04:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected affine algebraic group over a field has a finite radicial isogeny to a group that is nilpotent or has a noncentral semisimple element in its geometric Lie algebra, and every torus in the quotient lifts to a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"nilpotent_center_quotient_ind\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"Module.End.exists_isNilpotent_isSemisimple\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instHasTrivialRadical\"], \"digest\": \"100afeafa15cbcb6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra radicals, Jordan decomposition of a linear endomorphism, and infinitesimal ring lifting do not construct finite radicial algebraic-group quotients or lift their tori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterating infinitesimal isogenies gives a nilpotent algebraic group or a geometric Lie algebra with noncentral semisimple element while preserving liftability of tori",
+   "results": "{\"t\": \"2026-10-24T04:58:46Z\", \"tool\": \"leanfinder\", \"query\": \"Iterating infinitesimal isogenies gives a nilpotent algebraic group or a geometric Lie algebra with noncentral semisimple element while preserving liftability of tori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"Algebra.FormallyUnramified.lift_unique'\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallyUnramified.lift_unique\", \"PerfectRing.liftAux\"], \"digest\": \"853a6eb71d1191d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra radicals, Jordan decomposition of a linear endomorphism, and infinitesimal ring lifting do not construct finite radicial algebraic-group quotients or lift their tori."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "{\"t\": \"2026-10-24T04:58:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra radicals, Jordan decomposition of a linear endomorphism, and infinitesimal ring lifting do not construct finite radicial algebraic-group quotients or lift their tori."
+  },
+  {
+   "tool": "grep",
+   "query": "infinitesimal.*isogen|isogen.*torus|noncentral.*semisimple",
+   "results": "{\"t\": \"2026-10-24T04:58:41Z\", \"tool\": \"grep\", \"query\": \"infinitesimal.*isogen|isogen.*torus|noncentral.*semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra radicals, Jordan decomposition of a linear endomorphism, and infinitesimal ring lifting do not construct finite radicial algebraic-group quotients or lift their tori."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every smooth connected affine algebraic group over a field has a finite radicial isogeny to a group that is nilpotent or has a noncentral semisimple element in its geometric Lie algebra, and every torus in the quotient lifts to a torus",
+   "results": "{\"t\": \"2026-10-24T04:58:41Z\", \"tool\": \"leansearch\", \"query\": \"Every smooth connected affine algebraic group over a field has a finite radicial isogeny to a group that is nilpotent or has a noncentral semisimple element in its geometric Lie algebra, and every torus in the quotient lifts to a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.HasCentralRadical.mk\", \"LieAlgebra.nilpotent_of_nilpotent_quotient\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"Algebra.Smooth.exists_finiteType\", \"Function.Injective.lieAlgebra_isNilpotent\", \"Algebra.Smooth.formallySmooth\", \"CommGroup.isNilpotent\", \"LieAlgebra.instHasTrivialRadicalOfSubsingleton\"], \"digest\": \"8a77de414305f966\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra radicals, Jordan decomposition of a linear endomorphism, and infinitesimal ring lifting do not construct finite radicial algebraic-group quotients or lift their tori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected affine algebraic group admits a finite radicial isogeny to a nilpotent group or one whose Lie algebra has a noncentral semisimple vector, and tori lift",
+   "results": "{\"t\": \"2026-10-24T07:08:32Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected affine algebraic group admits a finite radicial isogeny to a nilpotent group or one whose Lie algebra has a noncentral semisimple vector, and tori lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Module.End.exists_isNilpotent_isSemisimple\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.HasTrivialRadical\"], \"digest\": \"38e15a0851f9f06b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract nilpotent groups, Engel theory, endomorphism Jordan decomposition and infinitesimal algebra lifts do not give this algebraic-group reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal isogeny reduction of algebraic groups by iterating central semisimple tangent kernels",
+   "results": "{\"t\": \"2026-10-24T07:08:33Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal isogeny reduction of algebraic groups by iterating central semisimple tangent kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.Extension.Cotangent.map_toInfinitesimal_bijective\", \"Algebra.FormallyEtale\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\"], \"digest\": \"c7ac1dfa10cea639\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract nilpotent groups, Engel theory, endomorphism Jordan decomposition and infinitesimal algebra lifts do not give this algebraic-group reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "{\"t\": \"2026-10-24T07:08:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract nilpotent groups, Engel theory, endomorphism Jordan decomposition and infinitesimal algebra lifts do not give this algebraic-group reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "infinitesimal.*isogen|isogen.*torus|noncentral.*semisimple",
+   "results": "{\"t\": \"2026-10-24T07:08:29Z\", \"tool\": \"grep\", \"query\": \"infinitesimal.*isogen|isogen.*torus|noncentral.*semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract nilpotent groups, Engel theory, endomorphism Jordan decomposition and infinitesimal algebra lifts do not give this algebraic-group reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite radicial isogeny reduction to nilpotent algebraic groups or noncentral semisimple Lie elements",
+   "results": "{\"t\": \"2026-10-24T07:08:30Z\", \"tool\": \"leansearch\", \"query\": \"Finite radicial isogeny reduction to nilpotent algebraic groups or noncentral semisimple Lie elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsNilpotent\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"LieModule.isNilpotent_iff_forall'\", \"isNilpotent_pi\", \"Function.Injective.lieAlgebra_isNilpotent\", \"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"LieAlgebra.isNilpotent_iff_forall\", \"LieEquiv.nilpotent_iff_equiv_nilpotent\"], \"digest\": \"dc9b803acd46d328\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract nilpotent groups, Engel theory, endomorphism Jordan decomposition and infinitesimal algebra lifts do not give this algebraic-group reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379.",
+   "via": [
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-infinitesimal-isogeny-lie-reduction",
+  "worker": "stage1",
+  "summary": "Separate the invariant semisimple subspace, height-one quotient with central multiplicative kernel, no-infinite-bad-tower assertion, and central infinitesimal torus extension. Construct the quotient tower, verify termination hypotheses, compose isogenies, and lift tori by an explicit character-lattice construction. No assertion that dimensions decrease.",
+  "blueprint": "The latest direct-images proof (3), via the existing alteration/PGL/Milne prerequisite chain recorded in blueprint.from: Proposition 17.80 supplies the isogeny reduction in Proposition 17.81. All steps retain that local route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-3c1112d58",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-3c1112d58 (reviewer sub-agent of L); spot-checked: I read Milne iAG 2017: 17.74–17.80 (pp.377–378), 11.35–11.38 (pp.222–223), and 12.22–12.24 and 12.29 (pp.239–241). The item statement is unchanged from live, and this is a first split of an unsplit node with no repair note. Steps 1–7 follow the proof of Milne 17.80. Step 2 cites the central-semisimple node (p>0, restricted, Ad trivial, k̄-span is the full semisimple subspace), which supplies every hypothesis of the height-one node, including its central and multiplicative clause. Step 3's sequence meets every hypothesis of the termination node, and no step argues by falling dimension. Step 4 composes finite/radicial maps via lem-trf-finite-radicial-basechange and flat maps via RingHom.Flat.comp. Step 5 forms the fibre product P→S, a base change of q_i, so it is finite and faithfully flat with the same central infinitesimal multiplicative kernel; the extension node then gives P of multiplicative type and the exact character sequence. Step 6 sets R = D(M/M_tors) ⊆ P using the antiduality equivalence and its closed-immersion criterion; L→M̄ is injective, so k[S]→k[R] is injective and the image of R is S. Step 7 iterates this backwards. I checked that all 4 new nodes are true. Central-semisimple: commuting semisimple elements form a toral subspace that is defined over k because the p-map fixed points are separable, and Ad is trivial by Cor 17.77. Height-one: Cor 11.38 applies, and G(toral h) ≅ μ_p^r over k̄. Termination: in a bad stage S = Lie T and H = T[p]; the minimal p-divisibility of the nonzero T-weights then drops by one at each quotient, as in the example G_a⋊G_m with weight p^a. Extension: the commutator descends to a map T×T→N that must be trivial, so E is commutative, and Cor 12.22 and Thm 12.23 give the rest. None of the new nodes duplicates commutative-multiplicative-type-extension, central-extension-of-tori, action-rigidity or largest-subtorus, and rg -L found no other duplicates. All four are statement-only, self-contained, and have searches recorded. Batch-5: the new citations of lem-sfb-multiplicative-character-antiduality (in the extension node's statement and in item step 6) reach lem-trf-projective-exterior-scalar-comparisons. That node is pure commutative algebra about base change of exterior powers, duals and determinants. It is neither the trace formula nor Poincaré duality nor a step of their proofs, so it is genuinely outside both assumptions. The Springer 13.3.5 details are WANTED, and the proof is correctly marked by: agent. No fixes."
+ }
+}

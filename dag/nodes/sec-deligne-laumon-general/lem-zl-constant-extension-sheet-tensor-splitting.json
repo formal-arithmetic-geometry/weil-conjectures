@@ -1,0 +1,125 @@
+{
+ "id": "lem-zl-constant-extension-sheet-tensor-splitting",
+ "kind": "lemma",
+ "title": "Evaluation tensor splitting for the actual finite constant field",
+ "statement": "For a finite-field datum D of [def-weil-finite-field-fiber], and m >= 1, the tensor-splitting clause of [def-zl-constant-extension-sheet-heart-data] holds: with the specified algebra structure on E = D.extensionSubfield m hm, there is a ring isomorphism E tensor_(D.k_0) D.k to the product of D.k indexed by D.k_0-algebra embeddings sigma:E -> D.k, taking t tensor b to (sigma(t)b)_sigma, and the number of embeddings is m. The chosen subfield and its cardinality are those of [def-dl-a1-constant-extension-data].",
+ "stmt_deps": [
+  "def-zl-constant-extension-sheet-heart-data",
+  "def-weil-finite-field-fiber",
+  "def-dl-a1-constant-extension-data"
+ ],
+ "proof": [
+  {
+   "text": "Use constantExtensionField_properties of [def-dl-a1-constant-extension-data] to give E its finite type. The equality of finite cardinalities q^[E:k_0] = #E = q^m and q >= 2 give [E:k_0] = m. The finite-field separability assertion of [lem-sfb-finite-field-galois-frobenius] applies. Define f:k tensor_(k_0) E -> product_sigma k by b tensor t mapping to (b sigma(t))_sigma. Distinct embeddings are linearly independent as multiplicative characters (Mathlib linearIndependent_monoidHom); span_flip_eq_top_iff_linearIndependent makes the evaluation vectors span the product. Each such vector is f(1 tensor t), so f is surjective. The source dimension is [E:k_0] by finrank_baseChange; the target dimension is the number of embeddings, also [E:k_0] by AlgHom.card for a separable extension into an algebraically closed field. Equal dimensions make f injective. Package f as an algebra equivalence and compose its underlying ring equivalence with the tensor swap. Commutativity gives the prescribed evaluation formula and the degree calculation gives exactly m embeddings.",
+   "uses": [
+    "def-dl-a1-constant-extension-data",
+    "lem-sfb-finite-field-galois-frobenius"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-dl-a1-constant-extension-data",
+  "lem-sfb-finite-field-galois-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), p. 150, and paragraph after (1.1.10), p. 152."
+ },
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), p. 150, and paragraph after (1.1.10), p. 152."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite separable extension tensor product with algebraic closure evaluation at embeddings product",
+   "results": "Found Field.finSepDegree_eq_of_isAlgClosed and embEquivOfIsAlgClosed; no tensor evaluation splitting.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients only; no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable field extension tensored with an algebraically closed field is the product indexed by algebra embeddings, with component map sending a tensor b to sigma a times b",
+   "results": "Found linear-disjointness and algebraic tensor field facts, no exact statement.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients only; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"span_flip_eq_top_iff_linearIndependent\"",
+   "results": "Found exactly this duality lemma in Mathlib.LinearAlgebra.Dual.Lemmas.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(pi|Pi)|TensorProduct.*(equiv|Equiv); finiteGaloisTensorAlgEquiv; blueprint_refs.py search tensor decomposition",
+   "results": "Mathlib has tensor/product commutation. Existing private finiteGaloisTensorAlgEquiv in WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorDecomposition supplies the Dedekind-independence proof pattern, for a different domain and index set. Existing separable_tensor_algebraicallyClosed_equiv_pi has no pinned evaluation formula. No duplicate of this finite constant-field clause.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients only; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionSheetGeometry",
+  "date": "2026-10-26",
+  "group": "B4"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1: geometric splitting after finite constant extension; geometry lemma steps 1 and 2.",
+   "via": [
+    "lem-zl-constant-extension-sheet-geometry",
+    "lem-zl-constant-extension-sheet-heart-coordinates",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantExtensionSheetTensorSplitting",
+  "file": "lean/Sheaf/Paper/ConstantExtensionSheetTensorSplitting.lean",
+  "declaration": "WeilConjectures.constantExtensionSheetTensorSplitting",
+  "statement": "theorem constantExtensionSheetTensorSplitting : ZlSheetTensorSplitting D m hm",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T000943-L-4150729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T000943-L-4150729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

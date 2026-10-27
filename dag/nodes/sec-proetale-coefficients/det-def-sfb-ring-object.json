@@ -1,0 +1,210 @@
+{
+ "id": "det-def-sfb-ring-object",
+ "kind": "definition",
+ "title": "Ring objects of abelian sheaves",
+ "statement": "A *ring object* of a monoidal category $(\\mathcal C,\\otimes,\\mathbf 1)$ is a monoid\nobject. It consists of an object $R$, a *multiplication* $\\mu\\colon R\\otimes R\\to R$ and\na *unit* $\\eta\\colon\\mathbf 1\\to R$, such that $\\mu$ is associative,\n$\\mu\\circ(\\mu\\otimes\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\otimes\\mu)\\circ\\alpha_{R,R,R}$, and\n$\\eta$ is a two-sided unit, $\\mu\\circ(\\eta\\otimes\\mathrm{id})=\\lambda_R$ and\n$\\mu\\circ(\\mathrm{id}\\otimes\\eta)=\\rho_R$. A *morphism of ring objects* is a morphism\ncompatible with the multiplications and the units. If $\\mathcal C$ is braided, the ring\nobject $R$ is *commutative* when $\\mu\\circ\\beta_{R,R}=\\mu$.\n\nThroughout, $\\Ab$ carries the tensor product $\\otimes_{\\mathbf Z}$ with unit $\\mathbf Z$.\nAbelian presheaves carry the objectwise tensor product. Abelian sheaves on a site $C$\ncarry its sheafification, the tensor product of [lem-weil-pbc-sheaf-tensor-closed] (with $C$ as\nthere, e.g. $X_{\\mathrm{proét}}$ or the site of profinite sets).\n\n1. Every ring $R$ is a ring object of $\\Ab$, with unit $\\mathbf Z\\to R$, $n\\mapsto n\\cdot1$,\n   and multiplication $R\\otimes_{\\mathbf Z}R\\to R$, $a\\otimes b\\mapsto ab$. A ring\n   homomorphism is a morphism of ring objects. If $R$ is commutative, so is the ring\n   object $R$.\n2. A presheaf of rings $P$ on $C$ is, objectwise as in 1, a ring object of abelian\n   presheaves, and a morphism of presheaves of rings is a morphism of ring objects. The\n   sheafification $aP$ of the underlying abelian presheaf is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $P(U)$ are.\n3. The abelian sheaf underlying a sheaf of rings $\\mathcal R$ on $C$ is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $\\mathcal R(U)$ are. A morphism of sheaves\n   of rings is a morphism of ring objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-ring-object.md",
+  "place": "node det-def-sfb-ring-object, order 1061"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Ring objects, their morphisms, and braided commutativity are exactly the monoid-object clauses in [det-def-sfb-ring-object-monoid]. The ordinary-ring realization and ring-homomorphism and commutativity claims are [det-def-sfb-ring-object-rings]. The presheaf realization and its sheafification are [det-def-sfb-ring-object-presheaf], and the underlying sheaf-of-rings realization and morphism claim are [det-def-sfb-ring-object-sheaf]. These four nodes are stated for the monoidal structure of [det-def-sfb-sheaf-tensor-structure] on $\\Sh(C,\\Ab)$, for a site $C$ with essentially small underlying category and $\\Ab$ with $\\otimes_{\\mathbf Z}$ and unit $\\mathbf Z$; this is the item's convention. Indeed [lem-weil-pbc-sheaf-tensor-closed], part (2), for $\\mathcal A=\\Ab$ (Grothendieck abelian, closed symmetric monoidal, $\\otimes_{\\mathbf Z}$ additive in each variable) on the same kind of site gives the tensor product $\\mathcal F\\otimes\\mathcal G=a(\\iota\\mathcal F\\otimes_p\\iota\\mathcal G)$ with unit $a(\\underline{\\mathbf Z})$, for which $a$ is strong symmetric monoidal. These are the tensor product, unit and strong symmetric monoidal sheafification of [det-def-sfb-sheaf-tensor-structure], whose associator, unitors and symmetry are $a$ of the objectwise ones transported along the comparison isomorphisms $aP\\otimes aQ\\cong a(P\\otimes_pQ)$. Since every sheaf $\\mathcal F$ is $a(\\iota\\mathcal F)$ through the counit, the coherence isomorphisms are determined by these comparisons, so both nodes describe the same symmetric monoidal category. Hence the ring objects, morphisms and commutativity in the four detail nodes are those of the item, and combining them gives all three clauses.",
+   "uses": [
+    "det-def-sfb-ring-object-monoid",
+    "det-def-sfb-ring-object-rings",
+    "det-def-sfb-ring-object-presheaf",
+    "det-def-sfb-ring-object-sheaf",
+    "det-def-sfb-sheaf-tensor-structure",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-ring-object.md",
+    "place": "## Proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-ring-object-monoid",
+  "det-def-sfb-ring-object-rings",
+  "det-def-sfb-ring-object-presheaf",
+  "det-def-sfb-ring-object-sheaf",
+  "det-def-sfb-sheaf-tensor-structure",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/det-def-sfb-ring-object.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring objects of abelian sheaves, presheaves and sheaves of rings with multiplication unit morphisms and commutativity",
+   "results": "PresheafOfModules.presheaf, AlgebraicGeometry.Scheme.ringCatSheaf, CategoryTheory.instPreadditiveSheaf, CategoryTheory.presheafToSheaf_additive, PresheafOfModules.Sheafify.module, PresheafOfModules.unit, PresheafOfModules.Sheafify.smul, PresheafOfModules.ofPresheaf_obj_isAddCommGroup",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic presheaf/sheaf or monoidal infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring objects in a monoidal category together with presheaf and sheaf ring constructions",
+   "results": "SheafOfModules, PresheafOfModules, AlgebraicGeometry.RingedSpace, AlgebraicGeometry.Scheme.PresheafOfModules, SheafOfModules.unit, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.presheaf, AlgebraicGeometry.Scheme.ringCatSheaf",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic module/sheaf infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonObj, CategoryTheory.IsMonHom, CategoryTheory.Sheaf.monObj_presheafToSheaf_obj, CategoryTheory.Sheaf.monObj_sheafCompose_obj",
+   "results": "none; note: loogle: unknown identifier 'CategoryTheory.Sheaf.monObj_presheafToSheaf_obj'",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic monoid declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "MonObj|IsMonHom|ringMonObj|monObj_presheafToSheaf_obj|monObj_sheafCompose_obj",
+   "results": "Mathlib/CategoryTheory/MarkovCategory/Positive.lean, Mathlib/CategoryTheory/MarkovCategory/Basic.lean, Mathlib/CategoryTheory/Preadditive/CommGrp_.lean, Mathlib/CategoryTheory/Preadditive/CommGrp_.lean, Mathlib/CategoryTheory/Preadditive/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic Mathlib monoidal/search hits only",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monoid objects in monoidal categories and ring sheaves obtained from presheaf and sheafification",
+   "results": "CategoryTheory.Sheaf.monoidalCategory, PresheafOfModules.sheafify, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, PresheafOfModules.sheafification, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, PresheafOfModules.monoidalCategoryStruct, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.monoidalCategory",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic presheaf/sheaf or monoidal infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a presheaf of rings and a sheaf of rings define monoid objects in abelian presheaves and abelian sheaves",
+   "results": "SheafOfModules.unit, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, SheafOfModules.instAdditivePresheafOfModulesValRingCatForget, SheafOfModules, SheafOfModules.instPreadditive, PresheafOfModules.ofPresheaf_obj_isAddCommGroup, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.instAbelian",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic module/sheaf infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonObj, CategoryTheory.IsMonHom, CategoryTheory.IsCommMonObj",
+   "results": "CategoryTheory.MonObj.instIsMonHomMulOfIsCommMonObj, CategoryTheory.CommMon.mkIso', CategoryTheory.CommMon.mkIso'_hom_hom_hom, CategoryTheory.CommMon.mkIso'_inv_hom_hom, CategoryTheory.instIsMonHomInvHomOfIsCommMonObj",
+   "date": "2026-10-26",
+   "verdict": "no exact whole-item match; generic monoid declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyRingPresheaf|monObj_sheafCompose_obj|isMonHom_sheafCompose_map",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no exact match; generic Mathlib monoidal/search hits only",
+   "subdirectory": "CategoryTheory/Sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1061,
+ "blueprint_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "det-def-sfb-ring-object-monoid",
+  "det-def-sfb-ring-object-rings",
+  "det-def-sfb-ring-object-presheaf",
+  "det-def-sfb-ring-object-sheaf"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.MonObj",
+  "CategoryTheory.IsMonHom",
+  "CategoryTheory.IsCommMonObj",
+  "AddCommGrpCat.ringMonObj",
+  "AddCommGrpCat.isMonHom_ofHom_ringHom",
+  "CategoryTheory.Functor.monObjCompForget₂",
+  "CategoryTheory.Sheaf.sheafifyRingPresheaf",
+  "CategoryTheory.Sheaf.monObj_presheafToSheaf_obj",
+  "CategoryTheory.Sheaf.monObj_sheafCompose_obj",
+  "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.MonObj",
+  "CategoryTheory.IsMonHom",
+  "CategoryTheory.IsCommMonObj",
+  "AddCommGrpCat.ringMonObj",
+  "AddCommGrpCat.isMonHom_ofHom_ringHom",
+  "CategoryTheory.Functor.monObjCompForget₂",
+  "CategoryTheory.Sheaf.sheafifyRingPresheaf",
+  "CategoryTheory.Sheaf.monObj_presheafToSheaf_obj",
+  "CategoryTheory.Sheaf.monObj_sheafCompose_obj",
+  "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-sfb-ring-object",
+  "from": null,
+  "same_as": [
+   "sk-def-sfb-ring-object"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-condensed-point",
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "det-def-sfb-ring-object",
+  "worker": "stage1",
+  "summary": "Reused the four existing detail nodes for the monoidal, ordinary-ring, presheaf, and sheaf clauses; no new nodes or Mathlib leaves were needed. The parallel reviewed umbrella sk-def-sfb-ring-object is recorded in blueprint.same_as, while this item retains its explicit detail-node assembly and the current blueprint source.",
+  "blueprint": "Realizes the sole proof paragraph of det-def-sfb-ring-object: monoid-object clauses via det-def-sfb-ring-object-monoid, clauses 1–3 via the rings, presheaf, and sheaf detail nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-032b1c3b1",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-032b1c3b1 (reviewer sub-agent of L); spot-checked: I read the item, its blueprint .md and .proof.md (main-20261023-1620, order 1061), the four cited detail nodes (monoid, rings, presheaf, sheaf), det-def-sfb-sheaf-tensor-structure, det-def-sfb-sheaf-tensor-presheaf, lem-weil-pbc-sheaf-tensor-closed and sk-def-sfb-ring-object. The delivery adds no new nodes. The single assembly step follows the blueprint proof, and each clause is fully covered by its cited statement: monoid clauses 1-3; rings 1-3 (zero ring and noncommutative rings checked); presheaf parts 1-2; sheaf (underlying sheaf, transported structure, commutativity, morphisms). Hypotheses match: a site with essentially small underlying category, Ab with tensor over Z. One fault, fixed: the item fixes the sheaf tensor via lem-weil-pbc-sheaf-tensor-closed, but all four detail nodes are stated for det-def-sfb-sheaf-tensor-structure, and the step never identified the two conventions or cited either node (C4). The corrected item json under fixes/ adds that identification to the step: same tensor, same unit, and coherence isomorphisms determined by the strong symmetric monoidal comparisons, since every sheaf is a(iota F). It also adds both nodes to uses and proof_deps. The statement is unchanged, and I checked that the fix adds no cycle. sk-def-sfb-ring-object, which has the same clauses, is correctly recorded in same_as. Tool uses accepted: the four det-def-sfb-ring-object-* nodes (unit sk-def-sfb-ring-object) and det-def-sfb-sheaf-tensor-structure, which are the blueprint's own route.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.RingPresheaf",
+  "declaration": "CategoryTheory.Functor.monObjCompForget₂",
+  "declarations": [
+   "CategoryTheory.MonObj",
+   "CategoryTheory.IsMonHom",
+   "CategoryTheory.IsCommMonObj",
+   "AddCommGrpCat.monoidalCategory",
+   "AddCommGrpCat.symmetricCategory",
+   "AddCommGrpCat.ringMonObj",
+   "AddCommGrpCat.ringMonObj_one_apply",
+   "AddCommGrpCat.ringMonObj_mul_tmul",
+   "AddCommGrpCat.isMonHom_ofHom_ringHom",
+   "AddCommGrpCat.isCommMonObj_of_commRing",
+   "CategoryTheory.Functor.monObjCompForget₂",
+   "CategoryTheory.Functor.isMonHom_whiskerRight_forget₂",
+   "CategoryTheory.Functor.isCommMonObj_compForget₂",
+   "CategoryTheory.Sheaf.sheafifyRingPresheaf",
+   "CategoryTheory.Sheaf.monObj_presheafToSheaf_obj",
+   "CategoryTheory.Sheaf.isCommMonObj_presheafToSheaf_obj",
+   "CategoryTheory.Sheaf.sheafifyRingPresheafIso",
+   "CategoryTheory.Sheaf.monObj_sheafCompose_obj",
+   "CategoryTheory.Sheaf.isCommMonObj_sheafCompose_obj",
+   "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+  ],
+  "statement": "noncomputable instance monObjCompForget₂ : MonObj (P ⋙ forget₂ RingCat.{w} Ab.{w})",
+  "branch": "slopmaster2",
+  "by": "NA",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "The recorded upstream RingObjects.RingPresheaf module publicly imports RingObjects.Ab and jointly realizes every clause of this umbrella node. Ring object, morphism and commutativity are Mathlib MonObj, IsMonHom, IsCommMonObj; Ab carries the tensor product over Z with unit ULift Z (AddCommGrpCat.monoidalCategory, symmetricCategory). Clause 1: ringMonObj (unit Int.cast, multiplication LinearMap.mul'), isMonHom_ofHom_ringHom, isCommMonObj_of_commRing. Clause 2: monObjCompForget₂, isMonHom_whiskerRight_forget₂, isCommMonObj_compForget₂, sheafifyRingPresheaf with monObj/isCommMonObj_presheafToSheaf_obj. Clause 3: monObj_sheafCompose_obj (transport along the counit sheafifyRingPresheafIso), isCommMonObj_sheafCompose_obj, isMonHom_sheafCompose_map. The sheaf tensor is Sheaf.monoidalCategory under [(J.W).IsMonoidal]; on an essentially small site this is the tensor of lem-weil-pbc-sheaf-tensor-closed by GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall_eq (rfl). The [J.HasSheafCompose (forget₂ RingCat Ab)] hypothesis of clause 3 always holds (hasSheafCompose_of_preservesLimitsOfSize). Second reader added the omitted declarations, notably isCommMonObj_sheafCompose_obj for the sheaf commutativity clause.",
+  "fixed_by": "NT-stage2-cc-98f8095a8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98f8095a8",
+  "group": "NA",
+  "result": "fix",
+  "note": "Existing attachment to RingObjects.RingPresheaf/Ab is mathematically exact: MonObj/IsMonHom/IsCommMonObj; Ab tensor over Z with unit ULift Z; clause 1 ringMonObj (Int.cast unit, mul'), isMonHom_ofHom_ringHom, isCommMonObj_of_commRing; clause 2 monObjCompForget₂/isMonHom_whiskerRight_forget₂/isCommMonObj_compForget₂ + sheafifyRingPresheaf/monObj_presheafToSheaf_obj; clause 3 monObj_sheafCompose_obj/isMonHom_sheafCompose_map. Sheaf.monoidalCategory = monoidalCategory_sheaf_of_essentiallySmall of lem-weil-pbc-sheaf-tensor-closed by rfl; HasSheafCompose always holds; universe-polymorphic; statement verbatim (line 433). F1 fixed: lean.declarations omitted isCommMonObj_sheafCompose_obj (the clause-3 commutativity, cited by the report) and the notion and Ab-structure declarations; fixes/det-def-sfb-ring-object.lean-record.json gives the full list (same names as landed sk-def-sfb-ring-object) and a note; module, declaration, statement and existing unchanged; no Lean changed, no compile."
+ }
+}

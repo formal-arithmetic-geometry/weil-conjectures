@@ -1,0 +1,194 @@
+{
+ "id": "lem-trf-etale-presented-descent-gluing",
+ "kind": "statement",
+ "title": "Descend and glue already constructed local Zariski cokernels",
+ "statement": "Let $T,c,G,I,U,K,J,d,q$ be as in [lem-trf-etale-presented-local-cokernels], and suppose the etale family $U_i\\to T$ is jointly surjective. Fix any local recovery datum $L$ of that lemma: in particular its quasi-coherent modules $F_i$, comparisons $L_{U_i}F_i\\simeq G|_{U_i}$ and normalized tensor coordinates are specified. In the coordinates [def-trf-etale-presented-recovery-coordinates], there exist unique overlap lifts on every etale test overlap, satisfying their section-image equations and cocycle. There exist a quasi-coherent Zariski module $F$, chart isomorphisms $u_i^*F\\simeq F_i$ inducing those lifts, normalized linear tensor coordinates for $F$, and an isomorphism $L_TF\\simeq G$ whose specified local equations hold and whose morphism is unique with those restrictions. This is the datum EtalePresentedDescentRecovery relative to L. The conclusion does not identify F with R_T G or assert any property of the adjunction counit.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-module-pullback",
+  "def-trf-etale-presented-recovery-coordinates",
+  "lem-trf-etale-presented-local-cokernels"
+ ],
+ "proof": [
+  {
+   "text": "The pairwise and triple fibre products are objects of the small etale site by [def-weil-pbc-etale-site]. On $V_{ij}$, the modules $p_i^*F_i,p_j^*F_j$ are quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Use the etale restriction and composition identifications of [lem-trf-etale-extension-free-presentations-hom] to regard the restrictions of $b_i,b_j$ as maps from their respective $L_{V_{ij}}$-images to the same $G|_{(V_{ij})_{\\mathrm{et}}}$. Fullness gives the unique lift $\\phi_{ij}$ of $b_j^{-1}b_i$. Fullness also lifts its inverse $b_i^{-1}b_j$; faithfulness sends the two inverse equations back to the Zariski modules. Thus $\\phi_{ij}$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-etale-extension-free-presentations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof of (2) by the same construction as (1)."
+   }
+  },
+  {
+   "text": "Pull to $V_{ijk}$, using the composition identifications of [def-pc-module-pullback], preservation of quasi-coherence [lem-weil-pbc-module-pullback-quasi-coherent], and restriction compatibility in [lem-trf-etale-extension-free-presentations-hom]. The $L_{V_{ijk}}$-image of the proposed cocycle equation is $(b_k^{-1}b_j)(b_j^{-1}b_i)=b_k^{-1}b_i$. Faithfulness gives $\\phi_{jk}\\phi_{ij}=\\phi_{ik}$. Pulling this equation for $i=j=k$ along the small diagonal $V_i\\to V_{iii}$ gives $e_i^2=e_i$ for $e_i=\\Delta_i^*\\phi_{ii}$. As $e_i$ is invertible, $e_i=1$. This is a normalized descent datum.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-etale-extension-free-presentations-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof of (2) by the same construction as (1)."
+   }
+  },
+  {
+   "text": "The given family is a covering of the terminal object of $T_{\\mathrm{et}}$. By [lem-weil-pbc-fpqc-finer-than-etale] it is an fpqc covering in the family sense; no quasi-compactness of the individual $u_i$ is required. Apply clause (1) of [lem-pc-fpqc-descent] to the quasi-coherent $F_i$ and the datum of steps 3--4. It gives a quasi-coherent $F$ and isomorphisms $a_i:u_i^*F\\simeq F_i$ satisfying $a_j=\\phi_{ij}a_i$ on each overlap, with canonical pullback identifications understood.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof of (2) by the same construction as (1)."
+   }
+  },
+  {
+   "text": "By the restriction compatibility of [lem-trf-etale-extension-free-presentations-hom], define $c_i=b_iL_{V_i}(a_i):(L_TF)|_{(V_i)_{\\mathrm{et}}}\\simeq G|_{(V_i)_{\\mathrm{et}}}$. On overlaps, $c_j=b_jL(\\phi_{ij})L(a_i)=b_j(b_j^{-1}b_i)L(a_i)=c_i$. Apply [lem-pur-sheaf-hom-cover-gluing] on the small etale site at its terminal object to obtain the unique module map $b:L_TF\\to G$ restricting to $c_i$. The inverses $c_i^{-1}$ also agree on overlaps and glue by the same lemma to a map $d:G\\to L_TF$. The composites $db,bd$ restrict to identities, so the uniqueness clause of that lemma gives $db=1$ and $bd=1$. This constructs the required global isomorphism.",
+   "uses": [
+    "lem-trf-etale-extension-free-presentations-hom",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof of (2) by the same construction as (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful tensor extension lifts a presentation by free modules to a quasicoherent cokernel and compatible local comparisons",
+   "results": "SheafOfModules.presentationOfIsCokernelFree, QuasicoherentData.presentation, quasicoherentDataOfIsFinitePresentation; these package presentations but do not lift along change of topology.",
+   "date": "2026-10-26",
+   "verdict": "No direct recovery construction; the existing free-presentation/Hom theorem remains the tool."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent module on the small etale site is recovered by restriction to the Zariski site and effective descent of free presentations",
+   "results": "SheafOfModules.QuasicoherentData and its presentation/local-generators projections.",
+   "date": "2026-10-26",
+   "verdict": "Local presentations alone do not construct compatible Zariski cokernels or their descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "Adjunction.homEquiv, left_triangle_components, right_triangle_components and toEquivalence.",
+   "date": "2026-10-26",
+   "verdict": "The Hom equivalence and triangle identities supply the final formal argument; not the local recovery or descent."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePresentedRecovery|etalePresentedModule_effectiveRecovery|isIso_counit_app; rg in Mathlib, lean/WeilConjectures, lean/Sheaf, DAG; blueprint_refs search etale presented",
+   "results": "The assigned module is the only recovery datum. Existing declarations are isQuasicoherent_cokernel, isQuasicoherent_sigma, exists_isQuasicoherent_toDescentData_iso, existsUnique_hom_of_cover, Hom.isIso_iff_isIso_app. No imported blueprint node matches etale presented.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing dependency declarations for the two genuine construction steps, and prove the adjunction tail directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtalePresentedModuleEffectiveRecovery",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 03DX recovery argument below the section-algebra change of topology: Descend and glue already constructed local Zariski cokernels",
+   "via": [
+    "lem-trf-etale-presented-module-effective-recovery",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePresentedDescentGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePresentedDescentGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etalePresented_descentGluing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.EtalePresentedDescentRecovery",
+   "AlgebraicGeometry.Scheme.Modules.etalePresented_descentGluing"
+  ],
+  "statement": "theorem etalePresented_descentGluing (c : ∀ X : Scheme.{u}, ZariskiEtaleModuleContext X) (T : Scheme.{u}) (G : SmallEtaleModules T) (I : Type w) (U : I → T.Etale) (K J : I → Type u) (d : ∀ i, SheafOfModules.free (R := smallEtaleModuleRing (U i).left) (K i) ⟶ SheafOfModules.free (J i)) (q : ∀ i, SheafOfModules.free (R := smallEtaleModuleRing (U i).left) (J i) ⟶ (presentedEtaleRestriction (U i)).obj G) (cover : ∀ x : T, ∃ (i : I) (y : (U i).left), (U i).hom.base y = x) (L : EtalePresentedLocalRecovery c T G I U K J d q) : Nonempty (EtalePresentedDescentRecovery c T G I U K J d q L)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + EtalePresentedRecovery unchanged vs clone; new Local/Descent structures = verbatim field subsets of EtalePresentedRecovery; moved defs verbatim vs published; item node vs proof as written"
+ }
+}

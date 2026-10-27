@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-free-log-chart-strict-parameters",
+ "kind": "statement",
+ "title": "Free characteristic, nonunit ideal and parameters in the strict local ring",
+ "statement": "Let W be an affine locally Noetherian scheme [pqf-def-locnoeth], with a fine saturated log regular structure N [def-trf-fs-log-blowup]. Let beta be a chart by N^r. For any w and algebraically closed geometric point t above w [def-weil-geometric-point], let J be exactly the nonunit ordinary coordinates, and use the actual functions and increasing list [def-trf-free-log-chart-coordinates]. Then the characteristic at t is multiplicatively isomorphic to N^J, with every chart monomial sent to its restriction to J. The nonunit ideal, transported by the canonical strict-henselization comparison [def-trf-log-etale-restriction-stalk-comparison], is the ideal of the strictCoordinate(j), j in J. The recorded strict henselization is local and Noetherian and the ordered list of these strict coordinates extends to a regular system of parameters [def-weil-pbc-regular-system-of-parameters].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-weil-geometric-point",
+  "def-trf-free-log-chart-coordinates",
+  "def-trf-log-etale-restriction-stalk-comparison",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\mathcal O_{W,w}$ and $A=B^{\\mathrm{sh}}$. Choose a Noetherian affine open around $w$ using local Noetherianity. Its local ring $B$ is a localization by [lem-weil-pbc-affine-open-stalk-localization], hence is Noetherian by [lem-weil-pbc-localization-noetherian]. Write this open as $\\operatorname{Spec}D$ and $\\mathfrak p\\subset D$ for the prime of $w$, so $B=D_{\\mathfrak p}$. By [lem-exc-affine-strict-local-ring-comparison] the pointed-neighbourhood ring $A$ of $\\bar w$ is isomorphic as a $D$-algebra, compatibly with the structural morphism, to an algebraic strict henselization of $B$ relative to the separable closure $l$ of $\\kappa(w)$ in $\\Omega$, and its residue field is identified with $l$. Through this identification the ring-level strict-henselization lemmas below and in step 5 apply to $A$ and to the canonical map $B\\to A$. Then $A$ is Noetherian by [lem-sc-strict-henselization-noetherian]. The structural map $B\\to A$ is local by [lem-sc-strict-henselization-faithfully-flat]; therefore a $t_i$ is a unit in $B$ iff it is a unit in $A$ (units map to units, and nonunits lie in the maximal ideal, whose image lies in the target maximal ideal). In particular the same set $J$ indexes the nonunits in both rings.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LJ (lemma-henselization-noetherian), 07QM (lemma-dumb-properties-henselization); affine localizations: schemes.tex Tag 01HV, algebra.tex Tag 00FN."
+   }
+  },
+  {
+   "text": "Write $K=\\{1,\\ldots,r\\}\\setminus J$. A monomial $t^a$ is a unit iff every factor with positive exponent is a unit: if $uv$ has inverse $z$, then $u$ has inverse $vz$. Hence the preimage of $A^\\times$ in $\\mathbf N^r$ is $\\mathbf N^K$. The chart pushout of [def-trf-fs-log-blowup] is explicitly $\\mathbf N^J\\oplus A^\\times$: its forward map sends $[(a_J,a_K),u]$ to $(a_J,t_K^{a_K}u)$ and its inverse sends $(a_J,u)$ to $[(a_J,0),u]$. These are inverse by the pushout relation. Quotienting by units gives the canonical characteristic $\\mathbf N^J$. A log element is a nonunit precisely when $a_J\\ne0$. Its structural image $u\\prod_{j\\in J}t_j^{a_j}$ lies in $(t_j:j\\in J)A$, and each $t_j$ is itself such an image. Thus the nonunit ideal is exactly $I=(t_j:j\\in J)A$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1--1.2, printed p. 69; explicit associated-log-stalk pushout for the free chart."
+   }
+  },
+  {
+   "text": "By log regularity, $A/I$ is regular local and $\\dim A=\\dim(A/I)+|J|$, since $(\\mathbf N^J)^{\\mathrm{gp}}=\\mathbf Z^J$. Choose a regular system of parameters $\\bar b_1,\\ldots,\\bar b_s$ of $A/I$, where $s=\\dim(A/I)$, and lift them to $b_i\\in\\mathfrak m_A$. Such a system exists by [def-weil-regular-scheme]. Since $I\\subseteq\\mathfrak m_A$, taking inverse images of the equality $\\mathfrak m_A/I=(\\bar b_1,\\ldots,\\bar b_s)$ gives $\\mathfrak m_A=(t_j:j\\in J)+(b_1,\\ldots,b_s)$. This list has $|J|+s=\\dim A$ entries and generates the maximal ideal, so by the definitions it is a regular system of parameters and $A$ is regular. This uses the given $t_j$, in their indexed order, without replacing them by associates.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.2, 1.6--1.7, printed pp. 69--70; elementary lifting of generators of the stratum maximal ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-trf-fs-log-blowup",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a log regular scheme with a free monoid chart, the nonunit coordinates extend to a regular system of parameters in each ordinary local ring",
+   "results": "8 hits, including Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal and RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem. These concern smooth algebras or regular sequences, not logarithmic charts or descent of prescribed parameter sublists.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "12 hits. Inspected IsRegularLocalRing.of_spanFinrank_maximalIdeal_le, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, and isRegularLocalRing_iff. These establish regularity from generators or transport through an isomorphism; none supplies the free log chart presentation, etale restriction, or specified strict-local parameter descent.",
+   "date": "2026-10-26",
+   "verdict": "individual tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters; etaleRestrict|IsLogRegular|trivialityLocus; strictHenselization.*parameter|parameters.*strictHenselization",
+   "results": "msearch grep returned zero hits for the combined parameter search. Local rg inspected FineSaturatedLogBlowup, LogConditionFineChartLocality, LogEtaleRestrictionStalkComparison, the strict-henselization regularity and cotangent comparison modules, RegularLocalQuotientKernelParameters, and Mathlib RegularLocalRing/Defs. No existing theorem gives any of the three exact intermediate conclusions. The definitions of the four chart functions occur only in the assigned item and are moved verbatim to their definition module.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; existing ingredients retained"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The characteristic monoid of a free logarithmic chart is the free monoid on its nonunit coordinates and those coordinates extend to regular parameters in a log regular scheme",
+   "results": "8 hits: CharP.eq, MulChar.casesOn, FreeAlgebra.charP, MonoidAlgebra.instFree, MulChar.rec, FreeAlgebra.basisFreeMonoid, ExpChar.prime, NumberField.Units.logEmbedding. Inspected returned types; none supplies this exact statement. The parameter queries return regular-sequence, characteristic-p, character or henselian structure results; the coordinate query also returns TopCat.Presheaf.Γgerm, which supplies only the ordinary germ, and unrelated affine-space coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FreeLogChartOrdinaryParameters",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-free-log-chart-ordinary-parameters",
+   "place": "Steps of the ordinary-parameter proof, factored without changing its statement or the unit route."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FreeLogChartStrictParameters",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeLogChartStrictParameters.lean",
+  "declaration": "AlgebraicGeometry.freeLogChart_strict_parameters",
+  "statement": "theorem freeLogChart_strict_parameters\n    (W : Scheme.{u}) [IsAffine W] [IsLocallyNoetherian W]\n    (N : EtaleLogStructure W) (hfs : N.IsFineSaturated)\n    (hlog : FineSaturatedLogScheme.IsLogRegular ⟨W, inferInstance, N, hfs⟩)\n    (r : ℕ) (β : Multiplicative (ULift.{u} (Fin r) → ℕ) →*\n      N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 W))))\n    (hβ : N.IsChart (Scheme.Etale.mk (𝟙 W)) β)\n    (w : W) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶ W) (ht : (Scheme.SpecToEquivOfField Ω W t).1 = w) :\n      (∃ E : N.characteristic t ≃*\n          Multiplicative ({i : ULift.{u} (Fin r) //\n            ¬ IsUnit (FreeLogChart.ordinaryCoordinate N β w i)} → ℕ),\n        ∀ a : Multiplicative (ULift.{u} (Fin r) → ℕ),\n          E (Associates.mk (N.toEtalePrelogStructure.germ t\n            (Scheme.Etale.mk (𝟙 W)) (CategoryTheory.Over.homMk t (by simp)) (β a))) =\n            Multiplicative.ofAdd (fun j ↦ a.toAdd j.val)) ∧\n      (N.nonunitIdeal t).map (strictLocalRingStrictHenselizationIso W t).hom.hom =\n        Ideal.span {a | ∃ i : ULift.{u} (Fin r),\n          ¬ IsUnit (FreeLogChart.ordinaryCoordinate N β w i) ∧\n            a = FreeLogChart.strictCoordinate N β t i} ∧\n      (∃ (_ : IsLocalRing (Scheme.strictHenselizationRing t))\n          (_ : IsNoetherianRing (Scheme.strictHenselizationRing t)),\n        (∃ b : List (Scheme.strictHenselizationRing t),\n          IsLocalRing.IsRegularSystemOfParameters\n            (((FreeLogChart.nonunitIndices N β w).map\n              (FreeLogChart.strictCoordinate N β t)) ++ b)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone + node lean.statement (byte-identical); moved FreeLogChart.* defs vs clone (verbatim, re-exported, 0 importers/users); 3 new sorry statements vs FineSaturatedLogBlowup defs, ILO VI 1.1-1.2/1.6-1.7 and Stacks 06LN/07QM; node stmt_deps vs declaration owners"
+ }
+}

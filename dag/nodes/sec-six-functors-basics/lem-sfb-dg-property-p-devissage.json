@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-dg-property-p-devissage",
+ "kind": "statement",
+ "title": "Property-(P) devissage in a dg-module derived category",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(A,d)$ be an associative unital differential graded $\\mathbf Z$-algebra: $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ is a graded ring, $d:A^i\\to A^{i+1}$ is additive, $d^2=0$, and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right dg $A$-module is a graded right module $M$ with degree-one differential satisfying $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at maps inducing isomorphisms on every $H^j(M)=\\ker(d:M^j\\to M^{j+1})/\\operatorname{im}(d:M^{j-1}\\to M^j)$. Its distinguished triangles are the mapping-cone triangles and its shift is $M[n]^j=M^{j+n}$ with differential $(-1)^n d_M$ and unchanged right action [def-weil-triangulated-category]. Let $\\mathscr P$ be a property of objects of $D(A,d)$ invariant under isomorphisms. Suppose (i) $\\mathscr P(\\bigoplus_{i\\in I}M_i)$ holds for every small family with $\\mathscr P(M_i)$ for every $i$ (including the empty family); (ii) for every distinguished triangle, if $\\mathscr P$ holds for two of its vertices, it holds for the third; and (iii) $\\mathscr P(A[n])$ holds for every $n\\in\\mathbf Z$. Then $\\mathscr P(M)$ holds for every $M\\in D(A,d)$. No countability assumption on $A$, the cohomology of $M$, or the coproducts is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0FQE, remark-P-resolution, conditions (1)-(3) and conclusion; its proof cites the property-(P) sequence and existence of property-(P) resolutions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose an arbitrary object $M$ of $D(A,d)$ and a representing dg module, also denoted $M$. By [lem-sfb-dg-property-p-resolution] choose a quasi-isomorphism $q:P\\to M$ with a filtration $0=F_0P\\subset F_1P\\subset\\cdots$ exhausting $P$, graded-split inclusions, and dg quotients $Q_n=F_{n+1}P/F_nP\\cong\\bigoplus_{j\\in J_n}A[k_{nj}]$. The resolution and every $J_n$ lie in the module universe, so hypothesis (i) applies to these families. The image of $q$ is an isomorphism by the defining localization of $D(A,d)$.",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0FQE, remark-P-resolution; Tag 09KP, lemma-resolve."
+   }
+  },
+  {
+   "text": "We prove $\\mathscr P(F_nP)$ for every $n$ by induction. The empty family in (i) gives $\\mathscr P(0)$, hence the case $n=0$. The direct sums of dg modules represent coproducts in $D(A,d)$ by [lem-sfb-dg-sequential-colimit-triangle]. Thus (iii), (i), and invariance under isomorphisms give $\\mathscr P(Q_n)$. The short exact sequence $0\\to F_nP\\to F_{n+1}P\\to Q_n\\to0$ splits as graded modules by the chosen filtration. By [lem-sfb-dg-derived-admissible-triangles] it gives a distinguished triangle with these three vertices. From the inductive hypothesis and $\\mathscr P(Q_n)$, condition (ii) gives $\\mathscr P(F_{n+1}P)$.",
+   "uses": [
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-sfb-dg-derived-admissible-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0FQE, remark-P-resolution; Tag 09KK, section-P-resolutions; Tag 09K8, definition-distinguished-triangle."
+   }
+  },
+  {
+   "text": "The degreewise colimit of the inclusions $F_nP\\to F_{n+1}P$ is $P$: each homogeneous element lies in a filtration stage, and the maps agree on overlaps. Apply [lem-sfb-dg-sequential-colimit-triangle] to this sequence. It gives the distinguished triangle $S\\xrightarrow{1-s}S\\to P\\to S[1]$, where $S=\\bigoplus_{n\\geq0}F_nP$ and $s\\iota_n=\\iota_{n+1}(F_nP\\hookrightarrow F_{n+1}P)$. By the induction and (i), $\\mathscr P(S)$ holds. The first two vertices therefore satisfy $\\mathscr P$, so (ii) gives $\\mathscr P(P)$.",
+   "uses": [
+    "lem-sfb-dg-sequential-colimit-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0FQE, remark-P-resolution; Tag 09KL, lemma-property-P-sequence; Tag 0CRL, lemma-homotopy-colimit."
+   }
+  },
+  {
+   "text": "Finally, $q:P\\to M$ becomes an isomorphism in $D(A,d)$, so isomorphism invariance gives $\\mathscr P(M)$. Since $M$ was arbitrary this proves the assertion. Only the filtration is indexed by $\\mathbf N$; its successive free quotients and the original module need not be countable.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0FQE, remark-P-resolution, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "lem-sfb-dg-derived-admissible-triangles"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0FQE, remark-P-resolution; filtration induction and telescope from Tags 09KP, 09KL and 0CRL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of a differential graded algebra is generated under triangles and small coproducts by its regular module, which is compact",
+   "results": "Search returned 8 hits: HasDerivedCategory.standard, DerivedCategory, HasDerivedCategory, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsGE. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ObjectProperty.IsTriangulatedClosed and ext_of_isTriangulatedClosed concern formal closure conditions; they do not assert generation of the derived category of a dg algebra by its regular module. HasDerivedCategory.standard and projective resolutions of ordinary modules do not give this dg-algebra devissage."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property of objects in the derived category of a dg algebra holds for every object if it holds for all shifts of the free module and is closed under coproducts and distinguished triangles",
+   "results": "Search returned 8 hits: CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁, DerivedCategory.isGE_Q_obj_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ObjectProperty.IsTriangulatedClosed and ext_of_isTriangulatedClosed concern formal closure conditions; they do not assert generation of the derived category of a dg algebra by its regular module. HasDerivedCategory.standard and projective resolutions of ordinary modules do not give this dg-algebra devissage."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generation by the regular dg module via semi-free property P resolutions in the derived category of a differential graded algebra",
+   "results": "Search returned 8 hits: HasDerivedCategory.standard, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.HasProjectiveResolutions, CategoryTheory.ProjectiveResolution.of_def, Algebra.FormallySmooth.casesOn. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ObjectProperty.IsTriangulatedClosed and ext_of_isTriangulatedClosed concern formal closure conditions; they do not assert generation of the derived category of a dg algebra by its regular module. HasDerivedCategory.standard and projective resolutions of ordinary modules do not give this dg-algebra devissage."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: ObjectProperty.IsTriangulatedClosed and ext_of_isTriangulatedClosed concern formal closure conditions; they do not assert generation of the derived category of a dg algebra by its regular module. HasDerivedCategory.standard and projective resolutions of ordinary modules do not give this dg-algebra devissage."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DGModule\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: ObjectProperty.IsTriangulatedClosed and ext_of_isTriangulatedClosed concern formal closure conditions; they do not assert generation of the derived category of a dg algebra by its regular module. HasDerivedCategory.standard and projective resolutions of ordinary modules do not give this dg-algebra devissage."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|property.P|semi.free",
+   "results": "Search returned 3 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ObjectProperty.IsTriangulatedClosed and ext_of_isTriangulatedClosed concern formal closure conditions; they do not assert generation of the derived category of a dg algebra by its regular module. HasDerivedCategory.standard and projective resolutions of ordinary modules do not give this dg-algebra devissage."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|semi.free|property.P",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary-derived-category and triangulated object-property interfaces do not assert generation of a general DG-algebra derived category by its regular module. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:60-85 and Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:31-93; the latter concerns ordinary complexes in a fixed abelian category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of a differential graded algebra is generated under coproducts and distinguished triangles by shifts of its regular module",
+   "results": "8 hits: HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory, DerivedCategory.triangleOfSES_distinguished, HomologicalComplexUpToQuasiIso, DerivedCategory.instCategory, HomologicalComplexUpToQuasiIso.Q, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary-derived-category and triangulated object-property interfaces do not assert generation of a general DG-algebra derived category by its regular module. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:60-85 and Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:31-93; the latter concerns ordinary complexes in a fixed abelian category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DGModule\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary-derived-category and triangulated object-property interfaces do not assert generation of a general DG-algebra derived category by its regular module. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:60-85 and Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:31-93; the latter concerns ordinary complexes in a fixed abelian category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property of dg algebra derived category objects closed under small coproducts and triangles and containing shifts of the regular module holds for all objects",
+   "results": "8 hits: DerivedCategory.IsGE, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃, DerivedCategory.IsLE, DerivedCategory.TStructure.t, CategoryTheory.ObjectProperty.IsTriangulated, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary-derived-category and triangulated object-property interfaces do not assert generation of a general DG-algebra derived category by its regular module. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:60-85 and Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:31-93; the latter concerns ordinary complexes in a fixed abelian category."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|semi.free",
+   "results": "0 hits: none; subdirectory Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary-derived-category and triangulated object-property interfaces do not assert generation of a general DG-algebra derived category by its regular module. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:60-85 and Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:31-93; the latter concerns ordinary complexes in a fixed abelian category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semifree resolutions imply the regular differential graded module generates its entire derived category as a localizing subcategory",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, HasDerivedCategory, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary-derived-category and triangulated object-property interfaces do not assert generation of a general DG-algebra derived category by its regular module. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:60-85 and Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:31-93; the latter concerns ordinary complexes in a fixed abelian category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-adjunction-compact-unit",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: full faithfulness by 09LZ, with compactness in D_QCoh and the unit at the regular dg module. Supporting input for the compact-unit argument: Tag 0FQE, remark-P-resolution, conditions (1)-(3) and conclusion; its proof cites the property-(P) sequence and existence of property-(P) resolutions.",
+   "via": [
+    "lem-sfb-dg-adjunction-compact-unit",
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-property-p-devissage",
+  "worker": "stage1",
+  "summary": "Expanded the property-(P) devissage into resolution, induction on the graded-split filtration, the sequential-colimit triangle, and isomorphism invariance. Reused all three existing DG input nodes and created no nodes; checked the empty family, arbitrary cardinalities and graded splitting without differential compatibility. No statement change.",
+  "blueprint": "Supporting DG input to direct-image proof (3) of det-thm-sf-ctf-stability-direct-images, now headed sk-thm-sf-ctf-stability-direct-images in literature/blueprint/latest: the inherited compact-unit argument from Tag 09LZ uses the property-(P) devissage of Tag 0FQE. All four steps expand that cited devissage, keeping the inherited route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-3ac7d4516",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-3ac7d4516 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is Stacks dga.tex Tag 0FQE (remark-P-resolution, line 2736) with R=Z, plus explicit isomorphism invariance and the empty family; it is unchanged. The delivery adds no new nodes, and there is no repair note for this item, so the re-split rule does not apply. Step 1 takes the property-(P) resolution from lem-sfb-dg-property-p-resolution: P, a quasi-isomorphism q, F_0=0, an exhaustive filtration, graded left inverses, and quotients isomorphic to sums of A[k] indexed by sets in u. Its property (P) agrees with Tag 09KK. Step 2 is an explicit induction. The base P(0) comes from the empty family. Q_n is a dg direct sum, which lem-sfb-dg-sequential-colimit-triangle says represents the coproduct, so (iii), (i) and invariance give P(Q_n). The graded left inverse splits 0→F_n→F_{n+1}→Q_n→0 as graded modules, lem-sfb-dg-derived-admissible-triangles gives the triangle without needing the splitting to commute with d, and (ii) gives P(F_{n+1}). Step 3 is the telescope S→(1−s)S→P from the sequential-colimit node; it is the derived form of Tag 09KL (0CRL), the union identification is elementary, and (i) plus (ii) on vertices 1 and 2 give P(P). Step 4 is invariance through q. The shift convention, right modules and the edge cases (M=0, uncountable J_n, repeated stages, A=0) all check. All deps are in unit sk-thm-sf-ctf-stability. The 290-node closure has no cycle. lem-pc-derived-module-free-generation is the ordinary-ring analogue, not a duplicate. There is no SGA source and no tool_use. Advisory: the report mentions citations.json, which is not in the commit. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgPropertyPDevissage",
+  "declaration": "CategoryTheory.DgAlgebra.property_p_devissage",
+  "file": "lean/Sheaf/CategoryTheory/DgPropertyPDevissage.lean",
+  "statement": "theorem property_p_devissage (A : Algebra.{u}) [DerivedStructure A] (P : Derived A → Prop) (hiso : ∀ (M N : Derived A), (M ≅ N) → P M → P N) (hcoproducts : ∀ (I : Type u) (M : I → Derived A), (∀ i : I, P (M i)) → P (∐ M)) (htriangles : ∀ (T : Triangle (Derived A)), T ∈ distTriang (Derived A) → (P T.obj₁ → P T.obj₂ → P T.obj₃) ∧ (P T.obj₁ → P T.obj₃ → P T.obj₂) ∧ (P T.obj₂ → P T.obj₃ → P T.obj₁)) (hregular : ∀ n : ℤ, P (((Q A).obj (regular A))⟦n⟧)) : ∀ M : Derived A, P M",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9de12c598",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, Stacks dga.tex:2736 remark-P-resolution, the landed def-sfb-dg-derived-category module (DerivedStructure pins shift via shiftIso/shift_natural and distinguished triangles via distinguished_iff to actual dg cones, HasCoproducts.{u}, no generation axiom), and the item module. Clause match: hiso = isomorphism invariance; hcoproducts over arbitrary I : Type u, empty included; htriangles = all three 2-of-3 implications for every distinguished T; hregular = (Q regular)⟦n⟧ for every n : ℤ, which is A[n] up to iso; conclusion ∀ M. No extra assumptions; universes bound. lean.statement verbatim; added stmt_dep is landed; only node changes are the lean record and that stmt_dep. No duplicate found in Sheaf lean or Mathlib. Docstrings carry the source place, blueprint id and 4 proof steps; sorry only; report has Worker report and Second reading by Q05. No file changed, so no compile."
+ }
+}

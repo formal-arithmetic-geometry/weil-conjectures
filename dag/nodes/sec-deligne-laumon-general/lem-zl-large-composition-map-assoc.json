@@ -1,0 +1,122 @@
+{
+ "id": "lem-zl-large-composition-map-assoc",
+ "kind": "statement",
+ "title": "Three-pullback reassociation with an arbitrary common-stage arrow",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l in Type (u+1), and a scheme X in Type u on which l is invertible. Use the actual common-stage constructible category and pullback P_f of [def-weil-algebraically-closed-coefficients, def-weil-derived-pullback-tensor-hom], and the specified compositor c(f,g)_K:P_(f≫g)K→P_f(P_g K) of [def-weil-local-frobenius-trace]. For arbitrary endomorphisms f,g,h of X, common-stage objects K,L, and an arbitrary rational common-stage morphism t:P_h K→L, the composite c(f,g≫h)_K ≫ P_f(c(g,h)_K) ≫ P_f(P_g(t)) is heterogeneously equal to c(f≫g,h)_K ≫ P_(f≫g)(t) ≫ c(f,g)_L. The source types are identified by associativity f≫(g≫h)=(f≫g)≫h. No Weil structure or invariant integral lattice is assumed.",
+ "stmt_deps": [
+  "def-weil-local-frobenius-trace",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Lemma 099N (lemma-pushforward-Noetherian-case), parts (2),(5), and literature/stacks-project/sites-cohomology.tex, Lemma 0D6D (lemma-derived-pullback-composition), K-flat computation; agent expansion of step 1 of lem-zl-large-weil-iterate-addition, common-stage naturality and associativity."
+ },
+ "proof": [
+  {
+   "text": "The chosen integral family c of [lem-pod-integral-pullback-composition] satisfies c(f,g≫h) followed by P_f(c(g,h)) = c(f≫g,h) followed by c(f,g) at P_h K, after source associativity. Its naturality for t gives c(f,g) at P_h K followed by P_f(P_g(t)) = P_(f≫g)(t) followed by c(f,g) at L. Compose these two equations. At a rational finite stage localPullbackComposition is the localization of this family conjugated by localPullbackObjectIso. The normalized rational pullback action on pure tensors carries the integral equation to rational pure tensors; additivity proves the equation for arbitrary rational t. Object comparisons cancel in both words.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent t at a finite coefficient field containing the endpoint stages. The commonStageDerivedPullback representative formula conjugates its rational pullback by commonStagePullbackComparison. The specified scalar comparisons commute with compositor maps: at finite coefficient quotients both paths are the same associativity of inverse image and scalar tensor, and the coherent system comparisons preserve that equality before inverse limit. Thus the representative of composition defined at K.stage equals the rational compositor at the chosen common stage, conjugated by those comparisons. Substitute these representatives into both words; cancel adjacent inverse comparisons and apply the rational equation from step 1. Inclusion of the resulting equal representatives in the Hom colimit proves the desired heterogeneous equality.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-integral-pullback-composition",
+  "def-weil-local-frobenius-trace",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": "Agent Q1: explicit extraction of the naturality/associativity step already required by the parent; source K-flat and completed-pullback constructions read. No iteration assertion is retained in this obligation.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality and associativity of localized derived pullback composition at a common coefficient stage",
+   "results": "8 hits, including CategoryTheory.Functor.leftDerivedNatTrans_app_assoc and CategoryTheory.NatTrans.leftDerived_comp_assoc; none concerns this normalized pair-category compositor.",
+   "date": "2026-10-25",
+   "verdict": "No exact common-stage comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated isomorphism of a pullback pseudofunctor composition of iterates addition",
+   "results": "8 hits: Pseudofunctor.DescentData.pullFunctorCompIso and related descent data constructions, LocallyDiscreteOpToCat.pullHom_pullHom, CoGrothendieck.mapCompIso.",
+   "date": "2026-10-25",
+   "verdict": "Abstract pseudofunctor laws do not identify the specified common-stage components."
+  },
+  {
+   "tool": "grep",
+   "query": "composition_assoc|composition_naturality|weilIterate_add|localPositivePower_add; localPositivePower|composition.*associ",
+   "results": "Existing integralPullbackComposition supplies integral coherence; SemilinearFieldOperationLifts has private naturality for pullbackTensorCommonComposition, whose normalization differs syntactically. No equation for LocalFrobeniusLarge.composition. Mathlib results concern ordinary pullbacks, tensors, or generic coherence.",
+   "date": "2026-10-25",
+   "verdict": "No existing declaration proves the required prescribed-compositor equation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalFrobeniusLargeWeilAddition",
+  "date": "2026-10-25",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, constant-extension calculation: naturality and reassociation of three prescribed pullbacks, step 1 of lem-zl-large-weil-iterate-addition.",
+   "via": [
+    "lem-zl-large-weil-iterate-addition",
+    "def-zl-classical-local-frobenius-data",
+    "lem-zl-classical-local-frobenius-iterate-comparison",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalFrobeniusLargeCompositionCoherence",
+  "file": "lean/Sheaf/Paper/LocalFrobeniusLargeCompositionCoherence.lean",
+  "declaration": "WeilConjectures.LocalFrobeniusLarge.composition_map_assoc",
+  "statement": "theorem composition_map_assoc (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (f g h : X ⟶ X)\n    (K L : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    (t : (commonStageDerivedPullback l Ω h).obj K ⟶ L) :\n    HEq\n      ((composition l Ω f (g ≫ h) K).hom ≫\n        (commonStageDerivedPullback l Ω f).map (composition l Ω g h K).hom ≫\n        (commonStageDerivedPullback l Ω f).map\n          ((commonStageDerivedPullback l Ω g).map t))\n      ((composition l Ω (f ≫ g) h K).hom ≫\n        (commonStageDerivedPullback l Ω (f ≫ g)).map t ≫\n        (composition l Ω f g L).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T180944-L-4055738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T180944-L-4055738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

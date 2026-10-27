@@ -1,0 +1,309 @@
+{
+ "id": "lem-a1-completed-lisse-universe-transport",
+ "kind": "statement",
+ "title": "Universe and coefficient-model invariance of completed lisse modules",
+ "statement": "Fix a scheme $X$ and a small representative $C$ of its small pro-etale site [def-pc-scheme, def-weil-pbc-proetale-site]. Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension with its $\\ell$-adic topology, valuation ring $A$ and chosen uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. The coefficient field and site may initially lie in independent universes. Let $\\mathcal W_0\\subseteq\\mathcal W$ be universes containing $C$, its covering families, $\\mathbf Q_\\ell$ and a finite-dimensional $\\mathbf Q_\\ell$-vector-space model of $E$; all comparisons with $E$ are made in a common containing universe.\n\nThere is a field $E_0$ whose underlying set lies in the universe of $\\mathbf Q_\\ell$, and a $\\mathbf Q_\\ell$-algebra isomorphism $e:E_0\\xrightarrow{\\sim}E$. Give $E_0$ the topology transported by $e$, and put $A_0=e^{-1}(A)$ and $\\varpi_0=e^{-1}(\\varpi)$. Then $e$ is a topological algebra isomorphism carrying $A_0$, its power ideals and $\\varpi_0$ to $A$, its power ideals and $\\varpi$. In either module universe form\n$$B_0=\\varprojlim_{n\\geq1}(A_0/\\varpi_0^n)_C,\\qquad B=\\varprojlim_{n\\geq1}(A/\\varpi^n)_C$$\nfrom constant ring sheaves [def-weil-completed-integral-coefficients]. Let $s_0,s$ be the images of the constant uniformizers. Coefficient transport gives ring-sheaf isomorphisms $B_0\\cong B$ and $B_0[1/s_0]\\cong B[1/s]$ [def-weil-pbc-ringed-section-localization], commuting with constant-to-completion maps, all residue projections, transitions and localization units.\n\nFor a ring sheaf $R$ write $\\operatorname{Loc}_{\\mathcal W}(R)$ for its module sheaves in $\\mathcal W$ pro-etale locally free of finite rank, allowing varying rank and rank zero [def-weil-sheaf-of-modules-category]. Enlargement from $\\mathcal W_0$ to $\\mathcal W$, together with coefficient transport and equivalence of small site representatives, induces equivalences of the integral and localized $\\operatorname{Loc}$ categories. These equivalences commute with restriction to each site slice and with rationalization $M\\mapsto B[1/s]\\otimes_B M$ [def-pur-sheaf-tensor-product]. In particular, an abstract locally finite free integral model and its rationalization isomorphism transport in both directions, without an embedding hypothesis; every locally finite free module and every morphism in the larger universe descends up to these equivalences.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Definition 6.8.3, pp. 58-59 (coefficient sheaves and finite locally free notion); coefficient shrinking and universe invariance are the explicit agent-written argument isolated from returned step 5, not an assertion attributed to the paper"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-a1-completed-integral-small-site"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite basis $(b_i)_{i<d}$ of the finite-dimensional $\\mathbf Q_\\ell$-space $E$. On the small set $E_0=\\mathbf Q_\\ell^d$ put $e((a_i))=\\sum_i a_i b_i$ and transport all field operations and the $\\mathbf Q_\\ell$-algebra map through this bijection. Explicitly $x\\star y=e^{-1}(e(x)e(y))$, $x^{-1}=e^{-1}(e(x)^{-1})$, and $1_0=e^{-1}(1)$. All algebra laws follow on applying the injective map $e$. Give $E_0$ the inverse-image topology, take $A_0=e^{-1}(A)$ and $\\varpi_0=e^{-1}(\\varpi)$. Thus $e$ and its inverse are continuous by the definition of this topology. For every $n$, $e(\\varpi_0^n a_0)=\\varpi^ne(a_0)$, so $e$ identifies the two power ideals and induces $\\bar e_n:A_0/(\\varpi_0^n)\\simeq A/(\\varpi^n)$. The formulas $[a_0]\\mapsto[e(a_0)]$ commute with reduction and the maps from $A_0$. The basis and all comparisons with the possibly larger $E$ are chosen in the common containing universe. No topological classification theorem is needed: the topology on the model is transported, as required.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1); agent-written finite-basis construction for the universe clause"
+   }
+  },
+  {
+   "text": "First compare sheafification in the two value universes, on the fixed small site $C$. The plus theorem computes set sheafification by two plus constructions. For a small-valued presheaf $P$, a plus section is a matching family on a covering, modulo equality on a common refinement. The covering data and all the factors $P(V)$ are in $\\mathcal W_0$; the products of these factors, their subsets of matching families, and the quotient of their disjoint union are therefore in $\\mathcal W_0$. Viewing precisely these families and the same refinement equivalence relation in $\\mathcal W$ gives the same set up to its inclusion. Repeat this for the second plus. Restriction pulls back families and the unit uses the identity covering, so the comparison is natural and fixes the unit. For rings, the underlying-set sheafification theorem identifies this with ring sheafification; addition, multiplication and units agree since their maps agree before sheafification. Consequently each small constant ring sheaf has the same model in the two universes. For abelian groups, the underlying-set theorem [lem-pc-sites-sheafification-underlying-sets] identifies abelian sheafification with the same plus construction, so the same argument, followed by the uniquely extended scalar action in module sheafification, applies to presheaves of modules over a small ring sheaf.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-theorem",
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "lem-pe-ring-sheafification-underlying-sets",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WB theorem-plus, 00WH proposition-sheafification-adjoint, 00W4 lemma-plus-presheaf and 00YR section-sheaves-algebraic-structures; module action: sites-modules.tex Tag 03CY"
+   }
+  },
+  {
+   "text": "Apply functoriality of constant sheafification to $\\bar e_n$ and its inverse. The resulting ring-sheaf isomorphisms $c_n$ commute with all transitions and the maps from the constant integral ring. The sectionwise inverse-limit description gives\n$$c_U((x_n)_n)=(c_{n,U}(x_n))_n,$$\nwith inverse $(y_n)_n\\mapsto(c_{n,U}^{-1}(y_n))_n$. Transition compatibility makes these maps land in the compatible tuples. They are natural in $U$, preserve ring operations coordinatewise, and satisfy $\\pi_n c=c_n\\pi_{0,n}$. The constant-to-completion map sends $a_0$ to its residue tuple, whose image is the residue tuple of $e(a_0)$; in particular $c(s_0)=s$. This also proves that $B_0$ has small section sets: it is a subset of a countable product of small sets. The model for $B$ is its isomorphic copy. By step 2 the same description works in either value universe; hence the completion comparison fixes every residue projection and constant-to-completion map.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), with sectionwise inverse limits as specified in def-pur-sheaf-inverse-limit"
+   }
+  },
+  {
+   "text": "On each object, localization sends a fraction $b/s_0^k$ to $c(b)/s^k$, with inverse $a/s^k\\mapsto c^{-1}(a)/s_0^k$. These formulas respect the fraction equivalence relation: multiplying an equality by a power of $s_0$ is carried to multiplying its image by the same power of $s$. They commute with restrictions, and send $b/1$ to $c(b)/1$. Sheafify the inverse presheaf maps to obtain $c':B_0[1/s_0]\\simeq B[1/s]$. Thus $c'j_0=jc$ for the localization units. Before sheafification the small localization is a quotient of $B_0(U)\\times\\mathbf N$; step 2 makes its sheafification small as well, in either universe. This argument requires neither injectivity of the localization unit nor a nonzero-divisor assumption on $s$.",
+   "uses": [
+    "def-weil-pbc-ringed-section-localization",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Ringed-section localization construction used in the item; explicit fraction calculation, agent-written"
+   }
+  },
+  {
+   "text": "Let $R$ be either of the small ring-sheaf models just constructed. A locally finite free $R$-module $M$ in $\\mathcal W$ has small section sets up to bijection. Indeed, for each $U$ choose a small trivializing covering $(V_i\\to U)_i$, with $M|_{V_i}\\simeq R|_{V_i}^{r_i}$, $r_i\\in\\mathbf N$. Restriction and these coordinates give an injection\n$$M(U)\\longrightarrow\\prod_i R(V_i)^{r_i}.$$\nInjectivity is precisely the uniqueness part of the sheaf axiom. The product and every subset of it lie in $\\mathcal W_0$, so take its image $S_U$ and the induced bijection $h_U:S_U\\simeq M(U)$. There are only small many objects $U$, hence these choices can be made simultaneously in the common universe. No bound on the ranks across the covering is used. If the covering is empty, its product is a singleton and the same sheaf uniqueness argument still applies.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3; agent-written section-cardinality argument using local finite freeness and the sheaf axiom"
+   }
+  },
+  {
+   "text": "Make $N(U)=S_U$ into a small module presheaf by transporting the operations and restrictions through $h_U$: for $f:V\\to U$ set $N(f)=h_V^{-1}M(f)h_U$, and set $a\\cdot x=h_U^{-1}(a\\cdot h_U(x))$. The same formula transports addition and zero. The presheaf and module laws follow by cancelling the bijections. A matching family in $N$ maps under $h$ to one in $M$; its unique gluing pulls back under $h_U$. Thus $N$ is a sheaf and $h:N\\simeq M$ is an isomorphism of module sheaves after inclusion. Its restrictions to the trivializing slices are finite free, so $N$ is in the smaller $\\operatorname{Loc}$ category. For small module sheaves $N,N'$, any larger-universe morphism is a family of functions between small sets indexed by the small object set of $C$. Each function is its graph, a subset of $N(U)\\times N'(U)$, and the family belongs to $\\mathcal W_0$. Naturality and linearity are the same equations in both universes. The inclusion is therefore fully faithful and, by the constructed $N$, essentially surjective. On morphisms between chosen small models the inverse is explicitly $h_{M'}^{-1}fh_M$; it respects composition. This establishes the equivalence, rather than only objectwise smallness.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-cochain-coefficient-universe-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3; explicit inverse to the fully faithful common-universe inclusion, agent-written"
+   }
+  },
+  {
+   "text": "A ring-sheaf isomorphism $c:R_0\\simeq R$ gives scalar transport by keeping the abelian sheaf and defining $a\\cdot m=c^{-1}(a)m$. The scalar-extension lemma identifies this functor naturally with extension of scalars; applying it to $c^{-1}$ gives its inverse. On a trivializing slice $R_0^r$ the coordinate map $(x_i)\\mapsto(c(x_i))$ identifies its transport with $R^r$, including $r=0$. Thus $c$ and $c'$ restrict to equivalences of the integral and localized locally finite free subcategories. An equivalence $F:C\\simeq D$ of small representatives with their transported covering families acts on ring and module sheaves by precomposition. Its quasi-inverse and the unit and counit give inverse functors and their isomorphisms. Matching families correspond under $F$ and its quasi-inverse, so the sheaf axioms correspond; a trivialization on a covering corresponds to one on its image covering. This proves the analogous equivalence for changing representatives, including varying ranks. On slices use the induced equivalence $C/U\\simeq D/FU$. For universe inclusion, coefficient transport and this reindexing, the restriction map on sections at $V\\to U$ is exactly the already specified map at $V$. For independently chosen small models on a slice, the comparison at $V/U$ is $h_{V/U}^{-1}h_V$; these maps commute with restrictions by cancellation of $h$, and their composites on iterated slices are the same formula. Thus the equivalences commute naturally with slice restriction, including for the chosen inverse functors.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ lemma-adjointness-tensor-restrict, invertible-map specialization; agent-written reindexing under an equivalence of small site representatives"
+   }
+  },
+  {
+   "text": "Write $S_0=B_0[1/s_0]$ and $S=B[1/s]$. For the coefficient square $c'j_0=jc$, the comparison between rationalization and scalar transport is induced before sheafification by\n$$S\\otimes_B T_cM\\longrightarrow T_{c'}(S_0\\otimes_{B_0}M),\\qquad a\\otimes m\\longmapsto c'^{-1}(a)\\otimes m.$$\nIts inverse sends $a_0\\otimes m$ to $c'(a_0)\\otimes m$. Balancing is respected since $c'^{-1}(j(b))=j_0(c^{-1}(b))$; both composites fix pure tensors. The maps commute with restrictions and all module maps, so the sheafified maps are mutually inverse and natural. Universe enlargement preserves the same tensor by the common-universe tensor comparison, whose pure-tensor formula is unchanged. For reindexing by an equivalence of representatives the sectionwise balanced tensor is the same tensor at the reindexed object, and precomposition carries the sheafification universal property to itself using the inverse equivalence. Hence its tensor comparison also fixes pure tensors. These comparisons commute with slice restriction by those formulas. Locally, rationalization of $B^r$ is $S^r$, by the inverse maps $a\\otimes(b_i)\\mapsto(ab_i)$ and $(a_i)\\mapsto\\sum_i a_i\\otimes e_i$; thus rationalization stays in the stated subcategories. Finally apply these equivalences to an abstract pair $(M,\\theta:S\\otimes_BM\\simeq L)$. Composing the transported $\\theta$ with the tensor comparison transports the pair forward; the inverse equivalences transport it back. Full faithfulness transports every morphism and its inverse, so the isomorphism condition is preserved in both directions. No embedding of $M$ into $L$ is used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-cochain-coefficient-universe-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK section-tensor-product and Tag 03CY lemma-sheafification-presheaf-modules; explicit balanced-tensor calculation and assembly, agent-written"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-sheafification-plus-theorem",
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-cochain-coefficient-universe-transport",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Definition 6.8.3, pp. 58-59, provide the coefficient and lisse notions; the explicit universe-invariance proof is written by Q03, with the cited Stacks sheafification and tensor results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(universe|ulift|small).*(finiteLocallyFree|locallyFree|LocallyFree)|(LocallyFree|locallyFree).*(universe|ulift|small)",
+   "results": "0 hits: . Full returned hits retained in research/universe-grep.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf pullback and finite-presentation APIs do not supply coefficient shrinking, universe descent of local systems, and completed/localized coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of the p adic rationals has a small representative and locally finite free completed coefficient sheaves are invariant under coefficient universe enlargement",
+   "results": "8 hits: BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, Padic.adicCompletionEquiv, WittVector.isAdicCompleteIdealSpanP, PadicInt.instIsAdicCompleteMaximalIdeal, PadicInt.adicCompletionIntegersEquiv. Full returned hits retained in research/universe-leanfinder.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf pullback and finite-presentation APIs do not supply coefficient shrinking, universe descent of local systems, and completed/localized coefficient compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free sheaves over a completed p adic coefficient ring descend along a change of universe and coefficient ring isomorphism",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.free, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.ιFree, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.isFinitePresentation. Full returned hits retained in research/universe-leansearch.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf pullback and finite-presentation APIs do not supply coefficient shrinking, universe descent of local systems, and completed/localized coefficient compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ulift\"",
+   "results": "0 hits: . Full returned hits retained in research/universe-loogle.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf pullback and finite-presentation APIs do not supply coefficient shrinking, universe descent of local systems, and completed/localized coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing universes for ringed site locally finite free modules preserves completed constant coefficient sheaves localization and scalar extension",
+   "results": "8 hits: LightCondensed.free, SheafOfModules.mapFree, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.freeFunctor, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.freeFunctor_obj. Full returned hits retained in research/universe2-leanfinder.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf pullback and finite-presentation APIs do not supply coefficient shrinking, universe descent of local systems, and completed/localized coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finite free sheaves on a small ringed site are unchanged by enlarging the universe of module sections and by replacing the coefficient field by an isomorphic small model",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.free, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData, SheafOfModules.freeFunctor, SheafOfModules.IsFinitePresentation. Read the returned types; free sheaves/local generators and small limits are ingredients, not the coefficient-and-universe invariance assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ulift\"",
+   "results": "0 hits: . Read the returned types; free sheaves/local generators and small limits are ingredients, not the coefficient-and-universe invariance assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(universe|ulift|small).*(LocallyFree|locallyFree|SheafOfModules)|(LocallyFree|locallyFree).*(universe|ulift|small)",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean. Read the returned types; free sheaves/local generators and small limits are ingredients, not the coefficient-and-universe invariance assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free module sheaves on a small site descend to a smaller universe of values and commute with isomorphic completed coefficients",
+   "results": "8 hits: SheafOfModules.IsFiniteType, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.free, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.isFinitePresentation, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.localGeneratorsDataOfIsFiniteType. Read the returned types; free sheaves/local generators and small limits are ingredients, not the coefficient-and-universe invariance assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of universe for locally finite free sheaves using small sections on a covering sieve and coefficient ring sheaf isomorphisms",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData, SheafOfModules.GeneratingSections, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData. Read the returned types; free sheaves/local generators and small limits are ingredients, not the coefficient-and-universe invariance assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-normal-completed-integral-model",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "First sentence of the proof of lem-a1-affine-hc0, global lisse sections: integral-model input through lem-a1-degree-zero-compact-support-sections and lem-a1-smooth-lisse-integral-lattice; returned integral-model proof step 5, finite-basis coefficient model and descent/extension of locally finite free modules and scalar-extension isomorphisms",
+   "via": [
+    "lem-a1-normal-completed-integral-model"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-completed-lisse-universe-transport",
+  "worker": "stage1",
+  "summary": "Constructed the small coefficient model through a finite basis, proved smallness and universe compatibility by matching-family sheafification, explicit tuple and fraction comparisons, and a sectionwise small model for each locally finite free module. Gave the morphism, site-representative, slice and rationalization comparisons explicitly. Reused existing sheafification results; no new nodes. Statement unchanged.",
+  "blueprint": "Latest lem-a1-affine-hc0.proof.md first paragraph, the integral model input from p-real-integral, as isolated through lem-a1-normal-completed-integral-model; this item supplies its coefficient-universe bookkeeping without changing the unit route. The latest blueprint does not separately state this universe lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-plus-theorem",
+    "why": "Generic sheafification/scalar-transport tool on small sites; the integral-model universe bookkeeping uses exactly its statement, and the Rankin unit supplies no replacement for this general site construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-plus-construction-presheaf",
+    "why": "Generic sheafification/scalar-transport tool on small sites; the integral-model universe bookkeeping uses exactly its statement, and the Rankin unit supplies no replacement for this general site construction."
+   },
+   {
+    "node": "lem-pe-ring-sheafification-underlying-sets",
+    "why": "Generic sheafification/scalar-transport tool on small sites; the integral-model universe bookkeeping uses exactly its statement, and the Rankin unit supplies no replacement for this general site construction."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic sheafification/scalar-transport tool on small sites; the integral-model universe bookkeeping uses exactly its statement, and the Rankin unit supplies no replacement for this general site construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-plus-theorem",
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-weil-sheaf-scalar-extension-ring-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-51ef7b23c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-51ef7b23c (reviewer sub-agent of L); spot-checked: S1, no new nodes; the statement and stmt_deps are identical to live, where the item is still unsplit; there is no repair note and no SGA. I read Bhatt–Scholze Lemma 6.8.2(1) and Definition 6.8.3 (pp. 58–59); the universe argument is correctly marked agent-written. The Stacks tags 00WB, 00WH, 00W4, 00YR, 03CY, 03CZ and 03EK all exist with the cited labels. I read every cited statement and checked all eight steps. Step 1: the basis-transported field, topology, A_0 and ϖ_0, with e(ϖ_0^n A_0)=ϖ^n A. Step 3: the sectionwise tuple maps, π_n c=c_n π_{0,n}, c(s_0)=s, and smallness. Step 4: the fraction formulas respect the relation even with zero divisors, and c'j_0=jc. Step 5: injection into a small product of R(V_i)^{r_i}, including the empty cover and varying ranks. Step 6: the h_U-transported small model is a sheaf; full faithfulness via graphs. Step 7: scalar transport is used as the statement of lem-weil-sheaf-scalar-extension-ring-iso, and the site-reindexing argument is written out. Step 8: the balancing identity c'^{-1}(a j(b))⊗m=c'^{-1}(a)⊗c^{-1}(b)m holds, as does the rationalization of B^r. No duplicates found: the universe-transport-data and tower-pullback-universes nodes concern pullback interfaces, and def-sfb-lisse-coefficient-module is a condensed category. The declared tool_uses (plus theorem, plus presheaf, scalar-extension-ring-iso, plus the ring underlying-sets Mathlib leaf) are generic and accepted. FIX (C1/C4): step 2 claimed 'the same plus argument for abelian groups' with no cited node, but the module clause relies on abelian sheafification having the set sheafification as its underlying set. I added the Mathlib leaf lem-pc-sites-sheafification-underlying-sets to step 2 (text, uses) and to proof_deps; whole corrected item at fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-completed-lisse-universe-transport.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedLisseUniverseTransport",
+  "declaration": "WeilConjectures.CompletedLisseTransport.exists_completed_lisse_universe_transport",
+  "declarations": [
+   "WeilConjectures.CompletedLisseTransport.modulesRing",
+   "WeilConjectures.CompletedLisseTransport.Loc",
+   "WeilConjectures.CompletedLisseTransport.RingComparison",
+   "WeilConjectures.CompletedLisseTransport.RingComparison.over",
+   "WeilConjectures.CompletedLisseTransport.LisseComparison",
+   "WeilConjectures.CompletedLisseTransport.RationalComparison",
+   "WeilConjectures.CompletedLisseTransport.SliceCompatibility",
+   "WeilConjectures.CompletedLisseTransport.Coefficients",
+   "WeilConjectures.CompletedLisseTransport.integersEquiv",
+   "WeilConjectures.CompletedLisseTransport.SlicedRationalComparison",
+   "WeilConjectures.CompletedLisseTransport.Transport",
+   "WeilConjectures.CompletedLisseTransport.coefficientTopology",
+   "WeilConjectures.CompletedLisseTransport.exists_completed_lisse_universe_transport"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedLisseUniverseTransport.lean",
+  "statement": "theorem exists_completed_lisse_universe_transport (X : AlgebraicGeometry.Scheme.{t}) (C : Type c) [SmallCategory C] (site : C ≌ X.ProEt) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : ∃ (E₀ : Type) (_ : Field E₀) (_ : Algebra ℚ_[l] E₀) (e : E₀ ≃ₐ[ℚ_[l]] E), FiniteDimensional ℚ_[l] E₀ ∧ @IsHomeomorph E₀ E (TopologicalSpace.induced e (coefficientTopology l E)) (coefficientTopology l E) e ∧ (∀ n : ℕ, Ideal.map (integersEquiv l E e).toRingHom (Ideal.span ({(integersEquiv l E e).symm (Padic.coefficientExtensionUniformizer l E)} : Set ((Padic.coefficientExtensionIntegers l E).comap e.toRingEquiv.toRingHom)) ^ n) = Padic.coefficientExtensionIdeal l E n) ∧ ∀ (D : Type c) [SmallCategory D] (f : D ≌ C), Nonempty (Transport.{c, u, w} (site.functor.inducedTopology (AlgebraicGeometry.Scheme.ProEt.topology X)) ((f.trans site).functor.inducedTopology (AlgebraicGeometry.Scheme.ProEt.topology X)) f.functor ((Padic.coefficientExtensionIntegers l E).comap e.toRingEquiv.toRingHom) (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) (integersEquiv l E e)) ∧ Nonempty (Transport.{c, 0, w} (site.functor.inducedTopology (AlgebraicGeometry.Scheme.ProEt.topology X)) ((f.trans site).functor.inducedTopology (AlgebraicGeometry.Scheme.ProEt.topology X)) f.functor ((Padic.coefficientExtensionIntegers l E).comap e.toRingEquiv.toRingHom) ((Padic.coefficientExtensionIntegers l E).comap e.toRingEquiv.toRingHom) ((integersEquiv l E e).symm (Padic.coefficientExtensionUniformizer l E)) (RingEquiv.refl _))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ef242ebe",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after the H13/H2 RETURN of 18146cc. The def-weil-completed-integral-coefficients record is now byte-identical to live (cmp); the proved module is imported unchanged. The CompletedSite construction is owned by the new §1(A) node def-a1-completed-integral-small-site, which is in the item's stmt_deps. The item module is byte-identical to the one previously checked clause by clause; the other module differs only in its 12 blueprint docstring tags. Item node vs live: only lean and stmt_deps differ. New node: every clause matches the Lean (A/(p)^(n+1), ofOpSequence tower, limit, limit.lift constant map, section s); quotient_compatible and uniformizer_natural are true, named, documented sorries; stmt_deps constant-sheaf and inverse-limit have Mathlib records. No duplicate: the live constant map is scheme-specific at t+1; coefficientQuotientSheaf gives only quotients, without limit or universe lift. Item re-read: Transport is normalized on generators, projections, units, pure tensors and slices; universes c/max c w/max u c w carry no silent restriction; rank 0 and varying rank allowed; no embedding hypothesis. Statements verbatim, all declarations present, report sections present. Advisory H9: unused public import of CochainCoefficientUniverseTransport in the def module. No compile (no file changed)."
+ }
+}

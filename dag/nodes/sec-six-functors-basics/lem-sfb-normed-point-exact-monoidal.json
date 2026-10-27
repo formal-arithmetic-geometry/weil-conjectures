@@ -1,0 +1,546 @@
+{
+ "id": "lem-sfb-normed-point-exact-monoidal",
+ "kind": "statement",
+ "title": "Exact coherent monoidal evaluation at a normed-coefficient geometric point",
+ "statement": "Work in compatible small-site and coefficient universes [def-weil-size-convention]. Let $F$ be a normed field with totally disconnected metric topology, let $C_F(P)=C(P,F)$ on profinite sets [def-sfb-continuous-map-condensed-ring], and put $F_T=p_T^*C_F$ for every scheme $T$ [sk-def-sfb-pulled-back-coefficients]. Use internal $F_T$-modules [sk-def-sfb-module-objects], relative tensor [def-sfb-modobj-relative-tensor, def-sfb-modobj-symmetric-tensor], and the module inverse image $f_F^*=\\operatorname{Ext}_{\\alpha_{f,F}}\\circ\\operatorname{mapMod}(f^{-1})$ of [sk-def-sfb-module-pushforward-pullback].\n\nLet $Z$ be any scheme, $k$ an algebraically closed field, $s=\\operatorname{Spec}k$, and $x:s\\to Z$ a geometric point [def-weil-geometric-point]. Put $E_F(N)=\\Gamma(s,N)$ and $\\Phi_{x,F}=E_F\\circ x_F^*$, with the abstract $F$-actions given by constant sections. The constant-section ring map $c_F:F\\to\\Gamma(s,F_s)$ is an isomorphism. The functor $E_F$ is exact and additive. The natural balanced map\n$$b_{N,N'}:E_F(N)\\otimes_F E_F(N')\\longrightarrow E_F(N\\otimes_{F_s}N'),\\qquad n\\otimes n'\\longmapsto[n\\otimes n']$$\nis an isomorphism for arbitrary internal $F_s$-modules $N,N'$. Here the bracket denotes the sectionwise balanced tensor followed by its sheafification and the internal/sectionwise tensor identification [def-weil-pbc-internal-abelian-sheaf-module-equivalence, def-pur-sheaf-tensor-product]. The unit map is $c_F:F\\xrightarrow{\\sim}E_F(F_s)$. These specified maps satisfy associativity, both unit and symmetry coherence equations, and make $E_F$ strong symmetric monoidal.\n\nLet $q_x:x_F^*(M\\otimes_{F_Z}M')\\xrightarrow{\\sim}x_F^*M\\otimes_{F_s}x_F^*M'$ be the canonical balanced inverse-image tensor comparison and $u_x:x_F^*F_Z\\xrightarrow{\\sim}F_s$ the canonical regular-module comparison from the coefficient isomorphism $\\alpha_{x,F}$. The exact additive functor $\\Phi_{x,F}$ is strong symmetric monoidal with tensorator\n$$\\Phi_{x,F}(M)\\otimes_F\\Phi_{x,F}(M')\\xrightarrow{b}E_F(x_F^*M\\otimes_{F_s}x_F^*M')\\xrightarrow{E_F(q_x^{-1})}\\Phi_{x,F}(M\\otimes_{F_Z}M')$$\nand unit $F\\xrightarrow{c_F}E_F(F_s)\\xrightarrow{E_F(u_x^{-1})}\\Phi_{x,F}(F_Z)$. In particular these tensorators satisfy all the symmetric monoidal coherence equations and identify $\\Phi_{x,F}(F_Z)$ with $F$. No constructibility, Noetherianity or completeness is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1, printed p.6; Lemma 4.1(1), printed p.8, specialized to an algebraically closed point; Section 3, printed p.6 for geometric pullback. Explicit ordinary internal-module formulation by the agent."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-symmetric-tensor",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-geometric-point",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-norm-continuous-monodromy-data"
+ ],
+ "proof": [
+  {
+   "text": "The scheme $s=\\operatorname{Spec}k$ is affine, with one point and local ring $k$. A field is henselian (the maximal ideal is zero, so a simple residual root is already a root), and $k$ is separably closed since it is algebraically closed. Thus $s$ is w-strictly local, and its singleton component space is extremally disconnected. By the definition in [det-pe-wlocal-strict-contractible], $k$ is w-contractible. Apply [det-pe-wcb-projective] to $s$ as an object of its own pro-etale site: $s$ is weakly contractible in the sheaf-theoretic sense. Also [det-pe-wcb-clopen-partition] says every covering of $s$ refines a finite clopen partition. Since $s$ is connected and nonempty, its only nonempty partition member is $s$ itself. These assertions concern coverings of the terminal object, not coverings of every pro-etale $s$-scheme.",
+   "uses": [
+    "det-pe-wlocal-strict-contractible",
+    "det-pe-wcb-projective",
+    "det-pe-wcb-clopen-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1(1), w-contractible affine hypothesis; Bhatt-Scholze Section 2.4"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-condensed-point-basis-evaluation] with $X=U=s$ and with the condensed ring $C_F$. The canonical ring identification is $\\Gamma(s,F_s)\\cong C_F(\\pi_0(s))=C(*,F)$. Evaluation at the unique point identifies the last ring with $F$; its inverse sends $a\\in F$ to the constant map with value $a$. By the continuous-function definition [def-sfb-continuous-map-condensed-ring], this inverse followed by the canonical coefficient identification is exactly the constant-section map $c_F$, rather than an unspecified abstract ring isomorphism. Thus $c_F$ is a ring isomorphism and the scalar action through it is the action required in the statement.",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, printed p.6, and Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Use [lem-pe-internal-section-tensor-comparison] for the canonical exact equivalence from internal $F_s$-modules to sectionwise modules over the reconstructed ring sheaf $B_s$. It leaves sections and maps unchanged. By [det-pe-sections-limits-colimits], evaluation at the weakly contractible affine $s$ preserves all limits and colimits on these module sheaves. In particular it preserves kernels and cokernels, so is exact. It is additive because morphism addition and the zero morphism are evaluated sectionwise. Replacing the scalar ring $B_s(s)$ by $F$ through $c_F$ changes neither groups nor maps nor exactness. This proves the assertion about $E_F$ on every internal module, without a finiteness hypothesis.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "det-pe-sections-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1(1), exact evaluation; internal/sectionwise comparison: Stacks Tag 03EK"
+   }
+  },
+  {
+   "text": "The small pro-etale site has pullbacks, a strict empty object and disjoint finite coproducts stable under pullback; coproduct component inclusions cover, including the empty covering of the empty scheme. These follow directly from the site definition [def-weil-pbc-proetale-site]: take scheme fibre products and disjoint unions, and use their componentwise covering condition. Step 1 supplies the partition-refinement condition at its terminal object $s$, and step 3 supplies exactness. Apply [lem-zl-partition-section-tensor-flat] with $W=s$ and $\\mathcal O=B_s$. Its canonical section tensor pairing is an isomorphism for arbitrary module sheaves and respects associativity, symmetry and both unit laws. The comparison of [lem-pe-internal-section-tensor-comparison] identifies internal relative tensor with sheafified sectionwise tensor by the identity on local pure tensors, preserving all these constraints. Therefore the resulting pairing is precisely $n\\otimes n'\\mapsto[n\\otimes n']$, the specified $b$, after the ring identification $c_F$. The unit pairing, originally $B_s(s)\\to B_s(s)$, becomes $c_F$. Hence these specified maps make $E_F$ strong symmetric monoidal.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-zl-partition-section-tensor-flat",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1(1), tensor sheafification calculation; Stacks Tag 0F63 and Tag 03EK"
+   }
+  },
+  {
+   "text": "Take $\\Lambda=C_F$. The coefficient map $\\alpha_{x,F}$ is an isomorphism for this arbitrary condensed ring by [sk-def-sfb-coefficient-morphisms]; this does not require restricting to the finite list of admissible adic coefficients. By [det-prop-sfb-module-pullback-exact-main], the specified $x_F^*$ is additive and exact. The comparisons of [lem-sfb-internal-module-operations-transport] identify it with the ringed-topos pullback $B_s\\otimes_{x^{-1}B_Z}x^{-1}(-)$, through equivalences leaving underlying sheaves unchanged. Apply [lem-pur-cochain-pullback-tensor-coherence] to that ringed-topos morphism and complexes concentrated in degree zero. Its pure-tensor maps are $(a\\otimes m)\\otimes(a'\\otimes m')\\mapsto aa'\\otimes(m\\otimes m')$ and its inverse, and its regular-module map is $a\\otimes r\\mapsto a\\alpha_{x,F}(r)$. Transport through [lem-pe-internal-section-tensor-comparison]. This gives exactly $q_x^{-1}$ and $u_x$ of the statement; the cited cochain comparison includes associativity, both action unitors and signed symmetry, whose sign here is $(-1)^0=1$. Consequently the specified ordinary module comparisons give a strong symmetric monoidal structure on $x_F^*$.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, geometric inverse image; ordinary comparison: Stacks Tag 03EL, lemma-tensor-product-pullback"
+   }
+  },
+  {
+   "text": "Compose the structures of steps 4 and 5. The composite tensorator is, by its definition, $E_F(q_x^{-1})\\circ b_{x_F^*M,x_F^*M'}$, and its unit is $E_F(u_x^{-1})\\circ c_F$, exactly the displayed arrows. In the associativity diagram, move each inner tensor comparison through $b$ by naturality, then use the associativity equations for $b$ and $q_x^{-1}$. For the symmetry diagram use the same naturality followed by their symmetry equations; for each unit diagram use their corresponding unit equations. This proves each composite coherence equation. All the component maps are isomorphisms, as is the composite unit; its inverse identifies $\\Phi_{x,F}(F_Z)$ with $F$. Additivity and exactness also compose. Every argument used arbitrary modules and arbitrary schemes, and none used completeness of $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 and Lemma 4.1(1), assembly of geometric pullback and point sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-wlocal-strict-contractible",
+  "det-pe-wcb-projective",
+  "det-pe-wcb-clopen-partition",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-pe-internal-section-tensor-comparison",
+  "det-pe-sections-limits-colimits",
+  "def-weil-pbc-proetale-site",
+  "lem-zl-partition-section-tensor-flat",
+  "sk-def-sfb-coefficient-morphisms",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and Lemma 4.1(1), ordinary internal-module assembly using the cited existing generic nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of internal continuous normed field modules on the pro etale site of an algebraically closed field are exact symmetric monoidal with balanced tensorator and constant section unit",
+   "results": {
+    "t": "2026-10-22T07:33:38Z",
+    "tool": "leanfinder",
+    "query": "Global sections of internal continuous normed field modules on the pro etale site of an algebraically closed field are exact symmetric monoidal with balanced tensorator and constant section unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instMonoidalCategoryLightCondMod",
+     "LightCondensed.instSymmetricCategoryLightCondMod",
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "LightCondensed.instMonoidalClosedLightCondMod",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "28a1ca69a4e63893"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed monoidal structures, presheaf tensor and ordinary evaluation do not give exact coherent evaluation at an algebraically closed pro-etale point with continuous ring-object coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at an algebraically closed pro etale point preserves exact sequences and tensor products of continuous coefficient sheaves with symmetric monoidal coherence",
+   "results": {
+    "t": "2026-10-22T07:33:36Z",
+    "tool": "leansearch",
+    "query": "Evaluation at an algebraically closed pro etale point preserves exact sequences and tensor products of continuous coefficient sheaves with symmetric monoidal coherence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.evaluationPreservesLimitsOfSize",
+     "ContinuousMap.evalAlgHom",
+     "SheafOfModules.evaluation",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+     "SheafOfModules.evaluationPreservesLimitsOfShape",
+     "CategoryTheory.evalEquiv_apply",
+     "SheafOfModules.evaluationPreservesLimit"
+    ],
+    "digest": "4e0717af48a14b83"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed monoidal structures, presheaf tensor and ordinary evaluation do not give exact coherent evaluation at an algebraically closed pro-etale point with continuous ring-object coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Monoidal\"",
+   "results": {
+    "t": "2026-10-22T07:33:37Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"Monoidal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj",
+     "PresheafOfModulesOfCommRing.monoidalCategory",
+     "PresheafOfModulesOfCommRing.monoidalCategoryStruct",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObjMap",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul"
+    ],
+    "digest": "66301e6adcaceaed"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed monoidal structures, presheaf tensor and ordinary evaluation do not give exact coherent evaluation at an algebraically closed pro-etale point with continuous ring-object coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ss]ections|evaluation).*(monoidal|tensor)|[Mm]onoidal.*([Ss]ections|evaluation)",
+   "results": {
+    "t": "2026-10-22T07:33:36Z",
+    "tool": "grep",
+    "query": "([Ss]ections|evaluation).*(monoidal|tensor)|[Mm]onoidal.*([Ss]ections|evaluation)",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean",
+     "Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean"
+    ],
+    "digest": "0b99a3b1a12808cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed monoidal structures, presheaf tensor and ordinary evaluation do not give exact coherent evaluation at an algebraically closed pro-etale point with continuous ring-object coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly contractible point terminal sheafification preserves sections and gives coherent tensor product evaluation for sheaves of modules",
+   "results": {
+    "t": "2026-10-22T07:33:41Z",
+    "tool": "leanfinder",
+    "query": "Weakly contractible point terminal sheafification preserves sections and gives coherent tensor product evaluation for sheaves of modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.unitHomEquiv",
+     "CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal",
+     "CategoryTheory.Sheaf.ΓNatIsoSheafSections",
+     "SheafOfModules.unitHomEquiv_apply_coe",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "CategoryTheory.evalEquiv",
+     "CategoryTheory.constantSheafAdj_counit_w",
+     "CategoryTheory.constantSheafAdj_counit_app"
+    ],
+    "digest": "c28e7ca8e86226a7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: light condensed monoidal structures, presheaf tensor and ordinary evaluation do not give exact coherent evaluation at an algebraically closed pro-etale point with continuous ring-object coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of continuous coefficient internal modules at an algebraically closed pro etale point are exact symmetric monoidal",
+   "results": {
+    "t": "2026-10-22T12:04:35Z",
+    "tool": "leanfinder",
+    "query": "Global sections of continuous coefficient internal modules at an algebraically closed pro etale point are exact symmetric monoidal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instSymmetricCategoryLightCondMod",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalCategoryLightCondMod",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "LightCondensed.instMonoidalClosedLightCondMod"
+    ],
+    "digest": "ee310aba43ae9fc5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits supply ordinary evaluation and preservation of limits, presheaf colimits, or light-condensed structures; none states exact symmetric-monoidal evaluation for arbitrary continuous coefficient internal modules on an algebraically closed pro-etale point."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, Functor.Monoidal",
+   "results": {
+    "t": "2026-10-22T12:04:36Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.evaluation, Functor.Monoidal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.Monoidal'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: this Loogle pattern failed with loogle: unknown identifier 'Functor.Monoidal'"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Mm]onoidal|[Mm]onoidal.*evaluation",
+   "results": {
+    "t": "2026-10-22T12:04:36Z",
+    "tool": "grep",
+    "query": "evaluation.*[Mm]onoidal|[Mm]onoidal.*evaluation",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Action/End.lean"
+    ],
+    "digest": "769e1e391b4c2c5a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits supply ordinary evaluation and preservation of limits, presheaf colimits, or light-condensed structures; none states exact symmetric-monoidal evaluation for arbitrary continuous coefficient internal modules on an algebraically closed pro-etale point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of sheaves of modules at a weakly contractible affine commutes with tensor product and is exact",
+   "results": {
+    "t": "2026-10-22T12:06:59Z",
+    "tool": "leansearch",
+    "query": "Evaluation of sheaves of modules at a weakly contractible affine commutes with tensor product and is exact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.evaluation",
+     "CategoryTheory.sheafSectionsNatIsoEvaluation",
+     "ModuleCat.tildeInModuleCat",
+     "SheafOfModules.evaluationPreservesLimit",
+     "SheafOfModules.sectionsFunctor",
+     "SheafOfModules.evaluationPreservesLimitsOfSize",
+     "smoothSheafCommRing.evalHom",
+     "CategoryTheory.evalEquiv"
+    ],
+    "digest": "c101a66278f3e0f5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits supply ordinary evaluation and preservation of limits, presheaf colimits, or light-condensed structures; none states exact symmetric-monoidal evaluation for arbitrary continuous coefficient internal modules on an algebraically closed pro-etale point."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation",
+   "results": {
+    "t": "2026-10-22T12:06:59Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SheafOfModules.evaluation",
+     "SheafOfModules.evaluationPreservesLimitsOfSize",
+     "SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+     "SheafOfModules.evaluationPreservesLimitsOfShape",
+     "SheafOfModules.hasLimit",
+     "SheafOfModules.createsLimit",
+     "SheafOfModules.evaluationPreservesLimit",
+     "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections"
+    ],
+    "digest": "8d3424f9e60f64d0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits supply ordinary evaluation and preservation of limits, presheaf colimits, or light-condensed structures; none states exact symmetric-monoidal evaluation for arbitrary continuous coefficient internal modules on an algebraically closed pro-etale point."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationPreserves|preserves.*[Ee]valuation",
+   "results": {
+    "t": "2026-10-22T12:06:59Z",
+    "tool": "grep",
+    "query": "evaluationPreserves|preserves.*[Ee]valuation",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean"
+    ],
+    "digest": "d9e31ec5d62a87c0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits supply ordinary evaluation and preservation of limits, presheaf colimits, or light-condensed structures; none states exact symmetric-monoidal evaluation for arbitrary continuous coefficient internal modules on an algebraically closed pro-etale point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At an object whose covers split, sheafification preserves presheaf values and evaluation preserves module tensor products",
+   "results": {
+    "t": "2026-10-22T12:07:09Z",
+    "tool": "leanfinder",
+    "query": "At an object whose covers split, sheafification preserves presheaf values and evaluation preserves module tensor products",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+     "PresheafOfModules.toSheafify_app_apply'",
+     "PresheafOfModules.toSheafify_app_apply",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "PresheafOfModules.Sheafify.mul_smul",
+     "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.Sheafify.map_smul_eq"
+    ],
+    "digest": "d2677f891fea346f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits supply ordinary evaluation and preservation of limits, presheaf colimits, or light-condensed structures; none states exact symmetric-monoidal evaluation for arbitrary continuous coefficient internal modules on an algebraically closed pro-etale point."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-normed-geometric-fibres",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric norm-coefficient projection: the exact geometric fibre functor in lem-sfb-constructible-normed-geometric-fibres, first clause; ordinary point sections and specified balanced tensor/unit maps realizing HRS Lemma 4.1(1).",
+   "via": [
+    "lem-sfb-constructible-normed-geometric-fibres",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-point-exact-monoidal",
+  "worker": "stage1",
+  "summary": "Verified HRS Example 3.1 and Lemma 4.1(1), retained the statement, and split the ordinary point-evaluation argument into six steps using existing w-contractible, section-ring, internal-module and ringed-topos tensor nodes. No new nodes, no Lean attachment, and no completeness or finiteness assumption.",
+  "blueprint": "The inherited paragraph (3) geometric norm-coefficient projection: exact point fibres and coherent ordinary tensorators, expanded from old steps 1-3 of lem-sfb-constructible-normed-geometric-fibres. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wcb-projective",
+    "why": "Generic representables of w-contractible affines are projective used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "Generic coverings of a w-contractible affine are refined by clopen partitions used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-point-basis-evaluation",
+    "why": "Generic evaluation of the profinite-point inverse image on a contractible affine used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic relative tensor and k-flatness under the internal-to-sectionwise module equivalence used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "det-pe-sections-limits-colimits",
+    "why": "Generic evaluation on a weakly contractible affine preserves limits and colimits of modules used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "lem-zl-partition-section-tensor-flat",
+    "why": "Generic tensor evaluation and flat sections at a partition object used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of pullback on module objects used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic internal and sectionwise module operations agree used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic signed tensor comparison and composition on cochain sheaf pullbacks used only for the point-section or ordinary pullback construction; no constructibility or direct-image step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wcb-projective",
+  "det-pe-wcb-clopen-partition",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-pe-internal-section-tensor-comparison",
+  "det-pe-sections-limits-colimits",
+  "lem-zl-partition-section-tensor-flat",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-fb92ef652",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-fb92ef652 (reviewer sub-agent of L); spot-checked: This is an S1 split with no new nodes and no re-split note. The statement and stmt_deps are unchanged. The statement is correct: c_F is F to C(*,F)=Gamma(s,F_s). HRS Example 3.1 (p.6) holds for T1 rings, which covers normed fields, and Lemma 4.1(1) (p.8) gives a t-exact symmetric monoidal RGamma on a w-contractible scheme. Nothing uses SGA, completeness or finiteness. Step 1: Spec k is w-contractible, being one point with a separably closed field as local ring. wcb-projective clause 2 makes it weakly contractible, and the clopen partition of a connected s is just s. Step 2: point-basis-evaluation with X=U=s. Its p_X^* is the same construction as sk-def-sfb-pullback-from-point, and the identification is inverse to c_F. Step 3: exactness and additivity follow from internal-section-comparison plus sections-limits-colimits. Step 4: I checked every hypothesis of lem-zl-partition-section-tensor-flat, including s terminal, strict empty object, coproducts, refinement and exactness. Its tensor is def-pur-sheaf-tensor-product, which is the item's bracket. Step 5: the item's x_F^* = Ext_alpha mapMod is f^*_int of the operations-transport node, and alpha is invertible for any Lambda. The cochain coherence node in degree 0 gives q_x with sign 1 and u_x as the unitor, with directions matching. Step 6 composes elementarily, and the tensorator and unit agree with the displayed maps. Site sizes: the wcb nodes use sk-def-pe-site rather than the U-bounded site, which is harmless for Spec k. A BFS over 591 dependencies finds no cycle. No duplicate exists: lem-weil-point-finite-free-sections-tensor and lem-pod-point-dualizing-complex differ. Accepted tool_uses: the nine declared generic nodes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormedPointExactMonoidal",
+  "declaration": "AlgebraicGeometry.ProEtale.normed_point_exact_monoidal",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormedPointModules",
+   "AlgebraicGeometry.ProEtale.normedPointSectionRing",
+   "AlgebraicGeometry.ProEtale.normedPointConstantValue",
+   "AlgebraicGeometry.ProEtale.normedPointEvaluation",
+   "AlgebraicGeometry.ProEtale.normedPointFibre",
+   "AlgebraicGeometry.ProEtale.normedPointPullbackInsertion",
+   "AlgebraicGeometry.ProEtale.normedPointCompositeMaps",
+   "AlgebraicGeometry.ProEtale.normed_point_exact_monoidal"
+  ],
+  "file": "lean/Sheaf/Paper/NormedPointExactMonoidal.lean",
+  "statement": "theorem normed_point_exact_monoidal (F : Type u) [NormedField F] [TotallyDisconnectedSpace F] {Z : Scheme.{u}} (k : Type u) [Field k] [IsAlgClosed k] (x : Spec (.of k) ⟶ Z) : ∃ c : ULift.{u + 1} F →+* normedPointSectionRing F k, (∀ a : F, c (ULift.up a) = normedPointConstantValue F k a) ∧ Function.Bijective c ∧ (normedPointEvaluation F k c).Additive ∧ PreservesFiniteLimits (normedPointEvaluation F k c) ∧ PreservesFiniteColimits (normedPointEvaluation F k c) ∧ ∃ e : (normedPointEvaluation F k c).Braided, (∀ (N N' : NormedPointModules F (Spec (.of k))) (n : (normedPointEvaluation F k c).obj N) (n' : (normedPointEvaluation F k c).obj N'), (e.μ N N').hom (n ⊗ₜ[ULift.{u + 1} F] n') = ((Mod.tensorObjπ N N').hom.app (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))) (((Functor.LaxMonoidal.μ (sheafToPresheaf (Scheme.ProEt.topology (Spec (.of k))) Ab.{u + 1}) N.X N'.X).app (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))) (n ⊗ₜ[ℤ] n'))) ∧ (∀ a : ULift.{u + 1} F, e.ε.hom a = c a) ∧ ∃ p : (CondensedRing.upperStar (normContinuousRing F).X x).Braided, (∀ M N : NormedPointModules F Z, (normedPointPullbackInsertion (normContinuousRing F).X x M ⊗ₘ normedPointPullbackInsertion (normContinuousRing F).X x N) ≫ Mod.tensorObjπ _ _ ≫ (p.μ M N).hom = Functor.LaxMonoidal.μ (upperStar Ab.{u + 1} x) M.X N.X ≫ (upperStar Ab.{u + 1} x).map (Mod.tensorObjπ M N) ≫ normedPointPullbackInsertion (normContinuousRing F).X x (M ⊗ N)) ∧ (condensedPullbackHom (normContinuousRing F).X x ≫ p.ε.hom = normedPointPullbackInsertion (normContinuousRing F).X x (Mod.regular (condensedRingObj (normContinuousRing F).X Z))) ∧ (normedPointFibre F k x c).Additive ∧ PreservesFiniteLimits (normedPointFibre F k x c) ∧ PreservesFiniteColimits (normedPointFibre F k x c) ∧ ∃ h : (normedPointFibre F k x c).Braided, normedPointCompositeMaps (CondensedRing.upperStar (normContinuousRing F).X x) (normedPointEvaluation F k c) p e h",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coherent structures are pinned by constant-section, pure-tensor and insertion-of-one equations. The target uses the canonically isomorphic lifted field so its unit lies in the coefficient universe. The added statement dependency owns the reused continuous coefficient definition. The pure-tensor formula is inlined using the ambient sheaf pairing and relative tensor projection; InternalSectionTensorComparison is a private proof import only, and its theorem node is not a statement dependency. No downstream fibre theorem is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa0c6ca0b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery of 3448133e (returned H2). The only module change is the requested inlining: the e.μ pure-tensor equation now writes out comparison_internalTmul's body verbatim (Mod.tensorObjπ after the sheafToPresheaf lax μ, InternalSectionTensorComparison.lean:105-109), and that module is a private import. Node record vs side-live: only lean and stmt_deps differ; lem-pe-internal-section-tensor-comparison is dropped (kept in proof_deps); the only added stmt_dep is definition node def-sfb-norm-continuous-monodromy-data (owns normContinuousRing/normContinuousConstant). lean.statement matches the file verbatim; exactly one sorry. Re-checked all clauses: F NormedField + TotallyDisconnected, no completeness; k IsAlgClosed; Z arbitrary; universes Type u with Ab/ModuleCat at u+1; c pinned to constant sections and bijective; E and Φ Additive and preserve finite limits/colimits; e Braided with μ pinned on pure tensors and ε = c; p Braided on CondensedRing.upperStar with q_x⁻¹ pinned on generators and u_x⁻¹ via α; h.μ = e.μ ≫ E.map p.μ and h.ε = e.ε ≫ E.map p.ε. No hollow defs; docstrings carry source, blueprint id and all six proof steps; edge cases covered; item not yet landed. No compile run (no file changed); the report records clean scompile in sandbox and library modes and a deliver2 dry-run OK at 6a1235e7150."
+ }
+}

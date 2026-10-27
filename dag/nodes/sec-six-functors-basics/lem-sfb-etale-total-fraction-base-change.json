@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-etale-total-fraction-base-change",
+ "kind": "statement",
+ "title": "Total quotient rings commute with etale base change over reduced Noetherian rings",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] which is reduced, meaning that $a^n=0$ with $n\\geq1$ implies $a=0$. Let $f:A\\to B$ be a homomorphism of commutative rings such that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism, def-weil-affine-spectrum]. For a commutative ring $R$ let $T_R$ be its multiplicative set of non-zero-divisors, namely the elements $t$ for which $tr=0$ implies $r=0$ for every $r$, and put $Q(R)=T_R^{-1}R$ [def-weil-pbc-module-localization]. Then $f(T_A)\\subseteq T_B$, and the canonical $B$-algebra map\n$$Q(A)\\otimes_A B\\longrightarrow Q(B),\\qquad (a/s)\\otimes b\\longmapsto f(a)b/f(s)$$\nis an isomorphism. Tensor products use [def-weil-pbc-module-tensor-product]. The zero rings and the map $A\\to0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0EN6 (lemma-meromorphic-quasi-coherent), proof of (1)-(2), displayed map Q(A) tensor_A B to Q(B), specialized to reduced Noetherian A. The proof uses Algebra Tag 02LX (lemma-total-ring-fractions-no-embedded-points) and Tag 05C3 (lemma-weakly-ass-zero-divisors)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=T_A$ and $T=T_B$. The étale morphism is flat by its definition; the affine flatness criterion makes $B$ a flat $A$-module. For $s\\in S$, tensor the injective $A$-linear multiplication map $A\\xrightarrow{s}A$ with $B$. The definition of flatness says the resulting multiplication map $B\\xrightarrow{f(s)}B$ is injective (the identifications $A\\otimes_AB=B$ send $a\\otimes b$ to $f(a)b$). Thus $f(S)\\subseteq T$, including when $B=0$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0EN6, lemma-meromorphic-quasi-coherent, proof: parenthesis defining the displayed arrow by flatness."
+   }
+  },
+  {
+   "text": "Let $C=Q(A)\\otimes_AB$. Localization base change, with the tensor factors interchanged by $x\\otimes y\\mapsto y\\otimes x$, identifies $C$ as the $B$-algebra $f(S)^{-1}B$. Write $j:B\\to C$ for $b\\mapsto1\\otimes b$. Every element is $j(b)j(f(s))^{-1}$ for some $s\\in S$. The localization zero criterion says $j(b)=0$ precisely when $f(s)b=0$ for some $s\\in S$; Step 1 then gives $b=0$. In particular $j$ is injective.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, section-localization; base change of localization as in the displayed map in spaces-divisors.tex Tag 0EN6."
+   }
+  },
+  {
+   "text": "Apply the reduced Noetherian total-fraction decomposition to $A$. It supplies finitely many fields $K_i=A_{\\mathfrak p_i}$ and the compatible $A$-algebra isomorphism $Q(A)\\cong\\prod_iK_i$. Tensoring this isomorphism with $B$ and applying the finite-product tensor isomorphism gives $C\\cong\\prod_i C_i$, where $C_i=K_i\\otimes_AB$. Although the finite-product result is stated for modules, its map is also a ring map here: on pure tensors the formula $(x_i)_i\\otimes b\\mapsto(x_i\\otimes b)_i$ preserves the unit and multiplication; bilinearity extends that equality to sums of pure tensors. Therefore this is an isomorphism of $B$-algebras.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0EN6, lemma-meromorphic-quasi-coherent, proof: Q(A) as product of minimal-prime localizations; Algebra Tags 02LX and 00EU in the reduced case."
+   }
+  },
+  {
+   "text": "The affine fibre-product identification gives $\\operatorname{Spec}C_i=\\operatorname{Spec}K_i\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$, with its structure morphism to $\\operatorname{Spec}K_i$ the base change of the given étale morphism. Étale base change makes this morphism étale. The field-algebra structure theorem now gives $C_i\\cong\\prod_{h=1}^{n_i}L_{ih}$, with each $L_{ih}$ a finite separable extension field of $K_i$ and $n_i\\geq0$. Combining these isomorphisms with Step 3 expresses $C$ as a finite product of fields, allowing the empty product.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, lemma-etale-over-field; Morphisms Tag 02GO, lemma-base-change-etale; Schemes Tag 01I4, lemma-fibre-product-affine-schemes. This specializes the local-ring factors of Tag 0EN6 to fields."
+   }
+  },
+  {
+   "text": "For $t\\in T$ multiplication by $j(t)$ on $C$ is injective: if $j(t)j(b)j(f(s))^{-1}=0$, the fraction zero criterion gives $f(u)tb=0$ for some $u\\in S$; since both $f(u)$ and $t$ are non-zero-divisors in $B$, this implies $b=0$. In a finite product of fields an element with injective multiplication has no zero coordinate: a zero coordinate would annihilate the nonzero vector which is $1$ there and $0$ elsewhere. Taking the inverse in each coordinate thus makes $j(t)$ a unit in $C$. In the empty product, $C=0$ and its unique element is a unit as well.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, section-localization, fraction equivalence and zero criterion; elementary coordinate calculation after Tag 00U3."
+   }
+  },
+  {
+   "text": "Define $\\alpha:C\\to Q(B)$ on localization fractions by $j(b)j(f(s))^{-1}\\mapsto b/f(s)$; Step 1 and the fraction relation make it well-defined. Define $\\beta:Q(B)\\to C$ by $b/t\\mapsto j(b)j(t)^{-1}$ using Step 5. If $v(t^{\\prime}b-tb^{\\prime})=0$ with $v\\in T$, then $j(v)$, $j(t)$ and $j(t^{\\prime})$ are units, proving equality of the two images; addition and multiplication follow directly from the fraction formulas. These are $B$-algebra maps. Their composites fix respectively every fraction $b/t$ and every fraction $j(b)j(f(s))^{-1}$, so they are inverse. Finally $(a/s)\\otimes b=j(f(a)b)j(f(s))^{-1}$, whence $\\alpha((a/s)\\otimes b)=f(a)b/f(s)$, the required canonical map. If $A=0$ a unital map forces $B=0$; all constructions above still hold, as they also do for arbitrary $A\\to0$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0EN6, lemma-meromorphic-quasi-coherent, displayed canonical map; explicit inverse from the localization fraction relation (Algebra Tag 00CM)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-tensor-finite-product",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0EN6, lemma-meromorphic-quasi-coherent, proof of (1)-(2): reduced Noetherian specialization of its generic-factor argument, with the final comparison replaced by explicit localization inverses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced Noetherian ring A and an etale A algebra B the canonical map Q(A) tensor A B to Q(B) of total rings of fractions is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T14:10:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced Noetherian ring A and an etale A algebra B the canonical map Q(A) tensor A B to Q(B) of total rings of fractions is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.FormallyEtale.localization_base\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\"], \"digest\": \"87b3f6d6b1506233\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stability of etaleness, formal etaleness or integral closure, not the canonical total-quotient base-change isomorphism; Etale/Basic.lean:175-194 was read."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsFractionRing|TotalQuotientRing|nonZeroDivisors).*[Ee]tale|[Ee]tale.*(IsFractionRing|TotalQuotientRing|nonZeroDivisors)",
+   "results": "{\"t\": \"2026-10-23T14:10:55Z\", \"tool\": \"grep\", \"query\": \"(IsFractionRing|TotalQuotientRing|nonZeroDivisors).*[Ee]tale|[Ee]tale.*(IsFractionRing|TotalQuotientRing|nonZeroDivisors)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stability of etaleness, formal etaleness or integral closure, not the canonical total-quotient base-change isomorphism; Etale/Basic.lean:175-194 was read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFractionRing\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T14:10:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFractionRing\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stability of etaleness, formal etaleness or integral closure, not the canonical total-quotient base-change isomorphism; Etale/Basic.lean:175-194 was read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total quotient ring of an etale algebra over a reduced Noetherian ring is the tensor product with its total quotient ring",
+   "results": "{\"t\": \"2026-10-23T14:10:55Z\", \"tool\": \"leansearch\", \"query\": \"The total quotient ring of an etale algebra over a reduced Noetherian ring is the tensor product with its total quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.recOn\", \"StandardEtalePair.instAlgebraRing\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.Etale.comp\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.FormallyEtale.instTensorProduct\", \"RingHom.Etale\"], \"digest\": \"df8af7d477cbd321\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stability of etaleness, formal etaleness or integral closure, not the canonical total-quotient base-change isomorphism; Etale/Basic.lean:175-194 was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total quotient rings commute with etale base change of reduced Noetherian commutative rings",
+   "results": "{\"t\": \"2026-10-23T14:10:56Z\", \"tool\": \"leanfinder\", \"query\": \"Total quotient rings commute with etale base change of reduced Noetherian commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"7424e99a5816bb68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stability of etaleness, formal etaleness or integral closure, not the canonical total-quotient base-change isomorphism; Etale/Basic.lean:175-194 was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Meromorphic sections of a line bundle on a regular Noetherian separated algebraic space are products of generic fibres and evaluate on affine etale charts to total quotient rings",
+   "results": "{\"t\": \"2026-10-23T14:10:57Z\", \"tool\": \"leanfinder\", \"query\": \"Meromorphic sections of a line bundle on a regular Noetherian separated algebraic space are products of generic fibres and evaluate on affine etale charts to total quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\"], \"digest\": \"ca3046fac46d77de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stability of etaleness, formal etaleness or integral closure, not the canonical total-quotient base-change isomorphism; Etale/Basic.lean:175-194 was read."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsFractionRing|TotalQuotientRing|nonZeroDivisors).*[Ee]tale|[Ee]tale.*(IsFractionRing|TotalQuotientRing|nonZeroDivisors)",
+   "results": "{\"t\": \"2026-10-23T15:51:34Z\", \"tool\": \"grep\", \"query\": \"(IsFractionRing|TotalQuotientRing|nonZeroDivisors).*[Ee]tale|[Ee]tale.*(IsFractionRing|TotalQuotientRing|nonZeroDivisors)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits are etale stability, localization or algebraic-domain base change, not this result for arbitrary reduced Noetherian A and possibly disconnected B. Read Etale/Basic.lean:242, Localization/BaseChange.lean:459-475 and Algebraic/Integral.lean:502-531; the latter requires faithful action and NoZeroDivisors on the target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total rings of fractions commute with etale base change over a reduced Noetherian ring",
+   "results": "{\"t\": \"2026-10-23T15:51:34Z\", \"tool\": \"leansearch\", \"query\": \"Total rings of fractions commute with etale base change over a reduced Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.tensorEquiv\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.Etale.of_isLocalizationAway\", \"IsLocalization.Away.tensorRightEquiv\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"Algebra.Etale.of_isLocalization_Away\"], \"digest\": \"e1b35e43f8ecad8d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits are etale stability, localization or algebraic-domain base change, not this result for arbitrary reduced Noetherian A and possibly disconnected B. Read Etale/Basic.lean:242, Localization/BaseChange.lean:459-475 and Algebraic/Integral.lean:502-531; the latter requires faithful action and NoZeroDivisors on the target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFractionRing\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T15:51:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFractionRing\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits are etale stability, localization or algebraic-domain base change, not this result for arbitrary reduced Noetherian A and possibly disconnected B. Read Etale/Basic.lean:242, Localization/BaseChange.lean:459-475 and Algebraic/Integral.lean:502-531; the latter requires faithful action and NoZeroDivisors on the target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced Noetherian ring A and etale A algebra B the total quotient ring Q(B) is Q(A) tensor A B",
+   "results": "{\"t\": \"2026-10-23T15:51:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced Noetherian ring A and etale A algebra B the total quotient ring Q(B) is Q(A) tensor A B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.of_isLocalization_Away\", \"RingHom.etale_algebraMap\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"8494e694d8807ecd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits are etale stability, localization or algebraic-domain base change, not this result for arbitrary reduced Noetherian A and possibly disconnected B. Read Etale/Basic.lean:242, Localization/BaseChange.lean:459-475 and Algebraic/Integral.lean:502-531; the latter requires faithful action and NoZeroDivisors on the target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the total fraction ring along an etale map of reduced Noetherian commutative rings is the total fraction ring of the target",
+   "results": "{\"t\": \"2026-10-23T15:52:02Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of the total fraction ring along an etale map of reduced Noetherian commutative rings is the total fraction ring of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.Etale.comp\"], \"digest\": \"0d3306833e5e8cdb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: searched hits are etale stability, localization or algebraic-domain base change, not this result for arbitrary reduced Noetherian A and possibly disconnected B. Read Etale/Basic.lean:242, Localization/BaseChange.lean:459-475 and Algebraic/Integral.lean:502-531; the latter requires faithful action and NoZeroDivisors on the target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-meromorphic-generic-chart-model",
+  "date": "2026-10-23",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Divisors and rationally trivialized lines on a regular algebraic space. Current blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), proper-direct-image input; this live supporting branch retains the regular-base Picard geometry described in its existing provenance. Supporting algebra for the meromorphic model: spaces-divisors.tex Tag 0EN6, the displayed map Q(A) tensor_A B to Q(B) in its proof.",
+   "via": [
+    "lem-sfb-space-meromorphic-generic-chart-model",
+    "lem-sfb-regular-space-divisor-line-dictionary",
+    "lem-sfb-regular-group-rigidified-line-extension",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-total-fraction-base-change",
+  "worker": "stage1",
+  "summary": "Statement retained, including zero rings. Six proof steps use existing nodes only: affine flatness, localization base change, reduced Noetherian generic-field decomposition, etale field factors, and explicit inverse fractions. No new nodes. Project source searched by tag and total-fraction terminology; no exact finished declaration. Five fresh Mathlib searches recorded without replacing the inherited searches.",
+  "blueprint": "Retains the inherited supporting-algebra provenance for the meromorphic-chart model, ultimately attached to current sk-thm-sf-ctf-stability-direct-images.proof.md clause (3); supplies precisely the Q(A) tensor_A B to Q(B) comparison in Stacks 0EN6. No unit route or statement changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic commutative-algebra tool supplying the finite product of minimal-prime fields for a reduced Noetherian ring; no node of the six-functor unit states this ring decomposition. It is exactly the Algebra 02LX input named in the item source, not a substitute for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-62f35791f",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-62f35791f (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement and the source Stacks 0EN6 (lemma-meromorphic-quasi-coherent, proof of (1)-(2)). No new nodes. Statement, stmt_deps, source and blueprint are unchanged against live, and live still has the item unsplit. There is no repair note for the item and no SGA source. Step 1: étale ⇒ flat (def), the affine flatness criterion and the flat ring map definition give f(T_A) ⊆ T_B. Step 2: localization base change makes C = Q(A)⊗B the localization f(S)^{-1}B, and the kernel criterion with Step 1 makes j injective. Step 3: the 02LX node gives Q(A) ≅ ∏K_i; the tensor-with-finite-product isomorphism is upgraded to a ring isomorphism by a pure-tensor check, which I verified. Step 4: the affine fibre product, étale base change and the 00U3 field-product node give each C_i as a finite product of finite separable fields; the hypotheses hold since each K_i is a field. Step 5 (elementary): j(t) is a unit for t ∈ T, by the kernel criterion and coordinatewise inversion. Step 6 (elementary): explicit inverse maps α and β; I checked well-definedness, both composites and the canonical formula (a/s)⊗b ↦ f(a)b/f(s). The proof replaces the source's minimal-primes-of-B 'clearly implies' with this valid argument, so proof_origin agent is correct. Cases checked: A = 0, A → 0, a field, k×k with one factor, k[x,y]/(xy) with B = A_x. No duplicate: searched the DAG for 0EN6, total fractions and nonzerodivisors with étale/flat. Accepted tool use: lem-weil-pbc-reduced-noetherian-total-ring-fractions (sk-thm-p1, the item's own source input 02LX). proof_deps is exactly the union of the steps' uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleTotalFractionBaseChange",
+  "declaration": "etale_total_fraction_base_change",
+  "file": "lean/Sheaf/RingTheory/EtaleTotalFractionBaseChange.lean",
+  "statement": "theorem etale_total_fraction_base_change {A B : Type u} [CommRing A] [CommRing B] [Algebra A B] [IsNoetherianRing A] [IsReduced A] [AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap A B)))] : ∃ h : ∀ s : nonZeroDivisors A, algebraMap A B s ∈ nonZeroDivisors B, ∃ e : @AlgEquiv B (FractionRing A ⊗[A] B) (FractionRing B) _ _ _ (Algebra.TensorProduct.rightAlgebra (R := A) (A := FractionRing A) (B := B)) _, ∀ (a : A) (s : nonZeroDivisors A) (b : B), e (IsLocalization.mk' (FractionRing A) a s ⊗ₜ[A] b) = IsLocalization.mk' (FractionRing B) (algebraMap A B a * b) ⟨algebraMap A B s, h s⟩",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential B-algebra equivalence is characterized on every fraction tensor by the displayed formula, which uniquely specifies the canonical comparison. The right-factor B-algebra structure is passed explicitly, without a file-local instance. FractionRing is total localization and admits zero rings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e69072c8",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Single theorem etale_total_fraction_base_change in Sheaf.RingTheory.EtaleTotalFractionBaseChange. Every node clause is matched: IsNoetherianRing+IsReduced A, AlgebraicGeometry.Etale (Spec.map (ofHom (algebraMap A B))), nonZeroDivisors/FractionRing as T_R and Q(R), ∃ preservation witness h, ∃ B-AlgEquiv (FractionRing A ⊗[A] B) ≃ FractionRing B with the explicit rightAlgebra instance in the correct @AlgEquiv slot, and the formula mk' a s ⊗ b ↦ mk'(f(a)b, f(s)), which uniquely determines the canonical map. Edge cases A=0, A→0 and non-injective/disconnected B are covered with no extra assumptions; the common universe u is forced by Spec.map. lean.statement matches the file verbatim (script-checked). Source 0EN6 read; docstrings carry the source, blueprint tag and six proof steps; proof is sorry only; no definitions, new nodes or dependency repairs; proof import ReducedNoetherianTotalRingFractions exists as a module file; no duplicate or name collision in side-live lean/Sheaf or lean/WeilConjectures. Report has the Worker report and Second reading by Q08 sections. Not recompiled because no file was changed."
+ }
+}

@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-derived-finite-free-scalar-coordinates",
+ "kind": "statement",
+ "title": "Unbounded derived finite-free scalar coordinates and inverse-image normalization",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-size-convention], and let $a:R\\to S$ be a map of commutative ring sheaves. Use module sheaves [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories [def-weil-abstract-derived-category], sheafified balanced tensor [def-pur-sheaf-tensor-product], and derived scalar extension [lem-pur-derived-change-of-rings]. Suppose $\\theta:R^{\\oplus d}\\xrightarrow{\\sim}\\operatorname{Res}_a S$ is a specified module-sheaf isomorphism, with $d\\geq0$ finite, basis sections $b_i=\\theta(e_i)$ and inverse coordinates $q_i:S\\to R$. Write $r_a$ for exact restriction of scalars [def-pc-sheaf-restrict-scalars].\nThen ordinary scalar extension $S\\otimes_R-$ is exact and sends every quasi-isomorphism of arbitrary unbounded complexes to a quasi-isomorphism. Its termwise functor computes $E_a=S\\otimes_R^{\\mathbf L}-$ on the entire derived category, and there is a natural isomorphism\n$$\\Phi_{\\theta,K}:r_a E_a K\\xrightarrow{\\sim}K^{\\oplus d}.$$\nOn every complex representing $K$, this isomorphism and its inverse are the degreewise sheaf morphisms characterized on local elementary tensors by\n$$s\\otimes m\\longmapsto(q_i(s)m)_i,\\qquad (m_i)_i\\longmapsto\\sum_i b_i\\otimes m_i.$$\nFor every morphism of topoi $g:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ presented by small sites [def-weil-pbc-ringed-topos-morphism], put $R'=g^{-1}R$, $S'=g^{-1}S$, and $a'=g^{-1}a$. Under the canonical balancing $g_S^*E_a\\cong E_{a'}g_R^*$, the inverse-image comparison for restriction and the finite-sum comparison, $g_R^*\\Phi_{\\theta,K}$ equals $\\Phi_{g^{-1}\\theta,g_R^*K}$. Thus the same basis and coordinates specify the derived comparison after inverse image, without any boundedness assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), with the finite-basis tensor computation in blueprint main-20261015, sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md; extracted unbounded derivation and inverse-image compatibility of returned proof step 3."
+ },
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-pur-derived-change-of-rings",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-ringed-scalar-extension-complex-adjunction",
+  "def-sfb-scalar-inverse-image-normalization",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing sectionwise finite-basis scalarExtensionIso, its naturality and pure-tensor formula from the finite-free scalar-extension calculation. This yields the natural ordinary coordinate isomorphism. Apply its injectivity and product projections to prove the inverse finite-sum formula: the basis coordinate of the ith basis vector is the Kronecker delta. This also covers empty products.",
+   "uses": [
+    "lem-pur-finite-free-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved restriction_limits and restriction_colimits from the based tensor evaluation module, which establish exactness through the underlying abelian-sheaf functor. Restriction reflects isomorphisms through that functor. The existing finite-power exactness helper supplies exactness of finite powers. Transport exactness through the ordinary coordinate isomorphism and reflect it through restriction to obtain exact scalar extension.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-finite-power-complex",
+    "lem-pur-based-sheaf-tensor-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact scalar extension preserves quasi-isomorphisms of arbitrary unbounded complexes. Its composite with localization thus inverts the localization class. The universal left-derived-functor comparison for any given pair (E, epsilon) is consequently invertible on every complex, by Mathlib Functor.isIso_of_isLeftDerivedFunctor_of_inverts. No resolution or boundedness hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the ordinary coordinates degreewise. Identify the degreewise finite power with the categorical product of complexes. Localization is additive, hence preserves finite products. Descend the composite of epsilon, the restriction localization factor, the chain coordinate isomorphism, and this finite-product comparison using fully faithful whiskering by Q. Its projection identities give exactly the required representative normalization.",
+   "uses": [
+    "lem-pur-finite-power-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometric module inverse image is exact and therefore additive. Use the existing ordinary inverse_change_hom, whose underlying map is the prescribed underlying-sheaf comparison, to obtain the restriction isomorphism. Use inverseImage_unit_iso for the normalized regular-module isomorphisms. Its finite-product comparison transports the basis. Use the normalized scalar inverse-image comparison proved as a helper of the scalar tower theorem for the balanced comparison chi.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-flat-restriction-ordinary-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback-unit-existence",
+    "lem-sfb-scalar-inverse-image-tower-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the ordinary coordinate square after each product projection and then by generation by pure tensors. For arbitrary target scalar and module sections, finite-product preservation gives a generalized element of the inverse image of the product of the original scalar and module sheaves. The graph of the pure tensor pairing, the balanced normalization of chi, and naturality of the underlying-module comparisons identify its two images. The transported basis-coordinate equation and the module-action normalization give equality of their ith coordinates. This uses generalized elements, never a lift of sections to the original site.",
+   "uses": [
+    "lem-weil-pbc-flat-restriction-ordinary-comparisons",
+    "lem-sfb-scalar-inverse-image-tower-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Repeat exactness and counit invertibility for the transported basis. Descend chi using epsilon, epsilon prime and the inverse-image localization factors; this fixes beta and its displayed counit identity. Normalize the derived finite-power comparison by its projections. Form both sides of the final square as natural transformations and test them on Q of a complex using localization extensionality. After each projection, naturality and the counit identities reduce the square to the ordinary coordinate square applied degreewise. The exact-square factorization for restriction supplies its canonical compositor normalization. Thus the square holds on every derived object, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-pod-derived-exact-square-composition",
+  "lem-pur-based-sheaf-tensor-evaluation",
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-finite-power-complex",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-flat-restriction-ordinary-comparisons",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback-unit-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL, 03DA, 03DB and 04JC; finite-basis calculation reused from lem-pur-finite-free-scalar-extension, followed by exact localization and its universal property (derived.tex Tag 015F; categories.tex Tag 04VG). Written by Y6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a small site a chosen finite free ring sheaf basis gives functorial unbounded derived tensor coordinates compatible with inverse image",
+   "results": "{\"top\": [\"SheafOfModules.mapFree\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor extension between finite local field sheaves computed termwise on unbounded derived categories by an integral basis",
+   "results": "{\"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"PresheafOfModules.Monoidal.tensorObj\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*(tensor|derived)|tensor.*finiteFree|extendScalars.*(finite|exact)",
+   "results": "{\"top\": [\"Mathlib/Algebra/Module/FinitePresentation.lean\"], \"n_hits\": 1, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of continuous local field coefficient sheaves has natural derived tensor coordinates compatible with pullback",
+   "results": "{\"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.instIsLeftAdjointPullback\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary module/sheaf operations or abstract categorical identities, not the stated derived ring-sheaf construction and its specified normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*(tensor|derived)|tensor.*finiteFree|extendScalars.*(finite|exact)",
+   "results": "{\"top\": [\"Mathlib/Algebra/Module/FinitePresentation.lean\"], \"n_hits\": 1, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary free modules, pullback of free module sheaves, scalar localization, Ext scalar actions, or condensed monoidal structures; none states finite-basis derived coordinates and their inverse-image normalization for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chosen basis for a finite free ring sheaf gives derived extension of scalars compatible with pullback",
+   "results": "{\"top\": [\"Module.Free.chooseBasis\", \"IsBaseChange.basis.congr_simp\", \"IsBaseChange.of_basis\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"Algebra.TensorProduct.basisAux\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"Subalgebra.LinearDisjoint.basisOfBasisRight\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary free modules, pullback of free module sheaves, scalar localization, Ext scalar actions, or condensed monoidal structures; none states finite-basis derived coordinates and their inverse-image normalization for arbitrary ring sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary free modules, pullback of free module sheaves, scalar localization, Ext scalar actions, or condensed monoidal structures; none states finite-basis derived coordinates and their inverse-image normalization for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free sheaf of algebras tensor any module is a finite direct sum, unbounded derived scalar extension commutes with inverse image",
+   "results": "{\"top\": [\"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary free modules, pullback of free module sheaves, scalar localization, Ext scalar actions, or condensed monoidal structures; none states finite-basis derived coordinates and their inverse-image normalization for arbitrary ring sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension of scalars between sheaves of modules computed termwise on all complexes and its basis coordinate natural isomorphism",
+   "results": "{\"top\": [\"SheafOfModules.mapFree\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.ιFree_mapFree_inv\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.freeHomEquiv_comp_apply\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary free modules, pullback of free module sheaves, scalar localization, Ext scalar actions, or condensed monoidal structures; none states finite-basis derived coordinates and their inverse-image normalization for arbitrary ring sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), proper closed-complement scalar calculation: derived finite-free coordinates, returned scalar-comparison proof step 3.",
+   "via": [
+    "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-derived-finite-free-scalar-coordinates",
+  "worker": "stage1",
+  "summary": "Constructed the sectionwise inverse basis maps, showed the presheaf tensor is already a sheaf, proved exactness and the unbounded representative normalization, and checked inverse-image compatibility on inverse coordinate maps before localization. Reused existing generic nodes; no new nodes. Statement unchanged.",
+  "blueprint": "det-sf-comp-coherence-cocycle, Refinement isomorphisms (2), the scalar-comparison subargument through lem-sfb-qcqs-proper-open-boundary-vanishing and its closed-base-change and integral-rational-scalar-comparison children; realizes the finite-basis calculation and inverse-image compatibility in det-prop-sfb-cartesian-coefficients-finite-free.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module-sheaf limit and underlying abelian exactness calculation for arbitrary small sites. The compactification-coherence unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Universal property of module sheafification used to identify the explicit tensor presheaf with its sheaf tensor. The compactification-coherence unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded K-flat resolution existence used to compare the named derived scalar extension with termwise tensor. The compactification-coherence unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The existing K-flat definition and representative normalization of derived scalar extension. The compactification-coherence unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness of module inverse image for any geometric morphism, with inverse-image coefficient rings. The compactification-coherence unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Transport of scalar actions under arbitrary topos inverse image, needed for the restriction and coordinate comparison. The compactification-coherence unit has no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sfb-scalar-inverse-image-tower-diagram",
+    "why": "The ordinary balanced scalar/inverse-image comparison for arbitrary ring sheaves; no compactification geometry is replaced. The compactification-coherence unit has no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sfb-scalar-inverse-image-tower-diagram"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-32c9c4f48",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-32c9c4f48 (reviewer sub-agent of L); spot-checked: I read the delivered item and all nine of its steps against every cited statement. There are no new nodes and the statement is unchanged. The statement is true and correct for d=0, for d=1 with a=id, and in the pullback clause. Step 1: R^d(U)=R(U)^d because limits are sectionwise, and q_i(a(r)s)=rq_i(s), s=Σa(q_i(s))b_i hold. Step 2: β is balanced over R(U) acting on S through a; βγ=1 holds by q_j(b_i)=δ, and γβ=1 by balancing. Step 3: P_M ≅ M^d is already a sheaf, and the sheafification interface with O=S gives ε with εη=1 and ηε=1. Step 4: r_a keeps the underlying sheaves and so preserves and reflects kernel and cokernel cones; B_d preserves them coordinatewise; with the mathlib leaf lem-sfb-kernel-cokernel-finite-exactness this makes T exact. Step 5: T(p) is a quasi-isomorphism, so E_a≅D(T) through the left-derived structure in lem-pur-derived-change-of-rings (2); the naturality wording is brief but enough. Steps 6 and 9: natural transformations and termwise equalities descend by localization (2) and (3). Steps 7 and 8: the restriction comparison comes from the transported action, and the balanced-coequalizer χ comes from lem-sfb-scalar-inverse-image-tower-diagram with b=id. The inverse coordinate maps are written without elements as the sum of the maps induced by b_i, so the argument never assumes that sections after inverse image lift. Batch-5 flag on lem-trf-geometric-inverse-image-exact: this is generic exactness of inverse image along a geometric morphism. Its 132-node closure contains only two trf definitions and no trace-formula or Poincaré theorem, and about 16 other nodes cite it, so it lies outside both assumed statements and is accepted. I accept all seven declared tool_uses as generic black boxes. Duplicates checked and rejected: topos-finite-free-counit (a sibling that uses this Φ), kflat-scalar-comparison-normalization (ordinary χ, no coordinates), new-sbc-pullback-free-coordinates-naturality (schemes only) and pur-based-sheaf-tensor-evaluation (needs a terminal object); there is no cycle. Sources read: Stacks 03EL and the main-20261015 finite-free proof.md, which the item generalizes and which the parent cites in that role. Advisory (B3): the statement's 'canonical balancing' has no stmt_dep. Its meaning is fixed by χ, and the same ordinary χ is stated in lem-sfb-kflat-scalar-comparison-normalization, so I left the statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedFiniteFreeScalarCoordinates",
+  "declaration": "SheafOfModules.RingedTensor.derived_finiteFreeScalarCoordinates",
+  "declarations": [
+   "SheafOfModules.RingedTensor.scalarBasisInclusion",
+   "SheafOfModules.RingedTensor.scalarBasisCoordinate",
+   "SheafOfModules.RingedTensor.IsFiniteFreeScalarCoordinateIso",
+   "SheafOfModules.RingedTensor.FiniteFreeCoordinatesInverseImage",
+   "SheafOfModules.RingedTensor.IsDerivedFiniteFreeScalarCoordinateIso",
+   "SheafOfModules.RingedTensor.derived_finiteFreeScalarCoordinates",
+   "SheafOfModules.RingedTensor.DerivedCoordinateCompatibility",
+   "SheafOfModules.RingedTensor.FiniteFreeCoordinatePullbackExactness",
+   "SheafOfModules.RingedTensor.FiniteFreeCoordinatePullbackData",
+   "SheafOfModules.RingedTensor.FiniteFreeCoordinatePullbackLaws",
+   "SheafOfModules.RingedTensor.coordinateAbelianSheafify",
+   "SheafOfModules.RingedTensor.coordinateAbelianLocalEquivalences",
+   "SheafOfModules.RingedTensor.coordinateCommRingToRingCompose",
+   "SheafOfModules.RingedTensor.coordinateCommRingToTypeCompose",
+   "SheafOfModules.RingedTensor.coordinateAddCommGrpToTypeCompose",
+   "SheafOfModules.RingedTensor.OrdinaryComparisonTuple",
+   "SheafOfModules.RingedTensor.coordinateFiniteProductShape"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedFiniteFreeScalarCoordinates.lean",
+  "statement": "theorem derived_finiteFreeScalarCoordinates (θ : ∏ᶜ (fun _ : Fin d ↦ unit (ringSheaf R)) ≅ (restriction.{u, u} a).obj (unit (ringSheaf S))) [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf R))] [HasDerivedCategory.{w} (SheafOfModules.{u} (ringSheaf S))] (E : DerivedCategory (SheafOfModules.{u} (ringSheaf R)) ⥤ DerivedCategory (SheafOfModules.{u} (ringSheaf S))) (ε : DerivedCategory.Q ⋙ E ⟶ (tensorFunctor a).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) [E.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (SheafOfModules.{u} (ringSheaf R)) (.up ℤ))] : ∃ (_ : PreservesFiniteLimits (tensorFunctor a)) (_ : PreservesFiniteColimits (tensorFunctor a)) (_ : PreservesFiniteLimits (restriction.{u, u} a)) (_ : PreservesFiniteColimits (restriction.{u, u} a)) (_ : (Functor.const (Discrete (Fin d)) ⋙ (lim : (Discrete (Fin d) ⥤ SheafOfModules.{u} (ringSheaf R)) ⥤ _)).Additive) (_ : PreservesFiniteLimits (Functor.const (Discrete (Fin d)) ⋙ (lim : (Discrete (Fin d) ⥤ SheafOfModules.{u} (ringSheaf R)) ⥤ _))) (_ : PreservesFiniteColimits (Functor.const (Discrete (Fin d)) ⋙ (lim : (Discrete (Fin d) ⥤ SheafOfModules.{u} (ringSheaf R)) ⥤ _))), (∀ {K L : CochainComplex (SheafOfModules.{u} (ringSheaf R)) ℤ} (f : K ⟶ L), QuasiIso f → QuasiIso (((tensorFunctor a).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ K : CochainComplex (SheafOfModules.{u} (ringSheaf R)) ℤ, IsIso (ε.app K)) ∧ ∃ (φ : tensorFunctor a ⋙ restriction.{u, u} a ≅ Functor.const (Discrete (Fin d)) ⋙ lim) (Φ : E ⋙ (restriction.{u, u} a).mapDerivedCategory ≅ Functor.const (Discrete (Fin d)) ⋙ lim), IsFiniteFreeScalarCoordinateIso a d θ φ ∧ IsDerivedFiniteFreeScalarCoordinateIso a d E ε φ Φ ∧ FiniteFreeCoordinatesInverseImage a d θ φ E ε Φ",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Y6: complete proof. The inverse-image predicate has the same quantifiers and equations, grouped into an exactness record, an ordinary isomorphism record and its laws; the final derived equations are factored through DerivedCoordinateCompatibility. The theorem signature and the other four original public definitions are unchanged. See coord/changes/Y6-derived-finite-free-coordinate-witnesses.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd4bc8bc",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after RETURN f61320890a14 (H13). diff -r against the f6132 snapshot: the item module's only change is the import requested (public import Sheaf.CategoryTheory.ScalarInverseImageTowerDiagram). ScalarInverseImageNormalization.lean and the tower module are no longer delivered, so the landed stage-3 tower proof is untouched (live module has 0 sorry). def-sfb-scalar-inverse-image-normalization is now existing:true on the tower module; its lean.statement is verbatim in the live module, and scalarPure exists there. Item statement, helpers and stmt_deps are unchanged from the version accepted on substance; I re-checked them independently: Φ pinned through ε, φ and the projections; φ pinned on scalarPure (forward q_i(s)•m, inverse Σ b_i⊗m_i); χ/ρ/κ/κS/τ/σ/σD/β all pinned; θ' = g⁻¹θ; final square uses the actual Φ and a Φ' normalized the same way. No extra hypotheses; universes u and w; edge cases d=0, d=1 with scaled basis, no terminal object, identity g, unbounded complexes. lean.statement verbatim, 6 declarations present, one sorry, docstrings carry source and blueprint, report has Worker report and Second reading sections. No compile (no file changed); worker reports a clean scompile and a deliver2 dry-run OK at 5f900d98835. Advisory: double listing of the two definitions (tower node plus existing:true node, accepted by the dry run); possible duplicate LocalizedStrictTensor.scalarPure in another node; def-weil-pbc-ringed-topos-morphism contributes no Lean declaration."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261024T191823-L-504525",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

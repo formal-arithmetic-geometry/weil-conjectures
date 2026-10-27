@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-split-unit-group-ideal-tensor",
+ "kind": "statement",
+ "title": "Eliminating a split unit group on monomial ideal tensors",
+ "statement": "Let $Q$ be a commutative monoid written additively, $G$ an abelian group, $A$ a commutative ring, $c:Q\\to(A,\\cdot)$ a monoid homomorphism, and $v:G\\to A^\\times$ a homomorphism. For a monoid ideal $K\\subset Q$ (that is, $K+Q\\subset K$, allowing $\\varnothing$), put $L=K\\oplus G\\subset Q\\oplus G$. For any ring $D$ and monoid $T$, $D[T]$ is the ring of finite sums of monomials $d_tz^t$ with $z^tz^{t'}=z^{t+t'}$, and $D[K]$ denotes the ideal additively spanned by its indicated monomials. Give $A$ its $\\mathbf Z[Q\\oplus G]$-algebra structure $z^{(q,g)}\\mapsto c(q)v(g)$, and write $A_c$ for the $\\mathbf Z[Q]$-module with action $z^q\\mapsto c(q)$.\nThe extension of $\\mathbf Z[K]$ along $\\mathbf Z[Q]\\to\\mathbf Z[Q\\oplus G]$, $z^q\\mapsto z^{(q,0)}$, is $\\mathbf Z[L]$. There is an $A$-linear isomorphism of module tensors [def-weil-pbc-module-tensor-product]\n$$\\sigma:\\mathbf Z[L]\\otimes_{\\mathbf Z[Q\\oplus G]}A\\xrightarrow{\\sim}\\mathbf Z[K]\\otimes_{\\mathbf Z[Q]}A_c,\\qquad z^{(q,g)}\\otimes a\\longmapsto z^q\\otimes v(g)a,$$\nwith inverse $z^q\\otimes a\\mapsto z^{(q,0)}\\otimes a$. If $\\mu_L$ and $\\mu_K$ are multiplication to $A$, so $\\mu_L(z^{(q,g)}\\otimes a)=c(q)v(g)a$ and $\\mu_K(z^q\\otimes a)=c(q)a$, then $\\mu_K\\sigma=\\mu_L$. The inverse of $\\sigma$ is precisely the ideal-tensor map induced by the displayed inclusion of monoid rings and the identity on $A$. These maps commute with coefficient homomorphisms $\\phi:A\\to A'$ carrying $c,v$ to the chosen new characters.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 3.7(a) (printed p. 75), with the chart-tensor setting of Expose VIII proof of 3.4.3 (printed p. 110). Agent split group-factor calculation; returned parent step 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathbf Z[Q]$, $S=\\mathbf Z[Q\\oplus G]$, $I=\\mathbf Z[K]$, and $J=\\mathbf Z[K\\oplus G]$. The additive span $J$ is an ideal: multiplying $z^{(q,g)}$, $q\\in K$, by $z^{(r,h)}$ gives $z^{(q+r,g+h)}$ with $q+r\\in K$. It contains the image of $I$, so $IS\\subset J$. Conversely every spanning monomial satisfies $z^{(q,g)}=z^{(q,0)}z^{(0,g)}\\in IS$, so $J=IS$. This proves ideal extension as an equality of ideals, without asserting injectivity of any tensor multiplication map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.7(a), printed p. 75, split chart; VIII 3.4.2--3.4.3, printed p. 110, monoidal ideals. Agent finite-monomial calculation."
+   }
+  },
+  {
+   "text": "Write $N=I\\otimes_R A_c$, with its $A$-action on the second factor and hence its $S$-action through $z^{(r,h)}\\mapsto c(r)v(h)$. On the additive monomial basis of $J$ define $B(z^{(q,g)},a)=z^q\\otimes v(g)a$, extending by integer linearity in $J$ and additivity in $a$. For $r\\in Q,h\\in G$, tensor balancing in $N$ gives $B(z^{(q+r,g+h)},a)=z^{q+r}\\otimes v(g)v(h)a=z^q\\otimes c(r)v(g)v(h)a=B(z^{(q,g)},c(r)v(h)a)$. The same expression is $z^{(r,h)}B(z^{(q,g)},a)$. Finite expansion extends both linearity identities to every element of $S$, so $B$ is $S$-bilinear. The universal property in [def-weil-pbc-module-tensor-product] gives $\\sigma:J\\otimes_S A\\to N$ with the claimed formula. Since $B(x,ba)=bB(x,a)$, uniqueness also gives $A$-linearity. Apply [lem-trf-monomial-ideal-tensor-presentation] to the family indexed by K times G; its single balancing equation supplies the A-linear forward map.",
+   "uses": [
+    "lem-trf-monomial-ideal-tensor-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product: universal property and bilinearity relations; explicit agent calculation in the split-chart context of ILO Expose VI 3.7(a), printed p. 75, and VIII 3.4.3, printed p. 110."
+   }
+  },
+  {
+   "text": "Define $C(z^q,a)=z^{(q,0)}\\otimes a$ in $J\\otimes_S A$, extending by integer linearity and additivity. For $r\\in Q$, $C(z^{q+r},a)=z^{(q+r,0)}\\otimes a=z^{(q,0)}\\otimes c(r)a=C(z^q,c(r)a)$; this also equals the $z^r$-action on $C(z^q,a)$. Thus $C$ is $R$-bilinear. By [def-weil-pbc-module-tensor-product] it induces $\\tau:N\\to J\\otimes_S A$, and $C(x,ba)=bC(x,a)$ makes $\\tau$ $A$-linear. The map $I\\to J$, $z^q\\mapsto z^{(q,0)}$, and the identity on $A$ give exactly this formula, so $\\tau$ is the specified ideal-tensor map. In Lean, construct this canonical inverse directly as a semilinear TensorProduct.map along the ring inclusion; its coefficient component is the identity.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product: universal property and bilinearity relations; explicit agent calculation in the split-chart context of ILO Expose VI 3.7(a), printed p. 75, and VIII 3.4.3, printed p. 110."
+   }
+  },
+  {
+   "text": "On a monomial pure tensor, $\\sigma\\tau(z^q\\otimes a)=z^q\\otimes v(0)a=z^q\\otimes a$. In the other direction, $\\tau\\sigma(z^{(q,g)}\\otimes a)=z^{(q,0)}\\otimes v(g)a=z^{(q,0)}z^{(0,g)}\\otimes a=z^{(q,g)}\\otimes a$ by $S$-balancing. Pure tensors generate by [def-weil-pbc-module-tensor-product]; expanding their first factors into finite monomial sums and moving integer coefficients to the second factor shows that these monomial pure tensors generate as $A$-modules. Both composites are therefore identities, giving the claimed isomorphism and inverse. The additive extensionality theorem of [lem-trf-monomial-ideal-tensor-presentation] is applied to both composites.",
+   "uses": [
+    "lem-trf-monomial-ideal-tensor-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product: universal property and bilinearity relations; explicit agent calculation in the split-chart context of ILO Expose VI 3.7(a), printed p. 75, and VIII 3.4.3, printed p. 110."
+   }
+  },
+  {
+   "text": "The evaluations $I\\to A$, $z^q\\mapsto c(q)$, and $J\\to A$, $z^{(q,g)}\\mapsto c(q)v(g)$, are respectively $R$-linear and $S$-linear, since $c(q+r)=c(q)c(r)$ and $v(g+h)=v(g)v(h)$. Multiplication by the second factor therefore induces the displayed $\\mu_K,\\mu_L$ by [def-weil-pbc-module-tensor-product]. On $z^{(q,g)}\\otimes a$, $\\mu_K\\sigma$ and $\\mu_L$ both give $c(q)v(g)a$, proving their equality on generators. For $\\phi:A\\to A\\prime$, let $c\\prime=\\phi c$ and $v\\prime=\\phi v$. The coefficient maps on the two tensors send $z^{(q,g)}\\otimes a$ and $z^q\\otimes a$ to the same monomials tensored with $\\phi(a)$; bilinearity makes them well defined. Applying $\\sigma\\prime$ after coefficient change gives $z^q\\otimes v\\prime(g)\\phi(a)=z^q\\otimes\\phi(v(g)a)$, exactly coefficient change after $\\sigma$. For $\\tau$ both orders give $z^{(q,0)}\\otimes\\phi(a)$; for multiplication both orders give $\\phi(c(q)v(g)a)$ (and $\\phi(c(q)a)$ for $K$). Generation proves all asserted naturality identities. The multiplication identity is checked by [lem-trf-monomial-ideal-tensor-presentation]. Coefficient change is a TensorProduct.map; prove the inverse square on arbitrary pure tensors from its inclusion formula, and deduce the forward square by the two inverse identities.",
+   "uses": [
+    "lem-trf-monomial-ideal-tensor-presentation",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product: universal property and bilinearity relations; explicit agent calculation in the split-chart context of ILO Expose VI 3.7(a), printed p. 75, and VIII 3.4.3, printed p. 110."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-monomial-ideal-tensor-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00CX, lemma-tensor-product; finite monomial calculation in ILO Expose VI 3.7(a), printed p. 75, and VIII 3.4.3, printed p. 110. Agent-written generators-and-relations proof. Fully formal monomial presentation, canonical tensor maps, and generator calculations; same split-chart route as before."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Eliminate an abelian group factor from a monoid algebra ideal tensor a ring by evaluating the group at a character into units",
+   "results": "[leanfinder] OK 8 hit(s); Rep.leftRegularTensorTrivialIsoFree_hom_hom_single_tmul_single [Mathlib/RepresentationTheory/Rep]; Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single [Mathlib/RepresentationTheory/Coinvariants]; Rep.finsuppToCoinvariantsTensorFree_single [Mathlib/RepresentationTheory/Coinvariants]; Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single [Mathlib/RepresentationTheory/Coinvariants]; Rep.leftRegularTensorTrivialIsoFree_inv_hom_single_single [Mathlib/RepresentationTheory/Rep]; MonoidAlgebra.scalarTensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.scalarTensorEquiv_symm_single [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_single [Mathlib/RepresentationTheory/Rep]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For monoid Q and abelian group G the ideal tensor over Z[Q times G] is the ideal tensor over Z[Q] by the character action of G",
+   "results": "[leansearch] OK 8 hit(s); Representation.tprod [Mathlib.RepresentationTheory.Basic]; FDRep.char_tensor [Mathlib.RepresentationTheory.Character]; Action.leftRegularTensorIso [Mathlib.CategoryTheory.Action.Monoidal]; CharacterModule [Mathlib.Algebra.Module.CharacterModule]; Rep.ofMulDistribMulAction [Mathlib.RepresentationTheory.Rep]; MonoidAlgebra.scalarTensorEquiv [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; CharacterModule.int [Mathlib.Algebra.Module.CharacterModule]; Action.tensor_ρ [Mathlib.CategoryTheory.Action.Monoidal]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, TensorProduct",
+   "results": "[loogle] OK 12 hit(s); MonoidAlgebra.scalarTensorEquiv [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.tensorEquiv [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.lTensorAlgEquiv [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.rTensorEquivAlgEquiv [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.rTensorEquivAlgEquiv.invFun [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.scalarTensorEquiv_symm_single [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.scalarTensorEquiv_tmul [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.tensorEquiv_single_tmul_single [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.rTensorEquivAlgEquiv.invFun_tmul [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.lTensorAlgEquiv_symm_single [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.tensorEquiv_symm_single_eq_single_one_tmul [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; MonoidAlgebra.tensorEquiv_symm_single_eq_tmul_single_one [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*(prod|tensor)|TensorProduct.*MonoidAlgebra",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/Height/MvPolynomial.lean:231:   (archAbsVal.map fun v ↦ ⨆ j, (AddMonoidAlgebra.coeff <| p j).sum (fun _ c ↦ v c)).prod *; Mathlib/NumberTheory/Height/MvPolynomial.lean:236:      (archAbsVal.map fun v ↦ ⨆ j, (AddMonoidAlgebra.coeff <| p j).sum (fun _ c ↦ v c)).prod *; Mathlib/NumberTheory/Height/MvPolynomial.lean:312:      0 ≤ (archAbsVal.map (fun v ↦ ⨆ j, (AddMonoidAlgebra.coeff <| p j).sum fun _ c ↦ v c)).prod :=; Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean:16: * `TensorAlgebra.equivMonoidAlgebra b : TensorAlgebra R M ≃ₐ[R] FreeAlgebra R κ`:; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:10: public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:68:   AddMonoidAlgebra.rTensorEquivAlgEquiv R ..; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:90:   AddMonoidAlgebra.scalarTensorEquiv R N; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:99:   AddMonoidAlgebra.scalarTensorEquiv ..; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:104:   AddMonoidAlgebra.scalarTensorEquiv_tmul ..; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:30: noncomputable def _root_.AddMonoidAlgebra.rTensorEquivAlgEquiv.invFun [AddCommMonoid M] :; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:33:     (Algebra.TensorProduct.map (.id _ _) AddMonoidAlgebra.singleZeroAlgHom); Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:34:     (Algebra.TensorProduct.includeRight.toMonoidHom.comp <| AddMonoidAlgebra.of B M); Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:40:   MonoidAlgebra.liftNCAlgHom (Algebra.TensorProduct.map (.id _ _) singleOneAlgHom); Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:45: lemma _root_.AddMonoidAlgebra.rTensorEquivAlgEquiv.invFun_tmul (a : A) (m : M) (b : B) :; Mathlib/Algebra/MonoidAlgebra/Defs.lean:679: /-- `MonoidAlgebra.single` as a `MonoidHom` from the product type into the monoid algebra.; Mathlib/RepresentationTheory/Induced.lean:72:   Coinvariants.hom_ext <| TensorProduct.ext <| MonoidAlgebra.lhom_ext' fun h =>; Mathlib/RepresentationTheory/Induced.lean:81:     Coinvariants.map _ _ ⟨(MonoidAlgebra.mapDomainLinearMap k k fun x => x * h⁻¹).rTensor _,; Mathlib/RepresentationTheory/Homological/Resolution.lean:365:     have eq3 : MonoidAlgebra.single (i 0 • Fin.partialProd fun i_1 ↦ i i_1.succ) (1 : k) =; Mathlib/RepresentationTheory/Homological/Resolution.lean:366:         MonoidAlgebra.single (Fin.partialProd i ∘ Fin.succ) 1 := by; Mathlib/RepresentationTheory/Homological/Resolution.lean:373:           MonoidAlgebra.single (g • Fin.partialProd f) r := by; Mathlib/RepresentationTheory/Equiv.lean:145:   .mk (TensorProduct.congr (MonoidAlgebra.coeffLinearEquiv _) (MonoidAlgebra.coeffLinearEquiv _) ≪≫ₗ; Mathlib/RepresentationTheory/Basic.lean:639:   simp only [asAlgebraHom_def, MonoidAlgebra.lift_apply, tprod_apply, MonoidHom.one_apply,; Mathlib/RepresentationTheory/Basic.lean:648:   simp only [asAlgebraHom_def, MonoidAlgebra.lift_apply, tprod_apply, MonoidHom.one_apply,; Mathlib/RepresentationTheory/Action.lean:10: public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra; Mathlib/RepresentationTheory/Action.lean:119:   toLinearMap := (MonoidAlgebra.tensorEquiv k).toLinearMap",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor an induced monomial ideal from a direct product monoid Q times G with an evaluation algebra; cancel the group algebra factor",
+   "results": "[leanfinder] OK 8 hit(s); MvPolynomial.rTensor_apply_monomial_tmul [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MvPolynomial.scalarRTensor_apply_monomial_tmul [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MvPolynomial.rTensor_apply_X_tmul [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MvPolynomial.scalarRTensor_apply_X_tmul_apply [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MonoidAlgebra.tensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MvPolynomial.rTensor_symm_apply_single [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MvPolynomial.scalarRTensor_symm_apply_single [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MonoidAlgebra.scalarTensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(ideal|tensor)|(ideal|tensor).*(MonoidAlgebra|AddMonoidAlgebra)",
+   "results": "msearch.py: OK, 25 hits; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean; Mathlib/Algebra/MonoidAlgebra/Ideal.lean; Mathlib/Algebra/MonoidAlgebra/Ideal.lean; Mathlib/Algebra/MonoidAlgebra/Ideal.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra base-change equivalences and polynomial/representation formulas do not identify this arbitrary monomial ideal tensor with the specified evaluation maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ideal in Z[Q times G] supported on K times G tensored with a character algebra is isomorphic to Z[K] tensor over Z[Q]",
+   "results": "msearch.py: OK, 8 hits; Algebra.TensorProduct.quotIdealMapEquivTensorQuot; CharacterModule.int; Ideal.qoutMapEquivTensorQout; IsFractionRing.coeSubmodule_isPrincipal; Ideal.comap_idₐ; Ideal.toCharacterSpace; Ideal.toCharacterSpace_apply_eq_zero_of_mem; Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra base-change equivalences and polynomial/representation formulas do not identify this arbitrary monomial ideal tensor with the specified evaluation maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, TensorProduct",
+   "results": "msearch.py: OK, 12 hits; AddMonoidAlgebra.scalarTensorEquiv; AddMonoidAlgebra.tensorEquiv; AddMonoidAlgebra.lTensorAlgEquiv; AddMonoidAlgebra.rTensorEquivAlgEquiv; AddMonoidAlgebra.rTensorEquivAlgEquiv.invFun; AddMonoidAlgebra.scalarTensorEquiv_symm_single; AddMonoidAlgebra.scalarTensorEquiv_tmul; AddMonoidAlgebra.tensorEquiv_single_tmul_single",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra base-change equivalences and polynomial/representation formulas do not identify this arbitrary monomial ideal tensor with the specified evaluation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balanced tensor product map sends monomial (q,g) tensor a to monomial q tensor v(g) a and inverse inserts zero group coordinate",
+   "results": "msearch.py: OK, 8 hits; MvPolynomial.rTensor_symm_apply_single; MvPolynomial.rTensor_apply_monomial_tmul; MvPolynomial.rTensor_apply_X_tmul; MvPolynomial.scalarRTensor_apply_monomial_tmul; MvPolynomial.scalarRTensor_symm_apply_single; PolyEquivTensor.invFun_monomial; MvPolynomial.scalarRTensor_apply_X_tmul_apply; MvPolynomial.coeff_rTensorAlgHom_monomial_tmul",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra base-change equivalences and polynomial/representation formulas do not identify this arbitrary monomial ideal tensor with the specified evaluation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eliminating the group factor in a monomial ideal tensor over an additive monoid algebra via a character to units",
+   "results": "msearch.py: OK, 8 hits; MvPolynomial.rTensor_apply_monomial_tmul; MvPolynomial.rTensor_apply_X_tmul; Rep.finsuppToCoinvariantsTensorFree_single; MvPolynomial.scalarRTensor_apply_monomial_tmul; Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single; MonoidAlgebra.scalarTensorEquiv_symm_single; MonoidAlgebra.scalarTensorEquiv_tmul; MonoidAlgebra.scalarTensorEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra base-change equivalences and polynomial/representation formulas do not identify this arbitrary monomial ideal tensor with the specified evaluation maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-chart-face-tor-comparison",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction (through the ancestry of lem-trf-log-blowup-normalization): input Expose VIII, proof of Lemma 3.4.3, printed p. 110, where Tor_1^{Z[P]}(Z[P]/IZ[P],O_X)=0 is taken from Kato 1994, 6.1(ii); this node reduces the given chart to the sharp chart at a geometric point to which the Kato statement applies (face localization, splitting, unit twist; cf. Expose VI, 3.7(a), printed p. 75). Subargument: Expose VI 3.7(a) (printed p. 75), with the chart-tensor setting of Expose VIII proof of 3.4.3 (printed p. 110). Agent split group-factor calculation; returned parent step 6.",
+   "via": [
+    "lem-trf-log-chart-face-tor-comparison",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-split-unit-group-ideal-tensor",
+  "worker": "stage1",
+  "summary": "Preserved the statement; proved ideal extension, both balanced tensor maps, their inverse identities, multiplication compatibility and coefficient naturality directly. All five steps are explicit elementary calculations from the monomial definitions and the existing module tensor universal property. No new nodes. Exact Lean attachment searches found none; fresh Mathlib searches found only infrastructure.",
+  "blueprint": "Retains the recorded ancestry to lem-trf-local-term-locality proof (1)--(2) through the nearby-duality alteration route: the split-chart group-factor calculation singled out in returned parent step 6, ILO VI 3.7(a) and VIII 3.4.3. This does not replace any chapter or unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-9dc84e371",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-9dc84e371 (reviewer sub-agent of L); spot-checked: Read the item and its five steps in full. The statement is byte-identical to Q06's original statement-only node; the delivery has no new nodes and its only dependency is def-weil-pbc-module-tensor-product, a Mathlib leaf (TensorProduct) whose statement includes the universal property and generation by pure tensors that the steps use. Step 1 (J=IS) is correct for any commutative Q and abelian G, and for K empty. Step 2: B is well defined because the monomials of K⊕G form a Z-basis of J; the balancing check z^{q+r}⊗v(g)v(h)a = z^q⊗c(r)v(g)v(h)a holds, and A-linearity follows from uniqueness. Step 3: τ is exactly the change-of-rings map I→J with id_A, since A restricted to Z[Q] is A_c (v(0)=1). Step 4: both composites are the identity on monomial pure tensors, which generate. Step 5: the evaluation maps are linear, μ_Kσ=μ_L, and the coefficient squares commute with c'=φc, v'=φv. This matches parent step 2 of lem-trf-log-chart-face-tor-comparison, with no cycle. Edge cases checked: K empty, K=Q, G=0, A=0, c with zeros, non-cancellative Q, and Q=0 with G=Z. Sources: ILO VI 3.7(a) at PDF p.81 and VIII 3.4.1-3.4.3 at p.116; the proof is correctly marked agent-written. No duplicate found by rg -L over dag/nodes (neighbours: face-localization, unit-twist, monomial-module-tor-devissage). No route issue, no SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitUnitGroupIdealTensor",
+  "declaration": "MonoidAlgebra.SplitUnitGroupIdealTensor.split_unit_group_ideal_tensor",
+  "declarations": [
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.tensor",
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.pure",
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.multiplication",
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.evaluation",
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.splitEvaluation",
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.Comparison",
+   "MonoidAlgebra.SplitUnitGroupIdealTensor.split_unit_group_ideal_tensor"
+  ],
+  "file": "lean/Sheaf/RingTheory/SplitUnitGroupIdealTensor.lean",
+  "statement": "theorem split_unit_group_ideal_tensor {Q : Type u} {G : Type v} {A : Type w} [CommMonoid Q] [CommGroup G] [CommRing A] (c : Q →* A) (v : G →* Aˣ) (K : Set Q) (hK : ∀ q ∈ K, ∀ r : Q, q * r ∈ K) (I : Ideal (MonoidAlgebra ℤ Q)) (hI : I = Ideal.span (MonoidAlgebra.of ℤ Q '' K)) (J : Ideal (MonoidAlgebra ℤ (Q × G))) (hJ : J = Ideal.span (MonoidAlgebra.of ℤ (Q × G) '' (K ×ˢ Set.univ))) : I.map (MonoidAlgebra.mapDomainRingHom ℤ (MonoidHom.inl Q G)) = J ∧ ∃ σ : Comparison c v I J, ∀ (A' : Type w') [CommRing A'] (φ : A →+* A') (c' : Q →* A') (v' : G →* A'ˣ) (_hc : ∀ q, c' q = φ (c q)) (_hv : ∀ g, (v' g : A') = φ (v g : A)), ∃ (σ' : Comparison c' v' I J) (βK : tensor (evaluation c) I →+ tensor (evaluation c') I) (βL : tensor (splitEvaluation c v) J →+ tensor (splitEvaluation c' v') J), (∀ (x : I) (a : A), βK (pure (evaluation c) I x a) = pure (evaluation c') I x (φ a)) ∧ (∀ (y : J) (a : A), βL (pure (splitEvaluation c v) J y a) = pure (splitEvaluation c' v') J y (φ a)) ∧ (∀ t, σ'.equiv (βL t) = βK (σ.equiv t)) ∧ (∀ t, σ'.equiv.symm (βK t) = βL (σ.equiv.symm t)) ∧ (∀ t, multiplication (evaluation c') I (βK t) = φ (multiplication (evaluation c) I t)) ∧ (∀ t, multiplication (splitEvaluation c' v') J (βL t) = φ (multiplication (splitEvaluation c v) J t))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Monoids are written multiplicatively; tensor symmetry places the coefficient factor first. I and J are uniquely fixed by the span equalities. Comparison bundles the specified maps and equations; the other helpers expose Mathlib constructions with their prescribed scalar actions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e0e30f17",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Lean-only delivery; the node matches live apart from the lean field, and the item has not landed. Every clause checked: ideal extension via mapDomainRingHom inl = J; σ is an A-linear equivalence; the monomial formula has the v(g) factor; the inverse is fixed on all pure tensors as the map induced by inclusion and id_A, which also makes Comparison unique; μ_K∘σ=μ_L via liftBaseChange; naturality in φ with c'=φc, v'=φv, with βK/βL fixed on pure tensors (canonical) and squares for σ, σ⁻¹ and both multiplications. Hypotheses: hK allows K=∅; no stronger hypotheses; independent universes u v w w'. Edge cases K=∅, K=Q, G trivial, A=0, c with zeros, non-cancellative Q are all fine. Helpers are real Mathlib wrappers; one sorry; docstrings and statement field verbatim; the report has both sections. H4: the parent's LogChartFaceTor helpers are downstream theorem-module defs, so nothing to reuse (advisory only). No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T083248-L-2308882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-unit-power-fppf-surjective",
+ "kind": "statement",
+ "title": "Positive power maps of the multiplicative fppf sheaf are locally surjective",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $n\\geq1$ be an integer. For an $S$-scheme $T$ put $\\mathbf G_m(T)=\\Gamma(T,\\mathcal O_T)^\\times$. For every $S$-scheme $T$ and $a\\in\\mathbf G_m(T)$ there is a jointly surjective family $\\{T_i\\to T\\}$ of flat locally finitely presented morphisms [def-weil-flat-morphism, def-sbc-locally-finite-presentation] and units $b_i\\in\\Gamma(T_i,\\mathcal O_{T_i})^\\times$ with $b_i^n=a|_{T_i}$. Equivalently, the map of fppf sheaves $\\mathbf G_m\\to\\mathbf G_m$, $b\\mapsto b^n$, is locally surjective. No invertibility of $n$ on $S$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 040N, lemma-kummer-sequence-syntomic, positive-integer case and its proof; root algebra A[X]/(X^n-a). The displayed source says n in N but the proof requires n>0, as imposed here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Cover $T$ by its affine opens $U_i$ using [lem-weil-pbc-affine-opens-basis]. Put $A_i=\\Gamma(U_i,\\mathcal O_T)$ and let $a_i\\in A_i^\\times$ be the restriction of $a$. Use [lem-weil-pbc-affine-open-spec-points] to identify $U_i$ with $\\operatorname{Spec}A_i$ inside $T$. Form $B_i=A_i[X]/(X^n-a_i)$ and the morphism $q_i:\\operatorname{Spec}B_i\\to U_i$ induced by $A_i\\to B_i$ [def-weil-affine-spectrum]. Give its source the composite structure map to $S$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof, affine root algebra and covering argument, lines 2939–2966; fppf conclusion uses its explicit presentation instead of the stronger syntomic assertion."
+   }
+  },
+  {
+   "text": "An empty $U_i$ can be omitted. Otherwise $A_i\\ne0$, and $X^n-a_i$ is monic of degree $n$. By [lem-weil-pbc-monic-quotient-free], $B_i$ is free with basis $1,\\bar X,\\ldots,\\bar X^{n-1}$. Consequently $A_i\\to B_i$ is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. For every maximal ideal $\\mathfrak m\\subset A_i$, the reduction clause of [lem-weil-pbc-monic-quotient-free] gives $B_i/\\mathfrak mB_i\\cong(A_i/\\mathfrak m)[X]/(X^n-\\bar a_i)$, which has the same $n$-element power basis over the nonzero field $A_i/\\mathfrak m$. Since $n\\ge1$, its basis vector $1$ is nonzero. Thus $\\mathfrak mB_i\\ne B_i$, and [lem-weil-pbc-flat-faithfully-flat-maximal-ideals] shows that $A_i\\to B_i$ is faithfully flat. By [lem-weil-pbc-faithfully-flat-surjective-spectrum], $q_i$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof, affine root algebra and covering argument, lines 2939–2966; fppf conclusion uses its explicit presentation instead of the stronger syntomic assertion."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $q_i$ is flat. The inclusion $j_i:U_i\\hookrightarrow T$ has isomorphic local rings because the structure sheaf of an open subscheme is the restricted structure sheaf [def-weil-open-immersion]. An isomorphism of rings is flat: tensoring along it identifies an injective map with itself. Hence $j_i$ is flat by [def-weil-flat-morphism], and $p_i=j_iq_i$ is flat by [lem-pc-flat-compose]. The one-generator, one-relation presentation $B_i=A_i[X]/(X^n-a_i)$ proves that $p_i$ is locally of finite presentation directly by [def-sbc-locally-finite-presentation]: at each source point take the whole affine source and the affine target neighbourhood $U_i\\subset T$.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-pc-flat-compose",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof, affine root algebra and covering argument, lines 2939–2966; fppf conclusion uses its explicit presentation instead of the stronger syntomic assertion."
+   }
+  },
+  {
+   "text": "In $B_i$, let $b_i=\\bar X$. The defining quotient relation is $b_i^n=a_i$. It is a unit: an explicit inverse is $a_i^{-1}\\bar X^{n-1}$, since $n\\ge1$ and $\\bar X\\cdot a_i^{-1}\\bar X^{n-1}=a_i^{-1}\\bar X^n=1$. Under the global-section identification for an affine spectrum [def-weil-affine-spectrum], this is a unit on $\\operatorname{Spec}B_i$ whose $n$th power is $p_i^*a$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof, affine root algebra and covering argument, lines 2939–2966; fppf conclusion uses its explicit presentation instead of the stronger syntomic assertion."
+   }
+  },
+  {
+   "text": "For any $t\\in T$, choose $i$ with $t\\in U_i$. The surjectivity of $q_i$ proved in step 2 gives a point of $\\operatorname{Spec}B_i$ above $t$. Thus the $p_i$ are jointly surjective, and step 3 supplies exactly the flat locally finitely presented family required in the statement. Step 4 supplies its roots. For $T=\\varnothing$ use the empty family. This also gives the stated local surjectivity interpretation, since that means precisely that every target section has a lift on a covering family. At no point was $n$ inverted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof, affine root algebra and covering argument, lines 2939–2966; fppf conclusion uses its explicit presentation instead of the stronger syntomic assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "lem-pc-flat-compose",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof, affine root algebra and covering argument, lines 2939–2966; fppf conclusion uses its explicit presentation instead of the stronger syntomic assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat finitely presented covers obtained by inverting monic polynomials and by adjoining roots of units over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T08:29:28Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat finitely presented covers obtained by inverting monic polynomials and by adjoining roots of units over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"RingHom.FaithfullyFlat\", \"Algebra.Smooth.exists_subalgebra_fg\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\"], \"digest\": \"fae64d7004db9d5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot, its monic free-module construction and KummerPolynomial.root_X_pow_sub_C_pow concern ring presentations; they do not state local surjectivity on the big fppf site, in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"Monic\"",
+   "results": "{\"t\": \"2026-10-24T08:30:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdjoinRoot\\\", \\\"Monic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdjoinRoot.isIntegral_of_monic\", \"AdjoinRoot.nontrivial_iff_of_monic\", \"Polynomial.Monic.finite_adjoinRoot\", \"Polynomial.Monic.free_adjoinRoot\", \"AdjoinRoot.faithfulSMul_of_monic_of_degree_pos\", \"AdjoinRoot.of.injective_of_monic_of_degree_pos\", \"AdjoinRoot.modByMonicHom\", \"AdjoinRoot.isLocalHom_of_monic_of_degree_pos\"], \"digest\": \"a2045131fe8c5a79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot, its monic free-module construction and KummerPolynomial.root_X_pow_sub_C_pow concern ring presentations; they do not state local surjectivity on the big fppf site, in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|FaithfullyFlat|finitePresentation|FinitePresentation",
+   "results": "{\"t\": \"2026-10-24T08:30:33Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat|FaithfullyFlat|finitePresentation|FinitePresentation\", \"sub\": \"RingTheory/AdjoinRoot\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot, its monic free-module construction and KummerPolynomial.root_X_pow_sub_C_pow concern ring presentations; they do not state local surjectivity on the big fppf site, in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any commutative ring A and unit a, adjoining an nth root of a for n positive gives a finite faithfully flat finitely presented cover",
+   "results": "{\"t\": \"2026-10-24T08:31:29Z\", \"tool\": \"leansearch\", \"query\": \"For any commutative ring A and unit a, adjoining an nth root of a for n positive gives a finite faithfully flat finitely presented cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.instInhabited\", \"AdjoinRoot\", \"IsAdjoinRoot.mk.noConfusion\", \"AdjoinRoot.instCommRing\", \"CyclotomicRing.isCyclotomicExtension\", \"isSplittingField_AdjoinRoot_X_pow_sub_C\", \"root_X_pow_sub_C_pow\", \"AdjoinRoot.isAdjoinRoot\"], \"digest\": \"ee76f7031182a409\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot, its monic free-module construction and KummerPolynomial.root_X_pow_sub_C_pow concern ring presentations; they do not state local surjectivity on the big fppf site, in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "free_adjoinRoot|faithfulSMul_of_monic|Monic.*basis|basis.*Monic",
+   "results": "{\"t\": \"2026-10-24T08:31:29Z\", \"tool\": \"grep\", \"query\": \"free_adjoinRoot|faithfulSMul_of_monic|Monic.*basis|basis.*Monic\", \"sub\": \"RingTheory/AdjoinRoot.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"593\", \"618\", \"625\", \"626\", \"633\"], \"digest\": \"d8c6df5049f36ade\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot, its monic free-module construction and KummerPolynomial.root_X_pow_sub_C_pow concern ring presentations; they do not state local surjectivity on the big fppf site, in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|power.*surjective|surjective.*power",
+   "results": "{\"t\": \"2026-10-24T08:33:59Z\", \"tool\": \"grep\", \"query\": \"Kummer|power.*surjective|surjective.*power\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot, its monic free-module construction and KummerPolynomial.root_X_pow_sub_C_pow concern ring presentations; they do not state local surjectivity on the big fppf site, in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "free_adjoinRoot|faithfulSMul_of_monic_of_degree_pos|powerBasisAux",
+   "results": "{\"t\": \"2026-10-24T08:38:46Z\", \"tool\": \"grep\", \"query\": \"free_adjoinRoot|faithfulSMul_of_monic_of_degree_pos|powerBasisAux\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/Adjoin/PowerBasis.lean\", \"Mathlib/RingTheory/Adjoin/PowerBasis.lean\", \"Mathlib/RingTheory/Adjoin/PowerBasis.lean\"], \"digest\": \"57f1415f6e93184b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot.powerBasisAux′, Mathlib/RingTheory/AdjoinRoot.lean:593, is a basis for a monic quotient. It does not state local surjectivity of the power map of fppf sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unit has an nth root locally for the fppf topology without invertibility of n",
+   "results": "{\"t\": \"2026-10-24T08:55:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every unit has an nth root locally for the fppf topology without invertibility of n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasEnoughRootsOfUnity\", \"mem_rootsOfUnity_prime_pow_mul_iff'\", \"PerfectRing.lift_aux\", \"mem_rootsOfUnity_prime_pow_mul_iff\", \"rootsOfUnityEquivNthRoots\", \"Perfection.pthRoot\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"Perfection.frobenius_pthRoot\"], \"digest\": \"cb3b33741152393c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give roots of unity, AdjoinRoot algebra, or general local-surjectivity criteria; none gives positive power local surjectivity on the fppf site without n invertible."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"Monic\"",
+   "results": "{\"t\": \"2026-10-24T08:58:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdjoinRoot\\\", \\\"Monic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdjoinRoot.isIntegral_of_monic\", \"AdjoinRoot.nontrivial_iff_of_monic\", \"Polynomial.Monic.finite_adjoinRoot\", \"Polynomial.Monic.free_adjoinRoot\", \"AdjoinRoot.faithfulSMul_of_monic_of_degree_pos\", \"AdjoinRoot.of.injective_of_monic_of_degree_pos\", \"AdjoinRoot.modByMonicHom\", \"AdjoinRoot.isLocalHom_of_monic_of_degree_pos\"], \"digest\": \"a2045131fe8c5a79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give roots of unity, AdjoinRoot algebra, or general local-surjectivity criteria; none gives positive power local surjectivity on the fppf site without n invertible."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|power.*surjective|surjective.*power",
+   "results": "{\"t\": \"2026-10-24T08:58:02Z\", \"tool\": \"grep\", \"query\": \"fppf|power.*surjective|surjective.*power\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"4e9901e32fa38044\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give roots of unity, AdjoinRoot algebra, or general local-surjectivity criteria; none gives positive power local surjectivity on the fppf site without n invertible."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The positive power endomorphism of the multiplicative group sheaf is an epimorphism in the fppf topology",
+   "results": "{\"t\": \"2026-10-24T08:58:39Z\", \"tool\": \"leansearch\", \"query\": \"The positive power endomorphism of the multiplicative group sheaf is an epimorphism in the fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.epi_of_surjective\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective'\", \"CategoryTheory.Sheaf.epi_of_isLocallySurjective\", \"AlgebraicGeometry.StructureSheaf.to_basicOpen_epi\", \"TopCat.Presheaf.instEpiCommRingCatToTotalQuotientPresheaf\", \"CategoryTheory.Subfunctor.Subpresheaf.epi_iff_range_eq_top\", \"CategoryTheory.PreGaloisCategory.FibreFunctor.end_isIso\"], \"digest\": \"775d86f9ddc2a32f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give roots of unity, AdjoinRoot algebra, or general local-surjectivity criteria; none gives positive power local surjectivity on the fppf site without n invertible."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining a root of a monic polynomial of positive degree is faithfully flat and finitely presented",
+   "results": "{\"t\": \"2026-10-24T08:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining a root of a monic polynomial of positive degree is faithfully flat and finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.finitePresentation\", \"Polynomial.Monic.finite_adjoinRoot\", \"IsAdjoinRootMonic\", \"AdjoinRoot.isAdjoinRootMonic\", \"IsAdjoinRootMonic.finite\", \"AdjoinRoot.isAdjoinRootMonic_toAdjoinRoot\", \"Polynomial.instFinitePresentationUniversalFactorizationRing\", \"Polynomial.Monic.free_adjoinRoot\"], \"digest\": \"026cdca74d2ea4b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give roots of unity, AdjoinRoot algebra, or general local-surjectivity criteria; none gives positive power local surjectivity on the fppf site without n invertible."
+  },
+  {
+   "tool": "grep",
+   "query": "powerBasisAux|free_adjoinRoot|finitePresentation",
+   "results": "{\"t\": \"2026-10-24T09:03:20Z\", \"tool\": \"grep\", \"query\": \"powerBasisAux|free_adjoinRoot|finitePresentation\", \"sub\": \"RingTheory/AdjoinRoot.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"55\", \"159\", \"160\", \"593\"], \"digest\": \"b078dbdd99574ac4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give roots of unity, AdjoinRoot algebra, or general local-surjectivity criteria; none gives positive power local surjectivity on the fppf site without n invertible."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weighted-additive-central-extension",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Proposition 4.3.1, proof, printed pp.127--128: invariant additive commutator pairing and Lemma 4.3.2 with its proof, for weights 2 and -2. Auxiliary input: replace weight 2 or -2 by arbitrary unit scalar after an fppf square-root cover.",
+   "via": [
+    "lem-sfb-weighted-additive-central-extension",
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unit-power-fppf-surjective",
+  "worker": "stage1",
+  "summary": "Q07 follows Stacks 040N on an affine open cover. Reuses the existing monic power-basis, finite-free flatness, faithful-flatness criterion, spectral surjectivity and affine flatness nodes. Writes the inverse of the root explicitly and checks local finite presentation directly from the displayed algebra presentation. No new nodes and no statement change.",
+  "blueprint": "Supporting input below det-thm-sf-ctf-stability-direct-images, proof (3), along the existing alteration/moduli/relative-rank-one chain recorded in blueprint.from.place: replace weight 2 or -2 by an arbitrary unit after an fppf square-root cover. Steps 1–5 prove the positive-power auxiliary used there; the latest blueprint proof (3) is unchanged. blueprint_refs.py ancestor reports None for this imported created-node chain; preserve its recorded from.node and via."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-4113b3597",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4113b3597 (reviewer sub-agent of L); spot-checked: Read Stacks 040N (etale-cohomology.tex, lemma-kummer-sequence-syntomic, l.2920-2966) in full: affine root algebra A[T]/(T^n-a), finite free of rank n, hence faithfully flat, hence surjective on Spec, with the class of T as the root. The item's restriction to n>=1 is correct (counterexample for n=0: a=2 on Spec Q). The delivery has one commit and no new nodes. Against clones/live it changes only proof, proof_deps, proof_origin, status, split_report and searches; the statement, stmt_deps and blueprint are unchanged. All 12 cited nodes are Mathlib leaves, so the route is fine and no tool_uses are needed. I checked each cited statement. Step 1 uses affine-opens-basis and affine-open-spec-points. Step 2 uses the monic-quotient-free basis and its reduction-mod-I clause, then finite free => flat, then the maximal-ideal faithful-flatness criterion (mB != B because n>=1 basis vectors over a field), then surjective Spec. Step 3 uses Spec-flat iff ring-flat, open immersion flat by its stalk isomorphisms, flat-compose, and LFP via U=Spec B_i, V=U_i with 1 generator and 1 relation. Step 4 gives the explicit inverse a^{-1}X^{n-1}. Step 5 assembles a jointly surjective family; the empty T case is covered. Edge cases checked: n=1, n=p=char (non-reduced but fppf), A=0, empty T. Note for the maintainer: lem-sfb-fppf-local-unit-square-root (unsplit, Q102) is the n=2 case of this item and is a merge candidate. The base statement's 'Equivalently ... fppf sheaves' gloss lacks a def-pc-fppf-site stmt_dep; it predates this delivery and the citer does not use it. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnitPowerFppfSurjective",
+  "declaration": "AlgebraicGeometry.Scheme.exists_fppf_cover_unit_pow_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitPowerFppfSurjective.lean",
+  "statement": "theorem exists_fppf_cover_unit_pow_eq (S : Scheme.{u}) (n : ℕ) (hn : 1 ≤ n) (T : Over S) (a : Γ(T.left, ⊤)ˣ) : ∃ (I : Type u) (U : I → Over S) (f : ∀ i : I, U i ⟶ T) (b : ∀ i : I, Γ((U i).left, ⊤)ˣ), (∀ i : I, Flat (f i).left) ∧ (∀ i : I, LocallyOfFinitePresentation (f i).left) ∧ (∀ t : T.left, ∃ (i : I) (x : (U i).left), (f i).left x = t) ∧ (∀ i : I, b i ^ n = Units.map (f i).left.appTop.hom.toMonoidHom a)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0293cf2eb",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Read Stacks 040N l.2920-2966. Statement-only delivery; node unchanged except lean; lean.statement verbatim in file. Clauses match: S : Scheme.{u}; n : ℕ with 1 ≤ n; T : Over S; a : Γ(T,⊤)ˣ; family I : Type u (empty allowed), U i : Over S, f i : U i ⟶ T; Flat and LocallyOfFinitePresentation are the declarations the dependency nodes record; joint surjectivity; b i ^ n = Units.map appTop a. No extra hypotheses or universe restriction. Edge cases n=1, n=0 excluded, char | n, T empty, non-quasi-compact T covered. No duplicate in side-live lean/Sheaf, lean/WeilConjectures or Mathlib (the étale Kummer theorem assumes n invertible). No defs, sorry only, docstrings give source, blueprint and the 5 proof steps, report has both sections. No file changed, so no recompile."
+ }
+}

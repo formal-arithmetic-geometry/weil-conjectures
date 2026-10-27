@@ -1,0 +1,617 @@
+{
+ "id": "lem-coef-levelwise-normalized-adjoint-descent",
+ "kind": "statement",
+ "title": "Descent of an evaluated adjunction without a common level bound",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated finite type between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. For $W=X,Y,\\overline X$ and $\\tau=\\mathrm{et},\\mathrm{proet}$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], let $\\mathscr S_W^\\tau$ be the category of strict systems of $(A_n)_W$-module sheaves with semilinear quotient transitions and componentwise morphisms [lem-pur-coefficient-system-derived-comparison]; use its ordinary unbounded derived category [def-weil-abstract-derived-category], exact evaluations $e_n$ and, for $m\\ge n\\ge1$, derived quotient functors $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ [def-weil-derived-tensor]. Write $t^M_{m,n}:T^W_{m,n}M_m\\to M_n$ for the scalar-extension adjunct of the actual transition. \nAssume the actual etale functors $F=Rp_{*,\\bullet}j_{!,\\bullet}\\dashv G$ are identified under $e_n$ with the ordinary finite adjunctions, preserving units and counits. Suppose their transitions are\n$$t^{FM}_{m,n}=F_n(t^M_{m,n})q_{m,n,M_m},\\qquad t^{GN}_{m,n}=G_n(t^N_{m,n})b_{m,n,N_m},$$\nwith $q$ the canonical compact-support comparison and $b$ its counit mate [def-weil-pbc-adjunction-mate]. For $\\tau=\\mathrm{et},\\mathrm{proet}$, let $\\mathscr N_W^\\tau$ be the full subcategory of systems with every $t_{m,n}$ invertible and every level bounded constructible of finite Tor amplitude [def-coef-normalized-dvr-tower, def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. No common cohomological or Tor interval is required.\nBoth etale functors preserve $\\mathscr N^\\mathrm{et}$. On finite-Tor constructible inputs $b$ is the canonical invertible finite exceptional comparison [lem-coef-finite-exceptional]; its identity-index and quotient cocycle agree with the actual system transitions. For $\\nu_W:W_{\\mathrm{proet}}\\to W_{\\mathrm{et}}$, with site comparison as in [def-weil-pbc-site-comparison-morphism], the actual system adjunction $\\nu_W^*\\dashv R\\nu_{W,*,\\bullet}$ restricts to inverse equivalences $\\mathscr N_W^{\\mathrm{et}}\\simeq\\mathscr N_W^{\\mathrm{proet}}$. The canonical geometric mate\n$$\\nu_Y^*F\\longrightarrow Rp_{*,\\bullet}j_{!,\\bullet}\\nu_X^*$$\nis invertible on these categories. Transport of $F\\dashv G$ therefore defines an adjunction on $\\mathscr N^{\\mathrm{proet}}$, whose left functor is the displayed proper/open composite, whose finite operations are $Rf_{!,A_n}\\dashv Rf^!_{A_n}$ [def-weil-exceptional-inverse-image], and whose unit, counit, triangle identities and quotient-transition formulas are the transported actual system maps. This requires no exceptional right adjoint on all pro-etale derived systems.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "First proof paragraph, normalization, and final paragraph, system adjunction: levelwise finite-Tor restriction, cocycle and etale-origin descent; returned steps 7-10. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-finite-exceptional",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-coef-levelwise-normalized-strict-systems",
+  "def-coef-system-site-transport-interfaces",
+  "def-coef-constant-scalar-restriction",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Put $C_W=\\nu_{W,\\bullet}^*$ and $U_W=R\\nu_{W,*,\\bullet}$. The ordinary semilinear-system calculus supplies $C_W\\dashv U_W$ on the unbounded categories, its actual unit $u$, counit $v$, scalar comparisons and evaluations. At level $n$ the comparison inverse image is fully faithful on the entire unbounded derived category: $k$ is algebraically closed, $W$ is finite type, and $A_n$ is finite and killed by a power of the invertible prime $\\ell$. For an adjunction with fully faithful left functor, its unit is invertible: the adjunction bijection and the fully faithful Hom bijection identify postcomposition with that unit with a bijection for every test object, and applying this to its source and target gives an inverse. Its counit is invertible on the left functor's essential image by the triangle identities. Thus every $e_nu$ is invertible. If all $K_n$ have etale origin, every $e_nv_K$ is invertible too. Joint conservativity of derived evaluations proves that these actual SYSTEM maps $u$ and $v_K$ are isomorphisms. In particular $C_W$ reflects isomorphisms: evaluate and use full faithfulness at each level.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sfb-unbounded-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
+    "place": "Conclusion: unbounded unit and full faithfulness; agent application to actual system maps"
+   }
+  },
+  {
+   "text": "The calculus identifies $C_W(t^M_{m,n})$ with $t^{C_WM}_{m,n}$ under $C_{W,n}T^{\\mathrm{et}}_{m,n}\\cong T^{\\mathrm{proet}}_{m,n}C_{W,m}$. Hence $C_W$ preserves normalization. It preserves bounded constructible finite-Tor levels by site comparison. Conversely take $K\\in\\mathscr N_W^{\\mathrm{proet}}$. Each $K_n$ has etale origin by bounded constructible comparison, so Step 1 gives $v_K:C_WU_WK\\cong K$. Naturality of the actual reduction map with respect to this system morphism gives, under the same scalar comparison,\n$$v_{K,n}\\,C_{W,n}(t^{U_WK}_{m,n})=t^K_{m,n}\\,T^{\\mathrm{proet}}_{m,n}(v_{K,m}).$$\nThe other three arrows are invertible, so full faithfulness of $C_{W,n}$ implies that $t^{U_WK}_{m,n}$ is invertible. The unbounded finite-Tor reflection theorem applies to $(U_WK)_n$, whose pullback is $K_n$, and gives its bounded constructibility and finite Tor interval. No preliminary lower bound on $(U_WK)_n$ is assumed. We have proved both restrictions and the equivalence $C_W:\\mathscr N_W^{\\mathrm{et}}\\simeq\\mathscr N_W^{\\mathrm{proet}}$ using the actual $u,v$.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sp-unbounded-finite-tor-comparison-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
+    "place": "Conclusion, combined with constructible comparison (Stacks 09AK); explicit normalization square"
+   }
+  },
+  {
+   "text": "Write $P=Rp_{\\mathrm{proet},*,\\bullet}j_{!,\\bullet}^{\\mathrm{proet}}$. On systems first form the open comparison $C_{\\overline X}j_!^{\\mathrm{et}}\\cong j_!^{\\mathrm{proet}}C_X$, then the direct-image mate $C_YRp_{\\mathrm{et},*,\\bullet}\\to Rp_{\\mathrm{proet},*,\\bullet}C_{\\overline X}$. Their composite is an actual transformation $\\beta:C_YF\\to PC_X$. The semilinear-system calculus constructs these mate words and identifies their evaluations with the ordinary level words. Open comparison is the degreewise comparison with its actual open unit and evaluation counit; it is invertible on unbounded complexes. The other evaluated arrow is the canonical unbounded direct-image mate, invertible because $p$ is finite type between finite-type $k$-schemes. Thus every $e_n\\beta$ is invertible, and conservative evaluation makes $\\beta$ invertible. This establishes the named geometric comparison, rather than choosing an arbitrary isomorphism with the same endpoints.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sp-unbounded-open-counit-site-transport",
+    "lem-sfb-unbounded-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-direct-image.proof.md",
+    "place": "Canonical counit mate and conclusion; open factor: Stacks 09AF, lemma-jshriek-comparison"
+   }
+  },
+  {
+   "text": "Fix a level $n$, allowing its input intervals to depend on $n$. Open extension preserves bounded constructibility and its finite Tor interval; proper direct image preserves bounded constructibility and changes a Tor interval $[a_n,b_n]$ to $[a_n,b_n+2d]$, where choose $d\\ge0$ with $\\dim\\overline X\\le d$ by finite-type dimension finiteness (use $d=0$ for the empty scheme). Apply these results on pro-etale sites. For an etale input in $\\mathscr N_X^{\\mathrm{et}}$, Step 3 identifies the resulting finite composite with $\\nu_Y^*F_nM_n$; unbounded reflection gives bounded constructibility and finite Tor amplitude for $F_nM_n$. For $G_nN_n$, the definition of the finite exceptional functor identifies $\\nu_X^*G_nN_n$ with $Rf^!_{A_n}(\\nu_Y^*N_n)$, using the comparison unit. Finite exceptional preservation gives bounded constructibility and a finite Tor interval on this pro-etale value; unbounded reflection again gives them on $G_nN_n$. All schemes and the fixed compactification are in the finite-field setting and separated finite type as required. This proves level preservation for both functors, independently of normalization.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-kun-dimension-finite-type",
+    "lem-sp-unbounded-finite-tor-comparison-reflection",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "First sentence: finite exceptional preservation; compact-support preservation and site reflection expanded"
+   }
+  },
+  {
+   "text": "On finite-Tor constructible inputs, compact-support coefficient comparison $q$ is invertible and respects successive reductions. Its etale and pro-etale versions correspond: expand it as open scalar comparison followed by the proper counit-defined projection map. Pullback commutes with derived scalar extension in the system calculus; open site comparison preserves the open unit and counit. Mate pasting then identifies the two proper scalar/site words, since both are the mate of the same inverse-image/tensor square. Here the pro-etale finite adjunction $F_n=Rf_{!,n}\\dashv G_n=Rf_n^!$ whose units and counits occur in the finite exceptional theorem is, by the definition of $Rf_n^!=\\nu_X^*f^\\times R\\nu_{Y,*}$, the bounded-below etale-origin adjunction obtained by transporting the ordinary etale adjunction $Rp_*j_!\\dashv f^\\times$ along the compact-support site comparison and the full faithfulness of $\\nu^*$ [def-weil-exceptional-inverse-image, thm-sf-ambient-adjoint-class]; the level comparison of Step 3 is that compact-support comparison. The same pasting for $F_n\\dashv G_n$, using their assumed counit-compatible evaluated identifications, therefore carries the etale counit mate $b$ to the finite exceptional mate. The finite exceptional theorem states that this mate is invertible and gives its two unit/counit equations and quotient cocycle. Fully faithful level comparison reflects these equalities and isomorphisms. In particular\n$$\\epsilon_nF_n(b_{m,n})q_{m,n,G_m}=T^Y_{m,n}(\\epsilon_m).$$\nThis equation uniquely characterizes $b$ by the finite adjunction bijection, so it identifies the specified mate, not just an isomorphism between its source and target. Its identity-index and cocycle equations are precisely those of the finite theorem. We use mate pasting for equalities of specified words, not detection of equality of unrelated system maps.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change",
+    "lem-coef-finite-exceptional",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sp-unbounded-open-counit-site-transport",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Last paragraph: coefficient comparisons preserve evaluation, units and counits; explicit mate identification"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathscr N_X^{\\mathrm{et}}$ the assumed formula $t^{FM}_{m,n}=F_n(t^M_{m,n})q_{m,n,M_m}$ is a composite of isomorphisms by Step 5. For $N\\in\\mathscr N_Y^{\\mathrm{et}}$ the same argument applies to $t^{GN}_{m,n}=G_n(t^N_{m,n})b_{m,n,N_m}$. Together with Step 4 this proves both functors preserve the full subcategories. Their transition compatibility is that of their actual system maps from the hypothesis; the identified finite $b$ has the identity-index and quotient cocycle just proved. Restrict the ambient Hom bijections of $F\\dashv G$ to these full subcategories. The unit and counit are the same ambient maps and their two triangle equations remain equations in the full subcategories. This restriction requires no common bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite normalization and restriction of the assumed actual adjunction"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathscr N_X^{\\mathrm{proet}}$, Step 2 gives $C_XU_XM\\cong M$. Thus $PM\\cong PC_XU_XM\\cong C_YFU_XM$, so $P$ preserves the pro-etale subcategories. Put $H=C_XGU_Y$. All factors now preserve their stated domains. On actual system Hom sets use the natural composite\n$$\\operatorname{Hom}_Y(PM,N)\\cong\\operatorname{Hom}_Y(C_YFU_XM,N)\\cong\\operatorname{Hom}_Y(FU_XM,U_YN)\\cong\\operatorname{Hom}_X(U_XM,GU_YN)\\cong\\operatorname{Hom}_X(M,HN).$$\nThe first isomorphism uses $\\beta$ and $v_{X,M}$; the second and last use the equivalences of Step 2, and the middle is the restricted ambient adjunction. These bijections and their inverses define $P\\dashv H$. Define its unit by the image of $1_{PM}$ and counit by the inverse image of $1_{HN}$. Naturality gives the formulas $h\\mapsto H(h)\\eta_M$ and $g\\mapsto\\epsilon_NP(g)$; applying the inverse equations to identities proves the triangles. Consequently these are transported actual system maps, with triangle identities in the system category itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Transport of the actual adjunction by the constructed equivalences; explicit Hom bijections"
+   }
+  },
+  {
+   "text": "Evaluation preserves the units and counits of the site system adjunction and of the assumed etale exceptional adjunction. It also preserves the specified proper/open mate $\\beta$. Therefore evaluating the composite Hom construction in Step 7 gives the ordinary finite adjunction with right functor $\\nu_X^*G_nR\\nu_{Y,*}=Rf^!_{A_n}$ and left functor $Rf_{!,A_n}$. Here evaluation is applied to the constructed unit/counit/mate words; no faithfulness on arbitrary system Hom sets is claimed. The scalar comparisons of $C_W,U_W$ are the specified adjunction mates in the system calculus, so mate pasting carries the assumed transition words to\n$$t^{PM}_{m,n}=F_n(t^M_{m,n})q_{m,n,M_m},\\qquad t^{HN}_{m,n}=G_n(t^N_{m,n})b_{m,n,N_m},$$\nwith finite pro-etale notation on the right. Step 5 identifies their coefficient maps and their identity/cocycle and adjunction equations with the canonical finite ones. Functorial transport preserves the actual triangle equations from Step 6. Every bound used above was attached to one level only; no limit of finite Hom bijections or exceptional right adjoint on all pro-etale systems was introduced.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-finite-exceptional",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Final paragraph: finite units and counuits before tower reconstruction; system mate transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sp-unbounded-finite-tor-comparison-reflection",
+  "lem-sp-unbounded-open-counit-site-transport",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-kun-dimension-finite-type",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-preservation-class",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-coef-finite-exceptional",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-mate",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite normalization and counit-mate argument, expanded to ordinary systems using the latest unbounded comparison proofs; original allocation: NF returned steps 7-10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale system compact support adjunction descends to normalized proetale systems with bounded constructible finite Tor levels without a uniform bound",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "Condensed.profiniteSolidCounit",
+      "module": "Mathlib/Condensed/Solid",
+      "type": "(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R",
+      "doc": "The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,"
+     },
+     {
+      "name": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C",
+      "doc": "Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.smallEtaleTopology",
+      "module": "Mathlib/AlgebraicGeometry/Sites/Etale",
+      "type": "(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale",
+      "doc": "For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com",
+      "doc": "Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ "
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.etaleTopology",
+      "module": "Mathlib/AlgebraicGeometry/Sites/Etale",
+      "type": "CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme",
+      "doc": "The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.smallEtalePretopology",
+      "module": "Mathlib/AlgebraicGeometry/Sites/Etale",
+      "type": "(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale",
+      "doc": "The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert"
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale",
+      "doc": "The composition of two étale morphisms of schemes is also an étale morphism."
+     },
+     {
+      "name": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U",
+      "doc": "Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: generic equivalence adjunctions and definitions of etale/proetale sites do not prove levelwise finite-Tor preservation or descent of an ordinary strict-system adjunction without a common bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfer an unbounded etale coefficient system adjunction along proetale comparison on systems with etale origin at every level and preserve cartesian transitions",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.IsEtale.of_comp",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f",
+      "doc": "If the composition of a morphism $ f: X \to Y $ with a morphism $ g: Y \to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism."
+     },
+     {
+      "name": "Algebra.Etale.comp",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\n  [Algebra.Etale A B], Algebra.Etale R B",
+      "doc": "Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \to A $ and $ A \to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \to A \to B $, then the composite algebra $ R \to "
+     },
+     {
+      "name": "StandardEtalePair.homEquiv",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "{R : Type u_1} →\n  {S : Type u_2} →\n    [inst : CommRing R] →\n      [inst_1 : CommRing S] →\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }",
+      "doc": "For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\n$$ \\operatorname{Hom}_{R\\text{-alg}}(P.\\text{Ring}, S) \\cong \\"
+     },
+     {
+      "name": "Algebra.FormallyEtale.comp",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B",
+      "doc": "If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $."
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)",
+      "doc": "For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper"
+     },
+     {
+      "name": "StandardEtalePair.HasMap.map",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)",
+      "doc": "For any $ R $-algebra homomorphism $ \\phi: S \\to T $, if $ x \\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\phi(x) $ satisfies $ f(\\phi(x)) = 0 $ and $ g(\\phi(x)) $ is a unit "
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.Etale.forget",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)",
+      "doc": "The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét"
+     },
+     {
+      "name": "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation",
+      "doc": "For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: generic equivalence adjunctions and definitions of etale/proetale sites do not prove levelwise finite-Tor preservation or descent of an ordinary strict-system adjunction without a common bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale system compact support adjunction descends to normalized proetale systems with bounded constructible finite Tor levels without a uniform bound",
+   "results": {
+    "summary": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "hits": []
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Adjunction",
+   "results": {
+    "summary": "[loogle] OK 6 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.Equivalence.toAdjunction",
+      "module": "Mathlib.CategoryTheory.Adjunction.Basic",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.functor ⊣ e.inverse",
+      "doc": "The adjunction given by an equivalence of categories. (To obtain the opposite adjunction,\nsimply use `e.symm.toAdjunction`.)"
+     },
+     {
+      "name": "CategoryTheory.Equivalence.toAdjunction'",
+      "module": "Mathlib.CategoryTheory.Adjunction.Basic",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.inverse ⊣ e.functor",
+      "doc": "`toAdjunction'` is the dual of `ToAdjunction`, which we need for `to_dual`.\nPlease avoid using this directly."
+     },
+     {
+      "name": "CategoryTheory.Equivalence.trans_toAdjunction",
+      "module": "Mathlib.CategoryTheory.Adjunction.Basic",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] (e' : D ≌ E) : (e.trans e').toAdjunction = e.toAdjunction.comp e'.toAdjunction",
+      "doc": ""
+     },
+     {
+      "name": "CategoryTheory.Adjunction.toEquivalence",
+      "module": "Mathlib.CategoryTheory.Adjunction.Basic",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : C ≌ D",
+      "doc": "If the unit and counit of a given adjunction are (pointwise) isomorphisms, then we can upgrade the\nadjunction to an equivalence."
+     },
+     {
+      "name": "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+      "module": "Mathlib.CategoryTheory.Sites.Equivalence",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i",
+      "doc": "Transporting and sheafifying is left adjoint to taking the underlying presheaf."
+     },
+     {
+      "name": "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+      "module": "Mathlib.CategoryTheory.Endofunctor.Algebra",
+      "type": " {C : Type u} [CategoryTheory.Category.{v, u} C] {F G : CategoryTheory.Functor C C} (adj : F ⊣ G) : CategoryTheory.Endofunctor.Algebra F ≌ CategoryTheory.Endofunctor.Coalgebra G",
+      "doc": "If `F` is left adjoint to `G`, then the category of algebras over `F` is equivalent to the\ncategory of coalgebras over `G`."
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: generic equivalence adjunctions and definitions of etale/proetale sites do not prove levelwise finite-Tor preservation or descent of an ordinary strict-system adjunction without a common bound."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*system|etale.*adjoint|proetale",
+   "results": {
+    "summary": "[grep] OK 10 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+      "line": "11",
+      "text": "public import Mathlib.AlgebraicGeometry.Sites.Proetale"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+      "line": "39",
+      "text": "- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+      "line": "61",
+      "text": "[Definition 6.8.1.][proetale2015]"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+      "line": "65",
+      "text": "  ((ProEt.forget X ⋙ Over.forget _).sheafPushforwardContinuous _ _ proetaleTopology).obj"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+      "line": "66",
+      "text": "    ⟨continuousMapPresheafAb (ℤ_[ℓ]), .of_le proetaleTopology_le_fpqcTopology <|"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "line": "34",
+      "text": "- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "line": "50",
+      "text": "[Definition 4.1.1][proetale2015]"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "line": "52",
+      "text": "def proetalePrecoverage : Precoverage Scheme.{u} :="
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "line": "57",
+      "text": "lemma proetalePrecoverage_le_precoverage_weaklyEtale :"
+     },
+     {
+      "file": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "line": "58",
+      "text": "    proetalePrecoverage ≤ MorphismProperty.precoverage @WeaklyEtale :="
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: generic equivalence adjunctions and definitions of etale/proetale sites do not prove levelwise finite-Tor preservation or descent of an ordinary strict-system adjunction without a common bound."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*system|proetale.*adjunction|etale.*coefficient",
+   "results": {
+    "summary": "0 hits; ",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: generic adjunction/equivalence/derived-adjunction tools and site definitions do not state this ordinary varying-coefficient normalization and pro-etale descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": {
+    "summary": "6 hits; ",
+    "top": [
+     "CategoryTheory.Equivalence.toAdjunction",
+     "CategoryTheory.Equivalence.toAdjunction'",
+     "CategoryTheory.Equivalence.trans_toAdjunction",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv"
+    ],
+    "digest": "e0228ac4463035e1"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: generic adjunction/equivalence/derived-adjunction tools and site definitions do not state this ordinary varying-coefficient normalization and pro-etale descent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of an adjunction on ordinary derived coefficient systems along etale proetale comparison with bounded constructible finite Tor levels",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.derived_counit",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Adjunction.derivedε",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "digest": "5b828abe54455cc4"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: generic adjunction/equivalence/derived-adjunction tools and site definitions do not state this ordinary varying-coefficient normalization and pro-etale descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale compact support adjunction on strict quotient coefficient systems restricts to normalized levelwise bounded constructible finite Tor systems and transports to the proetale site without a uniform cohomological bound",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "Condensed.lanSheafProfinite",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.profiniteSolidification",
+     "LightCondMod.ofSheafLightProfinite",
+     "LightCondAb.ofSheafLightProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology"
+    ],
+    "digest": "609b574852decf7f"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: generic adjunction/equivalence/derived-adjunction tools and site definitions do not state this ordinary varying-coefficient normalization and pro-etale descent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along etale proetale site comparison induces an equivalence of normalized derived quotient ring towers and transports the compact support exceptional adjunction",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "StandardEtalePair.homEquiv_symm_apply",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+     "Condensed.profiniteSolidCounit",
+     "StandardEtalePair.homEquiv",
+     "StandardEtalePair.homEquiv_apply_coe",
+     "Algebra.Etale.comp"
+    ],
+    "digest": "02e7a3c0e38f8478"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: generic adjunction/equivalence/derived-adjunction tools and site definitions do not state this ordinary varying-coefficient normalization and pro-etale descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "toEquivalence|toAdjunction|noncomputable def derived",
+   "results": {
+    "summary": "25 hits; ",
+    "top": [
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Generator/Basic.lean",
+     "Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean",
+     "Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Pullback.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Pullback.lean",
+     "Mathlib/CategoryTheory/Localization/Pi.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean"
+    ],
+    "digest": "07200e5174532c70"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: generic adjunction/equivalence/derived-adjunction tools and site definitions do not state this ordinary varying-coefficient normalization and pro-etale descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "First proof paragraph, normalization, and final paragraph, system adjunction: levelwise finite-Tor restriction, cocycle and etale-origin descent; returned steps 7-10.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-coef-levelwise-normalized-adjoint-descent",
+  "worker": "stage1",
+  "summary": "No statement change or new nodes. Explicit unbounded site-system unit/counit descent and normalization square; named geometric comparison, levelwise finite-Tor preservation, counit-mate identification, restriction and transport of the actual system adjunction. Bounds are chosen separately at each finite level.",
+  "blueprint": "Nearest imported ancestor prop-coef-integral-exceptional-adjoint: normalization and actual system adjunction before inverse limit, retained as NF returned steps 7-10. The historical ancestor file is absent from latest; latest lem-coef-finite-exceptional.proof.md last paragraph supplies finite normalization, and latest unbounded-classical unit/direct-image proofs supply site descent. No change of unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-unbounded-site-comparison",
+    "why": "Unbounded finite-coefficient full faithfulness, needed for systems without a common lower bound; the bounded-below comparison in this unit alone cannot supply it."
+   },
+   {
+    "node": "lem-sfb-unbounded-direct-image-comparison",
+    "why": "Invertibility of the actual proper direct-image site mate, evaluated levelwise on ordinary systems."
+   },
+   {
+    "node": "lem-sp-unbounded-finite-tor-comparison-reflection",
+    "why": "Reflect bounded constructibility and finite Tor intervals from the pullback of an arbitrary unbounded etale level before any lower bound has been established."
+   },
+   {
+    "node": "lem-sp-unbounded-open-counit-site-transport",
+    "why": "The exact open site comparison preserves the actual open adjunction maps; needed to identify the named geometric and coefficient mates."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Finite-coefficient open extension preservation, used as a generic finite-Tor tool in the compactification, not as a new exceptional route."
+   },
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Finite-coefficient proper direct-image preservation with finite dimension bound, used at each compactification level."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Finite compact-support coefficient comparison q (invertible on finite-Tor constructible inputs, compatible with successive reductions and counits); generic finite-coefficient tool, the same one lem-coef-finite-exceptional uses (reviewer-added record)."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the finite-type compactification, needed for the Tor bound of proper direct image; generic tool (reviewer-added record)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-sp-unbounded-finite-tor-comparison-reflection",
+  "lem-sp-unbounded-open-counit-site-transport",
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-2d7b50f0f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-2d7b50f0f (reviewer sub-agent of L); spot-checked: S1 split with 8 steps and no new nodes. The statement and stmt_deps are identical to live (unsplit there); no repair note, no competing split. Read the main-20261015 prop-coef-integral-exceptional-adjoint.proof.md and the full lem-coef-finite-exceptional proof (F_r⊣G_r comes from thm-sf-ambient-adjoint-class; steps 13-14 give b = mate of q^{-1} and its unit/counit equations). Steps checked: (1) the semilinear calculus evaluates units and counits; unbounded ν^* full faithfulness holds (k=F̄_q, A_n finite ℓ-torsion, X̄ finite type); the fully-faithful-left-adjoint ⇒ invertible-unit argument is written out; conservativity applies only to constructed maps. (2) The normalization square plus full faithfulness reflects t^{UK}; the unbounded reflection node applies (qcqs, no prior bound on C), and constructible-origin (ii) gives étale origin. (3) β = open comparison e followed by the canonical direct-image mate α; both are invertible on unbounded inputs. (4) Level preservation: lem-trf-open-ctf, cor-sf-direct-image-ctf-proetale with dim X̄≤d, def Rf^!=ν^*f^×Rν_* plus the unit, and thm-sf-preservation-class with Y separated. (5) b is characterized by its transpose ε F(b) q = Q(ε). (6-7) Elementary restriction and Hom-chain transport, which I verified. (8) Evaluation gives Rf_{!,n} and Rf_n^!. FIX: step 5 used, without citing it, that the finite theorem's pro-étale adjunction is the transported étale one. I added [def-weil-exceptional-inverse-image, thm-sf-ambient-adjoint-class] to the step and thm-sf-ambient-adjoint-class to proof_deps; it is already in the closure of lem-coef-finite-exceptional, on the route, and creates no cycle. I also recorded the off-route tools lem-fix-compact-support-coefficient-change and lem-kun-dimension-finite-type in tool_uses. Batch 5: lem-sfb-unbounded-site-comparison and lem-sfb-unbounded-direct-image-comparison reach only def-trf-schematically-dense-open, a general definition reached through Nagata and the cohomological-dimension chain. Both are generic site comparisons, not steps of the trace formula or Poincaré duality, so they are accepted. No cycle, no duplicate, no SGA citation. Small cases checked: m=n, empty X/Y, f=id.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LevelwiseNormalizedAdjointDescent",
+  "declaration": "WeilConjectures.LevelwiseNormalizedAdjointDescent.levelwise_normalized_adjoint_descent",
+  "declarations": [
+   "WeilConjectures.LevelwiseNormalizedAdjointDescent.SiteEquivalence",
+   "WeilConjectures.LevelwiseNormalizedAdjointDescent.transportedRight",
+   "WeilConjectures.LevelwiseNormalizedAdjointDescent.rightEtaleEvaluation",
+   "WeilConjectures.LevelwiseNormalizedAdjointDescent.rightEvaluation",
+   "WeilConjectures.LevelwiseNormalizedAdjointDescent.Descent",
+   "WeilConjectures.LevelwiseNormalizedAdjointDescent.levelwise_normalized_adjoint_descent"
+  ],
+  "file": "lean/Sheaf/Paper/LevelwiseNormalizedAdjointDescent.lean",
+  "statement": "theorem levelwise_normalized_adjoint_descent (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) c) (A : EvaluatedAdjunction S) (_htrans : TransitionFormulas A) : ∃ (CX : ExceptionalSystemSiteComparison _ _ X S.PX) (CY : ExceptionalSystemSiteComparison _ _ Y S.PY) (CZ : ExceptionalSystemSiteComparison _ _ c.Z S.PZ) (P : ExceptionalProCompactSupport _ _ c CX.proEvaluation CY.proEvaluation CZ.proEvaluation) (R : ExceptionalSystemCompactificationComparison S CX CY CZ P), Nonempty (Descent A CX CY CZ P R)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cd8362fc",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Lean byte-identical to 279455 (maths re-read clause by clause: hypotheses, pinned q/quotientOpen/evaluation, TransitionFormulas incl. counit characterization of b, levelwise-only bounds, SiteEquivalence, canonical comparison, ExceptionalOriginAdjunction transpose, finite Rf^! formula, edge cases m=n/empty/n+1/universes; correct). H2 repair verified: def-coef-system-site-transport-interfaces lists 37 live declarations of ExceptionalSystemTransport (script-checked, statement verbatim) and def-coef-constant-scalar-restriction matches ring/Modules/Fixed/restriction. FIX (§1(B)/H12): etaleLevel/proLevel use restriction.mapDerivedCategory, whose Additive/PreservesFinite(Co)Limits instances come only from the instance-theorems additive/isEquivalence of lem-sfb-constant-scalar-restriction-tensor; restored it to def-coef-levelwise-normalized-strict-systems stmt_deps with a statement clause (fixes/def-coef-levelwise-normalized-strict-systems.json). Advisories: lem-pur-coefficient-system-derived-comparison stmt_dep accepted as constructed data; Q74 84770 FIX (unlanded) creates def-sf-exceptional-system-interfaces owning the same defs; second lander must rebind."
+ }
+}

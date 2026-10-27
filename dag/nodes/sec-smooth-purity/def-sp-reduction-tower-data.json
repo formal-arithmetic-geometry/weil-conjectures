@@ -1,0 +1,122 @@
+{
+ "id": "def-sp-reduction-tower-data",
+ "kind": "definition",
+ "title": "The fixed integral reduction-tower data and predicates",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, and a scheme T, with the coefficients and ordinary module-sheaf derived categories of [sk-def-sp-coefficient-towers], [def-weil-sheaf-of-modules-category], and [def-weil-abstract-derived-category]. Reconstruct the section ring of the pulled-back condensed integer sheaf by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and its exact section/internal derived equivalence. Keep the unique projection-normalized abelian completed-ring comparison of [det-prop-sfb-qlbar-colimit-x-integral-limit] and its ell-power projections. For a tower presentation D of [det-sp-coefficient-towers-abelian], reduction data consists of: an isomorphism to the completed coefficient ring with precisely that abelian map; an additive ordinary strict tower functor with levelwise scalar-extension isomorphisms and quotient transitions on local pure tensors; its universal left-derived functor, comparison invertible on all K-flat complexes [def-pc-kflat-complex], and evaluation isomorphisms; invertibility of every specified reduction adjunct [sk-def-sp-normalized-towers]; and, on qcqs T, preservation of bounded constructibility, finite Tor amplitude and every Tor interval as both Tor and cohomological bounds [sk-def-sfb-constructible, det-def-sfb-constructible-tor-amplitude]. These are the original SpReductionTower and its auxiliary definitions, relocated verbatim; the definition makes no assertion of existence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+  "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sp-normalized-towers",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived reduction tower with constructible cohomology and uniform Tor amplitude",
+   "results": "HasDerivedCategory.standard; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; generic triangulated and t-structure declarations.",
+   "date": "2026-10-25",
+   "verdict": "No theorem about the chosen coefficient-tower presentation or its constructibility and Tor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars forms a normalized strict inverse system with uniform Tor amplitude",
+   "results": "localCohomology.diagram; Ext; CategoryTheory.Tor and Tor'; adic completion maps. Loogle Functor.IsLeftDerivedFunctor: unknown identifier, zero hits.",
+   "date": "2026-10-25",
+   "verdict": "No match. These generic homology constructions do not compare the fixed scalar and tower presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.?tower|reduction.?tower; SpReductionTower; spIntegralAbComparison; presentation descent and adjunct normalization",
+   "results": "msearch Mathlib grep: zero hits. Local Sheaf and WeilConjectures search finds the parent and consumers, generic strict tensor descent, successive quotient normalization, and stratified Postnikov comparison. Blueprint and DAG search finds no existing fixed-presentation comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing generic results; new statements isolate the remaining changes of presentation and strictly separate assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionTowerNormalized",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionTowerData",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionTowerData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpReductionTower",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spIntegralCondensed",
+   "AlgebraicGeometry.ProEtale.spIntegralCondensedComm",
+   "AlgebraicGeometry.ProEtale.spIntegralSectionRing",
+   "AlgebraicGeometry.ProEtale.spIntegralSectionModules",
+   "AlgebraicGeometry.ProEtale.spIntegralSectionHasDerived",
+   "AlgebraicGeometry.ProEtale.spIntegralModuleEquivalence",
+   "AlgebraicGeometry.ProEtale.spIntegralInternalization",
+   "AlgebraicGeometry.ProEtale.spIntegralAbComparison",
+   "AlgebraicGeometry.ProEtale.spIntegralEllProjection",
+   "AlgebraicGeometry.ProEtale.spIntegralReductionScalar",
+   "AlgebraicGeometry.ProEtale.spTowerLocalization",
+   "AlgebraicGeometry.ProEtale.spReductionOrdinaryLevels",
+   "AlgebraicGeometry.ProEtale.spReductionGenerator",
+   "AlgebraicGeometry.ProEtale.spStrictTransitionSection",
+   "AlgebraicGeometry.ProEtale.IsSpReductionTransition",
+   "AlgebraicGeometry.ProEtale.spReductionDerivedEvaluations",
+   "AlgebraicGeometry.ProEtale.IsSpReductionConstructible",
+   "AlgebraicGeometry.ProEtale.SpReductionTower"
+  ],
+  "statement": "structure SpReductionTower (D : SpCoefficientTowersAbelian l E T)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9af5e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T162438-L-451995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9af5e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T162438-L-451995",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityReductionTowerData vs clone's old item (byte-identical 18-decl block); item proof vs det-sp-reduction-tower-normalized; 4 new sorry statements vs their nodes and the blueprint clauses; sandbox --all compile of the 6 delivered modules + 7 direct importers (all clean); #print axioms (sorryAx only via the 4 new lemmas)"
+ }
+}

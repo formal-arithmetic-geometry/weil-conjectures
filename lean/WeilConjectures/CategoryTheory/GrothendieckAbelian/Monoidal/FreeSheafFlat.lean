@@ -69,6 +69,9 @@ Proof:
    [lem-weil-pbc-sheaf-tensor-closed] (1). The composite in step 1 therefore
    preserves finite limits; transport along its natural isomorphism proves
    the conclusion.
+
+In Lean, steps 1, 3 and 4 are `flat_presheafToSheaf_obj`; the proof below only
+carries out step 2.
 -/
 lemma free_sheaf_flat (P : A) (hP : PreservesFiniteLimits (tensorLeft P))
     (X : C) :

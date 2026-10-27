@@ -1,0 +1,127 @@
+{
+ "id": "def-sp-open-scalar-restriction-comparison",
+ "kind": "definition",
+ "title": "Canonical open-extension scalar-restriction comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A,B$ be finite commutative rings in universe $u$, let $\\varphi:A\\to B$ be a unital homomorphism, and let $j:U\\hookrightarrow Z$ be an open immersion of schemes in universe $u$ [def-weil-open-immersion]. Use the ordinary constant-ring module sheaves and uncompleted unbounded derived categories of [def-weil-pbc-proetale-modules]. Write $\\varphi_W:A_W\\to B_W$ for the canonical constant coefficient sheaf map [def-sp-proetale-constant-coefficient-ring-map], $r_W$ for scalar restriction along it [def-pc-sheaf-restrict-scalars], and $J_R=j_{!,R}$ for sheafified extension by zero [def-weil-extension-by-zero]. Define $a^0:J_A r_U\\xrightarrow{\\sim}r_Z J_B$ by transporting the fixed-scalar comparison through the canonical module realization equivalences used in $J_R$. The fixed-scalar comparison is the left-adjoint uniqueness isomorphism between scalar restriction followed by open extension and open extension followed by scalar restriction, after identifying their common right adjoint (open restriction followed by scalar coextension). The realization comparisons are the identity on sheafified underlying abelian presheaves and preserve constant scalar sections. Thus this is the canonical comparison induced by the identity of extension presheaves with the restricted scalar action, not an arbitrary isomorphism. Define $a:J_A r_U\\xrightarrow{\\sim}r_Z J_B$ on the entire unbounded derived categories by exact termwise localization of $a^0$, with the canonical localization comparisons for the two composite functors [def-weil-abstract-derived-category]. These are the published definitions sfOpenRestriction and sfOpenRestrictionDerived; no coefficient cocycle or normalization theorem conclusion is included.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-modules",
+  "def-sp-proetale-constant-coefficient-ring-map",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero) and 03CY (lemma-sheafification-presheaf-modules), scalar action on the extension presheaf; exact termwise derived localization, derived.tex Tag 015F. Definition ownership of published sfOpenRestriction and sfOpenRestrictionDerived, as requested by H2 return on 2d2128af2ba5."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison extension by zero restriction of scalars on module sheaves derived category",
+   "results": "{\"t\": \"2026-10-24T16:49:58Z\", \"tool\": \"leansearch\", \"query\": \"canonical comparison extension by zero restriction of scalars on module sheaves derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars\", \"LinearMap.restrictScalars_zero\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ContinuousLinearMap.restrictScalars_zero\"], \"digest\": \"39d1fcecb7c621bf\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the intrinsic open-extension scalar-restriction comparison; use the published project definitions sfOpenRestriction and sfOpenRestrictionDerived unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism between scalar restriction followed by extension by zero and extension by zero followed by scalar restriction",
+   "results": "{\"t\": \"2026-10-24T16:49:59Z\", \"tool\": \"leanfinder\", \"query\": \"canonical isomorphism between scalar restriction followed by extension by zero and extension by zero followed by scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"ModuleCat.homEquiv_extendScalarsId\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"27eaaf5c342fda23\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the intrinsic open-extension scalar-restriction comparison; use the published project definitions sfOpenRestriction and sfOpenRestrictionDerived unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|lowerShriek|openExtension).*(scalar|Scalar)|(scalar|Scalar).*(extensionByZero|lowerShriek|openExtension)",
+   "results": "{\"t\": \"2026-10-24T16:49:58Z\", \"tool\": \"grep\", \"query\": \"(extensionByZero|lowerShriek|openExtension).*(scalar|Scalar)|(scalar|Scalar).*(extensionByZero|lowerShriek|openExtension)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the intrinsic open-extension scalar-restriction comparison; use the published project definitions sfOpenRestriction and sfOpenRestrictionDerived unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"(extensionByZero|lowerShriek|openExtension).*(scalar|Scalar)|(scalar|Scalar).*(extensionByZero|lowerShriek|openExtension)\" lean/WeilConjectures",
+   "results": "FiniteCoefficient/Derived/ExtendScalars/CompactFrobenius.lean: lowerShriekWeilDatum_extendScalarsWeilDatum and uses; no intrinsic open scalar-restriction definition.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate intrinsic comparison in the upstream root."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"^((noncomputable )?def sfOpenRestriction|def sfOpenRestrictionDerived)\" lean/Sheaf",
+   "results": "lean/Sheaf/Paper/SfCompactSupportRestrictionOfScalars.lean:97 noncomputable def sfOpenRestriction; lean/Sheaf/AlgebraicGeometry/ProEtaleOpenScalarRestrictionCoherence.lean:49 def sfOpenRestrictionCoefficientSquare; :602 def sfOpenRestrictionDerived",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definitions found; attach their definition ownership without writing a module."
+  },
+  {
+   "tool": "grep",
+   "query": "Search definition-kind DAG lean records for sfOpenRestrictionDerived or sfOpenRestriction; tools/blueprint_refs.py search \"open scalar restriction\"",
+   "results": "No definition-kind DAG lean record owns sfOpenRestriction or sfOpenRestrictionDerived. 0 blueprint nodes match open scalar restriction. The theorem lem-sf-open-extension-scalar-restriction-coherence lists the definitions with its coherence conclusions.",
+   "date": "2026-10-24",
+   "verdict": "A separate definition node is required by H2 repair; it reuses existing declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-open-scalar-counit-square",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels paragraph: canonical scalar restriction comparison for the open factor in finite coefficient counit compatibility.",
+   "via": [
+    "lem-sp-open-scalar-counit-square",
+    "lem-sp-restriction-transition-transpose",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenScalarRestrictionCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.sfOpenRestrictionDerived",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfOpenRestriction",
+   "AlgebraicGeometry.Scheme.sfOpenRestrictionDerived"
+  ],
+  "statement": "def sfOpenRestrictionDerived {U Z : Scheme.{u}} (j : U ⟶ Z)\n    [IsOpenImmersion j] (φ : A →+* B) :\n    (proEtaleCoefficientRestrictScalars U φ).mapDerivedCategory ⋙\n        (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅\n      (sfIntrinsicExtensionByZero j B).mapDerivedCategory ⋙\n        (proEtaleCoefficientRestrictScalars Z φ).mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 definition ownership only. sfOpenRestriction is defined in Sheaf.Paper.SfCompactSupportRestrictionOfScalars and publicly imported by the recorded module; sfOpenRestrictionDerived is its exact termwise localization in the recorded module. Both definitions are reused unchanged. No conclusion of lem-sf-open-extension-scalar-restriction-coherence is used to define them or to state the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dc65d05c",
+  "group": "Q87",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dc65d05c",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at 2d2128af2ba5. The Lean module is byte-identical to the accepted one (sha 155db2cb). The theorem stmt_deps lem-sf-open-extension-scalar-restriction-coherence and lem-trf-open-square-exchange are removed; the 6 base stmt_deps are kept; statement, proof and proof_deps are unchanged. New def-sp-open-scalar-restriction-comparison (existing:true) owns sfOpenRestriction and sfOpenRestrictionDerived: its signature matches side-live verbatim, its text describes the leftAdjointUniq-transport-then-localization construction, it has no theorem content, and its deps exist; on side-live only the theorem node named these defs, so it is not a duplicate. The requested owners are cited: def-coef-scalar-restriction-identity, def-trf-finite-pullback-coordinate-comparison, def-sp-finite-intrinsic-open-square, plus def-sp-open-scalar-tensor-data and def-sp-proetale-constant-coefficient-ring-map. Maths re-confirmed: no extra hypotheses or universe restriction; the square is a NatTrans equality with correct orientations; injectivity is claimed only on Hom(J_R M, N); restriction and identity clauses match; helper defs are real; proofs are sorry only. Advisory: sfIntrinsicDerivedOpenUnit is not in its owner's declarations list (dry run passed); two proof docstrings still name the removed theorem; three transitive owners are uncited. No compile, since no file changed."
+ }
+}

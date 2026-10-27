@@ -9,6 +9,11 @@ gate(D, group, item) -> (verdict, reasons), verdict one of
           SHEAF_GATE_WIDE or more other modules use, is changed or removed, or the import of a unit-route module is
           removed. The cc review service (~/weil-review-svc, lane S3) reads it;
   AUTO    landed by ~/cc1/autoland3.py through tools/batch_land.py; the global build verifies it.
+2026-10-26 (decision of the human: "只有修改了其他文件的 stage3 的改动才需要审核"): a delivery that changes a file other
+than its own module (other_files below: another existing Lean module, upstream WeilConjectures.* or our Sheaf.*, or the
+node file of another module) is READER with the reason "changes other files: <list>", repairs included. The reader checks
+the usual semantic consistency and that the change keeps every module and node the delivery did not touch compiling;
+tools/importer_compile.py gives it the compile of the direct importers as evidence (tools/review_packet.py --stage 3).
 
 What the gate refuses, besides the static checks a-e of tools/stage3_delivery.py (paths a delivery may change,
 ownership of adapted modules, target statements, new axiom/unsafe/extern/opaque/sorryAx, a sorry only as a named
@@ -77,6 +82,33 @@ def import_cycle(D: dict, graph=None) -> list[str] | None:
     return cycles.closing_cycle(g, {m["module"]: m["text"] for m in D["modules"]})
 
 
+def node_modules(x: dict) -> set:
+    """The modules a delivered node file records (its `lean.module`, or the module of `lean.file`), before and after."""
+    out = set()
+    for n in (x.get("node"), x.get("base_node")):
+        l = (n or {}).get("lean") if isinstance((n or {}).get("lean"), dict) else {}
+        m = l.get("module")
+        f = l.get("file")
+        if not m and isinstance(f, str) and f.endswith(".lean"):
+            m = s3.module_of_path(f if f.startswith("lean/") else "lean/" + f)
+        if isinstance(m, str) and m:
+            out.add(m)
+    return out
+
+
+def other_files(D: dict, item: str) -> list[str]:
+    """The files of a stage-3 delivery other than its own (the human, 2026-10-26: such a delivery is read). Its own: the
+    item's module, the modules the delivery adds (role new) or restores from quarantine with a rework cluster (role
+    restored; nothing unchanged imports a quarantined module), node files, the change records and the report. Only an
+    existing module besides the item counts (role adapted: upstream WeilConjectures.* or our Sheaf.*); 2026-10-26 (the
+    human): "只审核改了其他已有模块的交付" -- node files of other modules and changes to the item's own interface do not."""
+    return [m["file"] for m in D["modules"] if m["role"] not in ("item", "new", "restored", "deleted")]
+
+
+# 2026-10-24 (the human: "预检做减法"): rules 3 and 4 below are ADVISORY notes now, not refusals. Rule 4 (upstream
+# statements verbatim) belonged to the sync of 10-17..10-23, replaced on 10-23 by a merge whose conflicts go to merge
+# agents and whose local changes go to the PR agent; a changed statement that DAG nodes record or 3+ modules use is
+# still read by the review service (READER below). Rule 3 measures progress, not honesty.
 def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -> tuple[str, list[str]]:
     refuse, reader = [], []
     if cycle_check:
@@ -92,6 +124,12 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         d = m["diff"]
         old = d["old"]
         hollowed = [k for k in d["new_sorry"] if k in old and not old[k]["sorry"]]
+        if hollowed and s3.restored_from_quarantine(D, m):
+            # 2026-10-25 (deliver3fix; the human: touching a quarantined module refuses only if the build fails): the
+            # quarantined copy's bodies did not compile, so `sorry` in their place hollows no proof of the library
+            D.setdefault("notes", []).append(f"ADVISORY (quarantine restore) {m['module']}: puts `sorry` into "
+                                             f"{short(hollowed)}, whose quarantined bodies the reviewer checks")
+            hollowed = []
         if hollowed:
             refuse.append(f"{m['module']}: puts `sorry` into {short(hollowed)}, proved before the delivery "
                           "(a proved declaration keeps its proof)")
@@ -131,11 +169,11 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         # the imported modules upstream with the closer (human, 2026-10-17); public import changes stay refused below
         imports = [i for i in d["public_imports_changed"] if f"import {i}" not in ok]
         if imports: bad.append("changes public imports " + short(imports))
-        if bad:
-            refuse.append(f"{m['module']}: " + "; ".join(bad) + f" ({UPNOTE})")
-    if new_sorry and not proved and after >= before:
-        refuse.append(f"adds `sorry` ({short(new_sorry)}) but proves no declaration that had one, and the sorry count of "
-                      f"the delivered modules does not fall ({before} -> {after})")
+        if bad:   # 2026-10-24: advisory (syncs merge since 10-23; our changes to upstream files go to the PR agent)
+            D.setdefault("notes", []).append(f"ADVISORY (gate rule 4) {m['module']}: " + "; ".join(bad))
+    if new_sorry and not proved and after >= before:   # 2026-10-24: advisory, progress is not honesty
+        D.setdefault("notes", []).append(f"ADVISORY (gate rule 3) adds `sorry` ({short(new_sorry)}) but proves no "
+                                         f"declaration that had one ({before} -> {after} sorries)")
     if refuse:
         return "REFUSE", refuse
     repair = s3.repair_job(group, item) is not None
@@ -166,6 +204,11 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
                           + ("; " if recorded and wide else "") + (f"used by {WIDE}+ other modules" if wide else ""))
     removed_routes = [r for r in (s3.classify(D, group, item)) if r.startswith("removes the import of unit-route")]
     reader += removed_routes
+    # 2026-10-26 (the human): a delivery that changes other files is read (semantic consistency, and that every module
+    # and node it did not touch still compiles); a repair included
+    other = other_files(D, item)
+    if other:
+        reader.append("changes other files: " + short(other, 8))
     return ("READER", reader) if reader else ("AUTO", [])
 
 

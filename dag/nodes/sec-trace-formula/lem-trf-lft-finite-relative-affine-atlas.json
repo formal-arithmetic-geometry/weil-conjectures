@@ -1,0 +1,218 @@
+{
+ "id": "lem-trf-lft-finite-relative-affine-atlas",
+ "kind": "statement",
+ "title": "Finite relative affine atlas for a locally finite type morphism",
+ "statement": "Let $S_0,U_0,V_0$ be quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], let $u_0:U_0\\to S_0$ and $v_0:V_0\\to S_0$ be morphisms, and let $g_0:U_0\\to V_0$ satisfy $v_0\\circ g_0=u_0$. Assume $g_0$ is locally of finite type [def-weil-finite-type-morphism]. Then $g_0$ is quasi-compact, and there exist nonnegative integers $m,n_1,\\ldots,n_m$, affine open subschemes $W_{j,0}\\subseteq S_0$, a finite affine open covering $V_0=\\bigcup_{j=1}^mY_{j,0}$ with $v_0(Y_{j,0})\\subseteq W_{j,0}$, and finite affine open coverings $g_0^{-1}(Y_{j,0})=\\bigcup_{k=1}^{n_j}X_{jk,0}$ by opens of $U_0$. Writing $W_{j,0}=\\operatorname{Spec}R^{(j)}_0$, $Y_{j,0}=\\operatorname{Spec}B_{j,0}$ and $X_{jk,0}=\\operatorname{Spec}C_{jk,0}$ [def-weil-affine-spectrum], the restricted structure morphisms give commutative $R^{(j)}_0$-algebras $B_{j,0},C_{jk,0}$, and $g_0|_{X_{jk,0}}:X_{jk,0}\\to Y_{j,0}$ is induced by an $R^{(j)}_0$-algebra map $\\varphi_{jk,0}:B_{j,0}\\to C_{jk,0}$ for which $C_{jk,0}$ is finitely generated over $B_{j,0}$. Empty coverings and zero coordinate rings are allowed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C4W (lemma-descend-unramified), proof, first paragraph: the finite affine chart reduction in Situation (situation-descent-property). The choice of the two finite nested coverings, their factorization over affine base opens, and finite type of each chart ring map (old proof step 1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-qcqs-morphism-permanence] (1) to $g_0:U_0\\to V_0$: $U_0$ is quasi-compact and $V_0$ is quasi-separated, so $g_0$ is quasi-compact. No finite-type hypothesis is needed for this step.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03GI (lemma-quasi-compact-permanence), applied to the structure morphism to Spec Z."
+   }
+  },
+  {
+   "text": "For every $y\\in V_0$, choose an affine neighbourhood $W_y\\subseteq S_0$ of $v_0(y)$ using [lem-weil-pbc-affine-opens-basis]. The inverse image $v_0^{-1}(W_y)$ is open and contains $y$; the same basis lemma gives an affine open $y\\in Y_y\\subseteq v_0^{-1}(W_y)$. The $Y_y$ cover $V_0$. Quasi-compactness, in [def-weil-pbc-quasi-compact-scheme], gives a finite subcover. Enumerate its members as $Y_{j,0}$, $1\\leq j\\leq m$, retaining the associated $W_{j,0}$. Thus $v_0(Y_{j,0})\\subseteq W_{j,0}$. If $V_0$ is empty take $m=0$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C4W (lemma-descend-unramified), proof, first paragraph: finite affine coverings over affine base opens in Situation (situation-descent-property). Expand the choices using Schemes Tag 01IT (lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "For each affine $Y_{j,0}=\\operatorname{Spec}B_{j,0}$, [def-weil-finite-type-morphism] and the hypotheses give an affine open covering of $g_0^{-1}(Y_{j,0})$ whose coordinate rings are finitely generated $B_{j,0}$-algebras, and step 1 says this inverse image is quasi-compact. By the finite-subcover definition [def-weil-pbc-quasi-compact-scheme], retain finitely many of these opens as $X_{jk,0}=\\operatorname{Spec}C_{jk,0}$, $1\\leq k\\leq n_j$. The retained chart maps still have finitely generated coordinate algebras. These are opens of $U_0$ because the preimage is an open subscheme. For an empty preimage take $n_j=0$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C4W (lemma-descend-unramified), proof, first paragraph: finite affine coverings over affine base opens in Situation (situation-descent-property). The local finite-type cover is the definition in Morphisms Tag 01T1 (definition-finite-type)."
+   }
+  },
+  {
+   "text": "On each chart, restrict $v_0\\circ g_0=u_0$ to obtain $X_{jk,0}\\to Y_{j,0}\\to W_{j,0}$. By [def-weil-affine-spectrum], write $W_{j,0}=\\operatorname{Spec}R^{(j)}_0$ and take the corresponding ring maps $R^{(j)}_0\\to B_{j,0}\\to C_{jk,0}$. Contravariant functoriality and uniqueness of these maps identify their composite with the ring map of $u_0|_{X_{jk,0}}$. Hence the second map $\\varphi_{jk,0}$ is an $R^{(j)}_0$-algebra map. It has the finite-generation property from step 3. Finite sets can be enumerated by their cardinalities; all constructions allow empty families and the zero ring.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C4W (lemma-descend-unramified), proof, first paragraph: finite affine coverings over affine base opens in Situation (situation-descent-property). Coordinate interpretation by affine spectrum functoriality (Schemes Tag 01I1, lemma-morphism-into-affine)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C4W (lemma-descend-unramified), proof, first paragraph: finite affine coverings over affine base opens in Situation (situation-descent-property). Details of the choices expanded by Schemes Tags 01IT and 03GI and the definition of locally finite type."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*affine.*cover|affine.*cover.*finite|finite.*(openCover|affineCover)",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"grep\", \"query\": \"finite.*affine.*cover|affine.*cover.*finite|finite.*(openCover|affineCover)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"08532c126f506f46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits provide finite subcovers and the affine-pair finite-type criterion separately; none constructs the nested source/target/base atlas and its compatible ring maps in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine charts for a morphism locally of finite type over a scheme with affine charts on the base",
+   "results": "{\"t\": \"2026-10-22T06:09:51Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine charts for a morphism locally of finite type over a scheme with affine charts on the base\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Cover",
+   "results": "{\"t\": \"2026-10-22T06:09:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits provide finite subcovers and the affine-pair finite-type criterion separately; none constructs the nested source/target/base atlas and its compatible ring maps in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism between quasi compact quasi separated schemes over a base has finite affine source and target covers mapping into affine base opens with finite type coordinate ring maps",
+   "results": "{\"t\": \"2026-10-22T06:10:03Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism between quasi compact quasi separated schemes over a base has finite affine source and target covers mapping into affine base opens with finite type coordinate ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\"], \"digest\": \"3f8a3c5b3430a4c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits provide finite subcovers and the affine-pair finite-type criterion separately; none constructs the nested source/target/base atlas and its compatible ring maps in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.OpenCover.finiteSubcover",
+   "results": "{\"t\": \"2026-10-22T06:11:00Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\"], \"digest\": \"a6e7b797552edf58\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits provide finite subcovers and the affine-pair finite-type criterion separately; none constructs the nested source/target/base atlas and its compatible ring maps in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For U and V quasi compact and V quasi separated a locally finite type S morphism U to V admits finite affine covers X_jk of inverse images of affine opens Y_j of V each lying over an affine W_j of S with finite type ring homomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"For U and V quasi compact and V quasi separated a locally finite type S morphism U to V admits finite affine covers X_jk of inverse images of affine opens Y_j of V each lying over an affine W_j of S with finite type ring homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\"], \"digest\": \"a0a5a099d7cbcab7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits provide finite subcovers and the affine-pair finite-type criterion separately; none constructs the nested source/target/base atlas and its compatible ring maps in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSubcover|finiteType_appLE|quasiCompact_of_compactSpace",
+   "results": "{\"t\": \"2026-10-23T09:57:16Z\", \"tool\": \"grep\", \"query\": \"finiteSubcover|finiteType_appLE|quasiCompact_of_compactSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"cc16a52dbe5b9687\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read the hits. Finite-type affine-pair criteria and affine refinements/subcovers are separate ingredients; none gives this complete nested relative atlas in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type morphism of quasi compact schemes has finite affine charts compatible with affine opens of a base scheme",
+   "results": "{\"t\": \"2026-10-23T09:57:17Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type morphism of quasi compact schemes has finite affine charts compatible with affine opens of a base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"AlgebraicGeometry.LocallyOfFiniteType.rec\"], \"digest\": \"c4aa0d1eecaee501\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read the hits. Finite-type affine-pair criteria and affine refinements/subcovers are separate ingredients; none gives this complete nested relative atlas in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.OpenCover",
+   "results": "{\"t\": \"2026-10-23T09:57:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.OpenCover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read the hits. Finite-type affine-pair criteria and affine refinements/subcovers are separate ingredients; none gives this complete nested relative atlas in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism between quasi compact quasi separated schemes over a base admits finite affine source and target covers lying over affine base opens with finite type coordinate ring maps",
+   "results": "{\"t\": \"2026-10-23T09:57:22Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism between quasi compact quasi separated schemes over a base admits finite affine source and target covers lying over affine base opens with finite type coordinate ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"902244154124c024\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read the hits. Finite-type affine-pair criteria and affine refinements/subcovers are separate ingredients; none gives this complete nested relative atlas in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open covers of the source and target of a scheme morphism can be chosen subordinate to an affine open cover of the base and compatible with the morphism",
+   "results": "{\"t\": \"2026-10-23T09:59:54Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine open covers of the source and target of a scheme morphism can be chosen subordinate to an affine open cover of the base and compatible with the morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.Scheme.AffineCover.J\"], \"digest\": \"b9c9bdc4a0659728\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read the hits. Finite-type affine-pair criteria and affine refinements/subcovers are separate ingredients; none gives this complete nested relative atlas in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unramified-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the unramified descent input used by the downstream nodal-family approximation argument. Refinement of lem-trf-unramified-limit-descent: The choice of the two finite nested coverings, their factorization over affine base opens, and finite type of each chart ring map (old proof step 1).",
+   "via": [
+    "lem-trf-unramified-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lft-finite-relative-affine-atlas",
+  "worker": "stage1",
+  "summary": "Expanded the finite nested chart choices of Stacks 0C4W using existing nodes only: qcqs permanence, the affine-open basis, quasi-compact finite subcovers, the defining locally finite-type cover, and affine spectrum functoriality. The statement is unchanged; no new nodes or Lean files.",
+  "blueprint": "Historical nearby-duality/alteration input below lem-trf-local-term-locality proof (1)--(2), via the recorded unramified-limit-descent ancestor chain. The current latest blueprint proves local-term locality by contracting correspondences; this item only expands the existing 0C4W finite-chart reduction, without altering any unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-00f2184b2",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-00f2184b2 (reviewer sub-agent of L); spot-checked: Read Stacks limits.tex situation-descent-property (l.1739) and 0C4W lemma-descend-unramified proof paragraph 1: the item states exactly its nested finite atlas (affine Y_j over affine W_j ⊂ S_0, finite affine covers of g^{-1}Y_j) for qcqs S_0, U_0, V_0. The statement is unchanged from live/side-live, where the item is still unsplit; there are 0 new nodes and the proof is about 2.4k characters. The re-split note belongs to the parent unramified-limit-descent, whose step 1 cites this item, and the item serves it. Step 1: qcqs-morphism-permanence (mathlib) clause (1), with U_0 quasi-compact and V_0 quasi-separated, gives g_0 quasi-compact. Step 2: affine-opens-basis (mathlib) is used twice, then the finite subcover from def-weil-pbc-quasi-compact-scheme; no affine-intersection assumption (E1 avoided). Step 3: def-weil-finite-type-morphism quantifies over every affine open V of the target, so it gives finitely generated chart rings over B_j directly, and quasi-compactness of the preimage gives a finite subcover; elementary is justified. Step 4: def-weil-affine-spectrum uniqueness and functoriality give the R^(j)-algebra structure, since u_0(X_jk) ⊆ v_0(Y_j) ⊆ W_j. Edge cases checked: V_0, U_0, S_0 or a preimage empty, and zero rings. Tags 01I1, 01IT, 03GI, 01T1, 0C4W match tags/tags; no SGA. Cited nodes are definitions or Mathlib leaves, so there are no route issues, tool_uses or cycles. No duplicate: affine-limit-chart-diagrams takes the atlas as input; lft-affine-pairs and qcqs-finite-affine-open-cover are smaller ingredients. Advisory only: qcqs schemes are cited via scheme-conventions rather than def-weil-pbc-quasi-compact-scheme; this is the DAG-wide convention and was inherited unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LftFiniteRelativeAffineAtlas",
+  "declaration": "AlgebraicGeometry.exists_finite_relative_affine_atlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/LftFiniteRelativeAffineAtlas.lean",
+  "statement": "theorem exists_finite_relative_affine_atlas (S U V : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace U] [QuasiSeparatedSpace U] [CompactSpace V] [QuasiSeparatedSpace V] (s : U ⟶ S) (v : V ⟶ S) (g : U ⟶ V) (hcomp : g ≫ v = s) [LocallyOfFiniteType g] : QuasiCompact g ∧ ∃ (m : ℕ) (n : Fin m → ℕ) (W : Fin m → S.Opens) (Y : Fin m → V.Opens) (X : (j : Fin m) → Fin (n j) → U.Opens), (∀ j, IsAffineOpen (W j)) ∧ ∃ (hY : ∀ j, IsAffineOpen (Y j)) (hX : ∀ j k, IsAffineOpen (X j k)), (⨆ j, Y j) = ⊤ ∧ (∀ j, (⨆ k, X j k) = g ⁻¹ᵁ Y j) ∧ ∃ (hYW : ∀ j, Y j ≤ v ⁻¹ᵁ W j) (hXY : ∀ j k, X j k ≤ g ⁻¹ᵁ Y j) (hXW : ∀ j k, X j k ≤ s ⁻¹ᵁ W j), ∀ j k, (g.appLE (Y j) (X j k) (hXY j k)).hom.FiniteType ∧ v.appLE (W j) (Y j) (hYW j) ≫ g.appLE (Y j) (X j k) (hXY j k) = s.appLE (W j) (X j k) (hXW j k) ∧ Spec.map (g.appLE (Y j) (X j k) (hXY j k)) ≫ (hY j).fromSpec = (hX j k).fromSpec ≫ g",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f0df3c77",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, Stacks limits.tex situation-descent-property l.1739 and 0C4W proof para 1, all 4 stmt_dep records, the module and report. Hypotheses match exactly (qcqs S,U,V via CompactSpace+QuasiSeparatedSpace; g≫v=s; LocallyOfFiniteType g). Conclusion matches clause by clause: QuasiCompact g; Fin-indexed affine W/Y/X; ⨆Y=⊤ and ⨆_k X j k = g⁻¹ᵁ Y j; Y≤v⁻¹ᵁW; canonical rings Γ(S,W), Γ(V,Y), Γ(U,X); φ=g.appLE with .hom.FiniteType; R-algebra compatibility v.appLE≫g.appLE=s.appLE; Spec.map φ≫fromSpec=fromSpec≫g (Mathlib SpecMap_appLE_fromSpec, AffineScheme.lean:482). hXW follows from the triangle, so it adds no assumption. Edge cases: m=0, n j=0, empty schemes, zero rings; no extra assumptions; single universe u. Node copy differs from side-live only in the lean field; lean.statement verbatim in the file; no competing module or earlier stage-2 run. Docstrings carry the source place, blueprint id and all 4 proof steps; proof is sorry only; imports needed; no duplicate found. The Second reading by Q22 section was written by the same worker (dispatch did not allow a separate agent) but is substantive. No compile run: no file changed; worker reports clean scompile."
+ }
+}

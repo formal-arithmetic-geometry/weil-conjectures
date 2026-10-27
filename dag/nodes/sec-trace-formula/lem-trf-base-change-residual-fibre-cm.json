@@ -1,0 +1,265 @@
+{
+ "id": "lem-trf-base-change-residual-fibre-cm",
+ "kind": "statement",
+ "title": "Residual fibre identification and Cohen–Macaulay tensor ring",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-weil-finite-type-morphism] and $g:S'\\to S$ any morphism. Put $X'=X\\times_SS'$ with its projections $g':X'\\to X$, $f':X'\\to S'$ [def-pc-base-change]. Fix $r'\\in S'$, set $r=g(r')$, $k=\\kappa(r)$ and $k'=\\kappa(r')$ [def-weil-residue-field], and form the fibres $Y=X_r$, $Y'=X'_{r'}$ [def-pc-scheme-fibre]. Let $h:Y'\\to Y$ be the canonical morphism induced by the fibre square, and let $z\\in X$ satisfy $f(z)=r$, with canonical point $\\bar z\\in Y$. The residue field $\\kappa_Y(\\bar z)$ is canonically isomorphic to $\\kappa_X(z)$ over $k$, and $\\kappa_X(z)/k$ is finitely generated as a field [def-pc-field-extension]: $\\kappa_X(z)=k(a_1,\\ldots,a_n)$ for finitely many elements, with no assumption that $z$ is closed. Put $T=k'\\otimes_k\\kappa_X(z)$ [def-weil-pbc-module-tensor-product], with multiplication $(a\\otimes b)(c\\otimes d)=ac\\otimes bd$. There is a canonical isomorphism $h^{-1}(\\bar z)=Y'\\times_Y\\operatorname{Spec}\\kappa_Y(\\bar z)\\cong\\operatorname{Spec}T$ [def-weil-affine-spectrum]. For each $z'\\in X'$ over $z,r'$, this isomorphism identifies the canonical point over $z'$ in that fibre with the point of $\\operatorname{Spec}T$ whose prime is the kernel of $T\\to\\kappa_{X'}(z')$, $a\\otimes b\\mapsto\\bar a\\bar b$, using the residue-field maps of the two projections. The ring $T$ is Noetherian [def-weil-pbc-noetherian-ring] and every prime localization $T_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is a Noetherian local ring satisfying $\\operatorname{depth}(T_{\\mathfrak q})=\\dim T_{\\mathfrak q}$ [def-weil-pbc-depth; def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DC (lemma-base-change-relative-assassin), proof, second paragraph: residual fibre identification and application of Algebra Tag 045M (lemma-tensor-fields-CM); finite generation verified using finite-type affine charts."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\iota:Y\\to X$ and $\\pi:Y\\to\\operatorname{Spec}k$ be the fibre projections [def-pc-scheme-fibre], so $\\iota(\\bar z)=z$ and $f\\circ\\iota=j_r\\circ\\pi$ with $j_r:\\operatorname{Spec}k\\to S$ the canonical morphism. By [lem-sbc-scheme-fibre-stalk-quotient] (with $g=f$, $y=z$, $t=r$) the stalk map $\\iota^\\sharp_{\\bar z}:\\mathcal O_{X,z}\\to\\mathcal O_{Y,\\bar z}$ is surjective with kernel $\\mathfrak m_r\\mathcal O_{X,z}$. A surjective local homomorphism of local rings maps the maximal ideal onto the maximal ideal, so the induced residue-field map $\\varphi=\\iota^\\sharp:\\kappa_X(z)\\to\\kappa_Y(\\bar z)$ of $\\iota$ [def-weil-residue-field] is surjective; being a field homomorphism it is injective, hence an isomorphism. Residue-field maps are functorial (they are induced by the stalk maps), so $f\\circ\\iota=j_r\\circ\\pi$ gives $\\varphi\\circ f^\\sharp_z=\\pi^\\sharp_{\\bar z}$ as maps $k\\to\\kappa_Y(\\bar z)$, where $k$ is the residue field of the one point of $\\operatorname{Spec}k$ [def-weil-affine-spectrum] and the fibre is a $k$-scheme through $\\pi$. Thus $\\varphi$ is the asserted canonical $k$-isomorphism, the residue-field map of $\\iota$ itself and not an abstract isomorphism over $k$. This canonical choice matters in step 4: for $k=\\mathbf Q$, $\\kappa_X(z)=k'=\\mathbf Q(i)$, twisting $\\varphi$ by complex conjugation would exchange the two points of $\\operatorname{Spec}(\\mathbf Q(i)\\otimes_{\\mathbf Q}\\mathbf Q(i))$. Use $\\varphi$ below.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT (lemma-points-fibre-product), applied to the defining fibre square $X\\times_S\\operatorname{Spec}\\kappa(r)$; fibre stalk as quotient $\\mathcal O_{X,z}/\\mathfrak m_r\\mathcal O_{X,z}$ (Tag 0HA1, via lem-sbc-scheme-fibre-stalk-quotient)."
+   }
+  },
+  {
+   "text": "Choose an affine neighbourhood $V=\\operatorname{Spec}A$ of $r$. By [def-weil-finite-type-morphism], an affine member $U=\\operatorname{Spec}B$ of its specified cover contains $z$, with $B=A[b_1,\\ldots,b_n]$. Let $\\mathfrak q$ represent $z$. By [lem-weil-pbc-affine-open-stalk-localization] the stalk at $z$ is $B_{\\mathfrak q}$, compatibly with germs, so [lem-weil-pbc-prime-residue-field-algebra] identifies $\\kappa_X(z)$ with $\\operatorname{Frac}(B/\\mathfrak q)$. The image of $A$ in this field lies in the image of $k=\\kappa_S(r)$ by the residue-field map of $f$ [def-weil-residue-field]. Thus every element of $B/\\mathfrak q$ is a polynomial in the images $\\bar b_i$ with coefficients in $k$. Every element of its fraction field is a quotient of two such polynomials. Consequently $\\kappa_X(z)\\subseteq k(\\bar b_1,\\ldots,\\bar b_n)$, and the reverse inclusion holds because $k$ and all $\\bar b_i$ lie in $\\kappa_X(z)$. This proves finite generation as a field without requiring $\\mathfrak q$ maximal.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC (lemma-base-change-relative-assassin), second paragraph: finite-type hypothesis needed for Tag 045M; expanded using finite-type affine charts and the residue-field fraction description."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-of-base-change], $Y'=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ with its canonical projections. The universal property [def-pc-fibre-product] now identifies $Y'\\times_Y\\operatorname{Spec}\\kappa_Y(\\bar z)$ with $\\operatorname{Spec}k'\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa_Y(\\bar z)$: a map into either side is exactly a pair of maps into these two field spectra whose composites to $\\operatorname{Spec}k$ agree. The maps in both directions retain these two projections; their composites are identities by uniqueness. Apply [lem-weil-pbc-fibre-product-affine-spectra] with $R=k$, $A=k'$, $B=\\kappa_Y(\\bar z)$, then step 1. This gives $h^{-1}(\\bar z)\\cong\\operatorname{Spec}(k'\\otimes_k\\kappa_X(z))$, with projections induced by the two tensor inclusions.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC (lemma-base-change-relative-assassin), second paragraph, displayed residual fibre; affine product formula Tag 01I4 (schemes-lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "For $z'$ as in the statement, naturality [lem-weil-pbc-residue-field-point-naturality] makes its canonical residue-field point compatible with both projections $g',f'$. It therefore lifts to the fibre $Y'$, and then to $h^{-1}(\\bar z)$ by [def-pc-fibre-product], with second component $\\operatorname{Spec}(g'^\\sharp\\circ\\varphi^{-1}):\\operatorname{Spec}\\kappa_{X'}(z')\\to\\operatorname{Spec}\\kappa_Y(\\bar z)$, where $\\varphi=\\iota^\\sharp$ is the canonical isomorphism of step 1: the two composites into $Y=X\\times_S\\operatorname{Spec}k$ agree after $\\iota$ by naturality of $\\iota$ at $\\bar z$ and of $g'$ at $z'$, and after $\\pi$ because both are $\\operatorname{Spec}$ of the residue map $k\\to\\kappa_{X'}(z')$. Under step 3, the two component maps of this lift are precisely the residue-field maps $k'\\to\\kappa_{X'}(z')$ and $\\kappa_X(z)\\to\\kappa_{X'}(z')$. Hence [lem-weil-pbc-algebra-tensor-pushout-universal-property] identifies its ring map with $a\\otimes b\\mapsto\\bar a\\bar b$. The kernel is the prime attached to $z'$ by [lem-weil-pbc-fibre-product-point-residue-field], applied to the original square $X\\times_SS'$ (and exchanging the tensor factors). This is also the prime of its image in $\\operatorname{Spec}T$: the unique prime $(0)$ in the spectrum of the target field pulls back to the kernel. This proves the point compatibility for the same scheme isomorphism, not merely a bijection of underlying sets.",
+   "uses": [
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT (lemma-points-fibre-product), proof: the prime is the kernel of the canonical tensor map; Tag 05DC residual-fibre identification."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tensor-fields-cohen-macaulay] with $K=k'$ and $L=\\kappa_X(z)$. The second extension is finitely generated by step 2; the theorem requires only one extension to be finitely generated and imposes no separability condition. Its tensor multiplication is exactly the multiplication specified for $T$. It gives Noetherianity of $T$ and, for every prime $\\mathfrak q$, Noetherianity and locality of $T_{\\mathfrak q}$ and $\\operatorname{depth}(T_{\\mathfrak q})=\\dim T_{\\mathfrak q}$, as required.",
+   "uses": [
+    "lem-trf-tensor-fields-cohen-macaulay"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), applied as in Tag 05DC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-trf-tensor-fields-cohen-macaulay"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DC (lemma-base-change-relative-assassin), second paragraph; residual fibre expanded by Schemes Tag 01JT and affine formula Tag 01I4; Algebra Tag 045M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|tensor.*[Rr]esidue|[Rr]esidue.*tensor",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean; digest=8358926e6934b222.  Residue-field pushout/fibre descriptions are ingredients only; none gives the finite-generation and Cohen–Macaulay assertions for the residual fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For locally finite type schemes the residue field extension at every point is finitely generated and its tensor with any field extension is Noetherian Cohen Macaulay",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, instFiniteResidueField, AlgebraicGeometry.LocallyRingedSpace.residueField, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; digest=cd6b8b2de203d032.  Residue-field pushout/fibre descriptions are ingredients only; none gives the finite-generation and Cohen–Macaulay assertions for the residual fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, IsNoetherianRing",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c.  Residue-field pushout/fibre descriptions are ingredients only; none gives the finite-generation and Cohen–Macaulay assertions for the residual fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre at a point of a field extension base change of a locally finite type scheme is the spectrum of a Noetherian Cohen Macaulay tensor product of residue fields",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, PrimeSpectrum.preimageEquivFiber_apply_asIdeal, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; digest=c1879c338c9f2d82.  Residue-field pushout/fibre descriptions are ingredients only; none gives the finite-generation and Cohen–Macaulay assertions for the residual fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residual fibre of a scheme base change is Spec of kappa s prime tensor kappa x and its local rings have depth equal to dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, PrimeSpectrum.nontrivial_iff_mem_rangeComap, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, Ideal.comap_fiberIsoOfBijectiveResidueField_apply, Ideal.fiberIsoOfBijectiveResidueField, Ideal.comap_fiberIsoOfBijectiveResidueField_symm; digest=d431a737b1f4e4f9.  Residue-field pushout/fibre descriptions are ingredients only; none gives the finite-generation and Cohen–Macaulay assertions for the residual fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*[Ff]inite|[Ff]inite.*residueField|residueField.*FG|fg.*residueField",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; digest=49c33c576320960a. Only ingredients: fibre/tensor descriptions and finite-type stalk maps; none states the full residual-fibre and Cohen–Macaulay conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes the residue field of any point is a finitely generated field extension of the residue field of its image",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.stalkMap, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instFiniteResidueField, Algebra.QuasiFinite.instResidueField, AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue; digest=a1402a80057a9874. Only ingredients: fibre/tensor descriptions and finite-type stalk maps; none states the full residual-fibre and Cohen–Macaulay conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor product of residue fields over the residue field of the base is the residual fibre of base change and is Noetherian Cohen Macaulay",
+   "results": "8 hits: Ideal.Fiber, IsLocalRing.subsingleton_tensorProduct, Algebra.QuasiFinite.finite_fiber, Algebra.quasiFinite_iff, IsLocalRing.map_tensorProduct_mk_eq_top, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, Algebra.QuasiFinite.casesOn, Algebra.QuasiFinite.instIsArtinianRingFiber; digest=9ba89ebb8ae4d46e. Only ingredients: fibre/tensor descriptions and finite-type stalk maps; none states the full residual-fibre and Cohen–Macaulay conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, IntermediateField.FG",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Only ingredients: fibre/tensor descriptions and finite-type stalk maps; none states the full residual-fibre and Cohen–Macaulay conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre of a base changed scheme over a residue point is a spectrum of a tensor product of fields and the local ring has depth equal to dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl; digest=00eb35b3fd338ed0. Only ingredients: fibre/tensor descriptions and finite-type stalk maps; none states the full residual-fibre and Cohen–Macaulay conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|tensor.*residueField|residueField.*tensor",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; digest=5a25ddc58a3089a6. Only ingredients: fibre/tensor descriptions and finite-type stalk maps; none states the full residual-fibre and Cohen–Macaulay conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-assassin-base-change",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first and second paragraphs: ascend the generic associated point and descend the special associated point, retaining the generic-residue-fibre condition. In the inherited 05DC argument: Tag 05DC (lemma-base-change-relative-assassin), proof, second paragraph: residual fibre identification and application of Algebra Tag 045M (lemma-tensor-fields-CM); finite generation verified using finite-type affine charts.",
+   "via": [
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-base-change-residual-fibre-cm",
+  "worker": "stage1",
+  "summary": "Expanded the residual-fibre comparison, proved residue-field finite generation on finite-type affine charts without assuming the point closed, and applied the existing general tensor-fields CM theorem. No new nodes or statement changes. Every cited statement was read, and each use is quoted in citations.json. Reviewer FIX (Q71 maintainer read, 2026-10-23): step 1 now takes the canonical residue-field isomorphism of the fibre projection from lem-sbc-scheme-fibre-stalk-quotient instead of the merely existential arrow isomorphism of lem-zl-fibre-residue-arrow, which step 4's point compatibility needs; step 4 names the lift's second component.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first and second paragraphs: ascend the generic associated point and descend the special associated point, retaining the generic-residue-fibre condition. In the inherited 05DC argument: Tag 05DC (lemma-base-change-relative-assassin), proof, second paragraph: residual fibre identification and application of Algebra Tag 045M (lemma-tensor-fields-CM); finite generation verified using finite-type affine charts.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic Lean-closed fibre-stalk quotient (Tag 0HA1): gives that the fibre projection induces the canonical residue-field isomorphism kappa_X(z) -> kappa_Y(z-bar); no node of this unit states it. Replaces lem-zl-fibre-residue-arrow, whose statement only asserts a non-canonical arrow isomorphism (Lean: Nonempty)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-2518d90ba",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-2518d90ba (reviewer sub-agent of L); spot-checked: I read the whole item: 5 steps, no new nodes, statement unchanged. Sources checked: Stacks divisors.tex lemma-base-change-relative-assassin (05DC), proof second paragraph, against algebra.tex lemma-tensor-fields-CM (045M); also 01JT and 0HA1. One citation fault (C3/C4) in step 1, now repaired. Step 1 cited lem-zl-fibre-residue-arrow, whose statement (Lean nonempty_fibreResidueArrow_iso) only says that some k-isomorphism kappa_X(z) ≅ kappa_Y(z-bar) exists. The item claims a canonical identification, and step 4 uses it to identify the point over z' with the kernel of T -> kappa(z'). With a non-canonical choice that point claim is false: for k=Q and kappa(z)=k'=Q(i), conjugation swaps the two points of Spec(Q(i) tensor_Q Q(i)). Repair: step 1 now cites lem-sbc-scheme-fibre-stalk-quotient (0HA1; its Lean file has no sorry and imports only Mathlib, so it counts as a closed tool). Surjective stalk map gives a surjective residue map iota^sharp, hence an isomorphism. It is k-linear because residue maps are functorial along f∘iota = j_r∘pi. Step 4 now names the lift's second component Spec(g'^sharp ∘ phi^{-1}) and checks the two composites into Y. proof_deps recomputed. split_report.tool_uses now declares lem-sbc-scheme-fibre-stalk-quotient; lem-zl-fibre-residue-arrow is no longer cited. Other steps check out. Step 2 (marked elementary): a finite-type affine chart B=A[b_i] with B_q giving Frac(B/q)=k(b_i), no closed-point or Noetherian assumption. Step 3: cartesian fibre square, pasting, then Spec(k' tensor_k kappa(z)) by 01I4. Step 5: the existing tensor-fields node in the same unit, hypothesis supplied by step 2. Small cases: k'=k, generic point of A^1, purely inseparable K tensor K, Q(i). No SGA. No duplicates. lem-trf-field-extension-residual-generic-components overlaps in one clause only (special case S=Spec k); it is not a duplicate. Maintainer note: lem-zl-fibre-residue-arrow's statement is non-canonical. Fixed file: fixes/dag/nodes/sec-trace-formula/lem-trf-base-change-residual-fibre-cm.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeResidualFibreCM",
+  "declaration": "AlgebraicGeometry.baseChange_residualFibre_cohenMacaulay",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeResidualFibreCM.lean",
+  "statement": "theorem baseChange_residualFibre_cohenMacaulay {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [LocallyOfFiniteType f] (r' : S') (z : X) (hz : f z = g r') [Algebra (S.residueField (g r')) (S'.residueField r')] [Algebra (S.residueField (g r')) (X.residueField z)] (hk' : algebraMap (S.residueField (g r')) (S'.residueField r') = (g.residueFieldMap r').hom) (hkz : algebraMap (S.residueField (g r')) (X.residueField z) = ((S.residueFieldCongr hz).inv ≫ f.residueFieldMap z).hom) : (⊤ : IntermediateField (S.residueField (g r')) (X.residueField z)).FG ∧ IsNoetherianRing (TensorProduct (S.residueField (g r')) (S'.residueField r') (X.residueField z)) ∧ (∀ (q : Ideal (TensorProduct (S.residueField (g r')) (S'.residueField r') (X.residueField z))) [q.IsPrime], IsNoetherianRing (Localization.AtPrime q) ∧ IsLocalRing (Localization.AtPrime q) ∧ (IsLocalRing.depth (R := Localization.AtPrime q) (Localization.AtPrime q) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime q)) ∧ ∃ (y : f.fiber (g r')) (hy : f.fiberι (g r') y = z) (e : X.residueField z ≅ (f.fiber (g r')).residueField y), e.hom = (X.residueFieldCongr hy).inv ≫ (f.fiberι (g r')).residueFieldMap y ∧ Spec.map (CommRingCat.ofHom (algebraMap (S.residueField (g r')) (X.residueField z)) ≫ e.hom) = (f.fiber (g r')).fromSpecResidueField y ≫ f.fiberToSpecResidueField (g r') ∧ ∃ h : (pullback.snd f g).fiber r' ⟶ f.fiber (g r'), h ≫ f.fiberι (g r') = (pullback.snd f g).fiberι r' ≫ pullback.fst f g ∧ h ≫ f.fiberToSpecResidueField (g r') = (pullback.snd f g).fiberToSpecResidueField r' ≫ Spec.map (g.residueFieldMap r') ∧ ∃ E : h.fiber y ≅ Spec (CommRingCat.of (TensorProduct (S.residueField (g r')) (S'.residueField r') (X.residueField z))), E.inv ≫ h.fiberToSpecResidueField y = Spec.map (e.inv ≫ CommRingCat.ofHom (Algebra.TensorProduct.includeRight (R := S.residueField (g r')) (A := S'.residueField r') (B := X.residueField z)).toRingHom) ∧ E.inv ≫ h.fiberι y ≫ (pullback.snd f g).fiberToSpecResidueField r' = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom (R := S.residueField (g r')) (A := S'.residueField r') (B := X.residueField z))) ∧ ∀ (z' : ↑(pullback f g)) (hx : pullback.fst f g z' = z) (hr : pullback.snd f g z' = r'), ∃ ψ : TensorProduct (S.residueField (g r')) (S'.residueField r') (X.residueField z) →+* (pullback f g).residueField z', (∀ (a : S'.residueField r') (b : X.residueField z), ψ (a ⊗ₜ[S.residueField (g r')] b) = (((S'.residueFieldCongr hr).inv ≫ (pullback.snd f g).residueFieldMap z').hom a) * (((X.residueFieldCongr hx).inv ≫ (pullback.fst f g).residueFieldMap z').hom b)) ∧ ∃ w : h.fiber y, (pullback.snd f g).fiberι r' (h.fiberι y w) = z' ∧ (E.hom w).asIdeal = RingHom.ker ψ",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27d2d7605",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05DC/01JT/01I4/045M clause by clause: LocallyOfFiniteType f only, g arbitrary; algebra binders pinned to canonical residue maps by hk'/hkz; e fixed as residue map of fiberι (no conjugation twist); h and E determined by prescribed projections (Y and h.fiber y are pullbacks); psi fixed on pure tensors, w unique over z', kernel clause true, E chosen before forall z'; IntermediateField.FG covers non-closed z; Noetherian/local/depth=dim clauses same form as 045M theorem. lean.statement verbatim; node unchanged except lean; no defs, only sorry, docstrings with source/blueprint/proof steps; single universe u; no duplicate found. Note: def-weil-pbc-module-tensor-product has no lean record (pre-existing, mathlib_match TensorProduct)."
+ }
+}

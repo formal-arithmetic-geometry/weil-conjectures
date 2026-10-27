@@ -24,21 +24,9 @@ public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Sheaf.Paper.ModuleRingedToposDerivedComparison
-import Sheaf.CategoryTheory.InternalSectionScalarAdjunction
-import Sheaf.Paper.FiniteSubextensionsDirected
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-import Sheaf.Paper.KFlatScalarComparisonNormalization
-import Sheaf.Paper.CoefficientHeartLisseExtensionConstructible
-import Sheaf.SixFunctors.OpenTensorNormalization
-import Sheaf.Paper.ClosedSupportedScalarComparison
-import Sheaf.CategoryTheory.ExactOpenClosedUnboundedCalculus
-import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
-import Sheaf.Paper.AdicConstructibilityPredicateComparison
-import Sheaf.Paper.ConstructibleInternalHomContinuity
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.Paper.SupportedCommonFieldScalarModels
+import Sheaf.Paper.FiniteModelTopologyDerivedHom
+import Sheaf.Paper.GlobalInternalHomDetection
 
 /-!
 # Supported finite-stage local systems and the scalar-unit topology defect
@@ -50,17 +38,257 @@ paragraph (3), explicit agent coefficient-topology obligation
 C is the finite-subextension-valued condensed ring and B is the full norm-continuous
 condensed ring. The existing inclusion and derived scalar adjunction are used unchanged.
 The supported objects are constructed by exact termwise extension through their closures.
-The theorem is only a statement: its proof remains postponed.
+The proof uses common-field supported models and the finite-model global Hom comparison,
+then detects the actual scalar unit and applies distinguished-triangle exactness.
 -/
 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types false
+attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
+  CategoryTheory.Functor.leftDerivedFunctor CategoryTheory.Functor.rightDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Mod.monoidalCategory CategoryTheory.Sheaf.monoidalCategory
+  DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+  AlgebraicGeometry.ProEtale.CondensedRing.derivedHom
+  AlgebraicGeometry.ProEtale.CondensedRing.derivedTensorHomAdjunction
+  AlgebraicGeometry.ProEtale.CondensedRing.internalScalarExtension
+  AlgebraicGeometry.ProEtale.CondensedRing.internalScalarTensorIso
+  AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.sections
+  AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.restrictionSections
+  AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.globalize
+  AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.restrictionMate
+  AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.scalarAdjunction
+
 
 universe u
-open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
+
+
+private theorem bijective_of_equiv_square {A B C D : Type*}
+    (e : A ≃ B) (d : C ≃ D) (f : A → C) (g : B → D)
+    (h : ∀ a, d (f a) = g (e a)) (hg : Function.Bijective g) :
+    Function.Bijective f := by
+  constructor
+  · intro a b hab
+    apply e.injective
+    apply hg.injective
+    rw [← h, ← h, hab]
+  · intro c
+    obtain ⟨b, hb⟩ := hg.surjective (d c)
+    refine ⟨e.symm b, d.injective ?_⟩
+    rw [h, e.apply_symm_apply, hb]
+
+private theorem triangle_hom_zero
+    {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (T : Triangle C) (hT : T ∈ distTriang C) (G : C)
+    (hs : Function.Surjective (fun f : G ⟶ T.obj₁ ↦ f ≫ T.mor₁))
+    (hi : Function.Injective (fun f : G ⟶ T.obj₁⟦(1 : ℤ)⟧ ↦
+      f ≫ T.mor₁⟦(1 : ℤ)⟧')) : Subsingleton (G ⟶ T.obj₃) := by
+  have hz (q : G ⟶ T.obj₃) : q = 0 := by
+    have hq : q ≫ T.mor₃ = 0 := by
+      apply hi
+      simp only [zero_comp]
+      rw [Category.assoc, comp_distTriang_mor_zero₃₁ T hT, comp_zero]
+    obtain ⟨f, hf⟩ := T.coyoneda_exact₃ hT q hq
+    obtain ⟨g, hg⟩ := hs f
+    rw [hf, ← hg, Category.assoc, comp_distTriang_mor_zero₁₂ T hT, comp_zero]
+  exact ⟨fun f g ↦ (hz f).trans (hz g).symm⟩
+
+private theorem unitHom_transport
+    {C : Type*} [Category C] [HasShift C ℤ] (J : C ⥤ C) (η : 𝟭 C ⟶ J)
+    {G H G' H' : C} (e : G ≅ G') (d : H ≅ H') (n : ℤ)
+    (h : Function.Bijective (fun f : G' ⟶ H'⟦n⟧ ↦ f ≫ (η.app H')⟦n⟧')) :
+    Function.Bijective (fun f : G ⟶ H⟦n⟧ ↦ f ≫ (η.app H)⟦n⟧') := by
+  apply bijective_of_equiv_square
+    (e.homCongr ((shiftFunctor C n).mapIso d))
+    (e.homCongr ((shiftFunctor C n).mapIso (J.mapIso d))) _ _ _ h
+  intro f
+  simp only [Iso.homCongr_apply, Functor.mapIso_hom]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [← η.naturality d.hom]
+  rfl
+
+private theorem triangle_shift_hom_zero
+    {C : Type*} [Category C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (T : Triangle C) (hT : T ∈ distTriang C) (G : C)
+    (h : ∀ n : ℤ, Function.Bijective (fun f : G ⟶ T.obj₁⟦n⟧ ↦
+      f ≫ T.mor₁⟦n⟧')) (n : ℤ) : Subsingleton (G ⟶ T.obj₃⟦n⟧) := by
+  have hb : Function.Bijective (fun f : G ⟶ T.obj₁⟦n⟧⟦(1 : ℤ)⟧ ↦
+      f ≫ (T.mor₁⟦n⟧')⟦(1 : ℤ)⟧') := by
+    apply bijective_of_equiv_square
+      ((shiftFunctorAdd C n (1 : ℤ)).app T.obj₁).symm.homToEquiv
+      ((shiftFunctorAdd C n (1 : ℤ)).app T.obj₂).symm.homToEquiv _ _ _ (h (n + 1))
+    intro f
+    change (f ≫ (T.mor₁⟦n⟧')⟦(1 : ℤ)⟧') ≫
+        (shiftFunctorAdd C n (1 : ℤ)).inv.app T.obj₂ =
+      (f ≫ (shiftFunctorAdd C n (1 : ℤ)).inv.app T.obj₁) ≫ T.mor₁⟦n + 1⟧'
+    have hn := (shiftFunctorAdd C n (1 : ℤ)).inv.naturality T.mor₁
+    simpa only [Functor.comp_map, Category.assoc] using congrArg (fun z ↦ f ≫ z) hn
+  apply triangle_hom_zero ((shiftFunctor (Triangle C) n).obj T)
+    (Triangle.shift_distinguished T hT n) G
+  · change Function.Surjective (fun f : G ⟶ T.obj₁⟦n⟧ ↦
+      f ≫ (n.negOnePow • T.mor₁⟦n⟧'))
+    simpa only [Function.comp_def, Linear.comp_units_smul] using
+      ((MulAction.bijective n.negOnePow).comp (h n)).surjective
+  · change Function.Injective (fun f : G ⟶ T.obj₁⟦n⟧⟦(1 : ℤ)⟧ ↦
+      f ≫ (n.negOnePow • T.mor₁⟦n⟧')⟦(1 : ℤ)⟧')
+    simpa only [Function.comp_def, Functor.map_units_smul, Linear.comp_units_smul] using
+      ((MulAction.bijective n.negOnePow).comp hb).injective
+
+private theorem adjointGlobalize_comp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {J : C ⥤ D} {U : D ⥤ C} (a : J ⊣ U)
+    (Γ : C ⥤ E) (Γ' : D ⥤ E) (δ : U ⋙ Γ ≅ Γ')
+    (V : C) (W Z : D) (f : J.obj V ⟶ W) (g : W ⟶ Z) :
+    Γ.map (a.homEquiv V Z (f ≫ g)) ≫ δ.hom.app Z =
+      (Γ.map (a.homEquiv V W f) ≫ δ.hom.app W) ≫ Γ'.map g := by
+  rw [a.homEquiv_naturality_right, Functor.map_comp]
+  have hn := δ.hom.naturality g
+  change Γ.map (U.map g) ≫ δ.hom.app Z = δ.hom.app W ≫ Γ'.map g at hn
+  simp only [Category.assoc]
+  rw [hn]
+
+private theorem adjointGlobalize_isIso_of_comp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {J : C ⥤ D} {U : D ⥤ C} (a : J ⊣ U)
+    (Γ : C ⥤ E) (Γ' : D ⥤ E) (δ : U ⋙ Γ ≅ Γ')
+    (V : C) (W Z : D) (f : J.obj V ⟶ W) (g : W ⟶ Z) [IsIso g]
+    (h : IsIso (Γ.map (a.homEquiv V Z (f ≫ g)) ≫ δ.hom.app Z)) :
+    IsIso (Γ.map (a.homEquiv V W f) ≫ δ.hom.app W) := by
+  have h' : IsIso ((Γ.map (a.homEquiv V W f) ≫ δ.hom.app W) ≫ Γ'.map g) := by
+    rw [← adjointGlobalize_comp a Γ Γ' δ V W Z f g]
+    exact h
+  letI := h'
+  exact IsIso.of_isIso_comp_right _ (Γ'.map g)
+
+private theorem rightUniq_apply
+    {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {U V : D ⥤ C} (a : F ⊣ U) (b : F ⊣ V)
+    {X : C} {Y : D} (f : F.obj X ⟶ Y) :
+    a.homEquiv X Y f ≫ (a.rightAdjointUniq b).hom.app Y = b.homEquiv X Y f := by
+  rw [a.homEquiv_unit, Category.assoc,
+    (a.rightAdjointUniq b).hom.naturality f, ← Category.assoc,
+    Adjunction.unit_rightAdjointUniq_hom_app, ← b.homEquiv_unit]
+
+private theorem scalarHom_normalization
+    {C D : Type*} [Category C] [Category D]
+    {J : C ⥤ D} {U : D ⥤ C} (a : J ⊣ U)
+    {L R : C ⥤ C} (b : L ⊣ R) {L' R' : D ⥤ D} (b' : L' ⊣ R')
+    (μ : L ⋙ J ≅ J ⋙ L') (N : C) :
+    a.homEquiv _ _ (b'.homEquiv _ _
+      (μ.inv.app (R.obj N) ≫ J.map (b.counit.app N))) ≫
+      ((a.comp b').rightAdjointUniq ((b.comp a).ofNatIsoLeft μ)).hom.app (J.obj N) =
+        R.map (a.unit.app N) := by
+  have he := rightUniq_apply (a.comp b') ((b.comp a).ofNatIsoLeft μ)
+    (μ.inv.app (R.obj N) ≫ J.map (b.counit.app N))
+  rw [Adjunction.comp_homEquiv] at he
+  change a.homEquiv _ _ (b'.homEquiv _ _
+    (μ.inv.app (R.obj N) ≫ J.map (b.counit.app N))) ≫ _ = _ at he
+  simp only [Functor.id_obj] at he ⊢
+  rw [he, Adjunction.homEquiv_ofNatIsoLeft_apply]
+  simp only [Iso.hom_inv_id_app_assoc]
+  rw [Adjunction.comp_homEquiv]
+  change b.homEquiv _ _ (a.homEquiv _ _ (J.map (b.counit.app N))) = _
+  rw [a.homEquiv_unit]
+  have hn := a.unit.naturality (b.counit.app N)
+  change b.counit.app N ≫ a.unit.app N =
+    a.unit.app (L.obj (R.obj N)) ≫ U.map (J.map (b.counit.app N)) at hn
+  rw [← hn]
+  change b.homEquiv _ _ (b.counit.app N ≫ a.unit.app N) = _
+  rw [b.homEquiv_naturality_right, ← b.homEquiv_symm_id]
+  simp only [Functor.id_obj, Equiv.apply_symm_apply, Category.id_comp]
+
+private theorem scalarHom_sections_isIso
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {J : C ⥤ D} {U : D ⥤ C} (a : J ⊣ U)
+    {L R : C ⥤ C} (b : L ⊣ R) {L' R' : D ⥤ D} (b' : L' ⊣ R')
+    (μ : L ⋙ J ≅ J ⋙ L') (Γ : C ⥤ E) (Γ' : D ⥤ E)
+    (δ : U ⋙ Γ ≅ Γ') (N : C)
+    (h : IsIso (Γ.map (a.homEquiv _ _ (b'.homEquiv _ _
+      (μ.inv.app (R.obj N) ≫ J.map (b.counit.app N)))) ≫
+        δ.hom.app (R'.obj (J.obj N)))) :
+    IsIso (Γ.map (R.map (a.unit.app N))) := by
+  simp only [Functor.id_obj] at h ⊢
+  have hm : IsIso (Γ.map (a.homEquiv _ _ (b'.homEquiv _ _
+      (μ.inv.app (R.obj N) ≫ J.map (b.counit.app N))))) := by
+    apply (isIso_comp_right_iff _ (δ.hom.app _)).mp
+    simpa only [Functor.id_obj] using h
+  rw [← scalarHom_normalization a b b' μ N, Functor.map_comp]
+  simp only [Functor.id_obj] at hm ⊢
+  letI := hm
+  apply (isIso_comp_right_iff _
+    (Γ.map (((a.comp b').rightAdjointUniq ((b.comp a).ofNatIsoLeft μ)).hom.app
+      (J.obj N)))).mpr
+  exact hm
+
+private theorem unitHom_bijective_of_globalHom_isIso
+    (X : Scheme.{u})
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (c : Λ ⟶ Λ') [IsMonHom c]
+    (K N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (h : IsIso (FiniteModelTopologyHom.globalize X c _ _
+      (FiniteModelTopologyHom.homComparison X c K N))) (n : ℤ) :
+    Function.Bijective (fun f : K ⟶ N⟦n⟧ ↦
+      f ≫ ((FiniteModelTopologyHom.scalarAdjunction X c).unit.app N)⟦n⟧') := by
+  let η := (FiniteModelTopologyHom.scalarAdjunction X c).unit.app N
+  have hd : IsIso ((FiniteModelTopologyHom.sections X (condensedRingObj Λ X)).map
+      (((CondensedRing.derivedHom Λ X).obj (op K)).map η)) := by
+    apply scalarHom_sections_isIso (FiniteModelTopologyHom.scalarAdjunction X c)
+      (CondensedRing.derivedTensorHomAdjunction Λ K)
+      (CondensedRing.derivedTensorHomAdjunction Λ'
+        ((CondensedRing.internalScalarExtension c X).obj K))
+      ((CondensedRing.internalScalarTensorIso c X).app K)
+      (FiniteModelTopologyHom.sections X (condensedRingObj Λ X))
+      (FiniteModelTopologyHom.sections X (condensedRingObj Λ' X))
+      (FiniteModelTopologyHom.restrictionSections X (coefficientMap c X)) N
+    simpa only [FiniteModelTopologyHom.globalize, FiniteModelTopologyHom.restrictionMate,
+      FiniteModelTopologyHom.homComparison, Functor.id_obj, Iso.app_inv] using h
+  exact FiniteModelTopologyHom.shiftedHom_bijective_of_globalInternalHom_isIso X Λ K η hd n
+
+
+
+private theorem unitHom_bijective_of_globalHom_comp_isIso
+    (X : Scheme.{u})
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (c : Λ ⟶ Λ') [IsMonHom c]
+    (K N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    {Z : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ' X))}
+    (t : ((CondensedRing.derivedHom Λ' X).obj
+      (op ((CondensedRing.internalScalarExtension c X).obj K))).obj
+        ((CondensedRing.internalScalarExtension c X).obj N) ⟶ Z) [IsIso t]
+    (h : IsIso (FiniteModelTopologyHom.globalize X c _ _
+      (FiniteModelTopologyHom.homComparison X c K N ≫ t))) (n : ℤ) :
+    Function.Bijective (fun f : K ⟶ N⟦n⟧ ↦
+      f ≫ ((FiniteModelTopologyHom.scalarAdjunction X c).unit.app N)⟦n⟧') := by
+  have hg : IsIso (FiniteModelTopologyHom.globalize X c _ _
+      (FiniteModelTopologyHom.homComparison X c K N)) := by
+    simp only [FiniteModelTopologyHom.globalize, FiniteModelTopologyHom.restrictionMate]
+      at h ⊢
+    exact adjointGlobalize_isIso_of_comp (FiniteModelTopologyHom.scalarAdjunction X c)
+      (FiniteModelTopologyHom.sections X (condensedRingObj Λ X))
+      (FiniteModelTopologyHom.sections X (condensedRingObj Λ' X))
+      (FiniteModelTopologyHom.restrictionSections X (coefficientMap c X)) _ _ _ _ t h
+  exact unitHom_bijective_of_globalHom_isIso X c K N hg n
+
+set_option backward.isDefEq.respectTransparency false
+attribute [local semireducible] CondensedRing.internalScalarExtension
+  CondensedRing.internalScalarTensorIso FiniteModelTopologyHom.scalarAdjunction
+attribute [local irreducible] Mod.derivedExtendMapDerivedCategoryAdjunction
 
 /-- The specified object a_!(C_S tensor^L_{A_E,S} L[0]), using the canonical
 scheme-theoretic closure factorization already defining
@@ -121,96 +349,26 @@ Source: blueprint main-20261015, direct-image stability proof, paragraph (3),
 agent supported finite-stage scalar-unit defect obligation
 (blueprint: lem-sfb-supported-finite-stage-topology-defect).
 
-Proof plan (exact literature proof WANTED; HRS Lemma 7.9 only treats C):
-1. Pass to the small-site section-ring model using [lem-pd-module-ringed-topos-derived-comparison]
-and [lem-sfb-internal-section-scalar-adjunction]. The first identifies the specified derived
-tensors and exact open extension; closed internal Homs are identified by uniqueness of their right
-adjunctions. The second identifies scalar extension/restriction AND their actual units, including
-$v\mapsto1\otimes v$; thus this passage does not change the triangle in the assertion. A field is
-Noetherian (its only ideals are zero and itself); hence $X$ is Noetherian by [lem-weil-pbc-finite-
-type-over-noetherian]. Every open in $X$ is quasi-compact by [lem-weil-pbc-noetherian-open-
-subscheme-noetherian]. Closed subschemes are Noetherian too: on a Noetherian affine their rings
-are quotients, whose ascending chains of ideals lift to chains of ideals upstairs, and closed
-subsets of a Noetherian space are quasi-compact. These observations apply also to the closures
-used to define $a_!,b_!$.
-
-2. Take the finite compositum $E_0=EF\subset\Omega$ by [det-def-sfb-qlbar-condensed-
-subextensions], and write $A_V=A_{E_0,V}$. Extend $L,M$ on their respective supports to
-$L_0=A_S\otimes_{A_{E,S}}L$ and $M_0=A_T\otimes_{A_{F,T}}M$. These are ordinary degree-zero
-modules: finite-field scalar extension is exact by [lem-sfb-subfield-flat]. They are lisse: pull
-back to the covers trivializing $L,M$; [lem-sfb-kflat-scalar-comparison-normalization] identifies
-the pullbacks of these tensors with the tensors of the pullbacks, hence with $A^r,A^s$. Define
-$K=(a_!L_0)[0]$, $N=(b_!M_0)[0]$ in $D(A_X)$. They are bounded constructible by [lem-sfb-
-coefficient-heart-lisse-extension-constructible], since $X$ is Noetherian. The two supports and
-ranks have not been identified.
-
-3. Scalar extension along each coefficient map used here commutes with $a_!$ and $b_!$. For their
-open factors this is [lem-sf-open-tensor-normalization], with the identity geometric map and the
-given change of rings. For the closed factors use [lem-sfb-closed-supported-scalar-comparison]
-with inverse-image comparisons [lem-sfb-kflat-scalar-comparison-normalization]. Its unbounded-
-calculus hypothesis follows from [lem-weil-pbc-condensed-open-closed-recollement] and [lem-sfb-
-exact-open-closed-unbounded-calculus]: all four sheaf functors are exact; the open unit and closed
-counit are isomorphisms; the mixed restrictions are zero by extension by zero and disjoint
-supports. Applying the first recollement triangle to a degree-zero sheaf gives the required short
-exact sequence $0\to j_!j^*M\to M\to i_*i^*M\to0$. Complements are quasi-compact by step 1. Thus
-the cited unbounded calculus applies, without assuming that the scalar extensions are bounded or
-flat. The resulting closed comparison is linear over the new coefficient ring, with the precise
-counit normalization of that node.
-
-4. For $R=C_X,B_X$ put $S_R(V)=R\otimes_{A_X}^L V$. Apply step 3 first to $E\to E_0\to C$ on $S$,
-and to $F\to E_0\to C$ on $T$. The scalar reassociations of [lem-sfb-successive-derived-quotient-
-normalization] give $G\simeq S_CK$, $H\simeq S_CN$. Applying the same reassociation to $A_X\to
-C_X\to B_X$ gives $J_XG\simeq S_BK$, $J_XH\simeq S_BN$. All identifications are natural, and the
-cited reassociation takes successive scalar units to the direct unit, by $(v\otimes z)\otimes
-w\mapsto v\otimes c(z)w$. We may therefore make these identifications when computing the actual
-scalar-extension map on morphisms.
-
-5. Put $D=R\mathcal Hom_{A_X}(K,N)$. The predicate comparison [lem-sfb-adic-constructibility-
-predicate-comparison] for the field $E_0$ on the Noetherian $X$ shows that $K,N$ are bounded
-constructible in the stratified local-finite-presentation sense. So $D$ is bounded constructible
-in that sense by [lem-sfb-dc-hom-preserves], applied to $E_0$ in the standing setting. By the same
-comparison $D$ also has finite constant local models. The complex $K$ has the internal filtered-
-colimit continuity property of [lem-sfb-constructible-internal-hom-continuity]: $X$ is Noetherian
-and $K$ has the finite constant local model from step 2. Since $N$ is degree zero, it is bounded
-below. Consequently [lem-sfb-qlbar-internal-hom-coefficient-comparison] gives the evaluation-
-transpose isomorphism $\phi_C:S_CD\simeq R\mathcal Hom_{C_X}(S_CK,S_CN)$. Independently, [lem-sfb-
-norm-algcl-internal-hom-base-change] gives the evaluation-transpose isomorphism $\phi_B:S_BD\simeq
-R\mathcal Hom_{B_X}(S_BK,S_BN)$. This second input is about the norm coefficient ring, so it is
-not inferred from the colimit-coefficient result.
-
-6. Apply [lem-sfb-norm-algcl-cohomology-topology-comparison] to the bounded constructible
-$A_X$-complex $D$ from step 5. It makes the actual map $R\Gamma(m_D):R\Gamma(S_CD)\to
-R\Gamma(S_BD)$ invertible. Under $\phi_C,\phi_B$ this is the morphism on derived global Hom
-induced by $J_X$. Indeed both evaluation transposes are scalar extension of the same evaluation
-$D\otimes_{A_X}^L K\to N$. Reassociating balanced tensors, their evaluations after $c_X$ agree:
-both are $B_X\otimes_{A_X}^L(D\otimes_{A_X}^L K)\xrightarrow{1\otimes\mathrm{ev}}S_BN$. The
-defining tensor/internal-Hom adjunction [sk-def-sfb-derived-tensor-hom] makes the transpose
-unique. Thus this equality identifies the actual map, including its naturality in arrows, rather
-than merely identifying its endpoints. Derived global sections of a $C_X$- or $B_X$-complex agree
-with those of its restriction to $A_X$: by [lem-pur-sheaf-ring-derived-coefficient-adjunction]
-applied to $A_X\to R$ and the unit $R$ itself,
-$\operatorname{Hom}_{D(R)}(R,M[n])=\operatorname{Hom}_{D(A_X)}(A_X,M[n])$. Taking degree-$n$
-cohomology and using [lem-sfb-derived-internal-hom-sections-model] yields a bijection $u\mapsto
-J_Xu$ from $\operatorname{Hom}_{D(C_X)}(G,H[n])$ to $\operatorname{Hom}_{D(B_X)}(J_XG,J_XH[n])$
-for every integer $n$. The module equivalences in step 1 preserve these constructions and
-underlying abelian sheaves.
-
-7. Use [lem-pur-sheaf-ring-derived-coefficient-adjunction] for $c_X:C_X\to B_X$. The right adjoint
-is exact restriction, and the normalized derived unit is exactly the one in the statement. The
-adjunction sends $J_Xu:J_XG\to J_XH[n]$ to $U_XJ_Xu\circ\eta_G=\eta_{H[n]}\circ u$ by naturality
-of the unit. Since these exact derived functors and their units commute with shifts, this is
-$\eta_H[n]\circ u$. Composing with the bijections from step 6 therefore shows that the maps
-$\operatorname{Hom}(G,H[n])\xrightarrow{\eta_H[n]\circ-}\operatorname{Hom}(G,U_XJ_XH[n])$ are
-bijections for all integers $n$. This step uses no flatness of $c_X$.
-
-8. Let the triangle in the assertion be arbitrary and let $q:G\to Q_H[n]$. By [lem-weil-pbc-hom-
-into-triangle-exact] applied also to the shifted and rotated distinguished triangles [def-weil-
-triangulated-category], its boundary $dq:G\to H[n+1]$ is killed by $\eta_H[n+1]$. Step 7 makes
-that map on Hom injective, so $dq=0$. Exactness at $Q_H[n]$ gives $q=vh$ for some $h:G\to
-U_XJ_XH[n]$. Surjectivity in step 7 writes $h=\eta_H[n]u$; consecutive triangle arrows compose to
-zero, so $q=v\eta_H[n]u=0$. Thus every element of the asserted Hom group is zero. Nothing depended
-on a chosen cone, a nonempty support, a positive rank, or a relation between $S,T$ or $E,F$, so
-the asserted edge cases are included. -/
+Proof:
+1. Apply supported_common_field_scalar_models to the independent supports and finite
+fields. It produces bounded constructible K,N over the finite compositum E F and
+canonical isomorphisms from the two supported objects to their C-scalar extensions.
+The termwise exact composite comparison identifies the displayed supported objects
+with those used in that model theorem.
+2. finiteModelTopologyDerivedHom makes the actual globalHomComparison invertible.
+Its final reassociation acts on internal Hom by an isomorphism; naturality of
+restrictionSections permits cancelling that isomorphism after globalization.
+3. Uniqueness of right adjoints identifies the restriction mate of the scalar
+Hom comparison, followed by the canonical scalar-Hom isomorphism, with internal
+Hom applied to the actual unit. GlobalInternalHomDetection gives bijectivity of
+postcomposition with every shifted unit. Naturality of the unit transports this
+through the supported-object isomorphisms, without identifying their supports.
+4. Shift the specified distinguished triangle. Its first arrow is the shifted unit
+multiplied by the invertible sign (-1)^n. Surjectivity on Hom at this arrow and
+injectivity at its shift by one force every map into the third object to vanish:
+its boundary is zero by injectivity; exactness factors it through the second
+arrow; surjectivity then factors it through the composite of the first two,
+which is zero. This proves Subsingleton for the arbitrary given cone and n. -/
 theorem supported_finiteStage_topology_defect
     (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p]
     (hp : 0 < p) (hpℓ : p ≠ ℓ)
@@ -239,6 +397,62 @@ theorem supported_finiteStage_topology_defect
           (supportedFiniteStageTopologyObject ℓ X b hb F M)) v w ∈ distTriang _)
     (n : ℤ) :
     Subsingleton (supportedFiniteStageTopologyObject ℓ X a ha E L ⟶ Q⟦n⟧) := by
-  sorry
+  letI : IsImmersion a := ha
+  letI : IsImmersion b := hb
+  obtain ⟨hX, hmodels⟩ :=
+    SupportedCommonField.supported_common_field_scalar_models ℓ p k hp hpℓ
+      X S T a haCons b hbCons E F L hL M hM
+  letI := hX
+  obtain ⟨hS, hmodels⟩ := hmodels
+  letI := hS
+  obtain ⟨hT, hmodels⟩ := hmodels
+  letI := hT
+  have hLmodel := hmodels.2.2.2.2.2.1
+  have hMmodel := hmodels.2.2.2.2.2.2
+  obtain ⟨_, hK, hSingleL, dL, _, _, _, _, _, _⟩ := hLmodel
+  obtain ⟨_, hN, hSingleM, dM, _, _, _, _, _, _⟩ := hMmodel
+  letI := hSingleL
+  letI := hSingleM
+  let A := SupportedCommonField.commonField ℓ E F
+  have hEA : E ≤ A := (show E.1 ≤ E.1 ⊔ F.1 from le_sup_left)
+  have hFA : F ≤ A := (show F.1 ≤ E.1 ⊔ F.1 from le_sup_right)
+  let K := SupportedCommonField.finiteModel ℓ hEA a L
+  let N := SupportedCommonField.finiteModel ℓ hFA b M
+  let eG : supportedFiniteStageTopologyObject ℓ X a ha E L ≅
+      (FiniteModelTopologyHom.toUnion X.left ℓ A).obj K :=
+    (Functor.mapDerivedCategoryCompIso
+      (CondensedRing.openImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) a.toImage)
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) a.imageι)).app _ ≪≫
+        SupportedCommonField.alpha ℓ hEA a L dL
+  let eH : supportedFiniteStageTopologyObject ℓ X b hb F M ≅
+      (FiniteModelTopologyHom.toUnion X.left ℓ A).obj N :=
+    (Functor.mapDerivedCategoryCompIso
+      (CondensedRing.openImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) b.toImage)
+      (CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) b.imageι)).app _ ≪≫
+        SupportedCommonField.alpha ℓ hFA b M dM
+  let adj := Mod.derivedExtendMapDerivedCategoryAdjunction
+    (coefficientMap (algClTopologyInclusion ℓ) X.left)
+  have hu (m : ℤ) : Function.Bijective
+      (fun f : supportedFiniteStageTopologyObject ℓ X a ha E L ⟶
+          (supportedFiniteStageTopologyObject ℓ X b hb F M)⟦m⟧ ↦
+        f ≫ (adj.unit.app (supportedFiniteStageTopologyObject ℓ X b hb F M))⟦m⟧') := by
+    apply unitHom_transport _ adj.unit eG eH m
+    haveI : Fact p.Prime := ⟨CharP.char_prime_of_ne_zero k (Nat.ne_of_gt hp)⟩
+    have hall := FiniteModelTopologyHom.finiteModelTopologyDerivedHom X.left ℓ A K N
+      (k := k) p hpℓ X.hom hK hN
+    have hg := hall.2.2.2.2.2.2.2.2
+    let c := algClTopologyInclusion ℓ
+    let G := (FiniteModelTopologyHom.toUnion X.left ℓ A).obj K
+    let H := (FiniteModelTopologyHom.toUnion X.left ℓ A).obj N
+    let t := FiniteModelTopologyHom.homArrow X.left
+      (Profinite.continuousMapRingObj (PadicAlgCl ℓ))
+      ((FiniteModelTopologyHom.reassociation X.left ℓ A).inv.app K)
+      ((FiniteModelTopologyHom.reassociation X.left ℓ A).hom.app N)
+    have ht : IsIso t := by
+      dsimp only [t, FiniteModelTopologyHom.homArrow]
+      infer_instance
+    letI := ht
+    exact unitHom_bijective_of_globalHom_comp_isIso X.left c G H t hg m
+  exact triangle_shift_hom_zero _ htriangle _ hu n
 
 end AlgebraicGeometry.ProEtale

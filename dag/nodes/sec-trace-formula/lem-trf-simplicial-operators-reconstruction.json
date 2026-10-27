@@ -12,26 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Use the category $P$ and functor $J:P\\to\\Delta$ in [lem-sc-module-cup-godement-simplex-presentation-faithful]. Explicitly, an arrow of $P$ is a finite composable word in cofaces $\\delta_i$ and codegeneracies $\\sigma_i$, modulo replacement of either side of a simplex relation inside a word. The relations, with degree superscripts suppressed and only typed instances allowed, are $\\delta_j\\delta_i=\\delta_i\\delta_{j-1}$ for $i<j$, $\\sigma_j\\delta_i=\\delta_i\\sigma_{j-1}$ for $i<j$, $\\sigma_j\\delta_j=1=\\sigma_j\\delta_{j+1}$, $\\sigma_j\\delta_i=\\delta_{i-1}\\sigma_j$ for $i>j+1$, and $\\sigma_j\\sigma_i=\\sigma_i\\sigma_{j+1}$ for $i\\leq j$. Here juxtaposition means ordinary composition, with the right factor first. Send $[n]$ to $U_n$; evaluate a word contravariantly, replacing $\\delta_i$ by $d_i$, $\\sigma_i$ by $s_i$, and reversing composition. Every displayed relation evaluates respectively to exactly the corresponding hypothesis on $d,s$, including the two separate identity relations. Consequently replacing a subword preserves its evaluated morphism: the surrounding words just compose the equality on both sides. Reflexivity, symmetry and transitivity then show that equivalent words have equal values. Empty words evaluate to identities and concatenation reverses evaluation. Thus evaluation gives a well-defined functor $E:P^{\\mathrm{op}}\\to\\mathcal D$.",
+   "text": "Apply [lem-trf-simplex-word-evaluation-descent] to the given $U_n,d_i,s_i$. Its hypotheses are precisely the five displayed identities, with the adjacent mixed identity imposed twice. Obtain the contravariant evaluation functor $E:P^{\\mathrm{op}}\\to\\mathcal D$.",
    "uses": [
-    "lem-sc-module-cup-godement-simplex-presentation-faithful"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
-   }
-  },
-  {
-   "text": "For a simplex map $\\alpha:[m]\\to[n]$, let $W(\\alpha)$ mean that there exists $p:[m]\\to[n]$ in $P$ with $J(p)=\\alpha$. Since $J$ is a functor and is the identity on the degree labels, $W$ contains identities and is closed under composition: if $J(p)=\\alpha$ and $J(q)=\\beta$, then $J(qp)=\\beta\\alpha$. It contains all cofaces and codegeneracies by their specified images under $J$. Apply [lem-sc-simplex-morphism-property-generators] to this property $W$ to obtain a lift of every $\\alpha$. By [lem-sc-module-cup-godement-simplex-presentation-faithful], any two such lifts with these endpoints are equal. Write $\\widehat\\alpha$ for this unique lift. Uniqueness gives $\\widehat{1}=1$, $\\widehat{\\beta\\alpha}=\\widehat\\beta\\,\\widehat\\alpha$, and the lift of each coface or codegeneracy is the corresponding generator.",
-   "uses": [
-    "lem-sc-simplex-morphism-property-generators",
-    "lem-sc-module-cup-godement-simplex-presentation-faithful"
+    "lem-trf-simplex-word-evaluation-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), via Tag 0168, lemma-face-degeneracy-category."
+   }
+  },
+  {
+   "text": "By [lem-trf-simplex-presentation-unique-lifts], every simplex arrow has a unique lift $\\widehat\\alpha$ in $P$; lifts preserve identities, composition and the specified generators.",
+   "uses": [
+    "lem-trf-simplex-presentation-unique-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), via Tag 0168, lemma-face-degeneracy-category."
    }
   },
   {
@@ -82,14 +81,15 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-module-cup-godement-simplex-presentation-faithful",
-  "lem-sc-simplex-morphism-property-generators",
-  "def-weil-pbc-simplicial-object"
+  "lem-trf-simplex-word-evaluation-descent",
+  "lem-trf-simplex-presentation-unique-lifts",
+  "def-weil-pbc-simplicial-object",
+  "lem-sc-simplex-morphism-property-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/simplicial.tex",
-  "place": "Tag 016B proof via 0168, expanded using the existing faithful-presentation and morphism-generator nodes. Word quotient evaluation, inverse-on-arrows construction and naturality closure are written out."
+  "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), via Tag 0168, lemma-face-degeneracy-category."
  },
  "mathlib_searches": [
   {
@@ -205,28 +205,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-simplicial-operators-reconstruction",
   "worker": "stage1",
-  "summary": "Kept the full statement and all five relations unchanged after checking Stacks 016B and its remark. Expanded the omitted presentation argument using the existing faithful-presentation node and existing simplex-morphism generator leaf: word evaluation descends by the hypotheses, J has unique lifts, inverse lifts define the functor, and generator closure proves uniqueness and morphism naturality. No new nodes. No exact finished project Lean declaration or Mathlib reconstruction theorem found.",
-  "blueprint": "Preserves the inherited lem-trf-local-term-locality (1)--(2) support chain, through cotangent-resolution coherence, adjunction standard simplicial homotopy, and the comonad construction. The item realizes the 016B(2),(3) invocation in the opening sentence of Stacks 0G5N; Steps 1--4 reconstruct and prove uniqueness, Steps 5--6 reconstruct morphisms.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-module-cup-godement-simplex-presentation-faithful",
-    "why": "Generic completeness of the simplex generator relations, exactly the 0168 presentation input used by 016B; the current unit has no presentation theorem. Its statement alone supplies faithfulness, not reconstruction, and no result on cup products is used."
-   }
-  ]
+  "summary": "Repair of returned head 99744d3a833: retained the approved two-node split and logged searches, compared against the current DAG, and re-read every existing cited statement and Stacks 0167/0168/016B. The initial current-base dry run identified a new same-tag neighbour, lem-trf-comonad-counit-augmentation; after reading its full statement, added both explicit nonduplicate comparisons to the report. Its supplied-comonad augmentation is distinct from word evaluation and unique presentation lifts. The parent statement and route remain unchanged; six-step assembly totals 2926 characters, both supporting tasks remain statement-only. Revalidated exact citations, edge cases and the absence of a full project attachment; final current-base preflight is rerun after this repair.",
+  "blueprint": "Preserves the inherited lem-trf-local-term-locality (1)--(2) support chain, through cotangent-resolution coherence, adjunction standard simplicial homotopy, and the comonad construction. The item realizes the 016B(2),(3) invocation in the opening sentence of Stacks 0G5N; Steps 1--4 reconstruct and prove uniqueness, Steps 5--6 reconstruct morphisms. Re-split: new word-evaluation node carries old Step 1, new unique-lifts node carries old Step 2; parent Steps 3--6 retain the original assembly.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sc-module-cup-godement-simplex-presentation-faithful"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NB-045cee9c8",
-  "group": "NB",
+  "reviewer": "NT-cc-Q138-b4317d8b2",
+  "group": "Q138",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-045cee9c8 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks simplicial.tex 016B(2),(3) (l.217-251), remark-relations (l.253-265) and 0167/0168. The statement is unchanged and its 'whenever defined' convention gives exactly Stacks' index ranges, checked for (a),(b),(d),(e). D is an arbitrary category, as in Stacks. Step 1: I reversed each of the six relations of P (two identities kept separate; they agree with Mathlib GeneratorsRelations/Basic.lean:54-69 up to reindexing), and each gives exactly one of the hypotheses. Descent through the generated congruence is written out. Step 2: W = 'has a J-preimage' is multiplicative and contains δ,σ. The generator lemma (morphismProperty_eq_top, MorphismProperty.lean:74-87) gives fullness and the faithful node gives unique lifts; both are used only through their statements. Steps 3-6 (functor laws, strict uniqueness via the equaliser property, naturality closure with endpoints m,n,r checked, converse by definition) are correct. Edge cases: degree 0 (d_0s_0=d_1s_0=1), maps to and from [0], empty words, and the constant object used by the citer lem-trf-comonad-simplicial-object step 8. Duplicate search (016B, characterize-simplicial, face-degeneracy-category, unique simplicial object, simplex-presentation) found nothing beyond the parent and the faithfulness-only node. There are no new nodes, no restated clauses and no cycle. Accepted tool use: lem-sc-module-cup-godement-simplex-presentation-faithful, a generic combinatorial fact about Δ with no presentation theorem in unit sk-i-curve-zero. No SGA citation; blueprint fields are inherited and correct. No repairs."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-b4317d8b2 (reviewer sub-agent of L); spot-checked: This is the fourth push of the Q138 re-split. Earlier heads 1b6444e0, 5d0e346a and 99744d3a were refused only at landing, because the side completion was never promoted (coord/returns/Q138.md, 16:41 UTC), and that is L's job. After JSON normalisation the item and both new nodes are byte-identical to those heads; only split_report.summary and the report changed. I re-read the mathematics myself. Repair note (released 2026-10-22; old proof 4662 characters, steps 1363/813/528/752/795/411): old Step 1 is now lem-trf-simplex-word-evaluation-descent, carrying P with all six typed relations, the hypotheses, descent through the congruence, E:P^op→D, reversed concatenation and empty word ↦ 1. Old Step 2 is now lem-trf-simplex-presentation-unique-lifts: existence by the generator leaf applied to 'has a J-preimage', uniqueness by faithfulness, the functor and generator laws, and a strict inverse K with K(Jp)=p by faithfulness. Steps 3-6 are byte-identical to live, with the same uses; the total is 2926 characters, and the statement and stmt_deps are unchanged. Steps 4-5 each check the hypotheses of one generator-criterion application, which I count as assembly. Nothing was shortened, the two nodes are comparable in size and independent, and neither restates an item clause. Sources: Stacks simplicial.tex 0167, 0168 (l.159-171), 016B(1)(a)-(e),(2),(3) (l.218-251) and remark-relations (l.253-265). I reversed each cosimplicial identity of P by hand and each one gives exactly the item's hypothesis, with the two adjacent identities kept separate and typed as E(δ_i)=d_i:U_n→U_{n-1}. Small cases: degree 0 (no face, d0s0=d1s0=1), empty words, σ0:[1]→[0], δ2δ0~δ0δ1, and the Step-5 index chain. The cited statements in the snapshot (presentation-faithful, simplex-morphism-property-generators, def-weil-pbc-simplicial-object, def-weil-pbc-simplicial-set) match their uses. There are no duplicates: the comonad-counit/face/mixed-degeneracy nodes take a supplied comonad simplicial object, the Godement nodes are concrete and covariant, and the pbc simplex identities are Δ-level only. No SGA source is used. Both new nodes are statement-only and unsplit with a full search log. No fixes, no tool_uses."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SimplicialOperatorsReconstruction",
@@ -246,5 +241,16 @@
   "result": "pass",
   "note": "Single module Sheaf.CategoryTheory.SimplicialOperatorsReconstruction (theorem simplicialObject_reconstruction, sorry). The only node change is the lean field; the statement matches the file verbatim. Five relations (a)-(e) with both (c) identities checked against Stacks 016B (simplicial.tex l.218-251) and Mathlib δ_comp_δ/δ_comp_σ_of_le/self/succ/of_gt/σ_comp_σ: orientation and index ranges exact. ∃! strict reconstruction with transported δ/σ equalities; morphism clause is a full iff with all faces and degeneracies. Arbitrary category, independent universes, no extra instances. Edge cases degree 0/1 and equal/boundary indices OK. Only stmt_dep is the Mathlib SimplicialObject record. No duplicate in Mathlib GeneratorsRelations or side Sheaf/CategoryTheory. Docstrings carry source and blueprint id plus the 6 proof steps. nt_compile --json clean (1.6 s, exit 0); broken control copy fails. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

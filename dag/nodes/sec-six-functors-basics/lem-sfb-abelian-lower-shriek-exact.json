@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-abelian-lower-shriek-exact",
+ "kind": "statement",
+ "title": "Exactness of abelian lower shriek without terminal objects",
+ "statement": "Fix the small-site universes of [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology], and let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1). Suppose fibre products and equalizers exist in $\\mathcal C$ and are preserved by $u$: their image cones have the corresponding universal properties in $\\mathcal D$. An equalizer of $r,s:X\\to Y$ means a universal arrow $e:E\\to X$ with $re=se$. Write $T^{\\mathrm{Ab}}:\\operatorname{Ab}(\\mathcal D)\\to\\operatorname{Ab}(\\mathcal C)$ for precomposition on sheaves of abelian groups, and choose a left adjoint $A:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{Ab}(\\mathcal D)$, meaning natural bijections $\\operatorname{Hom}(AM,N)\\simeq\\operatorname{Hom}(M,T^{\\mathrm{Ab}}N)$. Then $A$ is additive and exact: it carries every short exact sequence $0\\to M_1\\to M_2\\to M_3\\to0$ of abelian sheaves to a short exact sequence $0\\to AM_1\\to AM_2\\to AM_3\\to0$. No equivalence of localized sites and no terminal object of either site is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04BH, lemma-exactness-lower-shriek, hypotheses (a)-(c) and conclusion; additivity of the left adjoint between abelian categories."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor"
+ ],
+ "proof": [
+  {
+   "text": "Continuity implies that precomposition $T^{\\mathrm{Ab}}N(U)=N(uU)$ is a sheaf by [lem-weil-pbc-site-continuous-pushforward-sheaf]. Apply [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] with abelian-group coefficients. For a presheaf $F$ put $P(F)(V)=\\operatorname{colim}_{J_V}F(U)$, where $J_V=I_V^{\\mathrm{op}}$ and $I_V$ has objects $(U,\\phi:V\\to uU)$ and arrows $r:(U,\\phi)\\to(U\\prime,\\phi\\prime)$ satisfying $u(r)\\phi=\\phi\\prime$. Then $B(M)=(P(M))^\\#$ is left adjoint to $T^{\\mathrm{Ab}}$. Each $I_V$ is small: its objects are a union, indexed by the small object set of $\\mathcal C$, of hom sets in $\\mathcal D$, and its arrows are subsets of the corresponding hom sets of $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BH (lemma-exactness-lower-shriek), use of the construction preceding it; the adjunction is Tag 04BG (lemma-g-shriek-adjoint)."
+   }
+  },
+  {
+   "text": "A common-source span in $J_V$ reverses to $(U\\prime,\\phi\\prime)\\xrightarrow{a}(U,\\phi)\\xleftarrow{b}(U\\prime\\prime,\\phi\\prime\\prime)$ in $I_V$. Take $Q=U\\prime\\times_UU\\prime\\prime$, with projections $p_1,p_2$. Since $u(a)\\phi\\prime=u(b)\\phi\\prime\\prime$, the image pullback gives a unique $\\psi:V\\to uQ$ with $u(p_1)\\psi=\\phi\\prime$ and $u(p_2)\\psi=\\phi\\prime\\prime$. The projection arrows in $I_V$ satisfy $a p_1=b p_2$. Their opposites complete the given span to a commuting cocone in $J_V$. This is condition (a) of the abelian-colimit lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X4 (lemma-almost-directed), first universal-property check."
+   }
+  },
+  {
+   "text": "A parallel pair in $J_V$ reverses to $a,b:(U,\\phi)\\rightrightarrows(U\\prime,\\phi\\prime)$ in $I_V$. Let $e:E\\to U$ be their equalizer in $\\mathcal C$. Since $u(a)\\phi=u(b)\\phi=\\phi\\prime$ and $u(e)$ is an equalizer, $\\phi$ factors uniquely as $u(e)\\psi$ for $\\psi:V\\to uE$. Thus $e:(E,\\psi)\\to(U,\\phi)$ equalizes $a,b$ in $I_V$, and its opposite coequalizes the original pair. This is condition (b). These two checks assert nothing about nonemptiness and apply also when $J_V$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X4 (lemma-almost-directed), second universal-property check."
+   }
+  },
+  {
+   "text": "By [lem-sfb-almost-filtered-abelian-colimits], the functor $\\operatorname{colim}_{J_V}$ is additive and preserves finite limits, including the zero group when $J_V$ is empty. Finite limits of presheaves are objectwise by [lem-weil-pbc-presheaf-finite-limits-objectwise]. Consequently $P$ preserves finite limits: evaluate a finite diagram at each $(U,\\phi)$ and apply the colimit comparison at each $V$. These comparison maps commute with restriction along $t:V\\prime\\to V$, since restriction sends $(U,\\phi)$ to $(U,\\phi t)$ and leaves the element of $F(U)$ unchanged. Additivity of the same colimit functors gives $P(f+g)(V)=P(f)(V)+P(g)(V)$, hence $P$ is additive.",
+   "uses": [
+    "lem-sfb-almost-filtered-abelian-colimits",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BH (lemma-exactness-lower-shriek), reduction to presheaf colimits and invocation of Algebra Tag 04B0 (lemma-almost-directed-colimit-exact)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-sheafification-exact], inclusion of abelian sheaves preserves limits and abelian sheafification preserves finite limits and all colimits. Thus $B=\\#\\circ P\\circ\\iota$ preserves finite limits, in particular kernels. Sheafification is additive: it preserves the zero object and finite biproduct diagrams, so it preserves the diagonal and codiagonal in the identity $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$. Inclusion is additive because its maps are the same natural transformations with sectionwise addition. Together with step 4 this proves that $B$ is additive.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BH (lemma-exactness-lower-shriek), exactness of abelian sheafification via Tag 03CO (lemma-limits-colimits-abelian-sheaves)."
+   }
+  },
+  {
+   "text": "The adjunction for $B$ in step 1 and the given adjunction for $A$ provide bijections $\\operatorname{Hom}(AM,N)\\simeq\\operatorname{Hom}(BM,N)$ natural in $M,N$. The images of the identity maps give maps $BM\\to AM$ and $AM\\to BM$; naturality shows their two composites are identities and that they commute with every map of $M$. Hence they define a natural isomorphism $A\\cong B$. Conjugating a sum of maps by this isomorphism and using step 5 proves additivity of $A$; conjugating the kernel diagrams proves that $A$ preserves kernels.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BH (lemma-exactness-lower-shriek), passage from the constructed left adjoint to any chosen left adjoint, expanded by its universal property."
+   }
+  },
+  {
+   "text": "For a short exact sequence $0\\to M_1\\xrightarrow{i}M_2\\xrightarrow{q}M_3\\to0$, preservation of its kernel gives $Ai=\\ker(Aq)$. To check the cokernel, let $h:AM_2\\to N$ satisfy $h\\circ Ai=0$. Under the given adjunction, its transpose $\\widetilde h:M_2\\to T^{\\mathrm{Ab}}N$ satisfies $\\widetilde h\\circ i=0$, by naturality and additivity of $T^{\\mathrm{Ab}}$. It factors uniquely through $q$. Transposing back gives the unique factorization of $h$ through $Aq$, so $Aq$ is the cokernel of $Ai$. Thus the image sequence is short exact. No terminal object, local slice equivalence, or assertion about set-valued lower shriek was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BH (lemma-exactness-lower-shriek), right exactness of a left adjoint; cokernel universal-property argument written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-sfb-almost-filtered-abelian-colimits",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04BH (lemma-exactness-lower-shriek), with the two checks of Sites 00X4 expanded and Algebra 04B0 extracted as the sole new supporting node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "almost.*[Ff]iltered|[Aa]lmost.*[Dd]irected|preserves.*[Ee]qualizer",
+   "results": "{\"t\": \"2026-10-23T23:02:24Z\", \"tool\": \"grep\", \"query\": \"almost.*[Ff]iltered|[Aa]lmost.*[Dd]irected|preserves.*[Ee]qualizer\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/RegularEpi.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\"], \"digest\": \"dd7095a042e05015\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Sites/Pullback.lean:89-99 and 119-121: finite-limit preservation assumes RepresentablyFlat and finite-limit preservation by the presheaf left Kan extension, not merely pullbacks and equalizers without terminal objects. CoverLifting.lean:322-328 puts precomposition on the left of a different adjunction. Other hits give sheafification, local injectivity, or general exact-functor criteria; none gives this abelian lower-shriek theorem from these site hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian lower shriek is exact without terminal objects when a site functor preserves pullbacks and equalizers",
+   "results": "{\"t\": \"2026-10-23T23:02:25Z\", \"tool\": \"leansearch\", \"query\": \"Abelian lower shriek is exact without terminal objects when a site functor preserves pullbacks and equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.exactFunctor\", \"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.hasExactLimitsOfShape_of_preservesEpi\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono\", \"CategoryTheory.exactFunctor_iff\", \"CategoryTheory.Functor.preservesFiniteLimits_tfae\"], \"digest\": \"da7b9e66cb65b234\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Sites/Pullback.lean:89-99 and 119-121: finite-limit preservation assumes RepresentablyFlat and finite-limit preservation by the presheaf left Kan extension, not merely pullbacks and equalizers without terminal objects. CoverLifting.lean:322-328 puts precomposition on the left of a different adjunction. Other hits give sheafification, local injectivity, or general exact-functor criteria; none gives this abelian lower-shriek theorem from these site hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T23:02:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPullback\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\"], \"digest\": \"8e006d851f843bd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Sites/Pullback.lean:89-99 and 119-121: finite-limit preservation assumes RepresentablyFlat and finite-limit preservation by the presheaf left Kan extension, not merely pullbacks and equalizers without terminal objects. CoverLifting.lean:322-328 puts precomposition on the left of a different adjunction. Other hits give sheafification, local injectivity, or general exact-functor criteria; none gives this abelian lower-shriek theorem from these site hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous cocontinuous functor of sites preserving fiber products and equalizers the left adjoint to precomposition on abelian sheaves is exact",
+   "results": "{\"t\": \"2026-10-23T23:02:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous cocontinuous functor of sites preserving fiber products and equalizers the left adjoint to precomposition on abelian sheaves is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf\"], \"digest\": \"2ecaa9a8dcdc3b47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Sites/Pullback.lean:89-99 and 119-121: finite-limit preservation assumes RepresentablyFlat and finite-limit preservation by the presheaf left Kan extension, not merely pullbacks and equalizers without terminal objects. CoverLifting.lean:322-328 puts precomposition on the left of a different adjunction. Other hits give sheafification, local injectivity, or general exact-functor criteria; none gives this abelian lower-shriek theorem from these site hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]reserves.*[Ff]inite[Ll]imits|[Rr]epresentably[Ff]lat|sheafAdjunctionContinuous",
+   "results": "{\"t\": \"2026-10-23T23:05:44Z\", \"tool\": \"grep\", \"query\": \"[Pp]reserves.*[Ff]inite[Ll]imits|[Rr]epresentably[Ff]lat|sheafAdjunctionContinuous\", \"sub\": \"CategoryTheory/Sites/Pullback.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"59\", \"75\", \"82\", \"87\"], \"digest\": \"210af81cfdee4a60\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Sites/Pullback.lean:89-99 and 119-121: finite-limit preservation assumes RepresentablyFlat and finite-limit preservation by the presheaf left Kan extension, not merely pullbacks and equalizers without terminal objects. CoverLifting.lean:322-328 puts precomposition on the left of a different adjunction. Other hits give sheafification, local injectivity, or general exact-functor criteria; none gives this abelian lower-shriek theorem from these site hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified left Kan extension of abelian group sheaves preserves injections when comma categories are disjoint unions of filtered categories",
+   "results": "{\"t\": \"2026-10-23T23:05:46Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafified left Kan extension of abelian group sheaves preserves injections when comma categories are disjoint unions of filtered categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.inj_of_sep\", \"CategoryTheory.Presheaf.isLocallyInjective_toSheafify'\", \"CategoryTheory.GrothendieckTopology.instIsLocallyInjectiveToSheafify\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\"], \"digest\": \"19673c00b13c448e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Sites/Pullback.lean:89-99 and 119-121: finite-limit preservation assumes RepresentablyFlat and finite-limit preservation by the presheaf left Kan extension, not merely pullbacks and equalizers without terminal objects. CoverLifting.lean:322-328 puts precomposition on the left of a different adjunction. Other hits give sheafification, local injectivity, or general exact-functor criteria; none gives this abelian lower-shriek theorem from these site hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of abelian sheaf lower shriek using almost filtered comma categories",
+   "results": "{\"t\": \"2026-10-23T23:29:46Z\", \"tool\": \"leansearch\", \"query\": \"Exactness of abelian sheaf lower shriek using almost filtered comma categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.isFiltered_of_final\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits\", \"CategoryTheory.AB5OfSize.mk\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\"], \"digest\": \"847866bec693d214\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/CategoryTheory/Sites/Pullback.lean:90-99,120-121 assumes RepresentablyFlat and finite-limit preservation of the presheaf Kan extension. The present hypotheses give only componentwise filtered comma categories and do not ensure nonemptiness. The adjunction at :75 is already the Mathlib leaf lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, and sheafification exactness is already lem-weil-pbc-sheafification-exact; neither proves this exactness criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T23:29:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPullback\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\"], \"digest\": \"8e006d851f843bd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/CategoryTheory/Sites/Pullback.lean:90-99,120-121 assumes RepresentablyFlat and finite-limit preservation of the presheaf Kan extension. The present hypotheses give only componentwise filtered comma categories and do not ensure nonemptiness. The adjunction at :75 is already the Mathlib leaf lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, and sheafification exactness is already lem-weil-pbc-sheafification-exact; neither proves this exactness criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint to precomposition on abelian sheaves along a continuous cocontinuous functor preserving pullbacks and equalizers is exact without a terminal object",
+   "results": "{\"t\": \"2026-10-23T23:29:47Z\", \"tool\": \"leanfinder\", \"query\": \"The left adjoint to precomposition on abelian sheaves along a continuous cocontinuous functor preserving pullbacks and equalizers is exact without a terminal object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\"], \"digest\": \"58d82df47aa6d7d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/CategoryTheory/Sites/Pullback.lean:90-99,120-121 assumes RepresentablyFlat and finite-limit preservation of the presheaf Kan extension. The present hypotheses give only componentwise filtered comma categories and do not ensure nonemptiness. The adjunction at :75 is already the Mathlib leaf lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, and sheafification exactness is already lem-weil-pbc-sheafification-exact; neither proves this exactness criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "preserve.*[Ee]qualiz|almost|[Rr]epresentably[Ff]lat|preservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-23T23:30:55Z\", \"tool\": \"grep\", \"query\": \"preserve.*[Ee]qualiz|almost|[Rr]epresentably[Ff]lat|preservesFiniteLimits\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/RegularEpi.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\"], \"digest\": \"8fde0b9787cfc87c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/CategoryTheory/Sites/Pullback.lean:90-99,120-121 assumes RepresentablyFlat and finite-limit preservation of the presheaf Kan extension. The present hypotheses give only componentwise filtered comma categories and do not ensure nonemptiness. The adjunction at :75 is already the Mathlib leaf lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, and sheafification exactness is already lem-weil-pbc-sheafification-exact; neither proves this exactness criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafPullback|def sheafAdjunctionContinuous|sheafToPresheaf.*lan|lan.*presheafToSheaf",
+   "results": "{\"t\": \"2026-10-23T23:32:29Z\", \"tool\": \"grep\", \"query\": \"def sheafPullback|def sheafAdjunctionContinuous|sheafToPresheaf.*lan|lan.*presheafToSheaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\"], \"digest\": \"004c9624294cceb4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/CategoryTheory/Sites/Pullback.lean:90-99,120-121 assumes RepresentablyFlat and finite-limit preservation of the presheaf Kan extension. The present hypotheses give only componentwise filtered comma categories and do not ensure nonemptiness. The adjunction at :75 is already the Mathlib leaf lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction, and sheafification exactness is already lem-weil-pbc-sheafification-exact; neither proves this exactness criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-slice-module-shriek-exact",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Injective module transport along representable stack morphisms. Supporting input: Exact module lower shriek under local slice equivalences. Exactness prerequisite: Stacks 04BH, abelian lower shriek for continuous cocontinuous functors preserving fibre products and equalizers, before transporting exactness through the 0798 forgetful comparison.",
+   "via": [
+    "lem-sfb-local-slice-module-shriek-exact",
+    "lem-sfb-stack-representable-module-injective-transport",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-lower-shriek-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks 04BH, 00X4 and 04B0. Reused the existing abelian comma-colimit adjunction and exact sheafification leaves; expanded the two universal-property checks, transferred finite limits through abelian colimits and sheafification, and proved additivity, uniqueness of the chosen left adjoint, and right exactness explicitly. Added only the coefficient-specific almost-filtered colimit lemma. Normalized doubled TeX backslashes without changing the statement.",
+  "blueprint": "The inherited support chain ends at det-thm-sf-ctf-stability-direct-images, clause (3), through local-slice exact module lower shriek and the stack cohomological inputs. Read latest blueprint main-20261024, ef6f9619fdbffa59e88528fb56483d76c70258c8, six-functors-basics/sk-thm-sf-ctf-stability direct-images proof (3). This is the 04BH abelian exactness prerequisite of lem-sfb-local-slice-module-shriek-exact, not a new route. blueprint_refs ancestor returns None for this inherited chain, retained as supplied. No unit realization is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-3ad64df74",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-3ad64df74 (reviewer sub-agent of L); spot-checked: PASS: no faults found and no fixes written; review in review.md. Sources read in full: Stacks 04BH (sites-modules lemma-exactness-lower-shriek), 00X4 (sites lemma-almost-directed), 04B0 (algebra lemma-almost-directed-colimit-exact) and 002X (categories lemma-split-into-directed). Item: the statement and hypotheses (a)-(c) are unchanged from base; only TeX was normalized. The proof runs as follows. Step 1 takes the abelian adjunction (u_pF)^# ⊣ u^s from the 00WW/00WX nodes; both statements were read, and the arrow convention and colimit over I_V^op match. Steps 2-3 write out the two universal-property checks that Stacks omits in 00X4, giving conditions (a) and (b) for J_V; I verified them. Step 4 shows P preserves finite limits and is additive, from the new node plus the objectwise finite-limits node (1). Step 5 does the same for B = #∘P∘ι via sheafification-exact (1),(2), with a biproduct argument for additivity. Step 6 gives A ≅ B by Yoneda uniqueness of adjoints. Step 7 proves Aq = coker(Ai) by transposing through the adjunction. Cocontinuity is in the statement but unused in the proof; the target is not weakened. New node lem-sfb-almost-filtered-abelian-colimits is 04B0 with the 002X hypotheses written out. It is statement-only, self-contained, true (direct sum of filtered colimits over the 002X decomposition) and site-free, so it does not restate the item. Small cases checked: empty I gives 0; a discrete pair gives a direct sum; a nontrivial group fails (b), as it must since coinvariants are not left exact; a cospan fails (a). Not a duplicate: the existing almost-filtered-components node is 002X only, almost-filtered-set-colimits is the Set case (disjoint union is not direct sum), and the slice/module shriek nodes carry extra hypotheses or cite the item. Mathlib's exactness instances need IsFiltered (nonempty and connected index), so there is no exact leaf. No cycle, no SGA citation. Accepted tool_uses: the generic pbc site/sheaf nodes from other units (site-continuous-pushforward-sheaf, continuous-functor-sheaf-pullback-adjunction, presheaf-finite-limits-objectwise, sheafification-exact)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AbelianLowerShriekExact",
+  "declaration": "CategoryTheory.Functor.abelianLowerShriek_additive_shortExact",
+  "file": "lean/Sheaf/CategoryTheory/AbelianLowerShriekExact.lean",
+  "statement": "theorem abelianLowerShriek_additive_shortExact {C : Type u} [SmallCategory C] {D : Type u} [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (F : C ⥤ D) [F.IsCocontinuous J.toGrothendieck K.toGrothendieck] (hcover : ∀ (X : C) (R : Presieve X), R ∈ J X → R.map F ∈ K (F.obj X)) [HasPullbacks C] [HasEqualizers C] [PreservesLimitsOfShape WalkingCospan F] [PreservesLimitsOfShape WalkingParallelPair F] : ∃ hcontinuous : F.IsContinuous J.toGrothendieck K.toGrothendieck, ∀ A : Sheaf J.toGrothendieck AddCommGrpCat.{max u w} ⥤ Sheaf K.toGrothendieck AddCommGrpCat.{max u w}, (A ⊣ @sheafPushforwardContinuous C _ D _ F AddCommGrpCat.{max u w} _ J.toGrothendieck K.toGrothendieck hcontinuous) → ∃ _ : A.Additive, ∀ S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{max u w}), S.ShortExact → (S.map A).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fa291632",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Checked against Stacks 04BH (sites-modules.tex l.1658), the node and its 3 stmt_deps; only the lean field differs from live. Cocontinuity = the special-cocontinuity dep's first clause verbatim; continuity = hcover + global WalkingCospan preservation; pullbacks and equalizers exist in C and are preserved; no terminal object or slice equivalence. The continuity conclusion (∃ hcontinuous) is true (sites are coverages; isContinuous_toGrothendieck_of_pullbacksPreservedBy / 00WW), same pattern as the landed sheafPullback_preserves_pullbacks_and_equalizers. The conclusion covers every chosen left adjoint: additive and preserves short exact sequences. Sites in one universe u as in the landed sibling; coefficients max u w. Statement verbatim, docstrings with source place and all 7 proof steps, sorry only, no duplicate in Mathlib or live. Report sections present. No compile (no file changed)."
+ }
+}

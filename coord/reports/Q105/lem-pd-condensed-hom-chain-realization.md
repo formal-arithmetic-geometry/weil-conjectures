@@ -1,0 +1,37 @@
+## Worker report
+
+Files written: `dag/nodes/sec-poincare-duality/lem-pd-condensed-hom-chain-realization.json` (statement unchanged; four-step split; existing Mathlib leaves reused), `citations.json`, and this report. There are no new nodes and no new Mathlib leaves. The original citations, statement dependencies, blueprint provenance and searches were retained. Six new executed searches were appended with their actual results.
+
+Attachments: none. I searched the project by the exact blueprint tag and by condensed Hom, tensor-Hom, exchange and Poincare terminology. `WeilConjectures/PoincareDuality/Abstract.lean`, lines 225–244, contains the calculation in a local `have e` inside `CategoryTheory.Verdier.isIso_exchange_of_isIso`; its declaration concludes `IsIso`, rather than the entire equality and natural Hom chain of this item. The local equality is not a declaration for attachment. `PoincareDuality/Verdier.lean` specializes the larger isomorphism result. Neither replaces this item by an exact attachment.
+
+WANTED: none.
+
+The imported item had no proof. Its statement is correctly typed and remains unchanged. The blueprint source `literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/sk-thm-sf-tensor-hom.proof.md` displays the chain in the opposite direction. The present argument reverses its bijections and computes their value using the specified adjunctions. The blueprint's finite/adically compared coefficient categories are not identified with the condensed categories: the latter's adjunctions and closure are supplied by the item's own definition dependencies. There is no source error or statement dispute.
+
+All requested work is finished in the sandbox, pending the mandatory dry run and push.
+
+## Searches and reuse
+
+I read the statements of the existing formula nodes and searched the whole DAG by adjunction/Hom/currying titles and formulas. Whole-blueprint searches included `Hom bijection`, `currying`, `tensor–Hom`, `counit representative`, and `projection counit`. The tensor-Hom blueprint node gives the geometric chain in its different coefficient setting, not this condensed precise-representative statement. The ancestor command returns `None` for the seeded target lineage; the item's existing null ancestor and detailed place are retained. No new node needed a blueprint ancestor.
+
+The six searches in `searches.jsonl` are two LeanFinder phrasings, Loogle, LeanSearch and two grep patterns. I read the returned hits. Parametrized adjunction hom equivalences, rigid tensor adjunctions, composite counits and `MonoidalClosed.homEquiv_apply_eq` give ingredients, not the full item. I also read `Mathlib/CategoryTheory/Adjunction/Basic.lean`, lines 159–182, and `Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean`, lines 145–195: these confirm the actual inverse-adjunct formula, source naturality, and evaluation-normalized uncurrying used by the existing leaves. The original searches from Q59 are retained as prior provenance, not claimed as newly executed by Q105.
+
+## Not duplicates
+
+No new nodes. Reused `lem-weil-pbc-adjunction-of-natural-bijection` and `lem-pod-closed-uncurry-laws`, both Mathlib leaves, instead of introducing duplicate generic formulas or a node restating a clause of the item.
+
+## Review by Q105
+
+I read the chapter and the Verdier-exchange unit record. The unit uses tensor-Hom exchange to obtain Verdier exchange; the displayed Hom-chain source above is precisely that formal route. The auxiliary concrete source I read was the local calculation in `PoincareDuality/Abstract.lean`, lines 225–244. I checked its functor naming against this item: its `F,G,P,S` are this item's `U,G,F,V`. Only the natural family at the fixed K is needed here, so I did not add its stronger two-variable projection datum as a hypothesis.
+
+Step 1 uses the statement of `sk-def-sfb-dc-restricted-functors`, which explicitly gives closure for pushforward, tensor and internal Hom at the stated l-adic coefficients, and restricts the pullback/pushforward and tensor/Hom adjunctions. `sk-def-sfb-dc-upper-shriek` explicitly gives the chosen-compactification adjunction. `def-sfb-dc-tensor-hom-adjunction` specifies the left-factor adjunction; hence no braiding or switch of tensor factors is implicit. The inverse of precomposition with P_B is written explicitly. W, E and D remain objects of the same full categories, rather than enlarging the category of tests. The elementary composition of five bijections uses no representability or Yoneda theorem.
+
+Step 2 uses the literal formula Psi^{-1}(b)=epsilon composed with F(b) in `lem-weil-pbc-adjunction-of-natural-bijection`, first for U and then for F. The statement of `lem-pod-closed-uncurry-laws` explicitly gives uncurry(v)=(1 tensor v);evaluation. Substituting q gives exactly the displayed composite, with the two distinct counits in their correct positions. Although the generic adjunction leaf is phrased as construction from natural Hom bijections, its input may be the Hom bijections of the specified adjunction, and its displayed formulas apply to those same bijections and counits. There is no replacement by a merely isomorphic adjunction.
+
+Step 3 is a short substitution using the assumed naturality equation of P, the tensor functor composition law and F's composition law. The exact equation is displayed; it is not hidden in the word 'transport'. The source-naturality clause of `lem-weil-pbc-adjunction-of-natural-bijection` gives curry(r_E composed with (1 tensor h))=curry(r_E) composed with h. Taking h=identity shows that curry(r_E) is exactly the Phi in the statement. Step 4 is just associativity and proves naturality for arbitrary a:B' to B. Thus steps 3–4 are elementary relative to the cited formulas and the stated data; no non-elementary lemma is hidden in them. Every proof step is shorter than 2000 characters, and the whole proof is shorter than 3000 characters.
+
+I checked the arrows before substitution: UB to W, K tensor UB to VL, F(K tensor UB) to L, FK tensor B to L, and B to D. For h=identity at E the formula reduces to Phi itself; for an arbitrary composable a it gives the naturality square. For zero K or zero test B the same equations still typecheck and the Hom bijections remain valid. For identity functors and identity projection maps the calculation reduces to the ordinary tensor-Hom adjunction. No nonzero-object, smoothness, purity, finite-field or coefficient-comparison hypothesis was introduced. The isomorphism hypothesis on P is used only to obtain bijectivity, while its naturality is used for the precise representative.
+
+I checked delivery-errors B–E with the node statements open. There are no new definitions, statement-only nodes, source-tag collisions or per-degree derived comparisons. I retained the source fields and filled the split report. The citations file contains a verbatim part of each cited statement for every step; these substrings were checked directly against the live JSON statements. The proof cites statements rather than extracting undocumented constructions from their proofs. No SGA source is used. The only correction while drafting was a Python quoting typo before any files were written; there was no mathematical statement change.
+
+The first dry run required a longer quotation for the exceptional adjunction. I replaced the short formula by its full sentence stating that lower shriek is left adjoint to upper shriek; the proof and statement were unchanged.

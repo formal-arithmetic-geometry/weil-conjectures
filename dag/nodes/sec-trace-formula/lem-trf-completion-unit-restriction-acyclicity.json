@@ -1,0 +1,125 @@
+{
+ "id": "lem-trf-completion-unit-restriction-acyclicity",
+ "kind": "statement",
+ "title": "Restricted K-injective coefficient systems are acyclic for ordinary inverse limit",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and an arbitrary scheme W. Use the actual coefficient sequence site and restriction U = coefficientSequenceRestriction of [def-coef-ringed-sequence-site], and its complex functor tower [def-trf-completion-unit-models]. For every K-injective coefficient-system complex I, every K-injective complex J of towers of completed-coefficient modules, and every quasi-isomorphism j : tower(I) -> J, the degreewise ordinary inverse-limit map lim(j) is a quasi-isomorphism. Restriction itself is not asserted to preserve K-injectivity. There is no invertibility-of-l, boundedness, or flatness hypothesis.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "def-coef-ringed-sequence-site",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "0941 lemma-derived-limit-is-ok and 0D6E lemma-derived-pushforward-composition; restriction-acyclicity substep of parent proof step 1."
+ },
+ "proof": [
+  {
+   "text": "Use the vertical-slice equivalence between modules on the coefficient sequence site and strict semilinear systems. Its exactness preserves K-injectivity. Identify the specified restriction with the strict-system restrictionFunctor by its unique object, horizontal-map and morphism characterizations; this yields an isomorphism of restricted tower complexes, natural in I.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport j through that isomorphism. Apply the first conclusion of acyclicity from lem-coef-restricted-tower-resolution-acyclicity with the identity system resolution. It says that ordinary lim sends this tower resolution to a quasi-isomorphism. Conjugating by the degreewise limit of the transport isomorphism gives the claimed map lim(j). No K-injectivity of the restricted tower is used.",
+   "uses": [
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-restricted-tower-resolution-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "0941 lemma-derived-limit-is-ok and 0D6E lemma-derived-pushforward-composition; restriction-acyclicity substep of parent proof step 1."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of a K-injective resolution of a restricted semilinear coefficient system is a quasi-isomorphism; Equality of finite scalar adjunction mates determines a tensor reduction comparison on K-flat complexes",
+   "results": "The acyclicity query returned QuasiIso, homotopy-equivalence quasi-isomorphisms, and ordinary injective resolutions. The finite-mate query returned linear adjoints and tensor equalizer results, with no specialized comparison.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem states the fixed coefficient-system specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a K-injective sequence is acyclic for inverse limit; Finite evaluation of derived tensor comparison determined by normalized adjunction unit",
+   "results": "Returned bounded-below injective criteria, Grothendieck complexes, and generic monoidal adjunction comparisons. Read the project RestrictedTowerResolutionAcyclicity and SequencePushforwardLimitProjections declarations instead.",
+   "date": "2026-10-26",
+   "verdict": "The project has the generic restriction acyclicity statement, but the specified coefficient-site transport is required. Finite normalization requires the actual coefficient scalar units."
+  },
+  {
+   "tool": "grep",
+   "query": "restricted_limit_acyclic|finiteComparison_of_unit|rightDerivedFunctorObjQIso|homEquiv_naturality_right|isIso_map_iff",
+   "results": "No duplicate specialized declarations in Sheaf or WeilConjectures. Read CoefficientRingedSequenceSite, CompletionUnitModels, CoefDerivedSystemEvaluationCalculus, DerivedScalarExtensionRestrictionAdjunction, RestrictedTowerResolutionAcyclicity and Mathlib Adjunction/Unique. Whole-blueprint searches found the generic lem-coef-restricted-tower-resolution-acyclicity and the parent comparison, but no other node of either specialized statement.",
+   "date": "2026-10-26",
+   "verdict": "Use generic acyclicity after transporting the actual site; use finite scalar Hom injectivity for the finite comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletionUnitDerivedAdjunctionComparison",
+  "date": "2026-10-26",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "0941 lemma-derived-limit-is-ok and 0D6E lemma-derived-pushforward-composition; restriction-acyclicity substep of parent proof step 1.",
+   "via": [
+    "lem-trf-completion-unit-derived-adjunction-comparison",
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletionUnitRestrictionAcyclicity",
+  "file": "lean/Sheaf/Paper/CompletionUnitRestrictionAcyclicity.lean",
+  "declaration": "WeilConjectures.CompletionUnit.restricted_limit_acyclic",
+  "statement": "theorem restricted_limit_acyclic\n    (I : CochainComplex (coefficientSequenceModules l E W) ℤ) [I.IsKInjective]\n    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective]\n    (j : (tower l E W).obj I ⟶ J) [QuasiIso j] :\n    QuasiIso (((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n      scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T065823-L-3252510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T080831-L-1618165",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.CompletionUnit.restricted_limit_acyclic"
+  ],
+  "sorry_after": []
+ }
+}

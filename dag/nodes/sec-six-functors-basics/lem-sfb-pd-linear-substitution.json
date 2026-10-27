@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-pd-linear-substitution",
+ "kind": "statement",
+ "title": "Linear substitution identity for divided-power multinomial expressions",
+ "statement": "Let $A,B$ be commutative rings, $f:A\\to B$ a unital ring map, and $I\\subseteq A$ an ideal with an ordinary divided-power structure $\\gamma$ [def-sfb-ordinary-divided-power-structure]. For a finite tuple $x=(x_1,\\ldots,x_r)$ in $I$, $b=(b_1,\\ldots,b_r)$ in $B$, and $n\\geq0$, put\n$$P_n(x;b)=\\sum_{e\\in\\mathbb N^r,\\;\\sum_i e_i=n}\\prod_{i=1}^r b_i^{e_i}f(\\gamma_{e_i}(x_i)),$$\nwith $\\gamma_0(x)=1$. For any $s\\geq0$, $a_{ij}\\in A$ and $c_j\\in B$, put $b_i=\\sum_{j=1}^s f(a_{ij})c_j$ and $y_j=\\sum_{i=1}^r a_{ij}x_i$. Then $P_n(x;b)=P_n(y;c)$ for every $n\\geq0$. Empty tuples, zero coefficients and zero ideals are allowed. No divided powers on any ideal of $B$ and no flatness of $f$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07H1 flat-case proof: matrix substitution identity preceding the common-refinement argument."
+ },
+ "stmt_deps": [
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use finite coefficient arrays $u=(u_0,\\ldots,u_n)$ over $B$, with $(u*v)_m=\\sum_{p+q=m}u_pv_q$ for $0\\le m\\le n$, and unit $\\delta_0=1$, $\\delta_m=0$ for $m>0$. This is merely finite-sum notation. Commutativity swaps $(p,q)$; both $((u*v)*w)_m$ and $(u*(v*w))_m$ expand to $\\sum_{p+q+t=m}u_pv_qw_t$, so convolution is associative. The unit assertion follows because only the term with zero index in $\\delta$ survives. Thus finite convolution products may be reordered, including empty products $\\delta$. Their $m$th entry is $\\sum_{\\sum_i e_i=m}\\prod_i(u_i)_{e_i}$: for zero factors this is the convention for $\\delta$; appending a factor gives exactly the displayed convolution sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07H1, lemma-gamma-extends, flat-case proof: displayed matrix-substitution identity; expansion using Tag 07GL, definition-divided-powers."
+   }
+  },
+  {
+   "text": "For $z\\in I$ and $t\\in B$, write $E(z;t)_m=t^m f(\\gamma_m(z))$ for $0\\le m\\le n$. From the scalar axiom with scalar zero, $\\gamma_m(0)=0$ for $m>0$; $\\gamma_0(0)=1$. Therefore $E(0;t)=\\delta=E(z;0)$, using $0^0=1$. The degree-zero entries of all these arrays are $1$. In particular the coefficient-array convention deals with zero elements and with an empty tuple.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07H1, lemma-gamma-extends, flat-case proof: displayed matrix-substitution identity; expansion using Tag 07GL, definition-divided-powers."
+   }
+  },
+  {
+   "text": "For $z\\in I$ and $t,u\\in B$, the binomial theorem in the commutative ring $B$ gives\n$$E(z;t+u)_m=\\sum_{p+q=m}t^pu^q\\binom mp f(\\gamma_m(z))=\\sum_{p+q=m}t^pu^q f(\\gamma_p(z))f(\\gamma_q(z)).$$\nThe second equality uses the product axiom $\\gamma_p(z)\\gamma_q(z)=\\binom{p+q}{p}\\gamma_{p+q}(z)$ when $p,q>0$; if one index is zero it follows from $\\gamma_0(z)=1$ and the endpoint binomial coefficient $1$. For $m=0$ it is $1=1$. A unital ring map preserves these integer coefficients. Hence $E(z;t+u)=E(z;t)*E(z;u)$.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure",
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07H1, lemma-gamma-extends, flat-case proof: displayed matrix-substitution identity; expansion using Tag 07GL, definition-divided-powers."
+   }
+  },
+  {
+   "text": "For $z,w\\in I$ and $t\\in B$, the addition axiom and $t^{p+q}=t^pt^q$ give, entry by entry,\n$$E(z+w;t)_m=\\sum_{p+q=m}t^pt^q f(\\gamma_p(z))f(\\gamma_q(w))=(E(z;t)*E(w;t))_m.$$\nThis includes $m=0$, where both sides are $1$. For $a\\in A$, the scalar axiom similarly gives $E(az;t)=E(z;f(a)t)$, including degree zero. All ideal-membership hypotheses hold since $I$ is an ideal.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07H1, lemma-gamma-extends, flat-case proof: displayed matrix-substitution identity; expansion using Tag 07GL, definition-divided-powers."
+   }
+  },
+  {
+   "text": "Repeated use of step 3 yields $E(z;\\sum_j t_j)=\\mathop{*}_j E(z;t_j)$: the empty case is step 2 and the successor case splits off the last summand by step 3. In the same way step 4 and $E(0;t)=\\delta$ give $E(\\sum_i z_i;t)=\\mathop{*}_i E(z_i;t)$ for every finite tuple in $I$. Apply these identities with $t_j=f(a_{ij})c_j$ and $z_i=a_{ij}x_i$; every $z_i$ lies in $I$ and every $t_j$ lies in $B$. The scalar identity of step 4 then gives\n$$\\mathop{*}_i E(x_i;b_i)=\\mathop{*}_i\\mathop{*}_j E(a_{ij}x_i;c_j)=\\mathop{*}_j\\mathop{*}_i E(a_{ij}x_i;c_j)=\\mathop{*}_j E(y_j;c_j).$$\nThe middle equality reorders the same finite list of $rs$ factors using step 1. Taking the $n$th entry and the finite-product formula of step 1 is exactly $P_n(x;b)=P_n(y;c)$. If either index set is empty, both corresponding products are $\\delta$, so the argument also covers $r=0$ or $s=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 07H1, lemma-gamma-extends, flat-case proof: displayed matrix-substitution identity; expansion using Tag 07GL, definition-divided-powers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ordinary-divided-power-structure",
+  "lem-pur-commutative-ring-binomial-expansion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 07H1, lemma-gamma-extends, matrix-substitution paragraph; explicit finite-convolution expansion of the coefficient comparison, using the binomial theorem rather than rational universal coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "linearCombination|dpow_sum|dpow_smul|prod_dpow",
+   "results": {
+    "t": "2026-10-24T01:08:40Z",
+    "tool": "grep",
+    "query": "linearCombination|dpow_sum|dpow_smul|prod_dpow",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean"
+    ],
+    "digest": "085d9769a6b1eef9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:329-351 has dpow_sum and dpow_linearCombination but these evaluate existing divided powers in the target ring; this identity assumes divided powers only on the source ideal. prod_dpow at line 259 is a supporting expansion, not this matrix identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of generators identity for divided power multinomial sums in an arbitrary algebra without divided powers on the algebra",
+   "results": {
+    "t": "2026-10-24T01:08:41Z",
+    "tool": "leansearch",
+    "query": "Change of generators identity for divided power multinomial sums in an arbitrary algebra without divided powers on the algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_sum'",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.prod_dpow",
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.RatAlgebra.dpow_eq_inv_fact_smul",
+     "DividedPowers.DPMorphism.fromGens_coe",
+     "DividedPowers.OfInvertibleFactorial.mul_dpow",
+     "DividedPowers.dpow_comp_from_gens"
+    ],
+    "digest": "720b2157af5ede16"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:329-351 has dpow_sum and dpow_linearCombination but these evaluate existing divided powers in the target ring; this identity assumes divided powers only on the source ideal. prod_dpow at line 259 is a supporting expansion, not this matrix identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "DividedPowers.dpow_linearCombination",
+   "results": {
+    "t": "2026-10-24T01:08:41Z",
+    "tool": "loogle",
+    "query": "DividedPowers.dpow_linearCombination",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_linearCombination"
+    ],
+    "digest": "d6a7d663bc1cf532"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:329-351 has dpow_sum and dpow_linearCombination but these evaluate existing divided powers in the target ring; this identity assumes divided powers only on the source ideal. prod_dpow at line 259 is a supporting expansion, not this matrix identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided power multinomial expression is invariant under a matrix change of coefficients b_i equals sum a_ij c_j",
+   "results": {
+    "t": "2026-10-24T01:08:42Z",
+    "tool": "leanfinder",
+    "query": "Divided power multinomial expression is invariant under a matrix change of coefficients b_i equals sum a_ij c_j",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.prod_dpow",
+     "DividedPowers.dpow_sum'",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.exp_add'",
+     "DividedPowers.OfInvertibleFactorial.dpow_add_of_lt",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.dpow_add",
+     "DividedPowers.mul_dpow"
+    ],
+    "digest": "fba86b9f97ab10d9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:329-351 has dpow_sum and dpow_linearCombination but these evaluate existing divided powers in the target ring; this identity assumes divided powers only on the source ideal. prod_dpow at line 259 is a supporting expansion, not this matrix identity."
+  },
+  {
+   "tool": "grep",
+   "query": "check.*generat|from_gens|dpow_linearCombination|flat",
+   "results": {
+    "t": "2026-10-24T01:10:15Z",
+    "tool": "grep",
+    "query": "check.*generat|from_gens|dpow_linearCombination|flat",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean"
+    ],
+    "digest": "29102140dd9e2c14"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Basic.lean:329-351 has dpow_sum and dpow_linearCombination but these evaluate existing divided powers in the target ring; this identity assumes divided powers only on the source ideal. prod_dpow at line 259 is a supporting expansion, not this matrix identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided power multinomial expression is invariant under a matrix change of coefficients without divided powers in the target ring",
+   "results": {
+    "t": "2026-10-24T01:33:08Z",
+    "tool": "leanfinder",
+    "query": "Divided power multinomial expression is invariant under a matrix change of coefficients without divided powers in the target ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.prod_dpow",
+     "DividedPowers.dpow_sum'",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.dpow_comp_from_gens",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.coincide_on_smul",
+     "DividedPowers.OfInvertibleFactorial.dpow_add_of_lt",
+     "DividedPowers.RatAlgebra.dpow_eq_inv_fact_smul"
+    ],
+    "digest": "26670f8b836c4843"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dpow_sum and prod_dpow concern source divided powers; dpow_linearCombination evaluates a pre-existing divided-power structure in its ambient ring. DPMorphism declarations require target divided powers. None states the arbitrary-target coefficient matrix identity. Read Basic.lean:259-270 and 329-351."
+  },
+  {
+   "tool": "loogle",
+   "query": "DividedPowers.dpow_linearCombination",
+   "results": {
+    "t": "2026-10-24T01:33:08Z",
+    "tool": "loogle",
+    "query": "DividedPowers.dpow_linearCombination",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_linearCombination"
+    ],
+    "digest": "d6a7d663bc1cf532"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dpow_sum and prod_dpow concern source divided powers; dpow_linearCombination evaluates a pre-existing divided-power structure in its ambient ring. DPMorphism declarations require target divided powers. None states the arbitrary-target coefficient matrix identity. Read Basic.lean:259-270 and 329-351."
+  },
+  {
+   "tool": "grep",
+   "query": "dpow_sum|dpow_linearCombination|prod_dpow|linear.*substit",
+   "results": {
+    "t": "2026-10-24T01:33:08Z",
+    "tool": "grep",
+    "query": "dpow_sum|dpow_linearCombination|prod_dpow|linear.*substit",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean"
+    ],
+    "digest": "0462a34cbcb29c03"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dpow_sum and prod_dpow concern source divided powers; dpow_linearCombination evaluates a pre-existing divided-power structure in its ambient ring. DPMorphism declarations require target divided powers. None states the arbitrary-target coefficient matrix identity. Read Basic.lean:259-270 and 329-351."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divided power polynomial expressions and arbitrary algebra coefficients change of generators matrix identity",
+   "results": {
+    "t": "2026-10-24T01:33:09Z",
+    "tool": "leansearch",
+    "query": "Divided power polynomial expressions and arbitrary algebra coefficients change of generators matrix identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.dpow_comp_from_gens",
+     "DividedPowers.dpow_eq_from_gens",
+     "DividedPowers.recOn",
+     "DividedPowers.casesOn",
+     "DividedPowers.dpow_mul",
+     "DividedPowers.DPMorphism.mk.inj"
+    ],
+    "digest": "666727fb7eb35ab6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dpow_sum and prod_dpow concern source divided powers; dpow_linearCombination evaluates a pre-existing divided-power structure in its ambient ring. DPMorphism declarations require target divided powers. None states the arbitrary-target coefficient matrix identity. Read Basic.lean:259-270 and 329-351."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a divided power ideal I in A and a ring map A to B, coefficient convolution gives invariance of divided power sums under linear substitution over A",
+   "results": {
+    "t": "2026-10-24T01:34:01Z",
+    "tool": "leanfinder",
+    "query": "For a divided power ideal I in A and a ring map A to B, coefficient convolution gives invariance of divided power sums under linear substitution over A",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_comp_from_gens",
+     "DividedPowers.IsDPMorphism.dpow_comp",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.DPMorphism.dpow_comp",
+     "DividedPowers.dpow_sum'",
+     "DividedPowers.dpow_add'",
+     "DividedPowers.dpow_add"
+    ],
+    "digest": "ecc64c02dbda1049"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dpow_sum and prod_dpow concern source divided powers; dpow_linearCombination evaluates a pre-existing divided-power structure in its ambient ring. DPMorphism declarations require target divided powers. None states the arbitrary-target coefficient matrix identity. Read Basic.lean:259-270 and 329-351."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pd-flat-extension",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: the adjunctions of exterior and divided-power variables of Stacks 09PH/09PI and 0F4I that define the polynomial graded divided-power algebras of the item; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3). Supporting argument: Tag 07H5 (lemma-divided-power-polynomial-algebra), existence, uniqueness and universal property; the algebra and augmentation ideal are the explicit construction in section-divided-power-polynomial-ring. Supporting input to Tag 07H5: Tag 07H1 (lemma-gamma-extends), uniqueness and existence under condition (3), flatness. Immediate supporting input: Tag 07H1 flat-case proof: matrix substitution identity preceding the common-refinement argument.",
+   "via": [
+    "lem-sfb-pd-flat-extension",
+    "lem-sfb-ordinary-pd-polynomial-extension",
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pd-linear-substitution",
+  "worker": "stage1",
+  "summary": "Checked Tag 07H1 against the unchanged statement. Gave an explicit finite-convolution proof of the matrix identity using the five ordinary divided-power axioms and an existing commutative-ring binomial Mathlib leaf. No new nodes: the convolution identities are finite distributivity calculations written in full. Checked all degree-zero, empty-tuple, zero-coefficient and zero-ideal cases; no divided powers on B, flatness, factorial cancellation or rational embedding is used.",
+  "blueprint": "Supports the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images through the inherited chain to the flat extension of ordinary divided powers. The latest blueprint has no separate statement of this matrix identity; all five steps realize the Tag 07H1 coefficient-expansion subargument at the inherited blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-a84b5ca18",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-a84b5ca18 (reviewer sub-agent of L); spot-checked: Read dpa.tex Tag 07H1 (lemma-gamma-extends, flat-case matrix paragraph, lines 560-580). The statement is unchanged and matches the source: b_i=Σ f(a_ij)c_j and y_j=Σ a_ij x_i, with no flatness and no divided powers on B; it also matches the use in the citer lem-sfb-pd-flat-extension. The cited statements back the steps: def-sfb-ordinary-divided-power-structure for the scalar, addition and product axioms and γ_0=1, and the Mathlib leaf lem-pur-commutative-ring-binomial-expansion (add_pow). The five elementary steps are correct. They use truncated convolution (B[t]/t^{n+1}), the arrays E(z;t)_m=t^m f(γ_m z), E(0;t)=E(z;0)=δ, E(z;t+u)=E(z;t)*E(z;u) via binomial plus the product axiom with endpoint cases, E(z+w;t)=E(z;t)*E(w;t), E(az;t)=E(z;f(a)t), and the double product reordering. Edge cases checked: n=0, r=0, s=0, and a hand check r=1,s=2,n=2 using x²=2γ2(x), which also holds in characteristic 2. No new nodes. No duplicate in the DAG: the 07H1 hits are only the citer, the polynomial extension and the generator criterion. The blueprint snapshots have no divided-power text. No SGA, no cycle, proof_deps equals the union of uses, no tool_uses, no repair note. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DividedPowerLinearSubstitution",
+  "declaration": "DividedPowers.dpow_multinomial_linear_substitution",
+  "file": "lean/Sheaf/RingTheory/DividedPowerLinearSubstitution.lean",
+  "statement": "theorem dpow_multinomial_linear_substitution {A : Type u} {B : Type v} [CommRing A] [CommRing B] (f : A →+* B) (I : Ideal A) (γ : DividedPowers I) (r s : ℕ) (x : Fin r → A) (hx : ∀ i : Fin r, x i ∈ I) (a : Fin r → Fin s → A) (c : Fin s → B) (n : ℕ) : (∑ e ∈ (Finset.univ : Finset (Fin r)).sym n, ∏ i : Fin r, (∑ j : Fin s, f (a i j) * c j) ^ Multiset.count i e * f (γ.dpow (Multiset.count i e) (x i))) = ∑ d ∈ (Finset.univ : Finset (Fin s)).sym n, ∏ j : Fin s, c j ^ Multiset.count j d * f (γ.dpow (Multiset.count j d) (∑ i : Fin r, a i j * x i))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1952f3c7a",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Statement matches node and dpa.tex Tag 07H1 matrix paragraph: b_i=Σ_j f(a_ij)c_j, y_j=Σ_i a_ij x_i, Finset.univ.sym n with Multiset.count exponents (no multinomial factor, dpow_sum convention), f applied to source dpow. A:Type u, B:Type v independent; no flatness or target PD; hx membership. Edge cases n=0, r=0, s=0, zero ideal, zero ring, any characteristic covered; r=s=1 sanity check. Node differs from live only in lean (was null); statement verbatim in file; existing:false; no new nodes or defs; proof only sorry; source and blueprint docstrings with 5-step plan; report has Worker report and Second reading by Q43. No Mathlib/project duplicate (dpow_sum/prod_dpow/dpow_linearCombination differ). No file changed, so no compile; relied on worker's clean scompile."
+ }
+}

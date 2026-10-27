@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-scalar-proper-open-interchange-square",
+ "kind": "statement",
+ "title": "Coefficient compatibility of the normalized proper/open interchange",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes are separated of finite type over $k$, and all morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\Lambda\\to\\Lambda'$ be any of the coefficient maps specified in [det-prop-scalar-six-direct-image]: a homomorphism of finite commutative $\\ell$-primary rings, $\\mathcal O_E\\to\\mathcal O_F$ or $E\\to F$ for finite $F/E$ inside $\\overline{\\mathbf Q}_\\ell$, $\\mathcal O_E\\to E$, $E\\to\\overline{\\mathbf Q}_\\ell$, a continuous map $\\mathcal O_E\\to A$ to a finite admissible ring, or a finite composite. Here $E/\\mathbf Q_\\ell$ is finite and $\\mathcal O_E$ its valuation ring; use pulled-back condensed coefficients, including the finite-subextension condensed convention for $\\overline{\\mathbf Q}_\\ell$. Work in ordinary unbounded module-object derived categories on the small pro-étale sites [sk-def-sfb-module-derived-pushpull]. Write $T_V=\\Lambda'_V\\otimes^{\\mathbf L}_{\\Lambda_V}-$ [sk-def-sfb-coefficient-change], $\\gamma_{v,M}:T Rv_*M\\to Rv_*TM$ for the unit/pullback/counit comparison [det-prop-scalar-six-direct-image], and $\\delta_{a,M}:T a_!M\\xrightarrow{\\sim}a_!TM$ for the canonical open comparison [def-sfb-derived-open-immersion-shriek-iso, det-prop-scalar-six-pullback]. The notation $\\Dctf$ means bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible].\n\nLet $p:\\overline X\\to Y$ be proper and $i:Y\\hookrightarrow\\overline Y$ a quasi-compact open immersion. Choose a dense compactification $\\overline X\\xrightarrow{j'}W\\xrightarrow r\\overline Y$ of $ip$ [sk-def-nagata-sketch-data]. Use $r^{-1}(Y)=\\overline X$, $r|_{\\overline X}=p$, and the natural map $\\iota_A:i_!Rp_*A\\to Rr_*j'_!A$ characterized by restriction to $\\operatorname{id}_{Rp_*A}$, as in [det-sf-comp-composition-interchange]. For every $A\\in\\Dctf(\\overline X,\\Lambda)$ the coefficient square is\n$$Rr_*\\delta_{j',A}\\circ\\gamma_{r,j'_!A}\\circ T_{\\overline Y}(\\iota_A)\n=\\iota_{T_{\\overline X}A}\\circ i_!\\gamma_{p,A}\\circ\\delta_{i,Rp_*A}.$$\nIts source is $T_{\\overline Y}i_!Rp_*A$ and its target is $Rr_*j'_!T_{\\overline X}A$. Under the canonical open-restriction and pullback/coefficient identifications, the restriction of each side to $Y$ is $\\gamma_{p,A}$. The source and target are bounded constructible of finite Tor amplitude over $\\Lambda'$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Composition paragraph: interchange characterized by restriction to the open; returned step 6."
+ },
+ "stmt_deps": [
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "det-sf-comp-composition-interchange",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Use [det-sf-comp-composition-interchange] (1) to identify $W\\times_{\\overline Y}Y$ with $\\overline X$, with projections $j'$ and $p$. For $R=\\Lambda,\\Lambda'$ write $u_{a,R}:1\\xrightarrow{\\sim}a_R^*a_{!,R}$ for the actual open unit. The open-restriction lemma gives $\\rho_{R,B}:i_R^*Rr_{*,R}B\\xrightarrow{\\sim}Rp_{*,R}j_R'^*B$ and the open adjunctions on the entire unbounded categories. Put $N=Rp_{*,\\Lambda}A$, $B=j'_{!,\\Lambda}A$, and $H_R(M)=Rr_{*,R}j'_{!,R}M$. Define $\\sigma_{R,M}=Rp_{*,R}(u_{j',R,M}^{-1})\\circ\\rho_{R,j'_{!,R}M}$. The defining normalization of $\\iota_M$ is precisely $\\sigma_{R,M}\\circ i_R^*(\\iota_M)\\circ u_{i,R,Rp_{*,R}M}=1$.",
+   "uses": [
+    "det-sf-comp-composition-interchange",
+    "lem-sfb-derived-open-square-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition, normalized Cartesian open square and interchange"
+   }
+  },
+  {
+   "text": "The $\\rho_{R,B}$ just used is the actual unit--square--counit exchange $\\operatorname{Ex}_{R,B}$ for this Cartesian square. Indeed, transpose its defining Hom chain under $p_R^*\\dashv Rp_{*,R}$. The adjunct formula for $\\beta^{-1}:j'_!p^*\\to r^*i_!$ in [lem-sfb-condensed-open-square-scalar-comparison] is $\\theta\\circ p^*u_i$. Substituting it in that chain and cancelling the open unit against its counit gives $j'^*(\\varepsilon_{r,B})\\circ\\theta_{Rr_*B}$, the transpose defining $\\operatorname{Ex}_{R,B}$ in [def-weil-pbc-ambient-ringed-exchange]. Equality follows from the adjunction bijection. The formula remains this formula on unbounded complexes: the cited open-square lemma localizes $\\beta$ termwise, and the derived restriction lemma gives the same Hom chain there. Thus the exchange rectangle applies to the specified $\\rho$, not an arbitrary isomorphism with these endpoints.",
+   "uses": [
+    "lem-sfb-derived-open-square-restriction",
+    "lem-sfb-condensed-open-square-scalar-comparison",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition, identification of canonical open restriction with its adjunction mate"
+   }
+  },
+  {
+   "text": "Write $c_a:a_{\\Lambda'}^*T\\xrightarrow{\\sim}Ta_\\Lambda^*$ for the inverse pullback comparison of [det-prop-scalar-six-direct-image]. It is the inverse of the canonical comparison of [det-prop-scalar-six-pullback] (1), whose forward map is the scalar-adjunction mate of the restriction/inverse-image comparison [def-sfb-scalar-six-coefficient-interfaces]. By [lem-sfb-kflat-scalar-comparison-normalization] this mate is $\\theta_a$ and its inverse is the balanced K-flat comparison. Hence $c_a=\\lambda_a=\\theta_a^{-1}$ for the $\\lambda$ of the rectangle and the $\\theta$ of the open normalization below. The normalized exchange rectangle for $(r,p,i,j')$ and $B$ says\n$$Rp_{*,\\Lambda'}(c_{j',B})\\rho_{\\Lambda',T_WB}i_{\\Lambda'}^*(\\gamma_{r,B})=\\gamma_{p,j_\\Lambda'^*B}\\,T_Y(\\rho_{\\Lambda,B})\\,c_{i,Rr_{*,\\Lambda}B}.$$\nIts $\\rho$ and $\\gamma$ are those in steps 1--2: the rectangle defines $\\gamma$ by exactly the same counit transpose as the direct-image node. The open scalar normalization gives, for $a=i,j'$,\n$$u_{a,\\Lambda',T M}^{-1}a_{\\Lambda'}^*(\\delta_{a,M})=T(u_{a,\\Lambda,M}^{-1})c_{a,a_{!,\\Lambda}M}.$$\nThese formulas apply to $M=A$ and $M=N$ without assuming either scalar map flat.",
+   "uses": [
+    "lem-sfb-scalar-geometric-exchange-rectangle",
+    "det-prop-scalar-six-direct-image",
+    "lem-sfb-open-scalar-conjugate-normalization",
+    "det-prop-scalar-six-pullback",
+    "def-sfb-scalar-six-coefficient-interfaces",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition, coefficient compatibility of the open-restriction exchange"
+   }
+  },
+  {
+   "text": "Put $q=Rr_{*,\\Lambda'}(\\delta_{j',A})\\circ\\gamma_{r,B}$, and let $L=q\\circ T_{\\overline Y}(\\iota_A)$ and $R=\\iota_{T_{\\overline X}A}\\circ i_{!,\\Lambda'}(\\gamma_{p,A})\\circ\\delta_{i,N}$. Use the source identification $s=u_{i,\\Lambda',T_YN}^{-1}\\circ i_{\\Lambda'}^*(\\delta_{i,N})$ and target identification $t=\\sigma_{\\Lambda',T_{\\overline X}A}$. Naturality of $\\rho$ and $\\gamma$, step 3 for $j'$, and the rectangle give\n$$t\\,i_{\\Lambda'}^*q=\\gamma_{p,A}\\,T_Y(\\sigma_{\\Lambda,A})\\,c_{i,H_\\Lambda(A)}.$$\nNow naturality of $c_i$, step 1's normalization, and step 3 for $i$ yield\n$$t\\,i_{\\Lambda'}^*L=\\gamma_{p,A}\\,T_Y(u_{i,\\Lambda,N}^{-1})c_{i,i_{!,\\Lambda}N}=\\gamma_{p,A}s.$$\nFor $R$, step 1 over $\\Lambda'$ and naturality of the open unit give directly $t\\,i_{\\Lambda'}^*R=\\gamma_{p,A}s$. Thus both restrictions are the specified $\\gamma_{p,A}$ under the canonical identifications.",
+   "uses": [
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-pullback",
+    "lem-sfb-derived-open-square-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition, explicit calculation of both restrictions"
+   }
+  },
+  {
+   "text": "Precompose both maps by $\\delta_{i,N}^{-1}$, so their common source becomes $i_{!,\\Lambda'}T_YN$. Under $i_{!,\\Lambda'}\\dashv i_{\\Lambda'}^*$, a map $f$ from this source has adjunct $i_{\\Lambda'}^*(f)\\circ u_{i,\\Lambda',T_YN}$. The adjuncts of $L\\delta_{i,N}^{-1}$ and $R\\delta_{i,N}^{-1}$ agree by step 4. Injectivity of this adjunction bijection gives their equality, and cancellation of $\\delta_{i,N}^{-1}$ gives $L=R$, the asserted square. This only uses the adjunction; no assertion that restriction is faithful on arbitrary objects is needed.",
+   "uses": [
+    "lem-sfb-derived-open-square-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition, uniqueness by the open adjunction"
+   }
+  },
+  {
+   "text": "The hypotheses for constructibility hold: $p,r$ are proper maps of standing schemes and $i,j'$ are quasi-compact open immersions (the latter is part of a compactification). By [det-thm-sf-ctf-stability-direct-images] (2)--(3), $Rp_*A$ and $i_!Rp_*A$ belong to $\\Dctf$ over $\\Lambda$. By [det-prop-scalar-six-ctf] (3), $T_{\\overline Y}i_!Rp_*A$ belongs to $\\Dctf(\\overline Y,\\Lambda')$ and $T_{\\overline X}A$ belongs to $\\Dctf(\\overline X,\\Lambda')$. Apply the same direct-image stability clauses over $\\Lambda'$ first to $j'_!$ and then to $Rr_*$ to get $Rr_*j'_!T_{\\overline X}A\\in\\Dctf(\\overline Y,\\Lambda')$. This proves the final boundedness, constructibility and finite-Tor-amplitude assertion.",
+   "uses": [
+    "det-thm-sf-ctf-stability-direct-images",
+    "det-prop-scalar-six-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism paragraph and Composition, endpoint constructibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-scalar-six-coefficient-interfaces",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "det-prop-scalar-six-ctf",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "det-sf-comp-composition-interchange",
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-sfb-condensed-open-square-scalar-comparison",
+  "lem-sfb-derived-open-square-restriction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-scalar-geometric-exchange-rectangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Composition paragraph: expand the restriction argument using the existing normalized exchange rectangle and specified open scalar conjugate; formal mate construction is Stacks sites-cohomology.tex Tags 07A7 (remark-base-change) and 0E47 (remark-compose-base-change-horizontal)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "interchange.*coefficient|coefficient.*interchange|extensionByZero",
+   "results": "; 0 hits; scope Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficient ring commutes with the proper open interchange morphism in derived categories of sheaves",
+   "results": "; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply; AlgebraicGeometry.StructureSheaf.toOpen; AlgebraicGeometry.StructureSheaf.toPushforwardStalk; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap; AlgebraicGeometry.StructureSheaf.comap; AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension commutes with the proper direct image and open extension interchange isomorphism characterized by restriction",
+   "results": "; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.Scheme.Hom.app_appIso_inv; AlgebraicGeometry.Scheme.Hom.app_invApp'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"conjugate\"",
+   "results": "; CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateEquiv; CategoryTheory.conjugateEquiv_id; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_symm_id; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.conjugateEquiv_symm_of_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The square of scalar extension and proper open base change commutes by uniqueness of the open adjunction transpose",
+   "results": "; IsBaseChange.of_comp; IsBaseChange.comp_iff; IsBaseChange.comp; Algebra.IsPushout.cancelBaseChangeAux; Algebra.IsPushout.cancelBaseChange; Algebra.IsPushout.cancelBaseChange_tmul; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalars_assoc'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "grep",
+   "query": "interchange.*coefficient|coefficient.*interchange|extensionByZero",
+   "results": "0 hits: ; scope Mathlib/CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module/sheaf pullback or scalar adjunctions and abstract mates do not state this normalized condensed pro-etale interchange coefficient square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension compatibility of proper direct image and open extension by zero interchange in derived sheaves",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, ModuleCat.restrictCoextendScalarsAdj, IsBaseChange.directSumPow, IsLocalizedModule.mapExtendScalars_apply_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.Sheafify.SMulCandidate.h",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module/sheaf pullback or scalar adjunctions and abstract mates do not state this normalized condensed pro-etale interchange coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module/sheaf pullback or scalar adjunctions and abstract mates do not state this normalized condensed pro-etale interchange coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficients commutes with the proper open interchange morphism characterized by restriction to the open subscheme",
+   "results": "8 hits: AlgebraicGeometry.morphismRestrict_ι, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, AlgebraicGeometry.Scheme.Hom.appLE_map, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module/sheaf pullback or scalar adjunctions and abstract mates do not state this normalized condensed pro-etale interchange coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of mates of pullback squares under extension of scalars implies coefficient compatibility with open restriction of derived pushforward",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module/sheaf pullback or scalar adjunctions and abstract mates do not state this normalized condensed pro-etale interchange coefficient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-compact-support",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-compact-support",
+   "place": "Composition paragraph: interchange characterized by restriction to the open; returned step 6.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scalar-proper-open-interchange-square",
+  "worker": "stage1",
+  "summary": "Q144: statement unchanged. Six-step proof expands the canonical open-restriction argument using existing normalized exchange and scalar-open-unit lemmas, with explicit common restriction gamma_p, Hom-bijection uniqueness, and endpoint constructibility. No new nodes, no Lean writes or compilation. Existing metadata and searches retained.",
+  "blueprint": "det-prop-scalar-six-compact-support.proof.md Composition paragraph (interchange coefficient compatibility); endpoint check follows its Isomorphism paragraph. Realizes sk-prop-scalar-six step 5 without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "det-sf-comp-composition-interchange",
+    "why": "The existing normalized proper/open interchange and Cartesian-open identification are the precise geometric input of the composition paragraph, not an alternative construction."
+   },
+   {
+    "node": "lem-sfb-derived-open-square-restriction",
+    "why": "Generic unbounded open restriction and the actual adjunction Hom bijection used to identify and compare the two arrows; this unit has no replacement for that open-slice calculation."
+   },
+   {
+    "node": "lem-sfb-condensed-open-square-scalar-comparison",
+    "why": "Generic adjunct normalization of the open pullback/extension square, used to identify the existing restriction isomorphism with the exchange mate."
+   },
+   {
+    "node": "def-weil-pbc-ambient-ringed-exchange",
+    "why": "Definition of the specified unit-square-counit exchange used in the rectangle."
+   },
+   {
+    "node": "lem-sfb-scalar-geometric-exchange-rectangle",
+    "why": "Generic coefficient/exchange rectangle for every Cartesian square; applying it to the open square supplies the formal compatibility omitted by the blueprint."
+   },
+   {
+    "node": "det-thm-sf-ctf-stability-direct-images",
+    "why": "Generic preservation of Dctf by open extension and direct image, used only to verify the endpoint clause."
+   },
+   {
+    "node": "def-sfb-scalar-six-coefficient-interfaces",
+    "why": "Definition pinning the forward map of the canonical pullback comparison of det-prop-scalar-six-pullback (1) as the scalar-adjunction mate; used only to identify c_a with the K-flat lambda/theta^{-1} of the rectangle and open normalization (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-comp-composition-interchange",
+  "lem-sfb-derived-open-square-restriction",
+  "lem-sfb-condensed-open-square-scalar-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-sfb-scalar-geometric-exchange-rectangle",
+  "det-thm-sf-ctf-stability-direct-images",
+  "def-sfb-scalar-six-coefficient-interfaces"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-b77c27a52",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-b77c27a52 (reviewer sub-agent of L); spot-checked: S1 first split; the item was unsplit with an empty proof, not a re-split. Statement and stmt_deps are unchanged; no new nodes; no cycles. Source: main-20261015 det-prop-scalar-six-compact-support.proof.md, Composition paragraph (the interchange is characterized by its restriction to the open; scalar comparisons commute with it by the restriction argument of Independence); the split follows this route. I checked all 6 steps. Step 1: the normalization sigma i^*iota u_i = 1 matches the definition of iota in the comp-interchange proof (lambda_A=(Rp_*eta)^{-1}rho). Step 2: I recomputed the Yoneda chain; the adjunct formula theta∘p^*u_i plus the triangle identity give j^*eps_r∘theta, which is Ex of def-weil-pbc-ambient-ringed-exchange. Steps 4 and 5: I recomputed both restriction chains; each ends at gamma_p s, then the i_!⊣i^* bijection gives L=R. Step 6: the ctf-stability (2),(3) and scalar-six-ctf (3) domains cover the listed coefficient maps, all of which are admissible. Fault (C3/C4): step 3 silently identified c_a, the inverse of the unpinned 'natural isomorphism' of det-prop-scalar-six-pullback (1), with the rectangle's K-flat lambda_a and with theta_a^{-1} of the open normalization. FIX: step 3 now states c_a=lambda_a=theta_a^{-1} and cites det-prop-scalar-six-pullback (1), def-sfb-scalar-six-coefficient-interfaces (forward map = scalar-adjunction mate) and lem-sfb-kflat-scalar-comparison-normalization (mate=theta, inverse = balanced chi); I added these to proof_deps and added a tool_use entry for the interfaces definition. Neither added citation brings a new node into the item's closure. Batch-5 flags, all accepted as generic: lem-trf-proetale-pullback-stalk-coherence (stalk comparison for pullbacks), lem-pd-module-ringed-topos-derived-comparison (internal vs ringed-topos module equivalence), lem-pod-derived-exact-square-composition (abstract exact-functor square pasting), def-pd-section-derived-tensor-data (a definition); none is a step of the trace formula or of Poincaré duality. Small cases checked: A=0, i=id, identity coefficient map, non-flat Z/l^2→F_l.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ScalarProperOpenInterchangeSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarProperOpenInterchangeSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarProperOpenLeft",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarProperOpenRight",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarProperOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarProperOpenInterchangeSquare"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ScalarProperOpenInterchangeSquare.lean",
+  "statement": "theorem scalarProperOpenInterchangeSquare (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)] (_ha : ListedCoefficientMap ell a) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Ybar.Over (Spec (.of k))] [c.obj.obj.Z.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Ybar ↘ Spec (.of k))] [QuasiCompact (Ybar ↘ Spec (.of k))] [IsSeparated (Ybar ↘ Spec (.of k))] [LocallyOfFiniteType (c.obj.obj.Z ↘ Spec (.of k))] [QuasiCompact (c.obj.obj.Z ↘ Spec (.of k))] [IsSeparated (c.obj.obj.Z ↘ Spec (.of k))] [p.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))] [c.obj.obj.i.IsOver (Spec (.of k))] [c.obj.obj.g.IsOver (Spec (.of k))] [QuasiCompact i] [IsProper p] [IsSchemeTheoreticallyDominant c.obj.obj.i] (hA : constantModelBoundedConstructible Λ.X X A ∧ DerivedCategory.finiteTorAmplitude _ A) (m : D(openImmersionLowerShriek Λ.X i).obj ((RootCoordinateFace.lower Λ.X p).obj A) ⟶ (RootCoordinateFace.lower Λ.X c.obj.obj.g).obj (D(openImmersionLowerShriek Λ.X c.obj.obj.i).obj A)) (_hm : compositionInterchangeIsNormalized Λ.X p i c A m) (m' : D(openImmersionLowerShriek Λ'.X i).obj ((RootCoordinateFace.lower Λ'.X p).obj ((scalarSixChange a X).obj A)) ⟶ (RootCoordinateFace.lower Λ'.X c.obj.obj.g).obj (D(openImmersionLowerShriek Λ'.X c.obj.obj.i).obj ((scalarSixChange a X).obj A))) (_hm' : compositionInterchangeIsNormalized Λ'.X p i c ((scalarSixChange a X).obj A) m') : scalarProperOpenLeft a p i c A m = scalarProperOpenRight a p i c A m' ∧ scalarProperOpenRestriction a p i c A (scalarProperOpenLeft a p i c A m) = (scalarDirectImageMate a p).app A ≫ (RootCoordinateFace.lower Λ'.X p).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ'.X c.obj.obj.i).unit.app ((scalarSixChange a X).obj A)) ∧ scalarProperOpenRestriction a p i c A (scalarProperOpenRight a p i c A m') = (scalarDirectImageMate a p).app A ≫ (RootCoordinateFace.lower Λ'.X p).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ'.X c.obj.obj.i).unit.app ((scalarSixChange a X).obj A)) ∧ (constantModelBoundedConstructible Λ'.X Ybar ((scalarSixChange a Ybar).obj (D(openImmersionLowerShriek Λ.X i).obj ((RootCoordinateFace.lower Λ.X p).obj A))) ∧ DerivedCategory.finiteTorAmplitude _ ((scalarSixChange a Ybar).obj (D(openImmersionLowerShriek Λ.X i).obj ((RootCoordinateFace.lower Λ.X p).obj A)))) ∧ (constantModelBoundedConstructible Λ'.X Ybar ((RootCoordinateFace.lower Λ'.X c.obj.obj.g).obj (D(openImmersionLowerShriek Λ'.X c.obj.obj.i).obj ((scalarSixChange a X).obj A))) ∧ DerivedCategory.finiteTorAmplitude _ ((RootCoordinateFace.lower Λ'.X c.obj.obj.g).obj (D(openImmersionLowerShriek Λ'.X c.obj.obj.i).obj ((scalarSixChange a X).obj A))))",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two interchange morphisms are quantified with the existing defining normalization, which uniquely determines them. The two canonical restriction identities are written after postcomposition with Rp_* of the invertible open unit; this avoids choosing inverses or adding invertibility hypotheses. The auxiliary definitions construct the two displayed routes and their canonical restriction from existing maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2be552af5",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read item node (unchanged except lean), module, report (Worker report + Second reading by NV), ProEtaleProperOpenInterchange (normalization/restriction/properOpenInterchange), scalarDirectImageMate (mate of theta^-1 = gamma), derivedOpenImmersionShriekIso (hom: T j_! -> j_! T = delta), scalarSixChange, BoundaryCompactification, landed scalarSixDirectImage. Square Left=Right matches node map by map in diagrammatic order; iota/iota' quantified with the normalization predicate, unique by properOpenInterchange; restriction clauses are s^-1;i*(route);rho = gamma_p;Rp_*(u_j'), equivalent to restriction = gamma_p since u_j' invertible, no chosen inverses; standing k/ell/scheme/IsOver/proper/qc-open/dense hypotheses identical to properOpenInterchange; Dctf hypothesis and both endpoint clauses present; lean.statement verbatim; single universe u; edge cases A=0, identity/zero/non-flat coefficients, i=id covered; defs non-hollow, docstrings with source and blueprint, sorry only. Advisory: ListedCoefficientMap/ScalarSixRing/scalarSixChange/scalarDirectImageMate/RootCoordinateFace.lower owners uncited but inherited exactly from the landed det-prop-scalar-six-direct-image interface the node cites. No compile (no file changed)."
+ }
+}

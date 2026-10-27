@@ -1,0 +1,371 @@
+{
+ "id": "lem-sp-signed-double-roos-tensor-exchange",
+ "kind": "statement",
+ "title": "Signed double Roos interchange and tensor augmentation coherence",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe and $R$ a sheaf of commutative rings with exact countable products of module sheaves [def-weil-sheaf-of-modules-category]. Use unbounded complexes and derived categories [def-weil-abstract-derived-category], the strict Roos model $\\mathsf R(X)=\\operatorname{Cone}(1-s:\\prod X_i\\to\\prod X_i)[-1]$ [def-weil-strict-roos-model], in coordinates $(v,u)$ with differential $(dv,-du-(1-s)v)$, and total tensor [def-pc-tensor-complex-sheaves].\n\nFor every strict double inverse sequence $X_{n,j}$ of unbounded $R$-complexes with commuting transitions, coordinate interchange $\\prod_n\\prod_j X_{n,j}^a\\cong\\prod_j\\prod_n X_{n,j}^a$, multiplied by $(-1)^{pq}$ on Roos degrees $(p,q)\\in\\{0,1\\}^2$, is a natural chain isomorphism\n$$\\beta_X:\\mathsf R_n\\mathsf R_jX_{n,j}\\xrightarrow{\\sim}\\mathsf R_j\\mathsf R_nX_{n,j}.$$\nIt is compatible with strict maps and with evaluations in Roos degree zero. It induces the same signed isomorphism of iterated total derived limits under the normalized strict Roos comparison [lem-weil-strict-roos-comparison].\n\nMore specifically let $t\\in\\Gamma(\\mathcal C,R)$, $L_j=[R\\xrightarrow{t^j}R]$ with transitions $(t,1)$ in degrees $[-1,0]$ [def-pur-principal-koszul-quotient-towers], and let $Q_n$ be any strict tower of unbounded complexes. Put $H_0=\\mathsf R_n Q_n$, $C(P)=\\mathsf R_j(P\\otimes_RL_j)$, and let $u_P:P\\to C(P)$ have components $p\\mapsto p\\otimes1$ and zero shifted $j$-component. The coordinate identifications give chain isomorphisms\n$$\\gamma_j:H_0\\otimes_RL_j\\xrightarrow{\\sim}\\mathsf R_n(Q_n\\otimes_RL_j)$$\nnatural in $Q$ and compatible with the $j$-transitions, inclusions, and evaluations at $n$. The composite\n$$H_0\\xrightarrow{\\mathsf R_n(u_{Q_n})}\\mathsf R_n C(Q_n)\\xrightarrow{\\beta}\\mathsf R_j\\mathsf R_n(Q_n\\otimes_RL_j)\\xrightarrow{\\mathsf R_j(\\gamma^{-1})}C(H_0)$$\nis exactly $u_{H_0}$. After $\\beta$, its coordinates with $j$-Roos degree $q=1$ vanish; those with $q=0$ and $n$-Roos degree $p=0,1$ are the respective coordinates of $H_0$ followed by the degree-zero Koszul inclusion. No torsion, regularity, normalization or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness and reduction-as-cone sentences: signed double-Roos comparison, tensor exchange, and augmentation identity; returned proof steps 4--6. Stacks 014E (derived.tex, definition-cone), 012Z (homology.tex, definition-associated-simple-complex), 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-strict-roos-comparison",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sp-signed-double-roos-interchange-core] for beta, its signed four-coordinate formula and the two strict evaluation squares. These are exactly the first three clauses.",
+   "uses": [
+    "lem-sp-signed-double-roos-interchange-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary derived comparison isomorphisms rho_nj and rho_jn, take delta to be rho_nj inverse followed by Q(beta) followed by rho_jn, the existing derivedInterchange. Associativity and rho_nj hom-inverse cancellation prove the displayed equality. This is purely functorial localization and does not require invoking the normalized strict Roos comparison theorem.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-signed-double-roos-tensor-exchange-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sp-signed-double-roos-tensor-core] to the same beta and its signed coordinate formula. Its eta, tau, gamma and eight compatibility clauses give the entire remaining tensor/augmentation conclusion. Combine the results as a conjunction without any change to the parent statement.",
+   "uses": [
+    "lem-sp-signed-double-roos-tensor-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-signed-double-roos-interchange-core",
+  "def-weil-abstract-derived-category",
+  "def-sp-signed-double-roos-tensor-exchange-data",
+  "lem-sp-signed-double-roos-tensor-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "M5 Lean assembly of the coordinate interchange (old steps 1--4), explicit derived conjugation (old step 5), and tensor/augmentation argument (old steps 6--8)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded complexes of sheaf modules double Roos inverse limits commute with sign minus one on the two shifted product coordinates and tensor with a two term finite free complex commutes with Roos",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex₂.ι_totalShift₁Iso_inv_f",
+     "HomologicalComplex₂.ι_totalShift₂Iso_inv_f",
+     "HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom",
+     "CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_inv_f_f",
+     "CochainComplex.mapBifunctorHomologicalComplexShift₂Iso_inv_f_f",
+     "HomologicalComplex₂.ι_totalShift₂Iso_hom_f",
+     "CochainComplex.mapBifunctorHomologicalComplexShift₁Iso",
+     "HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: totalFlipIso and totalShift isomorphisms are useful ingredients, but do not state the double product Roos interchange, tensor comparison and simultaneous augmentation coordinate identities. This requires constructing a Roos bicomplex and comparing product coordinates, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"tensor\"",
+   "results": {
+    "subdirectory": "",
+    "count": 12,
+    "hits": [
+     "HomologicalComplex.tensorUnit",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "HomologicalComplex.tensorUnitIso",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.instHasTensorXTensorUnit_1"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: totalFlipIso and totalShift isomorphisms are useful ingredients, but do not state the double product Roos interchange, tensor comparison and simultaneous augmentation coordinate identities. This requires constructing a Roos bicomplex and comparing product coordinates, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|homotopyLimit|homotopy_limit",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: totalFlipIso and totalShift isomorphisms are useful ingredients, but do not state the double product Roos interchange, tensor comparison and simultaneous augmentation coordinate identities. This requires constructing a Roos bicomplex and comparing product coordinates, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The iterated shifted cone of two commuting endomorphisms is symmetric with Koszul sign and commutes with tensor by a finite free complex",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso",
+     "HomologicalComplex₂.shiftFunctor₁₂CommIso",
+     "CochainComplex.ShiftSequence.shiftIso",
+     "CochainComplex.mappingCone.map_δ",
+     "CochainComplex.shiftFunctorComm_hom_app_f",
+     "CategoryTheory.Functor.commShiftMapCochainComplex",
+     "HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom",
+     "CochainComplex.mappingCone.shiftTrianglehIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: totalFlipIso and totalShift isomorphisms are useful ingredients, but do not state the double product Roos interchange, tensor comparison and simultaneous augmentation coordinate identities. This requires constructing a Roos bicomplex and comparing product coordinates, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exchange two countable inverse limits of complexes using the signed totalization isomorphism of a bicomplex and products commuting with finite direct sums",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex₂.totalFlipIsoX",
+     "HomologicalComplex.ι_mapBifunctorFlipIso_hom",
+     "HomologicalComplex₂.ιTotal_totalFlipIso_f_hom",
+     "HomologicalComplex₂.XXIsoOfEq_inv_ιTotal",
+     "HomologicalComplex₂.XXIsoOfEq_inv_ιTotal_assoc",
+     "HomologicalComplex₂.ιTotal_totalFlipIso_f_inv_assoc",
+     "HomologicalComplex₂.ιTotal_totalFlipIso_f_inv",
+     "HomologicalComplex.ι_mapBifunctorFlipIso_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: totalFlipIso and totalShift isomorphisms are useful ingredients, but do not state the double product Roos interchange, tensor comparison and simultaneous augmentation coordinate identities. This requires constructing a Roos bicomplex and comparing product coordinates, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|homotopyLimit|totalFlipIso",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 9,
+    "hits": [
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+     "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+     "Mathlib/Algebra/Homology/TotalComplexSymmetry.lean",
+     "Mathlib/Algebra/Homology/TotalComplexSymmetry.lean",
+     "Mathlib/Algebra/Homology/TotalComplexSymmetry.lean",
+     "Mathlib/Algebra/Homology/TotalComplexSymmetry.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general total-complex flip, shifts, cones, and tensor constructions are ingredients; none states the strict double-product Roos comparison together with the specified tensor comparison and augmentation identities. Realizing the product coordinates and all specified maps requires the calculations in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a countable homotopy inverse limit of unbounded sheaf module complexes with the two term Koszul complex commutes with the shifted product cone and its augmentation",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.tensorObj",
+     "Submodule.FG.rTensor.directLimit",
+     "HomologicalComplex.tensorHom",
+     "CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+     "TensorProduct.directLimitRight",
+     "CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+     "HomologicalComplex.coneOfHasLimitEval",
+     "HomologicalComplex.instHasTensorTensorUnit_1"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general total-complex flip, shifts, cones, and tensor constructions are ingredients; none states the strict double-product Roos comparison together with the specified tensor comparison and augmentation identities. Realizing the product coordinates and all specified maps requires the calculations in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.totalFlipIso",
+   "results": {
+    "subdirectory": "",
+    "count": 10,
+    "hits": [
+     "HomologicalComplex₂.totalFlipIso",
+     "HomologicalComplex₂.flip_totalFlipIso",
+     "HomologicalComplex₂.totalFlipIso_hom_f_D₁",
+     "HomologicalComplex₂.totalFlipIso_hom_f_D₂",
+     "HomologicalComplex₂.totalFlipIso_hom_f_D₁_assoc",
+     "HomologicalComplex₂.totalFlipIso_hom_f_D₂_assoc",
+     "HomologicalComplex₂.ιTotal_totalFlipIso_f_hom",
+     "HomologicalComplex₂.ιTotal_totalFlipIso_f_hom_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general total-complex flip, shifts, cones, and tensor constructions are ingredients; none states the strict double-product Roos comparison together with the specified tensor comparison and augmentation identities. Realizing the product coordinates and all specified maps requires the calculations in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural signed chain isomorphism exchanges two shifted mapping cones of commuting endomorphisms and preserves zero shifted component augmentations",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.mappingCone.shiftIso",
+     "CochainComplex.mappingCone.shiftTriangleIso",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+     "CochainComplex.mappingCone.shiftTrianglehIso",
+     "CochainComplex.mappingCone.mapHomologicalComplexIso",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general total-complex flip, shifts, cones, and tensor constructions are ingredients; none states the strict double-product Roos comparison together with the specified tensor comparison and augmentation identities. Realizing the product coordinates and all specified maps requires the calculations in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The double mapping fibre of commuting chain endomorphisms is unchanged by exchanging their order with a minus sign on the doubly shifted summand",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.CommShift₂Setup.int_ε",
+     "CategoryTheory.CommShift₂Setup.int_z",
+     "CategoryTheory.CommShift₂Setup.int",
+     "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app",
+     "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app",
+     "CategoryTheory.shiftComm_symm",
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntMapFlipMap₂CochainComplex",
+     "HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general total-complex flip, shifts, cones, and tensor constructions are ingredients; none states the strict double-product Roos comparison together with the specified tensor comparison and augmentation identities. Realizing the product coordinates and all specified maps requires the calculations in this split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-power-torsion-sheaf-limit-complete",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Completeness and reduction-as-cone sentences: signed double-Roos comparison, tensor exchange, and augmentation identity; returned proof steps 4--6. Stacks 014E (derived.tex, definition-cone), 012Z (homology.tex, definition-associated-simple-complex), 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok).",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-signed-double-roos-tensor-exchange",
+  "worker": "stage1",
+  "summary": "Expanded both iterated Roos differentials, checked the signed swap and both evaluation squares, constructed the rank-one two-term tensor comparison and checked its three differential contributions, and computed the augmentation on all four coordinates. The statement is unchanged. All auxiliary coordinate identities are elementary arguments in the item; no clause is moved to a new node. The only non-elementary input is the existing normalized strict Roos comparison.",
+  "blueprint": "Realizes the completeness and reduction-as-cone sentences of sk-lem-sp-tower, through the signed double-Roos/tensor-exchange refinement from lem-sp-power-torsion-sheaf-limit-complete.",
+  "tool_uses": [
+   {
+    "node": "def-weil-category-product",
+    "why": "Its universal property constructs product interchange and product/biproduct coordinate identifications."
+   },
+   {
+    "node": "def-sp-abelian",
+    "why": "Finite biproducts provide the four cone coordinates."
+   },
+   {
+    "node": "def-weil-strict-roos-model",
+    "why": "The existing definition supplies the exact complex, cone, tensor, or Koszul convention used in the coordinate calculation; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "The existing definition supplies the exact complex, cone, tensor, or Koszul convention used in the coordinate calculation; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Its normalized natural comparison identifies the explicit strict Roos model with total derived inverse limit and preserves projections."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Its sectionwise tensor and sheafification define the explicit rank-one unitor."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Its factorization property descends the inverse rank-one tensor maps to sheaves."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "The existing definition supplies the exact complex, cone, tensor, or Koszul convention used in the coordinate calculation; it does not replace the unit route."
+   },
+   {
+    "node": "def-pur-principal-koszul-quotient-towers",
+    "why": "The existing definition supplies the exact complex, cone, tensor, or Koszul convention used in the coordinate calculation; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-category-product",
+  "def-sp-abelian",
+  "def-weil-strict-roos-model",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-d8cc91636",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-d8cc91636 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, 0 new nodes, statement and stmt_deps byte-identical to the base copy (Q65 snapshot), no repair note, no SGA. Conventions match the sources: the Roos model Cone(1-s)[-1] (Stacks 014E, derived.tex:2471, plus the [-1] negation) has (y,z)->(-dy-u z,dz) with u=1-s, which is the item's (v,u)=(z,y) with differential (dv,-du-(1-s)v); evaluation is v. The tensor sign is Stacks 012Z (homology.tex:4195) and def-pc-tensor-complex-sheaves. Recomputed by hand: step 2 D=(da,-db-Ba,-dc-Aa,dh+Bc-Ab); step 3 D'beta=betaD=(da,-dc-Aa,-db-Ba,-dh-Bc+Ab), so beta=(-1)^{pq} with the sign only on (1,1); step 4 the evaluation squares keep (a,b) and (a,c); steps 6-7 the coefficients agree under gamma_j ((-1)^p, (-1)^{a+p}, -(1-s)), with only Koszul degrees -1 and 0 so unbounded Q is fine; step 8 R_n(u)=(v⊗1,0,u⊗1,0), then beta gives (v⊗1,u⊗1,0,0), then gamma^{-1} gives u_{H_0}, a strict equality. Step 5 conjugates beta by the outer normalized rho of lem-weil-strict-roos-comparison, using naturality and projection normalization; advisory: its 'inner rho' wording is not needed under the iterated-Roos-model reading the parent uses. Edge cases checked: t=0, t a unit, characteristic 2, zero complexes, identity or zero transitions. Duplicate scan: def-sp-koszul-roos-comparison-data and lem-sp-normalized-koszul-roos-models are abstract packaging, not duplicates. The parent lem-sp-power-torsion-sheaf-limit-complete step 2 uses exactly beta, gamma and the augmentation identity. Accepted tool_use: lem-weil-strict-roos-comparison (sk-def-sf-operations) as the generic Roos=Rlim comparison; the other listed tool uses are definitions."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchange",
+  "declaration": "CategoryTheory.SignedDoubleRoos.signed_double_roos_tensor_exchange",
+  "declarations": [
+   "CategoryTheory.SignedDoubleRoos.signed_double_roos_tensor_exchange"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SignedDoubleRoosTensorExchange.lean",
+  "statement": "theorem signed_double_roos_tensor_exchange [HasExactLimitsOfShape (Discrete ℕ) (Modules R)] : ∃ β : rows R ≅ columns R, (∀ (X : ℕᵒᵖ ⥤ Tower R) (p q : Bool) (k : ℤ) (n j : ℕ), (β.hom.app X).f k ≫ columnCoordinate R X p q k n j = if p && q then -rowCoordinate R X p q k n j else rowCoordinate R X p q k n j) ∧ (∀ (X : ℕᵒᵖ ⥤ Tower R) (n : ℕ), β.hom.app X ≫ (roos R).map (innerEvaluation R X.flip n) = evaluation R (X ⋙ roos R) n) ∧ (∀ (X : ℕᵒᵖ ⥤ Tower R) (j : ℕ), β.hom.app X ≫ evaluation R (X.flip ⋙ roos R) j = (roos R).map (innerEvaluation R X j)) ∧ (∀ [HasDerivedCategory.{w} (Modules R)] (X : ℕᵒᵖ ⥤ Tower R) (Dnj Djn : DerivedCategory.{w} (Modules R)) (ρnj : DerivedCategory.Q.obj ((rows R).obj X) ≅ Dnj) (ρjn : DerivedCategory.Q.obj ((columns R).obj X) ≅ Djn), ∃ δ : Dnj ≅ Djn, ρnj.hom ≫ δ.hom = DerivedCategory.Q.map (β.hom.app X) ≫ ρjn.hom) ∧ ∀ t : (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections, ∃ (η : 𝟭 (Complex R) ⟶ completion R t) (τ : ∀ j : ℕ, 𝟭 (Complex R) ⟶ tensorTower R t ⋙ (CategoryTheory.evaluation ℕᵒᵖ (Complex R)).obj (op j)) (γ : ∀ Q : Tower R, (tensorTower R t).obj ((roos R).obj Q) ≅ (Q ⋙ tensorTower R t).flip ⋙ roos R), (∀ P : Complex R, η.app P = augmentation R P t) ∧ (∀ (P : Complex R) (j : ℕ), (τ j).app P = (strictAugmentation R P t).app (op j)) ∧ (∀ (Q Q' : Tower R) (f : Q ⟶ Q') (j : ℕ), ((tensorTower R t).map ((roos R).map f)).app (op j) ≫ (γ Q').hom.app (op j) = (γ Q).hom.app (op j) ≫ (roos R).map (((flipFunctor _ _ _).map (Functor.whiskerRight f (tensorTower R t))).app (op j))) ∧ (∀ (Q : Tower R) (j : ℕ) (p : Bool) (a b k : ℤ) (h : a + b = k) (n : ℕ), HomologicalComplex.ιTensorObj ((roos R).obj Q) (principalKoszul R t j) a b k h ≫ ((γ Q).hom.app (op j)).f k ≫ coordinate R ((Q ⋙ tensorTower R t).flip.obj (op j)) p k n = (coordinate R Q p a n ▷ (principalKoszul R t j).X b) ≫ HomologicalComplex.ιTensorObj (Q.obj (op n)) (principalKoszul R t j) (a - degree p) b (k - degree p) (by omega)) ∧ (∀ (Q : Tower R) (j n : ℕ), (γ Q).hom.app (op j) ≫ evaluation R ((Q ⋙ tensorTower R t).flip.obj (op j)) n = (evaluation R Q n ▷ principalKoszul R t j)) ∧ (∀ (Q : Tower R) (j : ℕ), (strictAugmentation R ((roos R).obj Q) t).app (op j) ≫ (γ Q).hom.app (op j) = (roos R).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q (τ j))) ∧ (∀ Q : Tower R, (roos R).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η) ≫ β.hom.app (Q ⋙ tensorTower R t) ≫ (roos R).map (γ Q).inv = augmentation R ((roos R).obj Q) t) ∧ (∀ (Q : Tower R) (p q : Bool) (k : ℤ) (n j : ℕ), ((roos R).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η) ≫ β.hom.app (Q ⋙ tensorTower R t)).f k ≫ columnCoordinate R (Q ⋙ tensorTower R t) p q k n j = if hq : q then 0 else coordinate R Q p k n ≫ ((strictAugmentation R (Q.obj (op n)) t).app (op j)).f (k - degree p) ≫ eqToHom (congrArg (fun a : ℤ ↦ (((tensorTower R t).obj (Q.obj (op n))).obj (op j)).X a) (by simp [degree, hq])))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ef13713df",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, module, report, StrictRoosModel/TowerTransitionEndomorphism/PrincipalKoszulQuotientTowers/StrictRoosComparison and Mathlib sign conventions. Node copy changed only in lean; lean.statement verbatim; no hollow defs; docstrings with source/blueprint and 8-step plan; Worker report + Second reading present. Recomputed: roosF differential (dv,-du-(1-s)v) matches node; iterated-cone swap requires sign = inner shift sign = -1, so (-1)^{pq} correct; shifted-coordinate sign cancels; Mathlib tensor sign d1+(-1)^a d2 makes gamma the identity on coordinates; braiding sign 1 on Koszul degree 0 so strictAugmentation is p⊗1. All clauses present (beta signs, both evaluation squares, derived conjugate, gamma naturality/coords/eval/inclusion, augmentation identity, q=1 vanishing/q=0 coords); no extra hypotheses; universes independent; exponent j+1 is owner's m>=1 convention. Advisories: derived clause tautological given beta (faithful, rho only existential); some unused proof-plan imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved definitions byte-identical to published item module (clone c84b68f); item theorem signature unchanged; two new sorry cores = parent conjuncts 1-3 (minus unneeded exactness) and the tensor conjunct for any β with the coordinate formula (which determines β); nodes follow the assembly proof"
+ }
+}

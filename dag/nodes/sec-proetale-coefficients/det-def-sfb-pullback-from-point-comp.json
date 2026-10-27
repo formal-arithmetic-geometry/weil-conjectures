@@ -1,0 +1,163 @@
+{
+ "id": "det-def-sfb-pullback-from-point-comp",
+ "kind": "definition",
+ "title": "$f^*\\circ p_Y^*\\cong p_X^*$",
+ "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes. Let $f^*$ be the pullback of\nabelian pro-étale sheaves along $f$, and let\n$p_X^*=\\pi_X^*\\circ p^*$, $p_Y^*=\\pi_Y^*\\circ p^*$ be the inverse images from\nthe point ([def-sfb-finite-upper-star],\n[det-def-sfb-pullback-from-point]). Since $\\Spec\\Z$ is terminal,\n$\\pi_Y\\circ f=\\pi_X$. The natural isomorphism\n$$\nf^*\\circ p_Y^*=f^*\\pi_Y^*p^*\\ \\cong\\ (\\pi_Y\\circ f)^*p^*=\\pi_X^*p^*=p_X^*\n$$\nis $p^*$ composed with the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of\n[def-sfb-finite-upper-star-comp], followed by the identification\n$(\\pi_Y\\circ f)^*=\\pi_X^*$.\n\nIt is a monoidal natural isomorphism for the strong monoidal structures of\n$f^*\\circ p_Y^*$ and $p_X^*$ ([def-sfb-finite-upper-star-monoidal],\n[det-def-sfb-pullback-from-point]) and the tensor products of\n[lem-weil-pbc-sheaf-tensor-closed].",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/det-def-sfb-pullback-from-point-comp.md",
+  "place": "node det-def-sfb-pullback-from-point-comp, order 1217"
+ },
+ "stmt_deps": [
+  "def-sfb-finite-upper-star",
+  "det-def-sfb-pullback-from-point",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "By [det-def-sfb-pullback-from-point], the functors in the statement are $p_T^*=\\pi_T^*\\circ p^*$ for $T=X,Y$, and $\\pi_Y\\circ f=\\pi_X$. These are precisely the functors used in [def-sfb-pullback-from-point-comp-iso]. Take its natural isomorphism: on a condensed abelian group $F$ its component is $c_{p^*F}^{-1}$ followed by the equality identification, where $c\\colon(\\pi_Y\\circ f)^*\\xrightarrow{\\sim}f^*\\circ\\pi_Y^*$ is the specified composition isomorphism. Thus its direction, components, and action on morphisms agree with the construction required here.",
+   "uses": [
+    "det-def-sfb-pullback-from-point",
+    "def-sfb-pullback-from-point-comp-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/det-def-sfb-pullback-from-point-comp.proof.md",
+    "place": "First paragraph: the isomorphism is def-sfb-pullback-from-point-comp-iso."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pullback-from-point-comp-monoidal] to this very comparison, rather than to an unspecified isomorphism of the same functors. Its tensor products are those of [sk-def-sfb-sheaf-tensor]: sheafification of objectwise $\\otimes_{\\mathbf Z}$ with sheafified constant unit $\\mathbf Z$. These are exactly the products $a(\\iota F\\otimes_p\\iota G)$ and unit $a(\\mathbf 1)$ in [lem-weil-pbc-sheaf-tensor-closed] specialized to $\\mathcal A=\\Ab$. The inverse images have the specified strong monoidal structures of [def-sfb-finite-upper-star-monoidal] and [det-def-sfb-pullback-from-point]. Hence the cited monoidality assertion gives compatibility with both the tensor comparison and the unit comparison for the structures in the statement.",
+   "uses": [
+    "lem-sfb-pullback-from-point-comp-monoidal",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-sfb-finite-upper-star-monoidal",
+    "det-def-sfb-pullback-from-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/det-def-sfb-pullback-from-point-comp.proof.md",
+    "place": "First paragraph: its monoidality is lem-sfb-pullback-from-point-comp-monoidal; compare the tensor conventions in the defining statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-pullback-from-point",
+  "def-sfb-pullback-from-point-comp-iso",
+  "lem-sfb-pullback-from-point-comp-monoidal",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-sfb-finite-upper-star-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/det-def-sfb-pullback-from-point-comp.proof.md",
+  "place": "First paragraph, assembling the two existing comparison nodes and explicitly checking the coefficient and tensor conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperStarFromPointComp|isMonoidal_upperStarFromPointComp|pointUpperStar",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.NatTrans.IsMonoidal",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism f from X to Y, inverse image of abelian pro-etale sheaves commutes monoidally with pullback from the condensed point, f star pY star is naturally isomorphic to pX star",
+   "results": "8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp",
+   "date": "2026-10-26",
+   "verdict": "no match: related module-sheaf/site pullbacks or general whiskering calculus do not state the specified monoidal comparison from the condensed point."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]omp|[Ii]sMonoidal.*[Ww]hisker|def isoWhiskerLeft",
+   "results": "5 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-26",
+   "verdict": "no match: related module-sheaf/site pullbacks or general whiskering calculus do not state the specified monoidal comparison from the condensed point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of schemes the pullback functor on abelian pro-etale sheaves composed with pullback from the condensed point is naturally isomorphic as a monoidal functor to pullback from the point to the source scheme",
+   "results": "8 hits; TopCat.Sheaf.pullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback, TopCat.Sheaf.pullbackIso, CategoryTheory.GrothendieckTopology.overMapPullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+   "date": "2026-10-26",
+   "verdict": "no match: related module-sheaf/site pullbacks or general whiskering calculus do not state the specified monoidal comparison from the condensed point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering the inverse natural isomorphism for composition of sheaf inverse image functors with a fixed strong monoidal functor produces the monoidal pullback from the point comparison",
+   "results": "8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, TopCat.Sheaf.pullbackIso, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_id_comp",
+   "date": "2026-10-26",
+   "verdict": "no match: related module-sheaf/site pullbacks or general whiskering calculus do not state the specified monoidal comparison from the condensed point."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1217,
+ "blueprint_uses": [
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-finite-upper-star-monoidal",
+  "det-def-sfb-pullback-from-point",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-sfb-pullback-from-point-comp-iso",
+  "lem-sfb-pullback-from-point-comp-monoidal"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.upperStarFromPointComp",
+  "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.upperStarFromPointComp",
+  "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-sfb-pullback-from-point-comp",
+  "from": null,
+  "same_as": [
+   "sk-def-sfb-pullback-from-point-comp"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "det-def-sfb-pullback-from-point-comp",
+  "worker": "stage1",
+  "summary": "Reused the existing comparison definition and monoidality theorem; no new nodes. Verified the inverse-composition direction, arbitrary scheme morphisms, abelian coefficients, and the common sheafified objectwise tensor over Z. Replaced the imported elementary:null test-object aside by a two-step assembly of the precise stated claims. Kept the statement and all import metadata unchanged; recorded six actual Mathlib searches and verbatim citation evidence. No attachment is proposed, in accordance with the rejected earlier attachment disposition.",
+  "blueprint": "Step 1 realizes the first sentence of the first proof paragraph and the defining composite; step 2 realizes its second sentence and the monoidality clause. The test-object second paragraph is explanatory and is not a further clause of the statement. The unit compatibility step uses exactly this comparison, so its route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-pullback-from-point-comp-monoidal",
+    "why": "Existing generic monoidality theorem for exactly the point comparison; the current blueprint explicitly cites it, and the completed-coefficients unit does not reprove it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-pullback-from-point-comp-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-6f38fd981",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-6f38fd981 (reviewer sub-agent of L); spot-checked: I read the whole delivery and its sources. The statement is word for word the blueprint's (main-20261023-1620, identical to latest), and its stmt_deps are unchanged. Coefficients are Ab with the sheafified tensor over Z. The comparison is the inverse of the composition iso of def-sfb-finite-upper-star-comp, whiskered by p^*, then the equality pi_Y o f = pi_X, for any scheme morphism f. Step 1 is elementary and correct: def-sfb-pullback-from-point-comp-iso (reviewed) states exactly this composite in the same direction. Its p_X^* comes from def-sfb-upper-star-from-point, which is the same pi_X^* o p^* that det-def-sfb-pullback-from-point uses (that node lists it in its stmt_deps). Step 2 is correct: lem-sfb-pullback-from-point-comp-monoidal states unit and tensor compatibility for this very comparison, with the composite strong monoidal structures. The tensor products of sk-def-sfb-sheaf-tensor and lem-weil-pbc-sheaf-tensor-closed(2) are the same, a(objectwise tensor) with unit a(1), as in the NK precedent. I accept the tool use of lem-sfb-pullback-from-point-comp-monoidal (another unit): the blueprint proof of this node cites it, and this unit has no node of its own giving it. lem-weil-pbc-sheaf-tensor-closed is cited only for the definition of the tensor product, and the item is a definition, so no tool use is needed. The blueprint's second paragraph (the formula on test objects) is not part of the statement; leaving it out is fine, and the sk twin carries it. There are no new nodes. The item is the det twin of sk-def-sfb-pullback-from-point-comp, recorded in same_as. proof_deps equals the union of the step uses, nothing cited is merged, and there is no cycle (I checked all 277 nodes it reaches). Searches cover all three kinds. Edge cases checked: f = id, X empty, zero sheaves. No SGA source is used. I made no changes."
+ }
+}

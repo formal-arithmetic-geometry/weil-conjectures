@@ -11,18 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
-import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
-import WeilConjectures.AlgebraicGeometry.Picard.Degree
-import WeilConjectures.AlgebraicGeometry.PicardFunctor
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!
 # The morphism from the Hilbert scheme to the degree component of the Picard scheme
@@ -90,6 +78,33 @@ theorem exists_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k]
                 Nonempty ((fromSkeleton _).obj LK.val ≅ DK.toModulesᵛ) ∧
                 eP.homEquiv (x ≫ γ) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k)))
                   (picardSubfunctorDegree f d).toFunctor).app (op T) ⟨LK, hLK⟩ := by
-  sorry
+  let D := eH.homEquiv (𝟙 H)
+  have hD : D.1.IsRelativeEffectiveCartier (pullback.snd f H.hom) :=
+    ⟨D.2.isInvertible, D.2.2.1⟩
+  let L := abelClass f D
+  have hL : L ∈ (picardSubfunctorDegree f d).obj (op H) := abelClass_mem f D
+  let η := toSheafify (Scheme.fppfTopology.over (Spec (.of k)))
+    (picardSubfunctorDegree f d).toFunctor
+  let γ := eP.homEquiv.symm (η.app (op H) ⟨L, hL⟩)
+  refine ⟨hD, D.2.isInvertible.isInvertible_dual_toModules, L,
+    ⟨abelClassIso f D⟩, (mem_picardSubfunctorDegree_iff f d L).mp hL, hL, γ,
+    eP.homEquiv.apply_symm_apply _, ?_⟩
+  intro K _ _ x
+  let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let DK := eH.homEquiv x
+  let LK := abelClass f DK
+  have hLK : LK ∈ (picardSubfunctorDegree f d).obj (op T) := abelClass_mem f DK
+  refine ⟨DK.2.isInvertible, DK.2.isInvertible.isInvertible_dual_toModules, LK, hLK,
+    ⟨abelClassIso f DK⟩, ?_⟩
+  have hx : (hilbertPresheaf f d).map x.op D = DK := by
+    simpa only [Category.comp_id] using (eH.homEquiv_comp x (𝟙 H)).symm
+  have hclass : (picardSubfunctorDegree f d).toFunctor.map x.op ⟨L, hL⟩ =
+      ⟨LK, hLK⟩ := by
+    apply Subtype.ext
+    exact (pic_map_abelClass f x D).trans (congrArg (abelClass f) hx)
+  rw [eP.homEquiv_comp, show eP.homEquiv γ = η.app (op H) ⟨L, hL⟩ from
+    eP.homEquiv.apply_symm_apply _]
+  exact (η.naturality_apply x.op ⟨L, hL⟩).symm.trans
+    (congrArg (η.app (op T)) hclass)
 
 end AlgebraicGeometry

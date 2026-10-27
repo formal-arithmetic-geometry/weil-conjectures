@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-complete-model-face-quotients",
+ "kind": "statement",
+ "title": "Face projections and prime quotients of complete monoid models",
+ "statement": "Let $P$ be a finitely generated integral saturated additive commutative monoid [def-trf-fs-log-blowup], with $0$ its only invertible element, and let $n\\ge0$. Let $S\\subseteq P$ be an additive submonoid which is a face, meaning that $a+b\\in S$ with $a,b\\in P$ implies $a,b\\in S$. For a local ring $L$ with maximal ideal $\\mathfrak m_L$, put\n$$B_L(P,n)=\\varprojlim_N L[P][t_1,\\ldots,t_n]/(\\mathfrak m_L,z^q\\ (q\\ne0),t_1,\\ldots,t_n)^N,$$\nand define $B_L(S,n)$ in the same way [def-trf-complete-toric-model, def-weil-pbc-adic-completion]. Let $L$ be either a field $k$, or a Cohen ring $C$ of residue characteristic a prime $p$ [def-weil-pbc-cohen-ring]. Then $S$ is also finitely generated, integral, saturated and sharp; if $g_1,\\ldots,g_s$ generate $P$, their subset in $S$ generates $S$. There is a surjective $L$-algebra map $\\rho:B_L(P,n)\\to B_L(S,n)$ which, under the coefficient-family descriptions, retains exactly the coefficients at exponents $(q,e)\\in S\\times\\mathbf N^n$. Its kernel is\n$$J_S=(z^{g_i}:g_i\\notin S)B_L(P,n)=(z^q:q\\notin S)B_L(P,n).$$\nFor $R=B_k(P,n)$ put $\\mathfrak p_S=J_S$. For $R=B_C(P,n)/(\\theta)$ with $\\theta-p\\in(z^q\\ (q\\ne0),t_1,\\ldots,t_n)B_C(P,n)$, let $\\mathfrak p_S$ be the image of $J_S$ and put $\\theta_S=\\rho(\\theta)$. In the second case $\\theta_S-p\\in(z^s\\ (s\\in S\\setminus\\{0\\}),t_1,\\ldots,t_n)B_C(S,n)$. There are isomorphisms preserving constants and the surviving chart monomials\n$$R/\\mathfrak p_S\\cong B_k(S,n)\\quad\\hbox{or}\\quad R/\\mathfrak p_S\\cong B_C(S,n)/(\\theta_S),$$\nrespectively. Each displayed quotient is a nonzero normal domain [def-weil-pbc-normal-ring], $\\mathfrak p_S$ is prime, and $z^q\\in\\mathfrak p_S$ if and only if $q\\notin S$. The cases $S=P$, $S=\\{0\\}$ and $n=0$ are included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-formulated refinement of Expose VI 1.6(i)--(ii), printed p. 70 (model notation, not a theorem asserted there). Extracted from lem-trf-complete-toric-facet-valuations retained proof steps 9--11; the full original argument is retained in report.md. Kato (1994), Toric singularities, is WANTED; no proof is attributed to that unread source."
+ },
+ "stmt_deps": [
+  "def-trf-complete-toric-model",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "First check the hypotheses for the face monoid. If $s\\in S$ is expressed as a sum of the generators $g_i$ of $P$, repeated application of the face condition shows that every summand belongs to $S$. Thus the subset of generators in $S$ generates $S$. Integrality and sharpness are inherited from $P$. For saturation identify $S^{\\rm gp}$ with the subgroup it generates in $P^{\\rm gp}$, using integrality. If $x\\in S^{\\rm gp}$ and $a x\\in S$ for an integer $a>0$, saturation of $P$ first gives $x\\in P$; the face condition applied to the sum of $a$ copies of $x$ then gives $x\\in S$. This proves that $S$ is fine, saturated and sharp, using precisely the definitions in [def-trf-fs-log-blowup].",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  },
+  {
+   "text": "Use [lem-trf-sharp-fs-orthant-embedding] to embed $P$ in $\\mathbf N^r\\subset\\mathbf Z^r$ by $\\lambda$. In $H=\\mathbf Z^{r+n}$ put $T_P=\\lambda(P)\\times\\mathbf N^n$ and $T_S=\\lambda(S)\\times\\mathbf N^n$. Both are finitely generated, and the sum $W$ of the coordinates of $H$ is strictly positive on each monoid away from zero. Renaming $z^q t^e$ as $z^{(\\lambda(q),e)}$ identifies $L[P][t_1,\\ldots,t_n]$ with $L[T_P]$, and likewise for $S$; nonzero pairs generate exactly the chart ideals, so these renamings induce inverse maps on every quotient defining the completions. A field is a PID, and a Cohen ring is a complete local PID with nonzero uniformizer $p$ by [def-weil-pbc-cohen-ring]. Hence both coefficient rings are Noetherian domains by [lem-weil-pbc-pid-noetherian-normal], complete and separated for their maximal ideals (for a field the ideal is zero). Apply [lem-trf-complete-model-coefficient-nonvanishing] to $T_P,T_S$. It identifies the two completions with all coefficient families indexed by $P\\times\\mathbf N^n$ and $S\\times\\mathbf N^n$, respectively, with finite convolution multiplication and the stipulated chart monomials.",
+   "uses": [
+    "lem-trf-sharp-fs-orthant-embedding",
+    "def-weil-pbc-cohen-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-trf-complete-model-coefficient-nonvanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  },
+  {
+   "text": "Define $\\rho$ by restriction of these families to $S\\times\\mathbf N^n$. For $s\\in S$, every decomposition $s=a+b$ in $P$ has $a,b\\in S$, so the finite convolution coefficient of a product at $(s,e)$ is unchanged by restriction. Restriction also preserves addition, $1$, and constants; hence it is an $L$-algebra map. Extending any family by zero outside $S\\times\\mathbf N^n$ gives a preimage, proving surjectivity. Its kernel consists exactly of the families supported at pairs $(q,e)$ with $q\\notin S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  },
+  {
+   "text": "If $q\\notin S$, some generator outside $S$ occurs in any expression for $q$ as a sum of the $g_i$, since a sum of generators in $S$ lies in $S$. Thus $q=g_i+h$ with $g_i\\notin S$ and $h\\in P$. Order the indices with $g_i\\notin S$ and assign each such $q$ to its first eligible index $i$, meaning $q-g_i\\in P$. For a kernel family $a$, define a family $b_i$ on $P\\times\\mathbf N^n$ by $(b_i)_{h,e}=a_{g_i+h,e}$ when $g_i+h$ is assigned to $i$, and zero otherwise. These are elements of the completion because every family is allowed in Step 2. Cancellation in $P$ shows coefficientwise that $a=\\sum_{g_i\\notin S}z^{g_i}b_i$, a finite sum. Conversely a multiple of any $z^{g_i}$ with $g_i\\notin S$ has support outside $S$, since $g_i+h\\in S$ would imply $g_i\\in S$. This proves the first kernel equality. The same divisibility $q=g_i+h$ proves equality with the ideal generated by all $z^q$ for $q\\notin S$. If no generator is outside $S$, the kernel family and the sum are both zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  },
+  {
+   "text": "In the field case the map $[b]\\mapsto\\rho(b)$ identifies $B_k(P,n)/J_S$ with $B_k(S,n)$: it is onto and two representatives have the same image exactly when their difference is in the kernel from Step 4. In the Cohen case the composite map $b\\mapsto[\\rho(b)]$ onto $B_C(S,n)/(\\theta_S)$ has kernel $J_S+(\\theta)$. Indeed, if $\\rho(b)=\\theta_S c$, choose a lift $\\widetilde c$ under $\\rho$; then $b-\\theta\\widetilde c\\in J_S$, and the converse is immediate. Factoring first by $(\\theta)$ therefore gives exactly $R/\\mathfrak p_S$ and the asserted isomorphism. Every map fixes constants and surviving monomials. Applying $\\rho$ to the hypothesis on $\\theta-p$ gives $\\theta_S-p$ in the displayed chart ideal: each generator maps either to zero, a surviving $z^s$ with $s\\ne0$, or the same variable $t_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-log-regular-saturation-normality] with monoid $S$, which satisfies all its finiteness, integrality, saturation and sharpness hypotheses by Step 1. In the Cohen case Step 5 supplies exactly its hypothesis $\\theta_S-p$ in the chart ideal, with the original Cohen ring and prime $p$; in the field case use the original field $k$. Thus both quotient rings of Step 5 are nonzero normal domains. Their kernels $\\mathfrak p_S$ in $R$ are prime: $1$ has nonzero image, and a product has zero image only if one factor has zero image in the domain.",
+   "uses": [
+    "lem-trf-log-regular-saturation-normality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  },
+  {
+   "text": "For $q\\notin S$, the chart monomial maps to zero under $\\rho$, hence belongs to $\\mathfrak p_S$. If $q\\in S$, its image is $z^q$ in the corresponding model for $S$. In the field case this family has coefficient $1$ at $(q,0)$, so is nonzero. In the Cohen case, the coefficient at $(0,0)$ of $\\theta_S$ is exactly $p$: every generator of the chart ideal has zero constant coefficient by finite convolution and sharpness. We have $p\\in\\mathfrak m_C\\setminus\\{0\\}$ by [def-weil-pbc-cohen-ring], so [lem-trf-complete-model-coefficient-nonvanishing], with $A=C$, $T=T_S$ and $r=p$, says that every $z^{(\\lambda(q),0)}$ survives modulo $(\\theta_S)$. Thus $z^q\\notin\\mathfrak p_S$. For $S=P$ the complementary generator list is empty and $\\rho$ is the identity; for $S=\\{0\\}$ it retains exactly $q=0$, leaving the power-series variables. The same formulas work for $n=0$ and $P=\\{0\\}$, where $W$ may be zero on the ambient zero group because there is no nonzero monoid element to test.",
+   "uses": [
+    "def-weil-pbc-cohen-ring",
+    "lem-trf-complete-model-coefficient-nonvanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-sharp-fs-orthant-embedding",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-trf-complete-model-coefficient-nonvanishing",
+  "lem-trf-log-regular-saturation-normality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70, supplies the model notation only; Q46 agent coefficient argument for face quotients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection of a completed saturated monoid algebra onto a face is surjective with kernel generated by monomials outside the face and its Cohen hypersurface quotient is a domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure\", \"module\": \"Mathlib/RingTheory/FiniteType\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommMonoid M] [inst_1 : CommSemiring R] {S : Set M},\\n  Submonoid.closure S = ⊤ → Function.Surjective ⇑(MvPolynomial.aeval fun s => (MonoidAlgebra.of R M) ↑s)\", \"doc\": \"If the submonoid generated by a set $ S $ in a commutative monoid $ M $ equals $ M $ itself, then the evaluation homomorphism from the multivariate polynomial ring $ R[S] $ to the monoid algebra $ R[M\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"AddMonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure\", \"module\": \"Mathlib/RingTheory/FiniteType\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : AddCommMonoid M] [inst_1 : CommSemiring R] {S : Set M},\\n  AddSubmonoid.closure S = ⊤ → Function.Surjective ⇑(MvPolynomial.aeval fun s => AddMonoidAlgebra.of' R M ↑s)\", \"doc\": \"Let $ M $ be an additive commutative monoid and $ R $ a commutative semiring. If a subset $ S \\\\subseteq M $ generates $ M $ (i.e., the additive submonoid closure of $ S $ equals $ M $), then the multi\"}\n  {\"name\": \"AdicCompletion.kerProj_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {A : Type u_4} [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R S] {f : S →ₐ[R] A} (hf : Function.Surjective ⇑f),\\n  Function.Surjective ⇑(AdicCompletion.kerProj hf)\", \"doc\": \"If $ f : S \\\\to A $ is a surjective $ S $-algebra homomorphism, then the kernel projection associated with $ f $ is surjective.\"}\n  {\"name\": \"Algebra.Presentation.differentials.surjective_hom₁\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ), Function.Surjective ⇑(Algebra.Presentation.differentials.hom₁ pres)\", \"doc\": \"The first differential map from the module of formal $ S $-linear combinations of relations to the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ is surjective, where $ \\\\phi: R \\\\to S $ is the canonical \"}\n  {\"name\": \"IsLocalization.surjective_piRingHom_algebraMap_comp_piEvalRingHom\", \"module\": \"Mathlib/RingTheory/Localization/Pi\", \"type\": \"∀ {ι : Type u_1} {R : ι → Type u_2} (S : ι → Type u_3) [inst : (i : ι) → CommSemiring (R i)]\\n  [inst_1 : (i : ι) → CommSemiring (S i)] [inst_2 : (i : ι) → Algebra (R i) (S i)] (M : Submonoid ((i : ι) → R i))\\n  [∀ (i : ι), IsLocalization (Submonoid.map (Pi.evalRingHom R i) M) (S i)] [∀ (i : ι), Ring.\", \"doc\": \"Given a family of commutative semirings $\\\\{R_i\\\\}$ and localizations $\\\\{S_i\\\\}$ where each $R_i$ has Krull dimension $\\\\leq 0$ and is a local ring, the ring homomorphism from the product $\\\\prod R_i$ to $\"}\n  {\"name\": \"IsLocalization.algebraMap_pi_surjective_of_isLocalization\", \"module\": \"Mathlib/RingTheory/Localization/Pi\", \"type\": \"∀ {ι : Type u_1} {R : ι → Type u_2} [inst : (i : ι) → CommSemiring (R i)] (S' : Type u_4) [inst_1 : CommSemiring S']\\n  [inst_2 : Algebra ((i : ι) → R i) S'] (M : Submonoid ((i : ι) → R i)) [∀ (i : ι), Ring.KrullDimLE 0 (R i)]\\n  [∀ (i : ι), IsLocalRing (R i)] [IsLocalization M S'] [Finite ι], Functio\", \"doc\": \"Given a finite index set $\\\\iota$ and a family of zero-dimensional local rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, if $S'$ is a localization of the product ring $\\\\prod_{i \\\\in \\\\iota} R_i$ at some submonoid $M$, th\"}\n  {\"name\": \"AdicCompletion.surjective_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ), Function.Surjective ⇑(AdicCompletion.evalₐ I n)\", \"doc\": \"For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal monoid series restricted to a face induce quotient isomorphisms with completed face algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.mk_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (n : ℕ) (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk (I ^ n)) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.evalₐ I n) x\", \"doc\": \"For any natural number $ n $ and any element $ x $ in the $ I $-adic completion of a commutative ring $ S $, the image of $ (\\\\text{ofAlgEquiv}\\\\ I)^{-1}(x) $ under the canonical quotient map $ S \\\\to S/\"}\n  {\"name\": \"AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk I) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.evalOneₐ I) x\", \"doc\": \"For any element $ x $ in the $ I $-adic completion of a commutative ring $ S $, the image of the inverse algebra equivalence $ (\\\\varphi^{-1}(x)) $ under the canonical quotient map $ S \\\\to S/I $ coinci\"}\n  {\"name\": \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (n : ℕ) (x : AdicCompletion I S),\\n  (Ideal.Quotient.mk (I ^ n • ⊤)) ((AdicCompletion.ofAlgEquiv I).symm x) = (AdicCompletion.eval I S n) x\", \"doc\": \"For a commutative ring $ S $, an ideal $ I $, and any natural number $ n $, the evaluation map at level $ n $ of an element $ x $ in the $ I $-adic completion of $ S $ satisfies $ \\\\text{quotient}_{I^n\"}\n  {\"name\": \"AdicCompletion.of_ofAlgEquiv_symm\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) [inst_1 : IsAdicComplete I S] (x : AdicCompletion I S),\\n  (AdicCompletion.of I S) ((AdicCompletion.ofAlgEquiv I).symm x) = x\", \"doc\": \"Given a commutative ring $ S $, an ideal $ I $, and the condition that $ S $ is $ I $-adically complete, there exists an $ S $-algebra equivalence between $ S $ and its $ I $-adic completion $ \\\\varpro\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (x : PowerSeries A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient.symm x = (Ideal.Quotient.mk (Ideal.span {f})) (⋯.mod' ((\", \"doc\": \"The inverse of the algebra isomorphism between the polynomial quotient ring $ A[X]/(g) $ and the power series quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial. For any element $ x\"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] {I : Ideal S} {a : ℕ → ℕ}\\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n),\\n  (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) →\\n    ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I ⋯).co\", \"doc\": \"For natural numbers $ m $ and $ n $ with $ m \\\\leq n $, the composition of the canonical quotient ring homomorphism $ R/I^m \\\\to R/I^n $ with the homomorphism $ f_n $ equals the homomorphism $ f_m $. Th\"}\n  {\"name\": \"AdicCompletion.component_sumInv\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] [inst_3 : Fintype ι]\\n  (x : AdicCompletion I (DirectSum ι fun j => M j)) (j : ι),\\n  (DirectSum.component (AdicCompletion I R) ι (fun i =>\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, there exists a linear equivalence between the $ I $-adic complet\"}\n  {\"name\": \"FormalMultilinearSeries.comp_rightInv_aux2\", \"module\": \"Mathlib/Analysis/Analytic/Inverse\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F]\\n  (p : FormalMultilinearSeries 𝕜 E F) (i : E ≃L[𝕜] F) (x : E) (n : ℕ) (v : Fin (n + 2) → F),\\n  ∑ c\", \"doc\": \"For a formal multilinear series $ p $ over a semiring $ \\\\mathbb{K} $, a linear equivalence $ i : E \\\\simeq_{\\\\mathbb{K}} F $, and elements $ x \\\\in E $, $ v : \\\\mathrm{Fin}(n+2) \\\\to F $, the sum over comp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"face\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "face.*(MonoidAlgebra|monoid.algebra)|MonoidAlgebra.*face|face.*AdicCompletion",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The monomial ideal complementary to a face of a saturated formal monoid algebra is prime",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Order.Ideal.IsPrime.mk\", \"module\": \"Mathlib.Order.PrimeIdeal\", \"type\": \"∀ {P : Type u_1} [inst : Preorder P] {I : Order.Ideal P} [toIsProper : I.IsProper], Order.IsPFilter (↑I)ᶜ → I.IsPrime\", \"doc\": \"Given a proper order ideal $ I $ in a preorder $ P $, if the complement of $ I $ is a P-filter, then $ I $ is a prime order ideal.\"}\n  {\"name\": \"Ideal.mem_primeCompl_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Prime\", \"type\": \"{P : Ideal α} [P.IsPrime] {x : α} : x ∈ P.primeCompl ↔ x ∉ P\", \"doc\": \"For any prime ideal $ P $ in a semiring $ \\\\alpha $, the complement $ P^c $ forms a submonoid of $ \\\\alpha $. This submonoid consists of all elements not in $ P $, and it is closed under multiplication \"}\n  {\"name\": \"Ideal.IsMaximal.isPrime'\", \"module\": \"Mathlib.RingTheory.Ideal.Maximal\", \"type\": \"(I : Ideal α) : ∀ [_H : I.IsMaximal], I.IsPrime\", \"doc\": \"In a commutative semiring, every maximal ideal is a prime ideal.\"}\n  {\"name\": \"Ideal.primeCompl.congr_simp\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"∀ {α : Type u} [inst : Semiring α] (P P_1 : Ideal α) (e_P : P = P_1) [hp : P.IsPrime], P.primeCompl = P_1.primeCompl\", \"doc\": \"For a semiring $\\\\alpha$ and prime ideals $P$ and $P_1$, if $P = P_1$, then their prime complements (as submonoids) are equal, i.e., $P.\\\\text{primeCompl} = P_1.\\\\text{primeCompl}$.\"}\n  {\"name\": \"Ideal.primeCompl_le_nonZeroDivisors\", \"module\": \"Mathlib.RingTheory.Ideal.Operations\", \"type\": \"{R : Type*} [CommSemiring R] [NoZeroDivisors R] (P : Ideal R) [P.IsPrime] : P.primeCompl ≤ nonZeroDivisors R\", \"doc\": \"In a commutative semiring $ R $ with no zero divisors, the complement of any prime ideal $ P $ is contained within the submonoid of non-zero divisors of $ R $. This means that every element not in $ P\"}\n  {\"name\": \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(x : ProjectiveSpectrum 𝒜) : Ideal.IsPrime x.asHomogeneousIdeal.toIdeal\", \"doc\": \"For any point $\\\\mathfrak{p}$ in the projective spectrum $\\\\text{Proj}(A)$ of a graded ring $A$, the homogeneous prime ideal $\\\\mathfrak{p}$ remains a prime ideal in the underlying ring $A$ when viewed a\"}\n  {\"name\": \"Ideal.isPrime_of_maximally_disjoint\", \"module\": \"Mathlib.RingTheory.Ideal.Maximal\", \"type\": \"(I : Ideal α) (S : Submonoid α) (disjoint : Disjoint (I : Set α) S)\\n  (maximally_disjoint : ∀ (J : Ideal α), I < J → ¬Disjoint (J : Set α) S) : I.IsPrime\", \"doc\": \"Let $ I $ be an ideal in a semiring $ \\\\alpha $, and let $ S $ be a submonoid of $ \\\\alpha $. If $ I $ and $ S $ are disjoint (i.e., $ I \\\\cap S = \\\\emptyset $) and $ I $ is maximally disjoint from $ S $ \"}\n  {\"name\": \"Ideal.primeCompl\", \"module\": \"Mathlib.RingTheory.Ideal.Prime\", \"type\": \"(P : Ideal α) [hp : P.IsPrime] : Submonoid α\", \"doc\": \"For a prime ideal $ P $ in a semiring $ \\\\alpha $, the complement $ P^c $ forms a submonoid of $ \\\\alpha $. This submonoid consists of all elements not in $ P $, and it is closed under multiplication be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "face.*(MonoidAlgebra|AdicCompletion)|MonoidAlgebra.*face",
+   "results": "OK 0 hits: . Read the returned types: finite-support monoid algebras and their divisions, kernel-adic projections to an uncompleted target, and Weierstrass polynomial quotients do not state this face-completion theorem. Candidate source checks: Mathlib/Algebra/MonoidAlgebra/Defs.lean:64; Division.lean:110; Mathlib/RingTheory/AdicCompletion/Algebra.lean:482-494; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:688.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A completed monoid algebra modulo the monomial ideal complementary to a face is the completed face algebra",
+   "results": "OK 8 hits: MonoidAlgebra, AddMonoidAlgebra.gradeBy.gradedMonoid, AddMonoidAlgebra.exists_finset_adjoin_eq_top, AddMonoidAlgebra.commRing, MonoidAlgebra.instFree, MonoidAlgebra.ring, AddMonoidAlgebra.grade.gradedAlgebra, MonoidAlgebra.nonUnitalCommRing. Read the returned types: finite-support monoid algebras and their divisions, kernel-adic projections to an uncompleted target, and Weierstrass polynomial quotients do not state this face-completion theorem. Candidate source checks: Mathlib/Algebra/MonoidAlgebra/Defs.lean:64; Division.lean:110; Mathlib/RingTheory/AdicCompletion/Algebra.lean:482-494; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:688.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"face\"",
+   "results": "OK 0 hits: . Read the returned types: finite-support monoid algebras and their divisions, kernel-adic projections to an uncompleted target, and Weierstrass polynomial quotients do not state this face-completion theorem. Candidate source checks: Mathlib/Algebra/MonoidAlgebra/Defs.lean:64; Division.lean:110; Mathlib/RingTheory/AdicCompletion/Algebra.lean:482-494; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:688.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of a completed saturated monoid algebra to a face has kernel the ideal of complementary monomials and the quotient is a normal domain",
+   "results": "OK 8 hits: AdicCompletion.kerProj_of, Algebra.Generators.ker_naive, RingHom.ker_evalRingHom, AdicCompletion.kerProj, Algebra.Generators.kerCompPreimage, AddMonoidAlgebra.modOf, CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker, Algebra.Generators.map_toComp_ker. Read the returned types: finite-support monoid algebras and their divisions, kernel-adic projections to an uncompleted target, and Weierstrass polynomial quotients do not state this face-completion theorem. Candidate source checks: Mathlib/Algebra/MonoidAlgebra/Defs.lean:64; Division.lean:110; Mathlib/RingTheory/AdicCompletion/Algebra.lean:482-494; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:688.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal monoid power series restricted to a face give a quotient isomorphic to the completed face algebra",
+   "results": "OK 8 hits: PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, LaurentSeries.powerSeriesAlgEquiv, Polynomial.IsDistinguishedAt.algEquivQuotient, Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, PowerSeries.algEquivQuotientWeierstrassDistinguished, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ. Read the returned types: finite-support monoid algebras and their divisions, kernel-adic projections to an uncompleted target, and Weierstrass polynomial quotients do not state this face-completion theorem. Candidate source checks: Mathlib/Algebra/MonoidAlgebra/Defs.lean:64; Division.lean:110; Mathlib/RingTheory/AdicCompletion/Algebra.lean:482-494; Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:688.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-facet-valuations",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Boundary-prime and valuation input to the complete-local recognition equality, replacing the unsupported converse application of VI 1.6. Re-split of the retained facet-valuation proof, steps 9--11: Face projections and prime quotients of complete monoid models.",
+   "via": [
+    "lem-trf-complete-toric-facet-valuations",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-model-face-quotients",
+  "worker": "stage1",
+  "summary": "Constructed the face restriction and finite complementary-generator kernel decomposition directly in coefficient families, then computed both quotient kernels. Reused the existing sharp-monoid embedding, coefficient nonvanishing, PID and complete-model normality statements; no new nodes. Checked saturation of the face, all coefficient-ring and positive-weight hypotheses, the exact constant coefficient p, and empty generator/variable lists. Statement unchanged.",
+  "blueprint": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Boundary-prime and valuation input to the complete-local recognition equality, replacing the unsupported converse application of VI 1.6. Re-split of the retained facet-valuation proof, steps 9--11: Face projections and prime quotients of complete monoid models.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "Generic PID-to-Noetherian input for the coefficient rings, needed by the coefficient-family lemma; the trace-formula unit has no competing PID theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-f8cdd0ad4",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-f8cdd0ad4 (reviewer sub-agent of L); spot-checked: PASS, no fixes; I read the item and every cited statement in full. Delivery: one commit, no new nodes; item unsplit in live and side-live; no repair note, so the 2026-10-21 re-split rule does not apply. Statement, stmt_deps and blueprint are unchanged against live; only proof, proof_deps, proof_origin, split_report, status and searches changed. Source: ILO VI 1.6 (printed p. 70) gives only the k[[P]][[t]] and C[[P]][[t]]/(f) models, f ≡ p mod (P∖0, t), so proof_origin agent is right. No SGA. Searches: LeanSearch, LeanFinder, Loogle and grep, all no match. Step 1: the face is fs and sharp. A generator expression of an element of S lies in S, S^gp embeds in P^gp by integrality, and saturation follows from P's saturation plus the face condition. Step 2: the orthant embedding gives T_P = λ(P)×N^n ⊂ Z^{r+n} with coordinate-sum weight positive off 0. The chart ideals match under the renaming. Field and Cohen ring are PIDs, hence Noetherian (Mathlib leaf), and complete local domains, so every hypothesis of coefficient-nonvanishing holds. Step 3: the face condition makes restriction multiplicative; extension by zero gives surjectivity. Step 4: the first-eligible-index partition with cancellation gives a = Σ z^{g_i} b_i, a finite sum; the reverse inclusion holds. Step 5: in the Cohen case the kernel is J_S + (θ) via a lift of c; θ_S − p follows by applying ρ. Step 6: saturation-normality applied to S; the kernel of a surjection onto a nonzero domain is prime. Step 7: the constant coefficient of θ_S is exactly p, because sharpness and positive t-degree kill the constant terms of the chart generators; nonvanishing with r = p then gives z^q ≠ 0 for q ∈ S. Small cases agree with the statement: S = P, S = {0}, n = 0, P = {0}, N² with an axis face, and the even-sum monoid. No duplicate among the B_L(P,n) neighbours (monomial-factors, boundary-class-injectivity, localized-unit-divisor-lift, kato-recognition). The citer facet-valuations step 3 uses exactly the delivered clauses. The tool_use of the PID-Noetherian Mathlib leaf is accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteModelFaceQuotients",
+  "declaration": "ToricMonoid.complete_model_face_quotients",
+  "declarations": [
+   "ToricMonoid.IsModelCoefficientDescription",
+   "ToricMonoid.faceMonomialIdeal",
+   "ToricMonoid.hypersurfaceFaceIdeal",
+   "ToricMonoid.complete_model_face_quotients"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompleteModelFaceQuotients.lean",
+  "statement": "theorem complete_model_face_quotients (P : Type u) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ a b : P, a + b = 0 → a = 0 ∧ b = 0) (n : ℕ) (S : AddSubmonoid P) (hface : ∀ a b : P, a + b ∈ S → a ∈ S ∧ b ∈ S) : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative S) ∧ (∀ a b : S, a + b = 0 → a = 0 ∧ b = 0) ∧ (∀ (s : ℕ) (g : Fin s → P), AddSubmonoid.closure (Set.range g) = ⊤ → AddSubmonoid.closure (Set.range g ∩ (S : Set P)) = S) ∧ ∀ (L : Type v) [CommRing L] [IsLocalRing L], (IsField L ∨ ∃ p : ℕ, IsCohenRing p L) → ∃ (cP : Complete L P n ≃ₗ[L] (P → (Fin n →₀ ℕ) → L)) (cS : Complete L S n ≃ₗ[L] (S → (Fin n →₀ ℕ) → L)) (ρ : Complete L P n →ₐ[L] Complete L S n), IsModelCoefficientDescription L P n cP ∧ IsModelCoefficientDescription L S n cS ∧ Function.Surjective ρ ∧ (∀ (b : Complete L P n) (q : S) (e : Fin n →₀ ℕ), cS (ρ b) q e = cP b q.val e) ∧ RingHom.ker ρ.toRingHom = faceMonomialIdeal L P n S ∧ (∀ (s : ℕ) (g : Fin s → P), AddSubmonoid.closure (Set.range g) = ⊤ → faceMonomialIdeal L P n S = Ideal.span {a | ∃ i : Fin s, g i ∉ S ∧ a = monomial L P n (g i)}) ∧ (IsField L → (∃ E : (Complete L P n ⧸ faceMonomialIdeal L P n S) ≃ₐ[L] Complete L S n, (∀ b : Complete L P n, E (Ideal.Quotient.mk _ b) = ρ b) ∧ ∀ q : S, E (Ideal.Quotient.mk _ (monomial L P n q.val)) = monomial L S n q) ∧ IsDomain (Complete L S n) ∧ IsIntegrallyClosed (Complete L S n) ∧ (faceMonomialIdeal L P n S).IsPrime ∧ ∀ q : P, monomial L P n q ∈ faceMonomialIdeal L P n S ↔ q ∉ S) ∧ (∀ (p : ℕ), IsCohenRing p L → ∀ θ : Complete L P n, θ - (p : Complete L P n) ∈ completedChartIdeal L P n → ρ θ - (p : Complete L S n) ∈ completedChartIdeal L S n ∧ (∃ E : ((Complete L P n ⧸ Ideal.span {θ}) ⧸ hypersurfaceFaceIdeal L P n S θ) ≃ₐ[L] (Complete L S n ⧸ Ideal.span {ρ θ}), (∀ b : Complete L P n, E (Ideal.Quotient.mk _ (Ideal.Quotient.mk _ b)) = Ideal.Quotient.mk _ (ρ b)) ∧ ∀ q : S, E (Ideal.Quotient.mk _ (Ideal.Quotient.mk _ (monomial L P n q.val))) = Ideal.Quotient.mk _ (monomial L S n q)) ∧ IsDomain (Complete L S n ⧸ Ideal.span {ρ θ}) ∧ IsIntegrallyClosed (Complete L S n ⧸ Ideal.span {ρ θ}) ∧ (hypersurfaceFaceIdeal L P n S θ).IsPrime ∧ ∀ q : P, Ideal.Quotient.mk (Ideal.span {θ}) (monomial L P n q) ∈ hypersurfaceFaceIdeal L P n S θ ↔ q ∉ S)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three real definitions are notation for this node’s coefficient descriptions and the two explicitly introduced face ideals; the coefficient descriptions are characterized by all sufficiently deep polynomial representatives, so they are not arbitrary identifications."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d6b96cc5",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Fresh delivery: only the item's lean record changed; the 5 stmt_dep nodes are identical to side-live and lean.statement matches the file exactly. Every hypothesis and conclusion matches the node: fs and sharp P, the face condition, n:ℕ, IsField ∨ IsCohenRing on a local L with independent universes; S fs, sharp and generated by its generators; ρ an L-algebra surjection keeping exactly the S×ℕⁿ coefficients; ker ρ = J_S in both presentations; field and Cohen quotient isos E keeping representatives and monomials; ρθ−p in the face chart ideal; domain plus integrally closed (the recorded normal-domain form); primality; the membership iff. IsModelCoefficientDescription is satisfiable (truncation depth k+W(q)+|e|) and unique by separatedness, so cP, cS and ρ are canonical, not arbitrary. Edge cases S=P, S={0}, P={0} with n=0 (θ=p), empty generator list, n=0 checked. Docstrings with source and blueprint, the 7 proof steps, sorry only, no stronger hypotheses. Note: IsFineSaturatedMonoid is recorded under def-trf-log-regular-pair, reached through the cited def-trf-fs-log-blowup, as in the landed siblings. Advisory: RationalRoot import unused. No compile (no changes)."
+ }
+}

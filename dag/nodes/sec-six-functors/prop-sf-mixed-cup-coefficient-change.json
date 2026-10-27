@@ -27,11 +27,73 @@
   "def-weil-integral-scalar-extension",
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-sf-mixed-cup-coefficient-passages",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-compact-support-scalar-tensor-identification",
+  "def-sf-mixed-cup-normalized-scalars",
+  "def-sf-mixed-cup-coefficient-data",
+  "def-sf-mixed-cup-ringed-normalization",
+  "def-sf-mixed-cup-field-coordinates",
+  "def-sf-mixed-cup-field-normalization",
+  "def-sf-mixed-cup-tensor-normalization",
+  "def-sf-mixed-cup-field-operations",
+  "def-sf-mixed-cup-tensor-elementary",
+  "def-sf-mixed-cup-tensor-closure",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sp-coefficient-mate-comparisons",
+  "def-sf-finite-tor-integral-inclusion",
+  "def-pur-operation-scalar-transport",
+  "def-sf-constructible-operation-scalar-transport",
+  "def-sf-integral-tensor-finite-comparison",
+  "def-a1-flat-term-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Obtain the normalized point and cohomology comparison family, with both support choices and all elementary normalizations, from operationComparisons_exists.",
+   "uses": [
+    "lem-sf-mixed-cup-operation-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+    "place": "Displayed projection/counit composite and final coefficient compatibility sentence; expanded in prop-sf-mixed-cup-coefficient-change proof steps 2--9."
+   }
+  },
+  {
+   "text": "Independently obtain the normalized site tensor comparisons, their six elementary specifications and the naturality and formal identity/composition laws, from tensorComparisons_exists.",
+   "uses": [
+    "lem-sf-mixed-cup-tensor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+    "place": "Displayed projection/counit composite and final coefficient compatibility sentence; expanded in prop-sf-mixed-cup-coefficient-change proof steps 2--9."
+   }
+  },
+  {
+   "text": "Apply normalizedCup_coefficient_square to these actual families, discharging every normalization and coherence hypothesis with the respective proofs obtained in the preceding two steps. Package all data, proofs and the resulting square in Comparisons. The existing geometricSpaceSeparated instance supplies separation of the specified geometric fibre.",
+   "uses": [
+    "lem-sf-mixed-cup-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+    "place": "Displayed projection/counit composite and final coefficient compatibility sentence; expanded in prop-sf-mixed-cup-coefficient-change proof steps 2--9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-mixed-cup-operation-comparisons",
+  "lem-sf-mixed-cup-tensor-comparisons",
+  "lem-sf-mixed-cup-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+  "place": "Normalized operation and tensor subassemblies, followed by the projection/counit cup square; final packaging checked in Lean."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -123,10 +185,52 @@
    "results": "No hits in Mathlib.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedSupportCup|cup.*coefficient|coefficient.*cup|compactSupport.*scalar",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived compact support cup product with coefficient extension and integral reduction",
+   "results": "Hits: TestFunction.coe_ofSupportedIn, CochainComplex.instIsStrictlyGEExtendNatIntEmbeddingUpNatOfNat, TestFunction.coe_ofSupportedInLM, TestFunction.coe_ofSupportedInCLM, CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat, Algebra.Extension.CotangentSpace.map_comp, CochainComplex.HomComplex.Cochain.comp_units_smul, CompactlySupportedContinuousMap.coe_comp_to_continuous_fun. These concern ordinary monoidal adjunctions, sections, Hom or group cohomology; none states the geometric derived mixed-support coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Functor.Monoidal",
+   "results": "Hits: CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.mapAddMon_counit, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.mapAddGrp_counit, CategoryTheory.Adjunction.mapGrp_counit, CategoryTheory.MonoidalClosed.ofEquiv_curry_def. These concern ordinary monoidal adjunctions, sections, Hom or group cohomology; none states the geometric derived mixed-support coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived mixed support cup product commutes with extension of coefficient rings via compact support and ordinary global sections comparisons",
+   "results": "Hits: Rep.standardResolution.extIso, groupCohomology.mapCocycles₁_comp_i, CategoryTheory.Sheaf.instAddCommGroupH, groupCohomology.isoCocycles₁_hom_comp_i, groupCohomologyIsoExt, groupCohomology.mapCocycles₂_comp_i, LightCondensed.ihomPoints_symm_comp, groupCohomology.isoCocycles₁_inv_comp_iCocycles. These concern ordinary monoidal adjunctions, sections, Hom or group cohomology; none states the geometric derived mixed-support coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|IsMonoidalCounit",
+   "results": "No hits. Directory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension preserves the action of ordinary derived global sections on compactly supported etale cohomology by projection formula and adjunction counit",
+   "results": "Hits: SheafOfModules.pushforwardSections_unitHomEquiv, LightCondensed.ihom_map_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_coe, CondensedMod.hom_naturality_apply, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, LightCondensed.ihomPoints_symm_comp. These concern ordinary monoidal adjunctions, sections, Hom or group cohomology; none states the geometric derived mixed-support coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pod-mixed-support-cup-product",
@@ -135,5 +239,164 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "prop-sf-mixed-cup-coefficient-change",
+  "worker": "stage1",
+  "summary": "Q107 proves coefficient compatibility by pasting the projection square and the explicitly normalized ordinary-counit square. Finite arbitrary ring maps, integral reduction, finite integral extension, rationalization and common finite stages are kept distinct. All auxiliary facts already have nodes; no new nodes. Maintainer reader Q107 FIX: added the B-stage domain verification (finite ring maps, integral extension, field stages) and the restriction/direct-image comparison in the integral basis argument.",
+  "blueprint": "def-pod-mixed-support-cup-product: projection/counit composite, stagewise transport paragraph, and final sentence on finite reduction and coefficient change.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-finite-direct-image",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-kun-geometric-point-derived-constants",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-pur-compact-support-integral-coefficient-comparison",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-sfb-etale-proetale-scalar-pullback-cube",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "prop-sf-pf-coherence",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "thm-sf-pf-adic",
+    "why": "Generic coefficient, tensor, adjunction or point comparison used on its stated domain to transport the two factors of the mixed cup composite; it does not replace the projection/counit route of this unit."
+   },
+   {
+    "node": "lem-sp-finite-compact-support-domains",
+    "why": "Generic finite coefficient-change domain lemma (applied with the identity compactification): the B-stage inputs K_B, L_B of the mixed cup stay bounded constructible of finite Tor amplitude; no node of this unit states it for an arbitrary finite ring map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-finite-direct-image",
+  "lem-fix-operation-reduction",
+  "lem-fix-scalar-completion-associator",
+  "lem-kun-geometric-point-derived-constants",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-point-sections-scalar-extension",
+  "prop-sf-pf-coherence",
+  "thm-sf-pf-adic",
+  "lem-sp-finite-compact-support-domains"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-4392f63eb",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-4392f63eb (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, all 22 cited statements, the source def-pod-mixed-support-cup-product.md (main-20261015; the cup is PF(K,Ra_{X*}L) followed by Ra_{X!}(1⊗ε), with a final sentence on finite reduction and base change of the coefficient ring) and the definition node. Statement and stmt_deps are unchanged from base. Live and side-live still have the item unsplit. No new nodes and no duplicate anywhere in the DAG. The only citer, thm-pod-finite-reduction step 2, uses exactly this square. The step-6 pasting checks out by hand: naturality of c, the step-5 counit equation ε^B∘P_B(o)=S_X(ε)∘h, PF naturality along o_L, and the projection squares for the specified c (étale q_f transported to pro-étale for finite rings; c_{F/E} at the integral stage). Small cases checked: zero input, X=s, identity passage, non-flat Z/ℓ²→F_ℓ, ramified A_{F,en}. Two faults, both repaired in fixes/dag/nodes/sec-six-functors/prop-sf-mixed-cup-coefficient-change.json. (F1, C1/E1) No step showed K_B,L_B ∈ D^b_ctf(X,B), which μ^B needs; thm-sf-ctf-stability (vii) covers only quotients. Step 2 now cites lem-sp-finite-compact-support-domains with the identity compactification, plus δ_X of the scalar/pullback cube (tool_use added). Step 3 now cites lem-weil-integral-scalar-extension-constructible and thm-sf-ctf-stability (vii); step 4 cites def-weil-finite-tor-amplitude for the field stages. (F2, C1) The step-3 basis argument needs restriction along R→T to commute with Rf_*; it now cites κ of lem-sfb-ringed-derived-monoidal-comparisons. Batch-5: the item is reached via fix-prop-coherence/sk-thm-sf-package and prop-trf-adic-coefficient-morphism-systems as a six-functor package coherence, not as a step of the trace formula or Poincaré duality. The six flagged citations (lem-coef-finite-direct-image, lem-pod-point-sections-derived-reduction, lem-pur-completed-coefficient-pushforward-comparison, lem-pur-etale-compact-scalar-coherence, prop-sf-pf-coherence, thm-sf-pf-adic) are generic coefficient, projection or point lemmas whose forbidden-chapter reach is only generic definitions or algebra; accepted. The citations added by the FIX add 0 nodes to the closure and make no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.MixedCupCoefficientChange",
+  "declaration": "WeilConjectures.MixedCupCoefficientChange.mixedCupCoefficientChange",
+  "declarations": [
+   "WeilConjectures.MixedCupCoefficientChange.Comparisons",
+   "WeilConjectures.MixedCupCoefficientChange.geometricSpaceSeparated",
+   "WeilConjectures.MixedCupCoefficientChange.mixedCupCoefficientChange"
+  ],
+  "file": "lean/Sheaf/Paper/MixedCupCoefficientChange.lean",
+  "statement": "theorem mixedCupCoefficientChange (S : Operations C) (d : ℕ) (G : PoincareDualitySetting D.k₀ d) (c : Compactification (sixFunctorStructure (pairingGeometricSpace D d G)).hom.left) : Nonempty (Comparisons C S (pairingGeometricSpace D d G) c)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair of immutable head f591df956e53: elementary cohomology and all six tensor components are fixed to recorded canonical maps; free siteCongruence removed. Owning finite tensor model and integral comparison dependencies cited. Statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-848c6a174",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery after 375e RETURN H2. Lean diff vs 375e: only moduleDerived made a scoped instance (same value, all modules open the scope, no live importers). F1 fixed: existing:true def-sf-integral-tensor-finite-comparison matches the live source verbatim (IntegralOperationsPreserveConstructible:77-83); its statement describes the actual homEquiv-transpose/Roos-projection composite with no extra hypotheses; signature owners scalarReductionDerivedExtension (def-weil-integral-derived-reduction), integralOperationsGoodComplex (def-a1-flat-term-kflat-complex) and integralCompletedTensor (def-weil-derived-pullback-tensor-hom) are cited; no duplicate live owner. F2 fixed: the passages node cites lem-pod-point-sections-derived-reduction-data (a definition node owning pointReductionQuotient) in text and stmt_deps. Item statement, proof and proof_deps unchanged; every lean.statement verbatim; no dangling deps; sorry only in named postponed theorems. Advisories: theorem stmt_dep for the adjunction assertion; integralTensorFiniteComplex still theorem-owned but used only inside the owner's type. No compile run (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T143131-L-950943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

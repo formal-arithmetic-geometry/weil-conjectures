@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-section-ordinary-pull-compatibility",
+ "kind": "statement",
+ "title": "Ordinary scalar pullback compatibility through section reconstruction",
+ "statement": "Let a be a condensed coefficient morphism, f:X→Y a scheme morphism, and sX,sY normalized section scalar comparisons. Let r be a section restriction/pushforward isomorphism identity on sections, and let c be a section scalar/pullback isomorphism whose inverse is conjugate to r under the specified composite ordinary adjunctions. Then the two ordinary paths from the section realization of internal scalar extension followed by geometric pullback to section geometric pullback followed by scalar extension agree: the image of CondensedRing.pullIso inverse, followed by sX.ordinary and scalar extension of pullComparison, equals pullComparison at the extended module followed by geometric pullback of sY.ordinary and c. This is an ordinary-module equation and contains no derived comparison. The coefficient data, actual ordinary functors and adjunctions, and the normalized endpoint comparisons are those of [def-sfb-internal-derived-scalar-comparisons] and [def-sfb-internal-section-scalar-pullback-comparison-data].",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-section-scalar-pullback-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 06YS, 06YY, 0D6D and 07A6; normalization transport, ordinary mate compatibility step."
+ },
+ "proof": [
+  {
+   "text": "The balanced generator equation at the unit coefficient, and the specified section scalar unit, show that the given scalar ordinary comparisons have the given restriction comparisons as their mates.",
+   "uses": [
+    "def-sfb-internal-section-scalar-pullback-comparison-data",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the defining unique-choice mate equation of the geometric upper comparison and paste the scalar and geometric adjunction squares. Their right-adjoint rectangle is the identity on sections: chain the endpoint restriction equations, the geometric pushforward comparison equations, coefficient compatibility, and the hypothesis on r.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mate pasting and injectivity of the mate correspondence, or equivalently the normalized adjunction-compositor comparison, to identify the left rectangle. The internal compositor is pullIso inverse by its defining conjugation, and the section compositor is c by its given conjugation.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-equivalence-square-inverse-mate-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit scalar/pullback section-transport calculation, using the specified universal counits and adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between left adjoints commutes with equivalences when its conjugate right adjoint square commutes",
+   "results": "Adjunction.leftAdjointCompIso; conjugateIsoEquiv; conjugateEquiv_iso.",
+   "date": "2026-10-26",
+   "verdict": "The existing equivalenceAdjunctionComparison_compositor packages the required mate calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv; unit_mateEquiv; mateEquiv_hcomp; conjugateEquiv_mateEquiv_vcomp.",
+   "date": "2026-10-26",
+   "verdict": "Use ordinary unit normalization, mateEquiv_hcomp and the existing compositor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPairComplexComparison|leftDerived_ext",
+   "results": "ScalarInternalHomData defines the scalar cochain counit; DerivedSectionScalarTransport extends a derived-unit equation from flat-term K-flat resolutions by naturality.",
+   "date": "2026-10-26",
+   "verdict": "The specialized ordinary equation is not present; use the existing adjunction-compositor theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionPullComputationOfRealization",
+  "date": "2026-10-26",
+  "group": "W8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (1), scalar/pullback normalization; K-flat representative computation inside endpoint transport. Substep: ordinary scalar/geometric mate identification.",
+   "via": [
+    "lem-sfb-section-pull-computation-of-realization",
+    "lem-sfb-section-pull-normalization-transport",
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionOrdinaryPullCompatibility",
+  "file": "lean/Sheaf/Paper/SectionOrdinaryPullCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.section_ordinary_pull_compatibility",
+  "statement": "theorem section_ordinary_pull_compatibility (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (sX : SectionScalarComparison a X) (sY : SectionScalarComparison a Y)\n    (hX : SectionScalarNormalized a X sX) (hY : SectionScalarNormalized a Y sY)\n    (r : ModuleRingedComparison.pushforward Λ' f ⋙\n      SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology Y) (coefficientMap a Y)) ≅\n        SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n          (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X) (coefficientMap a X)) ⋙\n            ModuleRingedComparison.pushforward Λ f)\n    (identity_on_sections : (∀ (N : ModuleRingedComparison.modules Λ' X) (U : Y.ProEtᵒᵖ)\n      (x : ((ModuleRingedComparison.pushforward Λ' f).obj N).val.obj U),\n    (r.hom.app N).val.app U x = x))\n    (c : sY.pair.extension ⋙ ModuleRingedComparison.pullback Λ' f ≅\n    ModuleRingedComparison.pullback Λ f ⋙ sX.pair.extension)\n    (conjugate : conjugateEquiv\n      (sY.pair.ordinaryAdjunction.comp (ModuleRingedComparison.adjunction Λ' f))\n      ((ModuleRingedComparison.adjunction Λ f).comp sX.pair.ordinaryAdjunction) c.inv = r.hom)\n :\n    ∀ M : Modules Λ Y,\n    (ModuleRingedComparison.equivalence Λ' X).functor.map\n        ((CondensedRing.pullIso a f).inv.app M) ≫\n        sX.ordinary.hom.app ((CondensedRing.upperStar Λ f).obj M) ≫\n        sX.pair.extension.map ((ModuleRingedComparison.pullComparison Λ f).hom.app M) =\n      (ModuleRingedComparison.pullComparison Λ' f).hom.app ((extension a Y).obj M) ≫\n        (ModuleRingedComparison.pullback Λ' f).map (sY.ordinary.hom.app M) ≫\n        c.hom.app ((ModuleRingedComparison.equivalence Λ Y).functor.obj M)",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261026T093010-L-3491281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261026T093010-L-3491281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

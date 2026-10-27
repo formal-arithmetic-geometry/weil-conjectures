@@ -26,6 +26,42 @@ universe u v
 
 namespace Algebra
 
+private theorem integrallyClosed_of_faithfullyFlat
+    (A : Type u) (B : Type v) [CommRing A] [CommRing B]
+    [Algebra A B] [Module.FaithfullyFlat A B] [IsDomain B] [IsIntegrallyClosed B] :
+    IsIntegrallyClosed A := by
+  let : IsDomain A := (FaithfulSMul.algebraMap_injective A B).isDomain (algebraMap A B)
+  let K := FractionRing A
+  let L := FractionRing B
+  have hinj : Function.Injective (algebraMap A L) := by
+    rw [IsScalarTower.algebraMap_eq A B L]
+    exact (IsFractionRing.injective B L).comp (FaithfulSMul.algebraMap_injective A B)
+  let f : K →ₐ[A] L := IsFractionRing.liftAlgHom (g := Algebra.ofId A L) hinj
+  apply (isIntegrallyClosed_iff K).mpr
+  intro x hx
+  obtain ⟨a, b, hb, hab⟩ := IsFractionRing.div_surjective A x
+  have hb0 : b ≠ 0 := nonZeroDivisors.ne_zero hb
+  obtain ⟨s, hs⟩ := IsIntegrallyClosed.algebraMap_eq_of_integral
+    ((hx.map f).tower_top (A := B))
+  have hbL : algebraMap B L (algebraMap A B b) ≠ 0 := by
+    exact fun h ↦ hb0 ((IsFractionRing.injective B L).comp
+      (FaithfulSMul.algebraMap_injective A B) (by simpa using h))
+  have heq : algebraMap A B a = algebraMap A B b * s := by
+    apply IsFractionRing.injective B L
+    have hs' : algebraMap B L s =
+        algebraMap B L (algebraMap A B a) / algebraMap B L (algebraMap A B b) := by
+      simpa only [← hab, map_div₀, AlgHom.commutes, ← IsScalarTower.algebraMap_apply A B L] using hs
+    rw [map_mul, hs', mul_div_cancel₀ _ hbL]
+  have ha : a ∈ Ideal.span ({b} : Set A) := by
+    rw [← Ideal.comap_map_eq_self_of_faithfullyFlat (B := B) (Ideal.span ({b} : Set A))]
+    change algebraMap A B a ∈ Ideal.map (algebraMap A B) (Ideal.span ({b} : Set A))
+    rw [Ideal.map_span, Set.image_singleton, Ideal.mem_span_singleton]
+    exact ⟨s, heq⟩
+  obtain ⟨r, hr⟩ := Ideal.mem_span_singleton.mp ha
+  refine ⟨r, ?_⟩
+  rw [← hab, hr, map_mul, mul_div_cancel_left₀]
+  exact fun h ↦ hb0 ((IsFractionRing.injective A K) (by simpa using h))
+
 /-- Normality descends along any faithfully flat map of commutative rings, including
 non-Noetherian rings and the zero ring. Normality is the assertion that every prime
 localization is an integrally closed domain.
@@ -60,6 +96,23 @@ theorem normal_ring_of_faithfullyFlat
       IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)) :
     ∀ (p : Ideal R) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p) := by
-  sorry
+  intro p hp
+  obtain ⟨q, hq, hqp⟩ := Ideal.exists_isPrime_liesOver_of_faithfullyFlat (B := S) p
+  let := hq
+  let A := Localization.AtPrime p
+  let B := Localization.AtPrime q
+  have hpq : p = q.comap (algebraMap R S) := hqp.over
+  let f : A →+* B := Localization.localRingHom p q (algebraMap R S) hpq
+  let : Algebra A B := f.toAlgebra
+  let : Module.Flat A B :=
+    (RingHom.Flat.localRingHom ((RingHom.flat_algebraMap_iff).mpr inferInstance) q p hpq)
+  let : IsLocalHom (algebraMap A B) :=
+    Localization.isLocalHom_localRingHom p q (algebraMap R S) hpq
+  let : Module.FaithfullyFlat A B := Module.FaithfullyFlat.of_flat_of_isLocalHom
+  obtain ⟨hd, hi⟩ := hS q
+  let : IsDomain B := hd
+  let : IsIntegrallyClosed B := hi
+  exact ⟨(FaithfulSMul.algebraMap_injective A B).isDomain (algebraMap A B),
+    integrallyClosed_of_faithfullyFlat A B⟩
 
 end Algebra

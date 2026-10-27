@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-exact-algebraic-group-property-permanence",
+ "kind": "statement",
+ "title": "Affineness, smoothness and connectedness in exact algebraic-group sequences",
+ "statement": "Let $k$ be a field [def-weil-field], and let $N,E,Q$ be separated group schemes of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion, def-weil-proper-morphism]. Let $i:N\\hookrightarrow E$ be a closed normal subgroup scheme [def-sc-group-scheme-subgroup] and let $q:E\\to Q$ be a homomorphism whose scheme-theoretic kernel is $i:N\\hookrightarrow E$, meaning that the square with $N\\to\\operatorname{Spec}k$ and the identity section $e_Q:\\operatorname{Spec}k\\to Q$ is Cartesian [def-pc-fibre-product]. Suppose $q$ is flat [def-weil-flat-morphism] and surjective on underlying spaces. Thus $1\\to N\\to E\\to Q\\to1$ is an exact sequence of algebraic groups. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme], smoothness means [def-sbc-smooth-morphisms], and connected means [def-weil-connected-scheme]. For each of the three properties affine, smooth, and connected, the following hold separately: if $N$ and $Q$ have the property, then $E$ has it; if $E$ has the property, then $Q$ has it. Neither commutativity nor perfectness of $k$ is assumed, and the trivial group is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.1(a),(b), printed p.149. Its cited inputs are Proposition 1.62 (smoothness), printed p.24; Corollary 2.70 (affine extensions), printed p.61; Proposition 5.29 (affine quotients), printed p.105; Proposition 5.59 (connectedness), printed p.114. Exactness is defined in Section 1(e), printed pp.23--24. No single Stacks tag states this algebraic-group permanence theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First establish the finiteness needed for descent. The field $k$ is Noetherian, since its only ideals are $0$ and $k$, so $\\operatorname{Spec}k$ is locally Noetherian. By [pqf-lem-locnoeth-lft], $Q$ is locally Noetherian. By clause (f) of [lem-weil-pbc-proper-fp-permanence], $q$ is locally of finite type, because $E\\to\\operatorname{Spec}k$ is. Hence [pqf-lem-lft-fp-locnoeth] makes $q$ locally of finite presentation. Both $E$ and $Q$ are quasi-compact, and $Q$ is quasi-separated: its diagonal is a closed immersion, hence affine by [lem-weil-pbc-closed-immersion-integral-separated-uc], hence quasi-compact by [lem-weil-pbc-affine-morphism-permanence]. Thus [lem-weil-pbc-qcqs-morphism-permanence](1) makes $q$ quasi-compact. Its flatness and surjectivity are hypotheses. In particular $\\{q:E\\to Q\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering]: for an affine open $V\\subset Q$, cover the quasi-compact inverse image $q^{-1}(V)$ by finitely many affine opens; their images cover $V$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 1.61, p.24; finite-type refinement using Stacks 01T6, 01T8, 01TX; singleton fpqc condition, Stacks 022B."
+   }
+  },
+  {
+   "text": "The kernel square and the group operations [def-sc-group-scheme, def-pc-fibre-product] give inverse scheme morphisms\n$$\\alpha:E\\times_kN\\longrightarrow E\\times_QE,\\quad(g,n)\\longmapsto(g,g\\,i(n)),\\qquad\n\\beta:(g,h)\\longmapsto(g,g^{-1}h).$$\nFor $\\beta$, the second component factors uniquely through $N$, since $q(g)^{-1}q(h)=e_Q$. The two composites are identities by $g^{-1}(g\\,i(n))=i(n)$ and $g(g^{-1}h)=h$, using uniqueness in the fibre-product universal property. Both maps preserve the first projection to $E$. These are formulas in morphisms, using multiplication and inverse, so they hold after every base change, including nonreduced test schemes.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 2.68 and Exercise 2-1, pp.60--61; Proposition 5.24, pp.104--105."
+   }
+  },
+  {
+   "text": "Assume $N$ and $Q$ affine. The structure map $N\\to\\operatorname{Spec}k$ is affine by [pqf-def-affine-morphism]. Its base change $E\\times_kN\\to E$ is affine by [lem-weil-pbc-affine-morphism-permanence](1). Step 2 identifies this projection with the base change of $q$ along itself. Since step 1 gives the fpqc cover $\\{q\\}$, [lem-weil-pbc-fpqc-descend-affine] makes $q$ affine. Its target $Q$ is affine, so [lem-weil-pbc-affine-morphism-permanence](2) makes $E$ affine.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.69 and Corollary 2.70, pp.60--61; Stacks 02L5 (lemma-descending-property-affine)."
+   }
+  },
+  {
+   "text": "Assume $E$ affine. The closed immersion $N\\hookrightarrow E$ is affine by [lem-weil-pbc-closed-immersion-integral-separated-uc], and [lem-weil-pbc-affine-morphism-permanence](2) makes $N$ affine. Apply [lem-sfb-affine-normal-quotient-geometry] to the normal closed subgroup $N\\subset E$, obtaining an affine finite-type group $Q_0$ and a flat surjective finitely presented homomorphism $q_0:E\\to Q_0$ with kernel $N$. The same argument as step 1 makes $\\{q_0\\}$ an fpqc cover. By step 2, both relations $E\\times_QE$ and $E\\times_{Q_0}E$ consist of pairs $(g,gi(n))$. Therefore $q_0$ agrees on the two projections of $E\\times_QE$, and $q$ agrees on those of $E\\times_{Q_0}E$. By [lem-weil-pbc-fpqc-representable-descent], $q_0$ descends along $q$ to $a:Q\\to Q_0$, and $q$ descends along $q_0$ to $b:Q_0\\to Q$. They satisfy $aq=q_0$ and $bq_0=q$. Consequently $ba$ and $\\mathrm{id}_Q$ have the same pullback along $q$, and $ab$ and $\\mathrm{id}_{Q_0}$ have the same pullback along $q_0$. The uniqueness clause of that descent theorem gives $ba=\\mathrm{id}_Q$ and $ab=\\mathrm{id}_{Q_0}$. Hence $Q\\simeq Q_0$ is affine.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.29 and its proof using quotient uniqueness Theorem 5.13, pp.101,105; Stacks 023Q, representable fpqc descent."
+   }
+  },
+  {
+   "text": "Assume $N$ and $Q$ smooth over $k$. By [lem-pc-proper-base-change](2), the projection $E\\times_kN\\to E$ is smooth. Step 2 identifies it with $E\\times_QE\\to E$, the pullback of $q$ along $q$. The flat quasi-compact surjection $q$ of step 1 therefore permits [lem-trf-smooth-fpqc-base-descent] to conclude that $q$ is smooth. Composing it with the smooth structure map of $Q$ by [lem-trf-smooth-composition] proves that $E$ is smooth.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(a), p.24, with the torsor computation of 2.68; Stacks 01VB, 02VL, 01VA."
+   }
+  },
+  {
+   "text": "Assume $E$ smooth over $k$. Apply [lem-sbc-smooth-flat-surjective-source-descent] to $E\\xrightarrow{q}Q\\to\\operatorname{Spec}k$. Its hypotheses on $q$ are flatness and surjectivity from the statement and local finite presentation from step 1; the composite is the smooth structure map of $E$. Thus $Q$ is smooth. This argument does not require the kernel to be smooth.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(b), p.24, in its smooth source-descent form, Stacks 05B5 (lemma-smooth-permanence)."
+   }
+  },
+  {
+   "text": "Assume $N$ connected. Its identity is a $k$-rational point, so [lem-sbc-connected-rational-point-geometrically-connected] gives connectedness of $N_L$ for every field extension $L/k$. For $y\\in Q$, let $F=E\\times_Q\\operatorname{Spec}\\kappa(y)$ [def-pc-scheme-fibre]. The homeomorphism in that definition and surjectivity of $q$ make $F$ nonempty. Choose any point $x\\in F$ and put $L=\\kappa(x)$; the canonical map $\\operatorname{Spec}L\\to F$ gives an $L$-point $g$ of $F_L$. Translation $n\\mapsto g\\,i(n)$ identifies $N_L$ with $F_L$, with inverse $h\\mapsto g^{-1}h$, exactly by the kernel calculation in step 2. The map $\\operatorname{Spec}L\\to\\operatorname{Spec}\\kappa(y)$ is surjective (both spectra have one point); its base change $F_L\\to F$ is surjective by [lem-weil-pbc-surjective-base-change]. Thus $F$ is connected: a nonempty clopen separation would pull back to one of the connected space $N_L$. The homeomorphism of [def-pc-scheme-fibre] now shows that every topological fibre $q^{-1}(y)$ is connected.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), p.114, via the torsor fibre calculation of 2.68; Stacks 04KV, 01S1, 01K1."
+   }
+  },
+  {
+   "text": "If also $Q$ is connected, step 7 gives connected nonempty fibres of $q$. Step 1 gives flatness, quasi-compactness and surjectivity, so [lem-weil-pbc-flat-qc-surjective-quotient-map] says that $Q$ has the quotient topology for $q$. Taking the whole closed connected subset $Q$ in [lem-weil-pbc-connected-fibres-quotient-preimage-connected] proves that $E$ is connected.",
+   "uses": [
+    "lem-weil-pbc-flat-qc-surjective-quotient-map",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), p.114; Stacks 02JY and 0377 (lemma-connected-fibres-quotient-topology-connected-components)."
+   }
+  },
+  {
+   "text": "Finally suppose $E$ connected. If $Q=U\\amalg V$ were a separation into nonempty clopen subsets, then $E=q^{-1}(U)\\amalg q^{-1}(V)$ would be a separation into nonempty clopen subsets by continuity and surjectivity. This contradicts connectedness of $E$ [def-weil-connected-scheme]. The identity section makes $Q$ nonempty. Hence $Q$ is connected, completing all six implications. No inference asserts any of these properties for $N$ from the corresponding property of $E$.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(b), p.114; elementary continuous-surjective-image argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-fpqc-covering",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-trf-smooth-composition",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-flat-qc-surjective-quotient-map",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.1, p.149; expand 2.70 and 5.29 by the torsor and quotient-uniqueness arguments; use existing general descent tools for 1.62 and connected-fibre topology for 5.59."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affine.*(quotient|extension)|quotient.*(smooth|connected)|smooth.*exact.sequence",
+   "results": "{\"t\": \"2026-10-24T08:07:40Z\", \"tool\": \"grep\", \"query\": \"affine.*(quotient|extension)|quotient.*(smooth|connected)|smooth.*exact.sequence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"672efe146bec7b18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; abstract group extensions, morphism cancellation, Hopf structures and general flat/connected maps do not assert permanence for algebraic group exact sequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of affine smooth connected algebraic groups is affine smooth connected and a quotient of such an algebraic group has the same properties",
+   "results": "{\"t\": \"2026-10-24T08:07:40Z\", \"tool\": \"leansearch\", \"query\": \"An extension of affine smooth connected algebraic groups is affine smooth connected and a quotient of such an algebraic group has the same properties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\", \"AddGroupExtension\", \"AddGroupExtension.quotientRangeInlEquivRight\", \"GroupExtension.mk\", \"AddGroupExtension.quotientKerRightHomEquivRight\", \"GroupExtension.Equiv.noConfusionType\", \"GroupExtension.quotientRangeInlEquivRight\"], \"digest\": \"5f5c0cc211dd5d0f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; abstract group extensions, morphism cancellation, Hopf structures and general flat/connected maps do not assert permanence for algebraic group exact sequences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T08:07:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine\"], \"digest\": \"f974a08dec113b64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; abstract group extensions, morphism cancellation, Hopf structures and general flat/connected maps do not assert permanence for algebraic group exact sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an exact sequence of separated finite type group schemes over a field affineness smoothness and connectedness are preserved under extensions and quotients",
+   "results": "{\"t\": \"2026-10-24T08:07:43Z\", \"tool\": \"leanfinder\", \"query\": \"In an exact sequence of separated finite type group schemes over a field affineness smoothness and connectedness are preserved under extensions and quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsAffineHom.of_comp\", \"Algebra.Generators.CotangentSpace.exact\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"bca1ea36da0920df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; abstract group extensions, morphism cancellation, Hopf structures and general flat/connected maps do not assert permanence for algebraic group exact sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a faithfully flat surjective morphism of algebraic groups the quotient of an affine group is affine and the quotient of a smooth connected group is smooth connected",
+   "results": "{\"t\": \"2026-10-24T08:08:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a faithfully flat surjective morphism of algebraic groups the quotient of an affine group is affine and the quotient of a smooth connected group is smooth connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\"], \"digest\": \"4e19c23d4296e312\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; abstract group extensions, morphism cancellation, Hopf structures and general flat/connected maps do not assert permanence for algebraic group exact sequences."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(quotient|extension)|quotient.*(smooth|connected)|smooth.*exact.sequence",
+   "results": "{\"t\": \"2026-10-24T08:43:37Z\", \"tool\": \"grep\", \"query\": \"affine.*(quotient|extension)|quotient.*(smooth|connected)|smooth.*exact.sequence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"672efe146bec7b18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module exactness, ordinary abstract groups, Hopf structures, or separate scheme-morphism properties; none states all six permanence implications for exact finite-type group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affineness smoothness and connectedness in a faithfully flat exact sequence of algebraic groups",
+   "results": "{\"t\": \"2026-10-24T08:43:37Z\", \"tool\": \"leansearch\", \"query\": \"Affineness smoothness and connectedness in a faithfully flat exact sequence of algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"RingHom.Flat\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\"], \"digest\": \"3b53c74c2d3a6ec6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module exactness, ordinary abstract groups, Hopf structures, or separate scheme-morphism properties; none states all six permanence implications for exact finite-type group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T08:43:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine\"], \"digest\": \"f974a08dec113b64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module exactness, ordinary abstract groups, Hopf structures, or separate scheme-morphism properties; none states all six permanence implications for exact finite-type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an exact sequence of finite type group schemes over a field, affineness smoothness and connectedness pass to extensions and quotients",
+   "results": "{\"t\": \"2026-10-24T08:43:41Z\", \"tool\": \"leanfinder\", \"query\": \"In an exact sequence of finite type group schemes over a field, affineness smoothness and connectedness pass to extensions and quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Exact.ab_finite\", \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"Algebra.Generators.CotangentSpace.exact\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.Cotangent.exact\", \"Module.Finite.of_exact\"], \"digest\": \"02ececa59475e66a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module exactness, ordinary abstract groups, Hopf structures, or separate scheme-morphism properties; none states all six permanence implications for exact finite-type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat homomorphism of algebraic group schemes identifies its target with the quotient by its kernel; affine smooth connected groups are stable under quotients and extensions",
+   "results": "{\"t\": \"2026-10-24T08:44:04Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat homomorphism of algebraic group schemes identifies its target with the quotient by its kernel; affine smooth connected groups are stable under quotients and extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"RingHom.FaithfullyFlat.stableUnderComposition\"], \"digest\": \"5b7f03ac176df785\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module exactness, ordinary abstract groups, Hopf structures, or separate scheme-morphism properties; none states all six permanence implications for exact finite-type group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-normal-subgroup-products",
+  "date": "2026-10-24",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.1(a),(b), used in Section 5(f) to transfer smoothness, connectedness and affineness from the semidirect product to its image; realizes the product input in Proposition 8.2 in the Barsotti--Chevalley branch of det-thm-sf-ctf-stability-direct-images, proof (3).",
+   "via": [
+    "lem-sfb-affine-normal-subgroup-products",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-exact-algebraic-group-property-permanence",
+  "worker": "stage1",
+  "summary": "Proved all six clauses in nine steps using only existing nodes. Made the torsor inverse explicit, descended affineness and smoothness, identified the affine quotient by mutual fpqc descent, and proved connected fibres after extension to the residue field of any chosen fibre point. No new nodes and no statement change.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md, step (3): existing below-unit algebraic-group prerequisite through the ancestry recorded in blueprint.from.place (Barsotti--Chevalley/product branch). The latest blueprint contains no separate statement equivalent to this permanence lemma; level-one and level-two route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic tool: Being affine descends along fpqc coverings (Stacks 02L5). Used only for the indicated local geometry or descent inference in this algebraic-group argument; no step of the constructible-functor unit route is replaced."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic tool: Smoothness descends along flat surjective locally finitely presented source maps. Used only for the indicated local geometry or descent inference in this algebraic-group argument; no step of the constructible-functor unit route is replaced."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic tool: A connected scheme with a rational point is geometrically connected. Used only for the indicated local geometry or descent inference in this algebraic-group argument; no step of the constructible-functor unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-2aabaa14e",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-2aabaa14e (reviewer sub-agent of L); spot-checked: I read the whole item split. It has 9 steps and no new nodes. Diffing against clones/live shows the statement and stmt_deps are unchanged. The statement matches Milne iAG Prop 8.1(a),(b) on p.149: an exact sequence where the kernel is a Cartesian square and q is flat and surjective, for separated finite-type groups over a field. Nothing is weakened. Step 1: q is locally of finite type by cancellation and then locally of finite presentation, since k is Noetherian. Q is quasi-separated because its diagonal is a closed immersion, hence affine, hence quasi-compact; that makes q quasi-compact, and {q} is an fpqc covering checked straight from the definition. Step 2: the torsor maps (g,n)->(g,g i(n)) and (g,h)->(g,g^{-1}h) are inverse; this was checked with the noncommutative order. Step 3: affineness descends along {q} (02L5), so E is affine over the affine Q. Step 4: E affine makes N affine. The affine-normal-quotient node gives Q0. Each of q and q0 kills the other's kernel pair, so representable fpqc descent (existence and uniqueness) gives a and b with ba=id and ab=id. This identifies the given Q with the constructed quotient rather than assuming it. Step 5: smooth base change, then smooth base descent along the flat quasi-compact surjection q (02VL), then composition. Step 6: smooth source descent (q flat, surjective, locally of finite presentation); it correctly assumes no smooth kernel, as the Frobenius on G_m with kernel mu_p requires. Step 7: N has a rational point, so N_L is connected for every L (04KV). Each fibre F is nonempty; a point x gives L=kappa(x) and an isomorphism N_L = F_L by translation. F_L -> F is surjective, so F is connected. No perfect field or closed point is needed. Step 8: flat quasi-compact surjections are quotient maps, and connected fibres then give connected E (0377). Step 9: a continuous surjective image of a connected space is connected, and e_Q makes Q nonempty. Small cases checked: trivial group, N=1, Q=1. Route: picard-rr, p1 and iff are on the unit route, and the lem-trf nodes are Mathlib leaves. I accept the declared tool_uses for 02L5, smooth source descent and 04KV as generic black boxes. No cycle, no SGA. lem-sfb-connected-group-extension covers only the algebraically closed affine connected case, so it is not a duplicate. Batch 5: lem-trf-smooth-fpqc-base-descent (02VL) and lem-trf-smooth-composition (01VA) are generic morphism facts, not steps of the trace formula or Poincare duality proofs. The route through affine-normal-quotient-geometry reaches only the general definition def-trf-scheme-cover-descent-datum. All three accepted. No changes."
+ }
+}

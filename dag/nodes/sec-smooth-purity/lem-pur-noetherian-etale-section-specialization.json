@@ -37,7 +37,7 @@
  ],
  "proof": [
   {
-   "text": "Choose affine open neighbourhoods $S_i$ of points of $S$ and neighbourhoods $U_i$ of $s(S_i)$ in $V_i=V\\times_SS_i$. The pointwise smooth normal form gives $e_i:U_i\\to\\mathbf A^d_{S_i}$ etale; its relative dimension is $d$ because $g$ has that relative dimension. Subtract from each coordinate its value on $s$ so that $e_is=0$. These choices can be made with $S_i$ and $U_i$ affine: after choosing an affine neighbourhood of $s(b)$, shrink the base to an affine principal neighbourhood contained in its inverse image under $s$. In particular $e_i$ is separated (its source is affine). Its inverse image $P_i=e_i^{-1}(0)$ is separated etale over $S_i$, by base change. Its section $s$ is an open-and-closed immersion by the etale-section lemma. Since $P_i$ is closed in $U_i$, the complementary component $P_i\\setminus s(S_i)$ is closed in $U_i$; remove it. If necessary choose affine neighbourhoods again and shrink the base as just described. We obtain an open cover of $S$ with separated finite-type etale charts $e_i:U_i\\to\\mathbf A^d_{S_i}$ for which the centre square is Cartesian. On an affine chart write $S_i=\\operatorname{Spec}R$, $U_i=\\operatorname{Spec}B$, $P=R[x_1,\\ldots,x_d]$, $J=(x_1,\\ldots,x_d)$. Then $I=JB$, $B/I=R$, and $B$ is flat over $P$ (etale implies flat, with the affine flatness criterion). No isomorphism $U_i=\\mathbf A^d_{S_i}$ is asserted.",
+   "text": "Choose affine open neighbourhoods $S_i$ of points of $S$ and neighbourhoods $U_i$ of $s(S_i)$ in $V_i=V\\times_SS_i$. The pointwise smooth normal form gives $e_i:U_i\\to\\mathbf A^d_{S_i}$ etale; its relative dimension is $d$ because $g$ has that relative dimension. Subtract from each coordinate its value on $s$ so that $e_is=0$. These choices can be made with $S_i$ and $U_i$ affine: after choosing an affine neighbourhood of $s(b)$, shrink the base to an affine principal neighbourhood contained in its inverse image under $s$. In particular $e_i$ is separated (its source is affine). Its inverse image $P_i=e_i^{-1}(0)$ is separated etale over $S_i$, by base change. Its section $s$ is an open-and-closed immersion by the etale-section lemma. Since $P_i$ is closed in $U_i$, the complementary component $P_i\\setminus s(S_i)$ is closed in $U_i$; remove it. If necessary choose affine neighbourhoods again and shrink the base as just described. We obtain an open cover of $S$ with separated finite-type etale charts $e_i:U_i\\to\\mathbf A^d_{S_i}$ for which the centre square is Cartesian. On an affine chart write $S_i=\\operatorname{Spec}R$, $U_i=\\operatorname{Spec}B$, $P=R[x_1,\\ldots,x_d]$, $J=(x_1,\\ldots,x_d)$. Then $I=JB$, $B/I=R$, and $B$ is flat over $P$ (etale implies flat, with the affine flatness criterion). No isomorphism $U_i=\\mathbf A^d_{S_i}$ is asserted. M3 Lean realization: use SmoothSectionCentredCoordinates.exists_affineChart and adapt its genuine affine opens, restricted section and Cartesian centre to SectionLocalDualizingComparisons.Chart. Closedness of the restricted section follows from its open pullback square.",
    "uses": [
     "sbc-thm-etale-local-normal-form",
     "def-sbc-smooth-morphisms",
@@ -47,7 +47,8 @@
     "lem-weil-pbc-separated-base-change",
     "lem-weil-pbc-etale-section-clopen-immersion",
     "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-sbc-smooth-relative-dimension-permanence"
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sc-smooth-section-affine-coordinates"
    ],
    "elementary": false,
    "source": {
@@ -104,13 +105,14 @@
    }
   },
   {
-   "text": "Apply the ordinary-etale smooth tensor theorem to $g$, $\\pi$, and $\\widetilde g$. The ring $A=\\mathbf Z/\\ell^n$ is finite and killed by $\\ell^n$, which is invertible on every scheme here. These three maps are separated, smooth of dimension $d$, and compactifiable by the statement; Step 3 has verified the remaining hypotheses for $\\widetilde g$. The bases and sources are Noetherian (for affine space and the vector bundle use the finite-type Noetherian lemma). Thus $\\omega_h[-2d]$ is a locally constant free rank-one sheaf. Exact inverse image preserves this property, so $C[-2d]$ and $F[-2d]$ are sheaves of the claimed kind. The adjoints and the complexes are those on the entire ordinary unbounded etale derived categories, as required; no pro-etale or coefficient-completion comparison is used. Lean implementation reuses AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor, the existing source interface underlying thm-asd-smooth-tensor. Pull back its locally constant sheaf along the section and use the single-complex and shift compositors. Refine the local-constancy cover by pairs consisting of a cover member and one of its points. An algebraic-closure point on each nonempty member, and the geometric stalk isomorphism, identify its constant coefficient module with A. This also treats the empty base without a nonemptiness assumption. The invertible exponent hypothesis is assembled from stalkwise invertibility by isUnit_of_isUnit_germ.",
+   "text": "Apply the ordinary-etale smooth tensor theorem to $g$, $\\pi$, and $\\widetilde g$. The ring $A=\\mathbf Z/\\ell^n$ is finite and killed by $\\ell^n$, which is invertible on every scheme here. These three maps are separated, smooth of dimension $d$, and compactifiable by the statement; Step 3 has verified the remaining hypotheses for $\\widetilde g$. The bases and sources are Noetherian (for affine space and the vector bundle use the finite-type Noetherian lemma). Thus $\\omega_h[-2d]$ is a locally constant free rank-one sheaf. Exact inverse image preserves this property, so $C[-2d]$ and $F[-2d]$ are sheaves of the claimed kind. The adjoints and the complexes are those on the entire ordinary unbounded etale derived categories, as required; no pro-etale or coefficient-completion comparison is used. Lean implementation reuses AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor, the existing source interface underlying thm-asd-smooth-tensor. Pull back its locally constant sheaf along the section and use the single-complex and shift compositors. Refine the local-constancy cover by pairs consisting of a cover member and one of its points. An algebraic-closure point on each nonempty member, and the geometric stalk isomorphism, identify its constant coefficient module with A. This also treats the empty base without a nonemptiness assumption. The invertible exponent hypothesis is assembled from stalkwise invertibility by isUnit_of_isUnit_germ. M3 compilation optimization: reuse the shifted-line clauses of section_local_dualizing_comparisons, whose proof is exactly this smooth-tensor argument, rather than duplicating its private section_line construction.",
    "uses": [
     "thm-asd-smooth-tensor",
     "thm-amb-etale-exceptional-adjoint",
     "def-weil-pbc-derived-categories",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-section-local-dualizing-comparisons"
    ],
    "elementary": false,
    "source": {
@@ -144,13 +146,14 @@
    }
   },
   {
-   "text": "Etale/open locality of the ordinary compact-support right adjoint first identifies $\\omega_{g_i}|_{U_i}$ with $\\omega_{g_i|_{U_i}}$, and then with $e_i^*\\omega_{p_d}$, since $g_i|_{U_i}=p_de_i$. It gives the same two identifications for the deformation chart, with $\\widetilde e_i$ in place of $e_i$. The ordinary affine-space adjunction and uniqueness of right adjoints identify $\\omega_{p_d}$ with $A(d)[2d]$ on $\\mathbf A^d_{S_i}$, and the corresponding dualizing object over $\\mathbf A^1_{S_i}$ with $A(d)[2d]$ there. Pull these identifications to the two sections. Pullback of finite-coefficient etale Tate sheaves identifies both results with the pullback of the same $A_{S_i}(d)[2d]$. Smooth base change for $S_i\\to S$ identifies them with $C|_{S_i}$ and $F|_{\\mathbf A^1_{S_i}}$, respectively. This produces an isomorphism $\\lambda_i:F|_{\\mathbf A^1_{S_i}}\\to a_i^*(C|_{S_i})$. If $h_i=(i_1^*\\lambda_i)\\theta_i^{-1}$, replace $\\lambda_i$ by $a_i^*(h_i^{-1})\\lambda_i$. Its restriction at $1$ is exactly $\\theta_i$. This normalization does not presume compatibility of any chosen affine orientation with the fibre map.",
+   "text": "Etale/open locality of the ordinary compact-support right adjoint first identifies $\\omega_{g_i}|_{U_i}$ with $\\omega_{g_i|_{U_i}}$, and then with $e_i^*\\omega_{p_d}$, since $g_i|_{U_i}=p_de_i$. It gives the same two identifications for the deformation chart, with $\\widetilde e_i$ in place of $e_i$. The ordinary affine-space adjunction and uniqueness of right adjoints identify $\\omega_{p_d}$ with $A(d)[2d]$ on $\\mathbf A^d_{S_i}$, and the corresponding dualizing object over $\\mathbf A^1_{S_i}$ with $A(d)[2d]$ there. Pull these identifications to the two sections. Pullback of finite-coefficient etale Tate sheaves identifies both results with the pullback of the same $A_{S_i}(d)[2d]$. Smooth base change for $S_i\\to S$ identifies them with $C|_{S_i}$ and $F|_{\\mathbf A^1_{S_i}}$, respectively. This produces an isomorphism $\\lambda_i:F|_{\\mathbf A^1_{S_i}}\\to a_i^*(C|_{S_i})$. If $h_i=(i_1^*\\lambda_i)\\theta_i^{-1}$, replace $\\lambda_i$ by $a_i^*(h_i^{-1})\\lambda_i$. Its restriction at $1$ is exactly $\\theta_i$. This normalization does not presume compatibility of any chosen affine orientation with the fibre map. M3 Lean realization: section_local_dualizing_comparisons supplies the two Tate comparisons on each centred chart. Obtain compactifiability of its symmetric normal projection from the stated zero-fibre square, smoothness, separatedness, quasi-compactness and Nagata. rawComparison combines the source and family Tate comparisons; normalize by composing with the pullback of the inverse sectionRestrictionIso.",
    "uses": [
     "lem-amb-etale-adjoint-locality",
     "cor-amb-affine-space-adjunction",
     "det-sp-unique-right-adjoint",
     "lem-asd-etale-finite-twist-pullback",
-    "prop-asd-smooth-base-change"
+    "prop-asd-smooth-base-change",
+    "lem-trf-section-local-dualizing-comparisons"
    ],
    "elementary": false,
    "source": {
@@ -159,7 +162,7 @@
    }
   },
   {
-   "text": "To pass from derived maps to sheaf maps, shift by $[-2d]$ and apply full faithfulness of the degree-zero single-complex functor to the rank-one sheaves of Step 5. This identifies each derived local comparison and its inverse with actual sheaf morphisms and respects their compositions. On $S_i\\cap S_j$, the ratio $\\lambda_j\\lambda_i^{-1}$ is an automorphism of $a^*C[-2d]$. Its scalar is intrinsic: in a local basis it is multiplication by $u\\in A^\\times$, and a different basis changes this to $vuv^{-1}=u$ since $A$ is commutative. Pull it to a geometric fibre $\\mathbf A^1_{\\Omega}$, where $a^*C[-2d]$ is the constant free rank-one module obtained from its fibre over $\\operatorname{Spec}\\Omega$. The ring $\\Omega[t]$ is a domain, so $(0)$ is prime and its closure in the spectrum is the whole spectrum; the spectrum is irreducible, hence connected. The constant-sheaf section lemma implies that $u$ is constant on this fibre. Its value at $t=1$ is $1$ by normalization, so the ratio is the identity on every geometric fibre. It is therefore the identity on every geometric stalk. Exactness and conservativity of geometric stalks give equality of the sheaf maps: apply them to the image of their difference, which has all stalks zero. This proves agreement on every overlap and proves that any two global normalized comparisons agree, by the identical ratio argument.",
+   "text": "To pass from derived maps to sheaf maps, shift by $[-2d]$ and apply full faithfulness of the degree-zero single-complex functor to the rank-one sheaves of Step 5. This identifies each derived local comparison and its inverse with actual sheaf morphisms and respects their compositions. On $S_i\\cap S_j$, the ratio $\\lambda_j\\lambda_i^{-1}$ is an automorphism of $a^*C[-2d]$. Its scalar is intrinsic: in a local basis it is multiplication by $u\\in A^\\times$, and a different basis changes this to $vuv^{-1}=u$ since $A$ is commutative. Pull it to a geometric fibre $\\mathbf A^1_{\\Omega}$, where $a^*C[-2d]$ is the constant free rank-one module obtained from its fibre over $\\operatorname{Spec}\\Omega$. The ring $\\Omega[t]$ is a domain, so $(0)$ is prime and its closure in the spectrum is the whole spectrum; the spectrum is irreducible, hence connected. The constant-sheaf section lemma implies that $u$ is constant on this fibre. Its value at $t=1$ is $1$ by normalization, so the ratio is the identity on every geometric fibre. It is therefore the identity on every geometric stalk. Exactness and conservativity of geometric stalks give equality of the sheaf maps: apply them to the image of their difference, which has all stalks zero. This proves agreement on every overlap and proves that any two global normalized comparisons agree, by the identical ratio argument. M3 Lean realization: convert the existing over-site trivializations of lines_and_fibres to Scheme.IsLisseRankOneSheaf using the over-sheaf equivalence and its constant-sheaf comparison. The normalized-descent theorem implements the ratio and geometric-line rigidity argument.",
    "uses": [
     "lem-weil-pbc-derived-single-fully-faithful",
     "lem-weil-pbc-polynomial-ring-domain",
@@ -167,7 +170,8 @@
     "lem-pc-irreducible-space-connected",
     "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
     "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
@@ -176,10 +180,11 @@
    }
   },
   {
-   "text": "Apply sheaf-Hom gluing to the normalized sheaf maps of Step 9 on the cover $\\{\\mathbf A^1_{S_i}\\to\\mathbf A^1_S\\}$. Their inverse maps also agree and glue, so the resulting sheaf morphism is an isomorphism. Shift back to obtain $\\kappa:F\\xrightarrow{\\sim}a^*C$. It restricts to $\\theta$ at $1$, and Step 9 gives the asserted uniqueness. At $0$, the actual map from $C$ to $z^*\\omega_\\pi$ is\n$$\\delta=\\eta\\circ(i_0^*\\kappa)^{-1},$$\nusing $i_0^*a^*C=C$. This is precisely the displayed formula in the statement under its stipulated fibre identifications. Once a normalized comparison is supplied, isIso_specialization follows directly from the isomorphism of atZero proved in lines_and_fibres and the displayed composite defining specialization.",
+   "text": "Apply sheaf-Hom gluing to the normalized sheaf maps of Step 9 on the cover $\\{\\mathbf A^1_{S_i}\\to\\mathbf A^1_S\\}$. Their inverse maps also agree and glue, so the resulting sheaf morphism is an isomorphism. Shift back to obtain $\\kappa:F\\xrightarrow{\\sim}a^*C$. It restricts to $\\theta$ at $1$, and Step 9 gives the asserted uniqueness. At $0$, the actual map from $C$ to $z^*\\omega_\\pi$ is\n$$\\delta=\\eta\\circ(i_0^*\\kappa)^{-1},$$\nusing $i_0^*a^*C=C$. This is precisely the displayed formula in the statement under its stipulated fibre identifications. Once a normalized comparison is supplied, isIso_specialization follows directly from the isomorphism of atZero proved in lines_and_fibres and the displayed composite defining specialization. M3 Lean realization: apply AffineLineNormalizedDescent.normalized_descent to the affine-open cover and the normalized local comparisons. Its existence and uniqueness components are precisely existsUnique_normalized; no new auxiliary sorry is introduced.",
    "uses": [
     "lem-pur-sheaf-hom-cover-gluing",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-trf-etale-shifted-line-normalized-descent"
    ],
    "elementary": false,
    "source": {
@@ -188,12 +193,13 @@
    }
   },
   {
-   "text": "We verify the compatibility of the fibre identifications with successive base changes, before using uniqueness. Write $b_{h,v}:v_X^*\\omega_h\\to\\omega_{h_v}$ for the canonical exceptional comparison, obtained by taking the right-adjoint mate of the inverse compact-support exchange. The ordinary unbounded compact-support exchange is compatible with composite changes of base. Mate pasting therefore gives, under the inverse-image compositors,\n$$b_{h,vw}=b_{h_v,w}\\circ w_X^*b_{h,v}.$$\nFor $v:S'\\to S$, put $\\bar v:\\mathbf A^1_{S'}\\to\\mathbf A^1_S$, and write $b_C:v^*C\\to C'$, $b_F:\\bar v^*F\\to F'$, and $b_N:v^*(z^*\\omega_\\pi)\\to z'^*\\omega_{\\pi'}$ for the section pullbacks of these maps. Apply the preceding pasting identity to the commuting rectangle $\\bar v i'_r=i_rv$, in its two decompositions (first $\\bar v$ then $i'_r$, or first $i_r$ then $v$). The centre/fibre identifications of Step 4 give the same Cartesian diagram in both decompositions. Pulling its mates to the section gives the explicit equalities\n$$\\theta'\\circ i_1'^*b_F=b_C\\circ v^*\\theta,\\qquad\n\\eta'\\circ i_0'^*b_F=b_N\\circ v^*\\eta.$$\nThis is the required compatibility with the fibre maps; exactness of inverse image alone would not establish it.",
+   "text": "We verify the compatibility of the fibre identifications with successive base changes, before using uniqueness. Write $b_{h,v}:v_X^*\\omega_h\\to\\omega_{h_v}$ for the canonical exceptional comparison, obtained by taking the right-adjoint mate of the inverse compact-support exchange. The ordinary unbounded compact-support exchange is compatible with composite changes of base. Mate pasting therefore gives, under the inverse-image compositors,\n$$b_{h,vw}=b_{h_v,w}\\circ w_X^*b_{h,v}.$$\nFor $v:S'\\to S$, put $\\bar v:\\mathbf A^1_{S'}\\to\\mathbf A^1_S$, and write $b_C:v^*C\\to C'$, $b_F:\\bar v^*F\\to F'$, and $b_N:v^*(z^*\\omega_\\pi)\\to z'^*\\omega_{\\pi'}$ for the section pullbacks of these maps. Apply the preceding pasting identity to the commuting rectangle $\\bar v i'_r=i_rv$, in its two decompositions (first $\\bar v$ then $i'_r$, or first $i_r$ then $v$). The centre/fibre identifications of Step 4 give the same Cartesian diagram in both decompositions. Pulling its mates to the section gives the explicit equalities\n$$\\theta'\\circ i_1'^*b_F=b_C\\circ v^*\\theta,\\qquad\n\\eta'\\circ i_0'^*b_F=b_N\\circ v^*\\eta.$$\nThis is the required compatibility with the fibre maps; exactness of inverse image alone would not establish it. M3 Lean realization: package the actual Rees family with the actual one and normal fibres as ExceptionalSectionFamily. The one-fibre map commutes with deformationMap by its Cartesian universal property and the forgetful map to V; the normal-fibre equality is the defining pullback-lift equation. Apply sectionExceptional_fibre_coherence to this concrete diagram.",
    "uses": [
     "prop-asd-smooth-base-change",
     "lem-amb-unbounded-compact-support-comparisons",
     "lem-weil-pbc-mate-pasting",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-trf-section-exceptional-fibre-coherence"
    ],
    "elementary": false,
    "source": {
@@ -202,10 +208,12 @@
    }
   },
   {
-   "text": "All these $b$ maps are isomorphisms by smooth base change. The pullback candidate for the normalized comparison over $S'$ is explicitly\n$$\\kappa^v=a'^*b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}:F'\\longrightarrow a'^*C'.$$\nBy the first equality in Step 11 its restriction at $1$ is $b_C\\circ v^*\\theta\\circ(i_1'^*b_F)^{-1}=\\theta'$. It is thus the normalized comparison $\\kappa'$ by Step 9's uniqueness, which applies over every such Noetherian $S'$ (Steps 3--4 preserve the deformation hypotheses, and compactifiability is assumed). At $0$, substituting the second equality of Step 11 and inverting $i_0'^*\\kappa^v$ gives\n$$\\delta'\\circ b_C=b_N\\circ v^*\\delta.$$\nThese are exactly the claimed base-change identities for $\\kappa$ and $\\delta$. For the empty base every sheaf map and diagram is unique; in rank zero all the polynomial and monomial calculations above have no $x_j$ and reduce to $B/I=R$, so no case was excluded.",
+   "text": "All these $b$ maps are isomorphisms by smooth base change. The pullback candidate for the normalized comparison over $S'$ is explicitly\n$$\\kappa^v=a'^*b_C\\circ\\bar v^*\\kappa\\circ b_F^{-1}:F'\\longrightarrow a'^*C'.$$\nBy the first equality in Step 11 its restriction at $1$ is $b_C\\circ v^*\\theta\\circ(i_1'^*b_F)^{-1}=\\theta'$. It is thus the normalized comparison $\\kappa'$ by Step 9's uniqueness, which applies over every such Noetherian $S'$ (Steps 3--4 preserve the deformation hypotheses, and compactifiability is assumed). At $0$, substituting the second equality of Step 11 and inverting $i_0'^*\\kappa^v$ gives\n$$\\delta'\\circ b_C=b_N\\circ v^*\\delta.$$\nThese are exactly the claimed base-change identities for $\\kappa$ and $\\delta$. For the empty base every sheaf map and diagram is unique; in rank zero all the polynomial and monomial calculations above have no $x_j$ and reduce to $B/I=R$, so no case was excluded. M3 Lean realization: centred smooth affine coordinates also supply the regular-sequence hypothesis over S′. Stalk maps preserve invertibility and smooth base change gives Noetherian V′. Apply existsUnique_normalized on both bases, then sectionExceptional_normalized_baseChange. The comparison maps agree with sectionMap by associativity, and the existing private sectionPullback_endpoint theorem (accessed with a private import all) identifies its projection compositor with linePullback; no duplicate endpoint lemma remains.",
    "uses": [
     "prop-asd-smooth-base-change",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sc-smooth-section-affine-coordinates",
+    "lem-trf-section-exceptional-fibre-coherence"
    ],
    "elementary": true,
    "source": {
@@ -215,50 +223,54 @@
   }
  ],
  "proof_deps": [
-  "cor-amb-affine-space-adjunction",
-  "def-sbc-affine-space",
+  "sbc-thm-etale-local-normal-form",
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-proper-morphism",
-  "det-sp-unique-right-adjoint",
-  "lem-amb-etale-adjoint-locality",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-pc-irreducible-space-connected",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-pur-conormal-graded-algebra",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-sbc-smooth-relative-dimension-permanence",
   "lem-weil-pbc-affine-source-morphism-separated",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
-  "lem-weil-pbc-derived-single-fully-faithful",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-polynomial-ring-domain",
   "lem-weil-pbc-separated-base-change",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-asd-smooth-base-change",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-sbc-affine-space",
   "sbc-lem-affine-space-smooth",
-  "sbc-thm-etale-local-normal-form",
-  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
   "thm-asd-smooth-tensor",
-  "thm-nagata-compactification"
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-trf-section-local-dualizing-comparisons",
+  "prop-asd-smooth-base-change",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-amb-etale-adjoint-locality",
+  "cor-amb-affine-space-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-pc-irreducible-space-connected",
+  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-trf-etale-shifted-line-normalized-descent",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "lem-trf-section-exceptional-fibre-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Local construction and Gluing; ordinary-etale Noetherian adaptation, with explicit flat Rees algebra and mate-pasting arguments; P2 stage-3 partial realization (2026-10-18): geometry, lines_and_fibres, isIso_specialization, normalMap_condition and baseChange_geometry reuse the existing source smooth-duality and Rees APIs; geometry's conormal clauses use the local flat Rees and polynomial calculations of Steps 2-3, with lem-pur-conormal-graded-algebra; the implementation helper regularNormalBundle does not require the global constructible setting; the original plan remains for existsUnique_normalized and baseChange_compatibility"
+  "place": "Local construction and Gluing; ordinary-etale Noetherian adaptation, with explicit flat Rees algebra and mate-pasting arguments; P2 stage-3 partial realization (2026-10-18): geometry, lines_and_fibres, isIso_specialization, normalMap_condition and baseChange_geometry reuse the existing source smooth-duality and Rees APIs; geometry's conormal clauses use the local flat Rees and polynomial calculations of Steps 2-3, with lem-pur-conormal-graded-algebra; the implementation helper regularNormalBundle does not require the global constructible setting; the original plan remains for existsUnique_normalized and baseChange_compatibility; M3 stage-3 completion (2026-10-23): normalized local Tate comparisons on proved centred affine charts, shifted rank-one normalized descent, and the proved exceptional-fibre coherence theorem on the actual Rees family. The original unit route and all public statements remain unchanged. M3 returned-delivery repair (2026-10-24): reuse sectionPullback_endpoint from SectionExceptionalFibreCoherence, accessing its existing private proof with import all instead of duplicating it; the dependency module and its public interface are unchanged."
  },
  "mathlib_searches": [
   {
@@ -448,7 +460,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-c7c31c58f (reviewer sub-agent of L); spot-checked: Read the whole item: the unchanged statement, all 12 steps, all 50 cited statements, the main-20261015 sk-thm-dnc statement and proof, and the unit/chapter records. The statement is byte-identical to the side-tree copy, so it is not weakened. Coefficients are the ordinary unbounded étale D(-,Z/ℓ^n) with ω=h^×A. The base-change maps are prop-asd-smooth-base-change's β, the mate of C_{f,v} from lem-amb-unbounded-compact-support-comparisons. Checks: Step 1, 054L chart with d fixed by permanence and the clopen-section removal giving I=JB with B flat over R[x]. Step 2, the monomial bijection x^α t^k ↔ u^α t^{k+|α|}, and gr=Sym via flat exactness. Step 3, the cover by D_{U_i} and D[1/t], both fibres, s̃ a ring map, finite type, Noetherian, separated. Step 4, nonflat base change through flatness of B' over R'[x]. Steps 5–8, all smooth-tensor, locality and Nagata hypotheses, plus the affine-space adjunction on a Noetherian base and the normalization h_i^{-1}∘i_1^*λ_i=θ_i. Steps 9–10, ratio in A^× constant on connected geometric lines, stalk conservativity, gluing. Steps 11–12, mate pasting and both recomputed identities, including δ'b_C=b_N v^*δ. Edge cases d=0, S empty, the y²=1+x chart and k[ε]→k. Every proof dep is on the sk-thm-purity-transport route except the Mathlib leaf det-sp-unique-right-adjoint, which I accept as a tool use. No SGA, no new nodes, no duplicates; same_as=[] is justified because the dnc blueprint nodes are field-based and pro-étale. One fault, C1, repaired: Step 12 uses uniqueness over S', but nothing showed the base-changed data meet the hypotheses (g' separated, finite type, smooth of pure relative dimension d; V' Noetherian; s' a closed immersion). The fix adds this to Step 4, citing lem-pod-separated-finite-type-base-change, lem-sbc-smooth-relative-dimension-permanence, lem-weil-pbc-finite-type-over-noetherian and lem-weil-pbc-closed-immersion-base-change, with proof_deps recomputed. The fix file is fixes/dag/nodes/sec-smooth-purity/lem-pur-noetherian-etale-section-specialization.json; details in review.md.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
@@ -491,12 +514,12 @@
   "note": "The declarations together give every clause: geometry, lines_and_fibres, existsUnique_normalized, isIso_specialization, baseChange_geometry and baseChange_compatibility. Helpers define the canonical Rees fibre maps, normalization, specialization and fixed base-change maps. The normal bundle is presented by the canonically isomorphic Rees cone; symmetricComparison and purityNormalCone_comparison identify it with Spec Sym(I/I²). Auxiliary quasi-compactness and Cartesian witnesses are supplied by geometry/baseChange_geometry, not additional hypotheses on the asserted data."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261019T005356-L-2760667",
+  "landing": "20261023T231827-L-3648477",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

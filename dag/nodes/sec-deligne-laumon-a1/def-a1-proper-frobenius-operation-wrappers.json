@@ -1,0 +1,123 @@
+{
+ "id": "def-a1-proper-frobenius-operation-wrappers",
+ "kind": "definition",
+ "title": "Proper geometric Frobenius operation and exchange wrappers",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a proper $k_0$-scheme $Y_0$ [def-weil-proper-morphism], a prime $\\ell\\ne p$, and a finite coefficient extension $E/\\mathbf Q_\\ell$. Put $Y=Y_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, $a_Y:Y\\to s$, $g=\\operatorname{id}_{Y_0}\\times h$, and $h=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius. Use the integral and raw rational coefficient operations and exchange recipes of [def-weil-operation-exchange-coefficient-descent]. At the canonical identity compactification $Y_0\\xrightarrow{\\operatorname{id}}Y_0\\to\\operatorname{Spec}k_0$, select the direct model when $c=\\mathrm{false}$ and the compact model when $c=\\mathrm{true}$, exactly as in [def-weil-frobenius-cohomology-transport]. Define $R^{\\mathcal O_E}_c:D^b_c(Y,\\mathcal O_E)\\to D^b_c(s,\\mathcal O_E)$ to be modelFunctor of that selected model, and define its exchange $Lh^*R^{\\mathcal O_E}_c\\to R^{\\mathcal O_E}_c Lg^*$ to be modelExchange of the same model. Define $R^E_c$ and its exchange by modelRationalFunctor and modelRationalExchange with exactly those arguments, the prescribed raw scalar localizations. The case $c=\\mathrm{false}$ is ordinary derived direct image and the case $c=\\mathrm{true}$ is compact-support direct image with the retained identity compactification; no comparison between them is asserted here. Supply the canonical residue-field invertibility instances for $\\ell$ on $s$ and $Y$, respectively from frobeniusPointPrimeInvertible and sfWeilPrimeInvertible of [def-weil-weil-sheaf-complex]. No Weil structure on the input object is required: that last input is used only for its prime-invertibility construction.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-operation-exchange-coefficient-descent",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), (1.1.7), (1.1.10)--(1.1.14), printed pp. 150--153; canonical specialization of the recorded operations/exchange to the geometric structure map, retaining the identity compactification. Ownership-only extraction required by L H2-a for a43a8bd0ed4a."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical integral and rational Frobenius direct image and exchange at the identity compactification of a proper scheme",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.hasAffineProperty, coe_frobenius_comp_coe_frobeniusEquiv_symm, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsIntegralHom.comp_iff, AlgebraicGeometry.IsIntegralHom.toIsAffineHom, AlgebraicGeometry.isIntegralHom_iff, frobenius_comp_frobeniusEquiv_symm",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib construction; reuse the exact existing project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical integral and rational Frobenius direct image and exchange at the identity compactification of a proper scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib construction; reuse the exact existing project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "properFrobeniusIntegralFunctor|properFrobeniusIntegralExchange|properFrobeniusRationalFunctor|properFrobeniusPointPrime|properFrobeniusFiberPrime",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib construction; reuse the exact existing project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n properFrobeniusIntegralFunctor|properFrobeniusIntegralExchange|properFrobeniusRationalFunctor lean/WeilConjectures lean/Sheaf; rg -l same names dag/nodes",
+   "results": "No upstream WeilConjectures hits. Exact definitions at ProperCoincidenceFrobenius.lean:210,222,232,244 and prime instances at 154,161. DAG declaration records only the parent statement lem-pod-proper-coincidence-frobenius and a consuming integral-germ theorem; no definition node owns these specializations.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing declarations; missing definition-node ownership, as independently required by L H2-a."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search 'proper Frobenius'",
+   "results": "One result: def-weil-pbc-frobenius-tower-datum, a different Frobenius-equivariant tower datum.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-semilinear-germ-iteration-descent",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "Evaluation sentence: the ordinary cohomology germ square uses the prescribed direct image and its exchange at the geometric structure map.",
+   "via": [
+    "lem-a1-semilinear-germ-iteration-descent",
+    "lem-a1-proper-sections-semilinear-germs",
+    "lem-a1-finite-weil-sections-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.Paper.ProperCoincidenceFrobenius",
+  "declaration": "WeilConjectures.properFrobeniusIntegralFunctor",
+  "declarations": [
+   "WeilConjectures.properFrobeniusIntegralFunctor",
+   "WeilConjectures.properFrobeniusIntegralExchange",
+   "WeilConjectures.properFrobeniusRationalFunctor",
+   "WeilConjectures.properFrobeniusRationalExchange",
+   "WeilConjectures.properFrobeniusPointPrime",
+   "WeilConjectures.properFrobeniusFiberPrime"
+  ],
+  "statement": "def properFrobeniusIntegralFunctor (compact : Bool) :\n    sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left ⥤\n      sfIntegralConstructibleCategory l E (Spec (.of D.k))",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2-a ownership-only extraction from the already landed ProperCoincidenceFrobenius module. All four operation/exchange wrappers and the two residue-prime instances are plain definitions with canonical data. This node owns these specializations without assuming or citing the proper-coincidence theorem. Reuse the existing declarations verbatim; no module copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d78ff8ce1",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d78ff8ce1",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Module byte-identical (sha 2f767b96) to a43a8bd0, whose mathematics was accepted; this re-delivery only repairs records. Mechanical H2 finding judged genuine: the item uses frobeniusCohomologyRationalScalar (sourceScalar) and frobeniusCohomologyRealizedComparison (qbarSourceComparison), whose data is the .choose of the ∃! theorems frobeniusCohomologyRationalOperationScalar_existsUnique and frobeniusCoefficientModulesTower_existsUnique of lem-weil-frobenius-cohomology-transport-iso; no def node owns them, so this is constructed data, PASS on that point (agrees with the a43a review). Re-checked the statement against the node: OneStep in diagrammatic order, recurrences tauHat/insertionHat/squareHat/contraction, all four equalities plus naturality, rational, scalarCompatibility and descent clauses, edge cases n=0, empty Y, identity extension, universes u,v independent. New node def-a1-proper-frobenius-operation-wrappers (existing:true over ProperCoincidenceFrobenius) matches its six declarations, lean.statement verbatim; def-a1-proper-sections-germ-and-moving-point changed lean only, with a note. No hollow defs, sorry only in theorems, docstrings and line lengths OK. No compile run, no file changed."
+ }
+}

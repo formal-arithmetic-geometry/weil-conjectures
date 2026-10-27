@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-field-bounded-constructible-tensor",
+ "kind": "statement",
+ "title": "Bounded constructible tensor closure over a constant field sheaf",
+ "statement": "Let $S$ be a Noetherian scheme, meaning a quasi-compact locally Noetherian scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth], and let $\\kappa$ be a field [def-weil-field]. On the small pro-étale site of $S$ let $\\kappa_S$ be the associated constant ring sheaf [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf]. Use its module sheaves and ordinary unbounded derived category, with uncompleted K-flat derived tensor [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. Call a module sheaf constructible if it has a finite stratification by constructible locally closed subschemes and on each stratum a pro-étale cover on which it is isomorphic to $\\kappa^r$ for a finite rank, allowed to vary with the covering object [def-constructible-stratification, sk-def-sfb-constructible]. Write $D^b_c(S,\\kappa)$ for the objects with finitely many nonzero cohomology sheaves, all constructible in this sense.\n\nFor constructible module sheaves $F,G$, their ordinary sheaf tensor $F\\otimes_{\\kappa_S}G$ is constructible, and the canonical comparison identifies $F[0]\\otimes^{\\mathbf L}_{\\kappa_S}G[0]$ with $(F\\otimes_{\\kappa_S}G)[0]$. On any common trivializing cover of a common refinement of their stratifications, the rank of this tensor is the product of their ranks.\n\nFor $A,B\\in D^b_c(S,\\kappa)$ the object $A\\otimes^{\\mathbf L}_{\\kappa_S}B$ belongs to $D^b_c(S,\\kappa)$. If their cohomology is supported in $[a,b]$ and $[c,d]$, respectively, the tensor cohomology is supported in $[a+c,b+d]$. Neither a finite-field hypothesis nor a condition on the characteristic of $S$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "Third paragraph, residue-field flatness, common stratification and trivializing cover, then finite truncation induction; old split steps 6, 7 and 8. Supporting Stacks Tag 03ET (lemma-flatness-sheafification)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-field",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-constructible-stratification",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-proetale-tor-amplitude",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "proof": [
+  {
+   "text": "Intersect the two global finite stratifications. On each fibre-product stratum pull back the finite local constant models with lem-pe-coefficient-finite-local-model-pullback and intersect their covering sieves. Constant scalar restriction is a monoidal equivalence by lem-sfb-constant-restriction-ordinary-monoidal and lem-ctf-finite-comparison-model-realization. Fixed-coefficient site pullback and restriction to slices are monoidal (the former by left Kan extension followed by monoidal sheafification; the latter by sheafification compatibility). Thus the tensor has constant finite tensor-product models. NoetherianGlobalConstructibility converts back to the affine-local predicate. For every chart and every given rank-r and rank-s trivialization, compose these monoidal comparisons with the explicit tensor-product basis and finProdFinEquiv to obtain rank r*s. This includes zero ranks and empty covering sieves.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-pe-coefficient-finite-local-model-pullback",
+    "lem-sfb-constant-restriction-ordinary-monoidal",
+    "lem-ctf-finite-comparison-model-realization",
+    "lem-sfb-noetherian-global-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Third paragraph, residue-field constructible tensor closure."
+   }
+  },
+  {
+   "text": "The existing singleComparison definition computes the normalized tensor of degree-zero complexes: field modules are flat, the single complex is bounded above and K-flat, and its total tensor has just the degree-zero term. Its data and all public definitions are retained unchanged.",
+   "uses": [
+    "lem-exc-constant-field-module-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-sf-ringed-kflat-single-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Third paragraph, residue-field constructible tensor closure."
+   }
+  },
+  {
+   "text": "Prove weak Serre closure on the coefficient-sized site rather than identifying it with an undersized original-site coefficient category. The constant-ring module equivalence transports finite locally constant fixed-scalar sheaves to finite type locally constant intrinsic modules, using lem-sfb-proetale-fp-local-models-comparison. Apply lem-weil-pbc-locally-constant-derived-serre. Exact fixed-scalar restriction and exact stratum pullbacks transport kernels, cokernels and short exact sequences. Intersect the two outer stratifications and apply the finite-model result on each stratum, then lem-sfb-noetherian-global-constructibility. The zero sheaf is locally the constant zero module. Isomorphism invariance follows from lem-pe-coefficient-constructible-iso.",
+   "uses": [
+    "lem-ctf-finite-comparison-model-realization",
+    "lem-sfb-proetale-fp-local-models-comparison",
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "lem-pe-coefficient-finite-local-model-pullback",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sfb-noetherian-global-constructibility",
+    "lem-pe-coefficient-constructible-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Third paragraph, residue-field constructible tensor closure."
+   }
+  },
+  {
+   "text": "For arbitrary A and a constructible sheaf L, lem-fd-ringed-flat-single-tensor-cohomology gives H^n(A tensor^L L[0]) isomorphic to H^n(A) tensor L, since every field module sheaf is flat. Step 1 proves constructibility and this isomorphism preserves the support interval of A. Choose a flat-term K-flat resolution of A by lem-pc-kflat-resolution. The normalized shifts and triangulatedness of lem-weil-pbc-kflat-fixed-tensor-triangulated descend along its isomorphism to A; the site-to-monoidal tensor comparison is lem-weil-pbc-independent-sheaf-tensor-colimits. Thus tensor by A preserves distinguished triangles and integer shifts.",
+   "uses": [
+    "lem-fd-ringed-flat-single-tensor-cohomology",
+    "lem-exc-constant-field-module-flat",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Third paragraph, residue-field constructible tensor closure."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-bounded-postnikov-extension-generation only to B. For q in [c,d], its layer is H^q(B)[0][-q]. The preceding cohomology comparison puts its tensor with A in [a+q,b+q], contained in [a+c,b+d]. The five-term homology exact sequence and weak Serre closure propagate constructibility; its middle exact triple propagates vanishing outside the fixed sum interval. Induction starts at the zero vertex and ends at B. If c>d, B has zero cohomology in every degree, hence is zero and so is its tensor. No ordering of a,b is needed by the argument; if a>b its cohomology vanishes and the same comparison gives zero layers. Choosing the ordered intervals in the bounded-constructible hypotheses proves bounded constructibility.",
+   "uses": [
+    "lem-sfb-bounded-postnikov-extension-generation",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Third paragraph, residue-field constructible tensor closure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-pe-coefficient-finite-local-model-pullback",
+  "lem-sfb-constant-restriction-ordinary-monoidal",
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-sfb-proetale-fp-local-models-comparison",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-pe-coefficient-constructible-iso",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-bounded-postnikov-extension-generation",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "D7: coefficient-sized monoidal finite models and weak Serre closure; flat-single cohomology comparison followed by one finite Postnikov induction, retaining the integral tensor unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On the proetale site of a noetherian scheme the derived tensor of bounded constructible complexes over a constant field sheaf is bounded constructible with the sum of cohomological amplitude intervals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex truncations and light-condensed tensor structures do not state pro-etale constructible tensor closure or the asserted cohomological bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex truncations and light-condensed tensor structures do not state pro-etale constructible tensor closure or the asserted cohomological bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible.*[Tt]ensor|[Tt]ensor.*[Cc]onstructible|[Ff]ield.*[Ff]lat",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"16\", \"text\": \"- `Smooth.of_smooth_fiberToSpecResidueField`: A flat morphism, locally of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"34\", \"text\": \"lemma Smooth.of_smooth_fiberToSpecResidueField [LocallyOfFinitePresentation f] [Flat f]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex truncations and light-condensed tensor structures do not state pro-etale constructible tensor closure or the asserted cohomological bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes with constructible cohomology over a constant field are closed under derived tensor by finite stratifications and truncation triangles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \"(K₁ K₂ : HomologicalComplex C c) [HasTensor K₁ K₂] : HomologicalComplex C c\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ equipped with a monoidal structure via the curried tensor product bifunctor, this constructs their tensor product as a\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \": TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"HomologicalComplex.instHasFiniteLimits\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"[HasFiniteLimits C] : HasFiniteLimits (HomologicalComplex C c)\", \"doc\": \"If a category $ C $ has zero morphisms and finite limits, then the category of homological complexes over $ C $ with shape $ c $ also has finite limits.\"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": HasTensor (tensorUnit C c) K\", \"doc\": \"The tensor unit homological complex in a monoidal category $ \\\\mathcal{C} $, when tensored with any homological complex $ K $, results in a complex that satisfies the total complex condition with respe\"}\n  {\"name\": \"HomologicalComplex.stupidTrunc\", \"module\": \"Mathlib.Algebra.Homology.Embedding.StupidTrunc\", \"type\": \": HomologicalComplex C c'\", \"doc\": \"The homological complex obtained by first restricting the complex $ K $ via the embedding $ e $ and then extending it back using the same embedding, resulting in a complex where the original structure\"}\n  {\"name\": \"HomologicalComplex.instIsStrictlySupportedTruncLE_1\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLE\", \"type\": \"{ι'' : Type*} {c'' : ComplexShape ι''} (e' : c''.Embedding c') [K.IsStrictlySupported e'] :\\n  (K.truncLE e).IsStrictlySupported e'\", \"doc\": \"If a homological complex $ K $ is strictly supported by an embedding $ e' $, then the truncation $ K^{\\text{truncLE}} $ obtained via an embedding $ e $ is also strictly supported by $ e' $. This instan\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex truncations and light-condensed tensor structures do not state pro-etale constructible tensor closure or the asserted cohomological bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor of finite dimensional locally constant sheaves on common strata over a field extends by truncation to bounded constructible complexes on the pro etale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n  {\"name\": \"LightCondensed.instMonoidalCategoryLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalCategory (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex truncations and light-condensed tensor structures do not state pro-etale constructible tensor closure or the asserted cohomological bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*tensor|tensor.*constructible",
+   "results": "0 hits; ; result digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex tensor, Cartesian sheaf tensor and light-condensed monoidal structures do not state constructible pro-etale tensor closure over an arbitrary constant field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of bounded complexes of constructible sheaves over a field is bounded constructible",
+   "results": "8 hits; HomologicalComplex.tensorObj, CategoryTheory.Sheaf.tensorProd_isSheaf, HomologicalComplex.tensorHom, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasBinaryBiproduct, HomologicalComplex.instHasTensorOfHasTensorX; result digest 07341a10ac0b04b0",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex tensor, Cartesian sheaf tensor and light-condensed monoidal structures do not state constructible pro-etale tensor closure over an arbitrary constant field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "0 hits; ; result digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex tensor, Cartesian sheaf tensor and light-condensed monoidal structures do not state constructible pro-etale tensor closure over an arbitrary constant field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a constant field sheaf on a site derived tensor preserves bounded constructible cohomology with additive cohomological bounds",
+   "results": "8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, instAbelianLightCondMod, CategoryTheory.Sheaf.tensorProd_isSheaf; result digest f611d1ba05d27568",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex tensor, Cartesian sheaf tensor and light-condensed monoidal structures do not state constructible pro-etale tensor closure over an arbitrary constant field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of finite rank locally constant module sheaves is locally constant and finite rank, then extend to bounded complexes using truncation triangles",
+   "results": "8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategoryLightCondMod, LightCondMod.LocallyConstant.functor, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree; result digest 6f747207b34bb429",
+   "date": "2026-10-22",
+   "verdict": "no match: generic complex tensor, Cartesian sheaf tensor and light-condensed monoidal structures do not state constructible pro-etale tensor closure over an arbitrary constant field"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-tensor-product",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "Third paragraph, residue-field flatness, common stratification and trivializing cover, then finite truncation induction; old split steps 6, 7 and 8. Supporting Stacks Tag 03ET (lemma-flatness-sheafification).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-field-bounded-constructible-tensor",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Proved tensor ranks on common local models, canonical K-flat degree-zero comparison, weak Serre closure with global/affine predicate comparison, two finite Postnikov inductions and the sum interval bound. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "det-lem-int-tensor-product.proof.md, third paragraph, from constant residue-field flatness through common stratification to finite truncation induction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-stratification-intersection",
+    "why": "Generic Common refinement of two stratifications with constructible strata used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-pur-proetale-constant-module-pullback-composition",
+    "why": "Generic Composition of the actual canonical constant-coefficient module pullbacks used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-sfb-proetale-fp-local-models-pullback",
+    "why": "Generic Pullback preserves finitely presented constant local models used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-pur-proetale-constant-coefficient-comparison",
+    "why": "Generic The canonical constant coefficient comparison is invertible used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic Underived tensor comparison for pullback of modules on ringed topoi used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-exc-constant-field-module-flat",
+    "why": "Generic All modules over a constant field sheaf are flat used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic Derived tensor and K-flat representative descent on a ringed site used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Generic Tensor product of complexes of modules on a ringed site used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "Generic Constructible sheaves over a discrete Noetherian ring form a weak Serre subcategory used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-sfb-noetherian-global-constructibility",
+    "why": "Generic Global constructibility from affine-local constructibility used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-sfb-bounded-postnikov-extension-generation",
+    "why": "Generic Finite ordered Postnikov towers for an arbitrary t-structure used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic Exact descent of tensoring with a fixed K-flat complex used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic Derived category of an abelian category used in the constant-field local-model and finite truncation argument; no replacement of the integral tensor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-exc-constant-field-module-flat",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-sfb-bounded-postnikov-extension-generation",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-925bdc78b",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-925bdc78b (reviewer sub-agent of L); spot-checked: I read the item in full, all 16 cited statements, the main-20261015 det-lem-int-tensor-product statement and its third proof paragraph, the unit sk-lem-int-tensor, and parent step 3, which uses the item with κ=O_E/π_E. Shape: one commit; the statement, stmt_deps, source and blueprint are identical to the base snapshots; no snapshot shows the item already split elsewhere; no new nodes; proof_deps is the union of the step uses; no cycle in an 891-node closure; no SGA. Step 1: the stratification-intersection lemma gives V_kl=Z_k×W_l. Pullback composition, the fp-local-model pullback (any morphism, Noetherian R) and the invertible coefficient comparison carry the rank-r and rank-s free models to a fibre-product cover. The ringed-topoi tensor comparison applies because u^*=u^{-1}⊗R_U≅u^{-1}. On charts κ^r⊗κ^s≅κ^{rs}, including rank 0. Step 2: constant-field flatness (Stacks 03ET) makes F[0] and G[0] flat-term and K-flat (06YQ). Site-derived-tensor-descent then gives a derived-category isomorphism with Tot=(F⊗G)[0]. Step 3: discrete-Noetherian weak Serre closure (09B5) with R=κ, matched to the global stratification predicate on Noetherian S (095E); fp κ-modules are κ^r. Step 4: two Postnikov inductions (L_0=0, factors H^q[-q]); exactness and shifts come from the fixed K-flat tensor lemma, with a K-flat resolution for B. The long exact sequence gives H^n(V) as an extension of a kernel by a cokernel, and step 3 applies. Step 5: the interval [a+c,b+d] by the cochain shift convention. Edge cases checked: empty S, ranks 0, empty interval, a point with κ^2 in degree −1 and κ^3 in degree 4 (rank 6 in degree 3), infinite κ. Duplicates: the constant-field Tor bounds, admissible, ℓ-adic dc-single, étale finite-ring (fd refinement witness, finite-flat total tensor), O_E/ϖ^n and F_ℓ dévissage nodes all differ in site, coefficients or conclusion. I accept the 14 generic tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldBoundedConstructibleTensor",
+  "declaration": "AlgebraicGeometry.Scheme.FieldConstructibleTensor.field_bounded_constructible_tensor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.ring",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.Modules",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.D",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.ordinary",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.tensor",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.single",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.singleComparison",
+   "AlgebraicGeometry.Scheme.FieldConstructibleTensor.field_bounded_constructible_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/FieldBoundedConstructibleTensor.lean",
+  "statement": "theorem field_bounded_constructible_tensor (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] (κ : Type (max v (u + 1))) [Field κ] : (∀ F G : Modules.{u, v} X κ, IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, v} X κ F → IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, v} X κ G → IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, v} X κ (((ordinary.{u, v} X κ).obj F).obj G) ∧ ∀ (S : Stratification X) (i : Fin S.n) (T : Scheme.{u}) (f : T ⟶ S.domain i) [WeaklyEtale f] (r s : ℕ), Nonempty ((coefficientProEtaleFixedModulePullback.{u, v} (f ≫ S.immersion i) κ).obj ((coefficientModelFixedScalars _ κ).obj F) ≅ (constantSheaf (coefficientProEtaleModelTopology.{u, v} T) (ModuleCat κ)).obj (ModuleCat.of κ (Fin r → κ))) → Nonempty ((coefficientProEtaleFixedModulePullback.{u, v} (f ≫ S.immersion i) κ).obj ((coefficientModelFixedScalars _ κ).obj G) ≅ (constantSheaf (coefficientProEtaleModelTopology.{u, v} T) (ModuleCat κ)).obj (ModuleCat.of κ (Fin s → κ))) → Nonempty ((coefficientProEtaleFixedModulePullback.{u, v} (f ≫ S.immersion i) κ).obj ((coefficientModelFixedScalars _ κ).obj (((ordinary.{u, v} X κ).obj F).obj G)) ≅ (constantSheaf (coefficientProEtaleModelTopology.{u, v} T) (ModuleCat κ)).obj (ModuleCat.of κ (Fin (r * s) → κ)))) ∧ (∀ A B : D.{u, v} X κ, ProEtale.coefficientBoundedConstructibleProEtale.{u, v} X κ A → ProEtale.coefficientBoundedConstructibleProEtale.{u, v} X κ B → ProEtale.coefficientBoundedConstructibleProEtale.{u, v} X κ (((tensor (ring.{u, v} X κ)).obj A).obj B) ∧ ∀ a b c d : ℤ, (∀ n : ℤ, n < a ∨ b < n → IsZero ((coefficientModelCohomology (ring.{u, v} X κ) n).obj A)) → (∀ n : ℤ, n < c ∨ d < n → IsZero ((coefficientModelCohomology (ring.{u, v} X κ) n).obj B)) → ∀ n : ℤ, n < a + c ∨ b + d < n → IsZero ((coefficientModelCohomology (ring.{u, v} X κ) n).obj (((tensor (ring.{u, v} X κ)).obj A).obj B)))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The transparent specializations use the existing coefficient-sized small pro-etale model, intrinsic constant-field modules and standard ordinary derived localization. Constructibility uses the landed discrete predicate: NoetherianGlobalConstructibility identifies it with finite constructible stratifications, and finite presentation over a field is finite freeness. singleComparison is the canonical derived isomorphism obtained from the uniquely normalized ringed K-flat single-tensor comparison, not an arbitrary choice of isomorphism. The main theorem states sheaf closure, the rank product on every trivializing stratum chart, bounded-derived closure and the sum interval, including unordered intervals. Added statement dependencies are already landed interfaces used for these specializations; no node statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5629b683",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read item, 17 stmt_deps, report, module and live decls. Clauses match node: Noetherian X (CompactSpace+IsLocallyNoetherian), arbitrary field κ in the coefficient universe, constant sheaf on the coefficient-sized pro-étale model, standard D and K-flat derivedTensor. Constructibility uses the landed affine-local predicate, equal to the global one on Noetherian X (lem-sfb-noetherian-global-constructibility); the sk-def-sfb-constructible Lean cannot take these modules. Tensor closure, chart rank r*s (any weakly étale chart over any stratum), D^b_c closure and [a+c,b+d] support including unordered intervals. Edge cases: empty scheme, rank 0, empty intervals, infinite κ. Mechanical finding: singleComparison is .choose of the ∃!-normalized ringed_kFlat_single_tensor_comparison applied with the K-flatness conclusion of the bounded-flat theorem, a genuine dependence on objects/conclusions those theorems construct → PASS on that point. Verbatim statement, lines ≤93, docstrings with source/blueprint and 5 proof steps, no hollow defs, only sorry, report sections present. Advisory: isFlat_constantFieldModule (lem-exc-constant-field-module-flat) used in the def is in proof_deps but not stmt_deps; owner def nodes of KFlatFixedTensor/ConstantCompletion decls not cited; theorem docstring lists the comparison that lives in the def. No fixes; no compile (unchanged file)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261024T014500-L-2204944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

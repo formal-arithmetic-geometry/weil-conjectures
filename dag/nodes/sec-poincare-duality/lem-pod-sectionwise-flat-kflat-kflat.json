@@ -1,0 +1,111 @@
+{
+ "id": "lem-pod-sectionwise-flat-kflat-kflat",
+ "kind": "statement",
+ "title": "Sectionwise inverse image preserves independent-coefficient K-flat complexes",
+ "statement": "Let $g:X\\to Y$ be a scheme isomorphism with essentially small pro-etale sites, $R_Y,R_X$ commutative ring sheaves, $c:g^{-1}R_Y\\cong R_X$, and $F$ the additive sectionwise inverse-image module functor identified with the displayed construction. Then the induced functor on cochain complexes sends every independent-coefficient K-flat complex over $R_Y$ to an independent-coefficient K-flat complex over $R_X$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 1, tensor preservation argument of lem-pod-sectionwise-flat-kflat; the indicated clause"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Construct the inverse sectionwise module functor using the inverse scheme isomorphism and the inverse coefficient isomorphism. Exactness carries acyclic complexes to acyclic complexes, and preservation of the direct sums in total tensor complexes together with the natural tensor comparison transports the acyclic-tensor test across the equivalence.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "F1 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "the K-flat clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites preserves flat module sheaves",
+   "results": "Generic equivalence and flat-module results only; no exact sectionwise sheaf theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reindexing sheaves of modules along a site equivalence preserves flatness",
+   "results": "Ordinary module and monoidal-equivalence matches, but no exact independent-coefficient site statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSectionwiseModuleInverseImage flat KFlat",
+   "results": "No existing declaration states either preservation clause.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseFlatKFlat",
+  "date": "2026-10-27",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-sectionwise-flat-kflat",
+   "place": "the K-flat clause",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseKFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/IsoSectionwiseKFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage_preservesKFlat",
+  "statement": "theorem isoSectionwiseModuleInverseImage_preservesKFlat\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]\n    (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (isoSectionwiseInverseImage g CommRingCat.{u + 1}).obj RY ≅ RX)\n    (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY) ⥤\n      SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)) [F.Additive]\n    (_hF : F = isoSectionwiseModuleInverseImage.{u, u} g\n      (RY := (sheafCompose (ProEt.topology Y)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)\n      (RX := (sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)\n      ((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c).hom) :\n    ∀ K : CochainComplex (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (J := ProEt.topology Y) (R := RY) K →\n        CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (J := ProEt.topology X) (R := RX)\n          ((F.mapHomologicalComplex (.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T131450-L-2939592",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T131450-L-2939592",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

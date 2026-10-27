@@ -1,0 +1,177 @@
+{
+ "id": "lem-zl-pullback-sheet-return-comparison",
+ "kind": "statement",
+ "title": "Normalized compositor comparison for the pulled-back ordered Weil iterate",
+ "statement": "Fix a finite-field datum $D$, $m\\geq1$, a separated finite-type $k_0$-scheme $X_0$, a prime $\\ell\\neq p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Use the actual constant-extension data [def-dl-a1-constant-extension-data], Weil heart [def-weil-weil-sheaf-complex] and integral-normalized pullback compositors [def-zl-weil-ind-sheaf-category]. Write $\\pi$ for the geometric projection, $j$ for the distinguished sheet and $a=j\\pi$ for the specified fibre isomorphism. For any Weil sheaf $F=(M,\\theta)$ on $X_0$, put $N=g_m^*F$ and let $c:j^*\\pi^*M\\simeq a^*M$ be the inverse of the prescribed compositor. The equation is $g_m^{\\mathrm{Frob}*}(c)\\,\\rho_M\\,a^*(\\theta^{[m]})=\\tau_{\\pi^*M}\\,j^*(\\theta_N^{[m]})\\,c$, with composition written in execution order. Here $\\rho$ is constantExtensionRestrictionComparison [def-zl-constant-extension-restriction-local-data] and $\\tau$ is constantExtensionReturnComparison [def-zl-constant-extension-sheet-pullback-data]. Both iterates and every comparison are the already specified morphisms. This asserts one equality on each actual inverse-image carrier; it does not assume or construct a sheet equivalence or a restriction functor.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-dl-a1-constant-extension-data",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-constant-extension-sheet-pullback-data",
+  "def-zl-constant-extension-restriction-local-data"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Definition (1.1.10), p.151, and following change-of-finite-base paragraph, p.152; pullback and ordered return calculation."
+ },
+ "proof": [
+  {
+   "text": "At positive iterate length one, expand the defining Frobenius square of actual Weil inverse image. Naturality and associativity of the normalized integral pullback compositor give the comparison obtained by pulling the original Weil map along j followed by pi. The two composites j followed by pi and a agree by the definition of the canonical fibre isomorphism.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pod-integral-pullback-composition",
+    "def-dl-a1-constant-extension-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the successor length, expand both ordered iterates using their recursive definitions. Apply the length-one square to the next Weil-map factor and the induction hypothesis to the remaining factors. Naturality moves the compositor past the next Weil-map factor, and associativity of the prescribed integral compositors identifies the parenthesizations. No factors are permuted. Scalar localization and common-stage descent preserve these equations because the common-stage compositor is the specified localized integral compositor.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pod-integral-pullback-composition",
+    "def-zl-constant-extension-restriction-local-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At length m, substitute the sheet-return and fibre-return geometric identities. With the equality j followed by pi = a, the comparison on the source is exactly rho and the one on the right is exactly tau. This yields the displayed equation. At m=1 only the base square is used. Nothing in the induction uses connectedness, lissity or a nonzero carrier, so disconnected or empty schemes and zero sheaves are included.",
+   "uses": [
+    "def-dl-a1-constant-extension-data",
+    "def-zl-constant-extension-sheet-pullback-data",
+    "def-zl-constant-extension-restriction-local-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Definition (1.1.10) and paragraph following it, pp.151--152; explicit normalized-compositor expansion of the pullback-return step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ii]terat|[Ii]terat.*pullback",
+   "results": {
+    "t": "2026-10-25T21:19:23Z",
+    "tool": "grep",
+    "query": "pullback.*[Ii]terat|[Ii]terat.*pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean"
+    ],
+    "digest": "b5ac846bf1c42bdf"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match for the project-specific ordered sheet-return compatibility; the query and its actual hits are recorded."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso",
+   "results": {
+    "t": "2026-10-25T21:19:23Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match for the project-specific ordered sheet-return compatibility; the query and its actual hits are recorded."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordered Frobenius return of a Weil sheaf pulled back through finite extension of the base field is the original Weil structure iterated m times",
+   "results": {
+    "t": "2026-10-25T21:19:23Z",
+    "tool": "leanfinder",
+    "query": "The ordered Frobenius return of a Weil sheaf pulled back through finite extension of the base field is the original Weil structure iterated m times",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "WittVector.StandardOneDimIsocrystal.frobenius_apply",
+     "IsPurelyInseparable.iterateFrobeniusₛₗ",
+     "WittVector.Isocrystal.frobenius",
+     "WittVector.instIsocrystalStandardOneDimIsocrystal",
+     "IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base",
+     "IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ",
+     "FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate",
+     "WittVector.Isocrystal.frob"
+    ],
+    "digest": "d1897358f7b77107"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match for the project-specific ordered sheet-return compatibility; the query and its actual hits are recorded."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionPullbackReturnResidue",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Opening finite constant-extension step: inverse image and its iterated Weil structure; extracted pullback-return argument.",
+   "via": [
+    "lem-zl-constant-extension-pullback-return-residue"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantExtensionPullbackSheetComparison",
+  "file": "lean/Sheaf/Paper/ConstantExtensionPullbackSheetComparison.lean",
+  "declaration": "WeilConjectures.pullbackSheetReturnComparison",
+  "statement": "theorem pullbackSheetReturnComparison (F : sfCommonStageWeilSheaf D l hl X₀ Ω) :\n    letI := sfWeilPrimeInvertible D l hl X₀\n    letI := sfWeilPrimeInvertible D l hl (constantExtensionOriginalModel D m hm X₀)\n    letI := sfWeilPrimeInvertible (constantExtensionDatum D m hm) l hl\n      (constantExtensionModel D m hm X₀)\n    (sfCommonStageWeilFrobeniusPullback (constantExtensionDatum D m hm) l hl\n        (constantExtensionModel D m hm X₀) Ω).map\n      ((zlPullComp l Ω (constantExtensionSheet D m hm X₀)\n        (zlFiberMap D (constantExtensionProjection D m hm X₀))).inv.app F.obj.carrier) ≫\n        (constantExtensionRestrictionComparison D m hm X₀ l hl Ω F.obj.carrier).hom ≫\n          (constantExtensionFiberPull D m hm X₀ l hl Ω).map\n            (constantExtensionWeilIterate D l hl Ω X₀ F.obj (m - 1)).hom =\n      (constantExtensionReturnComparison D m hm X₀ l hl Ω\n        ((zlWeilPull D l hl Ω (constantExtensionProjection D m hm X₀)).obj F).obj.carrier).hom ≫\n        (constantExtensionSheetPull D m hm X₀ l hl Ω).map\n          (constantExtensionWeilIterate D l hl Ω (constantExtensionOriginalModel D m hm X₀)\n            ((zlWeilPull D l hl Ω (constantExtensionProjection D m hm X₀)).obj F).obj\n            (m - 1)).hom ≫\n        (zlPullComp l Ω (constantExtensionSheet D m hm X₀)\n          (zlFiberMap D (constantExtensionProjection D m hm X₀))).inv.app F.obj.carrier",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pod-integral-pullback-composition",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-zl-constant-extension-sheet-pullback-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071247-L-3907111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071247-L-3907111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

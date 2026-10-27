@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-stack-affine-source-nerve-geometry",
+ "kind": "statement",
+ "title": "Geometry of affine-source Cech nerves over qcqs stacks",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $T$ and $V$ be affine $S$-schemes, and let $h:\\mathcal A\\to T$ be a quasi-compact, quasi-separated morphism of algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack, def-sfb-stack-qcqs-morphism]. Let $v:V\\to\\mathcal A$ be any morphism; it need not be smooth or surjective. For $p\\geq0$ form $V_p=V\\times_{\\mathcal A}\\cdots\\times_{\\mathcal A}V$ with $p+1$ factors and augmentation $v_p:V_p\\to\\mathcal A$, using [def-sfb-stable-pointed-moduli-groupoids]. Then $V_p$ is representable by an algebraic space [def-trf-algebraic-space], and $h\\circ v_p:V_p\\to T$ is quasi-compact and quasi-separated. If $\\mathcal A$ is representable by an algebraic space, every $V_p$ is representable by a scheme. If $\\mathcal A$ is representable by a scheme $A$, every $V_p$ is a scheme separated over $T$, meaning its relative diagonal over $T$ is a closed immersion [def-weil-closed-immersion]. If, in addition, $A\\to T$ is separated, every $V_p$ is affine. These assertions hold for the empty schemes and for $p=0$; no finite-type or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 076Z, lemma-general-pushforward, proof paragraphs 2--5: geometry of iterated affine-source fibre products. Quasi-compact and quasi-separated fibre products: stacks-morphisms.tex Tag 075S, lemma-quasi-compact-quasi-separated-permanence, (2),(3)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "We may regard the stacks and spaces as absolute objects, retaining their maps to $S$ and $T$: [lem-sfb-algebraic-stack-change-base-to-integers] preserves the relevant fibre products and relative qcqs predicates, without any separation hypothesis on $S$. Put $Q=V\\times_TV$. By [lem-weil-pbc-morphism-into-affine-scheme] the morphism $V\\to T$ between affine schemes is $\\operatorname{Spec}$ of a ring map, so the affine tensor-product formula [lem-weil-pbc-fibre-product-affine-spectra] makes $Q$ affine. Thus $V,T,Q$ are quasi-compact and absolutely quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. The morphisms $V\\to T$ and both projections $Q\\to V$ are separated by [lem-weil-pbc-affine-source-morphism-separated].",
+   "uses": [
+    "lem-sfb-algebraic-stack-change-base-to-integers",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof, affine-base reduction and the four diagonal reductions; affine fibre products: schemes.tex Tag 01JQ."
+   }
+  },
+  {
+   "text": "Put $R=V\\times_{\\mathcal A}V$. There is a cartesian square with top arrow $R\\to\\mathcal A$, bottom arrow $Q\\to\\mathcal A\\times_T\\mathcal A$ induced by $(v,v)$, and right arrow $\\Delta_h$. Indeed, on each test scheme an object of its pullback is a pair of maps to $V$ and an isomorphism between their images in $\\mathcal A$; its image in the discrete groupoid $T$ is the identity. This is precisely the defining $2$-fibre product. By the quasi-separatedness clause of [def-sfb-stack-qcqs-morphism], its scheme test $r:R\\to Q$ is an algebraic space morphism that is quasi-compact and quasi-separated. Since $Q$ is quasi-compact, taking the identity test $Q\\to Q$ in the definition of a quasi-compact space morphism shows that $R$ is quasi-compact. Since $Q$ is absolutely quasi-separated and $r$ is quasi-separated, [lem-sfb-space-qcqs-source-products] shows that $R$ is absolutely quasi-separated.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof paragraph beginning \"In this situation\"; relative-diagonal test made explicit; spaces-morphisms.tex Tag 04ZH (2)."
+   }
+  },
+  {
+   "text": "Let $a,b:R\\to V$ be the two projections. Define $W_0=V$, and for $p\\geq1$ define $W_p$ as $p$ copies of $R$ fibred over $V$, matching $b$ of one copy with $a$ of the next. By [lem-trf-space-fibre-products-etale-covers] these are algebraic spaces. On a test scheme a point of $W_p$ consists of $x_0,\\ldots,x_p$ in $V$ and consecutive isomorphisms $v(x_{i-1})\\simeq v(x_i)$. Composing them identifies this groupoid with the $p+1$-fold $2$-product defining $V_p$; conversely the isomorphisms to the first object give consecutive ones by taking inverses and composing. These operations are inverse, including on arrows, and commute with pullback. Hence $W_p\\simeq V_p$. Starting with the qcqs objects $V$ and $R$, the fibre-product clause of [lem-sfb-space-qcqs-source-products], applied at each step over the qcqs space $V$, proves by induction that every $W_p$ is qcqs.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof, displayed iterated fibre products; spaces.tex Tag 02X2 and spaces-morphisms.tex Tag 073B (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-stack-qcqs-permanence] to $W_p\\to T$. Its source is qcqs and its target is quasi-separated by Steps 1--3. Here the algebraic-space and stack absolute separation conventions agree directly: the diagonal of a sheaf is a monomorphism, whose own diagonal is an isomorphism, so its extra quasi-separatedness as a representable stack map imposes no additional condition. Likewise a quasi-compact etale scheme atlas is a quasi-compact smooth scheme atlas, since every etale morphism of schemes is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Thus the lemma gives that $W_p\\to T$, and therefore $h\\circ v_p$, is quasi-compact and quasi-separated in the required stack sense. No assumption about smoothness or surjectivity of $v$ has been used.",
+   "uses": [
+    "lem-sfb-algebraic-stack-qcqs-permanence",
+    "def-sfb-stack-qcqs-morphism",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof, qcqs assertion; stacks-morphisms.tex Tag 075S (2)."
+   }
+  },
+  {
+   "text": "If $\\mathcal A$ is an algebraic space, its diagonal is representable by schemes by [def-trf-algebraic-space]. Pull it back along $V\\times_SV\\to\\mathcal A\\times_S\\mathcal A$: the resulting scheme represents $R$. This follows on test objects from the same pair-and-isomorphism description as in Step 2, with the groupoids now discrete. The recursion $W_p=W_{p-1}\\times_VR$ is therefore a recursion using scheme fibre products, which exist by [def-pc-fibre-product]. It follows by induction from $W_0=V$ that every $V_p$ is represented by a scheme.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof, algebraic-space reduction: \"the diagonal of an algebraic space is representable by schemes\"."
+   }
+  },
+  {
+   "text": "Now suppose $\\mathcal A$ is a scheme $A$. Then $R$ and every $W_p$ are schemes directly: on test schemes $h_V\\times_{h_A}h_V$ is represented by the scheme fibre product $V\\times_AV$ of [def-pc-fibre-product], and the recursion $W_p=W_{p-1}\\times_VR$ of Step 5 uses only scheme fibre products. The square of Step 2 identifies $r:R\\to Q$ with a scheme base change of $\\Delta_{A/T}$. The diagonal is an immersion by [lem-weil-pbc-diagonal-immersion], so $r$ is an immersion by [lem-weil-pbc-immersion-base-change-lft]. Each $Q\\to V$ is separated by Step 1. Therefore [lem-trf-immersion-over-separated-base] makes $a,b:R\\to V$ separated. In the recursion of Step 3 the projection $W_p\\to W_{p-1}$ is a base change of $a$ (use the last projection $W_{p-1}\\to V$ and attach the next copy of $R$). It is separated by [lem-weil-pbc-separated-base-change]. With the separated base case $W_0=V\\to T$ of Step 1, composition of separated morphisms in [lem-weil-pbc-proper-fp-permanence] proves inductively that $W_p\\to T$ is separated. This is exactly the assertion that its relative diagonal is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-diagonal-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-trf-immersion-over-separated-base",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof, scheme reduction; schemes.tex Tags 01KJ, 01JY, 01L8 and 01KU."
+   }
+  },
+  {
+   "text": "If in addition $A\\to T$ is separated, its diagonal is a closed immersion by [def-weil-proper-morphism]. By [lem-weil-pbc-closed-immersion-base-change] its pullback $r:R\\to Q$ is a closed immersion. Taking the whole affine target $Q$ in the affine description of [def-weil-closed-immersion] shows that $R$ is affine. The recursion $W_p=W_{p-1}\\times_VR$ now involves only affine schemes over the affine scheme $V$, so [lem-weil-pbc-fibre-product-affine-spectra] proves their affineness inductively. For $p=0$ all claims are the affine scheme $V$ and its morphism to affine $T$ from Step 1. If $V$ or $T$ is empty, the constructions and the same identities still apply (the empty affine is the spectrum of the zero ring); none of the cited results requires nonemptiness, finite type, or Noetherian hypotheses.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof, separated-scheme reduction; schemes.tex Tag 01JQ and morphisms.tex Tag 01QR."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-change-base-to-integers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-algebraic-stack-qcqs-permanence",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-diagonal-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-trf-immersion-over-separated-base",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 076Z (lemma-general-pushforward), proof, four diagonal reductions; the adjacent-pair description explicitly expands the iterated-product argument. Qcqs source properties use spaces-morphisms.tex Tags 04ZH and 073B and stacks-morphisms.tex Tag 075S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme mapping to a quasi compact quasi separated stack over an affine scheme all iterated fiber products are qcqs algebraic spaces; for space scheme and separated scheme targets they are schemes separated schemes and affine schemes",
+   "results": "{\"t\": \"2026-10-23T19:58:09Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine scheme mapping to a quasi compact quasi separated stack over an affine scheme all iterated fiber products are qcqs algebraic spaces; for space scheme and separated scheme targets they are schemes separated schemes and affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"AlgebraicGeometry.instQuasiCompactSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.instQuasiSeparatedSndScheme\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\"], \"digest\": \"13d3dfb045729739\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine pullback lemmas cover some scheme cases only; no hit gives the algebraic-stack and algebraic-space representability and qcqs nerve assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"diagonal\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-23T19:58:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"diagonal\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine pullback lemmas cover some scheme cases only; no hit gives the algebraic-stack and algebraic-space representability and qcqs nerve assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(affine|closed|separated)|affine.*diagonal|iterated.*[Ff]iber",
+   "results": "{\"t\": \"2026-10-23T19:58:20Z\", \"tool\": \"grep\", \"query\": \"diagonal.*(affine|closed|separated)|affine.*diagonal|iterated.*[Ff]iber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"3187bd97290670a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine pullback lemmas cover some scheme cases only; no hit gives the algebraic-stack and algebraic-space representability and qcqs nerve assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine scheme mapping to a quasi compact quasi separated stack over an affine scheme all iterated fiber products are qcqs algebraic spaces; for space scheme and separated scheme targets they are schemes separated schemes and affine schemes",
+   "results": "{\"t\": \"2026-10-23T19:58:42Z\", \"tool\": \"leansearch\", \"query\": \"For an affine scheme mapping to a quasi compact quasi separated stack over an affine scheme all iterated fiber products are qcqs algebraic spaces; for space scheme and separated scheme targets they are schemes separated schemes and affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"79b08c547bf9c0a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine pullback lemmas cover some scheme cases only; no hit gives the algebraic-stack and algebraic-space representability and qcqs nerve assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech nerve of an affine cover has algebraic space terms for an algebraic stack, scheme terms for an algebraic space, separated terms for a scheme and affine terms for a separated scheme",
+   "results": "{\"t\": \"2026-10-23T19:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"The Cech nerve of an affine cover has algebraic space terms for an algebraic stack, scheme terms for an algebraic space, separated terms for a scheme and affine terms for a separated scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\"], \"digest\": \"919009966881bf4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonal and affine pullback lemmas cover some scheme cases only; no hit gives the algebraic-stack and algebraic-space representability and qcqs nerve assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|[Aa]lgebraic[Ss]tack|[Aa]lgebraic[Ss]pace",
+   "results": "{\"t\": \"2026-10-23T21:17:39Z\", \"tool\": \"grep\", \"query\": \"Cech|[Aa]lgebraic[Ss]tack|[Aa]lgebraic[Ss]pace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes and do not state the stack/algebraic-space Cech nerve result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated fibre products of an affine scheme over an algebraic stack are algebraic spaces and are schemes if the stack is an algebraic space",
+   "results": "{\"t\": \"2026-10-23T21:17:39Z\", \"tool\": \"leansearch\", \"query\": \"Iterated fibre products of an affine scheme over an algebraic stack are algebraic spaces and are schemes if the stack is an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.IsFinite.instSndScheme\", \"AlgebraicGeometry.instIsAffineCoprodScheme\"], \"digest\": \"99fd7b56662b7d9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes and do not state the stack/algebraic-space Cech nerve result"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-23T21:17:40Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instFstScheme\", \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"fe2bb1988f59edb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes and do not state the stack/algebraic-space Cech nerve result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine source Cech nerve over an algebraic space has scheme terms; over a scheme separated terms; over a separated scheme affine terms",
+   "results": "{\"t\": \"2026-10-23T21:17:41Z\", \"tool\": \"leanfinder\", \"query\": \"An affine source Cech nerve over an algebraic space has scheme terms; over a scheme separated terms; over a separated scheme affine terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\"], \"digest\": \"f0a3515fce0390c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes and do not state the stack/algebraic-space Cech nerve result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech nerve of an affine scheme over a quasi compact quasi separated algebraic stack has quasi compact quasi separated algebraic space terms",
+   "results": "{\"t\": \"2026-10-23T21:17:42Z\", \"tool\": \"leanfinder\", \"query\": \"Cech nerve of an affine scheme over a quasi compact quasi separated algebraic stack has quasi compact quasi separated algebraic space terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\"], \"digest\": \"1927e96a8d55f4c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern schemes and do not state the stack/algebraic-space Cech nerve result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting geometric input to the four diagonal reductions: the Cech terms progress from algebraic spaces to schemes to separated schemes to affines.",
+   "via": [
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-affine-source-nerve-geometry",
+  "worker": "stage1",
+  "summary": "Expanded the four geometric diagonal reductions of Stacks 076Z using the relative-diagonal scheme test R to Q and the explicit chain of adjacent isomorphisms. Reused existing algebraic-space fibre-product and qcqs lemmas and Mathlib scheme leaves. No new nodes and no statement correction. All hypotheses and the empty and p=0 cases checked.",
+  "blueprint": "The existing provenance chain serves the direct-image preservation route below det-thm-sf-ctf-stability-direct-images, proof (3); the immediate parent is the smooth-descent higher-image criterion. The current latest blueprint direct-images proof (3) was read; this split supplies its inherited auxiliary Stacks 076Z four diagonal reductions. The ancestor tool returns None, so the existing from.node and via chain are retained. Whole-blueprint searches for diagonal, algebraic space, fibre product and permanence found no node stating this combined nerve geometry.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Uses closure under algebraic-space fibre products as a generic geometric tool; no node of this unit states that closure."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Step 4 compares the etale atlas of an algebraic space with the smooth atlas of an algebraic stack; etale implies smooth for schemes is a generic fact stated by this proper-base-change node and by no node of this unit. Added by the cc maintainer reader (FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-52fa718e6",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-52fa718e6 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics of the item is correct; three steps were missing citations, which I added. Item lem-sfb-stack-affine-source-nerve-geometry; the delivery has no new nodes. I read the source, Stacks 076Z (lemma-general-pushforward), proof paragraphs 2-5. The item's four claims match its four diagonal reductions: algebraic space and qcqs, then schemes, then separated schemes, then affine schemes. The statement is unchanged. Dropping the smooth/surjective hypotheses on v is a correct generalization. I checked all 7 steps against the statements of the cited nodes, including the relative diagonal over T in Step 2 and the closed-immersion use in Step 7. Edge cases tested: p=0, empty V or T, the line with doubled origin (R is separated over V but not affine), and BG_m (nontrivial stabilizers). Fixes (C1), written to fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-affine-source-nerve-geometry.json: (1) Step 1 needs V->T to be Spec of a ring map; it now cites lem-weil-pbc-morphism-into-affine-scheme and names lem-weil-pbc-fibre-product-affine-spectra inline. (2) Step 4 used 'etale atlas => smooth atlas' with no node; it now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres, and I added a tool_uses entry for it. (3) Step 6 relied on Step 5 to make R and W_p schemes, which would need h_A to be an fppf sheaf; it now states directly that h_V x_{h_A} h_V is represented by V x_A V (def-pc-fibre-product). proof_deps updated; no cycle. Batch-5: the three sfb citations reach sec-trace-formula only through the general definition def-trf-algebraic-space. lem-trf-space-fibre-products-etale-covers (02X2) and lem-trf-immersion-over-separated-base (01L8, a Mathlib leaf) are generic geometry. None of these is a step of the proof of the trace formula or of Poincare duality, so all are accepted; the two nodes I added reach no trace-formula or Poincare node. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackAffineSourceNerveGeometry",
+  "declaration": "CategoryTheory.stack_affine_source_nerve_geometry",
+  "declarations": [
+   "CategoryTheory.stackAffineSourceNerve",
+   "CategoryTheory.stack_affine_source_nerve_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackAffineSourceNerveGeometry.lean",
+  "statement": "theorem stack_affine_source_nerve_geometry {S : Scheme.{u}} (T V : Over S) [IsAffine T.left] [IsAffine V.left] (A : BasedCategory.{v, w} (Over S)) (hA : IsAlgebraicModuliStack A) (h : BasedFunctor A (discreteModuli (yoneda.obj T))) (hhqc : IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, t, s} h) (hhqs : IsQuasiSeparatedAlgebraicModuliMap h) (a : BasedFunctor (discreteModuli (yoneda.obj V)) A) (p : ℕ) : (∃ (Z : AlgebraicSpace S) (e : BasedFunctor (discreteModuli Z.obj.obj) (stackAffineSourceNerve a p).1), e.toFunctor.IsEquivalence) ∧ IsQuasiCompactAlgebraicModuliMap.{u, max u v, max (u + 1) v w, u, u + 1, t, s} ((stackAffineSourceNerve a p).2.comp h) ∧ IsQuasiSeparatedAlgebraicModuliMap ((stackAffineSourceNerve a p).2.comp h) ∧ ((∃ (Z : AlgebraicSpace S) (e : BasedFunctor (discreteModuli Z.obj.obj) A), e.toFunctor.IsEquivalence) → ∃ W : Over S, IsRepresentedByScheme (stackAffineSourceNerve a p).1 W) ∧ (∀ (B : Over S) (e : BasedFunctor (discreteModuli (yoneda.obj B)) A), e.toFunctor.IsEquivalence → ∀ b : B ⟶ T, Nonempty (ModuliTwoIso (e.comp h) (discreteModuliMap (yoneda.map b))) → ∃ (W : Over S) (q : W ⟶ T) (f : BasedFunctor (discreteModuli (yoneda.obj W)) (stackAffineSourceNerve a p).1), f.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (f.comp ((stackAffineSourceNerve a p).2.comp h)) (discreteModuliMap (yoneda.map q))) ∧ IsClosedImmersion (pullback.diagonal q.left) ∧ (IsSeparated b.left → IsAffine W.left))",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All four geometry clauses for the actual iterated 2-fibre products and their augmentation. The real recursive helper presents the one-factor term as V ×_A A along the identity, canonically equivalent to V; it avoids any identification of the stack universes with the scheme-site universe. Every quasi-compact map predicate explicitly retains the independent test universes t and s."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82c35b6c5",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the node, all 8 stmt_dep records and their Lean (IsAlgebraicModuliStack; IsQuasiCompact/IsQuasiSeparatedAlgebraicModuliMap; moduliTwoFiberProduct/Fst, discreteModuli, ModuliTwoIso, IsRepresentedByScheme; AlgebraicSpace; IsSeparated; IsClosedImmersion), Stacks 076Z paragraphs 2-5 and 075S. Node differs from the live stage-1 node only in lean, so not a no-op or rebind. stackAffineSourceNerve is a real recursive iterated 2-fibre product (degree 0 = V x_A A along id, equivalent to V; degree n+1 adds a factor V), no duplicate found. All clauses match: algebraic-space equivalence; qcqs composite to T; space => IsRepresentedByScheme; scheme rep (B,e,b pinned by ModuliTwoIso) => W, q with closed relative diagonal over T; IsSeparated b.left => IsAffine W.left. No extra hypotheses; v arbitrary. Edge cases p=0, empty schemes, BG_m, doubled origin covered. Note: shared test universes t,s; the conclusion's test universe also includes v, harmless because qc of algebraic stacks does not depend on test size. Statement verbatim, docstrings, source and blueprint, proof sorry, report sections present. No file changed, nothing compiled."
+ }
+}

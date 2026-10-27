@@ -1,0 +1,270 @@
+{
+ "id": "lem-per-qcqs-etale-topos-inverse-limit",
+ "kind": "statement",
+ "title": "Finite-cover presentation and points of an inverse limit of qcqs etale topoi",
+ "statement": "Let $I$ be a small nonempty cofiltered category in the universe convention [def-weil-size-convention], and let $(Y_i)_{i\\in I}$ be a diagram of quasi-compact quasi-separated schemes with quasi-compact quasi-separated transition morphisms [def-weil-pbc-scheme-conventions]. For each $i$ let $\\mathcal C_i$ be a small equivalent version of the category of quasi-compact quasi-separated etale $Y_i$-schemes, equipped with finite jointly surjective covering families [def-weil-pbc-etale-site, def-weil-pbc-finite-precoverage]. Transition functors are scheme-theoretic pullback, with its canonical composition isomorphisms. After replacing this system by an equivalent strict system, form the colimit site $\\mathcal C=\\varinjlim_i\\mathcal C_i$ with the finite coverings coming from stages [lem-weil-pbc-colimit-of-sites]. Then $\\mathcal C$ has finite limits, its terminal object is the image of every $Y_i$, and $\\operatorname{Sh}(\\mathcal C)$ with its projection geometric morphisms $p_i$ is a $2$-categorical inverse limit of the small etale topoi $(Y_i)_{\\mathrm{et}}$ [def-weil-pbc-topos, def-trf-geometric-morphism]. A compatible family of geometric points of the $Y_i$, including isomorphisms between the pulled-back topos points satisfying the cocycle condition, determines a point of $\\operatorname{Sh}(\\mathcal C)$, and there is a set of such points which is conservative: a morphism of sheaves is an isomorphism if its inverse images at all points of this set are bijections. Here a geometric point is a morphism from the spectrum of a separably closed field [def-weil-geometric-point]. The construction and projection inverse images are invariant, up to their canonical equivalences, under cofinal reindexing and compatible isomorphisms of the diagrams of schemes. No inverse limit scheme or affineness of transition morphisms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 09YL (lemma-colimit-sites), 0A35 (lemma-compute-pullback-to-limit), 00YQ (proposition-criterion-points); finite-cover presentation and geometric-point interpretation specialized to qcqs etale sites. Also ILO XX 4.4, printed p.373, the paragraph defining the projective-limit etale topos."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-precoverage",
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-topos",
+  "def-trf-geometric-morphism",
+  "def-weil-geometric-point",
+  "def-per-qcqs-etale-limit-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-qcqs-etale-limit-presentation-exists] to obtain P, and [lem-per-qcqs-etale-presentation-topos-limit] to obtain its IsToposLimit property. The categories of sets in the containing universe form a Grothendieck topos: use sheaves for the bottom topology on the discrete singleton, whose presheaf category is equivalent to sets. The essential-surjectivity conjunct of IsToposLimit therefore factors every geometric-point cone through P.",
+   "uses": [
+    "lem-per-qcqs-etale-limit-presentation-exists",
+    "lem-per-qcqs-etale-presentation-topos-limit",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A P.cover covering presieve is the image of a finite stage covering by P.cover_iff and P.stageCover_iff; its uncurried set of arrows is contained in the finite image of that stage presieve. Index a covering presieve by its distinct arrows to obtain a finite family. The finite composition axiom gives bind composition with one chosen inner cover per distinct outer arrow, and finite base change gives pullbacks of the finite representative family. Repeated members in an arbitrary presentation produce the same pullback presieve, proving IsSiteForCoverings. Thus the finite-refinement hypothesis of [lem-trf-finitary-site-enough-points] holds. Apply it with the finite limits P.finiteLimits to obtain points t that jointly detect isomorphisms. Compose each point with each projection using [def-trf-geometric-morphism], and apply [lem-trf-etale-topos-points-geometric]. Its algebraically closed field is separably closed and its inverse image is the required composite, so the same points retain conservativity.",
+   "uses": [
+    "lem-trf-finitary-site-enough-points",
+    "def-trf-geometric-morphism",
+    "lem-trf-etale-topos-points-geometric"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r, D' and epsilon as in the last clause, transport compactness and quasi-separatedness of each D(r(j)) through epsilon_j. Every D' transition is qcqs since its source and target are qcqs. Apply [lem-per-qcqs-etale-limit-presentation-exists] to D' for nonemptiness. For each supplied P', [lem-per-qcqs-etale-presentation-comparison] gives its canonical comparison with P. Assemble the four conjuncts with the witness P.",
+   "uses": [
+    "lem-per-qcqs-etale-limit-presentation-exists",
+    "lem-per-qcqs-etale-presentation-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-qcqs-etale-limit-presentation-exists",
+  "lem-per-qcqs-etale-presentation-topos-limit",
+  "def-weil-pbc-topos",
+  "lem-trf-finitary-site-enough-points",
+  "def-trf-geometric-morphism",
+  "lem-trf-etale-topos-points-geometric",
+  "lem-per-qcqs-etale-presentation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lean assembly of original Steps 1-7. Steps 1-3, 4-5, and 7 are the three named component obligations. Step 6, the finite site axioms and refinements, the sets-topos witness, and the reindexed existence argument are proved in the item module. ILO XX 4.4, printed p.373."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of small etale topoi of quasi compact quasi separated schemes is presented by the filtered colimit of the finite cover sites and its points are compatible geometric points",
+   "results": "{\"t\": \"2026-10-24T10:09:57Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse limit of small etale topoi of quasi compact quasi separated schemes is presented by the filtered colimit of the finite cover sites and its points are compatible geometric points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"], \"digest\": \"c135b3cd9145763a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits of sheaves inside one topos or affine-transition limits of schemes, not an inverse limit of etale topoi with arbitrary qcqs transitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cofiltered diagram of qcqs schemes has a limit etale topos with enough compatible geometric points, constructed from finite etale covers",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"leansearch\", \"query\": \"A cofiltered diagram of qcqs schemes has a limit etale topos with enough compatible geometric points, constructed from finite etale covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"CategoryTheory.Limits.hasLimitsOfShape_of_has_cofiltered_limits\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.nonempty_of_isLimit\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"CategoryTheory.GrothendieckTopology.Point.isCofiltered\"], \"digest\": \"17c3f351a0696438\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits of sheaves inside one topos or affine-transition limits of schemes, not an inverse limit of etale topoi with arbitrary qcqs transitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.IsLimit",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, CategoryTheory.Limits.IsLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isSheaf_of_isLimit\", \"CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit\", \"CategoryTheory.GrothendieckTopology.OneHypercover.isLimitMultifork\", \"CategoryTheory.GrothendieckTopology.CoversTop.ext\", \"CategoryTheory.Functor.OneHypercoverDenseData.essSurj.presheafObjIsLimit\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.Sheaf.isLimitConeΓ\"], \"digest\": \"3c70388d05009075\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits of sheaves inside one topos or affine-transition limits of schemes, not an inverse limit of etale topoi with arbitrary qcqs transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "limit.?topos|limit.*topoi|colimit.*site|compatible.*geometric.*point",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"grep\", \"query\": \"limit.?topos|limit.*topoi|colimit.*site|compatible.*geometric.*point\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\"], \"digest\": \"b80c6cfb3069b5be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits of sheaves inside one topos or affine-transition limits of schemes, not an inverse limit of etale topoi with arbitrary qcqs transitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of Grothendieck topoi is the topos of sheaves on a filtered colimit of finite limit sites",
+   "results": "{\"t\": \"2026-10-24T10:54:37Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse limit of Grothendieck topoi is the topos of sheaves on a filtered colimit of finite limit sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.limit_isSheaf\", \"LightProfinite.hasSheafify\", \"CategoryTheory.hasLimitsEssentiallySmallSite\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"CategoryTheory.preservesLimitsOfShape_presheafToSheaf\", \"CategoryTheory.Sheaf.instHasFiniteLimits\"], \"digest\": \"1c5bda3fb74e693f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits inside one topos, site equivalences or affine-transition scheme limits, not this inverse limit of topoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Functor.IsEquivalence",
+   "results": "{\"t\": \"2026-10-24T10:54:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology, CategoryTheory.Functor.IsEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.hasWeakSheafify_of_isEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.hasSheafify_of_isEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.sheafifyOfIsEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Functor.IsDenseSubsite.sheafifyAdjunctionOfIsEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse\", \"CategoryTheory.Functor.IsDenseSubsite.sheafifyHomEquivOfIsEquivalence\", \"CategoryTheory.Functor.IsDenseSubsite.sheafifyOfIsEquivalenceCompIso\"], \"digest\": \"ed32adf5586e077d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits inside one topos, site equivalences or affine-transition scheme limits, not this inverse limit of topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "limit.?topos|limit.*topoi|colimit.*site|compatible.*geometric.*point",
+   "results": "{\"t\": \"2026-10-24T10:54:38Z\", \"tool\": \"grep\", \"query\": \"limit.?topos|limit.*topoi|colimit.*site|compatible.*geometric.*point\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\"], \"digest\": \"b80c6cfb3069b5be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits inside one topos, site equivalences or affine-transition scheme limits, not this inverse limit of topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cofiltered inverse limit of etale topoi is presented by a finite covering colimit site",
+   "results": "{\"t\": \"2026-10-24T10:58:38Z\", \"tool\": \"leansearch\", \"query\": \"A cofiltered inverse limit of etale topoi is presented by a finite covering colimit site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasLimitsOfShape_of_has_cofiltered_limits\", \"CategoryTheory.Limits.has_cofiltered_limits_of_has_filtered_colimits_op\", \"CategoryTheory.IsCofiltered.of_hasFiniteLimits\", \"TopCat.isTopologicalBasis_cofiltered_limit\", \"CategoryTheory.Limits.hasCofilteredLimitsOfSize_of_hasLimitsOfSize\", \"CategoryTheory.Limits.HasCofilteredLimits\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"CategoryTheory.Limits.HasCofilteredLimitsOfSize.HasLimitsOfShape\"], \"digest\": \"73183c5e24956c3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits inside one topos, site equivalences or affine-transition scheme limits, not this inverse limit of topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible families of points of etale topoi give enough points of their inverse limit",
+   "results": "{\"t\": \"2026-10-24T10:58:40Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible families of points of etale topoi give enough points of their inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"e1debd2a631ca82b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern limits inside one topos, site equivalences or affine-transition scheme limits, not this inverse limit of topoi."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-admissible-modification-cohomology-presentation",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The limit etale topos and its geometric points in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor.",
+   "via": [
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qcqs-etale-topos-inverse-limit",
+  "worker": "stage1",
+  "summary": "Built the finite-cover site, proved finite limits by the stagewise Hom calculation, and assembled the topos universal property through left exact cover-preserving functors. Reused strictification, enough-points and geometric-point classification; added two smaller statement-only inputs after logged searches. Checked arbitrary cofiltered indices, non-affine transitions and empty schemes.",
+  "blueprint": "Serves the completion part of lem-per-artin-gabber-affine-curve, inherited proof Step 3 provenance, specifically the projective-limit etale topos in ILO XX 4.4, printed p.373; no unit or chapter route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-pc-fppf-dense-sheaf-equivalence",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-coef-pseudofunctor-split-family-strictification",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-of-sites",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-categories",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-trf-finitary-site-enough-points",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   },
+   {
+    "node": "lem-trf-etale-topos-points-geometric",
+    "why": "Generic site/category input for the finite-cover inverse-limit presentation and its points; this unit has no node supplying that input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-coef-pseudofunctor-split-family-strictification",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-trf-finitary-site-enough-points",
+  "lem-trf-etale-topos-points-geometric"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-7c8d2ccf9",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-7c8d2ccf9 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, both new nodes, every cited statement and each source at the cited place: ILO XX 4.4 printed p.373 (the projective-limit étale topos, Deligne enough points, geometric points with a separable closure) and Stacks 00X6, 09YL, 0A35, 03A1, 00YQ, 04HU, 04E7, 04AX, 004A. Statement and stmt_deps are unchanged from the unproved seed. All seven steps check out. Step 1: the qcqs étale category is closed under fibre products, and the finite affine refinement plus the comparison lemma give Sh(T_et). Step 2: strictification over I^op with H empty. Step 3: finite limits by the stagewise Hom calculation, using that filtered colimits commute with finite limits. Steps 4-5: R_{h#∘u_i}=p_{i*}, so the extension is p_i^{-1}; the pseudococone gluing and the lex-cover equivalence give the 2-categorical limit including 2-cells. Step 6: enough points and the geometric-point classification, with the r_t identified with the family-determined points by Step 5 full faithfulness. Step 7: final reindexing and objectwise equivalences. New node lex-cover-functor-extension is true: sieves all of whose pullbacks go to epimorphic families form a topology, R_A is a sheaf, and L_A over elements is left adjoint to R_A; it does not duplicate left-exact-site-inverse-image-tensor (site to site, no equivalence) or topos-site-presentation. New node filtered-category-pseudococones is true: for parallel arrows equalized later, the cocycle forces θ_a=θ_a' on the common object; the final-reindexing and objectwise-equivalence clauses also hold. It is not a duplicate of the directed filtered-two-colimit nodes or coherent-pair-functor-descent. Neither new node restates the parent. Batch-5 flags, all three accepted: def-trf-geometric-morphism is a general definition. lem-trf-finitary-site-enough-points (Deligne) and lem-trf-etale-topos-points-geometric are general topos and étale results that neither the trace-formula nor the PD statement gives. Their closures contain no trace-formula or PD statement, no sk-thm/nt- node and no sec-poincare-duality node, both are already cited by non-trf nodes, and here they are not used as steps of proving the trace formula. The 13 tool_uses are generic and accepted. Notes: the seeded statement's gloss 'separably closed [def-weil-geometric-point]' is looser than the definition (algebraically closed), but the proof works for either reading. Step 1 is marked elementary while listing uses (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsEtaleToposInverseLimit",
+  "declaration": "AlgebraicGeometry.qcqs_etale_topos_inverse_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsEtaleToposInverseLimit.lean",
+  "statement": "theorem qcqs_etale_topos_inverse_limit (I : Type u) [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u}) [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)] [∀ (i j : I) (a : i ⟶ j), QuasiCompact (D.map a)] [∀ (i j : I) (a : i ⟶ j), QuasiSeparated (D.map a)] : ∃ P : QcqsEtaleLimit.Presentation D, QcqsEtaleLimit.IsToposLimit P.projections ∧ (∀ q : QcqsEtaleLimit.GeometricPointCone D, Nonempty (QcqsEtaleLimit.Factorization P.projections q.cone)) ∧ (∃ (T : Type (u + 1)) (points : T → GeometricMorphism (Type (u + 1)) (Sheaf P.cover.toGrothendieck (Type (u + 1)))), (∀ (t : T) (i : I), ∃ (Ω : Type u) (_ : Field Ω) (_ : IsSepClosed Ω) (s : Spec (.of Ω) ⟶ D.obj i), Nonempty ((P.projections.projection i).inverse ⋙ (points t).inverse ≅ (Scheme.pointSmallEtale s).sheafFiber (A := Type (u + 1)))) ∧ ∀ {F G : Sheaf P.cover.toGrothendieck (Type (u + 1))} (a : F ⟶ G), (∀ t : T, Function.Bijective ((points t).inverse.map a)) → IsIso a) ∧ (∀ (J : Type u) [SmallCategory J] [IsCofiltered J] (r : J ⥤ I) [r.Initial] (D' : J ⥤ Scheme.{u}) (ε : D' ≅ r ⋙ D), Nonempty (QcqsEtaleLimit.Presentation D') ∧ ∀ P' : QcqsEtaleLimit.Presentation D', ∃ c : QcqsEtaleLimit.Comparison P.projections P'.projections r ε, c.IsCanonical)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c706111bb",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Item theorem and new def node are mathematically right. Checked: every hypothesis (cofiltered I includes nonempty; qcqs stages and transitions); the stages and their equivalences to the qcqs etale categories, with the actual Over.pullbackComp cocycle; finite jointly surjective stage covers; the objects/arrows colimit site; the finite-limit and terminal clauses; projections normalized as restriction of sections; IsToposLimit (factorization of every cone plus unique lifting of all compatible 2-cells); separably closed geometric-point cones with pointSmallEtale stalks (per-stage form equivalent to the compatible-family form); invariance under any initial reindexing and diagram isomorphism, with a unique invertible comparison. Universes match etaleToposPoint_isGeometric and finitarySite_enoughPoints. Statements verbatim; docstrings with all 7 proof steps; only sorry is the theorem proof; no duplicate found. FIX (H12/H2): the new def node uses Cat.arrows (def-weil-pbc-arrows-functor), Etale.lowerStar (def-weil-pbc-direct-image) and Etale.lowerStarComp (recorded declaration of lem-weil-pbc-inverse-image-composition) without citing them. fixes/def-per-qcqs-etale-limit-presentation.json adds the three stmt_deps and matching TeX citations; no Lean change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T091759-L-3375895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "def-sfb-algcl-topology-scalar-extension",
+ "kind": "definition",
+ "title": "Derived extension along the algebraic-closure topology inclusion",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$. Let $c:C\\to B$ be the canonical inclusion of the finite-subextension-valued algebraic-closure coefficient ring into the all norm-continuous coefficient ring [def-sfb-algcl-topology-inclusion]. For any scheme $X$, put $C_X=p_X^*C$, $B_X=p_X^*B$ and $c_X=p_X^*c$ [sk-def-sfb-pulled-back-coefficients]. In the ordinary unbounded derived categories [sk-def-sfb-derived-categories] of internal module objects [sk-def-sfb-module-objects], define $J_X=B_X\\otimes^L_{C_X}-$ to be the actual total left derived scalar-extension functor along $c_X$, computed on K-flat resolutions [sk-def-sfb-derived-extension-of-scalars]. The abbreviation algClTopologyScalarExtension names this functor. No constructibility, boundedness, properness or flatness assumption is made.",
+ "stmt_deps": [
+  "def-sfb-algcl-topology-inclusion",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-extension-of-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), coefficient-topology change: the displayed functor J_X; existing abbreviation in Sheaf.Paper.ConstructibleAlgClTopologyComparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total left derived extension of scalars along the inclusion of finite subextension valued algebraic closure condensed coefficients into all norm continuous coefficients on a scheme pro etale site",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerived, LightCondensed.lanLightCondSet, Condensed.lanCondensedSet, ContinuousLinearMap.coe_restrictScalarsL, IntermediateField.extendScalars, IntermediateField.coe_extendScalars, Condensed.lanPresheafNatIso, ContinuousLinearMap.restrictScalarsL",
+   "date": "2026-10-23",
+   "verdict": "Only generic constructions; the precise specialized functor is the existing project abbreviation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along a morphism of ring objects",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor_map, ModuleCat.extendScalars, ModuleCat.coextendScalars, ModuleCat.CoextendScalars.obj', ModuleCat.ExtendScalars.obj', PresheafOfModules.Derivation', CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendScalars.map'",
+   "date": "2026-10-23",
+   "verdict": "Only generic constructions; the precise specialized functor is the existing project abbreviation."
+  },
+  {
+   "tool": "grep",
+   "query": "algClTopologyScalarExtension|derivedExtendScalars|leftDerivedFunctor CategoryTheory/Monoidal/Mod",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "Only generic constructions; the precise specialized functor is the existing project abbreviation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n algClTopologyScalarExtension|algClTopologyInclusion lean/WeilConjectures lean/Sheaf; rg -l algClTopologyScalarExtension|topology-scalar-extension dag/nodes",
+   "results": "No upstream hit. Exact abbreviation at lean/Sheaf/Paper/ConstructibleAlgClTopologyComparison.lean:85-86; DAG hits are the theorem record and a consumer theorem, no definition node owning this scalar functor. Inclusion is already owned by def-sfb-algcl-topology-inclusion.",
+   "date": "2026-10-23",
+   "verdict": "Reuse the published abbreviation with existing:true; add ownership node only."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search algClTopologyScalarExtension; ancestor lem-sfb-algcl-topology-mate-hom-bijection",
+   "results": "0 blueprint nodes match 'algClTopologyScalarExtension'; a node created for lem-sfb-algcl-topology-mate-hom-bijection has blueprint.from.node = None",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node; preserve ancestor None."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algcl-topology-mate-hom-bijection",
+  "date": "2026-10-23",
+  "group": "Q153"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof paragraph (3), proper coefficient-change input: Hom calculation for the canonical topology-change counit mate (returned parent proof step 4); the derived scalar-extension functor J_X.",
+   "via": [
+    "lem-sfb-algcl-topology-mate-hom-bijection",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleAlgClTopologyComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.algClTopologyScalarExtension",
+  "statement": "abbrev algClTopologyScalarExtension (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "Q153",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Ownership of the unchanged existing abbreviation only, as requested by returned head c3145fd6f9c6. No new Lean definition or module; theorem constructible_algCl_topology_comparison remains a proof dependency only."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c860e9b8",
+  "group": "Q153",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c860e9b8",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Re-delivery after c3145 RETURN; both faults repaired. (1) lem-sfb-constructible-algcl-topology-comparison removed from stmt_deps (kept in proof_deps); stmt_deps now cite def-sfb-algcl-topology-inclusion plus new def-sfb-algcl-topology-scalar-extension (existing:true on unchanged ConstructibleAlgClTopologyComparison, statement substring of live abbrev line 85, matches J_X=leftDerived extendScalars along p_X^*c, no other owner). (2) kflat-normalization record absent from delivery so landed record untouched; the 4 θ/σ helpers moved byte-identically (diffed vs c3145, only blueprint tags differ) into the item module and listed in lean.declarations; imports = union of former compiled files. Mathematics re-checked: σ=(asIso ScalarPullback.mate(action square)).symm with action built only from canonical leftDerived≅mapDerivedCategory and derivedComapUpperStarIso, direction f_B^*J_T→J_Zf_C^*; χ=homEquiv_B(σ_P≫J_Zε_L); eT/eZ forward maps pinned to J.map; four-stage composite and J_Tu clause correct; no properness/Q-constructibility/flatness/universe restriction; statement verbatim and all declarations present; two sorries (theorems only). Advisory: owners of derivedComapUpperStarIso/leftDerivedUpperStarIsoMapDerivedCategory not in stmt_deps; ModuleRingedToposDerivedComparison import serves θ_isIso plan but lem-pd-module-ringed-topos-derived-comparison not in proof_deps. No compile (no file changed)."
+ }
+}

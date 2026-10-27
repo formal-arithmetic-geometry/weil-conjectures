@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-proj-product-chart-twist-frame",
+ "kind": "statement",
+ "title": "Explicit twist frame on a product standard chart",
+ "statement": "Let $A=\\bigoplus_{j\\geq0}A_j$ be a nonnegatively graded commutative ring and $P=\\operatorname{Proj}(A)$ [def-pc-proj], with twists and canonical homogeneous sections as in [def-weil-pbc-proj-twisting-sheaf]. Let $d,n\\geq1$, $\\alpha,\\beta\\geq0$, $\\alpha=\\beta+d$, and $a\\in A_\\alpha$, $b\\in A_\\beta$. Put $h=ab$, $V=D_+(h)$, and $R=A_h$, the localization at the powers of $h$, with $A_j=0$ for $j<0$ and degree parts $R_j=\\{z/h^t:z\\in A_{j+t(\\alpha+\\beta)},\\ t\\geq0\\}$. Both $a$ and $b$ are units in $R$. The element $e=(a/b)^n=a^{2n}/h^n\\in R_{nd}$ has inverse $e^{-1}=(b/a)^n=b^{2n}/h^n\\in R_{-nd}$. Multiplication by $e$ gives an $R_0$-linear isomorphism $R_0\\simeq R_{nd}$ with inverse $t\\mapsto e^{-1}t$. These maps commute with all standard-open localization restrictions inside $V$ and induce an isomorphism of sheaves $\\mathcal O_V\\simeq\\mathcal O_P(nd)|_V$ sending $1$ to $e$. For every homogeneous $f\\in A_{nd}$, the canonical section on $V$ has expression $f/1=c e$, with $c=b^nf/a^n\\in R_0=\\Gamma(V,\\mathcal O_V)$, and the same expression holds on every subopen of $V$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MU (lemma-where-invertible), first paragraph of proof: generator (a/b)^n; Tag 01MV (lemma-principal-open), proof: expression f/1=(b^n f/a^n)(a/b)^n."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=\\alpha+\\beta=2\\beta+d>0$. In $R=A_h$ the inverse of $a/1$ is $b/h$, and the inverse of $b/1$ is $a/h$: their products are $ab/h=1$. Hence $(a/b)^n=a^{2n}/h^n$ and $(b/a)^n=b^{2n}/h^n$. Their product is $a^{2n}b^{2n}/h^{2n}=1$. The numerator degrees are $2n\\alpha=nk+nd$ and $2n\\beta=nk-nd$, respectively, so these elements belong to $R_{nd}$ and $R_{-nd}$ as asserted. No cancellation in $A$, and no nonzero hypothesis on $a$ or $b$, is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MU (lemma-where-invertible), first paragraph of proof: generator (a/b)^n; Tag 01MV (lemma-principal-open), proof: expression f/1=(b^n f/a^n)(a/b)^n."
+   }
+  },
+  {
+   "text": "For $r=z/h^t\\in R_0$ one has $er=a^{2n}z/h^{n+t}\\in R_{nd}$, because its numerator has degree $2n\\alpha+tk=(n+t)k+nd$. For $v=z/h^t\\in R_{nd}$ one has $e^{-1}v=b^{2n}z/h^{n+t}\\in R_0$, because its numerator has degree $2n\\beta+nd+tk=(n+t)k$. Both operations are well-defined multiplication by fixed elements of the commutative ring $R$ and are $R_0$-linear. Their two composites are the identity since $ee^{-1}=1$. This proves the claimed module isomorphism and its precise inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MU (lemma-where-invertible), first paragraph of proof: generator (a/b)^n; Tag 01MV (lemma-principal-open), proof: expression f/1=(b^n f/a^n)(a/b)^n."
+   }
+  },
+  {
+   "text": "For a positive-degree homogeneous $g$ with $D_+(g)\\subseteq V$, let $\\lambda_g:A_h\\to A_g$ be the localization restriction from [def-weil-pbc-proj-twisting-sheaf] (2). The section modules on this chart are $(A_g)_0$ and $(A_g)_{nd}$. The images $e_g=\\lambda_g(e)$ and $\\bar e_g=\\lambda_g(e^{-1})$ have degrees $nd$ and $-nd$ and satisfy $e_g\\bar e_g=1$. Multiplication by them therefore gives inverse $(A_g)_0$-linear maps between these two modules, by the degree calculation of Step 2. For a further standard-open inclusion with localization map $\\lambda$, the identities $\\lambda(e_g r)=\\lambda(e_g)\\lambda(r)$ and $\\lambda(\\bar e_g v)=\\lambda(\\bar e_g)\\lambda(v)$ show compatibility in both directions. The restrictions of the section $e$ are exactly the $e_g$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MU (lemma-where-invertible), first paragraph of proof: generator (a/b)^n; Tag 01MV (lemma-principal-open), proof: expression f/1=(b^n f/a^n)(a/b)^n."
+   }
+  },
+  {
+   "text": "The positive-degree standard opens $D_+(g)$ contained in $V$ form a basis of $V$. Indeed [lem-weil-pbc-proj-standard-open-inclusion] (0) states that the standard opens $D_+(g)$, $g$ homogeneous of positive degree, form a basis of the topology of $P$, and that $D_+(g)\\cap D_+(h)=D_+(gh)$. Hence for $x\\in V$ and an open neighbourhood $N\\subseteq V$ of $x$ there is such a $g$ with $x\\in D_+(g)\\subseteq N$, and every chart $D_+(g)$ meets $V$ in the standard open $D_+(gh)\\subseteq V$, of positive degree $\\deg g+k$. By (1) of the same node, for $D_+(g)\\subseteq V$ the element $h$ is a unit of $A_g$, so the localization map $\\lambda_g:A_h\\to A_g$ of Step 3 exists.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01M3 (label section-proj), paragraph before Lemma 01M4 (standard opens form a basis, $D_+(f)\\cap D_+(g)=D_+(fg)$); Lemma 01M4 (label lemma-standard-open)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-sheaf-morphism-on-basis] (a) on the topological space $V$, with values in abelian groups, to the underlying additive sheaves of $\\mathcal O_V$ and $\\mathcal O_P(nd)|_V$. Their basis sections and restrictions are those of [def-weil-pbc-proj-twisting-sheaf] (2). Steps 3--4 supply inverse compatible families on this basis, hence two sheaf morphisms. Their composites are identities because this is true on each basis open, and uniqueness in (a) detects equality there. They are $\\mathcal O_V$-linear: for sections $u,s$ on an arbitrary open, restrict to each basis member; the equality $\\Phi(us)=u\\Phi(s)$ holds there by Step 3, and the sheaf separation axiom gives equality on that open. The same argument applies to the inverse. This gives the stated module-sheaf isomorphism; on $V=D_+(h)$ its map is $r\\mapsto re$, so it sends $1$ to $e$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009O (lemma-restrict-basis-equivalence) and Tag 009U (lemma-restrict-basis-equivalence-modules), applied to the compatible fraction maps in Constructions Tag 01MU"
+   }
+  },
+  {
+   "text": "For homogeneous $f\\in A_{nd}$, [def-weil-pbc-proj-twisting-sheaf] (3) identifies its canonical section on $V$ with $f/1\\in R_{nd}$. Its coefficient under the inverse frame is $c=e^{-1}(f/1)=b^{2n}f/h^n=b^nf/a^n$. The middle expression exhibits it in $R_0$: its numerator has degree $2n\\beta+nd=nk$. Multiplying by $e$ gives $ce=(b^{2n}f/h^n)(a^{2n}/h^n)=f/1$. By (2) of the same definition, $R_0=\\Gamma(V,\\mathcal O_V)$. Restricting the equality of these sheaf sections gives the same coefficient expression on every subopen of $V$, with $c$ and $e$ restricted there; no assertion that arbitrary subopens are affine is needed.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MU (lemma-where-invertible), first paragraph of proof: generator (a/b)^n; Tag 01MV (lemma-principal-open), proof: expression f/1=(b^n f/a^n)(a/b)^n."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01MU (lemma-where-invertible), first proof paragraph and preceding lemma-when-invertible; Tag 01MV (lemma-principal-open), coefficient formula; basis extension detailed using Sheaves Tags 009O and 009U."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a product standard open D_+(ab) of Proj where deg a = deg b + d, (a/b)^n trivializes the twisting sheaf O(nd) and the coefficient of f is b^n f/a^n",
+   "results": "{\"t\": \"2026-10-22T06:13:49Z\", \"tool\": \"leanfinder\", \"query\": \"On a product standard open D_+(ab) of Proj where deg a = deg b + d, (a/b)^n trivializes the twisting sheaf O(nd) and the coefficient of f is b^n f/a^n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\"], \"digest\": \"699902f736f247da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"twist\"",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"twist\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isFreeGenerator|trivializ|twist",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"grep\", \"query\": \"isFreeGenerator|trivializ|twist\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The twisting sheaf on Proj is freely generated by a homogeneous unit of the localized graded ring",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"leansearch\", \"query\": \"The twisting sheaf on Proj is freely generated by a homogeneous unit of the localized graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.neg_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\"], \"digest\": \"60c9811ef938cc71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|trivializ|FreeGenerator",
+   "results": "{\"t\": \"2026-10-22T06:14:43Z\", \"tool\": \"grep\", \"query\": \"twist|trivializ|FreeGenerator\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide only component facts, not this full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|trivializ|FreeGenerator",
+   "results": "{\"t\": \"2026-10-23T04:18:59Z\", \"tool\": \"grep\", \"query\": \"twist|trivializ|FreeGenerator\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by the fraction (a/b)^n is an isomorphism between the structure sheaf and the twisting sheaf O(nd) on D_+(ab) of Proj",
+   "results": "{\"t\": \"2026-10-23T04:19:00Z\", \"tool\": \"leansearch\", \"query\": \"Multiplication by the fraction (a/b)^n is an isomorphism between the structure sheaf and the twisting sheaf O(nd) on D_+(ab) of Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.basicOpenIso\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\"], \"digest\": \"80a788086f845ce4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"twist\"",
+   "results": "{\"t\": \"2026-10-23T04:19:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"twist\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous unit of degree n in a localized graded commutative ring trivializes the Proj twisting sheaf O(n) on a standard open, compatibly with restriction",
+   "results": "{\"t\": \"2026-10-23T04:19:02Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous unit of degree n in a localized graded commutative ring trivializes the Proj twisting sheaf O(n) on a standard open, compatibly with restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.openToLocalization\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\"], \"digest\": \"666d89a779859560\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|trivializ|FreeGenerator",
+   "results": "{\"t\": \"2026-10-23T04:25:24Z\", \"tool\": \"grep\", \"query\": \"twist|trivializ|FreeGenerator\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero part of a graded localization is linearly equivalent to degree m part by multiplication with an invertible homogeneous fraction",
+   "results": "{\"t\": \"2026-10-23T04:25:31Z\", \"tool\": \"leanfinder\", \"query\": \"Degree zero part of a graded localization is linearly equivalent to degree m part by multiplication with an invertible homogeneous fraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.awayMap_fromZeroRingHom\", \"HomogeneousLocalization.NumDenSameDeg\", \"HomogeneousLocalization.awayMapAux_mk\", \"HomogeneousLocalization.awayMap_mk\", \"HomogeneousLocalization.awayMap\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"HomogeneousLocalization.NumDenSameDeg.embedding\", \"HomogeneousLocalization.map\"], \"digest\": \"974202e79992905c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  },
+  {
+   "tool": "grep",
+   "query": "awayToSection|openToLocalization|sectionInBasicOpen|awayToΓ",
+   "results": "{\"t\": \"2026-10-23T04:26:12Z\", \"tool\": \"grep\", \"query\": \"awayToSection|openToLocalization|sectionInBasicOpen|awayToΓ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"3894c40d1c3bd743\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern structure-sheaf sections or homogeneous localization, not twist frames, inverse degree maps and coefficient formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proj-twist-section-basic-open",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited Section-algebra/Proj ampleness input of lem-trf-local-term-locality, through lem-trf-proj-qc-open-twist-ample: returned item proof Step 1, construction and localization compatibility of the frame (a/b)^n on D_+(ab).",
+   "via": [
+    "lem-trf-proj-twist-section-basic-open",
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proj-product-chart-twist-frame",
+  "worker": "stage1",
+  "summary": "Q105: expanded the product-chart frame into six steps: explicit inverse fractions and degrees, inverse module maps, restriction compatibility, positive homogeneous basis refinement, sheaf extension, and canonical-section coefficient. Reused existing twist, topology and basis-morphism nodes; no new nodes or statement changes. Checked non-domain, degree-zero b and empty-chart cases.",
+  "blueprint": "Retains the inherited Section-algebra/Proj ampleness route in blueprint.from.place through lem-trf-proj-twist-section-basic-open. Steps 1--5 justify the generator (a/b)^n used in Stacks 01MU, and Step 6 the coefficient formula of 01MV. The nearest blueprint ancestor lem-trf-local-term-locality is a distant origin recorded by the earlier split, not a claim that its local-term proof contains this Proj calculation. Whole-blueprint searches for twist, 01MU and 01MV found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Generic topology of Proj: the positive-degree standard opens form a basis and D_+(g)∩D_+(h)=D_+(gh); the inherited trace-formula unit has no topology-of-Proj substitute."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-morphism-on-basis",
+    "why": "Generic extension and uniqueness for sheaf maps on a basis, used to assemble the explicit inverse fraction maps; no trace-formula argument replaces this sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-d2616b92a",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-d2616b92a (reviewer sub-agent of L); spot-checked: Read the full stage-1 delivery: lem-trf-proj-product-chart-twist-frame gets its first proof, 6 steps and 0 new nodes. The live node is still unsplit and the delivered statement is byte-identical to live and side-live. There is no re-split note for this item. Source checks: Stacks Constructions lemma-where-invertible (01MU, l.1853), first proof paragraph, gives the generator (f/g)^n=f^{2n}/(fg)^n. lemma-principal-open (01MV, l.1919) gives f/1=b^nf/a^n·(a/b)^n, exactly Step 6. lemma-when-invertible gives the multiplication-isomorphism model. Steps 1–3 and 5–6 are correct: the inverses and degrees (2nα=nk+nd, 2nβ=nk−nd), R_0-linearity, compatibility with localization via def-weil-pbc-proj-twisting-sheaf (2), assembly by lem-weil-pbc-sheaf-morphism-on-basis (a) on additive sheaves with O-linearity by separation, and c∈R_0 with ce=f/1 and restriction to subopens. Small cases checked: b=1 and β=0; k[x,y] with a=x², b=y; h nilpotent giving V=∅; f=0. One fault, a duplicate reference: Step 4 re-derives that positive-degree standard opens form a basis and that D_+(g)∩D_+(h)=D_+(gh), and attributes the product formula to the weaker D(r) node lem-weil-pbc-projective-spectrum-basic-opens-basis. Both facts are clause (0) of the existing node lem-weil-pbc-proj-standard-open-inclusion. FIX: Step 4 now cites that node, (0) for the basis and (1) for h being a unit in A_g. proof_deps and split_report.tool_uses are updated to match; the statement and stmt_deps are unchanged. No duplicate of the item exists in the DAG; lem-trf-proj-generated-pullback-frames covers only the b-of-degree-0, n=1 special case. Accepted tool_uses: lem-weil-pbc-proj-standard-open-inclusion and lem-weil-pbc-sheaf-morphism-on-basis, both generic Proj-topology and sheaf tools with no substitute in the trace-formula unit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjProductChartTwistFrame",
+  "declaration": "AlgebraicGeometry.Proj.productChartTwistFrame",
+  "declarations": [
+   "AlgebraicGeometry.Proj.productChartFrameFraction",
+   "AlgebraicGeometry.Proj.productChartInverseFrameFraction",
+   "AlgebraicGeometry.Proj.productChartTwistFrame"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjProductChartTwistFrame.lean",
+  "statement": "theorem productChartTwistFrame {A : Type u} [CommRing A] (𝒜 : ℕ → AddSubgroup A) [GradedRing 𝒜] (d n α β : ℕ) (hd : 0 < d) (hn : 0 < n) (hα : α = β + d) (a b : A) (ha : a ∈ 𝒜 α) (hb : b ∈ 𝒜 β) : IsUnit (algebraMap A (Localization.Away (a * b)) a) ∧ IsUnit (algebraMap A (Localization.Away (a * b)) b) ∧ ∃ (e : degreePart 𝒜 (Submonoid.powers (a * b)) ((n * d : ℕ) : ℤ)) (v : degreePart 𝒜 (Submonoid.powers (a * b)) (-((n * d : ℕ) : ℤ))) (E : Away 𝒜 (a * b) ≃ₗ[Away 𝒜 (a * b)] degreePart 𝒜 (Submonoid.powers (a * b)) ((n * d : ℕ) : ℤ)), (e : Localization.Away (a * b)) = productChartFrameFraction a b n ∧ (v : Localization.Away (a * b)) = productChartInverseFrameFraction a b n ∧ (e : Localization.Away (a * b)) * v = 1 ∧ (∀ r : Away 𝒜 (a * b), (E r : Localization.Away (a * b)) = r.val * e) ∧ (∀ t : degreePart 𝒜 (Submonoid.powers (a * b)) ((n * d : ℕ) : ℤ), (E.symm t).val = (t : Localization.Away (a * b)) * v) ∧ (∀ (g : A) (k : ℕ), 0 < k → g ∈ 𝒜 k → basicOpen 𝒜 g ≤ basicOpen 𝒜 (a * b) → ∃ (ρ : Localization.Away (a * b) →+* Localization.Away g) (ρ₀ : Away 𝒜 (a * b) →+* Away 𝒜 g) (F : Away 𝒜 g ≃ₗ[Away 𝒜 g] degreePart 𝒜 (Submonoid.powers g) ((n * d : ℕ) : ℤ)), ρ.comp (algebraMap A (Localization.Away (a * b))) = algebraMap A (Localization.Away g) ∧ (∀ r : Away 𝒜 (a * b), (ρ₀ r).val = ρ r.val) ∧ (∀ r : Away 𝒜 g, (F r : Localization.Away g) = r.val * ρ e) ∧ (∀ t : degreePart 𝒜 (Submonoid.powers g) ((n * d : ℕ) : ℤ), (F.symm t).val = (t : Localization.Away g) * ρ v) ∧ (∀ r : Away 𝒜 (a * b), ρ (E r : Localization.Away (a * b)) = (F (ρ₀ r) : Localization.Away g)) ∧ (∀ (t : degreePart 𝒜 (Submonoid.powers (a * b)) ((n * d : ℕ) : ℤ)) (t' : degreePart 𝒜 (Submonoid.powers g) ((n * d : ℕ) : ℤ)), (t' : Localization.Away g) = ρ t → ρ₀ (E.symm t) = F.symm t')) ∧ ∃ (s : Γ(twist 𝒜 (0 + ((n * d : ℕ) : ℤ)), basicOpen 𝒜 (a * b))) (Φ : (Scheme.Modules.unit (Proj 𝒜)).restrict (basicOpen 𝒜 (a * b)).ι ≅ (twist 𝒜 (0 + ((n * d : ℕ) : ℤ))).restrict (basicOpen 𝒜 (a * b)).ι), (∀ x : basicOpen 𝒜 (a * b), (s.val x : Localization.AtPrime x.val.asHomogeneousIdeal.toIdeal) = Localization.mk (a ^ (2 * n)) ⟨(a * b) ^ n, pow_mem_primeCompl x n⟩) ∧ (∀ (Q : (basicOpen 𝒜 (a * b)).toScheme.Opens) (r : Γ((Scheme.Modules.unit (Proj 𝒜)).restrict (basicOpen 𝒜 (a * b)).ι, Q)), ((twist 𝒜 (0 + ((n * d : ℕ) : ℤ))).restrictAppIso (basicOpen 𝒜 (a * b)).ι Q).hom (Φ.hom.app Q r) = (Scheme.Modules.unitSectionsEquiv ((basicOpen 𝒜 (a * b)).ι ''ᵁ Q)).symm (((Scheme.Modules.unit (Proj 𝒜)).restrictAppIso (basicOpen 𝒜 (a * b)).ι Q).hom r) • (twist 𝒜 (0 + ((n * d : ℕ) : ℤ))).presheaf.map (homOfLE ((basicOpen 𝒜 (a * b)).ι_image_le Q)).op s) ∧ (∀ (f : A) (hf : f ∈ 𝒜 (n * d)), ∃ c : Away 𝒜 (a * b), c.val = productChartInverseFrameFraction a b n * algebraMap A (Localization.Away (a * b)) f ∧ c.val * (algebraMap A (Localization.Away (a * b)) a) ^ n = (algebraMap A (Localization.Away (a * b)) b) ^ n * algebraMap A (Localization.Away (a * b)) f ∧ c.val * e = algebraMap A (Localization.Away (a * b)) f ∧ ∀ (U : (Proj 𝒜).Opens) (hU : U ≤ basicOpen 𝒜 (a * b)), (twist 𝒜 (0 + ((n * d : ℕ) : ℤ))).presheaf.map (homOfLE le_top).op ((unitToTwist hf).app ⊤ (Scheme.Modules.unitSectionsEquiv ⊤ 1)) = (Proj 𝒜).presheaf.map (homOfLE hU).op (awayToSection 𝒜 (a * b) c) • (twist 𝒜 (0 + ((n * d : ℕ) : ℤ))).presheaf.map (homOfLE hU).op s)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fcaab6cb",
+  "group": "Q38",
+  "result": "pass",
+  "note": "The delivery changes only the item's lean record; statement and stmt_deps are byte-identical to side-live, and lean.statement equals the file signature verbatim. Clauses match the node: a general GradedRing 𝒜 : ℕ → AddSubgroup A with one free universe u; d,n>0, α=β+d, a∈A_α, b∈A_β, with no extra hypotheses; IsUnit for a and b; e and v pinned to a^{2n}/(ab)^n and b^{2n}/(ab)^n with e·v=1; E : R_0 ≃ₗ R_nd pinned both ways. Restriction compatibility for each positive-degree D_+(g) ≤ V: ρ unique by the localization universal property, ρ₀ pinned through val, F the frame map. Φ : O_V ≅ O(0+nd)|_V pinned on every open as r • s|_Q, with s pinned pointwise to the frame fraction. c ∈ Away with c = v·f/1, c·a^n = b^n f and c·e = f/1, and the unitToTwist section equals c·s on every open U ≤ V. degreePart over powers(ab) equals the node's R_j because k ≥ d > 0. The twist index 0+nd follows the upstream unitToTwist signature. Edge cases checked: ab nilpotent (V empty), β=0, f=0, nonaffine U. The helper defs carry real fractions and their names do not clash (sibling coefficient-locus deliveries Q104/Q37 use other names). Docstrings carry Stacks 01MU/01MV and the blueprint id; the only proof is sorry. No compile, since no file was changed. No findings."
+ }
+}

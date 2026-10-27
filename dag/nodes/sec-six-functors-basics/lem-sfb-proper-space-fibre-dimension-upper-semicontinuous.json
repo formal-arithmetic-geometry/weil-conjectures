@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+ "kind": "statement",
+ "title": "Upper semicontinuity of fibre dimension for proper algebraic spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $f:X\\to T$ be a morphism from an algebraic space [def-trf-algebraic-space]. For $t\\in T$ put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$, using the residue field and its canonical point map [def-weil-residue-field, def-weil-affine-spectrum] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Define $n_f(t)$ as the supremum of the topological Krull dimensions [def-kun-topological-krull-dimension] of all affine schemes with a representable etale map to $X_t$; the empty fibre has dimension $-\\infty$. Assume $f$ is proper: it is separated, of finite type and universally closed. Separated means that the representable diagonal is a closed immersion on every scheme test; finite type means quasi-compact and locally of finite type on etale scheme charts [def-weil-finite-type-morphism]; universally closed means closed on underlying point spaces after every algebraic-space base change. Point spaces carry the atlas topology [def-a1-space-point-topology]; these are the algebraic-space versions of the scheme conventions [def-weil-proper-morphism]. Then $n_f(t)\\in\\{-\\infty,0,1,2,\\ldots\\}$ for every $t$, and for each integer $a\\geq-1$ the set $\\{t\\in T:n_f(t)\\leq a\\}$ is open, equivalently $\\{t:n_f(t)>a\\}$ is closed. No flatness, finite-presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D4Q (lemma-dimension-fibres-proper), restricted to a scheme target; fibre dimension is computed on affine etale charts."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-type-morphism",
+  "def-a1-space-point-topology",
+  "def-weil-proper-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-algebraic-space-etale-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Properness includes finite type, so apply [lem-sfb-space-fibre-dimension-supremum] to $f$. With $\\delta_f(x)$ defined there by chartwise local fibre dimension, it gives $n_f(t)=\\sup_{f(x)=t}\\delta_f(x)$, finite when the fibre is nonempty and $-\\infty$ otherwise. This is exactly the defining supremum over affine etale charts, not the dimension of the local ring at a point. Thus all asserted values of $n_f$ lie in $\\{-\\infty,0,1,\\ldots\\}$.",
+   "uses": [
+    "lem-sfb-space-fibre-dimension-supremum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4M (lemma-dimension-fibre), preliminary to Tag 0D4Q"
+   }
+  },
+  {
+   "text": "Fix an integer $a\\geq0$. Finite type includes locally finite type, so [lem-sfb-space-local-fibre-dimension-open] gives an open subset $W_a=\\{x:\\delta_f(x)\\leq a\\}$ of $|X|$, with exactly the same chartwise definition of $\\delta_f$ as in step 1. Its complement $Z_a=\\{x:\\delta_f(x)>a\\}$ is closed. No finite-presentation or flatness hypothesis is used.",
+   "uses": [
+    "lem-sfb-space-local-fibre-dimension-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4Q (lemma-dimension-fibres-proper), first sentence of proof, using Tag 04NT"
+   }
+  },
+  {
+   "text": "For $a\\geq0$, the supremum formula in step 1 gives $n_f(t)>a$ if and only if some $x$ over $t$ has $\\delta_f(x)>a$: if no such $x$ exists, $a$ is an upper bound, and conversely any such value is a lower bound for the supremum. Therefore $\\{t:n_f(t)>a\\}=|f|(Z_a)$. By the universally closed part of the assumed properness, applied to the identity base change, this image of the closed subset $Z_a$ is closed. Its complement $\\{t:n_f(t)\\leq a\\}$ is open. This uses the explicit definition of properness in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4Q (lemma-dimension-fibres-proper), last two sentences of proof"
+   }
+  },
+  {
+   "text": "For $a=-1$, take $Z_{-1}=|X|$, a closed subset of itself. By the fibre-emptiness assertion of [lem-sfb-space-fibre-dimension-supremum] and the values already proved, $\\{t:n_f(t)>-1\\}=|f|(|X|)$. This is closed by the same universally closed hypothesis. Its open complement consists precisely of the empty fibres, with dimension $-\\infty$. This proves the remaining threshold and completes the assertion.",
+   "uses": [
+    "lem-sfb-space-fibre-dimension-supremum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D4Q (lemma-dimension-fibres-proper), empty-fibre threshold written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-fibre-dimension-supremum",
+  "lem-sfb-space-local-fibre-dimension-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D4Q (lemma-dimension-fibres-proper), with its 0D4M and 04NT inputs exposed and the threshold -1 explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of algebraic spaces fibre dimension is upper semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus in the base of a proper morphism where fibres have dimension greater than an integer is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsClosedMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsClosedMap)\", \"doc\": \"The property that a scheme morphism is a closed map (in the topological sense) is Zariski local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is universally closed, then the underlying continuous map of $ f $ is universally closed in the topological sense.\"}\n  {\"name\": \"IsProperMap.universally_closed\", \"module\": \"Mathlib/Topology/Maps/Proper/Basic\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y} (Z : Type u_6)\\n  [inst_2 : TopologicalSpace Z], IsProperMap f → IsClosedMap (Prod.map f id)\", \"doc\": \"If $ f : X \\\\to Y $ is a proper map between topological spaces, then for any topological space $ Z $, the product map $ f \\\\times \\\\mathrm{id}_Z : X \\\\times Z \\\\to Y \\\\times Z $ is a closed map.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ that is universally closed satisfies the property that for every base change, the induced continuous map on the underlying topological spaces is a closed map. In ot\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UpperSemicontinuous\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "upperSemicontinuous.*dim|dim.*upperSemicontinuous|proper.*[Ff]ib.*[Dd]im",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"23\", \"text\": \"smooth and proper and the fibres are geometrically-connected one-dimensional group varieties). In\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper morphism of algebraic spaces fibre dimension is upper semicontinuous",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"UpperSemicontinuous\", \"module\": \"Mathlib.Topology.Semicontinuity.Defs\", \"type\": \"(f : α → β)\", \"doc\": \"A function $ f : \\\\alpha \\\\to \\\\beta $ is upper semicontinuous if for every $ x \\\\in \\\\alpha $ and $ y \\\\in \\\\beta $ such that $ f(x) < y $, there exists a neighborhood of $ x $ where $ f(x') < y $ for all $\"}\n  {\"name\": \"UpperSemicontinuousAt\", \"module\": \"Mathlib.Topology.Semicontinuity.Defs\", \"type\": \"(f : α → β) (x : α)\", \"doc\": \"The function $ f $ is upper semicontinuous at $ x $ if for every $ y $ such that $ f(x) < y $, there exists a neighborhood of $ x $ where $ f(x') < y $ for all $ x' $ in that neighborhood.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"Continuous.upperSemicontinuous\", \"module\": \"Mathlib.Topology.Semicontinuity.Basic\", \"type\": \"{f : α → γ} (h : Continuous f) : UpperSemicontinuous f\", \"doc\": \"Every continuous function is upper semicontinuous.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.continuous\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) : Continuous f\", \"doc\": \"For any schemes $X$ and $Y$, every morphism $f : X \\to Y$ (as a morphism of locally ringed spaces) is continuous with respect to the underlying topological spaces of $X$ and $Y$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, module ranks or general semicontinuity; none states semicontinuity of fibre Krull dimension for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of algebraic spaces fibre dimension is upper semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus in the base of a proper morphism where fibres have dimension greater than an integer is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsClosedMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsClosedMap)\", \"doc\": \"The property that a scheme morphism is a closed map (in the topological sense) is Zariski local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is universally closed, then the underlying continuous map of $ f $ is universally closed in the topological sense.\"}\n  {\"name\": \"IsProperMap.universally_closed\", \"module\": \"Mathlib/Topology/Maps/Proper/Basic\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y} (Z : Type u_6)\\n  [inst_2 : TopologicalSpace Z], IsProperMap f → IsClosedMap (Prod.map f id)\", \"doc\": \"If $ f : X \\\\to Y $ is a proper map between topological spaces, then for any topological space $ Z $, the product map $ f \\\\times \\\\mathrm{id}_Z : X \\\\times Z \\\\to Y \\\\times Z $ is a closed map.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ that is universally closed satisfies the property that for every base change, the induced continuous map on the underlying topological spaces is a closed map. In ot\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UpperSemicontinuous\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "grep",
+   "query": "upperSemicontinuous.*dim|dim.*upperSemicontinuous|proper.*[Ff]ib.*[Dd]im",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"23\", \"text\": \"smooth and proper and the fibres are geometrically-connected one-dimensional group varieties). In\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper morphism of algebraic spaces fibre dimension is upper semicontinuous",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"UpperSemicontinuous\", \"module\": \"Mathlib.Topology.Semicontinuity.Defs\", \"type\": \"(f : α → β)\", \"doc\": \"A function $ f : \\\\alpha \\\\to \\\\beta $ is upper semicontinuous if for every $ x \\\\in \\\\alpha $ and $ y \\\\in \\\\beta $ such that $ f(x) < y $, there exists a neighborhood of $ x $ where $ f(x') < y $ for all $\"}\n  {\"name\": \"UpperSemicontinuousAt\", \"module\": \"Mathlib.Topology.Semicontinuity.Defs\", \"type\": \"(f : α → β) (x : α)\", \"doc\": \"The function $ f $ is upper semicontinuous at $ x $ if for every $ y $ such that $ f(x) < y $, there exists a neighborhood of $ x $ where $ f(x') < y $ for all $ x' $ in that neighborhood.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"Continuous.upperSemicontinuous\", \"module\": \"Mathlib.Topology.Semicontinuity.Basic\", \"type\": \"{f : α → γ} (h : Continuous f) : UpperSemicontinuous f\", \"doc\": \"Every continuous function is upper semicontinuous.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.continuous\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) : Continuous f\", \"doc\": \"For any schemes $X$ and $Y$, every morphism $f : X \\to Y$ (as a morphism of locally ringed spaces) is continuous with respect to the underlying topological spaces of $X$ and $Y$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphism properties, smooth relative dimension, finite or Jacobson fibres, or general semicontinuity; none supplies this algebraic-space fibre-dimension statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-fibre-dimension",
+  "date": "2026-10-23",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4Q, lemma-dimension-fibres-proper, the upper semicontinuity half of the proof of 0D4R.",
+   "via": [
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-space-fibre-dimension-upper-semicontinuous",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed Stacks 0D4Q: take the closed source locus of local fibre dimension greater than a, identify its image using 0D4M, and use universal closedness. Added the two genuinely smaller inputs 04NT and 0D4M as statement-only nodes. Explicitly handled empty fibres and a=-1. Checked all citations, definitions, duplicates, source hypotheses and Mathlib searches; no attachment or Mathlib match found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E6I proof, the dimension-one open locus, with arbitrary-base-change invariance. Supporting input: Stacks 0D4Q, lemma-dimension-fibres-proper, the upper semicontinuity half of the proof of 0D4R. Realizes the proper upper semicontinuity input through the source local-dimension locus and its closed image. The nearest blueprint ancestor is null in the inherited chain and is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-5e55c2edb",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-5e55c2edb (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full and checked them against Stacks spaces-more-morphisms 0D4Q (lemma-dimension-fibres-proper) and 0D4M (lemma-dimension-fibre), and spaces-morphisms 04NM (definition-dimension-fibre (3) and its chart diagram) and 04NT (lemma-openness-bounded-dimension-fibres). The item statement and stmt_deps are identical to the live ones; live is unsplit with no repair note and no parallel split. The proof mirrors 0D4Q. Step 1 cites lem-sfb-space-fibre-dimension-supremum (0D4M: n_f(t)=sup over x with f(x)=t of δ_f(x), −∞ exactly on empty fibres; finite type comes from properness). Step 2 cites lem-sfb-space-local-fibre-dimension-open (04NT: W_a open for lft f, a≥0, with the same chart formula for δ). Step 3 is elementary: for a set of integers, sup>a iff some element >a, so {n>a}=|f|(Z_a), closed by universal closedness. Step 4 is elementary: for a=−1 the locus is the image of |X|, needed because 04NT covers only n≥0. Both new nodes are true and self-contained statement-only nodes, strictly smaller than the item (one is openness upstairs with no properness, the other a chart comparison with no closedness), so D1/D2 hold. Edge cases tested: empty fibres, the identity, P¹⊔pt (no purity claimed), the generic point of A¹ (chart topological dimension, not local-ring dimension), open immersions, A¹_T. Searched for duplicates by tags and concepts in the snapshot and live DAG. Not duplicates: scheme versions 02FZ (lem-weil-pbc-local-fibre-dimension-open) and lem-trf-retrocompact-bounded-fibre-dimension; quasi-separated atlas-dimension nodes; 04NS base-change nodes; 0B7I; Q118 chart invariance (local-ring dimension). The only other 0D4M citer is the proper-flat parent, which would be circular. Batch-5 flags: def-trf-algebraic-space, def-a1-space-point-topology and lem-trf-space-fibre-products-etale-covers are general definitions and foundational fibre-product existence, not steps of the trace formula or Poincaré duality, and all three are already in the item's base stmt_deps; accepted as generic. No SGA source, same unit, no tool_uses. Cosmetic only: the item's 5 Mathlib searches are recorded twice. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSpaceFibreDimensionUpperSemicontinuous",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_fibreDimension_finite_isOpen",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fibreDimensionOverScheme",
+   "AlgebraicGeometry.AlgebraicSpace.proper_fibreDimension_finite_isOpen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSpaceFibreDimensionUpperSemicontinuous.lean",
+  "statement": "theorem proper_fibreDimension_finite_isOpen {S : Scheme.{u}} (T : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (hf : MapIsProper f) : (∀ t : T.left, fibreDimensionOverScheme f t = ⊥ ∨ ∃ n : ℕ, fibreDimensionOverScheme f t = (n : WithBot ℕ∞)) ∧ (∀ a : ℤ, -1 ≤ a → IsOpen {t : T.left | fibreDimensionOverScheme f t ≤ (if a < 0 then ⊥ else (a.toNat : WithBot ℕ∞))} ∧ IsClosed {t : T.left | (if a < 0 then ⊥ else (a.toNat : WithBot ℕ∞)) < fibreDimensionOverScheme f t})",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the published properness, scheme-as-space, and chartwise dimension definitions. fibreDimensionOverScheme is the existing etaleDimension of the actual residue-field presheaf pullback. Affine refinement identifies this with the stated supremum of affine etale chart dimensions. Integer threshold -1 is dimension bottom; nonnegative integer thresholds use their natural-number coercions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74adac697",
+  "group": "NL",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0D4Q (scheme target): canonical residue-field pullback X_t, n_f via published etaleDimension (equals the affine-chart supremum by local-dim/affine refinement; empty = ⊥), MapIsProper = separated ∧ finite type ∧ universally closed exactly, values ⊥ or ℕ, all a ≥ −1 with a = −1 as ⊥, open and closed forms on T.left. The extra base S is bookkeeping only. lean.statement verbatim; item statement unchanged; stmt_deps only gained the owners of MapIsProper/schemeSpace/etaleDimension. Helper def is real with docstrings; single sorry; no duplicate notion found; report sections present. No changes, no compile."
+ }
+}

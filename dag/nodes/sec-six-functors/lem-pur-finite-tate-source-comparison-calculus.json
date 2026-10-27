@@ -1,0 +1,233 @@
+{
+ "id": "lem-pur-finite-tate-source-comparison-calculus",
+ "kind": "statement",
+ "title": "Finite coefficient and Cartesian comparison calculus for a Tate source",
+ "statement": "Fix the finite-field and coefficient conventions of [def-pur-conventions]: $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and $G_T=Lg_{T,\\gamma}^*$, with $g_{T,\\gamma}=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius $\\gamma$ [def-pur-scheme-geometric-frobenius]. Work on the small pro-etale derived categories with $A=A_{E,n}$ and the operations of [def-weil-derived-pullback-tensor-hom]. Let $f_0:X_0\\to Y_0$ be separated and finite type between such schemes, with geometric base change $f:X\\to Y$ smooth of pure relative dimension $d\\ge0$. Write $F_f=Lf^*$, $T_{r,X}=A_X(r)$, and $P_fK=(F_fK\\otimes^L T_{d,X})[2d]$. For $K\\in D^b_{ctf}(Y,A)$ write $c_f:G_XF_f\\xrightarrow{\\sim}F_fG_Y$ for the canonical commuting-pullback comparison and\n$$b_{f,K}=(c_{f,K}\\otimes1)[2d]\\,\\mu_{g_X;F_fK,T_{d,X}}[2d]:G_XP_fK\\xrightarrow{\\sim}(F_fG_YK\\otimes^LG_XT_{d,X})[2d],$$\nwhere $\\mu$ is the canonical pullback-tensor comparison [lem-pur-derived-pullback-tensor-iso], as in [def-pur-tate-datum]. Let $\\varphi_K:G_YK\\xrightarrow{\\sim}K$ be a strict datum [def-pur-tate-datum] and put $\\psi_{f,K}=(F_f\\varphi_K\\otimes\\tau_{d,X})[2d]b_{f,K}$, with the canonical $\\tau$ of [def-weil-frobenius-coefficient-twists]. Let $(Q_X,Q_Y)$ be either derived reduction $A_{E,n}\\to A_{E,m}$, $1\\le m\\le n$, or $(Lu^*,Lv^*)$ for the base change to $k$ of a Cartesian square of separated finite-type $k_0$-schemes with vertical arrows $f_0,f'_0$ and horizontal arrows $u_0,v_0$ [def-weil-pbc-cartesian-square]. Primes denote the resulting coefficient/scheme data. Set $K'=Q_YK$, $C_T:Q_TG_T\\cong G'_TQ_T$, $\\varphi_{K'}=Q_Y(\\varphi_K)C_{Y,K}^{-1}$, and let $a_P:Q_XP_fK\\cong P'_{f'}K'$ be the canonical pullback, tensor, twist and shift comparison. Then, as maps from $Q_XG_XP_fK$ to $P'_{f'}K'$,\n$$a_PQ_X(\\psi_{f,K})=\\bigl(F'_{f'}(Q_Y(\\varphi_K)C_{Y,K}^{-1})\\otimes\\tau'_{d,X'}\\bigr)[2d]b'_{f',K'}G'_X(a_P)C_{X,P_fK}.$$\nThe reduction case uses the finite-Tor comparisons of [lem-fix-operation-reduction]. The square case uses only ordinary derived pullbacks; it makes no assertion of exceptional base change or of a Cartesian scheme-Frobenius square.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Displayed source-of-purity composite; agent-extracted argument from lem-pur-weil-tate-datum-transport, old Steps 4, 5; constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-tate-datum",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-pbc-cartesian-square",
+  "lem-fix-operation-reduction",
+  "def-pur-finite-tate-source-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=F_f$, $F'=F'_{f'}$, $T=T_{d,X}$ and $T'=T'_{d,X'}$, and compose maps right to left. Write $A_M:Q_XFM\\xrightarrow{\\sim}F'Q_YM$, $t:Q_XT\\xrightarrow{\\sim}T'$, and $\\nu_{M,N}:Q_X(M\\otimes^LN)\\xrightarrow{\\sim}Q_XM\\otimes^LQ_XN$ for the canonical comparisons. For scheme pullback, $A$ is the natural isomorphism obtained by composing the two pullback-composition isomorphisms of [lem-weil-pbc-proetale-derived-pullback-composition] around the given commuting square, and $\\nu$ is the bifunctorial comparison of [lem-pur-derived-pullback-tensor-iso]. For reduction they are the pullback and tensor comparisons of [lem-fix-operation-reduction]. Naturality at $\\varphi_K:G_YK\\to K$ gives\n$$A_KQ_X(F\\varphi_K)=F'(Q_Y\\varphi_K)A_{G_YK}.$$\nAll finite-reduction applications are on the finite-Tor domains already stipulated in the statement; the twist is a degree-zero invertible line. No direct-image comparison is used.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Source-of-purity displayed composite; finite comparison calculation realizing constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities (agent elaboration)."
+   }
+  },
+  {
+   "text": "Apply the current statement of [lem-pur-canonical-tate-arrow-naturality] with $r=d\\ge0$. In the square case take $T_0=X_0$, $T'_0=X'_0$, $w_0=u_0$, $\\Lambda=A_{E,n}$, so $Q_X=Lu^*$ and $t=t_{u,d}$. In the reduction case take $T_0=X_0$ and $R=Q_X=-\\otimes^L_{A_{E,n}}A_{E,m}$. The cited node writes its source exponent as $m$ and target exponent as $n$; substitute $(m_{\\rm cited},n_{\\rm cited})=(n,m)$, permitted by $1\\le m\\le n$. Thus $t=t_{R,d}$ and $C_R=C_X$ are precisely our canonical comparisons. The respective displayed scheme and coefficient equations both give\n$$tQ_X(\\tau_{d,X})=\\tau'_{d,X'}G'_X(t)C_{X,T}.$$\nThis uses the actual roots-of-unity arrow, including its coefficient-unit case $d=0$. Put $\\varphi'=Q_Y(\\varphi_K)C_{Y,K}^{-1}$. Functoriality and cancellation give $F'(\\varphi')F'(C_{Y,K})=F'(Q_Y\\varphi_K)$.",
+   "uses": [
+    "lem-pur-canonical-tate-arrow-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Source-of-purity displayed composite; finite comparison calculation realizing constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities (agent elaboration)."
+   }
+  },
+  {
+   "text": "Let $H=(FG_YK\\otimes^LG_XT)[2d]$, $e=(F\\varphi_K\\otimes\\tau_{d,X})[2d]:H\\to P_fK$, and $e'=(F'\\varphi'\\otimes\\tau'_{d,X'})[2d]$. Use $a_H$ as defined in [lem-pur-finite-tate-source-structural-coherence]. Suppress the canonical shift identifications temporarily. The definitions of $a_P$ and $a_H$ are\n$$a_P=(A_K\\otimes t)\\nu_{FK,T},$$\n$$a_H=(F'(C_{Y,K})A_{G_YK}\\otimes G'_X(t)C_{X,T})\\nu_{FG_YK,G_XT}.$$\nApply bifunctoriality of $\\nu$ from [lem-pur-derived-pullback-tensor-iso] in the square case, or the tensor comparison of [lem-fix-operation-reduction] in the reduction case. Then the two factor equations of Steps 1 and 2 give\n$$\\begin{aligned}\na_PQ_X(e)\n&=\\bigl(A_KQ_X(F\\varphi_K)\\otimes tQ_X(\\tau_{d,X})\\bigr)\\nu_{FG_YK,G_XT}\\\\\n&=\\bigl(F'(Q_Y\\varphi_K)A_{G_YK}\\otimes\\tau'_{d,X'}G'_X(t)C_{X,T}\\bigr)\\nu_{FG_YK,G_XT}\n=e'a_H.\n\\end{aligned}$$\nHere each displayed expression is shifted by $[2d]$. Restoring the canonical termwise shift comparisons gives exactly the same equality, since the structural lemma states their compatibility. No tensor factors are interchanged.",
+   "uses": [
+    "lem-pur-finite-tate-source-structural-coherence",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-fix-operation-reduction",
+    "lem-pur-canonical-tate-arrow-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Source-of-purity displayed composite; finite comparison calculation realizing constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities (agent elaboration)."
+   }
+  },
+  {
+   "text": "By [lem-pur-finite-tate-source-structural-coherence],\n$$a_HQ_X(b_{f,K})=b'_{f',K'}G'_X(a_P)C_{X,P_fK}.$$\nSince $\\psi_{f,K}=e b_{f,K}$, functoriality, Step 3 and this equation yield\n$$a_PQ_X(\\psi_{f,K})=a_PQ_X(e)Q_X(b_{f,K})=e'a_HQ_X(b_{f,K})=e'b'_{f',K'}G'_X(a_P)C_{X,P_fK}.$$\nSubstitute $e'=(F'_{f'}(Q_Y(\\varphi_K)C_{Y,K}^{-1})\\otimes\\tau'_{d,X'})[2d]$. This is the claimed equality with precisely its stated source and target. The square case involved only ordinary pullbacks and their composition comparisons.",
+   "uses": [
+    "lem-pur-finite-tate-source-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Source-of-purity displayed composite; finite comparison calculation realizing constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities (agent elaboration)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-operation-reduction",
+  "lem-pur-canonical-tate-arrow-naturality",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-finite-tate-source-structural-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Source-of-purity displayed composite; finite comparison calculation realizing constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities (agent elaboration)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction and Cartesian pullback comparisons intertwine a finite coefficient Tate twisted pullback Weil datum",
+   "results": "CategoryTheory.GlueData.t'_jii; CategoryTheory.GlueData.t'; WittVector.coeff; CategoryTheory.GlueData.t'_iji; CategoryTheory.Meq.pullback_refine; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app_assoc; PreTilt.coeff; Derivation.mapCoeffs_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality square for tensor of pulled back Frobenius isomorphism with Tate line arrow under change of schemes or finite coefficient ring",
+   "results": "AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.pullbackSpecIso_hom_base; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalFunctor, CategoryTheory.NatTrans",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'",
+   "date": "2026-10-22",
+   "verdict": "no match: loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDatum|TateTwist|Frobenius.*(reduction|baseChange)",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDatum|TateTwist|Frobenius.*(reduction|baseChange)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue-field tensors, generic monoidal naturality or unrelated Frobenius maps do not state the finite pro-etale Tate-source comparison; generic tensor naturality alone does not provide the geometric structural and Tate-arrow equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor pullback comparison intertwines Frobenius datum on a Tate twist under change of coefficients",
+   "results": "8 hits: VectorField.mpullback, CategoryTheory.GlueData.t'_jii, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.frobeniusMorphism, TensorProduct.map, TensorPower.cast, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, LinearMap.rTensor_baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue-field tensors, generic monoidal naturality or unrelated Frobenius maps do not state the finite pro-etale Tate-source comparison; generic tensor naturality alone does not provide the geometric structural and Tate-arrow equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue-field tensors, generic monoidal naturality or unrelated Frobenius maps do not state the finite pro-etale Tate-source comparison; generic tensor naturality alone does not provide the geometric structural and Tate-arrow equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient Tate twisted derived pullback Weil datum is compatible with coefficient reduction and Cartesian pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, WittVector.fontaineThetaModPPow_teichmuller, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue-field tensors, generic monoidal naturality or unrelated Frobenius maps do not state the finite pro-etale Tate-source comparison; generic tensor naturality alone does not provide the geometric structural and Tate-arrow equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of monoidal functor tensor comparison applied to tensor product of two morphisms and shifted complexes",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.map_tensor, CategoryTheory.Monoidal.InducingFunctorData.tensorHom_eq, CategoryTheory.NatTrans.tensor_naturality_assoc, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.NatTrans.tensor_naturality, CategoryTheory.NatTrans.IsMonoidal.tensor, CategoryTheory.Functor.CoreMonoidal.μIso_hom_natural_left, CategoryTheory.Localization.Monoidal.μ_natural_right",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme residue-field tensors, generic monoidal naturality or unrelated Frobenius maps do not state the finite pro-etale Tate-source comparison; generic tensor naturality alone does not provide the geometric structural and Tate-arrow equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-tate-datum-transport",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly: source datum on pullback, Tate twist and even shift; extracted old Tate-source transport proof Steps 4, 5.",
+   "via": [
+    "lem-pur-weil-tate-datum-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-tate-source-comparison-calculus",
+  "worker": "stage1",
+  "summary": "Proved the unchanged comparison identity by expanding the two tensor factors, applying naturality of the pullback comparison and the existing canonical Tate-arrow equation, and substituting existing structural coherence. No new nodes; no exceptional base change or scheme-Frobenius Cartesian claim. Rechecked upstream attachment candidates and ran logged Mathlib searches. Repair of return at b39d29a029e: reread all five current proof-dependency statements; instantiate the revised Tate-arrow statement explicitly in both cases, including the reversed dummy coefficient indices; refresh the scheme and coefficient citation excerpts. The item statement and dependency route remain unchanged.",
+  "blueprint": "prop-pur-weil-equivariance-compatibilities constituent-compatibility assembly, via lem-pur-weil-tate-datum-transport old Steps 4 and 5; the displayed source datum in def-pur-tate-datum is expanded without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Canonical ordinary pro-etale pullback comparison and its naturality around the commuting square; generic tool, not a replacement purity route."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Bifunctorial tensor comparison for ordinary derived pullbacks; generic tool used in the displayed Tate source composite."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Canonical finite-coefficient pullback and tensor comparisons on finite-Tor inputs; generic coefficient transport required by the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O1-70f032230",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-70f032230 (reviewer sub-agent of L); spot-checked: PASS with no fixes. This re-delivers b39d29a0, which had a reviewer PASS but was refused at landing because the statement of lem-pur-canonical-tate-arrow-naturality changed. I diffed the item against the b39d snapshot: only the proof and split_report changed, while the statement, stmt_deps and source are identical. There are no new nodes, no repair note and no SGA citation. The source composite in main-20261015 def-pur-tate-datum.md, lines 35-60, equals the item's psi = (F phi ⊗ tau)[2d] b. I reread all five cited statements in their current form. Step 1: A_K Q_X(F phi) = F'(Q_Y phi) A follows from the functor isomorphisms of the composition lemma around the square, or from lem-fix-operation-reduction. All reduction inputs are finite-Tor, because G_Y K stays ctf and A(d) is an invertible line. Step 2: the index substitution (m_c, n_c) = (n, m) matches the revised reduction convention, which is −⊗A_{E,m} A_{E,n} for m ≥ n. In the square case w = u_0 and C_w = C_X. Both cases give t Q(tau) = tau' G'(t) C_X. Step 3: I recomputed a_P Q_X(e) = e' a_H; the factor types match and no factors are swapped, so there is no sign. Step 4: the structural-coherence equation gives the stated identity from Q_X G_X P_f K to P' K'. Small cases checked: d=0, m=n, identity square, K=0. No duplicates found. Batch-5: lem-pod-derived-exact-square-composition is pure derived-functor homological algebra, and lem-trf-derived-pullback-coherence is general pullback-compositor associativity. Neither is part of the trace formula or Poincare duality, and both flagged citations are already in the parent lem-pur-weil-tate-datum-transport, so I accept them. The three generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityFiniteTateSourceComparisonCalculus",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTateSourceComparisonReduction",
+  "file": "lean/Sheaf/Paper/PurityFiniteTateSourceComparisonCalculus.lean",
+  "statement": "theorem finiteTateSourceComparisonReduction (P : PurityFiniteSetting.{u}) {X₀ Y₀ : Over (Spec (CommRingCat.of P.field.k₀))} (f₀ : X₀ ⟶ Y₀) (d : ℕ) [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] [IsSeparated f₀.left] [SmoothOfRelativeDimension d (P.frobeniusMap f₀)] (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) (K : Scheme.proEtaleDerivedCategory (P.frobeniusFiber Y₀).left P.Ring) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos (P.frobeniusFiber Y₀).left K) (φK : (P.finiteReductionPullback (P.frobeniusGaloisMap Y₀)).obj K ≅ K) : let QX := P.finiteReduction m hm hmn (P.frobeniusFiber X₀).left let QY := P.finiteReduction m hm hmn (P.frobeniusFiber Y₀).left let GX' := (P.finiteReductionSetting m hm).finiteReductionPullback (P.frobeniusGaloisMap X₀) let C_Y := P.finiteReductionPullbackComparison m hm hmn (P.frobeniusGaloisMap Y₀) K let φK' := C_Y.symm ≪≫ QY.mapIso φK let ψ := finiteTateSourceMap P f₀ d K φK let ψ' := finiteTateSourceMap (P.finiteReductionSetting m hm) f₀ d (QY.obj K) φK' let a_P := P.finiteReductionSourceComparison m hm hmn (P.frobeniusMap f₀) d K let C_X := P.finiteReductionPullbackComparison m hm hmn (P.frobeniusGaloisMap X₀) ((P.compositionShiftedPullback (P.frobeniusMap f₀) d).obj K) QX.map ψ.hom ≫ a_P.hom = C_X.hom ≫ GX'.map a_P.hom ≫ ψ'.hom",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-26",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteTateSourceComparisonReduction",
+   "WeilConjectures.PurityFiniteSetting.finiteTateSourceComparisonCartesian"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b0de0d0f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Mathematics correct: finiteTateSourceMap is the verbatim twisted-instance body of landed φpur (iX'=⟨g_X≫a_X⟩, fixing c9a7 return); reduction clause matches node (1≤m≤n, finiteTor K, canonical C_X/C_Y, φK'=Q_Y(φ)C_Y⁻¹, a_P=finiteReductionSourceComparison, equation a_P Q_X(ψ)=e'b'G'(a_P)C_X); Cartesian clause uses ChosenCartesianSquare + finiteReductionBaseChangeSource (ordinary pullback only), generalised to arbitrary gX/gX' pullback squares — true since twisted structures keep u over k and all base-change maps are chart-independent; no ctf hyp there (more general). Statements verbatim; stmt_deps add only the new def node; used owners are uncited def nodes (advisory). Edge cases d=0, m=n, identity square, K=0 ok. Advisory: NK structural-coherence (not landed) uses finiteTensorFixedLine for T_d. FIX: fixes/FiniteTateSourceMap.lean adds Source/blueprint docstring lines to the three new declarations (code unchanged); nt_compile 4.5 s clean."
+ }
+}

@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-stack-smooth-permanence",
+ "kind": "statement",
+ "title": "Smooth stack morphisms are preserved by composition and base change",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be algebraic stacks over $k$ [def-sfb-algebraic-moduli-stack]. A morphism of these stacks is smooth if it is smooth on smooth scheme charts, using [def-sbc-smooth-morphisms]; $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids]. If $f:\\mathcal X\\to\\mathcal Y$ and $g:\\mathcal Y\\to\\mathcal Z$ are smooth, then $g\\circ f$ is smooth. If $f:\\mathcal X\\to\\mathcal Y$ is smooth and $h:\\mathcal Z\\to\\mathcal Y$ is any morphism, then the projection $\\mathcal X\\times_{\\mathcal Y}\\mathcal Z\\to\\mathcal Z$ is smooth. These assertions include scheme and algebraic-space sources and targets, with representable smooth morphisms interpreted on scheme base changes [def-trf-algebraic-space]. No quasi-compactness, separation, finite-type or flatness condition is imposed on $h$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 075V (lemma-composition-smooth) and 075W (lemma-base-change-smooth), following Definition 075U (definition-smooth)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-smooth-moduli-map",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $W\\to\\mathcal Z$, then scheme atlases $V\\to\\mathcal Y\\times_{\\mathcal Z}W$ and $U\\to\\mathcal X\\times_{\\mathcal Y}V$. These fibre products are algebraic by [lem-sfb-algebraic-stack-fibre-products], so the atlases exist by [def-sfb-algebraic-moduli-stack]. The representable calculus [lem-sfb-fibred-groupoid-representable-smooth-calculus] shows that $V\\to\\mathcal Y$ and $U\\to\\mathcal X$ are smooth and surjective: each is an atlas followed by a base change of the preceding atlas. Condition (A) of [lem-sfb-stack-smooth-presentation-criterion], applied first to $g$ and then to $f$, gives smooth scheme maps $V\\to W$ and $U\\to V$; the induced relative chart maps are exactly the atlases chosen above. These maps of schemes are smooth in the algebraic-space sense of the criterion; by [lem-sfb-space-etale-presentation-property-criterion], applied with the property smooth, which is etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties], they are smooth as scheme morphisms. Their composite $U\\to W$ is smooth by [lem-trf-smooth-composition], hence smooth in the criterion's sense by the same comparison. The diagram $U\\to W$ over $g\\circ f$ has smooth vertical maps and surjective source map. Condition (B) of [lem-sfb-stack-smooth-presentation-criterion] therefore proves the composition assertion.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-smooth-presentation-criterion",
+    "lem-trf-smooth-composition",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 075V, 075W; remark-composition and remark-base-change following Tag 06FM."
+   }
+  },
+  {
+   "text": "For arbitrary $h:\\mathcal Z\\to\\mathcal Y$, choose atlases $V\\to\\mathcal Y$, $U\\to\\mathcal X\\times_{\\mathcal Y}V$, and $V'\\to\\mathcal Z\\times_{\\mathcal Y}V$. Existence uses [lem-sfb-algebraic-stack-fibre-products, def-sfb-algebraic-moduli-stack]. The presentation criterion [lem-sfb-stack-smooth-presentation-criterion](A) makes $U\\to V$ a smooth scheme map. Put $E=U\\times_VV'$, a scheme by [def-pc-fibre-product]. The map $U\\to\\mathcal X$ is smooth surjective as in step 1. Since $U\\to V$ is a map of algebraic spaces, it is representable and the representable comparison of [lem-sfb-stack-smooth-presentation-criterion] makes it a smooth representable map; its projection $E\\to V'$ is therefore smooth by the arbitrary representable base-change clause of [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Set $P=\\mathcal X\\times_{\\mathcal Y}\\mathcal Z$. Associating the tuples and their specified isomorphisms in the $2$-fibre products [def-sfb-stable-pointed-moduli-groupoids] identifies $E$ with $(\\mathcal X\\times_{\\mathcal Y}V')\\times_{\\mathcal X\\times_{\\mathcal Y}V}U$. Thus $E\\to\\mathcal X\\times_{\\mathcal Y}V'$ is a base change of the chosen atlas $U\\to\\mathcal X\\times_{\\mathcal Y}V$. Also $\\mathcal X\\times_{\\mathcal Y}V'\\simeq P\\times_{\\mathcal Z}V'$. The map $V'\\to\\mathcal Z$ is smooth surjective as the atlas followed by the base change of $V\\to\\mathcal Y$; hence so is $E\\to P$ by the same representable calculus. The diagram $E\\to V'$ over $P\\to\\mathcal Z$ has smooth vertical maps and a surjective source map. Criterion (B) proves smoothness of $P\\to\\mathcal Z$. Only atlas maps were assumed smooth; no property of $h$ was used.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-smooth-presentation-criterion",
+    "def-pc-fibre-product",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 075V, 075W; remark-composition and remark-base-change following Tag 06FM."
+   }
+  },
+  {
+   "text": "The algebraic-space comparison in [lem-sfb-stack-smooth-presentation-criterion] identifies the smooth chart condition with ordinary smoothness when source and target are spaces; its representable comparison identifies it with the scheme base-change test. Scheme smoothness agrees with this chart condition by [lem-sfb-space-etale-presentation-property-criterion] applied to the smooth case of [lem-sfb-scheme-etale-source-target-properties]. Therefore the preceding arguments also give exactly the scheme, algebraic-space and representable interpretations in the statement.",
+   "uses": [
+    "lem-sfb-stack-smooth-presentation-criterion",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 075V, 075W; remark-composition and remark-base-change following Tag 06FM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-stack-smooth-presentation-criterion",
+  "lem-trf-smooth-composition",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-scheme-etale-source-target-properties"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 075V, 075W; remark-composition and remark-base-change following Tag 06FM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphisms of algebraic stacks are stable under composition and arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite and pullback of representable smooth maps between algebraic stacks remain smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [hf : AlgebraicGeometry.IsSmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.IsSmoothOfRelativeDimension m g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStr\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"comp\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|isSmooth_isStableUnderBaseChange|IsMultiplicative.*Smooth",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"126\", \"text\": \"alias isSmooth_isStableUnderBaseChange := smooth_isStableUnderBaseChange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"236\", \"text\": \"instance : MorphismProperty.IsMultiplicative (@SmoothOfRelativeDimension 0) where\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth algebraic stack morphisms compose and are stable under base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsSmooth f] [IsSmooth g] : IsSmooth (f ≫ g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"RingHom.Smooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange Smooth\", \"doc\": \"Smoothness of a ring homomorphism is preserved under base change. Specifically, if $ R \\\\to S $ is a smooth homomorphism of commutative rings with compatible algebra structures and scalar tower conditi\"}\n  {\"name\": \"RingHom.isStandardSmooth_stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \": StableUnderComposition @IsStandardSmooth\", \"doc\": \"The composition of two standard smooth ring homomorphisms is itself a standard smooth ring homomorphism.\"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \": IsStableUnderBaseChange @IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange @FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-algebra-pushforward",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Smooth stack morphisms are preserved by composition and base change",
+   "via": [
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-smooth-permanence",
+  "worker": "stage1",
+  "summary": "Proved composition by compatible successive atlases and scheme smooth composition, and arbitrary base change by the explicit scheme E=U times_V Vprime. Reused representable calculus and algebraicity of fibre products. Added only the missing smooth-presentation criterion for general algebraic stacks, since the existing general-property comparison restricts to Deligne--Mumford stacks. No statement change.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), via the inherited alteration/moduli prerequisites in blueprint.from.place. No resolvable imported ancestor is returned by blueprint_refs.py ancestor; retained null and the inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic chart or scheme calculus used as a black box; it supplies no alternative to the inherited alteration/moduli route."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic chart or scheme calculus used as a black box; it supplies no alternative to the inherited alteration/moduli route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-composition",
+  "def-pc-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-6fdd6232a",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-6fdd6232a (reviewer sub-agent of L); spot-checked: Read stacks-morphisms.tex 06FM (lemma-local-source-target, with its whole proof), remark-composition, remark-base-change, and 075U/075V/075W with the section-smooth paragraph. Statement and stmt_deps are byte-identical to live, and the item is still unsplit live with no repair note, so the delivery is not superseded. New node lem-sfb-stack-smooth-presentation-criterion: it is 06FM for P = smooth, checked clause by clause: (A)=(1), (B)=(2), the space clause, and the representable clause (smoothness is stable under base change and fppf local by the section-smooth paragraph). The scheme-chart variant is a true equivalence via atlases. The DAG uses étale stacks while 06FM assumes fppf stacks; 076V (lem-sfb-etale-smooth-atlas-fppf-descent) closes that. Edge cases tested: empty source, identity, BG→Spec k. It is not a duplicate: lem-sfb-stack-smooth-chart-comparison is the same criterion but only for DM stacks, and smooth-atlas-base-change, the finite-type and lqf calculi and representable-property-tests are about other things. It is statement-only and self-contained, and its searches cover all three kinds. It is not a restated clause of the item. Steps 1 and 2 follow remark-composition and remark-base-change. I checked the atlas existence, the representable composition/base-change uses, both identifications E ≅ (X×_Y V')×_{X×_Y V}U and X×_Y V' ≃ P×_Z V', and that h is not used. The fact that a scheme is an algebraic stack is elementary. FIX (C3, 2 faults): step 1 applied lem-trf-smooth-composition, a scheme lemma, to maps that are only space-smooth, and the comparison it needs was cited only in step 3. Step 1 now cites lem-sfb-space-etale-presentation-property-criterion and lem-sfb-scheme-etale-source-target-properties. Step 2 now derives representable smoothness of U→V from the criterion's space and representable clauses, and says that U→X is smooth surjective. proof_deps is unchanged and equals the union of uses. Accepted tool_uses: lem-trf-smooth-composition and def-pc-fibre-product, both Mathlib leaves. Batch-5: the algebraic-stack-fibre-products, representable calculus and space-presentation-criterion citations, and the new node's stmt_deps (def-sfb-algebraic-moduli-stack, def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space), reach sec-trace-formula only through general definitions. lem-trf-smooth-composition (and scheme-etale-source-target-properties through it) is generic scheme smooth composition, a Mathlib leaf. None of these is part of the trace formula or Poincaré duality, so no assumption leaf is needed. No SGA. The null blueprint.from.node is inherited from the base.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmoothPermanence",
+  "declaration": "CategoryTheory.stack_smooth_permanence",
+  "declarations": [
+   "CategoryTheory.stack_smooth_permanence",
+   "CategoryTheory.smoothModuliMap_iff_space",
+   "CategoryTheory.smoothModuliMap_iff_scheme",
+   "CategoryTheory.smoothModuliMap_iff_representable"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmoothPermanence.lean",
+  "statement": "theorem stack_smooth_permanence (k : Type u) [Field k] (X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (Y : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (Z : BasedCategory.{v₃, w₃} (Over (Spec (.of k)))) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (hZ : IsAlgebraicModuliStack Z) (f : BasedFunctor X Y) (hf : IsSmoothModuliMap f) : (∀ g : BasedFunctor Y Z, IsSmoothModuliMap g → IsSmoothModuliMap (f.comp g)) ∧ (∀ h : BasedFunctor Z Y, IsSmoothModuliMap (moduliTwoFiberSnd f h))",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Composition and arbitrary stack base change, with explicit scheme, algebraic-space and representable interpretation clauses. No representability or other property is assumed on the base-changing morphism. The missing general smooth-morphism predicate is supplied by def-sfb-smooth-moduli-map.",
+  "fixed_by": "NT-stage2-cc-2a6d4c42b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a6d4c42b",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Item matches 075V/075W: k field, 3 algebraic stacks with independent universes, composition via f.comp g, base change via the actual moduliTwoFiberSnd with nothing assumed on h, plus scheme/space/representable iff clauses. New node def-sfb-smooth-moduli-map (IsSmoothModuliMap) = 06FM(2) with P=smooth (smooth surjective source atlas, representable smooth target chart not required surjective, Smooth q, 2-iso); real data, valid fields, no duplicate in side-live or the DAG. Added stmt_deps are the new node plus landed nodes (space-morphism-properties, open-moduli-substack), allowed. Edge cases OK (empty, identity, BG→Spec k, any characteristic, universes). Fault H2: smoothModuliMap_iff_representable used ModuliSpaceTest, owned by uncited def-sfb-dm-stack-morphism-properties; fixed in fixes/StackSmoothPermanence.lean by the definitionally equal ∀ T t, ∃ Z p, HasSpaceBaseChange f T t Z p ∧ SpaceMapIsSmooth Z T p (owners cited), docstring updated; main statement and records unchanged. nt_compile --json of SmoothModuliMap + fixed file: rc=0, clean (5.9 s / 3.3 s)."
+ }
+}

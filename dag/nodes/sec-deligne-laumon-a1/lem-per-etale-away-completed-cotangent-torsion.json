@@ -13,7 +13,8 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-affine-spectrum",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-completed-polynomial-conormal"
  ],
  "proof": [
   {
@@ -169,5 +170,39 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e9e18ae1b (reviewer sub-agent of L); spot-checked: I read the whole item and the new node against Stacks restricted.tex: 0ALQ(1) and its converse paragraph, 0AJU(3), 0AJP/0AJQ, 0AJR/0GAE and 0GAF. The item statement and stmt_deps are byte-identical to the live unsplit node, so nothing was weakened. Step 1: S is Noetherian (00FN leaf). The completion-Noetherian node applied to (S,IS) makes B Noetherian, and 05GG applied to the f.g. ideal IS gives IB-adic completeness and B/IB ≅ S/IS, which is finite type over A/I. Step 2: the presentation α comes from 00FP, and the new node gives I^c on ker and coker of d_α. The completed presentation β comes from the existence clause of lem-per-completed-cotangent-transitivity with the identity map B→B; that clause is in its statement and its hypotheses are exactly Step 1. Step 3: the 0GAF comparison node holds for any β and gives B-linear isomorphisms M̂_1 ≅ ker δ and M̂_0 ≅ coker δ. I^c kills each M_i/I^nM_i, so it kills their limit, and the A-action goes through A→B, so the annihilation transfers. Step 4 is elementary. proof_deps equals the union of the uses. The new node lem-per-finite-type-jacobian-torsion-etale-away is true by the 0ALQ converse argument: for each a in I, S_a is étale over A_a, so NL vanishes after inverting a. H^{-1} and H^0 are finite, so a power of a kills them, and finitely many generators of I give one common power. It holds for I=0, I=A, S=0 and Z→Z[x]/(px) with I=(p) (c=1). It is about the uncompleted complex, so it is strictly smaller than the item and does not restate it. No duplicate: I searched for 0ALQ, 'etale over … V(I)', I^c with étale, and conormal/naive-cotangent wording, and read 7 related nodes; the same argument appears only inside the proof of lem-per-completed-etale-jacobian-torsion (finite E over a complete base), which cannot be cited here. B1–B9 hold, and three kinds of Mathlib search are recorded. Route: the only off-unit non-leaf statement is lem-weil-pbc-adic-completion-noetherian (unit sk-thm-p1). sk-thm-p1 is reached through the unit's transitive uses, and the node is Lean-closed. No tool_uses, no cycle, no SGA. The citer lem-per-completed-retraction-conormal-torsion is unaffected. Cosmetic only: the Step 1 source field names restricted.tex for 05GG, which is in algebra.tex."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleAwayCompletedCotangentTorsion",
+  "declaration": "AlgebraicGeometry.etaleAway_completedCotangent_torsion",
+  "declarations": [
+   "AlgebraicGeometry.etaleAwayAlgebraCompletion",
+   "AlgebraicGeometry.rigPresentationDifferential",
+   "AlgebraicGeometry.etaleAway_completedCotangent_torsion"
+  ],
+  "file": "lean/Sheaf/RingTheory/EtaleAwayCompletedCotangentTorsion.lean",
+  "statement": "theorem etaleAway_completedCotangent_torsion (A S : Type u) [CommRing A] [CommRing S] [Algebra A S] [IsNoetherianRing A] [Algebra.FiniteType A S] (I : Ideal A) (het : Etale (Spec.map (CommRingCat.ofHom (algebraMap A S)) ∣_ ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set A)).isOpen_compl⟩)) : IsNoetherianRing (etaleAwayAlgebraCompletion A S I) ∧ IsAdicComplete (I.map (algebraMap A (etaleAwayAlgebraCompletion A S I))) (etaleAwayAlgebraCompletion A S I) ∧ RingHom.FiniteType (Ideal.quotientMap (I.map (algebraMap A (etaleAwayAlgebraCompletion A S I))) (algebraMap A (etaleAwayAlgebraCompletion A S I)) Ideal.le_comap_map) ∧ (∃ (r : ℕ) (β : rigPolynomialCompletion A I r →ₐ[A] etaleAwayAlgebraCompletion A S I), Function.Surjective β) ∧ (∀ (r : ℕ) (β : rigPolynomialCompletion A I r →ₐ[A] etaleAwayAlgebraCompletion A S I), Function.Surjective β → ∃ c : ℕ, (∀ (a : A), a ∈ I ^ c → ∀ x : (RingHom.ker β.toRingHom).Cotangent, rigPresentationDifferential A I r β x = 0 → a • x = 0) ∧ (∀ (a : A), a ∈ I ^ c → ∀ y : Fin r → etaleAwayAlgebraCompletion A S I, a • y ∈ LinearMap.range (rigPresentationDifferential A I r β)))",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d9d4a704",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, the landed Q147 CompletedPolynomialConormal on base de84d15, the item module, the report and Stacks 0ALQ(1)/0AJU(3). The prior RETURN (dep not on base) is fixed: Q147 landed 10-25 00:13 and the delivery now only cites it. Clauses match: Noetherian A, FiniteType S, Etale on the restriction over the complement of zeroLocus I (same encoding as the citer), B = AdicCompletion(IS) S, IsNoetherianRing, IsAdicComplete IB, RingHom.FiniteType of the canonical quotientMap A/I→B/IB, ∃ r surjective β, then ∀ r β surjective → ∃ c killing ker δ and coker (range membership) with one c. δ = kerLiftAlg∘rigJacobianDifferential (real data, no copy). A-algebra maps are automatically continuous. Edge cases r=0, I=0, I=A, S=0, c=0 OK. Shared universe u is harmless (S finite type over A) and matches the dependency and the citer: advisory. Statement field verbatim. Only sorry is the theorem proof. Docstrings and proof steps present. No duplicate, no parallel delivery. Not compiled (no file changed)."
+ }
 }

@@ -1,0 +1,324 @@
+{
+ "id": "lem-per-supported-kummer-class-localization-boundary",
+ "kind": "statement",
+ "title": "Supported Kummer class of a principal divisor is the localization boundary of its Kummer class",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $\\ell$ be a prime invertible on $T$, and let $A=\\mathbf F_\\ell$. Let $f\\in\\Gamma(T,\\mathcal O_T)$ be such that multiplication by $f$ on $\\mathcal O_T$ is injective, so that $D=V(f)$ is an effective Cartier divisor [def-nagata-effective-cartier-ideal]; write $i:D\\hookrightarrow T$ for its closed immersion [def-weil-closed-immersion] and $j:U=T\\setminus D\\hookrightarrow T$ for the complementary open immersion [def-weil-open-immersion]. Use the ordinary small-etale derived categories [def-weil-pbc-derived-categories], the twist $A_T(1)=\\mu_{\\ell,T}\\otimes_{\\mathbf F_{\\ell,T}}A_T=\\mu_{\\ell,T}$ [def-asd-finite-etale-tate-twist], the right adjoint $Ri^!$ of $i_*$ [lem-exc-closed-ambient], and, for $K=A_T(1)$, the closed-support triangle $i_*Ri^!K\\to K\\to Rj_*j^*K\\xrightarrow{\\delta}(i_*Ri^!K)[1]$ of [lem-exc-closed-support-triangle]. Let $\\kappa(f)\\in H^1(U_{\\mathrm{et}},\\mu_\\ell)=\\operatorname{Hom}(A_U,j^*K[1])$ [def-weil-pbc-etale-cohomology] be the image of $f|_U\\in H^0(U_{\\mathrm{et}},\\mathbf G_m)$ under the connecting map of the exact Kummer sequence $1\\to\\mu_\\ell\\to\\mathbf G_m\\xrightarrow{z\\mapsto z^\\ell}\\mathbf G_m\\to1$ [lem-amb-kummer-any-base], [lem-weil-pbc-derived-functor-long-exact]. Define $\\partial\\kappa(f):A_D\\to Ri^!K[2]$ as the morphism corresponding, under the adjunctions $j^*\\dashv Rj_*$ and $i^*\\dashv i_*$ (with $i^*A_T=A_D$), to the composite $A_T\\to Rj_*j^*K[1]\\xrightarrow{\\delta[1]}i_*Ri^!K[2]$ whose first map corresponds to $\\kappa(f)$. Let $c_{D,A}:Ri_*A_D\\to A_T(1)[2]$ be the supported Kummer morphism of [lem-asd-ordinary-supported-kummer] with $N=\\ell$, and $\\eta_D:A_D\\to Ri^!A_T(1)[2]$ its transpose under $i_*\\dashv Ri^!$. Then there is $\\varepsilon\\in\\{1,-1\\}$ with $$\\eta_D=\\varepsilon\\,\\partial\\kappa(f).$$ No Noetherian, regularity or excellence hypothesis is imposed, and the sign $\\varepsilon$ is not specified.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Lemme 3.4.8 and its proof, printed p.247: 'Un relevement dans H^1(X-D,mu_ell) de Cl_{D subset X} est donne par l'image de f par le morphisme de bord H^0((X-D)_et,G_m) -> H^1((X-D)_et,mu_ell) associe a la suite exacte de Kummer' (au signe pres). Added by the maintainer reader for Step 6 of lem-per-kummer-root-regular-divisor-purity; the SGA reference behind it is not used."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "def-weil-pbc-etale-cohomology",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-asd-ordinary-supported-kummer",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sp-ordinary-finite-class-arbitrary-base"
+ ],
+ "proof": [
+  {
+   "text": "Put $h=f|_U$. Multiplication by $f$ identifies $\\mathcal O_T$ with $\\mathcal I_D=(f)$; dualizing gives a global frame $e$ of $L=\\mathcal O_T(D)=\\mathcal I_D^\\vee$ [def-pc-divisor-line-bundle]. The section obtained by transposing the ideal inclusion is $s_D=f e$. Thus the frame torsor of $L$, in the frame $e$, is $\\mathbf G_m$ with specified section $h$ on $U$. This uses only the assumed injectivity of multiplication by $f$, and $h$ is invertible because $U=T-V(f)$.",
+   "uses": [
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Lemme 3.4.8, local equation f; explicit dual-ideal trivialization"
+   }
+  },
+  {
+   "text": "Write the group law of $G=\\mathbf G_m$ additively for this extension calculation and put $Q=i_*\\mathbf Z_D$. Let $e_h$ be the pushout extension of the open-closed sequence $0\\to j_!\\mathbf Z_U\\to\\mathbf Z_T\\to Q\\to0$ [lem-weil-pbc-open-closed-short-exact] along $1\\mapsto h$, as in [lem-per-supported-yoneda-localization]. The adjunction $j_!\\dashv j^{-1}$ [lem-weil-pbc-extension-by-zero-adjunction] gives natural additive identifications $\\operatorname{Hom}(j_!\\mathbf Z_U,M)=M(U)$ sending the inclusion $j_!\\mathbf Z_U\\to\\mathbf Z_T$ to the constant one; this is the hypothesis of [lem-sp-relative-torsor-extension] with $L=j_!\\mathbf Z_U$ and the etale object $U$. The extension $e_{-h}$ is the sheaf quotient of $G\\oplus\\mathbf Z_T$ by the relations $(h(n),n)=0$ for local $n\\in j_!\\mathbf Z_U$, where $h(n)=nh$. The map $G\\to E_{-h}$ given by $x\\mapsto[(x,1)]$ is equivariant, lies over the supported generator, and sends $h$ on $U$ to zero. Hence [lem-sp-relative-torsor-extension] identifies the normalized extension of the framed line bundle in Step 1 with $e_{-h}$. The map $[(x,m)]\\mapsto[(-x,m)]$ from $E_h$ to $E_{-h}$ induces $-1$ on $G$ and the identity on $Q$. Extension-class naturality [lem-sc-p1-ext-class-naturality] gives $e_{-h}=-e_h$.",
+   "uses": [
+    "lem-per-supported-yoneda-localization",
+    "lem-sp-relative-torsor-extension",
+    "lem-sc-p1-ext-class-naturality",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1, relative extension normalization; explicit pushout quotient and sign"
+   }
+  },
+  {
+   "text": "Set $K=\\mu_{\\ell,T}=A_T(1)$. The morphism $c=c_{D,A}$ exists by [lem-asd-ordinary-supported-kummer]. Its defining normalization [def-asd-ordinary-supported-kummer-boundary] says that its abelian realization, precomposed with $Q\\to i_*A_D$, is $k[1]\\circ\\beta$, where $k$ is the actual Kummer extension and $\\beta$ is the normalized extension in Step 2. Therefore this realization is $-k[1]\\circ e_h$. The Kummer sequence is exact on arbitrary $T$ because $\\ell$ is invertible [lem-amb-kummer-any-base]. Apply [lem-per-supported-yoneda-localization] with $G_1=\\mu_\\ell$, $G_2=G_3=\\mathbf G_m$ and $h=f|_U$: the splice $k[1]\\circ e_h$ is the supported class $\\partial(\\delta_U(h))=\\partial\\kappa(f)$. Thus the integral abelian realization of $c$ is the negative of this class, in the signed relative convention of that node.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "def-asd-ordinary-supported-kummer-boundary",
+    "lem-amb-kummer-any-base",
+    "lem-per-supported-yoneda-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Lemme 3.4.8, printed p.247; Stacks 03PL, lemma-kummer-sequence, and 06XU, lemma-yoneda-extension"
+   }
+  },
+  {
+   "text": "The preceding equality detects module morphisms, rather than merely their images after forgetting support. Indeed [lem-sp-etale-supported-integral-derived-unit], with $n=\\ell$, says that $Q\\to\\operatorname{forget}(i_*A_D)$ is a DerivedUnit. By [def-sp-exact-functor-derived-unit], forgetting and precomposing with this generator is a bijection from $\\operatorname{Hom}_{D(T,A)}(i_*A_D,K[2])$ to $\\operatorname{Hom}_{D(T,\\mathbf{Ab})}(Q,\\operatorname{forget}K[2])$. Moreover [lem-pur-module-restriction-kernel-comparison] identifies module and abelian supported cohomology by a morphism of the three restriction-kernel complexes. Consequently it also identifies their localization connecting maps: the same chain maps on $T$ and $U$ send a relative pair $(a,b)$ to $(q_Ta,q_Ub)$, commuting with $D(a,b)=(da,\\operatorname{res}(a)-db)$ and with the boundary representative $(0,-b)$ of [lem-pur-divisor-relative-cone]. Apply the bijection to Step 3 to obtain the corresponding equality of supported module morphisms via [lem-amb-closed-support-hom].",
+   "uses": [
+    "lem-sp-etale-supported-integral-derived-unit",
+    "def-sp-exact-functor-derived-unit",
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-pur-divisor-relative-cone",
+    "lem-amb-closed-support-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45, lemma-cohomology-with-support-triangle; integral derived-unit and kernel-comparison interfaces cited explicitly"
+   }
+  },
+  {
+   "text": "Let $\\lambda:A_T\\to i_*Ri^!K[2]$ be the composite defining $\\partial\\kappa(f)$ before the adjunction $i^*\\dashv i_*$. The supported-Hom isomorphism [lem-amb-closed-support-hom] reads its class as the localization boundary just used: the triangle of [lem-exc-closed-support-triangle] has closed counit and open unit as its first two arrows, and the signed kernel-to-relative-cone model of [lem-pur-divisor-relative-cone] reads its last arrow as $(0,-b)$. Changes of cone sign affect this identification by one overall sign. Write $\\beta:A_D\\to Ri^!K[2]$ for the adjoint of $\\lambda$ under $i^*\\dashv i_*$. Then $\\lambda=(i_*\\beta)u_D$. Under $i_*\\dashv Ri^!$ [lem-exc-closed-ambient] the corresponding supported morphism is $\\operatorname{counit}_K[2]\\circ i_*\\beta$; this is the same supported class, since the triangle identity identifies the two adjunction descriptions. Step 4 therefore gives $c=\\varepsilon(\\operatorname{counit}_K[2]\\circ i_*\\beta)$ for $\\varepsilon\\in\\{1,-1\\}$. Taking transposes gives $\\eta_D=\\varepsilon\\beta=\\varepsilon\\,\\partial\\kappa(f)$. All inputs hold on arbitrary schemes; none imposes regularity, Noetherianity or excellence.",
+   "uses": [
+    "lem-amb-closed-support-hom",
+    "lem-exc-closed-support-triangle",
+    "lem-pur-divisor-relative-cone",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Lemme 3.4.8, printed p.247, au signe pres; adjunction identities and the signed relative model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-pc-divisor-line-bundle",
+  "def-sp-exact-functor-derived-unit",
+  "lem-amb-closed-support-hom",
+  "lem-amb-kummer-any-base",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-per-supported-yoneda-localization",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-sc-p1-ext-class-naturality",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "lem-sp-relative-torsor-extension",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-open-closed-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI Lemme 3.4.8, printed p.247; general formal Cartier case proved using the existing normalized-extension, signed Yoneda-localization and coefficient-comparison interfaces, rather than importing regularity assumptions from the surrounding strict-local purity argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlI 'Kummer' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -rlI 'etaleCohomology\\|EtaleCohomology\\|cohomologyWithSupport' Mathlib",
+   "results": "none",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no etale cohomology, Kummer sequence or cohomology with supports"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|kummerBoundary|supportedClassMap|localization",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern arithmetic Kummer theory, algebra localizations, meromorphic divisors or topological bundle trivializations; none states this etale supported-class comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "supported Kummer class principal Cartier divisor localization boundary Kummer class",
+   "results": "MeromorphicOn.divisor; Localization.mk; KaehlerDifferential.isLocalizedModule; Localization.subalgebra; KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp; MeromorphicOn.divisor_def; Algebra.instIsStandardOpenImmersionAway; MeromorphicOn.divisor_zpow",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern arithmetic Kummer theory, algebra localizations, meromorphic divisors or topological bundle trivializations; none states this etale supported-class comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "kummerBoundary, supportedClassMap, localization boundary",
+   "results": "loogle: unknown identifier 'kummerBoundary'",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern arithmetic Kummer theory, algebra localizations, meromorphic divisors or topological bundle trivializations; none states this etale supported-class comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the supported Kummer class of a principal effective Cartier divisor equals, up to sign, the localization boundary of the Kummer class of its defining function in etale cohomology",
+   "results": "ClassGroup.mkMMem; IsDedekindDomain.selmerGroup; Algebra.etaleLocus_eq_compl_support; Algebra.Generators.cMulXSubOneCotangent_eq; Algebra.Generators.cMulXSubOneCotangent; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern arithmetic Kummer theory, algebra localizations, meromorphic divisors or topological bundle trivializations; none states this etale supported-class comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle with a chosen trivialization on an open complement defines a relative first Chern class; for a globally trivial line bundle it is the boundary of the Kummer class of the trivializing unit",
+   "results": "hom_trivializationAt; hom_trivializationAt_baseSet; hom_trivializationAt_source; hom_trivializationAt_apply; VectorBundle.trivialization_linear'; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; Trivialization.linearMapAt; Trivialization.linearMapAt_def_of_mem",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern arithmetic Kummer theory, algebra localizations, meromorphic divisors or topological bundle trivializations; none states this etale supported-class comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "maintainer-reader",
+  "item": "lem-per-kummer-root-regular-divisor-purity",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.4.5 and its proof, printed pp.246--248 (the monic root algebra, and its Kummer cover away from the divisor). Supported Kummer class versus Kummer boundary of the local equation, ILO XVI Lemme 3.4.8, used in the strict-local purity test (Step 6).",
+   "via": [
+    "lem-per-kummer-root-regular-divisor-purity",
+    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-log-smooth-trait-punctual-purity",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-supported-kummer-class-localization-boundary",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-scheme statement. Identified the globally framed Cartier pair explicitly and computed its extension as the negative pushout extension. Reused the existing general signed Yoneda-localization lemma, then justified passage from integral abelian realization to the module derived equality with the supported integral DerivedUnit and restriction-kernel comparison. Finished by the two adjunctions defining the stated boundary. No new nodes, attachments or strengthened hypotheses.",
+  "blueprint": "Historical Step 3 of lem-per-artin-gabber-affine-curve, through the existing ancestors: the local-equation supported Kummer comparison in the strict-local purity test, ILO XVI Lemme 3.4.8, used in Step 6 of lem-per-kummer-root-regular-divisor-purity.",
+  "tool_uses": [
+   {
+    "node": "def-asd-ordinary-supported-kummer-boundary",
+    "why": "Generic Relative supported Cartier Kummer boundary specification used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "def-pc-divisor-line-bundle",
+    "why": "Generic The module $\\mathcal{O}_X(D)$ of an effective Cartier divisor used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "def-sp-exact-functor-derived-unit",
+    "why": "Generic DerivedUnit used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic Closed support as a relative section complex used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic The Kummer sequence on an arbitrary base used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic Closed-immersion right adjoint before restriction used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic Closed-support triangle before restriction used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-pur-divisor-relative-cone",
+    "why": "Generic Relative section cone, supports, and change of topology used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Generic Forgetting constant module coefficients compares derived restriction kernels used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-sc-p1-ext-class-naturality",
+    "why": "Generic Naturality of Ext classes for morphisms of short exact sequences used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-sp-etale-supported-integral-derived-unit",
+    "why": "Generic supported integral derived unit used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-sp-relative-torsor-extension",
+    "why": "Generic Relative extension class of a torsor with a specified section used for the ordinary-etale relative Kummer construction and its adjunction/normalization comparison; the current perverse unit does not supply this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic open-closed short exact sequence 0 -> j_!j^{-1}F -> F -> i_*i^{-1}F -> 0 underlying the supported generator Q=i_*Z_D in Step 2; no node of the perverse unit states it (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic adjunction j_! -| j^{-1}, giving Hom(j_!Z_U,M)=M(U), the hypothesis of lem-sp-relative-torsor-extension in Step 2; no node of the perverse unit states it (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-pc-divisor-line-bundle",
+  "def-sp-exact-functor-derived-unit",
+  "lem-amb-closed-support-hom",
+  "lem-amb-kummer-any-base",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-sc-p1-ext-class-naturality",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "lem-sp-relative-torsor-extension",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-9b7e38c10",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-9b7e38c10 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and 5 steps, every cited statement, the citer, the rival lem-per-cartier-gysin-kummer-boundary, and the source ILO XVI Lemme 3.4.8 (printed p.247, read from the PDF). The source states the result only up to sign; the item keeps the ∃ε=±1 and is proved for an arbitrary scheme T, which the proof supports. Small cases checked: T empty, f a unit, a nonreduced ring, ℓ=2. Step 2 recomputed: the normalized extension is e_{-h}, and the map [(x,m)]↦[(-x,m)] gives e_{-h}=-e_h, consistent with Q56's e_{f^{-1}}. Step 3: c_{D,F_ℓ} satisfies the def-asd boundary predicate, and the Yoneda node applies to (μ_ℓ,G_m,G_m) on an arbitrary T. Step 4: the DerivedUnit hypotheses hold (n=ℓ, A=F_ℓ), and the restriction-kernel chain maps commute with the boundary (0,-b). Step 5: the adjunction transposes are right. Its identification of δ with the relative-cone boundary is compressed but sound, because the third arrow is unique (Hom(i_*X[1],Rj_*Y)=0) and any mismatch is one global sign, which ε absorbs; this is an advisory. No new nodes, and no duplicate: the Cartier-gysin node has regular/excellent hypotheses and a different class. Batch-5 flag: lem-pod-etale-stalk-tensor-scalar is a generic stalk/tensor/scalar fact, not part of the Poincaré-duality statement or its proof; accepted. Dropped-route flag (lem-per-supported-yoneda-localization): the item is not in the closure of lem-per-artin-gabber-affine-curve (checked by BFS); the target reaches it through the sfb ramified-Cartier chain. The cited node is live (split, reviewed pass by Q39 on 2026-10-18), is a general arbitrary-scheme Yoneda/localization lemma, and its closure has no Q̄_ℓ, middle t-structure, Gabber finiteness, uniformization or alteration. It is justified at Step 3. FIX (C1/C4): Step 2 used the hypothesis of lem-sp-relative-torsor-extension (Hom(j_!Z_U,M)=M(U), sending the inclusion to 1) and the open-closed sequence without citing them. It now cites lem-weil-pbc-extension-by-zero-adjunction and lem-weil-pbc-open-closed-short-exact; proof_deps and split_report.tool_uses are updated. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerLocalizationBoundary",
+  "declaration": "AlgebraicGeometry.Etale.SupportedKummerLocalization.supported_kummer_localization_boundary",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.singlePullback",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.constantPullback",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.lineRestriction",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.boundaryCore",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.transposeCore",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.Coeff",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.killed",
+   "AlgebraicGeometry.Etale.SupportedKummerLocalization.supported_kummer_localization_boundary"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerLocalizationBoundary.lean",
+  "statement": "theorem supported_kummer_localization_boundary (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (hl : IsUnit (l : Γ(T, ⊤))) (f : Γ(T, ⊤)) (hf : (T.zeroLocusSubschemeι {f}).ker.IsInvertible) (c : Ext ((lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f})).obj (ordinaryFiniteConstant (Coeff.{u} l) (T.zeroLocusSubscheme {f}))) (Scheme.finiteEtaleTateLine T l (Coeff.{u} l) (killed l)) 2) (hc : SupportedKummerBoundary (Coeff.{u} l) l (killed l) (T.zeroLocusSubschemeι {f}) hf hl c) (κ : ordinaryFiniteUnit (Coeff.{u} l) (T.basicOpen f).toScheme ⟶ (D(upperStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.basicOpen f).ι).obj (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T))⟦(1 : ℤ)⟧) (hκ : ordinaryFiniteClass (Coeff.{u} l) (T.basicOpen f).toScheme (Scheme.finiteEtaleTateLine (T.basicOpen f).toScheme l (Coeff.{u} l) (killed l)) 1 (κ ≫ (lineRestriction (Coeff.{u} l) l (Fact.out : l.Prime).pos (killed l) (T.basicOpen f).ι hl).hom) = Sheaf.H.map (ordinaryFiniteRootMap (Coeff.{u} l) l (killed l) (T.basicOpen f).toScheme) 1 ((T.basicOpen f).toScheme.kummerδ₀ l (by simpa using hl.map (T.basicOpen f).ι.appTop.hom) (Additive.ofMul (T.basicOpenUnit f)))) (δ : R(lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.basicOpen f).ι).obj (D(upperStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.basicOpen f).ι).obj (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T)) ⟶ (R(lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f}))).obj ((R(lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f}))).rightAdjoint.obj (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T))⟦(1 : ℤ)⟧) (hδ : Triangle.mk ((Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f})))).counit.app (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T)) ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (Coeff.{u} l)) (T.basicOpen f).ι).unit.app (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T)) δ ∈ distTriang _) : ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ transposeCore _ _ (Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f})))) (ordinaryFiniteUnit (Coeff.{u} l) (T.zeroLocusSubscheme {f})) (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T) (supportedExactDerivedMap (lowerStar (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f})) (ordinaryFiniteConstant (Coeff.{u} l) (T.zeroLocusSubscheme {f})) (Scheme.finiteEtaleTateLine T l (Coeff.{u} l) (killed l)) c) = ε • boundaryCore _ _ _ _ (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (Coeff.{u} l)) (T.zeroLocusSubschemeι {f})) (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (Coeff.{u} l)) (T.basicOpen f).ι) (ordinaryFiniteUnit (Coeff.{u} l) T) (ordinaryFiniteUnit (Coeff.{u} l) (T.zeroLocusSubscheme {f})) (ordinaryFiniteUnit (Coeff.{u} l) (T.basicOpen f).toScheme) (ordinaryFiniteLine (Coeff.{u} l) l (killed l) T) _ (constantPullback (Coeff.{u} l) (T.zeroLocusSubschemeι {f})) (constantPullback (Coeff.{u} l) (T.basicOpen f).ι) κ δ",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccec5d5df",
+  "group": "Q06",
+  "result": "pass",
+  "note": "All clauses match the node and ILO XVI 3.4.8 (au signe près). hf (ker of V(f) invertible) is equivalent to f being a non-zerodivisor; δ is pinned by hδ (third arrow exists by exists_etale_closedSupportTriangle and is unique since Hom(i_*X[1],Rj_*Y)=0); κ is pinned by hκ via the bijective ordinaryFiniteClass; c is pinned by SupportedKummerBoundary (∃! by uniqueBoundary); boundaryCore and transposeCore render ∂κ(f) and η_D; conclusion is ∃ ε=±1. Theorem stmt_deps: lem-asd-etale-finite-twist-pullback supplies finiteEtaleTwistPullbackData = Classical.choice of the theorem's existence result (an object the theorem constructs, normalized) → PASS on this point; lem-sp-ordinary-finite-class-arbitrary-base has no declarations in the statement and is the H^1 = Hom identification that pins κ, nothing to move into a definition node → PASS on this point. Statement verbatim; node text and proof unchanged; helpers real with source/blueprint docstrings; sorry only; no extra hypotheses or universe restriction; no pro-étale substitute; no duplicate found. Advisory: local instance priority on auto-generated DerivedCategoryModule._proof_1/_proof_2 is fragile. No compile run (no file changed)."
+ }
+}

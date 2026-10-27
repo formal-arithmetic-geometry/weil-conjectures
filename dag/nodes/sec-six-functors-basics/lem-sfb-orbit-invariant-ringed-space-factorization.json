@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-orbit-invariant-ringed-space-factorization",
+ "kind": "statement",
+ "title": "Invariant-section orbit ringed spaces and local categorical factorization",
+ "statement": "Let $X$ be a locally ringed space and let a group $G$ act on $X$ by locally ringed space automorphisms [def-weil-locally-ringed-space-morphism]. The group need not be finite. Give $Y=|X|/G$ the quotient topology, and let $q:|X|\\to Y$ be the orbit projection. For open $T\\subseteq Y$ put $\\mathcal F(T)=\\mathcal O_X(q^{-1}T)^G$, the subring of sections fixed by pullback under every group element, with inherited restrictions. Then $\\mathcal F$ is a sheaf of rings, $q$ is open, and inclusion of invariant sections defines an invariant morphism of ringed spaces $q:(X,\\mathcal O_X)\\to(Y,\\mathcal F)$. Every invariant morphism of ringed spaces $a:X\\to Z$ factors uniquely through this morphism. If every stalk of $\\mathcal F$ is local and the induced stalk maps $\\mathcal F_{q(x)}\\to\\mathcal O_{X,x}$ are local for all $x$, then for every locally ringed space $Z$ and invariant locally ringed space morphism $a:X\\to Z$, its unique factor $b:(Y,\\mathcal F)\\to Z$ is also a locally ringed space morphism. For every $G$-invariant open $W\\subseteq X$, $q(W)$ is open, $q^{-1}q(W)=W$, and the orbit ringed space of $W$ is canonically the restriction $(q(W),\\mathcal F|_{q(W)})$; all these factorization assertions hold on the restriction as well. If $X$ and $(Y,\\mathcal F)$ are schemes [def-pc-scheme], these factorizations are consequently factorizations in schemes. No scheme representability of $(Y,\\mathcal F)$ is asserted without the local chart hypotheses.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.4, printed pp.132--133, categorical admissible quotient used there; agent-written invariant-sheaf construction, locality, and invariant-open verification from original Steps 3 and 7 of lem-sfb-admissible-finite-type-field-quotient, stated for arbitrary locally ringed spaces."
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-scheme",
+  "def-sfb-orbit-ringed-space-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For any subset $U\\subseteq X$, two points have the same image under $q$ exactly when they are in one $G$-orbit, so $q^{-1}q(U)=\\bigcup_{g\\in G}gU$. Every $g$ is a homeomorphism, being an automorphism of locally ringed spaces [def-weil-locally-ringed-space-morphism]. Thus for open $U$ this union is open, and the definition of the quotient topology makes $q(U)$ open. In particular $q$ is an open continuous surjection. For invariant $W$, the same equality gives $q^{-1}q(W)=W$. No finiteness of $G$ is used.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZK, lemma-quotient, characterization (2); elementary orbit saturation calculation"
+   }
+  },
+  {
+   "text": "For open $T\\subseteq Y$, each $g$ preserves $q^{-1}T$. Its pullback is a unital ring automorphism on $\\mathcal O_X(q^{-1}T)$, so its common fixed elements form a subring, and restriction preserves fixed elements. Given a cover $T=\\bigcup_iT_i$ and matching fixed sections $s_i$, the sheaf axiom for $\\mathcal O_X$ glues them uniquely to $s$ on $q^{-1}T$. For every $g$, restriction of $g^*s$ to $q^{-1}T_i$ is $g^*s_i=s_i$; uniqueness of this gluing gives $g^*s=s$. Thus $s\\in\\mathcal F(T)$, and uniqueness in $\\mathcal F$ follows from uniqueness in $\\mathcal O_X$. This also covers the empty cover. Hence $\\mathcal F$ is a sheaf of rings, as required for a ringed space [def-weil-locally-ringed-space-morphism].",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 006T, definition-sheaf; 0072, definition-sheaf-values-in-category; 0091, definition-ringed-space; direct gluing verification"
+   }
+  },
+  {
+   "text": "The inclusions $\\mathcal F(T)\\hookrightarrow\\mathcal O_X(q^{-1}T)$ are unital ring maps commuting with restriction, hence, with the continuous map $q$, define a morphism of ringed spaces by [def-weil-locally-ringed-space-morphism]. For each $g$, its composite with $g:X\\to X$ has the same base map since $qg=q$, and the same section maps since $g^*s=s$ for $s\\in\\mathcal F(T)$. Thus this ringed-space morphism is invariant.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0091, definition-ringed-space; 0093, definition-composition-maps-ringed-spaces"
+   }
+  },
+  {
+   "text": "Let $a:X\\to Z$ be an invariant ringed-space morphism. Its continuous base map is constant on each orbit, so the rule $b(q(x))=a(x)$ defines a unique set map $b:Y\\to|Z|$. For open $V\\subseteq Z$, one has $q^{-1}(b^{-1}V)=a^{-1}V$, which is open by continuity of $a$. The quotient topology therefore makes $b^{-1}V$ open, proving continuity of $b$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZK, lemma-quotient, characterization (2); ringed-space morphisms as defined in Stacks 0091"
+   }
+  },
+  {
+   "text": "For every open $V\\subseteq Z$ and $t\\in\\mathcal O_Z(V)$, invariance of $a$ as a ringed-space morphism and the composition rule in [def-weil-locally-ringed-space-morphism] give $g^*(a^\\sharp_V(t))=a^\\sharp_V(t)$ for every $g$. Since $a^{-1}V=q^{-1}(b^{-1}V)$, define $b^\\sharp_V(t)$ to be this same section, now in $\\mathcal F(b^{-1}V)$. These maps are unital ring homomorphisms and commute with restriction because the maps $a^\\sharp_V$ do. They make $b$ a ringed-space morphism, and their defining equality gives $b\\circ q=a$ on base maps and on every section map.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0091, definition-ringed-space; 0093, definition-composition-maps-ringed-spaces; sectionwise factorization"
+   }
+  },
+  {
+   "text": "If $c:(Y,\\mathcal F)\\to Z$ also satisfies $c\\circ q=a$, surjectivity of $q$ gives $c=b$ on points. For each open $V\\subseteq Z$, the composite of $c^\\sharp_V$ with the inclusion $\\mathcal F(b^{-1}V)\\hookrightarrow\\mathcal O_X(a^{-1}V)$ must be $a^\\sharp_V$, just as for $b^\\sharp_V$. Injectivity of this inclusion forces $c^\\sharp_V=b^\\sharp_V$. The definition of a ringed-space morphism [def-weil-locally-ringed-space-morphism] now gives equality of the morphisms, proving uniqueness.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0091, definition-ringed-space; 0093, definition-composition-maps-ringed-spaces; injectivity of the explicitly defined inclusions"
+   }
+  },
+  {
+   "text": "Assume the stated locality hypotheses and that $a$ is a locally ringed space morphism. Fix $y\\in Y$ and choose $x$ with $q(x)=y$. Put $A=\\mathcal O_{Z,b(y)}$, $B=\\mathcal F_y$, $C=\\mathcal O_{X,x}$, and write $\\beta:A\\to B$, $\\gamma:B\\to C$ for the stalk maps of $b,q$. On a germ represented by a section $t$ on $V\\ni b(y)$, the formula in Step 5 identifies $\\gamma\\beta([t])$ with $a^\\sharp_x([t])$, so $\\gamma\\beta=a^\\sharp_x$. By locality of $q$, $\\gamma^{-1}(\\mathfrak m_C)$ contains $\\mathfrak m_B$; it is a proper ideal because $\\gamma(1)=1$, hence equals the maximal ideal $\\mathfrak m_B$. Locality of $a$ gives $\\gamma\\beta(\\mathfrak m_A)\\subseteq\\mathfrak m_C$, so $\\beta(\\mathfrak m_A)\\subseteq\\mathfrak m_B$. Thus $b$ is local on every stalk by [def-weil-locally-ringed-space-morphism].",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HB, definition-locally-ringed-space, clause (3); germ calculation using Sheaves 0078, section-stalks; elementary inverse-ideal calculation"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq X$ be invariant and open, and put $O=q(W)$. Step 1 shows $O$ open and $q^{-1}O=W$. The map $W/G\\to O$, sending the orbit of $x$ to $q(x)$, is bijective. For $T\\subseteq O$, its inverse image in $W$ is open in $W$ exactly when it is open in $X$, since $W$ is open; by the quotient topology this is equivalent to $T$ being open in $Y$, hence in $O$. Thus the bijection is a homeomorphism. For every open $T\\subseteq O$, which is also open in $Y$, the invariant-section sheaf for $W$ is exactly $\\mathcal O_W((q|_W)^{-1}T)^G=\\mathcal O_X(q^{-1}T)^G=\\mathcal F(T)$, with identical restrictions and quotient section maps. This identifies its ringed space with $(O,\\mathcal F|_O)$. Steps 2--7 apply to this restricted action. In the local case the stalks and their maps agree with the original ones: intersecting neighbourhoods with the open subsets $O,W$ gives the same germ representatives and equality relation. Thus the locality hypotheses pass to the restriction.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 00A1, definition-restriction; Tag 0078, section-stalks; explicit invariant-open identification"
+   }
+  },
+  {
+   "text": "Suppose $X$ and $(Y,\\mathcal F)$ are schemes; then the locality hypotheses of Step 7 hold automatically. The stalks of $\\mathcal F$ are local because a scheme is a locally ringed space [def-pc-scheme]. Let $s\\in\\mathcal F(T)$ and $x\\in q^{-1}T$ with germ $s_x$ a unit of $\\mathcal O_{X,x}$. Then $s$ has an inverse on an open $U\\ni x$ inside $q^{-1}T$. For each $g$, applying $g^\\sharp$ and using $g^*s=s$ shows that $s$ is invertible on $g^{-1}U$. By uniqueness of inverses, these inverses glue to an inverse $u$ of $s$ on the saturated open $q^{-1}q(U)=\\bigcup_gg^{-1}U$, which is open by Step 1. Since $g^*u$ is also an inverse of $g^*s=s$, $g^*u=u$. Thus $s|_{q(U)}$ is a unit of $\\mathcal F(q(U))$. So an element of $\\mathcal F_{q(x)}$ whose image in $\\mathcal O_{X,x}$ is a unit is itself a unit, and the stalk map sends $\\mathfrak m_{q(x)}$ into $\\mathfrak m_x$, i.e. it is local. By Step 8 the same holds for the restriction to $W$. Hence $q$ is a morphism of locally ringed spaces, and Step 7 applies to every scheme $Z$ and every invariant scheme morphism $a:X\\to Z$. A morphism of schemes is exactly a morphism of the underlying locally ringed spaces [def-weil-locally-ringed-space-morphism, def-pc-scheme]. So $q$, the factor $b$ and their restrictions to $W$ are morphisms of schemes, and the factorizations of Steps 5--8 are factorizations in schemes; uniqueness among scheme morphisms follows from Step 6. No affine chart or scheme representability has been constructed.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HB, definition-locally-ringed-space, clause (3); Tag 01IJ, definition-scheme; unit-gluing over the saturated open from Topology 08ZK, lemma-quotient (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.4, printed pp.132--133, supplies the admissible-quotient context, not a proof of the arbitrary-group ringed-space construction. The proof is the explicit construction from Stacks definitions 08ZK, 006T, 0072, 0091, 0093, 01HB, 00A1 and 01IJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient|invariant",
+   "results": "OK 1 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean Subdirectory: Geometry/RingedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the coequalizer construction for locally ringed spaces is a candidate tool, but converting a group action to its explicit orbit space, fixed-section sheaf, and invariant-open comparison is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyRingedSpace\", \"quotient\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the coequalizer construction for locally ringed spaces is a candidate tool, but converting a group action to its explicit orbit space, fixed-section sheaf, and invariant-open comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant sheaf on the orbit space of a group action yields unique factorization of invariant morphisms of locally ringed spaces",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.LocallyRingedSpace.is_sheafedSpace_iso, AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso, AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso, Rep.quotientToInvariantsFunctor_map_hom, StructureGroupoid.LocalInvariantProp.sheaf, CategoryTheory.imageFactorization",
+   "date": "2026-10-22",
+   "verdict": "no match: the coequalizer construction for locally ringed spaces is a candidate tool, but converting a group action to its explicit orbit space, fixed-section sheaf, and invariant-open comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a locally ringed space has the orbit topological space with the invariant section sheaf as categorical quotient if its stalks and quotient maps are local",
+   "results": "OK 8 hits: CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_stalk_isLocalHom, AlgebraicGeometry.LocallyRingedSpace.coequalizer, CategoryTheory.Limits.SingleObj.Types.colimitEquivQuotient, MulAction.ofQuotientStabilizer_smul, Topology.IsQuotientMap.isCoveringMapOn_of_smul_disjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: the coequalizer construction for locally ringed spaces is a candidate tool, but converting a group action to its explicit orbit space, fixed-section sheaf, and invariant-open comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant morphism of ringed spaces factors through the orbit space with fixed section sheaf and its factor is local whenever the original morphism is local",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_app_isLocalHom, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_stalk_isLocalHom, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, ModuleCat.Tilde.res_const, ModuleCat.Tilde.exists_const, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen, StructureGroupoid.LocalInvariantProp.section_spec, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec",
+   "date": "2026-10-22",
+   "verdict": "no match: the coequalizer construction for locally ringed spaces is a candidate tool, but converting a group action to its explicit orbit space, fixed-section sheaf, and invariant-open comparison is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|invariant|coequalizer",
+   "results": "OK 8 hits: Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean; subdirectory Geometry/RingedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: coequalizers in LocallyRingedSpace are related but do not directly state the explicit orbit topology, arbitrary invariant ringed-space factorization and invariant-open comparison; the remaining hits concern representations, automorphic sums, or definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant morphism of ringed spaces factors uniquely through the orbit space with the sheaf of invariant sections",
+   "results": "OK 8 hits: Rep.quotientToInvariantsFunctor_map_hom, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.LocallyRingedSpace.Hom, ContinuousCohomology.invariants, AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv, Rep.invariantsFunctor_map_hom, AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso",
+   "date": "2026-10-23",
+   "verdict": "no match: coequalizers in LocallyRingedSpace are related but do not directly state the explicit orbit topology, arbitrary invariant ringed-space factorization and invariant-open comparison; the remaining hits concern representations, automorphic sums, or definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyRingedSpace\", \"quotient\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: coequalizers in LocallyRingedSpace are related but do not directly state the explicit orbit topology, arbitrary invariant ringed-space factorization and invariant-open comparison; the remaining hits concern representations, automorphic sums, or definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a locally ringed space by a group action has invariant sections as its structure sheaf and is universal for invariant ringed space morphisms",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.coequalizer, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_app_isLocalHom, Rep.quotientToCoinvariantsFunctor, Rep.quotientToInvariantsFunctor, instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring, Rep.coinvariantsFunctor_obj_carrier, AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizer, Rep.quotientToInvariants",
+   "date": "2026-10-23",
+   "verdict": "no match: coequalizers in LocallyRingedSpace are related but do not directly state the explicit orbit topology, arbitrary invariant ringed-space factorization and invariant-open comparison; the remaining hits concern representations, automorphic sums, or definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group acts by automorphisms on a sheafed space; continuous invariant maps descend to the quotient with the fixed subsheaf of the direct image",
+   "results": "OK 8 hits: QuotientGroup.automorphize_smul_left, Rep.quotientToInvariantsFunctor, MulAction.automorphize, QuotientAddGroup.automorphize_smul_left, Representation.quotientToInvariants, Rep.quotientToCoinvariantsFunctor, MulAction.automorphize_smul_left, QuotientGroup.automorphize",
+   "date": "2026-10-23",
+   "verdict": "no match: coequalizers in LocallyRingedSpace are related but do not directly state the explicit orbit topology, arbitrary invariant ringed-space factorization and invariant-open comparison; the remaining hits concern representations, automorphic sums, or definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-admissible-finite-type-field-quotient",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), admissible quotients in ILO IX 1.4 / X 2.3 Step 2: orbit topology, invariant sheaf, categorical factor locality and invariant-open compatibility (original Steps 3 and 7).",
+   "via": [
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-orbit-invariant-ringed-space-factorization",
+  "worker": "stage1",
+  "summary": "Constructed the orbit ringed space and its universal morphism explicitly, including invariant gluing, the sectionwise descended morphism and uniqueness, stalkwise locality via inverse maximal ideals, and the invariant-open comparison. Statement and statement dependencies are unchanged. Every step is a direct calculation from the given objects and the existing ringed-space definition, so no elementary construction was promoted to a new node. Mathlib and project attachment searches found no full match. Reviewer FIX (maintainer reader, 2026-10-23): the scheme clause moved from Step 8 to a new Step 9, which proves that when X and (Y,F) are schemes the stalk-locality hypotheses hold automatically (an invariant section that is a unit at x is a unit on the saturated neighbourhood q^{-1}q(U)), so the clause holds as literally stated.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images, proof (3), admissible quotients in ILO IX 1.4, via the existing alteration branch: the orbit topology/invariant sheaf/factorization and invariant-open parts of original Steps 3 and 7 of lem-sfb-admissible-finite-type-field-quotient. blueprint_refs.py ancestor returns None for the existing ancestry; retained blueprint.from.node=null and the inherited via list. Whole-blueprint searches invariant, ringed and orbit space found no equivalent imported theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-c247ff867",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-c247ff867 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 8 steps, both cited definitions (def-weil-locally-ringed-space-morphism, def-pc-scheme with its blueprint_update), the Stacks tags of every step (08ZK, 006T, 0072, 0078, 0091, 0093, 00A1, 01HB, 01IJ; all labels match) and ILO IX 1.4 at printed pp.132-133. ILO only uses the quotients X'/G, so proof_origin by=agent is accurate. No SGA is used. Statement, stmt_deps and metadata are byte-identical to the landed node from the Q22 run; there are no new nodes and no repair note, so this is a plain one-level split. Steps 1-8 are correct and elementary: saturation and openness of q by 08ZK(2); invariant gluing via uniqueness over the G-stable cover; q^sharp is invariant by the composition formula; b on points is continuous; b^sharp is the corestriction of a^sharp to invariants; uniqueness from surjectivity of q and injectivity of the inclusions; locality through gamma^{-1}(m_C)=m_B; restriction to invariant opens. Edge cases checked: X empty, trivial action, one point (R^G), x->-x on A^1, infinite G, W empty and W=X. Duplicate search found none: the admissible finite scheme quotient nodes, the projective finite-group quotient and the invariant-open substack descent are different settings. The Mathlib coequalizer construction in LocallyRingedSpace is not a one-line specialization. FIX (one gap, E1/C4 type): the statement's scheme clause has no stalk-locality hypothesis, but Step 8 proved it only 'in the local case'. Those hypotheses hold automatically for schemes. An invariant section that is a unit at x is invertible on every g^{-1}U, so it is a unit on the saturated open q^{-1}q(U), with a G-fixed glued inverse. Hence the stalk maps of q are local, and the stalks of F are local because (Y,F) is a scheme. The fix trims Step 8 to the restriction argument and adds Step 9 with this argument and the scheme-morphism conclusion; proof_deps are unchanged. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-orbit-invariant-ringed-space-factorization.json. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrbitInvariantRingedSpaceFactorization",
+  "declaration": "AlgebraicGeometry.exists_orbitRingedSpacePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrbitInvariantRingedSpaceFactorization.lean",
+  "statement": "theorem exists_orbitRingedSpacePresentation (G : Type v) [Group G] (X : LocallyRingedSpace.{u}) (action : G →* Aut X) : Nonempty (OrbitRingedSpacePresentation G X action)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.exists_orbitRingedSpacePresentation",
+   "AlgebraicGeometry.OrbitRingedSpacePresentation.isOpenMap",
+   "AlgebraicGeometry.OrbitRingedSpacePresentation.existsUnique_factor",
+   "AlgebraicGeometry.OrbitRingedSpacePresentation.existsUnique_local_factor",
+   "AlgebraicGeometry.OrbitRingedSpacePresentation.invariant_open",
+   "AlgebraicGeometry.OrbitRingedSpacePresentation.existsUnique_scheme_factor"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01594cca4",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Clause-by-clause match: arbitrary G : Type v, orbit Quot with coinduced topology via orbitHomeomorph+projection_eq, invariant sections via injective c.app with image = fixed sections (HEq over opens equal by `invariant`), presentation unique up to unique iso so Nonempty+∀D is not an arbitrary-choice substitute; isOpenMap; ∃! ringed factor to arbitrary RingedSpace; local factor with both stalk hypotheses (∃! over conjunction, complemented by existsUnique_factor); invariant_open pins actionW and comparison by squares with ofRestrict and passes locality; scheme clause needs no locality hypothesis (Step 9) and asserts no representability. New def node genuinely new (only finite-scheme admissible quotient / finiteQuotientInvariantSections nearby). Item diff vs live = lean + new stmt_dep only. Statements verbatim, sorry only in theorems, docstrings with source/blueprint, report sections present. Not recompiled (no change)."
+ }
+}

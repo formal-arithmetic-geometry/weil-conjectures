@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-triangle-projection-compositor-contraction",
+ "kind": "statement",
+ "title": "Contract the triangle counit normal form to the projection equation",
+ "statement": "With the component notation of [def-sf-composition-projection-data], at every positive finite coefficient level and for each specified simultaneous system realization, leftMap equals rightMap for every supplied proper/open compactification triangle and arbitrary derived inputs K,L. Only the component equation is asserted: invertibility, joint naturality and three-cell associativity are separate arguments.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B--0F7K; agent expansion of the blueprint composition/refinement calculation"
+ },
+ "stmt_deps": [
+  "def-sf-composition-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand each compactification projection and alpha. Move the inner open tensor morphism through gamma by naturality, and apply the triangle counit normal-form identity retaining the successive pullbacks.",
+   "uses": [
+    "lem-sf-triangle-projection-normal-form",
+    "def-sf-composition-projection-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Contract the two successive proper projections by tensor-composition and adjunction conjugation. Contract the open tensor maps by transposing under the composite open adjunction: open-unit normalization and tensor-pullback composition make their transposes equal. No projection map is inverted.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the proper and open compositors contracts the remaining word. Pullback associativity identifies the last transport with trianglePull. Repeat the same intrinsic calculation on simultaneous sequence sites, retaining quotient transitions before evaluation.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-triangle-projection-normal-form",
+  "def-sf-composition-projection-data",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Proper/open support and the composition/refinement counit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of compact support direct image projection formula proper open counit",
+   "results": "CompHausLike.LocallyConstant.counitAppApp, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.counitApp, CompactlySupportedContinuousMap.compLinearMap, CompHausLike.LocallyConstant.adjunction_left_triangle",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|compositionProjectionMate|gamma_isIso|isIso_gamma",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper open direct image projection mate support unbounded derived composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.stableUnderComposition",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenMate|mapDerivedCategoryCompIso|isIso_counit_app_of_iso",
+   "results": "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction and geometric results only; no matching unbounded projection statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompositionProjectionMate",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence: Contract the triangle counit normal form to the projection equation",
+   "via": [
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TriangleProjectionCompositorContraction",
+  "file": "lean/Sheaf/SixFunctors/TriangleProjectionCompositorContraction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompactCompositionProjection.triangleProjectionCompositorContraction",
+  "statement": "theorem triangleProjectionCompositorContraction (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) : TriangleEquations (ordinary F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) (ordinaryTensor F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) ∧ ∀ (o : WeilConjectures.IntegralSystemRealization.Operations l E) (z : WeilConjectures.IntegralSystemRealization.Realizations l E F o), TriangleEquations (realizedSystems F l E o z) (realizedTensor F l E o z)",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompactCompositionProjection.triangleProjectionCompositorContraction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-78e02",
+  "group": "U7",
+  "result": "fix",
+  "landing": "20261025T144152-L-1203649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-78e02",
+  "group": "U7",
+  "result": "fix",
+  "landing": "20261025T144152-L-1203649",
+  "kind": "interface",
+  "note": "independent cc review: Item statement byte-identical to the clone; the 13 moved component declarations are verbatim in CompositionProjectionData (diff); ordinaryProperOpenMateIsIso checked against properOpenMate (Stacks 0F7B, non-Cartesian square, clopen lift); the contraction is the component conjunct of TriangleLaws; all 10 direct importers compile against the delivery; #print axioms has sorryAx only via the two new statements and existing upstream sorries"
+ }
+}

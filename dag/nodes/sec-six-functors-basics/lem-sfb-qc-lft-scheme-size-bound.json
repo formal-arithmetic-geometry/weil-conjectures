@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-qc-lft-scheme-size-bound",
+ "kind": "statement",
+ "title": "Scheme size bound for a quasi-compact locally finite type source",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], locally of finite type [def-weil-finite-type-morphism], and assume $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. For a scheme $Z$, put $s(Z)=\\max\\{\\aleph_0,|\\mathcal B(Z)|,\\sup_{U\\in\\mathcal B(Z)}|\\Gamma(U,\\mathcal O_Z)|\\}$, where $\\mathcal B(Z)$ is its set of affine open subschemes and $\\Gamma(U,\\mathcal O_Z)$ is the ring of sections of its structure sheaf on $U$. Then $s(X)\\leq s(S)$. The target $S$ need not be quasi-compact or quasi-separated, and $f$ need not be quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 04T7, lemma-bound-finite-type; scheme size defined in section-categories-schemes preceding Tag 000I."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-scheme-cardinal-size"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\kappa=s(S)$, so $\\aleph_0\\leq\\kappa$. The affine opens $V\\subseteq S$ cover $S$ by [lem-weil-pbc-affine-opens-basis]. For every such $V=\\operatorname{Spec}A$, the definition of locally finite type gives an affine open covering of $f^{-1}(V)$ by $U=\\operatorname{Spec}B$ with $B$ finitely generated over $A$. Together these charts cover $X$. Quasi-compactness of $X$ selects finitely many of these very charts $U_i$, with corresponding $V_i=\\operatorname{Spec}A_i$ and $U_i=\\operatorname{Spec}B_i$. No quasi-compactness of the preimages or of $f$ is used. The selected family may be empty.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type, proof."
+   }
+  },
+  {
+   "text": "For each selected chart, $|A_i|\\leq\\kappa$ by the definition of $s(S)$. Choose finitely many $A_i$-algebra generators $b_1,\\ldots,b_r$ of $B_i$. Every element of $B_i$ is the evaluation of a polynomial expression in these generators and constants from $A_i$. Encode these expressions as finite words in the alphabet consisting of $A_i$ and finitely many variable and operation symbols. This alphabet has cardinal at most $\\max\\{\\aleph_0,|A_i|\\}\\leq\\kappa$; [lem-weil-pbc-finite-list-cardinality] bounds its finite words by $\\kappa$. Evaluation is surjective from the valid expressions, hence $|B_i|\\leq\\kappa$. This includes $r=0$ and the zero algebra.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type, proof. Final polynomial-cardinality estimate, with the omitted encoding written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-scheme-size] to each $U_i$. Its ring of global sections is $B_i$, so $s(U_i)=\\max\\{\\aleph_0,|B_i|\\}\\leq\\kappa$.",
+   "uses": [
+    "lem-sfb-affine-scheme-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type, proof. Affine size estimate 000P."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-open-cover-scheme-size] to $X=\\bigcup_{i\\in I}U_i$. Since $I$ is finite and every $s(U_i)\\leq\\kappa$, it gives $s(X)\\leq\\max\\{\\aleph_0,|I|,\\sup_i s(U_i)\\}\\leq\\kappa=s(S)$. If $I$ is empty the same bound still applies. Neither separatedness nor quasi-separatedness is used.",
+   "uses": [
+    "lem-sfb-open-cover-scheme-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 04T7, lemma-bound-finite-type, proof. Open-cover estimate 000Q, including the empty covering."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-list-cardinality",
+  "lem-sfb-affine-scheme-size",
+  "lem-sfb-open-cover-scheme-size"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 04T7, lemma-bound-finite-type, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(size|cardinal).*(finite.type|finiteType)|finiteType.*(size|cardinal)",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "grep",
+    "query": "(size|cardinal).*(finite.type|finiteType)|finiteType.*(size|cardinal)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine covers and finite-type maps on sections are present, but no cardinal bound for the number of affine opens and sizes of all their section rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"Small\"",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "loogle",
+    "query": "\"LocallyOfFiniteType\", \"Small\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine covers and finite-type maps on sections are present, but no cardinal bound for the number of affine opens and sizes of all their section rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinality of affine opens and coordinate rings of quasi compact locally finite type schemes",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "leansearch",
+    "query": "Cardinality of affine opens and coordinate rings of quasi compact locally finite type schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpens",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.Scheme.Hom.finiteType_appLE",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen",
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.Scheme.AffineCover.mk.sizeOf_spec",
+     "AlgebraicGeometry.AffineScheme"
+    ],
+    "digest": "5e868089a076de22"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine covers and finite-type maps on sections are present, but no cardinal bound for the number of affine opens and sizes of all their section rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact scheme locally of finite type over S has scheme size at most size S, counting affine opens and their rings of sections",
+   "results": {
+    "t": "2026-10-23T09:34:43Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact scheme locally of finite type over S has scheme size at most size S, counting affine opens and their rings of sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source"
+    ],
+    "digest": "51930638c1c79cda"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine covers and finite-type maps on sections are present, but no cardinal bound for the number of affine opens and sizes of all their section rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality bound for rings of functions on finite type affine charts implies a size bound for quasi compact schemes",
+   "results": {
+    "t": "2026-10-23T09:34:44Z",
+    "tool": "leanfinder",
+    "query": "Cardinality bound for rings of functions on finite type affine charts implies a size bound for quasi compact schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover",
+     "AlgebraicGeometry.quasiCompactCover_iff"
+    ],
+    "digest": "c73dc54d1a0e52ef"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine covers and finite-type maps on sections are present, but no cardinal bound for the number of affine opens and sizes of all their section rings."
+  },
+  {
+   "tool": "grep",
+   "query": "(size|cardinal).*(finite.type|finiteType)|finiteType.*(size|cardinal)",
+   "results": {
+    "t": "2026-10-23T11:45:15Z",
+    "tool": "grep",
+    "query": "(size|cardinal).*(finite.type|finiteType)|finiteType.*(size|cardinal)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"Cardinal\"",
+   "results": {
+    "t": "2026-10-23T11:45:15Z",
+    "tool": "loogle",
+    "query": "\"LocallyOfFiniteType\", \"Cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact scheme locally of finite type over S has cardinal size at most that of S counting affine opens and their section rings",
+   "results": {
+    "t": "2026-10-23T11:45:17Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact scheme locally of finite type over S has cardinal size at most that of S counting affine opens and their section rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+     "AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen"
+    ],
+    "digest": "481710408eba5417"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinality bound for a quasi compact scheme locally of finite type over an arbitrary base scheme",
+   "results": {
+    "t": "2026-10-23T11:45:48Z",
+    "tool": "leansearch",
+    "query": "Cardinality bound for a quasi compact scheme locally of finite type over an arbitrary base scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+     "AlgebraicGeometry.QuasiCompact.mk",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat"
+    ],
+    "digest": "f884029584975d4a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-affine-lft-coproduct",
+  "date": "2026-10-23",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. Split prerequisite: the bound on each quasi-compact locally finite type affine atlas summand.",
+   "via": [
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qc-lft-scheme-size-bound",
+  "worker": "stage1",
+  "summary": "Followed 04T7 via a finite family of locally finite type affine charts; exposed the independent affine and open-cover size estimates as two statement-only nodes and wrote the finite-expression cardinal estimate using the existing Mathlib finite-list leaf. The item statement is unchanged.",
+  "blueprint": "Retains the inherited supporting-input chain below direct-images proof (3). The current latest direct-images proof uses compactification instead of the historical alteration subroute; this split only expands the already-seeded scheme-size prerequisite 04T7. Its first sentence is realized by step 1, polynomial estimate by step 2, reduction through 000P by step 3 and through 000Q by step 4."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-e6bea6d76",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-e6bea6d76 (reviewer sub-agent of L); spot-checked: I read Stacks sets.tex: the size definition (l.311-325), 000P lemma-bound-affine, 000Q lemma-bound-size and 04T7 lemma-bound-finite-type (l.609-623). The item statement is unchanged and matches 04T7 hypothesis by hypothesis: S arbitrary, f locally of finite type, X quasi-compact. Step 1: def-weil-finite-type-morphism gives affine charts Spec B with B finitely generated over A on each preimage of an affine open; affine-opens-basis (a Mathlib leaf) and quasi-compactness of X give finitely many charts; nothing assumes f or its preimages quasi-compact, or affine intersections. Step 2 writes out the 'omitted' polynomial bound by encoding elements as finite words, through finite-list-cardinality (Cardinal.mk_list_le_max); I checked r=0, the zero ring and finite A. Steps 3 and 4 cite the two new nodes, each with its hypotheses met. The new nodes state exactly 000P and 000Q, each self-contained, statement-only and searched. 000Q adds aleph_0 inside the max: the source fails for an empty cover (Y empty, size aleph_0 but right side 0), and this correction is reported under Source error. I tested both new statements on the empty scheme, Spec F_2 and an uncountable ring. Neither restates a clause of the item. rg over the DAG for 000P/000Q/04T7 and size wording finds no duplicate (bounded-affine-lft-coproduct, big-site-open-cover-size-closure and affine-etale-essentially-small-cover state other facts). The blueprint has no scheme-size statement, and from.node null is inherited with the via chain extended correctly. Every off-unit dependency is a definition or a Mathlib leaf, so no tool_uses are needed. No SGA is cited and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCompactLocallyFiniteTypeSchemeSize",
+  "declaration": "AlgebraicGeometry.Scheme.cardinalSize_le_of_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCompactLocallyFiniteTypeSchemeSize.lean",
+  "statement": "theorem cardinalSize_le_of_locallyOfFiniteType {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [CompactSpace X] : X.cardinalSize ≤ S.cardinalSize",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bee6b1bbf",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Item theorem cardinalSize_le_of_locallyOfFiniteType {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [CompactSpace X] : X.cardinalSize ≤ S.cardinalSize matches the node and Stacks 04T7 (sets.tex l.609-623) hypothesis by hypothesis, with no extra qc/qs assumptions; lean.statement verbatim. New def node def-sfb-scheme-cardinal-size = max ℵ₀ (max #X.affineOpens (⨆ U, #Γ(X,U.1))) in Cardinal.{u}, matching the sets.tex size definition; affineOpens = {U | IsAffineOpen U}; supremum is a genuine bound by Cardinal.bddAbove_range (small index); empty scheme gives ℵ₀; no duplicate in Mathlib, lean/Sheaf or the DAG; §5 fields correct (import_flags allowed). Item node changes only by stmt_deps gaining the new (A) node plus its lean record; not superseded. Docstrings with source, blueprint and four proof steps; only sorry is the theorem proof; no line over 100 characters; plain Cardinal.Arithmetic import = module of proof dependency lem-weil-pbc-finite-list-cardinality. No recompile per instruction (worker reports clean per-file compiles). Advisory: DAG has duplicate open-cover size nodes (lem-sfb-open-cover-scheme-size vs lem-sfb-scheme-size-open-cover-bound); sibling nodes should cite def-sfb-scheme-cardinal-size."
+ }
+}

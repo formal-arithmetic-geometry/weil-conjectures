@@ -1,0 +1,255 @@
+{
+ "id": "lem-pur-coefficient-comparisons-unit-composition",
+ "kind": "statement",
+ "title": "Unit and successive-composition laws for normalized strict coefficient comparisons",
+ "statement": "Let $u:\\operatorname{Sh}(\\mathcal X)\\to\\operatorname{Sh}(\\mathcal Y)$ be a geometric morphism on small sites with left-exact inverse image. For $W=X,Y$ and $a=0,1,2$, let $R^a_{W,\\bullet}$ be inverse sequences of commutative ring sheaves, and let $i_W^{ab}:R^a_{W,\\bullet}\\to R^b_{W,\\bullet}$, $a\\le b$, satisfy $i^{aa}=1$ and $i^{02}=i^{12}i^{01}$. Let $\\phi^a:u^{-1}R^a_{Y,\\bullet}\\to R^a_{X,\\bullet}$ commute with all coefficient and sequence arrows. In module sheaves [def-weil-sheaf-of-modules-category] with actual sheafified tensors [def-pur-sheaf-tensor-product], set $F_aM=R_X^a\\otimes_{u^{-1}R_Y^a}u^{-1}M$ and $S_W^{ab}M=R_W^b\\otimes_{R_W^a}M$ levelwise. Let $T_a$ be the signed direct-sum total tensor of arbitrary unbounded cochain complexes [def-pc-tensor-complex-sheaves]. A strict system has semilinear chain transitions for every sequence arrow, and strict morphisms commute with them.\n\nSuppose natural chain isomorphisms $k^{ab}:S_X^{ab}F_a\\cong F_bS_Y^{ab}$ and $s_W^{ab}:S_W^{ab}T_a\\cong T_b(S_W^{ab},S_W^{ab})$, together with their inverses, are strict, and in each level and bidegree have the normalized generator formulas\n$$k^{ab}:b\\otimes(a\\otimes x)\\mapsto b i_X^{ab}(a)\\otimes(1\\otimes x),\\quad\n(k^{ab})^{-1}:b\\otimes(d\\otimes x)\\mapsto b\\phi^b(d)\\otimes(1\\otimes x),$$\n$$s_W^{ab}:b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y),\\quad\n(s_W^{ab})^{-1}:(b\\otimes x)\\otimes(d\\otimes y)\\mapsto bd\\otimes(x\\otimes y).$$\nInverse-image notation is suppressed; the $d$ for $(k^{ab})^{-1}$ belongs to $u^{-1}R_Y^b$.\n\nThe multiplication maps\n$$U_W^a:S_W^{aa}\\cong1,\\quad a\\otimes x\\mapsto ax,\\qquad\nA_W:S_W^{12}S_W^{01}\\cong S_W^{02},\\quad d\\otimes(b\\otimes x)\\mapsto d i_W^{12}(b)\\otimes x$$\nare balanced natural strict chain isomorphisms. Their inverse formulas are $x\\mapsto1\\otimes x$ and $c\\otimes x\\mapsto c\\otimes(1\\otimes x)$ respectively. With composition written in order from right to left, their compatibility equations are\n$$F_a(U_Y^a)k^{aa}=U_X^aF_a,\\qquad\nT_a(U_W^a,U_W^a)s_W^{aa}=U_W^aT_a,$$\n$$F_2(A_Y)k^{12}_{S_Y^{01}K}S_X^{12}(k^{01}_K)=k^{02}_K(A_X)_{F_0K},$$\n$$T_2(A_W,A_W)s_W^{12}_{S_W^{01}K,S_W^{01}H}S_W^{12}(s_W^{01}_{K,H})\n=s_W^{02}_{K,H}(A_W)_{T_0(K,H)}.$$\nThe successive $k$ routes on $d\\otimes(b\\otimes(a\\otimes x))$ both have value $d i_X^{12}(b)i_X^{02}(a)\\otimes(1\\otimes x)$ after the displayed source and target identifications. The successive $s_W$ routes on $d\\otimes(b\\otimes(x\\otimes y))$ both have value $(d i_W^{12}(b)\\otimes x)\\otimes(1\\otimes y)$. All four equations hold as equalities of strict chain isomorphisms and of their inverse isomorphisms, for arbitrary semilinear transitions, including zero maps, zero rings, nonflat coefficient maps and unbounded complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; Section Tensor product, section-tensor-product. Agent extraction of returned lem-pur-strict-coefficient-comparison-calculus proof steps 7--8 (multiplication units, balanced associators, successive kappa and sigma equations, inverse equations)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-normalized-coefficient-diagram"
+ ],
+ "proof": [
+  {
+   "text": "We use the actual sheafified tensors, not tensors of global sections. The universal property in [lem-pc-sites-sheaf-tensor-bilinear-universal] identifies maps out of a sheaf tensor with restriction-compatible balanced pairings. For sectionwise tensors use the quotient by bilinearity and pure-tensor generation in [def-weil-pbc-module-tensor-product], and descend linear maps by [def-weil-presheaf-modules-sheafification]. For an iterated tensor, first define its pairing with the inner presheaf tensor and extend across the inner sheafification by [lem-pc-sites-module-sheafification-bilinear-extension], then use the outer tensor universal property. Repeating this once more handles three nested tensors. Its uniqueness clauses show that equality on the displayed nested generators implies equality of the resulting sheaf maps. Apply the same argument after restricting the target scalars along each coefficient map; check linearity over the final ring on generators. Thus this test applies to scalar extensions as well. For sources involving $u^{-1}K$, take $x$ to be an arbitrary section of that sheaf; when an inner map on $Y$ is pulled back, apply $u^{-1}$ to its defining equality of morphisms. No claim that sections of $u^{-1}K$ lift globally to $Y$ is needed.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons."
+   }
+  },
+  {
+   "text": "Fix $W$ and a sequence level; abbreviate $R_W^a$ to $R^a$ and $i_W^{ab}$ to $i^{ab}$. For an $R^a$-module $M$, $U(a\\otimes x)=ax$ is additive, balanced since $(ar)x=a(rx)$, and $R^a$-linear. Its proposed inverse is linear because $1\\otimes rx=r\\otimes x$; the two composites are $x\\mapsto x$ and $a\\otimes x\\mapsto1\\otimes ax=a\\otimes x$. For an $R^0$-module $M$, the formula $A(d\\otimes(b\\otimes x))=d i^{12}(b)\\otimes x$ respects the outer $R^1$ relation since $d i^{12}(t)i^{12}(b)=d i^{12}(tb)$. The inner $R^0$ relation gives $d i^{12}(b i^{01}(r))\\otimes x=d i^{12}(b)i^{02}(r)\\otimes x=d i^{12}(b)\\otimes rx$. For the inverse $B(c\\otimes x)=c\\otimes(1\\otimes x)$, its $R^0$ balancing is $c i^{02}(r)\\otimes(1\\otimes x)=c\\otimes(i^{01}(r)\\otimes x)=c\\otimes(1\\otimes rx)$. Both formulas are additive and $R^2$-linear. Step 1 therefore constructs all four sheaf maps. Now $AB(c\\otimes x)=c\\otimes x$ and $BA(d\\otimes(b\\otimes x))=d i^{12}(b)\\otimes(1\\otimes x)=d\\otimes(b\\otimes x)$. Step 1 proves the inverse equations. For a module map $h$, either order with $U,A,B$ merely replaces $x$ by $h(x)$; hence these are natural isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons."
+   }
+  },
+  {
+   "text": "Apply Step 2 in every cochain degree. For $U$ both orders with the differential send $a\\otimes x$ to $a\\,d_Mx$; for $A$ they send $d\\otimes(b\\otimes x)$ to $d i^{12}(b)\\otimes d_Mx$; the inverse formulas give the same check with inserted ones. For a sequence arrow $m\\to n$, write $\\rho^a$ for its ring maps and $t$ for its semilinear chain transition. Either order with $U$ gives $\\rho^a(a)t(x)$, and either order with $A$ gives $\\rho^2(d)i_n^{12}(\\rho^1(b))\\otimes t(x)$, because $\\rho^2i_m^{12}=i_n^{12}\\rho^1$. For the inverses the common values are $1\\otimes t(x)$ and $\\rho^2(c)\\otimes(1\\otimes t(x))$. Thus $U,A$ and their inverses are strict chain maps, including when $t=0$. When evaluated on $T_0(K,H)$ their coefficient multiplication leaves the bidegree unchanged: on $x\\in K^p$ it carries the two differential terms separately to the corresponding terms with $d_Kx\\otimes y$ and $(-1)^p x\\otimes d_Hy$. The direct-sum total in [def-pc-tensor-complex-sheaves] is a coproduct in each degree, so equality can be tested on each summand. For $S(Q)$, regard the target as a module over the old ring. The tensor-Hom bijection of [lem-pc-sheaf-modules-tensor-closed] identifies maps from $R^b\\otimes_{R^a}Q$ with maps from $Q$ to $\\mathcal Hom_{R^a}(R^b,-)$. The coproduct universal property now tests equality on the inclusions of the summands of $Q=T_0$. Apply this bijection twice for $S^{12}S^{01}(T_0)$. Thus bidegree tests suffice on all the scalar-extended totals, without boundedness or a claim that coproduct sections are globally finite sums.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex, total differential and direct sums; sites-modules.tex Section 03EK, tensor-Hom adjunction and universal property; agent check of coefficient multiplication and arbitrary semilinear transitions."
+   }
+  },
+  {
+   "text": "For the first unit equation evaluate on $b\\otimes(a\\otimes x)$ in $S_X^{aa}F_aK$. The $k^{aa}$ route followed by $F_a(U_Y^a)$ is $ba\\otimes(1\\otimes x)\\mapsto ba\\otimes x$; $U_X^aF_a$ gives the same $ba\\otimes x$. For the second equation, on $b\\otimes(x\\otimes y)$ with homogeneous $x,y$, the $s_W^{aa}$ route followed by $T_a(U_W^a,U_W^a)$ gives $(bx)\\otimes y=b(x\\otimes y)$, which is the value of $U_W^aT_a$. These are balancing and module-action identities, with no change of bidegree. Steps 1 and 3 give equality of the sheaf maps in every degree, hence the two unit equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons."
+   }
+  },
+  {
+   "text": "For the successive $k$ equation start with $d\\otimes(b\\otimes(a\\otimes x))$ in $S_X^{12}S_X^{01}F_0K$. Applying $S_X^{12}(k_K^{01})$ gives $d\\otimes(b i_X^{01}(a)\\otimes(1\\otimes x))$. Applying $k^{12}_{S_Y^{01}K}$ gives $d i_X^{12}(b i_X^{01}(a))\\otimes(1\\otimes(1\\otimes x))$. Applying $F_2(A_Y)$ multiplies the two unit coefficients on $Y$, giving $d i_X^{12}(b)i_X^{02}(a)\\otimes(1\\otimes x)$. In the other order $(A_X)_{F_0K}$ first gives $d i_X^{12}(b)\\otimes(a\\otimes x)$ and $k_K^{02}$ gives exactly the same value. Here we used multiplicativity of $i_X^{12}$ and the assumed equality $i_X^{12}i_X^{01}=i_X^{02}$; the $Y$ coefficients used in $F_2(A_Y)$ are both $1$. Step 1 establishes equality on the whole source sheaf, in every degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons."
+   }
+  },
+  {
+   "text": "For the successive $s_W$ equation start with $d\\otimes(b\\otimes(x\\otimes y))$, $x\\in K^p$, $y\\in H^q$. The left side successively gives $d\\otimes((b\\otimes x)\\otimes(1\\otimes y))$, then $(d\\otimes(b\\otimes x))\\otimes(1\\otimes(1\\otimes y))$, then $(d i_W^{12}(b)\\otimes x)\\otimes(1\\otimes y)$. On the right, $(A_W)_{T_0(K,H)}$ gives $d i_W^{12}(b)\\otimes(x\\otimes y)$ and $s_{W;K,H}^{02}$ gives the same final tensor. No interchange of $x$ and $y$ occurs, so there is no extra Koszul sign. Step 1 gives equality on each sheaf tensor summand and Step 3 gives equality on the arbitrary unbounded direct-sum total.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons."
+   }
+  },
+  {
+   "text": "By hypothesis every $k,s_W$ and its inverse already is a natural strict chain isomorphism, and Step 3 proves this for $U,A$ and their inverses. Thus all routes in Steps 4--6 are well-defined in the category of strict systems. Their componentwise equalities are equalities of strict chain maps, since strictness adds commuting equations to the component maps rather than changing equality. An inverse of an isomorphism is unique: if $P=Q$ then $P^{-1}=P^{-1}QQ^{-1}=Q^{-1}$. Inverting the four equations, with the order of factors reversed, therefore gives exactly the equations of inverse isomorphisms. The proof uses only balancing, addition, multiplication, units and the stated coefficient/sequence squares. It applies to zero rings (where all module sections vanish), nonflat coefficient maps, zero or arbitrary semilinear transitions, and unbounded complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product (balanced tensors and bilinear universal property), and Tag 03EL, lemma-tensor-product-pullback, constituents only; agent calculation of multiplication units and successive normalized comparisons.",
+  "group": "Q48",
+  "date": "2026-10-22",
+  "note": "Explicit calculation from the sheafified tensor universal properties. Stacks supplies the constituents, not the strict-system coherence assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized scalar association and tensor comparisons for three commutative ring sheaves respect multiplication unit and successive scalar extension associators",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; TensorProduct.AlgebraTensorModule.tensorTensorTensorComm; Algebra.TensorProduct.assoc; TensorProduct.AlgebraTensorModule.assoc_tmul; TensorProduct.AlgebraTensorModule.assoc_symm_tmul; Algebra.TensorProduct.assoc_aux_1; Algebra.TensorProduct.assoc_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar associator coherence alone does not give both tensor and geometric-pullback unit/composition laws as strict chain-system equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For ring sheaves with compatible geometric inverse image, coefficient pullback and tensor scalar comparison satisfy identity and composition under multiplication associators",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.pullback_assoc; PresheafOfModules.monoidalCategory; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.comp_val_assoc; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar associator coherence alone does not give both tensor and geometric-pullback unit/composition laws as strict chain-system equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars_assoc",
+   "results": "[loogle] OK 1 hit(s); ModuleCat.extendScalars_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar associator coherence alone does not give both tensor and geometric-pullback unit/composition laws as strict chain-system equations."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|pullback_assoc|pullback_id_comp|pullback_comp_id",
+   "results": "[grep] OK 10 hit(s); Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean:68; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:204; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:209; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:1015; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:1034; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:1040; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:151; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:156; directory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar associator coherence alone does not give both tensor and geometric-pullback unit/composition laws as strict chain-system equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit and cocycle equations for coefficient scalar extension tensor comparison chain isomorphisms on arbitrary semilinear strict systems",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.extendScalarsComp; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.homEquiv_extendScalarsComp; IsBaseChange.of_equiv; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.extendScalarsId_inv_app_apply; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar associator coherence alone does not give both tensor and geometric-pullback unit/composition laws as strict chain-system equations."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalarsId|pullback_assoc",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean (directory Mathlib/Algebra/Category/ModuleCat)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary scalar or pullback comparisons, or monoidal sheaf structures; none states both normalized unit/composition equations for k and s on arbitrary strict semilinear unbounded systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp, ModuleCat.extendScalarsId",
+   "results": "4 hits: ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary scalar or pullback comparisons, or monoidal sheaf structures; none states both normalized unit/composition equations for k and s on arbitrary strict semilinear unbounded systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized change of coefficients tensor and inverse image comparisons for sheaves of modules obey unit and successive composition equations on unbounded chain complexes",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary scalar or pullback comparisons, or monoidal sheaf structures; none states both normalized unit/composition equations for k and s on arbitrary strict semilinear unbounded systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of ring sheaves multiplication unit and associator satisfy identity and composition for normalized tensor and geometric pullback comparisons on strict cochain systems",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary scalar or pullback comparisons, or monoidal sheaf structures; none states both normalized unit/composition equations for k and s on arbitrary strict semilinear unbounded systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and transitivity of extension of scalars compatible with the strong monoidal tensor comparison of sheaves on complexes with semilinear transition maps",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, ModuleCat.extendScalarsComp_hom_app_one_tmul, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategoryLightCondMod, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary scalar or pullback comparisons, or monoidal sheaf structures; none states both normalized unit/composition equations for k and s on arbitrary strict semilinear unbounded systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-strict-coefficient-comparison-calculus",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Coefficient-compatible Frobenius transport, former proof step 6: strict finite quotient scalar/pullback and tensor comparisons; their signs, coefficient square, quotient transitions, identity and successive extensions. Returned strict-comparison proof steps 7--8: unit maps, scalar associators and successive comparisons.",
+   "via": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-coefficient-comparisons-unit-composition",
+  "worker": "stage1",
+  "summary": "Constructed balanced multiplication units and associators, proved both inverse formulas, naturality, differential and arbitrary semilinear transition compatibility, and evaluated both sides of all four normalized equations. Reused tensor/sheafification universal-property nodes; no new nodes. Preserved the complete statement and every coefficient/unboundedness hypothesis.",
+  "blueprint": "Realizes the finite-reduction/scalar-extension compatibility sentence of def-weil-frobenius-coefficient-twists (current main-20261015 snapshot, sec-six-functors-basics/sk-def-purity-conv), through the ancestor strict comparison calculus: its extracted unit/composition clause, former proof steps 7--8.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic extension and uniqueness of balanced pairings through inner module sheafification, used to construct and test nested scalar tensor maps. This is a tool below the unit coefficient-compatibility calculation, not a replacement of its route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Its explicit tensor-Hom adjunction reduces equality after scalar extension of unbounded coproduct totals to equality on the input summand inclusions. This generic sheaf tensor tool supplies no coefficient-coherence clause of the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-ead585b4b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-ead585b4b (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item in full against Stacks 03EK (section-tensor-product, Bilin bijection, 0GMW), Stacks 03EL (with its proof) and homology 012Z, and against the statements of all eight cited nodes. The parent strict-coefficient-comparison-calculus (its step 3 cites the item) and its Q114 siblings were also read. There is no repair note, so this is not a re-split. The four equations type-check. I recomputed every generator route: k-composition gives d i12(b) i02(a)⊗(1⊗x) on both sides, s-composition gives (d i12(b)⊗x)⊗(1⊗y) on both sides with no swap and so no Koszul sign, and both unit laws hold. For U and A, outer R1 and inner R0 balancing hold; the inner one uses i02=i12 i01. Both inverse pairs check, including BA via outer balancing. Transition strictness uses rho2 i12_m = i12_n rho1. Step 1 is an equality test on nested generators: bilinear-universal, the uniqueness in bilinear-extension, and generators of the module tensor; u^-1 is applied to the defining equalities under the 03EL identification the statement suppresses. Step 3 tests equality on unbounded coproduct totals via the tensor-Hom bijection of lem-pc-sheaf-modules-tensor-closed, which the node states. Step 7 handles inverses through uniqueness of inverses. Edge cases checked: zero ring, all-equal rings, Z->Z/2, zero transitions, unbounded complexes. Nothing duplicates the item: lem-pur-scalar-tensor-unit is a narrower earlier special case, and lem-pur-coefficient-tensor-ordinary-coherence and the derived scalar-associator nodes state different things. There are no new nodes. bilinear-universal is Lean-closed and needs no declaration. The two declared tool_uses (sheafification-bilinear-extension, sheaf-modules-tensor-closed) are accepted as generic sheaf-tensor tools. No SGA. Advisory only: 'geometric morphism on small sites' cites no def node (def-trf-geometric-morphism exists); this is inherited from the parent and siblings."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.CoefficientComparisonsUnitComposition",
+  "declaration": "CategoryTheory.CochainPullback.StrictCoefficient.coefficientComparisonsUnitComposition",
+  "declarations": [
+   "CategoryTheory.CochainPullback.StrictCoefficient.UnitMultiplication",
+   "CategoryTheory.CochainPullback.StrictCoefficient.CompositionMultiplication",
+   "CategoryTheory.CochainPullback.StrictCoefficient.UnitStrictness",
+   "CategoryTheory.CochainPullback.StrictCoefficient.twiceSquareArrow",
+   "CategoryTheory.CochainPullback.StrictCoefficient.CompositionStrictness",
+   "CategoryTheory.CochainPullback.StrictCoefficient.coefficientComparisonsUnitComposition"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/CoefficientComparisonsUnitComposition.lean",
+  "statement": "theorem coefficientComparisonsUnitComposition (d : Diagram (J := J) (K := K)) (k : ∀ i : Index, Comparison (d.ringed i)) (e : Comparisons d) (_normalized : e.Normalized k) (_strict : e.KappaTransitionLaws ∧ TensorTransitionLaws d.R e.sigmaR ∧ TensorTransitionLaws d.S e.sigmaS) : UnitMultiplication d.R ∧ UnitMultiplication d.S ∧ CompositionMultiplication d.R ∧ CompositionMultiplication d.S ∧ UnitStrictness d.R ∧ UnitStrictness d.S ∧ CompositionStrictness d.R ∧ CompositionStrictness d.S ∧ TensorLaws d.R e.sigmaR ∧ TensorLaws d.S e.sigmaS ∧ (∀ (i : Index) (P : Complex (d.R.obj i)), e.kappaC (𝟙 i) P ≪≫ (pull (d.ringed i)).mapIso ((diagramUnit d.R i).app P) = (diagramUnit d.S i).app ((pull (d.ringed i)).obj P)) ∧ (∀ {i j l : Index} (a : i ⟶ j) (b : j ⟶ l) (P : Complex (d.R.obj i)), (extend (d.S.map b)).mapIso (e.kappaC a P) ≪≫ e.kappaC b ((extend (d.R.map a)).obj P) ≪≫ (pull (d.ringed l)).mapIso ((diagramComp d.R a b).app P) = (diagramComp d.S a b).app ((pull (d.ringed i)).obj P) ≪≫ e.kappaC (a ≫ b) P)",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94f0ea210",
+  "group": "NV",
+  "result": "fix",
+  "note": "Item Lean matches the node clause by clause: k pinned by IsScalarAssociation, s by the unique Comparison pure formula; strictness hypotheses satisfiable (parent ∃!); conclusions are U/A formulas and strictness, TensorLaws for R and S, and both k equations as Iso equalities (inverses included); no extra assumptions, universes independent, docstrings/source/blueprint OK, statement verbatim. New existing:true def-pur-normalized-coefficient-diagram passes check_existing/check_new_node and its stmt_deps own the body decls. FIX: added the body helpers Comparisons.pullArrow and tensorArrowFor (used by KappaTransitionLaws/TensorTransitionLaws) to its declarations (fixes/def-pur-normalized-coefficient-diagram.json, check_existing clean). Advisory: the parent's proof_dep on this item would close an import cycle (§3(7), disclosed); move the interface to its own module at stage 3."
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; coefficient realization in step 1 and forgotten derived Hom in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; native coefficient tensor comparison, expanded by H2 into the ordinary tensor identification and scalar-forgetting step."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCoefficientTensorComparison",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-native-ordinary-tensor-identification",
+ "title": "Ordinary native Hom representatives determine the native derived tensor",
+ "statement": "Let l be prime and Y a scheme. Put A=ProEtale.AdicSheaf l Y, with its relative module tensor [def-sfb-modobj-relative-tensor] and the standard derived tensor [sk-def-sfb-derived-tensor-hom]. Let H:D(A)^op times D(A) to D(A), R:NativeHomRepresentatives(ordinaryIhomBifunctor l Y,H), and S:CoefficientClosedStructure H, in the conventions of [def-sf-native-weil-closed-models]. For every P in D(A), tensorRight for S at P is naturally isomorphic to the standard derived tensorRight at P. There is no scalar-forgetting functor, change of coefficients or derived tensor transport in this assertion, and no additional ordinary tensor model is assumed.",
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Both presentations of relative tensor are coequalizers of the two balancing action maps in [def-sfb-modobj-relative-tensor]. Their universal properties identify Mod.tensorLeft with the standard tensorRight, naturally in the fixed module. Conjugating under the two ordinary tensor-Hom adjunctions identifies Mod.ihom with the standard internal Hom, using the braiding to correct input order. Check naturality by conjugateEquiv_comp.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary internal-Hom isomorphism in each pair of degrees and take products. Naturality in both variables identifies the row-sign differentials. This yields a natural isomorphism of the ordinary product-total Hom with CochainComplex.internalHom. On K-injective targets the canonical comparison with the standard derived internal Hom is an isomorphism by its K-injective computation [sk-def-sfb-derived-tensor-hom].",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The model and naturality fields of R from [def-sf-native-weil-closed-models] identify H with this canonical derived internal Hom on K-injective complexes. The functor from K-injective complexes to D(A) is a localization, so fully faithful whiskering lifts the natural isomorphism to all derived targets. For each source, S.adjunction and the canonical derived tensor-Hom adjunction now have the same right adjoint. Apply Mathlib Adjunction.leftAdjointUniq; transport the chosen complex preimage to P and use the canonical braiding to obtain tensorRight.",
+   "uses": [
+    "def-sf-native-weil-closed-models",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-internal-hom",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sf-native-weil-closed-models"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence induces a monoidal equivalence of unbounded derived categories preserving the derived tensor product",
+   "results": "Eight generic monoidal and derived-category hits. The local source library already has mapDerivedCategoryTensorComparison, usable once the ordinary comparison and native tensor identification are supplied.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "Mathlib.CategoryTheory.Adjunction.Unique supplies Adjunction.leftAdjointUniq, used to compare tensors after identifying their right adjoints. It does not identify the native product-Hom complex or scalar-forgetting tensor.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two left adjoints of naturally isomorphic right adjoints are naturally isomorphic",
+   "results": "Eight hits, including Adjunction.natIsoOfRightAdjointNatIso and Adjunction.leftAdjointUniq. The latter finishes the proof after the explicit Hom-complex and localization comparison.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2 of the parent coefficient tensor comparison, identifying the supplied source closed tensor with the standard K-flat derived module tensor. Blueprint searches ordinary tensor native and forgetting ambient found no matching imported statement. The nearest imported ancestor is null (blueprint_refs.py ancestor).",
+   "via": [
+    "lem-sf-native-coefficient-tensor-comparison",
+    "lem-sf-native-geometric-hom-comparison",
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryTensorIdentification",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryTensorIdentification.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOrdinary_tensorRight_iso",
+  "statement": "theorem nativeOrdinary_tensorRight_iso (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×\n      DerivedCategory (ProEtale.AdicSheaf l Y) ⥤\n        DerivedCategory (ProEtale.AdicSheaf l Y))\n    (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)\n    (S : CoefficientClosedStructure H) (P : DerivedCategory (ProEtale.AdicSheaf l Y)) :\n    Nonempty (@MonoidalCategory.tensorRight _ _ S.monoidal P ≅\n      MonoidalCategory.tensorRight P)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T065852-L-3274992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T065852-L-3274992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-rational-fixed-space-base-change",
+ "kind": "statement",
+ "title": "Rational fixed spaces over algebras and normal-subgroup stability",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an affine group scheme [def-sc-group-scheme, def-pc-scheme] of finite type over $k$ [def-weil-finite-type-morphism], $H\\subseteq G$ a closed subgroup scheme [def-sc-group-scheme-subgroup], and $V$ a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace] with a rational representation $r:G\\to\\mathrm{GL}(V)$ [def-sc-general-linear-group, after choosing a basis]. Define\n$$V^H=\\{v\\in V:r_B(h)(v\\otimes1)=v\\otimes1\\text{ for every commutative }k\\text{-algebra }B\\text{ and }h\\in H(B)\\}.$$\nFor every commutative $k$-algebra $A$, the natural map $V^H\\otimes_k A\\to V\\otimes_k A$ is injective and identifies its source with\n$$\\{w\\in V\\otimes_k A:r_B(h)(w\\otimes1)=w\\otimes1\\text{ for every commutative }A\\text{-algebra }B\\text{ and }h\\in H(B)\\}.$$\nIf $H$ is normal in $G$, every $g\\in G(A)$ preserves $V^H\\otimes_k A$, and these restrictions define a rational representation of $G$ on $V^H$. The subgroup scheme $H$ acts trivially on that representation. Here $\\mathrm{GL}(V)(A)$ means the $A$-linear automorphisms of $V\\otimes_k A$; if $V=0$, this is the trivial group scheme $\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 4.31 and 4.33, printed p.96, and Lemma 5.15, printed p.102; fixed vectors over every further algebra, followed by normal-subgroup stability."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-weil-finite-dimensional-subspace",
+  "def-sfb-rational-natural-representation"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=V^H$. For each $B,h$, the equation defining $W$ is linear in $v$, so $W$ is a $k$-subspace. We first construct a linear retraction $p:V\\to W$. Give $V/W$ a basis by [lem-weil-pbc-vector-space-free] and choose in $V$ a lift of each basis vector. Unique finite basis expansions [def-weil-pbc-free-module] extend these lifts to a linear section $s:V/W\\to V$ of the quotient $q:V\\to V/W$. Then $p(v)=v-s(q(v))$ lies in $W$ and $p(w)=w$ for $w\\in W$. In particular $W$ is finite-dimensional: if $v_1,\\ldots,v_n$ span $V$, then $p(v_1),\\ldots,p(v_n)$ span $W$, by applying $p$ to a spanning expression for $w$. Successively discard any vector in the span of its predecessors in this finite list; the remaining list is an independent spanning family, hence a finite basis of $W$. This includes the empty basis when $W=0$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-free-module",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.31, printed p.96: the fixed subspace and its tensor inclusion; explicit linear-algebra preliminaries."
+   }
+  },
+  {
+   "text": "Write $\\iota:W\\hookrightarrow V$. For every $k$-algebra $A$, tensor functoriality [def-weil-pbc-module-tensor-product] gives $(p\\otimes1_A)(\\iota\\otimes1_A)=1_{W\\otimes_k A}$, so the natural map is injective. Also choose a $k$-basis $(a_i)_{i\\in I}$ of $A$ by [lem-weil-pbc-vector-space-free]. Its coordinate maps $\\lambda_j:A\\to k$ are linear by uniqueness of finite expansions [def-weil-pbc-free-module]. Every element of $M\\otimes_k A$, for any $k$-vector space $M$, is $\\sum_i m_i\\otimes a_i$ with finite support: expand the second factors of a finite sum of pure tensors and collect terms. The tensor universal property gives coefficient maps $E_j^M:M\\otimes_k A\\to M$, $m\\otimes a\\mapsto\\lambda_j(a)m$, so these coefficients are unique. All reassociations used below are the maps $(v\\otimes x)\\otimes y\\mapsto v\\otimes(x\\otimes y)$ and their inverses, constructed by the same universal property; their composites fix pure tensors and hence are identities.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.31, printed p.96: choice of a basis of the scalar algebra and comparison of coefficients."
+   }
+  },
+  {
+   "text": "If $w$ lies in the image of $W\\otimes_k A$, write $w=\\sum_t w_t\\otimes b_t$ with $w_t\\in W$ using pure-tensor generation [def-weil-pbc-module-tensor-product]. For any $A$-algebra $B$ and $h\\in H(B)$, its extension is $\\sum_t b_t(w_t\\otimes1_B)$. Each $w_t\\otimes1_B$ is fixed by the definition of $W$, and $r_B(h)$ is $B$-linear, so this sum is fixed. Thus the image is contained in the claimed set of universally fixed vectors.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.31, printed p.96: the immediate inclusion."
+   }
+  },
+  {
+   "text": "Conversely, let $w\\in V\\otimes_k A$ satisfy the displayed universal fixed-vector condition and write $w=\\sum_i v_i\\otimes a_i$ using step 2. Take any commutative $k$-algebra $S$ and $h\\in H(S)$. The algebra tensor product [lem-weil-pbc-algebra-tensor-pushout-universal-property] makes $B=S\\otimes_k A$ an $A$-algebra by $a\\mapsto1\\otimes a$. Send $h$ to $h'\\in H(B)$ by $s\\mapsto s\\otimes1$. Naturality of the given morphism $r$ and $B$-linearity imply, in $(V\\otimes_k S)\\otimes_k A$,\n$$0=r_B(h')(w\\otimes1_B)-w\\otimes1_B=\\sum_i\\bigl(r_S(h)(v_i\\otimes1_S)-v_i\\otimes1_S\\bigr)\\otimes a_i.$$\nApply $E_j^{V\\otimes_k S}$ from step 2. It gives $r_S(h)(v_j\\otimes1_S)=v_j\\otimes1_S$. Since $S,h$ were arbitrary, every $v_j$ belongs to $W$, and $w$ is in the image of $W\\otimes_k A$. The reassociations and coefficient maps here use [def-weil-pbc-module-tensor-product]. No density of field-valued points is used.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.31, printed p.96: its basis-coefficient argument, applied to the restricted representation of H."
+   }
+  },
+  {
+   "text": "Assume $H$ is normal. Let $g\\in G(A)$ and $w\\in W\\otimes_k A$, viewed in $V\\otimes_k A$ by step 2. For any $A$-algebra $B$ and $h\\in H(B)$, normality [def-sc-group-scheme-subgroup] gives $g_B^{-1}hg_B\\in H(B)$. By steps 3--4 and the representation law,\n$$r_B(h)r_B(g_B)w_B=r_B(g_B)r_B(g_B^{-1}hg_B)w_B=r_B(g_B)w_B.$$\nThus step 4 puts $r_A(g)w$ in $W\\otimes_k A$. Applying the same argument to $g^{-1}$ shows that the restriction $T_A(g)$ is an $A$-linear automorphism. The restrictions commute with $A\\to B$: their composites with the injective map $W\\otimes_k B\\hookrightarrow V\\otimes_k B$ agree by naturality of $r$, hence they agree. Their products and identities likewise agree after this injection.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.15, printed p.102: the explicit conjugation calculation and its consequence using Proposition 4.31."
+   }
+  },
+  {
+   "text": "To check rationality, write $G=\\operatorname{Spec}C$, possible since $G$ is affine [def-pc-scheme]. The identity $C\\to C$ represents a universal point $u\\in G(C)$ by [def-weil-affine-spectrum]. If $d=\\dim_kW>0$, use the finite basis of $W$ from step 1. The automorphism $T_C(u)$ is an invertible $d\\times d$ matrix over $C$, hence a $C$-point of $\\mathrm{GL}_{d,k}$ by [def-sc-general-linear-group]. A $C$-point is precisely a $k$-morphism $r_W:G=\\operatorname{Spec}C\\to\\mathrm{GL}_{d,k}$. For every $k$-algebra $A$, a point $g\\in G(A)$ corresponds to a $k$-algebra map $f:C\\to A$. The $A$-point of $r_W$ at $g$ is the matrix obtained by applying $f$ to $T_C(u)$. By the naturality proved in step 5 this is exactly $T_A(g)$. Thus this actual scheme morphism realizes all the restrictions simultaneously, including over algebras with nilpotents.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed pp.83--84 (universal element and its representing matrix), and Lemma 5.15, printed p.102 (restricted rational action)."
+   }
+  },
+  {
+   "text": "The morphism $r_W$ respects multiplication, as can be checked on each affine open $U=\\operatorname{Spec}D$ of $G\\times_kG$ [def-pc-scheme]. Its two projections define $g_1,g_2\\in G(D)$. The two multiplication composites on $U$ have the matrices $T_D(g_1g_2)$ and $T_D(g_1)T_D(g_2)$, equal by step 5, so they are the same morphism by [def-weil-affine-spectrum]. Equality on this open cover is equality of the scheme morphisms (both the underlying maps and the sheaf maps agree on each open). The identity is preserved by $T_k(1)=1$. These are the group-scheme homomorphism diagrams [def-sc-group-scheme], so $r_W$ is a rational representation. If $h\\in H(A)$, step 3 with $B=A$ gives $T_A(h)w=w$ for every $w\\in W\\otimes_k A$, so $H$ acts trivially. The corresponding morphisms on $H$ agree by the same test on its affine opens. If $W=0$, use the unique map $G\\to\\operatorname{Spec}k$; its action on $0\\otimes_k A=0$ is the unique automorphism, so all assertions hold.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed pp.83--84; Propositions 4.31 and 4.33, printed p.96; Lemma 5.15, printed p.102: group law and trivial H-action on the restricted representation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-pbc-free-module",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-general-linear-group",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.31, printed p.96; Lemma 5.15, printed p.102; Remark 4.1, printed pp.83--84, for the universal matrix description of rationality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Invariants of a normal subgroup scheme in a rational representation form a subrepresentation and commute with scalar extension to every algebra",
+   "results": "{\"t\": \"2026-10-23T13:22:58Z\", \"tool\": \"leanfinder\", \"query\": \"Invariants of a normal subgroup scheme in a rational representation form a subrepresentation and commute with scalar extension to every algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"Representation.toInvariants\", \"Rep.toCoinvariantsKer\", \"Rep.toCoinvariants\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"Representation.quotientToInvariants\", \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\", \"Rep.quotientToInvariantsFunctor\"], \"digest\": \"52d21f69068af45d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group scheme fixed subspace normal subgroup arbitrary algebra base change invariants",
+   "results": "{\"t\": \"2026-10-23T13:22:59Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic group scheme fixed subspace normal subgroup arbitrary algebra base change invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.toInvariants\", \"Rep.toInvariants\", \"vadd_mem_fixedPoints_of_normal\", \"smul_mem_fixedPoints_of_normal\", \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"fixedPointsSubAddOfNormal\", \"coe_smul_fixedPoints_of_normal\", \"Algebra.IsInvariant.mk\"], \"digest\": \"50b3e65ebc4e8aee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.invariants",
+   "results": "{\"t\": \"2026-10-23T13:23:00Z\", \"tool\": \"loogle\", \"query\": \"Representation.invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Representation.invariants\", \"Representation.invariants_eq_top\", \"Representation.isProj_averageMap\", \"Representation.averageMap_invariant\", \"Representation.averageMap_id\", \"Representation.invariants_eq_inter\", \"Representation.mem_invariants\", \"Representation.mem_invariants_iff_of_forall_mem_zpowers\"], \"digest\": \"404505538e8c1b89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "invariants|fixed.*sub",
+   "results": "{\"t\": \"2026-10-23T13:23:00Z\", \"tool\": \"grep\", \"query\": \"invariants|fixed.*sub\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\"], \"digest\": \"6fc0edb1a02ac306\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a rational representation of an affine group scheme invariants commute with base change to every commutative algebra over the field and are fixed by points over all further algebras",
+   "results": "{\"t\": \"2026-10-23T13:25:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a rational representation of an affine group scheme invariants commute with base change to every commutative algebra over the field and are fixed by points over all further algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isInvariant_iff\", \"IsGaloisGroup.isInvariant\", \"WeierstrassCurve.Affine.Point.map_id\", \"Algebra.isInvariant_of_isGalois'\", \"Algebra.IsInvariant.isInvariant\", \"Algebra.isInvariant_of_isGalois\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"FixedPoints.toAlgHomEquiv\"], \"digest\": \"86faa55de2b3cdfd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*invariant|invariant.*baseChange|invariants.*tensor|tensor.*invariants",
+   "results": "{\"t\": \"2026-10-23T13:25:17Z\", \"tool\": \"grep\", \"query\": \"baseChange.*invariant|invariant.*baseChange|invariants.*tensor|tensor.*invariants\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\"], \"digest\": \"6c04b27828c10f9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|invariants|tensor",
+   "results": "{\"t\": \"2026-10-23T13:27:46Z\", \"tool\": \"grep\", \"query\": \"baseChange|invariants|tensor\", \"sub\": \"RepresentationTheory/Invariants.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"15\", \"18\", \"66\", \"74\"], \"digest\": \"740c7119387680fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.toInvariants concerns one abstract group on a fixed module; it does not identify rational group-scheme invariants over every algebra or construct the rational restriction in this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational invariants of affine group schemes commute with extension to every algebra and are stable under the ambient group when the subgroup is normal",
+   "results": "{\"t\": \"2026-10-23T14:29:37Z\", \"tool\": \"leanfinder\", \"query\": \"Rational invariants of affine group schemes commute with extension to every algebra and are stable under the ambient group when the subgroup is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"Representation.toInvariants\", \"Representation.le_comap_invariants\", \"instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\", \"IsGaloisGroup.isInvariant\", \"Representation.Coinvariants.le_comap_ker\"], \"digest\": \"9c346256a52c51a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Representation.toInvariants/le_comap_invariants are about one abstract group, not universal rational invariants over all further algebras; read Mathlib/RepresentationTheory/Invariants.lean lines 74--85 and 153--172; tensor/induction hits give no group-scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*invariant|invariant.*baseChange|invariants.*tensor|tensor.*invariants",
+   "results": "{\"t\": \"2026-10-23T14:30:19Z\", \"tool\": \"grep\", \"query\": \"baseChange.*invariant|invariant.*baseChange|invariants.*tensor|tensor.*invariants\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"Mathlib/RepresentationTheory/Coinvariants.lean\"], \"digest\": \"3bd8b424de64622b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Representation.toInvariants/le_comap_invariants are about one abstract group, not universal rational invariants over all further algebras; read Mathlib/RepresentationTheory/Invariants.lean lines 74--85 and 153--172; tensor/induction hits give no group-scheme comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine group scheme rational invariants commute with scalar extension to arbitrary algebras, with normal subgroup invariants forming a rational subrepresentation",
+   "results": "{\"t\": \"2026-10-23T14:30:19Z\", \"tool\": \"leansearch\", \"query\": \"Affine group scheme rational invariants commute with scalar extension to arbitrary algebras, with normal subgroup invariants forming a rational subrepresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.toInvariants\", \"Rep.toInvariants\", \"Algebra.IsInvariant.recOn\", \"Representation.quotientToInvariants\", \"Algebra.IsInvariant.mk\", \"Representation.invariants\", \"Rep.quotientToInvariantsFunctor\", \"Rep.quotientToInvariants\"], \"digest\": \"4adb5a9c74b99f33\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Representation.toInvariants/le_comap_invariants are about one abstract group, not universal rational invariants over all further algebras; read Mathlib/RepresentationTheory/Invariants.lean lines 74--85 and 153--172; tensor/induction hits give no group-scheme comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.invariants",
+   "results": "{\"t\": \"2026-10-23T14:30:19Z\", \"tool\": \"loogle\", \"query\": \"Representation.invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Representation.invariants\", \"Representation.invariants_eq_top\", \"Representation.isProj_averageMap\", \"Representation.averageMap_invariant\", \"Representation.averageMap_id\", \"Representation.invariants_eq_inter\", \"Representation.mem_invariants\", \"Representation.mem_invariants_iff_of_forall_mem_zpowers\"], \"digest\": \"404505538e8c1b89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Representation.toInvariants/le_comap_invariants are about one abstract group, not universal rational invariants over all further algebras; read Mathlib/RepresentationTheory/Invariants.lean lines 74--85 and 153--172; tensor/induction hits give no group-scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "invariants|toInvariants|le_comap",
+   "results": "{\"t\": \"2026-10-23T14:30:41Z\", \"tool\": \"grep\", \"query\": \"invariants|toInvariants|le_comap\", \"sub\": \"RepresentationTheory/Invariants.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"15\", \"18\", \"66\", \"74\"], \"digest\": \"740c7119387680fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Representation.toInvariants/le_comap_invariants are about one abstract group, not universal rational invariants over all further algebras; read Mathlib/RepresentationTheory/Invariants.lean lines 74--85 and 153--172; tensor/induction hits give no group-scheme comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subspace of a rational representation fixed by a closed normal subgroup scheme remains invariant over every algebra and defines a morphism into a general linear group",
+   "results": "{\"t\": \"2026-10-23T14:30:41Z\", \"tool\": \"leanfinder\", \"query\": \"A subspace of a rational representation fixed by a closed normal subgroup scheme remains invariant over every algebra and defines a morphism into a general linear group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toInvariants\", \"Representation.toInvariants\", \"Rep.toCoinvariantsKer\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"Rep.quotientToInvariantsFunctor\", \"Representation.quotientToInvariants\", \"Rep.invariantsFunctor_obj_carrier\", \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\"], \"digest\": \"0cd93f1b000a9df6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Representation.toInvariants/le_comap_invariants are about one abstract group, not universal rational invariants over all further algebras; read Mathlib/RepresentationTheory/Invariants.lean lines 74--85 and 153--172; tensor/induction hits give no group-scheme comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-subgroup-representation-kernel",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Propositions 4.31 and 4.33, printed p.96, and Lemma 5.15, printed p.102; fixed vectors over every further algebra, followed by normal-subgroup stability.",
+   "via": [
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rational-fixed-space-base-change",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 4.31, Proposition 4.33, Remark 4.1 and Lemma 5.15. Proved the arbitrary-algebra comparison by coefficient extraction, gave a split tensor inclusion, wrote normality as a pointwise conjugation equation, and constructed the rational restricted morphism from the universal point. No change to the statement, no new nodes, no attachment. The existing Mathlib basis leaf supplies all basis choices; tensor and affine-coordinate facts are reused from existing nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Propositions 4.31 and 4.33, printed p.96, and Lemma 5.15, printed p.102; fixed vectors over every further algebra, followed by normal-subgroup stability. This split realizes the fixed-space supporting input by the cited Milne basis argument and universal-matrix construction. The ancestor search returns None; inherited provenance and unit route are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-77e8cb1ec",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-77e8cb1ec (reviewer sub-agent of L); spot-checked: I read the item in full: a 7-step split with no new nodes. The base proof was empty and there is no repair or re-split note. I checked it against Milne iAG2017 by pdftotext. Prop 4.31 (p.96) is the basis-of-R argument with the map S→S⊗R, which is steps 2-4. Prop 4.33 (p.96) is the universal element, used in step 6. Lemma 5.15 (p.102) is the computation n·g v = g·(g^{-1}ng) v, which is step 5. Remark 4.1 (pp.83-84) is the matrix description used in steps 6-7. The item keeps Milne's universal quantifier over all algebras. Step 1 builds the retraction p = id-sq from a basis of V/W, so W is finite-dimensional. Step 2 gets injectivity from (pι)⊗1 = id and defines coefficient maps E_j from a k-basis of A, which may be infinite. Step 4 uses B = S⊗A and the naturality r_B(h') = r_S(h)⊗id_A. Step 5 gets normality from def-sc-group-scheme-subgroup and inverts the restriction by applying the argument to g^{-1}. Step 6 uses the universal point u ∈ G(C) and the natural point identification of the GL node (c≥1 is respected; d=0 is handled in step 7). Step 7 checks the homomorphism on affine opens of G×G and uses the GL(0) = Spec k convention. Every cited statement says what its step takes from it. The union of uses equals proof_deps, there is no SGA citation, and every step is under 1000 characters. Edge cases checked: A=0, A=k, A infinite-dimensional, V=W=0, H=1, H=G, nonreduced α_p/μ_p. A DAG search turned up no duplicate (the comodule-finite-subrepresentation, affine-group-coordinate-hopf and normal-invariant-comparison-data nodes are different). The parent normal-subgroup-representation-kernel uses only clauses the item states. blueprint.from.node is null, inherited from the parent chain. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalFixedSpaceBaseChange",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.fixedSpace_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.RationalRepresentation.fixedSpace",
+   "AlgebraicGeometry.RationalRepresentation.fixedSpace_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalFixedSpaceBaseChange.lean",
+  "statement": "theorem fixedSpace_baseChange [LocallyOfFiniteType (G ↘ Spec (.of k))] [QuasiCompact (G ↘ Spec (.of k))] [FiniteDimensional k V] (r : NaturalRepresentation (k := k) G V) (i : H ⟶ G.asOver (Spec (.of k))) [IsClosedSubgroupScheme i] : (∀ (A : Type u) [CommRing A] [Algebra k A], Function.Injective ((fixedSpace r i).subtype.baseChange A) ∧ ∀ w : A ⊗[k] V, w ∈ LinearMap.range ((fixedSpace r i).subtype.baseChange A) ↔ ∀ (B : Type u) [CommRing B] [Algebra k B] (α : A →ₐ[k] B) (h : points H B), r.action B (h ≫ i) (α.toLinearMap.rTensor V w) = α.toLinearMap.rTensor V w) ∧ (IsNormalSubgroupScheme i → ∃ s : NaturalRepresentation (k := k) G (fixedSpace r i), (∀ (A : Type u) [CommRing A] [Algebra k A] (g : points (G.asOver (Spec (.of k))) A) (w : A ⊗[k] fixedSpace r i), (fixedSpace r i).subtype.baseChange A (s.action A g w) = r.action A g ((fixedSpace r i).subtype.baseChange A w)) ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (h : points H A), s.action A (h ≫ i) = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 09152204a7c7: the unchanged Lean statement uses the existing plain NaturalRepresentation structure, now owned by def-sfb-rational-natural-representation. The dictionary theorem belongs to proof_deps, not stmt_deps; it supplies the finite-dimensional scheme-map interpretation. fixedSpace remains the actual intersection of defining kernels, and all mathematical hypotheses and clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b3b8211e",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Re-delivery 1b3b fixes 80bf H7 and 0915 H2. Item JSON differs from live only in lean + stmt_deps (+def-sfb-rational-natural-representation, landed existing:true from Q91, identical in the snapshot so on base). proof_deps equal the base. Statement uses only def-owned symbols (NaturalRepresentation, points, IsClosed/IsNormalSubgroupScheme, GrpObj, finite type, IsAffine, FiniteDimensional); no theorem or choose. Maths faithful to Milne 4.31/4.33/5.15: fixedSpace = infimum of the fixed-equation kernels over all test algebras B and h in H(B); injective base change for all A; range = vectors fixed after every A to B and h in H(B); normality conditional; s pinned by intertwining through the injective inclusion; H trivial; rationality via finite_dictionary incl. GL(0)=Spec k. Edge cases V=0, A=0, A=k, H=1, H=G, infinite-dim A, nilpotents OK; one universe u. Docstrings + source present, sorry only; report has Worker report + Second reading by Q84. No compile (no change). Advisory: stale lean.note sentence about the dictionary being in proof_deps."
+ }
+}

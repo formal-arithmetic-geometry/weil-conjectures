@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-etale-kflat-support-strict",
+ "kind": "statement",
+ "title": "Unique strict comparison of actual support rows",
+ "statement": "Let A be a finite commutative ring and i:Z→P, j:U→P a complementary closed-open pair of schemes. Work with integer cochain complexes of ordinary A-module sheaves on the small etale site of P [def-pur-etale-kflat-support-data]. Let I be K-injective and termwise injective, and Q any complex whose terms are flat. Let F be a functor on this complex category and η:Id→F a natural transformation such that every F(K) is K-injective and termwise injective and every η(K) is a quasi-isomorphism. Put N=Q⊗I, J=F(N), a=η(N), S=Q⊗(the actual support sequence of I), and T=the actual support sequence of J [lem-pur-etale-injective-support-sequence]. Then j*I and j*J are K-injective, S and T are short exact, and there exists a unique morphism m:S→T whose middle component is a and whose third component has the following characterization: on every total summand Q^p⊗j_*j^*I^q in degree n=p+q, it is the ordinary j*⊣j_* adjunct of the canonical tensor/pullback comparison followed by the counit on j*I^q, the inverse tensor comparison, and the (p,q)-summand of j*a. Equivalently its third component satisfies IsRightMap j Q I J a [def-pur-etale-kflat-support-data]. No B-module action or boundedness assumption is imposed. The map is natural in all chain maps I→I' with any other comparison having the same middle and quotient components. The localized middle component is invertible because eta is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective; actual support rows and their tensor/kernel comparison, as required by lem-pur-etale-kflat-support-comparison."
+ },
+ "stmt_deps": [
+  "def-pur-etale-kflat-support-data",
+  "lem-pur-etale-injective-support-sequence",
+  "lem-pur-flat-support-chain-diagram",
+  "def-pur-etale-kflat-support-rows"
+ ],
+ "proof": [
+  {
+   "text": "The support-sequence lemma gives short exactness of both actual support rows and K-injectivity after open pullback. The canonical isomorphism from a short exact row to the kernel sequence of its quotient identifies these rows with the rows used by flatSupportChainDiagram. Its degreewise tensor exactness implies short exactness of S. Its right map has the required summand characterization and commutes with the quotient arrows. Hence S.f followed by a is killed by T.g; the exactness kernel lift constructs m. Extensionality on total summands makes the quotient component unique, and cancellation of the monomorphism T.f makes the first component unique. Naturality follows by equality of the middle and right components and cancellation of the target monomorphism. Localization of eta is invertible because it is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-etale-injective-support-sequence",
+    "lem-pur-flat-support-chain-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective; strict cochain tensor/kernel refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-injective-support-sequence",
+  "lem-pur-flat-support-chain-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "X9 isolates the strict part of the assigned comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES",
+   "results": "12 hits: DerivedCategory.triangleOfSES; DerivedCategory.triangleOfSES_distinguished; DerivedCategory.triangleOfSES_obj₁; DerivedCategory.triangleOfSES_obj₂; DerivedCategory.triangleOfSES_obj₃; DerivedCategory.triangleOfSES_mor₃; DerivedCategory.triangleOfSESIso; DerivedCategory.triangleOfSES_mor₁",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the morphism of support exact sequences after tensor with a flat complex",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; Module.Flat.lTensor_exact; Module.FaithfullyFlat.range_le_ker_of_exact_rTensor; Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ_naturality",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural strict diagram between short exact sequences of sheaf complexes tensor with a flat complex",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact; Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; Module.Flat.rTensor_shortComplex_exact; Module.FaithfullyFlat.rTensor_exact_iff_exact; CategoryTheory.ShortComplex.homMk; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.FaithfullyFlat.lTensor_exact_iff_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact result: these generic tensor, adjunction and exact-sequence facts are used in the proof but do not state this ordinary etale support assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportComparison",
+  "date": "2026-10-25",
+  "group": "X9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof step 1 and naturality in step 4",
+   "via": [
+    "lem-pur-etale-kflat-support-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportStrict",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleKFlatSupportStrict.lean",
+  "declaration": "AlgebraicGeometry.Etale.KFlatSupportComparison.support_comparison_strict",
+  "statement": "theorem support_comparison_strict [Finite A]\n    (i : Z ⟶ P) [IsClosedImmersion i]\n    (j : U ⟶ P) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (I : Complex A P) [I.IsKInjective] [∀ n : ℤ, Injective (I.X n)]\n    (Q : Complex A P) (_hQf : ∀ n : ℤ, ObjectProperty.flat (Q.X n))\n    (F : Complex A P ⥤ Complex A P) (η : 𝟭 _ ⟶ F)\n    [∀ K : Complex A P, (F.obj K).IsKInjective]\n    [∀ (K : Complex A P) (n : ℤ), Injective ((F.obj K).X n)]\n    [∀ K : Complex A P, QuasiIso (η.app K)] :\n    let S := (topSequenceFamily A i j hij Q).obj I\n    let N := Q ⊗ I\n    let J := F.obj N\n    let a := η.app N\n    let S' := (bottomSequenceFamily A i j hij Q F).obj I\n    let v := OpenSupport.rightMap\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j)\n      Q I (F.obj (Q ⊗ I)) (η.app (Q ⊗ I))\n    ∃ (hI : CochainComplex.IsKInjective ((pullComplex A j).obj I))\n      (hJ : CochainComplex.IsKInjective ((pullComplex A j).obj (F.obj (Q ⊗ I))))\n      (hTop : S.ShortExact) (hBottom : S'.ShortExact) (m : S ⟶ S'),\n      HEq m.τ₂ a ∧ HEq m.τ₃ v ∧\n      (∀ m' : S ⟶ S', HEq m'.τ₂ a → HEq m'.τ₃ v → m' = m) ∧\n      IsIso ((localize A P).map m.τ₂) ∧\n      DiagramNatural (topSequenceFamily A i j hij Q)\n        (bottomSequenceFamily A i j hij Q F) (IsComparison A i j hij Q F η) I m",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "independent cc review: new etale_kflat_support_comparison vs old statement from the change record (old proved from new + support_rightMap_iff in a scratch compile); strict/projection sorries vs their nodes, the support-sequence and chain-diagram lemmas, and the old normalization clause"
+ }
+}

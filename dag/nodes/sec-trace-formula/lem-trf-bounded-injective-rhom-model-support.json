@@ -1,0 +1,259 @@
+{
+ "id": "lem-trf-bounded-injective-rhom-model-support",
+ "kind": "statement",
+ "title": "Bounded injective model of module derived Hom and its upper support bound",
+ "statement": "Let $A$ be a commutative ring. Write $Q$ for localization of integer-indexed cochain complexes of $A$-modules into $D(A)$ [def-weil-abstract-derived-category]. Let $I$ be a complex of injective $A$-modules [def-sp-injective-resolutions], and let $a\\leq b$ be integers with $I^q=0$ outside $[a,b]$. For every complex $M$, there is a canonical isomorphism in $D(A)$\n$$\\theta_M:R\\operatorname{Hom}_A(QM,QI)\\xrightarrow{\\sim}Q\\operatorname{Hom}_A^\\bullet(M,I),$$\nwhere derived internal Hom [def-pur-derived-internal-hom] is taken on the one-object site with coefficient ring $A$ and only the identity covering [def-pc-ring-hom-extension-shared-definitions], and total Hom is $A$-module-valued [def-sc-module-total-hom-complex]. For every chain map $f:M'\\to M$, the comparisons satisfy\n$$Q(f^*)\\circ\\theta_M=\\theta_{M'}\\circ R\\operatorname{Hom}_A(Qf,QI).$$\nIf, in addition, $M^p=0$ for $p<n$ for an integer $n$, then $\\operatorname{Hom}_A^r(M,I)=0$ and $H^rR\\operatorname{Hom}_A(QM,QI)=0$ for every $r>b-n$. No finiteness or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof: bounded injective computation and truncation comparison, expanded at the complex level."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sc-module-total-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-pc-ring-hom-extension-shared-definitions",
+  "def-weil-pbc-ring-complex-godement-construction",
+  "def-trf-module-hom-precomposition",
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "On the one-object site there is just one value and no nontrivial restriction or sheaf condition. Thus a module sheaf is an $A$-module, sheaf Hom is $A$-linear Hom, and products are products of modules. The formula for the sheaf Hom complex therefore becomes exactly $\\operatorname{Hom}_A^r(M,I)=\\prod_p\\operatorname{Hom}_A(M^p,I^{p+r})$ with differential $d_Iz-(-1)^rzd_M$, including its $A$-action. The identity on every component identifies these complexes and their pre- and postcomposition maps.",
+   "uses": [
+    "def-pc-ring-hom-extension-shared-definitions",
+    "def-pur-hom-complex",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 08J7 (section-internal-hom); evaluation on the one-object identity-covering site."
+   }
+  },
+  {
+   "text": "Since $I^q=0$ for $q<a$ and every $I^q$ is injective, the bounded-below-injectives lemma makes $I$ K-injective. Let $\\eta:I\\to J(I)$ be the fixed K-injective resolution used in the definition of derived internal Hom. For each $M$, that definition supplies the localization comparison $c_M:R\\operatorname{Hom}_A(QM,QI)\\xrightarrow{\\sim}Q\\operatorname{Hom}_A^\\bullet(M,J(I))$. Apply Hom-complex invariance with $s=\\eta$ and $t=1_M$: both targets are K-injective, and both maps are quasi-isomorphisms. Hence $u_M=Q\\operatorname{Hom}_A^\\bullet(M,\\eta)$ is invertible. Define $\\theta_M=u_M^{-1}c_M$. This uses the fixed resolution unit, so gives the canonical comparison, without choosing a new resolution or an arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (section-internal-hom), Tag 0A95 (lemma-RHom-well-defined); derived.tex Tag 070J (lemma-bounded-below-injectives-K-injective)."
+   }
+  },
+  {
+   "text": "For $f:M'\\to M$, write $v=Q\\operatorname{Hom}_A^\\bullet(f,I)$ and $w=Q\\operatorname{Hom}_A^\\bullet(f,J(I))$. Componentwise, $\\eta(zf)=(\\eta z)f$, giving $u_{M'}v=wu_M$. The definition by localization gives $wc_M=c_{M'}R\\operatorname{Hom}_A(Qf,QI)$, since the first-variable action is precomposition before localization. Multiplying these equalities by the inverses of $u_M$ and $u_{M'}$ gives $v\\theta_M=\\theta_{M'}R\\operatorname{Hom}_A(Qf,QI)$, the required naturality identity.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 08J7 (section-internal-hom): functor on the product localization."
+   }
+  },
+  {
+   "text": "Assume $M^p=0$ for $p<n$ and fix $r>b-n$. In the product formula, for $p<n$ the source of the factor $\\operatorname{Hom}_A(M^p,I^{p+r})$ is zero; for $p\\geq n$ one has $p+r>b$, so its target is zero. Every factor is therefore the zero module, and their product is the zero module (its only family is the zero family). Thus $\\operatorname{Hom}_A^r(M,I)=0$. Its $r$-th cohomology is then zero by the kernel/image formula, and the cohomology functor applied to $\\theta_M$ identifies this with $H^rR\\operatorname{Hom}_A(QM,QI)$.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H (lemma-finite-ext-into-bounded-injective), proof, support-vanishing assertion; factorwise calculation using more-algebra.tex Tag 0A8H (section-hom-complexes)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-hom-extension-shared-definitions",
+  "def-pur-hom-complex",
+  "def-sc-module-total-hom-complex",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J7 (section-internal-hom), 0A95 (lemma-RHom-well-defined), with derived.tex Tag 070J and the support calculation underlying dualizing.tex Tag 0G4H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Hh]omComplex.*[Ii]sLE|[Ii]sLE.*[Hh]omComplex|[Hh]omComplex.*[Ii]sZero",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: K-injective localized shifted Hom and support predicates do not identify the module-valued derived internal Hom naturally with the total Hom complex and prove its upper support bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, CochainComplex.HomComplex",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: K-injective localized shifted Hom and support predicates do not identify the module-valued derived internal Hom naturally with the total Hom complex and prove its upper support bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom into a bounded injective complex is represented by the module total Hom complex and has upper cohomological bound b minus n when the source terms vanish below n",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective', 'CochainComplex.IsKInjective', 'CategoryTheory.InjectiveResolution.extMk', 'CategoryTheory.InjectiveResolution.extMk_surjective', 'CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'CochainComplex.isKInjective_of_injective_aux']; subdirectory=; note=; digest=c64347b86bec41c9",
+   "date": "2026-10-22",
+   "verdict": "no match: K-injective localized shifted Hom and support predicates do not identify the module-valued derived internal Hom naturally with the total Hom complex and prove its upper support bound."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]s[Kk]Injective|[Ii]sLE|[Ii]sZero",
+   "results": "5 hits; top=['39', '43', '46', '50', '61']; subdirectory=Algebra/Homology/DerivedCategory/KInjective.lean; note=; digest=3692a4ea3ae7b36d",
+   "date": "2026-10-22",
+   "verdict": "no match: K-injective localized shifted Hom and support predicates do not identify the module-valued derived internal Hom naturally with the total Hom complex and prove its upper support bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module valued derived internal Hom into bounded injective I is the total Hom complex naturally in the source and vanishes above b minus n for sources zero below n",
+   "results": "8 hits; top=['DerivedCategory.isZero_of_isLE', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', 'DerivedCategory.isZero_of_isGE', 'DerivedCategory.isLE_iff', 'CategoryTheory.hasExt_of_enoughInjectives', 'CochainComplex.isZero_of_isGE', 'CategoryTheory.HasInjectiveDimensionLT.casesOn']; subdirectory=; note=; digest=01dc18289d38226a",
+   "date": "2026-10-22",
+   "verdict": "no match: K-injective localized shifted Hom and support predicates do not identify the module-valued derived internal Hom naturally with the total Hom complex and prove its upper support bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If I is an injective complex supported in degrees a through b and M is zero below n then RHom(M,I) is represented by Hom(M,I) with zero terms above b-n",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt', 'CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.cm5b.I_X', 'CochainComplex.cm5b.I']; subdirectory=; note=; digest=a4adbf7e655a681e",
+   "date": "2026-10-22",
+   "verdict": "no match: K-injective localized shifted Hom and support predicates do not identify the module-valued derived internal Hom naturally with the total Hom complex and prove its upper support bound."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|internalHom|isKInjective_of_injective|isLE.*[Hh]om",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean', 'Mathlib/Algebra/Homology/Bifunctor.lean']; subdirectory=Algebra/Homology; note=; digest=33615712559c33e7",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide bounded-below K-injectivity or external Ext and ordinary injective-resolution comparisons, not the module-valued derived internal Hom comparison together with naturality and upper support bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, CochainComplex.HomComplex",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide bounded-below K-injectivity or external Ext and ordinary injective-resolution comparisons, not the module-valued derived internal Hom comparison together with naturality and upper support bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module valued derived internal Hom into K injective complex represented by total Hom with canonical natural comparison",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality', 'CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality', 'CategoryTheory.injectiveResolutions', 'CochainComplex.isKInjective_iff_rightOrthogonal', 'CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc', 'CochainComplex.IsKInjective', 'CochainComplex.isKInjective_of_injective', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc']; subdirectory=; note=; digest=fb89b10bfdaeb094",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide bounded-below K-injectivity or external Ext and ordinary injective-resolution comparisons, not the module-valued derived internal Hom comparison together with naturality and upper support bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of modules into a bounded complex of injectives is represented by the total Hom complex naturally in its source",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.extMk_hom', 'CategoryTheory.Abelian.Ext.homLinearEquiv', 'Ext', 'CategoryTheory.InjectiveResolution.extMk', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass', 'CategoryTheory.ProjectiveResolution.isoExt', 'CategoryTheory.ProjectiveResolution.extMk_hom']; subdirectory=; note=; digest=8e8e994f932355fe",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide bounded-below K-injectivity or external Ext and ordinary injective-resolution comparisons, not the module-valued derived internal Hom comparison together with naturality and upper support bound."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omComplex.*([Ii]sLE|[Ii]sZero)|([Ii]sLE|[Ii]sZero).*[Hh]omComplex",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide bounded-below K-injectivity or external Ext and ordinary injective-resolution comparisons, not the module-valued derived internal Hom comparison together with naturality and upper support bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a target complex I consists of injective modules and vanishes outside a through b and M vanishes below n then Hom(M,I) computes RHom in D(A) and has zero terms above b minus n",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CochainComplex.isKInjective_of_injective', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'CochainComplex.IsKInjective', 'CochainComplex.cm5b', 'CochainComplex.isKInjective_of_injective_aux']; subdirectory=; note=; digest=7cb6de37dbeab4b6",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide bounded-below K-injectivity or external Ext and ordinary injective-resolution comparisons, not the module-valued derived internal Hom comparison together with naturality and upper support bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coherent-rhom-finite-injective-dimension",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Re-split of this auxiliary input: Old Steps 1 and 3: K-injective bounded target, the module-valued derived comparison natural in the source, and vanishing of each Hom factor when source and target supports do not meet.",
+   "via": [
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-bounded-injective-rhom-model-support",
+  "worker": "stage1",
+  "summary": "Reused existing K-injectivity and sheaf-Hom invariance nodes. Constructed the canonical module-valued comparison from the fixed resolution unit, wrote the naturality square explicitly, and proved termwise and cohomological upper support vanishing. No new nodes or change to the statement.",
+  "blueprint": "Preserves the recorded auxiliary coherent-duality branch below lem-trf-local-term-locality Proof (1)--(2); realizes the bounded-injective computation and support-vanishing input extracted from dualizing.tex Tag 0G4H. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic Hom-complex invariance for a quasi-isomorphism between K-injective targets; needed to invert the fixed resolution unit in the module-valued comparison. The trace-formula unit does not restate this foundational ringed-site result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-43398b61a",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-43398b61a (reviewer sub-agent of L); spot-checked: Read the item and all four steps in full: 0 new nodes, statement byte-identical to live (live still unsplit, no repair note for this item; it is itself a node created today by Q160's re-split of lem-trf-coherent-rhom-finite-injective-dimension). Sources: Stacks 0G4H dualizing.tex l.2574 (vanishing of RHom(tau>=n+1 K,L) above c-n, made precise here as r>b-n); 0A95 sites-cohomology l.8754 matches lem-pur-rhom-well-defined; 070J derived l.9688 matches the Mathlib leaf lem-weil-pbc-bounded-below-injectives-kinjective. Step 1: the one-object bottom-topology site gives Mod(O)≃Mod_A, and def-pur-hom-complex has the same formula as def-sc-module-total-hom-complex, so elementary. Step 2: I is K-injective; passing from 'Hom^• acyclic' to the homotopy-zero notion is one line via H^0. The functorial resolution η and the localization lift c_M come from def-pur-derived-internal-hom. 0A95 applied with s=η, t=1_M inverts u_M, and theta=u_M^{-1}c_M is canonical. Step 3: u_{M'}v=wu_M and wc_M=c_{M'}RHom(Qf,QI) give v·theta_M=theta_{M'}·RHom(Qf,QI); arrow directions checked. Step 4: every product factor vanishes for r>b-n, and then H^r via theta. Edge cases: k[-n] into k[-b] over a field shows the strict bound is sharp; M=0, I=0, A=0, a=b also checked. No Noetherian or upper-bound hypothesis on M is used. Searched for duplicates (bounded-free-rhom-model, rhom-into-kinjective-local, single-hom-evaluation, sibling total-hom-exact, finite-module-target-rhom and others): none. proof_deps equals the union of uses, and the Mathlib searches cover all three kinds. Accepted the declared tool use of lem-pur-rhom-well-defined (generic 0A95 invariance). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedInjectiveRHomModelSupport",
+  "declaration": "CategoryTheory.boundedInjective_rhom_model_support",
+  "declarations": [
+   "CategoryTheory.ringModuleComplex",
+   "CategoryTheory.ringHomResolutionMap",
+   "CategoryTheory.ringHomResolutionComparison",
+   "CategoryTheory.boundedInjective_rhom_model_support"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/BoundedInjectiveRHomModelSupport.lean",
+  "statement": "theorem boundedInjective_rhom_model_support (A : Type u) [CommRing A] [HasDerivedCategory.{w} (RingSiteModules A)] (I : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (hab : a ≤ b) (hI : ∀ q : ℤ, Injective (I.X q)) (hIb : ∀ q : ℤ, q < a ∨ b < q → IsZero (I.X q)) : ∃ (e : ∀ M : CochainComplex (ModuleCat.{u} A) ℤ, homComplex (R := CochainComplex.onePointRingSheaf A) ((ringModuleComplex A).obj M) ((ringModuleComplex A).obj I) ≅ (ringModuleComplex A).obj (CochainComplex.moduleHomComplex M I)) (θ : ∀ M : CochainComplex (ModuleCat.{u} A) ℤ, (derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf A)).obj (op (DerivedCategory.Q.obj ((ringModuleComplex A).obj M)), DerivedCategory.Q.obj ((ringModuleComplex A).obj I)) ≅ DerivedCategory.Q.obj ((ringModuleComplex A).obj (CochainComplex.moduleHomComplex M I))), (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (r p : ℤ) (z : (homComplex (R := CochainComplex.onePointRingSheaf A) ((ringModuleComplex A).obj M) ((ringModuleComplex A).obj I)).X r |>.val.obj (op ⟨PUnit.unit⟩)) (x : M.X p), (((e M).hom.f r).val.app (op ⟨PUnit.unit⟩) z).v p (p + r) rfl x = ringHomEvaluate ((ringModuleComplex A).obj M) ((ringModuleComplex A).obj I) r p (op ⟨PUnit.unit⟩) z x) ∧ (∀ M : CochainComplex (ModuleCat.{u} A) ℤ, (θ M).hom ≫ DerivedCategory.Q.map (e M).inv ≫ DerivedCategory.Q.map (ringHomResolutionMap ((ringModuleComplex A).obj M) ((ringModuleComplex A).obj I)) = (ringHomResolutionComparison ((ringModuleComplex A).obj M) ((ringModuleComplex A).obj I)).hom) ∧ (∀ (M' M : CochainComplex (ModuleCat.{u} A) ℤ) (f : M' ⟶ M), (θ M).hom ≫ DerivedCategory.Q.map ((ringModuleComplex A).map (CochainComplex.moduleHomPrecomp I f)) = (derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf A)).map ((DerivedCategory.Q.map ((ringModuleComplex A).map f)).op, 𝟙 (DerivedCategory.Q.obj ((ringModuleComplex A).obj I))) ≫ (θ M').hom) ∧ (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ), (∀ p : ℤ, p < n → IsZero (M.X p)) → ∀ r : ℤ, b - n < r → IsZero ((CochainComplex.moduleHomComplex M I).X r) ∧ IsZero ((DerivedCategory.homologyFunctor (RingSiteModules A) r).obj ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf A)).obj (op (DerivedCategory.Q.obj ((ringModuleComplex A).obj M)), DerivedCategory.Q.obj ((ringModuleComplex A).obj I)))))",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The existing constant module embedding identifies D(A) with the one-object ringed-site presentation. Coordinate and fixed-resolution equations specify the canonical comparison, followed by naturality and the termwise and cohomological support bound. Precomposition is cited through its definition node def-trf-module-hom-precomposition, not through the homotopy theorem. The existing sheaf Hom complex is also a direct statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b03fa95f9",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery of the b7c03a46 H2 RETURN. The theorem stmt_dep lem-trf-hom-dual-preserves-homotopies is replaced by the new definition node def-trf-module-hom-precomposition: existing:true on the unchanged ModuleHomPrecompHomotopy (moduleHomPrecompComponent / moduleHomPrecomp_comm / moduleHomPrecomp), statement matches Stacks 0A8H (more-algebra l.17851) and the Lean (Cochain.ofHom f comp φ, δ_ofHom_comp); check_new_node and check_record return [], check_existing has only a `noncomputable` note. All 9 stmt_deps are definition nodes, and def-pur-hom-complex was added per the earlier advisory. Item statement and proof are byte-identical to the stage-1 review; the Lean differs from the returned head only by one already-transitive public import. Re-checked: θ unique via the Localization.fac normalization through the K-injective unit; e pinned by ringHomEvaluate; naturality direction for f:M'→M; strict r>b−n with both IsZero conclusions; edge cases A=0, I=0, M=0, a=b, negative bounds; universes u and w independent; lean.statement verbatim; one sorry; docstrings carry source and blueprint tags. Every dependency copy equals live. Advisory: onePointRingSheaf and kInjectiveResolutionFunctor are owned only by theorem nodes but reach the item through cited definition interfaces (base-era use). No compile (no fix)."
+ }
+}

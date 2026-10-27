@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-koszul-trivial-subset-decomposition",
+ "kind": "statement",
+ "title": "Canonical subset decomposition of a trivial Koszul model",
+ "statement": "Let $R$ be any commutative condensed ring [sk-def-sfb-condensed-ring], with internal modules [sk-def-sfb-module-objects] and the universe convention [def-weil-size-convention]. Let $r\\in\\mathbb N$, let $K$ be an internal discrete-lattice Koszul model with subset coordinates [lem-sfb-discrete-lattice-koszul-resolution], let $c$ be its comparison, and let cup be a triangulated cup comparison for the trivial regular algebra [lem-sfb-lattice-koszul-triangulated-cup-comparison]. Assume the differentials of $K(R)$ vanish. Write $S_q$ for the single complex with $R$ in degree $q$. There are maps $u_I:S_{|I|}\\to K(R)$ with coordinate $\\delta_{I,J}$ in degree $|I|$, and an isomorphism $\\bigoplus_I S_{|I|}\\cong K(R)$ restricting on each summand to $u_I$. The empty inclusion is the specified cup unit. When $r=0$, there is an isomorphism $K(R)\\cong S_0$ whose degree-zero component is the empty-subset projection in the prescribed Koszul coordinates; composing it with $u_\\varnothing$ gives the identity.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Step 1 and the empty-unit coordinate formula of step 2. Extracted below the ordered-Koszul lemma; agent-formulated internal calculation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-lattice-derived-invariants-tensor",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+ ],
+ "proof": [
+  {
+   "text": "for each I construct the map from S_|I| whose only component is the I-th\nbiproduct inclusion followed by K.coordinates.inv. It is a chain map because all\ndifferentials vanish. The sum of these maps is an isomorphism: in degree a,\nonly subsets of cardinality a contribute, and the coordinate projections give\nan inverse. Both composites are identity by the biproduct matrix identities.\nAt degree zero every subset is empty; the cup unit's prescribed coordinate is\nthe identity of the regular module, so it equals the empty inclusion by single\ncomplex extensionality. If r=0, every nonempty-degree term is zero and the sole\nremaining coordinate is the empty subset. Projecting to that coordinate gives\nthe rank-zero inverse, and its composite with the empty inclusion is identity.\nThis construction works also for r=0 and for the zero ring.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Step 1 and the empty-unit coordinate formula of step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zero differential trivial action Koszul complex decomposes as finite biproduct of single complexes indexed by finite subsets",
+   "results": "8 hits: single_obj_d, extend_single_d, and double-complex constructions; no subset decomposition of the specified Koszul model.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"single\"",
+   "results": "12 hits including single, singleObjXSelf, singleObjXIsoOfEq and mkHomFromSingle. Constructors and extensionality apply, but no theorem assembles the required normalization or subset calculation.",
+   "date": "2026-10-26",
+   "verdict": "building blocks only, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "from_single_hom_ext|ιTensorObj|biproduct.*single",
+   "results": "21 hits including HomologicalComplex.from_single_hom_ext, HomologicalComplex.ιTensorObj and graded tensor summand naturality. No specified Koszul subset formula or complete single-term normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; local rg also checked WeilConjectures and Sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LatticeOrderedKoszulProducts",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic dense-lattice normalization below the ordinary-open-direct-image route; returned parent proof steps 1 and 4, and rank-zero part of step 5: zero differential, subset inclusions, trivial-action shuffle pairing and ordered tensor normalization. Step 1 and the empty-unit coordinate formula of step 2.",
+   "via": [
+    "lem-sfb-lattice-ordered-koszul-products",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.KoszulTrivialSubsetDecomposition",
+  "file": "lean/Sheaf/CategoryTheory/KoszulTrivialSubsetDecomposition.lean",
+  "declaration": "Profinite.DiscreteLattice.OrderedKoszul.trivial_subset_decomposition",
+  "statement": "theorem trivial_subset_decomposition (r : ℕ) (K : KoszulModel R r)\n    (c : Comparison R r K)\n    (cup : TriangulatedCup.CupComparison R r K c (Mon.trivial (Equivariant R r)))\n    (hd : ∀ a b : ℤ, (K.functor.obj (𝟙_ (Equivariant R r))).d a b = 0) :\n    ∃ (incl : ∀ I : Finset (Fin r), S I.card ⟶ K.functor.obj (𝟙_ (Equivariant R r)))\n      (decomposition :\n        (⨁ fun I : Finset (Fin r) ↦ S I.card) ≅ K.functor.obj (𝟙_ (Equivariant R r)))\n      (rank_zero_iso : r = 0 → (K.functor.obj (𝟙_ (Equivariant R r)) ≅ S 0)),\n      (∀ (I : Finset (Fin r)) (J : Subsets r (I.card : ℤ)),\n    (HomologicalComplex.singleObjXSelf (.up ℤ) (I.card : ℤ) (𝟙_ (Modules R))).inv ≫\n      (incl I).f (I.card : ℤ) ≫ (K.coordinates (𝟙_ (Equivariant R r)) I.card).hom ≫\n      biproduct.π _ J = if I = J.val then 𝟙 _ else 0) ∧\n      (∀ I : Finset (Fin r),\n    biproduct.ι (fun I : Finset (Fin r) ↦ S I.card) I ≫ decomposition.hom = incl I) ∧\n      (incl ∅ = cup.unit) ∧\n      (∀ h : r = 0,\n    (rank_zero_iso h).hom.f 0 = (K.coordinates (𝟙_ (Equivariant R r)) 0).hom ≫\n      biproduct.π _ ⟨∅, rfl⟩ ≫\n      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ (Modules R))).inv) ∧\n      (∀ h : r = 0, incl ∅ ≫ (rank_zero_iso h).hom = 𝟙 (S 0))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080745-L-1560557",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080745-L-1560557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

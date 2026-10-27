@@ -16,11 +16,10 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\operatorname{Spec}A$, $U=\\operatorname{Spec}B$, and $V_a=\\operatorname{Spec}C_a$. By [def-weil-pbc-ind-etale-basis], $B$ and $C_a$ are ind-etale $A$-algebras. The $A$-algebra map $B\\to C_a$ is ind-etale by the algebra-map clause of [lem-weil-pbc-ind-etale-stability]. Hence [def-weil-pbc-ind-etale-algebra] presents $V_a$ as an inverse limit of affine etale finite-presentation $U$-schemes. Apply [lem-weil-pbc-filtered-category-directed-cofinal] to the filtered algebra diagram, or its opposite scheme diagram, to replace its index category by a nonempty directed set $J_a$ without changing its colimit or limit. All diagrams and directed replacements are small in the universe fixed by [def-weil-size-convention]. Denote the resulting projections by $q_{a,i}:V_a\\to V_{a,i}$.",
+   "text": "For each a, the already proved AffineProEt.proAffineEtale_hom says that V_a -> U is pro-affine-etale. Unpack its definition into a small cofiltered diagram of affine etale U-schemes and a scheme limit cone. Apply [lem-weil-pbc-filtered-category-directed-cofinal] to the opposite index, and compose with the double-opposite equivalence, obtaining the required small nonempty directed preorder and the same cone vertex. Lift the diagram and its cone into Over U using the given factorization equations.",
    "uses": [
     "def-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-filtered-category-directed-cofinal",
     "def-weil-size-convention"
    ],
@@ -44,13 +43,12 @@
    }
   },
   {
-   "text": "Each stage $V_{a,i}\\to U$ is ind-etale, using its one-object etale presentation in [def-weil-pbc-ind-etale-algebra]. Compose with $U\\to X$ by [lem-weil-pbc-ind-etale-stability]; since $V_{a,i}$ is affine, [def-weil-pbc-ind-etale-basis] puts it in $\\mathcal B_X$. Repeated application of the fibre-product clause of [lem-weil-pbc-ind-etale-basis] now puts both $T_\\alpha$ and $T_{\\alpha,j}$ in $\\mathcal B_X$, including tuples with repetitions. Every transition in a factor system or an intersection system is a morphism between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]. This also makes the limit-to-stage projections affine.",
+   "text": "Each affine etale stage is pro-affine-etale over U by proAffineEtale.of_isAffine; composition with U -> X is pro-affine-etale. A finite product in Over U is in the basis by induction on its number of factors. For zero factors its vertex is isomorphic to U. For a successor, form the pullback of the first factor and the product of the remaining factors; the relative map of the first factor is pro-affine-etale by cancellation, its base change along the affine structural map of the tail is pro-affine-etale, and composition with the tail structural map proves the claim. Transport along the unique product isomorphism. Every map between the resulting affine schemes is affine [lem-weil-pbc-morphism-affine-schemes-affine].",
    "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-ind-etale-stability",
     "def-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-morphism-affine-schemes-affine"
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
@@ -59,7 +57,7 @@
    }
   },
   {
-   "text": "Fix $a$. Reindex the cone for $V_a$ along $J\\to J_a$. It is still a limit, as follows directly from the dual universal property in [def-weil-pbc-category-colimit]. For a compatible family $h_j:Z\\to V_{a,j_a}$, the map at $j$ depends only on $j_a$: if $j_a=k_a=i$, take an upper bound $l\\ge j,k$ with $l_a=i$; both maps equal $h_l$, since the transition at coordinate $a$ is the identity. Write this map as $h_i$. If $i\\le i'$, choose $j\\le k$ with $j_a=i$, $k_a=i'$ by holding the other coordinates fixed. Compatibility gives a cone $(h_i)$ over $J_a$, hence a unique map $Z\\to V_a$. Conversely this map recovers every $h_j$. Thus $V_a=\\varprojlim_{j\\in J}V_{a,j_a}$ with exactly the original projections.",
+   "text": "Reindex each factor cone along the opposite of the coordinate evaluation functor. Mathlib Pi.final_eval proves this evaluation final because the coordinate categories are filtered; its opposite is initial. Functor.Initial.isLimitWhiskerEquiv gives the reindexed limit cone. Reflect through Over.forget U to obtain the factor limit in Over U.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -70,7 +68,7 @@
    }
   },
   {
-   "text": "For a tuple $\\alpha=(a_0,\\ldots,a_p)$, define $t_{\\alpha,j}:T_\\alpha\\to T_{\\alpha,j}$ by the maps $q_{a_r,j_{a_r}}$ on the respective factors. Existence, uniqueness and compatibility with transitions follow from the fibre-product universal property [def-pc-fibre-product]. A cone $h_j:Z\\to T_{\\alpha,j}$ gives, by each factor projection, a cone $Z\\to V_{a_r,j_{a_r}}$. Step 4 gives a unique map $h_r:Z\\to V_{a_r}$. All $h_r$ have the same composite to $U$: at each stage this follows from the fibre product, and any two stage indices have a common upper bound. Therefore the $h_r$ give a unique map $h:Z\\to T_\\alpha$. Its composite with $t_{\\alpha,j}$ is $h_j$, since they have equal projections to every factor. The same uniqueness proves that $h$ is the only such map. This is the limit universal property [def-weil-pbc-category-colimit]. If $a_r=a_s$, the two factor cones and the maps $h_r,h_s$ remain separate; the argument never identifies them.",
+   "text": "Construct the intersection cone in Over U using Pi.map on the factor cone legs. For any cone s, compose each leg with the corresponding product projection to obtain separate cones over the factor diagrams. Apply their limit lifts and combine them by Pi.lift. The factorwise limit equations prove the lift equations; the product hom_ext theorem and the factorwise limit hom_ext theorems prove uniqueness. This handles repeated labels separately and also zero factors. Since the simultaneous opposite index is cofiltered and hence connected, Over.forget U preserves the resulting limit, giving the required scheme limit.",
    "uses": [
     "def-pc-fibre-product",
     "def-weil-pbc-category-colimit"
@@ -98,19 +96,17 @@
   "def-pc-fibre-product",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-proetale-covering",
   "def-weil-size-convention",
   "lem-weil-pbc-filtered-category-directed-cofinal",
   "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-morphism-affine-schemes-affine"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099U (lemma-affine-vanishing), first-limit paragraph and displayed intersection identity; universal-property details written out"
+  "place": "Tag 099U, first-limit paragraph and intersection identity; implemented using existing pro-affine-etale presentations, directed reindexing and product universal properties"
  },
  "mathlib_searches": [
   {
@@ -258,5 +254,26 @@
   "result": "pass",
   "note": "Read the node, all 5 stmt_deps records and the upstream AffineProEt/topology declarations. Only the node's lean field differs from side-live. Statement verbatim; the only proof is sorry; helpers firstLimitCoordinate/firstLimitIntersectionDiagram/firstLimitDelete are real data with source/blueprint docstrings; the theorem docstring carries the 6 proof steps. Clauses match: X affine, U in AffineProEt, 0<m, basis cover in the restricted topology; J_a : Type u nonempty directed preorders; stages affine, etale, finite presentation over U; factor cones are IsLimit after Over.forget; every simultaneous stage family covers U in etaleTopology; stages and intersections are affine and pro-affine-etale over X; intersection cone pi is pinned factorwise and is a scheme limit; transitions and legs affine; both deletion squares hold. Edge cases k=0 (empty product = U, connected index), m=1, repeats, empty schemes and universes are fine. H4 duplicate search agreed (AffineEtaleCechSystem is different). nt_compile --json: 4.9 s, rc=0, no warnings. Advisory only: big etaleTopology vs smallEtaleTopology (equivalent for etale families); proAffineEtale owned by a non-stmt_dep but used as AffineProEt's own predicate; second reading by the author."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261023T123554-L-1213787",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

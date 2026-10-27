@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-semisimple-root-subgroups-generate",
+ "kind": "statement",
+ "title": "Root subgroups generate a semisimple group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Write $\\mathbf G_a$ and $\\mathbf G_m$ for the additive and multiplicative group schemes [def-sc-gm-ga]. A torus is a group scheme becoming $\\mathbf G_m^r$ over an algebraic closure; split means already isomorphic to this product over $F$, and maximal means maximal under inclusion. Let $G$ be a smooth connected affine $F$-group scheme of finite type which is reductive, meaning that it has no nontrivial smooth connected normal unipotent closed subgroup scheme. Here unipotent means that every geometric point is a unipotent matrix in a faithful linear representation. Let $T\\subseteq G$ be a split maximal torus. Let $\\mathfrak g$ be the tangent space of $G$ at the identity, with the action of $T$ obtained by differentiating conjugation on $G$. Let $\\Phi$ be the nontrivial characters $\\alpha:T\\to\\mathbf G_m$ occurring as weights in this action: $\\mathfrak g_\\alpha$ is the subspace on which $t$ acts by $\\alpha(t)$. We use characters of $T$, not their differentials. Assume in addition that $G$ is semisimple, meaning that it has no nontrivial smooth connected solvable normal closed subgroup scheme. Solvable means that successive derived subgroup schemes eventually become trivial; the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. For each $\\alpha\\in\\Phi$, let $U_\\alpha$ be the root subgroup of [lem-sfb-reductive-root-subgroup-parametrizations]. If $K\\subseteq G$ is a closed subgroup scheme through which every inclusion $U_\\alpha\\hookrightarrow G$ factors, then $K=G$. This includes the case $\\Phi=\\varnothing$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.49(a), printed p.439, with the root groups of Theorem 21.11(c)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Use the character and cocharacter lattices and canonical coroots of [lem-sfb-reductive-rank-one-reflections] for the given split maximal torus $T$. The root-datum conventions in [lem-sfb-semisimple-roots-span] identify $Y=X_*(T)$ with the integer dual of $X=X^*(T)$ by the character/cocharacter pairing. Since $G$ is semisimple, that node gives $\\operatorname{span}_{\\mathbf Q}\\{\\alpha^\\vee:\\alpha\\in\\Phi\\}=Y\\otimes\\mathbf Q$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-semisimple-roots-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.48 and Proposition 21.49(a), p.439."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\Phi$ and choose $v_\\alpha$ from [lem-sfb-opposite-root-sl2-parametrizations]. In $\\operatorname{SL}_2(A)$ direct multiplication gives $$w(s):=x_+(s)x_-(-s^{-1})x_+(s)=sE_{12}-s^{-1}E_{21},\\qquad w(s)w(1)^{-1}=h(s)$$ for every commutative $F$-algebra $A$ and unit $s$. Each image $v_\\alpha(x_\\pm(a))$ belongs to $K(A)$ by the hypotheses on $U_\\alpha,U_{-\\alpha}$. Closure under multiplication and inversion [def-sc-group-scheme-subgroup] therefore gives $\\alpha^\\vee(s)=v_\\alpha(h(s))\\in K(A)$. This is a natural factorization $\\alpha^\\vee:\\mathbf G_m\\to K$: explicitly the displayed products of the two morphisms $\\mathbf G_a\\to K$ and their inverses define the morphism on $\\mathbf G_m$. It holds over every $A$, including nonreduced algebras.",
+   "uses": [
+    "lem-sfb-opposite-root-sl2-parametrizations",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph 21.24, p.432; matrix identity 20.41, p.423; proof of Proposition 21.49(a), p.439."
+   }
+  },
+  {
+   "text": "Put $D=T\\times_G K$, a closed subgroup of the split torus $T$. By [lem-sfb-split-torus-subgroups-diagonalizable], $D$ is diagonalizable. By [lem-sfb-multiplicative-character-antiduality] its inclusion gives a surjection $q:X^*(T)\\to X^*(D)$. Step 2 makes every canonical coroot factor through $D$. If $\\chi\\in\\ker q$, then $\\chi$ restricts trivially to $D$, so $\\langle\\chi,\\alpha^\\vee\\rangle=0$ for every $\\alpha$. The rational spanning and perfect pairing of Step 1 imply $\\chi=0$ (the character lattice is free abelian). Thus $q$ is an isomorphism; the same contravariant equivalence makes $D\\hookrightarrow T$ an isomorphism. Consequently $T\\hookrightarrow G$ factors through $K$. This uses no assertion that a coroot is primitive, and remains valid when the lattice index is divisible by the characteristic.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.49(a), p.439, final lattice-duality sentence, expanded using Theorem 12.9(a), pp.233--234."
+   }
+  },
+  {
+   "text": "By [lem-sfb-reductive-rank-one-reflections], the finite root decomposition is $\\operatorname{Lie}(G)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha$. By [lem-sfb-reductive-root-subgroup-parametrizations], each $U_\\alpha$ is smooth and connected with tangent space $\\mathfrak g_\\alpha$. The split torus $T$ is smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus]. Apply [lem-sfb-smooth-subgroup-tangent-generation] to the finite family consisting of $T$ and the $U_\\alpha$. Their tangent spaces span, all factor through $K$, and $G$ is smooth connected affine of finite type. It follows that $K=G$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(f) and its proof, pp.429--430, using Corollary 10.17, p.191; Proposition 21.49(a), p.439."
+   }
+  },
+  {
+   "text": "If $\\Phi=\\varnothing$, Step 1 gives $Y\\otimes\\mathbf Q=0$. Since $T$ is split, its free character lattice has rank zero and $T$ is the trivial group. Step 3 still applies with no coroots: the perfect pairing forces $\\ker q=0$. Step 4 then applies to the singleton family $\\{T\\}$; its tangent space is all of $\\operatorname{Lie}(G)$ by the root decomposition. Thus the same conclusion includes the asserted empty-root case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.49(a) and Theorem 21.11(f), rank-zero case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-semisimple-roots-span",
+  "lem-sfb-opposite-root-sl2-parametrizations",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.49(a), printed p.439; Theorem 21.11(f), printed pp.429--430; the torus inclusion is expanded by character antiduality rather than inferred only from points."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "root.*[Gg]enerat|[Gg]enerat.*root",
+   "results": "Hits: Mathlib/NumberTheory/MulChar/Lemmas.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/NumberField/CMField.lean, Mathlib/NumberTheory/NumberField/CMField.lean, Mathlib/NumberTheory/NumberField/CMField.lean; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semisimple algebraic group is generated by its root groups",
+   "results": "Hits: LieAlgebra.IsSemisimple, LieAlgebra.IsSemisimple.booleanGenerators, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, LieAlgebra.IsSemisimple.mk, LieAlgebra.IsSimple.instIsSemisimple, RootDatum, LieAlgebra.IsSemisimple.instHasTrivialRadical, LieAlgebra.IsSemisimple.isSimple_of_isAtom; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"closure\"",
+   "results": "Hits: roots_mem_integralClosure, AlgebraicClosure.finEquivRoots, RootPairing.eq_baseOf_of_linearIndepOn_of_mem_or_neg_mem_closure, RootPairing.coroot_mem_or_neg_mem_closure_of_root, IsNormalClosure.adjoin_rootSet, AlgebraicClosure.hasEnoughRootsOfUnity, AlgebraicClosure.hasEnoughRootsOfUnity_pow, SeparableClosure.hasEnoughRootsOfUnity; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup of a semisimple group containing all root groups is the whole group",
+   "results": "Hits: frattini, MulAction.IwasawaStructure.is_generator, LieAlgebra.IsSemisimple.booleanGenerators, frattini_nongenerating, RootPairing.coe_top, frattini_le_coatom, LieAlgebra.IsSemisimple.sSup_atoms_eq_top, OpenSubgroup.toSubgroup_top; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split semisimple algebraic group is generated by its root subgroups",
+   "results": "Hits: LieAlgebra.IsSemisimple.booleanGenerators, RootPairing.EmbeddedG2.span_eq_top, RootPairing.span_root'_eq_top, RootPairing.span_orbit_eq_top, RootPairing.GeckConstruction.span_range_h'_eq_top, RootPairing.range_weylGroup_coweightHom, RootPairing.range_weylGroupToPerm, RootPairing.range_weylGroup_weightHom; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-group-perfect",
+  "date": "2026-10-23",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Generation by root subgroups, Milne Proposition 21.49(a), used at the last step of Corollary 21.50.",
+   "via": [
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-root-subgroups-generate",
+  "worker": "Q108",
+  "summary": "Followed Milne 21.49(a): compatible opposite-root SL2 maps give coroot factorization on all algebra points; character antiduality and the existing coroot span yield T in K; the root tangent decomposition and a new general smooth-subgroup generation lemma finish. Two statement-only lemmas; retained all hypotheses and the empty-root case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Generation by root subgroups, Milne Proposition 21.49(a), used at the last step of Corollary 21.50. The current latest blueprint direct-images proof (3) is the ancestor route. This item realizes the root-generation input to the semisimple-perfectness prerequisite; no chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-006d9f548",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-006d9f548 (reviewer sub-agent of L); spot-checked: First delivery: live and side-live still have the item unsplit, there is no repair note, and the item's statement and stmt_deps are unchanged. Source read: Milne 21.49(a) p.439, 21.11 with its proof pp.428-430, 21.24 p.432 and 10.15-10.17 p.191. The proof follows 21.49(a) for an arbitrary closed subgroup scheme K, with two expansions: Milne's 'by duality' becomes an explicit character argument, and 21.11(f) is replaced by the tangent-generation lemma applied directly to K. Step 1 takes the coroot span of Y⊗Q (semisimple-roots-span) and the perfect pairing; steps 2 and 3 use the same borel-pair coroots. Step 2: I multiplied the matrices by hand; x+(s)x-(-1/s)x+(s) = sE12 - s^-1E21 and w(s)w(1)^-1 = diag(s,s^-1) hold over every algebra A. The subgroup property of K(A) then gives the factorization alpha^vee: G_m -> K by Yoneda, also for nonreduced A. Step 3: D = T x_G K is diagonalizable, antiduality makes q: X(T) -> X(D) surjective, and ker q pairs to 0 with every coroot, so ker q = 0 by the span, the perfect pairing and torsion-freeness. Hence D = T and T is in K; no primitivity of coroots is used (PGL2 in characteristic 2 is fine). Step 4: Lie(G) = Lie(T) + sum of g_alpha, T and the U_alpha are smooth and connected, and the new lemma gives K = G. Step 5 (Phi empty): G is trivial, correct. New node lem-sfb-opposite-root-sl2-parametrizations is exactly Milne 21.11(b),(e) with 21.24, which states U- -> U_{-alpha} is an isomorphism; I checked the weight signs, SL2 and PGL2. It is not a duplicate: rank-one-reflections gives only the upper restriction. New node lem-sfb-smooth-subgroup-tangent-generation is Milne 10.17 with stronger hypotheses, so it is true: the smooth generated subgroup is contained in K and 10.15 gives equality. The empty family is fine and alpha_p is excluded because the H_i must be smooth. The only DAG analogues (lem-wf-same-lie-closed-subgroup, lem-ag-equal-dimension-subgroup) are characteristic-zero Q̄_ℓ statements, so not duplicates. All proof_deps are on-unit (sk-thm-sf-ctf-stability) or definitions, no SGA, and the searches are recorded. Batch-5: borel-pair -> lem-trf-fppf-covering-base-change (fppf coverings stable under base change) and largest-subtorus -> lem-trf-smooth-fpqc-base-descent (smoothness descends along fpqc maps) are generic Mathlib leaves, neither part of the trace formula nor Poincaré duality nor their proofs; accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SemisimpleRootSubgroupsGenerate",
+  "declaration": "AlgebraicGeometry.TorusCharacterTangent.semisimple_rootSubgroups_generate",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SemisimpleRootSubgroupsGenerate.lean",
+  "statement": "theorem semisimple_rootSubgroups_generate (F : Type u) [Field F] [IsAlgClosed F] (G T : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (hsemisimple : IsSemisimpleGroupScheme G.X) (i : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (r : ℕ) (hsplit : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [ModObj T.X G.X] (hconj : γ[T.X,G.X] = (fst T.X G.X ≫ i.hom.hom) * snd T.X G.X * (fst T.X G.X ≫ i.hom.hom)⁻¹) (U : {α : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F) // α.hom.hom ≠ 1 ∧ weightSpace T G α ≠ ⊥} → Grp (Over (Spec (.of F)))) (j : ∀ α, U α ⟶ G) (hU : ∀ α, IsClosedSubgroupScheme (j α).hom.hom ∧ Smooth (U α).X.hom ∧ ConnectedSpace (U α).X.left ∧ IsStable T G (j α) ∧ (GrpObj.differential (j α).hom.hom).toLinearMap.range = weightSpace T G α.val) (K : Grp (Over (Spec (.of F)))) (k : K ⟶ G) (hK : IsClosedSubgroupScheme k.hom.hom) (hcontains : ∀ α, ∃ f : U α ⟶ K, f ≫ k = j α) : IsIso k",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b41d6ab21",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Node diff vs side-live: lean record + added landed def stmt_dep def-sfb-semisimple-group-scheme only; statement verbatim in file, ≤100-char lines, sorry-only theorem, no defs, source/blueprint docstrings with 5 proof steps. Clause match: F alg. closed; IsReductive (smooth unipotent via IsUnipotent's Smooth) + IsSemisimpleGroupScheme; split maximal torus i/hT/r/hsplit; action pinned by hconj; Φ = nontrivial characters with nonzero actual weightSpace; U/j/hU = exact characterizing clauses of landed reductive_root_subgroup_parametrizations (uniqueness makes U α the root subgroup); arbitrary closed K; hcontains factorization; IsIso k = K=G; Φ=∅ and r=0 covered, single universe u. Proof-dep plain imports are required by brief, not H9. No duplicate found. Advisory: IsReductive/IsMaximalTorus/weightSpace/IsStable/splitTorus owners not in item stmt_deps (reached via landed parametrization stmt_dep) — record nit only. No recompilation (no file changed; worker clean scompile)."
+ }
+}

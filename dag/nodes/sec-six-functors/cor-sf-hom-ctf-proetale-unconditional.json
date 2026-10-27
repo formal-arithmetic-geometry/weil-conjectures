@@ -175,7 +175,18 @@
   "latex:corollary"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-hom-ctf",
  "split_report": {
@@ -225,5 +236,25 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The site-perfect hypothesis reuses the existing upstream Etale.DerivedCategory.IsSitePerfect, with its etale cover and bounded finite-free retract models. The helper composes the recorded intrinsic derived comparison with the recorded universe-general K-injective internal Hom; its coefficient-finiteness proof is supplied by the recorded coefficient theorem. Two already-landed statement dependencies are cited for that canonical comparison and the etale Tor predicate."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $K',M'\\in D^b_{ctf}(X_{\\Et},A)$ have Tor amplitude $[a,b]$\nand $[c,d]$, and assume $K'$ is site-perfect. Then\n$R\\mathcal Hom_A(\\nu_X^*K',\\nu_X^*M')$ is bounded constructible\nwith Tor amplitude in $[c-b,d-a]$.",
+  "proof": [
+   {
+    "text": "Apply [thm-sf-hom-ctf] on the étale site, identify its pullback\nby [thm-sf-hom-comparison-constructible], and transport the Tor\nbound by [lem-exc-comparison-tor-interval].",
+    "uses": [
+     "thm-sf-hom-ctf",
+     "thm-sf-hom-comparison-constructible",
+     "lem-exc-comparison-tor-interval"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

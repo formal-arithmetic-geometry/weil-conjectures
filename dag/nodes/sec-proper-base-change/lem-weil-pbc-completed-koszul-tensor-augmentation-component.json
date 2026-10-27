@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-tensor-augmentation-component",
+ "kind": "statement",
+ "title": "The component normalization square for completed Koszul tensor augmentation",
+ "statement": "Let T be a scheme, A a commutative ring, d an adic coefficient datum, r a natural number, a : Fin r -> A, n a natural number, P an arbitrary unbounded cochain complex of completed coefficient module sheaves, U the cochain tensor unit, K the recorded completed exterior Koszul complex at n and Q the recorded finite quotient module at n [def-weil-pbc-koszul-reconstruction-models]. Let b : Tot(P tensor K) -> (P tensor Q) and bU : Tot(U tensor K) -> (U tensor Q), where the targets are the actual termwise ordinary tensors of [lem-weil-pbc-completed-koszul-tensor-quotient-augmentation]. Assume the unit normalization equations for b and bU, and that b is zero on every total summand (p,q) with q nonzero. Let j be the inverse of the single-degree-zero total tensor comparison at U, followed by the left unitor U tensor Q[0] -> Q[0]. Then (P tensor bU) followed by (P tensor j) and the single-degree-zero total tensor comparison at P equals (P tensor lambda_K) followed by b. This is one equality of maps of complexes at a fixed n; neither naturality of b,bU, strict tower compatibility, cones, K-flatness nor derived limits are assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proof of lemma-naive-completion, finite tensor of the Koszul augmentation; sites-cohomology.tex, Definition 06YN (total tensor). Agent expansion of the normalization calculation in steps 1 and 2 of lem-weil-pbc-completed-koszul-tensor-cone-comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+  "lem-weil-pbc-completed-koszul-coefficient-cone-realization"
+ ],
+ "proof": [
+  {
+   "text": "Write c = lambda_K inverse, then bU, then j. Exterior degree zero is the rank-one coefficient module. The constant unit and its scalar extension identify the recorded degree-zero Koszul unit u with an invertible unit-module map. The unit normalization of bU, the degree-zero component of the single-tensor comparison and naturality of the module unitors imply u followed by c^0 equals the prescribed quotient unit. In nonzero degrees c^q is zero since its target Q[0]^q is zero.",
+   "uses": [
+    "def-weil-pbc-koszul-reconstruction-models",
+    "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+    "lem-weil-pbc-completed-koszul-unit-zero-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare b with total tensor P tensor c followed by the single-degree-zero comparison. Detect their components by the total tensor summand injections. For q nonzero the two composites vanish by the hypothesis on b and the zero target component of c. For q=0 precompose the summand with P^p tensor u, which is invertible. The unit equation of b and the formula for c^0 give the same map P^p -> P^p tensor Q. Naturality of the module right unitor gives equality after that precomposition, and cancellation gives equality on the summand.",
+   "uses": [
+    "def-weil-pbc-koszul-reconstruction-models",
+    "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use joint detection to conclude the equality of maps of complexes. Precompose with tensor of lambda_K and cancel its inverse to obtain precisely the displayed square. These computations are valid for unbounded P and degenerate rings, ideals and ranks; there are no infinite products or boundedness arguments.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+  "lem-weil-pbc-completed-koszul-unit-zero-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M finite Koszul tensor augmentation; normalization calculation expanded with the total tensor construction of sites-cohomology.tex, Definition 06YN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized augmentation from a total Koszul tensor complex to quotient tensor is determined by its value on the tensor unit",
+   "results": "Eight generic results, including HomologicalComplex.rightUnitor', tensor_unit_d2, unit_tensor_d1 and TensorProduct.tensorQuotientEquiv; no component normalization square for the completed exterior model.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem; existing total tensor and unitor APIs supply identifications only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total tensor commutes with mapping cone naturally and tensor with a complex concentrated in degree zero",
+   "results": "Eight generic cone and mapping-cone comparison results; local source has CochainComplex.mapBifunctorSingle2Iso and CochainComplex.mapBifunctorMappingCone2Iso, but neither gives the normalization equality for two given completed augmentations.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the component equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorMappingCone₂Iso",
+   "results": "No hit; identifier belongs to adopted source library rather than the search index. Read the declaration in WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone.",
+   "date": "2026-10-27",
+   "verdict": "The natural signed cone isomorphism is a later assembly input, not this component equation."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*tensor|tensor.*mappingCone; normalized tensor augmentation square, in Mathlib, WeilConjectures, Sheaf and DAG nodes",
+   "results": "Generic signed tensor-cone and single-degree-zero comparison APIs found. KoszulQuotientLimit has an analogous private uniqueness argument in a different coefficient presentation. No existing node or public declaration proves this fixed-level completed normalization square.",
+   "date": "2026-10-27",
+   "verdict": "New strictly smaller component equality is needed by the explicit assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorConeComparison",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Order 1248, finite strict tensor augmentation in Koszul reconstruction; steps 1 and 2 of the tensor-cone comparison, before taking any cone or strict tower.",
+   "via": [
+    "lem-weil-pbc-completed-koszul-tensor-cone-comparison",
+    "lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero",
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorAugmentationComponent",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorAugmentationComponent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulTensorAugmentationComponent",
+  "statement": "theorem completedKoszulTensorAugmentationComponent\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (n : ℕ)\n    (P : CochainComplex (CompletedAdicModules T d) ℤ)\n    (b : completedAdicKoszulTensor T d r a P n ⟶\n      (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj P).asFunctor.obj\n        (op n))\n    (bU : completedAdicKoszulTensor T d r a (𝟙_ _) n ⟶\n      (((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj\n        (𝟙_ _)).asFunctor.obj (op n))\n    (hu : completedAdicKoszulTensorUnit T d r a P n ≫ b =\n      completedQuotientTensorUnit T d P n)\n    (hz : ∀ (p q : ℤ), q ≠ 0 →\n      completedKoszulTensorSummand T d r a P n p q ≫ b.f (p + q) = 0)\n    (huU : completedAdicKoszulTensorUnit T d r a (𝟙_ _) n ≫ bU =\n      completedQuotientTensorUnit T d (𝟙_ _) n) :\n    P ◁ bU ≫ (tensorLeft P).map\n        ((CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _)\n          (completedAdicFiniteModule T d n) (𝟙_ _)).inv ≫\n            (λ_ ((HomologicalComplex.single _ (.up ℤ) 0).obj\n              (completedAdicFiniteModule T d n))).hom) ≫\n        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _)\n          (completedAdicFiniteModule T d n) P).hom =\n      P ◁ (λ_ (completedAdicKoszul T d r a n)).hom ≫ b",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

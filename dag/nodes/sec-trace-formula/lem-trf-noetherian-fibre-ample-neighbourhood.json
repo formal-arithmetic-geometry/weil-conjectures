@@ -33,99 +33,39 @@
    }
   },
   {
-   "text": "Apply [lem-trf-ample-fibre-section-lifting] to obtain $d_0$. Choose an integer $N\\geq\\max(1,d_0)$. By [lem-sc-ample-positive-tensor-power], $L_s^{\\otimes N}$ is ample. The proper fibre map is locally of finite type by the definition of properness. Apply [lem-weil-pbc-ample-very-ample-immersion-affine-base] over the field $\\kappa(s)$ to this invertible module. It gives $a\\geq1$, $r\\geq0$, an immersion $i_s:Z_s\\to\\mathbf P^r_{\\kappa(s)}$, and an isomorphism $i_s^*\\mathcal O(1)\\cong L_s^{\\otimes d}$, where $d=Na\\geq d_0$. Here the polynomial-Proj model and the projective-bundle model, with their twists, are identified as stated in [lem-trf-projective-bundle-quotient-geometry]. Thus no assertion that every large power embeds is needed from the cited immersion node.",
+   "text": "Apply [lem-trf-fibre-embedding-lifted-coordinates] to $f,L,s$. Obtain $d\\geq1$, $r\\geq0$, an affine neighbourhood $U$, and sections $u_j$ of $L^{\\otimes d}|_{Z_U}$ whose fibre tuple generates $L_s^{\\otimes d}$ and defines a closed immersion $i_s:Z_s\\to\\mathbf P^r_{\\kappa(s)}$.",
    "uses": [
-    "lem-trf-ample-fibre-section-lifting",
-    "lem-sc-ample-positive-tensor-power",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-trf-fibre-embedding-lifted-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood; assembly of the three extracted arguments."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-proper-base-change], $Z_U\\to U$ is proper. The positive tensor power $M=L^{\\otimes d}|_{Z_U}$ is invertible by [def-weil-pbc-ample-invertible-module]. Apply [lem-trf-fibre-generators-projective-neighbourhood] with $M$ and the fibre-generating $u_j$. It gives an affine neighbourhood $U_1\\subseteq U$ on which they generate, a proper morphism $\\varphi:Z_{U_1}\\to\\mathbf P^r_{U_1}$ defined by them, and $\\varphi^*\\mathcal O(1)\\cong L^{\\otimes d}|_{Z_{U_1}}$. Its fibre map is $i_s$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-fibre-generators-projective-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood; assembly of the three extracted arguments."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-projective-map-finite-near-embedded-fibre] to this proper $\\varphi$, whose fibre $i_s$ is a closed immersion. Obtain an affine open neighbourhood $V\\subseteq U_1$ of $s$ such that $\\varphi_V:Z_V\\to\\mathbf P^r_V$ is finite. The restricted $u_j$ still generate and define $\\varphi_V$, by the arbitrary-pullback naturality in [lem-trf-projective-bundle-quotient-geometry].",
+   "uses": [
+    "lem-trf-projective-map-finite-near-embedded-fibre",
     "lem-trf-projective-bundle-quotient-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, first paragraph; Tag 01VT, choosing a sufficiently large power via an initial N-th power"
-   }
-  },
-  {
-   "text": "The target projective space is separated over $\\kappa(s)$ by [lem-trf-projective-bundle-quotient-geometry]. Consequently [lem-weil-pbc-proper-to-separated] makes $i_s$ proper, and [lem-weil-pbc-proper-immersion-closed] makes it a closed immersion. The quotient-functor description in [lem-trf-projective-bundle-quotient-geometry], for the free sheaf with $r+1$ basis vectors, associates to $i_s$ the surjection $\\mathcal O_{Z_s}^{r+1}\\twoheadrightarrow L_s^{\\otimes d}$. Denote its coordinate sections by $t_0,\\ldots,t_r$. They generate $L_s^{\\otimes d}$, and their associated projective-space morphism is exactly $i_s$.",
-   "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
-    "lem-weil-pbc-proper-to-separated",
-    "lem-weil-pbc-proper-immersion-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, first paragraph, including use of Tag 01W6 and projective-space coordinates"
-   }
-  },
-  {
-   "text": "For each $t_j$, apply [lem-trf-ample-fibre-section-lifting] with this same $d\\geq d_0$ and choose a lift $u_j$ over an open neighbourhood $U_j$ of $s$. Intersect the finitely many $U_j$ and then choose an affine open neighbourhood $U=\\operatorname{Spec}A$ inside their intersection. Restrict all $u_j$ to $Z_U=f^{-1}(U)$. These are sections of $L^{\\otimes d}|_{Z_U}$ pulling back to $t_j$. The canonical tensor/pullback identifications, including their action on sections and residue-field values, are [lem-weil-pbc-invertible-pullback-tensor], iterated over the $d$ factors. Properness of $Z_U\\to U$ follows from [lem-weil-pbc-proper-base-change].",
-   "uses": [
-    "lem-trf-ample-fibre-section-lifting",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-proper-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, lifting the finitely many sections after shrinking the base"
-   }
-  },
-  {
-   "text": "Put $B=Z_U\\setminus\\bigcup_j(Z_U)_{u_j}$. The nonvanishing loci are open by [lem-weil-pbc-nonvanishing-section-trivializes], so $B$ is closed. On the fibre the $t_j$ generate, hence at each point some $t_j$ is nonzero by [lem-weil-pbc-invertible-generating-sections-fibre]. The residue-field pullback formula of [lem-weil-pbc-invertible-pullback-tensor] shows that a section $u_j$ vanishes at a point of $f^{-1}(s)$ if and only if its fibre restriction does: the residue-field extension is injective. Thus $B$ misses that whole fibre. As $Z_U\\to U$ is proper, its image of $B$ is closed by [def-weil-proper-morphism] and misses $s$. Choose an affine open neighbourhood $U_1$ of $s$ in its complement. Over $Z_{U_1}$ the restricted $u_j$ have no common zero and therefore generate $L^{\\otimes d}$, again by [lem-weil-pbc-invertible-generating-sections-fibre].",
-   "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-invertible-generating-sections-fibre",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, first shrinking using the closed image of the failure-of-generation locus"
-   }
-  },
-  {
-   "text": "The generating tuple yields a surjection $\\mathcal O_{Z_{U_1}}^{r+1}\\twoheadrightarrow L^{\\otimes d}|_{Z_{U_1}}$. Apply [lem-trf-projective-bundle-quotient-geometry] for the free rank-$(r+1)$ sheaf on $U_1$ to obtain $\\varphi:Z_{U_1}\\to P=\\mathbf P^r_{U_1}$ and $\\varphi^*\\mathcal O_P(1)\\cong L^{\\otimes d}|_{Z_{U_1}}$. Its naturality under arbitrary pullback, applied to $\\operatorname{Spec}\\kappa(s)\\to U_1$, identifies its fibre map with $i_s$: the restricted quotient has precisely the sections $t_j$ of Step 3. Properness of $Z_{U_1}\\to U_1$ is [lem-weil-pbc-proper-base-change]. Since $P\\to U_1$ is separated by the same quotient-geometry node, [lem-weil-pbc-proper-to-separated] makes $\\varphi$ proper.",
-   "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-proper-to-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, construction of phi and identification of its fibre; properness made explicit"
-   }
-  },
-  {
-   "text": "Write $q:P\\to U_1$ for the projection. For each point $p\\in q^{-1}(s)$ the set $\\varphi^{-1}(p)$ has at most one point. Indeed, the two fibre projections in [def-pc-scheme-fibre] identify $Z_s$ with the topological fibre of $Z_{U_1}\\to U_1$ and $P_s$ with that of $q$; under these identifications $\\varphi$ is $i_s$, which is injective on points by the definition of closed immersion [def-weil-closed-immersion]. Apply [lem-trf-proper-finite-fibre-finite-near] to the proper map $\\varphi$ at each such $p$. It gives an open neighbourhood $W_p\\subseteq P$ on which $\\varphi$ is finite. Set $W=\\bigcup_{p\\in q^{-1}(s)}W_p$. By the finite-morphism clause of [lem-weil-pbc-closed-finite-etale-zariski-local], the restriction $\\varphi^{-1}(W)\\to W$ is finite. This application allows the empty fibre of $\\varphi$ at a point outside the image of $i_s$.",
-   "uses": [
-    "def-pc-scheme-fibre",
-    "def-weil-closed-immersion",
-    "lem-trf-proper-finite-fibre-finite-near",
-    "lem-weil-pbc-closed-finite-etale-zariski-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, final paragraph: finite over a neighbourhood of the whole projective-space fibre; Tag 02UP generalizes the cited 02OH"
-   }
-  },
-  {
-   "text": "The structural map $q:\\mathbf P^r_{U_1}\\to U_1$ is proper by [lemma-nagata-projective-space-base-change-proper], so $q(P\\setminus W)$ is closed by [def-weil-proper-morphism]. Since $W$ contains $q^{-1}(s)$, this closed set misses $s$. Choose an affine open neighbourhood $V$ of $s$ in $U_1\\setminus q(P\\setminus W)$. Then $P_V=q^{-1}(V)\\subseteq W$. The restricted $\\varphi_V:Z_V\\to P_V$ is finite: cover $P_V$ by its intersections with the $W_p$, restrict the finite morphisms there (finiteness on smaller affine opens is part of [def-weil-finite-integral-morphism]), and use [lem-weil-pbc-closed-finite-etale-zariski-local].",
-   "uses": [
-    "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-proper-morphism",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-closed-finite-etale-zariski-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0D2N, final paragraph: second shrinking, using closedness of projective space over the base"
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood; assembly of the three extracted arguments."
    }
   },
   {
@@ -149,26 +89,17 @@
  ],
  "proof_deps": [
   "def-pc-scheme-fibre",
-  "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-ample-invertible-module",
   "def-weil-pbc-morphism-to-projective-space-by-sections",
   "def-weil-proper-morphism",
-  "lem-sc-ample-positive-tensor-power",
-  "lem-trf-ample-fibre-section-lifting",
+  "lem-trf-fibre-embedding-lifted-coordinates",
+  "lem-trf-fibre-generators-projective-neighbourhood",
   "lem-trf-projective-bundle-quotient-geometry",
-  "lem-trf-proper-finite-fibre-finite-near",
-  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
-  "lem-weil-pbc-closed-finite-etale-zariski-local",
-  "lem-weil-pbc-invertible-generating-sections-fibre",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-trf-projective-map-finite-near-embedded-fibre",
   "lem-weil-pbc-projective-morphism-chart-preimage",
   "lem-weil-pbc-projective-space-standard-charts",
   "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-immersion-closed",
-  "lem-weil-pbc-proper-to-separated",
-  "lemma-nagata-projective-space-base-change-proper",
   "pqf-lem-proper-basic"
  ],
  "proof_origin": {
@@ -286,42 +217,18 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-noetherian-fibre-ample-neighbourhood",
   "worker": "stage1",
-  "summary": "Expanded the Noetherian cohomological proof 0D2N into nine steps, separating the single new lifting input 0D2M. Reused the existing immersion, projective-space quotient, finite-neighbourhood and finiteness-locality nodes. Made both proper-image shrinkings, the empty fibre, arbitrarily high exponent choice, and the final absolute affine-chart criterion explicit. The statement is unchanged.",
+  "summary": "Repair of the human re-split request: extracted original steps 2-4, 5-6 and 7-8 into three independently actionable statement-only nodes of comparable proof workload. Retained original empty-fibre and final affine-chart arguments. Statement, route, Lean attribution, original searches and other imported metadata unchanged. Full original nine-step argument and allocation are preserved verbatim in report.md. Rebased delivery after the side-completion promotion return: re-read current dependency statements and verified every citation against the current DAG; no changed mathematical hypotheses or conclusions require a different assembly. Current retry: compared the retained nine-step source against the live item (no changed fields), revalidated all current cited statements and quotations, and made generation and positive-power invertibility explicit in assembly steps 2-3. All three statement-only tasks and original proof allocations are preserved.",
   "blueprint": "Realizes the Noetherian input to lem-trf-ample-neighbourhood in the fibrewise-ampleness-to-projectivity branch below lem-trf-local-term-locality; it follows 0D2N and preserves the unit route.",
   "tool_uses": [
-   {
-    "node": "lem-sc-ample-positive-tensor-power",
-    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
-    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
-    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-invertible-pullback-tensor",
-    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
-    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
-   },
    {
     "node": "lem-weil-pbc-projective-morphism-chart-preimage",
     "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
    },
    {
     "node": "lem-weil-pbc-projective-space-standard-charts",
-    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
-   },
-   {
-    "node": "lemma-nagata-projective-space-base-change-proper",
     "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
    },
    {
@@ -342,12 +249,12 @@
   "pqf-lem-proper-basic"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q22-b9615fec2",
-  "group": "Q22",
+  "reviewer": "NT-cc-Q157-8b8473c45",
+  "group": "Q157",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-b9615fec2 (reviewer sub-agent of L); spot-checked: Read the prescribed DAG records, item, new lifting node, cited statements, unit/chapter route, and Stacks Tags 0D2M/0D2N. All nine steps match the source with hypotheses checked, edge cases tested, no duplicate or circular split, no route-pivot violation, and no long-step issue. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-8b8473c45 (reviewer sub-agent of L); spot-checked: Q157 lem-trf-noetherian-fibre-ample-neighbourhood @8b8473c4: FIX. This is the third push of the three-node re-split (after 96408cd9 and 368535f7, both FIX). The new nodes A, B and C are byte-identical to those of 368535f7, so the earlier B3 FIX was lost again; I re-applied it. The item differs from 368535f7 only in step 2 (the fibre tuple is now stated to generate L_s^d), step 3 (invertibility of M = L^d|Z_U now cites def-weil-pbc-ample-invertible-module) and split_report. Live and side-live still hold the 9-step item, and none of the new ids is live. The statement equals live. Re-split check: all 9 live steps appear verbatim in the report. Steps 1 and 9 became parent steps 1 and 5. Steps 2-4 went to A (lem-trf-fibre-embedding-lifted-coordinates), 5-6 to B (lem-trf-fibre-generators-projective-neighbourhood) and 7-8 to C (lem-trf-projective-map-finite-near-embedded-fibre). These are about 2039, 1567 and 1472 characters, so comparable. The parent is 2727 characters, down from 6647. Nothing was shortened, and no node restates the item. Source: I read Stacks coherent.tex 0D2N (line 6091) in full; A, B and C are its consecutive segments. The item's absolute ampleness over affine V is proved directly in step 5, and the route uses no SGA. A is true: d = N·a ≥ d0, the immersion is closed because the projective target is separated, and the lifts come from lem-trf-ample-fibre-section-lifting (S Noetherian). B is true for any S: the common-zero locus is closed and misses f^{-1}(s) by the residue-field formula of invertible-pullback-tensor (3), then take the proper image and shrink to an affine; phi is proper because the target is separated; the fibre comes from pullback naturality. C is true for any S: at most one point over each p in q^{-1}(s), then proper-finite-fibre-finite-near, a union, Zariski-locality, properness of q and shrinking. Parent steps 1-5 were checked against the cited statements; phi is a U1-morphism. Edge cases checked: empty fibre, r=0, d=1, nonclosed s, non-surjective phi_s. The chart-preimage, standard-charts and proper-basic tool_uses are accepted as generic tools already used in the base. Duplicate search (rg -L for 0D2N and fibre-finite phrases): there are no duplicates of A, B or C. Maintainer note: lem-sfb-space-noetherian-ample-neighbourhood and lem-sfb-space-relative-ample-locus (O3, 2026-10-22) generalize the item itself to algebraic spaces; this is not a fault. FIX (B3, re-applied unchanged from 368535f7): node A said 'canonical tensor/pullback identifications' without citing a node. It now cites (L^d)|Z_s ≅ L_s^d from lem-weil-pbc-invertible-pullback-tensor, iterated, as p_j(L,d) of def-sc-tensor-pullback-power-comparison, and both are added to stmt_deps. File: fixes/dag/nodes/sec-trace-formula/lem-trf-fibre-embedding-lifted-coordinates.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NoetherianFibreAmpleNeighbourhood",
@@ -367,5 +274,16 @@
   "result": "fix",
   "note": "Mathematics, dependencies, universes, edge cases, docstrings and verbatim signature checked; immutable module compiled cleanly through scompile.py. Repaired H11 with a complete independent second-reading report in fixes/lem-trf-noetherian-fibre-ample-neighbourhood.report.md. Full findings recorded in review.md; no Lean or node changes needed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

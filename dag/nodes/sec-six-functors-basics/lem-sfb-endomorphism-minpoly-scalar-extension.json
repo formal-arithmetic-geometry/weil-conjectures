@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-endomorphism-minpoly-scalar-extension",
+ "kind": "statement",
+ "title": "Minimum polynomial of an endomorphism under arbitrary scalar extension",
+ "statement": "Let $K,L$ be fields [def-weil-field], let $\\iota:K\\to L$ be a unital field homomorphism, let $V$ be a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace], and let $T:V\\to V$ be $K$-linear. Let $W=L\\otimes_K V$ be the $L$-vector space universal for $K$-bilinear maps out of $L\\times V$, and let $T_L:W\\to W$ be the $L$-linear map with $T_L(\\lambda\\otimes v)=\\lambda\\otimes T(v)$. Then $W$ is finite-dimensional over $L$. If $m_T\\in K[X]$ and $m_{T_L}\\in L[X]$ [def-weil-polynomial-ring] are the monic polynomials of least degree annihilating the two maps (equal to $1$ on the zero space), then $m_{T_L}=\\iota_*m_T$, where $\\iota_*$ applies $\\iota$ to every coefficient. No perfectness or algebraicity hypothesis on $K$ or $L/K$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 9b, printed pp.166,168: supporting minimum-polynomial scalar-extension lemma for the matrix argument. This exact equality is supplied by the agent, not asserted as a named theorem in Milne; the report gives its coefficient-matrix proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "If $\\iota(a)=0$ and $a\\ne0$, then $1=\\iota(a^{-1})\\iota(a)=0$, impossible. Thus identify $K$ with $\\iota(K)\\subset L$. Choose a finite spanning list of $V$ and repeatedly delete a vector expressible through the others. A dependence expresses a vector through the others by dividing by a nonzero coefficient. Each deletion preserves the span; the resulting finite list $e_1,\\ldots,e_n$ is independent and spans, hence is a basis.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+   }
+  },
+  {
+   "text": "By [def-weil-vector-space-scalar-extension], $e_j\\otimes1$ is a basis of $V\\otimes_KL$. The mutually inverse maps $v\\otimes\\lambda\\mapsto\\lambda\\otimes v$ and $\\lambda\\otimes v\\mapsto v\\otimes\\lambda$ are well-defined by the balancing relations, so $1\\otimes e_j$ is a basis of $W$. In particular $W$ is finite-dimensional. If $n=0$, both spaces are zero and both minimum polynomials are $1$, proving the assertion. Assume $n>0$.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+   }
+  },
+  {
+   "text": "Write $T(e_j)=\\sum_i a_{ij}e_i$ and $A=(a_{ij})$. Then $T_L(1\\otimes e_j)=\\sum_i\\iota(a_{ij})(1\\otimes e_i)$, so its matrix is $A_L=(\\iota(a_{ij}))$. Composition of maps has matrix product because its $(i,j)$ entry is $\\sum_k a_{ik}b_{kj}$; The zeroth powers have identity matrices, and multiplying once more by $A$ or $A_L$ gives by induction matrices $A^r$ and $A_L^r=\\iota_*(A^r)$ for all powers. Hence for every $p\\in K[X]$, the matrix of $(\\iota_*p)(T_L)$ is $\\iota_*(p(A))$. Put $d=\\deg m_T$ and $q=\\iota_*m_T$. The polynomial $q$ is monic of degree $d$ and annihilates $T_L$, since $m_T(T)=0$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+   }
+  },
+  {
+   "text": "The arrays $I,A,\\ldots,A^{d-1}$ are $K$-linearly independent: a nonzero relation gives a nonzero polynomial $p$ of degree $r<d$ with $p(T)=0$, and dividing $p$ by its nonzero leading coefficient gives a monic annihilating polynomial of degree $r$, contradicting the defining minimality of $m_T$. Also $d>0$, since the only monic constant polynomial is $1$ and its value is the nonzero identity of $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+   }
+  },
+  {
+   "text": "Regard these arrays as vectors in $K^{n^2}$, indexed by pairs $(i,j)$. By [lem-weil-linear-independence-field-extension] their coefficientwise images $I,A_L,\\ldots,A_L^{d-1}$ remain $L$-linearly independent. Thus no nonzero polynomial over $L$ of degree less than $d$ annihilates $T_L$. Since $q$ is monic of degree $d$ and annihilates $T_L$, the least degree of a monic annihilator is exactly $d$, so $\\deg m_{T_L}=d$.",
+   "uses": [
+    "lem-weil-linear-independence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+   }
+  },
+  {
+   "text": "The leading terms of the monic polynomials $m_{T_L}$ and $q$ cancel, so their difference is either zero or has degree less than $d$. Its value at $T_L$ is zero. The independence just proved excludes a nonzero such difference, whence $m_{T_L}=q=\\iota_*m_T$. None of these steps used perfectness, algebraicity, separability, or finiteness of $L/K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-polynomial-ring",
+  "lem-weil-linear-independence-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 9b, printed pp.166,168; agent-supplied coefficient-matrix argument supporting scalar extension, not a named theorem of Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any field extension L over K and finite dimensional endomorphism T, the minimal polynomial of 1 tensor T is the coefficientwise image of the minimal polynomial of T",
+   "results": "{\"t\": \"2026-10-24T08:44:54Z\", \"tool\": \"leanfinder\", \"query\": \"For any field extension L over K and finite dimensional endomorphism T, the minimal polynomial of 1 tensor T is the coefficientwise image of the minimal polynomial of T\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.polyCharpoly_baseChange\", \"LinearMap.polyCharpolyAux_map_aeval\", \"LinearMap.polyCharpolyAux_baseChange\", \"minpoly.map_algebraMap\", \"LinearMap.charpoly_baseChange\", \"minpoly_algEquiv_toLinearMap\", \"minpoly_algHom_toLinearMap\", \"LinearMap.toMvPolynomial_baseChange\"], \"digest\": \"93a049958a346417\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimal polynomial of a matrix is unchanged under an injective field homomorphism",
+   "results": "{\"t\": \"2026-10-24T08:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"The minimal polynomial of a matrix is unchanged under an injective field homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minpoly.algHom_eq\", \"minpoly.algebraMap_eq\", \"ConjRootClass.minpoly_injective\", \"LinearMap.minpoly_toMatrix'\", \"Matrix.minpoly_toLin'\", \"minpoly.map_algebraMap\", \"LinearMap.minpoly_toMatrix\", \"Matrix.minpoly_toLin\"], \"digest\": \"16dd5597df1793e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial of a linear endomorphism after extension of the scalar field tensor product",
+   "results": "{\"t\": \"2026-10-24T08:43:13Z\", \"tool\": \"leansearch\", \"query\": \"Minimal polynomial of a linear endomorphism after extension of the scalar field tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.minpoly_toMatrix'\", \"Matrix.minpoly_toLin\", \"LinearMap.minpoly_dvd_charpoly\", \"minpoly.map_algebraMap\", \"minpoly.algebraMap_eq\", \"minpoly.dvd_map_of_isScalarTower'\", \"LinearMap.minpoly_toMatrix\", \"Matrix.minpoly_toLin'\"], \"digest\": \"4fdafd6da9016d2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial of a matrix under an arbitrary field extension is the coefficient map of its minimal polynomial",
+   "results": "{\"t\": \"2026-10-24T08:47:32Z\", \"tool\": \"leansearch\", \"query\": \"Minimal polynomial of a matrix under an arbitrary field extension is the coefficient map of its minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.minpoly_toMatrix'\", \"LinearMap.minpoly_toMatrix\", \"minpoly.isIntegrallyClosed_eq_field_fractions\", \"minpoly.ofSubring\", \"Matrix.minpoly_toLin'\", \"minpoly.algebraMap_eq\", \"IntermediateField.minpoly_eq\", \"minpoly.algHom_eq\"], \"digest\": \"776f7bfd4e765339\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.baseChange, minpoly",
+   "results": "{\"t\": \"2026-10-24T08:44:49Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.baseChange, minpoly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly, Matrix.map",
+   "results": "{\"t\": \"2026-10-24T08:44:49Z\", \"tool\": \"loogle\", \"query\": \"minpoly, Matrix.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.*map|map.*minpoly|baseChange.*minpoly|minpoly.*baseChange",
+   "results": "{\"t\": \"2026-10-24T08:46:19Z\", \"tool\": \"grep\", \"query\": \"minpoly.*map|map.*minpoly|baseChange.*minpoly|minpoly.*baseChange\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.*(baseChange|base_change)|baseChange.*minpoly|map.*minpoly",
+   "results": "{\"t\": \"2026-10-24T08:44:49Z\", \"tool\": \"grep\", \"query\": \"minpoly.*(baseChange|base_change)|baseChange.*minpoly|map.*minpoly\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/Separable.lean\"], \"digest\": \"f4143a34cd6faa55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.charpoly_baseChange concerns characteristic polynomials. LinearMap.minpoly_toMatrix only changes representation over the same base. minpoly.algHom_eq keeps the base field fixed; minpoly.map_algebraMap requires coefficient descent and a commutative ambient algebra. None gives the asserted equality for the noncommutative endomorphism algebra after an arbitrary field extension in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.*baseChange|baseChange.*minpoly|linearIndependent.*baseChange|baseChange.*linearIndependent",
+   "results": "{\"t\": \"2026-10-24T09:07:28Z\", \"tool\": \"grep\", \"query\": \"minpoly.*baseChange|baseChange.*minpoly|linearIndependent.*baseChange|baseChange.*linearIndependent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean\"], \"digest\": \"84e37ee75df9d693\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only an import of the general linear-independence base-change module, not an endomorphism minpoly base-change theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly, LinearMap.baseChange",
+   "results": "{\"t\": \"2026-10-24T09:07:29Z\", \"tool\": \"loogle\", \"query\": \"minpoly, LinearMap.baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the requested base-change/matrix-map pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimal polynomial of a linear endomorphism is preserved by extension of scalars to any larger field",
+   "results": "{\"t\": \"2026-10-24T09:07:30Z\", \"tool\": \"leanfinder\", \"query\": \"The minimal polynomial of a linear endomorphism is preserved by extension of scalars to any larger field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minpoly.aeval_of_isScalarTower\", \"minpoly.map_algebraMap\", \"minpoly.dvd_map_of_isScalarTower\", \"minpoly.algebraMap_eq\", \"minpoly.dvd_map_of_isScalarTower'\", \"IntermediateField.minpoly_eq\", \"minpoly_algHom_toLinearMap\", \"LinearMap.minpoly_dvd_charpoly\"], \"digest\": \"eb35845519201ddd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned characteristic-polynomial or same-base representation results, or minpoly.map_algebraMap which assumes coefficient descent and a commutative ambient algebra; none is this arbitrary scalar-extension statement for endomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial of an endomorphism after arbitrary base change of the scalar field",
+   "results": "{\"t\": \"2026-10-24T09:09:11Z\", \"tool\": \"leansearch\", \"query\": \"Minimal polynomial of an endomorphism after arbitrary base change of the scalar field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.minpoly_toMatrix\", \"LinearMap.polyCharpolyAux_baseChange\", \"LinearMap.minpoly_toMatrix'\", \"LinearMap.polyCharpoly.congr_simp\", \"Matrix.minpoly_toLin\", \"LinearMap.charpoly_baseChange\", \"LinearMap.polyCharpoly_baseChange\", \"LinearMap.polyCharpoly\"], \"digest\": \"223cc11622de2d55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned characteristic-polynomial or same-base representation results, or minpoly.map_algebraMap which assumes coefficient descent and a commutative ambient algebra; none is this arbitrary scalar-extension statement for endomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal polynomial of a matrix is unchanged by an injective homomorphism between its coefficient fields",
+   "results": "{\"t\": \"2026-10-24T09:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal polynomial of a matrix is unchanged by an injective homomorphism between its coefficient fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minpoly.algHom_eq\", \"minpoly.algebraMap_eq\", \"Matrix.minpoly_toLin'\", \"Matrix.minpoly_toLin\", \"LinearMap.minpoly_toMatrix'\", \"LinearMap.minpoly_toMatrix\", \"Matrix.charpoly.univ_map_map\", \"minpoly.map_algebraMap\"], \"digest\": \"7fb67fa36ddf45e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned characteristic-polynomial or same-base representation results, or minpoly.map_algebraMap which assumes coefficient descent and a commutative ambient algebra; none is this arbitrary scalar-extension statement for endomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly, Matrix.map",
+   "results": "{\"t\": \"2026-10-24T09:12:40Z\", \"tool\": \"loogle\", \"query\": \"minpoly, Matrix.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the requested base-change/matrix-map pattern."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-semisimplicity-field-extension",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282. Supporting prerequisite: Proposition 17.74(a),(b), printed p.377, and the geometric faithful-matrix formulation obtained by applying it over an algebraic closure. Rational representations, not arbitrary abstract Lie representations; Sections 10a–10d give tangent injectivity and matrix differentials. The theorem is the additive counterpart of Chapter 9 and does not assert a Jordan decomposition over an imperfect base field. Supporting proof input: Preliminaries to Proposition 17.74, printed p.376, additive version of Theorem 9.11 and Propositions 9.13--9.15, pp.168--169. Tensor-sum and scalar-extension formulations are the linear-algebra input to the agent-written solution of the exercise 17.74. Supporting linear-algebra prerequisite: Comparison of geometric and invariant-complement semisimplicity, before applying polynomial Jordan decomposition and comparing scalar extensions in Milne pp.166,168,376. Supporting proof input: Coefficient-matrix comparison of minimum polynomials, before comparing geometric diagonalizability across arbitrary field extensions (Milne pp.166,168).",
+   "via": [
+    "lem-sfb-geometric-semisimplicity-field-extension",
+    "lem-sfb-additive-jordan-linear-compatibility",
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-endomorphism-minpoly-scalar-extension",
+  "worker": "stage1",
+  "summary": "N6: no exact completed project declaration found. Proved the scalar-extension equality by comparing coefficient arrays of powers below the minimum-polynomial degree. Reused the existing scalar-extension basis and linear-independence Mathlib leaves; no new nodes. Included arbitrary embeddings, the zero space, and imperfect or transcendental extensions.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting chain recorded in blueprint.from.place: coefficient-matrix comparison for lem-sfb-geometric-semisimplicity-field-extension, Milne Section 9b pp.166,168. No change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-290a2a324",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-290a2a324 (reviewer sub-agent of L); spot-checked: Read the item and its full proof, the five cited statements, the parent's citing steps 3–5 and Milne iAG2017 §9b printed p.166 (it gives semisimplicity and the minimum-polynomial criterion but not this equality, so proof_origin by:agent is correct). There are no new nodes. Compared with side-live, the item is still unsplit there, and only status, proof, proof_deps, proof_origin, split_report and added searches change; the statement and stmt_deps stay as they were. There is no repair note, so the re-split rule does not apply. The statement m_{T_L}=ι_*m_T for an arbitrary ι is true. Checked cases: V=0; X−a, including a non-inclusion embedding of Q(√2) into C with √2↦−√2, which gives X+√2; T=0; a nilpotent block; the companion matrix of X^p−a over F_p(a) extended by a^{1/p}, whose minimum polynomial stays of degree p; a transcendental L. Step by step: step 1 (injectivity and choosing a basis) is elementary. Step 2 uses the basis and finite-dimensionality clauses of the statement of def-weil-vector-space-scalar-extension, with flip maps for the factor order. Step 3 is the matrix calculation ι_*(p(A)), and q is a monic annihilator of degree d. Step 4 shows I,…,A^{d−1} are independent by minimality. Step 5 uses lem-weil-linear-independence-field-extension in K^{n²}, which is exactly its statement. Step 6 shows the difference of the two degree-d monic polynomials vanishes. proof_deps equals the union of the steps' uses. All citations are definitions or Mathlib leaves, so the item stays inside sk-thm-sf-ctf-stability and no tool_uses are needed. No duplicate in the DAG (rg -L for minimal/minimum polynomial with scalar extension, base change, endomorphism or matrix). No Mathlib leaf: minpoly.map_algebraMap needs a commutative algebra and a lifts hypothesis, and dvd_map_of_isScalarTower gives only divisibility. Minor note: the existence of m_T is presupposed by the statement's wording; it is automatic for finite-dimensional V and is Mathlib's minpoly. No changes."
+ }
+}

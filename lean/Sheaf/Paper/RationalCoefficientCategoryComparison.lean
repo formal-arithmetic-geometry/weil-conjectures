@@ -12,28 +12,11 @@ public import Sheaf.Paper.SfWeilSheafComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
-import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
-import Sheaf.Paper.FiniteStagePairCategory
-import Sheaf.Paper.PbcCommonStageCones
-import WeilConjectures.Algebra.Homology.RoosComplex
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.IntegralPullbackComparisonRealization
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.Paper.IntrinsicQbarCategory
-import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.Paper.PbcRationalCategory
-import Sheaf.Paper.PbcScalarExtension
-import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.SfScalarExtensionComposition
+import Sheaf.Paper.FdIntegralIdentityRationalEquivalence
+import Sheaf.Paper.FdCompletionInverseScalarCoherence
+import Sheaf.Paper.FdCommonStageComparisonDescent
+import Sheaf.Paper.WholeTowerIntegralPullbackComparison
+import Sheaf.Paper.FrobeniusFixedPairComparison
 
 /-! # Canonical coefficient comparison and Frobenius pairs
 
@@ -215,6 +198,52 @@ theorem rationalCoefficientCategoryComparison (D : FiniteFieldDatum.{u}) (hl : l
       FdComparisonSchemeCoherence l Ω S ∧
       ∀ (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
         [IsSeparated X₀.hom], Nonempty (FdFrobeniusComparison l Ω D hl S X₀) := by
-  sorry
+  classical
+  have coefficient_exists (T : Scheme.{u}) [IsNoetherian T]
+      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] :
+      Nonempty (FdCoefficientComparison l Ω T) := by
+    let stage : ∀ E, FdRationalStageComparison l Ω T E := fun E ↦
+      (fdIntegralIdentityRationalEquivalence D l hl Ω T E).choose
+    obtain ⟨c⟩ := fdCompletionInverseScalarCoherence D l hl Ω T stage
+    let finite : FdFiniteCoefficientComparison l Ω T :=
+      { stage := stage
+        family := c.family
+        finite_functor := c.finite_functor
+        finite_shift := c.finite_shift
+        finite_shift_normalization := c.finite_shift_normalization
+        scalar_shift := fun h ↦ (c.scalar_shift h).1
+        ordinary := c.integral.ordinary
+        integral_scalar := c.integral.comparison
+        integral_scalar_lift := fun h ↦
+          ⟨c.integral.integral h, c.integral.restriction h, c.scalar_lift h⟩
+        chi := c.integral.chi }
+    obtain ⟨C, _⟩ := fdNormalizedCommonStageDescent l Ω T finite
+    exact ⟨C⟩
+  let C : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+      [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))],
+      FdCoefficientComparison l Ω T := fun T _ _ _ ↦ (coefficient_exists T).some
+  obtain ⟨W⟩ := wholeTowerIntegralPullbackComparison l Ω D hl C
+  let S : FdCoefficientComparisonSystem.{u} l Ω :=
+    { realization := W.realization
+      realization_coherent := W.realization_coherent
+      coefficients := C
+      pullback := W.pullback }
+  refine ⟨S, ⟨W.unit, W.composition, W.scalar_realization⟩, ?_⟩
+  intro X₀ _ _ _
+  obtain ⟨hN, hD, hI, h⟩ := frobeniusFixedPairComparison l Ω S D hl X₀
+  let := hN
+  let := hD
+  let := hI
+  obtain ⟨J, hJ⟩ := h.2.1
+  let finite := fun E ↦ (h.2.2 E).choose
+  exact ⟨{ noetherian := hN
+           dimension := hD
+           invertible := hI
+           common := J
+           common_functor := hJ
+           finite := finite
+           finite_functors := fun E ↦ (h.2.2 E).choose_spec }⟩
 
 end WeilConjectures

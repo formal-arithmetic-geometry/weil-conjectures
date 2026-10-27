@@ -97,7 +97,8 @@ def decl_names(d: dict, done_branch: str) -> list[str]:
     """the Lean declarations a node records: its `lean` record (declaration, declarations) and the upstream audit's decls"""
     l = d.get("lean") if isinstance(d.get("lean"), dict) else {}
     out = ([l.get("declaration")] if l.get("declaration") else []) + [x for x in l.get("declarations") or [] if isinstance(x, str)]
-    return out + [x["name"] for x in ((d.get("lean_audit") or {}).get(done_branch) or {}).get("decls") or []
+    a = (d.get("lean_audit") if isinstance(d.get("lean_audit"), dict) else {}).get(done_branch)
+    return out + [x["name"] for x in (a if isinstance(a, dict) else {}).get("decls") or []
                   if isinstance(x, dict) and x.get("name")]
 
 

@@ -30,92 +30,77 @@
  ],
  "proof": [
   {
-   "text": "For the module-equivalence clause, use the concrete gluingFunctor and gluingEquivalence underlying [lem-pur-clopen-ringed-module-gluing]. Reindex the finite family by Fin m so the section product stays in the published module universe. Transport the equivalence back using Pi.equivalenceOfEquiv and its counit. Its sectionwise inverse is the reindexing additive equivalence; scalar, restriction and morphism formulas follow coordinatewise. Restriction exactness uses [lem-pur-finite-product-derived-tensor-calculus]. Residue-field invertibility follows by mapping the published stalk unit. The empty-cover clause follows directly from the union equality.",
+   "text": "Apply the normalized module gluing theorem, package its unit and counit as an equivalence, and retain its explicit sectionwise product, scalar, restriction and morphism formulas. The field coefficient map to each stalk preserves the unit witnessing invertibility of the coefficient prime. The covering equality handles the empty case.",
    "uses": [
     "lem-pur-clopen-ringed-module-gluing",
-    "lem-pur-finite-product-derived-tensor-calculus"
+    "lem-pur-clopen-strict-tower-roos-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TS, sites-lemma-mapping-property-glue; Tags 04TQ/04TR, sites-lemma-glue-maps/sites-lemma-glue-sheaves. Agent finite-clopen module expansion of the section-invariant argument, old item steps 1-3."
-   }
+   "elementary": false
   },
   {
-   "text": "The unbounded derived/tensor/unit clause remains unproved and retains [lem-pur-finite-product-derived-tensor-calculus] as its planned dependency. The actual finite, integral, rational and common-stage tensor comparisons and finite quotient comparisons are obtained from [lem-pur-derived-pullback-tensor-iso]. For integral reduction evaluate the coherent coefficient-sequence comparison, using the invertible counit on pulled-back constructible reduction systems.",
+   "text": "Use the finite-product derived calculus for the unbounded equivalence and exact-functor cohomology comparison. Restriction sends the regular module directly to the restricted regular module. Compare each published duality-model tensor with the native K-flat tensor by fully faithful localization whiskering, and compose these model comparisons with the bifunctor isomorphism supplied by normalized clopen K-flat monoidal descent.",
    "uses": [
     "lem-pur-finite-product-derived-tensor-calculus",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pur-clopen-kflat-monoidal-descent",
+    "lem-sfb-ring-isomorphism-tensor-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, derived-lemma-right-derived-exact-functor; Tag 05RU, derived-definition-unbounded-derived-category; sites-modules.tex Tag 0GMW, sites-modules-lemma-sheafification-tensor; sites-cohomology.tex Tags 06YS/0G7D/06YU, lemma-K-flat-resolution/lemma-factor-through-K-flat/definition-derived-tor. Agent finite-product application, old item steps 4-6."
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-pur-clopen-finite-constructibility-bounds] at level n+1. Transport its actual inverse-image functor through [lem-trf-open-square-exchange]; cohomological support, Tor amplitude and constructibility are invariant under this isomorphism. Finite unions of supports give common cohomological bounds; minima and maxima of finite ranges give common Tor bounds, also for the empty family. Restrict the existing equivalences using fullyFaithfulCancelRight and the ambient pullback isomorphisms. Apply the proved tensor/reduction comparison to transfer these fixed finite-level bounds to every integral reduction, then use the same finite-range argument for uniform integral Tor bounds.",
+   "text": "Use finite pullback localization/cohomology to identify exact restriction with actual finite pullback, followed by normalized coefficient transport. Apply the fixed-interval finite constructibility and Tor criteria and choose common bounds over the finite index set. Exact restriction preserves products, so the signed additive Roos comparison also gives the strict tower comparison.",
    "uses": [
+    "lem-pur-finite-pullback-localization-cohomology",
     "lem-pur-clopen-finite-constructibility-bounds",
-    "lem-trf-open-square-exchange",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "def-pur-section-invariant, final invertibility assertion: agent finite-clopen constructibility and fixed-interval Tor argument, old item step 8; definitions def-weil-finite-torsion-constructibility and def-weil-finite-tor-amplitude."
-   }
-  },
-  {
-   "text": "For the strict Roos clause, apply the additive cone comparison of [lem-pur-roos-additive-comparison] to the transposed tower complex. Naturality follows from its strict product and comparison-map squares. Restriction is the right adjoint largePush of [def-sp-varying-ring-operations], so it preserves countable products. This proves the named strict-Roos theorem without importing the integral-descent module.",
-   "uses": [
     "lem-pur-roos-additive-comparison",
-    "def-sp-varying-ring-operations"
+    "lem-galois-equivalence-preserves-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC; functorial shifted Roos cone and additive comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "The integral constructible equivalences, the coefficient-unit assertions, the finite/integral restriction identifications and the scalar-extension theorem remain original named holes. Their original integral route uses [lem-pur-clopen-roos-integral-descent]. That module currently imports this module for its definitions, so importing it back is cyclic; the independent strict-Roos and integral-bounds clauses above avoid that cycle. The remaining coefficient and restriction-identification assertions are not claimed proved by this packet.",
+   "text": "The constructible integral, rational, common-stage and finite-Tor equivalences remain unproved in finiteClopen_constructible_equivalences. Retain the planned completed-system, integral-descent and field-stage dependencies for that original hole. The independent proof of the integral restriction identification constructs scalar transport along the canonical completed-ring isomorphism and composes exact-derived-functor comparisons with the normalized open-completed comparison on constructible objects.",
    "uses": [
-    "lem-pur-clopen-roos-integral-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, derived-definition-derived-limit, and derived-lemma-products immediately following it. Agent finite-clopen strict-cone and integral completeness application, old item steps 7 and 9; strict models of def-pur-integral-derived-operations and def-weil-integral-scalar-extension."
-   }
-  },
-  {
-   "text": "For the remaining rational/common-stage equivalence clause retain the original planned application of [lem-pur-finite-product-field-coefficient-descent] once the integral equivalences and their required comparisons are available. This clause remains a named hole in this partial proof delivery.",
-   "uses": [
+    "lem-pur-ring-iso-quotient-system-transport",
+    "lem-pur-clopen-roos-integral-descent",
+    "lem-pur-open-completed-restriction-identification",
     "lem-pur-finite-product-field-coefficient-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "def-pur-section-invariant, final invertibility assertion: agent rationalization and common-stage finite-product transport, old item steps 10-11; the explicit category models of def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients."
-   }
+   "elementary": false
+  },
+  {
+   "text": "The finite restriction identification is proved by taking the inverse of the canonical finite coefficient ring comparison supplied by finite pullback localization/cohomology. Scalar restriction along this isomorphism is an exact equivalence. Descend it degreewise, combine the exact-derived composition and natural-isomorphism comparisons with the normalized finite pullback comparison, and retain the localization factorization on complexes. The scalar-extension proof composes the normalized completion-unit isomorphisms with the ordinary scalar/pullback square, and uses the published rational pullback object and Hom formulas. The unit proof transports regular module units through normalized finite and completed restriction, then applies rationalization and common-stage inclusions.",
+   "uses": [
+    "lem-pur-finite-pullback-localization-cohomology",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-normalized-scalar-completion",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-clopen-strict-tower-roos-equivalence",
   "lem-pur-finite-product-derived-tensor-calculus",
-  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-pur-clopen-kflat-monoidal-descent",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-pur-finite-pullback-localization-cohomology",
   "lem-pur-clopen-finite-constructibility-bounds",
-  "lem-trf-open-square-exchange",
   "lem-pur-roos-additive-comparison",
-  "def-sp-varying-ring-operations",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-pur-ring-iso-quotient-system-transport",
   "lem-pur-clopen-roos-integral-descent",
-  "lem-pur-finite-product-field-coefficient-descent"
+  "lem-pur-open-completed-restriction-identification",
+  "lem-pur-finite-product-field-coefficient-descent",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-normalized-scalar-completion",
+  "lem-pur-derived-pullback-tensor-iso"
  ],
  "proof_origin": {
-  "by": "R7",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-  "place": "Partial stage-3 proof: ten original theorem holes closed with concrete module gluing, strict additive Roos comparison, finite and integral bounds/equivalences and coefficient tensor/reduction calculus; six original named holes retained. No new statements or holes."
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "J5 stage-3 partial proof: normalized gluing, direct K-flat tensor comparison, scalar and unit comparisons, and normalized completed restriction. Two original theorem holes retain their planned dependencies; the unit route and public statements are unchanged. R7, 2026-10-27: finite restriction identification assembled from normalized finite localization, ordinary scalar restriction equivalence, and exact-derived composition/localization APIs; the original constructible-equivalences hole remains."
  },
  "mathlib_searches": [
   {
@@ -230,12 +215,17 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-finite-clopen-derived-decomposition",
   "worker": "stage1",
-  "summary": "Human-requested re-split of the existing 11245-character proof into five statement-only tasks: module gluing, unbounded K-flat tensor calculus, finite constructibility/bounds, integral Roos/completeness, and rational/common-stage descent. Statement unchanged; all eleven original argument texts and their cited sources preserved verbatim in report.md.",
-  "blueprint": "def-pur-section-invariant, main-20261015 final invertibility assertion. New tasks inherit the exact five portions of the existing finite-clopen well-definedness expansion; no change to chapter or unit route.",
-  "tool_uses": []
+  "summary": "Q120 repair: unchanged statement; three new independent statement-only tasks isolate ring-isomorphism derived transport, coherent quotient-system transport, and the natural completed-open-pullback/restriction identification. The original six proof texts and their argument allocation are preserved in report.md. The assembly now states a complete conditional proof through the DAG rather than reporting remaining Lean holes. Existing gluing, tensor, bounds, integral and field-descent tasks are reused.",
+  "blueprint": "def-pur-section-invariant final invertibility assertion: finite-clopen coefficient category decomposition, finite and completed coefficient normalization, and common-stage transport. Chapter and unit route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-pullback-localization-cohomology",
+    "why": "Generic pro-etale-object inverse-image versus restriction comparison, needed to identify the finite component restriction functor; does not replace the purity route."
+   }
+  ]
  },
  "tool_uses": [
   "lem-weil-proetale-weakly-etale-localization",
@@ -247,15 +237,16 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pur-derived-change-of-rings",
   "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence"
+  "lem-weil-derived-limit-existence",
+  "lem-pur-finite-pullback-localization-cohomology"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q37-7bde813e8",
-  "group": "Q37",
+  "reviewer": "NT-cc-Q120-d24befc3d",
+  "group": "Q120",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-7bde813e8 (reviewer sub-agent of L); spot-checked: This is a re-split under the human's note of 2026-10-21 (coord/repair-notes, at least 3 new nodes, assembly of at most 3000 characters). I compared the base proof, the 11-step split reviewed in Q109, step by step with the delivery. Nothing was dropped or blurred. Old steps 1-3 (localization, cover, explicit product quasi-inverse, exactness, completed-ring identification, empty case) are now lem-pur-clopen-ringed-module-gluing. Steps 4-6 (insertion identities, D(R)≃∏D(R_i), H^m, bilinear tensor, K-flat iff componentwise, derived tensor, change of rings for every R→S) are lem-pur-finite-product-derived-tensor-calculus. Step 8 (stratifications in both directions, common intervals, fixed-interval Tor via zero insertion) is lem-pur-clopen-finite-constructibility-bounds. Steps 7 and 9 (strict Cone(1-s)[-1], Roos triangle with the specified c, completeness, D^b_c and D^b_ctf over O_E, uniform bounds, completed tensor, integral scalar extension) are lem-pur-clopen-roos-integral-descent. Steps 10-11 ((∏H_i)⊗E≅∏(H_i⊗E) with raw localization, compositum, fullness and faithfulness via filtered colimits) are lem-pur-finite-product-field-coefficient-descent. The five nodes are of comparable size, each is statement-only and unsplit with 5 recorded searches, none restates the item, and there is no cycle. The item statement is byte-identical to the base, and its 5-step assembly (1906 characters) covers every clause. Step 5's hypothesis is exactly what step 4 gives for each finite E. I checked the new statements against def-weil-finite-torsion-constructibility (finite partition into locally closed constructible subschemes), def-weil-proetale-tor-amplitude and def-weil-finite-tor-amplitude, def-weil-derived-complete (specified first map c, no canonical cone), def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi (no Karoubi completion) and def-weil-algebraically-closed-coefficients. Small cases checked: I=∅ (X=∅, zero categories), |I|=1, components with different bounds, empty components, ramified E⊂L. Stacks labels checked in tags/tags: 04TQ/04TR/04TS, 015F, 05RU, 08TC, 0GMW, 06YS/0G7D/06YU. No SGA. Duplicate search over all chapters: lem-weil-pbc-etale-sheaf-clopen-product and the related nodes are on the étale site or concern sets or curves, so none is a duplicate. One repairable fault, B3: the new nodes' stmt_deps omit definition nodes cited inline. All five lack def-weil-open-immersion and def-weil-closed-immersion. constructibility-bounds also lacks def-weil-abstract-derived-category and def-weil-derived-tensor. roos-integral-descent also lacks def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-integral-derived-reduction and def-weil-integral-reduction-tower. field-coefficient-descent also lacks def-pur-integral-derived-operations and def-weil-integral-scalar-extension. I added them in fixes/dag/nodes/sec-smooth-purity/*.json and changed nothing else. Advisory: the item's maintainer field tool_uses still lists the ten base tools, which are no longer in proof_deps; the new nodes' future proofs will need them. Three uncited base-era lemma stmt_deps on the item are unchanged from the base.; 5 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-d24befc3d (reviewer sub-agent of L); spot-checked: Batch-5 re-split note (3045 chars in 6 steps; needs at least 2 new nodes and an assembly of at most 3000 chars). Live is still at the Q37 base, so the delivery is not superseded. The item statement and stmt_deps are byte-identical to live. The assembly is 2464 chars in 6 steps. It adds 3 statement-only unsplit nodes (1971, 2258 and 2504 chars), each with 5 searches and inline citations equal to stmt_deps. No SGA. Step-by-step comparison with the base: no argument is dropped. Old step 3's C4 miscitation of lem-trf-open-square-exchange is correctly replaced by lem-pur-finite-pullback-localization-cohomology, whose u in X_proet hypothesis is met by a clopen immersion and whose conclusion is eta: Lu* = D(R_U). The integral uniform bounds go to step 5 via clopen-roos-integral-descent, which states them. Step 4: the roos-additive-comparison hypotheses hold, with products preserved by the equivalence (galois-equivalence-preserves-limits) plus projection. Step 6: the hypotheses of field-coefficient-descent are exactly step 5's output. The base step-5 holes are now cited interfaces. New nodes: ring-iso-derived-transport (directions and the tensor formulas m⊗n↦m⊗n and r↦α(r) checked; alpha=id and the zero ring tested) and ring-iso-quotient-system-transport (compatible α_n, system categories abelian as modules on the ringed site ℕ×C; m=n and r≥m≥n tested) are true and not duplicates. I read lem-weil-isomorphism-derived-pullback-equivalence, etale-module-ring-iso-adjunction, sf-semilinear-scalar-derived-comparison and sf-automorphism-completion-unit-comparison. open-completed-restriction-identification is true: restriction commutes with sectionwise products and Cone(1-s), and r_n ≅ j_n^* on K-flat P_n gives the isomorphism with the def-pur Rlim Res_n j_n^*(P_n). On complete K it composes with the completion unit. U=X and U=∅ tested. Advisory: its D^b_c clause overlaps lem-tw-ordinary-completed-integral-pullback (sk-r-real-linear) and lem-sf-open-restriction-completeness / lem-sf-open-roos-unit-adjunction. All of these are outside the sk-def-purity-conv route and state neither this normalisation nor arbitrary K, so the in-route node is kept. Maintainer note: its future prover may reuse that Lean. No changes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -319,14 +310,25 @@
   "existing": false,
   "note": "The module states all clauses through named theorem declarations: explicit sectionwise exact module gluing; unbounded derived, cohomology, tensor and strict Roos comparisons; finite and integral constructible/finite-Tor equivalences and common bounds; rational/common-stage equivalences, units and scalar transport. Helpers are actual canonical functors or full-subcategory lifts, not arbitrary data. Positive level n is represented by n+1. All theorem proofs are sorry."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "R7",
   "result": "pass",
-  "landing": "20261021T194158-L-1441507",
+  "landing": "20261027T112423-L-1582253",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

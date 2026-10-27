@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.Topology.ModuleColimitRestriction
-import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Finite presentation of a binary direct sum of module sheaves
@@ -24,6 +24,25 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.RingedSpace
+
+private theorem finite_biprod_presentation
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M N : SheafOfModules.{u} R} (P : M.Presentation) (Q : N.Presentation)
+    [P.IsFinite] [Q.IsFinite] :
+    ∃ T : (M ⊞ N).Presentation, T.IsFinite := by
+  classical
+  let A : ULift.{u} WalkingPair → SheafOfModules.{u} R :=
+    pairFunction M N ∘ ULift.down
+  let T : ∀ i, (A i).Presentation
+    | ⟨.left⟩ => P
+    | ⟨.right⟩ => Q
+  have : ∀ i, (T i).IsFinite := by
+    rintro ⟨_ | _⟩ <;> dsimp [T] <;> infer_instance
+  let e : (∐ A) ≅ M ⊞ N :=
+    Sigma.reindex Equiv.ulift (pairFunction M N) ≪≫ (biprod.isoCoprod M N).symm
+  exact ⟨(SheafOfModules.Presentation.sigma A T).ofIsIso e.hom, inferInstance⟩
 
 /-- The binary biproduct of two finitely presented module sheaves is finitely presented.
 Source: Stacks Project, Properties, Lemma 01PJ, proof; Modules, Definition 01BN
@@ -57,6 +76,41 @@ theorem isFinitePresentation_biprod (X : RingedSpace.{u})
     (G H : SheafOfModules.{u} (moduleRings X))
     [G.IsFinitePresentation] [H.IsFinitePresentation] :
     (G ⊞ H).IsFinitePresentation := by
-  sorry
+  classical
+  obtain ⟨p, hp⟩ := SheafOfModules.IsFinitePresentation.exists_quasicoherentData G
+  obtain ⟨q, hq⟩ := SheafOfModules.IsFinitePresentation.exists_quasicoherentData H
+  let U : p.I × q.I → TopologicalSpace.Opens X := fun i ↦ p.X i.1 ⊓ q.X i.2
+  have hU : (Opens.grothendieckTopology X).CoversTop U := by
+    apply (Opens.coversTop_iff _ _).2
+    apply TopologicalSpace.IsOpenCover.mk
+    apply top_unique
+    intro x hx
+    obtain ⟨i, hi⟩ := ((Opens.coversTop_iff _ _).1 p.coversTop).exists_mem x
+    obtain ⟨j, hj⟩ := ((Opens.coversTop_iff _ _).1 q.coversTop).exists_mem x
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨(i, j), hi, hj⟩
+  have hlocal (i : p.I × q.I) : ((G ⊞ H).over (U i)).IsFinitePresentation := by
+    let f : U i ⟶ p.X i.1 := homOfLE inf_le_left
+    let g : U i ⟶ q.X i.2 := homOfLE inf_le_right
+    let F := SheafOfModules.overMap (moduleRings X) f
+    let K := SheafOfModules.overMap (moduleRings X) g
+    let P := ((p.presentation i.1).map F (SheafOfModules.overMapUnitIso f).symm).ofIsIso
+      ((SheafOfModules.overFunctorMap (moduleRings X) f).app G).hom
+    let Q := ((q.presentation i.2).map K (SheafOfModules.overMapUnitIso g).symm).ofIsIso
+      ((SheafOfModules.overFunctorMap (moduleRings X) g).app H).hom
+    have : (p.presentation i.1).IsFinite := hp.isFinite_presentation i.1
+    have : (q.presentation i.2).IsFinite := hq.isFinite_presentation i.2
+    have : P.IsFinite := by dsimp [P]; infer_instance
+    have : Q.IsFinite := by dsimp [Q]; infer_instance
+    obtain ⟨T, hT⟩ := finite_biprod_presentation P Q
+    have hfp : (G.over (U i) ⊞ H.over (U i)).IsFinitePresentation :=
+      T.isFinitePresentation
+    let : PreservesBinaryBiproduct G H
+        (SheafOfModules.overFunctor (moduleRings X) (U i)) :=
+      preservesBinaryBiproduct_of_preservesBinaryCoproduct _
+    exact (SheafOfModules.isFinitePresentation ((moduleRings X).over (U i))).prop_of_iso
+      (Functor.mapBiprod (SheafOfModules.overFunctor (moduleRings X) (U i)) G H).symm
+      hfp
+  exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
+    (G ⊞ H) (p.I × q.I) U hU hlocal
 
 end AlgebraicGeometry.RingedSpace

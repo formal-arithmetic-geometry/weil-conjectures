@@ -14,40 +14,10 @@
  ],
  "proof": [
   {
-   "text": "Put $I=\\Delta\\times\\Delta$, working with small abelian groups in a universe containing this countable category. In $\\mathcal E=\\operatorname{Fun}(I,\\mathrm{Ab})$ define $R_i(j)=\\mathbf Z[\\operatorname{Hom}_I(i,j)]$, with postcomposition on generators. This category is abelian: kernels are pointwise kernel subgroups, cokernels are pointwise quotient groups, their structure maps are induced by the naturality squares, and image equals coimage pointwise. Thus these constructions satisfy exactly [def-sp-abelian]. A natural transformation $R_i\\to F$ is uniquely specified by $x\\in F(i)$: its value on a generator $\\alpha:i\\to j$ must be $F(\\alpha)x$. Hence maps from $R_i$ lift through every pointwise surjection, by lifting $x$. Finite sums of the $R_i$ are projective by lifting each component. Also $\\bigoplus_{(i,x),\\ x\\in F(i)}R_i\\to F$, sending the distinguished generator to $x$, is pointwise surjective and its source projective (choose lifts for all its generators). Thus $\\mathcal E$ has enough projectives. Monomorphisms, epimorphisms and exactness in $\\mathcal E$ are detected pointwise by the displayed kernel and cokernel constructions.",
+   "text": "In $\\mathcal E=\\operatorname{Fun}(\\Delta\\times\\Delta,\\mathrm{Ab})$, take $P_n=R_{(n,n)}$ and $Q_n=\\bigoplus_{a+b=n}R_{(a,b)}$ with the boundaries and augmentations of [lem-sfb-free-bisimplex-projective-resolutions]. That lemma supplies projective resolutions, including repeated vertices. Apply [lem-sfb-universal-shuffle-homotopy-inverse] to these very complexes: it supplies the prescribed $\\sigma:Q\\to P$, its augmented inverse $\\tau$, and both homotopies in the functor category.",
    "uses": [
-    "def-sp-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
-   }
-  },
-  {
-   "text": "Define nonnegative chain complexes in $\\mathcal E$ by $P_n=R_{(n,n)}$ and $Q_n=\\bigoplus_{a+b=n}R_{(a,b)}$. On $P$, the boundary precomposes a pair of monotone maps by each diagonal coface, with alternating signs. On the $(a,b)$ summand of $Q$, take alternating precomposition in the first variable and $(-1)^a$ times alternating precomposition in the second; omit a direction in degree zero. Two deletions in one variable cancel in opposite orders, and the two cross terms have coefficients $(-1)^{a-1}$ and $(-1)^a$, so both boundaries square to zero. Both augment to the constant functor $\\mathbf Z$ by sending each vertex generator to $1$. At $(p,q)$ these are exactly $P(p,q)=V(p,q)$ and $Q(p,q)=\\operatorname{Tot}(U(p)\\otimes U(q))$, with the strings, boundaries and augmentations of [lem-sfb-simplex-lattice-shuffle-boundary].",
-   "uses": [
-    "lem-sfb-simplex-lattice-shuffle-boundary"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
-   }
-  },
-  {
-   "text": "For $P(p,q)$, prepend the minimum vertex $(0,0)$ to every string, obtaining $h_n:P_n(p,q)\\to P_{n+1}(p,q)$. Let $e:\\mathbf Z\\to P_0(p,q)$ send $1$ to that vertex. Deleting the prepended entry gives the original string; deleting any other entry cancels the corresponding term of $h\\partial$. Consequently $\\partial h+h\\partial=1$ in positive degrees and $\\partial h=1-e\\epsilon$ in degree zero. Thus the augmentation is surjective and the augmented complex is exact. Identical formulas, prepending $0$, give contractions $h_p,h_q$ and projections $E_p=e_p\\epsilon_p,E_q=e_q\\epsilon_q$ of $U(p),U(q)$, with $E$ zero in positive degree. On $Q(p,q)$ put $H(u\\otimes v)=h_pu\\otimes v+(-1)^a E_pu\\otimes h_qv$ for $u$ of degree $a$. Expanding the tensor boundary cancels the cross terms and gives $\\partial H+H\\partial=(1-E_p)\\otimes1+E_p\\otimes(1-E_q)=1-E_p\\otimes E_q$. Its degree-zero augmentation is surjective. Both augmented complexes are therefore pointwise exact. Together with Step 1, $P,Q$ are projective resolutions of the constant functor; these contractions need not be natural in $(p,q)$, since they are used only to prove pointwise exactness.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08Q3, example-simplex-contractible (minimum-vertex variant); explicit unnormalized integral cone and tensor contraction written here."
-   }
-  },
-  {
-   "text": "The maps $\\sigma_{p,q}:Q(p,q)\\to P(p,q)$ of [lem-sfb-simplex-lattice-shuffle-boundary] commute with boundary, preserve the augmentation and commute with postcomposition. They therefore assemble to an augmented chain map $\\sigma:Q\\to P$ in $\\mathcal E$. On the distinguished generator of $R_{(a,b)}$, its value is the signed sum of pairs $(\\alpha_\\mu,\\alpha_\\nu):(n,n)\\to(a,b)$. This also fixes exactly which coordinate receives each list of shuffle positions; no interchange of $a,b$ or additional sign is introduced.",
-   "uses": [
-    "lem-sfb-simplex-lattice-shuffle-boundary"
+    "lem-sfb-free-bisimplex-projective-resolutions",
+    "lem-sfb-universal-shuffle-homotopy-inverse"
    ],
    "elementary": false,
    "source": {
@@ -56,34 +26,11 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-injective-resolution-lift-exists] in $\\mathcal E^{\\mathrm{op}}$ on the identity of the constant object, with the two opposite resolutions in the order $Q^{\\mathrm{op}},P^{\\mathrm{op}}$. The hypotheses hold: reversing the pointwise kernels/cokernels in Step 1 gives an abelian opposite category; a projective object becomes injective because its lifting through epis is precisely extension across the opposite monos. Enough projectives gives enough injectives in the opposite, and the exact augmented nonnegative chain resolutions become injective nonnegative cochain resolutions. Reversing the resulting map gives $\\tau:P\\to Q$ with $\\epsilon_Q\\tau_0=\\epsilon_P$. Both $\\sigma\\tau:P\\to P$ and $\\tau\\sigma:Q\\to Q$ have the same augmentation as the respective identities. Apply [new-t4-augmented-resolution-lift-homotopy] to each pair: its source is a projective resolution, its target has all the exactness properties verified in Step 3, and its augmentation vanishes on $d_1$. We obtain $\\sigma\\tau-1=\\partial h_P+h_P\\partial$ and $\\tau\\sigma-1=\\partial h_Q+h_Q\\partial$ in $\\mathcal E$.",
+   "text": "Evaluate the fixed universal equivalence with [lem-sfb-universal-shuffle-evaluation], obtaining homotopy equivalences whose forward maps have the required finite-subset formula. Naturality follows directly on each diagonal coproduct inclusion: move the diagram map through each shuffle arrow using its naturality square and through the target inclusion using functoriality of totalization; finite sums preserve these equations.",
    "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "new-t4-augmented-resolution-lift-homotopy"
+    "lem-sfb-universal-shuffle-evaluation"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0649, lemma-morphisms-lift-projective (equivalently Tag 013P in the opposite category); Tag 064A, lemma-morphisms-equal-up-to-homotopy-projective. Apply the stated existing lift and uniqueness nodes."
-   }
-  },
-  {
-   "text": "Here is the explicit evaluation of these universal identities in an arbitrary abelian $\\mathcal C$. A map $R_i\\to R_j$ is determined by a finite integral sum of generators $\\alpha:j\\to i$, by the generator formula in Step 1. For a covariant diagram $Y:I\\to\\mathcal C$, send that map contravariantly to $\\sum c_\\alpha Y(\\alpha):Y(j)\\to Y(i)$. For finite sums of representables take the transposed matrix on the corresponding finite biproducts. Identities, sums and compositions are preserved contravariantly because composition expands as $\\sum_{\\alpha,\\beta}c_\\alpha d_\\beta Y(\\alpha\\beta)$, equal to the product of the two matrices by functoriality and bilinearity. Thus every chain-map or homotopy equation between $P,Q$ evaluates to the corresponding cochain equation. Evaluating $P$ gives the diagonal alternating-coface complex of $Y$, and evaluating $Q$ gives the double alternating-coface total. The evaluation of $\\sigma$ is precisely $S$, since its generator values were computed in Step 4. The evaluation of $\\tau$ is its inverse up to the evaluated cochain homotopies.",
-   "uses": [
-    "def-sp-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
-   }
-  },
-  {
-   "text": "Apply Step 6 with $Y^{a,b}=X^{a,b,r}$ for each internal degree $r$, using the same fixed universal matrices $\\sigma,\\tau,h_P,h_Q$ for all $r$. Every entry is a sum of structure maps of $X$, so it commutes with $d_r$, and is natural in $X$. The evaluated degree-zero maps preserve total cosimplicial degree $n$: hence $(-1)^n d_r S=S(-1)^n d_r$, and the same for the inverse. They therefore give cochain maps between the complexes $D(X),T(X)$ of the statement. For an evaluated homotopy $H$, which lowers total cosimplicial degree from $n$ to $n-1$, the extra terms in the total homotopy equation are $(-1)^{n-1}d_rH+(-1)^nHd_r=0$. The remaining terms are exactly the cochain homotopy equations of Step 6. Thus $S$ is a chain homotopy equivalence of the full total complexes, including their internal differentials. All matrices and all total-degree sums are finite by nonnegativity, as required by [def-sp-double-complex-total]; no countable sum in $\\mathcal C$ is used.",
-   "uses": [
-    "def-sp-double-complex-total"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
     "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker."
@@ -101,7 +48,7 @@
    }
   },
   {
-   "text": "For the augmentation clause, write $f_0,f_1$ and $g_0,g_1$ for the two degree-zero cofaces. The hypotheses are $(f_0-f_1)i=0$ and $(g_0-g_1)i=0$. The diagonal alternating coface applied to $i$ is $f_0g_0i-f_1g_1i=(f_0-f_1)g_0i+f_1(g_0-g_1)i=0$, using commutation of the two directions to move $g_0$ past $f_0-f_1$. The two separate coface sums in $T$ also kill $i$. Since $i$ commutes with internal differentials, the inclusions in cosimplicial degree zero are chain maps $j_D,j_T$. In degree $n=0$ there is just the empty shuffle, its sign is $1$, and both surjections are the identity of $[0]$. Therefore $S_{0,0}=1$ and $Sj_D=j_T$ as chain maps, strictly. Vanishing objects give zero matrices. The contractions in Step 3 and the shuffle identity retain repeated vertices, including $p=0$ or $q=0$; the proof never assumes either cosimplicial direction is nonconstant. Thus constant objects and either constant direction are included.",
+   "text": "Write $f_0,f_1$ and $g_0,g_1$ for the degree-zero cofaces in the two directions. Their commutation gives $(f_0g_0-f_1g_1)i=g_0(f_0-f_1)i+f_1(g_0-g_1)i=0$. The separate coface sums also kill $i$. Together with $d_ri=i d_M$, these equations show that the degree-zero inclusions define chain maps $j_D,j_T$. The sole shuffle for $n=0$ has empty lists, sign $1$, and identity surjections, so $S_{0,0}=1$ and $Sj_D=j_T$ strictly. Zero diagrams give zero matrices. Repeated vertices were retained throughout, and no step assumes either direction nonconstant; hence both constant-direction cases and constant diagrams are included.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -111,17 +58,15 @@
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "lem-sfb-simplex-lattice-shuffle-boundary",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "new-t4-augmented-resolution-lift-homotopy",
-  "def-sp-double-complex-total",
+  "lem-sfb-free-bisimplex-projective-resolutions",
+  "lem-sfb-universal-shuffle-homotopy-inverse",
+  "lem-sfb-universal-shuffle-evaluation",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), formal bicosimplicial homological algebra for the diagonal versus successive bar augmentations; universal free-simplex proof written by the worker. The blueprint supplies the application, not this universal proof; Weibel section 8.5 is unavailable locally."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal bicosimplicial comparison input. Agent-formulated algebra in existing shuffle proof steps 6–7; the blueprint gives the application. Lean assembly proves naturality, localization and strict augmentation preservation; finite evaluation is isolated as its own transfer result."
  },
  "mathlib_searches": [
   {
@@ -226,49 +171,29 @@
   "date": "2026-10-22",
   "item": "lem-sfb-bicosimplicial-shuffle-totalization",
   "worker": "stage1",
-  "summary": "Constructed a universal free-representable proof, including pointwise cone contractions, resolution comparison via existing lift and homotopy-uniqueness nodes, contravariant finite-matrix evaluation and internal differential signs. One strictly smaller unsplit combinatorial boundary identity is isolated. Checked unnormalized repeated-vertex small cases and the strict augmentation square; no statement correction.",
-  "blueprint": "Paragraph (3) of the current main-20261015 direct-images proof, the formal diagonal versus successive bar augmentation comparison used by condensed-product-bar-comparison. The inherited ancestor command returns None.",
-  "tool_uses": [
-   {
-    "node": "new-t4-augmented-resolution-lift-homotopy",
-    "why": "Generic homotopy uniqueness for augmented maps between projective resolutions, applied in the auxiliary abelian functor category; the direct-image unit has no such homological-algebra comparison result."
-   }
-  ]
+  "summary": "Repair of the human re-split return: unchanged statement; three comparable statement-only tasks isolate free projective simplex resolutions (old steps 1–3), the prescribed universal shuffle inverse (old steps 4–5), and contravariant finite-matrix evaluation with total homotopies (old steps 6–7). The parent assembles these and retains the derived-form and strict augmentation arguments. All nine old steps are preserved verbatim in the report and assigned to the new tasks or retained assembly. Rebased for the landing refusal at returned head dec77863b03: the current DAG parent equals the retained original-node snapshot, all cited statements were reread, and the three-child split is reapplied to the current baseline with expanded verbatim citation coverage; no statement or proof change is needed.",
+  "blueprint": "Paragraph (3) of the current main-20261015 direct-images proof, the formal diagonal versus successive bar augmentation comparison used by condensed-product-bar-comparison. The inherited ancestor command returns None."
  },
- "tool_uses": [
-  "new-t4-augmented-resolution-lift-homotopy"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NY-3e05719c0",
-  "group": "NY",
+  "reviewer": "NT-cc-Q23-b8a4996e6",
+  "group": "Q23",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3e05719c0 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, every cited statement, the blueprint direct-images proof (whose paragraph (3) gives the application only, not this proof) and Stacks 0649/064A/08Q3 at their labels. Item statement, stmt_deps and blueprint fields are byte-identical to the unsplit NP-era version, so nothing was weakened; parent step 8 gets the direction D->T, first-direction-first ordering and strict S j_D=j_T it needs. Steps: (1) Fun(DeltaxDelta,Ab) is abelian, additive Yoneda gives Hom(R_i,R_j)=Z[Hom(j,i)], and enough projectives is shown, which def-sp-injective-resolutions requires for Step 5 in E^op. (2) P(p,q)=V(p,q) and Q(p,q)=Tot(U(p)⊗U(q)) with the Koszul boundary. (3) I redid the cone contraction and H=h⊗1+(-1)^a E⊗h: the cross terms cancel, E∂=0, and ∂H+H∂=1-E⊗E. (4) The generator value is Σε(α_μ,α_ν) with the item's coordinate assignment. (5) The injective lift in E^op with order (Q^op,P^op) gives τ:P->Q; new-t4's hypotheses hold, and its off-unit use is declared in tool_uses and accepted. The lift node is a Mathlib leaf. (6) Evaluation is contravariant and finite; the homotopy equations transfer. (7) The d_r signs cancel under the homotopy because n drops by one, so this is a genuine total-complex homotopy equivalence. (8) Derived-form isomorphism, natural. (9) The degree-0 coface computation and S_{0,0}=id give S j_D=j_T strictly; constant, zero and one-constant-direction cases are covered since the proof is unnormalized. New node: B1, B2, B3, B7 and B9 are fine and it is strictly smaller than the item (D1). My independent script verified the shuffle boundary identity on all 1,801 basis pairs with p,q<=2, a+b<=4, including repeated vertices; the test catches sign errors (wrong signs give 1,009 or 496 failures). My own Mathlib grep found no Eilenberg–Zilber declaration. The DAG sweep found no duplicate: the normalized AW diagonal and the bisimplicial weak-equivalence nodes are different statements. No SGA citations, no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-b8a4996e6 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This head re-delivers dec77863, which the reader approved but the landing refused with 'completed in this project's DAG but not in the live DAG ... L promotes it'. Compared with dec77863, the three new nodes are byte-identical and the item differs only in split_report.summary. Live and side-live still hold the NY 9-step split and none of the child ids exists live, so the delivery is not superseded. The item statement, stmt_deps and blueprint fields equal the live base. The released re-split note (8,202 characters, at least 2 nodes, assembly at most 3,000) is met. Old steps 1-3 go to free-bisimplex: pointwise abelian, additive Yoneda, projectivity, enough projectives, P(p,q)=V(p,q), Q(p,q)=Tot(U(p)⊗U(q)), cone contraction 1−E and H=h⊗1+(−1)^aE⊗h giving 1−E_p⊗E_q, which I recomputed by hand. Old steps 4-5 go to universal-shuffle: the generator Σε[(α_μ,α_ν)] in R_(n,n)(a,b) uses α_μ = A_k of the lattice node. I checked a=b=1 by hand and ran a /tmp script over all 961 string pairs with p,q,a,b ≤ 2; the chain identity has 0 failures. τ and h_P,h_Q come from projective comparison, Stacks 0649/064A (derived.tex:6777/6802). Old steps 6-7 go to matrix-totalization: I verified the contravariance E(g∘f)=E(f)E(g), and that the internal terms (−1)^{n−1}d_rE(h)+(−1)^nE(h)d_r cancel. Old steps 8-9 stay as elementary parent steps 3-4. I checked (f0g0−f1g1)i = g0(f0−f1)i + f1(g0−g1)i and S_{0,0}=1, so S j_D = j_T strictly. In parent step 2, E_X(∂_P)=δ_diag and E_X(∂_Q)=δ_1+(−1)^aδ_2, with the total sign matching def-sp-double-complex-total; σ evaluates exactly to S_{a,b} in the direction D→T. The children are 2.3k, 1.7k and 2.1k characters, and the parent assembly is 2,213. The universal node is the item's instance at C=E^op, but it has its own independent projective-comparison route and is not a relabelled clause. There is no cycle. I read Stacks 08Q3 (simplicial.tex:4581); its last-vertex homotopy is honestly adapted to a minimum-vertex version. Each node records three search kinds; leansearch is 'unavailable' for free-bisimplex. My rg -L DAG search found no duplicate: the coef bar-resolution, trf derived-colimit, cbc holim and sfb lattice-Koszul nodes state other things. No SGA citation. Maintainer note: the parent's tool_uses [new-t4-augmented-resolution-lift-homotopy] is stale, because the parent no longer cites it; that tool belongs to the future split of the universal-shuffle node."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.BicosimplicialShuffleTotalization",
   "declaration": "AlgebraicTopology.BicosimplicialShuffle.exists_shuffle",
   "declarations": [
-   "AlgebraicTopology.BicosimplicialShuffle.diagonalBicomplex",
-   "AlgebraicTopology.BicosimplicialShuffle.tripleComplex",
-   "AlgebraicTopology.BicosimplicialShuffle.cosimplicialTotal",
-   "AlgebraicTopology.BicosimplicialShuffle.diagonalTotal",
-   "AlgebraicTopology.BicosimplicialShuffle.successiveTotal",
-   "AlgebraicTopology.BicosimplicialShuffle.diagonalMap",
-   "AlgebraicTopology.BicosimplicialShuffle.successiveMap",
-   "AlgebraicTopology.BicosimplicialShuffle.diagonalInclusion",
-   "AlgebraicTopology.BicosimplicialShuffle.successiveInclusion",
-   "AlgebraicTopology.BicosimplicialShuffle.shuffleSurjection",
-   "AlgebraicTopology.BicosimplicialShuffle.shuffleSign",
-   "AlgebraicTopology.BicosimplicialShuffle.shuffleTerm",
    "AlgebraicTopology.BicosimplicialShuffle.exists_shuffle"
   ],
   "file": "lean/Sheaf/Algebra/Homology/BicosimplicialShuffleTotalization.lean",
   "statement": "theorem exists_shuffle [HasDerivedCategory.{w} C] : ∃ S : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, diagonalTotal X ⟶ successiveTotal X, (∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (n r m : ℕ) (h : n + r = m), diagonalInclusion X n r m h ≫ (S X).f m = ∑ μ : Finset (Fin n), shuffleTerm X n r m h μ) ∧ (∀ (X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (f : X ⟶ Y), diagonalMap f ≫ S Y = S X ≫ successiveMap f) ∧ (∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, ∃ e : HomotopyEquiv (diagonalTotal X) (successiveTotal X), e.hom = S X) ∧ (∃ e : ∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, (DerivedCategory.Q.obj ((diagonalTotal X).extend ComplexShape.embeddingUpNat)) ≅ (DerivedCategory.Q.obj ((successiveTotal X).extend ComplexShape.embeddingUpNat)), (∀ X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ, (e X).hom = DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (S X))) ∧ (∀ (X Y : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (f : X ⟶ Y), DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (diagonalMap f)) ≫ (e Y).hom = (e X).hom ≫ DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (successiveMap f)))) ∧ (∀ (X : SimplexCategory × SimplexCategory ⥤ CochainComplex C ℕ) (M : CochainComplex C ℕ) (i : M ⟶ X.obj (⦋0⦌, ⦋0⦌)), i ≫ (X.map ((SimplexCategory.δ (0 : Fin 2), 𝟙 ⦋0⦌) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌)) - X.map ((SimplexCategory.δ (1 : Fin 2), 𝟙 ⦋0⦌) : (⦋0⦌, ⦋0⦌) ⟶ (⦋1⦌, ⦋0⦌))) = 0 → i ≫ (X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (0 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌)) - X.map ((𝟙 ⦋0⦌, SimplexCategory.δ (1 : Fin 2)) : (⦋0⦌, ⦋0⦌) ⟶ (⦋0⦌, ⦋1⦌))) = 0 → ∃ (jD : M ⟶ diagonalTotal X) (jT : M ⟶ successiveTotal X), (∀ m : ℕ, jD.f m = i.f m ≫ diagonalInclusion X 0 m m (Nat.zero_add m)) ∧ (∀ m : ℕ, jT.f m = i.f m ≫ successiveInclusion X 0 0 m m (Nat.zero_add m)) ∧ jD ≫ S X = jT)",
   "branch": "sheaf-dag",
-  "by": "N7",
-  "date": "2026-10-21",
+  "by": "E9",
+  "date": "2026-10-25",
   "existing": false
  },
  "reviewed_lean": {
@@ -278,5 +203,27 @@
   "group": "N7",
   "result": "pass",
   "note": "Lean matches the node clause by clause: D(X) and T(X) are Mathlib totals of alternating coface complexes, and with TensorSigns (up ℕ) the differentials are exactly δ_diag+(-1)^n d_r and δ₁+(-1)^a δ₂+(-1)^{a+b} d_r. The shuffle surjections count {j∈μ: j<i}; the sign counts the inversions of the list (μ,μᶜ). S is pinned on every coproduct inclusion, so it is the canonical map. Naturality, HomotopyEquiv with e.hom = S, and a natural derived iso with hom = Q.map(extend S) are stated, so the isomorphism is in derived form. The strict augmentation clause jD ≫ S = jT has the correct d⁰ = δ₀−δ₁ hypotheses. My script found S∘d_D = d_T∘S universally for n ≤ 5 with 0 mismatches; a deliberately wrong sign gives 144 mismatches. The delivery changes only the lean record; the statement is verbatim and the declarations match the file. Imports: stmt-dep modules public, proof-dep modules (InjectiveResolution, AugmentedResolutionLiftHomotopy) plain. No hollow definitions, no extra assumptions, universes bound, only sorry is the theorem proof. Item and citer are not dropped; no duplicate in Mathlib or the project. Advisory only: the derived-naturality conjunct is redundant. No compile run, since no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66fc4",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T060817-L-2374026",
+  "kind": "interface",
+  "note": "independent cc review: exists_shuffle signature vs clone (identical); 12 moved defs vs clone originals (verbatim); evaluate_universal_shuffle hypotheses vs projective_resolutions/universal_shuffle_homotopy_inverse clauses and sign conventions (pathSign↔shuffleSign, shufflePathArrow↔shuffleSurjection, totalBoundary↔total ε₂); #print axioms exists_shuffle in /tmp sandbox"
  }
 }

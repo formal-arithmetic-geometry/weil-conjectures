@@ -1,0 +1,43 @@
+## Worker report
+
+Files written: dag/nodes/sec-smooth-purity/lem-pur-p1-kummer-trace-site-transport.json (statement, split; no Mathlib match); citations.json (verbatim statements for every step citation). No Lean files or repository files were written. No compiler or build tools were run.
+
+Attachments: none. Searches of lean/WeilConjectures by the exact blueprint tag and Kummer/comparison/trace keywords found no declaration proving the whole statement. KummerCoefficientBaseChange.lean concerns a scalar-extension cohomology comparison, with a freeness hypothesis; it does not attach to this site-comparison assertion.
+
+WANTED: none.
+
+The item was unsplit and the sandbox had no saved node, report, or search log at resumption. No delivery process was active. Its statement has been retained verbatim, including its nonseparated finite-type base, arbitrary positive coefficient length, root-projection normalization, and the actual open counit. The broad definition def-pur-supported-projective-site-arrows also asserts invertibility; the proof uses only its specified arrows and proves invertibility independently. It does not assume this claim from a definition.
+
+The split has nine steps and introduces no new nodes and no Mathlib leaves. The needed geometric, Kummer, and adjunction inputs already exist. Blueprint-wide searches via tools/blueprint_refs.py for Kummer and counit and the whole-DAG searches for mate/unit/normalization/extension exactness identified these inputs. The new searches were run with msearch.py, recorded in searches.jsonl, and their actual signatures read. LeanFinder and LeanSearch primarily returned etale ring facts, normalized field traces and sheaf free-module comparisons. Loogle returned generic adjunction transport; Mathlib/CategoryTheory/Adjunction/Basic.lean lines 480–534 was read. The two Mathlib grep phrasings returned no hits. None states the item's geometric comparison. Existing search records from the repository have been preserved.
+
+No unfinished mathematics remains. Server dry run and push follow this report.
+
+## New nodes
+
+None. In particular no node restates one of the item's clauses or moves the proof wholesale into another assertion.
+
+## Not duplicates
+
+No new nodes. Existing lem-amb-open-site-evaluation-counit proves the bounded-below open equation. The item asks for actual derived counits without an explicit boundedness restriction, so Steps 7–8 derive the sheaf identity from the existing open-unit normalization and localize it degreewise. This avoids silently strengthening the bounded-below lemma.
+
+## Review by Q120
+
+I read the current blueprint's sec-six-functors-basics/sk-lem-geo-p1-cohomology/def-amb-p1-trace.md: the trace is the second projection of the projective-line decomposition, with Chern integral one. I also read Stacks proetale.tex, lemma-jshriek-comparison (09AF): its comparison is obtained by identifying left adjoints to the same right adjoint. I read categories.tex, lemma-transformation-between-functors-and-adjoints (0B65), including its Hom-bijection proof. Those sources justify the normalization route; they do not by themselves identify the supported Kummer class. That part is taken from the explicit statement of lem-amb-cartier-kummer-map, which I read together with the finite Tate descent and projective-trace node statements. No SGA source is used. The proof is agent-written assembly of these existing inputs, not attributed as a verbatim proof from Stacks.
+
+For Step 1 I opened the Noetherian finite-type, projective properness, proper-morphism definition, finite-type definition, separated-implies-quasi-separated, ordinary finite projective-line adjunction and canonical-mate statements. The first gives Noetherianity without a separated base. The next statements give properness of q and exactly the qcqs hypothesis on the morphism required by the mate. The ordinary decomposition only needs a Noetherian base and an invertible annihilating integer. The mate is asserted invertible only on bounded-below objects; the proof uses a sheaf shifted by two, and later an exact open extension of such a sheaf. It never needs an unbounded direct-image comparison.
+
+For Step 2 I checked def-amb-p1-trace, lem-amb-cartier-kummer-map and lem-amb-finite-tate-site-descent against their whole statements. The Cartier lemma explicitly identifies the composite of the supported class with the pulled-back etale positive Chern class; hence there is no uncited comparison of connecting maps. The infinity divisor has its prescribed positive line bundle O(1). The finite Tate lemma fixes the target identification and its pullback compatibility for any annihilating power. This step uses neither coefficient freeness nor divisibility of n by the ramification index.
+
+For Step 3 the canonical-mate statement supplies its actual counit equation, rather than only the existence of an isomorphism. Substituting the Chern arrow into that equation and using naturality of the inverse-image comparison gives the displayed transpose. The definition of adjunction mate states the Hom bijection used for cancellation. The supported-projective-Chern definition specifies the pro-etale adjunct used in the conclusion. Every object in the formula is in the correct corner; in particular the component of a inverse is at Rq_* K.
+
+For Step 4 I opened lem-pur-mate-unit-compatibility: its orientation is alpha:L2 G -> H L1, so here alpha is a inverse. Its conclusion is exactly the displayed unit equation. Finite Tate descent supplies the line pullback identification; exact comparison supplies additivity and shifts. This proves the first component independently of Step 3. Steps 5–6 are elementary biproduct and inverse calculations, using only the named projective-site arrows and ordinary projection trace: an additive functor preserves the biproduct identities, the two components determine b, and multiplying its inverse identity by the second projection gives t. The proof explicitly avoids taking the invertibility assertion in the definition as a theorem.
+
+For Step 7 I read the complete statement of lem-sf-open-comparison-unit-normalization. It normalizes precisely the canonical extension comparison, relative to the canonical restriction comparison. I used its stated equation, not its proof. The transpose calculation is written out using naturality and the triangle identity, yielding the counit equation for that same c. Thus no abstract unnormalized comparison is substituted. The mate definition supplies the adjunction bijection; there is no additional hidden geometric lemma in this calculation.
+
+For Step 8 I opened both exact extension-by-zero nodes, the etale exact module inverse-image proposition, the finite pro-etale exact inverse-image lemma, exact comparison, def-weil-exact-derived-adjunction and def-pur-open-site-comparison-arrows. These say exactly that the functors descend degreewise and that the actual exact derived adjunction has the localized original counit. The coefficient ring is finite as required. Equality in each degree is an equality of chain transformations before localization, so the statement remains valid for an arbitrary unbounded complex; no bounded-below lemma has been extrapolated.
+
+For Step 9 I checked naturality and the bounded-below restriction in the direct-image-mate statement, and the actual target isomorphism from finite Tate descent. The source is j_! j^* of a shifted sheaf, still bounded below by Step 8. The displayed source comparison includes Rq_* E as well as beta at that source. It is therefore an equality between the actual composites in the item, not just a trace equality after an unspecified source isomorphism.
+
+I tested the empty base (all identities are the unique maps), the empty and identity open immersions (the counit equation reduces to zero and identity), a geometric point (the two projective summands and positive Chern integral one), disconnected bases (the equations are componentwise), and a nonseparated finite-type base (none of the cited inputs imposes separatedness on the base). For n=1 and arbitrarily ramified E the exponent r exists and the finite twist lemma has no freeness assumption. The reindexing n'=n-1 and r'=r-1 is valid for every n,r >= 1. No statement correction was necessary.
+
+The B–E audit found no new nodes needing definition or duplication checks. Every cited node was opened and quotes in citations.json reproduce its statement verbatim. All proof steps are shorter than 2000 characters. Generic off-unit statement uses are declared in split_report.tool_uses; they are existing tools for this normalization, not a change to the diagonal/DNC smooth-purity route. No unit or chapter record was changed.

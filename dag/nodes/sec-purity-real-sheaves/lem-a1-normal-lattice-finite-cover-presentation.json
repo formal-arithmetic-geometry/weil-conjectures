@@ -1,0 +1,305 @@
+{
+ "id": "lem-a1-normal-lattice-finite-cover-presentation",
+ "kind": "statement",
+ "title": "Coefficient-compatible finite-cover lattice presentation on a normal base",
+ "statement": "Let $X$ be a nonempty connected Noetherian separated scheme [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth, def-weil-scheme-morphism-properties], where Noetherian means locally Noetherian and quasi-compact. Suppose that every local ring is a domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Let $\\ell$ be a prime invertible on $X$, let $E/\\mathbf Q_\\ell$ be finite with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site [def-weil-pbc-proetale-site] let $B_X=\\varprojlim_{n\\geq1}(A/\\varpi^n)_X$, with constant sheaves interpreted as sheafifications of constant presheaves [def-weil-pbc-constant-sheaf], and put $R_X=B_X[1/\\varpi]$. Let $A_X^{\\mathrm{cts}},E_X^{\\mathrm{cts}}$ be the continuous-function coefficient sheaves [def-weil-pbc-lisse-lattice-coefficients]. A lisse module means a sheaf module pro-etale locally free of finite rank, including rank zero [def-weil-sheaf-of-modules-category].\n\nThe underlying space of $X$ is Noetherian and $X$ is quasi-separated. There are canonical ring-sheaf isomorphisms $A_X^{\\mathrm{cts}}\\cong B_X$ and $E_X^{\\mathrm{cts}}\\cong B_X[1/\\ell]\\cong R_X$, respecting the integral inclusions, reductions and localizations.\n\nFor every lisse $R_X$-module $L$, regard $L$ as an $E_X^{\\mathrm{cts}}$-module through these isomorphisms. For $U\\to X$ let $\\mathscr L_L(U)$ be the set of isomorphism classes of pairs $(M,\\alpha)$ consisting of a lisse $A_U^{\\mathrm{cts}}$-module and an isomorphism $\\alpha:E_U^{\\mathrm{cts}}\\otimes_{A_U^{\\mathrm{cts}}}M\\cong L|_U$, with classes and restrictions as in [lem-weil-pbc-lattice-sheaf-locally-constant]. Tensor products are sheaf tensor products [def-pur-sheaf-tensor-product], and restrictions are pro-etale inverse images [def-weil-proetale-inverse-image]. Then $\\mathscr L_L$ is a locally constant, locally nonempty sheaf of sets. On any trivialization $L|_U\\cong (E_U^{\\mathrm{cts}})^r$ it identifies with the constant sheaf on $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$, the right cosets of invertible matrices, for every $r\\geq0$. There is a finite etale surjection $p:Y\\to X$ [def-weil-pbc-finite-etale-category, def-weil-surjective-morphism] and an actual representative $(M,\\alpha)$ of an element of $\\mathscr L_L(Y)$. Equivalently it gives a lisse $B_Y$-module $M$ with $M[1/\\varpi]\\cong p^{-1}L$ under the same coefficient identifications. No descent datum on $M$ is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2), Proposition 6.8.4(6), pp. 59–60; Lemma 7.3.9 and proof of Lemma 7.4.10, pp. 67–71. Intermediate lattice-class construction, with the coefficient and qcqs checks of returned proof steps 1–4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-normal-ring",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-ringed-section-localization",
+  "def-a1-finite-coefficient-sheaves",
+  "def-a1-finite-coefficient-ring-tower",
+  "def-a1-proetale-profinite-comparison",
+  "def-sfb-integral-lattice-pairs"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-locally-noetherian-quasi-separated], $X$ is quasi-separated, since it is locally Noetherian. To check the underlying topology, apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] using local Noetherianity and quasi-compactness. Given a descending chain of closed subsets, choose a minimal member of its set of values. Every subsequent member is contained in that member and hence equals it. Thus the chain stabilizes, which is the definition of a Noetherian space.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OY (lemma-locally-Noetherian-quasi-separated), 01OZ (lemma-Noetherian-topology); topology.tex Tag 0051 (definition-noetherian)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-continuous-coefficient-completion] on $X$ with the specified finite extension $E/\\mathbf Q_\\ell$. Its finiteCoefficientRing at index $n$ is the lifted quotient $A/(\\varpi^{n+1})$, so its finiteCoefficientLimit is exactly $B_X$, with the positive indices reindexed by $n+1$. Its displayed projection equation says that the image of a continuous integral section at level $n+1$, evaluated at any point, is its residue modulo $\\varpi^{n+1}$. Its constant-section equation identifies the constant quotient sheaf with continuous functions to that discrete quotient. Consequently it gives the canonical ring-sheaf isomorphism $i_X:A_X^{\\mathrm{cts}}\\simeq B_X$, preserving every reduction, including the image of each constant coefficient. This uses the normalized statement, rather than an unnormalized existence of an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58–59: inverse limit of the positive uniformizer-power quotient sheaves"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-continuous-coefficient-localization]: its integralCoefficientLocalization is the sheafification of sectionwise localization at the constant uniformizer, and integralCoefficientLocalizationNormalized says that the map to $E_X^{\\mathrm{cts}}$ sends every integral numerator to the same continuous function. Thus it identifies $(A_X^{\\mathrm{cts}})[1/\\varpi]$ with $E_X^{\\mathrm{cts}}$ compatibly with integral inclusion. Localize $i_X$ and its inverse to obtain $E_X^{\\mathrm{cts}}\\simeq B_X[1/\\varpi]=R_X$. For completeness, [lem-weil-l-adic-extension-integers-dvr], clause 5, writes $\\ell=u\\varpi^e$, where $u\\in A^\\times$ and $e>0$: positivity follows from $|\\ell|_E=\\ell^{-1}<1$ and $0<|\\varpi|_E<1$. In any $A$-algebra, inverting $\\varpi$ therefore inverts $\\ell$; conversely $\\varpi^{-1}=u\\varpi^{e-1}\\ell^{-1}$ after inverting $\\ell$. These inverse fraction maps identify the two sectionwise localizations and their sheafifications, proving $B_X[1/\\ell]\\simeq R_X$. The maps fix $B_X$, so they respect its integral map and the already fixed reductions.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-localization",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(2), p. 59; equality of localization at ell and at a uniformizer follows from the cited DVR factorization"
+   }
+  },
+  {
+   "text": "Regard $L$ as an $E_X^{\\mathrm{cts}}$-module using the inverse coefficient isomorphism just obtained. A local basis $R_U^r\\simeq L|_U$ then becomes a basis $(E_U^{\\mathrm{cts}})^r\\simeq L|_U$ by sending each coefficient through the ring isomorphism. Applying its inverse gives the inverse basis map. Hence $L$ is locally free of finite rank over the continuous rational coefficient sheaf. This argument preserves the original trivializing cover and includes $r=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3 and Lemma 6.8.2: express the same finite local bases through the coefficient isomorphism"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-lattice-sheaf-locally-constant] to this finite locally free $E_X^{\\mathrm{cts}}$-module. Its $A_X(V)=C(|V|,A)$ and $E_X(V)=C(|V|,E)$ are precisely our continuous coefficient sheaves; the isomorphism relation includes the specified rationalization $\\alpha$, and its restrictions are exactly the ones in the item. It says that $\\mathscr L_L$ is a sheaf and, on every rational trivialization of rank $r\\geq0$, identifies it with the sheafification of the discrete right-coset set $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$. Thus it is locally constant, with exactly the asserted cosets and all ranks allowed.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof on p. 60: lattice classes and the constant right-coset sheaf"
+   }
+  },
+  {
+   "text": "On each member $U$ of the trivializing cover, take the identity coset in $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$. Under the normalization in [lem-weil-pbc-lattice-sheaf-locally-constant] it gives the actual pair $((A_U^{\\mathrm{cts}})^r,\\alpha)$, where $\\alpha$ sends the scalar-extended standard basis to the chosen rational basis of $L|_U$. This supplies a section of $\\mathscr L_L(U)$ on every member of that cover, proving local nonemptiness. For $r=0$, both matrix groups and their coset set have one element and this pair is $(0,0\\simeq0)$.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof: the standard lattice in each rational frame"
+   }
+  },
+  {
+   "text": "Now apply [lem-a1-normal-locally-constant-finite-section] with $F=\\mathscr L_L$. The scheme is nonempty and connected by assumption, locally Noetherian and quasi-compact by the stated meaning of Noetherian, and all its local rings are integrally closed domains by assumption. Steps 5 and 6 give respectively its locally constant sheaf and locally nonempty hypotheses. Obtain a finite etale surjection $p:Y\\to X$ and $c\\in\\mathscr L_L(Y)$. By the definition of the set in [lem-weil-pbc-lattice-sheaf-locally-constant], $c$ is an isomorphism class of actual pairs; choose a representative $(M,\\alpha)$ in that class. It consists of a lisse $A_Y^{\\mathrm{cts}}$-module and an isomorphism $E_Y^{\\mathrm{cts}}\\otimes_{A_Y^{\\mathrm{cts}}}M\\simeq p^{-1}L$, exactly as required. Choosing a representative of this quotient class adds no descent datum.",
+   "uses": [
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9 and proof of Lemma 7.4.10, pp. 67–71, through the existing finite-section lemma; Proposition 6.8.4(6) for the meaning of the class"
+   }
+  },
+  {
+   "text": "Apply the same normalized completion and localization statements on $Y$; both are stated for every scheme, so no new finiteness hypothesis on $Y$ is needed. They give $i_Y:A_Y^{\\mathrm{cts}}\\simeq B_Y$ with its projection and constant-section equations, and identify $A_Y^{\\mathrm{cts}}\\to E_Y^{\\mathrm{cts}}$ with $B_Y\\to B_Y[1/\\varpi]$. These identifications on $Y$ are the pullbacks of those on $X$, which is what makes $p^{-1}L$ the same module for both coefficient structures. Since $p$ is etale, [def-weil-pbc-lisse-lattice-coefficients] makes the comparisons $p^{-1}A_X^{\\mathrm{cts}}\\to A_Y^{\\mathrm{cts}}$ and $p^{-1}E_X^{\\mathrm{cts}}\\to E_Y^{\\mathrm{cts}}$ the identity on continuous functions, and [lem-weil-pbc-profinite-coefficient-inverse-image], applied to the system $Q_n=A/\\varpi^n$, gives $c_p:p^{-1}B_X\\simeq B_Y$ with $\\pi_{Y,n}\\circ c_p=c_{p,n}\\circ p^{-1}\\pi_{X,n}$, where $c_{p,n}$ sends each constant section to the same constant. The two maps $p^{-1}A_X^{\\mathrm{cts}}\\to B_Y$, namely $i_Y$ after the continuous comparison and $c_p\\circ p^{-1}i_X$, are equal. A map into the limit $B_Y$ is determined by its projections, and by the adjunction of [def-weil-proetale-inverse-image] a map out of $p^{-1}A_X^{\\mathrm{cts}}$ is determined by its adjoint on sections $s\\in A_X^{\\mathrm{cts}}(U)$. After composing with the $n$-th projection and the identification $q_{Y,n}$ of step 2, both send $s$, pulled back to $U\\times_XY$, to the function whose value at a point is the residue modulo $\\varpi^{n+1}$ of the value of $s$ at the image point: for the first map this is the projection equation on $Y$; for the second it is the projection equation on $X$, once $q_{Y,n}\\circ c_{p,n}$ equals the pulled-back $q_{X,n}$ followed by the continuous comparison. Those two maps out of $p^{-1}$ of a constant sheaf agree because both send each constant section to the constant function with the same value (the constant-section equations on $X$ and $Y$). Localizing at $\\varpi$ as in step 3 gives the same compatibility between $p^{-1}E_X^{\\mathrm{cts}}\\simeq E_Y^{\\mathrm{cts}}$ and $p^{-1}R_X\\simeq R_Y$. Hence the $R_Y$-module $p^{-1}L$ (through $c_p$) is the $E_Y^{\\mathrm{cts}}$-module $L|_Y$ of step 7 (through $i_Y$).",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "lem-weil-pbc-continuous-coefficient-localization",
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2) on Y and its compatibility with restriction to the etale Y; Definition 6.8.1 (sheaves of continuous functions)"
+   }
+  },
+  {
+   "text": "Use the identifications of step 8. Give $M$ its $B_Y$-action via $i_Y^{-1}$; the same finite local bases now make it lisse over $B_Y$. On presheaf tensors, the coefficient identifications send $b\\otimes m$ to the corresponding rational coefficient tensored with $m$, with inverse given by the inverse ring isomorphisms. The balanced relations are identical because the integral inclusions commute. Sheafifying these inverse maps gives $B_Y[1/\\varpi]\\otimes_{B_Y}M\\simeq E_Y^{\\mathrm{cts}}\\otimes_{A_Y^{\\mathrm{cts}}}M$ by [def-pur-sheaf-tensor-product]. Composing with $\\alpha$ and the identification of $p^{-1}L$ in step 8 gives $M[1/\\varpi]\\simeq p^{-1}L$ as $R_Y$-modules. Reversing these coefficient actions gives the converse formulation. No gluing on $Y\\times_XY$ has been introduced.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2) on Y; Definition 6.8.3; rewrite the scalar-extension isomorphism through the normalized coefficient maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-weil-pbc-continuous-coefficient-localization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-a1-normal-locally-constant-finite-section",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.8.2(1),(2), Proposition 6.8.4(6), Lemma 7.3.9 and proof of Lemma 7.4.10; existing Stacks Noetherian and coefficient DVR tools supply the explicit preliminary checks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lisse|pro.?etale.*lattice|lattice.*pro.?etale|unibranch",
+   "results": "Mathlib/Topology/MetricSpace/MetricSeparated.lean; Mathlib/Topology/MetricSpace/Cover.lean; Mathlib/Data/Rel/Separated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern condensed locally constant functors, ordinary etale sites, Z-lattices or unrelated separated metric sets; none supplies this finite-cover pro-etale lattice presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An l-adic local system on a normal Noetherian scheme has an integral lattice on a finite etale cover",
+   "results": "AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; ZLattice.module_free; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.instIsLocallyNoetherianXScheme; ZLattice.FG; IsZLattice.mk; ZLattice.module_finite",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern condensed locally constant functors, ordinary etale sites, Z-lattices or unrelated separated metric sets; none supplies this finite-cover pro-etale lattice presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsEtale\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern condensed locally constant functors, ordinary etale sites, Z-lattices or unrelated separated metric sets; none supplies this finite-cover pro-etale lattice presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The lattice class sheaf of a rational l-adic local system on a connected normal scheme is locally constant and has a section on a finite etale surjection",
+   "results": "LightCondensed.locallyConstantPresheaf; Condensed.lanSheafProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor; Profinite.exists_locallyConstant_finite_aux; LightCondSet.LocallyConstant.functor; CompHausLike.LocallyConstant.functor; LightCondensed.isColimitLocallyConstantPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern condensed locally constant functors, ordinary etale sites, Z-lattices or unrelated separated metric sets; none supplies this finite-cover pro-etale lattice presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice|locallyConstant",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern condensed locally constant functors, ordinary etale sites, Z-lattices or unrelated separated metric sets; none supplies this finite-cover pro-etale lattice presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free sheaf over continuous l-adic coefficient functions has a locally constant sheaf of integral lattices GL(n,E)/GL(n,O_E)",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; LightCondMod.LocallyConstant.functorToPresheaves; LocallyConstant.freeOfProfinite; CondensedMod.LocallyConstant.functorToPresheaves; Condensed.profiniteFree",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern condensed locally constant functors, ordinary etale sites, Z-lattices or unrelated separated metric sets; none supplies this finite-cover pro-etale lattice presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-normal-proetale-monodromy",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Proof of lem-a1-affine-hc0, first sentence about a compactly supported global section: coefficient realization via global integral lattices. Returned monodromy split steps 1–4: coefficient conventions, qcqs checks, lattice classes and the finite-cover section.",
+   "via": [
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-normal-lattice-finite-cover-presentation",
+  "worker": "stage1",
+  "summary": "Assemble the coefficient-compatible finite-cover presentation from the existing normalized coefficient comparisons, lattice-class sheaf and normal-base finite-section theorem. No new nodes: all non-elementary inputs already have DAG statements. Explicitly check Noetherian topology and quasi-separatedness, the ramified ell/uniformizer localization, rank zero, the representative of a quotient class and the coefficient change on Y. Statement and hypotheses unchanged.",
+  "blueprint": "Realizes the coefficient/lattice preparation below lem-a1-affine-hc0, first proof sentence in the historical master proof (compactly supported classes as sections), via the normal-monodromy and integral-lattice nodes. The current main-20261015 ancestor has the same statement and no proof; no chapter or Rankin–Selberg unit route is altered.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme-topology tool for the preliminary qcqs clause; the Rankin–Selberg unit has no internal replacement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Noetherian-topology tool for the descending chain condition; this is not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-completion",
+    "why": "Normalized completion of continuous integral coefficients is a generic coefficient tool; it identifies the two presentations used by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-localization",
+    "why": "Normalized rationalization is the generic coefficient tool needed to compare B[1/varpi] with continuous rational coefficients."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic finite-extension DVR factorization tool to compare localization at ell and at varpi, including ramification."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "why": "Existing generic lattice-class theorem on any scheme, already named in the item; the unit itself has no separate construction."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic comparison of inverse images of completed constant coefficients, needed in step 8 to see that the coefficient identifications on Y are the pullbacks of those on X (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-weil-pbc-continuous-coefficient-localization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-e1157b427",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-e1157b427 (reviewer sub-agent of L); spot-checked: Read the item and all 8 cited statements in full. There are 0 new nodes. The statement is unchanged and matches what the parent lem-a1-normal-proetale-monodromy step 1 uses. Checked against Bhatt–Scholze pp. 58–60 and 71. Lemma 6.8.2(1),(2) gives steps 2–3. Prop 6.8.4(6) gives the lattice-sheaf node, cited in steps 5–6, with the g ↦ gA^n normalization. Lemma 7.4.10 is the content of the finite-section node, cited in step 7. In Lean (read only), finiteCoefficientRing n = A/ϖ^{n+1} and the tower is the constant sheaves, so the limit is B_X reindexed, as step 2 says. Step 1: qs from local Noetherianity; the DCC from the minimal-element lemma (stationary chain). Step 3: ℓ = uϖ^e with e ≥ 1 because |ℓ|_E = 1/ℓ < 1, so the ramified case is covered. Step 7: all hypotheses of the finite-section node hold (nonempty, connected, locally Noetherian, qc, normal; locally constant and locally nonempty from steps 5–6). The representative is chosen in a class sheaf that needs no sheafification. Edge cases checked: rank 0, varying rank, disconnected Y, ramification. The batch-5 flag on lem-a1-normal-locally-constant-finite-section reaches def-trf-valuation-ring and other trf definitions and generic algebraic-space and descent lemmas. These are not content of the trace formula or Poincaré duality, so it is accepted. FIX (E5): the old step 8 claimed M[1/ϖ] ≅ p^{-1}L 'under the same coefficient identifications' without checking that i_Y agrees with the pullback of i_X. New step 8 proves this by citing def-weil-pbc-lisse-lattice-coefficients (the étale comparison is the identity), lem-weil-pbc-profinite-coefficient-inverse-image (c_p and its projection identities) and def-weil-proetale-inverse-image (adjunction), and comparing projections and constants on X and Y. The old step 8 becomes step 9. proof_deps and tool_uses are updated; there is no cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalLatticeFiniteCoverPresentation",
+  "declaration": "AlgebraicGeometry.ProEtale.normal_lattice_finite_cover_presentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normalLatticeCompletionNormalized",
+   "AlgebraicGeometry.ProEtale.normalLatticeUniformizerSection",
+   "AlgebraicGeometry.ProEtale.normalLatticePrimeSection",
+   "AlgebraicGeometry.ProEtale.normalLatticeRationalRing",
+   "AlgebraicGeometry.ProEtale.normalLatticeCoefficientMap",
+   "AlgebraicGeometry.ProEtale.normalLatticeContinuousModule",
+   "AlgebraicGeometry.ProEtale.normal_lattice_finite_cover_presentation"
+  ],
+  "file": "lean/Sheaf/Paper/NormalLatticeFiniteCoverPresentation.lean",
+  "statement": "theorem normal_lattice_finite_cover_presentation (X : Scheme.{u}) [ConnectedSpace X] [IsLocallyNoetherian X] [CompactSpace X] [X.IsSeparated] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (l : ℕ) [Fact l.Prime] (hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : TopologicalSpace.NoetherianSpace X ∧ QuasiSeparatedSpace X ∧ ∃ i : latticeCoefficientSheaf X (latticeCoefficientIntegers l E) ≅ Scheme.finiteCoefficientLimit l X E, normalLatticeCompletionNormalized l E X i ∧ ∃ e : latticeCoefficientSheaf X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ≅ normalLatticeRationalRing l E X i, integralLatticeCoefficientMap X l E ≫ e.hom = i.hom ≫ normalLatticeCoefficientMap l E X i ∧ (∃ eell : ringedLocalizationRingOfUniverses.{u + 1, u + 1, u} (Scheme.finiteCoefficientLimit l X E) (normalLatticePrimeSection l E X) ≅ normalLatticeRationalRing l E X i, ringedLocalizationRingUnitOfUniverses.{u + 1, u + 1, u} (Scheme.finiteCoefficientLimit l X E) (normalLatticePrimeSection l E X) ≫ eell.hom = normalLatticeCoefficientMap l E X i) ∧ ∀ (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (normalLatticeRationalRing l E X i))), L.IsFiniteLocallyFree → ∃ (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 2))) (c : ∀ U : X.ProEt, IntegralLatticePair (integralLatticeCoefficientMap X l E) (normalLatticeContinuousModule l E X i e L) U → F.obj.obj (op U)), IsLatticeClassPresentation (integralLatticeCoefficientMap X l E) (normalLatticeContinuousModule l E X i e L) F c ∧ (∃ (I : Type (u + 1)) (U : I → X.ProEt), (Scheme.ProEt.topology X).CoversTop U ∧ ∀ j : I, ∃ S : Type (u + 2), Nonempty ((constantSheaf ((Scheme.ProEt.topology X).over (U j)) (Type (u + 2))).obj S ≅ F.over (U j))) ∧ (∃ (I : Type (u + 1)) (U : I → X.ProEt), (Scheme.ProEt.topology X).CoversTop U ∧ ∀ j : I, Nonempty (F.obj.obj (op (U j)))) ∧ (∀ (U : X.ProEt) (r : ℕ) (t : (normalLatticeContinuousModule l E X i e L).over U ≅ latticeFreeSheaf X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) U r), ∃ k : (constantSheaf ((Scheme.ProEt.topology X).over U) (Type (u + 2))).obj (ULift.{u + 2} (integralMatrixCosets (latticeCoefficientIntegers l E) r)) ≅ F.over U, ∀ (g : Matrix.GeneralLinearGroup (Fin r) (WithAbs (Padic.coefficientExtensionAbsoluteValue l E))) (P : IntegralLatticePair (integralLatticeCoefficientMap X l E) (normalLatticeContinuousModule l E X i e L) U), k.hom.hom.app (op (Over.mk (𝟙 U))) (((toSheafify ((Scheme.ProEt.topology X).over U) ((Functor.const (Over U)ᵒᵖ).obj (ULift.{u + 2} (integralMatrixCosets (latticeCoefficientIntegers l E) r)))).app (op (Over.mk (𝟙 U)))) (ULift.up (Quotient.mk _ g))) = c U P ↔ ∀ T : (Over U)ᵒᵖ, Set.image (t.hom.val.app T) (P.image T) = matrixLatticeImage X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) (latticeCoefficientIntegers l E) U r g T) ∧ ∃ Y : X.ProEt, IsFinite Y.hom ∧ Etale Y.hom ∧ Surjective Y.hom ∧ Nonempty (IntegralLatticePair (integralLatticeCoefficientMap X l E) (normalLatticeContinuousModule l E X i e L) Y) ∧ ∃ iY : latticeCoefficientSheaf Y.left (latticeCoefficientIntegers l E) ≅ Scheme.finiteCoefficientLimit l Y.left E, normalLatticeCompletionNormalized l E Y.left iY ∧ ∃ cR : (Scheme.proEtaleSheafInverseImage Y.hom CommRingCat.{u + 1}).obj (normalLatticeRationalRing l E X i) ≅ normalLatticeRationalRing l E Y.left iY, (Scheme.proEtaleSheafInverseImage Y.hom CommRingCat.{u + 1}).map (normalLatticeCoefficientMap l E X i) ≫ cR.hom = Scheme.proEtaleProfiniteComparison Y.hom (Scheme.finiteCoefficientRingTower l E) ≫ normalLatticeCoefficientMap l E Y.left iY ∧ ∃ M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y.left) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.finiteCoefficientLimit l Y.left E)), M.IsFiniteLocallyFree ∧ Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1} (normalLatticeCoefficientMap l E Y.left iY) M ≅ SheafOfModules.changeOfRings.{u, u + 1, u + 1} cR.hom ((Scheme.proEtaleModuleInverseImage Y.hom (normalLatticeRationalRing l E X i)).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of returned head 2e004cf8162b: the trivialization-dependent coset isomorphism k is normalized on every constant g and actual pair P by equality of all embedded lattice images after applying t, exactly as integralLatticeSheaf_locallyConstant. New existing:true definition nodes own the unchanged positive finite coefficient sheaves, ring-valued tower and canonical profinite comparison. The completion and profinite-inverse-image theorems stay in proof_deps; their conclusions are not needed to type the statement. The existing integral-lattice-pair definition node is now cited explicitly. Mathematical prose and proof plan unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40e707bf4",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 2e004cf8. H3 repaired: the trivialization clause now has the normalized k (class of g = c U P iff t.hom image of P.image = matrixLatticeImage g on every T), term-for-term the same as integralLatticeSheaf_locallyConstant (LatticeSheafLocallyConstant.lean:74-100); t is used and rank 0 is covered. H2 repaired: the completion and profinite-inverse-image theorems are moved to proof_deps only; three new existing:true definition nodes (def-a1-finite-coefficient-sheaves, def-a1-finite-coefficient-ring-tower, def-a1-proetale-profinite-comparison) own the unchanged real-data defs in ContinuousCoefficientBasic, ContinuousCoefficientCompletion and ProfiniteCoefficientInverseImage. Their statements match the Lean, their recorded signatures are verbatim, and the live DAG has no other owner apart from the theorem nodes. def-sfb-integral-lattice-pairs is now cited. Item lean.statement verbatim, all 7 declarations present, only one sorry, docstrings have source and blueprint and list all 9 steps; all other clauses and edge cases unchanged from the earlier full check. Advisory: def-weil-completed-integral-coefficients is the same B construction with a different Lean declaration (RingCat-valued); 'Second reading by Q132' still reports none. No file changed, so no compile; the worker reports a clean scompile and a passing dry run."
+ }
+}

@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-relative-rank-one-semisimple-models",
+ "kind": "statement",
+ "title": "Local matrix models in the semisimple rank-one cases",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is a group object in schemes over $S$, with multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme] over this base. A reductive $S$-group means a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $S$-group all of whose geometric fibres are connected [def-weil-connected-scheme] and have no nontrivial smooth connected normal unipotent closed subgroup. Unipotent means that every geometric point is unipotent in a faithful matrix representation. A split maximal torus $T\\hookrightarrow G$ is a closed subgroup [def-weil-closed-immersion] isomorphic to $\\mathbf G_{m,S}^r$, $r\\geq0$, maximal among tori on every geometric fibre; a torus over an algebraically closed field is a product of multiplicative groups. Here $\\mathbf G_{m,S}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. Semisimple rank one means that the quotient of each geometric fibre by its largest smooth connected normal solvable subgroup has maximal tori of dimension one; solvable means that successive scheme-theoretic commutator subgroups become trivial. The centre is the subgroup functor of points commuting with every point after every algebra extension. Let $H$ be reductive of semisimple rank one with split maximal torus $T$. Suppose its centre is finite locally free of constant rank $d\\in\\{1,2\\}$, meaning its coordinate module is locally free of rank $d$ over $\\mathcal O_S$. If $d=1$, there is a Zariski open cover on which $(H,T)$ is isomorphic to $(\\operatorname{PGL}_{2,S},D_{\\mathrm{PGL}})$. If $d=2$, there is a Zariski open cover on which $(H,T)$ is isomorphic to $(\\operatorname{SL}_{2,S},D_{\\mathrm{SL}})$. The cover may be refined to affine opens. Here $\\operatorname{SL}_2(R)$ consists of determinant-one matrices over each commutative $S$-algebra $R$; $\\operatorname{PGL}_2$ is the fppf sheaf quotient of the group of invertible matrices $\\operatorname{GL}_2$ by scalar invertible matrices, with fppf coverings meaning faithfully flat finitely presented coverings; $D_{\\mathrm{SL}}$ is the determinant-one diagonal subgroup and $D_{\\mathrm{PGL}}$ the image of the diagonal subgroup. The chosen isomorphisms remain isomorphisms after every base change. No residue characteristic is excluded.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 4.2.7 and proof, printed pp.123--124 (trivial centre); Proposition 4.3.4 and proof, printed pp.131--132 (centre of order two). Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative structural theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Record the standard exact sequence of fppf group sheaves $1\\to\\mu_2\\to\\operatorname{SL}_2\\xrightarrow{q_0}\\operatorname{PGL}_2\\to1$ by calculation. The projective-frame theorem gives local matrix lifts. For a lift $M\\in\\operatorname{GL}_2(R)$, put $\\delta=\\det M\\in R^\\times$ and pass to $R[t]/(t^2-\\delta)$, free of rank two with $t$ invertible; $t^{-1}M$ has determinant one. This extension is faithfully flat and finitely presented, so gives the required fppf lift. A determinant-one matrix maps to the identity exactly when it is $uI$ with $u^2=1$. Also $q_0^{-1}(D_{\\mathrm{PGL}})=D_{\\mathrm{SL}}$: being projectively diagonal forces both off-diagonal entries to vanish after a faithfully flat scalar lift, hence already over the original ring. These descriptions hold on every test scheme by gluing affine tests.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Elementary matrix expansion of the standard central quotient used in Proposition 4.3.4, printed p.131; no division by two."
+   }
+  },
+  {
+   "text": "First prove the case $d=1$. If $C$ is the coordinate algebra of the centre, its augmentation and unit split $C=A\\oplus I$. Since $C$ is locally free of rank one, the direct summand $I$ has rank zero and is zero; thus $Z(H)=1_S$. Apply the relative adjoint flag-curve lemma to $(H,T)$, after its specified Zariski restriction. It supplies $T\\subseteq B\\subseteq H$, a smooth proper quotient $X=H/B$, the section $\\sigma=1\\bmod B$, and the geometric-fibre isomorphisms given by the translation action.",
+   "uses": [
+    "lem-sfb-relative-adjoint-rank-one-flag-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, printed pp.123--124, through the section sigma."
+   }
+  },
+  {
+   "text": "Apply the pointed-family lemma to $(X,\\sigma)$ to arrange $X\\simeq\\mathbf P^1_S$ with $\\sigma$ at infinity, on a further open cover. The base is still Noetherian. The projective-frame theorem with rank two identifies its automorphism sheaf with $\\operatorname{PGL}_2$, so translation gives a group morphism $\\phi:H\\to\\operatorname{PGL}_2$. On every geometric fibre this is an isomorphism by the flag-curve lemma. Both source and target are smooth over $S$; the map is locally finitely presented. Explicitly, on affine patches both coordinate algebras are finitely generated over a Noetherian base ring: generators for the source algebra over the base also generate over the target algebra, and the kernel of the resulting polynomial presentation is finitely generated. The geometric-fibre criterion now makes $\\phi$ an isomorphism. Since $B$ fixes $\\sigma$, $\\phi(T)\\subseteq B_\\infty$, where fixing infinity is precisely the vanishing of the lower-left matrix entry on each local matrix lift.",
+   "uses": [
+    "lem-sfb-pointed-projective-line-family",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-relative-adjoint-rank-one-flag-curve",
+    "lem-sfb-flat-geometric-fibre-open-criterion",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, printed p.124, action on the trivialized quotient and fibral isomorphism test."
+   }
+  },
+  {
+   "text": "The image $\\phi(T)$ is a maximal torus, since $\\phi$ is a group isomorphism. Apply the triangular-torus lemma and postcompose $\\phi$ with conjugation by its local section $b$. This carries $T$ to $D_{\\mathrm{PGL}}$. Thus steps 2--4 have proved the entire trivial-centre assertion, including its specified torus, for any affine Noetherian base with these hypotheses.",
+   "uses": [
+    "lem-sfb-triangular-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, last paragraph of proof, printed p.124."
+   }
+  },
+  {
+   "text": "Now let $d=2$. The relative centre theorem makes $Z=Z(H)$ a multiplicative-type closed subgroup with formation compatible with base change. Fppf locally it is $D(N)$; its coordinate algebra is free with basis $N$, so rank two forces $N\\simeq\\mathbf Z/2\\mathbf Z$. Consequently $Z$ is fppf locally $\\mu_2$. The character-duality theorem says that $\\operatorname{Aut}(\\mu_2)=\\operatorname{Aut}(\\mathbf Z/2\\mathbf Z)=1$, also over nonreduced bases. The local identifications therefore agree on overlaps and glue to $Z\\simeq\\mu_2$. This uses the sheaf property of represented functors, rather than any assertion that geometric points determine arbitrary scheme maps.",
+   "uses": [
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.4, opening centre argument, printed p.131; Theorem 3.3.4 and Appendix B.1."
+   }
+  },
+  {
+   "text": "The central-quotient theorem supplies a reductive $Q=H/Z$ with trivial centre, quotient maximal torus $\\overline T=T/Z$, and $p^{-1}(\\overline T)=T$. This torus is split Zariski locally: write $T=D(\\mathbf Z^r)$; the inclusion $\\mu_2\\hookrightarrow T$ corresponds locally to a surjection $u:\\mathbf Z^r\\to\\mathbf Z/2\\mathbf Z$, and duality gives $T/\\mu_2=D(\\ker u)$. If $u(e_j)=1$ and $u(e_i)=c_i\\in\\{0,1\\}$, a basis of $\\ker u$ is $2e_j$ together with $e_i-c_ie_j$ for $i\\ne j$. On each geometric fibre the field classification shows that finite centre of order two forces $H_{\\bar s}\\simeq\\operatorname{SL}_2$: the displayed central torus factors and the GL2 case have positive-dimensional centre, and PGL2 has trivial centre. By step 1 its central quotient is PGL2; hence $Q$ has semisimple rank one. Apply the already established steps 2--4 to $(Q,\\overline T)$, refining by affine opens, to get $\\theta:(Q,\\overline T)\\simeq(\\operatorname{PGL}_2,D_{\\mathrm{PGL}})$.",
+   "uses": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.3.4, first paragraph of proof, printed p.131; split-torus quotient basis written explicitly."
+   }
+  },
+  {
+   "text": "Set $p'=\\theta p$ and form the pullback group sheaf $E=H\\times_{\\operatorname{PGL}_2}\\operatorname{SL}_2$ along $q_0$. Projection to the second factor gives $1\\to Z\\to E\\to\\operatorname{SL}_2\\to1$, a central exact fppf extension: local lifts and its kernel are obtained by pulling back those of $p'$. Here $Z=\\mu_2$ is a separated commutative group scheme, so Gabber's splitting theorem applies without a smoothness hypothesis on $Z$. Its splitting followed by projection to $H$ yields a homomorphism $f:\\operatorname{SL}_2\\to H$ with $p'f=q_0$. Thus $a=f|_{\\mu_2}$ has values in $\\ker p'=Z=\\mu_2$.",
+   "uses": [
+    "lem-sfb-relative-sl2-central-extension-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent simplification of the central-extension argument of Proposition 4.3.4 using Proposition 4.3.1, printed pp.126--131."
+   }
+  },
+  {
+   "text": "By character duality, locally on the base $a:\\mu_2\\to\\mu_2$ is either the trivial homomorphism or the identity; the choice is locally constant. The trivial case is impossible. On any geometric fibre in that case, $f$ factors through the sheaf quotient $q_0$, giving a homomorphic section $s$ of $p'$. Then $(x,z)\\mapsto s(x)z$ identifies $H_{\\bar s}$ with $\\operatorname{PGL}_{2,\\bar s}\\times\\mu_{2,\\bar s}$: the inverse sends $h$ to $(p'h,s(p'h)^{-1}h)$. In characteristic different from two the two values $1,-1$ disconnect this product; in characteristic two its coordinate rings contain the nonzero nilpotent $t-1$ with square zero, so it is not reduced, whereas a smooth geometric fibre is reduced. Both contradict the hypotheses on $H$. Thus $a$ is the identity everywhere, including over nilpotent bases.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent alternative to the pushout/kernel dichotomy in Proposition 4.3.4, printed pp.131--132; the scheme-theoretic order-two alternatives include characteristic two."
+   }
+  },
+  {
+   "text": "The map $f$ is now an isomorphism of fppf sheaves. For injectivity, $f(g)=1$ implies $q_0(g)=1$, so $g\\in\\mu_2$, where $f$ is the identity onto $Z$. For surjectivity, given $h$, lift $p'h$ fppf locally to $g\\in\\operatorname{SL}_2$ by step 1; then $h f(g)^{-1}\\in Z$, and multiplication of $g$ by the corresponding element of $\\mu_2$ produces a preimage of $h$. Injectivity makes these local preimages agree, so they glue. Representability converts this sheaf isomorphism into a group-scheme isomorphism. Finally $p'^{-1}(D_{\\mathrm{PGL}})=T$ by step 6 and $q_0^{-1}(D_{\\mathrm{PGL}})=D_{\\mathrm{SL}}$ by step 1. Since $p'f=q_0$, $f^{-1}(T)=D_{\\mathrm{SL}}$, proving the torus clause.",
+   "uses": [
+    "lem-sfb-relative-central-multiplicative-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Elementary assembly of the two central exact sequences and their kernel isomorphism; Proposition 4.3.4, torus correspondence paragraph, printed p.131."
+   }
+  },
+  {
+   "text": "Refine the resulting open covers by affine opens. Restrict every chosen isomorphism and its inverse to these opens. For any subsequent base change, pull back both maps; their two composites remain the identity by functoriality of fibre products. The pulled-back subgroup identities are the same identities, so all chosen models preserve the named tori after every base change. None of the steps inverted two or any residue characteristic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Elementary final restriction and base-change assembly of Propositions 4.2.7 and 4.3.4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-relative-adjoint-rank-one-flag-curve",
+  "lem-sfb-pointed-projective-line-family",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-triangular-maximal-torus-conjugacy",
+  "lem-sfb-relative-reductive-centre-weight-kernel",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-relative-central-multiplicative-quotient",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-relative-sl2-central-extension-splitting",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; online reading of Propositions 4.2.7 and 4.3.4. The order-two proof is an agent simplification using the existing Proposition 4.3.1 splitting node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple rank one group scheme with split maximal torus and centre of order two or one is Zariski locally SL2 or PGL2",
+   "results": "{\"t\": \"2026-10-24T07:09:39Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple rank one group scheme with split maximal torus and centre of order two or one is Zariski locally SL2 or PGL2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"OnePoint.exists_mem_SL2\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"MatrixGroups.termPSL(_,_)\", \"SpecialLinearGroup.mem_center_iff\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"Matrix.ProjectiveSpecialLinearGroup\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\"], \"digest\": \"8dd7542cd6253c09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"equiv\"",
+   "results": "{\"t\": \"2026-10-24T07:09:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"Matrix.SpecialLinearGroup.eq_scalar_center_equiv_rootsOfUnity\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_symm_apply_coe_coe\", \"Matrix.SpecialLinearGroup.toGLKerEquiv\", \"Matrix.SpecialLinearGroup.toGLKerEquiv_apply_coe\", \"Matrix.SpecialLinearGroup.toGLKerEquiv_symm_apply_coe\"], \"digest\": \"ad4e9b1ada6520be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "PGL|ProjectiveLinear|semisimple.?rank|reductive",
+   "results": "{\"t\": \"2026-10-24T07:09:30Z\", \"tool\": \"grep\", \"query\": \"PGL|ProjectiveLinear|semisimple.?rank|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\"], \"digest\": \"dc6350b77a9ccfce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local isomorphisms of rank one semisimple group schemes with SL2 and PGL2 over general base ring",
+   "results": "{\"t\": \"2026-10-24T07:09:31Z\", \"tool\": \"leansearch\", \"query\": \"Local isomorphisms of rank one semisimple group schemes with SL2 and PGL2 over general base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.IsLocalIso.casesOn\", \"AlgebraicGeometry.IsLocalIso.recOn\", \"AlgebraicGeometry.IsLocalIso.le_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.IsLocalIso.mk\", \"SpecialLinearGroup\", \"AlgebraicGeometry.IsLocalIso.le_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\"], \"digest\": \"1e380b72d8e8ff0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, Hopf algebra structures or local morphism properties; none states this relative group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of semisimple rank one group schemes over a base ring with split maximal torus",
+   "results": "{\"t\": \"2026-10-24T07:51:06Z\", \"tool\": \"leansearch\", \"query\": \"Classification of semisimple rank one group schemes over a base ring with split maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSemisimple\", \"IsSemisimpleModule\", \"FDRep.simple_iff_end_is_rank_one\", \"IsSemisimpleRing\", \"ValuativeRel.IsRankLeOne.casesOn\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"instIsPrincipalIdealRingOfIsSemisimpleRing\"], \"digest\": \"cac8d570ded2aeba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern abstract matrix-group centres, semisimple Lie algebras and general morphism infrastructure, not relative rank-one classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme with split maximal torus and finite centre of rank one or two is Zariski locally PGL2 or SL2",
+   "results": "{\"t\": \"2026-10-24T07:51:15Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme with split maximal torus and finite centre of rank one or two is Zariski locally PGL2 or SL2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.fin_two_induction\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Matrix.ProjectiveSpecialLinearGroup\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"MatrixGroups.termPSL(_,_)\", \"SpecialLinearGroup.mem_center_iff\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity\"], \"digest\": \"0aaf6ea18291605b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern abstract matrix-group centres, semisimple Lie algebras and general morphism infrastructure, not relative rank-one classification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-local-matrix-model",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction.",
+   "via": [
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-rank-one-semisimple-models",
+  "worker": "stage1",
+  "summary": "Ten-step proof with three statement-only supporting nodes. Reuses the relative centre/central quotient inputs newly landed during this work, projective-frame automorphisms, the geometric-fibre criterion, diagonalizable duality and Gabber splitting. The mu2 kernel dichotomy and exact-sequence assembly are written out, including characteristic two. Statement unchanged.",
+  "blueprint": "The inherited blueprint.from.node is null, as confirmed by blueprint_refs.py ancestor. Retains the inherited via chain and its exact place in det-thm-sf-ctf-stability-direct-images proof (3). New steps supply the semisimple-model prerequisite to the relative rank-one reconstruction; latest sk-thm-sf-ctf-stability and direct-images proof were read. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme smoothness fact used only to exclude the nonreduced geometric product PGL2 times mu2 in characteristic two; this unit has no replacement for this property of smooth morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-d07a5e2fe",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-d07a5e2fe (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the three new nodes and every cited statement in full. Conrad 4.2.7/4.3.4 is not in literature/ (WANTED), so I checked the agent-origin proof mathematically rather than at the cited pages. The statement and stmt_deps match live, where the item is still unsplit; every cited node exists unchanged on side-live; there is no cycle. The d=1 case runs: augmentation splitting forces Z=1; the flag lemma; the pointed P^1 trivialization; the frames node for Aut(P^1)=PGL2; the geometric-fibre isomorphism criterion, whose hypotheses I checked; B fixes sigma, so phi(T) lies in B_inf; then the triangular transporter. The d=2 case runs: rank 2 forces N=Z/2 and Aut(mu2)=1, so Z=mu2 globally; Q=H/Z; I verified the basis 2e_j, e_i-c_ie_j of ker u; fibre classification gives H_s=SL2; steps 2-4 apply to Q; the pullback extension E is split by Gabber's node; if a=f|mu2 were 0 then H_s=PGL2 x mu2, which is disconnected (char not 2) or nonreduced (char 2, via the declared tool sbc-lem-smooth-geometrically-reduced); the exactness assembly and torus inverse images are correct. Step 4's application of the triangular lemma on affine opens is implicit; step 10 refines, so this is not a fault. The three new nodes are true, self-contained, statement-only, searched with all four tools and not restatements: N_B(D)=D, so the transporter is a D-torsor; O(sigma) gives X=P(f_*O(sigma)); P_G(lambda) gives the flag curve. My DAG duplicate search found only field-level or different statements. Batch-5: the four listed closures reach only generic sk-i-curve-zero lemmas (Stacks 01OB projective-bundle functor, 02G8 unramified via geometric fibres, 022C fppf is fpqc, f.g. torsion-free abelian groups are free), none of them trace-formula or Poincare-duality steps. No changes."
+ }
+}

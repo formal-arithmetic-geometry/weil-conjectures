@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-etale-compact-support-coarse-upper-bound",
+ "kind": "statement",
+ "title": "A coarse uniform upper bound for ordinary etale compact support",
+ "statement": "For a finite commutative coefficient ring $\\Lambda$ and schemes $X,Y$, let $c=(j,r)$ be a compactification of $f:X\\to Y$ [def-weil-compactifications-refinements], and assume $Y$ is quasi-compact. In the ordinary etale derived categories [def-weil-pbc-derived-categories], with the standard t-structure [def-sbc-standard-tstructure-derived-category], there exists $N\\in\\mathbb{N}$ such that $Rr_*Dj_!$ sends every $K\\in D^{\\leq a}(X_{et},\\Lambda)$ into $D^{\\leq a+N}(Y_{et},\\Lambda)$, for every integer $a$. No boundedness below or bound on the original fibres is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "lemma-derived-lower-shriek-bounded, assertion (3), torsion coefficient case, lines 3574–3610"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The proper map r has uniformly bounded geometric fibre dimensions over the quasi-compact base Y. Proper base change and the torsion cohomological-dimension theorem give a uniform classical cohomological-dimension bound N for r_* with finite module coefficients.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-proper-torsion-cd-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-dimensional unbounded derived-functor theorem gives Rr_*(D^{≤a})⊆D^{≤a+N}. Exact extension by zero preserves D^{≤a}, so its composite with Rr_* satisfies the same bound. This is already proved by the attached source-library theorem; no new Lean construction is introduced.",
+   "uses": [
+    "lem-etale-derived-functor-upper-amplitude",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "lemma-derived-lower-shriek-bounded, (3), first paragraph of proof; already proved source implementation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unbounded derived compact support functor with torsion coefficients on quasi compact schemes has a uniform finite upper cohomological amplitude",
+   "results": "Eight hits, including DerivedCategory.TStructure.t and bounded representatives; none is a compact-support amplitude theorem.",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient ring and a fixed compactification over a quasi compact base give some uniform upper cohomological amplitude for unbounded compact support",
+   "results": "Eight unrelated compact-support and qcqs hits. Project source has exists_isLE_rightDerivedLowerShriekOfCompactification_obj.",
+   "date": "2026-10-23",
+   "verdict": "Reuse existing source theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isLE_rightDerivedLowerShriekOfCompactification_obj|uniform.*upper.*amplitude",
+   "results": "No Mathlib result. Exact source theorem in WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow. No existing DAG attachment for this declaration; blueprint search found no matching coarse-bound statement.",
+   "date": "2026-10-23",
+   "verdict": "Attach the existing proved source declaration, without adding a Lean declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportUnboundedAmplitude",
+  "date": "2026-10-23",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph beginning \"For Λ in {O_E,E,Qlb}, use respectively derived inverse limits, rationalization, and the common-stage construction ... of the compatible finite-level functors\": auxiliary coarse upper bound for the finite-level compact-support amplitude input.",
+   "via": [
+    "lem-pur-etale-support-unbounded-amplitude",
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow",
+  "declaration": "AlgebraicGeometry.Etale.exists_isLE_rightDerivedLowerShriekOfCompactification_obj",
+  "statement": "theorem exists_isLE_rightDerivedLowerShriekOfCompactification_obj [Finite Λ] {X Y : Scheme.{u}}\n    {f : X ⟶ Y} (c : Compactification f) [CompactSpace Y] :\n    ∃ N : ℕ, ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ),\n      K.IsLE n → ((Rf_!(c)[ModuleCat.{u + 1} Λ]).obj K).IsLE (n + N)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261023T102633-L-2939784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261023T102633-L-2939784",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

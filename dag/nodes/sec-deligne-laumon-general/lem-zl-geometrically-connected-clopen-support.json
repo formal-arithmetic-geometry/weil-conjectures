@@ -1,0 +1,141 @@
+{
+ "id": "lem-zl-geometrically-connected-clopen-support",
+ "kind": "statement",
+ "title": "Connected clopen support over its field of constants",
+ "statement": "Let k₀ be a finite field, ℓ an invertible prime, X a smooth affine finite-type k₀-scheme, and V a nonzero arithmetically simple lisse source Weil sheaf [def-weil-weil-sheaf-complex, def-pod-lisse-l-adic-sheaves, def-sbc-smooth-morphisms]. Let x,y be finite points with nonzero V-stalks. There exist a finite field extension k₁/k₀, a geometrically connected smooth affine separated finite-type k₁-scheme C of constant relative dimension d ≥ 0, and a clopen immersion c:C→X over k₁/k₀. Both x and y lift to finite points of C. No functor on Weil sheaves and no positivity of d is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Since X is finite type and affine over a field, its space is Noetherian. The connected component U of x is therefore open and closed. The clopen-support lemma puts y in U. Its clopen immersion into affine X makes U affine and connected.",
+   "uses": [
+    "lem-zl-irreducible-lisse-clopen-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Apply the connected smooth affine constant-field theorem to U over k0. It constructs the finite constant field k1 and a smooth geometrically connected structure g on the very same scheme U, with the required factorization.",
+   "uses": [
+    "lem-zl-smooth-affine-connected-constants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "On the connected smooth scheme U the relative dimension is constant. Explicitly, regularity makes it irreducible; any two nonempty standard-smooth neighborhoods intersect and their dimensions agree by the dimension comparison over a field. Glue the local smooth-relative-dimension structures. Affineness gives separatedness and quasi-compactness, smoothness gives finite type, and the open immersion preserves the residue fields of the marked points. Transport ring characteristic along the algebra map.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-irreducible-lisse-clopen-support",
+  "lem-zl-smooth-affine-connected-constants",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-regular-connected-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+  "note": "Y2: direct constant-field construction, clopen simplicity via the adjunction-unit kernel, explicit relative-dimension and finite-point assembly. No geometric-component descent is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The connected component supporting a simple lisse Weil sheaf becomes geometrically connected over its finite field of constants",
+   "results": "8 hits: connectedComponent, ConnectedComponents.mk, isClosed_connectedComponent, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, isConnected_connectedComponentIn_iff, isConnected_connectedComponent, SimpleGraph.ConnectedComponent.supp. No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple lisse Weil sheaf on a disconnected scheme is supported on one connected component",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected, CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.fiber_in_connected_component, CategoryTheory.PreGaloisCategory.nonempty_fiber_of_isConnected, CategoryTheory.IsConnected.of_any_functor_const_on_obj, LightCondensed.IsDiscrete. No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIrreducibleLisse|Weil.*component|component.*Weil",
+   "results": "0 hits: . No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SimpleLisseSupportModel",
+  "date": "2026-10-26",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Connected clopen support over its field of constants",
+   "via": [
+    "lem-zl-simple-lisse-support-model",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.GeometricallyConnectedClopenSupport",
+  "file": "lean/Sheaf/DeligneLaumon/GeometricallyConnectedClopenSupport.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_geometrically_connected_clopen_support",
+  "statement": "theorem exists_geometrically_connected_clopen_support\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))] [IsAffine X]\n    [Smooth (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    (V : WeilSheaf k₀ l X) (hV : V.IsIrreducibleLisse)\n    (x y : X.finitePoints)\n    (hx : Nontrivial (V.stalk x).carrier) (hy : Nontrivial (V.stalk y).carrier) :\n    ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₀ k₁)\n      (_ : Fact (ringChar k₁ ≠ l)) (d : ℕ) (C : Scheme.{u})\n      (_ : C.Over (Spec (CommRingCat.of k₁))) (_ : IsAffine C)\n      (_ : SmoothOfRelativeDimension d (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : GeometricallyConnected (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : IsSeparated (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₁)))\n      (_ : QuasiCompact (C ↘ Spec (CommRingCat.of k₁)))\n      (c : C ⟶ X) (_ : IsOpenImmersion c) (_ : IsClosedImmersion c),\n      c ≫ (X ↘ Spec (CommRingCat.of k₀)) =\n        (C ↘ Spec (CommRingCat.of k₁)) ≫\n          Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁)) ∧\n      ∃ s t : C.finitePoints, c s.1 = x.1 ∧ c t.1 = y.1",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T070226-L-3477383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T203305-L-3516854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

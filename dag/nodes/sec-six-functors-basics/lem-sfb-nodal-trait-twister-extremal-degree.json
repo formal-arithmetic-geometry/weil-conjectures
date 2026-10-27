@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-nodal-trait-twister-extremal-degree",
+ "kind": "statement",
+ "title": "Extremal subcurve degree for a generically trivial line on a nodal trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$ and closed point $s$. Let $f:X\\to\\operatorname{Spec}R$ be a projective flat finitely presented family with nonempty connected reduced one-dimensional geometric fibres, having only ordinary nodes, as in [lem-sfb-nodal-log-canonical-reconstruction] without markings or positivity. Let $T$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module] whose restriction to $X_K$ is isomorphic to $\\mathcal O_{X_K}$. For any geometric closed fibre $C=X\\times_R\\Omega$, where $\\Omega$ is an algebraic closure of the residue field of $R$, either $T|_C\\simeq\\mathcal O_C$, or there is a nonempty proper reduced union $Y$ of irreducible components of $C$ such that\n$$\\deg_Y(T|_C)\\geq k_Y>0.$$\nThe integer $k_Y$ counts the nodes where $Y$ meets the reduced union of the other components; $\\deg_Y$ is the sum of degrees on its normalized components [def-pc-degree-line-bundle]. This conclusion allows singular total spaces, nodes persisting in the generic fibre, and arbitrary thickness at the nodes which smooth. It does not assume that individual components of the special fibre are Cartier divisors.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.3, proof of Proposition 10, printed p.16, extremal vertical-divisor subcurve and inequality k_Y <= degree. Agent formulation covering singular total spaces and persistent nodes; a precise reference for that extension is WANTED. Local PDF WANTED; read online.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-pc-degree-line-bundle",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $k=\\kappa(s)$ and $L=T|_C$. The projective morphism $f$ is proper by [lem-pc-projective-proper]. All its residue and geometric fibres are projective by [lem-pc-projective-base-change], hence proper by the same properness lemma. Both $T$ and $\\mathcal O_X$ are finitely presented and flat over $R$: locally $T$ is $\\mathcal O_X$, and $\\mathcal O_X$ is $R$-flat by the given flatness of $f$. Apply [lem-sfb-proper-flat-sheaf-euler-local-constancy] to each of these two modules. A locally constant function on $\\operatorname{Spec}R$ has the same value at the generic and closed points, because every open neighbourhood of the closed point contains the generic point. Since $T_K\\simeq\\mathcal O_{X_K}$, their Euler characteristics agree generically and hence on the closed fibre. The base-change clause of the same lemma carries this equality to $\\Omega$. Thus $\\chi(C,L)=\\chi(C,\\mathcal O_C)$ and $\\deg_C L=0$ by [def-pc-degree-line-bundle].",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-sc-invertible-module",
+    "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+    "def-pc-degree-line-bundle",
+    "lem-pc-projective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T, lemma-chi-locally-constant-geometric; degree defined in varieties.tex Tag 0AYR."
+   }
+  },
+  {
+   "text": "There is a nonzero section $\\sigma\\in H^0(C,L)$. Indeed $1\\in H^0(X_K,\\mathcal O_{X_K})$ is nonzero since the generic fibre is nonempty; the generic trivialization of $T$ therefore gives $\\beta^0(\\eta)\\geq1$. Apply the upper semicontinuity clause of [thm-pc-semicontinuity-base-change], with the properness, finite presentation and relative flatness verified in Step 1. The closed set $\\{t:\\beta^0(t)\\geq1\\}$ contains the generic point of $\\operatorname{Spec}R$, so contains the closed point too. Hence $H^0(X_s,T_s)\\ne0$. Apply [lem-pc-flat-base-change-cohom] in degree zero to the flat field extension $k\\to\\Omega$ and the proper (therefore quasi-compact and quasi-separated) $k$-scheme $X_s$. It identifies $H^0(C,L)$ with $H^0(X_s,T_s)\\otimes_k\\Omega$, which is nonzero: a nonzero vector extends to a basis and remains nonzero after extension of scalars. Choose $\\sigma\\ne0$.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric (upper semicontinuity); coherent.tex Tag 02KH, lemma-flat-base-change-cohomology."
+   }
+  },
+  {
+   "text": "Let $Z_1,\\ldots,Z_v$ be the reduced irreducible components of $C$. By [lem-trf-degree-weighted-irreducible-components] this is a finite list of integral proper curves. Their multiplicities are $1$, since $C$ is reduced and its local ring at each generic point is a field. Let $\\nu_i:\\widetilde Z_i\\to Z_i$ be the normalization and put $L_i=\\nu_i^*(L|_{Z_i})$ and $\\sigma_i=\\nu_i^*(\\sigma|_{Z_i})$. Apply [lem-trf-nodal-normalization-adjunction] to the nodal finite-type $\\Omega$-curve $C$ and each proper component: $\\widetilde Z_i$ is smooth, proper and connected, normalization is an isomorphism over the smooth locus of $Z_i$, and the two branches of each node give two points on the relevant normalizations. In particular a node joining different components has exactly one preimage on each of them. Degree is unchanged by each normalization: $Z_i$ (an integral closed subscheme of the projective $\\Omega$-scheme $C$, of dimension one) and $\\widetilde Z_i$ (smooth, proper and connected, hence integral) are proper curves over $\\Omega$, and $\\nu_i$ is an isomorphism over the smooth locus of $Z_i$, a dense open since the singular points of $Z_i$ are finitely many self-nodes. So $\\nu_i$ is dominant with function-field degree $d=1$, and [lem-sfb-proper-curve-bundle-pullback-degree] gives $\\deg L_i=\\deg(L|_{Z_i})$. Together with the component formula and Step 1 this gives $\\sum_i\\deg L_i=\\deg_C L=0$. Set $I=\\{i:\\sigma_i\\ne0\\}$. It is nonempty: on an affine trivialization of $L$, a section vanishing at every component's generic point lies in every minimal prime, hence in the nilradical, which is zero because $C$ is reduced.",
+   "uses": [
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-sfb-proper-curve-bundle-pullback-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0AYW (lemma-degree-in-terms-of-components) and 0AYZ (lemma-degree-pullback-map-proper-curves, degree one); curves.tex Tag 0C4D (lemma-nodal), normalization branch description."
+   }
+  },
+  {
+   "text": "First suppose $I=\\{1,\\ldots,v\\}$. On each integral proper curve $\\widetilde Z_i$, [lem-trf-curve-section-degree-positivity] gives $\\deg L_i\\geq0$, and gives strict positivity if $\\sigma_i$ has any zero. The sum in Step 3 is zero, so every degree is zero and every $\\sigma_i$ is nowhere vanishing. Thus $\\sigma$ has no zero on $C$: a smooth point of a component has a preimage under its normalization, and at a node its branch preimages exist by Step 3; vanishing of $\\sigma$ would force vanishing at any such preimage. These smooth points and nodes cover $C$. Locally in a basis of $L$, the section is consequently a unit in every local ring. Multiplication by $\\sigma$ therefore defines an isomorphism $\\mathcal O_C\\simeq L$. This is the first alternative.",
+   "uses": [
+    "lem-trf-curve-section-degree-positivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B40, lemma-check-invertible-sheaf-trivial (1), (2), on the normalized components."
+   }
+  },
+  {
+   "text": "Otherwise let $Y=\\bigcup_{i\\in I}Z_i$ and $W=\\bigcup_{i\\notin I}Z_i$, with reduced structures. Both are nonempty closed unions, and $Y$ is proper as a subcurve of $C$. They can meet only at nodes: a smooth point lies on just one component. If they did not meet, they would be disjoint nonempty open-and-closed subsets covering $C$, contradicting connectedness. At a node there are exactly two branches by the normalization statement in Step 3. Hence each node of $Y\\cap W$ has exactly one branch in $Y$. Denote the finite set of these nodes by $B$, so $k_Y=|B|>0$. For $i\\in I$ let $B_i\\subset\\widetilde Z_i$ be its branch preimages over $B$ and set $r_i=|B_i|$. Distinct boundary nodes have distinct preimages, and the branch count gives $\\sum_{i\\in I}r_i=k_Y$. The section on every component of $W$ is zero, since it is zero at its generic point and the component is integral. Therefore its value in the fibre $L\\otimes\\kappa(p)$ is zero for every $p\\in B$; pulling that value back shows that $\\sigma_i$ vanishes at every point of $B_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D, lemma-nodal, two-branch description already supplied by Step 3; elementary connectedness and section restriction argument."
+   }
+  },
+  {
+   "text": "For each $i\\in I$, the smooth connected curve $\\widetilde Z_i$ has a DVR at every closed point by [lem-sc-smooth-connected-curve-local-rings]. Thus the finite set $B_i$ defines a reduced effective Cartier divisor $D_i=\\sum_{q\\in B_i}[q]$: its ideal is generated by a uniformizer at each $q$ and is the unit ideal elsewhere. These branch points are $\\Omega$-rational (their branch local model is $\\Omega[[u]]$). Because $\\sigma_i$ vanishes at them, it is a section $\\tau_i$ of $L_i\\otimes\\mathcal O(-D_i)$: in a local basis its coefficient lies in the point ideal, and off $D_i$ that ideal is the unit ideal, so these local factorizations agree. This section is nonzero since its image is $\\sigma_i\\ne0$. By [lem-trf-curve-section-degree-positivity], $\\deg(L_i\\otimes\\mathcal O(-D_i))\\geq0$. The rational-point and effective-divisor formulas of [lem-pc-degree-base-change], applied with $\\mathcal L=L_i\\otimes\\mathcal O(-D_i)$ and $\\mathcal M=\\mathcal O(D_i)$, give $\\deg L_i=\\deg(L_i\\otimes\\mathcal O(-D_i))+r_i\\geq r_i$. This includes $B_i=\\varnothing$, when the twist is trivial and $r_i=0$. Summing over $i\\in I$ proves $\\deg_Y L=\\sum_{i\\in I}\\deg L_i\\geq\\sum_{i\\in I}r_i=k_Y>0$. This is the second alternative and finishes the proof.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-trf-curve-section-degree-positivity",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B40 (lemma-check-invertible-sheaf-trivial) and 0AYY (lemma-degree-effective-Cartier-divisor); smooth-curve local rings as in properties.tex Tag 02IZ and algebra.tex Tag 00PD."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-sc-invertible-module",
+  "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+  "def-pc-degree-line-bundle",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-flat-base-change-cohom",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-sfb-proper-curve-bundle-pullback-degree",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-degree-base-change",
+  "lem-pc-projective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent section-specialization proof using Tags 0B9T and 0BDN, coherent.tex Tag 02KH, varieties.tex Tags 0AYW, 0AYZ, 0AYY and 0B40, and curves.tex Tag 0C4D. It supplies the general-total-space extension of the boundary-zero argument in Morrison Section 3.3, Proposition 10, printed p.16."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a flat proper nodal curve over a discrete valuation ring that is trivial on the generic fibre is either trivial on the special fibre or has degree on a proper subcurve at least the number of boundary nodes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → { v // v ≤ 1 }\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsMinimal R W],\\n  MaximalFor (fun C => WeierstrassCurve.IsInteg\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W],\\n  ↑(WeierstrassCurve.valuation_Δ_aux R W) =\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation of the discriminant $ \\\\Delta(W) $ computed via the auxiliary valuation \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Weierstrass discriminant valuations, Lagrange nodal polynomials and trivial smooth vector bundles do not state a vertical Cartier line-bundle result on a nodal family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vertical Cartier divisor twister on a nodal family extremal component coefficients give positive subcurve degree bounded below by the edge cut",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ}, 2 < n → ↑n ≠ 0 → 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ), 0 < ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℤ}, 2 < n.natAbs → ↑n ≠ 0 → 0 < (W.preΨ n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is an integer with $ |n| > 2 $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-division polynomial $ \\\\Psi_n $ associa\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Weierstrass discriminant valuations, Lagrange nodal polynomials and trivial smooth vector bundles do not state a vertical Cartier line-bundle result on a nodal family."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CartierDivisor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Weierstrass discriminant valuations, Lagrange nodal polynomials and trivial smooth vector bundles do not state a vertical Cartier line-bundle result on a nodal family."
+  },
+  {
+   "tool": "grep",
+   "query": "twister|vertical.*divisor|subcurve|nodal.*degree",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"554\", \"text\": \"theorem natDegree_nodal [Nontrivial R] : (nodal s v).natDegree = #s := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"555\", \"text\": \"  simp_rw [nodal, natDegree_prod_of_monic (h := fun i _ => monic_X_sub_C (v i)),\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"565\", \"text\": \"theorem degree_nodal [Nontrivial R] : (nodal s v).degree = #s := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"566\", \"text\": \"  simp_rw [degree_eq_natDegree nodal_ne_zero, natDegree_nodal]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"618\", \"text\": \"  · rw [degree_sub_eq_left_of_degree_lt h, degree_nodal, Set.toFinset_card, degree_pow, degree_X,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Weierstrass discriminant valuations, Lagrange nodal polynomials and trivial smooth vector bundles do not state a vertical Cartier line-bundle result on a nodal family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic trivial line bundles on nodal curves over a trait satisfy an extremal subcurve degree inequality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Bundle.Trivial.contMDiffVectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \": ContMDiffVectorBundle n F (Bundle.Trivial B F) IB\", \"doc\": \"The trivial bundle over a topological space $ B $ with fiber $ F $, a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, is a vector bundle. This structure equips the product space $\"}\n  {\"name\": \"Bundle.Trivial.trivialization.isLinear\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \": (trivialization B F).IsLinear 𝕜\", \"doc\": \"The canonical trivialization of a trivial bundle over a base space $ B $ with fiber $ F $ is linear with respect to the vector space structure on the fibers. This means that the local trivialization m\"}\n  {\"name\": \"Bundle.Trivial.symmₗ_trivialization\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"(x : B) : (trivialization B F).symmₗ 𝕜 x = LinearMap.id\", \"doc\": \"For any base point $x$ in the base space $B$, the inverse of the canonical linear trivialization of the trivial bundle with fiber $F$ at $x$ is the identity linear map on the fiber $F$.\"}\n  {\"name\": \"Bundle.Trivial.vectorBundle\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \": VectorBundle 𝕜 F (Bundle.Trivial B F)\", \"doc\": \"The trivial bundle over a topological space $ B $ with fiber $ F $, a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, is a vector bundle. This structure equips the product space $\"}\n  {\"name\": \"trivialVectorBundleCore\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(ι : Type*) [Inhabited ι] : VectorBundleCore R B F ι\", \"doc\": \"Constructs a trivial vector bundle over a topological space $ B $ with fiber $ F $, using the universal set as the base set and identity continuous linear maps as transition functions between triviali\"}\n  {\"name\": \"Trivialization.toPretrivialization.isLinear\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"[AddCommMonoid F] [Module R F] [∀ x, AddCommMonoid (E x)] [∀ x, Module R (E x)] [e.IsLinear R] :\\n  e.toPretrivialization.IsLinear R\", \"doc\": \"If a trivialization of a vector bundle is linear with respect to the module structures on the fibers, then the corresponding pretrivialization (obtained by omitting topological compatibility condition\"}\n  {\"name\": \"Trivialization.IsLinear\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : Semiring R] →\\n          [inst_1 : TopologicalSpace F] →\\n            [inst_2 : TopologicalSpace B] →\\n              [inst_3 : TopologicalSpace (Bundle.TotalSpace F E)] →\\n                [inst_4 : AddCom\", \"doc\": \"A property of a trivialization stating that it is linear with respect to the module structures on the fibers, i.e., the local trivialization maps are linear isomorphisms between the fiber and the base\"}\n  {\"name\": \"VectorBundleCore.localTriv\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(i : ι) : Trivialization F (π F Z.Fiber)\", \"doc\": \"For each index $i$, this constructs a trivialization of the vector bundle, which is a homeomorphism between the preimage of the base set $Z.\\\\text{baseSet}(i)$ under the projection map and the product \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Weierstrass discriminant valuations, Lagrange nodal polynomials and trivial smooth vector bundles do not state a vertical Cartier line-bundle result on a nodal family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generically trivial line bundle on a proper flat nodal curve over a discrete valuation ring is trivial on the special fibre or has degree on a proper subcurve at least its number of boundary nodes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.isMinimal_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsMinimal R W ↔\\n    MaximalFor (fun C => WeierstrassCurve.IsIntegral R\", \"doc\": \"A Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $ is minimal if and only if the constant function $ 1 $ is the maximal element among all variable changes $ C $\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → { v // v ≤ 1 }\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsMinimal R W],\\n  MaximalFor (fun C => WeierstrassCurve.IsInteg\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern Weierstrass or polynomial degrees, residue/zero-cycle degrees, or definitions of zero loci; none states this nodal line-bundle specialization and subcurve inequality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a connected nodal projective curve a line bundle of total degree zero with a nonzero section is trivial or has a positive subcurve degree bounded below by the boundary cut",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ}, 2 < n → ↑n ≠ 0 → 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℤ}, 2 < n.natAbs → ↑n ≠ 0 → 0 < (W.preΨ n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is an integer with $ |n| > 2 $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-division polynomial $ \\\\Psi_n $ associa\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (x : R),\\n  WeierstrassCurve.Affine.CoordinateRing.XClass W' x ≠ 0\", \"doc\": \"For any element $x$ in a non-trivial ring $R$, the equivalence class of $X - x$ in the coordinate ring of an affine Weierstrass curve $W'$ over $R$ is non-zero. This follows from the construction of t\"}\n  {\"name\": \"WeierstrassCurve.natDegree_ΨSq_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) [NoZeroDivisors R] {n : ℤ},\\n  1 < n.natAbs → ↑n ≠ 0 → 0 < (W.ΨSq n).natDegree\", \"doc\": \"For a Weierstrass curve $W$ over a ring $R$ with no zero divisors, if $n$ is an integer with $|n| > 1$ and $n \\\\neq 0$ in $R$, then the natural degree of the squared division polynomial $\\\\Psi^{(n)}(X)$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern Weierstrass or polynomial degrees, residue/zero-cycle degrees, or definitions of zero loci; none states this nodal line-bundle specialization and subcurve inequality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"degree\"",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.residueDegree\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X) : ℕ\", \"doc\": \"Degree of `f` at a point `x` is defined to be the degree of the associated field extension\\nfrom `κ(f x)` to `κ(x)`. We return a default value of zero when this degree is infinite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.residueDegree_id\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \" {X : AlgebraicGeometry.Scheme} (x : ↥X) : AlgebraicGeometry.Scheme.Hom.residueDegree (CategoryTheory.CategoryStruct.id X) x = 1\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.residueDegree_eq_finrank\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \" {X : AlgebraicGeometry.Scheme} {k : Type u} [Field k] (f : X ⟶ AlgebraicGeometry.Spec ↧k) (x : ↥X) : AlgebraicGeometry.Scheme.Hom.residueDegree f x = Module.finrank k ↑(X.residueField x)\", \"doc\": \"The residue degree of a morphism `f : X ⟶ Spec k` to the spectrum of a field at a point `x`\\nequals the degree of `κ(x)` as a `k`-algebra, via the canonical `k`-algebra structure on `κ(x)`\\ninduced by `\"}\n  {\"name\": \"AlgebraicGeometry.AlgebraicCycle.degree\", \"module\": \"Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {R : Type u_1} (f : X ⟶ Y) [CompactSpace ↥X] [AddCommMonoid R] : AlgebraicGeometry.AlgebraicCycle X R →+ R\", \"doc\": \"The degree of a zero-cycle `D` with respect to a morphism `f : X ⟶ Y`.\\nNote that this definition is closely related to the pushforward of `D` along `f` (see stacks 0AZ1).\\nIn applications, typically `f\"}\n  {\"name\": \"AlgebraicGeometry.AlgebraicCycle.degree_single\", \"module\": \"Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {R : Type u_1} (f : X ⟶ Y) [CompactSpace ↥X] [AddCommMonoid R] [DecidableEq ↥X] (p : ↥X) (r : R) : (AlgebraicGeometry.AlgebraicCycle.degree f) (Function.locallyFinsuppWithin.single p r) = AlgebraicGeometry.Scheme.Hom.residueDegree f p • r\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AlgebraicCycle.degree_apply\", \"module\": \"Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {R : Type u_1} (f : X ⟶ Y) [CompactSpace ↥X] [AddCommMonoid R] (D : AlgebraicGeometry.AlgebraicCycle X R) : (AlgebraicGeometry.AlgebraicCycle.degree f) D = ∑ᶠ (x : ↥X), AlgebraicGeometry.Scheme.Hom.residueDegree f x • D x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.AlgebraicCycle.degree_eq_map_of_unique\", \"module\": \"Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {R : Type u_1} (f : X ⟶ Y) [CompactSpace ↥X] [AlgebraicGeometry.QuasiCompact f] [Semiring R] {N : Type u_2} [DecidableEq N] (wx : ↥X → N) (wy : ↥Y → N) [Unique ↥Y] (D : AlgebraicGeometry.AlgebraicCycle X R) (hw : ∀ (x : ↥X), D x ≠ 0 → AlgebraicGeometry.Scheme.Hom.re\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern Weierstrass or polynomial degrees, residue/zero-cycle degrees, or definitions of zero loci; none states this nodal line-bundle specialization and subcurve inequality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree bounds from zeros of sections of line bundles on components of a nodal algebraic curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.card_roots'\", \"module\": \"Mathlib.Algebra.Polynomial.Roots\", \"type\": \"(p : R[X]) : Multiset.card p.roots ≤ natDegree p\", \"doc\": \"The number of roots of a polynomial $ p $, counted with multiplicity, is less than or equal to the natural degree of $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : Set X\", \"doc\": \"For an open subset $U$ of a scheme $X$ and a set $s$ of sections of the structure sheaf over $U$, this function returns the set of points in $X$ where all sections in $s$ vanish. It is defined by appl\"}\n  {\"name\": \"Polynomial.degree_le_iff_coeff_zero\", \"module\": \"Mathlib.Algebra.Polynomial.Degree.Definitions\", \"type\": \"(f : R[X]) (n : WithBot ℕ) : degree f ≤ n ↔ ∀ m : ℕ, n < m → coeff f m = 0\", \"doc\": \"For any polynomial $ f $ over a semiring $ R $ and any $ n \\\\in \\\\mathbb{N} \\\\cup \\\\{-\\\\infty\\\\} $, the degree of $ f $ satisfies $ \\\\deg(f) \\\\leq n $ if and only if for all natural numbers $ m $, if $ n < m \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(n : ℕ) : (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(n : ℤ) : (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_zero\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\", \"type\": \"(k : ℕ) (D : ℕ → ℕ) : degBound k D 0 = 1\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound function for multivariate polynomials evaluated at the zero polynomial yields 1, i.e., $\\\\text{degBound}(k, D, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern Weierstrass or polynomial degrees, residue/zero-cycle degrees, or definitions of zero loci; none states this nodal line-bundle specialization and subcurve inequality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Proposition 10, printed p.16, extremal vertical-divisor subcurve and inequality k_Y <= degree. Agent formulation covering singular total spaces and persistent nodes; a precise reference for that extension is WANTED. Local PDF WANTED; read online.",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-nodal-trait-twister-extremal-degree",
+  "worker": "stage1",
+  "summary": "Q95 proved the full singular-total-space assertion by a nonzero section on the closed fibre supplied by semicontinuity, rather than representing individual fibre components by Cartier divisors. Euler-characteristic constancy gives total degree zero; normalization and boundary vanishing give the two alternatives. Six steps, all black boxes existing, no new nodes. Added only the invertible-module definition citation to the unchanged mathematical statement.",
+  "blueprint": "The inherited provenance place is Morrison Section 3.3, Proposition 10, printed p.16, the extremal subcurve and boundary-zero degree inequality within the stable-curve moduli prerequisite of det-thm-sf-ctf-stability-direct-images proof (3). The creation chain has no imported blueprint ancestor (blueprint_refs.py ancestor reports None); retain its existing from.node=null and detailed place/via. Steps 1-2 replace the unsupported component-Cartier representation in that generality, Steps 3-4 prove the trivial alternative, and Steps 5-6 implement the same boundary-zero inequality. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projective implies proper, a general scheme tool needed before semicontinuity and Euler constancy. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "thm-pc-semicontinuity-base-change",
+    "why": "General upper semicontinuity in degree zero supplies a nonzero special-fibre section; no new curve-family theorem is used. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "General coherent flat base change transports a nonzero section from the residue field to its algebraic closure. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "General degree decomposition on a proper curve; reducedness makes all multiplicities one. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-trf-nodal-normalization-adjunction",
+    "why": "Only its normalization and branch-geometry clauses are used as generic nodal geometry, not its adjunction formula or trace-formula route. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "Generic integral-curve section positivity, used for both ordinary and boundary-twisted sections. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic smooth-curve local geometry ensures boundary point ideals are principal nonzerodivisors. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Only the effective-divisor twist and rational-point degree formulas are used to count boundary zeros. This supplies a generic tool; no step of the constructible direct-image unit is replaced."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "General projectivity under arbitrary base change supplies projective, hence proper, residue and geometric fibres. No step of the constructible direct-image unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-flat-base-change-cohom",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-degree-base-change",
+  "lem-pc-projective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-5f04a738e",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-5f04a738e (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, 6 steps, 0 new nodes. It is live: not on the drop list, and still unsplit in side-live. The statement is true; I tested an irreducible fibre, two P^1 meeting in one node with O(1,-1), and several boundary nodes. All six steps check against the statements of the cited nodes. Step 1: properness via 01W5/01WF and Euler constancy via 0B9T on T and O_X give deg L = 0. Step 2: semicontinuity of beta^0 (0BDN) and flat base change k to Omega (02KH) give a nonzero section. Step 3: the component formula 0AYW with multiplicities 1, the nodal-normalization branch clauses (0C4D), and nonemptiness of I because a section vanishing at every generic point is nilpotent. Step 4: positivity 0B40 makes sigma nowhere vanishing, so L is trivial. Step 5: connectedness and the two-branch count give sum r_i = k_Y. Step 6: the point divisors D_i and the twisted section give deg L_i >= r_i. One fault (C1/drop): Step 3 cited the dropped lem-per-birational-curve-degree-invariance (2026-10-19 artin-gabber section, l.1434). It is a generic fact (Stacks 0AYU), so I re-cited it to the live same-unit lem-sfb-proper-curve-bundle-pullback-degree (Stacks 0AYZ with d=1, Q26 PASS). Its hypotheses are checked in the step: Z_i and its normalization are proper integral curves, and the normalization is an isomorphism over the dense smooth locus. I also updated proof_deps and the source places, and removed the dropped node's tool_uses entry. The item does not touch the artin-gabber route content (no Qbar/adic, no duality, no Gabber, no alterations). Batch 5: lem-trf-degree-weighted-irreducible-components (0AYW), lem-trf-curve-section-degree-positivity (0B40) and lem-trf-nodal-normalization-adjunction (normalization and branch clauses only) have closures made of sk-i-curve-zero curve preliminaries and generic category tools. None is the trace formula, Poincare duality or a batch-4 target, so they are generic and accepted. The dropped citation was removed and the replacement's trf deps are generic. Maintainer note: the inherited closure still reaches def-weil-pbc-trivial-kan-fibration (10-18 drop list, l.1343) via lem-trf-cotangent-resolution-coherence, both through the base stmt_dep nodal-log-canonical-reconstruction and through the nodal-normalization node; this is not the delivery's fault. blueprint.from.node=null is inherited. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalTraitTwisterExtremalDegree",
+  "declaration": "AlgebraicGeometry.nodal_trait_twister_extremal_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalTraitTwisterExtremalDegree.lean",
+  "statement": "theorem nodal_trait_twister_extremal_degree (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [IsProjective f] [Flat f] [LocallyOfFinitePresentation f] (hnodal : HasNodalGeometricFibres f) (hgeometric : ∀ (F : Type u) [Field F] [IsAlgClosed F] (t : Spec (.of F) ⟶ Spec (.of R)), IsReduced (pullback f t) ∧ (pullback f t).IsPureDimension 1) (T : X.Modules) [T.IsInvertible] (hgeneric : Nonempty ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))).obj T ≅ SheafOfModules.unit (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).ringCatSheaf)) (Ω : Type u) [Field Ω] [Algebra (IsLocalRing.ResidueField R) Ω] [IsAlgClosure (IsLocalRing.ResidueField R) Ω] (C : Scheme.{u}) (i : C ⟶ X) (p : C ⟶ Spec (.of Ω)) (hC : IsPullback i p f (Spec.map (CommRingCat.ofHom ((algebraMap (IsLocalRing.ResidueField R) Ω).comp (IsLocalRing.residue R))))) : Nonempty ((Scheme.Modules.tensorPullback i).obj T ≅ SheafOfModules.unit C.ringCatSheaf) ∨ ∃ S : Finset (irreducibleComponents C), S.Nonempty ∧ (⋃ Z ∈ S, Z.1) ≠ (Set.univ : Set C) ∧ (((⋃ Z ∈ S, Z.1) ∩ ⋃ Z : irreducibleComponents C, ⋃ (_ : Z ∉ S), Z.1).ncard : ℤ) ≤ ∑ Z ∈ S, markedNodalComponentDegree Ω (C.reducedNormalizationComponent Z) (Scheme.IdealSheafData.vanishingIdeal ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι ((Scheme.IdealSheafData.vanishingIdeal ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι ≫ p) ((Scheme.Modules.tensorPullback i).obj T) ∧ 0 < ((⋃ Z ∈ S, Z.1) ∩ ⋃ Z : irreducibleComponents C, ⋃ (_ : Z ∉ S), Z.1).ncard",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded nodal-family and normalized-component degree interfaces. An arbitrary cartesian model of the geometric closed fibre is accepted. Finite subsets of irreducibleComponents encode reduced component unions; the boundary is the intersection with the union of remaining components. No total-space or Cartier-component assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88673f878",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, Morrison §3.3 Prop 10 place, module, report (Worker report + Second reading by Q111 present) and the used decls HasNodalGeometricFibres, markedNodalComponentDegree, reducedNormalizationComponent, IsPureDimension, IsProjective, Modules.degree. Item differs from side-live only in lean (live has none). All clauses match: DVR+K, IsProjective/Flat/LFP (= projective fp over Spec R), nodal connected dim-1 fibres plus reduced/pure-1 as in reconstruction, invertible T, generic triviality via tensorPullback, any cartesian geometric closed fibre over an algebraic closure of the residue field, trivial OR nonempty proper Finset of components with ncard(Y∩W) ≤ Σ normalized component degrees and 0 < ncard. Edge cases (empty fibre, irreducible fibre, O(1,-1) on two P1, universes) OK. Statement verbatim, sorry only, docstrings with 6 steps, no line over 100 chars, no pro-etale. Advisory: def-trf-nodal-geometric-fibres, def-weil-pure-dimension, def-weil-pbc-reduced-normalization and def-sfb-marked-nodal-dualizing-degree-data are used without being direct item stmt_deps; they are reached through the cited lem-sfb-nodal-log-canonical-reconstruction, which the node takes its family 'as in'. Maintainer may add them; an S2 fix cannot. No compile (no file changed)."
+ }
+}

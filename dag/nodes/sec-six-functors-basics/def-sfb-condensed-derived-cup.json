@@ -13,9 +13,42 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), dense-lattice input: agent-formulated formal restriction and cup-product infrastructure. Bhatt-Scholze section 4.3 and the Stacks right-derived construction provide context, not this entire internal-ring statement; exact reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For trivialFlat, use the existing strong forgetful tensor comparison from actionTensor and the finite-limit and finite-colimit preservation in forgetExact. The forgetful functor is faithful because its map is the inclusion of equivariant morphisms into module morphisms. Abelian categories are balanced, so this faithful functor reflects isomorphisms and consequently reflects finite limits and colimits.",
+   "uses": [
+    "def-sfb-condensed-action-tensor",
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a flat underlying module, the monoidal natural isomorphisms commTensorLeft and commTensorRight identify each action-tensor functor followed by forgetting with forgetting followed by the corresponding exact module-tensor functor. Both composites therefore preserve finite limits and colimits. Reflection along forgetting gives exactness of the two action-tensor functors. The underlying module of a trivial action is definitionally the original module, so this proves that trivial inflation preserves flat objects.",
+   "uses": [
+    "def-sfb-condensed-action-tensor",
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existence and uniqueness of the representative-normalized derived monoidal core remains the original derivedTrivialTensorExist obligation, with its existing complete proof outline in the Lean docstring. The definitions of the derived lax structure, coefficient object, cup product, restriction map and ordered products are unchanged.",
+   "uses": [
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-tensor",
+  "def-sfb-condensed-derived-invariants",
+  "lem-derived-right-exact-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S8",
+  "date": "2026-10-26",
+  "description": "Proved trivialFlat by exact strong-monoidal forgetful detection of flatness; the original derivedTrivialTensorExist obligation is unchanged."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -229,10 +262,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -287,5 +324,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Read the item, 11 stmt_deps, 5 new def nodes and all 6 modules against the node. Every clause is rendered faithfully: exact forget/inflation/restriction/scalar, Grothendieck structure, b_u = rightDerivedPullback of the unique invariant inclusion with unit normalization, CommShift, degree zero, identity case, c_J via a unique unit-normalized scalarComparison (no flatness), coefficientSquare, the unital cup algebra as the mate of the K-flat-pinned strong trivial tensor, the unique UnipotentAction on R⊞R, and the class/product formulas for restriction and coefficient change. Mathlib's cone differential makes singleδ = +snake δ, so [a] has cocycle +a as required. All choices are pinned; no hollow defs; records match; item statement unchanged; stmt_deps only gained new def nodes. Only fault, H8: 5 of 6 modules had no module docstring. FIX adds docstrings only (the item's includes the 12-step proof outline) plus an item lean-record override keeping the statement verbatim. nt_compile --json twice timed out at 60 s on the unchanged sibling CondensedDerivedInvariants at load 153-162; changes are comment-only; the worker compiled all six clean (46.0 s). Notes: overlap with Q02's profinite-only def-sfb-condensed-derived-inflation-arrows (not a duplicate); the new cup def node cites theorem lem-derived-right-exact-tensor-comparison for a plain Prop predicate (advisory); proof-dep imports are not in the item module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261026T092620-L-3447267",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

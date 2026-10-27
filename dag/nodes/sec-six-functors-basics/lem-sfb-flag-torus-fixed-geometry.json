@@ -1,0 +1,416 @@
+{
+ "id": "lem-sfb-flag-torus-fixed-geometry",
+ "kind": "statement",
+ "title": "Torus fixed flags and a separating dominant one-parameter action",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Fix a split maximal torus $T$, a Borel subgroup $B\\supseteq T$, its unipotent radical $V$, positive roots $\\Phi^+$ and the quotient $Q=G/B$ with right torsor $\\pi:G\\to Q$ as in [lem-sfb-reductive-borel-pair-structure]. Put $W=N_G(T)(F)/T(F)$, acting on characters by $(w\\chi)(t)=\\chi(n^{-1}tn)$ for a representative $n$ of $w$. The scheme $Q$ is smooth, projective and connected. It admits a $G$-equivariant closed immersion $Q\\hookrightarrow\\mathbf P(E)$ for a finite-dimensional rational $G$-representation $E$; a rational representation is a group-scheme morphism to $\\operatorname{GL}(E)$, and $\\mathbf P(E)$ parametrizes lines. For any representatives $n_w\\in N_G(T)(F)$, the fixed subscheme $Q^T$ (the functor of points fixed by $T$ after every algebra extension) is the finite disjoint union of the reduced points $e_w=n_wB$, indexed without repetition by $W$. The $T$-weights on the tangent space $T_{e_w}Q$ are exactly $\\Phi\\setminus w\\Phi^+$, each with multiplicity one, where $\\Phi=\\Phi^+\\sqcup(-\\Phi^+)$. There is a cocharacter $\\lambda:\\mathbf G_m\\to T$ with $\\langle\\alpha,\\lambda\\rangle>0$ for every $\\alpha\\in\\Phi^+$ such that $\\mathbf P(E)^{\\lambda(\\mathbf G_m)}=\\mathbf P(E)^T$ as fixed subschemes; the pairing is specified by $\\alpha\\circ\\lambda(t)=t^{\\langle\\alpha,\\lambda\\rangle}$. In particular $Q^{\\lambda(\\mathbf G_m)}=Q^T$. The empty-root case is included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27 (a subgroup as a line stabilizer), Theorem 17.9 and Section 18c; Summary 21.41, Lemma 13.51 and the paragraphs before Proposition 21.70, pp.436,446; tangent-space calculation in the proof of Theorem 21.73, p.447. Fixed-subscheme smoothness for torus actions is Theorem 13.1; the roots of the tangent quotient are characters, valid also in positive characteristic."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-pc-projective-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-flag-linear-fixed-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "The quotient and torsor in the hypotheses satisfy the quotient condition of [lem-sfb-borel-quotient-proper-geometry]: two lifts have the same image precisely when their ratio lies in $B$, and the faithfully flat torsor supplies local lifts. Apply that node with $H=B$. It gives that $Q$ is smooth, geometrically integral, proper and Noetherian, and that $\\pi$ is smooth. In particular $Q$ is connected. Here $B$ is smooth and connected by its Borel definition, so this application has no inseparable-stabilizer exception.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-quotient-proper-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 5.26--5.27, Proposition 7.15 and Theorem 17.9(a)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-chevalley-scheme-line-stabilizer] to $B\\subset G$, obtaining $(E,D)$ with stabilizer exactly $B$ on every test algebra. The orbit map $g\\mapsto gD$ is invariant under right $B$. Its values on the torsor kernel pair agree; [lem-weil-pbc-fpqc-representable-descent] therefore gives a $G$-equivariant map $i:Q\\to\\mathbf P(E)$. This is a monomorphism: for two test-scheme points with equal images choose common fpqc-local lifts $g,h$ to $G$; equality of lines implies $g^{-1}h\\in B$, whence equality in $Q$, and descent detects that equality globally. Projective space is separated by [lem-weil-pbc-projective-space-proj-separated]. Since $Q$ is proper, [lem-weil-pbc-proper-over-separated] makes $i$ proper; [lem-pc-proper-monomorphism-closed] makes it a closed immersion. Choosing a basis of nonzero $E$ identifies its projective space of lines with an ordinary projective space, proving projectivity of $Q$.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and the paragraph preceding Proposition 21.70; Stacks Tags 023Q (lemma-fpqc-universal-effective-epimorphisms), 01W6 (lemma-image-proper-scheme-closed), 04XV (lemma-characterize-closed-immersion)"
+   }
+  },
+  {
+   "text": "Choose $T\\simeq\\mathbf G_m^r$. Apply [lem-sfb-gm-representation-weight-basis] to its first factor on $E$. Each resulting eigenspace is stable under the other factors: their actions commute, so applying another factor to $t^av$ again gives $t^a$ times that vector. Apply the same node to the second factor on each eigenspace, and continue for the finite number $r$ of factors. This gives $E=\\bigoplus_{\\chi\\in S}E_\\chi$ for a finite set $S$ of distinct characters, with an eigenbasis. These are group-scheme identities on all test algebras. For $r=0$ this is the single trivial weight (since $E\\ne0$). Let $U_i=Q\\cap D_+(x_i)$ for this eigenbasis. By [lem-weil-pbc-projective-space-standard-charts] these are affine opens covering $Q$, and $T$ preserves them because it multiplies each $x_i$ by a character. On $D_+(x_i)$, its action on the point-coordinate $u_j=x_j/x_i$ is multiplication by $\\chi_j\\chi_i^{-1}$. Thus the fixed subfunctor is the closed subscheme obtained by setting $u_j=0$ whenever $\\chi_j\\ne\\chi_i$: in the Laurent polynomial coaction equation $(\\chi_j\\chi_i^{-1}-1)u_j=0$, distinct monomials have coefficients $u_j$ and $-u_j$. The same equations on $U_i$ agree on overlaps and represent $Q^T$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, Remark 12.13 and the proof of Lemma 13.51; standard affine projective charts"
+   }
+  },
+  {
+   "text": "For any $q\\in Q(F)$ the fibre of $\\pi$ is nonempty and smooth by [lem-sfb-borel-quotient-proper-geometry]. By [lem-pc-dense-separable-points] it has a point with residue field finite separable over $F$, hence an $F$-point. Write $q=gB$. Its scheme stabilizer is $gBg^{-1}$ by the torsor identity; consequently it is fixed by $T$ exactly when $T\\subset gBg^{-1}$. In that case [lem-sfb-torus-normalizer-borel-transitivity] gives $n\\in N_G(T)(F)$ with $nBn^{-1}=gBg^{-1}$. Then $n^{-1}g$ normalizes $B$, so lies in $B$ by [lem-sfb-borel-scheme-normalizer]; hence $q=nB$. Conversely every $nB$ with $n\\in N_G(T)(F)$ is fixed. For injectivity, if $a\\in N_G(T)(F)\\cap B(F)$, apply the projection $p:B\\to T$ from [lem-sfb-reductive-borel-pair-structure] to $ata^{-1}$, after arbitrary scalar extension. Since $ata^{-1}\\in T$ and $T$ is commutative, $ata^{-1}=p(a)t p(a)^{-1}=t$. Thus $a\\in C_G(T)(F)=T(F)$ by [lem-sfb-reductive-torus-self-centralizer]. The cosets $e_w$ are therefore indexed without repetition by $W$. This group is finite by [lem-sfb-reductive-rank-one-reflections].",
+   "uses": [
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-pc-dense-separable-points",
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.53, Summary 21.41 and the paragraphs preceding Proposition 21.70"
+   }
+  },
+  {
+   "text": "Write $\\mathfrak g=T_1G$ and $\\mathfrak b=T_1B$, with tangent spaces defined by [def-sc-scheme-tangent-space]. The differential of $\\pi$ at $1$ is surjective: given a dual-number tangent vector to $Q$ at $B$, regard $F[\\epsilon]/(\\epsilon^2)$ as an $\\mathcal O_{Q,B}$-algebra; formal smoothness of $\\mathcal O_{G,1}$ over that stalk, supplied by [lem-sfb-smooth-stalk-formally-smooth], lifts the residue map $\\mathcal O_{G,1}\\to F$. This lift gives the required tangent vector to $G$ at $1$. The kernel consists precisely of the dual-number points in the fibre $B$, so is $\\mathfrak b$. At $e_w$, apply the same argument to $g\\mapsto gn_wB$, whose fibre at $1$ is $n_wBn_w^{-1}$. This map intertwines conjugation by $T$ on $G$ with the left action on $Q$, since $tgn_wB=(tgt^{-1})n_wB$. Hence it identifies $T_{e_w}Q$ with $\\mathfrak g/\\operatorname{Ad}(n_w)\\mathfrak b$ as a $T$-representation. By [lem-sfb-reductive-rank-one-reflections], $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha$, each root summand one-dimensional. By [lem-sfb-reductive-borel-pair-structure], $\\mathfrak b$ contains exactly the positive-root summands and $\\operatorname{Lie}(T)$. Conjugation by $n_w$ carries weight $\\alpha$ to $w\\alpha$ because $t(n_wvn_w^{-1})=n_w((n_w^{-1}tn_w)v)n_w^{-1}$. Taking the quotient leaves exactly $\\Phi\\setminus w\\Phi^+$, each once. This uses characters, never differentials of characters.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "lem-sfb-smooth-stalk-formally-smooth",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Theorem 21.73, tangent quotient at w0, with the same quotient calculation at any w; Stacks Tags 02H6 and 0B2C"
+   }
+  },
+  {
+   "text": "Each $U_i$ of step 3 is affine, finite type and smooth over $F$. Its represented closed fixed subscheme is smooth by [lem-sfb-torus-fixed-scheme-smooth], so these opens make $Q^T$ smooth. Apply [lem-pc-dense-separable-points] to $Q^T$: its rational points are dense because $F$ is algebraically closed. By step 4 those points are a finite list. Each is closed (on an affine neighbourhood its residue map to $F$ has maximal kernel), so their finite union is closed and dense, and equals the entire underlying space. Every point is therefore open and closed. By [lem-weil-pbc-smooth-scheme-over-field-regular], its local ring is regular of dimension zero; the defining regularity condition says its maximal ideal has zero generators, so the local ring is a field. Its residue field is $F$ by [lem-weil-pbc-closed-point-residue-field-base]. A singleton open scheme has an affine neighbourhood equal to itself and thus is $\\operatorname{Spec}F$. Hence $Q^T=\\coprod_{w\\in W}\\{e_w\\}$ as schemes, including reducedness.",
+   "uses": [
+    "lem-sfb-torus-fixed-scheme-smooth",
+    "lem-pc-dense-separable-points",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.1, Proposition 17.53 and the finite-constant assertion preceding Proposition 21.70; Stacks Tag 056S"
+   }
+  },
+  {
+   "text": "By [lem-sfb-regular-cocharacter-borel-description] choose a regular $\\lambda_0$ with $B=P(\\lambda_0)$. Comparing its Lie description with the positive-root summands in $\\operatorname{Lie}(B)$ gives $\\langle\\alpha,\\lambda_0\\rangle>0$ for every $\\alpha\\in\\Phi^+$. Identify $X_*(T)$ with $\\mathbf Z^r$ using $T\\simeq\\mathbf G_m^r$, and let $e_1,\\ldots,e_r$ be the coordinate cocharacters. For a positive integer $N$ put $\\lambda(N)=N^{r+1}\\lambda_0+\\sum_{i=1}^rN^i e_i$. For each positive root its pairing with this cocharacter is a polynomial in $N$ with positive leading coefficient, so is positive for all sufficiently large $N$. For each distinct $\\chi,\\psi\\in S$, its pairing with $\\chi-\\psi$ is a nonzero polynomial: the coordinate coefficients $\\langle\\chi-\\psi,e_i\\rangle$ are not all zero and occur in different degrees below $r+1$. Such a polynomial has only finitely many integer roots. Choose $N$ large enough for all inequalities and outside all these finite sets. Then $\\lambda=\\lambda(N)$ is dominant and separates all distinct weights of $E$. If $\\Phi$ is empty there are no positivity inequalities. If $r=0$, there are no distinct weights, and $\\lambda=0$ already works.",
+   "uses": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.51 and the dominant-chamber choice preceding Proposition 21.70"
+   }
+  },
+  {
+   "text": "On every eigenbasis chart $D_+(x_i)$ from step 3, the fixed scheme for $\\lambda$ is cut out by $u_j=0$ whenever $\\langle\\chi_j-\\chi_i,\\lambda\\rangle\\ne0$. Indeed, invariance is the identity $(z^{\\langle\\chi_j-\\chi_i,\\lambda\\rangle}-1)u_j=0$ in $A[z,z^{-1}]$, whose coefficients force $u_j=0$ for a nonzero exponent over any test algebra $A$. This remains true when that integer is divisible by the characteristic. Separation makes this exactly the condition $\\chi_j\\ne\\chi_i$, so its fixed ideal equals the torus fixed ideal on every chart. Thus $\\mathbf P(E)^{\\lambda(\\mathbf G_m)}=\\mathbf P(E)^T$ as schemes. Finally, because $i:Q\\hookrightarrow\\mathbf P(E)$ is equivariant and a monomorphism, a test-scheme point of $Q$ is fixed precisely when its image is fixed, after every algebra extension. Pulling back the two equal fixed subfunctors proves $Q^{\\lambda(\\mathbf G_m)}=Q^T$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 13.51 and the paragraph preceding Proposition 21.70"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-pc-dense-separable-points",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-borel-scheme-normalizer",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-reductive-rank-one-reflections",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-smooth-stalk-formally-smooth",
+  "lem-sfb-torus-fixed-scheme-smooth",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-regular-cocharacter-borel-description"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27; Theorem 13.1; Lemma 13.51; Proposition 17.53; paragraphs before Proposition 21.70 and tangent computation in Theorem 21.73. Scheme-chart and lattice details supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a connected reductive algebraic group the Weyl group acts simply transitively on Borel subgroups containing a maximal torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [NeZero 2]\\n  [P.IsIrreducible] (i : ι), Submodule.span R (MulAction.orbit (↥P.weylGroup) (P.ro\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}\n  {\"name\": \"RootPairing.weylGroup.induction\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N)\\n  {pred : (g : P.Aut) → g ∈ P.weylGroup → Prop},\\n  (∀ (i : ι), pred (RootPairing.Equiv.reflect\", \"doc\": \"For any root pairing $ P $ and index $ i $, the reflection automorphism associated with $ i $ is an element of the Weyl group of $ P $.\"}\n  {\"name\": \"RootPairing.weylGroup.induction'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [Nonempty ι]\\n  {pred : (g : P.Aut) → g ∈ P.weylGroup → Prop},\\n  (∀ (i : ι), pred (RootPairing.\", \"doc\": \"To prove a property $P(g)$ for all elements $g$ in the Weyl group of a root pairing $P$, it suffices to verify that $P$ holds for each reflection automorphism $\\\\text{reflection}_i$ and that $P$ is clo\"}\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → Subgroup P.Aut\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"RootPairing.range_weylGroupToPerm\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  P.weylGroupToPerm.range = Subgroup.closure (Set.range P.reflectionPerm)\", \"doc\": \"The image of the Weyl group permutation homomorphism $ P.\\text{weylGroupToPerm} $ for a root pairing $ P $ is equal to the subgroup generated by the permutations $ P.\\text{reflectionPerm} $ associated w\"}\n  {\"name\": \"RootPairing.range_weylGroup_weightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  ((RootPairing.Equiv.weightHom P).restrict P.weylGroup).range = Subgroup.closure (Set.range \", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the weight homomorphism is equal to the subgroup generated by the reflections of $ P $. This means that every element in the image can be expr\"}\n  {\"name\": \"RootPairing.weylGroupToPerm\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → ↥P.weylGroup →* ι ≃ ι\", \"doc\": \"The group homomorphism from the Weyl group of a root pairing $ P $ to the permutation group of its index set $ \\\\iota $, sending each Weyl group element to the permutation it induces on $ \\\\iota $ via i\"}\n  {\"name\": \"RootPairing.weylGroup_apply_root\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (g : ↥P.weylGroup)\\n  (i : ι), g • P.root i = P.root ((P.weylGroupToPerm g) i)\", \"doc\": \"For any element $ g $ of the Weyl group of a root pairing $ P $ and any index $ i $, the action of $ g $ on the root $ \\\\alpha_i $ satisfies $ g \\\\cdot \\\\alpha_i = \\\\alpha_{\\\\sigma(i)} $, where $ \\\\sigma $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The torus fixed subscheme of a flag variety is finite reduced indexed by the Weyl group and the flag variety embeds equivariantly into projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N)\\n  [inst_5 : P.EmbeddedG2] [Finite ι] [CharZero R] [IsDomain R] [P.IsIrreducible],\\n  {RootPairi\", \"doc\": \"The index set $\\\\iota$ of an embedded $G_2$ root system, equipped with the involutive negation structure, is exhausted by the elements $\\\\{\\\\pm\\\\text{long } P, \\\\pm\\\\text{short } P, \\\\pm(\\\\text{short} + \\\\text\"}\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [NeZero 2]\\n  [P.IsIrreducible] (i : ι), Submodule.span R (MulAction.orbit (↥P.weylGroup) (P.ro\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"Projectivization.finite_of_finite\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Cardinality\", \"type\": \"∀ (k : Type u_1) (V : Type u_2) [inst : DivisionRing k] [inst_1 : AddCommGroup V] [inst_2 : Module k V] [Finite V],\\n  Finite (Projectivization k V)\", \"doc\": \"If $ V $ is a finite module over a division ring $ K $, then its projectivization $ \\\\mathbb{P}(K, V) $, defined as the quotient of nonzero vectors in $ V $ under scalar multiplication by invertible el\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"RootPairing.range_weylGroup_weightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  ((RootPairing.Equiv.weightHom P).restrict P.weylGroup).range = Subgroup.closure (Set.range \", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the weight homomorphism is equal to the subgroup generated by the reflections of $ P $. This means that every element in the image can be expr\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"RootPairing.range_weylGroup_coweightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  ((RootPairing.Equiv.coweightHom P).restrict P.weylGroup).range =\\n    Subgroup.closure (Set.\", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the restricted coweight homomorphism is equal to the subgroup generated by the coreflections composed with the opposite monoid operation. Spec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weyl\", \"Borel\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|flag.variety|weyl.*chamber|torus.*fixed",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"25\", \"text\": \"actions which give rise to torsors include the action of the Weyl group on Weyl chambers, the\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torus fixed points on a reductive flag variety are the Weyl group and Borel chambers form a simply transitive Weyl action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Subgroup (Aut P)\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"RootPairing.weylGroup.ofIdx_smul\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \"(i : ι) (m : M) : weylGroup.ofIdx P i • m = Equiv.reflection P i • m\", \"doc\": \"For each index $i$ and element $m$ in the module $M$, the action of the Weyl group element corresponding to $i$ on $m$ equals the action of the reflection automorphism associated with $i$ on $m$, i.e.\"}\n  {\"name\": \"RootPairing.weylGroupRootRep\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Representation R P.weylGroup M\", \"doc\": \"The representation of the Weyl group of a root pairing $ P $ on the underlying $ R $-module $ M $, constructed via the distributive multiplicative action of the Weyl group on $ M $ that commutes with \"}\n  {\"name\": \"RootPairing.weylGroup_apply_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \"(g : P.weylGroup) (i : ι) : g • P.root i = P.root (P.weylGroupToPerm g i)\", \"doc\": \"For any element $ g $ of the Weyl group of a root pairing $ P $ and any index $ i $, the action of $ g $ on the root $ \\\\alpha_i $ satisfies $ g \\\\cdot \\\\alpha_i = \\\\alpha_{\\\\sigma(i)} $, where $ \\\\sigma $ \"}\n  {\"name\": \"RootPairing.weylGroupToPerm\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → ↥P.weylGroup →* ι ≃ ι\", \"doc\": \"The group homomorphism from the Weyl group of a root pairing $ P $ to the permutation group of its index set $ \\\\iota $, sending each Weyl group element to the permutation it induces on $ \\\\iota $ via i\"}\n  {\"name\": \"MulAction.fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Set α\", \"doc\": \"The set of elements $ a \\\\in \\\\alpha $ satisfying $ m \\\\cdot a = a $ for all $ m \\\\in M $, where $ M $ is a monoid acting on $ \\\\alpha $.\"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[Nontrivial M] :\\n  IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule ↔\\n    ∀ (q : Submodule R M), (∀ i, q ∈ invtSubmodule (P.reflection i)) → q ≠ ⊥ → q = ⊤\", \"doc\": \"Let $ R $ be a commutative ring and $ P $ a root pairing over $ R $ with underlying $ R $-module $ M $. Assume $ M $ is nontrivial. The $ R[P.\\\\text{WeylGroup}] $-module structure on $ M $ induced by t\"}\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"(i : ι) : span R (orbit P.weylGroup (P.root i)) = ⊤\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract root systems, topological actions, or general affine/projective scheme constructions do not state this group-scheme or attracting-cell assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torus fixed subscheme of a reductive flag variety and generic dominant cocharacter",
+   "results": "Hits: FixedPoints.subalgebra, Representation.invariants_eq_inter, FixedPoints.subring, LieModule.genWeightSpace, LieModule.shiftedGenWeightSpace, Representation.invariants, FixedPoints.smulCommClass', fixedPointsSubAddOfNormal",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Reductive, Borel",
+   "results": "Hits: . loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|Reductive|cocharacter",
+   "results": "Hits: ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus acting on the flag scheme of a reductive algebraic group has Weyl group indexed reduced fixed points",
+   "results": "Hits: RootPairing.weylGroup.ofIdx, RootPairing.weylGroup.induction', RootPairing.weylGroup.induction, RootPairing.span_orbit_eq_top, RootPairing.weylGroup.ofIdx_smul, RootPairing.Base.induction_reflect, RootPairing.weylGroup, RootPairing.weylGroupRootRep",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional rational representation of a split algebraic torus is a direct sum of character weight spaces",
+   "results": "Hits: LieModule.iSup_genWeightSpace_eq_top, FDRep.char_orthonormal, LieModule.iSup_genWeightSpace_eq_top', FDRep.simple_iff_char_is_norm_one, RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u, FDRep.char_one, Rep.diagonalSuccIsoFree, FDRep.scalar_product_char_eq_finrank_equivariant",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, DirectSum",
+   "results": "Hits: Representation.directSum, Representation.directSum_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "Diagonalizable|weightSpace|WeightSpace|IsTorus",
+   "results": "Hits: ; Mathlib subdirectory RepresentationTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representations of a diagonalizable group scheme are graded vector spaces indexed by the character group",
+   "results": "Hits: Rep.diagonal, Rep.diagonalHomEquiv, Rep.diagonalHomEquiv_apply, Representation.diagonal, Rep.diagonalSuccIsoFree, Rep.diagonalHomEquiv_symm_apply, Rep.diagonal_succ_projective, Rep.diagonalSuccIsoTensorTrivial",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational representation of a split algebraic torus decomposes into its character eigenspaces",
+   "results": "Hits: LinearMap.IsSymmetric.direct_sum_isInternal, LinearMap.IsSymmetric.directSumDecomposition, CharacterModule, algebraRat.charZero, UnitAddTorus.mFourierSubalgebra_separatesPoints, DirectSum.decompose_algebraMap, Matrix.IsHermitian.splits_charpoly, Polynomial.SplittingField.instField",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth homogeneous space G over H the tangent space at the identity coset is Lie G modulo Lie H",
+   "results": "Hits: instLieAlgebraGroupLieAlgebra, mulInvariantVectorField, GroupLieAlgebra, instLieRingGroupLieAlgebra, addInvariantVectorField, instLieAlgebraAddGroupLieAlgebra, TangentSpace, instInhabitedTangentSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, tangentSpace",
+   "results": "Hits: . loogle: unknown identifier 'tangentSpace'",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "tangentSpace|TangentSpace|LieAlgebra",
+   "results": "Hits: ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split torus representation the fixed subscheme of projective space is the disjoint union of projectivized character weight spaces",
+   "results": "Hits: Rep.diagonal_succ_projective, LieModule.disjoint_genWeightSpace, Representation.isProj_averageMap, ProjectiveSpectrum.basicOpen_eq_union_of_projection, Projectivization.nonZeroEquivProjectivizationProdUnits, LieModule.disjoint_genWeightSpaceOf, AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj, LieModule.iSupIndep_genWeightSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective fixed scheme of a diagonal torus action is the union of projective eigenspaces",
+   "results": "Hits: Matrix.iSup_eigenspace_toLin_diagonal_eq_top, Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute, Matrix.maxGenEigenspace_toLin_diagonal_eq_eigenspace, Projectivization.instMulAction, Representation.diagonal, Matrix.maxGenEigenspace_toLin'_diagonal_eq_eigenspace, Projectivization.instMulAction.congr_simp, Representation.invariants_eq_inter",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "torus|diagonalizable|weightSpace",
+   "results": "Hits: ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "Representation.directSum",
+   "results": "Hits: 20; Mathlib subdirectory RepresentationTheory/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential of a smooth quotient map of algebraic groups gives an exact sequence of tangent spaces with kernel the Lie algebra of the stabilizer",
+   "results": "Hits: tangentMap_proj, tangentMapWithin_proj, mulInvariantVectorField, SmoothBumpCovering.embeddingPiTangent_ker_mfderiv, OpenPartialHomeomorph.MDifferentiable.ker_mfderiv_eq_bot, inverse_mfderiv_mul_left, contMDiff_equivTangentBundleProd_symm, SmoothBumpCovering.comp_embeddingPiTangent_mfderiv",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent space at a point of a homogeneous algebraic variety is the quotient of Lie algebras",
+   "results": "Hits: TangentSpace, LieSubmodule.Quotient.lieQuotientLieRing, instTopologicalSpaceTangentSpace, LieSubmodule.Quotient.lieQuotientLieAlgebra, instPathConnectedSpaceTangentSpaceReal, instAddCommGroupTangentSpace, instInhabitedTangentSpace, oneTangentSpaceIcc",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra, Quotient",
+   "results": "Hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group representations, root pairings or differential geometry do not supply the reductive flag scheme statement; no group-scheme tangent quotient or fixed-scheme theorem returned"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bruhat-longest-cell-charts",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Supporting input: smooth projective flag quotient, fixed flags and dominant separating cocharacter, preceding Milne 21.70",
+   "via": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flag-torus-fixed-geometry",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Reused existing Borel, root, normalizer, smoothness and projective-scheme tools; supplied the orbit embedding, tangent quotient, root-weight calculation, reduced fixed-scheme argument and explicit dominant weight-separating cocharacter. No new nodes are necessary. All proof citations read and quoted in citations.json. No project Lean attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Bruhat cells and flag charts for a split reductive group. Supporting input: smooth projective flag quotient, fixed flags and dominant separating cocharacter, preceding Milne 21.70; realizes this supporting Milne geometry in steps 1--8, along the existing alteration/moduli prerequisite chain. Current blueprint direct-images proof (3) is the ancestor route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "General scheme tool used only for explicit affine coordinate charts for fixed-scheme equations; it does not replace the unit route, which here reaches reductive flag geometry."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "General scheme tool used only for existence and density of rational points on smooth schemes over an algebraically closed field; it does not replace the unit route, which here reaches reductive flag geometry."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "General scheme tool used only for regularity of the smooth zero-dimensional fixed scheme; it does not replace the unit route, which here reaches reductive flag geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-290418729",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-290418729 (reviewer sub-agent of L); spot-checked: I read the item and all eight steps against the statements of the 20 cited nodes and Milne iAG2017: Lemma 13.51, the paragraph before Prop 21.70, and Prop 17.53. There are no new nodes. The statement, stmt_deps and source are unchanged from live, where the item is still unsplit, and no cited node depends on the item. Step by step: (1) Borel quotient: smooth, proper and geometrically integral. (2) Line-stabilizer orbit map descended along the fpqc cover π; it is a monomorphism by common lifts, then proper over separated, then a closed immersion. (3) Factor-by-factor weight basis and chart equations (χ_jχ_i^{-1}−1)u_j=0. (4) Transitivity plus the Borel normalizer give the fixed points nB; injectivity holds because p:B→T forces the element to centralize T, hence lie in T; W is finite. (5) dπ is surjective by formal smoothness of the stalk with kernel 𝔟, the convention (wχ)(t)=χ(n^{-1}tn) is verified, and the weights are Φ∖wΦ⁺, each once. (6) Fixed-scheme smoothness on the affine U_i plus density of rational points give a finite discrete scheme with regular 0-dimensional local rings, so Q^T=⊔Spec F. (7) B=P(λ₀) and λ(N)=N^{r+1}λ₀+ΣN^i e_i is dominant and separating. (8) z^m−1 with m≠0 forces u_j=0 in every characteristic, so equivariance and the monomorphism give Q^λ=Q^T. Small cases checked: G=T, SL₂ weights ∓α at e and e_s, repeated weights, p dividing the exponent. Batch-5: all five flagged citations reach sec-trace-formula only through the Mathlib leaves lem-trf-smooth-fpqc-base-descent and lem-trf-vector-subspace-complement. These are generic algebra/descent facts, not given by the trace-formula or Poincaré assumptions, so they are accepted. The worker-written tool_uses (standard charts, dense separable points, smooth⇒regular) are generic tools and accepted. Minor: independence of e_w from the representative is not written, but it is one line from T⊂B. lem-sfb-general-flag-isolated-linear-action (N6) is weaker and more general, not a duplicate. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FlagTorusFixedGeometry",
+  "declaration": "AlgebraicGeometry.flag_torus_fixed_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FlagTorusFixedGeometry.lean",
+  "statement": "theorem flag_torus_fixed_geometry {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) (Q : Over (Spec (.of F))) (π : G.X ⟶ Q) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π) (hπtorsor : IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) (aB : ModObj T.X B.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φplus : Finset (RankOneRoots.Character T)) (hΦplus : ∀ χ : RankOneRoots.Character T, χ ∈ Φplus ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B aB χ ≠ ⊥) : Smooth Q.hom ∧ IsProjective Q.hom ∧ ConnectedSpace Q.left ∧ Finite (RankOneRoots.Weyl iT) ∧ ∃ (aQ : ModObj G.X Q), (𝟙 G.X ⊗ₘ π) ≫ aQ.smul = μ[G.X] ≫ π ∧ ∃ (n : ℕ) (ρ : G.X ⟶ GeneralLinearGroup (ULift.{u} (Fin (n + 1))) F) (_ : IsMonHom ρ) (aP : ModObj G.X (DiagonalProjectiveAction.space F n)) (embedding : Q ⟶ DiagonalProjectiveAction.space F n), FlagGeometry.IsLinearProjectiveAction G n ρ aP ∧ IsClosedImmersion embedding.left ∧ aQ.smul ≫ embedding = (G.X ◁ embedding) ≫ aP.smul ∧ ∃ (act : RankOneRoots.Weyl iT →* Aut T), (∀ (nw : RankOneRoots.normalizer iT) (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ T.X), t ≫ (act (QuotientGroup.mk nw)).hom.hom.hom ≫ iT.hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ nw.val) * (t ≫ iT.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ nw.val)⁻¹) ∧ (∀ (nw : RankOneRoots.Weyl iT → RankOneRoots.normalizer iT), (∀ w, QuotientGroup.mk (nw w) = w) → ∃ (Z : Over (Spec (.of F))) (z : Z ⟶ Q) (e : RankOneRoots.Weyl iT → (𝟙_ (Over (Spec (.of F))) ⟶ Z)), IsClosedImmersion z.left ∧ Nonempty (IsColimit (Cofan.mk Z e)) ∧ (∀ w, e w ≫ z = (nw w).val ≫ π) ∧ (∀ (A : CommAlgCat.{u} F) (q : (algSpec (.of F)).obj (op A) ⟶ Q), (∃ q' : (algSpec (.of F)).obj (op A) ⟶ Z, q' ≫ z = q) ↔ FlagGeometry.IsFixed iT Q aQ A q) ∧ ∀ w, FlagGeometry.HasTangentWeightBasis iT Q aQ ((nw w).val ≫ π) ({χ : RankOneRoots.Character T | χ ∈ Φplus ∨ ∃ α ∈ Φplus, χ.hom.hom = α.hom.hom⁻¹} \\ Set.image (fun χ : RankOneRoots.Character T ↦ (act w).inv ≫ χ) (Φplus : Set _))) ∧ ∃ (cochar : RankOneRoots.Cocharacter T) (pairing : RankOneRoots.Character T → ℤ), (∀ χ, cochar.hom.hom ≫ χ.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ pairing χ) ∧ (∀ α ∈ Φplus, 0 < pairing α) ∧ (∀ (A : CommAlgCat.{u} F) (x : (algSpec (.of F)).obj (op A) ⟶ DiagonalProjectiveAction.space F n), FlagGeometry.IsFixed (cochar ≫ iT) (DiagonalProjectiveAction.space F n) aP A x ↔ FlagGeometry.IsFixed iT (DiagonalProjectiveAction.space F n) aP A x) ∧ ∀ (A : CommAlgCat.{u} F) (q : (algSpec (.of F)).obj (op A) ⟶ Q), FlagGeometry.IsFixed (cochar ≫ iT) Q aQ A q ↔ FlagGeometry.IsFixed iT Q aQ A q",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b43562228",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item, new def node, both modules, report and all dependency declarations (reductive_borel_pair_structure, RankOneRoots.Weyl/normalizer/Character/Cocharacter, TorusCharacterTangent.weightSpace, schemeTangentSpace, DiagonalProjectiveAction.space, GeneralLinearGroup.homMulEquiv, IsProjective). Every clause matches the node: hypotheses are identical to the borel-pair dep (torsor square, split maximal torus, Borel, Φ⁺ as nonzero Lie(B) weights); aQ is pinned to left multiplication; GL rep, closed immersion and equivariance hold; the Weyl action is pinned by conjugation so (act w).inv≫χ = wχ; for every representative family Q^T is a coproduct of Spec F indexed by W with e_w=n_wB, fixedness tested after all algebra extensions; the tangent basis is indexed by Φ∖wΦ⁺ (w=1 gives −Φ⁺, conjugation direction checked); λ has its pairing pinned, is positive on Φ⁺, and gives the fixed-subfunctor equalities on P(E) and Q. The projective substitution is on lines. Edge cases: empty roots, r=0, repeated weights, char p, nilpotent test algebras, universes. New node fields, searches, stmt_deps and real (non-hollow) defs are fine; no duplicate notion; statement fields are verbatim; only lean plus the new stmt_dep changed; no declaration is owned by a theorem node; docstrings and proof steps present; proof is sorry only. No compile (no file changed). Advisory: the Second reading section is brief."
+ }
+}

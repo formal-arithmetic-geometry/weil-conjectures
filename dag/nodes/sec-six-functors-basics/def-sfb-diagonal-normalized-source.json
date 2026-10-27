@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-diagonal-normalized-source",
+ "kind": "definition",
+ "title": "A normalized source for a right-derived direct image",
+ "status": "split",
+ "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories with the same object and morphism universes and chosen unbounded derived categories [def-weil-abstract-derived-category] in a common localization universe. Let $F:\\mathcal A\\to\\mathcal B$ be additive and let $(R,\\eta)$ be a specified total right derived functor of $F$, with its universal unit, its invertible computation on K-injective complexes, and its exact shift structure. Let $M\\in\\mathcal A$, $N\\in\\mathcal B$, $P$ a proposition, and $\\mathrm{normalizes}$ a predicate on pairs $(e,h)$ with $e:N\\simeq F(M)$ and $h:P$. Using the canonical single-object comparison $s_{F,R,M}:F(M)[0]\\to R(M[0])$ of [def-sfb-diagonal-trace-models], define a normalized source to consist of $h:P$, an isomorphism $e:N\\simeq F(M)$, a proof of $\\mathrm{normalizes}(e,h)$, and the assertion that $s_{F,R,M}$ is invertible. Its associated morphism $N[0]\\to R(M[0])$ is exactly $e[0]$ followed by $s_{F,R,M}$. This records a specified ordinary normalization and acyclicity; it asserts no existence of such data.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "Part (2): supported coefficient-source comparison before the diagonal integration composite"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, Mathlib.Tactic.Module.reduceCoefficientwise, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Module.qNF.toNF, Mathlib.Tactic.LinearCombination.normStx, Mathlib.Tactic.tacticReduce__, SimplexCategoryGenRel.exists_normal_form_P_σ, Mathlib.Tactic.LinearCombination'.normStx, FixedDetMatrices.reduce_reduceStep, Algebra.SubmersivePresentation.comp",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "rg",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream WeilConjectures matches. Sheaf matches: DiagonalTowerSystem, DiagonalTowerLimit, DiagonalTowerTrace (the definitions); DiagonalTowerTraceLimit, DiagonalCoefficientReference, DiagonalTowerCoefficients, DiagonalCoefficientCategory, CoefficientBidualEvaluationShiftOne (consumers).",
+   "date": "2026-10-23",
+   "verdict": "Exact existing project definitions; new nodes supply ownership only."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'diagonal derived reduction'; search 'normalized source'",
+   "results": "0 blueprint nodes for either query. DAG rg found the three theorem records and existing trace/reference definition consumers, but no definition node owning these eight declarations.",
+   "date": "2026-10-23",
+   "verdict": "Extract definition ownership from theorem modules, as requested by return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-triangle",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Part (2): supported coefficient-source comparison before the diagonal integration composite",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTraceSources",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.NormalizedSource",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.NormalizedSource",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.NormalizedSource.hom"
+  ],
+  "statement": "structure NormalizedSource\n    {A : Type a} {B : Type a} [Category.{va} A] [Category.{va} B]\n    [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]\n    (F : A ⥤ B) [F.Additive] (R : DiagonalRightDerived F) (M : A) (N : B)\n    (P : Prop) (normalizes : (N ≅ F.obj M) → P → Prop)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 ownership extraction only: these are the existing plain definitions in the published theorem module, not its theorem conclusion. No Lean declaration is redefined.",
+  "file": "lean/Sheaf/Paper/DiagonalTraceSources.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of the 69f9 H2 RETURN. Lean signature and body are byte-identical; only imports changed (5 definition modules made public imports, DiagonalTowerCoefficients made a plain proof import). stmt_deps drop det-prop-diagonal-tower-coefficients and -trace (both kept in proof_deps) and cite def-sfb-diagonal-coefficient-reference, -trace-limit-characterization, -trace-models plus three new existing:true ownership nodes (system-interface, completed-endpoints, normalized-source). check_existing is clean on all three; statements are verbatim with live; the prose matches the live declarations and the source places exist. No cycle, no theorem stmt_dep, no Lean moved. Seven dependency modules and records are unchanged from 69f9. H3 substance accepted at 69f9 still holds. Advisories: diagonalSurface in the signature is owned only by det-prop-diagonal-tower-system but is reached through the closure; second readings are self-readings; inherited ∃ CommShift in unitCounit_exact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-beeda",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261023T231004-L-3527995",
+  "kind": "interface",
+  "note": "independent cc review: item diagonalTower_trace (signature byte-identical to live) and 7 moved defs (byte-identical block now in DiagonalTraceSources, re-exported) against live clone; new sorry statements against det-prop-diagonal-tower-trace clauses 1-2 and the Result/Presentation/Twisting/Coefficients pinning; direct importers DiagonalCoefficientCategory and DiagonalTowerCoefficients compiled against the delivered modules; #print axioms clean apart from expected sorryAx"
+ }
+}

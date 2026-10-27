@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26; original coefficient-stage construction steps 1--4"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension preserves constructible finite Tor complexes and normalized integral scalar restriction",
+   "results": "RestrictScalars, ModuleCat.extendRestrictScalarsAdj, AlgHom.extendScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.restrictCoextendScalarsAdj, Module.RestrictScalars.normedSpaceOrig, instSeminormedAddCommGroupRestrictScalars.",
+   "date": "2026-10-27",
+   "verdict": "Generic ordinary scalar algebra and adjunction results; no finite-Tor sheaf-derived restriction or geometric mate invertibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension preserves constructible finite Tor complexes and normalized integral scalar restriction",
+   "results": "Eight results about algebraic tensor base change and flatness (Algebra.Extension.tensorH1Cotangent, RingHom.finite_isStableUnderBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, and related declarations); none constructs the geometric derived scalar restrictions.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf-derived scalar restriction or geometric mate invertibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-27",
+   "verdict": "Supplies the counit equation in the assembly proof, but neither scalar preservation nor invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ring_scalar_mates|CounitQNormalized|ScalarIdentity",
+   "results": "The server grep search returned zero hits; the local rg reads found the assembly statements and definitions, and the existing finite/system interfaces.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of either proposed smaller statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingScalarMates",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-ring-canonical-scalar-invertibility",
+ "title": "Geometric invertibility of canonical ring scalar maps and their exceptional mates",
+ "statement": "Fix a prime $l$, an algebraic closure $\\Omega$ of $\\mathbf Q_l$, a finite-field datum $D$ with $l\\ne D.p$, finite-type $D.k$-schemes $X,Y$, a separated finite-type $D.k$-morphism $f:X\\to Y$, a compactification $c$, ring stages $s,t$, and an Allowed actual coefficient map $a:s\\to t$ [def-sf-ring-stage-assembly-data, def-sf-constructible-exceptional-assembly-data]. Let $A,B$ be supplied exact adjunction operations at $s,t$ with ambient compact-support left realizations $r_A,r_B$, and $S_X,S_Y$ endpoint scalar functors with their ambient realizations $\\rho_X,\\rho_Y$. Write $I_{W,r}$ for the full inclusion at stage $r$, $P_r$ for the actual ambient compact-support functor at stage $r$, $T_W$ for ambient derived scalar extension along $a$ at $W$, and $\\gamma:P_sT_Y\\to T_XP_t$ for the canonical proper/open coefficient comparison. Then (1) $I_{X,s}\\gamma$ is invertible; and (2) for every natural isomorphism $q:A.F S_Y\\simeq S_X B.F$ satisfying, for all $K$ in the source finite-Tor category, the equation\n$$ I_{Y,t}(q_K)\\,;\\,(r_B)_{S_XK}\\,;\\,P_t((\\rho_X)_K)=(\\rho_Y)_{A.FK}\\,;\\,T_Y((r_A)_K)\\,;\\,\\gamma_{I_{X,s}K}, $$\nthe right counit mate $\\operatorname{mateEquiv}(A.\\mathrm{adjunction},B.\\mathrm{adjunction})(q^{-1})$ is invertible. Semicolons denote composition in the written order. This asserts only the two invertibility tests; no scalar functor, shift structure or comparison datum is constructed.",
+ "proof": [
+  {
+   "text": "Construct a coherent finite/integral family with its normalized system reconstruction, before scalar comparisons. Lift the given algebraic closure to the scheme universe; the finite and integral stage categories do not depend on that closure.",
+   "uses": [
+    "lem-sf-exceptional-ring-transport-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exceptionalIntegralScalarMates_core to this family. Its Comparison supplies invertible q and b and QNormalized. The counit formula and injectivity of the target adjunction Hom bijection identify b with mateEquiv of inverse q. QNormalized also writes the ambient scalar comparison as a composite of isomorphisms.",
+   "uses": [
+    "lem-sf-exceptional-integral-scalar-mates-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Full faithfulness lifts the two left realizations and the two scalar realizations to natural isomorphisms. Compose them with the constructed q. Naturality of the four realizations and the original QNormalized equation prove normalization for this transferred q. Faithfulness of the target inclusion and cancellation of the realization isomorphisms identify every supplied normalized q with it. The conjugateEquiv/mateEquiv composition identities transfer the invertible mate through the four isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-ring-transport-family",
+  "lem-sf-exceptional-integral-scalar-mates-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26; use the existing normalized integral scalar construction, then full-inclusion and adjunction mate transport."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Coefficient-stage construction: system scalar comparison and transpose steps 2, 3, 6",
+   "via": [
+    "lem-sf-ring-scalar-mates-for-realized-operations",
+    "lem-sf-ring-stage-assembly",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingCanonicalScalarInvertibility",
+  "file": "lean/Sheaf/Paper/RingCanonicalScalarInvertibility.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.ring_canonical_scalar_invertibility",
+  "statement": "theorem ring_canonical_scalar_invertibility\n    (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) {s t : RingStage.{max u v} l}\n    (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))\n    (_ha : Allowed l a)\n    (A : Operation.{u, v} l Ω X Y (s.stage l))\n    (B : Operation.{u, v} l Ω X Y (t.stage l))\n    (rA : LeftRealization.{u, v} l Ω c s A)\n    (rB : LeftRealization.{u, v} l Ω c t B)\n    (SX : Scalar.{u, v} l Ω a X) (SY : Scalar.{u, v} l Ω a Y) :\n    IsIso (Functor.whiskerLeft (RingStage.inclusion.{u, v} l Ω X s)\n      (PurCompactSupport.comparison a c)) ∧\n    ∀ (q : A.F ⋙ SY.functor ≅ SX.functor ⋙ B.F),\n      (∀ K : C.{u, v} l Ω X (s.stage l),\n        (RingStage.inclusion.{u, v} l Ω Y t).map (q.hom.app K) ≫\n          rB.hom.app (SX.functor.obj K) ≫\n          (PurCompactSupport.image (t.coefficients l) c).map (SX.realization.hom.app K) =\n        SY.realization.hom.app (A.F.obj K) ≫\n          (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫\n          (PurCompactSupport.comparison a c).app\n            ((RingStage.inclusion.{u, v} l Ω X s).obj K)) →\n      IsIso (mateEquiv A.adjunction B.adjunction q.inv).natTrans",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T103451-L-1084652",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T123556-L-2321662",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

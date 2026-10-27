@@ -1,0 +1,156 @@
+{
+ "id": "lem-coef-compact-support-restriction-identity",
+ "kind": "statement",
+ "title": "Identity coefficient normalization of compact-support restriction",
+ "statement": "Let $X,Y$ be schemes and $c=(j,p)$ a compactification of $f:X\\to Y$ [def-weil-compactifications-refinements]. Let $A$ be any finite commutative ring. On the small pro-etale sites [def-weil-pbc-proetale-site] use the entire unbounded derived categories of intrinsic constant-$A$-module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. Write $F=Rp_*j_!$ for the fixed-compactification functor [def-compact-support-direct-image-detailed], $\\sigma_1:F\\operatorname{Res}_{1_A}\\cong\\operatorname{Res}_{1_A}F$ for its specified coefficient restriction comparison [lem-sf-compact-support-restriction-of-scalars], and $i_T:\\operatorname{Res}_{1_A}\\cong\\mathrm{id}$ for the canonical identity restriction comparison [def-coef-scalar-restriction-identity]. For every $H\\in D(X_{\\mathrm{proet}},A)$ and any ring map $q:A\\to A$ equipped with an equality $h:q=1_A$, $\\sigma_{q,H};(\\mathrm{eqToIso}(\\operatorname{Res}_Y(h));i_Y)_{FH}=F((\\mathrm{eqToIso}(\\operatorname{Res}_X(h));i_X)_H)$. This only concerns the identity coefficient map and imposes no geometric boundedness or coefficient invertibility requirement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Final paragraph, finite-level compact-support comparisons: normalize the identity coefficient restriction square (expanded quotient proof Step 5)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-coef-compact-support-reduction-maps",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-coef-scalar-restriction-identity",
+  "def-coef-compact-support-coefficient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For extension by zero, apply the identity-coefficient clause of the normalized open restriction coherence theorem. Its square is the one made from the sectionwise identity comparisons i_X and i_Z. The same holds after exact termwise localization.",
+   "uses": [
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "def-coef-scalar-restriction-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+   }
+  },
+  {
+   "text": "For direct image, evaluate the specified comparison on a K-injective representative. Both composites are the same identity-coefficient restriction comparison on that representative, followed by its same universal direct-image comparison. The uniqueness clause in the normalized derived direct-image construction extends this equality to every derived object.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+   }
+  },
+  {
+   "text": "The compact-support restriction comparison is the composite of these open and proper squares, by its defining formula. Whisker the first by Rp_* and the second by j_!, and combine the equalities by functoriality and associativity. Transport along q=1_A to insert the specified eqToIso factors.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-coef-compact-support-coefficient-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "def-coef-scalar-restriction-identity",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-coef-compact-support-coefficient-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension composition isomorphism and the cocycle of quotient reduction maps defined by adjunction units",
+   "results": "OK 8 hits, including ModuleCat.homEquiv_extendScalarsComp and cotangent-complex comparisons.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary module adjunction composition lemma is related, but does not state the normalized unbounded sheaf coefficient maps, their K-flat models, or the compact-support comparisons. Generic adjunction composition is used directly for the categorical part."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars on sheaf modules is computed by a K flat complex and restriction comparisons preserve coefficient identity and composition",
+   "results": "OK 8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, Scheme.Modules.restrictFunctorComp and ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for these specified derived coefficient arrows and their normalized representative or compact-support squares."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_hom_app|map_cocycle",
+   "results": "OK 3 hits: group cohomology cocycles and Mathlib/CategoryTheory/Adjunction/CompositionIso.lean lines 100, 116.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic leftAdjointCompIso API in the proved categorical calculation. No compact-support or K-flat representative theorem is returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportQuotientCocycle",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-compact-support",
+   "place": "Final paragraph, finite-level compact-support comparisons: normalize the identity coefficient restriction square (expanded quotient proof Step 5).",
+   "via": [
+    "lem-coef-compact-support-quotient-cocycle"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportRestrictionIdentity",
+  "file": "lean/Sheaf/Paper/CompactSupportRestrictionIdentity.lean",
+  "declaration": "WeilConjectures.compactSupportRestriction_identity",
+  "declarations": [
+   "WeilConjectures.compactSupportRestriction_identity"
+  ],
+  "statement": "theorem compactSupportRestriction_identity\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (A : Type u) [CommRing A] [Finite A]\n    (q : A →+* A) (hq : q = RingHom.id A) (K : proEtaleDerivedCategory X A) :\n    (compactSupportCoefficientComparison c q).hom.app K ≫\n        (compactSupportCoefficientResId Y A q hq).hom.app\n          ((sfAmbientCompactSupportCandidate A c).obj K) =\n      (sfAmbientCompactSupportCandidate A c).map\n        ((compactSupportCoefficientResId X A q hq).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c35df",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261027T135438-L-3708061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c35df",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261027T135438-L-3708061",
+  "kind": "interface",
+  "note": "independent cc review: Q3 c35df53c819c (byte-identical to fd5b): item theorems vs published signatures, 20 new modules vs their nodes, node proof_deps vs step uses and merge rules (stage3_delivery check_nodes), both direct importers compiled against the delivered modules"
+ }
+}

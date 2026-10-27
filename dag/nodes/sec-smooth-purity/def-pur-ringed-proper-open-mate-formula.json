@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-ringed-proper-open-mate-formula",
+ "kind": "definition",
+ "title": "Generic formulas for the proper open mate and its coefficient square",
+ "statement": "Given categories U,V,W,Z, adjunctions lp:Z→V ⊣ rp and lr:W→U ⊣ rr, functors i:W→Z and k:U→V and a transformation ta:i⋙lp→lr⋙k, define properOpenMate:rr⋙i→k⋙rp to be the unit of lp⊣rp, followed by ta whiskered with rr and rp, followed by the counit of lr⊣rr whiskered with k and rp. This is the explicit construction of [def-weil-pbc-adjunction-mate], with the functor-composition identifications implicit. For two such A and B diagrams and scalar functors su,sv,sw,sz, pullback/scalar transformations cp:sz⋙lpB→lpA⋙sv and cr:sw⋙lrB→lrA⋙su, and open transformations di:iA⋙sz→sw⋙iB and dk:kA⋙sv→su⋙kB, define properOpenLeft as properOpenMate_A whiskered with sz, followed by the cp mate whiskered with kA, followed by dk whiskered with rpB. Define properOpenRight as di whiskered with rrA, followed by the cr mate whiskered with iB, followed by properOpenMate_B whiskered with su. These are explicit composites, with no asserted equality as part of these definitions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6; explicit unit/counit mate formula in the parent coefficient supplement, Steps 4–5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scalar extension preserves the clopen projector and open pullback base change comparison on derived sheaves of modules",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearEquiv.extendScalarsOfIsLocalizationEquiv, Algebra.FormallyUnramified.projective_of_restrictScalars, PresheafOfModules.pullback, AlgHom.extendScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "No match: ordinary module scalar APIs do not assert the normalized clopen derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings preserves a proper open mate by adjunction and a compatible left adjoint square",
+   "results": "CategoryTheory.mateEquiv_apply, mateEquiv, mateEquiv_counit, mateEquiv_square, iterated_mateEquiv_conjugateEquiv, mateEquiv_conjugateEquiv_vcomp, mateEquiv_counit_symm, mateEquiv_symm_apply.",
+   "date": "2026-10-25",
+   "verdict": "The mates equivalence exists in Mathlib, but the explicit unit/whiskering/counit word is recorded as a direct generic constructor so its specialized use does not kernel-normalize derived functor constructions. No arbitrary mate data is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*coefficient|mateEquiv_square",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:245 and Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:362 give mateEquiv_square. Repository searches find RingedRefinementClopen (only identity-left refinement compatibility), SemilinearScalarProperOpen and SemilinearAlphaPullback (constant coefficient towers), not this arbitrary ring-sheaf pullback identity. blueprint_refs.py search \"clopen coefficient\" returns 0 blueprint nodes. blueprint_refs.py search \"adjunction mate\" returned det-ctf-finite-proper-localizing, det-sp-reduction-compatibilities, lem-cbc-extension-zero-base-change, lem-sf-projection-finite-constant; none is this generic constructor.",
+   "date": "2026-10-25",
+   "verdict": "No existing arbitrary ring-sheaf general-square pullback identity. Reuse the existing normalized operations and split only the geometric compatibility step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProperOpenCoefficientSquare",
+  "group": "M9",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Intended source recorded by the item: thm-pur-rational-and-qbar-purity; current sk-prop-sp-composition proof, Towers and passage by Rlim, inversion of ell and finite-extension descent; sk-thm-purity-transport proof Steps 2–3, identifying the reconstructed compact-support adjunction with the specified condensed one. The created.item chain ends at the launcher-created nt-target-smooth-purity-qbar, whose created.item is a human description, so the computed nearest imported blueprint ancestor is null. This auxiliary supplies the single proper/open coefficient square used when reducing the completed compositor and then changing to E and Omega coefficients. The explicit mate formula, Steps 4–5; generic constructor avoids repeated kernel expansion of derived functors.",
+   "via": [
+    "lem-pur-ringed-proper-open-coefficient-square",
+    "lem-pur-condensed-compositor-realization",
+    "lem-route-smooth-purity-iso-comp-open-immersion",
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProperOpenCoefficientSquare",
+  "file": "lean/Sheaf/Paper/RingedProperOpenCoefficientSquare.lean",
+  "declaration": "SheafOfModules.RingedProperOpen.properOpenMate",
+  "statement": "def properOpenMate\n    {U V W Z : Type*} [Category U] [Category V] [Category W] [Category Z]\n    {lp : Z ⥤ V} {rp : V ⥤ Z} {lr : W ⥤ U} {rr : U ⥤ W}\n    (ap : lp ⊣ rp) (ar : lr ⊣ rr) (i : W ⥤ Z) (k : U ⥤ V)\n    (ta : i ⋙ lp ⟶ lr ⋙ k) : rr ⋙ i ⟶ k ⋙ rp",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-26",
+  "note": "A real unit-map-counit construction, with no proof obligation or arbitrary chosen data. Definitionally the previous gamma formula after specialization. The scalar-square constructors retain the former left/right formulas at generic categories before specialization.",
+  "declarations": [
+   "SheafOfModules.RingedProperOpen.properOpenMate",
+   "SheafOfModules.RingedProperOpen.properOpenLeft",
+   "SheafOfModules.RingedProperOpen.properOpenRight"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-24263",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T211954-L-4179387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-24263",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T211954-L-4179387",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new RingedProperOpenPullbackCoefficients module and 4 node files vs clone sheaf-dag (68b8e04) and lem-pur-ringed-proper-open-coefficient-square Steps 1-5; defeq of new gamma/left/right with old bodies checked by rfl in a scratch compile"
+ }
+}

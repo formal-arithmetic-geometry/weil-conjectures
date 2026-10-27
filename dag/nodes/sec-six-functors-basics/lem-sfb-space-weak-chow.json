@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-space-weak-chow",
+ "kind": "statement",
+ "title": "Weak Chow lemma for a separated finite-type algebraic space over an affine scheme",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Give spaces the atlas topology [def-a1-space-point-topology]. For morphisms of spaces, separated means that the representable diagonal is a closed immersion on every scheme test [def-weil-closed-immersion]; quasi-compact means that inverse images of quasi-compact opens are quasi-compact; quasi-separated means that the diagonal is quasi-compact. Locally of finite type and locally of finite presentation are tested on etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated, and locally of finite presentation. Proper means separated, of finite type, and universally closed, where universally closed means closed on underlying spaces after every algebraic-space base change (agreeing with the scheme convention [def-weil-proper-morphism]). Let $A$ be a commutative ring and let $a:X\\to\\operatorname{Spec}A$ be a separated finite-type morphism from an algebraic space. There exist an integer $n\\ge0$, a quasi-compact separated scheme $X'$, a proper morphism $\\pi:X'\\to X$, and a quasi-compact immersion $j:X'\\to\\mathbf P^n_{\\operatorname{Spec}A}$ over $\\operatorname{Spec}A$ such that $a\\pi=qj$, where $q$ is the projective-space projection [def-nagata-projective-space-base-change]. An immersion is a closed immersion into an open subscheme followed by its open inclusion [def-weil-open-immersion]. The map $\\pi$ is universally surjective: for every algebraic space $W\\to X$, the projection $X'\\times_XW\\to W$ is surjective on underlying point sets.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-nagata-projective-space-base-change",
+  "def-weil-open-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-qc-space-affine-etale-atlas], choose a representable surjective etale map $f:W\\to X$ with $W$ affine. Quasi-compactness of $X$ follows from finite type over the affine base. Apply [lem-sfb-space-etale-maximum-degree] to see that $W$ is of finite type over $B=\\operatorname{Spec}A$ and that the geometric fibre cardinalities are bounded. We prove the assertion, more generally for every such $X$ equipped with such an atlas whose fibres have cardinality at most $b$, by strong induction on $b$. For $b=0$, surjectivity forces $X$ empty; use $X'=\\varnothing$ and its empty closed immersion into $\\mathbf P^0_B$. For nonempty $X$, the cited node gives a least positive bound $d\\leq b$, the nonempty maximum-degree open $U$, and an affine etale atlas $W_T\\to T$ of the reduced closed complement with bound $d-1<b$.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-etale-maximum-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), first paragraph; explicit induction statement and empty base case"
+   }
+  },
+  {
+   "text": "By [lem-chow-affine-immersion], embed $W$ into $\\mathbf P^m_B$ through its closed immersion into the standard affine chart. This immersion is quasi-compact: the first map is closed and the standard chart is quasi-compact over the separated projective space. Apply [lem-chow-closed-model] to obtain its schematic closure $Y$, with $W\\hookrightarrow Y$ open and $Y\\hookrightarrow\\mathbf P^m_B$ closed. Now apply [lem-sfb-space-chow-configuration] to the atlas, $d$, $U$ and this compactification. Write its output as $V\\subset H\\subset Z$, $g_i:Z\\to Y$, and $p:H\\to X$. In particular $p$ is separated of finite type, $V\\hookrightarrow H$ is quasi-compact and dense, the $g_i$ are proper, $H$ has the required quasi-compact projective-space immersion, and $p(V)=U$.",
+   "uses": [
+    "lem-chow-affine-immersion",
+    "lem-chow-closed-model",
+    "lem-sfb-space-chow-configuration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), configuration and compactification, through the properness claim"
+   }
+  },
+  {
+   "text": "Take a valuation ring $R$ with fraction field $K$, a map $v:\\operatorname{Spec}K\\to V$, and $x:\\operatorname{Spec}R\\to X$ extending $p v$. The pullback $W_R=W\\times_X\\operatorname{Spec}R$ is a scheme, etale and surjective over $\\operatorname{Spec}R$, by [lem-trf-space-fibre-products-etale-covers]. In particular it is flat by [def-weil-etale-morphism]. Its image contains the closed point, so [lem-a1-flat-valuation-lifting] supplies an injective local extension of valuation rings $R\\to R'$ and a lift $w:\\operatorname{Spec}R'\\to W$ of $x$. Put $K'=\\operatorname{Frac}R'$. By the coordinate completeness in [lem-sfb-space-chow-configuration], the restriction of $w$ to $K'$ is one of the $d$ coordinates of $v_{K'}$, say the $i$th. This uses the whole split fibre, so no assumption that a mere pointwise representative descends to $K$ is made.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-a1-flat-valuation-lifting",
+    "lem-sfb-space-chow-configuration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), valuation lifting through the etale atlas, including coordinate completeness"
+   }
+  },
+  {
+   "text": "Use $v_{K'}:\\operatorname{Spec}K'\\to V\\subset Z$ and $w:\\operatorname{Spec}R'\\to W\\subset Y$ as a valuation square for the proper scheme map $g_i:Z\\to Y$. It commutes by the choice of $i$. By [lemma-nagata-proper-valuative-criterion-existence-api] there is a lift $z:\\operatorname{Spec}R'\\to Z$ with $g_i z=w$. Since $w$ factors through $W$, the universal property of the open inverse image makes $z$ factor through $g_i^{-1}(W)\\subset H$. On that open, $p=f g_i$, so $p z=f w=x_{R'}$. Its generic restriction is the original $v_{K'}$. Thus every diagram required by [lem-sfb-space-dense-open-valuative-proper] has an extension after an injective local valuation-ring extension. To check its corrected affine-test quasi-compactness, use [lem-sfb-space-qcqs-permanence]. The configuration gives quasi-compact $H$ and $V$ ($V$ is clopen in the affine $F$). Its separated scheme $H$ is quasi-separated. Also $X$ is absolutely quasi-separated: $X\\to B$ is separated, $B=\\operatorname{Spec}A$ is separated over $\\operatorname{Spec}\\mathbf Z$, and on each affine test the absolute diagonal factors as the closed relative diagonal followed by the pullback of the closed diagonal of $B$; hence it is a closed immersion and quasi-compact. The cited permanence node now makes $p:H\\to X$ and $h:V\\to H$ quasi-compact on affine tests. Local finite type and separatedness of $p$, and density of $h$, are supplied by [lem-sfb-space-chow-configuration]. It follows that $p$ is proper.",
+   "uses": [
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "lem-sfb-space-dense-open-valuative-proper",
+    "lem-sfb-space-chow-configuration",
+    "lem-sfb-space-qcqs-permanence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), proof of the properness claim, final valuation square"
+   }
+  },
+  {
+   "text": "Let $i:T\\hookrightarrow X$ be the reduced closed subspace with support $|X|\\setminus U$ from [lem-sfb-space-reduced-closed-support]. Its map to $X$ is proper by [lem-sfb-space-closed-subspace-proper]. The composite $T\\to B$ is separated and of finite type: on scheme charts its diagonal is the restriction of the closed diagonal of $X\\to B$, and its affine coordinate algebras are quotients of finite-type $A$-algebras. It is quasi-compact since $|T|$ is closed in the quasi-compact $|X|$. By [lem-sfb-space-etale-maximum-degree], $W_T\\to T$ is a surjective etale atlas from an affine scheme with fibres bounded by $d-1<b$. The induction hypothesis therefore gives a proper surjection $T'\\to T$ from a quasi-compact separated scheme with a quasi-compact immersion into a finite $B$-projective space. Its composite $T'\\to X$ is proper by [lem-sfb-space-proper-composition].",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-etale-maximum-degree",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), induction on d and the reduced closed complement"
+   }
+  },
+  {
+   "text": "Set $X'=H\\amalg T'$ and let $\\pi:X'\\to X$ restrict to the two maps just obtained. Both are proper. The finite disjoint union map is proper directly on tests: it is separated because its diagonal is the disjoint union of the two closed diagonals in the matching components, with empty inverse images in the cross components; it is of finite type by the two finite-type open pieces and their finite union; after every base change the image of a closed subset is the union of its two closed images. The source is quasi-compact and separated for the same finite-component reasons. The image of $H$ contains $U$, since $p(V)=U$, and the image of $T'$ contains $|X|\\setminus U$. Thus $\\pi$ is surjective. This completes the inductive construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), proper surjectivity of the final disjoint union"
+   }
+  },
+  {
+   "text": "To combine the two projective-space immersions, put their ambient projective spaces $\\mathbf P^r_B$ and $\\mathbf P^s_B$ into complementary coordinate linear subspaces of $\\mathbf P^{r+s+1}_B$. These closed subspaces are disjoint: a point in their intersection would have every homogeneous coordinate zero. Their union is closed, and its induced scheme is their disjoint union, as the two defining homogeneous ideals sum to the irrelevant ideal. The two quasi-compact immersions give a quasi-compact immersion of $H\\amalg T'$ into this disjoint union, and then into $\\mathbf P^{r+s+1}_B$: factor each immersion through an open in its component and take the union of those opens. The resulting $j$ is over $B$, hence $a\\pi=qj$. This also covers an empty component by omitting it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), H-quasi-projectivity of the finite disjoint union, homogeneous-coordinate expansion"
+   }
+  },
+  {
+   "text": "Finally let $Q\\to X$ be any algebraic space and $q\\in|Q|$. Choose a point $x'\\in|X'|$ over the image of $q$ using surjectivity. By the field-valued point equivalence in [lem-trf-space-fibre-products-etale-covers], representatives of $q$ and $x'$ have extensions to a common field on which their maps to $X$ agree. The resulting pair is a point of $X'\\times_XQ$ mapping to $q$. Thus every such projection is surjective, as required. This is the point-class proof of Tag 03MH; it uses no representability assumption on $Q\\to X$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), universal surjectivity (spaces-morphisms.tex Tag 03MH)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-etale-maximum-degree",
+  "lem-chow-affine-immersion",
+  "lem-chow-closed-model",
+  "lem-sfb-space-chow-configuration",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-etale-morphism",
+  "lem-a1-flat-valuation-lifting",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-sfb-space-dense-open-valuative-proper",
+  "lem-sfb-space-qcqs-permanence",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 089J (lemma-weak-chow), with the induction and the universal-surjectivity argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type algebraic space over an affine scheme admits a proper surjective cover by a quasi projective scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak Chow lemma for algebraic spaces gives a proper scheme cover immersing in projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "grep",
+   "query": "weak.chow|chow|algebraic.space",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chow lemma for a separated finite type algebraic space over an affine base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsAffineHom (f ≫ g)] [IsSeparated g] : IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[IsAffine Y] (f : X ⟶ Y) :\\n  AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔ QuasiSeparatedSpace X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological maps, not this assertion for algebraic spaces; the scheme-only IsProper class was read in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak Chow lemma: a separated finite type algebraic space over an affine scheme has a proper surjective quasi projective scheme cover",
+   "results": "8 hit(s); AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned properness and covering declarations are for schemes, not covers of general algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper surjective scheme cover with a quasi compact immersion in finite projective space for a separated algebraic space",
+   "results": "8 hit(s); AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.Scheme.JointlySurjective, AlgebraicGeometry.Scheme.Hom.cover, AlgebraicGeometry.QuasiCompactCover.singleton, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.QuasiCompactCover.of_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned properness and covering declarations are for schemes, not covers of general algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsImmersion\"",
+   "results": "0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned properness and covering declarations are for schemes, not covers of general algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.space|AlgebraicSpace|weak.?chow|reasonable.stratification",
+   "results": "0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned properness and covering declarations are for schemes, not covers of general algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak Chow lemma for a separated finite type algebraic space over an affine base",
+   "results": "8 hit(s); AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned properness and covering declarations are for schemes, not covers of general algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:37-42."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-eventually-proper",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective).",
+   "via": [
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-weak-chow",
+  "worker": "stage1",
+  "summary": "Read Tag 089J and its inputs. Split off bounded atlas fibres and maximum-degree stratification, the configuration compactification before properness, and the refined dense-open valuative criterion. Proved properness by scheme valuation lifting after a field extension, then strong induction on the atlas degree. Expanded finite disjoint unions and universal surjectivity. No statement change. Repair by Q133: step 4 now verifies affine-test quasi-compactness of both p and h using the existing lem-sfb-space-qcqs-permanence, after checking absolute quasi-separatedness of X and H. The weak-Chow statement and all other steps are unchanged.",
+  "blueprint": "The supporting weak-Chow input to the eventually-proper prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded created.item chain. Latest blueprint file sk-thm-sf-ctf-stability-direct-images.proof.md was read; no new unit route is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-affine-immersion",
+    "why": "Generic geometric input in the Stacks 089J construction, used with exactly the hypotheses stated; no statement of this unit replaces it."
+   },
+   {
+    "node": "lem-chow-closed-model",
+    "why": "Generic geometric input in the Stacks 089J construction, used with exactly the hypotheses stated; no statement of this unit replaces it."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic geometric input in the Stacks 089J construction, used with exactly the hypotheses stated; no statement of this unit replaces it."
+   },
+   {
+    "node": "lem-a1-flat-valuation-lifting",
+    "why": "Generic geometric input in the Stacks 089J construction, used with exactly the hypotheses stated; no statement of this unit replaces it."
+   },
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Generic geometric input in the Stacks 089J construction, used with exactly the hypotheses stated; no statement of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-affine-immersion",
+  "lem-chow-closed-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-flat-valuation-lifting",
+  "lemma-nagata-proper-valuative-criterion-existence-api"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-c995bd054",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-c995bd054 (reviewer sub-agent of L); spot-checked: Read Stacks 089J (spaces-cohomology.tex lemma-weak-chow) in full, plus 089G, 07S8, 03JX, 03KU, 089F and 03MH. The item's statement is 089J. It spells out H-quasi-projective as a quasi-compact immersion into P^n (01VW) and adds universal surjectivity, which step 8 proves by the 03MH point argument. The parent lem-sfb-space-eventually-proper uses exactly this statement in steps 2 and 5. Steps 1-8 follow 089J with an explicit strong induction on the fibre bound. Edge cases X empty and d=1 check out. The three new nodes are true as stated and smaller than the item: lem-sfb-space-etale-maximum-degree (03JX/07S8 top stratum, W_T affine with fewer than d geometric points), lem-sfb-space-chow-configuration (construction of V, Z and H; it stops before properness and the induction, so it is not a D1 restatement) and lem-sfb-space-dense-open-valuative-proper (089G with h an open immersion and (3) from separatedness). They duplicate neither sk-lem-nagata-sketch-dense-valuative (schemes) nor any other node found by rg -L. Accepted tool uses: lem-chow-affine-immersion, lem-chow-closed-model, lem-trf-space-fibre-products-etale-covers, lem-a1-flat-valuation-lifting, lemma-nagata-proper-valuative-criterion-existence-api. Batch-5 flags: every cited trf/a1 node is a generic definition or foundational lemma (algebraic space, valuation ring, fibre products, point topology, affine atlas, flat valuation lifting), outside the trace-formula and Poincaré proofs, so accepted. FIX, citations only: in chow-configuration, cite def-weil-open-immersion and def-nagata-projective-space-base-change in the statement. In etale-maximum-degree, cite def-weil-open-immersion and lem-sfb-space-reduced-closed-support, and add [def-weil-field] for Omega to the statement and stmt_deps. In item step 4, cite [lem-sfb-space-chow-configuration] in place of 'the configuration node'.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceWeakChow",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_proper_surjective_quasiProjective_scheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceWeakChow.lean",
+  "statement": "theorem exists_proper_surjective_quasiProjective_scheme_cover (A : Type u) [CommRing A] (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (a : X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec (.of A))))) (ha_sep : MapIsSeparated a) (ha_ft : MapIsFiniteType a) : ∃ (n : ℕ) (X' : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (π : schemeSpace X' ⟶ X) (j : X'.left ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A))), CompactSpace X'.left ∧ X'.left.IsSeparated ∧ MapIsProper π ∧ IsImmersion j ∧ QuasiCompact j ∧ π.hom.hom ≫ a.hom.hom = yoneda.map (Over.homMk (j ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A))) (specULiftZIsTerminal.hom_ext _ _)) ∧ ∀ (W : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (w : W ⟶ X), pointImage (Limits.pullback.snd π.hom w.hom).hom = Set.univ",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Review FIX (2026-10-24): universal surjectivity is stated as `pointImage (Limits.pullback.snd π.hom w.hom).hom = Set.univ` with pointImage of the stmt_dep def-a1-space-point-topology (the node's \"surjective on underlying point sets\"), instead of `Function.Surjective (mapPoint …)`, whose owner def-sfb-proper-curve-moduli is not a stmt_dep of the item. The two are equivalent (mapPoint f (Quot.mk a) = Quot.mk (a.map f), so pointImage f is the range of mapPoint f); nothing else changed.",
+  "fixed_by": "NT-stage2-cc-42d536315"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42d536315",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Statement matches Stacks 089J/01VW(2)/03MH and the node clause by clause: MapIsSeparated/MapIsFiniteType hypotheses (affine-test qc = topological qc over affine Spec A), qc separated scheme X', MapIsProper π (Stacks qc, as step 4 proves), qc immersion j into ProjectiveSpace (ULift (Fin (n+1))) over Spec A, aπ=qj as Yoneda equality, surjectivity for all algebraic-space base changes; edge cases (empty X, A=0, n=0, empty W) fine; no H4 dup, sorry only, docstrings complete. H2: Function.Surjective (mapPoint …) uses mapPoint owned by def-sfb-proper-curve-moduli (not a stmt_dep); FIX restates it as pointImage (Limits.pullback.snd π.hom w.hom).hom = Set.univ (pointImage owned by stmt_dep def-a1-space-point-topology; equivalent). fixes/: module, lean-record.json (verbatim statement), report.md. nt_compile --json clean 12.3 s rc 0; refit_record/check_lean_text no refusals."
+ }
+}

@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-space-picard-stack-smooth",
+ "kind": "statement",
+ "title": "Smooth Picard stack for algebraic-space curve families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to S$ a morphism of algebraic spaces [def-trf-algebraic-space] that is proper, flat and of finite presentation. Proper means separated, of finite type and universally closed; flatness and finite presentation are tested on etale scheme charts, and finite presentation includes quasi-compactness and quasi-separatedness [lem-sfb-space-flat-proper-fp-locality]. For each $S$-scheme $B$, put $X_B=X\\times_SB$ [lem-trf-space-fibre-products-etale-covers]. Define $\\mathcal P_f(B)$ to be the groupoid of line modules on the small etale site of $X_B$, meaning $\\mathcal O_{X_B}$-modules etale locally isomorphic to $\\mathcal O_{X_B}$, with module isomorphisms as arrows. For $u:B'\\to B$ pullback is along the canonical ringed etale topoi: $u_X^*M=\\mathcal O_{X_{B'}}\\otimes_{u_X^{-1}\\mathcal O_{X_B}}u_X^{-1}M$ [lem-trf-space-enlarged-etale-ringed-site-model]. Arrows over $u$ are isomorphisms $u_X^*M\\cong M'$, and composition uses the canonical composition isomorphism of module pullback. Then $\\mathcal P_f$ is an algebraic stack [def-sfb-algebraic-moduli-stack]. If every geometric fibre $X\\times_S\\operatorname{Spec}\\Omega$, for every algebraically closed field $\\Omega$ and map $\\operatorname{Spec}\\Omega\\to S$, has dimension at most one (dimension is the supremum of the Krull dimensions of affine etale charts [def-kun-topological-krull-dimension], with $\\dim\\varnothing=-\\infty$), then $\\mathcal P_f$ is smooth over $S$: it admits a smooth surjective scheme atlas $a:V\\to\\mathcal P_f$ for which $V\\to S$ is smooth [def-sbc-smooth-morphisms]. Surjectivity of this atlas means that every object of $\\mathcal P_f$ over a field $K$ lifts to $V$ after some field extension $K\\hookrightarrow K'$, with an isomorphism to the pulled-back object. No hypothesis on $f_*\\mathcal O_X$, sections, reducedness, connectedness, nonempty fibres or Noetherian bases is imposed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D04 (proposition-pic), for algebraicity with algebraic-space total space; moduli.tex Tag 0DPJ (lemma-pic-curves-smooth), under the standing algebraic-space hypotheses of section-picard-stack, and Tag 0DMB (lemma-pic-qs-lfp)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-algebraic-moduli-stack",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-proper-quot-functor",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-derived-pullback",
+  "lem-sfb-space-coherent-stack-general",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-space-coherent-stack-general] for $f:X\\to S$. Properness gives separatedness by [lem-sfb-space-flat-proper-fp-locality], so its hypotheses hold and $\\mathcal C_{X/S}$ is algebraic and locally of finite presentation over $S$. The groupoid $\\mathcal P_f$ in the statement is exactly $\\mathcal L_{X/S}$ of [lem-sfb-space-invertible-open-coherent], with identical tensor pullbacks and arrows. That lemma realizes it as an open subcategory of $\\mathcal C_{X/S}$. By [lem-sfb-open-stack-algebraic-lfp], $\\mathcal P_f$ is algebraic and locally of finite presentation over $S$. This proves algebraicity without imposing a fibre-dimension bound.",
+   "uses": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-open-stack-algebraic-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 09DS (theorem-coherent-algebraic-general), 0D03 (lemma-picard-stack-open-in-coh), 0D04 (proposition-pic); moduli.tex Tag 0DMB (lemma-pic-qs-lfp)"
+   }
+  },
+  {
+   "text": "Now assume the geometric fibre bound. To apply [lem-sfb-stack-infinitesimal-smooth-criterion], fix an arbitrary first order thickening $T=\\operatorname{Spec}A\\hookrightarrow T'=\\operatorname{Spec}A'$ of affine $S$-schemes and a line module $L$ on $Z=X_T$. Write $I=\\ker(A'\\to A)$, so $I^2=0$ and $A=A'/I$. Set $Z'=X_{T'}$. By [lem-sfb-space-flat-proper-fp-locality], $Z'\\to T'$ is flat, proper and finitely presented. Every geometric fibre is a geometric fibre from the hypothesis: a map $\\operatorname{Spec}\\Omega\\to T'$ composes to $S$, and its fibre product with $Z'$ is $X\\times_S\\operatorname{Spec}\\Omega$. Thus $Z'\\to T'$ is a family in [lem-sfb-curve-limit-preservation]. It suffices to extend $L$ to $Z'$.",
+   "uses": [
+    "lem-sfb-stack-infinitesimal-smooth-criterion",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-curve-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPJ (lemma-pic-curves-smooth), reduction to affine first order thickenings"
+   }
+  },
+  {
+   "text": "Order the finitely generated $\\mathbf Z$-subalgebras $A'_i\\subseteq A'$ by inclusion and put $I_i=I\\cap A'_i$, $A_i=A'_i/I_i$, $T'_i=\\operatorname{Spec}A'_i$, $T_i=\\operatorname{Spec}A_i$. By [lemma-nagata-noetherian-inverse-system-affine], $T'=\\varprojlim T'_i$ with affine transitions. By [lem-weil-pbc-finite-type-over-noetherian], all $T'_i$ are Noetherian. The ideals $I_i$ square to zero. The quotients $A_i$ inject into $A$, and their directed union is $A$: every element of $A$ has a lift in $A'$ contained in one $A'_i$. Thus $T=\\varprojlim T_i$ by the affine spectrum universal property. Extension of $I_j$ need not equal $I_i$ for $i\\geq j$; the stage thickenings are not asserted to form cartesian squares.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK (lemma-descend-finite-presentation); limits.tex Tag 01Z0 (lemma-noetherian-approximation), affine finitely generated subrings"
+   }
+  },
+  {
+   "text": "By [lem-sfb-curve-limit-preservation], after choosing a stage $i_0$ there is a flat proper finitely presented family $Z'_{i_0}\\to T'_{i_0}$ with geometric fibres of dimension at most one whose pullback to $T'$ is $Z'$. For $i\\geq i_0$ set $Z'_i=Z'_{i_0}\\times_{T'_{i_0}}T'_i$ and $Z_i=Z'_i\\times_{T'_i}T_i$. They have the same family properties by [lem-sfb-space-flat-proper-fp-locality]. The $Z_i$ have affine transition maps, since the $T_i$ are affine, and limit $Z$, by the universal property of fibre products and inverse limits. They are quasi-compact and quasi-separated because they are proper over affine schemes. Apply [lem-sfb-space-invertible-limit-descent] to this inverse system: at some later stage $i$ there is a line module $L_i$ on $Z_i$ whose pullback is isomorphic to $L$. Notice that $T_i\\hookrightarrow T'_i$ varies with $i$; it is not required to be the pullback of a fixed stage thickening.",
+   "uses": [
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-invertible-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 07SK, 08K0, 08K1, 0D4K (descent of curve families), 0D2X (lemma-descend-invertible-modules)"
+   }
+  },
+  {
+   "text": "Let $J_i$ be the ideal of $Z_i\\hookrightarrow Z'_i$. This is a thickening by [lem-sfb-space-thickening-base-change], and on any affine etale chart $\\operatorname{Spec}B'\\to Z'_i$ it has ideal $I_iB'$, whose square is zero. Choose a jointly surjective family of such charts, each of finite type over the Noetherian affine $T'_i$, as permitted by local finite presentation on charts. By [lem-weil-pbc-finite-type-over-noetherian], $B'$ is Noetherian. By [lem-trf-noetherian-submodule-finitely-presented], its ideal $I_iB'$ is finitely generated; since it is killed by itself, the same generators generate it over $B'/I_iB'$. By [lem-sfb-space-closed-immersion-quasi-coherent-modules], $J_i$ is a quasi-coherent ideal of $\\mathcal O_{Z'_i}$, and since $J_i\\cdot J_i=0$ it is the direct image of a quasi-coherent $\\mathcal O_{Z_i}$-module, again written $J_i$: this is $J_i$ with the quotient action. The base changes $\\operatorname{Spec}(B'/I_iB')\\to Z_i$ of the chosen charts form a jointly surjective etale family, their rings are Noetherian as quotients of $B'$, and on them $J_i$ is associated to the finitely generated $B'/I_iB'$-module $I_iB'$. Hence $J_i$ is coherent in the sense of [lem-sfb-noetherian-space-fibre-cohomology-bound]. The scheme $T_i$ is Noetherian as the closed subscheme defined by $I_i$ of the Noetherian affine $T'_i$; equivalently its ring is a quotient of a Noetherian ring.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-noetherian-submodule-finitely-presented",
+    "lem-sfb-noetherian-space-fibre-cohomology-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 09ZX (lemma-base-change-thickening); spaces-morphisms.tex Tag 04ZL (lemma-finite-presentation-noetherian); spaces-cohomology.tex Tag 0A4T"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-noetherian-space-fibre-cohomology-bound] with $p:Z_i\\to T_i$, $d=1$ and $F=J_i$. The base is Noetherian, $p$ is proper and all its geometric fibres have dimension at most one; coherence was checked in Step 5. Thus $R^2p_*J_i=0$. Properness makes $p$ quasi-compact and quasi-separated, and $T_i$ is affine, so [lem-sfb-space-affine-base-higher-image-sections] gives $H^2(Z_i,J_i)\\cong\\Gamma(T_i,R^2p_*J_i)=0$. Exactness of [lem-sfb-space-square-zero-picard-obstruction] now supplies a line module $L'_i$ on $Z'_i$ and an isomorphism $L'_i|_{Z_i}\\cong L_i$.",
+   "uses": [
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-space-square-zero-picard-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPJ (lemma-pic-curves-smooth); spaces-cohomology.tex Tags 0A4T, 08EX; spaces-more-morphisms.tex Tag 0DNM"
+   }
+  },
+  {
+   "text": "Pull $L'_i$ back along $Z'\\to Z'_i$. A tensor pullback of a line module is a line module: pull back its etale local trivializations, where $\\mathcal O\\otimes\\mathcal O$ is the target structure sheaf. The resulting $L'$ restricts to $L$ because both composites $Z\\to Z_i\\to Z'_i$ and $Z\\to Z'\\to Z'_i$ agree, and the pullback composition isomorphisms identify the restriction with the pullback of $L_i$. Compose with the isomorphism in Step 4. This proves essential surjectivity for every affine first order thickening over $S$, including non-Noetherian ones. Step 1 supplies local finite presentation, so [lem-sfb-stack-infinitesimal-smooth-criterion] proves smoothness in precisely the atlas sense asserted. The field-extension formulation of surjectivity follows from [lem-sfb-stack-chartwise-smooth-etale-calculus].",
+   "uses": [
+    "lem-sfb-stack-infinitesimal-smooth-criterion",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DPJ (lemma-pic-curves-smooth); stacks-more-morphisms.tex Tag 0DP0 (lemma-smooth-formally-smooth)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-coherent-stack-general",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-invertible-open-coherent",
+  "lem-sfb-open-stack-algebraic-lfp",
+  "lem-sfb-stack-infinitesimal-smooth-criterion",
+  "lem-sfb-curve-limit-preservation",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-space-invertible-limit-descent",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-sfb-noetherian-space-fibre-cohomology-bound",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-sfb-space-square-zero-picard-obstruction",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli.tex",
+  "place": "Tag 0DPJ, with its non-Noetherian lifting argument made explicit by Noetherian approximation (spaces-limits.tex Tags 07SK, 08K0, 08K1, 0D4K, 0D2X); algebraicity follows quot.tex 0D04."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented algebraic space over a scheme with fibres of dimension at most one, the stack of invertible modules is algebraic and smooth over the base",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, Algebra.Smooth.flat, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsSmooth\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "grep",
+   "query": "PicardStack|Picardstack|picard_stack|stack.*invertible|invertible.*stack",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard stack of line bundles on a flat proper finitely presented algebraic space is algebraic and is smooth when the fibres have dimension at most one",
+   "results": "OK: 8 hits; AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, CommRing.Pic.instSubsingletonOfIsLocalRing, AlgebraicGeometry.IsSmooth, CommRing.relPic, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.mapAlgebra_mapAlgebra, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stack of invertible sheaves of a flat proper finitely presented algebraic space with geometric fibres of dimension at most one admits a smooth surjective scheme atlas smooth over the base",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|PolarizedCurves|polarized",
+   "results": "OK: 3 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat families of curves have a relatively ample invertible sheaf locally for a smooth surjective base cover",
+   "results": "OK: 8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stack of line bundles on a proper flat finitely presented algebraic space is algebraic and smooth if geometric fibres have dimension at most one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and ring Picard groups do not construct or prove smoothness of this algebraic-space stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and ring Picard groups do not construct or prove smoothness of this algebraic-space stack"
+  },
+  {
+   "tool": "grep",
+   "query": "PicardStack|picard_stack|stack.*invertible|invertible.*stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and ring Picard groups do not construct or prove smoothness of this algebraic-space stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth algebraic Picard stack of invertible sheaves on an algebraic space family of curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.instCoeSortType\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": CoeSort (Pic R) (Type u)\", \"doc\": \"There is a canonical coercion from elements of the Picard group $\\\\mathrm{Pic}(R)$ to their corresponding invertible $R$-modules, where each element $M \\\\in \\\\mathrm{Pic}(R)$ is represented by its underl\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_apply_coe\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : (Submodule R A)ˣ ⧸ (Units.map ↑(Submodule.spanSingleton R)).range),\\n  ↑((Submodule.unitsQuotEquivRelPic R A) a) =\\n    ↑((QuotientGroup.quotientKerEquivRange (Subm\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules is multiplicatively isomorphic to the relative Picard subgroup $ \\\\mathrm{relPic}\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subgroup (Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(M : Pic R) : Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": (Submodule R A)ˣ ⧸ (Units.map (spanSingleton R).toMonoidHom).range ≃* relPic R A\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules (those generated by a single element) is multiplicatively isomorphic to the rela\"}\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and ring Picard groups do not construct or prove smoothness of this algebraic-space stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible modules on proper flat families of algebraic spaces form a smooth moduli stack in relative dimension one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and ring Picard groups do not construct or prove smoothness of this algebraic-space stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-smooth-polarization-cover",
+  "date": "2026-10-23",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space.",
+   "via": [
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-picard-stack-smooth",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-base algebraic-space statement. Algebraicity and local finite presentation follow the coherent stack and its open rank-one locus. For smoothness, descended each affine square-zero lifting problem and its line module to a Noetherian stage, killed its coherent H2 obstruction there, and pulled the lift back. This avoids the cycle through the existing curve scheme-cover/cohomological-bound route and does not drop the Noetherian hypothesis of Stacks 0A4T. Three statement-only inputs are new; no Mathlib matches.",
+  "blueprint": "The inherited supporting Picard-stack input to the stable-curve/local-polarization branch recorded in blueprint.from.place, not a replacement of the six-functor unit route. Read latest main-20261023-1620 sec-six-functors-basics/sk-thm-sf-ctf-stability: direct-images proof (3) contains the proper/open compactification route, with no duplicate Picard-stack statement. Steps 1 and 2--7 realize the algebraicity and smoothness assertions used by Tag 0DQ0 in the inherited prerequisite chain.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic affine approximation by finitely generated integer subalgebras, used only to make the Picard infinitesimal lifting test Noetherian; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian stability and the explicit integer-base clause check Noetherian approximation stages and their affine charts; no alteration or six-functor route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-3d70cb880",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-3d70cb880 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 3 new nodes, every cited statement, and the Stacks sources 0DPJ (moduli.tex l.1366-1402), 0D03 (quot.tex l.2601-2641), 0DNM (spaces-more-morphisms.tex l.2265-2290) and 0A4T (spaces-cohomology.tex l.4409-4440). The statement is unchanged and is the algebraic-space form of 0D04/0DPJ. Confirmed source error: 0DPJ applies 0A4T, which needs a locally Noetherian base and coherent coefficients, to an arbitrary affine square-zero thickening. The delivery repairs this by Noetherian approximation (Steps 3-6) and marks the proof agent-written. It correctly avoids lem-sfb-proper-space-curve-qcoh-bound, an ancestor of the item, which would close a cycle. Steps 1-4, 6 and 7 check out: separatedness from properness, the open-substack lfp lemma, the infinitesimal criterion, descent of the family and of the line module with affine transitions (limit of the Z_i is Z), d=1 vanishing, the affine-base Leray isomorphism, and the obstruction exactness. The new nodes are true and statement-only, and none restates the item or duplicates a node. Their scheme analogues (lem-sfb-invertible-open-in-coherent-stack, lem-sfb-square-zero-picard-obstruction, lem-sfb-proper-quasicoherent-fibre-dimension-vanishing) do not cover algebraic-space sources. Tested on F=0 (U_F = T minus f(X_T)), empty X, J=0, split thickenings and d=0. No cycle and no SGA. The declared tool uses (Nagata approximation, finite type over Noetherian) are accepted. Batch-5 flags: all are general definitions or generic space foundations (def-trf-algebraic-space, qcoh/module functors, ringed-site model, Noetherian-submodule Mathlib leaf), and the other flagged nodes reach sec-trace-formula only through def-trf-algebraic-space; none is a trace-formula or Poincare step. FIX (2 faults): (1) B3/E1 in lem-sfb-noetherian-space-fibre-cohomology-bound: the coherence convention is now etale-local (quasi-coherent, and finitely generated on some jointly surjective Noetherian affine etale family; this is Stacks' coherent), and def-weil-pbc-noetherian-ring and def-weil-finitely-generated-module were added to stmt_deps. (2) C1 in item Step 5: cited lem-sfb-space-closed-immersion-quasi-coherent-modules for quasi-coherence of J_i and its quotient-action O_{Z_i}-module structure, which Step 6's two cited nodes require; the step now checks coherence on the base-changed covering charts. proof_deps updated.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePicardStackSmooth",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.picard_stack_smooth",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.Hom",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.identity",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.composition",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.category_laws",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.instCategory",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.forgetTest",
+   "AlgebraicGeometry.AlgebraicSpace.PicardModuli.category",
+   "AlgebraicGeometry.AlgebraicSpace.picard_stack_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePicardStackSmooth.lean",
+  "statement": "theorem picard_stack_smooth {S : Scheme.{u}} (X : AlgebraicSpace S) (f : X ⟶ schemeSpace (Over.mk (𝟙 S))) (hproper : MapIsProper f) (hflat : MapIsFlat f) (hfp : ProperQuotFinitePresentation f) : IsAlgebraicModuliStack (PicardModuli.category f) ∧ ((∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ S) (U : (properQuotFibre f (CostructuredArrow.mk (yoneda.map (Over.homMk (U := Over.mk a) (V := Over.mk (𝟙 S)) a (Category.comp_id a))))).EtaleSite), IsAffine U.obj.left.left → topologicalKrullDim U.obj.left.left ≤ 1) → ∃ (V : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj V)) (PicardModuli.category f)), IsSmoothModuliAtlas (PicardModuli.category f) V a ∧ Smooth V.hom ∧ IsSurjectiveModuliMap a)",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The total Picard category has actual small-etale line modules and canonical tensor-pullback isomorphisms, without coherent-family conditions on its objects. Algebraicity is unconditional on dimension; the conditional smooth atlas retains field-extension local lifting. Geometric fibre dimension is stated on every affine etale chart, exactly the supremum convention including the empty fibre. Added statement dependencies are landed owners of the existing fibre-product, tensor-coherence, morphism-property and surjectivity interfaces used in this construction; no statement correction or new node. Returned head 073f5ba5e243 H2 repair: cite the now-landed def-sfb-surjective-moduli-map as owner of the plain IsSurjectiveModuliMap predicate; the chartwise calculus theorem stays only in proof_deps. CoherentModuli.fibreMap_laws remains a genuine theorem dependency of the eqToIso transports."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-433ec76ec",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of returned head 073f5ba5 (H2). Only change: stmt_deps lem-sfb-stack-chartwise-smooth-etale-calculus → def-sfb-surjective-moduli-map (landed Q87, existing:true on CategoryTheory.IsSurjectiveModuliMap; snapshot node identical to live), theorem kept in proof_deps, lean.note extended. Lean byte-identical to the reviewed head, live item still unlanded. Mechanical finding: lem-sfb-space-coherent-stack-general is genuine, because the statement uses CoherentModuli.fibreMap_laws, a theorem (functor laws of the pullback.map properQuotFibreMap) needed for the eqToIso transports in PicardModuli.identity/composition; PASS on that point. Clauses re-confirmed against live declarations: MapIsProper/MapIsFlat/ProperQuotFinitePresentation; small-etale IsLineModule objects; canonical moduleTensorPullback arrows with moduleTensorPullbackId/moduleTensorComposition; unconditional IsAlgebraicModuliStack; chartwise geometric-fibre dim<=1 (empty fibre vacuous, Omega : Type u); IsSmoothModuliAtlas ∧ Smooth V.hom ∧ IsSurjectiveModuliMap. No hollow defs, sorry only in the two theorems, docstrings, statement verbatim, report sections present. No file changed, nothing compiled."
+ }
+}

@@ -28,27 +28,20 @@ public import Mathlib.CategoryTheory.Products.Basic
 public import Mathlib.CategoryTheory.Sites.Grothendieck
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.KFlatRingedToposPullback
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.CategoryTheory.ClosedAdjunctionComparison
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.TensorParameterComposition
+public import Sheaf.Paper.CoefficientSystemScalarCalculus
+import Sheaf.Paper.CoefficientTotalTensorEvaluation
+import Sheaf.Paper.CoefficientActualScalarDerivedPair
+import Sheaf.Paper.PrescribedScalarTensorComparison
+import Sheaf.Paper.SemilinearEvaluationAcyclicLift
+import all Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
+import Mathlib.CategoryTheory.Adjunction.Evaluation
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 /-! # Coherent derived coefficient-system evaluation
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0A95 and 0941;
@@ -70,9 +63,12 @@ The natural number n denotes the positive coefficient exponent n+1.
 
 @[expose] public section
 set_option autoImplicit false
-set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option Elab.async false
+set_option backward.defeqAttrib.useBackward true
+set_option synthInstance.maxSize 128
+set_option linter.unusedSectionVars false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 -- Use coefficient-universe sheafification: the generic instance requires a successor.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -80,353 +76,36 @@ universe t u c v a b r w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite AlgebraicGeometry
 namespace WeilConjectures
 
+attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
+  DerivedCategory.Q DerivedCategory.Qh
+
+attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
+  SheafOfModules.instPreadditive HomologicalComplex.instPreadditive
+
+section StandardCoefficientInstances
+
+attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian
+
+attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
+  SheafOfModules.monoidalCategory HasDerivedCategory.standard
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Derived termwise global sections, keeping the strict tower until after deriving.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientTowerSections :
-    (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ (ℕᵒᵖ ⥤ AddCommGrpCat.{max u (t+1)}) :=
-  (Functor.whiskeringRight ℕᵒᵖ (scalarReductionSource l E W)
-    AddCommGrpCat.{max u (t+1)}).obj
-      (preadditiveCoyoneda.obj (op (SheafOfModules.unit
-        (completedIntegralCoefficientSheafUnrestricted l E W))))
-
-/-- Global sections on towers are additive, component by component.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: at every level, Hom from the module unit preserves addition of maps.
-Natural transformations are equal when all components are equal. -/
-theorem coefficientTowerSections_additive : (coefficientTowerSections l E W).Additive := by
-  unfold coefficientTowerSections
-  infer_instance
-
-/-- Additivity needed for the total right derived tower-sections functor.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable instance coefficientTowerSectionsAdditive :
-    (coefficientTowerSections l E W).Additive := coefficientTowerSections_additive l E W
-
-/-- The standard derived category of strict abelian-group towers.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable instance coefficientAbTowersDerived :
-    HasDerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) := HasDerivedCategory.standard _
-
-/-- The standard derived category of the mapping complexes' abelian groups.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable instance coefficientAbDerived :
-    HasDerivedCategory AddCommGrpCat.{r} := HasDerivedCategory.standard _
-
-/-- Abelian-group towers admit simultaneous K-injective resolutions.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: identify strict towers with abelian sheaves on the sequence site over a point.
-This is Grothendieck abelian, so apply the functorial K-injective resolution theorem. -/
-theorem coefficientAbTowers_haveKInjectives :
-    Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) := by
-  sorry
-
-/-- Simultaneous K-injectives for the mapping-complex towers.
-Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable instance coefficientAbTowersKInjectives :
-    Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) :=
-  coefficientAbTowers_haveKInjectives.{r}
-
-/-- Inverse limit of abelian-group towers preserves addition.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: compose with every limit projection; the two maps become the same sum.
-The projections jointly detect equality. -/
-theorem coefficientAbLimit_additive :
-    (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}).Additive := by
-  exact Functor.additive_of_preserves_binary_products _
-
-/-- Additivity for the mapping-complex total-limit functor.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable instance coefficientAbLimitAdditive :
-    (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}).Additive :=
-  coefficientAbLimit_additive.{r}
-
-/-- The actual total right derived limit on mapping-complex towers.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable abbrev coefficientMappingLimit :
-    DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
-      DerivedCategory AddCommGrpCat.{r} :=
-  (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
-    AddCommGrpCat.{r}).rightDerivedFunctor
-
-/-- The derived evaluation on strict mapping-complex towers.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable abbrev coefficientMappingEvaluation (n : ℕ) :
-    DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤
-      DerivedCategory AddCommGrpCat.{r} :=
-  ((evaluation ℕᵒᵖ AddCommGrpCat.{r}).obj (op n)).mapDerivedCategory
-
-/-- Actual mapping-limit projections, fixed on simultaneous K-injective resolutions.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: apply the ordinary limit projection to a K-injective tower, use the exact
-localization comparison for evaluation, and descend by the derived universal property.
-Every tower has a K-injective representative; hence this characterization is unique. -/
-theorem coefficientMappingProjection_exists (n : ℕ) :
-    ∃! π : coefficientMappingLimit.{r} ⟶ coefficientMappingEvaluation.{r} n,
-      ∀ (I : CochainComplex (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ℤ) [I.IsKInjective],
-        π.app (DerivedCategory.Q.obj I) ≫
-          ((evaluation ℕᵒᵖ AddCommGrpCat.{r}).obj
-            (op n)).mapDerivedCategoryFactors.hom.app I =
-        (Functor.rightDerivedFunctorObjQIso
-          (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{r}) ⥤ AddCommGrpCat.{r}) I).hom ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-            (lim.π (op n)) (ComplexShape.up ℤ)).app I) := by
-  sorry
-
-/-- The mapping-limit projection defined by its unique K-injective normalization.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientMappingProjection (n : ℕ) :=
-  (coefficientMappingProjection_exists.{r} n).choose
-
-/-- The coherent global derived mapping-complex system H_W.
-It derives termwise global sections after exact scalar restriction of the actual
-sequence-site internal Hom, and hence retains all strict transition data.
-Source: Stacks 08JA, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientSequenceGlobalHom :
-    (coefficientSequenceDerived l E W)ᵒᵖ × coefficientSequenceDerived l E W ⥤
-      DerivedCategory (ℕᵒᵖ ⥤ AddCommGrpCat.{max u (t+1)}) :=
-  coefficientSequenceInternalHom l E W ⋙ coefficientSequenceDerivedRestriction l E W ⋙
-    (coefficientTowerSections l E W).rightDerivedFunctor
-/-- The base-change map is defined by evaluation and tensor-Hom transposition.
-This definition takes place in the derived categories, before any finite evaluation.
-Source: Stacks 08J9 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-def coefficientBaseChangeHom
-    {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P Q : A) :
-    F.obj (HA.obj (op P, Q)) ⟶ HB.obj (op (F.obj P), F.obj Q) :=
-  SB.transpose _ (F.obj P) (F.obj Q)
-    (μ.inv.app (HA.obj (op P, Q), P) ≫ F.map (SA.evaluation P Q))
-
-/-- Coherence of an evaluation-defined comparison, as actual system-map equations.
-The transpose equation includes evaluation; the composition equation concerns internal
-composition objects, and is stronger than preservation of composition on Hom sets.
-Source: Stacks 08J9, 0A98 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-structure CoefficientEvaluationCompatible
-    {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) : Prop where
-  /-- Naturality in both derived inputs. -/
-  naturality : ∀ (P Q P' Q' : A) (f : P' ⟶ P) (g : Q ⟶ Q'),
-    F.map (HA.map
-        (Prod.mkHom (f.op) (g))) ≫ coefficientBaseChangeHom SA SB F μ P' Q' =
-      coefficientBaseChangeHom SA SB F μ P Q ≫ HB.map
-        (Prod.mkHom ((F.map f).op) (F.map g))
-  /-- Compatibility with every tensor-Hom transpose, before evaluation at a level. -/
-  transpose : ∀ (T P Q : A) (f : SA.tensor.obj (T, P) ⟶ Q),
-    F.map (SA.transpose T P Q f) ≫ coefficientBaseChangeHom SA SB F μ P Q =
-      SB.transpose (F.obj T) (F.obj P) (F.obj Q) (μ.inv.app (T, P) ≫ F.map f)
-  /-- Compatibility with internal composition as a system morphism. -/
-  composition : ∀ P Q V : A,
-    F.map (SA.composition P Q V) ≫ coefficientBaseChangeHom SA SB F μ P V =
-      μ.hom.app (HA.obj (op Q, V), HA.obj (op P, Q)) ≫
-        SB.tensor.map
-        (Prod.mkHom (coefficientBaseChangeHom SA SB F μ Q V)
-          (coefficientBaseChangeHom SA SB F μ P Q)) ≫
-        SB.composition (F.obj P) (F.obj Q) (F.obj V)
-
-/-- The enriched adjunction map, defined as the adjunct of base change followed
-by internal Hom of the counit. Its invertibility is a conclusion of the calculus.
-Source: Stacks 08J9, 07A6 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-def coefficientEnrichedAdjunctionMap
-    {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
-    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
-    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
-    (F : A ⥤ B) {G : B ⥤ A} (adj : F ⊣ G)
-    (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P : A) (N : B) :
-    HA.obj (op P, G.obj N) ⟶ G.obj (HB.obj (op (F.obj P), N)) :=
-  adj.homEquiv _ _
-    (coefficientBaseChangeHom SA SB F μ P (G.obj N) ≫
-      HB.map
-        (Prod.mkHom (𝟙 _) (adj.counit.app N)))
-
-/-- Successive actual coefficient restrictions equal restriction by the limit projection.
-Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: the limit-cone equation identifies A→B_m→B_n with A→B_n. Restriction
-composition is the identity on every section and every module morphism. -/
-theorem coefficientRestrictionComp {m n : ℕ} (h : n ≤ m) :
-    normalizedDVRModuleRes l E W h ⋙ scalarReductionRestriction l E W m =
-      scalarReductionRestriction l E W n := by
-  sorry
-
-/-- The ordinary tensor quotient map, as the scalar-extension adjunct of x↦x⊗1.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientOrdinaryQuotientComponent {m n : ℕ} (h : n ≤ m)
-    (M : scalarReductionSource l E W) :
-    (scalarReductionExtension l E W m).obj M ⟶
-      (normalizedDVRModuleRes l E W h).obj ((scalarReductionExtension l E W n).obj M) :=
-  ((scalarReductionExtension_adjunction l E W m).choose.homEquiv _ _).symm
-    ((scalarReductionExtension_adjunction l E W n).choose.unit.app M ≫
-      (eqToIso (coefficientRestrictionComp l E W h)).inv.app
-        ((scalarReductionExtension l E W n).obj M))
-
-/-- The ordinary quotient components give a unique natural transformation.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: naturality follows from the tensor/restriction Hom equivalence and naturality
-of its unit. Its sections send x⊗b to x⊗ρ(b). The component formula gives uniqueness. -/
-theorem coefficientOrdinaryQuotient_exists {m n : ℕ} (h : n ≤ m) :
-    ∃! τ : scalarReductionExtension l E W m ⟶
-      scalarReductionExtension l E W n ⋙ normalizedDVRModuleRes l E W h,
-      ∀ M, τ.app M = coefficientOrdinaryQuotientComponent l E W h M := by
-  sorry
-
-/-- Strict quotient maps between the actual ordinary tensor reductions.
-Source: Stacks 06YY, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientOrdinaryQuotient {m n : ℕ} (h : n ≤ m) :=
-  (coefficientOrdinaryQuotient_exists l E W h).choose
-
-/-- The additive structure of the recorded ordinary finite scalar extension.
-This explicit instance exposes its existing structure without unfolding the derived witness.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable instance coefficientFiniteExtensionAdditive (n : ℕ) :
-    (scalarReductionExtension l E W n).Additive :=
-  (scalarReductionExistence l E W n).choose_spec.choose_spec.choose_spec.choose
-
-/-- Finite reduction's universal counit is invertible on every K-flat representative.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: the recorded derived-change-of-rings witness provides its universal left derived
-pair and asserts invertibility of this exact counit on K-flat complexes. Apply that last
-clause to Q and hQ, with the standard localization and actual completion projection. -/
-theorem coefficientFiniteReductionCounit_isIso
-    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
-    (n : ℕ) : IsIso ((scalarReductionCounit l E W n).app
-      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj Q)) := by
-  exact (scalarReductionDerivedExistence l E W n).choose_spec.choose_spec.2.2 Q hQ
-
-/-- The canonical computation of finite derived reduction on a K-flat complex.
-Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientFiniteReductionModel
-    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
-    (n : ℕ) :
-    (coefficientFiniteDerivedExtension l E W n).obj (DerivedCategory.Q.obj Q) ≅
-      DerivedCategory.Q.obj
-        (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) :=
-  letI : IsIso ((scalarReductionCounit l E W n).app
-      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj Q)) :=
-    coefficientFiniteReductionCounit_isIso l E W Q hQ n
-  (coefficientFiniteDerivedExtension l E W n).mapIso
-      ((DerivedCategory.quotientCompQhIso _).app Q).symm ≪≫
-    asIso ((scalarReductionCounit l E W n).app
-      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj Q)) ≪≫
-    (DerivedCategory.quotientCompQhIso _).app _
-
-/-- Simultaneous K-flat computation of reduction, with its actual strict quotient maps.
-The equality at each level also fixes how the model comparison meets the derived
-finite-reduction comparison, so an unrelated isomorphism of evaluated objects cannot serve.
-Source: Stacks 06YS, 06YY, 0941
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
-def CoefficientReductionModels
-    (R : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
-    (ρ : ∀ n : ℕ, R ⋙ coefficientSequenceDerivedEvaluation l E W n ≅
-      coefficientFiniteDerivedExtension l E W n) : Prop :=
-  ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients
-      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q),
-    (∀ i : ℤ, SheafOfModules.IsFlatOnSite
-      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W)
-        (Q.X i)) →
-    ∃ (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
-      (e : R.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj C)
-      (κ : ∀ n : ℕ,
-        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-          C ≅ ((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-            Q),
-      (∀ n : ℕ,
-        (coefficientSequenceDerivedEvaluation l E W n).map e.hom ≫
-          (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app C ≫
-          DerivedCategory.Q.map (κ n).hom =
-        (ρ n).hom.app (DerivedCategory.Q.obj Q) ≫
-          (coefficientFiniteReductionModel l E W Q hQ n).hom) ∧
-      (∀ (m n : ℕ) (h : n ≤ m),
-        (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)
-            (ComplexShape.up ℤ)).app C ≫
-          ((normalizedDVRModuleRes l E W h).mapHomologicalComplex (ComplexShape.up ℤ)).map
-            (κ n).hom =
-        (κ m).hom ≫ (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h)
-          (ComplexShape.up ℤ)).app Q)
-/-- The pure-tensor formula for a scalar tensor comparison, over general ring sheaves.
-The same chain isomorphism must send every scalar-unit tensor generator to the tensor
-of the scalar-unit sections. Specializing this predicate does not choose another map.
-Source: Stacks 03EK, 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-def CoefficientScalarTensorGenerators
-    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
-    [HasSheafify J AddCommGrpCat.{max c v u}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
-    (A B : Sheaf J CommRingCat.{max c v u})
-    (F : SheafOfModules.{max c v u}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A) ⥤
-      SheafOfModules.{max c v u}
-        ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj B))
-    [hF : F.Additive]
-    (η : ∀ (M : SheafOfModules.{max c v u}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) (V : Cᵒᵖ),
-      M.val.obj V → (F.obj M).val.obj V)
-    (P Q : CochainComplex (SheafOfModules.{max c v u}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
-    (e : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-        ((coefficientTotalTensor.{u, c, v} J A).obj (P, Q)) ≅
-      (coefficientTotalTensor.{u, c, v} J B).obj
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P,
-          (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)) : Prop :=
-  ∀ (p q k : ℤ) (hpq : p + q = k) (V : Cᵒᵖ)
-    (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),
-    (e.hom.f k).val.app V
-      (η (((coefficientTotalTensor.{u, c, v} J A).obj (P, Q)).X k) V
-        (coefficientTensorGenerator.{u, c, v} J A P Q p q k hpq V x y)) =
-      coefficientTensorGenerator.{u, c, v} J B
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
-        ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) p q k hpq V
-        (η (P.X p) V x) (η (Q.X q) V y)
-
-/-- The recorded integral-to-finite adjunction unit on the underlying local section.
-Scalar restriction changes the action only, so this is the very same unit element.
-Source: Stacks 03CZ, 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientIntegralScalarUnitSection (n : ℕ)
-    (M : scalarReductionSource l E W) (V : W.ProEtᵒᵖ) (x : M.val.obj V) :
-    ((scalarReductionExtension l E W n).obj M).val.obj V :=
-  (((scalarReductionExtension_adjunction l E W n).choose.unit.app M).val.app V x)
-
-/-- The ordinary finite scalar-extension tensor comparison is uniquely fixed by
-its unit formula on tensor generators, in every total-degree summand.
-Source: Stacks 03EK, 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus).
-Proof: extension is sheafification of sectionwise scalar tensor. Send
-b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). Balancing gives the
-inverse (b tensor x) tensor (c tensor y) ↦ bc tensor (x tensor y).
-Both commute with restrictions and the signed total differential. Extension
-preserves coproducts by its normalized adjunction. Sheafification and the tensor
-universal properties make the generator equation determine every component. -/
-theorem coefficientScalarTensorIso_exists (n : ℕ)
-    (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
-    ∃! e : ((scalarReductionExtension l E W n).mapHomologicalComplex
-        (ComplexShape.up ℤ)).obj
-          ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-            (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ≅
-      (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-        (integralCoefficientCommRingSheaf l E W n)).obj
-          (((scalarReductionExtension l E W n).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj P,
-           ((scalarReductionExtension l E W n).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj Q),
-      CoefficientScalarTensorGenerators.{u, t+1, t} (Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l E W)
-        (integralCoefficientCommRingSheaf l E W n) (scalarReductionExtension l E W n)
-        (hF := coefficientFiniteExtensionAdditive l E W n)
-        (coefficientIntegralScalarUnitSection l E W n) P Q e := by
-  sorry
-
-/-- The unique ordinary scalar tensor comparison, with its generator normalization retained.
-Source: Stacks 03EK, 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientScalarTensorIso (n : ℕ)
-    (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :=
-  (coefficientScalarTensorIso_exists l E W n P Q).choose
+attribute [local irreducible] preadditiveCoyoneda SheafOfModules.unit
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+attribute [local irreducible] coefficientOrdinaryScalarAdjunction
+attribute [local irreducible] coefficientOrdinaryQuotientNaturalTransformation
+attribute [local irreducible] scalarReductionExtension
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] coefficientLocalizedCounitModel
+attribute [local irreducible] coefficientFiniteReductionModel
+attribute [local irreducible] CoefficientComparisonEquation CoefficientTransitionEquation
+attribute [local irreducible] coefficientComplexCompositeTransformation
+attribute [local irreducible] coefficientComplexCompositeSourceTransformation
+attribute [local irreducible] coefficientActualScalarDerivedPair
+attribute [local irreducible] coefficientUniqueComparisonChoice
 
 /-- Evaluation on sections, including the canonical coefficient-ring transport.
 Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -436,6 +115,7 @@ noncomputable def coefficientEvaluationSection
     ((coefficientSequenceEvaluation l E W n).obj M).val.obj U :=
   (eqToHom (coefficientSequenceEvaluationAb_eq l E W M n U).symm) x
 
+set_option backward.defeqAttrib.useBackward false in
 /-- Ordinary tensor evaluation is uniquely fixed on the actual sectionwise tensor generators.
 Source: Stacks 03EK, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus).
 Proof: restrict the tensor presheaf to the vertical slice and send x tensor y to
@@ -473,14 +153,44 @@ theorem coefficientEvaluationTensorIso_exists (n : ℕ)
             (ComplexShape.up ℤ)).obj Q) p q k h U
           (coefficientEvaluationSection l E W (P.X p) n U x)
           (coefficientEvaluationSection l E W (Q.X q) n U y) := by
-  sorry
+  -- Supply the already elaborated theorem to the kernel with its local arguments.
+  -- Re-elaborating this application expands the coefficient site's large instances.
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let get (n : Lean.Name) : Lean.Elab.Tactic.TacticM Lean.Expr := do
+      return (← Lean.Meta.getLocalDeclFromUserName n).toExpr
+    let l ← get `l
+    let E ← get `E
+    let W ← get `W
+    let n ← get `n
+    let P ← get `P
+    let Q ← get `Q
+    let getInst (head : Lean.Name) : Lean.Elab.Tactic.TacticM Lean.Expr := do
+      for decl in ← Lean.getLCtx do
+        if decl.type.isAppOf head then return decl.toExpr
+      Lean.throwError "missing local instance {head}"
+    let as ← getInst ``Fact
+    let fs ← getInst ``Field
+    let alg ← getInst ``Algebra
+    let fd ← getInst ``FiniteDimensional
+    let .sort (.succ u) ← Lean.Meta.inferType E | Lean.throwError "field universe absent"
+    let .const _ (t :: _) := (← Lean.Meta.inferType W).getAppFn |
+      Lean.throwError "scheme universe absent"
+    let info ← Lean.getConstInfo ``coefficientTotalTensorEvaluation_existsUnique
+    let levels := info.levelParams.map fun name ↦ if name == `t then t else u
+    let th := Lean.mkConst ``coefficientTotalTensorEvaluation_existsUnique levels
+    (← Lean.Elab.Tactic.getMainGoal).assign
+      (Lean.mkAppN th #[l, as, E, fs, alg, fd, W, n, P, Q])
+    Lean.Elab.Tactic.replaceMainGoal []
 
 /-- The unique ordinary evaluation tensor comparison, fixed before deriving.
 Source: Stacks 03EK, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 noncomputable def coefficientEvaluationTensorIso (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ) :=
-  (coefficientEvaluationTensorIso_exists l E W n P Q).choose
+  coefficientUniqueComparisonChoice (coefficientEvaluationTensorIso_exists l E W n P Q)
 
+attribute [local irreducible] coefficientScalarTensorIso coefficientEvaluationTensorIso
+
+attribute [local semireducible] coefficientTotalTensor in
 /-- Evaluation and finite scalar extension preserve the K-flat models in use.
 Source: Stacks 06YN, 07A4, 0941
 (blueprint: lem-coef-derived-system-evaluation-calculus).
@@ -504,9 +214,76 @@ theorem coefficientTensorModelPreservation :
         (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W n)
         (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  constructor
+  · intro P hP n
+    let (R : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}) :
+        HasDerivedCategory.{max (t + 2) (u + 1)} (SheafOfModules.scalarModules
+          (Scheme.ProEt.topology W) R) := HasDerivedCategory.standard _
+    let : (show SheafOfModules.scalarModules (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) ⥤
+          SheafOfModules.scalarModules (Scheme.ProEt.topology W)
+            (integralCoefficientCommRingSheaf l E W n)
+        from scalarReductionExtension l E W n).Additive :=
+      coefficientFiniteExtensionAdditive l E W n
+    exact CategoryTheory.ScalarHomTensor.pair_preservesKFlat_with_extension.{t+1, t, u,
+      max (t+2) (u+1)}
+      (completedIntegralCommRingProjectionUnrestricted l E W n)
+      (coefficientActualScalarDerivedPair l E W n)
+      (scalarReductionExtension l E W n)
+      (coefficientActualScalarDerivedPair_extension l E W n) P hP
+  · intro P hP n
+    let J := Scheme.ProEt.topology W
+    let A := integralCoefficientCommRingSheaf l E W
+    let R := coefficientSequenceCommRingSheaf l E W
+    let B := A n
+    let F := coefficientSequenceEvaluation l E W n
+    intro Z hZ
+    have hLift : ∃ L : CochainComplex (coefficientSequenceModules l E W) ℤ,
+        L.Acyclic ∧ Nonempty (((F.mapHomologicalComplex (.up ℤ)).obj L) ≅ Z) := by
+      apply SheafOfModules.semilinearEvaluation_acyclicLift.{t+1, t, max u (t+1)}
+      exact hZ
+    obtain ⟨L, hL, ⟨eL⟩⟩ := hLift
+    have hT := hP L hL
+    have hE : ((F.mapHomologicalComplex (.up ℤ)).obj
+        ((coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology J) R).obj
+          (L, P))).Acyclic := by
+      intro i
+      exact (hT i).map F
+    let e := coefficientEvaluationTensorIso l E W n L P
+    have hS : ((coefficientTotalTensor.{u, t+1, t} J B).obj
+        (((F.mapHomologicalComplex (.up ℤ)).obj L),
+          ((F.mapHomologicalComplex (.up ℤ)).obj P))).Acyclic := by
+      intro i
+      exact (hE i).of_iso e
+    let e' := (coefficientTotalTensor.{u, t+1, t} J B).mapIso
+      (eL.prod (Iso.refl ((F.mapHomologicalComplex (.up ℤ)).obj P)))
+    intro i
+    exact (hS i).of_iso e'
 
+set_option backward.defeqAttrib.useBackward false
 
+attribute [local irreducible] coefficientKFlatInclusion
+  CoefficientTensorModels.iso coefficientBaseChangeHom coefficientEnrichedAdjunctionMap
+  CoefficientClosedStructure.tensor CoefficientClosedStructure.transpose
+  CoefficientClosedStructure.evaluation CoefficientClosedStructure.composition
+  CoefficientReductionModels CoefficientScalarTensorGenerators
+
+attribute [local irreducible] coefficientOrdinaryQuotient
+  coefficientOrdinaryQuotientComponent
+
+attribute [local irreducible] CommRingCat.hasForgetToRingCat sheafCompose
+  CommRingCat.instConcreteCategoryRingHomCarrier RingCat.instConcreteCategoryRingHomCarrier
+  SheafOfModules.instCategory HomologicalComplex.instCategory
+  CochainComplex.IsKFlatIndependentCoefficients SheafOfModules.IsFlatOnSite
+  SheafOfModules.siteSheafTensorRight
+  CategoryTheory.Functor.mapHomologicalComplex
+  CategoryTheory.Functor.mapBifunctorHomologicalComplex HomologicalComplex.mapBifunctorMap
+  HomologicalComplex₂.total HomologicalComplex.single
+
+set_option genSizeOf false
+set_option genSizeOfSpec false
+set_option genInjectivity false
+set_option genCtorIdx false
 
 /-- Full data and identities of the coherent coefficient evaluation calculus.
 The fields spell out each conclusion of the node. The normalized-system hypotheses
@@ -530,6 +307,65 @@ structure CoefficientDerivedSystemTensors where
   /-- Each finite tensor is the recorded total tensor on K-flat representatives. -/
   finiteTensorModel : ∀ n : ℕ, CoefficientTensorModels.{u, t+1, t} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W n) (finiteClosed n)
+
+section ModelInterfaceCache
+
+/-- Integral K-flat tensor comparison in the displayed coefficient category.
+Source: Stacks 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+noncomputable def coefficientIntegralTensorModelIso
+    (S : CoefficientDerivedSystemTensors l E W)
+    (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients
+      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q) :
+    DerivedCategory.Q.obj (((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)).obj ((P), (Q)))) ≅
+      S.integralClosed.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :=
+  CoefficientTensorModels.iso (Scheme.ProEt.topology W)
+    (completedIntegralCommRingSheafUnrestricted l E W) S.integralClosed
+    S.integralTensorModel P Q hP hQ
+
+/-- System K-flat tensor comparison in the displayed coefficient category.
+Source: Stacks 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+noncomputable def coefficientSystemTensorModelIso
+    (S : CoefficientDerivedSystemTensors l E W)
+    (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (R := coefficientSequenceCommRingSheaf l E W) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (R := coefficientSequenceCommRingSheaf l E W) Q) :
+    DerivedCategory.Q.obj (((coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology
+      (Scheme.ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)).obj ((P), (Q)))) ≅
+      S.systemClosed.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :=
+  CoefficientTensorModels.iso (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf l E W) S.systemClosed S.systemTensorModel P Q hP hQ
+
+attribute [local instance 2000] HasDerivedCategory.standard in
+/-- Finite K-flat tensor comparison in the displayed coefficient category.
+Source: Stacks 06YU (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+noncomputable def coefficientFiniteTensorModelIso
+    (S : CoefficientDerivedSystemTensors l E W) (n : ℕ)
+    (P Q : CochainComplex (normalizedDVRModules l E W n) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W n) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients
+      (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W n) Q) :
+    DerivedCategory.Q.obj (((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n)).obj ((P), (Q)))) ≅
+      (S.finiteClosed n).tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :=
+  CoefficientTensorModels.iso (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n)
+    (S.finiteTensorModel n) P Q hP hQ
+
+end ModelInterfaceCache
+attribute [local irreducible] coefficientIntegralTensorModelIso
+  coefficientSystemTensorModelIso coefficientFiniteTensorModelIso
+
+attribute [local semireducible] CommRingCat.hasForgetToRingCat sheafCompose
+  CommRingCat.instConcreteCategoryRingHomCarrier RingCat.instConcreteCategoryRingHomCarrier in
 /-- The commutative quotient underlying the recorded scalar restriction.
 Source: Stacks 06YY, node proof step 10
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -544,9 +380,37 @@ set_option linter.defProp false in
 /-- The recorded universal change-of-rings witness, now for B_m → B_n.
 Source: Stacks 06YY, node proof steps 5, 7 and 10
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientFiniteQuotientExistence {m n : ℕ} (h : n ≤ m) :=
+noncomputable def coefficientFiniteQuotientExistence {m n : ℕ} (h : n ≤ m) :
+    ∃ (F : normalizedDVRModules l E W m ⥤ normalizedDVRModules l E W n)
+      (hobj : ∀ M : normalizedDVRModules l E W m,
+        F.obj M = SheafOfModules.changeOfRings (coefficientFiniteQuotient l E W h) M)
+      (_ : ∀ {M N : normalizedDVRModules l E W m} (f : M ⟶ N),
+        F.map f = eqToHom (hobj M) ≫
+          SheafOfModules.changeOfRingsHom (coefficientFiniteQuotient l E W h) M f ≫
+            eqToHom (hobj N).symm)
+      (_ : F.Additive),
+      (∀ {P Q : CochainComplex (normalizedDVRModules l E W m) ℤ} (f : P ⟶ Q),
+        CochainComplex.IsKFlatIndependentCoefficients
+          (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W m) P →
+        CochainComplex.IsKFlatIndependentCoefficients
+          (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W m) Q →
+        QuasiIso f → QuasiIso ((F.mapHomologicalComplex (.up ℤ)).map f)) ∧
+      (F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor
+        (HomotopyCategory.quasiIso (normalizedDVRModules l E W m) (.up ℤ)) ∧
+      ∃ (LF : normalizedDVRDerived l E W m ⥤ normalizedDVRDerived l E W n)
+        (ε : DerivedCategory.Qh ⋙ LF ⟶
+          F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),
+        LF.IsLeftDerivedFunctor ε
+            (HomotopyCategory.quasiIso (normalizedDVRModules l E W m) (.up ℤ)) ∧
+          (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
+          ∀ P : CochainComplex (normalizedDVRModules l E W m) ℤ,
+            CochainComplex.IsKFlatIndependentCoefficients
+              (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W m) P →
+              IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients
     (J := Scheme.ProEt.topology W) (coefficientFiniteQuotient l E W h)
+
+attribute [local irreducible] coefficientFiniteQuotientExistence
 
 /-- Ordinary extension along the actual finite quotient, with tensor objects and maps fixed.
 Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -564,7 +428,7 @@ theorem coefficientFiniteQuotientExtension_obj {m n : ℕ} (h : n ≤ m)
     (M : normalizedDVRModules l E W m) :
     (coefficientFiniteQuotientExtension l E W h).obj M =
       SheafOfModules.changeOfRings (coefficientFiniteQuotient l E W h) M := by
-  sorry
+  exact (coefficientFiniteQuotientExistence l E W h).choose_spec.choose M
 
 /-- Additivity supplied by the recorded change-of-rings witness.
 Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -575,8 +439,21 @@ noncomputable instance coefficientFiniteQuotientExtensionAdditive {m n : ℕ} (h
 set_option linter.defProp false in
 /-- The universal derived pair for the actual finite quotient.
 Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-noncomputable def coefficientFiniteQuotientDerivedExistence {m n : ℕ} (h : n ≤ m) :=
+noncomputable def coefficientFiniteQuotientDerivedExistence {m n : ℕ} (h : n ≤ m) :
+    ∃ (LF : normalizedDVRDerived l E W m ⥤ normalizedDVRDerived l E W n)
+      (ε : DerivedCategory.Qh ⋙ LF ⟶
+        (coefficientFiniteQuotientExtension l E W h).mapHomotopyCategory (.up ℤ) ⋙
+          DerivedCategory.Qh),
+      LF.IsLeftDerivedFunctor ε
+          (HomotopyCategory.quasiIso (normalizedDVRModules l E W m) (.up ℤ)) ∧
+        (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
+        ∀ P : CochainComplex (normalizedDVRModules l E W m) ℤ,
+          CochainComplex.IsKFlatIndependentCoefficients
+            (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W m) P →
+            IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
   (coefficientFiniteQuotientExistence l E W h).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+
+attribute [local irreducible] coefficientFiniteQuotientDerivedExistence
 
 /-- Derived scalar extension B_m → B_n from the recorded change-of-rings construction.
 Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -604,7 +481,7 @@ theorem coefficientFiniteQuotientCounit_isIso {m n : ℕ} (h : n ≤ m)
       (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W m) P) :
     IsIso ((coefficientFiniteQuotientCounit l E W h).app
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  exact (coefficientFiniteQuotientDerivedExistence l E W h).choose_spec.choose_spec.2.2 P hP
 
 /-- The canonical K-flat computation, using precisely the universal change-of-rings counit.
 Source: Stacks 06YY (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -616,12 +493,13 @@ noncomputable def coefficientFiniteQuotientModel {m n : ℕ} (h : n ≤ m)
       DerivedCategory.Q.obj
         (((coefficientFiniteQuotientExtension l E W h).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj P) :=
-  letI := coefficientFiniteQuotientCounit_isIso l E W h P hP
-  (coefficientFiniteQuotientDerived l E W h).mapIso
-      ((DerivedCategory.quotientCompQhIso _).app P).symm ≪≫
-    asIso ((coefficientFiniteQuotientCounit l E W h).app
-      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ≪≫
-    (DerivedCategory.quotientCompQhIso _).app _
+  coefficientLocalizedCounitModel (coefficientFiniteQuotientDerived l E W h) P
+    (((coefficientFiniteQuotientExtension l E W h).mapHomologicalComplex (.up ℤ)).obj P)
+    ((coefficientFiniteQuotientCounit l E W h).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+    (coefficientFiniteQuotientCounit_isIso l E W h P hP)
+
+attribute [local irreducible] coefficientFiniteQuotientModel
 
 /-- Finite-quotient adjunction and tensor data, with both normalizations on representatives.
 The ordinary unit is the actual sheafified 1 tensor x. The derived unit uses the
@@ -649,6 +527,8 @@ structure CoefficientFiniteQuotientData (S : CoefficientDerivedSystemTensors l E
     (S.finiteClosed m).tensor ⋙ coefficientFiniteQuotientDerived l E W h ≅
       (coefficientFiniteQuotientDerived l E W h).prod
         (coefficientFiniteQuotientDerived l E W h) ⋙ (S.finiteClosed n).tensor
+attribute [local semireducible] CommRingCat.hasForgetToRingCat sheafCompose
+  CommRingCat.instConcreteCategoryRingHomCarrier RingCat.instConcreteCategoryRingHomCarrier in
 /-- The ordinary scalar-unit section is sheafification of the module element 1 tensor x.
 This general formula keeps coefficient constructions out of the sectionwise calculation.
 Source: Stacks 03CZ, 03EK (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -663,6 +543,7 @@ noncomputable def coefficientChangeOfRingsUnitSection
   (toSheafify J (SheafOfModules.changeOfRingsPresheaf.{v, c, max c v u} φ M).presheaf).app V
     ((ModuleCat.extendRestrictScalarsAdj (φ.hom.app V).hom).unit.app (M.val.obj V) x)
 
+attribute [local semireducible] SheafOfModules.instCategory in
 /-- The actual finite-quotient tensor unit on a local section, with its scalar action displayed.
 Source: Stacks 03CZ, node proof step 10
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -674,13 +555,7 @@ noncomputable def coefficientFiniteQuotientUnitSection {m n : ℕ} (h : n ≤ m)
       (integralCoefficientCommRingSheaf l E W m) (integralCoefficientCommRingSheaf l E W n)
       (coefficientFiniteQuotient l E W h) M V x)
 
-/-- Forget scalar restriction on a section, keeping its underlying element unchanged.
-Source: Stacks 03CZ, 03DA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
-def coefficientRestrictionSection
-    {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-    {A B : Sheaf J RingCat.{r}} (φ : A ⟶ B) (M : SheafOfModules.{r} B) (V : Cᵒᵖ)
-    (x : ((SheafOfModules.restrictScalars φ).obj M).val.obj V) : M.val.obj V := x
-
+attribute [local semireducible] SheafOfModules.instCategory in
 /-- The ordinary finite-quotient unit is actual sheafification of 1 tensor x.
 Source: Stacks 03CZ, node proof step 10
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -710,6 +585,21 @@ def CoefficientFiniteQuotientDerivedUnit (S : CoefficientDerivedSystemTensors l 
     DerivedCategory.Q.map (((D.ordinaryAdjunction h).mapHomologicalComplex
       (ComplexShape.up ℤ)).unit.app P)
 
+/-- The representative tensor comparison square, for arbitrary coefficient categories.
+Source: Stacks 07A4 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
+def CoefficientTensorComparisonSquare
+    {A : Type a} {B : Type b} {K : Type c}
+    [Category.{v} A] [Category.{w} B] [Category.{r} K]
+    (T : A × A ⥤ A) (T' : B × B ⥤ B) (F : A ⥤ B) (Q : K ⥤ B)
+    {X Y Z : A} {X' Y' Z' N : K}
+    (s : Z ⟶ T.obj (X, Y)) (μ : T ⋙ F ⟶ F.prod F ⋙ T')
+    (p : F.obj X ⟶ Q.obj X') (q : F.obj Y ⟶ Q.obj Y')
+    (z : F.obj Z ⟶ Q.obj Z') (e : Z' ⟶ N)
+    (t : Q.obj N ⟶ T'.obj (Q.obj X', Q.obj Y')) : Prop :=
+  F.map s ≫ μ.app (X, Y) ≫ T'.map (Prod.mkHom p q) = z ≫ Q.map e ≫ t
+
+attribute [local irreducible] CoefficientTensorComparisonSquare
+
 /-- The exact K-flat quotient tensor normalization, packaged once as a proposition.
 Source: Stacks 06YY, 07A4, node proof step 10
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -723,8 +613,8 @@ def CoefficientFiniteQuotientTensorNormalization (S : CoefficientDerivedSystemTe
       (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W m) Q),
     ∃ e : ((coefficientFiniteQuotientExtension l E W h).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj
-          ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-            (integralCoefficientCommRingSheaf l E W m)).obj (P, Q)) ≅
+          (((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+            (integralCoefficientCommRingSheaf l E W m)).obj ((P), (Q)))) ≅
       (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
         (integralCoefficientCommRingSheaf l E W n)).obj
           (((coefficientFiniteQuotientExtension l E W h).mapHomologicalComplex
@@ -736,20 +626,20 @@ def CoefficientFiniteQuotientTensorNormalization (S : CoefficientDerivedSystemTe
         (coefficientFiniteQuotientExtension l E W h)
         (hF := coefficientFiniteQuotientExtensionAdditive l E W h)
         (coefficientFiniteQuotientUnitSection l E W h) P Q e ∧
-      (coefficientFiniteQuotientDerived l E W h).map
-          (((S.finiteTensorModel m).iso (Scheme.ProEt.topology W)
-            (integralCoefficientCommRingSheaf l E W m) (S.finiteClosed m) P Q hP hQ).hom) ≫
-        (D.tensor h).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-        (S.finiteClosed n).tensor.map
-          (Prod.mkHom (coefficientFiniteQuotientModel l E W h P hP).hom
-            (coefficientFiniteQuotientModel l E W h Q hQ).hom) =
-      (coefficientFiniteQuotientModel l E W h _
-        (coefficientTotalTensor_isKFlat.{u, t+1, t} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W m) P Q hP hQ)).hom ≫
-        DerivedCategory.Q.map e.hom ≫
-        ((S.finiteTensorModel n).iso (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n) _ _
+      CoefficientTensorComparisonSquare (S.finiteClosed m).tensor
+        (S.finiteClosed n).tensor (coefficientFiniteQuotientDerived l E W h) DerivedCategory.Q
+        (coefficientFiniteTensorModelIso l E W S m P Q hP hQ).hom
+        (D.tensor h).hom
+        (coefficientFiniteQuotientModel l E W h P hP).hom
+        (coefficientFiniteQuotientModel l E W h Q hQ).hom
+        (coefficientFiniteQuotientModel l E W h _
+          (coefficientTotalTensor_isKFlat.{u, t+1, t} (Scheme.ProEt.topology W)
+            (integralCoefficientCommRingSheaf l E W m) P Q hP hQ)).hom e.hom
+        (coefficientFiniteTensorModelIso l E W S n _ _
           (D.preservesKFlat h P hP) (D.preservesKFlat h Q hQ)).hom
+
+attribute [local irreducible] CoefficientFiniteQuotientOrdinaryUnit
+  CoefficientFiniteQuotientDerivedUnit CoefficientFiniteQuotientTensorNormalization
 
 /-- Finite-quotient data together with its actual pure-tensor K-flat normalization.
 Source: Stacks 06YY, 07A4, node proof step 10
@@ -804,6 +694,8 @@ noncomputable def coefficientSequenceNormalizationIso (S : CoefficientDerivedSys
   letI := coefficientSequenceTransitionAdjoint_isIso l E W S D h N hN
   asIso (coefficientSequenceTransitionAdjoint l E W S D h N)
 
+attribute [local irreducible] coefficientSequenceNormalizationIso
+
 /-- The comparison c_(m,n) is reduced finite evaluation followed by tensor-Hom transpose.
 Its tensor comparison is pinned to ordinary pure tensors by D.tensor_model.
 Source: Stacks 08J9, 06YY, node proof step 10
@@ -818,6 +710,8 @@ noncomputable def coefficientFiniteQuotientHomComparison (S : CoefficientDerived
           (coefficientFiniteQuotientDerived l E W h).obj Q) :=
   coefficientBaseChangeHom (S.finiteClosed m) (S.finiteClosed n)
     (coefficientFiniteQuotientDerived l E W h) (D.tensor h) P Q
+
+attribute [local irreducible] coefficientFiniteQuotientHomComparison
 
 /-- Reduction and its normalized adjunction on the actual derived coefficient categories.
 Source: Stacks 06YY, 07A6, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -871,19 +765,19 @@ def CoefficientFiniteTensorNormalization (S : CoefficientDerivedSystemReduction 
       (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) P)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
       (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q),
-    (coefficientFiniteDerivedExtension l E W n).map
-      ((S.integralTensorModel.iso (Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l E W) S.integralClosed P Q hP hQ).hom) ≫
-      (S.finiteTensor n).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-      (S.finiteClosed n).tensor.map
-        (Prod.mkHom (coefficientFiniteReductionModel l E W P hP n).hom
-          (coefficientFiniteReductionModel l E W Q hQ n).hom) =
-    (coefficientFiniteReductionModel l E W _
-      (coefficientTotalTensor_isKFlat.{u, t+1, t} (Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l E W) P Q hP hQ) n).hom ≫
-      DerivedCategory.Q.map (coefficientScalarTensorIso l E W n P Q).hom ≫
-      ((S.finiteTensorModel n).iso (Scheme.ProEt.topology W)
-        (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n) _ _
+    CoefficientTensorComparisonSquare S.integralClosed.tensor (S.finiteClosed n).tensor
+      (coefficientFiniteDerivedExtension l E W n) DerivedCategory.Q
+      (coefficientIntegralTensorModelIso l E W
+        S.toCoefficientDerivedSystemTensors P Q hP hQ).hom
+      (S.finiteTensor n).hom
+      (coefficientFiniteReductionModel l E W P hP n).hom
+      (coefficientFiniteReductionModel l E W Q hQ n).hom
+      (coefficientFiniteReductionModel l E W _
+        (coefficientTotalTensor_isKFlat.{u, t+1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W) P Q hP hQ) n).hom
+      (coefficientScalarTensorIso l E W n P Q).hom
+      (coefficientFiniteTensorModelIso l E W
+        S.toCoefficientDerivedSystemTensors n _ _
         ((coefficientTensorModelPreservation l E W).1 P hP n)
         ((coefficientTensorModelPreservation l E W).1 Q hQ n)).hom
 
@@ -899,17 +793,17 @@ def CoefficientEvaluationTensorNormalization (S : CoefficientDerivedSystemReduct
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
       (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
       (R := coefficientSequenceCommRingSheaf l E W) Q),
-    (coefficientSequenceDerivedEvaluation l E W n).map
-      ((S.systemTensorModel.iso (coefficientSequenceTopology (Scheme.ProEt.topology W))
-        (coefficientSequenceCommRingSheaf l E W) S.systemClosed P Q hP hQ).hom) ≫
-      (S.evaluationTensor n).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-      (S.finiteClosed n).tensor.map
-        (Prod.mkHom ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app P)
-          ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app Q)) =
-    (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app _ ≫
-      DerivedCategory.Q.map (coefficientEvaluationTensorIso l E W n P Q).hom ≫
-      ((S.finiteTensorModel n).iso (Scheme.ProEt.topology W)
-        (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n) _ _
+    CoefficientTensorComparisonSquare S.systemClosed.tensor (S.finiteClosed n).tensor
+      (coefficientSequenceDerivedEvaluation l E W n) DerivedCategory.Q
+      (coefficientSystemTensorModelIso l E W
+        S.toCoefficientDerivedSystemTensors P Q hP hQ).hom
+      (S.evaluationTensor n).hom
+      ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app P)
+      ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app Q)
+      ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app _)
+      (coefficientEvaluationTensorIso l E W n P Q).hom
+      (coefficientFiniteTensorModelIso l E W
+        S.toCoefficientDerivedSystemTensors n _ _
         ((coefficientTensorModelPreservation l E W).2 P hP n)
         ((coefficientTensorModelPreservation l E W).2 Q hQ n)).hom
 
@@ -918,15 +812,18 @@ comparison, with the actual reduction and tensor-evaluation identifications.
 Source: Stacks 07A4, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 def CoefficientReductionTensorEvaluation (S : CoefficientDerivedSystemReduction l E W) : Prop :=
   ∀ (P Q : DerivedCategory (scalarReductionSource l E W)) (n : ℕ),
-    (coefficientSequenceDerivedEvaluation l E W n).map
-        (S.reductionTensor.hom.app (P, Q)) ≫
-      (S.evaluationTensor n).hom.app (S.reduction.obj P, S.reduction.obj Q) ≫
-      (S.finiteClosed n).tensor.map
+    CoefficientComparisonEquation
+      ((coefficientSequenceDerivedEvaluation l E W n).map
+        (S.reductionTensor.hom.app (P, Q)))
+      ((S.evaluationTensor n).hom.app (S.reduction.obj P, S.reduction.obj Q))
+      ((S.finiteClosed n).tensor.map
         (Prod.mkHom ((S.reductionEvaluation n).hom.app P)
-          ((S.reductionEvaluation n).hom.app Q)) =
-    (S.reductionEvaluation n).hom.app (S.integralClosed.tensor.obj (P, Q)) ≫
-      (S.finiteTensor n).hom.app (P, Q)
+          ((S.reductionEvaluation n).hom.app Q)))
+      ((S.reductionEvaluation n).hom.app (S.integralClosed.tensor.obj (P, Q)))
+      ((S.finiteTensor n).hom.app (P, Q))
 
+attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex
+  SheafOfModules.instCategory in
 /-- A single strict reduction presentation with all finite and horizontal identifications.
 This is the presentation already required in CoefficientReductionModels, exposed so
 that the tensor comparison can be specified on the very same presentations.
@@ -944,18 +841,23 @@ def CoefficientReductionPresentation
         ((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) :
     Prop :=
   (∀ n : ℕ,
-    (coefficientSequenceDerivedEvaluation l E W n).map e.hom ≫
-      (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app C ≫
-      DerivedCategory.Q.map (κ n).hom =
-    (S.reductionEvaluation n).hom.app (DerivedCategory.Q.obj P) ≫
-      (coefficientFiniteReductionModel l E W P hP n).hom) ∧
+    CoefficientComparisonEquation
+      ((coefficientSequenceDerivedEvaluation l E W n).map e.hom)
+      ((coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app C)
+      (DerivedCategory.Q.map (κ n).hom)
+      ((S.reductionEvaluation n).hom.app (DerivedCategory.Q.obj P))
+      ((coefficientFiniteReductionModel l E W P hP n).hom)) ∧
   (∀ (m n : ℕ) (h : n ≤ m),
-    (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h)
-        (ComplexShape.up ℤ)).app C ≫
-      ((normalizedDVRModuleRes l E W h).mapHomologicalComplex (ComplexShape.up ℤ)).map
-        (κ n).hom =
-    (κ m).hom ≫ (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h)
-      (ComplexShape.up ℤ)).app P)
+    CoefficientTransitionEquation
+      (coefficientComplexCompositeTransformation
+        (coefficientSequenceEvaluation l E W n) (normalizedDVRModuleRes l E W h)
+        (coefficientSequenceTransition l E W h) C)
+      (((normalizedDVRModuleRes l E W h).mapHomologicalComplex (ComplexShape.up ℤ)).map
+        (κ n).hom)
+      ((κ m).hom)
+      (coefficientComplexCompositeTransformation
+        (scalarReductionExtension l E W n) (normalizedDVRModuleRes l E W h)
+        (coefficientOrdinaryQuotient l E W h) P))
 
 /-- The reduction tensor map is induced by one strict chain map whose finite components
 are the ordinary normalized scalar tensor maps. Its square is an equality in the
@@ -982,8 +884,8 @@ def CoefficientReductionTensorNormalization (S : CoefficientDerivedSystemReducti
       (eC : S.reduction.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj C)
       (eD : S.reduction.obj (DerivedCategory.Q.obj Q) ≅ DerivedCategory.Q.obj D)
       (eZ : S.reduction.obj (DerivedCategory.Q.obj
-        ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))) ≅
+        (((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W)).obj ((P), (Q))))) ≅
         DerivedCategory.Q.obj Z)
       (κC : ∀ n : ℕ,
         ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
@@ -996,8 +898,8 @@ def CoefficientReductionTensorNormalization (S : CoefficientDerivedSystemReducti
       (κZ : ∀ n : ℕ,
         ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
           Z ≅ ((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-            ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-              (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)))
+            (((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+              (completedIntegralCommRingSheafUnrestricted l E W)).obj ((P), (Q)))))
       (ψ : Z ⟶ (coefficientTotalTensor.{u, t+1, t}
         (coefficientSequenceTopology (Scheme.ProEt.topology W))
         (coefficientSequenceCommRingSheaf l E W)).obj (C, D)),
@@ -1007,19 +909,21 @@ def CoefficientReductionTensorNormalization (S : CoefficientDerivedSystemReducti
         (coefficientTotalTensor_isKFlat.{u, t+1, t} (Scheme.ProEt.topology W)
           (completedIntegralCommRingSheafUnrestricted l E W) P Q hP hQ) Z eZ κZ ∧
       (∀ n : ℕ,
-        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).map
-            ψ ≫ (coefficientEvaluationTensorIso l E W n C D).hom ≫
-          (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+        CoefficientComparisonEquation
+          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map ψ)
+          (coefficientEvaluationTensorIso l E W n C D).hom
+          ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
             (integralCoefficientCommRingSheaf l E W n)).map
-              (Prod.mkHom (κC n).hom (κD n).hom) =
-        (κZ n).hom ≫ (coefficientScalarTensorIso l E W n P Q).hom) ∧
-      S.reduction.map ((S.integralTensorModel.iso (Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l E W) S.integralClosed P Q hP hQ).hom) ≫
-        S.reductionTensor.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-        S.systemClosed.tensor.map (Prod.mkHom eC.hom eD.hom) =
-      eZ.hom ≫ DerivedCategory.Q.map ψ ≫
-        (S.systemTensorModel.iso (coefficientSequenceTopology (Scheme.ProEt.topology W))
-          (coefficientSequenceCommRingSheaf l E W) S.systemClosed C D hC hD).hom
+              (Prod.mkHom (κC n).hom (κD n).hom))
+          (κZ n).hom (coefficientScalarTensorIso l E W n P Q).hom) ∧
+      CoefficientTensorComparisonSquare S.integralClosed.tensor S.systemClosed.tensor
+        S.reduction DerivedCategory.Q
+        (coefficientIntegralTensorModelIso l E W
+          S.toCoefficientDerivedSystemTensors P Q hP hQ).hom
+        S.reductionTensor.hom eC.hom eD.hom eZ.hom ψ
+        (coefficientSystemTensorModelIso l E W
+          S.toCoefficientDerivedSystemTensors C D hC hD).hom
 
 /-- The actual internal-Hom transition under its fiber identifications.
 This is the transition-adjoint formula for normalized inputs, using the finite quotient
@@ -1051,6 +955,11 @@ def CoefficientFiberTransition (S : CoefficientDerivedSystemTensors l E W)
           S D h M hM).inv.op)
           (coefficientSequenceNormalizationIso l E W
             S D h N hN).hom)
+
+attribute [local irreducible] CoefficientReductionTensorNormalization
+  CoefficientReductionPresentation CoefficientReductionTensorEvaluation
+  CoefficientFiniteTensorNormalization CoefficientEvaluationTensorNormalization
+  CoefficientFiberTransition
 
 /-- Coherent fibers and evaluation on the canonical reduction data.
 Source: Stacks 0A95, 0941 and node proof steps 6--11
@@ -1155,6 +1064,8 @@ structure CoefficientDerivedSystemCalculus extends CoefficientDerivedSystemFiber
     coefficientSequenceDerivedRestriction l E W ⋙
       (coefficientTowerSections l E W).rightDerivedFunctor ⋙
         coefficientMappingLimit.{max u (t+1)}
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The global comparison gamma is the global sections of the specified enriched adjunct,
 followed by the specified total-limit comparison. Thus its data are real composites.
 Source: Stacks 08J9, 07A6, 0941 and node proof steps 12--14
@@ -1167,10 +1078,10 @@ noncomputable def CoefficientDerivedSystemCalculus.gamma
         (op P, (coefficientSequenceLimit l E W).obj N) ≅
       coefficientMappingLimit.{max u (t+1)}.obj
         ((coefficientSequenceGlobalHom l E W).obj (op (S.reduction.obj P), N)) :=
-  letI := S.enriched_isIso P N hN
   (coefficientIntegralSections l E W).mapIso
-      (asIso (coefficientEnrichedAdjunctionMap S.integralClosed S.systemClosed S.reduction
-        S.adjunction S.reductionTensor P N)) ≪≫
+      (@asIso _ _ _ _
+        (coefficientEnrichedAdjunctionMap S.integralClosed S.systemClosed S.reduction
+          S.adjunction S.reductionTensor P N) (S.enriched_isIso P N hN)) ≪≫
     S.globalLimit.app
       ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N))
 
@@ -1188,8 +1099,27 @@ noncomputable def CoefficientDerivedSystemCalculus.tensorLimitMap
       S.systemClosed.tensor.map
         (Prod.mkHom (𝟙 (S.reduction.obj T)) (S.adjunction.counit.app N)))
 
+private theorem preservedLimitComparison_existsUnique
+    {A : Type a} [Category.{b} A] [HasLimitsOfShape ℕᵒᵖ A]
+    (G : A ⥤ AddCommGrpCat.{w}) [PreservesLimitsOfShape ℕᵒᵖ G] :
+    ∃! e : (lim : (ℕᵒᵖ ⥤ A) ⥤ A) ⋙ G ≅
+      (Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G ⋙ lim,
+      ∀ (T : ℕᵒᵖ ⥤ A) (n : ℕ),
+        e.hom.app T ≫ (lim.π (op n)).app (T ⋙ G) =
+          G.map ((lim.π (op n)).app T) := by
+  refine ⟨preservesLimitNatIso G, ?_, ?_⟩
+  · intro T n
+    exact preservesLimitIso_hom_π G T (op n)
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext T
+    apply limit.hom_ext
+    intro n
+    exact (he T n.unop).trans (preservesLimitIso_hom_π G T n).symm
 
-
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Ordinary global sections commute with inverse limit by the actual projections.
 Source: Stacks 0941 and node proof step 12
 (blueprint: lem-coef-derived-system-evaluation-calculus).
@@ -1207,7 +1137,12 @@ theorem coefficientSectionsLimitIso_exists :
         e.hom.app T ≫ (lim.π (op n)).app ((coefficientTowerSections l E W).obj T) =
           (coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
             (completedIntegralCommRingSheafUnrestricted l E W)).map ((lim.π (op n)).app T) := by
-  sorry
+  let G : scalarReductionSource l E W ⥤ AddCommGrpCat.{max u (t+1)} :=
+    coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)
+  have : PreservesLimits G := CategoryTheory.preservesLimits_preadditiveCoyoneda_obj _
+  have : PreservesLimitsOfSize.{0, 0} G := preservesLimitsOfSize_shrink G
+  exact preservedLimitComparison_existsUnique G
 
 /-- The unique ordinary sections/limit comparison used by the derived normalization.
 Source: Stacks 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -1227,6 +1162,7 @@ noncomputable def coefficientGlobalLimitLeftComparison
         (coefficientRightDerivedComparison
           (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W) K)
 
+attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex in
 /-- The right composite universal comparison, after ordinary sections/limit commutation.
 Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 noncomputable def coefficientGlobalLimitRightComparison
@@ -1269,6 +1205,11 @@ structure CoefficientDerivedSystemScalarData where
         (completedIntegralCommRingSheafUnrestricted l E W) ≅
     coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
       (integralCoefficientCommRingSheaf l E W n)
+
+attribute [local semireducible] CommRingCat.hasForgetToRingCat sheafCompose
+  CommRingCat.instConcreteCategoryRingHomCarrier RingCat.instConcreteCategoryRingHomCarrier
+  SheafOfModules.instCategory in
+attribute [local semireducible] preadditiveCoyoneda SheafOfModules.unit in
 /-- The ordinary section transport is characterized on all section maps.
 Source: Stacks 03CZ, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 def CoefficientOrdinaryScalarSectionsFormula
@@ -1280,22 +1221,41 @@ def CoefficientOrdinaryScalarSectionsFormula
     (((D.ordinaryScalarSections n).hom.app M) f).val.app V b = b • (@id (M.val.obj V) (f.val.app V
       (1 : (completedIntegralCoefficientSheafUnrestricted l E W).obj.obj V)))
 
+set_option cleanup.letToHave false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex
+  SheafOfModules.instCategory in
 /-- Compatibility of scalar-section transport with the universal derived comparisons.
 Source: Stacks 079P, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 def CoefficientScalarSectionsModel
     (D : CoefficientDerivedSystemScalarData l E W) : Prop :=
   ∀ (n : ℕ) (I : CochainComplex (scalarReductionTarget l E W n) ℤ),
-    coefficientSiteSectionsComparison.{u, t+1, t} (Scheme.ProEt.topology W)
+    let G : scalarReductionTarget l E W n ⥤ AddCommGrpCat.{max u (t+1)} :=
+      coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+    let : G.PreservesZeroMorphisms := by
+      let : G.Additive := CategoryTheory.additive_coyonedaObj' _
+      exact Functor.preservesZeroMorphisms_of_additive G
+    CoefficientComparisonEquation
+      (coefficientSiteSectionsComparison.{u, t+1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W)
         (((scalarReductionRestriction l E W n).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj I) ≫
-      (coefficientIntegralSections l E W).map
-          ((scalarReductionRestriction l E W n).mapDerivedCategoryFactors.inv.app I) ≫
-      (D.scalarSections n).hom.app (DerivedCategory.Q.obj I) =
-    DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (D.ordinaryScalarSections n).hom
-      (ComplexShape.up ℤ)).app I) ≫
-      coefficientSiteSectionsComparison.{u, t+1, t} (Scheme.ProEt.topology W)
-        (integralCoefficientCommRingSheaf l E W n) I
+          (ComplexShape.up ℤ)).obj I))
+      ((coefficientIntegralSections l E W).map
+          ((scalarReductionRestriction l E W n).mapDerivedCategoryFactors.inv.app I))
+      ((D.scalarSections n).hom.app (DerivedCategory.Q.obj I))
+      (DerivedCategory.Q.map
+      (coefficientComplexCompositeSourceTransformation
+        (scalarReductionRestriction l E W n)
+        (coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W))
+        (H := G) (D.ordinaryScalarSections n).hom I))
+      (coefficientSiteSectionsComparison.{u, t+1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n) I)
+
+attribute [local irreducible] CoefficientOrdinaryScalarSectionsFormula
+  CoefficientScalarSectionsModel
 
 /-- The canonical scalar-section comparisons and their resolution normalization.
 Source: Stacks 03CZ, 079P, 08JA (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -1308,6 +1268,7 @@ structure CoefficientDerivedSystemScalarCoherence
   scalarSections_model : CoefficientScalarSectionsModel l E W
     toCoefficientDerivedSystemScalarData
 
+attribute [local semireducible] CategoryTheory.Functor.mapHomologicalComplex in
 /-- The simultaneous-resolution equation for the actual global-limit comparison.
 This is the original model equation, packaged once to avoid duplicating its large
 localization terms in every generated structure declaration.
@@ -1315,19 +1276,22 @@ Source: Stacks 079P, 0941, node proof steps 12--14
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
 def CoefficientGlobalLimitModel (S : CoefficientDerivedSystemCalculus l E W) : Prop :=
   ∀ (K : CochainComplex (coefficientSequenceModules l E W) ℤ),
-    coefficientGlobalLimitLeftComparison l E W
+    CoefficientComparisonEquation
+      (coefficientGlobalLimitLeftComparison l E W
         (((coefficientSequenceRestriction l E W).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj K) ≫
-      (coefficientIntegralSections l E W).map
+          (ComplexShape.up ℤ)).obj K))
+      ((coefficientIntegralSections l E W).map
           ((coefficientConstantTowerLimit l E W).map
-            ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app K)) ≫
-      S.globalLimit.hom.app (DerivedCategory.Q.obj K) =
-    coefficientGlobalLimitRightComparison l E W
+            ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app K)))
+      (S.globalLimit.hom.app (DerivedCategory.Q.obj K))
+      (coefficientGlobalLimitRightComparison l E W
         (((coefficientSequenceRestriction l E W).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj K) ≫
-      coefficientMappingLimit.{max u (t+1)}.map
+          (ComplexShape.up ℤ)).obj K))
+      (coefficientMappingLimit.{max u (t+1)}.map
         ((coefficientTowerSections l E W).rightDerivedFunctor.map
-          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app K))
+          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app K)))
+
+attribute [local irreducible] CoefficientGlobalLimitModel
 
 /-- The resolution normalization of the global mapping-system comparisons.
 Source: Stacks 079P, 0941 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -1492,6 +1456,9 @@ def CoefficientMappingComposition (S : CoefficientDerivedSystemCalculus l E W) :
         (Prod.mkHom (𝟙 U) (f)) ≫ S.tensorLimitMap l E W U N ≫
       (coefficientSequenceLimit l E W).map g
 
+attribute [local irreducible] CoefficientFiniteEnrichedIsIso CoefficientGammaProjection
+  CoefficientGammaNaturality CoefficientHomProjection CoefficientMappingComposition
+
 /-- The specified finite projections, naturality and composition of gamma.
 Source: Stacks 07A6, 0941 and node proof steps 14--15
 (blueprint: lem-coef-derived-system-evaluation-calculus). -/
@@ -1560,5 +1527,7 @@ theorem coefficientDerivedSystemEvaluationCalculus :
     ∃ S : CoefficientDerivedSystemCalculus l E W,
       Nonempty (CoefficientDerivedSystemCoherence l E W S) := by
   sorry
+
+end StandardCoefficientInstances
 
 end WeilConjectures

@@ -1,0 +1,132 @@
+{
+ "id": "lem-fix-qcqs-ordinary-finite-coefficient-isos",
+ "kind": "statement",
+ "title": "Canonical finite coefficient adjuncts in the ordinary models",
+ "statement": "Fix a prime ell and a finite extension E of the ell-adic field [def-weil-l-adic-coefficient-extension], with E in a universe u. Let X,Y be schemes in an independent universe t [def-pc-scheme], f:X to Y any morphism, and n a natural number. Use coefficient size max(u,t+1), the actual ordinary ring direct image and its specified left adjoint [def-fix-qcqs-completion-ordinary-models, def-weil-proetale-inverse-image]. Then the adjunct of ordinaryFiniteRingMap ell E f n is invertible. The map here is the prescribed constant-section map on the lifted quotient ring at exponent n+1, sheafified in commutative rings and forgotten to rings. There is no immersion, quasi-compactness or nonempty-source assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "example-constant-sheaf and the sheafification adjunction; sites-modules.tex, section-constant, for algebraic structures; blueprint prop-weil-pbc-proetale-constant-ring-map for normalization of the constant-section map."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For an arbitrary coefficient ring, constant sheafification is left adjoint to evaluation at a terminal site object. Base change preserves that object. Compose the ring inverse-image adjunction with the target constant-sheaf adjunction and compare with the source constant-sheaf adjunction. Uniqueness of left adjoints gives an isomorphism, and the two hom equivalences show that its component is precisely the adjunct of the constant-section direct map.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary commutative coefficient ring, forget commutativity through sheafification. Obtain the preservation-of-sheafification instance on the coefficient-sized site model and transport it back. The canonical constant-sheaf comparison respects the sheafification unit. Use that equation and the sheafification hom bijection to show that the specified forgotten direct map, composed with the source comparison, equals the target comparison composed with the ring constant-section map. Transpose this square through the actual ring adjunction. All comparisons are invertible, so its ring adjunct is invertible.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the abstract commutative ring to the lifted coefficient quotient at exponent n+1. Its direct map is definitionally ordinaryFiniteRingMap. The proof applies to zero rings and empty source schemes without an exception.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "example-constant-sheaf and the sheafification adjunction; sites-modules.tex, section-constant, for algebraic structures; blueprint prop-weil-pbc-proetale-constant-ring-map for normalization of the constant-section map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjunct of the constant-section map on sheaves of rings is an isomorphism for independent site and coefficient universes",
+   "results": "Eight hits, including constantSheafAdj, constantSheafGammaAdj and constantCommuteCompose. These supply the categorical proof, but no hit identifies the actual ordinary finite coefficient map.",
+   "date": "2026-10-27",
+   "verdict": "Use the constant-sheaf adjunction and forgetful comparison directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the finite constant coefficient ring sheaf along any scheme morphism is canonically isomorphic to the source constant sheaf",
+   "results": "Eight hits concerning scheme structure-sheaf constants and module pullback/free comparisons; none has the actual independent-universe ring adjunct statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ii]nverseImage.*[Ii]sIso|constant.*[Aa]djunct.*[Ii]so",
+   "results": "Three Mathlib hits: two locally constant condensed adjunctions and a constant-sheaf counit statement. Local project comparison has the fixed-universe finite continuous-function model.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate actual-model interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryRestrictionExact",
+  "date": "2026-10-27",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.; Step 1: geometric inverse image, completed coefficient identification and module limits; underlying module scalar-action comparison; constant-section finite coefficient adjunct and its actual sheafification-unit normalization",
+   "via": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsOrdinaryFiniteCoefficientMaps",
+  "file": "lean/Sheaf/Paper/QcqsOrdinaryFiniteCoefficientMaps.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.ordinaryFiniteCoefficientMap_isIso",
+  "statement": "theorem ordinaryFiniteCoefficientMap_isIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :\n    IsIso (((Adjunction.ofIsRightAdjoint (ordinaryRingPush.{t, u} f)).homEquiv _ _).symm\n      (ordinaryFiniteRingMap l E f n))",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T012936-L-2350264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T012936-L-2350264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

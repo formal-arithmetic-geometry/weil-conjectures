@@ -8,11 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleOperations
 public import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import Sheaf.AlgebraicGeometry.SpaceChartTensorRealization
+import Sheaf.AlgebraicGeometry.SpaceEtaleDirectImageChartComparison
+import Sheaf.AlgebraicGeometry.SpaceEtaleTensorSquareComparison
+import Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.AlgebraicSpace
-import Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite
 
 /-!
 # Étale localization and module direct images on algebraic spaces
@@ -81,7 +81,16 @@ theorem moduleTensorPullback_etale_restriction (g : Y' ⟶ Y) (hg : IsEtale g.ho
         (a : Y'.structureSheaf.obj.obj (op q.left)) (m : M.val.obj (op V)),
         (e.hom.app M).val.app (op q.left) (moduleTensorSection g M V q a m) =
           a • M.val.map (moduleChartEtaleHom g hg V q).op m := by
-  sorry
+  have hgc : IsChartwiseEtale g := fun T a ha ↦ isEtale_comp a g.hom.hom ha hg
+  obtain ⟨L, _, _, σ, hσ, _, _⟩ :=
+    (space_chart_adjunction_tensor_realization g (𝟙 Y')).2 Y' Y g hgc
+  refine ⟨L.comparison ≪≫ σ, ?_⟩
+  intro M V q a m
+  change (σ.hom.app M).val.app (op q.left)
+    ((L.comparison.hom.app M).val.app (op q.left)
+      (moduleTensorSection g M V q a m)) = _
+  rw [L.chartTensor]
+  exact hσ M V q a m
 
 /-- Commutativity of the ringed square supplies the triangle on the same chart scheme.
 Source: Stacks, Tags 03LX and 03M8
@@ -94,7 +103,14 @@ theorem moduleChartBaseChange_triangle
     (V : Y'.EtaleSite) (q : ModuleChart f' V) :
     yoneda.map q.hom.left ≫ ((etaleMap g hg).obj V).obj.hom =
       ((moduleChartTarget f).obj ((etaleMap h hh).obj q.left)).hom := by
-  sorry
+  have hw : h.hom.hom ≫ f.hom.hom = f'.hom.hom ≫ g.hom.hom :=
+    congrArg (fun k ↦ k.hom) w
+  have hq : yoneda.map q.hom.left ≫ V.obj.hom =
+      q.left.obj.hom ≫ f'.hom.hom := by
+    exact CostructuredArrow.w q.hom
+  change yoneda.map q.hom.left ≫ (V.obj.hom ≫ g.hom.hom) =
+    q.left.obj.hom ≫ h.hom.hom ≫ f.hom.hom
+  rw [← Category.assoc, hq, Category.assoc, hw]
 
 /-- The same scheme chart, regarded as a chart of `X ×_Y V` through the square.
 Source: Stacks, Tags 03LX and 03M8
@@ -161,6 +177,11 @@ theorem etale_module_pushforward_restriction
               (a • moduleTensorSection f M ((etaleMap g hg).obj V)
                 (moduleChartBaseChange f g h f' hg hh hp.w V q) b m) =
             moduleTensorSection f' ((pullback g hg).obj M) V q (a * b) m) := by
-  sorry
+  have hh : IsEtale h.hom.hom :=
+    representableWith_baseChange _
+      ((sheafToPresheaf _ _).map_isPullback hp.flip) hg
+  obtain ⟨beta, hbeta⟩ := etale_directImage_chart_comparison f g h f' hg hh hp
+  obtain ⟨lambda, hlambda⟩ := etale_tensor_square_comparison f g h f' hg hh hp.w
+  exact ⟨hh, beta, lambda, hbeta, hlambda⟩
 
 end AlgebraicGeometry.AlgebraicSpace

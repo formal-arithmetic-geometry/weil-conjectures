@@ -21,8 +21,10 @@ public import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
 import Sheaf.CategoryTheory.ScalarLocalization
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
-import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Actual scalar extension on raw integral rationalizations
 
@@ -52,6 +54,35 @@ variable (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
 variable (T : Scheme.{u}) [IsNoetherian T]
   [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
   [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+
+set_option synthInstance.checkSynthOrder false in
+/-- Continuous field coefficients in the scheme universe have the inherited bounded
+constructible triangulation. Source: Bhatt--Scholze, Proposition 6.8.11(1),(3).
+(blueprint: lem-weil-pbc-realization-scalar-functor)
+
+Proof. Local finite presentations over these coefficients are pro-etale locally finite
+free. The constructible Serre argument therefore supplies kernel, cokernel and extension
+closure on the noetherian strata. The bounded homology Serre criterion gives triangulated
+closure, including zero ranks and the empty scheme. -/
+instance realizationScalarTargetTriangulated :
+    (boundedConstructible
+      (condensedRingObj (Profinite.continuousCoefficientRingObj E) T)).IsTriangulated := by
+  obtain ⟨hk, he⟩ := condensed_constructible_serre_of_locally_free freeEpiLocalSplitting
+    (Profinite.continuousCoefficientRingObj E)
+    (exists_finiteFree_cover_of_condensedField_lfp l E) T
+  let R := condensedRingObj (Profinite.continuousCoefficientRingObj E) T
+  let : ObjectProperty.IsClosedUnderKernels (IsConstructibleModuleObject R) :=
+    ⟨by
+      rintro _ ⟨f, s, hs, hf⟩
+      exact IsConstructibleModuleObject.of_iso (R := R) (limit.isoLimitCone ⟨s, hs⟩)
+        (hk _ _ f hf.1 hf.2).1⟩
+  let : ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R) :=
+    ⟨by
+      rintro _ ⟨f, s, hs, hf⟩
+      exact IsConstructibleModuleObject.of_iso (R := R) (colimit.isoColimitCocone ⟨s, hs⟩)
+        (hk _ _ f hf.1 hf.2).2⟩
+  let : ObjectProperty.IsClosedUnderExtensions (IsConstructibleModuleObject R) := ⟨he _⟩
+  exact isTriangulated_boundedConstructible_of_serre R
 
 /-- The coefficient-normalized scalar functor, with the actual extension and restriction
 on the ambient derived categories. The integral comparison expresses J(K)=F(K) in

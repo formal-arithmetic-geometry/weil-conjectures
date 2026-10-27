@@ -187,20 +187,35 @@
  "lean": {
   "module": "Sheaf.RingTheory.IntegralSupportWeightedInitialDegree",
   "declaration": "AddMonoidAlgebra.not_isIntegralElem_of_negative_support_weight",
+  "declarations": [
+   "AddMonoidAlgebra.not_isIntegralElem_of_negative_support_weight"
+  ],
   "file": "lean/Sheaf/RingTheory/IntegralSupportWeightedInitialDegree.lean",
   "statement": "theorem not_isIntegralElem_of_negative_support_weight {k : Type u} [Field k] {H : Type v} [AddCommGroup H] [AddGroup.FG H] [IsAddTorsionFree H] (P : AddSubmonoid H) (w : H →+ ℤ) (hw : ∀ p ∈ P, 0 ≤ w p) (x : AddMonoidAlgebra k H) (hx : x ≠ 0) (hneg : ∃ g ∈ x.coeff.support, w g < 0) : ¬ (AddMonoidAlgebra.mapDomainRingHom k P.subtype).IsIntegralElem x",
-  "branch": "newtargets-dag",
-  "by": "Q73",
-  "date": "2026-10-18",
-  "existing": false
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Dependency interface repair under brief-stage2 §1(B): the live source was a legacy non-module file, so a required module-mode consumer could not import it. Add module mode, expose the original declarations and mark signature imports public, keeping proof imports private. All definition bodies, theorem signatures, proof docstrings and sorry proofs are unchanged. This repair is required by the complete-local comparison through characteristic-zero independence and its toric-realization proof import."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8d7ab5277",
-  "group": "Q73",
-  "result": "pass",
-  "note": "Node clauses k field, H FG torsion-free AddCommGroup, arbitrary AddSubmonoid P, w : H →+ ℤ with w≥0 on P, x≠0 with ∃ g ∈ x.coeff.support, w g<0 ⇒ ¬(mapDomainRingHom k P.subtype).IsIntegralElem x all match exactly; no extra hypotheses, independent universes u v. The snapshot node differs from the live node only in lean, and lean.statement is verbatim in the file. Docstrings carry the ILO VIII 3.2.9 p.104 source, the blueprint tag and all 4 proof steps; proof is sorry only; no definitions. No duplicate in Mathlib MonoidAlgebra/Laurent, side lean/Sheaf or runs/2. nt_compile --json clean (3.2 s, exit 0). Probe confirmed the mapDomainRingHom (M →+ N) signature, the IsIntegralElem definition, and that the hypotheses are satisfiable (e^{-1} in k[ℤ]). Advisory: FineFanBlowup import kept only for the stmt_dep; second-reading section is the worker's own pass."
+  "reviewer": "NT-stage2-cc-a21433971",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Lean exact against node and ILO VIII 5.5.2 (all hypotheses: regular local + IsAdicComplete + IsSepClosed residue field; ∐ Spec A_i with m=0 allowed; Pair extras implied for affine X; sameScheme/sameAction/sameBoundary keep log structures independent; IsFanInduced D.fanRule P with D : InducedNormalizedLogResolution F). Conclusion: Nonempty UnderlyingIso = full ordered towers equal with center ideals by comap, over the identity of X, no contraction; same content as CenterIso/IsIsoOver, needed because Construction towers lack reduced. Construction is unique up to unique iso (fs-Cartesian full pullback), so the ∀ C₁ C₂ form is right. Statement verbatim; char-0 dep record lean-only; 8 header-only module-mode (B) conversions (char-0 + 7 trf algebra modules) with bodies identical to live. Only fault H11: the second reading was the worker's own self-audit → replaced in fixes/lem-per-complete-local-rigidification-comparison.report.md (worker report verbatim + real clause-by-clause reading). Advisories: base-era theorem stmt_deps carry Pair/Construction and route the induced-resolution structures, whose owner def nodes are not in stmt_deps; Q03 15fcd14a competing char-0 module re-delivery needs a rebase at landing. No compile (no Lean changed).; reverted the delivery's change of existing node(s) lem-per-characteristic-zero-log-resolution-independence (--revert-nodes; kept as on sheaf-dag)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

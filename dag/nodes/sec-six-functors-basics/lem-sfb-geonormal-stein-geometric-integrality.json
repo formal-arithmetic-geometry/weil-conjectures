@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-geonormal-stein-geometric-integrality",
+ "kind": "statement",
+ "title": "Geometric integrality over the separable Stein constants of a geometrically normal scheme",
+ "statement": "Let $l$ be a field and let $X$ be an integral proper finite-type $l$-scheme which is geometrically normal over $l$, meaning that every local ring of $X\\times_l L$ is an integrally closed domain for every field extension $L/l$. Suppose that $e=\\Gamma(X,\\mathcal O_X)$, with its structure inclusion from $l$, is a finite field extension of $l$, and that the canonical evaluation morphism $h:X\\to\\operatorname{Spec}e$ is proper with geometrically connected fibres: $X\\times_e E$ is nonempty and connected for every field extension $E/e$. Then $e/l$ is finite separable, and $X$ is geometrically normal and geometrically integral over $e$.\n\nMore precisely, for every extension field $E/e$, the canonical morphism $X\\times_e E\\to X\\times_l E$ is an open-and-closed immersion and $X\\times_e E$ is a normal integral Noetherian scheme. The associated map $\\operatorname{Spec}E\\to\\operatorname{Spec}(e\\otimes_l E)$ is the inclusion of the component selected by multiplication $a\\otimes t\\mapsto at$.\n\nSchemes, fields, integrality, properness, finite type, field extensions, separability, base change, normal rings, Noetherian rings and geometric integrality use [def-pc-scheme], [def-weil-field], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-pc-field-extension], [def-weil-pbc-separable-field-extension], [def-pc-base-change], [def-weil-pbc-normal-ring], [def-weil-pbc-noetherian-ring] and [def-pc-geometrically-irreducible]. Noetherian for a scheme means that it has a finite affine cover by spectra of Noetherian rings. An open-and-closed immersion identifies its source with a subscheme whose underlying subset is both open and closed and whose local rings are those of the ambient scheme.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (4), and Tag 0FD3, lemma-geometrically-normal-stein; change from l to the separable constants e by the multiplication-component construction. Geometric normality: Tag 038M, definition-geometrically-normal."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-pc-base-change",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "For every field extension $L/l$, the local rings of $X_L$ are domains by hypothesis, hence have no nonzero nilpotents. Thus $X$ is geometrically reduced. Apply [lem-pc-proper-geometrically-reduced-global-sections-separable] to the proper $l$-scheme $X$ and the given field $e=\\Gamma(X,\\mathcal O_X)$. It gives separability of $e/l$ [def-weil-pbc-separable-field-extension]; finiteness was assumed. Since $e/l$ is finite, every $a\\in e$ lies in the finitely generated algebraic subextension $l(a)$, whose only transcendence basis is empty, so separable generation of $l(a)/l$ says that $a$ is separable algebraic over $l$: $e/l$ is finite separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-proper-geometrically-reduced-global-sections-separable",
+    "def-weil-pbc-separable-field-extension",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (4)"
+   }
+  },
+  {
+   "text": "Fix any $E/e$ and put $R=e\\otimes_l E$, with $E$-algebra structure $t\\mapsto1\\otimes t$. Since $e/l$ is finite separable, [lem-weil-pbc-finite-separable-extension-etale] and [lem-weil-pbc-etale-ring-base-change] show that $R$ is etale over $E$ (interchange the tensor factors). Multiplication $\\mu:R\\to E$, $a\\otimes t\\mapsto at$, is an $E$-algebra retraction. By [lem-weil-pbc-etale-section-idempotent-splitting], there is an idempotent $p\\in R$ with $\\mu(p)=1$, $\\ker\\mu=(1-p)R$, and $R\\cong E\\times(1-p)R$, with $\\mu$ the first projection. Thus $\\operatorname{Spec}\\mu$ includes precisely the clopen component $D(p)\\cong\\operatorname{Spec}E$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-section-idempotent-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09XI, lemma-characterize-henselian-pair, proof (5) implies (2), section splitting; algebra.tex Tag 00U3, lemma-etale-over-field and Tag 00U2, lemma-etale (3)"
+   }
+  },
+  {
+   "text": "For an affine open $U=\\operatorname{Spec}A\\subseteq X$, give $A$ its $e$-algebra structure by restricting global functions. The affine base-change formula gives $U\\times_l E=\\operatorname{Spec}(A\\otimes_l E)$. The balanced inverse maps $a\\otimes(b\\otimes t)\\mapsto ab\\otimes t$ and $a\\otimes t\\mapsto a\\otimes(1\\otimes t)$ identify $A\\otimes_e R$ with $A\\otimes_l E$. Pulling back the factor $R\\to E$ therefore gives $A\\otimes_e E$, the ring of $U\\times_e E$. Explicitly, its kernel in $A\\otimes_e R$ is generated by $1-p$, and its spectrum is $D(1\\otimes p)$, with complementary open $D(1-1\\otimes p)$. These identifications agree on overlaps because they are induced by the same structural maps. They prove that the canonical $X\\times_e E\\to X\\times_l E$ is an open-and-closed immersion, and identify it with the pullback of the multiplication component.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; explicit balanced tensor maps and idempotent-localization calculation"
+   }
+  },
+  {
+   "text": "The local rings of $X\\times_e E$ are consequently local rings of the geometrically normal $X\\times_l E$, hence normal domains. Since $E/e$ was arbitrary, $X$ is geometrically normal over $e$. Also, a finite affine $l$-cover of $X$ remains a finite affine cover as an $e$-scheme; any finite set of $l$-algebra generators of a chart is also a set of $e$-algebra generators. Hence $X$ is of finite type over $e$. The base changes of these charts have rings $A\\otimes_e E$, generated over $E$ by $a_i\\otimes1$ for the chosen generators $a_i$ of $A$. Thus each $X\\times_e E$ is of finite type over $E$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038M, definition-geometrically-normal; finite-type verification directly from affine generators"
+   }
+  },
+  {
+   "text": "The given geometric connectedness of $h$ says exactly that every $X\\times_e E$ is nonempty and connected. Fix $E/e$. Since $\\operatorname{Spec}E$ is Noetherian (the only ideals of a field are $(0)$ and $(1)$), [lem-weil-pbc-finite-type-over-noetherian] and the finite type over $E$ verified in step 4 show that $X\\times_e E$ is Noetherian. By step 4 all its local rings are normal domains. By [rem-pc-regular-normal] (2), the irreducible components of $X\\times_e E$ are pairwise disjoint open and closed subsets which, as open subschemes, are normal and integral. As $X\\times_e E$ is nonempty it has a component, which is a nonempty open and closed subset; connectedness forces it to be all of $X\\times_e E$. Hence $X\\times_e E$ is a normal integral Noetherian scheme. Since $E/e$ was arbitrary, $X$ is geometrically integral over $e$ [def-pc-geometrically-irreducible], and with step 4 every asserted clause is proved.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "rem-pc-regular-normal",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD3, lemma-geometrically-normal-stein, proof: a locally Noetherian normal scheme is the disjoint union of its irreducible components (properties.tex Tag 033M, lemma-normal-Noetherian); morphisms.tex Tag 01T6, lemma-finite-type-noetherian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible",
+  "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BUG (4) and Tag 0FD3, with the explicit multiplication-component change of constants proved using Stacks 00U3, 00U2, 09XI and 01I4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper geometrically normal integral scheme is geometrically integral over its field of global functions with geometrically connected Stein fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric-integrality definitions and purely inseparable spectrum homeomorphisms do not supply normality over the separable constants or the selected component"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GeometricallyIntegral\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.GeometricallyIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"We say that morphism `f : X ⟶ Y` is geometrically integral if for all `Spec K ⟶ Y` with `K`\\na field, `X ×[Y] Spec K` is integral.\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.eq_geometrically\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" : @AlgebraicGeometry.GeometricallyIntegral = AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.GeometricallyIrreducible f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.GeometricallyReduced f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.Surjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.GeometricallyIntegral f] : AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (geometrically_isIntegral : AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f) : AlgebraicGeometry.GeometricallyIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.geometricallyIntegral_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.GeometricallyIntegral f ↔ AlgebraicGeometry.geometrically AlgebraicGeometry.IsIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyReduced f] [AlgebraicGeometry.GeometricallyIrreducible f] : AlgebraicGeometry.GeometricallyIntegral f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.UniversallyOpen f] [AlgebraicGeometry.IsIntegral S] [AlgebraicGeometry.IsLocallyNoetherian S] : AlgebraicGeometry.IsIntegral X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [Subsingleton ↥S] [AlgebraicGeometry.IsIntegral S] : AlgebraicGeometry.IsIntegral X\", \"doc\": \"If `X` is geometrically integral over a field, then it is integral.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric-integrality definitions and purely inseparable spectrum homeomorphisms do not supply normality over the separable constants or the selected component"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]eometrically[Nn]ormal|[Ss]tein|[Gg]eometrically[Cc]onnected",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyConnected`: A morphism `f : X ⟶ Y` is geometrically connected if\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"24\", \"text\": \"- `GeometricallyConnected.iff_geometricallyConnected_fiber`: A scheme is geometrically connected\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"40\", \"text\": \"class GeometricallyConnected (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"43\", \"text\": \"lemma GeometricallyConnected.eq_geometrically :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"44\", \"text\": \"    @GeometricallyConnected = geometrically (ConnectedSpace ·) := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric-integrality definitions and purely inseparable spectrum homeomorphisms do not supply normality over the separable constants or the selected component",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric normality over a field descends to the finite separable constant field and geometrically connected normal fibres are integral",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Normal.isIntegral\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \"(_ : Normal F K) (x : K) : IsIntegral F x\", \"doc\": \"Let `K` be a normal field extension of a field `F`. Then every element `x \\\\in K` is integral over `F`, meaning `x` is a root of some monic polynomial with coefficients in `F`.\"}\n  {\"name\": \"IsSeparable.isIntegral\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"{x : K} (h : IsSeparable F x) : IsIntegral F x\", \"doc\": \"If an element $ x $ in the field $ K $ is separable over $ F $, then $ x $ is integral over $ F $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : IsIntegralHom (f.normalizationDesc f₁ f₂ H)\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"IsSeparable.of_integral\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"(x : K) : IsSeparable F x\", \"doc\": \"If an element $ x $ in a field extension $ K $ of $ F $ is integral over $ F $, then $ x $ is separable over $ F $. This holds under the assumption that $ F $ has characteristic zero, ensuring that al\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric-integrality definitions and purely inseparable spectrum homeomorphisms do not supply normality over the separable constants or the selected component"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite separable field extension e over l the scheme X base changed to an extension E of e is an open and closed subscheme of X base changed from l to E",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (k : Type u_1) (K : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K],\\n  IsHomeomorph (PrimeSpectrum.comap (algebraMap R (TensorProduct k R K)))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (R' : Type u_4)\\n  (S' : Type u_5) [inst_3 : CommRing S'] [FaithfulSMul R S] [alg : Algebra.IsAlgebraic R S] [NoZeroDivisors S]\\n  [inst_6 : Algebra S S'] [IsFractionRing S S'] [inst_8 : Algebra R S'] [ins\", \"doc\": \"If $ R' $ is a fraction ring of $ R $ and $ S' $ is equipped with a scalar tower structure $ R \\to R' \\to S' $, then the base change construction satisfies the universal property of the tensor product f\"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  (F : Type u) →\\n    (K : Type v) →\\n      [inst : CommRing R] →\\n        [inst_1 : Field F] →\\n          [inst_2 : Field K] →\\n            {W' : WeierstrassCurve.Affine R} →\\n              [inst_3 : DecidableEq F] →\\n                [inst_4 : DecidableEq K] →\\n                  [inst_5 : Al\", \"doc\": \"Given fields $F$ and $K$ equipped with an $R$-algebra structure and satisfying the scalar tower compatibility condition $R \\to F \\to K$, this function defines a group homomorphism from the set of points\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {F : Type u} {K : Type v} {L : Type w} [inst : CommRing R] [inst_1 : Field F] [inst_2 : Field K]\\n  [inst_3 : Field L] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : DecidableEq L] [inst_7 : Algebra R F] [inst_8 : Algebra R K] [inst_9 : A\", \"doc\": \"Given fields $F$, $K$, and $L$ with $R$-algebra structures and scalar tower compatibility $R → F → K$ and $R → F → L$, for any algebra homomorphism $f : K → L$ over $F$ and point $P$ on an affine Weie\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"WeierstrassCurve.map_baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {S : Type s} [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {A : Type v} [inst_3 : CommRing A] [inst_4 : Algebra R A] [inst_5 : Algebra S A] [IsScalarTower R S A] {B : Type w}\\n  [inst_7 : CommRing B] [inst_8 : Algebra R B] [inst_9 : Algebra\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, given commutative $ R $-algebras $ A $ and $ B $ with an $ S $-algebra homomorphism $ g : A \\\\to B $ (where $ S $ is an $ R $-algebra), the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric-integrality definitions and purely inseparable spectrum homeomorphisms do not supply normality over the separable constants or the selected component"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]eometrically[Nn]ormal|[Ss]tein|[Gg]eometrically[Cc]onnected",
+   "results": "OK 5 hits: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean lines 35-120 and Mathlib/AlgebraicGeometry/Morphisms/Proper.lean lines 150-169; these do not state this item.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide geometric-integrality definitions, integral normalization, or finiteness of global sections; none gives geometric normality over the selected separable constant field and the multiplication-component clause",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric normality over a field and geometrically connected Stein fibres imply geometric integrality over the field of global sections",
+   "results": "OK 8 hits: AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsIntegral. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean lines 35-120 and Mathlib/AlgebraicGeometry/Morphisms/Proper.lean lines 150-169; these do not state this item.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide geometric-integrality definitions, integral normalization, or finiteness of global sections; none gives geometric normality over the selected separable constant field and the multiplication-component clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GeometricallyIntegral\"",
+   "results": "OK 12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral.eq_geometrically, AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral, AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral, AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral, AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral, AlgebraicGeometry.GeometricallyIntegral.mk. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean lines 35-120 and Mathlib/AlgebraicGeometry/Morphisms/Proper.lean lines 150-169; these do not state this item.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide geometric-integrality definitions, integral normalization, or finiteness of global sections; none gives geometric normality over the selected separable constant field and the multiplication-component clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper geometrically normal integral scheme is geometrically integral over its finite separable field of global functions with geometrically connected Stein fibres",
+   "results": "OK 8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean lines 35-120 and Mathlib/AlgebraicGeometry/Morphisms/Proper.lean lines 150-169; these do not state this item.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide geometric-integrality definitions, integral normalization, or finiteness of global sections; none gives geometric normality over the selected separable constant field and the multiplication-component clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing base field from l to finite separable constants e selects an open closed component and preserves geometric normality of a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage. Read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean lines 35-120 and Mathlib/AlgebraicGeometry/Morphisms/Proper.lean lines 150-169; these do not state this item.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide geometric-integrality definitions, integral normalization, or finiteness of global sections; none gives geometric normality over the selected separable constant field and the multiplication-component clause"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-alteration-constant-regularization",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong (1997), Lemma 5.5 and proof, printed p.614, applied over Spec k: purely inseparable geometric reduction and Stein constants. Geometric-normal preparation is Stacks Tag 0BXT (varieties-lemma-finite-extension-geometrically-normal); the fixed-field conclusion uses the geometric integrality of Y.; extracted argument: returned proof steps 11, 12, 13",
+   "via": [
+    "lem-sfb-normal-alteration-constant-regularization",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geonormal-stein-geometric-integrality",
+  "worker": "stage1",
+  "summary": "Q24: statement unchanged. Five steps prove separability, split the multiplication retraction, compute the selected base change explicitly, inherit geometric normality and finite type, and apply existing connected-normal geometric-integrality and Noetherian tools. All dependencies already exist; no new nodes. Searched current project Lean and the whole blueprint; no exact attachment or equivalent blueprint statement. Maintainer review FIX: step 5 cites rem-pc-regular-normal (Stacks 033M, the argument of 0FD3) instead of the sec-trace-formula criterion; step 1 records finite separable = separable algebraic.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through de Jong Lemma 5.5: extracted normal-alteration-constant-regularization steps 11-13, passage from geometrically normal l-scheme to its separable Stein constants. The ancestor command returns None; inherited from.node/via are retained. This is a generic geometric prerequisite below the alteration construction, with no replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-geometrically-reduced-global-sections-separable",
+    "why": "Generic proper-scheme separability of the global constant field; used in the inherited alteration/Stein-constants route, which has no same-unit substitute."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-idempotent-splitting",
+    "why": "Generic ring-algebra retraction splits an etale algebra by an idempotent; supplies the selected multiplication factor, not an alternative alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product computation used for the explicit tensor identifications and finite-type charts."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic Stacks 033M: a Noetherian normal scheme is the disjoint union of its normal integral irreducible components; the connected-normal step of Tag 0FD3, applied to each X_E. Replaces the trace-formula-chapter criterion (batch-5)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-geometrically-reduced-global-sections-separable",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-ea553e930",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-ea553e930 (reviewer sub-agent of L); spot-checked: Q24 lem-sfb-geonormal-stein-geometric-integrality ea553e93 (0 new nodes, statement unchanged). I read 0BUG(4) and 0FD3 (varieties.tex:2270), plus 033M, 00U2/00U3, 09XI, 01I4 and 01T6, and the statement of every cited node. Small cases tested: e=l, X=Spec e separable, inseparable e (excluded by the hypotheses), E/e transcendental. Steps 1-4 are correct. Step 1: geometrically normal gives geometrically reduced, then lem-pc-proper-geometrically-reduced-global-sections-separable. Step 2: 00U3+00U2 make e⊗_lE étale over E; multiplication is an E-retraction, so the idempotent splitting gives the clopen point D(p). Step 3: A⊗_e(e⊗_lE)≅A⊗_lE, the kernel is 1⊗(1-p) by right exactness, so the image is D(1⊗p), clopen and local on the target. Step 4: open immersions keep local rings, and l-generators are e-generators. FIX 1 (batch-5): step 5 cited lem-trf-geonormal-geoconnected-finite-type-integral, an unsplit node of the trace-formula proof chain (via lem-trf-trace-specialization). It is replaced by rem-pc-regular-normal (2) (Stacks 033M, the argument 0FD3 itself uses; its closure has no trf/pod nodes) together with finite-type-over-noetherian and nonempty+connected, so X_E has one clopen component and is integral. FIX 2: step 1 now writes the bridge from separable (def-weil-pbc-separable-field-extension) to separable algebraic, which lem-weil-pbc-finite-separable-extension-etale assumes; both definitions are cited. Batch-5 flag on lem-pc-proper-geometrically-reduced-global-sections-separable accepted: its closure reaches only def-trf-schematically-dense-open (a definition) and the Mathlib leaves lem-pod-separated-finite-type-base-change and lem-trf-affine-open-limit-descent, none of them trace-formula or duality content. Tool uses accepted: proper-reduced-separable, étale idempotent splitting, affine fibre product, and rem-pc-regular-normal in place of the trf entry. No duplicates, no cycle, no SGA citation. Whole item JSON in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ }
+}

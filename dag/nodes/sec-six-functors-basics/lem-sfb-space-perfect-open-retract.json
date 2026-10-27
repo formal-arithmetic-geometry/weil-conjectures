@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-space-perfect-open-retract",
+ "kind": "statement",
+ "title": "A perfect complex on a quasi-compact open is a retract of a global restriction",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $i:U\\hookrightarrow X$ be a quasi-compact open subspace [def-a1-space-open-subspace], and let $A\\in D(\\mathcal O_U)$ be perfect. There exist a perfect $Q\\in D(\\mathcal O_X)$ and morphisms $s:A\\to i^*Q$, $r:i^*Q\\to A$ in $D(\\mathcal O_U)$ with $r\\circ s=\\mathrm{id}_A$. Here $i^*$ is exact restriction to the open small etale site [def-trf-space-etale-module-functors].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IX, lemma-direct-summand-of-a-restriction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-a1-space-open-subspace",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix the given perfect $A$ on $U$. For a quasi-compact open $W\\subset X$, let $\\mathcal P(W)$ assert that $U\\subset W$ and that there are a perfect $B$ on $W$ and maps $s_W:A\\to B|_U$, $r_W:B|_U\\to A$ with $r_Ws_W=\\mathrm{id}_A$. At $W=U$ choose $B=A$ and both maps the identity. The enlargement induction principle reduces $\\mathcal P(X)$ to its preservation across an elementary distinguished square $(W_1\\subset W_2,f:V\\to W_2)$ with $U\\subset W_1$ and $V$ affine. Fix a witness $(B,s_1,r_1)$ for $\\mathcal P(W_1)$. Its overlap $H=W_1\\times_{W_2}V$ is a quasi-compact open subscheme of $V$.",
+   "uses": [
+    "lem-sfb-space-qc-open-enlargement-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IX, lemma-direct-summand-of-a-restriction, via the enlargement-and-gluing construction in Tag 09IV, lemma-lift-map-from-perfect-complex-with-support, specialized to the zero target and full support."
+   }
+  },
+  {
+   "text": "Restriction of a local bounded complex of finite-free summands stays such a complex, so $F=B|_H$ is perfect. Since $H$ is a quasi-compact open of the affine scheme $V$, it is quasi-compact and quasi-separated. The quasi-coherence clause for perfect objects puts $F$ in $D_{\\mathrm{QCoh}}(\\mathcal O_{H,\\mathrm{et}})$. The etale/Zariski equivalence gives $F_0\\in D_{\\mathrm{QCoh}}(\\mathcal O_{H,\\mathrm{Zar}})$ with $\\epsilon_H^*F_0\\cong F$, and the perfectness comparison makes $F_0$ Zariski-perfect. Apply the affine supported-extension theorem on $V$ with closed subset $T=|V|$ and open $H$. Its support hypothesis is vacuous and $V\\setminus T=\\varnothing$ is quasi-compact. It gives a Zariski-perfect $D_0$ on $V$ with $D_0|_H\\cong F_0\\oplus F_0[1]$. The perfect-quasi-coherent theorem puts $D_0$ in $D_{\\mathrm{QCoh}}(\\mathcal O_{V,\\mathrm{Zar}})$, the domain of the pullback comparison. Set $D=\\epsilon_V^*D_0$, which is etale-perfect by the perfectness comparison. The equivalence's natural pullback comparison for $H\\hookrightarrow V$, and its exact additive pullback, give $D|_H\\cong F\\oplus F[1]\\cong (B\\oplus B[1])|_H$.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-space-perfect-objects-compact",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-perfect-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IV, representable-chart paragraph and first construction paragraph; Tags 071Q and 08HG; perfect.tex Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, with full support."
+   }
+  },
+  {
+   "text": "Invert the overlap isomorphism to obtain $c:(B\\oplus B[1])|_H\\xrightarrow{\\sim}D|_H$. Derived gluing for the distinguished square gives $R\\in D(\\mathcal O_{W_2})$ and isomorphisms $e:R|_{W_1}\\xrightarrow{\\sim}B\\oplus B[1]$ and $R|_V\\xrightarrow{\\sim}D$, with transition $c$. The pair $W_1\\to W_2$, $V\\to W_2$ is jointly surjective: the reduced closed complement $Z$ has $|Z|=|W_2|\\setminus|W_1|$, the projection $V\\times_{W_2}Z\\to V$ identifies the points of $V\\times_{W_2}Z$ with $|f|^{-1}(|Z|)$, and since $V\\times_{W_2}Z\\to Z$ is an isomorphism, $|f|$ maps $|f|^{-1}(|Z|)$ onto $|Z|$; so every point outside $W_1$ lifts to $V$. The object $B\\oplus B[1]$ is perfect because on each common local model its terms are finite direct sums of finite-free summands, with bounded union of the shifted degree intervals. Both restrictions of $R$ therefore have the local models in the definition of perfectness, and the jointly surjective etale cover provides those models on $W_2$. Thus $R$ is perfect.",
+   "uses": [
+    "lem-sfb-space-distinguished-derived-gluing",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-space-qc-open-enlargement-induction",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IX, lemma-direct-summand-of-a-restriction, via the enlargement-and-gluing construction in Tag 09IV, lemma-lift-map-from-perfect-complex-with-support, specialized to the zero target and full support."
+   }
+  },
+  {
+   "text": "Restrict $e$ to $U$ and put $s_2=e_U^{-1}\\circ\\mathrm{inl}\\circ s_1$ and $r_2=r_1\\circ\\mathrm{pr}_1\\circ e_U$. The inverse-isomorphism and biproduct identities give $r_2\\circ s_2=r_1\\circ\\mathrm{pr}_1\\circ\\mathrm{inl}\\circ s_1=r_1\\circ s_1=\\mathrm{id}_A$. Hence $(R,s_2,r_2)$ witnesses $\\mathcal P(W_2)$. This establishes the induction step, including compatibility of the chosen retraction with the original $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IX, lemma-direct-summand-of-a-restriction, via the enlargement-and-gluing construction in Tag 09IV, lemma-lift-map-from-perfect-complex-with-support, specialized to the zero target and full support."
+   }
+  },
+  {
+   "text": "Apply enlargement induction to the property and base case of step 1 and the construction in steps 2--4. It gives $\\mathcal P(X)$. The resulting $Q$, $s$, $r$ are exactly the perfect object and derived restriction retraction required by the statement.",
+   "uses": [
+    "lem-sfb-space-qc-open-enlargement-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IX, lemma-direct-summand-of-a-restriction, via the enlargement-and-gluing construction in Tag 09IV, lemma-lift-map-from-perfect-complex-with-support, specialized to the zero target and full support."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qc-open-enlargement-induction",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-space-perfect-objects-compact",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-detects-perfect",
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-perfect-qcoherent",
+  "lem-sfb-space-distinguished-derived-gluing",
+  "lem-sfb-space-reduced-closed-support"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IX, lemma-direct-summand-of-a-restriction, via the enlargement-and-gluing construction in Tag 09IV, lemma-lift-map-from-perfect-complex-with-support, specialized to the zero target and full support."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every perfect complex on a quasi compact open algebraic subspace is a direct summand of restriction of a perfect complex on the whole space",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(retract|summand|restrict)|[Pp]erfectComplex",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complex on quasi compact open extends as a direct summand of a perfect complex",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.QuasiCompactCover.inst",
+     "AlgebraicGeometry.instQuasiCompactMorphismRestrict",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.quasiCompactCover_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Retract\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Thomason extension theorem perfect complex on an open is a retract of a global perfect complex",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ComplexShape.Embedding.homRestrict_hasLift",
+     "HomologicalComplex.extendSingleIso",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "ComplexShape.Embedding.isIso_liftExtend_f_iff",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(retract|summand|restrict)|[Pp]erfectComplex",
+   "sub": "",
+   "results": {
+    "hits": 7,
+    "top": [
+     "Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+     "Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+     "Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+     "Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+     "Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+     "Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean",
+     "Mathlib/LinearAlgebra/RootSystem/BaseChange.lean"
+    ],
+    "note": "",
+    "digest": "e27ed95cf008b5e0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, complex-shape extension, perfect pairings, or topological perfect spaces; no perfect-complex extension for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Thomason extension theorem perfect complex on an open is a direct summand of a global perfect complex",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.extend.congr_simp",
+     "ModuleCat.localizedModule_functor_map_exact",
+     "CategoryTheory.hasExt_of_enoughProjectives",
+     "LinearMap.IsPerfPair.restrict",
+     "HomologicalComplex.isZero_extend_X",
+     "LinearMap.IsPerfectCompl.isCompl_right",
+     "LinearMap.IsPerfectCompl.right_top_iff",
+     "perfectSpace_of_module"
+    ],
+    "note": "",
+    "digest": "53ced4ccd6162432"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, complex-shape extension, perfect pairings, or topological perfect spaces; no perfect-complex extension for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Retract\"",
+   "sub": "",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, complex-shape extension, perfect pairings, or topological perfect spaces; no perfect-complex extension for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a quasi compact open algebraic subspace is a retract of restriction of a perfect complex on the whole qcqs algebraic space",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.isLocalization_basicOpen_of_qcqs"
+    ],
+    "note": "",
+    "digest": "068f723485b8e882"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme sections, complex-shape extension, perfect pairings, or topological perfect spaces; no perfect-complex extension for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-detects-lower-bound",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, distinguished-square paragraph: lift a perfect object on U as a direct summand of a restriction.",
+   "via": [
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-open-retract",
+  "worker": "stage1",
+  "summary": "Retained the exact Tag 09IX statement. Expanded its reference to Tag 09IV into enlargement induction, affine plus-shift extension, explicit etale/Zariski transport, distinguished-square gluing, and the explicit biproduct retraction. Created only the generic enlargement induction principle; reused the existing affine extension, topology comparison, perfect quasi-coherence and derived gluing nodes.",
+  "blueprint": "Supporting algebraic-space perfect extension in the existing ancestry of det-thm-sf-ctf-stability-direct-images, clause (3): the Tag 0GFI distinguished-square proof requires a global perfect object restricting with the given perfect summand. The newest blueprint clause (3) still concerns direct-image preservation; this split elaborates the already recorded supporting algebraic-space route, without altering its unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-perfect-support-extension",
+    "why": "The generic affine-scheme plus-shift extension theorem is used on the affine chart after etale/Zariski comparison; no node of this unit supplies this affine geometric construction."
+   },
+   {
+    "node": "lem-sc-perfect-qcoherent",
+    "why": "The generic scheme theorem supplies quasi-coherent cohomology of the Zariski-perfect affine extension, needed for the etale/Zariski comparison domain. This is a coefficient-independent tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-c3d49cfd7",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-c3d49cfd7 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, together with the sources: spaces-perfect 09IX, 09IV, 09IT, 08GP, 08HB, 08HG and perfect 08EK. Fixed one fault (C1/C4): step 3 proved that W1 and V jointly cover W2 using |Z|=|W2|\\|W1| and the point clause for the base change V×Z, but did not cite lem-sfb-space-reduced-closed-support. I added it to the step's uses and to proof_deps and wrote out the point argument (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-perfect-open-retract.json). The item's statement is identical to live and to 09IX; the retraction form is equivalent to a direct summand because idempotents split in D(O_U). No repair note, and live is still unsplit. Step 1: P(W) is defined, its base case at U is the identity, and the qc-overlap clause is true. Step 2: each use matches the cited statement: B|_H is perfect, perfect objects have QCoh cohomology (H is qcqs), the étale/Zariski equivalence and the hypothesis-free perfectness iff give F0, 08EK applies with T=|V| so the support conditions are vacuous, lem-sc-perfect-qcoherent puts D0 in the domain of the pullback comparison, and restriction gives D|_H≅(B⊕B[1])|_H. Step 3: gluing (08HB with t=id) has the transition in the right direction; perfectness of B⊕B[1] and of R is elementary. Step 4: the r2∘s2=id calculation checks. Step 5: the induction conclusion applies with W0=U. New node lem-sfb-space-qc-open-enlargement-induction matches 09IT quantifier by quantifier. It holds in the small cases (W0 empty, W0=X, H empty), has 5 recorded searches, a statement only, and correct blueprint from/via. It is not the 08GP node lem-sfb-space-qcqs-distinguished-square-induction (an absolute induction from affine base cases) and does not restate the item. No cycle. I accept the tool_uses lem-sc-affine-perfect-support-extension (08EK) and lem-sc-perfect-qcoherent as generic. No SGA. Batch-5 flags: all reach sec-trace-formula only through generic definitions (def-trf-algebraic-space, def-trf-space-quasi-coherent-module) or the generic ε site comparison lem-trf-zariski-etale-functor-comparison-square (03FH/03LC). None is the trace formula, Poincaré duality, or a step of their proofs, so all are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectOpenRetract",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_perfect_open_retract",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectOpenRetract.lean",
+  "statement": "theorem exists_perfect_open_retract {S : Scheme.{u}} (X U : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} U.SmallModules] (hXqc : CompactSpace (Point X.obj.obj)) (hXqs : IsAbsolutelyQuasiSeparated X) (i : U ⟶ X) (hi : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) i.hom.hom) (hUqc : CompactSpace (Point U.obj.obj)) (A : U.DerivedModules) (hA : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} U.smallStructureSheaf A) : ∃ Q : X.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf Q ∧ ∃ (s : A ⟶ (derivedTensorPullback i).obj Q) (r : (derivedTensorPullback i).obj Q ⟶ A), s ≫ r = 𝟙 A",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f01572c5",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read item, 13 stmt_dep records (identical to live), module, report, Stacks 09IX (spaces-perfect.tex l.3660-3671) and the Lean of OpenSubspace, IsAbsolutelyQuasiSeparated, SmallModules/smallStructureSheaf (SmallModel.{u}), DerivedModules, derivedTensorPullback (O3), IsPerfectOnRingedSiteOfUniverses. Every clause matches: qc via CompactSpace Point, absolute qs via owner predicate, qc open subspace as i with IsRepresentableWith IsOpenImmersion (same predicate as OpenSubspace; iso-invariant), A and Q perfect with {u,u,u,w}, s ≫ r = 𝟙 A (= r∘s = id; retract ⇔ direct summand), i^* = canonical Lf^* (exact restriction for open immersions). No extra hypotheses; edge cases (empty U/X, A=0, i=id, non-qs S) covered; universes bound. lean.statement verbatim; node diff only lean (new) + 4 landed def-owner stmt_deps used in the signature; no defs, only sorry; source/blueprint/proof docstrings present; no copies. No file changed, no compile. review.md shortened because the disk is full."
+ }
+}

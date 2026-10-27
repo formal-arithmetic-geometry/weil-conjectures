@@ -390,16 +390,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-2b64aa647 (reviewer sub-agent of L); spot-checked: I read all 11 steps, the new node and every cited statement, and checked the item against ILO XIII 3.7.2 (p. 203). The source cites SGA 5 I 3.1.2 for this reduction. The split does not use SGA anywhere: it proves the reduction by Noetherian induction on reduced closed supports, the existing finite-ring Sylow filtration node, the degree-trace retraction (W_b is irreducible, so connected, and d is prime to ell), the finite-open isomorphism (Stacks 0GJ1) on a square that is cartesian by the new node's full-preimage clause, and the degree-zero open-closed sequence, with reduction via 03SI. The statement is unchanged and matches its citer, lem-per-gabber-open-immersion-sheaf-finiteness Step 8. Hypotheses checked: affine Noetherian and ell F=0 in Step 4; |Z| a proper subset of T in Step 10; T_red = S_red in Step 11. New node lem-per-finite-etale-integral-models-after-shrinking: it is true. My proof: T is reduced and all its components lie over the generic point (flatness); shrinking separates them; Stacks 05K0 gives a finite model; take the reduced closure; T_i is closed in Y_W because it is finite over W, and dense, so T_i = Y_W. Tested on a field base and on a nodal cubic with a crosswise double cover. B1-B9 hold. It is strictly smaller than the item and not a duplicate: only thm-pqf-zmt-factorization (no integral components) and curve-specific nodes come close. No cycle (719-node closure). The tool_uses inside split_report list all 17 off-unit generic tools, and I accept them. Advisory: Step 4 does not cite a node for 'affine open of a Noetherian scheme has Noetherian ring' (Stacks 01OT), a standard fact. No fixes."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/ConstructibleFiniteOpenConstantGeneration.lean",
   "module": "Sheaf.AlgebraicGeometry.ConstructibleFiniteOpenConstantGeneration",
   "declaration": "AlgebraicGeometry.Etale.constructible_finite_open_constant_generation",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleFiniteOpenConstantGeneration.lean",
-  "statement": "theorem constructible_finite_open_constant_generation (S : Scheme.{u}) [IsNoetherian S] (B : Type (u + 1)) [Field B] [Finite B] (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} B)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) (P : ObjectProperty (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} B))) [P.IsClosedUnderIsomorphisms] [P.IsClosedUnderFiniteCoproducts] [P.IsClosedUnderExtensions] [P.IsStableUnderRetracts] (hgen : ∀ (S' W : Scheme.{u}) (π : S' ⟶ S) [IsFinite π] [IsIntegral S'] (k : W ⟶ S') [IsOpenImmersion k] [Nonempty W], P ((lowerStar (ModuleCat.{u + 1} B) π).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} B) k).obj ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} B)).obj (ModuleCat.of B B))))) : P F",
-  "branch": "newtargets-dag",
-  "by": "NK",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.ConstructibleFiniteOpenConstantGeneration deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -409,5 +406,16 @@
   "result": "pass",
   "note": "Statement matches node clause by clause: Noetherian Scheme.{u}, finite field B : Type (u+1) (forced by recorded IsConstructibleEtaleModuleSheaf; project convention), Sheaf S.smallEtaleTopology (ModuleCat B), sheaf-level constructibility predicate (owner def-weil-pbc-etale-constructible-sheaf, cited via def-weil-pbc-constructible-complexes), smallest subcategory as universal property over ObjectProperty with IsClosedUnderIsomorphisms/FiniteCoproducts (incl. empty)/Extensions/StableUnderRetracts, generators ordinary Etale.lowerStar ∘ openImmersionLowerShriek of constant ModuleCat.of B B with IsFinite π, AlgebraicGeometry.IsIntegral S', IsOpenImmersion k, Nonempty ↥W (#check with pp.fullNames). Only the node's lean field changed; statement verbatim; docstrings carry source/blueprint and all 11 steps; sorry only; no defs. nt_compile --json clean 3.1 s, broken control fails. Edge cases: empty S / zero F via empty coproduct; any characteristic. Advisory: the 'Second reading by NK' section is dispatcher boilerplate claiming no independent reading (substance checked here)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

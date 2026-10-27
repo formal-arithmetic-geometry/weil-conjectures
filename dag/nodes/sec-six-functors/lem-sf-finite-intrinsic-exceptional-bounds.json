@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-finite-intrinsic-exceptional-bounds",
+ "kind": "statement",
+ "title": "Uniform intrinsic exceptional bounds at the specified compactification",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne p$, finite-type $k$-schemes $X,Y$, a separated finite-type $k$-morphism $f:X\\to Y$ and a compactification $c$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. Use the full finite-Tor categories, intrinsic intervals and intrinsic Tor-amplitude predicates [def-weil-finite-tor-amplitude, def-weil-constructible-intervals, def-weil-proetale-tor-amplitude], and the specified intrinsic exceptional functor $H_c$ [def-sf-finite-operation-realizations]. There are integers $c_-,c_+$ independent of the positive coefficient stage $(E,n)$ such that $H_c$ sends every object of $D^b_{ctf}(Y,A_{E,n})$ to $D^b_{ctf}(X,A_{E,n})$, carries intrinsic constructible interval $[a,b]$ into $[a+c_-,b+c_+]$, and carries Tor interval $[a,b]$ into $[a+c_-,b+c_+]$. The interval and Tor clauses are independent implications, and the constructible interval clause allows unordered endpoints. Neither scheme is required separated over $k$. This asserts only preservation by an already defined ambient functor, with no adjunction or compact-support statement.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.29(2), 3.16(2); blueprint cor-pur-general-admissibility-datum; original exceptional construction step 3."
+ },
+ "stmt_deps": [
+  "def-sf-finite-operation-realizations",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-constructible-intervals",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sfb-finite-derived-lower-shriek-compactification",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sf-specified-exceptional-hom-chain"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing ProEtale.exists_preservationClauses theorem, which already assembles the finite affine charts in cor-pur-general-admissibility-datum and transports the resulting etale bounds to the fixed-module pro-etale category. Choose one natural-number bound for the target dimension and the chart dimension furnished there, before introducing the finite coefficient extension and level. The constants are -2D and 2dY+1, also when the source is empty. The coefficient exponent is invertible by the coefficient_invertible lemma of PurityAffineChartBounds.",
+   "uses": [
+    "cor-pur-general-admissibility-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use rightDerivedUpperShriekAdjunctionOfCompactification and uniqueness of right adjoints to identify the upstream global etale exceptional functor with the right adjoint at the specified compactification. Whisker with the etale/pro-etale comparison functors.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact coefficient realization preserves and reflects boundedness and cohomological concentration. The finite-ring constructible-derived-origin comparison identifies intrinsic constructible homology with the fixed-module constructible predicate. Transport Tor amplitude through intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn, and transport all predicates through the counit and exceptional-functor isomorphisms. Intrinsic bounded constructibility is closed under isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the transported Tor estimate to any finite Tor interval of the input, obtaining constructibility and a finite Tor interval for the output. Apply the upstream cohomological estimate separately for arbitrary endpoints: no order is required by that theorem. Normalize a-2D and b+2dY+1 to additions of the chosen constants. The Tor output endpoints remain ordered because both dimensions are nonnegative.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "cor-pur-general-admissibility-datum",
+  "fix-prop-adjunctions",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-proetale-dbc-triangulated",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Propositions 2.29(2), 3.16(2); upstream ProEtale.exists_preservationClauses (the affine-chart proof of cor-pur-general-admissibility-datum); canonical exact coefficient transport and uniqueness of the specified etale right adjoint. K8, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniform cohomological and Tor bounds for exceptional inverse image of constructible finite coefficient complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.instHasFiniteLimits\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"[HasFiniteLimits C] : HasFiniteLimits (HomologicalComplex C c)\", \"doc\": \"If a category $ C $ has zero morphisms and finite limits, then the category of homological complexes over $ C $ with shape $ c $ also has finite limits.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CochainComplex.ConnectData.restrictionGEIso_inv_f\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Connect\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : ChainComplex C ℕ} {L : CochainComplex C ℕ} (h : CochainComplex.ConnectData K L) (i : ℕ),\\n  h.restrictionGEIso.inv.f i =\\n    (HomologicalComplex.restrictionXIso h.cochainComplex (Comple\", \"doc\": \"For a cochain complex $ h.\\\\text{cochainComplex} $ constructed from chain complex $ K $ and cochain complex $ L $, the inverse of the restriction isomorphism $ h.\\\\text{restrictionGEIso} $ at each natur\"}\n  {\"name\": \"CochainComplex.ConnectData.restrictionLEIso_inv_f\", \"module\": \"Mathlib.Algebra.Homology.Embedding.Connect\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : ChainComplex C ℕ} {L : CochainComplex C ℕ} (h : CochainComplex.ConnectData K L) (i : ℕ),\\n  h.restrictionLEIso.inv.f i =\\n    (HomologicalComplex.restrictionXIso h.cochainComplex (Comple\", \"doc\": \"For a connected cochain complex constructed from a chain complex $ K $ and cochain complex $ L $ in a category $ \\\\mathcal{C} $, the inverse of the isomorphism component at index $ i \\\\in \\\\mathbb{N} $ b\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_of_iso\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] : L.IsStrictlyGE n\", \"doc\": \"If cochain complexes $ K $ and $ L $ are isomorphic and $ K $ is strictly supported in degrees $ \\\\geq n $, then $ L $ is also strictly supported in degrees $ \\\\geq n $.\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEI\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5b\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] : (I K).IsStrictlyGE n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, this constructs a cochain complex $I K$ where each object $X^n$ is the injective replacement of $K.X^n$ from the original complex $K$, and \"}\n  {\"name\": \"HomologicalComplex.instHasFiniteColimits\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"[HasFiniteColimits C] : HasFiniteColimits (HomologicalComplex C c)\", \"doc\": \"If a category $ C $ has finite colimits, then the category of homological complexes over $ C $ with shape $ c $ also has finite colimits. This instance asserts that the property of having finite colim\"}\n  {\"name\": \"Module.Basis.exists_opNorm_le\", \"module\": \"Mathlib.Analysis.Normed.Module.FiniteDimension\", \"type\": \"{ι : Type*} [Finite ι] (v : Basis ι 𝕜 E) :\\n  ∃ C > (0 : ℝ), ∀ {u : E →L[𝕜] F} {M : ℝ}, 0 ≤ M → (∀ i, ‖u (v i)‖ ≤ M) → ‖u‖ ≤ C * M\", \"doc\": \"Let $ E $ and $ F $ be normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $, and let $ \\\\{v_i\\\\}_{i \\\\in I} $ be a finite basis for $ E $. There exists a constant $ C > 0 $ such that for \"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical tools do not supply this specified geometric finite-coefficient interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image finite Tor amplitude uniform bound from affine charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsAffine Y]\\n  {ι : Type u_1} (U : ι → \", \"doc\": \"If a scheme $X$ is covered by affine open subsets $\\\\{U_i\\\\}$ (i.e., $\\\\bigcup U_i = X$) and the induced ring homomorphism satisfies property $Q$ on each $U_i$, then the morphism $f$ satisfies property $\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_source_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsAffine Y]\\n  (𝒰 : X.OpenCover) [∀ (i \", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes with $ Y $ affine. If $ \\\\{U_i\\\\} $ is an open cover of $ X $ such that each $ U_i $ is affine, and for every $ i $ the composition $ U_i \\to X \\to Y $ satisfies\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_le\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q W : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, Q f → W f) →\\n    AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) ≤\\n    \", \"doc\": \"If a ring homomorphism condition $ Q $ implies another condition $ W $ for all commutative rings, then the property of being locally on affine target opens an affine morphism satisfying $ Q $ is conta\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsAffine Y]\\n  {ι : Type u_1} (U : ι → \", \"doc\": \"Let $X$ be a scheme with an affine open cover $\\\\{U_i\\\\}_{i \\\\in I}$ whose union is $X$, and let $Y$ be an affine scheme. For a morphism $f: X \\\\to Y$ corresponding to a ring homomorphism, a ring homomorp\"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical tools do not supply this specified geometric finite-coefficient interface."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(bound|amplitude)|[Ee]xceptional.*[Tt]or",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical tools do not supply this specified geometric finite-coefficient interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFiniteOperations",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Complement: the constructible exceptional adjunction Rf_! dashv f^! and compatibility with shifts; Uniform intrinsic exceptional bounds at the specified compactification",
+   "via": [
+    "lem-sf-exceptional-finite-operations",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFiniteIntrinsicBounds",
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteIntrinsicBounds.lean",
+  "declaration": "WeilConjectures.sfFiniteOperations_intrinsicExceptionalBounds",
+  "statement": "theorem sfFiniteOperations_intrinsicExceptionalBounds (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) :\n    ∃ cMinus cPlus : ℤ, ∀ (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l)\n      (n : ℕ+),\n      (∀ L : finiteTorConstructibleCategory l E.carrier n n.pos Y,\n        finiteTorConstructible l E.carrier n n.pos X\n          ((sfFiniteOperationsIntrinsicRight l E n c).obj L.obj)) ∧\n      (∀ (L : finiteTorConstructibleCategory l E.carrier n n.pos Y) (a b : ℤ),\n        constructibleInterval l E.carrier n n.pos Y a b L.obj →\n        constructibleInterval l E.carrier n n.pos X (a + cMinus) (b + cPlus)\n          ((sfFiniteOperationsIntrinsicRight l E n c).obj L.obj)) ∧\n      (∀ (L : finiteTorConstructibleCategory l E.carrier n n.pos Y) (a b : ℤ),\n        HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E.carrier n) L.obj a b →\n        HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E.carrier n)\n          ((sfFiniteOperationsIntrinsicRight l E n c).obj L.obj) (a + cMinus) (b + cPlus))",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-330ed",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164918-L-1127780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T084425-L-3679036",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

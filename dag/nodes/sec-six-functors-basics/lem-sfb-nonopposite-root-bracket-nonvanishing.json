@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-nonopposite-root-bracket-nonvanishing",
+ "kind": "statement",
+ "title": "Nonvanishing of brackets in nonopposite root spaces",
+ "statement": "Let $K$ be a characteristic-zero field and $L$ a finite-dimensional $K$-Lie algebra [def-wf-lie-algebra] with nondegenerate Killing form $B(x,y)=\\operatorname{Tr}_L(\\operatorname{ad}(x)\\operatorname{ad}(y))$. Let $H\\subseteq L$ be a nilpotent self-normalizing subalgebra, meaning its lower central series eventually vanishes and $\\{x\\in L:[x,H]\\subseteq H\\}=H$, such that every $\\operatorname{ad}(h)$ for $h\\in H$ is diagonalizable over $K$. For $\\gamma\\in H^\\vee$ write $L_\\gamma=\\{x\\in L:[h,x]=\\gamma(h)x\\text{ for all }h\\in H\\}$. Let $\\alpha,\\beta\\in H^\\vee$ be nonzero, with $\\alpha+\\beta\\ne0$ and $L_\\alpha,L_\\beta,L_{\\alpha+\\beta}$ all nonzero. For every nonzero $x\\in L_\\alpha$ and $y\\in L_\\beta$ one has $[x,y]\\ne0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed p.503 (split characteristic-zero root-space theory assumed there) and Theorem 23.71, pp.508--509 (nonzero bracket constants). This general-field local statement is agent-formulated; the root-string proof for an arbitrary split form, without assuming an already chosen Chevalley basis, needs Serre, Complex Semisimple Lie Algebras, Chapters V--VI, WANTED."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-killing-cartan-rank-one-spaces]. Its triangularizability hypothesis follows from the assumed diagonalizability. Its generalized spaces equal the ordinary $L_\\gamma$: ordinary eigenvectors are generalized eigenvectors, and the cited statement gives the converse. Thus $L_\\alpha$ and $L_\\beta$ are one-dimensional. Obtain $c\\in H$, $u\\in L_\\alpha$, $v\\in L_{-\\alpha}$ with $\\alpha(c)=2$, $[u,v]=c$, $[c,u]=2u$, $[c,v]=-2v$. Write $x=au$ with $a\\in K^\\times$ and set $f=a^{-1}v$. Then $(c,x,f)$ is an $\\mathfrak{sl}_2$ triple: $[x,f]=c$, $[c,x]=2x$, $[c,f]=-2f$, and $c\\ne0$ since $\\alpha(c)=2$. Put $E=\\operatorname{ad}(x)$ and $F=\\operatorname{ad}(f)$.",
+   "uses": [
+    "lem-sfb-killing-cartan-rank-one-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed p.503, split root-space prerequisite; Theorem 23.71, pp.508--509, nonzero structure constants. Agent proof using the cited general rank-one and Mathlib primitive-vector statements, not a chosen Chevalley basis."
+   }
+  },
+  {
+   "text": "Jacobi gives $[t,[x,w]]=[[t,x],w]+[x,[t,w]]=(\\alpha(t)+\\gamma(t))[x,w]$ for $w\\in L_\\gamma$ and $t\\in H$. Hence $E(L_\\gamma)\\subseteq L_{\\gamma+\\alpha}$ and likewise $F(L_\\gamma)\\subseteq L_{\\gamma-\\alpha}$. By [lem-sfb-nilpotent-module-generalized-weight-decomposition] only finitely many generalized weights of the adjoint $H$-module $L$ occur; every nonzero ordinary weight space is among them. The functions $\\gamma+j\\alpha$ for $j\\ge0$ are distinct: evaluate at any $t$ with $\\alpha(t)\\ne0$ and use characteristic zero. Therefore for any $z\\in L_\\gamma$, some $E^jz$ is zero. This proves precisely the termination needed below.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "lem-sfb-nilpotent-module-generalized-weight-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed p.503, split root-space prerequisite; Theorem 23.71, pp.508--509, nonzero structure constants. Agent proof using the cited general rank-one and Mathlib primitive-vector statements, not a chosen Chevalley basis."
+   }
+  },
+  {
+   "text": "Suppose for contradiction that $Ey=[x,y]=0$. In the finite-dimensional adjoint representation of $L$, the vector $y\\ne0$ satisfies $[c,y]=\\beta(c)y$. Apply [lem-sfb-sl2-primitive-lowering-string] to $(c,x,f)$ and $y$: there is $m\\in\\mathbf N$ with $\\beta(c)=m\\cdot1_K$.",
+   "uses": [
+    "lem-sfb-sl2-primitive-lowering-string"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed p.503, split root-space prerequisite; Theorem 23.71, pp.508--509, nonzero structure constants. Agent proof using the cited general rank-one and Mathlib primitive-vector statements, not a chosen Chevalley basis."
+   }
+  },
+  {
+   "text": "Choose $0\\ne z\\in L_{\\alpha+\\beta}$. By step 2 choose the last nonzero vector $w=E^rz$ in its raising sequence, so $r\\ge0$ and $Ew=0$. The same weight calculation gives $w\\in L_{\\beta+(r+1)\\alpha}$ and $[c,w]=(m+2r+2)w$. Apply [lem-sfb-sl2-primitive-lowering-string] to $w$. Its natural highest weight is $N=m+2r+2$, since natural-number casts in $K$ are injective. In particular $r+1\\le N$, $F^{r+1}w\\ne0$ and $F^rw\\ne0$. Its raising formula at $j=r$ is $$EF^{r+1}w=(r+1)(m+r+2)F^rw\\ne0.$$ Both integer factors are positive, hence nonzero in $K$.",
+   "uses": [
+    "lem-sfb-sl2-primitive-lowering-string"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed p.503, split root-space prerequisite; Theorem 23.71, pp.508--509, nonzero structure constants. Agent proof using the cited general rank-one and Mathlib primitive-vector statements, not a chosen Chevalley basis."
+   }
+  },
+  {
+   "text": "The lowering inclusion of step 2 places $F^{r+1}w$ in $L_\\beta$. By the one-dimensionality of $L_\\beta$ from [lem-sfb-killing-cartan-rank-one-spaces], write $F^{r+1}w=by$ for some $b\\in K$. Then $EF^{r+1}w=bEy=0$, contradicting step 4. Thus $[x,y]\\ne0$, for every pair of nonzero $x,y$ as asserted.",
+   "uses": [
+    "lem-sfb-killing-cartan-rank-one-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed p.503, split root-space prerequisite; Theorem 23.71, pp.508--509, nonzero structure constants. Agent proof using the cited general rank-one and Mathlib primitive-vector statements, not a chosen Chevalley basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-killing-cartan-rank-one-spaces",
+  "def-wf-lie-algebra",
+  "lem-sfb-nilpotent-module-generalized-weight-decomposition",
+  "lem-sfb-sl2-primitive-lowering-string"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed p.503, split root-space prerequisite; Theorem 23.71, pp.508--509, nonzero structure constants. Agent proof using the cited general rank-one and Mathlib primitive-vector statements, not a chosen Chevalley basis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The bracket of root spaces is the full root space when the sum is a root",
+   "results": "{\"t\": \"2026-10-23T23:37:37Z\", \"tool\": \"leanfinder\", \"query\": \"The bracket of root spaces is the full root space when the sum is a root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.rootSpaceProduct_tmul\", \"LieAlgebra.rootSpaceProduct\", \"LieAlgebra.coe_rootSpaceWeightSpaceProduct_tmul\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"LieAlgebra.rootSpaceProduct_def\", \"LieAlgebra.lie_mem_genWeightSpace_of_mem_genWeightSpace\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg_aux\"], \"digest\": \"5542cc31400e86c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and lie_mem_genWeightSpace_of_mem_genWeightSpace give the weight inclusion only. Killing bracket formulas concern opposite roots. GeckConstruction.e_lie_v_ne/f_lie_v_ne concern its constructed matrices and do not specialize to arbitrary split L in one line. Root-string membership alone does not assert the bracket is nonzero."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a semisimple split Lie algebra if alpha beta and alpha plus beta are roots the bracket of any nonzero alpha and beta root vectors is nonzero",
+   "results": "{\"t\": \"2026-10-23T23:41:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a semisimple split Lie algebra if alpha beta and alpha plus beta are roots the bracket of any nonzero alpha and beta root vectors is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot_isNonZero\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"LieAlgebra.killingForm_apply_eq_zero_of_mem_rootSpace_of_add_ne_zero\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_ne_bot\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"LieAlgebra.IsKilling.rootSpace_neg_nsmul_add_chainTop_of_le\", \"LieAlgebra.IsKilling.root_apply_cartanEquivDual_symm_ne_zero\"], \"digest\": \"d5df26331f941a68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and lie_mem_genWeightSpace_of_mem_genWeightSpace give the weight inclusion only. Killing bracket formulas concern opposite roots. GeckConstruction.e_lie_v_ne/f_lie_v_ne concern its constructed matrices and do not specialize to arbitrary split L in one line. Root-string membership alone does not assert the bracket is nonzero."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If two roots of a split semisimple Lie algebra sum to a root their root space bracket is nonzero",
+   "results": "{\"t\": \"2026-10-23T23:42:07Z\", \"tool\": \"leansearch\", \"query\": \"If two roots of a split semisimple Lie algebra sum to a root their root space bracket is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.killingForm_apply_eq_zero_of_mem_rootSpace_of_add_ne_zero\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"LieAlgebra.coe_rootSpaceWeightSpaceProduct_tmul\", \"LieAlgebra.lie_mem_genWeightSpace_of_mem_genWeightSpace\", \"LieAlgebra.rootSpaceWeightSpaceProductAux\", \"LieAlgebra.rootSpace\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"LieAlgebra.rootSpace.congr_simp\"], \"digest\": \"2920abbcc8e768c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and lie_mem_genWeightSpace_of_mem_genWeightSpace give the weight inclusion only. Killing bracket formulas concern opposite roots. GeckConstruction.e_lie_v_ne/f_lie_v_ne concern its constructed matrices and do not specialize to arbitrary split L in one line. Root-string membership alone does not assert the bracket is nonzero."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.rootSpaceProduct",
+   "results": "{\"t\": \"2026-10-23T23:42:07Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.rootSpaceProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieAlgebra.rootSpaceProduct\", \"LieAlgebra.rootSpaceProduct_def\", \"LieAlgebra.rootSpaceProduct_tmul\"], \"digest\": \"2252632b1724dc29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and lie_mem_genWeightSpace_of_mem_genWeightSpace give the weight inclusion only. Killing bracket formulas concern opposite roots. GeckConstruction.e_lie_v_ne/f_lie_v_ne concern its constructed matrices and do not specialize to arbitrary split L in one line. Root-string membership alone does not assert the bracket is nonzero."
+  },
+  {
+   "tool": "grep",
+   "query": "lie.*(ne_zero|surjective|rootSpace)|rootSpace.*(lie|surj)|isNilpotent_ad",
+   "results": "{\"t\": \"2026-10-23T23:37:34Z\", \"tool\": \"grep\", \"query\": \"lie.*(ne_zero|surjective|rootSpace)|rootSpace.*(lie|surj)|isNilpotent_ad\", \"sub\": \"Algebra/Lie/Weights\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\"], \"digest\": \"68526185a80d20cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and lie_mem_genWeightSpace_of_mem_genWeightSpace give the weight inclusion only. Killing bracket formulas concern opposite roots. GeckConstruction.e_lie_v_ne/f_lie_v_ne concern its constructed matrices and do not specialize to arbitrary split L in one line. Root-string membership alone does not assert the bracket is nonzero."
+  },
+  {
+   "tool": "grep",
+   "query": "root.*(nonzero|nonvanish)|lie.*rootSpace|rootSpace.*lie",
+   "results": "{\"t\": \"2026-10-23T23:42:06Z\", \"tool\": \"grep\", \"query\": \"root.*(nonzero|nonvanish)|lie.*rootSpace|rootSpace.*lie\", \"sub\": \"Algebra/Lie/Basis\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Prod.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\"], \"digest\": \"44fd5b57ab80d594\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and lie_mem_genWeightSpace_of_mem_genWeightSpace give the weight inclusion only. Killing bracket formulas concern opposite roots. GeckConstruction.e_lie_v_ne/f_lie_v_ne concern its constructed matrices and do not specialize to arbitrary split L in one line. Root-string membership alone does not assert the bracket is nonzero."
+  },
+  {
+   "tool": "grep",
+   "query": "lie.*(ne_zero|surjective)|rootSpaceProduct|rootSpace.*(lie|surj)",
+   "results": "{\"t\": \"2026-10-24T00:13:33Z\", \"tool\": \"grep\", \"query\": \"lie.*(ne_zero|surjective)|rootSpaceProduct|rootSpace.*(lie|surj)\", \"sub\": \"Algebra/Lie/Weights\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\"], \"digest\": \"c4d3efccb9c3ecfb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and its evaluation are weight-inclusion constructions only; the Killing formulas concern opposite roots. The GeckConstruction e_lie_v_ne/f_lie_v_ne formulas concern constructed matrices, not arbitrary split Lie algebras. Root-string support does not itself assert nonvanishing of the bracket. Read Cartan.lean rootSpaceProduct and Killing.lean, and GeckConstruction/Basic.lean:351,365."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The bracket of any nonzero vectors in two root spaces of a split semisimple Lie algebra is nonzero when their sum is a nonzero root",
+   "results": "{\"t\": \"2026-10-24T00:13:33Z\", \"tool\": \"leansearch\", \"query\": \"The bracket of any nonzero vectors in two root spaces of a split semisimple Lie algebra is nonzero when their sum is a nonzero root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.coe_rootSpaceWeightSpaceProduct_tmul\", \"LieAlgebra.killingForm_apply_eq_zero_of_mem_rootSpace_of_add_ne_zero\", \"LieAlgebra.IsKilling.lie_eq_smul_of_mem_rootSpace\", \"LieAlgebra.rootSpaceWeightSpaceProductAux\", \"LieAlgebra.lie_mem_genWeightSpace_of_mem_genWeightSpace\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg_aux\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg\"], \"digest\": \"59e5ba7edd55a404\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and its evaluation are weight-inclusion constructions only; the Killing formulas concern opposite roots. The GeckConstruction e_lie_v_ne/f_lie_v_ne formulas concern constructed matrices, not arbitrary split Lie algebras. Root-string support does not itself assert nonvanishing of the bracket. Read Cartan.lean rootSpaceProduct and Killing.lean, and GeckConstruction/Basic.lean:351,365."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a split semisimple Lie algebra over a field of characteristic zero, nonzero root vectors have nonzero bracket if the sum of their nonopposite roots is a root",
+   "results": "{\"t\": \"2026-10-24T00:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"In a split semisimple Lie algebra over a field of characteristic zero, nonzero root vectors have nonzero bracket if the sum of their nonopposite roots is a root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"LieAlgebra.IsKilling.reflectRoot_isNonZero\", \"LieAlgebra.killingForm_apply_eq_zero_of_mem_rootSpace_of_add_ne_zero\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\"], \"digest\": \"74b522934ce9818a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and its evaluation are weight-inclusion constructions only; the Killing formulas concern opposite roots. The GeckConstruction e_lie_v_ne/f_lie_v_ne formulas concern constructed matrices, not arbitrary split Lie algebras. Root-string support does not itself assert nonvanishing of the bracket. Read Cartan.lean rootSpaceProduct and Killing.lean, and GeckConstruction/Basic.lean:351,365."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.rootSpaceProduct",
+   "results": "{\"t\": \"2026-10-24T00:14:05Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.rootSpaceProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieAlgebra.rootSpaceProduct\", \"LieAlgebra.rootSpaceProduct_def\", \"LieAlgebra.rootSpaceProduct_tmul\"], \"digest\": \"2252632b1724dc29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rootSpaceProduct and its evaluation are weight-inclusion constructions only; the Killing formulas concern opposite roots. The GeckConstruction e_lie_v_ne/f_lie_v_ne formulas concern constructed matrices, not arbitrary split Lie algebras. Root-string support does not itself assert nonvanishing of the bracket. Read Cartan.lean rootSpaceProduct and Killing.lean, and GeckConstruction/Basic.lean:351,365."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-semisimple-root-decomposition",
+  "date": "2026-10-24",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.508 (split Cartan weight gradation on rational representations), p.511, proof of Corollary 23.73 (fundamental-weight choice); underlying highest-weight theorem: Serre, Complex Semisimple Lie Algebras, Chapter VII, with split rational-field form, WANTED. This input does not assert that Lemma 22.24 alone supplies fundamental weights. Supporting step: Split root decomposition and simple-root generation. Supporting input: Nonvanishing of brackets in nonopposite root spaces.",
+   "via": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-rational-highest-weight-modules",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nonopposite-root-bracket-nonvanishing",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Normalize the arbitrary root vector into the existing rank-one triple, obtain termination from finite weight support, and contradict a vanishing bracket using two primitive vectors and the explicit lowering coefficient. The only new node is a Mathlib leaf with three directly matching primitive-vector declarations. Checked all cited statements and all coefficient and field hypotheses.",
+  "blueprint": "Realizes the inherited place in det-thm-sf-ctf-stability-direct-images proof (3), through the root-decomposition prerequisite: nonvanishing needed for simple-root generation. The current blueprint proof was read; this algebraic input is an agent-created descendant, not itself an imported blueprint proposition. blueprint_refs.py ancestor returns None, retained in from.node; its precise inherited place and full via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-42787f594",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-42787f594 (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited statement, Milne §23h (printed p.503) and Thm 23.71 (pp.508-509), and Mathlib Algebra/Lie/Sl2.lean. The proof is correct and complete. Step 1: lem-sfb-killing-cartan-rank-one-spaces matches the item's hypotheses (diagonalizable implies triangularizable; its Cartan definition is the same; it shows generalized and ordinary root spaces coincide). It gives dim L_alpha = dim L_beta = 1 and the triple u, v, c; rescaling to x = au, f = v/a keeps an sl2 triple. Step 2: the Jacobi identity gives the weight shifts; the finite-support clause of lem-sfb-nilpotent-module-generalized-weight-decomposition plus distinct gamma + j*alpha (characteristic 0) makes raising stop. The elementary mark is accepted. Steps 3-5: y is primitive with weight m in N. For w = E^r z (last nonzero), N = m+2r+2, so F^{r+1}w lies in L_beta = Ky. Then E F^{r+1}w = (r+1)(m+r+2) F^r w is nonzero, but it also equals b[x,y] = 0, a contradiction. I checked the index conventions against lie_e_pow_succ_toEnd_f (l.170), exists_nat (l.186) and pow_toEnd_f_ne_zero_of_eq_nat (l.203), all with the needed instances. Edge cases: alpha = beta (consistent with reduced roots), r = 0, m = 0, sl3. The new leaf is a valid one-declaration-per-clause Mathlib leaf. I tested it on the standard, trivial and adjoint sl2 modules. No duplicate in the DAG: I checked sl2-rational-polynomial-model, primitive-cyclic-weight-bound, chevalley-integral-rank-one and opposition-root-bracket-norm. The citer split-semisimple-root-decomposition step 7 is unaffected, since the statement is unchanged. Route and proof_deps are fine, with no cycle. blueprint.from.node = null is inherited from the base, not this delivery's fault. FIX (B6): the leaf's mathlib_match.how cited IsSl2Triple at lines 42--46 and HasPrimitiveVectorWith at 81--84. The actual lines are 41--45 and 82--85; the old range missed the lie_e field. Corrected in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-sl2-primitive-lowering-string.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.NonoppositeRootBracketNonvanishing",
+  "declaration": "LieAlgebra.lie_ne_zero_of_nonopposite_root_vectors",
+  "file": "lean/Sheaf/Algebra/Lie/NonoppositeRootBracketNonvanishing.lean",
+  "statement": "theorem lie_ne_zero_of_nonopposite_root_vectors (K : Type u) [Field K] [CharZero K] (L : Type v) [LieRing L] [LieAlgebra K L] [FiniteDimensional K L] [IsKilling K L] (H : LieSubalgebra K L) [H.IsCartanSubalgebra] (hdiag : ∀ h : H, (⨆ μ : K, (ad K L (h : L)).eigenspace μ) = ⊤) (α β : Module.Dual K H) (hα : α ≠ 0) (hβ : β ≠ 0) (hαβ : α + β ≠ 0) (hrootα : LieModule.weightSpace L (α : H → K) ≠ ⊥) (hrootβ : LieModule.weightSpace L (β : H → K) ≠ ⊥) (hrootαβ : LieModule.weightSpace L ((α + β : Module.Dual K H) : H → K) ≠ ⊥) (x y : L) (hx : x ∈ LieModule.weightSpace L (α : H → K)) (hy : y ∈ LieModule.weightSpace L (β : H → K)) (hxne : x ≠ 0) (hyne : y ≠ 0) : ⁅x, y⁆ ≠ 0",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4818ef02c",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Clause-by-clause match: CharZero field K, finite-dimensional Lie algebra L, IsKilling (Killing radical = bottom), H.IsCartanSubalgebra (nilpotent + self-normalizing), hdiag (K-eigenspaces of ad h span L, equivalent to diagonalizable in finite dimension), weightSpace = ordinary root space L_gamma (mem_weightSpace), alpha, beta, alpha+beta nonzero with nonzero root spaces, every nonzero x in L_alpha and y in L_beta gives a nonzero bracket. No extra assumptions; universes u, v independent; edge cases (zero L, alpha = beta) vacuous as in the node. No duplicate in Mathlib (Weights/Killing, Chain, RootSystem grep) or in the project (nonopposite rg hits are other statements). Item node changed only in lean; dep def-wf-lie-algebra unchanged; lean.statement verbatim; docstrings carry source, blueprint id and all 5 proof steps; proof is sorry only; no lines over 100 characters; report sections present. No compile (no file changed). Advisory: Sl2 import redundant (publicly imported by Weights.Killing)."
+ }
+}

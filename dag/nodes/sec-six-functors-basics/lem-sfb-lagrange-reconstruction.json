@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-lagrange-reconstruction",
+ "kind": "statement",
+ "title": "Distinct-node Lagrange reconstruction",
+ "statement": "Let $K$ be a field [def-weil-field], let $D\\geq0$ be an integer, and let $c_0,\\ldots,c_D\\in K$ be pairwise distinct. Define $L_j(T)=\\prod_{0\\leq k\\leq D,\\ k\\ne j}(T-c_k)/(c_j-c_k)\\in K[T]$ [def-weil-polynomial-ring]. For every $q\\in K[T]$ of degree at most $D$, one has the polynomial identity $q(T)=\\sum_{j=0}^D q(c_j)L_j(T)$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 10.12 proof, printed p.47: solving the system at distinct c_j; explicit Lagrange formula in Mathlib/LinearAlgebra/Lagrange.lean:362–365 and 453–455."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "interpolate_poly_eq_self|def interpolate|def basis|basis_apply|interpolate_apply",
+   "results": "{\"t\": \"2026-10-23T11:49:32Z\", \"tool\": \"grep\", \"query\": \"interpolate_poly_eq_self|def interpolate|def basis|basis_apply|interpolate_apply\", \"sub\": \"LinearAlgebra/Lagrange.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"147\", \"199\", \"299\", \"310\", \"313\"], \"digest\": \"fc8edbe63ad02440\"}",
+   "date": "2026-10-23",
+   "verdict": "candidate: the single-file grep output is misparsed as file fields 147, 199, 299, 310, 313; repeated against directory LinearAlgebra and read the source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Lagrange interpolation sum of evaluations times basis polynomials equals a polynomial of degree less than the number of nodes",
+   "results": "{\"t\": \"2026-10-23T11:49:32Z\", \"tool\": \"leansearch\", \"query\": \"The Lagrange interpolation sum of evaluations times basis polynomials equals a polynomial of degree less than the number of nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Lagrange.interpolate_eq_sum\", \"Lagrange.interpolate_eq_nodalWeight_mul_nodal_div_X_sub_C\", \"Lagrange.interpolate\", \"Lagrange.degree_interpolate_lt\", \"Lagrange.interpolate_eq_sum_interpolate_insert_sdiff\", \"Lagrange.basis\", \"Lagrange.interpolate_apply\", \"Lagrange.eval_basis_of_ne\"], \"digest\": \"d844c12e0831089f\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Lagrange.eq_interpolate (362–365) and Lagrange.interpolate_eq_sum (453–455) give the displayed reconstruction after specializing s to Fin (D+1) and unfolding the formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Lagrange.interpolate_poly_eq_self",
+   "results": "{\"t\": \"2026-10-23T11:49:32Z\", \"tool\": \"loogle\", \"query\": \"Lagrange.interpolate_poly_eq_self\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Lagrange.interpolate_poly_eq_self'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the service reports unknown identifier; the declaration was found by LeanFinder and verified in the source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lagrange interpolation reconstructs a polynomial of degree at most D from D plus one pairwise distinct values",
+   "results": "{\"t\": \"2026-10-23T11:49:33Z\", \"tool\": \"leanfinder\", \"query\": \"Lagrange interpolation reconstructs a polynomial of degree at most D from D plus one pairwise distinct values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Lagrange.interpolate_poly_eq_self\", \"Lagrange.degree_interpolate_le\", \"Lagrange.interpolate_apply\", \"Lagrange.interpolate\", \"Lagrange.degree_interpolate_lt\", \"Lagrange.funEquivDegreeLT\", \"Lagrange.coeff_eq_sum\", \"Lagrange.eval_interpolate_at_node\"], \"digest\": \"c8a8285bbbfa923c\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Lagrange.eq_interpolate (362–365) and Lagrange.interpolate_eq_sum (453–455) give the displayed reconstruction after specializing s to Fin (D+1) and unfolding the formula."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem interpolate_poly_eq_self|theorem interpolate_eq_sum|theorem interpolate_apply",
+   "results": "{\"t\": \"2026-10-23T11:51:03Z\", \"tool\": \"grep\", \"query\": \"theorem interpolate_poly_eq_self|theorem interpolate_eq_sum|theorem interpolate_apply\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"f52c97157d8d97cb\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Lagrange.eq_interpolate (362–365) and Lagrange.interpolate_eq_sum (453–455) give the displayed reconstruction after specializing s to Fin (D+1) and unfolding the formula."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem eq_interpolate|theorem interpolate_eq_sum",
+   "results": "{\"t\": \"2026-10-23T11:56:20Z\", \"tool\": \"grep\", \"query\": \"theorem eq_interpolate|theorem interpolate_eq_sum\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"4206460d35e53194\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Lagrange.eq_interpolate (362–365) and Lagrange.interpolate_eq_sum (453–455) give the displayed reconstruction after specializing s to Fin (D+1) and unfolding the formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Lagrange\", \"interpolate\"",
+   "results": "{\"t\": \"2026-10-23T11:56:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Lagrange\\\", \\\"interpolate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.interpolate\", \"Lagrange.degree_interpolate_lt\", \"Lagrange.eval_interpolate_at_node\", \"Lagrange.interpolate_empty\", \"Lagrange.degree_interpolate_le\", \"Lagrange.degree_interpolate_erase_lt\", \"Lagrange.eq_interpolate\", \"Lagrange.interpolate_one\"], \"digest\": \"d08425078a08b183\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Lagrange.eq_interpolate (362–365) and Lagrange.interpolate_eq_sum (453–455) give the displayed reconstruction after specializing s to Fin (D+1) and unfolding the formula."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Lagrange.eq_interpolate, Lagrange.interpolate_eq_sum",
+  "file": "Mathlib/LinearAlgebra/Lagrange.lean",
+  "line": 362,
+  "how": "specializes in one line: rewrite Lagrange.eq_interpolate (lines 362–365) by Lagrange.interpolate_eq_sum (lines 453–455), with s=Finset.univ on Fin (D+1) and v j=c_j. Pairwise distinctness gives InjOn; degree at most D gives degree < D+1, including q=0. The sum formula is exactly the displayed product divided by the nonzero product of c_j-c_k. Read also basisDivisor (147–148), basis (199–200), and interpolate (299–308)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-line-polynomial-interpolation",
+  "date": "2026-10-23",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Chapter I, Lemma 10.12 proof, printed p.47, with the uniform degree bound supplied by Proposition 10.13; bounded version and total-degree argument; interpolation system in Milne Lemma 10.12: solve for coefficients using D+1 fixed pairwise distinct nodes.",
+   "via": [
+    "lem-sfb-bounded-line-polynomial-interpolation",
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

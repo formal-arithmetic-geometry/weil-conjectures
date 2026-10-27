@@ -3,22 +3,81 @@
  "blueprint": {
   "is": "sk-def-sf-weil-complexes",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Weil structure",
- "statement": "Fix $k_0=\\mathbb F_q$ and its algebraic closure $k$, and let $f:X\\to Y$ be\nobtained from a smooth morphism $f_0:X_0\\to Y_0$ over $k_0$ by extension to\n$k$. For a scheme $T=T_0\\times_{k_0}k$, let\n$\\operatorname{Fr}_T:T\\to T$ be the semilinear automorphism induced by the\ngeometric Frobenius $\\sigma=\\sigma_{\\mathrm{ar}}^{-1}\\in\\operatorname{Gal}(k/k_0)$,\nand for an admissible coefficient ring $\\Lambda$ let\n$\\operatorname{Fr}_T^*:\\Dctf(T,\\Lambda)\\to\\Dctf(T,\\Lambda)$ be the induced\npullback.\n\nFor $K\\in\\Dctf(Y,\\Lambda)$, a *Weil structure* is an isomorphism in\n$\\Dctf(Y,\\Lambda)$\n\n$$\n\\phi_K:\\operatorname{Fr}_Y^*K\\xrightarrow{\\sim}K.\n$$\n\nA *Weil complex* is a pair $(K,\\phi_K)$ with this structure. A morphism\n$(K,\\phi_K)\\to(L,\\phi_L)$ is a morphism $h:K\\to L$ in $\\Dctf(Y,\\Lambda)$\nsatisfying\n\n$$\nh\\circ\\phi_K=\\phi_L\\circ\\operatorname{Fr}_Y^*(h).\n$$\n\nThe same definition applies on $X$ or on any $T=T_0\\times_{k_0}k$.\n\n*Complement (normalization, scope and duals).* Weil complexes in this sense\nare also called *strict* Weil complexes. The Tate twist $\\Lambda_T(r)$ carries\nits canonical Weil structure $\\tau_r:\\operatorname{Fr}_T^*\\Lambda_T(r)\\xrightarrow{\\sim}\\Lambda_T(r)$,\nnormalized so that geometric Frobenius acts on $\\Lambda(r)$ by $q^{-r}$ (hence\nby $q^{r}$ on $\\Lambda(-r)$); write $\\varphi_\\Lambda=\\tau_0$ for the canonical\nstructure on $\\Lambda_T$. Weil complexes form a category of pairs over the\nunderlying derived category, not a triangulated (derived) category of Weil\nsheaves: its Hom groups are not Ext groups of Weil sheaves (a nonsplit\nFrobenius extension of $\\Lambda$ by $\\Lambda$, a Jordan block, gives no nonzero\nmap $\\Lambda\\to\\Lambda[1]$ of pairs). Only traces, stalk Frobenius maps,\nweights of cohomology sheaves, equivariant maps and functorial triangles are\nused. For a Weil complex $(K,\\phi_K)$ on $T$, the *contragredient datum* on\n$K^\\vee=R\\mathcal Hom_T(K,\\Lambda_T)$ is the composite\n\n$$\n\\phi_{K^\\vee}:\\operatorname{Fr}_T^*R\\mathcal Hom_T(K,\\Lambda_T)\n\\xrightarrow{\\sim}R\\mathcal Hom_T(\\operatorname{Fr}_T^*K,\\operatorname{Fr}_T^*\\Lambda_T)\n\\xrightarrow{R\\mathcal Hom(\\mathrm{id},\\varphi_\\Lambda)}R\\mathcal Hom_T(\\operatorname{Fr}_T^*K,\\Lambda_T)\n\\xrightarrow{R\\mathcal Hom(\\phi_K^{-1},\\mathrm{id})}R\\mathcal Hom_T(K,\\Lambda_T),\n$$\n\nthe first arrow being the canonical pullback isomorphism, and the datum on the\ntwisted dual is $\\phi_{K^\\vee(r)}=\\phi_{K^\\vee}\\otimes\\tau_r$.",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], with $q=p^a$, and a prime $\\ell\\ne p$. Use admissible condensed coefficient rings [def-pur-admissible-condensed-ring]; the stages in question are a finite commutative ring $A$ killed by a power of $\\ell$, $\\mathcal O_E$, $E$, and $\\overline{\\mathbf Q}_\\ell$, where $E/\\mathbf Q_\\ell$ is finite. On any scheme $T$ use $\\Lambda_T=p_T^*\\Lambda$ [det-def-sfb-pulled-back-coefficients], the ordinary derived category of $\\Lambda_T$-modules [det-def-sfb-derived-categories], and its bounded constructible finite-Tor full subcategory $\\Dctf(T,\\Lambda)$ [sk-def-sfb-constructible]. Here finite Tor amplitude means a single finite interval bounding $K\\otimes^L_{\\Lambda_T}M$ for every degree-zero module sheaf $M$. These are the condensed coefficient constructions of the current blueprint; no identification with the older scalar-localized or common-stage categories is implicit.\n\nLet $f:X\\to Y$ be obtained by base change [def-pc-base-change] from a smooth morphism $f_0:X_0\\to Y_0$ over $k_0$ [def-sbc-smooth-morphisms]. For any $k_0$-scheme $T_0$, put $T=T_0\\times_{k_0}k$ and define\n$$g_T=\\operatorname{Fr}_T=\\operatorname{id}_{T_0}\\times_{k_0}\\operatorname{Spec}(\\sigma),\\qquad \\sigma(z)=z^{1/q}$$\nusing geometric Frobenius [def-weil-frobenius-substitution]. This is the semilinear automorphism with inverse obtained by $z\\mapsto z^q$, not the absolute or relative scheme Frobenius. The coefficient module pullback is that of [det-def-sfb-module-pushforward-pullback]. It is exact [det-prop-sfb-module-pullback-exact-main]; on derived categories write $P_T=Lg_T^*$ for its termwise derived functor. The inverse is pullback along $g_T^{-1}$. It reindexes covers, constant local models and stratifications, so preserves bounded constructibility; the tensor comparison and the inverse equivalence preserve and reflect each Tor interval. Thus it restricts to $P_T:\\Dctf(T,\\Lambda)\\to\\Dctf(T,\\Lambda)$. The derived tensor and internal Hom below are the ambient relative closed operations of [sk-def-sfb-derived-tensor-hom]. The canonical derived monoidal equivalence is the descent of the exact monoidal inverse-image equivalence [new-lem-kun-exact-monoidal-equivalence-derived].\n\nA *Weil structure* on $K\\in\\Dctf(T,\\Lambda)$ is an isomorphism\n$$\\phi_K:P_TK\\xrightarrow{\\sim}K.$$\nA *strict Weil complex* (here also a *Weil complex*) is a pair $(K,\\phi_K)$. A morphism to $(L,\\phi_L)$ is an underlying morphism $h:K\\to L$ with\n$$h\\circ\\phi_K=\\phi_L\\circ P_T(h).$$\nThese form the fixed-pair category $\\Dctf(T,\\Lambda)^{P_T}$ of [def-weil-endofunctor-fixed-pair-category], with inherited identity and composition and its faithful forgetful functor. In particular this applies on $X$ and $Y$; smoothness of $f$ is context, not extra data of a pair.\n\n*Scope of the pair category.* No triangulated structure is supplied by this definition. Its morphisms must not in general be identified with derived morphisms of Weil sheaves. For $T_0$ of finite type and $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, use the constructible heart and its closure under kernels, cokernels and extensions [sk-lem-coefficient-heart]; $\\Dctf=\\Dbc$ here [lem-integral-ctf-equals-bc]. Define Weil modules to be fixed pairs in the abelian category of $\\Lambda_T$-module sheaves. The native category $D^b_{c,\\mathrm W}(T,\\Lambda)$ is the full subcategory of the derived category of these Weil modules on bounded objects with constructible underlying cohomology. It maps to strict pairs by\n$$K\\longmapsto(\\operatorname{For}(K),\\theta_K),$$\nwhere $\\operatorname{For}$ forgets termwise and $\\theta_K$ is induced by the termwise Frobenius isomorphisms. This comparison and its equivalence on the degree-zero hearts are [lem-pur-derived-fixed-pair-realization]. It need not be faithful: on $T_0=\\operatorname{Spec}k_0$, the extension with Frobenius matrix $\\left(\\begin{smallmatrix}1&1\\\\0&1\\end{smallmatrix}\\right)$ on $\\Lambda_T^2$ is nonsplit as Weil modules but split after forgetting. Its nonzero connecting morphism is killed by that comparison. In fact there is no nonzero underlying map $\\Lambda_T\\to\\Lambda_T[1]$ on this geometric point, by exactness of point sections [lem-weil-point-proetale-sections-exact]. The nonfaithfulness assertion is in general, not an assertion for the empty scheme. Traces, stalk Frobenius, weights, equivariant maps and compatible underlying distinguished triangles may be used without identifying the two categories.\n\n*Tate normalization.* Use the actual Tate sheaves $\\Lambda_T(r)$ of [sk-def-sp-tate-twist], placed in degree zero. Their canonical structures\n$$\\tau_r:P_T\\Lambda_T(r)\\xrightarrow{\\sim}\\Lambda_T(r)$$\nare induced by inverse image of roots of unity [def-pur-roots-of-unity-inverse-image], with their isomorphism and transition compatibility [lem-pur-roots-of-unity-inverse-image-iso], the coefficient-unit isomorphism, and the tensor, dual, inverse-limit and scalar-extension constructions defining those sheaves. More explicitly at the geometric point the geometric automorphism acts on a compatible system of $\\ell$-power roots by $\\zeta\\mapsto\\zeta^{q^{-1}}$, with $q^{-1}\\in\\mathbf Z_\\ell^\\times$. Hence its action on the Tate line is $q^{-1}$, on its $r$-fold tensor power $q^{-r}$, and on the dual tensor powers the inverse scalar. These equalities pass to the defining inverse limits and scalar extensions. Thus geometric Frobenius on $\\Lambda(r)$ is normalized by $q^{-r}$ for every integer $r$, and by $q^r$ on $\\Lambda(-r)$. Put $\\varphi_\\Lambda=\\tau_0$ on the unit $\\Lambda_T$.\n\n*Contragredient and its domain.* For a strict pair $(K,\\phi_K)$ put $K^\\vee=R\\mathcal Hom_{\\Lambda_T}(K,\\Lambda_T)$ in the ambient derived category. There its contragredient datum is the typed composite\n$$\n\\begin{aligned}\n\\phi_{K^\\vee}:P_TR\\mathcal Hom(K,\\Lambda_T)\n&\\xrightarrow{c_{P_T;K,\\Lambda_T}}R\\mathcal Hom(P_TK,P_T\\Lambda_T)\\\\\n&\\xrightarrow{R\\mathcal Hom(\\mathrm{id},\\varphi_\\Lambda)}R\\mathcal Hom(P_TK,\\Lambda_T)\\\\\n&\\xrightarrow{R\\mathcal Hom(\\phi_K^{-1},\\mathrm{id})}R\\mathcal Hom(K,\\Lambda_T).\n\\end{aligned}\n$$\nThe first arrow is the evaluation-transpose comparison [lem-pur-monoidal-equivalence-hom-comparison], applied to the ambient strong monoidal equivalence $P_T$. No site-perfectness is required for that arrow. This is an ambient strict datum for every $K$ under discussion; it is a strict Weil complex in the bounded constructible finite-Tor category only when $K^\\vee\\in\\Dctf(T,\\Lambda)$. That membership is a domain condition, not an assertion of automatic closure on arbitrary $T$. For any integer $r$, the datum on the ambient twisted dual is\n$$P_T(K^\\vee\\otimes^L\\Lambda_T(r))\\xrightarrow{\\mu^{-1}}P_TK^\\vee\\otimes^LP_T\\Lambda_T(r)\\xrightarrow{\\phi_{K^\\vee}\\otimes^L\\tau_r}K^\\vee\\otimes^L\\Lambda_T(r),$$\nwhere $\\mu$ is the tensorator in [def-sfb-strong-monoidal-functor]. The abbreviation $\\phi_{K^\\vee(r)}=\\phi_{K^\\vee}\\otimes\\tau_r$ includes this first arrow. It restricts to the small pair category when its underlying twisted dual lies there.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
   "place": "node sk-def-sf-weil-complexes, order 1837"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pur-admissible-condensed-ring",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-substitution",
+  "det-def-sfb-derived-categories",
+  "det-def-sfb-module-pushforward-pullback",
+  "det-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-integral-ctf-equals-bc",
+  "lem-pur-derived-fixed-pair-realization",
+  "lem-pur-monoidal-equivalence-hom-comparison",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "lem-weil-point-proetale-sections-exact",
+  "new-lem-kun-exact-monoidal-equivalence-derived",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sp-tate-twist",
+  "sk-lem-coefficient-heart"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict Weil complexes on constructible derived coefficient categories with Frobenius pullback isomorphism, Tate twists and contragredient dual",
+   "results": "Hits: WittVector.Isocrystal, WittVector.instModuleFractionRingStandardOneDimIsocrystal, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.toModule, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, WittVector.IsocrystalEquiv. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Functor.IsEquivalence",
+   "results": "Hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|strict Weil|contragredient",
+   "results": "Hits: . ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil complex Frobenius pullback isomorphism Tate twist dual",
+   "results": "Hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.verschiebung_frobenius_comm, WittVector.iterate_verschiebung_iterate_frobenius, WittVector.IsocrystalHom.frob_equivariant, WittVector.frobenius_verschiebung, WittVector.frobeniusEquiv_apply, Isocrystal.term_≃ᶠⁱ[_,_]_. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible algebra for an endofunctor on the bounded constructible derived category of sheaves",
+   "results": "Hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.singleFunctor, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.singleFunctors. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -39,7 +98,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-weil-complexes",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.WeilComplex"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.WeilComplex"
+   ]
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.StrictWeilDualTate",
   "declaration": "AlgebraicGeometry.Etale.WeilComplex.contragredientDatum",
@@ -80,5 +154,30 @@
   "group": "Q123",
   "result": "pass",
   "note": "Clause by clause, the Lean matches the node (statement verbatim) and its main-20261015 source section, complement included. It reuses the upstream WeilComplex, Hom, category instance, forget and the Hom-vanishing lemma unchanged. The dual-datum first arrow is built from the actual pullback and evaluation maps (homEquiv transpose), with a named IsIso theorem that is true for an automorphism and adds no perfectness. Second arrow: the unit iso. Third arrow: RHom.map of phi.inv.op, contravariance correct. The twisted-dual datum is tensorWeilDatum. Tate datum: the upstream pullback iso; tau_0 = phi_Lambda is derivable from the twist axioms. Sign checked: geometric Frobenius gives q^-r, matching strictWeilTateScalar. The cyclotomic scalar theorem is true. Finite Lambda in the operator theorem comes from upstream IsNormalized. Universes are the upstream convention. No empty definitions; every theorem is sorry with source and proof docstring; blueprint docstrings on all 16 declarations. stage2_delivery check_lean_text, check_record and check_report: no failures. Empty stmt_deps is consistent. nt_compile --json: clean, no errors or warnings. Landing preflight not run (review service blocks git); the landing tool runs it."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix $k_0=\\mathbb F_q$ and its algebraic closure $k$, and let $f:X\\to Y$ be\nobtained from a smooth morphism $f_0:X_0\\to Y_0$ over $k_0$ by extension to\n$k$. For a scheme $T=T_0\\times_{k_0}k$, let\n$\\operatorname{Fr}_T:T\\to T$ be the semilinear automorphism induced by the\ngeometric Frobenius $\\sigma=\\sigma_{\\mathrm{ar}}^{-1}\\in\\operatorname{Gal}(k/k_0)$,\nand for an admissible coefficient ring $\\Lambda$ let\n$\\operatorname{Fr}_T^*:\\Dctf(T,\\Lambda)\\to\\Dctf(T,\\Lambda)$ be the induced\npullback.\n\nFor $K\\in\\Dctf(Y,\\Lambda)$, a *Weil structure* is an isomorphism in\n$\\Dctf(Y,\\Lambda)$\n\n$$\n\\phi_K:\\operatorname{Fr}_Y^*K\\xrightarrow{\\sim}K.\n$$\n\nA *strict Weil complex* (in this section simply a *Weil complex*) is a pair\n$(K,\\phi_K)$ with this structure. A morphism\n$(K,\\phi_K)\\to(L,\\phi_L)$ is a morphism $h:K\\to L$ in $\\Dctf(Y,\\Lambda)$\nsatisfying\n\n$$\nh\\circ\\phi_K=\\phi_L\\circ\\operatorname{Fr}_Y^*(h).\n$$\n\nThe same definition applies on $X$ or on any $T=T_0\\times_{k_0}k$.\n\n*Complement (normalization, scope and duals).* The Tate twist $\\Lambda_T(r)$ carries\nits canonical Weil structure $\\tau_r:\\operatorname{Fr}_T^*\\Lambda_T(r)\\xrightarrow{\\sim}\\Lambda_T(r)$,\nnormalized so that geometric Frobenius acts on $\\Lambda(r)$ by $q^{-r}$ (hence\nby $q^{r}$ on $\\Lambda(-r)$); write $\\varphi_\\Lambda=\\tau_0$ for the canonical\nstructure on $\\Lambda_T$. Strict Weil complexes form a category of pairs over\nthe underlying derived category, not a triangulated (derived) category of Weil\nsheaves: its Hom groups are not Ext groups of Weil sheaves (a nonsplit\nFrobenius extension of $\\Lambda$ by $\\Lambda$, a Jordan block, gives no nonzero\nmap $\\Lambda\\to\\Lambda[1]$ of pairs). For $\\Lambda\\in\\{E,\\Qlb\\}$, where\n$\\Dctf=\\Dbc$ and $\\operatorname{Fr}_T$ is the geometric-Frobenius automorphism\n$g_T$, they are the strict Weil complexes of [def-weil-weil-sheaf-complex], and\nthe triangulated category $D^b_{c,\\mathrm W}(T,\\Lambda)$ of Weil complexes\ndefined there maps to them by $K\\mapsto(\\operatorname{For}(K),\\theta_K)$; this\nfunctor is an equivalence on the hearts but not faithful. Only traces, stalk Frobenius maps,\nweights of cohomology sheaves, equivariant maps and functorial triangles are\nused. For a Weil complex $(K,\\phi_K)$ on $T$, the *contragredient datum* on\n$K^\\vee=R\\mathcal Hom_T(K,\\Lambda_T)$ is the composite\n\n$$\n\\phi_{K^\\vee}:\\operatorname{Fr}_T^*R\\mathcal Hom_T(K,\\Lambda_T)\n\\xrightarrow{\\sim}R\\mathcal Hom_T(\\operatorname{Fr}_T^*K,\\operatorname{Fr}_T^*\\Lambda_T)\n\\xrightarrow{R\\mathcal Hom(\\mathrm{id},\\varphi_\\Lambda)}R\\mathcal Hom_T(\\operatorname{Fr}_T^*K,\\Lambda_T)\n\\xrightarrow{R\\mathcal Hom(\\phi_K^{-1},\\mathrm{id})}R\\mathcal Hom_T(K,\\Lambda_T),\n$$\n\nthe first arrow being the canonical pullback isomorphism, and the datum on the\ntwisted dual is $\\phi_{K^\\vee(r)}=\\phi_{K^\\vee}\\otimes\\tau_r$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "sk-def-sf-weil-complexes",
+  "worker": "stage1",
+  "summary": "Definition split following the latest condensed coefficient realization. Named all underlying notions, exposed the general derived fixed-pair comparison and the closed comparison for a monoidal equivalence as independent categorical prerequisites. Corrected the unrestricted dual closure interpretation and the universal nonfaithfulness wording; preserved the strict pair, geometric Frobenius convention, all coefficient stages, canonical Tate normalization and both typed dual composites. Prior archived finite-etale attachments do not cover this statement.",
+  "blueprint": "Realizes all paragraphs of latest sk-def-sf-weil-complexes/_section.md: semilinear Frobenius, pairs and commuting morphisms, comparison with native derived Weil objects, Tate normalization, contragredient and twisted dual; corrected small-category scope is explicit. The two new statement-only nodes supply the derived action comparison and the evaluation-defined closed comparison, not replacement definitions of the item."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-6f9d95472",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-6f9d95472 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the unit record and all cited node statements in full, against the latest blueprint section (main-20261026, order 3067, the same text as the item's blueprint_update) and the latest condensed def-weil-weil-sheaf-complex. Item: g_T = id×Spec(z↦z^{1/q}) agrees with def-weil-frobenius-substitution and def-weil-frobenius-detailed. P_T is exact module pullback (det-prop-sfb-module-pullback-exact-main). The fixed-pair category is exactly def-weil-endofunctor-fixed-pair-category. The scope paragraph defines Weil modules and D^b_{c,W} exactly as the latest def-weil-weil-sheaf-complex does. It applies sk-lem-coefficient-heart (1) and lem-integral-ctf-equals-bc (qcqs holds for finite-type T0) under the new realization lemma, whose hypotheses I checked: Mod(Λ_T) Grothendieck, g^* an exact autoequivalence, Cons preserved by P^{±1}. Jordan check: the section (b,1) maps to (b+1,1), so the extension is nonsplit, and Hom(Λ,Λ[1]) = H^1Γ = 0 by lem-weil-point-proetale-sections-exact. Tate: τ_r comes from c^g_μ with transition, semilinearity and invertibility as in lem-pur-roots-of-unity-inverse-image-iso; σ(ζ) = ζ^{1/q} gives q^{-r} on Λ(r), which agrees with the source. Contragredient: the arrows are typed correctly (c, then [id,φ_Λ], then [φ_K^{-1},id]), and the twisted dual includes μ^{-1}. The STATEMENT-DISPUTED clarification is correct: on T0 = ⊔A^d, K = i_*F_ℓ at the origins is in Dctf but K^∨ has cohomology in degree 2d for every d, so it is unbounded. The blueprint never asserted K^∨ ∈ Dctf; making membership a domain condition keeps the datum ambient and weakens nothing. The qualified non-triangulated/non-faithful wording is right, because T empty is a counterexample to the blanket claim. Not citing def-weil-weil-sheaf-complex is correct: the live node still states the old rationalized pairs model, and its blueprint_update is pending (maintainer issue). New lem-pur-derived-fixed-pair-realization is true: the termwise θ is a natural transformation that descends, the heart equivalence holds because A is fully faithful as a heart, and a nonsplit Yoneda class with split U-image gives R(δ) = 0. It is the claim moved out of the definition, not a restatement. It is not a duplicate of lem-sf-fixed-pair-created-abelian-structure, lem-sf-fixed-pair-derived-forget-comparison or lem-zl-texact-fixed-pair-heart-cohomology. New lem-pur-monoidal-equivalence-hom-comparison is true by the Yoneda chain through the inverse equivalence. It is not a duplicate of lem-fix-monoidal-dual-hom-comparison (dualizable P) or lem-pod-derived-automorphism-hom-evaluation (model specific). lem-coef-closed-adjunction-enriched-isomorphism is related, but it does not specialize to this node in one line. Mathlib expComparison is cartesian only. Both new nodes are statement-only and self-contained, carry created/blueprint.from with place, and record searches of three kinds. Unit realized fields are set correctly. The definition has no proof steps, so there are no route or tool_uses issues. No fixes."
  }
 }

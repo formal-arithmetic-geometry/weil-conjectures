@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-injective-pushforward-totally-acyclic",
+ "kind": "statement",
+ "title": "Direct image of an injective module is totally acyclic",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in a common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with sheaves of commutative rings $\\mathcal O_{\\mathcal C},\\mathcal O_{\\mathcal D}$. Let $f:(\\operatorname{Sh}(\\mathcal C),\\mathcal O_{\\mathcal C})\\to(\\operatorname{Sh}(\\mathcal D),\\mathcal O_{\\mathcal D})$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with its induced module direct image [def-weil-sheaf-of-modules-category]. For a sheaf of sets $K$ on a site $\\mathcal T$ and an $\\mathcal O_{\\mathcal T}$-module $N$, put $\\Gamma(K,N)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal T)}(K,N_{\\mathrm{sets}})$ with pointwise abelian-group operations, and put $H^q(K,N)=R^q\\Gamma(K,-)(N)$, computed by injective resolutions in the module category [def-sp-injective-resolutions]. If $I$ is an injective $\\mathcal O_{\\mathcal C}$-module, then $$H^q(K,f_*I)=0$$ for every sheaf of sets $K$ on $\\mathcal D$ and every $q>0$. Thus $f_*I$ is totally acyclic, where this means precisely the displayed vanishing for every $K$. No flatness of the structural ring map is assumed, and the geometric morphism need not come from a functor between the given sites.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072Z (lemma-direct-image-injective-sheaf); Tag 072Y (definition-limp) and section-limp for the meaning of H^q(K,-)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-trf-free-module-sheaf-construction"
+ ],
+ "proof": [
+  {
+   "text": "All module categories below have enough injectives: [lem-weil-pbc-ring-sheaves-grothendieck] applies to each small site with its ring sheaf, and [lem-sp-grothendieck-enough-injectives] applies to the resulting Grothendieck abelian categories. The element sites used below are small by [lem-weil-pbc-ringed-sheaf-slice-adjunction]; the replacement sites are small by [lem-weil-pbc-ringed-topos-site-presentation]. Work in the common coefficient universe throughout. Thus the injective resolutions defining every right derived evaluation and global-section functor used below exist.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-ringed-topos-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q (remark-existence-D); small slice and presentation sites: sites-modules.tex Tags 04IE and 03CR"
+   }
+  },
+  {
+   "text": "Fix a target sheaf of sets $K$ and put $B=f^{-1}K$. Write $r_K,r_B$ for module restriction to the small element sites presenting the slices. By [lem-weil-pbc-ringed-sheaf-slice-adjunction], each restriction is exact and has an exact additive left adjoint $j_!$. It therefore preserves injectives, directly from the definition [def-sp-injective-resolutions]: a map $L\\to r_KJ$ along a mono $L\\hookrightarrow M$ corresponds to $j_!L\\to J$; exactness makes $j_!L\\to j_!M$ monic, so injectivity of $J$ extends it, and adjunction gives the required extension to $M$. The identical argument applies to $r_B$. For any module $N$, a section of $r_KN$ on the slice is a compatible family $n_{U,s}\\in N(U)$ indexed by $s\\in K(U)$, equivalently a natural map $K\\to N_{\\mathrm{sets}}$. This identifies the additive functors $\\Gamma(K,-)$ and $\\Gamma(\\mathcal D/K,-)r_K$. Apply the exact, injective-preserving $r_K$ to an injective resolution of $N$; the two resulting section complexes agree. Hence $H^q(K,N)=R^q\\Gamma(\\mathcal D/K,-)(r_KN)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section section-limp, definition of H^q(K,-); sites-modules.tex Tag 04IE (lemma-localize-ringed-topos), exact extension by zero"
+   }
+  },
+  {
+   "text": "Use [lem-sbc-ringed-sheaf-slice-ordinary-square] with $A=K$. It supplies a ringed-topos morphism $f_K$ between the element-site slices and the natural MODULE isomorphism $r_Kf_*\\cong f_{K*}r_B$. The restricted structural ring map is the one in that cited statement, so no scalar comparison is omitted. By step 2, $J=r_BI$ is injective. Substituting $N=f_*I$ in step 2 therefore reduces the desired vanishing to $R^q\\Gamma(\\mathcal D/K,-)(f_{K*}J)=0$, for $q>0$. Only the ordinary square is used; no derived direct-image composition or Leray theorem is assumed.",
+   "uses": [
+    "lem-sbc-ringed-sheaf-slice-ordinary-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IF (lemma-localize-morphism-ringed-topoi), module direct-image identity"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topos-site-presentation] to $f_K$. Obtain small finite-limit sites $\\mathcal C',\\mathcal D'$, ringed equivalences $g,e$, and a morphism of ringed sites $h$ induced by a continuous finite-limit-preserving $v:\\mathcal D'\\to\\mathcal C'$, with $ef_K\\cong hg$. By [lem-weil-pbc-ringed-presentation-transport], the module functors $g_*,e_*$ are exact equivalences. In particular $J'=g_*J$ is injective: applying the exact inverse equivalence to a monomorphism and then the lifting property of $J$ proves its lifting property. The ringed commutativity gives $e_*f_{K*}J\\cong h_*J'$ as modules, using the induced module direct image of [def-weil-pbc-ringed-topos-morphism]. Indeed the right-adjoint comparison identifies underlying sheaves, and the commuting structural ring maps identify their scalar actions. For any module $P$ on the target slice, full faithfulness of $e_*$ and its preservation of the terminal sheaf identify $\\Gamma(P)$ with $\\Gamma(e_*P)$, including addition. Applying $e_*$ to an injective resolution gives an injective resolution, since it is an exact equivalence; thus this identification holds for all right derived global sections as well.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CR (lemma-morphism-ringed-topoi-comes-from-morphism-ringed-sites), presentation and equivalence invariance; Tag 072Z first paragraph in sites-cohomology.tex"
+   }
+  },
+  {
+   "text": "The finite-limit site $\\mathcal D'$ has a final object $T$, so $h_T$ is the terminal sheaf and module global sections are exactly evaluation at $T$. Apply [lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic] to $h$ and $J'$. Here the node's site $\\mathcal C$ is $\\mathcal D'$, its site $\\mathcal D$ is $\\mathcal C'$, its continuous functor $u$ is $v$, and its ring map $\\rho:\\mathcal O_{\\mathcal D'}\\to h_*\\mathcal O_{\\mathcal C'}$ is the adjunct of $h^\\sharp$. Since $h$ is the morphism of sites given by $v$, its direct image on sheaves of sets is $h_*=v^s$, $P\\mapsto P\\circ v$ [def-weil-pbc-sites-and-cohomology] (3); the module direct image of [def-weil-pbc-ringed-topos-morphism] has this underlying sheaf and the scalar action induced by $h^\\sharp$, which on sections over $U$ is the action through $\\rho_U$. So the module $h_*J'$ of step 4 is the node's $(h_*J')(U)=J'(v(U))$. Its continuous site-functor hypothesis is provided by step 4; its enough-injectives and size hypotheses are provided by step 1. Its conclusion at $U=T$ is $R^q\\Gamma(T,-)(h_*J')=0$ for every $q>0$. Step 4 transports this vanishing to the target slice, and steps 2--3 identify it with $H^q(K,f_*I)$. Since $K$ was arbitrary, this is precisely the total acyclicity in the statement. No step asserts that $f_*I$ is injective or that the original ring map is flat.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072Z (lemma-direct-image-injective-sheaf), reduction to site-object evaluation; Tag 0731 (lemma-limp-acyclic), terminal-object specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sbc-ringed-sheaf-slice-ordinary-square",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+  "lem-weil-pbc-ringed-topos-site-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072Z (lemma-direct-image-injective-sheaf); its representability reduction implemented using arbitrary-sheaf localization (sites-modules.tex Tags 04IE, 04IF) and presentation (03CR), then the existing site-object case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The direct image of an injective module under a morphism of ringed topoi is totally acyclic for sections over every sheaf of sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The canonical morphism from a presheaf of modules $M_0$ to the restriction of scalars of its sheafification via a natural transformation $\\\\alpha: R_0 \\\\to R$ is locally injective with respect to the Gr\"}\n  {\"name\": \"PresheafOfModules.IsLocallyInjective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    CategoryTheory.GrothendieckTopology C →\\n      {R : CategoryTheory.Functor Cᵒᵖ RingCat} → {M₁ M₂ : PresheafOfModules R} → (M₁ ⟶ M₂) → Prop\", \"doc\": \"A morphism $ f $ between presheaves of modules over a presheaf of rings $ R $ is locally injective if, after applying the forgetful functor to presheaves of abelian groups, the induced natural transfo\"}\n  {\"name\": \"CochainComplex.cm5b.I_X\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ),\\n  (CochainComplex.cm5b.I K).X n = CategoryTheory.Injective.under (K.X n)\", \"doc\": \"For any cochain complex $ K $ in an abelian category $ \\\\mathcal{C} $ with enough injectives, and for every integer $ n $, the object $ X^n $ in the cochain complex $ I $ constructed via the CM5b facto\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (L : CochainComplex C ℤ) (d : ℤ) [L.IsStrictlyGE d] [∀ (n : ℤ), CategoryTheory.Injective (L.X n)], L.IsKInjective\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, if a cochain complex $L$ is strictly supported in degrees $\\\\geq d$ and each object $L^n$ in the complex is injective, then $L$ is a K-injective cochain complex. T\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CochainComplex.cm5b.instInjectiveXIntI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ),\\n  CategoryTheory.Injective ((CochainComplex.cm5b.I K).X n)\", \"doc\": \"For each integer $ n $, the object $ (I K).X(n) $ in the cochain complex $ I K $ constructed via injective replacements is an injective object in the abelian category $ \\\\mathcal{C} $. This follows fro\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n  {\"name\": \"CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (J : C)\\n  [hJ : CategoryTheory.Injective J], (CategoryTheory.preadditiveYonedaObj J).PreservesHomology\", \"doc\": \"If $ J $ is an injective object in an abelian category $ \\\\mathcal{C} $, then the preadditive Yoneda functor associated with $ J $, which maps $ \\\\mathcal{C}^{\\\\text{op}} $ to modules over the endomorphi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of an injective sheaf of modules is acyclic for evaluation on every slice topos without flatness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.IsLocallyInjective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    CategoryTheory.GrothendieckTopology C →\\n      {R : CategoryTheory.Functor Cᵒᵖ RingCat} → {M₁ M₂ : PresheafOfModules R} → (M₁ ⟶ M₂) → Prop\", \"doc\": \"A morphism $ f $ between presheaves of modules over a presheaf of rings $ R $ is locally injective if, after applying the forgetful functor to presheaves of abelian groups, the induced natural transfo\"}\n  {\"name\": \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The canonical morphism from a presheaf of modules $M_0$ to the restriction of scalars of its sheafification via a natural transformation $\\\\alpha: R_0 \\\\to R$ is locally injective with respect to the Gr\"}\n  {\"name\": \"CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (J : C)\\n  [hJ : CategoryTheory.Injective J], (CategoryTheory.preadditiveYonedaObj J).PreservesHomology\", \"doc\": \"If $ J $ is an injective object in an abelian category $ \\\\mathcal{C} $, then the preadditive Yoneda functor associated with $ J $, which maps $ \\\\mathcal{C}^{\\\\text{op}} $ to modules over the endomorphi\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] {J : CategoryTheory.GrothendieckTop\", \"doc\": \"If $\\\\phi: F_1 \\\\to F_2$ is a locally injective morphism between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$, then the induced morphism obtained by composing with the\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_iff_injective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] {J : CategoryTheory.GrothendieckTop\", \"doc\": \"A morphism $\\\\phi: F_1 \\\\to F_2$ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is locally injective if and only if for every object $X$ in the opposite category\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type v} [inst : CategoryTheory.SmallCategory C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁)\\n  [inst_1 : CategoryTheory.Category.{v, u₁} A] [inst_2 : CategoryTheory.Abelian A]\\n  [CategoryTheory.IsGrothendieckAbelian.{v, v, u₁} A] [inst_4 : CategoryTheory.HasSheafify J A],\\n  Categ\", \"doc\": \"Given a small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and an abelian category $\\\\mathcal{A}$ that is Grothendieck abelian with a sheafification functor, the category of sheaves on $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTop\", \"doc\": \"If each component of a natural transformation $\\\\phi : F_1 \\\\Rightarrow F_2$ between presheaves (functors $\\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$) is injective, then $\\\\phi$ is locally injective with r\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Injective\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"PresheafOfModules.injective_of_mono\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (f : M₁ ⟶ M₂) [CategoryTheory.Mono f] (X : Cᵒᵖ) : Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (f.app X))\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.mono_of_injective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f : M₁ ⟶ M₂} (hf : ∀ ⦃X : Cᵒᵖ⦄, Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (f.app X))) : CategoryTheory.Mono f\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Derivation.Universal.postcomp_injective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {M : PresheafOfModulesOfCommRing R} {φ : S ⟶ F.op.comp R} {d : M.Derivatio\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.IsLocallyInjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (f : M₁ ⟶ M₂) : Prop\", \"doc\": \"A morphism of presheaves of modules is locally injective\\nif the underlying morphism of presheaves of abelian groups is.\"}\n  {\"name\": \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] {M₀ : Pre\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ R : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R₀ ⟶ R) [CategoryTheory.Presheaf.IsLocallyInjective J α] {M₀ : PresheafOfModules R₀} {A : CategoryTheory.Functor Cᵒᵖ AddCommGrpCat} (φ : M₀.presheaf ⟶ A) [\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?acyclic|limp|injective.*pushforward|pushforward.*injective",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Logic/Nontrivial/Defs.lean\", \"line\": \"38\", \"text\": \"/-- Pushforward a `Nontrivial` instance along an injective function. -/\"}\n  {\"file\": \"Mathlib/Util/TransImports.lean\", \"line\": \"34\", \"text\": \"  let imports := (← getEnv).allImportedModuleNames\"}\n  {\"file\": \"Mathlib/Util/Tactic.lean\", \"line\": \"4\", \"text\": \"Authors: Arthur Paulino, Jannis Limperg\"}\n  {\"file\": \"Mathlib/Control/ULift.lean\", \"line\": \"4\", \"text\": \"Authors: Kim Morrison, Jannis Limperg\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Init.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2023 Jannis Limperg. All rights reserved.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Init.lean\", \"line\": \"4\", \"text\": \"Authors: Jannis Limperg\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"line\": \"143\", \"text\": \"private noncomputable def fullyFaithfulImp (hG : G.FullyFaithful) : G'.FullyFaithful :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"line\": \"161\", \"text\": \"  ⟨fun ⟨h⟩ => ⟨Φ.fullyFaithfulImp L₁ L₂ G L₁' L₂' G' h⟩,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"line\": \"162\", \"text\": \"    fun ⟨h⟩ => ⟨Φ.fullyFaithfulImp L₁' L₂' G' L₁ L₂ G h⟩⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"line\": \"26\", \"text\": \"- `IsSifted.colimPreservesFiniteProductsOfIsSifted`: The `Type`-valued colimit functor for sifted\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean\", \"line\": \"135\", \"text\": \"  functorPushforward_equalizer_mem f₁ f₂ e := by obtain rfl := G.map_injective e; simp\"}\n  {\"file\": \"Mathlib/Algebra/Module/Submodule/Map.lean\", \"line\": \"143\", \"text\": \"/-- The pushforward of a submodule by an injective linear map is\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/MulExpNegMulSqIntegral.lean\", \"line\": \"127\", \"text\": \"  have limP : Tendsto (fun n : ℕ => ∫ x, (g * (1 + (n : ℝ)⁻¹ • -(ε • g * g)) ^ n) x ∂P) atTop\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/MulExpNegMulSqIntegral.lean\", \"line\": \"132\", \"text\": \"    (tendsto_integral_mul_one_add_inv_smul_sq_pow g hε) limP\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Portmanteau.lean\", \"line\": \"372\", \"text\": \"section LimitBorelImpliesLimsupClosedLE\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Portmanteau.lean\", \"line\": \"479\", \"text\": \"end LimitBorelImpliesLimsupClosedLE --section\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/Jacobian.lean\", \"line\": \"1125\", \"text\": \"injective and differentiable on a null measurable set `s`, then the pushforward of the measure with\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/Jacobian.lean\", \"line\": \"1146\", \"text\": \"injective and differentiable on a measurable set `s`, then the pushforward of the measure with\"}\n  {\"file\": \"Mathlib/Data/List/Indexes.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2020 Jannis Limperg. All rights reserved.\"}\n  {\"file\": \"Mathlib/Data/List/Indexes.lean\", \"line\": \"4\", \"text\": \"Authors: Jannis Limperg\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Init.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2023 Jannis Limperg. All rights reserved.\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Init.lean\", \"line\": \"4\", \"text\": \"Authors: Jannis Limperg\"}\n  {\"file\": \"Mathlib/Tactic/GCongr/Core.lean\", \"line\": \"599\", \"text\": \"so instead we use `relImpRelLemma` to look it up.\"}\n  {\"file\": \"Mathlib/Tactic/GCongr/Core.lean\", \"line\": \"613\", \"text\": \"def relImpRelLemma (arity : Nat) : List GCongrLemma :=\"}\n  {\"file\": \"Mathlib/Tactic/GCongr/Core.lean\", \"line\": \"795\", \"text\": \"    lemmas := lemmas ++ relImpRelLemma lhsArgs.size\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image of injective module sheaf has zero higher cohomology over every object of the target topos",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"{F : Sheaf C X} {G : Presheaf C X} (f : F.1 ⟶ G) :\\n  (∀ x : X, Function.Injective ((stalkFunctor C x).map f)) ↔ ∀ U : Opens X, Function.Injective (f.app (op U))\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ and a presheaf $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$ is injective on all stalks $\\\\mathcal{F}_x \\\\to \\\\mathcal{G}_x$ for every $\"}\n  {\"name\": \"TopCat.Presheaf.stalkToFiber_injective\", \"module\": \"Mathlib.Topology.Sheaves.Sheafify\", \"type\": \"(x : X) : Function.Injective (F.stalkToFiber x)\", \"doc\": \"For each point $x$ in the topological space $X$, the canonical morphism from the stalk of the sheafification of $\\\\mathcal{F}$ at $x$ to the stalk of $\\\\mathcal{F}$ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] (X : C) [Injective X] : IsIso ((InjectiveResolution.self X).toRightDerivedZero' F)\", \"doc\": \"For an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an injective object $ X $ in an abelian category $ \\\\mathcal{C} $, the canonical morphism from $ F(X) $ to the 0th cycles of the cochain c\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": Function.Injective <| (specTargetImageFactorization f).appTop\", \"doc\": \"The application of the target-image factorization of a scheme morphism $ f $ to the entire topological space induces an injective map between the global sections of the structure sheaves.\"}\n  {\"name\": \"SheafOfModules.Hom.mk.injEq\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {X Y : SheafOfModules R} (val val_1 : X.val ⟶ Y.val),\\n  ({ val := val } = { val := val_1 }) = (val = val_1)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and sheaves $X$ and $Y$ of modules over $R$, the constructor for homomorphisms between $X$ and $\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \"{F G : Sheaf J (Type w)} (f : F ⟶ G) : IsLocallyInjective (Sheaf.imageι f)\", \"doc\": \"For any sheaves $F$ and $G$ on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$, and for any morphism $f : F \\\\to G$, the inclusion morphism from the image sheaf of $f$ to $G$ is lo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"[QuasiCompact f] : Function.Injective (f.toImage.app (f.imageι ⁻¹ᵁ U))\", \"doc\": \"For a quasi-compact morphism $ f $ of schemes, the induced map on sections over the preimage of an open subset $ U $ under the inclusion of the image subscheme is injective, i.e., $ f.\\text{toImage}.\\\\t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?acyclic|\\blimp\\b|injective.*pushforward|pushforward.*injective",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of an injective module sheaf under an arbitrary morphism of ringed topoi is totally acyclic on all sheaves of sets",
+   "results": "8 hits: PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.IsLocallyInjective, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.I_X, CategoryTheory.Sheaf.isLocallyInjective_forget, SheafOfModules.instAbelian, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex. Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "0 hits: . Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?acyclic|\\blimp\\b|pushforward.*injective|injective.*pushforward",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean. Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher derived sections over arbitrary sheaves of sets vanish for the direct image of an injective module on a ringed topos",
+   "results": "8 hits: SheafOfModules.sectionsFunctor, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.sections, SheafOfModules.Presentation.mk.inj, SheafOfModules.sectionsFunctor_obj, PresheafOfModules.Derivation'.d_app, SheafOfModules.GeneratingSections.opEpi_comp. Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?[Aa]cyclic|RingedTopos|[Aa]cyclic.*pushforward|pushforward.*[Aa]cyclic",
+   "results": "0 hits: . Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective sheaf of modules pushed forward along a geometric morphism has vanishing higher cohomology on every slice topos without a flatness hypothesis",
+   "results": "8 hits: CategoryTheory.Sheaf.isLocallyInjective_forget, PresheafOfModules.IsLocallyInjective, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, PresheafOfModules.instIsLocallyInjectiveToSheafify, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, SheafOfModules.instAbelian, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ. Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_rightDerived_obj_injective_succ|theorem isZero_rightDerived_obj_injective",
+   "results": "2 hits: 32, 153. Read returned types: local injectivity of maps, underived sections, general K-injective results and vanishing of derived functors AT injective inputs do not imply vanishing at a nonflat module pushforward.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-topos-relative-leray",
+  "date": "2026-10-23",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 0734 (lemma-relative-Leray), module assertion; proof uses Tags 0731 (lemma-limp-acyclic), 03F3 (lemma-direct-image-injective-sheaf) and 015N (lemma-grothendieck-spectral-sequence). Relative Leray prerequisite: Tag 072Z (lemma-direct-image-injective-sheaf); Tag 072Y (definition-limp) and section-limp for the meaning of H^q(K,-).",
+   "via": [
+    "lem-sfb-ringed-topos-relative-leray",
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-injective-pushforward-totally-acyclic",
+  "worker": "stage1",
+  "summary": "Reused all existing inputs; no new nodes. Reduced arbitrary sheaf evaluation to exact slice restriction, localized the morphism, presented it by ringed sites, and applied the existing site-object evaluation acyclicity theorem. Checked the nonflat hypothesis, exact equivalence transport, common-universe size, and that the supporting closures do not reach this item. Statement unchanged.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, paragraph (3), derived direct-image composition: this is the generic ringed-topos acyclicity prerequisite along the inherited relative-Leray branch. The ancestor command reports None for this inherited chain; retained its existing from.node and explicit from.place, with same_as=[] after whole-blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-ringed-sheaf-slice-ordinary-square",
+    "why": "Ordinary localization of an arbitrary ringed-topos morphism; supplies the module direct-image square without derived assumptions."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Enough injectives for all module categories used."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Module categories on each small site are Grothendieck abelian."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Exact module equivalence under a change of site presentation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Exact arbitrary-sheaf localization and exact left adjoint, needed before object evaluation applies."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+    "why": "Existing continuous ringed-site evaluation case, used only after the arbitrary-sheaf slice reduction and presentation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-site-presentation",
+    "why": "Generic presentation of a ringed-topos morphism by small sites with finite limits."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-ringed-sheaf-slice-ordinary-square",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-site-direct-image-injective-evaluation-acyclic",
+  "lem-weil-pbc-ringed-topos-site-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-27da0c6e7",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-27da0c6e7 (reviewer sub-agent of L); spot-checked: Read the whole split against Stacks sites-cohomology 072Z (lemma-direct-image-injective-sheaf), 072Y and section-limp. Statement unchanged from base and not weakened: arbitrary ringed-topos morphism, I injective, every sheaf of sets K, q>0, no flatness. No new nodes, no SGA, no repair note; the item is still unsplit in live and side-live. Steps checked against each cited statement in full. Step 1: Grothendieck abelian + enough injectives; element sites and presentation sites are small. Step 2: slice-adjunction gives exact r_K with exact left adjoint j_!, so r_K preserves injectives; Γ(K,-)=Γ(D/K,-)∘r_K via the terminal sheaf on the element site. Step 3: slice-ordinary-square gives r_K f_* ≅ f_{K*} r_B as modules. Step 4: site-presentation applies to f_K; presentation-transport gives exact module equivalences that preserve injectives and Γ (directions checked). Step 5: the final object T of D' has terminal representable, so P(T)=Γ(P); the evaluation-acyclic node applies with roles C:=D', D:=C', u:=v. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-injective-pushforward-totally-acyclic.json: step 5 now states that the ringed-topos module direct image h_* is the evaluation node's concrete (h_*J')(U)=J'(v(U)) (h_*=v^s by def-weil-pbc-sites-and-cohomology (3)), with ρ = adjunct of h^♯ and the scalar action from def-weil-pbc-ringed-topos-morphism; those two defs are added to step 5 uses, and def-weil-pbc-sites-and-cohomology to proof_deps. Not duplicates: lem-sfb-totally-acyclic-direct-image (0731(4), a different statement) and the K=1 global-acyclic sibling (it cites the item; the item does not cite it). No cycle: the 581-node closure does not contain the item. Accepted generic tool_uses: pbc slice-adjunction, site-presentation, presentation-transport, site evaluation-acyclic, ring-sheaves-grothendieck, sbc slice-ordinary-square, sp grothendieck-enough-injectives. Edge cases: K=∅, K=1, f=id, and nonflat Z→F_p (f_*I not injective, yet the vanishing holds and the proof never claims injectivity).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InjectivePushforwardTotallyAcyclic",
+  "declaration": "CategoryTheory.ringedTopos_directImage_injective_totally_acyclic",
+  "declarations": [
+   "CategoryTheory.moduleSheafSections",
+   "CategoryTheory.moduleSheafSectionCohomology",
+   "CategoryTheory.ringedTopos_directImage_injective_totally_acyclic"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/InjectivePushforwardTotallyAcyclic.lean",
+  "statement": "theorem ringedTopos_directImage_injective_totally_acyclic {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (SheafFreeModule.ring A) (SheafFreeModule.ring B)) (I : ringedSiteModules.{u} (SheafFreeModule.ring A)) [Injective I] (E : Sheaf K (Type u)) (q : ℕ) (hq : 0 < q) : IsZero ((moduleSheafSectionCohomology B E q).obj (f.modules.obj I))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two real helper constructions implement the sections and module-derived cohomology explicitly introduced in this item. Sections are represented by the existing free module sheaf on the arbitrary test sheaf. Added the landed definition def-trf-free-module-sheaf-construction to stmt_deps under brief-stage2 §5; no new notion or copy of the free module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a419125f1",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, Stacks 079X/072Y/072Z, delivered module and report. f: arbitrary RingedToposMorphism (ring A) (ring B), direction checked (modules: Mod A ⥤ Mod B); I injective in Mod; every E : Sheaf K (Type u), q>0; IsZero conclusion = total acyclicity; no flatness/site-functor/representability binder. Γ(E,-) = preadditiveCoyoneda of landed SheafFreeModule.free B E, canonically Hom(E,N_sets) via FreeModuleUniversalProperty; H^q = rightDerived in Mod(B) via local letI isGrothendieckAbelianOfUniverses (no extra EnoughInjectives binder). No def node owns Γ(K,-)/H^q(K,-) (Cech helpers are theorem-node-local), item introduces them so helpers in item module are fine. Node diff vs live: only lean + stmt_deps (+def-trf-free-module-sheaf-construction, landed with lean record, allowed by brief §1). lean.statement verbatim; proof sorry only; docstrings with 072Y/072Z/079X + blueprint + 5 proof steps; imports exist. No compile run (no change)."
+ }
+}

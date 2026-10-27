@@ -1,0 +1,273 @@
+{
+ "id": "lem-cbc-completed-support-ambient-comparisons",
+ "kind": "statement",
+ "title": "Ambient completed support comparisons and normalized exchange",
+ "statement": "Fix the Noetherian adic coefficient datum $(A,I,d)$ of [def-weil-pbc-adic-coefficient-datum]. For every scheme $T$ use the unbounded constant-coefficient derived category $D(T)$, strict reduction $\\mathcal R_T$, derived inverse limit $L_T$, completion $C_T=\\mathcal R_T\\mathbin\\gg L_T$ and specified unit $\\eta_T$ of [lem-sp-completion-mate-comparison]; throughout, $F\\mathbin\\gg G$ means first $F$, then $G$. For an open immersion $j:X\\to U$, use the exact derived open adjunction $J_j\\dashv j^*$ and the strict open operation $J_j^{\\mathrm{tw}}$ of [def-cbc-strict-tower-open-extension]. For $p:U\\to Y$ put $B_f=J_j\\mathbin\\gg Rp_*$, $F_f=J_j^{\\mathrm{tw}}\\mathbin\\gg R_p$, and $\\widehat B_f=B_f\\mathbin\\gg C_Y$. Define the open tensor map by the inverse open mate of the specified reduction/pullback comparison, and define the proper projection by its proper counit-tensor mate. The open tensor map and $\\mathcal R_T(\\eta_T)$ are invertible. Let $t_f:B_f\\mathbin\\gg\\mathcal R_Y\\to\\mathcal R_X\\mathbin\\gg F_f$ be proper projection followed by inverse open tensor; let $\\theta_f:\\widehat B_f\\mathbin\\gg\\mathcal R_Y\\to\\mathcal R_X\\mathbin\\gg F_f$ be $t_f$ after inverse reduction of $\\eta_{B_f}$; and let $\\mu_f=L_Y(\\theta_f)\\eta_{\\widehat B_f}$. If $j$ is quasi-compact and $p$ is proper, the two completion insertions defining $\\widehat B_f\\to J_j\\mathbin\\gg C_U\\mathbin\\gg Rp_*$ are invertible, $\\widehat B_f$ has complete values, and $\\theta_f,\\mu_f$ are invertible. That identification followed by the open tensor and proper direct-image/limit identification is exactly $\\mu_f$; reduction of $\\eta_{B_f}$ followed by $\\theta_f$ is exactly $t_f$.\n\nFor a Cartesian proper/open base-change diagram with arrows $x:X'\\to X$, $u:U'\\to U$ and $y:Y'\\to Y$, and with quasi-compact open maps $j,j'$ and proper maps $p,p'$, define ordinary exchange by the proper mate followed by the inverse open unit mate. Define completed exchange $x_f:\\widehat B_f\\mathbin\\gg y_c^*\\to x_c^*\\mathbin\\gg\\widehat B_{f'}$ by the inverse source completion insertion, completion of ordinary exchange, and target completion insertion, where $g_c^*=g^*\\mathbin\\gg C$. Both endpoint insertions are invertible. Let $q_g:g_c^*\\mathbin\\gg\\mathcal R\\to\\mathcal R\\mathbin\\gg G_g$ be inverse reduced completion unit followed by the inverse reduction/pullback comparison. Under the source identification formed from pullback reconstruction and $\\theta_f$, and the target identification formed from $\\mu_{f'}$ and $q_x$, the completed exchange is exactly $L$ of the specified strict proper-then-open exchange. Both identifications and $q_x$ are invertible. All these are natural transformations on ambient derived categories using the actual strict quotient diagrams. The existing assertions $\\mathrm{strictUnits}$, $\\mathrm{completionUnits}$ and $\\mathrm{exchangeSubstitution}$ carry precisely the remaining obligations in this ambient statement; finite origins and successive exchange substitutions are outside it.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "The proper base-change mate followed by the inverse open mate and its naturality. The detailed strict-tensor argument is Steps 9--11 of the reviewed intermediate-tower node; Stacks proetale.tex, lemma-naive-completion and lemma-pushforward-Noetherian-case (099M, 099N), and sites-cohomology.tex, remark-base-change (07A7)."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sp-completed-pullback-adjunction",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sp-completion-mate-comparison",
+  "lem-sf-cbc-completed-pullback-unit-tower",
+  "lem-cbc-completed-open-endpoint-limit-transport",
+  "lem-weil-pbc-ordered-exchange-coefficient-comparison",
+  "def-cbc-finite-constant-coefficient-transport"
+ ],
+ "proof": [
+  {
+   "text": "Work first with constant $A$ coefficients. The canonical equivalence identifies the intrinsic Koszul unit with quotient completion and identifies reductions, their transitions and completion units. Thus $\\bar K$ is complete and $M=\\mathcal R_X\\bar K$ is the restricted specified tower, not a chosen lift of its evaluations. All tower operations take place on the small diagram sites. We use the supplied compactifications, so their existence and the quasi-compactness of $c,i$ are already hypotheses.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-cbc-compactifiable-compatible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Coefficient transport and supplied compatible compactifications; Stacks 099M/099N, not an equivalence of ambient coefficient categories."
+   }
+  },
+  {
+   "text": "Put $N=J_c\\bar K$. By the completed-open reduction theorem there is a unit-normalized strict isomorphism $q:\\mathcal R_U(C_UN)\\cong J_cM$, satisfying $q\\mathcal R_U(\\eta_N)=t_c$, where $t_c$ is the actual open-tensor comparison. Also $C_UN$ is complete and its specified presentation is $L_UJ_cM$. Apply the direct-image/limit theorem to obtain $Rp_{Y*}C_UN\\cong L_YF_fM$. This comparison is natural in derived tower maps and has the indicated limit projections. No ordinary open/limit interchange occurs.",
+   "uses": [
+    "lem-sf-cbc-extension-zero-completion",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Completed extension rather than ordinary extension; Stacks 099M, 099N(4), 0A07."
+   }
+  },
+  {
+   "text": "For any ambient $V$ on $U$, define $\\pi_{p_Y,V}:\\mathcal R_YRp_{Y*}V\\to R_{p_Y}\\mathcal R_UV$ by the diagram-site adjunct of counit tensored with the quotient diagram. The constant-tower direct-image normalization identifies the source with the counit-normalized diagonal image. Evaluation gives exactly the fixed constant-coefficient perfect-quotient mate of [def-sp-constant-quotient-projection], invertible for every ambient input by [lem-sp-constant-perfect-quotient-projection]. Its cone has zero cohomology levelwise, hence the strict map itself is invertible. The construction is natural in $V$ and preserves the quotient augmentation: at the tensor unit its adjunct is the counit, hence the unit coefficient gives the identity on $Rp_{Y*}V$. The unit $\\eta_N$ is a reduction isomorphism, so $Rp_{Y*}\\eta_N$ is also one, by naturality of $\\pi$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sp-constant-perfect-quotient-projection",
+    "def-sp-constant-quotient-projection",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Diagram-site projection map; Stacks sites-cohomology.tex, projection-formula construction; same strict lift as def-cbc-completed-exchange-map."
+   }
+  },
+  {
+   "text": "The target $Rp_{Y*}C_UN$ is complete because direct image preserves complete objects. Since completion is $L\\mathcal R$, it inverts every reduction isomorphism. Applying $C_Y$ to $Rp_{Y*}\\eta_N$ and cancelling the target completion unit therefore gives a specified isomorphism $C_YB_f\\bar K\\cong Rp_{Y*}C_UN$. This is $\\bar H$. Combining $\\pi$ for $C_UN$ with $R_{p_Y}q$ gives $\\theta_{f,K}:\\mathcal R_Y\\bar H\\cong F_fM$. Naturality and $q\\mathcal R\\eta_N=t_c$ give $\\theta_{f,K}\\mathcal R_Y\\eta_{B_f\\bar K}=t_f$. For $\\mu$, put $V=C_UN$ and write $\\eta_W=L(e_W)c_W$, with $e_W:\\Delta W\\to\\mathcal R W$ the strict augmentation and $c_W:W\\cong L\\Delta W$. The presentation of Step 2 is $L_U(q)\\eta_V$. Naturality of the limit comparison $a$ in tower maps moves $L_U(q)$ past $a$ as $L_Y(R_{p_Y}q)$. The constant-tower normalization gives $a_{\\Delta V}Rp_{Y*}(c_V)=L_Y(\\chi_V)c_{Rp_{Y*}V}$. The projection map is natural in the coefficient diagram and is the identity at the unit coefficient. Applied to the augmentation $\\Delta\\underline A\\to(\\underline{P_n})_n$, this gives the strict-tower equation $\\pi_V e_{Rp_{Y*}V}=R_{p_Y}^{\\mathcal T}(e_V)\\chi_V$. Applying $L_Y$ gives $a_{\\mathcal R_UV}Rp_{Y*}(\\eta_V)=L_Y(\\pi_V)\\eta_{Rp_{Y*}V}$. Hence $\\mu_{f,K}=L_Y(\\theta_{f,K})\\eta_{\\bar H}$ as actual morphisms, not by comparing projections. Transport back by the coefficient equivalence to obtain intrinsic completeness of $H$. D7 formalization: supportProperUnitNormalization isolates only the proper direct-image/quotient-unit calculation. The first reconstruction equation follows by cancellation of the invertible reduced unit. For the second, precompose with the completion unit at the ordinary support object. Naturality cancels the completed proper-target unit; naturality of directLimitIso moves the open tensor inverse past the limit comparison. Substitute supportProperUnitNormalization and identify properProjection with projection by the mate-counit equation. The resulting map is the limit of ordinaryReduction. The defining equation for theta and naturality of the completion unit give the same result for mu. Precomposition is injective because the completed image of the unit and the unit at the target are invertible; the latter follows from completionUnits transported along mu.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-sf-cbc-extension-zero-completion",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-cbc-support-proper-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Completion reflector and direct-image reconstruction; Stacks 099N(1),(3),(4)."
+   }
+  },
+  {
+   "text": "For an arbitrary ambient constant-coefficient input $V$, the same construction gives natural isomorphisms $t_f:\\mathcal R_YB_fV\\cong F_f\\mathcal R_XV$. Strict open/tensor descent supplies the open factor; Step 3 supplies the proper factor. Thus $B_f$ preserves reduction isomorphisms. The reduced completion unit is invertible for every input, so its inverse defines $\\theta_{f,V}=t_{f,V}\\mathcal R_Y(\\eta_{B_fV})^{-1}$. This proves the displayed unit equation and naturality also for the base-changed operations. Exact pullback has the unit-normalized strict reduction $q_g:\\mathcal R(g_c^*V)\\cong G_g\\mathcal R(V)$ and preserves reduction isomorphisms. These statements justify all endpoint insertions and cancellations by completion units in the definition of $x_f,x_h$.",
+   "uses": [
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-sf-cbc-completed-pullback-unit-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Strict tensor and completion-unit normalization; Stacks 099M/099N; repeated application of Steps 3–4."
+   }
+  },
+  {
+   "text": "The reduction of the ordinary compact-support exchange is $e_f$ under $t_f$ and the pullback/tensor comparisons. For the proper factor this is precisely the exchange/tensor square: its two arrows are transposes of counit tensored with the same quotient identity. Apply that square on the diagram site with its single quotient diagram, not separately chosen coefficient maps. For the open factor, the inverse exchange is transpose of the pulled-back open unit; the strict tensor comparison sends that unit to the same unit tensored with $1$. Thus its transpose is the open unit-mate $\\beta$ on strict towers. Composing the two squares gives the strict proper-mate/open-mate composite defining $e_f$. The identical calculation with $(i,q)$ gives $e_h$. No equality of derived tower morphisms is inferred from their evaluations.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Specified exchange and projection mates; Stacks 07A7 (sites-cohomology.tex, remark-base-change) and extension-unit adjunction 03DI."
+   }
+  },
+  {
+   "text": "Apply $C=L\\mathcal R$ to the ordinary exchange square of Step 9. Use Step 8's reduction isomorphisms for the completion units on its source and target. Cancellation gives the strict equation $\\theta_{f'}\\mathcal R(x_f)q_{g_Y}^{-1}=e_f$, with $G$ applied to $\\theta_f$ on the source and $F'_f q_{g_X}$ on the target understood. Equivalently, after the specified endpoint maps, $x_f(K)=L(e_{f,M})$; the same statement holds for $h$ at any complete input, without any witness or common-bound condition. This follows by functoriality of $L$ on the strict square and the natural identity $\\eta_W a=C(a)\\eta_V$ for every $a:V\\to W$. It does not use an open/limit comparison for arbitrary towers.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-sf-cbc-completed-pullback-unit-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Complete the specified ordinary exchange, with completed target; upstream CompletedExchange.lean lines 266–293; Stacks 099M/099N."
+   }
+  },
+  {
+   "text": "The definitions and assertions in this node are the pre-existing ambient portion of CompletedSupportIntermediateTower, relocated verbatim to its Core module to permit reuse by a strictly smaller reduction-square theorem. The ordinary open inverse is invertible by the fully faithful exact open adjunction and the open pullback comparison. Endpoint insertions are invertible by reduced-unit invertibility, using reductionPullIso for the source and mu for the target. The unit and reconstruction equations retain their existing proofs. No new axiom or postponed theorem is introduced by this relocation.",
+   "uses": [
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-support-proper-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "The proper base-change mate followed by the inverse open mate and its naturality. The detailed strict-tensor argument is Steps 9--11 of the reviewed intermediate-tower node; Stacks proetale.tex, lemma-naive-completion and lemma-pushforward-Noetherian-case (099M, 099N), and sites-cohomology.tex, remark-base-change (07A7)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sp-constant-perfect-quotient-projection",
+  "def-sp-constant-quotient-projection",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-cbc-support-proper-unit-normalization",
+  "lem-sf-cbc-localized-strict-tensor-descent",
+  "lem-sf-cbc-completed-pullback-unit-tower",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-cbc-strict-tower-open-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+  "place": "The proper base-change mate followed by the inverse open mate and its naturality. The detailed strict-tensor argument is Steps 9--11 of the reviewed intermediate-tower node; Stacks proetale.tex, lemma-naive-completion and lemma-pushforward-Noetherian-case (099M, 099N), and sites-cohomology.tex, remark-base-change (07A7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of a completed compact support base change exchange equals the strict proper then open exchange with quotient tensor coefficients",
+   "results": "Eight results, on IsBaseChange.finitePow, Algebra.IsPushout and algebraic AdicCompletion; none concerns the derived strict-tower exchange.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "One result: CategoryTheory.mateEquiv_vcomp, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-26",
+   "verdict": "General mate composition is useful but does not state the normalized reduction square."
+  },
+  {
+   "tool": "grep",
+   "query": "completedExchange|properProjection|openTensor",
+   "results": "msearch reports zero hits; repository rg finds the assigned module and the existing strict tensor and mate coherence prerequisites, but no theorem giving this reduction square.",
+   "date": "2026-10-26",
+   "verdict": "No separate existing statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedSupportIntermediateTower",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proper-then-open exchange naturality, via the reviewed intermediate-tower proof Steps 2--4 and 8--11."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedSupportIntermediateTowerCore",
+  "file": "lean/Sheaf/Paper/CompletedSupportIntermediateTowerCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.completionUnits",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.openExtension",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.openAdjunction",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.openTensor",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.properProjection",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinary",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.tower",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.completed",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.strictUnits",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.openTensorIso",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinaryReduction",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.reducedUnit",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.theta",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.mu",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.completionUnits",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.properCompletedOpen",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.limitCompletedOpen",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.reconstructionNormalization",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinarySquare",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinaryProperExchange",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinaryOpenInverse",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinaryOpenInverse_isIso",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.ordinaryExchange",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.strictExchange",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.sourceInsertion",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.targetInsertion",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.endpointInsertions",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.completedExchange",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.pullReduction",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.pullReconstruction",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.exchangeSource",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.exchangeTarget",
+   "AlgebraicGeometry.Scheme.CompletedSupportIntermediateTower.exchangeSubstitution"
+  ],
+  "statement": "theorem completionUnits {X U Y : Scheme.{t}} (j : X ⟶ U) (p : U ⟶ Y)\n    [IsOpenImmersion j] [QuasiCompact j] [IsProper p] :\n    IsIso (whiskerRight\n      (whiskerRight (whiskerLeft (openExtension (A := A) j) (unit d U))\n        (push (A := A) p)) (completion d Y)) ∧\n    IsIso (whiskerLeft (openExtension (A := A) j ⋙ completion d U ⋙ push (A := A) p)\n      (unit d Y)) ∧ IsIso (theta d j p) ∧ IsIso (mu d j p) ∧\n    (∀ K : D (A := A) X, IsComplete d Y ((completed d j p).obj K))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ea704",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261026T024204-L-645451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ea704",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261026T024204-L-645451",
+  "kind": "interface",
+  "note": "independent cc review: Core (verbatim published prefix, lines 1-532) + ExchangeReduction + item vs the live item module and its node; ambient-node declarations vs those the item node lost (32 = 32); the new completedExchange_reduction against Steps 9-10 of lem-cbc-completed-support-intermediate-tower; axioms and import-deletion variants in sandbox /tmp/w3csit_ea70"
+ }
+}

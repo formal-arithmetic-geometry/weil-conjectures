@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-normalized-divisor-family-pullback",
+ "kind": "lemma",
+ "title": "Supported etale pullback of arbitrary normalized divisor families",
+ "statement": "For any two full relative Kummer-normalized divisor families C on T and Cprime on Tprime over k, their etale supported-Hom representatives commute with functorialCupPullback on every Cartesian square whose two closed immersions are effective Cartier. No separatedness, finite type, or smoothness hypothesis is needed.",
+ "source": {
+  "document": "blueprint main-20261015",
+  "place": "lem-amb-cartier-kummer-map, Cartier-preserving geometric pullback; lem-pur-cartier-class-agreement Step 7"
+ },
+ "stmt_deps": [
+  "lem-pur-divisor-class",
+  "def-pur-supported-class-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply supported_kummer_boundary_pullback to the two normalized Ext classes with p1DecompositionTwistTransport in degree one. Constant-unit normalization and uniqueness identify its source exchange with functorialCupExchange. Apply Ext.hom, expand Ext.comp_hom, Ext.mk₀_hom and Ext.mapExactFunctor_hom, and cancel the degree-zero source exchange. The two realization fields identify the endpoints. The full relative boundary fixes the section and sign; empty Cartier divisors are included.",
+   "uses": [
+    "lem-asd-supported-kummer-boundary-pullback",
+    "lem-pur-supported-constant-exchange-normalization",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-supported-kummer-boundary-pullback",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "blueprint main-20261015",
+  "place": "lem-pur-cartier-class-agreement Step 7, normalized etale component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized effective Cartier divisor Kummer class is natural under Cartesian pullback preserving the Cartier condition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap"
+    ],
+    "note": "Only scheme normalization hits; no Kummer class theorem."
+   },
+   "date": "2026-10-26",
+   "verdict": "Use existing project supported boundary pullback and Ext realization API."
+  },
+  {
+   "tool": "loogle",
+   "query": "HEq, Eq",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "eq_of_heq",
+     "heq_of_eq",
+     "type_eq_of_heq",
+     "cast_heq"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "Generic conversion lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDivisorFamily|supported_kummer_boundary_pullback",
+   "results": {
+    "n_hits": 0,
+    "top": []
+   },
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match; the project boundary pullback is the geometric input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CartierClassAgreement",
+  "date": "2026-10-26",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-cartier-class-agreement",
+   "place": "Step 7, etale pullback of the normalized family",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDivisorFamilyPullback",
+  "file": "lean/Sheaf/Paper/NormalizedDivisorFamilyPullback.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.normalizedDivisorFamily_pullback",
+  "statement": "theorem normalizedDivisorFamily_pullback (P : PurityFiniteSetting.{u})\n    {D T D' T' : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k))\n    (a' : T' ⟶ Spec (.of P.field.k))\n    (C : P.DivisorEtaleClasses T) (C' : P.DivisorEtaleClasses T')\n    (hC : P.DivisorEtaleNormalized T a C)\n    (hC' : P.DivisorEtaleNormalized T' a' C')\n    (i : D ⟶ T) (i' : D' ⟶ T') [IsClosedImmersion i] [IsClosedImmersion i']\n    (h : T' ⟶ T) (w : D' ⟶ D) (sq : ChosenCartesianSquare w i' i h)\n    (hI : i.ker.IsInvertible) (hI' : i'.ker.IsInvertible) :\n    P.functorialCupPullback false i i' h w sq a 2 1 (C.homClassOf i hI) =\n      C'.homClassOf i' hI'",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T201433-L-2510229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T201433-L-2510229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

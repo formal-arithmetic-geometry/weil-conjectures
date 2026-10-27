@@ -1,0 +1,149 @@
+{
+ "id": "lem-trf-isomorphism-strict-quotient-multiplication",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Strict quotient multiplication, original steps 3--4",
+   "via": [
+    "lem-trf-isomorphism-multiplication-cone-descent",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict quotient multiplication, original steps 3--4",
+ "statement": "Fix $\\ell,E$ and schemes $X,Y$ with the completed and finite coefficient sheaves and strict quotient notation of [def-trf-isomorphism-strict-quotient-models]. Let $g:X\\to Y$ be an isomorphism. On the full category of flat-term K-flat complexes $Q$ over $\\widehat R_Y$, let $C_g(Q)$ be the published strict finite pullback tower, with positive exponent $n+1$, and $D_Y(Q)$ its original strict quotient tower [lem-pur-integral-operations-well-defined]. There exists a natural strict tower isomorphism $j:C_g\\simeq G_{\\rm tow}D_Y$ whose map sends the sheafified finite unit generator associated to $x$ (restricted along the canonical comma arrow over $U\\to X$) to $x$, and whose inverse sends $x$ to this very unit generator. The equations hold for every $Q,n,i,U,x$; linearity is the bundled completed-coefficient linearity of $j$.",
+ "stmt_deps": [
+  "def-trf-isomorphism-strict-quotient-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), with sites-modules.tex Tags 03CZ/03EK; explicit strict quotient/cone argument, original multiplication-cone node steps Strict quotient multiplication, original steps 3--4"
+ },
+ "proof": [
+  {
+   "text": "For each unbounded completed-coefficient complex Q and level n, use the existing completed-linear QuotientTensor.insertion on its actual finite reduction Q_n. Its uniquely specified section formula is precisely the canonical comma restriction of integralOperationsPullbackGenerator. The already proved insertion_isIso and insertion_naturality implementation lemmas in Sheaf.Paper.QuotientTensorInsertion give invertibility and naturality in finite complexes. These lemmas apply without any invertibility-of-ell hypothesis on the schemes; no scalar extension or sheafification is constructed again.",
+   "uses": [
+    "lem-trf-quotient-tensor-insertion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove compatibility with the published pullback transition, rather than substitute the auxiliary transition from the insertion module. Evaluate the two composites on a section x at U. Replace both insertions by their section formulas. The naturality square of the published pullback transition along proEtaleIsoCommaArrow moves its action past the restriction. Its defining generator equation, integralOperationsPullbackTransition_existsUnique, then identifies that action with the generator of the actual unrestrictedIntegralTransition applied to x. Applying the target restriction to this generator equation proves the required square.",
+   "uses": [
+    "lem-trf-quotient-tensor-insertion",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use NatTrans.ofOpSequence and the successor square to assemble the insertions into a strict tower map. Each component is invertible, so NatIso.isIso_of_isIso_app makes the tower map invertible. Apply insertion_naturality to the finite reduction of a chain map to obtain a natural isomorphism on the category of all original complexes. Invert this natural isomorphism and whisker on the left by the full inclusion of good complexes. Its inverse section formula is the insertion formula itself. Evaluate the hom-inverse identity on x and substitute that formula to prove the forward multiplication formula. This produces exactly the isomorphism and both equations of the unchanged statement.",
+   "uses": [
+    "lem-trf-quotient-tensor-insertion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quotient-tensor-insertion",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ (lemma-adjointness-tensor-restrict) and 03EK (section-tensor-product), through the existing proved completed-linear tensor insertion; P3 2026-10-26 strict assembly from the published generator transition equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict quotient towers, scalar extension along a ring isomorphism, and natural product comparison on mapping cocones and derived limits",
+   "results": "8 hits, including CategoryTheory.Limits.Cocones.extendIso, Submodule.Quotient.isScalarTower, and CategoryTheory.Limits.IsLimit.extendIso; no strict coefficient-system or normalized Roos assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "11 hits: piComparison, piComparison_comp_π, map_lift_piComparison and instIsIsoPiComparison in Mathlib.CategoryTheory.Limits.Shapes.Products and Preserves.Shapes.Products; these supply the product API, not the entire tower/cocone/normalization.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionRingIso|mapHomologicalComplexIso|ReductionPresentation",
+   "results": "11 hits, including CochainComplex.mappingCone.mapHomologicalComplexIso in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:639 and its descShortComplex compatibility; no strict quotient-system normalization. The source was read.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication identifies strict quotient pullback towers under a scheme isomorphism; inverse image commutes with their Roos cocone; simultaneous reduction realizes completion",
+   "results": "8 hits concerning Scheme.Pullback.pullbackP1Iso and open-cover pullback refinements. None addresses these module-sheaf strict systems.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.IsomorphismStrictQuotientMultiplication",
+  "file": "lean/Sheaf/TraceFormula/IsomorphismStrictQuotientMultiplication.lean",
+  "declaration": "WeilConjectures.isomorphismStrictQuotientMultiplication",
+  "declarations": [
+   "WeilConjectures.isomorphismStrictQuotientMultiplication"
+  ],
+  "statement": "theorem isomorphismStrictQuotientMultiplication\n    {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :\n    ∃ (j : (integralOperationsGoodComplex l E Y).ι ⋙\n          integralOperationsPullbackTowerFunctor l E g ≅\n        (integralOperationsGoodComplex l E Y).ι ⋙\n          trfQuotientTowerFunctor l E Y ⋙ trfInverseImageTower l E g),\n      (∀ (Q : (integralOperationsGoodComplex l E Y).FullSubcategory) (n : ℕ) (i : ℤ)\n        (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X i).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        (((j.hom.app Q).app (op n)).f i).val.app (op U)\n            ((((integralOperationsPullbackLevel l E g n).obj Q.obj).X i).val.map\n              (proEtaleIsoCommaArrow g U).op\n              (integralOperationsPullbackGenerator l E g n\n                (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X i)\n                ((proEtaleIsoPostcompose g).obj U) x)) = x) ∧\n      (∀ (Q : (integralOperationsGoodComplex l E Y).FullSubcategory) (n : ℕ) (i : ℤ)\n        (U : X.ProEt)\n        (x : (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X i).val.obj\n          (op ((proEtaleIsoPostcompose g).obj U))),\n        (((j.inv.app Q).app (op n)).f i).val.app (op U) x =\n          ((((integralOperationsPullbackLevel l E g n).obj Q.obj).X i).val.map\n            (proEtaleIsoCommaArrow g U).op\n            (integralOperationsPullbackGenerator l E g n\n              (((unrestrictedIntegralFiniteComplex l E Y n).obj Q.obj).X i)\n              ((proEtaleIsoPostcompose g).obj U) x)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "worker": "stage3",
+  "summary": "A strict part of the existing ten-step argument, extracted without changing the parent statement. Complete proof in words accompanies the exact Lean statement.",
+  "blueprint": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Strict quotient multiplication, original steps 3--4"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29c11",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T092852-L-3475163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T111923-L-1776469",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

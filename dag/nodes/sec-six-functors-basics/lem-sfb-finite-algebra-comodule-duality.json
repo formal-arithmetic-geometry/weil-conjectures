@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-finite-algebra-comodule-duality",
+ "kind": "statement",
+ "title": "Finite associative algebras and right comodules of their duals",
+ "statement": "Let $k$ be a field [def-weil-field] and let $E$ be a finite-dimensional associative unital $k$-algebra, not assumed commutative. Finite-dimensional means possessing a finite spanning set [def-weil-finite-dimensional-subspace]; the multiplication is $k$-bilinear. Put $D=E^*=\\operatorname{Hom}_k(E,k)$ and use tensor products [def-weil-pbc-module-tensor-product]. There is a unique counital coassociative coalgebra structure on $D$ specified by\n$$\\langle\\Delta d,a\\otimes b\\rangle=d(ab),\\qquad\\epsilon(d)=d(1_E)\\quad(a,b\\in E).$$\nFor any finite-dimensional $k$-vector space $M$, unital associative $k$-bilinear left $E$-actions correspond bijectively to linear maps $\\rho:M\\to M\\otimes_kD$ satisfying $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$ and $(1\\otimes\\epsilon)\\rho=1_M$. The action corresponding to $\\rho$ is\n$$a\\cdot m=(1_M\\otimes\\operatorname{ev}_a)\\rho(m),$$\nand its inverse is $\\rho(m)=\\sum_j(a_j\\cdot m)\\otimes a_j^*$ for any finite basis $(a_j)$ of $E$ with dual basis $(a_j^*)$. These formulas are independent of that basis. A linear map is $E$-linear if and only if it commutes with the corresponding coactions. Thus they give an equivalence from finite-dimensional left $E$-modules to finite-dimensional right $D$-comodules which is the identity on underlying vector spaces and maps. The zero algebra and zero-dimensional spaces are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§9(d), printed pp.174–175, the paragraph following Lemma 9.35 on p.177 (opposite handedness), Example 9.36 and 9.41–9.42, printed pp.178–180."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-finite-algebra-duality-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of each finite-dimensional vector space used below by [lem-weil-pbc-vector-space-free]. Such a basis is finite: take the union $J$ of the finite basis supports of a finite spanning family. Every vector then has support in $J$, whereas a basis vector outside $J$ would have its own coordinate equal to $1$, a contradiction. For $E$ write the basis as $(a_i)_{i\\in I}$. Define $f_i:E\\to k$ to be its coordinate maps. These are linear, $f_i(a_j)=\\delta_{ij}$, and $a=\\sum_i f_i(a)a_i$. Applying any $d\\in E^*$ to this last equality gives $d=\\sum_i d(a_i)f_i$. Thus $(f_i)$ is a basis of $D=E^*$, including when $I$ is empty.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Supporting basis input: Stacks Tag 09FN (fields-lemma-vector-space-is-free); finite support and coordinate argument supplied here."
+   }
+  },
+  {
+   "text": "By [lem-sc-tensor-product-free-basis], the $f_i\\otimes f_j$ form a basis of $D\\otimes D$, and iterating the same statement gives a basis $f_i\\otimes f_j\\otimes f_h$ of the triple tensor product, with the canonical associator understood. Their coefficients are obtained by evaluation at $a_i\\otimes a_j$ and $a_i\\otimes a_j\\otimes a_h$. Consequently those evaluations detect equality. For a finite-dimensional vector space $M$ with basis $(e_s)$, the same lemma gives a basis $(e_s\\otimes f_i)$ of $M\\otimes D$; hence every $z\\in M\\otimes D$ has the unique expression $z=\\sum_i z_i\\otimes f_i$, where $z_i=(1_M\\otimes\\operatorname{ev}_{a_i})z$. Repeating this argument gives equality detection in $M\\otimes D\\otimes D$ by $1_M\\otimes\\operatorname{ev}_{a_i}\\otimes\\operatorname{ev}_{a_j}$. The tensor maps and associator here are defined on pure tensors by the universal property [def-weil-pbc-module-tensor-product]; inverse associators compose to the identity on pure tensors, which generate.",
+   "uses": [
+    "lem-sc-tensor-product-free-basis",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175: tensor-dual pairing and comodule coefficient identities; explicit finite-basis equality detection."
+   }
+  },
+  {
+   "text": "Let $\\mu:E\\otimes E\\to E$ be induced by multiplication using [def-weil-pbc-module-tensor-product]. Apply [lem-sfb-finite-free-tensor-dual] to $E,E$, whose finite bases were established in Step 1. Its canonical isomorphism $\\theta:D\\otimes D\\xrightarrow{\\sim}(E\\otimes E)^*$ sends $f\\otimes g$ to $(a\\otimes b\\mapsto f(a)g(b))$. Define $\\Delta(d)=\\theta^{-1}(d\\circ\\mu)$ and $\\epsilon(d)=d(1_E)$. Both maps are linear. Their required pairing formula follows directly from the formula for $\\theta$; equivalently $\\Delta(d)=\\sum_{i,j}d(a_i a_j)f_i\\otimes f_j$. Step 2 shows that the pairing formula determines $\\Delta$ uniquely, while the displayed formula determines $\\epsilon$. Thus their construction is independent of the chosen basis.",
+   "uses": [
+    "lem-sfb-finite-free-tensor-dual",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), p.174: canonical tensor-dual map; paragraph after Lemma 9.35, p.177, and Example 9.36, p.178: dual of a finite algebra."
+   }
+  },
+  {
+   "text": "Evaluate $(\\Delta\\otimes1)\\Delta(d)$ on $a\\otimes b\\otimes c$: the result is $d((ab)c)$. Evaluating $(1\\otimes\\Delta)\\Delta(d)$ gives $d(a(bc))$. Associativity in $E$ and the triple equality detection of Step 2 prove coassociativity. Evaluating $(\\epsilon\\otimes1)\\Delta(d)$ at $a$ gives $d(1_Ea)=d(a)$, and evaluating $(1\\otimes\\epsilon)\\Delta(d)$ gives $d(a1_E)=d(a)$. Since the $a_i$ form a basis, these are the two counit identities. The uniqueness established in Step 3 therefore proves the asserted uniqueness of the coalgebra structure, without assuming that $E$ is commutative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), p.174 and Example 9.36, p.178; agent verification by evaluating the transposed associativity and unit identities."
+   }
+  },
+  {
+   "text": "Given a unital associative bilinear left action, define the linear map $\\rho(m)=\\sum_i(a_i\\cdot m)\\otimes f_i$. For every $a\\in E$, contraction gives $\\sum_i f_i(a)(a_i\\cdot m)=a\\cdot m$ by the basis expansion of $a$ and bilinearity. After contraction at $a,b$ on its two $D$ factors, $(\\rho\\otimes1)\\rho(m)$ is $a\\cdot(b\\cdot m)$, whereas $(1\\otimes\\Delta)\\rho(m)$ is $(ab)\\cdot m$ by Step 3. Associativity of the action and Step 2 give the coassociativity identity for $\\rho$. Its counit is $\\sum_i f_i(1_E)(a_i\\cdot m)=1_E\\cdot m=m$. Thus the formula produces a right $D$-comodule. Notice the order $ab$: no opposite algebra or reversal of tensor factors is being inserted.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 9.36, p.178, and 9.42, p.180; expanded verification of the right-comodule convention."
+   }
+  },
+  {
+   "text": "Conversely let $\\rho:M\\to M\\otimes D$ be a right coaction. Define $a\\cdot m=(1_M\\otimes\\operatorname{ev}_a)\\rho(m)$. This is linear in $m$ because $\\rho$ and contraction are linear, and linear in $a$ because $d\\mapsto d(a)$ depends linearly on $a$. Since $\\operatorname{ev}_{1_E}=\\epsilon$, the counit identity gives $1_E\\cdot m=m$. Apply $1_M\\otimes\\operatorname{ev}_a\\otimes\\operatorname{ev}_b$ to $(\\rho\\otimes1)\\rho(m)=(1\\otimes\\Delta)\\rho(m)$. The left side becomes $a\\cdot(b\\cdot m)$ and the right side becomes $(ab)\\cdot m$, by the defining pairing formula of $\\Delta$. This proves precisely the required associative left action.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 9.36, p.178, and 9.42, p.180; expanded evaluation of the coaction axioms."
+   }
+  },
+  {
+   "text": "Starting with an action, Step 5 already shows that recovering it from its coaction returns $a\\cdot m$ for every $a,m$. Starting with $\\rho$, its recovered action satisfies $a_i\\cdot m=(1_M\\otimes\\operatorname{ev}_{a_i})\\rho(m)$. The unique normal form in Step 2 therefore gives $\\sum_i(a_i\\cdot m)\\otimes f_i=\\rho(m)$. The two constructions are inverse bijections. The same normal-form uniqueness also proves basis independence of the action-to-coaction construction: for any other finite basis the resulting tensor has contraction $a\\cdot m$ for every $a$, so equals the first tensor. The coaction-to-action formula has no choice of basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 9.36, p.178: canonical comodule structure; explicit inverse and basis-independence check."
+   }
+  },
+  {
+   "text": "For linear $u:M\\to N$, contract the difference $\\rho_Nu-(u\\otimes1_D)\\rho_M$ at $a$. Its value on $m$ is $a\\cdot u(m)-u(a\\cdot m)$. If $u$ is colinear all these differences vanish, so $u$ is $E$-linear. If $u$ is $E$-linear they vanish for every basis vector $a_i$, and Step 2 detects that the difference of tensors is zero; hence $u$ is colinear. The two assignments on objects from Steps 5–7 therefore extend to functors by leaving every underlying linear map fixed. They preserve identities and compositions literally. Their composites recover each action and coaction by Step 7 and each morphism by construction, giving inverse functors and thus the claimed equivalence of finite-dimensional categories.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 9.36, p.178, and 9.42, p.180: equivalence with canonical comodule structure; explicit morphism calculation."
+   }
+  },
+  {
+   "text": "All computations permit empty bases and zero sums. If $M=0$ the action and coaction are unique and all identities hold. If $E=0$, then $D=0$ and $\\Delta,\\epsilon$ are the unique zero maps; the coalgebra identities hold because $1_D=0$. For any $M$, a bilinear action of $E=0$ has $1_E\\cdot m=0$, so is unital exactly when $M=0$. Likewise the sole map $M\\to M\\otimes0=0$ is counital exactly when $1_M=0$, equivalently $M=0$. Thus for nonzero $M$ both sets of structures are empty, and for zero $M$ both are singletons; the equivalence includes the stated degenerate cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent edge-case verification of Example 9.36, p.178, allowing the zero unital algebra and zero vector spaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-finite-dimensional-subspace",
+  "lem-sc-tensor-product-free-basis",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-finite-free-tensor-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§9(d), printed pp.174–175 and 177–178, Example 9.36, and 9.41–9.42, pp.179–180. Milne states the dictionary; Q28 supplies the explicit finite-coordinate proof of every clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]omodule|[Cc]omod|dual.*[Cc]oalgebra|[Cc]oalgebra.*dual",
+   "results": "{\"t\": \"2026-10-24T14:25:04Z\", \"tool\": \"grep\", \"query\": \"[Cc]omodule|[Cc]omod|dual.*[Cc]oalgebra|[Cc]oalgebra.*dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/ModEq.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Angle.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Angle.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\"], \"digest\": \"2415d72305e757bd\"}; Read CoalgCat/ComonEquivalence.lean:45–108: its equivalence is between coalgebras and comonoid objects, not modules and comodules. Read RingTheory/Coalgebra/Quotient.lean:32–65: this requires an existing coalgebra and coideal. FGModuleCat duals (Basic.lean:110–155 and LinearAlgebra/Dual/Basis.lean:245–290) and dual-space search hits have no algebra-action/comodule equivalence. Targeted Algebra and RingTheory greps find no comodule declaration. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional associative algebra has a dual coalgebra and left modules correspond to right comodules by the dual basis formula",
+   "results": "{\"t\": \"2026-10-24T14:25:05Z\", \"tool\": \"leansearch\", \"query\": \"A finite dimensional associative algebra has a dual coalgebra and left modules correspond to right comodules by the dual basis formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.dualBasis\", \"Module.Basis.toDualEquiv\", \"Module.Basis.dualBasis_equivFun\", \"Module.Basis.toDual_toDual\", \"Module.Basis.coord_toDualEquiv_symm_apply\", \"Module.Basis.coe_dualBasis\", \"Module.Basis.dualBasis_coord_toDualEquiv_apply\", \"Subspace.instModuleDualFiniteDimensional\"], \"digest\": \"614b9baee8679b1a\"}; Read CoalgCat/ComonEquivalence.lean:45–108: its equivalence is between coalgebras and comonoid objects, not modules and comodules. Read RingTheory/Coalgebra/Quotient.lean:32–65: this requires an existing coalgebra and coideal. FGModuleCat duals (Basic.lean:110–155 and LinearAlgebra/Dual/Basis.lean:245–290) and dual-space search hits have no algebra-action/comodule equivalence. Targeted Algebra and RingTheory greps find no comodule declaration. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"Module\"",
+   "results": "{\"t\": \"2026-10-24T14:25:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Coalgebra.Quotient.instCoalgebraStructQuotientSubmodule\", \"Coalgebra.Quotient.instQuotientSubmodule\"], \"digest\": \"fd1c53d000c93b3d\"}; Read CoalgCat/ComonEquivalence.lean:45–108: its equivalence is between coalgebras and comonoid objects, not modules and comodules. Read RingTheory/Coalgebra/Quotient.lean:32–65: this requires an existing coalgebra and coideal. FGModuleCat duals (Basic.lean:110–155 and LinearAlgebra/Dual/Basis.lean:245–290) and dual-space search hits have no algebra-action/comodule equivalence. Targeted Algebra and RingTheory greps find no comodule declaration. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional modules over an associative algebra are equivalent to right comodules over its linear dual coalgebra",
+   "results": "{\"t\": \"2026-10-24T14:25:06Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional modules over an associative algebra are equivalent to right comodules over its linear dual coalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.rightRigidCategory\", \"FGModuleCat.FGModuleCatDual\", \"FGModuleCat.rightDual\", \"CoalgCat.comonEquivalence\", \"FGModuleCat.FGModuleCatDual_coe\", \"FGModuleCat.FGModuleCatDual_obj\", \"Module.finite_dual_iff\", \"Basis.linearEquiv_dual_iff_finiteDimensional\"], \"digest\": \"bca4f1798b6f74bb\"}; Read CoalgCat/ComonEquivalence.lean:45–108: its equivalence is between coalgebras and comonoid objects, not modules and comodules. Read RingTheory/Coalgebra/Quotient.lean:32–65: this requires an existing coalgebra and coideal. FGModuleCat duals (Basic.lean:110–155 and LinearAlgebra/Dual/Basis.lean:245–290) and dual-space search hits have no algebra-action/comodule equivalence. Targeted Algebra and RingTheory greps find no comodule declaration. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comodule category over the dual of a finite dimensional algebra is equivalent to the category of left modules with the same underlying vector spaces",
+   "results": "{\"t\": \"2026-10-24T14:25:08Z\", \"tool\": \"leanfinder\", \"query\": \"The comodule category over the dual of a finite dimensional algebra is equivalent to the category of left modules with the same underlying vector spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.comonEquivalence\", \"FGModuleCat.rightRigidCategory\", \"FGModuleCat.FGModuleCatDual_obj\", \"FGModuleCat.FGModuleCatDual_coe\", \"FGModuleCat.rightDual\", \"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"FGModuleCat.exactPairing\", \"FGModuleCat.FGModuleCatCoevaluation\"], \"digest\": \"b98e8f1004a70517\"}; Read CoalgCat/ComonEquivalence.lean:45–108: its equivalence is between coalgebras and comonoid objects, not modules and comodules. Read RingTheory/Coalgebra/Quotient.lean:32–65: this requires an existing coalgebra and coideal. FGModuleCat duals (Basic.lean:110–155 and LinearAlgebra/Dual/Basis.lean:245–290) and dual-space search hits have no algebra-action/comodule equivalence. Targeted Algebra and RingTheory greps find no comodule declaration. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|comodules|dualCoalgebra|coalgebraDual",
+   "results": "{\"t\": \"2026-10-24T14:31:40Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|comodules|dualCoalgebra|coalgebraDual\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read CoalgCat/ComonEquivalence.lean:45–108: its equivalence is between coalgebras and comonoid objects, not modules and comodules. Read RingTheory/Coalgebra/Quotient.lean:32–65: this requires an existing coalgebra and coideal. FGModuleCat duals (Basic.lean:110–155 and LinearAlgebra/Dual/Basis.lean:245–290) and dual-space search hits have no algebra-action/comodule equivalence. Targeted Algebra and RingTheory greps find no comodule declaration. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional algebra dual coalgebra and left modules equivalent to right comodules",
+   "results": "{\"t\": \"2026-10-24T14:53:03Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional algebra dual coalgebra and left modules equivalent to right comodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.rightRigidCategory\", \"CoalgCat.comonEquivalence\", \"FGModuleCat.rightDual\", \"FGModuleCat.FGModuleCatDual\", \"Module.finite_dual_iff\", \"FGModuleCat.FGModuleCatDual_coe\", \"Basis.linearEquiv_dual_iff_finiteDimensional\", \"FGModuleCat.exactPairing\"], \"digest\": \"587e7450c059fcb0\"}; Read CoalgCat/ComonEquivalence.lean:45–108: equivalence of coalgebras with comonoid objects, not modules with comodules. Read Dual/Basis.lean:114–155 and Contraction.lean:447–463: dual basis and tensor dual results are components, not the entire dictionary. MulOpposite coalgebra instances require an existing coalgebra. Inner-product algebraOfCoalgebra requires an inner product over RCLike and constructs an algebra from a coalgebra, not the present arbitrary-field dual construction. No whole-statement match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"Dual\"",
+   "results": "{\"t\": \"2026-10-24T14:53:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"Dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read CoalgCat/ComonEquivalence.lean:45–108: equivalence of coalgebras with comonoid objects, not modules with comodules. Read Dual/Basis.lean:114–155 and Contraction.lean:447–463: dual basis and tensor dual results are components, not the entire dictionary. MulOpposite coalgebra instances require an existing coalgebra. Inner-product algebraOfCoalgebra requires an inner product over RCLike and constructs an algebra from a coalgebra, not the present arbitrary-field dual construction. No whole-statement match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|dualCoalgebra|coalgebraDual",
+   "results": "{\"t\": \"2026-10-24T14:53:04Z\", \"tool\": \"grep\", \"query\": \"Comodule|dualCoalgebra|coalgebraDual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read CoalgCat/ComonEquivalence.lean:45–108: equivalence of coalgebras with comonoid objects, not modules with comodules. Read Dual/Basis.lean:114–155 and Contraction.lean:447–463: dual basis and tensor dual results are components, not the entire dictionary. MulOpposite coalgebra instances require an existing coalgebra. Inner-product algebraOfCoalgebra requires an inner product over RCLike and constructs an algebra from a coalgebra, not the present arbitrary-field dual construction. No whole-statement match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional associative algebra has dual coalgebra with right comodules equivalent to left modules",
+   "results": "{\"t\": \"2026-10-24T14:59:05Z\", \"tool\": \"leansearch\", \"query\": \"A finite dimensional associative algebra has dual coalgebra with right comodules equivalent to left modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.comonEquivalence_functor\", \"CoalgCat.instMonoidalCategoryAux\", \"CoalgCat.comonEquivalence\", \"CoalgCat.ofComonObj\", \"CoalgCat.MonoidalCategoryAux.comul_tensorObj_tensorObj_right\", \"CoalgCat.MonoidalCategoryAux.comul_tensorObj\", \"Subspace.instModuleDualFiniteDimensional\", \"FGModuleCat.FGModuleCatDual\"], \"digest\": \"b332d4637fdf71b9\"}; Read CoalgCat/ComonEquivalence.lean:45–108: equivalence of coalgebras with comonoid objects, not modules with comodules. Read Dual/Basis.lean:114–155 and Contraction.lean:447–463: dual basis and tensor dual results are components, not the entire dictionary. MulOpposite coalgebra instances require an existing coalgebra. Inner-product algebraOfCoalgebra requires an inner product over RCLike and constructs an algebra from a coalgebra, not the present arbitrary-field dual construction. No whole-statement match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizing multiplication on a finite dimensional noncommutative algebra defines comultiplication and identifies actions with coactions",
+   "results": "{\"t\": \"2026-10-24T14:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"Dualizing multiplication on a finite dimensional noncommutative algebra defines comultiplication and identifies actions with coactions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulOpposite.comul_def\", \"CommAlgCat.mul_op_of_unop_hom\", \"InnerProductSpace.AlgebraOfCoalgebra.mul_def\", \"MulOpposite.instCoalgebraStruct\", \"MulOpposite.instCoalgebra\", \"Bialgebra.comul_mul\", \"instIsCommMonObjOppositeCommAlgCatOpOfOfIsCocomm\", \"CommSemiring.instIsCocomm\"], \"digest\": \"fece6b7f76cabc36\"}; Read CoalgCat/ComonEquivalence.lean:45–108: equivalence of coalgebras with comonoid objects, not modules with comodules. Read Dual/Basis.lean:114–155 and Contraction.lean:447–463: dual basis and tensor dual results are components, not the entire dictionary. MulOpposite coalgebra instances require an existing coalgebra. Inner-product algebraOfCoalgebra requires an inner product over RCLike and constructs an algebra from a coalgebra, not the present arbitrary-field dual construction. No whole-statement match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|Comodule|dualCoalgebra|coalgebraDual",
+   "results": "{\"t\": \"2026-10-24T14:59:07Z\", \"tool\": \"grep\", \"query\": \"comodule|Comodule|dualCoalgebra|coalgebraDual\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read CoalgCat/ComonEquivalence.lean:45–108: equivalence of coalgebras with comonoid objects, not modules with comodules. Read Dual/Basis.lean:114–155 and Contraction.lean:447–463: dual basis and tensor dual results are components, not the entire dictionary. MulOpposite coalgebra instances require an existing coalgebra. Inner-product algebraOfCoalgebra requires an inner product over RCLike and constructs an algebra from a coalgebra, not the present arbitrary-field dual construction. No whole-statement match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exact-fibre-coalgebra-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Theorems 9.24 and 9.46--9.47, Notes 9.25--9.27, printed pp.172--173,182--184; Lie tangent-family description is the dual-number calculation in Lemma 23.69, p.506. Differentiation and adjoint bracket: Theorem 10.23, pp.193--194; tensor differential: 10.28, pp.194--195. No existence of a semisimple group is asserted here. Supporting abelian reconstruction before the tensor structure: Milne Theorems 9.32 and 9.37, Sections 9(d)-9(e), coefficient presentation of the reconstructed coalgebra. Supporting input: Milne §9(d), Lemma 9.35 concluding dualization, and 9.41–9.42: finite algebra/coalgebra module dictionary, with right-comodule convention. Q28 split realizes the finite-algebra/right-comodule dictionary by transposing multiplication, checking both structures and inverse formulas by contractions, and proving morphism compatibility; current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), remains the ancestor route.",
+   "via": [
+    "lem-sfb-exact-fibre-coalgebra-reconstruction",
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-algebra-comodule-duality",
+  "worker": "stage1",
+  "group": "Q28",
+  "summary": "Read Milne 9(d), Example 9.36 and 9.41–9.42; kept the statement and all hypotheses. No matching project Lean declaration. Reused existing vector-space basis, tensor-basis and finite tensor-dual Mathlib leaves. Wrote the finite-coordinate coalgebra and action/coaction proof, basis independence, linear-map equivalence and all zero cases. No new nodes.",
+  "blueprint": "Supporting algebra input to det-thm-sf-ctf-stability-direct-images, paragraph (3), via the existing reconstruction chain. Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md was read. No blueprint node states this dictionary (whole-blueprint comodule, coalgebra, dual basis and tensor dual searches). The inherited from.node remains null: blueprint_refs.py ancestor reports None because created.item eventually names Sheaf.SixFunctors.CtfStabilityDirectImages rather than a DAG node; preserve this existing provenance, do not invent an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-2398baf5d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-2398baf5d (reviewer sub-agent of L); spot-checked: Read the item and all nine steps in full. The delivery adds no new nodes and is not a re-split. Source checked against Milne iAG2017 (pdftotext extract). Example 9.36 (p.178) says left A-modules correspond to right A^∨-comodules, A not necessarily commutative, which matches the item's convention. The p.177 paragraph after Lemma 9.35 uses the opposite handedness, and the item correctly follows 9.36. 9.41–9.42 only use the dictionary, so proof_origin=agent is right. Cited statements read: vector-space-free (Mathlib leaf, Stacks 09FN); finite-dimensional def (finite spanning set); tensor-product-free-basis (Basis.tensorProduct, finite bases); tensor def (universal property, generation by pure tensors, f⊗id); finite-free-tensor-dual (dualDistribEquiv, empty basis allowed); field def. Each says what its step takes from it. Coordinates recomputed by hand: Δd=Σd(a_ia_j)f_i⊗f_j. The two coassociativity composites give d((ab)c) and d(a(bc)); the counits give d(1a) and d(a1). For ρ(m)=Σ(a_im)⊗f_i, contracting (ρ⊗1)ρ(m) at (a,b) gives a(bm) and (1⊗Δ)ρ(m) gives (ab)m, so the order is correct with no opposite algebra. The converse action, the inverse bijections via the step-2 normal form, basis independence and the colinear ⇔ E-linear argument are all correct. Edge cases: E=0 forces M=0 on both sides (both empty for M≠0, singletons for M=0); M=0 is trivial; empty bases are covered. Duplicate search (rg -L for comodule and dual coalgebra): coalgebra-dual-action-detection, finite-coalgebra-dual-base-change, convolution-linear-map-algebra, finite-comodule-coefficient-coalgebra and rational-representation-comodule-dictionary are different statements; none states this dictionary. No cycle: all citations are leaves or definitions, and the only citer, exact-fibre-coalgebra-reconstruction, uses the same left-E/right-E* convention. Blueprint provenance (null from.node with inherited via) is unchanged; no SGA; no tool_uses needed. One minor point left as is: linear independence of the f_i is implicit, immediate from f_i(a_j)=δ_ij. I could not diff the statement against the base (no git); the report says it was kept and the diff stat fits that. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAlgebraComoduleDuality",
+  "declaration": "FiniteAlgebraComoduleDuality.finite_algebra_comodule_duality",
+  "file": "lean/Sheaf/RingTheory/FiniteAlgebraComoduleDuality.lean",
+  "statement": "theorem finite_algebra_comodule_duality [FiniteDimensional k E] : ∃ c : Coalgebra k (Module.Dual k E), IsDualCoalgebra c ∧ (∀ c' : Coalgebra k (Module.Dual k E), IsDualCoalgebra c' → c' = c) ∧ ∃ e : ∀ M : FGModuleCat.{w} k, (E →ₐ[k] Module.End k M) ≃ RightCoaction c M, (∀ (M : FGModuleCat.{w} k) (ρ : RightCoaction c M) (a : E) (m : M), (e M).symm ρ a m = TensorProduct.rid k M ((Module.Dual.eval k E a).lTensor M (ρ.val m))) ∧ (∀ (M : FGModuleCat.{w} k) (α : E →ₐ[k] Module.End k M) (I : Type t) [Fintype I] (b : Module.Basis I k E) (m : M), (e M α).val m = ∑ i : I, α (b i) m ⊗ₜ[k] b.coord i) ∧ (∀ (M N : FGModuleCat.{w} k) (α : E →ₐ[k] Module.End k M) (β : E →ₐ[k] Module.End k N) (f : M →ₗ[k] N), (∀ (a : E) (m : M), f (α a m) = β a (f m)) ↔ (e N β).val ∘ₗ f = f.rTensor (Module.Dual k E) ∘ₗ (e M α).val) ∧ ∃ Φ : LeftModule.{u, v, w} k E ≌ RightComodule.{u, v, w} c, Φ.functor ⋙ forgetRight c = forgetLeft ∧ Φ.inverse ⋙ forgetLeft = forgetRight c ∧ (∀ X : LeftModule.{u, v, w} k E, HEq (Φ.functor.obj X).coaction (e X.space X.action)) ∧ (∀ Y : RightComodule.{u, v, w} c, HEq (Φ.inverse.obj Y).action ((e Y.space).symm Y.coaction))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cc0bb761",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Lean and records correct: ∃ c : Coalgebra k (Dual k E) pinned by IsDualCoalgebra (dualDistrib f a * g b, ε=eval 1) with uniqueness c'=c; ∀ M : FGModuleCat.{w}, Equiv (E →ₐ End M) ≃ RightCoaction (assoc/rid equations); contraction formula rid∘(eval a).lTensor; dual-basis formula for every Fintype basis (basis independence); E-linear ↔ colinear; Φ : LeftModule ≌ RightComodule with strict forget-functor equations + HEq to e. No commutativity/nontriviality; E=0 and M=0 consistent; universes free. New def-sfb-finite-algebra-duality-data is genuine (no sorry, real Hom subtypes), docstrings present, not a duplicate (Mathlib has no comodules; HopfAction.Coassociative needs a commutative Hopf algebra). Item node diff only adds lean + new-def stmt_dep; statements verbatim. Only fault H11: the second reading was a worker self-check → fixes/lem-sfb-finite-algebra-comodule-duality.report.md (worker report verbatim + independent second reading). No Lean changed, no compile."
+ }
+}

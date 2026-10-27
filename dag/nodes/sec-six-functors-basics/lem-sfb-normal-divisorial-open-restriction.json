@@ -1,0 +1,470 @@
+{
+ "id": "lem-sfb-normal-divisorial-open-restriction",
+ "kind": "statement",
+ "title": "Divisorial sheaves and the boundary kernel on a normal scheme",
+ "statement": "Let $Y$ be an integral Noetherian normal scheme [def-pc-scheme, def-pc-integral-scheme], where Noetherian means admitting a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring] and normal means that all local rings are integrally closed domains [def-weil-pbc-normal-ring]. Let $U\\subseteq Y$ be a nonempty open subscheme [def-weil-open-immersion]. A prime divisor is a reduced integral closed subscheme whose generic point has local-ring dimension one. A Weil divisor is a finite sum $D=\\sum_Z n_Z[Z]$ over prime divisors. Write $k(Y)$ for the function field, the local ring at the generic point [def-sc-function-field]. For a prime divisor $Z$, let $v_Z$ be the normalized valuation of its discrete valuation local ring [def-sc-discrete-valuation-ring]. Define $\\mathcal O_Y(D)$ inside the constant sheaf $k(Y)$ by the condition $v_Z(f)+n_Z\\geq0$ at every prime divisor meeting the open on which a rational function $f$ is considered, and include the zero section. For a coherent module $M$ [pqf-def-coherent], put $M^\\vee=\\mathcal Hom_{\\mathcal O_Y}(M,\\mathcal O_Y)$ [def-pur-sheaf-hom] and $M^{**}=(M^\\vee)^\\vee$; reflexive means that evaluation $M\\to M^{**}$ is an isomorphism, and rank one means that its generic fibre has dimension one over $k(Y)$.\n\nThe sheaf $\\mathcal O_Y(D)$ is coherent reflexive of rank one, $\\mathcal O_Y(0)=\\mathcal O_Y$, and every coherent reflexive rank-one module on $Y$ is isomorphic to some $\\mathcal O_Y(D)$. Restriction gives $\\mathcal O_Y(D)|_U=\\mathcal O_U(D|_U)$, where $D|_U$ retains the prime divisors meeting $U$. Every invertible module on $U$ [def-sc-invertible-module] is the restriction of a coherent reflexive rank-one module on $Y$. If a coherent reflexive rank-one module $F$ on $Y$ restricts to $\\mathcal O_U$, then there are integers $m_1,\\ldots,m_s$ such that $F\\cong\\mathcal O_Y(\\sum_i m_i[Z_i])$, where $Z_1,\\ldots,Z_s$ are precisely the codimension-one irreducible components of $Y\\setminus U$. With sheaf tensor product [def-pur-sheaf-tensor-product], for any Weil divisors $D,E$ one has $(\\mathcal O_Y(D)\\otimes\\mathcal O_Y(E))^{**}\\cong\\mathcal O_Y(D+E)$. For any coherent reflexive rank-one $F$, the sheaf $(F\\otimes\\mathcal O_Y(E))^{**}$ is coherent reflexive of rank one; if $F|_U$ is invertible and $E|_U=0$, its restriction is $F|_U$. All restrictions of duals, double duals and tensor products here are the canonical ones; pullback uses [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0EBM (lemma-normal-class-group), including its construction from a Weil divisor; 0EBL (lemma-reflexive-normal), the reflexive tensor law; 0BE6 (definition-divisor-invertible-sheaf) and 0BE8 (lemma-normal-c1-injective). Agent-extracted restriction and boundary-kernel formulation, with the convention O(D), not the O(-D) fractional-ideal convention."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-open-immersion",
+  "def-sc-function-field",
+  "def-sc-discrete-valuation-ring",
+  "pqf-def-coherent",
+  "def-pur-sheaf-hom",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-per-effective-q-cartier-weil-divisor",
+  "def-sfb-coherent-reflexive-rank-one"
+ ],
+ "proof": [
+  {
+   "text": "We work on nonempty affine opens $W=\\operatorname{Spec}A$ of $Y$. The integral-scheme definition makes $A$ a domain; [pqf-lem-affine-open-locnoeth] makes it Noetherian. The stalk identifications of [lem-weil-pbc-spec-domain-stalks-function-field] identify its localizations with the local rings of $Y$ and its fraction field with $K=k(Y)$. Normality of those local rings and [lem-weil-pbc-normal-domain-of-local-normal] make $A$ a normal domain. Height-one points and their local rings are unchanged by passage to an open neighbourhood; the closure of such a point is the corresponding prime divisor. Thus [lem-trf-normal-domain-principal-divisor-kernel] supplies the DVRs, normalized valuations, and finite valuation support of any element of $K^\\times$ on $W$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0EBM, lemma-normal-class-group, affine reduction; algebra.tex Tag 031T, lemma-normal-domain-intersection-localizations-height-1"
+   }
+  },
+  {
+   "text": "For $D=\\sum n_Z[Z]$ put $d_{\\mathfrak p}=-n_{\\overline{\\{\\mathfrak p\\}}}$ on $W$. Apply [lem-per-divisorial-fractional-module-lattices] to these finitely supported integers. Its $I_A(-D)$ consists exactly of the sections prescribed in the statement, and its localization law identifies the sections on every nonempty basic open with the same valuation prescription there. Hence $\\mathcal O_Y(D)|_W=\\widetilde{I_A(-D)}$. The cited node gives coherence, generic rank one, and module reflexivity; [lem-sfb-affine-reflexive-module-comparison] gives sheaf reflexivity. Coherence is local by [lem-weil-pbc-coherent-module-local-on-open-cover]. With $D=0$ the intersection assertion of the lattice node gives $I_A(0)=A$, whence $\\mathcal O_Y(0)=\\mathcal O_Y$. The empty open has just the zero section.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-sfb-affine-reflexive-module-comparison",
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, lemma-normal-class-group, construction from a divisor, using more-algebra.tex Tag 0AVB, lemma-reflexive-over-normal"
+   }
+  },
+  {
+   "text": "For an arbitrary open $V\\subseteq U$, the nonempty intersections $Z\\cap U$ are exactly the prime divisors of $U$; their generic points, local rings and valuations are those on $Y$. Indeed the generic point of an irreducible closed subset belongs to every open meeting it, and taking closure in $Y$ reverses intersection with $U$. Therefore the valuation conditions for $\\mathcal O_Y(D)(V)$ and $\\mathcal O_U(D|_U)(V)$ are identical. This proves the asserted restriction equality as subsheaves of the same constant field. From the open-set formula in [def-pur-sheaf-hom], restriction of Hom and hence of duals and double duals is canonical. Restriction of tensor products is the canonical isomorphism of [lem-weil-pbc-module-restriction-tensor-comparison].",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, lemma-normal-class-group, invariance of codimension-one data under open restriction; canonical open restriction of sheaf Hom and tensor"
+   }
+  },
+  {
+   "text": "Let $F$ be coherent reflexive of rank one and fix $F_\\eta\\cong K$. On $W$ the affine equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction], finite generation [lem-weil-pbc-coherent-affine-sections-finite], and [lem-sfb-affine-reflexive-module-comparison] identify $F|_W$ with a finite reflexive module $M$. By [lem-per-reflexive-height-one-intersection-criterion], $M$ is torsion free and embeds in $M_K=K$, so these embeddings glue to $F\\subseteq K$. For each height-one $\\mathfrak p$, [lem-sc-dvr-fg-torsionfree-free] makes $M_{\\mathfrak p}$ free; its generic rank is one. Write $M_{\\mathfrak p}=c_{\\mathfrak p}A_{\\mathfrak p}$ and $e_{\\mathfrak p}=v_{\\mathfrak p}(c_{\\mathfrak p})$. Choose $0\\ne b\\in M$ and a common nonzero denominator $a\\in A$ for finite generators, so $bA\\subseteq M\\subseteq a^{-1}A$. If $v_{\\mathfrak p}(a)=v_{\\mathfrak p}(b)=0$, both bounds localize to $A_{\\mathfrak p}$, so $e_{\\mathfrak p}=0$. Finite valuation support, Step 1, proves finite support on $W$. A finite affine cover proves global finiteness. At a fixed codimension-one point the lattice $F_\\xi\\subseteq K$ is intrinsic, so its integer $e_Z$ agrees on all charts.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-sfb-affine-reflexive-module-comparison",
+    "lem-per-reflexive-height-one-intersection-criterion",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0EBM, lemma-normal-class-group, attaching a divisor class to a reflexive sheaf; 0AVB, more-algebra-lemma-reflexive-over-normal, (3)"
+   }
+  },
+  {
+   "text": "Set $D=-\\sum e_Z[Z]$. At every height-one point the stalk lattices of $F$ and $\\mathcal O_Y(D)$ agree: a DVR fractional generator $c$ spans precisely the elements with valuation at least $v(c)$, by the valuation membership criterion in [lem-trf-normal-domain-principal-divisor-kernel]. On $W$, the intersection assertion of [lem-per-reflexive-height-one-intersection-criterion] reconstructs $F(W)$ from these lattices, and [lem-per-divisorial-fractional-module-lattices] reconstructs $\\mathcal O_Y(D)(W)$ from the same lattices. Thus these modules are equal inside $K$ on every chart and basic subchart; their identifications glue. This proves $F\\cong\\mathcal O_Y(D)$ without choosing incompatible local divisor classes.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-per-reflexive-height-one-intersection-criterion",
+    "lem-per-divisorial-fractional-module-lattices"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, lemma-normal-class-group; more-algebra.tex Tag 0AVB, lemma-reflexive-over-normal, (3)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-open-subscheme-noetherian], the nonempty open $U$ is Noetherian; it is integral and normal because its local rings and generic point are inherited from $Y$. If $L$ is invertible on $U$, local frames identify it with $\\mathcal O_U$: it is coherent by [pqf-lem-coherent-ft-locnoeth], and evaluation is the identity after these frames. It is reflexive of rank one. Apply Steps 1--5 with $U$ in place of $Y$ to obtain $L\\cong\\mathcal O_U(D_U)$ with finite $D_U$. Close each prime divisor of $D_U$ in $Y$ and retain its coefficient to form a Weil divisor $D$. Step 2 constructs the required coherent reflexive rank-one $\\mathcal O_Y(D)$; Step 3 identifies its restriction with $L$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BE6, definition-divisor-invertible-sheaf, and 0EBM, lemma-normal-class-group, applied on U and closure of its finitely many prime divisors"
+   }
+  },
+  {
+   "text": "If $F|_U\\cong\\mathcal O_U$, choose the generic identification $F_\\eta\\cong K$ induced by this very trivialization. Then its embedded stalk is $\\mathcal O_{Y,\\xi}$ for each codimension-one $\\xi\\in U$, so the construction of Steps 4--5 has $e_Z=0$ for every $Z$ meeting $U$. Every remaining prime divisor lies in $Y\\setminus U$ and is an irreducible component of that closed subset: a strictly larger irreducible closed subset containing it would give a prime strictly below its height-one prime, necessarily the generic point of $Y$, which cannot lie in the proper closed complement. There are only finitely many such components: on a finite affine cover their generic primes are among the minimal primes of the ideals cutting out $Y\\setminus U$, finite by [lem-sc-finite-minimal-primes-over-ideal]. List the codimension-one components as $Z_1,\\ldots,Z_s$, insert zero coefficients for any absent from $D$, and set $m_i=-e_{Z_i}$. Then Step 5 gives exactly the asserted boundary formula.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, lemma-normal-class-group, trivial divisor class on an open; boundary support argument with algebra.tex lemma-Noetherian-finite-minimal-primes"
+   }
+  },
+  {
+   "text": "Put $T=\\mathcal O_Y(D)\\otimes\\mathcal O_Y(E)$. By [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections], on an affine chart $W=\\operatorname{Spec}A$ its sections are the tensor product $I\\otimes_AJ$ of the two finite modules of Step 2, and $T|_W$ is the associated sheaf; finite pure tensors of their generators generate it. Thus $T$ is quasi-coherent of finite type and coherent by [pqf-lem-coherent-ft-locnoeth]. Its dual $T^\\vee$ and double dual $T^{**}$ are coherent by [lem-weil-pbc-coherent-sheaf-hom-coherent], and $T^{**}$ is coherent reflexive by [lem-sfb-coherent-reflexive-hull]. Coherent modules are locally cokernels of maps between finite free modules by [lem-weil-pbc-coherent-local-finite-presentation]; hence [lem-weil-pbc-stalk-internal-hom-finite-presentation], applied first to $T$ and then to the coherent $T^\\vee$, identifies each stalk $(T^{**})_y$ with $\\operatorname{Hom}_{\\mathcal O_{Y,y}}(\\operatorname{Hom}_{\\mathcal O_{Y,y}}(T_y,\\mathcal O_{Y,y}),\\mathcal O_{Y,y})$, compatibly with evaluation. For $y\\in W$ corresponding to $\\mathfrak p$, $T_y=I_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}J_{\\mathfrak p}$; on modules this is the statement that finite Hom commutes with the flat localization, [lem-weil-pbc-flat-base-change-hom-finitely-presented] and [lem-weil-pbc-localization-flat]. At the generic point $T_\\eta=K\\otimes_KK\\cong K$ by multiplication, so $T^{**}$ has generic fibre $K$ and rank one. At a height-one point the stalk lattices are $\\pi^{-n_Z(D)}A_{\\mathfrak p}$ and $\\pi^{-n_Z(E)}A_{\\mathfrak p}$; their tensor is free of rank one over the DVR, multiplication sends its generator to $\\pi^{-n_Z(D)-n_Z(E)}$, and evaluation identifies a free rank-one module with its double dual. So the exponent is $-n_Z(D)-n_Z(E)$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "lem-sfb-coherent-reflexive-hull",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBL, lemma-reflexive-normal, reflexive tensor law; algebra.tex Tag 0583, lemma-hom-from-finitely-presented"
+   }
+  },
+  {
+   "text": "The generic multiplication $K\\otimes_KK\\to K$ identifies these stalk lattices with those of $\\mathcal O_Y(D+E)$. Both sheaves are coherent reflexive. On every affine chart [lem-sfb-affine-reflexive-module-comparison] and [lem-per-reflexive-height-one-intersection-criterion] reconstruct both modules as the intersection of these same lattices inside $K$. Hence the generic multiplication gives an isomorphism $(\\mathcal O_Y(D)\\otimes\\mathcal O_Y(E))^{**}\\cong\\mathcal O_Y(D+E)$; the chart maps glue because they are the same generic map. This also covers the field case: the intersection over no height-one primes is all of $K$.",
+   "uses": [
+    "lem-sfb-affine-reflexive-module-comparison",
+    "lem-per-reflexive-height-one-intersection-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBL, lemma-reflexive-normal, and 0EBM, lemma-normal-class-group, compatibility with addition"
+   }
+  },
+  {
+   "text": "For any coherent reflexive rank-one $F$, Step 5 writes $F\\cong\\mathcal O_Y(D)$, and Steps 8--9 show $(F\\otimes\\mathcal O_Y(E))^{**}$ coherent reflexive of rank one. If $E|_U=0$, Step 3 gives $\\mathcal O_Y(E)|_U=\\mathcal O_U$. Restricting tensor and double dual by the canonical comparisons of Step 3 yields $(F|_U\\otimes\\mathcal O_U)^{**}$. When $F|_U$ is invertible, a local frame identifies the evaluation map to its double dual with the identity of a rank-one free module. Therefore this restriction is canonically $F|_U$, as required.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBL, lemma-reflexive-normal, together with open restriction of sheaf Hom and tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-sfb-affine-reflexive-module-comparison",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-per-reflexive-height-one-intersection-criterion",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-sfb-coherent-reflexive-hull",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0EBM (lemma-normal-class-group), 0EBL (lemma-reflexive-normal), 0AVB (lemma-reflexive-over-normal). Explicit embedded-lattice proof, open restriction and boundary support; O(D) uses the negative of the lattice exponent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a normal variety rank one reflexive sheaves are Weil divisors modulo rational functions and extend line bundles from open subsets",
+   "results": "{\"t\": \"2026-10-24T07:19:41Z\", \"tool\": \"leanfinder\", \"query\": \"On a normal variety rank one reflexive sheaves are Weil divisors modulo rational functions and extend line bundles from open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"c817c59d2923d9bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divisorial sheaves on a geometrically normal variety commute with field extensions and classify rank one reflexive modules",
+   "results": "{\"t\": \"2026-10-24T07:19:40Z\", \"tool\": \"leansearch\", \"query\": \"Divisorial sheaves on a geometrically normal variety commute with field extensions and classify rank one reflexive modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"SheafOfModules.noConfusionType\", \"AlgebraicGeometry.Scheme.Modules\", \"Module.IsReflexive.to_isTorsionFree\", \"ModuleCat.tilde\", \"AlgebraicGeometry.structureSheafInType\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.Hom\"], \"digest\": \"d113aa9c96fd0965\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reflexive\", \"divisor\"",
+   "results": "{\"t\": \"2026-10-24T07:19:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"reflexive\\\", \\\"divisor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|divisorial|classGroup",
+   "results": "{\"t\": \"2026-10-24T07:19:39Z\", \"tool\": \"grep\", \"query\": \"reflexive|divisorial|classGroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"6c92b7ff116b4cff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent reflexive sheaf trivial on an open of a normal scheme is the divisorial sheaf of a divisor supported in the boundary",
+   "results": "{\"t\": \"2026-10-24T07:19:43Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent reflexive sheaf trivial on an open of a normal scheme is the divisorial sheaf of a divisor supported in the boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"dbed325aa6e90f13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on an open subset of a normal noetherian integral scheme extends to a rank one reflexive sheaf; the kernel of restriction on the class group is generated by boundary divisors",
+   "results": "{\"t\": \"2026-10-24T07:26:12Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle on an open subset of a normal noetherian integral scheme extends to a rank one reflexive sheaf; the kernel of restriction on the class group is generated by boundary divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.Scheme.restrict\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\"], \"digest\": \"00ad18c76f5086a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one coherent reflexive sheaves on a normal Noetherian scheme are sheaves associated to Weil divisors with tensor product given by reflexive hull",
+   "results": "{\"t\": \"2026-10-24T08:07:05Z\", \"tool\": \"leanfinder\", \"query\": \"Rank one coherent reflexive sheaves on a normal Noetherian scheme are sheaves associated to Weil divisors with tensor product given by reflexive hull\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tilde\", \"ModuleCat.tildeInType\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"ModuleCat.Tilde.exists_const\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.structureSheafInType\"], \"digest\": \"d3b30e4d47998d33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned tilde sheaf, restriction, or Dedekind-domain valuation declarations do not state this normal-scheme divisorial classification and boundary assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on an open subset of a normal integral noetherian scheme extends to a rank one reflexive sheaf and the kernel is generated by boundary divisors",
+   "results": "{\"t\": \"2026-10-24T08:07:05Z\", \"tool\": \"leansearch\", \"query\": \"An invertible sheaf on an open subset of a normal integral noetherian scheme extends to a rank one reflexive sheaf and the kernel is generated by boundary divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\", \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"Module.Invertible.instLocalizationLocalizedModule\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\"], \"digest\": \"465c3ee6abea30a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned tilde sheaf, restriction, or Dedekind-domain valuation declarations do not state this normal-scheme divisorial classification and boundary assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReflexive\", \"divisor\"",
+   "results": "{\"t\": \"2026-10-24T08:07:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReflexive\\\", \\\"divisor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned tilde sheaf, restriction, or Dedekind-domain valuation declarations do not state this normal-scheme divisorial classification and boundary assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "divisorial|reflexive|WeilDivisor",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"grep\", \"query\": \"divisorial|reflexive|WeilDivisor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned tilde sheaf, restriction, or Dedekind-domain valuation declarations do not state this normal-scheme divisorial classification and boundary assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divisorial fractional ideal valuation inequalities define a coherent sheaf and every rank one reflexive module is determined by its height one localizations",
+   "results": "{\"t\": \"2026-10-24T08:07:28Z\", \"tool\": \"leanfinder\", \"query\": \"Divisorial fractional ideal valuation inequalities define a coherent sheaf and every rank one reflexive module is determined by its height one localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.valuation\", \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_apply\", \"Set.coe_integer\", \"IsDedekindDomain.HeightOneSpectrum.Support\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\", \"IsDedekindDomain.isDedekindDomainDvr\"], \"digest\": \"92fe6cb70b2cc5e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned tilde sheaf, restriction, or Dedekind-domain valuation declarations do not state this normal-scheme divisorial classification and boundary assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-variety-picard-detection",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard prerequisite beneath det-thm-sf-ctf-stability-direct-images, proof (3), extracted in lem-sfb-birigidified-affine-triviality-locus: detection of geometric triviality by normal projective compactification. The latest blueprint proof (3) assembles open and proper direct image and no longer spells out this historical prerequisite. Supporting input: Divisorial sheaves and the boundary kernel on a normal scheme.",
+   "via": [
+    "lem-sfb-constant-variety-picard-detection",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-divisorial-open-restriction",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reused divisorial fractional lattices, affine reflexivity, and coherent reflexive hulls. Gave finite-support construction in a fixed generic trivialization, the boundary kernel with that trivialization, and the tensor exponent calculation; checked signs and canonical open comparisons. No complete project declaration or Mathlib match.",
+  "blueprint": "Historical alteration/Picard input below det-thm-sf-ctf-stability-direct-images proof (3), inherited through constant-variety-picard-detection. Read latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3); it now assembles proper and open direct images and does not spell out this historical input. blueprint_refs ancestor returns None; retain from.node=null and inherited via chain. Steps implement the divisorial extension, boundary correction and reflexive tensor prerequisites, without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-of-local-normal",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-per-divisorial-fractional-module-lattices",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-tensor-comparison",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-affine-sections-finite",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-per-reflexive-height-one-intersection-criterion",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-sc-finite-minimal-primes-over-ideal",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic affine module, valuation, coherence or topology input used in the cited proof step; no node of the stability unit supplies this statement. It supports the inherited divisorial argument and does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "why": "Generic coherent-module Hom input (coherence of sheaf Hom, local finite presentation, stalk of internal Hom) used in Step 8 to compute the stalks of the double dual; no node of the stability unit supplies this statement. It does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-local-finite-presentation",
+    "why": "Generic coherent-module Hom input (coherence of sheaf Hom, local finite presentation, stalk of internal Hom) used in Step 8 to compute the stalks of the double dual; no node of the stability unit supplies this statement. It does not replace a step of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "why": "Generic coherent-module Hom input (coherence of sheaf Hom, local finite presentation, stalk of internal Hom) used in Step 8 to compute the stalks of the double dual; no node of the stability unit supplies this statement. It does not replace a step of the six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-per-reflexive-height-one-intersection-criterion",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-de9f5696d",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-de9f5696d (reviewer sub-agent of L); spot-checked: Read the item and all 10 steps against Stacks divisors.tex 0EBM, 0EBL and 0BE6, and against every cited statement. The delivery has no new nodes and leaves the statement unchanged. The statement is true; I tested it on Spec K, a DVR, U=Y and the quadric cone, and the O(D) vs I_A sign convention checks out. One C4 fault, fixed: Step 8 computes the stalks of the sheaf double dual using only the module-level Hom/localization nodes. I added lem-weil-pbc-coherent-sheaf-hom-coherent, lem-weil-pbc-coherent-local-finite-presentation and lem-weil-pbc-stalk-internal-hom-finite-presentation (applied to T and then to T^vee) to the step, proof_deps and tool_uses, and wrote out the stalk and exponent calculation. None of the three reaches trf, Poincare or the item. Batch-5 flags (normal-domain-principal-divisor-kernel, divisorial-fractional-module-lattices, coherent-reflexive-hull) are accepted: they are generic commutative algebra and linear algebra, and their closures reach only def-trf-affine-weil-divisor-class-group, trf-noetherian-submodule-finitely-presented and trf-vector-subspace-complement, not the trace formula or its proof. No duplicate node and no cycle; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalDivisorialOpenRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.normalDivisorialOpenRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.WeilDivisor.Allows",
+   "AlgebraicGeometry.Scheme.WeilDivisor.AllowsSection",
+   "AlgebraicGeometry.Scheme.WeilDivisor.divisorialSubpresheaf",
+   "AlgebraicGeometry.Scheme.WeilDivisor.divisorialModule",
+   "AlgebraicGeometry.Scheme.WeilDivisor.divisorialInclusion",
+   "AlgebraicGeometry.Scheme.WeilDivisor.coefficientAt",
+   "AlgebraicGeometry.Scheme.WeilDivisor.IsOpenRestriction",
+   "AlgebraicGeometry.Scheme.openFunctionFieldMap",
+   "AlgebraicGeometry.Scheme.normalDivisorialOpenRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalDivisorialOpenRestriction.lean",
+  "statement": "theorem normalDivisorialOpenRestriction (Y : Scheme.{u}) [IsIntegral Y] [IsNoetherian Y] (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) (U : Y.Opens) [Nonempty U] : (∀ D : Y.WeilDivisor, Modules.IsCoherentReflexiveRankOne D.divisorialModule ∧ ∀ W : Y.Opens, Function.Injective (D.divisorialInclusion.app W) ∧ Set.range (D.divisorialInclusion.app W) = {s | D.AllowsSection W s}) ∧ (∃ e : (0 : Y.WeilDivisor).divisorialModule ≅ 𝟙_ Y.Modules, ∀ (W : Y.Opens) (a : Γ(Y, W)) (h : PLift (genericPoint Y ∈ W)), ((0 : Y.WeilDivisor).divisorialInclusion.app W (e.inv.app W a)) h = Y.presheaf.germ W (genericPoint Y) h.down a) ∧ (∀ F : Y.Modules, Modules.IsCoherentReflexiveRankOne F → ∃ D : Y.WeilDivisor, Nonempty (F ≅ D.divisorialModule)) ∧ (∀ D : Y.WeilDivisor, ∃ E : U.toScheme.WeilDivisor, D.IsOpenRestriction U E ∧ ∃ e : D.divisorialModule.restrict U.ι ≅ E.divisorialModule, ∀ (W : U.toScheme.Opens) (s : Γ(D.divisorialModule.restrict U.ι, W)) (h : PLift (genericPoint U.toScheme ∈ W)) (hY : PLift (genericPoint Y ∈ U.ι ''ᵁ W)), openFunctionFieldMap Y U ((E.divisorialInclusion.app W (e.hom.app W s)) h) = (D.divisorialInclusion.app (U.ι ''ᵁ W) ((D.divisorialModule.restrictAppIso U.ι W).hom s)) hY) ∧ (∀ L : U.toScheme.Modules, L.IsInvertible → ∃ F : Y.Modules, Modules.IsCoherentReflexiveRankOne F ∧ Nonempty (F.restrict U.ι ≅ L)) ∧ (∀ F : Y.Modules, Modules.IsCoherentReflexiveRankOne F → Nonempty (F.restrict U.ι ≅ 𝟙_ U.toScheme.Modules) → ∃ (s : ℕ) (Z : Fin s → Y.WeilPrime) (m : Fin s → ℤ), Function.Injective Z ∧ Set.range Z = {p | closure ({p.val} : Set Y) ⊆ (U : Set Y)ᶜ} ∧ Nonempty (F ≅ WeilDivisor.divisorialModule (∑ i, Finsupp.single (Z i) (m i)))) ∧ (∀ D E : Y.WeilDivisor, Nonempty (Modules.dual (Modules.dual (D.divisorialModule ⊗ E.divisorialModule)) ≅ (D + E).divisorialModule)) ∧ (∀ (F : Y.Modules) (E : Y.WeilDivisor), Modules.IsCoherentReflexiveRankOne F → Modules.IsCoherentReflexiveRankOne (Modules.dual (Modules.dual (F ⊗ E.divisorialModule))) ∧ ((F.restrict U.ι).IsInvertible → E.IsOpenRestriction U 0 → Nonempty ((Modules.dual (Modules.dual (F ⊗ E.divisorialModule))).restrict U.ι ≅ F.restrict U.ι))) ∧ (∀ F : Y.Modules, ∃ (e : (Modules.dual F).restrict U.ι ≅ Modules.dual (F.restrict U.ι)) (e₂ : (Modules.dual (Modules.dual F)).restrict U.ι ≅ Modules.dual (Modules.dual (F.restrict U.ι))), (∀ (W : U.toScheme.Opens) (φ : Γ((Modules.dual F).restrict U.ι, W)) (s : Γ(F.restrict U.ι, W)), (U.ι.appIso W).hom (PresheafOfModules.homObjEvalId F.val (SheafOfModules.unit Y.ringCatSheaf).val (U.ι ''ᵁ W) (((Modules.dual F).restrictAppIso U.ι W).hom φ) ((F.restrictAppIso U.ι W).hom s)) = PresheafOfModules.homObjEvalId (F.restrict U.ι).val (SheafOfModules.unit U.toScheme.ringCatSheaf).val W (e.hom.app W φ) s) ∧ (∀ (W : U.toScheme.Opens) (t : Γ((Modules.dual (Modules.dual F)).restrict U.ι, W)) (φ : Γ((Modules.dual F).restrict U.ι, W)), (U.ι.appIso W).hom (PresheafOfModules.homObjEvalId (Modules.dual F).val (SheafOfModules.unit Y.ringCatSheaf).val (U.ι ''ᵁ W) (((Modules.dual (Modules.dual F)).restrictAppIso U.ι W).hom t) (((Modules.dual F).restrictAppIso U.ι W).hom φ)) = PresheafOfModules.homObjEvalId (Modules.dual (F.restrict U.ι)).val (SheafOfModules.unit U.toScheme.ringCatSheaf).val W (e₂.hom.app W t) (e.hom.app W φ)) ∧ (Modules.restrictFunctor U.ι).map (SheafOfModules.bidual (R := Y.sheaf) F) ≫ e₂.hom = SheafOfModules.bidual (R := U.toScheme.sheaf) (F.restrict U.ι)) ∧ (∀ F G : Y.Modules, ∃ e : (F ⊗ G).restrict U.ι ≅ F.restrict U.ι ⊗ G.restrict U.ι, ∀ (W : U.toScheme.Opens) (s : Γ(F.restrict U.ι, W)) (t : Γ(G.restrict U.ι, W)), ((F ⊗ G).restrictAppIso U.ι W).hom (e.inv.app W (Modules.tmulSection s t)) = Modules.tmulSection ((F.restrictAppIso U.ι W).hom s) ((G.restrictAppIso U.ι W).hom t))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem module imports and reuses Modules.IsCoherentReflexiveRankOne from Sheaf.AlgebraicGeometry.NormalDivisorialModule, the owner named by the return. Since that module is absent from current published sources, this delivery supplies it and its definition node under §1(A). The theorem signature is unchanged. Other helpers supply the valuation-prescribed divisorial sheaf, canonical rational inclusion, open divisor restriction and generic-field comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3d23c474",
+  "group": "Q91",
+  "result": "fix",
+  "note": "d3d2 is byte-identical to 1983547c (Lean + node JSONs); only the report changed. The 1983 FIX was refused at landing because the node fix sat at a nested path; this re-applies it flat as fixes/def-sfb-coherent-reflexive-rank-one.json (merge_delivery.py:851 accepts DIR/<new node id>.json): adds stmt_dep def-pc-module-torsion-generic-rank, owner of Modules.rank (existing:true, landed 2026-10-21, no cycle), and cites it in the rank clause; nothing else changed (diffed key by key). Mathematics checked: item statement unchanged vs live and verbatim in the file; hypotheses integral / Noetherian / normal stalks / nonempty U, none stronger; Allows has the O(D) sign with correct ℤ casts; subpresheaf sInf + sheafification is real data; boundary range {p | closure{p} ⊆ Uᶜ} = codimension-one components of Y∖U; restriction iso compatible with openFunctionFieldMap; canonical dual/bidual/tensor comparisons present; edge cases Spec K, W=∅, U=Y, F=0, normal cone fine. New def IsCoherentReflexiveRankOne = coherent ∧ IsIso bidual ∧ rank=1, sole owner. Gates: only sorry is the theorem proof, docstrings with source and blueprint, report sections present. No compile run (no Lean changed)."
+ }
+}

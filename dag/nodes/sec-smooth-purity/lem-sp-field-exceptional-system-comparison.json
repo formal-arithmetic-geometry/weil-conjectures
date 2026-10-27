@@ -1,0 +1,244 @@
+{
+ "id": "lem-sp-field-exceptional-system-comparison",
+ "kind": "statement",
+ "title": "Exceptional coefficient-system mate with unit and composition equations",
+ "statement": "Fix the global finite-field datum of [def-pur-conventions], with algebraic closure $k$ of characteristic $p$ and a prime $\\ell\\ne p$. Let $E\\subset F$ be finite extensions of $\\mathbf Q_\\ell$, with valuation rings $R=\\mathcal O_E\\subset S=\\mathcal O_F$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms, def-sf-setting]. For $T=X,Y$, put $A_{n,T}=(R/\\ell^n)_T$, $B_{n,T}=(S/\\ell^n)_T$ on the small pro-etale site, and use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Write $\\mathcal N_A(T),\\mathcal N_B(T)$ for their normalized constructible subcategories with uniform cohomological and Tor bounds [sk-def-sp-normalized-towers], and $C_T=-\\otimes^L_{A_{\\bullet,T}}B_{\\bullet,T}$ for scalar extension of whole systems [lem-coef-semilinear-derived-sections]. Twists mean [def-coefficient-twists-detailed]. Write $P_A=Rf_{!,A,\\bullet}\\dashv G_A=f^!_{A,\\bullet}$ and $P_B\\dashv G_B$ for the specified tower adjunctions, with units $\\eta_A,\\eta_B$ and counits $\\epsilon_A,\\epsilon_B$ [det-sp-tower-gluing]. Fix the same compactification for the two compact-support functors [det-sp-tower-shriek-levels]. Let $b:C_YP_A\\xrightarrow{\\sim}P_BC_X$ be the coefficient comparison formed by the proper direct-image coefficient mate followed by the open-extension tensor identification, as in [lem-sp-field-shriek-system-comparison]. For $K\\in\\mathcal N_A(Y)$ define $c_K$ as the $P_B\\dashv G_B$ transpose of $C_Y\\epsilon_{A,K}\\circ b_{G_AK}^{-1}$. These are natural isomorphisms of whole coefficient systems $c:C_XG_A\\xrightarrow{\\sim}G_BC_Y$. Evaluation gives exactly the finite exceptional comparison $c_{R/\\ell^n,S/\\ell^n}(K_n)$ of [det-sp-reduction-exceptional]. Its quotient transitions agree with the two mixed paths from $R/\\ell^n$ to $S/\\ell^m$ and with the specified quotient mates of $G_A,G_B$ in [det-sp-tower-gluing](3). In the tower derived categories themselves,\n$$\\epsilon_{B,C_YK}\\circ P_B(c_K)=C_Y(\\epsilon_{A,K})\\circ b_{G_AK}^{-1},$$\n$$G_B(b_M)\\circ c_{P_AM}\\circ C_X(\\eta_{A,M})=\\eta_{B,C_XM}.$$\nFor successive finite extensions $E\\subset F\\subset L$, the composite of the two $c$ transformations is the $c$ for $E\\subset L$, using the canonical tensor associators; identity extensions give identities. These equations do not rely on faithfulness of general derived evaluation.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), counit transpose; returned steps 4–5"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "lem-coef-semilinear-derived-sections",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-field-shriek-system-comparison",
+  "det-sp-reduction-exceptional",
+  "def-sp-field-exceptional-system-domains",
+  "def-sp-field-exceptional-system-finite-adjoint",
+  "def-sp-field-exceptional-system-adjoints",
+  "def-sp-field-exceptional-system-components",
+  "def-sp-field-exceptional-system-finite-composite",
+  "def-sp-field-exceptional-system-evaluation",
+  "def-sp-field-exceptional-system-laws",
+  "def-sp-field-exceptional-system-iso"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sp-field-shriek-system-comparison to obtain simultaneous Models D and proper/open Laws b. Apply lem-sp-field-exceptional-normalized-adjoints for Domains a, Adjoints A and the right-adjoint quotient formula.",
+   "uses": [
+    "lem-sp-field-shriek-system-comparison",
+    "lem-sp-field-exceptional-normalized-adjoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "component is the actual adjunction transpose. Applying the inverse Hom equivalence gives its counit law. Apply homEquiv_naturality_left_square to naturality of the inverse support comparison and of the scalar-extended counit, giving naturality. For the unit equation transpose both words, use naturality of the support comparison and the target counit, then the defining component counit equation and the source triangle identity; cancellation of the invertible support comparison proves the unit law.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sp-field-exceptional-finite-compatibility for the evaluation and mixed laws and finite invertibility. Conjugate the evaluated component by sourceEvaluation and targetEvaluation to obtain its invertibility at each finite level. The detects field of D.base.calculus, supplied by det-sp-tower-shriek-levels, gives ambient invertibility. The fully faithful inclusion of the normalized full subcategory reflects it.",
+   "uses": [
+    "lem-sp-field-exceptional-finite-compatibility",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For transitions, systemReduction is the transpose of the natural derivedTransition followed by the section-identity restriction comparison. Its naturality square follows by homEquiv_naturality_right_square applied to that natural transformation, at the actual component. This proves the transition law without equality detection by evaluation.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the coefficient composition law by transposing both words under the last adjunction. Naturality of the last counit and the second support comparison, followed by the two defining counit equations, reduces the successive word to the scalar associator applied to the first counit. The composition clause of b identifies the remaining support word. Cancel its invertible components; injectivity gives composition. For identity, transpose component followed by the exceptional image of the scalar unitor. Naturality of the counit and scalar unitor reduces to b.identity, then inverse cancellation. Bundle these proved laws with the finite and quotient laws into Laws.",
+   "uses": [
+    "lem-sp-field-shriek-system-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-field-shriek-system-comparison",
+  "lem-sp-field-exceptional-normalized-adjoints",
+  "lem-sp-field-exceptional-finite-compatibility",
+  "det-sp-tower-shriek-levels",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M9",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), counit transpose, finite comparisons and quotient compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The counit transpose of compact support scalar comparison gives an isomorphism of normalized varying coefficient towers evaluating to finite exceptional pullback comparisons",
+   "results": "[leanfinder] OK 8 hit(s); CompHausLike.LocallyConstant.counit_app_val: ∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p); CompHausLike.LocallyConstant.adjunction_counit: ∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p); CompHausLike.LocallyConstant.counit: (P : TopCat → Prop) →\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\n ; CompHausLike.LocallyConstant.counitApp_app: ∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p); CompHausLike.LocallyConstant.adjunction_left_triangle: ∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p); CompHausLike.LocallyConstant.counitAppApp: {P : TopCat → Prop} →\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\n ; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction: CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit; CompHausLike.LocallyConstant.incl_of_counitAppApp: ∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image coefficient mate in derived tower categories agrees with quotient transitions without assuming evaluation faithful",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.mapDerivedCategorySingleFunctor: {C₁ : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\n    [inst_1 : CategoryTheory.Abelian C₁] →\n ; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app: ∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\n  [inst_2 :; DerivedCategory.singleFunctorsPostcompQIso_inv_hom: ∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\n  [inst_2 : HasDe; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm: ∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\n  [inst_; CategoryTheory.iterated_mateEquiv_conjugateEquiv: ∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\n  [inst_; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors: ∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\n  [inst_2 :; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso: ∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\n  [inst_2 : HasDe; CategoryTheory.Abelian.Ext.mapExactFunctor_hom: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\n  [",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.homEquiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.mk'_homEquiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.corepresentableBy_homEquiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.representableBy_homEquiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.comp_homEquiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Ty; CategoryTheory.Adjunction.homEquiv_apply:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.homEquiv_unit:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.homEquiv_counit:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.homEquiv_symm_apply:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.homEquiv_id:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca; CategoryTheory.Adjunction.homEquiv_symm_id:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : Ca",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|semilinear|rightMate",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Lie/SerreConstruction.lean:34: ### Exceptional Lie algebras; Mathlib/Algebra/Lie/SerreConstruction.lean:151: /-- The exceptional split Lie algebra of type e₆. -/; Mathlib/Algebra/Lie/SerreConstruction.lean:154: /-- The exceptional split Lie algebra of type e₇. -/; Mathlib/Algebra/Lie/SerreConstruction.lean:157: /-- The exceptional split Lie algebra of type e₈. -/; Mathlib/Algebra/Lie/SerreConstruction.lean:160: /-- The exceptional split Lie algebra of type f₄. -/; Mathlib/Algebra/Algebra/NonUnitalHom.lean:108:     SemilinearMapClass F φ A B :=; Mathlib/NumberTheory/NumberField/Basic.lean:90:     to_finiteDimensional := (SemilinearEquivClass.semilinearEquiv e : K ≃ₗ[ℚ] L).finiteDimensional; Mathlib/Algebra/Module/LinearMap/Defs.lean:20: * `LinearMap σ M M₂`, `M →ₛₗ[σ] M₂` : a semilinear map between two `Module`s. Here,; Mathlib/Algebra/Module/LinearMap/Defs.lean:26:   was not generalized to semilinear maps.); Mathlib/Algebra/Module/LinearMap/Defs.lean:37: To ensure that composition works smoothly for semilinear maps, we use the typeclasses; Mathlib/Algebra/Module/LinearMap/Defs.lean:43: * Throughout the file, we denote regular linear maps by `fₗ`, `gₗ`, etc, and semilinear maps; Mathlib/Algebra/Module/LinearMap/Defs.lean:48: * Parts of this file have not yet been generalized to semilinear maps (i.e. `CompatibleSMul`); Mathlib/Topology/Algebra/LinearMapCompletion.lean:15: lifted to a continuous semilinear map between the completions of those modules.; Mathlib/Topology/Algebra/LinearMapCompletion.lean:19: * `ContinuousLinearMap.completion`: promotes a continuous semilinear map; Mathlib/Topology/Algebra/LinearMapCompletion.lean:20:   from `α` to `β` to a continuous semilinear map from `Completion α` to `Completion β`.; Mathlib/Topology/Algebra/LinearMapCompletion.lean:21: * `ContinuousLinearMap.fromCompletion`: promotes a continuous semilinear map; Mathlib/Topology/Algebra/LinearMapCompletion.lean:22:   from `α` to `β` to a continuous semilinear map from `Completion α` to `β`.; Mathlib/Algebra/Module/Torsion/Basic.lean:587: /-- If an `R`-module `M` is annihilated by a two-sided ideal `I`, then the identity is a semilinear; Mathlib/Algebra/Module/Torsion/Basic.lean:589: def IsTorsionBySet.semilinearMap [I.IsTwoSided] (hM : IsTorsionBySet R M I) :; Mathlib/Algebra/Module/Torsion/Basic.lean:600:   (hM.semilinearMap.isSemisimpleModule_iff_of_bijective Function.bijective_id).symm; Mathlib/Algebra/Module/SpanRank.lean:303: section Semilinear; Mathlib/Algebra/Module/SpanRank.lean:361: end Semilinear; Mathlib/Algebra/Module/Injective.lean:484:   let I' := Submodule.map e₁.symm.toSemilinearEquiv.toLinearMap I; Mathlib/Algebra/Module/Injective.lean:485:   let e : I' ≃ₛₗ[RingHomClass.toRingHom e₁] I := (e₁.symm.toSemilinearEquiv.submoduleMap I).symm; Mathlib/Algebra/Module/Injective.lean:489:   exact ⟨e₂.toLinearMap ∘ₛₗ f' ∘ₛₗ e₁.toSemilinearEquiv.symm.toLinearMap, by simp_all [I']⟩",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit transpose of compact support scalar comparison gives an isomorphism of normalized varying coefficient towers evaluating to finite exceptional pullback comparisons",
+   "results": "[leansearch] OK 8 hit(s); ModuleCat.RestrictionCoextensionAdj.counit': : coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R); Pi.counit_coe_dFinsupp: (x : Π₀ i, A i) : counit (R := R) ⇑x = counit x; CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux: [∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj.toComonad.Coalge; CategoryTheory.Adjunction.counitAsIsoOfIso: (adj : L ⊣ R) (j : R ⋙ L ≅ 𝟭 D) : R ⋙ L ≅ 𝟭 D; CompHausLike.LocallyConstant.counit: [HasExplicitFiniteCoproducts.{u} P] :\n  haveI := CompHausLike.preregular hs\n  (sheafSections _ _).obj ⟨CompHau; CompHausLike.LocallyConstant.counitApp: [HasExplicitFiniteCoproducts.{u} P] (Y : (CompHausLike.{u} P)ᵒᵖ ⥤ Type max u w) [PreservesFiniteProducts Y] :\n; TestFunction.coe_ofSupportedIn: ∀ {E : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : ; CompHausLike.LocallyConstant.counitApp_app: ∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointMate|mateEquiv",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/Adjunction/Mates.lean:53: section mateEquiv; Mathlib/CategoryTheory/Adjunction/Mates.lean:84: def mateEquiv : TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂ where; Mathlib/CategoryTheory/Adjunction/Mates.lean:123: theorem mateEquiv_counit (α : TwoSquare G L₁ L₂ H) (d : D) :; Mathlib/CategoryTheory/Adjunction/Mates.lean:124:     L₂.map ((mateEquiv adj₁ adj₂ α).app _) ≫ adj₂.counit.app _ =; Mathlib/CategoryTheory/Adjunction/Mates.lean:128: theorem mateEquiv_counit_symm (α : TwoSquare R₁ H G R₂) (d : D) :; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:119: section mateEquiv; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:148: def mateEquiv : (g ≫ l₂ ⟶ l₁ ≫ h) ≃ (r₁ ≫ g ⟶ h ≫ r₂) :=; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:151: lemma mateEquiv_eq_iff (α : g ≫ l₂ ⟶ l₁ ≫ h) (β : r₁ ≫ g ⟶ h ≫ r₂) :; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:152:     mateEquiv adj₁ adj₂ α = β ↔; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:155:   rw [mateEquiv_apply, Equiv.symm_apply_apply]; Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean:94: lemma toNatTrans_mateEquiv {C D E F : Cat}; Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean:98:     (Bicategory.mateEquiv adj₁ adj₂ f).toNatTrans =; Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean:99:       CategoryTheory.mateEquiv (Adjunction.ofCat adj₁) (Adjunction.ofCat adj₂) f.toNatTrans := by; Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean:101:   simp [mateEquiv, Adjunction.homEquiv₁, Adjunction.homEquiv₂]; Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean:112:   rw [toNatTrans_mateEquiv]; Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean:60:   map_id X := by simp [rightAdjointMate_id]; Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean:61:   map_comp f g := by simp [comp_rightAdjointMate]; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:22: * The `rightAdjointMate f` as a morphism `fᘁ : Yᘁ ⟶ Xᘁ` for a morphism `f : X ⟶ Y`; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:27: * `comp_rightAdjointMate`: The adjoint mates of the composition is the composition of; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:295: def rightAdjointMate {X Y : C} [HasRightDual X] [HasRightDual Y] (f : X ⟶ Y) : Yᘁ ⟶ Xᘁ :=; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:302: @[inherit_doc] notation f \"ᘁ\" => rightAdjointMate f; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:306: theorem rightAdjointMate_id {X : C} [HasRightDual X] : (𝟙 X)ᘁ = 𝟙 (Xᘁ) := by; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean:34:       map_comp := fun f g => by simp [comp_rightAdjointMate] }; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean:42:               rightAdjointMate_comp_evaluation, ← MonoidalCategory.whiskerLeft_comp_assoc,; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean:50:               coevaluation_comp_rightAdjointMate, Category.assoc, ← comp_whiskerRight,",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module facts or basic site definitions; no whole-system coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit transpose of compact support scalar comparison gives an exceptional pullback comparison on normalized varying coefficient towers",
+   "results": "Actual logged hits: PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, scalar modules or basic sheaf comparisons do not state this normalized derived tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "Actual logged hits: CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, scalar modules or basic sheaf comparisons do not state this normalized derived tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|mateEquiv_unit|mateEquiv.*comp",
+   "results": "Actual logged hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, scalar modules or basic sheaf comparisons do not state this normalized derived tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|normalized.*tower|coefficient.*system",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, scalar modules or basic sheaf comparisons do not state this normalized derived tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with exceptional inverse image on derived coefficient systems and the adjunction mate preserves units and composes",
+   "results": "Actual logged hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_assoc', CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, scalar modules or basic sheaf comparisons do not state this normalized derived tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image scalar extension comparison for normalized derived towers",
+   "results": "Actual logged hits: LinearEquiv.extendScalarsOfSurjective_symm, LinearMap.extendScalarsOfIsLocalizationEquiv_symm_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv, algHomEquivSigma, LinearEquiv.extendScalarsOfIsLocalization_symm_apply, IntermediateField.extendScalars.orderIso, IsScalarTower.AlgEquiv.restrictNormalHom_comp, DifferentiableOn.restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, scalar modules or basic sheaf comparisons do not state this normalized derived tower assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-field-extension-towers",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), counit transpose; returned steps 4–5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-field-exceptional-system-comparison",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Construct c by the whole-system adjunction, identify its evaluated counit equation, use conservative evaluation only for invertibility, write the mixed quotient equation, and prove unit, composition and identity equations by explicit tower transposes. Reuse all existing domain and comparison lemmas; no new nodes.",
+  "blueprint": "det-sp-field-extension-towers proof (2): counit transpose, evaluation and quotient squares, unit and counit equations, and composition before inverse limit. The domain check uses proof (1).",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ordinary derived-system scalar extension, evaluated tensor and reduction maps. This is the existing system calculus the item explicitly specifies; the unit does not reconstruct these operations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-743c6c396",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-743c6c396 (reviewer sub-agent of L); spot-checked: PASS with no changes. This is the first delivery: no repair note, not a re-split, 0 new nodes. The statement is unchanged. Sources read: blueprint main-20261015 sk-lem-sp-field-extension-towers.proof.md (2) and sk-lem-sp-reduction-compatibilities.proof.md (1)-(2); the item's 7 steps are the tower-category copy of those transposition arguments. The mate direction is correct: alpha=b^{-1}, L1=P_A, L2=P_B, G=C_X, H=C_Y, per def-weil-pbc-adjunction-mate. Step 1: domains come from lem-sp-field-scalar-normalized-systems and det-sp-tower-gamma(3). Step 2: c is defined through the det-sp-tower-gluing Hom bijection. Step 3: the evaluated counit equation is exactly the defining equation of det-sp-reduction-exceptional, so its uniqueness gives (c_K)_n=c_{A_n,B_n}(K_n), and det-sp-tower-shriek-levels(3) (applied with E:=F) gives iso-detection only. Step 4: I recomputed the n->m square from compatibilities(2) on both mixed paths plus naturality of c_{A_m,B_m} at r; it is correct. Step 5 (unit) and Step 6 (composition, inverse order (b^H)^{-1}=D(b^C)^{-1}(b^D)^{-1}) were recomputed and are correct. Step 7 (identity) is correct. The route stays inside the unit's transitive uses (gluing, shriek-levels, gamma, reduction). The declared tool_use lem-coef-semilinear-derived-sections is accepted: it is the generic system calculus and already a stmt_dep. Batch-5 flags: det-sp-scalar-extension-functor (a definition) is already in the base stmt closure. det-sp-tower-gamma (clause 3) and det-sp-reduction-compatibilities add only sk-i-curve-zero generic algebra lemmas and one sk-d-weil-push site lemma; they add no sec-poincare-duality node, no sk-thm-trace-transport and no batch-4 target, and their content is outside both assumption leaves. lem-trf-site-functorial-flat-resolution is a generic module-sheaf lemma. Advisory: lem-coef-ramified-scalar-exceptional-limit overlaps in subject (completed setting); it is not a duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldExceptionalSystemComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldExceptionalSystem.field_exceptional_system_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldExceptionalSystem.field_exceptional_system_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FieldExceptionalSystemComparison.lean",
+  "statement": "theorem field_exceptional_system_comparison (X Y : Scheme.{u}) [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] (d : ℕ) [SmoothOfRelativeDimension d f] [IsSeparated f] (c : Compactification f) : ∃ (D : Models P) (b : FieldShriekSystem.Laws P D c) (a : Domains P D c) (A : Adjoints P D c b a), Nonempty (Laws P D c b a A)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bc6d65e1",
+  "group": "ND",
+  "result": "fix",
+  "note": "Read all 9 modules, the item and the 8 new def nodes, the source place towers.proof.md (2), and the dependency declarations (FieldShriekSystem Models/Laws/iso/scalarAssoc/scalarUnit, tower_gluing, reductionExceptional_isIso, AdjunctionEvaluationNormalized). c = homEquiv transpose of b^-1 then C_Y(eps_A), direction correct. Counit, unit, composition (scalarAssoc) and identity (scalarUnit) laws have the right order. evaluationLaw matches finiteComponent, which is the unique finite c of det-sp-reduction-exceptional; rightReduction, both mixed paths and transition are present; no faithfulness assumed. The exists-pinned package form matches the landed dependency and tower gluing. H3 FIX: Domains.scalar/finite/finiteScalar claimed preservation for every scheme T, but the node and the provider field_scalar_normalized_systems only cover T=X,Y and finite-scalar preservation is only given on finite-type schemes. Fixes: restrict the fields to (T = X ∨ T = Y), add an autoParam proof to scalar/level so call sites are unchanged, pass (.inl/.inr rfl) at the 5 finiteScalar sites (Components, FiniteComposite, Evaluation), and update the domains node TeX. Recompiled all 9 modules once via nt_compile --json: rc 0, no errors or warnings, every file under 60 s. Advisory: some owners are cited only transitively; Domains has unused proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a81ec",
+  "group": "M9",
+  "result": "fix",
+  "landing": "20261026T070331-L-3547379",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery identical in Lean/nodes to 323389a2 (FIX not landed: override named .md); item proof + 2 sorry substeps vs node lem-sp-field-exceptional-system-comparison; sandbox --all with published Adjoints/LevelWords + current importers (exit 0), all-published control for Witnesses"
+ }
+}

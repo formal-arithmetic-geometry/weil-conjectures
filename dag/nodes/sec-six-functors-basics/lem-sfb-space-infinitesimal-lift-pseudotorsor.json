@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+ "kind": "statement",
+ "title": "The infinitesimal lift sheaf for algebraic spaces is a quasi-coherent pseudo-torsor",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a locally finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space]; local finite presentation is tested on compatible etale scheme charts using [def-sbc-locally-finite-presentation]. Let $j:T_0\\hookrightarrow T$ be a first order thickening of schemes over $S$ [def-sbc-first-order-thickening], with square-zero quasi-coherent ideal $\\mathcal I$, and let $a_0:T_0\\to X$ and $b:T\\to Y$ satisfy $fa_0=bj$. No affineness assumption is made. Write $\\Omega_{X/Y}$ for the relative differential module on the small etale ringed site of $X$, representing derivations of $\\mathcal O_X$ which vanish on the image of $f^{-1}\\mathcal O_Y$; on compatible etale scheme charts its pullback is the usual scheme relative differential module [def-sc-relative-differential-sheaf]. For a map of ringed sites $g$, module pullback means $g^*M=\\mathcal O_{\\mathrm{source}}\\otimes_{g^{-1}\\mathcal O_{\\mathrm{target}}}g^{-1}M$. Put $E=a_0^*\\Omega_{X/Y}$ on $(T_0)_{\\mathrm{et}}$, and regard $\\mathcal I$ as an $\\mathcal O_{T_0}$-module via the quotient map, since $\\mathcal I^2=0$. Let $H$ be the Zariski $\\mathcal O_T$-module obtained by restricting $j_*\\underline{\\operatorname{Hom}}_{\\mathcal O_{T_0}}(E,\\mathcal I_{\\mathrm{et}})$ to Zariski opens, where $\\mathcal I_{\\mathrm{et}}$ is the etale sheaf on $(T_0)_{\\mathrm{et}}$ associated to the quasi-coherent $\\mathcal O_{T_0}$-module $\\mathcal I$ [def-sc-etale-qcoherent-module], internal Hom means the sheaf of homomorphisms of sheaves of modules [def-weil-sheaf-of-modules-category] on each localized etale site, and $j_*$ is direct image along the thickening. Then $H$ is quasi-coherent [pqf-def-coherent]. On the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site], the rule\n$$\\mathcal L(u:U\\to T)=\\{a:U\\to X\\text{ over }S\\mid fa=bu,\\ a|_{U_0}=a_0\\operatorname{pr}_{T_0}\\},\\qquad U_0=T_0\\times_TU,$$\nwith restriction by composition, is a sheaf of sets; fibre products here are sheaf fibre products, agreeing with scheme fibre products [def-pc-fibre-product]. The associated abelian etale sheaf $H_{\\mathrm{et}}$ [def-sc-etale-qcoherent-module] acts on $\\mathcal L$, naturally under restriction. For every $u:U\\to T$ and every $a\\in\\mathcal L(U)$, the map $h\\mapsto h\\cdot a$ is a bijection $H_{\\mathrm{et}}(U)\\to\\mathcal L(U)$. Under the relative derivation interpretation of $H_{\\mathrm{et}}$, the action adds the derivation to the ring-sheaf map of a lift. No local or global existence of a lift is asserted.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 061A (lemma-sheaf), 061C (lemma-action-sheaf), 061D (remark-special-case); finite presentation of relative differentials: Tag 05ZF (lemma-finite-presentation-differentials); quasi-coherence of internal Hom: Tag 03M1 (lemma-properties-quasi-coherent), (6). The final paragraph of Tag 04AM (lemma-smooth-formally-smooth) uses these facts on an affine test; the present statement only identifies the pseudo-torsor and does not assert nonemptiness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-sc-etale-qcoherent-module",
+  "def-sfb-space-relative-differential-module",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-square-zero-stalk-data",
+  "def-sfb-space-square-zero-extension-data",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-relative-differentials-finite-presentation], $\\Omega_{X/Y}$ has local finite presentations. Tensor pullback is a left adjoint by [lem-weil-pbc-ringed-topoi-module-adjunction], hence preserves their cokernels by [lem-weil-pbc-left-adjoint-preserves-colimits]. Pulling back a finite free presentation gives a finite free presentation of $E=a_0^*\\Omega_{X/Y}$ on a covering of $(T_0)_{\\mathrm{et}}$; pullback sends each basis vector to the corresponding basis vector. Thus $E$ is of finite presentation and quasi-coherent on this site. The ideal $\\mathcal I$ is a quasi-coherent $\\mathcal O_{T_0}$-module: on an affine $\\operatorname{Spec}A$ with ideal $J$, it is the module $J$ over $A/J$, since $J^2=0$. These local descriptions agree on restriction.",
+   "uses": [
+    "lem-sfb-space-relative-differentials-finite-presentation",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZF; tensor pullback of finite free presentations"
+   }
+  },
+  {
+   "text": "Put $K=\\underline{\\operatorname{Hom}}(E,\\mathcal I_{\\mathrm{et}})$. On an etale chart where $\\mathcal O^{m}\\xrightarrow{A}\\mathcal O^{n}\\to E\\to0$ is a finite presentation, $K$ is the kernel of $\\mathcal I_{\\mathrm{et}}^{n}\\xrightarrow{A^t}\\mathcal I_{\\mathrm{et}}^{m}$: a homomorphism is a tuple of images of the $n$ generators, and factors through $E$ exactly when each of the $m$ relations vanishes. This identification commutes with restriction because it sends a homomorphism to its generator images. Here $\\mathcal I_{\\mathrm{et}}$ is quasi-coherent on $(T_0)_{\\mathrm{et}}$, being the image of the quasi-coherent Zariski module $\\mathcal I$ of step 1 under the equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Finite sums and kernels are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]; quasi-coherence is local by [def-trf-space-quasi-coherent-module]. Therefore $K$ is quasi-coherent. The closed immersion result [lem-sfb-space-closed-immersion-quasi-coherent-modules] implies that $j_*K$ is quasi-coherent on $T_{\\mathrm{et}}$. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], its restriction $H$ to Zariski opens is quasi-coherent, and the counit gives a canonical isomorphism $H_{\\mathrm{et}}\\cong j_*K$. This is the translation sheaf specified in the statement.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/spaces-morphisms.tex; literature/stacks-project/descent.tex",
+    "place": "Tag 03M1 (6), finite-presentation matrix proof; Tags 04CJ (3), 03DX (2)"
+   }
+  },
+  {
+   "text": "For an etale covering $\\{U_i\\to U\\}$, compatible lifts $a_i$ glue uniquely to $a:U\\to X$: algebraic spaces are fppf sheaves by [def-trf-algebraic-space], and this covering is an fpqc covering by [lem-weil-pbc-fpqc-finer-than-etale], so [lem-a1-algebraic-space-fpqc-sheaf] applies. The maps $fa$ and $bu$ agree on the covering and hence agree globally by the same statement for $Y$. The base-changed covering of $U_0$ similarly checks $a|_{U_0}=a_0\\operatorname{pr}_{T_0}$. Uniqueness holds because it holds for maps into $X$. Restrictions are composition, so $\\mathcal L$ is a sheaf.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-a1-algebraic-space-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 061A (lemma-sheaf), using Tag 04P2 (lemma-fpqc-universal-effective-epimorphisms)"
+   }
+  },
+  {
+   "text": "Fix $u:U\\to T$ and a lift $a\\in\\mathcal L(U)$. The base change $U_0\\hookrightarrow U$ is square-zero with ideal $\\mathcal I\\mathcal O_U$: locally it is the quotient $B\\to B/JB$ with $(JB)^2=0$. Since $u$ is etale, hence flat [def-weil-etale-morphism], $u^*\\mathcal I=\\mathcal I\\otimes_{\\mathcal O_T}\\mathcal O_U\\to\\mathcal I\\mathcal O_U$ is an isomorphism (locally $J\\otimes_AB\\cong JB$), so the etale module of this ideal on $(U_0)_{\\mathrm{et}}$ is the restriction of $\\mathcal I_{\\mathrm{et}}$. Use [lem-sfb-space-square-zero-lift-linearization] for maps into $X$ over $S$, and its naturality for $f:X\\to Y$. It identifies maps $c:U\\to X$ restricting to $a_0|_{U_0}$ with $S$-derivations $D=c^\\sharp-a^\\sharp$ into this ideal. The equation $fc=bu=fa$ is equivalent to $D\\circ f^\\sharp=0$, since the difference coordinate for $fa$ is zero precisely at $fa$. By the defining universal property of $\\Omega_{X/Y}$ and the tensor adjunction [lem-weil-pbc-ringed-topoi-module-adjunction], these relative derivations are exactly $\\operatorname{Hom}_{\\mathcal O_{U_0}}(a_0|_{U_0}^*\\Omega_{X/Y},\\mathcal I\\mathcal O_U)$. This is $(j_*K)(U)$: restriction to the localized etale site is etale pullback [def-trf-algebraic-space], and the tensor formula for pullback identifies the restricted $E$ and ideal with these modules. Step 2 therefore identifies it with $H_{\\mathrm{et}}(U)$.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), 061D (remark-special-case)"
+   }
+  },
+  {
+   "text": "For $h\\in H_{\\mathrm{et}}(U)$ corresponding to $D$, define $h\\cdot a$ by replacing $a^\\sharp$ with $a^\\sharp+D$, using the inverse in step 4. This is a lift over $Y$, since $D\\circ f^\\sharp=0$. Zero fixes $a$, and adding $D_1$ then $D_2$ gives $a^\\sharp+D_1+D_2$; uniqueness in the linearization makes this an abelian group action. Its orbit map at $a$ is the inverse of the bijection of step 4, hence bijective. Restricting any ring-sheaf map or derivation restricts its sum and difference, so the same uniqueness gives $(h\\cdot a)|_V=h|_V\\cdot a|_V$ for every morphism $V\\to U$ in $T_{\\mathrm{et}}$. On an object with no lift the action is the unique map to the empty set. Thus these operations define a sheaf action everywhere without asserting existence of a lift.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 061C (lemma-action-sheaf), 061D (remark-special-case)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-etale-morphism",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-relative-differentials-finite-presentation",
+  "lem-sfb-space-square-zero-lift-linearization",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 061A, 061C, 061D, 05ZF, 03M1 (6); relative derivations obtained by naturality in 0618/04D0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of algebraic spaces the sheaf of square zero lifts is a pseudo torsor under the quasi coherent module of derivations",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {φ : S ⟶ F.op.comp R} [self : PresheafOfModules.HasDi\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^\\\\mathrm{op}\\\\to\\\\mathbf{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, a presheaf of commutative ri\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.Derivation'.Universal.mk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      {M : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))} →\\n        {φ' : S' ⟶ R} →\\n          {d : M.Derivation' φ'} →\\n            (desc :\\n                {\", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ M $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.desc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, there exists a unique morphism of presheaves of modules from the universal derivation t\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.fac\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, the postcomposition of $ d $ with the unique morphism $ \\text{desc}(d') $ from the unive\"}\n  {\"name\": \"PresheafOfModules.HasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} → {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} → (S ⟶ F.op.comp \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "loogle",
+   "query": "liftOfDerivationToSquareZero",
+   "sub": "",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \" {R : Type u} {A : Type v} {B : Type w} [CommSemiring R] [CommSemiring A] [CommRing B] [Algebra R A] [Algebra R B] (I : Ideal B) [Algebra A B] [IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) : A →ₐ[R] B\", \"doc\": \"Given a tower of algebras `R → A → B`, and a square-zero `I : Ideal B`, each `R`-derivation\\nfrom `A` to `I` corresponds to a lift `A →ₐ[R] B` of the canonical map `A →ₐ[R] B ⧸ I`.\"}\n  {\"name\": \"liftOfDerivationToSquareZero_mk_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \" {R : Type u} {A : Type v} {B : Type w} [CommSemiring R] [CommSemiring A] [CommRing B] [Algebra R A] [Algebra R B] (I : Ideal B) [Algebra A B] (hI : I ^ 2 = ⊥) [IsScalarTower R A B] (d : Derivation R A ↥I) (x : A) : (Ideal.Quotient.mk I) ((liftOfDerivationToSquareZero I hI d) x) = (algebraMap A (B ⧸\", \"doc\": \"\"}\n  {\"name\": \"liftOfDerivationToSquareZero_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \" {R : Type u} {A : Type v} {B : Type w} [CommSemiring R] [CommSemiring A] [CommRing B] [Algebra R A] [Algebra R B] (I : Ideal B) [Algebra A B] [IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) (x : A) : (liftOfDerivationToSquareZero I hI f) x = ↑(f x) + (algebraMap A B) x\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orsor|[Dd]erivation",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differences between infinitesimal lifts to an algebraic space form an internal Hom module from relative differentials to the square zero ideal",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"derivationToSquareZeroOfLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : A →ₐ[R] B)\\n  (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I)) : Derivation R A I\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring, forming a scalar tower with algebra homomorphisms $R \\\\to A \\\\to B$. Let $I$ be an ideal of $B$ such that $I^2 = \\\\{0\\\\}$. Let $f: \"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (d : Derivation R A ↥I) (x : A),\\n  ↑((derivationToSq\", \"doc\": \"Let $R$ and $A$ be commutative semirings, and $B$ be a commutative ring. Suppose that $A$ is an $R$-algebra, and $B$ is an $A$-algebra and an $R$-algebra, such that the scalar actions form a tower (i.\"}\n  {\"name\": \"DualNumber.lift\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \": { fe : (A →ₐ[R] B) × B // fe.2 * fe.2 = 0 ∧ ∀ a, Commute fe.2 (fe.1 a) } ≃ (A[ε] →ₐ[R] B)\", \"doc\": \"This equivalence establishes a bijection between pairs $(f, \\\\epsilon)$, where $f : A \\\\to B$ is an $R$-algebra homomorphism and $\\\\epsilon \\\\in B$ satisfies $\\\\epsilon^2 = 0$ and commutes with $f(a)$ for \"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n  {\"name\": \"liftOfDerivationToSquareZero_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] [inst_6 : IsScalarTower R A B]\\n  (hI : I ^ 2 = ⊥) (f : Derivation R A ↥I) (x : A),\\n  (liftOfDerivation\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\\\to I $ over $ R $, there exists an $ R $-algebra homomorph\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (f : { f // (Ideal.Quotient.mkₐ R I).comp f = IsScal\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"derivationToSquareZeroOfLift_apply\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (f : A →ₐ[R] B) (e : (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I))\\n  (x : A) : (derivationToSquareZeroOfLift I hI f e x : B) = f x - algebraMap A B x\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an $ R $-algebra $ B $, given an algebra homomorphism $ f : A \\\\to B $, a square-zero ideal $ I \\\\subseteq A $, and a compatibility conditio\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale sheaf of infinitesimal deformations has a simply transitive action by Hom of the cotangent sheaf into the conormal module",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Extension.toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.CotangentSpace →ₗ[S] Ω[S⁄R]\", \"doc\": \"The linear map from the cotangent space of the algebra extension to the module of Kähler differentials $\\\\Omega_{S/R}$, induced by the base change isomorphism for Kähler differentials that identifies $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential",
+   "sub": "",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"KaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : Type v\", \"doc\": \"The module of Kähler differentials (Kahler differentials, Kaehler differentials).\\nThis is implemented as `I / I ^ 2` with `I` the kernel of the multiplication map `S ⊗[R] S →ₐ[R] S`.\\nTo view elements \"}\n  {\"name\": \"instAddCommGroupKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u_2) (S : Type u_1) [CommRing R] [CommRing S] [Algebra R S] : AddCommGroup Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"instInhabitedKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u_2) (S : Type u_1) [CommRing R] [CommRing S] [Algebra R S] : Inhabited Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"instSMulKaehlerDifferentialOfSMulCommClass\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u_3) (S : Type u_2) [CommRing R] [CommRing S] [Algebra R S] {R' : Type u_1} [CommRing R'] [Algebra R' S] [SMulCommClass R R' S] : SMul R' Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.finite\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.EssFiniteType R S] : Module.Finite S Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.subsingleton_of_surjective\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (h : Function.Surjective ⇑(algebraMap R S)) : Subsingleton Ω[S⁄R]\", \"doc\": \"`Ω[S⁄R]` is trivial if `R → S` is surjective.\\nAlso see `Algebra.FormallyUnramified.iff_subsingleton_kaehlerDifferential`.\"}\n  {\"name\": \"instModuleKaehlerDifferentialOfSMulCommClass\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u_3) (S : Type u_2) [CommRing R] [CommRing S] [Algebra R S] {R' : Type u_1} [CommRing R'] [Algebra R' S] [SMulCommClass R R' S] : Module R' Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"instModuleTensorProductKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u_2) (S : Type u_1) [CommRing R] [CommRing S] [Algebra R S] : Module (TensorProduct R S S) Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.D\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : Derivation R S Ω[S⁄R]\", \"doc\": \"The universal derivation into `Ω[S⁄R]`.\"}\n  {\"name\": \"KaehlerDifferential.DLinearMap\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] : S →ₗ[R] Ω[S⁄R]\", \"doc\": \"(Implementation) The underlying linear map of the derivation into `Ω[S⁄R]`.\"}\n  {\"name\": \"KaehlerDifferential.isScalarTower_of_tower\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] {R₁ : Type u_2} {R₂ : Type u_3} [CommRing R₁] [CommRing R₂] [Algebra R₁ S] [Algebra R₂ S] [SMul R₁ R₂] [SMulCommClass R R₁ S] [SMulCommClass R R₂ S] [IsScalarTower R₁ R₂ S] : IsScalarTower R₁ R₂ Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"Derivation.liftKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {M : Type u_1} [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] (D : Derivation R S M) : Ω[S⁄R] →ₗ[S] M\", \"doc\": \"The linear map from `Ω[S⁄R]`, associated with a derivation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "grep",
+   "query": "liftOfDerivationToSquareZero|derivationOfToSquareZero",
+   "sub": "RingTheory",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"81\", \"text\": \"def liftOfDerivationToSquareZero [IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) :\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"101\", \"text\": \"-- simp normal form is `liftOfDerivationToSquareZero_mk_apply'`\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"102\", \"text\": \"theorem liftOfDerivationToSquareZero_mk_apply [IsScalarTower R A B] (d : Derivation R A I) (x : A) :\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"103\", \"text\": \"    Ideal.Quotient.mk I (liftOfDerivationToSquareZero I hI d x) = algebraMap A (B ⧸ I) x := by\"}\n  {\"file\": \"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"line\": \"104\", \"text\": \"  rw [liftOfDerivationToSquareZero_apply, map_add, Ideal.Quotient.eq_zero_iff_mem.mpr (d x).prop,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the presheaf differential and square-zero ring derivation APIs do not state the algebraic-space lift sheaf, its sheafwise action, or quasi-coherence of the translation module"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiCoherent|FinitePresentation",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T12:04:03Z\", \"tool\": \"grep\", \"query\": \"QuasiCoherent|FinitePresentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\"], \"digest\": \"d9e3d8c66f808811\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|FinitePresentation",
+   "sub": "RingTheory/Kaehler",
+   "results": "{\"t\": \"2026-10-23T12:07:19Z\", \"tool\": \"grep\", \"query\": \"finitePresentation|FinitePresentation\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative differential sheaf of a morphism of algebraic spaces locally of finite presentation has finite presentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:07:19Z\", \"tool\": \"leansearch\", \"query\": \"The relative differential sheaf of a morphism of algebraic spaces locally of finite presentation has finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"SheafOfModules.isFinitePresentation\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"13aa82ee10f5031c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.FinitePresentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:07:19Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\"], \"digest\": \"069197c9f5262854\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative differentials of a locally finitely presented morphism of algebraic spaces are a finitely presented quasi coherent module",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:07:23Z\", \"tool\": \"leanfinder\", \"query\": \"Relative differentials of a locally finitely presented morphism of algebraic spaces are a finitely presented quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"KaehlerDifferential.ideal_fg\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\"], \"digest\": \"c40af03e8fe51f1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+   "sub": "RingTheory/Extension",
+   "results": "{\"t\": \"2026-10-23T12:10:38Z\", \"tool\": \"grep\", \"query\": \"instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"sub\": \"RingTheory/Extension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials on small etale sites of algebraic spaces are locally cokernels of maps of finite rank free modules for a morphism locally of finite presentation",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:10:42Z\", \"tool\": \"leanfinder\", \"query\": \"Kahler differentials on small etale sites of algebraic spaces are locally cokernels of maps of finite rank free modules for a morphism locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.etaleLocus_eq_compl_support\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\"], \"digest\": \"56ca89d94ac02368\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.FinitePresentation.*Ω|Module.FinitePresentation.*Kaehler",
+   "sub": "RingTheory/Extension/Cotangent",
+   "results": "{\"t\": \"2026-10-23T12:17:15Z\", \"tool\": \"grep\", \"query\": \"Module.FinitePresentation.*Ω|Module.FinitePresentation.*Kaehler\", \"sub\": \"RingTheory/Extension/Cotangent\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"digest\": \"3d9429ee1d6c767e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:17:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level finite presentation and general presheaf differentials do not assert finite presentation of the relative differential sheaf of algebraic spaces. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:537; its instance is only for commutative algebras."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-space-affine-infinitesimal-lift",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms.",
+   "via": [
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+  "worker": "stage1",
+  "summary": "Checked Stacks infinitesimal map deformation and module finiteness arguments. Reused existing square-zero linearization, closed-immersion and etale-Zariski comparison nodes; added only the general differential finite-presentation input. Wrote out relative-kernel condition, local Hom matrix calculation, restriction compatibility and empty-fibre case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic sheaf/module/descent tool for the infinitesimal-lift prerequisite; no node of this unit supplies its stated general interface."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic sheaf/module/descent tool for the infinitesimal-lift prerequisite; no node of this unit supplies its stated general interface."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic sheaf/module/descent tool for the infinitesimal-lift prerequisite; no node of this unit supplies its stated general interface."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic sheaf/module/descent tool for the infinitesimal-lift prerequisite; no node of this unit supplies its stated general interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-a1-algebraic-space-fpqc-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-c0908eb63",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c0908eb63 (reviewer sub-agent of L); spot-checked: Read in full: the item (5 steps), the new node lem-sfb-space-relative-differentials-finite-presentation, every cited statement, and Stacks spaces-more-morphisms 05ZF, 04CT/04CU/04CV, 061A, 061C, 061D, 0618/04D0, plus 03M1(6). The item statement and stmt_deps are unchanged from live; live is still unsplit and there is no repair note. Step 1: the finite presentation of E comes from the new node plus the left-adjoint pullback (adjunction and colimit preservation). Step 2: Hom(E, I_et) is a matrix kernel, quasi-coherent by the kernels/colimits node; j_*K is quasi-coherent by the closed-immersion node; the Zariski-étale equivalence gives H and H_et ≅ j_*K. Step 3: the sheaf of lifts comes from fppf/fpqc descent of maps into algebraic spaces, as in 061A. Step 4: the linearization plus naturality for f gives fc = fa ⇔ D∘f^♯ = 0, and the universal property of Ω_{X/Y} plus the adjunction gives Hom(a^*Ω_{X/Y}, I·O_U). Step 5: the action laws and the empty case are elementary. FIX on two points: step 2 now says that I_et is quasi-coherent, via the Zariski-étale equivalence already cited there; step 4 now says that u is étale, hence flat [def-weil-etale-morphism], so u^*I ≅ I·O_U, which is needed to identify the ideal's étale module with I_et restricted to U_0. The new node is true (05ZF/04CU/04CV); tested on the identity, étale maps, A^n_Y → Y, and a non-reduced base. It is statement-only, not a clause of the item, and not a duplicate: grep over snapshot, live and side-live for 05ZF/04CV/01V3 and a statement regex found only scheme-level nodes, and the blueprint search returned 0 hits. Tool uses accepted as generic: the module adjunction, the Zariski-étale qcoh equivalence, fpqc-finer-than-étale, and the space fpqc sheaf property. Batch-5 flags: def-trf-space-quasi-coherent-module and def-trf-algebraic-space are general definitions; lem-a1-algebraic-space-fpqc-sheaf is generic morphism descent; lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is a foundational module equivalence whose closure has no trace-formula, Poincaré or nt-assume node. None is a step of either assumed proof; all accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInfinitesimalLiftPseudotorsor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_infinitesimal_lift_pseudotorsor",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalSchemeMap",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalTest",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.InfinitesimalLifts",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalLifts_restrict",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalLiftPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalCharts",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalIdentityChart",
+   "AlgebraicGeometry.AlgebraicSpace.HasInfinitesimalDifferentialCharts",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalDifferentials",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalHom",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalTranslationPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalReducedTest",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalThickenedTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalReducedScalar",
+   "AlgebraicGeometry.AlgebraicSpace.infinitesimalDifferentialTensor",
+   "AlgebraicGeometry.AlgebraicSpace.IsInfinitesimalTranslationComparison",
+   "AlgebraicGeometry.AlgebraicSpace.IsInfinitesimalAddition",
+   "AlgebraicGeometry.AlgebraicSpace.space_infinitesimal_lift_pseudotorsor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInfinitesimalLiftPseudotorsor.lean",
+  "statement": "theorem space_infinitesimal_lift_pseudotorsor {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocallyOfFinitePresentation f) {T₀ T : Over S} (j : T₀ ⟶ T) (hj : IsFirstOrderThickening j.left) (a₀ : yoneda.obj T₀ ⟶ X.obj.obj) (b : yoneda.obj T ⟶ Y.obj.obj) (comm : a₀ ≫ f.hom.hom = yoneda.map j ≫ b) : HasInfinitesimalDifferentialCharts f ∧ Presheaf.IsSheaf T.left.smallEtaleTopology (infinitesimalLiftPresheaf f j a₀ b) ∧ ∃ (M : ThickeningSiteModel (infinitesimalSchemeMap j)) (I : SquareZeroIdeal M), I.obj.IsQuasicoherent ∧ ∃ (H : T.left.Modules) (_hH : H.IsQuasicoherent) (e : (Scheme.Modules.etaleTensorSectionsSheaf H).obj ⋙ AddCommGrpCat.uliftFunctor.{u + 1, u} ≅ infinitesimalTranslationPresheaf f a₀ M I), IsInfinitesimalTranslationComparison f a₀ M I H e ∧ ∃ act : ∀ U : T.left.Etale, (Scheme.Modules.etaleTensorSectionsSheaf H).obj.obj (op U) → InfinitesimalLifts f j a₀ b U → InfinitesimalLifts f j a₀ b U, (∀ (U : T.left.Etale) (a : InfinitesimalLifts f j a₀ b U), act U 0 a = a) ∧ (∀ (U : T.left.Etale) (h k : (Scheme.Modules.etaleTensorSectionsSheaf H).obj.obj (op U)) (a : InfinitesimalLifts f j a₀ b U), act U (h + k) a = act U h (act U k a)) ∧ (∀ (U V : T.left.Etale) (r : V ⟶ U) (h : (Scheme.Modules.etaleTensorSectionsSheaf H).obj.obj (op U)) (a : InfinitesimalLifts f j a₀ b U), (infinitesimalLiftPresheaf f j a₀ b).map r.op (act U h a) = act V ((Scheme.Modules.etaleTensorSectionsSheaf H).obj.map r.op h) ((infinitesimalLiftPresheaf f j a₀ b).map r.op a)) ∧ (∀ (U : T.left.Etale) (a : InfinitesimalLifts f j a₀ b U), Function.Bijective (fun h ↦ act U h a)) ∧ IsInfinitesimalAddition f a₀ b M I H e act",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-906079890",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Re-delivery after a919 RETURN H2/H11. Both Lean files byte-identical to a919. Item stmt_deps now drop lem-trf-scheme-zariski-etale-quasi-coherent-equivalence and lem-trf-space-enlarged-etale-ringed-site-model and add def-trf-scheme-algebraic-space, def-sfb-space-small-ringed-model and def-sfb-space-quasi-coherent-algebra, exactly as requested. Against base, stmt_deps only gain landed def nodes; no theorem stmt_dep. Second reading is now a real clause-by-clause reading. Own reading: hf chart test, first-order j with no affineness, comm, canonical Omega (omega of cotangentRingMap via smallModuleEquivalence), E tensor pullback, homObj, ThickeningSiteModel/SquareZeroIdeal pinned (cartesian, quotient=Gamma, exact kernel, scalar law), exists qcoh H with ulift iso to j_*Hom plus scalar clause, lift sheaf with both equations, action zero/add/naturality/orbit-bijective with no existence, IsInfinitesimalAddition sign c#=a#+D as in 0618/0619. Edge cases OK; no hollow data; docstrings OK; imports all exist on live. Advisory: Q42 17ffdcf1 (unlanded) spaceRelativeDifferentials has the same body as relativeDifferentialModule, so the second to land should become an abbrev of the def-node decl; homObj (def-pur-sheaf-hom) and representable_etale_scheme_tests (Prop only) owners not in stmt_deps; Omega chart clause is Nonempty only. No file changed, so no compile."
+ }
+}

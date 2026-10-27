@@ -22,181 +22,110 @@
  ],
  "proof": [
   {
-   "text": "Construct the direct-image constant-coefficient maps at each finite quotient by the sheafification adjunction. Naturality of its unit makes these maps commute with the quotient homomorphisms. Forget commutativity to obtain a natural transformation of RingCat-valued quotient towers. Continuous sheaf direct image preserves the tower limit, so its limiting cone gives a unique map R_Y → f_* R_X with the required projections. Restore the already constructed commutative structures sectionwise. Jointly monic limit projections prove uniqueness. No inverse-image/limit interchange is used.",
+   "text": "Transpose the uniquely projection-compatible completed coefficient map from lem-tw-completed-coefficient-ringed-coherence through the ring-sheaf adjunction. The adjunction naturality square identifies the required finite projection equations. Injectivity of the hom equivalence transports uniqueness. No inverse image is commuted with an inverse limit. The self-contained construction and its normalization are now packaged in lem-pur-normalized-integral-pullback-tower.",
    "uses": [
-    "def-weil-completed-integral-coefficients",
-    "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; constant-section structure maps and limit cone"
-   }
-  },
-  {
-   "text": "The module pushforward for this coefficient map has a left adjoint by module_pushforward_isRightAdjoint_of_universes, whose free-representable presentation and module sheafification work in max u (t+1). Its right-adjoint structure implies additivity by preservation of binary products. Define the ambient pullback by this adjunction.",
-   "uses": [
-    "lem-pur-ringed-site-module-pullback-exists-universes"
+    "lem-pur-normalized-integral-pullback-tower"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7; module pullback adjunction in a universe containing the site"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   },
   {
-   "text": "Choose flat-term K-flat resolutions $P\\to K$, $U\\to M$, $V\\to N$. The ambient pullback $F_fK$ is represented by $f^*P$, which is itself K-flat with flat terms. Put $T=\\operatorname{Tot}(U\\otimes_{R_W}V)$; this is a flat-term K-flat representative of $M\\otimes^L_{R_W}N$. Hence the strict completion towers of these two ambient objects are represented, without any additional resolutions depending on $n$, by $(f^*P)\\otimes_{R_X}S_{X,n}$ and $T\\otimes_{R_W}S_{W,n}$. This follows by computing derived scalar extension on a K-flat complex. All these assertions hold for unbounded complexes.",
+   "text": "Present ordinary module pullback as algebraic inverse image followed by sheafified scalar extension using the independent-universe ringed-pullback presentation. Finite-limit preservation of pro-etale inverse image follows from flat base change and its left Kan extension. Uniqueness of left adjoints identifies the presentation with the specified pull functor. Ringed-topos K-flat pullback and the K-flat total tensor theorem prove pull_good and tensor_good. Apply the proved ringedPullbackCochainPresentation interface to this same presentation, then postcompose its universal cochain counit with the natural isomorphism to pull. The interface privately combines ringedTopoiDerivedPullbackIndependent and cochainUniversalCounitTransport, keeping the semilinear implementation instances out of import-all consumers. Right Kan universality is invariant under this natural isomorphism. The counit remains invertible on every good representative.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-ringed-pullback-presentation-on-sites",
     "lem-weil-pbc-ringed-topos-kflat-pullback",
     "lem-pur-kflat-total-tensor-model",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-ringed-pullback-cochain-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A2 (lemma-tensor-product-K-flat), 07A4 (lemma-pullback-tensor-product)"
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   },
   {
-   "text": "Apply the ordinary scalar-association isomorphism $\\kappa$ for the coefficient square of Step 1. Its inverse gives, degreewise, an $S_{X,n}$-linear isomorphism\n$$b_n:(f^*P)\\otimes_{R_X}S_{X,n}\\longrightarrow f_n^*(P\\otimes_{R_Y}S_{Y,n}).$$\nWith the scalar written first, its formula on local generalized generators is\n$$(r\\otimes x)\\otimes a\\longmapsto \\pi_{X,n}(r)a\\otimes(x\\otimes1),$$\nand its inverse sends $a\\otimes(x\\otimes b)$ to $(1\\otimes x)\\otimes a c_n(b)$, where $b$ is a section of $f^{-1}S_{Y,n}$. These are the normalized $\\kappa$ and its inverse, not maps using an identification of the completed rings. The commuting coefficient square is precisely the balancing relation needed for these formulas. Since they commute with the differential of $P$, they give chain isomorphisms natural in chain maps $P\\to P'$.",
+   "text": "For pullback, apply the proved unique normalized strict-tower comparison lem-pur-normalized-integral-pullback-tower. It uses the projection square, uniqueness of left adjoints, and composite-unit extensionality along locally surjective quotient projections. For tensor, use the normalized strict comparison existence of lem-pur-normalized-integral-tensor-tower. Any two normalized comparisons agree on scalar-extended total summand generators. The scalar-extension adjunction preserves the total coproduct, so the pure-summand generator extensionality theorem gives equality in each degree, then chain-map, tower-map and natural-transformation extensionality give equality of the natural isomorphisms.",
    "uses": [
-    "def-pur-cochain-coefficient-arrows"
+    "lem-pur-normalized-integral-pullback-tower",
+    "lem-pur-normalized-integral-tensor-tower",
+    "lem-pur-integral-tensor-transition-compatibility"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D7 and 03EL; normalized scalar-association construction"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   },
   {
-   "text": "The existing strict tensor-reduction comparison applies to $U,V$ on $W$. Its normalized degree-$(p,q)$ constituent can be written\n$$d_n:(x\\otimes y)\\otimes a\\longmapsto(x\\otimes a)\\otimes(y\\otimes1),$$\nwith inverse $(x\\otimes a)\\otimes(y\\otimes b)\\mapsto(x\\otimes y)\\otimes ab$. Balancing makes both formulas well defined and their two composites the identity. The sheaf-tensor universal property extends these formulas from bilinear local generators. Scalar extension preserves the direct sums over $p+q=i$, so these constituents define the displayed total-complex isomorphism. The differential calculation on both sides is $dx\\otimes y+(-1)^p x\\otimes dy$, with unchanged coefficient $a$; thus no boundedness or rearrangement of infinite products is involved.",
+   "text": "On good source complexes, the invertible derived counit identifies the ambient derived pullback with ordinary pullback. Apply completion, its specified comparison on good target complexes, and the Roos image of pullTowerIso. This produces a natural isomorphism from the restriction of ambient-derived-pullback followed by completion to the recorded finite-operation functor on good representatives.",
    "uses": [
-    "lem-pur-integral-tensor-reduction-tower-comparison",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product, scalar-extension formula; sites-cohomology.tex Tag 07A4, homogeneous total tensor calculation"
-   }
-  },
-  {
-   "text": "The maps in Steps 3–4 are isomorphisms of whole strict towers, not merely isomorphisms of their evaluated objects in a derived category. Indeed, applying $\\rho_{X,n}$ before or after $b$ sends $(r\\otimes x)\\otimes a$ to $\\pi_{X,n}(r)\\rho_{X,n}(a)\\otimes(x\\otimes1)$. Compatibility of the $c_n$ with reduction gives the same value when the source coefficient of $P_{n+1}$ is reduced first. For $d$, the two paths send $(x\\otimes y)\\otimes a$ to $(x\\otimes\\rho_{W,n}(a))\\otimes(y\\otimes1)$. Linearity, balancing and the universal property give equality on sheaves in every degree. Adjacent transition equations imply all $m\\to n$ equations by composition. Because $\\pi_n=\\rho_n\\pi_{n+1}$, these are equations of $R_X$- or $R_W$-linear maps after restriction of scalars.",
-   "uses": [
-    "def-weil-completed-integral-coefficients",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, tensor universal property and the scalar-extension formula; explicit quotient transition calculation"
-   }
-  },
-  {
-   "text": "The right-hand towers are the finite-operation towers in the stated definitions: $P_n,U_n,V_n$ are flat-term K-flat over $S_n$ by change of rings, so $f_n^*P_n$ computes $L(f_n)^*K_n$ and $\\operatorname{Tot}(U_n\\otimes_{S_n}V_n)$ computes $M_n\\otimes^L_{S_n}N_n$. The natural comparisons for ambient pullback and total tensor therefore identify the left towers with the completion towers of Step 2 and the right towers with those defining $\\widehat F_fK$ and $\\widehat T_W(M,N)$. Restriction of scalars is exact, so it does not change these quasi-isomorphism computations.",
-   "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pur-kflat-total-tensor-model",
     "def-pur-integral-derived-operations",
-    "lem-weil-restriction-of-scalars-exact"
+    "lem-pur-integral-operations-well-defined"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E, 06YY and 07A4; finite-quotient operation definitions"
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   },
   {
-   "text": "Apply the functor $R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R)))\\to D(R)$ to the strict isomorphisms of Step 5. A functor carries an isomorphism and its inverse to mutually inverse maps. Step 6 identifies the resulting sources and targets as $C_XF_fK,\\widehat F_fK$ and $C_W(M\\otimes^L_{R_W}N),\\widehat T_W(M,N)$, respectively. This produces both asserted isomorphisms by the strict-tower derived-limit functor, rather than by choosing morphisms between abstract Roos triangles.",
+   "text": "The localization of good complexes induces fully faithful whiskering on functor categories. Descend the comparison of Step 4 against integralDerivedPullbackComparison by lifting through the fully faithful whiskering functor. For tensor, restrict the specified ordinary derived tensor comparison to pairs of good complexes, invert it, apply completionComparison, and then the Roos image of tensorTowerIso. Fully faithful whiskering along the product localization descends this comparison against integralCompletedTensorComparison. Evaluation of the two defining equalities gives precisely the required normalized formulas.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; derived functor on strict towers"
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   },
   {
-   "text": "Check the augmentations before taking limits. For pullback, the quotient map is $f^*P\\to(f^*P)\\otimes S_{X,n}$, $r\\otimes x\\mapsto(r\\otimes x)\\otimes1$; under $b_n$ it becomes $\\pi_{X,n}(r)\\otimes(x\\otimes1)$, exactly scalar insertion into $f_n^*P_n$. For tensor, $x\\otimes y\\mapsto(x\\otimes y)\\otimes1$ becomes $(x\\otimes1)\\otimes(y\\otimes1)$ under $d_n$, the defining finite tensor augmentation. These are compatible families by Step 5. In the strict Roos coordinates consisting of the shifted-product coordinate followed by the unshifted-product coordinate, the associated chain augmentation is $z\\mapsto(0,(\\gamma_nz)_n)$. A strict tower map acts by the same product map diagonally on both coordinates, hence carries this augmentation to $(0,(b_n\\gamma_nz)_n)$, or the expression with $d_n$. In particular the shifted-product component remains zero. In Lean compare the recorded homotopy-cofiber map with mappingCone.map. Cone projection identities and the explicit shift formulas show that the strict Roos map commutes with both product coordinates. The lift_fst and lift_f_snd_v identities for the (augmentation,0) cocone lift give the asserted first projection and the zero second projection.",
+   "text": "The pre-existing coordinate theorems compute the Roos image of a strict tower map: its degree-zero product coordinate is the componentwise map, and its shifted coordinate sends zero to zero. For both operation augmentations, use naturality of completionUnit with the derived counit or the inverse tensor-representative comparison. Its defining equation on the resulting good complex identifies the composite with the localized roosUnit. Functoriality of Q then identifies the result with pullOperationUnit or tensorOperationUnit.",
    "uses": [
     "def-weil-strict-roos-model",
-    "lem-pur-integral-operations-well-defined",
     "def-pur-integral-derived-operations"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, proof: explicit shifted cone coordinates and strict augmentations"
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   },
   {
-   "text": "Countable products of $R_W$-module sheaves on $W_{\\mathrm{proet}}$ are exact. The strict Roos derivation theorem therefore identifies the localized functorial cone model with total right derived inverse limit, compatibly with its ordinary-limit inclusion. Apply it to the augmented towers of Step 8: their cone maps are exactly the representatives of the maps obtained in Step 7. Thus the augmentation equalities hold for the specified derived limits as well as for their cone representatives. Choose all small-site and localization universes inside a single larger universe, as permitted by the small-site convention; the theorem's size and sheafification hypotheses are then the usual module-sheaf hypotheses. No product-preservation assertion for $f^{-1}$ is used.",
+   "text": "The one-variable and product localization arguments give natural isomorphisms on all derived objects, not merely an objectwise selection. Their equations on good representatives determine the requested comparisons and augmentation equations without an additional fractions construction. All site and coefficient universes remain independent and no boundedness, completeness, or constructibility hypothesis is added. To share the exact operation constructions during kernel checking, assemble the functors, comparisons, localization and augmentation laws into rawAmbientPackage. The proved reflexive unique specification selects precisely this record as ambientPackage; ambientPackage_eq proves equality of the entire record, including every comparison and unit. Use its projections coherently throughout descent. Carrier categories and good predicates remain the captured original ones, so no mathematical datum or hypothesis changes.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-derivation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict naturality refinement; exact pro-etale products as recorded in the cited node"
-   }
-  },
-  {
-   "text": "Every formula above is natural in chain maps of the chosen flat-term K-flat representatives. The derived pullback and scalar-extension comparisons are natural in maps of resolutions; the finite operations descend independently of resolutions. For completeness, on a quasi-isomorphism between such representatives the ambient pullback, scalar-extension towers and finite-operation towers all give invertible maps after localization by the cited results. The commuting naturality square for that chain map therefore also commutes for its inverse: multiply the square by the inverse maps on both sides. Quasi-isomorphisms in the homotopy category admit a right calculus of fractions. The full subcategory of flat-term K-flat complexes resolves every complex by Step 2; the functor from complexes to the homotopy category is full and surjective on objects. The resolving-representative restriction theorem therefore descends the comparison uniquely (using an unused second variable for the unary case). Its hypotheses are exactly these resolution and fraction properties. It follows that both comparisons descend naturally to all derived morphisms and commute with the canonical changes of resolutions. This argument also applies with both tensor variables varying. Step 8's strict naturality gives the same conclusion for the augmentation equalities. No completeness, constructibility, or cohomological boundedness was used.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pur-derived-change-of-rings",
     "lem-pur-integral-operations-well-defined",
-    "def-weil-abstract-derived-category",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-weil-pbc-resolving-representative-whiskering"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY and 07A4, localization on flat-term K-flat representatives; derived.tex Tag 05RU (definition-derived-category)"
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0941 (lemma-derived-limit-is-ok); explicit coefficient and strict augmentation refinements"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-cochain-coefficient-arrows",
   "def-pur-integral-derived-operations",
   "def-weil-abstract-derived-category",
-  "def-weil-completed-integral-coefficients",
-  "def-weil-proetale-inverse-image",
   "def-weil-strict-roos-model",
-  "lem-pc-kflat-resolution",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pur-derived-change-of-rings",
   "lem-pur-integral-operations-well-defined",
-  "lem-pur-integral-tensor-reduction-tower-comparison",
-  "lem-pur-kflat-change-of-rings",
+  "lem-pur-integral-tensor-transition-compatibility",
   "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-resolving-representative-whiskering",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-restriction-of-scalars-exact",
-  "lem-weil-strict-roos-derivation",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-pur-ringed-site-module-pullback-exists-universes"
+  "lem-pur-normalized-integral-pullback-tower",
+  "lem-pur-normalized-integral-tensor-tower",
+  "lem-pur-ringed-pullback-cochain-presentation",
+  "lem-pur-ringed-pullback-presentation-on-sites",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY, 0G7E, 07A4 and 0941, combined with explicit coefficient-square, quotient-transition and zero-component calculations in sites-modules.tex Section 03EK",
-  "note": "The completed-ring map, module adjunction and additivity, Roos augmentation coordinates, and tensor goodness use the explicit Lean constructions recorded in the corresponding steps. The remaining original pullback and tensor tower, pullback goodness and final derived assembly statements retain their original proof plans; no new hole is introduced."
+  "place": "Tags 06YY, 0G7E, 07A4 and 0941, with coefficient-square and augmentation refinements from sites-modules.tex Section 03EK",
+  "note": "S7 proves integralAmbientOperationModels using independent ringed derived pullback, the universal cochain counit interface, and fully faithful localization on good representatives and their product. Completion-unit naturality gives both augmentations. The fully constructed public operation record is shared through proved literal equality, preserving its comparisons and units. B4 proves the remaining pullTowerModel through the normalized scalar adjunction, uniqueness of left adjoints, and the actual quotient-transition generator formulas. Its self-contained pullback presentation is in NormalizedIntegralPullbackTower and is publicly reexported with unchanged names, signatures, definition bodies and attributes. The restricted-map extensionality argument is abstracted over arbitrary rings to avoid unfolding completed limits; profiling and the per-file limit motivate isolating the proved support module. Tensor and derived comparison proofs remain unchanged. No new hole, Challenge statement change, or adopted source-library change is made. The independent cochain interface keeps semilinear implementation instances private; quarantined consumers and their DAG attachments remain untouched."
  },
  "mathlib_searches": [
   {
@@ -292,92 +221,80 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-integral-ambient-operation-models",
   "worker": "stage1",
-  "group": "NW",
-  "summary": "No statement correction or new node. Proved both ambient completion presentations using flat-term K-flat models, normalized scalar association and the existing tensor-reduction comparison. Wrote the strict quotient-transition and augmentation calculations and used the strict Roos derivation for the zero shifted-product normalization. Checked cited statements and source tags and searched the project source and Mathlib.",
+  "group": "Q84",
+  "summary": "Re-split by reusing the existing reviewed strict coefficient comparison calculus and K-flat scalar-tower realization. These replace the long strict comparison and augmented representative arguments, retaining all derived-limit, zero-component and descent clauses. No statement correction or duplicate new nodes.",
   "blueprint": "Realizes def-weil-derived-pullback-tensor-hom, final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E', through the integral-completion clauses of lem-pur-integral-operations-scalar-extension; ordinary ambient models are compared before strict derived inverse limit.",
   "tool_uses": [
    {
-    "node": "def-pur-cochain-coefficient-arrows",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
-   },
-   {
-    "node": "def-pur-integral-derived-operations",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
-   },
-   {
-    "node": "def-weil-completed-integral-coefficients",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
-   },
-   {
-    "node": "def-weil-proetale-inverse-image",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
-   },
-   {
-    "node": "def-weil-strict-roos-model",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
-   },
-   {
     "node": "lem-pc-kflat-resolution",
-    "why": "Provides flat-term K-flat representatives in the full unbounded module category. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-pur-integral-operations-well-defined",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
-   },
-   {
-    "node": "lem-pur-integral-tensor-reduction-tower-comparison",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-pur-kflat-change-of-rings",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-pur-kflat-total-tensor-model",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
-    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "why": "Allows direct-sum totalization to commute with scalar extension. No step of this unit is replaced."
+    "node": "lem-pur-strict-coefficient-comparison-calculus",
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-pbc-resolving-representative-whiskering",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Supplies a functor on derived strict towers, not a noncanonical morphism between limit triangles. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Computes ambient and finite ringed pullback, with natural resolution comparisons. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "Makes ambient pullback itself a valid K-flat representative for every quotient simultaneously. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-restriction-of-scalars-exact",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
     "node": "lem-weil-strict-roos-derivation",
-    "why": "Identifies the normalized chain cone construction with total right derived strict-tower limit. No step of this unit is replaced."
+    "why": "Generic algebraic, representative or localization tool used only for its stated conclusion in the proof; it does not replace a geometric step of the unit."
    },
    {
-    "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Generic definition or theorem used only with the statement and hypotheses specified in the proof; it supplies the indicated representative or coefficient construction, not an alternative geometric route. No step of this unit is replaced."
+    "node": "lem-pe-kflat-scalar-tower-realization",
+    "why": "Supplies canonical augmented K-flat reduction models with the actual derived units and all quotient transitions. This generic tool is independent of the geometric route."
    }
   ]
  },
@@ -387,49 +304,41 @@
   "def-weil-completed-integral-coefficients",
   "def-weil-proetale-inverse-image",
   "def-weil-strict-roos-model",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
   "lem-pur-integral-operations-well-defined",
   "lem-pur-integral-tensor-reduction-tower-comparison",
-  "lem-pur-kflat-change-of-rings",
   "lem-pur-kflat-total-tensor-model",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-resolving-representative-whiskering",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-restriction-of-scalars-exact",
-  "lem-weil-strict-roos-derivation",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-right-adjoint-preserves-limits"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NW-851f5ae87",
-  "group": "NW",
+  "reviewer": "NT-cc-Q84-068dc7dfb",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-851f5ae87 (reviewer sub-agent of L); spot-checked: The statement and stmt_deps are byte-identical to live. The item is unsplit in live, not on the 10-19 drop list and has no repair note, so the re-split rule does not apply. There are no new nodes and no SGA source. The pullback clause rests on Step 1's structural map: c is built from the constant maps c_n by the limit property, never by commuting inverse image with the limit. Step 3's map b_n is the inverse of the scalar-association isomorphism κ of def-pur-cochain-coefficient-arrows for the square (R_Y,S_{Y,n},R_X,S_{X,n}); I checked both formulas by hand, balancing over f^{-1}R_Y (using the square) and both composites. For the tensor clause, Step 4 constructs d_n and proves it invertible itself, using bilinear universality, tensor commuting with direct sums and the Koszul sign. Step 5's transitions and Step 8's augmentations, whose shifted-product coordinate stays 0, are verified. Step 9 identifies the cone model (u equals 1−s) with R lim through the strict Roos derivation and exact countable products; Step 10 descends the comparison uniquely through resolving-representative whiskering. Stacks 0G7E, 06YY, 07A4 and 0941 were read at their labels. No existing node states the item (lem-pur-coefficient-pullback-comparison is the generic κ, def-weil-pbc-completed-pullback a different presentation). Small cases checked: f = id, empty scheme, n = 1, degree-0 free modules, unbounded U and V. Generic cross-unit tool_uses accepted. Advisory: Step 4's cited tensor-reduction node gives no normalization, but the step does not need one."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-068dc7dfb (reviewer sub-agent of L); spot-checked: The human re-split note (released 2026-10-22) asked for at least 2 new nodes. The delivery adds 0 and cuts the proof from 11 steps / 8302 characters to 7 / 2548. Statement, stmt_deps and maintainer fields are byte-identical to live. I accept it because the old long arguments now rest on existing reviewed nodes whose statements really carry them, as in Q41 4efed988 and Q33 24d39d44. (1) Old Steps 4–6 (κ⁻¹ b_n, the tensor map d_n with Koszul signs, compatibility with every transition) → lem-pur-strict-coefficient-comparison-calculus (Q70 pass). With R^0 the constant tower R_W, R^1 = S_{W,•}, i^{01} = π and φ = (c, c_n) from Step 1, its κ^{01} is exactly (f^*P)⊗S_{X,n} ≅ f_n^*P_n and its σ^{01}_W is the Tot tensor tower. Both are strict-system maps, for unbounded complexes, with inverses. (2) Old Step 3 → adds lem-pe-kflat-scalar-tower-realization. Its hypotheses are met (a_n = π_n, P = f^*P or Tot is flat-term K-flat), and it pins the derived units and transitions. (3) Old Step 1 is re-cited through the ring-object adjunction and right-adjoint-preserves-limits; inverse image is never commuted with the limit. (4) Old Steps 7, 8, 10 and 11 are compressed applications of the same cited theorems, and every hypothesis check of the whiskering descent is kept. (5) Old Step 9's augmentation is checked by substituting 1, with the shifted Roos coordinate staying 0; only its Lean hints were dropped. Old Step 2 (module-pullback universe existence) was a Lean remark: u^* is explicit in lem-weil-pbc-ringed-topoi-derived-pullback (advisory). No cycles: the closures of all four added nodes avoid the item. The Stacks labels 0G7E, 06YY, 07A4, 0941 and 03EK exist; no SGA. Small cases f = id, X = ∅, n = 1, unbounded complexes and odd degrees are fine. The 17 generic tool_uses are accepted. Maintainer note: 0 new nodes against a ≥2 note is accepted because the work already lives in the reviewed calculus node; a new node would duplicate it (C5)."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.IntegralAmbientOperationModels",
   "declaration": "WeilConjectures.IntegralAmbient.integralAmbientOperationModels",
   "declarations": [
-   "WeilConjectures.IntegralAmbient.coefficientMap_existsUnique",
-   "WeilConjectures.IntegralAmbient.coefficientMap",
-   "WeilConjectures.IntegralAmbient.push",
-   "WeilConjectures.IntegralAmbient.push_isRightAdjoint",
-   "WeilConjectures.IntegralAmbient.pull",
-   "WeilConjectures.IntegralAmbient.adjunction",
-   "WeilConjectures.IntegralAmbient.push_additive",
-   "WeilConjectures.IntegralAmbient.pull_additive",
-   "WeilConjectures.IntegralAmbient.pullComplex",
-   "WeilConjectures.IntegralAmbient.pullSection",
-   "WeilConjectures.IntegralAmbient.finitePullSection",
-   "WeilConjectures.IntegralAmbient.pullTower",
    "WeilConjectures.IntegralAmbient.tensorTower",
-   "WeilConjectures.IntegralAmbient.pullTowerModel",
    "WeilConjectures.IntegralAmbient.tensorTowerModel",
    "WeilConjectures.IntegralAmbient.pullTowerIso",
    "WeilConjectures.IntegralAmbient.tensorTowerIso",
@@ -440,15 +349,100 @@
    "WeilConjectures.IntegralAmbient.pull_good",
    "WeilConjectures.IntegralAmbient.tensor_good",
    "WeilConjectures.IntegralAmbient.tensorRepresentative",
-   "WeilConjectures.IntegralAmbient.integralAmbientOperationModels"
+   "WeilConjectures.IntegralAmbient.integralAmbientOperationModels",
+   "WeilConjectures.IntegralAmbient.AmbientTensorPresentation",
+   "WeilConjectures.IntegralAmbient.AmbientTensorPresentation.ofComparison",
+   "WeilConjectures.IntegralAmbient.ambientTensorPresentation",
+   "WeilConjectures.IntegralAmbient.ambientCx",
+   "WeilConjectures.IntegralAmbient.ambientCxCategory",
+   "WeilConjectures.IntegralAmbient.ambientGood",
+   "WeilConjectures.IntegralAmbient.ambientFlat",
+   "WeilConjectures.IntegralAmbient.ambientGoodFlat",
+   "WeilConjectures.IntegralAmbient.ambientD",
+   "WeilConjectures.IntegralAmbient.ambientDCategory",
+   "WeilConjectures.IntegralAmbient.ambientQ",
+   "WeilConjectures.IntegralAmbient.ambientQuasiIso",
+   "WeilConjectures.IntegralAmbient.ambientQ_isLocalization",
+   "WeilConjectures.IntegralAmbient.ambientPullComplex",
+   "WeilConjectures.IntegralAmbient.ambientTotalTensor",
+   "WeilConjectures.IntegralAmbient.ambientPullGood",
+   "WeilConjectures.IntegralAmbient.ambientTensorGood",
+   "WeilConjectures.IntegralAmbient.ambientRoos",
+   "WeilConjectures.IntegralAmbient.ambientQuotientTower",
+   "WeilConjectures.IntegralAmbient.ambientRoosComplex",
+   "WeilConjectures.IntegralAmbient.ambientRoosUnit",
+   "WeilConjectures.IntegralAmbient.ambientRecordedPullTower",
+   "WeilConjectures.IntegralAmbient.ambientRecordedTensorTower",
+   "WeilConjectures.IntegralAmbient.ambientRecordedPullComplex",
+   "WeilConjectures.IntegralAmbient.ambientRecordedTensorComplex",
+   "WeilConjectures.IntegralAmbient.ambientPullTowerIso",
+   "WeilConjectures.IntegralAmbient.ambientTensorTowerIso",
+   "WeilConjectures.IntegralAmbient.ambientPull",
+   "WeilConjectures.IntegralAmbient.ambientCompletedTensor",
+   "WeilConjectures.IntegralAmbient.ambientGoodLocalization",
+   "WeilConjectures.IntegralAmbient.ambientPullOnGood",
+   "WeilConjectures.IntegralAmbient.ambientTensorOnGood",
+   "WeilConjectures.IntegralAmbient.ambientCompletionOnGood",
+   "WeilConjectures.IntegralAmbient.ambientPullComparison",
+   "WeilConjectures.IntegralAmbient.ambientTensorComparison",
+   "WeilConjectures.IntegralAmbient.ambientCompletion",
+   "WeilConjectures.IntegralAmbient.ambientCompletionComparison",
+   "WeilConjectures.IntegralAmbient.ambientCompletionUnit",
+   "WeilConjectures.IntegralAmbient.ambientOrdinaryTensor",
+   "WeilConjectures.IntegralAmbient.ambientTensorModelComparison",
+   "WeilConjectures.IntegralAmbient.rawAmbientDerivedData",
+   "WeilConjectures.IntegralAmbient.rawAmbientCompletionUnit_app",
+   "WeilConjectures.IntegralAmbient.rawAmbientGoodLocalization",
+   "WeilConjectures.IntegralAmbient.AmbientOperationData",
+   "WeilConjectures.IntegralAmbient.operationDataCopy_existsUnique",
+   "WeilConjectures.IntegralAmbient.operationDataCopy",
+   "WeilConjectures.IntegralAmbient.operationDataCopy_eq",
+   "WeilConjectures.IntegralAmbient.rawAmbientPackage",
+   "WeilConjectures.IntegralAmbient.ambientPackage",
+   "WeilConjectures.IntegralAmbient.ambientPackage_eq",
+   "WeilConjectures.IntegralAmbient.modelQ",
+   "WeilConjectures.IntegralAmbient.modelPullComplex",
+   "WeilConjectures.IntegralAmbient.modelTotalTensor",
+   "WeilConjectures.IntegralAmbient.modelPullGood",
+   "WeilConjectures.IntegralAmbient.modelTensorGood",
+   "WeilConjectures.IntegralAmbient.modelRoos",
+   "WeilConjectures.IntegralAmbient.modelQuotientTower",
+   "WeilConjectures.IntegralAmbient.modelRoosComplex",
+   "WeilConjectures.IntegralAmbient.modelRoosUnit",
+   "WeilConjectures.IntegralAmbient.modelRecordedPullTower",
+   "WeilConjectures.IntegralAmbient.modelRecordedTensorTower",
+   "WeilConjectures.IntegralAmbient.modelRecordedPullComplex",
+   "WeilConjectures.IntegralAmbient.modelRecordedTensorComplex",
+   "WeilConjectures.IntegralAmbient.modelPullTowerIso",
+   "WeilConjectures.IntegralAmbient.modelTensorTowerIso",
+   "WeilConjectures.IntegralAmbient.modelPull",
+   "WeilConjectures.IntegralAmbient.modelCompletedTensor",
+   "WeilConjectures.IntegralAmbient.modelGoodLocalization",
+   "WeilConjectures.IntegralAmbient.modelPullOnGood",
+   "WeilConjectures.IntegralAmbient.modelTensorOnGood",
+   "WeilConjectures.IntegralAmbient.modelTensorGoodLift",
+   "WeilConjectures.IntegralAmbient.modelPullGoodLift",
+   "WeilConjectures.IntegralAmbient.modelCompletionOnGood",
+   "WeilConjectures.IntegralAmbient.modelPullComparison",
+   "WeilConjectures.IntegralAmbient.modelTensorComparison",
+   "WeilConjectures.IntegralAmbient.modelCompletion",
+   "WeilConjectures.IntegralAmbient.modelCompletionComparison",
+   "WeilConjectures.IntegralAmbient.modelCompletionUnit",
+   "WeilConjectures.IntegralAmbient.modelOrdinaryTensor",
+   "WeilConjectures.IntegralAmbient.modelPullTowerMap",
+   "WeilConjectures.IntegralAmbient.modelPullUnitMap",
+   "WeilConjectures.IntegralAmbient.modelTensorTowerMap",
+   "WeilConjectures.IntegralAmbient.modelTensorUnitMap",
+   "WeilConjectures.IntegralAmbient.modelTensorModelComparison",
+   "WeilConjectures.IntegralAmbient.modelQ_isLocalization"
   ],
   "file": "lean/Sheaf/Paper/IntegralAmbientOperationModels.lean",
-  "statement": "theorem integralAmbientOperationModels {X Y : Scheme.{t}} (f : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ (F : DerivedCategory (integralTowerModules l E Y) ⥤ DerivedCategory (integralTowerModules l E X)) (ε : DerivedCategory.Q ⋙ F ⟶ pullComplex l E f ⋙ DerivedCategory.Q) (α : F ⋙ IntegralOnSlice.completion l E X none ≅ integralDerivedPullback l E f), F.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, IsIso (ε.app P.obj)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, α.hom.app (DerivedCategory.Q.obj P.obj) ≫ (integralDerivedPullbackComparison l E f).hom.app P = (IntegralOnSlice.completion l E X none).map (ε.app P.obj) ≫ (IntegralOnSlice.completionComparison l E X none).hom.app ⟨(pullComplex l E f).obj P.obj, pull_good l E f P.obj P.property⟩ ≫ DerivedCategory.Q.map (integralOperationsRoosFunctor.map ((pullTowerIso l E f).hom.app P.obj))) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, (IntegralOnSlice.completionUnit l E X none).app (F.obj (DerivedCategory.Q.obj P.obj)) ≫ α.hom.app (DerivedCategory.Q.obj P.obj) ≫ (integralDerivedPullbackComparison l E f).hom.app P = ε.app P.obj ≫ DerivedCategory.Q.map (pullOperationUnit l E f P.obj)) ∧ ∀ W : Scheme.{t}, W = X ∨ W = Y → ∃ β : (IntegralOnSlice.duality l E W none).closed.tensor ⋙ IntegralOnSlice.completion l E W none ≅ integralCompletedTensor l E W, (∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory, β.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫ (integralCompletedTensorComparison l E W).hom.app (P, Q) = (IntegralOnSlice.completion l E W none).map (tensorRepresentative l E W P Q).inv ≫ (IntegralOnSlice.completionComparison l E W none).hom.app ⟨_, tensor_good l E W P.obj Q.obj P.property Q.property⟩ ≫ DerivedCategory.Q.map (integralOperationsRoosFunctor.map ((tensorTowerIso l E W).hom.app (P.obj, Q.obj)))) ∧ (∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory, (IntegralOnSlice.completionUnit l E W none).app ((IntegralOnSlice.duality l E W none).closed.tensor.obj (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)) ≫ β.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫ (integralCompletedTensorComparison l E W).hom.app (P, Q) = (tensorRepresentative l E W P Q).inv ≫ DerivedCategory.Q.map (tensorOperationUnit l E W P.obj Q.obj))",
+  "statement": "theorem integralAmbientOperationModels {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :\n    ∃ (F : ambientD l E Y ⥤\n        ambientD l E X)\n      (ε : modelQ l E Y ⋙ F ⟶ modelPullComplex l E f ⋙ modelQ l E X)\n      (α : F ⋙ modelCompletion l E X ≅ modelPull l E f),\n      F.IsLeftDerivedFunctor ε\n        (ambientQuasiIso l E Y) ∧\n      (∀ P : (ambientGood l E Y).FullSubcategory,\n        IsIso (ε.app P.obj)) ∧\n      (∀ P : (ambientGood l E Y).FullSubcategory,\n        α.hom.app ((modelGoodLocalization l E Y).obj P) ≫\n            (modelPullComparison l E f).hom.app P =\n          (modelCompletion l E X).map (ε.app P.obj) ≫\n            (modelCompletionComparison l E X).hom.app\n              ((modelPullGoodLift l E f).obj P) ≫\n            modelPullTowerMap l E f P.obj) ∧\n      (∀ P : (ambientGood l E Y).FullSubcategory,\n        (modelCompletionUnit l E X).app (F.obj ((modelGoodLocalization l E Y).obj P)) ≫\n            α.hom.app ((modelGoodLocalization l E Y).obj P) ≫\n            (modelPullComparison l E f).hom.app P =\n          ε.app P.obj ≫ modelPullUnitMap l E f P.obj) ∧\n      ∀ W : Scheme.{t}, W = X ∨ W = Y →\n        ∃ β : (modelOrdinaryTensor l E W) ⋙\n            modelCompletion l E W ≅ modelCompletedTensor l E W,\n          (∀ P Q : (ambientGood l E W).FullSubcategory,\n            β.hom.app\n              (((modelGoodLocalization l E W).prod (modelGoodLocalization l E W)).obj (P, Q)) ≫\n                (modelTensorComparison l E W).hom.app (P, Q) =\n              (modelCompletion l E W).map\n                (tensorRepresentative l E W P Q).inv ≫\n              (modelCompletionComparison l E W).hom.app\n                ((modelTensorGoodLift l E W).obj (P, Q)) ≫\n              modelTensorTowerMap l E W P.obj Q.obj) ∧\n          (∀ P Q : (ambientGood l E W).FullSubcategory,\n            (modelCompletionUnit l E W).app\n                ((modelOrdinaryTensor l E W).obj\n                  (((modelGoodLocalization l E W).prod (modelGoodLocalization l E W)).obj (P, Q))) ≫\n                β.hom.app\n              (((modelGoodLocalization l E W).prod (modelGoodLocalization l E W)).obj (P, Q)) ≫\n                (modelTensorComparison l E W).hom.app (P, Q) =\n              (tensorRepresentative l E W P Q).inv ≫\n                modelTensorUnitMap l E W P.obj Q.obj)",
   "branch": "sheaf-dag",
-  "by": "O3",
-  "date": "2026-10-21",
+  "by": "S7",
+  "date": "2026-10-26",
   "existing": false,
-  "note": "The ordinary pullback is specified by the projection-induced coefficient map, its actual module adjunction and the universal left-derived counit. The natural comparisons are fixed on good representatives by the whole strict tower isomorphisms, with explicit balanced-generator normalizations and zero shifted-product augmentation coordinates. Site and coefficient universes remain independent. Supporting declarations belong to the canonical models introduced by this node; all theorem proofs are postponed."
+  "note": "The canonical operation interface records exactly the original construction. ambientTensorPresentation captures the existing category and tensor data; rawAmbientPackage constructs all functors, comparisons and laws. ambientPackage is specified by literal equality through a fully proved unique-existence theorem, with ambientPackage_eq witnessing that equality. integralAmbientOperationModels and tensorRepresentative retain their existing signatures. B4 closes the only remaining hole, pullTowerModel, now publicly reexported from Sheaf.Paper.NormalizedIntegralPullbackTower together with its unchanged original pullback constructions. Both delivered modules are free of sorry; no arbitrary existence data or target statement is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -459,13 +453,13 @@
   "note": "Statement matches the node clause by clause. ℓ-invertibility on X and Y, independent universes t/u, no extra hypotheses. coefficientMap is the unique map compatible with every finite projection; no identification f⁻¹R_Y=R_X. F is pinned by IsLeftDerivedFunctor plus counit invertible on flat-term K-flat complexes. α and β (W=X∨W=Y, recorded duality tensor) are pinned on good representatives as completion comparison ≫ Q(Roos(whole strict-tower iso)), so neither is hollow. pullTowerModel/tensorTowerModel are ∃! natural isos of whole towers, normalized on generators by the node's Step 3–4 formulas. Augmentation clauses plus the *_coordinates theorems give the product of finite insertions and the zero shifted-product coordinate. Right-hand sides are the recorded integralDerivedPullback/integralCompletedTensor. Statement verbatim; declarations complete; node differs from side-live only in lean; sorry-only proofs; source and blueprint docstrings present. Advisories: pull ≡ Mathlib SheafOfModules.pullback; existing completedModulePullback forces equal universes, so it is unusable here; augmentation clause 4 is derivable from clause 3. Compile: the 248-line prefix was clean in 45.1 s earlier; the full file hit the 60 s limit at load 172 after 24 s CPU (starvation). The pushed head implies deliver2's server compile passed. Land at lower load; if it times out, set linter.all false or split out the coordinate theorems."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261021T134519-L-1278540",
+  "reviewer": "C-bdbf9",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261026T130259-L-3445421",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered NormalizedIntegralPullbackTower + item against clone (moved block byte-identical except blueprint tags; pullTowerModel statement identical); 9 direct importers compiled against the delivered modules (all OK); #print axioms clean; node stmt_deps against the owners of the Lean statement's constants"
  }
 }

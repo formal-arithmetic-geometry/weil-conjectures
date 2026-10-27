@@ -20,49 +20,55 @@
  ],
  "proof": [
   {
-   "text": "The inverse mate of each localized restriction square is an isomorphism because the horizontal functors are equivalences. Injectivity of the derived tensor/restriction Hom bijection shows that the unit equation uniquely fixes its components. Hence the supplied b_n is this normalized inverse mate.",
+   "text": "Restriction of scalars along the completed coefficient projection is fully faithful on ordinary sheaf modules: the projection is surjective on sections, hence locally surjective, and the sheaf restriction Hom equivalence applies. Paste the two supplied ordinary squares with the internal and section restriction compositors and cancel this fully faithful functor to obtain the finite restriction square. No identity-on-sections normalization is needed for this lifting.",
    "uses": [
-    "lem-stage3-inverse-mate-equivalences",
+    "lem-sp-completed-coefficient-regular-quotients",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compatibility of exact derived squares with composition to the lifted ordinary square. Cancelling the derived compositor isomorphisms gives the same restriction comparison square in the unbounded derived categories.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized DVR K-flat transition theorem, with identity representative isomorphism and the proved private normalized scalar-adjunction unit helper from normalized DVR effectivity, satisfies the representative characterization of sfDerivedReductionTransition. Uniqueness identifies the latter with the completed restriction of the adjoint of the smaller quotient unit. The legacy comparison supplies the already-proved equality of the ordinary quotient chain maps and their units. An auxiliary finite-field datum of characteristic 2 or 3, distinct from l, is constructed explicitly; the functors are independent of this datum.",
+   "uses": [
+    "lem-coef-normalized-dvr-kflat-transition",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the comparison between the two finite transition arrows through the upper-level derived scalar adjunction. The two given unit equations, naturality of the restriction square and the internal reduction-unit compatibility reduce both transposes to the smaller internal unit. Injectivity of the Hom bijection proves equality of finite transition arrows. Apply restriction, use the derived compositor square, and cancel the comparison isomorphisms to obtain the stated transition equation. The argument uses no boundedness, nonzero-object or nonempty-site assumption.",
+   "uses": [
+    "sk-def-pe-derived-completion",
     "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": true
-  },
-  {
-   "text": "Take an internal K-flat representative. The section reconstruction and relabelling along a ring isomorphism preserve K-flatness: apply the tensor comparison to every acyclic test complex and its image under the inverse equivalence. The normalized restriction square makes the balancing relation on the two finite tensor constructions identical, so the localized inverse mate is the comparison sending s tensor x to s tensor x.",
-   "uses": [
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The consecutive quotient chain map on both representatives sends s tensor x to rho(s) tensor x. This is finite-linear since the quotient projections compose. Its transpose is the smaller tensor unit, since rho(1)=1. The defining internal scalar adjunction, its canonical compositor, and the representative characterization of sfDerivedReductionTransition identify these chain maps with precisely the displayed transitions. Tensor generation and sheafification give equality before localization. Counit invertibility on K-flat representatives and naturality transport the equality to every derived K. The calculation also applies at n=0 and on the empty site.",
-   "uses": [
-    "sk-def-pe-derived-completion",
-    "def-weil-integral-reduction-tower",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-stage3-inverse-mate-equivalences",
+  "lem-sp-completed-coefficient-regular-quotients",
+  "def-coef-normalized-dvr-tower",
+  "lem-pod-derived-exact-square-composition",
+  "lem-coef-normalized-dvr-kflat-transition",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-sf-derived-complete-legacy-comparison",
   "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "def-pur-sheaf-tensor-product",
-  "sk-def-pe-derived-completion",
-  "def-weil-integral-reduction-tower"
+  "def-weil-integral-reduction-tower",
+  "sk-def-pe-derived-completion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-  "place": "The final coefficient-presentation comparison is expanded by the parent plan; the normalized component calculations here are written out."
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/_section.md",
+  "place": "Coefficient-presentation comparison, proved by full ordinary restriction, exact localization coherence, and normalized adjunction transposition; Q5, 2026-10-24."
  },
  "mathlib_searches": [
   {
@@ -143,13 +149,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R7",
+  "group": "Q5",
   "result": "pass",
-  "landing": "20261021T171836-L-3157810",
+  "landing": "20261024T190703-L-10647",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

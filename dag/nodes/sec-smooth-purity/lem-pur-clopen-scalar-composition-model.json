@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-clopen-scalar-composition-model",
+ "kind": "statement",
+ "title": "Derived scalar composition on a fixed flat K-flat model",
+ "statement": "For a fixed flat-term K-flat complex P and a flat-term K-flat restriction, the derived scalar composition square commutes provided the ordinary composition square commutes. The data and hypotheses are those of def-pur-clopen-derived-scalar-comparison-data: presentations p,q, Normalizations n,m, Comparison d with degree, representative, computed and extended, and the ordinary composition equation. There is no claim about arbitrary derived inputs or finite covers.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D, composition calculation on a flat K-flat representative; parent coherence proof."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "write E_a for ordinary extension and c_a for the canonical computation.\nPostcompose both paths by the image of the restriction factorization at P followed\nby c_(a_i b_i) on the restricted P. These are isomorphisms by computed. On the\nleft, use the ambient normalization representative and the comparison representative\nfor ab. On the right, use naturality to move c_a past the comparison for b, then\napply the comparison representatives for b at E_a P and for a at P. Extended gives\nflat terms and K-flatness for E_a P and its restriction, so all representative\nidentities used are available. Apply the component normalization representative\nat the restricted P. Naturality of the restriction factorization identifies its\nimages of cochain morphisms. After functoriality and reassociation, both expressions\nare the same computation morphisms followed by Q of the two cochain maps induced\nby the ordinary composition square. Their degree-k components agree by hordinary\nat P.X k and hdegree. Thus the cochain maps agree. Functor.map_comp transports\nidentify the actual same ring map and act by the corresponding equality maps on\ncomplexes. Cancel the postcomposed isomorphisms. There is no localization-density\nstep in this lemma: P is fixed. All computations also hold for zero rings and\nzero complexes, and no flatness of either coefficient map is assumed.",
+   "uses": [
+    "def-pur-clopen-derived-scalar-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The composition part of the fixed-model calculation in the parent node, separated from ordinary tensor generation and localization extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherence of normalized scalar extension comparisons on flat K-flat complexes under restriction, for composition and identity, by cancellation of computation counits",
+   "results": "Generic ModuleCat adjunction and associativity hits; no theorem for the recorded clopen comparison representative laws.",
+   "date": "2026-10-25",
+   "verdict": "The fixed-model counit calculation must be supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived natural transformations scalar extension restriction composition unit commute on a K-flat complex with flat terms using normalized counits",
+   "results": "Generic Derived.Adjunction factorization and ModuleCat tensor adjunction hits; no coherence theorem for this normalized restriction comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use normalized representatives and explicit cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "Exact Mathlib generic localization extensionality theorem, no representative coherence calculation.",
+   "date": "2026-10-25",
+   "verdict": "Use for extension from complexes in the parent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatTrans_comp|mapHomologicalComplexCompIso|mapDerivedCategoryFactors_hom_naturality",
+   "results": "Generic prolongation and exact-functor factorization tools found; no scalar restriction coherence equation.",
+   "date": "2026-10-25",
+   "verdict": "The new model calculation is the remaining application of these tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenScalarComparisonCoherence",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: finite-clopen restriction/scalar composition on a flat K-flat complex.",
+   "via": [
+    "lem-pur-clopen-scalar-comparison-coherence",
+    "lem-pur-clopen-derived-scalar-compositor",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenScalarCompositionModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenScalarCompositionModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_scalar_composition_model",
+  "statement": "theorem clopen_scalar_composition_model\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}\n    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := X.ProEt) (J := topology X) (hD := derived.{t, u} X) @p)\n    (m : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := Y.ProEt) (J := topology Y) (hD := derived.{t, u} Y) @q)\n    (d : Comparison.{t, u} j @p @q)\n    (hdegree : d.degree) (hrep : d.representative)\n    (hcomputed : d.computed) (hextended : d.extended)\n    (hordinary : ∀ {R S T : Sheaf (topology X) CommRingCat.{max u (t + 1)}}\n    (a : R ⟶ S) (b : S ⟶ T) (M : Mods.{t, u} R),\n    (res.{t, u} j T).map ((n.ordinary a b).hom.app M) ≫\n        (d.ordinary (a ≫ b)).hom.app M =\n      (d.ordinary b).hom.app ((ext.{t, u} (Z := X) (p a)).obj M) ≫\n        (ext.{t, u} (Z := Y) (q ((rings.{t, u} j).map b))).map ((d.ordinary a).hom.app M) ≫\n        (m.ordinary ((rings.{t, u} j).map a) ((rings.{t, u} j).map b)).hom.app ((res.{t, u} j R).obj\n          M) ≫\n        eqToHom (congrArg (fun f ↦ (ext.{t, u} (Z := Y) (q f)).obj ((res.{t, u} j R).obj M))\n          ((rings.{t, u} j).map_comp a b).symm))\n    {R S T : Sheaf (topology X) CommRingCat.{max u (t + 1)}}\n    (a : R ⟶ S) (b : S ⟶ T)\n    (P : CochainComplex (Mods.{t, u} R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := R) P)\n    (hf : ∀ k : ℤ, IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology X) (R :=\n      R) (P.X k))\n    (hiP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R :=\n      (rings.{t, u} j).obj R)\n      (((res.{t, u} j R).mapHomologicalComplex (.up ℤ)).obj P))\n    (hif : ∀ k : ℤ, IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology Y) (R :=\n      (rings.{t, u} j).obj R)\n      ((res.{t, u} j R).obj (P.X k))) :\n    (resD.{t, u} j T).map ((n.derived a b).hom.app (DerivedCategory.Q.obj P)) ≫\n        (d.derived (a ≫ b)).hom.app (DerivedCategory.Q.obj P) =\n      (d.derived b).hom.app ((extD.{t, u} (Z := X) (p a)).obj (DerivedCategory.Q.obj P)) ≫\n        (extD.{t, u} (Z := Y) (q ((rings.{t, u} j).map b))).map ((d.derived a).hom.app\n          (DerivedCategory.Q.obj P)) ≫\n        (m.derived ((rings.{t, u} j).map a) ((rings.{t, u} j).map b)).hom.app ((resD.{t, u} j R).obj\n          (DerivedCategory.Q.obj P)) ≫\n        eqToHom (congrArg (fun f ↦ (extD.{t, u} (Z := Y) (q f)).obj ((resD.{t, u} j R).obj\n          (DerivedCategory.Q.obj P)))\n          ((rings.{t, u} j).map_comp a b).symm)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202044-L-2669482",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202044-L-2669482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

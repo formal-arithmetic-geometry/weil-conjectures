@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-space-etale-atlas-topological-dimension",
+ "kind": "statement",
+ "title": "Topological dimension of a quasi-separated space is computed by an etale scheme atlas, including after base change",
+ "statement": "Let $B$ be a scheme [def-pc-scheme] and let $f:X\\to B$ be a morphism of algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Assume $f$ is quasi-separated: its representable diagonal $X\\to X\\times_BX$ is quasi-compact, meaning that its pullback to any scheme is a quasi-compact scheme morphism (inverse images of quasi-compact open subsets are quasi-compact). For any morphism of schemes $T\\to B$, put $X_T=X\\times_BT$ [lem-trf-space-fibre-products-etale-covers]. Let $a:U\\to X_T$ be a representable surjective etale morphism with $U$ a scheme [def-trf-algebraic-space]. Give $|X_T|$ its atlas topology [def-a1-space-point-topology], and use topological Krull dimension [def-kun-topological-krull-dimension] for both $|X_T|$ and the underlying space $|U|$. Then $\\dim|X_T|=\\dim|U|$. Empty spaces have dimension $-\\infty$. No finite-type, quasi-compactness, connectedness, or equidimensionality assumption is imposed on $X_T$ or $U$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0A4J, lemma-dimension-decent-space (2); spaces-properties.tex Tag 0A4H, lemma-dimension-decent-invariant-under-etale (3), with Tags 04N5 and 04N6, definitions of chart dimension; quasi-separated morphisms remain so after base change by spaces-morphisms.tex Tag 03KL, lemma-base-change-separated. Over affine opens of the scheme T, the resulting space is quasi-separated; hence it is Zariski locally quasi-separated and is decent by Tag 03JX, lemma-bounded-fibres."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X_T$ and $g:Y\\to T$. The fibre-product node supplies $Y$ as an algebraic space. Via its structure map $g$ we regard $Y$ as an algebraic space over $T$: restriction to $T$-schemes is an equivalence between algebraic spaces over $B$ with a map to $T$ and algebraic spaces over $T$, which keeps the same etale scheme charts, hence the same point set, atlas topology and local rings. The diagonal $\\Delta_g:Y\\to Y\\times_TY$ is the pullback of $\\Delta_f:X\\to X\\times_BX$ along $Y\\times_TY\\to X\\times_BX$: on every test scheme both sides classify the same pairs together with their equality in $X$. For a scheme $V\\to Y\\times_TY$, its pullback of $\\Delta_g$ is therefore the pullback of $\\Delta_f$ along the composite $V\\to X\\times_BX$, which is quasi-compact by the hypothesis. Thus $g$ is quasi-separated. Equivalently, any further scheme test preserves this property by quasi-compact base change. This uses no quasi-separatedness of $T$ as an absolute scheme.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL, lemma-base-change-separated: diagonal base-change identity; quasi-compactness on scheme tests by Tag 01K5, schemes-lemma-quasi-compact-preserved-base-change. Change of base scheme: spaces.tex Tag 04SG, lemma-category-of-spaces-over-smaller-base-scheme."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-topological-dimension-local-rings] with base scheme $S=T$ and space $Y$. Step 1 verifies exactly its relative diagonal hypothesis. It gives $\\dim|Y|=\\sup_{y\\in|Y|}\\delta_Y(y)$. Its definition of $\\delta$ gives $\\delta_Y(a(u))=\\dim\\mathcal O_{U,u}$ for every $u\\in U$, since $a$ is an etale scheme-source map. Independently [lem-pc-scheme-dimension-local-rings] gives $\\dim|U|=\\sup_{u\\in U}\\dim\\mathcal O_{U,u}$, without any quasi-separatedness requirement on $U$. By [lem-a1-space-point-open-calculus], representable surjectivity of $a$ implies that $|a|:|U|\\to|Y|$ is surjective.",
+   "uses": [
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAN, lemma-dimension, (1)=(2), and Tag 04NA, definition-dimension-local-ring; decent-spaces.tex Tag 0A4J, lemma-dimension-decent-space (2). Point surjectivity is spaces-properties.tex Tag 03H5, lemma-characterize-surjective."
+   }
+  },
+  {
+   "text": "For every $u$, the value $\\dim\\mathcal O_{U,u}=\\delta_Y(a(u))$ occurs among the terms of the supremum for $Y$. Conversely every $y$ has a preimage $u$, so its value $\\delta_Y(y)$ occurs among the terms for $U$. The sets of values coincide, hence their suprema in $\\{-\\infty,0,1,\\ldots,\\infty\\}$ coincide. The equalities from step 2 prove $\\dim|X_T|=\\dim|U|$. This argument also covers an unbounded set of finite values and the value $\\infty$. If $Y$ is empty then the existence of $a$ forces $U$ empty, and if $U$ is empty its surjectivity forces $Y$ empty; both suprema are then empty and equal to $-\\infty$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAN, lemma-dimension, proof: reindex the supremum along a surjective etale scheme chart; properties.tex Tag 04MU, lemma-dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-quasi-compact-base-change",
+  "lem-sfb-space-topological-dimension-local-rings",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0BAN, lemma-dimension, supremum argument, composed with existing topological/local-ring comparison (Tags 03JX and 0A4J) and scheme dimension formula (Tag 04MU); relative base change as in Tag 03KL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Topological Krull dimension of a quasi-separated algebraic space equals dimension of a surjective etale scheme atlas after any scheme base change",
+   "results": "OK 8 hits: PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, ringKrullDim_succ_le_of_surjective, ringKrullDim_quotient, IsClosedEmbedding.topologicalKrullDim_le, ringKrullDim_le_of_surjective, ringKrullDim_le_ringKrullDim_add_card, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, ringKrullDim_le_ringKrullDim_add_spanFinrank. ",
+   "date": "2026-10-22",
+   "verdict": "no match: none concerns dimension of algebraic spaces; returned scheme, spectrum and ring facts have different objects or hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|decent",
+   "results": "OK 0 hits: ; searched Mathlib/AlgebraicGeometry. ",
+   "date": "2026-10-22",
+   "verdict": "no match: none concerns dimension of algebraic spaces; returned scheme, spectrum and ring facts have different objects or hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Etale\", \"topologicalKrullDim\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: none concerns dimension of algebraic spaces; returned scheme, spectrum and ring facts have different objects or hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a quasi-separated algebraic space computed on any surjective etale scheme atlas",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.mk. ",
+   "date": "2026-10-22",
+   "verdict": "no match: none concerns dimension of algebraic spaces; returned scheme, spectrum and ring facts have different objects or hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale surjection from a scheme onto a quasi-separated algebraic space preserves Krull dimension",
+   "results": "OK 8 hits: Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, ringKrullDim_succ_le_of_surjective, ringKrullDim_le_of_surjective, AlgebraicGeometry.IsEtale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero. ",
+   "date": "2026-10-22",
+   "verdict": "no match: none concerns dimension of algebraic spaces; returned scheme, spectrum and ring facts have different objects or hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological Krull dimension of a quasi-separated algebraic space equals the dimension of any surjective etale scheme atlas after scheme base change",
+   "results": "OK 8 hits: PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, ringKrullDim_succ_le_of_surjective, ringKrullDim_le_of_surjective, ringKrullDim_quotient, IsClosedEmbedding.topologicalKrullDim_le, ringKrullDim_le_ringKrullDim_add_card, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, ringKrullDim_le_ringKrullDim_add_spanFinrank",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, spectrum, ring or etale-morphism facts; no algebraic-space dimension comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, topologicalKrullDim",
+   "results": "OK 1 hits: AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, spectrum, ring or etale-morphism facts; no algebraic-space dimension comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|decent",
+   "results": "OK 0 hits: . Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, spectrum, ring or etale-morphism facts; no algebraic-space dimension comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a quasi separated algebraic space computed by a surjective etale scheme presentation",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.QuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, spectrum, ring or etale-morphism facts; no algebraic-space dimension comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale surjection from a scheme onto an algebraic space with quasi compact diagonal preserves the supremum of local ring dimensions",
+   "results": "OK 8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, spectrum, ring or etale-morphism facts; no algebraic-space dimension comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fibre-dimension-base-change",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Tag 0D56 proof: first implication in the relative-dimension test, citing Tag 04NS. Supporting comparison in Tag 04NS atlas reduction: dimensions on a scheme presentation agree with topological dimensions of the quasi-separated fibres.",
+   "via": [
+    "lem-sfb-space-fibre-dimension-base-change",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-atlas-topological-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused the existing stronger topological/local-ring dimension comparison over an arbitrary scheme, and the scheme dimension formula; the atlas reindexes their suprema. Wrote out the relative diagonal argument after arbitrary base change, without assuming the base scheme or the atlas quasi-separated. No new nodes. Checked sources, full point-surjectivity statement, empty and infinite-dimensional cases, project Lean attachment search and Mathlib searches.",
+  "blueprint": "The inherited from.place records the atlas-dimension comparison in the Tag 04NS reduction supporting the original alteration input to det-thm-sf-ctf-stability-direct-images, proof (3). The three steps realize that comparison, not a new route for the direct-image theorem. Latest blueprint direct-images proof (3) now cites the proper and open preservation tools; this ancillary dimension fact and its statement remain unchanged. No whole-blueprint node states it.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product existence used to form X_T; no dimension argument is replaced."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme dimension formula for the scheme U; the unit has no scheme-local-ring replacement."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic equivalence of representable scheme-test surjectivity and surjectivity on point classes, needed to reindex the dimension supremum."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-02696d43c",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-02696d43c (reviewer sub-agent of L); spot-checked: Read the item and its 3 steps in full, every cited statement, and the Stacks sources: 0A4J(2), 03JX, 0BAN with proof, 04N5/04N6/04NA, 03H5, 03KL with proof, 01K5 and 04MU; tags checked in tags/tags. The statement is unchanged and true: it is the decent-space dimension equality plus diagonal base change. Step 1 follows the 03KL diagonal pullback argument correctly. Step 2 uses three statement clauses: lem-sfb-space-topological-dimension-local-rings (relative quasi-separated over any scheme S; delta defined by any etale scheme chart), lem-pc-scheme-dimension-local-rings (any scheme, empty case included) and the point-surjectivity clause of lem-a1-space-point-open-calculus. Step 3 reindexes the suprema and is genuinely elementary. Edge cases checked: empty, a field, an unbounded disjoint union, an infinite-dimensional local ring, non-quasi-separated T or U. One fault, fixed: step 1 never regarded Y=X_T as an algebraic space over T, but step 2 applies the local-rings node with S=T, and over B the diagonal of Y need not be quasi-compact. I added one sentence citing spaces.tex Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme), which keeps charts, point set, topology and local rings. No new nodes. lem-sfb-quasiseparated-space-atlas-dimension is the field-base special case, not a duplicate. No cycle found. Batch-5 flag on lem-a1-space-point-open-calculus: its closure reaches sec-trace-formula only through the general def-trf-algebraic-space and fibre-product foundations, which are not steps of the trace-formula or Poincare-duality proofs, so I return nothing on it. Tool_uses accepted (fibre products, scheme dimension formula, point surjectivity). No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleAtlasTopologicalDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleAtlasTopologicalDimension.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_etale_atlas_topological_dimension",
+  "statement": "theorem space_etale_atlas_topological_dimension {B : Scheme.{u}} (X : AlgebraicSpace B) (f : X ⟶ schemeSpace (Over.mk (𝟙 B))) (hqs : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (Limits.pullback.diagonal f.hom.hom)) (T : Over B) (U : Over B) (a : yoneda.obj U ⟶ (enlargedFibreProduct f (ObjectProperty.homMk ⟨yoneda.map (Over.homMk T.hom rfl)⟩ : schemeSpace T ⟶ schemeSpace (Over.mk (𝟙 B)))).obj.obj) (hae : IsEtale a) (has : IsSurjective a) : topologicalKrullDim (Point (enlargedFibreProduct f (ObjectProperty.homMk ⟨yoneda.map (Over.homMk T.hom rfl)⟩ : schemeSpace T ⟶ schemeSpace (Over.mk (𝟙 B)))).obj.obj) = topologicalKrullDim U.left",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4eb91fef0",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Re-delivery after the H3 RETURN at 265f (atlas source forced to be T) is repaired: independent U : Over B, a : yoneda.obj U ⟶ X_T with IsEtale and IsSurjective, conclusion dim Point(X_T) = dim U.left. Every clause matches the node and Stacks 0A4J(2)/0BAN/03KL. hqs is diagonal quasi-compactness on scheme tests; X_T is enlargedFibreProduct with T; the topology is pointTopologicalSpace (atlas topology); no extra hypotheses. Empty (⊥) and infinite (⊤) cases are covered, single universe u. Node non-lean fields identical to live; lean record complete and statement verbatim; docstrings have source, blueprint and proof steps; sorry only; lines ≤100; imports used; no duplicate found. Not compiled (no file changed). Advisory: owners of schemeSpace/enlargedFibreProduct (def-trf-scheme-algebraic-space, def-sfb-space-sheaf-fibre-product) are uncited; the stage-1 theorem stmt_dep is kept unchanged, as in precedent Q157 282029b2 → not blocking."
+ }
+}

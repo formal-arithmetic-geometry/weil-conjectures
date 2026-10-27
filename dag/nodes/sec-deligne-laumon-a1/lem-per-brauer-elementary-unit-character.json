@@ -1,0 +1,216 @@
+{
+ "id": "lem-per-brauer-elementary-unit-character",
+ "kind": "statement",
+ "title": "The trivial complex character lies in the integral elementary induction ideal",
+ "statement": "Let $G$ be a finite group. A subgroup $E\\leq G$ is elementary if, for some prime $p$, it is isomorphic to $C\\times P$ where $C$ is a finite cyclic group with order prime to $p$ and $P$ is a finite group of order $p^a$ for some $a\\geq0$. A complex representation of a finite group $J$ is a finite-dimensional complex vector space with a linear $J$-action; its character is $\\chi_W(j)=\\operatorname{tr}_{\\mathbf C}(j\\mid W)$. The coefficient field $\\mathbf C$ is algebraically closed of characteristic zero [def-weil-algebraic-closure]. Define $\\operatorname{Ind}_E^G W$ as the quotient of $\\mathbf C[G]\\otimes_{\\mathbf C}W$ by $[ge]\\otimes w=[g]\\otimes ew$, with action $a([g]\\otimes w)=[ag]\\otimes w$.\nThere are finitely many elementary subgroups $E_i\\leq G$, finite-dimensional complex representations $W_i$ of $E_i$, and integers $n_i$, such that, as functions on $G$,\n$$1_G=\\sum_i n_i\\,\\chi_{\\operatorname{Ind}_{E_i}^G W_i}.$$\nHere $1_G(g)=1$ for every $g\\in G$; negative coefficients are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, context for the representation input only. WANTED: Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3, the elementary-subgroup induction identity for the unit. This is the character-unit lemma, not the monomial generation conclusion of the item. No Stacks tag found for this finite-group representation-theoretic result."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-per-brauer-elementary-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=|G|\\geq1$. By [lem-per-cyclotomic-integer-power-basis] choose $\\zeta$, $K=\\mathbf Q(\\zeta)$ and its ring of integers $A$, with integral basis $1,\\zeta,\\ldots,\\zeta^{d-1}$. Let $t:A\\to\\mathbf Z$ take the coefficient of $1$ in this basis. Thus $t$ is $\\mathbf Z$-linear and $t(1)=1$; no multiplicativity is asserted. By [lem-per-character-prime-part-reduction] every complex $G$-character takes values in $A$.",
+   "uses": [
+    "lem-per-cyclotomic-integer-power-basis",
+    "lem-per-character-prime-part-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  },
+  {
+   "text": "Let $B\\subset A^G$ be the $A$-linear span of the characters of finite-dimensional complex $G$-representations. Trace of a direct sum is the sum of traces; in tensor bases the diagonal entries are products, so $\\chi_{V\\otimes W}=\\chi_V\\chi_W$. Hence $B$ is a unital subring containing the constant functions. Let $J$ be the $A$-linear span of $\\chi_{\\operatorname{Ind}_E^G W}$ over elementary $E\\leq G$ and all $E$-representations $W$. The tensor identity of [lem-per-finite-group-induction-calculus] gives\n$$\\chi_V\\chi_{\\operatorname{Ind}_E^G W}=\\chi_{\\operatorname{Ind}_E^G(\\operatorname{Res}_E^G V\\otimes W)}.$$\nDistributing over the finite sums defining $B,J$ shows that $J$ is an ideal of $B$. All these representations are finite-dimensional. The algebraic-closure hypothesis of the induction calculus holds by [lem-weil-complex-algebraically-closed], and $\\mathbf C$ has characteristic zero.",
+   "uses": [
+    "lem-per-finite-group-induction-calculus",
+    "lem-weil-complex-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  },
+  {
+   "text": "Suppose $J\\neq B$. Since $A$ is finite free over $\\mathbf Z$ by Step 1 and $G$ is finite nonempty, [lem-per-finite-function-subring-residue-test] gives $g\\in G$ and a maximal ideal $\\mathfrak q$ of $A$ such that $f(g)\\in\\mathfrak q$ for all $f\\in J$. Put $k=A/\\mathfrak q$ and let $r:A\\to k$ be reduction; the same node gives a prime $p=\\operatorname{char}(k)$. By [lem-per-character-prime-part-reduction], write $g=su$ with commuting $s,u$, the order $m$ of $s$ prime to $p$ and the order of $u$ a power of $p$. For every character, and therefore every element $f$ of its $A$-span $B$, one has $r(f(g))=r(f(s))$. Thus $r(f(s))=0$ for every $f\\in J$.",
+   "uses": [
+    "lem-per-finite-function-subring-residue-test",
+    "lem-per-character-prime-part-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  },
+  {
+   "text": "Let $D=C_G(s)$ and $C=\\langle s\\rangle\\leq D$. Apply [lem-weil-pbc-sylow-subgroup-prime-index] to the finite group $D$ and prime $p$, obtaining $P\\leq D$ of $p$-power order with $p\\nmid[D:P]$. The subgroup $C$ is central in $D$. Since $|C|=m$ is prime to $p$, $C\\cap P=\\{1\\}$: the order of an element of the intersection divides both $m$ and $|P|$. Thus multiplication $(c,v)\\mapsto cv$ is an injective homomorphism $C\\times P\\to G$. Its image $E=CP$ is elementary, $|E|=m|P|$, and\n$$c_0=[D:E]=|D|/(m|P|)$$\nis an integer prime to $p$, since $[D:P]=m c_0$ is prime to $p$. Cosets give the displayed order and index equalities.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  },
+  {
+   "text": "Let $S=C\\cap s^G$, so $s\\in S$. As $m\\mid N$, $\\xi=\\zeta^{N/m}$ is a primitive $m$th root. For $0\\leq j<m$ define $\\lambda_j(s^a v)=\\xi^{ja}$ for $v\\in P$; uniqueness in $C\\times P$ makes this a well-defined homomorphism $E\\to\\mathbf C^\\times$. Put $a_j=\\sum_{s^a\\in S}\\xi^{ja}\\in A$. In $A\\subset\\mathbf C$ the finite geometric-sum calculation gives\n$$\\sum_{j=0}^{m-1}\\xi^{-j}a_j=\\sum_{s^a\\in S}\\sum_{j=0}^{m-1}\\xi^{j(a-1)}=m.$$\nIndeed the inner sum is $m$ when $a=1$ modulo $m$; otherwise multiplying it by the nonzero number $\\xi^{a-1}-1$ gives $\\xi^{m(a-1)}-1=0$, so it vanishes in $\\mathbf C$. This also covers $m=1$. As $r(m)\\neq0$, at least one $r(a_j)$ is nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  },
+  {
+   "text": "An element of $E=C\\times P$ conjugate in $G$ to $s$ has order $m$, hence prime to $p$. Its $P$-component must therefore be $1$, since its order divides both $m$ and the $p$-power $|P|$. Consequently $E\\cap s^G=S$. Apply [lem-per-induced-character-conjugacy-formula] to the one-dimensional $E$-representation $\\mathbf C_{\\lambda_j}$ chosen in Step 5. The formula gives\n$$\\chi_{\\operatorname{Ind}_E^G\\mathbf C_{\\lambda_j}}(s)=\\frac{|C_G(s)|}{|E|}\\sum_{h\\in E\\cap s^G}\\lambda_j(h)=c_0a_j.$$\nThis character belongs to $J$. But $r(c_0a_j)\\neq0$, because $p\\nmid c_0$ and $r(a_j)\\neq0$ in the field $k$. This contradicts Step 3. Hence $J=B$ and its element $1_G$ is a finite sum $\\sum_i b_i\\chi_{\\operatorname{Ind}_{E_i}^G W_i}$ with $b_i\\in A$.",
+   "uses": [
+    "lem-per-induced-character-conjugacy-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  },
+  {
+   "text": "Write $U_i=\\operatorname{Ind}_{E_i}^G W_i$. By [lem-per-finite-group-character-decomposition], decompose the finitely many $U_i$ into irreducibles and group isomorphic summands; also include the trivial line $T_0$. The field hypothesis is supplied by [lem-weil-complex-algebraically-closed]. For the resulting finite list of pairwise nonisomorphic $T$, let $m_{iT}\\in\\mathbf Z_{\\geq0}$ be the multiplicity in $U_i$. Pair the character equality of Step 6 with $\\chi_T(g^{-1})$ and divide by $|G|$. The orthogonality statement [lem-per-finite-group-character-orthogonality] gives\n$$\\sum_i b_i m_{iT}=\\delta_{T,T_0}$$\nin $\\mathbf C$ and hence in its subring $A$. Apply the $\\mathbf Z$-linear coefficient map $t$ of Step 1 to get $\\sum_i t(b_i)m_{iT}=\\delta_{T,T_0}$. Multiplying these integer equalities by $\\chi_T$ and summing over the finite list yields\n$$1_G=\\sum_i t(b_i)\\chi_{U_i}.$$\nSet $n_i=t(b_i)\\in\\mathbf Z$. The elementary subgroups and quotient induction are exactly those of the statement. The coefficient map was applied only to equalities of multiplicities, not to character values multiplied by arbitrary elements of $A$.",
+   "uses": [
+    "lem-per-finite-group-character-decomposition",
+    "lem-weil-complex-algebraically-closed",
+    "lem-per-finite-group-character-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-cyclotomic-integer-power-basis",
+  "lem-per-character-prime-part-reduction",
+  "lem-per-finite-group-induction-calculus",
+  "lem-weil-complex-algebraically-closed",
+  "lem-per-finite-function-subring-residue-test",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-per-induced-character-conjugacy-formula",
+  "lem-per-finite-group-character-decomposition",
+  "lem-per-finite-group-character-orthogonality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, representation lifting before (5), motivation only. Agent-written character-ring proof; WANTED Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Brauer|elementary.*subgroup|induced.*character",
+   "results": "{\"t\": \"2026-10-24T01:37:35Z\", \"tool\": \"grep\", \"query\": \"Brauer|elementary.*subgroup|induced.*character\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: character orthogonality, cyclic resolutions and additive-character identities do not supply integral induction of the trivial ordinary character from elementary subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trivial character of a finite group is an integer linear combination of characters induced from representations of elementary subgroups direct products of a cyclic prime to p group and a p group",
+   "results": "{\"t\": \"2026-10-24T01:37:38Z\", \"tool\": \"leanfinder\", \"query\": \"The trivial character of a finite group is an integer linear combination of characters induced from representations of elementary subgroups direct products of a cyclic prime to p group and a p group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_char_is_norm_one\", \"FDRep.char_orthonormal\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"FDRep.average_char_eq_finrank_invariants\", \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\", \"FDRep.char_one\", \"Rep.FiniteCyclicGroup.resolution.π\", \"Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_linearCombination\"], \"digest\": \"310c537a10d70626\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: character orthogonality, cyclic resolutions and additive-character identities do not supply integral induction of the trivial ordinary character from elementary subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of the complex character ring lies in the sum of induction images from p elementary subgroups with integral coefficients",
+   "results": "{\"t\": \"2026-10-24T01:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of the complex character ring lies in the sum of induction images from p elementary subgroups with integral coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.sum_subgroup_units\", \"jacobiSum_mem_algebraAdjoin_of_pow_eq_one\", \"DirichletCharacter.unit_norm_eq_one\", \"Subgroup.periods\", \"Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_linearCombination\", \"NumberField.Units.map_complexEmbedding_torsion\", \"NumberField.IsCMField.indexRealUnits_eq_two_iff\", \"NumberField.IsCMField.map_unitsMulComplexConjInv_torsion\"], \"digest\": \"9cf1eb9c7286c577\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: character orthogonality, cyclic resolutions and additive-character identities do not supply integral induction of the trivial ordinary character from elementary subgroups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brauer elementary subgroup induction trivial character integer sum induced characters",
+   "results": "{\"t\": \"2026-10-24T01:37:35Z\", \"tool\": \"leansearch\", \"query\": \"Brauer elementary subgroup induction trivial character integer sum induced characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IndV\", \"AddChar.sum_eq_card_of_eq_one\", \"AddChar.sum_ne_zero_iff_eq_zero\", \"AddChar.sum_eq_ite\", \"AddChar.instInhabited\", \"Rep.coindToInd.congr_simp\", \"Rep.ind\", \"CharacterModule.int\"], \"digest\": \"7a7015e13adcb11b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: character orthogonality, cyclic resolutions and additive-character identities do not supply integral induction of the trivial ordinary character from elementary subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "FDRep, \"ind\"",
+   "results": "{\"t\": \"2026-10-24T01:37:35Z\", \"tool\": \"loogle\", \"query\": \"FDRep, \\\"ind\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: character orthogonality, cyclic resolutions and additive-character identities do not supply integral induction of the trivial ordinary character from elementary subgroups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-brauer-monomial-induction",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 (duality input) of lem-per-artin-gabber-affine-curve, through the inherited auxiliary cyclotomic splitting route: Expose X Proposition 1.2, printed p.138, representation lifting before equation (5). This auxiliary representation-theoretic input is not proved by the current blueprint paragraph. Specifically: WANTED: Serre, Linear Representations of Finite Groups, Part II Chapter 10, sections 10.2-10.3, the elementary-subgroup induction identity for the unit. This is the character-unit lemma, not the monomial generation conclusion of the item.",
+   "via": [
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-brauer-elementary-unit-character",
+  "worker": "stage1",
+  "summary": "Seven-step character-ring proof of the unchanged integral elementary unit identity. Residue evaluation, cyclotomic p-prime trace reduction and the induced-character formula are genuine statement-only dependencies. The cyclotomic integer power-basis input is a Mathlib leaf; Sylow existence, semisimple decomposition, orthogonality and complex algebraic closure are reused. Fourier separation and coefficient descent are written out, with no Brauer-induction black box.",
+  "blueprint": "Inherited auxiliary representation input under lem-per-artin-gabber-affine-curve, Proof Step 3, via lem-per-brauer-monomial-induction; Expose X Proposition 1.2, printed p.138, before (5). The latest blueprint does not prove this auxiliary input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-bdaefb9ef",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-bdaefb9ef (reviewer sub-agent of L); spot-checked: Read the item and all 4 new nodes in full, plus every cited statement. The item statement and stmt_deps are unchanged against side-live, where the item is still unsplit; there is no repair note and no parallel supersession. The 7 steps check out: (1) cyclotomic Z-basis with a Z-linear coefficient map t, characters A-valued since N=|G|; (2) B is a unital ring of A-combinations of characters and J is an ideal, via the tensor identity of lem-per-finite-group-induction-calculus; (3) residue test on B⊆A^G gives g and q, reduction gives g=su and r(f(s))=0 on J; (4) Sylow subgroup P of C_G(s) gives E=C×P elementary with c0 prime to p; (5) geometric sum gives Σξ^{-j}a_j=m, so some r(a_j)≠0, m=1 included; (6) E∩s^G=S, and the induced formula gives χ(s)=c0·a_j, a contradiction, so 1_G∈J; (7) decomposition plus orthogonality give Σb_i m_iT=δ in A, t applied to these integer identities gives integer n_i. New nodes are true, statement-only and self-contained; edge cases tested. Cyclotomic-integer-power-basis leaf verified at Mathlib Cyclotomic/Basic.lean 853-867 (and Complex.lean:92, :410, :469, PowerBasis.lean:60-64); advisory only: intermediateField_adjoin_isCyclotomicExtension also exists. Prime-part reduction tested on G=1, V=0, u=1. Induced-character formula checked for H=G, H=1, W=0, and Mathlib has none. Residue test (00GQ lying over + 00GR + coordinate primes) tested on A=Z, Z/4, F_p; it is strictly more than lem-weil-pbc-integral-injective-lying-over. Duplicate search over snapshot, live and side-live found none and no clause restatements. Batch-5 citation lem-per-finite-group-induction-calculus -> def-trf-abelian-group-presentation is a general Mathlib-leaf definition of a presented abelian group, not part of the trace formula or Poincaré duality proofs and not supplied by those assumptions; accepted. No SGA citation; route all in sk-p-dl-a1-perverse or Mathlib leaves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.BrauerElementaryUnitCharacter",
+  "declaration": "Representation.brauer_elementary_unit_character",
+  "file": "lean/Sheaf/RepresentationTheory/BrauerElementaryUnitCharacter.lean",
+  "statement": "theorem brauer_elementary_unit_character (G : Type u) [Group G] [Finite G] : ∃ (n : ℕ) (E : Fin n → Subgroup G) (W : Fin n → ModuleCat.{v} ℂ) (ρ : (i : Fin n) → Representation ℂ (E i) (W i)) (a : Fin n → ℤ), (∀ i, Group.IsBrauerElementary (E i)) ∧ (∀ i, Module.Finite ℂ (W i)) ∧ ∀ g : G, (1 : ℂ) = ∑ i, (a i : ℂ) * LinearMap.trace ℂ (IndV (E i).subtype (ρ i)) (ind (E i).subtype (ρ i) g)",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b43c4f1bf",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Item statement (finite G, elementary subgroups via new def node Group.IsBrauerElementary with subgroup witnesses equivalent to abstract C×P, Fin n families, finite-dim ModuleCat.{v} ℂ reps, ℤ coefficients, ∀ g, 1 = Σ a_i·trace(ind g) on IndV) matches the node clause by clause. Checked by hand that IndV.mk g⁻¹ w turns the node's quotient relation and action into Mathlib's, the same convention as the landed InducedCharacterConjugacyFormula. New def node is real, not hollow, sourced and blueprint-tagged; no existing predicate in Mathlib, side-live Lean or DAG. Item node unchanged vs side-live except lean record + added stmt_dep. lean.statement fields match the files verbatim; sorry only; proof-plan docstring present; import paths exist. No faults; no compile (no changes)."
+ }
+}

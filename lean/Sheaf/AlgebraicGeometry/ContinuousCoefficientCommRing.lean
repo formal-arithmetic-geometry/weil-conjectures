@@ -6,7 +6,6 @@ Authors: SHEAF maintenance
 module
 
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
 /-!
 # Commutative continuous coefficient rings in the scheme universe

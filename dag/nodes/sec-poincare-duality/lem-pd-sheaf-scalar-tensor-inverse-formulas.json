@@ -1,0 +1,285 @@
+{
+ "id": "lem-pd-sheaf-scalar-tensor-inverse-formulas",
+ "kind": "statement",
+ "title": "Inverse formulas for any insertion-normalized sheaf scalar tensor map",
+ "statement": "Let $D$ be a site small in a common ring and module universe [def-weil-pbc-sites-and-cohomology], let $A,S$ be sheaves of commutative rings on $D$, and let $\\alpha:A\\to S$ be a unital ring-sheaf morphism. Let $H,K$ be sheaves of $A$-modules [def-weil-sheaf-of-modules-category]. For an $A$-module sheaf $X$, put\n$$T(X)=\\bigl(U\\longmapsto S(U)\\otimes_{A(U)}X(U)\\bigr)^\\#,$$\nusing module sheafification [def-weil-presheaf-modules-sheafification]. Write $\\tau_X(s,x)$ for the sheafification image of $s\\otimes x$ and $q_X(x)=\\tau_X(1,x)$. All tensor products of sheaves are sheafified balanced tensor products [def-pur-sheaf-tensor-product].\n\nLet $b:T(H\\otimes_AK)\\to T(H)\\otimes_ST(K)$ be any $S$-linear sheaf map satisfying, for every $U\\in D$, $h\\in H(U)$ and $k\\in K(U)$,\n$$b\\bigl(q_{H\\otimes_AK}(h\\otimes k)\\bigr)=q_H(h)\\otimes q_K(k).$$\nThen $b$ is an isomorphism, and for all $s,t\\in S(U)$ its forward and inverse section formulas are\n$$b\\bigl(\\tau_{H\\otimes_AK}(s,h\\otimes k)\\bigr)=\\tau_H(s,h)\\otimes\\tau_K(1,k),$$\n$$b^{-1}\\bigl(\\tau_H(s,h)\\otimes\\tau_K(t,k)\\bigr)\n=\\tau_{H\\otimes_AK}(st,h\\otimes k).$$\nThe inverse is an $S$-linear morphism of sheaves. No flatness or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, lemma-sheafification-tensor, and section-tensor-product; agent balanced inverse calculation in original item Step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=H\\otimes_AK$, $V=T(L)$ and $W=T(H)\\otimes_ST(K)$. Write $P_X(U)=S(U)\\otimes_{A(U)}X(U)$ and $\\iota_X:P_X\\to T(X)$ for its $S$-linear sheafification unit. The balancing relation gives $q_X(ax)=\\tau_X(1,ax)=\\tau_X(\\alpha(a),x)=\\alpha(a)q_X(x)$, so $q_X:X\\to\\operatorname{Res}_\\alpha T(X)$ is $A$-linear. Since $\\tau_X(s,x)=s q_X(x)$, the given normalization and $S$-linearity of $b$ imply\n$$b(\\tau_L(s,h\\otimes k))=s(q_H(h)\\otimes q_K(k))=\\tau_H(s,h)\\otimes\\tau_K(1,k).$$\nThis proves the forward formula without any assertion about generation of sheaf sections.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation."
+   }
+  },
+  {
+   "text": "For each $U$ define a pairing $\\beta_U:P_H(U)\\times P_K(U)\\to V(U)$ on pure tensors by\n$$\\beta_U(s\\otimes h,t\\otimes k)=\\tau_L(st,h\\otimes k).$$\nThis descends through both ordinary tensor products by their universal property: the displayed expression is additive separately in $s,h,t,k$; for $a\\in A(U)$ its two balancing checks are\n$$\\tau_L(s\\alpha(a)t,h\\otimes k)=\\tau_L(st,(ah)\\otimes k),\\qquad\n\\tau_L(st\\alpha(a),h\\otimes k)=\\tau_L(st,h\\otimes(ak)).$$\nIndeed, in the first equality move $\\alpha(a)$ across the scalar-extension tensor, then use $a(h\\otimes k)=(ah)\\otimes k$; in the second use $a(h\\otimes k)=h\\otimes(ak)$. Commutativity of $S(U)$ and scalar linearity of $\\iota_L$ give\n$$\\beta_U(r(s\\otimes h),t\\otimes k)=r\\beta_U(s\\otimes h,t\\otimes k)=\\beta_U(s\\otimes h,r(t\\otimes k)).$$\nAdditivity extends these identities from pure tensors to finite sums, which generate the ordinary tensor products. Thus $\\beta_U$ is $S(U)$-bilinear. In Lean, use TensorProduct.AlgebraTensorModule.distribBaseChange.symm, followed by scalar extension of the sheaf-tensor unit and the scalar sheafification unit, to implement this pairing without quotient calculations.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "lem-trf-scalar-tensor-distrib-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation."
+   }
+  },
+  {
+   "text": "For $f:U'\\to U$, naturality of the pure tensor maps and $\\iota_L$ gives\n$$\\beta_U(s\\otimes h,t\\otimes k)|_{U'}=\\tau_L(s|_{U'}t|_{U'},h|_{U'}\\otimes k|_{U'})=\\beta_{U'}((s\\otimes h)|_{U'},(t\\otimes k)|_{U'}).$$\nOrdinary tensor generation extends this equality to all pairs of sections of $P_H,P_K$. Hence the pairings of Step 2 form a morphism of presheaves of sets $\\beta:P_H\\times P_K\\to V$, bilinear over the ring sheaf $S$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation."
+   }
+  },
+  {
+   "text": "Apply the bilinear-extension theorem with ring presheaf $\\mathcal O=S$, already a sheaf, with $\\mathcal F=P_H$, $\\mathcal G=P_K$ and target $\\mathcal H=V$. All modules and the site lie in the common universe of the statement. It gives a unique $S$-bilinear sheaf pairing $\\beta^\\#:T(H)\\times T(K)\\to V$ extending $\\beta$. The sheaf tensor universal property over $S$ now gives an $S$-linear sheaf morphism $d:W\\to V$ with\n$$d(\\tau_H(s,h)\\otimes\\tau_K(t,k))=\\tau_L(st,h\\otimes k).$$\nHere the input is the canonical pure tensor of the two sheaf sections; no surjectivity on sections of a sheafification unit is needed. For the direct sheafification object siteSheafTensorRight, implement the cited tensor universal property directly using TensorProduct.lift and the Mathlib module-sheafification adjunction (private tensorLift and tensorLift_apply); no transport to the localization tensor is needed.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation."
+   }
+  },
+  {
+   "text": "We prove $db=\\mathrm{id}_V$. The module sheafification universal property for $P_L\\to V$ reduces equality of these $S$-linear maps to equality after $\\iota_L$. Sectionwise, $P_L(U)$ is generated by $s\\otimes x$ and $\\tau_L(s,x)=s q_L(x)$, so it suffices to prove equality of the $A$-linear sheaf maps $dbq_L,q_L:L\\to\\operatorname{Res}_\\alpha V$. The sheaf tensor universal property over $A$ reduces that equality to $x=h\\otimes k$, for all objects and sections. There the normalization and Step 4 give\n$$dbq_L(h\\otimes k)=d(q_H(h)\\otimes q_K(k))=\\tau_L(1,h\\otimes k)=q_L(h\\otimes k).$$\nBoth reductions are injectivity/uniqueness assertions of the cited universal properties, so they establish equality on all sheaf sections. The direct tensor uniqueness assertion is the private proved tensor_ext, obtained from the sheafification adjunction and TensorProduct.ext'.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation."
+   }
+  },
+  {
+   "text": "For bd=id_W, direct tensor uniqueness reduces equality to the two natural S-bilinear families obtained by composing the pure tensor pairing with bd and with id_W. Apply unique_bilinear_sheafification_extension to reduce to the two presheaf units. Tensor induction in both presheaf arguments and S-bilinearity reduce further to the pair (1 tensor h,1 tensor k): each s tensor h is s times 1 tensor h, and the same holds for the other argument. On this pair, the inverse formula gives d(q_H(h) tensor q_K(k))=tau_L(1,h tensor k); the normalization of b sends this to q_H(h) tensor q_K(k). This proves bd=id_W. Together with the first identity, the already constructed S-linear morphism d is b inverse and has the asserted scalar-multiplying formula. The private scalarTensor_ext implements precisely this uniqueness and scalar-generation argument; it does not assume that sheafification units are surjective on sections. Zero rings, arbitrary ring maps and arbitrary module sheaves are included.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-scalar-tensor-distrib-base-change",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), Tag 0GMW (lemma-sheafification-tensor) and Tag 03CY (lemma-sheafification-presheaf-modules); agent explicit balanced inverse calculation. G6: direct sheafification universal-property implementation, ordinary distribBaseChange for the presheaf pairing, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules scalar extension tensor isomorphism sends s tensor (m tensor n) to (s tensor m) tensor (1 tensor n) and its inverse multiplies the two scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.tensorEquiv\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  {M : Type v₁} →\\n    {N : Type v₂} →\\n      {S : Type v₃} →\\n        [inst : AddCommMonoid M] →\\n          [inst_1 : AddCommMonoid N] →\\n            [inst_2 : CommSemiring R] →\\n              [inst_3 : CommSemiring S] →\\n                [inst_4 : Algebra R S] →\\n                  [inst_5 \", \"doc\": \"Given an $ R $-linear map $ f : M → N $ that satisfies the base change condition with respect to a ring homomorphism $ R → S $, and an $ S $-module $ P $ equipped with compatible $ R $-module and scal\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObjMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n      (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) →\\n        {X Y : Cᵒᵖ} →\\n          (f : X ⟶ Y) →\\n            CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a presheaf of modules $ M_1, M_2 $ over a presheaf of commutative rings $ R $ on a category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to Y $ in $ \\\\mathcal{C}^\\\\text{op} $, this defines the $ R(X) $-l\"}\n  {\"name\": \"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendScalarsComp f₁₂ f₂₃).hom.app M)) (1 ⊗ₜ[R₁] m) =\\n    1 ⊗ₜ[R₂] (1 ⊗ₜ[R₁] m)\", \"doc\": \"For a ring homomorphism $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the homomorphism component of the natural isomorphism between the composed extension of scalars functor and the direct extens\"}\n  {\"name\": \"IsLocalization.moduleTensorEquiv\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (S : Submonoid R) →\\n      (A : Type u_2) →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Algebra R A] →\\n            [IsLocalization S A] →\\n              (M₁ : Type u_5) →\\n                (M₂ : Type u_6) →\\n                  [inst_4 : AddCommM\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and $ R $-modules $ M_1 $ and $ M_2 $ equipped with compatible $ A $-module structures (via $ \\\\mathrm{SMulCommClass} $ and $ \\\\mathrm{TensorP\"}\n  {\"name\": \"ModuleCat.extendScalarsId_inv_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} [inst : CommRing R] (M : ModuleCat R) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendScalarsId R).inv.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"For any commutative ring $ R $ and left $ R $-module $ M $, the inverse of the natural isomorphism between the extension of scalars functor induced by the identity ring homomorphism $ R \\\\to R $ and th\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Tower\", \"type\": \"∀ (R : Type uR) (A : Type uA) (B : Type uB) {M : Type uM} {N : Type uN} [inst : CommSemiring R]\\n  [inst_1 : CommSemiring A] [inst_2 : Semiring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B]\\n  [inst_5 : AddCommMonoid M] [inst_6 : Module R M] [inst_7 : Module A M] [inst_8 : Module B M]\\n  [inst_9 : I\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, the inverse of the base change isomorphism $\\\\operatorname{cancelBaseChange}_{R,A,B,M,N}$ maps the tensor product $m \\\\otimes n$ to $m \\\\otimes (1\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Tower\", \"type\": \"(R : Type uR) →\\n  (A : Type uA) →\\n    (B : Type uB) →\\n      (M : Type uM) →\\n        (N : Type uN) →\\n          [inst : CommSemiring R] →\\n            [inst_1 : CommSemiring A] →\\n              [inst_2 : Semiring B] →\\n                [inst_3 : Algebra R A] →\\n                  [inst_4 : Algebra R B] →\\n  \", \"doc\": \"Let $R, A, B$ be commutative semirings, and let $A$ and $B$ be $R$-algebras. Let $M$ be an $A$-module and a $B$-module, such that the actions of $A$ and $B$ commute. Let $N$ be an $R$-module. Then the\"}\n  {\"name\": \"TensorProduct.isBaseChange\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ (R : Type u_1) (M : Type v₁) (S : Type v₃) [inst : AddCommMonoid M] [inst_1 : CommSemiring R]\\n  [inst_2 : CommSemiring S] [inst_3 : Algebra R S] [inst_4 : Module R M], IsBaseChange S ((TensorProduct.mk R S M) 1)\", \"doc\": \"The tensor product of modules satisfies the universal property of base change, establishing a bijective correspondence between bilinear maps and linear maps from the tensor product under scalar restri\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extensionOfScalars",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ModuleCat.extensionOfScalars'",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "SheafOfModules changeOfRings tensor product scalar extension inverse formula",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendScalarsId_inv_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"(M : ModuleCat R) (m : M) : (extendScalarsId R).inv.app M m = (1 : R) ⊗ₜ m\", \"doc\": \"For any commutative ring $ R $ and left $ R $-module $ M $, the inverse of the natural isomorphism between the extension of scalars functor induced by the identity ring homomorphism $ R \\\\to R $ and th\"}\n  {\"name\": \"ModuleCat.ExtendScalars.obj'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} → {S : Type u₂} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → ModuleCat R → ModuleCat S\", \"doc\": \"Given a ring homomorphism $ f : R → S $ and an $ R $-module $ M $, this constructs the $ S $-module obtained by extending scalars through $ f $, defined as the tensor product $ M ⊗_R S $ with scalar m\"}\n  {\"name\": \"ModuleCat.ExtendScalars.map_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{M M' : ModuleCat.{v} R} (g : M ⟶ M') (s : S) (m : M) : (extendScalars f).map g (s ⊗ₜ[R,f] m) = s ⊗ₜ[R,f] g m\", \"doc\": \"Let $R$ and $S$ be commutative rings, $f: R \\\\to S$ a ring homomorphism, and $g: M \\\\to M'$ an $R$-linear map between $R$-modules $M$ and $M'$. The extension of scalars functor `extendScalars f` induces\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": (M ≃ₗ[R] N) ≃ M ≃ₗ[A] N\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"ModuleCat.extendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → CategoryTheory.Functor (ModuleCat R) (ModuleCat S)\", \"doc\": \"Given commutative rings $ R $ and $ S $ and a ring homomorphism $ f : R → S $, this functor maps the category of $ R $-modules to the category of $ S $-modules by extending scalars along $ f $. For an\"}\n  {\"name\": \"LinearMap.liftBaseChange_tmul\", \"module\": \"Mathlib.RingTheory.TensorProduct.Basic\", \"type\": \"(l : M →ₗ[R] N) (x y) : l.liftBaseChange A (x ⊗ₜ y) = x • l y\", \"doc\": \"For a ring homomorphism $\\\\sigma: R \\\\to S$ and modules $M$ (over $R$) and $M_2$ (over $S$), the $S$-module structure on linear maps $M \\\\to M_2$ induced by base change satisfies $\\\\forall x \\\\in S, y \\\\in \"}\n  {\"name\": \"ModuleCat.ExtendScalars.map'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {M1 M2 : ModuleCat R} → (M1 ⟶ M2) → (ModuleCat.ExtendScalars.obj' f M1 ⟶ ModuleCat.ExtendScalars.obj' f M2)\", \"doc\": \"Given a ring homomorphism $ f : R → S $ and an $ R $-linear map $ φ : M_1 → M_2 $, this constructs the induced $ S $-linear map $ M_1 ⊗_R S → M_2 ⊗_R S $ by tensoring $ φ $ with the identity map on $ \"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionOfScalars.*(Monoidal|tensor)|tensor.*(baseChange|changeOfRings)|baseChange.*tensor",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"50\", \"text\": \"      (μIso := fun M₁ M₂ ↦ (AlgebraTensorModule.distribBaseChange R S M₁ M₂).symm.toModuleIso)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"64\", \"text\": \"        erw [AlgebraTensorModule.distribBaseChange_tmul,\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"73\", \"text\": \"        erw [AlgebraTensorModule.distribBaseChange_tmul,\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"96\", \"text\": \"      (AlgebraTensorModule.distribBaseChange R S M₁ M₂).toModuleIso.inv :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"104\", \"text\": \"      (AlgebraTensorModule.distribBaseChange R S M₁ M₂).toModuleIso.hom :=\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheafified extension of scalar tensors normalized on inserted pure tensors is an isomorphism whose inverse sends (s tensor m) tensor (t tensor n) to st tensor (m tensor n)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"PresheafOfModules.Sheafify.mul_smul\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For all scalars $ r, r' $ in the sheafified ring $ R $ and all elements $ m $ in the sheafified module $ A $, the scalar multiplication operation satisfies $ \\\\alpha(\\\\phi(r \\\\cdot r') \\\\cdot m) = \\\\alpha(\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a functor $F$ between sheaf of modules categories over ring sheaves $R$ and $S$, the composition of $\\\\iota_{\\\\text{Free}}(i)$ with the inverse of $\\\\text{mapFree}(F,\\\\eta,I)$ followed by a morphism $\"}\n  {\"name\": \"Module.Invertible.rTensorInv\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} →\\n  {M : Type v} →\\n    {N : Type u_1} →\\n      (P : Type u_2) →\\n        (Q : Type u_3) →\\n          [inst : CommSemiring R] →\\n            [inst_1 : AddCommMonoid M] →\\n              [inst_2 : AddCommMonoid N] →\\n                [inst_3 : AddCommMonoid P] →\\n                  [inst_4 : AddCom\", \"doc\": \"A linear map from the space of linear maps between tensor products $ P \\\\otimes_R M $ and $ Q \\\\otimes_R M $ to the space of linear maps between $ P $ and $ Q $, constructed by composing the right cance\"}\n  {\"name\": \"IsLocalization.moduleTensorEquiv\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (S : Submonoid R) →\\n      (A : Type u_2) →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Algebra R A] →\\n            [IsLocalization S A] →\\n              (M₁ : Type u_5) →\\n                (M₂ : Type u_6) →\\n                  [inst_4 : AddCommM\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and $ R $-modules $ M_1 $ and $ M_2 $ equipped with compatible $ A $-module structures (via $ \\\\mathrm{SMulCommClass} $ and $ \\\\mathrm{TensorP\"}\n  {\"name\": \"IsLocalizedModule.map_lTensor\", \"module\": \"Mathlib/RingTheory/Localization/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (A : Type u_2) [inst_1 : CommSemiring A] [inst_2 : Algebra R A] {M : Type u_3}\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] {M' : Type u_4} [inst_5 : AddCommMonoid M'] [inst_6 : Module R M']\\n  [inst_7 : Module A M'] [inst_8 : IsScalarTower R A M'] (S : \", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, an $ A $-module $ M $ with scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, A, M) $, a localization map $ g: M \\\\to M' $ at a submonoid\"}\n  {\"name\": \"ModuleCat.FreeMonoidal.μIso_inv_freeMk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {X Y : Type u} (z : CategoryTheory.MonoidalCategoryStruct.tensorObj X Y),\\n  (CategoryTheory.ConcreteCategory.hom (ModuleCat.FreeMonoidal.μIso R X Y).inv) (ModuleCat.freeMk z) =\\n    ModuleCat.freeMk z.1 ⊗ₜ[R] ModuleCat.freeMk z.2\", \"doc\": \"For any types $ X $ and $ Y $, applying the inverse of the canonical isomorphism between the tensor product of the free $ R $-modules generated by $ X $ and $ Y $ and the free $ R $-module generated b\"}\n  {\"name\": \"ModuleCat.FreeMonoidal.μIso_hom_freeMk_tmul_freeMk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {X Y : Type u} (x : X) (y : Y),\\n  (CategoryTheory.ConcreteCategory.hom (ModuleCat.FreeMonoidal.μIso R X Y).hom)\\n      (ModuleCat.freeMk x ⊗ₜ[R] ModuleCat.freeMk y) =\\n    ModuleCat.freeMk (x, y)\", \"doc\": \"For any elements $x \\\\in X$ and $y \\\\in Y$, the image of the tensor product $\\\\text{freeMk}(x) \\\\otimes \\\\text{freeMk}(y)$ under the canonical isomorphism $\\\\mu_{\\\\text{Iso}}$ is the basis vector $\\\\text{free\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"ModuleCat.extendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : CategoryTheory.Functor (ModuleCat R) (ModuleCat S)\", \"doc\": \"Extension of scalars is a functor where an `R`-module `M` is sent to `S ⊗ M` and\\n`l : M1 ⟶ M2` is sent to `s ⊗ m ↦ s ⊗ l m`\"}\n  {\"name\": \"ModuleCat.instIsLeftAdjointExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : (ModuleCat.extendScalars f).IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"Given commutative rings `R, S` and a ring hom `f : R →+* S`, the extension and restriction of\\nscalars by `f` are adjoint to each other.\"}\n  {\"name\": \"ModuleCat.extendScalarsId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" (R : Type u₁) [CommRing R] : ModuleCat.extendScalars (RingHom.id R) ≅ CategoryTheory.Functor.id (ModuleCat R)\", \"doc\": \"The extension of scalars by the identity of a ring is isomorphic to the\\nidentity functor.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {Y : ModuleCat S} : ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For any `S`-module Y, there is a natural `R`-linear map from `S ⨂ Y` to `Y` by\\n`s ⊗ y ↦ s • y`\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} : X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"For any `R`-module X, there is a natural `R`-linear map from `X` to `X ⨂ S` by sending `x ↦ x ⊗ 1`\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y) : (ModuleCat.extendScalars f).obj X ⟶ Y\", \"doc\": \"Given `R`-module X and `S`-module Y and a map `X ⟶ (restrictScalars f).obj Y`, i.e `R`-linear map\\n`X ⟶ Y`, there is a map `(extend_scalars f).obj X ⟶ Y`, i.e `S`-linear map `S ⨂ X → Y` by\\n`s ⊗ x ↦ s •\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) : X ⟶ (ModuleCat.restrictScalars f).obj Y\", \"doc\": \"Given `R`-module X and `S`-module Y and a map `g : (extendScalars f).obj X ⟶ Y`, i.e. `S`-linear\\nmap `S ⨂ X → Y`, there is a `X ⟶ (restrictScalars f).obj Y`, i.e. `R`-linear map `X ⟶ Y` by\\n`x ↦ g (1 ⊗\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} : ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"Given `R`-module X and `S`-module Y, `S`-linear maps `(extendScalars f).obj X ⟶ Y`\\nbijectively correspond to `R`-linear maps `X ⟶ (restrictScalars f).obj Y`.\"}\n  {\"name\": \"ModuleCat.extendScalarsComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R₁ R₂ R₃ : Type u₁} [CommRing R₁] [CommRing R₂] [CommRing R₃] (f₁₂ : R₁ →+* R₂) (f₂₃ : R₂ →+* R₃) : ModuleCat.extendScalars (f₂₃.comp f₁₂) ≅ (ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)\", \"doc\": \"The extension of scalars by a composition of commutative ring morphisms\\nidentifies to the composition of the extension of scalars functors.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"The natural transformation from the composition of restriction and extension of scalars to the\\nidentity functor on `S`-module.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"The natural transformation from identity functor on `R`-module to the composition of extension and\\nrestriction of scalars.\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange|tensor.*changeOfRings|changeOfRings.*tensor|homEquiv.*tensor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange(_tmul|_symm_tmul)?",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"441\", \"text\": \"def distribBaseChange : A ⊗[R] (N ⊗[R] Q) ≃ₗ[A] (A ⊗[R] N) ⊗[A] (A ⊗[R] Q) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"462\", \"text\": \"theorem distribBaseChange_tmul (n : N) (q : Q) (a : A) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"463\", \"text\": \"    distribBaseChange R A N Q (a ⊗ₜ (n ⊗ₜ q)) = (a ⊗ₜ n) ⊗ₜ (1 ⊗ₜ q) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"467\", \"text\": \"theorem distribBaseChange_symm_tmul\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"469\", \"text\": \"    (distribBaseChange R A N Q).symm ((a ⊗ₜ n) ⊗ₜ (b ⊗ₜ q)) = (a * b) ⊗ₜ (n ⊗ₜ q) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: TensorProduct.AlgebraTensorModule.distribBaseChange and its two tmul formulas are for ordinary modules; descending through module sheafifications and identifying an arbitrary normalized sheaf map is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Tt]ensor|[Tt]ensor.*changeOfRings|distribBaseChange",
+   "results": "{\"t\": \"2026-10-22T06:26:46Z\", \"tool\": \"grep\", \"query\": \"changeOfRings.*[Tt]ensor|[Tt]ensor.*changeOfRings|distribBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\"], \"digest\": \"925b64eee58bfe7d\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: the returned scalar/tensor declarations are for ordinary modules or module sheafification structure, not arbitrary insertion-normalized sheaf tensor maps. Ordinary distribBaseChange is already the existing DAG leaf lem-trf-scalar-tensor-distrib-base-change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module scalar extension is strong monoidal with inverse on pure tensors multiplying scalars",
+   "results": "{\"t\": \"2026-10-22T06:26:46Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf module scalar extension is strong monoidal with inverse on pure tensors multiplying scalars\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "results": "{\"t\": \"2026-10-22T06:26:47Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"TensorProduct.AlgebraTensorModule.distribBaseChange_tmul\", \"TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul\", \"ModuleCat.extendScalars_δ\", \"ModuleCat.extendScalars_μ\", \"Algebra.TensorProduct.distribBaseChange_includeLeftSubRight_apply\", \"Algebra.TensorProduct.distribBaseChange_comp_includeLeftSubRight\"], \"digest\": \"afd42cdc4623f5d9\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: the returned scalar/tensor declarations are for ordinary modules or module sheafification structure, not arbitrary insertion-normalized sheaf tensor maps. Ordinary distribBaseChange is already the existing DAG leaf lem-trf-scalar-tensor-distrib-base-change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An insertion-normalized map between sheafified scalar extension of a tensor and tensor of scalar extensions has inverse multiplying the two scalars",
+   "results": "{\"t\": \"2026-10-22T06:26:57Z\", \"tool\": \"leanfinder\", \"query\": \"An insertion-normalized map between sheafified scalar extension of a tensor and tensor of scalar extensions has inverse multiplying the two scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.mul_smul\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"PresheafOfModules.Sheafify.one_smul\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Sheafify.map_smul\", \"PresheafOfModules.Sheafify.SMulCandidate.h\"], \"digest\": \"c7534a6aa7fd4808\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: the returned scalar/tensor declarations are for ordinary modules or module sheafification structure, not arbitrary insertion-normalized sheaf tensor maps. Ordinary distribBaseChange is already the existing DAG leaf lem-trf-scalar-tensor-distrib-base-change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings for sheaves of modules commutes with tensor product; a map determined by one tensor h tensor k has a scalar multiplying inverse",
+   "results": "{\"t\": \"2026-10-22T06:27:41Z\", \"tool\": \"leanfinder\", \"query\": \"Change of rings for sheaves of modules commutes with tensor product; a map determined by one tensor h tensor k has a scalar multiplying inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.Monoidal.tensorHom_app\", \"PresheafOfModules.Monoidal.tensorHom\", \"PresheafOfModules.monoidalCategoryStruct\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"PresheafOfModules.monoidalCategory\"], \"digest\": \"7e7961674c224d54\"}",
+   "date": "2026-10-22",
+   "verdict": "No full match: the returned scalar/tensor declarations are for ordinary modules or module sheafification structure, not arbitrary insertion-normalized sheaf tensor maps. Ordinary distribBaseChange is already the existing DAG leaf lem-trf-scalar-tensor-distrib-base-change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-ringed-tensor-adjunction-mate",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Parent def-pd-proetale-section-module-functors original Steps 3 and 7 / retained completion Steps 4–5 (Verdier exchange Step 2); Original item Step 4: descend the scalar-multiplying reverse pairing and prove both inverse identities on sheaves.",
+   "via": [
+    "lem-pd-ringed-tensor-adjunction-mate",
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pd-sheaf-scalar-tensor-inverse-formulas",
+  "worker": "stage1",
+  "group": "Q81",
+  "summary": "Retain the statement. Construct the scalar-multiplying presheaf pairing with both balancing checks and restriction compatibility; extend it using existing bilinear-extension and sheaf tensor universal properties; prove both inverse identities using their uniqueness clauses. No new nodes.",
+  "blueprint": "Retains the seeded ancestor chain with no imported blueprint ancestor. Realizes parent lem-pd-ringed-tensor-adjunction-mate original Step 4, in the recorded Verdier-exchange Step 2 support route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic existence and uniqueness of bilinear extension through module sheafification, applied to the two presheaves S tensor_A H and S tensor_A K; no same-unit statement supplies this."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic representing property of a sheafified balanced tensor, over A and S; constructs the inverse from a pairing and tests equalities, without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-2621c6386",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-2621c6386 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item split into 6 steps, no new nodes, no fixes. The statement and stmt_deps are identical to the item as Q102 created it (checked against the Q102 run snapshot), so the target is not weakened. The item is not in a dropped list and cites no SGA. Sources read: Stacks sites-modules.tex 03EK (section-tensor-product, l.3551, distributivity formula and Bilin representability), 0GMW (lemma-sheafification-tensor, l.3606, omitted proof with the hint bilinear maps + sheafification universal property) and 03CY (l.815); all three tags checked in tags/tags. Step 1: tau=s*q and q is A-linear by balancing; the forward formula follows from S-linearity of b. Step 2: both A-balancing checks hold in S(U)(x)_{A(U)}L(U) because H(U)xK(U)->L(U) is A-bilinear; S-bilinearity holds. Step 3: the pairing commutes with restrictions. Step 4: lem-pc-sites-module-sheafification-bilinear-extension applies with O=S already a sheaf and F^#=T(H), G^#=T(K); with lem-pc-sites-sheaf-tensor-bilinear-universal over S it gives d with d(tau_H(s,h)(x)tau_K(t,k))=tau_L(st,h(x)k). Step 5: db=id reduces via sheafification uniqueness to dbq_L=q_L, then via the A-tensor bijection into Res_alpha V to pure tensors h(x)k. Step 6: bd=id reduces via the S-tensor bijection and the uniqueness of bilinear extension to pure presheaf tensors, where bd(tau_H(s,h)(x)tau_K(t,k))=tau_H(st,h)(x)tau_K(1,k)=tau_H(s,h)(x)tau_K(t,k). The proof never assumes that sheaf sections are sums of pure tensors. Edge cases checked: S=0, alpha=id, H=0 or K=0, and the one-point site with Z->Z/2 (non-flat). DAG duplicate search: lem-weil-pbc-scalar-extension-tensor-comparison only asserts that one normalized iso exists, not that every normalized b is invertible with this inverse formula; it is a sibling cited together with the item in parent Step 4. Also checked and not duplicates: lem-pur-change-of-rings-tensor-comparison, lem-weil-pbc-scalar-tensor-comparison-universes, def-weil-pbc-canonical-ringed-tensor-comparison, and the derived and complex variants. The use in the parent (H=IM, K=IN) fits. Accepted tool_uses: the two generic sk-thm-picard-semicon universal-property nodes, which the 0GMW hint requires and which do not replace a step of the unit's route. Minor: restriction of scalars Res_alpha in Step 5 is not cited, which is elementary."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarTensorInverseFormulas",
+  "declaration": "SheafOfModules.scalarTensor_inverse_formulas",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarTensorInverseFormulas.lean",
+  "statement": "theorem scalarTensor_inverse_formulas {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} (A S : Sheaf J CommRingCat.{u}) (α : A ⟶ S) (H K : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) (b : changeOfRingsOfUniverses.{u, u, u, u} α ((siteSheafTensorRight.{u, u, u, u} K).obj H) ⟶ (siteSheafTensorRight.{u, u, u, u} (changeOfRingsOfUniverses.{u, u, u, u} α K)).obj (changeOfRingsOfUniverses.{u, u, u, u} α H)) (hb : ∀ (U : Cᵒᵖ) (h : H.val.obj U) (k : K.val.obj U), b.val.app U (scalarExtensionRingIsoTmul.{u, u, u, u} α ((siteSheafTensorRight.{u, u, u, u} K).obj H) U (siteSheafTensorTmul.{u, u, u, u} H K U h k) 1) = siteSheafTensorTmul.{u, u, u, u} (changeOfRingsOfUniverses.{u, u, u, u} α H) (changeOfRingsOfUniverses.{u, u, u, u} α K) U (scalarExtensionRingIsoTmul.{u, u, u, u} α H U h 1) (scalarExtensionRingIsoTmul.{u, u, u, u} α K U k 1)) : ∃ e : changeOfRingsOfUniverses.{u, u, u, u} α ((siteSheafTensorRight.{u, u, u, u} K).obj H) ≅ (siteSheafTensorRight.{u, u, u, u} (changeOfRingsOfUniverses.{u, u, u, u} α K)).obj (changeOfRingsOfUniverses.{u, u, u, u} α H), e.hom = b ∧ (∀ (U : Cᵒᵖ) (h : H.val.obj U) (k : K.val.obj U) (s : S.obj.obj U), b.val.app U (scalarExtensionRingIsoTmul.{u, u, u, u} α ((siteSheafTensorRight.{u, u, u, u} K).obj H) U (siteSheafTensorTmul.{u, u, u, u} H K U h k) s) = siteSheafTensorTmul.{u, u, u, u} (changeOfRingsOfUniverses.{u, u, u, u} α H) (changeOfRingsOfUniverses.{u, u, u, u} α K) U (scalarExtensionRingIsoTmul.{u, u, u, u} α H U h s) (scalarExtensionRingIsoTmul.{u, u, u, u} α K U k 1)) ∧ (∀ (U : Cᵒᵖ) (h : H.val.obj U) (k : K.val.obj U) (s t : S.obj.obj U), e.inv.val.app U (siteSheafTensorTmul.{u, u, u, u} (changeOfRingsOfUniverses.{u, u, u, u} α H) (changeOfRingsOfUniverses.{u, u, u, u} α K) U (scalarExtensionRingIsoTmul.{u, u, u, u} α H U h s) (scalarExtensionRingIsoTmul.{u, u, u, u} α K U k t)) = scalarExtensionRingIsoTmul.{u, u, u, u} α ((siteSheafTensorRight.{u, u, u, u} K).obj H) U (siteSheafTensorTmul.{u, u, u, u} H K U h k) (s * t))",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7953ae30d",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: b is an arbitrary morphism of S-module sheaves T(H⊗K)→T(H)⊗_S T(K) (changeOfRingsOfUniverses/siteSheafTensorRight, tensor order checked via siteSheafTensorTmul); hb is the insertion normalization for every U,h,k; ∃ e, e.hom = b; the forward formula with scalars (s,1) and the inverse formula e.inv(τ_H(s,h)⊗τ_K(t,k)) = τ_L(s*t, h⊗k). One common universe u as the node says; no extra instances, flatness or nonzero assumptions. Edge cases zero ring/module, α=id, non-flat α, empty site covered. No duplicate: lem-weil-pbc-scalar-extension-tensor-comparison is existential only. Proof is one sorry, no new defs; docstrings have source, blueprint id and all 6 steps; lines ≤100; proof-dep imports allowed by brief-stage2 l.104; record statement verbatim; only lean changed vs live; report sections present. Advisory: scalarExtensionRingIsoTmul is owned by def-sfb-scalar-extension-pure-tensor-section, which is not in stmt_deps (the node spells out τ inline). No compile run because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261022T202021-L-1249687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

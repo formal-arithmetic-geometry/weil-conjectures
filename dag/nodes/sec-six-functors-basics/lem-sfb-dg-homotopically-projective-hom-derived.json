@@ -1,0 +1,183 @@
+{
+ "id": "lem-sfb-dg-homotopically-projective-hom-derived",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRL, lemma-homotopy-colimit, including its proof with canonical maps; Tag 09QI, lemma-derived-products, clauses (1) and (2). Within lem-sfb-dg-sequential-colimit-triangle, step 2 (Tag 09QI part (2), direct sums are derived coproducts): the Hom comparison of Tag 09KY part (1) for the homotopically projective replacements.",
+   "via": [
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Morphisms out of a homotopically projective DG module in D(A,d)",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. For right differential graded $A$-modules $M,N$ let $\\underline{\\operatorname{Hom}}_A(M,N)$ be the complex whose degree-$r$ elements are families of additive maps $f:M^j\\to N^{j+r}$ with $f(ma)=f(m)a$, with differential $df=d_Nf-(-1)^rfd_M$. Its closed degree-zero elements are the module maps commuting with the differentials, and two of them are chain homotopic when their difference is $dh$ for some $h$ of degree $-1$; thus the homotopy category $K(A,d)$ has $\\operatorname{Hom}_{K(A,d)}(M,N)=H^0\\underline{\\operatorname{Hom}}_A(M,N)$, and $D(A,d)$ is its localization, with localization functor $K(A,d)\\to D(A,d)$. Call a right differential graded $A$-module $P$ homotopically projective if $\\underline{\\operatorname{Hom}}_A(P,N)$ is acyclic for every right differential graded $A$-module $N$ with $H^i(N)=0$ for all $i$. If $P$ is homotopically projective, then for every right differential graded $A$-module $N$ the map $\\operatorname{Hom}_{K(A,d)}(P,N)\\to\\operatorname{Hom}_{D(A,d)}(P,N)$ induced by the localization functor is bijective. No boundedness, freeness or countability assumption is imposed on $P$, $N$ or $A$; the cases $P=0$ and $N=0$ are included.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KY, lemma-hom-derived, part (1) and its proof (the only input on P used there is the vanishing of Tag 09KM, lemma-property-P-K-projective, i.e. homotopical projectivity)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-homotopy-structure",
+  "def-sfb-dg-homotopically-projective",
+  "def-sfb-dg-homotopy-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-dg-homotopy-acyclic-localization], $\\mathcal T=K(A,d)$ is triangulated, its strictly full subcategory $\\mathcal E$ of acyclic DG modules is triangulated, and the morphisms with a cone in $\\mathcal E$ are exactly the quasi-isomorphisms. Consequently the functor $L:K(A,d)\\to D(A,d)$ specified in the statement is a localization at precisely $W_{\\mathcal E}$. This checks the categorical hypotheses of the general orthogonal localization theorem; the ambient category is the DG-module homotopy category, rather than the homotopy category of ordinary complexes of modules over the underlying graded ring.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KJ, proposition-homotopy-category-triangulated; Tag 09KW, lemma-acyclic; Tag 09KX, definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "For every $E\\in\\mathcal E$, homotopical projectivity makes $\\underline{\\operatorname{Hom}}_A(P,E)$ acyclic. Its zeroth cohomology is therefore zero. The identity $\\operatorname{Hom}_{K(A,d)}(P,E)=H^0\\underline{\\operatorname{Hom}}_A(P,E)$ in the statement now gives $\\operatorname{Hom}_{K(A,d)}(P,E)=0$: every closed degree-zero map is a boundary, hence is null homotopic. Thus $P$ is left orthogonal to $\\mathcal E$. No property-(P) resolution or termwise projectivity is used. All shifts of acyclic modules already belong to $\\mathcal E$, so this also supplies the shifted vanishing used in the source proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KY, lemma-hom-derived, proof of (1), the vanishing input attributed there to Tag 09KM; here it follows directly from the stronger Hom-complex hypothesis in the item."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-left-orthogonal-localization-hom] with $\\mathcal T=K(A,d)$, the subcategory $\\mathcal E$ of step 1, the object $P$ of step 2, and $L$ the stated localization. For every DG module $N$ it gives the bijection $\\operatorname{Hom}_{K(A,d)}(P,N)\\to\\operatorname{Hom}_{D(A,d)}(LP,LN)$, and its statement identifies this map as $f\\mapsto L(f)$. This is exactly the required canonical map. The two inputs impose no bounds on degrees or cardinality, and their hypotheses still hold when $P=0$, $N=0$ or $A$ is the zero ring.",
+   "uses": [
+    "lem-sfb-left-orthogonal-localization-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KY, lemma-hom-derived, proof of (1), lifting uniquely across a quasi-isomorphism by the acyclic-cone vanishing; general categorical form in Mathlib/CategoryTheory/Triangulated/Orthogonal.lean:124-137."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-homotopy-acyclic-localization",
+  "lem-sfb-left-orthogonal-localization-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KY, lemma-hom-derived, proof of (1), using Tags 09KJ and 09KW and the general Mathlib left-orthogonal localization theorem for its cone/fractions argument. The hypothesis of this item gives the vanishing directly, without property (P)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKProjective\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no direct match: CochainComplex.IsKProjective.Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) treats ordinary cochain complexes. Its generic categorical ingredient was found and made a separate exact Mathlib leaf, but the arbitrary-DG-algebra triangulation and acyclic class require a new statement-only foundation node. Thus the item itself is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a homotopically projective differential graded module in the derived category equal homotopy classes of DG module maps",
+   "results": "{\"t\": \"2026-10-24T00:30:46Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms from a homotopically projective differential graded module in the derived category equal homotopy classes of DG module maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"DerivedCategory.Q_map_eq_of_homotopy\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"43299f785ef9e575\"}",
+   "date": "2026-10-24",
+   "verdict": "no direct match: CochainComplex.IsKProjective.Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) treats ordinary cochain complexes. Its generic categorical ingredient was found and made a separate exact Mathlib leaf, but the arbitrary-DG-algebra triangulation and acyclic class require a new statement-only foundation node. Thus the item itself is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|IsKProjective",
+   "results": "{\"t\": \"2026-10-24T00:31:28Z\", \"tool\": \"grep\", \"query\": \"DGModule|DGAlgebra|DifferentialGraded|IsKProjective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\"], \"digest\": \"3179534aafe978cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no direct match: CochainComplex.IsKProjective.Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) treats ordinary cochain complexes. Its generic categorical ingredient was found and made a separate exact Mathlib leaf, but the arbitrary-DG-algebra triangulation and acyclic class require a new statement-only foundation node. Thus the item itself is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopically projective differential graded modules derived category morphisms localization",
+   "results": "{\"t\": \"2026-10-24T00:31:29Z\", \"tool\": \"leansearch\", \"query\": \"homotopically projective differential graded modules derived category morphisms localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"DerivedCategory.Qh\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.Qh\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\"], \"digest\": \"3c08ab5b82f56130\"}",
+   "date": "2026-10-24",
+   "verdict": "no direct match: CochainComplex.IsKProjective.Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) treats ordinary cochain complexes. Its generic categorical ingredient was found and made a separate exact Mathlib leaf, but the arbitrary-DG-algebra triangulation and acyclic class require a new statement-only foundation node. Thus the item itself is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the covariant representable functor Hom X inverts a class W of morphisms then localization induces a bijection from Hom X Y to Hom LX LY",
+   "results": "{\"t\": \"2026-10-24T00:34:28Z\", \"tool\": \"leanfinder\", \"query\": \"If the covariant representable functor Hom X inverts a class W of morphisms then localization induces a bijection from Hom X Y to Hom LX LY\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.homEquiv\", \"CategoryTheory.Localization.LeftBousfield.W.homEquiv\", \"CategoryTheory.Localization.homEquiv_apply\", \"CategoryTheory.Localization.homEquiv_eq\", \"CategoryTheory.Localization.homEquiv_isoOfHom_inv\", \"CategoryTheory.Localization.homEquiv_refl\", \"CategoryTheory.Localization.homEquiv_symm_apply\", \"CategoryTheory.Localization.SmallHom.chgUniv\"], \"digest\": \"e5ee75e56a512258\"}",
+   "date": "2026-10-24",
+   "verdict": "no direct match: CochainComplex.IsKProjective.Qh_map_bijective (DerivedCategory/KProjective.lean:43-48) treats ordinary cochain complexes. Its generic categorical ingredient was found and made a separate exact Mathlib leaf, but the arbitrary-DG-algebra triangulation and acyclic class require a new statement-only foundation node. Thus the item itself is not a one-line Mathlib specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-sequential-colimit-triangle",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-homotopically-projective-hom-derived",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof by the acyclic Verdier class, explicit Hom-complex orthogonality, and an exact generic Mathlib localization leaf. Statement unchanged. Searched current Lean source and entire DAG/blueprint; no exact attachment or duplicate found. Two new nodes, one Mathlib leaf.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); inherited supporting chain in blueprint.from.place, specifically the Hom comparison in step 2 of lem-sfb-dg-sequential-colimit-triangle. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Steps realize 09KY proof (1): triangulated acyclic cone, Hom vanishing, unique localization lift."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-167c7f94d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-167c7f94d (reviewer sub-agent of L); spot-checked: Read Stacks dga.tex 09KY(1) and its proof (l.2633), 09KW lemma-acyclic, 09KJ (l.1130, TR4), the pre-triangulated TR1 lemma (l.1007), definition-shift and definition-cone. The item is the same as the Q92 reviewer-added node: statement, source, stmt_deps and blueprint are byte-identical; only proof fields, split_report and logged searches changed. It is true as stated: the only input on P in 09KY is Hom_K(P, acyclic)=0, which the hypothesis that the Hom complex is acyclic gives through H^0. Step 1 cites the new DG node: K(A,d) is triangulated, the acyclics form a strictly full triangulated subcategory, and W_E equals the quasi-isomorphisms, so L is a localization at W_E. Step 2 is elementary and correct (H^0 of the Hom complex = Hom_K, so P is left orthogonal). Step 3 cites the Mathlib leaf leftOrthogonal.map_bijective_of_isTriangulated. I read Orthogonal.lean:124-137 and ObjectProperty/Orthogonal.lean:41-47: the match is exact (P.IsTriangulated = def-weil-triangulated-subcategory, IsTriangulated C = TR4, trW = W_E, D arbitrary). The split is genuine: the new nodes are not clauses of the item, and there is no cycle. I verified by hand the right-module Hom-complex differential, the shift Leibniz rule and the cone action. Small cases: A=0, A=Z in degree 0, P=0, N=0, an acyclic but non-contractible module over Z, E={0}, E=T. Duplicate search found none: lem-sfb-dg-derived-admissible-triangles states D(A,d) is triangulated, not K(A,d) or the acyclic class; the lem-coef dg enhanced-localization nodes are another unit's heavy package; lem-coef-kprojective-derived-hom-bijection and lem-sc-kinjective-quasi-iso-comparison are for ordinary complexes; lem-trf-triangulated-subcategory-cone-system and lem-sf-shift-stable-left-orthogonal are different statements. No SGA, no tool_uses. FIX (B2/E6): lem-sfb-dg-homotopy-acyclic-localization declared triangles distinguished via 'the usual cone connecting map'. With its own cone differential, Stacks (dga l.730 and TR1) takes (f, i, -p) as the distinguished cone triangle. The statement now names i(y)=(y,0) and the third map (y,x) ↦ -x; no other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgHomotopicallyProjectiveHomDerived",
+  "declaration": "CategoryTheory.DgAlgebra.homotopicallyProjective_hom_derived_bijective",
+  "file": "lean/Sheaf/CategoryTheory/DgHomotopicallyProjectiveHomDerived.lean",
+  "statement": "theorem homotopicallyProjective_hom_derived_bijective (A : Algebra.{u}) (P N : RightModule A) (hP : IsHomotopicallyProjective A P) : Function.Bijective ((homotopyDerivedFunctor A).map : ((homotopyQuotient A).obj P ⟶ (homotopyQuotient A).obj N) → ((homotopyDerivedFunctor A).obj ((homotopyQuotient A).obj P) ⟶ (homotopyDerivedFunctor A).obj ((homotopyQuotient A).obj N)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae0ace119",
+  "group": "N5",
+  "result": "pass",
+  "note": "Item theorem homotopicallyProjective_hom_derived_bijective matches node and Stacks 09KY(1): arbitrary A : Algebra.{u}, P N : RightModule A, hP : IsHomotopicallyProjective, conclusion Function.Bijective of the canonical map (homotopyDerivedFunctor A).map on Hom_K(qP,qN). Node diff vs live: only lean/stmt_deps. New def-sfb-dg-homotopically-projective: Hom-complex acyclicity via IsRightLinearCochain (no sign) and HomComplex.δ (sign d_N f − (−1)^r f d_P checked), exact dual of landed IsHomotopicallyInjective, no duplicate. New def-sfb-dg-homotopy-derived-functor: genuine Quotient.lift of Q along the landed homotopy quotient; Q_map_eq_of_homotopy stated in the node, sorry, cylinder proof checked (d²=0, Leibniz, chain-map condition equivalent to f−g=dh+hd). Proof plan feasible via homotopy_acyclic_localization and Mathlib leftOrthogonal.map_bijective_of_isTriangulated. Edge cases P=0, N=0, zero algebra, negative r covered. No collisions in live Lean/DAG; docstrings with source and blueprint; sorry only; statement verbatim; universe u bound. Minor: new def node omits def-weil-size-convention stmt_dep (harmless). No file changed, no compile."
+ }
+}

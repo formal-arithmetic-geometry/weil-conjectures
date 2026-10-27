@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-space-supported-koszul-low-localization",
+ "kind": "statement",
+ "title": "A supported Koszul test controls low truncation of open localization",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $(i:U\\hookrightarrow X,p:V\\to X)$ be an elementary distinguished square: $U$ is a quasi-compact open subspace [def-a1-space-open-subspace], $p$ is representable etale, $V=\\operatorname{Spec}A$ is affine, and $V\\times_X Z\\to Z$ is an isomorphism for the reduced closed subspace $Z$ of $X$ with underlying set $|X|\\setminus|U|$ [lem-sfb-space-reduced-closed-support]. Put $T=U\\times_XV$. There is a finite list $f_1,\\ldots,f_r\\in A$ with $T=\\bigcup_{k=1}^rD(f_k)$. For every such list, let $B\\in D(\\mathcal O_V)$ be the associated etale complex of the Koszul complex $K_\\bullet(f_1,\\ldots,f_r)$ [def-weil-pbc-koszul-complex], placed in cohomological degrees $-r,\\ldots,0$ by $B^{-n}=\\widetilde {K_n}$ [lem-sfb-affine-etale-derived-module-realization]. Use canonical derived module functors [lem-sfb-space-derived-etale-chart-calculus] and standard truncation [def-sbc-standard-tstructure-derived-category]. Then $B_X=Rp_*B$ is perfect. For every $E\\in C_X$, if $\\operatorname{Hom}_{D(\\mathcal O_X)}(B_X,E[j])=0$ for all sufficiently negative integers $j$, there exists $a\\in\\mathbf Z$ such that the canonical open-adjunction unit induces an isomorphism in $D(\\mathcal O_X)$\n$$\\tau_{\\le a}E\\xrightarrow{\\sim}\\tau_{\\le a}Ri_*(i^*E).$$",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFI, proposition-detecting-bounded-below, distinguished-square proof through the low-truncation comparison; supported transport: Tags 08HK lemma-pushforward-perfect and 08GG lemma-pushforward-with-support-in-open; affine orthogonality: perfect.tex Tag 0GEK lemma-orthogonal-koszul-second-variant."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "def-weil-pbc-koszul-complex",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-a1-space-point-topology",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-hom-comparison",
+  "def-trf-scheme-algebraic-space",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "proof": [
+  {
+   "text": "The open $U$ is quasi-separated: its absolute diagonal is the base change of the quasi-compact absolute diagonal of $X$. The affine $V$ is qcqs, so $T=U\\times_XV$ is quasi-compact by the qcqs fibre-product lemma. Since $T$ is an open of $\\operatorname{Spec}A$, refine it by the principal-open basis and take a finite subcover. This gives the required finite list, allowing the empty list when $T$ is empty.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, proposition-detecting-bounded-below, paragraph Say V = Spec(A)."
+   }
+  },
+  {
+   "text": "Fix any such list. In degrees $-q$ the associated etale Koszul object has finite free terms with the exterior-subset bases; there are no terms outside $[-r,0]$. Indeed the affine associated etale functor is exact, sends $A$ to $\\mathcal O_V$, and preserves finite direct sums. Thus this actual representative makes $B$ perfect. On $D(f_k)$ the operator $h(x)=f_k^{-1}e_k\\wedge x$ has $dh+hd=\\mathrm{id}$ by the contraction formula for the Koszul differential. It is a homotopy of the sheafified complex, and remains so on every etale chart of $D(f_k)$. Hence $B|_{D(f_k)}=0$ and $B|_T=0$.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, Koszul construction; Tag 0663, Koszul contraction."
+   }
+  },
+  {
+   "text": "Apply supported etale excision to $F=B$. It gives $p^*Rp_*B\\cong B$ and $i^*Rp_*B=0$. The family $U\\amalg V\\to X$ is a surjective etale covering: it covers $U$, and $V$ is an isomorphism above the reduced complement. Both restrictions of $B_X=Rp_*B$ are perfect, by step 2 and the zero complex. Perfectness is defined locally on this site. For an etale object $W$ of $X$, cover it by $W\\times_XU$ and $W\\times_XV$. On the first, $B_X$ restricts to $0$. On the second, the derived isomorphism $B\\cong p^*B_X$ from the strictly perfect complex $B$ is, after refining the covering, represented by chain maps by the strict-perfect local-actual lemma; these are quasi-isomorphisms because their images in the derived category are isomorphisms. So $B_X$ is perfect. Excision also gives, for every $j$, $\\operatorname{Hom}(B_X,E[j])\\cong\\operatorname{Hom}(B,p^*E[j])$. Thus the assumed vanishing holds on the affine chart for all sufficiently negative $j$.",
+   "uses": [
+    "lem-sfb-space-supported-etale-excision",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-ringed-site-strict-perfect-local-actual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 08GG and 08HK; Tag 0GFI, supported pushforward and Hom formula."
+   }
+  },
+  {
+   "text": "Put $E_V=p^*E$, which has quasi-coherent cohomology by the etale chart calculus. Choose $a$ so that $\\operatorname{Hom}(B,E_V[n])=0$ for every $n\\leq a$; this is the same as $\\operatorname{Hom}(B[-n],E_V)=0$. Use the derived etale/Zariski equivalence on $V$ and $T$. Its exactness identifies their standard truncations, and its canonical pullback and direct-image comparisons identify the open adjunction unit: both units are adjoint to the identity of the restricted object. The associated Koszul object corresponds to $C_f$, because etale realization is Zariski tilde followed by exact etale pullback. Apply the quantitative affine Koszul lemma to the corresponding Zariski object and transport back. For $k:T\\hookrightarrow V$ this yields the canonical isomorphism $\\tau_{\\leq a}E_V\\to\\tau_{\\leq a}Rk_*(E_V|_T)$. The comparison for $k$ applies because $T$ is a quasi-compact open of an affine scheme, hence $k$ is quasi-compact and separated.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-affine-koszul-low-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, application of perfect-lemma-orthogonal-koszul-second-variant (Tag 0GEK); etale/Zariski comparison Tag 08H8."
+   }
+  },
+  {
+   "text": "Let $u:E\\to Ri_*i^*E$ be the specified unit. Etale base change identifies $p^*u$ with $E_V\\to Rk_*(E_V|_T)$, and identifies $i^*u$ with the identity of $i^*E$; these are the canonical identifications respecting units in the chart calculus. Exact restriction commutes with cohomology and therefore with the standard truncation. Hence $\\tau_{\\leq a}u$ restricts to isomorphisms on $V$ by step 4 and on $U$ by the identity calculation. Its cone consequently has zero cohomology after restriction to the covering $U\\amalg V$. Every section of any of these cohomology sheaves is locally zero on that cover and so is zero by the sheaf axiom. Thus the cone is acyclic, and $\\tau_{\\leq a}u$ is an isomorphism in $D(\\mathcal O_X)$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, check that the canonical map is an isomorphism after restricting to U and to V."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-pbc-koszul-complex",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-space-supported-etale-excision",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-affine-koszul-low-localization",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sfb-ringed-site-strict-perfect-local-actual"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFI, proposition-detecting-bounded-below, distinguished-square proof from Say V = Spec(A) through the low-truncation comparison; supporting Tags 08GG, 08HK and 0GEK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*([Ee]tale|[Pp]ushforward|trunc)|([Ee]tale|[Pp]ushforward).*Koszul",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul supported etale neighborhood perfect pushforward detects low truncation open localization",
+   "results": {
+    "hits": 8,
+    "top": [
+     "RingHom.Etale.propertyIsLocal",
+     "HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside",
+     "HomologicalComplex.isZero_stupidTrunc_iff",
+     "RingHom.Etale.ofLocalizationSpanTarget",
+     "HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported",
+     "Algebra.basicOpen_subset_etaleLocus_iff",
+     "CochainComplex.quasiIso_ιTruncLE_iff",
+     "Algebra.isOpen_etaleLocus"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"IsIso\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Koszul complex supported on the closed complement in an elementary distinguished square extends perfectly and detects lower truncation of localization",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.IsGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported perfect complex extension by zero along etale neighborhood and negative Ext Koszul localization comparison",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "HomologicalComplex.instIsStrictlySupportedExtend",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported Koszul complex in an etale distinguished square detects low truncation of derived open localization",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside",
+     "HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported",
+     "HomologicalComplex.quasiIso_πTruncGE_iff_isSupported",
+     "HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside",
+     "HomologicalComplex.isZero_stupidTrunc_iff",
+     "Algebra.etaleLocus_eq_compl_support"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"trunc\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "([Kk]oszul.*(trunc|localiz)|[Ss]upported.*[Ee]tale)",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Negative Koszul Ext vanishing detects low degree open localization on an algebraic space",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "Algebra.basicOpen_subset_etaleLocus_iff",
+     "Algebra.basicOpen_subset_etaleLocus_iff_etale",
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+     "AlgebraicGeometry.Γ_restrict_isLocalization"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern complex-shape support, generic truncations, or ring etale loci, not the stated geometric derived assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-detects-lower-bound",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, paragraphs Say V=Spec(A) through Then tau_le_a E = tau_le_a R(U to X)_*(E|U).",
+   "via": [
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-supported-koszul-low-localization",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0GFI on the canonical unit, with explicit Koszul contraction, supported etale excision, quantitative affine low-degree orthogonality and etale-local verification. Created two statement-only inputs; no change to the item statement.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited proper/open direct-image prerequisite; exact inherited from.place and via chain retained. blueprint_refs ancestor returns None, matching inherited null from.node. The split realizes the indicated 0GFI supported-Koszul paragraph and low-truncation comparison, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme topology or etale/Zariski derived comparison used beneath the existing supported-Koszul prerequisite; it does not replace any direct-image unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic scheme topology or etale/Zariski derived comparison used beneath the existing supported-Koszul prerequisite; it does not replace any direct-image unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-99bd98bee",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-99bd98bee (reviewer sub-agent of L); spot-checked: FIX with one repaired fault. I read the item, the two new nodes, every cited statement, and the sources: Stacks 0GFI ('Say V=Spec(A)' through the U/V check), 08GG, 08HK and 0GEK. This is not a re-split: the item was created on 2026-10-23 with an empty proof. Fault, C1/C4 in step 3: it concluded 'B_X is perfect' from a derived iso B≅p^*B_X, but def-weil-pbc-strict-perfect-coefficient-package requires local chain quasi-isos. That passage is Stacks 08FR, carried by the existing same-unit node lem-sfb-ringed-site-strict-perfect-local-actual. The fix adds that citation to step 3 and proof_deps and writes out the cover W×U, W×V. I checked the new citation makes no cycle. Steps 1, 2, 4 and 5 check out. Step 1: U is qs as a base change of Δ_X, T is qc by the qcqs fibre product lemma, basic opens give the finite list. Step 2: the contraction homotopy satisfies Dh+hD=id. Step 4: the étale/Zariski equivalence carries τ, Hom and Rk_* for qcqs k:T→V. Step 5: base change plus the sheaf axiom on U⊔V. New node lem-sfb-affine-koszul-low-localization is exactly 0GEK (2)⇒(1); tested r=0, f=0 and f=1. It is not a duplicate of the τ≥ node (0GEJ) or the all-shifts 09IR nodes. New node lem-sfb-space-supported-etale-excision is exactly 08GG(2). I checked that c_F (transpose of unit⁻¹) is an iso: p^*c_F is iso by (a) and (b), both sides are zero on U. It is not a duplicate of the scheme open-pushforward or shriek-exact nodes. Batch-5 flags: all seven are algebraic-space foundations, reaching sec-trace-formula only through def-trf-algebraic-space, def-trf-space-quasi-coherent-module and the trf fibre-product and Zariski/étale comparison lemmas. None is a step of the trace formula or Poincaré duality, so I accept them. I accept the tool_uses for the two Mathlib leaves. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSupportedKoszulLowLocalization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_supported_koszul_low_localization",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineEtaleKoszul",
+   "AlgebraicGeometry.AlgebraicSpace.space_supported_koszul_low_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSupportedKoszulLowLocalization.lean",
+  "statement": "theorem space_supported_koszul_low_localization {S : Scheme.{u}} (X U : AlgebraicSpace S) (i : U ⟶ X) (hi : IsRepresentableWith (fun _ _ q ↦ IsOpenImmersion q.left) i.hom.hom) (hXqc : CompactSpace (Point X.obj.obj)) (hXqs : IsAbsolutelyQuasiSeparated X) (hUqc : CompactSpace (Point U.obj.obj)) (A : Type u) [CommRing A] (s : Spec (.of A) ⟶ S) (p : schemeSpace (Over.mk s) ⟶ X) (hp : IsEtale p.hom.hom) (Z : ClosedSubspace X) (hZred : IsReduced (Z.val : AlgebraicSpace S)) (hZ : pointImage Z.val.arrow.hom.hom = (pointImage i.hom.hom)ᶜ) (hZp : IsIso (pullback.snd p.hom Z.val.arrow.hom)) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} U.SmallModules] [HasDerivedCategory.{w} (schemeSpace (Over.mk s)).SmallModules] : (∃ (r : ℕ) (f : Fin r → A), schemePointMap p.hom.hom ⁻¹' pointImage i.hom.hom = ⋃ k : Fin r, (PrimeSpectrum.basicOpen (f k) : Set (PrimeSpectrum A))) ∧ ∀ (r : ℕ) (f : Fin r → A), schemePointMap p.hom.hom ⁻¹' pointImage i.hom.hom = ⋃ k : Fin r, (PrimeSpectrum.basicOpen (f k) : Set (PrimeSpectrum A)) → SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf ((derivedDirectImage p).obj (spaceAffineEtaleKoszul A s r f)) ∧ ∀ E : X.DerivedModules, X.derivedQCohProperty E → (∃ b : ℤ, ∀ j : ℤ, j ≤ b → Subsingleton (((derivedDirectImage p).obj (spaceAffineEtaleKoszul A s r f)) ⟶ (E⟦j⟧))) → ∃ a : ℤ, IsIso ((DerivedCategory.TStructure.t.truncLE a).map ((spaceDerivedAdjunction i).unit.app E))",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper constructs the associated etale Koszul complex termwise using the existing affine scalar pullback on the canonical small ringed model. The theorem includes existence of a finite basic-open list and the perfectness/localization conclusion for every such list. The comparison is the truncation of the normalized canonical derived-adjunction unit. Added only already landed definition-owner dependencies; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44a6add93",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of e544980d9924. Lean file byte-identical to the returned head. Node differs from live only in lean and stmt_deps; proof and proof_deps unchanged. The theorem node lem-trf-space-enlarged-etale-ringed-site-model is replaced by def-trf-scheme-algebraic-space (existing:true, owns schemeSpace). The four advisory owners are added (point classes, closed subspace, reduced space, small ringed model). All 10 added deps are definition nodes whose lean records list the declarations used. Clauses rechecked against Stacks 0GFI: qcqs X, quasi-compact open U via explicit i, affine étale p, reduced complement Z with hZp, overlap T as a subset of Spec A via schemePointMap, existence plus for-all over lists, real Koszul helper, perfect pushforward with universes u,u,u,w, eventual negative Hom vanishing, IsIso of the truncated unit of the ∃!-pinned spaceDerivedAdjunction. Edge cases r=0, empty U, U=X and zero ring all covered. No compile (no file changed). Advisory for stage 3: node proof step 4 keeps the 0GEK endpoint off by one; the docstring's a=b-1 is correct and the statement is existential in a."
+ }
+}

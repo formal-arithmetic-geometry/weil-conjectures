@@ -17,9 +17,69 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), ordinary internal lattice calculation, proof steps 9 and 13: normalized derived adjunction and strong inflation tensor"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The internal-module category is Grothendieck. On SingleObj (Group r), the evaluation left adjoints carry a module separator to a separating family: adjunction naturality reduces equality of natural transformations to equality detected by that separator. Its coproduct is a separator; filtered colimits and AB5 are pointwise. Transport along Action.functorCategoryEquivalence. This repeats the proved argument of DiscreteLattice.resolutions and proves actionGrothendieck.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": "Mathlib evaluation adjunction, pointwise AB5 and equivalence transfer."
+  },
+  {
+   "text": "Forgetting actions commutes definitionally with tensoring, preserves colimits and reflects them. The closed tensor of internal modules preserves colimits; hence tensoring actions preserves colimits. The special adjoint functor theorem using the action separator gives actionTensorLeftAdjoint, and therefore actionClosed.",
+   "uses": [],
+   "elementary": "Mathlib Action limits and the special adjoint functor theorem."
+  },
+  {
+   "text": "Let Lambda be the existing functorial flat resolution of internal modules. Map each group-action homomorphism by the endofunctor Lambda.F followed by inclusion. Naturality of Lambda.pi makes its augmentation equivariant and natural. If an underlying module is flat, both tensor functors on its action are exact because forgetting commutes with them and reflects finite limits and colimits. Forgetting also reflects epimorphisms. Thus the lifted endofunctor and augmentation prove actionFlatResolutions.",
+   "uses": [
+    "lem-sfb-modobj-flat-resolutions"
+   ],
+   "elementary": "Functor.mapAction and reflection of finite (co)limits and epimorphisms."
+  },
+  {
+   "text": "Trivial action followed by forgetting is the identity, so trivial action preserves finite limits and colimits. A map from a trivial action defines the constant-legged cone on the action diagram; limit.lift gives its transpose, and composition with limit.pi gives its inverse. Limit uniqueness proves the two inverse laws and naturality. Build the adjunction from this equivalence. The prescribed inverse-transpose equation at an identity determines every counit component, and Adjunction.ext_counit proves uniqueness. This proves trivialProperties and trivialAdjunctionExists.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": "The limit universal property and adjunction hom equivalences."
+  },
+  {
+   "text": "Apply rightDerivedFunctorOfQuasiIsoResolutions_unique to the ordinary rightDerivedFunctor and its computation unit. The latter universal factorization map is bijective by rightDerived_ext, rightDerivedDesc and rightDerived_fac. This proves ordinaryDerivedIsoExists with exactly the required unit normalization.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": "The Mathlib total-right-derived universal property."
+  },
+  {
+   "text": "For trivialCoreExists, use Action.tensorUnitIso on the identity and Action.mkIso on the underlying identity tensor map. The diagonal tensor of trivial actions is trivial. Faithfulness of forgetting reduces naturality, associativity and both unit laws to the ordinary tensor identities. The stated coordinate equations uniquely determine the unit and tensor isomorphisms; the other CoreMonoidal fields are proofs, so the complete structure is unique.",
+   "uses": [],
+   "elementary": "Identity tensorators, Action.Hom.ext, Iso.ext and proof irrelevance."
+  },
+  {
+   "text": "Remaining named theorem derivedCoreExists: trivial inflation is exact, strong monoidal, left adjoint and preserves flat objects because forgetting creates exactness. Apply the two-variable derived tensor comparison on flat K-flat resolutions. Its model equation determines each tensorator on those representatives, then naturality determines it everywhere. The localized ordinary unit fixes the unit. Associativity and the two unit laws descend from the ordinary identity tensorator. This theorem remains sorry in the partial delivery.",
+   "uses": [
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": null
+  },
+  {
+   "text": "Use the uniquely specified ordinary adjunction and unit-compatible derived comparison to form derivedAdjunction. Once derivedCoreExists supplies the strong left-adjoint tensor, Mathlib Adjunction.rightAdjointLaxMonoidal equips derived invariants with the tensor-of-counits lax structure. The existing downstream definitions and theorem signatures are unchanged.",
+   "uses": [],
+   "elementary": "Existing exact-left derived-adjunction and right-adjoint lax-monoidal constructions."
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-sfb-right-derived-functor",
+  "lem-derived-right-exact-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary internal lattice calculation; H3 formal proof using the existing lattice-resolution argument, module flat resolutions and Mathlib universal properties. Seven auxiliary theorems proved; the derived-core existence and uniqueness theorem remains open."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -70,10 +130,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -142,5 +206,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "Re-delivery after RETURN bdc4ce08b4f8. H3(1) fixed: totalCommShift built from mapCochainComplexShiftIso + totalShift₂Iso (sign (-1)^(a·n)), and the new factorShiftCompatibility (NatTrans.CommShift factor.hom) fixes the descended functor's shift through the localization, so triangulated/shiftCompatibility are no longer vacuous. H3(2) fixed: new def node def-sfb-lattice-restriction-cup-comparison (Bridge/Compatible). The equivalence is tied to underlying+constants, invariants fixed by inclusion, derived by computation units on every complex, regular by underlying, the tensorator on flat K-flat representatives and the unit; cohomologyIso does not depend on the choice. Compatible equates the restriction-calculus cup and cupUnit (ring ⟨R.X⟩, G = ULift (Multiplicative (Fin r→ℤ)), the citer's Lattice r) with DerivedCup.cup and cupUnit of the regular algebra, via the raise u+1→u+2 transport and no universe equality. Not a duplicate of the rank-one RelativeCyclic.DiscreteBridge. Records: stmt_deps adds the new node, statement verbatim, declarations listed, 'structure Bridge' convention OK. The other two modules are byte-identical to bdc4 (checked there). Docstrings/H5/H6/H8 OK, no extra hypotheses. No compile (no file changed). Advisory: citer step 3 should name the Bridge for the connecting-class transport."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T082049-L-2127969",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

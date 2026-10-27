@@ -37,84 +37,72 @@
  ],
  "proof": [
   {
-   "text": "Let $F$ be the stated restricted functor and $L$ its ambient derived extension. By [lem-sfb-integral-derived-extension-comparison], the actual coefficients agree with the continuous integral coefficients, the integral source is triangulated, $L$ is additive and triangulated, and $F$ is its additive restriction under the specified full inclusions.",
+   "text": "Equip E with its norm from the fixed algebraic-closure embedding. The scalar-tower identity gives its normed Q_ell-algebra structure, and the continuous integral coefficient map is definitionally padicIntegersToPadicSubfield. Apply integralScalarExtension_exact. The canonical leftDerivedFunctorIsoMapDerivedCategory identifies the actual left derived extension L with termwise exact extension; transport its shift and triangulated structure along this isomorphism. The integral bounded constructible source has the proved coefficient-specific triangulated structure.",
    "uses": [
-    "lem-sfb-integral-derived-extension-comparison"
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-padic-integers-bounded-triangulated",
+    "sk-def-sfb-derived-extension-of-scalars"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sfb-rational-derived-scalar-invertible], every $\\ell^n\\operatorname{id}$ is invertible on ambient rational objects, hence also in the rational full subcategory. If $Z$ is a cone killed by $\\ell^n$, additivity gives $\\ell^n\\operatorname{id}_{LZ}=0$; cancelling this invertible endomorphism gives $\\operatorname{id}_{LZ}=0$. The image triangle has zero cone, so [lem-kun-distinguished-cone-zero] makes its first map invertible. Full inclusions reflect inverses, and thus $F$ inverts the class of [sk-def-sfb-rationalization].",
+   "text": "Apply the already proved private rationalization_of_subcategory_models helper preserved in Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization, with the original restricted functor and its specified compatibility. In that helper, derived_nsmul_isIso gives invertibility of ell on ambient rational objects; induction gives every power. Additivity carries a torsion cone to a zero object, so distinguished-triangle exactness makes its first map invertible. Full inclusions reflect inverses. No triangulated structure on the rational full subcategory is needed.",
    "uses": [
-    "lem-sfb-rational-derived-scalar-invertible",
+    "lem-weil-pbc-continuous-constructible-integral-image",
     "lem-kun-distinguished-cone-zero",
     "sk-def-sfb-rationalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a map $h:FA\\to FB$, apply [lem-weil-pbc-continuous-constructible-integral-denominators] through the compatibility of step 1 to get $\\ell^nh=F(u)$. For every rational bounded constructible $K$, [lem-weil-pbc-continuous-constructible-integral-model] gives an integral $M$ and $LM\\cong K$. This isomorphism and its inverse are morphisms in the full subcategory, so $FM\\cong K$ there. Hence $F$ is essentially surjective.",
+   "text": "Supply continuousConstructible_integral_model and continuousConstructible_clear_denominators as the model and denominator premises of the helper. The coefficient identifications are definitional. Fullness of the rational inclusion lifts the ambient model isomorphism, proving essential surjectivity. Conjugation by the specified compatibility identifies maps and their scalar multiples, so denominator lifting holds for the restricted functor.",
    "uses": [
-    "lem-weil-pbc-continuous-constructible-integral-denominators",
-    "lem-weil-pbc-continuous-constructible-integral-model"
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-constructible-integral-denominators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "The adjunction $L\\dashv U$ is [sk-def-sfb-derived-extension-of-scalars]. The telescope of [def-weil-pbc-integral-localization-telescope] has zeroth leg its unit, since the inverse scalar has exponent zero. At shift zero [lem-sfb-integral-localization-hom-colimit] supplies the Hom colimit required by [lem-sfb-scalar-unit-equality-detection]. Apply it with $a=\\ell$: $L(f)=L(g)$ implies $\\ell^nf=\\ell^ng$. Compatibility and faithfulness of the full inclusions give the same assertion for $F$.",
+   "text": "Supply the already proved private integral_scalar_map_eq from the same preserved archive. Its proof extends sheaf-source Hom continuity through the finite cohomological cone decomposition, uses the strict localization-complex model and colimit transport to obtain the Hom colimit of the actual unit telescope, and applies filtered-colimit equality detection at stage zero. Naturality of the actual derived adjunction unit turns L(f)=L(g) into equality at stage zero; the transition to stage n is ell^n, giving ell^n f=ell^n g.",
    "uses": [
-    "sk-def-sfb-derived-extension-of-scalars",
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-integral-localization-complex-model",
+    "lem-weil-pbc-integral-localization-colimit-transport",
     "def-weil-pbc-integral-localization-telescope",
-    "lem-sfb-integral-localization-hom-colimit",
-    "lem-sfb-scalar-unit-equality-detection"
+    "sk-def-sfb-derived-extension-of-scalars"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-rationalization-localization-hom-criterion] with $R=\\mathbf Z$ and $M=\\{\\ell^n:n\\geq0\\}$. Additivity from step 1 gives integer linearity; step 2 gives inversion of $W_M$ and invertible scalars; step 3 gives denominator lifting and essential surjectivity; step 4 gives scalar detection of equality. The criterion proves precisely the asserted localization property of the unchanged functor $F$.",
+   "text": "The preserved rationalization_of_subcategory_models helper applies its proved rationalization_localization_of_hom criterion. Scalar fractions in the source rationalization, denominator lifting, and scalar equality detection make the induced functor fully faithful. Essential surjectivity makes it an equivalence, and uniqueness of localization gives the stated IsLocalization instance for the unchanged restricted scalar-extension functor.",
    "uses": [
-    "lem-sfb-rationalization-localization-hom-criterion"
+    "lem-sfb-rationalization-scalar-fractions",
+    "sk-def-sfb-rationalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-integral-localization-telescope",
   "lem-kun-distinguished-cone-zero",
-  "lem-sfb-integral-derived-extension-comparison",
-  "lem-sfb-integral-localization-hom-colimit",
-  "lem-sfb-rational-derived-scalar-invertible",
-  "lem-sfb-rationalization-localization-hom-criterion",
-  "lem-sfb-scalar-unit-equality-detection",
+  "lem-sfb-rationalization-scalar-fractions",
   "lem-weil-pbc-continuous-constructible-integral-denominators",
+  "lem-weil-pbc-continuous-constructible-integral-image",
   "lem-weil-pbc-continuous-constructible-integral-model",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-integral-constructible-sheaf-hom",
+  "lem-weil-pbc-integral-localization-colimit-transport",
+  "lem-weil-pbc-integral-localization-complex-model",
+  "lem-weil-pbc-padic-integers-bounded-triangulated",
   "sk-def-sfb-derived-extension-of-scalars",
   "sk-def-sfb-rationalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Q98 re-split, 2026-10-21: Proposition 6.8.14(2), using Lemma 6.8.12; retain the current live scalar-Hom route and extract the remaining coefficient/termwise-triangulated comparison as a statement-only node."
+  "place": "Proposition 6.8.14(2), using Lemma 6.8.12; G1 2026-10-22 specializes the preserved proved private helpers rationalization_of_subcategory_models and integral_scalar_map_eq, constructs the canonical termwise comparison in the proof, and reuses the existing continuous model and denominator theorems."
  },
  "mathlib_searches": [
   {
@@ -227,7 +215,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-integral-constructible-sheaf-hom",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-weil-pbc-continuous-constructible-integral-denominators",
   "lem-weil-pbc-continuous-constructible-integral-model",
   "lem-weil-pbc-padic-integers-bounded-triangulated"
@@ -240,7 +227,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-40b7a5297 (reviewer sub-agent of L); spot-checked: Q98 builds on the live Q59 split of this item, which is already reviewed. The statement and steps 2–5 are byte-identical to that split; I field-diffed the item against Q59's fixed item. The only change is the old 7-citation step 1, which moves whole into the new statement-only node lem-sfb-integral-derived-extension-comparison. Its statement carries every clause of the old step: T=Ext_φ exact (E_X flat by det-prop-sfb-qlbar-colimit-x-invert-ell); L≅D(T) (exact-functor bullet of sk-def-sfb-derived-categories); L additive and triangulated (lem-sf-exact-functor-derived-triangulated); φ and L equal to the pbc continuous inclusion and integralScalarExtension (E has the norm induced from Q̄_ℓ, so O_E is the unit ball); D_cons(O_E) triangulated (lem-weil-pbc-padic-integers-bounded-triangulated, same Noetherian and finite-E hypotheses); F additive, with the identity-component compatibility F⋙j≅i⋙L preserving triangles (def-sfb-bounded-constructible-extend-scalars). Each clause is true. I tested X empty, the zero complex, the unit and E=Q_ℓ. The node is self-contained, stmt_deps match its citations, it records grep, LeanSearch, Loogle and LeanFinder searches, and its blueprint.from is correct. It restates no clause of the item. No existing node states it: I checked pbc continuous-integral-scalar-exact (finite limits only), integral-derived-unit, realization-scalar-functor, the O_E→O_L integral-scalar-extension nodes, rationalization-equivalence and extend-scalars-bounded-constructible. Steps 2–5 still get from step 1 exactly what they use: additivity, the compatibility and the triangulated source. I rechecked steps 2–5: cone zero, denominators and model, the zeroth telescope leg is the unit, and the hypotheses of the localization criterion with R=ℤ, M=ℓ^ℕ. The proof is 2200 chars, under the 3000 cap, and proof_deps equals the union of the step uses. Nothing from the old proof is shortened, so the re-split note is met. The route fits unit sk-thm-sfb-rationalization-comparison step 2. Bhatt–Scholze Prop 6.8.14(2) proof was read; the triangulated-comparison part is the agent's expansion, as the report says. No SGA. Accepted tool uses: pbc integral-denominators and integral-model. Maintainer notes: (1) Q59 had already answered the note; this delivery is a correct refinement, not a conflicting split. (2) The live node-level tool_uses still list det-prop-sfb-qlbar-colimit-x-invert-ell, lem-weil-pbc-padic-integers-bounded-triangulated and lem-weil-pbc-integral-constructible-sheaf-hom, which the item no longer cites. The first two now belong to the new node's future split. (3) The future worker on the new node should cite det-prop flatness, not the SheafOfModules node lem-sfb-integral-rationalization-exact (the Q59 C4/E6 fault). (4) In the new node, 'Fj≅iL' is in diagrammatic order."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization",
+     "lines": [
+      148,
+      157
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "branch": "master",
   "existing": true,
@@ -252,13 +264,60 @@
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization: the blueprint item thm-sfb-extend-scalars-localization's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "T8",
   "result": "pass",
-  "landing": "20261018T101338-L-3972760",
+  "landing": "20261023T135436-L-2894854",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalars_obj",
+   "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
+  ],
+  "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme whose underlying topological space is Noetherian. Then the functor\n$E\\otimes^{\\mathrm L}_{\\cO_E}-\\colon D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)\\to\nD_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)$ of [def-sfb-bounded-constructible-extend-scalars]\nis a localization functor with respect to the class $W_{\\ell^{\\mathbf N}}$\n[det-def-sfb-rationalization]. This is the class of morphisms of the triangulated\n$\\mathbf Z$-linear category $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)$\n[det-def-sfb-bounded-constructible] whose mapping cone is killed by some power $\\ell^n$.",
+  "proof": [
+   {
+    "text": "Write $F=E\\otimes^{\\mathrm L}_{\\cO_E}-$, $\\mathcal T=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)$\nand $\\mathcal T'=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)$. By the proof of\n[lem-sfb-extend-scalars-bounded-constructible], $F$ is induced by the exact functor\n$E_X\\otimes_{\\cO_{E,X}}-$ with $E_X=\\colim(\\cO_{E,X}\\xrightarrow{\\ell}\\cO_{E,X}\\to\\cdots)$.\nSo $F$ is triangulated.",
+    "uses": [
+     "lem-sfb-extend-scalars-bounded-constructible"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$F$ inverts $W_{\\ell^{\\mathbf N}}$.* If $\\ell^n\\cdot\\mathrm{id}_Z=0$, then\n$\\ell^n\\cdot\\mathrm{id}_{F(Z)}=0$. But $\\ell$ acts invertibly on $E_X$-modules, so\n$F(Z)=0$. A morphism with $\\ell$-power-torsion cone is therefore sent to a morphism with\nzero cone, i.e. to an isomorphism. So $F$ factors through\n$\\bar F\\colon\\mathcal T[\\ell^{-1}]\\to\\mathcal T'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Morphisms of the rationalization.* For $s\\colon L\\to L'$ in $W_{\\ell^{\\mathbf N}}$ with\ncone $C$ killed by $\\ell^n$, the composite $L'\\to C$ of $\\ell^n\\cdot\\mathrm{id}_{L'}$ is\nzero. So $\\ell^n\\cdot\\mathrm{id}_{L'}=s\\circ t$ for some $t\\colon L'\\to L$. Then\n$s\\circ(t\\circ s-\\ell^n)=0$, so $t\\circ s-\\ell^n$ factors through $C[-1]$ and is killed by\n$\\ell^n$, which gives $(\\ell^nt)\\circ s=\\ell^{2n}$. Hence the multiplications by $\\ell^n$\nare cofinal in $W_{\\ell^{\\mathbf N}}$, and\n$$\n\\Hom_{\\mathcal T[\\ell^{-1}]}(K,L)=\\colim\\bigl(\\Hom_{\\mathcal T}(K,L)\\xrightarrow{\\ell}\\Hom_{\\mathcal T}(K,L)\\xrightarrow{\\ell}\\cdots\\bigr)=\\Hom_{\\mathcal T}(K,L)[\\ell^{-1}].\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Full faithfulness of $\\bar F$.* By the adjunction\n$F\\dashv D(\\operatorname{Res}_\\varphi)$ [det-def-sfb-derived-extension-of-scalars],\n$\\Hom_{\\mathcal T'}(F(K),F(L))=\\Hom(K,E_X\\otimes_{\\cO_{E,X}}L)$, and\n$E_X\\otimes_{\\cO_{E,X}}L$ is the sequential homotopy colimit of $L\\xrightarrow{\\ell}L\\to\\cdots$.\nSo full faithfulness amounts to the commutation\n$$\n\\colim_\\ell\\Hom(K,L)\\xrightarrow{\\ \\sim\\ }\\Hom(K,\\colim_\\ell L)\n$$\nfor bounded constructible $K,L$. By dévissage along the canonical truncations and the\ncommon stratification of the proof of [det-def-sfb-bounded-constructible], one reduces to\n$K$ a single locally finitely presented module on a stratum. There $\\Hom(K,-)$ is\ncomputed by pro-étale cohomology on a quasi-compact quasi-separated scheme (a\ntopologically Noetherian scheme is such), which commutes with filtered colimits\n(Bhatt–Scholze, §6.8).",
+    "uses": [
+     "det-def-sfb-derived-extension-of-scalars",
+     "det-def-sfb-bounded-constructible"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Essential surjectivity.* The essential image of the fully faithful triangulated functor\n$\\bar F$ is closed under extensions and shifts. Every object of $\\mathcal T'$ is an\niterated extension of shifts of its constructible cohomology sheaves. So it suffices that\nevery constructible $E_X$-module is $E_X\\otimes N$ for a bounded constructible\n$\\cO_{E,X}$-complex $N$. This is the existence of $\\cO_E$-lattices: scale a local\npresentation by a power of $\\ell$ to make it integral, and glue over the finitely many\nstrata and a finite subcover (Bhatt–Scholze, §6.8).\n\nSo $\\bar F$ is an equivalence, i.e. $F$ is a localization at $W_{\\ell^{\\mathbf N}}$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-finite-equivariant-open-orbits",
+ "kind": "statement",
+ "title": "Finite equivariant covers of schemes with open geometric orbits",
+ "statement": "Let $k$ be a field, let $P$ be a smooth group scheme of finite type over $k$, and let $Q$ be a group scheme of finite type over $k$ [def-weil-field, def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Group schemes have multiplication, identity and inverse satisfying the group-object identities. Let $u:P\\to Q$ be a finite surjective group homomorphism [def-weil-finite-integral-morphism]. Let $W$ be a finite-type $k$-scheme with a $Q$-action. Suppose that for every algebraically closed extension $\\Omega/k$, $W_\\Omega$ is a finite disjoint union of open geometric $Q_\\Omega$-orbits: on each nonempty piece any two points over any algebraically closed extension $\\Omega'/\\Omega$ are related by an element of $Q(\\Omega')$. Let $V$ be a geometrically reduced finite-type $k$-scheme, meaning that $V_{k'}$ is reduced for every field extension $k'/k$, with a $P$-action and a finite surjective morphism $v:V\\to W$ satisfying $v(pz)=u(p)v(z)$ as an equality of morphisms on $P\\times_k V$ [def-pc-fibre-product]. Then $V$ is smooth over $k$. Moreover, for every algebraically closed extension $\\Omega/k$, the connected components of $V_\\Omega$ are a finite disjoint union of open geometric orbits of $(P_\\Omega)^0$, the connected component containing the identity of $P_\\Omega$ [lem-sfb-lft-field-group-neutral-component, def-weil-connected-scheme]; equivalently each connected component is one such orbit, with transitivity on points over every algebraically closed extension of $\\Omega$. Empty $V=W$ is allowed. No affineness, commutativity, reducedness of $Q$ or $W$, or perfectness of $k$ is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Proposition 4.2.3 (OCR 4,2,5), printed p.59, geometric-orbit argument after normalization, isolated in its field form. Orbit machinery: Milne, Algebraic Groups (2017), Lemma 1.64 and Propositions 1.65–1.66, printed pp.26–28, literature/milne-algebraic-groups_iAG2017.pdf. This lemma includes the finite-equivariant orbit comparison that the paragraph uses; it is not the potential-normalization theorem. Local Anantharaman archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "lem-sfb-lft-field-group-neutral-component",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix an algebraically closed extension $F/k$ and base change all data to $F$. Finite type, finite morphisms, surjectivity and smoothness survive this base change by the cited permanence lemmas. Geometric reducedness gives reducedness of $V_F$ directly from its definition. All finite-type $F$-schemes here are Noetherian, since a field is Noetherian. Their open subschemes are Noetherian and of finite type: their inclusions are quasi-compact open immersions and finite type composes. Thus the given open pieces $W_j$ and $V_j=v_F^{-1}(W_j)$ are finite type. We henceforth work over $F$ and omit the subscript. Empty pieces may be discarded; if there are no pieces there is nothing to prove.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "The finite surjection $u$ is onto on $F$-points. Indeed its fibre at a rational point is a nonempty finite scheme over $F$, so it has a closed point; the residue-field lemma makes that point rational. The prescribed transitivity of $Q(F)$ on each $W_j(F)$ therefore implies transitivity of $P(F)$. Apply the general orbit lemma to the $P$-action $(p,y)\\mapsto u(p)y$ on $W$: the reduced orbit $O_w$ of any $w\\in W_j(F)$ has support all of $W_j$. First, $b_w^{-1}(W_j)$ is open in $P$ and contains every closed point $p$ of $P$, since $p$ is rational and $pw=u(p)w\\in W_j(F)$ as the orbit piece $W_j$ is $Q$-stable; its closed complement has no closed point, hence is empty, so $|O_w|\\subseteq W_j$. Next, the closure of $|O_w|$ contains all rational points of $W_j$, hence all of $W_j$ by their density; $|O_w|$ is open in this closure, so $W_j\\setminus|O_w|$ is closed in $W_j$ and has no rational point, hence is empty. In particular $W_j$ is equidimensional of some finite dimension $d_j$, and, writing $H=P_w$, the dimension formula gives $d_j=\\dim P-\\dim H$. Nilpotents in $W_j$ do not change its topological dimension.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-sfb-smooth-algebraic-action-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "Put $P^0=(P_F)^0$. The neutral-component theorem gives a clopen geometrically irreducible finite-type subgroup, compatible with every further field extension. It is smooth since it is open in the smooth group $P$. We will use the following elementary dimension observation. If $L$ is any finite-type $F$-group and $K\\subset L$ a nonempty open subgroup, its cosets by $L(F)$ cover $|L|$: the closed complement of their union, if nonempty, would have a rational closed point. Quasi-compactness gives a finite coset cover. Translation identifies every coset with $K$, so $\\dim L=\\dim K$ by finite-union dimension. In particular $\\dim P^0=\\dim P$, and for every closed finite-type subgroup $J\\subset P$, $J\\cap P^0$ is an open subgroup and $\\dim(J\\cap P^0)=\\dim J$. Rational-point detection here uses density of closed points and their residue fields. Finite-union dimension follows directly because an irreducible closed set contained in a finite union of closed sets lies in one; an open subgroup is also closed, since its other cosets form its open complement.",
+   "uses": [
+    "lem-sfb-lft-field-group-neutral-component",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "For $z\\in V_j(F)$ put $w=v(z)$, $H=P_w$ and $J=P_z$. Equivariance gives $J\\subset H$, and $H$ acts on the finite fibre $V_w$. Its underlying points are finite and rational. For each point of the $H(F)$-orbit of $z$ choose $h_i\\in H(F)$ carrying $z$ to it. The fibres of $H\\to V_w$, $h\\mapsto hz$, over those points are the closed cosets $h_iJ$, by the group identities. These cosets cover all rational points of $H$, hence all of $|H|$, by closedness of their finite union and density of rational closed points. Translation makes their dimensions equal, so finite-union dimension yields $\\dim H=\\dim J$. This uses no flatness or reducedness of $V_w$, $H$, or $J$.",
+   "uses": [
+    "lem-sfb-smooth-algebraic-action-orbit-geometry",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "Apply the general orbit lemma to the $P^0$-action on $V$. Its stabilizer at $z$ is $J\\cap P^0$ by the fibre-product definition. Steps 2–4 give\n$$\\dim(P^0z)=\\dim P^0-\\dim(J\\cap P^0)=\\dim P-\\dim J=\\dim P-\\dim H=d_j.$$\nThus every rational-point $P^0$-orbit in $V_j$ has dimension $d_j$, is smooth and locally closed, and is irreducible because $P^0$ is connected. The action preserves $V_j$: each prescribed piece of $W$ is a geometric $Q$-orbit, and equivariance carries its inverse image to itself. Scheme-theoretic restriction to these open pieces follows by the unique factorization through an open subscheme.",
+   "uses": [
+    "lem-sfb-smooth-algebraic-action-orbit-geometry",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "The morphism $V_j\\to W_j$ is finite by base change. Its scheme-theoretic fibres have dimension zero when nonempty: on an affine chart a finite algebra over a field is finite-dimensional, and its quotient by a prime is a finite-dimensional domain, hence a field (multiplication by any nonzero element is injective and therefore surjective). Thus no strict chain of primes exists. Apply the fibre dimension bound with $n=0$ to obtain $\\dim V_j\\leq d_j$. This bound does not require flatness or reducedness of $W_j$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-finite-integral-morphism",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "Let $O=P^0z\\subset V_j$. If its boundary in $V_j$ were nonempty, that locally closed finite-type subset would contain a rational closed point $y$; invariance puts $O_y$ in the boundary. The boundary inequality in the orbit lemma gives $\\dim O_y<\\dim O=d_j$, whereas step 5 gives $\\dim O_y=d_j$. Therefore $O$ is closed in $V_j$. It is irreducible of dimension $d_j$, so it is an irreducible component: if properly contained in a larger irreducible closed subset, a maximal chain of length $d_j$ in $O$ followed by that larger subset would contradict step 6. There are only finitely many irreducible components. All rational-point $P^0$-orbits are therefore closed components, and they are pairwise disjoint by the orbit lemma. There are finitely many, and their union is closed and contains every rational point of $V_j$, hence is all of $V_j$ by density of closed points. The complement of any one is a finite union of closed orbits, so each is open. Their irreducibility makes each connected; a connected subset cannot meet two disjoint clopen pieces. Consequently these are precisely the connected components of $V_j$. The finitely many $V_j$ form a disjoint open partition and hence are clopen in $V$, so these are also precisely the connected components of $V$.",
+   "uses": [
+    "lem-sfb-smooth-algebraic-action-orbit-geometry",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-noetherian-finite-components",
+    "def-kun-topological-krull-dimension",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "The source $V_F$ is reduced. On each clopen orbit support, its open-subscheme structure is therefore reduced and agrees with the canonical reduced orbit structure, by uniqueness of reduced induced closed subschemes. The orbit lemma makes these open subschemes smooth. They cover $V_F$, so $V_F\\to\\operatorname{Spec}F$ is smooth by the local definition of smoothness. The map $\\operatorname{Spec}F\\to\\operatorname{Spec}k$ is affine, quasi-compact, flat and surjective: faithful flatness is the field-extension lemma, and affine flatness is the flat-affine criterion. Smooth fpqc base descent now gives smoothness of $V/k$.",
+   "uses": [
+    "lem-sfb-smooth-algebraic-action-orbit-geometry",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-trf-smooth-fpqc-base-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  },
+  {
+   "text": "For any algebraically closed extension $E/F$, the orbit lemma gives transitivity of $P^0(E)$ on the $E$-points of each of the clopen components just constructed. The neutral-component base-change equality identifies this group with $((P_E)^0)(E)$. Since $F/k$ was an arbitrary algebraically closed extension, this proves exactly the asserted geometric transitivity for every $V_F$ and every further algebraically closed extension. Empty $V=W$ gives an empty finite orbit decomposition and a smooth empty morphism.",
+   "uses": [
+    "lem-sfb-smooth-algebraic-action-orbit-geometry",
+    "lem-sfb-lft-field-group-neutral-component"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.65(b),(c), 7.4(b), 7.5 and 7.6, printed pp.27,139–140; Appendix A.11, A.14–A.15, A.71–A.73, pp.569,582. Orbit dimension from the faithfully flat orbit map and its stabilizer fibres; Stacks varieties.tex Tag 0B2L, lemma-dimension-fibres-locally-algebraic."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-smooth-algebraic-action-orbit-geometry",
+  "lem-sfb-lft-field-group-neutral-component",
+  "lem-pc-open-immersion-smooth-composition",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-weil-finite-integral-morphism",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-weil-pbc-noetherian-finite-components",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-trf-smooth-fpqc-base-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly of Milne Propositions 1.65, 7.4–7.6 and Appendix A.11,A.71–A.73 for the finite-equivariant field argument isolated from Anantharaman Proposition 4.2.3, p.59. No local Anantharaman archive is available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective equivariant map to a variety with open group orbits has open identity component orbits and its geometrically reduced source is smooth",
+   "results": "{\"t\": \"2026-10-24T13:33:21Z\", \"tool\": \"leanfinder\", \"query\": \"A finite surjective equivariant map to a variety with open group orbits has open identity component orbits and its geometrically reduced source is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"706c4404749c3e0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite group orbit results and openness of smooth loci do not state smoothness or orbit decomposition of finite equivariant covers of schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite equivariant covering of a homogeneous variety under a finite surjective homomorphism of algebraic groups has finitely many open orbits",
+   "results": "{\"t\": \"2026-10-24T13:33:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite equivariant covering of a homogeneous variety under a finite surjective homomorphism of algebraic groups has finitely many open orbits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"Finite.of_finite_addAction_orbitRel_quotient\", \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd\", \"Finite.of_finite_mulAction_orbitRel_quotient\", \"Finite.algEquiv\", \"Topology.IsQuotientMap.isCoveringMapOn_of_smul_disjoint\", \"IsQuotientCoveringMap.isOpenQuotientMap\", \"Topology.IsQuotientMap.isCoveringMapOn_of_vadd_disjoint\"], \"digest\": \"a66a8afb107dd258\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite group orbit results and openness of smooth loci do not state smoothness or orbit decomposition of finite equivariant covers of schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T13:33:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite group orbit results and openness of smooth loci do not state smoothness or orbit decomposition of finite equivariant covers of schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]rbit|[Hh]omogeneous",
+   "results": "{\"t\": \"2026-10-24T13:33:19Z\", \"tool\": \"grep\", \"query\": \"[Oo]rbit|[Hh]omogeneous\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite group orbit results and openness of smooth loci do not state smoothness or orbit decomposition of finite equivariant covers of schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically reduced homogeneous scheme under an algebraic group is smooth; finite equivariant covers preserve open orbits",
+   "results": "{\"t\": \"2026-10-24T13:33:23Z\", \"tool\": \"leanfinder\", \"query\": \"Geometrically reduced homogeneous scheme under an algebraic group is smooth; finite equivariant covers preserve open orbits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"bb52fc915c990537\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite group orbit results and openness of smooth loci do not state smoothness or orbit decomposition of finite equivariant covers of schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant|homogeneous",
+   "results": "{\"t\": \"2026-10-24T14:42:18Z\", \"tool\": \"grep\", \"query\": \"equivariant|homogeneous\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"2a42b4b301985aea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite equivariant covering of a scheme with open transitive algebraic group orbits is smooth when geometrically reduced",
+   "results": "{\"t\": \"2026-10-24T14:42:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite equivariant covering of a scheme with open transitive algebraic group orbits is smooth when geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"b4098f6e58234bba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T14:42:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant|homogeneous",
+   "results": "{\"t\": \"2026-10-24T14:42:18Z\", \"tool\": \"grep\", \"query\": \"equivariant|homogeneous\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"2a42b4b301985aea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite equivariant covering of a scheme with open transitive algebraic group orbits is smooth when geometrically reduced",
+   "results": "{\"t\": \"2026-10-24T14:42:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite equivariant covering of a scheme with open transitive algebraic group orbits is smooth when geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"b4098f6e58234bba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T14:42:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant|homogeneous",
+   "results": "{\"t\": \"2026-10-24T14:42:18Z\", \"tool\": \"grep\", \"query\": \"equivariant|homogeneous\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"2a42b4b301985aea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite equivariant covering of a scheme with open transitive algebraic group orbits is smooth when geometrically reduced",
+   "results": "{\"t\": \"2026-10-24T14:42:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite equivariant covering of a scheme with open transitive algebraic group orbits is smooth when geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"b4098f6e58234bba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T14:42:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern smooth presentations, ordinary set actions or projective graded ideals; none constructs scheme-theoretic algebraic group orbits or proves their dimension and boundary statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-almost-homogeneous-potential-smooth-cover",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait group descent; Proposition 4.2.3 (OCR 4,2,5), printed p.59, geometric-orbit argument after normalization, isolated in its field form. Orbit machinery: Milne, Algebraic Groups (2017), Lemma 1.64 and Propositions 1.65–1.66, printed pp.26–28, literature/milne-algebraic-groups_iAG2017.pdf. This lemma includes the finite-equivariant orbit comparison that the paragraph uses; it is not the potential-normalization theorem. Local Anantharaman archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf",
+   "via": [
+    "lem-sfb-almost-homogeneous-potential-smooth-cover",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-equivariant-open-orbits",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and arbitrary-field, non-affine and non-separated hypotheses. Added one general smooth algebraic-group orbit lemma because the existing orbit nodes assume affine groups and separated targets. The proof lifts target transitivity, compares stabilizers using finite closed cosets, computes neutral-orbit dimensions, excludes boundaries, obtains finitely many clopen reduced smooth orbits, and descends smoothness. All new-node Mathlib searches were actually run and logged.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) trait descent field-orbit subargument. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. The ancestor command returns None; preserve inherited from.node=null and via chain. Whole-blueprint searches for orbit, locally closed orbit, smooth orbit, orbit boundary and finite morphism dimension found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/topological permanence, dimension, rational-point or descent tool used with its stated hypotheses; it does not replace the unit route and no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Generic scheme/topological permanence, dimension, rational-point or descent tool used with its stated hypotheses; it does not replace the unit route and no node of this unit supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/topological permanence, dimension, rational-point or descent tool used with its stated hypotheses; it does not replace the unit route and no node of this unit supplies this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-892895e65",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-892895e65 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-smooth-algebraic-action-orbit-geometry and every cited statement in full. Sources checked in Milne iAG2017: A.11 defines an algebraic scheme as finite type over k, with no separatedness; 1.65(a)-(c), 1.66, 7.4(b), 7.5 and 7.6 cover locally closed, smooth, flat orbits, stabilizer fibres and the boundary dimension drop for arbitrary smooth algebraic groups. The new node is true. I tested it on the trivial group, G_m scaling A^1, and the doubled-origin line. It is a genuine generalisation of lem-sfb-smooth-group-orbit-geometry and lem-sfb-smooth-rational-orbit-arbitrary-field, which both need G affine and X separated, while the item needs non-affine P^0 and non-separated V. It is not a restatement of the item (D1/D2) and it is statement-only (B1-B7 pass). Steps 1 and 3-9 are correct: stabilizer cosets, dim J = dim H, the neutral-orbit dimension d_j, the finite-fibre bound with n=0, boundary exclusion, clopen components, the reduced-structure uniqueness and smooth fpqc descent. The item statement is unchanged and not weakened. One fix: step 2 showed W_j is contained in |O_w| but not |O_w| contained in W_j, which equidimensionality and d_j need. I added the Jacobson argument, using lemmas the step already cites: b_w^{-1}(W_j) is open in P and contains every closed point of P. Batch-5: lem-trf-smooth-fpqc-base-descent is a Mathlib leaf (Stacks 02VL, MorphismProperty.of_pullback_snd_of_descendsAlong with Smooth.DescendsAlong). Its proof_deps are empty, and it is not part of the trace formula or Poincare duality or their proofs, so I accepted it. I also accepted the declared tool uses: lem-pc-proper-base-change, lem-zl-finite-type-fibre-image-dimension-bounds and lem-weil-pbc-reduced-induced-closed-subscheme.; 1 file(s) fixed by the reviewer"
+ }
+}

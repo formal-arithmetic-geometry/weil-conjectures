@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-proper-flat-fibre-section-lifting",
+ "kind": "statement",
+ "title": "Lifting fibre sections when first coherent cohomology vanishes",
+ "statement": "Let $S$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact, and let $f:X\\to S$ be a proper morphism of schemes [def-pc-scheme, def-weil-proper-morphism]. Let $F$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module] flat over $S$, meaning that $F_x$ is flat as an $\\mathcal O_{S,f(x)}$-module for every $x\\in X$ [def-weil-pbc-flat-ring-map]. Fix $s\\in S$, let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre, def-weil-residue-field], and write $F_s$ for the tensor pullback of $F$ to $X_s$ [def-pc-module-pullback]. If $H^1(X_s,F_s)=0$ [pqf-def-cohomology], then for every $t\\in\\Gamma(X_s,F_s)$ there are an open neighbourhood $U\\subseteq S$ of $s$ and a section $\\widetilde t\\in\\Gamma(f^{-1}U,F)$ whose restriction to $X_s$ is $t$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07VK, lemma-perfect-direct-image, canonical derived base change and a finite-free representative; degree-zero section-lifting consequence for a relatively flat invertible sheaf when H^1 of the fibre vanishes. This consequence is agent-extracted, not a verbatim assertion of 07VK."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-proper-flat-section-normalized-stalk-complex] to obtain C over O_(S,s), its finite-free support bounds, the pushforward-stalk comparison e0, and the two fibre comparisons eF0 and eF1 with their section normalization.",
+   "uses": [
+    "lem-sfb-proper-flat-section-normalized-stalk-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07VK and remark-explain-perfect-direct-image"
+   }
+  },
+  {
+   "text": "Transport the given H^1 vanishing through eF1. Apply [lem-sfb-local-residue-cohomology-lifting] to C. For the class eF0^(-1)(t), surjectivity gives y in H^0(C) reducing to that class.",
+   "uses": [
+    "lem-sfb-local-residue-cohomology-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07VK and remark-explain-perfect-direct-image"
+   }
+  },
+  {
+   "text": "Represent the germ e0(y) in (f_*F)_s by a section t' on an open U containing s, using Mathlib TopCat.Presheaf.exists_germ_eq. Sections of f_*F on U are definitionally sections of F on f^(-1)U. Substitute this germ identity and the chosen reduction identity into the normalized comparison. The inverse identities for e0 and eF0 give exactly the required restriction equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07VK and remark-explain-perfect-direct-image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-flat-section-normalized-stalk-complex",
+  "lem-sfb-local-residue-cohomology-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07VK and its explanation; local-ring minimal-model version of the original steps 4-6, with stalk representatives replacing explicit principal denominator shrinkings. Canonical restriction normalization retained as a separate prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj|[Ss]urj.*baseChange",
+   "results": "{\"t\": \"2026-10-23T09:48:37Z\", \"tool\": \"grep\", \"query\": \"lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj|[Ss]urj.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Data/Matrix/Basis.lean\", \"Mathlib/Data/QPF/Multivariate/Constructions/Cofix.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/Order/Lattice.lean\", \"Mathlib/Algebra/Algebra/Basic.lean\", \"Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean\", \"Mathlib/NumberTheory/Multiplicity.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\"], \"digest\": \"5155188bb01936da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-23T09:48:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"cohomology\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology and base change lifts fibre sections if H1 vanishes",
+   "results": "{\"t\": \"2026-10-23T09:48:38Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology and base change lifts fibre sections if H1 vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.lift.congr_simp\", \"IsBaseChange.lift_comp\", \"groupCohomology.instMonoModuleCatFH1InfRes\", \"groupCohomology.H1InfRes\", \"IsBaseChange.lift_eq\", \"Algebra.Extension.tensorH1Cotangent\", \"IsBaseChange.lift\", \"groupCohomology.H1ofAutOnUnitsUnique\"], \"digest\": \"be1da739e8475fa6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat family over a noetherian scheme a section on a fibre of a coherent flat sheaf lifts to a neighbourhood if its first cohomology vanishes",
+   "results": "{\"t\": \"2026-10-23T09:48:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper flat family over a noetherian scheme a section on a fibre of a coherent flat sheaf lifts to a neighbourhood if its first cohomology vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\"], \"digest\": \"1e6c558ff63bde28\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing H1 on a fibre implies surjectivity of restriction of global sections near the base point cohomology base change",
+   "results": "{\"t\": \"2026-10-23T09:48:49Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing H1 on a fibre implies surjectivity of restriction of global sections near the base point cohomology base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.extensiveTopology.surjective_of_isLocallySurjective_sheaf_of_types\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"PresheafOfModules.restrictHomEquivOfIsLocallySurjective\", \"PresheafOfModules.IsLocallySurjective\", \"TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\"], \"digest\": \"28284ab210a75504\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj|[Ss]urj.*baseChange",
+   "results": "{\"t\": \"2026-10-23T09:51:14Z\", \"tool\": \"grep\", \"query\": \"lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj|[Ss]urj.*baseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\"], \"digest\": \"7fd666ec76a9185b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism over a noetherian base and a relatively flat invertible sheaf vanishing H1 on a fibre implies every fibre section lifts on a Zariski neighbourhood",
+   "results": "{\"t\": \"2026-10-23T11:18:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper morphism over a noetherian base and a relatively flat invertible sheaf vanishing H1 on a fibre implies every fibre section lifts on a Zariski neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"f57cdbd31aeb6467\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern unrelated scheme morphisms, group or cotangent cohomology, or topological sheaf surjectivity, not proper coherent section lifting"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"cohomology\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-23T11:18:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, \\\"cohomology\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: malformed namespace query; repeated using quoted name substrings"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj|[Ss]urj.*baseChange",
+   "results": "{\"t\": \"2026-10-23T11:18:03Z\", \"tool\": \"grep\", \"query\": \"lift.*[Ss]ection|[Ss]ection.*lift|baseChange.*[Ss]urj|[Ss]urj.*baseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"a6ef5d8c6f578fc7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern unrelated scheme morphisms, group or cotangent cohomology, or topological sheaf surjectivity, not proper coherent section lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology and base change theorem H1 vanishing gives surjectivity of H0 to fibre sections of a proper family",
+   "results": "{\"t\": \"2026-10-23T11:23:19Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology and base change theorem H1 vanishing gives surjectivity of H0 to fibre sections of a proper family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"groupCohomology.instEpiModuleCatH1π\", \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"groupCohomology.instEpiModuleCatH2π\", \"groupCohomology.π_comp_H0IsoOfIsTrivial_hom\", \"TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective\", \"groupHomology.chains₁ToCoinvariantsKer_surjective\", \"groupCohomology.H1π_eq_zero_iff\"], \"digest\": \"a6c26d7c6105ede3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern unrelated scheme morphisms, group or cotangent cohomology, or topological sheaf surjectivity, not proper coherent section lifting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If first cohomology of a fibre vanishes then sections of a flat coherent sheaf extend locally on the base of a proper morphism",
+   "results": "{\"t\": \"2026-10-23T11:23:19Z\", \"tool\": \"leansearch\", \"query\": \"If first cohomology of a fibre vanishes then sections of a flat coherent sheaf extend locally on the base of a proper morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.Extension.H1Cotangent\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.flat_iff\", \"Algebra.Extension.subsingleton_h1Cotangent\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"TopCat.Presheaf.section_ext\"], \"digest\": \"bfb0bcedc8c5bff2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern unrelated scheme morphisms, group or cotangent cohomology, or topological sheaf surjectivity, not proper coherent section lifting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T11:23:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomology\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern unrelated scheme morphisms, group or cotangent cohomology, or topological sheaf surjectivity, not proper coherent section lifting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-bundle-picard-classification",
+  "date": "2026-10-23",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Projective frames and projective linear transformations over schemes. General Picard decomposition underlying the tautological-line and local-matrix arguments; not an automorphism or frame-torsor statement. Supporting input: Lifting fibre sections when first coherent cohomology vanishes.",
+   "via": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-fibre-section-lifting",
+  "worker": "stage1",
+  "summary": "Seven-step proof from existing nodes only: canonical perfect derived base change, finite-free local model, finite unit-entry cancellation, H1 vanishing forcing degree one to be zero, explicit denominator lifting, and verification of the actual restriction map. No new nodes and no statement change.",
+  "blueprint": "Supporting prerequisite of the inherited det-thm-sf-ctf-stability-direct-images proof (3) route, through projective-bundle Picard classification: extends a prescribed fibre section of a relatively flat invertible sheaf. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "Generic Perfectness of $Rf_*\\mathcal{G}$ and base change input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic A finite projective module is free after localizing away from each prime input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-sc-tilde-preserves-finite-limits",
+    "why": "Generic Finite-limit preservation by affine associated sheafification input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-pc-cohomology-sections-affine-base",
+    "why": "Generic Cohomology over an affine base is the global sections of the higher direct images input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Generic Termwise derived pullback of a bounded above flat complex input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic Pullback of the sheaf associated to a module along a morphism of affine schemes input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-free-complex-unit-entry-splits",
+    "why": "Generic A unit differential entry splits off an identity complex input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-pc-scheme-derived-mate-evaluation",
+    "why": "Generic Counit evaluation of the canonical derived base-change mate input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic The tensor-formula pullback of modules is left adjoint to pushforward input for the finite-complex section-lifting argument; it supplies no alternative six-functor route and the present unit does not state this coherent/module-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-free-complex-unit-entry-splits",
+  "lem-pc-scheme-derived-mate-evaluation",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-3fa5e8f58",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-3fa5e8f58 (reviewer sub-agent of L); spot-checked: I read the item and all its steps; it is correct and I made no fixes. I checked it against Stacks coherent.tex 07VK and its remark-explain-perfect-direct-image, perfect.tex 0B91(2), and algebra.tex 00MT and 00NX. The statement is the degree-0 case of cohomology and base change: S Noetherian, f proper, F invertible and flat over S, H^1(X_s,F_s)=0, then fibre sections lift locally. It is true without assuming f flat, and the citer's use (P^n_A with L(-m)) fits the hypotheses. Step 1: properness and a locally Noetherian base give the finite-presentation hypotheses of lem-pc-rf-perfect-base-change. Step 2: the perfect model is localized to a bounded finite-free complex (def-pc-perfect-complex, 00NX node, tilde sections). Restricting to opens is base change along an open immersion, which the same node covers. Step 3: the cohomology dictionary is exact, and the cited statements give what is taken (01XK node, 06YD termwise pullback, 01I9 unit formula). Step 4: unit-entry cancellation (00MT node, chain indices C_j=K^{-j}) terminates because the rank sum drops by two. Steps 5-6 are genuinely elementary: rank L^1=0, and denominators are inverted after shrinking. Step 7 checks the actual restriction map through the module base-change map definition, the mate-evaluation node and the module pullback adjunction (08HY, 0096). Duplicate search: lem-trf-infinitesimal-vanishing-section-lifting and lem-trf-ample-fibre-section-lifting have different hypotheses (no flatness; H^1 of J^n/J^{n+1}, or ample). The lem-sc-picard-h1-* nodes are joint H^1(O)/locus statements. No new nodes, no SGA. I accept the nine declared tool uses as generic coherent/module tools. Batch-5: lem-pc-rf-perfect-base-change is Stacks 0B91 perfectness and base change. It is not part of the trace formula or Poincare duality or their proofs, and the sec-trace-formula node it reaches (def-trf-schematically-dense-open) is a general definition, so no assumption leaf is needed. The inherited blueprint.from.node=null is kept as delivered."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatFibreSectionLifting",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_lift_section_of_fiber_h1_eq_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatFibreSectionLifting.lean",
+  "statement": "theorem exists_lift_section_of_fiber_h1_eq_zero {X S : Scheme.{u}} (f : X ⟶ S) [IsLocallyNoetherian S] [CompactSpace S] [IsProper f] (F : X.Modules) [F.IsInvertible] (hflat : ∀ x : X, Module.Flat (S.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))) (s : S) (hH : Subsingleton ((RingedSpace.moduleCohomology (f.fiber s).toRingedSpace 1).obj ((tensorPullback (f.fiberι s)).obj F))) : ∀ t : Γ((tensorPullback (f.fiberι s)).obj F, ⊤), ∃ (U : S.Opens) (hs : s ∈ U) (t' : Γ(F, f ⁻¹ᵁ U)), ((tensorPullback (f.fiberι s)).obj F).val.map (homOfLE (fun x _ ↦ Eq.mpr (congrArg (fun y : S ↦ y ∈ U) (f.fiberHomeo s x).property) hs)).op (tensorPullbackSection (f.fiberι s) F (f ⁻¹ᵁ U) t') = t",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7311f33f5",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Stage-2 Lean statement of lem-sfb-proper-flat-fibre-section-lifting matches the node clause by clause: IsLocallyNoetherian+CompactSpace S, IsProper f, F.IsInvertible, stalkwise Module.Flat via restrictScalars of the actual stalkMap O_{S,f(x)}→O_{X,x}, H^1 = Subsingleton of RingedSpace.moduleCohomology (fiber) 1 of the tensorPullback along fiberι, and ∀ t ∃ U ∋ s ∃ t' with the genuine restriction (tensorPullbackSection = 1⊗t', restricted to ⊤ via fiberHomeo_apply rfl) equal to t; quantifier order right, no extra hypotheses (no flat f, no reducedness), single universe u. Delivery changes only the lean field and one new module; lean.statement verbatim; only sorry; docstrings carry source 07VK, blueprint id and all 7 steps; proof_dep modules imported; no H4 duplicate. Edge cases (empty S/fibre, non-closed s, nonreduced base, t=0) covered. No recompile (no file changed); worker reports a clean compile in 4.7 s. Advisory only: moduleStalkFunctor's owner def-pc-module-stalk-functor is not in stmt_deps (not fixable at S2; established advisory precedent)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

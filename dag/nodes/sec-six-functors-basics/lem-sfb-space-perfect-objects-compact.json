@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-space-perfect-objects-compact",
+ "kind": "statement",
+ "title": "Perfect objects of an algebraic space are compact in its quasi-coherent derived category",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$, with its small etale site and structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space]. Module sheaves are [def-weil-sheaf-of-modules-category], and quasi-coherence is [def-trf-space-quasi-coherent-module]. Write $D(\\mathcal O_X)$ for the unbounded derived category [def-weil-abstract-derived-category] and $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for its full subcategory of objects with quasi-coherent cohomology. A perfect object means one etale locally represented by a bounded complex of direct summands of finite free $\\mathcal O_X$-modules [def-weil-pbc-strict-perfect-coefficient-package]. Assume $X$ is quasi-compact and quasi-separated: every open cover of $|X|$ has a finite subcover, and its diagonal is quasi-compact. Every perfect $P\\in D(\\mathcal O_X)$ has quasi-coherent cohomology and is compact in $C_X$ [def-pc-compact-object]: for every set $I$ in the chosen indexing universe and family $(E_i)_{i\\in I}$ in $C_X$, the canonical map $\\bigoplus_{i\\in I}\\operatorname{Hom}_{C_X}(P,E_i)\\longrightarrow\\operatorname{Hom}_{C_X}(P,\\bigoplus_{i\\in I}E_i)$ is bijective. Here the coproduct on the right is the coproduct in $C_X$, not an assertion of compactness in all of $D(\\mathcal O_X)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09M8, proposition-compact-is-perfect, perfect-to-compact direction; perfect objects lie in D_QCoh as in section-spell-out and the first paragraph of that proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-compact-object",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Coproducts used below exist in the ambient category. By [lem-pur-ringed-site-grothendieck-abelian] module sheaves form a Grothendieck abelian category. K-injective resolutions exist by [lem-sfb-grothendieck-k-injective]. Coproducts in module sheaves are exact: they are filtered colimits of finite biproducts, so exactness follows from the Grothendieck axiom. Apply [lem-kun-grothendieck-derived-coproducts] and [src-weil-derived-homology-preserves-coproducts]: termwise sums give ambient derived coproducts and $\\mathcal H^q(\\bigoplus E_i)=\\bigoplus\\mathcal H^q(E_i)$. By [lem-sfb-space-qcoh-kernels-colimits] these sheaves are quasi-coherent when the $E_i$ lie in $C_X$. Fullness restricts the ambient coproduct universal property to $C_X$, so these are also its coproducts, with the same injections.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "src-weil-derived-homology-preserves-coproducts",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F3, lemma-quasi-coherence-direct-sums, proof"
+   }
+  },
+  {
+   "text": "A perfect $P$ has quasi-coherent cohomology. Use its local bounded finite-free-retract models [def-weil-pbc-strict-perfect-coefficient-package]. On each etale chart, finite free structure modules are quasi-coherent by their presentations [def-trf-space-quasi-coherent-module]; a retract is the image of its splitting idempotent, so all terms of such a model are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]. Kernels and cokernels from that same node show that $\\ker d^q/\\operatorname{im}d^{q-1}$ is quasi-coherent. The etale restriction and local detection in [lem-sfb-space-derived-etale-chart-calculus] now give the assertion for $P$. This argument is on each individual chart and requires no uniform local bound.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "section-spell-out, local perfect models; Tag 071X and Tag 03M1"
+   }
+  },
+  {
+   "text": "Set $P^\\vee=R\\mathcal Hom(P,\\mathcal O_X)$. By [lem-sfb-ringed-site-perfect-duality] it is perfect and the evaluation comparison $P^\\vee\\otimes^{\\mathbf L}M\\cong R\\mathcal Hom(P,M)$ is natural in every $M$. Use [lem-sf-ringed-derived-closed-symmetric-monoidal] to supply the tensor-Hom adjunction required by the sections model. Taking zeroth derived sections and using [lem-sfb-derived-internal-hom-sections-model] gives a natural identification\n$$\\operatorname{Hom}_{D(\\mathcal O_X)}(P,M)\\cong H^0(X,P^\\vee\\otimes^{\\mathbf L}M).$$\n",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, first paragraph; sites-cohomology.tex Tag 08JJ"
+   }
+  },
+  {
+   "text": "For $M\\in C_X$, the tensor $T(M)=P^\\vee\\otimes^{\\mathbf L}M$ lies in $C_X$ by the following finite-column argument. Restrict to an etale chart $V$ with a bounded finite-free-retract model $F$ for $P^\\vee$; exact restriction and local detection are [lem-sfb-space-derived-etale-chart-calculus]. Restriction to the slice site is strong monoidal: [lem-weil-pbc-ringed-slice-normalized-comparisons] gives $T(M)|_V\\cong P^\\vee|_V\\otimes^{\\mathbf L}M|_V$. A finite-free-retract module $L$ has exact tensor functor, as a functorial direct summand of a finite power of the identity. Thus $H^q(L\\otimes M)=L\\otimes H^q(M)$ is a direct summand of a finite sum of quasi-coherent sheaves, hence quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]. Such $L$ is flat, and the bounded flat model $F$ is K-flat by [lem-weil-pbc-independent-bounded-flat-kflat], so its total tensor with any representative of $M$ computes $T(M)$. Filter this total complex by columns with $p\\ge c$. The quotients are $(F^c\\otimes M)[-c]$ and the sequences of consecutive tails are split in each degree. Their long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact] express each middle cohomology as an extension of a cokernel by a kernel. Kernel/cokernel closure [lem-sfb-space-qcoh-kernels-colimits] and extension closure [lem-sfb-space-qcoh-extension-closed] apply. Starting with the zero tail above the highest column and decreasing $c$ through the finite support proves the claim. No bound on $M$ is needed.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-sfb-space-qcoh-extension-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F5, lemma-quasi-coherence-tensor-product, perfect-factor local finite-complex case; Tag 09M8 first paragraph"
+   }
+  },
+  {
+   "text": "Write $T(M)=P^\\vee\\otimes^{\\mathbf L}M$. By the closed tensor-Hom adjunction and symmetry of [lem-sf-ringed-derived-closed-symmetric-monoidal], $T$ is a left adjoint. Explicitly, for an ambient coproduct $E=\\bigoplus E_i$ and any $N$,\n$$\\operatorname{Hom}(T(E),N)\\cong\\operatorname{Hom}(E,R\\mathcal Hom(P^\\vee,N))\\cong\\prod_i\\operatorname{Hom}(E_i,R\\mathcal Hom(P^\\vee,N))\\cong\\prod_i\\operatorname{Hom}(T(E_i),N).$$\nNaturality shows that restriction along $T(\\iota_i)$ gives this bijection; hence $T(E)$ with those injections is the coproduct of the $T(E_i)$. All these objects have quasi-coherent cohomology by step 4.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, first paragraph: derived tensor commutes with direct sums"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-zeroth-hypercohomology-coproducts] to the coproduct cofan $T(E_i)\\to T(E)$ from step 5. It identifies $\\bigoplus_iH^0(X,T(E_i))$ with $H^0(X,T(E))$. Under the natural identifications of steps 3 and 4, its component on summand $i$ sends $u:P\\to E_i$ to $\\iota_i\\circ u:P\\to E$. Thus it is precisely the canonical Hom-coproduct map in the item. Fullness of $C_X$ and the coproduct identification in step 1 give the required bijection in $C_X$. The zero object and empty coproduct are covered by the same argument; no compactness assertion in the whole ambient category is made.",
+   "uses": [
+    "lem-sfb-space-zeroth-hypercohomology-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, first paragraph, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-grothendieck-k-injective",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-slice-normalized-comparisons",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-sfb-space-qcoh-extension-closed",
+  "lem-sfb-space-zeroth-hypercohomology-coproducts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09M8, proposition-compact-is-perfect, perfect-to-compact direction; expanded using Tags 08F3 and 08JJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on quasi compact quasi separated algebraic spaces are compact in the derived category of quasi coherent modules",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If the target scheme $Y$ is both quasi-separated and compact as a topological space, then the morphism $f$ is quasi-compact if and only if the source scheme \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes and module presentation data; none gives Hom-coproduct compactness of perfect derived objects on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a perfect complex commutes with arbitrary coproducts of complexes with quasi coherent cohomology on an algebraic space",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"CochainComplex.cm5b.i_f_comp_assoc\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) {Z : C}\\n  (h : (CochainComplex.cm5b.I K).X n ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((CochainComplex.cm\", \"doc\": \"A morphism from a cochain complex $ K $ to the direct sum of the mapping cone of the identity morphism on its injective replacement complex $ I K $ (with zero differentials) and another complex $ L $,\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.f =\\n    CategoryTheory.Limits.biprod.lift\\n\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, the differential $ f $ of the associated short complex in the category of sheaves with values in addit\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CochainComplex.cm5b.fac_assoc\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) {Z : CochainComplex C ℤ}\\n  (h : L ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (CochainComplex.cm5b.i f)\\n      (Categ\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, for any cochain complexes $K, L, Z$ indexed by $\\\\mathbb{Z}$ and morphisms $f: K \\\\to L$ and $h: L \\\\to Z$, the composition of the morphism $i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes and module presentation data; none gives Hom-coproduct compactness of perfect derived objects on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactObject",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsCompactObject'\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes and module presentation data; none gives Hom-coproduct compactness of perfect derived objects on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*compact|compact.*perfect|IsCompactObject",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes and module presentation data; none gives Hom-coproduct compactness of perfect derived objects on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex with quasi coherent cohomology on an algebraic space is a compact object",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) [IsAffine X] : CompactSpace X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], CompactSpace ↥X\", \"doc\": \"Every quasi-affine scheme has an underlying topological space that satisfies the compactness property (every open cover has a finite subcover).\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [CompactSpace Y] : CompactSpace X\", \"doc\": \"If $ f: X \\\\to Y $ is a quasi-compact morphism of schemes and $ Y $ is a compact space (i.e., every open cover of $ Y $ has a finite subcover), then the domain scheme $ X $ is also a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} [NoetherianSpace X] (f : X ⟶ Y) : QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] [CompactSpace Y] : QuasiCompact f ↔ CompactSpace X\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If the target scheme $Y$ is both quasi-separated and compact as a topological space, then the morphism $f$ is quasi-compact if and only if the source scheme \"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [CompactSpace X] [QuasiSeparatedSpace Y] : QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes and module presentation data; none gives Hom-coproduct compactness of perfect derived objects on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*[Cc]ompact|[Cc]ompact.*perfect",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes, not perfect-object Hom-coproduct compactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes, not perfect-object Hom-coproduct compactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect objects are compact in the quasi coherent derived category of a qcqs algebraic space",
+   "results": "Search returned 8 hits: AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace, AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace, perfectSpace_of_module, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes, not perfect-object Hom-coproduct compactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on quasi compact quasi separated algebraic spaces are compact objects of the quasi coherent derived category",
+   "results": "Search returned 8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.quasiCompact_iff_forall_affine, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes, not perfect-object Hom-coproduct compactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactness of etale locally bounded finite projective structure sheaf complexes in D QCoh algebraic spaces",
+   "results": "Search returned 8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.compactSpace_of_isAffine, AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace, AlgebraicGeometry.isCompact_basicOpen, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological compactness of schemes, not perfect-object Hom-coproduct compactness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-localizing-generation",
+  "date": "2026-10-23",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, first paragraph: reduction to perfect tests using the perfect generator, including the ambient-coproduct interpretation. Supporting input for this split: Tag 09M8, proposition-compact-is-perfect, perfect-to-compact direction; perfect objects lie in D_QCoh as in section-spell-out and the first paragraph of that proof.",
+   "via": [
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-perfect-objects-compact",
+  "worker": "stage1",
+  "summary": "Expanded the perfect-to-compact proof through ambient coproducts, local quasi-coherent cohomology, perfect duality, the tensor adjunction and zeroth hypercohomology. Reused all existing inputs except the space hypercohomology coproduct consequence; no statement change.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/deformation ancestry; supporting Tag 09M8 perfect-to-compact argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "src-weil-derived-homology-preserves-coproducts",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic ringed-site or Grothendieck derived-category tool; supplies the stated coproduct, K-flatness, cohomology exact sequence or adjunction input without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "why": "Generic ringed-site slice comparison: step 4 takes from its statement the tensor isomorphism r(K⊗^L L)≅rK⊗^L rL for exact restriction to an etale chart; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-ringed-slice-normalized-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-75c20b974",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-75c20b974 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, every cited statement, and Stacks spaces-perfect.tex 09M8 (proposition-compact-is-perfect, first paragraph), 08F3 and 08FB. The statement matches the perfect⇒compact direction of 09M8, with compactness in D_QCoh only; it is unchanged from the base. Steps 1-3 and 5-6 follow 09M8/08F3 and each cited statement says what the step takes. Step 1: Grothendieck abelian, termwise derived coproducts, H^q preserves them, quasi-coherent sums. Step 2: local finite-free-retract models, presentation, kernel/image closure, chart detection. Step 3: perfect duality, closed symmetric monoidal structure, sections model for any right adjoint. Step 5: T is a left adjoint. Step 6: the new node plus naturality u↦ι_i∘u. Step 4's finite-column induction is correct, but step 4 used (P^∨⊗^L M)|_V ≅ P^∨|_V⊗^L M|_V with no node, since the chart-calculus node gives only pullback/pushforward comparisons (C1). FIX: step 4 now cites lem-weil-pbc-ringed-slice-normalized-comparisons, whose comparison data include the slice tensor isomorphism ρ. The citation makes no cycle and adds no new node to the item's closure; uses, proof_deps and tool_uses are updated. New node lem-sfb-space-zeroth-hypercohomology-coproducts (H^0 commutes with sums on D_QCoh of a qcqs space) is the 08FB consequence that 09M8 invokes. It is true, including the empty family and unbounded inputs, statement-only and self-contained. It is not a restatement of the item and not a duplicate: lem-sfb-space-derived-pushforward-coproducts is the Rf_* form, and lem-weil-pbc-qcqs-cohomology-direct-sum and lem-pc-* are scheme-only. Batch 5: the three listed sfb lemmas and the two def-trf citations reach sec-trace-formula only through the algebraic-space and quasi-coherence definitions and generic foundations (atlas tests, fibre products, étale tensor sections, localization). The closure has no trace-formula or Poincaré statement, no assumption leaf and no step of their proofs, so these are not grounds for a return. The declared tool uses are generic; I accept them plus the added one. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePerfectObjectsCompact",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfectObjects_compact",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpacePerfectObjectsCompact.lean",
+  "statement": "theorem perfectObjects_compact {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (P : X.DerivedModules) (hperfect : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P) : ∃ (hP : X.derivedQCohProperty P) (hcoprod : HasCoproducts.{u} X.DerivedQCoh), @IsCompactObject.{u} X.DerivedQCoh _ _ hcoprod ⟨P, hP⟩",
+  "branch": "sheaf-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed small ringed-model derived calculus and absolute quasi-separatedness. The conclusion supplies the quasi-coherent cohomology witness and coproducts in D_QCoh, then applies the recorded canonical Hom-coproduct definition to that same ambient object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d415d92af",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Read node, 09M8 source, all stmt_dep declarations (DerivedModules/derivedQCohProperty/DerivedQCoh, smallStructureSheaf at SmallModel.{u}, IsPerfectOnRingedSiteOfUniverses.{u,u,u,w}, IsAbsolutelyQuasiSeparated, IsCompactObject). Node diff vs base: only lean + two landed owner def nodes added to stmt_deps. Hypotheses match (absolute qs, qc point space, local strict-perfect predicate, no extra bounds); conclusions give QCoh cohomology, HasCoproducts.{u} on D_QCoh and IsCompactObject.{u} in D_QCoh (consistent with landed exists_compact_perfect_generator). Edge cases empty I/zero/empty X covered. No new defs or duplicates, sorry only, docstrings with source/blueprint/proof steps, lean.statement verbatim, imports exist. No findings; nothing recompiled since no file changed."
+ }
+}

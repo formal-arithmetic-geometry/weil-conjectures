@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-flat-subgroup-identity-neighbourhood-open",
+ "kind": "statement",
+ "title": "A flat subgroup containing an identity neighbourhood is open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $H,G$ be group objects in schemes over $S$, with identity sections $e_H,e_G$, multiplication and inverse. Let $i:H\\hookrightarrow G$ be an $S$-group homomorphism which is a closed immersion [def-weil-closed-immersion]. Assume $H\\to S$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose there is an open immersion $v:V\\hookrightarrow G$ [def-weil-open-immersion] and morphisms $e_V:S\\to V$ and $b:V\\to H$ over $S$ such that $ve_V=e_G$ and $ib=v$. Then $i$ is an open immersion. Neither $H\\to S$ nor $G\\to S$ is assumed smooth, and no connectedness assumption is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem B.3.2(2), final proof, printed p.289, translation from a neighbourhood of the identity. Agent general tool formulation: multiplication of H with V is flat and locally finitely presented, hence open, and its open image contains H; fpqc local exactness of a closed ideal identifies H with that open image. Online source read; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=H\\times_SG$ and $D=H\\times_SV$. The group laws define inverse $S$-automorphisms of $P$, $a(h,g)=(h,i(h)g)$ and $a^{-1}(h,g)=(h,i(h)^{-1}g)$: their composites are the identity by associativity and the inverse law. These formulas mean morphisms formed from the two projections and the group operations, so apply over every test scheme. The morphism $j=1_H\\times v:D\\to P$ is a base change of $v$, hence an open immersion by [lem-weil-pbc-open-immersion-base-change]. Consequently $k=a\\circ j$ is an open immersion: the automorphism carries the open subscheme identified by $j$ to its isomorphic open subscheme. Define $q=\\operatorname{pr}_G\\circ k:D\\to G$, so $q(h,t)=i(h)v(t)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent translation construction; Schemes Tag 01JY (lemma-base-change-immersion), open-immersion case."
+   }
+  },
+  {
+   "text": "The projection $p=\\operatorname{pr}_G:P\\to G$ is the base change of $H\\to S$. It is flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. The open immersion $k$ is etale by [lem-weil-pbc-open-immersion-etale], hence flat and locally of finite presentation by [def-weil-etale-morphism]. Apply [lem-pc-flat-compose] and [lem-sbc-locally-finite-presentation-composition] to $D\\xrightarrow{k}P\\xrightarrow{p}G$. Thus $q$ is flat and locally of finite presentation. No flatness of $G\\to S$ is used.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9 (lemma-base-change-flat), 01TS (lemma-base-change-finite-presentation), 02GP (lemma-open-immersion-etale), 02GI/02GV (etale criterion), 01U7 (lemma-composition-flat), 01TR (lemma-composition-finite-presentation)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-lfp-open], $U=q(|D|)$ is open in $|G|$. There is a morphism $r:D\\to H$, $r(h,t)=h\\,b(t)$, with $i\\circ r=q$, because $i$ respects multiplication and $i\\circ b=v$. Conversely define $s:H\\to D$ by $s(h)=(h,e_V(p_H(h)))$, where $p_H:H\\to S$ is the structure map. Since $v\\circ e_V=e_G$, the identity law gives $q\\circ s=i$. The two factorizations imply $q(|D|)\\subseteq i(|H|)$ and $i(|H|)\\subseteq q(|D|)$ respectively. Hence $U=i(|H|)$. The closed immersion $i$ is therefore a homeomorphism of $|H|$ onto the open subspace $U$, by [def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UA (lemma-fppf-open); agent argument using the specified multiplication and identity morphisms."
+   }
+  },
+  {
+   "text": "Fix $h\\in H$ and put $u=i(h)$. Choose $z\\in D$ with $q(z)=u$, which exists by Step 3 (one may take $z=s(h)$). Since $i\\circ r=q$ and $i$ is injective on points, $r(z)=h$. The stalk map $q_z^\\sharp:\\mathcal O_{G,u}\\to\\mathcal O_{D,z}$ is a flat local ring homomorphism by [def-weil-flat-morphism]. It is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat], and injective by [lem-weil-pbc-faithfully-flat-universally-injective] with $N=\\mathcal O_{G,u}$, identifying $N\\otimes_N\\mathcal O_{D,z}$ with $\\mathcal O_{D,z}$ by $a\\otimes c\\mapsto q_z^\\sharp(a)c$. Functoriality of germs gives $q_z^\\sharp=r_z^\\sharp\\circ i_h^\\sharp$, so $i_h^\\sharp$ is injective. It is also surjective: the affine quotient description of [def-weil-closed-immersion] identifies it locally with $A_{\\mathfrak p}\\to(A/I)_{\\mathfrak p/I}$, whose elements are the images of fractions in $A_{\\mathfrak p}$. Thus $i_h^\\sharp$ is an isomorphism for every $h$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HR (lemma-local-flat-ff) and 05CK (lemma-faithfully-flat-universally-injective); affine quotient clause of Morphisms Tag 01QO."
+   }
+  },
+  {
+   "text": "Use the homeomorphism $|H|\\simeq U$ from Step 3 to regard $\\mathcal O_H$ as a sheaf on $U$. The structure map is then a morphism of sheaves of rings $\\mathcal O_G|_U\\to\\mathcal O_H$ whose stalk maps are exactly the isomorphisms of Step 4: the corresponding neighbourhoods are identified by this homeomorphism. Apply [lem-weil-pbc-sets-sheaf-iso-on-stalks] to the underlying sheaves of sets on $U$. The structure map is bijective on sections over every open. The inverses preserve addition, multiplication and the unit because the forward section maps are bijective ring homomorphisms; the inverses commute with restrictions by inverting the naturality squares. Thus it is an isomorphism of sheaves of rings. Together with Step 3, [def-weil-open-immersion] proves that $i$ is an open immersion.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 007T (lemma-points-exactness), part (3); definition of open immersion, Schemes Tags 01HE and 01IO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-etale-morphism",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Translation argument for the stated general group-scheme tool, using Stacks Tags 01JY, 01U9, 01TS, 02GP, 01U7, 01TR, 01UA, Algebra 00HR/05CK and Sheaves 007T. Conrad Theorem B.3.2(2), printed p.289, motivates the translation step but does not state this general lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(subgroup|groupScheme).*(isOpenImmersion|is_open)|(isOpenImmersion).*(subgroup|groupScheme)",
+   "results": "{\"t\": \"2026-10-24T11:32:32Z\", \"tool\": \"grep\", \"query\": \"(subgroup|groupScheme).*(isOpenImmersion|is_open)|(isOpenImmersion).*(subgroup|groupScheme)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Subgroup.isOpen_of_one_mem_interior and related results concern topological groups, not group schemes or structure sheaves. IsOpenImmersion.of_flat_of_mono requires flatness of i, whereas the hypothesis here is flatness of H over S; it is not a one-line specialization. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat closed subgroup scheme is open if it contains an open neighbourhood of the identity section",
+   "results": "{\"t\": \"2026-10-24T11:32:32Z\", \"tool\": \"leansearch\", \"query\": \"A flat closed subgroup scheme is open if it contains an open neighbourhood of the identity section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.isOpen_of_mem_nhds\", \"Subgroup.isOpen_of_one_mem_interior\", \"Subgroup.isOpen_of_openSubgroup\", \"AddSubgroup.isOpen_of_mem_nhds\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one\", \"OpenSubgroup.mem_nhds_one\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"716bd381829237b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Subgroup.isOpen_of_one_mem_interior and related results concern topological groups, not group schemes or structure sheaves. IsOpenImmersion.of_flat_of_mono requires flatness of i, whereas the hypothesis here is flatness of H over S; it is not a one-line specialization. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T11:32:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Subgroup.isOpen_of_one_mem_interior and related results concern topological groups, not group schemes or structure sheaves. IsOpenImmersion.of_flat_of_mono requires flatness of i, whereas the hypothesis here is flatness of H over S; it is not a one-line specialization. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of flat finitely presented group schemes which is an isomorphism near the identity section is an open immersion",
+   "results": "{\"t\": \"2026-10-24T11:32:33Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion of flat finitely presented group schemes which is an isomorphism near the identity section is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\"], \"digest\": \"0b6f22aee668efc9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Subgroup.isOpen_of_one_mem_interior and related results concern topological groups, not group schemes or structure sheaves. IsOpenImmersion.of_flat_of_mono requires flatness of i, whereas the hypothesis here is flatness of H over S; it is not a one-line specialization. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness of a subgroup immersion can be checked on a neighbourhood of the identity section in a flat group scheme",
+   "results": "{\"t\": \"2026-10-24T11:32:34Z\", \"tool\": \"leanfinder\", \"query\": \"Openness of a subgroup immersion can be checked on a neighbourhood of the identity section in a flat group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTopologicalGroup.isOpenMap_iff_nhds_one\", \"TopologicalGroup.isOpenMap_iff_nhds_one\", \"Subgroup.isOpen_of_mem_nhds\", \"IsOpen.isImmersionAt\", \"Subgroup.isOpen_of_one_mem_interior\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"TopologicalGroup.isOpenMap_iff_nhds_zero\"], \"digest\": \"f025cdd0a99f1d6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Subgroup.isOpen_of_one_mem_interior and related results concern topological groups, not group schemes or structure sheaves. IsOpenImmersion.of_flat_of_mono requires flatness of i, whereas the hypothesis here is flatness of H over S; it is not a one-line specialization. Loogle and geometry grep have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat closed subgroup scheme containing an open neighbourhood of the identity section is an open subgroup scheme",
+   "results": "{\"t\": \"2026-10-24T11:54:15Z\", \"tool\": \"leanfinder\", \"query\": \"A flat closed subgroup scheme containing an open neighbourhood of the identity section is an open subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.isOpen_of_one_mem_interior\", \"OpenSubgroup\", \"Subgroup.isOpen_of_mem_nhds\", \"OpenSubgroup.isClopen\", \"OpenSubgroup.mem_nhds_one\", \"OpenSubgroup.isClosed\", \"OpenSubgroup.instInhabited\", \"Subgroup.isClosed_of_isOpen\"], \"digest\": \"4da3debc11861c0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological-group subgroup openness does not assert a scheme open immersion; IsOpenImmersion.of_flat_of_mono assumes flatness of i, not flatness of H over S. Read FlatMono.lean:38-39. The remaining geometry hits give only definitions or consequences of open immersions."
+  },
+  {
+   "tool": "grep",
+   "query": "(subgroup|GrpObj).*(isOpenImmersion|IsOpenImmersion)|(isOpenImmersion|IsOpenImmersion).*(subgroup|GrpObj)",
+   "results": "{\"t\": \"2026-10-24T11:54:38Z\", \"tool\": \"grep\", \"query\": \"(subgroup|GrpObj).*(isOpenImmersion|IsOpenImmersion)|(isOpenImmersion|IsOpenImmersion).*(subgroup|GrpObj)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological-group subgroup openness does not assert a scheme open immersion; IsOpenImmersion.of_flat_of_mono assumes flatness of i, not flatness of H over S. Read FlatMono.lean:38-39. The remaining geometry hits give only definitions or consequences of open immersions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-24T11:54:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological-group subgroup openness does not assert a scheme open immersion; IsOpenImmersion.of_flat_of_mono assumes flatness of i, not flatness of H over S. Read FlatMono.lean:38-39. The remaining geometry hits give only definitions or consequences of open immersions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subgroup scheme containing an open neighbourhood of the identity is an open immersion when the subgroup is flat and locally finitely presented",
+   "results": "{\"t\": \"2026-10-24T11:55:11Z\", \"tool\": \"leansearch\", \"query\": \"A closed subgroup scheme containing an open neighbourhood of the identity is an open immersion when the subgroup is flat and locally finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"6b2c5549f29ae24d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological-group subgroup openness does not assert a scheme open immersion; IsOpenImmersion.of_flat_of_mono assumes flatness of i, not flatness of H over S. Read FlatMono.lean:38-39. The remaining geometry hits give only definitions or consequences of open immersions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of group schemes is open if it is an isomorphism on a neighbourhood of the identity and its source is flat over the base",
+   "results": "{\"t\": \"2026-10-24T11:55:12Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion of group schemes is open if it is an isomorphism on a neighbourhood of the identity and its source is flat over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\"], \"digest\": \"e54a5cf24cb8be76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological-group subgroup openness does not assert a scheme open immersion; IsOpenImmersion.of_flat_of_mono assumes flatness of i, not flatness of H over S. Read FlatMono.lean:38-39. The remaining geometry hits give only definitions or consequences of open immersions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes. Supporting input: Theorem B.3.2(2), printed pp.288-290, split source, including both the Hom bijection and the open-and-closed-immersion assertion. Supporting input: Theorem B.3.2(2), final proof, printed p.289, translation from a neighbourhood of the identity. Agent general tool formulation: multiplication of H with V is flat and locally finitely presented, hence open, and its open image contains H; fpqc local exactness of a closed ideal identifies H with that open image.",
+   "via": [
+    "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-subgroup-identity-neighbourhood-open",
+  "worker": "stage1",
+  "summary": "Q88: unchanged statement; checked the relative translation map and its open image; used injectivity of a faithfully flat local stalk map to remove the closed-immersion ideal. Reused existing DAG statements throughout; no new nodes. No smoothness, connectedness, Noetherian or quasi-compactness hypotheses were added.",
+  "blueprint": "The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) supplies the ancestor direct-image route. This deeply created generic prerequisite realizes the parent complete-local diagonalizable lifting proof, final translation step, as recorded in blueprint.from.place; ancestor tool reports node=None, so the inherited null from.node and full via chain are retained. Latest blueprint search for identity neighbourhood and subgroup found no equal statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-712d3da72",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-712d3da72 (reviewer sub-agent of L); spot-checked: The statement is unchanged against side-live and true: the standard translation argument, with Conrad B.3.2(2) p.289 as motivation and proof_origin agent. This is a five-step split with no new nodes, and every cited node is a Mathlib leaf whose statement says what each step takes from it. S1 (shear automorphism, then j=1×v as a base change of v under 01JY): checked. S2 (pr_G is the base change of H→S; it is flat (01U9) and lfp (permanence clause (3), with no qcqs needed); k is étale, so flat and lfp; the composites are flat and lfp): checked. S3 (q(|D|) is open by 01UA; i∘r=q via ib=v and i a homomorphism; q∘s=i via ve_V=e_G and p_G∘i=p_H; so U=i(|H|) and i is a homeomorphism onto the open set U): checked. S4 (at z=s(h), r(z)=h; the flat local hom q_z^♯ is faithfully flat (00HR) and injective (05CK); q_z^♯=r_z^♯∘i_h^♯ makes i_h^♯ injective, and it is surjective from the closed-immersion quotient form): checked. S5 (007T stalk criterion on U, inverse ring maps, def of open immersion): checked. Edge cases: empty S is vacuous; a nilpotent thickening of the identity shows the factorization ib=v must be schematic. The hypotheses the parent applies the lemma with match. Duplicate search over DAG group/open-immersion nodes found no equal node. No SGA, C1–C4 hold, and the blueprint chain is inherited with from.node null. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSubgroupIdentityNeighbourhoodOpen",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_of_flat_subgroup_identity_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSubgroupIdentityNeighbourhoodOpen.lean",
+  "statement": "theorem isOpenImmersion_of_flat_subgroup_identity_neighbourhood {S : Scheme.{u}} (H G : Over S) [GrpObj H] [GrpObj G] (i : H ⟶ G) [IsMonHom i] [IsClosedImmersion i.left] [Flat H.hom] [LocallyOfFinitePresentation H.hom] (V : Over S) (v : V ⟶ G) [IsOpenImmersion v.left] (eV : 𝟙_ (Over S) ⟶ V) (b : V ⟶ H) (heV : eV ≫ v = MonObj.one (X := G)) (hb : b ≫ i = v) : IsOpenImmersion i.left",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-966ffd24b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: GrpObj H/G on Over S, IsMonHom i, IsClosedImmersion i.left, Flat and LocallyOfFinitePresentation of H.hom, IsOpenImmersion v.left, eV : 𝟙_ ⟶ V, eV≫v = MonObj.one, b≫i = v, conclusion IsOpenImmersion i.left. No extra hypotheses, one universe. The only change from the side-live node is the lean field; lean.statement matches the file verbatim. GrpObj is the recorded Lean form of def-sc-group-scheme (fields only) and no relative group-scheme definition node exists, so no H2 or H4 issue. IsOpenImmersion.of_flat_of_mono needs i itself flat, so this is not an existing result. The translation proof is sound; edge cases (empty S, i = id, alpha_p identity subgroup excluded by the scheme factorization b) checked. No definitions, sorry only, docstrings give source and blueprint and the 5 proof steps, report has both sections. Not compiled because nothing was changed."
+ }
+}

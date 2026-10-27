@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-supported-padic-scalar-extension",
+ "kind": "statement",
+ "title": "Normalized scalar extension of a supported integral constant",
+ "statement": "Let $\\ell$ be prime and $i:X\\to Z$ a closed immersion of arbitrary schemes. Extension of scalars from abelian pro-etale sheaves to discrete constant $\\mathbf Z_\\ell$-module sheaves [def-sfb-diagonal-system-interface] carries $i_*\\mathbf Z_X$ to $i_*\\mathbf Z_{\\ell,X}$. There is an isomorphism $e$ whose scalar adjunction unit followed by the forgotten $e$ is the normalized supported integral generator of [def-sfb-cartier-reduction-data]. No residue coefficient, ordinary reduction presentation, invertibility hypothesis, or derived category is involved.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), source paragraph: supported quotient and its quotient-unit normalization."
+ },
+ "proof": [
+  {
+   "text": "For the lifted integer coefficient ring, the constant sheafification/forgetting comparison is an isomorphism and its hom is the normalized integral generator. Integer scalar forgetting is fully faithful, so it preserves the relevant Hom sets bijectively.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the normalized coefficient map from ULift(ZMod 0)=ULift(Z) to the p-adic ring. Evaluation at one proves its constant-source ordinary scalar-unit universal property. Finite direct image preserves that property. Compose its Hom bijection with lifted-integer forgetting and the preceding integral-source isomorphism; the generator-scalar identity identifies the composite with the supported integral generator.",
+   "uses": [
+    "lem-asd-finite-ordinary-scalar-unit",
+    "lem-asd-supported-kummer-scalar-maps",
+    "lem-asd-supported-kummer-scalar-derived-units",
+    "lem-sp-etale-supported-integral-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer the ordinary Hom universal property through the comparison inverse-image/direct-image adjunctions. The canonical closed supported source comparisons are invertible; the scalar-forgetting comparison is the transpose of the module comparison unit. Its unit formula identifies the transferred universal map with cartierProIntegralGenerator, retaining the exact generator rather than an unspecified automorphism.",
+   "uses": [
+    "def-sfb-cartier-reduction-data",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the pro-etale generator through the insertion-of-one scalar adjunction. The resulting arrow is an isomorphism because precomposition induces a bijection on Hom into every p-adic sheaf. Its adjunction unit equation is exactly the required generator normalization.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-diagonal-system-interface",
+  "lem-asd-finite-ordinary-scalar-unit",
+  "lem-asd-supported-kummer-scalar-derived-units",
+  "lem-asd-supported-kummer-scalar-maps",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), source paragraph: supported quotient and its quotient-unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of a constant sheaf supported on a closed subscheme commutes with direct image and preserves the scalar adjunction unit",
+   "results": "ModuleCat.extendRestrictScalarsAdj and its unit apply coefficientwise; sheaf pushforward adjunction results do not supply the supported constant comparison. Project FiniteOrdinaryScalarUnit provides the essential finite direct-image tool.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the finite ordinary scalar-unit theorem and comparison adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernel of multiplication on scalar extension is restriction of the constant residue module sheaf",
+   "results": "ModuleCat.Tilde results and a generatorsOfIsCokernelFree lemma; no supported scalar-extension identification.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar.*scalar|scalar.*lowerStar|finite_ordinary_scalar_unit|constant_ordinary_scalar_unit",
+   "results": "Found FiniteOrdinaryScalarUnit, the constant ordinary scalar-unit proof in SupportedKummerScalarDerived, and the normalized generator scalar identity in EtaleSupportedIntegralDerivedUnit.",
+   "date": "2026-10-27",
+   "verdict": "These proved tools give the scalar-extension comparison without a new hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalSourceQuotientNormalization",
+  "group": "R2",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), source paragraph: supported quotient and its quotient-unit normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedPadicScalarExtension",
+  "file": "lean/Sheaf/Paper/SupportedPadicScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_padic_scalar_extension",
+  "statement": "theorem supported_padic_scalar_extension (ℓ : ℕ) [Fact ℓ.Prime]\n    {X Z : Scheme.{u}} (i : X ⟶ Z) [IsClosedImmersion i] :\n    ∃ e : (diagonalScalarExtension ℓ Z).obj\n        ((lowerStar AddCommGrpCat.{u + 1} i).obj\n          ((constantSheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).obj\n            (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) ≅\n      (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) i).obj\n        (geoCartierConstant (ULift.{u + 1} ℤ_[ℓ]) X),\n      HEq ((diagonalScalarAdjunction ℓ Z).unit.app _ ≫\n        (diagonalForget ℓ Z).map e.hom)\n        (cartierProIntegralGenerator (ULift.{u + 1} ℤ_[ℓ]) i)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T034733-L-3680397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T034733-L-3680397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

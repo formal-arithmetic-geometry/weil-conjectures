@@ -31,184 +31,84 @@
   "det-sp-normalized-equivalence",
   "def-weil-derived-complete-integral-detailed",
   "det-sp-integral-direct-image-tower",
-  "det-sp-integral-adjunction-bijection"
+  "det-sp-integral-adjunction-bijection",
+  "def-sp-adjoint-compositor-data"
  ],
  "proof": [
   {
-   "text": "The chosen compactifications exist inside the standing setting. Their schemes are Noetherian: a field is Noetherian since its only ideals are $0$ and $1$, and finite type over a Noetherian scheme is Noetherian. The composite $gf$ is smooth of relative dimension $d+e$. Consequently the constructible adjunctions apply to $f,g,gf$ for both coefficient rings. Scalar extension sends each $\\Dctf$ object to a $\\Dctf$ object, without a flatness assumption. In particular all arguments of $b$ and $c$ below are in their stated domains.",
+   "text": "For each of f, g and fg, apply reductionExceptional_isIso to obtain the actual finite support restrictions, exceptional adjunctions, scalar closure and invertible counit-mate coefficient comparisons. The compactification middle schemes inherit their separated finite-type structure over k. Lift reductionDirectImageComparison componentwise to the full constructible categories using reductionDirectImage_isIso; the inverse is fixed by the hom normalization. The existing exceptional counit equation gives the full-subcategory equation by hom_ext.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-direct-image",
     "lem-sbc-smooth-relative-dimension-permanence",
-    "sk-prop-sf-rf-shriek-preservation",
-    "det-sp-scalar-extension-functor"
+    "sk-def-sfb-dc-setting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(1)-(2), domain checks"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a compatible tower of compactifications: $Y\\xrightarrow i\\bar Y\\xrightarrow s Z$ and $X\\xrightarrow a\\bar X\\xrightarrow p\\bar Y$ compactify $g$ and $if$; put $V=\\bar X\\times_{\\bar Y}Y$, with $b:V\\hookrightarrow\\bar X$, $r:V\\to Y$, and $j:X\\hookrightarrow V$, so $bj=a$. On the etale site the normalized compositor is\n$$Rs_*i_!Rr_*j_!\\xrightarrow{Rs_*\\Gamma j_!}Rs_*Rp_*b_!j_!\\simeq R(sp)_*a_!.$$\nThe compact-support comparison lemma gives its invertibility and independence of the tower for every finite commutative coefficient ring. Every bounded intrinsically constructible pro-etale input has bounded etale origin, by the arbitrary-finite-ring derived-origin equivalence. Transport the displayed map by the normalized proper site-comparison mates and the exact open-extension comparisons. The site equation for $\\Gamma$ in the proper/open coefficient-mate lemma identifies the transported map with the same proper/open prescription on the pro-etale site. This defines $\\alpha_R$ on the required objects, independently of the witness and compactifications; the origin equivalence is fully faithful.",
+   "text": "Finite type over the field and quasi-compactness give Noetherian X,Y,Z. Apply the normalized finite support compositor existence theorem for each ring, retaining exactly the adjunctions from the first step. Apply the coefficient theorem and lift its ambient equation by hom_ext. These construct DA, DB and the left composition equation.",
    "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-sp-proper-open-coefficient-mate"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-finite-support-compositor-existence",
+    "lem-sp-finite-support-compositor-coefficient"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(1), compact-support composition; Stacks 0F7J (lemma-shriek-composition)"
-   }
+   "elementary": false
   },
   {
-   "text": "Compose the Hom bijections for $F_f\\dashv H_f$ and $F_g\\dashv H_g$:\n$$\\operatorname{Hom}(F_gF_fM,K)\\simeq\\operatorname{Hom}(F_fM,H_gK)\\simeq\\operatorname{Hom}(M,H_fH_gK).$$\nThe inverse sends $u$ to $\\varepsilon_g\\circ F_g(\\varepsilon_f)\\circ F_gF_f(u)$, so the composite counit is the one asserted. Transporting this bijection through $\\alpha_R$ makes $H_fH_g$ right adjoint to $F_{gf}$. Uniqueness of right adjoints gives $\\theta_R$. More precisely $\\theta_R(K)$ is the image of $\\varepsilon_{gf,R}(K)\\circ\\alpha_R(H_{gf,R}K)$ in the displayed Hom bijection. Its inverse is obtained by reversing the two representing bijections. Thus it preserves the specified counits, and every counit-preserving comparison has the same Hom image and equals it. This proves (1), including its normalization.",
+   "text": "Apply finiteAdjointCompositorTransposes to DA, DB and the three specified b and c isomorphisms. Keep its normalized right compositors, uniqueness, composite counits and coefficient equation, omitting only the extra displayed intermediate transpose formula. Assemble these fields into SpCompositionFinite.",
    "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-common-left-adjunctions-iso"
+    "lem-sp-finite-adjoint-compositor-transposes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(1), composition of Hom bijections and counit uniqueness"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $q_p:S Rp_{*,A}\\to Rp_{*,B}S$ and $t_j:S j_{!,A}\\simeq j_{!,B}S$ for the normalized constituents in the definition of $b$. Proper compositors commute with $q$: paste the pullback/scalar squares and apply mate-pasting along the adjunctions. These pullback squares paste to the square for the composite: on a K-flat tensor model both reassociations take an inverse-image generator $x\\otimes u$ to the iterated inverse-image generator with the same coefficient $u$; the section formula in scalar/tensor normalization fixes these maps. Hence their mates agree, with the canonical proper compositors inserted. For composable opens, both ways of composing $t$ extend the same tensor section by zero on the composite open and send it to zero off that open. Their sheafifications and termwise derived maps therefore agree with the open compositor. These assertions concern actual coefficient-linear maps: the proper comparison is defined by the $B$-linear adjunction, and the open comparison is the normalized comparison of left adjoints, not an arbitrary underlying-$A$ isomorphism.",
+   "text": "For each actual quotient ring R_n, construct a normalized support compositor using the existing finite adjunctions of the supplied tower levels, not independently chosen right adjoints. Quotient rings are annihilated by ell^(n+1). The left coefficient theorem gives the quotient comparison equation. The specified exceptional coefficientMate has its defining counit equation by the Hom equivalence. Its pointwise invertibility from Levels, and naturality proved by injectivity of this Hom equivalence, give a natural isomorphism. Apply the finite transpose theorem at levels n,m. Its uniqueness identifies its right compositors with finiteTheta, whose normalization follows from rightAdjointUniq. Thus obtain both FiniteIdentities, including m=n, and apply towerAdjointCompositorRealization to obtain all tower laws.",
    "uses": [
-    "def-sp-reduction-direct-image-comparison",
-    "lem-weil-pbc-mate-pasting",
-    "lem-sp-proetale-scalar-tensor-normalization",
-    "lem-cbc-extension-zero-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(2), primitive proper and open composition squares"
-   }
-  },
-  {
-   "text": "In the compatible tower of step 2, put $L=j_!M$ on $V$. It and its scalar extension have bounded etale origins: $M$ has finite Tor amplitude, scalar extension preserves it, and extension by zero is exact and commutes with scalar extension by the comparison $t_j$. Apply the coefficient equation for the cartesian proper/open square $pb=ir$:\n$$Rp_{*,B}(t_b)\\,q_p\\,S(\\Gamma_A)=\\Gamma_B\\,i_{!,B}(q_r)\\,t_i.$$\nUse its site equation to transport to the pro-etale presentations. The scalar/site squares themselves commute by the generator formula of scalar/tensor normalization and mate-pasting for the proper constituents; for an open both send an extended tensor section to that same section. Paste this interchange square, the proper-composition square and the open-composition square of step 4, and apply $Rs_*$. The resulting outer boundary is exactly\n$$b_{gf}\\,S(\\alpha_A)=\\alpha_B\\,F_{g,B}(b_f)\\,b_gF_{f,A}.$$\nCoefficient compatibility with changing a chosen compactification follows by pasting the proper/open refinement coefficient square with the proper-composition square. Thus the boundary is the specified $b$ for the fixed compactifications, not just a map for the specially chosen tower. This proves the first equation of (2) for arbitrary $A\\to B$.",
-   "uses": [
-    "det-sp-scalar-extension-functor",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "def-sp-reduction-direct-image-comparison",
-    "lem-sp-proper-open-coefficient-mate",
-    "lem-sp-proetale-scalar-tensor-normalization",
-    "lem-weil-pbc-mate-pasting",
-    "lem-sf-proper-open-coefficient-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(2), b: paste the proper/open coefficient square; Stacks 0GL6 and 0F7I"
-   }
-  },
-  {
-   "text": "Use $F_h,H_h$ with a coefficient subscript when needed, and insert $\\alpha,\\theta$ as in the statement. Put $L=H_{g,A}K$, $N=H_{f,A}L$, and $D=H_{f,B}(c_g(K))\\circ c_f(L)$. Its transpose under the composite $B$-adjunction is\n$$\\varepsilon_{g,B}\\,F_{g,B}(\\varepsilon_{f,B})\\,F_{g,B}F_{f,B}(D).$$\nFirst naturality of $\\varepsilon_f$ moves $c_g$ past it. Substitute $\\varepsilon_{f,B}F_{f,B}(c_f(L))=S(\\varepsilon_{f,A}(L))b_f(N)^{-1}$, then substitute the defining counit identity for $c_g$. The result is\n$$S(\\varepsilon_{g,A})\\,b_g(L)^{-1}\\,F_{g,B}(S(\\varepsilon_{f,A}(L)))\\,F_{g,B}(b_f(N)^{-1}).$$\nNaturality of $b_g^{-1}$ moves $\\varepsilon_{f,A}(L)$ to the left, giving\n$$S(\\varepsilon^{\\mathrm{comp}}_A(K))\\,[F_{g,B}(b_f(N))\\,b_g(F_{f,A}N)]^{-1}.$$\nBy step 5 this is the transpose of $c_{gf}(K)$ after the prescribed compositors. The Hom bijection is injective, so $D\\,S(\\theta_A(K))=\\theta_B(S K)c_{gf}(K)$. This proves the second equation of (2); only naturality, the two defining counit identities, and the already proved $b$ equation were used.",
-   "uses": [
+    "def-sp-adjoint-compositor-data",
+    "det-sp-tower-gluing",
+    "lem-sp-finite-support-compositor-existence",
+    "lem-sp-finite-support-compositor-coefficient",
     "det-sp-reduction-direct-image",
-    "det-sp-reduction-exceptional",
-    "lem-weil-pbc-mate-pasting"
+    "lem-sp-finite-adjoint-compositor-transposes",
+    "lem-sp-tower-adjoint-compositor-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(2), c: explicit calculation of both transposes"
-   }
+   "elementary": false
   },
   {
-   "text": "For $A_n=\\mathcal O_E/\\ell^n$, the tower bound gives $F_{h,\\bullet}(\\mathcal C)\\subseteq\\mathcal C$ for $h=f,g,gf$, where $\\mathcal C$ is the uniformly bounded constructible finite-Tor tower category. Thus the hypothesis on the restricted functors in the tower compact-support calculus is satisfied. Its clause (1) gives an actual isomorphism $\\alpha_\\bullet:F_{g,\\bullet}F_{f,\\bullet}\\simeq F_{gf,\\bullet}$ before evaluation, and identifies its evaluation with the finite proper/open compositor. The tower-gluing theorem gives actual adjunctions $F_{h,\\bullet}\\dashv H_{h,\\bullet}$, whose finite evaluation comparisons preserve units and counits. Apply the Hom-bijection construction of step 3 in these tower categories to obtain an actual $\\theta_\\bullet:H_{gf,\\bullet}\\simeq H_{f,\\bullet}H_{g,\\bullet}$.",
+   "text": "For the integral assertion, use the fully faithful reduction and the left/right comparison isomorphisms in the three given integral-adjunction realization records. Paste b_g(F_f -), F_g(b_f), alphaTower and inverse b_gf to obtain an isomorphism after reduction. Lift it uniquely through the fully faithful functor on functor categories. map_preimage gives the left reduction equation. Transport the direct integral adjunction along inverse alpha and take rightAdjointUniq with the composite adjunction. This gives the integral counit normalization. The private evaluated_compositor calculation in the actual tower compositor module applies to the three reduction comparison squares: its unit and counit hypotheses follow by cancellation from the Realization unit_reduction and counit_reduction fields. It gives the right reduction equation by two applications of the Hom bijection and the supplied tower counit equation. Finally injectivity of the composite Hom bijection proves uniqueness, and Adjunction.comp_counit_app gives the composite counit. These are explicit maps of the published integral functors. No finite evaluation is assumed faithful.",
    "uses": [
-    "sk-lem-sp-tower-bound",
-    "lem-sp-coefficient-tower-shriek-calculus",
-    "det-sp-tower-gluing",
-    "lem-weil-common-left-adjunctions-iso"
+    "det-sp-integral-adjunction-bijection",
+    "lem-sp-tower-adjoint-compositor-realization",
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(3), construct the tower maps before evaluating"
-   }
-  },
-  {
-   "text": "Evaluate the defining counit equation for $\\theta_\\bullet$ at $n$. Tower gluing identifies the evaluated units and counits with the finite ones, and the tower calculus identifies $(\\alpha_\\bullet)_n$ with $\\alpha_{A_n}$. The resulting equation is the defining counit equation for $\\theta_{A_n}$ in step 3. Injectivity of the finite Hom bijection gives $(\\theta_\\bullet)_n=\\theta_{A_n}$ under those comparisons. This determines the evaluation of an already constructed tower morphism; it does not infer equality of tower morphisms from equality of their evaluations.",
-   "uses": [
-    "det-sp-tower-gluing",
-    "lem-sp-coefficient-tower-shriek-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(3), finite evaluation and counit normalization"
-   }
-  },
-  {
-   "text": "Let $r^C_{n,m}:S_{n,m}C_n\\to C_m$ be a tower reduction map. The tower compact-support calculus states $r^{F_hC}_{n,m}=F_{h,m}(r^C_{n,m})b_h(C_n)$, and tower gluing states $r^{H_hC}_{n,m}=H_{h,m}(r^C_{n,m})c_h(C_n)$. Substitute these formulas for $h=f,g,gf$. Naturality moves $r^C_{n,m}$ through the finite compositors; the remaining equality for $F$ is precisely the $b$ equation of step 5 with $A=A_n,B=A_m$, and for $H$ it is precisely the $c$ equation of step 6. Hence the evaluated compositors commute with the stated derived reduction maps. If $C$ is normalized then every $r^C_{n,m}$ is invertible, and so are $b_h,c_h$. The displayed reduction formulas show that $F_hC,H_hC$ are normalized. Their uniform constructible bounds hold already by the tower bound and tower gluing. Consequently both composition isomorphisms restrict to the full subcategories of normalized towers.",
-   "uses": [
-    "sk-def-sp-normalized-towers",
-    "lem-sp-coefficient-tower-shriek-calculus",
-    "det-sp-tower-gluing",
-    "det-sp-reduction-direct-image",
-    "det-sp-reduction-exceptional",
-    "sk-lem-sp-tower-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(3), write out the reduction-map compatibility and normalization"
-   }
-  },
-  {
-   "text": "Now use the global finite-field setting for the integral assertion. The Noetherian hypothesis of the constructible reduction/$R\\varprojlim$ equivalence holds by step 1. Put $r_T=\\operatorname{red}_T$ and $L_T=R\\varprojlim$; its counit gives $r_TL_T\\simeq1$ on normalized towers. The integral direct-image comparison identifies $F_{h,\\mathcal O_E}$ with $L_{\\mathrm{target}}F_{h,\\bullet}r_{\\mathrm{source}}$, and the integral adjunction theorem identifies $H_{h,\\mathcal O_E}$ with $L_{\\mathrm{source}}H_{h,\\bullet}r_{\\mathrm{target}}$, including their units and counits. Therefore\n$$F_{g,\\mathcal O_E}F_{f,\\mathcal O_E}\\simeq L_ZF_{g,\\bullet}r_YL_YF_{f,\\bullet}r_X\\simeq L_ZF_{g,\\bullet}F_{f,\\bullet}r_X\\xrightarrow{L_Z\\alpha_\\bullet r_X}L_ZF_{gf,\\bullet}r_X\\simeq F_{gf,\\mathcal O_E}.$$\nLikewise $L_X\\theta_\\bullet r_Z$ and $r_YL_Y\\simeq1$ give $H_{gf,\\mathcal O_E}\\simeq H_{f,\\mathcal O_E}H_{g,\\mathcal O_E}$. Every inserted counit is applied to a normalized tower by step 9. These are functorial isomorphisms on $\\Dbc$; the counits agree because the integral adjunction theorem identifies them with the tower counits under this equivalence. Setting $E=\\mathbf Q_\\ell$ gives the asserted integral comparisons.",
-   "uses": [
-    "det-sp-normalized-equivalence",
-    "det-sp-integral-direct-image-tower",
-    "det-sp-integral-adjunction-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-    "place": "(3), transfer the actual tower isomorphisms through reduction and derived limit"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(3), integral realization; categorical descent through the existing Realization comparison records"
    }
   }
  ],
  "proof_deps": [
+  "det-sp-reduction-exceptional",
+  "det-sp-reduction-direct-image",
+  "lem-sbc-smooth-relative-dimension-permanence",
   "sk-def-sfb-dc-setting",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "sk-prop-sf-rf-shriek-preservation",
-  "det-sp-scalar-extension-functor",
-  "lem-cbc-compactifiable-compatible-tower",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-sp-proper-open-coefficient-mate",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-common-left-adjunctions-iso",
-  "def-sp-reduction-direct-image-comparison",
-  "lem-sp-proetale-scalar-tensor-normalization",
-  "lem-cbc-extension-zero-composition",
-  "lem-sf-proper-open-coefficient-refinement",
-  "det-sp-reduction-direct-image",
-  "det-sp-reduction-exceptional",
-  "sk-lem-sp-tower-bound",
-  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-finite-support-compositor-existence",
+  "lem-sp-finite-support-compositor-coefficient",
+  "lem-sp-finite-adjoint-compositor-transposes",
+  "def-sp-adjoint-compositor-data",
   "det-sp-tower-gluing",
-  "sk-def-sp-normalized-towers",
-  "det-sp-normalized-equivalence",
-  "det-sp-integral-direct-image-tower",
-  "det-sp-integral-adjunction-bijection"
+  "lem-sp-tower-adjoint-compositor-realization",
+  "det-sp-integral-adjunction-bijection",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
-  "place": "(1)-(3), expanded using Stacks more-etale.tex Tags 0F7J, 0F7I, 0GL6 and the existing normalized proper/open mate and tower calculus statements. The blueprint finite-free totalization shortcut is replaced below the unit by coefficient-square pasting."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "Finite and tower assembly implemented using the published adjunction, coefficient transpose and tower realization declarations; the normalized left compositor and left coefficient pasting are separate proper substeps. Integral descent proof retained."
  },
  "mathlib_searches": [
   {
@@ -272,117 +172,60 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-composition",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "det-sp-composition-comparisons",
   "worker": "stage1",
-  "summary": "Expanded all three imported paragraphs into ten arguments using existing structural nodes; made standing scheme/coefficient hypotheses, compositor directions and B-linear equation endpoints explicit. Constructed tower morphisms before evaluation and wrote out reduction and integral conjugation formulas. No new nodes and no Lean changes.",
-  "blueprint": "The proof realizes comparisons.proof.md (1) in steps 1-3, (2) in steps 4-6, and (3) in steps 7-10; this supplies the composite adjunction and coefficient/tower infrastructure used in unit steps 1, 3 and 4. The unit purity route is unchanged.",
+  "summary": "Repair of the human re-split: three independently claimable statement-only nodes distribute the finite exceptional counit calculation, actual tower realization/reductions, and integral limit realization. Reuses existing exact finite compact-support/site/scalar coherence nodes instead of duplicating them. Statement unchanged. The full ten-step baseline argument and its destination map are retained verbatim in report.md.",
+  "blueprint": "(1) is realized by steps 1-2 and the new finite-adjoint lemma; (2) by step 3 and that lemma; (3) by the new tower and integral lemmas. The unit purity route is unchanged.",
   "tool_uses": [
    {
     "node": "sk-def-sfb-dc-setting",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic Noetherian hypothesis check for the finite-type schemes in the compositor and tower equivalence."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
     "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
     "node": "sk-prop-sf-rf-shriek-preservation",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
     "node": "det-sp-scalar-extension-functor",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "lem-cbc-compactifiable-compatible-tower",
-    "why": "Chooses the compatible compactifications needed for the unit compositor; it supplies geometry, not an alternative purity argument."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
     "node": "lem-amb-unbounded-compact-support-comparisons",
-    "why": "Gives the normalized proper/open compositor for arbitrary finite rings, whereas thm-sf-comp-composition is currently stated only for DVR quotient coefficients."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
     "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "why": "Provides etale origin and full faithfulness for arbitrary finite rings, needed to apply the specified etale compositor on the intrinsic pro-etale category."
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Specified etale/pro-etale direct-image comparison and counit normalization, for transporting the finite-ring compositor."
+    "node": "lem-sp-finite-compact-site-coherence",
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    },
    {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Exact finite-ring site comparison for open extension, for transporting the finite-ring compositor."
-   },
-   {
-    "node": "lem-sp-proper-open-coefficient-mate",
-    "why": "Supplies the coefficient and site interchange squares used inside the compositor; the unit itself contains no such structural square."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic categorical pasting and composite-counit formula, used for structural comparisons and their transposes."
-   },
-   {
-    "node": "lem-weil-common-left-adjunctions-iso",
-    "why": "Generic uniqueness of right adjoints identifies the composite right adjoint; it replaces no step of the unit purity route."
-   },
-   {
-    "node": "def-sp-reduction-direct-image-comparison",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "lem-sp-proetale-scalar-tensor-normalization",
-    "why": "Fixes coefficient-linear tensor/pullback comparisons by their K-flat generator formula, needed for the primitive pasting calculation."
-   },
-   {
-    "node": "lem-cbc-extension-zero-composition",
-    "why": "Canonical compositor for open extension, used as a constituent of compact-support composition."
-   },
-   {
-    "node": "lem-sf-proper-open-coefficient-refinement",
-    "why": "Supplies compatibility of coefficient maps with the proper refinement arrows when returning from compatible to chosen compactifications."
-   },
-   {
-    "node": "det-sp-reduction-direct-image",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "det-sp-reduction-exceptional",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "sk-lem-sp-tower-bound",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "lem-sp-coefficient-tower-shriek-calculus",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "det-sp-tower-gluing",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "sk-def-sp-normalized-towers",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "det-sp-normalized-equivalence",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "det-sp-integral-direct-image-tower",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
-   },
-   {
-    "node": "det-sp-integral-adjunction-bijection",
-    "why": "Structural operation, adjunction, or coefficient/tower realization needed by this unit; used as a black box and not as an alternative proof of purity composition."
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Existing structural theorem for Noetherian/smooth domains or normalized finite compact-support coefficient/site composition; reused as a tool without changing the unit purity route."
    }
   ]
  },
@@ -412,14 +255,56 @@
   "sk-def-sp-normalized-towers",
   "det-sp-normalized-equivalence",
   "det-sp-integral-direct-image-tower",
-  "det-sp-integral-adjunction-bijection"
+  "det-sp-integral-adjunction-bijection",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-et-proet-coefficient-compatibility"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q83-05bef16d0",
-  "group": "Q83",
+  "reviewer": "NT-cc-NF-6167b702d",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-05bef16d0 (reviewer sub-agent of L); spot-checked: Read the item, both blueprint files (comparisons.md and .proof.md), the unit sk-prop-sp-composition and the chapter, and every cited statement (19 stmt_deps, 26 proof_deps). Checked Stacks 0F7J (lemma-shriek-composition) and 0GL6. No new nodes; live still has the item imported; no repair note. The statement correction is valid: the base equations do not type-check without the compositors, so explicit α_R and θ_R are inserted, and both equations' sources and targets match. The integral clause is restricted to k=F̄_q, which is the hypothesis of det-sp-integral-adjunction-bijection. Citers det-sp-composition-factors and det-sp-trace-transitivity-steps use only clause (1), which is unchanged. Steps 1-10 checked: Noetherian, smooth-dimension and Dctf domains; α_R by the 0F7J proper/open tower through lem-amb-unbounded-compact-support-comparisons (sk-prop-an, on the unit's route), derived origin and site transport; θ as an explicit Hom image; the b equation via the coefficient equation of lem-sp-proper-open-coefficient-mate on the cartesian square pb=ir, plus lem-sf-proper-open-coefficient-refinement back to the chosen compactifications; the c-equation algebra recomputed by hand and correct; tower α/θ built before evaluation (tower-bound hypothesis met), with no faithfulness claim; the reduction formulas reduce exactly to the b/c equations for A_n→A_m; the integral step's ℓ-invertible and Noetherian hypotheses hold. Edge cases: identities, d or e = 0, empty schemes, A=B, non-flat Z/ℓ²→Z/ℓ. Batch-5 finding: the delivered citations add nothing to the base closure (150 trace-formula/Poincaré-duality nodes on base and head alike), and all are general six-functor infrastructure, so they are accepted. No cycle. Advisories: the existing pro-étale compositor lem-sfb-nonrational-localizing-lower-shriek-composition is not identified with α_R; step 5's ν^*/scalar-extension site compatibility is argued inline. Maintainer note: Q57's parallel delivery of the same item (5dfad820) is in review at the same time; merge only one."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-6167b702d (reviewer sub-agent of L); spot-checked: Read the re-split note (released 2026-10-22: 9285-character proof, at least 3 new nodes), the blueprint comparisons.md and .proof.md, the unit, the item, all three new nodes and every cited statement. Re-split complied with. Old step 1 is kept verbatim. Old step 2 is carried by existing nodes: lem-amb-unbounded-compact-support-comparisons gives the 0F7J-tower étale compositor for any finite A; lem-sp-finite-compact-site-coherence gives its transport equation to the pro-étale proper/open compositor; lem-weil-pbc-finite-ring-constructible-derived-origin gives the étale origin. Old steps 4-5 are exactly the pro-étale b-composition and refinement equations of the existing lem-sp-et-proet-coefficient-compatibility, for arbitrary A→B with no flatness. Old steps 3+6, 7-9 and 10 become the three new nodes (2577, 3222 and 2770 characters). The parent proof is a short assembly (2316 characters, 2703 after the fix). Each new node assumes the earlier pieces as hypotheses and none restates the item. Mathematics: in lem-sp-finite-adjoint-compositor-transposes I recomputed the transpose of D by hand (naturality of ε_f, the c_f and c_g counit identities from det-sp-reduction-exceptional, naturality of b_g) and the consequence (using the b identity and naturality of α_B); both are correct. The tower node matches det-sp-tower-gluing (2)-(3), lem-sp-coefficient-tower-shriek-calculus (1),(3) and sk-lem-sp-tower-bound, and assumes no faithfulness of finite evaluation. In the integral node, the κ_Y direction, the normalization of F_f r_X and H_g r_Z, and the k=F̄_q, ℓ-invertible and Noetherian hypotheses of det-sp-normalized-equivalence and det-sp-integral-adjunction-bijection all check. Edge cases tested: identity maps, A=B, Z/ℓ²→Z/ℓ, empty schemes, n=m. Duplicates: Q65 lem-sf-finite-exceptional-compositor-coefficients (same day) is narrower (F̄_q, quotient or finite-free changes only), so it is not a duplicate; maintainer note that it could cite the new finite node. Other candidates (sf adic compositor, rational scalar compatibility, cbc tower realization) concern other objects. No cycles; the trace-formula/Poincaré-duality closure is the same on base and head (283 nodes); no SGA. Tool uses accepted: lem-sp-et-proet-coefficient-compatibility and lem-sp-finite-compact-site-coherence, generic infrastructure. FIX (E1/C4, one fault): step 3 applied the coefficient-compatibility theorem to an étale origin of M without checking the finite Tor amplitude that theorem requires. The repaired step proves it from ν^*(L⊗H)≅M⊗ν^*H, ν^* commuting with cohomology, and the unit H→ν_*ν^*H being invertible, citing lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sf-comparison-pullback-exact and thm-weil-pbc-site-comparison (also added to proof_deps). The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompositionComparisons",
+  "declaration": "AlgebraicGeometry.ProEtale.compositionComparisons_finite",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCompositionFinite",
+   "AlgebraicGeometry.ProEtale.spCompositionFiniteResult",
+   "AlgebraicGeometry.ProEtale.compositionComparisons_finite",
+   "AlgebraicGeometry.ProEtale.spCompositionTowerResult",
+   "AlgebraicGeometry.ProEtale.compositionComparisons_towers",
+   "AlgebraicGeometry.ProEtale.SpCompositionIntegralLaws",
+   "AlgebraicGeometry.ProEtale.spCompositionPadicFinite",
+   "AlgebraicGeometry.ProEtale.spCompositionIntegralResult",
+   "AlgebraicGeometry.ProEtale.compositionComparisons_integral"
+  ],
+  "file": "lean/Sheaf/Paper/CompositionComparisons.lean",
+  "statement": "theorem compositionComparisons_finite (k : Type u) [Field k] {X Y Z : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] (cf : Compactification f) (cg : Compactification g) (ch : Compactification (f ≫ g)) (ℓ p : ℕ) [Fact ℓ.Prime] [Fact p.Prime] (_hpℓ : p ≠ ℓ) [CharP k p] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) : Nonempty (spCompositionFiniteResult k f g cf cg ch φ)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair of 9e84b5c8390b: def-sp-adjoint-compositor-data records the thirteen existing finite/tower definitions, which are reused from the publicly imported live TowerAdjointCompositorRealization module and its public FiniteAdjointCompositorTransposes import. There is no new definition module or redeclaration. The two theorem nodes remain proof dependencies only. All mathematical signatures and bodies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3080536c",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Re-delivery after 9e84 landing refusal. Item Lean byte-identical to 7dd0/9e84 except imports; re-read: setting, arbitrary φ:A→+*B (no flatness), (1) α pinned via datum normalization, θ unique + composite counits, (2) b/c equations in diagrammatic order, (3) tower Laws and integral ULift Q_l realization all match; lean.statement verbatim; only theorem proofs sorry. H2 repaired: def-sp-adjoint-compositor-data existing:true on live TowerAdjointCompositorRealization (+public FiniteAdjointCompositorTransposes), 13 decls verified present. F1 (H12) FIX: re-applied lost 9e84 fix — new node stmt_deps/statement add owners def-sp-reduction-direct-image-comparison (reductionCompactSupport/reductionDirectImageComparison) and def-pur-chosen-compactification-compositors (coherenceEtaleCompositor); JSON-only, no compile needed. M1: theorem-node records flipped existing:false→true (file dropped, by changed; both already stage-3 proved) — accept as Q121 f08de or --revert-nodes; not fixable by FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T211057-L-3792343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-hilbert-chart-gluing-projectivity",
+ "kind": "statement",
+ "title": "Affine Hilbert charts glue and become projective from unique DVR lifts",
+ "statement": "Let $S$ be a Noetherian scheme (quasi-compact and locally Noetherian [pqf-def-locnoeth]), $n\\geq0$, $E\\hookrightarrow\\mathbf P^n_S$ a closed immersion [def-weil-closed-immersion, def-kun-projective], and $P$ a numerical polynomial [def-sfb-projective-fibre-hilbert-polynomial]. Let $F_P(T)$, for every $S$-scheme $T$, be the set of closed subschemes $Z\\subset E_T=E\\times_ST$ flat and finitely presented over $T$ with geometric-fibre Hilbert polynomial $P$, with maps given by pullback [def-pc-fibre-product, def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-sfb-proper-hilbert-presheaf]. Let $G\\to S$ be H-projective [def-kun-projective]. Suppose for every affine open $U\\subset S$ there are a finite-type immersion $j_U:Y_U\\to G_U$ [def-weil-finite-type-morphism] and natural representing bijections $\\operatorname{Hom}_U(T,Y_U)\\cong F_P(T)$ for all $U$-schemes $T$ [def-pc-representable-functor]. Assume the transformations $F_P|_U\\to\\operatorname{Hom}_S(-,G)$ induced by $j_U$ agree on every common open restriction. Suppose also that for every DVR $R$ with fraction field $K$ [def-sc-discrete-valuation-ring, def-weil-field] and every $\\operatorname{Spec}R\\to S$ [def-weil-affine-spectrum], restriction $F_P(\\operatorname{Spec}R)\\to F_P(\\operatorname{Spec}K)$ is bijective. Then there exist an $S$-scheme $Y$, natural bijections $\\operatorname{Hom}_S(T,Y)\\cong F_P(T)$ for all $T$, and a closed immersion $j:Y\\hookrightarrow G$ restricting to $j_U$ under the unique isomorphisms $Y\\times_SU\\cong Y_U$ preserving the representing identifications. The local universal closed subschemes glue as ideal sheaves to the universal closed subscheme of $E\\times_SY$. The morphism $Y\\to S$ is H-projective, proper, separated and of finite type [def-weil-proper-morphism]; before using the DVR hypothesis the same gluing already gives a finite-type immersion $Y\\to G$. No flatness of $E/S$ is assumed.",
+ "source": {
+  "document": "literature/grothendieck-bourbaki-221-hilbert-schemes.pdf",
+  "url": "https://www.numdam.org/article/SB_1960-1961__6__249_0.pdf",
+  "place": "Proof of Theorem 3.2, printed pp.260--265, affine-base localization and the conclusion after Lemma 3.7: finite-type Grassmannian immersion, unique DVR lifts, and projectivity. Agent-explicit descent of representing charts and universal ideals. Archival PDF WANTED; primary PDF read online."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-sfb-projective-fibre-hilbert-polynomial",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-pc-representable-functor",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-proper-hilbert-presheaf",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $f_U:Y_U\\to U$. For affine opens $V\\subset U$, the fibre-product universal property identifies maps from a $V$-scheme $T$ into $Y_U\\times_UV$ with maps over $U$ into $Y_U$. Thus the stipulated natural bijections make both $Y_U\\times_UV$ and $Y_V$ represent the same functor on all $V$-schemes. Yoneda full faithfulness applied in the category of $V$-schemes gives a unique representing isomorphism $Y_V\\simeq Y_U\\times_UV$. Compose with the open inclusion into $Y_U$ to obtain $\\rho^U_V$. On a chain $W\\subset V\\subset U$, the two composites preserve the same representing identifications, so faithfulness gives $\\rho^U_W=\\rho^U_V\\rho^V_W$; likewise $\\rho^U_U=1$. No claim that intersections of affine opens are affine is needed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH: construction of its affine-basis gluing datum; Categories 001P; Schemes 01JR"
+   }
+  },
+  {
+   "text": "Apply relative affine-open gluing to these $\\rho^U_V$. This gives $f:Y\\to S$ and compatible isomorphisms $Y_U\\simeq f^{-1}(U)$. The maps $Y_U\\to G_U\\to G$ agree on overlaps: their induced transformations agree by hypothesis on every affine $V\\subset U\\cap U'$, and Yoneda faithfulness gives equality on the corresponding $Y_V$. Such $Y_V$ cover the overlap, so morphism gluing gives equality there and then a unique $S$-morphism $j:Y\\to G$. The preimage $j^{-1}(G_U)$ is exactly $f^{-1}(U)$, since $j$ is over $S$; hence its restriction is the original $j_U$.",
+   "uses": [
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH; Schemes 01JA, 01JJ: compatibility and gluing morphisms"
+   }
+  },
+  {
+   "text": "We verify the needed gluing of families on an arbitrary $S$-scheme $T$. Let $T=\\bigcup_aT_a$ be any open cover and let compatible closed subschemes $Z_a\\subset E_{T_a}$ be given. Their restrictions to $T_a\\cap T_b$ are equal as closed subschemes, giving canonical overlap isomorphisms satisfying the cocycle. Scheme gluing constructs $Z$; morphism gluing constructs $Z\\to E_T$. Its preimage over the open $E_{T_a}\\subset E_T$ is $Z_a$, so target-open locality of closed immersions shows that $Z\\to E_T$ is closed. If $I_a$ is the ideal of $Z_a$, its global ideal is explicitly\n$I(W)=\\{s\\in\\mathcal O_{E_T}(W):s|_{W\\cap E_{T_a}}\\in I_a(W\\cap E_{T_a})\\text{ for every }a\\}$.\nThe sheaf axiom shows that this is a sheaf of ideals restricting to $I_a$. The kernel formula for the ideal of the constructed closed immersion gives exactly this formula, so it is quasi-coherent and determines the glued closed subscheme uniquely. Thus this is gluing of embedded subschemes, not just gluing of abstract schemes.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR, 01JB, 01JC, 01QO; closed-subscheme kernel description"
+   }
+  },
+  {
+   "text": "If each $Z_a$ belongs to $F_P(T_a)$, the glued map $Z\\to T$ is flat and finitely presented. Specifically apply structural open locality with base $T$, $C=F=X=Z$, $p=q:Z\\to T$, $j=r=1_Z$, and select only the conditions that $p$ is flat and finitely presented; the lemma explicitly allows any chosen subset, so no dimension, etaleness or smoothness assumption is introduced. For a geometric point of $T$ choose $T_a$ containing its image: the geometric fibre and its embedding into $E$ are the same as those of $Z_a$, with the same restricted $\\mathcal O(1)$, so its Hilbert polynomial is $P$. This proves existence in $F_P(T)$, and uniqueness follows from the ideal formula in step 3. Conversely a global family restricts to the given type of families because $F_P$ is the stipulated pullback presheaf. Consequently $F_P$ satisfies gluing and uniqueness for arbitrary open covers, without a Noetherian assumption on $T$.",
+   "uses": [
+    "lem-trf-structural-fibrewise-open-locality",
+    "def-sfb-proper-hilbert-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TP, 01TQ, 01U3: structural open locality; geometric fibres unchanged on open restriction"
+   }
+  },
+  {
+   "text": "For any $T\\to S$, use the open cover $T_U=T\\times_SU$ indexed by affine opens $U\\subset S$. A map $a:T\\to Y$ gives maps $T_U\\to Y_U$ and hence compatible families by the stipulated natural bijections and step 1; steps 3--4 glue them to an element of $F_P(T)$. Conversely a family restricts to these $T_U$, giving unique maps $T_U\\to Y_U\\subset Y$. They agree on overlaps: restrict further over affine $V\\subset U\\cap U'$, use step 1 and injectivity of the local representing bijections, and use morphism gluing to deduce equality on the whole overlap. Morphism gluing now gives a unique map $T\\to Y$, which is over $S$ since that equation holds locally. The two constructions are inverse because they are inverse on the cover and both families and maps have uniqueness of gluing. For $T'\\to T$ the constructions commute with pullback on this cover by the assumed local naturality; uniqueness makes them commute globally. This proves natural representability on all $S$-schemes. Yoneda full faithfulness also proves uniqueness of the representing isomorphisms with the original charts.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH: sheaf and local representability argument in its proof, expanded for embedded families"
+   }
+  },
+  {
+   "text": "On $Y_U$, take the family corresponding to $1_{Y_U}$. The transition representing isomorphisms preserve these families by naturality; hence their ideals agree after restriction to any overlap (check over affine $V\\subset U\\cap U'$ and use uniqueness in step 3). Apply steps 3--4 on the base $Y$ to obtain a closed subscheme $\\mathcal Z\\subset E\\times_SY$, flat and finitely presented over $Y$, whose ideal restricts to the chart ideals. Under step 5 this is the element corresponding to $1_Y$. The Yoneda evaluation/naturality formula shows that for every $a:T\\to Y$, the corresponding family is $a^*\\mathcal Z$. This is the asserted universal closed subscheme, with actual equality of the restricted ideal sheaves. This uses restriction along open immersions; under arbitrary base change an ideal means its extended image in the new structure sheaf, not an asserted injective pullback of modules.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P: evaluation at identity and naturality; Schemes closed-subscheme ideal description"
+   }
+  },
+  {
+   "text": "Since $G\\to S$ is H-projective, projective-implies-proper makes it proper. By the definition of properness it is separated and of finite type. Its base change $G_U\\to U$ is of finite type, and composition with the given finite-type $j_U$ shows that $Y_U\\to U$ is of finite type. These statements use no DVR assumption.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WC, 01W1, 01T3, 01T4"
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $S=\\bigcup_{i=1}^m U_i$, possible because $S$ is quasi-compact. Each $U_i$ is Noetherian as an open subscheme of the Noetherian $S$. By finite-type-over-Noetherian, each $Y_{U_i}$ is Noetherian. Their images form a finite open cover of $Y$, so $Y$ is quasi-compact: any open cover restricts to each quasi-compact $Y_{U_i}$ and the union of the finitely many finite subcovers is finite. It is locally Noetherian because the Noetherian affine covers of these open charts together are an affine cover of $Y$. Thus $Y$ is Noetherian, using only the affine charts.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OV, 01OW, 01OZ; Morphisms 01T6"
+   }
+  },
+  {
+   "text": "Both $f:Y\\to S$ and $j:Y\\to G$ are locally of finite type. Indeed every point is in some open $Y_U$, and for $f$ the chart map to $U$ is finite type; for $j$ the chart map to the open $G_U$ is finite type by hypothesis. Choose an affine target neighbourhood inside the relevant open target and an affine source neighbourhood inside its preimage on this chart, as allowed by the definition of finite type. These same affine opens are open in the global schemes, and the pointwise criterion gives local finite type globally. For any affine open in either target its preimage is an open subscheme of the Noetherian $Y$, hence quasi-compact. Thus both morphisms are quasi-compact and locally of finite type, hence finite type. In particular the finite-type assertion has been obtained before using DVR lifts.",
+   "uses": [
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T1, 01T2; Properties 01OZ and 01OW"
+   }
+  },
+  {
+   "text": "The opens $G_U$ cover $G$ and $j^{-1}(G_U)\\to G_U$ is $j_U$, an immersion. Apply immersion locality near the image to obtain that $j$ is an immersion. Together with step 9 this establishes the entire conclusion asserted before the DVR hypothesis is used.",
+   "uses": [
+    "lem-zl-immersion-near-image-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0FCZ: checking immersions locally near the image"
+   }
+  },
+  {
+   "text": "Now let $b:\\operatorname{Spec}R\\to S$ and $a:\\operatorname{Spec}K\\to Y$ be any commuting DVR test square for $f$, with $K=\\operatorname{Frac}R$. Step 5 identifies $a$ with an element of $F_P(\\operatorname{Spec}K)$. The assumed bijection gives a unique family over $\\operatorname{Spec}R$, and step 5 gives its unique representing $S$-map $\\widetilde a:\\operatorname{Spec}R\\to Y$. Naturality and injectivity over $K$ give $\\widetilde a|_K=a$, and injectivity over $R$ gives uniqueness of the lift. This holds for every DVR, without a finite-type condition on $R$ or dominance condition on $b$. The base $S$ is locally Noetherian and $f$ is finite type by step 9, so the Noetherian DVR properness criterion applies and makes $f$ proper. By definition it is also separated and finite type.",
+   "uses": [
+    "lem-sfb-noetherian-dvr-properness",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208: equivalence of properness with unique DVR lifting for finite-type maps over locally Noetherian bases"
+   }
+  },
+  {
+   "text": "Apply proper-over-separated to $Y\\to S$, the separated map $G\\to S$ from step 7, and the $S$-map $j$. It gives that $j$ is proper. Step 10 makes $j$ an immersion, so proper-immersion-closed makes $j$ a closed immersion. Its restrictions are still the stipulated $j_U$ by step 2, under the uniquely representing chart isomorphisms from step 5.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6; Schemes Tag 01IQ"
+   }
+  },
+  {
+   "text": "Choose the finite projective-space embedding $G\\hookrightarrow\\mathbf P^N_S$ in the H-projective hypothesis. Its composite with the closed immersion $j$ is a closed immersion by composition of closed immersions. This is precisely an H-projective presentation of $Y\\to S$. Properness, separatedness and finite type were already proved in step 11. All constructions concerned flat families inside $E_T$ and never asserted flatness of the ambient $E/S$.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC (H-projective convention); composition of closed immersions, lemma-composition-closed-immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-trf-structural-fibrewise-open-locality",
+  "def-sfb-proper-hilbert-presheaf",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "def-weil-finite-type-morphism",
+  "lem-zl-immersion-near-image-locality",
+  "lem-sfb-noetherian-dvr-properness",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-kun-projective",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LH and the cited Stacks lemmas; explicit Hilbert-family ideal gluing and application of DVR criterion, following the route of Bourbaki 221, Theorem 3.2, printed pp.260--265 (archival PDF WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue affine Hilbert parameter schemes immersed in a Grassmannian and deduce projectivity from the unique DVR lifting property",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: relative gluing and local representability supply generic gluing tools; Proj properness concerns one graded algebra. None supplies the combined descent, finite-type immersion and DVR-to-projectivity theorem for the stated Hilbert charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsImmersion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: relative gluing and local representability supply generic gluing tools; Proj properness concerns one graded algebra. None supplies the combined descent, finite-type immersion and DVR-to-projectivity theorem for the stated Hilbert charts."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*gluing|proper.*immersion|valuativeCriterion|HilbertScheme",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.ValuativeCriterion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"87\", \"text\": \"  refine (MorphismProperty.cancel_left_of_respectsIso (P := @IsClosedImmersion)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"98\", \"text\": \"  rw [← MorphismProperty.cancel_right_of_respectsIso (P := @IsClosedImmersion) _ e₁.hom,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"99\", \"text\": \"    ← MorphismProperty.cancel_left_of_respectsIso (P := @IsClosedImmersion) e₂.inv]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"200\", \"text\": \"theorem valuativeCriterion_existence_aux\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"18\", \"text\": \"- `AlgebraicGeometry.UniversallyClosed.eq_valuativeCriterion`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"21\", \"text\": \"- `AlgebraicGeometry.IsSeparated.eq_valuativeCriterion`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"24\", \"text\": \"- `AlgebraicGeometry.IsProper.eq_valuativeCriterion`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"78\", \"text\": \"def ValuativeCriterion.Existence : MorphismProperty Scheme :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"83\", \"text\": \"def ValuativeCriterion.Uniqueness : MorphismProperty Scheme :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"line\": \"109\", \"text\": \"  rw [← MorphismProperty.cancel_right_of_respectsIso (P := @IsOpenImmersion) _ e.hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"12\", \"text\": \"# Relative gluing\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"14\", \"text\": \"In this file we show a relative gluing lemma (see https://stacks.math.columbia.edu/tag/01LH):\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"60\", \"text\": \"A relative gluing datum over a locally directed cover `𝒰` of `S` is a scheme `Xᵢ` for every\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"71\", \"text\": \"(see `AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"74\", \"text\": \"structure RelativeGluingData where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"36\", \"text\": \"instance : MorphismProperty.HasPullbacks IsOpenImmersion where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"511\", \"text\": \"instance : MorphismProperty.HasOfPostcompProperty @IsOpenImmersion @IsOpenImmersion where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"696\", \"text\": \"/-- The universal property of open immersions:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"829\", \"text\": \"    MorphismProperty.IsStableUnderComposition @IsOpenImmersion where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"832\", \"text\": \"instance isOpenImmersion_respectsIso : MorphismProperty.RespectsIso @IsOpenImmersion := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"839\", \"text\": \"    MorphismProperty.IsMultiplicative @IsOpenImmersion where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.RelativeGluing\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"250\", \"text\": \"Under this condition we can construct a family of gluing data (See `relativeGluingData`) and glue\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"251\", \"text\": \"`F` into a scheme over `X` via `(relativeGluingData _).glued`,\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: relative gluing and local representability supply generic gluing tools; Proj properness concerns one graded algebra. None supplies the combined descent, finite-type immersion and DVR-to-projectivity theorem for the stated Hilbert charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable local family charts glue to a finite type proper scheme closed in a projective Grassmannian",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine-local moduli schemes glue their universal closed subschemes and Grassmannian quotient maps into a projective representing scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          (i : ι) → X \", \"doc\": \"For each index $i$, this is the morphism from the scheme $X_i$ to the glued scheme constructed as the colimit of the gluing data, corresponding to the canonical projection from the diagram to its coli\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → (U : ↑X.affineOpens) → I.glueDataObj U ⟶ ↑↑U\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, this morphism is defined as the composition of the canonical ring homomorphism $\\\\mathcal{O}_X(U) \\\\to \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              AlgebraicGeometry.Proj 𝒜 ⟶\\n                AlgebraicGeometry.Spec { carrier := ↥(𝒜 0), comm\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: relative gluing and local representability supply generic gluing tools; Proj properness concerns one graded algebra. None supplies the combined descent, finite-type immersion and DVR-to-projectivity theorem for the stated Hilbert charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue representing schemes over affine opens of a Noetherian base, glue universal Hilbert families, and deduce closedness in a projective scheme from unique DVR lifts",
+   "results": "Search returned 8 hits. AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat. Read candidate sources: RelativeGluing.lean, Sites/Representability.lean, Morphisms/Immersion.lean, Morphisms/FiniteType.lean and ValuativeCriterion.lean. The generic tools do not state the combined theorem.",
+   "date": "2026-10-23",
+   "verdict": "No match: generic gluing requires the sheaf/descent argument, and generic properness/Proj results do not establish descent of these embedded families or the finite-type immersion and projectivity together."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Cover.RelativeGluingData, AlgebraicGeometry.IsProper",
+   "results": "Search returned 0 hits. . Read candidate sources: RelativeGluing.lean, Sites/Representability.lean, Morphisms/Immersion.lean, Morphisms/FiniteType.lean and ValuativeCriterion.lean. The generic tools do not state the combined theorem.",
+   "date": "2026-10-23",
+   "verdict": "No match: generic gluing requires the sheaf/descent argument, and generic properness/Proj results do not establish descent of these embedded families or the finite-type immersion and projectivity together."
+  },
+  {
+   "tool": "grep",
+   "query": "IsZariskiLocalAtTarget.*(IsImmersion|FiniteType)|isZariskiLocalAtTarget.*(IsImmersion|FiniteType)|HilbertScheme|hilbertScheme",
+   "results": "Search returned 3 hits. Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean. Read candidate sources: RelativeGluing.lean, Sites/Representability.lean, Morphisms/Immersion.lean, Morphisms/FiniteType.lean and ValuativeCriterion.lean. The generic tools do not state the combined theorem.",
+   "date": "2026-10-23",
+   "verdict": "No match: generic gluing requires the sheaf/descent argument, and generic properness/Proj results do not establish descent of these embedded families or the finite-type immersion and projectivity together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schemes locally representing flat Hilbert families glue over affine opens and unique DVR lifts imply projectivity",
+   "results": "Search returned 8 hits. AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy. Read candidate sources: RelativeGluing.lean, Sites/Representability.lean, Morphisms/Immersion.lean, Morphisms/FiniteType.lean and ValuativeCriterion.lean. The generic tools do not state the combined theorem.",
+   "date": "2026-10-23",
+   "verdict": "No match: generic gluing requires the sheaf/descent argument, and generic properness/Proj results do not establish descent of these embedded families or the finite-type immersion and projectivity together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme immersed in a projective scheme over a Noetherian base is closed and projective when all DVR points extend uniquely",
+   "results": "Search returned 8 hits. AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.Proj, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty. Read candidate sources: RelativeGluing.lean, Sites/Representability.lean, Morphisms/Immersion.lean, Morphisms/FiniteType.lean and ValuativeCriterion.lean. The generic tools do not state the combined theorem.",
+   "date": "2026-10-23",
+   "verdict": "No match: generic gluing requires the sheaf/descent argument, and generic properness/Proj results do not establish descent of these embedded families or the finite-type immersion and projectivity together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-hilbert-polynomial-representability",
+  "group": "NC",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Proof of Theorem 3.2, printed pp.260--265, affine-base localization and the conclusion after Lemma 3.7: finite-type Grassmannian immersion, unique DVR lifts, and projectivity. Agent-explicit descent of representing charts and universal ideals. Archival PDF WANTED; primary PDF read online.",
+   "via": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hilbert-chart-gluing-projectivity",
+  "worker": "stage1",
+  "group": "Q22",
+  "summary": "Retained the statement and inherited citations/searches. Gave explicit affine-basis Yoneda transitions, descent of embedded families and ideals on arbitrary test schemes, finite-type immersion before DVR lifts, then DVR properness and closedness in the H-projective ambient scheme. Reused existing general lemmas rather than creating elementary, duplicate or conclusion-shaped children.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Proof of Theorem 3.2, printed pp.260--265, affine-base localization and the conclusion after Lemma 3.7: finite-type Grassmannian immersion, unique DVR lifts, and projectivity. Agent-explicit descent of representing charts and universal ideals. Archival PDF WANTED; primary PDF read online.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-implies-proper tool for the given H-projective G; this does not replace the unit alteration route and our unit has no separate proof of properness of projective space."
+   },
+   {
+    "node": "lem-trf-structural-fibrewise-open-locality",
+    "why": "Only open-target locality of flatness and finite presentation is selected, specialized to C=F=X=Z and identity extra arrows; no curve, dimension or etale condition is used. No node of our unit supplies this arbitrary-cover structural locality."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Only composition of two closed immersions is used to embed Y into the fixed projective space containing G; it is a generic scheme-theoretic closure tool, not a change of geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-trf-structural-fibrewise-open-locality",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-ea24d009c",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-ea24d009c (reviewer sub-agent of L); spot-checked: PASS. Item statement unchanged; it was split into 13 steps with no new nodes. Steps 1-2: Yoneda-unique chart isomorphisms satisfy the hypotheses of Stacks 01LH relative gluing on the affine basis; j is glued from the j_U because their induced transformations agree. Steps 3-6: families glue along arbitrary covers of any T through target-local closed immersions and the explicit ideal formula; flatness and finite presentation are local by the any-subset clause of lem-trf-structural-fibrewise-open-locality; representability is checked on the cover T_U; the universal family is the image of 1_Y. Steps 7-10 prove finite type and immersion before any DVR is used: projective implies proper for G, base change and composition, Noetherian Y (01T6/01OW), the pointwise criterion 01T1, and 0FCZ. Step 11: Limits 0208 (limits.tex:3927, (1)<=>(3)) applies since S is locally Noetherian and f is of finite type; the hypothesis bijection F_P(R)->F_P(K) gives existence and uniqueness of lifts. Steps 12-13: 01W6(2) and proper immersion give a closed immersion, composed with G in P^N_S. Edge cases checked: empty S, empty T, no family with polynomial P, n=0; flatness of E is never used. DAG search finds no duplicate and the proof closure has no cycle. Batch-5 check: lem-trf-structural-fibrewise-open-locality is generic Zariski locality of flatness and finite presentation (Stacks 01TQ/01U3), not part of the trace-formula or Poincare-duality assumptions or their proofs. lem-sfb-noetherian-dvr-properness reaches only the definition def-trf-schematically-dense-open via Chow's lemma and Nagata, which is generic. Both are accepted, as are the 3 declared tool_uses. Bourbaki 221 is not available locally; the proof is marked agent."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertChartGluingProjectivity",
+  "declaration": "AlgebraicGeometry.exists_hilbert_chart_gluing_projectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertChartGluingProjectivity.lean",
+  "statement": "theorem exists_hilbert_chart_gluing_projectivity (S : Scheme.{u}) [IsLocallyNoetherian S] [CompactSpace S] (E : Over S) (n : ℕ) (i : E.left ⟶ ℙ(ULift.{u} (Fin (n + 1)); S)) [IsClosedImmersion i] (hi : i ≫ (ℙ(ULift.{u} (Fin (n + 1)); S) ↘ S) = E.hom) (P : NumericalHilbertPolynomial) (F : Subfunctor (properHilbertPresheaf E.hom)) (hF : ∀ (T : Over S) (I : (properHilbertPresheaf E.hom).obj (op T)), I ∈ F.obj (op T) ↔ HasProjectiveFibreHilbertPolynomial E.hom i T I.1 P.1) (G : Over S) [IsHProjective G.hom] (YU : ∀ U : S.affineOpens, Over U.1.toScheme) (jU : ∀ U : S.affineOpens, (Over.map U.1.ι).obj (YU U) ⟶ G) (hU : ∀ U : S.affineOpens, IsImmersion (((Over.mapPullbackAdj U.1.ι).homEquiv (YU U) G (jU U)).left) ∧ LocallyOfFiniteType (((Over.mapPullbackAdj U.1.ι).homEquiv (YU U) G (jU U)).left) ∧ QuasiCompact (((Over.mapPullbackAdj U.1.ι).homEquiv (YU U) G (jU U)).left)) (eU : ∀ U : S.affineOpens, ((Over.map U.1.ι).op ⋙ F.toFunctor).RepresentableBy (YU U)) (hcompat : ∀ (U V : S.affineOpens) (T : Over U.1.toScheme) (T' : Over V.1.toScheme) (a : (Over.map U.1.ι).obj T ≅ (Over.map V.1.ι).obj T') (x : F.toFunctor.obj (op ((Over.map V.1.ι).obj T'))), (Over.map U.1.ι).map ((eU U).homEquiv.symm (F.toFunctor.map a.hom.op x)) ≫ jU U = a.hom ≫ (Over.map V.1.ι).map ((eU V).homEquiv.symm x) ≫ jU V) : ∃ (Y : Over S) (e : F.toFunctor.RepresentableBy Y) (j : Y ⟶ G) (κ : ∀ U : S.affineOpens, (Over.map U.1.ι).obj (YU U) ⟶ Y), IsImmersion j.left ∧ LocallyOfFiniteType j.left ∧ QuasiCompact j.left ∧ LocallyOfFiniteType Y.hom ∧ QuasiCompact Y.hom ∧ (∀ U : S.affineOpens, IsPullback (κ U).left (YU U).hom Y.hom U.1.ι ∧ κ U ≫ j = jU U ∧ ∀ (T : Over U.1.toScheme) (g : T ⟶ YU U), e.homEquiv ((Over.map U.1.ι).map g ≫ κ U) = (eU U).homEquiv g) ∧ (∀ (U : S.affineOpens) (a : (Over.map U.1.ι).obj (YU U) ⟶ Y), (∀ (T : Over U.1.toScheme) (g : T ⟶ YU U), e.homEquiv ((Over.map U.1.ι).map g ≫ a) = (eU U).homEquiv g) → a = κ U) ∧ (∀ U : S.affineOpens, ((eU U).homEquiv (𝟙 (YU U))).1.1 = (e.homEquiv (𝟙 Y)).1.1.comap (baseChangeMap E.hom (κ U))) ∧ (∀ I : (pullback E.hom Y.hom).IdealSheafData, (∀ U : S.affineOpens, I.comap (baseChangeMap E.hom (κ U)) = ((eU U).homEquiv (𝟙 (YU U))).1.1) → I = (e.homEquiv (𝟙 Y)).1.1) ∧ (∀ (T : Over S) (g : T ⟶ Y), (e.homEquiv g).1.1 = (e.homEquiv (𝟙 Y)).1.1.comap (baseChangeMap E.hom g)) ∧ ((∀ (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (b : Spec (.of R) ⟶ S), Function.Bijective (F.toFunctor.map (Over.homMk (U := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R K)) ≫ b)) (V := Over.mk b) (Spec.map (CommRingCat.ofHom (algebraMap R K))) rfl).op)) → IsClosedImmersion j.left ∧ IsHProjective Y.hom ∧ IsProper Y.hom ∧ IsSeparated Y.hom ∧ LocallyOfFiniteType Y.hom ∧ QuasiCompact Y.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1641688bd",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read the item node, all 14 stmt_dep records, the single module and the live dependency sources (properHilbertPresheaf/IsProperHilbertFamily, HasProjectiveFibreHilbertPolynomial, IsHProjective, baseChangeMap, IdealSheafData.comap). The node changes only in lean and lean.statement is verbatim. One theorem with sorry, no new defs, no name collision, source/blueprint docstrings with all 13 steps, Worker report and Second reading sections present. Hypotheses: Noetherian S; E closed in P^n_S over S without flatness; numerical P; F_P is a Subfunctor of properHilbertPresheaf with an exact iff to the fibre-polynomial predicate (properness automatic in P^n, LFP=fp); G H-projective; hU is finite-type immersion of the mapPullbackAdj adjoint into G_U; eU natural for all U-schemes; hcompat is equivalent to overlap agreement via naturality, with no affine-intersection assumption. DVR map F(Spec R)->F(Spec K) in the correct direction, all DVRs in Type u. Conclusions: RepresentableBy Y; IsPullback chart squares, kappa;j=jU, representation-preserving and unique; universal ideals glue (comap along baseChangeMap) with uniqueness; finite-type immersion before DVR for the same Y,j; after DVR closed immersion, IsHProjective, proper, separated, finite type. Edge cases (empty S/T, P=0, unrealizable P, n=0, non-separated S) fine. No compile (no change). Advisories: baseChangeMap/IdealSheafData/Subfunctor enter outside stmt_deps; second reading by the same worker; redundant ideal clauses."
+ }
+}

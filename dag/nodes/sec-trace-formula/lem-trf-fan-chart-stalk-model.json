@@ -1,0 +1,130 @@
+{
+ "id": "lem-trf-fan-chart-stalk-model",
+ "kind": "statement",
+ "title": "Canonical ordinary stalk model of a characteristic fan chart",
+ "statement": "Let X be an fs locally Noetherian log scheme whose log structure is associated to a Zariski one [def-trf-fs-log-blowup], let F be a fine fan [def-trf-fine-fan-blowup], and let c from the sharp monoidal space of X to F induce bijections on all characteristic stalks (equivalently its inverse-image characteristic sheaf map is an isomorphism). For x in X, put R=N_Z,x and P=P_F,c(x). There is a normalized affine localization L at c(x) [lem-trf-fine-fan-point-localization] and a monoid equivalence e: Associates R ≃ P whose composite with the quotient R → Associates R is the canonical stalk quotient constructed from c. The canonical map R → R^gp is injective; P is fine saturated and sharp, and P^gp has a finite integer basis. No group section or neighborhood log-chart lift is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.6, p.70; VIII 3.1.4(iii), 3.1.10(ii), pp.98--100; 3.3.12, p.108."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Localize the fan at c(x). The normalized affine open of generalizations and its germ isomorphism give the PointLocalization, including normalization and fineness.",
+   "uses": [
+    "lem-trf-fine-fan-point-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction of a Zariski log structure to ordinary opens satisfies the log unit axiom. Stalks commute with the quotient by units and with sheafification: lift finitely many representatives and unit equations to a common open. This identifies Associates of the ordinary log stalk with the sharp-space stalk, canonically on every log germ. Compose with the inverse fan-chart stalk isomorphism.",
+   "uses": [
+    "lem-trf-zariski-prelog-logification-comparison",
+    "lem-trf-zariski-log-stalk-unit-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a geometric point over x and an fs etale chart Q. Unit extension proves integrality of the ordinary log stalk and identifies its sharpening with Associates of Q localized at the face mapping to units. Face sharpening proves fs, sharpness, and finite freeness of its group completion. Transfer through the canonical characteristic isomorphism.",
+   "uses": [
+    "lem-trf-zariski-log-stalk-unit-extension",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fine-fan-point-localization",
+  "lem-trf-zariski-prelog-logification-comparison",
+  "lem-trf-zariski-log-stalk-unit-extension",
+  "lem-trf-fs-face-sharpening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.6, p.70; VIII 3.1.4(iii), 3.1.10(ii), pp.98--100; 3.3.12, p.108. Explicit subargument of lem-trf-fan-chart-local-monoid-lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sharpening of the Zariski stalk of a fine saturated log scheme is a sharp fs monoid and its group completion is finite free",
+   "results": "Returned ordinary scheme stalks, rankAtStalk_eq_finrank_of_free and Localization.fg. None identifies a logarithmic characteristic stalk.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrothendieckGroup.lift\"",
+   "results": "Group completion universal property only; no characteristic comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Presheaf.*stalk|stalk.*germ",
+   "results": "Ordinary sheaf stalks and germs, local surjectivity, and sheafification. No logarithmic characteristic comparison, finite monoid lift, or chart criterion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FanChartLocalMonoidLift",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 3,4,5; Expose VIII 3.1.4(iii), 3.1.8(ii), 3.1.10(ii), pp.98--100; 3.3.12--3.3.13, pp.108--109: Zariski local lift expanded using free characteristic groups (VI 1.6, p.70). Subargument: Canonical ordinary stalk model of a characteristic fan chart.",
+   "via": [
+    "lem-trf-fan-chart-local-monoid-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FanChartStalkModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FanChartStalkModel.lean",
+  "declaration": "AlgebraicGeometry.fan_chart_stalk_model",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogStructure.zariskiSharpening",
+   "AlgebraicGeometry.LogFanChart.stalkQuotient",
+   "AlgebraicGeometry.LogFanChart.stalkGroupQuotient",
+   "AlgebraicGeometry.fan_chart_stalk_model"
+  ],
+  "statement": "theorem fan_chart_stalk_model\n    {X : FineSaturatedLogScheme.{u}} {F : FineFan.Fan.{u}}\n    (c : LogFanChart X F) (x : X.scheme) :\n    ∃ (L : FineFan.PointLocalization F (c.map.hom.base x))\n      (e : Associates (FineFan.stalk X.logStructure.zariskiPresheaf x) ≃*\n        FineFan.stalk F.space.presheaf (c.map.hom.base x)),\n      (∀ m, e (Associates.mk m) = c.stalkQuotient x m) ∧\n      Function.Injective\n        (Algebra.GrothendieckGroup.of (M := FineFan.stalk X.logStructure.zariskiPresheaf x)) ∧\n      IsFineSaturatedMonoid (FineFan.stalk F.space.presheaf (c.map.hom.base x)) ∧\n      FineFan.IsSharp (FineFan.stalk F.space.presheaf (c.map.hom.base x)) ∧\n      ∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ\n        (Additive (Algebra.GrothendieckGroup\n          (FineFan.stalk F.space.presheaf (c.map.hom.base x)))))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement unchanged vs clone; three relocated defs byte-identical and publicly re-exported (zero external users/importers in clone); three new holes checked true against LogFanChart (zariski field) and node statements; item node proof/proof_deps vs Lean proof"
+ }
+}

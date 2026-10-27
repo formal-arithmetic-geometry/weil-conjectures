@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-affine-homomorphism-flat-image",
+ "kind": "statement",
+ "title": "Faithfully flat factorization of an affine group homomorphism",
+ "statement": "Let $k$ be a field [def-weil-field], let $G,H$ be affine group schemes [def-sc-group-scheme, def-pc-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and let $f:G\\to H$ be a homomorphism. There exist an affine group scheme $I$ of finite type over $k$ and homomorphisms $u:G\\to I$, $j:I\\to H$ such that $f=j\\circ u$, $j$ is a closed immersion [def-weil-closed-immersion], and $u$ is faithfully flat: $k[G]$ is a faithfully flat $k[I]$-module through $u^*:k[I]\\to k[G]$ [def-weil-pbc-faithfully-flat-ring-map]. Here $k[X]=\\Gamma(X,\\mathcal O_X)$ for an affine $k$-scheme $X$. No smoothness, reducedness, connectedness, perfectness or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 3.34, printed p.75 (homomorphism theorem for affine algebraic groups); its proof uses Proposition 3.14 for the finitely generated image Hopf algebra and Theorem 3.31 for faithful flatness of a Hopf subalgebra inclusion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=k[H]$, $B=k[G]$ and $\\varphi=f^*:A\\to B$. By [lem-pc-affine-finite-type-algebra], both algebras have finite sets of $k$-algebra generators. Their coordinate Hopf maps satisfy the identities in [lem-sfb-affine-group-coordinate-hopf]. By [def-sc-group-scheme], $f$ is compatible with the multiplications, so on $R$-points it is a group homomorphism $G(R)\\to H(R)$ for every $k$-algebra $R$; hence it also preserves identity and inverse on $R$-points, and therefore as morphisms (take $R=k$ for the identity, and the universal point $\\mathrm{id}\\in G(B)$ for the inverse). Pulling back these three compatibilities gives $\\Delta_B\\varphi=(\\varphi\\otimes\\varphi)\\Delta_A$, $\\epsilon_B\\varphi=\\epsilon_A$, and $S_B\\varphi=\\varphi S_A$. Thus $\\varphi$ is a homomorphism of commutative Hopf algebras.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 3(b)--3(c), pp.65--67; Theorem 3.34, first sentence of proof, p.75."
+   }
+  },
+  {
+   "text": "Let $C=\\varphi(A)\\subseteq B$, let $q:A\\twoheadrightarrow C$ be corestriction, and let $i:C\\hookrightarrow B$ be inclusion. This is a $k$-subalgebra and $\\varphi=iq$. If $a_1,\\ldots,a_r$ generate $A$, every element of $C$ is a polynomial in $\\varphi(a_1),\\ldots,\\varphi(a_r)$, so $C$ is finitely generated. For $c=\\varphi(a)$ and $\\Delta_A(a)=\\sum a_s\\otimes a^{\\prime}_s$, step 1 gives $\\Delta_B(c)=\\sum\\varphi(a_s)\\otimes\\varphi(a^{\\prime}_s)\\in C\\otimes_k C$ and $S_B(c)=\\varphi(S_A(a))\\in C$. Restrict $\\Delta_B,S_B,\\epsilon_B$ to define $\\Delta_C,S_C,\\epsilon_C$. To justify this restriction and its axioms, extend a $k$-basis of the subspace $C$ to one of $B$ and let $r:B\\to C$ be the linear projection with $ri=1_C$. Then $i^{\\otimes n}$ has left inverse $r^{\\otimes n}$ for $n=1,2,3$, hence is injective. The restricted comultiplication is therefore well defined independently of $a$ and its tensor presentation. Each algebra-map identity and each coassociative, counit or antipode identity becomes the corresponding identity for $B$ after applying the appropriate $i^{\\otimes n}$, so holds in $C$. The same injectivity and the displayed formulas show that $q$ and $i$ preserve all three maps. This is the explicit image factorization of commutative Hopf algebras.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definitions 3.8 and Proposition 3.9, p.67; Proposition 3.14, p.68; explicit restriction verification."
+   }
+  },
+  {
+   "text": "Define $I=\\operatorname{Spec}C$, $u=\\operatorname{Spec}i$ and $j=\\operatorname{Spec}q$, using the canonical identifications $G\\simeq\\operatorname{Spec}B$ and $H\\simeq\\operatorname{Spec}A$. These canonical identifications commute with the group operations, since their pullbacks identify the multiplication, identity and inverse maps with the same coordinate maps of [lem-sfb-affine-group-coordinate-hopf]. By [lem-sfb-hopf-spectrum-functor], $I$ is an affine $k$-group scheme, $u,j$ are group homomorphisms, and contravariant functoriality applied to $\\varphi=iq$ gives $f=j\\circ u$. The finite list of generators of $C$ gives the one-chart finite affine presentation required for $I\\to\\operatorname{Spec}k$ to be of finite type [def-weil-finite-type-morphism]. Since $q$ is surjective, $\\operatorname{Spec}q$ has affine preimage $\\operatorname{Spec}C$ of the affine open $\\operatorname{Spec}A$, and its map on global sections is $q$, which is surjective; by [lem-weil-pbc-closed-immersion-affine-cover-criterion](2), applied to the one-member affine cover of $\\operatorname{Spec}A$, it is a closed immersion [def-weil-closed-immersion], and so is $j$, its composite with the isomorphism $\\operatorname{Spec}A\\simeq H$.",
+   "uses": [
+    "lem-sfb-hopf-spectrum-functor",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, last sentence of proof, p.75; Proposition 3.6, p.66; affine closed-immersion criterion Stacks Tag 01QO, lemma-closed-immersion-characterize.; Stacks Tag 01QO via lem-weil-pbc-closed-immersion-affine-cover-criterion (2)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-subalgebra-faithfully-flat] to the injective Hopf homomorphism $i:C\\hookrightarrow B$. Both algebras are commutative and finitely generated over the same field $k$ by steps 1--2; the image Hopf identities give exactly its compatibility hypotheses. Hence $B$ is faithfully flat over $C$. As $u^*=i$, this is precisely the required faithful flatness of $k[G]$ over $k[I]$. All constructions used the image algebra, with its nilpotents retained, so impose none of the excluded smoothness, reducedness, connectedness, perfectness or characteristic assumptions.",
+   "uses": [
+    "lem-sfb-hopf-subalgebra-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, pp.73--74, applied in Theorem 3.34, p.75."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-sc-group-scheme",
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-sfb-hopf-subalgebra-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 3.34, printed p.75, using Proposition 3.14 and Theorem 3.31."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism of affine group schemes of finite type over a field factors through its closed scheme theoretic image by a faithfully flat homomorphism",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.isFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has scheme-theoretic image constructions and equivalence of affine faithful flatness with flat surjectivity, but these do not prove faithful flatness of the image factor for group schemes; the Hopf hits provide category structures, not the required theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image Hopf algebra of a morphism of finitely generated commutative Hopf algebras is finitely generated and its inclusion into the codomain is faithfully flat",
+   "results": "8 hits; HopfAlgCat.category, HopfAlgCat.concreteCategory, RingHom.FaithfullyFlat.codescendsAlong_injective, Algebra.Smooth.exists_subalgebra_fg, HopfAlgCat, HopfAlgebra.ofAlgHom, HopfAlgCat.MonoidalCategory.inducingFunctorData, RingHom.FaithfullyFlat.codescendsAlong_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has scheme-theoretic image constructions and equivalence of affine faithful flatness with flat surjectivity, but these do not prove faithful flatness of the image factor for group schemes; the Hopf hits provide category structures, not the required theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has scheme-theoretic image constructions and equivalence of affine faithful flatness with flat surjectivity, but these do not prove faithful flatness of the image factor for group schemes; the Hopf hits provide category structures, not the required theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of affine algebraic group schemes factors as a faithfully flat homomorphism followed by a closed immersion",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.AffineScheme.ofHom, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.isAffineHom_of_isInducing",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has scheme-theoretic image constructions and equivalence of affine faithful flatness with flat surjectivity, but these do not prove faithful flatness of the image factor for group schemes; the Hopf hits provide category structures, not the required theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|faithfully_flat|schemeTheoreticImage",
+   "results": "17 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has scheme-theoretic image constructions and equivalence of affine faithful flatness with flat surjectivity, but these do not prove faithful flatness of the image factor for group schemes; the Hopf hits provide category structures, not the required theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf|range|image",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has scheme-theoretic image constructions and equivalence of affine faithful flatness with flat surjectivity, but these do not prove faithful flatness of the image factor for group schemes; the Hopf hits provide category structures, not the required theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphism of affine group schemes factors as faithfully flat map and closed immersion",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.Flat, AlgebraicGeometry.affineAnd_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: results characterize flat affine morphisms but do not prove group homomorphisms faithfully flat onto their image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-normal-quotient-geometry",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism.",
+   "via": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-homomorphism-flat-image",
+  "worker": "stage1",
+  "summary": "Read Milne 3.34 and its Hopf-algebra inputs. Retained the statement; constructed the image Hopf algebra explicitly, passed to spectra, and applied the smaller algebraic faithful-flatness theorem. Added one statement-only input and one Mathlib leaf. Checked arbitrary fields and nonreduced examples; no rational-point image argument or reduction was used.",
+  "blueprint": "The inherited from.place records det-thm-sf-ctf-stability-direct-images proof (3), below its alteration/moduli/PGL quotient prerequisites; the latest direct-images proof was read. The ancestor command returns None, so the inherited null from.node is retained. Steps realize the affine homomorphism input by the coordinate image construction, as Milne 3.34.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "General affine coordinate-ring finite-generation criterion, applied to G and H; this is not a substitute for the direct-images unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-6eda03518",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-6eda03518 (reviewer sub-agent of L); spot-checked: I read in full the item, both new nodes and every cited statement. Sources: Milne iAG2017 Def 3.3/3.4, Prop 3.6, Cor 3.7, 3.8–3.14 (pp.65–68), Thm 3.31 with proof (pp.73–74), Thm 3.34 with proof (p.75); Mathlib AlgebraicGeometry/Group/Affine.lean lines 170–260 and 330–345. The statement is unchanged from the base and matches Milne 3.34. The item follows Milne's own route: image Hopf algebra (3.9/3.14), then Spec, then 3.31. New node lem-sfb-hopf-subalgebra-faithfully-flat is a true, statement-only copy of Milne 3.31. It is strictly smaller than the item, defines Hopf algebras inline, and asking for compatibility with all three structure maps is equivalent by Milne 3.4. Checked on k⊂k[t]/(t^p), k[t^p]⊂k[t] and the identity; the non-Hopf case k[x]⊂k[x,x^{-1}] fails, so the Hopf hypothesis is needed. New node lem-sfb-hopf-spectrum-functor is a valid Mathlib leaf: hopfSpec at Affine.lean:177–179, group instance at 256–258, operations at 222–228. Neither new node duplicates an existing node. lem-sfb-algebraic-group-homomorphism-factorization (Milne 5.39) generalizes the item, but its source proof rests on 3.34, so keeping the 3.34 route is correct. Accepted tool use: lem-pc-affine-finite-type-algebra (generic finite-generation fact). FIX (C1/C4): step 3 proved j is a closed immersion only on U=Spec A, while def-weil-closed-immersion requires every affine open. I cited the existing leaf lem-weil-pbc-closed-immersion-affine-cover-criterion (2) on the one-member cover, and added it to uses, proof_deps and the source place. Step 1 now derives identity and inverse compatibility from def-sc-group-scheme through R-points (R=k, and the universal point). Edge cases checked: identity, trivial homomorphism (C=k), closed subgroup, Frobenius on G_a, α_p. No SGA, no cycle, no restated split.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineHomomorphismFlatImage",
+  "declaration": "AlgebraicGeometry.affineGroupHom_exists_faithfullyFlat_closedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineHomomorphismFlatImage.lean",
+  "statement": "theorem affineGroupHom_exists_faithfullyFlat_closedImmersion {k : Type u} [Field k] (G H : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [IsAffine G.left] [IsAffine H.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (f : G ⟶ H) [IsMonHom f] : ∃ (I : Over (Spec (.of k))) (_ : GrpObj I) (u : G ⟶ I) (j : I ⟶ H), IsAffine I.left ∧ LocallyOfFiniteType I.hom ∧ QuasiCompact I.hom ∧ IsMonHom u ∧ IsMonHom j ∧ u ≫ j = f ∧ IsClosedImmersion j.left ∧ @Module.FaithfullyFlat Γ(I.left, ⊤) Γ(G.left, ⊤) _ _ u.left.appTop.hom.toAlgebra.toModule",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d19de61b0",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Checked each clause of affineGroupHom_exists_faithfullyFlat_closedImmersion against the node (Milne Thm 3.34) and the 6 stmt_dep records. k: arbitrary field, one universe u. G,H: GrpObj on Over (Spec k), IsAffine, LocallyOfFiniteType+QuasiCompact. f: IsMonHom. Exists I (GrpObj, affine, finite type), u, j: IsMonHom with I's existential structure, u ≫ j = f, IsClosedImmersion j.left. Module.FaithfullyFlat Γ(I) Γ(G) via u.left.appTop.hom.toAlgebra.toModule: correct direction, definitionally RingHom.FaithfullyFlat. No extra hypotheses; lean.statement verbatim. The node is otherwise identical to side-live and no competing lean record exists. The proof-only import is the module of proof_dep lem-pc-affine-finite-type-algebra. Docstrings carry the source place, the blueprint tag and all 4 proof steps; proof sorry only; no definitions. Edge cases (identity, trivial, closed subgroup, Frobenius on G_a, alpha_p, empty) covered. Not recompiled per instructions (worker reports clean compile 2026-10-24). Advisory only: siblings write the RingHom .FaithfullyFlat form."
+ }
+}

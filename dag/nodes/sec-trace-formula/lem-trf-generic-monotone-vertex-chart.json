@@ -1,0 +1,197 @@
+{
+ "id": "lem-trf-generic-monotone-vertex-chart",
+ "kind": "statement",
+ "title": "Geometric generic monotone chart with regular vertex generators",
+ "statement": "Let k be a characteristic-zero field [def-weil-field], p:M -> Spec k a smooth finite-type scheme, i:X -> M a closed immersion, and a a point of X [def-sbc-smooth-morphisms] [def-weil-finite-type-morphism] [def-weil-closed-immersion]. There is an affine etale neighbourhood e:U -> M with center c above i(a) and bijective residue-field map [def-weil-etale-morphism], an integer n, an etale ring map k[T_1,...,T_n] -> Gamma(U,O) over p, and its centered Taylor homomorphism tau into kappa(c)[[T]] [def-trf-regular-hilbert-coefficient-datum] [def-weil-pbc-multivariate-power-series]. Put I=ker(Gamma(U,O) -> Gamma(X times_M U,O)) and K=I kappa(c)[[T]]. The actual diagram D consists exactly of the least nonzero exponents of elements of K, for ascending total-degree lexicographic order. It is monotone and equals the orthant union of a finite ordered vertex family alpha:Fin s -> N^n [def-trf-supported-homogeneous-division]. There are regular sections F:Fin s -> Gamma(U,O) with I=span(range F), first Taylor exponent alpha_j, and initial coefficient 1. This statement contains no homogeneous division assertion, no universal assertion for other regular lift families, and no conclusion about s when K=0.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997, sections 3.5, 8, and proof of Theorem 9.6, first paragraph, pp.278--279; original generic-monotone-diagram steps 1--4 and 7, with supported division for descent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Work in the given etale chart at $a$, and put $R=\\mathcal O_{M,a}$, $I=\\mathcal I_{X,a}$, $L=\\kappa(a)$ and $S=L[[T]]$. Apply [lem-trf-taylor-normal-cone-splitting] to identify the homogeneous initial ideal $J_T$ of $IS$ with the extension of $J=\\bigoplus_q((I\\cap\\mathfrak m^q)+\\mathfrak m^{q+1})/\\mathfrak m^{q+1}$ along the independent normal linear forms $\\ell_1,\\ldots,\\ell_c$. In particular $J_T$ is homogeneous. The degree-lexicographic exponent diagram of $IS$ equals the least-lexicographic monomial diagram of $J_T$: in each degree, the homogeneous initial forms of all series in $IS$ form a vector space, and multiplication by a homogeneous polynomial and addition are realized by multiplying and adding series; a nonzero resulting degree-q part is itself the initial form of that combination. The least term of a series is precisely the least term of its lowest homogeneous part.",
+   "uses": [
+    "lem-trf-taylor-normal-cone-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, sections 3 and 7; nonclosed-point comparison supplied by the cited agent lemma, supported by Stacks 0C35 and 0C0S."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-graded-generic-initial-borel] to $J_T$. Intersect its nonempty generic-coordinate open with the open where the normal linear subspace projects isomorphically to the last $c$ coordinates. This latter open is nonempty because the normal forms are independent. Choose the matrix over $k$: a nonzero polynomial over $L$ cannot vanish on all of $k^N$ when $k$ is infinite, as follows by induction on $N$ from the root bound in one variable; apply this to a principal open contained in the intersection. This linear change preserves the etale chart. Let $B$ be its fixed monomial ideal. If $T^\\alpha\\in B$ and $i<j$, invariance under $T_i\\mapsto T_i+T_j$ implies $(T_i+T_j)^{\\alpha_i}\\prod_{h\\ne i}T_h^{\\alpha_h}\\in B$. In a monomial ideal each nonzero monomial of a member belongs to the ideal, by the coefficientwise description of its monomial span. The term replacing all $T_i$ factors by $T_j$ has coefficient $1$ and exponent $\\alpha-\\alpha_i e_i+\\alpha_i e_j$. Thus $D$ is monotone. Characteristic zero enters in the generic Borel-fixity input, not in this final full-transfer calculation.",
+   "uses": [
+    "lem-trf-graded-generic-initial-borel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, section 8 and the paragraph before Theorem 9.6; graded Borel-fixity input and elementary full-transfer calculation."
+   }
+  },
+  {
+   "text": "The diagram $D$ is upward closed: multiply a series with first exponent $\\alpha$ by $T^\\beta$ to obtain first exponent $\\alpha+\\beta$. Its componentwise minimal elements are an antichain and hence finite by [lem-trf-monomial-upper-set-finite-basis]. The same node supplies a minimal element below every element of $D$. Therefore these minimal elements are exactly its vertices and $D=\\bigcup_i(\\alpha_i+\\mathbf N^n)$. Order them as in the statement. This also proves that the vertex list is empty exactly when $D$ is empty, equivalently when $IS=0$.",
+   "uses": [
+    "lem-trf-monomial-upper-set-finite-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, section 3, paragraph preceding Corollary 3.19 (Dickson argument)."
+   }
+  },
+  {
+   "text": "Write the new variables as $(U,V)$ with $n-c$ variables $U$ and $c$ variables $V$. By the projection condition, change the $L$-basis of normal forms so that $\\ell=V+AU$; the same basis change is realized by a new regular parameter tuple using lifts to $R$ of its matrix entries in $L$. The homogeneous comparison [lem-trf-taylor-normal-cone-splitting] now gives $J_T=J(V+AU)L[U,V]$. The substitution $V\\mapsto V+AU$ preserves every least fixed-degree lexicographic exponent: replacing a $V$ factor by a $U$ factor increases that exponent, and its inverse has the same property. Before substitution write a homogeneous element of $J(V)L[U,V]$ uniquely as $\\sum_\\beta U^\\beta H_\\beta(V)$, with every $H_\\beta\\in J$. Its least monomial belongs to one of these disjoint $U$ slices. Consequently $D=\\mathbf N^{n-c}\\times D_J$, where $D_J$ is the least-exponent diagram of homogeneous elements of $J$. Every vertex has zero $U$ component. For a vertex of degree $d_i$, choose a homogeneous $H_i\\in J_{d_i}$ with that least exponent. By the definition of $J_{d_i}$ choose $f_i\\in I\\cap\\mathfrak m^{d_i}$ representing it. The cited Taylor comparison gives initial homogeneous part $H_i(\\ell)$, so $\\tau(f_i)$ has first exponent $\\alpha_i$. Multiply $f_i$ by a unit of $R$ whose residue is the inverse of its first coefficient, obtaining coefficient $1$. Each of these finitely many germs is a regular section of the ideal sheaf on a common neighbourhood.",
+   "uses": [
+    "lem-trf-taylor-normal-cone-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, proof of Theorem 9.6, first paragraph, printed p.279; explicit vertex realization using the associated graded normal comparison at arbitrary points."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-supported-formal-division] to the normalized regular lifts. Every divisor belongs to the Taylor ideal. The supported remainder of a member of this ideal again belongs to it; if nonzero its least exponent belongs both to the diagram and to its complement. Thus the remainder is zero and these lifts generate the extended ideal. This establishes the equality needed for stalk contraction, without asserting any universal homogeneous division property.",
+   "uses": [
+    "lem-trf-supported-formal-division"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let $I'=(F_1,\\ldots,F_s)\\subset R$. The preceding supported-division step gives $I'S=IS$. Apply [lem-trf-implicit-taylor-coordinate-calculus] with $B=M$, $b=a$, all $n$ chart coordinates as $w$, and the empty tuple of implicit equations ($r=0$, so $N=M$). Its now-explicit centered Taylor map is the composite from $R$ through the completed local ring of $M_L=M\\times_k\\operatorname{Spec}L$ at the induced $L$-rational point $a_L$, identified with $S=L[[T]]$ by this chart. It sends each coordinate $t_i$ to $t_i(a)+T_i$, so it is precisely the Taylor map used in the preceding steps, also when $a$ is nonclosed. The cited faithful-flat ideal-contraction assertion therefore gives $I'=I$, since both ideals are finitely generated. The ideal sheaf generated by the finitely many $F_i$ and $\\mathcal I_X$ are coherent on the smooth finite-type scheme $M$; the cited coherent-ideal spreading assertion gives their equality after shrinking about $a$. If $IS=0$, the same contraction and spreading assertions give $I=0$ and the empty generating family on a neighbourhood. For $n=0$ the proper stalk ideal at $a\\in X$ is zero, so this also covers the zero-dimensional case. All coordinate changes and shrinkings have been finite.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, proof of Theorem 9.6, first paragraph; faithful-flat descent and coherent-ideal spreading are the explicit assertions of the current implicit-Taylor calculus statement, with its centered Taylor construction after residue-field extension and r=0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-taylor-normal-cone-splitting",
+  "lem-trf-graded-generic-initial-borel",
+  "lem-trf-monomial-upper-set-finite-basis",
+  "lem-trf-supported-formal-division",
+  "lem-trf-implicit-taylor-coordinate-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997, sections 3.5, 8, and proof of Theorem 9.6, first paragraph, pp.278--279; original generic-monotone-diagram steps 1--4 and 7, with supported division for descent. Agent-written elaboration of the owning node's argument; BM 1997 remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Generic coordinates on a smooth scheme make the Taylor ideal monotone with regular generators at its minimal exponents",
+   "results": "Scheme.IdealSheafData.ofIdeals_mono, ideal_mono, strictMono_ideal; HasFTaylorSeriesUpToOn.mono; IsSmooth.casesOn, recOn; PowerSeries.IsWeierstrassDivisorAt.",
+   "date": "2026-10-26",
+   "verdict": "No match: ideal-sheaf monotonicity, analytic Taylor series, and smooth chart data do not give generic exponent diagrams or regular vertex lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic linear coordinates yield a monotone diagram and regular generators of Taylor ideal",
+   "results": "Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs, coeffs, invJacobianOfHasCoeffs; Algebra.PreSubmersivePresentation.jacobiMatrix_naive; Algebra.Generators.exists_presentation_of_free_cotangent, exists_presentation_of_basis_cotangent; MvPowerSeries.LinearTopology.basis_le_iff, basis_le.",
+   "date": "2026-10-26",
+   "verdict": "No match: smooth-presentation generators do not ensure prescribed Taylor initial exponents."
+  },
+  {
+   "tool": "grep",
+   "query": "genericInitial|Borel.fixed|monotone.?diagram|homogeneous.*division in Mathlib; genericMonotoneDiagram|GenericMonotoneDiagram in lean/Sheaf and lean/WeilConjectures",
+   "results": "No Mathlib generic diagram theorem; unrelated elliptic-curve homogeneous division comments. The project has the owning GenericMonotoneDiagram theorem and its consumer NonreducedRegularHilbertCoefficients. TaylorNormalConeSplitting, GradedGenericInitialBorel, SupportedFormalDivision, and ImplicitTaylorCoordinateCalculus provide the planned inputs. Blueprint searches for regular vertex and homogeneous division found no blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate: the existing owning theorem also includes the universal division assertions. This new step isolates the geometric chart construction only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericMonotoneDiagram",
+  "date": "2026-10-26",
+  "group": "Q9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: sections 3.5 and 7.1, the generic-coordinate monotonicity recalled at the beginning of section 8 and before Theorem 9.6, and the first paragraph of the proof of Theorem 9.6 (pp.278--279) Further input: BM 1997, sections 3.5, 8, and proof of Theorem 9.6, first paragraph, pp.278--279; original generic-monotone-diagram steps 1--4 and 7, with supported division for descent.",
+   "via": [
+    "lem-trf-generic-monotone-diagram",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericMonotoneVertexChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericMonotoneVertexChart.lean",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.genericMonotoneVertexChart",
+  "statement": "theorem genericMonotoneVertexChart {k : Type u} [Field k] [CharZero k] {X M : Scheme.{u}} (p : M ⟶ Spec (CommRingCat.of k)) (i : X ⟶ M) [Smooth p] [LocallyOfFiniteType p] [QuasiCompact p] [IsClosedImmersion i] (a : X) : Nonempty (GenericMonotoneVertexChart p i a)",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.GenericMonotoneVertexChart",
+   "AlgebraicGeometry.HilbertCoefficient.genericMonotoneVertexChart"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T092400-L-3428077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T092400-L-3428077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

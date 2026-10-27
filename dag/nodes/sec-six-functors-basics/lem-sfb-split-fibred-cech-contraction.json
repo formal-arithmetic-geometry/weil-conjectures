@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-split-fibred-cech-contraction",
+ "kind": "statement",
+ "title": "A 2-section contracts the augmented relative Cech complex",
+ "statement": "Fix the universes and small-skeleton convention of [def-weil-size-convention] and a scheme $S$ [def-pc-scheme]. Categories fibred in groupoids, their morphisms, 2-isomorphisms and 2-fibre products have the meanings of [def-sfb-stable-pointed-moduli-groupoids]. Give each such category its big etale site: objects and arrows are those of the fibred category and coverings lie over jointly surjective etale families of schemes. Abelian sheaves mean abelian-group-valued contravariant functors satisfying the covering equalizer condition [def-weil-pbc-sites-and-cohomology]. Pullback $e^{-1}$ is precomposition. For $v:\\mathcal V\\to\\mathcal X$ and an abelian sheaf $N$ on $\\mathcal V$, put $(v_*N)(x)=\\Gamma(\\mathcal V\\times_{\\mathcal X}T,N|_{\\mathcal V\\times_{\\mathcal X}T})$ for $x$ over $T$, where $\\Gamma$ is the group of compatible families over all objects and restriction is precomposition with the projection. For $f:\\mathcal U\\to\\mathcal X$ and an abelian sheaf $F$ on $\\mathcal X$, let $\\mathcal U_p$ be the $(p+1)$-fold 2-fibre product over $\\mathcal X$ with projection $f_p$. Write $E^{-1}(f,F)=F$ and $E^p(f,F)=(f_p)_*f_p^{-1}F$ for $p\\geq0$, with zero terms below degree $-1$, augmentation restriction and differential $d^p=\\sum_{j=0}^{p+1}(-1)^jd_j^*$, where $d_j$ omits the $j$-th factor. Assume a functor $s:\\mathcal X\\to\\mathcal U$ over $S$ and a natural isomorphism $f\\circ s\\cong\\mathrm{id}_{\\mathcal X}$ over $S$ are given. There exist morphisms of abelian sheaves $h^p:E^p(f,F)\\to E^{p-1}(f,F)$ for $p\\geq0$ such that $h^0d^{-1}=\\mathrm{id}_F$ and $d^{p-1}h^p+h^{p+1}d^p=\\mathrm{id}_{E^p(f,F)}$ for all $p\\geq0$. These are a contracting homotopy of the augmented relative complex and are natural in $F$ for the fixed section and 2-isomorphism. There is no covering or faithfulness hypothesis on $f$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XA (lemma-homotopy-sheafified; underlying global-section construction Tag 06X6 (lemma-homotopy)), with the etale topology; the augmented-complex formulation includes the degree -1 identity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-fibred-relative-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-relative-cech-presentation-comparison] to replace $E$ by the isomorphic augmented complex $\\widetilde E$ of common-target tuples $A_p$, with $A_{-1}=\\mathcal X$ and projection $a_p$ to the common target $y$. Its comparison $\\Phi_F:E\\xrightarrow{\\sim}\\widetilde E$ is natural in $F$, commutes with all faces, and is the identity in degree $-1$. Thus it suffices to construct the homotopy on this tuple complex.",
+   "uses": [
+    "lem-sfb-relative-cech-presentation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XA (lemma-homotopy-sheafified), via Tag 06X6 (lemma-homotopy); leading insertion corrects the signs of the displayed trailing insertion"
+   }
+  },
+  {
+   "text": "Write $t:fs\\xrightarrow{\\sim}\\mathrm{id}$. For $p\\geq0$ define $r_p:A_p\\to A_{p+1}$ by prepending $(s(y),t_y)$ to the tuple, retaining $y$ and all old entries. On an arrow $(b_i,c)$ use $(s(c),b_i,c)$. This is well-defined because $c\\circ t_y=t_{y'}\\circ f(s(c))$; the other arrow equations are unchanged. Functoriality follows from functoriality of $s$. Put $r_{-1}(y)=(s(y),y,t_y)$, with arrows $(s(c),c)$. Each $r_p$ is strictly over $\\mathcal X$. Deleting the newly inserted entry gives $d_0r_p=\\mathrm{id}$ for $p\\geq-1$; deleting old entry $j$ gives $d_{j+1}r_p=r_{p-1}d_j$ for $p\\geq0$, $0\\leq j\\leq p$, also on arrows.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XA (lemma-homotopy-sheafified), via Tag 06X6 (lemma-homotopy); leading insertion corrects the signs of the displayed trailing insertion"
+   }
+  },
+  {
+   "text": "For $p\\geq1$ put $\\widetilde h^p=r_{p-1}^*$: on an object $x$ of $\\mathcal X$ this precomposes compatible families on $A_p\\times_{\\mathcal X}T$ with $r_{p-1}\\times_{\\mathcal X}T$. Compatibility is preserved since $r_{p-1}$ is a functor over $\\mathcal X$. Precomposition commutes with every restriction and with addition. Define $\\widetilde h^0_x$ by evaluating a compatible family at the tuple $(s(x),x,t_x)$ over the identity of $T$; its coefficient is $F(x)$. For $c:x'\\to x$, the arrow $(s(c),c)$ between these tuples gives $F(c)\\widetilde h^0_x=\\widetilde h^0_{x'}\\widetilde E^0(c)$. Thus these are natural transformations of abelian presheaves, hence morphisms between the given abelian sheaves.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XA (lemma-homotopy-sheafified), via Tag 06X6 (lemma-homotopy); leading insertion corrects the signs of the displayed trailing insertion"
+   }
+  },
+  {
+   "text": "The equation $d_0r_{-1}=\\mathrm{id}$ gives $\\widetilde h^0d^{-1}=\\mathrm{id}_F$. For $p\\geq0$, the identities in step 2 and contravariant composition give\n$$\\widetilde h^{p+1}d^p=\\sum_{j=0}^{p+1}(-1)^j(d_jr_p)^*=\\mathrm{id}-\\sum_{j=0}^{p}(-1)^j(r_{p-1}d_j)^*=\\mathrm{id}-d^{p-1}\\widetilde h^p.$$\nWhen $p=0$, the last sum means augmentation followed by evaluation at $(s(x),x,t_x)$: evaluating the two faces at $(s(y),u,y,t_y,\\alpha)$ gives the original family value minus the restricted value of $\\widetilde h^0$. Thus the same identity holds in degree zero, not just in positive degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XA (lemma-homotopy-sheafified), via Tag 06X6 (lemma-homotopy); leading insertion corrects the signs of the displayed trailing insertion"
+   }
+  },
+  {
+   "text": "For a morphism $F\\to G$, applying it to a compatible family and then precomposing with $r_{p-1}$ equals doing these operations in the reverse order; the same holds for evaluation defining $\\widetilde h^0$. Therefore $\\widetilde h$ is natural in $F$. Set $h^p=(\\Phi_F^{p-1})^{-1}\\widetilde h^p\\Phi_F^p$. Conjugating the identities in step 4 by the chain isomorphism $\\Phi_F$, whose degree $-1$ is the identity, proves both asserted formulas for $E$. Naturality of $\\Phi_F$ gives naturality of $h$. All formulas use only the specified $s,t$, functoriality and finite sums; they require no covering or faithfulness condition.",
+   "uses": [
+    "lem-sfb-relative-cech-presentation-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XA (lemma-homotopy-sheafified), via Tag 06X6 (lemma-homotopy); leading insertion corrects the signs of the displayed trailing insertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-cech-presentation-comparison",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XA (lemma-homotopy-sheafified), via Tag 06X6 (lemma-homotopy); leading insertion corrects the signs of the displayed trailing insertion; explicit tuple construction and sign verification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of categories fibred in groupoids with a section up to 2-isomorphism has a contractible augmented relative Cech complex of abelian sheaves",
+   "results": "Hits read: classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective₂, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_bijective, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff', classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "extraDegeneracy|ExtraDegeneracy|homotopyEquiv",
+   "results": "Hits read: Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean, Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean, Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean, Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean, Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean, Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean, Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean, Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean Search directory Mathlib/AlgebraicTopology/",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Ee]xtra|[Cc]ech.*[Cc]ontract|relative.*[Cc]ech|[Ff]ibred",
+   "results": "Hits read: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An augmented Cech complex of abelian sheaves for a morphism of fibred groupoids with a section is chain homotopic to zero",
+   "results": "Hits read: ChainComplex.augment, CochainComplex.augment_X_zero, CochainComplex.IsKProjective.homotopyZero, CochainComplex.augment, ChainComplex.augment_X_zero, CochainComplex.augment_d_zero_one, CochainComplex.fromSingle₀AsComplex, CochainComplex.truncateAugment_hom_f",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"homotopy\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechNerve\", \"ExtraDegeneracy\"",
+   "results": "Hits read: CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_base, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_succ, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_base_assoc, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_succ_assoc, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inserting a chosen splitting into the nerve of a functor of groupoids contracts its sheaf valued augmented Cech cochain complex",
+   "results": "Hits read: classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0, CategoryTheory.SimplicialObject.cechNerveEquiv_apply, CategoryTheory.SimplicialObject.cechNerveEquiv, CategoryTheory.SimplicialObject.cechNerveEquiv_symm_apply, CategoryTheory.CosimplicialObject.cechConerveEquiv_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global augmented Cech cochain complex of an abelian presheaf on a fibred groupoid is contractible when the covering functor has a section up to natural isomorphism",
+   "results": "Hits read: classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, classifyingSpaceUniversalCover.cechNerveTerminalFromIso, CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.H1, CochainComplex.IsKProjective, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CochainComplex.cm5b.I, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: ExtraDegeneracy.lean:329-442 treats strict split epimorphisms and ordinary categorical pullbacks; a 2-section, 2-fibre-product nerve and its sheaf-valued realization require additional comparison, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "extraDegeneracy|homotopyEquiv",
+   "results": "31, 32, 34, 36, 38",
+   "date": "2026-10-24",
+   "verdict": "no match: augment/truncate and ordinary split-epi Cech results do not handle the fibred-groupoid 2-section and coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section up to natural isomorphism contracts the augmented relative Cech complex of abelian sheaves by inserting the section into tuples",
+   "results": "CochainComplex.truncateAugment, CategoryTheory.SimplicialObject.cechNerveEquiv, CochainComplex.fromSingle₀AsComplex, CochainComplex.augmentTruncate, ChainComplex.truncateAugment, CategoryTheory.sheafSectionsNatIsoEvaluation, CategoryTheory.SimplicialObject.cechNerveAdjunction, CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: augment/truncate and ordinary split-epi Cech results do not handle the fibred-groupoid 2-section and coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-relative-cech-module-augmentation-exact",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Exact augmented relative Cech complex for stack module sheaves. Supporting input: A 2-section contracts the augmented relative Cech complex. Presentation comparison for the relative Cech complex; latest blueprint proof (3), preservation of direct images. The creation chain has no computed blueprint ancestor; its textual route refers to the named blueprint passage, also recorded by def-sfb-stable-pointed-moduli-groupoids.",
+   "via": [
+    "lem-sfb-stack-relative-cech-module-augmentation-exact",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-fibred-cech-contraction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Separated the comparison of 2-fibre-product presentations as one generic lemma. Constructed leading insertion directly with the supplied 2-section, verified the functor on arrows, all signed homotopy identities including degree -1 and 0, sheaf naturality and coefficient naturality. Found and corrected the source proof’s missing trailing-insertion signs. Documented the inherited unresolved creation chain and its named blueprint passage without changing the route.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), via the inherited alteration/moduli/cohomological descent chain: the contraction input to exactness of the relative stack Cech augmentation."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-9ad0f50c3",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-9ad0f50c3 (reviewer sub-agent of L); spot-checked: I read stacks-sheaves.tex lines 2890-3260 (06X3 tuple model, 06X5, 06X6, 06X7, the presheaf remark, 06X9, 06XA). The item statement is unchanged from base and agrees with 06XA: etale topology, degree -1 identity, no covering hypothesis. The worker's source-error claim is correct: 06X6 appends s(x) at the end with unsigned pullback, giving h d = (-1)^{n+1} id + d h, so signs are needed; it also writes t: s∘f where f∘s is meant. Steps 2-4 are checked. Step 2: the prepended (s(y),t_y) is well defined by naturality of t and is strictly over X; I checked d_0 r_p = id and d_{j+1} r_p = r_{p-1} d_j, including d_1 r_0 = r_{-1} a_0. Step 3: h~^0 evaluates at (s(x),x,t_x) over id_T, and naturality comes from the arrow (s(c),c). Step 4: the index shift gives h~d = id - d h~, and the degree-0 term (r_{-1}a_0)^* equals d^{-1}h~^0 via the arrow (s(φ),φ). Step 5: conjugating by Φ with Φ^{-1} = id gives both formulas and naturality. New node lem-sfb-relative-cech-presentation-comparison is statement-only, self-contained on the tuple side and true. It is 06X5/06X9(2) specialized: degree 0 is u ↦ (u,f(u),id), strictly over X; face squares commute up to 2-isomorphisms, with coefficients moved by F(α^{-1}). It is not a duplicate: lem-sfb-relative-cech-base-change (06XC) and fibred-cover-detects-exactness (06XD) do not state it, and grepping for 06X3/5/6/7/9/A finds only this delivery and the parent. It is not a restatement of the item: it has no section and no homotopy. Advisory: 'iterated presentation with usual omission maps' is no more precise than the item and its Q49 siblings, which leave the (p+1)-fold 2-fibre product model unfixed; a later split must fix the model. Batch-5 flag: def-sfb-stable-pointed-moduli-groupoids reaches def-trf-projective-bundle-morphism, which is only a general definition, not part of the trace formula or Poincare duality statements or proofs. The new node uses it only for CFG and 2-fibre-product meanings, which the item already cites on base, so it is outside the assumptions. Null from.node is the documented broken creation chain, as in the siblings. No SGA. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SplitFibredCechContraction",
+  "declaration": "CategoryTheory.splitFibredCech_contraction",
+  "declarations": [
+   "CategoryTheory.splitFibredCech_contraction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SplitFibredCechContraction.lean",
+  "statement": "theorem splitFibredCech_contraction {S : AlgebraicGeometry.Scheme.{u}} {U X : BasedCategory.{v, max v w} (Over S)} (f : BasedFunctor U X) (hU : IsFibredInGroupoids U) (hX : IsFibredInGroupoids X) (s : BasedFunctor X U) (t : ModuliTwoIso (s.comp f) (BasedFunctor.id X)) : ∃ h : (n : ℕ) → fibredRelativeCechTerm f hU hX (n + 1) ⟶ fibredRelativeCechTerm f hU hX n, fibredRelativeCechDifferential f hU hX 0 ≫ h 0 = 𝟙 _ ∧ ∀ n : ℕ, h n ≫ fibredRelativeCechDifferential f hU hX n + fibredRelativeCechDifferential f hU hX (n + 1) ≫ h (n + 1) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d1dbd55d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Item Lean matches node/Stacks 06XA clause by clause: S, U X CFGs over Over S (IsFibredInGroupoids), f s BasedFunctor, t ModuliTwoIso (vertical nat iso f∘s≅id), no covering/faithfulness hyp; ∃ h natural transformations term(n+1)→term n (natural in F for fixed s,t), d0≫h0=𝟙 = h^0d^{-1}=id_F, h n≫d n + d(n+1)≫h(n+1)=𝟙 = d^{p-1}h^p+h^{p+1}d^p=id, index shift checked. New def node def-sfb-fibred-relative-cech-complex is a genuine construction (Stacks 06X3/06X7): image-presieve comap of etalePrecoverage (big etale site), Ran = compatible-family direct image, degree 0 = U with f, vertical common-target tuples, faces j.rev/succAbove with α transports, pullback as in remark-cech-complex-presheaves, unit augmentation, alternating signs; d^0d^{-1}=0 hand-checked; sheafness/naturality/d²=0 postponed theorems stated in node with proof docstrings. Universe coefficients = object universe max v w needed for large Ran, per size convention. Statements verbatim, docstrings/source/blueprint present, sorry-only, no live competing binding, report sections present. No compile (no change)."
+ }
+}

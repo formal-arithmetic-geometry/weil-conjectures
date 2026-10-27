@@ -1,0 +1,172 @@
+{
+ "id": "lem-per-varying-site-system-evaluation-adjoints",
+ "kind": "statement",
+ "title": "Free and cofree evaluation for specified inverse-image coherence",
+ "statement": "Let I be a small category, D a VaryingSiteDiagram and e a VaryingSiteCoherence [def-per-varying-site-system]. In particular every inverse image is additive and preserves finite limits, and e satisfies the two unit and associativity identities. For each vertex i there exists L_i:Ab(C_i)→S with L_i left adjoint to evaluation ev_i and preserving monomorphisms, and there exists R_i:Ab(C_i)→S right adjoint to ev_i. Here S is the category VaryingSiteSystem D e with arbitrary, possibly noninvertible, transition maps. No site-level pseudofunctor or compatibility of e with a separately chosen site compositor is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WG (5)-(7) and 09WH, free evaluation construction, generalized to arbitrary small categories and specified inverse-image coherence; cofree construction from sites-cohomology.tex Tag 0EXZ."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-per-varying-site-system",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Each D.pull a is the actual left adjoint of continuous sheaf pushforward. Products of sheaves are sectionwise and coproducts are sheafifications of sectionwise presheaf coproducts. For a fixed i and A put (L_i A)_j=⊕_{a:j→i}(D.pull a)(A). Preservation of coproducts by D.pull c defines the transition on the a-summand using the inverse of e.comp c a and the (c≫a)-inclusion. Test identity and cocycle on all summands; exactly the unit and associativity axioms of e give these identities. The same formula on arrows is functorial.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WG (5)-(7) and 09WH, free evaluation construction, generalized to arbitrary small categories and specified inverse-image coherence; cofree construction from sites-cohomology.tex Tag 0EXZ."
+   }
+  },
+  {
+   "text": "A map A→F_i extends on the a-summand by inverse image followed by F.transition a. The cocycle makes it compatible; restriction to the identity summand, transported with e.unit, is the inverse. Compatibility with each a recovers the corresponding summand, including nonidentity endomorphisms. The formulas commute with pre- and postcomposition, yielding the adjunction by natural Hom bijections. Every inverse image preserves monomorphisms by D.exact_limits. A coproduct of such monomorphisms is monic because finite subsums are monic and the full sum is their filtered colimit, which is exact in abelian sheaves. A componentwise monic compatible family is monic, by componentwise cancellation. Hence L_i preserves monomorphisms.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WG (5)-(7) and 09WH, free evaluation construction, generalized to arbitrary small categories and specified inverse-image coherence; cofree construction from sites-cohomology.tex Tag 0EXZ."
+   }
+  },
+  {
+   "text": "Take the mates of e.unit and e.comp under the actual sheaf adjunctions. The Hom bijections for composite adjunctions show that these direct-image comparisons satisfy the unit and associativity equations. Put (R_i A)_j=∏_{a:i→j}P_a A, where P_a is direct image. For c:k→j define the transposed transition into P_c((R_i A)_k) by its b:i→k projection: it is the (b≫c)-projection transported by the mate compositor. Right adjoints preserve products, so this defines it uniquely. Projection tests and the mate coherence prove identity and cocycle; transposition supplies the inverse-image transitions. Products also define R_i on arrows and prove its functor laws.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  },
+  {
+   "text": "For h:F_i→A define F→R_i A by taking the a:i→j projection to be the adjunct of F.transition a≫h. After transposition the cocycle proves compatibility by testing every projection. The inverse is the identity-factor projection with the mate unit comparison. Compatibility with each a recovers every projection of the original map; starting from h recovers h by the identity law. Product uniqueness proves both inverse identities. These formulas are natural, giving ev_i⊣R_i. Empty Hom sets give zero sheaves, and empty I requires no construction at a vertex.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WG (5)-(7) and 09WH, free evaluation construction, generalized to arbitrary small categories and specified inverse-image coherence; cofree construction from sites-cohomology.tex Tag 0EXZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Free and cofree adjoints to evaluation for systems on varying sites with specified coherence of inverse image functors",
+   "results": "{\"t\": \"2026-10-26T08:22:41Z\", \"tool\": \"leansearch\", \"query\": \"Free and cofree adjoints to evaluation for systems on varying sites with specified coherence of inverse image functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationIsRightAdjoint\", \"CategoryTheory.evaluationLeftAdjoint\", \"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.constantPresheafAdj\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.evaluationRightAdjoint.congr_simp\", \"CategoryTheory.evaluationRightAdjoint\"], \"digest\": \"7152193455ccf19a\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for VaryingSiteSystem with specified inverse-image coherence. Ordinary functor-category evaluation adjoints do not apply. The existing varyingSite_evaluation_adjoints theorem is on a different site-pseudofunctor representation and does not accept the present D,e."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on coherent systems of abelian sheaves has a monomorphism preserving free left adjoint and a cofree right adjoint",
+   "results": "{\"t\": \"2026-10-26T08:22:42Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on coherent systems of abelian sheaves has a monomorphism preserving free left adjoint and a cofree right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.setAbAdjunction\", \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"CategoryTheory.Sheaf.adjunction\", \"Condensed.freeForgetAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.instIsRightAdjointSheaf\\u0393\"], \"digest\": \"cea700379d7ef74c\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for VaryingSiteSystem with specified inverse-image coherence. Ordinary functor-category evaluation adjoints do not apply. The existing varyingSite_evaluation_adjoints theorem is on a different site-pseudofunctor representation and does not accept the present D,e."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i varying.site|system.*abelian|evaluation.*adjoint Mathlib/CategoryTheory/Sites Mathlib/CategoryTheory/Adjunction/Evaluation.lean; rg VaryingSiteSystem lean/Sheaf lean/WeilConjectures",
+   "results": "Mathlib contains evaluation adjoints for ordinary functor categories. The only occurrences of VaryingSiteSystem in the project are its defining module and the assigned item. Blueprint searches for varying site, evaluation adjoint, 0EXZ and cofree returned no imported blueprint match.",
+   "date": "2026-10-26",
+   "verdict": "No match for VaryingSiteSystem with specified inverse-image coherence. Ordinary functor-category evaluation adjoints do not apply. The existing varyingSite_evaluation_adjoints theorem is on a different site-pseudofunctor representation and does not accept the present D,e."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.VaryingSiteSystemInjectiveResolutions",
+  "date": "2026-10-26",
+  "group": "Q7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The passage from finite-stage Leray to the limit spectral sequence in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor. Compatible resolutions used before applying continuity, refining the bounded-below derived-sections tool. This node isolates free and cofree evaluation for specified inverse-image coherence, used in the system-resolution argument.",
+   "via": [
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.VaryingSiteSystemEvaluationAdjoints",
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteSystemEvaluationAdjoints.lean",
+  "declaration": "CategoryTheory.varyingSiteSystem_evaluation_adjoints",
+  "declarations": [
+   "CategoryTheory.varyingSiteSystem_evaluation_adjoints"
+  ],
+  "statement": "theorem varyingSiteSystem_evaluation_adjoints {I : Type u} [SmallCategory I] (D : VaryingSiteDiagram.{u} I) (e : VaryingSiteCoherence D) (i : I) : (∃ L : D.Ab i ⥤ VaryingSiteSystem D e, Nonempty (L ⊣ VaryingSiteSystem.evaluation D e i) ∧ L.PreservesMonomorphisms) ∧ (∃ R : D.Ab i ⥤ VaryingSiteSystem D e, Nonempty (VaryingSiteSystem.evaluation D e i ⊣ R))",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T092350-L-3426633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T092350-L-3426633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

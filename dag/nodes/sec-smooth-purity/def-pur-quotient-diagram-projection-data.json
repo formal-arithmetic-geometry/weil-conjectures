@@ -1,0 +1,130 @@
+{
+ "id": "def-pur-quotient-diagram-projection-data",
+ "kind": "definition",
+ "title": "Normalized quotient reduction and projection data",
+ "statement": "For sites J,K small in the coefficient universe, a commutative ring A and ideal I, define constant sheaf coefficients and the actual successive quotient maps A/I^(n+2) to A/I^(n+1). A Reduction is ordinary extension to the quotient system with unit transition formula, its universal left-derived functor and its evaluated scalar-extension comparisons. A TensorReduction fixes the ordinary tensor comparison, its total-complex summands, K-flatness and preservation of flat terms, and its derived representative equation. A Presentation includes the module-induced ringed geometric adjunction, source and target reductions, and ordinary/derived pullback comparisons with their insertion and representative equations. Define the counit coefficient mate, balanced projection arrow and their finite evaluations; Laws expresses transitions, the specified finite counit, projection evaluation and naturality. All operations are on the ordinary module derived categories, with the coefficient and adjunction interfaces of the listed statement dependencies.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-pullback-tensor-product (07A4), lemma-adjoint (07A6), equation-projection-formula-map (0B56); Zheng Construction 4.1",
+  "note": "Agent-formulated normalization auxiliary; proof expands the representative comparison argument."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-ringed-coefficient-projection-data",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-geometry-base",
+  "def-coef-semilinear-geometry-derived",
+  "def-coef-semilinear-geometry-ops"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A4, 07A6, 0B56; Zheng Construction 4.1, common flat-term K-flat representative argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct ordinary and derived scalar extension of module sheaves to an inverse system of quotient rings with geometric inverse image comparisons",
+   "results": "PresheafOfModules.pullback; SheafOfModules.restrictScalars; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "Underived scalar operations only; no derived quotient-system presentation or its normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-24",
+   "verdict": "Generic counit formula does not construct normalized quotient reduction presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Dd]iagram|[Dd]iagram.*quotient|scalar.*[Ee]valuation",
+   "results": "Mathlib profinite group quotient diagrams and ModuleCat presheaf limit/colimit comparisons; no normalized quotient reduction presentation",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientDiagramProjectionEvaluation",
+  "date": "2026-10-24",
+  "group": "B8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof step 8).; quotient-diagram projection evaluation, ordinary reduction and tensor representative comparisons",
+   "via": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientDiagramProjectionData",
+  "file": "lean/Sheaf/Paper/QuotientDiagramProjectionData.lean",
+  "declaration": "SheafOfModules.QuotientDiagramProjection.Presentation",
+  "statement": "structure Presentation (J : GrothendieckTopology C) (K : GrothendieckTopology X)\n    (A : Type (max c v r)) [CommRing A] (I : Ideal A)\n    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf K (Type (max c v r)))\n    (uPush : Sheaf K (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n    (adj : uInv ⊣ uPush)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-24",
+  "declarations": [
+   "SheafOfModules.QuotientDiagramProjection.ringSheafify",
+   "SheafOfModules.QuotientDiagramProjection.constant",
+   "SheafOfModules.QuotientDiagramProjection.finite",
+   "SheafOfModules.QuotientDiagramProjection.quotientMap",
+   "SheafOfModules.QuotientDiagramProjection.quotientTransition",
+   "SheafOfModules.QuotientDiagramProjection.Reduction",
+   "SheafOfModules.QuotientDiagramProjection.Reduction.insertion",
+   "SheafOfModules.QuotientDiagramProjection.TensorReduction",
+   "SheafOfModules.QuotientDiagramProjection.Presentation",
+   "SheafOfModules.QuotientDiagramProjection.coefficientMate",
+   "SheafOfModules.QuotientDiagramProjection.targetBalance",
+   "SheafOfModules.QuotientDiagramProjection.arrow",
+   "SheafOfModules.QuotientDiagramProjection.finiteMate",
+   "SheafOfModules.QuotientDiagramProjection.finitePull",
+   "SheafOfModules.QuotientDiagramProjection.finiteTargetBalance",
+   "SheafOfModules.QuotientDiagramProjection.Laws"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bf0c8",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261024T184625-L-3081691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bf0c8",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261024T184625-L-3081691",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item definitions (byte-identical except added Prop field TensorReduction.flatTerms, change record present); construction sorry vs old item conclusion (implied, plus true flatness field); #print axioms of item and reductionTensorEvaluation (sorryAx only via construction hole and pre-existing upstream SemilinearSections.Data)"
+ }
+}

@@ -1,0 +1,182 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
+public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+
+import Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Mathlib.RingTheory.FiniteType
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
+import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.TraceFormula.FsFaceSharpening
+import Sheaf.AlgebraicGeometry.LogRegularSharpChart
+import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
+import Sheaf.RingTheory.FormalMonoidRingDimension
+import WeilConjectures.RingTheory.LocalCompletionQuotient
+import WeilConjectures.RingTheory.CompletionRegularLocal
+import WeilConjectures.RingTheory.CompletionDimension
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
+import WeilConjectures.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationDimension
+import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
+import Sheaf.AlgebraicGeometry.LogSmoothLogRegular
+
+/-!
+# Log smooth morphisms preserve log regularity
+
+Source: Illusie--Laszlo--Orgogozo, Exposé VI 1.3 and 1.8, pp.69--70;
+Exposé X Remark 1.1.1(b), p.136; Kato 1994, Theorem 8.2
+(blueprint: lem-sfb-log-smooth-preserves-log-regularity).
+
+The general theorem uses the full chart criterion, including finite chart kernels.
+The field clauses use the existing triviality locus to specify the trivial log structure.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- A log-smooth morphism of locally Noetherian fs log schemes preserves log regularity.
+There is no additional injectivity or torsion-free-cokernel condition on its charts.
+Source: ILO VI 1.8, p.70; Kato 1994, Theorem 8.2
+(blueprint: lem-sfb-log-smooth-preserves-log-regularity).
+
+Proof (Steps 1--9 of the DAG node):
+
+1. Fix a geometric point $\bar x$ and choose chart neighbourhoods $X_0\to Y_0$ from
+[def-per-fs-log-smooth-etale], with monoid map $u:P\to Q$, smooth comparison and finite kernel
+$K=\ker u^{\rm gp}$. Work on these neighbourhoods. Their pulled-back log structures have the
+same geometric stalks as the original ones: pointed etale neighbourhoods form the same refining
+system. Thus log regularity of $Y$ gives log regularity of $Y_0$, and proving the defining
+regularity and dimension equality above each $\bar x$ suffices by [def-trf-fs-log-blowup]. If
+$N$ is the product of the orders of $K$ and of the torsion subgroup of the chart cokernel, its
+invertibility at $\bar x$ implies its invertibility at the image point of $Y_0$, since the
+residue fields embed. Restrict $Y_0$ to $D(N)$ and $X_0$ to its inverse image from the outset.
+
+2. Every $k\in K$ is torsion in $P^{\rm gp}$; saturation puts both $k$ and $-k$ in $P$, so
+$K\subset P^\times$. Let $v_k=\alpha_Y(k)$, a unit on $Y_0$. Compatibility gives $f^*v_k=1$,
+hence $v_k=1$ in the residue field at the image of $\bar x$. If $d$ is the order of $k$, then
+$v_k^d=1$. The integer $d$ is invertible there, since it divides $|K|$, which is invertible at
+$\bar x$, and residue fields embed along $f$. In the factorization
+$(v_k-1)(1+v_k+\cdots+v_k^{d-1})=0$, the second factor has residue $d$, so it is invertible on
+an open neighbourhood. Therefore $v_k=1$ on that neighbourhood. Intersect these neighbourhoods
+for the finite group $K$ and restrict $X_0$ to its inverse image. All kernel elements now map to
+$1$ in the base log structure, because the log structure identifies its units with scheme units.
+
+3. Put $R=P/K$, the image of $P$ in $P^{\rm gp}/K$. This is fs: finite generators descend; it
+embeds in its group completion; if $ng$ lies in $R$, lift $g$ to $P^{\rm gp}$, write $ng=p+k$,
+and use $k\in K\subset P$ and saturation of $P$ to put that lift in $P$. The chart factors
+through $R$, and its associated log structure is unchanged: the quotient relations identify only
+units $k$ already mapped to $1$. The mutually inverse stalk pushout maps send $[p,a]$ to $[\bar
+p,a]$ and conversely, as in [lem-trf-associated-log-universal-stalks]. The map $h:R\to Q$ has
+injective group map and the same cokernel as $u^{\rm gp}$. Moreover $\mathbf Z[R]=\mathbf
+Z[P]/(z^k-1:k\in K)$. Since these relations already vanish on $Y_0$, the comparison target is
+unchanged on affine tensor rings. Thus the comparison is still smooth. This changes the chart,
+imposing no additional hypothesis on the original one.
+
+4. Let $Z=Y_0\times_{\operatorname{Spec}\mathbf Z[R]}\operatorname{Spec}\mathbf Z[Q]$, with its
+associated $Q$-log structure from [lem-trf-associated-log-universal-stalks]. This is locally
+Noetherian: on any affine base chart its ring is $E\otimes_{\mathbf Z[R]}\mathbf Z[Q]$ by
+[lem-weil-pbc-fibre-product-affine-spectra], a finite-type $E$-algebra generated by finitely
+many $Q$-monomials; apply [lem-weil-pbc-finite-type-algebra-noetherian]. Fix any geometric point
+$\bar z$ of $Z$, with image $\bar y$. Put $A=\mathcal O_{Y_0,\bar y}$ and pull $Z$ back to
+$\operatorname{Spec}A$. At the lifted point its ordinary local ring is $B=(A\otimes_{\mathbf
+Z[R]}\mathbf Z[Q])_{\mathfrak q}$, with $\mathfrak q$ contracting to the maximal ideal of $A$.
+The ring $A$ is Noetherian by [lem-sc-strict-henselization-noetherian]; the tensor algebra and
+$B$ are Noetherian by finite type and [lem-weil-pbc-localization-noetherian].
+
+5. Let $G=\alpha^{-1}(A^\times)$, $F=\{q\in Q:z^q\in B^\times\}$, $S=R_G/G^{\rm gp}$ and
+$T=Q_F/F^{\rm gp}$. These are faces and their sharp quotients are fs by
+[lem-trf-fs-face-sharpening]. Since $A\to B$ is local, $h^{-1}F=G$. The chart-stalk formula
+[lem-trf-associated-log-universal-stalks] identifies the base characteristic with $S$ and the
+source characteristic with $T$; the nonunit ideal on $B$ is $J=(z^q:q\notin F)B$. Apply
+[lem-trf-log-regular-sharp-chart] and [lem-trf-log-regular-completed-chart] to $Y_0$ at $\bar
+y$. Choose the permitted replacement of the sharp chart $a:S\to A$, so $\widehat A$ has its
+monomial-compatible equal- or mixed-characteristic presentation. The original chart on $R_G$ and
+$a$ lift the same characteristic: their ratio is a unique unit, by cancellation in the integral
+log stalk. Those ratios multiply, defining a character $\epsilon:R^{\rm gp}\to A^\times$ with
+$\alpha(r)=\epsilon(r)a(\bar r)$. This retains the unit twist in applying the completed model.
+
+6. Apply [lem-sfb-completed-tame-monoid-base-change-model] to $A,R,Q,h,a,\epsilon$ of Steps
+4--5. Its hypotheses hold without any Kummer condition or injectivity on sharp monoids. It
+identifies $(\widehat B,J\widehat B)$ with $(D[[T]],L)$ in equal characteristic, or
+$(D[[T]]/(\eta),L)$ in mixed characteristic, where $D$ is complete regular Noetherian local, $L$
+is generated by the nonzero $T$-monomials and the reduction $\bar\eta$ is a regular parameter of
+$D$. The ring in question is nonzero since it is localized at the specified prime.
+
+7. Apply [lem-trf-formal-monoid-ring-dimension]. If $e=0$ in the first case and $e=1$ in the
+second, it gives regularity of the quotient $D$ or $D/(\bar\eta)$ and the equalities
+$\dim\widehat B=\dim D+\operatorname{rank}T^{\rm gp}-e$ and $\dim(\widehat B/J\widehat B)=\dim
+D-e$. The latter quotient is the completion of $B/J$ by
+[lem-weil-pbc-local-completion-quotient]. Thus [lem-weil-pbc-completion-regular-local] and
+[lem-weil-pbc-completion-dimension] give that $B/J$ is regular and $\dim
+B=\dim(B/J)+\operatorname{rank}T^{\rm gp}$.
+
+8. The closed-immersion formula [lem-trf-closed-immersion-strict-localization-cartesian] gives
+$B^{\rm sh}/JB^{\rm sh}=(B/J)^{\rm sh}$. Apply [lem-sc-strict-henselization-regular] and
+[lem-sc-strict-henselization-dimension] to the Noetherian rings $B,B/J$. Regularity of the
+quotient and the same dimension equality follow after strict henselization. By
+[lem-trf-ind-etale-strict-local-invariance], applied to the base change of
+$\operatorname{Spec}A\to Y_0$, this $B^{\rm sh}$ is the geometric local ring $\mathcal O_{Z,\bar
+z}$. The identification is over $Z$, so preserves every $Q$-monomial and hence its nonunit
+ideal. Local maps reflect units, so the characteristic remains $T$. These are precisely the two
+conditions for log regularity in [def-trf-fs-log-blowup]. They hold at every $\bar z$, proving
+that $Z$ is log regular.
+
+9. The comparison $c:X_0\to Z$ is strict: both log structures are associated to the identical
+$Q$-chart, and [lem-trf-associated-log-universal-stalks] identifies the pullback chart with the
+given source log structure. It is smooth by the original chart hypothesis and Step 3. Apply
+[lem-trf-log-smooth-log-regular] to $c$ with the identical monoids $Q\xrightarrow{1}Q$. Its
+group map is injective with zero, hence torsion-free, cokernel; its comparison is $c$ itself and
+its target is log regular by Step 8. Its conclusion makes $X_0$ log regular. Step 1 then proves
+log regularity of $X$, with the empty source case vacuous.
+-/
+theorem EtaleLogHom.isLogRegular_of_isLogSmooth
+    {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y)
+    (hf : f.IsLogSmooth) (hY : Y.IsLogRegular) : X.IsLogRegular := by
+  sorry
+
+/-- The spectrum of any field with trivial log structure is log regular.
+Triviality on all geometric stalks specifies the usual trivial log structure by the
+log unit condition; it does not choose an unrelated log structure.
+Source: ILO VI 1.3 and 1.8, pp.69--70
+(blueprint: lem-sfb-log-smooth-preserves-log-regularity).
+
+Proof (Step 10 of the DAG node): a field is Noetherian and regular of dimension zero.
+Its strict henselizations are regular and have dimension zero by
+lem-sc-strict-henselization-regular and lem-sc-strict-henselization-dimension.
+Triviality of the characteristic makes every log germ a unit. Thus the nonunit ideal
+is zero and the characteristic group has rank zero. The defining dimension equality
+is 0 = 0 + 0. This works for imperfect fields as well. -/
+theorem isLogRegular_trivialLogField
+    (F : Type u) [Field F] (N : EtaleLogStructure (Spec (.of F)))
+    (hN : N.IsFineSaturated) (htriv : N.trivialityLocus = Set.univ) :
+    FineSaturatedLogScheme.IsLogRegular ⟨Spec (.of F), inferInstance, N, hN⟩ := by
+  sorry
+
+/-- In particular a log-smooth fs log scheme over an arbitrary trivially logged field
+is log regular. Source: ILO VI 1.3 and 1.8, pp.69--70
+(blueprint: lem-sfb-log-smooth-preserves-log-regularity).
+
+Proof: Step 10 proves log regularity of the trivial log field, as stated in
+isLogRegular_trivialLogField. Apply Steps 1--9, namely
+EtaleLogHom.isLogRegular_of_isLogSmooth, to the given morphism. -/
+theorem EtaleLogHom.isLogRegular_of_isLogSmooth_over_trivialLogField
+    (F : Type u) [Field F] (X : FineSaturatedLogScheme.{u})
+    (N : EtaleLogStructure (Spec (.of F))) (hN : N.IsFineSaturated)
+    (f : EtaleLogHom X ⟨Spec (.of F), inferInstance, N, hN⟩)
+    (htriv : N.trivialityLocus = Set.univ) (hf : f.IsLogSmooth) :
+    X.IsLogRegular := by
+  sorry
+
+end AlgebraicGeometry

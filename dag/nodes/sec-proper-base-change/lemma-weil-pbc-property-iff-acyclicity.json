@@ -143,7 +143,75 @@
    ]
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
+    "AlgebraicGeometry.Etale.HasTorsionBaseChange.hasInjectiveAcyclicity",
+    "AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange",
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients",
+     "lines": [
+      185,
+      199
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.HasTorsionBaseChange.hasInjectiveAcyclicity",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+     "lines": [
+      215,
+      238
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+     "lines": [
+      297,
+      307
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+     "lines": [
+      309,
+      337
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+     "lines": [
+      250,
+      295
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lean": {
@@ -168,32 +236,38 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked at 20:45: the new node lem-weil-pbc-property-implies-acyclicity is now statement-only (PBC for torsion sheaves implies IA_r after any base change, explicit form). Two steps: the implication via the new node; the converse is the unit paragraph of sk-thm-iff with every node named (Leray acyclicity, underived proper exchange, injective resolutions, prime-factor devissage, five-lemma transfer, torsion filtered unions, direct images of filtered colimits). The unit file dag/units/sk-thm-iff.json is realized by this node (accepted). The review by C1 is a real review."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For a proper morphism [def-weil-pbc-scheme-conventions] $f$, the following\nconditions are equivalent.\n\n1. $\\mathrm{PBC}(f)$ holds in the sense of\n   [def-weil-pbc-property].\n2. $\\mathrm{IA}_r(f)$ holds for every prime $r$ in the sense of\n   [def-weil-pbc-injective-acyclicity-property].",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a proper morphism [def-weil-pbc-scheme-conventions] $f$, the following\nconditions are equivalent.\n\n1. $\\mathrm{PBC}(f)$ holds for torsion coefficients: for every cartesian square\n   [def-weil-pbc-cartesian-square] over $f$ and every\n   $K\\in\\Dplus(X_{\\Et})$ of abelian sheaves whose cohomology sheaves are torsion\n   [def-weil-pbc-torsion-etale-sheaf], the derived exchange morphism\n   $\\Ex_{\\square,K}$ [def-weil-pbc-derived-exchange] is an isomorphism (the\n   property of [def-weil-pbc-property] restricted to objects with torsion\n   cohomology).\n2. $\\mathrm{IA}_r(f)$ holds for every prime $r$ in the sense of\n   [def-weil-pbc-injective-acyclicity-property].",
   "proof": [
    {
-    "text": "Suppose $\\mathrm{PBC}(f)$ holds. If $I$ is injective among $\\mathbf\nF_r$-module sheaves, then $Rf_*I=f_*I$ in that category; after arbitrary base\nchange, [def-weil-pbc-property] identifies $Rf'_*g'^{-1}I$ with the\ndegree-zero complex $g^{-1}f_*I$, so $R^qf'_*g'^{-1}I=0$ for $q>0$, which is\n$\\mathrm{IA}_r(f)$ by [def-weil-pbc-injective-acyclicity-property].",
+    "text": "Suppose $\\mathrm{PBC}(f)$ holds. Restriction of scalars along\n$\\mathbf Z\\to\\mathbf F_r$ is exact and conservative, commutes with inverse and\ndirect images and with derived direct images (an injective sheaf of\n$\\mathbf F_r$-modules has no higher cohomology as an abelian sheaf), and a\ncomplex of sheaves of $\\mathbf F_r$-modules has torsion cohomology; so it\ncarries the exchange morphism over $\\mathbf F_r$ to the one over $\\mathbf Z$, and\n$\\mathrm{PBC}(f)$ gives the base change property with $\\mathbf F_r$-coefficients.\nIf $I$ is injective among $\\mathbf F_r$-module sheaves, then $Rf_*I=f_*I$; after\narbitrary base change, this base change property identifies $Rf'_*g'^{-1}I$ with\nthe degree-zero complex $g^{-1}f_*I$, so $R^qf'_*g'^{-1}I=0$ for $q>0$, which is\n$\\mathrm{IA}_r(f)$ by [def-weil-pbc-injective-acyclicity-property].",
     "uses": [
-     "def-weil-pbc-property",
      "def-weil-pbc-injective-acyclicity-property"
     ],
     "elementary": false
    },
    {
-    "text": "Conversely assume $\\mathrm{IA}(f)$. For an $\\mathbf F_r$-module sheaf $E$,\ntake an injective resolution $E\\to I^\\bullet$. Acyclicity and\n[lemma-weil-pbc-leray-acyclicity] make $f'_*g'^{-1}I^\\bullet$ compute\n$Rf'_*g'^{-1}E$, while $g^{-1}f_*I^\\bullet$ computes $g^{-1}Rf_*E$; the\nunderived proper exchange of [lemma-weil-pbc-proper-underived-exchange] is an\nisomorphism in every degree, and by naturality these maps form an isomorphism\nof complexes, which is the derived exchange morphism of\n[def-weil-pbc-derived-exchange]. For a sheaf $F$ killed by $n$,\ninduction on the number of prime factors of $n$ using the exact sequence of\n[lem-weil-pbc-prime-factor-devissage] and the five-lemma transfer of\n[lemma-weil-pbc-five-lemma-transfer] gives the assertion for $F[n]$. Finally\nevery torsion sheaf is the filtered union of the $F[n]$ by\n[lemma-weil-pbc-torsion-filtered-union], and\n[lemma-weil-pbc-direct-image-filtered-colimit] passes the isomorphism to the\ncolimit, since proper maps are quasi-compact and quasi-separated. This proves\n$\\mathrm{PBC}(f)$ by [def-weil-pbc-property].",
+    "text": "Conversely assume $\\mathrm{IA}_r(f)$ for every prime $r$. Fix $r$ and\n$K\\in\\Dplus(X_{\\Et},\\mathbf F_r)$, and represent $K$ by a bounded below complex\n$I^\\bullet$ of injective sheaves of $\\mathbf F_r$-modules. Then\n$g^{-1}f_*I^\\bullet$ computes $g^{-1}Rf_*K$. The terms of $g'^{-1}I^\\bullet$\nare $f'_*$-acyclic by $\\mathrm{IA}_r(f)$, so by\n[lemma-weil-pbc-leray-acyclicity] $f'_*g'^{-1}I^\\bullet$ computes\n$Rf'_*g'^{-1}K$. Under these identifications the derived exchange morphism of\n[def-weil-pbc-derived-exchange] is the underived proper exchange\n$g^{-1}f_*I^\\bullet\\to f'_*g'^{-1}I^\\bullet$ of\n[lemma-weil-pbc-proper-underived-exchange], an isomorphism in every degree.\nSo the base change property holds with $\\mathbf F_r$-coefficients.",
     "uses": [
      "lemma-weil-pbc-leray-acyclicity",
-     "lemma-weil-pbc-proper-underived-exchange",
      "def-weil-pbc-derived-exchange",
-     "lem-weil-pbc-prime-factor-devissage",
-     "lemma-weil-pbc-five-lemma-transfer",
-     "lemma-weil-pbc-torsion-filtered-union",
-     "lemma-weil-pbc-direct-image-filtered-colimit",
-     "def-weil-pbc-property"
+     "lemma-weil-pbc-proper-underived-exchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Now let $E$ be an abelian sheaf on $X_{\\Et}$ killed by a prime $r$. Then $E$ is\nthe restriction of scalars of an $\\mathbf F_r$-module sheaf, and restriction of\nscalars carries the exchange morphism over $\\mathbf F_r$ to the one over\n$\\mathbf Z$ (see the first paragraph); hence $\\Ex^q_{\\square,E}$ is an\nisomorphism for every $q$. Since proper maps are quasi-compact and\nquasi-separated, the prime-torsion devissage\n[lemma-weil-pbc-prime-torsion-devissage] shows that $\\Ex^q_{\\square,F}$ is an\nisomorphism for every $q$ and every torsion sheaf $F$. For\n$K\\in\\Dplus(X_{\\Et})$ with torsion cohomology, induction on the\nlength of the canonical truncations of $K$ (both $g^{-1}Rf_*$ and $Rf'_*g'^{-1}$\nare triangulated and send $D^{\\geq N}$ into $D^{\\geq N}$) shows that\n$\\Ex_{\\square,K}$ is an isomorphism in every degree. This proves (1).",
+    "uses": [
+     "lemma-weil-pbc-prime-torsion-devissage"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

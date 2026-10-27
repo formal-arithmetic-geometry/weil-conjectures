@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-space-closed-subset-finite-fibre-open",
+ "kind": "statement",
+ "title": "Finite-fibre base open for a closed subset in a proper algebraic space",
+ "statement": "Algebraic spaces and their etale scheme charts are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. A morphism of algebraic spaces is proper if its diagonal is a closed immersion, it is quasi-compact and locally of finite type on etale scheme charts, and its underlying map is closed after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Fibre products and geometric fibres use [def-pc-fibre-product, def-weil-geometric-fibre]. Let $S$ be a scheme [def-pc-scheme], let $f:X\\to S$ be proper, and let $T\\subseteq|X|$ be a closed subset. For a field-valued point $\\bar s:\\operatorname{Spec}\\Omega\\to S$, let $T_{\\bar s}$ be the inverse image of $T$ in $|X\\times_S\\operatorname{Spec}\\Omega|$. The set of points $s\\in S$ for which $T_{\\bar s}$ is finite for an algebraic closure $\\Omega$ of $\\kappa(s)$ is an open subset $V_{f,T}\\subseteq S$. For every scheme morphism $g:S^\\prime\\to S$, let $f^\\prime:X^\\prime=X\\times_SS^\\prime\\to S^\\prime$ and let $T^\\prime$ be the inverse image of $T$ in $|X^\\prime|$. Then $V_{f^\\prime,T^\\prime}=g^{-1}(V_{f,T})$. At a field-valued point over $s$, finiteness of $T_{\\bar s}$ is equivalent to finiteness after any field extension of $\\kappa(s)$, including $\\kappa(s)$ itself. Empty subsets and empty fibres are allowed. No flatness, local finite presentation, Noetherian-base, or dimension assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0A4Y (lemma-proper-finite-fibre-finite-in-neighbourhood), closed-subset consequence using spaces-properties.tex Tag 03IQ (lemma-reduced-closed-subspace), and decent-spaces.tex Tag 0ACK (lemma-conditions-on-fibre-and-qf)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-geometric-fibre",
+  "def-pc-scheme",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-reduced-closed-support] to $T\\subseteq|X|$, obtaining a reduced closed subspace $i:Z\\hookrightarrow X$ with support $T$. Set $h=f\\circ i:Z\\to S$. By [lem-sfb-space-closed-subspace-proper] the closed immersion $i$ is proper, so [lem-sfb-space-proper-composition] applied to $i$ and the proper map $f$ shows that $h$ is proper, hence separated, quasi-compact and locally of finite type. In particular it satisfies the separated finite-type hypotheses of the fibre criterion.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ (lemma-reduced-closed-subspace); spaces-morphisms.tex Tags 04XZ (lemma-closed-immersion-proper) and 04XY (lemma-composition-proper)."
+   }
+  },
+  {
+   "text": "By [lem-trf-space-fibre-products-etale-covers], the sheaf fibre products $X_K$ and $Z\\times_S\\operatorname{Spec}K$ are algebraic spaces with the categorical fibre-product universal property. For a point $s\\in S$ and any field extension $K/\\kappa(s)$, [lem-sfb-space-reduced-closed-support] applied to $X_K\\to X$ identifies $|Z\\times_S\\operatorname{Spec}K|$ with the inverse image $T_K$ of $T$ in $|X_K|$. By [lem-sfb-space-finite-fibre-quasifinite-criterion] applied to $h$, this set is finite if and only if $h$ is quasi-finite at every point of $|Z|$ above $s$. In particular this characterizes the condition in the item when $K$ is an algebraic closure.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-finite-fibre-quasifinite-criterion",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACK (lemma-conditions-on-fibre-and-qf); spaces-properties.tex Tag 03IQ and Tag 03H4."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-quasifinite-locus-open], the quasi-finite locus $U=Q_h$ is open in $|Z|$. Let $C=|Z|\\setminus U$. Properness of $h$, obtained in Step 1 from [lem-sfb-space-closed-subspace-proper] and [lem-sfb-space-proper-composition], implies that its point map is closed, so $h(C)$ is closed in $S$. Thus $V=S\\setminus h(C)$ is open. A point $s$ belongs to $V$ precisely when there is no non-quasi-finite point of $h$ over $s$, equivalently when $h$ is quasi-finite at every point over $s$.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0A4Y (lemma-proper-finite-fibre-finite-in-neighbourhood), proof, construction of the complement of the closed image."
+   }
+  },
+  {
+   "text": "The equivalence of Step 2 and the description in Step 3 give $s\\in V$ if and only if $T_{\\bar s}$ is finite, for each $s\\in S$. Consequently $V=V_{f,T}$, proving openness. If the fibre is empty, the condition that all its points lie in $U$ is vacuous, so this argument includes empty fibres and the case $T=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0A4Y (lemma-proper-finite-fibre-finite-in-neighbourhood), closed-subset consequence."
+   }
+  },
+  {
+   "text": "The criterion in Step 2 is independent of the chosen extension $K/\\kappa(s)$: [lem-sfb-space-finite-fibre-quasifinite-criterion] always gives the same condition on the points of $Z$ over $s$. The support identification of [lem-sfb-space-reduced-closed-support] therefore proves equivalence of finiteness of $T_K$ for all these fields. This proves the field-valued clause, including the original residue field itself; it does not assert equality of the numbers of geometric and ordinary points.",
+   "uses": [
+    "lem-sfb-space-finite-fibre-quasifinite-criterion",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ACK (lemma-conditions-on-fibre-and-qf); spaces-properties.tex Tags 03IQ and 03H4."
+   }
+  },
+  {
+   "text": "Let $g:S^{\\prime}\\to S$. Apply [lem-sfb-space-proper-base-change] over $B=S$ with $Y=S$ and $Y'=S^{\\prime}$: the given $f$ is proper and $g$ is an arbitrary morphism of algebraic spaces over $S$, so $f^{\\prime}:X\\times_SS^{\\prime}\\to S^{\\prime}$ is proper. The pullback of the closed immersion $Z\\hookrightarrow X$ has support $T^{\\prime}$ by [lem-sfb-space-reduced-closed-support], and $T^{\\prime}$ is closed. Thus the openness argument already proved applies to $(f^{\\prime},T^{\\prime})$. For $s^{\\prime}\\in S^{\\prime}$ put $s=g(s^{\\prime})$ and choose an algebraic closure $L$ of $\\kappa(s^{\\prime})$. The field maps $\\kappa(s)\\to\\kappa(s^{\\prime})\\to L$ exhibit $L$ also as an extension of $\\kappa(s)$. The algebraic-space fibre-product universal property in [lem-trf-space-fibre-products-etale-covers] identifies $X^{\\prime}\\times_{S^{\\prime}}\\operatorname{Spec}L$ with $X\\times_S\\operatorname{Spec}L$: maps into either side are exactly a map into $X$ and a map into $\\operatorname{Spec}L$ agreeing in $S$. Under this identification, the inverse image of $T^{\\prime}$ is the inverse image $T_L$ of $T$. By the field independence of Step 5 (using [lem-sfb-space-finite-fibre-quasifinite-criterion]), this is finite exactly when $s\\in V_{f,T}$. Hence $s^{\\prime}\\in V_{f^{\\prime},T^{\\prime}}$ if and only if $g(s^{\\prime})\\in V_{f,T}$, giving the required equality of open subsets. No claim that reduced induced structures commute with base change is used.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-finite-fibre-quasifinite-criterion",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04WP (lemma-base-change-proper); decent-spaces.tex Tag 0ACK; spaces-properties.tex Tags 03IQ and 03H4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-finite-fibre-quasifinite-criterion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-quasifinite-locus-open",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0A4Y (lemma-proper-finite-fibre-finite-in-neighbourhood), proof of openness of the fibrewise quasi-finite condition; closed-subset reduction by spaces-properties.tex Tag 03IQ and fibre criterion by decent-spaces.tex Tag 0ACK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of algebraic spaces and a closed subset of the source the locus in the base where this subset has finite geometric fibre is open and commutes with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism is Zariski local at the target. Specifically, for any universally closed morphism $ f: X \\to Y $ of schemes and any Zariski covering sieve $ S $ on $\"}\n  {\"name\": \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsClosedMap)\", \"doc\": \"The property that a scheme morphism is a closed map (in the topological sense) is Zariski local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper algebraic space with finite fibre becomes finite over a neighbourhood of that base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper morphism of algebraic spaces and a closed subset of the source the locus in the base where this subset has finite geometric fibre is open and commutes with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : IsProperMap ⇑f\", \"doc\": \"[Stacks Tag 04XU](https://stacks.math.columbia.edu/tag/04XU)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ff]ib[er]+.*[Oo]pen|finite.*neighbou?r|isOpen.*[Ff]inite",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Basic.lean\", \"line\": \"92\", \"text\": \"theorem Set.Finite.isOpen_sInter {s : Set (Set X)} (hs : s.Finite) (h : ∀ t ∈ s, IsOpen t) :\"}\n  {\"file\": \"Mathlib/Topology/Basic.lean\", \"line\": \"100\", \"text\": \"theorem Set.Finite.isOpen_biInter {s : Set α} {f : α → Set X} (hs : s.Finite)\"}\n  {\"file\": \"Mathlib/Topology/Basic.lean\", \"line\": \"105\", \"text\": \"theorem isOpen_iInter_of_finite [Finite ι] {s : ι → Set X} (h : ∀ i, IsOpen (s i)) :\"}\n  {\"file\": \"Mathlib/Topology/Basic.lean\", \"line\": \"194\", \"text\": \"  exact isOpen_iInter_of_finite h\"}\n  {\"file\": \"Mathlib/Topology/ShrinkingLemma.lean\", \"line\": \"244\", \"text\": \"theorem exists_iUnion_eq_closure_subset (uo : ∀ i, IsOpen (u i)) (uf : ∀ x, { i | x ∈ u i }.Finite)\"}\n  {\"file\": \"Mathlib/Topology/ShrinkingLemma.lean\", \"line\": \"253\", \"text\": \"theorem exists_iUnion_eq_closed_subset (uo : ∀ i, IsOpen (u i)) (uf : ∀ x, { i | x ∈ u i }.Finite)\"}\n  {\"file\": \"Mathlib/Topology/CompactOpen.lean\", \"line\": \"318\", \"text\": \"    continuous_compactOpen.2 fun K hK U hU ↦ isOpen_set_pi hK.finite_of_discrete fun _ _ ↦ hU\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean\", \"line\": \"62\", \"text\": \"  exact H.isOpen_of_isClosed_of_finiteIndex Subgroup.isClosed_of_discrete\"}\n  {\"file\": \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"line\": \"344\", \"text\": \"theorem isOpen_forall_imp_mem_of_principal {S : Set ι} (hS : cofinite ≤ 𝓟 S) {p : ι → Prop} :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"line\": \"356\", \"text\": \"theorem isOpen_forall_mem_of_principal {S : Set ι} (hS : cofinite ≤ 𝓟 S) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"line\": \"374\", \"text\": \"theorem isOpenEmbedding_inclusion_principal {S : Set ι} (hS : cofinite ≤ 𝓟 S) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"line\": \"384\", \"text\": \"    IsOpenEmbedding (structureMap R A cofinite) where\"}\n  {\"file\": \"Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean\", \"line\": \"577\", \"text\": \"    (hBopen : ∀ i, IsOpen (B i : Set (R i))) (hT : cofinite ≤ 𝓟 T) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"line\": \"29\", \"text\": \"- `IsLocalRing.isOpen_iff_finite_quotient`:\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"line\": \"77\", \"text\": \"  I.toAddSubgroup.isOpen_of_isClosed_of_finiteIndex (inferInstanceAs (IsClosed (X := R) I))\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"line\": \"84\", \"text\": \"  (I ^ n).toAddSubgroup.isOpen_of_isClosed_of_finiteIndex\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"line\": \"108\", \"text\": \"lemma isOpen_iff_finite_quotient {I : Ideal R} :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"line\": \"109\", \"text\": \"    IsOpen (X := R) I ↔ Finite (R ⧸ I) := by\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/FiniteDimension.lean\", \"line\": \"342\", \"text\": \"theorem isOpenMap_of_finiteDimensional (f : F →ₗ[𝕜] E) (hf : Function.Surjective f) :\"}\n  {\"file\": \"Mathlib/Dynamics/SymbolicDynamics/Basic.lean\", \"line\": \"216\", \"text\": \"  simpa [cylinder_eq_set_pi U x] using isOpen_set_pi (U.finite_toSet) (by simp)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1080\", \"text\": \"lemma Scheme.exists_isOpenCover_and_isAffine_of_finite [IsCofiltered I]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1118\", \"text\": \"  obtain ⟨i, V, hV, heq⟩ := Scheme.exists_isOpenCover_and_isAffine_of_finite _ _ hc _ hU (hU' ·)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1124\", \"text\": \"/-- Variant of `Scheme.exists_isOpenCover_and_isAffine_of_finite` in terms of `Scheme.OpenCover`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1132\", \"text\": \"  obtain ⟨i, V, hV, hV'⟩ := Scheme.exists_isOpenCover_and_isAffine_of_finite _ _ hc _\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean\", \"line\": \"364\", \"text\": \"  refine isOpen_singleton_of_finite_mem_nhds 0 (s := Metric.closedBall 0 1) ?_ ?_\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space over a scheme the finite geometric fibre locus of a closed subset is open and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] (y : ↥Y),\\n  (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y}).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] {s : Set ↥Y},\\n  s.Finite → (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s).Finite\", \"doc\": \"Let $f : X \\\\to Y$ be a finite morphism of schemes. For any finite subset $S \\\\subseteq Y$, the preimage $f^{-1}(S)$ is a finite subset of $X$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper algebraic space is finite over a neighbourhood of a point with finite fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsProper f] [AlgebraicGeometry.LocallyQuasiFinite f] : AlgebraicGeometry.IsFinite f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"[Stacks Tag 02LS](https://stacks.math.columbia.edu/tag/02LS) ((1) <=> (3))\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" : @AlgebraicGeometry.IsFinite = @AlgebraicGeometry.IsProper ⊓ @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?space|finite.*fiber.*(open|neigh)|finite.*fibre.*(open|neigh)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"414\", \"text\": \"    exact Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr (isOpen_discrete _)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite geometric fibre locus of a closed subset of a proper algebraic space is open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : DiscreteTopology (f.fiber y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $ U $ of a ringed space $ X $ and any set $ s $ of sections over $ U $, the zero locus of $ s $ (i.e., the set of points in $ U $ where all elements of $ s $ vanish) is a closed su\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme, ring, or topological results, not the stated algebraic-space assertion; this is not a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smooth-open",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-closed-subset-finite-fibre-open",
+  "worker": "stage1",
+  "summary": "Q25: retained the complete statement; reduced the closed subset to its reduced closed subspace, constructed the open as the complement of the proper image of the non-quasi-finite locus, and proved field independence and arbitrary base change by explicit fibre identifications. Four supporting algebraic-space lemmas were searched and left statement-only; scheme Mathlib results are not algebraic-space attachments. Repair of returned head 86724d45db2: compared the retained split with the current unsplit live item, reread all cited statements, explicitly cited algebraic-space fibre-product existence and its universal property in Steps 2 and 6, and refreshed the new same-tag distinction against the live DAG. Current-DAG repair recheck: read the newly added atlas-point-comparison and atlas-test-open-subsets statements and recorded why their shared Tag 03H4 does not duplicate the reduced-closed-support construction. Rebase repair 2026-10-23: compared with the current unsplit live node, reread both external proof-cited statements and the two newly present same-tag open-subspace lemmas, and documented their distinct conclusions; all four supporting ids remain new and the explicit fibre-product repair remains valid. Landing-refusal repair: revalidated the changed proper-base-change statement, specialized its current B/Y/Y' hypotheses explicitly in Step 6, refreshed the verbatim citation, and checked the new proper-composition and quasi-compact-fppf-local same-tag nodes. Normalized retained proof TeX escaping.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Steps 2 and 6 use existence and the categorical universal property of sheaf fibre products of algebraic spaces; the scheme fibre-product definition in this unit does not establish this for algebraic spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-703134508",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-703134508 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, the cited statements and the Stacks sources: 0A4Y, 0ACK (4)/(5)/(8), 04NW, 03IQ, 04XZ, 04XY. Since the previous head c1c1, only Step 6 and split_report changed. Step 6 now instantiates the rewritten lem-sfb-space-proper-base-change with B=Y=S and Y'=S', which is correct. Steps 1-6 hold. Step 1: Z is the reduced closed subspace on T and h=f∘i is proper. Step 2: |Z_K|=T_K, and finite iff h is quasi-finite along the fibre. That uses 0ACK: separated implies decent, and Z_K is quasi-compact and discrete. Step 3: V=S∖h(|Z|∖Q_h), which is closed-complement open by properness. Step 4 is elementary and covers empty fibres. Step 5 gives field independence of finiteness only, not of point counts. Step 6 uses X'_L=X_L and never claims reducedness after base change. The new nodes reduced-closed-support (03IQ/02YW/03H4), quasifinite-locus-open (04NW) and finite-fibre-quasifinite-criterion (0ACK; finite type is necessary) are true and statement-only. None restates the item. One repair: since the last review, Q32 created lem-sfb-space-proper-composition (04XY, same unit). The new node lem-sfb-space-closed-subspace-proper (stated as 04XZ+04XY) therefore duplicated that node's composition clause. I narrowed it, keeping its id, to 04XZ: a closed immersion of algebraic spaces is proper. Steps 1 and 3 of the item now also cite proper-composition, and it is added to proof_deps. rg -L by tag and keyword found no other algebraic-space duplicate; the 0ABM and 03KL a1 nodes are not the open locus. Batch-5: def-trf-algebraic-space and def-a1-space-point-topology are definitions. lem-trf-space-fibre-products-etale-covers (accepted declared tool_use), proper-base-change and proper-composition are general foundations, not steps of the trace formula or Poincaré duality proofs, so all are accepted. No SGA citation. Edge cases checked: T=∅, empty fibres, P^1 fibres, sections, inseparable extensions.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceClosedSubsetFiniteFibreOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isOpen_closedSupportFiniteFibreLocus",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.closedSupportFibre",
+   "AlgebraicGeometry.AlgebraicSpace.supportResidueFieldPoint",
+   "AlgebraicGeometry.AlgebraicSpace.closedSupportFiniteFibreLocus",
+   "AlgebraicGeometry.AlgebraicSpace.isOpen_closedSupportFiniteFibreLocus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceClosedSubsetFiniteFibreOpen.lean",
+  "statement": "theorem isOpen_closedSupportFiniteFibreLocus {B : Scheme.{u}} (S : Over B) (X : AlgebraicSpace B) (f : X ⟶ schemeSpace S) (hf : MapIsProper f) (T : Set (Point X.obj.obj)) (hT : IsClosed T) : IsOpen (closedSupportFiniteFibreLocus f.hom.hom T) ∧ (∀ (S' : Over B) (g : S' ⟶ S), closedSupportFiniteFibreLocus (Limits.pullback.snd f.hom.hom (yoneda.map g)) (closedSupportFibre f.hom.hom T g) = g.left ⁻¹' closedSupportFiniteFibreLocus f.hom.hom T) ∧ ∀ (s : S.left) (K : Type u) [Field K] [Algebra (S.left.residueField s) K], s ∈ closedSupportFiniteFibreLocus f.hom.hom T ↔ (closedSupportFibre f.hom.hom T (supportResidueFieldPoint S s K)).Finite",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical support fibre, residue-field point and geometric finite-fibre locus are explicit helper constructions of this node. The theorem states openness, arbitrary scheme base-change equality and equivalence with finiteness after every residue-field extension. Existing algebraic-space topology, properness and sheaf pullbacks are reused. Review FIX (2026-10-24): the inverse-image sets are stated through the point classes and PointRepresentative.map of the stmt_dep def-a1-space-point-topology (closedSupportFibre is the set of classes of representatives of the fibre product whose first projection has class in T, and the base-change clause uses closedSupportFibre f T g for T'), instead of `mapPoint … ⁻¹' T`, whose owner def-sfb-proper-curve-moduli is not a stmt_dep. Equivalent: mapPoint (Quot.mk p) is Quot.mk (p.map _) by definition. The unused private import of the proof-dependency module ReducedClosedSubspaceSupport was dropped.",
+  "fixed_by": "NT-stage2-cc-e0ebfcf77"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0ebfcf77",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Mathematics matches node/Stacks 0A4Y, 03IQ, 0ACK: MapIsProper hypothesis, closed T in the atlas point topology, geometric fibre per def-weil-geometric-fibre, openness, arbitrary scheme base-change equality, field-extension equivalence including κ(s); no extra hypotheses; universes u; edge cases (empty T, empty fibres, identity base change) covered; helpers carry real data; sorry-only proof; docstrings and verbatim statement OK; no H4 duplicate. H2 fixed: mapPoint (owner def-sfb-proper-curve-moduli, not a stmt_dep) replaced in closedSupportFibre by the PointRepresentative.map set-builder from stmt_dep def-a1-space-point-topology (same set by definition); base-change T' now closedSupportFibre f.hom.hom T g; unused private import of ReducedClosedSubspaceSupport dropped. Fixed module compiles clean (nt_compile --json, 3.9 s); lean-record gives the new statement verbatim; refit_record gives no refusals."
+ }
+}

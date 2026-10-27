@@ -1,0 +1,252 @@
+{
+ "id": "lem-sf-varying-coefficient-composite-sequences",
+ "kind": "statement",
+ "title": "Composing functors on sequences with varying coefficient categories",
+ "statement": "For $n\\ge1$, let $\\mathcal A_n,\\mathcal B_n,\\mathcal C_n$ be categories, with functors $S_n^{\\mathcal A}:\\mathcal A_n\\to\\mathcal A_{n+1}$ and similarly $S_n^{\\mathcal B},S_n^{\\mathcal C}$. Write $\\operatorname{Seq}(\\mathcal A,S^{\\mathcal A})$ for the category whose objects are families $H_n\\in\\mathcal A_n$ with arrows $h_n:H_{n+1}\\to S_n^{\\mathcal A}H_n$, and whose morphisms $a:(H,h)\\to(H',h')$ are families $a_n:H_n\\to H'_n$ satisfying $S_n^{\\mathcal A}(a_n)h_n=h'_na_{n+1}$; identities and composition are componentwise. Use the analogous categories for $\\mathcal B,\\mathcal C$; this extends the inverse-system convention of [def-weil-inverse-system]. Let $J_n:\\mathcal A_n\\to\\mathcal B_n$ and $D_n:\\mathcal B_n\\to\\mathcal C_n$ be functors equipped with specified natural isomorphisms\n$$e_n:J_{n+1}S_n^{\\mathcal A}\\xrightarrow{\\sim}S_n^{\\mathcal B}J_n,\\qquad c_n:D_{n+1}S_n^{\\mathcal B}\\xrightarrow{\\sim}S_n^{\\mathcal C}D_n.$$\nThen there are functors $\\widehat J:\\operatorname{Seq}(\\mathcal A,S^{\\mathcal A})\\to\\operatorname{Seq}(\\mathcal B,S^{\\mathcal B})$ and $\\widehat D:\\operatorname{Seq}(\\mathcal B,S^{\\mathcal B})\\to\\operatorname{Seq}(\\mathcal C,S^{\\mathcal C})$, with levels $J_nH_n,D_nL_n$, transitions $e_n(H_n)J_{n+1}(h_n),c_n(L_n)D_{n+1}(d_n)$, and component maps $J_n(a_n),D_n(a_n)$, respectively. Their composite has level $D_nJ_nH_n$ and transition\n$$v_n=c_n(J_nH_n)\\circ D_{n+1}(e_n(H_n))\\circ D_{n+1}(J_{n+1}(h_n)).$$\nFor every $\\alpha:(L,d)\\to\\widehat J(H,h)$ in $\\operatorname{Seq}(\\mathcal B,S^{\\mathcal B})$, set $b_n=D_n(\\alpha_n)$ and $u_n=c_n(L_n)D_{n+1}(d_n)$. Then\n$$S_n^{\\mathcal C}(b_n)\\circ u_n=v_n\\circ b_{n+1}.$$\nThe composite functor agrees with the sequence functor for $D_nJ_n$ equipped with the pasted coefficient comparison $c_n(J_n(-))\\circ D_{n+1}(e_n(-))$, on objects, transitions and morphisms. All functors preserve componentwise isomorphisms. No common category for the different levels and no strict lift of these objects from a derived category is assumed.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0030 (definition-system-over-poset) for the inverse-sequence convention only. Agent-formulated extraction from lem-sf-compact-support-proper-image-tower, original proof Steps 1--3: functorial transport of the strict open comparison through direct image, retaining the factored compact-support transition; the tag does not assert this varying-category construction."
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "The convention of [def-weil-inverse-system] is recovered when all level categories coincide and all $S_n$ are identities. For varying levels, identity families satisfy the required squares because $S_n(1)=1$. If $a:H\\to H'$ and $a':H'\\to H''$ satisfy the squares, then\n$$S_n(a'_na_n)h_n=S_n(a'_n)S_n(a_n)h_n=S_n(a'_n)h'_na_{n+1}=h''_na'_{n+1}a_{n+1}.$$\nThus componentwise composition is defined; its associativity and units hold at each level. This verifies that each stated sequence category is a category.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0030 (definition-system-over-poset), with the varying-level category checked directly"
+   }
+  },
+  {
+   "text": "Put $t_n=e_n(H_n)J_{n+1}(h_n)$ and $t'_n=e_n(H'_n)J_{n+1}(h'_n)$. For a sequence morphism $a$, naturality of $e_n$, followed by its given square, gives\n$$S_n^{\\mathcal B}(J_n(a_n))t_n=e_n(H'_n)J_{n+1}(S_n^{\\mathcal A}(a_n))J_{n+1}(h_n)=e_n(H'_n)J_{n+1}(h'_n)J_{n+1}(a_{n+1})=t'_nJ_{n+1}(a_{n+1}).$$\nEvery factor lies in $\\mathcal B_{n+1}$. Hence the displayed component maps define morphisms. The equations $J_n(1)=1$ and $J_n(a'_na_n)=J_n(a'_n)J_n(a_n)$ verify the functor laws for $\\widehat J$. The same calculation with $(\\mathcal A,\\mathcal B,J,e)$ replaced by $(\\mathcal B,\\mathcal C,D,c)$ defines $\\widehat D$. Its object transition is $c_n(L_n)D_{n+1}(d_n)$ as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors); direct calculation from the data in the statement"
+   }
+  },
+  {
+   "text": "Evaluate $\\widehat D\\widehat J$ on $(H,h)$. Its level is $D_nJ_nH_n$; its transition is\n$$c_n(J_nH_n)D_{n+1}(e_n(H_n)J_{n+1}(h_n))=c_n(J_nH_n)D_{n+1}(e_n(H_n))D_{n+1}(J_{n+1}(h_n))=v_n,$$\nby the composition law for $D_{n+1}$. For the specified $\\alpha$ its input square is $S_n^{\\mathcal B}(\\alpha_n)d_n=e_n(H_n)J_{n+1}(h_n)\\alpha_{n+1}$. Naturality of $c_n$ and this square give\n$$S_n^{\\mathcal C}(D_n\\alpha_n)c_n(L_n)D_{n+1}(d_n)=c_n(J_nH_n)D_{n+1}(S_n^{\\mathcal B}(\\alpha_n)d_n)=v_nD_{n+1}(\\alpha_{n+1}).$$\nThe ends are maps $D_{n+1}L_{n+1}\\to S_n^{\\mathcal C}D_nJ_nH_n$ in $\\mathcal C_{n+1}$, proving the requested equation for $b_n,u_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors); direct calculation from the data in the statement"
+   }
+  },
+  {
+   "text": "Define $p_n(H)=c_n(J_nH)D_{n+1}(e_n(H))$. For any $a:H\\to H'$ in $\\mathcal A_n$, naturality of $c_n$ then of $e_n$ gives\n$$S_n^{\\mathcal C}(D_nJ_n(a))p_n(H)=c_n(J_nH')D_{n+1}(S_n^{\\mathcal B}(J_n(a))e_n(H))=p_n(H')D_{n+1}(J_{n+1}(S_n^{\\mathcal A}(a))).$$\nThus $p_n$ is natural. Its component inverse is $D_{n+1}(e_n(H)^{-1})c_n(J_nH)^{-1}$: both composites cancel to identities by the functor laws. The preceding naturality equation, multiplied by the component inverses, gives naturality of the inverse. Therefore $p_n$ is the required coefficient comparison isomorphism. The construction checked in Step 2, applied to $D_nJ_n,p_n$, has transitions $p_n(H_n)D_{n+1}J_{n+1}(h_n)=v_n$ and arrows $D_nJ_n(a_n)$. These are precisely the composite functor's data, so the functors agree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors); direct calculation from the data in the statement"
+   }
+  },
+  {
+   "text": "If a sequence morphism $a:(H,h)\\to(H',h')$ has invertible components, multiplying its square by inverses gives\n$$S_n(a_n^{-1})h'_n=h_na_{n+1}^{-1}.$$\nHere $S_n(a_n^{-1})$ is inverse to $S_n(a_n)$ because $S_n$ preserves their two identity composites. Thus $(a_n^{-1})$ is a sequence morphism and its two composites with $a$ are the identity families. Each $J_n(a_n)$ has inverse $J_n(a_n^{-1})$ by the same functor laws, and likewise for $D_n$ and $D_nJ_n$. This proves preservation of componentwise isomorphisms for all the asserted functors. Every calculation took place at a single level; no common ambient category or strict derived lift was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors); direct calculation from the data in the statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Direct varying-category calculation from Tags 001B, 001I and the inverse-system convention of Tag 0030; these tags define the ingredients, not the asserted construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilinear.*(sequence|tower)|((sequence|tower).*(restrictScalars|restriction))|section.*(pseudofunctor|Grothendieck)",
+   "results": "25 hits: Mathlib/Topology/Sheaves/Over.lean, Mathlib/Topology/MetricSpace/PiNat.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SeparableClosure.lean.  The hits give ordinary fixed-category sequence constructors, linear functors, or a Grothendieck map for strictly natural transformations into Cat. They do not construct sequence functors from the specified comparison isomorphisms between varying categories or identify the pasted transition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation commuting with change of coefficient functors induces maps of sequences in varying categories",
+   "results": "8 hits: CategoryTheory.NatTrans.mk, CategoryTheory.ShortComplex.homologyMap_mapNatTrans, CategoryTheory.Functor.HomObj.map, CategoryTheory.NatTrans, CategoryTheory.NatTrans.ofOpSequence, CategoryTheory.Functor.OfSequence.map, CategoryTheory.NatTrans.ofSequence, CategoryTheory.NatTrans.mapHomologicalComplex.  The hits give ordinary fixed-category sequence constructors, linear functors, or a Grothendieck map for strictly natural transformations into Cat. They do not construct sequence functors from the specified comparison isomorphisms between varying categories or identify the pasted transition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"map\"",
+   "results": "12 hits: CategoryTheory.Grothendieck.map, CategoryTheory.Grothendieck.map_id_eq, CategoryTheory.Grothendieck.map_obj_base, CategoryTheory.Grothendieck.forget_map, CategoryTheory.Grothendieck.mapIdIso, CategoryTheory.Grothendieck.map_comp_eq, CategoryTheory.Grothendieck.mapCompIso, CategoryTheory.Grothendieck.map_obj.  The hits give ordinary fixed-category sequence constructors, linear functors, or a Grothendieck map for strictly natural transformations into Cat. They do not construct sequence functors from the specified comparison isomorphisms between varying categories or identify the pasted transition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of coefficient comparison for two composable functors carries a compatible levelwise morphism to a morphism of semilinear towers with the explicitly composed transitions",
+   "results": "8 hits: CategoryTheory.ComposableArrows.naturality', ModuleCat.restrictScalarsComp'App_hom_naturality, CategoryTheory.ComposableArrows.naturality'_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, ModuleCat.restrictScalarsComp'App_inv_naturality, CondensedMod.hom_naturality_apply, LightCondMod.hom_naturality_apply, AlgebraicTopology.DoldKan.hσ'_naturality.  The hits give ordinary fixed-category sequence constructors, linear functors, or a Grothendieck map for strictly natural transformations into Cat. They do not construct sequence functors from the specified comparison isomorphisms between varying categories or identify the pasted transition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible functors between varying categories with coefficient restriction induce a functor on semilinear inverse sequences; the functor for a composite equals the composite sequence functors",
+   "results": "8 hits: CategoryTheory.Functor.instLinearComp, CategoryTheory.Functor.OfSequence.map_comp, CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Functor.linear_of_full_essSurj_comp, CategoryTheory.Functor.OfSequence.map_comp_assoc, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj, CategoryTheory.Linear.inducedCategory.  The hits give ordinary fixed-category sequence constructors, linear functors, or a Grothendieck map for strictly natural transformations into Cat. They do not construct sequence functors from the specified comparison isomorphisms between varying categories or identify the pasted transition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def map |map_comp_eq|sectionFunctor|sections.*[Ff]unctor",
+   "results": "5 hits: 248, 300, 312, 313, 392.  The hits give ordinary fixed-category sequence constructors, linear functors, or a Grothendieck map for strictly natural transformations into Cat. They do not construct sequence functors from the specified comparison isomorphisms between varying categories or identify the pasted transition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functors between sequences in varying categories with natural coefficient comparison isomorphisms induce functors on compatible sequences and their composites use the pasted comparison",
+   "results": "8 hits: CategoryTheory.Functor.ShiftSequence.induced, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans, CategoryTheory.Functor.OfSequence.map_comp, CategoryTheory.Functor.OfSequence.map_comp_assoc, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, CategoryTheory.ComposableArrows.mapFunctorArrows, CategoryTheory.ComposableArrows.mapFunctorArrows_app, CategoryTheory.SmallObject.SuccStruct.extendToSucc.map_comp. No match: OfSequence is in one fixed category; sectionsFunctor is set-valued; Grothendieck.map takes strictly natural Cat-valued diagrams, and its bicategorical variant maps total categories rather than the specified inverse-section categories. Endofunctor.Algebra.functorOfNatTransComp changes an algebra structure within one category. None directly supplies this varying-level construction and its transition formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionFunctor|def map |map_comp_eq",
+   "results": "5 hits: 248, 300, 312, 313, 392. No match: OfSequence is in one fixed category; sectionsFunctor is set-valued; Grothendieck.map takes strictly natural Cat-valued diagrams, and its bicategorical variant maps total categories rather than the specified inverse-section categories. Endofunctor.Algebra.functorOfNatTransComp changes an algebra structure within one category. None directly supplies this varying-level construction and its transition formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between varying categories induce functors on sections with comparison natural isomorphisms and respect composition",
+   "results": "8 hits: CategoryTheory.Functor.sectionsFunctor, CategoryTheory.NatTrans, CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp, CategoryTheory.NatTrans.mk, CategoryTheory.Limits.Types.limNatIsoSectionsFunctor, CategoryTheory.Functor.sectionsFunctor_map_coe, CategoryTheory.Functor.sectionsEquivHom_naturality, CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso. No match: OfSequence is in one fixed category; sectionsFunctor is set-valued; Grothendieck.map takes strictly natural Cat-valued diagrams, and its bicategorical variant maps total categories rather than the specified inverse-section categories. Endofunctor.Algebra.functorOfNatTransComp changes an algebra structure within one category. None directly supplies this varying-level construction and its transition formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"map\"",
+   "results": "12 hits: CategoryTheory.Grothendieck.map, CategoryTheory.Grothendieck.map_id_eq, CategoryTheory.Grothendieck.map_obj_base, CategoryTheory.Grothendieck.forget_map, CategoryTheory.Grothendieck.mapIdIso, CategoryTheory.Grothendieck.map_comp_eq, CategoryTheory.Grothendieck.mapCompIso, CategoryTheory.Grothendieck.map_obj. No match: OfSequence is in one fixed category; sectionsFunctor is set-valued; Grothendieck.map takes strictly natural Cat-valued diagrams, and its bicategorical variant maps total categories rather than the specified inverse-section categories. Endofunctor.Algebra.functorOfNatTransComp changes an algebra structure within one category. None directly supplies this varying-level construction and its transition formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of categories with successive transition functors has a category of inverse sections; compatible level functors with natural isomorphisms act on these sections and paste under composition",
+   "results": "8 hits: CategoryTheory.Functor.sections_property, CategoryTheory.Functor.sectionsFunctor, CategoryTheory.Functor.sections, CategoryTheory.Functor.sectionsFunctor_obj, CategoryTheory.Functor.sectionsPrecomp, CategoryTheory.Limits.MulticospanIndex.sectionsEquiv, CategoryTheory.Functor.WellOrderInductionData.sectionsMk, CategoryTheory.Functor.sections_ext_iff. No match: OfSequence is in one fixed category; sectionsFunctor is set-valued; Grothendieck.map takes strictly natural Cat-valued diagrams, and its bicategorical variant maps total categories rather than the specified inverse-section categories. Endofunctor.Algebra.functorOfNatTransComp changes an algebra structure within one category. None directly supplies this varying-level construction and its transition formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-compact-support-proper-image-tower",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "original proof Steps 1--3: functorial transport of the strict open comparison through direct image, retaining the factored compact-support transition",
+   "via": [
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-varying-coefficient-composite-sequences",
+  "worker": "stage1",
+  "summary": "Constructed the varying-level sequence categories and both functors directly, wrote out naturality calculations for the specified morphism and pasted comparison, and checked inverses componentwise. Statement and inherited metadata retained. No new nodes: each step is a short calculation from the explicitly supplied functor/naturality axioms. No exact project attachment or Mathlib match found.",
+  "blueprint": "Nearest ancestor def-weil-integral-rational-qbar-compact-support: finite-level composite Rf_!=Rp_*j_! and its reduction transitions, through lem-sf-integral-compact-support-constructible and lem-sf-compact-support-proper-image-tower, original proof Steps 1--3. This item verifies precisely the categorical transport and pasted-comparison calculation; it does not assert a strict derived-system realization."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-0546a0e6d",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-0546a0e6d (reviewer sub-agent of L); spot-checked: The delivery is an item-only split with no new nodes. Its statement is the unchanged Q20 statement, and coord/repair-notes has no note for this item, so the re-split rule does not apply. The item has 5 elementary steps. Step 1 cites def-weil-inverse-system: with S_n=id and constant categories, Seq is exactly that node's tower convention, and closure under composition is checked levelwise. Step 2 shows the transitions e_n(H_n)J_{n+1}(h_n) are morphisms, using naturality of e_n plus J_{n+1} applied to the square; arrows lie in B_{n+1}. Step 3: the composite transition is v_n by functoriality of D_{n+1}, and naturality of c_n at alpha_n plus the alpha square gives S(b_n)u_n=v_n b_{n+1}; source and target check, and alpha need not be invertible. Step 4: p_n=c_n(J_n-)D_{n+1}(e_n-) is natural with inverse D(e^-1)c^-1, so the composite agrees literally with the sequence functor of (DJ,p). Step 5: componentwise-invertible morphisms invert in Seq. Sources: Stacks categories.tex Tag 0030 (l.2607), 001B and 001I via the tags file; they give conventions only, and proof_origin is correctly by=agent. No SGA is cited. The only citer, lem-sf-compact-support-proper-image-tower Step 2, uses exactly the stated equation with A,B,C=D(X|V|Y,P_n). An rg -L search of the DAG found no duplicate: lem-sf-derived-coefficient-sequence-realization, sk-def-sp-coefficient-towers, def-sp-varying-ring-* and lem-sbc-lower-star-plus-transition-comp are different statements. The no-match Mathlib verdict is plausible: Grothendieck.map needs strict naturality and OfSequence works in a single category. proof_deps equals the union of uses. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.VaryingCoefficientCompositeSequences",
+  "declaration": "CategoryTheory.CoefficientSequence.composite_spec",
+  "declarations": [
+   "CategoryTheory.CoefficientSequence.Sequence",
+   "CategoryTheory.CoefficientSequence.Hom",
+   "CategoryTheory.CoefficientSequence.identity_comm",
+   "CategoryTheory.CoefficientSequence.homId",
+   "CategoryTheory.CoefficientSequence.composition_comm",
+   "CategoryTheory.CoefficientSequence.homComp",
+   "CategoryTheory.CoefficientSequence.homId_comp",
+   "CategoryTheory.CoefficientSequence.homComp_id",
+   "CategoryTheory.CoefficientSequence.homComp_assoc",
+   "CategoryTheory.CoefficientSequence.sequenceCategory",
+   "CategoryTheory.CoefficientSequence.toInverseSystem",
+   "CategoryTheory.CoefficientSequence.mapObj",
+   "CategoryTheory.CoefficientSequence.map_comm",
+   "CategoryTheory.CoefficientSequence.mapHom",
+   "CategoryTheory.CoefficientSequence.mapHom_id",
+   "CategoryTheory.CoefficientSequence.mapHom_comp",
+   "CategoryTheory.CoefficientSequence.mapFunctor",
+   "CategoryTheory.CoefficientSequence.paste",
+   "CategoryTheory.CoefficientSequence.paste_app",
+   "CategoryTheory.CoefficientSequence.isIso_of_components",
+   "CategoryTheory.CoefficientSequence.composite_spec"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/VaryingCoefficientCompositeSequences.lean",
+  "statement": "theorem composite_spec (A : ℕ → Type uA) [∀ n, Category.{vA} (A n)] (B : ℕ → Type uB) [∀ n, Category.{vB} (B n)] (C : ℕ → Type uC) [∀ n, Category.{vC} (C n)] (S : ∀ n, A n ⥤ A (n + 1)) (T : ∀ n, B n ⥤ B (n + 1)) (U : ∀ n, C n ⥤ C (n + 1)) (J : ∀ n, A n ⥤ B n) (D : ∀ n, B n ⥤ C n) (e : ∀ n, S n ⋙ J (n + 1) ≅ J n ⋙ T n) (c : ∀ n, T n ⋙ D (n + 1) ≅ D n ⋙ U n) : (∀ (H : Sequence A S) (n : ℕ), ((mapFunctor J e ⋙ mapFunctor D c).obj H).transition n = (D (n + 1)).map ((J (n + 1)).map (H.transition n)) ≫ (D (n + 1)).map ((e n).hom.app (H.obj n)) ≫ (c n).hom.app ((J n).obj (H.obj n))) ∧ (∀ (H : Sequence A S) (L : Sequence B T) (α : L ⟶ (mapFunctor J e).obj H) (n : ℕ), ((D (n + 1)).map (L.transition n) ≫ (c n).hom.app (L.obj n)) ≫ (U n).map ((D n).map (α.app n)) = (D (n + 1)).map (α.app (n + 1)) ≫ ((D (n + 1)).map ((J (n + 1)).map (H.transition n)) ≫ (D (n + 1)).map ((e n).hom.app (H.obj n)) ≫ (c n).hom.app ((J n).obj (H.obj n)))) ∧ mapFunctor J e ⋙ mapFunctor D c = mapFunctor (fun n ↦ J n ⋙ D n) (paste J D e c) ∧ (∀ (H K : Sequence A S) (a : H ⟶ K), (∀ n, IsIso (a.app n)) → ∀ n, IsIso (((mapFunctor J e).map a).app n)) ∧ (∀ (L M : Sequence B T) (a : L ⟶ M), (∀ n, IsIso (a.app n)) → ∀ n, IsIso (((mapFunctor D c).map a).app n)) ∧ (∀ (H K : Sequence A S) (a : H ⟶ K), (∀ n, IsIso (a.app n)) → ∀ n, IsIso (((mapFunctor J e ⋙ mapFunctor D c).map a).app n))",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The owning node itself introduces the varying-level sequence categories and their canonical functors. Sequence, Hom, componentwise category operations, mapObj, mapHom, mapFunctor, paste and the constant-coefficient bridge have real data. Named proof-only helpers render the category/functor laws and proof Steps 1--5 of this same node; paste_app records the specified component formula. Positive level n+1 is represented by n : ℕ. No statement or dependency field changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9278710de",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Node diff vs live: only lean added; statement verbatim; 21 declarations present; Worker report + Second reading sections present. Clauses match: n:ℕ=level n+1; Hom.comm = S(a_n)h_n=h'_n a_{n+1}; e,c specified isos; mapFunctor real data (J(h)≫e, J.map a); conj1 v_n = D(Jh)≫D(e)≫c(JH); conj2 for arbitrary α: (D d≫c L)≫U(Dα_n)=D α_{n+1}≫v_n; conj3 functor equality with paste (paste_app pins c(J−)∘D(e−)); conj4-6 componentwise-iso preservation; toInverseSystem uses ofOpSequence (def-weil-inverse-system). Independent universes, no unbound vars, no hollow defs, all proofs named sorry, docstrings/blueprint ok, lines ≤100, imports used, no name clash. Maintainer note: NZ DerivedCoefficientSequence.Sequence/Hom (theorem-node module, landed 11:16Z after this base 10:44Z) has the same shape; recommend a single owning def node; not citable by this item under project rules, so no RETURN. No compile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261022T144050-L-1492215",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CoefficientSequence.composite_spec",
+   "CategoryTheory.CoefficientSequence.composition_comm",
+   "CategoryTheory.CoefficientSequence.homComp_assoc",
+   "CategoryTheory.CoefficientSequence.homComp_id",
+   "CategoryTheory.CoefficientSequence.homId_comp",
+   "CategoryTheory.CoefficientSequence.identity_comm",
+   "CategoryTheory.CoefficientSequence.isIso_of_components",
+   "CategoryTheory.CoefficientSequence.mapHom_comp",
+   "CategoryTheory.CoefficientSequence.mapHom_id",
+   "CategoryTheory.CoefficientSequence.map_comm",
+   "CategoryTheory.CoefficientSequence.paste_app"
+  ],
+  "sorry_after": []
+ }
+}

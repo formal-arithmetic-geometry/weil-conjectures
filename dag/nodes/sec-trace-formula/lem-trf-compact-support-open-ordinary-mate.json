@@ -1,0 +1,121 @@
+{
+ "id": "lem-trf-compact-support-open-ordinary-mate",
+ "kind": "statement",
+ "title": "Ordinary open restriction evaluation and its inverse mate",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be a finite field extension, let $j:X\\to Z$ be an open immersion of schemes, and let $o$ be any IntegralOpenReduction.Operations presentation of [def-sf-integral-open-operations], with its independent scheme and coefficient universes. For every $n\\in\\mathbf N$ there is a natural isomorphism from systemRestriction followed by level evaluation on $X$ to level evaluation on $Z$ followed by finiteRestriction at $n$. Under the specified ordinary system adjunction and finite localized adjunction, the inverse mate of its forward natural transformation is exactly extensionEvaluation.inv of that presentation. All operations in this assertion are ordinary functors on module sheaves.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; specialization of coherence proof steps 1--3 and 6"
+ },
+ "stmt_deps": [
+  "def-sf-integral-open-operations"
+ ],
+ "proof": [
+  {
+   "text": "The unit_evaluation identity in the open-slice presentation shows that the inverse mate of restrictionEvaluation.hom is extensionEvaluation.inv: apply the finite adjunction Hom equivalence, compose with the invertible restriction of extensionEvaluation.hom, and cancel.",
+   "uses": [
+    "def-sf-integral-open-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mate of transportEvaluation.inv between the two coefficient-equivalence adjunctions is invertible, because all factors in its unit/counit formula are invertible. Paste it with the first square. The horizontal-pasting law for mates makes the resulting right square invertible. Apply inverse mates and cancel the equivalence; expanding the pasted left square is exactly extensionEvaluation.inv.",
+   "uses": [
+    "def-sf-integral-open-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-open-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Open-slice unit normalization, equivalence adjunctions, and the horizontal pasting law for ordinary mates; Zheng Construction 4.1 and Stacks 03DI--03DJ, 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation on a sequence site commutes with derived direct image and with the units and counits of the componentwise adjunction",
+   "results": "Eight hits, including pushforwardPushforwardAdj unit/counit formulas and Adjunction.derived_unit; no specialization to these actual coefficient functors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image evaluation natural isomorphism normalized by adjunction unit and counit",
+   "results": "Eight results for general adjunction and derived normalization; no specialization to the actual coefficient system functors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "Five general conjugation lemmas, without the required geometric coefficient and evaluation squares.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*evaluation|evaluation.*rightDerivedFunctor",
+   "results": "No Mathlib results.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportSystemNormalizedPresentation",
+  "date": "2026-10-27",
+  "group": "E6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Proof Step 1 (Global powers), compatibility with composition before rationalization; the comparison prerequisite of prop-trf-rational-frobenius-integral-model.proof.md (2)-(3). Coherence proof steps 1--3, 6.; Ordinary open restriction evaluation and its inverse mate",
+   "via": [
+    "lem-trf-compact-support-normalized-presentation",
+    "lem-trf-compact-support-system-evaluation-coherence",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportOpenOrdinaryMate",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportOpenOrdinaryMate.lean",
+  "declaration": "WeilConjectures.compactSupportOpenOrdinaryMate",
+  "statement": "theorem compactSupportOpenOrdinaryMate\n    {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :\n    ∃ d : IntegralOpenReduction.systemRestriction l E j o ⋙\n          coefficientSequenceEvaluation l E X n ≅\n        coefficientSequenceEvaluation l E Z n ⋙\n          IntegralOpenReduction.finiteRestriction l E j o n,\n      ((mateEquiv (IntegralOpenReduction.ordinarySystemAdjunction l E j o)\n        ((o.finite n).toAdjunction.comp\n          (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}\n            (integralCoefficientCommRingSheaf l E Z n)\n            (IntegralOpenReduction.openObject j)))).symm\n        (TwoSquare.mk _ _ _ _ d.hom)).natTrans =\n          (IntegralOpenReduction.extensionEvaluation l E j o n).inv",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T034634-L-3668344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T034634-L-3668344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

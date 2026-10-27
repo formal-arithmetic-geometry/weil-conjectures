@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-completed-coefficient-tower-limit-acyclic-resolution",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Completed tower complexes admit K-injective resolutions",
+ "statement": "For the completed coefficient tower and any scheme morphism f, structural map c and tower complex I occurring in the completed tower pushforward argument, there exist a K-injective target tower complex T and a quasi-isomorphism from the levelwise pushforward of I to T.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, K-injective replacement step"
+ },
+ "proof": [
+  {
+   "text": "Put B = Mod Y (R l E Y) and w = max u (t+1). Apply SheafOfModules.isGrothendieckAbelianOfUniverses to the original pro-etale site and the completed ring sheaf. The common universe is w; neither the site nor the ring is replaced. Choose its separator G.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The tower category has pointwise abelianness, filtered colimits and exact filtered colimits, using the functor-category instances. Thus it satisfies HasFilteredColimitsOfSize and AB5OfSize in w.",
+   "uses": [
+    "lem-weil-pbc-functor-abelian-colimits",
+    "lem-weil-pbc-functor-exact-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each n in the opposite natural-number category, let L_n be the left adjoint of evaluation at n. The family L_n(G) separates towers: if a and b agree after every map from these objects, adjunction says their nth components agree after every map from G. Since G is a separator, those components agree. Natural transformation extensionality gives a=b. ObjectProperty.IsSeparating.isSeparator_coproduct makes the coproduct of this countable family a separator. This proves the tower category is Grothendieck abelian.",
+   "uses": [
+    "lem-weil-pbc-evaluation-free-diagram-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pushforward functor is additive, so postcomposition on towers preserves zero morphisms and defines its functor on cochain complexes. Apply HasKInjectiveResolutions.exists_isKInjective, supplied by the existing Grothendieck K-injective resolution instance, to the levelwise pushforward of I. It returns T, its K-injectivity, a monomorphic quasi-isomorphism j. Forget monicity and reorder the witnesses to obtain precisely the unchanged conclusion.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-functor-abelian-colimits",
+  "lem-weil-pbc-functor-exact-colimits",
+  "lem-weil-pbc-evaluation-free-diagram-adjunction",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079Q (remark-existence-D), the ringed-site example, and the small-diagram generator argument of lem-weil-pbc-small-module-diagrams-grothendieck; the existing source-library K-injective resolution theorem lem-sfb-grothendieck-k-injective. F6 specializes the evaluation-adjoint proof to natural-number towers while retaining independent site and ring universes."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientTowerLimitAcyclic",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-coefficient-tower-limit-acyclic",
+   "place": "Proof Step 2"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientTowerLimitAcyclicResolution",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientTowerLimitAcyclicResolution.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.completedTower_exists_isKInjective",
+  "statement": "theorem completedTower_exists_isKInjective {X Y : Scheme.{t}} (f : X ⟶ Y) (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X)) (I : CochainComplex (ℕᵒᵖ ⥤ Mod X (R l E X)) ℤ) : ∃ (T : CochainComplex (ℕᵒᵖ ⥤ Mod Y (R l E Y)) ℤ) (j : ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f c)).mapHomologicalComplex (.up ℤ)).obj I) ⟶ T), T.IsKInjective ∧ QuasiIso j",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T235931-L-1471563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T021321-L-2756813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sp-reduction-tower-tor-intervals",
+ "kind": "statement",
+ "title": "Integral and evaluated reduction Tor intervals",
+ "statement": "Fix ell,E,T,D and a coefficient-ring isomorphism e as in [def-sp-reduction-tower-data]. Let red be any derived functor with evaluation isomorphisms to D.scalar extension along e and the quotient projections. Assume T qcqs. For a source complex M whose internalization is bounded constructible, that internalization has finite Tor amplitude. For every ordered Tor interval [a,b] of it, every evaluated reduction has HasProEtaleTorAmplitude in [a,b] and its homology vanishes outside [a,b]. No normalization condition or finite-level constructibility conclusion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+  "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+ },
+ "stmt_deps": [
+  "def-sp-reduction-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "The section/internal equivalence identifies integral coefficients and their derived tensor. Apply the integral qcqs Tor theorem, transporting the finite extension E to an isomorphic finite intermediate field if needed; scalar and module equivalences preserve finite constant models. A cohomological interval [r,s] gives [r-1,s], hence finite Tor amplitude.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+    "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+   }
+  },
+  {
+   "text": "For every quotient-module N in degree zero use Res((M tensor R_n) tensor N) = M tensor Res N. Exact scalar restriction preserves underlying homology. Thus any Tor interval of M bounds every such tensor, with no flatness of the quotient map.",
+   "uses": [
+    "lem-trf-site-derived-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+    "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+   }
+  },
+  {
+   "text": "K-flat tensor comparison and the section/internal equivalence identify this with all the representative tests defining HasProEtaleTorAmplitude. Taking N to be the coefficient unit proves the same cohomological bound.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+    "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-proetale-tor-amplitude",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "lem-trf-site-derived-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md",
+  "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived reduction tower with constructible cohomology and uniform Tor amplitude",
+   "results": "HasDerivedCategory.standard; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; generic triangulated and t-structure declarations.",
+   "date": "2026-10-25",
+   "verdict": "No theorem about the chosen coefficient-tower presentation or its constructibility and Tor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars forms a normalized strict inverse system with uniform Tor amplitude",
+   "results": "localCohomology.diagram; Ext; CategoryTheory.Tor and Tor'; adic completion maps. Loogle Functor.IsLeftDerivedFunctor: unknown identifier, zero hits.",
+   "date": "2026-10-25",
+   "verdict": "No match. These generic homology constructions do not compare the fixed scalar and tower presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.?tower|reduction.?tower; SpReductionTower; spIntegralAbComparison; presentation descent and adjunct normalization",
+   "results": "msearch Mathlib grep: zero hits. Local Sheaf and WeilConjectures search finds the parent and consumers, generic strict tensor descent, successive quotient normalization, and stratified Postnikov comparison. Blueprint and DAG search finds no existing fixed-presentation comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing generic results; new statements isolate the remaining changes of presentation and strictly separate assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionTowerNormalized",
+  "date": "2026-10-25",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Construction, normalization, and constructibility assertions; final Tor-amplitude sentence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionTorIntervals",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionTorIntervals.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_tower_tor_intervals",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sp_reduction_tower_tor_intervals"
+  ],
+  "statement": "theorem sp_reduction_tower_tor_intervals\n    (D : SpCoefficientTowersAbelian l E T)\n    (coefficient : spIntegralSectionRing l E T ≅\n      WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)\n    (red : DerivedCategory (spIntegralSectionModules l E T) ⥤\n      spDerivedCoefficientTowers l E T D)\n    (evaluation : spReductionDerivedEvaluations l E T D coefficient red)\n    [CompactSpace T] [QuasiSeparatedSpace T]\n    (M : DerivedCategory (spIntegralSectionModules l E T))\n    (hM : constantModelBoundedConstructible (spIntegralCondensed l E) T\n      ((spIntegralInternalization l E T).obj M)) :\n    DerivedCategory.finiteTorAmplitude _ ((spIntegralInternalization l E T).obj M) ∧\n    ∀ (a b : ℤ), a ≤ b →\n      DerivedCategory.torAmplitudeIn _ a b ((spIntegralInternalization l E T).obj M) →\n      ∀ n : ℕ,\n        Scheme.HasProEtaleTorAmplitude T\n          (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))\n          ((spDerivedCoefficientEvaluation l E T D n).obj (red.obj M)) a b ∧\n        ∀ i : ℤ, (i < a ∨ b < i) → IsZero\n          ((@DerivedCategory.homologyFunctor\n            (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T\n              (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))\n            _ _ (HasDerivedCategory.standard _) i).obj\n            ((spDerivedCoefficientEvaluation l E T D n).obj (red.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9af5e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T162438-L-451995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9af5e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T162438-L-451995",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityReductionTowerData vs clone's old item (byte-identical 18-decl block); item proof vs det-sp-reduction-tower-normalized; 4 new sorry statements vs their nodes and the blueprint clauses; sandbox --all compile of the 6 delivered modules + 7 direct importers (all clean); #print axioms (sorryAx only via the 4 new lemmas)"
+ }
+}

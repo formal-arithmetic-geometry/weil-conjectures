@@ -30,104 +30,42 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-smooth-locally-standard-smooth] to the structural morphism $U\\to\\operatorname{Spec}k$ at $u$. The affine open in $\\operatorname{Spec}k$ contains its unique point, so it is all of $\\operatorname{Spec}k$. Obtain an affine neighbourhood $W=\\operatorname{Spec}A\\subseteq U$ of $u$. Unpack [def-weil-pbc-standard-smooth-algebra]: choose $n\\ge r\\ge0$ and an identification $A=k[y_1,\\ldots,y_n]/(F_1,\\ldots,F_r)$ such that the image of $\\det(\\partial F_a/\\partial y_b)_{1\\le a,b\\le r}$ is a unit of $A$. Write $a_b\\in A$ for the image of $y_b$, and let $\\mathfrak q$ be the prime of $u$ in $A$.",
+   "text": "Apply [lem-pur-coordinate-differentials-affine-chart] to choose an affine open W containing x and a submersive presentation P with r+d variables, r relations, and P.map the first-r inclusion. Retain its canonical cotangent-fibre isomorphism Phi and its equality identifying the prescribed coordinate morphism with Spec of polynomial evaluation followed by the affine-space spectrum isomorphism. Pull the given fibre basis back along Phi; its specified values make it the family 1 tensor d(h_j restricted to W).",
    "uses": [
-    "lem-weil-pbc-smooth-locally-standard-smooth",
-    "def-weil-pbc-standard-smooth-algebra",
-    "def-weil-affine-spectrum"
+    "lem-pur-coordinate-differentials-affine-chart"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01V7, lemma-smooth-locally-standard-smooth, applied to the structural morphism"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-standard-smooth-kahler-basis], $\\Omega_{A/k}$ has basis $da_{r+1},\\ldots,da_n$. The affine description in [def-sc-relative-differential-sheaf] and the germ identification in [lem-weil-pbc-spec-tilde-stalk-localization] identify the differential fibre at $u$ with $\\Omega_{A/k}\\otimes_A K$, where $K=\\kappa(u)$: on pure tensors, $((\\omega/s)\\otimes\\lambda)\\mapsto\\omega\\otimes\\overline s^{-1}\\lambda$, with inverse $\\omega\\otimes\\lambda\\mapsto(\\omega/1)\\otimes\\lambda$. Here $s\\notin\\mathfrak q$, so its residue is invertible. Tensoring the basis and its coordinate inverse gives the basis $da_{r+1},\\ldots,da_n$ of this fibre [def-weil-module-base-change]. The assumed basis $dh_1,\\ldots,dh_d$ therefore has $d=n-r$ elements.",
+   "text": "By [lem-weil-pbc-standard-smooth-kahler-basis], the complementary last-d variables give a global basis of Omega_{A/k}, where A=Gamma(W,O). Reindex this basis and the prescribed fibre basis by ULift(Fin d). Apply [lem-pur-etale-coordinates-of-fibre-basis] to the evaluation A to kappa(x). This gives f in A with nonzero evaluation at x and an etale polynomial evaluation map k[T_j] to A[1/f] sending T_j to h_j restricted to W, then localized.",
    "uses": [
     "lem-weil-pbc-standard-smooth-kahler-basis",
-    "def-sc-relative-differential-sheaf",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "def-weil-module-base-change"
+    "lem-pur-etale-coordinates-of-fibre-basis"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00T7, lemma-standard-smooth, part (2); passage to the fibre uses the affine differential sheaf and module localization"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose polynomial lifts $H_j\\in k[y_1,\\ldots,y_n]$ of $h_j|_W\\in A$. Put $R=k[T_1,\\ldots,T_d]$, acting on $A$ by $T_j\\mapsto h_j|_W$. This is precisely the map on affine coordinate rings of $h|_W$ [def-sbc-affine-space, def-weil-affine-spectrum]. There is an isomorphism of $R$-algebras $$A\\cong R[y_1,\\ldots,y_n]/(F_1,\\ldots,F_r,H_1-T_1,\\ldots,H_d-T_d).$$ Indeed, evaluation $T_j\\mapsto H_j$ identifies $k[T,y]/(H_j-T_j)_j$ with $k[y]$, with inverse induced by inclusion of $k[y]$; quotienting by the $F_a$ gives the displayed isomorphism. There are $r+d=n$ equations.",
+   "text": "Let l:Spec A[1/f] to Spec A be the localization map and i=l followed by the affine-chart immersion into U. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] identifies the localized coordinate map with l followed by the original evaluation map. Thus [lem-weil-pbc-etale-ring-map-iff-etale-affine] and the chart equality show that i followed by the prescribed coordinate map is etale. By [lem-weil-pbc-principal-localization-open-immersion], i is an open immersion with image V=D_W(f). Evaluation of f at x is nonzero, so x is in V. The canonical isomorphism from Spec A[1/f] to V carries i to V.ι, and etaleness is invariant under that isomorphism. This proves the claimed restriction etale.",
    "uses": [
-    "def-sbc-affine-space",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GU, lemma-etale-at-point, condition (8): explicit presentation of the prescribed coordinate morphism"
-   }
-  },
-  {
-   "text": "Let $J$ be the $n\\times n$ Jacobian, with rows indexed by the equations $F_a,H_j-T_j$ and columns by $y_b$, and partition its rows and columns after the first $r$ entries. Denote its upper-left, upper-right, lower-left and lower-right blocks by $B,C,D,E$, respectively; $B$ has size $r\\times r$. Reduce coefficients to $K$. The matrix $\\overline B$ is invertible by step 1. The derivation rules [def-weil-pbc-kahler-differentials, def-weil-pbc-polynomial-partial-derivative] give $dP(a)=\\sum_b(\\partial P/\\partial y_b)(a)da_b$: this follows for each monomial by repeated Leibniz and then for polynomials by additivity. Thus $dF_a(a)=0$ gives $\\overline B\\,da_{\\le r}+\\overline C\\,da_{>r}=0$. Substitution into $dH_j(a)$ shows that the coefficient matrix of the assumed basis $dh_j$ in the basis $da_{>r}$ of step 2 is $\\overline E-\\overline D\\overline B^{-1}\\overline C$, which is invertible. Subtracting $\\overline D\\overline B^{-1}$ times the first block rows of $\\overline J$ from the last block rows gives a block triangular matrix with invertible diagonal blocks. Consequently $\\overline\\Delta=\\det\\overline J\\ne0$, where $\\Delta=\\det J\\in k[y_1,\\ldots,y_n]$. In particular its image $\\delta\\in A$ is not in $\\mathfrak q$. These formulas use empty matrices with determinant $1$ when $r=0$ or $d=0$.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00T7, lemma-standard-smooth, proof: solving the first r differential relations; the displayed block elimination is the explicit chosen-coordinate calculation"
-   }
-  },
-  {
-   "text": "Localize at $\\delta$ [def-weil-ring-localization-away]. The presentation of step 3 gives $$A_\\delta\\cong R[y_1,\\ldots,y_n,t]/(F_1,\\ldots,F_r,H_1-T_1,\\ldots,H_d-T_d,\\Delta t-1):$$ the map sends $t$ to $\\delta^{-1}$, and the reverse map is the unique extension of the map from $A$ since the relation makes $\\delta$ invertible. The Jacobian in the $n+1$ variables $(y_1,\\ldots,y_n,t)$ has upper-left block $J$, upper-right zero column, lower-left row $t\\,\\nabla\\Delta$, and lower-right entry $\\Delta$, so its determinant is $\\Delta\\det J=\\Delta^2$, whose image $\\delta^2$ is a unit in $A_\\delta$. This is a square Jacobian presentation [def-exc-jacobian-presentation] of the same $R$-algebra structure, not a new choice of coordinate functions.",
-   "uses": [
-    "def-weil-ring-localization-away",
-    "def-exc-jacobian-presentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GU, lemma-etale-at-point, square-Jacobian condition (8); explicit localization by one extra variable"
-   }
-  },
-  {
-   "text": "Apply the square-presentation implication of [lem-exc-etale-jacobian-presentation] to the $R$-algebra $A_\\delta$ of step 5: $R\\to A_\\delta$ is etale of finite presentation. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the induced map $\\operatorname{Spec}A_\\delta\\to\\operatorname{Spec}R=\\mathbf A^d_k$ is etale. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}A_\\delta$ identifies with the open subscheme $D_W(\\delta)$ of $W$, which contains $u$ since $\\delta\\notin\\mathfrak q$. Take $U'=D_W(\\delta)\\subseteq U$. Its map to affine space is $h|_{U'}$: the ring map still sends each $T_j$ to the restriction of the original $h_j$, by steps 3 and 5, and affine morphisms are determined by their ring maps [def-weil-affine-spectrum]. This proves the required open-neighbourhood assertion.",
-   "uses": [
-    "lem-exc-etale-jacobian-presentation",
+    "def-weil-pbc-mv-polynomial-ring",
     "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-principal-localization-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GJ, lemma-etale-characterize; square-presentation implication of Tag 02GU, lemma-etale-at-point (8) to (1), realized on the explicit principal open"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-locally-standard-smooth",
-  "def-weil-pbc-standard-smooth-algebra",
-  "def-weil-affine-spectrum",
+  "lem-pur-coordinate-differentials-affine-chart",
   "lem-weil-pbc-standard-smooth-kahler-basis",
-  "def-sc-relative-differential-sheaf",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "def-weil-module-base-change",
-  "def-sbc-affine-space",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-polynomial-partial-derivative",
-  "def-weil-ring-localization-away",
-  "def-exc-jacobian-presentation",
-  "lem-exc-etale-jacobian-presentation",
+  "lem-pur-etale-coordinates-of-fibre-basis",
+  "def-weil-pbc-mv-polynomial-ring",
   "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "lem-weil-pbc-principal-localization-open-immersion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 01V7 and 02GU(8); agent-written explicit graph-presentation, block-elimination and localization proof of the chosen-coordinate consequence, using algebra.tex Tag 00T7(2)"
+  "place": "Tags 01V7 and 02GU, with algebra.tex Tag 00T7(2). K1 uses the determinant of the differential change-of-basis matrix and the proved MvPolynomial.etale_aeval_of_basis_kaehlerDifferential instead of constructing a graph Jacobian."
  },
  "mathlib_searches": [
   {
@@ -267,30 +205,36 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "item": "lem-pur-etale-at-point-from-differentials",
   "worker": "stage1",
-  "summary": "Reused the existing standard-smooth chart and differential-basis nodes, the Lean-closed square-Jacobian criterion, and the affine/localization Mathlib leaves. Wrote out the prescribed-coordinate graph presentation, Schur-complement calculation and explicit principal-open shrinking; no new nodes and no statement change.",
-  "blueprint": "Realizes the second paragraph of lem-pur-regular-immersion-linearization.proof.md: the map (f_1,...,f_c,g_1,...,g_m) is etale by the differential criterion, and shrinking makes it etale on its source. The argument proves that criterion for arbitrary points and fields.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
-    "why": "Generic local affine presentation of a smooth morphism, used as a black box in step 1. No node of sk-prop-an supplies a standard smooth chart; this expands the coordinate criterion and does not replace the purity route."
-   }
-  ]
+  "summary": "Repair of the returned side completion that was not promoted to the live DAG. The retained split passed the mandatory initial dry run on the refreshed baseline at ed9efee2b25. Compared every item field with the current DAG: only proof, proof_deps and split_report differed; re-read all current cited statements and Stacks 01V7/00T7(2)/02GU(8). Retained both independent statement-only tasks and all prior proof/search material. Step 2 now gives the inverse local-ring maps inducing the residue-field identification and verifies localization fraction maps using the cited equality criterion; added both exact definition citations. The target statement, statement dependencies, source, Lean and maintainer metadata remain unchanged. All step citations have verbatim current-statement quotations.",
+  "blueprint": "The second paragraph of the current main-20261015 regular-immersion-linearization proof: chosen-coordinate differential criterion followed by shrinking. New nodes realize its affine reduction and Jacobian calculation; the item assembles the etale open.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-smooth-locally-standard-smooth"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q111-c79ae8a37",
-  "group": "Q111",
+  "reviewer": "NT-cc-Q121-ddc226f50",
+  "group": "Q121",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-c79ae8a37 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all 17 cited node statements, the blueprint ancestor's proof (second paragraph) and Stacks 02GU(8) (morphisms.tex l.8318), 01V7 (l.7191) and 00T7(2) (algebra.tex l.37274). All six steps hold. Step 1: the chart lemma applied over Spec k gives V=Spec k and a standard smooth A. Step 2: the fibre is Omega_{A/k} tensored with K, so d=n-r. Step 3: the graph presentation A = R[y]/(F, H-T), with n equations. Step 4: the Schur complement E-DB^{-1}C is invertible over K, so det J is nonzero at q. Steps 3-5 are elementary as labelled. Step 5: adjoining t with Delta*t-1 gives an (n+1)x(n+1) Jacobian with determinant Delta^2, a unit in A_delta. Step 6: Lean-closed square-Jacobian => etale (both nodes use Algebra.Etale), the Spec equivalence, the principal open D(delta) containing u, and uniqueness of the ring map. Edge cases tested: d=0, char-p x^p (the hypothesis fails as it should), A^2 with one function (the hypothesis fails), a non-closed point. No new nodes. Duplicate search over dag/nodes (etale/basis/differential, 02GU/00U9/02GJ) found only existential or algebra-level nodes. The tool_use of lem-weil-pbc-smooth-locally-standard-smooth is accepted and harmless: sk-thm-p1 is in sk-prop-an's transitive route. No SGA citation. proof_deps equals the union of the step uses, and every cited id exists and is not merged. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-ddc226f50 (reviewer sub-agent of L); spot-checked: S1 re-split is compliant and the mathematics is correct. Old steps 1-3 (01V7 chart, germ/tensor fibre with basis da_{>r}, d=n-r, lifts H_j, graph presentation) are now the chart node lem-pur-coordinate-differentials-affine-chart. Old steps 4-5 (Schur S=E-DB^{-1}C, det J=det B det S != 0, Delta t-1 presentation with Jacobian Delta^2) are now lem-pur-coordinate-graph-localized-jacobian. The two nodes are comparable in size, independent and statement-only; neither concludes etaleness. The assembly is 3 steps, about 2600 characters. All six live steps are quoted verbatim in the report. Step 2 transports along alpha concretely (fraction criteria in localization-at-prime and localization-away, Kahler universal property). Step 3 citations (exc square-Jacobian criterion, etale-ring-map-iff-affine, principal-open image, polynomial universal property, affine-spectrum uniqueness) each say what the step takes. Small cases checked: parabola y1=y2^2 with h=y1 (S=2y2, matches dy1=2y2 dy2); r=0, d=0, n=0; Frobenius fails the hypothesis. Sources read: Stacks 02GU(8) at morphisms.tex l.8318, 01V7 at l.7191, 00T7(2) at algebra.tex l.37274; no SGA. No duplicates: rg -L for Schur/graph/02GU/00T7, closest candidates are trf smooth-embedding, implicit-taylor and etale-near-point-zero-fibre-dimension. Item is not superseded in live or side-live. B3 FIX: the chart node uses the stalk Omega_{U/k,u} and germ_u without a stalk definition, so def-pc-module-stalk-functor is added inline and to stmt_deps (fixes/dag/nodes/sec-smooth-purity/lem-pur-coordinate-differentials-affine-chart.json; diff shows nothing else changed). This is the same fix as the 4 earlier heads and has been lost at landing each time; please land it with this head. Old tool_use lem-weil-pbc-smooth-locally-standard-smooth now belongs to the chart node's future proof; harmless.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -310,5 +254,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The cotangent fibre uses the recorded module-stalk functor and the canonical local-ring residue field, definitionally Scheme.residueField. AffineSpace.homOfVector constructs the prescribed k-morphism from the functions. Added the already-landed def-pc-module-stalk-functor to stmt_deps (brief-stage2 section 5, STMT_DEPS MAY GAIN LANDED NODES)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T091901-L-3384438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

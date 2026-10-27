@@ -1,0 +1,107 @@
+{
+ "id": "def-trf-coefficient-frobenius-trivialization",
+ "kind": "definition",
+ "title": "Canonical finite-coefficient absolute-Frobenius pullback trivialization",
+ "status": "split",
+ "statement": "Let $p$ be prime, let $X$ be a scheme of characteristic $p$ [def-weil-scheme-characteristic-p], let $A$ be a finite commutative ring, and let $b\\in\\mathbf N$. Write $H=F_X^b$ for the iterate of absolute Frobenius [def-weil-absolute-frobenius-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site], use the ordinary unbounded constant-coefficient derived category and identified-coefficient pullback $LH_A^*$ [def-weil-pbc-proetale-operations]. Define $\\tau_{X,A}^{(b)}:LH_A^*\\xrightarrow{\\sim}\\operatorname{id}$ to be the exact termwise derived descent, with the canonical derived identity comparison, of the normalized module-pullback trivialization supplied by [lem-pur-frobenius-trivialization-pullback]. This is the trivialization of [lem-trf-absolute-frobenius-site]: for a weakly etale object $v:V\\to X$, the site isomorphism is the relative Frobenius $r_V^{(b)}=(F_V^b,v):V\\xrightarrow{\\sim}V\\times_{X,H}X$; the module trivialization is fixed by requiring that the pullback-adjunction unit followed by direct image of its forward map acts on sections by restriction along $(r_V^{(b)})^{-1}$. The coefficient identification is the canonical constant-section identification in the specified module pullback. Exponent zero is included with its canonical identity-pullback unitor. No coefficient flatness, prime-to-$p$ annihilator, boundedness or constructibility is assumed.",
+ "stmt_deps": [
+  "def-weil-scheme-characteristic-p",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-absolute-frobenius-site"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+  "place": "Final paragraph: relative-Frobenius site isomorphisms, their adjoint inverse-image trivializations, exact descent on complexes and multiplicative iterates; used in the displayed contraction of prop-trf-scheme-galois-comparison.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical trivialization of derived pullback by an iterate of absolute Frobenius on the small pro etale site with finite constant coefficients",
+   "results": "[leansearch] OK 8 hit(s): Trivialization.pullback; FiberBundle.pullback_trivializationAt'; iterateFrobeniusEquiv_eq_pow; WittVector.iterate_frobenius_coeff; Trivialization.instCoePretrivialization; Perfection.coeff_iterate_frobenius'; iterateFrobenius_one; Trivialization.pullback_source.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "[loogle] OK 1 hit(s): CategoryTheory.Regular.frobeniusMorphism_isPullback (Mathlib.CategoryTheory.RegularCategory.Basic).",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(coefficientFrobeniusTrivialization|Frobenius.*trivialization|frobenius.*trivialization) AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n coefficientFrobeniusTrivialization lean/WeilConjectures lean/Sheaf; rg -l coefficientFrobeniusTrivialization|coefficient-frobenius-trivialization dag/nodes; tools/blueprint_refs.py search coefficientFrobeniusTrivialization",
+   "results": "No WeilConjectures definition. lean/Sheaf/AlgebraicGeometry/AbsoluteFrobeniusCoefficientNaturality.lean:50 defines coefficientFrobeniusTrivialization, with uses in its theorem. The only DAG mention is lem-trf-absolute-frobenius-coefficient-naturality, whose primary declaration is the theorem, not this definition. 0 blueprint nodes match coefficientFrobeniusTrivialization.",
+   "date": "2026-10-22",
+   "verdict": "existing declaration; no separate definition owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-contraction-scalar-pasting",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-finite-coefficient-map",
+   "place": "Final sentence of thm-trf-finite-coefficient-map.proof.md, all constructions natural in the coefficient ring: composition of the scalar/pullback square with the absolute-Frobenius trivialization in the displayed construction of prop-trf-scheme-galois-comparison.proof.md",
+   "via": [
+    "lem-trf-frobenius-contraction-scalar-pasting",
+    "lem-trf-scheme-galois-coefficient-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-trace-coeff",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.coefficientFrobeniusTrivialization",
+  "statement": "def coefficientFrobeniusTrivialization (p : ℕ) (hp : p.Prime)\n    (X : Scheme.{u}) (hX : X.IsCharacteristic p)\n    (A : Type u) [CommRing A] [Finite A] (b : ℕ) :\n    proEtaleConstantRingDerivedPullback A (X.iterateFrobenius hp (hX.2 ⊤) b) ≅\n      𝟭 (proEtaleDerivedCategory X A)",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-ownership record requested by return F1. This unchanged plain definition takes the uniquely section-normalized module trivialization from lem-pur-frobenius-trivialization-pullback and applies proEtaleFrobeniusDerivedIso from lem-trf-absolute-frobenius-site. It does not use the conclusion of absoluteFrobenius_coefficient_naturality. No duplicate module or declaration is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-263f0f9ec",
+  "group": "Q133",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-263f0f9ec",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Re-delivery of RETURN a549075167eb; both faults repaired, nothing else changed (module byte-identical except imports; item node changes only stmt_deps and lean). F1: theorem node lem-trf-absolute-frobenius-coefficient-naturality moved out of stmt_deps (kept in proof_deps); new node def-trf-coefficient-frobenius-trivialization is an existing:true record whose statement matches AbsoluteFrobeniusCoefficientNaturality.lean:49-53 verbatim; it has all §5 fields (3 search kinds); its stmt_deps cover every declaration the def uses (proEtaleFrobeniusDerivedIso, trivialization_pullback, proEtaleConstantRingDerivedPullback, IsCharacteristic, iterateFrobenius); the .choose is pinned by the r projection and the section-unit equation. F2: landed pur713-def-pullback-comparison added to stmt_deps, its module imported directly, report corrected. Maths re-checked: d_R = composition.symm, e_R = t_{V K}∘d_K, square c_{H≫v}≫T(e_A) = e_B≫c_v; v arbitrary, b:ℕ incl. 0, finite A,B, unbounded D, no extra hypotheses; edge cases b=0, v=id, non-invertible v, empty Y, B=0, Z/p²→F_p OK. No compile (no file changed). Advisory: the naturality node still lists coefficientFrobeniusTrivialization in its declarations, and its docstring blueprint tag names the theorem node."
+ }
+}

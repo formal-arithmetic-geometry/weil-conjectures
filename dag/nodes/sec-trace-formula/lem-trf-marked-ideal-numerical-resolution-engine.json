@@ -2,21 +2,154 @@
  "id": "lem-trf-marked-ideal-numerical-resolution-engine",
  "kind": "statement",
  "title": "Numerical invariant and termination for marked ideals",
- "statement": "Over $\\mathbf Q$, a marked ideal is data $(Z,N,E,I,b)$: $Z$ and its closed subscheme $N$ are smooth [def-sbc-smooth-morphisms, def-weil-closed-immersion], $E$ is a finite ordered list of smooth hypersurfaces meeting $N$ with normal crossings (locally their equations are distinct smooth coordinate parameters), $I\\subset\\mathcal O_N$ is coherent [pqf-def-coherent], and $b\\ge1$ is an integer. Its cosupport is $\\{x\\in N:I_x\\subset\\mathfrak m_x^b\\}$. Admissible blowups have smooth center in the cosupport transverse to $E$; transform $N$ strictly and divide the total transform of $I$ by the $b$th exceptional ideal. Test equivalence means equality of the admissible test sequences, also allowing products with a line and blowups of intersections of two exceptional hypersurfaces, with ordinary ideal pullback for those two operations [def-nagata-global-blowup, def-nagata-strict-transform].\n\nThere is one assignment, defined simultaneously for all such marked ideals over $\\mathbf Q$ and all their admissible histories, of a finite lexicographic word at each point of the cosupport, with values in one fixed totally ordered set, made of rational residual orders, nonnegative integers counting earlier exceptional components, and a terminal monomial entry, such that the following hold; the companion/coefficient-ideal construction provides one. For a maximal-order marked ideal its first entry is $1$. The rest of the word, including the terminal tie-breaking data from the ordered exceptional components, is invariant under test equivalence for fixed dimension and under smooth pullback. The word has finite image on quasi-compact inputs and is upper semicontinuous. Its full maximum locus is a smooth closed center transverse to $E$. After blowing up this center the maximum word strictly decreases until cosupport is empty. The resulting process terminates, also when a finite number of equivalent local presentations are patched and the maximum is taken over their union. More precisely, at fixed leading data coefficient ideals reduce the smooth support dimension, and the final monomial case terminates by reduction of the ordered exponent data; thus an infinite tail with all earlier entries fixed is impossible. This is a theorem about marked ideals and their controlled transforms, not about strict transforms of arbitrary singular schemes.",
+ "statement": "Over $\\mathbf Q$, a marked ideal is data $(Z,N,E,I,b)$: $Z$ and its closed subscheme $N$ are smooth and of finite type [def-sbc-smooth-morphisms] [def-weil-closed-immersion] [def-weil-finite-type-morphism], $E$ is a finite ordered list of smooth hypersurfaces with simple normal crossings, transverse to $N$ (locally their equations restrict to distinct smooth coordinate parameters on $N$), $I\\subset\\mathcal O_N$ is coherent [pqf-def-coherent], and $b\\ge1$ is an integer. The empty $N$ and the unit ideal are allowed. Its cosupport is $\\{x\\in N:I_x\\subseteq\\mathfrak m_x^b\\}$. Admissible blowups have smooth closed center in cosupport having normal crossings with $E$; a center may be contained in some $E_i$. Transform $N$ strictly and divide the total transform of $I$ by the $b$th exceptional ideal. Test equivalence means equality of finite admissible test sequences, also allowing open restrictions, products with a line and blowups of intersections of two exceptional hypersurfaces, with ordinary ideal pullback for the latter two operations [def-nagata-global-blowup] [def-nagata-strict-transform]. A line product adjoins its zero section to the ordered boundary. Histories retain the ordered boundary and the birth stages of its components.\n\nThere is one assignment, simultaneously for all these marked ideals and the histories of successive maximum-center blowups (and their restrictions and smooth pullbacks), of a finite lexicographic word on cosupport with values in one fixed totally ordered set. Its entries are rational normalized orders, nonnegative counts of earlier exceptional components, and terminal data: either a symbol $\\infty$ for a zero coefficient ideal on a smooth support, or a monomial entry with ordered boundary tie-breaking data. For a maximal-order marked ideal (order exactly $b$ throughout cosupport), its first entry is $1$. The rest of the word is invariant under test equivalence with identified ordered histories and fixed support dimension, and under smooth pullback. The word has finite image on each input and is upper semicontinuous. Its full maximum locus is a smooth closed center having normal crossings with $E$. After blowing up that center the maximum word strictly decreases unless cosupport is empty, and the process terminates. The same holds for finitely many equivalent local presentations patched together and synchronized by taking the maximum over their union. At fixed earlier entries the companion and coefficient construction lowers the smooth support dimension; a zero coefficient ideal is a terminal smooth-support case, and the residual monomial case ends by decrease of its ordered exponent data. In particular no infinite tail with all earlier entries fixed occurs. This concerns controlled transforms of marked ideals, not strict transforms of arbitrary singular schemes.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94; detailed input WANTED: BMT arXiv:0905.3580 sections 5.1--5.4 and BM marked-ideal invariant construction. No Stacks tag states this characteristic-zero marked-ideal result."
  },
  "stmt_deps": [
-  "def-weil-closed-immersion",
   "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
   "pqf-def-coherent",
   "def-nagata-global-blowup",
-  "def-nagata-strict-transform"
+  "def-nagata-strict-transform",
+  "def-trf-marked-ideal-data",
+  "def-trf-marked-ideal-invariant-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix one tagged alphabet consisting of rational entries, integer entries, the symbol $\\infty$, and finite monomial tuples, ordered lexicographically with the indicated terminal symbols. Use end markers to compare words; hence words of different lengths belong to one totally ordered set. A harmless uniform leading entry $1$ is the normalized order of a maximal-order companion; append the actual residual blocks below it. In particular every maximal-order input has the requested leading entry. This header neither changes centers nor asserts that the untransformed total order of an arbitrary marked ideal decreases. For histories, carry the ordered components and the birth bookkeeping of [lem-trf-residual-companion-boundary-reduction]. We define the tail recursively on the dimension of its current smooth support, using the same formulas for all inputs; no dimension bound is inserted into a numerical entry.",
+   "uses": [
+    "lem-trf-residual-companion-boundary-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "If the initial ideal is zero on a component, give that component the terminal word $(1,\\infty)$, larger than all finite residual blocks; its center is the entire component, which disappears by the chart lemma. On the other components, for a nonzero weighted presentation $(J,c)$ use [lem-trf-residual-companion-boundary-reduction] to factor its boundary monomial and compute the residual order $\\mu$. Append $(\\mu,s)$ only when $\\mu>0$; at $\\mu=0$ append $0$ followed immediately by the monomial entry, without an old-boundary count. At a positive block take the displayed companion and its old-boundary augmentation. On each neighbourhood of the maximal pair it presents exactly the retained-prefix stratum, and has maximal order with a logarithmic maximal-contact equation transverse to the remaining new boundary. Restrict to that hypersurface by [lem-trf-logarithmic-coefficient-test-equivalence], using the explicit sum of powers with mark $d!$. Its support dimension is one less. If this coefficient ideal is nonzero on a component, repeat there. If it is zero, put the terminal $\\infty$ symbol there and stop that branch; its entire support is already a smooth stratum. If the residual order is zero, stop coefficient recursion and use the monomial construction in Steps 4--5. In dimension zero a nonzero ideal is a unit, so it has empty cosupport; a zero auxiliary coefficient ideal is the just described terminal case. Thus this recursion constructs finite words, with at most the original support dimension many coefficient restrictions.",
+   "uses": [
+    "lem-trf-residual-companion-boundary-reduction",
+    "lem-trf-logarithmic-coefficient-test-equivalence",
+    "lem-trf-marked-controlled-blowup-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "The two local inputs identify whole test sequences after transforms, rather than only initial sets. Induction on the number of coefficient restrictions therefore identifies tail words for any two equivalent local presentations of the same support dimension: the next normalized residual pair agrees, its augmented companions present equivalent retained strata, and their coefficient presentations are equivalent in dimension one less. A terminal zero coefficient presentation is recognizable by its full smooth cosupport; a residual-zero presentation has the normalized exceptional exponents supplied by the companion lemma. The same induction proves equality after smooth pullback: coefficient restriction adds no free coordinates to the word, and the companion lemma compares orders and birth data even when relative dimensions change. Consequently all local choices in Step 2 give the same word on overlaps and all identified histories. This also defines words at nonmaximal points by restriction to their local retained-prefix strata.",
+   "uses": [
+    "lem-trf-logarithmic-coefficient-test-equivalence",
+    "lem-trf-residual-companion-boundary-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "For a residual-zero presentation write its ideal as $\\prod_i\\mathcal I_{E_i}^{a_i}$ with mark $c$. At $x$, among subsets $A$ of the components through $x$ with $\\sum_{i\\in A}a_i\\ge c$, let $p$ be the least size; among those of size $p$ maximize $q=\\sum_{i\\in A}a_i/c$ and then the ordered index tuple $A$. Use $\\Gamma(x)=(-p,q,A)$ as the terminal monomial entry. Empty cosupport has no word. By minimality, $\\sum_{j\\in A\\setminus\\{i\\}}a_j<c$ for every $i\\in A$. There are only finitely many candidate subsets locally; on a stratum where $\\Gamma$ is maximal, its center is the coordinate intersection $\\bigcap_{i\\in A}E_i$. Passing to a special point can only add candidate subsets, so $\\Gamma$ cannot decrease under specialization and its upper-level sets are finite unions of closed coordinate intersections. The maximal intersection is smooth and has normal crossings with the boundary. When boundary components are disconnected, apply this argument on their finitely many local constant-exponent pieces; equal words give the same intersection on overlaps. No new geometric theorem is hidden here: these are precisely the coordinate intersections in the definition of normal crossings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent monomial combinatorics: explicit subset invariant, the monomial terminal step of the BM route."
+   }
+  },
+  {
+   "text": "Blow up the monomial maximum. In its $i$-chart the chart lemma gives $a_F=\\sum_{j\\in A}a_j-c<a_i$, with the other strict-transform exponents unchanged and component $i$ absent. Compare any subset through a new point with an old subset by replacing $F$, if present, by $i$. Its old sum is strictly larger if $F$ was present. Thus no new subset of size below $p$ can reach $c$. For size $p$, either its new sum is strictly below the old maximum sum, or it omits $F$ and is an old candidate. In the latter case it cannot be the chosen tuple $A$, since $i$ is absent, so its ordered tuple is smaller when its sum ties. Hence $\\Gamma$ strictly decreases above the center, and the presentation is unchanged elsewhere. For termination, $p$ can increase only finitely often since at most $\\dim N$ boundary components meet. With $p$ fixed, $cq$ is a nonnegative integer and decreases only finitely often. Once $p,q$ are fixed in a tail, a new exceptional component cannot occur in a maximal chosen subset, by the strict-sum comparison. All such subsets then use only the finitely many components already present at the start of that tail. Their strictly descending index tuples cannot continue indefinitely.",
+   "uses": [
+    "lem-trf-marked-controlled-blowup-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent monomial decrease and termination; affine chart exponent calculation from Stacks 0804, divisors lemma-blowing-up-affine."
+   }
+  },
+  {
+   "text": "The companion lemma gives finite image and upper semicontinuity of each single block on a retained-prefix stratum. Recursion on dimension gives the same properties for each coefficient tail, using Step 4 in the monomial case and a constant terminal symbol in the zero case. For a maximum leading pair its stratum is closed, and the maximum of its tail is closed there; repeating this finite times proves that the full maximum is closed. More generally upper-level sets are obtained by finite unions of these closed prefix pieces, which proves upper semicontinuity of the word. A finite open cover of the finite-type input supplies only finitely many local block values at each recursive level; hence the full image is finite. Locally its maximum center is the lift of the lower-dimensional maximum center through the coefficient presentation, a monomial coordinate intersection, or an entire terminal smooth support. The two local lemmas ensure that these lifts are smooth and have normal crossings with all boundary components, including old ones encoded as equations.",
+   "uses": [
+    "lem-trf-logarithmic-coefficient-test-equivalence",
+    "lem-trf-residual-companion-boundary-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "Give the closed full maximum its reduced induced structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. Its local models in Step 6 are smooth and hence reduced by [lem-trf-smooth-geometrically-normal]. The uniqueness assertion for reduced induced structures identifies its ideal with the ideal of every local model. These ideals glue, so the center is a smooth closed subscheme, with the claimed boundary condition. On a component where the original ideal is nonzero, its generic point has unit ideal, so no cosupport center contains that component. A component where the ideal is zero is instead removed by its terminal-support blowup. The controlled chart lemma applies in both cases, giving a smooth transformed marked pair, a regular coherent controlled ideal, and the transformed normal crossings boundary; it preserves nonzeroness on every component not deleted. Thus every chosen maximum blowup is an allowed next history.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-trf-marked-controlled-blowup-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "At a point above the chosen center, either its first differing residual-order/birth-count block drops, or all earlier blocks are retained. In the second case the companion and coefficient test identifications reduce comparison to dimension one less. Induction applies there; at the terminal zero-coefficient case blowing up the whole terminal support removes that retained stratum, and at the terminal monomial case Step 5 gives strict decrease. Every block is nonincreasing at comparison points by the companion lemma. Outside the center the chart lemma identifies the old and new marked pair and its birth history, so the word is unchanged there. No old maximum point lies outside the center. The new image is finite by Step 6; since every remaining value is strictly below the old maximum, its own maximum is strictly below it.",
+   "uses": [
+    "lem-trf-logarithmic-coefficient-test-equivalence",
+    "lem-trf-residual-companion-boundary-reduction",
+    "lem-trf-marked-controlled-blowup-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "Prove termination by induction on support dimension, with the stronger assertion allowing any fixed finite prefix and any finite family of compatible local presentations. Take a finite cover at the birth of a prefix; the least common multiple of its local denominator bounds is a denominator bound for the synchronized next entries. Suppose an infinite chain of maximum blowups exists. At a fixed earlier prefix the next positive residual-order values have one denominator bound $D$ by the companion lemma. A nonincreasing sequence in $(1/D)\\mathbf Z_{\\ge0}$ is eventually constant; while it is constant its nonnegative birth count is also eventually constant. Discard this finite initial portion. If the stabilized residual entry is positive, all subsequent changes are in the coefficient presentation of strictly smaller support dimension, contradicting the induction hypothesis. A terminal zero coefficient support disappears when it is selected; it cannot support an infinite tail. If the residual entry is zero, Step 5 rules out an infinite monomial tail. The zero-dimensional base was checked in Step 2. This uses the actual denominator, dimension and monomial controls; strict descent in an arbitrary lexicographic set alone is not a termination proof.",
+   "uses": [
+    "lem-trf-logarithmic-coefficient-test-equivalence",
+    "lem-trf-residual-companion-boundary-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  },
+  {
+   "text": "For finitely many equivalent presentations on an open cover use the same word space and take the maximum over their finite disjoint union. Overlap equivalence from Step 3 identifies the reduced maximum ideals. The reduced-center uniqueness used in Step 7 glues them; patches not meeting this maximum undergo an empty-center stage. All proofs of nonincrease and the fixed-prefix denominator bounds apply on each of the finitely many patches. An infinite synchronized tail would, after passing to a fixed prefix and then to lower support dimension as in Step 9, require an infinite monomial tail on one of finitely many patches; each such patch has only finitely many monomial choices once $p,q$ stabilize. This is impossible by Step 5. Hence synchronization also terminates. Empty initial support and empty cosupport produce the empty tower.",
+   "uses": [
+    "lem-trf-logarithmic-coefficient-test-equivalence",
+    "lem-trf-residual-companion-boundary-reduction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent construction from the marked-ideal route cited in ILO VIII 2.3.11--2.3.13; BMT §§5.1--5.4 WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-residual-companion-boundary-reduction",
+  "lem-trf-logarithmic-coefficient-test-equivalence",
+  "lem-trf-marked-controlled-blowup-charts",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-smooth-geometrically-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13, printed pp.93--94, identifies the BM/BMT route but does not prove its local inputs. BMT §§5.1--5.4 and BM invariant construction WANTED; explicit dimension induction and monomial argument supplied by Q68."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +185,45 @@
    "results": "{\"t\": \"2026-10-18T22:10:49Z\", \"tool\": \"leanfinder\", \"query\": \"Coefficient ideal descent constructs a finite lexicographic invariant for resolution of marked ideals using monomial exponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.smithCoeffs\", \"Ideal.leadingCoeffNth\", \"Ideal.leadingCoeff\", \"FGAlgCatSkeleton.I\", \"MvPolynomial.mem_ideal_span_monomial_image\", \"Ideal.leadingCoeffNth_mono\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"MonomialOrder.span_leadingTerm_eq_span_monomial'\"], \"digest\": \"290992b940c7bfb1\"}",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations concern smoothness, ideal orders, formal series or dimension identities, not the stated presentation/invariant/blowup theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "marked.?ideal|coefficient.?ideal|maximal.?contact|desingulari[sz]",
+   "results": "{\"t\": \"2026-10-22T04:37:40Z\", \"tool\": \"grep\", \"query\": \"marked.?ideal|coefficient.?ideal|maximal.?contact|desingulari[sz]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary smoothness, analytic logarithmic derivatives, Weierstrass division, homological resolutions or Dedekind factorization, not the stated marked-ideal operation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MarkedIdeal\"",
+   "results": "{\"t\": \"2026-10-22T04:37:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"MarkedIdeal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary smoothness, analytic logarithmic derivatives, Weierstrass division, homological resolutions or Dedekind factorization, not the stated marked-ideal operation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial resolution of marked ideals in characteristic zero by a lexicographic invariant and controlled transforms",
+   "results": "{\"t\": \"2026-10-22T04:37:41Z\", \"tool\": \"leansearch\", \"query\": \"Functorial resolution of marked ideals in characteristic zero by a lexicographic invariant and controlled transforms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.LeftResolution.F\", \"CategoryTheory.Functor.mapProjectiveResolution\", \"CategoryTheory.projectiveResolutions\", \"CategoryTheory.injectiveResolutions\", \"localCohomology.ideal_powers_initial\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι\", \"ModuleCat.projectiveResolution\"], \"digest\": \"d4e07daf5c0c3257\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary smoothness, analytic logarithmic derivatives, Weierstrass division, homological resolutions or Dedekind factorization, not the stated marked-ideal operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-marked-ideal-numerical-resolution-engine: resolution of marked ideals using coefficient ideals residual orders and ordered exceptional hypersurfaces terminates in characteristic zero",
+   "results": "{\"t\": \"2026-10-22T04:37:45Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-marked-ideal-numerical-resolution-engine: resolution of marked ideals using coefficient ideals residual orders and ordered exceptional hypersurfaces terminates in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_integral_inj_algHom_of_quotient\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"HenselianRing\", \"Algebra.IsStandardSmooth.out\"], \"digest\": \"db554ade214e4e20\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary smoothness, analytic logarithmic derivatives, Weierstrass division, homological resolutions or Dedekind factorization, not the stated marked-ideal operation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A characteristic zero principalization algorithm lowers the multiplicity by induction on dimension using hypersurfaces of maximal contact",
+   "results": "{\"t\": \"2026-10-22T04:38:02Z\", \"tool\": \"leanfinder\", \"query\": \"A characteristic zero principalization algorithm lowers the multiplicity by induction on dimension using hypersurfaces of maximal contact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"emultiplicity_normalizedFactorsEquivSpanNormalizedFactors_eq_emultiplicity\", \"emultiplicity_normalizedFactorsEquivSpanNormalizedFactors_symm_eq_emultiplicity\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"emultiplicity_eq_emultiplicity_span\", \"Ideal.ramificationIdx_eq_find\", \"IsDedekindDomain.HeightOneSpectrum.maxPowDividing\", \"Ideal.ramificationIdx_spec\", \"Ideal.rank_pow_quot_aux\"], \"digest\": \"9305d1ae115fde4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary smoothness, analytic logarithmic derivatives, Weierstrass division, homological resolutions or Dedekind factorization, not the stated marked-ideal operation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
@@ -86,5 +254,66 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-marked-ideal-numerical-resolution-engine",
+  "worker": "stage1",
+  "summary": "Corrected the non-quasi-compact scope, normal-crossings-center terminology and omitted infinity terminal case. Retained zero input ideals and handled their deleted support components explicitly. Replaced the empty proof by one-block companion/coefficient recursion, an explicit monomial subset invariant and fixed-denominator/dimension termination. Three smaller local inputs remain statement-only; no finished Lean attachment was found. Detailed BM/BMT sources are wanted.",
+  "blueprint": "Historical alteration branch of lem-trf-local-term-locality proof (1)--(2), via the recorded resolution chain: the marked-ideal input to the Hilbert--Samuel invariant calculus. This split supplies its coefficient recursion and monomial termination, not a replacement of the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced-center construction/uniqueness and smooth schemes are reduced, needed to glue the local resolution centers; the unit has no competing construction."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic reduced-center construction/uniqueness and smooth schemes are reduced, needed to glue the local resolution centers; the unit has no competing construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-smooth-geometrically-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-d9db1429d",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-d9db1429d (reviewer sub-agent of L); spot-checked: Gating: first split of an empty-proof unsplit item; no repair note, so the re-split rule does not apply. The item, all cited nodes and the blueprint via chain are absent from route-pivot-dropped.txt. The item is queued again at distance 4019, its only citer is hilbert-samuel-resolution-invariant-calculus, and no SGA is cited. Sources read: ILO VIII 2.3.11-2.3.13 (printed pp.93-94) only points to BM/BMT, and proof_origin=agent with BMT WANTED records this correctly; Stacks 0FUE, 0FUT and 0804 labels verified. The three statement corrections are genuine and weaken nothing the citer uses: finite type (non-qc counterexample with the disjoint union of A^1 and ideals (x^n)), normal-crossings centers (N=Z=A^1, E={0}, I=(x)), and an explicit infinity symbol for a zero coefficient ideal. The uniform leading entry 1 is deleted by the parent. Steps: the companion is the standard BM/Kollar one, (R,a) or (R,a)+(M,c-a), with old components added; I checked the example x^2+y^3 with old boundary {x=0}. Step 4: Gamma=(-p,q,A) is upper semicontinuous and its maximum locus is the intersection of E_i over A0. Step 5: a_F < a_i, replacing F by i gives a strict comparison, a tie excludes A0, and termination follows from p bounded by dim N, cq an integer at least c, and the F-exclusion induction. Steps 6-10 cite statement clauses only (finite image, upper semicontinuity, denominator bound, nonincrease) and glue via reduced-induced uniqueness clause (3); termination does not assume well-foundedness. New nodes: the charts node is true (symbolic power equals ordinary power for smooth C, component deletion, monomial chart formula). The log coefficient node is plausible: maximal contact is a hypothesis, and transverse H makes d/dh a log derivation. The companion node is BM's one-block package, history-restricted (needed: x^2+y with new boundary {y=0} has no transverse maximal contact). None restates the item, and none duplicates the formal-coefficient, transverse-suspension, smooth-center or regular-flag nodes. Tool use: reduced-induced-closed-subscheme accepted; smooth-geometrically-normal is in the same unit, so its declaration was unnecessary. Maintainer note: step 3 of the parent hilbert-samuel-resolution-invariant-calculus still says the center is 'transverse'; it is now 'normal crossings', and the parent needs only a smooth center."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedIdealNumericalResolutionEngine",
+  "declaration": "AlgebraicGeometry.MarkedIdeal.exists_numerical_resolution",
+  "declarations": [
+   "AlgebraicGeometry.MarkedIdeal.exists_numerical_resolution"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedIdealNumericalResolutionEngine.lean",
+  "statement": "theorem exists_numerical_resolution : Nonempty NumericalResolution.{u}",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-212e85018",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Third delivery; repairs the e70183 H12/H4 return in full. def-trf-marked-ideal-data now uses Q74 HasAdaptedNormalCrossingsCenter at ⊥ for SNC and transversality (forces m=n=0: distinct labelled regular parameters), Q79 stalkIdeal/order (cosupport = j⁻¹' Marked.cosupport = order ≥ b, maximal order = order = b), and Q79 Embedded(ULift ℚ)/Marked/Step(admissibleBlowup)/Admissible/Transforms/Equivalent/MarkedPullback, with all three owners in its stmt_deps. All private copies removed; retained support/center maps pinned by commuting with the mono j; HistoryPullback has no fixed relative dimension. Invariant module diff vs e70183 is a pure projection migration; all NumericalResolution clauses re-checked against the node. Both earlier repairs kept (pqf-def-coherent byte-identical to live; stalk ringKrullDim conditions). Item node: only lean record and two new def stmt_deps vs live; statement verbatim, sole sorry is the whole proof, ten-step docstring. Snapshot dep records identical to live. No name clash with Q26 MarkedIdeal namespace. Edge cases (empty N/cosupport, unit/zero ideal, zero-component center, empty-center stage, empty boundary, non-equidimensional) checked. No compile (no file changed; worker scompile clean). Advisory: Q79 Equivalent omits open-restriction tests (handled via smoothValues; no counterexample found); Q25 coherent note stands."
+ }
 }

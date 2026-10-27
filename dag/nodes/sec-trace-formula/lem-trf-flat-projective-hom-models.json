@@ -1,0 +1,312 @@
+{
+ "id": "lem-trf-flat-projective-hom-models",
+ "kind": "statement",
+ "title": "Flat scalar extension and compatible projective Hom models",
+ "statement": "Let $\\varphi:R\\to S$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map]. Use ordinary module derived categories with localization functors $Q_R,Q_S$ [def-weil-abstract-derived-category], or equivalently the one-object bottom-topology module-sheaf categories [lem-weil-pbc-singleton-site-module-comparison]. Write $F(C)=S\\otimes_R C$ termwise, $U$ for restriction of scalars, and $LF=-\\otimes_R^{\\mathbf L}S$ for derived extension [lem-pur-derived-change-of-rings]. For every unbounded cochain complex $C$, tensoring the inclusions and quotients defining its cycles $Z^iC=\\ker d_C^i$ and boundaries $B^iC=\\operatorname{im}d_C^{i-1}$ gives natural identifications $Z^i(FC)=S\\otimes_R Z^iC$, $B^i(FC)=S\\otimes_R B^iC$, and $H^i(FC)\\cong S\\otimes_RH^i(C)$. Consequently $F$ preserves quasi-isomorphisms, and there is a natural isomorphism $c_C:LF(Q_RC)\\xrightarrow{\\sim}Q_S(FC)$. Its normalization is that for every K-flat resolution $k:K\\to C$, $c_C$ is the K-flat model comparison followed by $Q_S(Fk)$; these comparisons are compatible with changing resolutions. The adjunction $LF\\dashv U$ has, under $c$, unit represented by $x\\mapsto1\\otimes x$ and counit represented by $s\\otimes y\\mapsto sy$.\n\nLet $P$ be a bounded-above complex of projective $R$-modules [def-weil-pbc-projective-module], and $N$ any unbounded $R$-complex. Put $H_R=\\operatorname{Hom}_R^\\bullet(P,N)$ and $H_S=\\operatorname{Hom}_S^\\bullet(FP,FN)$, using the product total Hom [def-sc-module-total-hom-complex], identified with [def-pur-hom-complex] on the one-object site. Then $FP$ is bounded above with projective terms, and the canonical projective-Hom model comparisons give isomorphisms\n$$Q_RH_R\\cong R\\operatorname{Hom}_R(Q_RP,Q_RN),\\qquad Q_SH_S\\cong R\\operatorname{Hom}_S(LF(Q_RP),LF(Q_RN)),$$\nwhere derived internal Hom is [def-pur-derived-internal-hom] and the second comparison uses $c_P,c_N$. These comparisons are natural in the representatives and compatible with localization. The same $R$-linear Hom model applies with target $U(FN)$; no boundedness or K-flatness assumption on $N$ or $H_R$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A66 (lemma-RHom-out-of-projective), with Tag 0GMT (lemma-tensor-hom-adjoint); flat exact-extension model refinement from the proof of lemma-base-change-RHom, clause (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-projective-module",
+  "def-sc-module-total-hom-complex",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-flat-tensor-exact] with the flat $R$-module $S$ to the sequences $0\\to Z^iC\\to C^i\\to B^{i+1}C\\to0$ and $0\\to B^iC\\to Z^iC\\to H^iC\\to0$. Thus $F$ preserves these exact sequences, including their injections and surjections. Factor $F(d_C^i)$ as $FC^i\\twoheadrightarrow F B^{i+1}C\\hookrightarrow FC^{i+1}$. Its kernel is the image of $F Z^iC\\hookrightarrow FC^i$ and its image is the indicated copy of $F B^{i+1}C$. This proves the asserted identifications of cycles and boundaries, as submodules via their specified inclusions.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), applied to the cycle and boundary short exact sequences"
+   }
+  },
+  {
+   "text": "The second exact sequence of step 1 identifies the quotient $Z^i(FC)/B^i(FC)$ with $F H^i(C)$. A chain map induces maps of both short exact sequences; hence the quotient identification is natural, with the prescribed cycle inclusion and cohomology projection. If $a:C\\to C'$ is a quasi-isomorphism, $H^i(Fa)$ is identified with $F(H^i(a))$, which is invertible for every $i$. By [def-weil-abstract-derived-category], $Fa$ is a quasi-isomorphism. No bound on the index $i$ was used.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat); cohomology as cycles modulo boundaries"
+   }
+  },
+  {
+   "text": "The tensor functor is additive, and step 1 shows it is exact; [lem-weil-pbc-exact-functor-derived-factorization] therefore gives its termwise localization $D(F)$. The cited nodes use $T(C)=C\\otimes_RS$; the termwise symmetry $\\tau_C:S\\otimes_RC\\to C\\otimes_RS$, $s\\otimes x\\mapsto x\\otimes s$, is a natural isomorphism of complexes $F\\cong T$, and below $F(k)$ means $\\tau^{-1}T(k)\\tau$, $Q_S\\tau$ being absorbed into $c$. Apply [lem-trf-ringed-scalar-universal-resolution-comparison] on the singleton site, identified with modules by [lem-weil-pbc-singleton-site-module-comparison]. Write $\\varepsilon_C:LF(Q_RC)\\to Q_SFC$ for its universal comparison. For every K-flat resolution $k:K\\to C$ the cited statement gives $\\varepsilon_C=Q_S(Fk)\\theta_k$, where $\\theta_k:LF(Q_RC)\\xrightarrow{\\sim}Q_SFK$ is the K-flat model comparison. Step 2 makes $Q_S(Fk)$ invertible. Hence $c_C=\\varepsilon_C$ is invertible for every $C$. Naturality of $\\varepsilon$ gives a natural isomorphism $LF\\cong D(F)$. The cited formulas for $\\theta_k$ give precisely the requested resolution normalization, compatibility with augmentations, and three-resolution cocycle, including K-flat resolutions without flat terms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-trf-ringed-scalar-universal-resolution-comparison",
+    "lem-weil-pbc-singleton-site-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), dual universal comparison; counit formulas of lem-trf-ringed-scalar-universal-resolution-comparison"
+   }
+  },
+  {
+   "text": "Use [lem-pur-sheaf-ring-derived-coefficient-adjunction] on the singleton site via [lem-weil-pbc-singleton-site-module-comparison]. It gives the specified $LF\\dashv U$, and the unit and adjunct formulas on K-flat representatives with flat terms. Such a resolution $k:K\\to C$ exists by [lem-pc-kflat-resolution]. Put $u_C(x)=1\\otimes x$, the image under $\\tau^{-1}$ of the cited $x\\mapsto x\\otimes1$; likewise $\\tau$ turns the cited $x\\otimes a\\mapsto a\\,g(x)$ into $a\\otimes x\\mapsto a\\,g(x)$. Naturality of the unit and of $c$ gives $U(c_C)\\eta_{Q_RC}Q_Rk=U(Q_SFk)Q_Ru_K=Q_Ru_C Q_Rk$; cancel the isomorphism $Q_Rk$. Thus under $c_C$ the unit is $Q_Ru_C$ for arbitrary $C$. For an $S$-complex $Y$, resolve $UY$ by $g:K\\to UY$ with flat-term K-flat $K$. The cited counit formula is $\\epsilon_{Q_SY}=Q_S(m_Y Fg)\\theta_g$, where $m_Y(s\\otimes y)=sy$. Step 3 gives $c_{UY}=Q_S(Fg)\\theta_g$, so $\\epsilon_{Q_SY}=Q_S(m_Y)c_{UY}$. These are the claimed representatives. The two degreewise triangle identities send $s\\otimes x$ to $s\\otimes x$ and $y$ to $y$; both formulas use the same $c$, not a separately chosen adjunction.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GMT (lemma-tensor-hom-adjoint); sites-cohomology.tex Tag 07A6 (lemma-adjoint), normalized representative formulas"
+   }
+  },
+  {
+   "text": "Choose $b$ with $P^i=0$ for $i>b$. Then $(FP)^i=F(0)=0$ for $i>b$. For each $i$, [lem-trf-local-projective-tensor-base-change] applied to $R\\to S$ and $P^i$ says that $S\\otimes_RP^i$ is projective over $S$. Thus $FP$ satisfies the same bounded-above projective-source hypotheses over $S$. This use requires no finite-generation assumption.",
+   "uses": [
+    "lem-trf-local-projective-tensor-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF (lemma-characterize-projective), scalar extension of a direct summand of a free module"
+   }
+  },
+  {
+   "text": "By [def-pur-derived-internal-hom], $R\\operatorname{Hom}_R(Q_RP,Q_RN)$ is the complex $\\operatorname{Hom}^\\bullet(P,I(N))$ for the fixed K-injective resolution $\\eta_N:N\\to I(N)$; the canonical model comparison is $Q_R\\operatorname{Hom}^\\bullet(P,\\eta_N):Q_RH_R\\to Q_R\\operatorname{Hom}^\\bullet(P,I(N))$, as in the source proof of 0A66. It is invertible: [lem-pod-projective-hom-evaluation-model] for $(R,P,N)$ and $(R,P,I(N))$ gives isomorphisms of $Q_RH_R$ and $Q_R\\operatorname{Hom}^\\bullet(P,I(N))$ to the adjoint internal Hom of $(Q_RP,Q_RN)$ and $(Q_RP,Q_RI(N))$, natural in the target, and the adjoint internal Hom of the isomorphism $Q_R\\eta_N$ is invertible; the naturality square makes $Q_R\\operatorname{Hom}^\\bullet(P,\\eta_N)$ invertible. The same argument for $(S,FP,FN)$, valid by step 5, gives $Q_SH_S\\cong R\\operatorname{Hom}_S(Q_SFP,Q_SFN)$. Compose the second isomorphism with $R\\operatorname{Hom}_S(c_P,c_N^{-1})$; contravariance in the first variable gives exactly the stated target with $LF(Q_RP),LF(Q_RN)$. The module product Hom agrees with [def-pur-hom-complex] on the singleton site: a sheaf is its sole module, a sheaf Hom section is a module-linear map, the products are sectionwise, and both differentials are $d_Nf-(-1)^{|f|}fd_P$. Thus these are the internal-Hom models of [def-pur-derived-internal-hom], not just identifications of groups of morphisms.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66 (lemma-RHom-out-of-projective); sites-cohomology.tex Section 08J7 (section-internal-hom)"
+   }
+  },
+  {
+   "text": "The two applications in step 6 are natural in their source and target representatives by [lem-pod-projective-hom-evaluation-model]; step 3 makes the two $c$ factors natural as well. For a target quasi-isomorphism, its derived image is invertible, so the naturality square makes the corresponding Hom-model map invertible after localization. For a derived morphism between bounded-above projective source representatives, [lem-pc-ring-derived-map-representative] represents it by a chain map uniquely up to homotopy. If $a-b=d_Ph+hd_{P\\prime}$, the operator $T(f)=(-1)^{|f|}fh$ satisfies $dT+Td=f(a-b)$ on total Hom by expansion. Hence precomposition is independent of the representing chain map after localization. Naturality for inverse quasi-isomorphisms follows by inverting the square. Finally apply the same projective-Hom theorem over $R$ with target $U(FN)$. Its target may be any complex, so neither $N$, $U(FN)$, nor $H_R$ needs to be bounded or K-flat.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66 (lemma-RHom-out-of-projective); derived.tex morphisms-from-projective-complex, localization naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-trf-ringed-scalar-universal-resolution-comparison",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-trf-local-projective-tensor-base-change",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A66 and 0GMT; explicit flat exact-extension refinement using algebra.tex Tag 00HD and derived.tex Tag 06XN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension computes derived tensor and derived Hom models for bounded above projective complexes and arbitrary target complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.of_projective\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [Module.Projective R M], Module.Flat R M\", \"doc\": \"Every projective module over a commutative semiring is flat. Specifically, if $ M $ is a projective module over a commutative semiring $ R $, then $ M $ satisfies the flatness condition, meaning tenso\"}\n Read: The Ext/cohomology-class hits identify groups or hom sets, not natural module-derived internal-Hom objects with the scalar-extension and adjunction normalizations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension of scalars identifies the localized product Hom complex from a bounded above projective source with derived internal Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"{R : Type u_1} →\\n  [inst : Ring R] →\\n    {C : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.EnoughProjectives C] →\\n              {X : C} →\\n       \", \"doc\": \"For a ring $ R $, an abelian $ R $-linear category $ \\\\mathcal{C} $, an object $ X $ with projective resolution $ P $, natural number $ n $, and object $ Y $, there is an isomorphism between the $ n $-\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] →\\n              {X Y : C} →\\n                {n : ℕ} \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{C})}(X[\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X)\\n  [inst_3 : HasDerivedCategory C] {n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.Ca\", \"doc\": \"In an abelian category with derived category structure, for a projective resolution $ R $ of an object $ X $, if a morphism $ f: R_n \\\\to Y $ satisfies $ d_{n+1,n} \\\\circ f = 0 $, then the extended homo\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K L : CochainComplex C ℤ)\\n  (n : ℤ)\\n  [inst_2 :\\n    CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L]\\n  [K.IsKProjective], Function.Bijective\", \"doc\": \"If $ K $ is a K-projective cochain complex, then the function mapping cohomology classes in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ to morphisms in the localized category $ \\\\math\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [CategoryTheory.HasExt C]\\n  {S : CategoryTheory.ShortComplex C},\\n  CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ\\n    (S.map (CochainComplex.sin\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (constructed via the single-term cochain complex functor) w\"}\n  {\"name\": \"CategoryTheory.hasExt_of_enoughProjectives\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.EnoughProjectives C], CategoryTheory.HasExt C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small and has enough projective objects, then the derived category of $\\\\mathcal{C}$ has well-defined hom-sets between single-term cochain complexes concentrated \"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [CategoryTheory.HasExt C]\\n  (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0],\\n  CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n Read: The Ext/cohomology-class hits identify groups or hom sets, not natural module-derived internal-Hom objects with the scalar-extension and adjunction normalizations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"Projective\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KProjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [K.IsKProjective] : CochainComplex.HomComplex.CohomologyClass K L n ≃ Cat\", \"doc\": \"When `K` is a K-projective cochain complex, cohomology classes\\nin `CohomologyClass K L n` identify to elements in a type `SmallShiftedHom` relatively\\nto quasi-isomorphisms.\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KProjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] (K L : CochainComplex C ℤ) (n : ℤ) [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [K.IsKProjective] : Function.Bijective CochainComplex.HomComplex.Cohomolo\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KProjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [K.IsKProjective] (x : CochainComplex.HomComplex.CohomologyClass K L n) :\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.KProjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} [CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L] [K.IsKProjective] (b : CategoryTheory.Localization.SmallShiftedHom (Homol\", \"doc\": \"\"}\n Read: The Ext/cohomology-class hits identify groups or hom sets, not natural module-derived internal-Hom objects with the scalar-extension and adjunction normalizations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|[Pp]rojective.*[Hh]om[Cc]omplex|[Hh]om[Cc]omplex.*[Pp]rojective",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Padics/Measure/Basic.lean\", \"line\": \"230\", \"text\": \"  apply denseRange_tensorHom.equalizer (by fun_prop) (by fun_prop) (funext fun h ↦ ?_)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"67\", \"text\": \"    simp only [OrderHom.coe_mk, Submodule.map_span, toEnd_apply_apply, U']\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"73\", \"text\": \"    simp only [OrderHom.coe_mk, U', Submodule.map_span, Submodule.span_le, Set.image_subset_iff]\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"413\", \"text\": \"def inrHom : A →ₗ[S] Unitization R A where\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"419\", \"text\": \"lemma inrHom_injective : Function.Injective (inrHom S R A) := Unitization.inr_injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"line\": \"80\", \"text\": \"      rw [MonoidalCategory.tensorHom_comp_tensorHom]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"410\", \"text\": \"    ← OrderHom.Subtype.val_coe, map_finset_sup', OrderHom.Subtype.val_coe]\"}\n  {\"file\": \"Mathlib/Order/Disjointed.lean\", \"line\": \"123\", \"text\": \"    OrderHom.ext _ _ (funext fun i ↦ this _ i le_rfl)\"}\n  {\"file\": \"Mathlib/Order/Disjointed.lean\", \"line\": \"145\", \"text\": \"    · simp only [partialSups, sup'_eq_sup, OrderHom.coe_mk] at ih ⊢\"}\n  {\"file\": \"Mathlib/Order/KrullDimension.lean\", \"line\": \"1101\", \"text\": \"section orderHom\"}\n  {\"file\": \"Mathlib/Order/KrullDimension.lean\", \"line\": \"1152\", \"text\": \"/-- Another version when the `OrderHom` is unbundled -/\"}\n  {\"file\": \"Mathlib/Order/KrullDimension.lean\", \"line\": \"1164\", \"text\": \"end orderHom\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"line\": \"116\", \"text\": \"  let τ := IsFractionRing.stabilizerHom Gal(K/ℚ) (Ideal.span {(p : ℤ)}) P\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"line\": \"127\", \"text\": \"  have h₁ := IsFractionRing.stabilizerHom_apply_apply_mk Gal(K/ℚ) (Ideal.span {(p : ℤ)}) P\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"90\", \"text\": \"noncomputable def tensorHom (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) : tensorObj M₁ M₃ ⟶ tensorObj M₂ M₄ where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"96\", \"text\": \"    erw [ModuleCat.MonoidalCategory.tensorHom_tmul, tensorObj_map_tmul]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"108\", \"text\": \"  whiskerLeft _ _ _ g := tensorHom (𝟙 _) g\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"109\", \"text\": \"  whiskerRight f _ := tensorHom f (𝟙 _)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"110\", \"text\": \"  tensorHom := tensorHom\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"135\", \"text\": \"  rw [extendScalars_δ_tmul, tensorHom_tmul,\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"98\", \"text\": \"variable [∀ i j h, StarHomClass (T h) (G i) (G j)] [∀ i, StarHomClass (H i) (G i) C]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"115\", \"text\": \"variable [∀ i, InvolutiveStar (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"162\", \"text\": \"variable [∀ i, StarMul (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"186\", \"text\": \"instance [Star R] [∀ i, Star (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"246\", \"text\": \"variable [∀ i, StarAddMonoid (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n Read: The Ext/cohomology-class hits identify groups or hom sets, not natural module-derived internal-Hom objects with the scalar-extension and adjunction normalizations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from bounded above projective complexes represented by the ordinary Hom complex after flat extension of scalars",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{X : C} (P : ProjectiveResolution X) (F : C ⥤ D) [F.Additive] (n : ℕ) :\\n  (F.leftDerived n).obj X ≅ (HomologicalComplex.homologyFunctor D _ n).obj ((F.mapHomologicalComplex _).obj P.complex)\", \"doc\": \"The n-th left-derived functor of an additive functor $ F : C \\to D $, constructed by first replacing objects with projective resolutions (chain complexes of projective objects), applying $ F $ to these\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"[HasDerivedCategory.{w'} C] (f : X ⟶ Y) : (mk₀ f).hom = ShiftedHom.mk₀ _ (by simp) ((singleFunctor C 0).map f)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the function maps a morphism $ f : X \\\\to Y $ to the hom-set in the derived category between the $ a $-shifted single-term cochain co\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \": φ.hom' ≫ R'.π' = R.π' ≫ (CochainComplex.singleFunctor C 0).map f\", \"doc\": \"The composition of the extended homomorphism $\\\\phi.\\\\text{hom}'$ with the projection morphism $R'.\\\\pi'$ is equal to the composition of the projection morphism $R.\\\\pi'$ with the image of the morphism $f\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.down ℕ)\", \"doc\": \"The left derived functor associated to an additive functor $ F : C \\to D $, constructed by composing the projective resolutions functor on $ C $ with the induced functor between homotopy categories. Fo\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.up ℕ)\", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"CategoryTheory.hasExt_of_enoughProjectives\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives\", \"type\": \"[LocallySmall.{w} C] [EnoughProjectives C] : HasExt.{w} C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small and has enough projective objects, then the derived category of $\\\\mathcal{C}$ has well-defined hom-sets between single-term cochain complexes concentrated \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"[HasDerivedCategory C] {n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m) (hf : R.complex.d m n ≫ f = 0) :\\n  (R.extMk f m hm hf).hom =\\n    (ShiftedHom.mk₀ _ rfl\\n          ((DerivedCategory.singleFunctorIsoCompQ C 0).hom.app X ≫ inv (DerivedCategory.Q.map R.π'))).comp\\n      ((ShiftedHom.map\\n   \", \"doc\": \"In an abelian category with derived category structure, for a projective resolution $ R $ of an object $ X $, if a morphism $ f: R_n \\\\to Y $ satisfies $ d_{n+1,n} \\\\circ f = 0 $, then the extended homo\"}\n Read: The Ext/cohomology-class hits identify groups or hom sets, not natural module-derived internal-Hom objects with the scalar-extension and adjunction normalizations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(^|[^A-Za-z])RHom|derivedHom|[Hh]om[Cc]omplex.*[Pp]rojective|[Pp]rojective.*[Hh]om[Cc]omplex",
+   "results": "{\"t\": \"2026-10-22T07:43:10Z\", \"tool\": \"grep\", \"query\": \"(^|[^A-Za-z])RHom|derivedHom|[Hh]om[Cc]omplex.*[Pp]rojective|[Pp]rojective.*[Hh]om[Cc]omplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Precise scoped grep returned zero hits; the broad grep also matched unrelated names ending in rHom.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedHom|HomComplex.*[Pp]rojective|[Pp]rojective.*HomComplex",
+   "results": "{\"t\": \"2026-10-23T12:22:35Z\", \"tool\": \"grep\", \"query\": \"RHom|derivedHom|HomComplex.*[Pp]rojective|[Pp]rojective.*HomComplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\"], \"digest\": \"0eaee023b502619a\"} Source read: DerivedCategory/KProjective.lean:43,69,86 and HomotopyCategory/KProjective.lean:113 give hom-set/cohomology-class equivalences and K-projectivity, not the module-derived internal-Hom object comparison; ModuleCat/Descent.lean:42 gives exact flat scalar extension only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-23T12:22:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply\"], \"digest\": \"c003996fdf99a4ee\"} Source read: DerivedCategory/KProjective.lean:43,69,86 and HomotopyCategory/KProjective.lean:113 give hom-set/cohomology-class equivalences and K-projectivity, not the module-derived internal-Hom object comparison; ModuleCat/Descent.lean:42 gives exact flat scalar extension only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat extension of scalars on unbounded module complexes and projective source derived internal Hom models",
+   "results": "{\"t\": \"2026-10-23T12:22:36Z\", \"tool\": \"leansearch\", \"query\": \"Flat extension of scalars on unbounded module complexes and projective source derived internal Hom models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"comonadicExtendScalars\", \"Module.Flat.rTensor_shortComplex_exact\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.of_projective\"], \"digest\": \"cb3add909e0737a7\"} Source read: DerivedCategory/KProjective.lean:43,69,86 and HomotopyCategory/KProjective.lean:113 give hom-set/cohomology-class equivalences and K-projectivity, not the module-derived internal-Hom object comparison; ModuleCat/Descent.lean:42 gives exact flat scalar extension only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension on unbounded complexes computes derived extension and bounded above projective complexes compute derived internal Hom",
+   "results": "{\"t\": \"2026-10-23T12:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"Flat scalar extension on unbounded complexes computes derived extension and bounded above projective complexes compute derived internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"CategoryTheory.hasExt_iff\", \"CategoryTheory.hasExt_of_enoughProjectives\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"d57fbca2b5230377\"} Source read: DerivedCategory/KProjective.lean:43,69,86 and HomotopyCategory/KProjective.lean:113 give hom-set/cohomology-class equivalences and K-projectivity, not the module-derived internal-Hom object comparison; ModuleCat/Descent.lean:42 gives exact flat scalar extension only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product total Hom complex from a bounded above projective source represents derived internal Hom naturally under localization",
+   "results": "{\"t\": \"2026-10-23T12:22:41Z\", \"tool\": \"leanfinder\", \"query\": \"The product total Hom complex from a bounded above projective source represents derived internal Hom naturally under localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CategoryTheory.hasExt_of_enoughProjectives\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CochainComplex.isKProjective_of_projective\", \"Ext\"], \"digest\": \"a806a7b471902609\"} Source read: DerivedCategory/KProjective.lean:43,69,86 and HomotopyCategory/KProjective.lean:113 give hom-set/cohomology-class equivalences and K-projectivity, not the module-derived internal-Hom object comparison; ModuleCat/Descent.lean:42 gives exact flat scalar extension only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivOfIsKProjective|Qh_map_bijective|isKProjective_of_projective",
+   "results": "{\"t\": \"2026-10-23T12:24:05Z\", \"tool\": \"grep\", \"query\": \"equivOfIsKProjective|Qh_map_bijective|isKProjective_of_projective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\"], \"digest\": \"5b610fd309870201\"} Source read: DerivedCategory/KProjective.lean:43,69,86 and HomotopyCategory/KProjective.lean:113 give hom-set/cohomology-class equivalences and K-projectivity, not the module-derived internal-Hom object comparison; ModuleCat/Descent.lean:42 gives exact flat scalar extension only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Technical input for the algebraic calculus: bounded-below flat scalar extension of derived Hom, before applying polynomial models. Re-split component: flat exact localization and projective Hom models (returned steps 2--4)",
+   "via": [
+    "lem-trf-pseudocoherent-rhom-flat-base-change",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-projective-hom-models",
+  "worker": "stage1",
+  "summary": "Proved the cycle/boundary identifications by flat tensor exactness; used the existing universal K-flat counit comparison to normalize flat derived extension; calculated unit and counit on arbitrary complexes by cancelling resolutions; reused projective scalar-extension and projective-Hom model nodes over both rings. No new nodes or statement changes.",
+  "blueprint": "The inherited blueprint ancestor is lem-trf-local-term-locality, proof (1)--(2), through the recorded semistable/relative-duality chain. This algebraic tool realizes the parent lem-trf-pseudocoherent-rhom-flat-base-change returned steps 2--4, exactly the flat exact-localization and projective-Hom-model component named in blueprint.from.place. The current latest blueprint does not state this auxiliary algebra lemma separately.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized coefficient adjunction, specialized to the singleton site; the trace unit gives no module scalar-extension normalization."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a flat-term K-flat resolution, used only to evaluate the already specified derived unit and counit."
+   },
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Generic equivalence between ordinary modules and singleton-site module sheaves to apply the existing scalar-extension constructions."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic product-Hom model theorem for a bounded-above projective source and an arbitrary target, used over R and S; the trace unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-6ae40ee48",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-6ae40ee48 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the statements of all 18 cited nodes, Stacks 0A66 (more-algebra.tex:18708) and 0A6A case (3) with its proof, and the parent lem-trf-pseudocoherent-rhom-flat-base-change, including how it uses c_H and B. Steps 1-2: the cycle/boundary flatness argument is correct; with Z→Z/2 and C = (Z --2--> Z), Z^0 is not preserved, so flatness is needed. Step 3: eps_C = F(k)theta_k from the universal-resolution node, and step 2 makes it invertible. Step 4: I checked the unit and counit cancellation computations. Step 5: Mathlib leaf. Step 7: I verified dT+Td = f(a-b). Two repairs, both in the item file only; node ids and proof_deps are unchanged. (1) C4/E5 in step 6: the pod node's RHom is the right-adjoint internal Hom, but the item's RHom is def-pur-derived-internal-hom (the K-injective model). The step only matched the Hom complexes. It now gives the canonical comparison Q Hom(P, eta_N) and proves it invertible from pod's target naturality at N and at I(N), following the source proof of 0A66. (2) Steps 3-4: the cited nodes use -⊗_R S but the item uses S⊗_R -, and the symmetry tau was silent. It is now stated, and the unit 1⊗x and counit a⊗x ↦ a g(x) are transported through it. No new nodes; no duplicate found among nearby DAG nodes (lem-sc-affine-projective-complex-derived-hom has only a bounded-below target, and the sibling scalar-unit-normalization node is distinct). The 4 declared tool_uses are generic and accepted. No cycle, no SGA, no re-split note for this item. The fixed file is fixes/dag/nodes/sec-trace-formula/lem-trf-flat-projective-hom-models.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatProjectiveHomModels",
+  "declaration": "ModuleCat.flat_projective_hom_models",
+  "declarations": [
+   "CochainComplex.projectiveHomModelMap",
+   "CochainComplex.projectiveHomModelIso",
+   "ModuleCat.flatExtensionComplex",
+   "ModuleCat.flatRestrictionComplex",
+   "ModuleCat.flat_projective_hom_models"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatProjectiveHomModels.lean",
+  "statement": "theorem flat_projective_hom_models {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : φ.Flat) : (∃ z : ∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (extendScalars φ).obj (C.cycles i) ≅ ((flatExtensionComplex φ).obj C).cycles i, ∃ b : ∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (extendScalars φ).obj (image (C.d (i - 1) i)) ≅ image (((flatExtensionComplex φ).obj C).d (i - 1) i), ∃ h : ∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (extendScalars φ).obj (C.homology i) ≅ ((flatExtensionComplex φ).obj C).homology i, (∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (z C i).hom ≫ ((flatExtensionComplex φ).obj C).iCycles i = (extendScalars φ).map (C.iCycles i)) ∧ (∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (b C i).hom ≫ image.ι (((flatExtensionComplex φ).obj C).d (i - 1) i) = (extendScalars φ).map (image.ι (C.d (i - 1) i))) ∧ (∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (extendScalars φ).map (factorThruImage (C.d (i - 1) i)) ≫ (b C i).hom = factorThruImage (((flatExtensionComplex φ).obj C).d (i - 1) i)) ∧ (∀ (C : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ), (z C i).hom ≫ ((flatExtensionComplex φ).obj C).homologyπ i = (extendScalars φ).map (C.homologyπ i) ≫ (h C i).hom) ∧ (∀ (C D : CochainComplex (ModuleCat.{u} R) ℤ) (f : C ⟶ D) (i : ℤ), (extendScalars φ).map (HomologicalComplex.cyclesMap f i) ≫ (z D i).hom = (z C i).hom ≫ HomologicalComplex.cyclesMap ((flatExtensionComplex φ).map f) i) ∧ (∀ (C D : CochainComplex (ModuleCat.{u} R) ℤ) (f : C ⟶ D) (i : ℤ), (extendScalars φ).map (HomologicalComplex.homologyMap f i) ≫ (h D i).hom = (h C i).hom ≫ HomologicalComplex.homologyMap ((flatExtensionComplex φ).map f) i)) ∧ (∀ (C D : CochainComplex (ModuleCat.{u} R) ℤ) (f : C ⟶ D), QuasiIso f → QuasiIso ((flatExtensionComplex φ).map f)) ∧ (∃ c : DerivedCategory.Q ⋙ ordinaryDerivedExtendScalars φ ≅ flatExtensionComplex φ ⋙ DerivedCategory.Q, c.hom = (ordinaryDerivedChangeOfRings φ).counit ∧ (∀ (K C : CochainComplex (ModuleCat.{u} R) ℤ) (k : K ⟶ C), (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat K → ∀ [QuasiIso k], (c.app C).hom = (ordinaryDerivedExtendScalars φ).map (asIso (DerivedCategory.Q.map k)).inv ≫ (c.app K).hom ≫ DerivedCategory.Q.map ((flatExtensionComplex φ).map k)) ∧ (∀ (K L C : CochainComplex (ModuleCat.{u} R) ℤ) (k : K ⟶ C) (l : L ⟶ C), (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat K → (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat L → ∀ [QuasiIso k] [QuasiIso l], (c.app K).inv ≫ (ordinaryDerivedExtendScalars φ).map (DerivedCategory.Q.map k ≫ (asIso (DerivedCategory.Q.map l)).inv) ≫ (c.app L).hom ≫ DerivedCategory.Q.map ((flatExtensionComplex φ).map l) = DerivedCategory.Q.map ((flatExtensionComplex φ).map k)) ∧ (∀ (K L M C : CochainComplex (ModuleCat.{u} R) ℤ) (k : K ⟶ C) (l : L ⟶ C) (m : M ⟶ C), (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat K → (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat L → (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat M → ∀ [QuasiIso k] [QuasiIso l] [QuasiIso m], ((c.app K).inv ≫ (ordinaryDerivedExtendScalars φ).map (DerivedCategory.Q.map k ≫ (asIso (DerivedCategory.Q.map l)).inv) ≫ (c.app L).hom) ≫ ((c.app L).inv ≫ (ordinaryDerivedExtendScalars φ).map (DerivedCategory.Q.map l ≫ (asIso (DerivedCategory.Q.map m)).inv) ≫ (c.app M).hom) = (c.app K).inv ≫ (ordinaryDerivedExtendScalars φ).map (DerivedCategory.Q.map k ≫ (asIso (DerivedCategory.Q.map m)).inv) ≫ (c.app M).hom) ∧ (∃ a : ordinaryDerivedExtendScalars φ ⊣ derivedRestrictScalars φ, (∀ C : CochainComplex (ModuleCat.{u} R) ℤ, a.unit.app (DerivedCategory.Q.obj C) ≫ (derivedRestrictScalars φ).map (c.app C).hom ≫ (restrictScalars φ).mapDerivedCategoryFactors.hom.app ((flatExtensionComplex φ).obj C) = DerivedCategory.Q.map (((extendRestrictScalarsAdj φ).mapHomologicalComplex (.up ℤ)).unit.app C)) ∧ (∀ Y : CochainComplex (ModuleCat.{u} S) ℤ, a.counit.app (DerivedCategory.Q.obj Y) = (ordinaryDerivedExtendScalars φ).map ((restrictScalars φ).mapDerivedCategoryFactors.hom.app Y) ≫ (c.app ((flatRestrictionComplex φ).obj Y)).hom ≫ DerivedCategory.Q.map (((extendRestrictScalarsAdj φ).mapHomologicalComplex (.up ℤ)).counit.app Y))) ∧ (∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hp : ∀ i : ℤ, Module.Projective R (P.X i)), ∃ (hbS : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (((flatExtensionComplex φ).obj P).X i)) (hpS : ∀ i : ℤ, Module.Projective S (((flatExtensionComplex φ).obj P).X i)), ∀ N : CochainComplex (ModuleCat.{u} R) ℤ, ∃ eS : DerivedCategory.Q.obj (CochainComplex.moduleHomComplex ((flatExtensionComplex φ).obj P) ((flatExtensionComplex φ).obj N)) ≅ (ordinaryModuleDerivedInternalHom S).obj (op ((ordinaryDerivedExtendScalars φ).obj (DerivedCategory.Q.obj P)), (ordinaryDerivedExtendScalars φ).obj (DerivedCategory.Q.obj N)), eS.hom ≫ (MonoidalClosed.pre (c.app P).inv).app ((ordinaryDerivedExtendScalars φ).obj (DerivedCategory.Q.obj N)) ≫ (ihom (DerivedCategory.Q.obj ((flatExtensionComplex φ).obj P))).map (c.app N).hom = (CochainComplex.projectiveHomModelIso S ((flatExtensionComplex φ).obj P) hbS hpS ((flatExtensionComplex φ).obj N)).hom ∧ (∃ eR : DerivedCategory.Q.obj (CochainComplex.moduleHomComplex P N) ≅ (ordinaryModuleDerivedInternalHom R).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj N), eR = CochainComplex.projectiveHomModelIso R P hb hp N) ∧ (∃ eU : DerivedCategory.Q.obj (CochainComplex.moduleHomComplex P ((flatRestrictionComplex φ).obj ((flatExtensionComplex φ).obj N))) ≅ (ordinaryModuleDerivedInternalHom R).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj ((flatRestrictionComplex φ).obj ((flatExtensionComplex φ).obj N))), eU = CochainComplex.projectiveHomModelIso R P hb hp ((flatRestrictionComplex φ).obj ((flatExtensionComplex φ).obj N))))) ∧ (∀ (P P' N N' : CochainComplex (ModuleCat.{u} R) ℤ) (hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hp : ∀ i : ℤ, Module.Projective R (P.X i)) (hb' : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P'.X i)) (hp' : ∀ i : ℤ, Module.Projective R (P'.X i)) (a : P' ⟶ P) (b : N ⟶ N'), DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap R a b) ≫ (CochainComplex.projectiveHomModelIso R P' hb' hp' N').hom = (CochainComplex.projectiveHomModelIso R P hb hp N).hom ≫ (ordinaryModuleDerivedInternalHom R).map ((DerivedCategory.Q.map a).op, DerivedCategory.Q.map b)) ∧ (∀ (P P' N N' : CochainComplex (ModuleCat.{u} S) ℤ) (hb : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hp : ∀ i : ℤ, Module.Projective S (P.X i)) (hb' : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P'.X i)) (hp' : ∀ i : ℤ, Module.Projective S (P'.X i)) (a : P' ⟶ P) (b : N ⟶ N'), DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap S a b) ≫ (CochainComplex.projectiveHomModelIso S P' hb' hp' N').hom = (CochainComplex.projectiveHomModelIso S P hb hp N).hom ≫ (ordinaryModuleDerivedInternalHom S).map ((DerivedCategory.Q.map a).op, DerivedCategory.Q.map b)) ∧ (∀ (P N N' : CochainComplex (ModuleCat.{u} R) ℤ), (∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) → (∀ i : ℤ, Module.Projective R (P.X i)) → ∀ (b : N ⟶ N'), QuasiIso b → IsIso (DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap R (𝟙 P) b))) ∧ (∀ (P P' N : CochainComplex (ModuleCat.{u} R) ℤ), (∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) → (∀ i : ℤ, Module.Projective R (P.X i)) → (∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P'.X i)) → (∀ i : ℤ, Module.Projective R (P'.X i)) → ∀ (a a' : P' ⟶ P), DerivedCategory.Q.map a = DerivedCategory.Q.map a' → DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap R a (𝟙 N)) = DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap R a' (𝟙 N))) ∧ (∀ (P N N' : CochainComplex (ModuleCat.{u} S) ℤ), (∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) → (∀ i : ℤ, Module.Projective S (P.X i)) → ∀ (b : N ⟶ N'), QuasiIso b → IsIso (DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap S (𝟙 P) b))) ∧ (∀ (P P' N : CochainComplex (ModuleCat.{u} S) ℤ), (∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) → (∀ i : ℤ, Module.Projective S (P.X i)) → (∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P'.X i)) → (∀ i : ℤ, Module.Projective S (P'.X i)) → ∀ (a a' : P' ⟶ P), DerivedCategory.Q.map a = DerivedCategory.Q.map a' → DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap S a (𝟙 N)) = DerivedCategory.Q.map (CochainComplex.projectiveHomModelMap S a' (𝟙 N)))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded ordinary-module derived scalar extension and internal Hom. Helper maps extract the uniquely coordinate/counit-normalized witnesses of the existing projective evaluation theorem, now also cited as a statement dependency. The flat comparison is the fixed universal counit, with resolution, cocycle, and adjunction normalizations; both Hom models are canonical and compatible with localization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfd511c8e",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_deps, the full module, the report (Worker report + Second reading by Q126) and the side-live sources of the pod theorem, OrdinaryDerivedChangeOfRings, ordinaryModuleDerivedInternalHom and derivedRestrictScalars. The clauses match: z/b/h pinned by iCycles/image.ι/factorThruImage/homologyπ with naturality; quasi-iso preservation without bounds; c.hom = universal counit with the K-flat resolution, two-resolution and cocycle clauses; adjunction unit 1⊗x and counit s⊗y↦sy on all complexes; eR, eU and eS pinned through c_P^{-1}, c_N (variance checked); mixed naturality and localization compatibility over R and S; no f.g., bound or K-flat assumptions on N. Mechanical theorem stmt_dep: the pod module has only private defs; projectiveHomModelMap/Iso are Classical.choose of the theorem's ∃, uniquely pinned (coordinate formula; counit square with invertible μ), the same pattern as landed coinductionHomEvaluation, so the statement depends on objects the theorem constructs → PASS on this point. No hollow defs, sorry only in the theorem, docstrings and blueprint tags present, no extra assumptions. No file changed, no compile run."
+ }
+}

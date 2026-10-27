@@ -13,9 +13,53 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), open direct image; scalar analytic base, nilpotent extension devissage and filtered passage below the polynomial translation acyclicity input. Agent-formulated relative form of the rank-one cyclic resolution, exact-induction forgetting comparison, and bar normalization. The cited existing scalar theorems are context, not an assertion that their statements already include this relative form; exact combined reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify kernel-fixed sections with all fixed sections after restriction to the second factor, using g=(1,snd g) whenever fst g=1. Transpose the relative invariant inclusion through the scalar invariants adjunction. The two fixed-section image descriptions make this transpose bijective on every profinite section. Forgetting to underlying sheaves reflects isomorphisms. Injectivity of the scalar inclusion proves naturality and uniqueness. This proves forgetInvariantsExist without a new hole.",
+   "uses": [
+    "def-sfb-relative-derived-invariants",
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the derived comparison use [lem-sfb-relative-forgetting-kinjectives]. Construct both units for the underived common composite, inserting the actual exact-localization factors and the underived forgetting isomorphism. They are isomorphisms on K-injective complexes, so the K-injective derivability structure makes both functors right derived functors. Their unique unit-compatible comparison gives existence. Cancel the source unit on a K-injective representative and the target localization factor to prove uniqueness, then extend along the representative isomorphism. This proves forgetDerivedExist with precisely the original normalization equation.",
+   "uses": [
+    "lem-sfb-relative-forgetting-kinjectives",
+    "def-sfb-relative-derived-invariants",
+    "def-sfb-condensed-derived-invariants",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along v after inclusion of the second factor is the same action as product restriction followed by inclusion. Projection onto the second factor after that inclusion is the identity. In both cases use componentwise identity isomorphisms; equality of underlying maps gives naturality and uniqueness. This proves forgetRestrictionExist and unitResidualIsoExist.",
+   "uses": [
+    "def-sfb-relative-derived-invariants"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Remaining original holes: forgetBeta identifies the two restriction composites through their computation-unit equations and inclusion normalizations. forgetDerivedShift identifies the shift conjugate of the comparison by its same unit normalization. These two named theorems and their original docstring proof plans remain unchanged.",
+   "uses": [
+    "def-sfb-relative-derived-invariants",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-derived-invariants",
+  "def-sfb-condensed-derived-invariants",
+  "lem-sfb-relative-forgetting-kinjectives",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "H3, 2026-10-26: sectionwise proof of ordinary forgetting and identity comparisons; universal right-derived comparison reduced to K-injective preservation. The original beta and shift holes remain."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -104,10 +148,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -156,5 +204,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Read the item, its 17 steps, 7 new def nodes, all 8 modules, and the dependency Lean in side-live (CondensedEquivariantBarData/Computation, CondensedDerivedInvariants, ProductInvariants, DiscreteLatticeKoszulResolution). Only lean plus new-def-node stmt_deps changed, records verbatim, new-node fields ok, no dep changes. Clauses: ProductInvariants generalized to topological J; derived = full rightDerivedFunctor; beta = rightDerivedPullback of the unique inclusion with unit equation, CommShift and H0 inclusion; TotalModel coordinates N^n+N^(n-1), d=(dx,(T-1)x-dy), T pinned sectionwise; shift pinned to (x,(-1)^s y) (hand-checked); HasComparison pins lambda by theta alpha = Qb on all D+; cyclicMap = lambda^-1 beta; forgetting exact/conservative/injectives, forgetDerived and forgetBeta (= groupMap) and forgetCoefficient and shift; latticeCompatibility exists-witness pinned to forgotten lambda (B, E, L, k pinned, consistent under B sign) = node step 12; barEvaluation Q(j) eta^-1 c = Q(eps) with eta = dep Computation normalization transported, j the resolution-zero row, eps id/eval at v(1)/0. Edge cases tau=1, G=1, zero ring, negative bounds, universes ok. Advisories: second reading is an in-worker check (dispatcher policy); new nodes cite calculus/bar theorems instead of def-sfb-condensed-derived-invariants/def-sfb-condensed-equivariant-bar-data; DiscreteLattice.* theorem-owned vocabulary; about 20 unused proof imports; docstring says 18 steps for 17. No recompile (human rule); no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T082056-L-2129344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

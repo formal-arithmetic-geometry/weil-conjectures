@@ -18,15 +18,13 @@
  ],
  "proof": [
   {
-   "text": "The scheme $C$ is nonempty by [def-pc-integral-scheme]. Properness includes finite type and separatedness [def-weil-proper-morphism], so $C$ is a variety in the sense of [def-pc-curve]. The field $k$ is Noetherian: its only ideals are $0$ and $(1)$ [def-weil-pbc-noetherian-ring]. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. By [pqf-lem-coherent-ft-locnoeth], $\\mathcal O_C$ and every invertible module are coherent: locally each is free of rank one [def-sc-invertible-module]. Finite type over a field and properness therefore meet the Noetherian hypotheses used below.",
+   "text": "The scheme $C$ is nonempty by [def-pc-integral-scheme]. Properness includes finite type and separatedness [def-weil-proper-morphism], so $C$ is a variety in the sense of [def-pc-curve]. By [lem-trf-proper-field-invertible-coherent], $C$ is Noetherian and $\\mathcal O_C$ and $\\mathcal N$ are coherent. The field $k$ is Noetherian: its only ideals are $0$ and $(1)$ [def-weil-pbc-noetherian-ring].",
    "uses": [
     "def-pc-integral-scheme",
     "def-weil-proper-morphism",
     "def-pc-curve",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "pqf-lem-coherent-ft-locnoeth",
-    "def-sc-invertible-module"
+    "lem-trf-proper-field-invertible-coherent",
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false,
    "source": {
@@ -63,76 +61,19 @@
    }
   },
   {
-   "text": "For the converse assume $d>0$. By [lem-pc-coherent-hi], the coherent modules $\\mathcal N^{\\otimes n}$ on proper $C/k$ have finite-dimensional cohomology. Since $C$ is Noetherian of dimension one, [lem-sc-noetherian-cohomology-above-dimension] kills their cohomology in degrees above one. Thus [def-pc-euler-characteristic] and Step 2 give $h^0(C,\\mathcal N^{\\otimes n})=nd+\\chi(C,\\mathcal O_C)+h^1(C,\\mathcal N^{\\otimes n})\\ge nd+\\chi(C,\\mathcal O_C)$, which is unbounded as $n\\to\\infty$. Choose any nonempty affine open $U\\subseteq C$. By [lem-sc-affine-complement-finite-on-integral-curve], its complement is a finite set $\\{x_1,\\ldots,x_t\\}$. Each $x_i$ is closed: in an integral dimension-one scheme a non-generic point with a distinct specialization would give the chain $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x_i\\}}\\subsetneq C$, contrary to the dimension definition [def-kun-topological-krull-dimension]; the generic point exists by [lem-weil-pbc-scheme-sober]. Since $C/k$ is finite type, [lem-kun-closed-point-field] gives $[\\kappa(x_i):k]<\\infty$.",
+   "text": "Conversely assume $d>0$. Apply [lem-trf-positive-degree-affine-section] to obtain $n\\ge1$ and a nonzero $s\\in\\Gamma(C,\\mathcal N^{\\otimes n})$ with affine $C_s$. For each quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_C$, [lem-trf-affine-section-ideal-twist-h1-vanishing] supplies $E\\ge1$ with $H^1(C,\\mathcal I\\otimes\\mathcal N^{\\otimes En})=0$. Thus each ideal has a vanishing twist of positive exponent $En$; the exponent may depend on the ideal.",
    "uses": [
-    "lem-pc-coherent-hi",
-    "lem-sc-noetherian-cohomology-above-dimension",
-    "def-pc-euler-characteristic",
-    "lem-sc-affine-complement-finite-on-integral-curve",
-    "def-kun-topological-krull-dimension",
-    "lem-weil-pbc-scheme-sober",
-    "lem-kun-closed-point-field"
+    "lem-trf-positive-degree-affine-section",
+    "lem-trf-affine-section-ideal-twist-h1-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5X, reverse implication, growth of sections and choice of finite boundary"
+    "place": "Tag 0B5X, lemma-ample-curve, reverse implication, second and third paragraphs."
    }
   },
   {
-   "text": "Choose $n\\ge1$ with $h^0(C,\\mathcal N^{\\otimes n})>\\sum_i[\\kappa(x_i):k]$. Evaluation at the $x_i$ is a $k$-linear map to $\\bigoplus_i(\\mathcal N^{\\otimes n})_{x_i}\\otimes\\kappa(x_i)$, whose dimension is that sum because each fibre has dimension one over $\\kappa(x_i)$ [def-sc-invertible-module]. Its kernel is nonzero by the dimension inequality. Take a nonzero section $s$ in the kernel, so $s$ vanishes at every boundary point. Consequently $C_s\\subseteq U$, using the fibrewise definition of $C_s$ [def-weil-pbc-ample-invertible-module]. By [lem-sc-affine-cap-section-open], $C_s=U\\cap C_s$ is affine. This produces a fixed $n\\ge1$ and nonzero $s\\in\\Gamma(C,\\mathcal N^{\\otimes n})$ with affine nonvanishing locus. No surjectivity of the evaluation map was required.",
-   "uses": [
-    "def-sc-invertible-module",
-    "def-weil-pbc-ample-invertible-module",
-    "lem-sc-affine-cap-section-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5X, evaluation kernel and affine nonvanishing locus; Properties Tag 01PV"
-   }
-  },
-  {
-   "text": "Let $\\mathcal I\\subseteq\\mathcal O_C$ be any quasi-coherent ideal. It is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2), since $C$ is locally Noetherian and $\\mathcal O_C$ is coherent. Put $\\mathcal F_e=\\mathcal I\\otimes\\mathcal N^{\\otimes en}$ for $e\\ge0$. These are coherent because locally the invertible factor is $\\mathcal O_C$ [def-sc-invertible-module]. The nonzero section $s$ has nonzero generic value: on a trivializing open where it is nonzero its coefficient injects into the function field by [lem-sc-integral-scheme-stalks-in-function-field]. Hence its coefficient at every stalk is nonzero, by that same injection. Multiplication by $s$ on each $\\mathcal F_e$ is injective: after trivializing, it is multiplication by a nonzero element on the ideal $\\mathcal I_x$ in the domain $\\mathcal O_{C,x}$. It is an isomorphism on $C_s$. Thus $0\\to\\mathcal F_e\\xrightarrow{s}\\mathcal F_{e+1}\\to\\mathcal Q_e\\to0$ is exact, with coherent cokernel by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1). Its support is contained in $C\\setminus C_s$, which omits the generic point and has dimension at most zero: any strict chain there would extend by $C$ to a length-two chain [def-kun-topological-krull-dimension].",
-   "uses": [
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "def-sc-invertible-module",
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5X, injective section-multiplication sequence and zero-dimensional cokernels"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-chi-zero-dim-support](1) to each coherent $\\mathcal Q_e$ on the proper $k$-scheme $C$: Step 6 verified its support dimension at most zero, so $H^1(C,\\mathcal Q_e)=0$. The long exact sequence explicitly supplied by [pqf-def-cohomology] for the short exact sequence in Step 6 gives a surjection $H^1(C,\\mathcal F_e)\\twoheadrightarrow H^1(C,\\mathcal F_{e+1})$ for every $e\\ge0$. Composing these maps shows that $H^1(C,\\mathcal I)\\to H^1(C,\\mathcal F_e)$ is surjective for every $e$.",
-   "uses": [
-    "lem-pc-chi-zero-dim-support",
-    "pqf-def-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5X, surjectivity on first cohomology; Cohomology of Schemes Tag 0B3J"
-   }
-  },
-  {
-   "text": "The vector space $H^1(C,\\mathcal I)$ is finite-dimensional by [lem-pc-coherent-hi], since $C/k$ is proper and $\\mathcal I$ is coherent. Apply [lem-sc-section-affine-open-kills-cohomology] with $X=C$, $L=\\mathcal N^{\\otimes n}$, $F=\\mathcal I$, and $p=1$: $C$ is quasi-compact and quasi-separated by Step 1 and [lem-weil-pbc-locally-noetherian-quasi-separated], $L$ is invertible, and $C_s$ is affine by Step 5. Each element of a finite basis is killed by some power of multiplication by $s$. Choose $E\\ge1$ at least all these exponents (take $E=1$ for the zero vector space). The map $H^1(C,\\mathcal I)\\to H^1(C,\\mathcal F_E)$ kills the basis and hence is zero. It is also surjective by Step 7, so $H^1(C,\\mathcal I\\otimes\\mathcal N^{\\otimes En})=0$. The exponent $En$ is positive and may depend on $\\mathcal I$, exactly as required.",
-   "uses": [
-    "lem-pc-coherent-hi",
-    "lem-sc-section-affine-open-kills-cohomology",
-    "lem-weil-pbc-locally-noetherian-quasi-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5X, finite basis and eventual annihilation; Cohomology of Schemes Tag 01XR"
-   }
-  },
-  {
-   "text": "Step 8 applies to every quasi-coherent ideal of $\\mathcal O_C$. The field $k$ is Noetherian by Step 1, $C\\to\\operatorname{Spec}k$ is proper by hypothesis, and $\\mathcal N$ is invertible. Therefore [lem-trf-ideal-twist-vanishing-implies-ample] with $R=k$ gives absolute ampleness of $\\mathcal N$. Together with Step 3 this proves the equivalence, with the original degree and without imposing smoothness or geometric integrality.",
+   "text": "Step 4 applies to every quasi-coherent ideal of $\\mathcal O_C$. The field $k$ is Noetherian by Step 1, $C\\to\\operatorname{Spec}k$ is proper by hypothesis, and $\\mathcal N$ is invertible. Therefore [lem-trf-ideal-twist-vanishing-implies-ample] with $R=k$ gives absolute ampleness of $\\mathcal N$. Together with Step 3 this proves the equivalence, with the original degree and without imposing smoothness or geometric integrality.",
    "uses": [
     "lem-trf-ideal-twist-vanishing-implies-ample"
    ],
@@ -144,34 +85,21 @@
   }
  ],
  "proof_deps": [
-  "def-kun-topological-krull-dimension",
-  "def-pc-curve",
-  "def-pc-degree-line-bundle",
-  "def-pc-euler-characteristic",
   "def-pc-integral-scheme",
-  "def-sc-invertible-module",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-ample-invertible-module",
-  "def-weil-pbc-noetherian-ring",
   "def-weil-proper-morphism",
-  "lem-kun-closed-point-field",
-  "lem-pc-chi-zero-dim-support",
-  "lem-pc-coherent-hi",
-  "lem-pc-h0-proper-variety",
-  "lem-sc-affine-cap-section-open",
-  "lem-sc-affine-complement-finite-on-integral-curve",
-  "lem-sc-integral-scheme-stalks-in-function-field",
-  "lem-sc-noetherian-cohomology-above-dimension",
-  "lem-sc-section-affine-open-kills-cohomology",
+  "def-pc-curve",
+  "lem-trf-proper-field-invertible-coherent",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-degree-line-bundle",
   "lem-trf-curve-degree-tensor-additive",
+  "lem-pc-h0-proper-variety",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-krull-dimension",
   "lem-trf-curve-section-degree-positivity",
-  "lem-trf-ideal-twist-vanishing-implies-ample",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-scheme-sober",
-  "pqf-def-cohomology",
-  "pqf-lem-coherent-ft-locnoeth"
+  "lem-trf-positive-degree-affine-section",
+  "lem-trf-affine-section-ideal-twist-h1-vanishing",
+  "lem-trf-ideal-twist-vanishing-implies-ample"
  ],
  "proof_origin": {
   "by": "document",
@@ -309,67 +237,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-proper-integral-curve-ample-degree",
   "worker": "stage1",
-  "summary": "Expanded the complete Stacks 0B5X proof over an arbitrary field, keeping its integral proper dimension-one hypotheses and Euler-characteristic degree. Reused existing finiteness, affine-open and cohomology nodes; created only degree tensor additivity, section positivity, and the general ideal-twist ampleness converse. Project Lean candidates require smoothness or other extra hypotheses and cannot attach. All new nodes searched by four tools and two semantic phrasings, sources and every citation checked; no statement correction needed.",
-  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X).",
+  "summary": "Q160 repairs the batch5 return by separating the positive-degree affine-section construction (old steps 4-5) and affine-section ideal-twist H1 vanishing (old steps 6-8) into two independent statement-only unsplit nodes. Old steps 1-3 and 9 remain, joined by a short application of the two lemmas. Every old proof argument and source citation is retained verbatim in report.md with the allocation to its new work item. The parent statement and inherited historical metadata and searches are unchanged. Both new nodes have actual logged searches and no Mathlib match. After the landing refusal for an unpromoted side completion, Q160 rechecked this retained split against the current live nine-step node and all current cited statements; only proof, proof_deps and split_report differ from the live parent. The two new ids remain absent live. The statement, provenance, Lean records and maintainer-owned metadata are retained from the current DAG, and report.md records the rebase review. On the renewed rebase, Step 1 now reuses the current same-unit lem-trf-proper-field-invertible-coherent for Noetherianity and coherence, removing its superseded finite-type and coherent-finite-type proof citations. The existing lemma has no dependency path back to the parent; its full conclusion matches the preparation needed here. All original preparation remains preserved verbatim in the report. On 2026-10-23 the resumed landing repair re-read all current cited statements, checked all 16 quotation records, and expanded current same-tag duplicate accounting; fresh server preflight passed before the final report update. The two extracted statements and all retained searches are unchanged.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). The same 0B5X argument is distributed into two sublemmas, with the forward implication and final cohomological criterion assembled here.",
   "tool_uses": [
-   {
-    "node": "lem-kun-closed-point-field",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-pc-chi-zero-dim-support",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-pc-coherent-hi",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
    {
     "node": "lem-pc-h0-proper-variety",
     "why": "Only clause (1), the field of global functions on a proper variety, rules out affineness; this is a generic curve input to the existing ampleness route."
-   },
-   {
-    "node": "lem-sc-affine-cap-section-open",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-sc-affine-complement-finite-on-integral-curve",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-sc-integral-scheme-stalks-in-function-field",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-sc-noetherian-cohomology-above-dimension",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-sc-section-affine-open-kills-cohomology",
-    "why": "Generic section-annihilation of positive cohomology is exactly the Stacks 01XR input to the fixed curve-degree route."
-   },
-   {
-    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "lem-weil-pbc-scheme-sober",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
-   },
-   {
-    "node": "pqf-lem-coherent-ft-locnoeth",
-    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
    }
   ]
  },
@@ -390,12 +266,12 @@
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q55-3ade7efef",
-  "group": "Q55",
+  "reviewer": "NT-cc-Q160-02dadc8ce",
+  "group": "Q160",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-3ade7efef (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, cited DAG statements, unit route, Stacks sources (Tags 0B5X, 0AYX, 0B40, 0B5U), and delivery instructions. Checked every proof step, hypotheses, edge cases, searches, duplicates, and route restrictions. No mathematical or structural fault found; review.md records the detailed checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-02dadc8ce (reviewer sub-agent of L); spot-checked: This is the fourth head of the 2026-10-21 re-split; landing has refused each earlier one. The three earlier heads a02a1fe3, 37a729fa and 76ed37a0 were all PASSed, and the live ledger shows landing refusals at 06:54, 12:20 and 16:44 ('approved by the reader, but the landing refused it'). Live still carries the old 9-step, 6621-character proof, and neither new id exists live, so the split is still needed. Against the 76ed snapshot, both new nodes are byte-identical and the item differs only in split_report (the date and one appended summary sentence); its statement, proof, proof_deps and source are unchanged. All 18 cited statements and stmt_deps match clones/live. I re-read everything against Stacks varieties.tex lines 9997-10066 (0B5X). The statement is faithful to the source: an integral proper curve, absolute ampleness in the sense of 01PS, and degree chi(N)-chi(O). Step 1: lem-trf-proper-field-invertible-coherent gives exactly 'Noetherian, N and O coherent', and k is Noetherian. Step 2: tensor-additive applies in dimension at most 1, giving deg N^n = nd. Step 3: by h0-proper-variety (1), C is not affine; ampleness then gives a nonzero s with C_s different from C, and section-degree-positivity gives d>0. Steps 4-5: node A's conclusion is exactly node B's hypothesis, and B's per-ideal exponent En>=1 is what ideal-twist-vanishing-implies-ample allows with R=k. Node A is the source's second paragraph (lines 10016-10036). Checked on P^1 with O(d): for d>0 a section with zeros has affine C_s; for d=0 the statement fails, so the hypothesis is needed. Node B is the third paragraph (lines 10038-10066); its injectivity is torsion-freeness on an integral curve, and it cites 0B3J and 01XR. Edge cases for B: I=0 and H^1(I)=0 give E=1, and C_s=C cannot occur. The two nodes are of comparable size (about 1.8k and 2.6k characters), statement-only, and neither asserts ampleness. The parent proof is 2486 characters and its proof_deps equal the union of the step uses. I swept live and side-live for affine C_s plus degree and for ideal-twist H^1 on curves: no duplicates. The new sfb first-jet and polarization nodes assume ampleness or projectivity. Accepted tool use: lem-pc-h0-proper-variety, clause (1). No SGA. Advisory: the maintainer-owned tool_uses field still lists the inputs of old Steps 1 and 4-8. Note for maintainers: this is an identical push in a promotion loop, so landing should promote it rather than return it again. No changes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProperIntegralCurveAmpleDegree",
@@ -415,5 +291,16 @@
   "result": "pass",
   "note": "Reviewed the immutable node, source, dependencies, Lean declaration, docstrings, edge cases, route-pivot constraints, and report sections. Per-file scompile side-overlay and server confirmation both succeeded; no substantive or mechanical defects found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

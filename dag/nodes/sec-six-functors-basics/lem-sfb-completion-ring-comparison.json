@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-completion-ring-comparison",
+ "kind": "statement",
+ "title": "Canonical small-site completed coefficient ring and projection comparison",
+ "statement": "Let X be a scheme [def-pc-scheme], A a commutative ring and I an ideal. The constant sheafification comparison [def-weil-pbc-sheafification] on the coefficient-sized equivalent pro-etale site identifies the positive quotient diagram of [def-sfb-adic-stratified-perfect-data] with the normalized diagram of [lem-sfb-adic-perfect-model-complete-reduction]. The constructed limit isomorphism sfbModelCompletionIso commutes with every projection: its composite with the normalized nth projection equals the transported actual nth projection followed by the constant quotient comparison. This holds for all n, without any Noetherian or boundedness assumption.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 reverse implication, completed coefficient model calculation; equivalent-site sheafification and scalar-extension presentation of the same model"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
+ ],
+ "proof": [
+  {
+   "text": "Precomposition by AsSmall.down is an equivalence of sites. The continuous-pushforward/sheafification compatibility applied to a constant presheaf gives sfbModelConstantsIso. Its naturality for quotient transition homomorphisms assembles sfbModelSystemIso. Compose preservation of the inverse limit with the limit of this natural isomorphism to obtain sfbModelCompletionIso. The two standard limit projection identities show that its composite with the nth normalized projection is the transported nth actual projection followed by the constant comparison.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-sfb-adic-perfect-model-complete-reduction"
+ ],
+ "proof_origin": {
+  "by": "E8 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Original completion-transport argument, ring and projection comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed sites identifies the scalar extended constant complex after localization in the derived category",
+   "results": "Eight generic derived-category hits, including mapDerivedCategory and the localization functor; no identification of these completed coefficient complexes.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactors",
+   "results": "Unknown identifier in the remote Mathlib index. Local project search finds the exact-functor factor API and equivalent-site module comparison helpers.",
+   "date": "2026-10-26",
+   "verdict": "Use project APIs; no ready-made model identification."
+  },
+  {
+   "tool": "grep",
+   "query": "sfbCompletedModel|sfbModelCompletionIso|pushforwardContinuousSheafificationCompatibility",
+   "results": "Mathlib has the generic continuous-pushforward/sheafification compatibility. Project rg finds sfbCompletedModel and the assigned completion theorem, but no complex comparison with its required AsSmall universe.",
+   "date": "2026-10-26",
+   "verdict": "Generic sheafification comparison is reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfbPerfectModelCompletionTransport",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-perfect-model-completion-transport",
+   "place": "Steps 1--2: ring/projection comparison and derived complex identification.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfbCompletionRingComparison",
+  "file": "lean/Sheaf/Paper/SfbCompletionRingComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbModelCompletionIso_projection",
+  "statement": "theorem sfbModelCompletionIso_projection (T : Scheme.{u}) {A : Type (u + 1)}\n    [CommRing A] (I : Ideal A) (n : ℕ) :\n    (sfbModelCompletionIso T I).hom ≫\n        ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, 0} T) A I n =\n      (sfbModelRings T).map (limit.π (adicLisseRingSystem T I) (op n)) ≫\n        (sfbModelConstantsIso T).hom.app (CommRingCat.of (A ⧸ I ^ (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261025T212737-L-226304",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261025T212737-L-226304",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

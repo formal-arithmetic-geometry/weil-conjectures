@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-dg-compact-finite-cell-retract",
+ "kind": "statement",
+ "title": "Compact dg modules are retracts of finite-cell modules",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $C$ be an associative unital dg algebra over $\\mathbf Z$, with $d^2=0$ and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$. Use the left dg modules and their derived category $D(C)$ of [def-sfb-sheaf-dg-module-localization] on a point; all small coproducts are represented by direct sums of dg modules. Let $M\\in D(C)$ be compact [def-pc-compact-object], meaning that $\\bigoplus_i\\operatorname{Hom}(M,N_i)\\to\\operatorname{Hom}(M,\\bigoplus_iN_i)$ is bijective for every small family. There is a dg $C$-module $P$ with a finite filtration $0=F_{-1}P\\subseteq F_0P\\subseteq\\cdots\\subseteq F_tP=P$ by dg submodules whose successive quotients are finite sums of integer shifts of $C$, and maps $M\\xrightarrow{i}P\\xrightarrow{p}M$ in $D(C)$ with $pi=1_M$. The zero module is allowed. No boundedness, commutativity, flatness or countability hypothesis on $C$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R3 (proposition-compact), implication (1) to (2), for left modules by the graded opposite algebra."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-pc-compact-object",
+  "def-sfb-dg-finite-cell-module"
+ ],
+ "proof": [
+  {
+   "text": "Pass explicitly to right modules. Put $A=C^{\\mathrm{opp}}$, with $a*b=(-1)^{|a||b|}ba$ and the same differential. A left module $L$ becomes a right $A$-module by $x*a=(-1)^{|x||a|}ax$. Associativity follows since $(x*a)*b$ and $x*(a*b)$ both equal $(-1)^{|x||a|+|x||b|+|a||b|}ba x$; the right Leibniz rule follows by expanding $d(ax)$. The inverse is $ax=(-1)^{|x||a|}x*a$, with the same underlying complexes. For a degree-$r$ left graded map, $h(ax)=(-1)^{r|a|}ah(x)$ becomes $h(x*a)=h(x)*a$, so chain maps and chain homotopies correspond exactly. Thus the two inverse operations induce inverse functors on the homotopy categories and on the localization words defining $D(C)$ in [def-sfb-sheaf-dg-module-localization]. They preserve direct sums and cohomology. The shifted left action is $a\\cdot_{L[k]}x=(-1)^{k|a|}ax$; hence the converted shifted right action has exponent $(|x|-k)|a|+k|a|=|x||a|$, exactly the unchanged right action on $L^{\\mathrm{opp}}[k]$. The regular left $C$ converts to the regular right $A$. Filtrations, quotients, and retractions are unchanged on underlying complexes, and the identical Hom and coproduct maps preserve compactness. It therefore suffices to prove the right-module assertion for the image $E$ of $M$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 0FQ0, lemma-left-right, and definition-opposite-dga; section-shift (the sign formulas and their inverse are written out)."
+   }
+  },
+  {
+   "text": "Represent $E$ by a right dg module and apply [lem-sfb-dg-property-p-resolution]. This gives a quasi-isomorphism $R\\to E$ and an exhaustive filtration $0=F_0R\\subseteq F_1R\\subseteq\\cdots\\subseteq R$, with each quotient a small direct sum of integer shifts of $A$. Identify $E$ with $R$ in $D(A)$; compactness is unchanged because precomposition with this isomorphism identifies both sides of its defining bijection. The dg category $D(A)$ is triangulated by [lem-sfb-dg-derived-admissible-triangles]. Apply [lem-sfb-dg-sequential-colimit-triangle] to the inclusions $v_m:F_mR\\to F_{m+1}R$. The degreewise colimit is $R$ by exhaustiveness. We obtain\n$$ B\\xrightarrow{t=1-s}B\\xrightarrow{b}E\\xrightarrow{\\delta}B[1],\\qquad B=\\bigoplus_{m\\geq0}F_mR,\\quad s\\iota_m=\\iota_{m+1}v_m,\\quad b\\iota_m=j_m,$$\nwhere $j_m:F_mR\\to E$ is the inclusion into $R$ followed by the identification.",
+   "uses": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-sfb-dg-sequential-colimit-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, first paragraph of (1) implies (2); Tags 09KP and 0CRL supply the resolution and the specified telescope triangle."
+   }
+  },
+  {
+   "text": "The degreewise shift gives $B[1]=\\bigoplus_m(F_mR)[1]$. By compactness [def-pc-compact-object], write $\\delta=\\sum_{m\\in I}\\iota_m[1]\\delta_m$ with $I\\subseteq\\mathbf N$ finite and set $\\delta_m=0$ outside $I$. Consecutive composites in the twice-rotated distinguished triangle vanish by [lem-weil-pbc-hom-into-triangle-exact](i); thus $t[1]\\delta=0$ (the rotation sign does not affect zero). Applying the projection onto $(F_0R)[1]$ gives $\\delta_0=0$. Projection onto $(F_mR)[1]$ for $m>0$ gives $\\delta_m-v_{m-1}[1]\\delta_{m-1}=0$. Induction gives $\\delta_m=0$ for all $m$, whence the finite-sum formula gives $\\delta=0$. This argument uses the forward telescope shift $F_mR\\to F_{m+1}R$ and imposes no bound on the degrees of $R$ or $A$.",
+   "uses": [
+    "def-pc-compact-object",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, vanishing of the telescope connecting arrow; derived.tex Tags 0146 and 0149 for consecutive composites and Hom exactness."
+   }
+  },
+  {
+   "text": "Rotate the telescope once, obtaining $B\\xrightarrow b E\\xrightarrow0 B[1]\\to B[1]$. By [lem-weil-pbc-hom-into-triangle-exact](ii), applied to $W=E$ and $a=1_E$, there is $r:E\\to B$ with $br=1_E$. By compactness [def-pc-compact-object], write $r=\\sum_{m\\in J}\\iota_m r_m$ for a finite subset $J\\subseteq\\mathbf N$. Choose $N\\geq m$ for all $m\\in J$ (take $N=0$ if $J$ is empty), and let $v_{mN}:F_mR\\to F_NR$ be the iterated inclusion. Set $a=\\sum_{m\\in J}v_{mN}r_m:E\\to F_NR$. Since $j_Nv_{mN}=j_m$, we have $j_Na=\\sum_{m\\in J}j_mr_m=br=1_E$. Thus the identity already factors through a single finite filtration stage; we have not asserted that the cells in that stage form a finite set.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-pc-compact-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, splitting and second use of compactness; derived.tex Tag 0149, applied to the rotated triangle."
+   }
+  },
+  {
+   "text": "The module $T=F_NR$ has a finite filtration by $F_0R,\\ldots,F_NR$, preceded by zero; its quotients are the small sums of shifts from the property-(P) filtration (the initial zero layer is an empty sum). Apply [lem-sfb-dg-compact-map-finite-subcell] to the compact source $E$ and $a:E\\to T$. It gives a dg submodule $P\\subseteq T$ and $i:E\\to P$ such that $(P\\hookrightarrow T)i=a$, with a finite filtration $G_kP=F_kR\\cap P$ whose quotients are finite sums of shifts of $A$. Set $p:P\\hookrightarrow F_NR\\xrightarrow{j_N}E$. Then $pi=j_Na=1_E$. Applying the inverse sign conversion of step 1 gives the required left dg $C$-module and the two derived maps for $M$, with the specified filtration and the same retraction equation. Empty layers and $P=0$ are permitted throughout.",
+   "uses": [
+    "lem-sfb-dg-compact-map-finite-subcell"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09R3, final application of Tag 09R2 in the proof of (1) implies (2); Tag 0FQ0 for the explicit inverse sign convention of step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-derived-admissible-triangles",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "def-pc-compact-object",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sfb-dg-compact-map-finite-subcell"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09R3, proposition-compact, implication (1) to (2); with Tag 09R2 and the explicit left/right conversion of Tag 0FQ0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compact.*[Ff]inite.*[Cc]ell|[Ff]inite.*[Cc]ell.*compact",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"grep\", \"query\": \"compact.*[Ff]inite.*[Cc]ell|[Ff]inite.*[Cc]ell.*compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived t-structure/fraction lemmas, graded modules and compact lattice elements do not characterize compact objects of a dg module derived category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCompactObject\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived t-structure/fraction lemmas, graded modules and compact lattice elements do not characterize compact objects of a dg module derived category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact differential graded modules are direct summands of finite semi free modules",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"leansearch\", \"query\": \"Compact differential graded modules are direct summands of finite semi free modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SetLike.gmodule.congr_simp\", \"Module.Finite.compactSpace\", \"Submodule.fg_iff_compact\", \"DirectSum.Gmodule\", \"Submodule.isCompact_of_fg\", \"Submodule.finset_span_isCompactElement\", \"Module.Finite.instDirectSum\", \"Module.dual_finite\"], \"digest\": \"8d8587c3175398cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived t-structure/fraction lemmas, graded modules and compact lattice elements do not characterize compact objects of a dg module derived category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact object in derived category of a differential graded algebra is retract of finite cell module",
+   "results": "{\"t\": \"2026-10-24T07:00:19Z\", \"tool\": \"leanfinder\", \"query\": \"Compact object in derived category of a differential graded algebra is retract of finite cell module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"1c1918a4eaf2a99a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived t-structure/fraction lemmas, graded modules and compact lattice elements do not characterize compact objects of a dg module derived category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Retract finite filtration shifts regular dg algebra characterization compact objects",
+   "results": "{\"t\": \"2026-10-24T07:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"Retract finite filtration shifts regular dg algebra characterization compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"65f42692e420353a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived t-structure/fraction lemmas, graded modules and compact lattice elements do not characterize compact objects of a dg module derived category."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Ff]inite.*[Cc]ell|[Ff]inite.*[Cc]ell.*compact",
+   "results": "{\"t\": \"2026-10-24T07:37:15Z\", \"tool\": \"grep\", \"query\": \"compact.*[Ff]inite.*[Cc]ell|[Ff]inite.*[Cc]ell.*compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary projective-module retracts and bounded representatives of ordinary complexes do not supply the dg-module finite-cell retract theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact differential graded modules are direct summands of finite semi free modules",
+   "results": "{\"t\": \"2026-10-24T07:37:16Z\", \"tool\": \"leansearch\", \"query\": \"Compact differential graded modules are direct summands of finite semi free modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SetLike.gmodule.congr_simp\", \"Module.Finite.compactSpace\", \"Submodule.fg_iff_compact\", \"DirectSum.Gmodule\", \"Submodule.isCompact_of_fg\", \"Submodule.finset_span_isCompactElement\", \"Module.Finite.instDirectSum\", \"Module.dual_finite\"], \"digest\": \"8d8587c3175398cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary projective-module retracts and bounded representatives of ordinary complexes do not supply the dg-module finite-cell retract theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-24T07:37:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCompactObject\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary projective-module retracts and bounded representatives of ordinary complexes do not supply the dg-module finite-cell retract theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact object in derived category of a differential graded algebra is retract of finite cell module",
+   "results": "{\"t\": \"2026-10-24T07:37:17Z\", \"tool\": \"leanfinder\", \"query\": \"Compact object in derived category of a differential graded algebra is retract of finite cell module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"1c1918a4eaf2a99a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary projective-module retracts and bounded representatives of ordinary complexes do not supply the dg-module finite-cell retract theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect dg module is a direct summand of a finitely generated semi free module",
+   "results": "{\"t\": \"2026-10-24T07:37:17Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect dg module is a direct summand of a finitely generated semi free module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instInvertibleReprₛ\", \"Module.Projective.iff_split'\", \"ModuleCat.projective_of_free\", \"ModuleCat.instProjectiveObjFree\", \"Module.finitePresentation_of_projective\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Module.Projective.of_free\"], \"digest\": \"73969de571f6be16\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lattice compactness, ordinary projective-module retracts and bounded representatives of ordinary complexes do not supply the dg-module finite-cell retract theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-dg-coefficient-module-comparison",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: After proving global compactness from principal-cover descent, use only the compact-to-finite-cell implication.",
+   "via": [
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-compact-finite-cell-retract",
+  "worker": "stage1",
+  "summary": "Followed Stacks 09R3 only in the needed direction. Reused the unrestricted property-(P) resolution, dg telescope and triangulatedness nodes, and the existing Mathlib Hom-exactness leaf. Wrote the opposite-algebra signs, coordinate proof that the connecting map vanishes, and factorization through a single filtration stage. Isolated only the genuinely smaller finite-length factorization lemma 09R2 as a new statement-only node. No statement change, no countability restriction, and no reverse implication or finite-cell compactness assumption.",
+  "blueprint": "Preserves the inherited det-thm-sf-ctf-stability-direct-images proof-(3) prerequisite chain: after global compactness in the affine dg coefficient comparison, obtain a finite-cell retract. The current latest blueprint unit/direct-image proof was read; no unit or chapter route is replaced. blueprint_refs.py ancestor reports None for this inherited created-node chain, so the existing null anchor is retained and the new node carries that same anchor and the extended via list."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-1ffb7d3c6",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-1ffb7d3c6 (reviewer sub-agent of L); spot-checked: Read all three delivered files: the report, the item (split into 5 steps, statement unchanged) and the new unsplit node lem-sfb-dg-compact-map-finite-subcell. Also read dga.tex 09R2, 09R3 and 09KL, plus the statement of every cited node. Step 1: I re-derived every sign of the left/right opposite-algebra conversion (Leibniz, associativity, graded-map sign, shift (L[k])^opp=(L^opp)[k], regular module), and it is correct. Step 2: the property-(P) resolution starting at F_0=0, the telescope triangle and triangulatedness are each taken from cited nodes. Step 3: (-t[1])δ=0, the coordinate recurrence δ_0=0 and δ_m=v_{m-1}[1]δ_{m-1}, and the finite expression from compactness give δ=0. The 09KL proof confirms the forward map, so 09R3's 'into F_{i-1}' is a slip and the item is right to use the forward shift. Step 4: clause (ii) of the leaf with a=1_E gives the splitting; finite support then gives a single stage F_N, and J empty gives E=0. Step 5: 09R2 applies to T=F_NR with an empty bottom layer, and pi=j_N a=1. The new node is 09R2 with layers reindexed to include F_0/F_{-1}. It is self-contained, and 'image exactly' holds because the x_{ij} form a graded basis of P'/F_mP. Tested on n=0, f=0, T=0 and C=Z with M=Z/2. Searching the DAG for 09R2/09R3/finite-cell found no duplicate; finite-cell-compact is the converse and countable-compact-telescope needs countability. Batch-5 check: derived-admissible-triangles reaches lem-trf-triangulated-subcategory-cone-system, a Mathlib leaf for Stacks 05RG (the multiplicative system of a triangulated subcategory). That is a general triangulated-category fact, not part of the trace-formula or Poincaré-duality statements or their proofs, so the citation is accepted. No SGA citations. The report mentions a citations.json that is not in the commit; that is not a DAG fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCompactFiniteCellRetract",
+  "declaration": "CategoryTheory.SheafDg.compact_exists_finiteCell_retract",
+  "file": "lean/Sheaf/CategoryTheory/DgCompactFiniteCellRetract.lean",
+  "statement": "theorem compact_exists_finiteCell_retract (A : Algebra (pointIntegers.{u})) [Preadditive (Derived A)] [HasCoproducts.{u} (Derived A)] (M : Derived A) (hM : IsCompactObject.{u} M) : ∃ P : LeftModule A, HasFiniteCellFiltration A P ∧ ∃ (i : M ⟶ (moduleQ A).obj P) (p : (moduleQ A).obj P ⟶ M), i ≫ p = 𝟙 M",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-266f9eaee",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item lem-sfb-dg-compact-finite-cell-retract matches the node and Stacks 09R3 (1)=>(2) clause by clause: A : Algebra pointIntegers.{u} (an arbitrary monoid in Koszul complexes of ULift Z sheaves on a point), LeftModule/Derived/moduleQ reused from def-sfb-sheaf-dg-module-localization, IsCompactObject.{u} M, exists P : LeftModule A with HasFiniteCellFiltration and i ≫ p = 𝟙 M; zero module covered (t=0, n=0); no extra boundedness, flatness or countability hypothesis. New def node def-sfb-dg-finite-cell-module is correct for 09R3 (2): Fin (t+2) stages, Mono inclusions, IsZero bottom, iso to P, dg-module isos from cokernel to a Fin n coproduct of signed shifts of regular A; pointIntegers is real data; no existing notion found in Sheaf/WeilConjectures/DAG. Item record differs from side-live only in lean and the added stmt_dep for the new node (§1(A)); both lean.statement fields verbatim; docstrings carry source, blueprint and the 5 proof steps; only proof is sorry; report has Worker report and Second reading sections. Advisory: the Preadditive(Derived A) instance parameter is unique given HasCoproducts (biproducts determine addition), the same rendering as IsCompactObject; pointIntegers leaves the PUnit universe free (more general); a similar onePointRingSheaf exists only in a theorem module (lem-pc-kflat-tensor-quasi-iso), so owning pointIntegers in a def node is correct. Not recompiled (no file changed)."
+ }
+}

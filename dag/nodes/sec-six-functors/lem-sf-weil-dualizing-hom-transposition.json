@@ -1,0 +1,217 @@
+{
+ "id": "lem-sf-weil-dualizing-hom-transposition",
+ "kind": "statement",
+ "title": "Native Weil dualizing Hom transposition along a structure adjunction",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, an algebraic closure $k$ of $k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the actual categories $\\mathrm{WC}^{\\mathrm{der}}(T_0)\\subset D(\\mathcal W_T)$, full subcategories with bounded constructible cohomology, and the actual equivariant derived operations of [def-sf-native-weil-derived-framework], with the tensor, internal Hom and coefficient unit $\\mathbf1_0$ of [def-sf-derived-weil-category-and-operations]. Let $T_0$ be a separated finite-type $k_0$-scheme, put $s_0=\\operatorname{Spec}k_0$, and let $a_{T,0}:T_0\\to s_0$ be its structure morphism. Assume that the actual restricted functor $A_T=Ra_{T,0!}$ has a chosen right adjoint $J_T$ on these categories, with adjunction $\\alpha_T:A_T\\dashv J_T$. Put $\\omega_T=J_T\\mathbf1_0$ and $D_TK=R\\mathcal Hom_T(K,\\omega_T)$, restricted to $\\mathrm{WC}^{\\mathrm{der}}(T_0)$ using [lem-sf-weil-verdier-dual-preserves-weil-complexes]. For every $K,L\\in\\mathrm{WC}^{\\mathrm{der}}(T_0)$, the ambient tensor $K\\otimes^L_{B_T}L$ lies in that full subcategory, and there are bijections\n$$\\operatorname{Hom}_T(L,D_TK)\\xrightarrow{c_{T,K,L}}\\operatorname{Hom}_T(K\\otimes^L_{B_T}L,\\omega_T)\\xrightarrow{t_{T,K,L}}\\operatorname{Hom}_{s_0}(A_T(K\\otimes^L_{B_T}L),\\mathbf1_0).$$\nThe map $c$ is the uncurrying map of the native closed derived tensor structure, with internal Hom exactly `ProEtaleWeilSheaf.derivedHom`; the map $t$ is the inverse of the chosen adjunction bijection $\\alpha_T$ at $\\mathbf1_0$. The Hom sets on $T_0$ are the ambient derived Hom sets identified with the full-subcategory Hom sets. Both bijections, their inverses and their composite are natural contravariantly in $L$ and $K$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+  "place": "fix-cor-verdier-exchange steps 1-2: structure-map adjunction and tensor-Hom transpositions; old item steps 1 and 3; native derived-Weil Hom-chain realization of fix-lem-tensor-adjunction step 1, retained from the accepted Q05 split"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "def-sf-native-constructible-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Apply nativeDerivedTensor_mem_weilComplex with arguments L,K to obtain bounded constructibility of the ambient native tensor of K,L. The actual native closed comparison and its nativeModel already use exactly the native derivedHom, so no further coefficient-presentation comparison is needed at this assembly step.",
+   "uses": [
+    "lem-sf-derived-weil-tensor-hom-adjunction",
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied adjunction alpha gives HasUpperShriek for the structure morphism. Adjunction.rightAdjointUniq identifies the library upperShriek with J; evaluate at the coefficient unit and apply the internal-Hom bifunctor to this target isomorphism. Compose with nativeModel at both targets, obtaining an isomorphism from the library derivedHom dual to nativeStructureDual. Transfer objectProperty_derivedHom_dualizingComplex along this isomorphism, since bounded constructibility is closed under isomorphisms.",
+   "uses": [
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-weil-native-closed-forgetful",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct c by the full-subcategory Hom equivalence, postcomposition with nativeModel inverse, inverse closed transpose for right tensoring with K, precomposition with the braiding from K tensor L to L tensor K, and the inverse full-subcategory Hom equivalence. Its ambient arrow is definitionally nativeDualizingUncurry. Construct t as the inverse alpha.homEquiv at the coefficient unit; this gives the required formula definitionally.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "def-sf-derived-weil-category-and-operations",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove simultaneous contravariant naturality of inverse closed transpose by expanding its counit formula, applying evaluation_naturality in the internal-Hom source, and using tensor interchange. Naturality of nativeModel inverse transports the derivedHom source map to the bifunctor map; braiding naturality changes the tensor order, yielding c naturality. Adjunction.homEquiv_naturality_left_symm gives t naturality. Compose these equations for the composite bijection. Apply injectivity of c to obtain its inverse square, use homEquiv_naturality_left for the inverse t square, and combine them for the inverse composite square.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-weil-tensor-hom-adjunction",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 tensor-Hom and structure-map adjunction transpositions, instantiated using existing native closed structure; Z7 Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|WeilComplex|ProEtaleWeilSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.homEquiv",
+   "results": "2 hits: CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For actual derived Weil complexes, Hom from L to the internal Hom of K into the structure morphism dualizing object is naturally bijective to Hom from compactly supported structure pushforward of K tensor L to the coefficient unit",
+   "results": "8 hits: LightCondensed.ihomPoints; LightCondensed.ihomPoints_symm_apply; LightCondensed.ihomPoints_apply; LightCondensed.ihomPoints_symm_comp; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural Hom pairing for Verdier dual in derived Weil sheaves using right adjoint to compact support structure pushforward and tensor internal Hom adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right; CategoryTheory.Adjunction.homEquiv_naturality_right_square; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.Adjunction.homEquiv_naturality_right; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed.*curry|def curry|def uncurry|homEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean; Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean; Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean; Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean; Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean; Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean; Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|ProEtaleWeilSheaf|WeilComplex",
+   "results": "{\"t\": \"2026-10-22T12:02:12Z\", \"tool\": \"grep\", \"query\": \"derivedHom|ProEtaleWeilSheaf|WeilComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the native assertion: generic closed-category and adjunction facts do not supply the actual derived Weil operations and their constructible domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom to a dualizing object has natural Hom set bijections by closed tensor adjunction and a chosen structure pushforward right adjoint",
+   "results": "{\"t\": \"2026-10-22T12:02:12Z\", \"tool\": \"leansearch\", \"query\": \"The internal Hom to a dualizing object has natural Hom set bijections by closed tensor adjunction and a chosen structure pushforward right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom\", \"CategoryTheory.ihom.adjunction\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.exp.adjunction\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"CategoryTheory.Closed.adj\", \"CategoryTheory.Adjunction.homEquiv\", \"ModuleCat.monoidalClosedHomEquiv\"], \"digest\": \"dbb1ba17b704040f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the native assertion: generic closed-category and adjunction facts do not supply the actual derived Weil operations and their constructible domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-22T12:02:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\"], \"digest\": \"cff438d1c1c07459\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the native assertion: generic closed-category and adjunction facts do not supply the actual derived Weil operations and their constructible domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural tensor internal Hom adjunction in a derived category of Frobenius equivariant sheaves, followed by adjunction for compact support pushforward",
+   "results": "{\"t\": \"2026-10-22T12:02:22Z\", \"tool\": \"leanfinder\", \"query\": \"Natural tensor internal Hom adjunction in a derived category of Frobenius equivariant sheaves, followed by adjunction for compact support pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.ihomPoints\", \"instMonoidalClosedCondensedSet\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"LightCondensed.ihomPoints_symm_comp\", \"instMonoidalClosedLightCondSet\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\"], \"digest\": \"240ea12e46d77e3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the native assertion: generic closed-category and adjunction facts do not supply the actual derived Weil operations and their constructible domains"
+  },
+  {
+   "tool": "grep",
+   "query": "def curry|def uncurry|homEquiv_naturality|def homEquiv",
+   "results": "{\"t\": \"2026-10-22T12:03:22Z\", \"tool\": \"grep\", \"query\": \"def curry|def uncurry|homEquiv_naturality|def homEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Localization/HomEquiv.lean\", \"Mathlib/CategoryTheory/GuitartExact/KanExtension.lean\", \"Mathlib/CategoryTheory/GuitartExact/KanExtension.lean\"], \"digest\": \"48286bfbeab1c990\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the native assertion: generic closed-category and adjunction facts do not supply the actual derived Weil operations and their constructible domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying and uncurrying for the native internal Hom of derived Weil sheaves are compatible with precomposition in both tensor variables",
+   "results": "{\"t\": \"2026-10-22T12:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"Currying and uncurrying for the native internal Hom of derived Weil sheaves are compatible with precomposition in both tensor variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"CategoryTheory.ExponentiableMorphism.coev_naturality\", \"CategoryTheory.ExponentiableMorphism.homEquiv_apply_eq\"], \"digest\": \"7846e250713e8559\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the native assertion: generic closed-category and adjunction facts do not supply the actual derived Weil operations and their constructible domains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-cor-verdier-exchange steps 1-2: structure-map adjunction and tensor-Hom transpositions; old item steps 1 and 3",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-dualizing-hom-transposition",
+  "worker": "stage1",
+  "summary": "Assembled the native closed tensor Hom equivalence and the chosen structure adjunction using existing nodes only. Made coefficient-presentation reconciliation, tensor and dual constructibility, fullness, inverse formulas and both contravariant naturality squares explicit. Statement unchanged.",
+  "blueprint": "Realizes the first/fourth tensor--Hom transpositions of fix-lem-tensor-adjunction proof step 1 at the structure dualizing object and the structure-adjunction Hom transposition used by fix-cor-verdier-exchange steps 1-2; nearest imported ancestor through lem-sf-weil-verdier-exchange is absent in the imported chain (blueprint_refs ancestor reports None)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-b72ff9ff2",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-b72ff9ff2 (reviewer sub-agent of L); spot-checked: I read the item, its five steps, all seven cited statements, the parent lem-sf-weil-verdier-exchange's use, and the blueprint main-20261015 sources fix-lem-tensor-adjunction step 1 and fix-cor-verdier-exchange steps 1-2. No SGA is cited. Shape: the statement and stmt_deps are byte-identical to the Q14 snapshot; the delivery adds no new nodes; proof_deps equals the union of the step uses; the searches cover all three kinds. Maths: c = gamma^{-1} with c(u) = ev o (1_K (x) u) matches the convention tensorLeft K -| ihom K. t = alpha^{-1} with t(v) = epsilon o A_T(v) is correct. I checked both naturality squares, including the source K'(x)L'. Step 2 meets the hypotheses of the tensor-closure node exactly. Step 1's coefficient reconciliation is supported by theta_T's naturality for Frobenius and by the module/constructibility equivalences; the definition node already ties its tensor and derivedHom to closed-forgetful. I tested K=0, L=0, T_0 empty and T_0=s_0. No duplicate: lem-sf-weil-chosen-duality-hom works on fixed-pair categories and is a different assertion. Batch 5: the new citation lem-sf-derived-weil-tensor-hom-adjunction is tensor constructibility. It reaches lem-trf-geometric-inverse-image-exact, a generic exactness lemma, only through def-sf-derived-weil-category-and-operations, which the item already cites on the base. That lemma is neither the trace formula, nor Poincare duality, nor a step of their proofs, so the citation is accepted. Maintainer note: naturality in K relies on the closed structure's first-variable functoriality being derivedHom's precomposition. The Lean stage should make this explicit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilDualizingHomTransposition",
+  "declaration": "AlgebraicGeometry.WeilComplex.native_dualizing_hom_transposition",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nativeStructureDualizing",
+   "AlgebraicGeometry.WeilComplex.nativeStructureDual",
+   "AlgebraicGeometry.WeilComplex.nativeStructureDualOfPreserves",
+   "AlgebraicGeometry.WeilComplex.nativeDualizingUncurry",
+   "AlgebraicGeometry.WeilComplex.native_dualizing_hom_transposition"
+  ],
+  "file": "lean/Sheaf/Paper/NativeWeilDualizingHomTransposition.lean",
+  "statement": "theorem native_dualizing_hom_transposition (α : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ J) : (∀ K L : WeilComplex k₀ l X, objectProperty k₀ l X ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).obj (K.obj, L.obj))) ∧ ∃ hD : ∀ K : WeilComplex k₀ l X, objectProperty k₀ l X ((nativeStructureDual k₀ l X J).obj (op K.obj)), ∃ c : ∀ K L : WeilComplex k₀ l X, (L ⟶ (nativeStructureDualOfPreserves k₀ l X J hD).obj (op K)) ≃ ((nativeConstructibleTensor k₀ l X).obj (K, L) ⟶ nativeStructureDualizing k₀ l X J), ∃ t : ∀ K L : WeilComplex k₀ l X, ((nativeConstructibleTensor k₀ l X).obj (K, L) ⟶ nativeStructureDualizing k₀ l X J) ≃ ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj ((nativeConstructibleTensor k₀ l X).obj (K, L)) ⟶ WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))), (∀ (K L : WeilComplex k₀ l X) (v : L ⟶ (nativeStructureDualOfPreserves k₀ l X J hD).obj (op K)), (c K L v).hom = nativeDualizingUncurry k₀ l X J K L v.hom) ∧ (∀ (K L : WeilComplex k₀ l X) (v : (nativeConstructibleTensor k₀ l X).obj (K, L) ⟶ nativeStructureDualizing k₀ l X J), t K L v = (α.homEquiv ((nativeConstructibleTensor k₀ l X).obj (K, L)) (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).symm v) ∧ (∀ (K K' L L' : WeilComplex k₀ l X) (f : K' ⟶ K) (g : L' ⟶ L) (v : L ⟶ (nativeStructureDualOfPreserves k₀ l X J hD).obj (op K)), c K' L' (g ≫ v ≫ (nativeStructureDualOfPreserves k₀ l X J hD).map f.op) = (nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g) ≫ c K L v) ∧ (∀ (K K' L L' : WeilComplex k₀ l X) (f : K' ⟶ K) (g : L' ⟶ L) (v : (nativeConstructibleTensor k₀ l X).obj (K, L) ⟶ nativeStructureDualizing k₀ l X J), t K' L' ((nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g) ≫ v) = (derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).map ((nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g)) ≫ t K L v) ∧ (∀ (K K' L L' : WeilComplex k₀ l X) (f : K' ⟶ K) (g : L' ⟶ L) (v : L ⟶ (nativeStructureDualOfPreserves k₀ l X J hD).obj (op K)), ((c K' L').trans (t K' L')) (g ≫ v ≫ (nativeStructureDualOfPreserves k₀ l X J hD).map f.op) = (derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).map ((nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g)) ≫ ((c K L).trans (t K L)) v) ∧ (∀ (K K' L L' : WeilComplex k₀ l X) (f : K' ⟶ K) (g : L' ⟶ L) (v : (nativeConstructibleTensor k₀ l X).obj (K, L) ⟶ nativeStructureDualizing k₀ l X J), (c K' L').symm ((nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g) ≫ v) = g ≫ (c K L).symm v ≫ (nativeStructureDualOfPreserves k₀ l X J hD).map f.op) ∧ (∀ (K K' L L' : WeilComplex k₀ l X) (f : K' ⟶ K) (g : L' ⟶ L) (v : (derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj ((nativeConstructibleTensor k₀ l X).obj (K, L)) ⟶ WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))), (t K' L').symm ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).map ((nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g)) ≫ v) = (nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g) ≫ (t K L).symm v) ∧ (∀ (K K' L L' : WeilComplex k₀ l X) (f : K' ⟶ K) (g : L' ⟶ L) (v : (derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj ((nativeConstructibleTensor k₀ l X).obj (K, L)) ⟶ WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀)))), ((c K' L').trans (t K' L')).symm ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).map ((nativeConstructibleTensor k₀ l X).map (Prod.mkHom f g)) ≫ v) = g ≫ ((c K L).trans (t K L)).symm v ≫ (nativeStructureDualOfPreserves k₀ l X J hD).map f.op)",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses nativeConstructibleTensor and its functor map from Sheaf.Paper.NativeCompactProjectionFormula. For arbitrary supplied J and alpha, asserts tensor closure, dual preservation, specified native uncurrying and alpha inverse Hom equivalences, and all forward, inverse and composite naturality squares. Four helpers define only the supplied-adjoint dualizing object, ambient/restricted dual and native uncurrying; the sole postponed theorem is the recorded declaration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2a92edf7",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read item, 4 stmt_deps, new node def-sf-native-constructible-tensor (existing:true NativeCompactProjectionFormula:137-147, no other owner in live DAG), module, report (Worker report + Second reading by Q67 present). Hypotheses exact (finite field, prime≠char, separated finite type; arbitrary J with α, no HasUpperShriek). ω=J(toComplex(adicConstant Spec k0)) matches operations node's 1_0; D=derivedHom into ω, preservation asserted (∃ hD), not assumed. c pinned: braiding ≫ transpose.symm(v ≫ nativeModel.inv) = native left uncurrying from right-closed structure; t pinned = (α.homEquiv).symm. Six forward/inverse/composite squares type-correct with f:K'⟶K, g:L'⟶L, D.map f.op; K-square true since nativeModel is natural and CoefficientClosedStructure.evaluation_naturality fixes first-variable functoriality. lean.statement verbatim in file. Edge cases K=0, L=0, X empty, X=Spec k0, universes OK. Advisory: redundant re-add of specOverSpec instance at file end (harmless); nativeModel unpinned in landed operations package (pre-existing). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T102058-L-3773726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
